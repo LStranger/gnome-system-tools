@@ -23,5 +23,6 @@ void       xst_ui_ctree_set_checkmark             (GtkCTree *ctree, GtkCTreeNode
 gboolean   xst_ui_ctree_get_checkmark             (GtkCTree *ctree, GtkCTreeNode *node, gint column);
 gchar     *xst_ui_load_etspec                     (const gchar *common_path, const gchar *name);
 void       xst_ui_entry_set_text                  (void *entry, const gchar *str);
+gboolean   xst_ui_logout_dialog                   (void);
 
 #endif /* XST_UI_H */

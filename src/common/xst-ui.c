@@ -452,6 +452,14 @@ xst_ui_load_etspec (const gchar *common_path, const gchar *name)
 	return table_spec;
 }
 
+/**
+ * xst_ui_entry_set_text:
+ * @entry: GtkEntry to set to
+ * @str: string to set
+ *
+ * Simple wrapper around gtk_entry_set_text. Sets entry text to "" if str == NULL
+ * 
+ **/
 void
 xst_ui_entry_set_text (void *entry, const gchar *str)
 {
@@ -459,4 +467,39 @@ xst_ui_entry_set_text (void *entry, const gchar *str)
 	g_return_if_fail (GTK_IS_ENTRY (entry));
 	
 	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
+}
+
+/**
+ * xst_ui_logout_dialog:
+ * @void: 
+ * 
+ * Asks user for confirmation and restarts X server.
+ * 
+ * Return Value: TRUE if logout, FALSE if not.
+ **/
+gboolean
+xst_ui_logout_dialog (void)
+{
+	GtkWidget *dialog;
+	gint retval;
+	GnomeClient *client = gnome_master_client ();
+
+	dialog = gnome_question_dialog (N_("You are about to logout from\n"
+					   "your graphical session.\n"
+					   "It is recommended you close all\n"
+					   "your running programs.\n\n"
+					   "Restart now?"),
+					NULL, NULL);
+
+	retval = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+
+	if (retval)
+		return FALSE;
+
+	/* Yes, let's end our gnome-session. */
+	
+	gnome_client_request_save (client, GNOME_SAVE_BOTH,
+				   TRUE, GNOME_INTERACT_ERRORS, FALSE, TRUE);
+
+	return TRUE;
 }
