@@ -148,7 +148,7 @@ gst_iface_ethernet_class_init (GstIfaceEthernetClass *class)
 							NULL,
 							G_PARAM_READWRITE));
   g_object_class_install_property (object_class,
-				   PROP_BROADCAST,
+				   PROP_GATEWAY,
 				   g_param_spec_string ("iface_gateway",
 							"Iface gateway",
 							"Gateway address for the iface",
@@ -350,7 +350,7 @@ gst_iface_ethernet_set_config_from_xml (GstIfaceEthernet *iface,
 					xmlNodePtr        node)
 {
   xmlNodePtr configuration;
-  gchar *address, *netmask, *bootproto;
+  gchar *address, *netmask, *gateway, *bootproto;
   GstBootProto proto;
 
   g_return_if_fail (iface != NULL);
@@ -370,23 +370,27 @@ gst_iface_ethernet_set_config_from_xml (GstIfaceEthernet *iface,
       proto = GST_BOOTPROTO_STATIC;
       address = gst_xml_get_child_content (configuration, "address");
       netmask = gst_xml_get_child_content (configuration, "netmask");
+      gateway = gst_xml_get_child_content (configuration, "gateway");
     }
   else
     {
       proto = GST_BOOTPROTO_DHCP;
       address = NULL;
       netmask = NULL;
+      gateway = NULL;
     }
 
   g_object_set (G_OBJECT (iface),
 		"iface-address",   address,
 		"iface-netmask",   netmask,
+		"iface-gateway",   gateway,
 		"iface-bootproto", proto,
 		NULL);
 
   g_free (bootproto);
   g_free (address);
   g_free (netmask);
+  g_free (gateway);
 }
 
 GstIfaceEthernet*
