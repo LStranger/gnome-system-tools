@@ -112,6 +112,26 @@ dnl =====================================================
 dnl END: GAL checking
 dnl =====================================================
 
+dnl =====================================================
+dnl Ximian archiver checking
+dnl =====================================================
+
+AC_MSG_CHECKING(for ximian_archiver >= 0.6.1)
+if gnome-config --libs ximian_archiver > /dev/null 2>&1; then
+	vers=`gnome-config --modversion ximian_archiver | sed -e "s/ximian-archiver-//" -e 's/cvs$//' -e 's/pre$//' | \
+		 awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
+	if test "$vers" -ge 60100; then
+		AC_MSG_RESULT(found)
+	 else
+		AC_MSG_ERROR(You need at least Ximian Archiver 0.6.1 for this version of ximian-setup-tools)
+	fi
+else
+	AC_MSG_ERROR(Did not find Ximian Archiver installed	    )
+fi
+dnl =====================================================
+dnl END: Ximian Archiver
+dnl =====================================================
+
 dnl ========================================================
 dnl Transtlations
 dnl ========================================================
@@ -162,8 +182,8 @@ dnl =====================================================
 dnl XST_LIBS & XST_CFLAGS 
 dnl =====================================================
 
-XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
-XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
+XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml ximian_archiver`"
+XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml ximian_archiver`"
 
 case $host in
 *-*-freebsd* )
@@ -171,8 +191,8 @@ case $host in
 	;;
 esac;
 
-XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/archiver/libximian_archiver.la \$(top_builddir)/src/common/libsetuptool.a"
-XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
+dnl XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/archiver/libximian_archiver.la \$(top_builddir)/src/common/libsetuptool.a"
+dnl XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
 
 XST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
 XST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(desktop).in \$(desktop) \$(etspecs)"
@@ -211,31 +231,6 @@ dnl ==================================
 dnl END: XST_LIBS & XST_FLAGS
 dnl ==================================
 
-dnl ======================================
-dnl Variables for ximian_archiverConf.sh.in
-dnl =======================================
-
-XIMIAN_ARCHIVER_LIBDIR='-L${libdir}'
-XIMIAN_ARCHIVER_LIBS="$($GNOME_CONFIG --libs gnome libglade xml gnomecanvaspixbuf)"
-XIMIAN_ARCHIVER_INCLUDEDIR="$($GNOME_CONFIG --cflags gnome libglade xml gnomecanvaspixbuf)"
-
-AC_SUBST(XIMIAN_ARCHIVER_LIBDIR)
-AC_SUBST(XIMIAN_ARCHIVER_LIBS)
-AC_SUBST(XIMIAN_ARCHIVER_INCLUDEDIR)
-
-XIMIAN_ARCHIVER_LIBDIR_CONF="$XIMIAN_ARCHIVER_LIBDIR"
-XIMIAN_ARCHIVER_LIBS_CONF="$XIMIAN_ARCHIVER_LIBS -lximian_archiver"
-XIMIAN_ARCHIVER_INCLUDEDIR_CONF="$XIMIAN_ARCHIVER_INCLUDEDIR"
-
-AC_SUBST(XIMIAN_ARCHIVER_LIBDIR_CONF)
-AC_SUBST(XIMIAN_ARCHIVER_LIBS_CONF)
-AC_SUBST(XIMIAN_ARCHIVER_INCLUDEDIR_CONF)
-
-dnl =============================================
-dnl END : Variables for ximian_archiverConf.sh.in
-dnl =============================================
-
-
 AC_SUBST(scriptsdir)
 AC_SUBST(pixmapsdir)
 AC_SUBST(interfacesdir)
@@ -247,8 +242,6 @@ ximian-setup-tools.spec
 macros/Makefile
 intl/Makefile
 interfaces/Makefile
-archiver/Makefile
-archiver/location-manager-capplet/Makefile
 backend/Makefile
 pixmaps/Makefile
 src/Makefile
