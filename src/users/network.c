@@ -32,6 +32,7 @@
 #include <gal/e-paned/e-hpaned.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
+#include "network.h"
 #include "callbacks.h"
 
 const gchar *group_spec = 
@@ -46,6 +47,7 @@ const gchar *group_spec =
 
 GtkWidget *network_group;
 GtkWidget *network_user;
+GHashTable *network_group_hash;
 
 static int
 col_count (ETableModel *etm, void *data)
@@ -117,6 +119,10 @@ user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 	if (!node)
 		return NULL;
 
+	node = xml_element_find_first (node, "login");
+	if (!node)
+		return NULL;
+
 	return xml_element_get_content (node);
 }
 
@@ -159,12 +165,17 @@ on_group_cursor_change (ETable *table, int row, gpointer user_data)
 
 	node = xml_element_find_first (node, "users");
 	if (!node)
+	{
+		e_tree_model_thaw (user_model);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("network_settings_frame")),
+				"Settings for selected user and group");
 		return;
+	}
 
 	for (n0 = xml_element_find_first (node, "user"); n0; 
 			n0 = xml_element_find_next (n0, "user"))
 	{
-		e_tree_model_node_insert (user_model, user_root, -1, n0);
+		network_insert_user (user_model, user_root, -1, n0);
 	}
 
 	e_tree_model_thaw (user_model);
@@ -195,6 +206,17 @@ on_user_cursor_change (ETable *table, int row, gpointer user_data)
 	g_free (txt);
 }
 
+static ETreePath *
+network_node_insert (ETreeModel *etree, ETreePath *parent, int position, 
+		gpointer node_data, GHashTable *hash)
+{
+	ETreePath *path;
+
+	path = e_tree_model_node_insert (etree, parent, position, node_data);
+	g_hash_table_insert (hash, node_data, path);
+	return path;
+}
+
 static void
 create_group_table (GtkWidget *paned)
 {
@@ -213,7 +235,8 @@ create_group_table (GtkWidget *paned)
 					 is_editable,
 					 NULL);
 
-	root_node = e_tree_model_node_insert (group_model, NULL, 0, g_strdup (""));
+	network_group_hash = g_hash_table_new (g_direct_hash, g_direct_equal);
+	root_node = network_node_insert (group_model, NULL, 0, g_strdup (""), network_group_hash);
 	e_tree_model_root_node_set_visible (group_model, FALSE);
 
 	network_group = e_table_scrolled_new (E_TABLE_MODEL (group_model), NULL, group_spec, NULL);
@@ -294,17 +317,96 @@ network_populate (xmlNodePtr xml_root)
 	if (!node)
 	{
 		g_warning ("network_populate: couldn't find groupdb node.");
+		e_tree_model_thaw (model);
 		return;
 	}
 
-	path = e_tree_model_node_insert (model, path_root, -1, node);
+	path = network_node_insert (model, path_root, -1, node, network_group_hash);
 
 	for (n0 = xml_element_find_first (node, "group"); n0; 
 			n0 = xml_element_find_next (n0, "group"))
 	{
-		e_tree_model_node_insert (model, path, -1, n0);
+		network_node_insert (model, path, -1, n0, network_group_hash);
 	}
 
 	e_tree_model_thaw (model);
 }
 
+extern xmlNodePtr
+network_current_node (void)
+{
+	ETreeModel *model;
+	ETreePath *path;
+	ETable *table;
+	gint row;
+
+	table = E_TABLE_SCROLLED (network_group)->table;
+	model = E_TREE_MODEL (table->model);
+	row = e_table_get_cursor_row (table);
+
+	if (row < 0)
+	{
+		table = E_TABLE_SCROLLED (network_user)->table;
+		model = E_TREE_MODEL (table->model);
+		row = e_table_get_cursor_row (table);
+	}
+
+	if (row >= 0)
+	{
+		path = e_tree_model_node_at_row (model, row);
+		return e_tree_model_node_get_data (model, path);
+	}
+
+	return NULL;
+}
+
+extern void network_current_delete (void)
+{
+	ETreeModel *model;
+	ETreePath *path;
+	ETable *table;
+	gint row;
+	xmlNodePtr node;
+
+	table = E_TABLE_SCROLLED (network_group)->table;
+	model = E_TREE_MODEL (table->model);
+	row = e_table_get_cursor_row (table);
+
+	if (row < 0)
+	{
+		table = E_TABLE_SCROLLED (network_user)->table;
+		model = E_TREE_MODEL (table->model);
+		row = e_table_get_cursor_row (table);
+	}
+
+	path = e_tree_model_node_at_row (model, row);
+	node = e_tree_model_node_get_data (model, path);
+
+	e_tree_model_node_remove (model, path);
+	xml_element_destroy (node);
+}
+
+ETreePath *
+network_insert_user (ETreeModel *etree, ETreePath *parent, int position, gpointer node_data)
+{
+	xmlNodePtr node = node_data;
+	xmlNodePtr user_node, l, n0;
+	gchar *name, *txt;
+
+	name = xml_element_get_content (node);
+	user_node = xml_element_find_first (xml_doc_get_root (tool_config_get_xml()), "userdb");
+
+	for (n0 = xml_element_find_first (user_node, "user"); n0;
+			n0 = xml_element_find_next (n0, "user"))
+	{
+		l = xml_element_find_first (n0, "login");
+		txt = xml_element_get_content (l);
+		if (!strcmp (txt, name))
+		{
+			g_free (txt);
+			return e_tree_model_node_insert (etree, parent, position, n0);
+		}
+		g_free (txt);
+	}
+	return NULL;
+}

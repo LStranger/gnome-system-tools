@@ -1083,3 +1083,176 @@ add_group_users (xmlNodePtr node, gchar *name)
 	xml_element_set_content (u, name);
 }
 
+static void
+my_gtk_entry_set_text (void *entry, gchar *str)
+{
+	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
+}
+
+
+extern void
+group_settings_prepare (xmlNodePtr node)
+{
+	GtkWidget *w0;
+	GList *member_rows;
+	gchar *txt, *name;
+
+	g_return_if_fail (node != NULL);
+	g_return_if_fail (name = my_xml_get_content (node, "name"));
+
+	w0 = tool_widget_get ("group_settings_name");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	my_gtk_entry_set_text (w0, name);
+
+	/* Fill group members */
+	member_rows = group_fill_members_list (node);
+
+	/* Fill all users list */
+	group_fill_all_users_list (member_rows);
+
+	while (member_rows)
+	{
+		g_free (member_rows->data);
+		member_rows = member_rows->next;
+	}
+	g_list_free (member_rows);
+
+	/* Show group settings dialog */
+	
+	w0 = tool_widget_get ("group_settings_dialog");
+	txt = g_strdup_printf (_("Settings for Group %s"), name);
+	gtk_window_set_title (GTK_WINDOW (w0), txt);
+	g_free (name);
+	g_free (txt);
+	gtk_widget_show (w0);
+}
+
+extern void
+user_settings_prepare (xmlNodePtr node)
+{
+	GtkWidget *w0;
+	GList *tmp_list;
+	gchar *txt;
+	gboolean found = FALSE;
+	gchar *login, *comment, *name = NULL;
+	gint gid, id = 0;
+	gint new_id = 0;
+	gboolean comp = FALSE;
+	GtkRequisition req;
+
+	g_return_if_fail (node != NULL);
+	g_return_if_fail (login = my_xml_get_content (node, "login"));
+
+	/* Get tool state (advanced/basic */
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		comp = TRUE;
+
+	/* Fill login name entry */	
+	w0 = tool_widget_get ("user_settings_name");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	my_gtk_entry_set_text (w0, login);
+	g_free (login);
+
+	/* Fill groups combo */
+	w0 = tool_widget_get ("user_settings_group");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	user_fill_settings_group (GTK_COMBO (w0), comp);
+
+	txt = my_xml_get_content (node, "gid");
+	gid = atoi (txt);
+	g_free (txt); 
+
+	tmp_list = get_group_list ("gid", comp);
+	while (tmp_list)
+	{
+		id = atoi (tmp_list->data);
+		g_free (tmp_list->data); 
+		tmp_list = tmp_list->next;
+
+		if (!found && id == gid)
+		{
+			new_id = id;
+			found = TRUE;
+		}
+	}
+	g_list_free (tmp_list);
+
+	if (!found) 
+	{
+		g_warning ("The GID for the main user's group was not found.");
+		name = g_strdup (_("Unkown User"));
+	}
+	else
+	{
+		txt = g_strdup_printf ("%d", new_id);
+		name = get_group_by_data ("gid", txt, "name");
+		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
+		g_free (txt);
+	}       
+
+	/* Fill comment entry */
+	comment = my_xml_get_content (node, "comment");
+	w0 = tool_widget_get ("user_settings_comment");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	my_gtk_entry_set_text (w0, comment);
+	g_free (comment);
+
+	/* If state == advanced, fill advanced settings too. */
+	if (!comp)
+		adv_user_settings (node, TRUE);
+
+	/* Set dialog's title and show it */
+	w0 = tool_widget_get ("user_settings_dialog");
+	txt = g_strdup_printf (_("Settings for User %s"), name);
+	g_free (name);
+	gtk_window_set_title (GTK_WINDOW (w0), txt);
+	g_free (txt);
+
+	/* Resize it to minimum */
+	gtk_widget_size_request (w0, &req);
+	gtk_window_set_default_size (GTK_WINDOW (w0), req.width, req.height);
+
+	/* Add 0 to windows data refering that we are not making new user */
+	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (0));
+	gtk_widget_show (w0);
+}
+
+extern void
+user_new_prepare (gchar *group_name)
+{
+	GtkWidget *w0;
+	gboolean comp = FALSE;
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		comp = TRUE;
+
+	w0 = tool_widget_get ("user_settings_group");
+	user_fill_settings_group (GTK_COMBO (w0), comp);
+	my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), group_name);
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+		adv_user_settings_new ();
+
+	w0 = tool_widget_get ("user_settings_dialog");
+	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
+	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
+	gtk_widget_show (w0);
+}
+
+extern void
+group_new_prepare (void)
+{
+	GtkWidget *w0;
+
+	/* Fill all users list */
+	group_fill_all_users_list (NULL);
+
+	/* Show group settings dialog */
+
+	w0 = tool_widget_get ("group_settings_dialog");
+	gtk_window_set_title (GTK_WINDOW (w0), _("Create New Group"));
+	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
+	gtk_widget_show (w0);
+}
+

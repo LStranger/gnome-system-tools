@@ -723,7 +723,7 @@ e_table_add_group (gchar *new_name)
 
 	row = xml_parent_childs (root);
 	e_table_model_append_row (etm, NULL, row);
-	
+
 	e_table_model_changed (etm); 
 	e_table_model_row_inserted (etm, row);
 

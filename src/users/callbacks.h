@@ -95,6 +95,12 @@ on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton
 		gpointer user_data);
 
 extern void
+on_network_delete_clicked (GtkWidget *button, gpointer user_data);
+
+extern void
+on_network_settings_clicked (GtkButton *button, gpointer user_data);
+
+extern void
 on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data);
 
 extern void

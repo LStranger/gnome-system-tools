@@ -77,5 +77,9 @@ GList *get_group_users (xmlNodePtr node);
 void del_group_users (xmlNodePtr node);
 void add_group_users (xmlNodePtr node, gchar *name);
 
+extern void group_settings_prepare (xmlNodePtr node);
+extern void user_settings_prepare (xmlNodePtr node);
+extern void user_new_prepare (gchar *group_name);
+extern void group_new_prepare (void);
 
 #endif /* USER_GROUP_H */

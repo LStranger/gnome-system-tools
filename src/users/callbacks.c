@@ -33,6 +33,7 @@
 #include "transfer.h"
 #include "passwd.h"
 #include "e-table.h"
+#include "network.h"
 
 /* Local globals */
 static int reply;
@@ -46,93 +47,10 @@ static void my_gtk_entry_set_text (void *entry, gchar *str);
 extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0;
-	GList *tmp_list;
-	gchar *txt;
-	gboolean found = FALSE;
-	gchar *login, *comment, *name = NULL;
-	gint gid, id = 0;
-	gint new_id = 0;
-	gboolean comp = FALSE;
-	GtkRequisition req;
 	xmlNodePtr node;
 
 	g_return_if_fail (node = e_table_get_current_user ());
-	g_return_if_fail (login = my_xml_get_content (node, "login"));
-
-	/* Get tool state (advanced/basic */
-
-	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
-		comp = TRUE;
-
-	/* Fill login name entry */	
-	w0 = tool_widget_get ("user_settings_name");
-	gtk_widget_set_sensitive (w0, tool_get_access());
-	my_gtk_entry_set_text (w0, login);
-	g_free (login);
-
-	/* Fill groups combo */
-	w0 = tool_widget_get ("user_settings_group");
-	gtk_widget_set_sensitive (w0, tool_get_access());
-	user_fill_settings_group (GTK_COMBO (w0), comp);
-
-	txt = my_xml_get_content (node, "gid");
-	gid = atoi (txt);
-	g_free (txt); 
-
-	tmp_list = get_group_list ("gid", comp);
-	while (tmp_list)
-	{
-		id = atoi (tmp_list->data);
-		g_free (tmp_list->data); 
-		tmp_list = tmp_list->next;
-
-		if (!found && id == gid)
-		{
-			new_id = id;
-			found = TRUE;
-		}
-	}
-	g_list_free (tmp_list);
-
-	if (!found) 
-	{
-		g_warning ("The GID for the main user's group was not found.");
-		name = g_strdup (_("Unkown User"));
-	}
-	else
-	{
-		txt = g_strdup_printf ("%d", new_id);
-		name = get_group_by_data ("gid", txt, "name");
-		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
-		g_free (txt);
-	}       
-
-	/* Fill comment entry */
-	comment = my_xml_get_content (node, "comment");
-	w0 = tool_widget_get ("user_settings_comment");
-	gtk_widget_set_sensitive (w0, tool_get_access());
-	my_gtk_entry_set_text (w0, comment);
-	g_free (comment);
-
-	/* If state == advanced, fill advanced settings too. */
-	if (!comp)
-		adv_user_settings (node, TRUE);
-
-	/* Set dialog's title and show it */
-	w0 = tool_widget_get ("user_settings_dialog");
-	txt = g_strdup_printf (_("Settings for User %s"), name);
-	g_free (name);
-	gtk_window_set_title (GTK_WINDOW (w0), txt);
-	g_free (txt);
-
-	/* Resize it to minimum */
-	gtk_widget_size_request (w0, &req);
-	gtk_window_set_default_size (GTK_WINDOW (w0), req.width, req.height);
-
-	/* Add 0 to windows data refering that we are not making new user */
-	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (0));
-	gtk_widget_show (w0);
+	user_settings_prepare (node);
 }
 
 void 
@@ -172,28 +90,9 @@ on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0;
-	gboolean comp = FALSE;
-	
 	g_return_if_fail (tool_get_access());
-
-	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
-		comp = TRUE;
-	
-	w0 = tool_widget_get ("user_settings_group");
-	user_fill_settings_group (GTK_COMBO (w0), comp);
-	my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
-
-	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-		adv_user_settings_new ();
-
-	w0 = tool_widget_get ("user_settings_dialog");
-	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
-	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
-	gtk_widget_show (w0);
+	user_new_prepare (g_strdup (""));
 }
-
-static int reply;
 
 static void
 reply_cb (gint val, gpointer data)
@@ -214,7 +113,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (node = e_table_get_current_user ());
 	g_return_if_fail (name = my_xml_get_content (node, "login"));
 
-	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
+	parent = GTK_WINDOW (tool_get_top_window());
 
 	if (!strcmp (name, "root"))
 	{
@@ -250,57 +149,17 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_group_settings_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0;
-	GList *member_rows;
-	gchar *txt, *name;
 	xmlNodePtr node;
 
 	g_return_if_fail (node = e_table_get_current_group ());
-	g_return_if_fail (name = my_xml_get_content (node, "name"));
-
-	w0 = tool_widget_get ("group_settings_name");
-	gtk_widget_set_sensitive (w0, tool_get_access());
-	my_gtk_entry_set_text (w0, name);
-
-	/* Fill group members */
-	member_rows = group_fill_members_list (node);
-
-	/* Fill all users list */
-	group_fill_all_users_list (member_rows);
-
-	while (member_rows)
-	{
-		g_free (member_rows->data);
-		member_rows = member_rows->next;
-	}
-	g_list_free (member_rows);
-
-	/* Show group settings dialog */
-	
-	w0 = tool_widget_get ("group_settings_dialog");
-	txt = g_strdup_printf (_("Settings for Group %s"), name);
-	gtk_window_set_title (GTK_WINDOW (w0), txt);
-	g_free (name);
-	g_free (txt);
-	gtk_widget_show (w0);
+	group_settings_prepare (node);
 }
 
 extern void
 on_group_new_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0;
-
 	g_return_if_fail (tool_get_access());
-
-	/* Fill all users list */
-	group_fill_all_users_list (NULL);
-
-	/* Show group settings dialog */
-
-	w0 = tool_widget_get ("group_settings_dialog");
-	gtk_window_set_title (GTK_WINDOW (w0), _("Create New Group"));
-	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
-	gtk_widget_show (w0);
+	group_new_prepare ();
 }
 
 extern void
@@ -315,7 +174,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (node = e_table_get_current_group ());
 	g_return_if_fail (name = my_xml_get_content (node, "name"));
 
-	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
+	parent = GTK_WINDOW (tool_get_top_window ());
 
 	if (!strcmp (name, "root"))
 	{
@@ -326,7 +185,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		g_free (txt);
 		return;
 	}
-	
+
 	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), name);
 	g_free (name);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
@@ -343,6 +202,97 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")),
 				"Settings for the selected group");
 	}
+}
+
+/* Network tab. */
+
+extern void
+on_network_delete_clicked (GtkWidget *button, gpointer user_data)
+{
+	xmlNodePtr node;
+	GtkWindow *parent;
+	GnomeDialog *dialog;
+	gchar *name, *buf = NULL;
+
+	g_return_if_fail (node = network_current_node ());
+
+	if (!strcmp (node->name, "group"))
+	{
+		node = xml_element_find_first (node, "name");
+		name = xml_element_get_content (node);
+		buf = g_strdup_printf ("Are You sure You want to delete group %s?", name);
+		g_free (name);
+	}
+
+	if (!strcmp (node->name, "user"))
+	{
+		node = xml_element_find_first (node, "login");
+		name = xml_element_get_content (node);
+		buf = g_strdup_printf ("Are You sure You want to delete user %s?", name);
+		g_free (name);
+	}
+
+	if (!buf)
+		return;
+
+	parent = GTK_WINDOW (tool_get_top_window ());
+	dialog = GNOME_DIALOG (gnome_question_dialog_parented (buf, reply_cb, NULL, parent));
+	gnome_dialog_run (dialog);
+	g_free (buf);
+
+	if (reply)
+		return;
+	else
+		network_current_delete ();
+}
+
+extern void
+on_network_settings_clicked (GtkButton *button, gpointer user_data)
+{
+	xmlNodePtr node;
+
+	g_return_if_fail (node = network_current_node ());
+
+	if (!strcmp (node->name, "group"))
+		group_settings_prepare (node);
+
+	else if (!strcmp (node->name, "user"))
+		user_settings_prepare (node);
+	else
+		g_warning ("unknown node.");
+
+	return;
+}
+
+extern void
+on_network_user_new_clicked (GtkButton *button, gpointer user_data)
+{
+	xmlNodePtr node;
+	gchar *buf = NULL;
+
+	g_return_if_fail (tool_get_access());
+	node = network_current_node ();
+
+	if (node)
+	{
+		if (!strcmp (node->name, "group"))
+		{
+			node = xml_element_find_first (node, "name");
+			buf = xml_element_get_content (node);
+		}
+	}
+
+	if (!buf)
+		buf = g_strdup ("");
+
+	user_new_prepare (buf);
+}
+
+extern void
+on_network_group_new_clicked (GtkButton *button, gpointer user_data)
+{
+	g_return_if_fail (tool_get_access());
+	group_new_prepare ();
 }
 
 /* User settings callbacks */
@@ -565,7 +515,7 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 
 	w0 = tool_widget_get ("group_settings_dialog");
 	new = GPOINTER_TO_UINT (gtk_object_get_data (GTK_OBJECT (w0), "new"));
-	
+
 	if (new)
 		retval = group_add ();
 	else
@@ -689,4 +639,5 @@ my_gtk_entry_set_text (void *entry, gchar *str)
 {
 	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
 }
+
 
