@@ -33,7 +33,6 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
-#include <pty.h>
 #include <termios.h>
 
 #include <gnome.h>
@@ -44,6 +43,8 @@
 #ifdef __FreeBSD__
 # include <errno.h>
 # include <libutil.h>
+#else
+#include <pty.h>
 #endif
 
 #include "gst-auth.h"
