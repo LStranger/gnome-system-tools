@@ -1,5 +1,6 @@
 # GNOME System Tools Czech translation.
 # Copyright (C) 2002 Free Software Foundation
+# Copyright (C) 2003 Miloslav Trmac <mitr@volny.cz>
 # This file is distributed under the same license as the gnome-system-tools package.
 # Michal Bukovjan <bukm@centrum.cz>, 2002,2003.
 # Miloslav Trmac <mitr@volny.cz>, 2003.
@@ -8,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-18 15:03+0100\n"
-"PO-Revision-Date: 2003-12-18 18:29+0100\n"
+"POT-Creation-Date: 2003-12-22 15:15+0100\n"
+"PO-Revision-Date: 2003-12-22 19:35+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -88,8 +89,8 @@ msgid "Whether the warning dialog should be shown or not"
 msgstr "Jestli se má zobrazovat dialog s varováním"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
+#: interfaces/disks.glade.in.h:2 interfaces/network.glade.in.h:1
+#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -375,6 +376,140 @@ msgstr "Použijte toto okno pro výběr počítače, který chcete nastavit"
 #: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:108
 msgid "_Password:"
 msgstr "_Heslo:"
+
+#: interfaces/disks.glade.in.h:1
+msgid " "
+msgstr " "
+
+#: interfaces/disks.glade.in.h:3
+msgid "<b>CDROM Properties</b>"
+msgstr "<b>Vlastnosti CDROM</b>"
+
+#: interfaces/disks.glade.in.h:4
+msgid "<b>Disk Properties</b>"
+msgstr "<b>Vlastnosti disku</b>"
+
+#: interfaces/disks.glade.in.h:5
+msgid "<b>Partition List</b>"
+msgstr "<b>Seznam oddílů</b>"
+
+#: interfaces/disks.glade.in.h:6
+msgid "<b>Partition Properties</b>"
+msgstr "<b>Vlastnosti oddílu</b>"
+
+#: interfaces/disks.glade.in.h:7
+msgid "<b>Storage List</b>"
+msgstr "<b>Seznam zařízení pro ukládání dat</b>"
+
+#: interfaces/disks.glade.in.h:8
+msgid "<b>Storage Properties</b>"
+msgstr "<b>Vlastnosti zařízení pro ukládání dat</b>"
+
+#: interfaces/disks.glade.in.h:9
+msgid ""
+"<big><b>Storage Settings</b></big>\n"
+"Configure your hard disks and storages devices."
+msgstr ""
+"<big><b>Nastavení úložného prostoru</b></big>\n"
+"Nastavte své pevné disky a zařízení pro ukládání dat."
+
+#: interfaces/disks.glade.in.h:11
+msgid "Can Read DVD"
+msgstr "Může číst DVD"
+
+#: interfaces/disks.glade.in.h:12
+msgid "Can Write CD-R"
+msgstr "Může zapisovat CD-R"
+
+#: interfaces/disks.glade.in.h:13
+msgid "Can Write CD-RW"
+msgstr "Může zapisovat CD-RW"
+
+#: interfaces/disks.glade.in.h:14
+msgid "Can Write DVD-R"
+msgstr "Může zapisovat DVD-R"
+
+#: interfaces/disks.glade.in.h:15
+msgid "Can Write DVD-RAM"
+msgstr "Může zapisovat DVD-RAM"
+
+#: interfaces/disks.glade.in.h:16
+msgid "Can play audio"
+msgstr "Může přehrávat zvuk"
+
+#: interfaces/disks.glade.in.h:17
+msgid "DMA"
+msgstr "DMA"
+
+#: interfaces/disks.glade.in.h:18
+msgid "Device: "
+msgstr "Zařízení: "
+
+#: interfaces/disks.glade.in.h:19
+msgid "Extended 2"
+msgstr "Extended 2"
+
+#: interfaces/disks.glade.in.h:20
+msgid "Extended 3"
+msgstr "Extended 3"
+
+#: interfaces/disks.glade.in.h:21
+msgid "FAT"
+msgstr "FAT"
+
+#: interfaces/disks.glade.in.h:22
+msgid "Filesystem:"
+msgstr "Systém souborů:"
+
+#: interfaces/disks.glade.in.h:23
+msgid "JFS"
+msgstr "JFS"
+
+#: interfaces/disks.glade.in.h:24
+msgid "Memory Swap"
+msgstr "Odkládací prostor"
+
+#: interfaces/disks.glade.in.h:25
+msgid "Mount Point:"
+msgstr "Místo připojení:"
+
+#: interfaces/disks.glade.in.h:26
+msgid "NTFS"
+msgstr "NTFS"
+
+#: interfaces/disks.glade.in.h:27 src/disks/callbacks.c:312
+#: src/disks/callbacks.c:313 src/disks/callbacks.c:328
+#: src/disks/callbacks.c:329
+msgid "Not Available"
+msgstr "Není k dispozici"
+
+#: interfaces/disks.glade.in.h:28
+msgid "Partitions"
+msgstr "Oddíly"
+
+#: interfaces/disks.glade.in.h:29
+msgid "Properties"
+msgstr "Vlastnosti"
+
+#: interfaces/disks.glade.in.h:30
+msgid "Reiser FS"
+msgstr "Reiser FS"
+
+#: interfaces/disks.glade.in.h:31
+msgid "Size:"
+msgstr "Velikost:"
+
+#: interfaces/disks.glade.in.h:32
+msgid "Speed"
+msgstr "Rychlost"
+
+#: interfaces/disks.glade.in.h:33
+msgid "XFS"
+msgstr "XFS"
+
+#: interfaces/disks.glade.in.h:34
+msgid "_Format"
+msgstr "_Formátovat"
 
 #: interfaces/network.glade.in.h:2
 msgid "/dev/modem"
@@ -886,24 +1021,28 @@ msgid "Description:"
 msgstr "Popis:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr "Parametry:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "Priorita:"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "_Vlastnosti služby"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Service:"
 msgstr "Služba:"
+
+#: interfaces/services.glade.in.h:9
+msgid "Status:"
+msgstr "Stav:"
 
 #: interfaces/services.glade.in.h:10
 msgid "Use this tool to specify which services to run"
 msgstr "Použijte tento nástroj pro určení, které služby spouštět"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Start"
+msgstr "_Spustit"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1227,7 +1366,8 @@ msgstr "Vytvářím nový zaváděcí obraz (%d z %d)"
 msgid "Finished creating a new boot image"
 msgstr "Tvorba nového zaváděcího obrazu dokončena"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:467
+#: src/boot/boot-image.c:40 src/disks/disks-storage-partition.c:128
+#: src/disks/disks-storage.c:101 src/network/profile.c:467
 msgid "Unknown"
 msgstr "Neznámý"
 
@@ -1354,13 +1494,14 @@ msgstr "Zařízení"
 msgid "/_Add ..."
 msgstr "/Přid_at ..."
 
-#: src/boot/table.c:52 src/services/table.c:37 src/users/table.c:49
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
 #: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Vlastnosti"
 
-#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/disks/disks-gui.c:44 src/network/connection.c:60
+#: src/network/dns.c:39 src/network/hosts.c:43 src/users/table.c:50
+#: src/users/table.c:57
 msgid "/_Delete"
 msgstr "/O_dstranit"
 
@@ -1459,6 +1600,46 @@ msgstr "Systémové nástroje GNOME"
 #: src/common/gst-ui.c:396
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "Restartujte prosím vaše sezení GNOME, aby se tyto změny projevily."
+
+#: src/disks/callbacks.c:304 src/disks/callbacks.c:305
+msgid "(Getting ...)"
+msgstr "(Získávám...)"
+
+#: src/disks/disks-gui.c:43
+msgid "/_Format"
+msgstr "/_Formátovat"
+
+#: src/disks/disks-storage-cdrom.c:103
+msgid "CDROM"
+msgstr "CDROM"
+
+#: src/disks/disks-storage-disk.c:83
+msgid "Hard Disk"
+msgstr "Pevý disk"
+
+#: src/disks/disks-storage-floppy.c:71
+msgid "Floppy"
+msgstr "Disketa"
+
+#: src/disks/disks-storage-partition.c:260
+msgid "Swap Partition"
+msgstr "Odkládací oddíl"
+
+#: src/disks/disks-storage.c:100
+msgid "Unknown Storage"
+msgstr "Neznámé zařízení pro ukládání dat"
+
+#: src/disks/disks.desktop.in.in.h:1
+msgid "Configure the system disks"
+msgstr "Nastavit systémové disky"
+
+#: src/disks/disks.desktop.in.in.h:2
+msgid "Disks"
+msgstr "Disky"
+
+#: src/disks/main.c:76
+msgid "Disks Manager"
+msgstr "Správce disků"
 
 #: src/network/callbacks.c:365
 #, c-format
@@ -1727,16 +1908,28 @@ msgstr "Jste si jisti, že chcete odstranit profil %s?"
 msgid "Profile name"
 msgstr "Název profilu"
 
-#: src/services/callbacks.c:45
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "Popis není k dispozici."
 
-#: src/services/callbacks.c:297
+#: src/services/callbacks.c:239
+msgid "Running"
+msgstr "Běží"
+
+#: src/services/callbacks.c:243
+msgid "Stopped"
+msgstr "Zastaveno"
+
+#: src/services/callbacks.c:248
+msgid "Could not get info"
+msgstr "Nelze získat informace"
+
+#: src/services/callbacks.c:300
 #, c-format
 msgid "Settings for service %s"
 msgstr "Nastavení služby %s"
 
-#: src/services/main.c:61
+#: src/services/main.c:58
 msgid "Services Settings"
 msgstr "Nastavení služeb"
 
@@ -1748,11 +1941,11 @@ msgstr "Nastavit, které služby budou spuštěny při startu systému"
 msgid "Services"
 msgstr "Služby"
 
-#: src/services/table.c:79
+#: src/services/table.c:78
 msgid "Active"
 msgstr "Aktivní"
 
-#: src/services/table.c:89
+#: src/services/table.c:88
 msgid "Service"
 msgstr "Služba"
 
@@ -2036,6 +2229,9 @@ msgstr "Shell"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Přidat nebo odstranit uživatele a skupiny"
+
+#~ msgid "Parameters:"
+#~ msgstr "Parametry:"
 
 #~ msgid "_Configure"
 #~ msgstr "Nasta_vit"
@@ -2368,9 +2564,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgid "Network adapter setup."
 #~ msgstr "Nastavení síťového adaptéru."
 
-#~ msgid "Services Manager"
-#~ msgstr "Správce služeb"
-
 #~ msgid "Time"
 #~ msgstr "Čas"
 
@@ -2459,12 +2652,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 
 #~ msgid "Open settings dialog for selected import"
 #~ msgstr "Otevřít dialog s nastavením pro vybraný import"
-
-#~ msgid "Partition"
-#~ msgstr "Oddíl"
-
-#~ msgid "Partition Settings"
-#~ msgstr "Nastavení oddílu"
 
 #~ msgid "Remember details of this partition"
 #~ msgstr "Pamatovat si podrobnosti tohoto oddílu"
@@ -2567,9 +2754,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 
 #~ msgid "   Configure...   "
 #~ msgstr "   Nastavit...   "
-
-#~ msgid " Exit and come back later after installing."
-#~ msgstr " Ukončit a zkusí se to znovu, až se komponenty nainstalují."
 
 #~ msgid " Keep the current configuration."
 #~ msgstr " Ponechat stávající nastavení."
@@ -2741,9 +2925,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgid "Choose Location"
 #~ msgstr "Vyberte umístění"
 
-#~ msgid "Copy"
-#~ msgstr "Kopírovat"
-
 #~ msgid "Copy Location"
 #~ msgstr "Kopírovat umístění"
 
@@ -2855,9 +3036,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 
 #~ msgid "Size"
 #~ msgstr "Velikost"
-
-#~ msgid "Size:"
-#~ msgstr "Velikost:"
 
 #~ msgid "Swap Settings"
 #~ msgstr "Nastavení odkládání"
@@ -3094,9 +3272,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgid "Send text documents raw to the printer."
 #~ msgstr "Posílat textové dokumenty přímo na tiskárnu."
 
-#~ msgid "Settings..."
-#~ msgstr "Nastavení..."
-
 #~ msgid "Size of the paper in the printer."
 #~ msgstr "Velikost papíru v tiskárně."
 
@@ -3261,9 +3436,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgstr ""
 #~ "Importy jsou adresáře, které jsou umístěny na jiných počítačích a jsou "
 #~ "vám přístupné pomocí sítě."
-
-#~ msgid "Mount Point"
-#~ msgstr "Místo připojení"
 
 #~ msgid "Mount p_oint:"
 #~ msgstr "Míst_o připojení:"
