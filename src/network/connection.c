@@ -2010,6 +2010,20 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "advanced_page"));
 
 		fill_ip (cxn);
+	} else {
+		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
+					 PIXMAPS_DIR "/network.png");
+
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
+
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ethernet_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ptp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "wireless_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ppp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "account_page"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "advanced_page"));
 	}
 
 	/* try to set the dialog at the minimum possible size */
