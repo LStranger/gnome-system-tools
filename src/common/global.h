@@ -7,4 +7,5 @@
 #include "xst-tool.h"
 #include "xst-dialog.h"
 #include "xst-ui.h"
+#include "xst-util.h"
 #include "xst-conf.h"
