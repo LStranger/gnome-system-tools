@@ -1384,7 +1384,10 @@ user_account_check_home_warnings (UserAccount *account, GList *warnings)
 			if (!account->new)
 				text = _("The home directory does not exist, or its path is invalid.");
 			break;
-		case EACCES: text = _("Couldn't get access to the home directory."); break;
+		case EACCES:
+			if (!account->new)
+				text = _("Couldn't	 get access to the home directory.");
+			break;
 		default:
 			if (!account->new)
 				/* We shouldn't fall here: the other cases are in the error checks. */
@@ -1394,23 +1397,31 @@ user_account_check_home_warnings (UserAccount *account, GList *warnings)
 		if (text)
 			warnings = g_list_append (warnings, text);
 	} else {
-		if (!S_ISDIR (s.st_mode))
+		if (account->new) {
 			warnings = g_list_append
-				(warnings, _("The home directory path exists, but it is not a directory."));
-		if (!account->new) {
+				(warnings, _("The home directory already exists. "
+					     "This will break the new user's permissions."));
+		} else {
+			if (!S_ISDIR (s.st_mode))
+				warnings = g_list_append
+					(warnings, _("The home directory path exists, "
+						     "but it is not a directory."));
 			if (account->uid && (s.st_uid != atoi (account->uid)))
 				warnings = g_list_append
 					(warnings, _("The home directory is not owned by the user."));
 			else {
 				if (!s.st_mode & S_IRUSR)
 					warnings = g_list_append
-						(warnings, _("The user doesn't have permission to read from the home directory."));
+						(warnings, _("The user doesn't have permission to "
+							     "read from the home directory."));
 				if (!s.st_mode & S_IWUSR)
 					warnings = g_list_append
-						(warnings, _("The user doesn't have permission to write in the home directory."));
+						(warnings, _("The user doesn't have permission to "
+							     "write in the home directory."));
 				if (!s.st_mode & S_IRUSR)
 					warnings = g_list_append
-						(warnings, _("The user doesn't have permission to use (``execute'') the home directory."));
+						(warnings, _("The user doesn't have permission to "
+							     "use (``execute'') the home directory."));
 			}
 		}
 	}
