@@ -104,8 +104,8 @@ create_groups_table (void)
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
 	g_signal_connect (G_OBJECT (selection), "changed",
-			  G_CALLBACK (on_group_table_clicked),
-			  NULL);
+			  G_CALLBACK (on_table_clicked),
+			  (gpointer) groups_table);
 
 	return groups_table;
 }

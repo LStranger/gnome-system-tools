@@ -31,15 +31,14 @@
 
 /* Main dialog general callbacks */
 void on_showall_toggled (GtkToggleButton*, gpointer);
+void on_table_clicked (GtkTreeSelection*, gpointer);
 
 /* Main dialog callbacks, users tab */
-void on_user_table_clicked (GtkTreeSelection*, gpointer);
 void on_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_user_settings_clicked (GtkButton *button, gpointer data);
 void on_user_delete_clicked (GtkButton *button, gpointer user_data);
 
 /* Main dialog callbacks, groups tab */
-void on_group_table_clicked (GtkTreeSelection*, gpointer);
 void on_group_new_clicked (GtkButton*, gpointer);
 void on_group_settings_clicked (GtkButton*, gpointer);
 void on_group_delete_clicked (GtkButton*, gpointer);

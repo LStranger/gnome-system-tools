@@ -114,8 +114,8 @@ create_users_table (void)
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
 	g_signal_connect (G_OBJECT (selection), "changed",
-			  G_CALLBACK (on_user_table_clicked),
-			  NULL);
+			  G_CALLBACK (on_table_clicked),
+			  (gpointer) users_table);
 	
 	return users_table;
 }

@@ -59,13 +59,43 @@ on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
 	tables_update_content ();
 }
 
-/* Users tab */
+/* Common stuff to users and groups tables */
 
 void
-on_user_table_clicked (GtkTreeSelection *selection, gpointer data)
+counter (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-	actions_set_sensitive (TABLE_USER, TRUE);
+   int *cont;
+
+   cont = (int *) data;
+
+   (*cont) ++;
 }
+
+void
+on_table_clicked (GtkTreeSelection *selection, gpointer data)
+{
+   GtkTreeView *treeview;
+   int cont;
+
+   treeview = (GtkTreeView *) data;
+   cont = 0;
+   gtk_tree_selection_selected_foreach (selection, counter , &cont);
+   
+   if (users_table == treeview)
+      actions_set_sensitive (TABLE_USER, TRUE);
+   else
+      actions_set_sensitive (TABLE_GROUP, TRUE);
+   if (cont > 1)
+   {
+      if (users_table == treeview)
+	 xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", FALSE);
+      else
+	 xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", FALSE);
+   }
+   
+}
+
+/* Users Tab */
 
 void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
