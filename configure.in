@@ -123,6 +123,41 @@ dnl =====================================================
 dnl END: Check for Module versions
 dnl =====================================================
 
+dnl =====================================================
+dnl Check for GST Modules to build
+dnl =====================================================
+
+
+AC_ARG_ENABLE(boot, 
+	      [  --enable-boot           Enable build boot module (default yes)], , 
+	      enable_boot=yes)
+AC_ARG_ENABLE(network,
+	      [  --enable-network        Enable build network module (default yes)], , 
+	      enable_network=yes)
+AC_ARG_ENABLE(services,
+	      [  --enable-services       Enable build services module (default yes)], , 
+	      enable_services=yes)
+AC_ARG_ENABLE(time,
+	      [  --enable-time           Enable build time module (default yes)], , 
+	      enable_time=yes)
+AC_ARG_ENABLE(users,
+	      [  --enable-users          Enable build users module (default yes)], , 
+	      enable_users=yes)
+AC_ARG_ENABLE(disks,
+	      [  --enable-disks          Enable build disks development module (default no)], , 
+	      enable_disks=no)
+
+AM_CONDITIONAL(BUILD_BOOT, test x$enable_boot = xyes)
+AM_CONDITIONAL(BUILD_NETWORK, test x$enable_network = xyes)
+AM_CONDITIONAL(BUILD_SERVICES, test x$enable_services = xyes)
+AM_CONDITIONAL(BUILD_TIME, test x$enable_time = xyes)
+AM_CONDITIONAL(BUILD_USERS, test x$enable_users = xyes)
+AM_CONDITIONAL(BUILD_DISKS, test x$enable_disks != xno)
+
+dnl =====================================================
+dnl END: Check for Module versions
+dnl =====================================================
+
 dnl ========================================================
 dnl Transtlations
 dnl ========================================================
