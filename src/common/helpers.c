@@ -156,6 +156,7 @@ list_add_ip (GtkList *list, GtkWidget *w_ip)
 		gtk_widget_show (item);
 		list_add = g_list_append (list_add, item);
 		gtk_list_append_items (GTK_LIST (list), list_add);
+		gtk_list_select_child (GTK_LIST (list), item);
 	}
 	
 	g_free (ip);
@@ -191,6 +192,7 @@ list_add_word (GtkList *list, GtkWidget *editable)
 	gtk_widget_show (item);
 	list_add = g_list_append (list_add, item);
 	gtk_list_append_items (GTK_LIST (list), list_add);
+	g_list_remove (list_add, item);
 }
 
 
