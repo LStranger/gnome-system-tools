@@ -35,7 +35,8 @@ static gint char_sort_func (gconstpointer a, gconstpointer b);
 static gboolean user_update_login (xmlNodePtr node);
 static gboolean user_update_comment (xmlNodePtr node);
 static gboolean user_update_group (xmlNodePtr node);
-
+static gboolean group_update_name (xmlNodePtr node);
+static void group_update_users (xmlNodePtr node);
 
 login_defs logindefs;
 
@@ -160,7 +161,7 @@ user_add (gchar type)
 	g_free (gid);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-		adv_user_settings_update (node, new_user_name);
+		adv_user_settings_update (node);
 
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
@@ -183,11 +184,17 @@ user_update (xmlNodePtr node, gchar type)
 	gboolean modified = FALSE;
 
 	/* Update login. */
-	user_modified = user_update_login (node);
+	if (user_update_login (node))
+		user_modified = TRUE;
 
 	/* Update comment. */
 	if (user_update_comment (node))
 		user_modified = TRUE;
+
+	/* If advanced mode, update advanced settings */
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+		if (adv_user_settings_update (node))
+			user_modified = TRUE;
 
 	if (user_modified)
 	{
@@ -198,16 +205,12 @@ user_update (xmlNodePtr node, gchar type)
 				e_table_change_user ();
 				break;
 			case NIS:
-				network_change_user (node);
+				network_change_table (USER);
 				break;
 			default:
 				break;
 		}
 	}
-
-	/* If advanced mode, update advanced settings */
-	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-		adv_user_settings_update (node, NULL); /* FIXME: expects new_user_name!!! */
 
 	/* Update group. */
 	if (user_update_group (node))
@@ -318,57 +321,35 @@ group_add (gchar type)
 }
 
 extern gboolean
-group_update (xmlNodePtr node)
+group_update (xmlNodePtr node, gchar type)
 {
-	GtkWidget *w0;
-	GtkWindow *win;
-	GnomeDialog *dialog;
-	gchar *txt, *name;
-	GtkCList *clist;
-	gint row;
+	gboolean group_modified = FALSE;
+	gboolean modified = FALSE;
 
-	g_return_val_if_fail (name = my_xml_get_content (node, "name"), FALSE);
+	/* Update name. */
+	if (group_update_name (node))
+		group_modified = TRUE;
 
-	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+	/* Update group users. */
+	group_update_users (node);
 
-	w0 = tool_widget_get ("group_settings_name");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
-
-	if (strcmp (name, txt))
+	if (group_modified)
 	{
-		g_free (name);
-		if (strlen (txt) < 1)
+		modified = TRUE;
+		switch (type)
 		{
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					(_("Group name is empty."), win));
-
-			gnome_dialog_run (dialog);
-			gtk_widget_grab_focus (w0);
-			return FALSE;
-		}
-		else
-		{
-			my_xml_set_child_content (node, "name", txt);
-			e_table_change_group ();
+			case LOCAL:
+				e_table_change_group ();
+				break;
+			case NIS:
+				network_change_table (GROUP);
+				break;
+			default:
+				break;
 		}
 	}
-	else
-		g_free (name);
 
-	/* Update group members also */
-	/* First, free our old users list ... */
-
-	del_group_users (node);
-
-	/* ... and then, build new one */
-
-	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
-
-	row = 0;
-	while (gtk_clist_get_text (clist, row++, 0, &txt))
-		add_group_users (node, txt);
-
-	return TRUE;
+	return modified;
 }
 
 gchar *
@@ -921,14 +902,15 @@ adv_user_settings_new (void)
 	gtk_widget_show (w0);
 }
 
-void
-adv_user_settings_update (xmlNodePtr node, gchar *login)
+gboolean
+adv_user_settings_update (xmlNodePtr node)
 {
 	gchar *new_shell;
 	gchar *new_home;
 	gint new_uid;
+	gboolean modified = FALSE;
 
-	g_return_if_fail (node != NULL);
+	g_return_val_if_fail (node != NULL, FALSE);
 
 	/* Shell */
 	new_shell = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_shell"))));
@@ -937,7 +919,7 @@ adv_user_settings_update (xmlNodePtr node, gchar *login)
 	if (strlen (new_shell) > 0)
 	{
 		my_xml_set_child_content (node, "shell", new_shell);
-		e_table_change_user ();
+		modified = TRUE;
 	}
 
 	/* Home */	
@@ -945,7 +927,7 @@ adv_user_settings_update (xmlNodePtr node, gchar *login)
 	if (strlen (new_home) > 0)
 	{
 		my_xml_set_child_content (node, "home", new_home);
-		e_table_change_user ();
+		modified = TRUE;
 	}
 
 	/* UID */
@@ -955,8 +937,10 @@ adv_user_settings_update (xmlNodePtr node, gchar *login)
 	if (is_free_uid (new_uid)) 
 	{
 		my_xml_set_child_content (node, "uid", g_strdup_printf ("%d", new_uid));
-		e_table_change_user ();
+		modified = TRUE;
 	}
+
+	return modified;
 }
 
 gchar *
@@ -1036,7 +1020,7 @@ my_gtk_entry_set_text (void *entry, gchar *str)
 
 
 extern void
-group_settings_prepare (xmlNodePtr node)
+group_settings_prepare (xmlNodePtr node, gchar type)
 {
 	GtkWidget *w0;
 	GList *member_rows;
@@ -1069,6 +1053,11 @@ group_settings_prepare (xmlNodePtr node)
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (name);
 	g_free (txt);
+
+	/* Add 0 to windows data refering that we are not making new user */
+	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (0));
+	/* Add type (local, nis, etc...) to windows data. */
+        gtk_object_set_data (GTK_OBJECT (w0), "type", GINT_TO_POINTER ((gint)type));
 	gtk_widget_show (w0);
 }
 
@@ -1167,7 +1156,7 @@ user_settings_prepare (xmlNodePtr node, gchar type)
 }
 
 extern void
-user_new_prepare (gchar *group_name)
+user_new_prepare (gchar *group_name, gchar type)
 {
 	GtkWidget *w0;
 	gboolean comp = FALSE;
@@ -1185,6 +1174,7 @@ user_new_prepare (gchar *group_name)
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
+	gtk_object_set_data (GTK_OBJECT (w0), "type", GINT_TO_POINTER ((gint)type));
 	gtk_widget_show (w0);
 }
 
@@ -1441,5 +1431,62 @@ user_update_group (xmlNodePtr node)
 	g_free (gid);
 
 	return new;
+}
+
+static gboolean
+group_update_name (xmlNodePtr node)
+{
+	GtkEntry *entry;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+	gchar *name, *new_name;
+	gboolean modified = FALSE;
+
+	name = my_xml_get_content (node, "name");
+	entry = GTK_ENTRY (tool_widget_get ("group_settings_name"));
+	new_name = gtk_entry_get_text (entry);
+
+	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+
+	if (strcmp (name, new_name))
+	{
+		if (strlen (new_name) < 1)
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
+					(_("Group name is empty."), win));
+
+			gnome_dialog_run (dialog);
+			gtk_widget_grab_focus (GTK_WIDGET (entry));
+		}
+		else
+		{
+			my_xml_set_child_content (node, "name", new_name);
+			modified = TRUE;
+		}
+	}
+	g_free (name);
+
+	return modified;
+}
+
+static void
+group_update_users (xmlNodePtr node)
+{
+	GtkCList *clist;
+	gchar *user;
+	gint row;
+
+	/* Update group members also */
+	/* First, free our old users list ... */
+
+	del_group_users (node);
+
+	/* ... and then, build new one */
+
+	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
+
+	row = 0;
+	while (gtk_clist_get_text (clist, row++, 0, &user))
+		add_group_users (node, user);
 }
 

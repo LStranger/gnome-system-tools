@@ -22,9 +22,6 @@
 
 #include <gnome-xml/tree.h>
 
-#define USER 1
-#define GROUP 2
-
 /* Functions for both tables */
 
 void e_table_create (void);

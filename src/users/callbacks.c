@@ -91,7 +91,7 @@ extern void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
 	g_return_if_fail (tool_get_access());
-	user_new_prepare (g_strdup (""));
+	user_new_prepare (g_strdup (""), LOCAL);
 }
 
 static void
@@ -152,7 +152,7 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	xmlNodePtr node;
 
 	g_return_if_fail (node = e_table_get_current_group ());
-	group_settings_prepare (node);
+	group_settings_prepare (node, LOCAL);
 }
 
 extern void
@@ -254,7 +254,7 @@ on_network_settings_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (node = network_current_node ());
 
 	if (!strcmp (node->name, "group"))
-		group_settings_prepare (node);
+		group_settings_prepare (node, NIS);
 
 	else if (!strcmp (node->name, "user"))
 		user_settings_prepare (node, NIS);
@@ -285,7 +285,7 @@ on_network_user_new_clicked (GtkButton *button, gpointer user_data)
 	if (!buf)
 		buf = g_strdup ("");
 
-	user_new_prepare (buf);
+	user_new_prepare (buf, NIS);
 }
 
 extern void
@@ -347,7 +347,7 @@ on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data)
 extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
-	gboolean retval;
+	gboolean retval = FALSE;
 	GtkWidget *w0;
 	guint new;
 	gchar type;
@@ -357,28 +357,32 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	new = GPOINTER_TO_UINT (gtk_object_get_data (GTK_OBJECT (w0), "new"));
 	type = ((gint) (gtk_object_get_data (GTK_OBJECT (w0), "type")));
 
-	switch (type)
-	{
-		case LOCAL:
-			node = e_table_get_current_user ();
-			break;
-		case NIS:
-			node = network_current_node (); 
-		default:
-			break;
-	}
-
-	if (!node)
-		return;
-
 	if (new)
 		retval = user_add (type);
+
 	else
-		retval = user_update (node, type);
+	{
+		switch (type)
+		{
+			case LOCAL:
+				node = e_table_get_current_user ();
+				break;
+			case NIS:
+				node = network_current_node ();
+				break;
+			default:
+				break;
+		}
+		if (!node)
+			g_warning ("Can't get current user");
+		else
+			retval = user_update (node, type);
+	}
 
 	if (retval)
 	{
 		tool_set_modified(TRUE);
+		
 		/* Clean up dialog, it's easiest to just call *_cancel_* function */
 		user_settings_dialog_close ();
 	}
@@ -530,26 +534,40 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	gboolean retval;
 	GtkWidget *w0;
 	guint new;
-	xmlNodePtr node;
-
-	g_return_if_fail (node = e_table_get_current_group ());
+	gchar type;
+	xmlNodePtr node = NULL;
 
 	w0 = tool_widget_get ("group_settings_dialog");
 	new = GPOINTER_TO_UINT (gtk_object_get_data (GTK_OBJECT (w0), "new"));
+	type = ((gint) (gtk_object_get_data (GTK_OBJECT (w0), "type")));
 
 	if (new)
-		retval = group_add (LOCAL);
+		retval = group_add (type);
 	else
 	{
-		retval = group_update (node);
+		switch (type)
+		{
+			case LOCAL:
+				node = e_table_get_current_group ();
+				break;
+			case NIS:
+				node = network_current_node ();
+				break;
+			default:
+				break;
+		}
+
+		if (!node)
+			return;
+
+		retval = group_update (node, type);
 	}
 
 	if (retval)
-	{
 		tool_set_modified(TRUE);
-		/* Clear list and hide dialog */
-		group_settings_dialog_close ();
-	}
+
+	/* Clear list and hide dialog */
+	group_settings_dialog_close ();
 }
 
 extern void

@@ -26,6 +26,8 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
+#define USER 1
+#define GROUP 2
 
 #define LOCAL 1
 #define NIS 2
@@ -57,7 +59,7 @@ extern void user_fill_settings_group (GtkCombo *combo, gboolean adv);
 extern GList *user_current_list (void);
 
 extern gboolean group_add (gchar type);
-extern gboolean group_update (xmlNodePtr node);
+extern gboolean group_update (xmlNodePtr node, gchar type);
 gchar *find_new_id (gchar from);
 extern gchar *find_new_key (gchar from);
 gboolean is_free_uid (gint new_uid);
@@ -74,16 +76,16 @@ xmlNodePtr basic_group_find_nth (xmlNodePtr parent, int n);
 
 void adv_user_settings (xmlNodePtr node, gboolean show);
 void adv_user_settings_new (void);
-void adv_user_settings_update (xmlNodePtr node, gchar *login);
+gboolean adv_user_settings_update (xmlNodePtr node);
 
 gchar *my_xml_get_content (xmlNodePtr parent, gchar *name);
 GList *get_group_users (xmlNodePtr node);
 void del_group_users (xmlNodePtr node);
 void add_group_users (xmlNodePtr node, gchar *name);
 
-extern void group_settings_prepare (xmlNodePtr node);
+extern void group_settings_prepare (xmlNodePtr node, gchar type);
 extern void user_settings_prepare (xmlNodePtr node, gchar type);
-extern void user_new_prepare (gchar *group_name);
+extern void user_new_prepare (gchar *group_name, gchar type);
 extern void group_new_prepare (void);
 void my_xml_set_child_content (xmlNodePtr parent, gchar *name, gchar *val);
 xmlNodePtr group_add_to_xml (gchar *name, gchar type);

@@ -34,6 +34,7 @@
 
 #include "network.h"
 #include "callbacks.h"
+#include "user_group.h"
 
 const gchar *group_spec = 
 "<ETableSpecification no-headers=\"true\" cursor-mode=\"line\"> \
@@ -319,10 +320,14 @@ network_populate (xmlNodePtr xml_root)
 	node = xml_element_find_first (xml_root, "nis_groupdb");
 	if (!node)
 	{
-		g_warning ("network_populate: couldn't find nis_groupdb node.");
+		gtk_label_set_text (GTK_LABEL (tool_widget_get ("network_label")),
+				"No NIS support. Backend doesn't support it yet.");
+
 		e_tree_model_thaw (model);
 		return;
 	}
+
+	gtk_widget_set_sensitive (tool_widget_get ("network_container"), TRUE);
 
 	path = network_node_insert (model, path_root, -1, node, network_group_hash);
 
@@ -415,13 +420,27 @@ network_insert_user (ETreeModel *etree, ETreePath *parent, int position, gpointe
 }
 
 extern void
-network_change_user (xmlNodePtr node)
+network_change_table (gchar type)
 {
-	ETable *table;
+	ETable *table = NULL;
 	ETableModel *model;
 	gint row;
 
-	table = E_TABLE_SCROLLED (network_user)->table;
+	switch (type)
+	{
+		case USER:
+			table = E_TABLE_SCROLLED (network_user)->table;
+			break;
+		case GROUP:
+			table = E_TABLE_SCROLLED (network_group)->table;
+			break;
+		default:
+			break;
+	}
+
+	if (!table)
+		return;
+
 	model = table->model;
 	row = e_table_get_cursor_row (table);
 
