@@ -72,6 +72,7 @@ GdkPixbuf *gentoo;
 GdkPixbuf *pld;
 GdkPixbuf *openna;
 GdkPixbuf *fedora;
+GdkPixbuf *conectiva;
 
 enum {
 	BOGUS,
@@ -433,6 +434,7 @@ gst_tool_create_distro_images (void)
 	pld = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/pld.png", NULL);
 	openna = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/openna.png", NULL);
 	fedora = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/fedora.png", NULL);
+	conectiva = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/conectiva.png", NULL);
 }
 
 static void
@@ -1685,6 +1687,9 @@ gst_tool_read_line_from_backend (GstTool *tool)
 	fgets (line, 1000, tool->backend_stream);
 	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
+
 	return g_strdup (line);
 }
 
@@ -1725,8 +1730,6 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 	/* turn the descriptor blocking for writing the configuration */
 	fcntl (tool->backend_master_fd, F_SETFL, 0);
 
-	static gint i = 0;
-
 	do {
 		ret = fputc (string [nread], tool->backend_stream);
 
@@ -1741,8 +1744,6 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 	} while (nread < strlen (string));
 
 	while (fflush (tool->backend_stream) != 0);
-
-	i++;
 
 	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 }
