@@ -26,20 +26,36 @@ libsetuptool_a_SOURCES =				\
 ccenterdir = $(datadir)/control-center
 Systemdir = $(ccenterdir)/System
 
+Gnomeccdirp = $(ccenterdir)/capplets/$(groups)
+
 paneldir = $(datadir)/gnome/apps/Settings
 Systemdirp = $(paneldir)/System
 
-directory = System.directory
-EXTRA_DIST = $(directory).in System.directory
-CLEANFILES = $(directory)
+panel_DATA = $(groups_files)
 
-$(directory): $(directory).in
-	sed 's#Icon=.*#Icon='$(pixmapsdir)'/hst.png#' < $< > $@
+EXTRA_DIST = $(directory).in $(groups_files)
+CLEANFILES = $(directory) $(groups_files)
+
 
 all-local: $(directory)
 
-install-data-local: $(directory)
+groups = System
+groups_files = $(groups:=.directory)
+groups_in_files = $(groups_files:.directory=.directory.in)
+
+$(groups_in_files): %.directory.in: %.directory.in.in
+	    sed s#Icon=#Icon=$(pixmapsdir)/# < $< > $@
+
+$(groups_files): %.directory: %.directory.in
+	$(top_builddir)/xml-i18n-merge -d $(top_srcdir)/po $< $@
+
+install-data-local:
 ##	$(mkinstalldirs) $(DESTDIR)$(Systemdir)
 ##	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
 	$(mkinstalldirs) $(DESTDIR)$(Systemdirp)
 	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdirp)/.directory
+	$(mkinstalldirs) $(DESTDIR)$(Gnomeccdirp)
+	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Gnomeccdirp)/.directory
+#	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)
+#     $(INSTALL_DATA) $(srcdir)/$(groups).directory $(datadir)/control-center/capplets/$(groups).directory
+
