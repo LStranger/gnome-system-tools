@@ -1,5 +1,16 @@
 2001-04-19  Arturo Espinosa Aldama  <arturo@ximian.com>
 
+	* main.c (main): spaces are not allowed for the alias text area.
+
+	* hosts.c (xst_hosts_update_sensitivity): change button is no longer used.
+	(on_hosts_alias_changed): record updating is done now as we type.
+
+	* connection.c (connection_update_row): Doesn't call connection_update_enabled
+	  anymore. Calling this by hand where needed in this file.
+
+	* callbacks.c (on_dns_dhcp_toggled): changes sensitivity for the whole
+	  dns_table.
+
 	* transfer.c (transfer_misc_xml_to_tool): add an object data that flags if
 	  the tool has passed the configuration phase, so the callback knows what's
 	  the conext.
@@ -9,12 +20,12 @@
 
 	* connection.c (connection_clist_cmp): comparisong function that sorts by
 	  dev, then by description.
-	  (connection_init_clist): Configure the connections clist.
-	  (connection_init_gui): call init_clist.
-	  (connection_add_to_list): deleted spurious code.
+	(connection_init_clist): Configure the connections clist.
+	(connection_init_gui): call init_clist.
+	(connection_add_to_list): deleted spurious code.
 
 	* callbacks.c (on_connection_add_clicked): use new_from_type.
-	  (on_samba_use_toggled): Check if we are in configuration fase. If so and
+	(on_samba_use_toggled): Check if we are in configuration fase. If so and
 	  samba is not installed and we are trying to activate smb, show message.
 	  Don't call modify_cb if !smb_installed.
 

@@ -179,11 +179,9 @@ void
 xst_hosts_update_sensitivity (void)
 {
 	GtkWidget *delete_button;
-	GtkWidget *change_button;
 	GtkWidget *add_button;
 	GtkWidget *ip;
 	GtkWidget *alias;
-	gboolean change;
 	gboolean delete;
 	gboolean add;
 	gboolean ip_is_in_list;
@@ -196,7 +194,6 @@ xst_hosts_update_sensitivity (void)
 	
 	/* Get the widgets */
 	delete_button = xst_dialog_get_widget (tool->main_dialog, "statichost_delete");
-	change_button = xst_dialog_get_widget (tool->main_dialog, "statichost_update");
 	add_button    = xst_dialog_get_widget (tool->main_dialog, "statichost_add");
 
 	ip    = xst_dialog_get_widget (tool->main_dialog, "ip");
@@ -210,15 +207,12 @@ xst_hosts_update_sensitivity (void)
 	/* DELETE : You can delete if the row is selected and the ip is in the list of ip's
 	 * and also that the ip is not the loopback ip address. FIXME
 	 * ADD: You can add when the ip is not in the clist already,
-	 * CHANGE : You can change when the ip is in the list 
 	 */
 	delete = (ip_is_in_list) && strcmp (ip_str, "127.0.0.1");
 	add = (strlen(ip_str) > 0) && (!ip_is_in_list);
-	change = ip_is_in_list;
 
 	/* Set the states */
 	gtk_widget_set_sensitive (delete_button, delete);
-	gtk_widget_set_sensitive (change_button, change);
 	gtk_widget_set_sensitive (add_button,    add);
 
 	g_free (ip_str);
@@ -260,14 +254,28 @@ on_hosts_ip_changed (GtkEditable *ip, gpointer not_used)
 
 	if (row != hosts_row_selected)
 		xst_hosts_select_row (row);
-
 }
 
 void
 on_hosts_alias_changed (GtkEditable *w, gpointer not_used)
 {
+	GtkWidget *clist;
+	char *s;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+
 	if (updating)
 		return;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
+
+	gtk_clist_set_text (GTK_CLIST (clist), hosts_row_selected, 0,
+			    gtk_editable_get_chars (
+				    GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1));
+	
+	s = fixup_text_list (GTK_WIDGET (w));
+	gtk_clist_set_text (GTK_CLIST (clist), hosts_row_selected, 1, s);
+	g_free (s);
 }
 
 
@@ -343,19 +351,14 @@ on_hosts_add_clicked (GtkWidget * button, gpointer user_data)
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	entry[2] = NULL;
-	
 	entry[0] = gtk_editable_get_chars (
 		GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1);
-
 	entry[1] = fixup_text_list (xst_dialog_get_widget (tool->main_dialog, "alias"));
+	entry[2] = NULL;
+
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
-
 	row = gtk_clist_append (GTK_CLIST (clist), entry);
-
-	xst_hosts_clear_entries ();
-	xst_hosts_unselect_all ();
 	my_gtk_clist_select_row (GTK_CLIST (clist), row, 0);
 }
 
@@ -382,29 +385,6 @@ on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 		
 	gtk_clist_remove (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), hosts_row_selected);
 	xst_dialog_modify (tool->main_dialog);
-
-	xst_hosts_clear_entries ();
-	xst_hosts_unselect_all ();
-}
-
-void
-on_hosts_update_clicked (GtkWidget *b, gpointer null)
-{
-	GtkWidget *clist, *w;
-	char *s;
-
-	g_return_if_fail (xst_tool_get_access (tool));
-
-	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
-
-	gtk_clist_set_text (GTK_CLIST (clist), hosts_row_selected, 0,
-			    gtk_editable_get_chars (
-				    GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1));
-	
-	w = xst_dialog_get_widget (tool->main_dialog, "alias");
-	s = fixup_text_list (w);
-	gtk_clist_set_text (GTK_CLIST (clist), hosts_row_selected, 1, s);
-	g_free (s);
 
 	xst_hosts_clear_entries ();
 	xst_hosts_unselect_all ();

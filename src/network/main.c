@@ -76,8 +76,6 @@ XstDialogSignal signals[] = {
 	{ "alias",                 "changed",         on_hosts_alias_changed },
 	{ "statichost_add",        "clicked",         on_hosts_add_clicked },
 	{ "statichost_add",        "clicked",         xst_dialog_modify_cb },
-	{ "statichost_update",     "clicked",         on_hosts_update_clicked },
-	{ "statichost_update",     "clicked",         xst_dialog_modify_cb },
 	{ "statichost_delete",     "clicked",         on_hosts_delete_clicked },
 	{ "statichost_delete",     "clicked",         xst_dialog_modify_cb },
 	{ NULL }
@@ -94,17 +92,17 @@ static const XstWidgetPolicy policies[] = {
 	{ "statichost_table",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "statichost_add",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "statichost_delete",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "statichost_update",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "samba_use",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "samba_frame",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "wins_ip",                XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "dns_dhcp",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "dns_table",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "domain",                 XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "domain_label",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "dns_list",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "dns_list_label",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "search_list",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "wins_ip",                XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "domain",                 XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "domain_label",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "search_list_label",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ NULL }
 };
 
@@ -123,9 +121,9 @@ main (int argc, char *argv[])
 	EditableFilterRules e[] = {
 		EF_ALLOW_NONE,
 		EF_ALLOW_ENTER,
-		EF_ALLOW_ENTER | EF_ALLOW_TEXT| EF_ALLOW_SPACE,
+		EF_ALLOW_ENTER | EF_ALLOW_TEXT,
 		EF_STATIC_HOST,
-		EF_STATIC_HOST | EF_ALLOW_ENTER | EF_ALLOW_TEXT | EF_ALLOW_SPACE
+		EF_STATIC_HOST | EF_ALLOW_ENTER | EF_ALLOW_TEXT
 	};
 
 	gboolean internet_druid = FALSE;

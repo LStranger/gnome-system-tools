@@ -521,8 +521,6 @@ connection_update_row (XstConnection *cxn)
 	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
 			       mini_pm[cxn->type], mini_mask[cxn->type]);
 
-	connection_update_row_enabled (cxn, cxn->enabled);
-	
 	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name);
 	gtk_clist_sort (GTK_CLIST (clist));
 
@@ -539,6 +537,7 @@ connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
 
 	connection_update_row (cxn);
+	connection_update_row_enabled (cxn, cxn->enabled);
 
 	return;
 }
@@ -705,6 +704,7 @@ connection_new_from_node (xmlNode *node)
 
 	connection_add_to_list (cxn, xst_dialog_get_widget (tool->main_dialog, "connection_list"));
 	connection_update_row (cxn);
+	connection_update_row_enabled (cxn, cxn->enabled);
 
 	return cxn;
 }
@@ -860,7 +860,8 @@ static void
 on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
 {
 	cxn->creating = FALSE;
-	connection_config_save (cxn);
+	if (cxn->modified)
+		connection_config_save (cxn);
 	gtk_widget_destroy (cxn->window);
 }
 
