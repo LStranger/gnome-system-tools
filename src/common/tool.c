@@ -485,17 +485,18 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
 	{
 		gnome_ok_cancel_dialog (_("You need full administration privileges (i.e. root)\n"
 					  "to run this configuration tool. You can acquire\n"
-					  "such privileges by issuing an \"su\" command in a shell.\n\n"
-					  "Continue anyway?"), reply_cb, NULL);
+					  "such privileges by running it from the GNOME control\n"
+					  "center or issuing an \"su\" command in a shell.\n\n"
+					  "You will be unable to make any changes. Continue anyway?"), reply_cb, NULL);
 
 		gtk_main ();
 
 		if (reply) exit(1);
-    
+
 		tool_set_access (FALSE);
 	}
 	else
-	      tool_set_access (TRUE);
+	        tool_set_access (TRUE);
 
 	tool_splash_show ();
 	tool_config_load ();
