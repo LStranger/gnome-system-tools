@@ -393,7 +393,7 @@ gst_ui_logout_dialog (const gchar *message)
 	gchar *tmp;
 
 	tmp = message? _(message) :
-		_("Plese restart your GNOME session for these changes to take effect.");
+		_("Please restart your GNOME session for these changes to take effect.");
 
 	d = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING,
 				    GTK_BUTTONS_OK, tmp);
