@@ -22,7 +22,7 @@ gchar *s = N_("_Delete...");
 gchar *s = N_("_Configure...");
 gchar *s = N_("Ac_tivate");
 gchar *s = N_("D_eactivate");
-gchar *s = N_("Default Gateway device : ");
+gchar *s = N_("Default Gateway Device:");
 gchar *s = N_("Connections");
 gchar *s = N_("How the names of other computers are found.");
 gchar *s = N_("_Domain:");
@@ -54,10 +54,9 @@ gchar *s = N_("Activate when the computer _starts");
 gchar *s = N_("General");
 gchar *s = N_("How the IP address for this connection is determined");
 gchar *s = N_("_Configuration:");
-gchar *s = N_("Manual\n"
-              "DHCP\n"
-              "BOOTP\n"
-              "");
+gchar *s = N_("Manual");
+gchar *s = N_("DHCP");
+gchar *s = N_("BOOTP");
 gchar *s = N_("_Update DNS when this connection becomes active");
 gchar *s = N_("_IP address:");
 gchar *s = N_("_Subnet mask:");
