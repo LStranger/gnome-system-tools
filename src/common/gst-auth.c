@@ -131,6 +131,12 @@ gst_auth_run_term (GstTool *tool, gchar *args[])
 	}
 	else if (tool->backend_pid == 0) {
 		/* It's the child process */
+		/* We must set the locale to "C" to keep su/ssh strings untranslated */
+		unsetenv("LC_ALL");
+		unsetenv("LC_MESSAGES");
+		unsetenv("LANG");
+		unsetenv("LANGUAGE");
+
 		execv (args[0], args);
 		exit (255);
 	} else {
@@ -299,13 +305,35 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 
 }
 
+static void
+gst_auth_save_locale (GString* command) {
+	char *lc_all, *lc_messages, *lang, *language;
+
+	/* Save the current state of current locale to restore it for the backend later */
+	lc_messages = getenv ("LC_MESSAGES");
+	language    = getenv ("LANGUAGE");
+	lc_all      = getenv ("LC_ALL");
+	lang        = getenv ("LANG");
+
+	if (lc_all)
+		g_string_append_printf (command, "export LC_ALL=\"%s\" && ", lc_all);
+	else if (lc_messages)
+		g_string_append_printf (command, "export LC_MESSAGES=\"%s\" && ", lc_messages);
+	else if (lang)
+		g_string_append_printf (command, "export LANG=\"%s\" && ", lang);
+	else if (language)
+		g_string_append_printf (command, "export LANGUAGE=\"%s\" && ", language);
+}
+
 void
 gst_auth_do_ssh_authentication (GstTool *tool, gchar *host)
 {
 	gchar *ssh_args[6];
 	GString *command;
 
-	command = g_string_new ("`pkg-config --variable=backenddir system-tools-backends`");
+	command = g_string_new (NULL);
+	gst_auth_save_locale   (command);
+	g_string_append (command, "`pkg-config --variable=backenddir system-tools-backends`");
 	g_string_append (command, "/");
 	g_string_append (command, tool->script_name);
 	g_string_append (command, " --report");
@@ -324,6 +352,7 @@ gst_auth_do_ssh_authentication (GstTool *tool, gchar *host)
 	ssh_args[5] = NULL;
 
 	gst_auth_do_authentication (tool, ssh_args);
+	g_string_free (command, TRUE);
 }
 
 void
@@ -332,7 +361,9 @@ gst_auth_do_su_authentication (GstTool *tool)
 	gchar *su_args[5];
 	GString *command;
 
-	command = g_string_new (tool->script_path);
+	command = g_string_new (NULL);
+	gst_auth_save_locale   (command);
+	command = g_string_append (command, tool->script_path);
 	command = g_string_append (command, " --report");
 
 	if (tool->current_platform) {
@@ -348,4 +379,5 @@ gst_auth_do_su_authentication (GstTool *tool)
 	su_args[4] = NULL;
 
 	gst_auth_do_authentication (tool, su_args);
+	g_string_free (command, TRUE);
 }
