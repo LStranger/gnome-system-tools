@@ -30,8 +30,6 @@ Changes since last release
 - Fix shares tool SMB problems (Hans Petter)
 - Location management builds by default now (Bradford)
 
-
-
 Contributions
 -------------
 
@@ -76,6 +74,21 @@ special catalog called "First", which is never touched again.
      
 Location Management
 -------------------
+
+Location management is available under the program
+"location-manager-capplet", now built by default.
+
+This program runs in two modes: per-user and global. In per-user mode
+(the default), the capplets available from the control center are
+location-managed. In order to use this mode, you will need to fetch
+the GNOME Control Center from CVS (HEAD branch). A release of the
+Control Center with capplets that support location management will be
+made shortly.
+
+In global mode, the Ximian Setup Tools themselves are location
+managed. To invoke the location manager in this mode, pass the -g
+option. Of course, you will need to be running as root to run the
+location manager in this mode.
 
 The current set of tools include :
 ----------------------------------
@@ -153,6 +166,7 @@ support. To the best of our knowledge.
 FIXME FIXME FIXME
 
 =================================================================
+>>>>>>> 1.27
 XST - 0.4.1
 -----------
 
