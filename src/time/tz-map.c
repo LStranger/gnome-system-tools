@@ -132,13 +132,17 @@ static gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer da
 	
 	if (event->button != 1)
 	        e_map_zoom_out (tzmap->map);
-	else if (e_map_get_magnification (tzmap->map) <= 1.0)
-	        e_map_zoom_to_location (tzmap->map, longitude, latitude);
+	else
+	{
+		if (e_map_get_magnification (tzmap->map) <= 1.0)
+		        e_map_zoom_to_location (tzmap->map, longitude, latitude);
 	
-	if (tzmap->point_selected)
-	        e_map_point_set_color_rgba (tzmap->map, tzmap->point_selected,
-					    TZ_MAP_POINT_NORMAL_RGBA);
-	tzmap->point_selected = tzmap->point_hover;
+		if (tzmap->point_selected)
+		        e_map_point_set_color_rgba (tzmap->map,
+						    tzmap->point_selected,
+						    TZ_MAP_POINT_NORMAL_RGBA);
+		tzmap->point_selected = tzmap->point_hover;
+	}
 	
 	return TRUE;
 }
