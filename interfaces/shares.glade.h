@@ -49,8 +49,9 @@ gchar *s = N_("export settings--NFS options");
 gchar *s = N_("Use this dialog to create a new export, or to edit the settings of an existing export.");
 gchar *s = N_("Export type:");
 gchar *s = N_("Enabled");
-gchar *s = N_("NFS");
-gchar *s = N_("Samba");
+gchar *s = N_("NFS\n"
+              "Samba\n"
+              "");
 gchar *s = N_("Export");
 gchar *s = N_("Name:");
 gchar *s = N_("Path:");
@@ -62,8 +63,9 @@ gchar *s = N_("export settings--Samba options");
 gchar *s = N_("Use this dialog to create a new export, or to edit the settings of an existing export.");
 gchar *s = N_("Export type:");
 gchar *s = N_("Enabled");
-gchar *s = N_("NFS");
-gchar *s = N_("Samba");
+gchar *s = N_("NFS\n"
+              "Samba\n"
+              "");
 gchar *s = N_("Export");
 gchar *s = N_("Name:");
 gchar *s = N_("Path:");
@@ -86,8 +88,9 @@ gchar *s = N_("Delete");
 gchar *s = N_("Import Settings--NFS Options");
 gchar *s = N_("Use this dialog to create a new import, or to edit the settings of an existing import.");
 gchar *s = N_("Import type:");
-gchar *s = N_("NFS");
-gchar *s = N_("Samba");
+gchar *s = N_("NFS\n"
+              "Samba\n"
+              "");
 gchar *s = N_("Mounted");
 gchar *s = N_("Import");
 gchar *s = N_("Host:");
@@ -98,8 +101,9 @@ gchar *s = N_("Do not remount this share after computer reboots");
 gchar *s = N_("Import Settings--Samba Options (Obsolete)");
 gchar *s = N_("Use this dialog to create a new import, or to edit the settings of an existing import.");
 gchar *s = N_("Import type:");
-gchar *s = N_("Samba");
-gchar *s = N_("NFS");
+gchar *s = N_("Samba\n"
+              "NFS\n"
+              "");
 gchar *s = N_("Mounted");
 gchar *s = N_("Import");
 gchar *s = N_("Host:");
@@ -112,8 +116,9 @@ gchar *s = N_("Do not remount this share after computer reboots");
 gchar *s = N_("Import Settings");
 gchar *s = N_("Use this dialog to create a new import, or to edit the settings of an existing import.");
 gchar *s = N_("Import _type:");
-gchar *s = N_("Samba");
-gchar *s = N_("NFS");
+gchar *s = N_("Samba\n"
+              "NFS\n"
+              "");
 gchar *s = N_("_Mounted");
 gchar *s = N_("Import");
 gchar *s = N_("_Host:");
@@ -121,14 +126,16 @@ gchar *s = N_("_Path:");
 gchar *s = N_("Pass_word:");
 gchar *s = N_("_Username:");
 gchar *s = N_("Mounting options");
+gchar *s = N_("If the mount point does not exist, it will be created.");
 gchar *s = N_("Mount p_oint:");
 gchar *s = N_("Do not _remount this share after computer reboots");
 gchar *s = N_("Export Settings");
 gchar *s = N_("Use this dialog to create a new export, or to edit the settings of an existing export.");
 gchar *s = N_("Export _type:");
 gchar *s = N_("Enabled");
-gchar *s = N_("Samba");
-gchar *s = N_("NFS");
+gchar *s = N_("Samba\n"
+              "NFS\n"
+              "");
 gchar *s = N_("Export");
 gchar *s = N_("_Name:");
 gchar *s = N_("_Path:");
