@@ -54,10 +54,9 @@ gchar *s = N_("Allow activation control for all users");
 gchar *s = N_("General");
 gchar *s = N_("How the IP address for this connection is determined");
 gchar *s = N_("Configuration:");
-gchar *s = N_("Manual\n"
-              "DHCP\n"
-              "BOOTP\n"
-              "");
+gchar *s = N_("Manual");
+gchar *s = N_("DHCP");
+gchar *s = N_("BOOTP");
 gchar *s = N_("Update DNS when this connection becomes active");
 gchar *s = N_("IP address:");
 gchar *s = N_("Subnet mask:");
