@@ -41,9 +41,22 @@ if test x"$HAVE_LIBCRACK" = xyes ; then
   AC_MSG_ERROR(cracklib crack.h header file not found.)])
 fi
 
+XST_CRACK_LIB_LOCATION="/usr/lib/cracklib_dict"
+AC_ARG_WITH(cracklib-dict,
+[  --with-cracklib-dict[=DIR]       specify a cracklib dir ],[
+  if test "$withval" != "no"; then
+    XST_CRACK_LIB_LOCATION=$withval
+  fi  
+])
+
 AC_CHECK_LIB(crypt, crypt, ,[
   AC_MSG_ERROR(crypt library is required.)])
 AC_CHECK_HEADER(crypt.h,AC_DEFINE(HAVE_CRYPT_H))
+AC_SUBST(XST_CRACK_LIB_LOCATION)
+XST_CRACK_LIB_CFLAGS="-DXST_CRACK_LIB_DICT_PATH=\"\\\"\$(XST_CRACK_LIB_LOCATION)\\\"\""
+AC_SUBST(XST_CRACK_LIB_CFLAGS)
+
+
 
 dnl =====================================================
 dnl END: Cracklib checking
