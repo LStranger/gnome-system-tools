@@ -6,7 +6,7 @@
   <program_name>internet_connection_druid</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <pixmaps_directory>../pixmaps</pixmaps_directory>
   <language>C</language>
   <gnome_support>True</gnome_support>
   <gettext_support>True</gettext_support>
@@ -47,18 +47,18 @@ Click the &quot;Next&quot; button to begin.</text>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
       <textbox_color>255,255,255</textbox_color>
-      <logo_image>connection-modem.png</logo_image>
+      <logo_image>settings.png</logo_image>
       <watermark_image>xstdruidbg-3.png</watermark_image>
     </widget>
 
     <widget>
       <class>GnomeDruidPageStandard</class>
       <name>druidpagestandard3</name>
-      <title>1. Account name</title>
+      <title>1. ISP phone number</title>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
-      <logo_image>nameresolution_id.png</logo_image>
+      <logo_image>connection-modem.png</logo_image>
 
       <widget>
 	<class>GtkVBox</class>
@@ -74,8 +74,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	<widget>
 	  <class>GtkVBox</class>
-	  <name>vbox2</name>
-	  <border_width>3</border_width>
+	  <name>vbox9</name>
 	  <homogeneous>False</homogeneous>
 	  <spacing>11</spacing>
 	  <child>
@@ -86,12 +85,12 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label3</name>
-	    <label>First, please give this account a name. This name will be used to identify the account.</label>
+	    <name>label24</name>
+	    <label>First, please enter the phone number you use to connect to the internet. This number is provided by your ISP. </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>True</wrap>
 	    <xalign>0.5</xalign>
-	    <yalign>7.45058e-09</yalign>
+	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
@@ -103,10 +102,10 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	  <widget>
 	    <class>GtkAlignment</class>
-	    <name>alignment1</name>
+	    <name>alignment7</name>
 	    <xalign>0.5</xalign>
-	    <yalign>1</yalign>
-	    <xscale>4.76837e-07</xscale>
+	    <yalign>0.5</yalign>
+	    <xscale>0</xscale>
 	    <yscale>1</yscale>
 	    <child>
 	      <padding>0</padding>
@@ -116,15 +115,15 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	    <widget>
 	      <class>GtkHBox</class>
-	      <name>hbox2</name>
+	      <name>hbox6</name>
 	      <border_width>3</border_width>
 	      <homogeneous>False</homogeneous>
 	      <spacing>3</spacing>
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label4</name>
-		<label>Account name:</label>
+		<name>label25</name>
+		<label>Phone number:</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
 		<xalign>0.5</xalign>
@@ -140,7 +139,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	      <widget>
 		<class>GtkEntry</class>
-		<name>entry2</name>
+		<name>entry10</name>
 		<can_focus>True</can_focus>
 		<has_focus>True</has_focus>
 		<editable>True</editable>
@@ -158,7 +157,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label5</name>
+	    <name>label26</name>
 	    <label>To continue configuring your account, click &quot;Next&quot;. To quit, click &quot;Cancel&quot;.
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
@@ -181,11 +180,11 @@ Click the &quot;Next&quot; button to begin.</text>
     <widget>
       <class>GnomeDruidPageStandard</class>
       <name>druidpagestandard4</name>
-      <title>2. ISP phone number</title>
+      <title>2. Username and password</title>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
-      <logo_image>connection-modem.png</logo_image>
+      <logo_image>users.png</logo_image>
 
       <widget>
 	<class>GtkVBox</class>
@@ -201,7 +200,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	<widget>
 	  <class>GtkVBox</class>
-	  <name>vbox3</name>
+	  <name>vbox10</name>
 	  <homogeneous>False</homogeneous>
 	  <spacing>11</spacing>
 	  <child>
@@ -212,134 +211,8 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label7</name>
-	    <label>Next, please enter the phone number you use to connect to the internet. This number is provided by your ISP. </label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>True</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>8</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkAlignment</class>
-	    <name>alignment2</name>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xscale>0</xscale>
-	    <yscale>1</yscale>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkHBox</class>
-	      <name>hbox3</name>
-	      <border_width>3</border_width>
-	      <homogeneous>False</homogeneous>
-	      <spacing>3</spacing>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<name>label8</name>
-		<label>Phone number:</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkEntry</class>
-		<name>entry3</name>
-		<can_focus>True</can_focus>
-		<has_focus>True</has_focus>
-		<editable>True</editable>
-		<text_visible>True</text_visible>
-		<text_max_length>150</text_max_length>
-		<text></text>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label9</name>
-	    <label>To continue configuring your account, click &quot;Next&quot;. To quit, click &quot;Cancel&quot;.
-</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>True</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	      <pack>GTK_PACK_END</pack>
-	    </child>
-	  </widget>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GnomeDruidPageStandard</class>
-      <name>druidpagestandard5</name>
-      <title>3. User name and password </title>
-      <title_color>255,255,255</title_color>
-      <background_color>0,0,1</background_color>
-      <logo_background_color>1,1,1</logo_background_color>
-      <logo_image>users.png</logo_image>
-
-      <widget>
-	<class>GtkVBox</class>
-	<child_name>GnomeDruidPageStandard:vbox</child_name>
-	<name>druid-vbox5</name>
-	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkVBox</class>
-	  <name>vbox4</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>11</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label10</name>
-	    <label>Now, please enter the user name and password which were assigned to you by your ISP.</label>
+	    <name>label27</name>
+	    <label>Next, please enter the user name and password which were assigned to you by your ISP.</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>True</wrap>
 	    <xalign>0.5</xalign>
@@ -355,7 +228,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	  <widget>
 	    <class>GtkAlignment</class>
-	    <name>alignment3</name>
+	    <name>alignment8</name>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xscale>0</xscale>
@@ -368,7 +241,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	    <widget>
 	      <class>GtkTable</class>
-	      <name>table1</name>
+	      <name>table3</name>
 	      <border_width>3</border_width>
 	      <rows>2</rows>
 	      <columns>2</columns>
@@ -378,7 +251,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label11</name>
+		<name>label28</name>
 		<label>User name:</label>
 		<justify>GTK_JUSTIFY_LEFT</justify>
 		<wrap>False</wrap>
@@ -404,7 +277,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label12</name>
+		<name>label29</name>
 		<label>Password:</label>
 		<justify>GTK_JUSTIFY_LEFT</justify>
 		<wrap>False</wrap>
@@ -430,7 +303,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	      <widget>
 		<class>GtkEntry</class>
-		<name>entry5</name>
+		<name>entry11</name>
 		<can_focus>True</can_focus>
 		<editable>True</editable>
 		<text_visible>True</text_visible>
@@ -454,7 +327,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	      <widget>
 		<class>GtkEntry</class>
-		<name>entry4</name>
+		<name>entry12</name>
 		<can_focus>True</can_focus>
 		<has_focus>True</has_focus>
 		<editable>True</editable>
@@ -481,7 +354,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
 	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label13</name>
+	    <name>label30</name>
 	    <label>To continue configuring your account, click &quot;Next&quot;. To quit, click &quot;Cancel&quot;.
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
@@ -501,6 +374,133 @@ Click the &quot;Next&quot; button to begin.</text>
     </widget>
 
     <widget>
+      <class>GnomeDruidPageStandard</class>
+      <name>druidpagestandard5</name>
+      <title>3. Account name</title>
+      <title_color>255,255,255</title_color>
+      <background_color>0,0,1</background_color>
+      <logo_background_color>1,1,1</logo_background_color>
+      <logo_image>nameresolution_id.png</logo_image>
+
+      <widget>
+	<class>GtkVBox</class>
+	<child_name>GnomeDruidPageStandard:vbox</child_name>
+	<name>druid-vbox5</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox11</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>11</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label31</name>
+	    <label>Now, please give this account a name. This name will be used to identify the account.</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>True</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>7.45058e-09</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>8</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>alignment9</name>
+	    <xalign>0.5</xalign>
+	    <yalign>1</yalign>
+	    <xscale>4.76837e-07</xscale>
+	    <yscale>1</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox7</name>
+	      <border_width>3</border_width>
+	      <homogeneous>False</homogeneous>
+	      <spacing>3</spacing>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label32</name>
+		<label>Account name:</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkEntry</class>
+		<name>entry13</name>
+		<can_focus>True</can_focus>
+		<has_focus>True</has_focus>
+		<editable>True</editable>
+		<text_visible>True</text_visible>
+		<text_max_length>150</text_max_length>
+		<text></text>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label33</name>
+	    <label>To continue configuring your account, click &quot;Next&quot;. To quit, click &quot;Cancel&quot;.
+</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>True</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	      <pack>GTK_PACK_END</pack>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
       <class>GnomeDruidPageFinish</class>
       <name>druidpagefinish2</name>
       <title>Finished</title>
@@ -513,7 +513,7 @@ To close this druid, click &quot;Finish&quot;.  </text>
       <textbox_color>255,255,255</textbox_color>
       <text_color>0,0,0</text_color>
       <title_color>255,255,255</title_color>
-      <logo_image>connection-modem.png</logo_image>
+      <logo_image>settings.png</logo_image>
       <watermark_image>xstdruidbg-3.png</watermark_image>
     </widget>
   </widget>
