@@ -25,13 +25,13 @@
 
 
 XstReportHook *
-xst_report_hook_new (guint id, XstReportHookFunc func, XstReportHookType type,
+xst_report_hook_new (gchar *key, XstReportHookFunc func, XstReportHookType type,
                      gboolean allow_repeat)
 {
 	XstReportHook *xrh;
 
 	xrh = g_new0 (XstReportHook, 1);
-	xrh->id = id;
+	xrh->key = key;
 	xrh->func = func;
 	xrh->type = type;
 	xrh->allow_repeat = allow_repeat;
@@ -44,7 +44,7 @@ xst_report_hook_new (guint id, XstReportHookFunc func, XstReportHookType type,
 XstReportHook *
 xst_report_hook_new_from_entry (XstReportHookEntry *entry)
 {
-	return xst_report_hook_new (entry->id, entry->func, entry->type, entry->allow_repeat);
+	return xst_report_hook_new (entry->key, entry->func, entry->type, entry->allow_repeat);
 }
 
 

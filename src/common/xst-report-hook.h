@@ -31,7 +31,7 @@ typedef gboolean (XstReportHookFunc) (XstTool *tool, XstReportLine *rline);
 /* Internal storage */
 
 struct _XstReportHook {
-	guint id;
+	gchar *key;
 	XstReportHookFunc *func;
 	XstReportHookType type;
 	guint allow_repeat : 1;
@@ -41,13 +41,13 @@ struct _XstReportHook {
 /* Arranged in arrays, allows for easy loading of report-hook entries */
 
 struct _XstReportHookEntry {
-	guint id;
+	gchar *key;
 	XstReportHookFunc *func;
 	XstReportHookType type;
 	gboolean allow_repeat;
 };
 
-XstReportHook     *xst_report_hook_new             (guint id,
+XstReportHook     *xst_report_hook_new             (gchar *key,
 						    XstReportHookFunc func,
                                                     XstReportHookType type,
                                                     gboolean allow_repeat);

@@ -26,16 +26,16 @@
 #include "xst-tool.h"
 
 struct _XstReportLine {
-	guint id;
+	gchar *key;
 	gchar *message;
 	guint handled : 1;
 };
 
-XstReportLine     *xst_report_line_new              (guint id, gchar *message);
+XstReportLine     *xst_report_line_new              (gchar *key, gchar *message);
 XstReportLine     *xst_report_line_new_from_string  (gchar *string);
 void               xst_report_line_free             (XstReportLine *line);
 
-guint              xst_report_line_get_id           (XstReportLine *line);
+const gchar       *xst_report_line_get_key          (XstReportLine *line);
 const gchar       *xst_report_line_get_message      (XstReportLine *line);
 gboolean           xst_report_line_get_handled      (XstReportLine *line);
 

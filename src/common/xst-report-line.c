@@ -26,14 +26,14 @@
 #include "xst-report-line.h"
 
 XstReportLine *
-xst_report_line_new (guint id, gchar *message)
+xst_report_line_new (gchar *key, gchar *message)
 {
 	XstReportLine *xrl;
 
 	g_return_val_if_fail (message != NULL, NULL);
 
 	xrl = g_new0 (XstReportLine, 1);
-	xrl->id = id;
+	xrl->key = g_strdup (key);
 	xrl->message = g_strdup (message);
 	xrl->handled = FALSE;
 
@@ -50,7 +50,7 @@ xst_report_line_new_from_string (gchar *string)
 	g_return_val_if_fail (strchr (string, ' ') != NULL, NULL);
 
 	parts = g_strsplit (string, " ", 1);
-	xrl = xst_report_line_new (atoi (parts [0]), parts [1]);
+	xrl = xst_report_line_new (parts [0], parts [1]);
 	g_strfreev (parts);
 
 	return xrl;
@@ -63,11 +63,11 @@ xst_report_line_free (XstReportLine *line)
 	g_free (line);
 }
 
-guint
-xst_report_line_get_id (XstReportLine *line)
+const gchar *
+xst_report_line_get_key (XstReportLine *line)
 {
 	g_return_val_if_fail (line != NULL, 0);
-	return (line->id);
+	return (line->key);
 }
 
 const gchar *
