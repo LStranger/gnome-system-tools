@@ -1,7 +1,10 @@
 pixmaps_DATA = \
 computer.png  \
-computer_alternative.png  \
 disks.png  \
+gnome-laptop.png \
+gnome-light-on.png \
+gnome-light-off.png \
+gnome-modem.png \
 hst.png  \
 memory.png  \
 nameresolution.png  \
