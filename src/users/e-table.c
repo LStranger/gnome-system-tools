@@ -38,6 +38,19 @@
 #include "callbacks.h"
 #include "user-group-xml.h"
 
+#ifdef JUST_FOR_TRANSLATORS
+static char *list [] = {
+	N_("Users"),
+	N_("UID"),
+	N_("Home"),
+	N_("Shell"),
+	N_("Comment"),
+	N_("Group"),
+	N_("GID"),
+	N_("Groups"),
+};
+#endif
+
 extern XstTool *tool;
 
 GtkWidget *user_table;

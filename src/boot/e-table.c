@@ -34,6 +34,16 @@
 #include "e-table.h"
 #include "callbacks.h"
 
+#ifdef JUST_FOR_TRANSLATORS
+static char *list [] = {
+	N_("Default"),
+	N_("Name"),
+	N_("Type"),
+	N_("Kernel Image"),
+	N_("Device"),
+};
+#endif
+
 extern XstTool *tool;
 
 GtkWidget *boot_table;
@@ -334,7 +344,7 @@ boot_value_type (xmlNodePtr node, gboolean bare)
 
 	if (def && !strcmp (def, label))
 	{
-		buf = g_strdup_printf ("%s (default)", buf);
+		buf = g_strdup_printf (_("%s (default)"), buf);
 		g_free (def);
 		g_free (label);
 	}

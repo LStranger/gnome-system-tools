@@ -57,6 +57,13 @@ typedef struct
 	GtkWidget       *file_add;
 } ProfileTab;
 
+#ifdef JUST_FOR_TRANSLATORS
+static char *list [] = {
+	N_("Profile"),
+	N_("Comment"),
+};
+#endif
+
 extern XstTool *tool;
 ProfileTable *profile_table;
 GtkWidget *table;
