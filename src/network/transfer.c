@@ -350,13 +350,9 @@ transfer_interfaces_to_xml (xmlNodePtr root)
 	GtkWidget *clist;
 	int i;
 
-	xml_element_destroy_children_by_name (root, "interface");
-
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
-		connection_save_to_node (gtk_clist_get_row_data (GTK_CLIST (clist), i),
-					 xml_element_add (root, "interface"));
-	}
+	for (i=0; i < GTK_CLIST (clist)->rows; i++)
+		connection_save_to_node (gtk_clist_get_row_data (GTK_CLIST (clist), i), root);
 }
 
 static void
@@ -393,7 +389,5 @@ transfer_gui_to_xml (XstTool *t, gpointer data)
 #endif
 	g_print ("Transfering clist2 !!!!!!!!!!!!|n");
 	transfer_string_clist2_gui_to_xml (root);
-#if 0	
 	transfer_interfaces_to_xml (root);
-#endif	
 }

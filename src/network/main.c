@@ -31,6 +31,7 @@
 
 #include "transfer.h"
 #include "callbacks.h"
+#include "connection.h"
 
 #include "ppp-druid.h"
 
@@ -120,7 +121,7 @@ main (int argc, char *argv[])
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 
-	init_icons ();
+	connection_init_icons ();
 
 	for (i=0; s[i]; i++)
 		connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);

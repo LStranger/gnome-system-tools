@@ -31,6 +31,8 @@ typedef enum {
 	CONNECTION_ETH,
 	CONNECTION_WVLAN,
 	CONNECTION_PPP,
+	CONNECTION_PLIP,
+	CONNECTION_LO,
 	CONNECTION_LAST
 } ConnectionType;
 
@@ -43,16 +45,19 @@ typedef enum {
 typedef struct {
 	GtkWidget *window;
 	GladeXML *xml;
+	xmlNode *node;
+	
 	ConnectionType type;
 
 	gboolean modified;
 	gboolean frozen;
 
 	/* General */
-	char *device;
-	char *description;
+	char *dev;
+	char *name;
 
-	gboolean active;
+	gboolean enabled;
+	gboolean user;
 	gboolean autoboot;
 	gboolean dhcp_dns;
 
@@ -62,8 +67,10 @@ typedef struct {
 	/* this is for the option menu because it sucks */
 	IPConfigType tmp_ip_config;
 
-	char *ip;
-	char *subnet;
+	char *address;
+	char *netmask;
+	char *broadcast;
+	char *network;
 	char *gateway;
 
 	/* Wavelan */
@@ -79,14 +86,15 @@ typedef struct {
 	char *password;
 } Connection;
 
-Connection *connection_new_from_node (xmlNode *node);
-Connection *connection_new_from_dev_name (char *dev_name);
-Connection *connection_new_from_type (ConnectionType type);
+extern void connection_init_icons (void);
+extern Connection *connection_new_from_node (xmlNode *node);
+extern Connection *connection_new_from_dev_name (char *dev_name);
+extern Connection *connection_new_from_type (ConnectionType type);
 
-void connection_free (Connection *);
+extern void connection_free (Connection *);
 
-void connection_configure (Connection *cxn);
+extern void connection_configure (Connection *cxn);
 
-void connection_save_to_node (Connection *cxn, xmlNode *node);
+extern void connection_save_to_node (Connection *cxn, xmlNode *node);
 
 #endif /* CONNECTION_H */

@@ -1,3 +1,31 @@
+2001-02-20  Arturo Espinosa  <arturo@ximian.com>
+
+	* connection.c: added static directive to all functions that
+	  were not used elsewhere. Renamed some callbacks to follow
+	  glade naming.
+	  (my_get_widget): issues warning when widget could not be found.
+	  (my_entry_set_text): if text is NULL, use empty string.
+	  (connection_xml_get_str): saves from repetitive work.
+	  (connection_xml_get_boolean): same.
+	  (connection_xml_save_str_to_node): creates/destroys node if necessary.
+	  (connection_xml_save_boolean_to_node): same, just interpreting as a boolean.
+	  (connection_config_type_from_str): take XML string value, give a type.
+	  (connection_config_type_to_str): take connection type, give XML string value.
+	  (connection_init_icons): saner name for init_icons.
+	  Commented out add_connections_to_list.
+	  (connection_description_from_type): gives a default description to interfaces, by type.
+	  Handle PLIP and LO connection types.
+	  (connection_save_to_node): Write dev, name, enabled, user, auto, address, netmask, broadcast,
+	  network, gateway and bootproto features.
+	  (connection_new_from_node): same, but for reading. Save xml node used for subsequent saving.
+	* connection.h:
+	  (Connection): handle new features, and renamed others to match tag names.
+	    Member to keep xml node.
+	  Added "extern" directive to public functions.
+	  PLIP and LO connection types.
+	* main.c: call connection_init_icons instead.
+	* transfer.c: uncomment interface saving call.
+	
 2001-02-19  Chema Celorio  <chema@celorio.com>
 
 	* transfer.c (transfer_string_clist2_gui_to_xml): split into

@@ -29,15 +29,16 @@
 
 /* sigh more libglade callbacks */
 
-void on_status_button_clicked (GtkWidget *w, Connection *cxn);
-void on_connection_help_clicked (GtkWidget *w, Connection *cxn);
-void on_connection_apply_clicked (GtkWidget *w, Connection *cxn);
-void on_connection_close_clicked (GtkWidget *w, Connection *cxn);
-gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Connection *cxn);
-void connection_modified (GtkWidget *w, Connection *cxn);
-void on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn);
+static void on_status_button_toggled (GtkWidget *w, Connection *cxn);
+static void on_connection_help_clicked (GtkWidget *w, Connection *cxn);
+static void on_connection_apply_clicked (GtkWidget *w, Connection *cxn);
+static void on_connection_close_clicked (GtkWidget *w, Connection *cxn);
+static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Connection *cxn);
+static void on_connection_modified (GtkWidget *w, Connection *cxn);
+static void on_connection_destroy (GtkWidget *w, Connection *cxn);
+static void on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn);
 
-#define W(s) glade_xml_get_widget (cxn->xml, (s))
+#define W(s) my_get_widget (cxn->xml, (s))
 
 static GdkPixmap *mini_pm[CONNECTION_LAST];
 static GdkBitmap *mini_mask[CONNECTION_LAST];
@@ -45,9 +46,116 @@ static GdkBitmap *mini_mask[CONNECTION_LAST];
 static GdkPixmap *active_pm[2];
 static GdkBitmap *active_mask[2];
 
-static GSList *connections;
+/*static GSList *connections;*/
 
 XstTool *tool;
+
+static GtkWidget *
+my_get_widget (GladeXML *glade, const gchar *name)
+{
+	GtkWidget *w;
+
+	g_return_val_if_fail (glade != NULL, NULL);
+	
+	w = glade_xml_get_widget (glade, name);
+	if (!w)
+		g_warning ("my_get_widget: Unexistent widget %s", name);
+
+	return w;
+}
+
+static void
+my_entry_set_text (GtkEntry *w, gchar *txt)
+{
+	gtk_entry_set_text (w, (txt)? txt: "");
+}
+
+static gchar *
+connection_xml_get_str (xmlNode *node, gchar *elem)
+{
+	xmlNode *subnode;
+	gchar *ret;
+
+	ret = NULL;
+	
+	subnode = xml_element_find_first (node, elem);
+	if (subnode) {
+		ret = xml_element_get_content (subnode);
+	}
+
+	return ret;
+}
+
+static gboolean
+connection_xml_get_boolean (xmlNode *node, gchar *elem)
+{
+	gchar *s;
+	gboolean ret;
+
+	ret = FALSE;
+
+	s = connection_xml_get_str (node, elem);
+	if (s) {
+		ret = atoi (s)? TRUE: FALSE;
+		g_free (s);
+	}
+
+	return ret;
+}
+
+static void
+connection_xml_save_str_to_node (xmlNode *node, gchar *node_name, gchar *str)
+{
+	xmlNode *subnode;
+
+	if (!str)
+		return;
+
+	subnode = xml_element_find_first (node, node_name);
+
+	if (*str == 0) {
+		if (subnode)
+			xml_element_destroy_children_by_name (node, node_name);
+	} else {
+		if (!subnode)
+			subnode = xml_element_add (node, node_name);
+		xml_element_set_content (subnode, str);
+	}
+}
+
+static void
+connection_xml_save_boolean_to_node (xmlNode *node, gchar *node_name, gboolean bool)
+{
+	connection_xml_save_str_to_node (node, node_name, bool? "1": "0");
+}
+
+static IPConfigType
+connection_config_type_from_str (gchar *str)
+{
+	gchar *protos[] = { "dhcp", "bootp", NULL };
+	IPConfigType types[] = { IP_DHCP, IP_BOOTP, IP_MANUAL };
+	gint i;
+	
+	for (i = 0; protos[i]; i++)
+		if (!strcmp (str, protos[i]))
+			break;
+	
+	return types[i];
+}
+
+static gchar *
+connection_config_type_to_str (IPConfigType type)
+{
+	gchar *protos[] = { "dhcp", "bootp", "none" };
+	IPConfigType types[] = { IP_DHCP, IP_BOOTP, IP_MANUAL };
+	gint i;
+	
+	for (i = 0; types[i] != IP_MANUAL; i++)
+		if (type == types[i])
+			break;
+	
+	return g_strdup (protos[i]);
+}
 
 static void
 connection_set_modified (Connection *cxn, gboolean state)
@@ -80,15 +188,17 @@ load_icon (char *file, GdkPixmap **pixmap, GdkBitmap **mask)
 	gdk_pixbuf_unref (pb2);
 }
 
-void
-init_icons (void)
+extern void
+connection_init_icons (void)
 {
 	ConnectionType i;
 	char *icons[CONNECTION_LAST] = {
 		"networking.png",
 		"connection-ethernet.png",
 		"gnome-laptop.png",
-		"connection-modem.png"
+		"connection-modem.png",
+		"networking.png",
+		"networking.png"
 	};
 
 	for (i = CONNECTION_OTHER; i < CONNECTION_LAST; i++)
@@ -112,21 +222,21 @@ update_row (Connection *cxn)
 
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
 
-	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->device, GNOME_PAD_SMALL,
+	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
 			       mini_pm[cxn->type], mini_mask[cxn->type]);
 	
 	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1,
-			       cxn->active ? _("Active") : _("Inactive"),
+			       cxn->enabled ? _("Active") : _("Inactive"),
 			       GNOME_PAD_SMALL,
-			       active_pm[cxn->active ? 1 : 0], 
-			       active_mask[cxn->active ? 1 : 0]);
+			       active_pm[cxn->enabled ? 1 : 0], 
+			       active_mask[cxn->enabled ? 1 : 0]);
 
-	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->description);
+	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name);
 
 	xst_dialog_modify (tool->main_dialog);
 }
 
-void
+static void
 add_connection_to_list (Connection *cxn, gpointer null)
 {
 	GtkWidget *clist;
@@ -141,64 +251,80 @@ add_connection_to_list (Connection *cxn, gpointer null)
 	update_row (cxn);
 }
 
-void
+/*static void
 add_connections_to_list (void)
 {
-	g_slist_foreach (connections, add_connection_to_list, NULL);
+	g_slist_foreach (connections, (GFunc) add_connection_to_list, NULL);
+}*/
+
+static gchar *
+connection_description_from_type (ConnectionType type)
+{
+	gchar *descriptions[] = {
+		N_("Ethernet LAN card"),
+		N_("WaveLAN wireless LAN"),
+		N_("PPP: modem or transfer cable"),
+		N_("Loopback: virtual interface"),
+		N_("Parallel line"),
+		N_("Other type"),
+		N_("Unknown type")
+	};
+
+	ConnectionType types[] = {
+		CONNECTION_ETH,
+		CONNECTION_WVLAN,
+		CONNECTION_PPP,
+		CONNECTION_LO,
+		CONNECTION_PLIP,
+		CONNECTION_OTHER,
+		CONNECTION_UNKNOWN
+	};
+
+	gint i;
+
+	for (i = 0; types[i] != CONNECTION_UNKNOWN; i++)
+		if (type == types[i])
+			break;
+
+	return descriptions[i];
 }
 
 Connection *
 connection_new_from_node (xmlNode *node)
 {
 	Connection *cxn;
-	xmlNode *subnode;
 	char *s = NULL;
 
-	subnode = xml_element_find_first (node, "dev");
-	if (subnode) {
-		s = xml_element_get_content (subnode);
-	}
+	s = connection_xml_get_str (node, "dev");
 
 	if (s) {
 		cxn = connection_new_from_dev_name (s);
-		g_free (cxn->device);
-		cxn->device = s;
+		g_free (cxn->dev);
+		cxn->dev = s;
 	} else
 		cxn = connection_new_from_type (CONNECTION_OTHER);
+
+	cxn->node = node;
 	
-	
-	subnode = xml_element_find_first (node, "bootproto");
-	if (subnode) {
-		s = xml_element_get_content (subnode);
-		if (s) {
-			if (!strcmp (s, "dhcp"))
-				cxn->ip_config = cxn->tmp_ip_config = IP_DHCP;
-			else if (!strcmp (s, "bootp"))
-				cxn->ip_config = cxn->tmp_ip_config = IP_BOOTP;
-			else
-				cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
-
-			g_free (s);
-		}
+	s = connection_xml_get_str (node, "bootproto");
+	if (s) {
+		cxn->ip_config = cxn->tmp_ip_config = connection_config_type_from_str (s);
+		g_free (s);
 	}
 
-	subnode = xml_element_find_first (node, "auto");
-	if (subnode) {
-		s = xml_element_get_content (subnode);
-		if (s) {
-			cxn->autoboot = atoi (s);
-			g_free (s);
-		}
-	}
+	s = connection_xml_get_str (node, "name");
+	if (s)
+		cxn->name = s;
+	else
+		cxn->name = connection_description_from_type (cxn->type);
+		
+	cxn->user = connection_xml_get_boolean (node, "user");
+	cxn->autoboot = connection_xml_get_boolean (node, "auto");
+	cxn->enabled = connection_xml_get_boolean (node, "enabled");
 
-	subnode = xml_element_find_first (node, "enabled");
-	if (subnode) {
-		s = xml_element_get_content (subnode);
-		if (s) {
-			cxn->active = atoi (s)? TRUE: FALSE;
-			g_free (s);
-		}
-	}
+	cxn->address = connection_xml_get_str (node, "address");
+	cxn->netmask = connection_xml_get_str (node, "netmask");
+	cxn->gateway = connection_xml_get_str (node, "gateway");
 
 	update_row (cxn);
 
@@ -217,6 +343,8 @@ connection_new_from_dev_name (char *dev_name)
 		{ "eth", CONNECTION_ETH },
 		{ "wvlan", CONNECTION_WVLAN },
 		{ "ppp", CONNECTION_PPP },
+		{ "lo", CONNECTION_LO },
+		{ "plip", CONNECTION_PLIP },
 		{ NULL, CONNECTION_OTHER }
 	};
 
@@ -229,6 +357,7 @@ connection_new_from_dev_name (char *dev_name)
 	return connection_new_from_type (table[i].type);
 }
 
+
 Connection *
 connection_new_from_type (ConnectionType type)
 {
@@ -240,31 +369,30 @@ connection_new_from_type (ConnectionType type)
 #warning FIXME: figure out a new device correctly
 	switch (cxn->type) {
 	case CONNECTION_ETH:
-		cxn->device = g_strdup ("eth0");
-		cxn->description = g_strdup (_("Ethernet connection"));
+		cxn->dev = g_strdup ("eth0");
 		break;
 	case CONNECTION_WVLAN:
-		cxn->device = g_strdup ("wvlan0");
-		cxn->description = g_strdup (_("WaveLAN connection"));
+		cxn->dev = g_strdup ("wvlan0");
 		break;
 	case CONNECTION_PPP:
-		cxn->device = g_strdup ("ppp0");
-		cxn->description = g_strdup (_("PPP connection"));
+		cxn->dev = g_strdup ("ppp0");
+		break;
+	case CONNECTION_LO:
+		cxn->dev = g_strdup ("lo");
+		break;
+	case CONNECTION_PLIP:
+		cxn->dev = g_strdup ("plip0");
 		break;
 	default:
-		cxn->device = g_strdup ("???");
-		cxn->description = g_strdup ( _("Unknown type connection"));
+		cxn->dev = g_strdup ("???");
 		break;
 	}	
 
 	/* set up some defaults */
 	cxn->autoboot = TRUE;
+	cxn->user = FALSE;
 	cxn->dhcp_dns = TRUE;
 	cxn->ip_config = cxn->tmp_ip_config = IP_DHCP;
-
-	cxn->ip      = g_strdup ("10.0.1.10");
-	cxn->subnet  = g_strdup ("255.255.0.0");
-	cxn->gateway = g_strdup ("10.0.1.1");
 
 	add_connection_to_list (cxn, NULL);
 	
@@ -274,7 +402,7 @@ connection_new_from_type (ConnectionType type)
 void
 connection_free (Connection *cxn)
 {
-#warning FIXME: implement
+#warning FIXME: implement connection_free
 }
 
 static void
@@ -286,14 +414,14 @@ update_status (Connection *cxn)
 				: PIXMAPS_DIR "/gnome-light-off.png");
 }
 
-void
+static void
 on_status_button_toggled (GtkWidget *w, Connection *cxn)
 {
 	connection_set_modified (cxn, TRUE);
 	update_status (cxn);
 }
 
-void
+static void
 on_connection_help_clicked (GtkWidget *w, Connection *cxn)
 {
 
@@ -302,11 +430,12 @@ on_connection_help_clicked (GtkWidget *w, Connection *cxn)
 static void
 empty_general (Connection *cxn)
 {
-	g_free (cxn->description);
-	cxn->description = gtk_editable_get_chars (GTK_EDITABLE (W ("connection_desc")), 0, -1);
+	g_free (cxn->name);
+	cxn->name = gtk_editable_get_chars (GTK_EDITABLE (W ("connection_desc")), 0, -1);
 		
 	cxn->autoboot = GTK_TOGGLE_BUTTON (W ("status_boot"))->active;
-	cxn->active = GTK_TOGGLE_BUTTON (W ("status_button"))->active;
+	cxn->user = GTK_TOGGLE_BUTTON (W ("status_user"))->active;
+	cxn->enabled = GTK_TOGGLE_BUTTON (W ("status_button"))->active;
 }
 
 static void
@@ -316,14 +445,16 @@ empty_ip (Connection *cxn)
 
 	cxn->dhcp_dns = GTK_TOGGLE_BUTTON (W ("status_dhcp"))->active;
 
-	g_free (cxn->ip);
-	cxn->ip = gtk_editable_get_chars (GTK_EDITABLE (W ("ip_address")), 0, -1);
+	g_free (cxn->address);
+	cxn->address = gtk_editable_get_chars (GTK_EDITABLE (W ("ip_address")), 0, -1);
 
-	g_free (cxn->subnet);
-	cxn->subnet = gtk_editable_get_chars (GTK_EDITABLE (W ("ip_subnet")), 0, -1);
+	g_free (cxn->netmask);
+	cxn->netmask = gtk_editable_get_chars (GTK_EDITABLE (W ("ip_netmask")), 0, -1);
 
 	g_free (cxn->gateway);
-	cxn->gateway = gtk_editable_get_chars (GTK_EDITABLE (W ("ip_gateway")), 0, -1);		
+	cxn->gateway = gtk_editable_get_chars (GTK_EDITABLE (W ("ip_gateway")), 0, -1);
+
+	/* FIXME: calculate broadcast */
 }
 
 static void
@@ -359,7 +490,7 @@ connection_config_save (Connection *cxn)
 	update_row (cxn);	
 }
 
-void
+static void
 on_connection_apply_clicked (GtkWidget *w, Connection *cxn)
 {
 	connection_config_save (cxn);
@@ -384,8 +515,8 @@ connection_close (Connection *cxn)
 	}
 }
 
-void
-connection_destroy (GtkWidget *w, Connection *cxn)
+static void
+on_connection_destroy (GtkWidget *w, Connection *cxn)
 {
 	gtk_object_unref (GTK_OBJECT (cxn->xml));
 	cxn->xml = NULL;
@@ -393,27 +524,27 @@ connection_destroy (GtkWidget *w, Connection *cxn)
 	cxn->window = NULL;
 }
 
-void
+static void
 on_connection_close_clicked (GtkWidget *wi, Connection *cxn)
 {
 	connection_close (cxn);
 	gtk_widget_destroy (cxn->window);
 }
 
-gint
+static gint
 on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Connection *cxn)
 {
 	connection_close (cxn);
 	return FALSE;
 }
 
-void
-connection_modified (GtkWidget *w, Connection *cxn)
+static void
+on_connection_modified (GtkWidget *w, Connection *cxn)
 {
 	connection_set_modified (cxn, TRUE);
 }
 
-void
+static void
 on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn)
 {
 
@@ -422,17 +553,15 @@ on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn)
 static void
 fill_general (Connection *cxn)
 {	
-	gtk_label_set_text (GTK_LABEL (W ("connection_device")),
-			    cxn->device);
-
-	gtk_entry_set_text (GTK_ENTRY (W ("connection_desc")),
-			    cxn->description);
+	gtk_label_set_text (GTK_LABEL (W ("connection_device")), cxn->dev);
+	my_entry_set_text (GTK_ENTRY (W ("connection_desc")), cxn->name);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_button")), cxn->dhcp_dns);
 
 	update_status (cxn);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_boot")), cxn->autoboot);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_user")), cxn->user);
 }
 
 static void
@@ -503,9 +632,9 @@ fill_ip (Connection *cxn)
 
 	update_ip_config (cxn);
 
-	gtk_entry_set_text (GTK_ENTRY (W ("ip_address")), cxn->ip);
-	gtk_entry_set_text (GTK_ENTRY (W ("ip_subnet")), cxn->subnet);
-	gtk_entry_set_text (GTK_ENTRY (W ("ip_gateway")), cxn->gateway);
+	my_entry_set_text (GTK_ENTRY (W ("ip_address")), cxn->address);
+	my_entry_set_text (GTK_ENTRY (W ("ip_netmask")), cxn->netmask);
+	my_entry_set_text (GTK_ENTRY (W ("ip_gateway")), cxn->gateway);
 }
 
 static void
@@ -536,8 +665,8 @@ hookup_callbacks (Connection *cxn)
 		{ "on_connection_close_clicked", on_connection_close_clicked },
 		{ "on_connection_config_dialog_delete_event", on_connection_config_dialog_delete_event },
 		{ "on_status_button_toggled", on_status_button_toggled },
-		{ "connection_modified", connection_modified },
-		{ "connection_destroy", connection_destroy },
+		{ "connection_modified", on_connection_modified },
+		{ "connection_destroy", on_connection_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
 		{ NULL } };
 
@@ -604,8 +733,26 @@ connection_configure (Connection *cxn)
 }
 
 void
-connection_save_to_node (Connection *cxn, xmlNode *node)
+connection_save_to_node (Connection *cxn, xmlNode *root)
 {
-#warning FIXME: implement
+	gchar *s;
+	
+	if (!cxn->node)
+		cxn->node = xml_element_add (root, "interface");
+		
+	connection_xml_save_str_to_node (cxn->node, "dev", cxn->dev);
+	connection_xml_save_str_to_node (cxn->node, "name", cxn->name);
+	connection_xml_save_boolean_to_node (cxn->node, "enabled", cxn->enabled);
+	connection_xml_save_boolean_to_node (cxn->node, "user", cxn->user);
+	connection_xml_save_boolean_to_node (cxn->node, "auto", cxn->autoboot);
+	connection_xml_save_str_to_node (cxn->node, "address", cxn->address);
+	connection_xml_save_str_to_node (cxn->node, "netmask", cxn->netmask);
+	connection_xml_save_str_to_node (cxn->node, "broadcast", cxn->broadcast);
+	connection_xml_save_str_to_node (cxn->node, "network", cxn->network);
+	connection_xml_save_str_to_node (cxn->node, "gateway", cxn->gateway);
+
+	s = connection_config_type_to_str (cxn->ip_config);
+	connection_xml_save_str_to_node (cxn->node, "bootproto", s);
+	g_free (s);
 }
 
