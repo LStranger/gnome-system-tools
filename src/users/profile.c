@@ -983,7 +983,7 @@ const static Profile default_profile = {
 	500,                     /* gmin */
 	60000,                   /* gmax */
 	"/home/$user",           /* home_prefix */
-	"/bin/bash/",            /* shell */
+	"/bin/bash",            /* shell */
 	"$user",                 /* group */
 	FALSE,                   /* pwd_random */
 	TRUE,                    /* logindefs */

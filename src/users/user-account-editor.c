@@ -123,8 +123,10 @@ user_account_editor_new (UserAccount *account)
 {
 	UserAccountEditor *new;
 
+	if (!account)
+		return NULL;
+	
 	new = (UserAccountEditor *) gtk_type_new (user_account_editor_get_type ());
-
 	if (construct (new, account))
 		return new;
 	else {

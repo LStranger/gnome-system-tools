@@ -349,9 +349,10 @@ check_user_uid (xmlNodePtr node, const gchar *val)
 		buf = g_strdup (_("User id must be a positive number."));
 	else if (!check_user_root (node, "uid", val))
 		buf = g_strdup (_("root user shouldn't be modified."));
-	else if (node_exists (node, "uid", val))
+	else if (node_exists (node, "uid", val)) {
 		buf = g_strdup (_("Such user id already exists."));
-
+		g_warning ("Duplicate id %s", val);
+	}
 	return buf;
 }
 

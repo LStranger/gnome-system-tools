@@ -1,3 +1,11 @@
+2001-05-23  Tambet Ingo  <tambet@ximian.com>
+
+	* user-account-editor.c (user_account_editor_new): return NULL if can't get account.
+
+	* user_group.c (check_user_uid): Added g_warning to give out more information.
+
+	* profile.c: Removed typo, fixes bug 2998 (New user's shell has a trailing slash)
+
 2001-05-22  JP Rosevear  <jpr@ximian>
 
 	* e-search-bar/Makefile.am: include gal cflags
