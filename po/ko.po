@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools 0.2\n"
-"POT-Creation-Date: 2000-12-06 10:17+0900\n"
+"POT-Creation-Date: 2000-12-29 09:19+0900\n"
 "PO-Revision-Date: 2000-12-06 10:53+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: korean <ko@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: interfaces/common.glade.h:7 interfaces/common.glade.h:10
+#: interfaces/common.glade.h:7 interfaces/common.glade.h:12
 msgid "Helix Setup Tools"
 msgstr "헬릭스 설정 도구"
 
@@ -26,11 +26,19 @@ msgstr "헬릭스 설정 도구"
 msgid "Scanning your system configuration."
 msgstr "여러분의 시스템 설정을 조사합니다."
 
-#: interfaces/common.glade.h:9 interfaces/common.glade.h:12
+#: interfaces/common.glade.h:9 interfaces/common.glade.h:14
 msgid "%P %%"
 msgstr ""
 
+#: interfaces/common.glade.h:10
+msgid "label51"
+msgstr ""
+
 #: interfaces/common.glade.h:11
+msgid "label52"
+msgstr ""
+
+#: interfaces/common.glade.h:13
 msgid "Updating your system configuration."
 msgstr "여러분의 시스템 설정을 업데이트 합니다."
 
@@ -48,15 +56,15 @@ msgstr "디스크 관리"
 msgid "Device"
 msgstr "장치"
 
-#: interfaces/disks.glade.h:9 interfaces/shares.glade.h:9
+#: interfaces/disks.glade.h:9 interfaces/shares.glade.h:10
 msgid "Detected"
 msgstr "발견"
 
-#: interfaces/disks.glade.h:10 interfaces/shares.glade.h:10
+#: interfaces/disks.glade.h:10 interfaces/shares.glade.h:11
 msgid "Listed"
 msgstr "목록"
 
-#: interfaces/disks.glade.h:11 interfaces/shares.glade.h:11
+#: interfaces/disks.glade.h:11 interfaces/shares.glade.h:12
 msgid "Mounted"
 msgstr "마운트됨"
 
@@ -81,7 +89,7 @@ msgstr "마운트 위치"
 msgid "Partition"
 msgstr "분할영역"
 
-#: interfaces/disks.glade.h:17 interfaces/shares.glade.h:16
+#: interfaces/disks.glade.h:17 interfaces/shares.glade.h:17
 msgid "Add an unlisted import"
 msgstr "목록에 없는것 추가"
 
@@ -93,13 +101,14 @@ msgstr "분할영역 추가"
 msgid "Mount this partition"
 msgstr "이 분할영역 마운트"
 
-#: interfaces/disks.glade.h:20 interfaces/shares.glade.h:19
+#: interfaces/disks.glade.h:20 interfaces/shares.glade.h:20
 msgid "Open settings dialog for selected import"
 msgstr "선택한 연결을 위한 설정 대화상자를 엽니다"
 
-#: interfaces/disks.glade.h:21 interfaces/nameresolution.glade.h:40
-#: interfaces/shares.glade.h:20 interfaces/shares.glade.h:34
-#: interfaces/shares.glade.h:39 interfaces/shares.glade.h:45
+#: interfaces/disks.glade.h:21 interfaces/memory.glade.h:28
+#: interfaces/memory.glade.h:37 interfaces/nameresolution.glade.h:42
+#: interfaces/shares.glade.h:21 interfaces/shares.glade.h:35
+#: interfaces/shares.glade.h:40 interfaces/shares.glade.h:46
 #: interfaces/users.glade.h:14 interfaces/users.glade.h:21
 msgid "Settings"
 msgstr "설정"
@@ -114,25 +123,25 @@ msgstr "디스크와 분할영역"
 
 #. Translation: respect the spaces before and after, and the minus than signs.
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
-#: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:15
-#: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
-#: interfaces/users.glade.h:23 src/common/tool.c:504
-msgid " Advanced >> "
-msgstr " 고급 >> "
+#: interfaces/nameresolution.glade.h:44 interfaces/networking.glade.h:15
+#: interfaces/shares.glade.h:48 interfaces/time.glade.h:16
+#: interfaces/users.glade.h:39 src/common/tool.c:621
+msgid " More Options >> "
+msgstr " 더 많은 옵션 >>"
 
 #: interfaces/disks.glade.h:25
 msgid "Partition Settings"
 msgstr "분할영역 설정"
 
-#: interfaces/disks.glade.h:26 interfaces/shares.glade.h:49
+#: interfaces/disks.glade.h:26 interfaces/shares.glade.h:50
 msgid "Type:"
 msgstr "형식:"
 
-#: interfaces/disks.glade.h:27
+#: interfaces/disks.glade.h:27 interfaces/memory.glade.h:26
 msgid "Device:"
 msgstr "장치:"
 
-#: interfaces/disks.glade.h:28 interfaces/shares.glade.h:54
+#: interfaces/disks.glade.h:28 interfaces/shares.glade.h:55
 msgid "Mount point:"
 msgstr "마운트 위치:"
 
@@ -160,7 +169,7 @@ msgstr "FAT32 (윈도우즈 98 이상)"
 msgid "NTFS (Windows NT & 2000)"
 msgstr "NTFS (윈도우즈 NT & 2000)"
 
-#: interfaces/disks.glade.h:35 interfaces/shares.glade.h:57
+#: interfaces/disks.glade.h:35 interfaces/shares.glade.h:58
 msgid "Choose a mount point"
 msgstr "마운트 위치 선택"
 
@@ -221,25 +230,24 @@ msgstr "증명"
 msgid "Domain Name Service (DNS)"
 msgstr "도메인 네임 서비스 (DNS)"
 
-#: interfaces/nameresolution.glade.h:21 interfaces/nameresolution.glade.h:31
-#: interfaces/nameresolution.glade.h:50
-msgid "New:"
-msgstr "새로운:"
+#: interfaces/nameresolution.glade.h:21
+msgid "New server:"
+msgstr "새 서버:"
 
-#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
-#: interfaces/nameresolution.glade.h:49
+#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:33
+#: interfaces/nameresolution.glade.h:50
 msgid "Existing:"
 msgstr "존재하는:"
 
-#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:27
-#: interfaces/nameresolution.glade.h:46 interfaces/shares.glade.h:32
-#: interfaces/shares.glade.h:40 interfaces/shares.glade.h:43
+#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:28
+#: interfaces/nameresolution.glade.h:48 interfaces/shares.glade.h:33
+#: interfaces/shares.glade.h:41 interfaces/shares.glade.h:44
 #: interfaces/time.glade.h:13
 msgid "Add"
 msgstr "추가"
 
-#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:28
-#: interfaces/nameresolution.glade.h:37 interfaces/nameresolution.glade.h:47
+#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:29
+#: interfaces/nameresolution.glade.h:39 interfaces/nameresolution.glade.h:49
 #: interfaces/users.glade.h:10 interfaces/users.glade.h:18
 msgid "Delete"
 msgstr "제거"
@@ -252,53 +260,70 @@ msgstr "WINS서버 사용:"
 msgid "Servers"
 msgstr "서버"
 
-#: interfaces/nameresolution.glade.h:29
+#: interfaces/nameresolution.glade.h:27
+msgid "Domain Lookup Order"
+msgstr "도메인 찾기 순서"
+
+#: interfaces/nameresolution.glade.h:30
 msgid " Move Up"
 msgstr " 위로"
 
-#: interfaces/nameresolution.glade.h:30
+#: interfaces/nameresolution.glade.h:31
 msgid "Move Down"
 msgstr "아래로"
 
-#: interfaces/nameresolution.glade.h:33
+#: interfaces/nameresolution.glade.h:32
+msgid "New domain:"
+msgstr "새 도메인:"
+
+#: interfaces/nameresolution.glade.h:34
 msgid "Search Domains"
 msgstr "도메인 검색"
 
-#: interfaces/nameresolution.glade.h:34
+#: interfaces/nameresolution.glade.h:35
+msgid ""
+"Assign aliases to IP addresses that may not be registered in the DNS or WINS "
+"servers, or to override or set new names for commonly used IP addresses. "
+msgstr ""
+"DNS나 WINS서버에 등록되지 않은 IP주소나, 이미 사용되고 있는 IP주소에 새 "
+"이름을 등록하려고 하면 별명을 할당하십시오."
+
+#: interfaces/nameresolution.glade.h:36
 msgid "IP address"
 msgstr "IP 주소"
 
-#: interfaces/nameresolution.glade.h:35
-msgid "Names"
-msgstr "이름"
+#: interfaces/nameresolution.glade.h:37
+msgid " Names"
+msgstr " 이름"
 
-#: interfaces/nameresolution.glade.h:36
+#: interfaces/nameresolution.glade.h:38
 msgid "New Alias"
 msgstr "새 별명"
 
-#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:207
+#: interfaces/nameresolution.glade.h:40 src/nameresolution/callbacks.c:354
+#: src/nameresolution/callbacks.c:398
 msgid "Settings for the selected alias"
 msgstr "선택한 별명에 대한 설정"
 
-#: interfaces/nameresolution.glade.h:39
+#: interfaces/nameresolution.glade.h:41
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "별명이 주어진 IP주소나 해당하는 이름을 바꿉니다."
 
-#: interfaces/nameresolution.glade.h:41 interfaces/nameresolution.glade.h:45
+#: interfaces/nameresolution.glade.h:43 interfaces/nameresolution.glade.h:47
 msgid "Aliases"
 msgstr "별명"
 
-#: interfaces/nameresolution.glade.h:43
+#: interfaces/nameresolution.glade.h:45
 msgid "Aliases Settings"
 msgstr "별명 설정"
 
-#: interfaces/nameresolution.glade.h:44
+#: interfaces/nameresolution.glade.h:46
 msgid "IP address:"
 msgstr "IP 주소:"
 
-#: interfaces/nameresolution.glade.h:48
-msgid "label48"
-msgstr ""
+#: interfaces/nameresolution.glade.h:51 interfaces/users.glade.h:52
+msgid "New:"
+msgstr "새로운:"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -347,156 +372,165 @@ msgid "Shares Administration"
 msgstr "공유 관리"
 
 #: interfaces/shares.glade.h:8
+msgid ""
+"Imports are directories wich reside in other computers and are accessible "
+"through the network."
+msgstr ""
+"연결은 다른컴퓨터와 네트웍을 통해 접근할수 있는 컴퓨터의 디렉토리를"
+"뜻합니다." 
+
+#: interfaces/shares.glade.h:9
 msgid "Location"
 msgstr "위치"
 
-#: interfaces/shares.glade.h:12
+#: interfaces/shares.glade.h:13
 msgid "User"
 msgstr "사용자"
 
-#: interfaces/shares.glade.h:13
+#: interfaces/shares.glade.h:14
 msgid "Password"
 msgstr "암호"
 
-#: interfaces/shares.glade.h:14
+#: interfaces/shares.glade.h:15
 msgid "Mount Point"
 msgstr "마운트 위치"
 
-#: interfaces/shares.glade.h:15
+#: interfaces/shares.glade.h:16
 msgid "Import"
 msgstr "연결"
 
-#: interfaces/shares.glade.h:17
+#: interfaces/shares.glade.h:18
 msgid "New import"
 msgstr "새 연결"
 
-#: interfaces/shares.glade.h:18
+#: interfaces/shares.glade.h:19
 msgid "Mount this import"
 msgstr "이 연결을 마운트합니다"
 
-#: interfaces/shares.glade.h:21
+#: interfaces/shares.glade.h:22
 msgid "Remember this import between boots"
 msgstr "이 연결을 기억하고 다음 부팅때 사용합니다"
 
-#: interfaces/shares.glade.h:22
+#: interfaces/shares.glade.h:23
 msgid "Imports"
 msgstr "연결"
 
-#: interfaces/shares.glade.h:23
+#: interfaces/shares.glade.h:24
 msgid "Name"
 msgstr "이름"
 
-#: interfaces/shares.glade.h:24
+#: interfaces/shares.glade.h:25
 msgid "Path"
 msgstr "경로"
 
-#: interfaces/memory.glade.h:11 interfaces/shares.glade.h:25
-#: interfaces/shares.glade.h:31
+#: interfaces/memory.glade.h:11 interfaces/memory.glade.h:27
+#: interfaces/memory.glade.h:36 interfaces/shares.glade.h:26
+#: interfaces/shares.glade.h:32
 msgid "Enabled"
 msgstr "가능"
 
-#: interfaces/shares.glade.h:26 interfaces/shares.glade.h:62
+#: interfaces/shares.glade.h:27 interfaces/shares.glade.h:63
 msgid "Browseable"
 msgstr "브라우즈 가능"
 
-#: interfaces/shares.glade.h:27 interfaces/shares.glade.h:63
+#: interfaces/shares.glade.h:28 interfaces/shares.glade.h:64
 msgid "Public"
 msgstr "공용"
 
-#: interfaces/shares.glade.h:28 interfaces/shares.glade.h:64
+#: interfaces/shares.glade.h:29 interfaces/shares.glade.h:65
 msgid "Writable"
 msgstr "쓰기가능"
 
-#: interfaces/shares.glade.h:29
+#: interfaces/shares.glade.h:30
 msgid "Comment"
 msgstr "설명"
 
-#: interfaces/shares.glade.h:30 interfaces/shares.glade.h:42
+#: interfaces/shares.glade.h:31 interfaces/shares.glade.h:43
 msgid "Export"
 msgstr "공유"
 
-#: interfaces/memory.glade.h:16 interfaces/shares.glade.h:33
-#: interfaces/shares.glade.h:41 interfaces/shares.glade.h:44
+#: interfaces/memory.glade.h:16 interfaces/shares.glade.h:34
+#: interfaces/shares.glade.h:42 interfaces/shares.glade.h:45
 msgid "Remove"
 msgstr "제거"
 
-#: interfaces/shares.glade.h:35
+#: interfaces/shares.glade.h:36
 msgid "SMB exports"
 msgstr "SMB 공유"
 
-#: interfaces/shares.glade.h:36
+#: interfaces/shares.glade.h:37
 msgid "Export/clients"
 msgstr "공유/클라이언트"
 
-#: interfaces/shares.glade.h:37
+#: interfaces/shares.glade.h:38
 msgid "Allow writing"
 msgstr "쓰기 허용"
 
-#: interfaces/shares.glade.h:38
+#: interfaces/shares.glade.h:39
 msgid "Client"
 msgstr "클라이언트"
 
-#: interfaces/shares.glade.h:46
+#: interfaces/shares.glade.h:47
 msgid "NFS exports"
 msgstr "NFS 공유"
 
-#: interfaces/shares.glade.h:48
+#: interfaces/shares.glade.h:49
 msgid "Import Settings"
 msgstr "연결 설정"
 
-#: interfaces/shares.glade.h:50
+#: interfaces/shares.glade.h:51
 msgid "Host:"
 msgstr "호스트:"
 
-#: interfaces/memory.glade.h:22 interfaces/shares.glade.h:51
+#: interfaces/memory.glade.h:38 interfaces/shares.glade.h:52
 msgid "Path:"
 msgstr "경로:"
 
-#: interfaces/shares.glade.h:52
+#: interfaces/shares.glade.h:53
 msgid "User:"
 msgstr "사용자:"
 
-#: interfaces/shares.glade.h:53
+#: interfaces/shares.glade.h:54
 msgid "Password:"
 msgstr "암호:"
 
-#: interfaces/shares.glade.h:55
+#: interfaces/shares.glade.h:56
 msgid "SMB"
 msgstr ""
 
-#: interfaces/shares.glade.h:56
+#: interfaces/shares.glade.h:57
 msgid "NFS"
 msgstr ""
 
-#: interfaces/shares.glade.h:58
+#: interfaces/shares.glade.h:59
 msgid "SMB Export Settings"
 msgstr "SMB 공유 설정"
 
-#: interfaces/shares.glade.h:59 interfaces/shares.glade.h:66
+#: interfaces/shares.glade.h:60 interfaces/shares.glade.h:67
 msgid "Local path:"
 msgstr "지역 경로:"
 
-#: interfaces/shares.glade.h:60
+#: interfaces/shares.glade.h:61
 msgid "Export name:"
 msgstr "공유 이름:"
 
-#: interfaces/shares.glade.h:61 interfaces/users.glade.h:27
+#: interfaces/shares.glade.h:62 interfaces/users.glade.h:44
 msgid "Comment:"
 msgstr "설명:"
 
-#: interfaces/shares.glade.h:65
+#: interfaces/shares.glade.h:66
 msgid "NFS Export Settings"
 msgstr "NFS 공유 설정"
 
-#: interfaces/shares.glade.h:67
+#: interfaces/shares.glade.h:68
 msgid "NFS Client Settings"
 msgstr "NFS 클라이언트 설정"
 
-#: interfaces/shares.glade.h:68
+#: interfaces/shares.glade.h:69
 msgid "Client pattern:"
 msgstr "클라이언트 패턴:"
 
-#: interfaces/shares.glade.h:69
+#: interfaces/shares.glade.h:70
 msgid "Allow writing from these clients"
 msgstr "이 클라이언트에게 쓰기 허용"
 
@@ -554,7 +588,7 @@ msgstr ""
 msgid "New User"
 msgstr "새 사용자"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:227
+#: interfaces/users.glade.h:11 src/users/callbacks.c:275
 msgid "Settings for the selected user"
 msgstr "선택한 사용자의 설정"
 
@@ -562,7 +596,8 @@ msgstr "선택한 사용자의 설정"
 msgid "Change the user's password or options like its name."
 msgstr "사용자의 암호나 이름같은 설정을 변경합니다."
 
-#: interfaces/users.glade.h:13 interfaces/users.glade.h:28
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:49
+#: interfaces/users.glade.h:51
 msgid "Change Password"
 msgstr "암호 바꿈"
 
@@ -590,67 +625,155 @@ msgstr "이름이나 구성원 같은 그룹의 설정을 변경합니다."
 msgid "Groups"
 msgstr "그룹"
 
+#: interfaces/users.glade.h:23
+msgid ""
+"These are global values that will affect the creation of new users. They are "
+"only available when you click \"More Options\"."
+msgstr ""
+"이것은 새 사용자를 만들때 적용되는 전체값 입니다. \"더 많은 옵션\"을 클릭하면 "
+"사용할수 있습니다."
+
 #: interfaces/users.glade.h:24
+msgid "System settings"
+msgstr "시스템 설정"
+
+#: interfaces/users.glade.h:25
+msgid "Mailbox directory:"
+msgstr "Mailbox 디렉토리:"
+
+#: interfaces/users.glade.h:26
+msgid "Create home for new users:"
+msgstr "새 사용자의 홈디렉토리:"
+
+#: interfaces/users.glade.h:27
+msgid "Min/max values for automatic UID/GID"
+msgstr "자동 UID/GID용 최소/최대값"
+
+#: interfaces/users.glade.h:28
+msgid "Maximum UID:"
+msgstr "최대 UID:"
+
+#: interfaces/users.glade.h:29
+msgid "Minimum UID:"
+msgstr "최소 UID:"
+
+#: interfaces/users.glade.h:30
+msgid "Minimum GID:"
+msgstr "최소 GID:"
+
+#: interfaces/users.glade.h:31
+msgid "Maximum GID:"
+msgstr "최대 GID:"
+
+#: interfaces/users.glade.h:32
+msgid "Password expiration"
+msgstr "암호 만료기간"
+
+#: interfaces/users.glade.h:33
+msgid "Days a password may be used:"
+msgstr "암호가 사용될수 있는 날:"
+
+#: interfaces/users.glade.h:34
+msgid "Minimum days allowed between password changes:"
+msgstr "암호 변경이 허용되는 최소 기간:
+
+#: interfaces/users.glade.h:35
+msgid ""
+"Days between warning and\n"
+" password expiration:  "
+msgstr ""
+"경고와 암호 만료기간 \n"
+"사이의 기간:  "
+
+#: interfaces/users.glade.h:37
+msgid "Minimum  password length:"
+msgstr "최소 암호 길이:"
+
+#: interfaces/users.glade.h:38
+msgid "Defaults"
+msgstr "기본값"
+
+#: interfaces/users.glade.h:40
 msgid "User Settings"
 msgstr "사용자 설정"
 
-#: interfaces/users.glade.h:25
+#: interfaces/users.glade.h:41
+msgid "Basic settings"
+msgstr "기본 설정"
+
+#: interfaces/users.glade.h:42
 msgid "Main group:"
 msgstr "주 그룹:"
 
-#: interfaces/users.glade.h:26
+#: interfaces/users.glade.h:43
 msgid "User name:"
 msgstr "사용자 이름:"
 
-#: interfaces/users.glade.h:29
-msgid "New password:"
-msgstr "새 암호:"
+#: interfaces/users.glade.h:45
+msgid "Advanced settings"
+msgstr "고급 설정"
 
-#: interfaces/users.glade.h:30
-msgid "Confirmation:"
+#: interfaces/users.glade.h:46
+msgid "Shell:"
+msgstr "쉘:"
+
+#: interfaces/users.glade.h:47
+msgid "User ID:"
+msgstr "사용자 계정:"
+
+#: interfaces/users.glade.h:48
+msgid "Home directory:"
+msgstr "홈 디렉토리:"
+
+#: interfaces/users.glade.h:50
+msgid "Enter a new password manually, or have one randomly assigned."
+msgstr "수동으로 새 암호를 입력하거나 무작위로 배정된 암호를 사용하십시오."
+
+#: interfaces/users.glade.h:53
+msgid "Confirm:"
 msgstr "확인:"
 
-#: interfaces/users.glade.h:31
-msgid "Check quality."
-msgstr ""
-
-#: interfaces/users.glade.h:32
+#: interfaces/users.glade.h:54
 msgid "  Random Password  "
 msgstr "  무작위 암호 "
 
-#: interfaces/users.glade.h:33
+#: interfaces/users.glade.h:55
+msgid "Check password quality"
+msgstr ""
+
+#: interfaces/users.glade.h:56
 msgid "Group Settings"
 msgstr "그룹 설정"
 
-#: interfaces/users.glade.h:34
+#: interfaces/users.glade.h:57
 msgid "Group name:"
 msgstr "그룹 이름:"
 
-#: interfaces/users.glade.h:35
+#: interfaces/users.glade.h:58
 msgid "Members"
 msgstr "구성원"
 
-#: interfaces/users.glade.h:36
+#: interfaces/users.glade.h:59
 msgid "All Users"
 msgstr "모든 사용자"
 
-#: interfaces/users.glade.h:37
-msgid "Member Users"
-msgstr "구성 사용자"
+#: interfaces/users.glade.h:60
+msgid "Group Members"
+msgstr "그룹 구성원"
 
-#: interfaces/users.glade.h:38
+#: interfaces/users.glade.h:61
 msgid "Add ->"
 msgstr "추가 ->"
 
-#: interfaces/users.glade.h:39
+#: interfaces/users.glade.h:62
 msgid "Remove <-"
 msgstr "삭제 <-"
 
-#: interfaces/users.glade.h:40
+#: interfaces/users.glade.h:63
 msgid "label27"
 msgstr ""
 
-#: interfaces/users.glade.h:41
+#: interfaces/users.glade.h:64
 msgid "label26"
 msgstr ""
 
@@ -660,7 +783,7 @@ msgstr ""
 #. * DO NOT compile it as part of your application.
 #.
 #: interfaces/memory.glade.h:7
-msgid "Memory administration"
+msgid "Memory Administration"
 msgstr "메모리 관리"
 
 #: interfaces/memory.glade.h:8
@@ -691,63 +814,63 @@ msgstr "설정..."
 msgid "Available partitions:"
 msgstr "사용가능한 분할영역:"
 
-#: interfaces/memory.glade.h:23 interfaces/memory.glade.h:33
-msgid "Size:"
-msgstr "크기:"
-
-#: interfaces/memory.glade.h:24
-msgid "Swap Partition"
-msgstr "스왑 분할영역"
-
-#: interfaces/memory.glade.h:25
-msgid "Swap File"
-msgstr "스왑 파일"
-
-#: interfaces/memory.glade.h:26
-msgid "Megabytes"
-msgstr ""
-
-#: interfaces/memory.glade.h:27 interfaces/memory.glade.h:31
-msgid "Enable this swap space"
-msgstr "이 스왑공간을 사용"
-
-#: interfaces/memory.glade.h:28
-msgid "Use non-default priority:"
-msgstr "기본치가 아닌 우선권 사용:"
-
-#: interfaces/memory.glade.h:29
-msgid "Browse..."
-msgstr "찾아보기..."
-
-#: interfaces/memory.glade.h:30
-msgid "Swap device"
-msgstr "스왑 장치"
-
-#: interfaces/memory.glade.h:32
-msgid "Use non-default priority"
-msgstr "기본치가 아닌 우선권 사용"
-
-#: interfaces/memory.glade.h:34
-msgid "Mb"
-msgstr ""
-
-#: interfaces/memory.glade.h:35
+#: interfaces/memory.glade.h:22
 msgid "Select  Swap File"
 msgstr "스왑파일 선택"
 
-#: interfaces/memory.glade.h:36
+#: interfaces/memory.glade.h:23
 msgid "OK"
 msgstr "확인"
 
-#: interfaces/memory.glade.h:37
+#: interfaces/memory.glade.h:24
 msgid "Cancel"
 msgstr "취소"
 
-#: src/common/tool.c:506
-msgid " << Basic "
-msgstr " << 기본"
+#: interfaces/memory.glade.h:25
+msgid "Swap Settings"
+msgstr "스왑 설정"
 
-#: src/common/tool.c:594
+#: interfaces/memory.glade.h:29 interfaces/memory.glade.h:40
+msgid "Size:"
+msgstr "크기:"
+
+#: interfaces/memory.glade.h:30 interfaces/memory.glade.h:39
+msgid "Priority:"
+msgstr "우선권:"
+
+#: interfaces/memory.glade.h:31 interfaces/memory.glade.h:41
+msgid "MB"
+msgstr ""
+
+#: interfaces/memory.glade.h:32
+msgid "New Swap Device"
+msgstr "새 스왑 장치"
+
+#: interfaces/memory.glade.h:33
+msgid "Swap type:"
+msgstr "스왑 형식:"
+
+#: interfaces/memory.glade.h:34
+msgid "partition"
+msgstr "분할영역"
+
+#: interfaces/memory.glade.h:35
+msgid "file"
+msgstr "파일"
+
+#: interfaces/memory.glade.h:42
+msgid "Browse..."
+msgstr "찾아보기..."
+
+#: src/common/tool.c:624
+msgid " Full Options >> "
+msgstr " 전체 옵션 >> "
+
+#: src/common/tool.c:627
+msgid " << Few Options "
+msgstr " << 축소 옵션 "
+
+#: src/common/tool.c:734
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -764,16 +887,16 @@ msgstr ""
 "여러분은 어떠한 변경도 할수 없습니다. 계속 하시겠습니까?"
 
 #. No name, no swap
-#: src/memory/callbacks.c:569
+#: src/memory/callbacks.c:536
 msgid "You have to specify path to new swap location!"
 msgstr "새 스왑위치 경로를 지정하여야 합니다!"
 
 #. It's already in there, can't add
-#: src/memory/callbacks.c:584
+#: src/memory/callbacks.c:551
 msgid "It's already used as swap space!"
 msgstr "이미 스왑공간으로 사용되고있습니다!"
 
-#: src/nameresolution/callbacks.c:57
+#: src/nameresolution/callbacks.c:121
 msgid ""
 "The IP address must have the form of four digits\n"
 "sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
@@ -783,50 +906,89 @@ msgstr ""
 "그 숫자의 범위는 0에서 255사이이며 그중 맨 처음과 끝의 범위는 \n"
 "1에서 254 입니다."
 
-#: src/nameresolution/callbacks.c:193
+#: src/nameresolution/callbacks.c:210
+msgid ""
+"The domain may only contain letters, numbers and dots (.),\n"
+"which may work as sub-domain separators."
+msgstr ""
+"도메인은 글자및 숫자, 그리고 하위 도메인을 구분하는 점(.),\n"
+"으로 구성되어 있습니다."
+
+#: src/nameresolution/callbacks.c:341
 msgid "Settings for alias of "
 msgstr "다음 별명의 설정 "
 
-#: src/users/callbacks.c:142
+#: src/nameresolution/callbacks.c:366
+msgid "Create New Alias"
+msgstr "새 별명 만들기"
+
+#: src/nameresolution/callbacks.c:387
+#, c-format
+msgid "Are you sure you want to delete the aliases for %s?"
+msgstr "%s의 별명을 정말로 지우겠습니까?"
+
+#: src/nameresolution/callbacks.c:421
+#, c-format
+msgid "Settings for Alias %s"
+msgstr "%s의 별명 설정"
+
+#. Changes have been made.
+#: src/nameresolution/callbacks.c:651 src/users/callbacks.c:708
+msgid ""
+"There are changes which haven't been applyed.\n"
+"Apply now?"
+msgstr ""
+"적용되지 않은 변경점이 있습니다.\n"
+"적용할까요?"
+
+#: src/nameresolution/callbacks.c:756
+msgid ""
+"The alias entry may only contain letters, numbers and dots (.),\n"
+"which may work as sub-domain separators."
+msgstr ""
+"별명 항목은 글자및 숫자, 하위 도메인을 구분하는 점(.),\n"
+"으로 구성되어 있습니다."
+
+#: src/users/callbacks.c:166
 #, c-format
 msgid "Settings for User %s"
 msgstr "사용자 %s의 설정"
 
-#: src/users/callbacks.c:160
+#: src/users/callbacks.c:190
 #, c-format
 msgid "Password for User %s"
 msgstr "사용자 %s의 암호"
 
-#: src/users/callbacks.c:207
+#: src/users/callbacks.c:254
 msgid "The root user must not be deleted."
 msgstr "root 사용자는 지울수 없습니다."
 
-#: src/users/callbacks.c:214
+#: src/users/callbacks.c:261
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "사용자 %s를 정말로 지우겠습니까?"
 
-#: src/users/callbacks.c:256
+#: src/users/callbacks.c:313
 #, c-format
 msgid "Settings for Group %s"
 msgstr "그룹 %s의 설정"
 
-#: src/users/callbacks.c:275
+#: src/users/callbacks.c:333
 msgid "Create New Group"
 msgstr "새 그룹 생성"
 
-#: src/users/callbacks.c:301
+#: src/users/callbacks.c:362
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "그룹 %s를 정말로 지우겠습니까?"
 
-#: src/users/callbacks.c:421
+#: src/users/callbacks.c:492
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "\"%s\"의 암호 설정."
 
 #. Bad confirmation
-#: src/users/callbacks.c:456
+#: src/users/callbacks.c:530
 msgid ""
 "The password and its confirmation\n"
 "must match."
@@ -835,7 +997,7 @@ msgstr ""
 "하여야 합니다."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:462
+#: src/users/callbacks.c:536
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -844,29 +1006,20 @@ msgstr ""
 "잘못된 암호: %s.\n"
 "다른 암호로 시도하십시오."
 
-#. Changes have been made.
-#: src/users/callbacks.c:627
-msgid ""
-"There are changes which haven't been applyed.\n"
-"Apply now?"
-msgstr ""
-"적용되지 않은 변경점이 있습니다.\n"
-"적용할까요?"
-
-#: src/users/user_group.c:55
+#: src/users/user_group.c:58
 msgid "Username is empty."
 msgstr "사용자 이름이 비어있습니다."
 
-#: src/users/user_group.c:72
+#: src/users/user_group.c:74
 #, c-format
 msgid "User %s already exists."
 msgstr "사용자 %s가 이미 있습니다."
 
-#: src/users/user_group.c:87
+#: src/users/user_group.c:94
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "소문자만으로 올바른 사용자이름을 정하십시오."
 
-#: src/users/user_group.c:120
+#: src/users/user_group.c:128
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from the pull-down menu."
@@ -874,23 +1027,56 @@ msgstr ""
 "소문자만으로 올바른 주 그룹이름을 정하거나 풀다운 메뉴에서 \n"
 "선택하십시오."
 
-#: src/users/user_group.c:176
+#: src/users/user_group.c:194
 msgid "The username is empty."
 msgstr "사용자 이름이 비어있습니다."
 
-#: src/users/user_group.c:307
+#: src/users/user_group.c:330
 msgid "The group name is empty."
 msgstr "그룹 이름이 비어있습니다."
 
-#: src/users/user_group.c:324
+#: src/users/user_group.c:347
 #, c-format
 msgid "Group %s already exists."
 msgstr "그룹 %s가 이미 있습니다."
 
-#: src/users/user_group.c:340
+#: src/users/user_group.c:363
 msgid "Please set a valid group name, with only lower-case letters."
 msgstr "소문자만으로 올바른 그룹이름을 정하십시오."
 
-#: src/users/user_group.c:382
+#: src/users/user_group.c:409
 msgid "Group name is empty."
 msgstr "그룹 이름이 비어있습니다."
+
+#~ msgid " Advanced >> "
+#~ msgstr " 고급 >> "
+
+#~ msgid "Basic"
+#~ msgstr "기본"
+
+#~ msgid "Advanced"
+#~ msgstr "고급"
+
+#~ msgid "New password:"
+#~ msgstr "새 암호:"
+
+#~ msgid "Member Users"
+#~ msgstr "구성 사용자"
+
+#~ msgid "Swap Partition"
+#~ msgstr "스왑 분할영역"
+
+#~ msgid "Swap File"
+#~ msgstr "스왑 파일"
+
+#~ msgid "Enable this swap space"
+#~ msgstr "이 스왑공간을 사용"
+
+#~ msgid "Use non-default priority:"
+#~ msgstr "기본치가 아닌 우선권 사용:"
+
+#~ msgid "Use non-default priority"
+#~ msgstr "기본치가 아닌 우선권 사용"
+
+#~ msgid " << Basic "
+#~ msgstr " << 기본"
