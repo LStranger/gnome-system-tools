@@ -117,6 +117,9 @@ xst_dialog_freeze (XstDialog *xd)
 	g_return_if_fail (xd->frozen >= 0);
 
 	d(g_message ("freezing %p", xd));
+
+	if (!xd->frozen)
+		gtk_widget_set_sensitive (GTK_WIDGET (xd), FALSE);
 	
 	xd->frozen++;
 }
@@ -131,6 +134,9 @@ xst_dialog_thaw (XstDialog *xd)
 	d(g_message ("thawing %p", xd));
 
 	xd->frozen--;
+
+	if (!xd->frozen)
+		gtk_widget_set_sensitive (GTK_WIDGET (xd), TRUE);
 }
 
 gboolean

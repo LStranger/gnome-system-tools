@@ -51,11 +51,11 @@ static enum {
 } root_access = ROOT_ACCESS_NONE;
 
 static GtkObjectClass *parent_class;
-static gint xsttool_signals[LAST_SIGNAL] = { 0 };
+static gint xsttool_signals [LAST_SIGNAL] = { 0 };
 
-static gboolean platform_unsupported_cb (XstTool *tool, XstReportLine *rline);
+static gboolean platform_unsupported_cb   (XstTool *tool, XstReportLine *rline);
 static gboolean platform_add_supported_cb (XstTool *tool, XstReportLine *rline);
-static gboolean platform_set_current_cb (XstTool *tool, XstReportLine *rline);
+static gboolean platform_set_current_cb   (XstTool *tool, XstReportLine *rline);
 
 static void report_dispatch (XstTool *tool);
 
@@ -64,7 +64,7 @@ static XstReportHookEntry common_report_hooks[] = {
 	{ "platform_unsup",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
 	{ "platform_list",    platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE  }, 
 	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_LOAD,     FALSE }, 
-	{ 0,   NULL,                       -1,                       FALSE }
+	{ 0,                  NULL,                       -1,                       FALSE }
 };
 
 /* --- Report hook callbacks --- */
@@ -265,12 +265,16 @@ timeout_cb (gpointer data)
 		gtk_main_quit ();
 }
 
+#if 0
+
 static void
 set_arrow (XstTool *tool, GtkArrowType arrow)
 {
 	gtk_notebook_set_page (GTK_NOTEBOOK (tool->report_notebook),
 			       arrow == GTK_ARROW_UP ? 0 : 1);
 }
+
+#endif
 
 static void
 report_clear_lines (XstTool *tool)
@@ -302,6 +306,7 @@ report_dispatch (XstTool *tool)
 		NULL
 	};
 
+#if 0
 	if (!GTK_IS_SCROLLED_WINDOW (tool->report_scrolled)) {
 		g_warning ("tool->report_scrolled is not a GtkScrolledWindow\n");
 		tool->report_dispatch_pending = FALSE;
@@ -311,6 +316,7 @@ report_dispatch (XstTool *tool)
 	
 	vadj = gtk_scrolled_window_get_vadjustment (
 		GTK_SCROLLED_WINDOW (tool->report_scrolled));
+#endif
 
 	for (list = tool->report_line_list; list; list = g_slist_next (list))
 	{
@@ -319,6 +325,7 @@ report_dispatch (XstTool *tool)
 		if (xst_report_line_get_handled (rline))
 			continue;
 
+#if 0
 		if (!strcmp (xst_report_line_get_key (rline), "progress")) {
 			/* Progress update */
 
@@ -338,6 +345,7 @@ report_dispatch (XstTool *tool)
 				scroll = FALSE;
 
 			report_text [1] = (char *) xst_report_line_get_message (rline);
+
 			gtk_clist_append (GTK_CLIST (tool->report_list), report_text);
 
 			if (scroll)
@@ -345,6 +353,7 @@ report_dispatch (XstTool *tool)
 
 			xst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
 		}
+#endif
 
 		xst_report_line_set_handled (rline, TRUE);
 	}
@@ -437,11 +446,10 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 	report_clear_lines (tool);
 
 	gtk_label_set_text (GTK_LABEL (tool->report_label), label);
-
+#if 0
 	set_arrow (tool, GTK_ARROW_DOWN);
-
 	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 0.0);
-	
+#endif
 	tool->input_id = gtk_input_add_full (fd, GDK_INPUT_READ, report_progress_tick,
 					     NULL, tool, NULL);
 
@@ -455,17 +463,19 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 	if (!tool->run_again)
 	{
 		/* Set progress to 100% and wait a bit before closing display */
-
+#if 0
 		gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 1.0);
 
 		cb_id = gtk_timeout_add (1500, (GtkFunction) timeout_cb, tool);
 		gtk_main ();
 		gtk_timeout_remove (cb_id);
-	
+#endif
 		gtk_widget_hide (tool->report_window);
 	}
 
+#if 0
 	gtk_clist_clear (GTK_CLIST (tool->report_list));
+#endif
 }
 
 gboolean
@@ -482,6 +492,8 @@ xst_tool_save (XstTool *tool)
 	g_return_val_if_fail (tool->script_path, FALSE);
 
 	g_return_val_if_fail (root_access != ROOT_ACCESS_NONE, FALSE);
+
+	xst_dialog_freeze (tool->main_dialog);
 
 	gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_XML]);
 
@@ -539,7 +551,8 @@ xst_tool_save (XstTool *tool)
 
 		g_error ("Unable to run backend: %s", tool->script_path);
 	}
-  
+
+	xst_dialog_thaw (tool->main_dialog);
 	return TRUE;  /* FIXME: Determine if it really worked. */
 }
 
@@ -588,6 +601,7 @@ xst_tool_load (XstTool *tool)
 		 * enormous documents can be considered a plus. </dystopic> */
 
 		report_progress (tool, fd [0], _("Scanning your system configuration."));
+
 		if (tool->run_again)
 			return TRUE;
 
@@ -652,9 +666,12 @@ xst_tool_load_try (XstTool *tool)
 void
 xst_tool_main (XstTool *tool)
 {
-	xst_tool_load_try (tool);
-	xst_dialog_thaw (tool->main_dialog);
+	xst_dialog_freeze (tool->main_dialog);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
+
+	xst_tool_load_try (tool);
+
+	xst_dialog_thaw (tool->main_dialog);
 	gtk_main ();
 }
 
@@ -699,6 +716,8 @@ xst_tool_class_init (XstToolClass *klass)
 	object_class->destroy = xst_tool_destroy;
 }
 
+#if 0
+
 static void
 visibility_toggled (GtkWidget *w, gpointer data)
 {
@@ -728,6 +747,8 @@ visibility_toggled (GtkWidget *w, gpointer data)
 	tool->report_list_visible = show;
 }
 
+#endif
+
 static void
 xst_tool_type_init (XstTool *tool)
 {
@@ -738,9 +759,12 @@ xst_tool_type_init (XstTool *tool)
 	xml = xst_tool_load_glade_common (tool, "report_window");
 
 	tool->report_window     = glade_xml_get_widget (xml, "report_window");
+#if 0
 	tool->report_scrolled   = glade_xml_get_widget (xml, "report_list_scrolled_window");
 	tool->report_progress   = glade_xml_get_widget (xml, "report_progress");
+#endif
 	tool->report_label      = glade_xml_get_widget (xml, "report_label");
+#if 0
 	tool->report_list       = glade_xml_get_widget (xml, "report_list");
 	tool->report_entry      = glade_xml_get_widget (xml, "report_text");
 	tool->report_visibility = glade_xml_get_widget (xml, "report_visibility");
@@ -761,6 +785,7 @@ xst_tool_type_init (XstTool *tool)
 	gtk_widget_show_all (tool->report_notebook);
 
 	glade_xml_signal_connect_data (xml, "visibility_toggled", visibility_toggled, tool);
+#endif
 
 	xml = xst_tool_load_glade_common (tool, "platform_dialog");
 	tool->platform_dialog = glade_xml_get_widget (xml, "platform_dialog");
@@ -808,7 +833,6 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 	g_free (s);
 	g_free (t);
 
-	xst_dialog_freeze (tool->main_dialog);
 	gtk_signal_connect (GTK_OBJECT (tool->main_dialog),
 			    "apply",
 			    GTK_SIGNAL_FUNC (xst_tool_save_cb),
