@@ -1,16 +1,16 @@
 # French translation of gnome-system-tools.
-# Copyright (C) 2001-2003 Free Software Foundation, Inc.
+# Copyright (C) 2001-2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-system-tools package.
 #
-# Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2001-2003.
-# maintainer: Jean-Michel Ardantz <jmardantz@ifrance.com>, 2001-2003.
+# Christophe Merlet (RedFox) <redfox@redfoxcenter.org>, 2001-2004.
+# maintainer: Jean-Michel Ardantz <jmardantz@ifrance.com>, 2001-2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 0.29.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-21 15:11+0100\n"
-"PO-Revision-Date: 2003-09-20 09:27+0200\n"
+"POT-Creation-Date: 2004-02-28 11:46+0100\n"
+"PO-Revision-Date: 2004-02-28 11:38+0100\n"
 "Last-Translator: Jean-Michel Ardantz <jmardantz@ifrance.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "MIME-Version: 1.0\n"
@@ -50,10 +50,14 @@ msgid "Last GST version executed"
 msgstr "Dernière version de GST exécutée"
 
 #: gnome-system-tools.schemas.in.h:8
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr "Système de démarrage qui sera configuré"
+
+#: gnome-system-tools.schemas.in.h:9
 msgid "Remote hosts"
 msgstr "Hôtes distants :"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:10
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -62,7 +66,7 @@ msgstr ""
 "basique et un mode avancé, le mode basic est conçu pour afficher moins "
 "d'informations que le mode avancé"
 
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:11
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
@@ -70,21 +74,32 @@ msgstr ""
 "GST est capable de faire de l'administration distante via SSH, activez cette "
 "option pour utiliser cette fonctionnalité."
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:12
 msgid "The last GST version that this computer has run"
 msgstr "La dernière version de GST que cette ordinateur a exécutée"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:13
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr ""
+"Désignation du chargeur de démarrage qui sera configuré par l'outil (dans le "
+"cas ou plusieurs chargeurs seraient installés). Si la zone est non "
+"renseignée ou non valide alors l'outil demandera cette information lors de "
+"l'exécution"
+
+#: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
 msgstr "Indique si l'outil utilisera l'administration distante ou non"
 
-#: gnome-system-tools.schemas.in.h:13
+#: gnome-system-tools.schemas.in.h:15
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Indique si l'outil users-admin doit afficher tous les utilisateurs et "
 "groupes ou non"
 
-#: gnome-system-tools.schemas.in.h:14
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr ""
 "Indique si la boîte de dialogue d'avertissement doit être affichée ou non"
@@ -167,7 +182,11 @@ msgstr "<span weight=\"bold\">Au démarrage de l'ordinateur</span>"
 msgid "Ask at boot"
 msgstr "Choisir au démarrage"
 
-#: interfaces/boot.glade.in.h:20
+#: interfaces/boot.glade.in.h:20 src/boot/main.c:73
+msgid "Boot Manager Settings"
+msgstr "Configuration du programme de démarrage"
+
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -177,25 +196,29 @@ msgstr ""
 "à monter en tant que racine. Vous pouvez, si nécessaire, saisir les "
 "paramètres à passer au noyau durant la phase de démarrage."
 
-#: interfaces/boot.glade.in.h:21
+#: interfaces/boot.glade.in.h:22
 msgid "Click \"Forward\" to continue"
 msgstr "Cliquez sur « Suivant » pour continuer"
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:23
 msgid "Confirmation"
 msgstr "Confirmation"
 
 #. set window title
-#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
 #: src/boot/boot-druid.c:441
 msgid "Creating a new boot image"
 msgstr "Création d'une nouvelle entrée de démarrage"
 
-#: interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.in.h:25
+msgid "Don't ask me again"
+msgstr "Ne plus demander"
+
+#: interfaces/boot.glade.in.h:26
 msgid "Enable IDE SCSI emulation"
 msgstr "Activer l'émulation IDE SCSI"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:27
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -203,49 +226,57 @@ msgstr ""
 "Saisissez un nom pour l'image de démarrage, ainsi que le type de système "
 "d'exploitation utilisé."
 
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:40
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:43
 msgid "Finished"
 msgstr "Terminé"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1786
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
+#: src/network/connection.c:1849
 msgid "Manual"
 msgstr "Manuel"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Modifie les paramètres d'un système d'exploitation ou du noyau."
 
-#: interfaces/boot.glade.in.h:29
+#: interfaces/boot.glade.in.h:31
 msgid "Number of colors:"
 msgstr "Nombre de couleurs:"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:32
 msgid "Other parameters:"
 msgstr "Autres paramètres :"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "Password"
 msgstr "Mot de passe"
 
-#: interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.in.h:34
 msgid "Protect with password"
 msgstr "Protéger avec un mot de passe"
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "Resolution:"
 msgstr "Résolution :"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:36
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr ""
 "Délai (en secondes) avant de lancer le système d'exploitation par défaut"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:37
+msgid ""
+"Several bootloaders have been found in the system, please select which do "
+"you want to configure"
+msgstr ""
+"Plusieurs systèmes de démarrage ont été trouvés, veuillez sélectionner celui "
+"que vous désirez configurer"
+
+#: interfaces/boot.glade.in.h:38
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Déterminez la partition sur laquelle le système est installé."
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:39
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
@@ -253,7 +284,7 @@ msgstr ""
 "La nouvelle image de démarrage a été ajoutée. Veuillez cliquer sur "
 "« Appliquer » pour enregistrer vos modifications. "
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:40
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -261,55 +292,55 @@ msgstr ""
 "Cet assistant vous permet d'ajouter de manière simple et rapide de nouvelles "
 "entrées de démarrage (boot image) à votre sytstème."
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:41
 msgid "Use this dialog to modify kernel parameters."
 msgstr ""
 "Utilisez cette boîte de dialogue pour modifier les paramètres du noyau."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:42
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Utilisez cet outil pour définir les systèmes d'exploitation sur lesquels il "
 "est possible de démarrer."
 
-#: interfaces/boot.glade.in.h:40
+#: interfaces/boot.glade.in.h:43
 msgid "Video modes (only frame buffer)"
 msgstr "Modes vidéo (uniquement frame buffer)"
 
-#: interfaces/boot.glade.in.h:41 interfaces/network.glade.in.h:85
+#: interfaces/boot.glade.in.h:44
 msgid "_Add..."
 msgstr "A_jouter..."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:45
 msgid "_Device:"
 msgstr "_Partition :"
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:46
 msgid "_Edit"
 msgstr "_Éditer"
 
-#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Chemin de l'image _initrd :"
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:48
 msgid "_Kernel image path:"
 msgstr "_Chemin de l'image du noyau :"
 
-#: interfaces/boot.glade.in.h:46
+#: interfaces/boot.glade.in.h:49
 msgid "_Name:"
 msgstr "_Nom :"
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:50
 msgid "_Operating system:"
 msgstr "_Système d'exploitation :"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:51
 msgid "_Parameters:"
 msgstr "_Paramètres :"
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:52
 msgid "_Root file system device:"
 msgstr "_Partition de la racine :"
 
@@ -379,7 +410,7 @@ msgstr ""
 "Utilisez cette fenêtre pour sélectionner l'ordinateur que vous souhaitez "
 "configurer"
 
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:107
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:110
 msgid "_Password:"
 msgstr "_Mot de passe :"
 
@@ -460,141 +491,160 @@ msgid "Account"
 msgstr "Compte"
 
 #: interfaces/network.glade.in.h:21
+msgid "Activate"
+msgstr "Activer"
+
+#: interfaces/network.glade.in.h:22
 msgid "Activate when the computer _starts"
 msgstr "_Activer lors du démarrage de l'ordinateur"
 
-#: interfaces/network.glade.in.h:22 src/network/network-druid.c:412
-msgid "Address configuration (Step 1 of 2)"
-msgstr "Configuration de l'adresse (étape 1 sur 2)"
+#: interfaces/network.glade.in.h:23
+msgid "Address configuration"
+msgstr "Configuration de l'adresse"
 
-#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:14
+#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
 msgid "Advanced"
 msgstr "Avancé"
 
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:25
 msgid "Advanced PPP connection tuning."
 msgstr "Paramètres PPP avancés."
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:26
 msgid "Aliases of other computers."
 msgstr "Détermine les alias pour les autres ordinateurs."
 
-#: interfaces/network.glade.in.h:26
+#: interfaces/network.glade.in.h:27
 msgid "Allow activation control for all _users"
 msgstr "Tous les _utilisateurs peuvent activer l'interface"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:28
 msgid "Auto"
 msgstr "Automatique"
 
-#: interfaces/network.glade.in.h:28 src/network/connection.c:1788
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1851
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:30
 msgid "Co_nfiguration:"
 msgstr "_Configuration :"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:31
 msgid "Connection _name:"
 msgstr "_Nom de la connexion :"
 
-#: interfaces/network.glade.in.h:31 src/network/network-druid.c:449
-#: src/network/network-druid.c:460
-msgid "Connection name (Step 3 of 3)"
-msgstr "Nom connexion (étape 3 sur 3)"
-
 #: interfaces/network.glade.in.h:32
+msgid "Connection name"
+msgstr "Nom de la connexion"
+
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "Type de connexion"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Connexions"
 
-#: interfaces/network.glade.in.h:34
+#. set window titles
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "Créer une nouvelle connection réseau"
 
-#: interfaces/network.glade.in.h:35 src/network/connection.c:1787
+#: interfaces/network.glade.in.h:36
+msgid "Current network profile:"
+msgstr "Profil réseau actuel :"
+
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1850
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "Nom de _domaine :"
+
+#: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
 msgstr "Passerelle par défaut :"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:41
 msgid "Device:"
 msgstr "Périphérique :"
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:42
 msgid "Domain / _Workgroup:"
 msgstr "Domaine / _Groupe de travail :"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:44
 msgid "General"
 msgstr "Général"
 
-#: interfaces/network.glade.in.h:42 src/network/main.c:214
+#: interfaces/network.glade.in.h:45
 msgid "Hosts"
 msgstr "Hôtes"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:46
 msgid "How the names of other computers are found."
 msgstr "Détermine la manière de trouver le nom des autres ordinateurs."
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:47
 msgid "How this computer is identified."
 msgstr "Détermine la manière dont cet ordinateur est identifié."
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:48
 msgid "How to access other computers."
 msgstr "Détermine la manière d'accéder aux autres ordinateurs."
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:49
 msgid "How to dial up to the Internet."
 msgstr "Détermine la manière de se connecter à Internet."
 
-#: interfaces/network.glade.in.h:47
-msgid "ISP phone number (Step 1 of 3)"
-msgstr "Numéro de téléphone ISP (étape 1 sur 3)"
+#: interfaces/network.glade.in.h:50
+msgid "ISP phone number"
+msgstr "_Numéro de téléphone"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:51
 msgid "Interface properties"
 msgstr "Paramètres de l'interface"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:52
+msgid ""
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr ""
+"Liste des domaines qui seront ajoutés s'il n'en existe aucun déjà configuré"
+
+#: interfaces/network.glade.in.h:54
 msgid "Modem _volume:"
 msgstr "Volume du _modem :"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:55
 msgid "Network name:"
 msgstr "Nom réseau :"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:56
 msgid "Network profiles"
 msgstr "Profils réseau"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:57
 msgid "Network profiles can be used to store different network configurations."
 msgstr ""
 "Les profils réseau peuvent être utilisés afin de sauvegarder différentes "
 "configuration réseau."
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:58
 msgid "Networking Settings"
 msgstr "Configuration réseau"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:59
 msgid "New network profile"
 msgstr "Nouveau profil réseau"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:60
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -602,7 +652,7 @@ msgstr ""
 "Ensuite, saisissez le compte utilisateur et le mot de passe qui vous ont été "
 "donnés par votre fournisseur d'accès."
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:61
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -610,35 +660,35 @@ msgstr ""
 "Saisissez l'adresse réseau qui sera attribuée à cette connexion, ainsi que "
 "l'addresse distante à laquelle elle sera reliée."
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:62
 msgid "Now, please enter the address that this network device will have."
 msgstr "Saisissez l'adresse réseau qui sera attribuée à cette connexion."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:63
 msgid "Now, please give this connection a name."
 msgstr "Donnez un nom à cette connexion."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:64
 msgid "Number to _access an external line:"
 msgstr "Numéro pour _accéder à une ligne extérieur :"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:65
 msgid "Number to get to an _external line:"
 msgstr "Numéro pour _accéder à une ligne extérieur :"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:66
 msgid "PPPD _options:"
 msgstr "_Options PPPD :"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:67
 msgid "Pa_ssword (confirm):"
 msgstr "_Mot de passe (confirmation) :"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:68
 msgid "Phone _number:"
 msgstr "_Numéro de téléphone :"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:69
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
@@ -646,7 +696,7 @@ msgstr ""
 "Veuillez saisir le numéro de téléphone qui vous a été fourni par votre "
 "fournisseur d'accès afin de vous connecter à Internet. "
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:70
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
@@ -654,41 +704,47 @@ msgstr ""
 "Veuillez sélectionner le réseau sans fil que vous désirez configurer et "
 "attribuer lui un nom"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:71
 msgid "Please, give this network profile a name and a description."
 msgstr "Veuillez donner un nom et une description à ce profil réseau."
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:72
 msgid "Please, select which type of connection you would like to add."
 msgstr "Veuillez sélectionner le type de connexion que vous désirez ajouter."
 
-#: interfaces/network.glade.in.h:69 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:73 interfaces/users.glade.in.h:38
 msgid "Profile _name:"
 msgstr "_Nom du profil :"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:74
 msgid "Pulses"
 msgstr "Impulsions"
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:75
 msgid "Se_condary:"
 msgstr "_Secondaire :"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:76
 msgid "Set _DNS servers manually"
 msgstr "Renseigner le D_NS manuellement"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:77
 msgid "Set modem as default _route to internet"
 msgstr "Définir le modem comme _route par défaut vers Internet"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:78
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
 msgstr "Cet assistant vous aidera à configurer une nouvelle connexion réseau."
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:80
+msgid ""
+"This is the list of IP addresses that the system will use as name servers"
+msgstr ""
+"Liste des adresses IP qui seront utilisés par le système comme serveur de nom"
+
+#: interfaces/network.glade.in.h:81
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -696,35 +752,35 @@ msgstr ""
 "Cliquez sur « Suivant » pour continuer à configurer votre connexion. Pour "
 "quitter cliquez sur « Annuler »."
 
-#: interfaces/network.glade.in.h:77
+#: interfaces/network.glade.in.h:82
 msgid "Tones"
 msgstr "Fréquence"
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:83
 msgid "Use \"Auto\" if unsure."
 msgstr "Utiliser « Automatique » si vous ne savez pas."
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:84
 msgid "Use this dialog for setting the configuration for this interface"
 msgstr "Configurez les paramètres de l'interface"
 
-#: interfaces/network.glade.in.h:80
-msgid "Username and password (Step 2 of 3)"
-msgstr "Nom et mot de passe (étape 2 sur 3)"
+#: interfaces/network.glade.in.h:85
+msgid "Username and password"
+msgstr "Nom et mot de passe"
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:86
 msgid "WI_NS server:"
 msgstr "Serveur _WINS :"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:87
 msgid "Wireless device:"
 msgstr "Périphérique réseau sans fil :"
 
-#: interfaces/network.glade.in.h:83
-msgid "Wireless settings (Step 1 of 3)"
-msgstr "Paramètres du réseau sans fil (étape 1 sur 3)"
+#: interfaces/network.glade.in.h:88
+msgid "Wireless settings"
+msgstr "Paramètres du réseau sans fil"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:89
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
@@ -732,135 +788,131 @@ msgstr ""
 "Vous êtes sur le point de créer une nouvelle conexion réseau. Veuillez "
 "cliquer sur « Appliquer » pour enregistrer vos modifications."
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:90
 msgid "_Autodetect"
 msgstr "_Autodétecter"
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:91
 msgid "_Comment:"
 msgstr "_Commentaire :"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:92
 msgid "_Configuration:"
 msgstr "_Configuration :"
 
-#: interfaces/network.glade.in.h:89
-msgid "_Configure"
-msgstr "_Configurer"
+#: interfaces/network.glade.in.h:93
+msgid "_Deactivate"
+msgstr "_Désactiver"
 
-#: interfaces/network.glade.in.h:90 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
 msgid "_Delete"
 msgstr "_Supprimer"
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:95
 msgid "_Description:"
 msgstr "_Description :"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:96
 msgid "_Dial type:"
 msgstr "Type de _composition :"
 
-#: interfaces/network.glade.in.h:93
-msgid "_Domain name:"
-msgstr "Nom de _domaine :"
-
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:97
 msgid "_Enable Windows networking"
 msgstr "_Accepte les réseaux Windows"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:98
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:99
 msgid "_Gateway address:"
 msgstr "_Passerelle :"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:100
 msgid "_Hostname:"
 msgstr "_Hôte:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:101
 msgid "_IP address:"
 msgstr "Adresse _IP :"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:102
 msgid "_IR LAN"
 msgstr "Liaison _infrarouge"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:103
 msgid "_Local IP address:"
 msgstr "Adresse IP _locale :"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:104
 msgid "_Local IP:"
 msgstr "IP _locale :"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:105
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:106
 msgid "_Modem port:"
 msgstr "Port du _modem :"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:107
 msgid "_Network Profiles"
 msgstr "_Profils réseau"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:108
 msgid "_Network name:"
 msgstr "_Nom réseau :"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:109
 msgid "_Parallel Line"
 msgstr "_Port parallèle"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:111
 msgid "_Phone number:"
 msgstr "_Numéro de téléphone :"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:112
 msgid "_Primary:"
 msgstr "_Primaire :"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:113
 msgid "_Remote IP address:"
 msgstr "Adresse IP _distante :"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:114
 msgid "_Remote IP:"
 msgstr "IP _distante :"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:115
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Re-essayer si la connexion échoue ou s'arrête brutalement"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:116
 msgid "_Save Current"
 msgstr "_Enregistrer la configuration courante"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:117
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Démarrer PPP dès que le modem se connecte"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:118
 msgid "_Subnet mask:"
 msgstr "Masque de _sous-réseau :"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:119
 msgid "_Update DNS when this connection becomes active"
 msgstr "_Mettre à jour le DNS à l'activation de la connexion"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:120
 msgid "_Use remote IP as default gateway"
 msgstr "_Utiliser l'adresse IP distante comme passerelle par défaut"
 
-#: interfaces/network.glade.in.h:118 interfaces/users.glade.in.h:66
+#: interfaces/network.glade.in.h:121 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "_Utilisateur :"
 
-#: interfaces/network.glade.in.h:119
+#: interfaces/network.glade.in.h:122
 msgid "_Wireless"
 msgstr "Réseau sans _fil"
 
@@ -885,24 +937,32 @@ msgid "Description:"
 msgstr "Description:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr "Paramètres :"
-
-#: interfaces/services.glade.in.h:7
-msgid "Priority:"
-msgstr "Priorité :"
-
-#: interfaces/services.glade.in.h:8
 msgid "Service _Properties"
 msgstr "_Détail service"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:7
 msgid "Service:"
 msgstr "Service :"
 
-#: interfaces/services.glade.in.h:10
+#: interfaces/services.glade.in.h:8
+msgid "Status:"
+msgstr "État :"
+
+#: interfaces/services.glade.in.h:9
 msgid "Use this tool to specify which services to run"
 msgstr "Utilisez cet outil pour spécifier les services à démarrer"
+
+#: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "_Ordonner la liste selon l'ordre de démarrage"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Start"
+msgstr "_Démarrer"
+
+#: interfaces/services.glade.in.h:12
+msgid "_Startup sequence:"
+msgstr "_Ordre de démarrage :"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1182,7 +1242,7 @@ msgstr "_Générer un mot de passe aléatoire"
 
 #: interfaces/users.glade.in.h:58
 msgid "_Home directory:"
-msgstr "Répertoire _personnel :"
+msgstr "Dossier _personnel :"
 
 #: interfaces/users.glade.in.h:59
 msgid "_Home phone:"
@@ -1197,26 +1257,22 @@ msgid "_Profile:"
 msgstr "_Profil :"
 
 #: interfaces/users.glade.in.h:62
-msgid "_Profiles..."
-msgstr "_Profils..."
-
-#: interfaces/users.glade.in.h:63
 msgid "_Real name:"
 msgstr "Nom _complet :"
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:63
 msgid "_Shell:"
 msgstr "_Shell :"
 
-#: interfaces/users.glade.in.h:65
+#: interfaces/users.glade.in.h:64
 msgid "_User's groups:"
 msgstr "Groupes _secondaires :"
 
-#: interfaces/users.glade.in.h:67
+#: interfaces/users.glade.in.h:66
 msgid "_Work phone:"
 msgstr "Téléphone _bureau :"
 
-#: interfaces/users.glade.in.h:68
+#: interfaces/users.glade.in.h:67
 msgid "profiles_table"
 msgstr "profiles_table"
 
@@ -1234,7 +1290,7 @@ msgstr "Création d'une nouvelle image de démarrage (%d sur %d)"
 msgid "Finished creating a new boot image"
 msgstr "Création d'une nouvelle image de démarrage terminée"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:466
+#: src/boot/boot-image.c:40 src/network/profile.c:468
 msgid "Unknown"
 msgstr "Inconnu"
 
@@ -1312,7 +1368,7 @@ msgstr "Éditeur d'entrée de démarrage"
 msgid "Boot Append Editor"
 msgstr "Éditeur d'entrée de démarrage"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1320,12 +1376,12 @@ msgstr ""
 "Sans une entrée de démarrage au minimun,\n"
 "votre système ne pourra pas démarrer.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Êtes vous sûr de vouloir supprimer « %s » ?"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -1333,10 +1389,6 @@ msgid ""
 msgstr ""
 "Le fichier « %s » est absent ou n'a pas pu être lu :\n"
 "La configuration apparaîtra vide."
-
-#: src/boot/main.c:73
-msgid "Boot Manager Settings"
-msgstr "Configuration du programme de démarrage"
 
 #: src/boot/table.c:41
 msgid "Name"
@@ -1346,7 +1398,7 @@ msgstr "Nom"
 msgid "Default"
 msgstr "Défaut"
 
-#: src/boot/table.c:43 src/network/connection.c:479
+#: src/boot/table.c:43 src/network/connection.c:485
 msgid "Type"
 msgstr "Type"
 
@@ -1354,7 +1406,7 @@ msgstr "Type"
 msgid "Kernel Image"
 msgstr "Noyau"
 
-#: src/boot/table.c:45 src/network/connection.c:495
+#: src/boot/table.c:45 src/network/connection.c:501
 msgid "Device"
 msgstr "Périphérique"
 
@@ -1362,7 +1414,8 @@ msgstr "Périphérique"
 msgid "/_Add ..."
 msgstr "/A_jouter..."
 
-#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Propriétés"
 
@@ -1372,16 +1425,23 @@ msgid "/_Delete"
 msgstr "/_Supprimer"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "Impossible de se connecter à l'orfinateur."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "Le mot de passe est incorrect."
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr ""
+"Impossible de lancer « %s ». Vérifiez que vous avez les permissions pour le "
+"lancer."
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "Une erreur inattendue est survenue."
 
@@ -1398,7 +1458,7 @@ msgstr " Plus d'_options"
 msgid " Fewer _Options"
 msgstr " Moins d'_options"
 
-#: src/common/gst-dialog.c:504
+#: src/common/gst-dialog.c:507
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1406,21 +1466,21 @@ msgstr ""
 "Certains changements n'ont pas été enregistrés.\n"
 "Voulez vous les enregistrer maintenant ?"
 
-#: src/common/gst-dialog.c:621
+#: src/common/gst-dialog.c:624
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Erreur d'appel du signal « %s » dans le composant « %s »"
 
-#: src/common/gst-tool.c:820
+#: src/common/gst-tool.c:822
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Ignorer la directive %s..."
 
-#: src/common/gst-tool.c:951
+#: src/common/gst-tool.c:953
 msgid "Skipping actual save..."
 msgstr "Ignorer la sauvegarde..."
 
-#: src/common/gst-tool.c:1024
+#: src/common/gst-tool.c:1026
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1428,7 +1488,7 @@ msgstr ""
 "Une erreur s'est produite durant l'exécution du\n"
 "script de chargement de la configuration."
 
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1437,7 +1497,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Bienvenue dans cette version %s de "
 "développement des Outils système GNOME</span>"
 
-#: src/common/gst-tool.c:1508
+#: src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1451,61 +1511,35 @@ msgstr ""
 "avertissement effectué, nous vous remercions de tester cette version des "
 "Outils système GNOME et de nous reporter les bugs rencontrés."
 
-#: src/common/gst-tool.c:1529
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Attention"
 
-#: src/common/gst-tool.c:1549
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Ne plus afficher ce message"
 
-#: src/common/gst-tool.c:1623
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "Outils système GNOME"
 
-#: src/common/gst-ui.c:396
+#: src/common/gst-ui.c:389
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr ""
 "Veuillez redémarrez votre session GNOME afin de prendre en compte ces "
 "changements."
 
-#: src/network/callbacks.c:116 src/services/table.c:55
-msgid "Active"
-msgstr "Active"
-
-#: src/network/callbacks.c:119
-msgid "Activating"
-msgstr "Activation"
-
-#: src/network/callbacks.c:130
-msgid "Inactive"
-msgstr "Inactive"
-
-#: src/network/callbacks.c:133
-msgid "Deactivating"
-msgstr "Désactivation"
-
-#: src/network/callbacks.c:455
+#: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Supprimer la connexion %s: « %s » ?"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:367
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Supprimer la connexion %s ?"
 
-#: src/network/callbacks.c:523
-#, c-format
-msgid "Activating connection ``%s.''"
-msgstr "Activation de la connexion « %s »."
-
-#: src/network/callbacks.c:561
-#, c-format
-msgid "Deactivating connection ``%s.''"
-msgstr "Désactivation de la connexion « %s »."
-
-#: src/network/callbacks.c:600
+#: src/network/callbacks.c:463
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1513,11 +1547,11 @@ msgstr ""
 "Vous n'avez pas de support SMB installé. Veuillez installer le support SMB "
 "afin de permettre l'accès à des réseaux Windows."
 
-#: src/network/callbacks.c:603
+#: src/network/callbacks.c:466
 msgid "SMB support missing."
 msgstr "Support SMB manquant."
 
-#: src/network/callbacks.c:654
+#: src/network/callbacks.c:522
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1525,7 +1559,7 @@ msgstr ""
 "Le nom de l'hôte a changé. Ceci vous empèchera de lancer de nouvelles "
 "applications, et vous obligera à vous reconnecter. Continuer quand même ?"
 
-#: src/network/callbacks.c:702
+#: src/network/callbacks.c:570
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1533,7 +1567,7 @@ msgstr ""
 "wvdial n'a pas été trouvé sur votre système. Vous devez installer wvdial, "
 "sans quoi la connexion PPP (modem) ne pourra pas être activée."
 
-#: src/network/callbacks.c:729
+#: src/network/callbacks.c:597
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1542,7 +1576,7 @@ msgstr ""
 "sans quoi la connexion PPP (modem) ne pourra être activée. Continuer quand "
 "même ?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:624
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1550,7 +1584,7 @@ msgstr ""
 "La passerelle par défaut n'est pas active. Ceci vous empêchera de vous "
 "connecter à Internet. Continuer quand même ?"
 
-#: src/network/callbacks.c:811
+#: src/network/callbacks.c:679
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1559,7 +1593,7 @@ msgstr ""
 "compléter les informations de la passerelle, ou choisir une autre passerelle "
 "par défaut."
 
-#: src/network/callbacks.c:857
+#: src/network/callbacks.c:725
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1569,17 +1603,17 @@ msgstr ""
 "connexions n'apparaîtront pas correctement. Veuillez installer le programme "
 "redhat-config-network pour résoudre ce problème."
 
-#: src/network/callbacks.c:894
+#: src/network/callbacks.c:762
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Voulez-vous activer l'interface %s ?"
 
-#: src/network/callbacks.c:904
+#: src/network/callbacks.c:772
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Voulez-vous désactiver l'interface %s ?"
 
-#: src/network/callbacks.c:989
+#: src/network/callbacks.c:859
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1587,19 +1621,19 @@ msgstr ""
 "Impossible de détecter le modem de manière automatique. Vérifiez qu'il "
 "estcorrectement branché et qu'il n'est pas occupé"
 
-#: src/network/callbacks.c:1041
+#: src/network/callbacks.c:911
 msgid "Silent"
 msgstr "Silencieux"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:913
 msgid "Low"
 msgstr "Faible"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:915
 msgid "Medium"
 msgstr "Moyen"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:917
 msgid "Loud"
 msgstr "Fort"
 
@@ -1617,7 +1651,7 @@ msgstr "Liaison par onde radio"
 
 #: src/network/connection.c:48
 msgid "Modem or transfer cable"
-msgstr "Modem ou cable de transfert"
+msgstr "Modem ou câble de transfert"
 
 #: src/network/connection.c:49
 msgid "Parallel line"
@@ -1629,7 +1663,7 @@ msgstr "LAN infrarouge"
 
 #: src/network/connection.c:51
 msgid "Loopback interface"
-msgstr "Interface locale"
+msgstr "Interface de bouclage"
 
 #: src/network/connection.c:52
 msgid "Unknown interface type"
@@ -1639,15 +1673,15 @@ msgstr "Type d'interface inconnu"
 msgid "/_Configure"
 msgstr "/_Configurer"
 
-#: src/network/connection.c:507
+#: src/network/connection.c:513
 msgid "Status"
 msgstr "État"
 
-#: src/network/connection.c:516 src/network/profiles-table.c:62
+#: src/network/connection.c:522 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Description"
 
-#: src/network/connection.c:1659
+#: src/network/connection.c:1713
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1656,7 +1690,7 @@ msgstr ""
 "interface. Veuillez saisir des adresses IP valides dans ces champs pour "
 "continuer."
 
-#: src/network/connection.c:1666
+#: src/network/connection.c:1720
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1665,7 +1699,7 @@ msgstr ""
 "interface. Veuillez saisir des adresses IP valides dans ces champs pour "
 "continuer."
 
-#: src/network/connection.c:1672
+#: src/network/connection.c:1726
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1675,10 +1709,30 @@ msgstr ""
 "mais vous n'avez pas saisi l'addresse IP du DNS primaire. Veuillez saisir "
 "une adresse IP ou décocher l'option de saisie manuelle du DNS."
 
-#: src/network/connection.c:2028
+#: src/network/connection.c:1732
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr ""
+"Le périphérique modem devant être utilisé lors de la connection n'a pas été "
+"renseigné. Veuillez le saisir ou utiliser l'auto-détection pour continuer."
+
+#: src/network/connection.c:1737
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr ""
+"Le numéro de téléphone devant être utilisé lors de la connection n'a pas été "
+"renseigné. Veuillez le saisir pour continuer."
+
+#: src/network/connection.c:2085
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "L'interface %s n'existe pas."
+
+#: src/network/connection.c:2087
+msgid " The loopback interface cannot be configured."
+msgstr " L'interface de bouclage ne peut être configurée."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1688,49 +1742,50 @@ msgstr "Adresse IP"
 msgid "Aliases"
 msgstr "Synonymes"
 
-#: src/network/main.c:254
+#: src/network/main.c:190
 msgid "Run the connection assistant."
 msgstr "Lancer l'assistant de connexion."
 
-#: src/network/main.c:255
+#: src/network/main.c:191
 msgid "Run the PPP connection assistant."
 msgstr "Lancer l'assistant de connexion PPP."
 
-#: src/network/main.c:256
+#: src/network/main.c:192
 msgid "Run the ethernet connection assistant."
 msgstr "Lancer l'assistant de connexion ethernet."
 
-#: src/network/main.c:257
+#: src/network/main.c:193
 msgid "Run the wlan connection assistant."
 msgstr "Lancer l'assistant de connexion wlan."
 
-#: src/network/main.c:258
+#: src/network/main.c:194
 msgid "Run the parallel port connection assistant."
 msgstr "Lancer l'assistant de connexion au port parallèle."
 
-#: src/network/main.c:259
+#: src/network/main.c:195
 msgid "Run the irlan connection assistant."
 msgstr "Lancer l'assistant de connexion radio."
 
-#: src/network/main.c:260
+#: src/network/main.c:196
 msgid "Configure a network interface"
 msgstr "Configurer une interface réseau"
 
-#: src/network/main.c:260
+#: src/network/main.c:196
 msgid "interface"
 msgstr "interface"
 
-#: src/network/main.c:267
+#: src/network/main.c:203
 msgid "Network Settings"
 msgstr "Configuration du réseau"
 
-#: src/network/network-druid.c:425
-msgid "Address configuration (Step 2 of 3)"
-msgstr "Configuration de l'adresse (étape 2 sur 3)"
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Création d'une nouvelle connection réseau (%d·sur·%d)"
 
-#: src/network/network-druid.c:446
-msgid "Connection name (Step 2 of 2)"
-msgstr "Nom connexion (étape 2 sur 2)"
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "Création d'une nouvelle connection réseau terminée"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -1749,16 +1804,28 @@ msgstr "Voulez-vous réellement supprimer le profil %s ?"
 msgid "Profile name"
 msgstr "Nom du profil"
 
-#: src/services/callbacks.c:45
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "Aucune description disponible."
 
-#: src/services/callbacks.c:301
+#: src/services/callbacks.c:250
+msgid "Running"
+msgstr "En cours"
+
+#: src/services/callbacks.c:254
+msgid "Stopped"
+msgstr "Arrêté"
+
+#: src/services/callbacks.c:259
+msgid "Could not get info"
+msgstr "Impossible de trouver le composant : %s"
+
+#: src/services/callbacks.c:325
 #, c-format
 msgid "Settings for service %s"
 msgstr "Paramètres du service %s"
 
-#: src/services/main.c:62
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "Réglages des services"
 
@@ -1770,7 +1837,11 @@ msgstr "Configurer les services à lancer au démarrage du système"
 msgid "Services"
 msgstr "Services"
 
-#: src/services/table.c:65
+#: src/services/table.c:79
+msgid "Active"
+msgstr "Actif"
+
+#: src/services/table.c:88
 msgid "Service"
 msgstr "Service"
 
@@ -1778,11 +1849,11 @@ msgstr "Service"
 msgid "Time Zone"
 msgstr "Fuseau horaire"
 
-#: src/time/main.c:427
+#: src/time/main.c:423
 msgid "Time Servers"
 msgstr "Serveurs de temps"
 
-#: src/time/main.c:505
+#: src/time/main.c:501
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1790,7 +1861,7 @@ msgstr ""
 "Vous n'avez pas installé le support NTP. Veuillez l'installer afin de "
 "pouvoir synchroniser l'horloge de votre système avec un autre serveur."
 
-#: src/time/main.c:812
+#: src/time/main.c:808
 msgid "Time and Date Settings"
 msgstr "Configuration de la date et de l'heure"
 
@@ -1802,11 +1873,11 @@ msgstr "Change la date, l'heure et le fuseau."
 msgid "Time and Date"
 msgstr "Date et heure"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "Créer un nouveau profil"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Paramètres du profil %s"
@@ -1861,23 +1932,23 @@ msgstr "Groupe"
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:122
+#: src/users/main.c:120
 msgid "User name contains"
 msgstr "Le nom de l'utilisateur contient"
 
-#: src/users/main.c:123
+#: src/users/main.c:121
 msgid "User ID is"
 msgstr "l'ID de l'utilisateur est"
 
-#: src/users/main.c:124
+#: src/users/main.c:122
 msgid "Group name contains"
 msgstr "Le nom du groupe contient"
 
-#: src/users/main.c:125
+#: src/users/main.c:123
 msgid "User GID is"
 msgstr "Le GID de l'utilisateur est"
 
-#: src/users/main.c:316 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Utilisateurs et groupes"
 
@@ -1900,7 +1971,7 @@ msgstr "Le profil doit avoir un nom"
 
 #: src/users/profile-settings.c:134
 msgid "The profile must have a default home"
-msgstr "Le profil doit avoir un répertoire par défaut"
+msgstr "Le profil doit avoir un dossier personnel par défaut"
 
 #: src/users/profile-settings.c:139 src/users/profile-settings.c:144
 msgid "The profile must have a default shell"
@@ -1999,19 +2070,19 @@ msgstr "Charactère « %c » invalide dans le commentaire."
 
 #: src/users/user-settings.c:423
 msgid "Home directory must not be empty."
-msgstr "Le répertoire personnel ne peut pas être vide."
+msgstr "Le dossier personnel ne peut pas être vide."
 
 #: src/users/user-settings.c:426
 msgid "Please enter full path for home directory."
-msgstr "Le chemin du répertoire personnel doit être un chemin absolu."
+msgstr "Veuillez saisir le chemin d'accès complet au dossier personnel."
 
 #: src/users/user-settings.c:429
 msgid "root home shouldn't be modified."
-msgstr "Le répertoire racine root n'a pas pu être modifié."
+msgstr "Le dossier personnel de root ne devrait pas être modifié."
 
 #: src/users/user-settings.c:459
 msgid "root uid shouldn't be modified."
-msgstr "L'identifiant root (uid) n'a pas pu être modifié."
+msgstr "L'identifiant (uid) de root ne devrait pas être modifié."
 
 #: src/users/user-settings.c:461
 msgid "Such user id already exists."
@@ -2037,7 +2108,7 @@ msgstr "Utilisateur"
 
 #: src/users/users-table.c:47
 msgid "Home"
-msgstr "Rep. perso"
+msgstr "Dossier personnel"
 
 #: src/users/users-table.c:48
 msgid "User details"
@@ -2054,630 +2125,3 @@ msgstr "Shell"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Ajouter ou supprimer des utilisateurs et groupes"
-
-#~ msgid "Boot Image Assistant"
-#~ msgstr "Assisant de création d'entrée de démarrage"
-
-#~ msgid "Image Settings (Step 1 of 2)"
-#~ msgstr "Paramètres de l'image (étape 1 sur 2)"
-
-#~ msgid "Image Settings (Step 2 of 2)"
-#~ msgstr "Paramètres de l'image (étape 2 sur 2)"
-
-#~ msgid "Other Operating System (Step 2 of 2)"
-#~ msgstr "Paramétres de l'entrée (étape 2 sur 2)"
-
-#~ msgid ""
-#~ "First, please enter the phone number you use to connect to the internet. "
-#~ "This number is provided by your ISP. "
-#~ msgstr ""
-#~ "Tout d'abord, veuillez saisir le numéro de téléphone qui vous a été "
-#~ "fourni par votre fournisseur d'accès afin de vous connecter à Internet. "
-
-#~ msgid ""
-#~ "How the IP address for this connection\n"
-#~ "is determined."
-#~ msgstr ""
-#~ "Détermine la manière d'obtenir \n"
-#~ "l'adresse IP pour cette connexion."
-
-#~ msgid ""
-#~ "How the IP addresses for this connection \n"
-#~ "are determined."
-#~ msgstr ""
-#~ "Détermine la manière d'obtenir les \n"
-#~ "adresses IP pour cette connexion."
-
-#~ msgid ""
-#~ "Now, please give this account a name. This name will be used to identify "
-#~ "the account."
-#~ msgstr ""
-#~ "Enfin, donnez un nom à cette connexion. Ce nom permettra par la suite "
-#~ "d'identifier la connexion."
-
-#~ msgid ""
-#~ "Select which type of connection\n"
-#~ "you would like to add."
-#~ msgstr ""
-#~ "Sélectionner le type de connexion\n"
-#~ "que vous désirez ajouter."
-
-#~ msgid ""
-#~ "To continue configuring your account, click \"Next\". To quit, click "
-#~ "\"Cancel\".\n"
-#~ msgstr ""
-#~ "Cliquez sur « Suivant » pour continuer à configurer votre compte. Pour "
-#~ "quitter cliquez sur « Annuler ».\n"
-
-#~ msgid ""
-#~ "Use the comment to identify the interface in the future. Activation "
-#~ "management lets you set who will activate connections, and when."
-#~ msgstr ""
-#~ "Permet de donner un nom à la connexion ainsi que la manière de l'activer "
-#~ "par la suite."
-
-#~ msgid ""
-#~ "Welcome to the Internet Connection druid. \n"
-#~ "\n"
-#~ "This druid will help you configure a new \n"
-#~ "Internet account. \n"
-#~ "\n"
-#~ "Before you begin, you must have a modem and\n"
-#~ "an Internet Service Provider (ISP). Please ask your \n"
-#~ "ISP for any pertinent information about your connection.\n"
-#~ "\n"
-#~ "Click the \"Next\" button to begin."
-#~ msgstr ""
-#~ "Bienvenue dans l'assistant de connexion à Internet. \n"
-#~ "\n"
-#~ "Cet assistant vous aidera à configurer une nouvelle \n"
-#~ "connexion Internet. \n"
-#~ "\n"
-#~ "Avant de démarrer, vous devez posséder un modem et un fournisseur \n"
-#~ "d'accès à Internet (FAI) qui doit vous avoir fourni des informations \n"
-#~ "telles qu'un numéro de téléphone, un identifiant et un mot de passe.\n"
-#~ "\n"
-#~ "Cliquez sur le bouton « Suivant » pour commencer."
-
-#~ msgid ""
-#~ "Welcome to the Network Connection druid. \n"
-#~ "\n"
-#~ "This druid will help you configure a new \n"
-#~ "network connection. \n"
-#~ "\n"
-#~ "Click the \"Next\" button to begin."
-#~ msgstr ""
-#~ "Bienvenue dans l'assistant de connexion à Internet. \n"
-#~ "\n"
-#~ "Cet assistant vous aidera à configurer une nouvelle \n"
-#~ "connexion Internet. \n"
-#~ "\n"
-#~ "Cliquez sur le bouton « Suivant » pour commencer."
-
-#~ msgid ""
-#~ "Change the settings and options for the\n"
-#~ "selected user or group, like a users password\n"
-#~ "or a groups name or members."
-#~ msgstr ""
-#~ "Changer la configuration et les options pour l'utilisateur\n"
-#~ "ou le groupe sélectionné, comme par exemple un mot de passe\n"
-#~ "un nom de groupe ou les membres d'un groupe."
-
-#~ msgid "Click \"Next\" to continue"
-#~ msgstr "Cliquez sur « Suivant » pour continuer"
-
-#~ msgid ""
-#~ "Congratulations, the new user has been created.\n"
-#~ "Please click \"Finish\" to save your changes. "
-#~ msgstr ""
-#~ "Le nouvel utilisateur a été créé.\n"
-#~ "Veuillez cliquer sur « Terminer » pour enregistrer vos modifications. "
-
-#~ msgid "Delete"
-#~ msgstr "Supprimer"
-
-#~ msgid ""
-#~ "EXPERIMENTAL NIS support.\n"
-#~ "It's only available if You have NIS\n"
-#~ "and when You click on \"More Settings\"."
-#~ msgstr ""
-#~ "Support NIS EXPERIMENTAL.\n"
-#~ "Ce support est disponible si vous avez NIS\n"
-#~ "et si vous cliquez sur « Plus d'options »."
-
-#~ msgid ""
-#~ "On this page, you can select scripts and files to be copied from your "
-#~ "account into new users' accounts."
-#~ msgstr ""
-#~ "Vous pouvez définir ici les fichiers à copier depuis votre compte vers "
-#~ "les nouveaux comptes utilisateurs."
-
-#~ msgid "Please enter a password for the new user. "
-#~ msgstr "Veuillez saisir un mot de passe pour l'utilisateur. "
-
-#~ msgid ""
-#~ "Please enter a username for the new user in the space below. Optionally, "
-#~ "you can fill in more information to identify the user. "
-#~ msgstr ""
-#~ "Veuillez saisir un nom pour l'utilisateur dans les champs ci-dessous. "
-#~ "Vous pouvez également saisir des informations complémentaires comme son "
-#~ "numéro de téléphone. "
-
-#~ msgid ""
-#~ "This druid is designed to help you quickly \n"
-#~ "and easily add new users to your system.\n"
-#~ "\n"
-#~ "To begin, click \"Next\". "
-#~ msgstr ""
-#~ "Cet assistant vous aidera à ajouter de manière simple \n"
-#~ "et rapide un nouvel utilisateur sur votre système.\n"
-#~ "\n"
-#~ "Cliquez sur « Suivant » pour commencer."
-
-#~ msgid ""
-#~ "The phone number must be composed of\n"
-#~ "only numbers or commas (,)."
-#~ msgstr ""
-#~ "Le numéro de téléphone doit uniquement être\n"
-#~ "composé de chiffre et de séparateurs."
-
-#~ msgid ""
-#~ "The password and its confirmation\n"
-#~ "must be the same."
-#~ msgstr ""
-#~ "Le mot de passe et sa confirmation\n"
-#~ "doivent être identiques."
-
-#~ msgid ""
-#~ "If you are specifying a password,\n"
-#~ "you should specify a user name."
-#~ msgstr ""
-#~ "Si vous saisissez un mot de passe, vous\n"
-#~ "devez également saisir un utilisateur."
-
-#~ msgid ""
-#~ "Please set a name for this account,\n"
-#~ "using only space, letters and numbers."
-#~ msgstr ""
-#~ "Veuillez donner un nom à cette connexion, nom composé\n"
-#~ "uniquement de lettres, de chiffres et d'espaces."
-
-#~ msgid "Disks & partitions"
-#~ msgstr "Disques et partitions"
-
-#~ msgid ""
-#~ "Disks are divided into several pieces, called partitions. Each partition "
-#~ "is dedicated for a specific storage task, such as virtual memory or home "
-#~ "directories for your users."
-#~ msgstr ""
-#~ "Les disques durs sont divisés en espaces appelés partitions. Les "
-#~ "partitions permettent de conserver les données systèmes, les données de "
-#~ "vos utilisateurs ainsi que les données temporaires."
-
-#~ msgid "Ext2 (Linux)"
-#~ msgstr "Ext2 (Linux)"
-
-#~ msgid "FAT (DOS)"
-#~ msgstr "FAT (DOS)"
-
-#~ msgid "FAT32 (Windows 98 and newer)"
-#~ msgstr "FAT32 (Windows 98 et plus récent)"
-
-#~ msgid "Mount point:"
-#~ msgstr "Point de montage :"
-
-#~ msgid "Mount this partition"
-#~ msgstr "Monter cette partition"
-
-#~ msgid "NTFS (Windows NT & 2000)"
-#~ msgstr "NTFS (Windows NT et 2000)"
-
-#~ msgid "Open settings dialog for selected import"
-#~ msgstr "Modifie la configuration de la partirion sélectionnée"
-
-#~ msgid "Remember details of this partition"
-#~ msgstr "Se souvenir des détails de cette partition"
-
-#~ msgid "VFAT (Windows 95 and newer)"
-#~ msgstr "VFAT (Windows 95 et plus récent)"
-
-#~ msgid "reiserfs (Linux)"
-#~ msgstr "reiserfs (Linux)"
-
-#~ msgid "ufs (FreeBSD)"
-#~ msgstr "ufs (FreeBSD)"
-
-#~ msgid "Appearance"
-#~ msgstr "Apparence"
-
-#~ msgid "Monitor information"
-#~ msgstr "Information sur l'écran"
-
-#~ msgid "Narrower"
-#~ msgstr "Rétrécir"
-
-#~ msgid "Probe again"
-#~ msgstr "Détecter à nouveau"
-
-#~ msgid "Refresh rate:"
-#~ msgstr "Raffraîchir le taux:"
-
-#~ msgid "Resolution"
-#~ msgstr "Résolution"
-
-#~ msgid "Restart X"
-#~ msgstr "Re-démarrer X"
-
-#~ msgid "Right"
-#~ msgstr "Droite"
-
-#~ msgid "Shift my display:"
-#~ msgstr "Cadrer l'affichage :"
-
-#~ msgid "Shorter"
-#~ msgstr "Diminuer"
-
-#~ msgid "Stretch my display:"
-#~ msgstr "Ajuster l'affichage:"
-
-#~ msgid "Taller"
-#~ msgstr "Agrandir"
-
-#~ msgid "Test current setting"
-#~ msgstr "Tester la configuration"
-
-#~ msgid "Up"
-#~ msgstr "Haut"
-
-#~ msgid "Use this tool to configure your monitor."
-#~ msgstr "Permet de configurer votre écran"
-
-#~ msgid "Vendor:"
-#~ msgstr "Fabriquant:"
-
-#~ msgid "Wider"
-#~ msgstr "Elargir"
-
-#~ msgid "_Restore settings"
-#~ msgstr "_Restaurer la configuration"
-
-#~ msgid "Add font..."
-#~ msgstr "Ajouter police..."
-
-#~ msgid "Delete font"
-#~ msgstr "Supprimer police"
-
-#~ msgid "Font family"
-#~ msgstr "Police"
-
-#~ msgid "Font size:"
-#~ msgstr "Taille :"
-
-#~ msgid "Preview"
-#~ msgstr "Apperçu"
-
-#~ msgid "Select the fonts you want to install."
-#~ msgstr "Sélectionner les polices que vous désirez installer."
-
-#~ msgid ""
-#~ "A local network interface has been detected, but it's not active.\n"
-#~ "Would you like to activate it now?\n"
-#~ msgstr ""
-#~ "Une interface réseau locale a été détectée, mais elle est inactive.\n"
-#~ "Voulez vous l'activer ?\n"
-
-#~ msgid ""
-#~ "A previous DHCP configuration has been detected. \n"
-#~ "Do you want to keep this configuration?"
-#~ msgstr ""
-#~ "Une configuration DHCP précédenet a été détectée. \n"
-#~ "Voulez-vous la conserver ?"
-
-#~ msgid ""
-#~ "The Internet sharing tool allows you to share your Internet conection "
-#~ "with other computers on the network."
-#~ msgstr ""
-#~ "L'outil de partage Internet vous permet de partager vos connexions "
-#~ "Internet avec d'autres ordinateurs sur le réseau."
-
-#~ msgid ""
-#~ "Welcome to the Internet Sharing Configuration Druid.\n"
-#~ "\n"
-#~ "This druid will help you to configure and share\n"
-#~ "your Internet connection.\n"
-#~ "\n"
-#~ "You should have already installed and configured a local\n"
-#~ "network connection, such as an Ethernet or waveLAN\n"
-#~ "card, and an internet connection, such as a modem.\n"
-#~ "\n"
-#~ "If you haven't, you will be given the option to launch the\n"
-#~ "Network Tool to configure them before continuing."
-#~ msgstr ""
-#~ "Bienvenue dans l'assistant de configuration du partage Internet.\n"
-#~ "\n"
-#~ "Cet assistant vous aidera à configurer et partager votre connexion\n"
-#~ "Internet.\n"
-#~ "\n"
-#~ "Vous devez avoir dèjà installé et configuré une connexion réseau\n"
-#~ "locale, telle qu'une connexion par carte Ethernet ou par liaison\n"
-#~ "radio, et une connexion Internet comme un modem.\n"
-#~ "\n"
-#~ "Si vous n'avez pas de connexion réseau, vous aurez la possibilité de\n"
-#~ "lancer l'outil de configuration réseau avant de pouvoir continuer."
-
-#~ msgid ""
-#~ "Would you like to give the automatic network\n"
-#~ "address assignment service (DHCP)?\n"
-#~ msgstr ""
-#~ "Voulez vous utiliser le service DHCP d'assignation automatique\n"
-#~ "d'addresse IP pour le réseau ?\n"
-
-#~ msgid "Yes (recommended)."
-#~ msgstr "Oui (recommandé)."
-
-#~ msgid ""
-#~ "You already have an internet sharing configuration.\n"
-#~ "Do you want to keep it, or use the druid's defaults?\n"
-#~ msgstr ""
-#~ "Vous avez déjà configuré un partage Internet.\n"
-#~ "Voulez-vous le conserver ou utiliser le partage par défaut de "
-#~ "l'assistant ?\n"
-
-#~ msgid ""
-#~ "You don't have a DHCP server installed, or\n"
-#~ "some other related component is missing."
-#~ msgstr ""
-#~ "Vous n'avez pas installé de serveur DHCP, ou\n"
-#~ "bien quelques éléments associés sont manquants."
-
-#~ msgid ""
-#~ "Use this tool to manage all the different locations where you could "
-#~ "possibly want to use your stinking laptop."
-#~ msgstr ""
-#~ "Utilisez cet outil pour configurer les différents lieux dans lesquels "
-#~ "vous voulez utiliser votre ordinateur portable."
-
-#~ msgid "Settings for the selected alias"
-#~ msgstr "Configuration de l'alias sélectionné"
-
-#~ msgid "Use WINS server:"
-#~ msgstr "Utiliser un server WINS :"
-
-#~ msgid "Workgroup:"
-#~ msgstr "Groupe de travail :"
-
-#~ msgid "/dev/lp0 (LPT1)"
-#~ msgstr "/dev/lp0 (LPT1)"
-
-#~ msgid "/dev/lp1 (LPT2)"
-#~ msgstr "/dev/lp1 (LPT2)"
-
-#~ msgid "/dev/ttyS0 (COM1)"
-#~ msgstr "/dev/ttyS0 (COM1)"
-
-#~ msgid "/dev/ttyS1 (COM2)"
-#~ msgstr "/dev/ttyS1 (COM2)"
-
-#~ msgid "/dev/ttyS2 (COM3)"
-#~ msgstr "/dev/ttyS2 (COM3)"
-
-#~ msgid "/dev/ttyS3 (COM4)"
-#~ msgstr "/dev/ttyS3 (COM4)"
-
-#~ msgid "1200x1200"
-#~ msgstr "1200x1200"
-
-#~ msgid "1200x600"
-#~ msgstr "1200x600"
-
-#~ msgid "16 colors"
-#~ msgstr "16 couleurs"
-
-#~ msgid "256 colors"
-#~ msgstr "256 couleurs"
-
-#~ msgid "300x300"
-#~ msgstr "300x300"
-
-#~ msgid "400x400"
-#~ msgstr "400x400"
-
-#~ msgid "600x600"
-#~ msgstr "600x600"
-
-#~ msgid "A3"
-#~ msgstr "A3"
-
-#~ msgid "A4"
-#~ msgstr "A4"
-
-#~ msgid "Add Printer..."
-#~ msgstr "Ajouter une imprimante..."
-
-#~ msgid "Add a New Printer"
-#~ msgstr "Ajouter une nouvelle imprimante"
-
-#~ msgid "Connection"
-#~ msgstr "Connexion"
-
-#~ msgid ""
-#~ "Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
-#~ msgstr "Convertir les sauts de ligne PC en format Un*x."
-
-#~ msgid "Convert _Linefeeds"
-#~ msgstr "Convertir les _sauts de ligne"
-
-#~ msgid "Document Pages per Sheet"
-#~ msgstr "Nombre de page par feuille"
-
-#~ msgid "Driver"
-#~ msgstr "Pilote"
-
-#~ msgid "E_xplicitly Eject Last Page"
-#~ msgstr "_Ejecter la dernière page"
-
-#~ msgid "High Color"
-#~ msgstr "Couleurs haute"
-
-#~ msgid "Legal"
-#~ msgstr "Legal"
-
-#~ msgid "Letter"
-#~ msgstr "Letter"
-
-#~ msgid "Name of the printer."
-#~ msgstr "Nom que vous voulez donner à cette imprimante."
-
-#~ msgid "Name of the server the printer is connected to."
-#~ msgstr "Serveur d'impression sur lequel l'imprimante est connectée."
-
-#~ msgid "Name the server uses for the printer."
-#~ msgstr "Nom de l'imprimante sur le serveur d'impression."
-
-#~ msgid "Novell _Netware (NCP) Printer"
-#~ msgstr "Imprimante Novell _Netware (NCP)"
-
-#~ msgid "Number of colors to print in."
-#~ msgstr "Nombre de couleur à utiliser."
-
-#~ msgid "Options"
-#~ msgstr "Options"
-
-#~ msgid "P_aper Size:"
-#~ msgstr "_Format papier :"
-
-#~ msgid "P_ort Number:"
-#~ msgstr "Numéro de p_ort:"
-
-#~ msgid "Port number the server is listening to."
-#~ msgstr "Numéro de port du serveur d'impression."
-
-#~ msgid "Port the printer is connected to."
-#~ msgstr "Périphérique sur lequel l'imprimante est connectée."
-
-#~ msgid "Print one page per sheet."
-#~ msgstr "Imprimer une page par feuille."
-
-#~ msgid "Print resolution."
-#~ msgstr "Résolution de l'imprimante."
-
-#~ msgid "Printer Settings"
-#~ msgstr "Configuration d'imprimantes"
-
-#~ msgid "Printer connected to a port on your machine."
-#~ msgstr "Imprimante connecté directement sur votre ordinateur."
-
-#~ msgid "Printer listening directly for network connections."
-#~ msgstr "Imprimante utilisant directement le port réseau."
-
-#~ msgid "Printer shared on a Windows (SMB) network."
-#~ msgstr "Imprimante partagée sur une réseau Windows (SMB)."
-
-#~ msgid "Printer shared using the Novell Netware (NCP) protocol."
-#~ msgstr "Imprimante partagée utilisant le protocole Novel Netware (NCP)."
-
-#~ msgid "Printer shared using the Unix (lpd) print protocol."
-#~ msgstr "Imprimante partagée utilisant le protocole Unix (lpd)."
-
-#~ msgid "R_esolution:"
-#~ msgstr "R_ésolution :"
-
-#~ msgid "Remote UNIX (_lpd) Printer"
-#~ msgstr "Imprimante distante UNIX (_lpd)"
-
-#~ msgid "Remote _Windows (SMB) printer"
-#~ msgstr "Imprimante distante _Windows (SMB)"
-
-#~ msgid "SMB workgroup the server is in."
-#~ msgstr "Groupe SMB du serveur."
-
-#~ msgid "Scale pages down and print eight per sheet."
-#~ msgstr "Imprimer huit pages par feuille."
-
-#~ msgid "Scale pages down and print four per sheet."
-#~ msgstr "Imprimer quatre pages par feuille."
-
-#~ msgid "Scale pages down and print two per sheet."
-#~ msgstr "Imprimer deux pages par feuille."
-
-#~ msgid "Select the type of printer to add:"
-#~ msgstr "Sélectionner le type d'imprimante à ajouter:"
-
-#~ msgid "Send an EOF after the print job to help eject the last page."
-#~ msgstr ""
-#~ "Envoi la commande EOF après l'impression afin d'éjecter la dernière page."
-
-#~ msgid "Send text documents raw to the printer."
-#~ msgstr "Envoyer des lignes de textes à l'imprimante."
-
-#~ msgid "Settings..."
-#~ msgstr "Configuration..."
-
-#~ msgid "Size of the paper in the printer."
-#~ msgstr "Format du papier dans l'imprimante."
-
-#~ msgid "The password used to connect to the server."
-#~ msgstr "Mot de passe pour la connexion au serveur."
-
-#~ msgid ""
-#~ "This is the list of the configured printers available on the system. "
-#~ "Create new printers or edit existing printer settings with this dialog."
-#~ msgstr ""
-#~ "Liste des imprimantes configurées disponibles dans le système. Créez une "
-#~ "nouvelle imprimante ou éditez la configuration d'une imprimante existante."
-
-#~ msgid ""
-#~ "Use this dialog to create a new export, or to edit the settings of an "
-#~ "existing export."
-#~ msgstr ""
-#~ "Permet la création d'un nouveau répertoire partagé, ou l'édition d'un "
-#~ "partage existant."
-
-#~ msgid ""
-#~ "Use this dialog to create a new import, or to edit the settings of an "
-#~ "existing import."
-#~ msgstr ""
-#~ "Permet l'accès à un nouveau répertoire partagé, ou l'édition d'un partage "
-#~ "existant."
-
-#~ msgid ""
-#~ "Use this dialog to define the client patterns which determine who has "
-#~ "access to your NFS share. Client patterns are typically of the form "
-#~ "\"10.10.10.*\" or \" *.gnome.org\".  "
-#~ msgstr ""
-#~ "Permet de définir les catégories de clients qui peuvent accéder à votre "
-#~ "partage via NFS. Les catégories de clients se présentent sous la forme "
-#~ "\"10.10.10.*\" ou \" *.gnome.org\".  "
-
-#~ msgid ""
-#~ "The internet sharing tool allows you to share your internet conection "
-#~ "with other computers on the network."
-#~ msgstr ""
-#~ "L'outil de partage Internet vous permet de partager vos connexions "
-#~ "Internet avec d'autres ordinateurs sur le réseau."
-
-#~ msgid ""
-#~ "Welcome to the Internet Sharing Configuration Druid\n"
-#~ "\n"
-#~ "This druid will help you to configure \n"
-#~ "and share your internet connection.\n"
-#~ "\n"
-#~ "At least, you must have an installed and configured local\n"
-#~ "network interface, such as an ethernet or waveLAN card\n"
-#~ "and an internet connection, such as a modem."
-#~ msgstr ""
-#~ "Bienvenue dans l'assistant de configuration du partage Internet.\n"
-#~ "\n"
-#~ "Cet assistant vous aidera à configurer et partager votre connexion\n"
-#~ "Internet.\n"
-#~ "\n"
-#~ "Vous devez avoir dèjà installé et configuré une connexion réseau\n"
-#~ "locale, telle qu'une connexion par carte Ethernet ou par liaison\n"
-#~ "radio, et une connexion Internet comme un modem."
-
-#~ msgid ""
-#~ "A previous DHCP configuration has been detected. \n"
-#~ "Do you want to keep this configuration?\n"
-#~ msgstr ""
-#~ "Une précédente configuration DHCP a été détectée. \n"
-#~ "Voulez-vous la conserver ?\n"
