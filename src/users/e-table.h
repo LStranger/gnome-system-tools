@@ -29,6 +29,8 @@
 
 #include "user_group.h"
 
+BEGIN_GNOME_DECLS
+
 #define COLOR_NORMAL "black"
 
 enum {
@@ -78,6 +80,8 @@ void current_table_new_row (xmlNodePtr node, gint tbl);
 void set_active_table (guint tbl);
 
 gchar *user_value_group (xmlNodePtr user_node);
+
+END_GNOME_DECLS
 
 #endif /* E_TABLE_H */
 

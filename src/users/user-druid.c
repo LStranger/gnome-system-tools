@@ -26,112 +26,156 @@
 #include <ctype.h>
 
 #include "user-druid.h"
-#include "profile.h"
-#include "user-group-xml.h"
-#include "user_group.h"
+#include "user_settings.h"
 #include "passwd.h"
 
 extern XstTool *tool;
 
-static void
-druid_exit (UserSettings *us)
-{
-	gtk_widget_destroy (us->dialog);
-	gtk_object_unref (GTK_OBJECT (us->xml));
+static void user_druid_class_init (UserDruidClass *class);
+static void user_druid_finalize   (GtkObject *obj);
 
-	g_free (us->basic);
-	g_free (us->group);
-	g_free (us->pwd);
-	g_free (us);
+static GtkWindowClass *parent_class;
+
+GtkType
+user_druid_get_type (void)
+{
+	static GtkType type = 0;
+
+	if (!type) {
+		GtkTypeInfo type_info = {
+			"UserDruid",
+			sizeof (UserDruid),
+			sizeof (UserDruidClass),
+			(GtkClassInitFunc) user_druid_class_init,
+			(GtkObjectInitFunc) NULL,
+			(GtkArgSetFunc) NULL,
+			(GtkArgGetFunc) NULL
+		};
+
+		type = gtk_type_unique (gtk_window_get_type (), &type_info);
+	}
+
+	return type;
+}
+
+static void
+user_druid_class_init (UserDruidClass *class)
+{
+	GtkObjectClass *object_class;
+
+	object_class = (GtkObjectClass *) class;
+	parent_class = gtk_type_class (gtk_window_get_type ());
+
+	/* override methods */
+	object_class->finalize = user_druid_finalize;
+}
+
+static void
+user_druid_finalize (GtkObject *obj)
+{
+	UserDruid *druid = (UserDruid *) obj;
+
+	user_account_gui_destroy (druid->gui);
+        ((GtkObjectClass *)(parent_class))->finalize (obj);
+}
+
+
+static void
+druid_exit (UserDruid *druid)
+{
+	gtk_widget_destroy (GTK_WIDGET (druid));
 }
 
 static void
 druid_cancel (GtkWidget *w, gpointer data)
 {
-	druid_exit ((UserSettings *) data);
+	druid_exit ((UserDruid *) data);
 }
 
 /* Identity Page */
 static void
-identity_check (UserSettings *us)
+identity_check (UserDruid *druid)
 {
-	GnomeDruid *druid;
 	gchar *login;
 
-	druid = GNOME_DRUID (glade_xml_get_widget (us->xml, "user_druid_druid"));
-	login = gtk_entry_get_text (us->basic->name);
-	if (strlen (login) > 0 && check_user_login (GTK_WINDOW (us->dialog), us->node, login))
-		gnome_druid_set_buttons_sensitive (druid, TRUE, TRUE, TRUE);
+	login = gtk_entry_get_text (druid->gui->name);
+	if (strlen (login) > 0)
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE);
 	else
-		gnome_druid_set_buttons_sensitive (druid, TRUE, FALSE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE);
 }
 
 static void
 identity_changed (GtkWidget *widget, gpointer data)
 {
-	UserSettings *us = data;
+	UserDruid *druid = data;
 	
-	identity_check (us);
+	identity_check (druid);
 }
 
 static void
 identity_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-	UserSettings *us = data;
+	UserDruid *config = data;
 
-	gtk_widget_grab_focus (GTK_WIDGET (us->basic->name));
-	identity_check (us);
+	gtk_widget_grab_focus (GTK_WIDGET (config->gui->name));
+	identity_check (config);
 }
 
 static gboolean
 identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-	/* go to the next page */
-	return FALSE;
+	UserDruid *config = data;
+	gchar *login, *buf;
+
+	login = gtk_entry_get_text (config->gui->name);
+	if ((buf = check_user_login (config->gui->account->node, login))) {
+		user_account_gui_error (GTK_WINDOW (config->gui->top), buf);
+		return TRUE;
+	} else
+		return FALSE;
 }
 
 static void
 identity_login_activate (GtkWidget *w, gpointer data)
 {
-	UserSettings *us = data;
+	UserDruid *druid = data;
 
-	gtk_widget_grab_focus (GTK_WIDGET (us->basic->comment));
+	gtk_widget_grab_focus (GTK_WIDGET (druid->gui->comment));
 }
 
 /* Password Page */
 static void
-password_check (UserSettings *us)
+password_check (UserDruid *druid)
 {
-	GnomeDruid *druid;
 	gchar *pwd1, *pwd2;
 	gboolean quality;
 
-	druid = GNOME_DRUID (glade_xml_get_widget (us->xml, "user_druid_druid"));
-	pwd1 = gtk_entry_get_text (us->pwd->pwd1);
-	pwd2 = gtk_entry_get_text (us->pwd->pwd2);
-	quality = gtk_toggle_button_get_active (us->pwd->quality);
+	pwd1 = gtk_entry_get_text (druid->gui->pwd1);
+	pwd2 = gtk_entry_get_text (druid->gui->pwd2);
+	quality = gtk_toggle_button_get_active (druid->gui->quality);
 	
 	if (strlen (pwd1) > 0 && !strcmp (pwd1, pwd2))
-		gnome_druid_set_buttons_sensitive (druid, TRUE, TRUE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE);
 	else
-		gnome_druid_set_buttons_sensitive (druid, TRUE, FALSE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE);
 }
 
 static void
 password_changed (GtkWidget *widget, gpointer data)
 {
-	UserSettings *us = data;
+	UserDruid *druid = data;
 	
-	password_check (us);
+	password_check (druid);
 }
 
 static void
 password_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-	UserSettings *us = data;
+	UserDruid *config = data;
 
-	gtk_widget_grab_focus (glade_xml_get_widget (us->xml, "user_druid_pwd_entry1"));
-	password_check (us);
+	gtk_widget_grab_focus (GTK_WIDGET (config->gui->pwd1));
+	password_check (config);
 }
 
 static gboolean
@@ -139,11 +183,11 @@ password_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	gchar *pwd1, *pwd2;
 	gboolean quality;
-	UserSettings *us = data;
+	UserDruid *config = data;
 
-	pwd1 = gtk_entry_get_text (us->pwd->pwd1);
-	pwd2 = gtk_entry_get_text (us->pwd->pwd2);
-	quality = gtk_toggle_button_get_active (us->pwd->quality);
+	pwd1 = gtk_entry_get_text (config->gui->pwd1);
+	pwd2 = gtk_entry_get_text (config->gui->pwd2);
+	quality = gtk_toggle_button_get_active (config->gui->quality);
 	
 	if (strlen (pwd1) > 0 && passwd_check (NULL, pwd1, pwd2, quality))
 		return FALSE;
@@ -154,42 +198,44 @@ password_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 password_activate (GtkWidget *w, gpointer data)
 {
-	UserSettings *us = data;
+	UserDruid *config = data;
 
-	gtk_widget_grab_focus (GTK_WIDGET (us->pwd->pwd2));
+	gtk_widget_grab_focus (GTK_WIDGET (config->gui->pwd2));
 }
 
 /* Common stuff */
 static void
 druid_entry_activate (GtkWidget *w, gpointer data)
 {
-	GtkWidget *w0, *w1;
-	UserSettings *us = data;
+	GtkWidget *widget = NULL;
+	UserDruid *druid = data;
 	
-	w0 = glade_xml_get_widget (us->xml, "user_druid_druid");
-	w1 = NULL;
-	
-	if (GTK_WIDGET_MAPPED (GNOME_DRUID (w0)->next))
-		w1 = GNOME_DRUID (w0)->next;
-	if (GTK_WIDGET_MAPPED (GNOME_DRUID (w0)->finish))
-		w1 = GNOME_DRUID (w0)->finish;
+	if (GTK_WIDGET_MAPPED (druid->druid->next))
+		widget = druid->druid->next;
+	if (GTK_WIDGET_MAPPED (druid->druid->finish))
+		widget = druid->druid->finish;
 
-	if (w1)
-		gtk_widget_grab_focus (w1);
+	if (widget)
+		gtk_widget_grab_focus (widget);
 }
 
 static void
 druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
 	gchar *buf;
-	UserSettings *us = data;
-	
-	user_update (us);
+	UserDruid *config = data;
 
-	buf = gtk_entry_get_text (us->pwd->pwd1);
-	passwd_set (us->node, buf);
+	user_account_gui_save (config->gui);
+
+	group_add (config->gui->account,
+		   config->gui->account->group);
+
+	user_account_add (config->gui->account);
 	
-	druid_exit (us);
+	buf = gtk_entry_get_text (config->gui->pwd1);
+	passwd_set (config->gui->account->node, buf);
+	
+	druid_exit (config);
 }
 
 static struct {
@@ -227,80 +273,74 @@ static struct {
 };
 
 static void
-connect_signals (UserSettings *us)
+construct (UserDruid *druid)
 {
-	gint i;
-	GnomeDruid *druid;
-	
-	for (i = 0; pages[i].name != NULL; i++) {
-		GnomeDruidPage *page;
+	GtkWidget *widget, *container;
+	UserAccount *account;
+	int i;
 
-		page = GNOME_DRUID_PAGE (glade_xml_get_widget (us->xml, pages[i].name));
+	account = user_account_get_default ();
+	druid->gui = user_account_gui_new (account);
+
+	/* get our toplevel widget and reparent it */
+	widget = glade_xml_get_widget (druid->gui->xml, "user_druid_druid");
+	gtk_widget_reparent (widget, GTK_WIDGET (druid));
+
+	druid->druid = GNOME_DRUID (widget);
+
+	/* set window title */
+	gtk_window_set_title (GTK_WINDOW (druid), _("User Account Wizard"));
+	gtk_window_set_policy (GTK_WINDOW (druid), FALSE, TRUE, FALSE);
+	gtk_window_set_modal (GTK_WINDOW (druid), TRUE);
+	gtk_object_set (GTK_OBJECT (druid), "type", GTK_WINDOW_DIALOG, NULL);
+
+	/* attach to druid page signals */
+	for (i = 0; pages[i].name != NULL; i++) {
+		GtkWidget *page;
+
+		page = glade_xml_get_widget (druid->gui->xml, pages[i].name);
 
 		if (pages[i].next_func)
 			gtk_signal_connect (GTK_OBJECT (page), "next",
-					    pages[i].next_func, us);
+					    pages[i].next_func, druid);
 		if (pages[i].prepare_func)
 			gtk_signal_connect (GTK_OBJECT (page), "prepare",
-					    pages[i].prepare_func, us);
+					    pages[i].prepare_func, druid);
 		if (pages[i].back_func)
 			gtk_signal_connect (GTK_OBJECT (page), "back",
-					    pages[i].back_func, us);
+					    pages[i].back_func, druid);
 		if (pages[i].finish_func)
 			gtk_signal_connect (GTK_OBJECT (page), "finish",
-					    pages[i].finish_func, us);
+					    pages[i].finish_func, druid);
 	}
-	druid = GNOME_DRUID (glade_xml_get_widget (us->xml, "user_druid_druid"));
-	gtk_signal_connect (GTK_OBJECT (druid), "cancel", druid_cancel, us);
+	gtk_signal_connect (GTK_OBJECT (druid->druid), "cancel", druid_cancel, druid);
 
-	gtk_signal_connect (GTK_OBJECT (us->basic->name), "changed", identity_changed, us);
-	gtk_signal_connect (GTK_OBJECT (us->basic->name), "activate", identity_login_activate, us);
-	gtk_signal_connect (GTK_OBJECT (us->basic->comment), "activate", druid_entry_activate, us);
+	container = glade_xml_get_widget (druid->gui->xml, "user_druid_identity");
+	widget = glade_xml_get_widget (druid->gui->xml, "user_settings_basic");
+	gtk_widget_reparent (widget, container);
+
+	container = glade_xml_get_widget (druid->gui->xml, "user_druid_password");
+	widget = glade_xml_get_widget (druid->gui->xml, "user_passwd_frame");
+	gtk_widget_reparent (widget, container);
+
+	user_account_gui_setup (druid->gui, GTK_WIDGET (druid));
 	
-	gtk_signal_connect (GTK_OBJECT (us->pwd->pwd1), "activate", password_activate, us);
-	gtk_signal_connect (GTK_OBJECT (us->pwd->pwd2), "changed", password_changed, us);
-	gtk_signal_connect (GTK_OBJECT (us->pwd->pwd2), "activate", druid_entry_activate, us);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "changed", identity_changed, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "activate", identity_login_activate, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->comment), "activate", druid_entry_activate, druid);
+	
+	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd1), "activate", password_activate, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd2), "changed", password_changed, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd2), "activate", druid_entry_activate, druid);
 }
 
-void
-user_druid_run (xmlNodePtr user_node)
+UserDruid *
+user_druid_new (void)
 {
-	UserSettings *us;
+	UserDruid *new;
 
-	us = g_new0 (UserSettings, 1);
-	us->xml = glade_xml_new (tool->glade_path, NULL);
-	
-	us->dialog = glade_xml_get_widget (us->xml, "user_druid_window");
-	us->node  = user_node;
-	us->table = TABLE_USER;
+	new = (UserDruid *) gtk_type_new (user_druid_get_type ());
+	construct (new);
 
-	us->basic = g_new0 (UserSettingsBasic, 1);
-	us->basic->name    = GTK_ENTRY (glade_xml_get_widget (us->xml, "user_druid_login"));
-	us->basic->comment = GTK_ENTRY (glade_xml_get_widget (us->xml, "user_druid_comment"));
-	us->basic->home    = GTK_ENTRY (glade_xml_get_widget (us->xml, "user_settings_home"));
-	us->basic->shell   = GTK_COMBO (glade_xml_get_widget (us->xml, "user_settings_shell"));
-	us->basic->uid     = GTK_SPIN_BUTTON (glade_xml_get_widget (us->xml, "user_settings_uid"));
-
-	us->group = g_new (UserSettingsGroup, 1);
-	us->group->main    = GTK_COMBO (glade_xml_get_widget (us->xml, "user_settings_group"));
-	us->group->all     = GTK_CLIST (glade_xml_get_widget (us->xml, "user_settings_gall"));
-	us->group->member  = GTK_CLIST (glade_xml_get_widget (us->xml, "user_settings_gmember"));
-
-	us->pwd = g_new0 (UserSettingsPwd, 1);
-	us->pwd->quality = GTK_TOGGLE_BUTTON (glade_xml_get_widget (us->xml, "user_druid_pwd_check"));
-	us->pwd->pwd1 = GTK_ENTRY (glade_xml_get_widget (us->xml, "user_druid_pwd_entry1"));
-	us->pwd->pwd2 = GTK_ENTRY (glade_xml_get_widget (us->xml, "user_druid_pwd_entry2"));
-	us->pwd->min  = GTK_SPIN_BUTTON (glade_xml_get_widget (us->xml, "user_passwd_min"));
-	us->pwd->max  = GTK_SPIN_BUTTON (glade_xml_get_widget (us->xml, "user_passwd_max"));
-	us->pwd->days = GTK_SPIN_BUTTON (glade_xml_get_widget (us->xml, "user_passwd_days"));
-	
-	us->new = TRUE;
-
-	user_settings_basic_fill (us);
-	user_settings_group_fill (us);
-	user_settings_pwd_fill   (us);
-
-	connect_signals (us);
-
-	gtk_widget_show (GTK_WIDGET (us->dialog));	
+	return new;
 }

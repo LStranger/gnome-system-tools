@@ -27,33 +27,27 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
-typedef struct _UserSettingsBasic UserSettingsBasic;
-typedef struct _UserSettingsGroup UserSettingsGroup;
-typedef struct _UserSettingsPwd   UserSettingsPwd;
-typedef struct _UserSettings      UserSettings;
+#include "user_group.h"
 
-struct _UserSettingsBasic
-{
+typedef struct {
+	GtkWidget *top;
+	UserAccount *account;
+	GladeXML *xml;
+	
 	GtkEntry *name;
 	GtkEntry *comment;
 	GtkEntry *home;
 	GtkCombo *shell;
 	GtkSpinButton *uid;
 	GtkWidget *advanced;
-};
 
-struct _UserSettingsGroup
-{
-	GtkCombo  *main;
+	GtkCombo  *group;
 	GtkCList  *all;
 	GtkCList  *member;
 	GtkWidget *add;
 	GtkWidget *remove;
 	GtkWidget *set_primary;
-};
 
-struct _UserSettingsPwd
-{
 	GtkToggleButton *quality;
 	GtkEntry *pwd1;
 	GtkEntry *pwd2;
@@ -61,30 +55,12 @@ struct _UserSettingsPwd
 	GtkSpinButton *min;
 	GtkSpinButton *max;
 	GtkSpinButton *days;
-};
+} UserAccountGui;
 
-struct _UserSettings
-{
-	GladeXML          *xml;
-	GtkWidget         *dialog;
-	UserSettingsBasic *basic;
-	UserSettingsGroup *group;
-	UserSettingsPwd   *pwd;
-	xmlNodePtr         node;
-	gboolean           new;
-	gint               table;
-};
-
-
-void user_settings_prepare    (xmlNodePtr user_node);
-void user_settings_basic_fill (UserSettings *us);
-void user_settings_group_fill (UserSettings *us);
-void user_settings_pwd_fill   (UserSettings *us);
-void user_settings_destroy    (UserSettings *us);
-
-GtkWidget *
-password_request_dialog (const gchar *prompt, const guint8 min_length,
-			 GnomeStringCallback callback, gpointer data,
-			 GtkWindow *parent);
+UserAccountGui *user_account_gui_new     (UserAccount *account);
+void            user_account_gui_setup   (UserAccountGui *gui, GtkWidget *top);
+gboolean        user_account_gui_save    (UserAccountGui *gui);
+void            user_account_gui_error   (GtkWindow *parent, gchar *error);
+void            user_account_gui_destroy (UserAccountGui *gui);
 
 #endif /* USER_SETTINGS_H */

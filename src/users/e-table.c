@@ -47,9 +47,7 @@ GtkWidget *net_user_table;
 
 gint active_table;
 
-/* e-table specifications.
-   WILL BE removed from here SOON!
- */
+/* e-table specifications */
 
 const gchar *user_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
@@ -196,13 +194,13 @@ user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *da
 		return;
 
 	switch (col) {
-	case COL_USER_LOGIN: user_set_value_login (xd, node, val); break;
-	case COL_USER_UID: user_set_value_uid (xd, node, val); break;
-	case COL_USER_HOME: user_set_value_home (xd, node, val); break;
-	case COL_USER_SHELL: user_set_value_shell (xd, node, val); break;
-	case COL_USER_COMMENT: user_set_value_comment (xd, node, val); break;
-	case COL_USER_GROUP: user_set_value_group (xd, node, val); break;
-	case COL_USER_GID: user_set_value_gid (xd, node, val); break;
+	case COL_USER_LOGIN: user_set_value_login (node, val); break;
+	case COL_USER_UID: user_set_value_uid_string (node, val); break;
+	case COL_USER_HOME: user_set_value_home (node, val); break;
+	case COL_USER_SHELL: user_set_value_shell (node, val); break;
+	case COL_USER_COMMENT: user_set_value_comment (node, val); break;
+	case COL_USER_GROUP: user_set_value_group (node, val); break;
+	case COL_USER_GID: user_set_value_gid_string (node, val); break;
 	default: g_warning ("user_set_value_at: wrong col nr");	break;
 	}
 }
@@ -563,7 +561,7 @@ create_user_table (void)
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	table_connect_signals (table);
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
-	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_settings_clicked, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_user_settings_clicked, NULL);
 
 	container = xst_dialog_get_widget (tool->main_dialog, "users_holder");
 	gtk_container_add (GTK_CONTAINER (container), user_table);

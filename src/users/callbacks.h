@@ -28,6 +28,8 @@
 #include <gnome-xml/tree.h>
 #include "xst.h"
 
+BEGIN_GNOME_DECLS
+
 void on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
 			      guint page_num, gpointer user_data);
 
@@ -41,9 +43,11 @@ void on_user_profiles_clicked (GtkButton *button, gpointer user_data);
 void on_group_new_clicked (GtkButton *button, gpointer user_data);
 void on_group_delete_clicked (GtkButton *button, gpointer user_data);
 
+#ifdef NIS
 void on_network_delete_clicked (GtkWidget *button, gpointer user_data);
 void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
+#endif
 
 void on_pro_name_changed (GtkMenuItem *menu_item, gpointer user_data);
 void on_pro_del_clicked (GtkButton *button, gpointer user_data);
@@ -51,21 +55,7 @@ void on_pro_new_clicked (GtkButton *button, gpointer user_data);
 void on_pro_copy_clicked (GtkButton *button, gpointer user_data);
 void on_pro_apply_clicked (XstDialog *xd, gpointer user_data);
 
-
-void on_user_settings_dialog_show (GtkWidget *button, gpointer user_data);
-void on_user_settings_dialog_delete_event (GnomeDialog *dialog, gpointer user_data);
-void on_user_settings_clicked (GnomeDialog *dialog, gint button_number, gpointer user_data);
-void on_user_settings_add_clicked (GtkButton *button, gpointer user_data);
-void on_user_settings_remove_clicked (GtkButton *button, gpointer user_data);
-void on_user_settings_gall_select_row (GtkCList *clist, gint row, gint column,
-				       GdkEventButton *event, gpointer user_data);
-
-void on_user_settings_gmember_select_row (GtkCList *clist, gint row, gint column,
-					  GdkEventButton *event, gpointer user_data);
-
-void on_user_passwd_change_clicked (GtkButton *button, gpointer user_data);
-void on_user_passwd_random_clicked (GtkButton *button, gpointer user_data);
-void user_password_change (xmlNodePtr user_node);
+void on_user_settings_clicked (GtkButton *button, gpointer data);
 
 void on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data);
 void on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data);
@@ -83,6 +73,8 @@ void actions_set_sensitive (gint table, gboolean state);
 void my_gtk_entry_set_text (void *entry, gchar *str);
 
 void on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer data);
+
+END_GNOME_DECLS
 
 #endif /* CALLBACKS_H */
 

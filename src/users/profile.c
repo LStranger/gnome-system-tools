@@ -276,6 +276,9 @@ profile_tab_prefill (void)
 static void
 profile_tab_init (XstDialog *xd)
 {
+	if (pft)
+		return;
+	
 	pft = g_new (ProfileTab, 1);
 	
 	pft->system_menu = GTK_OPTION_MENU (xst_dialog_get_widget (xd, "pro_system_menu"));
@@ -794,6 +797,27 @@ profile_table_set_selected (const gchar *name)
 	
 	profile_table->selected = pf->name;
 	profile_update_ui (pf);
+}
+
+static void
+profile_list (gpointer key, gpointer value, gpointer data)
+{
+	GSList *list = data;
+
+	list = g_slist_append (list, key);
+}
+
+GSList *
+profile_table_get_list (void)
+{
+	GSList *list = NULL;
+
+	list = g_slist_prepend (NULL, GINT_TO_POINTER (1));
+	
+	g_hash_table_foreach (profile_table->hash, profile_list, list);
+	list = g_slist_remove (list, GINT_TO_POINTER (1));
+	
+	return list;
 }
 
 /* Not much at the time :) */

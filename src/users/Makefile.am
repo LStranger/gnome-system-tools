@@ -25,7 +25,8 @@ users_admin_SOURCES = \
 	user_settings.c user_settings.h \
 	profile.c profile.h \
 	user-group-xml.c user-group-xml.h \
-	user-druid.c user-druid.h
+	user-druid.c user-druid.h \
+	user-account-editor.c user-account-editor.h
 
 users_admin_CFLAGS = 
 

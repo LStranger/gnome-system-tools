@@ -26,6 +26,7 @@
 #include "user-group-xml.h"
 
 #include "user_group.h"
+#include "profile.h"
 
 void generic_set_value (xmlNodePtr node, const gchar *name, const gchar *value);
 
@@ -78,8 +79,121 @@ user_value_group (xmlNodePtr user_node)
 	return buf;
 }
 
+GSList *
+user_get_groups (xmlNodePtr user_node)
+{
+	xmlNodePtr group_node, g, group_users;
+	gchar *user_name, *buf;
+	GSList *grouplist = NULL;
+
+	g_return_val_if_fail (user_node != NULL, NULL);
+
+	group_node = get_corresp_field (user_node);
+	user_name = user_value_login (user_node);
+
+	if (!user_name)
+		return NULL;
+
+	for (g = xst_xml_element_find_first (group_node, "group"); g;
+	     g = xst_xml_element_find_next (g, "group")) {
+		group_users = xst_xml_element_find_first (g, "users");
+		for (group_users = xst_xml_element_find_first (group_users, "user");
+		     group_users;
+		     group_users = xst_xml_element_find_next (group_users, "user")) {
+			buf = xst_xml_element_get_content (group_users);
+			if (!buf)
+				continue;
+
+			if (!strcmp (user_name, buf))
+				grouplist = g_slist_prepend (grouplist, group_value_name (g));
+			
+			g_free (buf);
+		}
+	}
+
+	g_free (user_name);
+	return grouplist;
+}
+
+static void
+del_user_groups (xmlNodePtr user_node)
+{
+	xmlNodePtr group_node, g, group_users, tmp_node;
+	gchar *user_name, *buf;
+	gboolean found;
+
+	g_return_if_fail (user_node != NULL);
+
+	group_node = get_corresp_field (user_node);
+	user_name = xst_xml_get_child_content (user_node, "login");
+
+	for (g = xst_xml_element_find_first (group_node, "group");
+	     g;
+	     g = xst_xml_element_find_next (g, "group")) {
+		group_users = xst_xml_element_find_first (g, "users");
+
+		group_users = xst_xml_element_find_first (group_users, "user");
+		while (group_users) {
+			found = FALSE;
+			buf = xst_xml_element_get_content (group_users);
+			if (buf) {
+				if (!strcmp (user_name, buf))
+					found = TRUE;
+				
+				g_free (buf);
+			}
+
+			tmp_node = group_users;
+			group_users = xst_xml_element_find_next (group_users, "user");
+			if (found)
+				xst_xml_element_destroy (tmp_node);
+		}
+	}
+
+	g_free (user_name);
+}
+
 void
-generic_set_value (xmlNodePtr node, const gchar *name, const gchar *value)
+user_set_groups (xmlNodePtr user_node, GSList *list)
+{
+	xmlNodePtr group_node, g, group_users;
+	gchar *user_name, *buf;
+	GSList *tmp;
+
+	g_return_if_fail (user_node != NULL);
+
+	del_user_groups (user_node);
+	
+	group_node = get_corresp_field (user_node);
+	user_name = xst_xml_get_child_content (user_node, "login");
+
+	for (g = xst_xml_element_find_first (group_node, "group"); g;
+	     g = xst_xml_element_find_next (g, "group")) {
+		buf = xst_xml_get_child_content (g, "name");
+
+		tmp = list;
+		while (tmp) {
+			gchar *group_name = tmp->data;
+			tmp = tmp->next;
+
+			if (!strcmp (buf, group_name)) {
+				group_users = xst_xml_element_find_first (g, "users");
+				if (!group_users)
+					group_users = xst_xml_element_add (g, "users");
+
+				group_users = xst_xml_element_add (group_users, "user");
+				xst_xml_element_set_content (group_users, user_name);
+				list = g_slist_remove (list, group_name);
+			}
+		}
+		g_free (buf);
+	}
+
+	g_free (user_name);
+}
+
+void
+generic_set_value_string (xmlNodePtr node, const gchar *name, const gchar *value)
 {
 	g_return_if_fail (node != NULL);
 	g_return_if_fail (name != NULL);
@@ -87,93 +201,40 @@ generic_set_value (xmlNodePtr node, const gchar *name, const gchar *value)
 	xst_xml_set_child_content (node, (gchar *)name, (gchar *)value);
 }
 
-gboolean
-user_set_value_login (XstDialog *xd, xmlNodePtr node, const gchar *value)
+void
+generic_set_value_integer (xmlNodePtr node, const gchar *name, gint value)
 {
-	if (check_user_login (GTK_WINDOW (xd), node, value)) {
-		generic_set_value (node, "login", value);
-		xst_dialog_modify (xd);
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-gboolean
-user_set_value_home (XstDialog *xd, xmlNodePtr node, const gchar *value)
-{
-	if (check_user_home (GTK_WINDOW (xd), node, value)) {
-		generic_set_value (node, "home", value);
-		xst_dialog_modify (xd);
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-gboolean
-user_set_value_shell (XstDialog *xd, xmlNodePtr node, const gchar *value)
-{
-	if (check_user_shell (GTK_WINDOW (xd), node, value)) {
-		generic_set_value (node, "shell", value);
-		xst_dialog_modify (xd);
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-gboolean
-user_set_value_comment (XstDialog *xd, xmlNodePtr node, const gchar *value)
-{
-	if (check_user_comment (GTK_WINDOW (xd), node, value)) {
-		generic_set_value (node, "comment", value);
-		xst_dialog_modify (xd);
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-gboolean
-user_set_value_uid (XstDialog *xd, xmlNodePtr node, gchar const *value)
-{
-	if (check_user_uid (GTK_WINDOW (xd), node, value)) {
-		generic_set_value (node, "uid", value);
-		xst_dialog_modify (xd);
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-gboolean
-user_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value)
-{
-	xmlNodePtr group_node;
-
-	group_node = get_corresp_field (node);
+	gchar *buf;
 	
-	if (check_group_gid (GTK_WINDOW (xd), group_node, value)) {
-		generic_set_value (node, "gid", value);
-		xst_dialog_modify (xd);
-		return TRUE;
-	}
+	g_return_if_fail (node != NULL);
+	g_return_if_fail (name != NULL);
 
-	return FALSE;
+	buf = g_strdup_printf ("%d", value);
+	xst_xml_set_child_content (node, (gchar *)name, buf);
+	g_free (buf);
 }
 
-gboolean
-user_set_value_group (XstDialog *xd, xmlNodePtr node, const gchar *value)
+void
+user_set_value_group (xmlNodePtr user_node, const gchar *value)
 {
-	return FALSE;
+	xmlNodePtr group, group_db;
+
+	group_db = get_corresp_field (user_node);
+	group = get_node_by_data (group_db, "name", value);
+	if (group) {
+		gchar *gid = xst_xml_get_child_content (group, "gid");
+		generic_set_value_string (user_node, "gid", gid);
+		g_free (gid);
+	} else {
+		/* add new group */
+	}
 }
 
 gboolean
 group_set_value_name (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
 	if (check_group_name (GTK_WINDOW (xd), node, value)) {
-		generic_set_value (node, "gid", value);
+		generic_set_value_string (node, "gid", value);
 		xst_dialog_modify (xd);
 		return TRUE;
 	}
@@ -185,10 +246,66 @@ gboolean
 group_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
 	if (check_group_gid (GTK_WINDOW (xd), node, value)) {
-		generic_set_value (node, "gid", value);
+		generic_set_value_string (node, "gid", value);
 		xst_dialog_modify (xd);
 		return TRUE;
 	}
 
 	return FALSE;
+}
+
+xmlNodePtr
+user_add_blank_xml (xmlNodePtr user_db)
+{
+	xmlNodePtr user;
+	Profile *pf;
+
+	g_return_val_if_fail (user_db != NULL, NULL);
+
+	user = xst_xml_element_add (user_db, "user");
+	pf = profile_table_get_profile (NULL);
+
+	xst_xml_element_add_with_content (user, "key", find_new_key (user_db));
+	xst_xml_element_add (user, "login");
+	xst_xml_element_add (user, "password");
+	xst_xml_element_add (user, "uid");	
+	xst_xml_element_add (user, "gid");
+	xst_xml_element_add (user, "comment");
+	xst_xml_element_add (user, "home");
+	xst_xml_element_add (user, "shell");
+	xst_xml_element_add (user, "last_mod");
+
+	xst_xml_element_add_with_content (user, "passwd_min_life",
+			g_strdup_printf ("%d", pf->pwd_mindays));
+
+	xst_xml_element_add_with_content (user, "passwd_max_life",
+			g_strdup_printf ("%d", pf->pwd_maxdays));
+
+	xst_xml_element_add_with_content (user, "passwd_exp_warn",
+			g_strdup_printf ("%d", pf->pwd_warndays));
+
+	xst_xml_element_add (user, "passwd_exp_disable");
+	xst_xml_element_add (user, "passwd_disable");
+	xst_xml_element_add (user, "reserved");
+	xst_xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
+
+	return user;
+}
+
+xmlNodePtr
+group_add_blank_xml (xmlNodePtr group_db)
+{
+	xmlNodePtr group;
+
+	g_return_val_if_fail (group_db != NULL, NULL);
+
+	group = xst_xml_element_add (group_db, "group");
+
+	xst_xml_element_add_with_content (group, "key", find_new_key (group_db));
+	xst_xml_element_add (group, "name");
+	xst_xml_element_add (group, "password");
+	xst_xml_element_add_with_content (group, "gid", find_new_id (group_db));
+	xst_xml_element_add (group, "users");
+
+	return group;
 }

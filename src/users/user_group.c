@@ -40,33 +40,20 @@ static int reply;
 
 login_defs logindefs;
 
-gint check_user_group (UserSettings *us);
-
 /* Static prototypes */
 
 static void group_settings_prepare (ug_data *ud);
-static void user_update_xml (UserSettings *us);
-static xmlNodePtr user_add_blank_xml (xmlNodePtr parent);
 static void group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_name);
-static xmlNodePtr group_add_blank_xml (xmlNodePtr db_node);
-static void group_add_from_user (UserSettings *us);
 static void group_update_xml (xmlNodePtr node, gboolean adv);
 static GList *get_group_users (xmlNodePtr group_node);
 static GList *get_group_mainusers (xmlNodePtr group_node);
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 static void del_group_users (xmlNodePtr group_node);
-static void add_group_users (xmlNodePtr group_node, gchar *name);
-static void del_user_groups (xmlNodePtr user_node);
-static void add_user_groups (xmlNodePtr user_node, gchar *group_name);
-static void reply_cb (gint val, gpointer data);
-static gchar *parse_home (UserSettings *us);
-static gchar *parse_group (UserSettings *us);
-
 
 
 static gboolean
-node_exsists (xmlNodePtr node, const gchar *name, const gchar *val)
+node_exists (xmlNodePtr node, const gchar *name, const gchar *val)
 {
 	xmlNodePtr n0;
 	gchar *buf;
@@ -260,8 +247,7 @@ is_valid_name (const gchar *str)
 	if (!str || !*str)
 		return FALSE;
 
-	for (;*str; str++)
-	{
+	for (;*str; str++) {
 		if (((*str < 'a') || (*str > 'z')) &&
 				((*str < '0') || (*str > '9')))
 
@@ -296,7 +282,7 @@ is_valid_id (const gchar *str)
 }
 
 gboolean
-check_user_root (GtkWindow *xd, xmlNodePtr node, const gchar *field, const gchar *value)
+check_user_root (xmlNodePtr node, const gchar *field, const gchar *value)
 {
 	gint i;
 	gboolean retval = TRUE;
@@ -326,8 +312,8 @@ check_user_root (GtkWindow *xd, xmlNodePtr node, const gchar *field, const gchar
 
 }
 
-gboolean
-check_user_login (GtkWindow *xd, xmlNodePtr node, const gchar *login)
+gchar *
+check_user_login (xmlNodePtr node, const gchar *login)
 {
 	gchar *buf = NULL;
 
@@ -342,137 +328,119 @@ check_user_login (GtkWindow *xd, xmlNodePtr node, const gchar *login)
 	else if (strlen (login) > 32)
 		buf = g_strdup (_("The username is too long."));
 
-	else if (!check_user_root (xd, node, "login", login))
+	else if (!check_user_root (node, "login", login))
 		buf = g_strdup (_("root user shouldn't be modified."));
 	
 	/* if valid. */
 	else if (!is_valid_name (login))
 		buf = g_strdup (_("Please set a valid username, using only lower-case letters."));
 
-	/* if !exsist. */
-	else if (node_exsists (node, "login", login))
-		buf = g_strdup (_("Username already exsists."));
+	/* if !exist. */
+	else if (node_exists (node, "login", login))
+		buf = g_strdup (_("Username already exists."));
 
-	/* If anything is wrong. */
-	if (buf)
-	{
-		GnomeDialog *dialog;
-
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
-		gnome_dialog_run (dialog);
-		g_free (buf);
-		gtk_widget_grab_focus (GTK_WIDGET (xd));
-
-		return FALSE;
-	}
-
-	else
-		return TRUE;
+	return buf;
 }
 
-gboolean
-check_user_uid (GtkWindow *xd, xmlNodePtr node, const gchar *val)
+gchar *
+check_user_uid (xmlNodePtr node, const gchar *val)
 {
 	gchar *buf = NULL;
-	gboolean retval = TRUE;
-	GnomeDialog *dialog;
 
 	if (!is_valid_id (val))
 		buf = g_strdup (_("User id must be a positive number."));
-	else if (!check_user_root (xd, node, "uid", val))
+	else if (!check_user_root (node, "uid", val))
 		buf = g_strdup (_("root user shouldn't be modified."));
-	else if (node_exsists (node, "uid", val))
-		buf = g_strdup (_("Such user id already exsists."));
+	else if (node_exists (node, "uid", val))
+		buf = g_strdup (_("Such user id already exists."));
 
-	if (buf) {
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
-		gnome_dialog_run (dialog);
-		g_free (buf);
-		gtk_widget_grab_focus (GTK_WIDGET (xd));
-		retval = FALSE;
-	}
-
-	return retval;
+	return buf;
 }
 
-gboolean
-check_user_comment (GtkWindow *xd, xmlNodePtr node, const gchar *val)
+gchar *
+check_user_comment (xmlNodePtr node, const gchar *val)
 {
 	/* What could be wrong with comment? */
-	return TRUE;
+	return NULL;
 }
 
-gboolean
-check_user_home (GtkWindow *xd, xmlNodePtr node, const gchar *val)
+gchar *
+check_user_shell (xmlNodePtr node, const gchar *val)
 {
 	gchar *buf = NULL;
+
+	if (strlen (val) > 0 && *val != '/')
+		buf = g_strdup (_("Please give shell with full path."));
+
+	return buf;
+}
+
+static gchar *
+parse_home (UserAccount *account)
+{
+	const guint max_tokens = 8;
+	gchar *home;
+	gchar **buf;
+	gint i;
+
+	buf = g_strsplit (account->home, "/", max_tokens);
+
+	for (i = 0; buf[i]; i++) {
+		if (!strcmp (buf[i], "$user")) {
+			g_free (buf[i]);
+			buf[i] = g_strdup (account->name);
+		}
+	}
 	
+	home = g_strjoinv ("/", buf);
+	
+	g_strfreev (buf);
+	
+	return home;
+}
+
+gchar *
+check_user_home (xmlNodePtr node, const gchar *val)
+{
+	gchar *buf = NULL;
+
 	if (strlen (val) < 1)
 		buf = g_strdup (_("Home directory must not be empty."));
 	else if (*val != '/')
 		buf = g_strdup (_("Please enter full path for home directory."));
-	else if (!check_user_root (xd, node, "home", val))
+	else if (!check_user_root (node, "home", val))
 		buf = g_strdup (_("root user shouldn't be modified."));
-	if (buf) {
-		GnomeDialog *dialog;
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
-		gnome_dialog_run (dialog);
-		g_free (buf);
-		gtk_widget_grab_focus (GTK_WIDGET (xd));
-		return FALSE;
-	}
 
-	return TRUE;
+	return buf;
 }
 
-gboolean
-check_user_shell (GtkWindow *xd, xmlNodePtr node, const gchar *val)
-{
-	GnomeDialog *dialog;
-	
-	/* Has to be full path */
-
-	if (strlen (val) > 0 && *val != '/') {
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented
-				       (_("Please give shell with full path."), xd));
-		gnome_dialog_run (dialog);
-		
-		return FALSE;
-	}
-	
-	return TRUE;
-}
-
-gint
-check_user_group (UserSettings *us)
+static gchar *
+parse_group (UserAccount *account, const gchar *val)
 {
 	gchar *buf;
-	GnomeDialog *dialog;
-	xmlNodePtr group_node;
+	
+	if (!strcmp (val, "$user"))
+		buf = g_strdup (account->name);
+	else
+		buf = g_strdup (val);
 
-	g_return_val_if_fail (us != NULL, -1);
+	return buf;
+}
 
-	buf = parse_group (us);
-	group_node = get_corresp_field (us->node);
+gchar *
+check_user_group (UserAccount *account, const gchar *val)
+{
+	gchar *group;
+	gchar *buf = NULL;
 
-	if (node_exsists (group_node, "name", buf))
-		return 0;
+	group = parse_group (account, val);
 
-	if (!is_valid_name (buf))
-	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented(_(
-			"Please set a valid main group name, with only lower-case letters,"
-			"\nor select one from pull-down menu."),
-								   GTK_WINDOW (us->dialog)));
+	if (!is_valid_name (group))
+		buf = g_strdup (_("Group name is not valid."));
 
-		gnome_dialog_run (dialog);
-		gtk_widget_grab_focus (GTK_WIDGET (us->group->main));
-
-		return -1;
-	}
-
-	/* Group not found, but name is valid. */
-	return 1;
+	g_free (group);
+	
+	return buf;
 }
 
 gboolean
@@ -495,9 +463,9 @@ check_group_name (GtkWindow *xd, xmlNodePtr node, const gchar *name)
 	else if (!is_valid_name (name))
 		buf = g_strdup (_("Please set a valid group name, using only lower-case letters."));
 
-	/* if !exsist. */
-	else if (node_exsists (node, "name", name))
-		buf = g_strdup (_("Group already exsists."));
+	/* if !exist. */
+	else if (node_exists (node, "name", name))
+		buf = g_strdup (_("Group already exists."));
 
 	/* If anything is wrong. */
 	if (buf)
@@ -527,8 +495,8 @@ check_group_gid (GtkWindow *xd, xmlNodePtr group_node, const gchar *val)
 		buf = g_strdup (_("User id must be a positive number."));
 	
 	/* Check if gid is available */
-	else if (node_exsists (group_node, "gid", val))
-		buf = g_strdup (_("Such group id already exsists."));
+	else if (node_exists (group_node, "gid", val))
+		buf = g_strdup (_("Such group id already exists."));
 	
 	if (buf) {
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
@@ -538,23 +506,6 @@ check_group_gid (GtkWindow *xd, xmlNodePtr group_node, const gchar *val)
 	}
 
 	return retval;
-}
-
-static gboolean
-check_passwd (xmlNodePtr user_node)
-{
-	/* Only checks if empty */
-	gchar *buf;
-	gboolean ret;
-
-	ret = FALSE;
-	buf = xst_xml_get_child_content (user_node, "password");
-	if (strlen (buf) > 0)
-		ret = TRUE;
-
-	g_free (buf);
-
-	return ret;
 }
 
 gboolean
@@ -618,7 +569,7 @@ get_corresp_field (xmlNodePtr node)
 }
 
 xmlNodePtr
-get_node_by_data (xmlNodePtr dbnode, gchar *field, gchar *fdata)
+get_node_by_data (xmlNodePtr dbnode, const gchar *field, const gchar *fdata)
 {
 	xmlNodePtr node;
 	gchar *buf;
@@ -792,11 +743,7 @@ settings_prepare (ug_data *ud)
 	{
 		/* Has to be some kind of user */
 		g_free (buf);
-
-		/* old_user
-		user_settings_prepare (ud);
-		*/
-		user_settings_prepare (ud->node);
+		g_warning ("settings_prepare: Deprecated, shouldn't be here");
 		return;
 	}
 
@@ -812,70 +759,6 @@ settings_prepare (ug_data *ud)
 	}
 
 	g_warning ("settings_prepare: shouldn't be here");
-}
-
-gboolean
-user_update (UserSettings *us)
-{
-	gint group, i;
-	gchar *buf;
-	gchar *new_name;
-
-	new_name = gtk_entry_get_text (us->basic->name);
-	
-	if (!check_user_login (GTK_WINDOW (us->dialog), us->node, new_name))
-		return FALSE;
-
-	buf = gtk_entry_get_text (us->basic->comment);
-	if (!check_user_comment (GTK_WINDOW (us->dialog), us->node, buf))
-		return FALSE;
-
-	group = check_user_group (us);
-	switch (group) {
-	case 0:
-		/* Group exsisted, everything is ok. */
-		break;
-	case 1:
-		/* Make new group */
-		group_add_from_user (us);
-		break;
-	case -1:
-	default:
-		/* Error. */
-		return FALSE;
-	}
-
-	i = gtk_spin_button_get_value_as_int (us->basic->uid);
-	buf = g_strdup_printf ("%d", i);
-	if (!check_user_uid (GTK_WINDOW (us->dialog), us->node, buf)) {
-		g_free (buf);
-		return FALSE;
-	}
-	g_free (buf);
-
-	buf = gtk_entry_get_text (us->basic->home);
-	if (!check_user_home (GTK_WINDOW (us->dialog), us->node, buf))
-		return FALSE;
-
-	buf = gtk_entry_get_text (GTK_ENTRY (us->basic->shell->entry));
-	if (!check_user_shell (GTK_WINDOW (us->dialog), us->node, buf))
-		return FALSE;
-	
-	if (us->new) {
-		/* Add new user, update table. */
-		us->node = user_add_blank_xml (us->node);
-		user_update_xml (us);
-		current_table_new_row (us->node, us->table);
-	} else {
-		gchar *old_name = xst_xml_get_child_content (us->node, "login");
-		/* Entered data ok, not new: just update. */
-		user_update_xml (us);
-		group_update_users (us->node, old_name, new_name);
-		g_free (old_name);
-		current_table_update_row (us->table);
-	}
-
-	return TRUE;
 }
 
 void
@@ -897,6 +780,13 @@ user_passwd_dialog_prepare (xmlNodePtr node)
 #ifndef HAVE_LIBCRACK
 	gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "user_passwd_quality"));
 #endif
+}
+
+static void
+reply_cb (gint val, gpointer data)
+{
+        reply = val;
+        gtk_main_quit ();
 }
 
 gboolean
@@ -949,6 +839,19 @@ group_new_prepare (ug_data *ud)
 	gtk_widget_show (w0);
 }
 
+void
+group_add (UserAccount *account, const gchar *group_name)
+{
+	gchar *name;
+	xmlNodePtr node = group_add_blank_xml (get_group_root_node ());
+
+	name = parse_group (account, group_name);
+	xst_xml_set_child_content (node, "name", name);
+	g_free (name);
+	
+	current_table_new_row (node, TABLE_GROUP);
+}
+
 gboolean
 group_update (ug_data *ud)
 {
@@ -965,20 +868,15 @@ group_update (ug_data *ud)
 	if (!check_group_name (GTK_WINDOW (d), ud->node, buf))
 		ok = FALSE;
 
-	if (ok)
-	{
-		if (ud->new)
-		{
+	if (ok) {
+		if (ud->new) {
 			/* Add new group, update table. */
 			ud->node = group_add_blank_xml (ud->node);
 			group_update_xml (ud->node, adv);
 			current_table_new_row (ud->node, ud->table);
 
 			return ok;
-		}
-
-		else
-		{
+		} else {
 			/* Entered data ok, not new: just update */
 			group_update_xml (ud->node, adv);
 			current_table_update_row (ud->table);
@@ -1071,153 +969,20 @@ group_settings_prepare (ug_data *ud)
 	gtk_widget_show (w0);
 }
 
+
 static void
-user_update_xml (UserSettings *us)
-{
-	gchar *buf;
-	gint i, row;
-	xmlNodePtr group_node;
-	gboolean adv;
-	
-	/* Login */
-	buf = gtk_entry_get_text  (us->basic->name);
-	xst_xml_set_child_content (us->node, "login", buf);
-
-	/* Comment */
-	buf = gtk_entry_get_text  (us->basic->comment);
-	xst_xml_set_child_content (us->node, "comment", buf);
-
-	/* Main group */
-	buf = parse_group (us);
-
-	group_node = get_corresp_field (get_db_node (us->node));
-	group_node = get_node_by_data (group_node, "name", buf);
-	buf = xst_xml_get_child_content (group_node, "gid");
-	xst_xml_set_child_content (us->node, "gid", buf);
-	
-	/* Secondary groups */
-	del_user_groups (us->node);
-
-	row = 0;
-	while (gtk_clist_get_text (us->group->member, row++, 0, &buf))
-		add_user_groups (us->node, buf);
-
-	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
-	
-	/* Home */
-	buf = parse_home (us);
-	xst_xml_set_child_content (us->node, "home", buf);
-	g_free (buf);
-	
-	/* Shell */
-	xst_xml_set_child_content (us->node, "shell",
-				   gtk_entry_get_text (GTK_ENTRY (us->basic->shell->entry)));
-
-	/* UID */
-	if (adv)
-	{
-		i = gtk_spin_button_get_value_as_int (us->basic->uid);
-		xst_xml_set_child_content (us->node, "uid", g_strdup_printf ("%d", i));
-	}
-
-	/* Passwd stuff */
-	i = gtk_spin_button_get_value_as_int (us->pwd->min);
-	xst_xml_set_child_content (us->node, "passwd_min_life", g_strdup_printf ("%d", i));
-
-	i = gtk_spin_button_get_value_as_int (us->pwd->max);
-	xst_xml_set_child_content (us->node, "passwd_max_life", g_strdup_printf ("%d", i));
-
-	i = gtk_spin_button_get_value_as_int (us->pwd->days);
-	xst_xml_set_child_content (us->node, "passwd_exp_warn", g_strdup_printf ("%d", i));
-}
-
-static xmlNodePtr
-user_add_blank_xml (xmlNodePtr parent)
+add_group_users (xmlNodePtr group_node, gchar *name)
 {
 	xmlNodePtr user;
-	Profile *pf;
 
-	g_return_val_if_fail (parent != NULL, NULL);
+	g_return_if_fail (group_node != NULL);
 
-	user = xst_xml_element_add (parent, "user");
-	pf = profile_table_get_profile (NULL);
+	user = xst_xml_element_find_first (group_node, "users");
+	if (!user)
+		user = xst_xml_element_add (group_node, "users");
 
-	xst_xml_element_add_with_content (user, "key", find_new_key (parent));
-	xst_xml_element_add (user, "login");
-	xst_xml_element_add (user, "password");
-	xst_xml_element_add_with_content (user, "uid", find_new_id (parent));
-	xst_xml_element_add (user, "gid");
-	xst_xml_element_add (user, "comment");
-	xst_xml_element_add (user, "home");
-	xst_xml_element_add (user, "shell");
-	xst_xml_element_add (user, "last_mod");
-
-	xst_xml_element_add_with_content (user, "passwd_min_life",
-			g_strdup_printf ("%d", pf->pwd_mindays));
-
-	xst_xml_element_add_with_content (user, "passwd_max_life",
-			g_strdup_printf ("%d", pf->pwd_maxdays));
-
-	xst_xml_element_add_with_content (user, "passwd_exp_warn",
-			g_strdup_printf ("%d", pf->pwd_warndays));
-
-	xst_xml_element_add (user, "passwd_exp_disable");
-	xst_xml_element_add (user, "passwd_disable");
-	xst_xml_element_add (user, "reserved");
-	xst_xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
-
-	return user;
-}
-
-static xmlNodePtr
-group_add_blank_xml (xmlNodePtr db_node)
-{
-	xmlNodePtr group;
-
-	g_return_val_if_fail (db_node != NULL, NULL);
-
-	group = xst_xml_element_add (db_node, "group");
-
-	xst_xml_element_add_with_content (group, "key", find_new_key (db_node));
-	xst_xml_element_add (group, "name");
-	xst_xml_element_add (group, "password");
-	xst_xml_element_add_with_content (group, "gid", find_new_id (db_node));
-	xst_xml_element_add (group, "users");
-
-	return group;
-}
-
-static void
-group_add_from_user (UserSettings *us)
-{
-	xmlNodePtr node;
-	gchar *buf;
-	ug_data *group_data;
-
-	node = get_corresp_field (us->node);
-	group_data = g_new (ug_data, 1);
-	group_data->node = group_add_blank_xml (node);
-
-	buf = parse_group (us);
-	xst_xml_set_child_content (group_data->node, "name", buf);
-
-	group_data->table = TABLE_GROUP;
-
-#ifdef NIS
-	/* Add it to e-table. */
-	if (us->table == TABLE_USER)
-		group_data->table = TABLE_GROUP;
-	else if (ud->table == TABLE_NET_USER)
-		group_data->table = TABLE_NET_GROUP;
-	else
-	{
-		g_warning ("group_add_from_user: shouldn't be here");
-		g_free (group_data);
-		return;
-	}
-#endif	
-	current_table_new_row (group_data->node, group_data->table);
-	g_free (group_data);
+	user = xst_xml_element_add (user, "user");
+	xst_xml_element_set_content (user, name);
 }
 
 static void
@@ -1375,106 +1140,6 @@ del_group_users (xmlNodePtr group_node)
 	xst_xml_element_destroy_children (node);
 }
 
-static void
-add_group_users (xmlNodePtr group_node, gchar *name)
-{
-	xmlNodePtr user;
-
-	g_return_if_fail (group_node != NULL);
-
-	user = xst_xml_element_find_first (group_node, "users");
-	if (!user)
-		user = xst_xml_element_add (group_node, "users");
-
-	user = xst_xml_element_add (user, "user");
-	xst_xml_element_set_content (user, name);
-}
-
-static void
-del_user_groups (xmlNodePtr user_node)
-{
-	xmlNodePtr group_node, g, group_users, tmp_node;
-	gchar *user_name, *buf;
-	gboolean found;
-
-	g_return_if_fail (user_node != NULL);
-
-	group_node = get_corresp_field (user_node);
-	user_name = xst_xml_get_child_content (user_node, "login");
-
-	for (g = xst_xml_element_find_first (group_node, "group");
-	     g;
-	     g = xst_xml_element_find_next (g, "group"))
-	{
-		
-		group_users = xst_xml_element_find_first (g, "users");
-
-		group_users = xst_xml_element_find_first (group_users, "user");
-		while (group_users)
-		{
-			found = FALSE;
-			buf = xst_xml_element_get_content (group_users);
-			if (buf)
-			{
-				if (!strcmp (user_name, buf))
-					found = TRUE;
-				
-				g_free (buf);
-			}
-
-			tmp_node = group_users;
-			group_users = xst_xml_element_find_next (group_users, "user");
-			if (found)
-				xst_xml_element_destroy (tmp_node);
-		}
-	}
-
-	g_free (user_name);
-}
-
-static void
-add_user_groups (xmlNodePtr user_node, gchar *group_name)
-{
-	xmlNodePtr group_node, g, group_users;
-	gchar *user_name, *buf;
-
-	g_return_if_fail (user_node != NULL);
-
-	group_node = get_corresp_field (user_node);
-	user_name = xst_xml_get_child_content (user_node, "login");
-
-	for (g = xst_xml_element_find_first (group_node, "group");
-	     g;
-	     g = xst_xml_element_find_next (g, "group"))
-	{
-
-		buf = xst_xml_get_child_content (g, "name");
-		if (strcmp (buf, group_name))
-		{
-			g_free (buf);
-			continue;
-		}
-
-		g_free (buf);
-		group_users = xst_xml_element_find_first (g, "users");
-		if (!group_users)
-			group_users = xst_xml_element_add (g, "users");
-
-		group_users = xst_xml_element_add (group_users, "user");
-		xst_xml_element_set_content (group_users, user_name);
-		break;
-	}
-
-	g_free (user_name);
-}
-
-static void
-reply_cb (gint val, gpointer data)
-{
-        reply = val;
-        gtk_main_quit ();
-}
-
 void
 my_gtk_clist_append_items (GtkCList *list, GList *items)
 {
@@ -1531,46 +1196,107 @@ user_query_string_get (void)
 	return g_strdup (user_search_string);
 }
 
-static gchar *
-parse_home (UserSettings *us)
+
+
+
+
+UserAccount *
+user_account_get_default (void)
 {
-	const guint max_tokens = 8;
-	gchar *home;
-	gchar **buf;
-	gint i;
+	UserAccount *account;
+	Profile *pf = profile_table_get_profile (NULL);
 
-	buf = g_strsplit (gtk_entry_get_text (us->basic->home), "/", max_tokens);
+	account = g_new0 (UserAccount, 1);
 
-	i = 0;
-	while (buf[i])
-	{
-		if (!strcmp (buf[i], "$user"))
-		{
-			g_free (buf[i]);
-			buf[i] = g_strdup (gtk_entry_get_text (us->basic->name));
-		}
-		i++;
-	}
+	account->node = get_user_root_node ();
+
+	account->uid = find_new_id (account->node);
+	account->group = pf->group;
+	account->shell = pf->shell;
+	account->home = pf->home_prefix;
 	
-	home = g_strjoinv ("/", buf);
+	account->pwd_maxdays = pf->pwd_maxdays;
+	account->pwd_mindays = pf->pwd_mindays;
+	account->pwd_warndays = pf->pwd_warndays;
 	
-	g_strfreev (buf);
-	
-	return home;
+	return account;
 }
 
-static gchar *
-parse_group (UserSettings *us)
+UserAccount *
+user_account_get_by_node (xmlNodePtr node)
+{
+	UserAccount *account;
+
+	account = g_new0 (UserAccount, 1);
+
+	account->node = node;
+
+	account->name = user_value_login (node);
+	account->comment = user_value_comment (node);
+	account->uid = user_value_uid_string (node);
+	account->home = user_value_home (node);
+	account->shell = user_value_shell (node);
+/* TODO:	account->password = user_value_password (node); */
+	account->group = user_value_group (node);
+		
+	account->pwd_maxdays = user_value_pwd_maxdays (node);
+	account->pwd_mindays = user_value_pwd_mindays (node);
+	account->pwd_warndays = user_value_pwd_warndays (node);
+
+	account->extra_groups = user_get_groups (node);
+	
+	return account;
+}
+
+void
+user_account_save (UserAccount *account)
 {
 	gchar *buf;
+	xmlNodePtr node = account->node;
 
-	buf = gtk_editable_get_chars (GTK_EDITABLE (us->group->main->entry), 0, -1);
+	user_set_value_login (node, account->name);
+	user_set_value_comment (node, account->comment);
+	user_set_value_uid_string (node, account->uid);
+	user_set_value_shell (node, account->shell);
 
-	if (!strcmp (buf, "$user"))
-	{
-		g_free (buf);
-		buf = g_strdup (gtk_editable_get_chars (GTK_EDITABLE (us->basic->name), 0, -1));
-	}
+	buf = parse_home (account);
+	user_set_value_home (node, buf);
+	g_free (buf);
 
-	return buf;
+	buf = parse_group (account, account->group);
+	user_set_value_group (node, buf);
+	g_free (buf);
+
+	user_set_value_pwd_maxdays (node, account->pwd_maxdays);
+	user_set_value_pwd_mindays (node, account->pwd_mindays);
+	user_set_value_pwd_warndays (node, account->pwd_warndays);
+
+	user_set_groups (node, account->extra_groups);
+/* TODO: set password */
+
+	current_table_update_row (TABLE_USER);
+	xst_dialog_modify (tool->main_dialog);
+}
+
+void
+user_account_add (UserAccount *account)
+{
+	account->node = user_add_blank_xml (account->node);
+	current_table_new_row (account->node, TABLE_USER);
+	user_account_save (account);
+}
+
+void
+user_account_destroy (UserAccount *account)
+{
+	if (account->name) g_free (account->name);
+	if (account->comment) g_free (account->comment);
+	if (account->home) g_free (account->home);
+	if (account->shell) g_free (account->shell);
+	if (account->uid) g_free (account->uid);
+	if (account->group) g_free (account->group);
+
+	g_slist_free (account->extra_groups);
+	
+	g_free (account);
 }

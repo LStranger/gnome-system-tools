@@ -18,7 +18,6 @@
  *
  * Authors: Tambet Ingo <tambet@ximian.com>
  *
- * Based on ximian-setup-tools/src/network/ppp-druid.h
  */
 
 #ifndef USER_DRUID_H
@@ -28,7 +27,34 @@
 #include <glade/glade.h>
 
 #include "xst.h"
+#include "user_settings.h"
 
-void user_druid_run (xmlNodePtr user_node);
+BEGIN_GNOME_DECLS
+
+#define USER_DRUID_TYPE        (user_druid_get_type ())
+#define USER_DRUID(o)          (GTK_CHECK_CAST ((o), USER_DRUID_TYPE, UserDruid))
+#define USER_DRUID_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), USER_DRUID_TYPE, UserDruidClass))
+#define USER_IS_DRUID(o)       (GTK_CHECK_TYPE ((o), USER_DRUID_TYPE))
+#define USER_IS_DRUID_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), USER_DRUID_TYPE))
+
+typedef struct {
+	GtkWindow parent;
+	
+	GnomeDruid *druid;
+	UserAccountGui *gui;
+} UserDruid;
+
+typedef struct {
+	GtkWindowClass parent_class;
+	
+	/* signals */
+	
+} UserDruidClass;
+
+GtkType user_druid_get_type (void);
+
+UserDruid *user_druid_new (void);
+
+END_GNOME_DECLS
 
 #endif /* USER_DRUID_H */

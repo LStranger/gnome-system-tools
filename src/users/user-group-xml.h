@@ -26,7 +26,12 @@
 
 gchar *generic_value_string  (xmlNodePtr node, const gchar *name);
 gint   generic_value_integer (xmlNodePtr node, const gchar *name);
+void generic_set_value_string (xmlNodePtr node, const gchar *name, const gchar *value);
+void generic_set_value_integer (xmlNodePtr node, const gchar *name, gint value);
 gchar *user_value_group      (xmlNodePtr user_node);
+void user_set_value_group (xmlNodePtr user_node, const gchar *value);
+GSList *user_get_groups      (xmlNodePtr user_node);
+void user_set_groups     (xmlNodePtr user_node, GSList *list);
 
 #define user_value_login(node)       (generic_value_string (node, "login"))
 #define user_value_home(node)        (generic_value_string (node, "home"))
@@ -36,20 +41,32 @@ gchar *user_value_group      (xmlNodePtr user_node);
 #define user_value_uid_integer(node) (generic_value_integer (node, "uid"))
 #define user_value_gid_string(node)  (generic_value_string (node, "gid"))
 #define user_value_gid_integer(node) (generic_value_integer (node, "gid"))
+#define user_value_pwd_maxdays(node) (generic_value_integer (node, "passwd_max_life"))
+#define user_value_pwd_mindays(node) (generic_value_integer (node, "passwd_min_lide"))
+#define user_value_pwd_warndays(node) (generic_value_integer (node, "passwd_exp_warn"))
 
 #define group_value_name(node)       (generic_value_string (node, "name"))
 #define group_value_gid_string(node) (generic_value_string (node, "gid"))
 #define group_value_gid_integer(node) (generic_value_integer (node, "gid"))
 
-gboolean user_set_value_login (XstDialog *xd, xmlNodePtr node, const gchar *value);
-gboolean user_set_value_home (XstDialog *xd, xmlNodePtr node, const gchar *value);
-gboolean user_set_value_shell (XstDialog *xd, xmlNodePtr node, const gchar *value);
-gboolean user_set_value_comment (XstDialog *xd, xmlNodePtr node, const gchar *value);
-gboolean user_set_value_uid (XstDialog *xd, xmlNodePtr node, const gchar *value);
-gboolean user_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value);
-gboolean user_set_value_group (XstDialog *xd, xmlNodePtr node, const gchar *value);
+
+#define user_set_value_login(node,value)           (generic_set_value_string (node, "login", value))
+#define user_set_value_home(node,value)        (generic_set_value_string (node, "home", value))
+#define user_set_value_shell(node,value)       (generic_set_value_string (node, "shell", value))
+#define user_set_value_comment(node,value)     (generic_set_value_string (node, "comment", value))
+#define user_set_value_uid_string(node,value)  (generic_set_value_string (node, "uid", value))
+#define user_set_value_uid_integer(node,value) (generic_set_value_integer (node, "uid", value))
+#define user_set_value_gid_string(node,value)  (generic_set_value_string (node, "gid", value))
+#define user_set_value_gid_integer(node,value) (generic_set_value_integer (node, "gid", value))
+#define user_set_value_pwd_maxdays(node,value) (generic_set_value_integer (node, "passwd_max_life", value))
+#define user_set_value_pwd_mindays(node,value) (generic_set_value_integer (node, "passwd_min_lide", value))
+#define user_set_value_pwd_warndays(node,value) (generic_set_value_integer (node, "passwd_exp_warn", value))
+
 
 gboolean group_set_value_name (XstDialog *xd, xmlNodePtr node, const gchar *value);
 gboolean group_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value);
+
+xmlNodePtr user_add_blank_xml  (xmlNodePtr user_db);
+xmlNodePtr group_add_blank_xml (xmlNodePtr group_db);
 
 #endif /* __USER_GROP_XML_H */

@@ -27,6 +27,8 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
+BEGIN_GNOME_DECLS
+
 #define PROFILE_DIALOG "profile_dialog"
 
 typedef struct
@@ -76,7 +78,10 @@ gboolean profile_table_del_profile (gchar *name);
 
 Profile *profile_table_get_profile  (const gchar *name);
 void     profile_table_set_selected (const gchar *name);
+GSList  *profile_table_get_list     (void);
 
 gboolean validate_var (gchar *var);
+
+END_GNOME_DECLS
 
 #endif /* PROFILE_H */

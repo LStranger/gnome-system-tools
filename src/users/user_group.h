@@ -28,7 +28,6 @@
 #include <gnome-xml/tree.h>
 
 #include "xst.h"
-#include "user_settings.h"
 
 #define IDMAX 100000
 
@@ -59,6 +58,32 @@ typedef struct
 	gint table;
 } ug_data;
 
+typedef struct {
+	xmlNodePtr node;
+	
+	gchar *name;
+	gchar *comment;
+	gchar *uid;
+	gchar *group;
+	gchar *home;
+	gchar *shell;
+	gchar *password;
+
+	gint pwd_maxdays;
+	gint pwd_mindays;
+	gint pwd_warndays;
+
+	GSList *extra_groups;
+} UserAccount;
+
+
+UserAccount *user_account_get_default (void);
+UserAccount *user_account_get_by_node (xmlNodePtr node);
+void         user_account_add         (UserAccount *acocunt);
+void         user_account_save        (UserAccount *account);
+void         user_account_destroy     (UserAccount *account);
+
+
 xmlNodePtr get_root_node (gint tbl);
 xmlNodePtr get_user_root_node (void);
 xmlNodePtr get_group_root_node (void);
@@ -67,17 +92,20 @@ xmlNodePtr get_nis_user_root_node (void);
 xmlNodePtr get_db_node (xmlNodePtr node);
 gchar *my_xst_xml_element_get_content (xmlNodePtr node);
 gboolean check_node_complexity (xmlNodePtr node);
-gboolean check_user_root (GtkWindow *xd, xmlNodePtr node, const gchar *field, const gchar *value);
-gboolean check_user_login (GtkWindow *xd, xmlNodePtr node, const gchar *login);
-gboolean check_user_uid (GtkWindow *xd, xmlNodePtr node, const gchar *val);
-gboolean check_user_comment (GtkWindow *xd, xmlNodePtr, const gchar *val);
-gboolean check_user_home (GtkWindow *xd, xmlNodePtr node, const gchar *val);
-gboolean check_user_shell (GtkWindow *xd, xmlNodePtr node, const gchar *val);
+
+gboolean  check_user_root (xmlNodePtr node, const gchar *field, const gchar *value);
+gchar    *check_user_login (xmlNodePtr node, const gchar *login);
+gchar    *check_user_uid (xmlNodePtr node, const gchar *val);
+gchar    *check_user_comment (xmlNodePtr, const gchar *val);
+gchar    *check_user_home (xmlNodePtr node, const gchar *val);
+gchar    *check_user_shell (xmlNodePtr node, const gchar *val);
+gchar    *check_user_group (UserAccount *account, const gchar *val);
+
 gboolean check_group_name (GtkWindow *xd, xmlNodePtr node, const gchar *name);
 gboolean check_group_gid (GtkWindow *xd, xmlNodePtr node, const gchar *val);
 gboolean get_min_max (xmlNodePtr db_node, gint *min, gint *max);
 xmlNodePtr get_corresp_field (xmlNodePtr node);
-xmlNodePtr get_node_by_data (xmlNodePtr dbnode, gchar *field, gchar *fdata);
+xmlNodePtr get_node_by_data (xmlNodePtr dbnode, const gchar *field, const gchar *fdata);
 GList *get_user_list (gchar *field, xmlNodePtr group_node);
 GList *my_g_list_remove_duplicates (GList *list1, GList *list2);
 gchar *find_new_id (xmlNodePtr parent);
@@ -87,13 +115,13 @@ gchar *find_new_key (xmlNodePtr parent);
 
 void settings_prepare (ug_data *ud);
 void user_new_prepare (ug_data *ud);
-gboolean user_update (UserSettings *us);
 void user_passwd_dialog_prepare (xmlNodePtr node);
 gboolean check_login_delete (xmlNodePtr node);
 
 /* Group related */
 
 void group_new_prepare (ug_data *ud);
+void group_add (UserAccount *account, const gchar *group_name);
 gboolean group_update (ug_data *ud);
 gboolean check_group_delete (xmlNodePtr node);
 

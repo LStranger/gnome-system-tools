@@ -49,9 +49,6 @@ void quit_cb (XstTool *tool, gpointer data);
 
 static XstDialogSignal signals[] = {
 	{ "notebook",                    "switch_page",   on_notebook_switch_page },
-	{ "user_settings_dialog",        "delete_event",  on_user_settings_dialog_delete_event },
-	{ "user_settings_dialog",        "show",          on_user_settings_dialog_show },
-	{ "user_settings_dialog",        "clicked",       on_user_settings_clicked },
 	{ "group_settings_dialog",       "delete_event",  on_group_settings_dialog_delete_event },
 	{ "group_settings_dialog",       "show",          on_group_settings_dialog_show },
 	{ "group_settings_ok",           "clicked",       on_group_settings_ok_clicked },
@@ -64,21 +61,11 @@ static XstDialogSignal signals[] = {
 	{ "group_settings_all",          "unselect_row",  on_group_settings_all_select_row },
 	{ "user_new",                    "clicked",       on_user_new_clicked },
 	{ "user_delete",                 "clicked",       on_user_delete_clicked },
+	{ "user_settings",               "clicked",       on_user_settings_clicked },
 	{ "user_profiles",               "clicked",       on_user_profiles_clicked },
 	{ "group_new",                   "clicked",       on_group_new_clicked },
 	{ "group_delete",                "clicked",       on_group_delete_clicked },
-	{ "network_user_new",            "clicked",       on_network_user_new_clicked },
-	{ "network_group_new",           "clicked",       on_network_group_new_clicked },
-	{ "network_delete",              "clicked",       on_network_delete_clicked },
 	{ "showall",                     "toggled",       on_showall_toggled },
-	{ "user_settings_gmember",       "select_row",    on_user_settings_gmember_select_row },
-	{ "user_settings_gmember",       "unselect_row",  on_user_settings_gmember_select_row },
-	{ "user_settings_gall",          "select_row",    on_user_settings_gall_select_row },
-	{ "user_settings_gall",          "unselect_row",  on_user_settings_gall_select_row },
-	{ "user_settings_add",           "clicked",       on_user_settings_add_clicked },
-	{ "user_settings_remove",        "clicked",       on_user_settings_remove_clicked },
-	{ "user_passwd_change",          "clicked",       on_user_passwd_change_clicked },
-	{ "user_passwd_random",          "clicked",       on_user_passwd_random_clicked },
 	{ NULL }};
 
 static const XstWidgetPolicy policies[] = {
@@ -120,21 +107,11 @@ connect_signals (void)
 
 	/* Stupid libglade converts user_data to strings */
 
-	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_settings")),
-					"clicked",
-					GTK_SIGNAL_FUNC (on_settings_clicked),
-					GINT_TO_POINTER (TABLE_USER));
-	
 	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "group_settings")),
 					"clicked",
 					GTK_SIGNAL_FUNC (on_settings_clicked),
 					GINT_TO_POINTER (TABLE_GROUP));
 	
-	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "network_settings")),
-					"clicked",
-					GTK_SIGNAL_FUNC (on_settings_clicked),
-					GINT_TO_POINTER (TABLE_NET_GROUP));
-
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 }
 
@@ -274,7 +251,7 @@ main (int argc, char *argv[])
 	xst_init ("users-admin", argc, argv, NULL);
 	tool = xst_tool_new ();
 	xst_tool_construct (tool, "users", _("Users and Groups"));
-	
+
 	xst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
 	main_window_prepare ();
