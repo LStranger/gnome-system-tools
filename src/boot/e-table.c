@@ -230,9 +230,12 @@ table_create (void)
 	extras = create_extras ();
 	model = e_table_simple_new (boot_col_count,
 				    boot_row_count,
+				    NULL,
 				    boot_value_at,
 				    boot_set_value_at,
 				    boot_is_cell_editable,
+				    NULL,
+				    NULL,
 				    boot_duplicate_value,
 				    boot_free_value,
 				    boot_initialize_value,
