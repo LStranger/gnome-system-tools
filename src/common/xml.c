@@ -440,3 +440,16 @@ xml_parent_childs (xmlNodePtr parent)
 
 	return ret;
 }
+
+gchar *
+xml_get_child_content (xmlNodePtr parent, gchar *child)
+{
+	xmlNodePtr node;
+
+	node = xml_element_find_first (parent, child);
+	if (!node)
+		return NULL;
+
+	return xml_element_get_content (node);
+}
+

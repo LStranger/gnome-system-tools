@@ -146,9 +146,16 @@ tool_interface_load ()
 	tool_context->child = tool_widget_get (path);
 	g_free (path);
 
-#warning FIXME: this really needs to be a dialog
 	if (!tool_context->child)
+	{
+		GnomeDialog *dialog;
+
+		dialog = GNOME_DIALOG (gnome_error_dialog (
+					_("Undefined toplevel window in Glade file.")));
+
+		gnome_dialog_run (dialog);
 	        g_error ("Undefined toplevel window in Glade file.");
+	}
 
 	gtk_widget_ref (tool_context->child);
 	gtk_widget_unparent (tool_context->child);
