@@ -54,6 +54,7 @@ typedef struct _XstDialogSignal     XstDialogSignal;
 
 typedef struct _XstWidget           XstWidget;
 typedef struct _XstWidgetPolicy     XstWidgetPolicy;
+typedef struct _XstWidgetUserPolicy XstWidgetUserPolicy;
 
 typedef struct _XstReportLine       XstReportLine;
 

@@ -257,6 +257,31 @@ xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy *xwp)
 	apply_widget_policies (xd);
 }
 
+void
+xst_dialog_set_widget_user_modes (XstDialog *xd, const XstWidgetUserPolicy *xwup)
+{
+	XstWidget *xw;
+	int i;
+
+	for (i = 0; xwup [i].widget; i++)
+	{
+		xw = xst_dialog_get_xst_widget (xd, xwup [i].widget);
+
+		if (!xw)
+		{
+			xw = xst_widget_new (xst_dialog_get_widget (xd, xwup [i].widget), xd,
+					     XST_WIDGET_MODE_SENSITIVE, XST_WIDGET_MODE_SENSITIVE,
+					     FALSE, TRUE);
+
+			xd->xst_widget_list = g_slist_append (xd->xst_widget_list, xw);
+		}
+
+		xst_widget_set_user_mode (xw, xwup [i].mode);
+	}
+
+	apply_widget_policies (xd);
+}
+
 XstWidget *
 xst_dialog_get_xst_widget (XstDialog *xd, const gchar *name)
 {

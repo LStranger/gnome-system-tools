@@ -45,6 +45,12 @@ struct _XstWidgetPolicy {
 	gboolean       user_sensitive;
 };
 
+struct _XstWidgetUserPolicy {
+	const gchar *widget;
+
+	XstWidgetMode mode;
+};
+
 XstWidget *xst_widget_new                (GtkWidget *w, XstDialog *d, XstWidgetMode basic,
 			                  XstWidgetMode advanced, gboolean need_access,
 			                  gboolean user_sensitive);
