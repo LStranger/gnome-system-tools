@@ -1,7 +1,7 @@
-/* passwd.c: this file is part of users-admin, a ximian-setup-tool frontend 
+/* e-table.h: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 
- * Copyright (C) 2000-2001 Ximian, Inc.
+ * Copyright (C) 2000 Helix Code, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -20,14 +20,23 @@
  * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
 
-#ifndef __PASSWD_H
-#define __PASSWD_H
+#ifndef __E_TABLE_H
+#define __E_TABLE_H
 
-#include <glib.h>
-#include "user_group.h"
-#include "e-table.h"
+#include <gnome.h>
+#include <gal/e-table/e-tree-simple.h>
 
-extern gchar *passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_quality);
-extern gchar *passwd_get_random (void);
+void clear_table (ETreeModel *model, ETreePath *root_path);
+void clear_all_tables (void);
+void populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node);
+void populate_all_tables (void);
+extern void create_tables (void);
+void tables_set_state (gboolean state);
+xmlNodePtr get_selected_node (void);
+gboolean delete_selected_node (void);
+void current_table_update_row (void);
+void current_table_new_row (xmlNodePtr node);
 
-#endif /* PASSWD_H */
+
+#endif /* E_TABLE_H */
+

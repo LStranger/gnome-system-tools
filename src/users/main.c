@@ -1,5 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* main.c: this file is part of users-admin, a helix-setup-tool frontend 
+/* main.c: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.
@@ -18,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
 
 
@@ -41,7 +40,6 @@
 #include "transfer.h"
 #include "e-table.h"
 #include "callbacks.h"
-#include "network.h"
 
 static void set_access_sensitivity (void)
 {
@@ -74,11 +72,14 @@ static void set_access_sensitivity (void)
 static void
 update_complexity (ToolComplexity complexity)
 {
-	e_table_state (complexity == TOOL_COMPLEXITY_ADVANCED);
+	tables_set_state (complexity == TOOL_COMPLEXITY_ADVANCED);
 	gtk_widget_set_sensitive (tool_widget_get ("defs_container"),
 				  complexity == TOOL_COMPLEXITY_ADVANCED);
 
 	user_actions_set_sensitive (FALSE);
+
+	clear_all_tables ();
+	populate_all_tables ();
 }
 
 int
@@ -91,14 +92,11 @@ main (int argc, char *argv[])
 	tool_init("users", argc, argv);
 	tool_set_complexity_func (update_complexity);
 	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
-	
-	tool_set_frozen(TRUE);
-	transfer_logindefs_from_xml (xml_doc_get_root(tool_config_get_xml ()));
-	e_table_create ();
-	network_create ();
-	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
-	tool_set_frozen(FALSE);
 
+	tool_set_frozen(TRUE);
+	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
+	create_tables ();
+	tool_set_frozen(FALSE);
   
 	gtk_widget_show (tool_get_top_window ());
 	set_access_sensitivity ();

@@ -1,7 +1,7 @@
-/* passwd.c: this file is part of users-admin, a helix-setup-tool frontend 
+/* passwd.c: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 
- * Copyright (C) 2000-2001 Ximian, Inc.
+ * Copyright (C) 2000 Helix Code, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -17,13 +17,14 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
+
+/* All this for password generation and crypting. */
 
 #include "config.h"
 #include "passwd.h"
 
-/* All this for password generation and crypting. */
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -36,9 +37,11 @@
 #endif
 
 #include <crypt.h>
-#include "md5.h"
 
+#include "global.h"
+#include "md5.h"
 #include "e-table.h"
+
 
 #define RANDOM_PASSWD_SIZE 6
 
@@ -86,7 +89,7 @@ passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_q
 	else
 		password = g_strdup (crypt (new_passwd, passwd_rand_str (salt, 2)));
 
-	my_xml_set_child_content (node, "password", password);
+	xml_set_child_content (node, "password", password);
 	return (gchar *) 0;
 }
 

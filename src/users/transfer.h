@@ -1,4 +1,4 @@
-/* transfer.h: this file is part of users-admin, a helix-setup-tool frontend 
+/* transfer.h: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
 
 #ifndef __TRANSFER_H
@@ -29,6 +29,5 @@
 void transfer_config_saved(xmlNodePtr root);
 void transfer_xml_to_gui(xmlNodePtr root);
 void transfer_gui_to_xml(xmlNodePtr root);
-void transfer_logindefs_from_xml (xmlNodePtr root);
 
 #endif /* TRANSFER_H */

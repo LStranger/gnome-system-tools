@@ -18,9 +18,8 @@ users_admin_SOURCES = \
 	passwd.c passwd.h \
 	transfer.c transfer.h \
 	user_group.c user_group.h \
-	network.c network.h \
 	md5.c md5.h md5_crypt.c \
-	 e-table.c e-table.h
+	e-table.c e-table.h 
 
 users_admin_CFLAGS = 
 

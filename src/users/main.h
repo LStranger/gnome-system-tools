@@ -1,4 +1,4 @@
-/* main.h: this file is part of users-admin, a helix-setup-tool frontend for user administration.
+/* main.h: this file is part of users-admin, a ximian-setup-tool frontend for user administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.
  *
@@ -16,6 +16,6 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
 

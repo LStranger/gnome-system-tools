@@ -1,4 +1,4 @@
-/* transfer.c: this file is part of users-admin, a helix-setup-tool frontend 
+/* transfer.c: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.
@@ -17,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
 
 /* Functions for transferring information between XML tree and UI */
@@ -33,7 +33,6 @@
 #include "user_group.h"
 #include "callbacks.h"
 #include "e-table.h"
-#include "network.h"
 
 /* Structure with some hard-coded defaults, just in case any of the tags is not present. */
 /* These were taken form RH 6.2's default values. Any better suggestions? */
@@ -77,23 +76,9 @@ my_atoi (gchar *str)
 	return atoi (str);
 }
 
-static gchar *
-my_xml_element_get_content (xmlNodePtr node)
-{
-	gchar *ret;
-	
-	ret = xml_element_get_content (node);
-	if (!ret) 
-	{
-		ret = g_new0 (gchar, 1);
-	}
-	
-	return ret;
-}
-
 /* ---- */
 
-void
+static void
 transfer_logindefs_from_xml (xmlNodePtr root)
 {
 	xmlNodePtr node, n0;
@@ -105,7 +90,6 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 	};
 	gchar *tag, *tmp;
 	gint i;
-
 
 	/* Assign defaults */
 	
@@ -250,8 +234,8 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 void
 transfer_xml_to_gui (xmlNodePtr root)
 {
+	transfer_logindefs_from_xml (root);
 	transfer_logindefs_to_gui ();
-	network_populate (root);
 }
 
 void
