@@ -9,4 +9,4 @@ gchar *s = N_("label1");
 gchar *s = N_("Add...");
 gchar *s = N_("Remove");
 gchar *s = N_("Settings...");
-gchar *s = N_(" Advanced >> ");
+gchar *s = N_(" More Options >> ");

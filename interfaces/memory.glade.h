@@ -15,7 +15,7 @@ gchar *s = N_("Size");
 gchar *s = N_("Create...");
 gchar *s = N_("Remove");
 gchar *s = N_("Settings...");
-gchar *s = N_(" Advanced >> ");
+gchar *s = N_(" More Options >> ");
 gchar *s = N_("Available partitions:");
 gchar *s = N_("Device");
 gchar *s = N_("Size");
@@ -31,9 +31,8 @@ gchar *s = N_("Priority:");
 gchar *s = N_("MB");
 gchar *s = N_("New Swap Device");
 gchar *s = N_("Swap type:");
-gchar *s = N_("partition\n"
-              "file\n"
-              "");
+gchar *s = N_("partition");
+gchar *s = N_("file");
 gchar *s = N_("Enabled");
 gchar *s = N_("Settings");
 gchar *s = N_("Path:");

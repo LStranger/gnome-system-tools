@@ -12,4 +12,4 @@ gchar *s = N_("Host IP:");
 gchar *s = N_("Use DHCP server");
 gchar *s = N_("Enable automatically at boot");
 gchar *s = N_("Primary networking");
-gchar *s = N_(" Advanced >> ");
+gchar *s = N_(" More Options >> ");

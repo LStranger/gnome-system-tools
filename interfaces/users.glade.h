@@ -32,10 +32,11 @@ gchar *s = N_("Maximum GID:");
 gchar *s = N_("Password expiration");
 gchar *s = N_("Days a password may be used:");
 gchar *s = N_("Minimum days allowed between password changes:");
-gchar *s = N_("Days between warning and password expiration:  ");
+gchar *s = N_("Days between warning and\n"
+              " assword expiration:  ");
 gchar *s = N_("Minimum  password length:");
 gchar *s = N_("Defaults");
-gchar *s = N_(" Advanced >> ");
+gchar *s = N_(" More Options >> ");
 gchar *s = N_("User Settings");
 gchar *s = N_("Basic settings");
 gchar *s = N_("Main group:");

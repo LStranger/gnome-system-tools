@@ -227,8 +227,8 @@ static gboolean timeout_done = FALSE;
 static gboolean report_list_visible = FALSE;
 
 
-void
-tool_read_report_visible_toggle ()
+static void
+tool_read_report_visible_toggle (void)
 {
 	GtkAdjustment *vadj;
 	
@@ -258,7 +258,7 @@ tool_read_report_visible_toggle ()
 
 
 static void
-timeout_cb ()
+timeout_cb (void)
 {
 	timeout_done = TRUE;
 
@@ -395,7 +395,7 @@ read_progress (int fd)
 
 
 gboolean
-tool_config_load ()
+tool_config_load (void)
 {
 	ToolContext *tc;
 	int fd [2];
@@ -600,11 +600,11 @@ tool_get_complexity ()
 	return (tool_context->complexity);
 }
 
-
 void
 tool_set_complexity (ToolComplexity complexity)
 {
 	GtkWidget *button, *label;
+	gchar *txt = NULL;
 	
 	tool_context->complexity = complexity;
 
@@ -613,11 +613,30 @@ tool_set_complexity (ToolComplexity complexity)
 	
 	button = tool_widget_get ("complexity");
 	label = GTK_BIN (button)->child;
-	if (complexity == TOOL_COMPLEXITY_BASIC)
+	
+	switch (complexity)
+	{
+	 case TOOL_COMPLEXITY_BASIC:
 		/* Translation: respect the spaces before and after, and the minus than signs. */
-		gtk_label_set_text (GTK_LABEL (label), _(" Advanced >> "));
-	else
-		gtk_label_set_text (GTK_LABEL (label), _(" << Basic "));
+		txt = _(" More Options >> ");
+		break;
+	 case TOOL_COMPLEXITY_INTERMEDIATE:
+		txt = _(" Full Options >> ");
+		break;
+	 case TOOL_COMPLEXITY_ADVANCED:
+		txt = _(" << Few Options ");
+		break;
+	 default:
+		g_warning ("Unexpected complexity level.");
+	}
+	
+	gtk_label_set_text (GTK_LABEL (label), txt);
+}
+
+static void tool_set_initial_complexity (void)
+{
+	/* FIXME: we need to remember (gnome-config) the last complexity set. */
+	tool_set_complexity (TOOL_COMPLEXITY_BASIC);
 }
 
 GtkWidget *
@@ -725,7 +744,7 @@ tool_init (gchar *task, int argc, char *argv [])
 		tool_set_access (FALSE);
 	}
 	else
-	        tool_set_access (TRUE);
+		tool_set_access (TRUE);
 
 	tool_splash_show ();
 	tool_config_load ();
@@ -749,11 +768,7 @@ tool_init (gchar *task, int argc, char *argv [])
 	 * NOTE: This is temporary, until we have more complexity levels
 	 * for at least one tool */
 
-	/* users-admin is axperimenting with advanced complexity, so here we go. */
-/*	w0 = tool_widget_get ("complexity");
-	if (w0) gtk_widget_set_sensitive (w0, FALSE);*/
-	tool_context->complexity = TOOL_COMPLEXITY_BASIC;
+	tool_set_initial_complexity ();
 
-	g_free (s);
 	return (tc);
 }
