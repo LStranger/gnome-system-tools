@@ -46,6 +46,12 @@ static XstDialogSignal signals [] = {
 	{ "dialog_service_priority", "value-changed", G_CALLBACK (on_service_priority_changed) },
 	{ NULL }};
 
+static XstWidgetPolicy policies [] = {
+	/* Name                     Basic                        Advanced                   Root   User */
+	{ "settings_button",        XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{NULL}
+};
+
 static void 
 connect_signals (XstTool *tool) 
 {
@@ -68,6 +74,8 @@ main (int argc, char *argv[])
 	tool = xst_tool_new();
 	xst_tool_construct (tool, "runlevel", _("Runlevel Settings"));
 	table_create ();
+
+	xst_dialog_set_widget_policies (tool->main_dialog, policies);
 	
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
 	xst_tool_add_report_hooks (tool, report_hooks);
