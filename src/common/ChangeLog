@@ -1,3 +1,27 @@
+2001-10-16  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c: removed platform_add_supported_cb: things
+	are done with directives now, not reports.
+	compare_platforms passed to xst-platform.c.
+	(xst_tool_get_supported_platforms): run the "platforms"
+	directive and build a list of XstPlatforms.
+	(xst_tool_process_startup): minor restructuring.
+	(xst_tool_send_directive): don't init backend here.
+	But check to see if it is ready.
+	(xst_tool_run_get_directive_va): init backend before setting
+	lock state. This allows to run directives inside init seq.
+	(xst_tool_run_set_directive_va): same.
+
+	* xst-platform.c (xst_platform_new): require key arg too.
+	(xst_platform_new_from_node): Creates a platform struct
+	from a compliant xmlNode.
+	(xst_platform_new_from_report_line): Take second arg from
+	rline and use that as the new name.
+	(xst_platform_cmp): Taken from xst-tool. It should live here.
+	(xst_platform_dup): Use platform_new to perform this.
+	(xst_platform_free): free the key too.
+	(xst_platform_get_key): counterpart to get_name.
+
 2001-10-10  Hans Petter Jansson  <hpj@ximian.com>
 
 	* xst-tool.h (XST_TOOL_MAKE_TYPE): Don't always register as

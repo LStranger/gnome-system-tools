@@ -29,6 +29,7 @@
 #include "xst-platform.h"
 #include "xst-ui.h"
 #include "xst-su.h"
+#include "xst-xml.h"
 
 #include <bonobo.h>
 #include <config-archiver/archiver-client.h>
@@ -66,28 +67,24 @@ static GtkObjectClass *parent_class;
 static gint xsttool_signals [LAST_SIGNAL] = { 0 };
 static const gchar *XST_TOOL_EOR = "\n<!-- XST: end of request -->\n";
 
-static gboolean platform_unsupported_cb   (XstTool *tool, XstReportLine *rline, gpointer data);
-static gboolean platform_add_supported_cb (XstTool *tool, XstReportLine *rline, gpointer data);
 static gboolean platform_set_current_cb   (XstTool *tool, XstReportLine *rline, gpointer data);
+static gboolean platform_unsupported_cb   (XstTool *tool, XstReportLine *rline, gpointer data);
 static gboolean report_finished_cb        (XstTool *tool, XstReportLine *rline, gpointer data);
 
 static void report_dispatch (XstTool *tool);
 
-static gint xst_tool_compare_platforms (XstPlatform *a, XstPlatform *b);
-
 static XstReportHookEntry common_report_hooks[] = {
 /*        key                 function                    type                      allow_repeat user_data */
 	{ "end",              report_finished_cb,         XST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
-	{ "platform_list",    platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE,        NULL }, 
+	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_SAVE,     FALSE,       NULL }, 
 	{ "platform_unsup",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE,       NULL },
 	{ "platform_undet",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE,       NULL },
-	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_SAVE,     FALSE,       NULL }, 
 	{ NULL,               NULL,                       -1,                       FALSE,       NULL }
 };
 
 static gchar *location_id;    /* Location in which we are editing */
 
-/* --- Report hook callbacks --- */
+/* --- Report hook and signal callbacks --- */
 
 static void
 platform_list_select_row_cb (GtkCList *clist, gint row, gint column, GdkEvent *event,
@@ -141,26 +138,6 @@ platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
 }
 
 static gboolean
-platform_unsupported_cb (XstTool *tool, XstReportLine *rline, gpointer data)
-{
-	tool->run_again = TRUE;
-
-	return TRUE;
-}
-
-static gboolean
-platform_add_supported_cb (XstTool *tool, XstReportLine *rline, gpointer data)
-{
-	XstPlatform *platform;
-
-	platform = xst_platform_new_from_report_line (rline);
-	g_return_val_if_fail (platform != NULL, TRUE);
-
-	xst_tool_add_supported_platform (tool, platform);
-	return TRUE;
-}
-
-static gboolean
 platform_set_current_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 {
 	XstPlatform *platform;
@@ -173,6 +150,14 @@ platform_set_current_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 
 	tool->current_platform = platform;
 	tool->run_again = FALSE;
+	return TRUE;
+}
+
+static gboolean
+platform_unsupported_cb (XstTool *tool, XstReportLine *rline, gpointer data)
+{
+	tool->run_again = TRUE;
+
 	return TRUE;
 }
 
@@ -190,14 +175,6 @@ report_finished_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 	return TRUE;
 }
 
-/* --- Utility function --- */
-
-static gint
-xst_tool_compare_platforms (XstPlatform *a, XstPlatform *b)
-{
-	return strcmp (a->name, b->name);
-}
-
 /* --- XstTool --- */
 
 void
@@ -210,11 +187,11 @@ xst_tool_add_supported_platform (XstTool *tool, XstPlatform *platform)
 	 * we're paranoid here. */
 	g_return_if_fail
 		(g_slist_find_custom (tool->supported_platforms_list, platform,
-		    (GCompareFunc) xst_tool_compare_platforms) == NULL);
+		    (GCompareFunc) xst_platform_cmp) == NULL);
 
 	tool->supported_platforms_list =
 		g_slist_insert_sorted (tool->supported_platforms_list, platform,
-		    (GCompareFunc) xst_tool_compare_platforms);
+		    (GCompareFunc) xst_platform_cmp);
 }
 
 void
@@ -524,6 +501,30 @@ report_progress (XstTool *tool, const gchar *label)
 #endif
 }
 
+static GSList *
+xst_tool_get_supported_platforms (XstTool *tool)
+{
+	xmlDoc *doc;
+	xmlNode *root, *node;
+	GSList *list;
+	XstPlatform *plat;
+	
+	doc = xst_tool_run_get_directive (tool, NULL, "platforms", NULL);
+	list = NULL;
+
+	g_return_val_if_fail (doc != NULL, NULL);
+	root = xst_xml_doc_get_root (doc);
+	for (node = xst_xml_element_find_first (root, "platform"); node;
+	     node = xst_xml_element_find_next (node, "platform")) {
+		plat = xst_platform_new_from_node (node);
+		if (!plat)
+			continue;
+		list = g_slist_append (list, plat);
+	}
+
+	return list;
+}
+
 static void
 xst_tool_run_platform_dialog (XstTool *tool)
 {
@@ -534,6 +535,8 @@ xst_tool_run_platform_dialog (XstTool *tool)
 	/* Fill in the platform GtkCList */
 
 	gtk_clist_clear (GTK_CLIST (tool->platform_list));
+
+	tool->supported_platforms_list = xst_tool_get_supported_platforms (tool);
 
 	for (list = tool->supported_platforms_list; list;
 	     list = g_slist_next (list))
@@ -568,7 +571,10 @@ xst_tool_process_startup (XstTool *tool)
 	/* let's process those startup reports. */
 	tool->report_hook_type = XST_REPORT_HOOK_LOAD;
 	report_progress (tool, NULL);
-	if (tool->run_again) {
+
+	/* stable version users should pass here only once,
+	   but if there's an inconsistency the dialog will repeat */
+	while (tool->run_again) {
 		xst_tool_run_platform_dialog (tool);
 		g_assert (tool->current_platform);
 		
@@ -576,7 +582,7 @@ xst_tool_process_startup (XstTool *tool)
 			root_access = ROOT_ACCESS_SIMULATED_DISABLED;
 		
 		xst_tool_run_set_directive (tool, NULL, NULL, "platform_set",
-					    tool->current_platform->name, NULL);
+					    xst_platform_get_key (tool->current_platform), NULL);
 
 		if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
 			root_access = ROOT_ACCESS_SIMULATED;
@@ -626,7 +632,7 @@ xst_tool_init_backend (XstTool *tool)
 		if (tool->current_platform)
 			execl (tool->script_path, tool->script_path,
 			       "--progress", "--report", "--platform",
-			       xst_platform_get_name (tool->current_platform), NULL);
+			       xst_platform_get_key (tool->current_platform), NULL);
 		else
 #ifndef XST_DEBUG_STRACE_BACKEND
 			execl (tool->script_path, tool->script_path, "--progress",
@@ -784,6 +790,8 @@ xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 	gchar *arg;
 	FILE *f;
 
+	g_return_if_fail (tool->backend_pid >= 0);
+
 	directive_line = g_string_new (directive);
 	while ((arg = va_arg (ap, char *)) != NULL) {
 		g_string_append (directive_line, "::");
@@ -792,9 +800,6 @@ xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 	va_end (ap);
 	g_string_append_c (directive_line, '\n');
 	
-	if (tool->backend_pid < 0)
-		xst_tool_init_backend (tool);
-
 	f = fdopen (dup (tool->backend_write_fd), "w");
 	fprintf (f, directive_line->str);
 	fclose (f);
@@ -811,6 +816,9 @@ xst_tool_run_get_directive_va (XstTool *tool, const gchar *report_sign, const gc
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
+
+	if (tool->backend_pid < 0)
+		xst_tool_init_backend (tool);
 	tool->directive_running = TRUE;
 
 	xst_tool_send_directive (tool, directive, ap);
@@ -858,6 +866,9 @@ xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
+
+	if (tool->backend_pid < 0)
+		xst_tool_init_backend (tool);
 	tool->directive_running = TRUE;
 
 	/* don't actually run if we are just pretending */

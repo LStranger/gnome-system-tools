@@ -23,26 +23,56 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include <tree.h>
+
 #include "xst-platform.h"
 #include "xst-report-line.h"
+#include "xst-xml.h"
 
 XstPlatform *
-xst_platform_new (const gchar *name)
+xst_platform_new (const gchar *key, const gchar *name)
 {
 	XstPlatform *xp;
 
 	g_return_val_if_fail (name != NULL, NULL);
 
 	xp = g_new0 (XstPlatform, 1);
+	xp->key  = g_strdup (key);
 	xp->name = g_strdup (name);
 
 	return xp;
 }
 
 XstPlatform *
+xst_platform_new_from_node (xmlNodePtr node)
+{
+	gchar *key;
+	gchar *name;
+	
+	g_return_val_if_fail (node != NULL, NULL);
+
+	name = xst_xml_get_child_content (node, "name");
+	key = xst_xml_get_child_content (node, "key");
+
+	if (key == NULL) {
+		g_free (name);
+		g_warning ("Invalid platform XML node: key != NULL failed.");
+		return NULL;
+	}
+
+	if (name == NULL || *name == 0) {
+		g_free (name);
+		name = strdup (key);
+	}
+
+	return xst_platform_new (key, name);
+}
+
+XstPlatform *
 xst_platform_new_from_report_line (XstReportLine *rline)
 {
 	const gchar *key;
+	const gchar **argv;
 	
 	g_return_val_if_fail (rline != NULL, NULL);
 
@@ -52,7 +82,8 @@ xst_platform_new_from_report_line (XstReportLine *rline)
 			      !strcmp (key, "platform_success"),
 			      NULL);
 
-	return xst_platform_new (xst_report_line_get_argv (rline)[0]);
+	argv = xst_report_line_get_argv (rline);
+	return xst_platform_new (argv[0], argv[1]);
 }
 
 XstPlatform *
@@ -62,17 +93,31 @@ xst_platform_dup (XstPlatform *platform)
 
 	g_return_val_if_fail (platform != NULL, NULL);
 
-	new_platform = g_new0 (XstPlatform, 1);
-	new_platform->name = g_strdup (platform->name);
+	new_platform = xst_platform_new (platform->key, platform->name);
 
 	return new_platform;
+}
+
+gint
+xst_platform_cmp (XstPlatform *a, XstPlatform *b)
+{
+	return strcmp (a->key, b->key);
 }
 
 void
 xst_platform_free (XstPlatform *platform)
 {
+	g_free (platform->key);
 	g_free (platform->name);
 	g_free (platform);
+}
+
+const gchar *
+xst_platform_get_key (XstPlatform *platform)
+{
+	g_return_val_if_fail (platform != NULL, NULL);
+	
+	return (platform->key);
 }
 
 const gchar *

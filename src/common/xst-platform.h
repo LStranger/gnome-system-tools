@@ -22,19 +22,25 @@
 #ifndef XST_PLATFORM_H
 #define XST_PLATFORM_H
 
+#include <tree.h>
+
 #include "xst-types.h"
 #include "xst-tool.h"
 
 struct _XstPlatform {
 	gchar *name;
+	gchar *key;
 };
 
-XstPlatform     *xst_platform_new                  (const gchar *name);
+XstPlatform     *xst_platform_new                  (const gchar *key, const gchar *name);
+XstPlatform     *xst_platform_new_from_node        (xmlNodePtr node);
 XstPlatform     *xst_platform_new_from_report_line (XstReportLine *rline);
 XstPlatform     *xst_platform_dup                  (XstPlatform *platform);
+gint             xst_platform_cmp                  (XstPlatform *a, XstPlatform *b);
 
 void             xst_platform_free                 (XstPlatform *platform);
 
+const gchar     *xst_platform_get_key              (XstPlatform *platform);
 const gchar     *xst_platform_get_name             (XstPlatform *platform);
 
 #endif /* XST_PLATFORM_H */

@@ -97,8 +97,8 @@ struct _XstTool {
 	GSList            *report_hook_list;
 	XstReportHook     *report_hook_defaults[XST_MAJOR_MAX];
 
-	XstPlatform *current_platform;     /* Always set from backend report */
-	GSList *supported_platforms_list;  /* Gets set only if backend breaks */
+	XstPlatform *current_platform;         /* Always set from backend report  */
+	GSList      *supported_platforms_list; /* Gets set only if backend breaks */
 };
 
 struct _XstToolClass {
