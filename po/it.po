@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools 0.2.0\n"
-"POT-Creation-Date: 2000-11-06 04:50+0100\n"
+"POT-Creation-Date: 2000-11-08 16:38-0600\n"
 "PO-Revision-Date: 2000-11-06 05:33+01:00\n"
 "Last-Translator: Christopher R. Gabriel <cgabriel@softwarelibero.org>\n"
 "Language-Team: Italian <it@li.org>\n"
@@ -110,7 +110,7 @@ msgstr "Dischi e partizioni"
 #: interfaces/disks.glade.h:24 interfaces/hardware.glade.h:12
 #: interfaces/memory.glade.h:18 interfaces/nameresolution.glade.h:40
 #: interfaces/networking.glade.h:24 interfaces/shares.glade.h:47
-#: interfaces/time.glade.h:48 interfaces/users.glade.h:23
+#: interfaces/time.glade.h:48 interfaces/users.glade.h:25
 msgid " Advanced >> "
 msgstr "Avanzato >> "
 
@@ -179,7 +179,7 @@ msgid "Remove"
 msgstr "Rimuovi"
 
 #: interfaces/hardware.glade.h:11 interfaces/memory.glade.h:17
-#: interfaces/users.glade.h:14 interfaces/users.glade.h:21
+#: interfaces/users.glade.h:15 interfaces/users.glade.h:23
 msgid "Settings..."
 msgstr "Impostazioni..."
 
@@ -444,7 +444,7 @@ msgstr "Percorso locale:"
 msgid "Export name:"
 msgstr ""
 
-#: interfaces/shares.glade.h:62 interfaces/users.glade.h:27
+#: interfaces/shares.glade.h:62 interfaces/users.glade.h:29
 msgid "Comment:"
 msgstr "Commento:"
 
@@ -552,100 +552,130 @@ msgid ""
 msgstr ""
 
 #: interfaces/users.glade.h:9
+#, fuzzy
+msgid "label24"
+msgstr "etichetta1"
+
+#: interfaces/users.glade.h:10
 msgid "New User..."
 msgstr "Nuovo utente..."
 
-#: interfaces/users.glade.h:10 interfaces/users.glade.h:18
+#: interfaces/users.glade.h:11 interfaces/users.glade.h:20
 msgid "Delete"
 msgstr "Cancella"
 
-#: interfaces/users.glade.h:11
+#: interfaces/users.glade.h:12 src/users/callbacks.c:221
 msgid "Settings for the selected user"
 msgstr "Impostazione per l'utente selezionato"
 
-#: interfaces/users.glade.h:12
+#: interfaces/users.glade.h:13
 msgid "Change the user's password or options like its name."
 msgstr "Cambia la password dell'utente o le sue opzioni."
 
-#: interfaces/users.glade.h:13
+#: interfaces/users.glade.h:14
 msgid "Change Password..."
 msgstr "Cambia password..."
 
-#: interfaces/users.glade.h:15
+#: interfaces/users.glade.h:16
 msgid "Users"
 msgstr "Utenti"
 
-#: interfaces/users.glade.h:16
-msgid "Users may be grouped to share resources with others."
-msgstr "Gli utenti possono essere raggruppati per condividere con altri risorse."
-
 #: interfaces/users.glade.h:17
+msgid "Users may be grouped to share resources with others."
+msgstr ""
+"Gli utenti possono essere raggruppati per condividere con altri risorse."
+
+#: interfaces/users.glade.h:18
+#, fuzzy
+msgid "label25"
+msgstr "etichetta1"
+
+#: interfaces/users.glade.h:19
 msgid "New Group..."
 msgstr "Nuovo gruppo..."
 
-#: interfaces/users.glade.h:19
+#: interfaces/users.glade.h:21 src/users/callbacks.c:323
 msgid "Settings for the selected group"
 msgstr "Impostazioni per il gruppo selezionato"
 
-#: interfaces/users.glade.h:20
+#: interfaces/users.glade.h:22
 msgid "Change the group's options like its name and members."
 msgstr "Cambia le opzioni del gruppo come il nome o i suoi membri."
 
-#: interfaces/users.glade.h:22
+#: interfaces/users.glade.h:24
 msgid "Groups"
 msgstr "Gruppi"
 
-#: interfaces/users.glade.h:24
+#: interfaces/users.glade.h:26
 msgid "User Settings"
 msgstr "Impostazioni utente"
 
-#: interfaces/users.glade.h:25
+#: interfaces/users.glade.h:27
 msgid "Main group:"
 msgstr "Gruppo principale:"
 
-#: interfaces/users.glade.h:26
+#: interfaces/users.glade.h:28
 msgid "User name:"
 msgstr "Nome utente:"
 
-#: interfaces/users.glade.h:28
+#: interfaces/users.glade.h:30
 msgid "Change Password"
 msgstr "Cambia password"
 
-#: interfaces/users.glade.h:29
+#: interfaces/users.glade.h:31
 msgid "New password:"
 msgstr "Nuova password:"
 
-#: interfaces/users.glade.h:30
+#: interfaces/users.glade.h:32
 msgid "Confirmation:"
 msgstr "Conferma:"
 
-#: interfaces/users.glade.h:31
+#: interfaces/users.glade.h:33
+msgid "Check quality."
+msgstr ""
+
+#: interfaces/users.glade.h:34
+#, fuzzy
+msgid "  Random Password  "
+msgstr "Cambia password"
+
+#: interfaces/users.glade.h:35
 msgid "Group Settings"
 msgstr "Impostzioni Gruppo"
 
-#: interfaces/users.glade.h:32
+#: interfaces/users.glade.h:36
 msgid "Group name:"
 msgstr "Nome del gruppo:"
 
-#: interfaces/users.glade.h:33
+#: interfaces/users.glade.h:37
 msgid "Members"
 msgstr "Membri"
 
-#: interfaces/users.glade.h:34
+#: interfaces/users.glade.h:38
 msgid "All Users"
 msgstr "Tutti gli utenti"
 
-#: interfaces/users.glade.h:35
+#: interfaces/users.glade.h:39
 msgid "Member Users"
 msgstr "Utenti membri"
 
-#: interfaces/users.glade.h:36
+#: interfaces/users.glade.h:40
 msgid "Add ->"
 msgstr "Aggiungi ->"
 
-#: interfaces/users.glade.h:37
+#: interfaces/users.glade.h:41
 msgid "Remove <-"
 msgstr "Rimuovi <-"
+
+#: interfaces/users.glade.h:42
+#, fuzzy
+msgid "label27"
+msgstr "etichetta1"
+
+#: interfaces/users.glade.h:43
+#, fuzzy
+msgid "label26"
+msgstr "etichetta1"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -732,7 +762,7 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Annulla"
 
-#: src/common/tool.c:511
+#: src/common/tool.c:518
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -747,3 +777,116 @@ msgstr ""
 "lanciando il comando \"su\" da una shell.\n"
 "\n"
 "Non sarà possibile effetturare alcuna modifica. Continuare?"
+
+#. No name, no swap
+#: src/memory/callbacks.c:569
+msgid "You have to specify path to new swap location!"
+msgstr ""
+
+#. It's already in there, can't add
+#: src/memory/callbacks.c:584
+msgid "It's already used as swap space!"
+msgstr ""
+
+#: src/users/callbacks.c:135
+#, fuzzy, c-format
+msgid "Settings for User %s"
+msgstr "Impostazione per l'utente selezionato"
+
+#: src/users/callbacks.c:150
+#, c-format
+msgid "Password for User %s"
+msgstr ""
+
+#: src/users/callbacks.c:193
+#, c-format
+msgid "Are you sure you want to delete user %s?"
+msgstr ""
+
+#: src/users/callbacks.c:230
+#, fuzzy
+msgid "Settings for user "
+msgstr "Impostazione per l'utente selezionato"
+
+#: src/users/callbacks.c:261
+#, fuzzy, c-format
+msgid "Settings for Group %s"
+msgstr "Impostazioni per il gruppo selezionato"
+
+#: src/users/callbacks.c:282
+#, fuzzy
+msgid "Create New Group"
+msgstr "Nuovo gruppo..."
+
+#: src/users/callbacks.c:296
+#, c-format
+msgid "Are you sure you want to delete group %s?"
+msgstr ""
+
+#: src/users/callbacks.c:333
+#, fuzzy
+msgid "Settings for group "
+msgstr "Impostazioni per il gruppo selezionato"
+
+#: src/users/callbacks.c:457
+#, c-format
+msgid "Password set to \"%s\"."
+msgstr ""
+
+#: src/users/callbacks.c:491
+msgid ""
+"The password and its confirmation\n"
+"must match."
+msgstr ""
+
+#: src/users/callbacks.c:499
+#, c-format
+msgid ""
+"Bad password: %s.\n"
+"Please try with a new password."
+msgstr ""
+
+#. Changes have been made.
+#: src/users/callbacks.c:784
+msgid ""
+"There are changes which haven't been applyed.\n"
+"Apply now?"
+msgstr ""
+
+#: src/users/callbacks.c:853 src/users/callbacks.c:936
+msgid "Username is empty."
+msgstr ""
+
+#: src/users/callbacks.c:900
+#, fuzzy
+msgid "Select main group."
+msgstr "Gruppo principale:"
+
+#: src/users/callbacks.c:954
+#, c-format
+msgid "User %s already exists."
+msgstr ""
+
+#: src/users/callbacks.c:969
+msgid "Please set a valid username, using only lower-case letters."
+msgstr ""
+
+#: src/users/callbacks.c:999
+msgid ""
+"Please set a valid main group name, with only lower-case letters,\n"
+"or select one from the pull-down menu."
+msgstr ""
+
+#: src/users/callbacks.c:1072 src/users/callbacks.c:1143
+#, fuzzy
+msgid "Group name is empty."
+msgstr "Nome del gruppo:"
+
+#: src/users/callbacks.c:1156
+#, c-format
+msgid "Group %s already exists."
+msgstr ""
+
+#: src/users/callbacks.c:1172
+msgid "Please set a valid gruop name, with only lower-case letters."
+msgstr ""

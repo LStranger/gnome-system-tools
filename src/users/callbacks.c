@@ -132,7 +132,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	my_gtk_entry_set_text (w0, current_user->comment);
 	
 	w0 = tool_widget_get ("user_settings_dialog");
-	txt = g_strdup_printf ("Settings for User %s", current_user->login);
+	txt = g_strdup_printf (_("Settings for User %s"), current_user->login);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
@@ -147,7 +147,7 @@ on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (tool_get_access());
 
 	w0 = tool_widget_get ("user_passwd_dialog");
-	txt = g_strdup_printf ("Password for User %s", current_user->login);
+	txt = g_strdup_printf (_("Password for User %s"), current_user->login);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
@@ -190,7 +190,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 
 	g_return_if_fail (tool_get_access());
 	
-	txt = g_strdup_printf ("Are you sure you want to delete user %s?", current_user->login);
+	txt = g_strdup_printf (_("Are you sure you want to delete user %s?"), current_user->login);
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
 	
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
@@ -218,7 +218,7 @@ on_user_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton 
 	{
 		user_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")),
-				"Settings for the selected user");
+				_("Settings for the selected user"));
 	} 
 	else 
 	{
@@ -227,7 +227,7 @@ on_user_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton 
 		current_user = gtk_clist_get_row_data (clist, row);
 		
 		user_actions_set_sensitive (TRUE);
-		label = g_strconcat ("Settings for user ", current_user->login, NULL);
+		label = g_strconcat (_("Settings for user "), current_user->login, NULL);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
 		g_free (label);
 	}
@@ -258,7 +258,7 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	/* Show group settings dialog */
 	
 	w0 = tool_widget_get ("group_settings_dialog");
-	txt = g_strdup_printf ("Settings for Group %s", current_group->name);
+	txt = g_strdup_printf (_("Settings for Group %s"), current_group->name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
@@ -279,7 +279,7 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	/* Show group settings dialog */
 	
 	w0 = tool_widget_get ("group_settings_dialog");
-	gtk_window_set_title (GTK_WINDOW (w0), "Create New Group");
+	gtk_window_set_title (GTK_WINDOW (w0), _("Create New Group"));
 	gtk_widget_show (w0);
 }
 
@@ -293,7 +293,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	gint row;
 	
 
-	txt = g_strdup_printf ("Are you sure you want to delete group %s?", current_group->name);
+	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), current_group->name);
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
 	
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
@@ -320,7 +320,7 @@ on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton
 	{
 		group_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")),
-				"Settings for the selected group");
+				_("Settings for the selected group"));
 		
 	}
 	else
@@ -330,7 +330,7 @@ on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton
 		current_group = gtk_clist_get_row_data (clist, row);
 		
 		group_actions_set_sensitive (TRUE);
-		label = g_strconcat ("Settings for group ", current_group->name, NULL);
+		label = g_strconcat (_("Settings for group "), current_group->name, NULL);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
 		g_free (label);
 	}
@@ -454,7 +454,7 @@ on_user_passwd_random_clicked (GtkButton *button, gpointer user_data)
 	my_gtk_entry_set_text (entry1, random_passwd);
 	my_gtk_entry_set_text (entry2, random_passwd);
 	
-	txt = g_strdup_printf ("Password set to \"%s\".", random_passwd);
+	txt = g_strdup_printf (_("Password set to \"%s\"."), random_passwd);
 	dialog = GNOME_DIALOG (gnome_ok_dialog_parented (txt, GTK_WINDOW (win)));
 	gnome_dialog_run (dialog);
 	g_free (txt);
@@ -488,7 +488,7 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	
 	if (strcmp (new_passwd, confirm))
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("The password and its confirmation\nmust match.",
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (_("The password and its confirmation\nmust match."),
 			GTK_WINDOW (win)));
 		
 		gnome_dialog_run (dialog);
@@ -496,7 +496,7 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	else if (gtk_toggle_button_get_active (quality) &&
 					 (check_err = FascistCheck (new_passwd, CRACK_DICT_PATH)))
 	{
-		msg = g_strdup_printf ("Bad password: %s.\nPlease try with a new password.", check_err);
+		msg = g_strdup_printf (_("Bad password: %s.\nPlease try with a new password."), check_err);
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (msg, GTK_WINDOW (win)));
 		g_free (msg);
 		gnome_dialog_run (dialog);
@@ -781,7 +781,7 @@ do_quit (void)
 	if (GTK_WIDGET_IS_SENSITIVE (tool_widget_get ("apply")))
 	{
 		/* Changes have been made. */
-		gchar *txt = "There are changes which haven't been applyed.\nApply now?";
+		gchar *txt = _("There are changes which haven't been applyed.\nApply now?");
 		GtkWindow *parent;
 		GnomeDialog *dialog;
 		
@@ -850,7 +850,7 @@ update_user (void)
 		if (strlen (txt) < 1)
 		{
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					("Username is empty.", win));
+					(_("Username is empty."), win));
 			
 			gnome_dialog_run (dialog);
 			gtk_widget_grab_focus (w0);
@@ -897,7 +897,7 @@ update_user (void)
 	
 	if (!tmplist)
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Select main group.", win));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (_("Select main group."), win));
 		gnome_dialog_run (dialog);
 		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
 		return FALSE;
@@ -933,7 +933,7 @@ add_user (void)
 	if (strlen (new_user_name) < 1)
 	{
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-				("Username is empty.", win));
+				(_("Username is empty."), win));
 		
 		gnome_dialog_run (dialog);
 		gtk_widget_grab_focus (w0);
@@ -951,7 +951,7 @@ add_user (void)
 
 		if (!strcmp (current_u->login, new_user_name))
 		{
-			tmp = g_strdup_printf ("User %s already exists.", new_user_name);
+			tmp = g_strdup_printf (_("User %s already exists."), new_user_name);
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented (tmp, win));
 			gnome_dialog_run (dialog);
 			g_free (tmp);
@@ -965,8 +965,8 @@ add_user (void)
 	
 	if (!is_valid_name (new_user_name))
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid username,"
-				       " using only lower-case letters.", win));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (
+			_("Please set a valid username, using only lower-case letters."), win));
 		
 		gnome_dialog_run (dialog);
 		return FALSE;
@@ -996,9 +996,9 @@ add_user (void)
 		
 		if (!is_valid_name (new_group_name))
 		{
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid "
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (_("Please set a valid "
 					"main group name, with only lower-case letters,\n"
-					"or select one from the pull-down menu.", win));
+					"or select one from the pull-down menu."), win));
 			
 			gnome_dialog_run (dialog);
 			return FALSE;
@@ -1069,7 +1069,7 @@ update_group (void)
 		if (strlen (txt) < 1)
 		{
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					("Group name is empty.", win));
+					(_("Group name is empty."), win));
 			
 			gnome_dialog_run (dialog);
 			gtk_widget_grab_focus (w0);
@@ -1140,7 +1140,7 @@ add_group (void)
 	if (strlen (new_group_name) < 1)
 	{
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-				("Group name is empty.", win));
+				(_("Group name is empty."), win));
 		
 		gnome_dialog_run (dialog);
 		gtk_widget_grab_focus (w0);
@@ -1153,7 +1153,7 @@ add_group (void)
 		current_g = (group *)selection->data;
 		if (!strcmp (current_g->name, new_group_name))
 		{
-			tmp = g_strdup_printf ("Group %s already exists.", new_group_name);
+			tmp = g_strdup_printf (_("Group %s already exists."), new_group_name);
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented (tmp, win));
 			gnome_dialog_run (dialog);
 			g_free (tmp);
@@ -1168,7 +1168,8 @@ add_group (void)
 	
 	if (!is_valid_name (new_group_name))
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid gruop name, with only lower-case letters.", win));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (
+		  _("Please set a valid gruop name, with only lower-case letters."), win));
 		gnome_dialog_run (dialog);
 		return FALSE;
 	}
