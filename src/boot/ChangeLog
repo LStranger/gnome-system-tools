@@ -1,5 +1,10 @@
 2001-07-25  Tambet Ingo  <tambet@ximian.com>
 
+	* e-table.c (boot_row_count): Return 0 if data model isn't inited yet.
+	(table_create): Just create the table, don't try to populate it (no data yet).
+	(table_populate): Renamed function name, call model_changed to let etable know
+	it has some data.
+
 	* boot-image.c (boot_image_valid_chars): Implement.
 	(boot_image_label_exists): Implement.
 	(boot_image_file_exists): Implement.

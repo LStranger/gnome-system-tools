@@ -67,14 +67,6 @@ update_complexity (void)
 static void
 connect_signals ()
 {
-	gtk_signal_connect (GTK_OBJECT (tool), "fill_gui",
-					GTK_SIGNAL_FUNC (transfer_xml_to_gui),
-					NULL);
-
-	gtk_signal_connect (GTK_OBJECT (tool), "fill_xml",
-					GTK_SIGNAL_FUNC (transfer_gui_to_xml),
-					NULL);
-
 	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change",
 					GTK_SIGNAL_FUNC (update_complexity),
 					NULL);
@@ -89,15 +81,13 @@ main (int argc, char *argv[])
 	tool = xst_tool_new ();
 	xst_tool_construct (tool, "boot", _("Boot Manager Settings - Ximian Setup Tools"));
 
-	xst_dialog_freeze (tool->main_dialog);
-
+	xst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	
 	connect_signals ();
 
 	xst_dialog_enable_complexity (tool->main_dialog);
-	buttons_set_visibility ();
+	update_complexity ();
 
-	xst_dialog_thaw (tool->main_dialog);
-	
 	xst_tool_main (tool, FALSE);
 	
 	return 0;

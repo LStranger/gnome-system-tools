@@ -59,10 +59,6 @@ const gchar *adv_boot_state = "\
   </grouping> \
 </ETableState>";
 
-
-/* Static prototypes */
-void init_array (void);
-
 static int
 boot_col_count (ETableModel *etc, void *data)
 {
@@ -72,7 +68,11 @@ boot_col_count (ETableModel *etc, void *data)
 static int
 boot_row_count (ETableModel *etc, void *data)
 {
-	return boot_array->len;
+	if (boot_array)
+		return boot_array->len;
+
+	/* else */
+	return 0;
 }
 
 static void *
@@ -216,18 +216,18 @@ table_connect_signals (ETable *table)
 			    (gpointer)table);
 }
 
-void
-create_table (xmlNodePtr root)
+GtkWidget *
+table_create (void)
 {
-	ETableModel *model;
+	ETableModel  *model;
 	ETableExtras *extras;
-	ETable *table;
-	GtkWidget *container;
-	gchar *spec, *state;
+	ETable       *table;
+	gchar        *spec;
 
-	init_array ();
-	extras = create_extras ();
+	if (boot_table)
+		return NULL;
 	
+	extras = create_extras ();
 	model = e_table_simple_new (boot_col_count,
 				    boot_row_count,
 				    boot_value_at,
@@ -248,46 +248,37 @@ create_table (xmlNodePtr root)
 		xst_conf_set_string (tool, "spec", spec);
 	}
 
-	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
-		state = xst_conf_get_string (tool, "state_adv");
-	else
-		state = xst_conf_get_string (tool, "state_basic");
-	
-	if (!state) {
-		state = g_strdup (basic_boot_state);
-		xst_conf_set_string (tool, "state_basic", basic_boot_state);
-		xst_conf_set_string (tool, "state_adv", adv_boot_state);
-	}
-
-	boot_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, spec, state);
+	boot_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, spec, basic_boot_state);
 	
 	g_free (spec);
-	g_free (state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	table_connect_signals (table);
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", boot_cursor_change, NULL);
 	
-	container = xst_dialog_get_widget (tool->main_dialog, "table_holder");
-	gtk_container_add (GTK_CONTAINER (container), boot_table);
-	gtk_widget_show (boot_table);
+	return boot_table;
 }
 
 void
-init_array (void)
+table_populate (xmlNodePtr root)
 {
-	xmlNodePtr node;
-	gint row;
+	xmlNodePtr  node;
+	gint        row;
+	ETable     *table;
+
+	g_return_if_fail (root != NULL);
+	
+	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 
 	boot_array = g_array_new (FALSE, FALSE, sizeof (xmlNodePtr));
-	node = xst_xml_doc_get_root (tool->config);
 	
-	for (node = xst_xml_element_find_first (node, "entry"), row = 0;
-		node;
-		node = xst_xml_element_find_next (node, "entry"), row++)
+	for (node = xst_xml_element_find_first (root, "entry"), row = 0;
+	     node != NULL;
+	     node = xst_xml_element_find_next (node, "entry"), row++)
 		
 		g_array_prepend_val (boot_array, node);
 
+	e_table_model_changed (table->model);
 }
 
 static gboolean

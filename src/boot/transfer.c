@@ -155,10 +155,11 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	xmlNodePtr root;
 
 	root = xst_xml_doc_get_root (tool->config);
-	create_table (root);
 
 	transfer_globals_xml_to_gui (root);
 	transfer_check_data (root);
+
+	table_populate (root);
 }
 
 void

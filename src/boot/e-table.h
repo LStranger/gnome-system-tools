@@ -39,7 +39,8 @@ enum {
 	COL_LAST,
 };
 
-void              create_table            (xmlNodePtr root);
+GtkWidget        *table_create            (void);
+void              table_populate          (xmlNodePtr root);
 void              boot_table_update_state (void);
 
 void             *boot_value_label        (xmlNodePtr node);
