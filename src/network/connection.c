@@ -85,6 +85,10 @@ static void on_connection_list_clicked (GtkWidget *w, gpointer data);
 #define SET_STR(yy_prefix,xx) xst_ui_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx)
 #define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), cxn->xx)
 #define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), !cxn->xx)
+#define SET_INT(yy_prefix,xx) gtk_range_set_value (GTK_RANGE (GTK_SCALE (W (yy_prefix#xx))), cxn->xx)
+#define GET_INT(yy_prefix,xx) cxn->xx = gtk_range_get_value (GTK_RANGE (GTK_SCALE (W (yy_prefix#xx))))
+#define SET_DIAL_OPTION_MENU(yy_prefix, xx) gtk_option_menu_set_history (GTK_OPTION_MENU (W (yy_prefix#xx)), ((cxn->xx != NULL) && (strcmp (cxn->xx, "ATDP") == 0))?1:0)
+#define GET_DIAL_OPTION_MENU(yy_prefix, xx) cxn->xx = (gtk_option_menu_get_history (GTK_OPTION_MENU (W (yy_prefix#xx))) == 0)? g_strdup ("ATDT"): g_strdup ("ATDP")
 
 typedef struct {
 	GtkWidget *list;
@@ -315,6 +319,21 @@ connection_xml_wvsection_get_boolean (xmlNode *node, gchar *section_name, gchar 
 	return ret;
 }
 
+static gint
+connection_xml_wvsection_get_int (xmlNode *node, gchar *section_name, gchar *elem)
+{
+	gchar *str;
+	gint ret;
+
+	str = connection_xml_wvsection_get_str (node, section_name, elem);
+	if (str) {
+		ret = atoi (str);
+		g_free (str);
+	}
+
+	return ret;
+}
+
 static xmlNode *
 connection_xml_wvsection_add (xmlNode *node, gchar *section_name, gchar *type)
 {
@@ -341,9 +360,15 @@ connection_xml_wvsection_save_str_to_node (xmlNode *node, gchar *section_name, g
 
 static void
 connection_xml_wvsection_save_boolean_to_node (xmlNode *node, gchar *section_name, 
-									  gchar *node_name, gboolean bool)
+					       gchar *node_name, gboolean bool)
 {
 	connection_xml_wvsection_save_str_to_node (node, section_name, node_name, bool? "1": "0");
+}
+
+static void
+connection_xml_wvsection_save_int_to_node (xmlNode *node, gchar *section_name, gchar *node_name, gint value)
+{
+	connection_xml_wvsection_save_str_to_node (node, section_name, node_name, g_strdup_printf ("%i", value));
 }
 
 extern gchar *
@@ -1223,6 +1248,8 @@ connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 		cxn->login = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "login");
 		cxn->password = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "password");
 		cxn->stupid = connection_xml_wvsection_get_boolean (node->parent, cxn->wvsection, "stupid");
+		cxn->volume = connection_xml_wvsection_get_int (node->parent, cxn->wvsection, "volume");
+		cxn->dial_command = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "dial_command");
 	} else {
 		cxn->wvsection = connection_wvsection_name_generate (cxn->dev, node->parent);
 		connection_xml_save_str_to_node (cxn->node, "wvsection", cxn->wvsection);
@@ -1231,6 +1258,8 @@ connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 		cxn->login = xst_xml_get_child_content (node, "login");
 		cxn->password = xst_xml_get_child_content (node, "password");
 		cxn->stupid = FALSE;
+		cxn->volume = 3;
+		cxn->dial_command = g_strdup ("ATDT");
 	}
 
 	/* PPP advanced */
@@ -1558,6 +1587,8 @@ empty_ppp (XstConnection *cxn)
 	GET_STR ("ppp_", login);
 	GET_STR ("ppp_", password);
 	GET_BOOL ("ppp_", persist);
+	GET_INT ("ppp_", volume);
+	GET_DIAL_OPTION_MENU ("ppp_", dial_command);
 }
 
 static void
@@ -1700,6 +1731,7 @@ connection_config_save (XstConnection *cxn)
 static void
 on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
 {
+
 	if (cxn->modified) {
 		if (connection_config_save (cxn))
 			gtk_widget_destroy (cxn->window);
@@ -1865,6 +1897,8 @@ fill_ppp (XstConnection *cxn)
 	SET_STR ("ppp_", login);
 	SET_STR ("ppp_", password);
 	SET_BOOL ("ppp_", persist);
+	SET_INT ("ppp_", volume);
+	SET_DIAL_OPTION_MENU ("ppp_", dial_command);
 }
 
 static void
@@ -2140,7 +2174,9 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "login", cxn->login);
 		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "password", cxn->password);
 		connection_xml_wvsection_save_boolean_to_node (root, cxn->wvsection, "stupid", cxn->stupid);
-		
+		connection_xml_wvsection_save_int_to_node (root, cxn->wvsection, "volume", cxn->volume);
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "dial_command", cxn->dial_command);
+
 		/* PPP advanced */
 		connection_xml_save_boolean_to_node (node, "persist", cxn->persist);
 		connection_xml_save_boolean_to_node (node, "noauth", cxn->noauth);

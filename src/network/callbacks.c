@@ -645,11 +645,14 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 		return;
 	}
 
-	if (smb_installed) {
-		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "samba_frame", active);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "description_label", active);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "description", active);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup_label", active);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup", active);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_use", active);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_ip", active);
+	if (smb_installed)
 		xst_dialog_modify_cb (w, null);
-	} else
-		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "samba_frame", active);
 }
 
 void

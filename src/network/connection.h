@@ -114,6 +114,8 @@ typedef struct {
 	gchar *dns1;
 	gchar *dns2;
 	gchar *ppp_options;
+	gint volume;
+	gchar *dial_command;
 
 	/* PtP (PLIP) */
 	gchar *remote_address;
