@@ -1639,11 +1639,9 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 		{NULL, '\0', 0, NULL, 0}
 	};
 
-#ifdef ENABLE_NLS
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
-#endif
 
 #warning FIXME	
 #if 0	
