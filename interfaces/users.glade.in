@@ -597,7 +597,6 @@
 		  <sensitive>False</sensitive>
 		  <can_focus>True</can_focus>
 		  <label>Add -&gt;</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		  <child>
 		    <padding>0</padding>
 		    <expand>False</expand>
@@ -611,7 +610,6 @@
 		  <sensitive>False</sensitive>
 		  <can_focus>True</can_focus>
 		  <label>Remove &lt;-</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		  <child>
 		    <padding>0</padding>
 		    <expand>False</expand>
@@ -625,7 +623,6 @@
 		  <sensitive>False</sensitive>
 		  <can_focus>True</can_focus>
 		  <label> Primary Group </label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		  <child>
 		    <padding>0</padding>
 		    <expand>False</expand>
@@ -1061,7 +1058,6 @@
 		<name>user_passwd_random</name>
 		<can_focus>True</can_focus>
 		<label>  Random Password  </label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -1310,7 +1306,6 @@
 		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
 		<label>Add -&gt;</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1324,7 +1319,6 @@
 		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
 		<label>Remove &lt;-</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1500,7 +1494,7 @@
 
       <widget>
 	<class>GtkVBox</class>
-	<name>user_parent</name>
+	<name>vbox444</name>
 	<border_width>3</border_width>
 	<homogeneous>False</homogeneous>
 	<spacing>3</spacing>
@@ -1577,10 +1571,13 @@
 	</widget>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox2</name>
+	  <class>GtkTable</class>
+	  <name>user_parent</name>
+	  <rows>2</rows>
+	  <columns>2</columns>
 	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
+	  <row_spacing>0</row_spacing>
+	  <column_spacing>0</column_spacing>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
@@ -1588,30 +1585,23 @@
 	  </child>
 
 	  <widget>
-	    <class>GtkHBox</class>
-	    <name>users_holder</name>
-	    <homogeneous>False</homogeneous>
-	    <spacing>0</spacing>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>Placeholder</class>
-	    </widget>
-	  </widget>
-
-	  <widget>
 	    <class>GtkVBox</class>
 	    <name>vbox4</name>
 	    <homogeneous>False</homogeneous>
 	    <spacing>0</spacing>
 	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
 	    </child>
 
 	    <widget>
@@ -1653,7 +1643,6 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Add User...</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -1663,7 +1652,6 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Settings...</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -1673,7 +1661,6 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Password...</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -1683,14 +1670,60 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Delete</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 	  </widget>
-	</widget>
 
-	<widget>
-	  <class>Placeholder</class>
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label60</name>
+	    <label></label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkHBox</class>
+	    <name>users_holder</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>True</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
+	    </child>
+
+	    <widget>
+	      <class>Placeholder</class>
+	    </widget>
+	  </widget>
 	</widget>
       </widget>
 
@@ -1861,7 +1894,6 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Add Group...</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -1871,7 +1903,6 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Settings...</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -1881,7 +1912,6 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Delete</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -2859,7 +2889,6 @@ and when You click on &quot;More Options&quot;.</label>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
 	      <label>New User</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
 	    <widget>
@@ -2869,7 +2898,6 @@ and when You click on &quot;More Options&quot;.</label>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
 	      <label>New Group</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
 	    <widget>
@@ -2879,7 +2907,6 @@ and when You click on &quot;More Options&quot;.</label>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
 	      <label>Delete</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 	  </widget>
 
@@ -3012,7 +3039,6 @@ or a groups name or members.</label>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Settings</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 	  </widget>
