@@ -150,7 +150,10 @@ xst_tool_clear_supported_platforms (XstTool *tool)
 	}
 
 	if (tool->supported_platforms_list)
+	{
 		g_slist_free (tool->supported_platforms_list);
+		tool->supported_platforms_list = NULL;
+	}
 }
 
 GladeXML *
@@ -206,6 +209,25 @@ set_arrow (XstTool *tool, GtkArrowType arrow)
 }
 
 static void
+report_clear_lines (XstTool *tool)
+{
+	GSList *list;
+	XstReportLine *rline;
+
+	for (list = tool->report_line_list; list; list = g_slist_next (list))
+	{
+		rline = (XstReportLine *) list->data;
+		xst_report_line_free (rline);
+	}
+
+	if (tool->report_line_list)
+	{
+		g_slist_free (tool->report_line_list);
+		tool->report_line_list = NULL;
+	}
+}
+
+static void
 report_dispatch_lines (XstTool *tool)
 {
 	GSList *list;
@@ -217,7 +239,7 @@ report_dispatch_lines (XstTool *tool)
 	};
 
 	if (!GTK_IS_SCROLLED_WINDOW (tool->report_scrolled)) {
-		g_warning ("took->report_scrolled is not a GtkScrolledWindow\n");
+		g_warning ("tool->report_scrolled is not a GtkScrolledWindow\n");
 		tool->report_dispatch_pending = FALSE;
 		tool->report_finished = TRUE;
 		return;
@@ -230,8 +252,6 @@ report_dispatch_lines (XstTool *tool)
 	{
 		rline = (XstReportLine *) list->data;
 
-		g_print ("b\n");
-		
 		if (xst_report_line_get_handled (rline))
 			continue;
 
@@ -338,6 +358,11 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 
 	tool->timeout_done = FALSE;
 	tool->report_list_visible = FALSE;
+	tool->report_finished = FALSE;
+	tool->report_dispatch_pending = FALSE;
+
+	xst_tool_clear_supported_platforms (tool);
+	report_clear_lines (tool);
 
 	gtk_label_set_text (GTK_LABEL (tool->report_label), label);
 
@@ -574,8 +599,6 @@ visibility_toggled (GtkWidget *w, gpointer data)
 	GtkAdjustment *vadj;
 
 	tool = XST_TOOL (data);
-
-	g_warning ("A2\n");
 
 	show = GTK_TOGGLE_BUTTON (w)->active;
 	vadj = gtk_scrolled_window_get_vadjustment (
