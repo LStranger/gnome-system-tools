@@ -403,8 +403,10 @@ dialog_close (XstDialog *dialog)
 			apply_cb (NULL, dialog);
 	}
 
-	gtk_widget_destroy (GTK_WIDGET (dialog));
-	gtk_signal_emit_by_name (GTK_OBJECT (dialog->tool), "destroy");
+	gtk_widget_hide (GTK_WIDGET (dialog));
+
+	if (dialog == dialog->tool->main_dialog)
+		gtk_signal_emit_by_name (GTK_OBJECT (dialog->tool), "destroy");
 }
 
 static void
