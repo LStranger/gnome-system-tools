@@ -163,24 +163,9 @@ on_apply_clicked(GtkButton *button, gpointer data)
 
 
 void
-on_close_clicked(GtkButton *button, gpointer data)
-{
-	/* TODO: Check for changes and optionally ask for confirmation */
-	gtk_main_quit();
-}
-
-
-void
 on_help_clicked(GtkButton *button, gpointer data)
 {
 	/* TODO: Have some help handy */
-}
-
-
-void
-delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
-{
-	gtk_main_quit ();
 }
 
 

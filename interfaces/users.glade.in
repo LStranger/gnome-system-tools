@@ -23,11 +23,6 @@
   <class>GnomeApp</class>
   <name>users_admin</name>
   <visible>False</visible>
-  <signal>
-    <name>delete_event</name>
-    <handler>on_users_admin_delete_event</handler>
-    <last_modification_time>Tue, 24 Oct 2000 13:50:32 GMT</last_modification_time>
-  </signal>
   <title>User Account Administration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -790,11 +785,6 @@
 	    <name>close</name>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_close_clicked</handler>
-	      <last_modification_time>Mon, 23 Oct 2000 22:54:58 GMT</last_modification_time>
-	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
 	  </widget>
 	</widget>
@@ -1031,6 +1021,7 @@
 	      <yfill>False</yfill>
 	    </child>
 	  </widget>
+
 	  <widget>
 	    <class>GtkCombo</class>
 	    <name>user_settings_group</name>
