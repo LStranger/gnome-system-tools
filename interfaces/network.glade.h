@@ -87,3 +87,44 @@ gchar *s = N_("Start PPP as soon as modem connects");
 gchar *s = N_("Set as default route");
 gchar *s = N_("Pppd options:");
 gchar *s = N_("Advanced");
+gchar *s = N_("Add New Internet Connection");
+gchar *s = N_("Create a new Internet Connection ");
+gchar *s = N_("Welcome to the Internet Connection druid. \n"
+              "\n"
+              "This druid will help you to configure a new \n"
+              "internet account. \n"
+              "\n"
+              "Before you begin, you must have a modem and\n"
+              "an Internet Service Provider (ISP). Please ask your \n"
+              "ISP for any information about your connection which\n"
+              "you are lacking.\n"
+              "\n"
+              "Click the \"Next\" button to begin.");
+gchar *s = N_("1. ISP phone number");
+gchar *s = N_("First, please enter the phone number you use to connect to the internet. This number is provided by your ISP. ");
+gchar *s = N_("Phone number:");
+gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
+              "");
+gchar *s = N_("Warning message goes here..\n"
+              "");
+gchar *s = N_("2. Username and password");
+gchar *s = N_("Next, please enter the user name and password which were assigned to you by your ISP.");
+gchar *s = N_("User name:");
+gchar *s = N_("Password:");
+gchar *s = N_("Password (confirm):");
+gchar *s = N_("Warning message goes here..\n"
+              "");
+gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
+              "");
+gchar *s = N_("3. Account name");
+gchar *s = N_("Now, please give this account a name. This name will be used to identify the account.");
+gchar *s = N_("Account name:");
+gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
+              "");
+gchar *s = N_("Warning message goes here..\n"
+              "");
+gchar *s = N_("Finished");
+gchar *s = N_("Summary of new account data\n"
+              "goes here, plus indications on\n"
+              "how to proceed (go back, cancel\n"
+              "or finish).");

@@ -4,7 +4,6 @@ interfaces = \
 	memory.glade 					\
 	nameresolution.glade			\
 	network.glade 					\
-	internet_connection_druid.glade	\
 	networking.glade 				\
 	shares.glade 					\
 	time.glade 					\
@@ -25,8 +24,6 @@ EXTRA_DIST = \
 	nameresolution.glade.h 			\
 	network.glade.in 				\
 	network.glade.h 				\
-	internet_connection_druid.glade.in	\
-	internet_connection_druid.glade.h 	\
 	networking.glade.in 			\
 	networking.glade.h				\
 	shares.glade.in				\
