@@ -238,7 +238,7 @@ on_user_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton 
 		current_user = gtk_clist_get_row_data (clist, row);
 		
 		user_actions_set_sensitive (TRUE);
-		label = g_strconcat (_("Settings for user "), current_user->login, NULL);
+		label = g_strdup_printf (_("Settings for user %s"), current_user->login);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
 		g_free (label);
 	}
@@ -342,7 +342,7 @@ on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton
 		current_group = gtk_clist_get_row_data (clist, row);
 		
 		group_actions_set_sensitive (TRUE);
-		label = g_strconcat (_("Settings for group "), current_group->name, NULL);
+		label = g_strdup_printf (_("Settings for group "), current_group->name);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
 		g_free (label);
 	}
