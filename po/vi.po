@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 0.3.0\n"
-"POT-Creation-Date: 2003-02-15 04:08+0100\n"
+"POT-Creation-Date: 2003-02-21 01:46+0100\n"
 "PO-Revision-Date: 2003-02-15 23:15+0700\n"
 "Last-Translator: Trinh Minh Thanh <tmthanh@yahoo.com>\n"
 "Language-Team: Gnome-Vi <Gnomevi-list@lists.sourceforge.net>\n"
@@ -43,7 +43,9 @@ msgstr "Phiên bản GST mới nhất được thực thi"
 
 #: gnome-system-tools.schemas.in.h:8
 msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
-msgstr "Mức chạy mà công cụ quản trị mức chạy hiển thị là mặc định trong chế độ cơ bản"
+msgstr ""
+"Mức chạy mà công cụ quản trị mức chạy hiển thị là mặc định trong chế độ cơ "
+"bản"
 
 #: gnome-system-tools.schemas.in.h:9
 msgid ""
@@ -58,11 +60,14 @@ msgid "The last GST version that this computer has run"
 msgstr "Phiên bản GST mới nhất mà máy tính này chạy"
 
 #: gnome-system-tools.schemas.in.h:11
-msgid "Wether the users-admin tool should show all users and groups or not"
-msgstr "Để công cụ quản trị người dùng hiển thị mọi người dùng và nhóm hay không"
+#, fuzzy
+msgid "Whether the users-admin tool should show all users and groups or not"
+msgstr ""
+"Để công cụ quản trị người dùng hiển thị mọi người dùng và nhóm hay không"
 
 #: gnome-system-tools.schemas.in.h:12
-msgid "wether the warning dialog should be shown or not"
+#, fuzzy
+msgid "Whether the warning dialog should be shown or not"
 msgstr "Để hộp thoại cảnh báo được hiển thị hay không"
 
 #.
@@ -352,7 +357,7 @@ msgstr "Tùy chọn khác"
 #. * NO lo compile como parte de su aplicación.
 #.
 #: interfaces/common.glade.h:7 interfaces/common.glade.in.h:12
-#: src/common/xst-tool.c:1725
+#: src/common/xst-tool.c:1703
 msgid "GNOME System Tools"
 msgstr "Công Cụ Hệ Thống GNOME"
 
@@ -967,7 +972,8 @@ msgstr " Giữ cấu hình hiện thời."
 
 #: interfaces/internetsharing.glade.h:39
 #: interfaces/internetsharing.glade.in.h:9
-msgid " Overwrite with the default internet sharing configuration (recommended)."
+msgid ""
+" Overwrite with the default internet sharing configuration (recommended)."
 msgstr " Ghi đè lên bằng cấu hình chia sẻ Internet mặc định (nên làm)."
 
 #: interfaces/internetsharing.glade.h:40
@@ -989,7 +995,8 @@ msgstr ""
 msgid ""
 " Yes, I'll set the local network computers to use automatic IP assignment  "
 "(recommended)."
-msgstr " Có, tôi sẽ lập các máy trong mạng cục bộ dùng cấp phát IP tự động (nên làm)."
+msgstr ""
+" Có, tôi sẽ lập các máy trong mạng cục bộ dùng cấp phát IP tự động (nên làm)."
 
 #: interfaces/internetsharing.glade.h:45
 #: interfaces/internetsharing.glade.in.h:5
@@ -2338,7 +2345,8 @@ msgid "E_xplicitly Eject Last Page"
 msgstr "Nhả trang giấy cuối cùng dứt khoát"
 
 #: interfaces/print.glade.h:54 interfaces/print.glade.in.h:19
-msgid "Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+msgid ""
+"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
 msgstr ""
 "Chuyển đổi PC linefeeds thành định dạng Un*x. Trợ giúp tránh văn bản "
 "\"stairstepping\"."
@@ -2597,7 +2605,8 @@ msgstr "Nhập vào"
 msgid ""
 "Exports are used to share directories on your computer with other computers "
 "over the network. "
-msgstr "Xuất ra dùng để chia sẻ các thư mục trên máy này với các máy khác qua mạng. "
+msgstr ""
+"Xuất ra dùng để chia sẻ các thư mục trên máy này với các máy khác qua mạng. "
 
 #: interfaces/shares.glade.h:20 interfaces/shares.glade.in.h:42
 #: src/boot/table.c:44
@@ -3221,7 +3230,8 @@ msgstr "Lý lịch người dùng - Công Cụ Hệ Thống GNOME"
 msgid ""
 "User profiles can be used as templates to facilitate the creation of new "
 "users. "
-msgstr "Lý lịch người dùng có thể được dùng làm mẫu để dễ dàng tạo người dùng mới. "
+msgstr ""
+"Lý lịch người dùng có thể được dùng làm mẫu để dễ dàng tạo người dùng mới. "
 
 #: interfaces/users.glade.h:101 interfaces/users.glade.in.h:100
 msgid "profiles_table"
@@ -3449,6 +3459,10 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Lỗi kết nối signal `%s' trong widget `%s'"
 
+#: src/common/xst-su.c:81
+msgid "The password you entered is invalid."
+msgstr "Mật khẩu nhập vào không hợp lệ."
+
 #: src/common/xst-tool.c:960
 #, c-format
 msgid "Skipping %s directive..."
@@ -3475,11 +3489,7 @@ msgstr ""
 msgid "%s - GNOME System Tools"
 msgstr "%s - Công Cụ Thiết lập GNOME"
 
-#: src/common/xst-tool.c:1610
-msgid "The password you entered is invalid."
-msgstr "Mật khẩu nhập vào không hợp lệ."
-
-#: src/common/xst-tool.c:1625
+#: src/common/xst-tool.c:1603
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -3506,15 +3516,15 @@ msgstr ""
 "--\n"
 "Nhóm phát triển Công Cụ Thiết Lập Gnome"
 
-#: src/common/xst-tool.c:1649
+#: src/common/xst-tool.c:1627
 msgid "Warning"
 msgstr "Cảnh báo"
 
-#: src/common/xst-tool.c:1658
+#: src/common/xst-tool.c:1636
 msgid "Don't show me this again"
 msgstr "Không hiển thị lại nữa"
 
-#: src/common/xst-tool.c:1732
+#: src/common/xst-tool.c:1710
 msgid "Pretending we are root..."
 msgstr "Coi như đang là root..."
 
@@ -5007,4 +5017,3 @@ msgstr "Người Dùng và Nhóm."
 
 #~ msgid "Identity"
 #~ msgstr "Nhận dạng"
-
