@@ -219,16 +219,18 @@ xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
 gchar *
 xst_ui_option_menu_get_selected_string (GtkOptionMenu *option_menu)
 {
-	gchar *buf = NULL;
+	gchar *buf;
 	
 	if (GTK_BIN (option_menu)->child) {
 		GtkWidget *child = GTK_BIN (option_menu)->child;
 		
-		if (GTK_IS_LABEL (child))
+		if (GTK_IS_LABEL (child)) {
 			gtk_label_get (GTK_LABEL (child), &buf);
+			return g_strdup (buf);
+		}		
 	}
 
-	return buf;
+	return NULL;
 }
 
 void
