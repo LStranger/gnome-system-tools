@@ -42,7 +42,7 @@
 
 #include "xst.h"
 #include "md5.h"
-#include "e-table.h"
+#include "table.h"
 
 
 #define RANDOM_PASSWD_SIZE 6

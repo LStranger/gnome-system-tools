@@ -18,30 +18,32 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
+ *          Tambet Ingo <tambet@ximian.com> and 
+ *          Arturo Espinosa <arturo@ximian.com>.
  */
 
 #ifndef __CALLBACKS_H
 #define __CALLBACKS_H
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
 #include "xst.h"
 
-BEGIN_GNOME_DECLS
+/* Main dialog general callbacks */
+void on_notebook_switch_page (GtkNotebook*, GtkNotebookPage*, guint, gpointer);
+void on_showall_toggled (GtkToggleButton*, gpointer);
 
-void on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
-			      guint page_num, gpointer user_data);
-
-void on_showall_toggled (GtkToggleButton *toggle, gpointer user_data);
-void on_settings_clicked (GtkButton *button, gpointer user_data);
-
+/* Main dialog callbacks, users tab */
+void on_user_table_clicked (GtkWidget *, gpointer);
 void on_user_new_clicked (GtkButton *button, gpointer user_data);
+void on_user_settings_clicked (GtkButton *button, gpointer data);
 void on_user_delete_clicked (GtkButton *button, gpointer user_data);
-void on_user_profiles_clicked (GtkButton *button, gpointer user_data);
 
-void on_group_new_clicked (GtkButton *button, gpointer user_data);
-void on_group_delete_clicked (GtkButton *button, gpointer user_data);
+/* Main dialog callbacks, groups tab */
+void on_group_table_clicked (GtkWidget *, gpointer);
+void on_group_new_clicked (GtkButton*, gpointer);
+void on_group_settings_clicked (GtkButton*, gpointer);
+void on_group_delete_clicked (GtkButton*, gpointer);
 
 #ifdef NIS
 void on_network_delete_clicked (GtkWidget *button, gpointer user_data);
@@ -49,25 +51,27 @@ void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 #endif
 
-void on_user_settings_clicked (GtkButton *button, gpointer data);
 
-void on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data);
-void on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data);
-void on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data);
-void on_group_settings_ok_clicked (GtkButton *button, gpointer user_data);
-void on_group_settings_add_clicked (GtkButton *button, gpointer user_data);
-void on_group_settings_remove_clicked (GtkButton *button, gpointer user_data);
-void on_group_settings_all_select_row (GtkCList *clist, gint row, gint column,
-				       GdkEventButton *event, gpointer user_data);
+/* user settings dialog callbacks */
+void on_user_settings_dialog_show (GtkWidget*, gpointer);
+void on_user_settings_dialog_delete_event (GtkWidget*, gpointer);
+void on_user_settings_ok_clicked (GtkButton*, gpointer);
+void on_user_settings_passwd_random_new (GtkButton*, gpointer);
+void on_user_settings_passwd_toggled (GtkToggleButton*, gpointer);
+void on_user_settings_profile_changed (GtkWidget*, gpointer);
+void on_user_settings_passwd_changed (GtkEntry*, gpointer);
 
-void on_group_settings_members_select_row (GtkCList *clist, gint row, gint column,
-					   GdkEventButton *event, gpointer user_data);
+/* group settings dialog callbacks */
+void on_group_settings_dialog_show (GtkWidget*, gpointer);
+void on_group_settings_dialog_delete_event (GtkWidget*, gpointer);
+void on_group_settings_ok_clicked (GtkButton*, gpointer);
 
+/* general callbacks */
+void on_add_remove_button_clicked (GtkButton *button, gpointer user_data);
+void on_list_select_row (GtkTreeView *list);
+
+/* Helpers */
 void actions_set_sensitive (gint table, gboolean state);
 
-void on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer data);
-
-END_GNOME_DECLS
 
 #endif /* CALLBACKS_H */
-

@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.h: this file is part of users-admin, a ximian-setup-tool frontend 
+/* group_settings.h: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.
@@ -18,17 +18,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
- *          Tambet Ingo <tambet@ximian.com> and 
- *          Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>.
  */
 
-#ifndef __TRANSFER_H
-#define __TRANSFER_H
+#ifndef __GROUP_SETTINGS_H
+#define __GROUP_SETTINGS_H
 
-#include "xst.h"
+#include <gnome.h>
 
-void transfer_xml_to_gui(XstTool *tool, gpointer data);
-void transfer_gui_to_xml(XstTool *tool, gpointer data);
+void		group_new_prepare		(ug_data*);
+void		group_settings_prepare		(ug_data*);
+void		group_settings_dialog_close	(void);
+gboolean	group_update			(ug_data*);
+void		group_delete			(xmlNodePtr);
 
-#endif /* TRANSFER_H */
+#endif /* __GROUP_SETTINGS_H */
+

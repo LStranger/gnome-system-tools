@@ -1,5 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* Copyright (C) 2000-2001 Ximian, Inc.
+/* user-group-xml.c: this file is part of users-admin, a ximian-setup-tool frontend 
+ * for user administration.
+ * 
+ * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -15,7 +18,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com>
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es> and
+ *          Tambet Ingo <tambet@ximian.com>
  */
 
 #ifdef HAVE_CONFIG_H
@@ -26,8 +30,9 @@
 #include "user-group-xml.h"
 
 #include "user_group.h"
-#include "profile.h"
-#include "e-table.h"
+#include "table.h"
+
+extern XstTool *tool;
 
 void generic_set_value (xmlNodePtr node, const gchar *name, const gchar *value);
 
@@ -114,12 +119,12 @@ user_value_group_peek (xmlNodePtr user_node)
 	return buf;
 }
 
-GSList *
+GList*
 user_get_groups (xmlNodePtr user_node)
 {
 	xmlNodePtr group_node, g, group_users;
 	gchar *user_name, *buf;
-	GSList *grouplist = NULL;
+	GList *grouplist = NULL;
 
 	g_return_val_if_fail (user_node != NULL, NULL);
 
@@ -140,7 +145,7 @@ user_get_groups (xmlNodePtr user_node)
 				continue;
 
 			if (!strcmp (user_name, buf))
-				grouplist = g_slist_prepend (grouplist, group_value_name (g));
+				grouplist = g_list_prepend (grouplist, group_value_name (g));
 			
 			g_free (buf);
 		}
@@ -150,13 +155,13 @@ user_get_groups (xmlNodePtr user_node)
 	return grouplist;
 }
 
-static void
+void
 del_user_groups (xmlNodePtr user_node)
 {
 	xmlNodePtr group_node, g, group_users, tmp_node;
 	gchar *user_name, *buf;
 	gboolean found;
-
+	
 	g_return_if_fail (user_node != NULL);
 
 	group_node = get_corresp_field (user_node);
@@ -316,7 +321,7 @@ user_set_value_group (xmlNodePtr user_node, const gchar *value)
 	generic_set_value_string (user_node, "gid", gid);
 	g_free (gid);
 }
-
+/*
 gboolean
 group_set_value_name (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
@@ -340,44 +345,35 @@ group_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value)
 
 	return FALSE;
 }
-
+*/
 xmlNodePtr
 user_add_blank_xml (xmlNodePtr user_db)
 {
 	xmlNodePtr user;
-	Profile *pf;
 
 	g_return_val_if_fail (user_db != NULL, NULL);
 
 	user = xst_xml_element_add (user_db, "user");
-	pf = profile_table_get_profile (NULL);
 
 	xst_xml_element_add_with_content (user, "key", find_new_key (user_db));
 	xst_xml_element_add (user, "login");
 	xst_xml_element_add (user, "password");
-	xst_xml_element_add (user, "uid");	
+	xst_xml_element_add (user, "uid");
 	xst_xml_element_add (user, "gid");
 	xst_xml_element_add (user, "comment");
 	xst_xml_element_add (user, "home");
 	xst_xml_element_add (user, "shell");
 	xst_xml_element_add (user, "last_mod");
 
-	xst_xml_element_add_with_content (user, "passwd_min_life",
-			g_strdup_printf ("%d", pf->pwd_mindays));
-
-	xst_xml_element_add_with_content (user, "passwd_max_life",
-			g_strdup_printf ("%d", pf->pwd_maxdays));
-
-	xst_xml_element_add_with_content (user, "passwd_exp_warn",
-			g_strdup_printf ("%d", pf->pwd_warndays));
-
+	xst_xml_element_add (user, "passwd_min_life");
+	xst_xml_element_add (user, "passwd_max_life");
+	xst_xml_element_add (user, "passwd_exp_warn");
+	
 	xst_xml_element_add (user, "passwd_exp_disable");
 	xst_xml_element_add (user, "passwd_disable");
 	xst_xml_element_add (user, "reserved");
 	xst_xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
 
-	current_table_new_row (user, TABLE_USER);
-	
 	return user;
 }
 
@@ -392,11 +388,279 @@ group_add_blank_xml (xmlNodePtr group_db)
 
 	xst_xml_element_add_with_content (group, "key", find_new_key (group_db));
 	xst_xml_element_add (group, "name");
-	xst_xml_element_add (group, "password");
-	xst_xml_element_add_with_content (group, "gid", find_new_id (group_db));
+	xst_xml_element_add (group, "gid");
 	xst_xml_element_add (group, "users");
 
-	current_table_new_row (group, TABLE_GROUP);
-	
 	return group;
 }
+/*
+static void
+add_group_users (xmlNodePtr group_node, gchar *name)
+{
+	xmlNodePtr user;
+
+	g_return_if_fail (group_node != NULL);
+
+	user = xst_xml_element_find_first (group_node, "users");
+	if (!user)
+		user = xst_xml_element_add (group_node, "users");
+
+	user = xst_xml_element_add (user, "user");
+	xst_xml_element_set_content (user, name);
+}
+*/
+
+static void
+del_group_users (xmlNodePtr group_node)
+{
+	xmlNodePtr node;
+	
+	g_return_if_fail (group_node != NULL);
+
+	node = xst_xml_element_find_first (group_node, "users");
+	if (!node)
+		return;
+
+	xst_xml_element_destroy_children (node);
+}
+
+static void
+user_add_extra_groups (GList *groups_list, const gchar *username)
+{
+	xmlNodePtr groupdb = xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "groupdb");
+	xmlNodePtr node, users;
+	gchar *groupname;
+	GList *list;
+	gboolean found;
+	
+	if (!groups_list)
+		return;
+	
+	for (node = xst_xml_element_find_first (groupdb, "group"); node != NULL; node = xst_xml_element_find_next (node, "group")) {
+		groupname = xst_xml_get_child_content (node, "name");
+		list = groups_list;
+		found = FALSE;
+	
+		/* is the group in the list? */
+		while (list && !found) {
+			if (strcmp (groupname, list->data) == 0) 
+				found = TRUE;
+			list = list->next;
+		}
+		
+		if (found) {
+			users = xst_xml_element_find_first (node, "users");
+			xst_xml_element_add_with_content (users, "user", (gchar *) username);
+			g_list_remove (groups_list, groupname);
+		}
+	}
+	
+	g_list_free (groups_list);
+}
+
+void
+user_update_xml (xmlNodePtr node, UserAccountData *data, gboolean change_password)
+{
+	xst_xml_set_child_content (node, "login", data->login);
+	xst_xml_set_child_content (node, "uid", data->uid);
+	xst_xml_set_child_content (node, "comment", g_strjoin (",", data->name, data->location, data->work_phone, data->home_phone, NULL));
+	xst_xml_set_child_content (node, "gid", data->gid);
+	xst_xml_set_child_content (node, "home", data->home);
+	xst_xml_set_child_content (node, "shell", data->shell);
+	if (change_password) 
+		passwd_set (node, data->password1);
+
+	xst_xml_set_child_content (node, "passwd_max_life", data->pwd_maxdays);
+	xst_xml_set_child_content (node, "passwd_min_life", data->pwd_mindays);
+	xst_xml_set_child_content (node, "passwd_exp_warn", data->pwd_warndays);
+
+	user_add_extra_groups (data->extra_groups, data->login);
+}
+
+void
+group_update_xml (xmlNodePtr node, gchar *name, gchar *gid, GList *users)
+{
+	xmlNodePtr u, n;
+	
+	xst_xml_set_child_content (node, "name", name);
+	xst_xml_set_child_content (node, "gid", gid);
+	
+	del_group_users (node);
+	
+	while (users) {
+		u = xst_xml_element_find_first (node, "users");
+		n = xst_xml_element_add (u, "user");
+		xst_xml_element_set_content (n, users->data);
+		users = users->next;
+	}
+}
+
+gboolean
+node_exists (xmlNodePtr node, const gchar *name, const gchar *val)
+{
+	xmlNodePtr n0;
+	gchar *buf, *key;
+	xmlNodePtr parent;
+	gboolean self;
+
+	parent = get_db_node (node);
+	if (parent == node)
+		self = FALSE;
+	else
+		self = TRUE;
+	
+	if (strcmp (parent->name, "userdb") == 0)
+		key = g_strdup ("user");
+	else if (strcmp (parent->name, "groupdb") == 0)
+		key = g_strdup ("group");
+	
+	for (n0 = xst_xml_element_find_first (parent, key); n0 != NULL; n0 = xst_xml_element_find_next (n0, key))
+	{
+		if (self && n0 == node)
+			continue;  /* Self */
+
+		buf = xst_xml_get_child_content (n0, (gchar *)name);
+
+		if (!buf)
+			continue;  /* No content */
+
+		if (!strcmp (val, buf))
+		{
+			g_free (buf);  /* Woohoo! found! */
+			return TRUE;
+		}
+
+		g_free (buf);
+	}
+
+	return FALSE;
+}
+
+xmlNodePtr
+find_node_with_name (xmlNodePtr parent, gchar *name)
+{
+	gchar *key = NULL;
+	gchar *field, *buf;
+	xmlNodePtr n0;
+	
+	if (strcmp (parent->name, "userdb") == 0) {
+		key = g_strdup ("user");
+		field = g_strdup ("login");
+	} else {
+		if (strcmp (parent->name, "groupdb") == 0) {
+			key = g_strdup ("group");
+			field = g_strdup ("name");
+		}
+	}
+	
+	g_return_val_if_fail (key != NULL, NULL);
+	
+	for (n0 = xst_xml_element_find_first (parent, key); n0 != NULL; n0 = xst_xml_element_find_next (n0, key))
+	{
+		buf = xst_xml_get_child_content (n0, (gchar *)field);
+		
+		if (buf) {
+			if (strcmp (name, buf) == 0) {
+				g_free (buf);  /* Woohoo! found! */
+				return n0;
+			}
+
+			g_free (buf);
+		}
+	}
+	
+	return NULL;
+}
+
+GList *
+get_group_users (xmlNodePtr group_node)
+{
+	GList *userlist = NULL;
+	xmlNodePtr node, u;
+
+	g_return_val_if_fail (group_node != NULL, NULL);
+
+	node = xst_xml_element_find_first (group_node, "users");
+	if (!node)
+		return NULL;
+
+	for (u = xst_xml_element_find_first (node, "user"); u; u = xst_xml_element_find_next (u, "user")) {
+		userlist = g_list_prepend (userlist, xst_xml_element_get_content (u));
+	}
+
+	return userlist;
+}
+
+GList *
+get_list_from_node (gchar *field, xmlNodePtr node)
+{
+	GList *list = NULL;
+	xmlNodePtr n, u;
+	gchar *key;
+
+	n = get_corresp_field (node);
+
+	if (!n)
+		return NULL;
+	
+	if (strcmp (n->name, "userdb") == 0) {
+		key = g_strdup ("user");
+	} else {
+		key = g_strdup ("group");
+	}
+	
+
+	for (u = xst_xml_element_find_first (n, key); u != NULL; u = xst_xml_element_find_next (u, key))
+	{
+		if (check_node_visibility (u))
+			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
+	}
+
+	return list;
+}
+
+gchar*
+group_xml_get_gid (xmlNodePtr root, gchar *name)
+{
+	xmlNodePtr node;
+	
+	for (node = xst_xml_element_find_first (root, "group"); node != NULL; node = xst_xml_element_find_next (node, "group")) {
+		if (strcmp (xst_xml_get_child_content (node, "name"), name) == 0) {
+			return xst_xml_get_child_content (node, "gid");
+		}
+	}
+	return NULL;
+}
+
+gchar *
+get_group_name (gchar *gid)
+{
+	xmlNodePtr groupdb = xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "groupdb");
+	xmlNodePtr n;
+	
+	for (n = xst_xml_element_find_first (groupdb, "group"); n != NULL; n = xst_xml_element_find_next (n, "group")) {
+		if (strcmp (gid, xst_xml_get_child_content (n, "gid")) == 0) 
+			return xst_xml_get_child_content (n, "name");
+	}
+	
+	return NULL;
+}
+
+GList*
+get_profile_list (void)
+{
+	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
+	xmlNodePtr node;
+	GList *list = NULL;
+	
+	root = xst_xml_element_find_first (root, "profiledb");
+	
+	for (node = xst_xml_element_find_first (root, "profile"); node != NULL; node = xst_xml_element_find_next (node, "profile"))
+	{
+		list = g_list_append (list, xst_xml_get_child_content (node, "name"));
+	}
+	
+	return list;
+}
+
+

@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.h: this file is part of users-admin, a ximian-setup-tool frontend 
+/* users-table.h: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.
@@ -18,17 +18,48 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
- *          Tambet Ingo <tambet@ximian.com> and 
- *          Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>
  */
 
-#ifndef __TRANSFER_H
-#define __TRANSFER_H
+#ifndef _USERS_TABLE_H
+#define _USERS_TABLE_H
 
-#include "xst.h"
+enum {
+	COL_USER_LOGIN,
+	COL_USER_UID,
+	COL_USER_HOME,
+	COL_USER_SHELL,
+	COL_USER_COMMENT,
+	COL_USER_GROUP,
 
-void transfer_xml_to_gui(XstTool *tool, gpointer data);
-void transfer_gui_to_xml(XstTool *tool, gpointer data);
+	COL_USER_LAST,
+};
 
-#endif /* TRANSFER_H */
+typedef struct 
+{
+	gchar *name;
+	gboolean advanced_state_showable;
+	gboolean basic_state_showable;
+} TableConfig;
+
+typedef struct UserTreeItem_ UserTreeItem;
+	
+struct UserTreeItem_
+{
+	const gchar *login;
+	guint UID;
+	const gchar *home;
+	const gchar *shell;
+	const gchar *comment;
+	const gchar *group;
+	
+	UserTreeItem *children;
+};
+
+void	construct_users_table		(void);
+void	populate_users_table		(void);
+void	update_users_table_complexity	(XstDialogComplexity);
+void	users_table_update_content	(void);
+
+#endif /* _USERS_TABLE_H */
+

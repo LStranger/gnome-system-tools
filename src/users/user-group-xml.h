@@ -1,5 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* Copyright (C) 2001 Ximian, Inc.
+/* user-group-xml.h: this file is part of users-admin, a ximian-setup-tool frontend 
+ * for user administration.
+ * 
+ * Copyright (C) 2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -15,14 +18,15 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com>
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es> and
+ *          Tambet Ingo <tambet@ximian.com>
  */
 
 #ifndef __USER_GROUP_XML_H
 #define __USER_GROUP_XML_H
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
+#include "user-settings.h"
 
 gchar    *generic_value_string         (xmlNodePtr node, const gchar *name);
 gint      generic_value_integer        (xmlNodePtr node, const gchar *name);
@@ -32,7 +36,7 @@ void      generic_set_value_integer    (xmlNodePtr node, const gchar *name, gint
 gchar    *user_value_group             (xmlNodePtr user_node);
 gpointer  user_value_group_peek        (xmlNodePtr user_node);
 void      user_set_value_group         (xmlNodePtr user_node, const gchar *value);
-GSList   *user_get_groups              (xmlNodePtr user_node);
+GList    *user_get_groups              (xmlNodePtr user_node);
 void      user_set_groups              (xmlNodePtr user_node, GSList *list);
 gchar   **user_value_comment_array     (xmlNodePtr node);
 void      user_set_value_comment_array (xmlNodePtr node, gchar **comment);
@@ -82,7 +86,23 @@ void      user_set_value_comment_array (xmlNodePtr node, gchar **comment);
 gboolean group_set_value_name (XstDialog *xd, xmlNodePtr node, const gchar *value);
 gboolean group_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value);
 
-xmlNodePtr user_add_blank_xml  (xmlNodePtr user_db);
-xmlNodePtr group_add_blank_xml (xmlNodePtr group_db);
+gboolean	node_exists		(xmlNodePtr, const gchar*, const gchar*);
 
-#endif /* __USER_GROP_XML_H */
+xmlNodePtr	group_add_blank_xml 	(xmlNodePtr);
+void		group_update_xml	(xmlNodePtr, gchar*, gchar*, GList*);
+
+xmlNodePtr	user_add_blank_xml  	(xmlNodePtr);
+void		user_update_xml		(xmlNodePtr, UserAccountData*, gboolean);
+void		del_user_groups		(xmlNodePtr);
+
+xmlNodePtr	find_node_with_name	(xmlNodePtr, gchar*);
+
+GList *		get_group_users		(xmlNodePtr);
+GList *		get_list_from_node	(gchar*, xmlNodePtr);
+GList *		get_profile_list	(void);
+
+gchar*		group_xml_get_gid	(xmlNodePtr, gchar*);
+
+gchar*		get_group_name		(gchar *);
+
+#endif /* __USER_GROUP_XML_H */

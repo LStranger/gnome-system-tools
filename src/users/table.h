@@ -1,7 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* main.h: this file is part of users-admin, a ximian-setup-tool frontend for user administration.
+/* table.h: this file is part of users-admin, a ximian-setup-tool frontend 
+ * for user administration.
  * 
- * Copyright (C) 2000-2001 Ximian, Inc.
+ * Copyright (C) 2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -17,6 +18,34 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>
  */
 
+#ifndef __TABLE_H
+#define __TABLE_H
+
+#include <gnome.h>
+
+#include "user_group.h"
+
+#define COLOR_NORMAL "black"
+
+enum {
+	TABLE_USER,
+	TABLE_GROUP,
+	TABLE_DEFAULT,
+	TABLE_NET_GROUP,
+	TABLE_NET_USER,
+};
+
+/* User and group lists creation function */
+GtkWidget*		create_gtktree_list		(GtkWidget*);
+
+/* User and group tables manipulation functions */
+void			construct_tables		(void);
+void			update_tables_complexity	(XstDialogComplexity);
+void			populate_all_tables		(void);
+xmlNodePtr		get_selected_row_node		(gint);
+void			delete_selected_row		(gint);
+
+#endif /* __TABLE_H */

@@ -1,0 +1,372 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* group_settings.c: this file is part of users-admin, a ximian-setup-tool frontend 
+ * for user administration.
+ * 
+ * Copyright (C) 2000-2001 Ximian, Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>.
+ */
+
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
+#include <gnome.h>
+
+#include "xst.h"
+#include "groups-table.h"
+#include "table.h"
+#include "callbacks.h"
+#include "user-group-xml.h"
+#include "user_group.h"
+#include "group-settings.h"
+
+extern XstTool *tool;
+static int reply;
+
+GtkWidget *group_settings_all = NULL;
+GtkWidget *group_settings_members = NULL;
+
+static void
+group_fill_users_gtktree (GtkWidget *widget, xmlNodePtr node)
+{
+	GList *users, *members, *items;
+	
+	members = get_group_users (node);
+	
+	if (widget == group_settings_all) {
+		users = get_list_from_node ("login", node);
+		items = my_g_list_remove_duplicates (users, members);
+	} else {
+		items = members;
+	}
+
+	my_gtktree_list_append_items (GTK_TREE_VIEW (widget), items);
+}
+
+static void
+create_users_lists (void)
+{
+	GtkWidget *add_button, *remove_button;
+	
+	/* We create the widgets, connect signals and attach data if they haven't been created already */
+	if (group_settings_all == NULL) {
+		group_settings_all = create_gtktree_list (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
+		gtk_object_set_data (GTK_OBJECT (group_settings_all), "button", "group_settings_add");
+		gtk_signal_connect (GTK_OBJECT (group_settings_all),
+		                    "cursor_changed",
+		                    G_CALLBACK (on_list_select_row),
+		                    NULL);
+
+		group_settings_members = create_gtktree_list (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
+		gtk_object_set_data (GTK_OBJECT (group_settings_members), "button", "group_settings_remove");
+		gtk_signal_connect (GTK_OBJECT (group_settings_members),
+		                    "cursor_changed",
+		                    G_CALLBACK (on_list_select_row),
+		                    NULL);
+		
+		/* We also need to attach some data to the 'add' and 'remove' buttons */
+		add_button = xst_dialog_get_widget (tool->main_dialog, "group_settings_add");
+		gtk_object_set_data (GTK_OBJECT (add_button), "in", group_settings_all);
+		gtk_object_set_data (GTK_OBJECT (add_button), "out", group_settings_members);
+		
+		remove_button = xst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
+		gtk_object_set_data (GTK_OBJECT (remove_button), "in", group_settings_members);
+		gtk_object_set_data (GTK_OBJECT (remove_button), "out", group_settings_all);
+	}
+}
+
+void
+group_new_prepare (ug_data *gd)
+{
+	GtkWidget *widget;
+	gchar     *buf;
+	
+	create_users_lists ();
+	
+	/* Fill all users list, don't exclude anything */
+	group_fill_users_gtktree (group_settings_all, gd->node);
+
+	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
+	gtk_window_set_title (GTK_WINDOW (widget), _("Create New Group"));
+
+	/* Fill in first available gid */
+	buf = (gchar *) find_new_id (gd->node);
+	if (buf) {
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "group_settings_gid")), 
+		                           g_strtod (buf, NULL));
+		g_free (buf);
+	}
+
+	gtk_object_set_data (GTK_OBJECT (widget), "data", gd);
+	gtk_widget_show (widget);
+}
+
+void
+group_settings_dialog_close (void)
+{
+	GtkWidget *widget;
+	GtkTreeModel *model;
+	ug_data *gd;
+
+	/* Clear group name */
+	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
+	gtk_entry_set_text (GTK_ENTRY (widget), "");
+
+	/* Clear both lists. */
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (group_settings_all));
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (group_settings_members));
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
+	
+	/* Set unsensitive the add and remove buttons */
+	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_add");
+	gtk_widget_set_sensitive (widget, FALSE);
+	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
+	gtk_widget_set_sensitive (widget, FALSE);
+	
+	/* Clear group data attached to the dialog */
+	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
+	gd = gtk_object_get_data (GTK_OBJECT (widget), "data");
+	g_free (gd);
+	gtk_object_remove_data (GTK_OBJECT (widget), "data");
+	gtk_widget_hide (widget);
+}
+
+static gboolean
+is_group_gid_valid (xmlNodePtr group_node, const gchar* gid)
+{
+	gchar *buf = NULL;
+
+	if (!is_valid_id (gid))
+		buf = g_strdup (_("User id must be a positive number."));
+	
+	/* Check if gid is available */
+	else if (node_exists (group_node, "gid", gid))
+		buf = g_strdup (_("Such group id already exists."));
+	
+	if (buf) {
+		show_error_message ("group_settings_dialog", buf);
+		g_free (buf);
+		
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+is_group_name_valid (xmlNodePtr node, const gchar *name)
+{
+	gchar *buf = NULL;
+
+	g_return_val_if_fail (node != NULL, FALSE);
+	g_return_val_if_fail (name != NULL, FALSE);
+
+	/* If !empty. */
+	if (strlen (name) < 1)
+		buf = g_strdup (_("Group name is empty."));
+
+	/* If too long. */
+	if (strlen (name) > 16)
+		buf = g_strdup (_("The group name is too long."));
+
+	/* if invalid. */
+	else if (!is_valid_name (name))
+		buf = g_strdup (_("Please set a valid group name, using only lower-case letters."));
+
+	/* if !exist. */
+	else if (node_exists (node, "name", name))
+		buf = g_strdup (_("Group already exists."));
+
+	/* If anything is wrong. */
+	if (buf) {
+		show_error_message ("group_settings_dialog", buf);
+		g_free (buf);
+
+		return FALSE;
+	} else {
+		return TRUE;
+	}
+}
+
+gboolean
+group_update (ug_data *gd)
+{
+	gchar *name, *gid;
+	GList *users;
+	
+	name = (gchar *) gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "group_settings_name")));
+	if (!is_group_name_valid (gd->node, name)) {
+		return FALSE;
+	}
+	
+	gid = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "group_settings_gid"))));
+	if (!is_group_gid_valid (gd->node, gid)) {
+		return FALSE;
+	}
+	
+	users = extract_members_list (GTK_TREE_VIEW (group_settings_members));
+	
+	if (gd->is_new) {
+		/* Add new group, update table. */
+		xmlNodePtr node;
+		
+		node = group_add_blank_xml (gd->node);
+		group_update_xml (node, name, gid, users);
+	} else {
+		/* Entered data ok, not new: just update */
+		group_update_xml (gd->node, name, gid, users);
+	}
+
+	groups_table_update_content ();
+	
+	return TRUE;
+}
+
+static void
+reply_cb (gint val, gpointer data)
+{
+        reply = val;
+}
+
+static gboolean
+check_group_delete (xmlNodePtr node)
+{
+	gchar *name, *txt;
+	GtkWindow *parent;
+	GnomeDialog *dialog;
+
+	g_return_val_if_fail (node != NULL, FALSE);
+
+	parent = GTK_WINDOW (tool->main_dialog);
+	name = xst_xml_get_child_content (node, "name");
+
+	if (!name)
+	{
+		g_warning ("check_group_delete: Can't get group's name");
+		return FALSE;
+	}
+
+	if (strcmp (name, "root") == 0)
+	{
+		g_free (name);
+		txt = g_strdup (_("The root group must not be deleted."));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
+		gnome_dialog_run (dialog);
+		g_free (txt);
+		return FALSE;
+	}
+
+	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), name);
+	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
+	gnome_dialog_run (dialog);
+	g_free (txt);
+	g_free (name);
+	
+	if (reply)
+		return FALSE;
+        else
+		return TRUE;
+}
+
+void 
+delete_group (xmlNodePtr node)
+{
+	if (check_group_delete (node))
+	{
+		delete_selected_row (TABLE_GROUP);
+		xst_xml_element_destroy (node);
+		xst_dialog_modify (tool->main_dialog);
+		groups_table_update_content ();
+		actions_set_sensitive (TABLE_GROUP, FALSE);
+	} 
+}
+
+static void
+group_settings_dialog_prepare (ug_data *gd)
+{
+	GtkWidget *w0;
+	gchar *txt, *name;
+
+	g_return_if_fail (gd != NULL);
+	
+	create_users_lists ();
+
+	/* Set group name */
+	name = xst_xml_get_child_content (gd->node, "name");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
+	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
+	xst_ui_entry_set_text (w0, name);
+
+	/* Set group id */
+	txt = xst_xml_get_child_content (gd->node, "gid");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
+	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
+
+	/* Fill group members */
+	group_fill_users_gtktree (group_settings_members, gd->node);
+
+	/* Fill all users list */
+	group_fill_users_gtktree (group_settings_all, gd->node);
+
+	/* Show group settings dialog */
+
+	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
+	txt = g_strdup_printf (_("Settings for Group %s"), name);
+	gtk_window_set_title (GTK_WINDOW (w0), txt);
+	g_free (name);
+	g_free (txt);
+
+	gtk_object_set_data (GTK_OBJECT (w0), "data", gd);
+	gtk_widget_show (w0);
+}
+
+void
+group_settings_prepare (ug_data *gd)
+{
+	gchar *buf;
+	
+	g_return_if_fail (gd != NULL);
+
+	buf = xst_xml_get_child_content (gd->node, "login");
+
+	if (buf)
+	{
+		/* Has to be some kind of user */
+		g_free (buf);
+		g_warning ("settings_prepare: Deprecated, shouldn't be here");
+		return;
+	}
+
+	buf = xst_xml_get_child_content (gd->node, "name");
+
+	if (buf)
+	{
+		/* Has to be some kind of group */
+		g_free (buf);
+
+		group_settings_dialog_prepare (gd);
+		return;
+	}
+
+	g_warning ("settings_prepare: shouldn't be here");
+}
+
+

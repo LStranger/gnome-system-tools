@@ -1,5 +1,7 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* 
+/* user-settings.h: this file is part of users-admin, a ximian-setup-tool frontend 
+ * for user administration.
+ * 
  * Copyright (C) 2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
@@ -16,45 +18,44 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com>
- *
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>.
  */
 
-#ifndef USER_DRUID_H
-#define USER_DRUID_H
+#ifndef __USER_SETTINGS_H
+#define __USER_SETTINGS_H
 
 #include <gnome.h>
-#include <glade/glade.h>
 
-#include "xst.h"
-#include "user_settings.h"
-
-BEGIN_GNOME_DECLS
-
-#define USER_DRUID_TYPE        (user_druid_get_type ())
-#define USER_DRUID(o)          (GTK_CHECK_CAST ((o), USER_DRUID_TYPE, UserDruid))
-#define USER_DRUID_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), USER_DRUID_TYPE, UserDruidClass))
-#define USER_IS_DRUID(o)       (GTK_CHECK_TYPE ((o), USER_DRUID_TYPE))
-#define USER_IS_DRUID_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), USER_DRUID_TYPE))
+#include "user_group.h"
 
 typedef struct {
-	GtkWindow parent;
-	
-	GnomeDruid *druid;
-	UserAccountGui *gui;
-} UserDruid;
+	gchar *login;
+	gchar *uid;
+	gchar *gid;
+		
+	gchar *name;
+	gchar *location;
+	gchar *work_phone;
+	gchar *home_phone;
+		
+	gchar *group;
+	gchar *home;
+	gchar *shell;
+	gchar *password1;
+	gchar *password2;
+		
+	gchar *pwd_maxdays;
+	gchar *pwd_mindays;
+	gchar *pwd_warndays;
+		
+	GList *extra_groups;
+} UserAccountData;
 
-typedef struct {
-	GtkWindowClass parent_class;
-	
-	/* signals */
-	
-} UserDruidClass;
+void		user_new_prepare		(ug_data*);
+void		user_settings_dialog_close	(void);
+gboolean	user_update 			(ug_data*);
+void		user_set_profile		(const gchar*);
+void		delete_user			(xmlNodePtr);
+void		user_settings_prepare		(ug_data*);
 
-GtkType user_druid_get_type (void);
-
-UserDruid *user_druid_new (void);
-
-END_GNOME_DECLS
-
-#endif /* USER_DRUID_H */
+#endif /* USER_SETTINGS_H */

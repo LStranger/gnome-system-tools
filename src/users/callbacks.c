@@ -18,7 +18,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
+ *          Tambet Ingo <tambet@ximian.com> and
+ *          Arturo Espinosa <arturo@ximian.com>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -32,87 +34,89 @@
 #include "user_group.h"
 #include "transfer.h"
 #include "passwd.h"
-#include "e-table.h"
-#include "user_settings.h"
-#include "profile.h"
-#include "user-druid.h"
-#include "user-account-editor.h"
+#include "table.h"
+#include "user-settings.h"
+#include "group-settings.h"
 
-XstTool *tool;
+extern XstTool *tool;
 
-/* Main window callbacks */
-/* "global" callbacks :) */
+extern GtkWidget *group_settings_all;
+extern GtkWidget *group_settings_members;
+
 
 void
 on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
 			 guint page_num, gpointer user_dat)
 {
-	set_active_table (page_num);
+//	set_active_table (page_num);
 }
 
 void
 on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
 {
-	xst_conf_set_boolean (tool, "showall", gtk_toggle_button_get_active (toggle));
+	XstDialogComplexity complexity = tool->main_dialog->complexity;
+
+	/* Only saves the change if we are in advanced mode, basic mode will be always FALSE (we don't need to save it) */
+	if (complexity == XST_DIALOG_ADVANCED) {
+		xst_conf_set_boolean (tool, "showall", gtk_toggle_button_get_active (toggle));
+	}
 	tables_update_content ();
-}
-
-void
-on_settings_clicked (GtkButton *button, gpointer user_data)
-{
-	ug_data *ud;
-
-	ud = g_new (ug_data, 1);
-
-	ud->new = FALSE;
-	ud->table = GPOINTER_TO_INT (user_data);
-	ud->node = get_selected_node ();
-
-	settings_prepare (ud);
 }
 
 /* Users tab */
 
 void
+on_user_table_clicked (GtkWidget *w, gpointer data)
+{
+	actions_set_sensitive (TABLE_USER, TRUE);
+}
+
+void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
+	ug_data *ud;
+	GtkWidget *notebook = xst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
+
 	g_return_if_fail (xst_tool_get_access (tool));
+	ud = g_new (ug_data, 1);
+
+	ud->is_new = TRUE;
+	ud->table = TABLE_USER;
+	ud->node = get_root_node (ud->table);
 
 	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED) {
-		UserAccount *account = user_account_new (NULL);
-		UserAccountEditor *editor = user_account_editor_new (account);		
-
-		if (editor)
-			gtk_widget_show (GTK_WIDGET (editor));
-		else {
-			gchar *error = g_strdup (N_("Can't create new user. Check your profile settings."));
-			user_account_gui_error (NULL, error);
-		}			
+		/* user settings dialog */
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
 	} else {
-		UserDruid *druid = user_druid_new ();
-
-		if (druid)
-			gtk_widget_show (GTK_WIDGET (druid));
-		else {
-			gchar *error = g_strdup (N_("Can't create new user. Too many users probably."));
-			user_account_gui_error (NULL, error);
-		}
+		/* user settings druid */
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 	}
+	user_new_prepare (ud);
 }
 
 void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
-	UserAccount *account;
-	UserAccountEditor *editor;
-	xmlNodePtr node = get_selected_node ();
+	ug_data *ud;
+	GtkWidget *notebook = xst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
 
-	if (xst_tool_get_access (tool)) {
-		account = user_account_get_by_node (node);
-		editor = user_account_editor_new (account);
+	ud = g_new (ug_data, 1);
 
-		gtk_widget_show (GTK_WIDGET (editor));
+	ud->is_new = FALSE;
+	ud->table = TABLE_USER;
+	ud->node = get_selected_row_node (TABLE_USER);
+
+	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED) {
+		/* user settings dialog */
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+	} else {
+		/* user settings druid */
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 	}
+
+	user_settings_prepare (ud);
 }
 
 void
@@ -121,42 +125,48 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	xmlNodePtr node;
 
 	g_return_if_fail (xst_tool_get_access (tool));
-	g_return_if_fail (node = get_selected_node ());
-
-	if (check_login_delete (node)) {
-		xst_dialog_modify (tool->main_dialog);
-		if (delete_selected_node (TABLE_USER))
-			xst_xml_element_destroy (node);
-
-		actions_set_sensitive (TABLE_USER, FALSE);
-	}
-}
-
-void
-on_user_profiles_clicked (GtkButton *button, gpointer user_data)
-{
-	XstDialog *xd;
-
-	xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
-	gtk_widget_show (GTK_WIDGET (xd));
+	
+	node = get_selected_row_node (TABLE_USER);
+	
+	delete_user (node);
 }
 
 /* Groups tab */
 
 void
+on_group_table_clicked (GtkWidget *w, gpointer user_data)
+{
+	actions_set_sensitive (TABLE_GROUP, TRUE);
+}
+
+void
 on_group_new_clicked (GtkButton *button, gpointer user_data)
 {
-	ug_data *ud;
+	ug_data *gd;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	ud = g_new (ug_data, 1);
+	gd = g_new (ug_data, 1);
 
-	ud->new = TRUE;
-	ud->table = TABLE_GROUP;
-	ud->node = get_root_node (ud->table);
+	gd->is_new = TRUE;
+	gd->table = TABLE_GROUP;
+	gd->node = get_root_node (gd->table);
 
-	group_new_prepare (ud);
+	group_new_prepare (gd);
+}
+
+void
+on_group_settings_clicked (GtkButton *button, gpointer user_data)
+{
+	ug_data *gd;
+
+	gd = g_new (ug_data, 1);
+
+	gd->is_new = FALSE;
+	gd->table = TABLE_GROUP;
+	gd->node = get_selected_row_node (TABLE_GROUP);
+
+	group_settings_prepare (gd);
 }
 
 void
@@ -165,17 +175,10 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	xmlNodePtr node;
 
 	g_return_if_fail (xst_tool_get_access (tool));
-
-	node = get_selected_node ();
-
-	if (check_group_delete (node))
-	{
-		xst_dialog_modify (tool->main_dialog);
-		if (delete_selected_node (TABLE_GROUP))
-			xst_xml_element_destroy (node);
-
-		actions_set_sensitive (TABLE_GROUP, FALSE);
-	}
+	
+	node = get_selected_row_node (TABLE_GROUP);
+	
+	delete_group (node);
 }
 
 #ifdef NIS
@@ -240,6 +243,77 @@ on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 }
 #endif
 
+/* User settings callbacks */
+
+void
+on_user_settings_passwd_changed (GtkEntry *entry, gpointer data)
+{
+	gtk_object_set_data (GTK_OBJECT (entry), "changed", GINT_TO_POINTER (TRUE));
+}
+
+
+void
+on_user_settings_dialog_show (GtkWidget *widget, gpointer user_data)
+{
+	/* Set focus to user name entry. */
+	gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "user_settings_name"));
+}
+
+void
+on_user_settings_dialog_delete_event (GtkWidget *w, gpointer user_data)
+{
+	user_settings_dialog_close ();
+}
+
+void
+on_user_settings_ok_clicked (GtkButton *button, gpointer data)
+{
+	GtkWidget *widget;
+	ug_data *ud;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	widget = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
+	ud = gtk_object_get_data (GTK_OBJECT (widget), "data");
+
+	if (user_update (ud))
+	{
+		xst_dialog_modify (tool->main_dialog);
+		user_settings_dialog_close ();
+	}
+}
+
+void
+on_user_settings_passwd_random_new (GtkButton *button, gpointer data)
+{
+	gchar *passwd;
+
+	passwd = passwd_get_random ();
+	gtk_label_set_text (GTK_LABEL (xst_dialog_get_widget (tool->main_dialog, "user_passwd_random_label")), passwd);
+	g_free (passwd);
+}
+
+void
+on_user_settings_passwd_toggled (GtkToggleButton *toggle, gpointer data)
+{
+	GtkNotebook *notebook = GTK_NOTEBOOK (xst_dialog_get_widget (tool->main_dialog, "user_passwd_notebook"));
+	GtkToggleButton *pwd_manual = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_manual"));
+	
+
+	if (gtk_toggle_button_get_active (pwd_manual)) {
+		gtk_notebook_set_current_page (notebook, 0);
+	} else {
+		gtk_notebook_set_current_page (notebook, 1);
+		on_user_settings_passwd_random_new (NULL, NULL);
+	}
+}
+
+void
+on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
+{
+	gchar *profile = data;
+}
+
 /* Group settings callbacks */
 
 void
@@ -247,38 +321,6 @@ on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data)
 {
 	/* Set focus to user name entry. */
 	gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "group_settings_name"));
-}
-
-static void
-group_settings_dialog_close (void)
-{
-	GtkWidget *w0;
-	ug_data *ud;
-
-	/* Clear group name */
-
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
-	gtk_entry_set_text (GTK_ENTRY (w0), "");
-
-	/* Clear both lists. */
-
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
-	gtk_clist_clear (GTK_CLIST (w0));
-
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
-	gtk_clist_clear (GTK_CLIST (w0));
-
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
-	ud = gtk_object_get_data (GTK_OBJECT (w0), "data");
-	g_free (ud);
-	gtk_object_remove_data (GTK_OBJECT (w0), "data");
-	gtk_widget_hide (w0);
-}
-
-void
-on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
-{
-	group_settings_dialog_close ();
 }
 
 void
@@ -290,15 +332,15 @@ on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data)
 void
 on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0;
-	ug_data *ud;
+	GtkWidget *widget;
+	ug_data *gd;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
-	ud = gtk_object_get_data (GTK_OBJECT (w0), "data");
+	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
+	gd = gtk_object_get_data (GTK_OBJECT (widget), "data");
 
-	if (group_update (ud))
+	if (group_update (gd))
 	{
 		xst_dialog_modify (tool->main_dialog);
 		group_settings_dialog_close ();
@@ -306,81 +348,65 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 }
 
 void
-on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
+on_add_remove_button_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkCList *all, *members;
+	GtkTreeView *in, *out;
+	GtkTreeModel *in_model, *out_model;
+	GtkTreePath *path;
+	GtkTreeIter in_iter, out_iter;
 	gchar *name;
 	gint row;
-
+	
 	g_return_if_fail (xst_tool_get_access (tool));
+	
+	in = gtk_object_get_data (GTK_OBJECT (button), "in");
+	out = gtk_object_get_data (GTK_OBJECT (button), "out");
+	
+	g_return_if_fail (in != NULL || out != NULL);
+	
+	in_model = gtk_tree_view_get_model (in);
+	out_model = gtk_tree_view_get_model (out);
+	
+	gtk_tree_view_get_cursor (in,
+	                          &path, NULL);
+	
+	g_return_if_fail (path != NULL);
+	
+	gtk_tree_model_get_iter (in_model, &in_iter, path);
+	
+	/* gets the user that is being removed from the 'in' list */
+	gtk_tree_model_get (in_model, &in_iter,
+	                    0, &name,
+	                    -1);
+	
+	/* appends the user to the 'out' list */	
+	gtk_tree_store_append (GTK_TREE_STORE (out_model), &out_iter, NULL);
+	gtk_tree_store_set (GTK_TREE_STORE (out_model),
+	                    &out_iter,
+			    0, name,
+			    -1);
 
-	all = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
-	members = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
-
-	while (all->selection)
-	{
-		row = GPOINTER_TO_INT (all->selection->data);
-		gtk_clist_get_text (all, row, 0, &name);
-		my_gtk_clist_append (members, g_strdup (name));
-		gtk_clist_remove (all, row);
-	}
+	/* removes the user from the 'in' list */
+	gtk_tree_store_remove (GTK_TREE_STORE (in_model), &in_iter);
+	
+	/* sets unsensitive the button again */
+	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 }
 
 void
-on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
+on_list_select_row (GtkTreeView *list)
 {
-	/* TODO: Maybe mix with previous func? */
-	GtkCList *all, *members;
-	gchar *name;
-	gint row;
-
-	g_return_if_fail (xst_tool_get_access (tool));
-
-	all = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
-	members = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
-
-	while (members->selection)
-	{
-		row = GPOINTER_TO_INT (members->selection->data);
-		gtk_clist_get_text (members, row, 0, &name);
-		my_gtk_clist_append (all, g_strdup (name));
-		gtk_clist_remove (members, row);
-	}
+	GtkTreePath *path;
+	GtkWidget *widget;
+	gchar *data;
+	
+	data = gtk_object_get_data (GTK_OBJECT (list), "button");
+	
+	gtk_tree_view_get_cursor (list, &path, NULL);
+	widget = xst_dialog_get_widget (tool->main_dialog, data);
+	
+	gtk_widget_set_sensitive (widget, TRUE);
 }
-
-void
-on_group_settings_all_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
-		gpointer user_data)
-{
-	GtkWidget *w0;
-
-	g_return_if_fail (xst_tool_get_access (tool));
-
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_add");
-
-	if (!clist->selection)
-		gtk_widget_set_sensitive (w0, FALSE);
-	else
-		gtk_widget_set_sensitive (w0, TRUE);
-}
-
-void
-on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
-		gpointer user_data)
-{
-	/* TODO: maybe mix with previous? */
-	GtkWidget *w0;
-
-	g_return_if_fail (xst_tool_get_access (tool));
-
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
-
-	if (!clist->selection)
-		gtk_widget_set_sensitive (w0, FALSE);
-	else
-		gtk_widget_set_sensitive (w0, TRUE);
-}
-
 
 /* Helpers .*/
 
@@ -399,13 +425,13 @@ actions_set_sensitive (gint table, gboolean state)
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_delete",   state);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", state);
 		break;
-	case TABLE_NET_USER:
+/*	case TABLE_NET_USER:
 	case TABLE_NET_GROUP:
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_group_new", TRUE);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_user_new",  TRUE);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_delete",    state);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_settings",  state);
-		break;
+		break;*/
 	default:
 		g_warning ("actions_set_sensitive: Shouldn't be here.");
 		return;

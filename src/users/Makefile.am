@@ -10,27 +10,27 @@ include ../common/CommonMakefile
 toolname = users
 bin_PROGRAMS = users-admin
 
-SUBDIRS = e-search-bar
+SUBDIRS = search-bar
 CPPFLAGS =
-INCLUDES = $(XST_TOOL_CFLAGS) $(XST_CRACK_LIB_CFLAGS)
+INCLUDES = $(XST_TOOL_CFLAGS)
 CLEANFILES = $(XST_TOOL_CLEANFILES)
 EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
 
-users_admin_LDADD = $(XST_TOOL_LIBS) ./e-search-bar/libesearchbar.a
-users_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES) ./e-search-bar/libesearchbar.a
+users_admin_LDADD = $(XST_TOOL_LIBS) ./search-bar/libsearchbar.a
+users_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES) ./search-bar/libsearchbar.a
 users_admin_SOURCES = \
 	main.c \
 	callbacks.c callbacks.h \
+	user-settings.c user-settings.h \
+	group-settings.c group-settings.h \
 	passwd.c passwd.h \
 	transfer.c transfer.h \
 	user_group.c user_group.h \
 	md5.c md5.h md5_crypt.c \
-	e-table.c e-table.h  \
-	user_settings.c user_settings.h \
-	profile.c profile.h \
-	user-group-xml.c user-group-xml.h \
-	user-druid.c user-druid.h \
-	user-account-editor.c user-account-editor.h
+	users-table.c users-table.h \
+	groups-table.c groups-table.h \
+	table.c table.h  \
+	user-group-xml.c user-group-xml.h 
 
 toolpixmaps =
-etspecs = group.etspec  net_group.etspec  net_user.etspec  profiles.etspec  users.etspec
+etspecs = 

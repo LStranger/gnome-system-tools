@@ -18,7 +18,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
+ *          Tambet Ingo <tambet@ximian.com> and 
+ *          Arturo Espinosa <arturo@ximian.com>.
  */
 
 
@@ -27,59 +29,71 @@
 #endif
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <glade/glade.h>
 
 #include <time.h>
 #include <stdlib.h>
 
-#include "xst.h"
-
 #include "transfer.h"
-#include "e-table.h"
+#include "table.h"
 #include "callbacks.h"
-#include "profile.h"
-#include "e-search-bar/e-search-bar.h"
+#include "search-bar/search-bar.h"
+#include "xst.h"
 
 XstTool *tool;
 
 void quit_cb (XstTool *tool, gpointer data);
 
 static XstDialogSignal signals[] = {
-	{ "notebook",                    "switch_page",   on_notebook_switch_page },
-	{ "group_settings_dialog",       "delete_event",  on_group_settings_dialog_delete_event },
-	{ "group_settings_dialog",       "show",          on_group_settings_dialog_show },
-	{ "group_settings_ok",           "clicked",       on_group_settings_ok_clicked },
-	{ "group_settings_cancel",       "clicked",       on_group_settings_cancel_clicked },
-	{ "group_settings_add",          "clicked",       on_group_settings_add_clicked },
-	{ "group_settings_remove",       "clicked",       on_group_settings_remove_clicked },
-	{ "group_settings_members",      "select_row",    on_group_settings_members_select_row },
-	{ "group_settings_members",      "unselect_row",  on_group_settings_members_select_row },
-	{ "group_settings_all",          "select_row",    on_group_settings_all_select_row },
-	{ "group_settings_all",          "unselect_row",  on_group_settings_all_select_row },
-	{ "user_new",                    "clicked",       on_user_new_clicked },
-	{ "user_delete",                 "clicked",       on_user_delete_clicked },
-	{ "user_settings",               "clicked",       on_user_settings_clicked },
-	{ "user_profiles",               "clicked",       profile_table_run },
-	{ "group_new",                   "clicked",       on_group_new_clicked },
-	{ "group_delete",                "clicked",       on_group_delete_clicked },
-	{ "showall",                     "toggled",       on_showall_toggled },
+	{ "notebook",                    	"switch_page",   	G_CALLBACK (on_notebook_switch_page) },
+	{ "showall",                     	"toggled",       	G_CALLBACK (on_showall_toggled) },
+	
+	/* User settings dialog callbacks */
+	{ "user_settings_dialog",		"delete_event",		G_CALLBACK (on_user_settings_dialog_delete_event) },
+	{ "user_settings_dialog",		"show",			G_CALLBACK (on_user_settings_dialog_show) },
+	{ "user_settings_ok",			"clicked",		G_CALLBACK (on_user_settings_ok_clicked) },
+	{ "user_settings_cancel",		"clicked",		G_CALLBACK (on_user_settings_dialog_delete_event) },
+	{ "user_settings_add",			"clicked",		G_CALLBACK (on_add_remove_button_clicked) },
+	{ "user_settings_remove",		"clicked",		G_CALLBACK (on_add_remove_button_clicked) },
+	{ "user_passwd_manual",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
+	{ "user_passwd_random",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
+	{ "user_passwd_random_new",		"clicked",		G_CALLBACK (on_user_settings_passwd_random_new) },
+	{ "user_passwd_entry1",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
+	{ "user_passwd_entry2",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
+//	{ "user_settings_profile_button",	"clicked",		G_CALLBACK (profile_table_run) },
+	
+	/* Group settings dialog callbacks */
+	{ "group_settings_dialog",		"delete_event",  	G_CALLBACK (on_group_settings_dialog_delete_event) },
+	{ "group_settings_dialog",		"show",          	G_CALLBACK (on_group_settings_dialog_show) },
+	{ "group_settings_ok",			"clicked",       	G_CALLBACK (on_group_settings_ok_clicked) },
+	{ "group_settings_cancel",		"clicked",       	G_CALLBACK (on_group_settings_dialog_delete_event) },
+	{ "group_settings_add",			"clicked",       	G_CALLBACK (on_add_remove_button_clicked) },
+	{ "group_settings_remove",		"clicked",       	G_CALLBACK (on_add_remove_button_clicked) },
+
+	/* Main dialog callbacks, users tab */
+	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
+	{ "user_settings",             		"clicked",       	G_CALLBACK (on_user_settings_clicked) },
+	{ "user_delete",                	"clicked",       	G_CALLBACK (on_user_delete_clicked) },
+//	{ "user_profiles",               	"clicked",       	G_CALLBACK (profile_table_run) },
+	
+	/* Main dialog callbacks, groups tab */
+	{ "group_new",				"clicked",		G_CALLBACK (on_group_new_clicked) },
+	{ "group_settings",			"clicked",		G_CALLBACK (on_group_settings_clicked) },
+	{ "group_delete",			"clicked",       	G_CALLBACK (on_group_delete_clicked) },
 	{ NULL }};
 
 static const XstWidgetPolicy policies[] = {
 	/* Name                     Basic                        Advanced                   Root   User */
-	{ "users_holder",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ "users_table",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_new",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "user_settings_basic",    XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "user_settings",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 /* Hiding user_profiles for now, until next release when profiles UI is given a face-lift */
-	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_HIDDEN, TRUE,  TRUE  },
 	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_HIDDEN,    TRUE,  TRUE  },
-	{ "groups_holder",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ "groups_table",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "group_new",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "group_delete",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "group_settings",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
@@ -89,17 +103,16 @@ static const XstWidgetPolicy policies[] = {
 	{ "network_delete",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "network_settings",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "showall",                XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
-	{ "user_passwd_optional",   XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE },
 	{ NULL }
 };
 
-static ESearchBarItem user_search_menu_items[] = {
+static SearchBarItem user_search_menu_items[] = {
 	{ N_("Show All"), 0 },
 	{ NULL, -1}
 };
 
 static void
-user_menu_activated (ESearchBar *esb, int id, gpointer user_data)
+user_menu_activated (SearchBar *sb, int id, gpointer user_data)
 {
 	switch (id)
 	{
@@ -114,22 +127,22 @@ user_menu_activated (ESearchBar *esb, int id, gpointer user_data)
 }
 
 enum {
-	ESB_USER_NAME,
-	ESB_USER_UID,
-	ESB_GROUP_NAME,
-	ESB_USER_GID,
+	SB_USER_NAME,
+	SB_USER_UID,
+	SB_GROUP_NAME,
+	SB_USER_GID,
 };
 
-static ESearchBarItem user_search_option_items[] = {
-	{ N_("User name contains"), ESB_USER_NAME },
-	{ N_("User ID is"), ESB_USER_UID },
-	{ N_("Group name contains"), ESB_GROUP_NAME },
-	{ N_("User GID is"), ESB_USER_GID },
+static SearchBarItem user_search_option_items[] = {
+	{ N_("User name contains"), SB_USER_NAME },
+	{ N_("User ID is"), SB_USER_UID },
+	{ N_("Group name contains"), SB_GROUP_NAME },
+	{ N_("User GID is"), SB_USER_GID },
 	{ NULL, -1 }
 };
 
 static void
-user_query_changed (ESearchBar *esb, gpointer user_data)
+user_query_changed (SearchBar *esb, gpointer user_data)
 {
 	gchar *search_word, *search_query;
 	int search_type;
@@ -141,19 +154,19 @@ user_query_changed (ESearchBar *esb, gpointer user_data)
 
 	if (search_word && strlen (search_word)) {
 		switch (search_type) {
-		case ESB_USER_NAME:
+		case SB_USER_NAME:
 			search_query = g_strdup_printf ("contains login %s",
 							search_word);
 			break;
-		case ESB_USER_UID:
+		case SB_USER_UID:
 			search_query = g_strdup_printf ("is uid %s",
 							search_word);
 			break;
-		case ESB_USER_GID:
+		case SB_USER_GID:
 			search_query = g_strdup_printf ("is gid %s",
 							search_word);
 			break;
-		case ESB_GROUP_NAME:
+		case SB_GROUP_NAME:
 			search_query = g_strdup_printf ("contains group %s",
 							search_word);
 			break;
@@ -176,15 +189,15 @@ user_query_changed (ESearchBar *esb, gpointer user_data)
 static void
 update_searchbar_complexity (XstDialogComplexity complexity)
 {	
-	ESearchBar *esb = E_SEARCH_BAR (gtk_object_get_data (GTK_OBJECT (tool->main_dialog),
-					"SearchBar"));
+	SearchBar *sb = SEARCH_BAR (gtk_object_get_data (GTK_OBJECT (tool->main_dialog), 
+	                               "SearchBar"));
 
 	switch (complexity) {
 	case XST_DIALOG_BASIC:
-		gtk_widget_hide (GTK_WIDGET (esb));
+		gtk_widget_hide (GTK_WIDGET (sb));
 		break;
 	case XST_DIALOG_ADVANCED:
-		gtk_widget_show (GTK_WIDGET (esb));
+		gtk_widget_show (GTK_WIDGET (sb));
 		break;
 	default:
 		g_warning ("update_searchbar_complexity: Unsupported complexity.");
@@ -200,10 +213,27 @@ update_notebook_complexity (XstDialogComplexity complexity)
 	switch (complexity) {
 	case XST_DIALOG_BASIC:
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
-		gtk_notebook_set_page (GTK_NOTEBOOK (notebook), 0);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 		break;
 	case XST_DIALOG_ADVANCED:
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+		break;
+	default:
+		g_warning ("update_notebook_complexity: Unsupported complexity.");
+	}
+}
+
+static void
+update_toggle_complexity (XstDialogComplexity complexity)
+{
+	GtkWidget *toggle = xst_dialog_get_widget (tool->main_dialog, "showall");
+	
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), FALSE);
+		break;
+	case XST_DIALOG_ADVANCED:
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), xst_conf_get_boolean (tool, "showall"));
 		break;
 	default:
 		g_warning ("update_notebook_complexity: Unsupported complexity.");
@@ -216,49 +246,30 @@ update_complexity (void)
 	XstDialogComplexity complexity = tool->main_dialog->complexity;
 
 	update_notebook_complexity (complexity);
-	update_searchbar_complexity (complexity);	
-	tables_update_complexity (complexity);
+	update_toggle_complexity (complexity);
+//	update_searchbar_complexity (complexity);	
+	update_tables_complexity (complexity);
 }
 
 static void
 connect_signals (void)
 {
-	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change",
-					GTK_SIGNAL_FUNC (update_complexity),
-					NULL);
+	g_signal_connect (G_OBJECT (tool->main_dialog), "complexity_change",
+	                  G_CALLBACK (update_complexity),
+	                  NULL);
 
-	/* Stupid libglade converts user_data to strings */
-
-	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "group_settings")),
-					"clicked",
-					GTK_SIGNAL_FUNC (on_settings_clicked),
-					GINT_TO_POINTER (TABLE_GROUP));
-	
 	xst_dialog_connect_signals (tool->main_dialog, signals);
-}
-
-static void
-config_clists (void)
-{
-	XstDialog *xd;
-	gint i;
-	gchar *lists[] = {"group_settings_all", "group_settings_members", NULL};
-
-	xd = tool->main_dialog;
-
-	for (i = 0; lists[i]; i++)
-		gtk_clist_set_auto_sort (GTK_CLIST (xst_dialog_get_widget (xd, lists[i])), TRUE);
 }
 
 static void
 create_searchbar (void)
 {
 	GtkWidget *table;
-	ESearchBar *search;
+	SearchBar *search;
 
 	table = xst_dialog_get_widget (tool->main_dialog, "user_parent");
 
-	search = E_SEARCH_BAR (e_search_bar_new (user_search_menu_items, user_search_option_items));
+	search = SEARCH_BAR (search_bar_new (user_search_menu_items, user_search_option_items));
 	gtk_table_attach (GTK_TABLE (table), GTK_WIDGET (search), 0, 1, 0, 1,
 			  GTK_FILL, GTK_FILL, 0, 0);
 
@@ -277,6 +288,7 @@ static void
 main_window_prepare (void)
 {
 	GtkToggleButton *toggle;
+	XstDialogComplexity complexity = tool->main_dialog->complexity;
 
 	/* For random password generation. */
 	srand (time (NULL));
@@ -284,11 +296,11 @@ main_window_prepare (void)
 	toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "showall"));
 	gtk_toggle_button_set_active (toggle, xst_conf_get_boolean (tool, "showall"));
 
-	update_notebook_complexity (tool->main_dialog->complexity);
-	
-	config_clists ();
-	create_tables ();
-	create_searchbar ();
+	construct_tables ();
+//	create_searchbar ();
+
+	update_notebook_complexity (complexity);
+	update_tables_complexity (complexity);
 }
 
 int
@@ -300,11 +312,11 @@ main (int argc, char *argv[])
 
 	xst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
-	main_window_prepare ();
-	connect_signals ();
-
 	xst_dialog_enable_complexity (tool->main_dialog);
 	xst_dialog_set_widget_policies (tool->main_dialog, policies);
+
+	main_window_prepare ();
+	connect_signals ();
 
 	/* This sucks, but calculating the needed size for simple mode based on the
 	 * hidden widgets plus the tabs size is going to be ugly. Chema

@@ -26,7 +26,7 @@
 
 #include <glib.h>
 #include "user_group.h"
-#include "e-table.h"
+#include "table.h"
 
 gchar *passwd_get_random (void);
 gchar *passwd_check      (gchar *pwd1, gchar *pwd2, gboolean check_quality);

@@ -18,7 +18,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
+ *          Tambet Ingo <tambet@ximian.com> and 
+ *          Arturo Espinosa <arturo@ximian.com>.
  */
 
 /* Functions for transferring information between XML tree and UI */
@@ -27,8 +29,7 @@
 #include <gnome.h>
 
 #include "transfer.h"
-#include "e-table.h"
-#include "profile.h"
+#include "table.h"
 
 void
 transfer_xml_to_gui (XstTool *tool, gpointer data)
@@ -38,10 +39,10 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	root = xst_xml_doc_get_root (tool->config);
 
 	/* Profiles */
-	profile_table_init ();
-	profile_table_from_xml (root);
+//	profile_table_init ();
+//	profile_table_from_xml (root);
 
-	/* Popuplate tables */
+	/* Populate tables */
 	populate_all_tables ();
 }
 

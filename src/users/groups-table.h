@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.h: this file is part of users-admin, a ximian-setup-tool frontend 
+/* groups-table.h: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.
@@ -18,17 +18,38 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
- *          Tambet Ingo <tambet@ximian.com> and 
- *          Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro <garparr@teleline.es>
  */
 
-#ifndef __TRANSFER_H
-#define __TRANSFER_H
+#ifndef _GROUPS_TABLE_H
+#define _GROUPS_TABLE_H
 
-#include "xst.h"
+enum {
+	COL_GROUP_NAME,
+	COL_GROUP_GID,
 
-void transfer_xml_to_gui(XstTool *tool, gpointer data);
-void transfer_gui_to_xml(XstTool *tool, gpointer data);
+	COL_GROUP_LAST,
+};
 
-#endif /* TRANSFER_H */
+typedef struct 
+{
+	gchar *name;
+	gboolean advanced_state_showable;
+	gboolean basic_state_showable;
+} GroupsTableConfig;
+
+typedef struct GroupTreeItem_ GroupTreeItem;
+	
+struct GroupTreeItem_
+{
+	const gchar *group;
+	guint GID;
+	
+	GroupTreeItem *children;
+};
+
+void	construct_groups_table		(void);
+void	populate_groups_table		(void);
+void	group_table_update_content	(void);
+
+#endif /* _GROUPS_TABLE_H */
