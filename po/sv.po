@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-10 21:20+0200\n"
-"PO-Revision-Date: 2004-09-10 21:21+0200\n"
+"POT-Creation-Date: 2004-09-11 23:33+0200\n"
+"PO-Revision-Date: 2004-09-11 23:33+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -349,6 +349,11 @@ msgid ""
 "/dev/ttyS2\n"
 "/dev/ttyS3\n"
 msgstr ""
+"/dev/modem\n"
+"/dev/ttyS0\n"
+"/dev/ttyS1\n"
+"/dev/ttyS2\n"
+"/dev/ttyS3\n"
 
 #: interfaces/network.glade.in.h:8
 msgid "<b>Profile Settings</b>"
@@ -359,6 +364,9 @@ msgid ""
 "<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
 "Use this tool for configuring the way your system access to other computers"
 msgstr ""
+"<span weight=\"bold\" size=\"larger\">Nätverksinställningar</span>\n"
+"Använd detta verktyg för att konfigurera det sätt som ditt system kommer åt "
+"andra datorer"
 
 #: interfaces/network.glade.in.h:11
 msgid "<span weight=\"bold\">Access Settings</span>"
@@ -819,6 +827,8 @@ msgid ""
 "<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
 "use this tool to specify which services to run at boot time"
 msgstr ""
+"<span size=\"larger\" weight=\"bold\">Tjänstinställningar</span>\n"
+"använd detta verktyg för att ange de tjänster som ska köras vid uppstart"
 
 #: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">General Information</span>"
@@ -877,6 +887,9 @@ msgid ""
 "<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
 "Use this tool for setting your current date, time and time zone"
 msgstr ""
+"<span size=\"larger\" weight=\"bold\">Inställningar för tid och datum</"
+"span>\n"
+"Använd detta verktyg för att ställa in ditt aktuella datum, tid och tidszon"
 
 #: interfaces/time.glade.in.h:8
 msgid "<span weight=\"bold\">Time Configuration</span>"
@@ -943,6 +956,10 @@ msgid ""
 "<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
 "Use this tool for configuring users and groups settings in your system"
 msgstr ""
+"<span weight=\"bold\" size=\"larger\">Inställningar för användare och "
+"grupper</span>\n"
+"Använd detta verktyg för att konfigurera inställningar för användare och "
+"grupper i ditt system"
 
 #: interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Advanced Settings</span>"
@@ -1431,16 +1448,15 @@ msgstr "GNOME-systemverktygen"
 
 #: src/common/gst-tool.c:1771
 msgid "Could not display help"
-msgstr ""
+msgstr "Kunde inte visa hjälp"
 
 #: src/network/callbacks.c:403
-#, fuzzy
 msgid ""
 "This will disable any network connection with this interface as soon as you "
 "press \"apply\""
 msgstr ""
 "Detta kommer att inaktivera alla nätverksanslutningar med detta gränssnitt "
-"så snart du klickar på \"verkställ\"."
+"så snart du trycker \"verkställ\""
 
 #: src/network/callbacks.c:408
 #, c-format
@@ -1452,16 +1468,14 @@ msgid "SMB Support is not running"
 msgstr "Stöd för SMB är inte igång"
 
 #: src/network/callbacks.c:517
-#, fuzzy
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable file sharing in Windows networks"
 msgstr ""
 "Du har inte SMB-stöd installerat. Installera SMB-stöd på systemet för att "
-"möjliggöra nätverksanslutning till windows."
+"möjliggöra fildelning i Windows-nätverk"
 
 #: src/network/callbacks.c:581
-#, fuzzy
 msgid "The host name has changed"
 msgstr "Värdnamnet har ändrats"
 
@@ -1478,18 +1492,16 @@ msgid "Change _Host name"
 msgstr "Ändra _värdnamnet"
 
 #: src/network/callbacks.c:629 src/network/callbacks.c:656
-#, fuzzy
 msgid "Wvdial command not found"
-msgstr "Wvdial hittades inte"
+msgstr "Wvdial-kommandot hittades inte"
 
 #: src/network/callbacks.c:630
-#, fuzzy
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate"
 msgstr ""
 "wvdial kunde inte hittas på ditt system. Du måste installera wvdial, annars "
-"kommer inte PPP-anslutningarna (modemanslutningarna) att kunna aktiveras."
+"kommer inte PPP-anslutningarna (modemanslutningarna) att kunna aktiveras"
 
 #: src/network/callbacks.c:657
 msgid ""
@@ -1518,7 +1530,6 @@ msgid "The default gateway device is missing gateway information"
 msgstr "Standardgatewayenheten saknar information om gateway"
 
 #: src/network/callbacks.c:734
-#, fuzzy
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device"
@@ -1531,13 +1542,12 @@ msgid "The program redhat-config-network-cmd could not be found"
 msgstr "Programmet redhat-config-network-cmd kunde inte hittas"
 
 #: src/network/callbacks.c:780
-#, fuzzy
 msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this"
 msgstr ""
 "Detta kan innebära saknade anslutningar under anslutningsfliken. Installera "
-"rpm-paketet redhat-config-network för att undvika detta."
+"rpm-paketet redhat-config-network för att undvika detta"
 
 #: src/network/callbacks.c:811
 #, c-format
@@ -1570,11 +1580,12 @@ msgid "Could not autodetect modem device"
 msgstr "Kunde inte automatiskt detektera modemenheten"
 
 #: src/network/callbacks.c:954
-#, fuzzy
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer"
-msgstr "Kontrollera att den inte är upptagen och att den är korrekt ansluten"
+msgstr ""
+"Kontrollera att enheten inte är upptagen och att den är korrekt ansluten "
+"till datorn"
 
 #: src/network/callbacks.c:1007
 msgid "Silent"
@@ -1650,79 +1661,72 @@ msgid "Error in IP address"
 msgstr "Fel i IP-adress"
 
 #: src/network/connection.c:1735
-#, fuzzy
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue"
 msgstr ""
 "IP-adressen eller nätmasken för gränssnittet lämnades tom. Ange giltiga IP-"
-"adresser i de fälten för att fortsätta."
+"adresser i de fälten för att fortsätta"
 
 #: src/network/connection.c:1745
-#, fuzzy
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue"
 msgstr ""
 "IP-adressen eller fjärradressen för gränssnittet lämnades tom. Ange giltiga "
-"IP-adresser i de fälten för att fortsätta."
+"IP-adresser i de fälten för att fortsätta"
 
 #: src/network/connection.c:1753
-#, fuzzy
 msgid "Error in domain name servers"
-msgstr "Fel i DNS-servrar"
+msgstr "Fel i domännamnsservrar"
 
 #: src/network/connection.c:1754
-#, fuzzy
 msgid ""
 "You chose to set the domain name servers for this connection manually, but "
 "left the IP address for the primary name server empty. Please enter the IP "
 "for the primary domain name server or uncheck the manual DNS option"
 msgstr ""
-"Du valde att manuellt ange DNS-servrarna för denna anslutning, men lämnade "
-"IP-adressen för den primära DNS-servern tom. Ange IP-adressen för den "
-"primära DNS-servern eller avmarkera alternativet att välja DNS-servrarna "
-"manuellt."
+"Du valde att manuellt ange domännamnsservrarna för denna anslutning, men "
+"lämnade IP-adressen för den primära namnservern tom. Ange IP-adressen för "
+"den primära domännamnsservern eller avmarkera alternativet att välja DNS-"
+"servrarna manuellt"
 
 #: src/network/connection.c:1761
 msgid "Invalid modem device"
 msgstr "Ogiltig modemenhet"
 
 #: src/network/connection.c:1762
-#, fuzzy
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue"
 msgstr ""
 "Modemenheten som anslutningen kommer att använda lämnades tom. Ange en enhet "
-"eller tryck \"detektera automatiskt\" för att fortsätta."
+"eller tryck \"detektera automatiskt\" för att fortsätta"
 
 #: src/network/connection.c:1767
 msgid "Invalid phone number"
 msgstr "Ogiltigt telefonnummer"
 
 #: src/network/connection.c:1768
-#, fuzzy
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue"
 msgstr ""
 "Telefonnumret som anslutningen kommer att använda lämnades tom. Ange ett "
-"giltigt telefonnummer för att fortsätta."
+"giltigt telefonnummer för att fortsätta"
 
 #: src/network/connection.c:2094
-#, fuzzy, c-format
+#, c-format
 msgid "The interface \"%s\" doesn't exist"
-msgstr "Gränssnittet \"%s\" finns inte."
+msgstr "Gränssnittet \"%s\" finns inte"
 
 #: src/network/connection.c:2098
 msgid "Invalid interface"
 msgstr "Ogiltigt gränssnitt"
 
 #: src/network/connection.c:2099
-#, fuzzy
 msgid "The loopback interface cannot be configured"
-msgstr "Loopback-gränssnittet kan inte konfigureras."
+msgstr "Loopback-gränssnittet kan inte konfigureras"
 
 #: src/network/dns.c:148 src/network/hosts.c:158
 msgid "IP Address"
@@ -1786,16 +1790,15 @@ msgid "Networking"
 msgstr "Nätverk"
 
 #: src/network/profile.c:51 src/users/profile-settings.c:215
-#, fuzzy
 msgid "You will not be able to recover this profile after pressing \"apply\""
 msgstr ""
 "Du kommer inte att kunna återställa denna profil efter att du klickar på "
 "\"verkställ\""
 
 #: src/network/profile.c:55
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete profile \"%s\"?"
-msgstr "Är du säker på att du vill ta bort profilen %s?"
+msgstr "Är du säker på att du vill ta bort profilen \"%s\"?"
 
 #: src/network/profiles-table.c:53
 msgid "Profile name"
@@ -1847,12 +1850,12 @@ msgid "NTP support is not running"
 msgstr "Stöd för NTP är inte igång"
 
 #: src/time/main.c:462
-#, fuzzy
 msgid ""
 "Please run NTP support in the system to enable synchronization of your local "
 "time server with internet time servers"
 msgstr ""
-"Kör NTP-stöd på systemet för att aktivera synkronisering med tidsserver"
+"Kör NTP-stöd på systemet för att aktivera synkronisering av din lokala "
+"tidsserver med Internet-tidsservrar"
 
 #: src/time/main.c:760
 msgid "Time and Date Settings"
@@ -1889,15 +1892,13 @@ msgid "Invalid group ID"
 msgstr "Ogiltigt grupp-id"
 
 #: src/users/group-settings.c:164
-#, fuzzy
 msgid "Group ID must be a positive number"
-msgstr "Grupp-id måste vara ett positivt tal."
+msgstr "Grupp-id måste vara ett positivt tal"
 
 #. if group is root
 #: src/users/group-settings.c:167
-#, fuzzy
 msgid "Group ID of the \"root\" user should not be modified"
-msgstr "Användar-id för användaren root bör inte ändras"
+msgstr "Grupp-id för användaren \"root\" bör inte ändras"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
@@ -1907,15 +1908,14 @@ msgid "This would leave the system unusable"
 msgstr "Detta kan lämna systemet i ett oanvändbart tillstånd"
 
 #: src/users/group-settings.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Group ID %s already exists"
-msgstr "Grupp-id %s finns redan."
+msgstr "Grupp-id %s finns redan"
 
 #. If empty.
 #: src/users/group-settings.c:197
-#, fuzzy
 msgid "Group name is empty"
-msgstr "Gruppnamnet är tomt."
+msgstr "Gruppnamnet är tomt"
 
 #: src/users/group-settings.c:198
 msgid "A group name must be specified"
@@ -1923,9 +1923,8 @@ msgstr "Ett gruppnamn måste anges"
 
 #. If too long.
 #: src/users/group-settings.c:201
-#, fuzzy
 msgid "The group name is too long"
-msgstr "Gruppnamnet är för långt."
+msgstr "Gruppnamnet är för långt"
 
 #: src/users/group-settings.c:202
 #, c-format
@@ -1938,15 +1937,14 @@ msgid "Group name has invalid characters"
 msgstr "Gruppnamnet har ogiltiga tecken"
 
 #: src/users/group-settings.c:206
-#, fuzzy
 msgid "Please set a valid group name, using only lower case letters"
-msgstr "Ange ett giltigt gruppnamn med endast små bokstäver."
+msgstr "Ange ett giltigt gruppnamn med endast små bokstäver"
 
 #. if !exist.
 #: src/users/group-settings.c:209
-#, fuzzy, c-format
+#, c-format
 msgid "Group \"%s\" already exists"
-msgstr "Gruppen \"%s\" finns redan."
+msgstr "Gruppen \"%s\" finns redan"
 
 #: src/users/group-settings.c:210
 msgid "Please select a different group name"
@@ -1954,23 +1952,21 @@ msgstr "Välj ett annat gruppnamn"
 
 #. if it's the root group
 #: src/users/group-settings.c:213
-#, fuzzy
 msgid "Group name of the \"root\" user should not be modified"
-msgstr "Användar-id för användaren root bör inte ändras"
+msgstr "Gruppnamnet för användaren \"root\" bör inte ändras"
 
 #: src/users/group-settings.c:283
-#, fuzzy
 msgid "The group \"root\" should not be deleted"
-msgstr "Gruppen root bör inte tas bort."
+msgstr "Gruppen \"root\" bör inte tas bort"
 
 #: src/users/group-settings.c:298
 msgid "This may leave files with invalid group ID in the filesystem"
 msgstr "Detta kan lämna filer med ogiltiga grupp-id i filsystemet"
 
 #: src/users/group-settings.c:303
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
-msgstr "Är du säker på att du vill ta bort gruppen %s?"
+msgstr "Är du säker på att du vill ta bort gruppen \"%s\"?"
 
 #: src/users/group-settings.c:358
 #, c-format
@@ -2006,18 +2002,17 @@ msgid "Users and Groups"
 msgstr "Användare och grupper"
 
 #: src/users/passwd.c:266
-#, fuzzy
 msgid "Passwords do not match"
-msgstr "Lösenorden stämmer inte överens."
+msgstr "Lösenorden stämmer inte överens"
 
 #: src/users/passwd.c:271
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Bad password: %s.\n"
 "Please try with a new password"
 msgstr ""
 "Felaktigt lösenord: %s.\n"
-"Försök med ett nytt lösenord."
+"Försök med ett nytt lösenord"
 
 #: src/users/profile-settings.c:122
 msgid "The profile must have a name"
@@ -2032,13 +2027,12 @@ msgid "The profile must have a default shell"
 msgstr "Profilen måste ha ett standardskal"
 
 #: src/users/profile-settings.c:204
-#, fuzzy
 msgid "The default profile should not be deleted"
-msgstr "Standardprofilen får inte tas bort."
+msgstr "Standardprofilen bör inte tas bort"
 
 #: src/users/profile-settings.c:205
 msgid "This profile is used for setting default data for new users"
-msgstr ""
+msgstr "Denna profil används för att ställa in standarddata för nya användare"
 
 #: src/users/profile-settings.c:214
 #, c-format
@@ -2067,83 +2061,73 @@ msgid "Text"
 msgstr "Text"
 
 #: src/users/user-settings.c:104
-#, fuzzy
 msgid "The \"root\" user should not be deleted"
-msgstr "Användaren root kan inte tas bort."
+msgstr "Användaren \"root\" bör inte tas bort"
 
 #: src/users/user-settings.c:120
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
-msgstr "Är du säker på att du vill ta bort användaren %s?"
+msgstr "Är du säker på att du vill ta bort användaren \"%s\"?"
 
 #: src/users/user-settings.c:219
 msgid "User Account Editor"
 msgstr "Redigerare för användarkonton"
 
 #: src/users/user-settings.c:335
-#, fuzzy
 msgid "The user name is empty"
-msgstr "Användarnamnet är tomt."
+msgstr "Användarnamnet är tomt"
 
 #: src/users/user-settings.c:336
-#, fuzzy
 msgid "A user name must be specified"
 msgstr "Ett användarnamn måste anges"
 
 #. = sizeof (ut.ut_name)
 #: src/users/user-settings.c:342 src/users/user-settings.c:347
-#, fuzzy
 msgid "The user name is too long"
-msgstr "Användarnamnet är för långt."
+msgstr "Användarnamnet är för långt"
 
 #: src/users/user-settings.c:343 src/users/user-settings.c:348
-#, fuzzy, c-format
+#, c-format
 msgid "The user name should have less than %i characters for being valid"
 msgstr "Användarnamnet bör ha färre än %i tecken för att vara giltigt"
 
 #: src/users/user-settings.c:354
-#, fuzzy
 msgid "User name for the \"root\" user should not be modified"
-msgstr "Användar-id för användaren root bör inte ändras"
+msgstr "Användarnamnet för användaren \"root\" bör inte ändras"
 
 #: src/users/user-settings.c:360
-#, fuzzy
 msgid "User name has invalid characters"
 msgstr "Användarnamnet har ogiltiga tecken"
 
 #: src/users/user-settings.c:361
-#, fuzzy
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers"
 msgstr ""
-"Ange ett giltigt användarnamn som består av en liten bokstav följt av små "
-"bokstäver och siffror."
+"Ställ in ett giltigt användarnamn som består av en liten bokstav följt av "
+"små bokstäver och siffror"
 
 #: src/users/user-settings.c:367
-#, fuzzy, c-format
+#, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Användarnamnet \"%s\" finns redan"
 
 #: src/users/user-settings.c:368
-#, fuzzy
 msgid "Please select a different user name"
 msgstr "Välj ett annat användarnamn"
 
 #: src/users/user-settings.c:393
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid character \"%c\" in comment"
-msgstr "Ogiltigt tecken i kommentar."
+msgstr "Ogiltigt tecken \"%c\" i kommentar"
 
 #: src/users/user-settings.c:394
-#, fuzzy
 msgid "Check that this character is not used"
-msgstr "Kontrollera att det ogiltigt tecknet \"%c\" inte används"
+msgstr "Kontrollera att detta tecken inte används"
 
 #: src/users/user-settings.c:442
-#, fuzzy
 msgid "Home directory should not be empty"
-msgstr "Hemkatalogen får inte vara tom."
+msgstr "Hemkatalogen bör inte vara tom."
 
 #: src/users/user-settings.c:443
 msgid "Make sure you provide a home directory"
@@ -2154,32 +2138,28 @@ msgid "Incomplete path in home directory"
 msgstr "Ofullständig sökväg i hemkatalogen"
 
 #: src/users/user-settings.c:446
-#, fuzzy
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
 msgstr ""
-"Ange en fullständig sökvägen till hemkatalogen.\n"
+"Ange en fullständig sökvägen till hemkatalogen\n"
 "<span size=\"smaller\">t.ex.: /home/johan</span>"
 
 #: src/users/user-settings.c:449
-#, fuzzy
 msgid "Home directory of the \"root\" user should not be modified"
-msgstr "Användar-id för användaren root bör inte ändras"
+msgstr "Hemkatalogen för användaren \"root\" bör inte ändras"
 
 #: src/users/user-settings.c:482
 msgid "Invalid user ID"
 msgstr "Ogiltigt användar-id"
 
 #: src/users/user-settings.c:483
-#, fuzzy
 msgid "User ID must be a positive number"
-msgstr "Användar-id måste vara ett positivt tal."
+msgstr "Användar-id måste vara ett positivt tal"
 
 #: src/users/user-settings.c:485
-#, fuzzy
 msgid "User ID of the \"root\" user should not be modified"
-msgstr "Användar-id för användaren root bör inte ändras"
+msgstr "Användar-id för användaren \"root\" bör inte ändras"
 
 # Måste vara årtiondets understatement...
 #: src/users/user-settings.c:502
@@ -2200,27 +2180,24 @@ msgid "Incomplete path in shell"
 msgstr "Ofullständig sökväg i skal"
 
 #: src/users/user-settings.c:525
-#, fuzzy
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
 msgstr ""
-"Ange en fullständig sökväg till skalet.\n"
+"Ange en fullständig sökväg till skalet\n"
 "<span size=\"smaller\">t.ex.: /bin/sh</span>"
 
 #: src/users/user-settings.c:547
-#, fuzzy
 msgid "Password should not be empty"
-msgstr "Lösenord kan inte vara tomt."
+msgstr "Lösenord kan inte vara tomt"
 
 #: src/users/user-settings.c:548
 msgid "A password must be provided"
 msgstr "Ett lösenord måste tillhandahållas."
 
 #: src/users/user-settings.c:550
-#, fuzzy
 msgid "Password confirmation isn't correct"
-msgstr "Lösenordsbekräftelsen är inte korrekt."
+msgstr "Lösenordsbekräftelsen är inte korrekt"
 
 #: src/users/user-settings.c:551
 msgid "Check that you have provided the same password in both text fields"
@@ -2254,6 +2231,214 @@ msgstr "Skal"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Lägg till eller ta bort användare och grupper"
+
+#~ msgid "Network settings"
+#~ msgstr "Nätverksinställningar"
+
+#~ msgid ""
+#~ "Use this tool for configuring the way your system access to other "
+#~ "computers"
+#~ msgstr ""
+#~ "Använd detta verktyg för att konfigurera det sätt som ditt system kommer "
+#~ "åt andra datorer"
+
+#~ msgid ""
+#~ "<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
+#~ "Use this tool to specify which services to run at boot time"
+#~ msgstr ""
+#~ "<span size=\"larger\" weight=\"bold\">Tjänstinställningar</span>\n"
+#~ "Använd detta verktyg för att ange de tjänster som ska köras vid uppstart"
+
+#~ msgid "Services settings"
+#~ msgstr "Tjänstinställningar"
+
+#~ msgid "Use this tool to specify which services to run at boot time"
+#~ msgstr ""
+#~ "Använd detta verktyg för att ange de tjänster som ska köras vid uppstart"
+
+#~ msgid "Time and date settings"
+#~ msgstr "Inställningar för tid och datum"
+
+#~ msgid "Use this tool for setting your current date, time and time zone"
+#~ msgstr ""
+#~ "Använd detta verktyg för att ställa in ditt aktuella datum, tid och "
+#~ "tidszon"
+
+#~ msgid "Users and groups settings"
+#~ msgstr "Inställningar för användare och grupper"
+
+#~ msgid ""
+#~ "Use this tool for configuring users and groups settings in your system"
+#~ msgstr ""
+#~ "Använd detta verktyg för att konfigurera inställningar för användare och "
+#~ "grupper i ditt system"
+
+#~ msgid ""
+#~ "This will disable any network connection with this interface as soon as "
+#~ "you press \"apply\"."
+#~ msgstr ""
+#~ "Detta kommer att inaktivera alla nätverksanslutningar med detta "
+#~ "gränssnitt så snart du trycker \"verkställ\"."
+
+#~ msgid ""
+#~ "You don't have SMB support installed. Please install SMB support in the "
+#~ "system to enable file sharing in Windows networks."
+#~ msgstr ""
+#~ "Du har inte SMB-stöd installerat. Installera SMB-stöd på systemet för att "
+#~ "möjliggöra fildelning i Windows-nätverk."
+
+#~ msgid ""
+#~ "wvdial could not be found on your system. You need to install wvdial, or "
+#~ "the PPP (modem) connections will not activate."
+#~ msgstr ""
+#~ "wvdial kunde inte hittas på ditt system. Du måste installera wvdial, "
+#~ "annars kommer inte PPP-anslutningarna (modemanslutningarna) att kunna "
+#~ "aktiveras."
+
+#~ msgid ""
+#~ "Please provide this information to proceed, or choose another default "
+#~ "gateway device."
+#~ msgstr ""
+#~ "Ange denna information för att fortsätta, eller välj en annan "
+#~ "standardgatewayenhet."
+
+#~ msgid ""
+#~ "This could render missing connections under the connections tab. Please "
+#~ "install the redhat-config-network rpm package to avoid this."
+#~ msgstr ""
+#~ "Detta kan innebära saknade anslutningar under anslutningsfliken. "
+#~ "Installera rpm-paketet redhat-config-network för att undvika detta."
+
+#~ msgid ""
+#~ "Check that the device is not busy and that is correctly attached to the "
+#~ "computer."
+#~ msgstr ""
+#~ "Kontrollera att enheten inte är upptagen och att den är korrekt ansluten "
+#~ "till datorn."
+
+#~ msgid ""
+#~ "The IP address or netmask for the interface was left empty. Please enter "
+#~ "valid IP addresses in those fields to continue."
+#~ msgstr ""
+#~ "IP-adressen eller nätmasken för gränssnittet lämnades tom. Ange giltiga "
+#~ "IP-adresser i de fälten för att fortsätta."
+
+#~ msgid ""
+#~ "The IP address or remote address for the interface was left empty. Please "
+#~ "enter valid IP addresses in those fields to continue."
+#~ msgstr ""
+#~ "IP-adressen eller fjärradressen för gränssnittet lämnades tom. Ange "
+#~ "giltiga IP-adresser i de fälten för att fortsätta."
+
+#~ msgid ""
+#~ "You chose to set the domain name servers for this connection manually, "
+#~ "but left the IP address for the primary name server empty. Please enter "
+#~ "the IP for the primary domain name server or uncheck the manual DNS "
+#~ "option."
+#~ msgstr ""
+#~ "Du valde att manuellt ange domännamnsservrarna för denna anslutning, men "
+#~ "lämnade IP-adressen för den primära namnservern tom. Ange IP-adressen för "
+#~ "den primära domännamnsservern eller avmarkera alternativet att välja DNS-"
+#~ "servrarna manuellt."
+
+#~ msgid ""
+#~ "The modem device that the connection will use was left empty. Please "
+#~ "enter a device or press \"autodetect\" to continue."
+#~ msgstr ""
+#~ "Modemenheten som anslutningen kommer att använda lämnades tom. Ange en "
+#~ "enhet eller tryck \"detektera automatiskt\" för att fortsätta."
+
+#~ msgid ""
+#~ "The phone number that the connection will use was left empty. Please "
+#~ "enter a valid phone number to continue."
+#~ msgstr ""
+#~ "Telefonnumret som anslutningen kommer att använda lämnades tom. Ange ett "
+#~ "giltigt telefonnummer för att fortsätta."
+
+#~ msgid "The interface \"%s\" doesn't exist."
+#~ msgstr "Gränssnittet \"%s\" finns inte."
+
+#~ msgid "The loopback interface cannot be configured."
+#~ msgstr "Loopback-gränssnittet kan inte konfigureras."
+
+#~ msgid "Group ID must be a positive number."
+#~ msgstr "Grupp-id måste vara ett positivt tal."
+
+#~ msgid "Group ID %s already exists."
+#~ msgstr "Grupp-id %s finns redan."
+
+#~ msgid "Group name is empty."
+#~ msgstr "Gruppnamnet är tomt."
+
+#~ msgid "The group name is too long."
+#~ msgstr "Gruppnamnet är för långt."
+
+#~ msgid "Please set a valid group name, using only lower case letters."
+#~ msgstr "Ange ett giltigt gruppnamn med endast små bokstäver."
+
+#~ msgid "Group \"%s\" already exists."
+#~ msgstr "Gruppen \"%s\" finns redan."
+
+#~ msgid "The group \"root\" should not be deleted."
+#~ msgstr "Gruppen \"root\" bör inte tas bort."
+
+#~ msgid "Passwords do not match."
+#~ msgstr "Lösenorden stämmer inte överens."
+
+#~ msgid ""
+#~ "Bad password: %s.\n"
+#~ "Please try with a new password."
+#~ msgstr ""
+#~ "Felaktigt lösenord: %s.\n"
+#~ "Försök med ett nytt lösenord."
+
+#~ msgid "The default profile should not be deleted."
+#~ msgstr "Standardprofilen bör inte tas bort."
+
+#~ msgid "The \"root\" user should not be deleted."
+#~ msgstr "Användaren \"root\" bör inte tas bort."
+
+#~ msgid "The user name is empty."
+#~ msgstr "Användarnamnet är tomt."
+
+#~ msgid "The user name is too long."
+#~ msgstr "Användarnamnet är för långt."
+
+#~ msgid "Username has invalid characters"
+#~ msgstr "Användarnamnet har ogiltiga tecken"
+
+#~ msgid ""
+#~ "Please set a valid user name consisting of a lower case letter followed "
+#~ "by lower case letters and numbers."
+#~ msgstr ""
+#~ "Ställ in ett giltigt användarnamn som består av en liten bokstav följt av "
+#~ "små bokstäver och siffror."
+
+#~ msgid "Invalid character \"%c\" in comment."
+#~ msgstr "Ogiltigt tecken \"%c\" i kommentar."
+
+#~ msgid ""
+#~ "Please enter full path for home directory.\n"
+#~ "<span size=\"smaller\">i.e.: /home/john</span>"
+#~ msgstr ""
+#~ "Ange en fullständig sökvägen till hemkatalogen.\n"
+#~ "<span size=\"smaller\">t.ex.: /home/johan</span>"
+
+#~ msgid "User ID must be a positive number."
+#~ msgstr "Användar-id måste vara ett positivt tal."
+
+#~ msgid ""
+#~ "Please enter full path for shell.\n"
+#~ "<span size=\"smaller\">i.e.: /bin/sh</span>"
+#~ msgstr ""
+#~ "Ange en fullständig sökväg till skalet.\n"
+#~ "<span size=\"smaller\">t.ex.: /bin/sh</span>"
+
+#~ msgid "Password should not be empty."
+#~ msgstr "Lösenord kan inte vara tomt."
+
+#~ msgid "Password confirmation isn't correct."
+#~ msgstr "Lösenordsbekräftelsen är inte korrekt."
 
 #~ msgid "Bootloader settings"
 #~ msgstr "Inställningar för startprogram"
