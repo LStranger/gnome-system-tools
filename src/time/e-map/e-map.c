@@ -109,6 +109,7 @@ static guint e_map_signals[LAST_SIGNAL];
 
 
 static void update_render_pixbuf(EMap *map, ArtFilterLevel interp);
+static void set_scroll_area(EMap *view);
 
 
 /**
@@ -188,7 +189,7 @@ static void e_map_class_init(EMapClass * class)
 static gint load_map_background(EMap *view, gchar *name)
 {
   EMapPrivate *priv;
-  GdkPixbuf *pb0, *pb1;
+  GdkPixbuf *pb0;
 
   priv = view->priv;
 
@@ -330,12 +331,7 @@ static void
 request_paint_area(EMap * view, GdkRectangle * area)
 {
   EMapPrivate *priv;
-  GdkPixbuf *pb, *pbt;
-  int area_xofs, area_yofs;
-  guchar *pixels;
   int width, height;
-  int rowstride;
-  int i, j, t;
 
 
   if (!GTK_WIDGET_DRAWABLE(view)) return;
@@ -381,7 +377,9 @@ request_paint_area(EMap * view, GdkRectangle * area)
     return;
   }
 
+#ifdef DEBUG
   printf("Doing hard redraw.\n");
+#endif
 }
 
 
@@ -584,7 +582,6 @@ static void blowup_window_area(GdkWindow *window,
   AxisType strong_axis;
   gfloat axis_factor, axis_counter;
   gint zoom_chunk;
-  gint move_steps, zoom_steps;
   gint divisor_width, divisor_height;
   gint divide_width_index, divide_height_index;
   gint area_width, area_height;
@@ -760,18 +757,11 @@ static void blowup_window_area(GdkWindow *window,
 static void zoom_in_smooth(EMap *map)
 {
   EMapPrivate *priv;
-  GdkGC *gc;
   GdkWindow *window;
-  AxisType strong_axis;
-  double axis_factor;
   int width, height;
   int win_width, win_height;
   int win_center_x, win_center_y;
   int target_width, target_height;
-  unsigned int base;
-  int line;
-  int zoom_chunk;
-  int i, j;
   double x, y;
 
   g_return_if_fail (map);
@@ -931,7 +921,6 @@ static void e_map_realize(GtkWidget * widget)
 {
   GdkWindowAttr attr;
   int attr_mask;
-  GdkCursor *cursor;
 
   g_return_if_fail(widget != NULL);
   g_return_if_fail(IS_E_MAP(widget));
@@ -978,7 +967,6 @@ e_map_size_request(GtkWidget * widget, GtkRequisition * requisition)
 {
   EMap *view;
   EMapPrivate *priv;
-  int scaled_width, scaled_height;
 
   g_return_if_fail(widget != NULL);
   g_return_if_fail(IS_E_MAP(widget));
@@ -1059,7 +1047,6 @@ e_map_button_press(GtkWidget * widget, GdkEventButton * event)
 {
   EMap *view;
   EMapPrivate *priv;
-  GdkCursor *cursor;
 
   view = E_MAP(widget);
   priv = view->priv;
@@ -1096,8 +1083,6 @@ static gint e_map_motion(GtkWidget * widget, GdkEventMotion * event)
 {
   EMap *view;
   EMapPrivate *priv;
-  gint x, y;
-  GdkModifierType mods;
 
   view = E_MAP(widget);
   priv = view->priv;
@@ -1303,8 +1288,6 @@ EMap *e_map_new()
 static void set_scroll_area(EMap *view)
 {
   EMapPrivate *priv;
-  int map_width, map_height;
-  GdkRectangle area;
 
   priv = view->priv;
 
