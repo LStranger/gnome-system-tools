@@ -75,6 +75,7 @@ GdkPixbuf *fedora;
 GdkPixbuf *conectiva;
 GdkPixbuf *black_panther;
 GdkPixbuf *vine;
+GdkPixbuf *specifix;
 
 enum {
 	BOGUS,
@@ -439,6 +440,7 @@ gst_tool_create_distro_images (void)
 	conectiva = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/conectiva.png", NULL);
 	black_panther = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/black_panther.png", NULL);
 	vine = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/vine.png", NULL);
+	specifix = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/specifix.png", NULL);
 }
 
 static void
