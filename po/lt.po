@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 23:29+0200\n"
-"PO-Revision-Date: 2005-01-26 23:40+0200\n"
+"POT-Creation-Date: 2005-01-31 09:15+0200\n"
+"PO-Revision-Date: 2005-01-31 09:18+0200\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -1178,7 +1178,7 @@ msgstr ""
 #: src/common/gst-auth.c:103
 #, c-format
 msgid "Could not run \"%s\""
-msgstr "Nerandu paleisti „%s“"
+msgstr "Nepavyko paleisti „%s“"
 
 #: src/common/gst-auth.c:104
 msgid "Check that you have permissions to run this command"
@@ -1188,14 +1188,22 @@ msgstr "Patikrinkite ar Jūs turite leidimą vykdyti šią komandą"
 msgid "An unexpected error has ocurred"
 msgstr "Įvyko nenumatyta klaida"
 
+#: src/common/gst-auth.c:132
+msgid "Could not execute the backend"
+msgstr "Nepavyko paleisti posistemės"
+
+#: src/common/gst-auth.c:133
+msgid "There was an error creating the child process, the tool will close now."
+msgstr "Kuriant antrinį procesą įvyko klaida, įrankis darbą nutraukia."
+
 #: src/common/gst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
-msgstr "Nerandu widget: %s"
+msgstr "Nepavyko rasti valdymo elemento: %s"
 
 #: src/common/gst-dialog.c:382
 msgid "There are changes which have not been applied"
-msgstr "Yra pakeitimų kurie nebuvo pritaikyti"
+msgstr "Yra dar nepritaikytų pakeitimų"
 
 #: src/common/gst-dialog.c:384
 msgid "Apply them now?"
@@ -1204,15 +1212,15 @@ msgstr "Pritaikyti juos dabar?"
 #: src/common/gst-dialog.c:490
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
-msgstr "Klaidos prisijungimo signalas `%s' ojekte `%s'"
+msgstr "Klaidos prisijungimo signalas „%s“ ojekte „%s“"
 
 #: src/common/gst-tool.c:1020
 msgid "The configuration could not be loaded"
-msgstr "Konfigūracija negalėjo būti įkelta"
+msgstr "Nepavyko įkelti konfigūracijos"
 
 #: src/common/gst-tool.c:1022
 msgid "There was an error running the backend script"
-msgstr "Leidžiant posistemės skriptą įvyko klaida"
+msgstr "Leidžiant posistemės scenarijų įvyko klaida"
 
 #: src/common/gst-tool.c:1503
 #, c-format
@@ -1227,7 +1235,7 @@ msgid ""
 "have been warned. Thank you for trying out this prerelease of the GNOME "
 "System Tools!"
 msgstr ""
-"Tai yra neužbaigtas darbas, taigi gali būti rimtų klaidų. Dėl šių įrankių "
+"Tai yra neužbaigtas darbas, tad gali būti rimtų klaidų. Dėl šių įrankių "
 "prigimties, klaidos gali paversti Jūsų kompiuterį <span weight=\"bold"
 "\">praktiškai nenaudingu</span>, gali pareikalauti laiko, pastangų ir sveiko "
 "proto. Jūs buvote įspėta(-s). Ačiū, kad išbandote šį bandomąjį GNOME System "
@@ -1278,11 +1286,11 @@ msgstr ""
 "Patikrinkite ar įrenginys nėra užimtas ir ar tinkamai prijungtas prie "
 "kompiuterio"
 
-#: src/network/callbacks.c:433
+#: src/network/callbacks.c:439
 msgid "The host name has changed"
 msgstr "Kompiuterio vardas pakeistas"
 
-#: src/network/callbacks.c:436
+#: src/network/callbacks.c:442
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1290,7 +1298,7 @@ msgstr ""
 "Tai neleis Jums paleisti naujų programų, todėl Jūs turėsite prisijungti iš "
 "naujo. Vistiek tęsti?"
 
-#: src/network/callbacks.c:442
+#: src/network/callbacks.c:448
 msgid "Change _Host name"
 msgstr "Pakeisti _kompiuterio vardą"
 
@@ -1326,34 +1334,34 @@ msgstr "Norite pašalinti šią vietą?"
 msgid "Changing profile"
 msgstr "Keičiamas profilis"
 
-#: src/network/main.c:105
+#: src/network/main.c:107
 msgid "The interface does not exist"
 msgstr "Ši sąsaja neegzistuoja"
 
-#: src/network/main.c:107
+#: src/network/main.c:109
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
 msgstr ""
 "Patikrinkite ar parašyta teisingai ir ar ją tinkamai palaiko Jūsų sistema."
 
-#: src/network/main.c:139
+#: src/network/main.c:154
 msgid "Configure a network interface"
 msgstr "Konfigūruoti tinklo sąsają"
 
-#: src/network/main.c:139
+#: src/network/main.c:154
 msgid "INTERFACE"
 msgstr "SĄSAJA"
 
-#: src/network/main.c:140
+#: src/network/main.c:155
 msgid "Configure the first network interface with a specific type"
 msgstr "Konfigūruoti pirmąją specifinio tipo tinklo sąsają"
 
-#: src/network/main.c:140
+#: src/network/main.c:155
 msgid "TYPE"
 msgstr "TIPAS"
 
-#: src/network/main.c:147
+#: src/network/main.c:162
 msgid "Network settings"
 msgstr "Tinklo nustatymai"
 
@@ -1528,8 +1536,8 @@ msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders. The tool will close now."
 msgstr ""
-"Norint viešinti Jūsų aplankus, Jums reikia bent jau Samba arba NFS. "
-"Dabar šis įrankis užsidarys."
+"Norint viešinti Jūsų aplankus, Jums reikia bent jau Samba arba NFS. Dabar "
+"šis įrankis užsidarys."
 
 #: src/time/main.c:461
 msgid "NTP support is not running"
@@ -1767,8 +1775,8 @@ msgid ""
 "This will disable the access of this user to the system, but his home "
 "directory will not be deleted"
 msgstr ""
-"Įjungus šį nustatymą, priėjimas prie sistemos šiam naudotojui bus uždraustas, "
-"bet jo namų aplankas ištrintas nebus"
+"Įjungus šį nustatymą, priėjimas prie sistemos šiam naudotojui bus "
+"uždraustas, bet jo namų aplankas ištrintas nebus"
 
 #: src/users/user-settings.c:187
 msgid "User Account Editor"
