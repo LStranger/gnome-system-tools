@@ -6,9 +6,10 @@
 
 gchar *s = N_("Memory administration");
 gchar *s = N_("These are the swap areas available:");
-gchar *s = N_("Enable");
+gchar *s = N_("Enabled");
 gchar *s = N_("Device");
 gchar *s = N_("Priority");
+gchar *s = N_("Size");
 gchar *s = N_("Enable");
 gchar *s = N_("Disable");
 gchar *s = N_("Create...");
