@@ -1,6 +1,6 @@
 /* main.h: this file is part of users-admin, a helix-setup-tool frontend for user administration.
  * 
- * Copyright (C) 2000 Helix Code, Inc.
+ * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
