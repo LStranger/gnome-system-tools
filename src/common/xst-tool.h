@@ -89,7 +89,9 @@ struct _XstTool {
 	gboolean  report_dispatch_pending;
 	gboolean  report_finished;
 	gboolean  run_again;
+	
 	gboolean  directive_running; /* locked when a directive is running */
+	GSList   *directive_queue; 
 
 	XstReportHookType  report_hook_type;
 	GSList            *report_hook_list;
@@ -125,14 +127,25 @@ void         xst_tool_save_cb             (GtkWidget *w, XstTool *tool);
 gboolean     xst_tool_load                (XstTool *tool);
 void         xst_tool_load_try            (XstTool *tool);
 
+
 /* All undefined arguments in these directive functions must be (const gchar *) type.
    They will become arguments in the directive line passed to the backend. Last arg must be NULL. */
 xmlDoc      *xst_tool_run_get_directive   (XstTool *tool, const gchar *report_sign,
 					   const gchar *directive, ...);
+xmlDoc      *xst_tool_run_get_directive_va (XstTool *tool, const gchar *report_sign,
+					    const gchar *directive, va_list ap);
+
 /* xml can be NULL, in which case no XML will be sent to the backend. */
 xmlDoc      *xst_tool_run_set_directive   (XstTool *tool, xmlDoc *xml,
 					   const gchar *report_sign, const gchar *directive, ...);
+xmlDoc      *xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
+					    const gchar *report_sign, const gchar *directive, va_list ap);
+
+/* This is for async directive calls. See .c file for directions. */
+guint        xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer data,
+				       xmlDoc *in_xml, const gchar *report_sign, const gchar *directive, ...);
 gboolean     xst_tool_directive_running   (XstTool *tool);
+
 
 void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 void         xst_tool_set_close_func      (XstTool *tool, XstCloseFunc close_cb, gpointer data);

@@ -1,3 +1,19 @@
+2001-10-05  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (xst_tool_idle_run_directives): Run a queued
+	directive. Ran as gtk_idle.
+	(xst_tool_default_set_directive_callback): This is callled
+	if no directive callback is specified. (NULL).
+	(xst_tool_queue_directive): Just like run_{set|get}_directive,
+	but passes additional callback and closure.
+	(xst_tool_run_get_directive_va): Receives a va_list, and does
+	the actual directive call.
+	(xst_tool_run_get_directive): The traditional function, wrapping
+	the one above.
+	(xst_tool_run_set_directive_va): converse. Report which directive
+	is being skipped if in ROOT_ACCESS_SIMULATED.
+	(xst_tool_run_set_directive): converse.
+
 2001-10-03  Tambet Ingo  <tambet@ximian.com>
 
 	* xst-ui.c (xst_ui_image_widget_get): Added assertion to not

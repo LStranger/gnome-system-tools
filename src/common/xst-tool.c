@@ -640,6 +640,22 @@ xst_tool_init_backend (XstTool *tool)
 	}
 }
 
+static gint
+xst_tool_idle_run_directives (gpointer data)
+{
+	XstTool           *tool = data;
+	XstDirectiveEntry *entry;
+
+	if (!tool->directive_queue)
+		return FALSE;
+
+	entry = tool->directive_queue->data;
+	tool->directive_queue = g_slist_remove (tool->directive_queue, entry);
+	entry->callback (entry);
+	g_free (entry);
+	return TRUE;
+}
+
 static void
 xst_tool_kill_backend (XstTool *tool, gpointer data)
 {
@@ -653,7 +669,7 @@ xst_tool_kill_backend (XstTool *tool, gpointer data)
 
 	if (root_access == ROOT_ACCESS_SIMULATED)
 		root_access = ROOT_ACCESS_SIMULATED_DISABLED;
-		
+
 	xst_tool_run_set_directive (tool, NULL, _("Closing tool."), "end", NULL);
 
 	if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
@@ -725,6 +741,46 @@ xst_tool_read_xml_from_backend (XstTool *tool)
 }
 
 static void
+xst_tool_default_set_directive_callback (XstDirectiveEntry *entry)
+{
+	xst_tool_run_set_directive_va (entry->tool, entry->in_xml, entry->report_sign,
+				       entry->directive, entry->ap);
+}
+
+/* All parameters except directive can be NULL. Last argument must be NULL.
+   NULL report_sign makes no report window to be shown when directive is run.
+   NULL callback runs the default directive callback, which runs a set directive.
+   data is for closure. in_xml is an input xml that may be required by the directive. */
+guint
+xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer data,
+			  xmlDoc *in_xml, const gchar *report_sign, const gchar *directive, ...)
+{
+	va_list            ap;
+	XstDirectiveEntry *entry;
+
+	g_return_val_if_fail (tool != NULL, -1);
+	g_return_val_if_fail (XST_IS_TOOL (tool), -1);
+
+	va_start (ap, directive);
+	entry = g_new0 (XstDirectiveEntry, 1);
+	g_return_val_if_fail (entry != NULL, -1);
+	
+	entry->tool        = tool;
+	entry->callback    = callback? xst_tool_default_set_directive_callback: callback;
+	entry->data        = data;
+	entry->in_xml      = in_xml;
+	entry->report_sign = report_sign;
+	entry->directive   = directive;
+	entry->ap          = ap;
+	
+	if (!tool->directive_queue)
+		gtk_idle_add (xst_tool_idle_run_directives, tool);
+	tool->directive_queue = g_slist_append (tool->directive_queue, entry);
+
+	return g_slist_length (tool->directive_queue);
+}
+
+static void
 xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 {
 	GString *directive_line;
@@ -750,11 +806,9 @@ xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 }
 
 xmlDoc *
-xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar *directive, ...)
+xst_tool_run_get_directive_va (XstTool *tool, const gchar *report_sign, const gchar *directive, va_list ap)
 {
-	va_list ap;
 	xmlDoc *xml;
-	const gchar *directive_ptr;
 	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
@@ -762,9 +816,7 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
 	tool->directive_running = TRUE;
 
-	directive_ptr = directive;
-	va_start (ap, directive);
-	xst_tool_send_directive (tool, directive_ptr, ap);
+	xst_tool_send_directive (tool, directive, ap);
 
 	/* FIXME: Instead of doing the following, we should pass around a value describing
 	 * tool I/O mode (as opposed to a string to report_progress ()). */
@@ -790,13 +842,20 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar
 }
 
 xmlDoc *
-xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
-			    const gchar *report_sign, const gchar *directive, ...)
+xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar *directive, ...)
 {
 	va_list ap;
+	
+	va_start (ap, directive);
+	return xst_tool_run_get_directive_va (tool, report_sign, directive, ap);
+}
+
+xmlDoc *
+xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
+			       const gchar *report_sign, const gchar *directive, va_list ap)
+{
 	FILE *f;
 	xmlDoc *xml_out;
-	const gchar *directive_ptr;
 	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
@@ -806,14 +865,12 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 
 	/* don't actually run if we are just pretending */
 	if (root_access == ROOT_ACCESS_SIMULATED) {
-		g_warning (_("Skipping set directive..."));
+		g_warning (_("Skipping %s directive..."), directive);
 		tool->directive_running = FALSE;
 		return NULL;
 	}
 
-	directive_ptr = directive;
-	va_start (ap, directive);
-	xst_tool_send_directive (tool, directive_ptr, ap);
+	xst_tool_send_directive (tool, directive, ap);
 
 	if (xml) {
 		f = fdopen (dup (tool->backend_write_fd), "w");
@@ -835,6 +892,16 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 
 	tool->directive_running = FALSE;
 	return xml_out;
+}
+
+xmlDoc *
+xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
+			    const gchar *report_sign, const gchar *directive, ...)
+{
+	va_list ap;
+	
+	va_start (ap, directive);
+	return xst_tool_run_set_directive_va (tool, xml, report_sign, directive, ap);
 }
 
 gboolean
@@ -907,6 +974,16 @@ xst_tool_load (XstTool *tool)
 	return tool->config != NULL;
 }
 
+#if 0
+static void
+xst_tool_save_directive_callback (XstDirectiveEntry *entry)
+{
+	xst_tool_run_set_directive_va (entry->tool, entry->in_xml, entry->report_sign,
+				       entry->directive, entry->ap);
+	xst_dialog_thaw_visible (entry->tool->main_dialog);
+}
+#endif
+
 gboolean
 xst_tool_save (XstTool *tool)
 {
@@ -965,11 +1042,10 @@ xst_tool_save (XstTool *tool)
 	CORBA_exception_free (&ev);
 
 	if (location_id == NULL)
-		xst_tool_run_set_directive (tool, tool->config,
-					    _("Updating your system configuration."),
+		xst_tool_run_set_directive (tool, tool->config, _("Updating your system configuration."),
 					    "set", NULL);
-
 	xst_dialog_thaw_visible (tool->main_dialog);
+
 	return TRUE;  /* FIXME: Determine if it really worked. */
 }
 
@@ -1179,6 +1255,7 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 	xst_tool_set_close_func (tool, xst_tool_kill_backend, NULL);
 
 	tool->directive_running = FALSE;
+	tool->directive_queue   = NULL;
 }
 
 XstTool *

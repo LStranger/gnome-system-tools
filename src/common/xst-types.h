@@ -23,6 +23,7 @@
 #define XST_TYPES_H
 
 #include <glib.h>
+#include <tree.h>    /* libxml */
 
 #define XST_CONF_ROOT "/xst"
 
@@ -72,5 +73,20 @@ typedef struct _XstReportHook       XstReportHook;
 typedef struct _XstReportHookEntry  XstReportHookEntry;
 
 typedef struct _XstPlatform         XstPlatform;
+
+typedef struct _XstDirectiveEntry   XstDirectiveEntry;
+typedef void (XstDirectiveFunc)    (XstDirectiveEntry *entry);
+
+struct _XstDirectiveEntry {
+	XstTool          *tool;
+	
+	XstDirectiveFunc *callback;
+	gpointer          data;
+
+	xmlDoc           *in_xml;
+	const gchar      *report_sign;
+	const gchar      *directive;
+	va_list           ap;
+};
 
 #endif /* XST_TYPES_H */
