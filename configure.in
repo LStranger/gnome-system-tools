@@ -40,7 +40,12 @@ AM_PATH_LIBGLADE(,,"gnome")
 AC_CHECK_LIB(crack, FascistCheck, ,[
   AC_MSG_WARN(),
   AC_MSG_WARN(---------- Building without cracklib is not recommended. ----------),
-	AC_MSG_WARN()])
+  AC_MSG_WARN(),
+  AC_MSG_WARN(-- If you are looking for cracklib you can try  :),
+  AC_MSG_WARN(--    http://www.users.dircon.co.uk/~crypto/),
+  AC_MSG_WARN(--    or :),
+  AC_MSG_WARN(--    http://www.rpmfind.net/linux/rpm2html/search.php?query=cracklib),
+  AC_MSG_WARN()])
 if test x"$HAVE_LIBCRACK" = xyes ; then
   AC_CHECK_HEADER(crack.h, ,[
   AC_MSG_ERROR(cracklib crack.h header file not found.)])
