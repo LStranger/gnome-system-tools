@@ -37,6 +37,8 @@ void             boot_settings_gui_error    (GtkWindow *parent, gchar *error);
 void             boot_settings_gui_destroy  (BootSettingsGui *gui);
 
 /* Callbacks */ 
+
+void             on_boot_add_clicked        (GtkButton *button, gpointer data);
 void             on_boot_settings_clicked   (GtkButton *button, gpointer data);
 
 #endif /* BOOT_SETTINGS_H */

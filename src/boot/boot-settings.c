@@ -61,7 +61,14 @@ on_boot_add_clicked (GtkButton *button, gpointer data)
 	if (xst_tool_get_access (tool)) {
 		druid = boot_druid_new ();
 
-		gtk_widget_show (GTK_WIDGET (druid));
+		if (druid)
+			gtk_widget_show (GTK_WIDGET (druid));
+		else {
+			gchar *error = g_strdup ("Can't add more images, maximum count reached.");
+			
+			boot_settings_gui_error (GTK_WINDOW (tool->main_dialog),
+						 error);
+		}		
 	}
 }
 

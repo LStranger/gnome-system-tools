@@ -29,7 +29,6 @@
 
 void      on_boot_delete_clicked    (GtkButton *button, gpointer data);
 void      on_boot_settings_clicked  (GtkButton *button, gpointer data);
-void      on_boot_add_clicked       (GtkButton *button, gpointer data);
 void      on_boot_default_clicked   (GtkButton *button, gpointer data);
 void      on_boot_prompt_toggled    (GtkToggleButton *toggle, gpointer data);
 

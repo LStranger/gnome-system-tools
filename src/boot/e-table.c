@@ -94,7 +94,7 @@ boot_value_at (ETableModel *etc, int col, int row, void *data)
 		return boot_value_image (node, FALSE);
 		break;
 	case COL_DEV:
-		return boot_value_image (node, FALSE);
+		return boot_value_device (node, FALSE);
 		break;
 	default:
 		return NULL;
@@ -290,6 +290,20 @@ init_array (void)
 
 }
 
+static gboolean
+boot_is_linux (xmlNodePtr node)
+{
+	xmlNodePtr n;
+	
+	g_return_val_if_fail (node != NULL, FALSE);
+
+	n = xst_xml_element_find_first (node, "image");
+	if (n)
+		return TRUE;
+	else
+		return FALSE;
+}
+
 void *
 boot_value_label (xmlNodePtr node)
 {
@@ -362,25 +376,50 @@ boot_value_type_char (xmlNodePtr node, gboolean bare)
 }
 
 void *
-boot_value_image (xmlNodePtr node, gboolean bare)
+boot_value_device (xmlNodePtr node, gboolean bare)
 {
-	gchar *buf;
-	
+	gchar *buf, *device;
+
 	g_return_val_if_fail (node != NULL, NULL);
 	
-	buf = xst_xml_get_child_content (node, "image");
-	if (!buf) {
+	if (boot_is_linux (node))
+		buf = xst_xml_get_child_content (node, "root");
+	else
 		buf = xst_xml_get_child_content (node, "other");
-		if (!buf)
-			return g_strdup ("");
+
+	if (buf == NULL)
+		buf = g_strdup ("");
+
+	if (bare)
+		device = buf;
+	else {
+		device = g_strdup_printf ("  %s", buf);
+		g_free (buf);
 	}
 
-	/* TODO: fix memory leak */
+	return device;
+}			
+
+void *
+boot_value_image (xmlNodePtr node, gboolean bare)
+{
+	gchar *buf, *image;
 	
+	g_return_val_if_fail (node != NULL, NULL);
+
+	if (boot_is_linux (node))
+		buf = xst_xml_get_child_content (node, "image");
+	else
+		buf = g_strdup ("");
+
 	if (bare)
-		return buf;
-	
-	return g_strdup_printf ("  %s", buf);
+		image = buf;
+	else {
+		image = g_strdup_printf ("  %s", buf);
+		g_free (buf);
+	}
+
+	return image;
 }
 
 void *

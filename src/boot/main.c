@@ -39,6 +39,7 @@
 #include "transfer.h"
 #include "e-table.h"
 #include "callbacks.h"
+#include "boot-settings.h"
 
 XstTool *tool;
 

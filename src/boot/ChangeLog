@@ -1,3 +1,18 @@
+2001-06-22  Tambet Ingo  <tambet@ximian.com>
+
+	* boot-settings.c (on_boot_add_clicked): Give error if MAX_COUNT is reached.
+
+	* boot-image.c (boot_image_new): Check if MAX_COUNT isn't reached, fixes bug #3449
+	(boot_image_count): Implement.
+
+	* e-table.c (boot_value_device): Implement, split from (boot_value_image).
+	Fixes bugs #3446 and #3447.
+	(boot_value_image): More robust.
+
+	* boot-image.c (boot_image_get_by_node): Get image right in case of non-linux.
+
+	* e-table.c (boot_is_linux): Implement to have on common check.
+
 2001-06-06  Tambet Ingo  <tambet@ximian.com>
 
 	* boot-druid.c: Finished. It's working, needs extra checkings though.

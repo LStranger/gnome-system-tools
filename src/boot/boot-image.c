@@ -36,11 +36,31 @@ static XstBootImageTypeTable boot_image_type_table[] = {
 	{ NULL, -1 }	
 };
 
+static guint
+boot_image_count (void)
+{
+	guint count;
+	xmlNodePtr n;
+	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
+	
+	for (count = 0, n = xst_xml_element_find_first (root, "entry");
+	     n != NULL;
+	     count++, n = xst_xml_element_find_next (n, "entry"))
+		;
+
+	return count;
+}
+
 BootImage *
 boot_image_new (void)
 {
 	BootImage *image;
+	guint count;
 
+	count = boot_image_count ();
+	if (count >= MAX_IMAGES)
+		return NULL;
+	
 	image = g_new0 (BootImage, 1);
 	image->new = TRUE;
 
@@ -60,14 +80,15 @@ boot_image_get_by_node (xmlNodePtr node)
 	image->new = FALSE;
 
 	image->type = boot_value_type (node);
-	image->label = boot_value_label (node);	
-	image->image = boot_value_image (node, TRUE);
+	image->label = boot_value_label (node);		
 	image->is_default = boot_value_default (image->label);
 	
 	if (image->type == TYPE_LINUX) {
+		image->image = boot_value_image (node, TRUE);
 		image->root = boot_value_root (node);
 		image->append = boot_value_append (node);
-	}
+	} else
+		image->image = boot_value_device (node, TRUE);
 	
 	return image;
 }

@@ -47,7 +47,7 @@ gboolean          boot_value_default     (const gchar *label);
 XstBootImageType  boot_value_type        (xmlNodePtr node);
 gchar            *boot_value_type_char   (xmlNodePtr node, gboolean bare);
 void             *boot_value_image       (xmlNodePtr node, gboolean bare);
-void             *boot_value_dev         (xmlNodePtr node, gboolean bare);
+void             *boot_value_device      (xmlNodePtr node, gboolean bare);
 void             *boot_value_root        (xmlNodePtr node);
 void             *boot_value_append      (xmlNodePtr node);
 

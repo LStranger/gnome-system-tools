@@ -29,6 +29,9 @@
 
 #include "xst.h"
 
+
+#define MAX_IMAGES 16
+
 typedef enum {
 	TYPE_UNKNOWN,
 	TYPE_WINNT,
