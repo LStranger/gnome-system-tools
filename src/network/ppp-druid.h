@@ -30,6 +30,7 @@ typedef struct {
 	GtkWidget *phone;
 	GtkWidget *login;
 	GtkWidget *passwd;
+	GtkWidget *passwd2;
 	GtkWidget *profile;
 
 	gboolean error_state;

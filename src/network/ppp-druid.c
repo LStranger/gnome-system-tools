@@ -60,10 +60,23 @@ static void ppp_druid_connect_signals (PppDruid *ppp, XstDialogSignal *signals)
 static void ppp_druid_exit (PppDruid *ppp)
 {
 	g_return_if_fail (ppp != NULL);
-
-	/* Release allocated memory */
 	
-	/* What to do here is not defined yet. Probably just exit gtk_main. */
+	gtk_widget_destroy (ppp->win);
+	gtk_main_quit ();
+}
+
+static void ppp_druid_save (PppDruid *ppp)
+{
+	gchar *phone, *login, *passwd, *profile;
+	
+	g_return_if_fail (ppp != NULL);
+
+	phone = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->phone)));
+	login = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->login)));
+	passwd = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->passwd)));
+	profile = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->profile)));
+
+	ppp_druid_exit (ppp);
 }
 
 static GtkWidget *ppp_druid_get_button_next (PppDruid *ppp)
@@ -96,15 +109,17 @@ static void ppp_druid_set_error (PppDruid *ppp, gchar *error)
 	w = my_get_widget (ppp->glade, widget_name);
 	g_free (widget_name);
 
-	if (error) {
-		gtk_widget_show (w);
-		
-		widget_name = g_strdup_printf ("page%dlabel", ppp->current_page);
-		w = my_get_widget (ppp->glade, widget_name);
-		g_free (widget_name);
-		gtk_label_set_text (GTK_LABEL (w), error);
-	} else
-		gtk_widget_hide (w);
+	if (w) {
+		if (error) {
+			gtk_widget_show (w);
+			
+			widget_name = g_strdup_printf ("page%dlabel", ppp->current_page);
+			w = my_get_widget (ppp->glade, widget_name);
+			g_free (widget_name);
+			gtk_label_set_text (GTK_LABEL (w), error);
+		} else
+			gtk_widget_hide (w);
+	}
 }
 
 static gchar *ppp_druid_check_phone (PppDruid *ppp)
@@ -130,12 +145,16 @@ static gchar *ppp_druid_check_phone (PppDruid *ppp)
 
 static gchar *ppp_druid_check_login_pass (PppDruid *ppp)
 {
-	gchar *login, *passwd;
+	gchar *login, *passwd, *passwd2;
 
 	g_return_val_if_fail (ppp != NULL, NULL);
 
 	login = gtk_entry_get_text (GTK_ENTRY (ppp->login));
 	passwd = gtk_entry_get_text (GTK_ENTRY (ppp->passwd));
+	passwd2 = gtk_entry_get_text (GTK_ENTRY (ppp->passwd2));
+
+	if (strcmp (passwd, passwd2))
+		return _("The password and its confirmation\nmust be the same.");
 
 	if (*passwd && !*login)
 		return _("If you are specifying a password,\nyou should specify a user name.");
@@ -165,6 +184,43 @@ static gchar *ppp_druid_check_profile (PppDruid *ppp)
 	return NULL;
 }
 
+static gchar *ppp_druid_check_last (PppDruid *ppp)
+{
+	GtkWidget *w;
+	gint i;
+	gchar *text;
+	gchar *phone, *login, *passwd, *profile;
+	gchar *format =
+_("You are about to create an account named with the following information:
+
+Account Name: %s
+
+Phone number: %s
+
+User name: %s
+
+Password: %s");
+
+	w = my_get_widget (ppp->glade, "page_last");
+	
+	phone = gtk_entry_get_text (GTK_ENTRY (ppp->phone));
+	login = gtk_entry_get_text (GTK_ENTRY (ppp->login));
+	passwd = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->passwd)));
+	profile = gtk_entry_get_text (GTK_ENTRY (ppp->profile));
+
+	for (i = 0; i < strlen (passwd); i++)
+		passwd[i] = '*';
+	
+	text = g_strdup_printf (format, profile, phone, login, passwd);
+
+	gnome_druid_page_finish_set_text (GNOME_DRUID_PAGE_FINISH (w), text);
+
+	g_free (text);
+	g_free (passwd);
+
+	return NULL;
+}
+
 static void ppp_druid_check_page (PppDruid *ppp)
 {
 	PppDruidCheckFunc func;
@@ -173,7 +229,7 @@ static void ppp_druid_check_page (PppDruid *ppp)
 		ppp_druid_check_phone,
 		ppp_druid_check_login_pass,
 		ppp_druid_check_profile,
-		NULL
+		ppp_druid_check_last
 	};
 	
 	g_return_if_fail (ppp != NULL);
@@ -219,9 +275,18 @@ static gboolean ppp_druid_on_page_back (GtkWidget *w, gpointer arg1, gpointer da
 
 static void ppp_druid_on_page_prepare (GtkWidget *w, gpointer arg1, gpointer data)
 {
+	gchar *next_focus[] = {
+		NULL, "phone", "login", "profile", NULL
+	};
+	
 	PppDruid *ppp = (PppDruid *) data;
 
 	ppp_druid_check_page (ppp);
+
+	if (next_focus[ppp->current_page])
+		gtk_widget_grab_focus (my_get_widget (ppp->glade, next_focus[ppp->current_page]));
+	else
+		gtk_widget_grab_focus (ppp_druid_get_button_next (ppp));
 }
 
 static void ppp_druid_on_page_last_finish (GtkWidget *w, gpointer arg1, gpointer data)
@@ -232,7 +297,7 @@ static void ppp_druid_on_page_last_finish (GtkWidget *w, gpointer arg1, gpointer
 
 
 	/* and quit */
-	ppp_druid_exit (ppp);
+	ppp_druid_save (ppp);
 }
 
 static void ppp_druid_on_entry_changed (GtkWidget *w, gpointer data)
@@ -250,6 +315,20 @@ static void ppp_druid_on_entry_activate (GtkWidget *w, gpointer data)
 		gtk_widget_grab_focus (ppp_druid_get_button_next (ppp));
 }
 
+static void ppp_druid_on_login_activate (GtkWidget *w, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	gtk_widget_grab_focus (ppp->passwd);
+}
+
+static void ppp_druid_on_passwd_activate (GtkWidget *w, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	gtk_widget_grab_focus (ppp->passwd2);
+}
+
 extern PppDruid *ppp_druid_new (void)
 {
 	PppDruid *ppp;
@@ -265,16 +344,20 @@ extern PppDruid *ppp_druid_new (void)
 		{ "page2",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
 		{ "page3",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
 		{ "page_last",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
+		{ "page0",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
 		{ "page1",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
 		{ "page2",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
 		{ "page3",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
+		{ "page_last",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
 		{ "page_last",	"finish",			ppp_druid_on_page_last_finish },
 		{ "phone",	"changed",		ppp_druid_on_entry_changed },
 		{ "phone",	"activate",		ppp_druid_on_entry_activate },
 		{ "login",	"changed",		ppp_druid_on_entry_changed },
-		{ "login",	"activate",		ppp_druid_on_entry_activate },
+		{ "login",	"activate",		ppp_druid_on_login_activate },
 		{ "passwd",	"changed",		ppp_druid_on_entry_changed },
-		{ "passwd",	"activate",		ppp_druid_on_entry_activate },
+		{ "passwd",	"activate",		ppp_druid_on_passwd_activate },
+		{ "passwd2",	"changed",		ppp_druid_on_entry_changed },
+		{ "passwd2",	"activate",		ppp_druid_on_entry_activate },
 		{ "profile",	"changed",		ppp_druid_on_entry_changed },
 		{ "profile",	"activate",		ppp_druid_on_entry_activate },
 		{ NULL }
@@ -302,6 +385,7 @@ extern PppDruid *ppp_druid_new (void)
 	ppp->phone = my_get_widget (ppp->glade, "phone");
 	ppp->login = my_get_widget (ppp->glade, "login");
 	ppp->passwd = my_get_widget (ppp->glade, "passwd");
+	ppp->passwd2 = my_get_widget (ppp->glade, "passwd2");
 	ppp->profile = my_get_widget (ppp->glade, "profile");
 	ppp_druid_connect_signals (ppp, signals);
 
