@@ -72,7 +72,7 @@ typedef struct _group group;
 
 struct _group
 {
-	guint key;
+	gchar *key;
 	gchar *name;
 	gchar *password;
 	guint gid;

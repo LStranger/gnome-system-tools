@@ -71,9 +71,13 @@ const static _logindefs default_logindefs = {
 
 
 gchar *user_tags[] = {
-		"key", "login", "password", "uid", "gid", "comment", "home", "shell", "last_mod",
-		"passwd_max_life", "passwd_exp_warn", "passwd_exp_disable", "passwd_disable",
-		"reserved", "is_shadow", NULL
+	"key", "login", "password", "uid", "gid", "comment", "home", "shell", "last_mod",
+	"passwd_max_life", "passwd_exp_warn", "passwd_exp_disable", "passwd_disable",
+	"reserved", "is_shadow", NULL
+};
+
+gchar *group_tags[] = {
+	"key", "name", "password", "gid", NULL
 };
 
 
@@ -207,9 +211,11 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 static void
 transfer_group_list_xml_to_glist (xmlNodePtr root)
 {
-	xmlNodePtr group_node, node, n0, n1, n2, n3;
+	xmlNodePtr group_node, node, n0;
 	xmlNodePtr sub_node, user_node;
 	group *g;
+	gint i;
+	gchar *tag;
 
 	/* Find groupdb */
 	
@@ -221,29 +227,28 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 	}
 
 	for (node = xml_element_find_first (group_node, "group");
-			node;
-		       	node = xml_element_find_next (node, "group"))
+			 node;
+			 node = xml_element_find_next (node, "group"))
 	{
 
-		n0 = xml_element_find_first (node, "key");
-		n1 = xml_element_find_first (node, "name");
-		n2 = xml_element_find_first (node, "password");
-		n3 = xml_element_find_first (node, "gid");
-		
 		g = g_new0 (group, 1);
-
-		if (n0)
-			g->key = my_atoi (xml_element_get_content (n0));
 		
-		if (n1)
-			g->name = g_strdup (xml_element_get_content (n1));
-		
-		if (n2)
-			g->password = g_strdup (xml_element_get_content (n2));
+		for (i = 0, tag = group_tags[0]; tag; i++, tag = group_tags[i])
+		{
+			n0 = xml_element_find_first (node, tag);
 
-		if (n3)
-			g->gid = my_atoi (xml_element_get_content (n3));
-
+			if (n0)
+			{
+				switch (i)
+				{
+				 case 0: g->key = xml_element_get_content (n0); break;
+				 case 1: g->name = g_strdup (xml_element_get_content (n0)); break;
+				 case 2: g->password = g_strdup (xml_element_get_content (n0)); break;
+				 case 3: g->gid = my_atoi (xml_element_get_content (n0)); break;
+				}
+			}
+		}
+			
 		/* Get all users in group */
 
 		g->users = NULL;
@@ -255,10 +260,7 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 
 		for (user_node = xml_element_find_first (sub_node, "user"); user_node;
 				user_node = xml_element_find_next (user_node, "user"))
-
-			
-			g->users = g_list_append (g->users, xml_element_get_content (user_node));
-		
+				g->users = g_list_append (g->users, xml_element_get_content (user_node));
 
 		group_list = g_list_append (group_list, g);
 	}
@@ -346,7 +348,8 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 	user *u;
 	gint i;
 	gchar *tag;
-	gchar *buf = (gchar *)g_malloc (15);	/*Max buf size for non-char tags */
+	gchar buf[15];	/*Max buf size for non-char tags */
+	gchar *str;
 
 	/* Delete old users and make a new ones */
 	/* Should we sort it first by key? */
@@ -364,64 +367,26 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 		{
 			switch (i)
 			{
-				case  0:
-				       xml_element_add_with_content (node, "key", u->key);
-				       break;
-				case  1:
-				       xml_element_add_with_content (node, "login", u->login);
-				       break;
-				case 2:
-				       xml_element_add_with_content (node, "password", u->password);
-				       break;
-				case 3:
-				       snprintf (buf, 15, "%d", u->uid);
-				       xml_element_add_with_content (node, "uid", buf);
-				       break;
-				case 4:
-				       snprintf (buf, 15, "%d", u->gid);
-				       xml_element_add_with_content (node, "gid", buf);
-				       break;
-				case 5:
-				       xml_element_add_with_content (node, "comment", u->comment);
-				       break;
-				case 6:
-				       xml_element_add_with_content (node, "home", u->home);
-				       break;
-				case 7:
-				       xml_element_add_with_content (node, "shell", u->shell);
-				       break;
-				case 8:
-				       snprintf (buf, 15, "%d", u->last_mod);
-				       xml_element_add_with_content (node, "last_mod", buf);
-				       break;
-				case 9:
-				       snprintf (buf, 15, "%d", u->passwd_max_life);
-				       xml_element_add_with_content (node, "passwd_max_life", buf);
-				       break;
-				case 10:
-				       snprintf (buf, 15, "%d", u->passwd_exp_warn);
-				       xml_element_add_with_content (node, "passwd_exp_warn", buf);
-				       break;
-				case 11:
-				       snprintf (buf, 15, "%d", u->passwd_exp_disable);
-				       xml_element_add_with_content (node, "passwd_exp_disable",
-						       buf);
-				       break;
-				case 12:
-				       snprintf (buf, 15, "%d", u->passwd_disable);
-				       xml_element_add_with_content (node, "passwd_disable", buf);
-				       break;
-				case 13:
-				       xml_element_add_with_content (node, "reserved", u->reserved);
-				       break;
-				case 14:
-				       snprintf (buf, 15, "%d", u->is_shadow);
-				       xml_element_add_with_content (node, "is_shadow", buf);
-				       break;
+				case  0: str = u->key; break;
+				case  1: str = u->login; break;
+				case  2: str = u->password; break;
+				case  3: snprintf (buf, 15, "%d", u->uid); str = buf; break;
+				case  4: snprintf (buf, 15, "%d", u->gid); str = buf; break;
+				case  5: str = u->comment; break;
+				case  6: str = u->home; break;
+				case  7: str = u->shell; break;
+				case  8: snprintf (buf, 15, "%d", u->last_mod); str = buf; break;
+				case  9: snprintf (buf, 15, "%d", u->passwd_max_life); str = buf; break;
+				case 10: snprintf (buf, 15, "%d", u->passwd_exp_warn); str = buf; break;
+				case 11: snprintf (buf, 15, "%d", u->passwd_exp_disable); str = buf; break;
+				case 12: snprintf (buf, 15, "%d", u->passwd_disable); str = buf; break;
+				case 13: str = u->reserved; break;
+				case 14: snprintf (buf, 15, "%d", u->is_shadow); str = buf; break;
 			}
+			
+			xml_element_add_with_content (node, tag, str);
 		}
 	}
-	g_free (buf);
 }
 
 
@@ -431,7 +396,7 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 	xmlNodePtr groupdb_node, users_node, node, u_node;
 	group *g;
 	GList *tmplist, *list;
-	gchar *buf = (gchar *)g_malloc (15);	/*Max buf size for non-char tags */
+	gchar buf[15]; /*Max buf size for non-char tags */
 
 	
 	/* Delete old users and make a new ones */
@@ -445,8 +410,7 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 		g = (group *)tmplist->data;
 		node = xml_element_add (groupdb_node, "group");
 
-		snprintf (buf, 15, "%d", g->key);
-		xml_element_add_with_content (node, "key", buf);
+		xml_element_add_with_content (node, "key", g->key);
 		xml_element_add_with_content (node, "name", g->name);
 		xml_element_add_with_content (node, "password", g->password);
 
@@ -463,7 +427,6 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 			xml_element_set_content (u_node, buf);
 		}
 	}
-	g_free (buf);
 }
 
 gint
