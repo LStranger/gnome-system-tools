@@ -157,9 +157,11 @@ gst_dialog_freeze_visible (GstDialog *xd)
 	g_return_if_fail (GST_IS_DIALOG (xd));
 	g_return_if_fail (xd->frozen >= 0);
 
-	cursor = gdk_cursor_new (GDK_WATCH);
-	gdk_window_set_cursor (GTK_WIDGET (xd)->window, cursor);
-	gdk_cursor_unref (cursor);
+	if (GTK_WIDGET (xd)->window) {
+		cursor = gdk_cursor_new (GDK_WATCH);
+		gdk_window_set_cursor (GTK_WIDGET (xd)->window, cursor);
+		gdk_cursor_unref (cursor);
+	}
 
 	if (!xd->frozen)
 		gtk_widget_set_sensitive (GTK_WIDGET (xd), FALSE);
@@ -174,7 +176,8 @@ gst_dialog_thaw_visible (GstDialog *xd)
 	g_return_if_fail (GST_IS_DIALOG (xd));
 	g_return_if_fail (xd->frozen >= 0);
 
-	gdk_window_set_cursor (GTK_WIDGET (xd)->window, NULL);
+	if (GTK_WIDGET (xd)->window)
+		gdk_window_set_cursor (GTK_WIDGET (xd)->window, NULL);
 
 	gst_dialog_thaw (xd);
 
