@@ -29,6 +29,7 @@
 #include "transfer.h"
 #include "callbacks.h"
 #include "connection.h"
+#include "profile.h"
 
 TransStringEntry transfer_string_entry_table[] =
 {
@@ -36,9 +37,9 @@ TransStringEntry transfer_string_entry_table[] =
 	{ "domain", "domain", 0, 0 },
 	{ "smbuse", NULL, "samba_use", 0 },
 	{ "workgroup", "workgroup", 0, 0 },
-	{ "description", "description", 0, 0 },
-	{ "winsuse", NULL, "wins_use", 0 },	
-	{ "winsserver", "wins_ip", 0, 0 },	
+	{ "smbdesc", "smbdesc", 0, 0 },
+	{ "winsuse", NULL, "wins_use", 0 },
+	{ "winsserver", "winsserver", 0, 0 },	
 	{ 0, 0, 0, 0 }
 };
 
@@ -287,8 +288,9 @@ transfer_interfaces_to_gui (GstTool *tool, xmlNodePtr root)
 
 	for (node = gst_xml_element_find_first (root, "interface"); 
 	     node; 
-	     node = gst_xml_element_find_next (node, "interface"))
+	     node = gst_xml_element_find_next (node, "interface")) {
 		connection_new_from_node (node);
+	}
 
 	callbacks_update_connections_hook (tool->main_dialog, NULL);
 	connection_update_complexity (tool, tool->main_dialog->complexity);
@@ -366,16 +368,34 @@ transfer_misc_xml_to_tool (GstTool *tool, xmlNodePtr root)
 
 	transfer_xml_to_gatewaydev (tool, root);
 }
-	
+
 void
-transfer_xml_to_gui (GstTool *tool, gpointer data)
+transfer_profile_to_gui (GstTool *tool, gpointer data)
 {
 	xmlNode *root = gst_xml_doc_get_root (tool->config);
-	
+
 	transfer_string_entry_xml_to_gui (tool, root);
 	transfer_string_list_xml_to_gui (tool, root);
 	transfer_string_clist2_xml_to_gui (tool, root);
 	transfer_interfaces_to_gui (tool, root);
+
+	/* misc has to go last */
+	transfer_misc_xml_to_tool (tool, root);
+}
+
+void
+transfer_xml_to_gui (GstTool *tool, gpointer data)
+{
+	xmlNode *root = gst_xml_doc_get_root (tool->config);
+
+	transfer_string_entry_xml_to_gui (tool, root);
+	transfer_string_list_xml_to_gui (tool, root);
+	transfer_string_clist2_xml_to_gui (tool, root);
+	transfer_interfaces_to_gui (tool, root);
+
+	profile_populate_option_menu (tool, root);
+	profiles_table_populate (tool, root);
+	
 	/* misc has to go last */
 	transfer_misc_xml_to_tool (tool, root);
 }

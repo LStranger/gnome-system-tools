@@ -38,36 +38,29 @@
 GstTool *tool;
 
 GstDialogSignal signals[] = {
-	{ "network_admin",           "switch_page",     G_CALLBACK (on_network_notebook_switch_page) },
-	{ "hostname",                "focus_in_event",  G_CALLBACK (update_hint) },
+	{ "network_admin_notebook",  "switch_page",     G_CALLBACK (on_network_notebook_switch_page) },
 	{ "hostname",                "changed",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "samba_use",               "toggled",         G_CALLBACK (on_samba_use_toggled) },
-	{ "description",             "focus_in_event",  G_CALLBACK (update_hint) },
-	{ "description",             "changed",         G_CALLBACK (gst_dialog_modify_cb) },
-	{ "workgroup",               "focus_in_event",  G_CALLBACK (update_hint) },
+	{ "smbdesc",                 "changed",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "workgroup",               "changed",         G_CALLBACK (gst_dialog_modify_cb) },
-	{ "wins_ip",                 "focus_in_event",  G_CALLBACK (update_hint) },
-	{ "wins_ip",                 "changed",         G_CALLBACK (gst_dialog_modify_cb) },
+	{ "winsserver",              "changed",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "wins_use",                "toggled",         G_CALLBACK (on_wins_use_toggled) },
-	{ "wins_use",                "toggled",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "connection_add",          "clicked",         G_CALLBACK (on_connection_add_clicked) },
 	{ "connection_delete",       "clicked",         G_CALLBACK (on_connection_delete_clicked) },
 	{ "connection_configure",    "clicked",         G_CALLBACK (on_connection_configure_clicked) },
-/*	{ "connection_activate",     "clicked",         G_CALLBACK (on_connection_activate_clicked) },
-	{ "connection_deactivate",   "clicked",         G_CALLBACK (on_connection_deactivate_clicked) },*/
 	{ "connection_def_gw_omenu", "changed",         G_CALLBACK (gst_dialog_modify_cb) },
-	{ "dns_list",                "focus_in_event",  G_CALLBACK (update_hint) },
-	{ "domain",                  "focus_in_event",  G_CALLBACK (update_hint) },
 	{ "domain",                  "changed",         G_CALLBACK (gst_dialog_modify_cb) },
-	{ "search_list",             "focus_in_event",  G_CALLBACK (update_hint) },
-	{ "ip",                      "focus_in_event",  G_CALLBACK (update_hint) },
 	{ "ip",                      "changed",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "ip",                      "changed",         G_CALLBACK (on_hosts_ip_changed) },
-	{ "alias",                   "focus_in_event",  G_CALLBACK (update_hint) },
 	{ "statichost_add",          "clicked",         G_CALLBACK (on_hosts_add_clicked) },
 	{ "statichost_add",          "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "statichost_delete",       "clicked",         G_CALLBACK (on_hosts_delete_clicked) },
 	{ "statichost_delete",       "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
+
+/*	{ "dns_list",                "focus_in_event",  G_CALLBACK (update_hint) },*/
+/*	{ "search_list",             "focus_in_event",  G_CALLBACK (update_hint) },*/
+/*      { "ip",                      "focus_in_event",  G_CALLBACK (update_hint) },*/
+/*	{ "alias",                   "focus_in_event",  G_CALLBACK (update_hint) },*/
 
 	/* Network druid callbacks */
 	{ "network_connection_window",       "delete_event",  G_CALLBACK (on_network_druid_hide) },
@@ -86,11 +79,6 @@ GstDialogSignal signals[] = {
 	{ "network_connection_ppp_page2",    "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_page_name",    "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_page_finish",  "back",   G_CALLBACK (on_network_druid_page_back) },
-/*	{ "network_connection_other_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_plip_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_ppp_page1",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_ppp_page2",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_page_name",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },*/
 	{ "network_connection_other_config_type", "changed", G_CALLBACK (on_network_druid_config_type_changed) },
 	{ "network_connection_other_ip_address", "changed", G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_other_ip_mask", "changed", G_CALLBACK (on_network_druid_entry_changed) },
@@ -104,6 +92,11 @@ GstDialogSignal signals[] = {
 	{ "network_connection_name",         "changed",   G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_page_finish",  "finish",    G_CALLBACK (on_network_druid_finish) },
 	{ "network_connection_other_ip_address", "focus_out_event", G_CALLBACK (on_network_druid_ip_address_focus_out) },
+
+	/* Network profiles callbacks */
+	{ "network_profiles_button", "clicked", G_CALLBACK (on_network_profiles_button_clicked) },
+	{ "network_profile_new", "clicked", G_CALLBACK (on_network_profile_new_clicked) },
+	{ "network_profile_delete", "clicked", G_CALLBACK (on_network_profile_delete_clicked) },
 	{ NULL }
 };
 
@@ -129,12 +122,12 @@ static const GstWidgetPolicy policies[] = {
 	{ "statichost_delete",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "samba_use",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "description_label",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
-	{ "description",             GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
+	{ "smbdesc",                 GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
 	{ "workgroup_label",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
 	{ "workgroup",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
 	{ "wins_use",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
 /*	{ "samba_frame",             GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },*/
-	{ "wins_ip",                 GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "winsserver",              GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "dns_table",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "domain",                  GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "domain_label",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
@@ -157,7 +150,7 @@ update_notebook_complexity (GstTool *tool, GstDialogComplexity complexity)
 	GtkNotebook *notebook;
 	gint pageno;
 
-	notebook = GTK_NOTEBOOK (gst_dialog_get_widget (tool->main_dialog, "network_admin"));
+	notebook = GTK_NOTEBOOK (gst_dialog_get_widget (tool->main_dialog, "network_admin_notebook"));
 	hosts    = gst_dialog_get_widget (tool->main_dialog, "hosts_container");
 	pageno   = gtk_notebook_page_num (notebook, hosts);
 
@@ -268,6 +261,7 @@ main (int argc, char *argv[])
 		gtk_main ();
 	} else {
 		connect_signals (tool->main_dialog, signals, signals_after);
+		
 		gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook,     NULL);
 		/*gst_dialog_add_apply_hook (tool->main_dialog, callbacks_update_connections_hook, NULL);*/
 		gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_dialer_hook,       tool);
@@ -276,7 +270,7 @@ main (int argc, char *argv[])
 		gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 		gst_dialog_enable_complexity (tool->main_dialog);
 		gst_dialog_set_widget_policies (tool->main_dialog, policies);
-		
+
 		init_hint_entries ();
 		init_editable_filters (tool->main_dialog);
 

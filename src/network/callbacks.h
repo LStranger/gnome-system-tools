@@ -114,4 +114,12 @@ void on_network_druid_entry_changed (GtkWidget*, gpointer);
 void on_network_druid_config_type_changed (GtkWidget*, gpointer);
 gboolean on_network_druid_ip_address_focus_out (GtkWidget*, GdkEventFocus*, gpointer);
 
+
+/* network profiles callbacks */
+void on_network_profiles_button_clicked (GtkWidget*, gpointer);
+void on_network_profile_new_clicked (GtkWidget*, gpointer);
+void on_network_profile_delete_clicked (GtkWidget*, gpointer);
+void on_network_profile_table_selection_changed (GtkWidget*, gpointer);
+void on_network_profile_option_selected (GtkWidget*, gpointer);
+
 #endif /*  __CALLBACKS_H__  */

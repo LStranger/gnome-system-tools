@@ -20,11 +20,13 @@ network_admin_LDADD = $(GST_TOOL_LIBS)
 network_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES)
 network_admin_SOURCES = \
 	main.c \
-	callbacks.c	callbacks.h	\
-	transfer.c	transfer.h	\
-	connection.c	connection.h	\
-	hosts.c		hosts.h		\
-	network-druid.c network-druid.h
+	callbacks.c		callbacks.h	\
+	transfer.c		transfer.h	\
+	connection.c		connection.h	\
+	hosts.c			hosts.h		\
+	profile.c		profile.h	\
+	profiles-table.c	profiles-table.h \
+	network-druid.c		network-druid.h
 
 toolpixmaps =
 etspecs = 

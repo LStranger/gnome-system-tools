@@ -35,7 +35,10 @@
 #include "transfer.h"
 #include "connection.h"
 #include "hosts.h"
+#include "profile.h"
+#include "profiles-table.h"
 #include "network-druid.h"
+
 
 #define d(x) x
 
@@ -66,6 +69,7 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	tool = user_data;
 	connection_init_gui (tool);
 	hosts_init_gui (tool);
+	profiles_table_create (tool);
 }
 
 #ifdef POLL_HACK
@@ -359,13 +363,13 @@ static const char *hint_entry[][3] = { {
 	"hostname", "general_help", 		
 	N_("The name of this computer")
 },{
-	"description", "general_help", 
+	"smbdesc", "general_help", 
 	N_("A short description of your computer")
 },{
 	"workgroup", "general_help",
 	N_("The Windows Networking workgroup for your network")
 },{
-	"wins_ip", "general_help", 
+	"winsserver", "general_help", 
 	N_("The IP address of your WINS server")
 },{
 	"domain", "dns_help",     
@@ -394,7 +398,7 @@ init_editable_filters (GstDialog *dialog)
 	gint i;
 	struct tmp { char *name; EditableFilterRules rule; };
 	struct tmp s[] = {
-		{ "wins_ip",     EF_ALLOW_NONE },
+		{ "winsserver",     EF_ALLOW_NONE },
 		{ "ip",          EF_ALLOW_IP }, 
 		{ "domain",      EF_ALLOW_TEXT },
 		{ "network_connection_other_ip_address", EF_ALLOW_IP },
@@ -494,13 +498,13 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 	g_free (txt);
 	res = gtk_dialog_run (GTK_DIALOG (d));
 	gtk_widget_destroy (d);
-	if (res != GTK_RESPONSE_YES)
-		return;
-
-	connection_default_gw_remove (cxn->dev);
-	connection_list_remove (cxn);
-	connection_free (cxn);	
-	gst_dialog_modify (tool->main_dialog);
+	
+	if (res == GTK_RESPONSE_YES) {
+		connection_default_gw_remove (cxn->dev);
+		connection_list_remove (cxn);
+		connection_free (cxn);	
+		gst_dialog_modify (tool->main_dialog);
+	}
 }
 
 void
@@ -591,11 +595,14 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 void
 on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
-	gboolean active, configured, smb_installed;
+	gboolean active, wins_active, configured, smb_installed;
 
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
+	wins_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "wins_use")));
 	configured = (gboolean) g_object_get_data (G_OBJECT (tool), "tool_configured");
 	smb_installed = (gboolean) g_object_get_data (G_OBJECT (tool), "smbinstalled");
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+
 	
 	if (configured && !smb_installed && active) {
 		GtkWidget *dialog;
@@ -615,20 +622,29 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 	}
 
 	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "description_label", active);
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "description", active);
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "smbdesc", active);
 	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup_label", active);
 	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup", active);
 	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_use", active);
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_ip", active);
-	if (smb_installed)
-		gst_dialog_modify_cb (w, null);
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "winsserver", active & wins_active);
+	if (smb_installed) {
+		gst_xml_element_set_boolean (root, "smbuse", active);
+		gst_dialog_modify (tool->main_dialog);
+	}
 }
 
 void
 on_wins_use_toggled (GtkWidget *w, gpointer null)
 {
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_ip",
-					      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
+	GtkWidget *smb = gst_dialog_get_widget (tool->main_dialog, "samba_use");
+	gboolean wins_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
+	gboolean smb_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (smb));
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "winsserver", wins_active & smb_active);
+
+	gst_xml_element_set_boolean (root, "winsuse", wins_active & smb_active);
+	gst_dialog_modify (tool->main_dialog);
 }
 
 gboolean
@@ -1357,4 +1373,107 @@ on_network_druid_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, 
 	connection_check_netmask_gui (druid_data->cxn, widget, mask_widget);
 
         return FALSE;
+}
+
+
+/* Network profiles callbacks */
+void
+on_network_profiles_button_clicked (GtkWidget *widget, gpointer data)
+{
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	GtkWidget *profiles_dialog = gst_dialog_get_widget (tool->main_dialog,
+							    "network_profiles_dialog");
+	
+	gtk_dialog_run (GTK_DIALOG (profiles_dialog));
+	gtk_widget_hide (profiles_dialog);
+
+	profile_populate_option_menu (tool, root);
+}
+
+void
+on_network_profile_new_clicked (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *profile_new = gst_dialog_get_widget (tool->main_dialog,
+							"network_profile_new_dialog");
+	GtkWidget *profile_name = gst_dialog_get_widget (tool->main_dialog,
+							 "profile_name");
+	GtkWidget *profile_description = gst_dialog_get_widget (tool->main_dialog,
+								"profile_description");
+	const gchar *name, *description;
+	gint response;
+	
+	response = gtk_dialog_run (GTK_DIALOG (profile_new));
+	gtk_widget_hide (profile_new);
+
+	if (response == GTK_RESPONSE_OK) {
+		name = gtk_entry_get_text (GTK_ENTRY (profile_name));
+		description = gtk_entry_get_text (GTK_ENTRY (profile_description));
+
+		if (strcmp (name, "") != 0) {
+			profile_save_current (name, description, tool);
+			profiles_table_update_content (tool);
+
+			gst_dialog_modify (tool->main_dialog);
+		}
+	}
+
+	gtk_entry_set_text (GTK_ENTRY (profile_name), "");
+	gtk_entry_set_text (GTK_ENTRY (profile_description), "");
+}
+
+void
+on_network_profile_table_selection_changed (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *delete_button = gst_dialog_get_widget (tool->main_dialog,
+							  "network_profile_delete");
+
+	gtk_widget_set_sensitive (delete_button, TRUE);
+}
+
+static void
+on_network_profile_delete_clicked_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+	xmlNodePtr node;
+	
+	gtk_tree_model_get (model, iter, PROFILES_TABLE_COL_POINTER, &node, -1);
+
+	if (profile_delete (node) == TRUE)
+		* (gboolean *) data = TRUE;
+}
+
+void
+on_network_profile_delete_clicked (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *profile_table = gst_dialog_get_widget (tool->main_dialog,
+							  "network_profiles_table");
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (profile_table));
+	gboolean deleted;
+
+	gtk_tree_selection_selected_foreach (selection,
+					     on_network_profile_delete_clicked_foreach,
+					     &deleted);
+
+	if (deleted) {
+		gst_dialog_modify (tool->main_dialog);
+		profiles_table_update_content (tool);
+	}
+
+	gtk_tree_selection_unselect_all (selection);
+}
+
+void
+on_network_profile_option_selected (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *connection_table = gst_dialog_get_widget (tool->main_dialog, "connection_list");
+	GtkTreeModel *connection_model = gtk_tree_view_get_model (GTK_TREE_VIEW (connection_table));
+	GtkWidget *statichost_table = gst_dialog_get_widget (tool->main_dialog, "statichost_list");
+	GtkTreeModel *statichost_model = gtk_tree_view_get_model (GTK_TREE_VIEW (statichost_table));
+	xmlNodePtr profile = (xmlNodePtr) data;
+	
+	profile_set_active (profile, tool);
+
+	gtk_list_store_clear (GTK_LIST_STORE (connection_model));	
+	gtk_list_store_clear (GTK_LIST_STORE (statichost_model));	
+	
+	transfer_profile_to_gui (tool, NULL);
 }

@@ -38,6 +38,7 @@ gchar *s = N_("A_liases:");
 gchar *s = N_("_Delete");
 gchar *s = N_("_IP address:");
 gchar *s = N_("Hosts");
+gchar *s = N_("_Network profiles");
 gchar *s = N_("New Connection Type");
 gchar *s = N_("_Modem (PPP)");
 gchar *s = N_("_Ethernet");
@@ -234,3 +235,14 @@ gchar *s = N_("Finished");
 gchar *s = N_("You are about to create a new network connection.\n"
               "\n"
               "Please click \"Apply\" to save your changes.");
+gchar *s = N_("Network profiles - GNOME System Tools");
+gchar *s = N_("Network profiles can be used to store different\n"
+              " network configurations");
+gchar *s = N_("_Save current");
+gchar *s = N_("New network profile - GNOME System Tools");
+gchar *s = N_("Please, give this network profile a name and a description");
+gchar *s = N_("*");
+gchar *s = N_("*");
+gchar *s = N_("Description:");
+gchar *s = N_("Profile name:");
+gchar *s = N_("<b>Profile Settings</b>");
