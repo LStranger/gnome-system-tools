@@ -19,13 +19,14 @@ pixmaps_DATA = \
 	init-anim-1.png          \
 	init-anim-2.png          \
 	init-anim-3.png          \
-	internetsharing.png	 \
+	internetsharing.png      \
 	memory.png               \
 	nameresolution.png       \
 	nameresolution_alias.png \
 	nameresolution_id.png    \
 	network.png              \
 	passwd.png               \
+	ppp.png                  \
 	print.png                \
 	reading.png              \
 	server.png               \
@@ -33,7 +34,7 @@ pixmaps_DATA = \
 	shares.png               \
 	time.png                 \
 	timezone.png             \
-	unsupported-distro.png	 \
+	unsupported-distro.png   \
 	users-groups.png         \
 	users.png                \
 	warning.png              \
