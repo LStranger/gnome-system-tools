@@ -1,6 +1,7 @@
 INCLUDES = \
 	$(GNOME_INCLUDEDIR)	\
-	$(GNOME_XML_CFLAGS)
+	$(GNOME_XML_CFLAGS)	\
+	$(GAL_CFLAGS)
 
 noinst_LIBRARIES =		\
 	libesearchbar.a
