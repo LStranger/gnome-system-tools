@@ -62,7 +62,7 @@ install-data-local: $(desktop).menu $(desktop).cc
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	rm -f $(DESTDIR)$(bindir)/users-admin
 	ln -s consolehelper $(DESTDIR)$(bindir)/users-admin
-	$(mkinstalldirs) $(sysconfdir)/pam.d
-	$(INSTALL_DATA) $(srcdir)/users.pam $(sysconfdir)/pam.d/users-admin
-	$(mkinstalldirs) $(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(srcdir)/$(security) $(sysconfdir)/security/console.apps/users-admin
+	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
+	$(INSTALL_DATA) $(srcdir)/users.pam $(DESTDIR)$(sysconfdir)/pam.d/users-admin
+	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
+	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/users-admin

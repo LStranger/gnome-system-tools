@@ -1,0 +1,56 @@
+# Note that this is NOT a relocatable package
+%define ver      	@VERSION@
+%define RELEASE		1
+%define rel      	%{?CUSTOM_RELEASE} %{!?CUSTOM_RELEASE:%RELEASE}
+%define sysconfdir	/etc
+
+Summary: 	Helix Setup Tools
+Name: 		helix-setup-tools
+Version: 	%ver
+Release: 	%rel
+Copyright: 	LGPL
+Group: 		Applications/System
+Source:		%{name}-%{version}.tar.gz
+BuildRoot: 	/var/tmp/%{name}-%{version}-root
+URL: 		http://www.helixcode.com/
+#Prereq: 	/sbin/install-info
+Docdir: 	%{_prefix}/doc
+
+Requires: 	gnome-libs >= 1.0.50
+Requires: 	ORBit >= 0.5.0
+Requires:	gdk-pixbuf >= 0.7.0
+
+%description
+Day-to-day system management on Unix systems is a chore. Even when you're using a friendly graphical desktop, seemingly basic tasks like setting the system time, changing the network setup, importing and exporting network shared filesystems and configuring swap partitions requires editing configuration files by hand, and the exact procedure varies between different operating systems and distributions.
+
+The Helix Setup Tools solve all these problems, giving you a simple graphical interface for each task, which uses an advanced backend to edit all the relevant files and apply your changes. The interface looks and acts in exactly the same way regardless of what platform you're using.
+
+%changelog
+* Wed Nov 29 2000 Ross Golder <rossigee@bigfoot.com>
+- Knocked up preliminary RPM spec file, based on gnome-core spec.
+
+%prep
+%setup -q
+
+%build
+%configure --prefix=%{_prefix} --sysconfdir=%{sysconfdir}
+CFLAGS="$RPM_OPT_FLAGS" make
+
+%install
+make DESTDIR=$RPM_BUILD_ROOT install
+
+%clean
+
+%files
+%doc README AUTHORS COPYING HACKING NEWS ChangeLog doc
+%config %{sysconfdir}/pam.d/*-admin
+%config %{sysconfdir}/security/console.apps/*-admin
+%{_prefix}/bin/*
+%{_prefix}/sbin/*
+%{_prefix}/share/%{name}/interfaces/*.glade
+%{_prefix}/share/%{name}/scripts/*-conf
+%{_prefix}/share/%{name}/pixmaps/*.png
+#%{_prefix}/share/control-center/System/.directory
+%{_prefix}/share/control-center/System/*.desktop
+#%{_prefix}/share/gnome/apps/Settings/System/.directory
+%{_prefix}/share/gnome/apps/Settings/System/*.desktop

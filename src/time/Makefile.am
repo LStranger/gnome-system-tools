@@ -56,7 +56,7 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	rm -f $(DESTDIR)$(bindir)/time-admin
 	ln -s consolehelper $(DESTDIR)$(bindir)/time-admin
-	$(mkinstalldirs) $(sysconfdir)/pam.d
-	$(INSTALL_DATA) $(srcdir)/time.pam $(sysconfdir)/pam.d/time-admin
-	$(mkinstalldirs) $(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(srcdir)/$(security) $(sysconfdir)/security/console.apps/time-admin
+	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
+	$(INSTALL_DATA) $(srcdir)/time.pam $(DESTDIR)$(sysconfdir)/pam.d/time-admin
+	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
+	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/time-admin
