@@ -205,7 +205,7 @@ exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 #endif
 
 		sleep (1);
-		execlp ("su", "su", "-m", user_p, "-c", exec_p, NULL);
+		execlp ("su", "su", user_p, "-c", exec_p, NULL);
 
 		_exit (0);
 	}
@@ -232,33 +232,6 @@ load_glade_common (const gchar *widget)
 	return xml;
 }
 
-static GtkWidget *
-xst_su_construct_dialog (GladeXML *xml)
-{
-	GtkWidget *dialog;
-	GtkWidget *content;
-
-	dialog = gtk_dialog_new_with_buttons (_("GNOME System Tools - Password"),
-					      NULL,
-					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					      _("Run without password"), XST_SU_RESPONSE_NP,
-					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					      GTK_STOCK_OK, GTK_RESPONSE_OK,
-					      NULL);
-
-	content = glade_xml_get_widget (xml, "password_dialog_content");
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
-			    content, FALSE, FALSE, 8);
-
-	return dialog;
-}
-
-static void
-xst_su_enter_cb (GtkWidget *widget, gpointer data)
-{
-	gtk_dialog_response (GTK_DIALOG (data), GTK_RESPONSE_OK);
-}
-
 gint
 xst_su_get_password (gchar **password)
 {
@@ -267,14 +240,11 @@ xst_su_get_password (gchar **password)
 	gchar *blank;
 	GtkWidget *password_dialog, *password_entry;
 
-	xml = load_glade_common ("password_dialog_content");
-	password_dialog = xst_su_construct_dialog (xml);
+	xml = load_glade_common ("password_dialog");
+	password_dialog = glade_xml_get_widget (xml, "password_dialog");
 	password_entry  = glade_xml_get_widget (xml, "password_entry");
-	g_assert (password_dialog);
 	g_assert (password_entry);
-
-	g_signal_connect (G_OBJECT (password_entry), "activate",
-			  G_CALLBACK (xst_su_enter_cb), (gpointer) password_dialog);
+	g_assert (password_dialog);
 
 	result = gtk_dialog_run (GTK_DIALOG (password_dialog));
 
