@@ -54,6 +54,8 @@ static void
 emit_query_changed (SearchBar *sb)
 {
 	gtk_signal_emit(GTK_OBJECT (sb), sb_signals [QUERY_CHANGED]);
+
+	gtk_widget_set_sensitive (sb->search_button, FALSE);
 }
 
 
@@ -68,7 +70,8 @@ option_activated_cb (GtkWidget *widget,
 	id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "SbChoiceId"));
 
 	sb->option_choice = id;
-	emit_query_changed (sb);
+	
+	gtk_widget_set_sensitive (sb->search_button, TRUE);
 }
 
 static void
@@ -76,6 +79,13 @@ entry_activated_cb (GtkWidget *widget,
 		     SearchBar *sb)
 {
 	emit_query_changed (sb);
+}
+
+static void
+entry_changed_cb (GtkWidget *widget,
+		  SearchBar *sb)
+{
+	gtk_widget_set_sensitive (sb->search_button, TRUE);
 }
 
 static void
@@ -89,6 +99,9 @@ clear_button_clicked_cb (GtkWidget *widget,
 		gtk_entry_set_text (GTK_ENTRY (sb->entry), "");
 		emit_query_changed (sb);
 	}
+	
+	gtk_widget_set_sensitive (sb->search_button, FALSE);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (sb->option), 0);
 }
 
 /* Widgetry creation.  */
@@ -130,6 +143,7 @@ set_option(SearchBar *sb, SearchBarItem *items)
 	gtk_option_menu_set_history (GTK_OPTION_MENU (sb->option), 0);
 
 	gtk_widget_set_sensitive (sb->option, TRUE);
+	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->option);
 }
 
 static void
@@ -138,8 +152,11 @@ add_entry (SearchBar *sb)
 	sb->entry = gtk_entry_new();
 	g_signal_connect (G_OBJECT (sb->entry), "activate",
 			  G_CALLBACK (entry_activated_cb), sb);
+	g_signal_connect (G_OBJECT (sb->entry), "changed",
+			  G_CALLBACK (entry_changed_cb), sb);
 	gtk_widget_show(sb->entry);
 	gtk_box_pack_start(GTK_BOX(sb), sb->entry, TRUE, TRUE, 0);
+	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->entry);
 }
 
 static void
@@ -152,6 +169,7 @@ add_spacer (SearchBar *sb)
 	gtk_box_pack_start(GTK_BOX(sb), spacer, FALSE, FALSE, 0);
 
 	gtk_widget_set_usize(spacer, 19, 1);
+	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), spacer);
 }
 
 static void
@@ -161,7 +179,9 @@ add_search_button (SearchBar *sb)
 	g_signal_connect (G_OBJECT (sb->search_button), "clicked",
 			  G_CALLBACK (entry_activated_cb), sb);
 	gtk_widget_show (sb->search_button);
+	gtk_widget_set_sensitive (sb->search_button, FALSE);
 	gtk_box_pack_start (GTK_BOX (sb), sb->search_button, FALSE, FALSE, 0);
+	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->search_button);
 }
 
 static void
@@ -172,6 +192,7 @@ add_clear_button (SearchBar *sb)
 			  G_CALLBACK (clear_button_clicked_cb), sb);
 	gtk_widget_show (sb->clear_button);
 	gtk_box_pack_start (GTK_BOX (sb), sb->clear_button, FALSE, FALSE, 0);
+	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->clear_button);
 }
 
 static int
@@ -317,6 +338,7 @@ search_bar_construct (SearchBar *search_bar,
 	g_return_if_fail (option_items != NULL);
 	
 	gtk_box_set_spacing (GTK_BOX (search_bar), 6);
+	search_bar->size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
 
 	search_bar_set_option(search_bar, option_items);
 

@@ -54,6 +54,7 @@ struct _SearchBar
 
 	/* PRIVATE */
 	GtkWidget *option_menu;
+	GtkSizeGroup *size_group;
 
 	int        option_choice;
 };
