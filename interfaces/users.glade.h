@@ -76,6 +76,10 @@ gchar *s = N_("Minimum days allowed between password changes:");
 gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
+gchar *s = N_("New Profile");
+gchar *s = N_("Delete Profile");
+gchar *s = N_("Save Profile");
+gchar *s = N_("Copy Profile");
 gchar *s = N_("Profiles");
 gchar *s = N_("Show system users and groups");
 gchar *s = N_("window2");
