@@ -327,7 +327,7 @@ is_login_valid (xmlNodePtr node, const gchar *login)
 		secondary_text = g_strdup_printf (_("The username should have less than %i characters for being valid"), sizeof (ut.ut_user));
 	}
 #endif
-	
+
 	/* If user being modified is root */
 	else if ((is_user_root (node)) && (strcmp (login, "root") != 0)) {
 		primary_text   = g_strdup (_("Root username shouldn't be modified."));
@@ -454,6 +454,7 @@ is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 {
 	gchar *primary_text   = NULL;
 	gchar *secondary_text = NULL;
+	GtkWidget *dialog;
 
 	if (!is_valid_id (uid)) {
 		primary_text   = g_strdup (N_("Invalid user ID"));
@@ -461,9 +462,6 @@ is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 	} else if ((is_user_root (node)) && (strcmp (uid, "0") != 0)) {
 		primary_text   = g_strdup (N_("root user ID should not be modified"));
 		secondary_text = g_strdup (N_("This would leave the system unusable"));
-	} else if (node_exists (node, "uid", uid)) {
-		primary_text   = g_strdup (N_("Invalid user ID"));
-		secondary_text = g_strdup_printf (N_("User ID %s already exists."), uid);
 	}
 	
 	if (primary_text) {
@@ -473,6 +471,22 @@ is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 		
 		return FALSE;
 	} else {
+		if (node_exists (node, "uid", uid)) {
+			dialog = gst_hig_dialog_new (GTK_WINDOW (gst_dialog_get_widget (tool->main_dialog,
+											"user_settings_dialog")),
+						     GTK_DIALOG_MODAL,
+						     GST_HIG_MESSAGE_INFO,
+						     NULL,
+						     _("Several users may share a single user ID, "
+						       "but it's not common and may lead to security problems"),
+						     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+						     NULL);
+			gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
+							 _("User ID %s already exists"), uid);
+			gtk_dialog_run (GTK_DIALOG (dialog));
+			gtk_widget_destroy (dialog);
+		}
+
 		return TRUE;
 	}
 }
