@@ -24,7 +24,7 @@
 
 extern GstTool *tool;
 
-static void boot_append_editor_class_init (BootAppendEditorClass *class);
+/*static void boot_append_editor_class_init (BootAppendEditorClass *class);
 static void boot_append_editor_finalize   (GObject *obj);
 
 static GtkDialogClass *parent_class;
@@ -38,13 +38,13 @@ boot_append_editor_get_type (void)
 			 static const GTypeInfo type_info = 
 				    {
 						  sizeof (BootAppendEditorClass),
-						  NULL, /* base_init */
-						  NULL, /* base finalize */
+						  NULL,  base_init 
+						  NULL,  base finalize 
 						  (GClassInitFunc) boot_append_editor_class_init,
-						  NULL, /* class_finalize */
-						  NULL, /* class_data */
+						  NULL,  class_finalize 
+						  NULL,  class_data 
 						  sizeof (BootAppendEditor),
-						  0, /* n_preallocs */
+						  0,  n_preallocs 
 						  (GInstanceInitFunc) NULL
 				    };
 			 
@@ -73,18 +73,20 @@ boot_append_editor_finalize (GObject *obj)
 	   
 	   G_OBJECT_CLASS (parent_class)->finalize (obj);
 }
+*/
 
-static void
-editor_append_response (GtkDialog *dialog, gint response, gpointer data)
+/*static void
+editor_append_response (GtkDialog *dialog, gint response, gpointer gdata)
 {
 	   BootAppendEditor *editor;
-	   char *append;
+	   gchar *append;
 	   
-	   editor = (BootAppendEditor *) data;
+	   editor = (BootAppendEditor *) gdata;
 	   
 	   switch (response) 
 	   {
 	   case GTK_RESPONSE_ACCEPT:
+			 printf ("DBG: entra\n");
 			 if (boot_append_gui_save (editor->gui, &append))
 			 {
 				    if (append)
@@ -98,33 +100,25 @@ editor_append_response (GtkDialog *dialog, gint response, gpointer data)
 			 break;
 	   }
 	   
-	   gtk_widget_destroy (GTK_WIDGET (editor));
-}
+	   gtk_widget_destroy (GTK_WIDGET (editor->dialog));
+}*/
 
 static gboolean
 construct (BootAppendEditor *editor, BootSettingsGui *settings)
 {
 	   GtkWidget *w;
 	   
-	   editor->gui = boot_append_gui_new (settings, GTK_WIDGET (editor));
+	   editor->gui = boot_append_gui_new (settings, GTK_WIDGET (editor->dialog));
 	   
 	   if (!editor->gui)
 			 return FALSE;
 	   
 	   w = glade_xml_get_widget (editor->gui->xml, "boot_append_editor");
-	   gtk_widget_reparent (w, GTK_DIALOG (editor)->vbox);
+	   gtk_widget_reparent (w, GTK_DIALOG (editor->dialog)->vbox);
 	   
-	   /* give our dialog an OK button and title */
-	   gtk_window_set_title (GTK_WINDOW (editor), _("Boot Append Editor"));
-	   gtk_window_set_policy (GTK_WINDOW (editor), FALSE, TRUE, TRUE);
-	   gtk_window_set_modal (GTK_WINDOW (editor), TRUE);
-	   gtk_dialog_add_buttons (GTK_DIALOG (editor),
-						  GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
-						  GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-						  NULL);
-	   
-	   g_signal_connect (G_OBJECT (editor), "response",
-					 G_CALLBACK (editor_append_response), editor);
+	   gtk_window_set_title (GTK_WINDOW (editor->dialog), _("Boot Append Editor"));
+	   gtk_window_set_policy (GTK_WINDOW (editor->dialog), FALSE, TRUE, TRUE);
+	   gtk_window_set_modal (GTK_WINDOW (editor->dialog), TRUE);
 	   
 	   boot_append_gui_setup (editor->gui, settings);
 	   
@@ -135,17 +129,22 @@ BootAppendEditor *
 boot_append_editor_new (BootSettingsGui *settings)
 {
 	   BootAppendEditor *new;
+	   GladeXML *xml;
 	   
 	   if (!settings)
 			 return NULL;
+
+	   new = g_new0 (BootAppendEditor, 1);
 	   
-	   new = (BootAppendEditor *) g_type_create_instance (boot_append_editor_get_type ());
+	   xml = glade_xml_new (tool->glade_path, "boot_dialog", NULL);
+	   new->dialog = GTK_DIALOG (glade_xml_get_widget (xml, "boot_dialog"));
+	   g_object_unref (xml);
 	   
 	   if (construct (new, settings))
 			 return new;
 	   else
 	   {
-			 gtk_widget_destroy (GTK_WIDGET (new));
+			 gtk_widget_destroy (GTK_WIDGET (new->dialog));
 			 return NULL;
 	   }
 }

@@ -30,6 +30,7 @@ gboolean  on_boot_table_clicked (GtkWidget*, gpointer);
 void	  on_boot_table_cursor_changed	(GtkTreeSelection*, gpointer);
 void      on_boot_delete_clicked    (GtkButton *button, gpointer data);
 void      on_boot_settings_clicked  (GtkButton *button, gpointer data);
+void      on_boot_append_browse_clicked (GtkButton *button, gpointer data);
 void      on_boot_default_clicked   (GtkButton *button, gpointer data);
 void      on_main_dialog_update_complexity (GstDialog *main_dialog, gpointer data);
 

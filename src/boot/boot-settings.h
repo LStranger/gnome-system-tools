@@ -4,7 +4,6 @@
 
 #include <gnome.h>
 
-
 #include "boot-image.h"
 
 typedef struct {
@@ -16,7 +15,6 @@ typedef struct {
 	GtkWidget *basic_frame;
 	GtkEntry  *name;
 	GtkCombo  *type;
-	/*GtkLabel  *type_label;*/
 
 	/* Image frame */
 	GtkWidget *image_frame;
@@ -33,6 +31,13 @@ typedef struct {
 	GtkCombo  *device;
 	
 } BootSettingsGui;
+
+typedef struct _BootImageEditor
+{
+	GtkDialog *dialog;
+
+	BootSettingsGui *gui;
+} BootImageEditor;
 
 BootSettingsGui *boot_settings_gui_new      (BootImage *image, GtkWidget *parent);
 void             boot_settings_gui_setup    (BootSettingsGui *gui, GtkWidget *top);

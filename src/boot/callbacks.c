@@ -30,8 +30,9 @@
 
 #include "gst.h"
 #include "gst-report-hook.h"
-#include "boot-image-editor.h"
 #include "boot-druid.h"
+#include "boot-settings.h"
+#include "boot-append-gui.h"
 #include "callbacks.h"
 #include "transfer.h"
 #include "table.h"
@@ -62,6 +63,55 @@ on_boot_add_clicked (GtkButton *button, gpointer data)
 	}
 }
 
+static gboolean
+boot_image_editor_construct (BootImageEditor *editor, BootImage *image)
+{
+	GtkWidget *w;
+
+	editor->gui = boot_settings_gui_new (image, GTK_WIDGET (editor->dialog));
+
+	if (!editor->gui)
+		return FALSE;
+
+	w = glade_xml_get_widget (editor->gui->xml, "boot_settings_editor");
+	gtk_widget_reparent (w, GTK_DIALOG (editor->dialog)->vbox);
+
+	gtk_window_set_title (GTK_WINDOW (editor->dialog), _("Boot Image Editor"));
+	gtk_window_set_policy (GTK_WINDOW (editor->dialog), FALSE, TRUE, TRUE);
+	gtk_window_set_modal (GTK_WINDOW (editor->dialog), TRUE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (editor->dialog), FALSE);
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (editor->dialog)), 6);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (editor->dialog)->vbox), 12);
+
+	boot_settings_gui_setup (editor->gui, GTK_DIALOG (editor->dialog)->vbox);
+
+	return TRUE;
+}
+
+static BootImageEditor *
+boot_image_editor_new (BootImage *image)
+{
+	BootImageEditor *new;
+	GladeXML *xml;
+
+	if (!image)
+		return NULL;
+
+	new = g_new0 (BootImageEditor, 1);
+
+	xml = glade_xml_new (tool->glade_path, "boot_dialog", NULL);
+	new->dialog = GTK_DIALOG (glade_xml_get_widget (xml, "boot_dialog"));
+	g_object_unref (xml);
+	
+	if (boot_image_editor_construct (new, image))
+		return new;
+	else
+	{
+		gtk_widget_destroy (GTK_WIDGET (new->dialog));
+		return NULL;
+	}
+}
+
 void
 on_boot_settings_clicked (GtkButton *button, gpointer data)
 {
@@ -71,6 +121,7 @@ on_boot_settings_clicked (GtkButton *button, gpointer data)
 	BootImage *image;
 	BootImageEditor *editor;
 	xmlNodePtr node;
+	gint response;
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
 
@@ -83,10 +134,105 @@ on_boot_settings_clicked (GtkButton *button, gpointer data)
 		image = boot_image_get_by_node (node);
 		editor = boot_image_editor_new (image);
 
-		gtk_widget_show (GTK_WIDGET (editor));
+		response = gtk_dialog_run (editor->dialog);
+		switch (response)
+		{
+		case GTK_RESPONSE_OK:
+			if (boot_settings_gui_save (editor->gui, TRUE))
+				boot_image_save (editor->gui->image);
+			else
+				return;
+			break;
+		default:
+			break;
+		}
+
+		boot_table_update ();
+		gtk_widget_destroy (GTK_WIDGET (editor->dialog));
 	}
 }
 
+static gboolean
+boot_append_editor_construct (BootAppendEditor *editor, BootSettingsGui *settings)
+{
+	GtkWidget *w;
+
+	editor->gui = boot_append_gui_new (settings, GTK_WIDGET (editor->dialog));
+
+	if (!editor->gui)
+		return FALSE;
+
+	w = glade_xml_get_widget (editor->gui->xml, "boot_append_editor");
+	gtk_widget_reparent (w, GTK_DIALOG (editor->dialog)->vbox);
+
+	gtk_window_set_title (GTK_WINDOW (editor->dialog), _("Boot Append Editor"));
+	gtk_window_set_policy (GTK_WINDOW (editor->dialog), FALSE, TRUE, TRUE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (editor->dialog), FALSE);
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (editor->dialog)), 6);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (editor->dialog)->vbox), 12);
+	gtk_window_set_modal (GTK_WINDOW (editor->dialog), TRUE);
+
+	boot_append_gui_setup (editor->gui, settings);
+
+	return TRUE;
+}
+
+static BootAppendEditor *
+boot_append_editor_new (BootSettingsGui *settings)
+{
+	BootAppendEditor *new;
+	GladeXML *xml;
+
+	if (!settings)
+		return NULL;
+
+	new = g_new0 (BootAppendEditor, 1);
+
+	xml = glade_xml_new (tool->glade_path, "boot_dialog", NULL);
+	new->dialog = GTK_DIALOG (glade_xml_get_widget (xml, "boot_dialog"));
+	g_object_unref (xml);
+
+	if (boot_append_editor_construct (new, settings))
+		return new;
+	else
+	{
+		gtk_widget_destroy (GTK_WIDGET (new->dialog));
+		return NULL;
+	}
+}
+
+void
+on_boot_append_browse_clicked (GtkButton *button, gpointer data)
+{
+	BootSettingsGui *settings;
+	BootAppendEditor *editor;
+	gint response;
+	gchar *append;
+
+	if (gst_tool_get_access (tool))
+	{
+		settings = (BootSettingsGui *) data;
+		editor = boot_append_editor_new (settings);
+		response = gtk_dialog_run (editor->dialog);
+
+		switch (response)
+		{
+		case GTK_RESPONSE_OK:
+			if (boot_append_gui_save (editor->gui, &append))
+				if (append)
+				{
+					gst_ui_entry_set_text (GTK_ENTRY (editor->gui->settings->append), g_strdup (append));
+					g_free (append);
+				}
+			break;
+		default:
+			break;
+		}
+		
+		gtk_widget_destroy (GTK_WIDGET (editor->dialog));
+		
+	}
+}
 
 gboolean
 on_boot_table_clicked (GtkWidget *w, gpointer data)

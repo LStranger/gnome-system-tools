@@ -20,36 +20,37 @@
  * Authors: Carlos Garcia Campos <elkalmail@yahoo.es>.
  */
  
-#ifndef BOOT_APPEND_EDITOR_H
-#define BOOT_APPEND_EDITOR_H
+/*#ifndef BOOT_APPEND_EDITOR_H
+  #define BOOT_APPEND_EDITOR_H*/
 
-#include <libgnomeui/gnome-dialog.h>
-#include <libgnomeui/gnome-file-entry.h>
+/*#include <libgnomeui/gnome-dialog.h>
+  #include <libgnomeui/gnome-file-entry.h>*/
 #include "boot-append-gui.h"
 
-G_BEGIN_DECLS
+/*G_BEGIN_DECLS
 
 #define BOOT_APPEND_EDITOR_TYPE        (boot_append_editor_get_type ())
 #define BOOT_APPEND_EDITOR(o)          (GTK_CHECK_CAST ((o), BOOT_APPEND_EDITOR_TYPE, BootAppendEditor))
-#define BOOT_APPEND_EDITOR_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BOOT_APPEND_EDITOR_TYPE, BootAppendEditorClass))
+#define BOOT_APPEND_EDITOR_CLASS(k)    (GTK_CHECK_CLASS_CAST((k), BOOT_APPEND_EDITOR_TYPE, BootAppendEditorClass))*/
 
 typedef struct _BootAppendEditor
 {
-	   GtkDialog parent;
+	   /*GtkDialog parent;*/
+	   GtkDialog *dialog;
 	   
 	   BootAppendGui *gui;
 } BootAppendEditor;
 
-typedef struct 
+/*typedef struct 
 {
 	   GtkDialogClass parent_class;
 	   
 } BootAppendEditorClass;
 
-GtkType boot_append_editor_get_type (void);
+GtkType boot_append_editor_get_type (void);*/
 
 BootAppendEditor *boot_append_editor_new (BootSettingsGui *settings);
 
-G_END_DECLS
+/*G_END_DECLS*/
 
-#endif /* BOOT_APPEND_EDITOR_H */
+/*#endif  BOOT_APPEND_EDITOR_H */

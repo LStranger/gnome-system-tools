@@ -24,16 +24,12 @@
 #define __BOOT_APPEND_H
 
 #include <gnome.h>
-#include <libgnomeui/gnome-dialog.h>
-#include <libgnomeui/gnome-file-entry.h>
-
 
 #include "boot-settings.h"
 
 typedef struct
 {
 	   GtkWidget *top;
-	   /*BootImage *image;*/
 	   BootSettingsGui *settings;
 	   GladeXML  *xml;
 	   
@@ -62,10 +58,16 @@ typedef struct
 
 } BootAppendGui;
 
+typedef struct _BootAppendEditor
+{
+	   GtkDialog *dialog;
+
+	   BootAppendGui *gui;
+} BootAppendEditor;
+
+
 BootAppendGui   *boot_append_gui_new      (BootSettingsGui *settings, GtkWidget *parent);
-gboolean 	      boot_append_gui_save	  (BootAppendGui *gui, char **append_string);
-void 		 boot_append_gui_error     (GtkWindow *parent, gchar *error);
-void            boot_append_gui_destroy   (BootAppendGui *gui);
+void             boot_append_gui_setup (BootAppendGui *gui, BootSettingsGui *settings);
 
 /* callbacks */
 void            on_boot_append_browse_clicked    (GtkButton *button, gpointer data);

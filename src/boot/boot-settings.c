@@ -33,9 +33,7 @@
 #include "boot-settings.h"
 #include "table.h"
 
-#include "boot-image-editor.h"
 #include "boot-append-gui.h"
-#include "boot-append-editor.h"
 #include "boot-druid.h"
 
 extern GstTool *tool;
@@ -120,7 +118,6 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->basic_frame = glade_xml_get_widget (gui->xml, "settings_basic_frame");
 	gui->name = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_name"));
 	gui->type = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_type"));
-	/*gui->type_label = GTK_LABEL (glade_xml_get_widget (gui->xml, "boot_type_label"));*/
 
 	/* Image frame */
 	gui->image_frame = glade_xml_get_widget (gui->xml, "settings_image_frame");

@@ -30,7 +30,6 @@
 #include "gst.h"
 #include "callbacks.h"
 #include "boot-append-gui.h"
-#include "boot-append-editor.h"
 
 extern GstTool *tool;
 
@@ -41,20 +40,6 @@ char *vga_table[][4] =
 	   "785", "788", "791", "794",
 	   "786", "789", "792", "795"
 };
-
-void
-on_boot_append_browse_clicked (GtkButton *button, gpointer data)
-{
-	   BootSettingsGui *settings;
-	   BootAppendEditor *editor;
-	   
-	   if (gst_tool_get_access (tool)) 
-	   {
-			 settings = (BootSettingsGui *) data;
-			 editor = boot_append_editor_new (settings);
-			 gtk_widget_show (GTK_WIDGET (editor));
-	   }
-}
 
 void
 on_append_vga_manual_toggle (GtkCheckButton *append_vga_manual, gpointer data)
@@ -184,7 +169,7 @@ boot_append_gui_new (BootSettingsGui *settings, GtkWidget *parent)
 	   
 	   gui->append_entry_others = GTK_ENTRY (glade_xml_get_widget (gui->xml, "append_entry_others"));
 	   
-	   /* Co	nnect signals */
+	   /* Connect signals */
 	   g_signal_connect (G_OBJECT (gui->append_vga), "toggled",
 					 G_CALLBACK (on_append_vga_toggle), (gpointer) gui);
 	   g_signal_connect (G_OBJECT (gui->append_vga_manual), "toggled",
@@ -197,10 +182,10 @@ boot_append_gui_new (BootSettingsGui *settings, GtkWidget *parent)
 	   return gui;
 }
 
-int
-hextodec (char *hex)
+static gint
+hextodec (gchar *hex)
 {
-	   int i;
+	   gint i;
 	   
 	   for (i=2;i<5;i++)
 	   {
@@ -230,7 +215,7 @@ hextodec (char *hex)
 }
 
 void
-boot_append_vga_error (char vga[6])
+boot_append_vga_error (gchar vga[6])
 {
 	   GtkWidget *dialog;
 
@@ -244,9 +229,9 @@ boot_append_vga_error (char vga[6])
 }
 
 void
-append_gui_vga_setup (BootAppendGui *gui, char vga[6])
+append_gui_vga_setup (BootAppendGui *gui, gchar vga[6])
 {
-	   int vga_num;
+	   gint vga_num;
 
 	   
 	   if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gui->append_vga)))
@@ -303,8 +288,8 @@ append_gui_vga_setup (BootAppendGui *gui, char vga[6])
 	   }
 }
 
-void
-append_gui_scsi_setup (BootAppendGui *gui, char scsi[4])
+static void
+append_gui_scsi_setup (BootAppendGui *gui, gchar scsi[4])
 {
 	   if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gui->append_scsi)))
 			 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->append_scsi), TRUE);
@@ -319,13 +304,13 @@ append_gui_scsi_setup (BootAppendGui *gui, char scsi[4])
 			 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->append_scsi_hdd), TRUE);
 }
 
-char *
-str_strip_spaces (const char *append)
+static gchar *
+str_strip_spaces (const gchar *append)
 {
-	   int i,j;
-	   char *str;
+	   gint i,j;
+	   gchar *str;
 	   
-	   str = (char *) malloc ((strlen (append) + 1) * sizeof (char));
+	   str = (gchar *) malloc ((strlen (append) + 1) * sizeof (gchar));
 	   str[0] = append[0];
 	   for (i=1,j=1;i<strlen (append);i++)
 	   {
@@ -356,8 +341,8 @@ boot_append_gui_setup (BootAppendGui *gui, BootSettingsGui *settings)
 	   
 	   gchar **appends;
 	   gchar **item;
-	   char *others;
-	   int i = 0;
+	   gchar *others;
+	   gint i = 0;
 	   
 	   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->append_vga), FALSE);
 	   on_append_vga_toggle (gui->append_vga, (gpointer) gui);
@@ -368,7 +353,7 @@ boot_append_gui_setup (BootAppendGui *gui, BootSettingsGui *settings)
 	   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->append_others), FALSE);
 	   on_append_others_toggle (gui->append_others, (gpointer) gui);
 	   
-	   others = (char *) g_malloc (strlen (gtk_entry_get_text (GTK_ENTRY (settings->append))) * sizeof (char) + 1);
+	   others = (gchar *) g_malloc (strlen (gtk_entry_get_text (GTK_ENTRY (settings->append))) * sizeof (gchar) + 1);
 	   others[0] = '\0';
 	   
 	   if (strlen (gtk_entry_get_text (GTK_ENTRY (settings->append))) > 0)
@@ -412,12 +397,12 @@ boot_append_gui_setup (BootAppendGui *gui, BootSettingsGui *settings)
 }
 
 gboolean
-boot_append_gui_save (BootAppendGui *gui, char **append_string)
+boot_append_gui_save (BootAppendGui *gui, gchar **append_string)
 {
 	   
-	   char *append;
+	   gchar *append;
 	   
-	   append = (char *) g_malloc ((70 + strlen (gtk_entry_get_text (gui->append_entry_others))) * sizeof (char));
+	   append = (gchar *) g_malloc ((70 + strlen (gtk_entry_get_text (gui->append_entry_others))) * sizeof (gchar));
 	   append[0] = '\0';
 	   
 	   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gui->append_vga)))
@@ -498,3 +483,4 @@ boot_append_gui_destroy (BootAppendGui *gui)
 			 g_free (gui);
 	   }
 }
+

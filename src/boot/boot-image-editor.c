@@ -22,7 +22,7 @@
 
 #include "boot-image-editor.h"
 
-static void boot_image_editor_class_init (BootImageEditorClass *class);
+/*static void boot_image_editor_class_init (BootImageEditorClass *class);
 static void boot_image_editor_finalize   (GObject *obj);
 
 static GtkDialogClass *parent_class;
@@ -35,13 +35,13 @@ boot_image_editor_get_type (void)
 	if (!type) {
 		static const GTypeInfo type_info = {
 			sizeof (BootImageEditorClass),
-			NULL, /* base_init */
-			NULL, /* base finalize */
+			NULL,  base_init 
+			NULL,  base finalize 
 			(GClassInitFunc) boot_image_editor_class_init,
-			NULL, /* class_finalize */
-			NULL, /* class_data */
+			NULL,  class_finalize 
+			NULL,  class_data 
 			sizeof (BootImageEditor),
-			0, /* n_preallocs */
+			0,  n_preallocs 
 			(GInstanceInitFunc) NULL
 		};
 		
@@ -69,7 +69,7 @@ boot_image_editor_finalize (GObject *obj)
 	boot_settings_gui_destroy (editor->gui);
 
 	G_OBJECT_CLASS (parent_class)->finalize (obj);
-}
+}*/
 
 static void
 editor_response (GtkDialog *dialog, gint response, gpointer data)
@@ -111,13 +111,13 @@ construct (BootImageEditor *editor, BootImage *image)
 	gtk_dialog_set_has_separator (GTK_DIALOG (editor), FALSE);
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (editor)), 6);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (editor)->vbox), 12);
-	gtk_dialog_add_buttons (GTK_DIALOG (editor),
+	/*gtk_dialog_add_buttons (GTK_DIALOG (editor),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 				GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-				NULL);
+				NULL);*/
 
-	g_signal_connect (G_OBJECT (editor), "response",
-			  G_CALLBACK (editor_response), editor);
+	/*g_signal_connect (G_OBJECT (editor), "response",
+	  G_CALLBACK (editor_response), editor);*/
 
 	boot_settings_gui_setup (editor->gui, GTK_DIALOG (editor)->vbox);
 
