@@ -448,5 +448,20 @@ void
 on_dialog_complexity_change (GtkWidget *widget, GstTool *tool)
 {
 	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	GstWidget *option_menu = gst_dialog_get_gst_widget (tool->main_dialog, "runlevels_menu");
+	gchar *runlevel;
+	gint n_option;
+
 	hide_sequence_ordering_toggle_button (root);
+
+	if ((option_menu->advanced != GST_WIDGET_MODE_HIDDEN) &&
+	    (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_BASIC))
+	{
+		runlevel = g_object_get_data (G_OBJECT (option_menu->widget), "default_runlevel");
+		n_option = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (option_menu->widget),
+							       "default_item"));
+		
+		gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu->widget), n_option);
+		change_runlevel (runlevel);
+	}
 }

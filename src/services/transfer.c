@@ -69,6 +69,7 @@ transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
 			/* It's the default runlevel */
 			has_default = TRUE;
 			n_option = n_items;
+			g_object_set_data (G_OBJECT (option_menu->widget), "default_runlevel", str);
 			g_object_set_data (G_OBJECT (menu_item), "default", GINT_TO_POINTER (TRUE));
 			change_runlevel (str);
 		}
@@ -84,6 +85,7 @@ transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
 		gtk_widget_show_all (menu_shell);
 		gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu->widget), menu_shell);
 		gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu->widget), n_option);
+		g_object_set_data (G_OBJECT (option_menu->widget), "default_item", GINT_TO_POINTER (n_option));
 	}
 
 	if (!has_default) {
