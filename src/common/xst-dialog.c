@@ -246,14 +246,10 @@ apply_cb (GtkWidget *w, gpointer data)
 }
 
 static void
-close_cb (GtkWidget *w, gpointer data)
+dialog_close (XstDialog *dialog)
 {
-	XstDialog *dialog;
-
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (XST_IS_DIALOG (data));
-
-	dialog = XST_DIALOG (data);
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (XST_IS_DIALOG (dialog));
 
 	if (xst_dialog_get_modified (dialog)) {
 		/* Changes have been made. */
@@ -265,11 +261,23 @@ close_cb (GtkWidget *w, gpointer data)
 			NULL, NULL, GTK_WINDOW (dialog));
 
 		if (!gnome_dialog_run_and_close (GNOME_DIALOG (w)))
-			apply_cb (NULL, data);
+			apply_cb (NULL, dialog);
 	}
 
 	/* this shouldn't be here eventually */
 	gtk_main_quit ();
+}
+
+static void
+dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
+{
+	dialog_close (data);
+}
+
+static void
+close_cb (GtkWidget *w, gpointer data)
+{
+	dialog_close (data);
 }
 
 static void
@@ -342,8 +350,6 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gnome_app_construct (GNOME_APP (dialog), s, title);
 	g_free (s);
 
-	gtk_signal_connect (GTK_OBJECT (dialog), "delete_event", close_cb, dialog);
-	
 	xml = xst_tool_load_glade_common (tool, "tool_vbox");
 	
 	w = glade_xml_get_widget (xml, "tool_vbox");
@@ -383,6 +389,8 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 
 	dialog->complexity = XST_DIALOG_ADVANCED;
 	xst_dialog_set_complexity (dialog, XST_DIALOG_BASIC);
+	
+	gtk_signal_connect (GTK_OBJECT (dialog), "delete_event", dialog_delete_event_cb, dialog);
 }
 
 XstDialog *
