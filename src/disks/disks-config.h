@@ -25,8 +25,6 @@
 #ifndef __DISKS_CONFIG_H__
 #define __DISKS_CONFIG_H__
 
-#include <gnome.h>
-
 #include "disks-storage.h"
 
 typedef struct

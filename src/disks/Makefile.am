@@ -26,6 +26,8 @@ disks_admin_SOURCES = \
 	disks-storage-disk.c 	  disks-storage-disk.h \
 	disks-partition.c 	  disks-partition.h \
 	disks-storage-cdrom.c     disks-storage-cdrom.h \
+	disks-cdrom-disc.c	  disks-cdrom-disc.h	\
+	disks-cdrom-disc-data.c	  disks-cdrom-disc-data.h \
 	disks-storage-floppy.c    disks-storage-floppy.h \
 	disks-factory-storage.c   disks-factory-storage.h \
 	disks-gui.c		  disks-gui.h \

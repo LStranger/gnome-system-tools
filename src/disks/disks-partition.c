@@ -27,6 +27,8 @@
 #include <libgnome/gnome-i18n.h>
 
 #include "disks-partition.h"
+#include "disks-gui.h"
+#include "transfer.h"
 
 #define PARENT_TYPE G_TYPE_OBJECT
 
@@ -325,6 +327,39 @@ partition_get_property (GObject  *object, guint prop_id, GValue *value,
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
+	}
+}
+
+void
+gst_disks_partition_setup_properties_widget (GstDisksPartition *part)
+{
+	gst_disks_gui_setup_partition_properties (part);
+}
+
+gboolean
+gst_disks_partition_mount (GstDisksPartition *part)
+{
+	g_return_val_if_fail (GST_IS_DISKS_PARTITION (part), FALSE);
+	
+	return gst_disks_mount_partition (part);
+}
+
+void
+gst_disks_partition_browse (GstDisksPartition *part)
+{
+	gchar *point, *browser;
+	
+	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
+
+	g_object_get (G_OBJECT (part), "point", &point, NULL);
+	
+	if (point) {
+		if ((browser = g_find_program_in_path ("nautilus"))) {
+			g_spawn_command_line_async (
+				g_strdup_printf ("%s %s", browser, point),
+				NULL);
+			g_free (browser);
+		}
 	}
 }
 

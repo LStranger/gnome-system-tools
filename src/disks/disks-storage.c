@@ -1,7 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* disks.h: this file is part of disks-admin, a gnome-system-tool frontend 
- * for disks administration.
- * 
+/*  
  * Copyright (C) 2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify

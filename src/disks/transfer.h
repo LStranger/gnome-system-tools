@@ -25,18 +25,16 @@
 #ifndef __TRANSFER_H
 #define __TRANSFER_H
 
-typedef struct _TransStringCList TransStringCList;
-
-struct _TransStringCList
-{
-  gchar *xml_path;
-  gchar *xml_path_field_1;
-  gchar *xml_path_field_2;
-
-  gchar *clist;
-};
+#include "gst.h"
+#include "disks-storage-cdrom.h"
+#include "disks-cdrom-disc.h"
+#include "disks-partition.h"
 
 void transfer_xml_to_gui(GstTool *tool, gpointer data);
 void transfer_gui_to_xml(GstTool *tool, gpointer data);
+
+gboolean      gst_disks_mount_partition         (GstDisksPartition *part);
+gboolean      gst_disks_mount_cdrom             (GstDisksStorageCdrom *cdrom);
+GstCdromDisc *gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom);
 
 #endif /* TRANSFER_H */

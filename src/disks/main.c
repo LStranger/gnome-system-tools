@@ -32,9 +32,9 @@
 #include "gst.h"
 #include "gst-report-hook.h"
 
-#include "transfer.h"
 #include "disks-config.h"
 #include "callbacks.h"
+#include "transfer.h"
 
 GstTool *tool;
 

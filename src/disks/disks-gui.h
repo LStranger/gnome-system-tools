@@ -30,6 +30,8 @@
 #include "disks-config.h"
 #include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"
+#include "disks-cdrom-disc.h"
+#include "disks-cdrom-disc-data.h"
 
 enum {
 	POPUP_PARTITION_FORMAT,
@@ -55,13 +57,12 @@ gchar *        gst_storage_get_human_readable_size (const gulong size);
 GdkPixbuf *    gst_storage_get_icon            (const gchar *icon_name);
 gfloat         gst_storage_get_float_size      (const gulong size);
 
-void           gst_disks_gui_setup_mounted     (GtkWidget *status_label,
-						GtkWidget *mount_button,
-						gboolean mounted);
-void           gst_storage_gui_setup                (GstDisksConfig *cfg);
+void           gst_disks_gui_setup                  (GstDisksConfig *cfg);
 void           gst_disks_gui_set_device_speed       (GstDisksStorage *storage);
-void           gst_disks_gui_setup_partition        (GtkWidget *treeview, GList *partitions);
+void           gst_disks_gui_setup_partition_list   (GtkWidget *treeview, GList *partitions);
 void           gst_disks_gui_setup_disk_properties  (GstDisksStorageDisk *disk);
+void           gst_disks_gui_setup_partition_properties (GstDisksPartition *part);
 void           gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom);
+void           gst_disks_gui_setup_cdrom_disc_data  (GstCdromDiscData *disc_data);
 
 #endif /* __DISKS_GUI_H */

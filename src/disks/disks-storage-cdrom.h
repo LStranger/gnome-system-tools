@@ -24,6 +24,8 @@
 #define __DISKS_STORAGE_CDROM_H__
 
 #include <glib-object.h>
+#include "disks-cdrom-disc.h"
+
 
 #define GST_TYPE_DISKS_STORAGE_CDROM         (gst_disks_storage_cdrom_get_type ())
 #define GST_DISKS_STORAGE_CDROM(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_DISKS_STORAGE_CDROM, GstDisksStorageCdrom))
@@ -36,14 +38,6 @@ typedef struct _GstDisksStorageCdrom      GstDisksStorageCdrom;
 typedef struct _GstDisksStorageCdromClass GstDisksStorageCdromClass;
 typedef struct _GstDisksStorageCdromPriv  GstDisksStorageCdromPriv;
 
-typedef enum {
-	CDROM_STATUS_EMPTY,
-	CDROM_STATUS_DATA,
-	CDROM_STATUS_AUDIO,
-	CDROM_STATUS_MIXED,
-	CDROM_STATUS_BLANK
-} GstCdromStatus;
-
 struct _GstDisksStorageCdrom {
         GstDisksStorage      parent;
 
@@ -55,10 +49,10 @@ struct _GstDisksStorageCdromClass {
 };
 
 GType            gst_disks_storage_cdrom_get_type (void);
-GstDisksStorage* gst_disks_storage_cdrom_new      (void);
+GstDisksStorage *gst_disks_storage_cdrom_new      (void);
 
-gchar *          gst_disks_storage_cdrom_get_human_readable_status (GstCdromStatus status);
-GstCdromStatus   gst_disks_storage_cdrom_get_status_from_name      (const gchar *status);
-gchar *          gst_disks_storage_cdrom_get_status                (GstCdromStatus status);
+gboolean         gst_disks_cdrom_mount                             (GstDisksStorageCdrom *cdrom);
+gchar           *gst_disks_storage_cdrom_get_human_readable_status (GstDisksStorageCdrom *cdrom);
+GstCdromDisc    *gst_disks_cdrom_set_disc                          (GstDisksStorageCdrom *cdrom);
 
 #endif /* __GST_DISKS_STORAGE_CDROM_H__  */

@@ -63,8 +63,12 @@ struct _GstDisksPartitionClass {
 
 GType              gst_disks_partition_get_type (void);
 GstDisksPartition* gst_disks_partition_new      (void);
-gchar *                   gst_disks_partition_get_human_readable_typefs (GstPartitionTypeFs type);
-GstPartitionTypeFs        gst_disks_partition_get_typefs_from_name (const gchar *name);
-gchar *                   gst_disks_partition_get_typefs (GstPartitionTypeFs type);
+
+void                      gst_disks_partition_setup_properties_widget   (GstDisksPartition *part);
+gboolean                  gst_disks_partition_mount                     (GstDisksPartition *part);
+void                      gst_disks_partition_browse                    (GstDisksPartition *part);
+gchar                    *gst_disks_partition_get_human_readable_typefs (GstPartitionTypeFs type);
+GstPartitionTypeFs        gst_disks_partition_get_typefs_from_name      (const gchar *name);
+gchar                    *gst_disks_partition_get_typefs                (GstPartitionTypeFs type);
 
 #endif /* __GST_DISKS_PARTITION_H__  */

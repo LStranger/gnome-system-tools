@@ -33,6 +33,8 @@
 #include "disks-partition.h"
 #include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"
+#include "disks-cdrom-disc.h"
+#include "disks-cdrom-disc-data.h"
 #include "disks-gui.h"
 #include "callbacks.h"
 
@@ -112,7 +114,7 @@ gst_storage_get_icon (const gchar *icon_name)
 }
 
 static GtkWidget *
-gst_storage_list_new ()
+gst_disks_gui_storage_list_new ()
 {
 	GtkTreeModel *model;
 	GtkWidget *treeview;
@@ -156,7 +158,7 @@ gst_storage_list_new ()
 }
 
 static void
-gst_storage_list_set (GtkWidget *treeview, GList *storages)
+gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -197,14 +199,14 @@ gst_storage_list_set (GtkWidget *treeview, GList *storages)
 }
 
 static void
-gst_storage_list_reload (GtkWidget *widget, gpointer gdata)
+gst_disks_gui_storage_list_reload (GtkWidget *widget, gpointer gdata)
 {
-	gst_storage_list_set (gst_dialog_get_widget (tool->main_dialog, "storage_list"),
-			      (GList *) gdata);
+	gst_disks_gui_setup_storage_list (gst_dialog_get_widget (tool->main_dialog, "storage_list"),
+					  (GList *) gdata);
 }
 
 static GtkWidget *
-gst_partition_list_new ()
+gst_disks_gui_partition_list_new ()
 {
 	GtkTreeModel *model;
 	GtkWidget *treeview;
@@ -247,7 +249,7 @@ gst_partition_list_new ()
 
 
 void 
-gst_disks_gui_setup_partition (GtkWidget *treeview, GList *partitions)
+gst_disks_gui_setup_partition_list (GtkWidget *treeview, GList *partitions)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
@@ -286,13 +288,18 @@ gst_disks_gui_setup_partition (GtkWidget *treeview, GList *partitions)
 	}
 }
 
-void
+static void
 gst_disks_gui_setup_mounted (GtkWidget *status_label, GtkWidget *mount_button, gboolean mounted)
 {
 	GtkWidget *icon, *label;
 
-	icon = gst_dialog_get_widget (tool->main_dialog, "mount_button_icon");
-	label = gst_dialog_get_widget (tool->main_dialog, "mount_button_label");
+	if (g_ascii_strcasecmp (gtk_widget_get_name (mount_button), "cd_mount_button") == 0) {
+		icon = gst_dialog_get_widget (tool->main_dialog, "cd_mount_button_icon");
+		label = gst_dialog_get_widget (tool->main_dialog, "cd_mount_button_label");
+	} else {
+		icon = gst_dialog_get_widget (tool->main_dialog, "part_mount_button_icon");
+		label = gst_dialog_get_widget (tool->main_dialog, "part_mount_button_label");
+	}
 
 	if (mounted) {
 		gtk_label_set_text (GTK_LABEL (status_label), _("Accessible"));
@@ -305,27 +312,33 @@ gst_disks_gui_setup_mounted (GtkWidget *status_label, GtkWidget *mount_button, g
 		gtk_image_set_from_stock (GTK_IMAGE (icon), GTK_STOCK_REDO,
 					  GTK_ICON_SIZE_BUTTON);
 	}
+
 }
 
 void
 gst_disks_gui_set_device_speed (GstDisksStorage *storage)
 {
-	gst_tool_queue_directive (tool, gst_disks_storage_get_device_speed_cb,
-				  (gpointer) storage, NULL, NULL, "dev_speed");
+	/*gst_tool_queue_directive (tool, gst_disks_storage_get_device_speed_cb,
+	  (gpointer) storage, NULL, NULL, "dev_speed");*/
 }
 
 
 void
-gst_storage_gui_setup (GstDisksConfig *cfg)
+gst_disks_gui_setup (GstDisksConfig *cfg)
 {
 	GtkWidget *treeview;
 	GtkTreeModel *model;
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
-	GtkWidget *change_mp_button;
-	GtkWidget *mount_button, *part_browse_button;
-	GtkWidget *point_entry;
 	GList *list;
+	/* Partition Widgets */
+	GtkWidget *part_change_mp_button;
+	GtkWidget *part_mount_button, *part_browse_button;
+	GtkWidget *part_point_entry;
+	/* Cdrom Disc Data Widgets */
+	GtkWidget *cd_change_mp_button;
+	GtkWidget *cd_mount_button, *cd_browse_button;
+	GtkWidget *cd_point_entry;
 
 	g_return_if_fail (cfg != NULL);
 
@@ -334,20 +347,21 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 	icon_theme = gnome_icon_theme_new ();
 	gnome_icon_theme_set_allow_svg (icon_theme, TRUE);
 	g_signal_connect (G_OBJECT (icon_theme), "changed",
-			  G_CALLBACK (gst_storage_list_reload),
+			  G_CALLBACK (gst_disks_gui_storage_list_reload),
 			  (gpointer) list);
 	
-	treeview = gst_partition_list_new ();
+	treeview = gst_disks_gui_partition_list_new ();
 
+	/** Partition Widgets **/
 	/* Point entry change, we have to update the partition object */
-	point_entry = gst_dialog_get_widget (tool->main_dialog, "point_entry");
-	g_signal_connect (G_OBJECT (point_entry), "changed",
+	part_point_entry = gst_dialog_get_widget (tool->main_dialog, "part_point_entry");
+	g_signal_connect (G_OBJECT (part_point_entry), "changed",
 			  G_CALLBACK (gst_on_point_entry_changed),
 			  (gpointer) treeview);
 
 	/* Mount/Umount button clicked */
-	mount_button = gst_dialog_get_widget (tool->main_dialog, "mount_button");
-	g_signal_connect (G_OBJECT (mount_button), "clicked",
+	part_mount_button = gst_dialog_get_widget (tool->main_dialog, "part_mount_button");
+	g_signal_connect (G_OBJECT (part_mount_button), "clicked",
 			  G_CALLBACK (gst_on_mount_button_clicked),
 			  (gpointer) treeview);
 
@@ -357,9 +371,38 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 			  G_CALLBACK (gst_on_browse_button_clicked),
 			  (gpointer) treeview);
 
-	treeview = gst_storage_list_new ();
+	/* Change Mount Point button callback */
+	part_change_mp_button = gst_dialog_get_widget (tool->main_dialog, "part_change_mp_button");
+	g_signal_connect (G_OBJECT (part_change_mp_button), "clicked",
+			  G_CALLBACK (gst_on_change_mp_button_clicked), NULL);
 
-	gst_storage_list_set (treeview, list);
+	treeview = gst_disks_gui_storage_list_new ();
+
+	gst_disks_gui_setup_storage_list (treeview, list);
+
+	/** Cdrom Disc Data Widgets **/
+	/* Point entry change, we have to update the CdromDiscData object */
+	cd_point_entry = gst_dialog_get_widget (tool->main_dialog, "cd_point_entry");
+	g_signal_connect (G_OBJECT (cd_point_entry), "changed",
+			  G_CALLBACK (gst_on_point_entry_changed),
+			  (gpointer) treeview);
+
+	/* Mount/Umount button clicked */
+	cd_mount_button = gst_dialog_get_widget (tool->main_dialog, "cd_mount_button");
+	g_signal_connect (G_OBJECT (cd_mount_button), "clicked",
+			  G_CALLBACK (gst_on_mount_button_clicked),
+			  (gpointer) treeview);
+
+	/* Browse button clicked */
+	cd_browse_button = gst_dialog_get_widget (tool->main_dialog, "cd_browse_button");
+	g_signal_connect (G_OBJECT (cd_browse_button), "clicked",
+			  G_CALLBACK (gst_on_browse_button_clicked),
+			  (gpointer) treeview);
+
+	/* Change Mount Point button callback */
+	cd_change_mp_button = gst_dialog_get_widget (tool->main_dialog, "cd_change_mp_button");
+	g_signal_connect (G_OBJECT (cd_change_mp_button), "clicked",
+			  G_CALLBACK (gst_on_change_mp_button_clicked), NULL);
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -367,11 +410,6 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 	gtk_tree_selection_select_iter (selection, &iter);
 	
 	gtk_widget_show_all (treeview);
-
-	/* Change Mount Point button callback */
-	change_mp_button = gst_dialog_get_widget (tool->main_dialog, "change_mp_button");
-	g_signal_connect (G_OBJECT (change_mp_button), "clicked",
-			  G_CALLBACK (gst_on_change_mp_button_clicked), NULL);
 }
 
 /* Porperties Widgets */
@@ -382,6 +420,8 @@ gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
 {
 	gchar *speed, *device;
 
+	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (disk));
+	
 	g_object_get (G_OBJECT (disk), "speed", &speed,
 		      "device", &device, NULL);
 	
@@ -397,6 +437,106 @@ gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
 			speed);
 	}
 }
+void 
+gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
+{
+	GtkWidget *device_label;
+	GtkWidget *point_entry;
+	GtkWidget *size_progress;
+	GtkWidget *fs_label;
+	GtkWidget *mount_button, *status_label;
+	GtkWidget *change_mp_button, *part_browse_button;
+	gchar *point, *device;
+	GstPartitionTypeFs type;
+	gulong size, free;
+	gboolean mounted, listed;
+
+	point_entry = gst_dialog_get_widget (tool->main_dialog, "part_point_entry");
+	size_progress = gst_dialog_get_widget (tool->main_dialog, "part_size_progress");
+	fs_label = gst_dialog_get_widget (tool->main_dialog, "part_fs_label");
+	device_label = gst_dialog_get_widget (tool->main_dialog, "part_device_label");
+	mount_button = gst_dialog_get_widget (tool->main_dialog, "part_mount_button");
+	status_label = gst_dialog_get_widget (tool->main_dialog, "part_status_label");
+	part_browse_button = gst_dialog_get_widget (tool->main_dialog, "part_browse_button");
+	change_mp_button = gst_dialog_get_widget (tool->main_dialog, "part_change_mp_button");
+
+	if (part) {
+		g_object_get (G_OBJECT (part), "type", &type, "point", &point,
+			      "size", &size, "device", &device,
+			      "free", &free, "mounted", &mounted,
+			      "listed", &listed, NULL);
+
+		gtk_widget_set_sensitive (size_progress, TRUE);
+		gtk_widget_set_sensitive (device_label, TRUE);
+
+		if (point)
+			gtk_entry_set_text (GTK_ENTRY (point_entry), point);
+		else
+			gtk_entry_set_text (GTK_ENTRY (point_entry), "");
+
+		if (type == PARTITION_TYPE_SWAP) {
+			gtk_widget_set_sensitive (change_mp_button, FALSE);
+			gtk_widget_set_sensitive (mount_button, FALSE);
+			gtk_widget_set_sensitive (part_browse_button, FALSE);
+			gtk_editable_set_editable (GTK_EDITABLE (point_entry), FALSE);
+		} else {
+			gtk_widget_set_sensitive (change_mp_button, TRUE);
+			gtk_widget_set_sensitive (mount_button, TRUE);
+			gtk_editable_set_editable (GTK_EDITABLE (point_entry), TRUE);
+		}
+
+		gtk_label_set_text (GTK_LABEL (device_label), device);
+
+		gtk_label_set_text (GTK_LABEL (fs_label),
+				    gst_disks_partition_get_human_readable_typefs (type));
+
+		gst_disks_gui_setup_mounted (status_label, mount_button, mounted);
+
+		if (mounted) {
+			if (type != PARTITION_TYPE_SWAP)
+				gtk_widget_set_sensitive (part_browse_button, TRUE);
+
+			gtk_progress_bar_set_fraction (
+				GTK_PROGRESS_BAR (size_progress),
+				(1 - ((gfloat)(free) / size)));
+
+			if (free) {
+				gtk_progress_bar_set_text (
+					GTK_PROGRESS_BAR (size_progress),
+					g_strdup_printf ("%s (%s Free)",
+							 gst_storage_get_human_readable_size (size),
+							 gst_storage_get_human_readable_size (free))
+					);
+			} else {
+				gtk_progress_bar_set_text (
+					GTK_PROGRESS_BAR (size_progress),
+					g_strdup_printf ("%s",
+							 gst_storage_get_human_readable_size (size))
+					);
+			}
+		} else {
+			gtk_widget_set_sensitive (part_browse_button, FALSE);
+
+			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
+			gtk_progress_bar_set_text (
+				GTK_PROGRESS_BAR (size_progress),
+				g_strdup_printf ("%s (Free space not available)",
+						 gst_storage_get_human_readable_size (size)));
+		}
+	} else {
+		gtk_entry_set_text (GTK_ENTRY (point_entry), "");
+		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), "");
+		gtk_label_set_text (GTK_LABEL (fs_label), "");
+		gtk_label_set_text (GTK_LABEL (device_label), "");
+
+		gtk_widget_set_sensitive (size_progress, FALSE);
+		gtk_widget_set_sensitive (device_label, FALSE);
+		gtk_widget_set_sensitive (change_mp_button, FALSE);
+		gtk_widget_set_sensitive (mount_button, FALSE);
+		gtk_widget_set_sensitive (part_browse_button, FALSE);
+	}
+}
 
 /* CDROM */
 void
@@ -405,12 +545,12 @@ gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 	gchar *speed, *device;
 	gboolean play_audio, write_cdr, write_cdrw, read_dvd;
 	gboolean write_dvdr, write_dvdram;
-	GstCdromStatus status;
-		
+	GstCdromDisc *disc;
+
+	g_return_if_fail (GST_IS_DISKS_STORAGE_CDROM (cdrom));
 	
 	g_object_get (G_OBJECT (cdrom), "speed", &speed,
-		      "device", &device, "status", &status,
-		      NULL);
+		      "device", &device, NULL);
 
 	gtk_label_set_text (
 		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_device_label")),
@@ -424,9 +564,13 @@ gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 			speed);
 	}
 
+	disc = gst_disks_cdrom_set_disc (cdrom);
+	if (disc)
+		gst_cdrom_disc_setup_gui (disc);
+	
 	gtk_label_set_text (
 		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_status_label")),
-		gst_disks_storage_cdrom_get_human_readable_status (status));
+		gst_disks_storage_cdrom_get_human_readable_status (cdrom));
 
 	g_object_get (G_OBJECT (cdrom), "play_audio", &play_audio, "write_cdr", &write_cdr,
 		      "write_cdrw", &write_cdrw, "read_dvd", &read_dvd, 
@@ -458,3 +602,65 @@ gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 	
 }
 	
+/* CDROM Disc Data */
+void 
+gst_disks_gui_setup_cdrom_disc_data (GstCdromDiscData *disc_data)
+{
+	GtkWidget *point_entry;
+	GtkWidget *size_progress;
+	GtkWidget *mount_button, *status_label;
+	GtkWidget *change_mp_button, *browse_button;
+	GtkWidget *tab_cdrom_label;
+	GtkWidget *data_cd_info, *audio_cd_info;
+	gulong size;
+	gchar *mount_point;
+	gboolean mounted;
+
+	point_entry = gst_dialog_get_widget (tool->main_dialog, "cd_point_entry");
+	size_progress = gst_dialog_get_widget (tool->main_dialog, "cd_size_progress");
+	mount_button = gst_dialog_get_widget (tool->main_dialog, "cd_mount_button");
+	status_label = gst_dialog_get_widget (tool->main_dialog, "cd_status_label");
+	browse_button = gst_dialog_get_widget (tool->main_dialog, "cd_browse_button");
+	change_mp_button = gst_dialog_get_widget (tool->main_dialog, "cd_change_mp_button");
+	tab_cdrom_label = gst_dialog_get_widget (tool->main_dialog, "tab_cdrom_label");
+	data_cd_info = gst_dialog_get_widget (tool->main_dialog, "data_cd_info");
+	audio_cd_info = gst_dialog_get_widget (tool->main_dialog, "audio_cd_info");
+	
+	g_return_if_fail (GST_IS_CDROM_DISC_DATA (disc_data));
+
+	gtk_label_set_text (GTK_LABEL (tab_cdrom_label), _("Data CD-ROM"));
+
+	gtk_widget_hide (audio_cd_info);
+	
+	g_object_get (G_OBJECT (disc_data), "size", &size,
+		      "mount-point", &mount_point,
+		      "mounted", &mounted, NULL);
+
+	if (mount_point)
+		gtk_entry_set_text (GTK_ENTRY (point_entry), mount_point);
+	else
+		gtk_entry_set_text (GTK_ENTRY (point_entry), "");
+
+	gst_disks_gui_setup_mounted (status_label, mount_button, mounted);
+
+	if (mounted) {
+		gtk_widget_set_sensitive (browse_button, TRUE);
+		
+		gtk_progress_bar_set_fraction (
+			GTK_PROGRESS_BAR (size_progress), 1.0);
+
+		gtk_progress_bar_set_text (
+			GTK_PROGRESS_BAR (size_progress),
+			g_strdup_printf ("%s",
+					 gst_storage_get_human_readable_size (size))
+			);
+	} else {
+		gtk_widget_set_sensitive (browse_button, FALSE);
+
+		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress),
+					   g_strdup (_("Not Available")));
+	}
+
+	gtk_widget_show_all (data_cd_info);
+}

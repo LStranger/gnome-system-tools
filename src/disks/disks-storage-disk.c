@@ -115,6 +115,12 @@ storage_disk_class_init (GstDisksStorageDiskClass *klass)
 }
 
 static void
+delete_object (gpointer object, gpointer gdata)
+{
+	g_object_unref (G_OBJECT (object));
+}
+
+static void
 storage_disk_finalize (GObject *object)
 {
 	GstDisksStorageDisk *storage = GST_DISKS_STORAGE_DISK (object);
@@ -122,6 +128,8 @@ storage_disk_finalize (GObject *object)
 
 	if (storage->priv) {
 		if (storage->priv->partitions) {
+			g_list_foreach (storage->priv->partitions,
+					delete_object, NULL);
 			g_list_free (storage->priv->partitions);
 			storage->priv->partitions = NULL;
 		}
