@@ -18,5 +18,6 @@
 #undef HAVE_CRYPT_H
 #undef FRONTEND_DIR
 #undef DESKTOP_DATA_DIR
+#undef SU_PATH
 
 @BOTTOM@

@@ -25,6 +25,22 @@ dnl glib-genmarshal
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
 dnl =====================================================
+dnl search for su
+dnl =====================================================
+
+AC_PATH_PROG(SU_TOOL, su)
+if test x"${SU_TOOL}" = xno; then
+  AC_MSG_ERROR([su executable not found in your path - should be installed])
+else
+  AC_DEFINE_UNQUOTED(SU_PATH, "${SU_TOOL}")
+fi
+
+dnl =====================================================
+dnl END: search for su
+dnl =====================================================
+
+
+dnl =====================================================
 dnl LibUtil checking
 dnl =====================================================
     
@@ -149,7 +165,7 @@ dnl ==============================================================
 dnl END: Set SCRIPTS_DIR & PIXMAPS_DIR 
 dnl ==============================================================
 
- dnl =====================================================
+dnl =====================================================
 dnl GCONF
 dnl =====================================================
 

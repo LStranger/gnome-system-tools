@@ -177,7 +177,7 @@ exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 	}
 	else {
 		/* This is the child process */
-		execlp ("su", "su", user_p, "-c", exec_p, NULL);
+		execl (SU_PATH, SU_PATH, user_p, "-c", exec_p, NULL);
 
 		_exit (1);
 	}
