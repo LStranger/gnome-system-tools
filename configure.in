@@ -85,8 +85,8 @@ AC_MSG_CHECKING(for GConf >= 0.50)
 if gconf-config --version > /dev/null 2>&1; then
         vers=`gconf-config --version | sed -e 's/cvs$//' -e 's/pre$//' | \
                  awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-        if test "$vers" -ge 50000; then
-                AC_MSG_RESULT(found)
+        if test "$vers" -ge 500000; then
+                AC_MSG_RESULT(found $vers)
          else
                 AC_MSG_ERROR(You need at least GConf 0.50 for this version of ximian-setup-tools)
         fi
