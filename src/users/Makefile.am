@@ -12,7 +12,7 @@ INCLUDES = \
 	$(GNOME_XML_CFLAGS)		\
 	$(GAL_CFLAGS)
 
-sbin_PROGRAMS = users-admin
+bin_PROGRAMS = users-admin
 
 users_admin_SOURCES = \
 	main.c \
@@ -86,10 +86,10 @@ install-data-local: $(desktop).menu $(desktop).cc
 ##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
 	$(INSTALL_DATA) users.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/users.desktop
 ##	$(INSTALL_DATA) $(srcdir)/users.desktop.cc $(DESTDIR)$(datadir)/control-center/System/users.desktop
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	rm -f $(DESTDIR)$(bindir)/users-admin
-	ln -s consolehelper $(DESTDIR)$(bindir)/users-admin
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
-	$(INSTALL_DATA) $(srcdir)/users.pam $(DESTDIR)$(sysconfdir)/pam.d/users-admin
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/users-admin
+##	$(mkinstalldirs) $(DESTDIR)$(bindir)
+##	rm -f $(DESTDIR)$(bindir)/users-admin
+##	ln -s consolehelper $(DESTDIR)$(bindir)/users-admin
+##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
+##	$(INSTALL_DATA) $(srcdir)/users.pam $(DESTDIR)$(sysconfdir)/pam.d/users-admin
+##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
+##	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/users-admin

@@ -9,7 +9,7 @@ INCLUDES = \
 	$(GNOME_XML_CFLAGS)             
 
 
-sbin_PROGRAMS = network-admin
+bin_PROGRAMS = network-admin
 
 network_admin_SOURCES = \
 	main.c \
@@ -70,10 +70,10 @@ install-data-local:
 ##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
 	$(INSTALL_DATA) network.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/network.desktop
 ##	$(INSTALL_DATA) $(srcdir)/network.desktop.cc $(DESTDIR)$(datadir)/control-center/System/network.desktop
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	rm -f $(DESTDIR)$(bindir)/network-admin
-	ln -s consolehelper $(DESTDIR)$(bindir)/network-admin
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
-	$(INSTALL_DATA) $(srcdir)/network.pam $(DESTDIR)$(sysconfdir)/pam.d/network-admin
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/network-admin
+##	$(mkinstalldirs) $(DESTDIR)$(bindir)
+##	rm -f $(DESTDIR)$(bindir)/network-admin
+##	ln -s consolehelper $(DESTDIR)$(bindir)/network-admin
+##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
+##	$(INSTALL_DATA) $(srcdir)/network.pam $(DESTDIR)$(sysconfdir)/pam.d/network-admin
+##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
+##	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/network-admin

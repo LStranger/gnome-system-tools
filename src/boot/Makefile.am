@@ -10,7 +10,7 @@ INCLUDES = \
 	$(GNOME_XML_CFLAGS)		\
 	$(GAL_CFLAGS)
 
-sbin_PROGRAMS = boot-admin
+bin_PROGRAMS = boot-admin
 
 boot_admin_SOURCES = \
 	main.c \
@@ -75,10 +75,10 @@ install-data-local: $(desktop).menu $(desktop).cc
 ##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
 	$(INSTALL_DATA) boot.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/boot.desktop
 ##	$(INSTALL_DATA) $(srcdir)/boot.desktop.cc $(DESTDIR)$(datadir)/control-center/System/boot.desktop
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	rm -f $(DESTDIR)$(bindir)/boot-admin
-	ln -s consolehelper $(DESTDIR)$(bindir)/boot-admin
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
-	$(INSTALL_DATA) $(srcdir)/boot.pam $(DESTDIR)$(sysconfdir)/pam.d/boot-admin
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/boot-admin
+##	$(mkinstalldirs) $(DESTDIR)$(bindir)
+##	rm -f $(DESTDIR)$(bindir)/boot-admin
+##	ln -s consolehelper $(DESTDIR)$(bindir)/boot-admin
+##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
+##	$(INSTALL_DATA) $(srcdir)/boot.pam $(DESTDIR)$(sysconfdir)/pam.d/boot-admin
+##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
+##	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/boot-admin

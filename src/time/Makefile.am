@@ -11,7 +11,7 @@ INCLUDES = \
 	$(LIBGLADE_CFLAGS)		\
 	$(GNOME_XML_CFLAGS)
 
-sbin_PROGRAMS = time-admin
+bin_PROGRAMS = time-admin
 
 time_admin_SOURCES = \
 	main.c            time-tool.h \
@@ -76,10 +76,10 @@ install-data-local:
 ##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
 	$(INSTALL_DATA) time.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/time.desktop
 ##	$(INSTALL_DATA) $(srcdir)/time.desktop.cc $(DESTDIR)$(datadir)/control-center/System/time.desktop
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	rm -f $(DESTDIR)$(bindir)/time-admin
-	ln -s consolehelper $(DESTDIR)$(bindir)/time-admin
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
-	$(INSTALL_DATA) $(srcdir)/time.pam $(DESTDIR)$(sysconfdir)/pam.d/time-admin
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/time-admin
+##	$(mkinstalldirs) $(DESTDIR)$(bindir)
+##	rm -f $(DESTDIR)$(bindir)/time-admin
+##	ln -s consolehelper $(DESTDIR)$(bindir)/time-admin
+##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
+##	$(INSTALL_DATA) $(srcdir)/time.pam $(DESTDIR)$(sysconfdir)/pam.d/time-admin
+##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
+##	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/time-admin
