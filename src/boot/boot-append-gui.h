@@ -39,8 +39,8 @@ typedef struct
 	   GtkRadioButton *append_vga_manual;
 	   GtkRadioButton *append_vga_ask;
 
-	   GtkOptionMenu *append_menu_colors;
-	   GtkOptionMenu *append_menu_res;
+	   GtkComboBox   *append_menu_colors;
+	   GtkComboBox   *append_menu_res;
 	   
 	   GtkLabel      *append_label_colors;
 	   GtkLabel      *append_label_res;

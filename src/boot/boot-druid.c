@@ -123,8 +123,9 @@ start_page_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 identity_check (BootDruid *druid)
 {
-	const gchar *label = gtk_entry_get_text (druid->gui->name);
-	gboolean enabled = (strlen (label) > 0)? TRUE: FALSE;
+	const gchar *label    = gtk_entry_get_text (druid->gui->name);
+	gint         selected = gtk_combo_box_get_active (GTK_COMBO_BOX (druid->gui->type));
+	gboolean     enabled  = ((strlen (label) > 0) && (selected != -1))? TRUE: FALSE;
 	
 	gnome_druid_set_buttons_sensitive (druid->druid, TRUE, enabled, TRUE, FALSE);
 }
@@ -169,18 +170,18 @@ identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 		return TRUE;
 	}
 
-	buf = gtk_entry_get_text (GTK_ENTRY (config->gui->type->entry));
+	buf = boot_settings_get_type (config->gui);
 	type = label_to_type (buf);
 
 	if (type == TYPE_LINUX)
 	{
-		gst_ui_entry_set_text (config->gui->root->entry, "");
+		gst_ui_entry_set_text (GTK_BIN (config->gui->root)->child, "");
 		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
 								    "druidImagePage"));
 	}
 	else
 	{
-		gst_ui_entry_set_text (config->gui->device->entry, "");
+		gst_ui_entry_set_text (GTK_BIN (config->gui->device)->child, "");
 		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
 								    "druidOtherPage"));
 	}
@@ -193,7 +194,7 @@ identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 other_check (BootDruid *druid)
 {
-	const gchar *buf = gtk_entry_get_text (GTK_ENTRY (druid->gui->device->entry));
+	const gchar *buf = gtk_entry_get_text (GTK_ENTRY (GTK_BIN (druid->gui->device)->child));
 	gboolean enabled = (strlen (buf) > 0)? TRUE: FALSE;
 
 	/* TODO: Improve check */ 
@@ -217,7 +218,7 @@ other_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	gtk_window_set_title (GTK_WINDOW (config), title);
 	g_free (title);
 
-	gtk_widget_grab_focus (config->gui->device->entry);
+	gtk_widget_grab_focus (GTK_BIN (config->gui->device)->child);
 	g_signal_stop_emission_by_name (page, "prepare");
 	other_check (config);
 }
@@ -249,7 +250,7 @@ static void
 image_check (BootDruid *druid)
 {
 	const gchar *buf = gtk_entry_get_text (druid->gui->image_entry);
-	const gchar *buf2 = gtk_entry_get_text (GTK_ENTRY (druid->gui->root->entry));
+	const gchar *buf2 = gtk_entry_get_text (GTK_ENTRY (GTK_BIN (druid->gui->root)->child));
 	gboolean enabled = ((strlen (buf) > 0) && (strlen (buf2) > 0))?TRUE : FALSE;
 	
 	/* TODO: Improve check */ 
@@ -369,7 +370,7 @@ druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 	const gchar      *buf;
 	BootDruid        *config = data;
 
-	buf = gtk_entry_get_text (GTK_ENTRY (config->gui->type->entry));
+	buf = boot_settings_get_type (config->gui);
 	type = label_to_type (buf);
 
 	if (type == TYPE_LINUX)
@@ -485,25 +486,24 @@ construct (BootDruid *druid)
 	gtk_box_set_child_packing (GTK_BOX (vbox), widget, TRUE, TRUE, 0, GTK_PACK_START);
 		
 	boot_settings_gui_setup (druid->gui, NULL);
-	gtk_combo_set_popdown_strings (druid->gui->type, settings_type_list ());
+	boot_settings_fill_type_list (druid->gui);
 	
 	/* Connect druid specific signals. */
-	
 	g_signal_connect (G_OBJECT (druid->gui->name), "changed",
 			  G_CALLBACK (identity_changed), druid);
-	g_signal_connect (G_OBJECT (druid->gui->type->entry), "activate",
-			  G_CALLBACK (druid_entry_activate), druid);
+	g_signal_connect (G_OBJECT (druid->gui->type), "changed",
+			  G_CALLBACK (identity_changed), druid);
 	
 	g_signal_connect (G_OBJECT (druid->gui->image_entry), "changed",
 			  G_CALLBACK (image_changed), druid);
-	g_signal_connect (G_OBJECT (druid->gui->root->entry), "changed",
+	g_signal_connect (G_OBJECT (GTK_BIN (druid->gui->root)->child), "changed",
 			  G_CALLBACK (image_changed), druid);
 	g_signal_connect (G_OBJECT (druid->gui->append), "activate",
 			  G_CALLBACK (druid_entry_activate), druid);
 
-	g_signal_connect (G_OBJECT (druid->gui->device->entry), "changed",
+	g_signal_connect (G_OBJECT (GTK_BIN (druid->gui->device)->child), "changed",
 			  G_CALLBACK (other_changed), druid);
-	g_signal_connect (G_OBJECT (druid->gui->device->entry), "activate",
+	g_signal_connect (G_OBJECT (GTK_BIN (druid->gui->device)->child), "activate",
 			  G_CALLBACK (druid_entry_activate), druid);
 
 	return TRUE;

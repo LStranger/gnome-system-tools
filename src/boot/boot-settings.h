@@ -14,13 +14,13 @@ typedef struct {
 	/* Basic frame */
 	GtkWidget *basic_frame;
 	GtkEntry  *name;
-	GtkCombo  *type;
+	GtkWidget *type;
 
 	/* Image frame */
 	GtkWidget *image_frame;
 	GtkWidget *image_widget;
 	GtkEntry  *image_entry;
-	GtkCombo  *root;
+	GtkWidget *root;
 	GtkWidget *initrd_label;
 	GtkWidget *initrd_widget;
 	GtkEntry  *initrd_entry;
@@ -36,7 +36,7 @@ typedef struct {
 	
 	/* Other frame */
 	GtkWidget *other_frame;
-	GtkCombo  *device;
+	GtkWidget *device;
 	
 } BootSettingsGui;
 
@@ -47,11 +47,14 @@ typedef struct _BootImageEditor
 	BootSettingsGui *gui;
 } BootImageEditor;
 
-BootSettingsGui *boot_settings_gui_new      (BootImage *image, GtkWidget *parent);
-void             boot_settings_gui_setup    (BootSettingsGui *gui, GtkWidget *top);
-gboolean         boot_settings_gui_save     (BootSettingsGui *gui, gboolean check);
-void             boot_settings_gui_error    (GtkWindow *parent, gchar *error);
-void             boot_settings_gui_destroy  (BootSettingsGui *gui);
-GList            *settings_type_list        (void);
+BootSettingsGui *boot_settings_gui_new        (BootImage *image, GtkWidget *parent);
+void             boot_settings_gui_setup      (BootSettingsGui *gui, GtkWidget *top);
+gboolean         boot_settings_gui_save       (BootSettingsGui *gui, gboolean check);
+void             boot_settings_gui_error      (GtkWindow *parent, gchar *error);
+void             boot_settings_gui_destroy    (BootSettingsGui *gui);
+
+void             boot_settings_fill_type_list (BootSettingsGui*);
+const gchar*     boot_settings_get_type       (BootSettingsGui*);
+void             boot_settings_set_type       (BootSettingsGui*, gchar*);
 
 #endif /* BOOT_SETTINGS_H */

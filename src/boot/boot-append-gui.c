@@ -133,6 +133,28 @@ on_append_others_toggle (GtkCheckButton *append_others, gpointer data)
 			 gtk_widget_set_sensitive (GTK_WIDGET (gui->append_entry_others), TRUE);
 }
 
+static void
+fill_colors_menu (BootAppendGui *gui)
+{
+	   gtk_combo_box_append_text (gui->append_menu_colors, "256");
+	   gtk_combo_box_append_text (gui->append_menu_colors, _("32,768"));
+	   gtk_combo_box_append_text (gui->append_menu_colors, _("65,536"));
+	   gtk_combo_box_append_text (gui->append_menu_colors, _("16,777,216"));
+
+	   gtk_combo_box_set_active (gui->append_menu_colors, 0);
+}
+
+static void
+fill_resolution_menu (BootAppendGui *gui)
+{
+	   gtk_combo_box_append_text (gui->append_menu_res, "640x480");
+	   gtk_combo_box_append_text (gui->append_menu_res, "800x600");
+	   gtk_combo_box_append_text (gui->append_menu_res, "1024x768");
+	   gtk_combo_box_append_text (gui->append_menu_res, "1280x1024");
+
+	   gtk_combo_box_set_active (gui->append_menu_res, 0);
+}
+
 BootAppendGui *
 boot_append_gui_new (BootSettingsGui *settings, GtkWidget *parent)
 {
@@ -153,9 +175,9 @@ boot_append_gui_new (BootSettingsGui *settings, GtkWidget *parent)
 	   gui->append_vga_ask     = GTK_RADIO_BUTTON (glade_xml_get_widget (gui->xml, "append_vga_ask"));
 	   
 	   gui->append_label_colors = GTK_LABEL (glade_xml_get_widget (gui->xml, "append_label_colors"));
-	   gui->append_menu_colors  = GTK_OPTION_MENU (glade_xml_get_widget (gui->xml, "append_menu_colors"));
+	   gui->append_menu_colors  = GTK_COMBO_BOX (glade_xml_get_widget (gui->xml, "append_menu_colors"));
 	   gui->append_label_res    = GTK_LABEL (glade_xml_get_widget (gui->xml, "append_label_res"));
-	   gui->append_menu_res     = GTK_OPTION_MENU (glade_xml_get_widget (gui->xml, "append_menu_res"));
+	   gui->append_menu_res     = GTK_COMBO_BOX (glade_xml_get_widget (gui->xml, "append_menu_res"));
 	   
 	   /* Scsi Emulation Devices */
 	   gui->append_scsi     = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "append_scsi"));
@@ -179,6 +201,10 @@ boot_append_gui_new (BootSettingsGui *settings, GtkWidget *parent)
 					 G_CALLBACK (on_append_scsi_toggle), (gpointer) gui);
 	   g_signal_connect (G_OBJECT (gui->append_others), "toggled",
 					 G_CALLBACK (on_append_others_toggle), (gpointer) gui);
+
+	   /* Fill combo boxes */
+	   fill_colors_menu (gui);
+	   fill_resolution_menu (gui);
 	   
 	   return gui;
 }
@@ -258,16 +284,16 @@ append_gui_vga_setup (BootAppendGui *gui, gchar *vga)
 	   switch (vga_num)
 	   {
 	   case 769: case 784: case 785: case 786:
-			 gtk_option_menu_set_history (gui->append_menu_res, 0);
+			 gtk_combo_box_set_active (gui->append_menu_res, 0);
 			 break;
 	   case 771: case 787: case 788: case 789:
-			 gtk_option_menu_set_history (gui->append_menu_res, 1);
+			 gtk_combo_box_set_active (gui->append_menu_res, 1);
 			 break;
 	   case 773: case 790: case 791: case 792:
-			 gtk_option_menu_set_history (gui->append_menu_res, 2);
+			 gtk_combo_box_set_active (gui->append_menu_res, 2);
 			 break;
 	   case 775: case 793: case 794: case 795:
-			 gtk_option_menu_set_history (gui->append_menu_res, 3);
+			 gtk_combo_box_set_active (gui->append_menu_res, 3);
 			 break;
 	   default:
 			 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->append_vga), FALSE);
@@ -276,16 +302,16 @@ append_gui_vga_setup (BootAppendGui *gui, gchar *vga)
 	   switch (vga_num)
 	   {
 	   case 769: case 771: case 773: case 775:
-			 gtk_option_menu_set_history (gui->append_menu_colors, 0);
+			 gtk_combo_box_set_active (gui->append_menu_colors, 0);
 			 break;
 	   case 784: case 787: case 790: case 793:
-			 gtk_option_menu_set_history (gui->append_menu_colors, 1);
+			 gtk_combo_box_set_active (gui->append_menu_colors, 1);
 			 break;
 	   case 785: case 788: case 791: case 794:
-			 gtk_option_menu_set_history (gui->append_menu_colors, 2);
+			 gtk_combo_box_set_active (gui->append_menu_colors, 2);
 			 break;
 	   case 786: case 789: case 792: case 795:
-			 gtk_option_menu_set_history (gui->append_menu_colors, 3);
+			 gtk_combo_box_set_active (gui->append_menu_colors, 3);
 			 break;
 	   default:
 			 boot_append_vga_error (gui->top, vga);
@@ -416,8 +442,8 @@ boot_append_gui_save (BootAppendGui *gui, gchar **append_string)
 			 strcat (append, "vga=");
 			 if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gui->append_vga_manual)))
 			 {
-				    strcat (append, vga_table[gtk_option_menu_get_history (gui->append_menu_colors)]
-						  [gtk_option_menu_get_history (gui->append_menu_res)]);
+				    strcat (append, vga_table[gtk_combo_box_get_active (gui->append_menu_colors)]
+						  [gtk_combo_box_get_active (gui->append_menu_res)]);
 			 }	 
 			 else
 				    strcat (append, "ask");
