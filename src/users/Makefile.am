@@ -23,7 +23,14 @@ $(LIBGLADE_LIBS) \
 $(INTLLIBS) \
 ../common/libsetuptool.a
 
-EXTRA_DIST = users.desktop
+desktop = users.desktop
+
+EXTRA_DIST = $(desktop)
+
+CLEANFILES = $(desktop)
+
+$(desktop): %.desktop: %.desktop.in
+	sed 's#Icon=.*#Icon='$(pixmapsdir)'/users.png#' < $< > $@
 
 sysdir = $(datadir)/control-center/System
 sys_DATA = users.desktop
