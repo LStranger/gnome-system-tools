@@ -251,12 +251,12 @@ main (int argc, char *argv[])
 	
 	struct poptOption options[] =
 	{
-		{ "new-connection", '\0', 0, &connection, 0, _("Run the connection druid."), NULL },
-		{ "ppp-connection", '\0', 0, &ppp_connection, 0, _("Run the PPP connection druid."), NULL },
-		{ "eth-connection", '\0', 0, &eth_connection, 0, _("Run the ethernet connection druid."), NULL },
-		{ "wlan-connection", '\0', 0, &wlan_connection, 0, _("Run the wlan connection druid."), NULL },
-		{ "plip-connection", '\0', 0, &plip_connection, 0, _("Run the parallel port connection druid."), NULL },
-		{ "irlan-connection", '\0', 0, &irlan_connection, 0, _("Run the irlan connection druid."), NULL },
+		{ "new-connection", '\0', 0, &connection, 0, _("Run the connection assistant."), NULL },
+		{ "ppp-connection", '\0', 0, &ppp_connection, 0, _("Run the PPP connection assistant."), NULL },
+		{ "eth-connection", '\0', 0, &eth_connection, 0, _("Run the ethernet connection assistant."), NULL },
+		{ "wlan-connection", '\0', 0, &wlan_connection, 0, _("Run the wlan connection assistant."), NULL },
+		{ "plip-connection", '\0', 0, &plip_connection, 0, _("Run the parallel port connection assistant."), NULL },
+		{ "irlan-connection", '\0', 0, &irlan_connection, 0, _("Run the irlan connection assistant."), NULL },
 		{ "configure", '\0', POPT_ARG_STRING, &interface, 0, _("Configure a network interface"), _("interface") },
 		
 		{NULL, '\0', 0, NULL, 0}

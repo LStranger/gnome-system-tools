@@ -404,7 +404,7 @@ construct (BootDruid *druid)
 	druid->druid = GNOME_DRUID (widget);
 	
 	/* set window title */
-	gtk_window_set_title (GTK_WINDOW (druid), _("Boot Image Wizard"));
+	gtk_window_set_title (GTK_WINDOW (druid), _("Creating a new boot image"));
 	gtk_window_set_modal (GTK_WINDOW (druid), TRUE);
 
 	/* attach to druid page signals */
