@@ -1040,13 +1040,13 @@ on_volume_format_value (GtkWidget *widget, gdouble value, gpointer data)
 	gchar *string;
 	
 	if (value == 0)
-		string = g_strdup_printf ("Silent");
+		string = g_strdup_printf (_("Silent"));
 	else if (value == 1)
-		string = g_strdup_printf ("Low");
+		string = g_strdup_printf (_("Low"));
 	else if (value == 2)
-		string = g_strdup_printf ("Medium");
+		string = g_strdup_printf (_("Medium"));
 	else if (value == 3)
-		string = g_strdup_printf ("Loud");
+		string = g_strdup_printf (_("Loud"));
 
 	return string;
 }
