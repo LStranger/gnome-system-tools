@@ -327,15 +327,15 @@
 	  <class>GtkTable</class>
 	  <name>table2</name>
 	  <border_width>5</border_width>
-	  <rows>2</rows>
+	  <rows>3</rows>
 	  <columns>3</columns>
 	  <homogeneous>False</homogeneous>
-	  <row_spacing>5</row_spacing>
+	  <row_spacing>4</row_spacing>
 	  <column_spacing>6</column_spacing>
 
 	  <widget>
 	    <class>GtkCombo</class>
-	    <name>timezone_combo</name>
+	    <name>location_combo</name>
 	    <width>356</width>
 	    <signal>
 	      <name>set_focus_child</name>
@@ -346,43 +346,13 @@
 	    <ok_if_empty>False</ok_if_empty>
 	    <case_sensitive>False</case_sensitive>
 	    <use_arrows>True</use_arrows>
-	    <use_arrows_always>False</use_arrows_always>
-	    <items>(GMT -1100) Midway Island, Samoa
-(GMT -1000) Hawaii
-(GMT -0900) Alaska
-(GMT -0800) Pacific Time (US &amp; Canada); Tijuana
-(GMT -0700) Arizona
-(GMT -0600) Central Time (US &amp; Canada); Mexico City, Tegucigalpa, Saskatchewan
-(GMT -0500) Eastern Time (US &amp; Canada); Bogota, Lima, Quito
-(GMT -0400) Atlantic Time (Canada); Caracas, La Paz, Santiago
-(GMT -0345) Guyana
-(GMT -0300) Brazil
-(GMT -0200) Mid-Atlantic
-(GMT -0100) Azores, Cape Verde Islands
-(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lisbon, London
-(GMT +0100) Amsterdam, Berlin, Bern, Rome, Oslo, Vienna
-(GMT +0200) Athens, Istanbul, Minsk, Bucharest, Cairo
-(GMT +0300) Baghdad, Kuwait, Moscow, Volgograd
-(GMT +0330) Tehran
-(GMT +0400) Abu Dhabi, Muscat, Baku, Tblisi
-(GMT +0430) Kabul
-(GMT +0500) Ekaterinburg, Islamabad, Karachi
-(GMT +0530) Bombay, Calcutta, Madras, New Delhi
-(GMT +0600) Astana, Almaty, Dhaka, Colombo
-(GMT +0630) Rangoon, Kuala Lumpur
-(GMT +0700) Bangkok, Hanoi, Jakarta
-(GMT +0800) Singapore, Taipei
-(GMT +0900) Seoul, Yakutsk
-(GMT +0930) Adelaide, Darwin
-(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok
-(GMT +1100) Magadan, Solomon Islands, New Caledonia
-(GMT +1200) Auckland, Wellington, Fiji, Kamchatka
-</items>
+	    <use_arrows_always>True</use_arrows_always>
+	    <items></items>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>3</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>True</xexpand>
@@ -401,7 +371,7 @@
 	      <editable>False</editable>
 	      <text_visible>True</text_visible>
 	      <text_max_length>0</text_max_length>
-	      <text>(GMT -1000) Hawaii</text>
+	      <text></text>
 	    </widget>
 	  </widget>
 
@@ -437,6 +407,31 @@
 		<class>Placeholder</class>
 	      </widget>
 	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>location_hover</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <editable>False</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>3</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
 	  </widget>
 	</widget>
 
