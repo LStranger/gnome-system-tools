@@ -114,12 +114,11 @@ update_notebook_complexity (XstDialogComplexity complexity)
 	notebook = GTK_NOTEBOOK (xst_dialog_get_widget (tool->main_dialog, "network_admin"));
 	hosts    = xst_dialog_get_widget (tool->main_dialog, "hosts_container");
 	pageno   = gtk_notebook_page_num (notebook, hosts);
-
-	if (pageno == -1)
-		return;
-		       
+	
 	switch (complexity) {
 	case XST_DIALOG_BASIC:
+		g_return_if_fail (pageno != -1);
+
 		if (gtk_notebook_get_current_page (notebook) == pageno)
 			gtk_notebook_set_page (notebook, pageno - 1);
 		gtk_widget_ref (hosts);
@@ -127,6 +126,9 @@ update_notebook_complexity (XstDialogComplexity complexity)
 		gtk_notebook_remove_page (notebook, pageno);
 		break;
 	case XST_DIALOG_ADVANCED:
+		if (pageno != -1)
+			return;
+
 		gtk_notebook_append_page (notebook, hosts,
 					  gtk_label_new (_("Hosts")));
 		gtk_widget_unref (hosts);
