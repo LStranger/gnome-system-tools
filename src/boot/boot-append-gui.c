@@ -28,7 +28,6 @@
 #include <gnome.h>
 
 #include "gst.h"
-#include "gst-hig-dialog.h"
 #include "callbacks.h"
 #include "boot-append-gui.h"
 
@@ -246,15 +245,13 @@ boot_append_vga_error (GtkWidget *parent, gchar *vga)
 {
 	   GtkWidget *dialog;
 
-	   dialog = gst_hig_dialog_new (GTK_WINDOW (parent),
-							  GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
-							  GST_HIG_MESSAGE_ERROR,
-							  _("Invalid VGA value"),
-							  NULL,
-							  GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-							  NULL);
-	   gst_hig_dialog_set_secondary_text (GST_HIG_DIALOG (dialog),
-								   _("\"%s\" is not a valid VGA value"), vga);
+	   dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
+								 GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+								 GTK_MESSAGE_ERROR,
+								 GTK_BUTTONS_CLOSE,
+								 _("Invalid VGA value"));
+	   gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+										_("\"%s\" is not a valid VGA value"), vga);
 	   gtk_dialog_run (GTK_DIALOG (dialog));
 	   gtk_widget_destroy (dialog);
 }

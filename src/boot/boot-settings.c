@@ -29,7 +29,6 @@
 #include <gnome.h>
 
 #include "gst.h"
-#include "gst-hig-dialog.h"
 #include "callbacks.h"
 #include "boot-settings.h"
 #include "table.h"
@@ -427,13 +426,13 @@ boot_settings_gui_error (GtkWindow *parent, gchar *error)
 {
 	GtkWidget *d;
 
-	d = gst_hig_dialog_new (parent,
-				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				GST_HIG_MESSAGE_ERROR,
-				_("Error modifying boot image"),
-				error,
-				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-				NULL);
+	d = gtk_message_dialog_new (parent,
+				    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				    GTK_MESSAGE_ERROR,
+				    GTK_BUTTONS_CLOSE,
+				    _("Error modifying boot image"));
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d), error);
+
 	gtk_dialog_run (GTK_DIALOG (d));
 	gtk_widget_destroy (d);
 }
