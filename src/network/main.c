@@ -135,6 +135,7 @@ static const GstWidgetPolicy policies[] = {
 	{ "dns_list_label",          GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "search_list",             GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "search_list_label",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "network_profiles_button", GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, TRUE  },
 	{ NULL }
 };
 
