@@ -18,6 +18,9 @@
  * Authors: Hans Petter Jansson <hpj@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
 
+#ifndef __CALLBACKS_H__
+#define __CALLBACKS_H__
+
 #include <gnome.h>
 #include <tree.h>
 
@@ -83,3 +86,5 @@ gboolean callbacks_check_hostname_hook     (XstDialog *dialog, gpointer data);
 gboolean callbacks_update_connections_hook (XstDialog *dialog, gpointer data);
 gboolean callbacks_check_dialer_hook       (XstDialog *dialog, gpointer data);
 gboolean callbacks_check_gateway_hook      (XstDialog *dialog, gpointer data);
+
+#endif /*  __CALLBACKS_H__  */
