@@ -18,6 +18,7 @@ CLEANFILES = $(XST_TOOL_CLEANFILES)
 EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
 
 boot_admin_LDADD = $(XST_TOOL_LIBS)
+boot_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES)
 boot_admin_SOURCES = \
 	main.c \
 	callbacks.c 		callbacks.h \

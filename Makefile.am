@@ -9,6 +9,7 @@ DESKTOP_FILES=$(DESKTOP_IN_FILES:.desktop.in=.desktop)
 
 EXTRA_DIST = \
 	HACKING 		\
+	BUGS			\
 	ximian-setup-tools.spec \
 	xml-i18n-extract.in	\
 	xml-i18n-merge.in 	\

@@ -18,6 +18,7 @@ CLEANFILES = $(XST_TOOL_CLEANFILES)
 EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
 
 users_admin_LDADD = $(XST_TOOL_LIBS) ./e-search-bar/libesearchbar.a
+users_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES) ./e-search-bar/libesearchbar.a
 users_admin_SOURCES = \
 	main.c \
 	callbacks.c callbacks.h \

@@ -152,10 +152,10 @@ dnl =====================================================
 XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
 XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
 
-XST_TOOL_LIBS="../common/libsetuptool.a $XST_LIBS"
+XST_TOOL_LIBS="$XST_LIBS \$(top_srcdir)/src/common/libsetuptool.a "
 XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
 
-XST_TOOL_CLEANFILES="\$(desktop) $(desktop).in"
+XST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
 XST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(desktop).in \$(desktop) \$(etspecs)"
 
 AC_DEFUN(AC_PROG_XST_TOOLS,
@@ -178,6 +178,7 @@ exec 5>>./config.log
 ])
 AC_PROG_XST_TOOLS
 
+XST_TOOL_DEPENDENCIES="\$(top_srcdir)/src/common/libsetuptool.a"
 
 AC_SUBST(XST_LIBS)
 AC_SUBST(XST_CFLAGS)
@@ -185,6 +186,7 @@ AC_SUBST(XST_TOOL_LIBS)
 AC_SUBST(XST_TOOL_CFLAGS)
 AC_SUBST(XST_TOOL_CLEANFILES)
 AC_SUBST(XST_TOOL_EXTRA_DIST)
+AC_SUBST(XST_TOOL_DEPENDENCIES)
 
 dnl ==================================
 dnl END: XST_LIBS & XST_FLAGS

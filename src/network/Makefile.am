@@ -17,7 +17,8 @@ INCLUDES = $(XST_TOOL_CFLAGS)
 CLEANFILES = $(XST_TOOL_CLEANFILES)
 EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
 
-network_admin_LDADD = $(XST_TOOL_LIBS)
+network_admin_LDADD = $(XST_TOOL_LIBS) 
+network_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES)
 network_admin_SOURCES = \
 	main.c \
 	callbacks.c	callbacks.h	\
