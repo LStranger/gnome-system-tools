@@ -26,12 +26,11 @@ gchar *s = N_("Partition Settings");
 gchar *s = N_("Type:");
 gchar *s = N_("Device:");
 gchar *s = N_("Mount point:");
-gchar *s = N_("Automatic (detect when mounting)\n"
-              "Ext2 (Linux)\n"
-              "FAT (DOS)\n"
-              "VFAT (Windows 95 and newer)\n"
-              "FAT32 (Windows 98 and newer)\n"
-              "NTFS (Windows NT & 2000)\n"
-              "");
+gchar *s = N_("Automatic (detect when mounting)");
+gchar *s = N_("Ext2 (Linux)");
+gchar *s = N_("FAT (DOS)");
+gchar *s = N_("VFAT (Windows 95 and newer)");
+gchar *s = N_("FAT32 (Windows 98 and newer)");
+gchar *s = N_("NTFS (Windows NT & 2000)");
 gchar *s = N_("Choose a mount point");
 gchar *s = N_("Check for errors on startup");

@@ -21,9 +21,8 @@ gchar *s = N_("Device");
 gchar *s = N_("Size");
 gchar *s = N_("Path:");
 gchar *s = N_("Size:");
-gchar *s = N_("Swap Partition\n"
-              "Swap File\n"
-              "");
+gchar *s = N_("Swap Partition");
+gchar *s = N_("Swap File");
 gchar *s = N_("Megabytes");
 gchar *s = N_("Enable this swap space");
 gchar *s = N_("Use non-default priority:");

@@ -52,9 +52,8 @@ gchar *s = N_("Path:");
 gchar *s = N_("User:");
 gchar *s = N_("Password:");
 gchar *s = N_("Mount point:");
-gchar *s = N_("SMB\n"
-              "NFS\n"
-              "");
+gchar *s = N_("SMB");
+gchar *s = N_("NFS");
 gchar *s = N_("Choose a mount point");
 gchar *s = N_("SMB Export Settings");
 gchar *s = N_("Local path:");
