@@ -175,10 +175,36 @@ add_spacer (SearchBar *sb)
 static void
 add_search_button (SearchBar *sb)
 {
-	sb->search_button = gtk_button_new_with_label (_("Search"));
+	GtkWidget *search_button_label, *search_button_image,
+	*search_button_hbox, *search_button_hbox_align;
+
+	/* default i18nized stock button would certainly conflict with other
+	buttons so we create our own*/
+	sb->search_button = gtk_button_new ();
+
+	search_button_hbox_align = gtk_alignment_new (0.50, 0.50, 1.0, 1.0);
+	gtk_container_add (GTK_CONTAINER (GTK_BUTTON (sb->search_button)),
+	GTK_WIDGET (GTK_ALIGNMENT (search_button_hbox_align)));
+
+	search_button_hbox = gtk_hbox_new (FALSE, 2);
+	gtk_container_add (GTK_CONTAINER (GTK_ALIGNMENT	(
+	search_button_hbox_align)), GTK_WIDGET (GTK_HBOX (
+	search_button_hbox)));
+
+	search_button_image = gtk_image_new_from_stock (GTK_STOCK_FIND,
+						        GTK_ICON_SIZE_BUTTON);
+	gtk_box_pack_start (GTK_BOX (GTK_HBOX (search_button_hbox)),
+			    GTK_WIDGET (GTK_IMAGE (search_button_image)),
+			    FALSE, FALSE, 0);
+
+	search_button_label = gtk_label_new_with_mnemonic (_("_Search"));
+	gtk_box_pack_start (GTK_BOX (GTK_HBOX (search_button_hbox)),
+			    GTK_WIDGET (GTK_LABEL (search_button_label)),
+			    FALSE, FALSE, 0);
+
 	g_signal_connect (G_OBJECT (sb->search_button), "clicked",
 			  G_CALLBACK (entry_activated_cb), sb);
-	gtk_widget_show (sb->search_button);
+	gtk_widget_show_all (sb->search_button);
 	gtk_widget_set_sensitive (sb->search_button, FALSE);
 	gtk_box_pack_start (GTK_BOX (sb), sb->search_button, FALSE, FALSE, 0);
 	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->search_button);
@@ -187,10 +213,36 @@ add_search_button (SearchBar *sb)
 static void
 add_clear_button (SearchBar *sb)
 {
-	sb->clear_button = gtk_button_new_with_label (_("Clear"));
+	GtkWidget *clear_button_label, *clear_button_image, *clear_button_hbox,
+	*clear_button_hbox_align;
+
+	/* default i18nized stock button would certainly conflict with other
+	buttons so we create our own*/
+	sb->clear_button = gtk_button_new ();
+
+	clear_button_hbox_align = gtk_alignment_new (0.50, 0.50, 1.0, 1.0);
+	gtk_container_add (GTK_CONTAINER (GTK_BUTTON (sb->clear_button)),
+	GTK_WIDGET (GTK_ALIGNMENT (clear_button_hbox_align)));
+
+	clear_button_hbox = gtk_hbox_new (FALSE, 2);
+	gtk_container_add (GTK_CONTAINER (GTK_ALIGNMENT	(
+	clear_button_hbox_align)), GTK_WIDGET (GTK_HBOX (
+	clear_button_hbox)));
+
+	clear_button_image = gtk_image_new_from_stock (GTK_STOCK_CLEAR,
+						       GTK_ICON_SIZE_BUTTON);
+	gtk_box_pack_start (GTK_BOX (GTK_HBOX (clear_button_hbox)),
+			    GTK_WIDGET (GTK_IMAGE (clear_button_image)),
+			    FALSE, FALSE, 0);
+
+	clear_button_label = gtk_label_new_with_mnemonic (_("C_lear"));
+	gtk_box_pack_start (GTK_BOX (GTK_HBOX (clear_button_hbox)),
+			    GTK_WIDGET (GTK_LABEL (clear_button_label)),
+			    FALSE, FALSE, 0);
+
 	g_signal_connect (G_OBJECT (sb->clear_button), "clicked",
 			  G_CALLBACK (clear_button_clicked_cb), sb);
-	gtk_widget_show (sb->clear_button);
+	gtk_widget_show_all (sb->clear_button);
 	gtk_box_pack_start (GTK_BOX (sb), sb->clear_button, FALSE, FALSE, 0);
 	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->clear_button);
 }
