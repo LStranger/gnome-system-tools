@@ -5,12 +5,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools 0.2.0\n"
-"POT-Creation-Date: 2000-12-01 09:44+0100\n"
-"PO-Revision-Date: 2000-12-01 10:31+01:00\n"
-"Last-Translator: Róbert Ványi <robi@mora.u-szeged.hu>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
+"POT-Creation-Date: 2000-12-14 12:30+0100\n"
+"PO-Revision-Date: 2000-12-14 12:36+01:00\n"
+"Last-Translator: Emese Kovacs <emese@gnome.hu>\n"
+"Language-Team: Hungarian <hu@gnome.hu>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=iso8859-2\n"
+"Content-Type: text/plain; charset=ISO 8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #.
@@ -18,7 +18,7 @@ msgstr ""
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: interfaces/common.glade.h:7 interfaces/common.glade.h:10
+#: interfaces/common.glade.h:7 interfaces/common.glade.h:12
 msgid "Helix Setup Tools"
 msgstr "Helix Setup Tools"
 
@@ -26,11 +26,19 @@ msgstr "Helix Setup Tools"
 msgid "Scanning your system configuration."
 msgstr "Rendszerkonfiguráció vizsgálata."
 
-#: interfaces/common.glade.h:9 interfaces/common.glade.h:12
+#: interfaces/common.glade.h:9 interfaces/common.glade.h:14
 msgid "%P %%"
 msgstr "%P %%"
 
+#: interfaces/common.glade.h:10
+msgid "label51"
+msgstr "label51"
+
 #: interfaces/common.glade.h:11
+msgid "label52"
+msgstr "label52"
+
+#: interfaces/common.glade.h:13
 msgid "Updating your system configuration."
 msgstr "Rendszerkonfiguráció frissítése."
 
@@ -116,7 +124,7 @@ msgstr "Lemezek & partíciók"
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
 #: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:15
 #: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
-#: interfaces/users.glade.h:23 src/common/tool.c:504
+#: interfaces/users.glade.h:23 src/common/tool.c:618
 msgid " Advanced >> "
 msgstr " Haladó >> "
 
@@ -179,7 +187,8 @@ msgstr "Névfeloldás adminisztáció"
 
 #: interfaces/nameresolution.glade.h:8
 msgid "Let the computer know its name, function and network surroundings."
-msgstr "Mondd meg a számítógépnek a nevét, rendeltetését és a hálózai beállításait."
+msgstr ""
+"Mondd meg a számítógépnek a nevét, rendeltetését és a hálózai beállításait."
 
 #: interfaces/nameresolution.glade.h:9
 msgid "Host"
@@ -221,13 +230,12 @@ msgstr "Azonosítás"
 msgid "Domain Name Service (DNS)"
 msgstr "Névfeloldás (DNS)"
 
-#: interfaces/nameresolution.glade.h:21 interfaces/nameresolution.glade.h:31
-#: interfaces/nameresolution.glade.h:50
-msgid "New:"
-msgstr "Új:"
+#: interfaces/nameresolution.glade.h:21
+msgid "New server:"
+msgstr "Új kiszolgáló:"
 
 #: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
-#: interfaces/nameresolution.glade.h:49
+#: interfaces/nameresolution.glade.h:48
 msgid "Existing:"
 msgstr "Létezõ:"
 
@@ -260,6 +268,10 @@ msgstr " Fel"
 msgid "Move Down"
 msgstr " Le"
 
+#: interfaces/nameresolution.glade.h:31
+msgid "New domain:"
+msgstr "Új tartomány:"
+
 #: interfaces/nameresolution.glade.h:33
 msgid "Search Domains"
 msgstr "Alapértelmezett tartományok"
@@ -276,7 +288,7 @@ msgstr "Nevek"
 msgid "New Alias"
 msgstr "Új aliaszok"
 
-#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:207
+#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:255
 msgid "Settings for the selected alias"
 msgstr "A kiválasztott aliasz beállításai"
 
@@ -296,7 +308,11 @@ msgstr "Aliaszok beállításai"
 msgid "IP address:"
 msgstr "IP cím:"
 
-#: interfaces/nameresolution.glade.h:48
+#: interfaces/nameresolution.glade.h:49
+msgid "New:"
+msgstr "Új:"
+
+#: interfaces/nameresolution.glade.h:50
 msgid "label48"
 msgstr "cimke48"
 
@@ -480,7 +496,7 @@ msgstr "Helyi elérési út:"
 msgid "Export name:"
 msgstr "Megosztás neve:"
 
-#: interfaces/shares.glade.h:61 interfaces/users.glade.h:27
+#: interfaces/shares.glade.h:61 interfaces/users.glade.h:28
 msgid "Comment:"
 msgstr "Megjegyzés:"
 
@@ -555,7 +571,7 @@ msgstr ""
 msgid "New User"
 msgstr "Új felhasználó"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:220
+#: interfaces/users.glade.h:11 src/users/callbacks.c:273
 msgid "Settings for the selected user"
 msgstr "A kiválasztott felhasználó beállításai"
 
@@ -565,7 +581,7 @@ msgstr ""
 "A felhasználó jelszavának, vagy egyéb beállításainak, például nevének "
 "megváltoztatása"
 
-#: interfaces/users.glade.h:13 interfaces/users.glade.h:28
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:33
 msgid "Change Password"
 msgstr "Jelszó megváltoztatása"
 
@@ -600,62 +616,82 @@ msgid "User Settings"
 msgstr "Felhasználói beállítások"
 
 #: interfaces/users.glade.h:25
+msgid "Basic settings"
+msgstr "Alapvetõ beállítások"
+
+#: interfaces/users.glade.h:26
 msgid "Main group:"
 msgstr "Fõ csoport:"
 
-#: interfaces/users.glade.h:26
+#: interfaces/users.glade.h:27
 msgid "User name:"
 msgstr "Felhasználó neve:"
 
 #: interfaces/users.glade.h:29
-msgid "New password:"
-msgstr "Új jelszó"
+msgid "Advanced settings"
+msgstr "Haladó beállítások"
 
 #: interfaces/users.glade.h:30
+msgid "Shell:"
+msgstr "Shell:"
+
+#: interfaces/users.glade.h:31
+msgid "User ID:"
+msgstr "Felhasználói azonosító:"
+
+#: interfaces/users.glade.h:32
+msgid "Home directory:"
+msgstr "Saját könyvtár:"
+
+#: interfaces/users.glade.h:34
+msgid "New password:"
+msgstr "Új jelszó:"
+
+#: interfaces/users.glade.h:35
 msgid "Confirmation:"
 msgstr "Megerõsítés:"
 
-#: interfaces/users.glade.h:31
+#: interfaces/users.glade.h:36
 msgid "Check quality."
 msgstr "Minõségellenõrzés."
 
-#: interfaces/users.glade.h:32
+#: interfaces/users.glade.h:37
 msgid "  Random Password  "
 msgstr "  Generált jelszó  "
 
-#: interfaces/users.glade.h:33
+#: interfaces/users.glade.h:38
 msgid "Group Settings"
 msgstr "Csoportbeállítások"
 
-#: interfaces/users.glade.h:34
+#: interfaces/users.glade.h:39
 msgid "Group name:"
 msgstr "Csoport neve:"
 
-#: interfaces/users.glade.h:35
+#: interfaces/users.glade.h:40
 msgid "Members"
 msgstr "Tagok"
 
-#: interfaces/users.glade.h:36
+#: interfaces/users.glade.h:41
 msgid "All Users"
 msgstr "Minden felhasználó"
 
-#: interfaces/users.glade.h:37
+#: interfaces/users.glade.h:42
 msgid "Member Users"
 msgstr "Tagok"
 
-#: interfaces/users.glade.h:38
+#: interfaces/users.glade.h:43
 msgid "Add ->"
 msgstr "Hozzáad ->"
 
-#: interfaces/users.glade.h:39
+#: interfaces/users.glade.h:44
 msgid "Remove <-"
 msgstr "Eltávolít <-"
 
-#: interfaces/users.glade.h:40
+#: interfaces/users.glade.h:45
 msgid "label27"
 msgstr "cimke27"
 
-#: interfaces/users.glade.h:41
+#: interfaces/users.glade.h:46
 msgid "label26"
 msgstr "cimke126"
 
@@ -748,11 +784,11 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Mégse"
 
-#: src/common/tool.c:506
+#: src/common/tool.c:620
 msgid " << Basic "
 msgstr " << Alap "
 
-#: src/common/tool.c:594
+#: src/common/tool.c:715
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -778,7 +814,7 @@ msgstr "Meg kell adnod az új swap terület elérési útvonalát!"
 msgid "It's already used as swap space!"
 msgstr "Ez már használt swap teület!"
 
-#: src/nameresolution/callbacks.c:57
+#: src/nameresolution/callbacks.c:62
 msgid ""
 "The IP address must have the form of four digits\n"
 "sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
@@ -788,57 +824,71 @@ msgstr ""
 "A számok értéke 0 és 255 között lehet, kivéve az elsõt és az utolsót,\n"
 "ami 1 és 254 közé kell essen."
 
-#: src/nameresolution/callbacks.c:193
+#: src/nameresolution/callbacks.c:241
 msgid "Settings for alias of "
 msgstr "A következõ aliasz beállításai:"
 
-#: src/users/callbacks.c:135
+#: src/nameresolution/callbacks.c:302
+#, c-format
+msgid "Settings for Alias %s"
+msgstr "A következõ aliasz beállításai: %s"
+
+#. Changes have been made.
+#: src/nameresolution/callbacks.c:414 src/users/callbacks.c:691
+msgid ""
+"There are changes which haven't been applyed.\n"
+"Apply now?"
+msgstr ""
+"Nincs minden változás alkalmazva.\n"
+"Alkalmazás most?"
+
+#: src/users/callbacks.c:164
 #, c-format
 msgid "Settings for User %s"
 msgstr "A következõ felhasználó beállításai: %s"
 
-#: src/users/callbacks.c:153
+#: src/users/callbacks.c:188
 #, c-format
 msgid "Password for User %s"
 msgstr "%s felhasználó jelszava"
 
-#: src/users/callbacks.c:200
+#: src/users/callbacks.c:252
 msgid "The root user must not be deleted."
 msgstr "A root felhasználót nem szabad törölni!"
 
-#: src/users/callbacks.c:207
+#: src/users/callbacks.c:259
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következõ felhasználót: %s?"
 
-#: src/users/callbacks.c:249
+#: src/users/callbacks.c:311
 #, c-format
 msgid "Settings for Group %s"
 msgstr "A következõ csoport beállításai: %s"
 
-#: src/users/callbacks.c:268
+#: src/users/callbacks.c:331
 msgid "Create New Group"
 msgstr "Új csoport létrehozása"
 
-#: src/users/callbacks.c:294
+#: src/users/callbacks.c:360
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következõ csoportot: %s?"
 
-#: src/users/callbacks.c:414
+#: src/users/callbacks.c:482
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "A beállított jelszó: \"%s\"."
 
 #. Bad confirmation
-#: src/users/callbacks.c:449
+#: src/users/callbacks.c:520
 msgid ""
 "The password and its confirmation\n"
 "must match."
 msgstr "A jelszó mind a két alkalommal meg kell egyezzen."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:455
+#: src/users/callbacks.c:526
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -847,29 +897,20 @@ msgstr ""
 "Rossz jelszó: %s.\n"
 "Próbáld meg másik jelszóval."
 
-#. Changes have been made.
-#: src/users/callbacks.c:620
-msgid ""
-"There are changes which haven't been applyed.\n"
-"Apply now?"
-msgstr ""
-"Nincs minden változás alkalmazva.\n"
-"Alkalmazás most?"
-
-#: src/users/user_group.c:55
+#: src/users/user_group.c:58
 msgid "Username is empty."
 msgstr "Nincs felhasználói név megadva"
 
-#: src/users/user_group.c:72
+#: src/users/user_group.c:74
 #, c-format
 msgid "User %s already exists."
 msgstr "A következõ felhasználó már létezik: %s"
 
-#: src/users/user_group.c:87
+#: src/users/user_group.c:94
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "Kérlek adj meg érvényes felhasználói nevet, csak kisbetûket használj."
 
-#: src/users/user_group.c:120
+#: src/users/user_group.c:128
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from the pull-down menu."
@@ -878,24 +919,24 @@ msgstr ""
 "használj,\n"
 "vagy válassz ki egy csoportot a legördülõ menübõl."
 
-#: src/users/user_group.c:176
+#: src/users/user_group.c:194
 msgid "The username is empty."
 msgstr "Nincs felhasználói név megadva."
 
-#: src/users/user_group.c:307
+#: src/users/user_group.c:330
 msgid "The group name is empty."
 msgstr "Csoportnév nincs megadva."
 
-#: src/users/user_group.c:324
+#: src/users/user_group.c:347
 #, c-format
 msgid "Group %s already exists."
 msgstr "A következõ csoport már létezik: %s."
 
-#: src/users/user_group.c:340
+#: src/users/user_group.c:363
 msgid "Please set a valid group name, with only lower-case letters."
 msgstr "Kérlek adj meg érvényes csoportnevet, csak kisbetûket használj."
 
-#: src/users/user_group.c:382
+#: src/users/user_group.c:409
 msgid "Group name is empty."
 msgstr "Csoportnév nincs megadva."
 
@@ -1018,9 +1059,6 @@ msgstr "Csoportnév nincs megadva."
 
 #~ msgid "Hardware Administration"
 #~ msgstr "Hardver adminisztráció"
-
-#~ msgid "label1"
-#~ msgstr "cimke1"
 
 #~ msgid "Add..."
 #~ msgstr "Hozzáadás..."
