@@ -260,7 +260,7 @@ close_cb (GtkWidget *w, gpointer data)
 		GtkWidget *w;
 		
 		w = gnome_question_dialog_parented (
-			_("There are changes which haven't been applyed.\n"
+			_("There are changes which haven't been applied.\n"
 			  "Apply them now?"),
 			NULL, NULL, GTK_WINDOW (dialog));
 
