@@ -30,6 +30,9 @@
 #include <stdio.h>
 #include <ctype.h>
 
+#include <locale.h>
+#include <langinfo.h>
+
 #include <gnome.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -756,6 +759,22 @@ xst_time_connect_calendar_signals (XstTimeTool *tool)
 	g_signal_connect (G_OBJECT (calendar), "month_changed", G_CALLBACK (xst_time_calendar_change_cb), tool);
 }
 
+/* changes the calendar first day depending on the locale configuration */
+static void
+xst_time_configure_calendar (XstTimeTool *tool)
+{
+	gint firstday;
+	GtkWidget *calendar = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog, "calendar");
+
+	setlocale (LC_ALL, "");
+	firstday = (int) *(nl_langinfo (_NL_TIME_FIRST_WEEKDAY));
+
+	if (firstday == 1) 
+		gtk_calendar_display_options (GTK_CALENDAR (calendar), GTK_CALENDAR_WEEK_START_MONDAY | GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES);
+	else
+		gtk_calendar_display_options (GTK_CALENDAR (calendar), GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -764,6 +783,8 @@ main (int argc, char *argv[])
 	xst_init ("time-admin", argc, argv, NULL);
 	tool = xst_time_tool_new ();
 	xst_tool_construct (tool, "time", _("Time and Date Settings"));
+
+	xst_time_configure_calendar (XST_TIME_TOOL (tool));
 
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	xst_dialog_connect_signals (tool->main_dialog, signals);
