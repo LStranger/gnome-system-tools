@@ -30,6 +30,7 @@
 #include <gnome.h>
 
 #include "gst.h"
+#include "gst-hig-dialog.h"
 
 #include "callbacks.h"
 #include "transfer.h"
@@ -350,25 +351,24 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 	GtkWidget *d;
 	GstConnection *cxn;
 	gint res;
-	gchar *txt;
 
 	cxn = connection_list_get_active ();
 
-	if (cxn->name && *cxn->name)
-		txt = g_strdup_printf (_("Remove connection %s: \"%s\"?"), cxn->dev, cxn->name);
-	else
-		txt = g_strdup_printf (_("Remove connection %s?"), cxn->dev);
+	d = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+				GTK_DIALOG_MODAL,
+				GST_HIG_MESSAGE_QUESTION,
+				NULL,
+				_("This will disable any network connection with this interface as soon as you hit \"apply\"."),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				NULL);
+	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (d),
+					 _("Are you sure you want to delete connection \"%s\"?"), cxn->dev);
 
-	d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-				    GTK_DIALOG_MODAL,
-				    GTK_MESSAGE_QUESTION,
-				    GTK_BUTTONS_YES_NO,
-				    txt);
-	g_free (txt);
 	res = gtk_dialog_run (GTK_DIALOG (d));
 	gtk_widget_destroy (d);
 	
-	if (res == GTK_RESPONSE_YES) {
+	if (res == GTK_RESPONSE_ACCEPT) {
 		connection_default_gw_remove (cxn->dev);
 		connection_list_remove (cxn);
 		connection_free (cxn);	
@@ -449,14 +449,15 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 		GtkWidget *dialog;
 		
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
-		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						 GTK_DIALOG_MODAL,
-						 GTK_MESSAGE_INFO,
-						 GTK_BUTTONS_OK,
-						 _("You don't have SMB support installed. Please install "
-						   "SMB support in the system to enable windows networking."));
 
-		gtk_window_set_title (GTK_WINDOW (dialog), _("SMB support missing."));
+		dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					     GTK_DIALOG_MODAL,
+					     GST_HIG_MESSAGE_INFO,
+					     _("SMB Support is not running"),
+					     _("You don't have SMB support installed. Please install "
+					       "SMB support in the system to enable windows networking."),
+					     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					     NULL);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		return;
@@ -512,29 +513,29 @@ callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
 
 	if (strcmp (hostname_new, hostname_old))
 	{
-		gchar *text = _("The host name has changed. This will prevent you "
-				"from launching new applications, and so you will "
-				"have to log in again. Continue anyway?");
 		GtkWidget *message;
 
-		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						  GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_WARNING,
-						  GTK_BUTTONS_OK_CANCEL,
-						  text);
+		message = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					      GTK_DIALOG_MODAL,
+					      GST_HIG_MESSAGE_WARNING,
+					      _("Host name has changed"),
+					      _("This will prevent you "
+						"from launching new applications, and so you will "
+						"have to log in again. Continue anyway?"),
+					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      _("Change _Host name"), GTK_RESPONSE_ACCEPT,
+					      NULL);
 
 		res = gtk_dialog_run (GTK_DIALOG (message));
 		gtk_widget_destroy (message);
 
 		switch (res) {
-		case GTK_RESPONSE_OK:
+		case GTK_RESPONSE_ACCEPT:
 			g_free (hostname_old);
 			return TRUE;
 		case GTK_RESPONSE_CANCEL:
-			gtk_entry_set_text (GTK_ENTRY (entry), hostname_old);
-			return FALSE;
 		default:
-			g_free (hostname_old);
+			gtk_entry_set_text (GTK_ENTRY (entry), hostname_old);
 			return FALSE;
 		}
 	}
@@ -560,17 +561,17 @@ callbacks_check_dialer (GtkWindow *window, GstTool *tool)
 	
 	if (!has_dialer)
 	{
-		gchar *text = _("wvdial could not be found on your system. "
-				"You need to install wvdial, or the PPP (modem) "
-				"connections will not activate.");
 		GtkWidget *message;
 
-		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						  GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_WARNING,
-						  GTK_BUTTONS_OK,
-						  text);
-
+		message = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					      GTK_DIALOG_MODAL,
+					      GST_HIG_MESSAGE_WARNING,
+					      _("Wvdial missing"),
+					      _("wvdial could not be found on your system. "
+						"You need to install wvdial, or the PPP (modem) "
+						"connections will not activate."),
+					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					      NULL);
 		gtk_dialog_run (GTK_DIALOG (message));
 		gtk_widget_destroy (message);
 	}
@@ -585,24 +586,24 @@ callbacks_check_dialer_hook (GstDialog *dialog, gpointer data)
 	tool = GST_TOOL (data);
 	
 	has_dialer = connection_list_has_dialer (tool);
-	if (!has_dialer)
-	{
-		gchar *text = _("wvdial could not be found on your system. "
-				"You need to install wvdial, or the PPP (modem) "
-				"connections will not activate. Continue anyway?");
-		gint res;
+	if (!has_dialer) {
 		GtkWidget *message;
+		gint res;
 
-		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						  GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_WARNING,
-						  GTK_BUTTONS_OK_CANCEL,
-						  text);
-
+		message = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					      GTK_DIALOG_MODAL,
+					      GST_HIG_MESSAGE_WARNING,
+					      _("Wvdial not found"),
+					      _("wvdial could not be found on your system. "
+						"You need to install wvdial, or the PPP (modem) "
+						"connections will not activate. Continue anyway?"),
+					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      _("_Continue"), GTK_RESPONSE_ACCEPT,
+					      NULL);
 		res = gtk_dialog_run (GTK_DIALOG (message));
 		gtk_widget_destroy (message);
 
-		if (res == GTK_RESPONSE_OK)
+		if (res == GTK_RESPONSE_ACCEPT)
 			return TRUE;
 		else
 			return FALSE;
@@ -614,23 +615,23 @@ callbacks_check_dialer_hook (GstDialog *dialog, gpointer data)
 static gboolean
 callbacks_disabled_gatewaydev_warn (GstTool *tool, GstConnection *cxn)
 {
-	gchar *text = _("The default gateway device is not activated. This "
-			"will prevent you from connecting to the Internet. "
-			"Continue anyway?");
-	gint res;
 	GtkWidget *message;
+	gint res;
 
-	message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-					  GTK_DIALOG_MODAL,
-					  GTK_MESSAGE_WARNING,
-					  GTK_BUTTONS_OK_CANCEL,
-					  text);
-
+	message = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+				      GTK_DIALOG_MODAL,
+				      GST_HIG_MESSAGE_WARNING,
+				      _("The default gateway device is not activated"),
+				      _("This will prevent you from connecting to the Internet. "
+					"Continue anyway?"),
+				      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				      _("_Continue"), GTK_RESPONSE_ACCEPT,
+				      NULL);
 	res = gtk_dialog_run (GTK_DIALOG (message));
 	gtk_widget_destroy (message);
 	
 	switch (res) {
-	case GTK_RESPONSE_OK:
+	case GTK_RESPONSE_ACCEPT:
 		connection_default_gw_fix (cxn, GST_CONNECTION_ERROR_ENABLED);
 		return TRUE;
 	case GTK_RESPONSE_CANCEL:
@@ -665,16 +666,15 @@ callbacks_check_manual_gatewaydev (GstTool *tool)
 		case GST_CONNECTION_ERROR_STATIC:
 		{
 			GtkWidget *dialog;
-			gchar *txt = _("The default gateway device is missing gateway "
-				       "information. Please provide this information to "
-				       "proceed, or choose another default gateway device.");
 
-			dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-							 GTK_DIALOG_MODAL,
-							 GTK_MESSAGE_ERROR,
-							 GTK_BUTTONS_OK,
-							 txt);
-
+			dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+						     GTK_DIALOG_MODAL,
+						     GST_HIG_MESSAGE_ERROR,
+						     _("The default gateway device is missing gateway information"),
+						     _("Please provide this information to "
+						       "proceed, or choose another default gateway device."),
+						     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+						     NULL);
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 			return FALSE;
@@ -711,18 +711,17 @@ gboolean
 callbacks_tool_not_found_hook (GstTool *tool, GstReportLine *rline, gpointer data)
 {
 	if (! strcmp (rline->argv[0], "redhat-config-network-cmd")) {
-		gchar *text = _("The program redhat-config-network-cmd could not "
-				"be found. This could render missing connections "
-				"under the connections tab. Please install the "
-				"redhat-config-network rpm package to avoid this.");
 		GtkWidget *message;
 
-		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						  GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_WARNING,
-						  GTK_BUTTONS_OK,
-						  text);
-
+		message = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					      GTK_DIALOG_MODAL,
+					      GST_HIG_MESSAGE_WARNING,
+					      _("The program redhat-config-network-cmd could not be found"),
+					      _("This could render missing connections "
+						"under the connections tab. Please install the "
+						"redhat-config-network rpm package to avoid this."),
+					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					      NULL);
 		gtk_dialog_run (GTK_DIALOG (message));
 		gtk_widget_destroy (message);
 	}
@@ -740,34 +739,44 @@ on_connection_toggled (GtkWidget *w, gchar *path_str, gpointer data)
 	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
 	GtkTreeIter iter;
 	GstConnection *cxn;
-	gchar *txt;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
+	gchar *button_text    = NULL;
 	GtkWidget *dialog;
 
 	gtk_tree_model_get_iter (model, &iter, path);
 	cxn = connection_list_get_by_path (path);
 
 	if (!cxn->enabled) {
-		if (cxn->type != GST_CONNECTION_LO) {
-			txt = g_strdup_printf (_("Do you want to enable interface %s?"), cxn->dev);
-			dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
-			if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
-				on_connection_activate_clicked (GTK_WIDGET (treeview), path, NULL);
-
-			gtk_widget_destroy (dialog);
-			g_free (txt);
-		}
+		primary_text   = g_strdup_printf (_("Do you want to enable interface \"%s\"?"), cxn->dev);
+		secondary_text = g_strdup (_("This will enable network access through this interface"));
+		button_text    = g_strdup (_("_Enable"));
 	} else {
-		if (cxn->type != GST_CONNECTION_LO) {
-			txt = g_strdup_printf (_("Do you want to disable interface %s?"), cxn->dev);
-			dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
-			if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
-				on_connection_deactivate_clicked (GTK_WIDGET (treeview), path,  NULL);
-
-			gtk_widget_destroy (dialog);
-			g_free (txt);
-		}
+		primary_text   = g_strdup_printf (_("Do you want to disable interface \"%s\"?"), cxn->dev);
+		secondary_text = g_strdup (_("This will disable network access through this interface"));
+		button_text    = g_strdup (_("_Disable"));
 	}
-	
+
+	dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+				     GTK_DIALOG_MODAL,
+				     GST_HIG_MESSAGE_QUESTION,
+				     primary_text,
+				     secondary_text,
+				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				     button_text, GTK_RESPONSE_ACCEPT,
+				     NULL);
+
+	if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT) {
+		if (!cxn->enabled)
+			on_connection_activate_clicked (GTK_WIDGET (treeview), path, NULL);
+		else
+			on_connection_deactivate_clicked (GTK_WIDGET (treeview), path,  NULL);
+	}
+
+	gtk_widget_destroy (dialog);
+	g_free (primary_text);
+	g_free (secondary_text);
+	g_free (button_text);
 	gtk_tree_path_free (path);
 }
 
@@ -779,7 +788,7 @@ on_connection_ok_clicked (GtkWidget *w, gpointer data)
 	gboolean standalone = (g_object_get_data (G_OBJECT (window), "standalone") != NULL);
 	gboolean add_to_list = !standalone;
 
-	if ((cxn->modified) && (connection_config_save (cxn, FALSE))) {
+	if ((cxn->modified) && (connection_config_save (cxn, window, FALSE))) {
 		cxn->creating = FALSE;
 		gst_dialog_modify (tool->main_dialog);
 
@@ -849,8 +858,13 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 	dev = connection_autodetect_modem ();
 
 	if ((!dev) || (strcmp (dev, "") == 0)) {
-		w = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
-					    _("Could not autodetect modem device, check that this is not busy and that it's correctly attached"));
+		w = gst_hig_dialog_new (GTK_WINDOW (dialog),
+					GTK_DIALOG_MODAL,
+					GST_HIG_MESSAGE_WARNING,
+					_("Could not autodetect modem device"),
+					_("Check that it's not busy and that it's correctly attached"),
+					GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					NULL);
 		gtk_dialog_run (GTK_DIALOG (w));
 		gtk_widget_destroy (w);
 	} else {
@@ -1403,7 +1417,7 @@ on_network_profile_delete_clicked_foreach (GtkTreeModel *model, GtkTreePath *pat
 	
 	gtk_tree_model_get (model, iter, PROFILES_TABLE_COL_POINTER, &node, -1);
 
-	if (profile_delete (node) == TRUE)
+	if (profile_delete (node, tool) == TRUE)
 		* (gboolean *) data = TRUE;
 }
 

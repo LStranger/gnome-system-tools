@@ -28,7 +28,7 @@
 
 #include "gst.h"
 
-gboolean profile_delete (xmlNodePtr);
+gboolean profile_delete (xmlNodePtr, GstTool*);
 void profile_save_current (const gchar*, const gchar*, GstTool*);
 void profile_populate_option_menu (GstTool*, xmlNodePtr);
 void profile_set_active (xmlNodePtr, GstTool*);

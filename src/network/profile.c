@@ -28,24 +28,37 @@
 #include <gnome.h>
 
 #include "gst.h"
+#include "gst-hig-dialog.h"
 #include "callbacks.h"
 #include "profile.h"
 #include "transfer.h"
 
 gboolean
-profile_delete (xmlNodePtr node)
+profile_delete (xmlNodePtr node, GstTool *tool)
 {
 	gint reply;
-	gchar *txt, *name;
+	gchar *name;
 	GtkWidget *dialog;
+	GtkWidget *parent;
 
 	name = gst_xml_get_child_content (node, "name");
-	txt = g_strdup_printf (_("Are you sure you want to delete profile %s?"), name);
-	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_YES_NO, txt);
+	parent = gst_dialog_get_widget (tool->main_dialog, "network_profiles_dialog");
+
+	dialog = gst_hig_dialog_new (GTK_WINDOW (parent),
+				     GTK_DIALOG_MODAL,
+				     GST_HIG_MESSAGE_WARNING,
+				     NULL,
+				     _("You won't be able to recover this profile after hitting \"apply\""),
+				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				     NULL);
+	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog), _("Delete profile \"%s\"?"), name);
+
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
+	g_free (name);
 
-	if (reply == GTK_RESPONSE_YES) {
+	if (reply == GTK_RESPONSE_ACCEPT) {
 		gst_xml_element_destroy (node);
 		return TRUE;
 	} else {

@@ -30,6 +30,7 @@
 #include "callbacks.h"
 
 #include "gst.h"
+#include "gst-hig-dialog.h"
 
 typedef struct _GstNetworkInterfaceDescription GstNetworkInterfaceDescription;
 
@@ -1701,9 +1702,10 @@ strempty (gchar *str)
 }
 
 static gboolean
-connection_validate (GstConnection *cxn)
+connection_validate (GstConnection *cxn, GtkWidget *parent)
 {
-	gchar *error = NULL;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
 	
 	switch (cxn->type) {
 	case GST_CONNECTION_ETH:
@@ -1712,49 +1714,63 @@ connection_validate (GstConnection *cxn)
 	case GST_CONNECTION_UNKNOWN:
 		if (cxn->ip_config == IP_MANUAL &&
 		    (strempty (cxn->address) ||
-		     strempty (cxn->netmask)))
-			error = _("The IP address or netmask for the interface "
-				  "was left empty. Please enter valid IP "
-				  "addresses in those fields to continue.");
+		     strempty (cxn->netmask))) {
+			primary_text   = _("Error in IP address");
+			secondary_text = _("The IP address or netmask for the interface "
+					   "was left empty. Please enter valid IP "
+					   "addresses in those fields to continue.");
+		}
+		
 		break;
 	case GST_CONNECTION_PLIP:
 		if (strempty (cxn->address) ||
-		    strempty (cxn->remote_address))
-			error = _("The IP address or remote address for the "
-				  "interface was left empty. Please enter valid "
-				  "IP addresses in those fields to continue.");
+		    strempty (cxn->remote_address)) {
+			primary_text   = _("Error in IP address");
+			secondary_text = _("The IP address or remote address for the "
+					   "interface was left empty. Please enter valid "
+					   "IP addresses in those fields to continue.");
+		}
+		
 		break;
 	case GST_CONNECTION_PPP:
-		if (!cxn->update_dns && strempty (cxn->dns1))
-			error = _("You chose to set the DNS servers for this "
-				  "connection manually, but left the IP "
-				  "address for the primary DNS empty. Please "
-				  "enter the IP for the primary DNS or uncheck "
-				  "the manual DNS option.");
-		else if (strempty (cxn->serial_port))
-			error = _("The modem device that the connection "
-				  "will use was left empty. Please enter "
-				  "a device or press \"autodetect\" to "
-				  "continue.");
-		else if (strempty (cxn->phone_number))
-			error = _("The phone number that the connection "
-				  "will use was left empty. Please enter "
-				  "a valid phone number to continue.");
+		if (!cxn->update_dns && strempty (cxn->dns1)) {
+			primary_text   = _("Error in DNS servers");
+			secondary_text = _("You chose to set the DNS servers for this "
+					   "connection manually, but left the IP "
+					   "address for the primary DNS empty. Please "
+					   "enter the IP for the primary DNS or uncheck "
+					   "the manual DNS option.");
+			
+		} else if (strempty (cxn->serial_port)) {
+			primary_text   = _("Invalid modem device");
+			secondary_text = _("The modem device that the connection "
+					   "will use was left empty. Please enter "
+					   "a device or press \"autodetect\" to "
+					   "continue.");
+		} else if (strempty (cxn->phone_number)) {
+			primary_text   = _("Invalid phone number");
+			secondary_text = _("The phone number that the connection "
+					   "will use was left empty. Please enter "
+					   "a valid phone number to continue.");
+		}
+		
 		break;
 	default:
 		break;
 	}
 
-	if (error) {
+	if (primary_text) {
 		GtkWidget *message;
 
-		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-						  GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_ERROR,
-						  GTK_BUTTONS_OK,
-						  error);
-
+		message = gst_hig_dialog_new (GTK_WINDOW (parent),
+					      GTK_DIALOG_MODAL,
+					      GST_HIG_MESSAGE_ERROR,
+					      primary_text,
+					      secondary_text,
+					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					      NULL);
 		gtk_dialog_run (GTK_DIALOG (message));
+
 		gtk_widget_destroy (message);
 		return FALSE;
 	}
@@ -2080,11 +2096,12 @@ connection_configure_device (xmlNodePtr root, gchar *interface)
 {
 	xmlNodePtr node = gst_xml_element_find_first (root, "interface");
 	xmlNodePtr dev_node = NULL;
-	gchar *dev;
-	gboolean found = FALSE;
 	GstConnection *connection;
-	gchar *txt = NULL;
+	gboolean found = FALSE;
 	GtkWidget *dialog;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
+	gchar *dev;
 
 	if (strcmp (interface, "lo") != 0) {
 		for (node = gst_xml_element_find_first (root, "interface");
@@ -2099,21 +2116,26 @@ connection_configure_device (xmlNodePtr root, gchar *interface)
 			g_free (dev);
 		}
 
-		if (!dev_node)
-			txt = g_strdup_printf (_("The interface %s doesn't exist."), interface);
+		if (!dev_node) {
+			primary_text   = g_strdup (_("Nonexisting interface"));
+			secondary_text = g_strdup_printf (_("The interface \"%s\" doesn't exist."), interface);
+		}
 	} else {
-		txt = g_strdup_printf (_(" The loopback interface cannot be configured."));
+		primary_text   = g_strdup (_("Invalid interface"));
+		secondary_text = g_strdup (_("The loopback interface cannot be configured."));
 	}
 
-	if (!txt) {
+	if (!primary_text) {
 		connection = connection_new_from_node (dev_node, FALSE);
 		connection_configure (connection);
 	} else {
-		dialog = gtk_message_dialog_new (NULL,
-						 GTK_DIALOG_MODAL,
-						 GTK_MESSAGE_ERROR,
-						 GTK_BUTTONS_CLOSE,
-						 txt);
+		dialog = gst_hig_dialog_new (NULL,
+					     GTK_DIALOG_MODAL,
+					     GST_HIG_MESSAGE_ERROR,
+					     primary_text,
+					     secondary_text,
+					     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					     NULL);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		exit (0);
 	}
@@ -2306,7 +2328,7 @@ connection_list_select_connection (GstConnection *cxn)
 }
 
 gboolean
-connection_config_save (GstConnection *cxn, gboolean add_to_list)
+connection_config_save (GstConnection *cxn, GtkWidget *parent, gboolean add_to_list)
 {
 	GstConnection *tmp = g_new0 (GstConnection, 1);
 
@@ -2318,7 +2340,7 @@ connection_config_save (GstConnection *cxn, gboolean add_to_list)
 	tmp->tmp_ip_config = cxn->tmp_ip_config;
 	
 	connection_empty_gui (tmp);
-	if (!connection_validate (tmp)) {
+	if (!connection_validate (tmp, parent)) {
 		connection_free (tmp);
 		return FALSE;
 	}

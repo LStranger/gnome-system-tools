@@ -173,7 +173,7 @@ void           connection_list_save       (GstTool *tool);
 void           connection_list_select_connection (GstConnection *cxn);
 void           connection_list_clear      (GstTool *tool);
 
-gboolean connection_config_save (GstConnection*, gboolean);
+gboolean connection_config_save (GstConnection*, GtkWidget*, gboolean);
 void     connection_check_netmask_gui (GtkWidget*, GtkWidget*);
 void     connection_set_modified (GstConnection*, gboolean);
 
