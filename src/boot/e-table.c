@@ -332,7 +332,7 @@ boot_value_type (xmlNodePtr node)
 	
 	g_return_val_if_fail (node != NULL, type);
 
-	n = xst_xml_element_find_first (node, "XstImageType");
+	n = xst_xml_element_find_first (node, "XstEntryType");
 	if (n) {
 		gchar *buf;
 		
@@ -563,9 +563,9 @@ boot_value_set_type (xmlNodePtr node, XstBootImageType type)
 	g_return_if_fail (node != NULL);
 
 	buf = type_to_label (type);
-	n0 = xst_xml_element_find_first (node, "XstImageType");
+	n0 = xst_xml_element_find_first (node, "XstEntryType");
 	if (!n0)
-		n0 = xst_xml_element_add (node, "XstImageType");
+		n0 = xst_xml_element_add (node, "XstEntryType");
 
 	xst_xml_element_set_content (n0, buf);
 	g_free (buf);
