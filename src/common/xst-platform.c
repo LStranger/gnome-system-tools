@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Hans Petter Jansson <hpj@ximian.com>
+ *          Carlos Garnacho Parro <garparr@teleline.es> (added support for the logos of the distros)
  */
 
 #include <config.h>
@@ -27,14 +28,14 @@
 #include "xst-report-line.h"
 #include "xst-xml.h"
 
-/* Images used for distros/OS's */
-GdkPixbuf *redhat;
-GdkPixbuf *debian;
-GdkPixbuf *mandrake;
-GdkPixbuf *turbolinux;
-GdkPixbuf *slackware;
-GdkPixbuf *suse;
-GdkPixbuf *freebsd;
+/* pixmaps used for distros/OS's */
+extern GdkPixbuf *redhat;
+extern GdkPixbuf *debian;
+extern GdkPixbuf *mandrake;
+extern GdkPixbuf *turbolinux;
+extern GdkPixbuf *slackware;
+extern GdkPixbuf *suse;
+extern GdkPixbuf *freebsd;
 
 XstPlatform *
 xst_platform_new (const gchar *key, const gchar *name)

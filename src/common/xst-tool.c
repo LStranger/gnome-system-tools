@@ -53,13 +53,14 @@
 /* Define this if you want the frontend to run the backend under strace */
 /*#define XST_DEBUG_STRACE_BACKEND*/
 
-extern GdkPixbuf *redhat;
-extern GdkPixbuf *debian;
-extern GdkPixbuf *mandrake;
-extern GdkPixbuf *turbolinux;
-extern GdkPixbuf *slackware;
-extern GdkPixbuf *suse;
-extern GdkPixbuf *freebsd;
+/* pixmaps used for distros/OS's */
+GdkPixbuf *redhat;
+GdkPixbuf *debian;
+GdkPixbuf *mandrake;
+GdkPixbuf *turbolinux;
+GdkPixbuf *slackware;
+GdkPixbuf *suse;
+GdkPixbuf *freebsd;
 
 enum {
 	BOGUS,
@@ -67,6 +68,14 @@ enum {
 	FILL_XML,
 	CLOSE,
 	LAST_SIGNAL
+};
+
+enum {
+	PLATFORM_LIST_COL_LOGO,
+	PLATFORM_LIST_COL_NAME,
+	PLATFORM_LIST_COL_PLATFORM,
+
+	PLATFORM_LIST_COL_LAST
 };
 
 static enum {
@@ -103,43 +112,27 @@ static gchar *location_id = NULL;    /* Location in which we are editing */
 /* --- Report hook and signal callbacks --- */
 
 static void
-on_platform_list_select_row (GtkWidget *list, gpointer data)
+on_platform_list_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
-	GtkTreePath *path;
-	gint *index;
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	XstPlatform *platform;
+	gboolean selected;
 	XstTool *tool = (XstTool *) data;
 	
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (list), &path, NULL);
-	
-	if (!path)
-		return;
-	
-	index = gtk_tree_path_get_indices (path);
-	tool->platform_selected_row = *index;
-	
-	gtk_widget_set_sensitive (tool->platform_ok_button, TRUE);
-}
-
-static void
-on_platform_dialog_close (GtkWidget *dialog, XstTool *tool)
-{
-	exit (0);
-}
-
-static void
-on_platform_ok_clicked (GtkWidget *dialog, XstTool *tool)
-{
-	/* Locate the selected platform and set it up as the current one. */
-
 	if (tool->current_platform)
 		xst_platform_free (tool->current_platform);
+	
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, PLATFORM_LIST_COL_PLATFORM, &platform, -1);
+		tool->current_platform = xst_platform_dup (platform);
+		selected = TRUE;
+	} else {
+		tool->current_platform = NULL;
+		selected = FALSE;
+	}
 
-	tool->current_platform =
-		xst_platform_dup ((XstPlatform *)
-				 g_slist_nth_data (tool->supported_platforms_list,
-						   tool->platform_selected_row));
-
-	g_assert (tool->current_platform);
+	gtk_widget_set_sensitive (tool->platform_ok_button, selected);
 }
 
 static gboolean
@@ -460,11 +453,6 @@ static gboolean
 report_window_close_cb (GtkWidget *window, GdkEventAny *ev, gpointer data)
 {
 	XstTool *tool = data;
-
-	/* A hack to force the window to hide. Seems like the widget is
-	 * marked as hidden, while X window doesn't actually do it, so a
-	 * widget_show should set things normally. */
-	gtk_widget_show (tool->report_window);
 	gtk_widget_hide (tool->report_window);
 	return TRUE;
 }
@@ -579,13 +567,15 @@ xst_tool_fill_platform_tree (XstTool *tool)
 	
 	tool->supported_platforms_list = xst_tool_get_supported_platforms (tool);
 	
-	for (list = tool->supported_platforms_list; list; list = g_slist_next (list)) {
+	for (list = tool->supported_platforms_list; list; list = g_slist_next (list)) 
+	{
 		platform = (XstPlatform *) list->data;
 		
 		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 		gtk_tree_store_set (GTK_TREE_STORE (model), &iter, 
-		                    0, xst_platform_get_pixmap (platform), 
-		                    1, xst_platform_get_name (platform), 
+		                    PLATFORM_LIST_COL_LOGO, xst_platform_get_pixmap (platform), 
+		                    PLATFORM_LIST_COL_NAME, xst_platform_get_name (platform), 
+		                    PLATFORM_LIST_COL_PLATFORM, platform,
 		                    -1);
 	}
 }
@@ -593,22 +583,15 @@ xst_tool_fill_platform_tree (XstTool *tool)
 static void
 xst_tool_run_platform_dialog (XstTool *tool)
 {
-
+	gint result;
 	
-	/* Connect signals */
-	g_signal_connect (G_OBJECT (tool->platform_list), "cursor-changed", G_CALLBACK (on_platform_list_select_row), tool);
-	g_signal_connect (G_OBJECT (tool->platform_ok_button), "clicked", G_CALLBACK (on_platform_ok_clicked), tool);
-	g_signal_connect (G_OBJECT (tool->platform_dialog), "delete_event", G_CALLBACK (on_platform_dialog_close), tool);
-	g_signal_connect (G_OBJECT (tool->platform_cancel_button), "clicked", G_CALLBACK (on_platform_dialog_close), tool);
-
 	xst_tool_fill_platform_tree (tool);
-
-	/* Prepare dialog and show it */
-	tool->platform_selected_row = -1;
-
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
-	gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
-	gtk_widget_hide (tool->platform_dialog);
+	
+	result = gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
+	gtk_widget_destroy (tool->platform_dialog);
+	if (result != GTK_RESPONSE_OK)
+		exit (0);
 }
 
 static void
@@ -1280,13 +1263,14 @@ visibility_toggled (GtkWidget *w, gpointer data)
 #endif
 
 static GtkWidget*
-xst_tool_create_platform_list ()
+xst_tool_create_platform_list (XstTool *tool)
 {
-	GtkTreeModel *model = GTK_TREE_MODEL (gtk_tree_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_STRING));
+	GtkTreeModel *model = GTK_TREE_MODEL (gtk_tree_store_new (PLATFORM_LIST_COL_LAST, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_POINTER));
 	
 	GtkWidget *list;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
+	GtkTreeSelection *select;
 	
 	list = gtk_tree_view_new_with_model (model);
 	g_object_unref (model);
@@ -1300,20 +1284,27 @@ xst_tool_create_platform_list ()
 	
 	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (list),
 	                                             -1,
-	                                             "",
+	                                             "_Platform",
 	                                             renderer,
-	                                             "pixbuf", 0,
+	                                             "pixbuf", PLATFORM_LIST_COL_LOGO,
 						     NULL);
 
 	/* Insert the text cell */
-	column = gtk_tree_view_get_column (GTK_TREE_VIEW (list), 0);
+	column = gtk_tree_view_get_column (GTK_TREE_VIEW (list), PLATFORM_LIST_COL_LOGO);
 	
 	renderer = gtk_cell_renderer_text_new ();
 	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
 
 	gtk_tree_view_column_pack_end (column, renderer, TRUE);
-	gtk_tree_view_column_add_attribute (column, renderer, "text", 1);
+	gtk_tree_view_column_add_attribute (column, renderer, "text", PLATFORM_LIST_COL_NAME);
 	
+	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
+	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
+
+	g_signal_connect (G_OBJECT (select), "changed",
+			  G_CALLBACK (on_platform_list_selection_changed),
+			  (gpointer) tool);
+
 	gtk_widget_show_all (list);
 	return list;
 }
@@ -1363,20 +1354,14 @@ xst_tool_type_init (XstTool *tool)
 
 	xml = xst_tool_load_glade_common (tool, "platform_dialog");
 	
-        tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
-	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
-	tool->platform_cancel_button = glade_xml_get_widget (xml, "platform_cancel_button");
-			
-	
 	/* We get the scrolled window that will contain the list and embed the GtkTreeView into it */
 	sw = glade_xml_get_widget (xml, "platform_list_holder");
 	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
-	tool->platform_list = xst_tool_create_platform_list ();
+	tool->platform_list = xst_tool_create_platform_list (tool);
 	gtk_container_add (GTK_CONTAINER (sw), tool->platform_list);
 
 	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
 	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
-	tool->platform_cancel_button = glade_xml_get_widget (xml, "platform_cancel_button");		
 }
 
 GtkType

@@ -241,10 +241,9 @@ xst_su_construct_dialog (GladeXML *xml)
 	dialog = gtk_dialog_new_with_buttons (_("GNOME System Tools - Password"),
 					      NULL,
 					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					      GTK_STOCK_OK, GTK_RESPONSE_OK,
-					      _("Run without password"),
-					      XST_SU_RESPONSE_NP,
+					      _("Run without password"), XST_SU_RESPONSE_NP,
 					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      NULL);
 
 	content = glade_xml_get_widget (xml, "password_dialog_content");
