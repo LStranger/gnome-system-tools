@@ -196,7 +196,7 @@ gst_time_init_timezone (GstTimeTool *time_tool)
 	locs = tz_get_locations (e_tz_map_get_tz_db (tzmap));
 
 	for (i = 0; g_ptr_array_index (locs, i); i++)
-		gtk_combo_box_append_text (GTK_COMBO_BOX (w), g_strdup (tz_location_get_zone (g_ptr_array_index (locs, i))));
+		gtk_combo_box_append_text (GTK_COMBO_BOX (w), tz_location_get_zone (g_ptr_array_index (locs, i)));
 }
 
 #define is_leap_year(yyy) ((((yyy % 4) == 0) && ((yyy % 100) != 0)) || ((yyy % 400) == 0));
@@ -575,7 +575,8 @@ gst_time_focus_in (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
 static void
 gst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
 {
-	gint num = atoi (gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1));
+	gchar *val = gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1);
+	gint   num = atoi (val);
 	gchar *value;
 
 	if (widget == tool->seconds) {
@@ -590,7 +591,9 @@ gst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
 
 	value = g_strdup_printf ("%02d", num);
 	gtk_entry_set_text (GTK_ENTRY (widget), value);
+
 	g_free (value);
+	g_free (val);
 }
 
 static void

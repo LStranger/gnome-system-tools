@@ -185,8 +185,8 @@ transfer_servers_xml_to_gui (GstTool *tool, xmlNodePtr root)
 		
 		if (!server_entry_found) {
 			gtk_list_store_append (store, &iter);
-			gtk_list_store_set (store, &iter, 0, TRUE, 1, g_strdup (s), -1);
-		}		
+			gtk_list_store_set (store, &iter, 0, TRUE, 1, s, -1);
+		}
 		
 		g_free (s);
 	}

@@ -32,15 +32,18 @@ on_ntp_addserver (GtkButton *button, GstDialog *dialog)
 	if (strchr (text, ' ')) {
 		gtk_widget_grab_focus (GTK_WIDGET (ntp_entry));
 		gtk_editable_select_region (ntp_entry, 0, -1);
+
+		g_free (text);
 		return;
 	}
-	
-	if (!strlen (text)) return;
-	
-	gtk_editable_delete_text (ntp_entry, 0, -1);
-	gtk_widget_grab_focus (GTK_WIDGET (ntp_entry));
-	
-	gtk_list_store_append (store, &iter);
-	gtk_list_store_set (store, &iter, 0, FALSE, 1, g_strdup (text), -1);
 
+	if (text && *text) {
+		gtk_editable_delete_text (ntp_entry, 0, -1);
+		gtk_widget_grab_focus (GTK_WIDGET (ntp_entry));
+	
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter, 0, FALSE, 1, text, -1);
+
+		g_free (text);
+	}
 }

@@ -175,8 +175,8 @@ tz_location_set_locally (TzLocation *loc)
 	is_dst = curzone->tm_isdst;
 
 	str = g_strdup_printf ("TZ=%s", loc->zone);
-	/* g_print ("%s %s\n", loc->zone, str); */
 	putenv (str);
+	g_free (str);
 
 #if 0
 	curtime = time (NULL);
@@ -205,23 +205,17 @@ tz_info_from_location (TzLocation *loc)
 	g_return_val_if_fail (loc->zone != NULL, NULL);
 	
 	str = g_strdup_printf ("TZ=%s", loc->zone);
-	/*	g_print ("%s %s\n", loc->zone, str); */
 	putenv (str);
+	g_free (str);
+	
 #if 0
 	tzset ();
-	g_free (str);
 #endif
 	tzinfo = g_new0 (TzInfo, 1);
 
 	curtime = time (NULL);
 	curzone = localtime (&curtime);
 
-#if 0
-	g_print ("%s %s %d\n", curzone->tm_zone, 
-				&curzone->tm_zone[curzone->tm_isdst],
-				curzone->tm_isdst);
-#endif
-	
 	/* Currently this solution doesnt seem to work - I get that */
 	/* America/Phoenix uses daylight savings, which is wrong    */
 	tzinfo->tzname_normal = g_strdup (curzone->tm_zone);
