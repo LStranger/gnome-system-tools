@@ -101,10 +101,9 @@ XstWidget          *xst_dialog_get_xst_widget      (XstDialog *xd, const gchar *
 void                xst_dialog_widget_set_user_mode (XstDialog *xs, const gchar *name, XstWidgetMode mode);
 void                xst_dialog_widget_set_user_sensitive (XstDialog *xd, const gchar *name, gboolean state);
 
-void                xst_dialog_add_apply_hook      (XstDialog *xd, XstDialogHookFunc func, gpointer data);
 void                xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy *xwp);
 void                xst_dialog_set_widget_user_modes (XstDialog *xd, const XstWidgetUserPolicy *xwup);
 
-void                xst_dialog_add_apply_hook      (XstDialog *xd, XstDialogHookFunc *func, gpointer data);
+void                xst_dialog_add_apply_hook      (XstDialog *xd, XstDialogHookFunc func, gpointer data);
 
 #endif /* XST_DIALOG_H */
