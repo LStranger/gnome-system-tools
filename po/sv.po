@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-05-07 02:57+0200\n"
-"PO-Revision-Date: 2001-05-07 03:00+0200\n"
+"POT-Creation-Date: 2001-05-07 15:04+0200\n"
+"PO-Revision-Date: 2001-05-07 16:52+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -110,7 +110,7 @@ msgstr "Ingen fil att patcha: [%s]."
 #: backends/report.pl.in:156
 #, c-format
 msgid "Could not find [%s] for patching. Creating [%s]."
-msgstr "Kunde inte hitta [%s] för patchning. Skapar [%s]."
+msgstr "Kunde inte hitta och patcha [%s]. Skapar [%s]."
 
 #: backends/report.pl.in:157
 #, c-format
@@ -357,7 +357,7 @@ msgstr "Ställer in ytterligare alternativ i [%s]."
 #: backends/report.pl.in:211
 #, c-format
 msgid "Boot method [%s] for interface [%s] not supported."
-msgstr "Startmetoden [%s] för gränssnittet [%s] stöds inte."
+msgstr "Uppstartsmetoden [%s] för gränssnittet [%s] stöds inte."
 
 #: backends/report.pl.in:212
 #, c-format
@@ -369,10 +369,9 @@ msgstr "Hämtar fjärradress för gränssnittet [%s]."
 msgid "Setting remote address for interface [%s]."
 msgstr "Ställer in fjärradress för gränssnittet [%s]."
 
-# Knepigt!
 #: backends/report.pl.in:214
 msgid "Ensuring loopback interface configuration."
-msgstr "Testar loopback-gränssnittskonfiguration."
+msgstr "Testar konfiguration för loopback-gränssnitt."
 
 #: backends/report.pl.in:216
 msgid "Failed to run lilo."
@@ -385,7 +384,7 @@ msgstr "Körde lilo utan problem."
 #: backends/report.pl.in:219
 #, c-format
 msgid "Adding [%s] to fstab."
-msgstr "Lägger till [%s] till fstab."
+msgstr "Lägger till [%s] i fstab."
 
 #: backends/report.pl.in:220
 #, c-format
@@ -466,7 +465,7 @@ msgstr "Byt platsprofilen till den som angivits"
 
 #: archiver/main.c:83
 msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr "Pusha konfigurationsdata till klientmaskiner (OIMPLEMENTERAT)"
+msgstr "Tvinga konfigurationsdata till klientmaskiner (OIMPLEMENTERAT)"
 
 #: archiver/main.c:85
 msgid "Rename a location to a new name"
@@ -551,7 +550,7 @@ msgstr "STEG"
 
 #: archiver/main.c:128
 msgid "Don't run the backend, just dump the output"
-msgstr "Kör inte backenden, bara dumpa utdata"
+msgstr "Kör inte backenden, dumpa bara utdata"
 
 #: archiver/main.c:134
 msgid "Parent location for the new location"
@@ -583,11 +582,11 @@ msgstr "Delvis innehåll"
 
 #: archiver/main.c:313
 msgid "Global archiver options"
-msgstr "Globala arkiveraralternativ"
+msgstr "Globala arkiveringsalternativ"
 
 #: archiver/main.c:315
 msgid "Archiver commands"
-msgstr "Arkiverarkommandon"
+msgstr "Arkiveringskommandon"
 
 #: archiver/main.c:317
 msgid "Options for storing data"
@@ -708,7 +707,7 @@ msgstr "Tillfoga:"
 #.
 #: interfaces/common.glade.h:7 interfaces/common.glade.h:9
 msgid "Ximian Setup Tools"
-msgstr "Ximian Setup Tools"
+msgstr "Ximians inställningsalternativ"
 
 #. Parent
 #. Close writing end
@@ -742,7 +741,7 @@ msgid ""
 "cripple your computer."
 msgstr ""
 "Den plattform som du använder stöds inte av detta verktyg. Om du är säker på "
-"att det fungerar som en av de plattformar som anges nedan kan du välja det "
+"att det fungerar som en av de plattformar som anges nedan kan du välja den "
 "och fortsätta.\n"
 "\n"
 "Observera dock att detta kan skada systemkonfigurationen eller rentav "
@@ -856,7 +855,7 @@ msgstr "Montera denna partition"
 
 #: interfaces/disks.glade.h:32
 msgid "Open settings dialog for selected import"
-msgstr "Öppna inställningsfönstret för vald import"
+msgstr "Öppna inställningsdialogen för vald import"
 
 #: interfaces/disks.glade.h:34
 msgid "Remember details of this partition"
@@ -1129,7 +1128,7 @@ msgstr "Nätverksinställningar"
 
 #: interfaces/network.glade.h:8
 msgid "How this computer is identified."
-msgstr "Hur denna dator känns igen."
+msgstr "Hur denna dator identifieras."
 
 #: interfaces/network.glade.h:10
 msgid "Enable windows networking (Samba)"
@@ -2136,23 +2135,23 @@ msgstr "Skapa hem för nya användare:"
 
 #: interfaces/users.glade.h:74
 msgid "Min/max values for automatic UID/GID"
-msgstr "Minsta/största värde för automatiskt UID/GID"
+msgstr "Lägsta/högsta värde för automatiskt UID/GID"
 
 #: interfaces/users.glade.h:75 interfaces/users.glade.h:133
 msgid "Maximum UID:"
-msgstr "Största UID:"
+msgstr "Högsta UID:"
 
 #: interfaces/users.glade.h:76 interfaces/users.glade.h:130
 msgid "Minimum UID:"
-msgstr "Minsta UID:"
+msgstr "Lägsta UID:"
 
 #: interfaces/users.glade.h:77 interfaces/users.glade.h:131
 msgid "Minimum GID:"
-msgstr "Minsta GID:"
+msgstr "Lägsta GID:"
 
 #: interfaces/users.glade.h:78 interfaces/users.glade.h:132
 msgid "Maximum GID:"
-msgstr "Största GID:"
+msgstr "Högsta GID:"
 
 #: interfaces/users.glade.h:79
 msgid "Password expiration"
@@ -2360,7 +2359,7 @@ msgstr "Annat"
 
 #: src/boot/main.c:91
 msgid "Boot Manager Settings - Ximian Setup Tools"
-msgstr "Inställningar för uppstartshanterare - Ximian Setup Tools"
+msgstr "Inställningar för uppstartshanterare - Ximians inställningsverktyg"
 
 #: src/common/xst-dialog.c:58
 #, c-format
@@ -2403,7 +2402,7 @@ msgstr ""
 #: src/common/xst-tool.c:838
 #, c-format
 msgid "%s - Ximian Setup Tools"
-msgstr "%s - Ximian Setup Tools"
+msgstr "%s - Ximians inställningsverktyg"
 
 #: src/common/xst-tool.c:982
 msgid "Pretending we are root..."
@@ -3021,7 +3020,7 @@ msgstr "Inställningar för gruppen %s"
 #~ msgstr "PPP"
 
 #~ msgid "User/Group Settings - Ximian Setup Tools"
-#~ msgstr "Användar-/gruppinställningar - Ximian Setup Tools"
+#~ msgstr "Användar-/gruppinställningar - Ximians inställningsverktyg"
 
 #~ msgid ""
 #~ "The IP address must have the form of four digits\n"
@@ -3060,16 +3059,16 @@ msgstr "Inställningar för gruppen %s"
 #~ "som kan användas som avskiljare för subdomäner."
 
 #~ msgid "Network Shares - Ximian Setup Tools"
-#~ msgstr "Nätverksutdelningar - Ximian Setup Tools"
+#~ msgstr "Nätverksutdelningar - Ximians inställningsverktyg"
 
 #~ msgid "Date/Time Settings - Ximian Setup Tools"
-#~ msgstr "Datum-/Tidsinställningar - Ximian Setup Tools"
+#~ msgstr "Datum-/Tidsinställningar - Ximians inställningsverktyg"
 
 #~ msgid "Disk Partitions - Ximian Setup Tools"
-#~ msgstr "Diskpartitioner - Ximian Setup Tools"
+#~ msgstr "Diskpartitioner - Ximians inställningsverktyg"
 
 #~ msgid "Swap Management - Ximian Setup Tools"
-#~ msgstr "Hantering av växlingsutrymme - Ximian Setup Tools"
+#~ msgstr "Hantering av växlingsutrymme - Ximians inställningsverktyg"
 
 #~ msgid "WaveLAN connection"
 #~ msgstr "WaveLAN-anslutning"
