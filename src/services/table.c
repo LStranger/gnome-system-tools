@@ -38,10 +38,10 @@ GtkItemFactoryEntry popup_menu_items[] = {
 
 typedef struct TreeItem_ TreeItem;
 	
-struct TreeItem_
-{
+struct TreeItem_ {
 	const gchar *service;
 	gboolean active;
+	gint priority;
 };
 
 extern GstTool *tool;
@@ -72,6 +72,7 @@ add_columns (GtkTreeView *treeview)
 	gint i, *col;
 	gchar *label;
 	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
 
 	renderer = gtk_cell_renderer_toggle_new ();
 	gtk_tree_view_insert_column_with_attributes (treeview, -1,
@@ -84,11 +85,22 @@ add_columns (GtkTreeView *treeview)
 			  G_CALLBACK (on_service_toggled), tool);
 	
 	renderer = gtk_cell_renderer_text_new ();
-	gtk_tree_view_insert_column_with_attributes (treeview, -1,
-						     _("Service"),
-						     renderer,
-						     "text", COL_SERVICE,
-						     NULL);
+	column = gtk_tree_view_column_new_with_attributes (_("Service"),
+							   renderer,
+							   "text", COL_SERVICE,
+							   NULL);
+	gtk_tree_view_column_set_sort_column_id (column, COL_SERVICE);
+	gtk_tree_view_insert_column (treeview, column, -1);
+	
+	column = gtk_tree_view_column_new_with_attributes ("priority",
+							   renderer,
+							   "text", COL_PRIORITY,
+							   NULL);
+	gtk_tree_view_column_set_sort_column_id (column, COL_PRIORITY);
+	gtk_tree_view_column_set_sort_indicator (column, FALSE);
+	gtk_tree_view_column_set_visible (column, FALSE);
+
+	gtk_tree_view_insert_column (treeview, column, -1);
 }
 
 static GtkTreeModel*
@@ -99,6 +111,7 @@ create_model (void)
 	model = gtk_tree_store_new (COL_LAST,
 				    G_TYPE_BOOLEAN,
 				    G_TYPE_STRING,
+				    G_TYPE_INT,
 				    G_TYPE_POINTER);
 	return GTK_TREE_MODEL(model);
 }
@@ -182,6 +195,12 @@ table_value_active (xmlNodePtr node, gint runlevel)
 	return value;
 }
 
+static gint
+table_value_priority (xmlNodePtr node)
+{
+	return (gint) g_strtod (gst_xml_get_child_content (node, "priority"), NULL);
+}
+
 static TreeItem*
 get_node_data (xmlNodePtr service, gint runlevel)
 {
@@ -189,6 +208,7 @@ get_node_data (xmlNodePtr service, gint runlevel)
 
 	item->service = table_value_service (service);
 	item->active = table_value_active (service, runlevel);
+	item->priority = table_value_priority (service);
 
 	return item;
 }
@@ -215,6 +235,7 @@ table_populate (xmlNodePtr root, gint runlevel)
 		                    &iter,
 		                    COL_ACTIVE, item->active,
 		                    COL_SERVICE, item->service,
+				    COL_PRIORITY, item->priority,
 				    COL_POINTER, service,
 		                    -1);
 	}

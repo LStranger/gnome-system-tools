@@ -37,6 +37,7 @@ void            on_service_priority_changed             (GtkWidget*,   gpointer)
 void            on_runlevel_changed                     (GtkWidget*,   gpointer);
 void            on_service_toggled                      (GtkWidget*,   gchar*, gpointer);
 void            on_popup_settings_activate              (gpointer, guint, GtkWidget*);
+void            on_sequence_ordering_changed            (GtkWidget*,   gpointer);
 gboolean        on_table_button_press_event             (GtkWidget*, GdkEventButton*, gpointer);
 void            change_runlevel                         (gint);
 

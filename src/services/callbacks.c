@@ -219,6 +219,7 @@ on_service_priority_changed (GtkWidget *spin_button, gpointer data)
 		return;
 
 	gst_xml_set_child_content (service, "priority", value);
+	gtk_tree_store_set (GTK_TREE_STORE (model), &iter, COL_PRIORITY, val, -1);
 
 	gst_dialog_modify (tool->main_dialog);
 
@@ -414,4 +415,28 @@ on_table_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer 
 	}
 
 	return FALSE;
+}
+
+void
+on_priority_changed (GtkWidget *widget, gpointer data)
+{
+	
+}
+
+void
+on_sequence_ordering_changed (GtkWidget *widget, gpointer data)
+{
+	GtkTreeView *treeview = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
+	GtkTreeViewColumn *services_column = gtk_tree_view_get_column (treeview, COL_SERVICE);
+	GtkTreeViewColumn *priority_column = gtk_tree_view_get_column (treeview, COL_PRIORITY);
+	gboolean active = gtk_toggle_button_get_active (widget);
+
+	if (active) {
+		/* FIXME: is there any other way? */
+		gtk_tree_view_column_set_visible (priority_column, TRUE);
+		gtk_tree_view_column_clicked (priority_column);
+		gtk_tree_view_column_set_visible (priority_column, FALSE);
+	} else {
+		gtk_tree_view_column_clicked (services_column);
+	}
 }

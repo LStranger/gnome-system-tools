@@ -40,12 +40,15 @@ GstTool *tool;
 static GstDialogSignal signals [] = {
 	{ "settings_button", "clicked", G_CALLBACK (on_settings_button_clicked) },
 	{ "dialog_service_priority", "value-changed", G_CALLBACK (on_service_priority_changed) },
-	{ NULL }};
+	{ "sequence_ordering", "clicked", G_CALLBACK (on_sequence_ordering_changed) },
+	{ NULL }
+};
 
 static GstWidgetPolicy policies [] = {
 	/* Name                     Basic                        Advanced                   Root   User */
 	{ "settings_button",        GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "runlevels_menu",         GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE },
+	{ "sequence_ordering",      GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE },
 	{NULL}
 };
 
