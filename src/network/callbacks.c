@@ -73,7 +73,6 @@ connection_actions_set_sensitive (gboolean state)
 void 
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
-	GtkWidget *widget;
 	GtkCList *list;
 
 	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list"));
@@ -463,11 +462,11 @@ callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
 	XstConnection *cxn;
 
 	clist = xst_dialog_get_widget (dialog, "connection_list");
-	g_return_if_fail (GTK_IS_CLIST (clist));
+	g_return_val_if_fail (GTK_IS_CLIST (clist), TRUE);
 
 	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-		g_return_if_fail (cxn != NULL);
+		g_return_val_if_fail (cxn != NULL, TRUE);
 		connection_set_row_pixtext (clist, i, cxn->enabled ? _("Active") :
 					    _("Inactive"), cxn->enabled);
 	}

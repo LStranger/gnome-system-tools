@@ -539,9 +539,8 @@ connection_update_row (XstConnection *cxn)
 	g_return_if_fail (GTK_IS_CLIST (clist));
 	g_return_if_fail (cxn->dev != NULL);
 
-	if (cxn->type != XST_CONNECTION_UNKNOWN)
-		gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
-				       mini_pm[cxn->type], mini_mask[cxn->type]);
+	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
+			       mini_pm[cxn->type], mini_mask[cxn->type]);
 
 	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name);
 	gtk_clist_sort (GTK_CLIST (clist));
