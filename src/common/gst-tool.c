@@ -1615,7 +1615,7 @@ try_show_usage_warning (void)
 	value = gconf_client_get_bool (client, key, &error);
 	version = gconf_client_get_string (client, version_key, &error);
 
-	if ((value == TRUE) || (strcmp (version, VERSION) != 0))
+	if ((value == TRUE) || version && (strcmp (version, VERSION) != 0))
 	{
 		GtkWidget *dialog, *label, *image, *hbox;
 		GtkWidget *checkbox;
