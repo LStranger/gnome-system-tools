@@ -41,13 +41,13 @@ struct _XstNetworkInterfaceDescription {
 };
 
 static const XstNetworkInterfaceDescription xst_iface_desc [] = {
-	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "networking.png",  "other_type"},
+	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "network.png",  "other_type"},
 	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth"   },
-	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "networking.png",  "wvlan" },
+	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "network.png",  "wvlan" },
 	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp"   },
 	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "16_plip.xpm",  "plip"  },
 	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"    },
-	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "networking.png",  NULL},
+	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "network.png",  NULL},
 	{ NULL, XST_CONNECTION_UNKNOWN, NULL, NULL}
 };
 
