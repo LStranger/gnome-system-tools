@@ -139,6 +139,10 @@ dnl ========================================================
 ALL_LINGUAS="az ca da de el es fr gl hu it ja ko nn no pl pt_BR ru sk sv tr uk wa zh_TW"
 AM_GNOME_GETTEXT
 
+if test "x${DATADIRNAME}" = "x"; then
+  DATADIRNAME=share
+fi
+
 dnl Set PACKAGE_LOCALE_DIR in config.h.
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
