@@ -2,20 +2,23 @@
 <GTK-Interface>
 
 <project>
-  <name>Template</name>
-  <program_name>template</program_name>
+  <name>Users Admin</name>
+  <program_name>users-admin</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <pixmaps_directory>../pixmaps</pixmaps_directory>
   <language>C</language>
   <gnome_support>True</gnome_support>
   <gettext_support>True</gettext_support>
   <use_widget_names>True</use_widget_names>
+  <output_main_file>False</output_main_file>
+  <output_translatable_strings>True</output_translatable_strings>
+  <translatable_strings_file>users.glade.h</translatable_strings_file>
 </project>
 
 <widget>
   <class>GnomeApp</class>
-  <name>main_window</name>
+  <name>users-admin</name>
   <title>User Account Configuration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -106,7 +109,7 @@
 		<widget>
 		  <class>GnomePixmap</class>
 		  <name>pixmap2</name>
-		  <filename>gnome-who.png</filename>
+		  <filename>users.png</filename>
 		</widget>
 	      </widget>
 
@@ -276,7 +279,7 @@
 		    <widget>
 		      <class>GnomePixmap</class>
 		      <name>pixmap1</name>
-		      <filename>gnome-settings.png</filename>
+		      <filename>settings.png</filename>
 		    </widget>
 		  </widget>
 
@@ -390,7 +393,7 @@
 	      <widget>
 		<class>GnomePixmap</class>
 		<name>pixmap3</name>
-		<filename>gnome-ccthemes.png</filename>
+		<filename>users-groups.png</filename>
 	      </widget>
 	    </widget>
 
@@ -559,7 +562,7 @@
 		    <widget>
 		      <class>GnomePixmap</class>
 		      <name>pixmap4</name>
-		      <filename>gnome-settings.png</filename>
+		      <filename>settings.png</filename>
 		    </widget>
 		  </widget>
 
