@@ -154,12 +154,10 @@ xst_time_populate_ntp_list (XstTimeTool *time_tool)
 	/* ntp_list is a GtkTreeView */
 	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list2");
 
-
 	/* set the model */
 	store = gtk_list_store_new (2, G_TYPE_BOOLEAN, G_TYPE_STRING);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (ntp_list),
 				 GTK_TREE_MODEL (store));
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (ntp_list), TRUE);
 
 	/* create the first column, it contains 2 cell renderers */
 	column = gtk_tree_view_column_new ();
