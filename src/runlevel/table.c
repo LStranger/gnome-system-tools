@@ -284,11 +284,14 @@ table_update_state (XstDialogComplexity complexity)
 		for (i=0; i<=6; i++)
 		{
 			rl = g_strdup_printf ("%i",i);
-			if ((default_runlevel == NULL) || strcmp (default_runlevel, rl)!=0)
-			{
-				column = gtk_tree_view_get_column (treeview,i+1);
+			column = gtk_tree_view_get_column (treeview,i+1);
+			
+			if ((default_runlevel == NULL) || strcmp (default_runlevel, rl)!=0) {
 				gtk_tree_view_column_set_visible (column, FALSE);
+			} else if (strcmp (default_runlevel, rl) == 0) {
+				gtk_tree_view_column_set_visible (column, TRUE);
 			}
+			
 			g_free (rl);
 		}
 	}
