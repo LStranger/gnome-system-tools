@@ -1320,7 +1320,7 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	tool->script_name = g_strdup_printf ("%s-conf",         name);
 
 	s = g_strdup_printf ("%s_admin", name);
-	t = g_strdup_printf (_("%s"), title);
+	t = g_strdup_printf ("%s", title);
 	u = g_strdup_printf (PIXMAPS_DIR "/%s.png", name);
 
 	tool->main_dialog = gst_dialog_new (tool, s, t);
