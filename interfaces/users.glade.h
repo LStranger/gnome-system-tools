@@ -20,27 +20,20 @@ gchar *s = N_("Settings for the selected group");
 gchar *s = N_("Change the group's options like its name and members.");
 gchar *s = N_("Settings");
 gchar *s = N_("Groups");
-gchar *s = N_("Default system settings can\n"
-              " be edited in advnced mode.");
+gchar *s = N_("These are global values that will affect the creation of new users. They are only available when you click \"More Options\".");
 gchar *s = N_("System settings");
-gchar *s = N_("Directory where \n"
-              "mailboxes reside:");
-gchar *s = N_("Create home directory\n"
-              " for new users:");
+gchar *s = N_("Mailbox directory:");
+gchar *s = N_("Create home  for new users:");
 gchar *s = N_("Min/max values for automatic UID/GID");
-gchar *s = N_("Minimum UID:");
 gchar *s = N_("Maximum UID:");
+gchar *s = N_("Minimum UID:");
 gchar *s = N_("Minimum GID:");
 gchar *s = N_("Maximum GID:");
-gchar *s = N_("Password settings");
-gchar *s = N_("Maximum number of days \n"
-              "a password may be used:");
-gchar *s = N_("Minimum number of days allowed\n"
-              " between password changes:");
-gchar *s = N_("Number of days warning given\n"
-              " before a password expires:");
-gchar *s = N_("Minimum acceptable\n"
-              " password length:");
+gchar *s = N_("Password expiration");
+gchar *s = N_("Days a password may be used:");
+gchar *s = N_("Minimum days allowed between password changes:");
+gchar *s = N_("Days between warning and password expiration:  ");
+gchar *s = N_("Minimum  password length:");
 gchar *s = N_("Defaults");
 gchar *s = N_(" Advanced >> ");
 gchar *s = N_("User Settings");
