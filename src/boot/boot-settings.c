@@ -367,7 +367,11 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 	if (image->append)   g_free (image->append);
 	if (image->password) g_free (image->password);
 
-	image->type = label_to_type (boot_settings_get_type (gui));
+	/* only check if the image is new, if it isn't
+	   then there's no possibility to change it */
+	if (image->new)
+		image->type = label_to_type (boot_settings_get_type (gui));
+
 	image->label = g_strdup (gtk_entry_get_text (gui->name));
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gui->use_password)))

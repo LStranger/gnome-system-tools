@@ -398,9 +398,11 @@ label_to_type (const gchar *label)
 {
 	gint i;
 
-	for (i = 0; boot_image_type_table[i].label; i++)
-		if (strcmp (label, boot_image_type_table[i].label) == 0)
+	for (i = 0; boot_image_type_table[i].label; i++) {
+		if (label && boot_image_type_table[i].label &&
+		    strcmp (label, boot_image_type_table[i].label) == 0)
 			return boot_image_type_table[i].type;
+	}
 
 	return TYPE_UNKNOWN;
 }
