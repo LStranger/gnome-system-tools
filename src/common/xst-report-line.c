@@ -48,6 +48,11 @@ xst_report_sprintf (gchar *fmt, gchar **argv)
 	for (i = 0; argv[i]; i++) {
 		if (c)
 			*c = '%';
+		else {
+			g_warning ("Excess arguments given for [%s].", fmt);
+			break;
+		}
+		
 		c = strchr (c + 1, '%');
 		if (c)
 			*c = 0;
@@ -72,6 +77,9 @@ xst_report_line_new (XstReportMajor major, gchar *key, gchar *fmt, gchar **argv)
 	xrl->major = major;
 	xrl->key = g_strdup (key);
 	xrl->fmt = g_strdup (fmt);
+
+	if (major == XST_MAJOR_DEBUG)
+		g_print ("debug\n");
 
 	/* This code duplicates the argv */
 	str = g_strjoinv ("::", argv);
