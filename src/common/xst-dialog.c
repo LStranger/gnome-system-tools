@@ -501,6 +501,12 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	dialog->gui   = xst_tool_load_glade (tool, NULL);
 	dialog->child = xst_dialog_get_widget (dialog, widget);
 
+	if (GTK_WIDGET_TOPLEVEL (dialog->child)) {
+		g_warning ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
+			   "You just need to add the widget inside a GtkWindow so that it can be deparented it.", widget);
+		return;
+	}
+
 	gtk_widget_ref (dialog->child);
 	gtk_widget_unparent (dialog->child);
 	gtk_box_pack_start (GTK_BOX (w), dialog->child, TRUE, TRUE, 0);

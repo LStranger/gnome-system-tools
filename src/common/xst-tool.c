@@ -856,7 +856,7 @@ xst_tool_new (const char *name, const char *title)
 {
 	XstTool *tool;
 	g_return_val_if_fail (name != NULL, NULL);
-       
+
 	tool = XST_TOOL (gtk_type_new (XST_TYPE_TOOL));
 	xst_tool_construct (tool, name, title);
 
@@ -951,7 +951,8 @@ xst_tool_init (const char *name, const char *title, int argc, char *argv [], con
 #endif
 
 	/* This is to fool the linker: do not delete, even if it doesn't
-	   make sense. Arturo Espinosa <arturo@ximian.com> */
+	 * make sense. Arturo Espinosa <arturo@ximian.com>
+	 */
 	xst_ui_create_image_widget (NULL, NULL, NULL, 0, 0);
 
 	if (options == NULL) {
