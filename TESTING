@@ -69,4 +69,103 @@ Network
     machine in turn (for systems that have ifup/ifdown), verifying that there
     are no errors, and then run ifconfig to verify that everything is up.
 
-	 
+
+Users
+=====
+
+1)  Start users-admin as a normal user, and enter the root password in the
+    dialog. Wait for the scanning system configuration dialog to close.
+
+2)  Assure you are in simple mode (the button at the bottom of the window
+    should read "More Options >>". If not, click the button labelled "<<
+    Fewer Options").
+
+3)  Click "Add user...". The User Creation Druid will show up, with an intro
+    screen. Go through the procedure of adding a user named test, with the
+    comment "Test user". On the Password options tab, set the password to
+    "1" in both entries, make sure "Check password quality" is selected, and
+    click next. The tool should prevent you from continuing, saying the
+    password is too short. Change the password to something better, and click
+    next. Click finish to create the user.
+
+4)  Make sure the user is now on the list. Click apply, then check
+    /etc/passwd to verify that the user has been added with the expected
+    settings.
+
+5)  As a normal user, do an "su - test", and enter test's password. Make sure
+    it's possible to log in, read the home directory, etc.
+
+6)  Click on "Settings" for the user test, and change the full name and
+    password to something else. Apply, then verify /etc/passwd and by logging
+    in with the new password.
+
+7)  Click on the "More Options >>" button. The user interface changes to have
+    a "Groups" tab, and adds a search bar along the top of the list of users.
+
+8)  Enter "test" in the search bar, and press enter. The users list should
+    only show the newly added test user.
+
+10) Change to the Groups tab, and add a group named testgroup. Apply changes.
+
+11) Read /etc/group and verify that the group testgroup has been added.
+
+12) Go back to the Users tab. Select the test user, and click Settings. Go to
+    the Groups tab of the User Account Editor dialog, and add testgroup to
+    the user's groups. Click ok, and then apply. Verify that the user has
+    been added to the testgroup group by logging in as the user and running
+    "groups".
+
+13) Click on the "Profiles" button. The Profile editor pops up.
+
+14) Select the default profile, and click Copy. Name the new profile Test.
+
+15) Go to the System tab of the Profile editor, and select the Test profile
+    for editing. Change the home directory to /home/test/$user, and the
+    default shell to /bin/sh.
+
+16) Apply and close the Profiles editor. Click add user (note that it no
+    longer uses a Druid, since it's in advanced mode), and add a new user
+    named test2, using the Test profile, then apply.
+
+17) Verify that the user has been added in /etc/passwd, then log in as the
+    user, making sure that the home directory exists.
+
+18) Delete the user test2, Apply, and make sure that the user has been
+    removed properly. 
+
+19) Remove the group testgroup, Apply, and make sure the group has been
+    removed properly.
+
+20) Remove the user test.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
