@@ -504,9 +504,9 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	{
 		g_free (current_user->password);
 		if (passwd_uses_md5 ()) 
-			current_user->password = crypt_md5 (new_passwd, passwd_rand_str (salt, 8));
+			current_user->password = g_strdup (crypt_md5 (new_passwd, passwd_rand_str (salt, 8)));
 		else
-			current_user->password = crypt (new_passwd, passwd_rand_str (salt, 2));
+			current_user->password = g_strdup (crypt (new_passwd, passwd_rand_str (salt, 2)));
 
 		gtk_widget_hide (win);
 		tool_set_modified (TRUE);
@@ -1469,7 +1469,7 @@ passwd_rand_str (gchar *str, gint len)
 	str[len] = 0;
 	
 	for (i = 0; i < len; i++) 
-		str[i] = alphanum [(gint) ((((float) len) * rand () / (RAND_MAX + 1.0)))];
+		str[i] = alphanum [(gint) ((((float) alnum_len) * rand () / (RAND_MAX + 1.0)))];
 	
 	return str;
 }
