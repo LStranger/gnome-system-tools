@@ -4,6 +4,7 @@ interfaces = \
 	disks.glade	\
 	network.glade	\
 	services.glade  \
+	shares.glade	\
 	time.glade	\
 	users.glade
 

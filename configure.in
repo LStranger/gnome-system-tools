@@ -143,15 +143,19 @@ AC_ARG_ENABLE(users,
 	      [  --enable-users          Enable build users module (default yes)], , 
 	      enable_users=yes)
 AC_ARG_ENABLE(disks,
-	      [  --enable-disks          Enable build disks development module (default no)], , 
-	      enable_disks=no)
+	      [  --enable-disks          Enable build disks module (default yes)], , 
+	      enable_disks=yes)
+AC_ARG_ENABLE(shares,
+	      [  --enable-shares         Enable build shares module (default yes)], , 
+	      enable_shares=yes)
 
 AM_CONDITIONAL(BUILD_BOOT, test x$enable_boot != xno)
 AM_CONDITIONAL(BUILD_NETWORK, test x$enable_network = xyes)
 AM_CONDITIONAL(BUILD_SERVICES, test x$enable_services != xno)
 AM_CONDITIONAL(BUILD_TIME, test x$enable_time = xyes)
 AM_CONDITIONAL(BUILD_USERS, test x$enable_users = xyes)
-AM_CONDITIONAL(BUILD_DISKS, test x$enable_disks != xno)
+AM_CONDITIONAL(BUILD_DISKS, test x$enable_disks = xyes)
+AM_CONDITIONAL(BUILD_SHARES, test x$enable_shares = xyes)
 
 dnl =====================================================
 dnl END: Check for Module versions
@@ -288,6 +292,7 @@ src/time/Makefile
 src/time/e-map/Makefile
 src/boot/Makefile
 src/services/Makefile
+src/shares/Makefile
 src/disks/Makefile
 po/Makefile.in
 gnome-system-tools.pc

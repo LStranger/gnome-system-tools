@@ -36,7 +36,6 @@ void      generic_set_value_integer    (xmlNodePtr node, const gchar *name, gint
 gchar    *user_value_group             (xmlNodePtr user_node);
 gpointer  user_value_group_peek        (xmlNodePtr user_node);
 void      user_set_value_group         (xmlNodePtr user_node, const gchar *value);
-GList    *user_get_groups              (xmlNodePtr user_node);
 void      user_set_groups              (xmlNodePtr user_node, GSList *list);
 gchar   **user_value_comment_array     (xmlNodePtr node);
 void      user_set_value_comment_array (xmlNodePtr node, gchar **comment);

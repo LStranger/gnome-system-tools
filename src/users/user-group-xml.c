@@ -119,42 +119,6 @@ user_value_group_peek (xmlNodePtr user_node)
 	return buf;
 }
 
-GList*
-user_get_groups (xmlNodePtr user_node)
-{
-	xmlNodePtr group_node, g, group_users;
-	gchar *user_name, *buf;
-	GList *grouplist = NULL;
-
-	g_return_val_if_fail (user_node != NULL, NULL);
-
-	group_node = get_corresp_field (user_node);
-	user_name = user_value_login (user_node);
-
-	if (!user_name)
-		return NULL;
-
-	for (g = gst_xml_element_find_first (group_node, "group"); g;
-	     g = gst_xml_element_find_next (g, "group")) {
-		group_users = gst_xml_element_find_first (g, "users");
-		for (group_users = gst_xml_element_find_first (group_users, "user");
-		     group_users;
-		     group_users = gst_xml_element_find_next (group_users, "user")) {
-			buf = gst_xml_element_get_content (group_users);
-			if (!buf)
-				continue;
-
-			if (!strcmp (user_name, buf))
-				grouplist = g_list_insert_sorted (grouplist, group_value_name (g), my_strcmp);
-			
-			g_free (buf);
-		}
-	}
-
-	g_free (user_name);
-	return grouplist;
-}
-
 void
 del_user_groups (xmlNodePtr user_node)
 {

@@ -33,6 +33,7 @@
 #include "users-table.h"
 #include "groups-table.h"
 #include "profiles-table.h"
+#include "privileges-table.h"
 #include "user_group.h"
 #include "callbacks.h"
 #include "user-group-xml.h"
@@ -195,6 +196,7 @@ create_tables (void)
 	create_users_table ();
 	create_groups_table ();
 	create_profiles_table ();
+	create_user_privileges_table ();
 }
 
 void

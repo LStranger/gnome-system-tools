@@ -32,6 +32,7 @@ users_admin_SOURCES = \
 	table.c table.h  \
 	user-group-xml.c user-group-xml.h \
 	profiles-table.c profiles-table.h \
-	profile-settings.c profile-settings.h
+	profile-settings.c profile-settings.h \
+	privileges-table.c privileges-table.h
 
 toolpixmaps =

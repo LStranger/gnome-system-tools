@@ -21,11 +21,18 @@ endif
 if BUILD_DISKS
 disks_SUBDIR = disks
 endif
+
+if BUILD_SHARES
+shares_SUBDIR = shares
+endif
+
 SUBDIRS = common		\
 	  $(network_SUBDIR) 	\
 	  $(time_SUBDIR) 	\
 	  $(boot_SUBDIR)	\
 	  $(services_SUBDIR)	\
 	  $(users_SUBDIR)	\
-	  $(disks_SUBDIR)
+	  $(disks_SUBDIR)	\
+	  $(shares_SUBDIR)
+
 

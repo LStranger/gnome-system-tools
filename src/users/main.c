@@ -53,8 +53,6 @@ static GstDialogSignal signals[] = {
 	{ "user_settings_dialog",		"show",			G_CALLBACK (on_user_settings_dialog_show) },
 	{ "user_settings_ok",			"clicked",		G_CALLBACK (on_user_settings_ok_clicked) },
 	{ "user_settings_cancel",		"clicked",		G_CALLBACK (on_user_settings_dialog_delete_event) },
-	{ "user_settings_add",			"clicked",		G_CALLBACK (on_add_remove_button_clicked) },
-	{ "user_settings_remove",		"clicked",		G_CALLBACK (on_add_remove_button_clicked) },
 	{ "user_settings_profile_menu",         "changed",              G_CALLBACK (on_user_settings_profile_changed) },
 	{ "user_passwd_manual",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },
 	{ "user_passwd_random",			"toggled",		G_CALLBACK (on_user_settings_passwd_toggled) },

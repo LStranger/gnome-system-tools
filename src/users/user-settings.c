@@ -48,39 +48,6 @@ extern GstTool *tool;
 extern GList *groups_list;
 xmlNodePtr user_profile;
 
-static void
-create_groups_gtk_trees (void)
-{
-	GtkWidget *user_settings_all = gst_dialog_get_widget (tool->main_dialog, "user_settings_all");
-	GtkWidget *user_settings_members = gst_dialog_get_widget (tool->main_dialog, "user_settings_members");
-	GtkWidget *add_button, *remove_button;
-	GtkTreeSelection *selection;
-	GtkSizeGroup *sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
-	GtkTargetEntry target = { "group", GTK_TARGET_SAME_APP, 0 };
-	
-	/* connect signals and attach data if they haven't been created already */
-	if (g_object_get_data (G_OBJECT (user_settings_all), "button") == NULL) {
-		create_gtk_tree_list (user_settings_all, target);
-		g_object_set_data (G_OBJECT (user_settings_all), "button", "user_settings_add");
-
-		create_gtk_tree_list (user_settings_members, target);
-		g_object_set_data (G_OBJECT (user_settings_members), "button", "user_settings_remove");
-
-		/* We also need to attach some data to the 'add' and 'remove' buttons */
-		add_button = gst_dialog_get_widget (tool->main_dialog, "user_settings_add");
-		g_object_set_data (G_OBJECT (add_button), "in", user_settings_all);
-		g_object_set_data (G_OBJECT (add_button), "out", user_settings_members);
-		
-		remove_button = gst_dialog_get_widget (tool->main_dialog, "user_settings_remove");
-		g_object_set_data (G_OBJECT (remove_button), "in", user_settings_members);
-		g_object_set_data (G_OBJECT (remove_button), "out", user_settings_all);
-
-		/* Add the scrolled windows that contain the trees in the same GtkSizeGroup */
-		gtk_size_group_add_widget (sizegroup, gst_dialog_get_widget (tool->main_dialog, "group_settings_all_container"));
-		gtk_size_group_add_widget (sizegroup, gst_dialog_get_widget (tool->main_dialog, "group_settings_members_container"));
-	}
-}
-
 static gboolean
 check_user_delete (xmlNodePtr node)
 {
@@ -211,20 +178,14 @@ user_new_prepare (ug_data *ud)
 {
 	GtkWidget *button;
 	gchar *buf;
-	GList *user_settings_all_list = NULL;
 	GtkWidget *widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	GtkWidget *user_settings_all = gst_dialog_get_widget (tool->main_dialog, "user_settings_all");
-	GtkWidget *user_settings_members = gst_dialog_get_widget (tool->main_dialog, "user_settings_members");
 
 	gtk_window_set_title (GTK_WINDOW (widget), _("User Account Editor"));
 	g_object_set_data (G_OBJECT (widget), "data", ud);
 
 	gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "user_settings_profiles"));
 	
-	/* Creates and fills GtkTrees */
-	create_groups_gtk_trees ();
-	user_settings_all_list = get_list_from_node ("name", NODE_GROUP);
-	populate_gtk_tree_list (GTK_TREE_VIEW (user_settings_all), user_settings_all_list);
+	populate_user_privileges_table (NULL);
 	
 	/* Fill menus */
 	combo_add_groups   (gst_dialog_get_widget (tool->main_dialog, "user_settings_group"), TRUE);
@@ -244,8 +205,6 @@ user_new_prepare (ug_data *ud)
 void
 user_settings_dialog_close (void)
 {
-	GtkWidget *user_settings_all = gst_dialog_get_widget (tool->main_dialog, "user_settings_all");
-	GtkWidget *user_settings_members = gst_dialog_get_widget (tool->main_dialog, "user_settings_members");
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	ug_data *ud;
@@ -269,19 +228,6 @@ user_settings_dialog_close (void)
 		gtk_entry_set_text (GTK_ENTRY (widget), "");
 	}
 
-	/* Clear both lists */
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (user_settings_all));
-	gtk_tree_store_clear (GTK_TREE_STORE (model));
-
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (user_settings_members));
-	gtk_tree_store_clear (GTK_TREE_STORE (model));
-	
-	/* Set unsensitive the add and remove buttons */
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_add");
-	gtk_widget_set_sensitive (widget, FALSE);
-	widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_remove");
-	gtk_widget_set_sensitive (widget, FALSE);
-	
 	/* Set the manual password */
 	widget = gst_dialog_get_widget (tool->main_dialog, "user_passwd_manual");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
@@ -582,7 +528,6 @@ group_check (xmlNodePtr node, const gchar *groupname)
 gboolean
 user_update (ug_data *ud)
 {
-	GtkWidget *user_settings_members = gst_dialog_get_widget (tool->main_dialog, "user_settings_members");
 	UserAccountData *data;
 	gboolean change_password = FALSE;
 	GList *list;
@@ -666,7 +611,7 @@ user_update (ug_data *ud)
 		return FALSE;
 
 	g_list_free (data->extra_groups);
-	data->extra_groups = get_gtk_tree_list_items (GTK_TREE_VIEW (user_settings_members));
+	data->extra_groups = user_privileges_get_list ();
 
 	data->pwd_maxdays = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_max"))));
 	data->pwd_mindays = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_min"))));
@@ -730,14 +675,10 @@ user_settings_dialog_prepare_comments (gchar *comments)
 static void
 user_settings_dialog_prepare (ug_data *ud)
 {
-	GtkWidget *user_settings_all = gst_dialog_get_widget (tool->main_dialog, "user_settings_all");
-	GtkWidget *user_settings_members = gst_dialog_get_widget (tool->main_dialog, "user_settings_members");
 	GtkWidget *option_menu = gst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
 	GtkWidget *w0;
 	gchar *txt, *name;
-	GList *user_settings_all_list = NULL;
-	GList *user_settings_members_list = NULL;
 	gint counter = 0;
 	GList *element;
 	
@@ -790,14 +731,8 @@ user_settings_dialog_prepare (ug_data *ud)
 		gtk_combo_box_set_active (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, "user_settings_group")), counter);
 		g_free (txt);
 	}
-	
-	/* Fill groups lists */
-	create_groups_gtk_trees ();
 
-	user_settings_members_list = user_get_groups (ud->node);
-	user_settings_all_list = my_g_list_remove_duplicates (get_list_from_node ("name", NODE_GROUP), user_settings_members_list);
-	populate_gtk_tree_list (GTK_TREE_VIEW (user_settings_all), user_settings_all_list);
-	populate_gtk_tree_list (GTK_TREE_VIEW (user_settings_members), user_settings_members_list);
+	populate_user_privileges_table (name);
 	
 	/* Set password */
 	user_settings_dialog_prepare_password ();
