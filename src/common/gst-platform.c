@@ -42,6 +42,7 @@ extern GdkPixbuf *openna;
 extern GdkPixbuf *fedora;
 extern GdkPixbuf *conectiva;
 extern GdkPixbuf *black_panther;
+extern GdkPixbuf *vine;
 
 GstPlatform *
 gst_platform_new (const gchar *key, const gchar *name)
@@ -163,6 +164,8 @@ gst_platform_get_pixmap (GstPlatform *platform)
 		return conectiva;
 	else if (g_ascii_strncasecmp (platform->name, "Black Panther", 13) == 0)
 		return black_panther;
+	else if (g_ascii_strncasecmp (platform->name, "Vine", 4) == 0)
+		return vine;
 	else return NULL;
 }
 
