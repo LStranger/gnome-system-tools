@@ -1,0 +1,46 @@
+Release of 0.2.0 (Un-ix)
+------------------------
+
+- Merged the existing tools into one package with shared, policy-enforcing
+  code for the frontends. [Hans Petter]
+
+- Shared Perl code for backends and a cleanup of existing Perl code. [Arturo]
+
+- Implemented Time. [Hans Petter]
+
+- Implemented Memory. [Bradford]
+
+- Implemented Disks. [Hans Petter]
+
+- Implemented Users. [Arturo, Tambet]
+
+- Re-implemented parts of Memory to make the backend do all the config
+  detection and manipulation. [Tambet]
+
+- Simple protocol that allows the backends to tell the frontends about their
+  progress, and progress indicators in all frontends. [Hans Petter]
+
+- Handling of fstab is more gentle, preserving all manually set options,
+  e.g. NFS' wsize, rsize. [Hans Petter]
+
+- Integration with the new control-center. At this point, you need CVS
+  control-center to make it work, but the icons show up in the old one as
+  well. [Bradford, Hans Petter]
+
+- Shares has more robust handling of user input. [Hans Petter]
+
+- Totally reworked the timezone selector in the early release of Time. It now
+  has locations instead of GMT offset strips, uses GdkPixbuf directly (faster
+  and better-looking), and has some special effects. All of this is in a
+  reusable widget called EMap and a surrogate widget-like layer called
+  ETzMap. [Hans Petter]
+
+- Debian support for Networking. [David Lee Ludwig]
+
+- Shares now has more workarounds for pessimal SMB situations, like Windows
+  master hosts that serve empty host lists (in error). [Hans Petter]
+
+- Build-time massaging of interfaces and backends that makes life both
+  easier and more conforming. [Arturo]
+
+- Red Hat 7.0 fixes. [Hans Petter]
