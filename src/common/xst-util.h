@@ -18,6 +18,11 @@
  * Authors: Hans Petter Jansson <hpj@ximian.com>.
  */
 
+#ifndef XST_UTIL_H
+#define XST_UTIL_H
+
 void   xst_util_nice_hostname     (gchar *hostname);
 gchar *xst_util_nice_hostname_dup (gchar *hostname);
 gchar *xst_util_nice_path_dup     (gchar *path);
+
+#endif /* XST_UTIL_H */
