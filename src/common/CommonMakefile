@@ -7,10 +7,8 @@ $(desktop): %.desktop: %.desktop.in
 		../../intltool-merge -d ../../po $(desktop).in $(desktop)
 
 install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
-	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/gnome/apps/Settings/System/$(desktop)
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center-2.0/capplets
-	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center-2.0/capplets/$(desktop)
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/applications
+	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/applications/$(desktop)
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/X11/sysconfig
 	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(sysconfdir)/X11/sysconfig/$(desktop)
 
