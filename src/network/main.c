@@ -67,6 +67,8 @@ main (int argc, char *argv[])
 	tool_set_frozen (FALSE);
 
 	gtk_widget_show (tool_get_top_window ());
+	/*add_connections_to_list ();*/
+	
 	on_network_admin_show (NULL, NULL);
 
 	gtk_main ();

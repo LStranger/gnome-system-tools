@@ -28,6 +28,8 @@
 
 #include "transfer.h"
 
+#include "connection.h"
+
 /* define to x for debugging output */
 #define d(x) x
 
@@ -292,6 +294,32 @@ transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 	}
 }
 
+static void
+transfer_interfaces_to_xml (xmlNodePtr root)
+{
+	GtkWidget *clist;
+	int i;
+
+	xml_element_destroy_children_by_name (root, "interface");
+
+	clist = tool_widget_get ("connection_list");
+	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+		connection_save_to_node (gtk_clist_get_row_data (GTK_CLIST (clist), i),
+					 xml_element_add (root, "interface"));
+	}
+}
+
+static void
+transfer_interfaces_to_gui (xmlNodePtr root)
+{
+	xmlNodePtr node;
+
+	for (node = xml_element_find_first (root, "interface"); 
+	     node; 
+	     node = xml_element_find_next (node, "interface")) {
+		connection_new_from_node (node);
+	}
+}
 
 void
 transfer_xml_to_gui (xmlNodePtr root)
@@ -299,6 +327,7 @@ transfer_xml_to_gui (xmlNodePtr root)
 	transfer_string_entry_xml_to_gui (root);
 	transfer_string_list_xml_to_gui (root);
 	transfer_string_clist2_xml_to_gui (root);
+	transfer_interfaces_to_gui (root);
 }
 
 
@@ -308,4 +337,5 @@ transfer_gui_to_xml (xmlNodePtr root)
 	transfer_string_entry_gui_to_xml (root);
 	transfer_string_list_gui_to_xml (root);
 	transfer_string_clist2_gui_to_xml (root);
+	transfer_interfaces_to_xml (root);
 }

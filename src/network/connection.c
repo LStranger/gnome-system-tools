@@ -23,6 +23,7 @@
 #include "connection.h"
 
 #include "tool.h"
+#include "xml.h"
 
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -37,15 +38,15 @@ gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Conn
 void connection_modified (GtkWidget *w, Connection *cxn);
 void on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn);
 
-
 #define W(s) glade_xml_get_widget (cxn->xml, (s))
-
 
 static GdkPixmap *mini_pm[CONNECTION_LAST];
 static GdkBitmap *mini_mask[CONNECTION_LAST];
 
 static GdkPixmap *active_pm[2];
 static GdkBitmap *active_mask[2];
+
+static GSList *connections;
 
 static void
 connection_set_modified (Connection *cxn, gboolean state)
@@ -124,8 +125,8 @@ update_row (Connection *cxn)
 	tool_set_modified (TRUE);
 }
 
-static void
-add_connection_to_list (Connection *cxn)
+void
+add_connection_to_list (Connection *cxn, gpointer null)
 {
 	GtkWidget *clist;
 	int row;
@@ -139,11 +140,57 @@ add_connection_to_list (Connection *cxn)
 	update_row (cxn);
 }
 
+void
+add_connections_to_list (void)
+{
+	g_slist_foreach (connections, add_connection_to_list, NULL);
+}
+
 Connection *
 connection_new_from_node (xmlNode *node)
 {
-#warning FIXME: implement
-	return NULL;
+	Connection *cxn;
+	xmlNode *subnode;
+	char *s;
+
+	cxn = connection_new_from_type (CONNECTION_OTHER);
+
+	subnode = xml_element_find_first (node, "dev");
+	if (subnode) {
+		s = xml_element_get_content (subnode);
+		if (s) {
+			g_free (cxn->device);
+			cxn->device = s;
+		}
+	}
+
+	subnode = xml_element_find_first (node, "method");
+	if (subnode) {
+		s = xml_element_get_content (subnode);
+		if (s) {
+			if (!strcmp (s, "dhcp"))
+				cxn->ip_config = cxn->tmp_ip_config = IP_DHCP;
+			else if (!strcmp (s, "bootp"))
+				cxn->ip_config = cxn->tmp_ip_config = IP_BOOTP;
+			else
+				cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
+
+			g_free (s);
+		}
+	}
+
+	subnode = xml_element_find_first (node, "auto");
+	if (subnode) {
+		s = xml_element_get_content (subnode);
+		if (s) {
+			cxn->autoboot = atoi (s);
+			g_free (s);
+		}
+	}
+
+	update_row (cxn);
+
+	return cxn;
 }
 
 Connection *
@@ -183,7 +230,7 @@ connection_new_from_type (ConnectionType type)
 	cxn->subnet  = g_strdup ("255.255.0.0");
 	cxn->gateway = g_strdup ("10.0.1.1");
 
-	add_connection_to_list (cxn);
+	add_connection_to_list (cxn, NULL);
 	
 	return cxn;
 }
@@ -476,7 +523,7 @@ hookup_callbacks (Connection *cxn)
 void
 connection_configure (Connection *cxn)
 {
-	GtkWidget *nb;
+	GtkWidget *nb, *hb, *qm;
 	char *s;
 
 	if (cxn->window) {
@@ -498,6 +545,12 @@ connection_configure (Connection *cxn)
 
 	cxn->window = W("connection_config_dialog");
 
+	hb = W ("connection_help");
+	qm = gnome_stock_pixmap_widget_new (hb, GNOME_STOCK_PIXMAP_HELP);
+	gtk_widget_show (qm);
+	gtk_container_add (GTK_CONTAINER (hb), qm);
+	gtk_widget_set_sensitive (hb, FALSE);
+			   
 	fill_general (cxn);
 	fill_ip      (cxn);
 
