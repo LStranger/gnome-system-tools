@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools 0.1.0\n"
 "POT-Creation-Date: 2000-11-08 16:38-0600\n"
-"PO-Revision-Date: 2000-12-08 17:31+01:00\n"
+"PO-Revision-Date: 2000-12-13 17:31+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: interfaces/common.glade.h:7 interfaces/common.glade.h:10
+#: interfaces/common.glade.h:7 interfaces/common.glade.h:12
 msgid "Helix Setup Tools"
 msgstr "Helix opsætningsværktøjer"
 
@@ -27,11 +27,19 @@ msgstr "Helix opsætningsværktøjer"
 msgid "Scanning your system configuration."
 msgstr "Skanner din systemkonfiguration."
 
-#: interfaces/common.glade.h:9 interfaces/common.glade.h:12
+#: interfaces/common.glade.h:9 interfaces/common.glade.h:14
 msgid "%P %%"
 msgstr "%P %%"
 
+#: interfaces/common.glade.h:10
+msgid "label51"
+msgstr "etiket51"
+
 #: interfaces/common.glade.h:11
+msgid "label52"
+msgstr "etiket52"
+
+#: interfaces/common.glade.h:13
 msgid "Updating your system configuration."
 msgstr "Opdaterer din systemkonfiguration."
 
@@ -117,7 +125,7 @@ msgstr "Diske og partitioner"
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
 #: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:15
 #: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
-#: interfaces/users.glade.h:23 src/common/tool.c:504
+#: interfaces/users.glade.h:23 src/common/tool.c:618
 msgid " Advanced >> "
 msgstr " Avanceret >> "
 
@@ -222,13 +230,12 @@ msgstr "Identifikation"
 msgid "Domain Name Service (DNS)"
 msgstr "Navnetjeneste for domæner (DNS)"
 
-#: interfaces/nameresolution.glade.h:21 interfaces/nameresolution.glade.h:31
-#: interfaces/nameresolution.glade.h:50
-msgid "New:"
-msgstr "Ny:"
+#: interfaces/nameresolution.glade.h:21
+msgid "New server:"
+msgstr "Ny server:"
 
 #: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
-#: interfaces/nameresolution.glade.h:49
+#: interfaces/nameresolution.glade.h:48
 msgid "Existing:"
 msgstr "Eksisterende:"
 
@@ -261,6 +268,10 @@ msgstr " Flyt op"
 msgid "Move Down"
 msgstr "Flyt ned"
 
+#: interfaces/nameresolution.glade.h:31
+msgid "New domain:"
+msgstr "Nyt domæne:"
+
 #: interfaces/nameresolution.glade.h:33
 msgid "Search Domains"
 msgstr "Søgedomæner"
@@ -277,7 +288,7 @@ msgstr "Navne"
 msgid "New Alias"
 msgstr "Nyt alias"
 
-#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:207
+#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:255
 msgid "Settings for the selected alias"
 msgstr "Indstillinger for valgt alias"
 
@@ -297,7 +308,11 @@ msgstr "Aliasindstillinger"
 msgid "IP address:"
 msgstr "IP-adresse:"
 
-#: interfaces/nameresolution.glade.h:48
+#: interfaces/nameresolution.glade.h:49
+msgid "New:"
+msgstr "Ny:"
+
+#: interfaces/nameresolution.glade.h:50
 msgid "label48"
 msgstr "etiket48"
 
@@ -555,7 +570,7 @@ msgstr ""
 msgid "New User"
 msgstr "Ny bruger"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:258
+#: interfaces/users.glade.h:11 src/users/callbacks.c:273
 msgid "Settings for the selected user"
 msgstr "Indstillinger for valgt bruger"
 
@@ -764,11 +779,11 @@ msgstr "Ok"
 msgid "Cancel"
 msgstr "Afbryd"
 
-#: src/common/tool.c:506
+#: src/common/tool.c:620
 msgid " << Basic "
 msgstr "<< Basic "
 
-#: src/common/tool.c:594
+#: src/common/tool.c:715
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -794,7 +809,7 @@ msgstr "Du er nødt til at angive sti til nyt swap-sted!"
 msgid "It's already used as swap space!"
 msgstr "Det er allerede brugt som swap-sted!"
 
-#: src/nameresolution/callbacks.c:57
+#: src/nameresolution/callbacks.c:62
 msgid ""
 "The IP address must have the form of four digits\n"
 "sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
@@ -804,50 +819,64 @@ msgstr ""
 "adskilt af et punktum (.), disse tal skal være mellem 0 og 255,\n"
 "undtagen det første og det sidste, som skal være mellem 1 og 254."
 
-#: src/nameresolution/callbacks.c:193
+#: src/nameresolution/callbacks.c:241
 msgid "Settings for alias of "
 msgstr "Indstillinger for alias for "
 
-#: src/users/callbacks.c:156
+#: src/nameresolution/callbacks.c:302
+#, c-format
+msgid "Settings for Alias %s"
+msgstr "Indstillinger for alias %s "
+
+#. Changes have been made.
+#: src/nameresolution/callbacks.c:414 src/users/callbacks.c:691
+msgid ""
+"There are changes which haven't been applyed.\n"
+"Apply now?"
+msgstr ""
+"Der er ændringer som ikke er anvendt.\n"
+"Anvend nu?"
+
+#: src/users/callbacks.c:164
 #, c-format
 msgid "Settings for User %s"
 msgstr "Indstillinger for bruger %s"
 
-#: src/users/callbacks.c:180
+#: src/users/callbacks.c:188
 #, c-format
 msgid "Password for User %s"
 msgstr "Adgangskode for bruger %s"
 
-#: src/users/callbacks.c:238
+#: src/users/callbacks.c:252
 msgid "The root user must not be deleted."
 msgstr "Root-brugeren må ikke slettes."
 
-#: src/users/callbacks.c:245
+#: src/users/callbacks.c:259
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Er du sikker på at du vil slette bruger %s?"
 
-#: src/users/callbacks.c:289
+#: src/users/callbacks.c:311
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Indstillinger for gruppe %s"
 
-#: src/users/callbacks.c:308
+#: src/users/callbacks.c:331
 msgid "Create New Group"
 msgstr "Opret en ny gruppe"
 
-#: src/users/callbacks.c:336
+#: src/users/callbacks.c:360
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Er du sikker på at du vil slette gruppe %s?"
 
-#: src/users/callbacks.c:457
+#: src/users/callbacks.c:482
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "Adgangskode sat ti'%s'."
 
 #. Bad confirmation
-#: src/users/callbacks.c:495
+#: src/users/callbacks.c:520
 msgid ""
 "The password and its confirmation\n"
 "must match."
@@ -856,7 +885,7 @@ msgstr ""
 "skal være ens."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:501
+#: src/users/callbacks.c:526
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -865,16 +894,7 @@ msgstr ""
 "Dårlig adgangskode: %s\n"
 "Prøv venligst med en ny adgangskode."
 
-#. Changes have been made.
-#: src/users/callbacks.c:666
-msgid ""
-"There are changes which haven't been applyed.\n"
-"Apply now?"
-msgstr ""
-"Der er ændringer som ikke er anvendt.\n"
-"Anvend nu?"
-
-#: src/users/user_group.c:57
+#: src/users/user_group.c:58
 msgid "Username is empty."
 msgstr "Brugernavn er tomt"
 
@@ -883,11 +903,11 @@ msgstr "Brugernavn er tomt"
 msgid "User %s already exists."
 msgstr "Bruger %s eksistere allerede."
 
-#: src/users/user_group.c:89
+#: src/users/user_group.c:94
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "Sæt venligst et gyldigt brugernavn, og brug kun små bogstaver."
 
-#: src/users/user_group.c:122
+#: src/users/user_group.c:128
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from the pull-down menu."
@@ -895,24 +915,24 @@ msgstr ""
 "Sæt venligst et gyldigt hovedgruppenavn, kun med brug af små bogstaver,\n"
 "eller vælg ét fra rullegardinsmenuen."
 
-#: src/users/user_group.c:187
+#: src/users/user_group.c:194
 msgid "The username is empty."
 msgstr "Brugernavnet er tomt."
 
-#: src/users/user_group.c:316
+#: src/users/user_group.c:330
 msgid "The group name is empty."
 msgstr "Gruppenavnet er tomt."
 
-#: src/users/user_group.c:333
+#: src/users/user_group.c:347
 #, c-format
 msgid "Group %s already exists."
 msgstr "Gruppe %s eksisterer allerede."
 
-#: src/users/user_group.c:349
+#: src/users/user_group.c:363
 msgid "Please set a valid group name, with only lower-case letters."
 msgstr "Sæt venligst et gyldigt gruppenavn, og brug kun små bogstaver."
 
-#: src/users/user_group.c:394
+#: src/users/user_group.c:409
 msgid "Group name is empty."
 msgstr "Gruppenavn er tomt."
 
