@@ -172,6 +172,29 @@ is_char_ok (char c, EditableFilterRules rules)
 		((rules & EF_ALLOW_TEXT) && (isalpha (c) || c == '_' || c == '-'));
 }
 
+static gchar *
+str_insert_text (const gchar *str, const gchar *text, gint length, gint pos)
+{
+	gchar *buff;
+	gint i, len;
+
+	len = strlen (str);
+	
+	g_assert (pos <= len);
+
+	buff = g_new0 (char, len + length + 1);
+
+	for (i = 0; i < pos; i++)
+		buff[i] = str[i];
+	for (i = 0; i < length; i++)
+		buff[i + pos] = text[i];
+	for (i = 0; i < len - pos; i++)
+		buff[i + pos + length] = str[i + pos];
+	buff[len + length] = 0;
+
+	return buff;
+}
+
 void
 filter_editable (GtkEditable *editable, const gchar *text, gint length,
 		 gint *pos, gpointer data)
@@ -180,11 +203,20 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length,
 	char *s = NULL;
 	EditableFilterRules rules = GPOINTER_TO_INT (data);
 
-	if ((rules & EF_ALLOW_IP) && !is_ip_text_ok (gtk_editable_get_chars (editable, 0, -1)))
-		goto text_changed_fail;
-	else
-		goto text_changed_success;
+	if (rules & EF_ALLOW_IP) {
+		gboolean success;
 
+		s = str_insert_text (gtk_editable_get_chars (editable, 0, -1), text, length, *pos);
+		success = is_ip_text_ok (s);
+		g_free (s);
+		s = NULL;
+		
+		if (success)
+			goto text_changed_success;
+		else
+			goto text_changed_fail;
+	}
+	
 	/* thou shalt optimize for the common case */
 	if (length == 1) {
 		if (is_char_ok (*text, rules))
