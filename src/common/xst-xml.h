@@ -6,6 +6,7 @@
 
 xmlNodePtr     xst_xml_doc_get_root             (xmlDocPtr doc);
 void           xst_xml_doc_dump                 (xmlDocPtr doc);
+xmlDocPtr      xst_xml_doc_create               (const gchar *root_name);
 void           xst_xml_doc_destroy              (xmlDocPtr doc);
 
 xmlNodePtr     xst_xml_element_get_parent       (xmlNodePtr node);

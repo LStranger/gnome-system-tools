@@ -33,11 +33,6 @@
 
 #include "xst-xml.h"
 
-typedef struct {
-	char *font_name;
-	gint is_basic_14;
-} ps_internal_font;
-
 xmlNodePtr
 xst_xml_doc_get_root (xmlDocPtr doc)
 {
@@ -50,6 +45,19 @@ xst_xml_doc_dump (xmlDocPtr doc)
 	xmlDocDump (stdout, doc);
 }
 
+xmlDocPtr
+xst_xml_doc_create (const gchar *root_name)
+{
+	xmlDocPtr  doc;
+	xmlNodePtr root;
+
+	doc = xmlNewDoc ("1.0");
+	root = xmlNewNode (NULL, root_name);
+	root = xmlDocSetRootElement (doc, root);
+
+	return doc;
+}
+	
 void
 xst_xml_doc_destroy (xmlDocPtr doc)
 {
