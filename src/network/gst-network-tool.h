@@ -32,6 +32,7 @@ extern "C" {
 #include "network-iface-wireless.h"
 #include "network-iface-plip.h"
 #include "network-iface-irlan.h"
+#include "network-iface-isdn.h"
 #include "network-iface-modem.h"
 #include "connection.h"
 #include "location.h"

@@ -28,6 +28,7 @@ network_admin_SOURCES = 			\
 	network-iface-irlan.c network-iface-irlan.h		\
 	network-iface-plip.c network-iface-plip.h		\
 	network-iface-modem.c network-iface-modem.h		\
+	network-iface-isdn.c network-iface-isdn.h		\
 	ifaces-list.c ifaces-list.h		\
 	callbacks.c callbacks.h			\
 	connection.c connection.h		\

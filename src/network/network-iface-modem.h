@@ -25,7 +25,7 @@
 extern "C" {
 #endif
 
-#include "network-iface.h"
+#include "network-iface-isdn.h"
 #include "gst-xml.h"
 
 typedef enum {
@@ -55,14 +55,14 @@ typedef struct _GstIfaceModemPriv  GstIfaceModemPriv;
 
 struct _GstIfaceModem
 {
-  GstIface parent;
+  GstIfaceIsdn parent;
 
   GstIfaceModemPriv *_priv;
 };
 
 struct _GstIfaceModemClass
 {
-  GstIfaceClass parent_class;
+  GstIfaceIsdnClass parent_class;
 };
 
 GType gst_iface_modem_get_type ();

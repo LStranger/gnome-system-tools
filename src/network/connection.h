@@ -35,7 +35,7 @@ struct _GstConnectionDialog {
   GtkWidget *notebook;
   GtkWidget *general_page;
   GtkWidget *ppp_general_page;
-  GtkWidget *account_page;
+  GtkWidget *modem_page;
   GtkWidget *options_page;
 
   GtkWidget *connection_configured;
@@ -57,13 +57,19 @@ struct _GstConnectionDialog {
   GtkWidget *local_address;
   GtkWidget *remote_address;
 
-  /* modem */
+  /* isdn */
   GtkWidget *login;
   GtkWidget *password;
-  GtkWidget *serial_port;
-  GtkWidget *detect_modem;
   GtkWidget *phone_number;
   GtkWidget *dial_prefix;
+
+  /* modem */
+  GtkWidget *ppp_login;
+  GtkWidget *ppp_password;
+  GtkWidget *serial_port;
+  GtkWidget *detect_modem;
+  GtkWidget *ppp_phone_number;
+  GtkWidget *ppp_dial_prefix;
   GtkWidget *volume;
   GtkWidget *dial_type;
   GtkWidget *default_gw;
@@ -80,9 +86,9 @@ struct _GstConnectionDialog {
 
 GstConnectionDialog *connection_dialog_init (void);
 void connection_dialog_prepare    (GstConnectionDialog*, GstIface*);
+void connection_dialog_set_sensitive (GstConnectionDialog*, gboolean);
 void connection_save (GstConnectionDialog*);
 void connection_check_fields (GstConnectionDialog*);
 void connection_check_netmask (GtkWidget*, GtkWidget*);
 gchar *connection_detect_modem (void);
-
 #endif /* __CONNECTION_H */

@@ -120,15 +120,10 @@ on_iface_active_changed (GtkWidget *widget, gpointer data)
   GstConnectionDialog *dialog;
   gboolean active;
 
-  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
   dialog = GST_NETWORK_TOOL (tool)->dialog;
+  active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
-  gtk_widget_set_sensitive (dialog->wireless_frame, active);
-  gtk_widget_set_sensitive (dialog->ethernet_frame, active);
-  gtk_widget_set_sensitive (dialog->plip_frame,     active);
-  gtk_widget_set_sensitive (dialog->modem_frame,    active);
-  gtk_widget_set_sensitive (dialog->account_page,   active);
-  gtk_widget_set_sensitive (dialog->options_page,   active);
+  connection_dialog_set_sensitive (dialog, active);
 }
 
 void

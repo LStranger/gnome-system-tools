@@ -223,6 +223,8 @@ ifaces_model_set_interface_from_node_at_iter (xmlNodePtr node, GtkTreeIter *iter
     iface = GST_IFACE (gst_iface_plip_new_from_xml (node));
   else if (strcmp (type, "modem") == 0)
     iface = GST_IFACE (gst_iface_modem_new_from_xml (node));
+  else if (strcmp (type, "isdn") == 0)
+    iface = GST_IFACE (gst_iface_isdn_new_from_xml (node));
 
   if (iface)
     {
@@ -262,7 +264,7 @@ ifaces_model_search_iface (IfaceSearchTerm search_term, const gchar *term)
       if (search_term == SEARCH_DEV)
 	item = dev;
       else
-	item = gst_iface_get_iface_type (iface);
+	item = (gchar *) gst_iface_get_iface_type (iface);
 
       if (strcmp (term, item) == 0)
 	valid = FALSE;
