@@ -42,6 +42,8 @@ xst_report_sprintf (gchar *fmt, gchar **argv)
 	ret[0] = 0;
 	fmt_p = orig_fmt;
 	c = strchr (orig_fmt, '%');
+	if (!c)
+		return orig_fmt;
 	
 	for (i = 0; argv[i]; i++) {
 		if (c)
