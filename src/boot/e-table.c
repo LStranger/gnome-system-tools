@@ -307,6 +307,14 @@ boot_value_root (xmlNodePtr node)
 	return xst_xml_get_child_content (node, "root");
 }
 
+void *
+boot_value_append (xmlNodePtr node)
+{
+	g_return_val_if_fail (node != NULL, NULL);
+
+	return xst_xml_get_child_content (node, "append");
+}
+
 /* Set value functions */
 
 void
@@ -334,28 +342,6 @@ boot_value_set_label (xmlNodePtr node, gchar *val)
 	xst_xml_set_child_content (node, "label", val);
 }
 
-/*
-void
-boot_value_set_type (xmlNodePtr node, gchar *type)
-{
-	xmlNodePtr n;
-	
-	g_return_if_fail (node != NULL);
-
-	n = xst_xml_element_find_first (node, "image");
-
-	if (n)
-		return (_("Linux"));
-
-	n = xst_xml_element_find_first (node, "other");
-
-	if (n)
-		return (_("Other"));
-
-	return (_("Unknown"));
-}
-*/
-
 void
 boot_value_set_image (xmlNodePtr node, gchar *val)
 {
@@ -379,6 +365,12 @@ void boot_value_set_root (xmlNodePtr node, gchar *val)
 	xst_xml_set_child_content (node, "root", val);
 }
 
+void boot_value_set_append (xmlNodePtr node, gchar *val)
+{
+	g_return_if_fail (node != NULL);
+
+	xst_xml_set_child_content (node, "append", val);
+}
 
 xmlNodePtr
 get_selected_node (void)

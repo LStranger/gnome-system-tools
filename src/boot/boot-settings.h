@@ -19,6 +19,7 @@ typedef struct {
 
 	GtkWidget *optional;
 	GtkEntry *root;
+	GtkEntry *append;
 
 	XstDialogComplexity complexity;
 } BootSettingsDialog;

@@ -44,6 +44,7 @@ void *boot_value_type (xmlNodePtr node, gboolean bare);
 void *boot_value_image (xmlNodePtr node, gboolean bare);
 void *boot_value_dev (xmlNodePtr node, gboolean bare);
 void *boot_value_root (xmlNodePtr node);
+void *boot_value_append (xmlNodePtr node);
 
 void boot_value_set_default (xmlNodePtr node);
 void boot_value_set_label (xmlNodePtr node, gchar *val);
@@ -51,6 +52,7 @@ void boot_value_set_type (xmlNodePtr node, gchar *val);
 void boot_value_set_image (xmlNodePtr node, gchar *val);
 void boot_value_set_dev (xmlNodePtr node, gchar *val);
 void boot_value_set_root (xmlNodePtr node, gchar *val);
+void boot_value_set_append (xmlNodePtr node, gchar *val);
 
 xmlNodePtr get_selected_node (void);
 void boot_table_delete (void);

@@ -63,6 +63,8 @@ boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 	my_gtk_entry_set_text (state->basic_name, boot_value_label (node));
 	my_gtk_entry_set_text (state->adv_name, boot_value_label (node));
 	my_gtk_entry_set_text (state->type->entry, boot_value_type (node, TRUE));
+	my_gtk_entry_set_text (state->root, boot_value_root (node));
+	my_gtk_entry_set_text (state->append, boot_value_append (node));
 
 	if (xst_xml_element_find_first (node, "image"))
 	{
@@ -105,8 +107,6 @@ boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 		gtk_widget_hide (GTK_WIDGET (state->settings));
 		gtk_widget_hide (GTK_WIDGET (state->optional));
 	}
-	
-	my_gtk_entry_set_text (state->root, boot_value_root (node));
 }
 
 static gboolean
@@ -131,6 +131,7 @@ boot_settings_init (BootSettingsDialog *state)
 	state->image = xst_dialog_get_widget (tool->main_dialog, "settings_image");
 	state->optional = xst_dialog_get_widget (tool->main_dialog, "settings_optional");
 	state->root = GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "settings_root"));
+	state->append = GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "settings_append"));
 	state->complexity = tool->main_dialog->complexity;
 
 	return TRUE;
@@ -178,6 +179,7 @@ boot_settings_affect (BootSettingsDialog *state)
 			boot_value_set_dev (node, gtk_entry_get_text (GTK_ENTRY (state->device->entry)));
 
 		boot_value_set_root (node, gtk_entry_get_text (state->root));
+		boot_value_set_append (node, gtk_entry_get_text (state->append));
 	}
 	
 	else if (state->complexity == XST_DIALOG_BASIC)
