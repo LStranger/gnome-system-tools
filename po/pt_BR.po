@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-07 14:59+0200\n"
-"PO-Revision-Date: 2004-05-07 19:25-0300\n"
+"POT-Creation-Date: 2004-05-17 14:41-0400\n"
+"PO-Revision-Date: 2004-05-13 15:34-0300\n"
 "Last-Translator: Raphael Higino <raphaelh@uai.com.br>\n"
 "Language-Team: GNOME-BR <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -238,7 +238,7 @@ msgstr "Terminado"
 # interfaces/network.glade.h:57
 # src/network/connection.c:839
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:52
-#: src/network/connection.c:1883
+#: src/network/connection.c:1891
 msgid "Manual"
 msgstr "Manual"
 
@@ -585,11 +585,11 @@ msgstr "Permitir o controle de ativação para todos os _usuários"
 msgid "Auto"
 msgstr "Automaticamente"
 
-#: interfaces/network.glade.in.h:30 src/network/connection.c:1885
+#: interfaces/network.glade.in.h:30 src/network/connection.c:1893
 msgid "Automatic (BOOTP)"
 msgstr "Automático (BOOTP)"
 
-#: interfaces/network.glade.in.h:31 src/network/connection.c:1884
+#: interfaces/network.glade.in.h:31 src/network/connection.c:1892
 msgid "Automatic (DHCP)"
 msgstr "Automático (DHCP)"
 
@@ -1557,7 +1557,7 @@ msgid "Finished creating a new boot image"
 msgstr "Criação de uma nova imagem de inicialização terminada"
 
 # src/boot/e-table.c:250
-#: src/boot/boot-image.c:40 src/network/profile.c:481
+#: src/boot/boot-image.c:40 src/network/profile.c:482
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -1790,35 +1790,31 @@ msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Sinal de erro de conexão `%s' no widget `%s'"
 
 # src/common/xst-tool.c:480
-#: src/common/gst-tool.c:800
+#: src/common/gst-tool.c:802
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Ignorando diretiva %s..."
 
 # src/common/xst-tool.c:480
-#: src/common/gst-tool.c:927
+#: src/common/gst-tool.c:929
 msgid "Skipping actual save..."
 msgstr "Ignorando o salvamento efetivo..."
 
-#: src/common/gst-tool.c:1001
+#: src/common/gst-tool.c:1003
 msgid "The configuration could not be loaded"
 msgstr "A configuração não pôde ser carregada"
 
 # src/common/xst-tool.c:628
-#: src/common/gst-tool.c:1002
+#: src/common/gst-tool.c:1004
 msgid "There was an error running the backend script"
 msgstr "Houve um erro ao executar o script principal"
 
-#: src/common/gst-tool.c:1484
+#: src/common/gst-tool.c:1486
 #, c-format
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
-"GNOME System Tools</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Bem vindo ao %s pré lançamento das "
-"\"Ferramentas de Sistema do GNOME\"</span>"
+msgid "Welcome to the %s prerelease of the GNOME System Tools"
+msgstr "Bem-vindo ao %s pré-lançamento das Ferramentas de Sistema do GNOME"
 
-#: src/common/gst-tool.c:1487
+#: src/common/gst-tool.c:1488
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1832,19 +1828,19 @@ msgstr ""
 "esforço e sanidade. Você foi avisado. Obrigado por testar essa versão de pré-"
 "lançamento das Ferramentas de Sistema do GNOME!"
 
-#: src/common/gst-tool.c:1508
+#: src/common/gst-tool.c:1509
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/common/gst-tool.c:1528
+#: src/common/gst-tool.c:1529
 msgid "Don't show me this again"
 msgstr "Não mostre isso novamente"
 
-#: src/common/gst-tool.c:1602
+#: src/common/gst-tool.c:1604
 msgid "GNOME System Tools"
 msgstr "Ferramentas de Sistema GNOME"
 
-#: src/network/callbacks.c:361
+#: src/network/callbacks.c:365
 msgid ""
 "This will disable any network connection with this interface as soon as you "
 "hit \"apply\"."
@@ -1853,17 +1849,17 @@ msgstr ""
 "clicar em \"Aplicar\"."
 
 # src/users/user_group.c:691
-#: src/network/callbacks.c:366
+#: src/network/callbacks.c:370
 #, c-format
 msgid "Are you sure you want to delete connection \"%s\"?"
 msgstr "Você tem certeza de que deseja excluir a conexão \"%s\"?"
 
 # interfaces/shares.glade.h:17
-#: src/network/callbacks.c:456
+#: src/network/callbacks.c:460
 msgid "SMB Support is not running"
 msgstr "O suporte a SMB não está sendo executado"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:461
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1871,11 +1867,11 @@ msgstr ""
 "Você não tem suporte a SMB instalado. Por favor, instale o suporte a SMB no "
 "sistema para habilitar a rede windows."
 
-#: src/network/callbacks.c:521
+#: src/network/callbacks.c:525
 msgid "Host name has changed"
 msgstr "O nome da máquina mudou"
 
-#: src/network/callbacks.c:522
+#: src/network/callbacks.c:526
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1885,15 +1881,15 @@ msgstr ""
 
 # interfaces/nameresolution.glade.h:17
 # interfaces/network.glade.h:9
-#: src/network/callbacks.c:526
+#: src/network/callbacks.c:530
 msgid "Change _Host name"
 msgstr "Alterar nome da _máquina"
 
-#: src/network/callbacks.c:569
+#: src/network/callbacks.c:573
 msgid "Wvdial missing"
 msgstr "Faltando wvdial"
 
-#: src/network/callbacks.c:570
+#: src/network/callbacks.c:574
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1901,11 +1897,11 @@ msgstr ""
 "O wvdial não foi encontrado no seu sistema. Você precisa instalar o wvdial, "
 "ou as conexões PPP (modem) não serão ativadas."
 
-#: src/network/callbacks.c:596
+#: src/network/callbacks.c:600
 msgid "Wvdial not found"
 msgstr "Wvdial não encontrado"
 
-#: src/network/callbacks.c:597
+#: src/network/callbacks.c:601
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1914,23 +1910,23 @@ msgstr ""
 "wvdial, ou as conexões PPP (modem) não serão ativadas. Continuar mesmo assim?"
 
 # interfaces/network.glade.h:22
-#: src/network/callbacks.c:601 src/network/callbacks.c:628
+#: src/network/callbacks.c:605 src/network/callbacks.c:632
 msgid "_Continue"
 msgstr "_Continuar"
 
-#: src/network/callbacks.c:624
+#: src/network/callbacks.c:628
 msgid "The default gateway device is not activated"
 msgstr "O dispositivo de gateway padrão não está ativado"
 
-#: src/network/callbacks.c:625
+#: src/network/callbacks.c:629
 msgid "This will prevent you from connecting to the Internet. Continue anyway?"
 msgstr "Isto vai impedí-lo de se conectar à Internet. Continuar mesmo assim?"
 
-#: src/network/callbacks.c:673
+#: src/network/callbacks.c:677
 msgid "The default gateway device is missing gateway information"
 msgstr "Faltam informações de gateway ao dispositivo de gateway padrão"
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:678
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device."
@@ -1938,11 +1934,11 @@ msgstr ""
 "Por favor, forneça estas informações para continuar, ou escolha outro "
 "dispositivo de gateway padrão."
 
-#: src/network/callbacks.c:719
+#: src/network/callbacks.c:723
 msgid "The program redhat-config-network-cmd could not be found"
 msgstr "O programa redhat-config-network-cmd não pôde ser encontrado"
 
-#: src/network/callbacks.c:720
+#: src/network/callbacks.c:724
 msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this."
@@ -1951,56 +1947,56 @@ msgstr ""
 "favor, instale o pacote rpm redhat-config-network para evitar isso."
 
 # src/users/user_group.c:691
-#: src/network/callbacks.c:751
+#: src/network/callbacks.c:755
 #, c-format
 msgid "Do you want to enable interface \"%s\"?"
 msgstr "Você deseja habilitar a interface \"%s\"?"
 
-#: src/network/callbacks.c:752
+#: src/network/callbacks.c:756
 msgid "This will enable network access through this interface"
 msgstr "Isso habilitará acesso a rede através desta interface"
 
-#: src/network/callbacks.c:753
+#: src/network/callbacks.c:757
 msgid "_Enable"
 msgstr "_Habilitar"
 
 # src/users/user_group.c:691
-#: src/network/callbacks.c:755
+#: src/network/callbacks.c:759
 #, c-format
 msgid "Do you want to disable interface \"%s\"?"
 msgstr "Você deseja desabilitar a interface \"%s\"?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:760
 msgid "This will disable network access through this interface"
 msgstr "Isso desabilitará acesso a rede através desta interface"
 
 # interfaces/memory.glade.h:21
-#: src/network/callbacks.c:757
+#: src/network/callbacks.c:761
 msgid "_Disable"
 msgstr "_Desabilitar"
 
-#: src/network/callbacks.c:864
+#: src/network/callbacks.c:868
 msgid "Could not autodetect modem device"
 msgstr "Não foi possível detectar automaticamente dispositivos de modem"
 
-#: src/network/callbacks.c:865
+#: src/network/callbacks.c:869
 msgid "Check that it's not busy and that it's correctly attached"
 msgstr "Verifique se ele não está ocupado e que está devidamente conectado"
 
 # interfaces/time.glade.h:26
-#: src/network/callbacks.c:919
+#: src/network/callbacks.c:923
 msgid "Silent"
 msgstr "Mudo"
 
-#: src/network/callbacks.c:921
+#: src/network/callbacks.c:925
 msgid "Low"
 msgstr "Baixo"
 
-#: src/network/callbacks.c:923
+#: src/network/callbacks.c:927
 msgid "Medium"
 msgstr "Médio"
 
-#: src/network/callbacks.c:925
+#: src/network/callbacks.c:929
 msgid "Loud"
 msgstr "Alto"
 
@@ -2057,11 +2053,11 @@ msgstr "Ativo"
 # interfaces/nameresolution.glade.h:8
 # interfaces/network.glade.h:33
 # interfaces/network.glade.h:61
-#: src/network/connection.c:1734 src/network/connection.c:1744
+#: src/network/connection.c:1742 src/network/connection.c:1752
 msgid "Error in IP address"
 msgstr "Erro no endereço IP"
 
-#: src/network/connection.c:1735
+#: src/network/connection.c:1743
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -2069,7 +2065,7 @@ msgstr ""
 "O endereço IP ou máscara de rede para a interface foi deixada vazia. Por "
 "favor, digite um endereço IP válido nesses campos para continuar."
 
-#: src/network/connection.c:1745
+#: src/network/connection.c:1753
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -2077,11 +2073,11 @@ msgstr ""
 "O endereço IP ou o endereço remoto para a interface foi deixado vazio. Por "
 "favor, digite um endereço IP válido nestes campos para continuar."
 
-#: src/network/connection.c:1753
+#: src/network/connection.c:1761
 msgid "Error in DNS servers"
 msgstr "Erro nos servidores de DNS"
 
-#: src/network/connection.c:1754
+#: src/network/connection.c:1762
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -2091,11 +2087,11 @@ msgstr ""
 "deixou o endereço IP para o DNS primário vazio. Por favor, digite o endereço "
 "IP para o DNS primário ou desabilite a opção de DNS manual."
 
-#: src/network/connection.c:1761
+#: src/network/connection.c:1769
 msgid "Invalid modem device"
 msgstr "Dispositivo de modem inválido"
 
-#: src/network/connection.c:1762
+#: src/network/connection.c:1770
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -2104,11 +2100,11 @@ msgstr ""
 "informe o dispositivo ou pressione \"auto-detectar\" para continuar."
 
 # interfaces/internet_connection_druid.glade.h:20
-#: src/network/connection.c:1767
+#: src/network/connection.c:1775
 msgid "Invalid phone number"
 msgstr "Número de telefone inválido"
 
-#: src/network/connection.c:1768
+#: src/network/connection.c:1776
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -2117,21 +2113,21 @@ msgstr ""
 "digite um número de telefone válido para continuar."
 
 # interfaces/networking.glade.h:8
-#: src/network/connection.c:2136
+#: src/network/connection.c:2144
 msgid "Nonexisting interface"
 msgstr "Interface inexistente"
 
-#: src/network/connection.c:2137
+#: src/network/connection.c:2145
 #, c-format
 msgid "The interface \"%s\" doesn't exist."
 msgstr "A interface \"%s\" não existe."
 
 # interfaces/networking.glade.h:8
-#: src/network/connection.c:2140
+#: src/network/connection.c:2148
 msgid "Invalid interface"
 msgstr "Interface inválida"
 
-#: src/network/connection.c:2141
+#: src/network/connection.c:2149
 msgid "The loopback interface cannot be configured."
 msgstr "A interface loopback não pôde ser configurada."
 
@@ -2673,7 +2669,9 @@ msgstr "O ID do usuário root não deve ser modificado"
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
-msgstr "Vários usuários podem compartilhar um único ID de usuário, mas isso não é comum e pode levar a problemas de segurança"
+msgstr ""
+"Vários usuários podem compartilhar um único ID de usuário, mas isso não é "
+"comum e pode levar a problemas de segurança"
 
 # src/users/user_group.c:272
 #: src/users/user-settings.c:503
