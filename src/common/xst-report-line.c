@@ -118,11 +118,13 @@ xst_report_line_new_from_string (gchar *string)
 
 	parts = g_strsplit (string, "::", 0);
 
-	if (!parts[0] || !parts[1] || !parts[2])
+	g_print ("|%s|\n", string);
+
+	if (!parts[0] || !parts[1] || !parts[2]) {
 		g_warning ("xst_report_line_new_from_string: Error in report string [%s]", string);
-	g_return_val_if_fail (parts[0], NULL);
-	g_return_val_if_fail (parts[1], NULL);
-	g_return_val_if_fail (parts[2], NULL);
+		g_strfreev (parts);
+		return NULL;
+	}
 
 	major = xst_report_line_str_to_major (parts[0]);
 

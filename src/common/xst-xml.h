@@ -25,6 +25,7 @@ void           xst_xml_element_set_content      (xmlNodePtr node, const gchar *t
 char          *xst_xml_element_get_attribute    (xmlNodePtr node, const gchar *attr);
 void           xst_xml_element_set_attribute    (xmlNodePtr node, const gchar *attr, const gchar *value);
 
+/* For tags looking like <element state="{true|false}"/> */
 gboolean       xst_xml_element_get_bool_attr    (xmlNodePtr node, const gchar *attr);
 void           xst_xml_element_set_bool_attr    (xmlNodePtr node, const gchar *attr, gboolean state);
 
@@ -40,4 +41,5 @@ int            xst_xml_parent_childs                    (xmlNodePtr parent);
 gchar         *xst_xml_get_child_content        (xmlNodePtr parent, const gchar *child);
 void           xst_xml_set_child_content        (xmlNodePtr parent, const gchar *child, const gchar *val);
 
+/* For tags looking like <element>{1|0}</element> */
 gboolean       xst_xml_element_get_boolean      (xmlNodePtr root, const gchar *name);
