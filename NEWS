@@ -1,5 +1,127 @@
 Release of 0.3.0 (They know what is what but they don't know what is what)
---------------------------------------------------------------------------
+==========================================================================
+
+The Ximian Setup Tools 0.3.0, aka "Charm / 10", are out.
+
+ftp://ftp.ximian.com/pub/setuptools/ximian-setup-tools-0.3.0.tar.gz
+
+This is a working snapshot of a continuous effort, and the project is still
+in its infancy. As such, there are no guarantees of usability, beauty or
+evil masterplan compliance.
+
+This is a new features and beautification release. Most of the tools have new
+artwork, courtesy of Tuomas and Jakub, and some have new interfaces by Anna.
+Also, there is lots of new code.
+
+Ximian Setup Tools now require, in addition to the GNOME libraries, the
+latest version of GAL. You should get by with GAL 0.5, but the latest CVS
+snapshot is recommended.
+
+
+Tools in this release
+---------------------
+
+Boot     LILO boot parameters. Beautified.
+Disks    Find local harddisk partitions and mount them. Not beautified.
+Memory   Swap partitions and files. Not beautified.
+Network  All kinds of network parameters. Multiple interfaces. Beautified.
+Shares   NFS, SMB. Export, detect, import. Not beautified.
+Time     System clock, timezone, timeserver synchronization. Beautified.
+Users    Users and groups. Beautified.
+
+
+Participation
+-------------
+
+We need help, in particular to test these tools and port them to as many
+Unixy platforms and distributions as possible.
+
+If this seems like a worthy challenge, please get in touch with us. Further
+information can be found in the references section at the end of this text.
+
+Also, if you have any problems with these tools (identified in detail or
+not), we'd be absolutely delighted to hear from you.
+
+
+Changes since 0.2.1
+-------------------
+
+- Time beautified (Anna, Jacob).
+
+- Time backend speedup (Chema).
+
+- Added report display to frontend, which shows actions taken as
+  configuration is read/written (Hans Petter).
+
+- Source cleanup (Jacob).
+
+- Backend code refactored (Hans Petter).
+
+- Networking and Name Resolution merged to form new, pretty and more
+  functional Network (Jacob, Arturo, Anna, Chema).
+
+- Users fixed and polished (Tambet).
+
+- Implemented Boot tool (Tambet).
+
+- Platform detection and selection (Arturo, Hans Petter).
+
+- New configuration backup/rescue scheme (Hans Petter).
+
+- Generic code for parsing/modifying configuration files (Arturo).
+
+- Countless bugfixes (everyone).
+
+
+About the Ximian Setup Tools
+----------------------------
+
+- Primary audience - desktop users:
+
+  These tools are intended to simplify the tasks of configuring a Unix system
+  for workstations. They are not intended for configuring Unix servers.
+
+- Unified system configuration:
+
+  Configuring different Unix systems is different; every Unix system has
+  different ways of being administrated. The Helix Setup Tools aspire to
+  unify handling of these systems.
+
+- Adaptability:
+
+  Each one of the Helix Setup Tools is split in two parts: a backend (which
+  is typically written in Perl) and a user interface frontend (which is
+  typically written in C or Python).
+
+  The backends are written in a way that should allow us to quickly adapt
+  them to different flavors of Unix; the backend probes your system and
+  parses the existing system files. When the user has finished editing the
+  settings, the configuration is written back as patches to the system files.
+
+  This means that the Helix Setup Tools use whatever configuration files are
+  available on your system, and you can still edit those files by hand or
+  with other configuration tools without conflicts or data loss.
+
+
+References
+----------
+
+Introduction: http://www.ximian.com/desktop/setuptools.php3
+
+Whitepaper:   http://www.ximian.com/tech/helix-setup-tools.php3
+
+Mailing list: http://lists.ximian.com/mailman/listinfo/setup-tool-hackers
+
+FTP:          ftp://ftp.ximian.com/pub/setuptools/
+
+GNOME CVS:    Module "ximian-setup-tools".
+
+Developers:   Chema Celorio <chema@ximian.com>
+              Hans Petter Jansson <hpj@ximian.com>
+              Arturo Espinosa <arturo@ximian.com>
+              Tambet Ingo <tambet@ximian.com>
+
+
 
 - Time beautified. [Anna, Jacob]
 
@@ -29,7 +151,7 @@ Release of 0.3.0 (They know what is what but they don't know what is what)
 
 
 Release of 0.2.1 (Suspicion breeds Confidence)
-----------------------------------------------
+==============================================
 
 - Ability to change users' passwords in Users, even with MD5 enabled.
   [Arturo, Tambet]
@@ -61,7 +183,7 @@ Release of 0.2.1 (Suspicion breeds Confidence)
 
 
 Release of 0.2.0 (Un-ix)
-------------------------
+========================
 
 - Merged the existing tools into one package with shared, policy-enforcing
   code for the frontends. [Hans Petter]
