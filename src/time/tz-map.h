@@ -46,4 +46,6 @@ struct _ETzMap
 
 ETzMap *e_tz_map_new (void);
 
+TzDB *e_tz_map_get_tz_db (ETzMap *tzmap);
+
 #endif

@@ -115,11 +115,26 @@ populate_ntp_list ()
 
 
 void
-init_map ()
+init_timezone_selection ()
 {
+	GPtrArray *locs;
+	GList *combo_locs = NULL;
+	int i;
+
 	tzmap = e_tz_map_new ();
 	gtk_container_add (GTK_CONTAINER (tool_widget_get ("map_window")),
 			   GTK_WIDGET (tzmap->map));
+	
+	locs = tz_get_locations (e_tz_map_get_tz_db (tzmap));
+	
+	for (i = 0; i < locs->len; i++)
+	{
+		combo_locs = g_list_append (combo_locs,
+					    g_strdup (tz_location_get_zone (g_ptr_array_index (locs, i))));
+	}
+	
+	gtk_combo_set_popdown_strings (GTK_COMBO (tool_widget_get ("location_combo")),
+				       combo_locs);
 }
 
 
@@ -194,7 +209,7 @@ main(int argc, char *argv[])
 
 	tool_init("time", argc, argv);
 	populate_ntp_list();
-	init_map();
+	init_timezone_selection();
 	connect_signals();
 
 	tool_set_frozen(TRUE);

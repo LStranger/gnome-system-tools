@@ -1,11 +1,9 @@
-/* Timezone map.
+/* Timezone map - fake widget implementation with hooks for time-admin.
  *
  * Copyright (C) 2000 Helix Code, Inc.
  *
  * Authors: Hans Petter Jansson <hpj@helixcode.com>
  * 
- * Largely based on Michael Fulbright's work on Anaconda.
- *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -76,6 +74,44 @@ ETzMap *e_tz_map_new ()
 }
 
 
+TzDB *e_tz_map_get_tz_db (ETzMap *tzmap)
+{
+	return tzmap->tzdb;
+}
+
+
+static TzLocation *e_tz_map_location_from_point (ETzMap *tzmap, EMapPoint *point)
+{
+	TzLocation *tz_loc = NULL;
+	TzDB *tz_db;
+	GPtrArray *locs;
+	double p_longitude, p_latitude;
+	double l_longitude, l_latitude;
+	int i;
+
+	tz_db = e_tz_map_get_tz_db (tzmap);
+	locs = tz_get_locations (tz_db);
+	e_map_point_get_location (point, &p_longitude, &p_latitude);
+
+	for (i = 0; i < locs->len; i++)
+	{
+		tz_location_get_position (g_ptr_array_index (locs, i),
+					  &l_longitude, &l_latitude);
+		
+		if (l_longitude - 0.005 <= p_longitude &&
+		    l_longitude + 0.005 >= p_longitude &&
+		    l_latitude - 0.005 <= p_latitude &&
+		    l_latitude + 0.005 >= p_latitude)
+		{
+			tz_loc = g_ptr_array_index (locs, i);
+			break;
+		}
+	}
+	
+	return (tz_loc);
+}
+
+
 static gboolean flash_selected_point (gpointer data)
 {
 	ETzMap *tzmap;
@@ -116,6 +152,12 @@ static gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 	        e_map_point_set_color_rgba (tzmap->map, tzmap->point_hover,
 					    TZ_MAP_POINT_HOVER_RGBA);
 
+	/* e_tz_map_location_fom_point() can in theory return NULL, but in
+	 * practice there are no reasons why it should */
+
+	gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("location_hover")),
+			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_hover)));
+
 	return TRUE;
 }
 
@@ -142,6 +184,9 @@ static gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer da
 						    tzmap->point_selected,
 						    TZ_MAP_POINT_NORMAL_RGBA);
 		tzmap->point_selected = tzmap->point_hover;
+		
+		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (tool_widget_get ("location_combo"))->entry),
+				    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
 	}
 	
 	return TRUE;

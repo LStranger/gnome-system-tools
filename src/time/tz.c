@@ -125,6 +125,14 @@ tz_location_get_comment (TzLocation *loc)
 }
 
 
+void
+tz_location_get_position (TzLocation *loc, double *longitude, double *latitude)
+{
+	*longitude = loc->longitude;
+	*latitude = loc->latitude;
+}
+
+
 TzInfo *
 tz_info_from_location (TzLocation *loc)
 {
