@@ -1,6 +1,7 @@
 pixmaps_DATA = \
 computer.png  \
 connection-active.xpm \
+connection-ethernet.png \
 connection-inactive.xpm \
 connection-modem.png \
 disks.png  \
