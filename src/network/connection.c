@@ -255,7 +255,7 @@ add_connections_to_list (void)
 	g_slist_foreach (connections, (GFunc) add_connection_to_list, NULL);
 }*/
 
-static gchar *
+static const gchar *
 connection_description_from_type (ConnectionType type)
 {
 	gchar *descriptions[] = {
@@ -314,7 +314,7 @@ connection_new_from_node (xmlNode *node)
 	if (s)
 		cxn->name = s;
 	else
-		cxn->name = connection_description_from_type (cxn->type);
+		cxn->name = g_strdup (connection_description_from_type (cxn->type));
 		
 	cxn->user = connection_xml_get_boolean (node, "user");
 	cxn->autoboot = connection_xml_get_boolean (node, "auto");
@@ -422,6 +422,7 @@ on_status_button_toggled (GtkWidget *w, Connection *cxn)
 static void
 empty_general (Connection *cxn)
 {
+	g_print ("About to free *%s*\n", cxn->name);
 	g_free (cxn->name);
 	cxn->name = gtk_editable_get_chars (GTK_EDITABLE (W ("connection_desc")), 0, -1);
 		

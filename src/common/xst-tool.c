@@ -216,6 +216,13 @@ report_dispatch_lines (XstTool *tool)
 		NULL
 	};
 
+	if (!GTK_IS_SCROLLED_WINDOW (tool->report_scrolled)) {
+		g_warning ("took->report_scrolled is not a GtkScrolledWindow\n");
+		tool->report_dispatch_pending = FALSE;
+		tool->report_finished = TRUE;
+		return;
+	}
+	
 	vadj = gtk_scrolled_window_get_vadjustment (
 		GTK_SCROLLED_WINDOW (tool->report_scrolled));
 
@@ -223,6 +230,8 @@ report_dispatch_lines (XstTool *tool)
 	{
 		rline = (XstReportLine *) list->data;
 
+		g_print ("b\n");
+		
 		if (xst_report_line_get_handled (rline))
 			continue;
 
@@ -361,6 +370,8 @@ gboolean
 xst_tool_save (XstTool *tool)
 {
 	FILE *f;
+#warning This is a security problem, fix
+	FILE *debug_file;
 	int fd_xml [2], fd_report [2];
 	int t;
 
@@ -395,12 +406,19 @@ xst_tool_save (XstTool *tool)
 
 		close (fd_xml [0]);	/* Close reading end of XML pipe */
 		close (fd_report [1]);  /* Close writing end of report pipe */
+
 		f = fdopen (fd_xml [1], "w");
+		debug_file = fopen ("/tmp/xst-fe-write", "w");
 
 		xmlDocDump (f, tool->config);
+		xmlDocDump (debug_file, tool->config);
+		
 		fclose (f);
+		fclose (debug_file);
+		
 		report_progress (tool, fd_report [0], _("Updating your system configuration."));
 		close (fd_report [0]);
+
 	} else {
 		/* Child */
 
@@ -556,6 +574,8 @@ visibility_toggled (GtkWidget *w, gpointer data)
 	GtkAdjustment *vadj;
 
 	tool = XST_TOOL (data);
+
+	g_warning ("A2\n");
 
 	show = GTK_TOGGLE_BUTTON (w)->active;
 	vadj = gtk_scrolled_window_get_vadjustment (

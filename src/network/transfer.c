@@ -382,12 +382,8 @@ void
 transfer_gui_to_xml (XstTool *t, gpointer data)
 {
 	xmlNode *root = xml_doc_get_root (t->config);
-	g_print ("\n\n\n\n\n\n");
-#if 0	
 	transfer_string_entry_gui_to_xml (root);
 	transfer_string_list_gui_to_xml (root);
-#endif
-	g_print ("Transfering clist2 !!!!!!!!!!!!|n");
 	transfer_string_clist2_gui_to_xml (root);
 	transfer_interfaces_to_xml (root);
 }

@@ -31,7 +31,6 @@ typedef struct _TransStringList TransStringList;
 typedef struct _TransStringCList2 TransStringCList2;
 typedef struct _TransStringIPEntry TransStringIPEntry;
 
-
 struct _TransStringEntry
 {
   gchar *xml_path;

@@ -1,3 +1,15 @@
+2001-02-21  Chema Celorio  <chema@celorio.com>
+
+	* transfer.c (transfer_gui_to_xml): remove #if 0 that I left
+	here.
+
+2001-02-21  Chema Celorio  <chema@celorio.com>
+
+	* connection.c (connection_description_from_type): return a const
+	string. Avoids a crash.
+	(connection_new_from_node): g_strdup the string that goes
+	into cxt->name.
+
 2001-02-21  Arturo Espinosa  <arturo@ximian.com>
 
 	* connection.c: changed some callback names and set stuff up
