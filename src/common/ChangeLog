@@ -1,3 +1,12 @@
+2001-05-14  Tambet Ingo  <tambet@ximian.com>
+
+	* xst-ui.c (xst_ui_option_menu_get_selected_string): optimized.
+	(xst_ui_option_menu_get_string_list): removed.
+	(xst_ui_option_menu_add_string): Fixed OptionMenu's sizeing problem.
+	(xst_ui_option_menu_remove_string): Fixed the problem where selected string
+	didn't get removed cause it was temporarily parented elsewhere.
+	(xst_ui_option_menu_clear): gtk_widget_destroy menu_items.
+
 2001-05-14  Chema Celorio  <chema@celorio.com>
 
 	* xst-tool.h (XST_TOOL_MAKE_TYPE): add even more boilerplate

@@ -10,7 +10,6 @@ GtkWidget *xst_ui_create_image_widget             (gchar *name, gchar *string1, 
 						   gint int1, gint int2);
 gint       xst_ui_option_menu_get_selected_row    (GtkOptionMenu *option_menu);
 gchar     *xst_ui_option_menu_get_selected_string (GtkOptionMenu *option_menu);
-GList     *xst_ui_option_menu_get_string_list     (GtkOptionMenu *option_menu);
 void       xst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar *string);
 GtkWidget *xst_ui_option_menu_add_string          (GtkOptionMenu *option_menu, const gchar *string);
 void       xst_ui_option_menu_remove_string       (GtkOptionMenu *option_menu, const gchar *string);

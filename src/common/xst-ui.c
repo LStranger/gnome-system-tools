@@ -218,43 +218,16 @@ xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
 gchar *
 xst_ui_option_menu_get_selected_string (GtkOptionMenu *option_menu)
 {
-	GtkWidget *selected;
-	gchar *label;
-
-	if (!GTK_BIN (option_menu)->child)
-		return NULL;
+	gchar *buf = NULL;
 	
-	selected = GTK_WIDGET (GTK_BIN (option_menu)->child);
-	if (!GTK_IS_LABEL (selected))
-		return NULL;
-
-	gtk_label_get (GTK_LABEL (selected), &label);
-	return g_strdup (label);
-}
-
-GList *
-xst_ui_option_menu_get_string_list (GtkOptionMenu *option_menu)
-{
-	GtkWidget *menu, *label;
-	GList *menu_items, *string_list = NULL;
-	gchar *buf;
-
-	if (!(menu = gtk_option_menu_get_menu (option_menu)))
-		return string_list;
-	if (!(menu_items = GTK_MENU_SHELL (menu)->children))
-		return string_list;
-
-	while (menu_items) {
-		label = GTK_BIN (menu_items->data)->child;
-		menu_items = menu_items->next;
+	if (GTK_BIN (option_menu)->child) {
+		GtkWidget *child = GTK_BIN (option_menu)->child;
 		
-		if (!GTK_IS_LABEL (label))
-			continue;
-		gtk_label_get (GTK_LABEL (label), &buf);
-		string_list = g_list_append (string_list, buf);
+		if (GTK_IS_LABEL (child))
+			gtk_label_get (GTK_LABEL (child), &buf);
 	}
 
-	return string_list;
+	return buf;
 }
 
 void
@@ -290,13 +263,23 @@ GtkWidget *
 xst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
 {
 	GtkWidget *menu, *item;
+	gboolean new_menu = FALSE;
 
 	menu = gtk_option_menu_get_menu (option_menu);
 
+	if (!GTK_MENU_SHELL (menu)->children) {
+		gtk_option_menu_remove_menu (option_menu);
+		menu = gtk_menu_new ();
+		new_menu = TRUE;
+	}
+	
 	item = gtk_menu_item_new_with_label (string);
 	gtk_widget_show (item);
 	gtk_menu_append (GTK_MENU (menu), item);
 
+	if (new_menu)
+		gtk_option_menu_set_menu (option_menu, menu);
+	
 	return item;
 }
 
@@ -310,21 +293,26 @@ xst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
 void
 xst_ui_option_menu_remove_string (GtkOptionMenu *option_menu, const gchar *string)
 {
-	GtkWidget *found, *menu;
-	GList *menu_items;
+	GtkWidget *found = NULL;
+	gchar *buf = xst_ui_option_menu_get_selected_string (option_menu);
+	GtkWidget *menu = gtk_option_menu_get_menu (option_menu);
 
-	menu = gtk_option_menu_get_menu (option_menu);
-	menu_items = GTK_MENU_SHELL (menu)->children;
-	found = get_list_item_by_name (menu_items, string);
+	if (!strcmp (buf, string))
+		found = gtk_menu_get_active (GTK_MENU (menu));
+	else {
+		GList *menu_items = GTK_MENU_SHELL (menu)->children;
+		found = get_list_item_by_name (menu_items, string);
+		g_free (menu_items);
+	}
+	
 	if (found)
-		gtk_container_remove (GTK_CONTAINER (menu), found);
+		gtk_widget_destroy (found);
 }
 
 static void
 menu_clear (GtkWidget *widget, gpointer data)
 {
-	GtkContainer *container = data;
-	gtk_container_remove (container, widget);
+	gtk_widget_destroy (widget);
 }
 
 void
@@ -333,7 +321,7 @@ xst_ui_option_menu_clear (GtkOptionMenu *option_menu)
 	GtkWidget *menu;
 
 	menu = gtk_option_menu_get_menu (option_menu);
-	gtk_container_foreach (GTK_CONTAINER (menu), menu_clear, menu);
+	gtk_container_foreach (GTK_CONTAINER (menu), menu_clear, NULL);
 }
 
 void
