@@ -153,16 +153,107 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 	}
 }
 
+static void
+transfer_logindefs_to_gui (void)
+{
+	GtkWidget *w0;
+	GtkSpinButton *spin;
+	gint i;
+
+	gchar *widgets[] = {"defs_min_uid", "defs_max_uid", "defs_min_gid", "defs_max_gid", 
+			    "defs_passwd_max_days", "defs_passwd_min_days", 
+			    "defs_passwd_warn", "defs_passwd_min_len", NULL};
+
+	gint values[] = {logindefs.new_user_min_id, logindefs.new_user_max_id,
+			 logindefs.new_group_min_id, logindefs.new_group_max_id,
+			 logindefs.passwd_max_day_use, logindefs.passwd_min_day_use,
+			 logindefs.passwd_warning_advance_days, logindefs.passwd_min_length, 0};
+
+	/* System settings. */
+
+	w0 = tool_widget_get ("defs_create_home");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w0), logindefs.create_home);
+
+	w0 = tool_widget_get ("defs_mail_dir");
+	gtk_entry_set_text (GTK_ENTRY (w0), logindefs.mailbox_dir);
+
+	/* User and group id's and passwords. */
+
+	for (i = 0; widgets[i]; i++)
+	{
+		spin = GTK_SPIN_BUTTON (tool_widget_get (widgets[i]));
+		gtk_spin_button_set_value (spin, (gfloat) values[i]);
+	}
+}
+
+static void
+transfer_logindefs_to_xml (xmlNodePtr root)
+{
+	GtkWidget *w0;
+	GtkSpinButton *spin;
+	gchar *val;
+	xmlNodePtr node;
+	gint i;
+
+	gchar *widgets[] = {"defs_min_uid", "defs_max_uid", "defs_min_gid", "defs_max_gid", 
+			    "defs_passwd_max_days", "defs_passwd_min_days", 
+			    "defs_passwd_warn", "defs_passwd_min_len", NULL};
+
+	gchar *nodes[] = {"new_user_min_id", "new_user_max_id", "new_group_min_id",
+	       		 "new_group_max_id", "passwd_max_day_use", "passwd_min_day_use",
+			 "passwd_warning_advance_days", "passwd_min_length", NULL};
+
+	root = xml_element_find_first (root, "logindefs");
+
+	/* System settings. */
+
+	w0 = tool_widget_get ("defs_create_home");
+	node = xml_element_find_first (root, "create_home");
+	if (!node)
+		node = xml_element_add (root, "create_home");
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w0)))
+		xml_element_set_content (node, "yes");
+	else
+		xml_element_set_content (node, "no");
+
+
+	w0 = tool_widget_get ("defs_mail_dir");
+	val = gtk_editable_get_chars (GTK_EDITABLE (w0), 0, -1);
+	node = xml_element_find_first (root, "mailbox_dir");
+	if (!node)
+		node = xml_element_add (root, "mailbox_dir");
+
+	xml_element_set_content (node, val);
+	g_free (val);
+
+	/* User and group id's and passwords. */
+
+	for (i = 0; widgets[i]; i++)
+	{
+		spin = GTK_SPIN_BUTTON (tool_widget_get (widgets[i]));
+		val = g_strdup_printf ("%d", gtk_spin_button_get_value_as_int (spin));
+
+		node = xml_element_find_first (root, nodes[i]);
+		if (!node)
+			node = xml_element_add (root, nodes[i]);
+
+		xml_element_set_content (node, val);
+		g_free (val);
+	}
+}
 
 void
 transfer_xml_to_gui (xmlNodePtr root)
 {
 	transfer_logindefs_from_xml (root);
+	transfer_logindefs_to_gui ();
 }
 
 void
 transfer_gui_to_xml (xmlNodePtr root)
 {
+	transfer_logindefs_to_xml (root);
 }
 
 

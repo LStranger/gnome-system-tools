@@ -66,12 +66,14 @@ on_complexity_clicked (GtkButton *button, gpointer user_data)
 	{
 		tool_set_complexity (TOOL_COMPLEXITY_ADVANCED);
 		e_table_state (TRUE);
+		gtk_widget_set_sensitive (tool_widget_get ("defs_container"), TRUE);
 	}
 
 	else if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
 	{
 		tool_set_complexity (TOOL_COMPLEXITY_BASIC);
 		e_table_state (FALSE);
+		gtk_widget_set_sensitive (tool_widget_get ("defs_container"), FALSE);
 	}
 	user_actions_set_sensitive (FALSE);
 }
@@ -226,9 +228,6 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
 		adv_user_settings_new ();
 
-	/* Set focus to user name entry. */
-	gtk_widget_grab_focus (tool_widget_get ("user_settings_name"));
-
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
@@ -328,9 +327,6 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	/* Fill all users list */
 	group_fill_all_users_list (NULL);
 
-	/* Set focus to user name entry. */
-	gtk_widget_grab_focus (tool_widget_get ("group_settings_name"));
-
 	/* Show group settings dialog */
 
 	w0 = tool_widget_get ("group_settings_dialog");
@@ -382,6 +378,13 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 }
 
 /* User settings callbacks */
+
+extern void
+on_user_settings_dialog_show (GtkWidget *button, gpointer user_data)
+{
+	/* Set focus to user name entry. */
+	gtk_widget_grab_focus (tool_widget_get ("user_settings_name"));
+}
 
 static void
 user_settings_dialog_close (void)
@@ -542,6 +545,13 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 }
 
 /* Group settings dialog */
+
+extern void
+on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data)
+{
+	/* Set focus to user name entry. */
+	gtk_widget_grab_focus (tool_widget_get ("group_settings_name"));
+}
 
 static void
 group_settings_dialog_close (void)

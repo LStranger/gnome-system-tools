@@ -50,6 +50,9 @@ extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data);
 
 extern void
+on_user_settings_dialog_show (GtkWidget *widget, gpointer user_data);
+
+extern void
 on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data);
 
 extern void
@@ -75,6 +78,8 @@ on_user_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton 
 		gpointer user_data);
 
 
+extern void
+on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data);
 
 extern void
 on_group_settings_clicked (GtkButton *button, gpointer user_data);
