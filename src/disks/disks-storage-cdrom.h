@@ -24,6 +24,7 @@
 #define __DISKS_STORAGE_CDROM_H__
 
 #include <glib-object.h>
+#include "disks-storage.h"
 #include "disks-cdrom-disc.h"
 
 

@@ -37,17 +37,19 @@ enum {
 	PROP_SIZE,
 	PROP_ICON_NAME,
 	PROP_DEVICE,
+	PROP_PRESENT,
 	PROP_SPEED
 };
 
 struct _GstDisksStoragePriv
 {
-	gchar *name;
-	gchar *model;
-	gulong size;
-	gchar *icon_name;
-	gchar *device;
-	gchar *speed;
+	gchar   *name;
+	gchar   *model;
+	gulong   size;
+	gchar   *icon_name;
+	gchar   *device;
+	gboolean present;
+	gchar   *speed;
 };
 
 static void storage_init       (GstDisksStorage      *storage);
@@ -96,6 +98,7 @@ storage_init (GstDisksStorage *storage)
 	storage->priv->name = g_strdup (_("Unknown Storage"));
 	storage->priv->model = g_strdup (_("Unknown"));
 	storage->priv->size = 0;
+	storage->priv->present = FALSE;
 	storage->priv->speed = NULL;
 }
 
@@ -128,6 +131,9 @@ storage_class_init (GstDisksStorageClass *klass)
 	g_object_class_install_property (object_class, PROP_DEVICE,
 					 g_param_spec_string ("device", NULL, NULL,
 							      NULL, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_PRESENT,
+					 g_param_spec_boolean ("present", NULL, NULL,
+							      FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_SPEED,
 					 g_param_spec_string ("speed", NULL, NULL,
 							      NULL, G_PARAM_READWRITE));
@@ -180,6 +186,9 @@ storage_set_property (GObject  *object, guint prop_id, const GValue *value,
 		if (storage->priv->device) g_free (storage->priv->device);
 		storage->priv->device = g_value_dup_string (value);
 		break;
+	case PROP_PRESENT:
+		storage->priv->present = g_value_get_boolean (value);
+		break;
 	case PROP_SPEED:
 		if (storage->priv->speed) g_free (storage->priv->speed);
 		storage->priv->speed = g_value_dup_string (value);
@@ -214,6 +223,9 @@ storage_get_property (GObject  *object, guint prop_id, GValue *value,
 		break;
 	case PROP_DEVICE:
 		g_value_set_string (value, storage->priv->device);
+		break;
+	case PROP_PRESENT:
+		g_value_set_boolean (value, storage->priv->present);
 		break;
 	case PROP_SPEED:
 		g_value_set_string (value, storage->priv->speed);

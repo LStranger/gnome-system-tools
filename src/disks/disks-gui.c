@@ -106,6 +106,13 @@ gst_storage_get_icon (const gchar *icon_name)
 	file = gnome_icon_theme_lookup_icon (GST_DISKS_TOOL (tool)->icon_theme,
 					     icon_name, 48,
 					     NULL, NULL);
+	/* GTK 2.4 */
+	/*pb = gtk_icon_theme_load_icon (GST_DISKS_TOOL (tool)->icon_theme,
+				       icon_name, 48, GTK_ICON_LOOKUP_FORCE_SVG,
+				       NULL);*/
+	if (!file) {
+		file = g_strdup_printf (PIXMAPS_DIR"/%s.png", icon_name);
+	}
 	
 	pb = gdk_pixbuf_new_from_file (file, NULL);
 	
@@ -209,11 +216,14 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 	}
 }
 
-static void
+void
 gst_disks_gui_storage_list_reload (GtkWidget *widget, gpointer gdata)
 {
-	gst_disks_gui_setup_storage_list (gst_dialog_get_widget (tool->main_dialog, "storage_list"),
-					  (GList *) gdata);
+	GtkWidget        *treeview;
+
+	treeview = gst_dialog_get_widget (tool->main_dialog, "storage_list");
+
+	gst_disks_gui_setup_storage_list (treeview, (GList *) gdata);
 }
 
 static GtkWidget *
@@ -355,7 +365,7 @@ gst_disks_gui_setup ()
 
 	list = GST_DISKS_TOOL (tool)->storages;
 
-	GST_DISKS_TOOL (tool)->icon_theme = gnome_icon_theme_new ();
+	/*GST_DISKS_TOOL (tool)->icon_theme = gnome_icon_theme_new ();*/
 	gnome_icon_theme_set_allow_svg (GST_DISKS_TOOL (tool)->icon_theme, TRUE);
 	g_signal_connect (G_OBJECT (GST_DISKS_TOOL (tool)->icon_theme), "changed",
 			  G_CALLBACK (gst_disks_gui_storage_list_reload),
@@ -474,12 +484,20 @@ gst_disks_gui_setup_storage_properties (GstDisksStorage *storage)
 void
 gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
 {
-	gchar *speed, *device;
+	gchar *speed, *device, *icon_name;
+	gboolean present;
 
 	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (disk));
 	
 	g_object_get (G_OBJECT (disk), "speed", &speed,
-		      "device", &device, NULL);
+		      "device", &device, "present", &present,
+		      "icon_name", &icon_name, NULL);
+
+	if (present) {
+		g_object_set (G_OBJECT (disk), "icon_name", "gnome-dev-harddisk", NULL);
+	} else {
+		g_object_set (G_OBJECT (disk), "icon_name", "gnome-dev-removable", NULL);
+	}
 	
 	gtk_label_set_text (
 		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "disk_device_label")),
@@ -492,6 +510,8 @@ gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
 			GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "disk_speed_label")),
 			speed);
 	}
+
+	gst_disks_gui_storage_list_reload (NULL, GST_DISKS_TOOL (tool)->storages);
 }
 
 /* Partition */
@@ -600,7 +620,7 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 void
 gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 {
-	gchar *speed, *device;
+	gchar *speed, *device, *icon_name;
 	gboolean play_audio, write_cdr, write_cdrw, read_dvd;
 	gboolean write_dvdr, write_dvdram;
 	GstCdromDisc *disc;
@@ -608,7 +628,8 @@ gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 	g_return_if_fail (GST_IS_DISKS_STORAGE_CDROM (cdrom));
 	
 	g_object_get (G_OBJECT (cdrom), "speed", &speed,
-		      "device", &device, NULL);
+		      "device", &device, "icon_name", &icon_name,
+		      NULL);
 
 	gtk_label_set_text (
 		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_device_label")),
@@ -629,6 +650,18 @@ gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 	gtk_label_set_text (
 		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_status_label")),
 		gst_disks_storage_cdrom_get_human_readable_status (cdrom));
+
+	if (GST_IS_CDROM_DISC_AUDIO (disc)) {
+		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom-audio", NULL);
+	} else if (GST_IS_CDROM_DISC_DATA (disc)) {
+		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom", NULL);
+	} else if (GST_IS_CDROM_DISC_MIXED (disc)) {
+		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom", NULL);
+	} else {
+		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom", NULL);
+	}
+	
+	gst_disks_gui_storage_list_reload (NULL, GST_DISKS_TOOL (tool)->storages);
 
 	g_object_get (G_OBJECT (cdrom), "play_audio", &play_audio, "write_cdr", &write_cdr,
 		      "write_cdrw", &write_cdrw, "read_dvd", &read_dvd, 
@@ -674,6 +707,8 @@ gst_disks_gui_setup_cdrom_disc_data (GstCdromDiscData *disc_data)
 	gchar *mount_point;
 	gboolean mounted;
 
+	g_return_if_fail (GST_IS_CDROM_DISC_DATA (disc_data));
+
 	point_entry = gst_dialog_get_widget (tool->main_dialog, "cd_point_entry");
 	size_progress = gst_dialog_get_widget (tool->main_dialog, "cd_size_progress");
 	mount_button = gst_dialog_get_widget (tool->main_dialog, "cd_mount_button");
@@ -684,8 +719,6 @@ gst_disks_gui_setup_cdrom_disc_data (GstCdromDiscData *disc_data)
 	data_cd_info = gst_dialog_get_widget (tool->main_dialog, "data_cd_info");
 	audio_cd_info = gst_dialog_get_widget (tool->main_dialog, "audio_cd_info");
 	
-	g_return_if_fail (GST_IS_CDROM_DISC_DATA (disc_data));
-
 	gtk_label_set_text (GTK_LABEL (tab_cdrom_label), _("Data CD-ROM"));
 
 	gtk_widget_hide (audio_cd_info);
@@ -733,13 +766,13 @@ gst_disks_gui_setup_cdrom_disc_audio (GstCdromDiscAudio *disc_audio)
 	guint num_tracks;
 	gchar *duration;
 
+	g_return_if_fail (GST_IS_CDROM_DISC_AUDIO (disc_audio));
+
 	num_tracks_label = gst_dialog_get_widget (tool->main_dialog, "cd_num_tracks_label");
 	duration_label = gst_dialog_get_widget (tool->main_dialog, "cd_duration_label");
 	tab_cdrom_label = gst_dialog_get_widget (tool->main_dialog, "tab_cdrom_label");
 	data_cd_info = gst_dialog_get_widget (tool->main_dialog, "data_cd_info");
 	audio_cd_info = gst_dialog_get_widget (tool->main_dialog, "audio_cd_info");
-
-	g_return_if_fail (GST_IS_CDROM_DISC_AUDIO (disc_audio));
 
 	gtk_label_set_text (GTK_LABEL (tab_cdrom_label), _("Audio CD-ROM"));
 
@@ -756,5 +789,34 @@ gst_disks_gui_setup_cdrom_disc_audio (GstCdromDiscAudio *disc_audio)
 	else
 		gtk_label_set_text (GTK_LABEL (duration_label), "");
 	
+	gtk_widget_show_all (audio_cd_info);
+}
+
+/* CDROM Disc Mixed */
+void
+gst_disks_gui_setup_cdrom_disc_mixed (GstCdromDiscMixed *disc_mixed)
+{
+	GtkWidget *data_cd_info, *audio_cd_info;
+	GtkWidget *tab_cdrom_label;
+	GstCdromDiscData  *data = NULL;
+	GstCdromDiscAudio *audio = NULL;
+
+	g_return_if_fail (GST_IS_CDROM_DISC_MIXED (disc_mixed));
+
+	data_cd_info = gst_dialog_get_widget (tool->main_dialog, "data_cd_info");
+	audio_cd_info = gst_dialog_get_widget (tool->main_dialog, "audio_cd_info");
+	tab_cdrom_label = gst_dialog_get_widget (tool->main_dialog, "tab_cdrom_label");
+
+	g_object_get (G_OBJECT (disc_mixed), "data", &data, "audio", &audio, NULL);
+
+	if (data)
+		gst_disks_gui_setup_cdrom_disc_data (data);
+
+	if (audio)
+		gst_disks_gui_setup_cdrom_disc_audio (audio);
+
+	gtk_label_set_text (GTK_LABEL (tab_cdrom_label), _("Mixed CD-ROM"));
+	
+	gtk_widget_show_all (data_cd_info);
 	gtk_widget_show_all (audio_cd_info);
 }

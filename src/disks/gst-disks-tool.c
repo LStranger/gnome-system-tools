@@ -22,6 +22,9 @@
 #  include <config.h>
 #endif
 
+/*#include <gtk/gtk.h>*/
+#include <libgnomeui/libgnomeui.h>
+
 #include "gst-tool.h"
 #include "gst-disks-tool.h"
 
@@ -62,7 +65,8 @@ disks_tool_init (GstDisksTool *tool)
 	   g_return_if_fail (GST_IS_DISKS_TOOL (tool));
 
 	   tool->storages = NULL;
-	   tool->icon_theme = NULL;
+	   /*tool->icon_theme = gtk_icon_theme_get_default();*/ /* GTK 2.4 */
+	   tool->icon_theme = gnome_icon_theme_new ();
 }
 
 static void

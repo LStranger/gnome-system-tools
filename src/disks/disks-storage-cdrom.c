@@ -304,9 +304,9 @@ gst_disks_storage_cdrom_get_human_readable_status (GstDisksStorageCdrom *cdrom)
 				return g_strdup (_("Data Disc Inserted"));
 			else if (GST_IS_CDROM_DISC_AUDIO (disc))
 				return g_strdup (_("Audio Disc Inserted"));
-			/*else if (GST_IS_CDROM_DISC_MIXED (disc))
+			else if (GST_IS_CDROM_DISC_MIXED (disc))
 				return g_strdup (_("Audio and Data Disc Inserted"));
-			else if (GST_IS_CDROM_DISC_BLANK (disc))
+			/*else if (GST_IS_CDROM_DISC_BLANK (disc))
 			return g_strdup (_("Blank Disc Inserted"));*/
 			else
 				return g_strdup (_("Unknown Disc Inserted"));

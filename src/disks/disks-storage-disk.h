@@ -24,6 +24,7 @@
 #define __DISKS_STORAGE_DISK_H__
 
 #include <glib-object.h>
+#include "disks-storage.h"
 #include "disks-partition.h"
 
 #define GST_TYPE_DISKS_STORAGE_DISK         (gst_disks_storage_disk_get_type ())

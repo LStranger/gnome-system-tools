@@ -66,6 +66,11 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 	GstCdromDisc     *disc;
 	GtkWidget        *properties_notebook;
 
+	/* Avoid cycle */
+	g_signal_handlers_block_by_func (G_OBJECT (selection),
+					 G_CALLBACK (gst_on_storage_list_selection_change),
+					 NULL);
+	
 	notebook = gst_dialog_get_widget (tool->main_dialog, "main_notebook");
 	
 	if (gtk_tree_selection_get_selected (GTK_TREE_SELECTION (selection), &model, &iter)) {
@@ -137,6 +142,11 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 			}
 		}
 	}
+
+	/* Avoid cycle */
+	g_signal_handlers_unblock_by_func (G_OBJECT (selection),
+					   G_CALLBACK (gst_on_storage_list_selection_change),
+					   NULL);
 }
 
 void 
@@ -165,7 +175,8 @@ gst_on_point_entry_changed (GtkWidget *entry, gpointer gdata)
 	GtkTreeSelection     *selection;
 	GstDisksPartition    *part;
 	GstDisksStorageCdrom *cdrom;
-	GstCdromDiscData     *disc;
+	GstCdromDisc         *disc;
+	GstCdromDiscData     *disc_data;
 	const gchar *point;
 
 	treeview = (GtkWidget *) gdata;
@@ -186,9 +197,17 @@ gst_on_point_entry_changed (GtkWidget *entry, gpointer gdata)
 			gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &cdrom, -1);
 			if (GST_IS_DISKS_STORAGE_CDROM (cdrom)) {
 				g_object_get (G_OBJECT (cdrom), "disc", &disc, NULL);
-				if (GST_IS_CDROM_DISC_DATA (disc))
+				if (GST_IS_CDROM_DISC_DATA (disc)) {
 					g_object_set (G_OBJECT (disc), "mount-point",
 						      point, NULL);
+				} else if (GST_IS_CDROM_DISC_MIXED (disc)) {
+					g_object_get (G_OBJECT (disc), "data",
+						      &disc_data, NULL);
+					if (GST_IS_CDROM_DISC_DATA (disc_data))
+						g_object_set (G_OBJECT (disc_data), "mount-point",
+							      point, NULL);
+				}
+					
 			}
 		}
 	}
@@ -237,7 +256,7 @@ gst_on_browse_button_clicked (GtkWidget *button, gpointer gdata)
 	GtkTreeSelection     *selection;
 	GstDisksPartition    *part;
 	GstDisksStorageCdrom *cdrom;
-	GstCdromDiscData     *disc;
+	GstCdromDisc         *disc;
 
 	treeview = (GtkWidget *) gdata;
 
@@ -252,8 +271,11 @@ gst_on_browse_button_clicked (GtkWidget *button, gpointer gdata)
 			gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &cdrom, -1);
 			if (GST_IS_DISKS_STORAGE_CDROM (cdrom)) {
 				g_object_get (G_OBJECT (cdrom), "disc", &disc, NULL);
-				if (GST_IS_CDROM_DISC_DATA (disc))
-					gst_disks_cdrom_disc_data_browse (disc);
+				if (GST_IS_CDROM_DISC_DATA (disc)) {
+					gst_disks_cdrom_disc_data_browse (GST_CDROM_DISC_DATA (disc));
+				} else if (GST_IS_CDROM_DISC_MIXED (disc)) {
+					gst_disks_cdrom_disc_mixed_browse (GST_CDROM_DISC_MIXED (disc));
+				}
 			}
 		}
 	}
@@ -267,7 +289,7 @@ gst_on_play_button_clicked (GtkWidget *button, gpointer gdata)
 	GtkTreeIter            iter;
 	GtkTreeSelection      *selection;
 	GstDisksStorageCdrom  *cdrom;
-	GstCdromDiscAudio     *disc;
+	GstCdromDisc          *disc;
 	const gchar *device;
 
 	treeview = (GtkWidget *) gdata;
@@ -278,8 +300,11 @@ gst_on_play_button_clicked (GtkWidget *button, gpointer gdata)
 		if (GST_IS_DISKS_STORAGE_CDROM (cdrom)) {
 			g_object_get (G_OBJECT (cdrom), "device", &device, 
 				      "disc", &disc, NULL);
-			if (GST_IS_CDROM_DISC_AUDIO (disc))
-				gst_disks_cdrom_disc_audio_play (disc, device);
+			if (GST_IS_CDROM_DISC_AUDIO (disc)) {
+				gst_disks_cdrom_disc_audio_play (GST_CDROM_DISC_AUDIO (disc), device);
+			} else if (GST_IS_CDROM_DISC_MIXED (disc)) {
+				gst_disks_cdrom_disc_mixed_play (GST_CDROM_DISC_MIXED (disc), device);
+			}
 		}
 	}
 }

@@ -27,12 +27,12 @@
 
 #include <gnome.h>
 
-#include "disks-config.h"
 #include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"
 #include "disks-cdrom-disc.h"
 #include "disks-cdrom-disc-data.h"
 #include "disks-cdrom-disc-audio.h"
+#include "disks-cdrom-disc-mixed.h"
 
 enum {
 	POPUP_PARTITION_FORMAT,
@@ -60,6 +60,7 @@ gfloat         gst_storage_get_float_size      (const gulong size);
 
 void           gst_disks_gui_setup                      ();
 void           gst_disks_gui_set_device_speed           (GstDisksStorage *storage);
+/*void           gst_disks_gui_storage_list_reload        (GtkWidget *widget, gpointer gdata);*/
 void           gst_disks_gui_setup_partition_list       (GtkWidget *treeview, GList *partitions);
 void           gst_disks_gui_setup_storage_properties   (GstDisksStorage *storage);
 void           gst_disks_gui_setup_disk_properties      (GstDisksStorageDisk *disk);
@@ -67,5 +68,6 @@ void           gst_disks_gui_setup_partition_properties (GstDisksPartition *part
 void           gst_disks_gui_setup_cdrom_properties     (GstDisksStorageCdrom *cdrom);
 void           gst_disks_gui_setup_cdrom_disc_data      (GstCdromDiscData *disc_data);
 void           gst_disks_gui_setup_cdrom_disc_audio     (GstCdromDiscAudio *disc_audio);
+void           gst_disks_gui_setup_cdrom_disc_mixed     (GstCdromDiscMixed *disc_mixed);
 
 #endif /* __DISKS_GUI_H */
