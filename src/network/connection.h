@@ -78,6 +78,14 @@ typedef enum {
 	ACTIVATION_DOWN
 } ActivationType;
 
+enum {
+	CONNECTION_POPUP_NONE,
+	CONNECTION_POPUP_ADD,
+	CONNECTION_POPUP_SEPARATOR,
+	CONNECTION_POPUP_CONFIGURE,
+	CONNECTION_POPUP_DELETE
+};
+
 typedef struct {
 	xmlNode *node;
 	

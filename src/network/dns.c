@@ -35,8 +35,8 @@
 
 extern GstTool *tool;
 
-GtkItemFactoryEntry popup_menu_items[] = {
-	{ N_("/_Delete"), NULL, G_CALLBACK (on_dns_search_popup_del_activate), POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+GtkItemFactoryEntry dns_search_popup_menu_items[] = {
+	{ N_("/_Delete"), NULL, G_CALLBACK (on_dns_search_popup_del_activate), DNS_SEARCH_POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
 };
 
 static char *
@@ -55,8 +55,8 @@ dns_search_popup_item_factory_create (GtkWidget *treeview)
 	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
 	gtk_item_factory_set_translate_func (item_factory, dns_search_item_factory_trans,
 					     NULL, NULL);
-	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (popup_menu_items),
-				       popup_menu_items, (gpointer) treeview);
+	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (dns_search_popup_menu_items),
+				       dns_search_popup_menu_items, (gpointer) treeview);
 
 	return item_factory;
 }
@@ -237,7 +237,7 @@ dns_search_gui_setup (GstTool *tool, const gchar *listname, const gchar *entryna
 	item_factory = dns_search_popup_item_factory_create (treeview);
 
 	g_signal_connect (G_OBJECT (treeview), "button_press_event",
-			  G_CALLBACK (on_dns_search_button_press),
+			  G_CALLBACK (callbacks_button_press),
 			  (gpointer) item_factory);
 
 	gst_dns_search_update_sensitivity (treeview);

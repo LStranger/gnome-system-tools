@@ -30,6 +30,11 @@ enum {
 	STATICHOST_LIST_COL_LAST
 };
 
+enum {
+	HOSTS_POPUP_NONE,
+	HOSTS_POPUP_DELETE
+};
+
 typedef struct {
 	GtkWidget *list;
 	GtkWidget *ip;

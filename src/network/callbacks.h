@@ -65,6 +65,10 @@ gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
 void on_connection_add_clicked (GtkWidget *w, gpointer null);
 void on_connection_delete_clicked (GtkWidget *w, gpointer null);
 void on_connection_configure_clicked (GtkWidget *w, gpointer null);
+void on_connection_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_connection_popup_configure_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_connection_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget);
+
 void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
 void on_samba_use_toggled (GtkWidget *w, gpointer null);
 void on_wins_use_toggled (GtkWidget *w, gpointer null);
@@ -79,6 +83,8 @@ gboolean callbacks_check_dialer_hook       (GstDialog *dialog, gpointer data);
 gboolean callbacks_check_gateway_hook      (GstDialog *dialog, gpointer data);
 
 gboolean callbacks_tool_not_found_hook     (GstTool *tool, GstReportLine *rline, gpointer data);
+
+gboolean callbacks_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
 
 /* connection callbacks */
 void on_connection_toggled (GtkWidget*, gchar*, gpointer);
@@ -95,8 +101,6 @@ gchar* on_volume_format_value (GtkWidget*, gdouble, gpointer);
 void on_dns_search_add_button_clicked (GtkWidget *button, gpointer gdata);
 void on_dns_search_del_button_clicked (GtkWidget *button, gpointer gdata);
 void on_dns_search_entry_changed      (GtkWidget *entry, gpointer gdata);
-gboolean on_dns_search_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
-void on_dns_search_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget);
 void on_dns_search_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget);
 
 /* Hosts tab callbacks */
@@ -104,6 +108,8 @@ void on_hosts_ip_changed (GtkEditable*, gpointer);
 void on_hosts_alias_changed (GtkTextBuffer*, gpointer);
 void on_hosts_add_clicked (GtkWidget*, gpointer);
 void on_hosts_delete_clicked (GtkWidget*, gpointer);
+void on_hosts_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget);
+
 
 /* Network connection druid callbacks */
 gboolean on_network_druid_hide (GtkWidget*, gpointer);

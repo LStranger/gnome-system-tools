@@ -27,8 +27,8 @@ enum {
 };
 
 enum {
-	POPUP_NONE,
-	POPUP_DELETE
+	DNS_SEARCH_POPUP_NONE,
+	DNS_SEARCH_POPUP_DELETE
 };
 
 void     dns_search_init_gui          (GstTool *tool);

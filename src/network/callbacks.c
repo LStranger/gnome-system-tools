@@ -155,6 +155,30 @@ poll_connections_timeout (gpointer data)
 }
 #endif
 
+gboolean
+callbacks_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
+{
+	GtkTreePath *path;
+	GtkItemFactory *factory;
+
+	factory = (GtkItemFactory *) gdata;
+
+	if (event->button == 3)
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (treeview));
+		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
+		{
+			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
+			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
+
+			gtk_item_factory_popup (factory, event->x_root, event->y_root,
+						event->button, event->time);
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
+
 void
 on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 				 gint page_num, gpointer user_data)
@@ -378,29 +402,11 @@ init_editable_filters (GstDialog *dialog)
 		{ NULL,          EF_ALLOW_NONE }
 	};
 
-	struct tmp s1[] = {
-		{ "alias",       EF_ALLOW_ENTER | EF_ALLOW_TEXT },
-		{ NULL,          EF_ALLOW_NONE }
-	};
-
 	for (i = 0; s[i].name; i++)
 		g_signal_connect (G_OBJECT (gst_dialog_get_widget (dialog, s[i].name)),
 				  "insert_text",
 				  G_CALLBACK (filter_editable),
 				  GINT_TO_POINTER (s[i].rule));
-
-#warning FIXME
-	return;
-
-	for (i = 0; s1[i].name; i++) {
-		GtkTextBuffer *buffer;
-		GtkWidget *w = gst_dialog_get_widget (dialog, s1[i].name);
-
-		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
-		g_signal_connect (G_OBJECT (buffer), "changed",
-				  G_CALLBACK (filter_editable),
-				  GINT_TO_POINTER (s1[i].rule));
-	}
 }
 
 gint
@@ -473,6 +479,24 @@ on_connection_configure_clicked (GtkWidget *w, gpointer null)
 	GstConnection *cxn = connection_list_get_active ();
 	
 	connection_configure (cxn);
+}
+
+void
+on_connection_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_connection_add_clicked (callback_data, NULL);
+}
+
+void
+on_connection_popup_configure_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_connection_configure_clicked (callback_data, NULL);
+}
+
+void
+on_connection_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_connection_delete_clicked (callback_data, NULL);
 }
 
 static void
@@ -849,7 +873,6 @@ callbacks_tool_not_found_hook (GstTool *tool, GstReportLine *rline, gpointer dat
 	return TRUE;
 }
 
-
 /* Connection dialog callbacks */
 
 void
@@ -1109,30 +1132,6 @@ on_dns_search_entry_changed (GtkWidget *widget, gpointer gdata)
 	gtk_widget_show_all (list);
 }
 
-gboolean
-on_dns_search_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
-{
-	GtkTreePath *path;
-	GtkItemFactory *factory;
-
-	factory = (GtkItemFactory *) gdata;
-
-	if (event->button == 3)
-	{
-		gtk_widget_grab_focus (GTK_WIDGET (treeview));
-		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
-		{
-			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
-			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
-
-			gtk_item_factory_popup (factory, event->x_root, event->y_root,
-						event->button, event->time);
-		}
-		return TRUE;
-	}
-	return FALSE;
-}
-
 void
 on_dns_search_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget)
 {
@@ -1288,9 +1287,7 @@ on_hosts_add_clicked (GtkWidget * button, gpointer user_data)
 void
 on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 {
-	gchar *txt, *ip, *alias;
-	GtkWidget *dialog;
-	gint res;
+	gchar *ip, *alias;
 	GstStatichostUI *ui;
 
 	g_return_if_fail (gst_tool_get_access (tool));
@@ -1300,25 +1297,17 @@ on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 	if (!hosts_list_get_selected (&ip, &alias))
 		return;
 
-	txt = g_strdup_printf (_("Are you sure you want to delete the aliases for %s?"), ip);
-	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-					 GTK_DIALOG_MODAL,
-					 GTK_MESSAGE_QUESTION,
-					 GTK_BUTTONS_YES_NO,
-					 txt);
-
-	res = gtk_dialog_run (GTK_DIALOG (dialog));
-	gtk_widget_destroy (dialog);
-	g_free (txt);
-
-	if (res != GTK_RESPONSE_YES)
-		return;
-
 	hosts_list_remove (tool, ip);
 	gst_dialog_modify (tool->main_dialog);
 
 	gst_hosts_clear_entries ();
 	gst_hosts_unselect_all ();
+}
+
+void
+on_hosts_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_hosts_delete_clicked (callback_data, NULL);
 }
 
 /* Network druid callbacks */

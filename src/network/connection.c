@@ -53,6 +53,13 @@ static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ NULL,                          GST_CONNECTION_UNKNOWN,  NULL,             NULL,         NULL }
 };
 
+GtkItemFactoryEntry connection_popup_menu_items[] = {
+	{ N_("/_Add ..."), NULL, G_CALLBACK (on_connection_popup_add_activate), CONNECTION_POPUP_ADD, "<StockItem>", GTK_STOCK_ADD},
+	{ "/" , NULL, NULL, CONNECTION_POPUP_SEPARATOR, "<Separator>", NULL},
+	{ N_("/_Configure"), NULL, G_CALLBACK (on_connection_popup_configure_activate), CONNECTION_POPUP_CONFIGURE, "<StockItem>", GTK_STOCK_PREFERENCES },
+	{ N_("/_Delete"), NULL, G_CALLBACK (on_connection_popup_delete_activate), CONNECTION_POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+};
+
 #define GET_STR(yy_prefix,xx) g_free (cxn->xx); \
 	cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), 0, -1)
 #define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))->active
@@ -419,6 +426,28 @@ connection_get_dev_type (GstConnection *cxn)
 	return NULL;
 }
 
+static char *
+connection_item_factory_trans (const char *path, gpointer data)
+{
+	return _((gchar*)path);
+}
+
+static GtkItemFactory *
+connection_popup_item_factory_create (GtkWidget *treeview)
+{
+	GtkItemFactory *item_factory;
+
+	g_return_val_if_fail (treeview != NULL, NULL);
+
+	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
+	gtk_item_factory_set_translate_func (item_factory, connection_item_factory_trans,
+					     NULL, NULL);
+	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (connection_popup_menu_items),
+				       connection_popup_menu_items, (gpointer) treeview);
+
+	return item_factory;
+}
+
 static GtkTreeModel *
 connection_list_model_new (void)
 {
@@ -496,17 +525,28 @@ connection_list_add_columns (GtkTreeView *treeview)
 static void
 connection_list_select_row (GtkTreeSelection *selection, gpointer data)
 {
-	GtkTreeIter    iter;
-	GtkTreeModel  *model;
-	GstConnection *cxn;
+	GtkTreeIter     iter;
+	GtkTreeModel   *model;
+	GstConnection  *cxn;
+	GtkItemFactory *factory;
+
+	factory = (GtkItemFactory *) data;
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 
-		if (cxn->type == GST_CONNECTION_LO)
+		if (cxn->type == GST_CONNECTION_LO) {
 			connection_actions_set_sensitive (FALSE);
-		else
+			gtk_widget_set_sensitive (
+				gtk_item_factory_get_widget_by_action (factory, CONNECTION_POPUP_DELETE),
+				FALSE);
+		}
+		else {
 			connection_actions_set_sensitive (TRUE);
+			gtk_widget_set_sensitive (
+				gtk_item_factory_get_widget_by_action (factory, CONNECTION_POPUP_DELETE),
+				TRUE);
+		}
 	} else
 		connection_actions_set_sensitive (FALSE);
 }
@@ -594,6 +634,7 @@ connection_list_new (GstTool *tool)
 	GtkWidget        *treeview;
 	GtkTreeSelection *select;
 	GtkTreeModel     *model;
+	GtkItemFactory   *item_factory;
 
 	model = connection_list_model_new ();
 
@@ -603,10 +644,17 @@ connection_list_new (GstTool *tool)
 
 	connection_list_add_columns (GTK_TREE_VIEW (treeview));
 
+	item_factory = connection_popup_item_factory_create (treeview);
+
+	g_signal_connect (G_OBJECT (treeview), "button_press_event",
+			  G_CALLBACK (callbacks_button_press),
+			  (gpointer) item_factory);
+	
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
 	g_signal_connect (G_OBJECT (select), "changed",
-			  G_CALLBACK (connection_list_select_row), NULL);
+			  G_CALLBACK (connection_list_select_row),
+			  (gpointer) item_factory); 
 
 	gtk_widget_show_all (treeview);
 
