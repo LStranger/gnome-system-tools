@@ -19,6 +19,11 @@
 	(xst_tool_load): This function shrank a lot by using the new functions.
 	(xst_tool_save): Same. Just a particular case, with some other GUI and
 	archiver instructions.
+	XST_TOOL_EOR: static global with the magic string.
+	(xst_tool_end_of_request): Use static global, and receive the entire
+	GString, using now g_string_truncate.
+	(xst_tool_run_set_directive): Send the end of request string after dumping
+	xml.
 
 2001-06-25  Tambet Ingo  <tambet@ximian.com>
 

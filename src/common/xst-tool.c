@@ -61,6 +61,7 @@ static enum {
 
 static GtkObjectClass *parent_class;
 static gint xsttool_signals [LAST_SIGNAL] = { 0 };
+static const gchar *XST_TOOL_EOR = "\n<!-- XST: end of request -->\n";
 
 static gboolean platform_unsupported_cb   (XstTool *tool, XstReportLine *rline);
 static gboolean platform_add_supported_cb (XstTool *tool, XstReportLine *rline);
@@ -637,21 +638,22 @@ xst_tool_kill_backend (XstTool *tool, gpointer data)
 }
 
 static gboolean
-xst_tool_end_of_request (gchar *str)
+xst_tool_end_of_request (GString *string)
 {
-	const gchar *eor = "\n<!-- XST: end of request -->\n";
+	gchar *str;
 	gint len, eorlen, i;
 
+	str = string->str;
 	len = strlen (str);
-	eorlen = strlen (eor);
+	eorlen = strlen (XST_TOOL_EOR);
 	if (len < eorlen)
 		return FALSE;
 
 	for (i = 0; i < eorlen; i++)
-		if (eor[eorlen - i - 1] != str[len - i -1])
+		if (XST_TOOL_EOR[eorlen - i - 1] != str[len - i - 1])
 			return FALSE;
 
-	str[len - eorlen + 1] = 0;
+	g_string_truncate (string, len - eorlen + 1);
 
 	return TRUE;
 }
@@ -712,7 +714,7 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *directive, ...)
 	if (location_id == NULL)
 		report_progress (tool, _("Scanning your system configuration."));
 
-	while (! xst_tool_end_of_request (tool->xml_document->str)) {
+	while (! xst_tool_end_of_request (tool->xml_document)) {
 		t = read (tool->backend_read_fd, buffer, sizeof (buffer) - 1);
 		if (t == 0)
 			break;
@@ -750,6 +752,7 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml, const gchar *directive, 
 	if (xml) {
 		f = fdopen (dup (tool->backend_write_fd), "w");
 		xmlDocDump (f, xml);
+		fprintf (f, XST_TOOL_EOR);
 		fclose (f);
 	}
 
