@@ -16,17 +16,23 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Hans Petter Jansson <hpj@ximian.com>
+ * Authors: Carlos Garnacho Parro  <garnacho@tuxerver.net>
  */
 
-#ifndef GST_SU_H
-#define GST_SU_H
+#ifndef GST_AUTH_H
+#define GST_AUTH_H
 
 #include "gst-types.h"
 
-void gst_su_run_term          (int, gchar**, gchar*);
-void gst_su_write_password    (gchar*);
-void gst_su_clear_term        (void);
-gint gst_su_get_password      (gchar **password);
+enum {
+	GST_AUTH_RUN_AS_ROOT,
+	GST_AUTH_RUN_AS_USER,
+	GST_AUTH_CANCEL
+};
 
-#endif /* GST_SU_H */
+void gst_su_run_term          (GstTool*, gchar**);
+void gst_su_write_password    (GstTool*, gchar*);
+gint gst_su_get_password      (gchar **password);
+void gst_auth_do_ssh_authentication (GstTool*, gchar*);
+void gst_auth_do_su_authentication (GstTool*);
+#endif /* GST_AUTH_H */
