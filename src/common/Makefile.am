@@ -25,3 +25,5 @@ libsetuptool_a_SOURCES =				\
 	gst.h						\
 	gst-marshal.h					\
 	gst-types.h
+
+EXTRA_DIST = CommonMakefile
