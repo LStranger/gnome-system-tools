@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-07-25 11:42+0200\n"
-"PO-Revision-Date: 2001-07-25 12:27+0200\n"
+"POT-Creation-Date: 2001-07-27 13:21+0200\n"
+"PO-Revision-Date: 2001-07-27 13:25+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -219,7 +219,7 @@ msgstr "Pobieranie opcji [%s] interfejsu [%s]."
 #: backend/report.pl.in:1
 #, c-format
 msgid "Getting keyword [%s] from interface [%s]."
-msgstr "Pobieranie s³owa kluczowego [%s] intefrejsu [%s]."
+msgstr "Pobieranie s³owa kluczowego [%s] interfejsu [%s]."
 
 #: backend/report.pl.in:1
 #, c-format
@@ -876,10 +876,6 @@ msgid "Narrower"
 msgstr "Wê¿szy"
 
 #: interfaces/display.glade.in.h:1
-msgid "Position"
-msgstr "Po³o¿enie"
-
-#: interfaces/display.glade.in.h:1
 msgid "Refresh rate:"
 msgstr "Czêstotliwo¶æ od¶wie¿ania:"
 
@@ -924,8 +920,7 @@ msgid "Up"
 msgstr "Góra"
 
 #: interfaces/display.glade.in.h:1
-msgid ""
-"Use this tool to configure your monitor. balh balhan837498 q29487 1 98374 "
+msgid "Use this tool to configure your monitor."
 msgstr "Narzêdzie to pozwala na skonfigurowanie monitora."
 
 #: interfaces/display.glade.in.h:1
@@ -1296,8 +1291,8 @@ msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
 msgstr ""
-"Na pocz±tku, wprowad¼ numer telefonu u¿ywany do ³±czenia z internetem. Numer "
-"ten udostêpniany jest przez twojego dostawcê internetu. "
+"Na pocz±tku, wprowad¼ numer telefonu u¿ywany do ³±czenia z Internetem. Numer "
+"ten udostêpniany jest przez twojego dostawcê Internetu. "
 
 #: interfaces/network.glade.in.h:1
 msgid "General"
@@ -1329,7 +1324,7 @@ msgstr "Rozpoznawanie tego komputera."
 
 #: interfaces/network.glade.in.h:1
 msgid "How to dial up to the internet."
-msgstr "Nawi±zywanie po³±czenia z internetem."
+msgstr "Nawi±zywanie po³±czenia z Internetem."
 
 #: interfaces/network.glade.in.h:1
 msgid "IP Address"
@@ -1549,6 +1544,10 @@ msgstr "_Nazwa komputera:"
 #: interfaces/network.glade.in.h:1
 msgid "_IP address:"
 msgstr "Adres _IP:"
+
+#: interfaces/network.glade.in.h:1
+msgid "_IR LAN"
+msgstr "Sieæ na po_dczerwieñ"
 
 #: interfaces/network.glade.in.h:1
 msgid "_Local IP:"
@@ -2210,7 +2209,7 @@ msgid ""
 "On this page, you can define security options, such as how frequently users "
 "must change their passwords."
 msgstr ""
-"Na tej stonie mo¿na okre¶liæ opcje dotycz±ce bezpieczeñstwa, takie, jak "
+"Na tej stronie mo¿na okre¶liæ opcje dotycz±ce bezpieczeñstwa, takie, jak "
 "wymagana czêsto¶æ zmian hase³ przez u¿ytkowników."
 
 #: interfaces/users.glade.in.h:1
@@ -2218,7 +2217,7 @@ msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
 msgstr ""
-"Na tej stonie mo¿na okre¶liæ domy¶lne ustawienia, przypisywane nowym "
+"Na tej stronie mo¿na okre¶liæ domy¶lne ustawienia, przypisywane nowym "
 "u¿ytkownikom."
 
 #: interfaces/users.glade.in.h:1
@@ -2439,6 +2438,31 @@ msgstr "DOS"
 msgid "Linux"
 msgstr "Linux"
 
+#: src/boot/boot-image.c:1
+#, c-format
+msgid "Invalid path: %s"
+msgstr "Niepoprawna ¶cie¿ka: %s"
+
+#: src/boot/boot-image.c:1
+#, c-format
+msgid "Image '%s' already exists, please set another name."
+msgstr "Obraz o nazwie \"%s\" ju¿ istnieje. Podaj inn± nazwê."
+
+#: src/boot/boot-image.c:1
+#, c-format
+msgid "Invalid image name: '%s'"
+msgstr "Niepoprawna nazwa obrazu: \"%s\""
+
+#: src/boot/boot-image.c:1
+#, c-format
+msgid "Invalid image: '%s'"
+msgstr "Niepoprawny obraz: \"%s\""
+
+#: src/boot/boot-image.c:1
+#, c-format
+msgid "Invalid root device: '%s'"
+msgstr "Niepoprawne urz±dzenie z g³ównym systemem plików: \"%s\""
+
 #: src/boot/callbacks.c:1
 #, c-format
 msgid "Are you sure you want to delete %s?"
@@ -2504,12 +2528,12 @@ msgid "Error connection signal `%s' in widget `%s'"
 msgstr "B³±d przy pod³±czaniu do sygna³u \"%s\" w widgecie \"%s\""
 
 #: src/common/xst-tool.c:1
-msgid "Skipping backend init..."
-msgstr "Pomijanie inicjacji programu przetwarzaj±cego..."
-
-#: src/common/xst-tool.c:1
 msgid "Closing tool."
 msgstr "Zamykanie narzêdzia."
+
+#: src/common/xst-tool.c:1
+msgid "Skipping set directive..."
+msgstr "Pomijanie dyrektywy set..."
 
 #: src/common/xst-tool.c:1
 msgid "Skipping actual save..."
@@ -2604,7 +2628,7 @@ msgstr "Lokalne niewymienne no¶niki danych."
 #. run test
 #: src/display/callbacks.c:1
 msgid "Testing current settings."
-msgstr "Przetowanie bie¿±cych ustawieñ."
+msgstr "Testowanie bie¿±cych ustawieñ."
 
 #: src/display/callbacks.c:1
 msgid "Restoring settings..."
@@ -2797,7 +2821,7 @@ msgstr "Wykonuje operacje korzystaj±c z globalnego programu przetwarzaj±cego"
 
 #: src/location-manager/main.c:1
 msgid "Options for the location manager"
-msgstr "Opcje mened¿era op³o¿enia"
+msgstr "Opcje mened¿era lokalizacji"
 
 #: src/memory/callbacks.c:1
 #, c-format
@@ -3338,7 +3362,7 @@ msgstr "Czê¶æ ¶cie¿ki do katalogu domowego jest plikiem."
 
 #: src/users/user_group.c:1
 msgid "There is a loop in the path to the home directory."
-msgstr "W ¶cie¿de do katalogu domowego wystêpuje zapêtlenie."
+msgstr "W ¶cie¿ce do katalogu domowego wystêpuje zapêtlenie."
 
 #: src/users/user_group.c:1
 msgid "Not enough memory to check the home directory."
@@ -3545,15 +3569,15 @@ msgstr "Synchronizowanie zegara z wybranymi serwerami"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Location"
-msgstr "Po³o¿enie"
+msgstr "Lokalizacja"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Location:"
-msgstr "Po³o¿enie:"
+msgstr "Lokalizacja:"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Locations"
-msgstr "Po³o¿enia"
+msgstr "Lokalizacje"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Mexico CIty "
@@ -3764,7 +3788,7 @@ msgstr "Drukarka dzielona przy u¿yciu protoko³u Novell Netware (NCP)."
 
 #: interfaces/print.glade.in.h:1
 msgid "Printer shared using the Unix (lpd) print protocol."
-msgstr "Drukarka dzielona przy u¿yciu uniksowgo protoko³u wydruku (lpd)."
+msgstr "Drukarka dzielona przy u¿yciu uniksowego protoko³u wydruku (lpd)."
 
 #: interfaces/print.glade.in.h:1
 msgid "R_esolution:"
@@ -3859,7 +3883,7 @@ msgstr "Nazwa _urz±dzenia:"
 
 #: interfaces/print.glade.in.h:1
 msgid "_Direct Network Printer"
-msgstr "Drukarka _Drirect Network"
+msgstr "Drukarka _Direct Network"
 
 #: interfaces/print.glade.in.h:1
 msgid "_Fast Text Printing"
