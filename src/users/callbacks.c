@@ -38,7 +38,7 @@ static int reply;
 /* Prototypes */
 static void reply_cb (gint val, gpointer data);
 
-/* Main button callbacks */
+/* Helper functions */
 
 static void 
 do_quit (void)
@@ -46,6 +46,16 @@ do_quit (void)
 	/* TODO: Check for changes and optionally ask for confirmation */
 	 gtk_main_quit ();
 }
+
+static void
+user_actions_set_sensitive (gboolean b)
+{
+	gtk_widget_set_sensitive (tool_widget_get ("user_delete"), b);
+	gtk_widget_set_sensitive (tool_widget_get ("user_chpasswd"), b);
+	gtk_widget_set_sensitive (tool_widget_get ("user_settings"), b);
+}
+
+/* Main button callbacks */
 
 extern void 
 on_close_clicked(GtkButton *button, gpointer data)
@@ -144,8 +154,9 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	GtkWindow *parent;
 	GnomeDialog *dialog;
 	GtkList *list;
+	GList *selection;
 
-	txt = g_strdup_printf ("Are You sure You want to delete %s?", current_user->login);
+	txt = g_strdup_printf ("Are you sure you want to delete user %s?", current_user->login);
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
 	
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
@@ -156,9 +167,12 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
-		list = GTK_LIST (tool_widget_get ("user_list"));
 		user_list = g_list_remove (user_list, current_user);
-		gtk_list_remove_items (list, list->selection);
+		
+		list = GTK_LIST (tool_widget_get ("user_list"));
+		selection = g_list_copy (list->selection);
+		gtk_list_remove_items (list, selection);
+		g_list_free (selection);
 /*		current_user = user_list; */
 		
 	}
@@ -173,11 +187,16 @@ on_user_list_selection_changed (GtkWidget *list, gpointer user_data)
 
 	current = GTK_LIST (list)->selection;
 
-	if (!current)
-		return;
-
-	list_item = GTK_OBJECT (current->data);
-	current_user = gtk_object_get_data (list_item, user_list_data_key);
+	if (!current) 
+	{
+		user_actions_set_sensitive (FALSE);
+	} 
+	else 
+	{
+		list_item = GTK_OBJECT (current->data);
+		current_user = gtk_object_get_data (list_item, user_list_data_key);
+		user_actions_set_sensitive (TRUE);
+	}
 }
 
 /* Groups tab */
