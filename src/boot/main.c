@@ -42,7 +42,10 @@
 XstTool *tool;
 
 static XstDialogSignal signals[] = {
-	{ "boot_delete", "clicked", on_boot_delete_clicked },
+	{ "boot_delete",   "clicked", on_boot_delete_clicked },
+	{ "boot_settings", "clicked", on_boot_settings_clicked },
+	{ "boot_add",      "clicked", on_boot_add_clicked },
+	{ "boot_prompt",   "toggled", on_boot_prompt_toggled },
 	{ NULL }
 };
 

@@ -40,7 +40,7 @@ GArray *boot_array;
 
 const gchar *table_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Default\" expansion=\"1.0\" minimum_width=\"16\" resizable=\"false\" cell=\"checkbox\" compare=\"integer\"/> \
+  <ETableColumn model_col=\"0\" _title=\"Default\" expansion=\"1.0\" minimum_width=\"16\" resizable=\"true\" cell=\"checkbox\" compare=\"integer\"/> \
   <ETableColumn model_col=\"1\" _title=\"Type\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
   <ETableColumn model_col=\"2\" _title=\"Label\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
   <ETableColumn model_col=\"3\" _title=\"Image\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
@@ -72,11 +72,7 @@ const gchar *adv_boot_state = "\
 
 /* Static prototypes */
 void init_array (void);
-void *boot_value_default (xmlNodePtr node);
-void *boot_value_label (xmlNodePtr node);
-void *boot_value_type (xmlNodePtr node);
-void *boot_value_image (xmlNodePtr node);
-void *boot_value_dev (xmlNodePtr node);
+
 
 static int
 boot_col_count (ETableModel *etc, void *data)
@@ -324,6 +320,72 @@ boot_value_dev (xmlNodePtr node)
 	return xml_get_child_content (node, "other");
 }
 
+/* Set value functions */
+
+void
+boot_value_set_default (xmlNodePtr node)
+{
+	xmlNodePtr n;
+	gchar *label;
+
+	g_return_if_fail (node != NULL);
+	
+	n = xml_doc_get_root (tool->config);
+
+	label = xml_get_child_content (node, "label");
+	if (!label)
+		return;
+
+	xml_set_child_content (n, "default", label);
+}
+
+void
+boot_value_set_label (xmlNodePtr node, gchar *val)
+{
+	g_return_if_fail (node != NULL);
+
+	xml_set_child_content (node, "label", val);
+}
+
+/*
+void
+boot_value_set_type (xmlNodePtr node, gchar *type)
+{
+	xmlNodePtr n;
+	
+	g_return_if_fail (node != NULL);
+
+	n = xml_element_find_first (node, "image");
+
+	if (n)
+		return (_("Linux"));
+
+	n = xml_element_find_first (node, "other");
+
+	if (n)
+		return (_("Other"));
+
+	return (_("Unknown"));
+}
+*/
+
+void
+boot_value_set_image (xmlNodePtr node, gchar *val)
+{
+	g_return_if_fail (node != NULL);
+
+	xml_set_child_content (node, "image", val);
+}
+
+void
+boot_value_set_dev (xmlNodePtr node, gchar *val)
+{
+	g_return_if_fail (node != NULL);
+
+	xml_set_child_content (node, "other", val);
+}
+
+
 xmlNodePtr
 get_selected_node (void)
 {
@@ -333,7 +395,7 @@ get_selected_node (void)
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	
 	if ((row = e_table_get_cursor_row (table)) >= 0)
-		return g_array_index (boot_array, xmlNodePtr, row);;
+		return g_array_index (boot_array, xmlNodePtr, row);
 
 	return NULL;
 }
@@ -353,3 +415,54 @@ boot_table_update_state (void)
 	else
 		e_table_set_state (table, adv_boot_state);
 }
+
+void
+boot_table_delete (void)
+{
+	ETable *table;
+	gint row;
+	xmlNodePtr node;
+
+	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
+	row = e_table_get_cursor_row (table);
+	node = g_array_index (boot_array, xmlNodePtr, row);
+
+	xml_element_destroy (node);
+	g_array_remove_index (boot_array, row);
+
+	e_table_model_row_deleted (table->model, row);
+}
+
+void
+boot_table_update (void)
+{
+	ETable *table;
+	gint row;
+
+	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
+	row = e_table_get_cursor_row (table);
+
+	e_table_model_row_changed (table->model, row);
+}
+
+void
+boot_table_add (void)
+{
+	ETable *table;
+	gint row;
+	xmlNodePtr node;
+
+	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
+
+	node = xml_doc_get_root (tool->config);
+	node = xml_element_add (node, "entry");
+	
+	g_array_append_val (boot_array, node);
+	
+	row = boot_array->len - 1;
+	g_print ("%d\n", row);
+
+	e_table_model_row_inserted (table->model, row);
+	e_table_set_cursor_row (table, row);
+}
+

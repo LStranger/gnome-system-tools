@@ -36,6 +36,9 @@ XstTool *tool;
 
 static int reply;
 
+static void boot_settings_dialog_clean (void);
+static void boot_settings_dialog_prepare (void);
+static gboolean boot_settings_dialog_affect (void);
 static void reply_cb (gint val, gpointer data);
 
 /* Main window callbacks */
@@ -59,12 +62,54 @@ on_boot_delete_clicked (GtkButton *button, gpointer user_data)
 	gnome_dialog_run (dialog);
 	g_free (label);
 	g_free (buf);
-
+	
 	if (reply)
-		/* NO */;
-	else
-		/* YES */ ;
+		return;
+	
+	boot_table_delete ();
+	xst_dialog_modify (tool->main_dialog);
+	actions_set_sensitive (FALSE);
+}
 
+extern void
+on_boot_settings_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkWidget *d;
+	gint res;
+
+	d = xst_dialog_get_widget (tool->main_dialog, "boot_settings_dialog");
+
+	boot_settings_dialog_prepare ();
+	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
+
+	if (res)
+		return;
+
+	/* affect */
+	boot_settings_dialog_affect ();
+	boot_table_update ();
+	xst_dialog_modify (tool->main_dialog);
+}
+
+extern void
+on_boot_add_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkWidget *d;
+	gint res;
+
+	d = xst_dialog_get_widget (tool->main_dialog, "boot_settings_dialog");
+
+	boot_settings_dialog_clean ();
+	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
+
+	if (res)
+		return;
+
+	/* affect */
+	boot_table_add ();
+	boot_settings_dialog_affect ();
+	boot_table_update ();
+	xst_dialog_modify (tool->main_dialog);
 }
 
 extern void
@@ -72,16 +117,82 @@ on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer user_data)
 {
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout"),
 						 gtk_toggle_button_get_active (toggle));
+
+	xst_dialog_modify (tool->main_dialog);
+}
+
+static void
+boot_settings_dialog_clean (void)
+{
+	gint i;
+	gchar *widget[] = { "boot_settings_label", "boot_settings_image", "boot_settings_append",
+					"boot_settings_root", NULL };
+
+	for (i = 0; widget[i]; i++)
+		gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, widget[i])),"");
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
+										    (tool->main_dialog,
+											"boot_settings_default")), FALSE);
+}
+
+static void
+boot_settings_dialog_prepare (void)
+{
+	xmlNodePtr node;
+
+	node = get_selected_node ();
+
+	/* Label */
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+											    "boot_settings_label")),
+					(gchar *)boot_value_label (node));
+
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+											    "boot_settings_image")),
+					(gchar *)boot_value_image (node));
+	
+	/* Default toggle */
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
+										    (tool->main_dialog,
+											"boot_settings_default")),
+							(gboolean)boot_value_default (node));
+}
+
+static gboolean
+boot_settings_dialog_affect (void)
+{
+	xmlNodePtr node;
+
+	node = get_selected_node ();
+
+	boot_value_set_label (node, gtk_entry_get_text
+					  (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+												  "boot_settings_label"))));
+	
+	boot_value_set_image (node, gtk_entry_get_text
+					  (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+												  "boot_settings_image"))));
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
+											   (tool->main_dialog,
+											    "boot_settings_default"))))
+	{
+		boot_value_set_default (node);
+	}
+	
+	return TRUE;
 }
 
 /* Helpers */
 
-extern void
+void
 actions_set_sensitive (gboolean state)
 {
 	if (xst_tool_get_access (tool))
 	{
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_new"), TRUE);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_add"), TRUE);
 		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_delete"),
 							 state);
 	}
