@@ -31,6 +31,7 @@
 #include "tz.h"
 #include "e-map/e-map.h"
 #include "tz-map.h"
+#include "../common/tool.h"
 
 
 /* --- Forward declarations of internal functions --- */

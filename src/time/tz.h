@@ -29,10 +29,15 @@
 #define TZ_DATA_FILE "/usr/share/zoneinfo/zone.tab"
 
 
+typedef struct _TzDB TzDB;
 typedef struct _TzLocation TzLocation;
 typedef struct _TzInfo TzInfo;
-typedef struct _TzDB TzDB;
 
+
+struct _TzDB
+{
+	GPtrArray *locations;
+};
 
 struct _TzLocation
 {
@@ -57,18 +62,22 @@ struct _TzInfo
 	gint daylight;
 };
 
-struct _TzDB
-{
-	GPtrArray *locations;
-};
-
 
 TzDB *tz_load_db (void);
+
 GPtrArray *tz_get_locations (TzDB *db);
+
+void tz_location_get_position (TzLocation *loc,
+			       double *longitude, double *latitude);
+
 char *tz_location_get_country (TzLocation *loc);
+
 gchar *tz_location_get_zone (TzLocation *loc);
+
 gchar *tz_location_get_comment (TzLocation *loc);
+
 TzInfo *tz_info_from_location (TzLocation *loc);
+
 void tz_info_free (TzInfo *tz_info);
 
 
