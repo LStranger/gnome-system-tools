@@ -613,85 +613,19 @@
 		</widget>
 
 		<widget>
-		  <class>GtkButton</class>
-		  <name>dns_add</name>
-		  <width>70</width>
-		  <can_focus>True</can_focus>
-		  <signal>
-		    <name>clicked</name>
-		    <handler>on_dns_add_clicked</handler>
-		    <last_modification_time>Wed, 17 May 2000 23:03:40 GMT</last_modification_time>
-		  </signal>
-		  <signal>
-		    <name>clicked</name>
-		    <handler>tool_modified_cb</handler>
-		    <last_modification_time>Tue, 22 Aug 2000 07:56:52 GMT</last_modification_time>
-		  </signal>
-		  <label>Add</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
-		  <child>
-		    <left_attach>2</left_attach>
-		    <right_attach>3</right_attach>
-		    <top_attach>0</top_attach>
-		    <bottom_attach>1</bottom_attach>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <xexpand>False</xexpand>
-		    <yexpand>False</yexpand>
-		    <xshrink>False</xshrink>
-		    <yshrink>False</yshrink>
-		    <xfill>True</xfill>
-		    <yfill>False</yfill>
-		  </child>
-		</widget>
-
-		<widget>
-		  <class>GtkAlignment</class>
-		  <name>alignment6</name>
-		  <xalign>0.5</xalign>
-		  <yalign>4.24683e-07</yalign>
-		  <xscale>1</xscale>
-		  <yscale>0</yscale>
-		  <child>
-		    <left_attach>2</left_attach>
-		    <right_attach>3</right_attach>
-		    <top_attach>2</top_attach>
-		    <bottom_attach>3</bottom_attach>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <xexpand>False</xexpand>
-		    <yexpand>True</yexpand>
-		    <xshrink>False</xshrink>
-		    <yshrink>False</yshrink>
-		    <xfill>True</xfill>
-		    <yfill>True</yfill>
-		  </child>
-
-		  <widget>
-		    <class>GtkButton</class>
-		    <name>dns_delete</name>
-		    <width>70</width>
-		    <sensitive>False</sensitive>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>clicked</name>
-		      <handler>on_dns_delete_clicked</handler>
-		      <last_modification_time>Tue, 28 Nov 2000 19:48:13 GMT</last_modification_time>
-		    </signal>
-		    <signal>
-		      <name>clicked</name>
-		      <handler>tool_modified_cb</handler>
-		      <last_modification_time>Tue, 22 Aug 2000 07:57:02 GMT</last_modification_time>
-		    </signal>
-		    <label>Delete</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
-		  </widget>
-		</widget>
-
-		<widget>
 		  <class>GtkEntry</class>
 		  <name>dns_ip</name>
 		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>activate</name>
+		    <handler>on_dns_ip_activate</handler>
+		    <last_modification_time>Wed, 29 Nov 2000 03:19:30 GMT</last_modification_time>
+		  </signal>
+		  <signal>
+		    <name>activate</name>
+		    <handler>tool_modified_cb</handler>
+		    <last_modification_time>Wed, 29 Nov 2000 03:24:41 GMT</last_modification_time>
+		  </signal>
 		  <editable>True</editable>
 		  <text_visible>True</text_visible>
 		  <text_max_length>0</text_max_length>
@@ -781,6 +715,82 @@
 		    <xfill>True</xfill>
 		    <yfill>True</yfill>
 		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkButton</class>
+		  <name>dns_add</name>
+		  <width>70</width>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>clicked</name>
+		    <handler>on_dns_add_clicked</handler>
+		    <last_modification_time>Wed, 17 May 2000 23:03:40 GMT</last_modification_time>
+		  </signal>
+		  <signal>
+		    <name>clicked</name>
+		    <handler>tool_modified_cb</handler>
+		    <last_modification_time>Tue, 22 Aug 2000 07:56:52 GMT</last_modification_time>
+		  </signal>
+		  <label>Add</label>
+		  <relief>GTK_RELIEF_NORMAL</relief>
+		  <child>
+		    <left_attach>2</left_attach>
+		    <right_attach>3</right_attach>
+		    <top_attach>0</top_attach>
+		    <bottom_attach>1</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>False</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>False</xfill>
+		    <yfill>False</yfill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkAlignment</class>
+		  <name>alignment6</name>
+		  <xalign>0.5</xalign>
+		  <yalign>4.24683e-07</yalign>
+		  <xscale>1</xscale>
+		  <yscale>0</yscale>
+		  <child>
+		    <left_attach>2</left_attach>
+		    <right_attach>3</right_attach>
+		    <top_attach>2</top_attach>
+		    <bottom_attach>3</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>False</xexpand>
+		    <yexpand>True</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>False</xfill>
+		    <yfill>True</yfill>
+		  </child>
+
+		  <widget>
+		    <class>GtkButton</class>
+		    <name>dns_delete</name>
+		    <width>70</width>
+		    <sensitive>False</sensitive>
+		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_dns_delete_clicked</handler>
+		      <last_modification_time>Tue, 28 Nov 2000 19:48:13 GMT</last_modification_time>
+		    </signal>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>tool_modified_cb</handler>
+		      <last_modification_time>Tue, 22 Aug 2000 07:57:02 GMT</last_modification_time>
+		    </signal>
+		    <label>Delete</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
+		  </widget>
 		</widget>
 	      </widget>
 	    </widget>
@@ -1312,8 +1322,8 @@
 
 	  <widget>
 	    <class>GtkFrame</class>
-	    <name>statichost_frame</name>
-	    <label>Settings for the selected IP address</label>
+	    <name>statichost_settings_frame</name>
+	    <label>Settings for the selected alias</label>
 	    <label_xalign>0</label_xalign>
 	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	    <child>
@@ -1527,7 +1537,7 @@
   <title>Aliases Settings</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
+  <modal>True</modal>
   <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
@@ -1569,6 +1579,11 @@
 	<name>aliases_settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_aliases_settings_ok_clicked</handler>
+	  <last_modification_time>Wed, 29 Nov 2000 07:36:24 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
 
@@ -1577,6 +1592,11 @@
 	<name>aliases_settings_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_aliases_settings_cancel_clicked</handler>
+	  <last_modification_time>Wed, 29 Nov 2000 07:36:07 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
@@ -1662,6 +1682,11 @@
 	    <class>GtkButton</class>
 	    <name>aliases_settings_add</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_aliases_settings_add_clicked</handler>
+	      <last_modification_time>Wed, 29 Nov 2000 07:37:05 GMT</last_modification_time>
+	    </signal>
 	    <label>Add</label>
 	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
@@ -1706,6 +1731,11 @@
 	      <class>GtkButton</class>
 	      <name>aliases_settings_delete</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_aliases_settings_delete_clicked</handler>
+		<last_modification_time>Wed, 29 Nov 2000 07:36:33 GMT</last_modification_time>
+	      </signal>
 	      <label>Delete</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
@@ -1737,6 +1767,11 @@
 	      <class>GtkCList</class>
 	      <name>aliases_settings_list</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>select_row</name>
+		<handler>on_aliases_settings_list_select_row</handler>
+		<last_modification_time>Wed, 29 Nov 2000 07:38:05 GMT</last_modification_time>
+	      </signal>
 	      <columns>1</columns>
 	      <column_widths>80</column_widths>
 	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
@@ -1762,6 +1797,11 @@
 	    <class>GtkEntry</class>
 	    <name>aliases_settings_new</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>activate</name>
+	      <handler>on_aliases_settings_new_activate</handler>
+	      <last_modification_time>Wed, 29 Nov 2000 07:37:24 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
