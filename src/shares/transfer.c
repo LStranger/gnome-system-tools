@@ -50,8 +50,6 @@ transfer_gui_to_xml (GstTool *tool, gpointer data)
 	gboolean      valid;
 	GstShare     *share;
 
-	g_print ("eoeoireurowie\n");
-	
 	table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 
