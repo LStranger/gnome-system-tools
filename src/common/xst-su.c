@@ -162,6 +162,7 @@ exec_su (gchar *exec_path, gchar *user, gchar *pwd)
 		freopen ("/dev/null", "w", stderr);
 		freopen ("/dev/null", "w", stdout);
 
+		sleep (1);
 		execlp ("su", "su", "-c", exec_p, user_p, NULL);
 
 		_exit (0);
