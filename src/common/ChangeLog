@@ -1,3 +1,9 @@
+2003-08-24  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* gst-common.c: (gst_tool_run_set_directive_va): removed a couple
+	  of unneeded fcntl()'s, now the fd doesn't need to be non-blocking in
+	  this area
+
 2003-08-23  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* gst-common.c: (gst_tool_run_set_directive_va): small

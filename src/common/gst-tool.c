@@ -959,7 +959,6 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 		/* read all output from the fd, this is done because a single fd is user for
 		 * reading and writing */
 		buffer = g_string_new ("");
-		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 
 		do {
 			read (tool->backend_master_fd, &buf, 1);
@@ -967,7 +966,6 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 		} while (g_strrstr (buffer->str, GST_TOOL_EOR) != NULL);
 
 		g_string_free (buffer, TRUE);
-		fcntl (tool->backend_master_fd, F_SETFL, 0);
 	}
 
 
