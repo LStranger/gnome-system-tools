@@ -9,7 +9,7 @@ INCLUDES = \
 	$(LIBGLADE_CFLAGS)		\
 	$(GNOME_XML_CFLAGS)
 
-bin_PROGRAMS = users-admin
+sbin_PROGRAMS = users-admin
 
 users_admin_SOURCES = \
 	main.c \
@@ -32,13 +32,22 @@ desktop = users.desktop
 
 EXTRA_DIST = $(desktop).in
 
-CLEANFILES = $(desktop)
+CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc
 
 $(desktop): %.desktop: %.desktop.in
 	sed 's#Icon=.*#Icon='$(pixmapsdir)'/users.png#' < $< > $@
 
-sysdir = $(datadir)/control-center/System
-sys_DATA = users.desktop
+$(desktop).menu: $(desktop)
+	sed 's#Exec=.*#Exec=users-admin#' < $< > $@
 
-install-data-local:
-	$(INSTALL_DATA) $(srcdir)/users.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/System/users.desktop
+$(desktop).cc: $(desktop)
+	sed 's#Exec=.*#Exec=root-manager users-admin#' < $< > $@
+
+all-local: $(desktop).menu $(desktop).cc
+
+install-data-local: $(desktop).menu $(desktop).cc
+	$(INSTALL_DATA) $(srcdir)/users.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/users.desktop
+	$(INSTALL_DATA) $(srcdir)/users.desktop.cc $(DESTDIR)$(datadir)/control-center/System/users.desktop
+	$(INSTALL) -d $(DESTDIR)$(bindir)
+	rm -f $(DESTDIR)$(bindir)/users-admin
+	ln -s consolehelper $(DESTDIR)$(bindir)/users-admin

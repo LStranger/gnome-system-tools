@@ -11,7 +11,7 @@ INCLUDES = \
 	$(LIBGLADE_CFLAGS)		\
 	$(GNOME_XML_CFLAGS)
 
-bin_PROGRAMS = time-admin
+sbin_PROGRAMS = time-admin
 
 time_admin_SOURCES = \
 	main.c \
@@ -30,10 +30,23 @@ $(INTLLIBS) \
 ../common/libsetuptool.a \
 ./e-map/e-map.o
 
-EXTRA_DIST = time.desktop
+desktop = time.desktop
 
-sysdir = $(datadir)/control-center/System
-sys_DATA = time.desktop
+EXTRA_DIST = $(desktop)
+
+CLEANFILES = $(desktop).menu $(desktop).cc
+
+$(desktop).menu: $(desktop)
+	sed 's#Exec=.*#Exec=time-admin#' < $< > $@
+
+$(desktop).cc: $(desktop)
+	sed 's#Exec=.*#Exec=root-manager time-admin#' < $< > $@
+
+all-local: $(desktop).menu $(desktop).cc
 
 install-data-local:
-	$(INSTALL_DATA) $(srcdir)/time.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/System/time.desktop
+	$(INSTALL_DATA) $(srcdir)/time.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/time.desktop
+	$(INSTALL_DATA) $(srcdir)/time.desktop.cc $(DESTDIR)$(datadir)/control-center/System/time.desktop
+	$(INSTALL) -d $(DESTDIR)$(bindir)
+	rm -f $(DESTDIR)$(bindir)/time-admin
+	ln -s consolehelper $(DESTDIR)$(bindir)/time-admin
