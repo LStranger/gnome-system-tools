@@ -45,9 +45,12 @@ struct _GstNetworkInterfaceDescription {
 static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ N_("Other type"),              GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
 	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
+	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "dc",         NULL },
 	{ N_("Wireless LAN card"),       GST_CONNECTION_WLAN,    "wavelan-16.png",  "wlan",       NULL },
 	{ N_("Modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
+	{ N_("Modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "tun",        NULL },
 	{ N_("Parallel line"),           GST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
+	{ N_("Parallel line"),           GST_CONNECTION_PLIP,    "16_plip.xpm",     "lp",         NULL },
 	{ N_("Infrared LAN"),            GST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
 	{ N_("Loopback interface"),      GST_CONNECTION_LO,      "16_loopback.xpm", "lo",         NULL },
 	{ N_("Unknown interface type"),  GST_CONNECTION_UNKNOWN, "network.png",     NULL,         NULL },
