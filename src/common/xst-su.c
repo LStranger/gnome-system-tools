@@ -157,8 +157,11 @@ exec_su (gchar *exec_path, gchar *user, gchar *pwd)
 		}
 
 		dup2 (t_fd, 0);
+
+#if 0
 		freopen ("/dev/null", "w", stderr);
 		freopen ("/dev/null", "w", stdout);
+#endif
 
 		sleep (1);
 		execlp ("su", "su", "-m", "-c", exec_p, user_p, NULL);

@@ -1,5 +1,10 @@
 2001-05-29  Hans Petter Jansson  <hpj@ximian.com>
 
+	* xst-su.c (exec_su): Don't close stdout and stderr. This means we can see
+	  debug output from programs.
+
+2001-05-29  Hans Petter Jansson  <hpj@ximian.com>
+
 	* xst-su.c: Tell su(1) not to modify environment variables. This might or
 	  might not fix the problem where you get the root user's theme instead
 	  of what you were expecting.
