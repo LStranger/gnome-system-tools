@@ -55,7 +55,8 @@ typedef struct {
 	gchar *label;
 	gchar *image;
 	gchar *root;
-	gchar *append;	       	
+	gchar *append;
+	gchar *initrd;
 } BootImage;
 
 BootImage        *boot_image_new          (void);
@@ -66,6 +67,7 @@ void              boot_image_destroy      (BootImage *image);
 gchar            *boot_image_valid_label  (BootImage *image);
 gchar            *boot_image_valid_device (BootImage *image);
 gchar            *boot_image_valid_root   (BootImage *image);
+gchar            *boot_image_valid_initrd (BootImage *image);
 gchar            *boot_image_check        (BootImage *image);
 
 /* Helpers */

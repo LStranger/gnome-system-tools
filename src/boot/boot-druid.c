@@ -262,17 +262,28 @@ image_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	boot_settings_gui_save (config->gui, FALSE);
 	
 	error = boot_image_valid_device (config->gui->image);
-	if (error != NULL) {
+	if (error != NULL)
+	{
 		druid_show_error (config, error);
 /*		image_prepare (page, druid, data);*/
 		return TRUE;
 	}
 	
 	error = boot_image_valid_root (config->gui->image);
-	if (error != NULL) {
+	if (error != NULL)
+	{
 		druid_show_error (config, error);
 		gtk_widget_grab_focus (GTK_WIDGET (config->gui->root));
 /*		identity_prepare (page, druid, data);*/
+		return TRUE;
+	}
+
+	error = boot_image_valid_initrd (config->gui->image);
+	if (error != NULL)
+	{
+		druid_show_error (config, error);
+		gtk_widget_grab_focus (GTK_WIDGET (config->gui->append));
+		/*              identity_prepare (page, druid, data);*/
 		return TRUE;
 	}
 	

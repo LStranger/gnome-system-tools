@@ -315,6 +315,21 @@ boot_value_append (xmlNodePtr node)
 	return buf;
 }
 
+void *
+boot_value_initrd (xmlNodePtr node)
+{
+	gchar *buf;
+	
+	g_return_val_if_fail (node != NULL, NULL);
+
+	if (boot_is_linux (node))
+		buf = gst_xml_get_child_content (node, "initrd");
+	if (!buf)
+		return NULL;
+
+	return buf;
+}
+
 void
 table_populate (xmlNodePtr root)
 {
@@ -481,6 +496,25 @@ boot_value_set_type (xmlNodePtr node, GstBootImageType type)
 
 	gst_xml_element_set_content (n0, buf);
 	g_free (buf);
+}
+
+void
+boot_value_set_initrd (xmlNodePtr node, const gchar *val)
+{
+	xmlNodePtr n0;
+
+	g_return_if_fail (node != NULL);
+
+	n0 = gst_xml_element_find_first (node, "initrd");
+	if (val && strlen (val) > 0)
+	{
+		if (!n0)
+			n0 = gst_xml_element_add (node, "initrd");
+		gst_xml_element_set_content (n0, val);
+	}
+	else
+		if (n0)
+			gst_xml_element_destroy (n0);
 }
 
 static gchar *

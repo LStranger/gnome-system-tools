@@ -121,6 +121,8 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->image_widget = glade_xml_get_widget (gui->xml, "settings_image");
 	gui->image_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image_entry"));	
 	gui->root = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_root_combo"));
+	gui->initrd_widget = glade_xml_get_widget (gui->xml, "settings_initrd");
+	gui->initrd_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_initrd_entry"));
 	gui->append = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_append"));
 	gui->append_browse = GTK_BUTTON (glade_xml_get_widget (gui->xml, "settings_append_browse"));
 
@@ -132,10 +134,12 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	g_signal_connect (G_OBJECT (gui->name), "activate",
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->type->entry);
 	g_signal_connect (G_OBJECT (gui->type->entry), "changed",
-	G_CALLBACK (on_type_entry_change), (gpointer) gui);
+			  G_CALLBACK (on_type_entry_change), (gpointer) gui);
 	g_signal_connect (G_OBJECT (gui->image_entry), "activate",
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->root);
 	g_signal_connect (G_OBJECT (gui->root->entry), "activate",
+			  G_CALLBACK (gui_grab_focus), (gpointer) gui->initrd_widget);
+	g_signal_connect (G_OBJECT (gui->initrd_entry), "activate",
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->append);
 	g_signal_connect (G_OBJECT (gui->append_browse), "clicked",
 	                  G_CALLBACK (on_boot_append_browse_clicked), (gpointer) gui);
@@ -219,6 +223,13 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 		gtk_combo_set_popdown_strings (gui->root, settings_dev_list (image->type));
 		if (image->root)
 		  gst_ui_entry_set_text (GTK_ENTRY (gui->root->entry), image->root);
+
+		if (error = boot_image_valid_initrd (image))
+			gst_ui_entry_set_text (gui->initrd_entry, "");
+		else
+			gst_ui_entry_set_text (gui->initrd_entry, image->initrd);
+
+		gst_ui_entry_set_text (gui->append, image->append);
 	}
 	else
 	{
@@ -229,12 +240,12 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 	
 	gst_ui_entry_set_text (gui->type->entry, type_to_label (image->type));
 	gst_ui_entry_set_text (gui->name, image->label);
-	gst_ui_entry_set_text (gui->append, image->append);
 
 	if (error = boot_image_valid_root (image))
 		gst_ui_entry_set_text (gui->image_entry, "");
 	else
 		gst_ui_entry_set_text (gui->image_entry, image->image);
+
 	gst_ui_entry_set_text (gui->device->entry, image->image);
 
 	if (!image->new) {
@@ -250,9 +261,10 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 {	
 	BootImage *image = gui->image;
 
-	if (image->label) g_free (image->label);
-	if (image->image) g_free (image->image);
-	if (image->root) g_free (image->root);
+	if (image->label)  g_free (image->label);
+	if (image->image)  g_free (image->image);
+	if (image->root)   g_free (image->root);
+	if (image->initrd) g_free (image->initrd);
 	if (image->append) g_free (image->append);
 
 	image->type = label_to_type (gtk_entry_get_text (GTK_ENTRY (gui->type->entry)));
@@ -263,12 +275,14 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 		image->root = g_strdup (gtk_entry_get_text (GTK_ENTRY (gui->root->entry)));
 		image->append = g_strdup (gtk_entry_get_text (gui->append));
 		image->image = g_strdup (gtk_entry_get_text (gui->image_entry));
+		image->initrd = g_strdup (gtk_entry_get_text (gui->initrd_entry));
 	}
 	else
 	{
 		image->root = g_strdup ("");
 		image->append = g_strdup ("");
 		image->image = g_strdup (gtk_entry_get_text (GTK_ENTRY (gui->device->entry)));
+		image->initrd = g_strdup ("");
 	}
 
 	if (check) {
