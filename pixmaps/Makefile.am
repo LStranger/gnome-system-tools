@@ -33,8 +33,8 @@ pixmaps_DATA = \
 	warning.png				\
 	world_map-960.png			\
 	xstdruidbg-3.png			\
-	ximian30.png
-
+	ximian30.png				\
+	talk-userlist.png
 
 EXTRA_DIST = $(pixmaps_DATA)
 
