@@ -372,17 +372,17 @@ construct (BootDruid *druid)
 	vbox = glade_xml_get_widget (druid->gui->xml, "druid_identity_vbox");
 	widget = druid->gui->basic_frame;
 	gtk_widget_reparent (widget, vbox);
-	gtk_box_set_child_packing (GTK_BOX (vbox), widget, FALSE, FALSE, 0, GTK_PACK_START);
+	gtk_box_set_child_packing (GTK_BOX (vbox), widget, TRUE, TRUE, 0, GTK_PACK_START);
 
 	vbox = glade_xml_get_widget (druid->gui->xml, "druid_image_vbox");
 	widget = druid->gui->image_frame;
 	gtk_widget_reparent (widget, vbox);
-	gtk_box_set_child_packing (GTK_BOX (vbox), widget, FALSE, FALSE, 0, GTK_PACK_START);
+	gtk_box_set_child_packing (GTK_BOX (vbox), widget, TRUE, TRUE, 0, GTK_PACK_START);
 
 	vbox = glade_xml_get_widget (druid->gui->xml, "druid_other_vbox");
 	widget = druid->gui->other_frame;
 	gtk_widget_reparent (widget, vbox);
-	gtk_box_set_child_packing (GTK_BOX (vbox), widget, FALSE, FALSE, 0, GTK_PACK_START);
+	gtk_box_set_child_packing (GTK_BOX (vbox), widget, TRUE, TRUE, 0, GTK_PACK_START);
 		
 	boot_settings_gui_setup (druid->gui, NULL);
 
