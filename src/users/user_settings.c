@@ -663,7 +663,7 @@ warnings_join (GList *warnings)
 	}
 
 	text2 = text;
-	text = g_strdup_printf ("The information you just entered created the following warnings:\n\n%s\n\nContinue anyways?", text);
+	text = g_strdup_printf ("The information you just entered produced the following warnings:\n\n%s\n\nContinue anyways?", text);
 	g_free (text2);
 
 	return text;
