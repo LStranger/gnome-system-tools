@@ -4,15 +4,15 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4.0\n"
-"POT-Creation-Date: 2001-05-11 00:49-0500\n"
-"PO-Revision-Date: 2001-04-30 14:16CET\n"
+"Project-Id-Version: 0.4.2\n"
+"POT-Creation-Date: 2001-05-15 15:17+0200\n"
+"PO-Revision-Date: 2001-05-15 15:27CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9beta\n"
+"X-Generator: KBabel 0.9\n"
 
 #: backends/report.pl.in:144
 msgid "Start of work report."
@@ -141,7 +141,7 @@ msgid "Couldn't find tool [%s]."
 msgstr "Nie je mo¾né nájs» nástroj [%s]."
 
 #: backends/report.pl.in:174
-#, fuzzy, c-format
+#, c-format
 msgid "Parsing option [%s]."
 msgstr "Èítam mo¾nosti z [%s]."
 
@@ -156,7 +156,7 @@ msgid "Getting option [%s] from [%s]."
 msgstr "Získavam mo¾nos» [%s] z [%s]."
 
 #: backends/report.pl.in:177 backends/report.pl.in:178
-#, fuzzy, c-format
+#, c-format
 msgid "Getting configuration from [%s]."
 msgstr "Získavam nastavenie z [%s]."
 
@@ -677,7 +677,7 @@ msgstr "Typ bootu:"
 
 #: interfaces/boot.glade.h:21 interfaces/boot.glade.h:23
 #: interfaces/shares.glade.h:56 interfaces/shares.glade.h:70
-#: interfaces/shares.glade.h:139 interfaces/users.glade.h:110
+#: interfaces/shares.glade.h:139 interfaces/users.glade.h:103
 msgid "Name:"
 msgstr "Meno:"
 
@@ -717,7 +717,7 @@ msgstr "Konfiguraèné nástroje Ximian"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.h:8 src/common/xst-tool.c:612
+#: interfaces/common.glade.h:8 src/common/xst-tool.c:626
 msgid "Scanning your system configuration."
 msgstr "Kontrolujem konfiguráciu vá¹ho systému."
 
@@ -947,12 +947,10 @@ msgid "Path:"
 msgstr "Cesta:"
 
 #: interfaces/memory.glade.h:32
-#, fuzzy
 msgid "Swap memory:"
 msgstr "Odkladacia pamä»:"
 
 #: interfaces/memory.glade.h:33
-#, fuzzy
 msgid "Physical memory:"
 msgstr "Fyzická pamä»:"
 
@@ -968,7 +966,7 @@ msgstr "Priorita"
 #: interfaces/nameresolution.glade.h:30 interfaces/nameresolution.glade.h:35
 #: interfaces/network.glade.h:37 interfaces/shares.glade.h:85
 #: interfaces/shares.glade.h:154 interfaces/time.glade.h:30
-#: interfaces/users.glade.h:135
+#: interfaces/users.glade.h:128
 msgid "Add"
 msgstr "Prida»"
 
@@ -1002,7 +1000,7 @@ msgstr "Aliasy"
 #: interfaces/shares.glade.h:45 interfaces/shares.glade.h:87
 #: interfaces/shares.glade.h:156 interfaces/users.glade.h:48
 #: interfaces/users.glade.h:54 interfaces/users.glade.h:63
-#: interfaces/users.glade.h:117 interfaces/users.glade.h:136
+#: interfaces/users.glade.h:110 interfaces/users.glade.h:129
 msgid "Delete"
 msgstr "Zmaza»"
 
@@ -1011,7 +1009,7 @@ msgstr "Zmaza»"
 msgid "Existing:"
 msgstr "Existujúce:"
 
-#: interfaces/nameresolution.glade.h:13 interfaces/users.glade.h:100
+#: interfaces/nameresolution.glade.h:13 interfaces/users.glade.h:27
 msgid "New:"
 msgstr "Nový:"
 
@@ -1162,7 +1160,7 @@ msgstr "Popis"
 
 #: interfaces/network.glade.h:20 interfaces/shares.glade.h:15
 #: interfaces/shares.glade.h:26 interfaces/shares.glade.h:34
-#: interfaces/shares.glade.h:43
+#: interfaces/shares.glade.h:43 interfaces/users.glade.h:108
 msgid "Add..."
 msgstr "Prida»..."
 
@@ -1264,7 +1262,7 @@ msgstr "Spojenie"
 
 #: interfaces/network.glade.h:50 interfaces/shares.glade.h:58
 #: interfaces/shares.glade.h:72 interfaces/shares.glade.h:141
-#: interfaces/users.glade.h:95 interfaces/users.glade.h:111
+#: interfaces/users.glade.h:9 interfaces/users.glade.h:104
 msgid "Comment:"
 msgstr "Komentár:"
 
@@ -1288,15 +1286,15 @@ msgstr "Ako je zistená IP adresa pre toto spojenie"
 msgid "Configuration:"
 msgstr "Nastavenie:"
 
-#: interfaces/network.glade.h:57 src/network/connection.c:980
+#: interfaces/network.glade.h:57 src/network/connection.c:983
 msgid "Manual"
 msgstr "Ruène"
 
-#: interfaces/network.glade.h:58 src/network/connection.c:981
+#: interfaces/network.glade.h:58 src/network/connection.c:984
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.h:59 src/network/connection.c:982
+#: interfaces/network.glade.h:59 src/network/connection.c:985
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -1357,7 +1355,6 @@ msgid "Phone number:"
 msgstr "Telefónne èíslo:"
 
 #: interfaces/network.glade.h:75 interfaces/network.glade.h:117
-#: interfaces/users.glade.h:9
 msgid "User name:"
 msgstr "Pou¾ívateµské meno:"
 
@@ -1525,7 +1522,7 @@ msgstr ""
 msgid "Account name:"
 msgstr "Meno úètu:"
 
-#: interfaces/network.glade.h:131 interfaces/users.glade.h:104
+#: interfaces/network.glade.h:131 interfaces/users.glade.h:98
 msgid "Finished"
 msgstr "Dokonèené"
 
@@ -1766,7 +1763,7 @@ msgstr ""
 "NFS\n"
 
 #: interfaces/shares.glade.h:111 interfaces/shares.glade.h:127
-#: interfaces/users.glade.h:94
+#: interfaces/users.glade.h:10
 msgid "Username:"
 msgstr "Pou¾ívateµské meno:"
 
@@ -1884,10 +1881,6 @@ msgstr "Nastavenie pou¾ívateµov"
 msgid "Basic settings"
 msgstr "Základné nastavenie"
 
-#: interfaces/users.glade.h:10
-msgid "Full Name:"
-msgstr "Úplné meno:"
-
 #: interfaces/users.glade.h:11
 msgid "Advanced settings"
 msgstr "Ïal¹ie mo¾nosti"
@@ -1896,7 +1889,7 @@ msgstr "Ïal¹ie mo¾nosti"
 msgid "User ID:"
 msgstr "Pou¾ívateµské ID:"
 
-#: interfaces/users.glade.h:13 interfaces/users.glade.h:122
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:115
 msgid "Home directory:"
 msgstr "Domovský prieèinok:"
 
@@ -1905,8 +1898,8 @@ msgid "Shell:"
 msgstr "Shell:"
 
 #: interfaces/users.glade.h:15
-msgid "Basic"
-msgstr "Základné"
+msgid "Identity"
+msgstr "Identita"
 
 #: interfaces/users.glade.h:16
 msgid "Main group:"
@@ -1918,11 +1911,11 @@ msgid "Groups"
 msgstr "Skupiny"
 
 #: interfaces/users.glade.h:18
-msgid "Available Groups"
+msgid "Available groups"
 msgstr "Dostupné skupiny"
 
 #: interfaces/users.glade.h:19
-msgid "User's Groups"
+msgid "User's groups"
 msgstr "Skupiny pou¾ívateµa"
 
 #: interfaces/users.glade.h:20 interfaces/users.glade.h:40
@@ -1934,7 +1927,7 @@ msgid "Remove <-"
 msgstr "Odstráni» <-"
 
 #: interfaces/users.glade.h:22
-msgid " Primary Group "
+msgid " Primary group "
 msgstr " Primárna skupina "
 
 #: interfaces/users.glade.h:23 interfaces/users.glade.h:42
@@ -1945,20 +1938,20 @@ msgstr "label27"
 msgid "label26"
 msgstr "label26"
 
-#: interfaces/users.glade.h:26 interfaces/users.glade.h:27
-msgid "Change Password"
-msgstr "Zmeni» heslo"
+#: interfaces/users.glade.h:26 interfaces/users.glade.h:34
+msgid "Password"
+msgstr "Heslo"
 
 #: interfaces/users.glade.h:28
-msgid "  Generate a random password  "
-msgstr " Generova» náhodné heslo "
-
-#: interfaces/users.glade.h:29 interfaces/users.glade.h:101
 msgid "Check password quality"
 msgstr "Skontrolova» kvalitu hesla"
 
+#: interfaces/users.glade.h:29
+msgid "Confirm:"
+msgstr "Potvrdi»:"
+
 #: interfaces/users.glade.h:30
-msgid "Optional Settings"
+msgid "Optional settings"
 msgstr "Nepovinné nastavenie"
 
 #: interfaces/users.glade.h:31
@@ -1973,10 +1966,6 @@ msgstr "Minimálny poèet dní medzi zmenami hesla:"
 msgid "Days between warning and password expiration:"
 msgstr "Dní medzi varovaním a vypr¹aním hesla: "
 
-#: interfaces/users.glade.h:34
-msgid "Passwords"
-msgstr "Heslá"
-
 #: interfaces/users.glade.h:35
 msgid "Group Settings"
 msgstr "Nastavenie skupín"
@@ -1990,11 +1979,11 @@ msgid "Members"
 msgstr "Èlenovia"
 
 #: interfaces/users.glade.h:38
-msgid "All Users"
+msgid "All users"
 msgstr "V¹etci pou¾ívatelia"
 
 #: interfaces/users.glade.h:39
-msgid "Group Members"
+msgid "Group members"
 msgstr "Èlenovia skupiny"
 
 #: interfaces/users.glade.h:45
@@ -2006,32 +1995,32 @@ msgstr ""
 "dialógu vytvorte nových a upravte nastavenie u¾ existujúcich."
 
 #: interfaces/users.glade.h:46
-msgid "Add User..."
+msgid "Add user..."
 msgstr "Prida» pou¾ívateµa..."
 
 #: interfaces/users.glade.h:49
-#, fuzzy
 msgid "Profiles..."
-msgstr "Profily"
+msgstr "Profily..."
 
 #: interfaces/users.glade.h:50
 msgid "Users"
 msgstr "Pou¾ívatelia"
 
 #: interfaces/users.glade.h:51
-msgid "Users may be grouped to share resources with others."
+msgid ""
+"This is the list of the groups available in the system. Create new groups or "
+"edit existing groups with this dialog."
 msgstr ""
-"Pou¾ívateµov je mo¾né zoradi» do skupín, aby mohli zdieµa» niektoré zdroje "
-"spoloène."
+"Toto je zoznam skupín, ktoré sú na tomto systéme. Pomocou tohto "
+"dialógu vytvorte nové a upravte nastavenie u¾ existujúcich skupín."
 
 #: interfaces/users.glade.h:52
-msgid "Add Group..."
+msgid "Add group..."
 msgstr "Prida» skupinu..."
 
 #: interfaces/users.glade.h:56
-#, fuzzy
 msgid "Show all users and groups"
-msgstr "Zobrazi» systémových pou¾ívateµov a skupiny"
+msgstr "Zobrazi» v¹etkých pou¾ívateµov a skupiny"
 
 #: interfaces/users.glade.h:57
 msgid "window2"
@@ -2097,19 +2086,19 @@ msgstr "Vytvori» domovský prieèinok pre nových pou¾ívateµov v:"
 msgid "Min/max values for automatic UID/GID"
 msgstr "Min/max hodnoty pre automatické UID/GID"
 
-#: interfaces/users.glade.h:75 interfaces/users.glade.h:129
+#: interfaces/users.glade.h:75 interfaces/users.glade.h:122
 msgid "Maximum UID:"
 msgstr "Maximálne UID:"
 
-#: interfaces/users.glade.h:76 interfaces/users.glade.h:126
+#: interfaces/users.glade.h:76 interfaces/users.glade.h:119
 msgid "Minimum UID:"
 msgstr "Minimálne UID:"
 
-#: interfaces/users.glade.h:77 interfaces/users.glade.h:127
+#: interfaces/users.glade.h:77 interfaces/users.glade.h:120
 msgid "Minimum GID:"
 msgstr "Minimálne GID:"
 
-#: interfaces/users.glade.h:78 interfaces/users.glade.h:128
+#: interfaces/users.glade.h:78 interfaces/users.glade.h:121
 msgid "Maximum GID:"
 msgstr "Maximálne GID:"
 
@@ -2121,7 +2110,7 @@ msgstr "Doba platnosti hesla"
 msgid "Days a password may be used:"
 msgstr "Heslo mô¾e by» pou¾ité dní:"
 
-#: interfaces/users.glade.h:81 interfaces/users.glade.h:144
+#: interfaces/users.glade.h:81 interfaces/users.glade.h:137
 msgid "Minimum days allowed between password changes:"
 msgstr "Minimálny poèet dní medzi zmenami hesla:"
 
@@ -2143,7 +2132,7 @@ msgstr "label80"
 
 #: interfaces/users.glade.h:86
 msgid "User Account Wizard"
-msgstr ""
+msgstr "Sprievodca úètom pou¾ívateµa"
 
 #: interfaces/users.glade.h:87
 msgid "User Creation Druid"
@@ -2154,11 +2143,13 @@ msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new users to your system.\n"
 "\n"
+"To begin, click \"Next\". "
 msgstr ""
 "Tento sprievodca je navrhnutý pre pomoc pri rýchlom\n"
 "a jednoduchom vytváraní pou¾ívateµských úètov\n"
 "na va¹om systéme.\n"
 "\n"
+"Zaènite stlaèením \"Dopredu\". "
 
 #: interfaces/users.glade.h:92
 msgid "User Identity  (step 1 of 2)"
@@ -2172,150 +2163,136 @@ msgstr ""
 "Prosím, zadajte pou¾ívateµské meno pre nového pou¾ívateµa. Rovnako mô¾ete "
 "zada» komentár o pou¾ívateµovi, napr. skutoèné meno."
 
-#: interfaces/users.glade.h:96 interfaces/users.glade.h:103
+#: interfaces/users.glade.h:94 interfaces/users.glade.h:97
 msgid "Click \"Next\" to continue"
 msgstr "Pre pokraèovanie stlaète \"Nasledujúci\""
 
-#: interfaces/users.glade.h:97
+#: interfaces/users.glade.h:95
 msgid "Password options (step 2 of 2)"
 msgstr "Mo¾nosti hesiel (krok 2 z 2)"
 
-#: interfaces/users.glade.h:98
-#, fuzzy
-msgid "Please enter user's password and it's confirmation."
-msgstr "Heslo a jeho potvrdenie sa musí zhodova»."
+#: interfaces/users.glade.h:96
+msgid "Please enter a password for the new user. "
+msgstr "Zadajte heslo pre nového pou¾ívateµa: "
 
 #: interfaces/users.glade.h:99
-#, fuzzy
-msgid "user's password"
-msgstr "Zadajte heslo"
-
-#: interfaces/users.glade.h:102
-msgid "Confirm:"
-msgstr "Potvrdi»:"
-
-#: interfaces/users.glade.h:105
-#, fuzzy
 msgid ""
-"Congratulations, you are finished. New user has been\n"
-"created. Click \"Finish\" to complete "
+"Congratulations, the new user has been created.\n"
+"Please click \"Finish\" to save your changes. "
 msgstr ""
-"Gratulujeme, vytvorili ste pou¾ívateµa \"anna\".\n"
-"Stlaèením \"Dokonèi»\" skonèíte jeho vytváranie."
+"Gratulujeme, vytvorili ste nového pou¾ívateµa.\n"
+"Stlaèením \"Dokonèi»\" ulo¾íte zmeny."
 
-#: interfaces/users.glade.h:107
+#: interfaces/users.glade.h:101
 msgid "New Profile"
 msgstr "Nový profil"
 
-#: interfaces/users.glade.h:108
-msgid ""
-"So you want to make a new profile,\n"
-"huh? This here is your dialog."
-msgstr ""
-"Naozaj chcete nový profil?\n"
-"Tak tu je dialóg."
+#: interfaces/users.glade.h:102
+msgid "Use this dialog to creat a new profile."
+msgstr "Pou¾ite tento dialóg pre vytvorenie nového profilu."
 
-#: interfaces/users.glade.h:112
+#: interfaces/users.glade.h:105
 msgid "Inherit settings from:"
 msgstr "Zdedi» nastavenie od:"
 
-#: interfaces/users.glade.h:113
-msgid "Profile Editor -- Users and Groups Tool"
-msgstr "Editor profilov - Pou¾ívatelia a skupiny"
+#: interfaces/users.glade.h:106
+msgid "window3"
+msgstr "window3"
 
-#: interfaces/users.glade.h:114
-#, fuzzy
+#: interfaces/users.glade.h:107
 msgid ""
 "User profiles can be used a templates to facilitate the creation of new "
 "users. To edit a profile, change the settings in the following tabs."
 msgstr ""
 "Pou¾ívateµské profily je mo¾né pou¾íva» ako ¹ablóny pre vytváranie nových "
-"pou¾ívateµovi. Pre úpravu profilu zmente nastavenie v tejto zálo¾ke."
+"pou¾ívateµovi. Pre úpravu profilu zmente nastavenie v týchto zálo¾kách."
 
-#: interfaces/users.glade.h:115
-msgid "New"
-msgstr "Nový"
+#: interfaces/users.glade.h:109
+msgid "Copy..."
+msgstr "Kopírova»..."
 
-#: interfaces/users.glade.h:116
-msgid "Copy Profile"
-msgstr "Kopírova» profil"
-
-#: interfaces/users.glade.h:118
+#: interfaces/users.glade.h:111
 msgid "Profiles"
 msgstr "Profily"
 
-#: interfaces/users.glade.h:119
+#: interfaces/users.glade.h:112
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
 msgstr ""
+"Na tejto stránke mô¾ete definova» ¹tandardné systémové nastavenie pre nových "
+"pou¾ívateµov."
 
-#: interfaces/users.glade.h:120 interfaces/users.glade.h:132
-#: interfaces/users.glade.h:139
-msgid "Edit Profile:"
+#: interfaces/users.glade.h:113 interfaces/users.glade.h:125
+#: interfaces/users.glade.h:132
+msgid "Edit profile:"
 msgstr "Upravi» profil:"
 
-#: interfaces/users.glade.h:121
+#: interfaces/users.glade.h:114
 msgid "System defaults"
 msgstr "©tandardné nastavenie systému"
 
-#: interfaces/users.glade.h:123
+#: interfaces/users.glade.h:116
 msgid "Default shell:"
 msgstr "©tandardný shell:"
 
-#: interfaces/users.glade.h:124
+#: interfaces/users.glade.h:117
 msgid "Default group:"
 msgstr "©tandardná skupina:"
 
-#: interfaces/users.glade.h:125
+#: interfaces/users.glade.h:118
 msgid "Automatic UID/GID"
 msgstr "Automatické UID/GID"
 
-#: interfaces/users.glade.h:130
+#: interfaces/users.glade.h:123
 msgid "System"
 msgstr "Systém"
 
-#: interfaces/users.glade.h:131
+#: interfaces/users.glade.h:124
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
 msgstr ""
+"Tu je mo¾né zvoli» skripty a súbory, ktoré budú skopírované z vá¹ho úètu "
+"do úètov nových pou¾ívateµov."
 
-#: interfaces/users.glade.h:133
+#: interfaces/users.glade.h:126
 msgid "Filename"
 msgstr "Meno súboru"
 
-#: interfaces/users.glade.h:134
+#: interfaces/users.glade.h:127
 msgid "Location"
 msgstr "Umiestnenie"
 
-#: interfaces/users.glade.h:137
+#: interfaces/users.glade.h:130
 msgid "Files"
 msgstr "Súbory"
 
-#: interfaces/users.glade.h:138
+#: interfaces/users.glade.h:131
 msgid ""
 "On this page, you can define security options, such as how frequently users "
 "must change their passwords."
 msgstr ""
+"Tu je mo¾né definova» mo¾nosti zabezpeèenia, napr. ako èasto si musia pou¾ívatelia "
+"meni» heslá."
 
-#: interfaces/users.glade.h:140
+#: interfaces/users.glade.h:133
 msgid "Password options"
 msgstr "Mo¾nosti hesiel"
 
-#: interfaces/users.glade.h:141
+#: interfaces/users.glade.h:134
 msgid "Days betweem warning and password expiration:"
 msgstr "Dní medzi varovaním a vypr¹aním hesla: "
 
-#: interfaces/users.glade.h:142
+#: interfaces/users.glade.h:135
 msgid "Assign a random pasword by default"
 msgstr "©tandardne priradi» náhodné heslo"
 
-#: interfaces/users.glade.h:143
+#: interfaces/users.glade.h:136
 msgid "Number of days that a password may be used:"
 msgstr "Heslo mô¾e by» pou¾ité max. dní:"
 
-#: interfaces/users.glade.h:145
+#: interfaces/users.glade.h:138
 msgid "Security"
 msgstr "Bezpeènos»"
 
@@ -2353,7 +2330,7 @@ msgstr " Podrobnej¹ie >>"
 msgid " << Fewer Options "
 msgstr "Menej mo¾ností >>"
 
-#: src/common/xst-dialog.c:398
+#: src/common/xst-dialog.c:408
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -2361,20 +2338,20 @@ msgstr ""
 "Niektoré zmeny ste e¹te nepotvrdili.\n"
 "Pou¾i» ich teraz?"
 
-#: src/common/xst-dialog.c:468
+#: src/common/xst-dialog.c:478
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Signál chyby spojenia `%s' v prvku `%s'"
 
-#: src/common/xst-tool.c:516
+#: src/common/xst-tool.c:530
 msgid "Skipping actual save..."
 msgstr "Preskakujem vlastné ukladanie..."
 
-#: src/common/xst-tool.c:542
+#: src/common/xst-tool.c:556
 msgid "Updating your system configuration."
 msgstr "Aktualizujem konfiguráciu vá¹ho systému."
 
-#: src/common/xst-tool.c:666
+#: src/common/xst-tool.c:680
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2382,16 +2359,16 @@ msgstr ""
 "Nastala chyba pri spustení skriptu,\n"
 "a nastavenie nebolo mo¾né naèíta»."
 
-#: src/common/xst-tool.c:838
+#: src/common/xst-tool.c:854
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Konfiguraèné nástroje Ximian"
 
-#: src/common/xst-tool.c:978
+#: src/common/xst-tool.c:1003
 msgid "Pretending we are root..."
 msgstr "Tvárim sa ako root..."
 
-#: src/common/xst-tool.c:982
+#: src/common/xst-tool.c:1007
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -2518,6 +2495,11 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"wvdial nebol nájdený.\n"
+"Musíte ho nain¹talova», inak nebudú\n"
+"spojenia PPP (modem) aktivované.\n"
+"\n"
+"Pokraèova»?"
 
 #: src/network/connection.c:44
 msgid "Other type"
@@ -2547,11 +2529,11 @@ msgstr "Loopback: virtuálne rozhranie"
 msgid "Unknown type"
 msgstr "Neznámy typ"
 
-#: src/network/connection.c:507
+#: src/network/connection.c:510
 msgid "To activate"
 msgstr "Aktivácia"
 
-#: src/network/connection.c:508
+#: src/network/connection.c:511
 msgid "To inactivate"
 msgstr "Deaktivácia"
 
@@ -2599,9 +2581,27 @@ msgstr ""
 "pou¾ite iba malé písmená, èíslice a medzery."
 
 #: src/network/ppp-druid.c:227
+#, c-format
 msgid ""
-"You are about to create an account named with the following information:"
-msgstr "Chystáte sa vytvori» úèet podµa týchto informácií:"
+"You are about to create an account named with the following information:\n"
+"\n"
+"Account Name: %s\n"
+"\n"
+"Phone number: %s\n"
+"\n"
+"User name: %s\n"
+"\n"
+"Password: %s"
+msgstr ""
+"Chystáte sa vytvori» úèet podµa týchto informácií:\n"
+"\n"
+"Meno úètu: %s\n"
+"\n"
+"Telefónne èíslo: %s\n"
+"\n"
+"Pou¾ívateµské meno: %s\n"
+"\n"
+"Heslo: %s"
 
 #: src/shares/main.c:131
 msgid "New Shares Admin"
@@ -2697,7 +2697,7 @@ msgstr ""
 "Musíte zada» lokálny prieèinok, ak sa má\n"
 "import pripoji»."
 
-#: src/time/main.c:251
+#: src/time/main.c:269
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -2705,44 +2705,35 @@ msgstr ""
 "Nemáte nain¹talovanú podporu NTP. Prosím, nain¹talujte ju,\n"
 "aby bola mo¾ná synchronizácia."
 
-#: src/time/main.c:252
+#: src/time/main.c:270
 msgid "NTP support missing."
 msgstr "Chýba podpora NTP."
 
-#: src/time/main.c:316
+#: src/time/main.c:347
 msgid "Time and Date Settings"
 msgstr "Nastavenie èasu a dátumu"
 
-#: src/users/callbacks.c:528
-msgid "Insert password"
-msgstr "Zadajte heslo"
-
-#: src/users/callbacks.c:547
-#, c-format
-msgid "Password set to \"%s\"."
-msgstr "Heslo nastavené na \"%s\"."
-
-#: src/users/main.c:156
+#: src/users/main.c:133
 msgid "Show All"
 msgstr "Zobrazi» v¹etkých"
 
-#: src/users/main.c:183
+#: src/users/main.c:160
 msgid "User name contains"
 msgstr "Meno pou¾ívateµa obsahuje"
 
-#: src/users/main.c:184
+#: src/users/main.c:161
 msgid "User ID is"
 msgstr "Pou¾ívateµské ID je"
 
-#: src/users/main.c:185
+#: src/users/main.c:162
 msgid "Group name contains"
 msgstr "Meno skupiny obsahuje"
 
-#: src/users/main.c:186
+#: src/users/main.c:163
 msgid "User GID is"
 msgstr "GID pou¾ívateµa je"
 
-#: src/users/main.c:276
+#: src/users/main.c:252
 msgid "Users and Groups"
 msgstr "Pou¾ívatelia a skupiny"
 
@@ -2755,166 +2746,100 @@ msgstr ""
 "Neplatné heslo: %s\n"
 "Prosím, skúste iné heslo."
 
-#: src/users/user_group.c:339
+#: src/users/user_group.c:325
 msgid "The username is empty."
 msgstr "Pou¾ívateµské meno je prázdne."
 
-#: src/users/user_group.c:343
+#: src/users/user_group.c:329
 msgid "The username is too long."
 msgstr "Pou¾ívateµské meno je príli¹ dlhé."
 
-#: src/users/user_group.c:346 src/users/user_group.c:383
-#: src/users/user_group.c:415
+#: src/users/user_group.c:332 src/users/user_group.c:353
+#: src/users/user_group.c:412
 msgid "root user shouldn't be modified."
 msgstr "Pou¾ívateµ root nesmie by» upravovaný."
 
-#: src/users/user_group.c:350
+#: src/users/user_group.c:336
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "Prosím, zadajte platné pou¾ívateµské meno, pou¾ite iba malé písmená."
 
-#: src/users/user_group.c:354
-msgid "Username already exsists."
+#: src/users/user_group.c:340
+msgid "Username already exists."
 msgstr "Pou¾ívateµské meno u¾ existuje."
 
-#: src/users/user_group.c:381 src/users/user_group.c:527
+#: src/users/user_group.c:351 src/users/user_group.c:495
 msgid "User id must be a positive number."
 msgstr "ID pou¾ívateµa musí by» kladné celé èíslo."
 
-#: src/users/user_group.c:385
-msgid "Such user id already exsists."
+#: src/users/user_group.c:355
+msgid "Such user id already exists."
 msgstr "Takéto id pou¾ívateµa u¾ existuje."
 
-#: src/users/user_group.c:411
-msgid "Home directory must not be empty."
-msgstr "Domovský prieèinok nesmie by» prázdny."
-
-#: src/users/user_group.c:413
-msgid "Please enter full path for home directory."
-msgstr "Zadajte plnú cestu k domovskému prieèinku."
-
-#: src/users/user_group.c:437
+#: src/users/user_group.c:373
 msgid "Please give shell with full path."
 msgstr "Prosím, zadajte shell s plnou cestou."
 
-#: src/users/user_group.c:464
-msgid ""
-"Please set a valid main group name, with only lower-case letters,\n"
-"or select one from pull-down menu."
-msgstr ""
-"Prosím, zadajte platné meno skupiny, pou¾ite iba malé písmená,\n"
-"alebo vyberte zo zoznamu."
+#: src/users/user_group.c:408
+msgid "Home directory must not be empty."
+msgstr "Domovský prieèinok nesmie by» prázdny."
 
-#: src/users/user_group.c:488
+#: src/users/user_group.c:410
+msgid "Please enter full path for home directory."
+msgstr "Zadajte plnú cestu k domovskému prieèinku."
+
+#: src/users/user_group.c:439
+msgid "Group name is not valid."
+msgstr "Meno skupiny nie je platné."
+
+#: src/users/user_group.c:456
 msgid "Group name is empty."
 msgstr "Meno skupiny je prázdne."
 
-#: src/users/user_group.c:492
+#: src/users/user_group.c:460
 msgid "The group name is too long."
 msgstr "Meno skupiny je príli¹ dlhé."
 
-#: src/users/user_group.c:496
+#: src/users/user_group.c:464
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Prosím, zadajte platné meno skupiny, pou¾ite iba malé písmená."
 
-#: src/users/user_group.c:500
-msgid "Group already exsists."
+#: src/users/user_group.c:468
+msgid "Group already exists."
 msgstr "Skupina u¾ existuje."
 
-#: src/users/user_group.c:531
-msgid "Such group id already exsists."
+#: src/users/user_group.c:499
+msgid "Such group id already exists."
 msgstr "Takéto id skupiny u¾ existuje."
 
-#: src/users/user_group.c:890
+#: src/users/user_group.c:773
 #, c-format
 msgid "Password for User %s"
 msgstr "Heslo pre pou¾ívateµa %s"
 
-#: src/users/user_group.c:917
+#: src/users/user_group.c:807
 msgid "The root user must not be deleted."
 msgstr "Pou¾ívateµ root nesmie by» odstránený."
 
-#: src/users/user_group.c:924
+#: src/users/user_group.c:814
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Naozaj chcete odstráni» pou¾ívateµa %s?"
 
-#: src/users/user_group.c:947
+#: src/users/user_group.c:837
 msgid "Create New Group"
 msgstr "Vytvori» novú skupinu"
 
-#: src/users/user_group.c:1013
+#: src/users/user_group.c:911
 msgid "The root group must not be deleted."
 msgstr "Skupina root nesmie by» odstránená."
 
-#: src/users/user_group.c:1020
+#: src/users/user_group.c:918
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Naozaj chcete odstráni» skupinu %s?"
 
-#: src/users/user_group.c:1065
+#: src/users/user_group.c:963
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Nastavenie pre skupinu %s"
 
-#~ msgid "Networking Administration"
-#~ msgstr "Administrácia siete"
-
-#~ msgid "Interface:"
-#~ msgstr "Rozhranie:"
-
-#~ msgid "Gateway IP:"
-#~ msgstr "IP brány:"
-
-#~ msgid "Netmask:"
-#~ msgstr "Sie»ová maska:"
-
-#~ msgid "Host IP:"
-#~ msgstr "IP hostiteµa:"
-
-#~ msgid "Use DHCP server"
-#~ msgstr "Pou¾i» DHCP server"
-
-#~ msgid "Enable automatically at boot"
-#~ msgstr "Povoli» automaticky pri ¹tarte"
-
-#~ msgid "Primary networking"
-#~ msgstr "Primárna sie»"
-
-#~ msgid "druid? "
-#~ msgstr "sprievodca?"
-
-#~ msgid ""
-#~ "There is a notebook with hidden tabs inside the \"anna's \n"
-#~ "Password\" frame. When the user clicks \"Generate random\n"
-#~ "password\", the second notebook page should be shown."
-#~ msgstr "huh?"
-
-#~ msgid "Set password by hand"
-#~ msgstr "Zada» heslo ruène"
-
-#~ msgid "Generate random password"
-#~ msgstr "Generova» náhodné heslo "
-
-#~ msgid "anna's password"
-#~ msgstr "heslo anny"
-
-#~ msgid "label197"
-#~ msgstr "label197"
-
-#~ msgid "Password has been set to \"xnu35irh\"."
-#~ msgstr "Heslo nastavené na \"xnu35irh\"."
-
-#~ msgid "New password"
-#~ msgstr "Nové heslo"
-
-#~ msgid "label198"
-#~ msgstr "label198"
-
-#~ msgid "Default"
-#~ msgstr "©tandardné"
-
-#~ msgid ""
-#~ "Okay in the interest of actually committing\n"
-#~ "this sometime this week, i am going to forego\n"
-#~ "writing good sentences for now."
-#~ msgstr "huh?"
