@@ -1,0 +1,287 @@
+/* Copyright (C) 2000 Helix Code, Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors: Hans Petter Jansson <hpj@helixcode.com>.
+ */
+
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
+#include <gnome.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+
+#include "helpers.h"
+
+#include "checked.xpm"
+#include "unchecked.xpm"
+
+
+int
+ip_first_entry_is_valid (GtkEditable *ip_entry)
+{
+	gchar *ip;
+
+	ip = gtk_editable_get_chars (GTK_EDITABLE (ip_entry), 0, -1);
+
+	if (strtoul (ip, 0, 10) == 0 || strtoul (ip, 0, 10) > 254)
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (ip_entry));
+		gtk_editable_select_region (GTK_EDITABLE (ip_entry), 0, -1);
+		return (FALSE);
+	}
+
+	return (TRUE);
+}
+
+
+int
+ip_entry_is_valid (GtkEditable *ip_entry)
+{
+	gchar *ip;
+
+	ip = gtk_editable_get_chars (GTK_EDITABLE (ip_entry), 0, -1);
+
+	if (strtoul (ip, 0, 10) > 254)
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (ip_entry));
+		gtk_editable_select_region (GTK_EDITABLE (ip_entry), 0, -1);
+		return (FALSE);
+	}
+
+	return (TRUE);
+}
+
+
+gboolean
+check_ip_number(GtkEditable * editable)
+{
+	gint nr_val;
+	gint nr_len;
+
+	nr_val = atoi (gtk_editable_get_chars(editable, 0, -1));
+	nr_len = strlen (gtk_editable_get_chars(editable, 0, -1));
+
+	if (nr_val > 255 || nr_len == 0)
+	{
+		gnome_ok_dialog("IP Address numbers are in the range [0-255]\n"
+			"and can't be empty.");
+
+		gtk_widget_grab_focus (GTK_WIDGET (editable));
+		gtk_entry_select_region (GTK_ENTRY (editable), 0, -1);
+		return FALSE;
+	}
+
+	else
+		return TRUE;
+}
+
+
+void
+list_add_ip (GtkList * list, GtkWidget * w_ip_1, GtkWidget * w_ip_2, GtkWidget * w_ip_3, GtkWidget * w_ip_4)
+{
+	gchar *ip, *ip1, *ip2, *ip3, *ip4;
+	GtkWidget *item;
+	GList *list_add = 0;
+
+	if (!ip_first_entry_is_valid (GTK_EDITABLE (w_ip_1)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_2)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_3)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_4)))
+		return;
+
+	ip1 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_1), 0, -1);
+	ip2 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_2), 0, -1);
+	ip3 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_3), 0, -1);
+	ip4 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_4), 0, -1);
+
+	gtk_editable_delete_text (GTK_EDITABLE (w_ip_1), 0, -1);
+	gtk_editable_delete_text (GTK_EDITABLE (w_ip_2), 0, -1);
+	gtk_editable_delete_text (GTK_EDITABLE (w_ip_3), 0, -1);
+	gtk_editable_delete_text (GTK_EDITABLE (w_ip_4), 0, -1);
+	gtk_widget_grab_focus (GTK_WIDGET (w_ip_1));
+
+	ip = g_strjoin (".", ip1, ip2, ip3, ip4, NULL);
+	item = gtk_list_item_new_with_label (ip);
+	gtk_widget_show (item);
+	list_add = g_list_append (list_add, item);
+	gtk_list_append_items (GTK_LIST (list), list_add);
+	g_free (ip);
+}
+
+
+void
+list_add_word (GtkList * list, GtkWidget * editable)
+{
+	GtkWidget *item;
+	GList *list_add = NULL;
+	gchar *text;
+
+	text = gtk_editable_get_chars (GTK_EDITABLE (editable), 0, -1);
+	g_strstrip (text);
+
+	if (strchr (text, ' '))
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (editable));
+		gtk_editable_select_region (GTK_EDITABLE (editable), 0, -1);
+		return;
+	}
+
+	if (!strlen (text))
+		return;
+
+	gtk_editable_delete_text (GTK_EDITABLE (editable), 0, -1);
+	gtk_widget_grab_focus (GTK_WIDGET (editable));
+
+	item = gtk_list_item_new_with_label (text);
+	gtk_widget_show (item);
+	list_add = g_list_append (list_add, item);
+	gtk_list_append_items (GTK_LIST (list), list_add);
+}
+
+
+void
+clist_add_ip (GtkCList * clist, GtkWidget * w_ip_1, GtkWidget * w_ip_2, GtkWidget * w_ip_3, GtkWidget * w_ip_4)
+{
+	gchar *ip, *ip1, *ip2, *ip3, *ip4;
+	gchar *row_data[3];
+
+	if (!ip_first_entry_is_valid (GTK_EDITABLE (w_ip_1)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_2)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_3)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_4)))
+		return;
+
+	ip1 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_1), 0, -1);
+	ip2 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_2), 0, -1);
+	ip3 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_3), 0, -1);
+	ip4 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_4), 0, -1);
+
+	gtk_editable_delete_text (GTK_EDITABLE (w_ip_1), 0, -1);
+	gtk_editable_delete_text (GTK_EDITABLE (w_ip_2), 0, -1);
+	gtk_editable_delete_text (GTK_EDITABLE (w_ip_3), 0, -1);
+	gtk_editable_delete_text (GTK_EDITABLE (w_ip_4), 0, -1);
+	gtk_widget_grab_focus (GTK_WIDGET (w_ip_1));
+
+	ip = g_strjoin (".", ip1, ip2, ip3, ip4, NULL);
+
+	row_data[0] = ip;
+	row_data[1] = "";
+	row_data[2] = NULL;
+	gtk_clist_select_row (clist, gtk_clist_append (clist, row_data), -1);
+
+	g_free (ip);
+}
+
+
+/* --- CTree checkmarks --- */
+
+
+GdkPixmap *checked_pixmap = NULL, *unchecked_pixmap = NULL;
+GdkBitmap *checked_mask = NULL, *unchecked_mask = NULL;
+
+
+void
+set_ctree_checkmark (GtkCTree * ctree, GtkCTreeNode * node, gint column, gboolean state)
+{
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	if (state)
+	{
+		if (!checked_pixmap)
+		{
+			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) checked_xpm);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &checked_pixmap, &checked_mask, 1);
+		}
+
+		pixmap = checked_pixmap;
+		mask = checked_mask;
+	}
+	else
+	{
+		if (!unchecked_pixmap)
+		{
+			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) unchecked_xpm);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &unchecked_pixmap, &unchecked_mask, 1);
+		}
+
+		pixmap = unchecked_pixmap;
+		mask = unchecked_mask;
+	}
+
+	gtk_ctree_node_set_pixmap (ctree, node, column, pixmap, mask);
+}
+
+
+gboolean
+get_ctree_checkmark (GtkCTree * ctree, GtkCTreeNode * node, gint column)
+{
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	gtk_ctree_node_get_pixmap (ctree, node, column, &pixmap, &mask);
+
+	if (pixmap == checked_pixmap)
+		return (TRUE);
+	return (FALSE);
+}
+
+
+/* --- CList checkmarks --- */
+
+
+void
+set_clist_checkmark (GtkCList * clist, gint row, gint column, gboolean state)
+{
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	if (state)
+	{
+		if (!checked_pixmap)
+		{
+			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) checked_xpm);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &checked_pixmap, &checked_mask, 1);
+		}
+
+		pixmap = checked_pixmap;
+		mask = checked_mask;
+	}
+	else
+	{
+		if (!unchecked_pixmap)
+		{
+			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) unchecked_xpm);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &unchecked_pixmap, &unchecked_mask, 1);
+		}
+
+		pixmap = unchecked_pixmap;
+		mask = unchecked_mask;
+	}
+
+	gtk_clist_set_pixmap (clist, row, column, pixmap, mask);
+}
+
+
+gboolean
+get_clist_checkmark (GtkCList * clist, gint row, gint column)
+{
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	gtk_clist_get_pixmap (clist, row, column, &pixmap, &mask);
+
+	if (pixmap == checked_pixmap)
+		return (TRUE);
+	return (FALSE);
+}
