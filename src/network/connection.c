@@ -2188,17 +2188,16 @@ connection_save_to_node (GstConnection *cxn, xmlNode *root)
 
 	/* PPP stuff */
 	if (cxn->type == GST_CONNECTION_PPP) {
-		if (!cxn->wvsection)
-			cxn->wvsection = connection_wvsection_name_generate (cxn->dev, root);
-		connection_xml_save_str_to_node (node, "wvsection", cxn->wvsection);
-		
-		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "phone", cxn->phone_number);
-		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "external_line", cxn->external_line);
-		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "login", cxn->login);
-		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "password", cxn->password);
-		connection_xml_wvsection_save_boolean_to_node (root, cxn->wvsection, "stupid", cxn->stupid);
-		connection_xml_wvsection_save_int_to_node (root, cxn->wvsection, "volume", cxn->volume);
-		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "dial_command", cxn->dial_command);
+		s = g_strdup_printf ("%i", cxn->volume);
+		connection_xml_save_str_to_node (node, "volume", s);
+		g_free (s);
+
+		connection_xml_save_str_to_node (node, "phone_number", cxn->phone_number);
+		connection_xml_save_str_to_node (node, "external_line", cxn->external_line);
+		connection_xml_save_str_to_node (node, "login", cxn->login);
+		connection_xml_save_str_to_node (node, "password", cxn->password);
+		connection_xml_save_str_to_node (node, "dial_command", cxn->dial_command);
+		connection_xml_save_boolean_to_node (node, "stupid", cxn->stupid);
 
 		/* PPP advanced */
 		connection_xml_save_boolean_to_node (node, "persist", cxn->persist);
@@ -2208,6 +2207,19 @@ connection_save_to_node (GstConnection *cxn, xmlNode *root)
 		connection_xml_save_str_to_node (node, "dns1", cxn->dns1);
 		connection_xml_save_str_to_node (node, "dns2", cxn->dns2);
 		connection_xml_save_str_to_node (node, "ppp_options", cxn->ppp_options);
+
+		if (!cxn->wvsection)
+			cxn->wvsection = connection_wvsection_name_generate (cxn->dev, root);
+		connection_xml_save_str_to_node (node, "wvsection", cxn->wvsection);
+		
+		/* FIXME: at the moment we need to keep this, but we should avoid wvdial eventually */
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "phone", cxn->phone_number);
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "external_line", cxn->external_line);
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "login", cxn->login);
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "password", cxn->password);
+		connection_xml_wvsection_save_boolean_to_node (root, cxn->wvsection, "stupid", cxn->stupid);
+		connection_xml_wvsection_save_int_to_node (root, cxn->wvsection, "volume", cxn->volume);
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "dial_command", cxn->dial_command);
 	}
 
 	/* PtP */
