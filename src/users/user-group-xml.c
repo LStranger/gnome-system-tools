@@ -599,10 +599,7 @@ get_list_from_node (gchar *field, gint table)
 	
 
 	for (u = gst_xml_element_find_first (n, key); u != NULL; u = gst_xml_element_find_next (u, key))
-	{
-		if (check_node_visibility (u))
-			list = g_list_insert_sorted (list, gst_xml_get_child_content (u, field), my_strcmp);
-	}
+		list = g_list_insert_sorted (list, gst_xml_get_child_content (u, field), my_strcmp);
 
 	return list;
 }
