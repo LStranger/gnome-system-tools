@@ -41,7 +41,7 @@ paneldir = $(datadir)/gnome/apps/Settings
 Systemdirp = $(paneldir)/System
 
 directory = System.directory
-EXTRA_DIST = $(directory).in
+EXTRA_DIST = $(directory).in System.directory
 CLEANFILES = $(directory)
 
 $(directory): $(directory).in

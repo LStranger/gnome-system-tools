@@ -31,12 +31,28 @@ $(INTLLIBS) \
 $(GAL_LIBS) \
 ../common/libsetuptool.a
 
-desktop = boot.desktop
-security = boot.security
+#desktop = boot.desktop
+#security = boot.security
+#EXTRA_DIST = $(desktop).in boot.pam $(security).in
+#CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
 
-EXTRA_DIST = $(desktop).in boot.pam $(security).in
+toolname = boot
+desktop  = $(toolname).desktop
+security = $(toolname).security
 
-CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
+CLEANFILES = \
+	$(desktop) \
+	$(desktop).menu \
+	$(desktop).cc \
+	$(security)
+
+EXTRA_DIST = \
+	$(toolname).pam	\
+	$(security)		\
+	$(security).in		\
+	$(desktop).in 		\
+	$(desktop).cc		\
+	$(desktop).menu
 
 $(desktop): %.desktop: %.desktop.in
 	sed 's#Icon=.*#Icon='$(pixmapsdir)'/boot.png#' < $< > $@

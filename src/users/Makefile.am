@@ -33,12 +33,29 @@ $(INTLLIBS) \
 $(GAL_LIBS) \
 ../common/libsetuptool.a
 
-desktop = users.desktop
-security = users.security
+#desktop = users.desktop
+#security = users.security
+#EXTRA_DIST = $(desktop).in users.pam $(security).in
+#CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
 
-EXTRA_DIST = $(desktop).in users.pam $(security).in
+toolname = users
+desktop  = $(toolname).desktop
+security = $(toolname).security
 
-CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
+CLEANFILES = \
+	$(desktop) \
+	$(desktop).menu \
+	$(desktop).cc \
+	$(security)
+
+EXTRA_DIST = \
+	$(toolname).pam	\
+	$(security)		\
+	$(security).in		\
+	$(desktop).in 		\
+	$(desktop).cc		\
+	$(desktop).menu
+
 
 $(desktop): %.desktop: %.desktop.in
 	sed 's#Icon=.*#Icon='$(pixmapsdir)'/users.png#' < $< > $@

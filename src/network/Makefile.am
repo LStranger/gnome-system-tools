@@ -27,12 +27,26 @@ $(LIBGLADE_LIBS) \
 $(INTLLIBS) \
 ../common/libsetuptool.a
 
-desktop = network.desktop
-security = network.security
+#EXTRA_DIST = $(desktop).in users.pam $(security).in
+#CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
 
-CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
+toolname = network
+desktop  = $(toolname).desktop
+security = $(toolname).security
 
-EXTRA_DIST = $(desktop).in network.pam $(security).in
+CLEANFILES = \
+	$(desktop) \
+	$(desktop).menu \
+	$(desktop).cc \
+	$(security)
+
+EXTRA_DIST = \
+	$(toolname).pam	\
+	$(security)		\
+	$(security).in		\
+	$(desktop).in 		\
+	$(desktop).cc		\
+	$(desktop).menu
 
 $(desktop): %.desktop: %.desktop.in
 	sed 's#Icon=.*#Icon='$(pixmapsdir)'/networking.png#' < $< > $@

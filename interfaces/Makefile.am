@@ -38,4 +38,4 @@ EXTRA_DIST = \
 CLEANFILES = $(interfaces)
 
 $(interfaces): %.glade: %.glade.in
-	./fix.pl $(pixmapsdir) < $< > $@
+	$(top_srcdir)/interfaces/fix.pl $(pixmapsdir) < $< > $@
