@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools\n"
-"POT-Creation-Date: 2000-12-03 14:47+0100\n"
-"PO-Revision-Date: 2000-12-03 15:06+0100\n"
+"POT-Creation-Date: 2000-12-12 02:12+0100\n"
+"PO-Revision-Date: 2000-12-12 02:16+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 #. * Add this file to your project's POTFILES.in.
 #. * DO NOT compile it as part of your application.
 #.
-#: interfaces/common.glade.h:7 interfaces/common.glade.h:10
+#: interfaces/common.glade.h:7 interfaces/common.glade.h:12
 msgid "Helix Setup Tools"
 msgstr "Helix inställningsverktyg"
 
@@ -29,11 +29,19 @@ msgstr "Helix inställningsverktyg"
 msgid "Scanning your system configuration."
 msgstr "Läser av din systemkonfiguration."
 
-#: interfaces/common.glade.h:9 interfaces/common.glade.h:12
+#: interfaces/common.glade.h:9 interfaces/common.glade.h:14
 msgid "%P %%"
 msgstr "%P %%"
 
+#: interfaces/common.glade.h:10
+msgid "label51"
+msgstr "label51"
+
 #: interfaces/common.glade.h:11
+msgid "label52"
+msgstr "label52"
+
+#: interfaces/common.glade.h:13
 msgid "Updating your system configuration."
 msgstr "Uppdaterar din systemkonfiguration."
 
@@ -119,7 +127,7 @@ msgstr "Diskar och partitioner"
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
 #: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:15
 #: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
-#: interfaces/users.glade.h:23 src/common/tool.c:504
+#: interfaces/users.glade.h:23 src/common/tool.c:612
 msgid " Advanced >> "
 msgstr " Avancerat >> "
 
@@ -483,7 +491,7 @@ msgstr "Lokal sökväg:"
 msgid "Export name:"
 msgstr "Exportnamn:"
 
-#: interfaces/shares.glade.h:61 interfaces/users.glade.h:27
+#: interfaces/shares.glade.h:61 interfaces/users.glade.h:28
 msgid "Comment:"
 msgstr "Kommentar:"
 
@@ -558,7 +566,7 @@ msgstr ""
 msgid "New User"
 msgstr "Ny användare"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:227
+#: interfaces/users.glade.h:11 src/users/callbacks.c:258
 msgid "Settings for the selected user"
 msgstr "Inställningar för den markerade användaren"
 
@@ -566,7 +574,7 @@ msgstr "Inställningar för den markerade användaren"
 msgid "Change the user's password or options like its name."
 msgstr "Byt användarens lösenord eller alternativ som användarens namn."
 
-#: interfaces/users.glade.h:13 interfaces/users.glade.h:28
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:33
 msgid "Change Password"
 msgstr "Byt lösenord"
 
@@ -599,62 +607,82 @@ msgid "User Settings"
 msgstr "Användarinställningar"
 
 #: interfaces/users.glade.h:25
+msgid "Basic settings"
+msgstr "Grundläggande inställningar"
+
+#: interfaces/users.glade.h:26
 msgid "Main group:"
 msgstr "Huvudgrupp:"
 
-#: interfaces/users.glade.h:26
+#: interfaces/users.glade.h:27
 msgid "User name:"
 msgstr "Användarnamn:"
 
 #: interfaces/users.glade.h:29
+msgid "Advanced settings"
+msgstr "Avancerade inställningar"
+
+#: interfaces/users.glade.h:30
+msgid "Shell:"
+msgstr "Skal:"
+
+#: interfaces/users.glade.h:31
+msgid "User ID:"
+msgstr "Användar-ID:"
+
+#: interfaces/users.glade.h:32
+msgid "Home directory:"
+msgstr "Hemkatalog:"
+
+#: interfaces/users.glade.h:34
 msgid "New password:"
 msgstr "Nytt lösenord:"
 
-#: interfaces/users.glade.h:30
+#: interfaces/users.glade.h:35
 msgid "Confirmation:"
 msgstr "Bekräftelse:"
 
-#: interfaces/users.glade.h:31
+#: interfaces/users.glade.h:36
 msgid "Check quality."
 msgstr "Kontrollera kvalitet."
 
-#: interfaces/users.glade.h:32
+#: interfaces/users.glade.h:37
 msgid "  Random Password  "
 msgstr "  Slumpmässigt lösenord  "
 
-#: interfaces/users.glade.h:33
+#: interfaces/users.glade.h:38
 msgid "Group Settings"
 msgstr "Gruppinställningar"
 
-#: interfaces/users.glade.h:34
+#: interfaces/users.glade.h:39
 msgid "Group name:"
 msgstr "Gruppnamn:"
 
-#: interfaces/users.glade.h:35
+#: interfaces/users.glade.h:40
 msgid "Members"
 msgstr "Medlemmar"
 
-#: interfaces/users.glade.h:36
+#: interfaces/users.glade.h:41
 msgid "All Users"
 msgstr "Alla användare"
 
-#: interfaces/users.glade.h:37
+#: interfaces/users.glade.h:42
 msgid "Member Users"
 msgstr "Medlemsanvändare"
 
-#: interfaces/users.glade.h:38
+#: interfaces/users.glade.h:43
 msgid "Add ->"
 msgstr "Lägg till ->"
 
-#: interfaces/users.glade.h:39
+#: interfaces/users.glade.h:44
 msgid "Remove <-"
 msgstr "Ta bort <-"
 
-#: interfaces/users.glade.h:40
+#: interfaces/users.glade.h:45
 msgid "label27"
 msgstr "label27"
 
-#: interfaces/users.glade.h:41
+#: interfaces/users.glade.h:46
 msgid "label26"
 msgstr "label26"
 
@@ -747,11 +775,11 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/common/tool.c:506
+#: src/common/tool.c:614
 msgid " << Basic "
 msgstr " << Grundläggande "
 
-#: src/common/tool.c:594
+#: src/common/tool.c:709
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -793,46 +821,46 @@ msgstr ""
 msgid "Settings for alias of "
 msgstr "Inställningar för aliaset "
 
-#: src/users/callbacks.c:142
+#: src/users/callbacks.c:156
 #, c-format
 msgid "Settings for User %s"
 msgstr "Inställningar för användaren %s"
 
-#: src/users/callbacks.c:160
+#: src/users/callbacks.c:180
 #, c-format
 msgid "Password for User %s"
 msgstr "Lösenord för användaren %s"
 
-#: src/users/callbacks.c:207
+#: src/users/callbacks.c:238
 msgid "The root user must not be deleted."
 msgstr "Användaren root får inte tas bort."
 
-#: src/users/callbacks.c:214
+#: src/users/callbacks.c:245
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/callbacks.c:256
+#: src/users/callbacks.c:289
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
 
-#: src/users/callbacks.c:275
+#: src/users/callbacks.c:308
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/callbacks.c:301
+#: src/users/callbacks.c:336
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/callbacks.c:421
+#: src/users/callbacks.c:457
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "Lösenordet sattes till \"%s\"."
 
 #. Bad confirmation
-#: src/users/callbacks.c:456
+#: src/users/callbacks.c:495
 msgid ""
 "The password and its confirmation\n"
 "must match."
@@ -841,7 +869,7 @@ msgstr ""
 "måste stämma överens."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:462
+#: src/users/callbacks.c:501
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -851,7 +879,7 @@ msgstr ""
 "Var vänlig och försök med ett nytt lösenord."
 
 #. Changes have been made.
-#: src/users/callbacks.c:627
+#: src/users/callbacks.c:666
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
@@ -859,22 +887,22 @@ msgstr ""
 "Det finns ändringar som inte har verkställts än.\n"
 "Verkställ nu?"
 
-#: src/users/user_group.c:55
+#: src/users/user_group.c:57
 msgid "Username is empty."
 msgstr "Användarnamnet är tomt."
 
-#: src/users/user_group.c:72
+#: src/users/user_group.c:74
 #, c-format
 msgid "User %s already exists."
 msgstr "Användaren %s finns redan."
 
-#: src/users/user_group.c:87
+#: src/users/user_group.c:89
 msgid "Please set a valid username, using only lower-case letters."
 msgstr ""
 "Var vänlig och ange ett giltigt användarnamn som bara består av små "
 "bokstäver."
 
-#: src/users/user_group.c:120
+#: src/users/user_group.c:122
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from the pull-down menu."
@@ -882,25 +910,25 @@ msgstr ""
 "Var vänlig och ange ett giltigt gruppnamn med endast små bokstäver,\n"
 "eller välj ett från rullgardinsmenyn."
 
-#: src/users/user_group.c:176
+#: src/users/user_group.c:187
 msgid "The username is empty."
 msgstr "Användarnamnet är tomt."
 
-#: src/users/user_group.c:307
+#: src/users/user_group.c:316
 msgid "The group name is empty."
 msgstr "Gruppnamnet är tomt."
 
-#: src/users/user_group.c:324
+#: src/users/user_group.c:333
 #, c-format
 msgid "Group %s already exists."
 msgstr "Gruppen %s finns redan."
 
-#: src/users/user_group.c:340
+#: src/users/user_group.c:349
 msgid "Please set a valid group name, with only lower-case letters."
 msgstr ""
 "Var vänlig och ställ in ett giltigt gruppnamn, med endast små bokstäver."
 
-#: src/users/user_group.c:382
+#: src/users/user_group.c:394
 msgid "Group name is empty."
 msgstr "Gruppnamnet är tomt."
 
