@@ -32,6 +32,7 @@
 #include "transfer.h"
 #include "user_group.h"
 #include "callbacks.h"
+#include "e-table.h"
 
 /* Structure with some hard-coded defaults, just in case any of the tags is not present. */
 /* These were taken form RH 6.2's default values. Any better suggestions? */
@@ -486,10 +487,11 @@ transfer_xml_to_gui (xmlNodePtr root)
 	transfer_logindefs_from_xml (root);
 	transfer_user_list_xml_to_glist (root);
 	transfer_group_list_xml_to_glist (root);
-	
-	transfer_user_list_to_gui ();
+
+	e_table_user_create ();
+/*	transfer_user_list_to_gui (); 
 	transfer_group_list_to_gui ();
-	
+*/
 }
 
 void

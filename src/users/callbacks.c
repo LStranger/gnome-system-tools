@@ -32,6 +32,7 @@
 #include "user_group.h"
 #include "transfer.h"
 #include "passwd.h"
+#include "e-table.h"
 
 /* Local globals */
 static int reply;
@@ -39,8 +40,6 @@ static int reply;
 /* Prototypes */
 static void reply_cb (gint val, gpointer data);
 static void do_quit (void);
-static void user_actions_set_sensitive (gboolean state);
-static void group_actions_set_sensitive (gboolean state);
 static void my_gtk_entry_set_text (void *entry, gchar *str);
 
 
@@ -162,8 +161,6 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	gchar *txt;
 	GtkWindow *parent;
 	GnomeDialog *dialog;
-	GtkCList *clist;
-	gint row;
 
 	g_return_if_fail (tool_get_access());
 	
@@ -178,36 +175,10 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
-		clist = GTK_CLIST (tool_widget_get ("user_list"));
-		row = GPOINTER_TO_INT (clist->selection->data);
-		user_list = g_list_remove (user_list, current_user);
-		gtk_clist_remove (clist, row);
-		current_user = NULL;
+		e_table_del (USER);
 		tool_set_modified (TRUE);
 	}
-}
 
-extern void
-on_user_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
-		gpointer user_data)
-{
-	if (!clist->selection) 
-	{
-		user_actions_set_sensitive (FALSE);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")),
-				_("Settings for the selected user"));
-	} 
-	else 
-	{
-		gchar *label;
-		
-		current_user = gtk_clist_get_row_data (clist, row);
-		
-		user_actions_set_sensitive (TRUE);
-		label = g_strdup_printf (_("Settings for user %s"), current_user->login);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
-		g_free (label);
-	}
 }
 
 
@@ -266,9 +237,6 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	gchar *txt;
 	GtkWindow *parent;
 	GnomeDialog *dialog;
-	GtkCList *clist;
-	gint row;
-	
 
 	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), current_group->name);
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
@@ -281,40 +249,10 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
-		clist = GTK_CLIST (tool_widget_get ("group_list"));
-		row = GPOINTER_TO_INT (clist->selection->data), 
-		group_list = g_list_remove (group_list, current_group);
-		gtk_clist_remove (clist, row);
-		current_group = NULL;
+		e_table_del (GROUP);
 		tool_set_modified (TRUE);
 	}
 }
-
-extern void
-on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
-		gpointer user_data)
-{
-	if (!clist->selection)
-	{
-		group_actions_set_sensitive (FALSE);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")),
-				_("Settings for the selected group"));
-		
-	}
-	else
-	{
-		gchar *label;
-		
-		current_group = gtk_clist_get_row_data (clist, row);
-		
-		group_actions_set_sensitive (TRUE);
-		label = g_strdup_printf (_("Settings for group %s"), current_group->name);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
-		g_free (label);
-	}
-}
-
-
 
 /* User settings callbacks */
 
@@ -655,7 +593,7 @@ do_quit (void)
 	gtk_main_quit ();
 }
 
-static void
+void
 user_actions_set_sensitive (gboolean state)
 {
 	if (tool_get_access())
@@ -668,7 +606,7 @@ user_actions_set_sensitive (gboolean state)
 	gtk_widget_set_sensitive (tool_widget_get ("user_settings"), state);
 }
 
-static void
+void
 group_actions_set_sensitive (gboolean state)
 {
 	if (tool_get_access())

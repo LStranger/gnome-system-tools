@@ -7,7 +7,8 @@ INCLUDES = \
 	$(GNOME_CFLAGS) 		\
 	$(GDK_PIXBUF_CFLAGS) 		\
 	$(LIBGLADE_CFLAGS)		\
-	$(GNOME_XML_CFLAGS)
+	$(GNOME_XML_CFLAGS)		\
+	$(GAL_CFLAGS)
 
 sbin_PROGRAMS = users-admin
 
@@ -17,7 +18,8 @@ users_admin_SOURCES = \
 	passwd.c passwd.h \
 	transfer.c transfer.h \
 	user_group.c user_group.h \
-	md5.c md5.h md5_crypt.c
+	md5.c md5.h md5_crypt.c \
+	 e-table.c e-table.h
 
 users_admin_CFLAGS = 
 
@@ -28,6 +30,7 @@ $(GNOME_XML_LIB) \
 $(GDK_PIXBUF_LIBS) \
 $(LIBGLADE_LIBS) \
 $(INTLLIBS) \
+$(GAL_LIBS) \
 ../common/libsetuptool.a
 
 desktop = users.desktop

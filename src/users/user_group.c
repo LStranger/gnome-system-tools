@@ -25,9 +25,7 @@
 
 #include "global.h"
 #include "user_group.h"
-
-#define USER 1
-#define GROUP 2
+#include "e-table.h"
 
 static guint find_new_id (gchar from);
 static gchar *find_new_key (gchar from);
@@ -192,17 +190,9 @@ user_add (void)
 		new_user->comment = g_strdup (new_comment);
 	user_list = g_list_append (user_list, new_user);
 	
-	/* Add to the user_list GtkCList */
-	
-	clist = GTK_CLIST (tool_widget_get ("user_list"));
-	
-	entry[0] = new_user_name;
-	row = gtk_clist_append (clist, entry);
-	gtk_clist_set_row_data (clist, row, new_user);
-	
-	/* Select current user in users list (last one)*/
+	/* Update visual table */
 
-	gtk_clist_select_row (clist, row, 0);
+	e_table_changed (USER, TRUE);
 	current_user = new_user;
 
 	return TRUE;
@@ -254,9 +244,7 @@ user_update (user *u)
 		g_free (u->login);
 		u->login = g_strdup (txt);
 
-		list = GTK_CLIST (tool_widget_get ("user_list"));
-		row = gtk_clist_find_row_from_data (list, u);
-		gtk_clist_set_text (list, row, 0, txt);
+		e_table_changed (USER, FALSE);
 	}
 
 	w0 = tool_widget_get ("user_settings_comment");
@@ -426,10 +414,7 @@ group_add (void)
 	tmpgroup = group_new ();
 	tmpgroup->name = g_strdup (new_group_name);
 
-	clist = GTK_CLIST (tool_widget_get ("group_list"));
-	entry[0] = new_group_name;
-	row = gtk_clist_append (clist, entry);
-	gtk_clist_set_row_data (clist, row, tmpgroup);
+	e_table_changed (GROUP, TRUE);
 	
 	/* Add group members */
 
@@ -446,11 +431,6 @@ group_add (void)
 
 	current_group = tmpgroup;
 	group_list = g_list_append (group_list, current_group);
-
-	/* Select current group in group list */
-
-	row = gtk_clist_find_row_from_data (clist, current_group);
-	gtk_clist_select_row (clist, row, 0);
 
 	return TRUE;
 }
@@ -487,9 +467,7 @@ group_update (group *g)
 			g_free (g->name);
 			g->name = g_strdup (txt);
 
-			clist = GTK_CLIST (tool_widget_get ("group_list"));
-			row = gtk_clist_find_row_from_data (clist, g);
-			gtk_clist_set_text (clist, row, 0, txt);
+			e_table_changed (GROUP, FALSE);
 		}
 	}
 
