@@ -36,9 +36,6 @@ struct _ToolContext
 	GtkWidget *top_window;
 	gboolean frozen, modified, access;
 	ToolComplexity complexity;
-
-	ToolReadState read_state;
-	guint progress_max, progress_done;
 };
 
 

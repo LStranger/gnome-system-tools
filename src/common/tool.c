@@ -91,19 +91,22 @@ tool_load_image (char *image_name)
 }
 
 
-GtkWidget *tool_widget_get(gchar *name)
+GtkWidget *
+tool_widget_get (gchar *name)
 {
-	return(glade_xml_get_widget (tool_context->interface, name));
+	return (glade_xml_get_widget (tool_context->interface, name));
 }
 
 
-GtkWidget *tool_widget_get_common(gchar *name)
+GtkWidget *
+tool_widget_get_common (gchar *name)
 {
-	return(glade_xml_get_widget (tool_context->common_interface, name));
+	return (glade_xml_get_widget (tool_context->common_interface, name));
 }
 
 
-static gboolean tool_interface_load()
+static gboolean
+tool_interface_load ()
 {
 	gchar *path;
 	
@@ -111,22 +114,23 @@ static gboolean tool_interface_load()
 
 	path = make_glade_path (tool_context->task);
 	tool_context->interface = glade_xml_new (path, NULL);
-
-	/* Connect signals */
-
-	if (tool_context->interface)
-	        glade_xml_signal_autoconnect (tool_context->interface);
-	else
+	if (!tool_context->interface)
 	        g_error ("Could not load tool interface from %s", path);
+
 	g_free (path);
+
+	glade_xml_signal_autoconnect (tool_context->interface);
 
 	/* Load common interface elements from Glade file */
 
 	path = make_glade_path ("common");
 	tool_context->common_interface = glade_xml_new (path, NULL);
 	if (!tool_context->common_interface)
-	  g_error ("Could not load common interface elements from %s", path);
+		g_error ("Could not load common interface elements from %s", path);
+
 	g_free (path);
+	
+	glade_xml_signal_autoconnect (tool_context->common_interface);
 
 	/* Locate and save a pointer to the top level window */
 
@@ -143,42 +147,141 @@ static gboolean tool_interface_load()
 }
 
 
-static ToolContext *tool_context_new(gchar *task)
+static ToolContext *
+tool_context_new (gchar *task)
 {
 	ToolContext *tc;
   
 	tc = g_new (ToolContext, 1);
-	memset(tc, 0, sizeof (*tc));
+	memset (tc, 0, sizeof (*tc));
 	tc->task = g_strdup (task);
 
 	tool_context = tc;
 	tool_interface_load (tc);
 	tool_set_modified (FALSE);
-	return(tc);
+	return tc;
 }
 
 
-void tool_context_destroy(ToolContext *tc)
+void
+tool_context_destroy (ToolContext *tc)
 {
-	g_assert(tc->task);
+	g_assert (tc->task);
 
-	g_free(tc->task);
+	g_free (tc->task);
 	/* TODO: Free interface */
 	/* TODO: Free config */
 	g_free (tc);
 }
 
 
-static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
+static void
+destroy_widget_cb (GtkWidget *w, gpointer data)
+{
+	gtk_container_remove (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+			      w);
+}
+
+
+static void
+progress_folding_button_set_hidden ()
+{
+	GtkWidget *w;
+
+	w = gnome_stock_pixmap_widget (tool_get_top_window (),
+				       GNOME_STOCK_PIXMAP_DOWN);
+	gtk_widget_show (w);
+	
+	gtk_container_foreach (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+			       destroy_widget_cb, NULL);
+
+	gtk_container_add (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+			   w);
+}
+
+
+static void
+progress_folding_button_set_visible ()
+{
+	GtkWidget *w;
+
+	w = gnome_stock_pixmap_widget (tool_get_top_window (),
+				       GNOME_STOCK_PIXMAP_UP);
+	gtk_widget_show (w);
+	
+	gtk_container_foreach (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+			       destroy_widget_cb, NULL);
+
+	gtk_container_add (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+			   w);
+}
+
+
+static gboolean timeout_done = FALSE;
+static gboolean report_list_visible = FALSE;
+
+
+void
+tool_read_report_visible_toggle ()
+{
+	GtkAdjustment *vadj;
+	
+	vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (tool_widget_get_common ("read_report_window")));
+	report_list_visible = ~report_list_visible;
+	
+	if (report_list_visible)
+	{
+		progress_folding_button_set_visible ();
+		
+		gtk_widget_set_usize (tool_widget_get_common ("read_report_window"),
+				      -1, 140);
+		gtk_widget_show (tool_widget_get_common ("read_report_window"));
+		gtk_adjustment_set_value (vadj,
+					  vadj->upper - vadj->page_size);
+		gtk_adjustment_value_changed (vadj);
+	}
+	else
+	{
+		progress_folding_button_set_hidden ();
+		
+		gtk_widget_hide (tool_widget_get_common ("read_report_window"));
+		if (timeout_done)
+			gtk_main_quit();
+	}
+}
+
+
+static void
+timeout_cb ()
+{
+	timeout_done = TRUE;
+
+	if (timeout_done && !report_list_visible)
+		gtk_main_quit();
+}
+
+
+static void
+read_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 {
 	char c;
-	GtkWidget *bar, *report;
+	GtkWidget *bar, *report, *report_list, *report_window;
+	GtkAdjustment *vadj;
 /*	gfloat p;*/
 	static char *line = NULL;
 	static int line_len = 0;
+	char *report_text[] =
+	{
+		NULL,
+		NULL
+	};
 
-	bar = tool_widget_get_common("read_progress");
-	report = tool_widget_get_common("read_report");
+	bar = tool_widget_get_common ("read_progress");
+	report = tool_widget_get_common ("read_report");
+	report_list = tool_widget_get_common ("read_report_clist");
+	report_window = tool_widget_get_common ("read_report_window");
+	vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (report_window));
+
 	if (!line)
 	{
 		line = malloc(1);
@@ -212,10 +315,27 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 				}
 				else
 				{
+					gboolean scroll;
+
 					/* Report line */
 					
-					gtk_entry_set_text(GTK_ENTRY(report),
-							   line + 4);
+					gtk_entry_set_text (GTK_ENTRY(report),
+							    line + 4);
+					
+					if (vadj->value >= vadj->upper - vadj->page_size)
+						scroll = TRUE;
+					else
+						scroll = FALSE;
+						
+					report_text[1] = line + 4;
+					gtk_clist_append (GTK_CLIST(report_list),
+							  report_text);
+					
+					if (scroll)
+					{
+						gtk_adjustment_set_value (vadj,
+									  vadj->upper - vadj->page_size);
+					}
 				}
 			}
 
@@ -226,54 +346,29 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 		{
 			/* Add character to end of current line */
 			
-			line = realloc(line, line_len + 2);
+			line = realloc (line, line_len + 2);
 			line [line_len] = c;
 			line_len++;
 			line [line_len] = '\0';
 		}
 	}
-#if 0  
-	if (tool_context->read_state == TOOL_READ_PROGRESS_MAX)
-	{
-		if (c - '0' < 10 && c - '0' >= 0)
-		{
-			tool_context->progress_max *= 10;
-			tool_context->progress_max += (c - '0');
-		}
-		else
-		        tool_context->read_state = TOOL_READ_PROGRESS_DONE;
-	}
-	else if (c != '.')
-	{
-		/* Progressbar's death */
-
-		gtk_main_quit ();
-	}
-	else
-	{
-		/* Update progressbar */
-		
-		tool_context->progress_done += 1;
-		
-		if (!tool_context->progress_max) p = 0.0;
-		else p = (gfloat) tool_context->progress_done / tool_context->progress_max;
-		if (p > 1.0) p = 1.0;
-		
-		gtk_progress_set_percentage (GTK_PROGRESS(bar), p);
-	}
-#endif
 }
 
 
-static void read_progress(int fd)
+static void
+read_progress (int fd)
 {
 	guint input_id;
 	gint cb_id;
 
-	tool_context->progress_max = 0;
-	tool_context->read_state = TOOL_READ_PROGRESS_MAX;
+	timeout_done = FALSE;
+	report_list_visible = FALSE;
+
+	progress_folding_button_set_hidden ();
+	
 	input_id = gtk_input_add_full (fd, GDK_INPUT_READ, read_progress_tick,
 				       NULL, NULL, NULL);
+
 	gtk_main ();
 
 	gtk_input_remove (input_id);
@@ -282,16 +377,19 @@ static void read_progress(int fd)
   
 	gtk_progress_set_percentage (GTK_PROGRESS (tool_widget_get_common ("read_progress")),
 				     1.0);
-	cb_id = gtk_timeout_add (500, (GtkFunction) gtk_main_quit, NULL);
+	cb_id = gtk_timeout_add (3000, (GtkFunction) timeout_cb, NULL);
 	gtk_main ();
 	gtk_timeout_remove (cb_id);
+	
+	gtk_clist_clear (GTK_CLIST (tool_widget_get_common ("read_report_clist")));
 }
 
 
 /* --- Exported interface --- */
 
 
-gboolean tool_config_load()
+gboolean
+tool_config_load ()
 {
 	ToolContext *tc;
 	int fd [2];
@@ -363,7 +461,8 @@ gboolean tool_config_load()
 }
 
 
-gboolean tool_config_save()
+gboolean
+tool_config_save ()
 {
 	ToolContext *tc;
 	FILE *f;
@@ -411,25 +510,29 @@ gboolean tool_config_save()
 }
 
 
-xmlDocPtr tool_config_get_xml()
+xmlDocPtr
+tool_config_get_xml ()
 {
 	return (tool_context->config);
 }
 
 
-void tool_config_set_xml(xmlDocPtr xml)
+void
+tool_config_set_xml (xmlDocPtr xml)
 {
 	tool_context->config = xml;
 }
 
 
-gboolean tool_get_frozen()
+gboolean
+tool_get_frozen ()
 {
 	return (tool_context->frozen);
 }
 
 
-void tool_set_frozen(gboolean state)
+void
+tool_set_frozen (gboolean state)
 {
 	tool_context->frozen = state;
 }
@@ -441,7 +544,8 @@ gboolean tool_get_modified()
 }
 
 
-void tool_set_modified(gboolean state)
+void
+tool_set_modified (gboolean state)
 {
 	GtkWidget *w0;
 
@@ -462,13 +566,15 @@ void tool_set_modified(gboolean state)
 }
 
 
-gboolean tool_get_access()
+gboolean
+tool_get_access ()
 {
 	return (tool_context->access);
 }
 
 
-void tool_set_access(gboolean state)
+void
+tool_set_access (gboolean state)
 {
 	GtkWidget *w0;
 
@@ -482,13 +588,15 @@ void tool_set_access(gboolean state)
 }
 
 
-ToolComplexity tool_get_complexity()
+ToolComplexity
+tool_get_complexity ()
 {
 	return (tool_context->complexity);
 }
 
 
-void tool_set_complexity(ToolComplexity complexity)
+void
+tool_set_complexity (ToolComplexity complexity)
 {
 	GtkWidget *button, *label;
 	
@@ -506,20 +614,22 @@ void tool_set_complexity(ToolComplexity complexity)
 		gtk_label_set_text (GTK_LABEL (label), _(" << Basic "));
 }
 
-GtkWidget *tool_get_top_window()
+GtkWidget *
+tool_get_top_window ()
 {
 	return (tool_context->top_window);
 }
 
 
-void tool_modified_cb()
+void
+tool_modified_cb ()
 {
 	tool_set_modified (TRUE);
 }
 
 
 static void
-handle_events_immediately()
+handle_events_immediately ()
 {
 	while (gtk_events_pending ()) gtk_main_iteration ();
 	usleep(100000);
@@ -527,7 +637,8 @@ handle_events_immediately()
 }
 
 
-void tool_splash_show()
+void
+tool_splash_show ()
 {
 	GtkWidget *w0;
   
@@ -536,21 +647,22 @@ void tool_splash_show()
 
 /*	w0 = gnome_pixmap_new_from_xpm_d (reading_xpm);
 
-	gtk_box_pack_end (GTK_BOX (tool_widget_get_common("reading_box")),
+	gtk_box_pack_end (GTK_BOX (tool_widget_get_common ("reading_box")),
 			  w0, TRUE, TRUE, 0);*/
 
 	w0 = tool_widget_get_common ("reading");
-	gtk_widget_show_all (w0);
+	gtk_widget_show (w0);
 
 	handle_events_immediately ();
 }
 
 
-void tool_splash_hide()
+void
+tool_splash_hide ()
 {
 	GtkWidget *w0;
 
-	w0 = tool_widget_get_common("reading");
+	w0 = tool_widget_get_common ("reading");
 	gtk_widget_hide (w0);
 }
 
@@ -558,21 +670,24 @@ void tool_splash_hide()
 static int reply;
 
 
-static void reply_cb(gint val, gpointer data)
+static void
+reply_cb (gint val, gpointer data)
 {
 	reply = val;
 	gtk_main_quit ();
 }
 
 
-void tool_user_close(GtkWidget *widget, gpointer data)
+void
+tool_user_close (GtkWidget *widget, gpointer data)
 {
 	/* TODO: Check for changes and optionally ask for confirmation */
 	gtk_main_quit ();
 }
 
 
-ToolContext *tool_init(gchar *task, int argc, char *argv [])
+ToolContext *
+tool_init (gchar *task, int argc, char *argv [])
 {
 	ToolContext *tc;
 	GtkWidget *w0;
