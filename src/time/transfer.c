@@ -168,7 +168,7 @@ transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 	xmlNodePtr node;
 	char *s;
 	
-	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list");
+	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list2");
 	store = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (ntp_list)));
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ntp_list));
 	
