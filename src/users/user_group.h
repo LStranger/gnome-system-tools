@@ -27,6 +27,8 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
+#include "user_settings.h"
+
 /* Just as specified in the @login_defs_prop_array in the users-conf backend: */
 typedef struct
 {
@@ -74,13 +76,17 @@ gboolean check_group_gid (xmlNodePtr node, gchar *val);
 gboolean get_min_max (xmlNodePtr db_node, gint *min, gint *max);
 xmlNodePtr get_corresp_field (xmlNodePtr node);
 xmlNodePtr get_node_by_data (xmlNodePtr dbnode, gchar *field, gchar *fdata);
+GList *get_user_list (gchar *field, xmlNodePtr group_node);
+GList *my_g_list_remove_duplicates (GList *list1, GList *list2);
+gchar *find_new_id (xmlNodePtr parent);
+gchar *find_new_key (xmlNodePtr parent);
 
 /* Extern functions */
 /* User related */
 
 extern void settings_prepare (ug_data *ud);
 extern void user_new_prepare (ug_data *ud);
-extern gboolean user_update (ug_data *ud);
+extern gboolean user_update (UserSettings *us);
 extern void user_passwd_dialog_prepare (xmlNodePtr node);
 extern gboolean check_login_delete (xmlNodePtr node);
 

@@ -47,8 +47,7 @@ static XstDialogSignal signals[] = {
 	{ "notebook",                    "switch_page",   on_notebook_switch_page },
 	{ "user_settings_dialog",        "delete_event",  on_user_settings_dialog_delete_event },
 	{ "user_settings_dialog",        "show",          on_user_settings_dialog_show },
-	{ "user_settings_ok",            "clicked",       on_user_settings_ok_clicked },
-	{ "user_settings_cancel",        "clicked",       on_user_settings_cancel_clicked },
+	{ "user_settings_dialog",        "clicked",       on_user_settings_clicked },
 	{ "user_passwd_dialog",          "delete_event",  on_user_passwd_dialog_delete_event },
 	{ "user_passwd_ok",              "clicked",       on_user_passwd_ok_clicked },
 	{ "user_passwd_cancel",          "clicked",       on_user_passwd_cancel_clicked },
@@ -156,7 +155,6 @@ connect_signals (void)
 					"clicked",
 					GTK_SIGNAL_FUNC (on_settings_clicked),
 					GINT_TO_POINTER (TABLE_NET_GROUP));
-
 
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 }

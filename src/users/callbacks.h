@@ -45,9 +45,8 @@ void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 
 void on_user_settings_dialog_show (GtkWidget *button, gpointer user_data);
-void on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data);
-void on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data);
-void on_user_settings_ok_clicked (GtkButton *button, gpointer user_data);
+void on_user_settings_dialog_delete_event (GnomeDialog *dialog, gpointer user_data);
+void on_user_settings_clicked (GnomeDialog *dialog, gint button_number, gpointer user_data);
 void on_user_settings_add_clicked (GtkButton *button, gpointer user_data);
 void on_user_settings_remove_clicked (GtkButton *button, gpointer user_data);
 void on_user_settings_gall_select_row (GtkCList *clist, gint row, gint column,

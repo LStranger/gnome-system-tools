@@ -72,8 +72,8 @@ void tables_update_content (void);
 void tables_set_state (gboolean state);
 xmlNodePtr get_selected_node (void);
 gboolean delete_selected_node (gint tbl);
-void current_table_update_row (ug_data *ud);
-void current_table_new_row (ug_data *ud);
+void current_table_update_row (gint tbl);
+void current_table_new_row (xmlNodePtr node, gint tbl);
 void set_active_table (guint tbl);
 
 

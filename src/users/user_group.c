@@ -29,6 +29,7 @@
 #include "user_group.h"
 #include "transfer.h"
 #include "e-table.h"
+#include "user_settings.h"
 
 extern XstTool *tool;
 
@@ -39,22 +40,16 @@ login_defs logindefs;
 
 /* Static prototypes */
 
-static void user_settings_prepare (ug_data *ud);
 static void group_settings_prepare (ug_data *ud);
-static void adv_user_new (xmlNodePtr node);
+static void user_update_xml (UserSettings *us);
 static xmlNodePtr user_add_blank_xml (xmlNodePtr parent);
-static void user_update_xml (xmlNodePtr node, gboolean adv);
 static void group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_name);
 static xmlNodePtr group_add_blank_xml (xmlNodePtr db_node);
-static void group_add_from_user (ug_data *ud);
+static void group_add_from_user (UserSettings *us);
 static void group_update_xml (xmlNodePtr node, gboolean adv);
 static gboolean node_exsists (xmlNodePtr node, gchar *name, gchar *val);
-static GList *get_group_list (gchar *field, xmlNodePtr user_node);
-static GList *get_user_list (gchar *field, xmlNodePtr group_node);
 static GList *get_group_users (xmlNodePtr group_node);
 static GList *get_group_mainusers (xmlNodePtr group_node);
-static GList *get_user_groups (xmlNodePtr user_node);
-static void user_fill_settings_group (GtkCombo *combo, xmlNodePtr node);
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 static void del_group_users (xmlNodePtr group_node);
@@ -62,12 +57,8 @@ static void add_group_users (xmlNodePtr group_node, gchar *name);
 static void del_user_groups (xmlNodePtr user_node);
 static void add_user_groups (xmlNodePtr user_node, gchar *group_name);
 static gboolean is_valid_name (gchar *str);
-static gchar *find_new_id (xmlNodePtr parent);
-static gchar *find_new_key (xmlNodePtr parent);
 static void reply_cb (gint val, gpointer data);
-static gint char_sort_func (gconstpointer a, gconstpointer b);
-static GList *my_g_list_remove_duplicates (GList *list1, GList *list2);
-static void my_gtk_clist_set_pixtext (GtkCList *list, gchar *txt);
+
 
 /* Global functions */
 
@@ -496,7 +487,9 @@ get_node_by_data (xmlNodePtr dbnode, gchar *field, gchar *fdata)
 
 	g_return_val_if_fail (dbnode != NULL, NULL);
 	g_return_val_if_fail (field != NULL, NULL);
-	g_return_val_if_fail (fdata != NULL, NULL);
+
+	if (!fdata)
+		return NULL;
 
 	for (node = dbnode->childs; node; node = node->next)
 	{
@@ -516,6 +509,133 @@ get_node_by_data (xmlNodePtr dbnode, gchar *field, gchar *fdata)
 	return NULL;
 }
 
+GList *
+get_user_list (gchar *field, xmlNodePtr group_node)
+{
+	GList *list = NULL;
+	xmlNodePtr node, u;
+
+	node = get_corresp_field (group_node);
+
+	for (u = xst_xml_element_find_first (node, "user");
+	     u;
+	     u = xst_xml_element_find_next (u, "user"))
+	{
+
+		if (check_node_complexity (u))
+			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
+	}
+
+	return list;
+}
+
+/* for GLists of strings only */
+GList *
+my_g_list_remove_duplicates (GList *list1, GList *list2)
+{
+	GList *new_list, *tmp_list;
+	gboolean found;
+
+	new_list = NULL;
+	
+	while (list1)
+	{
+		found = FALSE;
+		tmp_list = list2;
+		while (tmp_list)
+		{
+			if (!strcmp (list1->data, tmp_list->data))
+				found = TRUE;
+
+			tmp_list = tmp_list->next;
+		}
+		
+		if (!found)
+			new_list = g_list_prepend (new_list, list1->data);
+
+		list1 = list1->next;
+	}
+
+	return new_list;
+}
+
+gchar *
+find_new_id (xmlNodePtr parent)
+{
+	gchar *field, *buf;
+	gint id;
+	gint min, max;
+	gint ret = 0;
+	xmlNodePtr n0;
+
+	g_return_val_if_fail (parent != NULL, NULL);
+
+	if (!strcmp (parent->name, "userdb"))
+	{
+		field = g_strdup ("uid");
+		min = logindefs.new_user_min_id;
+		max = logindefs.new_user_max_id;
+	}
+
+	else if (!strcmp (parent->name, "groupdb"))
+	{
+		field = g_strdup ("gid");
+		min = logindefs.new_group_min_id;
+		max = logindefs.new_group_max_id;
+	}
+
+	else
+		return NULL;
+
+	for (n0 = parent->childs; n0; n0 = n0->next)
+	{
+		buf = xst_xml_get_child_content (n0, field);
+
+		if (!buf)
+			continue;
+
+		id = atoi (buf);
+		g_free (buf);
+
+		if (ret < id)
+			ret = id;
+	}
+	g_free (field);
+	ret++;
+
+	if (ret >= min && ret <= max)
+		return g_strdup_printf ("%d", ret);
+
+	return NULL;
+}
+
+gchar *
+find_new_key (xmlNodePtr parent)
+{
+	/* TODO: Possibily mix together find_new_id and find_new_key. */
+	gchar *buf;
+	gint id;
+	gint ret = 0;
+	xmlNodePtr n0;
+
+	g_return_val_if_fail (parent != NULL, NULL);
+
+	for (n0 = parent->childs; n0; n0 = n0->next)
+	{
+		buf = xst_xml_get_child_content (n0, "key");
+
+		if (!buf)
+			continue;
+
+		id = atoi (buf);
+		g_free (buf);
+
+		if (ret < id)
+			ret = id;
+	}
+
+	return g_strdup_printf ("%d", ++ret);
+}
 
 /* Extern functions */
 
@@ -535,7 +655,10 @@ settings_prepare (ug_data *ud)
 		/* Has to be some kind of user */
 		g_free (buf);
 
+		/* old_user
 		user_settings_prepare (ud);
+		*/
+		user_settings_prepare (ud->node);
 		return;
 	}
 
@@ -553,54 +676,25 @@ settings_prepare (ug_data *ud)
 	g_warning ("settings_prepare: shouldn't be here");
 }
 
-extern void
-user_new_prepare (ug_data *ud)
-{
-	GtkWidget *w0;
-	gboolean adv;
-	GtkCList *list;
-
-	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
-
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
-	user_fill_settings_group (GTK_COMBO (w0), ud->node);
-
-	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gall"));
-	my_gtk_clist_append_items (list, get_user_list ("login", get_corresp_field(ud->node)));
-	
-	if (adv)
-		adv_user_new (ud->node);
-	
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
-	gtk_object_set_data (GTK_OBJECT (w0), "data", ud);
-	gtk_widget_show (w0);
-}
-
 extern gboolean
-user_update (ug_data *ud)
+user_update (UserSettings *us)
 {
 	gboolean ok = TRUE;
-	gboolean adv;
-	gint group;
+	gint group, i;
 	gchar *buf;
 	gchar *old_name, *new_name;
 
-	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
-
-	new_name = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-									 "user_settings_name")));
-	old_name = xst_xml_get_child_content (ud->node, "login");
+	new_name = gtk_entry_get_text (us->basic->name);
+	old_name = xst_xml_get_child_content (us->node, "login");
 	
-	if (!check_user_login (ud->node, new_name))
+	if (!check_user_login (us->node, new_name))
 		ok = FALSE;
 
-	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								    "user_settings_comment")));
-	if (!check_user_comment (ud->node, buf))
+	buf = gtk_entry_get_text (us->basic->comment);
+	if (!check_user_comment (us->node, buf))
 		ok = FALSE;
 
-	group = check_user_group (ud->node);
+	group = check_user_group (us->node);
 	switch (group)
 	{
 		case 0:
@@ -609,7 +703,7 @@ user_update (ug_data *ud)
 		case 1:
 			/* Make new group */
 			if (ok)
-				group_add_from_user (ud);
+				group_add_from_user (us);
 			break;
 		case -1:
 		default:
@@ -618,37 +712,34 @@ user_update (ug_data *ud)
 			break;
 	}
 
-	if (adv)
-	{
-		GtkSpinButton *spin = GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_settings_uid"));
-		gint i = gtk_spin_button_get_value_as_int (spin);
+	i = gtk_spin_button_get_value_as_int (us->basic->uid);
+	
+	buf = g_strdup_printf ("%d", i);
+	if (!check_user_uid (us->node, buf))
+		ok = FALSE;
 
-		buf = g_strdup_printf ("%d", i);
-		if (!check_user_uid (ud->node, buf))
-			ok = FALSE;
+	g_free (buf);
 
-		g_free (buf);
+	buf = gtk_entry_get_text (us->basic->home);
+	if (!check_user_home (us->node, buf))
+		ok = FALSE;
 
-		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_home")));
-		if (!check_user_home (ud->node, buf))
-			ok = FALSE;
+	buf = gtk_entry_get_text (us->basic->shell);
+	if (!check_user_shell (us->node, buf))
+		ok = FALSE;
 
-		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_shell")));
-		if (!check_user_shell (ud->node, buf))
-			ok = FALSE;
-	}
-
+	
 	if (ok)
 	{
-		if (ud->new)
+		if (us->new)
 		{
 			/* Add new user, update table. */
-			ud->node = user_add_blank_xml (ud->node);
-			user_update_xml (ud->node, adv);
-			current_table_new_row (ud);
+			us->node = user_add_blank_xml (us->node);
+			user_update_xml (us);
+			current_table_new_row (us->node, us->table);
 
 			/* Ask for password too */
-			user_passwd_dialog_prepare (ud->node);
+			user_passwd_dialog_prepare (us->node);
 
 			return ok;
 		}
@@ -656,9 +747,9 @@ user_update (ug_data *ud)
 		else
 		{
 			/* Entered data ok, not new: just update. */
-			user_update_xml (ud->node, adv);
-			group_update_users (ud->node, old_name, new_name);
-			current_table_update_row (ud);
+			user_update_xml (us);
+			group_update_users (us->node, old_name, new_name);
+			current_table_update_row (us->table);
 
 			g_free (new_name);
 			
@@ -761,7 +852,7 @@ group_update (ug_data *ud)
 			/* Add new group, update table. */
 			ud->node = group_add_blank_xml (ud->node);
 			group_update_xml (ud->node, adv);
-			current_table_new_row (ud);
+			current_table_new_row (ud->node, ud->table);
 
 			return ok;
 		}
@@ -770,7 +861,7 @@ group_update (ug_data *ud)
 		{
 			/* Entered data ok, not new: just update */
 			group_update_xml (ud->node, adv);
-			current_table_update_row (ud);
+			current_table_update_row (ud->table);
 			return ok;
 		}
 	}
@@ -822,106 +913,6 @@ check_group_delete (xmlNodePtr node)
 /* Static functions */
 
 static void
-user_settings_groups (ug_data *ud)
-{
-	GtkCList *list;
-	GtkWidget *w0;
-	gchar *buf;
-	xmlNodePtr gnode, dbnode;
-	GList *users, *items, *members;
-
-	/* members */
-	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember"));
-	gtk_clist_set_auto_sort (list, TRUE);
-	
-	/* Members Primary group */
-	/* Fill groups combo, use node->parent to pass <userdb> */
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
-	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-	user_fill_settings_group (GTK_COMBO (w0), ud->node);
-
-	buf = xst_xml_get_child_content (ud->node, "gid");
-	dbnode = get_corresp_field (get_db_node (ud->node));
-	gnode = get_node_by_data (dbnode, "gid", buf);
-	g_free (buf);
-	buf = NULL;
-
-	if (gnode)
-		buf = xst_xml_get_child_content (gnode, "name");
-
-	if (buf)
-		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), buf);
-	else
-		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
-		
-	/* Members Secondary groups */
-	members = get_user_groups (ud->node);
-	my_gtk_clist_append_items (list, members);
-
-	/* Others */
-	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gall"));
-	gtk_clist_set_auto_sort (list, TRUE);
-
-	users = get_user_list ("login", dbnode);
-	items = my_g_list_remove_duplicates (users, members);
-	
-	my_gtk_clist_append_items (list, items);
-}
-
-static void
-user_settings_prepare (ug_data *ud)
-{
-	GtkWidget *w0;
-	gchar *txt;
-	gchar *login, *comment, *name = NULL;
-	GtkRequisition req;
-
-	g_return_if_fail (ud != NULL);
-	g_return_if_fail (login = xst_xml_get_child_content (ud->node, "login"));
-
-	/* Fill login name entry */
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_name");
-	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-	my_gtk_entry_set_text (w0, login);
-	g_free (login);
-
-	/* Set label for settings_comment_entry */
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_comment_label");
-	if (!check_node_complexity (ud->node))
-		gtk_label_set_text (GTK_LABEL (w0), _("Comment:"));
-	else
-		gtk_label_set_text (GTK_LABEL (w0), _("Full Name:"));
-	
-	/* Fill comment entry */
-	comment = xst_xml_get_child_content (ud->node, "comment");
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_comment");
-	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-	my_gtk_entry_set_text (w0, comment);
-	g_free (comment);
-
-	/* If state == advanced, fill advanced settings too. */
-	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
-		adv_user_settings (ud->node, TRUE);
-
-	user_settings_groups (ud);
-	
-	/* Set dialog's title and show it */
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	txt = g_strdup_printf (_("Settings for User %s"), name);
-	g_free (name);
-	gtk_window_set_title (GTK_WINDOW (w0), txt);
-	g_free (txt);
-
-	/* Resize it to minimum */
-	gtk_widget_size_request (w0, &req);
-	gtk_window_set_default_size (GTK_WINDOW (w0), req.width, req.height);
-
-	gtk_object_set_data (GTK_OBJECT (w0), "data", ud);
-
-	gtk_widget_show (w0);
-}
-
-static void
 group_settings_prepare (ug_data *ud)
 {
 	GtkWidget *w0;
@@ -961,23 +952,59 @@ group_settings_prepare (ug_data *ud)
 }
 
 static void
-adv_user_new (xmlNodePtr node)
+user_update_xml (UserSettings *us)
 {
-	GtkWidget *w0;
-	gfloat uid;
+	gchar *buf;
+	gint id, row;
+	xmlNodePtr group_node;
+	gboolean adv;
+	
+	/* Login */
+	buf = gtk_entry_get_text  (us->basic->name);
+	xst_xml_set_child_content (us->node, "login", buf);
 
-	/* Set new first available UID */
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-	uid = g_strtod (find_new_id (node), NULL);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), uid);
+	/* Comment */
+	buf = gtk_entry_get_text  (us->basic->comment);
+	xst_xml_set_child_content (us->node, "comment", buf);
 
-	/* Set bash as the default shell. */
-	/* FIXME: Maybe search for the first desirable shell for other systems */
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-	gtk_entry_set_text (GTK_ENTRY (w0), "/bin/bash");
+	/* Main group */
+	buf = gtk_entry_get_text (GTK_ENTRY (us->group->main->entry));
 
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_advanced");
-	gtk_widget_show (w0);
+	group_node = get_corresp_field (get_db_node (us->node));
+	group_node = get_node_by_data (group_node, "name", buf);
+	buf = xst_xml_get_child_content (group_node, "gid");
+	xst_xml_set_child_content (us->node, "gid", buf);
+	
+	/* Secondary groups */
+	del_user_groups (us->node);
+
+	row = 0;
+	while (gtk_clist_get_text (us->group->member, row++, 0, &buf))
+		add_user_groups (us->node, buf);
+
+	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
+	
+	/* TODO hardcoded default shell and home dir prefix are BAD */
+	/* Home */
+	buf = adv ?
+		gtk_entry_get_text (us->basic->home) :
+		g_strdup_printf ("/home/%s", gtk_entry_get_text (us->basic->name));
+	
+	xst_xml_set_child_content (us->node, "home", buf);
+
+	/* Shell */
+	buf = adv ?
+		gtk_entry_get_text (us->basic->shell) :
+		g_strdup ("/bin/bash");
+
+	xst_xml_set_child_content (us->node, "shell", buf);
+
+	/* UID */
+	if (adv)
+	{
+		id = gtk_spin_button_get_value_as_int (us->basic->uid);
+		xst_xml_set_child_content (us->node, "uid", g_strdup_printf ("%d", id));
+	}
 }
 
 static xmlNodePtr
@@ -1016,74 +1043,6 @@ user_add_blank_xml (xmlNodePtr parent)
 	return user;
 }
 
-static void
-user_update_xml (xmlNodePtr node, gboolean adv)
-{
-	GtkCList *clist;
-	gchar *buf;
-	gint id, row;
-	xmlNodePtr group_node;
-
-	/* Login */
-	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								    "user_settings_name")));
-	
-	xst_xml_set_child_content (node, "login", buf);
-
-	/* Comment */
-	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								    "user_settings_comment")));
-	
-	xst_xml_set_child_content (node, "comment", buf);
-
-	/* Main group */
-	buf = gtk_entry_get_text (
-			GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog,
-								     "user_settings_group"))->entry));
-
-	group_node = get_corresp_field (get_db_node (node));
-	group_node = get_node_by_data (group_node, "name", buf);
-	buf = xst_xml_get_child_content (group_node, "gid");
-	xst_xml_set_child_content (node, "gid", buf);
-
-	/* Secondary groups */
-	del_user_groups (node);
-	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember"));
-
-	row = 0;
-	while (gtk_clist_get_text (clist, row++, 0, &buf))
-		add_user_groups (node, buf);
-
-	/* TODO hardcoded default shell and home dir prefix are BAD */
-	/* Home */
-	buf = adv ?
-		gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								      "user_settings_home"))) :
-		g_strdup_printf ("/home/%s", gtk_entry_get_text
-				 (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								    "user_settings_name"))));
-	
-	xst_xml_set_child_content (node, "home", buf);
-
-	/* Shell */
-	buf = adv ?
-		gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								      "user_settings_shell"))) :
-		g_strdup ("/bin/bash");
-
-	xst_xml_set_child_content (node, "shell", buf);
-
-	/* UID */
-	if (adv)
-	{
-		id = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
-						       (xst_dialog_get_widget (tool->main_dialog,
-									       "user_settings_uid")));
-		
-		xst_xml_set_child_content (node, "uid", g_strdup_printf ("%d", id));
-	}
-}
-
 static xmlNodePtr
 group_add_blank_xml (xmlNodePtr db_node)
 {
@@ -1103,25 +1062,23 @@ group_add_blank_xml (xmlNodePtr db_node)
 }
 
 static void
-group_add_from_user (ug_data *ud)
+group_add_from_user (UserSettings *us)
 {
 	xmlNodePtr node;
 	gchar *buf;
 	ug_data *group_data;
 
-	node = get_corresp_field (ud->node);
-
+	node = get_corresp_field (us->node);
 	group_data = g_new (ug_data, 1);
-	
 	group_data->node = group_add_blank_xml (node);
 
-	buf = gtk_entry_get_text (
-			GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "user_settings_group"))->entry));
-
+	buf = gtk_entry_get_text (GTK_ENTRY (us->group->main->entry));
 	xst_xml_set_child_content (group_data->node, "name", buf);
 
+	group_data->table = TABLE_GROUP;
+#ifdef NIS
 	/* Add it to e-table. */
-	if (ud->table == TABLE_USER)
+	if (us->table == TABLE_USER)
 		group_data->table = TABLE_GROUP;
 	else if (ud->table == TABLE_NET_USER)
 		group_data->table = TABLE_NET_GROUP;
@@ -1131,8 +1088,8 @@ group_add_from_user (ug_data *ud)
 		g_free (group_data);
 		return;
 	}
-	
-	current_table_new_row (group_data);
+#endif	
+	current_table_new_row (group_data->node, group_data->table);
 	g_free (group_data);
 }
 
@@ -1233,49 +1190,6 @@ node_exsists (xmlNodePtr node, gchar *name, gchar *val)
 }
 
 static GList *
-get_group_list (gchar *field, xmlNodePtr user_node)
-{
-	GList *list = NULL;
-	xmlNodePtr node, u;
-
-	node = get_corresp_field (user_node);
-	
-	if (!node)
-		return NULL;
-
-	for (u = xst_xml_element_find_first (node, "group");
-	     u;
-	     u = xst_xml_element_find_next (u, "group"))
-	{
-
-		if (check_node_complexity (u))
-			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
-	}
-
-	return list;
-}
-
-static GList *
-get_user_list (gchar *field, xmlNodePtr group_node)
-{
-	GList *list = NULL;
-	xmlNodePtr node, u;
-
-	node = get_corresp_field (group_node);
-
-	for (u = xst_xml_element_find_first (node, "user");
-	     u;
-	     u = xst_xml_element_find_next (u, "user"))
-	{
-
-		if (check_node_complexity (u))
-			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
-	}
-
-	return list;
-}
-
-static GList *
 get_group_users (xmlNodePtr group_node)
 {
 	GList *userlist = NULL;
@@ -1326,69 +1240,6 @@ get_group_mainusers (xmlNodePtr group_node)
 
 	g_free (gid);
 	return userlist;
-}
-
-static GList *
-get_user_groups (xmlNodePtr user_node)
-{
-	xmlNodePtr group_node, g, group_users;
-	gchar *user_name, *buf;
-	GList *grouplist = NULL;
-
-	g_return_val_if_fail (user_node != NULL, NULL);
-
-	group_node = get_corresp_field (user_node);
-	user_name = xst_xml_get_child_content (user_node, "login");
-
-	for (g = xst_xml_element_find_first (group_node, "group");
-	     g;
-	     g = xst_xml_element_find_next (g, "group"))
-	{
-		
-		group_users = xst_xml_element_find_first (g, "users");
-		for (group_users = xst_xml_element_find_first (group_users, "user");
-		     group_users;
-		     group_users = xst_xml_element_find_next (group_users, "user"))
-		{
-			buf = xst_xml_element_get_content (group_users);
-			if (!buf)
-				continue;
-
-			if (!strcmp (user_name, buf))
-			{
-				grouplist = g_list_prepend (grouplist,
-							    xst_xml_get_child_content (g, "name"));
-			}
-
-			g_free (buf);
-		}
-	}
-
-	g_free (user_name);
-	return grouplist;
-}
-
-static void
-user_fill_settings_group (GtkCombo *combo, xmlNodePtr node)
-{
-	GList *tmp_list, *items;
-	gchar *name;
-
-	items = NULL;
-	tmp_list = get_group_list ("name", node);
-	while (tmp_list)
-	{
-		name = tmp_list->data;
-		tmp_list = tmp_list->next;
-
-		items = g_list_append (items, name);
-	}
-	g_list_free (tmp_list);
-
-	items = g_list_sort (items, char_sort_func);
-
-	gtk_combo_set_popdown_strings (combo, items);
-	g_list_free (items);
 }
 
 static GList *
@@ -1542,95 +1393,11 @@ is_valid_name (gchar *str)
 	return TRUE;
 }
 
-static gchar *
-find_new_id (xmlNodePtr parent)
-{
-	gchar *field, *buf;
-	gint id;
-	gint min, max;
-	gint ret = 0;
-	xmlNodePtr n0;
-
-	g_return_val_if_fail (parent != NULL, NULL);
-
-	if (!strcmp (parent->name, "userdb"))
-	{
-		field = g_strdup ("uid");
-		min = logindefs.new_user_min_id;
-		max = logindefs.new_user_max_id;
-	}
-
-	else if (!strcmp (parent->name, "groupdb"))
-	{
-		field = g_strdup ("gid");
-		min = logindefs.new_group_min_id;
-		max = logindefs.new_group_max_id;
-	}
-
-	else
-		return NULL;
-
-	for (n0 = parent->childs; n0; n0 = n0->next)
-	{
-		buf = xst_xml_get_child_content (n0, field);
-
-		if (!buf)
-			continue;
-
-		id = atoi (buf);
-		g_free (buf);
-
-		if (ret < id)
-			ret = id;
-	}
-	g_free (field);
-	ret++;
-
-	if (ret >= min && ret <= max)
-		return g_strdup_printf ("%d", ret);
-
-	return NULL;
-}
-
-static gchar *
-find_new_key (xmlNodePtr parent)
-{
-	/* TODO: Possibily mix together find_new_id and find_new_key. */
-	gchar *buf;
-	gint id;
-	gint ret = 0;
-	xmlNodePtr n0;
-
-	g_return_val_if_fail (parent != NULL, NULL);
-
-	for (n0 = parent->childs; n0; n0 = n0->next)
-	{
-		buf = xst_xml_get_child_content (n0, "key");
-
-		if (!buf)
-			continue;
-
-		id = atoi (buf);
-		g_free (buf);
-
-		if (ret < id)
-			ret = id;
-	}
-
-	return g_strdup_printf ("%d", ++ret);
-}
-
 static void
 reply_cb (gint val, gpointer data)
 {
         reply = val;
         gtk_main_quit ();
-}
-
-static gint
-char_sort_func (gconstpointer a, gconstpointer b)
-{
-	return (strcmp (a, b));
 }
 
 void
@@ -1666,57 +1433,4 @@ my_gtk_clist_append (GtkCList *list, gchar *text)
 	entry[1] = NULL;
 
 	return gtk_clist_append (list, entry);
-}
-
-/* for GLists of strings only */
-static GList *
-my_g_list_remove_duplicates (GList *list1, GList *list2)
-{
-	GList *new_list, *tmp_list;
-	gboolean found;
-
-	new_list = NULL;
-	
-	while (list1)
-	{
-		found = FALSE;
-		tmp_list = list2;
-		while (tmp_list)
-		{
-			if (!strcmp (list1->data, tmp_list->data))
-				found = TRUE;
-
-			tmp_list = tmp_list->next;
-		}
-		
-		if (!found)
-			new_list = g_list_prepend (new_list, list1->data);
-
-		list1 = list1->next;
-	}
-
-	return new_list;
-}
-
-static void
-my_gtk_clist_set_pixtext (GtkCList *list, gchar *txt)
-{
-	static GdkPixmap *pixmap;
-	static GdkBitmap *mask;
-	GtkWidget *window;
-	GtkStyle *style;
-	gint row;
-	
-
-	if (!pixmap)
-	{
-		window = GTK_WIDGET (tool->main_dialog);
-		style = gtk_widget_get_style (window);
-		pixmap = gdk_pixmap_create_from_xpm (window->window, &mask,
-						     &style->bg[GTK_STATE_NORMAL],
-						     "/usr/share/pixmaps/yes.xpm");
-	}
-
-	row = my_gtk_clist_append (list, txt);
-	gtk_clist_set_pixtext (list, row, 0, txt, 5, pixmap, mask);
 }

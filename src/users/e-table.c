@@ -1030,15 +1030,13 @@ delete_selected_node (gint tbl)
 }
 
 void
-current_table_update_row (ug_data *ud)
+current_table_update_row (gint tbl)
 {
 	ETable *table;
 	ETreeModel *model;
 	gint row;
 
-	g_return_if_fail (ud != NULL);
-	
-	table = get_table (ud->table);
+	table = get_table (tbl);
 
 	model = E_TREE_MODEL (table->model);
 	row = e_table_get_cursor_row (table);
@@ -1047,19 +1045,19 @@ current_table_update_row (ug_data *ud)
 }
 
 void
-current_table_new_row (ug_data *ud)
+current_table_new_row (xmlNodePtr node, gint tbl)
 {
 	ETable *table;
 	ETreeModel *model;
 	ETreePath *path;
 
-	g_return_if_fail (ud != NULL);
+	g_return_if_fail (node != NULL);
 
-	table = get_table (ud->table);
+	table = get_table (tbl);
 
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_get_root (model);
-	e_tree_model_node_insert (model, path, -1, ud->node);
+	e_tree_model_node_insert (model, path, -1, node);
 }
 
 void
