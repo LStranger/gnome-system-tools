@@ -37,8 +37,6 @@
 #include "e-map/e-map.h"
 #include "tz-map.h"
 
-#include "time-admin.h"
-
 ETzMap *tzmap;
 
 XstTool *tool;
