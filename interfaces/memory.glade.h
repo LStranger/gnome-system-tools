@@ -5,8 +5,8 @@
  */
 
 gchar *s = N_("Memory administration");
-gchar *s = N_("Physical Memory:");
 gchar *s = N_("Swap Memory:");
+gchar *s = N_("Physical Memory:");
 gchar *s = N_("These are the swap areas available:");
 gchar *s = N_("Enabled");
 gchar *s = N_("Device");
