@@ -1367,6 +1367,7 @@ xst_tool_get_type (void)
 void
 xst_tool_construct (XstTool *tool, const char *name, const char *title)
 {
+	GdkPixbuf *pb;
 	char *s, *t, *u;
 
 	g_return_if_fail (name != NULL);
@@ -1380,7 +1381,12 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 	u = g_strdup_printf (PIXMAPS_DIR "/%s.png", name);
 
 	tool->main_dialog = xst_dialog_new (tool, s, t);
-	gnome_window_icon_set_from_file (GTK_WINDOW (tool->main_dialog), u);
+
+	pb = gdk_pixbuf_new_from_file (u, NULL);
+	if (pb) {
+		gtk_window_set_icon (GTK_WINDOW (tool->main_dialog), pb);
+		gdk_pixbuf_unref (pb);
+	}
 
 	g_free (s);
 	g_free (t);
@@ -1619,8 +1625,8 @@ try_show_usage_warning (void)
 
 		gtk_window_set_default_size (GTK_WINDOW (dialog), 300, 150);
 		
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG(dialog)->vbox), hbox, FALSE, FALSE, 5);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG(dialog)->vbox), checkbox, FALSE, FALSE, 5);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 5);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), checkbox, FALSE, FALSE, 5);
 		
 		gtk_widget_show_all (dialog);
 		if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
@@ -1671,9 +1677,7 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 			g_print ("-->%s<--\n", (gchar *) args_list->data);
 		}
 		poptFreeContext (ctx);
-	}
-
-	glade_gnome_init ();
+	}	
 #endif
  	program = gnome_program_init (app_name, VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
