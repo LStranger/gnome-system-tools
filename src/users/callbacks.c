@@ -32,6 +32,12 @@
 #include "callbacks.h"
 #include "transfer.h"
 
+
+#define USER 1
+#define GROUP 2
+#define UID 1
+#define GID 2
+
 /* Local globals */
 static int reply;
 static const gchar *GROUP_MEMBER_DATA_KEY = "group_member_name";
@@ -50,7 +56,10 @@ static gboolean update_user (void);
 static gboolean add_user (void);
 static gboolean update_group (void);
 static gboolean add_group (void);
-
+static group *make_default_group (void);
+static user *make_default_user (gchar *name);
+static gint find_new_id (gchar from, gchar what);
+static gchar *find_new_key (gchar from);
 
 /* Main button callbacks */
 
@@ -367,7 +376,11 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	 * else we are modifying user settigns */
 	
 	if (!current_user)
+	{
 		retval = add_user ();
+		on_user_chpasswd_clicked (NULL, NULL);
+	}
+	
 	else
 		retval = update_user ();
 
@@ -889,9 +902,7 @@ add_user (void)
 
 	/* Everything should be ok, let's create new user */
 
-	/* TODO fill other fields too like key, uid, etc... */
-	tmpuser = g_new0 (user, 1);
-	tmpuser->login = g_strdup (txt);
+	tmpuser = make_default_user (txt);
 	tmpuser->gid = g->gid;
 
 	list = GTK_LIST (tool_widget_get ("user_list"));
@@ -912,6 +923,11 @@ add_user (void)
 	
 	current_user = tmpuser;
 	user_list = g_list_append (user_list, tmpuser);
+
+	/* Select current user in users list (last one)*/
+
+	tmplist = list->children;
+	gtk_list_select_item (list, g_list_length (tmplist) - 1);
 
 	return TRUE;
 }
@@ -1030,10 +1046,7 @@ add_group (void)
 
 	/* Everything should be ok and we can add new group */
 
-	/* TODO fill other information too (like key, gid, password */
-	
-	tmpgroup = g_new0 (group, 1);
-	tmpgroup->users = NULL;
+	tmpgroup = make_default_group ();
 	tmpgroup->name = g_strdup (txt);
 
 	list = GTK_LIST (tool_widget_get ("group_list"));
@@ -1060,6 +1073,167 @@ add_group (void)
 	current_group = tmpgroup;
 	group_list = g_list_append (group_list, current_group);
 
+	/* Select current group in group list (last one)*/
+
+	selection = list->children;
+	gtk_list_select_item (list, g_list_length (selection) - 1);
+
+
 	return TRUE;
+}
+
+static group *
+make_default_group (void)
+{
+	group *gr;
+	
+	gr = g_new0 (group, 1);
+
+	gr->users = NULL;
+	gr->password = g_strdup ("x");
+	gr->gid = find_new_id (GROUP, 0);
+	gr->key = find_new_key (GROUP);
+
+	return gr;
+}
+
+static user *
+make_default_user (gchar *name)
+{
+	user *u;
+
+	u = g_new0 (user, 1);
+	u->key = find_new_key (USER);
+	u->uid = find_new_id (USER, UID);
+	u->login = g_strdup (name);
+	u->passwd_max_life = logindefs.passwd_max_day_use;
+	u->passwd_exp_warn = logindefs.passwd_warning_advance_days;
+	u->is_shadow = TRUE;	/* hardcoded, since we don't have it in ui yet */
+
+	if (logindefs.create_home)
+		u->home = g_strdup_printf ("/home/%s", name);
+
+	u->shell = g_strdup ("/bin/bash"); /* hardcoded, since we don't have it in ui yet */
+
+	return u;
+}
+	
+
+static gint
+find_new_id (gchar from, gchar what)
+{
+	GList *tmplist;
+	group *current_g;
+	user *current_u;
+	gint ret = 0;
+	
+	if (from == GROUP)
+	{
+		for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+		{
+			current_g = (group *)tmplist->data;
+			if (ret < current_g->gid)
+				ret = current_g->gid;
+		}
+		
+		if (ret + 1 > logindefs.new_group_max_id || ret < logindefs.new_group_min_id)
+		{
+			g_warning ("new gid is out of bounds");
+			return -1;
+		}
+		return ++ret;
+	}
+
+	else if (from == USER && what == UID)
+	{
+		for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
+		{
+			current_u = (user *)tmplist->data;
+			if (ret < current_u->uid)
+				ret = current_u->uid;
+		}
+		
+		if (ret + 1 > logindefs.new_user_max_id || ret < logindefs.new_user_min_id)
+		{
+			g_warning ("new gid is out of bounds");
+			return -1;
+		}
+		return ++ret;
+	}
+
+
+	/* Shouldn't reach here */
+	
+	g_warning ("find_last_id: wrong parameter");
+	return -1;
+}
+
+static gchar *
+find_new_key (gchar from)
+{
+	GList *tmplist;
+	group *current_g;
+	user *current_u;
+	gint ret = 0;
+	gint tmp;
+	gchar *s, *end;
+	gchar *buf;
+
+	if (from == GROUP)
+	{
+		for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+		{
+			current_g = (group *)tmplist->data;
+			tmp = atoi (current_g->key);
+			if (ret < tmp)
+				ret = tmp;
+
+		}
+
+		buf = g_strdup_printf ("%6d", ++ret);
+
+		s = buf;
+		end = buf + 6;
+
+		while (s < end)
+		{
+			if (*s == ' ')
+				*s = '0';
+			s++;
+		}
+		
+		return buf;
+	}
+
+	if (from == USER)
+	{
+		for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
+		{
+			current_u = (user *)tmplist->data;
+			tmp = atoi (current_u->key);
+			if (ret < tmp)
+				ret = tmp;
+
+		}
+
+		buf = g_strdup_printf ("%6d", ++ret);
+
+		s = buf;
+		end = buf + 6;
+
+		while (s < end)
+		{
+			if (*s == ' ')
+				*s = '0';
+			s++;
+		}
+		
+		return buf;
+	}
+
+	/* We shouldn't get here */
+
+	g_warning ("find_new_key: wrong params");
+	return NULL;
 }
 
