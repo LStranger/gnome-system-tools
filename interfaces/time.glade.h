@@ -4,12 +4,27 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("window1");
+gchar *s = N_("Date/Time ");
+gchar *s = N_("Please select the current date and time. You can also specify a time zone and a time server.");
+gchar *s = N_("Date");
+gchar *s = N_("Time");
 gchar *s = N_(":");
 gchar *s = N_(":");
-gchar *s = N_("Time of day:");
+gchar *s = N_("AM");
+gchar *s = N_("PM");
+gchar *s = N_("Time zone");
+gchar *s = N_("(unconfigured)");
+gchar *s = N_("Set time zone...");
+gchar *s = N_("Time server");
+gchar *s = N_("Keep clock synchronized with selected servers");
+gchar *s = N_("Select servers...");
 gchar *s = N_("Date/time");
 gchar *s = N_("Time zone");
-gchar *s = N_("Add");
-gchar *s = N_("Keep clock in sync with selected servers");
+gchar *s = N_("Select a time zone by clicking on \n"
+              "one of the dots on the map.");
+gchar *s = N_("Time Zones");
+gchar *s = N_("Selection:");
 gchar *s = N_("Time servers");
+gchar *s = N_("Select the servers you wish to use for time synchronization.");
+gchar *s = N_("Add");
+gchar *s = N_("window1");

@@ -145,7 +145,6 @@
 	<widget>
 	  <class>GtkEntry</class>
 	  <name>report_text</name>
-	  <sensitive>False</sensitive>
 	  <can_focus>True</can_focus>
 	  <editable>False</editable>
 	  <text_visible>True</text_visible>
@@ -159,17 +158,16 @@
 	</widget>
 
 	<widget>
-	  <class>GtkButton</class>
+	  <class>GtkToggleButton</class>
 	  <name>report_visibility</name>
-	  <width>22</width>
-	  <height>22</height>
 	  <can_focus>True</can_focus>
 	  <signal>
-	    <name>clicked</name>
-	    <handler>tool_report_list_visible_toggle</handler>
-	    <last_modification_time>Sun, 07 Jan 2001 18:03:00 GMT</last_modification_time>
+	    <name>toggled</name>
+	    <handler>visibility_toggled</handler>
+	    <last_modification_time>Thu, 25 Jan 2001 23:22:31 GMT</last_modification_time>
 	  </signal>
 	  <relief>GTK_RELIEF_NORMAL</relief>
+	  <active>False</active>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -177,7 +175,32 @@
 	  </child>
 
 	  <widget>
-	    <class>Placeholder</class>
+	    <class>GtkNotebook</class>
+	    <name>report_notebook</name>
+	    <show_tabs>False</show_tabs>
+	    <show_border>False</show_border>
+	    <tab_pos>GTK_POS_TOP</tab_pos>
+	    <scrollable>False</scrollable>
+	    <tab_hborder>2</tab_hborder>
+	    <tab_vborder>2</tab_vborder>
+	    <popup_enable>False</popup_enable>
+
+	    <widget>
+	      <class>Placeholder</class>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>Notebook:tab</child_name>
+	      <name>label54</name>
+	      <label>label54</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
 	  </widget>
 	</widget>
       </widget>
