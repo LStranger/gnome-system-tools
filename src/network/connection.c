@@ -1624,6 +1624,7 @@ connection_configure (XstConnection *cxn)
 	/* would like to do this as a switch */
 	nb = W ("connection_nb");
 	if (cxn->type == XST_CONNECTION_PPP) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/ppp.png");
 		fill_ppp (cxn);
 		fill_ppp_adv (cxn);
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
@@ -1638,9 +1639,10 @@ connection_configure (XstConnection *cxn)
 								 W ("ppp_adv_vbox")));
 	}
        
-	if (cxn->type == XST_CONNECTION_WVLAN)
+	if (cxn->type == XST_CONNECTION_WVLAN) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/gnome-laptop.png");
 		fill_wvlan (cxn);
-	else
+	} else
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
 					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
 								 W ("wvlan_vbox")));
@@ -1654,6 +1656,10 @@ connection_configure (XstConnection *cxn)
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
 					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
 								 W ("ptp_vbox")));
+
+	if (cxn->type == XST_CONNECTION_ETH) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/connection-ethernet.png");
+	}
 
 	cxn->frozen = FALSE;
 
