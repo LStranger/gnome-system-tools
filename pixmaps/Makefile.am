@@ -19,7 +19,7 @@ pixmaps_DATA = \
 	init-anim-1.png          \
 	init-anim-2.png          \
 	init-anim-3.png          \
-	internetsharing.png		\
+	internetsharing.png	 \
 	memory.png               \
 	nameresolution.png       \
 	nameresolution_alias.png \
@@ -33,13 +33,15 @@ pixmaps_DATA = \
 	shares.png               \
 	time.png                 \
 	timezone.png             \
-	unsupported-distro.png	\
+	unsupported-distro.png	 \
 	users-groups.png         \
 	users.png                \
 	warning.png              \
 	world_map-960.png        \
 	xstdruidbg-3.png         \
 	ximian30.png             \
-	talk-userlist.png
+	talk-userlist.png	 \
+	big-monitor.png		 \
+	test-colors.png
 
 EXTRA_DIST = $(pixmaps_DATA)
