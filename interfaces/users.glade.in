@@ -82,7 +82,7 @@
 
     <widget>
       <class>GtkNotebook</class>
-      <name>notebook1</name>
+      <name>user_settings_notebook</name>
       <can_focus>True</can_focus>
       <show_tabs>True</show_tabs>
       <show_border>True</show_border>
@@ -798,8 +798,7 @@
 
 	<widget>
 	  <class>GtkFrame</class>
-	  <name>frame15</name>
-	  <border_width>3</border_width>
+	  <name>user_passwd_frame</name>
 	  <label>Password</label>
 	  <label_xalign>0</label_xalign>
 	  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
@@ -810,40 +809,87 @@
 	  </child>
 
 	  <widget>
-	    <class>GtkVBox</class>
-	    <name>vbox448</name>
+	    <class>GtkTable</class>
+	    <name>table26</name>
 	    <border_width>3</border_width>
+	    <rows>3</rows>
+	    <columns>2</columns>
 	    <homogeneous>False</homogeneous>
-	    <spacing>3</spacing>
+	    <row_spacing>6</row_spacing>
+	    <column_spacing>3</column_spacing>
 
 	    <widget>
-	      <class>GtkButton</class>
-	      <name>user_passwd_change</name>
-	      <can_focus>True</can_focus>
-	      <label>Enter a new password</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
+	      <class>GtkLabel</class>
+	      <name>label145</name>
+	      <label>New:</label>
+	      <justify>GTK_JUSTIFY_LEFT</justify>
+	      <wrap>False</wrap>
+	      <xalign>0</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
 	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
+		<left_attach>0</left_attach>
+		<right_attach>1</right_attach>
+		<top_attach>0</top_attach>
+		<bottom_attach>1</bottom_attach>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<xexpand>False</xexpand>
+		<yexpand>False</yexpand>
+		<xshrink>False</xshrink>
+		<yshrink>False</yshrink>
+		<xfill>True</xfill>
+		<yfill>False</yfill>
 	      </child>
 	    </widget>
 
 	    <widget>
-	      <class>GtkButton</class>
-	      <name>user_passwd_random</name>
+	      <class>GtkEntry</class>
+	      <name>user_passwd_entry1</name>
 	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>on_user_passwd_random_clicked</handler>
-		<last_modification_time>Tue, 07 Nov 2000 06:15:53 GMT</last_modification_time>
-	      </signal>
-	      <label>  Generate a random password  </label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
+	      <has_focus>True</has_focus>
+	      <editable>True</editable>
+	      <text_visible>False</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
 	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
+		<left_attach>1</left_attach>
+		<right_attach>2</right_attach>
+		<top_attach>0</top_attach>
+		<bottom_attach>1</bottom_attach>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<xexpand>True</xexpand>
+		<yexpand>False</yexpand>
+		<xshrink>False</xshrink>
+		<yshrink>False</yshrink>
+		<xfill>True</xfill>
+		<yfill>False</yfill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <name>user_passwd_entry2</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>False</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	      <child>
+		<left_attach>1</left_attach>
+		<right_attach>2</right_attach>
+		<top_attach>1</top_attach>
+		<bottom_attach>2</bottom_attach>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<xexpand>True</xexpand>
+		<yexpand>False</yexpand>
+		<xshrink>False</xshrink>
+		<yshrink>False</yshrink>
+		<xfill>True</xfill>
+		<yfill>False</yfill>
 	      </child>
 	    </widget>
 
@@ -852,12 +898,47 @@
 	      <name>user_passwd_quality</name>
 	      <can_focus>True</can_focus>
 	      <label>Check password quality</label>
-	      <active>False</active>
+	      <active>True</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
+		<left_attach>0</left_attach>
+		<right_attach>2</right_attach>
+		<top_attach>2</top_attach>
+		<bottom_attach>3</bottom_attach>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<xexpand>False</xexpand>
+		<yexpand>False</yexpand>
+		<xshrink>False</xshrink>
+		<yshrink>False</yshrink>
+		<xfill>True</xfill>
+		<yfill>False</yfill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label146</name>
+	      <label>Confirm:</label>
+	      <justify>GTK_JUSTIFY_LEFT</justify>
+	      <wrap>False</wrap>
+	      <xalign>0</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<left_attach>0</left_attach>
+		<right_attach>1</right_attach>
+		<top_attach>1</top_attach>
+		<bottom_attach>2</bottom_attach>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<xexpand>False</xexpand>
+		<yexpand>False</yexpand>
+		<xshrink>False</xshrink>
+		<yshrink>False</yshrink>
+		<xfill>True</xfill>
+		<yfill>False</yfill>
 	      </child>
 	    </widget>
 	  </widget>
@@ -3190,7 +3271,7 @@ To begin, click &quot;Next&quot;. </text>
 
 	  <widget>
 	    <class>GtkAlignment</class>
-	    <name>alignment36</name>
+	    <name>user_druid_identity</name>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xscale>0.67</xscale>
@@ -3202,115 +3283,7 @@ To begin, click &quot;Next&quot;. </text>
 	    </child>
 
 	    <widget>
-	      <class>GtkTable</class>
-	      <name>table19</name>
-	      <border_width>3</border_width>
-	      <rows>2</rows>
-	      <columns>2</columns>
-	      <homogeneous>False</homogeneous>
-	      <row_spacing>6</row_spacing>
-	      <column_spacing>3</column_spacing>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<name>label83</name>
-		<label>Username:</label>
-		<justify>GTK_JUSTIFY_LEFT</justify>
-		<wrap>False</wrap>
-		<xalign>0</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
-		  <top_attach>0</top_attach>
-		  <bottom_attach>1</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkEntry</class>
-		<name>user_druid_login</name>
-		<can_focus>True</can_focus>
-		<has_focus>True</has_focus>
-		<editable>True</editable>
-		<text_visible>True</text_visible>
-		<text_max_length>0</text_max_length>
-		<text></text>
-		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
-		  <top_attach>0</top_attach>
-		  <bottom_attach>1</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkEntry</class>
-		<name>user_druid_comment</name>
-		<can_focus>True</can_focus>
-		<editable>True</editable>
-		<text_visible>True</text_visible>
-		<text_max_length>0</text_max_length>
-		<text></text>
-		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<name>label84</name>
-		<label>Comment:</label>
-		<justify>GTK_JUSTIFY_LEFT</justify>
-		<wrap>False</wrap>
-		<xalign>0</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
+	      <class>Placeholder</class>
 	    </widget>
 	  </widget>
 
@@ -3398,7 +3371,7 @@ To begin, click &quot;Next&quot;. </text>
 
 	  <widget>
 	    <class>GtkAlignment</class>
-	    <name>alignment39</name>
+	    <name>user_druid_password</name>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xscale>0.67</xscale>
@@ -3410,146 +3383,7 @@ To begin, click &quot;Next&quot;. </text>
 	    </child>
 
 	    <widget>
-	      <class>GtkFrame</class>
-	      <name>user_druid_pwd_frame</name>
-	      <label>Password</label>
-	      <label_xalign>0</label_xalign>
-	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-
-	      <widget>
-		<class>GtkTable</class>
-		<name>table26</name>
-		<border_width>3</border_width>
-		<rows>3</rows>
-		<columns>2</columns>
-		<homogeneous>False</homogeneous>
-		<row_spacing>6</row_spacing>
-		<column_spacing>3</column_spacing>
-
-		<widget>
-		  <class>GtkLabel</class>
-		  <name>label142</name>
-		  <label>New:</label>
-		  <justify>GTK_JUSTIFY_LEFT</justify>
-		  <wrap>False</wrap>
-		  <xalign>0</xalign>
-		  <yalign>0.5</yalign>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <child>
-		    <left_attach>0</left_attach>
-		    <right_attach>1</right_attach>
-		    <top_attach>0</top_attach>
-		    <bottom_attach>1</bottom_attach>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <xexpand>False</xexpand>
-		    <yexpand>False</yexpand>
-		    <xshrink>False</xshrink>
-		    <yshrink>False</yshrink>
-		    <xfill>True</xfill>
-		    <yfill>False</yfill>
-		  </child>
-		</widget>
-
-		<widget>
-		  <class>GtkEntry</class>
-		  <name>user_druid_pwd_entry1</name>
-		  <can_focus>True</can_focus>
-		  <has_focus>True</has_focus>
-		  <editable>True</editable>
-		  <text_visible>False</text_visible>
-		  <text_max_length>0</text_max_length>
-		  <text></text>
-		  <child>
-		    <left_attach>1</left_attach>
-		    <right_attach>2</right_attach>
-		    <top_attach>0</top_attach>
-		    <bottom_attach>1</bottom_attach>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <xexpand>True</xexpand>
-		    <yexpand>False</yexpand>
-		    <xshrink>False</xshrink>
-		    <yshrink>False</yshrink>
-		    <xfill>True</xfill>
-		    <yfill>False</yfill>
-		  </child>
-		</widget>
-
-		<widget>
-		  <class>GtkEntry</class>
-		  <name>user_druid_pwd_entry2</name>
-		  <can_focus>True</can_focus>
-		  <editable>True</editable>
-		  <text_visible>False</text_visible>
-		  <text_max_length>0</text_max_length>
-		  <text></text>
-		  <child>
-		    <left_attach>1</left_attach>
-		    <right_attach>2</right_attach>
-		    <top_attach>1</top_attach>
-		    <bottom_attach>2</bottom_attach>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <xexpand>True</xexpand>
-		    <yexpand>False</yexpand>
-		    <xshrink>False</xshrink>
-		    <yshrink>False</yshrink>
-		    <xfill>True</xfill>
-		    <yfill>False</yfill>
-		  </child>
-		</widget>
-
-		<widget>
-		  <class>GtkCheckButton</class>
-		  <name>user_druid_pwd_check</name>
-		  <can_focus>True</can_focus>
-		  <label>Check password quality</label>
-		  <active>True</active>
-		  <draw_indicator>True</draw_indicator>
-		  <child>
-		    <left_attach>0</left_attach>
-		    <right_attach>2</right_attach>
-		    <top_attach>2</top_attach>
-		    <bottom_attach>3</bottom_attach>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <xexpand>False</xexpand>
-		    <yexpand>False</yexpand>
-		    <xshrink>False</xshrink>
-		    <yshrink>False</yshrink>
-		    <xfill>True</xfill>
-		    <yfill>False</yfill>
-		  </child>
-		</widget>
-
-		<widget>
-		  <class>GtkLabel</class>
-		  <name>label143</name>
-		  <label>Confirm:</label>
-		  <justify>GTK_JUSTIFY_LEFT</justify>
-		  <wrap>False</wrap>
-		  <xalign>0</xalign>
-		  <yalign>0.5</yalign>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <child>
-		    <left_attach>0</left_attach>
-		    <right_attach>1</right_attach>
-		    <top_attach>1</top_attach>
-		    <bottom_attach>2</bottom_attach>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <xexpand>False</xexpand>
-		    <yexpand>False</yexpand>
-		    <xshrink>False</xshrink>
-		    <yshrink>False</yshrink>
-		    <xfill>True</xfill>
-		    <yfill>False</yfill>
-		  </child>
-		</widget>
-	      </widget>
+	      <class>Placeholder</class>
 	    </widget>
 	  </widget>
 
