@@ -67,6 +67,8 @@
   </ETableSpecification>"
 
 
+/* Local globals */
+
 GtkWidget *user_table;
 GtkWidget *group_table;
 
@@ -80,10 +82,14 @@ col_count (ETableModel *etm, void *data)
 {
 	if (E_TABLE (user_table)->model == etm)
 		return USER_COLS;
-	else
+
+	if (E_TABLE (group_table)->model == etm)
 		return GROUP_COLS;
+
+	return 0;
 }
 
+/* This function returns the number of rows in our ETableModel. */ 
 static int
 row_count (ETableModel *etm, void *data)
 {
@@ -103,15 +109,19 @@ value_at (ETableModel *etm, int col, int row, void *data)
 		u = g_list_nth_data (tmp_list, row);
 		return u->login;
 	}
-	else
+	
+	if (E_TABLE (group_table)->model == etm)
 	{
 		group *g;
 
 		g = g_list_nth_data (tmp_list, row);
 		return g->name;
 	}
+
+	return NULL;
 }
 
+/* This function sets value at a particular point in our ETableModel. */
 static void
 set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
@@ -124,17 +134,23 @@ set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 		u = g_list_nth_data (tmp_list, row);
 		g_free (u->login);
 		u->login = g_strdup (val);
+		return;
 	}
-	else
+
+	if (E_TABLE (group_table)->model == etm)
 	{
 		group *g;
 
 		g = g_list_nth_data (tmp_list, row);
 		g_free (g->name);
 		g->name = g_strdup (val);
+		return;
 	}
+
+	return;
 }
 
+/* This function checks if cell is editable. */
 static gboolean
 is_cell_editable (ETableModel *etm, int col, int row, void *data)
 {
@@ -169,12 +185,16 @@ value_is_empty (ETableModel *etm, int col, const void *value, void *data)
 	return !(value && *(char *)value);
 }
 
-/* This function reports if a value is empty. */
+/* This function converts value to string. */
 static char *
 value_to_string (ETableModel *etm, int col, const void *value, void *data)
 {
 	return g_strdup(value);
 }
+
+/* End of ETableSimple callbacks. */
+
+
 
 static void
 select_row (ETable *et, int row)
@@ -187,20 +207,29 @@ select_row (ETable *et, int row)
 
 	if (et == E_TABLE (user_table))
 	{
-		current_user = g_list_nth_data (user_list, row);
+		user *u;
+
+		u = g_list_nth_data (user_list, row);
 		user_actions_set_sensitive (TRUE);
-		label = g_strconcat (_("Settings for user "), current_user->login, NULL);
+		label = g_strconcat (_("Settings for user "), u->login, NULL);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
 		g_free (label);
+		return;
 	}
-	else
+
+	if (et == E_TABLE (group_table))
 	{
-		current_group = g_list_nth_data (group_list, row);
+		group *g;
+
+		g = g_list_nth_data (group_list, row);
 		group_actions_set_sensitive (TRUE);
-		label = g_strconcat ("Settings for group ", current_group->name, NULL);
+		label = g_strconcat ("Settings for group ", g->name, NULL);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
 		g_free (label);
+		return;
 	}
+
+	return;
 }
 
 /* Public functions */
@@ -267,22 +296,28 @@ e_table_del (gchar del)
 	gint row, nrow;
 	ETableModel *etm;
 	ETable *table;
+	GList *tmp_list;
 
 	if (del == USER)
 	{
 		table = E_TABLE (user_table);
-		user_list = g_list_remove (user_list, current_user);
+		row = e_table_get_cursor_row (table);
+		tmp_list = g_list_nth (user_list, row);
+		user_list = g_list_remove (user_list, tmp_list->data);
 	}
-	else
+
+	else if (del == GROUP)
 	{
 		table = E_TABLE (group_table);
-		group_list = g_list_remove (group_list, current_group);
+		row = e_table_get_cursor_row (table);
+		tmp_list = g_list_nth (group_list, row);
+		group_list = g_list_remove (group_list, tmp_list->data);
+		
 	}
-	
-	row = e_table_get_cursor_row (table);
-	if (row == -1)
-		return;
 
+	else
+		return;
+	
 	nrow = e_table_get_prev_row (table, row);
 	if (nrow < 0)
 		nrow = e_table_get_next_row (table, row);
@@ -297,16 +332,56 @@ void
 e_table_changed (gchar change, gboolean new)
 {
 	ETableModel *etm;
-
+	ETable *table;
+	
 	if (change == USER)
-		etm = E_TABLE_MODEL (E_TABLE (user_table)->model);
+		table = E_TABLE (user_table);
+
+	else if (change == GROUP)
+		table = E_TABLE (group_table);
+
 	else
-		etm = E_TABLE_MODEL (E_TABLE (group_table)->model);
+		return;
+
+	etm = E_TABLE_MODEL (table->model);
 
 	if (new)
+	{
 		e_table_model_append_row (etm, NULL, 0);
+		e_table_model_row_inserted (etm, 0);
+	}
+	else
+	{
+		gint row = e_table_get_cursor_row (table);
+		e_table_model_row_changed (etm, row);
+	}
+}
 
-	e_table_model_changed (etm);
+void *
+e_table_get (gchar get)
+{
+	ETableModel *etm;
+	ETable *table;
+	gint row;
 
+	if (get == USER)
+	{
+		table = E_TABLE (user_table);
+		etm = E_TABLE_MODEL (table->model);
+		row = e_table_get_cursor_row (table);
+
+		return (user *)g_list_nth_data (user_list, row);
+	}
+
+	if (get == GROUP)
+	{
+		table = E_TABLE (group_table);
+		etm = E_TABLE_MODEL (table->model);
+		row = e_table_get_cursor_row (table);
+
+		return (group *)g_list_nth_data (group_list, row);
+	}
+
+	return NULL;
 }
 

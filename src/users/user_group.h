@@ -79,10 +79,7 @@ typedef struct
 } group;
 
 
-extern user *current_user;
 extern GList *user_list;
-
-extern group *current_group;
 extern GList *group_list;
 
 extern user *user_new (gchar *name);

@@ -33,10 +33,7 @@ static gboolean is_valid_name (gchar *str);
 static gint char_sort_func (gconstpointer a, gconstpointer b);
 
 GList *user_list = NULL;
-user *current_user = NULL;
-
 GList *group_list = NULL;
-group *current_group = NULL;
 
 login_defs logindefs;
 
@@ -193,7 +190,6 @@ user_add (void)
 	/* Update visual table */
 
 	e_table_changed (USER, TRUE);
-	current_user = new_user;
 
 	return TRUE;
 }
@@ -429,8 +425,7 @@ group_add (void)
 		tmpgroup->users = g_list_append (tmpgroup->users, g_strdup (tmp));
 	}
 
-	current_group = tmpgroup;
-	group_list = g_list_append (group_list, current_group);
+	group_list = g_list_append (group_list, tmpgroup);
 
 	return TRUE;
 }
@@ -640,6 +635,12 @@ group_fill_members_list (void)
 	GtkCList *clist;
 	gint row;
 	gchar *entry[2];
+	group *g;
+
+	g = e_table_get (GROUP);
+
+	if (!g)
+		return NULL;
 
 	entry[1] = NULL;
 
@@ -647,7 +648,7 @@ group_fill_members_list (void)
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_freeze (clist);
 
-	tmp_list = current_group->users;
+	tmp_list = g->users;
 
 	while (tmp_list)
 	{

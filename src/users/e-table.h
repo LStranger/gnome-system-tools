@@ -27,4 +27,5 @@
 void e_table_create (void);
 void e_table_del (gchar del);
 void e_table_changed (gchar change, gboolean new);
+void *e_table_get (gchar get);
 

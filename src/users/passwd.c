@@ -65,11 +65,11 @@ passwd_set (user *u, gchar *new_passwd, gchar *confirm, gboolean check_quality)
 			(check_err = FascistCheck (new_passwd, CRACK_DICT_PATH)))
 		return check_err;
 
-	g_free (current_user->password);
+	g_free (u->password);
 	if (passwd_uses_md5 ()) 
-		current_user->password = g_strdup (crypt_md5 (new_passwd, passwd_rand_str (salt, 8)));
+		u->password = g_strdup (crypt_md5 (new_passwd, passwd_rand_str (salt, 8)));
 	else
-		current_user->password = g_strdup (crypt (new_passwd, passwd_rand_str (salt, 2)));
+		u->password = g_strdup (crypt (new_passwd, passwd_rand_str (salt, 2)));
 	
 	return (gchar *) 0;
 }
