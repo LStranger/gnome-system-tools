@@ -249,12 +249,15 @@ transfer_user_list_to_gui (void)
 
 	for (u = g_list_first (user_list), num_rows = 0; u; u = g_list_next (u), num_rows++)
 	{
-		
 		current_u = (user *)u->data;
-		list_item = gtk_list_item_new_with_label (current_u->login);
-		gtk_widget_show (list_item);
-		gtk_object_set_data (GTK_OBJECT (list_item), user_list_data_key, current_u);
-		rows = g_list_append (rows, list_item);
+		if (current_u->uid >= logindefs.new_user_min_id &&
+				current_u->uid <= logindefs.new_user_max_id) 
+		{
+			list_item = gtk_list_item_new_with_label (current_u->login);
+			gtk_widget_show (list_item);
+			gtk_object_set_data (GTK_OBJECT (list_item), user_list_data_key, current_u);
+			rows = g_list_append (rows, list_item);
+		}
 	}
 
 	gtk_list_append_items (list, rows);
@@ -282,10 +285,14 @@ transfer_group_list_to_gui (void)
 	for (g = g_list_first (group_list), num_rows = 0; g; g = g_list_next (g), num_rows++)
 	{
 		current_g = (group *)g->data;
-		list_item = gtk_list_item_new_with_label (current_g->name);
-		gtk_widget_show (list_item);
-		gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, current_g);
-		rows = g_list_append (rows, list_item);
+		if (current_g->gid >= logindefs.new_group_min_id &&
+				current_g->gid <= logindefs.new_group_max_id) 
+		{
+			list_item = gtk_list_item_new_with_label (current_g->name);
+			gtk_widget_show (list_item);
+			gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, current_g);
+			rows = g_list_append (rows, list_item);
+		}
 	}
 
 	gtk_list_append_items (list, rows);
