@@ -3374,9 +3374,7 @@ and easily add new users to your system.
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label93</name>
-	      <label>There is a notebook with hidden tabs inside the &quot;anna's 
-Password&quot; frame. When the user clicks &quot;Generate random
-password&quot;, the second notebook page should be shown.</label>
+	      <label>Please enter user's password and it's confirmation.</label>
 	      <justify>GTK_JUSTIFY_LEFT</justify>
 	      <wrap>False</wrap>
 	      <xalign>0.5</xalign>
@@ -3405,288 +3403,144 @@ password&quot;, the second notebook page should be shown.</label>
 	    </child>
 
 	    <widget>
-	      <class>GtkVBox</class>
-	      <name>vbox456</name>
-	      <border_width>3</border_width>
-	      <homogeneous>False</homogeneous>
-	      <spacing>3</spacing>
+	      <class>GtkFrame</class>
+	      <name>frame23</name>
+	      <label>user's password</label>
+	      <label_xalign>0</label_xalign>
+	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 
 	      <widget>
-		<class>GtkHBox</class>
-		<name>hbox26</name>
+		<class>GtkTable</class>
+		<name>table26</name>
 		<border_width>3</border_width>
+		<rows>3</rows>
+		<columns>2</columns>
 		<homogeneous>False</homogeneous>
-		<spacing>3</spacing>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
+		<row_spacing>6</row_spacing>
+		<column_spacing>3</column_spacing>
 
 		<widget>
-		  <class>GtkRadioButton</class>
-		  <name>user_druid_pwd_manual</name>
+		  <class>GtkLabel</class>
+		  <name>label142</name>
+		  <label>New:</label>
+		  <justify>GTK_JUSTIFY_LEFT</justify>
+		  <wrap>False</wrap>
+		  <xalign>0</xalign>
+		  <yalign>0.5</yalign>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <child>
+		    <left_attach>0</left_attach>
+		    <right_attach>1</right_attach>
+		    <top_attach>0</top_attach>
+		    <bottom_attach>1</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>False</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>False</yfill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkEntry</class>
+		  <name>user_druid_pwd_entry1</name>
 		  <can_focus>True</can_focus>
-		  <label>Set password by hand</label>
+		  <has_focus>True</has_focus>
+		  <editable>True</editable>
+		  <text_visible>False</text_visible>
+		  <text_max_length>0</text_max_length>
+		  <text></text>
+		  <child>
+		    <left_attach>1</left_attach>
+		    <right_attach>2</right_attach>
+		    <top_attach>0</top_attach>
+		    <bottom_attach>1</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>True</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>False</yfill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkEntry</class>
+		  <name>user_druid_pwd_entry2</name>
+		  <can_focus>True</can_focus>
+		  <editable>True</editable>
+		  <text_visible>False</text_visible>
+		  <text_max_length>0</text_max_length>
+		  <text></text>
+		  <child>
+		    <left_attach>1</left_attach>
+		    <right_attach>2</right_attach>
+		    <top_attach>1</top_attach>
+		    <bottom_attach>2</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>True</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>False</yfill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkCheckButton</class>
+		  <name>user_druid_pwd_check</name>
+		  <can_focus>True</can_focus>
+		  <label>Check password quality</label>
 		  <active>True</active>
 		  <draw_indicator>True</draw_indicator>
-		  <group>user_druid_pwd_group</group>
 		  <child>
-		    <padding>0</padding>
-		    <expand>False</expand>
-		    <fill>False</fill>
+		    <left_attach>0</left_attach>
+		    <right_attach>2</right_attach>
+		    <top_attach>2</top_attach>
+		    <bottom_attach>3</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>False</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>False</yfill>
 		  </child>
 		</widget>
 
 		<widget>
-		  <class>GtkRadioButton</class>
-		  <name>user_druid_pwd_random</name>
-		  <can_focus>True</can_focus>
-		  <label>Generate random password</label>
-		  <active>False</active>
-		  <draw_indicator>True</draw_indicator>
-		  <group>user_druid_pwd_group</group>
+		  <class>GtkLabel</class>
+		  <name>label143</name>
+		  <label>Confirm:</label>
+		  <justify>GTK_JUSTIFY_LEFT</justify>
+		  <wrap>False</wrap>
+		  <xalign>0</xalign>
+		  <yalign>0.5</yalign>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
 		  <child>
-		    <padding>0</padding>
-		    <expand>False</expand>
-		    <fill>False</fill>
+		    <left_attach>0</left_attach>
+		    <right_attach>1</right_attach>
+		    <top_attach>1</top_attach>
+		    <bottom_attach>2</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>False</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>False</yfill>
 		  </child>
-		</widget>
-	      </widget>
-
-	      <widget>
-		<class>GtkFrame</class>
-		<name>frame19</name>
-		<label>anna's password</label>
-		<label_xalign>0</label_xalign>
-		<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-
-		<widget>
-		  <class>GtkNotebook</class>
-		  <name>user_druid_pwd_notebook</name>
-		  <show_tabs>False</show_tabs>
-		  <show_border>False</show_border>
-		  <tab_pos>GTK_POS_TOP</tab_pos>
-		  <scrollable>False</scrollable>
-		  <tab_hborder>2</tab_hborder>
-		  <tab_vborder>2</tab_vborder>
-		  <popup_enable>False</popup_enable>
-
-		  <widget>
-		    <class>GtkTable</class>
-		    <name>table21</name>
-		    <border_width>3</border_width>
-		    <rows>3</rows>
-		    <columns>2</columns>
-		    <homogeneous>False</homogeneous>
-		    <row_spacing>6</row_spacing>
-		    <column_spacing>3</column_spacing>
-
-		    <widget>
-		      <class>GtkLabel</class>
-		      <name>label94</name>
-		      <label>New:</label>
-		      <justify>GTK_JUSTIFY_LEFT</justify>
-		      <wrap>False</wrap>
-		      <xalign>0</xalign>
-		      <yalign>0.5</yalign>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <child>
-			<left_attach>0</left_attach>
-			<right_attach>1</right_attach>
-			<top_attach>0</top_attach>
-			<bottom_attach>1</bottom_attach>
-			<xpad>0</xpad>
-			<ypad>0</ypad>
-			<xexpand>False</xexpand>
-			<yexpand>False</yexpand>
-			<xshrink>False</xshrink>
-			<yshrink>False</yshrink>
-			<xfill>True</xfill>
-			<yfill>False</yfill>
-		      </child>
-		    </widget>
-
-		    <widget>
-		      <class>GtkEntry</class>
-		      <name>user_druid_pwd_entry1</name>
-		      <can_focus>True</can_focus>
-		      <has_focus>True</has_focus>
-		      <editable>True</editable>
-		      <text_visible>False</text_visible>
-		      <text_max_length>0</text_max_length>
-		      <text></text>
-		      <child>
-			<left_attach>1</left_attach>
-			<right_attach>2</right_attach>
-			<top_attach>0</top_attach>
-			<bottom_attach>1</bottom_attach>
-			<xpad>0</xpad>
-			<ypad>0</ypad>
-			<xexpand>True</xexpand>
-			<yexpand>False</yexpand>
-			<xshrink>False</xshrink>
-			<yshrink>False</yshrink>
-			<xfill>True</xfill>
-			<yfill>False</yfill>
-		      </child>
-		    </widget>
-
-		    <widget>
-		      <class>GtkEntry</class>
-		      <name>user_druid_pwd_entry2</name>
-		      <can_focus>True</can_focus>
-		      <editable>True</editable>
-		      <text_visible>False</text_visible>
-		      <text_max_length>0</text_max_length>
-		      <text></text>
-		      <child>
-			<left_attach>1</left_attach>
-			<right_attach>2</right_attach>
-			<top_attach>1</top_attach>
-			<bottom_attach>2</bottom_attach>
-			<xpad>0</xpad>
-			<ypad>0</ypad>
-			<xexpand>True</xexpand>
-			<yexpand>False</yexpand>
-			<xshrink>False</xshrink>
-			<yshrink>False</yshrink>
-			<xfill>True</xfill>
-			<yfill>False</yfill>
-		      </child>
-		    </widget>
-
-		    <widget>
-		      <class>GtkCheckButton</class>
-		      <name>user_druid_pwd_check</name>
-		      <can_focus>True</can_focus>
-		      <label>Check password quality</label>
-		      <active>True</active>
-		      <draw_indicator>True</draw_indicator>
-		      <child>
-			<left_attach>0</left_attach>
-			<right_attach>2</right_attach>
-			<top_attach>2</top_attach>
-			<bottom_attach>3</bottom_attach>
-			<xpad>0</xpad>
-			<ypad>0</ypad>
-			<xexpand>False</xexpand>
-			<yexpand>False</yexpand>
-			<xshrink>False</xshrink>
-			<yshrink>False</yshrink>
-			<xfill>True</xfill>
-			<yfill>False</yfill>
-		      </child>
-		    </widget>
-
-		    <widget>
-		      <class>GtkLabel</class>
-		      <name>label95</name>
-		      <label>Confirm:</label>
-		      <justify>GTK_JUSTIFY_LEFT</justify>
-		      <wrap>False</wrap>
-		      <xalign>0</xalign>
-		      <yalign>0.5</yalign>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <child>
-			<left_attach>0</left_attach>
-			<right_attach>1</right_attach>
-			<top_attach>1</top_attach>
-			<bottom_attach>2</bottom_attach>
-			<xpad>0</xpad>
-			<ypad>0</ypad>
-			<xexpand>False</xexpand>
-			<yexpand>False</yexpand>
-			<xshrink>False</xshrink>
-			<yshrink>False</yshrink>
-			<xfill>True</xfill>
-			<yfill>False</yfill>
-		      </child>
-		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>Notebook:tab</child_name>
-		    <name>label96</name>
-		    <label>label197</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-
-		  <widget>
-		    <class>GtkVBox</class>
-		    <name>vbox457</name>
-		    <homogeneous>False</homogeneous>
-		    <spacing>0</spacing>
-
-		    <widget>
-		      <class>GtkLabel</class>
-		      <name>user_druid_pwd_label</name>
-		      <label>Password has been set to &quot;xnu35irh&quot;.</label>
-		      <justify>GTK_JUSTIFY_CENTER</justify>
-		      <wrap>False</wrap>
-		      <xalign>0.5</xalign>
-		      <yalign>0.5</yalign>
-		      <xpad>0</xpad>
-		      <ypad>0</ypad>
-		      <child>
-			<padding>0</padding>
-			<expand>True</expand>
-			<fill>True</fill>
-		      </child>
-		    </widget>
-
-		    <widget>
-		      <class>GtkHButtonBox</class>
-		      <name>hbuttonbox5</name>
-		      <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
-		      <spacing>30</spacing>
-		      <child_min_width>85</child_min_width>
-		      <child_min_height>27</child_min_height>
-		      <child_ipad_x>7</child_ipad_x>
-		      <child_ipad_y>0</child_ipad_y>
-		      <child>
-			<padding>0</padding>
-			<expand>False</expand>
-			<fill>False</fill>
-			<pack>GTK_PACK_END</pack>
-		      </child>
-
-		      <widget>
-			<class>GtkButton</class>
-			<name>user_druid_pwd_new</name>
-			<can_default>True</can_default>
-			<can_focus>True</can_focus>
-			<label>New password</label>
-			<relief>GTK_RELIEF_NORMAL</relief>
-		      </widget>
-		    </widget>
-		  </widget>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>Notebook:tab</child_name>
-		    <name>label98</name>
-		    <label>label198</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
 		</widget>
 	      </widget>
 	    </widget>

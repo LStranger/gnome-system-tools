@@ -95,19 +95,11 @@ gchar *s = N_("Username:");
 gchar *s = N_("Comment:");
 gchar *s = N_("Click \"Next\" to continue");
 gchar *s = N_("Password options (step 2 of 2)");
-gchar *s = N_("There is a notebook with hidden tabs inside the \"anna's \n"
-              "Password\" frame. When the user clicks \"Generate random\n"
-              "password\", the second notebook page should be shown.");
-gchar *s = N_("Set password by hand");
-gchar *s = N_("Generate random password");
-gchar *s = N_("anna's password");
+gchar *s = N_("Please enter user's password and it's confirmation.");
+gchar *s = N_("user's password");
 gchar *s = N_("New:");
 gchar *s = N_("Check password quality");
 gchar *s = N_("Confirm:");
-gchar *s = N_("label197");
-gchar *s = N_("Password has been set to \"xnu35irh\".");
-gchar *s = N_("New password");
-gchar *s = N_("label198");
 gchar *s = N_("Click \"Next\" to continue");
 gchar *s = N_("Finished");
 gchar *s = N_("Congratulations, you are finished. User \"anna\" has been\n"
