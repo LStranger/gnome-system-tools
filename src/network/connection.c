@@ -1755,9 +1755,9 @@ connection_updatedns_supported (XstConnection *cxn)
 	case XST_CONNECTION_ETH:
 	case XST_CONNECTION_WVLAN:
 	case XST_CONNECTION_PPP:
-	case XST_CONNECTION_PLIP:
 	case XST_CONNECTION_IRLAN:
 		return TRUE;
+	case XST_CONNECTION_PLIP:
 	case XST_CONNECTION_OTHER:
 	case XST_CONNECTION_LO:
 	case XST_CONNECTION_UNKNOWN:
