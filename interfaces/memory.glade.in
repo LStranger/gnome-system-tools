@@ -995,7 +995,7 @@ file
   <modal>False</modal>
   <default_width>378</default_width>
   <default_height>321</default_height>
-  <allow_shrink>True</allow_shrink>
+  <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
 
@@ -1028,7 +1028,7 @@ file
 	<widget>
 	  <class>GtkAlignment</class>
 	  <name>alignment1</name>
-	  <border_width>8</border_width>
+	  <border_width>3</border_width>
 	  <xalign>0.5</xalign>
 	  <yalign>0.5</yalign>
 	  <xscale>1</xscale>
@@ -1124,7 +1124,7 @@ file
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label22</name>
-	      <label>Swap Memory:</label>
+	      <label>Swap memory:</label>
 	      <justify>GTK_JUSTIFY_LEFT</justify>
 	      <wrap>False</wrap>
 	      <xalign>1</xalign>
@@ -1150,7 +1150,7 @@ file
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label21</name>
-	      <label>Physical Memory:</label>
+	      <label>Physical memory:</label>
 	      <justify>GTK_JUSTIFY_LEFT</justify>
 	      <wrap>False</wrap>
 	      <xalign>1</xalign>
@@ -1176,15 +1176,25 @@ file
 	</widget>
 
 	<widget>
-	  <class>GnomePixmap</class>
-	  <name>pixmap3</name>
-	  <filename>32_wrench_logo.png</filename>
+	  <class>GtkAlignment</class>
+	  <name>alignment3</name>
+	  <border_width>3</border_width>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xscale>1</xscale>
+	  <yscale>1</yscale>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
 	    <fill>False</fill>
 	    <pack>GTK_PACK_END</pack>
 	  </child>
+
+	  <widget>
+	    <class>GnomePixmap</class>
+	    <name>pixmap3</name>
+	    <filename>32_wrench_logo.png</filename>
+	  </widget>
 	</widget>
       </widget>
 
