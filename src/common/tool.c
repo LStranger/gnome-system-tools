@@ -712,7 +712,7 @@ static void
 handle_events_immediately ()
 {
 	while (gtk_events_pending ()) gtk_main_iteration ();
-	usleep(100000);
+	usleep(50000);
 	while (gtk_events_pending ()) gtk_main_iteration ();
 }
 
