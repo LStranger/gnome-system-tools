@@ -676,7 +676,7 @@ xst_tool_kill_backend (XstTool *tool, gpointer data)
 	if (root_access == ROOT_ACCESS_SIMULATED)
 		root_access = ROOT_ACCESS_SIMULATED_DISABLED;
 
-	xst_tool_run_set_directive (tool, NULL, _("Closing tool."), "end", NULL);
+	xst_tool_run_set_directive (tool, NULL, NULL, "end", NULL);
 
 	if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
 		root_access = ROOT_ACCESS_SIMULATED;

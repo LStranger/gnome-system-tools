@@ -11,6 +11,8 @@
 	(xst_tool_run_get_directive_va): init backend before setting
 	lock state. This allows to run directives inside init seq.
 	(xst_tool_run_set_directive_va): same.
+	(xst_tool_kill_backend): Don't show report window to run the
+	end directive.
 
 	* xst-platform.c (xst_platform_new): require key arg too.
 	(xst_platform_new_from_node): Creates a platform struct
