@@ -8,6 +8,7 @@ Anna
  
 Boc
 ---
+[ ] The tools are currently not working on the control-center
 
 Arturo
 ------
@@ -81,9 +82,9 @@ Crimz
 [ ] Disks tool
     [ ] Fix the redhat 7.0 fstab problem
 
-Tambets
-[~] Boot tool
-------------
+Tambet
+-------
+(boot)
     [X] The boot backend is not wrinting /etc/lilo.conf with changes
         (at least on my 2 RH systems 6.1 & 7.0 )
     [X] Clickin on the spin button (up/down) does not changes the apply
@@ -97,18 +98,28 @@ Tambets
     [ ] The add button in "this kernel requires aditional parameters" is not
         implemented.
     [X] When switching complexity mode, the buttons should not be spaced.
-        when swithcing from adv. to simple mode, we need to "pack" the buttons again.
+        when swithcing from adv. to simple mode, we need to "pack" the buttons
+	    again.
     [X] After clicking apply, two report dialogs come up.
     [X] If we have a default button (in advanced mode) the settings dialog
         should not contain "Make this my default boot" this is giving the
         user two choices for acomplishing the same task, which I think can
         confuse users.
-[~] Users tool
-    [X] local case
-    [ ] NIS support **
-        [ ] backend
-	[ ] front end
-
+(users)	   
+    [ ] Switching modes should keep the seleced user selected.
+    [ ] Hide the NIS tab of the notebook until we have backend support for
+         this.
+    [ ] The users data and the group data are not kept in sync in the front end.
+        If I change the group of user "a" to "foo". The "foo" group is not
+        updated with  the new user  "a". We need to verify before writing to
+        the backend that the user  data and the group data is in sync. We also
+        need to verify that we get from the  backend user&group data that is in
+        sync, if we found a problem (for example user  "a" has group as "foo"
+        but group "foo" does not contain user "a") we warn the user that there
+        was a problem found on the system configuration but that it has been
+        fixed. The backend also needs to verify that the users & group
+        information it is writing is in sync.
+    
 TOOLS
 -----
 - Tool
@@ -122,6 +133,7 @@ Planed :
 - Screen (resolution and stuff)
 - Fonts
 - Printing
+- A better tool for disks
 
 Server :
 - httpd
