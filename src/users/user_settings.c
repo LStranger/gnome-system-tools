@@ -27,6 +27,9 @@
 #include "xst.h"
 #include "user_settings.h"
 #include "profile.h"
+#include "passwd.h"
+
+#define USER_ACCOUNT_PASSWD_CHANGED "changed"
 
 extern XstTool *tool;
 
@@ -103,6 +106,42 @@ user_account_gui_all_select (GtkCList *clist, gint row, gint column, GdkEventBut
 		gtk_widget_set_sensitive (GTK_WIDGET (gui->add), FALSE);
 }
 
+enum {
+	NOTEBOOK_PAGE_MANUAL,
+	NOTEBOOK_PAGE_RANDOM,
+};
+
+static void
+user_account_passwd_toggled (GtkToggleButton *toggle, gpointer data)
+{
+	UserAccountGui *gui = data;
+
+	if (gtk_toggle_button_get_active (gui->pwd_manual))
+		gtk_notebook_set_page (gui->pwd_notebook, NOTEBOOK_PAGE_MANUAL);
+	else {
+		gtk_notebook_set_page (gui->pwd_notebook, NOTEBOOK_PAGE_RANDOM);
+		gtk_signal_emit_by_name (GTK_OBJECT (gui->pwd_random_new),
+					 "clicked", gui);
+	}
+}
+
+static void
+user_account_passwd_random_new (GtkButton *button, gpointer data)
+{
+	gchar *passwd;
+	UserAccountGui *gui = data;
+
+	passwd = passwd_get_random ();
+	gtk_label_set_text (gui->pwd_random_label, passwd);
+	g_free (passwd);
+}
+
+static void
+user_account_passwd_changed (GtkEditable *entry, gpointer data)
+{
+	gtk_object_set_data (GTK_OBJECT (entry), USER_ACCOUNT_PASSWD_CHANGED, GINT_TO_POINTER (TRUE));
+}
+
 static gint
 char_sort_func (gconstpointer a, gconstpointer b)
 {
@@ -161,6 +200,12 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->remove  = glade_xml_get_widget (gui->xml, "user_settings_remove");
 	gui->set_primary = glade_xml_get_widget (gui->xml, "user_settings_primary");
 
+	gui->pwd_box = glade_xml_get_widget (gui->xml, "user_passwd_box");
+	gui->pwd_notebook = GTK_NOTEBOOK (glade_xml_get_widget (gui->xml, "user_passwd_notebook"));
+	gui->pwd_manual = GTK_TOGGLE_BUTTON (glade_xml_get_widget (gui->xml, "user_passwd_manual"));
+	gui->pwd_random = GTK_TOGGLE_BUTTON (glade_xml_get_widget (gui->xml, "user_passwd_random"));
+	gui->pwd_random_label = GTK_LABEL (glade_xml_get_widget (gui->xml, "user_passwd_random_label"));
+	gui->pwd_random_new = glade_xml_get_widget (gui->xml, "user_passwd_random_new");
 	gui->pwd_frame = glade_xml_get_widget (gui->xml, "user_passwd_frame");
 	gui->pwd1 = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_passwd_entry1"));
 	gui->pwd2 = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_passwd_entry2"));
@@ -184,6 +229,18 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 			    GTK_SIGNAL_FUNC (user_account_gui_member_select), gui);
 	gtk_signal_connect (GTK_OBJECT (gui->member), "unselect_row",
 			    GTK_SIGNAL_FUNC (user_account_gui_member_select), gui);
+
+	gtk_signal_connect (GTK_OBJECT (gui->pwd_manual), "toggled",
+			    GTK_SIGNAL_FUNC (user_account_passwd_toggled), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->pwd_random), "toggled",
+			    GTK_SIGNAL_FUNC (user_account_passwd_toggled), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->pwd_random_new), "clicked",
+			    GTK_SIGNAL_FUNC (user_account_passwd_random_new), gui);
+
+	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "changed",
+			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->pwd2), "changed",
+			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
 	
 	return gui;
 }
@@ -234,7 +291,6 @@ user_account_groups_setup (GtkCombo *combo, xmlNodePtr node)
 	g_list_free (items);
 }
 
-
 static void
 setup_advanced_add (UserAccountGui *gui, GtkWidget *notebook)
 {
@@ -264,7 +320,7 @@ setup_advanced_add (UserAccountGui *gui, GtkWidget *notebook)
 	gtk_widget_show_all (box);
 	
 	box = gtk_vbox_new (FALSE, 3);
-	gtk_widget_reparent (GTK_WIDGET (gui->pwd_frame), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->pwd_box), box);
 	gtk_widget_reparent (GTK_WIDGET (gui->optional), box);
 	label = gtk_label_new (_("Password"));
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
@@ -331,7 +387,7 @@ setup_advanced (UserAccountGui *gui, GtkWidget *notebook)
 	gtk_widget_show_all (box);
 	
 	box = gtk_vbox_new (FALSE, 3);
-	gtk_widget_reparent (GTK_WIDGET (gui->pwd_frame), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->pwd_box), box);
 	gtk_widget_reparent (GTK_WIDGET (gui->optional), box);
 	label = gtk_label_new (_("Password"));
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
@@ -354,6 +410,9 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 	my_gtk_entry_set_text (GTK_ENTRY (gui->shell->entry), account->shell);
 	gtk_spin_button_set_value (gui->uid, atoi (account->uid));
 
+	gtk_clist_set_auto_sort (gui->all, TRUE);
+	gtk_clist_set_auto_sort (gui->member, TRUE);
+	
 	my_gtk_entry_set_text (GTK_ENTRY (gui->group->entry), account->group);
 	my_gtk_clist_append_items (gui->member, (GList *)account->extra_groups);
 	/* Others */
@@ -365,11 +424,33 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 	gtk_spin_button_set_value (gui->max, account->pwd_maxdays);
 	gtk_spin_button_set_value (gui->days, account->pwd_warndays);
 
-	/* Make notebook */
-	notebook = gtk_notebook_new ();
-	gtk_widget_show (notebook);
-	gtk_container_add (GTK_CONTAINER (top), notebook);
+	if (account->password && (strlen (account->password) > 2)) {
+		gtk_signal_handler_block_by_func (GTK_OBJECT (gui->pwd1),
+						  user_account_passwd_changed,
+						  gui);
+		gtk_signal_handler_block_by_func (GTK_OBJECT (gui->pwd2),
+						  user_account_passwd_changed,
+						  gui);
+						  
+		gtk_entry_set_text (gui->pwd1, "********");
+		gtk_entry_set_text (gui->pwd2, "********");
 
+		gtk_signal_handler_unblock_by_func (GTK_OBJECT (gui->pwd1),
+						  user_account_passwd_changed,
+						  gui);
+		gtk_signal_handler_unblock_by_func (GTK_OBJECT (gui->pwd2),
+						  user_account_passwd_changed,
+						  gui);
+	}
+	
+#ifdef HAVE_LIBCRACK
+	gtk_widget_show (GTK_WIDGET (gui->quality));
+	gtk_toggle_button_set_active (gui->quality, TRUE);
+#endif
+	/* Make notebook */
+
+	notebook = gtk_notebook_new ();
+	
 	if (account->new) {
 		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
 			setup_advanced_add (gui, notebook);
@@ -382,7 +463,11 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_BASIC)
 			setup_basic (gui, notebook);
 	}
-	
+
+	if (top) {
+		gtk_widget_show (notebook);
+		gtk_container_add (GTK_CONTAINER (top), notebook);
+	}
 }
 
 gboolean
@@ -430,6 +515,28 @@ user_account_gui_save (UserAccountGui *gui)
 		goto err;
 	account->group = g_strdup (buf);
 
+	/* Password */
+	if (gtk_toggle_button_get_active (gui->pwd_random)) {
+		gtk_label_get (gui->pwd_random_label, &buf);
+		account->password = g_strdup (buf);
+	} else {
+		gboolean changed1 = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (gui->pwd1),
+							 USER_ACCOUNT_PASSWD_CHANGED));
+		gboolean changed2 = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (gui->pwd2),
+							 USER_ACCOUNT_PASSWD_CHANGED));
+
+		if (changed1 || changed2) {
+			gchar *buf1 = gtk_entry_get_text (gui->pwd1);
+
+			buf = gtk_entry_get_text (gui->pwd2);
+			if ((error = passwd_check (buf1, buf, gtk_toggle_button_get_active (gui->quality))))
+				goto err;
+			else
+				account->password = g_strdup (buf);
+		} else
+			account->password = NULL;
+	}	
+	
 	account->pwd_mindays = gtk_spin_button_get_value_as_int (gui->min);
 	account->pwd_maxdays = gtk_spin_button_get_value_as_int (gui->max);
 	account->pwd_warndays = gtk_spin_button_get_value_as_int (gui->days);

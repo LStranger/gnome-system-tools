@@ -181,7 +181,7 @@ password_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static gboolean
 password_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-	gchar *pwd1, *pwd2;
+	gchar *pwd1, *pwd2, *error;
 	gboolean quality;
 	UserDruid *config = data;
 
@@ -189,10 +189,11 @@ password_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	pwd2 = gtk_entry_get_text (config->gui->pwd2);
 	quality = gtk_toggle_button_get_active (config->gui->quality);
 	
-	if (strlen (pwd1) > 0 && passwd_check (NULL, pwd1, pwd2, quality))
-		return FALSE;
-	else
+	if ((error = passwd_check (pwd1, pwd2, quality))) {
+		user_account_gui_error (GTK_WINDOW (config->gui->top), error);
 		return TRUE;
+	} else
+		return FALSE;
 }
 
 static void
@@ -312,7 +313,7 @@ construct (UserDruid *druid)
 	}
 	gtk_signal_connect (GTK_OBJECT (druid->druid), "cancel", druid_cancel, druid);
 	
-	user_account_gui_setup (druid->gui, GTK_WIDGET (druid));
+	user_account_gui_setup (druid->gui, NULL);
 	
 	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "changed", identity_changed, druid);
 	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "activate", identity_login_activate, druid);

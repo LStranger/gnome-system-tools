@@ -53,6 +53,12 @@ typedef struct {
 	GtkWidget *remove;
 	GtkWidget *set_primary;
 
+	GtkWidget *pwd_box;
+	GtkNotebook *pwd_notebook;
+	GtkToggleButton *pwd_manual;
+	GtkToggleButton *pwd_random;
+	GtkLabel *pwd_random_label;
+	GtkWidget *pwd_random_new;
 	GtkWidget *pwd_frame;
 	GtkToggleButton *quality;
 	GtkEntry *pwd1;

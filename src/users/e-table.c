@@ -821,7 +821,7 @@ tables_update_content (void)
 }
 
 void
-tables_set_state (gboolean state)
+tables_update_complexity (XstDialogComplexity complexity)
 {
 	ETable *u_table, *g_table;
 	gchar *user_state, *group_state;
@@ -829,12 +829,17 @@ tables_set_state (gboolean state)
 	u_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	g_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
 
-	if (state) {
-		user_state =  xst_conf_get_string (tool, "user_state_adv");
-		group_state = xst_conf_get_string (tool, "group_state_adv");
-	} else {
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
 		user_state =  xst_conf_get_string (tool, "user_state_basic");
 		group_state = xst_conf_get_string (tool, "group_state_basic");
+		break;
+	case XST_DIALOG_ADVANCED:
+		user_state =  xst_conf_get_string (tool, "user_state_adv");
+		group_state = xst_conf_get_string (tool, "group_state_adv");
+		break;
+	default:
+		g_warning ("update_notebook_complexity: Unsupported complexity.");
 	}
 
 	e_table_set_state (u_table, user_state);

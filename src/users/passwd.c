@@ -173,8 +173,8 @@ rand_str (gchar *str, gint len)
 	return str;
 }
 
-static gchar *
-get_random (void)
+gchar *
+passwd_get_random (void)
 {
 	gchar *random_passwd;
 	
@@ -187,8 +187,8 @@ get_random (void)
 	return random_passwd;
 }
 
-gboolean
-passwd_check (GtkWindow *xd, gchar *pwd1, gchar *pwd2, gboolean check_quality)
+gchar *
+passwd_check (gchar *pwd1, gchar *pwd2, gboolean check_quality)
 {
 #ifdef HAVE_LIBCRACK
 	gchar *check_err;
@@ -197,21 +197,13 @@ passwd_check (GtkWindow *xd, gchar *pwd1, gchar *pwd2, gboolean check_quality)
 	g_return_val_if_fail (pwd2 != NULL, FALSE);
 
 	if (strcmp (pwd1, pwd2))
-		return FALSE;
+		return g_strdup (_("Passwords doesn't match."));
 	
 #ifdef HAVE_LIBCRACK
-	if (check_quality && (check_err = FascistCheck (pwd1, CRACK_DICT_PATH))) {
-		GtkWidget *d;
-		gchar *msg;
-		
-		msg = g_strdup_printf (_("Bad password: %s.\nPlease try with a new password."), check_err);
-		d = gnome_error_dialog_parented (msg, xd);
-		gnome_dialog_run (GNOME_DIALOG (d));
-		g_free (msg);
-		return FALSE;
-	}
+	if (check_quality && (check_err = FascistCheck (pwd1, CRACK_DICT_PATH)))
+		return g_strdup_printf (_("Bad password: %s.\nPlease try with a new password."), check_err); 
 #endif
-	return TRUE;
+	return NULL;
 }	
 
 gchar *
@@ -223,7 +215,7 @@ passwd_set (xmlNodePtr node, const gchar *pwd)
 	g_return_val_if_fail (node != NULL, NULL);
 
 	if (!pwd)
-		password = get_random ();
+		password = passwd_get_random (); /* TODO: memory leak, free it! */
 	else
 		password = (gchar *)pwd;
 

@@ -72,7 +72,7 @@ void populate_all_tables (void);
 extern guint create_tables (void);
 extern void destroy_tables (void);
 void tables_update_content (void);
-void tables_set_state (gboolean state);
+void tables_update_complexity (XstDialogComplexity complexity);
 xmlNodePtr get_selected_node (void);
 gboolean delete_selected_node (gint tbl);
 void current_table_update_row (gint tbl);

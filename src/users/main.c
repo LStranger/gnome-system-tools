@@ -93,9 +93,30 @@ static const XstWidgetPolicy policies[] = {
 };
 
 static void
+update_notebook_complexity (XstDialogComplexity complexity)
+{
+	GtkWidget *notebook = xst_dialog_get_widget (tool->main_dialog, "notebook");
+
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_page (GTK_NOTEBOOK (notebook), 0);
+		break;
+	case XST_DIALOG_ADVANCED:
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+		break;
+	default:
+		g_warning ("update_notebook_complexity: Unsupported complexity.");
+	}
+}
+
+static void
 update_complexity (void)
 {
-	tables_set_state (tool->main_dialog->complexity == XST_DIALOG_ADVANCED);
+	XstDialogComplexity complexity = tool->main_dialog->complexity;
+
+	update_notebook_complexity (complexity);
+	tables_update_complexity (complexity);
 }
 
 static void
@@ -120,8 +141,7 @@ config_clists (void)
 {
 	XstDialog *xd;
 	gint i;
-	gchar *lists[] = {"group_settings_all", "group_settings_members",
-			  "user_settings_gall", "user_settings_gmember", NULL};
+	gchar *lists[] = {"group_settings_all", "group_settings_members", NULL};
 
 	xd = tool->main_dialog;
 
@@ -232,12 +252,14 @@ static void
 main_window_prepare (void)
 {
 	GtkToggleButton *toggle;
-	/* For random password generation. */
 
+	/* For random password generation. */
 	srand (time (NULL));
 
 	toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "showall"));
 	gtk_toggle_button_set_active (toggle, xst_conf_get_boolean (tool, "showall"));
+
+	update_notebook_complexity (tool->main_dialog->complexity);
 	
 	config_clists ();
 	create_tables ();

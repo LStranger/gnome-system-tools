@@ -44,6 +44,7 @@ void user_set_groups     (xmlNodePtr user_node, GSList *list);
 #define user_value_pwd_maxdays(node) (generic_value_integer (node, "passwd_max_life"))
 #define user_value_pwd_mindays(node) (generic_value_integer (node, "passwd_min_lide"))
 #define user_value_pwd_warndays(node) (generic_value_integer (node, "passwd_exp_warn"))
+#define user_value_password(node)    (generic_value_string (node, "password"))
 
 #define group_value_name(node)       (generic_value_string (node, "name"))
 #define group_value_gid_string(node) (generic_value_string (node, "gid"))

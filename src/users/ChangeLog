@@ -1,3 +1,26 @@
+2001-05-16  Tambet Ingo  <tambet@ximian.com>
+
+	* user_settings.c (user_account_passwd_toggled): Implement.
+	(user_account_passwd_random_new): Implement.
+	(user_account_passwd_changed): Implement.
+	(user_account_gui_new): Add more useful widgets to gui struct. Connect their signals.
+	(user_account_gui_setup): Set asteriscs if password exists.
+	Show password quality checkbox only if libcrack is installed.
+	(user_account_gui_save): Save password if modified.
+
+	* user_group.c (user_account_save): Set password too.
+	(user_account_get_by_node): Get password.
+
+	* passwd.c (passwd_get_random): Made it public, unified with other checks.
+
+	* main.c (config_clists): Removed user dialog's clists from here.
+
+	* e-table.c (tables_set_state): Renamed to (tables_update_complexity). Changed
+	parameter from gboolean to XstDialogComplexity.
+
+	* main.c (update_complexity): Hide/Show Group's tab.
+	(update_notebook_complexity): Implement.
+
 2001-05-15  Tambet Ingo  <tambet@ximian.com>
 
 	* user_group.c (user_account_add): Removed, unified with (user_account_save).

@@ -32,6 +32,7 @@
 #include "user_settings.h"
 #include "profile.h"
 #include "user-group-xml.h"
+#include "passwd.h"
 
 extern XstTool *tool;
 
@@ -1238,7 +1239,7 @@ user_account_get_by_node (xmlNodePtr node)
 	account->uid = user_value_uid_string (node);
 	account->home = user_value_home (node);
 	account->shell = user_value_shell (node);
-/* TODO:	account->password = user_value_password (node); */
+	account->password = user_value_password (node);
 	account->group = user_value_group (node);
 		
 	account->pwd_maxdays = user_value_pwd_maxdays (node);
@@ -1280,7 +1281,9 @@ user_account_save (UserAccount *account)
 	user_set_value_pwd_warndays (node, account->pwd_warndays);
 
 	user_set_groups (node, account->extra_groups);
-/* TODO: set password */
+
+	if (account->password)
+		passwd_set (node, account->password);
 
 	current_table_update_row (TABLE_USER);
 	xst_dialog_modify (tool->main_dialog);
@@ -1289,12 +1292,13 @@ user_account_save (UserAccount *account)
 void
 user_account_destroy (UserAccount *account)
 {
-	if (account->name) g_free (account->name);
-	if (account->comment) g_free (account->comment);
-	if (account->home) g_free (account->home);
-	if (account->shell) g_free (account->shell);
-	if (account->uid) g_free (account->uid);
-	if (account->group) g_free (account->group);
+	if (account->name)     g_free (account->name);
+	if (account->comment)  g_free (account->comment);
+	if (account->home)     g_free (account->home);
+	if (account->shell)    g_free (account->shell);
+	if (account->uid)      g_free (account->uid);
+	if (account->group)    g_free (account->group);
+	if (account->password) g_free (account->password);
 
 	if (account->extra_groups) g_slist_free (account->extra_groups);
 	
