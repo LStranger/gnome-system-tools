@@ -245,29 +245,16 @@ static void
 update_status (Connection *cxn)
 {
 	gnome_pixmap_load_file (GNOME_PIXMAP (W ("status_icon")),
-				cxn->active
+				GTK_TOGGLE_BUTTON (W ("status_button"))->active
 				? PIXMAPS_DIR "/gnome-light-on.png"
 				: PIXMAPS_DIR "/gnome-light-off.png");
-
-	gtk_label_set_text (GTK_LABEL (W("status_label")),
-			    cxn->active
-			    ? _("This device is currently active.")
-			    : _("This device is not currently active."));
-
-	gtk_label_set_text (GTK_LABEL (W("status_button_label")),
-			    cxn->active
-			    ? _("Deactivate")
-			    : _("Activate"));
 }
 
 void
-on_status_button_clicked (GtkWidget *w, Connection *cxn)
+on_status_button_toggled (GtkWidget *w, Connection *cxn)
 {
-	cxn->active = !cxn->active;
-
 	connection_set_modified (cxn, TRUE);
 	update_status (cxn);
-	update_row (cxn);
 }
 
 void
@@ -282,15 +269,16 @@ empty_general (Connection *cxn)
 	g_free (cxn->description);
 	cxn->description = gtk_editable_get_chars (GTK_EDITABLE (W ("connection_desc")), 0, -1);
 		
-
 	cxn->autoboot = GTK_TOGGLE_BUTTON (W ("status_boot"))->active;
-	cxn->dhcp_dns = GTK_TOGGLE_BUTTON (W ("status_dhcp"))->active;
+	cxn->active = GTK_TOGGLE_BUTTON (W ("status_button"))->active;
 }
 
 static void
 empty_ip (Connection *cxn)
 {
 	cxn->ip_config = cxn->tmp_ip_config;
+
+	cxn->dhcp_dns = GTK_TOGGLE_BUTTON (W ("status_dhcp"))->active;
 
 	g_free (cxn->ip);
 	cxn->ip = gtk_editable_get_chars (GTK_EDITABLE (W ("ip_address")), 0, -1);
@@ -404,10 +392,11 @@ fill_general (Connection *cxn)
 	gtk_entry_set_text (GTK_ENTRY (W ("connection_desc")),
 			    cxn->description);
 
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_button")), cxn->dhcp_dns);
+
 	update_status (cxn);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_boot")), cxn->autoboot);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_dhcp")), cxn->dhcp_dns);
 }
 
 static void
@@ -417,6 +406,7 @@ update_ip_config (Connection *cxn)
 
 	ip = cxn->tmp_ip_config;
 
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_dhcp")), cxn->dhcp_dns);
 	gtk_widget_set_sensitive (W ("status_dhcp"), ip != IP_MANUAL);
 	gtk_widget_set_sensitive (W ("ip_table"), ip == IP_MANUAL);
 }
@@ -509,7 +499,7 @@ hookup_callbacks (Connection *cxn)
 		{ "on_connection_apply_clicked", on_connection_apply_clicked },
 		{ "on_connection_close_clicked", on_connection_close_clicked },
 		{ "on_connection_config_dialog_delete_event", on_connection_config_dialog_delete_event },
-		{ "on_status_button_clicked", on_status_button_clicked },
+		{ "on_status_button_toggled", on_status_button_toggled },
 		{ "connection_modified", connection_modified },
 		{ "connection_destroy", connection_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
