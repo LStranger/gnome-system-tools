@@ -201,8 +201,8 @@ check_profile_delete (xmlNodePtr node)
 
 	if (is_default)
 	{
-		primary_text   = g_strdup (_("The default profile must not be deleted."));
-		secondary_text = g_strdup (_("This is the default profile for setting new users' data"));
+		primary_text   = g_strdup (_("The default profile should not be deleted"));
+		secondary_text = g_strdup (_("This profile is used for setting default data for new users"));
 		show_error_message ("profile_settings_dialog", primary_text, secondary_text);
 		g_free (profile_name);
 		g_free (primary_text);
@@ -211,8 +211,8 @@ check_profile_delete (xmlNodePtr node)
 		return FALSE;
 	}
 
-	primary_text   = g_strdup_printf (_("Delete profile \"%s\""), profile_name);
-	secondary_text = g_strdup_printf (_("You won't be able to recover this profile after hitting \"apply\""));
+	primary_text   = g_strdup_printf (_("Delete profile \"%s\"?"), profile_name);
+	secondary_text = g_strdup_printf (_("You will not be able to recover this profile after pressing \"apply\""));
 
 	dialog = gst_hig_dialog_new (GTK_WINDOW (parent),
 				     GTK_DIALOG_MODAL,

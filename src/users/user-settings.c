@@ -101,7 +101,7 @@ check_user_delete (xmlNodePtr node)
 
 	if (strcmp (login, "root") == 0) {
 		show_error_message ("user_settings_dialog",
-				    _("The root user can not be deleted."),
+				    _("The \"root\" user should not be deleted"),
 				    _("This would leave the system unusable"));
 		g_free (login);
 		return FALSE;
@@ -112,12 +112,12 @@ check_user_delete (xmlNodePtr node)
 				     GST_HIG_MESSAGE_WARNING,
 				     NULL,
 				     "This will disable the access of this user to the system, "
-				     "but the user's home directory wont be deleted",
+				     "but his home directory will not be deleted",
 				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
 				     NULL);
 	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
-					 _("Are you sure you want to delete user %s?"), login);
+					 _("Are you sure you want to delete user \"%s\"?"), login);
 
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
@@ -332,39 +332,40 @@ is_login_valid (xmlNodePtr node, const gchar *login)
 
 	/* If !empty. */
 	if (strlen (login) < 1) {
-		primary_text = g_strdup (_("The username is empty."));
-		secondary_text = g_strdup (_("A username must be specified"));
+		primary_text = g_strdup (_("The user name is empty"));
+		secondary_text = g_strdup (_("A user name must be specified"));
 	}
 
 	/* If too long. */
 #ifdef __FreeBSD__
 	else if (strlen (login) > UT_NAMESIZE) { /*  = sizeof (ut.ut_name) */
-		primary_text   = g_strdup (_("The username is too long."));
-		secondary_text = g_strdup_printf (_("The username should have less than %i characters for being valid"), UT_NAMESIZE);
+		primary_text   = g_strdup (_("The user name is too long"));
+		secondary_text = g_strdup_printf (_("The user name should have less than %i characters for being valid"), UT_NAMESIZE);
 	}
 #else
 	else if (strlen (login) > sizeof (ut.ut_user)) {
-		primary_text   = g_strdup (_("The username is too long."));
-		secondary_text = g_strdup_printf (_("The username should have less than %i characters for being valid"), sizeof (ut.ut_user));
+		primary_text   = g_strdup (_("The user name is too long"));
+		secondary_text = g_strdup_printf (_("The user name should have less than %i characters for being valid"), sizeof (ut.ut_user));
 	}
 #endif
 
 	/* If user being modified is root */
 	else if ((is_user_root (node)) && (strcmp (login, "root") != 0)) {
-		primary_text   = g_strdup (_("Root username shouldn't be modified."));
+		primary_text   = g_strdup (_("User name for the \"root\" user should not be modified"));
 	        secondary_text = g_strdup (_("This would leave the system unusable"));
 	}
 
 	/* if valid. */
 	else if (!is_valid_name (login)) {
-		primary_text   = g_strdup (_("Username has invalid characters"));
-		secondary_text = g_strdup (_("Please set a valid username consisting of a lower case letter followed by lower case letters and numbers."));
+		primary_text   = g_strdup (_("User name has invalid characters"));
+		secondary_text = g_strdup (_("Please set a valid user name consisting of "
+					     "a lower case letter followed by lower case letters and numbers"));
 	}
 
 	/* if !exist. */
 	else if (node_exists (node, "login", login)) {
-		primary_text   = g_strdup_printf (_("Username \"%s\" already exists"), login);
-		secondary_text = g_strdup (_("Please select a different username"));
+		primary_text   = g_strdup_printf (_("User name \"%s\" already exists"), login);
+		secondary_text = g_strdup (_("Please select a different user name"));
 	}
 
 	/* If anything is wrong. */
@@ -389,8 +390,8 @@ is_comment_valid (gchar *name, gchar *location, gchar *wphone, gchar *hphone)
 	
 	for (i = 0; i < strlen (comment); i++) {
 		if (iscntrl (comment[i]) || comment[i] == ',' || comment[i] == '=' || comment[i] == ':') {
-			primary_text   = g_strdup_printf (N_("Invalid character in comment."));
-			secondary_text = g_strdup_printf (N_("Check that invalid character '%c' is not used"), comment[i]);
+			primary_text   = g_strdup_printf (N_("Invalid character \"%c\" in comment"), comment[i]);
+			secondary_text = g_strdup (N_("Check that this character is not used"));
 			break;
 		}
 	}
@@ -438,14 +439,14 @@ is_home_valid (xmlNodePtr node, gchar *home)
 	struct stat s;
 	
 	if (!home || (strlen (home) < 1)) {
-		primary_text   = g_strdup (N_("Home directory must not be empty."));
+		primary_text   = g_strdup (N_("Home directory should not be empty"));
 		secondary_text = g_strdup (N_("Make sure you provide a home directory"));
 	} else if (*home != '/') {
 		primary_text   = g_strdup (N_("Incomplete path in home directory"));
-		secondary_text = g_strdup (N_("Please enter full path for home directory.\n"
+		secondary_text = g_strdup (N_("Please enter full path for home directory\n"
 					      "<span size=\"smaller\">i.e.: /home/john</span>"));
 	} else if ((is_user_root (node)) && (strcmp (home, "/root") != 0)) {
-		primary_text   = g_strdup (N_("root home shouldn't be modified."));
+		primary_text   = g_strdup (N_("Home directory of the \"root\" user should not be modified"));
 		secondary_text = g_strdup (N_("This would leave the system unusable"));
 	}
 
@@ -479,9 +480,9 @@ is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 
 	if (!is_valid_id (uid)) {
 		primary_text   = g_strdup (N_("Invalid user ID"));
-		secondary_text = g_strdup (N_("User id must be a positive number."));
+		secondary_text = g_strdup (N_("User ID must be a positive number"));
 	} else if ((is_user_root (node)) && (strcmp (uid, "0") != 0)) {
-		primary_text   = g_strdup (N_("root user ID should not be modified"));
+		primary_text   = g_strdup (N_("User ID of the \"root\" user should not be modified"));
 		secondary_text = g_strdup (N_("This would leave the system unusable"));
 	}
 	
@@ -521,7 +522,7 @@ is_shell_valid (const gchar *val)
 	
 	if (strlen (val) > 0 && *val != '/') {
 		primary_text   = g_strdup (N_("Incomplete path in shell"));
-		secondary_text = g_strdup (N_("Please enter full path for shell.\n"
+		secondary_text = g_strdup (N_("Please enter full path for shell\n"
 					      "<span size=\"smaller\">i.e.: /bin/sh</span>"));
 	}
 
@@ -543,10 +544,10 @@ is_password_valid (const gchar *passwd1, const gchar *passwd2)
 	gchar *secondary_text = NULL;
 	
 	if (!passwd1 || !passwd2 || strlen (passwd1) < 1 || strlen (passwd2) < 1) {
-		primary_text   = g_strdup (N_("Password can not be empty."));
+		primary_text   = g_strdup (N_("Password should not be empty"));
 		secondary_text = g_strdup (N_("A password must be provided"));
 	} else if (strcmp (passwd1, passwd2) != 0) {
-		primary_text   = g_strdup (N_("Password confirmation isn't correct."));
+		primary_text   = g_strdup (N_("Password confirmation isn't correct"));
 		secondary_text = g_strdup (N_("Check that you have provided the same password in both text fields"));
 	}
 

@@ -161,15 +161,15 @@ is_group_gid_valid (xmlNodePtr group_node, const gchar* gid)
 
 	if (!is_valid_id (gid)) {
 		primary_text   = g_strdup (_("Invalid group ID"));
-		secondary_text = g_strdup (_("Group ID must be a positive number."));
+		secondary_text = g_strdup (_("Group ID must be a positive number"));
 	} else if (is_group_root (group_node) && (strcmp (gid, "0") != 0)) {
 		/* if group is root */
-		primary_text   = g_strdup (_("root group ID should not be modified"));
+		primary_text   = g_strdup (_("Group ID of the \"root\" user should not be modified"));
 		secondary_text = g_strdup (_("This would leave the system unusable"));
 	} else if (node_exists (group_node, "gid", gid)) {
 		/* Check if gid is available */
 		primary_text   = g_strdup (_("Invalid group ID"));
-		secondary_text = g_strdup_printf (_("Group ID %s already exists."), gid);
+		secondary_text = g_strdup_printf (_("Group ID %s already exists"), gid);
 	}
 	
 	if (primary_text) {
@@ -194,23 +194,23 @@ is_group_name_valid (xmlNodePtr node, const gchar *name)
 
 	if (strlen (name) < 1) {
 		/* If empty. */
-		primary_text   = g_strdup (_("Group name is empty."));
+		primary_text   = g_strdup (_("Group name is empty"));
 		secondary_text = g_strdup (_("A group name must be specified"));
 	} else if (strlen (name) > 16) {
 		/* If too long. */
-		primary_text   = g_strdup (_("The group name is too long."));
+		primary_text   = g_strdup (_("The group name is too long"));
 		secondary_text = g_strdup_printf (_("The group name should have less than %i characters for being valid"), 16);
 	} else if (!is_valid_name (name)) {
 		/* if invalid. */
 		primary_text   = g_strdup (_("Group name has invalid characters"));
-		secondary_text = g_strdup (_("Please set a valid group name, using only lower case letters."));
+		secondary_text = g_strdup (_("Please set a valid group name, using only lower case letters"));
 	} else if (node_exists (node, "name", name)) {
 		/* if !exist. */
-		primary_text   = g_strdup_printf (_("Group \"%s\" already exists."), name);
+		primary_text   = g_strdup_printf (_("Group \"%s\" already exists"), name);
 		secondary_text = g_strdup (_("Please select a different group name"));
 	} else if (is_group_root (node) && (strcmp (name, "root") != 0)) {
 		/* if it's the root group */
-		primary_text   = g_strdup (_("Root group name should not be modified"));
+		primary_text   = g_strdup (_("Group name of the \"root\" user should not be modified"));
 		secondary_text = g_strdup (_("This would leave the system unusable"));
 	}
 
@@ -280,7 +280,7 @@ check_group_delete (xmlNodePtr node)
 	}
 
 	if (strcmp (name, "root") == 0) {
-		primary_text   = g_strdup (_("Root group shouldn't be deleted."));
+		primary_text   = g_strdup (_("The group \"root\" should not be deleted"));
 	        secondary_text = g_strdup (_("This would leave the system unusable"));
 		show_error_message ("group_settings_dialog", primary_text, secondary_text);
 
@@ -300,7 +300,7 @@ check_group_delete (xmlNodePtr node)
 				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
 				     NULL);
 	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
-					 _("Are you sure you want to delete group %s?"), name);
+					 _("Are you sure you want to delete group \"%s\"?"), name);
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 	g_free (name);
