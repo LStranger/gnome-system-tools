@@ -152,11 +152,31 @@ boot_image_destroy (BootImage *image)
 /* Checking functions */
 
 static gboolean
+boot_image_valid_name_chars (const gchar *string)
+{
+	xmlDocPtr  doc;
+	xmlNodePtr root;
+	gchar *value;
+	gboolean res;
+	
+	doc = xst_tool_run_get_directive (tool, NULL, "verify", "entrylabel", string, NULL);
+	root = xst_xml_doc_get_root (doc);
+
+	value = xst_xml_get_child_content (root, "result");
+	res =  (strcmp (value, "success"))? FALSE: TRUE;
+
+	g_free (value);
+	xst_xml_doc_destroy (doc);
+	
+	return res;
+}
+
+static gboolean
 boot_image_valid_chars (const gchar *string)
 {
 	gchar *s;
 
-	s = string;
+	s = (gchar *) string;
 	while (*s != '\0') {
 		if (isalnum (*s) || *s == '-' || *s == '/' || *s == '.' || *s == '_') 
 			s++;
@@ -234,7 +254,7 @@ boot_image_valid_label (BootImage *image)
 		return error;
 	}
 	
-	if (!boot_image_valid_chars (image->label)) {
+	if (!boot_image_valid_name_chars (image->label)) {
 		error = g_strdup_printf (_("Invalid image name: '%s'"), image->label);
 		return error;
 	}
@@ -268,7 +288,7 @@ boot_image_valid_root (BootImage *image)
 		return NULL; /* Not required */
 	
 	if (!boot_image_valid_chars (image->root)) {
-		error = g_strdup_printf (N_("Invalid root device: '%s'"), image->root);
+		error = g_strdup_printf (_("Invalid root device: '%s'"), image->root);
 		return error;
 	}
 
