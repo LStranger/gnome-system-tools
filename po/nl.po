@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-16 03:58+0100\n"
+"POT-Creation-Date: 2003-11-21 19:56+0100\n"
 "PO-Revision-Date: 2003-11-16 15:32+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -168,10 +168,6 @@ msgid "Ask at boot"
 msgstr "Vragen bij opstarten"
 
 #: interfaces/boot.glade.in.h:20
-msgid "Boot Image Assistant"
-msgstr "Opstart-Image-Assistent"
-
-#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -181,13 +177,19 @@ msgstr ""
 "moet worden. Optioneel kunnen extra parameters worden opgegeven die aan de "
 "kernel worden meegegeven bij het opstarten."
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:21
 msgid "Click \"Forward\" to continue"
 msgstr "Klik op \"Volgende\" om verder te gaan"
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:22
 msgid "Confirmation"
 msgstr "Bevestiging"
+
+#. set window title
+#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
+#: src/boot/boot-druid.c:441
+msgid "Creating a new boot image"
+msgstr "Maken van een nieuw opstart-image"
 
 #: interfaces/boot.glade.in.h:24
 msgid "Enable IDE SCSI emulation"
@@ -205,68 +207,54 @@ msgstr ""
 msgid "Finished"
 msgstr "Klaar"
 
-#: interfaces/boot.glade.in.h:27
-msgid "Image Settings (Step 1 of 2)"
-msgstr "Image-instellingen (stap 1 van 2)"
-
-#: interfaces/boot.glade.in.h:28
-msgid "Image Settings (Step 2 of 2)"
-msgstr "Image-instellingen (stap 2 van 2)"
-
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:49
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
 #: src/network/connection.c:1786
 msgid "Manual"
 msgstr "Handmatig"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:28
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Instellingen wijzigen voor een besturingssysteem of kernel."
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:29
 msgid "Number of colors:"
 msgstr "Aantal kleuren:"
 
-#: interfaces/boot.glade.in.h:32
-msgid "Other Operating System (Step 2 of 2)"
-msgstr "Ander besturingssysteem  (stap 2 van 2)"
-
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:30
 msgid "Other parameters:"
 msgstr "Overige parameters:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:31
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:32
 msgid "Protect with password"
 msgstr "Beveiligen met wachtwoord"
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:33
 msgid "Resolution:"
 msgstr "Resolutie:"
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:34
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr ""
 "Aantal seconden om te wachten alvorens het standaard besturingssysteem te "
 "starten"
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:35
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Geef de partitie op waarop het besturingssysteem is geinstalleerd."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:36
 msgid ""
-"The new boot image has been added.\n"
-"\n"
-"Please click \"Apply\" to save your changes."
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
 msgstr ""
-"Het nieuwe opstart-image is toegevoegd.\n"
-"\n"
-"Klik op \"Toepassen\" om de wijzigingen op te slaan."
+"Het nieuwe opstart-image is toegevoegd. Klik op \"Toepassen\" om de "
+"wijzigingen op te slaan."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:37
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -274,54 +262,54 @@ msgstr ""
 "Deze assistent is bedoeld om snel en makkelijk nieuwe opstart-images aan het "
 "systeem toe te voegen."
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:38
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Gebruik dit dialoogvenster om kernelparameters te bewerken."
 
-#: interfaces/boot.glade.in.h:44
+#: interfaces/boot.glade.in.h:39
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Dit programma kan gebruikt worden om de besturingssystemen in te stellen "
 "waaruit gekozen kan worden bij het opstarten."
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:40
 msgid "Video modes (only frame buffer)"
 msgstr "Videomodi (alleen bij framebuffer)"
 
-#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:85
+#: interfaces/boot.glade.in.h:41 interfaces/network.glade.in.h:85
 msgid "_Add..."
 msgstr "Toe_voegen..."
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:42
 msgid "_Device:"
 msgstr "_Apparaat:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:43
 msgid "_Edit"
 msgstr "Be_werken"
 
-#: interfaces/boot.glade.in.h:49 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "_Initrd imagepad:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:45
 msgid "_Kernel image path:"
 msgstr "_Kernel imagepad:"
 
-#: interfaces/boot.glade.in.h:51
+#: interfaces/boot.glade.in.h:46
 msgid "_Name:"
 msgstr "_Naam:"
 
-#: interfaces/boot.glade.in.h:52
+#: interfaces/boot.glade.in.h:47
 msgid "_Operating system:"
 msgstr "Besturings_systeem:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:48
 msgid "_Parameters:"
 msgstr "_Parameters:"
 
-#: interfaces/boot.glade.in.h:54
+#: interfaces/boot.glade.in.h:49
 msgid "_Root file system device:"
 msgstr "_Root bestandssysteem apparaat:"
 
@@ -1231,10 +1219,14 @@ msgstr "profiles_table"
 msgid "vga=%s is not a valid vga value"
 msgstr "vga=%s is geen geldige vga-waarde"
 
-#. set window title
-#: src/boot/boot-druid.c:407
-msgid "Creating a new boot image"
-msgstr "Maken van een nieuw opstart-image"
+#: src/boot/boot-druid.c:430
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "Maken van een nieuw opstart-image (%d van %d)"
+
+#: src/boot/boot-druid.c:431
+msgid "Finished creating a new boot image"
+msgstr "Nieuw opstart-image aangemaakt"
 
 #: src/boot/boot-image.c:40 src/network/profile.c:466
 msgid "Unknown"
@@ -2051,6 +2043,18 @@ msgstr "Shell"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Gebruikers en groepen toevoegen of verwijderen"
+
+#~ msgid "Boot Image Assistant"
+#~ msgstr "Opstart-Image-Assistent"
+
+#~ msgid "Image Settings (Step 1 of 2)"
+#~ msgstr "Image-instellingen (stap 1 van 2)"
+
+#~ msgid "Image Settings (Step 2 of 2)"
+#~ msgstr "Image-instellingen (stap 2 van 2)"
+
+#~ msgid "Other Operating System (Step 2 of 2)"
+#~ msgstr "Ander besturingssysteem  (stap 2 van 2)"
 
 #~ msgid "New network connection"
 #~ msgstr "Nieuwe netwerkverbinding"
