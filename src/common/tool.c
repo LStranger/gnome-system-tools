@@ -193,8 +193,6 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 	{
 		/* Progressbar's death */
 
-		/* Wait a second before removing it */
-		sleep (1);
 		gtk_main_quit ();
 	}
 	else
@@ -215,14 +213,23 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 static void read_progress(int fd)
 {
 	guint input_id;
+	gint cb_id;
 
 	tool_context->progress_max = 0;
 	tool_context->read_state = TOOL_READ_PROGRESS_MAX;
 	input_id = gtk_input_add_full (fd, GDK_INPUT_READ, read_progress_tick,
 				       NULL, NULL, NULL);
-	gtk_main();
+	gtk_main ();
 
 	gtk_input_remove (input_id);
+
+	/* Set progress to 100% and wait a bit before closing display */
+  
+  gtk_progress_set_percentage (GTK_PROGRESS (tool_widget_get_common ("progress")),
+                               1.0);
+  cb_id = gtk_timeout_add (500, (GtkFunction) gtk_main_quit, NULL);
+  gtk_main ();
+  gtk_timeout_remove (cb_id);
 }
 
 
@@ -506,6 +513,11 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
 	ToolContext *tc;
 	GtkWidget *w0;
 	gchar *s;
+
+#ifdef ENABLE_NLS
+	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
+	textdomain (PACKAGE);
+#endif
 
 	s = g_strjoin ("_", task, "admin", NULL);
 	gnome_init (s, VERSION, argc, argv);
