@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-12 05:17+0100\n"
-"PO-Revision-Date: 2004-02-12 05:28+0100\n"
+"POT-Creation-Date: 2004-02-20 18:00+0100\n"
+"PO-Revision-Date: 2004-02-20 18:01+0100\n"
 "Last-Translator: Данило Шеган <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,10 @@ msgid ""
 "This key stores the bootloader that boot-admin will configure if there are "
 "more than one installed, if it's not set or isn't valid, then boot-admin "
 "will ask the user"
-msgstr "Овај кључ садржи подизач система који ће подесити boot-admin уколико је инсталиран више од једног, а ако није постављен или није исправан, онда ће boot-admin питати корисника"
+msgstr ""
+"Овај кључ садржи подизач система који ће подесити boot-admin уколико је "
+"инсталиран више од једног, а ако није постављен или није исправан, онда ће "
+"boot-admin питати корисника"
 
 #: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
@@ -604,7 +607,9 @@ msgstr "Особине спреге"
 msgid ""
 "List of domains that the system will try to append to a hostname if there "
 "isn't already one specified"
-msgstr "Списак домена које ће систем покушати да прилепи имену рачунара уколико домен већ није наведен"
+msgstr ""
+"Списак домена које ће систем покушати да прилепи имену рачунара уколико "
+"домен већ није наведен"
 
 #: interfaces/network.glade.in.h:54
 msgid "Modem _volume:"
@@ -945,10 +950,14 @@ msgstr ""
 "покренути"
 
 #: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "_Поређај списак по редоследу покретања"
+
+#: interfaces/services.glade.in.h:11
 msgid "_Start"
 msgstr "_Почни"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:12
 msgid "_Startup sequence:"
 msgstr "_Поступак подизања:"
 
@@ -1351,7 +1360,7 @@ msgstr "Програм за избор слике кернела"
 msgid "Boot Append Editor"
 msgstr "Додавање параметара при подизању оперативног система"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1359,12 +1368,12 @@ msgstr ""
 "Без барем једне датотеке са кернелом, \n"
 "Ваш систем се неће покренути.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Да ли сте сигурни да желите да уклоните '%s'?"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -1408,16 +1417,21 @@ msgid "/_Delete"
 msgstr "/_Уклони"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "Не може да се повеже са тим рачунаром."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "Лозинка коју сте навели је нетачна."
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr "Не могу да покренем „%s“. Проверите да ли сте овлашћени да то покренете."
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "Дошло је до неочекиване грешке."
 
@@ -1464,7 +1478,7 @@ msgstr ""
 "Догодила се грешка при раду позадинске скрипте,\n"
 "и подешавања не могу бити учитана."
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1473,7 +1487,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Добродошли у %s предиздање Гномових "
 "системских алата</span>"
 
-#: src/common/gst-tool.c:1513
+#: src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1487,15 +1501,15 @@ msgstr ""
 "сте упозорени. Хвала Вам на испробавању овог предиздања „Гномових системских "
 "алата“!"
 
-#: src/common/gst-tool.c:1534
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Упозорење"
 
-#: src/common/gst-tool.c:1554
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Ову поруку више не приказуј"
 
-#: src/common/gst-tool.c:1628
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "Гномови системски алати (GNOME System Tools)"
 
@@ -1698,10 +1712,14 @@ msgstr ""
 "Број телефона за приступ није попуњен. Унесите исправан број телефона да "
 "наставите."
 
-#: src/network/connection.c:2082
+#: src/network/connection.c:2079
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Уређај %s не постоји."
+
+#: src/network/connection.c:2081
+msgid " The loopback interface cannot be configured."
+msgstr " Кружна спрега се не може подесити."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1777,24 +1795,24 @@ msgstr "Име скупа подешавања"
 msgid "No description available."
 msgstr "Опис није доступан."
 
-#: src/services/callbacks.c:247
+#: src/services/callbacks.c:248
 msgid "Running"
 msgstr "Ради"
 
-#: src/services/callbacks.c:251
+#: src/services/callbacks.c:252
 msgid "Stopped"
 msgstr "Заустављено"
 
-#: src/services/callbacks.c:256
+#: src/services/callbacks.c:257
 msgid "Could not get info"
 msgstr "Не могу да сазнам податке"
 
-#: src/services/callbacks.c:322
+#: src/services/callbacks.c:323
 #, c-format
 msgid "Settings for service %s"
 msgstr "Подешавања за услугу %s"
 
-#: src/services/main.c:58
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "Подешавање услужних програма"
 
@@ -1806,7 +1824,7 @@ msgstr "Подесите који услужни програми се покр�
 msgid "Services"
 msgstr "Услужни програми"
 
-#: src/services/table.c:78
+#: src/services/table.c:79
 msgid "Active"
 msgstr "Активно"
 
@@ -1842,11 +1860,11 @@ msgstr "Промените време, датум и временску зону
 msgid "Time and Date"
 msgstr "Време и датум"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "Направи нову поставку"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Подешавања за поставку %s"
