@@ -33,12 +33,13 @@ Systemdirp = $(paneldir)/System
 
 panel_DATA = $(groups_files)
 
-EXTRA_DIST = $(directory).in $(groups_files)
+EXTRA_DIST = $(directory).in.in $(groups_files)
 CLEANFILES = $(directory) $(groups_files)
 
 
 all-local: $(directory)
 
+directory = System.directory
 groups = System
 groups_files = $(groups:=.directory)
 groups_in_files = $(groups_files:.directory=.directory.in)
