@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-22 08:24+0100\n"
-"PO-Revision-Date: 2003-12-22 08:31+0100\n"
+"POT-Creation-Date: 2003-12-26 23:08+0100\n"
+"PO-Revision-Date: 2003-12-26 23:12+0100\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -171,7 +171,10 @@ msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
 "to the kernel at boot time."
-msgstr "Izaberite koja datoteka sa jezgrom se koristi i koja deonica se priključuje kao korena deonica. Dodatno, takođe možete pridodati parametre koji se prosleđuju jezgru prilikom podizanja operativnog sistema."
+msgstr ""
+"Izaberite koja datoteka sa jezgrom se koristi i koja deonica se priključuje "
+"kao korena deonica. Dodatno, takođe možete pridodati parametre koji se "
+"prosleđuju jezgru prilikom podizanja operativnog sistema."
 
 #: interfaces/boot.glade.in.h:21
 msgid "Click \"Forward\" to continue"
@@ -380,12 +383,12 @@ msgid " "
 msgstr " "
 
 #: interfaces/disks.glade.in.h:3
-msgid "<b>CDROM Properties</b>"
-msgstr "<b>Osobine CD čitača</b>"
+msgid "<b>Configuration</b>"
+msgstr "<b>Podešavanje</b>"
 
 #: interfaces/disks.glade.in.h:4
-msgid "<b>Disk Properties</b>"
-msgstr "<b>Osobine diska</b>"
+msgid "<b>General Information</b>"
+msgstr "<b>Opšti podaci</b>"
 
 #: interfaces/disks.glade.in.h:5
 msgid "<b>Partition List</b>"
@@ -404,109 +407,133 @@ msgid "<b>Storage Properties</b>"
 msgstr "<b>Osobine diskova</b>"
 
 #: interfaces/disks.glade.in.h:9
+msgid "<b>Supported Features</b>"
+msgstr "<b>Podržane mogućnosti</b>"
+
+#: interfaces/disks.glade.in.h:10
 msgid ""
 "<big><b>Storage Settings</b></big>\n"
-"Configure your hard disks and storages devices."
+"Configure your hard disks and storage devices."
 msgstr ""
 "<big><b>Podešavanja diskova</b></big>\n"
-"Podesite vaše tvrde diskove i uređaje za smeštanje podataka"
-
-#: interfaces/disks.glade.in.h:11
-msgid "Can Read DVD"
-msgstr "Čita DVD"
+"Podesite vaše tvrde diskove i uređaje za smeštanje podataka."
 
 #: interfaces/disks.glade.in.h:12
-msgid "Can Write CD-R"
-msgstr "Piše CD-R"
+msgid "CD-ROM"
+msgstr "CD čitač"
 
 #: interfaces/disks.glade.in.h:13
-msgid "Can Write CD-RW"
-msgstr "Piše CD-RV"
-
-#: interfaces/disks.glade.in.h:14
-msgid "Can Write DVD-R"
-msgstr "Piše DVD-R"
-
-#: interfaces/disks.glade.in.h:15
-msgid "Can Write DVD-RAM"
-msgstr "Piše DVD-RAM"
-
-#: interfaces/disks.glade.in.h:16
-msgid "Can play audio"
-msgstr "Pušta zvuk"
-
-#: interfaces/disks.glade.in.h:17
-msgid "DMA"
-msgstr "DMA"
-
-#: interfaces/disks.glade.in.h:18
 msgid "Device: "
 msgstr "Uređaj: "
 
-#: interfaces/disks.glade.in.h:19
+#: interfaces/disks.glade.in.h:14
+msgid "Enable DMA"
+msgstr "Omogući DMA:"
+
+#: interfaces/disks.glade.in.h:15
 msgid "Extended 2"
 msgstr "Prošireni 2 (ext2)"
 
-#: interfaces/disks.glade.in.h:20
+#: interfaces/disks.glade.in.h:16
 msgid "Extended 3"
 msgstr "Prošireni 3 (ext3)"
 
-#: interfaces/disks.glade.in.h:21
+#: interfaces/disks.glade.in.h:17
 msgid "FAT"
 msgstr "FAT"
 
-#: interfaces/disks.glade.in.h:22
+#: interfaces/disks.glade.in.h:18
 msgid "Filesystem:"
 msgstr "Sistem datoteka:"
 
-#: interfaces/disks.glade.in.h:23
+#: interfaces/disks.glade.in.h:19 src/disks/disks-storage-disk.c:83
+msgid "Hard Disk"
+msgstr "Tvrdi disk"
+
+#: interfaces/disks.glade.in.h:20
 msgid "JFS"
 msgstr "JFS"
 
-#: interfaces/disks.glade.in.h:24
+#: interfaces/disks.glade.in.h:21
 msgid "Memory Swap"
 msgstr "Razmena memorije"
 
-#: interfaces/disks.glade.in.h:25
+#: interfaces/disks.glade.in.h:22
 msgid "Mount Point:"
 msgstr "Tačka priključenja:"
 
-#: interfaces/disks.glade.in.h:26
+#: interfaces/disks.glade.in.h:23
 msgid "NTFS"
 msgstr "NTFS"
 
-#: interfaces/disks.glade.in.h:27 src/disks/callbacks.c:312
+#: interfaces/disks.glade.in.h:24 src/disks/callbacks.c:312
 #: src/disks/callbacks.c:313 src/disks/callbacks.c:328
 #: src/disks/callbacks.c:329
 msgid "Not Available"
 msgstr "Nije dostupan."
 
-#: interfaces/disks.glade.in.h:28
+#: interfaces/disks.glade.in.h:25
 msgid "Partitions"
 msgstr "Deonice"
 
-#: interfaces/disks.glade.in.h:29
+#: interfaces/disks.glade.in.h:26
+msgid "Play Audio"
+msgstr "Pusti zvuk"
+
+#: interfaces/disks.glade.in.h:27
 msgid "Properties"
 msgstr "Osobine"
 
-#: interfaces/disks.glade.in.h:30
+#: interfaces/disks.glade.in.h:28
+msgid "Read DVD"
+msgstr "Čitaj DVD"
+
+#: interfaces/disks.glade.in.h:29
 msgid "Reiser FS"
 msgstr "Reiser FS"
 
-#: interfaces/disks.glade.in.h:31
+#: interfaces/disks.glade.in.h:30
 msgid "Size:"
 msgstr "Veličina:"
 
-#: interfaces/disks.glade.in.h:32
+#: interfaces/disks.glade.in.h:31
 msgid "Speed"
 msgstr "Brzina"
 
+#: interfaces/disks.glade.in.h:32
+msgid "Speed:"
+msgstr "Brzina:"
+
 #: interfaces/disks.glade.in.h:33
+msgid "Type:"
+msgstr "Tip:"
+
+#: interfaces/disks.glade.in.h:34
+msgid "Type: "
+msgstr "Tip: "
+
+#: interfaces/disks.glade.in.h:35
+msgid "Write CD-R"
+msgstr "Piši CD-R"
+
+#: interfaces/disks.glade.in.h:36
+msgid "Write CD-RW"
+msgstr "Piši CD-RV"
+
+#: interfaces/disks.glade.in.h:37
+msgid "Write DVD-R"
+msgstr "Piši DVD-R"
+
+#: interfaces/disks.glade.in.h:38
+msgid "Write DVD-RAM"
+msgstr "Piši DVD-RAM"
+
+#: interfaces/disks.glade.in.h:39
 msgid "XFS"
 msgstr "XFS"
 
 # ovo je najverovatnije „formatiraj“
-#: interfaces/disks.glade.in.h:34
+#: interfaces/disks.glade.in.h:40
 msgid "_Format"
 msgstr "_Formatiraj"
 
@@ -1617,10 +1644,6 @@ msgstr "/_Formatiraj"
 msgid "CDROM"
 msgstr "CD čitač"
 
-#: src/disks/disks-storage-disk.c:83
-msgid "Hard Disk"
-msgstr "Tvrdi disk"
-
 #: src/disks/disks-storage-floppy.c:71
 msgid "Floppy"
 msgstr "Disketa"
@@ -2237,6 +2260,15 @@ msgstr "Interpretator naredbi"
 msgid "Add or remove users and groups"
 msgstr "Dodajte ili uklonite korisnike i grupe"
 
+#~ msgid "<b>CDROM Properties</b>"
+#~ msgstr "<b>Osobine CD čitača</b>"
+
+#~ msgid "<b>Disk Properties</b>"
+#~ msgstr "<b>Osobine diska</b>"
+
+#~ msgid "DMA"
+#~ msgstr "DMA"
+
 #~ msgid "Parameters:"
 #~ msgstr "Parametri:"
 
@@ -2791,7 +2823,10 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ "Disks are divided into several pieces, called partitions. Each partition "
 #~ "is dedicated for a specific storage task, such as virtual memory or home "
 #~ "directories for your users."
-#~ msgstr "Diskovi su podeljeni u nekoliko delova koji se zovu deonice. Svaka deonica služi za određenu namenu čuvanja podataka, kao što je virtualna memorija ili deonica (home) sa ličnim direktorijumima Vaših korisnika."
+#~ msgstr ""
+#~ "Diskovi su podeljeni u nekoliko delova koji se zovu deonice. Svaka deonica "
+#~ "služi za određenu namenu čuvanja podataka, kao što je virtualna memorija "
+#~ "ili deonica (home) sa ličnim direktorijumima Vaših korisnika."
 
 #~ msgid "Ext2 (Linux)"
 #~ msgstr "Ext2 (Linux)"
@@ -2816,9 +2851,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 
 #~ msgid "Remember details of this partition"
 #~ msgstr "Zapamti detalje ove deonice"
-
-#~ msgid "Type:"
-#~ msgstr "Tip:"
 
 #~ msgid "VFAT (Windows 95 and newer)"
 #~ msgstr "VFAT (Windows 95 i noviji)"
@@ -3007,9 +3039,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 
 #~ msgid "Disable"
 #~ msgstr "Onemogući"
-
-#~ msgid "Enable :"
-#~ msgstr "Omogući :"
 
 #~ msgid "End of Range"
 #~ msgstr "Kraj opsega"
