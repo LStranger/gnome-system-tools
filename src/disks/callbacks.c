@@ -153,7 +153,7 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 	GtkWidget *size_progress;
 	GtkWidget *fs_label;
 	GtkWidget *mount_button, *status_label;
-	GtkWidget *change_mp_button;
+	GtkWidget *change_mp_button, *part_browse_button;
 	gchar *point, *device;
 	GstPartitionType type;
 	gulong size, free;
@@ -165,6 +165,7 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 	device_label = gst_dialog_get_widget (tool->main_dialog, "device_label");
 	mount_button = gst_dialog_get_widget (tool->main_dialog, "mount_button");
 	status_label = gst_dialog_get_widget (tool->main_dialog, "status_label");
+	part_browse_button = gst_dialog_get_widget (tool->main_dialog, "part_browse_button");
 	change_mp_button = gst_dialog_get_widget (tool->main_dialog, "change_mp_button");
 
 	if (part) {
@@ -184,6 +185,7 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 		if (type == PARTITION_TYPE_SWAP) {
 			gtk_widget_set_sensitive (change_mp_button, FALSE);
 			gtk_widget_set_sensitive (mount_button, FALSE);
+			gtk_widget_set_sensitive (part_browse_button, FALSE);
 			gtk_editable_set_editable (GTK_EDITABLE (point_entry), FALSE);
 		} else {
 			gtk_widget_set_sensitive (change_mp_button, TRUE);
@@ -199,6 +201,9 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 		gst_disks_gui_setup_mounted (status_label, mount_button, mounted);
 		
 		if (mounted) {
+			if (type != PARTITION_TYPE_SWAP)
+				gtk_widget_set_sensitive (part_browse_button, TRUE);
+			
 			gtk_progress_bar_set_fraction (
 				GTK_PROGRESS_BAR (size_progress),
 				(1 - ((gfloat)(free) / size)));
@@ -220,6 +225,8 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 			}
 		}
 		else {
+			gtk_widget_set_sensitive (part_browse_button, FALSE);
+			
 			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
 			gtk_progress_bar_set_text (
 				GTK_PROGRESS_BAR (size_progress),
@@ -235,6 +242,9 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 
 		gtk_widget_set_sensitive (size_progress, FALSE);
 		gtk_widget_set_sensitive (device_label, FALSE);
+		gtk_widget_set_sensitive (change_mp_button, FALSE);
+		gtk_widget_set_sensitive (mount_button, FALSE);
+		gtk_widget_set_sensitive (part_browse_button, FALSE);
 	}
 }
 
@@ -286,7 +296,7 @@ static gboolean
 gst_disks_partition_mount (GstDisksStoragePartition *part)
 {
 	xmlDoc *xml;
-	xmlNodePtr root, part_node;
+	xmlNodePtr root, part_node, node;
 	gchar *device, *typefs, *point;
 	gboolean mounted, listed;
 	gchar *buf;
@@ -341,8 +351,15 @@ gst_disks_partition_mount (GstDisksStoragePartition *part)
 					      NULL);
 				g_free (buf);
 			}
+
+			node = gst_xml_element_find_first (part_node, "mounted");
+			if (node)
+				g_object_set (G_OBJECT (part), "mounted",
+					      gst_xml_element_get_bool_attr (
+						      node, "state"),
+					      NULL);
 		
-			g_object_set (G_OBJECT (part), "mounted", !mounted, NULL);
+			/*g_object_set (G_OBJECT (part), "mounted", !mounted, NULL);*/
 			
 			gst_xml_doc_destroy (xml);
 			
@@ -377,6 +394,36 @@ gst_on_mount_button_clicked (GtkWidget *button, gpointer gdata)
 				g_object_get (G_OBJECT (part), "mounted", &mounted, NULL);
 			}
 			gst_partition_properties_refresh (part);
+		}
+	}
+}
+
+void
+gst_on_browse_button_clicked (GtkWidget *button, gpointer gdata)
+{
+	GtkWidget        *treeview;
+	GtkTreeModel     *model;
+	GtkTreeIter       iter;
+	GtkTreeSelection *selection;
+	GtkWidget        *status_label;
+	GstDisksStoragePartition *part;
+	gchar *point, *browser;
+
+	treeview = (GtkWidget *) gdata;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
+		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
+			g_object_get (G_OBJECT (part), "point", &point, NULL);
+			if (point) {
+				if (browser = g_find_program_in_path ("nautilus")) {
+					g_spawn_command_line_async (
+						g_strdup_printf ("%s %s", browser, point),
+						NULL);
+					g_free (browser);
+				}
+			}
 		}
 	}
 }

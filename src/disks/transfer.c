@@ -85,6 +85,23 @@ transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
 		}
 
 		if (GST_IS_DISKS_STORAGE_CDROM (storage)) {
+			node = gst_xml_element_find_first (disk_node, "empty");
+			if (node) {
+				if (gst_xml_element_get_bool_attr (node, "state")) {
+					g_object_set (G_OBJECT (storage), "status",
+						      CDROM_STATUS_EMPTY, NULL);
+				} else {
+					buf = gst_xml_get_child_content (disk_node, "type-content");
+					if (buf) {
+						g_object_set (
+							G_OBJECT (storage), "status",
+							gst_disks_storage_cdrom_get_status_from_name (buf),
+							NULL);
+						g_free (buf);
+					}
+				}
+			}
+
 			node = gst_xml_element_find_first (disk_node, "play-audio");
 			if (node)
 				g_object_set (G_OBJECT (storage), "play_audio",

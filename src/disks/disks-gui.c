@@ -319,7 +319,7 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
 	GtkWidget *change_mp_button;
-	GtkWidget *mount_button;
+	GtkWidget *mount_button, *part_browse_button;
 	GtkWidget *point_entry;
 	GList *list;
 
@@ -345,6 +345,12 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 	mount_button = gst_dialog_get_widget (tool->main_dialog, "mount_button");
 	g_signal_connect (G_OBJECT (mount_button), "clicked",
 			  G_CALLBACK (gst_on_mount_button_clicked),
+			  (gpointer) treeview);
+
+	/* Browse button clicked */
+	part_browse_button = gst_dialog_get_widget (tool->main_dialog, "part_browse_button");
+	g_signal_connect (G_OBJECT (part_browse_button), "clicked",
+			  G_CALLBACK (gst_on_browse_button_clicked),
 			  (gpointer) treeview);
 
 	treeview = gst_storage_list_new ();
@@ -393,10 +399,12 @@ void gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 	gchar *speed, *device;
 	gboolean play_audio, write_cdr, write_cdrw, read_dvd;
 	gboolean write_dvdr, write_dvdram;
+	GstCdromStatus status;
 		
 	
 	g_object_get (G_OBJECT (cdrom), "speed", &speed,
-		      "device", &device, NULL);
+		      "device", &device, "status", &status,
+		      NULL);
 
 	gtk_label_set_text (
 		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_device_label")),
@@ -409,6 +417,10 @@ void gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 			GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_speed_label")),
 			speed);
 	}
+
+	gtk_label_set_text (
+		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_status_label")),
+		gst_disks_storage_cdrom_get_human_readable_status (status));
 
 	g_object_get (G_OBJECT (cdrom), "play_audio", &play_audio, "write_cdr", &write_cdr,
 		      "write_cdrw", &write_cdrw, "read_dvd", &read_dvd, 

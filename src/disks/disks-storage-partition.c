@@ -72,21 +72,22 @@ static void storage_partition_get_property (GObject  *object, guint prop_id,
 static GObjectClass *parent_class = NULL;
 
 #define GST_PARTITION_TYPE (gst_partition_type_get_type ())
+
 static GType
 gst_partition_type_get_type (void)
 {
 	static GType partition_type_type = 0;
 	static GEnumValue partition_type[] = {
-		{ PARTITION_TYPE_EXT2,     "0", NULL},
-		{ PARTITION_TYPE_EXT3,     "1", NULL},
-		{ PARTITION_TYPE_REISERFS, "2", NULL},
-		{ PARTITION_TYPE_XFS,      "3", NULL},
-		{ PARTITION_TYPE_JFS,      "4", NULL},
-		{ PARTITION_TYPE_VFAT,     "5", NULL},
-		{ PARTITION_TYPE_NTFS,     "6", NULL},
-		{ PARTITION_TYPE_SWAP,     "7", NULL},
-		{ PARTITION_TYPE_FREE,     "8", NULL},
-		{ PARTITION_TYPE_UNKNOWN,  "9", NULL},
+		{ PARTITION_TYPE_EXT2,     "0", NULL },
+		{ PARTITION_TYPE_EXT3,     "1", NULL },
+		{ PARTITION_TYPE_REISERFS, "2", NULL },
+		{ PARTITION_TYPE_XFS,      "3", NULL },
+		{ PARTITION_TYPE_JFS,      "4", NULL },
+		{ PARTITION_TYPE_VFAT,     "5", NULL },
+		{ PARTITION_TYPE_NTFS,     "6", NULL },
+		{ PARTITION_TYPE_SWAP,     "7", NULL },
+		{ PARTITION_TYPE_FREE,     "8", NULL },
+		{ PARTITION_TYPE_UNKNOWN,  "9", NULL },
 	};
 	if (!partition_type_type) {
 		partition_type_type = g_enum_register_static ("GstPartitionType", partition_type);

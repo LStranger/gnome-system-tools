@@ -36,7 +36,8 @@ extern GstTool *tool;
 
 struct _GstDisksStorageCdromPriv
 {
-	gboolean automount;
+	GstCdromStatus status;
+	/*gboolean automount;*/
 	gboolean play_audio;
 	gboolean write_cdr;
 	gboolean write_cdrw;
@@ -60,6 +61,7 @@ static GObjectClass *parent_class = NULL;
 
 enum {
 	PROP_0,
+	PROP_STATUS,
 	PROP_PLAY_AUDIO,
 	PROP_WRITE_CDR,
 	PROP_WRITE_CDRW,
@@ -68,6 +70,24 @@ enum {
 	PROP_WRITE_DVDRAM,
 };
 
+#define GST_CDROM_STATUS (gst_disks_storage_cdrom_status_get_type ())
+
+static
+GType gst_disks_storage_cdrom_status_get_type (void)
+{
+	static GType cdrom_status_type = 0;
+	static GEnumValue cdrom_status[] = {
+		{ CDROM_STATUS_EMPTY, "0", NULL },
+		{ CDROM_STATUS_DATA,  "1", NULL },
+		{ CDROM_STATUS_AUDIO, "2", NULL },
+		{ CDROM_STATUS_MIXED, "3", NULL },
+		{ CDROM_STATUS_BLANK, "4", NULL },
+	};
+	if (!cdrom_status_type) {
+		cdrom_status_type = g_enum_register_static ("GstCdromStatus", cdrom_status);
+	}
+	return cdrom_status_type;
+}
 
 GType
 gst_disks_storage_cdrom_get_type (void)
@@ -116,6 +136,11 @@ storage_cdrom_class_init (GstDisksStorageCdromClass *klass)
 
 	storage_class->setup_properties_widget = storage_cdrom_setup_properties_widget;
 
+	g_object_class_install_property (object_class, PROP_STATUS,
+					 g_param_spec_enum ("status", NULL, NULL,
+							    GST_CDROM_STATUS,
+							    0,
+							    G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_PLAY_AUDIO,
 					 g_param_spec_boolean ("play_audio", NULL, NULL,
 							       FALSE, G_PARAM_READWRITE));
@@ -187,6 +212,9 @@ storage_cdrom_set_property (GObject *object, guint prop_id, const GValue *value,
 	storage = GST_DISKS_STORAGE_CDROM (object);
 
 	switch (prop_id) {
+	case PROP_STATUS:
+		storage->priv->status = g_value_get_enum (value);
+		break;
 	case PROP_PLAY_AUDIO:
 		storage->priv->play_audio = g_value_get_boolean (value);
 		break;
@@ -221,6 +249,9 @@ storage_cdrom_get_property (GObject *object, guint prop_id, GValue *value,
 	storage = GST_DISKS_STORAGE_CDROM (object);
 
 	switch (prop_id) {
+	case PROP_STATUS:
+		g_value_set_enum (value, storage->priv->status);
+		break;
 	case PROP_PLAY_AUDIO:
 		g_value_set_boolean (value, storage->priv->play_audio);
 		break;
@@ -241,5 +272,50 @@ storage_cdrom_get_property (GObject *object, guint prop_id, GValue *value,
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
+	}
+}
+
+gchar *
+gst_disks_storage_cdrom_get_human_readable_status (GstCdromStatus status)
+{
+	gchar *states[] = {
+		"No Disc Inserted", "Data Disc Inserted",
+		"Audio Disc Inserted",
+		"Audio and Data Disc Inserted",
+		"Blank Disc Inserted"
+	};
+
+	return g_strdup (states[status]);
+}
+
+GstCdromStatus
+gst_disks_storage_cdrom_get_status_from_name (const gchar *status)
+{
+	if (g_ascii_strcasecmp (status, "empty") == 0)
+		return CDROM_STATUS_EMPTY;
+	else if (g_ascii_strcasecmp (status, "data") == 0)
+		return CDROM_STATUS_DATA;
+	else if (g_ascii_strcasecmp (status, "audio") == 0)
+		return CDROM_STATUS_AUDIO;
+	else if (g_ascii_strcasecmp (status, "mixed") == 0)
+		return CDROM_STATUS_MIXED;
+	else if (g_ascii_strcasecmp (status, "blank") == 0)
+		return CDROM_STATUS_BLANK;
+}
+
+gchar *
+gst_disks_storage_cdrom_get_status (GstCdromStatus status)
+{
+	switch (status) {
+	case CDROM_STATUS_EMPTY:
+		return g_strdup ("empty");
+	case CDROM_STATUS_DATA:
+		return g_strdup ("data");
+	case CDROM_STATUS_AUDIO:
+		return g_strdup ("audio");
+	case CDROM_STATUS_MIXED:
+		return g_strdup ("mixed");
+	case CDROM_STATUS_BLANK:
+		return g_strdup ("blank");
 	}
 }
