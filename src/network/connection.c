@@ -46,7 +46,6 @@ enum {
 	CONNECTION_LIST_COL_DEV_PIX,
 	CONNECTION_LIST_COL_DEVICE,
 	CONNECTION_LIST_COL_STAT_PIX,
-	CONNECTION_LIST_COL_STATUS,
 	CONNECTION_LIST_COL_DESCR,
 
 	CONNECTION_LIST_COL_DATA,
@@ -76,6 +75,7 @@ static void on_connection_modified (GtkWidget *w, XstConnection *cxn);
 static void on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn);
 static void on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn);
 static gboolean on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection *cxn);
+static void on_connection_list_clicked (GtkWidget *w, gpointer data);
 
 #define W(s) my_get_widget (cxn->xml, (s))
 
@@ -446,14 +446,6 @@ connection_get_stat_pixbuf (XstConnection *cxn)
 	return cxn->enabled ? active : inactive;
 }
 
-static const gchar *
-connection_get_stat_string (XstConnection *cxn)
-{
-	g_return_val_if_fail (cxn != NULL, NULL);
-
-	return cxn->enabled ? _("Active") : _("Inactive");
-}
-
 static GtkTreeModel *
 connection_list_model_new (void)
 {
@@ -463,7 +455,6 @@ connection_list_model_new (void)
 				    GDK_TYPE_PIXBUF,
 				    G_TYPE_STRING,
 				    GDK_TYPE_PIXBUF,
-				    G_TYPE_STRING,
 				    G_TYPE_STRING,
 				    G_TYPE_POINTER);
 	return GTK_TREE_MODEL (store);
@@ -497,15 +488,10 @@ connection_list_add_columns (GtkTreeView *treeview)
 
 	pixbuf_renderer = gtk_cell_renderer_pixbuf_new ();
 
-	gtk_tree_view_column_pack_start (col, pixbuf_renderer, FALSE);
-	gtk_tree_view_column_add_attribute (col, pixbuf_renderer, "pixbuf", CONNECTION_LIST_COL_STAT_PIX);
-
-	text_renderer = gtk_cell_renderer_text_new ();
-	gtk_tree_view_column_pack_start (col, text_renderer, TRUE);
-	gtk_tree_view_column_add_attribute (col, text_renderer, "text", CONNECTION_LIST_COL_STATUS);
-
-	gtk_tree_view_append_column (treeview, col);
-
+	g_object_set (G_OBJECT (pixbuf_renderer), "xalign", 0.5, NULL);
+	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW(treeview), -1, _("Status"), 
+	      pixbuf_renderer,"pixbuf", CONNECTION_LIST_COL_STAT_PIX, NULL);
+	                                                                    
 	/* Description */
 	text_renderer = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (_("Description"),
@@ -532,6 +518,45 @@ connection_list_select_row (GtkTreeSelection *selection, gpointer data)
 			connection_actions_set_sensitive (TRUE);
 	} else
 		connection_actions_set_sensitive (FALSE);
+}
+
+static void
+on_connection_list_clicked (GtkWidget *w, gpointer data)
+{
+   GtkTreePath *path;
+   GtkTreeViewColumn *column;
+   GtkTreeModel *model;
+   GtkTreeIter iter;
+   GList *column_list;
+   gint ncol;
+   GdkPixbuf *stat_icon;
+   XstConnection *cxn;
+
+   cxn = connection_list_get_active ();
+   column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
+   gtk_tree_view_get_cursor (GTK_TREE_VIEW (w), &path, &column);
+							  
+   ncol = g_list_index (column_list, column) + 1;
+
+   if (ncol == CONNECTION_LIST_COL_STAT_PIX)
+   {
+      model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
+      gtk_tree_model_get_iter (model, &iter, path);
+      
+      if (!cxn->enabled)
+      {
+	 if (cxn->type != XST_CONNECTION_LO)
+	    on_connection_activate_clicked (w, NULL);
+      }
+      else
+      {
+	 if (cxn->type != XST_CONNECTION_LO)
+	    on_connection_deactivate_clicked (w, NULL);
+      }
+   }
+   g_list_free (column_list);
+   gtk_tree_path_free (path);
+	   		      
 }
 
 static void
@@ -592,6 +617,11 @@ connection_list_new (void)
 	treeview = gtk_tree_view_new_with_model (model);
 	g_object_unref (G_OBJECT (model));
 
+	g_signal_connect (G_OBJECT (treeview), "cursor-changed", 
+	      G_CALLBACK (on_connection_list_clicked), NULL);
+
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (treeview), TRUE);
+	
 	connection_list_add_columns (GTK_TREE_VIEW (treeview));
 
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -626,7 +656,6 @@ connection_list_append (XstConnection *cxn)
 			    CONNECTION_LIST_COL_DEV_PIX,  connection_get_dev_pixbuf (cxn),
 			    CONNECTION_LIST_COL_DEVICE,   cxn->dev,
 			    CONNECTION_LIST_COL_STAT_PIX, connection_get_stat_pixbuf (cxn),
-			    CONNECTION_LIST_COL_STATUS,   connection_get_stat_string (cxn),
 			    CONNECTION_LIST_COL_DESCR,    cxn->name,
 			    CONNECTION_LIST_COL_DATA,     cxn,
 			    -1);
@@ -1993,8 +2022,6 @@ connection_actions_set_sensitive (gboolean state)
 	gchar *names[] = {
 		"connection_delete",
 		"connection_configure",
-		"connection_activate",
-		"connection_deactivate",
 		NULL
 	};
 

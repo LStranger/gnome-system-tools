@@ -444,6 +444,8 @@ statichost_list_new (void)
 	treeview = gtk_tree_view_new_with_model (model);
 	g_object_unref (G_OBJECT (model));
 
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (treeview), TRUE);
+	
 	statichost_list_add_columns (GTK_TREE_VIEW (treeview));
 
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));

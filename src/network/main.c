@@ -53,8 +53,8 @@ XstDialogSignal signals[] = {
 	{ "connection_add",          "clicked",         G_CALLBACK (on_connection_add_clicked) },
 	{ "connection_delete",       "clicked",         G_CALLBACK (on_connection_delete_clicked) },
 	{ "connection_configure",    "clicked",         G_CALLBACK (on_connection_configure_clicked) },
-	{ "connection_activate",     "clicked",         G_CALLBACK (on_connection_activate_clicked) },
-	{ "connection_deactivate",   "clicked",         G_CALLBACK (on_connection_deactivate_clicked) },
+/*	{ "connection_activate",     "clicked",         G_CALLBACK (on_connection_activate_clicked) },
+	{ "connection_deactivate",   "clicked",         G_CALLBACK (on_connection_deactivate_clicked) },*/
 	{ "connection_def_gw_omenu", "changed",         G_CALLBACK (xst_dialog_modify_cb) },
 	{ "dns_list",                "focus_in_event",  G_CALLBACK (update_hint) },
 	{ "domain",                  "focus_in_event",  G_CALLBACK (update_hint) },
@@ -77,8 +77,8 @@ static const XstWidgetPolicy policies[] = {
 	{ "connections_bbox",        XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "connection_delete",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "connection_configure",    XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_activate",     XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_deactivate",   XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+/*	{ "connection_activate",     XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_deactivate",   XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },*/
 	{ "connection_def_gw_hbox",  XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "statichost_table",        XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "statichost_add",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
