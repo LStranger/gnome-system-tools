@@ -1325,8 +1325,9 @@ connection_new_from_type (GstConnectionType type, xmlNode *root)
 	cxn->autoboot = TRUE;
 	cxn->update_dns = TRUE;
 	cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
-	
-	cxn->dev = connection_find_new_device (root, cxn->type);
+
+	if (root != NULL)	
+		cxn->dev = connection_find_new_device (root, cxn->type);
 
 	switch (cxn->type) {
 	case GST_CONNECTION_PPP:

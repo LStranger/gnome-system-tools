@@ -250,8 +250,6 @@ main (int argc, char *argv[])
 		else if (irlan_connection)
 			type = GST_CONNECTION_IRLAN;
 
-		gst_tool_load_try (tool);
-
 		g_object_set_data (G_OBJECT (druid), "standalone", GINT_TO_POINTER (TRUE));
 
 		connect_signals (tool->main_dialog, signals, signals_after);
@@ -259,7 +257,7 @@ main (int argc, char *argv[])
 		network_druid_new (druid, tool, type);
 		gtk_widget_show_all (druid_window);
 
-		gtk_main ();
+		gst_tool_main_with_hidden_dialog (tool, FALSE);
 	} else {
 		connect_signals (tool->main_dialog, signals, signals_after);
 		

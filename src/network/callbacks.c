@@ -1290,7 +1290,7 @@ on_network_druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer
 	GstConnection *cxn = network_druid_get_connection_data (druid);
 	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
 	GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "network_connection_window");
-	
+
 	g_return_if_fail (cxn != NULL);
 
 	if (g_object_get_data (G_OBJECT (druid), "standalone") == NULL) {

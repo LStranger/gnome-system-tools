@@ -1,5 +1,11 @@
 2003-08-31  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
+	* callbacks.c, connection.c, main.c: made network-admin to use
+	  gst_tool_main_with_hidden_dialog when running standalone druids,
+	  now they work again
+
+2003-08-31  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
 	* connection.c (connection_iter): fixed a crasher bug when trying
 	  to add new interfaces. (connection_list_remove): made it to
 	  erase interfaces more correctly based on cxn->file	
