@@ -12,6 +12,7 @@
 #include "e-map/e-map.h"
 #include "tz-map.h"
 
+extern XstTool *tool;
 
 TransStringSpin transfer_string_spin_table[] =
 {
@@ -57,7 +58,7 @@ transfer_string_spin_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
 		
 		if (node && (s = xml_element_get_content (node)))
 		{
-			spin = tool_widget_get (transfer_string_spin_table [i].spin);
+			spin = xst_dialog_get_widget (tool->main_dialog, transfer_string_spin_table [i].spin);
 			gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), (gfloat) atoi (s));
 			
 			g_free (s);
@@ -80,7 +81,7 @@ transfer_string_spin_gui_to_xml (TransTree *trans_tree, xmlNodePtr root)
 	
 	for (i = 0; transfer_string_spin_table [i].xml_path; i++)
 	{
-		spin = tool_widget_get (transfer_string_spin_table [i].spin);
+		spin = xst_dialog_get_widget (tool->main_dialog, transfer_string_spin_table [i].spin);
 		s = g_strdup_printf ("%d", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spin)));
 		node = xml_element_find_first (root, transfer_string_spin_table [i].xml_path);
 		xml_element_set_content (node, s);
@@ -104,7 +105,7 @@ transfer_string_calendar_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
 	
 	for (i = 0; transfer_string_calendar_table [i].calendar; i++)
 	{
-		calendar = tool_widget_get (transfer_string_calendar_table [i].calendar);
+		calendar = xst_dialog_get_widget (tool->main_dialog, transfer_string_calendar_table [i].calendar);
 		
 		node = xml_element_find_first (root, transfer_string_calendar_table [i].xml_year_path);
 		if (node && (s = xml_element_get_content (node)))
@@ -148,7 +149,7 @@ transfer_string_calendar_gui_to_xml (TransTree *trans_tree, xmlNodePtr root)
 	
 	for (i = 0; transfer_string_calendar_table [i].calendar; i++)
 	{
-		calendar = tool_widget_get (transfer_string_calendar_table [i].calendar);
+		calendar = xst_dialog_get_widget (tool->main_dialog, transfer_string_calendar_table [i].calendar);
 		gtk_calendar_get_date (GTK_CALENDAR (calendar), &year, &month, &day);
 		
 		node = xml_element_find_first (root, transfer_string_calendar_table [i].xml_year_path);
@@ -218,7 +219,7 @@ transfer_servers_xml_to_gui (xmlNodePtr root)
 	xmlNodePtr node;
 	char *s;
 	
-	ntp_list = tool_widget_get ("ntp_list");
+	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list");
 	
 	node = xml_element_find_first (root, "synchronization");
 	if (!node) return;
@@ -272,7 +273,7 @@ transfer_servers_gui_to_xml (xmlNodePtr root)
 	GtkWidget *ntp_list;
 	xmlNodePtr node;
 	
-	ntp_list = tool_widget_get ("ntp_list");
+	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list");
 	
 	node = xml_element_find_first (root, "synchronization");
 	if (!node) node = xml_element_add (root, "synchronization");
@@ -289,7 +290,7 @@ transfer_sync_toggle_xml_to_gui (xmlNodePtr root)
 	GtkWidget *toggle;
 	xmlNodePtr node;
 	
-	toggle = tool_widget_get ("ntp_use");
+	toggle = xst_dialog_get_widget (tool->main_dialog, "ntp_use");
 	
 	node = xml_element_find_first (root, "synchronization");
 	if (!node) return;
@@ -305,7 +306,7 @@ transfer_sync_toggle_gui_to_xml (xmlNodePtr root)
 	GtkWidget *toggle;
 	xmlNodePtr node;
 	
-	toggle = tool_widget_get ("ntp_use");
+	toggle = xst_dialog_get_widget (tool->main_dialog, "ntp_use");
 	
 	node = xml_element_find_first (root, "synchronization");
 	if (!node) return;
@@ -316,8 +317,12 @@ transfer_sync_toggle_gui_to_xml (xmlNodePtr root)
 
 
 void
-transfer_xml_to_gui (xmlNodePtr root)
+transfer_xml_to_gui (XstTool *tool, gpointer data)
 {
+	xmlNode *root;
+
+	root = xml_doc_get_root (tool->config);
+
 	transfer_string_calendar_xml_to_gui (&trans_tree, root);
 	transfer_string_spin_xml_to_gui (&trans_tree, root);
 	transfer_timezone_xml_to_gui (root);
@@ -327,8 +332,12 @@ transfer_xml_to_gui (xmlNodePtr root)
 
 
 void
-transfer_gui_to_xml (xmlNodePtr root)
+transfer_gui_to_xml (XstTool *tool, gpointer data)
 {
+	xmlNode *root;
+
+	root = xml_doc_get_root (tool->config);
+
 	transfer_string_calendar_gui_to_xml (&trans_tree, root);
 	transfer_string_spin_gui_to_xml (&trans_tree, root);
 	transfer_timezone_gui_to_xml (root);

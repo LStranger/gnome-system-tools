@@ -92,14 +92,14 @@ struct _TransTree
   Some utility functions that can be used in callbacks.
 */
 
-void xml_clist_insert(TransStringCList *trans_clist, int row, xmlNodePtr node);
-void xml_clist_append(TransStringCList *trans_clist, xmlNodePtr node);
-void xml_from_clist_row(TransStringCList *trans_clist, int row, xmlNodePtr node);
+void xml_clist_insert (TransStringCList *trans_clist, int row, xmlNodePtr node);
+void xml_clist_append (TransStringCList *trans_clist, xmlNodePtr node);
+void xml_from_clist_row (TransStringCList *trans_clist, int row, xmlNodePtr node);
 
 
 /*
   The routines that do all the work.
  */
 
-void transfer_xml_to_gui(xmlNodePtr root);
-void transfer_gui_to_xml(xmlNodePtr root);
+void transfer_xml_to_gui (XstTool *tool, gpointer data);
+void transfer_gui_to_xml (XstTool *tool, gpointer data);

@@ -209,7 +209,7 @@ e_map_init (EMap *view)
 	priv = g_new0 (EMapPrivate, 1);
 	view->priv = priv;
 
-	load_map_background (view, "world_map-960.png");
+	load_map_background (view, MAP_DIR"/world_map-960.png");
 	priv->frozen = FALSE;
 	priv->smooth_zoom = TRUE;
 	priv->zoom_state = E_MAP_ZOOMED_OUT;
@@ -980,8 +980,8 @@ load_map_background (EMap *view, gchar *name)
 
 	priv = view->priv;
 
-/*	pb0 = gdk_pixbuf_new_from_file (name); */
-	pb0 = tool_load_image (name);
+	pb0 = gdk_pixbuf_new_from_file (name);
+/*	pb0 = tool_load_image (name);*/
 	if (!pb0) return (FALSE);
 
 	if (priv->map_pixbuf) gdk_pixbuf_unref (priv->map_pixbuf);

@@ -18,8 +18,10 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Hans Petter Jansson <hpj@ximian.com>
+ *          Jacob Berkman <jacob@ximian.com>
  */
-#include "config.h"
+
+#include <config.h>
 
 #include <stdio.h>
 
@@ -35,20 +37,13 @@
 #include "e-map/e-map.h"
 #include "tz-map.h"
 
+#include "time-admin.h"
+
 ETzMap *tzmap;
 
+XstTool *tool;
 
-void init_map (void);
-void populate_ntp_list(void);
-gint clock_tick(gpointer data);
-void on_apply_clicked(GtkButton *button, gpointer data);
-void on_cancel_clicked(GtkButton *button, gpointer data);
-void on_help_clicked(GtkButton *button, gpointer data);
-void delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata);
-void connect_signals(void);
-
-
-char *ntp_servers[] =
+static char *ntp_servers[] =
 {
 	"time.nrc.ca (Canada)",
 	"ntp1.cmc.ec.gc.ca (Eastern Canada)",
@@ -87,82 +82,89 @@ char *ntp_servers[] =
 };
 
 
-void
-populate_ntp_list ()
+static void
+populate_ntp_list (void)
 {
 	GtkWidget *ntp_list, *item;
 	GList *list_add = 0;
 	int i;
 
-	ntp_list = tool_widget_get("ntp_list");
+	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list");
 	if (!ntp_list) return;  /* Broken interface file */
 	
-	for (i = 0; ntp_servers[i]; i++)
-	{
-		item = gtk_list_item_new_with_label(ntp_servers[i]);
-		gtk_widget_show(item);
-		list_add = g_list_append(list_add, item);
+	for (i = 0; ntp_servers[i]; i++) {
+		item = gtk_list_item_new_with_label (ntp_servers[i]);
+		gtk_widget_show (item);
+		list_add = g_list_append (list_add, item);
 	}
 	
-	gtk_list_append_items(GTK_LIST(ntp_list), list_add);
+	gtk_list_append_items (GTK_LIST (ntp_list), list_add);
 }
 
 
-void
-init_timezone_selection ()
+static void
+init_timezone_selection (void)
 {
+	GtkWidget *w, *w2;
 	GPtrArray *locs;
 	GList *combo_locs = NULL;
-	int i;
+	int i;	
 
 	tzmap = e_tz_map_new ();
-	gtk_container_add (GTK_CONTAINER (tool_widget_get ("map_window")),
-			   GTK_WIDGET (tzmap->map));
+	w = xst_dialog_get_widget (tool->main_dialog, "map_window");
+	gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (tzmap->map));
+	gtk_widget_show (GTK_WIDGET (tzmap->map));
 	
 	locs = tz_get_locations (e_tz_map_get_tz_db (tzmap));
 	
-	for (i = 0; i < locs->len; i++)
-	{
+	for (i = 0; i < locs->len; i++) {	
 		combo_locs = g_list_append (combo_locs,
 					    g_strdup (tz_location_get_zone (g_ptr_array_index (locs, i))));
 	}
 	
-	gtk_combo_set_popdown_strings (GTK_COMBO (tool_widget_get ("location_combo")),
-				       combo_locs);
+	w = xst_dialog_get_widget (tool->main_dialog, "location_combo");
+	gtk_combo_set_popdown_strings (GTK_COMBO (w), combo_locs);
+
+	w = xst_dialog_get_widget (tool->main_dialog, "map_vbox");
+	w2 = gtk_label_new ("");
+	gtk_box_pack_end (GTK_BOX(w), w2, FALSE, FALSE, 0);
+	gtk_widget_show (w2);
+	/* gtk_misc_set_alignment (GTK_MISC (w2), 0.0, 0.5); */
+
+	gtk_object_set_data (GTK_OBJECT (tool), "location_hover", w2);
 }
 
 
-gint
-clock_tick(gpointer data)
+static gint
+clock_tick (gpointer data)
 {
 	GtkWidget *w;
 
-	tool_set_frozen(TRUE);
+	xst_dialog_freeze (tool->main_dialog);
   
-	w = tool_widget_get("second");
+	w = xst_dialog_get_widget (tool->main_dialog, "second");
 	gtk_spin_button_spin(GTK_SPIN_BUTTON(w), GTK_SPIN_STEP_FORWARD, 1.0);
   
-	if (!gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w)))
-	{
-		w = tool_widget_get("minute");
+	if (!gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w))) {
+		w = xst_dialog_get_widget (tool->main_dialog, "minute");
 		gtk_spin_button_spin(GTK_SPIN_BUTTON(w), GTK_SPIN_STEP_FORWARD, 1.0);
 		
-		if (!gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w)))
-		{
-			w = tool_widget_get("hour");
+		if (!gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w))) {
+			w = xst_dialog_get_widget (tool->main_dialog, "hour");
 			gtk_spin_button_spin(GTK_SPIN_BUTTON(w), GTK_SPIN_STEP_FORWARD, 1.0);
 			
 			/* FIXME: Update calendar if we pass midnight */
 		}
 	}
+
+	xst_dialog_thaw (tool->main_dialog);
 	
-	tool_set_frozen(FALSE);
-	
-	return(TRUE);
+	return TRUE;
 }
 
 
-void tz_select_combo (GtkList *list, GtkWidget *widget, gpointer data)
+static void
+tz_select_combo (GtkList *list, GtkWidget *widget, gpointer data)
 {
 	GtkListItem *li;
 	gchar *text;
@@ -173,36 +175,119 @@ void tz_select_combo (GtkList *list, GtkWidget *widget, gpointer data)
 	e_tz_map_set_tz_from_name (tzmap, text);
 }
 
-
-void
-connect_signals()
+static void
+timezone_button_clicked (GtkWidget *w, gpointer data)
 {
-	GtkWidget *w;
+	static GtkWidget *d = NULL;
 
-	w = GTK_COMBO (tool_widget_get ("location_combo"))->list;
-	gtk_signal_connect(GTK_OBJECT (w), "select-child", tz_select_combo, NULL);
-	gtk_signal_connect(GTK_OBJECT (w), "select-child", tool_modified_cb, NULL);
+	if (!d) {
+		d = xst_dialog_get_widget (XST_DIALOG (data), "Time zone");
+		gnome_dialog_close_hides (GNOME_DIALOG (d), TRUE);
+	}
+
+	gtk_widget_show (d);
+	gdk_window_show (d->window);
+	gdk_window_raise (d->window);
+
+	gnome_dialog_run_and_close (GNOME_DIALOG (d));
+}
+
+static void
+server_button_clicked (GtkWidget *w, gpointer data)
+{
+	static GtkWidget *d = NULL;
+
+	if (!d) {
+		d = xst_dialog_get_widget (XST_DIALOG (data), "Time servers");
+		gnome_dialog_close_hides (GNOME_DIALOG (d), TRUE);
+	}
+
+	gtk_widget_show (d);
+	gdk_window_show (d->window);
+	gdk_window_raise (d->window);
+
+	gnome_dialog_run_and_close (GNOME_DIALOG (d));
+}
+
+static void
+update_tz (GtkWidget *w, gpointer data)
+{
+	GtkWidget *l;
+
+	l = xst_dialog_get_widget (XST_DIALOG (data), "tzlabel");
+	gtk_label_set_text (GTK_LABEL (l), gtk_entry_get_text (GTK_ENTRY (w)));			    
+}      
+
+static void
+ntp_use_toggled (GtkWidget *w, gpointer data)
+{
+	XstDialog *xd;      
+
+	xd = XST_DIALOG (data);
+
+	gtk_widget_set_sensitive (xst_dialog_get_widget (xd, "timeserver_button"),
+				  GTK_TOGGLE_BUTTON (w)->active);
+}
+
+static void
+connect_signals ()
+{	
+	GladeXML *xml;
+
+	xml = tool->main_dialog->gui;
+
+	gtk_signal_connect (GTK_OBJECT (tool), "fill_gui",
+			    GTK_SIGNAL_FUNC (transfer_xml_to_gui),
+			    NULL);
+
+	gtk_signal_connect (GTK_OBJECT (tool), "fill_xml",
+			    GTK_SIGNAL_FUNC (transfer_gui_to_xml),
+			    NULL);
+
+	glade_xml_signal_connect_data (xml, "timezone_button_clicked", timezone_button_clicked, tool->main_dialog);
+	glade_xml_signal_connect_data (xml, "server_button_clicked",   server_button_clicked,   tool->main_dialog);
+	glade_xml_signal_connect_data (xml, "xst_dialog_modify_cb",    xst_dialog_modify_cb,    tool->main_dialog);
+	glade_xml_signal_connect_data (xml, "update_tz",               update_tz,               tool->main_dialog);
+	glade_xml_signal_connect_data (xml, "ntp_use_toggled",         ntp_use_toggled,         tool->main_dialog);
 
 	gtk_timeout_add (1000, clock_tick, NULL);
 }
 
+static void
+adjust (const char *s, gint max)
+{
+	GtkAdjustment *adj;
+	GtkWidget *w;
+
+	w = xst_dialog_get_widget (tool->main_dialog, s);
+	if (!w)
+		return;
+
+	adj = gtk_adjustment_new (0.0, 0.0, max - 1.0,
+				  1.0, 5.0, 5.0);
+
+	gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (w), adj);
+	gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (w), TRUE);	
+}
 
 int
 main (int argc, char *argv[])
 {
-	tool_init ("time", argc, argv);
-	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
+	tool = xst_tool_init ("time", _("Date/Time Settings - Ximian Setup Tools"), argc, argv);
+	
+	xst_dialog_freeze (tool->main_dialog);
+
+	adjust ("hour", 24);
+	adjust ("minute", 60);
+	adjust ("second", 60);
 
 	populate_ntp_list ();
 	init_timezone_selection ();
 	connect_signals ();
 
-	tool_set_frozen (TRUE);
-	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
-	tool_set_frozen (FALSE);
+	xst_dialog_thaw (tool->main_dialog);
 
-	gtk_widget_show_all (tool_get_top_window ());
-	gtk_main ();
+	xst_tool_main (tool);
 
 	return 0;
 }

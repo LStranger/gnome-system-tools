@@ -1,4 +1,8 @@
-INCLUDES = $(GNOME_INCLUDEDIR) $(GNOME_XML_CFLAGS)
+INCLUDES = \
+	$(GNOME_INCLUDEDIR)	\
+	$(GNOME_XML_CFLAGS)	\
+	-DMAP_DIR=\""$(pixmapsdir)"\"
+
 LDADD = -lm
 
 noinst_PROGRAMS = \

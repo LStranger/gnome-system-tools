@@ -31,8 +31,10 @@
 #include "tz.h"
 #include "e-map/e-map.h"
 #include "tz-map.h"
-#include "../common/tool.h"
+#include "xst-tool.h"
+#include "xst-dialog.h"
 
+extern XstTool *tool;
 
 /* --- Forward declarations of internal functions --- */
 
@@ -112,14 +114,14 @@ void e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 	tzmap->point_selected =
 	  e_map_get_closest_point (tzmap->map, l_longitude, l_latitude, FALSE);
 
-	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (tool_widget_get ("location_combo"))->entry),
+	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "location_combo"))->entry),
 			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
 }
 
 
 gchar *e_tz_map_get_selected_tz_name (ETzMap *tzmap)
 {
-	return (gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (tool_widget_get ("location_combo"))->entry)));
+	return (gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "location_combo"))->entry)));
 }
 
 
@@ -198,7 +200,7 @@ static gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 	/* e_tz_map_location_fom_point() can in theory return NULL, but in
 	 * practice there are no reasons why it should */
 
-	gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("location_hover")),
+	gtk_label_set_text (GTK_LABEL (gtk_object_get_data (GTK_OBJECT (tool), "location_hover")),
 			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_hover)));
 
 	return TRUE;
@@ -228,10 +230,10 @@ static gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer da
 						    TZ_MAP_POINT_NORMAL_RGBA);
 		tzmap->point_selected = tzmap->point_hover;
 		
-		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (tool_widget_get ("location_combo"))->entry),
+		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "location_combo"))->entry),
 				    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
 		
-		tool_set_modified (TRUE);
+		xst_dialog_modify (tool->main_dialog);
 	}
 	
 	return TRUE;
