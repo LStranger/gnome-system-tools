@@ -4,8 +4,6 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("window1");
-gchar *s = N_("label1");
 gchar *s = N_("Add...");
 gchar *s = N_("Remove");
 gchar *s = N_("Settings...");

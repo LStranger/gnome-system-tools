@@ -4,12 +4,9 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("window1");
 gchar *s = N_("Select the fonts you want to install.");
 gchar *s = N_("Font family");
-gchar *s = N_("label329");
 gchar *s = N_("Style");
-gchar *s = N_("label332");
 gchar *s = N_("Font size:");
 gchar *s = N_("Add font...");
 gchar *s = N_("Delete font");

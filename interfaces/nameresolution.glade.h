@@ -11,7 +11,6 @@ gchar *s = N_("Add");
 gchar *s = N_("Delete");
 gchar *s = N_("Existing:");
 gchar *s = N_("New:");
-gchar *s = N_("window1");
 gchar *s = N_("Let the computer know its name, function and network surroundings.");
 gchar *s = N_("Host");
 gchar *s = N_("Host name:");

@@ -4,7 +4,6 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("window2");
 gchar *s = N_("Up");
 gchar *s = N_("Left");
 gchar *s = N_("Right");
@@ -32,18 +31,14 @@ gchar *s = N_("Wider");
 gchar *s = N_("Shorter");
 gchar *s = N_("Taller");
 gchar *s = N_("_Restore settings");
-gchar *s = N_("window2");
 gchar *s = N_("Monitor information");
 gchar *s = N_("Vendor:");
 gchar *s = N_("Model:");
 gchar *s = N_("<unknown>");
 gchar *s = N_("<unknown>");
 gchar *s = N_("Appearance");
-gchar *s = N_("window3");
 gchar *s = N_("Use this tool to configure your monitor.");
 gchar *s = N_("Resolution");
-gchar *s = N_("label49");
 gchar *s = N_("Test current setting");
 gchar *s = N_("Colors");
-gchar *s = N_("label50");
 gchar *s = N_("Probe again");

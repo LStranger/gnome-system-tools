@@ -4,7 +4,6 @@
  * NO lo compile como parte de su aplicación.
  */
 
-gchar *s = N_("window1");
 gchar *s = N_("Use this tool to set the installed operating\n"
               "systems to choose from at startup.");
 gchar *s = N_("_Add...");
@@ -15,7 +14,6 @@ gchar *s = N_("_Wait");
 gchar *s = N_("Wait");
 gchar *s = N_("_seconds before loading default kernel or OS");
 gchar *s = N_("Starting your computer");
-gchar *s = N_("window2");
 gchar *s = N_("Modify the settings for an operating system or kernel.");
 gchar *s = N_("_Name:");
 gchar *s = N_("Boot _type:");

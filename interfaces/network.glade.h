@@ -158,7 +158,6 @@ gchar *s = N_("Summary of new account data\n"
               "goes here, plus indications on\n"
               "how to proceed (go back, cancel\n"
               "or finish).");
-gchar *s = N_("window1");
 gchar *s = N_("Connection active");
 gchar *s = N_("Activate when the computer starts");
 gchar *s = N_("Allow activation control for all users");

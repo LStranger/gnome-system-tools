@@ -11,8 +11,6 @@ gchar *s = N_("Current:");
 gchar *s = N_("Edit Location");
 gchar *s = N_("Edit:");
 gchar *s = N_("                           ");
-gchar *s = N_("label86");
-gchar *s = N_("label87");
 gchar *s = N_("\n"
               "");
 gchar *s = N_("_Settings...");

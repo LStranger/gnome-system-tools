@@ -59,7 +59,6 @@ gchar *s = N_("Congratulations! Your computer will now be\n"
               "");
 gchar *s = N_("Start rage");
 gchar *s = N_("End range");
-gchar *s = N_("window1");
 gchar *s = N_("Enable :");
 gchar *s = N_("IP Forwarding");
 gchar *s = N_("DHCP");

@@ -18,7 +18,6 @@ gchar *s = N_("FAT32 (Windows 98 and newer)");
 gchar *s = N_("NTFS (Windows NT & 2000)");
 gchar *s = N_("Choose a mount point");
 gchar *s = N_("Check for errors on startup");
-gchar *s = N_("window1");
 gchar *s = N_("Device");
 gchar *s = N_("Detected");
 gchar *s = N_("Listed");
