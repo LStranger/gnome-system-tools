@@ -349,7 +349,7 @@ xml_element_set_state (xmlNodePtr node, char *element, gboolean state)
 
 
 void
-nxml_element_destroy (xmlNodePtr node)
+xml_element_destroy (xmlNodePtr node)
 {
 	g_return_if_fail (node != NULL);
 	
