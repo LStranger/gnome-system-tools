@@ -303,6 +303,34 @@ share_settings_get_share (void)
 		return NULL;
 }
 
+gboolean
+share_settings_validate (void)
+{
+	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "share_type");
+	GtkWidget    *widget;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gint          selected;
+	const gchar  *text;
+
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+
+	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
+		return FALSE;
+
+	gtk_tree_model_get (model, &iter, 1, &selected, -1);
+
+	if (selected == SHARE_THROUGH_SMB) {
+		widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
+		text   = gtk_entry_get_text (GTK_ENTRY (widget));
+		
+		return (text && *text);
+	}
+
+	/* in any other case, it's valid */
+	return TRUE;
+}
+
 void
 share_settings_dialog_run (const gchar *path, gboolean standalone)
 {
@@ -388,10 +416,10 @@ smb_settings_prepare_dialog (void)
 void
 smb_settings_save (void)
 {
-	GtkWidget  *widget;
-	gchar      *text;
-	gboolean   *active;
-	xmlNodePtr  root;
+	GtkWidget   *widget;
+	const gchar *text;
+	gboolean    *active;
+	xmlNodePtr   root;
 
 	root = gst_xml_doc_get_root (tool->config);
 

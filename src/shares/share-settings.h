@@ -35,7 +35,10 @@ enum {
 
 void          share_settings_dialog_run        (const gchar*, gboolean);
 void          share_settings_create_combo      (void);
+gboolean      share_settings_validate          (void);
 
 void          smb_settings_prepare_dialog      (void);
 void          smb_settings_save                (void);
+
+
 #endif /* _SHARE_SETTINGS_H */

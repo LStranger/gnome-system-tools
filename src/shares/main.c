@@ -44,9 +44,11 @@ static GstDialogSignal signals [] = {
 	{ "delete_share",             "clicked",      G_CALLBACK (on_delete_share_clicked) },
 	/* Shares dialog */
 	{ "share_type",               "changed",      G_CALLBACK (on_share_type_changed) },
+	{ "share_type",               "changed",      G_CALLBACK (on_dialog_validate) },
 	{ "share_nfs_delete",         "clicked",      G_CALLBACK (on_share_nfs_delete_clicked) },
 	{ "share_nfs_add",            "clicked",      G_CALLBACK (on_share_nfs_add_clicked) },
 	{ "share_smb_settings",       "clicked",      G_CALLBACK (on_share_smb_settings_clicked) },
+	{ "share_smb_name",           "changed",      G_CALLBACK (on_dialog_validate) },
 	/* NFS add hosts dialog */
 	{ "share_nfs_host_type",      "changed",      G_CALLBACK (on_share_nfs_host_type_changed) },
 	/* SMB settings dialog */
