@@ -498,6 +498,69 @@ connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean en
 			       active_mask[enabled ? 1 : 0]);
 }
 
+/* NULL if false, else GtkWidget in data in found node */
+static GtkWidget *
+connection_default_gw_exists (GtkWidget *omenu, gchar *dev)
+{
+	GList *l;
+	gchar *value;
+
+	for (l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
+	     l; l = l->next) {
+		value = gtk_object_get_data (GTK_OBJECT (l->data), "value");
+		if (!strcmp (dev, value))
+			return l->data;
+	}
+
+	return NULL;
+}
+
+void
+connection_default_gw_add (gchar *dev)
+{
+	GtkWidget *omenu, *menu, *item;
+	GList *l;
+	gchar *cpy;
+	
+	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+
+	if (connection_default_gw_exists (omenu, dev))
+		return;
+	
+	cpy = g_strdup (dev);
+	item = gtk_menu_item_new_with_label (dev);
+	gtk_object_set_data (GTK_OBJECT (item), "value", cpy);
+	gtk_widget_show (item);
+	gtk_menu_append (GTK_MENU (menu), item);
+	
+	l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
+	l = g_list_append (l, item);
+	gtk_object_set_data (GTK_OBJECT (omenu), "list", l);
+}
+
+void
+connection_default_gw_remove (gchar *dev)
+{
+	GtkWidget *omenu, *menu, *item;
+	GList *l;
+	gchar *cpy;
+	
+	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+
+	g_return_if_fail ((item = connection_default_gw_exists (omenu, dev)));
+	
+	l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
+	l = g_list_remove (l, item);
+	gtk_object_set_data (GTK_OBJECT (omenu), "list", l);
+
+	cpy = gtk_object_get_data (GTK_OBJECT (item), "value");
+	g_free (cpy);
+	
+	gtk_widget_destroy (item);
+}
+
 void
 connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 {
@@ -584,6 +647,7 @@ connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 	row = gtk_clist_append (GTK_CLIST (clist), text);
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
 
+	connection_default_gw_add (cxn->dev);
 	connection_update_row (cxn);
 	connection_update_row_enabled (cxn, cxn->enabled);
 

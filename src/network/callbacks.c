@@ -437,6 +437,7 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 	if (res)
 		return;
 
+	connection_default_gw_remove (cxn->dev);
 	connection_free (cxn);
 	gtk_clist_remove (GTK_CLIST (clist), connection_row_selected);
 	xst_dialog_modify (tool->main_dialog);

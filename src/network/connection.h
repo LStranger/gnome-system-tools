@@ -110,6 +110,8 @@ extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsect
 extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
 extern void connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean enabled);
 extern void connection_add_to_list (XstConnection *cxn, GtkWidget *clist);
+extern void connection_default_gw_add (gchar *dev);
+extern void connection_default_gw_remove (gchar *dev);
 extern void connection_update_row_enabled (XstConnection *cxn, gboolean enabled);
 extern void connection_update_row (XstConnection *cxn);
 extern void connection_update_complexity (XstDialogComplexity complexity);
