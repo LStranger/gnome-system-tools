@@ -52,26 +52,11 @@ gchar *s = N_("Add Group...");
 gchar *s = N_("Settings...");
 gchar *s = N_("Delete");
 gchar *s = N_("Groups");
-gchar *s = N_("These are global values that will affect the creation of new users. They are only available when you click \"More Options\".");
-gchar *s = N_("System settings");
-gchar *s = N_("Home directory:");
-gchar *s = N_("Default shell:");
-gchar *s = N_("Default group:");
-gchar *s = N_("Min/max values for automatic UID/GID");
-gchar *s = N_("Maximum UID:");
-gchar *s = N_("Minimum UID:");
-gchar *s = N_("Minimum GID:");
-gchar *s = N_("Maximum GID:");
-gchar *s = N_("Password expiration");
-gchar *s = N_("Days a password may be used:");
-gchar *s = N_("Minimum days allowed between password changes:");
-gchar *s = N_("Days between warning and\n"
-              " password expiration:  ");
-gchar *s = N_("Random Password by default");
-gchar *s = N_("New Profile");
-gchar *s = N_("Delete Profile");
-gchar *s = N_("Save Profile");
+gchar *s = N_("User profiles can be used as templates to facilitate the creation of new users. To edit a profile, change the settings in the followinf tabs.");
+gchar *s = N_("New");
 gchar *s = N_("Copy Profile");
+gchar *s = N_("Settings...");
+gchar *s = N_("Delete");
 gchar *s = N_("Profiles");
 gchar *s = N_("Show system users and groups");
 gchar *s = N_("window2");
@@ -103,3 +88,75 @@ gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
 gchar *s = N_("label80");
+gchar *s = N_("druid? ");
+gchar *s = N_("User Creation Druid");
+gchar *s = N_("This druid is designed to help you quickly \n"
+              "and easily add new users to your system.\n"
+              "\n"
+              "");
+gchar *s = N_("User Identity  (step 1 of 2)");
+gchar *s = N_("Please enter a username for the new user in the space below. You may also enter a comment about the user, such as his or her real name. ");
+gchar *s = N_("Username:");
+gchar *s = N_("Comment:");
+gchar *s = N_("Click \"Next\" to continue");
+gchar *s = N_("Password options (step 2 of 2)");
+gchar *s = N_("There is a notebook with hidden tabs inside the \"anna's \n"
+              "Password\" frame. When the user clicks \"Generate random\n"
+              "password\", the second notebook page should be shown.");
+gchar *s = N_("Set password by hand");
+gchar *s = N_("Generate random password");
+gchar *s = N_("anna's password");
+gchar *s = N_("New:");
+gchar *s = N_("Check password quality");
+gchar *s = N_("Confirm:");
+gchar *s = N_("label197");
+gchar *s = N_("Password has been set to \"xnu35irh\".");
+gchar *s = N_("New password");
+gchar *s = N_("label198");
+gchar *s = N_("Click \"Next\" to continue");
+gchar *s = N_("Finished");
+gchar *s = N_("Congratulations, you are finished. User \"anna\" has been\n"
+              "created. Click \"Finish\" to complete ");
+gchar *s = N_("New Profile");
+gchar *s = N_("So you want to make a new profile,\n"
+              "huh? This here is your dialog.");
+gchar *s = N_("Name:");
+gchar *s = N_("Comment:");
+gchar *s = N_("Inherit settings from:");
+gchar *s = N_("Default");
+gchar *s = N_("Profile Editor -- Users and Groups Tool");
+gchar *s = N_("Okay in the interest of actually committing\n"
+              "this sometime this week, i am going to forego\n"
+              "writing good sentences for now.");
+gchar *s = N_("Edit Profile:");
+gchar *s = N_("System defaults");
+gchar *s = N_("Home directory:");
+gchar *s = N_("Default shell:");
+gchar *s = N_("Default group:");
+gchar *s = N_("Automatic UID/GID");
+gchar *s = N_("Minimum UID:");
+gchar *s = N_("Minimum GID:");
+gchar *s = N_("Maximum GID:");
+gchar *s = N_("Maximum UID:");
+gchar *s = N_("System");
+gchar *s = N_("Okay in the interest of actually committing\n"
+              "this sometime this week, i am going to forego\n"
+              "writing good sentences for now.");
+gchar *s = N_("Edit Profile:");
+gchar *s = N_("Default");
+gchar *s = N_("Filename");
+gchar *s = N_("Location");
+gchar *s = N_("Add");
+gchar *s = N_("Delete");
+gchar *s = N_("Files");
+gchar *s = N_("Okay in the interest of actually committing\n"
+              "this sometime this week, i am going to forego\n"
+              "writing good sentences for now.");
+gchar *s = N_("Edit Profile:");
+gchar *s = N_("Default");
+gchar *s = N_("Password options");
+gchar *s = N_("Days betweem warning and password expiration:");
+gchar *s = N_("Assign a random pasword by default");
+gchar *s = N_("Number of days that a password may be used:");
+gchar *s = N_("Minimum days allowed between password changes:");
+gchar *s = N_("Security");
