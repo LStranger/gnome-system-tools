@@ -611,10 +611,15 @@
 	<class>GtkOptionMenu</class>
 	<name>type_widget</name>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_type_widget_clicked</handler>
+	  <last_modification_time>Mon, 04 Sep 2000 08:58:59 GMT</last_modification_time>
+	</signal>
 	<items>Swap Partition
 Swap File
 </items>
-	<initial_choice>0</initial_choice>
+	<initial_choice>1</initial_choice>
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>3</right_attach>
@@ -771,7 +776,6 @@ Swap File
       <widget>
 	<class>GtkButton</class>
 	<name>browse_button</name>
-	<sensitive>False</sensitive>
 	<can_focus>True</can_focus>
 	<signal>
 	  <name>clicked</name>
@@ -1015,6 +1019,49 @@ Swap File
 	</widget>
       </widget>
     </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkFileSelection</class>
+  <name>file_selection</name>
+  <border_width>10</border_width>
+  <visible>False</visible>
+  <title>Select  Swap File</title>
+  <type>GTK_WINDOW_DIALOG</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>True</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <show_file_op_buttons>True</show_file_op_buttons>
+
+  <widget>
+    <class>GtkButton</class>
+    <child_name>FileSel:ok_button</child_name>
+    <name>file_ok</name>
+    <can_default>True</can_default>
+    <can_focus>True</can_focus>
+    <signal>
+      <name>clicked</name>
+      <handler>file_ok_cb</handler>
+      <last_modification_time>Mon, 04 Sep 2000 08:26:23 GMT</last_modification_time>
+    </signal>
+    <label>OK</label>
+  </widget>
+
+  <widget>
+    <class>GtkButton</class>
+    <child_name>FileSel:cancel_button</child_name>
+    <name>file_cancel</name>
+    <can_default>True</can_default>
+    <can_focus>True</can_focus>
+    <signal>
+      <name>clicked</name>
+      <handler>file_cancel_cb</handler>
+      <last_modification_time>Mon, 04 Sep 2000 08:26:32 GMT</last_modification_time>
+    </signal>
+    <label>Cancel</label>
   </widget>
 </widget>
 
