@@ -1,3 +1,19 @@
+2001-05-08  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* transfer.c (xst_xml_element_get_boolean): utility.
+	(transfer_misc_xml_to_tool): Also get the dialinstalled
+	flag from the XML.
+
+	* main.c (main): add check_dialer apply hook.
+
+	* callbacks.c (on_network_admin_show): hiding dns_dhcp
+	until it actually does sth.
+	(callbacks_check_dialer_hook): Warn the user if wvdial
+	is not installed.
+
+	* transfer.c (transfer_string_list_gui_to_xml): fixed
+	core dump caused by editables not ending in \n.
+
 2001-04-26  Chema Celorio  <chema@celorio.com>
 
 	* Makefile.am: add $(srcdir) to security.in

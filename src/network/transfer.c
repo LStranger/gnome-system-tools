@@ -171,7 +171,7 @@ transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *widget;
 	int i;
-	gchar *text;
+	gchar *text, *pos = NULL;
 	gchar *end;
 	xmlNodePtr node;
 
@@ -186,17 +186,19 @@ transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 		text = gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1);
 
 		end = text + strlen (text);
-		for (; text < end;) {
-			gchar *pos;
-
+		for (; text < end; text = pos + 1) {
 			if (!*text)
 				continue;
 
 			pos = strchr (text, '\n');
-			*pos = 0;
+			if (pos)
+				*pos = 0;
+			
 			node = xst_xml_element_add (root, transfer_string_list_table [i].xml_path);
 			xst_xml_element_set_content (node, text);
-			text = pos+1;
+
+			if (!pos)
+				break;
 		}
 	}
 }
@@ -384,26 +386,40 @@ transfer_interfaces_to_gui (XstTool *tool, xmlNodePtr root)
 	callbacks_update_connections_hook (tool->main_dialog, NULL);
 }
 
-static void
-transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
+static gboolean
+xst_xml_element_get_boolean (xmlNodePtr root, gchar *name)
 {
 	xmlNodePtr node;
 	gboolean res;
 	gchar *str;
 
 	res = FALSE;
-	node = xst_xml_element_find_first (root, "smbinstalled");
+	node = xst_xml_element_find_first (root, name);
 
 	if (node) {
-		gtk_object_set_data (GTK_OBJECT (tool), "tool_configured", (gpointer) TRUE);
 		str = xst_xml_element_get_content (node);
 		res = (*str == '1')? TRUE: FALSE;
 		g_free (str);
 	}
 
-	gtk_object_set_data (GTK_OBJECT (tool), "smbinstalled", (gpointer) res);
+	return res;
 }
 
+static void
+transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
+{
+	gboolean res;
+
+	if (xst_xml_element_find_first (root, "smbinstalled"))
+		gtk_object_set_data (GTK_OBJECT (tool), "tool_configured", (gpointer) TRUE);
+	
+	res = xst_xml_element_get_boolean (root, "smbinstalled");
+	gtk_object_set_data (GTK_OBJECT (tool), "smbinstalled", (gpointer) res);
+
+	res = xst_xml_element_get_boolean (root, "dialinstalled");
+	gtk_object_set_data (GTK_OBJECT (tool), "dialinstalled", (gpointer) res);
+}
+	
 void
 transfer_xml_to_gui (XstTool *tool, gpointer data)
 {

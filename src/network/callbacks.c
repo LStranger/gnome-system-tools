@@ -73,6 +73,7 @@ connection_actions_set_sensitive (gboolean state)
 void 
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
+	GtkWidget *widget;
 	GtkCList *list;
 
 	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list"));
@@ -83,6 +84,10 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	gtk_clist_set_column_auto_resize (list, 0, TRUE);
 	gtk_clist_set_column_auto_resize (list, 1, TRUE);
 	gtk_clist_set_column_auto_resize (list, 2, TRUE);
+
+#warning we re hiding dns_dhcp until it actually does sth.
+	widget = xst_dialog_get_widget (tool->main_dialog, "dns_dhcp");
+	gtk_widget_hide (widget);
 }
 
 void
@@ -421,7 +426,7 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 	gchar *hostname_old;
 	gchar *hostname_new;
 	xmlNode *root, *node;
-	GtkWidget *entry, *message;
+	GtkWidget *entry;
 
 	root = xst_xml_doc_get_root (dialog->tool->config);
 	node = xst_xml_element_find_first (root, "hostname");
@@ -437,6 +442,7 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 				"from launching new applications,\n"
 				"and so you will have to log in again.\n\nContinue anyway?");
 		gint res;
+		GtkWidget *message;
 		
 		message = gnome_message_box_new (text, GNOME_MESSAGE_BOX_WARNING,
 						 _("Don't change host name"),
@@ -472,6 +478,41 @@ callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
 		connection_set_row_pixtext (clist, i, cxn->enabled ? _("Active") :
 					    _("Inactive"), cxn->enabled);
+	}
+
+	return TRUE;
+}
+
+gboolean
+callbacks_check_dialer_hook (XstDialog *dialog, gpointer data)
+{
+	XstTool *tool;
+	gboolean has_dialer;
+
+	tool = XST_TOOL (data);
+	has_dialer = (gboolean) gtk_object_get_data (GTK_OBJECT (tool),
+						     "dialinstalled");
+	if (!has_dialer)
+	{
+		gchar *text = _("wvdial could not be found on your system.\n"
+				"You need to install wvdial, or the PPP (modem)\n"
+				"connections will not activate.\n\nContinue anyway?");
+		gint res;
+		GtkWidget *message;
+		
+		message = gnome_message_box_new (text, GNOME_MESSAGE_BOX_WARNING,
+						 GNOME_STOCK_BUTTON_OK,
+						 GNOME_STOCK_BUTTON_CANCEL,
+						 NULL);
+		gnome_dialog_set_parent (GNOME_DIALOG (message), GTK_WINDOW (dialog));
+		res = gnome_dialog_run_and_close (GNOME_DIALOG (message));
+
+		switch (res) {
+		case 0:
+			return TRUE;
+		case 1:
+			return FALSE;
+		}
 	}
 
 	return TRUE;

@@ -71,3 +71,4 @@ void on_status_button_toggled (GtkWidget *w, gpointer null);
 
 gboolean callbacks_check_hostname_hook (XstDialog *dialog, gpointer data);
 gboolean callbacks_update_connections_hook (XstDialog *dialog, gpointer data);
+gboolean callbacks_check_dialer_hook (XstDialog *dialog, gpointer data);
