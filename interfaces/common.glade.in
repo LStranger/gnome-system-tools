@@ -19,7 +19,7 @@
 
 <widget>
   <class>GtkWindow</class>
-  <name>reading</name>
+  <name>report_window</name>
   <visible>False</visible>
   <signal>
     <name>delete_event</name>
@@ -71,7 +71,7 @@
 
 	  <widget>
 	    <class>GnomePixmap</class>
-	    <name>pixmap3</name>
+	    <name>report_pixmap</name>
 	    <filename>reading.png</filename>
 	    <child>
 	      <padding>0</padding>
@@ -94,7 +94,7 @@
 
 	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label49</name>
+	    <name>report_label</name>
 	    <label>Scanning your system configuration.</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -111,7 +111,7 @@
 
 	  <widget>
 	    <class>GtkProgressBar</class>
-	    <name>read_progress</name>
+	    <name>report_progress</name>
 	    <value>0</value>
 	    <lower>0</lower>
 	    <upper>100</upper>
@@ -144,7 +144,7 @@
 
 	<widget>
 	  <class>GtkEntry</class>
-	  <name>read_report</name>
+	  <name>report_text</name>
 	  <sensitive>False</sensitive>
 	  <can_focus>True</can_focus>
 	  <editable>False</editable>
@@ -160,16 +160,15 @@
 
 	<widget>
 	  <class>GtkButton</class>
-	  <name>read_report_visibility</name>
+	  <name>report_visibility</name>
 	  <width>22</width>
 	  <height>22</height>
 	  <can_focus>True</can_focus>
 	  <signal>
 	    <name>clicked</name>
-	    <handler>tool_read_report_visible_toggle</handler>
-	    <last_modification_time>Mon, 11 Dec 2000 03:11:33 GMT</last_modification_time>
+	    <handler>tool_report_list_visible_toggle</handler>
+	    <last_modification_time>Sun, 07 Jan 2001 18:03:00 GMT</last_modification_time>
 	  </signal>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -184,7 +183,7 @@
 
       <widget>
 	<class>GtkScrolledWindow</class>
-	<name>read_report_window</name>
+	<name>report_list_scrolled_window</name>
 	<height>140</height>
 	<visible>False</visible>
 	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
@@ -199,7 +198,7 @@
 
 	<widget>
 	  <class>GtkCList</class>
-	  <name>read_report_clist</name>
+	  <name>report_list</name>
 	  <sensitive>False</sensitive>
 	  <columns>2</columns>
 	  <column_widths>9,80</column_widths>
@@ -233,139 +232,6 @@
 	    <ypad>0</ypad>
 	  </widget>
 	</widget>
-      </widget>
-    </widget>
-  </widget>
-</widget>
-
-<widget>
-  <class>GtkWindow</class>
-  <name>writing</name>
-  <visible>False</visible>
-  <signal>
-    <name>delete_event</name>
-    <handler>gtk_true</handler>
-    <last_modification_time>Fri, 29 Dec 2000 16:05:34 GMT</last_modification_time>
-  </signal>
-  <title>Helix Setup Tools</title>
-  <type>GTK_WINDOW_DIALOG</type>
-  <position>GTK_WIN_POS_CENTER</position>
-  <modal>True</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>False</allow_grow>
-  <auto_shrink>False</auto_shrink>
-
-  <widget>
-    <class>GtkFrame</class>
-    <name>frame6</name>
-    <label_xalign>0</label_xalign>
-    <shadow_type>GTK_SHADOW_OUT</shadow_type>
-
-    <widget>
-      <class>GtkVBox</class>
-      <name>vbox5</name>
-      <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
-
-      <widget>
-	<class>GtkHBox</class>
-	<name>hbox7</name>
-	<border_width>6</border_width>
-	<homogeneous>False</homogeneous>
-	<spacing>16</spacing>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkVBox</class>
-	  <name>vbox6</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GnomePixmap</class>
-	    <name>pixmap4</name>
-	    <filename>reading.png</filename>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkVBox</class>
-	  <name>vbox7</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>4</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label50</name>
-	    <label>Updating your system configuration.</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkProgressBar</class>
-	    <name>write_progress</name>
-	    <value>0</value>
-	    <lower>0</lower>
-	    <upper>100</upper>
-	    <bar_style>GTK_PROGRESS_CONTINUOUS</bar_style>
-	    <orientation>GTK_PROGRESS_LEFT_TO_RIGHT</orientation>
-	    <activity_mode>False</activity_mode>
-	    <show_text>False</show_text>
-	    <format>%P %%</format>
-	    <text_xalign>0.5</text_xalign>
-	    <text_yalign>0.5</text_yalign>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkEntry</class>
-	<name>write_report</name>
-	<sensitive>False</sensitive>
-	<can_focus>True</can_focus>
-	<editable>False</editable>
-	<text_visible>True</text_visible>
-	<text_max_length>0</text_max_length>
-	<text></text>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
       </widget>
     </widget>
   </widget>
@@ -429,7 +295,6 @@
 	    <handler>tool_user_help</handler>
 	    <last_modification_time>Fri, 29 Dec 2000 05:58:47 GMT</last_modification_time>
 	  </signal>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -451,7 +316,6 @@
 	    <last_modification_time>Fri, 29 Dec 2000 05:58:57 GMT</last_modification_time>
 	  </signal>
 	  <label>blah</label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -486,7 +350,6 @@
 	    <last_modification_time>Fri, 29 Dec 2000 04:14:16 GMT</last_modification_time>
 	  </signal>
 	  <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -504,7 +367,6 @@
 	    <last_modification_time>Fri, 29 Dec 2000 03:04:37 GMT</last_modification_time>
 	  </signal>
 	  <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>

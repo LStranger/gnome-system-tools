@@ -37,7 +37,7 @@
 /*#include "reading.xpm"*/
 
 /* libglade callbacks */
-void tool_read_report_visible_toggle (GtkWidget *, gpointer);
+void tool_report_list_visible_toggle (GtkWidget *, gpointer);
 void tool_user_apply (GtkWidget *, gpointer);
 gint tool_user_delete (GtkWidget *, GdkEvent *, gpointer);
 void tool_user_help (GtkWidget *w, gpointer);
@@ -195,7 +195,7 @@ tool_context_destroy (ToolContext *tc)
 static void
 destroy_widget_cb (GtkWidget *w, gpointer data)
 {
-	gtk_container_remove (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+	gtk_container_remove (GTK_CONTAINER (tool_widget_get_common ("report_visibility")),
 			      w);
 }
 
@@ -209,10 +209,10 @@ progress_folding_button_set_hidden ()
 				       GNOME_STOCK_PIXMAP_DOWN);
 	gtk_widget_show (w);
 	
-	gtk_container_foreach (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+	gtk_container_foreach (GTK_CONTAINER (tool_widget_get_common ("report_visibility")),
 			       destroy_widget_cb, NULL);
 
-	gtk_container_add (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+	gtk_container_add (GTK_CONTAINER (tool_widget_get_common ("report_visibility")),
 			   w);
 }
 
@@ -226,10 +226,10 @@ progress_folding_button_set_visible ()
 				       GNOME_STOCK_PIXMAP_UP);
 	gtk_widget_show (w);
 	
-	gtk_container_foreach (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+	gtk_container_foreach (GTK_CONTAINER (tool_widget_get_common ("report_visibility")),
 			       destroy_widget_cb, NULL);
 
-	gtk_container_add (GTK_CONTAINER (tool_widget_get_common ("read_report_visibility")),
+	gtk_container_add (GTK_CONTAINER (tool_widget_get_common ("report_visibility")),
 			   w);
 }
 
@@ -239,20 +239,20 @@ static gboolean report_list_visible = FALSE;
 
 
 void
-tool_read_report_visible_toggle (GtkWidget *w, gpointer null)
+tool_report_list_visible_toggle (GtkWidget *w, gpointer null)
 {
 	GtkAdjustment *vadj;
 	
-	vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (tool_widget_get_common ("read_report_window")));
+	vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (tool_widget_get_common ("report_list_scrolled_window")));
 	report_list_visible = ~report_list_visible;
 	
 	if (report_list_visible)
 	{
 		progress_folding_button_set_visible ();
 		
-		gtk_widget_set_usize (tool_widget_get_common ("read_report_window"),
+		gtk_widget_set_usize (tool_widget_get_common ("report_list_scrolled_window"),
 				      -1, 140);
-		gtk_widget_show (tool_widget_get_common ("read_report_window"));
+		gtk_widget_show (tool_widget_get_common ("report_list_scrolled_window"));
 		gtk_adjustment_set_value (vadj,
 					  vadj->upper - vadj->page_size);
 		gtk_adjustment_value_changed (vadj);
@@ -261,7 +261,7 @@ tool_read_report_visible_toggle (GtkWidget *w, gpointer null)
 	{
 		progress_folding_button_set_hidden ();
 		
-		gtk_widget_hide (tool_widget_get_common ("read_report_window"));
+		gtk_widget_hide (tool_widget_get_common ("report_list_scrolled_window"));
 		if (timeout_done)
 			gtk_main_quit();
 	}
@@ -279,10 +279,10 @@ timeout_cb (void)
 
 
 static void
-read_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
+report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 {
 	char c;
-	GtkWidget *bar, *report, *report_list, *report_window;
+	GtkWidget *bar, *report, *report_list, *report_list_scrolled_window;
 	GtkAdjustment *vadj;
 /*	gfloat p;*/
 	static char *line = NULL;
@@ -293,11 +293,11 @@ read_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		NULL
 	};
 
-	bar = tool_widget_get_common ("read_progress");
-	report = tool_widget_get_common ("read_report");
-	report_list = tool_widget_get_common ("read_report_clist");
-	report_window = tool_widget_get_common ("read_report_window");
-	vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (report_window));
+	bar = tool_widget_get_common ("report_progress");
+	report = tool_widget_get_common ("report_text");
+	report_list = tool_widget_get_common ("report_list");
+	report_list_scrolled_window = tool_widget_get_common ("report_list_scrolled_window");
+	vadj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (report_list_scrolled_window));
 
 	if (!line)
 	{
@@ -373,7 +373,7 @@ read_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 
 
 static void
-read_progress (int fd)
+report_progress (int fd, gchar *label)
 {
 	guint input_id;
 	gint cb_id;
@@ -381,24 +381,31 @@ read_progress (int fd)
 	timeout_done = FALSE;
 	report_list_visible = FALSE;
 
+	gtk_label_set_text (GTK_LABEL (tool_widget_get_common ("report_label")),
+			    label);
 	progress_folding_button_set_hidden ();
+	gtk_progress_set_percentage (GTK_PROGRESS (tool_widget_get_common ("report_progress")),
+				     0.0);
 	
-	input_id = gtk_input_add_full (fd, GDK_INPUT_READ, read_progress_tick,
+	input_id = gtk_input_add_full (fd, GDK_INPUT_READ, report_progress_tick,
 				       NULL, NULL, NULL);
 
+	gtk_widget_show (tool_widget_get_common ("report_window"));
+	
 	gtk_main ();
 
 	gtk_input_remove (input_id);
 
 	/* Set progress to 100% and wait a bit before closing display */
   
-	gtk_progress_set_percentage (GTK_PROGRESS (tool_widget_get_common ("read_progress")),
+	gtk_progress_set_percentage (GTK_PROGRESS (tool_widget_get_common ("report_progress")),
 				     1.0);
 	cb_id = gtk_timeout_add (3000, (GtkFunction) timeout_cb, NULL);
 	gtk_main ();
 	gtk_timeout_remove (cb_id);
 	
-	gtk_clist_clear (GTK_CLIST (tool_widget_get_common ("read_report_clist")));
+	gtk_widget_hide (tool_widget_get_common ("report_window"));
+	gtk_clist_clear (GTK_CLIST (tool_widget_get_common ("report_list")));
 }
 
 
@@ -439,7 +446,7 @@ tool_config_load (void)
 		 * mechanism. Let's just load it all into memory, then. Also, refusing
 		 * enormous documents can be considered a plus. </dystopic> */
 
-		read_progress (fd [0]);
+		report_progress (fd [0], _("Scanning your system configuration."));
 
 		p = malloc (102400);
 		fcntl(fd [0], F_SETFL, 0);  /* Let's block */
@@ -483,10 +490,10 @@ tool_config_save ()
 {
 	ToolContext *tc;
 	FILE *f;
-	int fd [2];
+	int fd_xml [2], fd_report [2];
 	int t;
 	/* char *argv [] = { 0, "--filter", "-v", 0 }; */
-	char *argv [] = { 0, "--set", 0 };
+	char *argv [] = { 0, "--set", "--progress", "--report", 0 };
 	gchar *path;
 
 	tc = tool_context;
@@ -496,7 +503,8 @@ tool_config_save ()
 	if (tc->to_xml)
 		tc->to_xml (xml_doc_get_root (tc->config));
 
-	pipe (fd);
+	pipe (fd_xml);
+	pipe (fd_report);
 
 	t = fork ();
 	if (t < 0)
@@ -507,18 +515,23 @@ tool_config_save ()
 	{
 		/* Parent */
 
-		close (fd [0]);	/* Close reading end */
-		f = fdopen (fd [1], "w");
+		close (fd_xml [0]);	/* Close reading end of XML pipe */
+		close (fd_report [1]);  /* Close writing end of report pipe */
+		f = fdopen (fd_xml [1], "w");
 
 		xmlDocDump (f, tc->config);
 		fclose (f);
+		report_progress (fd_report [0], _("Updating your system configuration."));
+		close (fd_report [0]);
 	}
 	else
 	{
 		/* Child */
 
-		close (fd [1]);	/* Close writing end */
-		dup2 (fd [0], STDIN_FILENO);
+		close (fd_xml [1]);	/* Close writing end of XML pipe */
+		close (fd_report [0]);  /* Close reading end of report pipe */
+		dup2 (fd_xml [0], STDIN_FILENO);
+		dup2 (fd_report [1], STDOUT_FILENO);
 
 		argv [0] = make_script_name (tc->task);
 		path = make_script_path (tc->task);
@@ -681,6 +694,7 @@ tool_modified_cb ()
 	tool_set_modified (TRUE);
 }
 
+#if 0
 
 static void
 handle_events_immediately ()
@@ -720,6 +734,7 @@ tool_splash_hide ()
 	gtk_widget_hide (w0);
 }
 
+#endif
 
 static int reply;
 
@@ -832,9 +847,9 @@ tool_init (gchar *task, int argc, char *argv [])
 		tool_set_access (FALSE);
 	}
 
-	tool_splash_show ();
+	/* tool_splash_show (); */
 	tool_config_load ();
-	tool_splash_hide ();
+	/* tool_splash_hide (); */
 
 	/* Make sure apply and complexity start out as insensitive */
 
