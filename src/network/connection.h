@@ -184,6 +184,7 @@ gboolean connection_poll_stat (GstTool*);
 gchar*   connection_autodetect_modem (void);
 gchar*   connection_description_from_type (GstConnectionType);
 void     connection_fill_ip_menu (GtkWidget*);
+void     connection_update_ip_config (GstConnection*);
 void     connection_enable (GstConnection*, gboolean);
 void     connection_apply_and_enable (GstTool*, GstConnection*);
 
