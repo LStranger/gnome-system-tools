@@ -29,8 +29,8 @@
 
 enum {
 	COL_DEFAULT,
-	COL_TYPE,
 	COL_LABEL,
+	COL_TYPE,
 	COL_IMAGE,
 	COL_DEV,
 

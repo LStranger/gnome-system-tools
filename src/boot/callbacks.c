@@ -90,6 +90,9 @@ on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer user_data)
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout"),
 						 gtk_toggle_button_get_active (toggle));
 
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout_label"),
+						 gtk_toggle_button_get_active (toggle));
+
 	xst_dialog_modify (tool->main_dialog);
 }
 

@@ -1,3 +1,15 @@
+2001-04-27  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* e-table.h: changed order for COL enum.
+
+	* e-table.c (boot_value_type): Changed type "Unknown" to "Other".
+	(create_extras): justify left, not center.
+	Changed column order, to Name|Type, which is more expected.
+
+	* callbacks.c (on_boot_prompt_toggled): change sensitivity on
+	the label to make it mor apparent that the feature is not activated.
+	Not too pretty.
+
 2001-04-26  Chema Celorio  <chema@celorio.com>
 
 	* Makefile.am: add $(srcdir) to security.in

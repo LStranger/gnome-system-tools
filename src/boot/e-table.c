@@ -42,8 +42,8 @@ GArray *boot_array;
 const gchar *table_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
   <ETableColumn model_col=\"0\" _title=\"Default\" expansion=\"1.0\" minimum_width=\"16\" resizable=\"true\" cell=\"checkbox\" compare=\"integer\"/> \
-  <ETableColumn model_col=\"1\" _title=\"Type\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
-  <ETableColumn model_col=\"2\" _title=\"Name\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
+  <ETableColumn model_col=\"1\" _title=\"Name\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
+  <ETableColumn model_col=\"2\" _title=\"Type\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
   <ETableColumn model_col=\"3\" _title=\"Kernel Image\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
   <ETableColumn model_col=\"4\" _title=\"Device\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
 </ETableSpecification>";
@@ -163,7 +163,7 @@ create_extras (void)
 
 	extras = e_table_extras_new ();
 
-	ec = e_cell_text_new (NULL, GTK_JUSTIFY_CENTER);
+	ec = e_cell_text_new (NULL, GTK_JUSTIFY_LEFT);
 	e_table_extras_add_cell (extras, "centered_cell", ec);
 
 	return extras;
@@ -324,7 +324,7 @@ boot_value_type (xmlNodePtr node, gboolean bare)
 	}
 
 	if (!buf)
-		buf = g_strdup (_("Unknown"));
+		buf = g_strdup (_("Other"));
 
 	if (bare)
 		return buf;
