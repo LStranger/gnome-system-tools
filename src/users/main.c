@@ -38,6 +38,7 @@
 #include "global.h"
 
 #include "transfer.h"
+#include "e-table.h"
 #include "callbacks.h"
 
 int
@@ -52,6 +53,7 @@ main (int argc, char *argv[])
 
 	tool_set_frozen(TRUE);
 	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
+	e_table_create ();
 	tool_set_frozen(FALSE);
 
   

@@ -181,7 +181,7 @@ select_row (ETable *et, int row)
 	if (et == E_TABLE (user_table))
 	{
 		user_actions_set_sensitive (TRUE);
-		l = user_list;
+		l = user_current_list ();
 		frame_name = "user_settings_frame";
 		fmt = _("Settings for user ");
 	}
@@ -225,7 +225,7 @@ e_table_create (void)
                                            initialize_value,
                                            value_is_empty,
                                            value_to_string,
-                                           user_list);
+                                           user_current_list());
 
 	user_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, USER_SPEC, NULL);
 
@@ -280,8 +280,12 @@ e_table_del (gchar del)
 	{
 		table = E_TABLE (user_table);
 		row = e_table_get_cursor_row (table);
-		tmp_list = g_list_nth (user_list, row);
-		user_list = g_list_remove (user_list, tmp_list->data);
+		tmp_list = g_list_nth (user_current_list (), row);
+		
+		user_adv_list = g_list_remove (user_adv_list, tmp_list->data);
+		if (!user_group_is_system ((user_group *) tmp_list->data))
+			user_basic_list = g_list_remove (user_basic_list, tmp_list->data);
+		user_free (tmp_list->data);
 	}
 
 	else if (del == GROUP)
@@ -289,7 +293,11 @@ e_table_del (gchar del)
 		table = E_TABLE (group_table);
 		row = e_table_get_cursor_row (table);
 		tmp_list = g_list_nth (group_list, row);
+		
 		group_list = g_list_remove (group_list, tmp_list->data);
+		if (!user_group_is_system ((user_group *) tmp_list->data))
+			group_basic_list = g_list_remove (group_basic_list, tmp_list->data);
+		group_free (tmp_list->data);
 	}
 	
 	else
@@ -349,7 +357,7 @@ e_table_get (gchar get)
 		etm = E_TABLE_MODEL (table->model);
 		row = e_table_get_cursor_row (table);
 
-		return (user *)g_list_nth_data (user_list, row);
+		return (user *)g_list_nth_data (user_current_list (), row);
 	}
 
 	if (get == GROUP)

@@ -225,7 +225,10 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 			}
 		}
 		
-		user_list = g_list_append (user_list, u);
+		user_adv_list = g_list_append (user_adv_list, u);
+		
+		if (!user_group_is_system (&u->ug))
+			user_basic_list = g_list_append (user_basic_list, u);
 	}
 }
 
@@ -284,7 +287,10 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 				user_node = xml_element_find_next (user_node, "user"))
 				g->users = g_list_append (g->users, my_xml_element_get_content (user_node));
 
-		group_list = g_list_append (group_list, g);
+		group_adv_list = g_list_append (group_adv_list, g);
+		
+		if (!user_group_is_system (&g->ug))
+			group_basic_list = g_list_append (group_basic_list, g);
 	}
 }
 
@@ -305,7 +311,7 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 	userdb_node = xml_element_find_first (root, "userdb");
 	xml_element_destroy_children (userdb_node);
 
-	tmp_list = user_list;
+	tmp_list = user_adv_list;
 	while (tmp_list)
 	{
 		u = tmp_list->data;
@@ -373,7 +379,7 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 	groupdb_node = xml_element_find_first (root, "groupdb");
 	xml_element_destroy_children (groupdb_node);
 
-	tmp_list = group_list;
+	tmp_list = group_adv_list;
 	while (tmp_list)
 	{
 		g = tmp_list->data;
@@ -408,8 +414,6 @@ transfer_xml_to_gui (xmlNodePtr root)
 	transfer_logindefs_from_xml (root);
 	transfer_user_list_xml_to_glist (root);
 	transfer_group_list_xml_to_glist (root);
-
-	e_table_create ();
 }
 
 void

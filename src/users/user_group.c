@@ -33,9 +33,22 @@ static gboolean is_valid_name (gchar *str);
 static gint char_sort_func (gconstpointer a, gconstpointer b);
 
 GList *user_list = NULL;
+GList *user_basic_list = NULL;
+GList *user_adv_list = NULL;
 GList *group_list = NULL;
+GList *group_basic_list = NULL;
+GList *group_adv_list = NULL;
 
 login_defs logindefs;
+
+static gboolean user_group_adv_mode = FALSE;
+
+extern void user_group_free (user_group *ug)
+{
+	g_free (key);
+	g_free (name);
+	g_free (password);
+}
 
 extern gboolean user_group_is_system (user_group *ug)
 {
@@ -57,7 +70,7 @@ extern gboolean user_group_is_system (user_group *ug)
 		return FALSE;
 	}
 	
-	return (ug->id <= max && ug->id >= min);
+	return (! (ug->id <= max && ug->id >= min));
 }
 
 extern user *
@@ -82,6 +95,16 @@ user_new (gchar *name)
 	u->shell = g_strdup ("/bin/bash"); /* hardcoded, since we don't have it in ui yet */
 
 	return u;
+}
+
+extern void user_free (user *u)
+{
+	user_group_free (u->ug);
+	g_free (u->comment);
+	g_free (u->home);
+	g_free (u->shell);
+	g_free (u->reserved);
+	g_free (u);
 }
 
 extern gboolean
@@ -120,7 +143,7 @@ user_add (void)
 
 	/* Check if user exists */
 
-	tmp_list = user_list;
+	tmp_list = user_adv_list;
 	while (tmp_list)
 	{
 		current_u = tmp_list->data;
@@ -157,7 +180,7 @@ user_add (void)
 
 	/* Now find new group's gid, if it exists */
 
-	tmp_list = group_list;
+	tmp_list = group_adv_list;
 	while (tmp_list)
 	{
 		g = tmp_list->data;
@@ -188,7 +211,10 @@ user_add (void)
 		
 		new_group = group_new ();
 		new_group->ug.name = g_strdup (new_group_name);
-		group_list = g_list_append (group_list, new_group);
+		
+		group_adv_list = g_list_append (group_adv_list, new_group);
+		if (!user_group_is_system (&new_group->ug))
+				group_basic_list = g_list_append (group_basic_list, new_group);
 		
 		/* Add to the GtkCList. */
 		
@@ -210,7 +236,10 @@ user_add (void)
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
 	if (strlen (new_comment) > 0)
 		new_user->comment = g_strdup (new_comment);
-	user_list = g_list_append (user_list, new_user);
+
+	user_adv_list = g_list_append (user_adv_list, new_user);
+	if (!user_group_is_system (&new_user->ug))
+		user_basic_list = g_list_append (user_basic_list, new_user);
 	
 	/* Update visual table */
 
@@ -267,10 +296,10 @@ user_update (user *u)
 
 		e_table_changed (USER, FALSE);
 	}
-
+	
 	w0 = tool_widget_get ("user_settings_comment");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
-
+	
 	if (u->comment == NULL)
 	{
 		if (strlen (txt) > 0)
@@ -281,15 +310,15 @@ user_update (user *u)
 		g_free (u->comment);
 		u->comment = g_strdup (txt);
 	}
-
+	
 	/* Get selected group name */
-
+	
 	w0 = tool_widget_get ("user_settings_group");
 	new_group_name = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
-
+	
 	/* Now find group's gid */
-
-	tmp_list = group_list;
+	
+	tmp_list = group_adv_list;
 	while (tmp_list)
 	{
 		g = tmp_list->data;
@@ -320,13 +349,16 @@ user_update (user *u)
 
 		new_group = group_new ();
 		new_group->ug.name = g_strdup (new_group_name);
-		group_list = g_list_append (group_list, new_group);
 		u->gid = new_group->ug.id;
-
+		
+		group_adv_list = g_list_append (group_adv_list, new_group);
+		if (!user_group_is_system (&new_group->ug))
+			group_basic_list = g_list_append (group_basic_list, new_group);
+		
 		/* Add to CList */
-
+		
 		list = GTK_CLIST (tool_widget_get ("group_list"));
-
+		
 		entry[0] = new_group_name;
 		row = gtk_clist_append (list, entry);
 		gtk_clist_set_row_data (list, row, new_group);
@@ -337,7 +369,7 @@ user_update (user *u)
 
 	return TRUE;
 }
-
+		
 extern void
 user_fill_settings_group (GtkCombo *combo)
 {
@@ -351,6 +383,14 @@ user_fill_settings_group (GtkCombo *combo)
 
 	gtk_combo_set_popdown_strings (combo, items);
 	g_list_free (items);
+}
+		
+extern GList *
+user_current_list (void)
+{
+	if (user_group_adv_mode)
+		return user_adv_list;
+	return user_basic_list;
 }
 
 extern group *
@@ -367,6 +407,23 @@ group_new (void)
 	g->ug.id = find_new_id (GROUP);
 
 	return g;
+}
+
+extern void
+group_free (group *g)
+{
+	GList *i, *j;
+	
+	user_group_free (g->ug);
+	
+	for (i = g->users; i; i = j)
+	{
+		j = i->next;
+		g_list_remove (i, i->data);
+		g_free (i->data);
+	}
+	
+	g_free (g);
 }
 
 extern gboolean
@@ -401,7 +458,7 @@ group_add (void)
 	
 	/* Find if group with given name already exists */
 
-	selection = group_list;
+	selection = group_adv_list;
 	while (selection)
 	{
 		current_g = selection->data;
@@ -451,7 +508,9 @@ group_add (void)
 		tmpgroup->users = g_list_append (tmpgroup->users, g_strdup (tmp));
 	}
 
-	group_list = g_list_append (group_list, tmpgroup);
+	group_adv_list = g_list_append (group_adv_list, tmpgroup);
+	if (!user_group_is_system (&tmpgroup->ug))
+			group_basic_list = g_list_append (group_basic_list, tmpgroup);
 
 	return TRUE;
 }
@@ -530,7 +589,7 @@ find_new_id (gchar from)
 	{
 		ret = logindefs.new_group_min_id;
 
-		tmp_list = group_list;
+		tmp_list = group_adv_list;
 		while (tmp_list)
 		{
 			current_g = tmp_list->data;
@@ -553,7 +612,7 @@ find_new_id (gchar from)
 	{
 		ret = logindefs.new_user_min_id;
 
-		tmp_list = user_list;
+		tmp_list = user_adv_list;
 		while (tmp_list)
 		{
 			current_u = tmp_list->data;
@@ -591,7 +650,7 @@ find_new_key (gchar from)
 
 	if (from == GROUP)
 	{
-		tmp_list = group_list;
+		tmp_list = group_adv_list;
 		while (tmp_list)
 		{
 			current_g = tmp_list->data;
@@ -609,7 +668,7 @@ find_new_key (gchar from)
 
 	if (from == USER)
 	{
-		tmp_list = user_list;
+		tmp_list = user_adv_list;
 		while (tmp_list)
 		{
 			current_u = tmp_list->data;
@@ -705,7 +764,7 @@ group_fill_all_users_list (GList *member_rows)
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_freeze (clist);
 
-	tmp_list = user_list;
+	tmp_list = user_current_list ();
 	while (tmp_list)
 	{
 		current_u = tmp_list->data;
@@ -736,3 +795,10 @@ group_fill_all_users_list (GList *member_rows)
 	gtk_clist_thaw (clist);
 }
 
+extern GList *
+group_current_list (void)
+{
+	if (user_group_adv_mode)
+		return group_adv_list;
+	return group_basic_list;
+}

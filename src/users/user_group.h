@@ -89,19 +89,26 @@ typedef struct
 
 
 extern GList *user_list;
+extern GList *user_basic_list;
+extern GList *user_adv_list;
 extern GList *group_list;
+extern GList *group_basic_list;
+extern GList *group_adv_list;
 
 extern gboolean user_group_is_system (user_group *ug);
+
 extern user *user_new (gchar *name);
 extern gboolean user_add (void);
 extern gboolean user_update (user *u);
 extern void user_fill_settings_group (GtkCombo *combo);
+extern GList *user_current_list (void);
 
 extern group *group_new (void);
 extern gboolean group_add (void);
 extern gboolean group_update (group *g);
 extern GList *group_fill_members_list (void);
 extern void group_fill_all_users_list (GList *member_rows);
+extern GList *group_current_list (void);
 
 
 #endif /* USER_GROUP_H */
