@@ -37,16 +37,23 @@
 XstTool *tool;
 
 /* Main window callbacks */
-/* Users tab */
+/* "global" callbacks :) */
 
 extern void
-on_user_settings_clicked (GtkButton *button, gpointer user_data)
+on_settings_clicked (GtkButton *button, gpointer user_data)
 {
-	xmlNodePtr node;
+	ug_data *ud;
 
-	g_return_if_fail (node = get_selected_node ());
-	user_settings_prepare (node);
+	ud = g_new (ug_data, 1);
+
+	ud->new = FALSE;
+	ud->table = GPOINTER_TO_INT (user_data);
+	ud->node = get_selected_node ();
+
+	settings_prepare (ud);
 }
+
+/* Users tab */
 
 extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
@@ -62,12 +69,17 @@ on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
-	xmlNodePtr node;
+	ug_data *ud;
 
 	g_return_if_fail (xst_tool_get_access (tool));
+	
+	ud = g_new (ug_data, 1);
 
-	node = get_current_root_node ();
-	user_new_prepare (node);
+	ud->new = TRUE;
+	ud->table = TABLE_USER;
+	ud->node = get_root_node (ud->table);
+
+	user_new_prepare (ud);
 }
 
 extern void
@@ -81,7 +93,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	if (check_login_delete (node))
 	{
 		xst_dialog_modify (tool->main_dialog);
-		if (delete_selected_node ())
+		if (delete_selected_node (TABLE_USER))
 			xml_element_destroy (node);
 
 		user_actions_set_sensitive (FALSE);
@@ -94,23 +106,19 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 /* Groups tab */
 
 extern void
-on_group_settings_clicked (GtkButton *button, gpointer user_data)
-{
-	xmlNodePtr node;
-
-	g_return_if_fail (node = get_selected_node ());
-	group_settings_prepare (node);
-}
-
-extern void
 on_group_new_clicked (GtkButton *button, gpointer user_data)
 {
-	xmlNodePtr node;
+	ug_data *ud;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	node = get_current_root_node ();
-	group_new_prepare (node);
+	ud = g_new (ug_data, 1);
+
+	ud->new = TRUE;
+	ud->table = TABLE_GROUP;
+	ud->node = get_root_node (ud->table);
+
+	group_new_prepare (ud);
 }
 
 extern void
@@ -125,7 +133,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	if (check_group_delete (node))
 	{
 		xst_dialog_modify (tool->main_dialog);
-		if (delete_selected_node ())
+		if (delete_selected_node (TABLE_GROUP))
 			xml_element_destroy (node);
 
 		group_actions_set_sensitive (FALSE);
@@ -140,25 +148,70 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 {
-}
-
-extern void
-on_network_settings_clicked (GtkButton *button, gpointer user_data)
-{
 	xmlNodePtr node;
+	gboolean delete = FALSE;
+	gint tbl = -1;
 
-	g_return_if_fail (node = get_selected_node ());
-	user_settings_prepare (node);
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	node = get_selected_node ();
+
+	/* Is it user or group? */
+
+	if (!strcmp (node->name, "user"))
+	{
+		delete = check_login_delete (node);
+		tbl = TABLE_NET_USER;
+	}
+	else if (!strcmp (node->name, "group"))
+	{
+		delete = check_group_delete (node);
+		tbl = TABLE_NET_GROUP;
+	}
+
+	if (delete)
+	{
+		xst_dialog_modify (tool->main_dialog);
+		if (delete_selected_node (tbl))
+			xml_element_destroy (node);
+
+		group_actions_set_sensitive (FALSE);
+		gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
+													"network_settings_frame")),
+						 _("Settings for the selected user and group"));
+	}
 }
 
 extern void
 on_network_user_new_clicked (GtkButton *button, gpointer user_data)
 {
+	ug_data *ud;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+	
+	ud = g_new (ug_data, 1);
+
+	ud->new = TRUE;
+	ud->table = TABLE_NET_USER;
+	ud->node = get_root_node (ud->table);
+
+	user_new_prepare (ud);
 }
 
 extern void
 on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 {
+	ug_data *ud;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	ud = g_new (ug_data, 1);
+
+	ud->new = TRUE;
+	ud->table = TABLE_NET_GROUP;
+	ud->node = get_root_node (ud->table);
+
+	group_new_prepare (ud);
 }
 
 
@@ -176,6 +229,7 @@ user_settings_dialog_close (void)
 {
 	GtkWidget *w0;
 	GList *list;
+	ug_data *ud;
 
 	/* Clean up entries */
 
@@ -193,7 +247,10 @@ user_settings_dialog_close (void)
 		adv_user_settings (NULL, FALSE);
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	gtk_object_remove_data (GTK_OBJECT (w0), "node");
+	ud = gtk_object_get_data (GTK_OBJECT (w0), "data");
+	gtk_object_remove_data (GTK_OBJECT (w0), "data");
+	g_free (ud);
+	
 	gtk_widget_hide (w0);
 }
 
@@ -213,14 +270,14 @@ extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-	xmlNodePtr node;
+	ug_data *ud;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	node = gtk_object_get_data (GTK_OBJECT (w0), "node");
+	ud = gtk_object_get_data (GTK_OBJECT (w0), "data");
 
-	if (user_update (node))
+	if (user_update (ud))
 	{
 		xst_dialog_modify (tool->main_dialog);
 		user_settings_dialog_close ();
@@ -340,6 +397,7 @@ static void
 group_settings_dialog_close (void)
 {
 	GtkWidget *w0;
+	ug_data *ud;
 
 	/* Clear group name */
 
@@ -355,7 +413,9 @@ group_settings_dialog_close (void)
 	gtk_clist_clear (GTK_CLIST (w0));
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
-	gtk_object_remove_data (GTK_OBJECT (w0), "node");
+	ud = gtk_object_get_data (GTK_OBJECT (w0), "data");
+	g_free (ud);
+	gtk_object_remove_data (GTK_OBJECT (w0), "data");
 	gtk_widget_hide (w0);
 }
 
@@ -375,14 +435,14 @@ extern void
 on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-	xmlNodePtr node;
+	ug_data *ud;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
-	node = gtk_object_get_data (GTK_OBJECT (w0), "node");
+	ud = gtk_object_get_data (GTK_OBJECT (w0), "data");
 
-	if (group_update (node))
+	if (group_update (ud))
 	{
 		xst_dialog_modify (tool->main_dialog);
 		group_settings_dialog_close ();
@@ -473,6 +533,14 @@ on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, Gd
 /* Helpers .*/
 
 extern void
+actions_set_sensitive (gboolean state)
+{
+	user_actions_set_sensitive (state);
+	group_actions_set_sensitive (state);
+	net_actions_set_sensitive (state);
+}
+
+extern void
 user_actions_set_sensitive (gboolean state)
 {
 	if (xst_tool_get_access (tool))
@@ -495,6 +563,24 @@ group_actions_set_sensitive (gboolean state)
 	}
 
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "group_settings"), state);
+}
+
+extern void
+net_actions_set_sensitive (gboolean state)
+{
+	if (xst_tool_get_access (tool))
+	{
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_group_new"),
+							 TRUE);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_user_new"),
+							 TRUE);
+		
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_delete"),
+							 state);
+	}
+
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_settings"),
+						 state);
 }
 
 void

@@ -46,10 +46,18 @@ typedef struct
 
 extern login_defs logindefs;
 
-xmlNodePtr get_current_root_node (void);
+typedef struct
+{
+	xmlNodePtr node;
+	gboolean new;
+	gint table;
+} ug_data;
+
+xmlNodePtr get_root_node (gint tbl);
 xmlNodePtr get_user_root_node (void);
 xmlNodePtr get_group_root_node (void);
 xmlNodePtr get_nis_group_root_node (void);
+xmlNodePtr get_nis_user_root_node (void);
 xmlNodePtr get_db_node (xmlNodePtr node);
 gchar *my_xml_element_get_content (xmlNodePtr node);
 void adv_user_settings (xmlNodePtr node, gboolean show);
@@ -68,17 +76,16 @@ xmlNodePtr get_corresp_field (xmlNodePtr node);
 /* Extern functions */
 /* User related */
 
-extern void user_new_prepare (xmlNodePtr node);
-extern void user_settings_prepare (xmlNodePtr node);
-extern gboolean user_update (xmlNodePtr node);
+extern void settings_prepare (ug_data *ud);
+extern void user_new_prepare (ug_data *ud);
+extern gboolean user_update (ug_data *ud);
 extern void user_passwd_dialog_prepare (xmlNodePtr node);
 extern gboolean check_login_delete (xmlNodePtr node);
 
 /* Group related externs. */
 
-extern void group_new_prepare (xmlNodePtr node);
-extern void group_settings_prepare (xmlNodePtr node);
-extern gboolean group_update (xmlNodePtr node);
+extern void group_new_prepare (ug_data *ud);
+extern gboolean group_update (ug_data *ud);
 extern gboolean check_group_delete (xmlNodePtr node);
 
 #endif /* USER_GROUP_H */

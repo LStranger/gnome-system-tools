@@ -26,6 +26,8 @@
 #include <gnome.h>
 #include <gal/e-table/e-tree-simple.h>
 
+#include "user_group.h"
+
 #define COLOR_NORMAL "black"
 
 enum {
@@ -51,6 +53,14 @@ enum {
 	COL_GROUP_COLOR,
 };
 
+enum {
+	TABLE_USER,
+	TABLE_GROUP,
+	TABLE_DEFAULT,
+	TABLE_NET_GROUP,
+	TABLE_NET_USER,
+};
+
 void clear_table (ETreeModel *model, ETreePath *root_path);
 void clear_all_tables (void);
 void populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node);
@@ -58,9 +68,9 @@ void populate_all_tables (void);
 extern guint create_tables (void);
 void tables_set_state (gboolean state);
 xmlNodePtr get_selected_node (void);
-gboolean delete_selected_node (void);
-void current_table_update_row (void);
-void current_table_new_row (xmlNodePtr node);
+gboolean delete_selected_node (gint tbl);
+void current_table_update_row (ug_data *ud);
+void current_table_new_row (ug_data *ud);
 
 
 #endif /* E_TABLE_H */

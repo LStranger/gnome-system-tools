@@ -44,6 +44,8 @@ GtkWidget *group_table;
 GtkWidget *net_group_table;
 GtkWidget *net_user_table;
 
+gint active_table;
+
 /* e-table specifications. */
 
 const gchar *user_spec = "\
@@ -173,12 +175,6 @@ static GdkPixbuf *
 icon_at (ETreeModel *etm, ETreePath *path, void *model_data)
 {
         return NULL;
-}
-
-static void *
-value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
-{
-	return NULL;
 }
 
 static void
@@ -365,7 +361,7 @@ group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 }
 
 static void *
-net_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
+net_group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 {
 	xmlNodePtr node;
 
@@ -374,6 +370,18 @@ net_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 		return NULL;
 
 	return xml_get_child_content (node, "name");
+}
+
+static void *
+net_user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
+{
+	xmlNodePtr node;
+
+	node = e_tree_model_node_get_data (etm, path);
+	if (!node)
+		return NULL;
+
+	return xml_get_child_content (node, "login");
 }
 
 static GtkWidget *
@@ -427,6 +435,8 @@ user_cursor_change (ETable *table, gint row, gpointer user_data)
 	gchar *buf, *label;
 	xmlNodePtr node;
 
+	active_table = TABLE_USER;
+	
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
 	node = e_tree_model_node_get_data (model, path);
@@ -434,7 +444,7 @@ user_cursor_change (ETable *table, gint row, gpointer user_data)
 	node = xml_element_find_first (node, "login");
 	buf = xml_element_get_content (node);
 
-	label = g_strconcat ("Settings for user ", buf, NULL);
+	label = g_strconcat (_("Settings for user "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
 												"user_settings_frame")), label);
 	g_free (label);
@@ -451,6 +461,8 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 	gchar *buf, *label;
 	xmlNodePtr node;
 
+	active_table = TABLE_GROUP;
+	
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
 	node = e_tree_model_node_get_data (model, path);
@@ -458,7 +470,7 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 	node = xml_element_find_first (node, "name");
 	buf = xml_element_get_content (node);
 
-	label = g_strconcat ("Settings for group ", buf, NULL);
+	label = g_strconcat (_("Settings for group "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
 												"group_settings_frame")), label);
 	g_free (label);
@@ -470,11 +482,91 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 static void
 net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 {
+	ETable *u_table;
+	ETreeModel *model, *u_model;
+	ETreePath *path, *u_root;
+	xmlNodePtr node, u_node;
+	gchar *name, *buf, *user;
+
+	active_table = TABLE_NET_GROUP;
+
+	/* Get group name */
+	model = E_TREE_MODEL (table->model);
+	path = e_tree_model_node_at_row (model, row);
+	node = e_tree_model_node_get_data (model, path);
+	name = xml_get_child_content (node, "name");
+
+	/* Set desc */
+	buf = g_strconcat (_("Settings for group "), name, NULL);
+	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
+												"network_settings_frame")), buf);
+	g_free (buf);
+	
+	/* Get users table */
+	u_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
+	u_model = E_TREE_MODEL (u_table->model);
+	u_root = e_tree_model_get_root (u_model);
+	
+	/* Clear net_user_table */
+	clear_table (u_model, u_root);
+	
+	/* Get group users */
+	node = xml_element_find_first (node, "users");
+	for (node = node->childs; node; node = node->next)
+	{
+		user = xml_element_get_content (node);
+
+		if (!user)
+			continue;
+
+		u_node = get_nis_user_root_node ();
+		for (u_node = u_node->childs; u_node; u_node = u_node->next)
+		{
+			buf = xml_get_child_content (u_node, "login");
+
+			if (!buf)
+				continue;
+
+			if (strcmp (buf, user))
+			{
+				g_free (buf);
+				continue;
+			}
+
+			e_tree_model_node_insert (u_model, u_root, -1, u_node);
+			break;
+		}
+
+		g_free (user);
+	}
+	
+	net_actions_set_sensitive (TRUE);
 }
 
 static void
 net_user_cursor_change (ETable *table, gint row, gpointer user_data)
 {
+	ETreePath *path;
+	ETreeModel *model;
+	gchar *buf, *label;
+	xmlNodePtr node;
+
+	active_table = TABLE_NET_USER;
+	
+	model = E_TREE_MODEL (table->model);
+	path = e_tree_model_node_at_row (model, row);
+	node = e_tree_model_node_get_data (model, path);
+
+	node = xml_element_find_first (node, "login");
+	buf = xml_element_get_content (node);
+
+	label = g_strconcat (_("Settings for user "), buf, NULL);
+	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
+												"network_settings_frame")), label);
+	g_free (label);
+	g_free (buf);
+
+	net_actions_set_sensitive (TRUE);
 }
 
 static gchar *
@@ -537,7 +629,7 @@ create_user_table (void)
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", user_cursor_change, NULL);
-	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_user_settings_clicked, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_settings_clicked, NULL);
 
 	container = xst_dialog_get_widget (tool->main_dialog, "users_holder");
 	gtk_container_add (GTK_CONTAINER (container), user_table);
@@ -575,7 +667,7 @@ create_group_table (void)
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", group_cursor_change, NULL);
-	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_group_settings_clicked, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_settings_clicked, NULL);
 
 	container = xst_dialog_get_widget (tool->main_dialog, "groups_holder");
 	gtk_container_add (GTK_CONTAINER (container), group_table);
@@ -596,7 +688,7 @@ create_network_group_table (GtkWidget *paned)
 				   value_is_empty,
 				   value_to_string,
 				   icon_at,
-				   net_value_at,
+				   net_group_value_at,
 				   set_value_at,
 				   is_editable,
 				   NULL);
@@ -606,7 +698,7 @@ create_network_group_table (GtkWidget *paned)
 
 	net_group_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, net_group_spec, NULL);
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_group_table));
-	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", net_group_cursor_change, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "cursor_activated", net_group_cursor_change, NULL);
 
 	gtk_container_add (GTK_CONTAINER (paned), net_group_table);
 	gtk_widget_show (net_group_table);
@@ -626,7 +718,7 @@ create_network_user_table (GtkWidget *paned)
 				   value_is_empty,
 				   value_to_string,
 				   icon_at,
-				   value_at,
+				   net_user_value_at,
 				   set_value_at,
 				   is_editable,
 				   NULL);
@@ -636,7 +728,7 @@ create_network_user_table (GtkWidget *paned)
 
 	net_user_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, net_user_spec, NULL);
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
-	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", net_user_cursor_change, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "cursor_activated", net_user_cursor_change, NULL);
 
 	gtk_container_add (GTK_CONTAINER (paned), net_user_table);
 	gtk_widget_show (net_user_table);
@@ -775,24 +867,50 @@ tables_set_state (gboolean state)
 static ETable *
 get_current_table (void)
 {
-	GtkWidget *w0;
 	ETable *table = NULL;
-	gint active_page;
 
-	w0 = xst_dialog_get_widget (tool->main_dialog, "users_admin");
-	active_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (w0));
-
-	switch (active_page)
+	switch (active_table)
 	{
-	case 0:
+	case TABLE_USER:
 		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 		break;
-	case 1:
+	case TABLE_GROUP:
 		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
 		break;
-	case 2:
+	case TABLE_NET_GROUP:
 		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_group_table));
 		break;
+	case TABLE_NET_USER:
+		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
+		break;
+		
+	default:
+		return NULL;
+	}
+	
+	return table;
+}
+
+static ETable *
+get_table (gint tbl)
+{
+	ETable *table = NULL;
+
+	switch (tbl)
+	{
+	case TABLE_USER:
+		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
+		break;
+	case TABLE_GROUP:
+		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
+		break;
+	case TABLE_NET_GROUP:
+		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_group_table));
+		break;
+	case TABLE_NET_USER:
+		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
+		break;
+		
 	default:
 		return NULL;
 	}
@@ -821,14 +939,14 @@ get_selected_node (void)
 }
 
 gboolean
-delete_selected_node (void)
+delete_selected_node (gint tbl)
 {
 	ETable *table;
 	ETreePath *path;
 	ETreeModel *model;
 	gint row;
 
-	g_return_val_if_fail (table = get_current_table (), FALSE);
+	g_return_val_if_fail (table = get_table (tbl), FALSE);
 
 	if ((row = e_table_get_cursor_row (table)) >= 0)
 	{
@@ -842,13 +960,15 @@ delete_selected_node (void)
 }
 
 void
-current_table_update_row (void)
+current_table_update_row (ug_data *ud)
 {
 	ETable *table;
 	ETreeModel *model;
 	gint row;
 
-	g_return_if_fail (table = get_current_table ());
+	g_return_if_fail (ud != NULL);
+	
+	table = get_table (ud->table);
 
 	model = E_TREE_MODEL (table->model);
 	row = e_table_get_cursor_row (table);
@@ -857,17 +977,17 @@ current_table_update_row (void)
 }
 
 void
-current_table_new_row (xmlNodePtr node)
+current_table_new_row (ug_data *ud)
 {
 	ETable *table;
 	ETreeModel *model;
 	ETreePath *path;
 
-	g_return_if_fail (node != NULL);
-	g_return_if_fail (table = get_current_table ());
+	g_return_if_fail (ud != NULL);
+
+	table = get_table (ud->table);
 
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_get_root (model);
-	e_tree_model_node_insert (model, path, -1, node);
+	e_tree_model_node_insert (model, path, -1, ud->node);
 }
-

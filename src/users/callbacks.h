@@ -26,17 +26,16 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
-extern void on_user_settings_clicked (GtkButton *button, gpointer user_data);
+extern void on_settings_clicked (GtkButton *button, gpointer user_data);
+
 extern void on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
 extern void on_user_new_clicked (GtkButton *button, gpointer user_data);
 extern void on_user_delete_clicked (GtkButton *button, gpointer user_data);
 
-extern void on_group_settings_clicked (GtkButton *button, gpointer user_data);
 extern void on_group_new_clicked (GtkButton *button, gpointer user_data);
 extern void on_group_delete_clicked (GtkButton *button, gpointer user_data);
 
 extern void on_network_delete_clicked (GtkWidget *button, gpointer user_data);
-extern void on_network_settings_clicked (GtkButton *button, gpointer user_data);
 extern void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
 extern void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 
@@ -63,9 +62,10 @@ extern void on_group_settings_all_select_row (GtkCList *clist, gint row, gint co
 extern void on_group_settings_members_select_row (GtkCList *clist, gint row, gint column,
 	       GdkEventButton *event, gpointer user_data);
 
-
+extern void actions_set_sensitive (gboolean state);
 extern void user_actions_set_sensitive (gboolean state);
 extern void group_actions_set_sensitive (gboolean state);
+extern void net_actions_set_sensitive (gboolean state);
 void my_gtk_entry_set_text (void *entry, gchar *str);
 
 #endif /* CALLBACKS_H */

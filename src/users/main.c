@@ -51,11 +51,12 @@ static void set_access_sensitivity (void)
 					 "defs_min_gid", "defs_max_gid", "defs_passwd_max_days",
 					 "defs_passwd_min_days", "defs_passwd_warn",
 					 "defs_passwd_min_len", "defs_mail_dir",
-					 "defs_create_home", NULL};
+					 "defs_create_home", "network_user_new", "network_group_new",
+					 NULL};
 	
 	char *access_yes[] = {"users_holder", "groups_holder", NULL};
 	char *unsensitive[] = {"user_delete", "user_settings", "user_chpasswd", "group_delete",
-					   "group_settings", NULL};
+					   "group_settings", "network_delete", "network_settings", NULL};
 	int i;
 
 	/* Those widgets that won't be available if you don't have the access. */
@@ -85,7 +86,10 @@ update_complexity ()
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "defs_container"),
 				  complexity == XST_DIALOG_ADVANCED);
 
-	user_actions_set_sensitive (FALSE);
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_container"),
+						 complexity == XST_DIALOG_ADVANCED);
+
+	actions_set_sensitive (FALSE);
 
 	clear_all_tables ();
 	populate_all_tables ();
@@ -110,6 +114,23 @@ connect_signals ()
 					GTK_SIGNAL_FUNC (update_complexity),
 					NULL);
 
+	/* Stupid libglade converts user_data to strings */
+
+	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_settings")),
+					"clicked",
+					GTK_SIGNAL_FUNC (on_settings_clicked),
+					GINT_TO_POINTER (TABLE_USER));
+	
+	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "group_settings")),
+					"clicked",
+					GTK_SIGNAL_FUNC (on_settings_clicked),
+					GINT_TO_POINTER (TABLE_GROUP));
+	
+	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "network_settings")),
+					"clicked",
+					GTK_SIGNAL_FUNC (on_settings_clicked),
+					GINT_TO_POINTER (TABLE_NET_GROUP));
+	
 	/* Why not in xst_dialog ? */
 	glade_xml_signal_autoconnect (tool->main_dialog->gui);
 }
