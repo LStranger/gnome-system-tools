@@ -272,17 +272,29 @@ boot_value_type (xmlNodePtr node)
 void *
 boot_value_image (xmlNodePtr node)
 {
+	gchar *buf;
+	
 	g_return_val_if_fail (node != NULL, NULL);
-
-	return xml_get_child_content (node, "image");
+	
+	buf = xml_get_child_content (node, "image");
+	if (!buf)
+		return NULL;
+	
+	return g_strdup_printf ("  %s", buf);
 }
 
 void *
 boot_value_dev (xmlNodePtr node)
 {
+	gchar *buf;
+	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	return xml_get_child_content (node, "other");
+	buf = xml_get_child_content (node, "other");
+	if (!buf)
+		return NULL;
+	
+	return g_strdup_printf ("  %s", buf);
 }
 
 void *
