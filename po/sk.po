@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.99\n"
-"POT-Creation-Date: 2001-12-16 14:26-0600\n"
-"PO-Revision-Date: 2001-11-11 13:00CET\n"
+"POT-Creation-Date: 2002-01-04 16:02+0100\n"
+"PO-Revision-Date: 2002-01-04 16:05CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.9.5\n"
+"X-Generator: KBabel 0.9.6\n"
 
 #: interfaces/boot.glade.in.h:1
 msgid "Basic"
@@ -174,7 +174,7 @@ msgstr "Heslo:"
 msgid "Run without password"
 msgstr "Spustiť bez hesla"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:1018
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:997
 msgid "Scanning your system configuration."
 msgstr "Kontrolujem konfiguráciu vášho systému."
 
@@ -351,25 +351,25 @@ msgstr "reiserfs (Linux)"
 msgid "ufs (FreeBSD)"
 msgstr "ufs (FreeBSD)"
 
-#: interfaces/display.glade.in.h:1 interfaces/nameresolution.glade.in.h:3
-msgid "<unknown>"
-msgstr "<neznámy>"
-
-#: interfaces/display.glade.in.h:2
+#: interfaces/display.glade.in.h:1
 msgid "1024x768"
 msgstr "1024x768"
 
-#: interfaces/display.glade.in.h:3
+#: interfaces/display.glade.in.h:2
 msgid "1280x1024"
 msgstr "1280x1024"
 
-#: interfaces/display.glade.in.h:4
+#: interfaces/display.glade.in.h:3
 msgid "640x480"
 msgstr "640x480"
 
-#: interfaces/display.glade.in.h:5
+#: interfaces/display.glade.in.h:4
 msgid "800x600"
 msgstr "800x600"
+
+#: interfaces/display.glade.in.h:5 interfaces/nameresolution.glade.in.h:3
+msgid "<unknown>"
+msgstr "<neznámy>"
 
 #: interfaces/display.glade.in.h:6
 msgid "Appearance"
@@ -763,7 +763,7 @@ msgstr "Povoliť aktiváciu všetkým používateľom"
 msgid "Auto"
 msgstr "Automaticky"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1580
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1646
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -788,7 +788,7 @@ msgid "Create a new Internet Connection "
 msgstr "Vytvoriť nové spojenie na Internet"
 
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.in.h:27
-#: src/network/connection.c:1579
+#: src/network/connection.c:1645
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -868,7 +868,7 @@ msgstr "IP adresa"
 msgid "IP Settings"
 msgstr "Nastavenie IP"
 
-#: interfaces/network.glade.in.h:49 src/network/connection.c:1578
+#: interfaces/network.glade.in.h:49 src/network/connection.c:1644
 msgid "Manual"
 msgstr "Ručne"
 
@@ -884,8 +884,7 @@ msgstr "Nový typ spojenia"
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
-msgstr ""
-"Teraz zadajte meno používateľa a heslo, ktoré vám bolo priradené vaších ISP."
+msgstr "Teraz zadajte meno používateľa a heslo, ktoré vám bolo priradené vaších ISP."
 
 #: interfaces/network.glade.in.h:53
 msgid ""
@@ -2089,20 +2088,20 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Signál chyby spojenia `%s' v prvku `%s'"
 
-#: src/common/xst-tool.c:953
+#: src/common/xst-tool.c:939
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Preskakujem direktívu %s..."
 
-#: src/common/xst-tool.c:1098
+#: src/common/xst-tool.c:1077
 msgid "Skipping actual save..."
 msgstr "Preskakujem vlastné ukladanie..."
 
-#: src/common/xst-tool.c:1140
+#: src/common/xst-tool.c:1119
 msgid "Updating your system configuration."
 msgstr "Aktualizujem konfiguráciu vášho systému."
 
-#: src/common/xst-tool.c:1159
+#: src/common/xst-tool.c:1138
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2110,16 +2109,16 @@ msgstr ""
 "Nastala chyba pri spustení skriptu,\n"
 "a nastavenie nebolo možné načítať."
 
-#: src/common/xst-tool.c:1341
+#: src/common/xst-tool.c:1322
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Konfiguračné nástroje Ximian"
 
-#: src/common/xst-tool.c:1532
+#: src/common/xst-tool.c:1514
 msgid "The password you entered is invalid."
 msgstr "Heslo, ktoré ste zadali, nie je platné."
 
-#: src/common/xst-tool.c:1542
+#: src/common/xst-tool.c:1524
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2146,19 +2145,19 @@ msgstr ""
 "--\n"
 "Tím Konfiguračných nástrojov Ximian"
 
-#: src/common/xst-tool.c:1562
+#: src/common/xst-tool.c:1544
 msgid "Don't show me this again"
 msgstr "Nabudúce už túto správu nezobrazovať"
 
-#: src/common/xst-tool.c:1597
+#: src/common/xst-tool.c:1579
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tUpraviť nastavenie umiestneniea UMIESTNENIE."
 
-#: src/common/xst-tool.c:1597
+#: src/common/xst-tool.c:1579
 msgid "LOCATION"
 msgstr "UMIESTNENIE"
 
-#: src/common/xst-tool.c:1642
+#: src/common/xst-tool.c:1624
 msgid "Pretending we are root..."
 msgstr "Tvárim sa ako root..."
 
@@ -2265,81 +2264,81 @@ msgstr ""
 msgid "Internet Sharing"
 msgstr "Zdieľanie Internetu"
 
-#: src/network/callbacks.c:132 src/network/connection.c:807
-#: src/network/connection.c:838
+#: src/network/callbacks.c:119 src/network/connection.c:812
+#: src/network/connection.c:843
 msgid "Active"
 msgstr "Aktívne"
 
-#: src/network/callbacks.c:135
+#: src/network/callbacks.c:122
 msgid "Activating"
 msgstr "Aktivujem"
 
-#: src/network/callbacks.c:146 src/network/connection.c:808
-#: src/network/connection.c:839
+#: src/network/callbacks.c:133 src/network/connection.c:813
+#: src/network/connection.c:844
 msgid "Inactive"
 msgstr "Neaktívne"
 
-#: src/network/callbacks.c:149
+#: src/network/callbacks.c:136
 msgid "Deactivating"
 msgstr "Deaktivujem"
 
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:350
 msgid "The name of this computer"
 msgstr "Meno tohoto počítača"
 
-#: src/network/callbacks.c:368
+#: src/network/callbacks.c:353
 msgid "A short description of your computer"
 msgstr "Krátky popis vášho počítača"
 
-#: src/network/callbacks.c:371
+#: src/network/callbacks.c:356
 msgid "The Windows Networking workgroup for your network"
 msgstr "Pracovná skupina siete Windows pre vašu sieť"
 
-#: src/network/callbacks.c:374
+#: src/network/callbacks.c:359
 msgid "The IP address of your WINS server"
 msgstr "IP adresa vášho serveru WINS"
 
-#: src/network/callbacks.c:377
+#: src/network/callbacks.c:362
 msgid "The DNS domain for your computer"
 msgstr "Doména DNS pre váš počítač"
 
-#: src/network/callbacks.c:380
+#: src/network/callbacks.c:365
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Zoznam IP adries vašich serverov DNS"
 
-#: src/network/callbacks.c:383
+#: src/network/callbacks.c:368
 msgid "A list of domains where hosts will be searched"
 msgstr "Zoznam domén, kde majú byť hostitelia hľadaní"
 
-#: src/network/callbacks.c:386
+#: src/network/callbacks.c:371
 msgid "The IP address of this host"
 msgstr "IP adresa tohto hostiteľa"
 
-#: src/network/callbacks.c:389
+#: src/network/callbacks.c:374
 msgid "Aliases for this host, one per line"
 msgstr "Aliasy pre tohto hostiteľa, jeden na riadku"
 
-#: src/network/callbacks.c:532
+#: src/network/callbacks.c:523
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Odstrániť spojenie %s: ``%s''?"
 
-#: src/network/callbacks.c:534
+#: src/network/callbacks.c:525
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Odstrániť spojenie %s?"
 
-#: src/network/callbacks.c:589
+#: src/network/callbacks.c:581
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Aktivujem pripojenie ``%s.''"
 
-#: src/network/callbacks.c:622
+#: src/network/callbacks.c:615
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Deaktivujem pripojeni ``%s.''"
 
-#: src/network/callbacks.c:642
+#: src/network/callbacks.c:635
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2347,11 +2346,11 @@ msgstr ""
 "Nemáte nainštalovanú podporu SMB. Prosím, nainštalujte ju, aby\n"
 "ste mohli používať sieť windows."
 
-#: src/network/callbacks.c:643
+#: src/network/callbacks.c:636
 msgid "SMB support missing."
 msgstr "Chýba podpora SMB."
 
-#: src/network/callbacks.c:681
+#: src/network/callbacks.c:674
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -2365,11 +2364,11 @@ msgstr ""
 "\n"
 "Aj tak pokračovať?"
 
-#: src/network/callbacks.c:687
+#: src/network/callbacks.c:680
 msgid "Don't change host name"
 msgstr "Nemeniť meno hostiteľa"
 
-#: src/network/callbacks.c:730
+#: src/network/callbacks.c:752
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2379,7 +2378,7 @@ msgstr ""
 "Musíte ho nainštalovať, inak nebudú\n"
 "spojenia PPP (modem) aktivované."
 
-#: src/network/callbacks.c:751
+#: src/network/callbacks.c:772
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2393,7 +2392,7 @@ msgstr ""
 "\n"
 "Pokračovať?"
 
-#: src/network/callbacks.c:778
+#: src/network/callbacks.c:799
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -2405,11 +2404,11 @@ msgstr ""
 "\n"
 "Aj tak pokračovať?"
 
-#: src/network/callbacks.c:785
+#: src/network/callbacks.c:806
 msgid "Activate connection"
 msgstr "Aktivovať pripojenie"
 
-#: src/network/callbacks.c:831
+#: src/network/callbacks.c:852
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -2419,13 +2418,17 @@ msgstr ""
 "o bráne. Prosím, zadajte ich, aby bolo možné pokračovať,\n"
 "alebo vyberte iné zariadenie.\n"
 
-#: src/network/callbacks.c:871
+#: src/network/callbacks.c:892
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
 "under the connections tab. Please install the\n"
 "redhat-config-network rpm package to avoid this."
 msgstr ""
+"Nepodarilo sa nájsť program redhat-config-network-cmd.\n"
+"To môže spôsobiť chýbajúce spojenia v odpovedajúcej\n"
+"záložke. Aby ste tomu zabránili, nainštalujte balík\n"
+"redhat-config-network."
 
 #: src/network/connection.c:44
 msgid "Other type"
@@ -2459,7 +2462,7 @@ msgstr "Loopback: virtuálne rozhranie"
 msgid "Unknown type"
 msgstr "Neznámy typ"
 
-#: src/network/connection.c:1355
+#: src/network/connection.c:1421
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2468,7 +2471,7 @@ msgstr ""
 "IP adresa alebo sieťová maska pre rozhranie je prázdna.\n"
 "Pre pokračovanie musíte zadať platné hodnoty IP."
 
-#: src/network/connection.c:1362
+#: src/network/connection.c:1428
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2477,7 +2480,7 @@ msgstr ""
 "IP adresa alebo vzdialená adresa rozhrania je prázdna.\n"
 "Pre pokračovanie musíte zadať platné hodnoty IP."
 
-#: src/network/connection.c:1368
+#: src/network/connection.c:1434
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2494,11 +2497,11 @@ msgstr ""
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Naozaj chcete odstrániť aliasy pre %s?"
 
-#: src/network/main.c:177
+#: src/network/main.c:178
 msgid "\tRun the internet conection druid."
 msgstr "\tSpustiť sprievodcu pre pripojenie na Internet"
 
-#: src/network/main.c:184
+#: src/network/main.c:185
 msgid "Network Settings"
 msgstr "Nastavenie siete"
 
@@ -2656,7 +2659,7 @@ msgstr "Pripojiť"
 msgid "Unmount"
 msgstr "Odpojiť"
 
-#: src/shares/validate.c:164
+#: src/shares/validate.c:165
 msgid ""
 "Failed to create the path you requested:\n"
 "A path element is a regular file, not a directory."
@@ -2664,7 +2667,7 @@ msgstr ""
 "Nepodarilo sa vytvoriť požadovanú cestu:\n"
 "Časť cesty je normálny súbor a nie priečinok."
 
-#: src/shares/validate.c:167
+#: src/shares/validate.c:168
 msgid ""
 "Failed to create the path you requested:\n"
 "A path element is a special filesystem node, not a directory."
@@ -2672,7 +2675,7 @@ msgstr ""
 "Nepodarilo sa vytvoriť požadovanú cestu:\n"
 "Časť cesty je špeciálny súbor a nie priečinok."
 
-#: src/shares/validate.c:170
+#: src/shares/validate.c:171
 msgid ""
 "Failed to create the path you requested:\n"
 "You don't have access to that local location."
@@ -2680,15 +2683,15 @@ msgstr ""
 "Nepodarilo sa vytvoriť požadovanú cestu:\n"
 "Nemáte práva pre prístup k tomuto miestu."
 
-#: src/shares/validate.c:173
+#: src/shares/validate.c:174
 msgid "Failed to create the path you requested."
 msgstr "Nepodarilo sa vytvoriť požadovanú cestu."
 
-#: src/shares/validate.c:181
+#: src/shares/validate.c:182
 msgid "You need to specify a name for the export."
 msgstr "Musíte zadať meno pre export."
 
-#: src/shares/validate.c:190
+#: src/shares/validate.c:191
 msgid ""
 "You need to specify a path, i.e. the directory\n"
 "on your computer you would like to share."
@@ -2696,7 +2699,7 @@ msgstr ""
 "Musíte zadať cestu, čiže priečinok na vašom\n"
 "počítači, ktorý chcete zdieľať."
 
-#: src/shares/validate.c:198
+#: src/shares/validate.c:199
 msgid ""
 "You do not have access to the path you want to share.\n"
 "Please select another one."
@@ -2704,7 +2707,7 @@ msgstr ""
 "Nemáte práva pre prísup k ceste, ktorú chcete zdieľať.\n"
 "Prosím, zadajte inú cestu."
 
-#: src/shares/validate.c:205
+#: src/shares/validate.c:206
 msgid ""
 "The path you want to share does not exist.\n"
 "Would you like to create it?"
@@ -2712,7 +2715,7 @@ msgstr ""
 "Cesta, ktorú chcete zdieľať, neexistuje.\n"
 "Chcete ju vytvoriť?"
 
-#: src/shares/validate.c:216
+#: src/shares/validate.c:217
 msgid ""
 "The path you want to share points to a specific file.\n"
 "You can only share directories, not files."
@@ -2720,7 +2723,7 @@ msgstr ""
 "Cesta, ktorú chcete zdieľať, ukazuje na súbor.\n"
 "Môžete ale zdieľať iba priečinky, nie súbory."
 
-#: src/shares/validate.c:224
+#: src/shares/validate.c:225
 msgid ""
 "The path you want to share is not a directory,\n"
 "and you can only share directories."
@@ -2728,11 +2731,27 @@ msgstr ""
 "Cesta, ktorú chcete zdieľať, nie je priečinok,\n"
 "a môžete zdieľať iba priečinky."
 
-#: src/shares/validate.c:236
+#: src/shares/validate.c:244
+msgid ""
+"You don't have smbclient package installed,\n"
+"Can't mount smb shares."
+msgstr ""
+"Nemáte nainštalovaný balík smbclient,\n"
+"preto nemôžete pripojiť disky smb."
+
+#: src/shares/validate.c:276
+msgid ""
+"You don't have samba package installed,\n"
+"Can't export smb shares."
+msgstr ""
+"Nemáte nainštalovaný balík samba,\n"
+"preto nemôžete exportovať disky smb."
+
+#: src/shares/validate.c:301
 msgid "You need to name the host providing the import."
 msgstr "Musíte zadať meno hostiteľa, ktorý poskytuje tento import."
 
-#: src/shares/validate.c:242
+#: src/shares/validate.c:307
 msgid ""
 "You need to specify a path, i.e. where on the host\n"
 "the share is imported from."
@@ -2740,7 +2759,7 @@ msgstr ""
 "Musíte zadať cestu na hostiteľovi, čiže odkiaľ sa má importovať zdieľaný\n"
 "disk."
 
-#: src/shares/validate.c:252
+#: src/shares/validate.c:317
 msgid ""
 "You need to specify the local point, i.e. a directory,\n"
 "where the import will be mounted."
@@ -2748,7 +2767,7 @@ msgstr ""
 "Musíte zadať lokálne miesto (priečinok), kam sa\n"
 "má pripojiť import."
 
-#: src/shares/validate.c:260
+#: src/shares/validate.c:325
 msgid ""
 "You do not have access to the local point, i.e. directory\n"
 "where the import would be mounted.\n"
@@ -2758,7 +2777,7 @@ msgstr ""
 "kam sa má import pripojiť.\n"
 "Prosím, zadajte iné miesto."
 
-#: src/shares/validate.c:268
+#: src/shares/validate.c:333
 msgid ""
 "The local mount point does not exist.\n"
 "Would you like to create it?"
@@ -2766,7 +2785,7 @@ msgstr ""
 "Lokálny bod pripojenia neexistuje.\n"
 "Má sa vytvoriť?"
 
-#: src/shares/validate.c:279
+#: src/shares/validate.c:344
 msgid ""
 "The mount point you specified is not a directory.\n"
 "You can only import to directories, not files."
@@ -2774,7 +2793,7 @@ msgstr ""
 "Pod pripojenia, ktorý ste zadali, nie je priečinok.\n"
 "Môžete importovať iba priečinky, nie súbory."
 
-#: src/shares/validate.c:287
+#: src/shares/validate.c:352
 msgid ""
 "The mount point you specified is not a directory,\n"
 "and you can only import to directories."
@@ -2782,7 +2801,7 @@ msgstr ""
 "Pod pripojenia, ktorý ste zadali, nie je priečinok,\n"
 "a vy môžete importovať iba priečinky."
 
-#: src/shares/validate.c:299
+#: src/shares/validate.c:364
 msgid ""
 "You need to specify a client pattern, e.g.\n"
 "\"*.myschool.edu\" or \"192.168.0.1/24\"."
@@ -2816,8 +2835,7 @@ msgstr "Nepodarilo sa vytvoriť nového používateľa. Overte nastavenie profil
 
 #: src/users/callbacks.c:97
 msgid "Can't create new user. Too many users probably."
-msgstr ""
-"Nepodarilo sa vytvoriť nového používateľa. Asi príliš veľa používateľov."
+msgstr "Nepodarilo sa vytvoriť nového používateľa. Asi príliš veľa používateľov."
 
 #: src/users/main.c:97
 msgid "Show All"
@@ -3021,8 +3039,7 @@ msgid "The user doesn't have permission to write in the home directory."
 msgstr "Používateľ nemá práva pre zápis do domovského priečinku."
 
 #: src/users/user_group.c:1470
-msgid ""
-"The user doesn't have permission to use (``execute'') the home directory."
+msgid "The user doesn't have permission to use (``execute'') the home directory."
 msgstr "Používateľ nemá práva používať (\"vykonávať\") v domovskom priečinku."
 
 #: interfaces/internetsharing.glade.in.h:1
@@ -3058,8 +3075,7 @@ msgid " No, overwrite with new defaults (recommended)"
 msgstr "Nie, prepísať pomocou nového štandardného nastavenia (doporučené)"
 
 #: interfaces/internetsharing.glade.in.h:9
-msgid ""
-" Overwrite with the default internet sharing configuration (recommended)."
+msgid " Overwrite with the default internet sharing configuration (recommended)."
 msgstr "Prepísať štandardným nastavením zdieľania pripojenia (doporučené)."
 
 #: interfaces/internetsharing.glade.in.h:10
@@ -3421,8 +3437,7 @@ msgid "Add a New Printer"
 msgstr "Pridať novú tlačiareň"
 
 #: interfaces/print.glade.in.h:19
-msgid ""
-"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+msgid "Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
 msgstr "Prevedie konce riadkov PC na formát Un*n. Opraví \"schodový\" text."
 
 #: interfaces/print.glade.in.h:20
@@ -3725,3 +3740,4 @@ msgstr "Používateľ"
 #: src/users/profiles.etspec.h:2
 msgid "Profile"
 msgstr "Profil"
+
