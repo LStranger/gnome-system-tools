@@ -238,7 +238,9 @@ user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *da
 			return;
 	}
 
-	e_table_change_user (node, field, val);
+	my_xml_set_child_content (node, field, val);
+	e_table_change_user ();
+
 	g_free (field);
 
 	tool_set_modified(TRUE);
@@ -265,7 +267,8 @@ group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *d
 			return;
 	}
 
-	e_table_change_group (node, field, val);
+	my_xml_set_child_content (node, field, val);
+	e_table_change_group ();
 	g_free (field);
 
 	tool_set_modified(TRUE);
@@ -557,76 +560,35 @@ e_table_del_user (xmlNodePtr node)
 }
 
 void
-e_table_change_user (xmlNodePtr parent, gchar *field, gchar *val)
+e_table_change_user (void)
 {
 	ETableModel *etm;
 	gint row;
-	xmlNodePtr node;
-
-	g_return_if_fail (parent != NULL);
 
 	etm = E_TABLE (user_table)->model;
 	row = e_table_get_cursor_row (E_TABLE (user_table));
-
-	node = xml_element_find_first (parent, field);
-	if (!node)
-	{
-		g_warning ("e_table_change_user: can't get field %s.", field);
-		return;
-	}
-
-	xml_element_set_content (node, val);
 
 	e_table_model_row_changed (etm, row);
 	e_table_set_cursor_row (E_TABLE (user_table), row);
 }
 
-xmlNodePtr
-e_table_add_user (gchar *login)
+void
+e_table_add_user (void)
 {
 	ETableModel *etm;
 	ETable *table;
-	xmlNodePtr root, user;
+	xmlNodePtr root;
 	gint row;
 
 	table = E_TABLE (user_table);
 	etm = E_TABLE_MODEL (table->model);
 
 	root = E_TABLE_SIMPLE (etm)->data;
-	user = xml_element_add (root, "user");
-
-	xml_element_add_with_content (user, "key", find_new_key (USER));
-	xml_element_add_with_content (user, "login", login);
-	xml_element_add (user, "password");
-	xml_element_add_with_content (user, "uid", find_new_id (USER));
-	xml_element_add (user, "gid");
-	xml_element_add (user, "comment");
-
-	if (logindefs.create_home)
-		xml_element_add_with_content (user, "home", g_strdup_printf ("/home/%s", login));
-	xml_element_add_with_content (user, "shell", g_strdup ("/bin/bash"));
-	xml_element_add (user, "last_mod");
-
-	xml_element_add_with_content (user, "passwd_min_life",
-			g_strdup_printf ("%d", logindefs.passwd_min_day_use));
-
-	xml_element_add_with_content (user, "passwd_max_life",
-			g_strdup_printf ("%d", logindefs.passwd_max_day_use));
-
-	xml_element_add_with_content (user, "passwd_exp_warn",
-			g_strdup_printf ("%d", logindefs.passwd_warning_advance_days));
-	xml_element_add (user, "passwd_exp_disable");
-	xml_element_add (user, "passwd_disable");
-	xml_element_add (user, "reserved");
-	xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
-
 	row = xml_parent_childs (root);
 	e_table_model_append_row (etm, NULL, row);
 
 	e_table_model_changed (etm); 
 	e_table_model_row_inserted (etm, row);
-
-	return user;
 }
 
 
@@ -676,57 +638,34 @@ e_table_del_group (xmlNodePtr node)
 
 
 void
-e_table_change_group (xmlNodePtr parent, gchar *field, gchar *val)
+e_table_change_group (void)
 {
 	ETableModel *etm;
 	gint row;
-	xmlNodePtr node;
-
-	g_return_if_fail (parent != NULL);
 
 	etm = E_TABLE (group_table)->model;
 	row = e_table_get_cursor_row (E_TABLE (group_table));
-
-	node = xml_element_find_first (parent, field);
-	if (!node)
-	{
-		g_warning ("e_table_change_group: can't get field %s.", field);
-		return;
-	}
-
-	xml_element_set_content (node, val);
 
 	e_table_model_row_changed (etm, row);
 	e_table_set_cursor_row (E_TABLE (user_table), row);
 }
 
-xmlNodePtr
-e_table_add_group (gchar *new_name)
+void
+e_table_add_group (void)
 {
 	ETableModel *etm;
 	ETable *table;
-	xmlNodePtr root, group;
+	xmlNodePtr root;
 	gint row;
 
 	table = E_TABLE (group_table);
 	etm = E_TABLE_MODEL (table->model);
 
 	root = E_TABLE_SIMPLE (etm)->data;
-
-	group = xml_element_add (root, "group");
-
-	xml_element_add_with_content (group, "key", find_new_key (GROUP));
-	xml_element_add_with_content (group, "name", new_name);
-	xml_element_add_with_content (group, "password", "x");
-	xml_element_add_with_content (group, "gid", find_new_id (GROUP));
-	xml_element_add (group, "users");
-
 	row = xml_parent_childs (root);
 	e_table_model_append_row (etm, NULL, row);
 
 	e_table_model_changed (etm); 
 	e_table_model_row_inserted (etm, row);
-
-	return group;
 }
 

@@ -292,6 +292,7 @@ network_create (void)
 	container = tool_widget_get ("network_placeholder");
 
 	gtk_container_add (GTK_CONTAINER (container), paned);
+	e_paned_set_position (E_PANED (paned), 160); /* 160 is the width of left pane. */
 	gtk_widget_show (paned);
 
 	create_tables (paned);

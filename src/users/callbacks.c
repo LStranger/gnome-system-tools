@@ -349,14 +349,17 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	gboolean retval;
 	GtkWidget *w0;
 	guint new;
-	
+	xmlNodePtr node;
+
+        g_return_if_fail (node = e_table_get_current_user ());
+
 	w0 = tool_widget_get ("user_settings_dialog");
 	new = GPOINTER_TO_UINT (gtk_object_get_data (GTK_OBJECT (w0), "new"));
-	
+
 	if (new)
-		retval = user_add ();
+		retval = user_add (LOCAL);
 	else
-		retval = user_update ();
+		retval = user_update (node);
 
 	if (retval)
 	{
@@ -512,15 +515,18 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	gboolean retval;
 	GtkWidget *w0;
 	guint new;
+	xmlNodePtr node;
+
+	g_return_if_fail (node = e_table_get_current_group ());
 
 	w0 = tool_widget_get ("group_settings_dialog");
 	new = GPOINTER_TO_UINT (gtk_object_get_data (GTK_OBJECT (w0), "new"));
 
 	if (new)
-		retval = group_add ();
+		retval = group_add (LOCAL);
 	else
 	{
-		retval = group_update ();
+		retval = group_update (node);
 	}
 
 	if (retval)

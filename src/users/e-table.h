@@ -35,13 +35,13 @@ xmlNodePtr e_table_get_table_data (gchar get);
 
 xmlNodePtr e_table_get_current_user (void);
 void e_table_del_user (xmlNodePtr node);
-void e_table_change_user (xmlNodePtr parent, gchar *field, gchar *val);
-xmlNodePtr e_table_add_user (gchar *login);
+void e_table_change_user (void);
+void e_table_add_user (void);
 
 /* Group table functions. */
 
 xmlNodePtr e_table_get_current_group (void);
 void e_table_del_group (xmlNodePtr node);
-void e_table_change_group (xmlNodePtr parent, gchar *field, gchar *val);
-xmlNodePtr e_table_add_group (gchar *new_name);
+void e_table_change_group (void);
+void e_table_add_group (void);
 

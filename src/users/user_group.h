@@ -26,6 +26,9 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
+
+#define LOCAL 1
+
 /* Just as specified in the @login_defs_prop_array in the users-conf backend: */
 
 typedef struct
@@ -47,13 +50,13 @@ typedef struct
 
 extern login_defs logindefs;
 
-extern gboolean user_add (void);
-extern gboolean user_update (void);
+extern gboolean user_add (gchar type);
+extern gboolean user_update (xmlNodePtr node);
 extern void user_fill_settings_group (GtkCombo *combo, gboolean adv);
 extern GList *user_current_list (void);
 
-extern gboolean group_add (void);
-extern gboolean group_update (void);
+extern gboolean group_add (gchar type);
+extern gboolean group_update (xmlNodePtr node);
 gchar *find_new_id (gchar from);
 extern gchar *find_new_key (gchar from);
 gboolean is_free_uid (gint new_uid);
@@ -81,5 +84,8 @@ extern void group_settings_prepare (xmlNodePtr node);
 extern void user_settings_prepare (xmlNodePtr node);
 extern void user_new_prepare (gchar *group_name);
 extern void group_new_prepare (void);
+void my_xml_set_child_content (xmlNodePtr parent, gchar *name, gchar *val);
+xmlNodePtr group_add_to_xml (gchar *name, gchar type);
+xmlNodePtr user_add_to_xml (gchar *name, gchar type);
 
 #endif /* USER_GROUP_H */

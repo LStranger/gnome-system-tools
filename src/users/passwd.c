@@ -86,7 +86,7 @@ passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_q
 	else
 		password = g_strdup (crypt (new_passwd, passwd_rand_str (salt, 2)));
 
-	e_table_change_user (node, "password", password);
+	my_xml_set_child_content (node, "password", password);
 	return (gchar *) 0;
 }
 

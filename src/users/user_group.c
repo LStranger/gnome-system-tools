@@ -28,13 +28,14 @@
 #include "callbacks.h"
 #include "e-table.h"
 
+
 static gboolean is_valid_name (gchar *str);
 static gint char_sort_func (gconstpointer a, gconstpointer b);
 
 login_defs logindefs;
 
 extern gboolean
-user_add (void)
+user_add (gchar type)
 {
 	GtkWidget *w0;
 	GtkWindow *win;
@@ -135,8 +136,9 @@ user_add (void)
 		
 		/* Cool: create group. */
 
-		node = e_table_add_group (new_group_name);
+		node = group_add_to_xml (new_group_name, LOCAL);
 		gid = my_xml_get_content (node, "gid");
+		e_table_add_group ();
 	}
  	else
 	{
@@ -145,8 +147,11 @@ user_add (void)
 
 	/* Everything should be ok, let's create a new user */
 
-	node = e_table_add_user (new_user_name);
-	e_table_change_user (node, "gid", gid);
+	node = user_add_to_xml (new_user_name, type);
+	if (type == LOCAL)
+		e_table_add_user ();
+
+	my_xml_set_child_content (node, "gid", gid);
 	g_free (gid);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
@@ -155,7 +160,10 @@ user_add (void)
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
 	if (strlen (new_comment) > 0)
-		e_table_change_user (node, "comment", new_comment);
+	{
+		my_xml_set_child_content (node, "comment", new_comment);
+		e_table_change_user ();
+	}
 
 	/* Ask for password */
 	user_passwd_dialog_show (node);
@@ -164,7 +172,7 @@ user_add (void)
 }
 
 extern gboolean
-user_update (void)
+user_update (xmlNodePtr node)
 {
 	GtkWidget *w0;
 	GtkWindow *win;
@@ -175,9 +183,8 @@ user_update (void)
 	GList *tmp_list;
 	gboolean found = FALSE;
 	gboolean comp;
-	xmlNodePtr node, g_node;
+	xmlNodePtr g_node;
 
-	g_return_val_if_fail (node = e_table_get_current_user (), FALSE);
 	g_return_val_if_fail (login = my_xml_get_content (node, "login"), FALSE);
 
 	w0 = tool_widget_get ("user_settings_name");
@@ -208,7 +215,8 @@ user_update (void)
 			return FALSE;
 		}
 
-		e_table_change_user (node, "login", new_login);
+		my_xml_set_child_content (node, "login", new_login);
+		e_table_change_user ();
 	}
 	g_free (login);
 
@@ -220,10 +228,16 @@ user_update (void)
 	if (comment == NULL)
 	{
 		if (strlen (new_comment) > 0)
-			e_table_change_user (node, "comment", new_comment);
+		{
+			my_xml_set_child_content (node, "comment", new_comment);
+			e_table_change_user ();
+		}
 	}
 	else if (strcmp (new_comment, comment))
-		e_table_change_user (node, "comment", new_comment);
+	{
+		my_xml_set_child_content (node, "comment", new_comment);
+		e_table_change_user ();
+	}
 
 	g_free (comment);
 
@@ -271,14 +285,15 @@ user_update (void)
 
 		/* Cool: create new group */
 
-		g_node = e_table_add_group (new_group_name);
+		g_node = group_add_to_xml (new_group_name, LOCAL);
 		gid = my_xml_get_content (g_node, "gid");
+		e_table_add_group ();
 	}
 
 	else
 		gid = get_group_by_data ("name", new_group_name, "gid");
 
-	e_table_change_user (node, "gid", gid);
+	my_xml_set_child_content (node, "gid", gid);
 	g_free (gid);
 
 	return TRUE;
@@ -308,7 +323,7 @@ user_fill_settings_group (GtkCombo *combo, gboolean adv)
 }
 		
 extern gboolean
-group_add (void)
+group_add (gchar type)
 {
 	GtkWidget *w0;
 	GtkWindow *win;
@@ -365,10 +380,11 @@ group_add (void)
 		return FALSE;
 	}
 	
-
 	/* Everything should be ok and we can add new group */
 
-	node = e_table_add_group (new_group_name);
+	node = group_add_to_xml (new_group_name, type);
+	if (type == LOCAL)
+		e_table_add_group ();
 	
 	/* Add group members */
 
@@ -382,7 +398,7 @@ group_add (void)
 }
 
 extern gboolean
-group_update (void)
+group_update (xmlNodePtr node)
 {
 	GtkWidget *w0;
 	GtkWindow *win;
@@ -390,11 +406,9 @@ group_update (void)
 	gchar *txt, *name;
 	GtkCList *clist;
 	gint row;
-	xmlNodePtr node;
 
-	g_return_val_if_fail (node = e_table_get_current_group (), FALSE);
 	g_return_val_if_fail (name = my_xml_get_content (node, "name"), FALSE);
-	
+
 	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
 
 	w0 = tool_widget_get ("group_settings_name");
@@ -407,13 +421,16 @@ group_update (void)
 		{
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
 					(_("Group name is empty."), win));
-			
+
 			gnome_dialog_run (dialog);
 			gtk_widget_grab_focus (w0);
 			return FALSE;
 		}
 		else
-			e_table_change_group (node, "name", txt);
+		{
+			my_xml_set_child_content (node, "name", txt);
+			e_table_change_group ();
+		}
 	}
 	else
 		g_free (name);
@@ -422,7 +439,7 @@ group_update (void)
 	/* First, free our old users list ... */
 
 	del_group_users (node);
-	
+
 	/* ... and then, build new one */
 
 	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
@@ -998,20 +1015,28 @@ adv_user_settings_update (xmlNodePtr node, gchar *login)
 
 	/* TODO Check if shell is valid */
 	if (strlen (new_shell) > 0)
-		e_table_change_user (node, "shell", new_shell);
+	{
+		my_xml_set_child_content (node, "shell", new_shell);
+		e_table_change_user ();
+	}
 
 	/* Home */	
 	new_home = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home"))));
 	if (strlen (new_home) > 0)
-		e_table_change_user (node, "home", new_home);
+	{
+		my_xml_set_child_content (node, "home", new_home);
+		e_table_change_user ();
+	}
 
 	/* UID */
 	new_uid = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool_widget_get
 			("user_settings_uid")));
 
 	if (is_free_uid (new_uid)) 
-		e_table_change_user (node, "uid", g_strdup_printf ("%d", new_uid));
-
+	{
+		my_xml_set_child_content (node, "uid", g_strdup_printf ("%d", new_uid));
+		e_table_change_user ();
+	}
 }
 
 gchar *
@@ -1254,5 +1279,99 @@ group_new_prepare (void)
 	gtk_window_set_title (GTK_WINDOW (w0), _("Create New Group"));
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
 	gtk_widget_show (w0);
+}
+
+void
+my_xml_set_child_content (xmlNodePtr parent, gchar *name, gchar *val)
+{
+	xmlNodePtr node;
+
+	g_return_if_fail (parent != NULL);
+	g_return_if_fail (name != NULL);
+	g_return_if_fail (val != NULL);
+
+	node = xml_element_find_first (parent, name);
+	if (!node)
+	{
+		g_warning ("my_xml_set_child: can't get field %s.", name);
+		return;
+	}
+
+	xml_element_set_content (node, val);
+}
+
+xmlNodePtr
+group_add_to_xml (gchar *name, gchar type)
+{
+	xmlNodePtr root, group;
+
+	root = xml_doc_get_root (tool_config_get_xml());
+
+	switch (type)
+	{
+		case LOCAL:
+			root = xml_element_find_first (root, "groupdb");
+			break;
+		default:
+			g_warning ("group_add_to_xml: wrong type of group");
+			return NULL;
+	}
+
+	group = xml_element_add (root, "group");
+
+	xml_element_add_with_content (group, "key", find_new_key (GROUP));
+	xml_element_add_with_content (group, "name", name);
+	xml_element_add_with_content (group, "password", "x");
+	xml_element_add_with_content (group, "gid", find_new_id (GROUP));
+	xml_element_add (group, "users");
+
+	return group;
+}
+
+xmlNodePtr
+user_add_to_xml (gchar *name, gchar type)
+{
+	xmlNodePtr root, user;
+
+	root = xml_doc_get_root (tool_config_get_xml());
+
+	switch (type)
+	{
+		case LOCAL:
+			root = xml_element_find_first (root, "userdb");
+			break;
+		default:
+			g_warning ("user_add_to_xml: wrong type of group");
+			return NULL;
+	}
+
+	user = xml_element_add (root, "user");
+
+	xml_element_add_with_content (user, "key", find_new_key (USER));
+	xml_element_add_with_content (user, "login", name);
+	xml_element_add (user, "password");
+	xml_element_add_with_content (user, "uid", find_new_id (USER));
+	xml_element_add (user, "gid");
+	xml_element_add (user, "comment");
+
+	if (logindefs.create_home)
+		xml_element_add_with_content (user, "home", g_strdup_printf ("/home/%s", name));
+	xml_element_add_with_content (user, "shell", g_strdup ("/bin/bash"));
+	xml_element_add (user, "last_mod");
+
+	xml_element_add_with_content (user, "passwd_min_life",
+			g_strdup_printf ("%d", logindefs.passwd_min_day_use));
+
+	xml_element_add_with_content (user, "passwd_max_life",
+			g_strdup_printf ("%d", logindefs.passwd_max_day_use));
+
+	xml_element_add_with_content (user, "passwd_exp_warn",
+			g_strdup_printf ("%d", logindefs.passwd_warning_advance_days));
+	xml_element_add (user, "passwd_exp_disable");
+	xml_element_add (user, "passwd_disable");
+	xml_element_add (user, "reserved");
+	xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
+
+	return user;
 }
 
