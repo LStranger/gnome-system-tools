@@ -1,30 +1,16 @@
 #include <gnome.h>
 #include "e-map.h"
 
-GtkWidget *window, *scroll, *map;
-EMapPoint *point;
+GtkWidget *window, *scroll;
+EMap *map;
+EMapPoint *point, *highlight_point = NULL;
 int id;
-
-static gint zoom_in(gpointer data);
-
-static gint zoom_out(gpointer data)
-{
-  e_map_zoom_out(E_MAP(map));
-  return(0);
-}
-
-
-static gint zoom_in(gpointer data)
-{
-  e_map_zoom_to_site(E_MAP(map), -60, -60);
-  return(0);
-}
 
 
 static gint flash(gpointer data)
 {
 	if (e_map_point_get_color_rgba (point) == 0xf010d0ff)
-	  e_map_point_set_color_rgba (map, point, 0xffffffff);
+	  e_map_point_set_color_rgba (map, point, 0x000000ff);
 	else
 	  e_map_point_set_color_rgba (map, point, 0xf010d0ff);
 	
@@ -32,21 +18,68 @@ static gint flash(gpointer data)
 }
 
 
+gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer user_data)
+{
+	double longitude, latitude;
+	
+	e_map_window_to_world (map, (double) event->x, (double) event->y,
+			       &longitude, &latitude);
+
+	if (highlight_point && highlight_point != point)
+	  e_map_point_set_color_rgba (map, highlight_point, 0xf010d0ff);
+
+	highlight_point =
+	  e_map_get_closest_point (map, longitude, latitude, TRUE);
+	
+	if (highlight_point != point)
+	  e_map_point_set_color_rgba (map, highlight_point, 0xffff60ff);
+
+	return(TRUE);
+}
+
+
+gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
+{
+	double longitude, latitude;
+	
+	e_map_window_to_world (map, (double) event->x, (double) event->y,
+			       &longitude, &latitude);
+
+	if (event->button != 1)
+		e_map_zoom_out (map);
+	else if (e_map_get_magnification (map) <= 1.0)
+		e_map_zoom_to_location (map, longitude, latitude);
+
+	e_map_point_set_color_rgba (map, point, 0xf010d0ff);
+	point = highlight_point;
+	
+	return TRUE;
+}
+
+
 int main(int argc, char *argv[])
 {
-  gnome_init("e-map-test", "0.0.0", argc, argv);
+	gnome_init("e-map-test", "0.0.0", argc, argv);
   
-  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  scroll = gtk_scrolled_window_new(GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
-  map = GTK_WIDGET(e_map_new());
+	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	scroll = gtk_scrolled_window_new(GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+	map = e_map_new();
   
-  gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(scroll));
-  gtk_container_add(GTK_CONTAINER(scroll), GTK_WIDGET(map));
+	gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(scroll));
+	gtk_container_add(GTK_CONTAINER(scroll), GTK_WIDGET(map));
 
-  e_map_set_smooth_zoom(E_MAP(map), TRUE);
-  point = e_map_add_point(E_MAP(map), NULL, 10.0, 0.0, 0xf010d0ff);
-  gtk_widget_show_all(window);
-  id = gtk_timeout_add(100, flash, NULL);
-  gtk_main();
-  return(0);
+	e_map_set_smooth_zoom(E_MAP(map), TRUE);
+	e_map_add_point(E_MAP(map), NULL, 40.0, 0.0, 0xf010d0ff);
+	e_map_add_point(E_MAP(map), NULL, 10.0, 0.0, 0xf010d0ff);
+	point = e_map_add_point(E_MAP(map), NULL, 25.0, 40.0, 0xf010d0ff);
+	
+	gtk_signal_connect(GTK_OBJECT (map), "motion-notify-event",
+			   GTK_SIGNAL_FUNC (motion), NULL);
+	gtk_signal_connect(GTK_OBJECT(map), "button-press-event",
+			   GTK_SIGNAL_FUNC (button_pressed), NULL);
+
+	gtk_widget_show_all(window);
+	id = gtk_timeout_add(100, flash, NULL);
+	gtk_main();
+	return(0);
 }

@@ -67,39 +67,72 @@ struct _EMapPoint
 };
 
 
-GtkType
-e_map_get_type (void);
+/* --- Widget --- */
 
-EMap *
-e_map_new (void);
+GtkType e_map_get_type (void);
 
-void
-e_map_set_smooth_zoom (EMap *map,
-		       gboolean state);
+EMap *e_map_new (void);
 
-gboolean
-e_map_get_smooth_zoom (EMap *map);
+/* Stop doing redraws when map data changes (e.g. by modifying points) */
+void e_map_freeze (EMap *map);
 
-void
-e_map_window_to_world (EMap *map,
-		       double win_x,
-		       double win_y,
-		       double *world_longitude,
-		       double *world_latitude);
+/* Do an immediate repaint, and start doing realtime repaints again */
+void e_map_thaw (EMap *map);
 
-void
-e_map_world_to_window (EMap *map,
-		       double world_longitude,
-		       double world_latitude,
-		       double *win_x,
-		       double *win_y);
+/* --- Coordinate translation --- */
 
-void
-e_map_zoom_to_site (EMap *map,
-		    double longitude,
-		    double latitude);
+/* Translates window-relative coords to lat/long */
+void e_map_window_to_world (EMap *map,
+			    double win_x, double win_y,
+			    double *world_longitude, double *world_latitude);
 
-void
-e_map_zoom_out (EMap *map);
+/* Translates lat/long to window-relative coordinates. Note that the
+ * returned coordinates can be negative or greater than the current size
+ * of the allocation area */
+void e_map_world_to_window (EMap *map,
+			    double world_longitude, double world_latitude,
+			    double *win_x, double *win_y);
+
+/* --- Zoom --- */
+
+double e_map_get_magnification (EMap *map);
+
+/* Pass TRUE if we want the smooth zoom hack */
+void e_map_set_smooth_zoom (EMap *map, gboolean state);
+
+/* TRUE if smooth zoom hack will be employed */
+gboolean e_map_get_smooth_zoom (EMap *map);
+
+/* NB: Function definition will change shortly */
+void e_map_zoom_to_location (EMap *map, double longitude, double latitude);
+
+/* Zoom to mag factor 1.0 */
+void e_map_zoom_out (EMap *map);
+
+/* --- Points --- */
+
+EMapPoint *e_map_add_point (EMap *map, gchar *name,
+			    double longitude, double latitude,
+			    guint32 color_rgba);
+
+void e_map_remove_point (EMap *map, EMapPoint *point);
+
+void e_map_point_get_location (EMapPoint *point,
+			       double *longitude, double *latitude);
+
+gchar *e_map_point_get_name (EMapPoint *point);
+
+guint32 e_map_point_get_color_rgba (EMapPoint *point);
+
+void e_map_point_set_color_rgba (EMap *map, EMapPoint *point, guint32 color_rgba);
+
+void e_map_point_set_data (EMapPoint *point, gpointer data);
+
+gpointer e_map_point_get_data (EMapPoint *point);
+
+gboolean e_map_point_is_in_view (EMap *map, EMapPoint *point);
+
+EMapPoint *e_map_get_closest_point (EMap *map, double longitude, double latitude,
+				    gboolean in_view);
 
 #endif

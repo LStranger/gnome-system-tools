@@ -115,6 +115,8 @@ static void zoom_do (EMap *map);
 static gint load_map_background (EMap *view, gchar *name);
 static void adjustment_changed_cb (GtkAdjustment *adj, gpointer data);
 static void update_and_paint (EMap *map);
+static void update_render_point (EMap *map, EMapPoint *point);
+static void repaint_point (EMap *map, EMapPoint *point);
 
 static GtkWidgetClass *parent_class;
 
@@ -301,7 +303,9 @@ e_map_realize (GtkWidget *widget)
 	attr.wclass = GDK_INPUT_OUTPUT;
 	attr.visual = gdk_rgb_get_visual ();
 	attr.colormap = gdk_rgb_get_cmap ();
-	attr.event_mask = (gtk_widget_get_events (widget) | GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK);
+	attr.event_mask = gtk_widget_get_events (widget) |
+	  GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK |
+	  GDK_POINTER_MOTION_MASK;
 
 	attr_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
@@ -419,18 +423,18 @@ e_map_button_press (GtkWidget *widget, GdkEventButton *event)
 	priv = view->priv;
 
 	if (!GTK_WIDGET_HAS_FOCUS (widget)) gtk_widget_grab_focus (widget);
-
+#if 0
 	if (event->button != 1)
 	{
 		e_map_zoom_out(view);
 		return TRUE;
 	}
-	
+
 	/* Zoom to clicked location */
-	
+
 	e_map_window_to_world(view, event->x, event->y, &lat, &lng);
 	e_map_zoom_to_site(view, lat, lng);
-	
+#endif
 	return TRUE;
 }
 
@@ -709,8 +713,22 @@ e_map_world_to_window (EMap *map, double world_longitude, double world_latitude,
 }
 
 
+/* --- Zoom --- */
+
+
+double
+e_map_get_magnification (EMap *map)
+{
+	EMapPrivate *priv;
+	
+	priv = map->priv;
+	if (priv->zoom_state == E_MAP_ZOOMED_IN) return 2.0;
+	else return 1.0;
+}
+
+
 void
-e_map_zoom_to_site (EMap *map, double longitude, double latitude)
+e_map_zoom_to_location (EMap *map, double longitude, double latitude)
 {
 	EMapPrivate *priv;
 	int width, height;
@@ -835,28 +853,32 @@ e_map_remove_point (EMap *map, EMapPoint *point)
 }
 
 
-void e_map_point_get_location (EMapPoint *point, double *longitude, double *latitude)
+void
+e_map_point_get_location (EMapPoint *point, double *longitude, double *latitude)
 {
 	*longitude = point->longitude;
 	*latitude = point->latitude;
 }
 
 
-gchar e_map_point_get_name (EMapPoint *point)
+gchar *
+e_map_point_get_name (EMapPoint *point)
 {
 	return point->name;
 }
 
 
-guint32 e_map_point_get_color_rgba (EMapPoint *point)
+guint32
+e_map_point_get_color_rgba (EMapPoint *point)
 {
 	return point->rgba;
 }
 
 
-void e_map_point_set_color_rgba (EMap *map, EMapPoint *point, guint32 rgba)
+void
+e_map_point_set_color_rgba (EMap *map, EMapPoint *point, guint32 color_rgba)
 {
-	point->rgba = rgba;
+	point->rgba = color_rgba;
 
 	if (!((EMapPrivate *) map->priv)->frozen)
 	{
@@ -868,13 +890,15 @@ void e_map_point_set_color_rgba (EMap *map, EMapPoint *point, guint32 rgba)
 }
 
 
-void e_map_point_set_data (EMapPoint *point, gpointer data)
+void
+e_map_point_set_data (EMapPoint *point, gpointer data)
 {
 	point->user_data = data;
 }
 
 
-gpointer e_map_point_get_data (EMapPoint *point)
+gpointer
+e_map_point_get_data (EMapPoint *point)
 {
 	return point->user_data;
 }
