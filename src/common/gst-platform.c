@@ -39,6 +39,7 @@ extern GdkPixbuf *freebsd;
 extern GdkPixbuf *gentoo;
 extern GdkPixbuf *pld;
 extern GdkPixbuf *openna;
+extern GdkPixbuf *fedora;
 
 GstPlatform *
 gst_platform_new (const gchar *key, const gchar *name)
@@ -154,6 +155,8 @@ gst_platform_get_pixmap (GstPlatform *platform)
 		return pld;
 	else if (g_ascii_strncasecmp (platform->name, "OpenNA", 6) == 0)
 		return openna;
+	else if (g_ascii_strncasecmp (platform->name, "Fedora", 6) == 0)
+		return fedora;
 	else return NULL;
 }
 
