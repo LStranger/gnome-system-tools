@@ -47,7 +47,7 @@ void      user_set_value_comment_array (xmlNodePtr node, gchar **comment);
 #define user_value_gid_string(node)  (generic_value_string (node, "gid"))
 #define user_value_gid_integer(node) (generic_value_integer (node, "gid"))
 #define user_value_pwd_maxdays(node) (generic_value_integer (node, "passwd_max_life"))
-#define user_value_pwd_mindays(node) (generic_value_integer (node, "passwd_min_lide"))
+#define user_value_pwd_mindays(node) (generic_value_integer (node, "passwd_min_life"))
 #define user_value_pwd_warndays(node) (generic_value_integer (node, "passwd_exp_warn"))
 #define user_value_password(node)    (generic_value_string (node, "password"))
 
@@ -75,7 +75,7 @@ void      user_set_value_comment_array (xmlNodePtr node, gchar **comment);
 #define user_set_value_gid_string(node,value)  (generic_set_value_string (node, "gid", value))
 #define user_set_value_gid_integer(node,value) (generic_set_value_integer (node, "gid", value))
 #define user_set_value_pwd_maxdays(node,value) (generic_set_value_integer (node, "passwd_max_life", value))
-#define user_set_value_pwd_mindays(node,value) (generic_set_value_integer (node, "passwd_min_lide", value))
+#define user_set_value_pwd_mindays(node,value) (generic_set_value_integer (node, "passwd_min_life", value))
 #define user_set_value_pwd_warndays(node,value) (generic_set_value_integer (node, "passwd_exp_warn", value))
 
 
