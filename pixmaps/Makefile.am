@@ -40,6 +40,7 @@ pixmaps_DATA = \
 	unsupported-distro.png    \
 	users-groups.png          \
 	users.png                 \
+	vine.png                  \
 	wavelan-16.png            \
 	wavelan-48.png            \
 	world_map-960.png 
