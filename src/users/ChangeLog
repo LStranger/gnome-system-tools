@@ -2,6 +2,9 @@
 
 	* user_group.c (find_new_id): g_warning message had arguments
 	in the wrong order.
+	(find_new_id): When looking for an id, start at the minimum
+	and check the compared ids are < the maximum.
+	(find_new_id): Made min, max and ret guints.
 
 2001-05-22  Tambet Ingo  <tambet@ximian.com>
 
@@ -23,7 +26,6 @@
 
 	* e-table.c, profile.c: Marked to translate the ETableSpecification labels.
 	
->>>>>>> 1.94
 2001-05-20  Theo van Klaveren <t.vanklaveren@student.utwente.nl>
 
 	* passwd.c: Conditionally include <crypt.h>.

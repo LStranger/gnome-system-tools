@@ -660,9 +660,9 @@ gchar *
 find_new_id (xmlNodePtr parent)
 {
 	gchar *field, *buf;
-	gint id;
-	gint min, max;
-	gint ret = 0;
+	guint id;
+	guint min, max;
+	guint ret = 0;
 	xmlNodePtr n0;
 	Profile *pf;
 
@@ -682,6 +682,7 @@ find_new_id (xmlNodePtr parent)
 		return NULL;
 	}
 
+	ret = min - 1;
 	for (n0 = parent->childs; n0; n0 = n0->next) {
 		buf = xst_xml_get_child_content (n0, field);
 		if (!buf)
@@ -690,7 +691,7 @@ find_new_id (xmlNodePtr parent)
 		id = atoi (buf);
 		g_free (buf);
 
-		if (ret < id)
+		if (id <= max && ret < id)
 			ret = id;
 	}
 	g_free (field);
