@@ -4,8 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: ximian-setup-tools 0.2.1\n"
-"POT-Creation-Date: 2001-03-15 17:34+0100\n"
+"Project-Id-Version: ximian-setup-tools 0.7.0\n"
+"POT-Creation-Date: 2001-08-12 15:12+0100\n"
 "PO-Revision-Date: 2001-02-10 20:45:12+0900\n"
 "Last-Translator: Simos Xenitellis <simos@hellug.gr>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
@@ -13,326 +13,660 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-7\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: backend/report.pl.in:144
+msgid "Start of work report."
+msgstr "Αρχή της αναφοράς εργασίας."
+
+#: backend/report.pl.in:145
+msgid "End of work report."
+msgstr "Τέλος της αναφοράς εργασίας."
+
+#: backend/report.pl.in:146
+#, c-format
+msgid "%d"
+msgstr "%d"
+
+#: backend/report.pl.in:147
+#, c-format
+msgid "%s."
+msgstr "%s."
+
+#: backend/report.pl.in:149
+#, c-format
+msgid "Directive [%s] not supported."
+msgstr "Η οδηγία [%s] δεν υποστηρίζεται."
+
+#: backend/report.pl.in:150
+#, c-format
+msgid "Directive [%s] structure has wrong format."
+msgstr "Η δομή οδηγίας [%s] έχει λάθος μορφή."
+
+#: backend/report.pl.in:151
+#, c-format
+msgid "Directive [%s] requires exactly [%s] args in [%s]."
+msgstr "Η οδηγία [%s] απαιτεί ακριβώς [%s] ορίσματα στο [%s]."
+
+#: backend/report.pl.in:152
+#, c-format
+msgid "Directive [%s] requires at least [%s] args in [%s]."
+msgstr "Η οδηγία [%s] απαιτεί τουλάχιστον [%s] ορίσματα στο [%s]."
+
+#: backend/report.pl.in:154
+#, c-format
+msgid "Supported: [%s]"
+msgstr "Υποστηρίζεται: [%s]"
+
+#: backend/report.pl.in:155
+#, c-format
+msgid "Your platform [%s] is not supported."
+msgstr "Η πλατφόρμα σας [%s] δεν υποστηρίζεται."
+
+#: backend/report.pl.in:156
+msgid "Unable to determine host platform."
+msgstr "Αδύνατος ο εντοπισμός της πλατφόρμας του συστήματός σας."
+
+#: backend/report.pl.in:157
+#, c-format
+msgid "Configuring for platform [%s]."
+msgstr "Ρύθμιση για την πλατφόρμα [%s]."
+
+#: backend/report.pl.in:158
+#, c-format
+msgid "No parse/replace table for platform [%s]."
+msgstr ""
+
+#: backend/report.pl.in:160
+#, c-format
+msgid "Unexpected tag [%s]."
+msgstr ""
+
+#: backend/report.pl.in:161
+#, c-format
+msgid "Unexpected argument [%s] to tag [%s]."
+msgstr ""
+
+#: backend/report.pl.in:163
+#, c-format
+msgid "Could not open [%s] for reading."
+msgstr ""
+
+#: backend/report.pl.in:164
+#, c-format
+msgid "Reading options from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:165
+#, c-format
+msgid "Failed to write to [%s]."
+msgstr ""
+
+#: backend/report.pl.in:166
+#, c-format
+msgid "Could not find [%s] for writing. Creating [%s]."
+msgstr ""
+
+#: backend/report.pl.in:167
+#, c-format
+msgid "Writing to [%s]."
+msgstr ""
+
+#: backend/report.pl.in:168
+#, c-format
+msgid "Failed to pipe command [%s] for reading."
+msgstr ""
+
+#: backend/report.pl.in:169
+#, c-format
+msgid "Piping command [%s] for reading."
+msgstr ""
+
+#: backend/report.pl.in:170
+#, c-format
+msgid "Directory [%s] created."
+msgstr ""
+
+#: backend/report.pl.in:171
+#, c-format
+msgid "Backup directory [%s] was rotated."
+msgstr ""
+
+#: backend/report.pl.in:172
+#, c-format
+msgid "Saved backup for [%s]."
+msgstr ""
+
+#: backend/report.pl.in:173
+#, c-format
+msgid "No file to patch: [%s]."
+msgstr ""
+
+#: backend/report.pl.in:174
+#, c-format
+msgid "Could not find [%s] for patching. Creating [%s]."
+msgstr ""
+
+#: backend/report.pl.in:175
+#, c-format
+msgid "Found [%s]. Patching [%s]."
+msgstr ""
+
+#: backend/report.pl.in:176
+#, c-format
+msgid "Loading file [%s] to buffer."
+msgstr ""
+
+#: backend/report.pl.in:177
+#, c-format
+msgid "Saving buffer to file [%s]."
+msgstr ""
+
+#: backend/report.pl.in:178
+#, c-format
+msgid "Running command [%s]."
+msgstr ""
+
+#: backend/report.pl.in:179
+#, c-format
+msgid "Removing file [%s]."
+msgstr ""
+
+#: backend/report.pl.in:180
+#, c-format
+msgid "Found tool [%s]."
+msgstr ""
+
+#: backend/report.pl.in:181
+#, c-format
+msgid "Couldn't find tool [%s]."
+msgstr ""
+
+#: backend/report.pl.in:183
+#, c-format
+msgid "Parsing option [%s]."
+msgstr ""
+
+#: backend/report.pl.in:184
+#, c-format
+msgid "Trivialy passing [%s]."
+msgstr ""
+
+#: backend/report.pl.in:185 backend/report.pl.in:228
+#, c-format
+msgid "Getting option [%s] from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:186 backend/report.pl.in:187
+#, c-format
+msgid "Getting configuration from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:188
+#, c-format
+msgid "Getting shell option [%s] from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:189
+#, c-format
+msgid "Getting keyword [%s] from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:190
+#, fuzzy, c-format
+msgid "Getting information from [%s]."
+msgstr "Ρυθμίσεις Ομάδας %s"
+
+#: backend/report.pl.in:191
+#, c-format
+msgid "Getting chat information from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:192
+#, c-format
+msgid "Getting option [%s] from [%s], section [%s]."
+msgstr ""
+
+#: backend/report.pl.in:193
+#, c-format
+msgid "Getting option [%s] from interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:194
+#, c-format
+msgid "Getting keyword [%s] from interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:195
+#, c-format
+msgid "Keyword for interface [%s] in [%s] had unexpected value."
+msgstr ""
+
+#: backend/report.pl.in:197
+#, c-format
+msgid "Replacing key [%s] in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:198
+#, c-format
+msgid "Replacing shell var [%s] in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:199
+#, c-format
+msgid "Replacing keyword [%s] in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:200
+#, c-format
+msgid "Replacing contents of file [%s]."
+msgstr ""
+
+#: backend/report.pl.in:201
+#, c-format
+msgid "Replacing values in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:202
+#, c-format
+msgid "Replacing variable [%s] in section [%s] of [%s]."
+msgstr ""
+
+#: backend/report.pl.in:203
+#, c-format
+msgid "Removing section [%s] from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:204
+#, c-format
+msgid "Replacing option [%s] from interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:205
+#, c-format
+msgid "Replacing keyword [%s] from interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:207
+#, c-format
+msgid "Service [%s] is running."
+msgstr ""
+
+#: backend/report.pl.in:208
+#, c-format
+msgid "Service [%s] is stopped."
+msgstr ""
+
+#: backend/report.pl.in:209
+#, c-format
+msgid "Could not find SystemV scripts for service [%s]."
+msgstr ""
+
+#: backend/report.pl.in:210
+#, c-format
+msgid "Could not find SystemV runlevel [%s] directory [%s]."
+msgstr ""
+
+#: backend/report.pl.in:211
+#, c-format
+msgid "Removed SystemV link [%s]."
+msgstr ""
+
+#: backend/report.pl.in:212
+#, c-format
+msgid "Created SystemV link [%s]."
+msgstr ""
+
+#: backend/report.pl.in:213
+#, c-format
+msgid "Unknown initd operation [%s]."
+msgstr ""
+
+#: backend/report.pl.in:214
+#, c-format
+msgid "Service [%s] %s."
+msgstr ""
+
+#: backend/report.pl.in:215
+#, c-format
+msgid "Service [%s] cound not be %s."
+msgstr ""
+
+#: backend/report.pl.in:217
+msgid "Loading ISP configurations."
+msgstr ""
+
+#: backend/report.pl.in:218
+msgid "Finding active interfaces."
+msgstr ""
+
+#: backend/report.pl.in:219
+#, c-format
+msgid "Checking if interface [%s] is active."
+msgstr ""
+
+#: backend/report.pl.in:220
+#, fuzzy, c-format
+msgid "Setting hostname to [%s]."
+msgstr "Ρυθμίσεις για Χρήστη %s"
+
 #
-#: archiver/location.c:212
+#: backend/report.pl.in:221
 #, fuzzy
-msgid "Default Location"
-msgstr "Τοποθεσία"
+msgid "Saving ISP configurations."
+msgstr "Ρύθμιση:"
 
-#: archiver/main.c:77
-msgid "Store XML data in the archive"
+#: backend/report.pl.in:222
+#, c-format
+msgid "Removing entry [%s] from [%s]."
 msgstr ""
 
-#: archiver/main.c:79
-msgid "Roll back the configuration to a given point"
+#: backend/report.pl.in:223
+#, c-format
+msgid "Configuring interface [%s]."
 msgstr ""
 
-#: archiver/main.c:81
-msgid "Change the location profile to the given one"
+#: backend/report.pl.in:224
+#, c-format
+msgid "Activating interface [%s]."
 msgstr ""
 
-#: archiver/main.c:83
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+#: backend/report.pl.in:225
+#, c-format
+msgid "Deactivating interface [%s]."
 msgstr ""
 
-#: archiver/main.c:85
-msgid "Rename a location to a new name"
+#: backend/report.pl.in:226
+msgid "Setting up interfaces."
 msgstr ""
 
-#: archiver/main.c:87
-msgid "Add a new location to the archive"
+#: backend/report.pl.in:227
+#, c-format
+msgid "Getting PAP/CHAP password for [%s] from [%s]."
 msgstr ""
 
-#: archiver/main.c:89
-msgid "Remove a location from the archive"
+#: backend/report.pl.in:229
+#, c-format
+msgid "Setting option [%s] in [%s]."
 msgstr ""
 
-#: archiver/main.c:91
-msgid "Add a given backend to the given location"
+#: backend/report.pl.in:230
+#, c-format
+msgid "Setting connect option in [%s]."
 msgstr ""
 
-#: archiver/main.c:93
-msgid "Remove the given backend from the given location"
+#: backend/report.pl.in:231
+#, c-format
+msgid "Getting additional options from [%s]."
 msgstr ""
 
-#: archiver/main.c:99
-msgid "Use the global repository"
+#: backend/report.pl.in:232
+#, c-format
+msgid "Setting additional options in [%s]."
 msgstr ""
 
-#: archiver/main.c:101
-msgid "Identifier of location profile on which to operate"
+#: backend/report.pl.in:233
+#, c-format
+msgid "Boot method [%s] for interface [%s] not supported."
 msgstr ""
 
-#: archiver/main.c:102
-msgid "LOCATION"
+#: backend/report.pl.in:234
+#, c-format
+msgid "Getting remote address for interface [%s]."
 msgstr ""
 
-#: archiver/main.c:104
-msgid "Backend being used for this operation"
+#: backend/report.pl.in:235
+#, c-format
+msgid "Setting remote address for interface [%s]."
 msgstr ""
 
-#: archiver/main.c:104
-msgid "BACKEND_ID"
+#: backend/report.pl.in:236
+msgid "Ensuring loopback interface configuration."
 msgstr ""
 
-#: archiver/main.c:110
-msgid "Store only the differences with the parent location's config"
+#: backend/report.pl.in:238
+msgid "Failed to run lilo."
 msgstr ""
 
-#: archiver/main.c:112
-msgid "Store only those settings set in the previous config"
+#: backend/report.pl.in:239
+msgid "Succesfully executed lilo."
 msgstr ""
 
-#: archiver/main.c:118
-msgid "Date to which to roll back"
+#: backend/report.pl.in:241
+#, c-format
+msgid "Adding [%s] to fstab."
 msgstr ""
 
-#: archiver/main.c:118
-msgid "DATE"
+#: backend/report.pl.in:242
+#, c-format
+msgid "Looking for partitions on [%s]."
 msgstr ""
 
-#: archiver/main.c:120
-msgid "Roll back all configuration items"
+#: backend/report.pl.in:243
+#, c-format
+msgid "Querying size of [%s]."
 msgstr ""
 
-#: archiver/main.c:122
-msgid "Roll back to the revision REVISION_ID"
+#: backend/report.pl.in:244
+#, c-format
+msgid "Mounting [%s]."
 msgstr ""
 
-#: archiver/main.c:122
-msgid "REVISION_ID"
+#: backend/report.pl.in:245
+#, c-format
+msgid "Unmounting [%s]."
 msgstr ""
 
-#: archiver/main.c:124
-msgid "Roll back to the last known revision"
+#: backend/report.pl.in:246
+msgid "Could not find mount tools. No mounting done."
 msgstr ""
 
-#: archiver/main.c:126
-msgid "Roll back by STEPS revisions"
+#: backend/report.pl.in:248
+#, c-format
+msgid "Found swap entry [%s]."
 msgstr ""
 
-#: archiver/main.c:126
-msgid "STEPS"
+#: backend/report.pl.in:249
+msgid "Looking for swap entries."
 msgstr ""
 
-#: archiver/main.c:128
-msgid "Don't run the backend, just dump the output"
+#: backend/report.pl.in:251
+#, c-format
+msgid "No printtool setup in directory [%s]."
 msgstr ""
 
-#: archiver/main.c:134
-msgid "Parent location for the new location"
+#: backend/report.pl.in:253
+msgid "Scanning timezones."
 msgstr ""
 
-#: archiver/main.c:134
-msgid "PARENT"
+#: backend/report.pl.in:254
+#, c-format
+msgid "Scanning timezones: [%s]."
 msgstr ""
 
-#: archiver/main.c:136
-msgid "New name to assign to the location"
+#: backend/report.pl.in:255
+#, fuzzy, c-format
+msgid "Setting timezone as [%s]."
+msgstr "Ρυθμίσεις για Χρήστη %s"
+
+#: backend/report.pl.in:256
+#, c-format
+msgid "Setting local time as [%s]."
 msgstr ""
 
-#: archiver/main.c:136
-msgid "NEW_NAME"
+#: backend/report.pl.in:258
+#, fuzzy
+msgid "Getting user database."
+msgstr "Ρυθμίσεις χρήστη "
+
+#: interfaces/boot.glade.in.h:1
+msgid "Basic"
 msgstr ""
 
-#: archiver/main.c:142
-msgid "Add/remove this backend to/from the master backend list"
-msgstr ""
-
-#: archiver/main.c:144
-msgid "Full containment"
-msgstr ""
-
-#: archiver/main.c:146
-msgid "Partial containment"
-msgstr ""
-
-#: archiver/main.c:309
-msgid "Global archiver options"
-msgstr ""
-
-#: archiver/main.c:311
-msgid "Archiver commands"
-msgstr ""
-
-#: archiver/main.c:313
-msgid "Options for storing data"
-msgstr ""
-
-#: archiver/main.c:315
-msgid "Options for rolling back"
-msgstr ""
-
-#: archiver/main.c:317
-msgid "Options for adding or renaming locations"
-msgstr ""
-
-#: archiver/main.c:320
-msgid "Options for adding and removing backends"
+#: interfaces/boot.glade.in.h:2
+msgid "Boot Image Assistant"
 msgstr ""
 
 #
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/boot.glade.h:7 interfaces/disks.glade.h:19
-#: interfaces/memory.glade.h:31 interfaces/nameresolution.glade.h:14
-#: interfaces/shares.glade.h:29 interfaces/time.glade.h:31
-#: interfaces/users.glade.h:42
-msgid "window1"
-msgstr "Σινδος1"
+#: interfaces/boot.glade.in.h:3
+#, fuzzy
+msgid "Boot _type:"
+msgstr "Είδος ενναλαγής:"
 
-#: interfaces/boot.glade.h:8
+#: interfaces/boot.glade.in.h:4
 msgid ""
-"Use this tool to manage the operating systems\n"
-"or Linux kernels on your machine."
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition.\n"
+"Optionally, you may also enter append parameters which are passed to the\n"
+"kernel at boot time."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:7 interfaces/users.glade.in.h:17
+msgid "Click \"Next\" to continue"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:8
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:9 interfaces/network.glade.in.h:36
+#: interfaces/users.glade.in.h:31
+msgid "Finished"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:10
+msgid "Image"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:11
+msgid "Image (step 2 of 2)"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:12
+msgid "Image Identity (step 1 of 2)"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:13
+msgid "Modify the settings for an operating system or kernel."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:14
+msgid "Other"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:15
+msgid "Other  (step 2 of 2)"
 msgstr ""
 
 #
-#: interfaces/boot.glade.h:10
+#: interfaces/boot.glade.in.h:16
 #, fuzzy
-msgid "_Add..."
-msgstr "Προσθήκη..."
-
-#
-#: interfaces/boot.glade.h:11
-#, fuzzy
-msgid "_Delete"
-msgstr "Διαγραφή"
-
-#
-#: interfaces/boot.glade.h:12
-#, fuzzy
-msgid "_Settings..."
-msgstr "Ρυθμίσεις..."
-
-#
-#: interfaces/boot.glade.h:13
-#, fuzzy
-msgid "D_efault"
+msgid "Set as D_efault"
 msgstr "Εξ' ορισμού"
 
-#: interfaces/boot.glade.h:14
+#: interfaces/boot.glade.in.h:17
+msgid "Specify the partition on which the operating system is installed."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:18
 #, fuzzy
 msgid "Starting your computer"
 msgstr "Ρυθμίσεις χρήστη "
 
-#: interfaces/boot.glade.h:15
-msgid "Wait"
-msgstr ""
-
-#: interfaces/boot.glade.h:16
-msgid "seconds before loading default kernel or OS"
-msgstr ""
-
-#: interfaces/boot.glade.h:17 interfaces/boot.glade.h:22
-#: interfaces/disks.glade.h:33 interfaces/memory.glade.h:16
-#: interfaces/memory.glade.h:25 interfaces/memory.glade.h:41
-#: interfaces/nameresolution.glade.h:49 interfaces/shares.glade.h:43
-#: interfaces/shares.glade.h:57 interfaces/shares.glade.h:63
-#: interfaces/shares.glade.h:69 interfaces/users.glade.h:82
-msgid "Settings"
-msgstr "Ρυθμίσεις"
-
-#: interfaces/boot.glade.h:18
+#: interfaces/boot.glade.in.h:19
 msgid ""
-"Use this dialog to add new kernel or\n"
-"operating system to your computer."
+"The new boot image has been added.\n"
+"Please click \"Finish\" to save your changes. "
+msgstr ""
+
+#: interfaces/boot.glade.in.h:21
+msgid ""
+"This assistant is designed to help you quickly \n"
+"and easily add new boot images to your system.\n"
+"\n"
+"To begin, click \"Next\". "
+msgstr ""
+
+#: interfaces/boot.glade.in.h:25
+msgid ""
+"Use this tool to set the installed operating\n"
+"systems to choose from at startup."
 msgstr ""
 
 #
-#: interfaces/boot.glade.h:20
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:91
+#: interfaces/shares.glade.in.h:57
 #, fuzzy
-msgid "Boot type:"
-msgstr "Είδος ενναλαγής:"
-
-#
-#: interfaces/boot.glade.h:21 interfaces/boot.glade.h:23
-#, fuzzy
-msgid "Name:"
-msgstr "Όνομα"
-
-#: interfaces/boot.glade.h:24
-msgid "Image:"
-msgstr ""
-
-#: interfaces/boot.glade.h:25
-msgid "Make this my default"
-msgstr ""
-
-#: interfaces/boot.glade.h:26 interfaces/disks.glade.h:9
-#: interfaces/memory.glade.h:14 interfaces/network.glade.h:50
-msgid "Device:"
-msgstr "Συσκευή:"
-
-#: interfaces/boot.glade.h:27
-msgid "Optional"
-msgstr ""
-
-#: interfaces/boot.glade.h:28
-#, fuzzy
-msgid "Root:"
-msgstr "Σύστημα:"
-
-#: interfaces/boot.glade.h:29
-msgid "This kernel requires additional parameters"
-msgstr ""
-
-#
-#: interfaces/boot.glade.h:30 interfaces/network.glade.h:20
-msgid "Add..."
+msgid "_Add..."
 msgstr "Προσθήκη..."
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/common.glade.h:7 interfaces/common.glade.h:13
-msgid "Ximian Setup Tools"
-msgstr "Εργαλεία Εγκατάστασης Ximian"
-
-#. Parent
-#. Close writing end
-#. LibXML support for parsing from memory is good, but parsing from
-#. * opened filehandles is not supported unless you write your own feed
-#. * mechanism. Let's just load it all into memory, then. Also, refusing
-#. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.h:8 src/common/xst-tool.c:593
-msgid "Scanning your system configuration."
+#: interfaces/boot.glade.in.h:28
+msgid "_Append:"
 msgstr ""
 
-#: interfaces/common.glade.h:9
-msgid "%P %%"
-msgstr "%P %%"
+#
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:96
+#: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:90
+#, fuzzy
+msgid "_Delete"
+msgstr "Διαγραφή"
 
-#: interfaces/common.glade.h:10
-msgid "label54"
-msgstr "label54"
+#: interfaces/boot.glade.in.h:30
+#, fuzzy
+msgid "_Device:"
+msgstr "Συσκευή:"
 
-#: interfaces/common.glade.h:11
-msgid "label51"
-msgstr "label51"
+#
+#: interfaces/boot.glade.in.h:31
+#, fuzzy
+msgid "_Edit..."
+msgstr "Προσθήκη..."
 
-#: interfaces/common.glade.h:12
-msgid "label52"
-msgstr "label52"
+#
+#: interfaces/boot.glade.in.h:32 interfaces/print.glade.in.h:72
+#: interfaces/shares.glade.in.h:65 interfaces/users.glade.in.h:94
+#, fuzzy
+msgid "_Name:"
+msgstr "Όνομα"
 
-#: interfaces/common.glade.h:14
+#
+#: interfaces/boot.glade.in.h:33 interfaces/shares.glade.in.h:66
+#, fuzzy
+msgid "_Path:"
+msgstr "Διαδρομή:"
+
+#: interfaces/boot.glade.in.h:34
+#, fuzzy
+msgid "_Root:"
+msgstr "Σύστημα:"
+
+#: interfaces/boot.glade.in.h:35
+msgid "_Wait"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:36
+msgid "_seconds before loading default kernel or OS"
+msgstr ""
+
+#: interfaces/common.glade.in.h:1
 msgid "Complexity"
 msgstr "Πολυπλοκότητα"
 
-#: interfaces/common.glade.h:15
-msgid "Unsupported platform"
+#
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:55
+#: interfaces/shares.glade.in.h:43
+msgid "Password:"
+msgstr "Κωδικός:"
+
+#: interfaces/common.glade.in.h:3
+msgid "Run without password"
 msgstr ""
 
-#: interfaces/common.glade.h:16
-msgid "[ICON]"
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:845
+msgid "Scanning your system configuration."
 msgstr ""
 
-#: interfaces/common.glade.h:17
+#: interfaces/common.glade.in.h:5
 msgid ""
 "The platform you are running is not supported by this tool. If you know for "
 "sure that it works like one of the platforms listed below, you can select "
@@ -342,769 +676,864 @@ msgid ""
 "cripple your computer."
 msgstr ""
 
-#: interfaces/common.glade.h:20
+#: interfaces/common.glade.in.h:8
+msgid ""
+"To run this tool, you need administrator privileges.\n"
+"\n"
+"To acquire such privileges, enter your root password below. If you don't\n"
+"specify a password, you will be unable to modify your system configuration."
+msgstr ""
+
+#: interfaces/common.glade.in.h:12
+msgid "Unsupported platform"
+msgstr ""
+
+#: interfaces/common.glade.in.h:13
+msgid "Ximian Setup Tools"
+msgstr "Εργαλεία Εγκατάστασης Ximian"
+
+#: interfaces/common.glade.in.h:14
 #, fuzzy
-msgid "label57"
-msgstr "label27"
+msgid "Ximian Setup Tools - Password"
+msgstr "Εργαλεία Εγκατάστασης Ximian"
 
-#
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/disks.glade.h:7
-msgid "Partition Settings"
-msgstr "Ρυθμίσεις Διαμέρισης"
+#: interfaces/disks.glade.in.h:1
+msgid "Add an unlisted import"
+msgstr ""
 
-#
-#: interfaces/disks.glade.h:8 interfaces/shares.glade.h:8
-msgid "Type:"
-msgstr "Τύπος:"
+#: interfaces/disks.glade.in.h:2
+msgid "Add partition"
+msgstr "Προσθήκη διαμέρισης"
 
-#
-#: interfaces/disks.glade.h:10 interfaces/shares.glade.h:13
-msgid "Mount point:"
-msgstr "Σημείο προσάρτησης:"
-
-#: interfaces/disks.glade.h:11
+#: interfaces/disks.glade.in.h:3
 msgid "Automatic (detect when mounting)"
 msgstr ""
 
-#: interfaces/disks.glade.h:12
-msgid "Ext2 (Linux)"
-msgstr "Ext2 (Linux)"
-
-#: interfaces/disks.glade.h:13
-msgid "FAT (DOS)"
-msgstr "FAT (DOS)"
-
-#: interfaces/disks.glade.h:14
-msgid "VFAT (Windows 95 and newer)"
-msgstr "VFAT (Windows 95 ή νεώτερο)"
-
-#: interfaces/disks.glade.h:15
-msgid "FAT32 (Windows 98 and newer)"
-msgstr "FAT32 (Windows 98 ή νεώτερο)"
-
-#: interfaces/disks.glade.h:16
-msgid "NTFS (Windows NT & 2000)"
-msgstr "NTFS (Windows NT & 2000)"
-
-#: interfaces/disks.glade.h:17 interfaces/shares.glade.h:16
-msgid "Choose a mount point"
-msgstr "Επιλογή σημείου προσάρτησης"
-
-#
-#: interfaces/disks.glade.h:18
-msgid "Check for errors on startup"
-msgstr "Έλεγχος σφαλμάτων κατά την εκκίνηση"
-
-#: interfaces/disks.glade.h:20 interfaces/memory.glade.h:8
-#: interfaces/memory.glade.h:36 interfaces/network.glade.h:17
-msgid "Device"
-msgstr "Συσκευή"
-
-#
-#: interfaces/disks.glade.h:21 interfaces/shares.glade.h:32
-msgid "Detected"
-msgstr ""
-
-#: interfaces/disks.glade.h:22 interfaces/shares.glade.h:33
-msgid "Listed"
-msgstr ""
-
-#
-# # FIX todo
-#: interfaces/disks.glade.h:23 interfaces/shares.glade.h:34
-msgid "Mounted"
-msgstr ""
-
-#: interfaces/disks.glade.h:24 interfaces/memory.glade.h:9
-#: interfaces/memory.glade.h:38
-msgid "Size"
-msgstr "Μέγεθος"
-
-#: interfaces/disks.glade.h:25
+#: interfaces/disks.glade.in.h:4
 msgid "Bootable"
 msgstr "Εκκινήσιμο"
 
 #
-#: interfaces/disks.glade.h:26
+#: interfaces/disks.glade.in.h:5
 msgid "Check"
 msgstr "Έλεγχος"
 
-#: interfaces/disks.glade.h:27
-msgid "Mount point"
-msgstr "Σημείο προσάρτησης"
+#
+#: interfaces/disks.glade.in.h:6
+msgid "Check for errors on startup"
+msgstr "Έλεγχος σφαλμάτων κατά την εκκίνηση"
+
+#: interfaces/disks.glade.in.h:7
+msgid "Choose a mount point"
+msgstr "Επιλογή σημείου προσάρτησης"
 
 #
-#: interfaces/disks.glade.h:28
-msgid "Partition"
-msgstr "Διαμέριση"
-
-#: interfaces/disks.glade.h:29 interfaces/shares.glade.h:39
-msgid "Add an unlisted import"
+#: interfaces/disks.glade.in.h:8
+msgid "Detected"
 msgstr ""
 
-#: interfaces/disks.glade.h:30
-msgid "Add partition"
-msgstr "Προσθήκη διαμέρισης"
+#: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
+#: interfaces/network.glade.in.h:34 src/boot/boot.etspec.h:2
+msgid "Device"
+msgstr "Συσκευή"
 
-#: interfaces/disks.glade.h:31
-msgid "Mount this partition"
-msgstr "Προσάρτηση αυτής της διαμέρισης"
+#: interfaces/disks.glade.in.h:10 interfaces/memory.glade.in.h:6
+#: interfaces/network.glade.in.h:35
+msgid "Device:"
+msgstr "Συσκευή:"
 
-#: interfaces/disks.glade.h:32 interfaces/shares.glade.h:42
-msgid "Open settings dialog for selected import"
-msgstr ""
+#
+#: interfaces/disks.glade.in.h:11
+msgid "Disks & partitions"
+msgstr "Δίσκοι και διαμερίσεις"
 
-#: interfaces/disks.glade.h:34
-msgid "Remember details of this partition"
-msgstr "Απομνημόνευση λεπτομερειών αυτής της διαμέρισης"
-
-#: interfaces/disks.glade.h:35
+#: interfaces/disks.glade.in.h:12
 msgid ""
 "Disks are divided into several pieces, called partitions. Each partition is "
 "dedicated for a specific storage task, such as virtual memory or home "
 "directories for your users."
 msgstr ""
 
-#
-#: interfaces/disks.glade.h:36
-msgid "Disks & partitions"
-msgstr "Δίσκοι και διαμερίσεις"
+#: interfaces/disks.glade.in.h:13
+msgid "Ext2 (Linux)"
+msgstr "Ext2 (Linux)"
+
+#: interfaces/disks.glade.in.h:14
+msgid "FAT (DOS)"
+msgstr "FAT (DOS)"
+
+#: interfaces/disks.glade.in.h:15
+msgid "FAT32 (Windows 98 and newer)"
+msgstr "FAT32 (Windows 98 ή νεώτερο)"
+
+#: interfaces/disks.glade.in.h:16
+msgid "Listed"
+msgstr ""
+
+#: interfaces/disks.glade.in.h:17
+msgid "Mount point"
+msgstr "Σημείο προσάρτησης"
 
 #
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/memory.glade.h:7
+#: interfaces/disks.glade.in.h:18 interfaces/shares.glade.in.h:34
+msgid "Mount point:"
+msgstr "Σημείο προσάρτησης:"
+
+#: interfaces/disks.glade.in.h:19
+msgid "Mount this partition"
+msgstr "Προσάρτηση αυτής της διαμέρισης"
+
+#
+# # FIX todo
+#: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:35
+msgid "Mounted"
+msgstr ""
+
+#: interfaces/disks.glade.in.h:21
+msgid "NTFS (Windows NT & 2000)"
+msgstr "NTFS (Windows NT & 2000)"
+
+#: interfaces/disks.glade.in.h:22
+msgid "Open settings dialog for selected import"
+msgstr ""
+
+#
+#: interfaces/disks.glade.in.h:23
+msgid "Partition"
+msgstr "Διαμέριση"
+
+#
+#: interfaces/disks.glade.in.h:24
+msgid "Partition Settings"
+msgstr "Ρυθμίσεις Διαμέρισης"
+
+#: interfaces/disks.glade.in.h:25
+msgid "Remember details of this partition"
+msgstr "Απομνημόνευση λεπτομερειών αυτής της διαμέρισης"
+
+#: interfaces/disks.glade.in.h:26 interfaces/memory.glade.in.h:16
+#: interfaces/nameresolution.glade.in.h:30 interfaces/users.glade.in.h:67
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: interfaces/disks.glade.in.h:27 interfaces/memory.glade.in.h:17
+msgid "Size"
+msgstr "Μέγεθος"
+
+#
+#: interfaces/disks.glade.in.h:28
+msgid "Type:"
+msgstr "Τύπος:"
+
+#: interfaces/disks.glade.in.h:29
+msgid "VFAT (Windows 95 and newer)"
+msgstr "VFAT (Windows 95 ή νεώτερο)"
+
+#: interfaces/disks.glade.in.h:30
+msgid "reiserfs (Linux)"
+msgstr ""
+
+#: interfaces/disks.glade.in.h:31
+msgid "ufs (FreeBSD)"
+msgstr ""
+
+#: interfaces/display.glade.in.h:1 interfaces/nameresolution.glade.in.h:3
+msgid "<unknown>"
+msgstr "<άγνωστο>"
+
+#: interfaces/display.glade.in.h:2
+msgid "1024x768"
+msgstr ""
+
+#: interfaces/display.glade.in.h:3
+msgid "1280x1024"
+msgstr ""
+
+#: interfaces/display.glade.in.h:4
+msgid "640x480"
+msgstr ""
+
+#: interfaces/display.glade.in.h:5
+msgid "800x600"
+msgstr ""
+
+#: interfaces/display.glade.in.h:6
+msgid "Appearance"
+msgstr ""
+
+#: interfaces/display.glade.in.h:7
+msgid "Colors"
+msgstr ""
+
+#: interfaces/display.glade.in.h:8
+msgid "Colors:"
+msgstr ""
+
+#
+#: interfaces/display.glade.in.h:9
+#, fuzzy
+msgid "Down"
+msgstr "Μετακίνηση Κάτω"
+
+#: interfaces/display.glade.in.h:10
+msgid "Left"
+msgstr ""
+
+#: interfaces/display.glade.in.h:11
+msgid "Model:"
+msgstr ""
+
+#: interfaces/display.glade.in.h:12
+msgid "Monitor information"
+msgstr ""
+
+#: interfaces/display.glade.in.h:13
+msgid "Narrower"
+msgstr ""
+
+#: interfaces/display.glade.in.h:14
+msgid "Refresh rate:"
+msgstr ""
+
+#
+#: interfaces/display.glade.in.h:15
+msgid "Resolution"
+msgstr ""
+
+#
+#: interfaces/display.glade.in.h:16
+msgid "Resolution:"
+msgstr ""
+
+#: interfaces/display.glade.in.h:17
+msgid "Restart X"
+msgstr "Επανεκκίνηση των Χ"
+
+#: interfaces/display.glade.in.h:18
+msgid "Right"
+msgstr "Δεξιά"
+
+#: interfaces/display.glade.in.h:19
+msgid "Shift my display:"
+msgstr "Μετατόπιση της οθόνης:"
+
+#: interfaces/display.glade.in.h:20
+msgid "Shorter"
+msgstr ""
+
+#: interfaces/display.glade.in.h:21
+msgid "Stretch my display:"
+msgstr ""
+
+#: interfaces/display.glade.in.h:22
+msgid "Taller"
+msgstr ""
+
+#
+#: interfaces/display.glade.in.h:23
+#, fuzzy
+msgid "Test current setting"
+msgstr "Ρυθμίσεις συστήματος"
+
+#: interfaces/display.glade.in.h:24
+msgid "Up"
+msgstr "Επάνω"
+
+#: interfaces/display.glade.in.h:25
+msgid "Use this tool to configure your monitor."
+msgstr ""
+
+#: interfaces/display.glade.in.h:26
+msgid "Vendor:"
+msgstr "Κατασκευαστής:"
+
+#: interfaces/display.glade.in.h:27
+msgid "Wider"
+msgstr ""
+
+#
+#: interfaces/display.glade.in.h:28
+#, fuzzy
+msgid "_Restore settings"
+msgstr "Ρυθμίσεις συστήματος"
+
+#
+#: interfaces/memory.glade.in.h:1
 msgid "Available partitions:"
 msgstr "Διαθέσιμες διαμερίσεις:"
 
-#
-#: interfaces/memory.glade.h:10
-msgid "Select  Swap File"
-msgstr "Επιλέξτε Αρχείο Ενναλαγής"
+#: interfaces/memory.glade.in.h:2
+msgid "Available swap areas"
+msgstr "Διαθέσιμές περιοχές ενναλαγής"
 
-#: interfaces/memory.glade.h:11
-msgid "OK"
-msgstr "Εντάξει"
-
-#
-#: interfaces/memory.glade.h:12
-msgid "Cancel"
-msgstr "Ακύρωση"
-
-#
-#: interfaces/memory.glade.h:13
-msgid "Swap Settings"
-msgstr "Ρυθμίσεις Ενναλαγής"
-
-#: interfaces/memory.glade.h:15 interfaces/memory.glade.h:24
-#: interfaces/memory.glade.h:35 interfaces/shares.glade.h:48
-#: interfaces/shares.glade.h:54
-msgid "Enabled"
-msgstr "Ενεργοποιημένο"
-
-#: interfaces/memory.glade.h:17 interfaces/memory.glade.h:26
-msgid "MB"
-msgstr "MB"
-
-#: interfaces/memory.glade.h:18 interfaces/memory.glade.h:29
-msgid "Size:"
-msgstr "Μέγεθος:"
-
-#: interfaces/memory.glade.h:19 interfaces/memory.glade.h:30
-msgid "Priority:"
-msgstr "Προτεραιότητα:"
-
-#: interfaces/memory.glade.h:20
-msgid "New Swap Device"
-msgstr "Νέα Συσκευή Εναλλαγής"
-
-#
-#: interfaces/memory.glade.h:21
-msgid "Swap type:"
-msgstr "Είδος ενναλαγής:"
-
-#
-#: interfaces/memory.glade.h:22
-msgid "partition"
-msgstr "διαμέριση"
-
-#: interfaces/memory.glade.h:23
-msgid "file"
-msgstr "αρχείο"
-
-#: interfaces/memory.glade.h:27
+#: interfaces/memory.glade.in.h:3
 msgid "Browse..."
 msgstr "Περιήγηση"
 
 #
-#: interfaces/memory.glade.h:28 interfaces/shares.glade.h:10
+#: interfaces/memory.glade.in.h:4
+msgid "Cancel"
+msgstr "Ακύρωση"
+
+#: interfaces/memory.glade.in.h:7 interfaces/shares.glade.in.h:14
+msgid "Enabled"
+msgstr "Ενεργοποιημένο"
+
+#: interfaces/memory.glade.in.h:8
+msgid "MB"
+msgstr "MB"
+
+#: interfaces/memory.glade.in.h:9
+msgid "New Swap Device"
+msgstr "Νέα Συσκευή Εναλλαγής"
+
+#: interfaces/memory.glade.in.h:10
+msgid "OK"
+msgstr "Εντάξει"
+
+#
+#: interfaces/memory.glade.in.h:11 interfaces/shares.glade.in.h:45
 msgid "Path:"
 msgstr "Διαδρομή:"
 
-#: interfaces/memory.glade.h:32
-msgid "Swap Memory:"
-msgstr "Μνήμη Ενναλαγής:"
-
-#: interfaces/memory.glade.h:33
-msgid "Physical Memory:"
+#: interfaces/memory.glade.in.h:12
+#, fuzzy
+msgid "Physical memory:"
 msgstr "Φυσική Μνήμη:"
 
-#: interfaces/memory.glade.h:34
-msgid "Available swap areas"
-msgstr "Διαθέσιμές περιοχές ενναλαγής"
-
 #
-#: interfaces/memory.glade.h:37
+#: interfaces/memory.glade.in.h:13
 msgid "Priority"
 msgstr "Προτεραιότητα"
 
+#: interfaces/memory.glade.in.h:14
+msgid "Priority:"
+msgstr "Προτεραιότητα:"
+
 #
-#: interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:10
-#: interfaces/nameresolution.glade.h:30 interfaces/nameresolution.glade.h:35
-#: interfaces/network.glade.h:37 interfaces/shares.glade.h:55
-#: interfaces/shares.glade.h:64 interfaces/shares.glade.h:67
-#: interfaces/time.glade.h:30
-msgid "Add"
+#: interfaces/memory.glade.in.h:15
+msgid "Select  Swap File"
+msgstr "Επιλέξτε Αρχείο Ενναλαγής"
+
+#: interfaces/memory.glade.in.h:18
+msgid "Size:"
+msgstr "Μέγεθος:"
+
+#
+#: interfaces/memory.glade.in.h:19
+msgid "Swap Settings"
+msgstr "Ρυθμίσεις Ενναλαγής"
+
+#: interfaces/memory.glade.in.h:20
+#, fuzzy
+msgid "Swap memory:"
+msgstr "Μνήμη Ενναλαγής:"
+
+#
+#: interfaces/memory.glade.in.h:21
+msgid "Swap type:"
+msgstr "Είδος ενναλαγής:"
+
+#
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:90
+#: interfaces/time.glade.in.h:17
+#, fuzzy
+msgid "_Add"
 msgstr "Προσθήκη"
 
 #
-#: interfaces/memory.glade.h:40 interfaces/shares.glade.h:56
-#: interfaces/shares.glade.h:65 interfaces/shares.glade.h:68
-msgid "Remove"
+#: interfaces/memory.glade.in.h:23
+#, fuzzy
+msgid "_Remove"
 msgstr "Διαγραφή"
 
-#
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/nameresolution.glade.h:7
-msgid "Aliases Settings"
-msgstr "Ρυθμίσεις Ψευδωνύμων"
+#: interfaces/memory.glade.in.h:24
+#, fuzzy
+msgid "_Settings"
+msgstr "Ρυθμίσεις"
+
+#: interfaces/memory.glade.in.h:25
+msgid "file"
+msgstr "αρχείο"
 
 #
-#: interfaces/nameresolution.glade.h:8 interfaces/network.glade.h:35
-#: interfaces/network.glade.h:63
-msgid "IP address:"
-msgstr "Διεύθυνση IP:"
+#: interfaces/memory.glade.in.h:26
+msgid "partition"
+msgstr "διαμέριση"
 
-#: interfaces/nameresolution.glade.h:9 interfaces/nameresolution.glade.h:50
-#: interfaces/network.glade.h:34
-msgid "Aliases"
-msgstr "Ψευδώνυμα"
-
-#
-#: interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
-#: interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
-#: interfaces/network.glade.h:39 interfaces/users.glade.h:47
-#: interfaces/users.glade.h:52 interfaces/users.glade.h:77
-msgid "Delete"
-msgstr "Διαγραφή"
-
-#: interfaces/nameresolution.glade.h:12 interfaces/nameresolution.glade.h:29
-#: interfaces/nameresolution.glade.h:40
-msgid "Existing:"
-msgstr "Υπάρχον:"
-
-#
-#: interfaces/nameresolution.glade.h:13 interfaces/users.glade.h:29
-msgid "New:"
-msgstr "Νέο:"
-
-#: interfaces/nameresolution.glade.h:15
-msgid "Let the computer know its name, function and network surroundings."
-msgstr ""
-
-#: interfaces/nameresolution.glade.h:16
-msgid "Host"
-msgstr "Σύστημα"
-
-#
-#: interfaces/nameresolution.glade.h:17 interfaces/network.glade.h:9
-msgid "Host name:"
-msgstr "Όνομα συστήματος:"
-
-#
-#: interfaces/nameresolution.glade.h:18 interfaces/nameresolution.glade.h:22
-msgid "Reverse:"
-msgstr ""
-
-#: interfaces/nameresolution.glade.h:19 interfaces/nameresolution.glade.h:23
-msgid "<unknown>"
-msgstr "<άγνωστο>"
-
-#
-#: interfaces/nameresolution.glade.h:20
-msgid "Domain"
-msgstr "Επίθημα"
-
-#
-#: interfaces/nameresolution.glade.h:21 interfaces/network.glade.h:28
-msgid "Domain:"
-msgstr "Επίθημα:"
-
-#: interfaces/nameresolution.glade.h:24 interfaces/network.glade.h:13
-msgid "Workgroup:"
-msgstr ""
-
-#
-#: interfaces/nameresolution.glade.h:25 interfaces/network.glade.h:12
-msgid "Description:"
-msgstr "Περιγραφή:"
-
-#
-#: interfaces/nameresolution.glade.h:26
-msgid "Identification"
-msgstr "Αναγνώριση"
-
-#: interfaces/nameresolution.glade.h:27
-msgid "Domain Name Service (DNS)"
-msgstr ""
-
-#
-#: interfaces/nameresolution.glade.h:28
-msgid "New server:"
-msgstr "Νέος εξυπηρετητής:"
-
-#: interfaces/nameresolution.glade.h:32
-msgid "Use WINS server:"
-msgstr ""
-
-#
-#: interfaces/nameresolution.glade.h:33
-msgid "Servers"
-msgstr "Εξυπηρετητές"
-
-#: interfaces/nameresolution.glade.h:34
-msgid "Domain Lookup Order"
-msgstr "Σειρά Αναζήτησης Επιθήματος"
-
-#: interfaces/nameresolution.glade.h:37
+#: interfaces/nameresolution.glade.in.h:1
 msgid " Move Up"
 msgstr " Μετακίνηση Πάνω"
 
 #
-#: interfaces/nameresolution.glade.h:38
-msgid "Move Down"
-msgstr "Μετακίνηση Κάτω"
+#: interfaces/nameresolution.glade.in.h:2
+msgid " Names"
+msgstr " Ονόματα"
 
 #
-#: interfaces/nameresolution.glade.h:39
-msgid "New domain:"
-msgstr "Νέο επίθημα:"
+#: interfaces/nameresolution.glade.in.h:4 interfaces/shares.glade.in.h:4
+#: interfaces/users.glade.in.h:4
+msgid "Add"
+msgstr "Προσθήκη"
 
-#: interfaces/nameresolution.glade.h:41
-msgid "Search Domains"
-msgstr "Αναζήτηση Επιθημάτων"
+#: interfaces/nameresolution.glade.in.h:5 interfaces/network.glade.in.h:16
+msgid "Aliases"
+msgstr "Ψευδώνυμα"
 
-#: interfaces/nameresolution.glade.h:42
+#
+#: interfaces/nameresolution.glade.in.h:6
+msgid "Aliases Settings"
+msgstr "Ρυθμίσεις Ψευδωνύμων"
+
+#: interfaces/nameresolution.glade.in.h:7
 msgid ""
 "Assign aliases to IP addresses that may not be registered in the DNS or WINS "
 "servers, or to override or set new names for commonly used IP addresses. "
 msgstr ""
 
-#
-#: interfaces/nameresolution.glade.h:43
-msgid "IP address"
-msgstr "Διεύθυνση IP"
-
-#
-#: interfaces/nameresolution.glade.h:44
-msgid " Names"
-msgstr " Ονόματα"
-
-#: interfaces/nameresolution.glade.h:45
-msgid "New Alias"
-msgstr "Νέο Ψευδώνυμο"
-
-#
-#: interfaces/nameresolution.glade.h:47
-msgid "Settings for the selected alias"
-msgstr "Ρυθμίσεις για το επιλεγμένο ψευδώνυμο"
-
-#: interfaces/nameresolution.glade.h:48
+#: interfaces/nameresolution.glade.in.h:8
 msgid "Change the alias' IP address or its corresponding names."
 msgstr ""
 
 #
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/network.glade.h:7
-msgid "Networking Settings"
-msgstr "Ρυθμίσεις Δικτύωσης"
-
-#: interfaces/network.glade.h:8
-msgid "How this computer is identified."
-msgstr ""
-
-#: interfaces/network.glade.h:10
-msgid "Enable windows networking (Samba)"
-msgstr ""
-
-#: interfaces/network.glade.h:11
-msgid "Windows Networking"
-msgstr ""
+#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:21
+#: interfaces/shares.glade.in.h:11 interfaces/users.glade.in.h:25
+msgid "Delete"
+msgstr "Διαγραφή"
 
 #
-#: interfaces/network.glade.h:14
-msgid "WINS server:"
-msgstr "Εξυπηρέτης WINS:"
+#: interfaces/nameresolution.glade.in.h:10
+msgid "Description:"
+msgstr "Περιγραφή:"
 
-#: interfaces/network.glade.h:15 interfaces/network.glade.h:56
-msgid "General"
-msgstr "Γενικά"
+#
+#: interfaces/nameresolution.glade.in.h:11
+msgid "Domain"
+msgstr "Επίθημα"
 
-#: interfaces/network.glade.h:16
-msgid "How other computers are accessed."
+#: interfaces/nameresolution.glade.in.h:12
+msgid "Domain Lookup Order"
+msgstr "Σειρά Αναζήτησης Επιθήματος"
+
+#: interfaces/nameresolution.glade.in.h:13
+msgid "Domain Name Service (DNS)"
 msgstr ""
 
 #
-#: interfaces/network.glade.h:18
-msgid "Status"
-msgstr "Κατάσταση"
+#: interfaces/nameresolution.glade.in.h:14
+msgid "Domain:"
+msgstr "Επίθημα:"
+
+#: interfaces/nameresolution.glade.in.h:15
+msgid "Existing:"
+msgstr "Υπάρχον:"
+
+#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:22
+msgid "Host"
+msgstr "Σύστημα"
 
 #
-#: interfaces/network.glade.h:19
-msgid "Description"
-msgstr "Περιγραφή"
+#: interfaces/nameresolution.glade.in.h:17
+msgid "Host name:"
+msgstr "Όνομα συστήματος:"
 
 #
-#: interfaces/network.glade.h:21
-msgid "Delete..."
-msgstr "Διαγραφή..."
+#: interfaces/nameresolution.glade.in.h:18
+msgid "IP address"
+msgstr "Διεύθυνση IP"
 
 #
-#: interfaces/network.glade.h:22
-msgid "Configure..."
-msgstr "Ρύθμιση..."
+#: interfaces/nameresolution.glade.in.h:19
+msgid "IP address:"
+msgstr "Διεύθυνση IP:"
 
 #
-#: interfaces/network.glade.h:23
+#: interfaces/nameresolution.glade.in.h:20
+msgid "Identification"
+msgstr "Αναγνώριση"
+
+#: interfaces/nameresolution.glade.in.h:21
+msgid "Let the computer know its name, function and network surroundings."
+msgstr ""
+
+#
+#: interfaces/nameresolution.glade.in.h:22
+msgid "Move Down"
+msgstr "Μετακίνηση Κάτω"
+
+#: interfaces/nameresolution.glade.in.h:23
+msgid "New Alias"
+msgstr "Νέο Ψευδώνυμο"
+
+#
+#: interfaces/nameresolution.glade.in.h:24
+msgid "New domain:"
+msgstr "Νέο επίθημα:"
+
+#
+#: interfaces/nameresolution.glade.in.h:25
+msgid "New server:"
+msgstr "Νέος εξυπηρετητής:"
+
+#
+#: interfaces/nameresolution.glade.in.h:26
+msgid "New:"
+msgstr "Νέο:"
+
+#
+#: interfaces/nameresolution.glade.in.h:27
+msgid "Reverse:"
+msgstr ""
+
+#: interfaces/nameresolution.glade.in.h:28
+msgid "Search Domains"
+msgstr "Αναζήτηση Επιθημάτων"
+
+#
+#: interfaces/nameresolution.glade.in.h:29
+msgid "Servers"
+msgstr "Εξυπηρετητές"
+
+#
+#: interfaces/nameresolution.glade.in.h:31
+msgid "Settings for the selected alias"
+msgstr "Ρυθμίσεις για το επιλεγμένο ψευδώνυμο"
+
+#: interfaces/nameresolution.glade.in.h:32
+msgid "Use WINS server:"
+msgstr ""
+
+#: interfaces/nameresolution.glade.in.h:33
+msgid "Workgroup:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:1
+msgid "1. ISP phone number"
+msgstr ""
+
+#: interfaces/network.glade.in.h:2
 #, fuzzy
-msgid "Activate"
+msgid "2. Username and password"
+msgstr "  Τυχαίος Κωδικός  "
+
+#: interfaces/network.glade.in.h:3
+msgid "2.422"
+msgstr "2,422"
+
+#: interfaces/network.glade.in.h:4
+msgid "3. Account name"
+msgstr ""
+
+#: interfaces/network.glade.in.h:5
+#, fuzzy
+msgid "A_liases:"
+msgstr "Ψευδώνυμα:"
+
+#
+#: interfaces/network.glade.in.h:6
+#, fuzzy
+msgid "Ac_tivate"
 msgstr "Ενεργό"
 
+#: interfaces/network.glade.in.h:7
+msgid "Account"
+msgstr ""
+
 #
-#: interfaces/network.glade.h:24
+#: interfaces/network.glade.in.h:8
 #, fuzzy
-msgid "Deactivate"
-msgstr "Ενεργό"
+msgid "Account name:"
+msgstr "Όνομα συστήματος:"
 
-#
-#: interfaces/network.glade.h:25
-msgid "Connections"
-msgstr "Συνδέσεις"
+#: interfaces/network.glade.in.h:9
+#, fuzzy
+msgid "Activate when the computer _starts"
+msgstr "Ψευδώνυμα άλλων υπολογιστών."
 
-#: interfaces/network.glade.h:26
-msgid "How the names of other computers are found."
-msgstr ""
-
-#: interfaces/network.glade.h:27
-msgid "Obtain DNS information from DHCP / BOOTP server"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:29
-msgid "Search Domains:"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:30
-msgid "DNS Servers:"
-msgstr "Εξυπηρετητές DNS:"
-
-#: interfaces/network.glade.h:31
-msgid "DNS"
-msgstr "DNS"
-
-#: interfaces/network.glade.h:32
-msgid "Aliases of other computers."
+#: interfaces/network.glade.in.h:10
+#, fuzzy
+msgid "Activate when the computer starts"
 msgstr "Ψευδώνυμα άλλων υπολογιστών."
 
 #
-#: interfaces/network.glade.h:33
+#: interfaces/network.glade.in.h:11
+#, fuzzy
+msgid "Activation"
+msgstr "Τοποθεσία"
+
+#
+#: interfaces/network.glade.in.h:12
+msgid "Ad-Hoc Settings"
+msgstr ""
+
+#: interfaces/network.glade.in.h:13
+msgid "Add New Internet Connection"
+msgstr ""
+
+#
+#: interfaces/network.glade.in.h:14
+#, fuzzy
+msgid "Advanced"
+msgstr "Προχωρημένες ρυθμίσεις"
+
+#
+#: interfaces/network.glade.in.h:15
+#, fuzzy
+msgid "Advanced PPP connection tuning."
+msgstr "Προχωρημένες ρυθμίσεις"
+
+#: interfaces/network.glade.in.h:17
+msgid "Aliases of other computers."
+msgstr "Ψευδώνυμα άλλων υπολογιστών."
+
+#: interfaces/network.glade.in.h:18
+msgid "Allow activation control for all _users"
+msgstr ""
+
+#: interfaces/network.glade.in.h:19
+msgid "Allow activation control for all users"
+msgstr ""
+
+#: interfaces/network.glade.in.h:20
+msgid "Auto"
+msgstr ""
+
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1554
+msgid "BOOTP"
+msgstr "BOOTP"
+
+#
+#: interfaces/network.glade.in.h:22 interfaces/print.glade.in.h:18
+msgid "Connection"
+msgstr "Σύνδεση"
+
+#: interfaces/network.glade.in.h:23
+msgid "Connection Settings"
+msgstr "Ρυθμίσεις Σύνδεσης"
+
+#
+#: interfaces/network.glade.in.h:24
+#, fuzzy
+msgid "Connection active"
+msgstr "Σύνδεση"
+
+#
+#: interfaces/network.glade.in.h:25
+msgid "Connections"
+msgstr "Συνδέσεις"
+
+#: interfaces/network.glade.in.h:26
+msgid "Create a new Internet Connection "
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:27
+#: src/network/connection.c:1553
+msgid "DHCP"
+msgstr "DHCP"
+
+#: interfaces/network.glade.in.h:28
+msgid "DNS"
+msgstr "DNS"
+
+#
+#: interfaces/network.glade.in.h:29
+#, fuzzy
+msgid "DNS Servers"
+msgstr "Εξυπηρετητές DNS:"
+
+#
+#: interfaces/network.glade.in.h:30
+#, fuzzy
+msgid "DNS _Servers:"
+msgstr "Εξυπηρετητές DNS:"
+
+#
+#: interfaces/network.glade.in.h:31
+#, fuzzy
+msgid "D_eactivate"
+msgstr "Ενεργό"
+
+#: interfaces/network.glade.in.h:32
+msgid "Default Gateway Device:"
+msgstr ""
+
+#
+#: interfaces/network.glade.in.h:33
+msgid "Description"
+msgstr "Περιγραφή"
+
+#: interfaces/network.glade.in.h:37
+msgid ""
+"First, please enter the phone number you use to connect to the internet. "
+"This number is provided by your ISP. "
+msgstr ""
+
+#: interfaces/network.glade.in.h:38
+msgid "General"
+msgstr "Γενικά"
+
+#: interfaces/network.glade.in.h:39 src/network/main.c:133
+msgid "Hosts"
+msgstr "Συστήματα"
+
+#: interfaces/network.glade.in.h:40
+msgid "How other computers are accessed."
+msgstr ""
+
+#: interfaces/network.glade.in.h:41
+msgid "How the IP address for this connection is determined"
+msgstr ""
+
+#: interfaces/network.glade.in.h:42
+msgid "How the IP addresses for this connection are determined"
+msgstr ""
+
+#: interfaces/network.glade.in.h:43
+msgid "How the names of other computers are found."
+msgstr ""
+
+#: interfaces/network.glade.in.h:44
+msgid "How this computer is identified."
+msgstr ""
+
+#: interfaces/network.glade.in.h:45
+msgid "How to dial up to the internet."
+msgstr ""
+
+#
+#: interfaces/network.glade.in.h:46
 #, fuzzy
 msgid "IP Address"
 msgstr "Διεύθυνση IP"
 
-#: interfaces/network.glade.h:36
-msgid "Aliases:"
-msgstr "Ψευδώνυμα:"
+#
+#: interfaces/network.glade.in.h:47
+msgid "IP Settings"
+msgstr "Ρυθμίσεις IP"
+
+#: interfaces/network.glade.in.h:48 src/network/connection.c:1552
+msgid "Manual"
+msgstr "Χειρωνακτική"
 
 #
-#: interfaces/network.glade.h:38
-msgid "Change"
-msgstr "Αλλαγή"
-
-#: interfaces/network.glade.h:40
-msgid "Hosts"
-msgstr "Συστήματα"
+#: interfaces/network.glade.in.h:49
+msgid "Networking Settings"
+msgstr "Ρυθμίσεις Δικτύωσης"
 
 #
-#: interfaces/network.glade.h:41
+#: interfaces/network.glade.in.h:50
 #, fuzzy
 msgid "New Connection Type"
 msgstr "Σύνδεση"
 
-#: interfaces/network.glade.h:42
+#: interfaces/network.glade.in.h:51
+msgid ""
+"Next, please enter the user name and password which were assigned to you by "
+"your ISP."
+msgstr ""
+
+#: interfaces/network.glade.in.h:52
+msgid ""
+"Now, please give this account a name. This name will be used to identify the "
+"account."
+msgstr ""
+
+#
+#: interfaces/network.glade.in.h:53 interfaces/print.glade.in.h:33
+#, fuzzy
+msgid "Options"
+msgstr "Περισσότερες Επιλογές >>"
+
+#
+#: interfaces/network.glade.in.h:54
+#, fuzzy
+msgid "Password (confirm):"
+msgstr "Κωδικός:"
+
+#: interfaces/network.glade.in.h:56
+msgid "Phone _number:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:57
+msgid "Phone number:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:58
+msgid "Pppd _options:"
+msgstr ""
+
+#
+#: interfaces/network.glade.in.h:59
+#, fuzzy
+msgid "Se_condary:"
+msgstr "Επιλογή:"
+
+#: interfaces/network.glade.in.h:60
+#, fuzzy
+msgid "Sea_rch Domains:"
+msgstr "Αναζήτηση Επιθημάτων"
+
+#: interfaces/network.glade.in.h:61
 msgid "Select which type of connection you would like to add."
 msgstr ""
 
-#: interfaces/network.glade.h:43
-msgid "Modem (PPP)"
-msgstr "Μόντεμ (PPP)"
-
-#: interfaces/network.glade.h:44
-msgid "Ethernet"
+#: interfaces/network.glade.in.h:62
+msgid "Set _DNS servers manually"
 msgstr ""
 
-#: interfaces/network.glade.h:45
-msgid "Wavelan"
+#: interfaces/network.glade.in.h:63
+msgid "Set as default _route"
 msgstr ""
 
-#: interfaces/network.glade.h:46
-msgid "Parallel Line"
+#
+#: interfaces/network.glade.in.h:64
+msgid "Status"
+msgstr "Κατάσταση"
+
+#: interfaces/network.glade.in.h:65
+msgid ""
+"Summary of new account data\n"
+"goes here, plus indications on\n"
+"how to proceed (go back, cancel\n"
+"or finish)."
 msgstr ""
 
-#: interfaces/network.glade.h:47
-msgid "Connection Settings"
-msgstr "Ρυθμίσεις Σύνδεσης"
+#: interfaces/network.glade.in.h:69
+msgid ""
+"To continue configuring your account, click \"Next\". To quit, click "
+"\"Cancel\"."
+msgstr ""
 
-#: interfaces/network.glade.h:48
+#: interfaces/network.glade.in.h:70
+msgid "Use \"Auto\" if unsure."
+msgstr ""
+
+#: interfaces/network.glade.in.h:71
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
 msgstr ""
 
 #
-#: interfaces/network.glade.h:49
-msgid "Connection"
-msgstr "Σύνδεση"
-
-#
-#: interfaces/network.glade.h:51 interfaces/shares.glade.h:20
-msgid "Comment:"
-msgstr "Σχόλιο:"
-
-#
-#: interfaces/network.glade.h:52
-#, fuzzy
-msgid "Activation"
-msgstr "Τοποθεσία"
-
-#
-#: interfaces/network.glade.h:53
-#, fuzzy
-msgid "Connection active"
-msgstr "Σύνδεση"
-
-#: interfaces/network.glade.h:54
-#, fuzzy
-msgid "Activate when the computer starts"
-msgstr "Ψευδώνυμα άλλων υπολογιστών."
-
-#: interfaces/network.glade.h:55
-msgid "Allow activation control for all users"
-msgstr ""
-
-#: interfaces/network.glade.h:57
-msgid "How the IP address for this connection is determined"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:58
-msgid "Configuration:"
-msgstr "Ρύθμιση:"
-
-#: interfaces/network.glade.h:59 src/network/connection.c:951
-msgid "Manual"
-msgstr "Χειρωνακτική"
-
-#: interfaces/network.glade.h:60 src/network/connection.c:952
-msgid "DHCP"
-msgstr "DHCP"
-
-#: interfaces/network.glade.h:61 src/network/connection.c:953
-msgid "BOOTP"
-msgstr "BOOTP"
-
-#: interfaces/network.glade.h:62
-msgid "Update DNS when this connection becomes active"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:64 interfaces/network.glade.h:95
-msgid "Subnet mask:"
-msgstr "Μάσκα επιθήματος:"
-
-#
-#: interfaces/network.glade.h:65
-msgid "Gateway address:"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:66 interfaces/network.glade.h:97
-msgid "IP Settings"
-msgstr "Ρυθμίσεις IP"
-
-#: interfaces/network.glade.h:67
-msgid "Wireless networking settings."
-msgstr ""
-
-#: interfaces/network.glade.h:68
-msgid "Ad-Hoc mode"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:69
-msgid "Ad-Hoc Settings"
-msgstr ""
-
-#: interfaces/network.glade.h:70
-msgid "Session ID:"
-msgstr ""
-
-#: interfaces/network.glade.h:71
-msgid "Frequency (GHz):"
-msgstr ""
-
-#: interfaces/network.glade.h:72
-msgid "2.422"
-msgstr "2,422"
-
-#
-#: interfaces/network.glade.h:73
-msgid "Channel:"
-msgstr "Κανάλι:"
-
-#: interfaces/network.glade.h:74
-msgid "WaveLAN"
-msgstr ""
-
-#: interfaces/network.glade.h:75
-msgid "How to dial up to the internet."
-msgstr ""
-
-#: interfaces/network.glade.h:76 interfaces/network.glade.h:113
-msgid "Phone number:"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:77 interfaces/network.glade.h:120
-#: interfaces/users.glade.h:9
+#: interfaces/network.glade.in.h:72
 msgid "User name:"
 msgstr "Όνομα χρήστη:"
 
 #
-#: interfaces/network.glade.h:78 interfaces/network.glade.h:121
-#: interfaces/shares.glade.h:12
-msgid "Password:"
-msgstr "Κωδικός:"
-
-#
-#: interfaces/network.glade.h:79
+#: interfaces/network.glade.in.h:73
 #, fuzzy
-msgid "Options"
-msgstr "Περισσότερες Επιλογές >>"
+msgid "WI_NS server:"
+msgstr "Εξυπηρέτης WINS:"
 
-#: interfaces/network.glade.h:80
-msgid "Restart if connection cuts or fails to start"
+#: interfaces/network.glade.in.h:74
+msgid "Warning message goes here.."
 msgstr ""
 
-#: interfaces/network.glade.h:81
-msgid "Account"
+#: interfaces/network.glade.in.h:75
+msgid "WaveLAN"
 msgstr ""
 
-#
-#: interfaces/network.glade.h:82
-#, fuzzy
-msgid "Advanced PPP connection tunning."
-msgstr "Προχωρημένες ρυθμίσεις"
-
-#
-#: interfaces/network.glade.h:83
-msgid "Modem port:"
-msgstr "Θύρα μόντεμ:"
-
-#
-#: interfaces/network.glade.h:84
-#, fuzzy
-msgid "DNS Servers"
-msgstr "Εξυπηρετητές DNS:"
-
-#: interfaces/network.glade.h:85
-#, fuzzy
-msgid "Primary:"
-msgstr "Προτεραιότητα:"
-
-#
-#: interfaces/network.glade.h:86
-#, fuzzy
-msgid "Secondary:"
-msgstr "Επιλογή:"
-
-#: interfaces/network.glade.h:87
-msgid "Set DNS servers manually"
-msgstr ""
-
-#: interfaces/network.glade.h:88
-msgid "Start PPP as soon as modem connects"
-msgstr ""
-
-#: interfaces/network.glade.h:89
-msgid "Set as default route"
-msgstr ""
-
-#: interfaces/network.glade.h:90
-msgid "Pppd options:"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:91
-#, fuzzy
-msgid "Advanced"
-msgstr "Προχωρημένες ρυθμίσεις"
-
-#: interfaces/network.glade.h:92
-msgid "How the IP addresses for this connection are determined"
-msgstr ""
-
-#
-#: interfaces/network.glade.h:93
-#, fuzzy
-msgid "Local IP:"
-msgstr "Τοπική διαδρομή:"
-
-#: interfaces/network.glade.h:94
-#, fuzzy
-msgid "Remote IP:"
-msgstr "IP συστήματος:"
-
-#: interfaces/network.glade.h:96
-msgid "Use remote IP as default gateway"
-msgstr ""
-
-#: interfaces/network.glade.h:98
-msgid "Add New Internet Connection"
-msgstr ""
-
-#: interfaces/network.glade.h:99
-msgid "Create a new Internet Connection "
-msgstr ""
-
-#: interfaces/network.glade.h:100
+#: interfaces/network.glade.in.h:76
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1119,844 +1548,1451 @@ msgid ""
 "Click the \"Next\" button to begin."
 msgstr ""
 
-#: interfaces/network.glade.h:111
-msgid "1. ISP phone number"
+#: interfaces/network.glade.in.h:87
+msgid "Windows Networking"
 msgstr ""
 
-#: interfaces/network.glade.h:112
-msgid ""
-"First, please enter the phone number you use to connect to the internet. "
-"This number is provided by your ISP. "
+#: interfaces/network.glade.in.h:88
+msgid "Wireless networking settings."
 msgstr ""
 
-#: interfaces/network.glade.h:114 interfaces/network.glade.h:125
-#: interfaces/network.glade.h:130
-msgid ""
-"To continue configuring your account, click \"Next\". To quit, click "
-"\"Cancel\".\n"
-msgstr ""
-
-#: interfaces/network.glade.h:116 interfaces/network.glade.h:123
-#: interfaces/network.glade.h:132
-msgid "Warning message goes here..\n"
-msgstr ""
-
-#: interfaces/network.glade.h:118
-#, fuzzy
-msgid "2. Username and password"
-msgstr "  Τυχαίος Κωδικός  "
-
-#: interfaces/network.glade.h:119
-msgid ""
-"Next, please enter the user name and password which were assigned to you by "
-"your ISP."
+#: interfaces/network.glade.in.h:89
+msgid "_Ad-Hoc mode"
 msgstr ""
 
 #
-#: interfaces/network.glade.h:122
+#: interfaces/network.glade.in.h:92
 #, fuzzy
-msgid "Password (confirm):"
-msgstr "Κωδικός:"
+msgid "_Channel:"
+msgstr "Κανάλι:"
 
-#: interfaces/network.glade.h:127
-msgid "3. Account name"
+#
+#: interfaces/network.glade.in.h:93 interfaces/shares.glade.in.h:59
+#: interfaces/users.glade.in.h:88
+#, fuzzy
+msgid "_Comment:"
+msgstr "Σχόλιο:"
+
+#
+#: interfaces/network.glade.in.h:94
+#, fuzzy
+msgid "_Configuration:"
+msgstr "Ρύθμιση:"
+
+#
+#: interfaces/network.glade.in.h:95
+#, fuzzy
+msgid "_Configure..."
+msgstr "Ρύθμιση..."
+
+#
+#: interfaces/network.glade.in.h:97
+#, fuzzy
+msgid "_Delete..."
+msgstr "Διαγραφή..."
+
+#
+#: interfaces/network.glade.in.h:98
+#, fuzzy
+msgid "_Description:"
+msgstr "Περιγραφή:"
+
+#
+#: interfaces/network.glade.in.h:99
+#, fuzzy
+msgid "_Domain:"
+msgstr "Επίθημα:"
+
+#: interfaces/network.glade.in.h:100
+msgid "_Enable windows networking (Samba)"
 msgstr ""
 
-#: interfaces/network.glade.h:128
-msgid ""
-"Now, please give this account a name. This name will be used to identify the "
-"account."
+#: interfaces/network.glade.in.h:101
+msgid "_Ethernet"
+msgstr ""
+
+#: interfaces/network.glade.in.h:102
+msgid "_Frequency (GHz):"
 msgstr ""
 
 #
-#: interfaces/network.glade.h:129
+#: interfaces/network.glade.in.h:103
 #, fuzzy
-msgid "Account name:"
+msgid "_Gateway address:"
+msgstr "Διεύθυνση IP:"
+
+#
+#: interfaces/network.glade.in.h:104
+#, fuzzy
+msgid "_Host name:"
 msgstr "Όνομα συστήματος:"
 
-#: interfaces/network.glade.h:134
-msgid "Finished"
-msgstr ""
+#
+#: interfaces/network.glade.in.h:105
+#, fuzzy
+msgid "_IP address:"
+msgstr "Διεύθυνση IP:"
 
-#: interfaces/network.glade.h:135
-msgid ""
-"Summary of new account data\n"
-"goes here, plus indications on\n"
-"how to proceed (go back, cancel\n"
-"or finish)."
-msgstr ""
-
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/networking.glade.h:7
-msgid "Networking Administration"
-msgstr ""
-
-#: interfaces/networking.glade.h:8
-msgid "Interface:"
-msgstr ""
-
-#: interfaces/networking.glade.h:9
-msgid "Gateway IP:"
-msgstr ""
-
-#: interfaces/networking.glade.h:10
-msgid "Netmask:"
-msgstr "Μάσκα:"
-
-#: interfaces/networking.glade.h:11
-msgid "Host IP:"
-msgstr "IP συστήματος:"
-
-#: interfaces/networking.glade.h:12
-msgid "Use DHCP server"
-msgstr ""
-
-#: interfaces/networking.glade.h:13
-msgid "Enable automatically at boot"
+#: interfaces/network.glade.in.h:106
+msgid "_IR LAN"
 msgstr ""
 
 #
-#: interfaces/networking.glade.h:14
-msgid "Primary networking"
-msgstr ""
-
-#
-#: interfaces/networking.glade.h:15 src/common/xst-dialog.c:130
-msgid " More Options >> "
-msgstr " Περισσότερες Επιλογές >> "
-
-#
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/shares.glade.h:7
-msgid "Import Settings"
-msgstr "Εισαγωγή Ρυθμίσεων"
-
-#: interfaces/shares.glade.h:9
-msgid "Host:"
-msgstr "Σύστημα:"
-
-#: interfaces/shares.glade.h:11
-msgid "User:"
-msgstr "Χρήστης:"
-
-#: interfaces/shares.glade.h:14
-msgid "SMB"
-msgstr "SMB"
-
-#: interfaces/shares.glade.h:15
-msgid "NFS"
-msgstr "NFS"
-
-#
-#: interfaces/shares.glade.h:17
-msgid "SMB Export Settings"
-msgstr "Ρυθμίσεις Εξαγωγής SMB"
-
-#
-#: interfaces/shares.glade.h:18 interfaces/shares.glade.h:25
-msgid "Local path:"
+#: interfaces/network.glade.in.h:107
+#, fuzzy
+msgid "_Local IP:"
 msgstr "Τοπική διαδρομή:"
 
-#
-#: interfaces/shares.glade.h:19
-msgid "Export name:"
-msgstr "Όνομα εξαγωγής:"
+#: interfaces/network.glade.in.h:108
+#, fuzzy
+msgid "_Modem (PPP)"
+msgstr "Μόντεμ (PPP)"
 
-#: interfaces/shares.glade.h:21 interfaces/shares.glade.h:49
+#
+#: interfaces/network.glade.in.h:109
+#, fuzzy
+msgid "_Modem port:"
+msgstr "Θύρα μόντεμ:"
+
+#: interfaces/network.glade.in.h:110
+msgid "_Parallel Line"
+msgstr ""
+
+#
+#: interfaces/network.glade.in.h:111 interfaces/print.glade.in.h:73
+#, fuzzy
+msgid "_Password:"
+msgstr "Κωδικός:"
+
+#: interfaces/network.glade.in.h:112
+#, fuzzy
+msgid "_Primary:"
+msgstr "Προτεραιότητα:"
+
+#: interfaces/network.glade.in.h:113
+#, fuzzy
+msgid "_Remote IP:"
+msgstr "IP συστήματος:"
+
+#: interfaces/network.glade.in.h:114
+msgid "_Retry if the connection drops or fails to start"
+msgstr ""
+
+#: interfaces/network.glade.in.h:115
+msgid "_Session ID:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:116
+msgid "_Start PPP as soon as modem connects"
+msgstr ""
+
+#
+#: interfaces/network.glade.in.h:117
+#, fuzzy
+msgid "_Subnet mask:"
+msgstr "Μάσκα επιθήματος:"
+
+#: interfaces/network.glade.in.h:118
+msgid "_Update DNS when this connection becomes active"
+msgstr ""
+
+#: interfaces/network.glade.in.h:119
+msgid "_Use remote IP as default gateway"
+msgstr ""
+
+#
+#: interfaces/network.glade.in.h:120
+#, fuzzy
+msgid "_User name:"
+msgstr "Όνομα χρήστη:"
+
+#: interfaces/network.glade.in.h:121
+msgid "_Wavelan"
+msgstr ""
+
+#: interfaces/network.glade.in.h:122 interfaces/print.glade.in.h:76
+msgid "_Workgroup:"
+msgstr ""
+
+#
+#: interfaces/rollback-location-management.glade.in.h:1
+#, fuzzy
+msgid "Advanced..."
+msgstr "Προχωρημένες ρυθμίσεις"
+
+#: interfaces/rollback-location-management.glade.in.h:2
+#, fuzzy
+msgid "Change to this Location"
+msgstr "Προσάρτηση αυτής της διαμέρισης"
+
+#
+#: interfaces/rollback-location-management.glade.in.h:3
+#, fuzzy
+msgid "Configuration Restoration"
+msgstr "Ρύθμιση:"
+
+#
+#: interfaces/rollback-location-management.glade.in.h:4
+#, fuzzy
+msgid "Create..."
+msgstr "Διαγραφή..."
+
+#
+#: interfaces/rollback-location-management.glade.in.h:5
+#, fuzzy
+msgid "Destroy..."
+msgstr "Διαγραφή..."
+
+#: interfaces/rollback-location-management.glade.in.h:6
+#, fuzzy
+msgid "Edit this Location"
+msgstr "Προσάρτηση αυτής της διαμέρισης"
+
+#: interfaces/location-manager.glade.in.h:19
+#: interfaces/rollback-location-management.glade.in.h:7
+msgid "Location Management"
+msgstr ""
+
+#
+#: interfaces/rollback-location-management.glade.in.h:8
+#, fuzzy
+msgid "Location name:"
+msgstr "Τοποθεσία"
+
+#
+#: interfaces/rollback-location-management.glade.in.h:9
+#, fuzzy
+msgid "Parent Location:"
+msgstr "Τοποθεσία"
+
+#: interfaces/rollback-location-management.glade.in.h:10
+msgid "Rename..."
+msgstr ""
+
+#: interfaces/rollback-location-management.glade.in.h:11
+msgid "Restore all tools"
+msgstr ""
+
+#
+#: interfaces/rollback-location-management.glade.in.h:12
+#, fuzzy
+msgid "Restore configuration from"
+msgstr "Ρύθμιση:"
+
+#: interfaces/rollback-location-management.glade.in.h:13
+msgid "Restore only"
+msgstr ""
+
+#: interfaces/rollback-location-management.glade.in.h:14
+msgid "View Logs..."
+msgstr ""
+
+#: interfaces/rollback-location-management.glade.in.h:15
+msgid "days ago"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:1
+msgid " Edit clients... "
+msgstr ""
+
+#: interfaces/shares.glade.in.h:2
+msgid " _Edit clients... "
+msgstr ""
+
+#: interfaces/shares.glade.in.h:3
+msgid "Access control"
+msgstr ""
+
+#
+#: interfaces/shares.glade.in.h:5 interfaces/users.glade.in.h:5
+msgid "Add..."
+msgstr "Προσθήκη..."
+
+#: interfaces/shares.glade.in.h:6
+msgid "Allow writing"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:7
 msgid "Browseable"
 msgstr "Περιηγήσιμο"
 
-#: interfaces/shares.glade.h:22 interfaces/shares.glade.h:50
-msgid "Public"
-msgstr "Δημόσιο"
+#: interfaces/shares.glade.in.h:8
+msgid "Client"
+msgstr ""
 
-#: interfaces/shares.glade.h:23 interfaces/shares.glade.h:51
-msgid "Writable"
-msgstr "Εγγράψιμο"
-
-#
-#: interfaces/shares.glade.h:24
-msgid "NFS Export Settings"
+#: interfaces/shares.glade.in.h:9
+msgid "Clients"
 msgstr ""
 
 #
-#: interfaces/shares.glade.h:26
-msgid "NFS Client Settings"
+#: interfaces/shares.glade.in.h:10
+msgid "Comment:"
+msgstr "Σχόλιο:"
+
+#: interfaces/shares.glade.in.h:12
+msgid "Do not _remount this share after computer reboots"
 msgstr ""
 
-#: interfaces/shares.glade.h:27
-msgid "Client pattern:"
+#: interfaces/shares.glade.in.h:13
+msgid "Do not remount this share after computer reboots"
 msgstr ""
 
-#: interfaces/shares.glade.h:28
-msgid "Allow writing from these clients"
+#: interfaces/shares.glade.in.h:15
+msgid "Export"
 msgstr ""
 
-#: interfaces/shares.glade.h:30
+#
+#: interfaces/shares.glade.in.h:16
+#, fuzzy
+msgid "Export Clients"
+msgstr "Όνομα εξαγωγής:"
+
+#
+#: interfaces/shares.glade.in.h:17
+#, fuzzy
+msgid "Export Settings"
+msgstr "Ρυθμίσεις Εξαγωγής SMB"
+
+#
+#: interfaces/shares.glade.in.h:18
+#, fuzzy
+msgid "Export _type:"
+msgstr "Όνομα εξαγωγής:"
+
+#
+#: interfaces/shares.glade.in.h:19
+#, fuzzy
+msgid "Export type:"
+msgstr "Όνομα εξαγωγής:"
+
+#
+#: interfaces/shares.glade.in.h:20
+#, fuzzy
+msgid "Exports"
+msgstr "Εισαγωγές"
+
+#: interfaces/shares.glade.in.h:21
 msgid ""
-"Imports are directories wich reside in other computers and are accessible "
-"through the network."
+"Exports are used to share directories on your computer with other computers "
+"over the network. "
 msgstr ""
 
-#
-#: interfaces/shares.glade.h:31
-msgid "Location"
-msgstr "Τοποθεσία"
-
-#: interfaces/shares.glade.h:35
-msgid "User"
-msgstr "Χρήστης"
-
-#: interfaces/shares.glade.h:36
-msgid "Password"
-msgstr "Κωδικός"
-
-#: interfaces/shares.glade.h:37
-msgid "Mount Point"
-msgstr "Σημείο Προσάρτησης"
+#: interfaces/shares.glade.in.h:23
+msgid "Host:"
+msgstr "Σύστημα:"
 
 #
-#: interfaces/shares.glade.h:38
+#: interfaces/shares.glade.in.h:24
 msgid "Import"
 msgstr "Εισαγωγή"
 
 #
-#: interfaces/shares.glade.h:40
-msgid "New import"
-msgstr "Νέα εισαγωγή"
+#: interfaces/shares.glade.in.h:25
+msgid "Import Settings"
+msgstr "Εισαγωγή Ρυθμίσεων"
 
-#: interfaces/shares.glade.h:41
-msgid "Mount this import"
-msgstr ""
+#
+#: interfaces/shares.glade.in.h:26
+#, fuzzy
+msgid "Import Settings--NFS Options"
+msgstr "Εισαγωγή Ρυθμίσεων"
 
-#: interfaces/shares.glade.h:44
-msgid "Remember this import between boots"
+#: interfaces/shares.glade.in.h:27
+msgid "Import Settings--Samba Options (Obsolete)"
 msgstr ""
 
 #
-#: interfaces/shares.glade.h:45
+#: interfaces/shares.glade.in.h:28
+#, fuzzy
+msgid "Import _type:"
+msgstr "Είδος ενναλαγής:"
+
+#
+#: interfaces/shares.glade.in.h:29
+#, fuzzy
+msgid "Import type:"
+msgstr "Είδος ενναλαγής:"
+
+#
+#: interfaces/shares.glade.in.h:30
 msgid "Imports"
 msgstr "Εισαγωγές"
 
+#: interfaces/shares.glade.in.h:31
+msgid ""
+"Imports are directories which reside in other computers and are accessible "
+"to you through the network."
+msgstr ""
+
+#: interfaces/shares.glade.in.h:32
+msgid "Mount Point"
+msgstr "Σημείο Προσάρτησης"
+
 #
-#: interfaces/shares.glade.h:46
+#: interfaces/shares.glade.in.h:33
+#, fuzzy
+msgid "Mount p_oint:"
+msgstr "Σημείο προσάρτησης:"
+
+#: interfaces/shares.glade.in.h:36
+#, fuzzy
+msgid "Mounting Options"
+msgstr "Σημείο προσάρτησης"
+
+#: interfaces/shares.glade.in.h:37
+#, fuzzy
+msgid "Mounting options"
+msgstr "Σημείο προσάρτησης"
+
+#: interfaces/shares.glade.in.h:38
+msgid "NFS"
+msgstr "NFS"
+
+#
+#: interfaces/shares.glade.in.h:39 src/boot/boot.etspec.h:4
 msgid "Name"
 msgstr "Όνομα"
 
 #
-#: interfaces/shares.glade.h:47
+#: interfaces/location-manager.glade.in.h:23 interfaces/shares.glade.in.h:40
+#, fuzzy
+msgid "Name:"
+msgstr "Όνομα"
+
+#: interfaces/shares.glade.in.h:41
+#, fuzzy
+msgid "P_ublic"
+msgstr "Δημόσιο"
+
+#
+#: interfaces/shares.glade.in.h:42
+#, fuzzy
+msgid "Pass_word:"
+msgstr "Κωδικός:"
+
+#
+#: interfaces/shares.glade.in.h:44
 msgid "Path"
 msgstr "Μονοπάτι"
 
 #
-#: interfaces/shares.glade.h:52
-msgid "Comment"
-msgstr "Σχόλιο"
+#: interfaces/shares.glade.in.h:46
+#, fuzzy
+msgid "Pattern:"
+msgstr "Διαδρομή:"
 
-#: interfaces/shares.glade.h:53 interfaces/shares.glade.h:66
-msgid "Export"
+#: interfaces/shares.glade.in.h:47
+msgid "Public"
+msgstr "Δημόσιο"
+
+#: interfaces/shares.glade.in.h:48
+msgid "Restrict access to this share to specific clients"
 msgstr ""
 
-#: interfaces/shares.glade.h:58
+#: interfaces/shares.glade.in.h:49
+msgid "Samba"
+msgstr ""
+
+#
+#: interfaces/print.glade.in.h:56 interfaces/shares.glade.in.h:50
+msgid "Settings..."
+msgstr "Ρυθμίσεις..."
+
+#
+#: interfaces/shares.glade.in.h:51
+#, fuzzy
+msgid "Update"
+msgstr "Ημ/νία"
+
+#: interfaces/shares.glade.in.h:52
 msgid ""
-"The directories in your machine may be made available to others through the "
-"network using exports. SMB exports are compatible with Microsoft Windows "
-"(TM) and Unix or Linux machines with Samba installed."
+"Use this dialog to create a new export, or to edit the settings of an "
+"existing export."
 msgstr ""
 
-#: interfaces/shares.glade.h:59
-msgid "SMB exports"
-msgstr ""
-
-#: interfaces/shares.glade.h:60
-msgid "Export/clients"
-msgstr ""
-
-#: interfaces/shares.glade.h:61
-msgid "Allow writing"
-msgstr ""
-
-#: interfaces/shares.glade.h:62
-msgid "Client"
-msgstr ""
-
-#: interfaces/shares.glade.h:70
+#: interfaces/shares.glade.in.h:53
 msgid ""
-"NFS exports are used to share directories with Unix or Linux machines over "
-"the network."
+"Use this dialog to create a new import, or to edit the settings of an "
+"existing import."
 msgstr ""
 
-#: interfaces/shares.glade.h:71
-msgid "NFS exports"
+#: interfaces/shares.glade.in.h:54
+msgid ""
+"Use this dialog to define the client patterns which determine who has access "
+"to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
+"or \" *.gnome.org\".  "
 msgstr ""
 
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/time.glade.h:7
+#
+#: interfaces/shares.glade.in.h:55
+#, fuzzy
+msgid "Username:"
+msgstr "Όνομα χρήστη:"
+
+#: interfaces/shares.glade.in.h:56
+msgid "Writable"
+msgstr "Εγγράψιμο"
+
+#: interfaces/shares.glade.in.h:58
+#, fuzzy
+msgid "_Browseable"
+msgstr "Περιηγήσιμο"
+
+#: interfaces/shares.glade.in.h:61
+#, fuzzy
+msgid "_Enable"
+msgstr "Ενεργοποιημένο"
+
+#: interfaces/shares.glade.in.h:62
+#, fuzzy
+msgid "_Host:"
+msgstr "Σύστημα:"
+
+#: interfaces/shares.glade.in.h:63
+msgid "_Mount"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:64
+msgid "_Mounted"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:67
+msgid "_Restrict access to this share to specific clients"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:68
+msgid "_Scan"
+msgstr ""
+
+#
+#: interfaces/location-manager.glade.in.h:39 interfaces/shares.glade.in.h:69
+#: interfaces/users.glade.in.h:98
+#, fuzzy
+msgid "_Settings..."
+msgstr "Ρυθμίσεις..."
+
+#
+#: interfaces/print.glade.in.h:75 interfaces/shares.glade.in.h:70
+#: interfaces/users.glade.in.h:101
+#, fuzzy
+msgid "_Username:"
+msgstr "Όνομα χρήστη:"
+
+#: interfaces/shares.glade.in.h:71
+#, fuzzy
+msgid "_Writable"
+msgstr "Εγγράψιμο"
+
+#: interfaces/shares.glade.in.h:72
+msgid "add/edit clients"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:73
+msgid "advanced mode--main window"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:74
+msgid "export settings--NFS options"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:75
+msgid "export settings--Samba options"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:76
+msgid "simple mode--main window"
+msgstr ""
+
+#: interfaces/location-manager.glade.in.h:2 interfaces/time.glade.in.h:1
+msgid "(unconfigured)"
+msgstr ""
+
+#
+#: interfaces/location-manager.glade.in.h:10 interfaces/time.glade.in.h:2
+msgid "Date"
+msgstr "Ημ/νία"
+
+#: interfaces/location-manager.glade.in.h:11 interfaces/time.glade.in.h:3
 msgid "Date/Time "
 msgstr ""
 
-#: interfaces/time.glade.h:8
+#
+#: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.in.h:4
+msgid "Date/time"
+msgstr "Ημερομηνία/ώρα"
+
+#: interfaces/location-manager.glade.in.h:28 interfaces/time.glade.in.h:5
 msgid ""
 "Please select the current date and time. You can also specify a time zone "
 "and a time server."
 msgstr ""
 
 #
-#: interfaces/time.glade.h:9
-msgid "Date"
-msgstr "Ημ/νία"
-
-#: interfaces/time.glade.h:10
-msgid "Time"
-msgstr "Ώρα"
-
-#: interfaces/time.glade.h:11 interfaces/time.glade.h:12
-msgid ":"
-msgstr ":"
-
-#: interfaces/time.glade.h:13
-msgid ""
-"AM\n"
-"PM\n"
-msgstr ""
-
-#: interfaces/time.glade.h:16 interfaces/time.glade.h:23
-msgid "Time zone"
-msgstr ""
-
-#: interfaces/time.glade.h:17
-msgid "(unconfigured)"
-msgstr ""
-
-#: interfaces/time.glade.h:18
-msgid "Set time zone..."
-msgstr ""
-
-#
-#: interfaces/time.glade.h:19
-msgid "Time server"
-msgstr "Εξυπηρέτης ώρας"
-
-#: interfaces/time.glade.h:20
-msgid "Keep clock synchronized with selected servers"
-msgstr ""
-
-#
-#: interfaces/time.glade.h:21
-msgid "Select servers..."
+#: interfaces/time.glade.in.h:6
+#, fuzzy
+msgid "Select _servers..."
 msgstr "Επιλογή εξυπηρετητών..."
 
-#
-#: interfaces/time.glade.h:22
-msgid "Date/time"
-msgstr "Ημερομηνία/ώρα"
-
-#: interfaces/time.glade.h:24
+#: interfaces/time.glade.in.h:7
 msgid ""
 "Select a time zone by clicking on \n"
 "one of the dots on the map."
 msgstr ""
 
-#: interfaces/time.glade.h:26
-msgid "Time Zones"
-msgstr ""
-
-#
-#: interfaces/time.glade.h:27
-msgid "Selection:"
-msgstr "Επιλογή:"
-
-#
-#: interfaces/time.glade.h:28
-msgid "Time servers"
-msgstr "Εξυπηρέτες ώρας"
-
-#: interfaces/time.glade.h:29
+#: interfaces/time.glade.in.h:9
 msgid "Select the servers you wish to use for time synchronization."
 msgstr ""
 
 #
-#.
-#. * Translatable strings file generated by Glade.
-#. * Add this file to your project's POTFILES.in.
-#. * DO NOT compile it as part of your application.
-#.
-#: interfaces/users.glade.h:7
-msgid "User Settings"
-msgstr "Ρυθμίσεις Χρήστη"
-
-#
-#: interfaces/users.glade.h:8
-msgid "Basic settings"
-msgstr "Βασικές ρυθμίσεις"
-
-#
-#: interfaces/users.glade.h:10
+#: interfaces/time.glade.in.h:10
 #, fuzzy
-msgid "Full Name:"
-msgstr " Ονόματα"
+msgid "Select time _zone..."
+msgstr "Επιλογή εξυπηρετητών..."
 
 #
-#: interfaces/users.glade.h:11
+#: interfaces/time.glade.in.h:11
+msgid "Selection:"
+msgstr "Επιλογή:"
+
+#: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:12
+#: src/time/time.desktop.in.in.h:1
+msgid "Time"
+msgstr "Ώρα"
+
+#: interfaces/time.glade.in.h:13
+msgid "Time Zones"
+msgstr ""
+
+#
+#: interfaces/location-manager.glade.in.h:35 interfaces/time.glade.in.h:14
+msgid "Time server"
+msgstr "Εξυπηρέτης ώρας"
+
+#
+#: interfaces/time.glade.in.h:15
+msgid "Time servers"
+msgstr "Εξυπηρέτες ώρας"
+
+#: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.in.h:16
+msgid "Time zone"
+msgstr ""
+
+#: interfaces/time.glade.in.h:18
+msgid "_Keep clock synchronized with selected servers"
+msgstr ""
+
+#
+#: interfaces/users.glade.in.h:1
+#, fuzzy
+msgid "<< _Remove"
+msgstr "Διαγραφή"
+
+#
+#: interfaces/users.glade.in.h:2
+#, fuzzy
+msgid "<< _Remove "
+msgstr "Διαγραφή"
+
+#
+#: interfaces/users.glade.in.h:3
+#, fuzzy
+msgid "A_vailable groups"
+msgstr "Διαθέσιμες διαμερίσεις:"
+
+#
+#: interfaces/users.glade.in.h:6
 msgid "Advanced settings"
 msgstr "Προχωρημένες ρυθμίσεις"
 
-#: interfaces/users.glade.h:12
-msgid "User ID:"
-msgstr "Ταυτότητα Χρήστη:"
-
-#
-#: interfaces/users.glade.h:13
-msgid "Home directory:"
-msgstr "Κατάλογος Χρήστη:"
-
-#: interfaces/users.glade.h:14
-msgid "Shell:"
-msgstr "Φλοιός:"
-
-#: interfaces/users.glade.h:15
-msgid "Basic"
-msgstr ""
-
-#: interfaces/users.glade.h:16
-msgid "Main group:"
-msgstr ""
-
-#: interfaces/users.glade.h:17 interfaces/users.glade.h:25
-#: interfaces/users.glade.h:53
-msgid "Groups"
-msgstr "Ομάδες"
-
-#
-#: interfaces/users.glade.h:18
+#: interfaces/users.glade.in.h:7
 #, fuzzy
-msgid "Available Groups"
-msgstr "Διαθέσιμες διαμερίσεις:"
-
-#: interfaces/users.glade.h:19
-#, fuzzy
-msgid "User's Groups"
-msgstr "Νέα Ομάδα"
-
-#
-#: interfaces/users.glade.h:20 interfaces/users.glade.h:38
-msgid "Add ->"
-msgstr "Προσθήκη ->"
-
-#
-#: interfaces/users.glade.h:21 interfaces/users.glade.h:39
-msgid "Remove <-"
-msgstr "Διαγραφή <-"
-
-#: interfaces/users.glade.h:22
-msgid " Primary Group "
-msgstr ""
-
-#: interfaces/users.glade.h:23 interfaces/users.glade.h:40
-msgid "label27"
-msgstr "label27"
-
-#: interfaces/users.glade.h:24 interfaces/users.glade.h:41
-msgid "label26"
-msgstr "label26"
-
-#: interfaces/users.glade.h:26 interfaces/users.glade.h:28
-msgid "Change Password"
-msgstr "Αλλαγή Κωδικού"
-
-#: interfaces/users.glade.h:27
-msgid "Enter a new password manually, or have one randomly assigned."
-msgstr ""
-
-#: interfaces/users.glade.h:30
-msgid "Confirm:"
-msgstr "Επιβεβαίωση:"
-
-#: interfaces/users.glade.h:31
-msgid "  Random Password  "
-msgstr "  Τυχαίος Κωδικός  "
-
-#: interfaces/users.glade.h:32
-msgid "Check password quality"
-msgstr "Έλεγχος ποιότητας κωδικού"
-
-#
-#: interfaces/users.glade.h:33
-msgid "Group Settings"
-msgstr "Ρυθμίσεις Ομάδας"
-
-#
-#: interfaces/users.glade.h:34
-msgid "Group name:"
-msgstr "Όνομα ομάδας:"
-
-#: interfaces/users.glade.h:35
-msgid "Members"
-msgstr "Μέλη"
-
-#: interfaces/users.glade.h:36
-msgid "All Users"
+msgid "All _users"
 msgstr "Όλοι οι Χρήστες"
 
-#: interfaces/users.glade.h:37
-msgid "Group Members"
-msgstr "Μέλη Ομάδας"
-
-#: interfaces/users.glade.h:43
-msgid ""
-"This is the list of the users available in the system. Create new users or "
-"edit existing user's settings with this dialog."
-msgstr ""
-
-#
-#: interfaces/users.glade.h:44
+#: interfaces/users.glade.in.h:8
 #, fuzzy
-msgid "Add User..."
-msgstr "Προσθήκη..."
+msgid "Assign a random password by default"
+msgstr "  Τυχαίος Κωδικός  "
+
+#: interfaces/users.glade.in.h:9
+msgid "Automatic UID/GID"
+msgstr ""
 
 #
-#: interfaces/users.glade.h:45 interfaces/users.glade.h:51
-msgid "Settings..."
-msgstr "Ρυθμίσεις..."
+#: interfaces/users.glade.in.h:10
+msgid "Basic settings"
+msgstr "Βασικές ρυθμίσεις"
 
-#: interfaces/users.glade.h:46
+#: interfaces/users.glade.in.h:11
 #, fuzzy
-msgid "Password..."
-msgstr "Κωδικός"
+msgid "C_onfirm:"
+msgstr "Επιβεβαίωση:"
 
-#: interfaces/users.glade.h:48
-msgid "Users"
-msgstr "Χρήστες"
-
-#: interfaces/users.glade.h:49
-msgid "Users may be grouped to share resources with others."
+#: interfaces/users.glade.in.h:12
+msgid "C_opy settings from:"
 msgstr ""
 
-#
-#: interfaces/users.glade.h:50
-#, fuzzy
-msgid "Add Group..."
-msgstr "Προσθήκη..."
-
-#: interfaces/users.glade.h:54
-msgid ""
-"These are global values that will affect the creation of new users. They are "
-"only available when you click \"More Options\"."
-msgstr ""
-
-#
-#: interfaces/users.glade.h:55
-msgid "System settings"
-msgstr "Ρυθμίσεις συστήματος"
-
-#
-#: interfaces/users.glade.h:56
-msgid "Mailbox directory:"
-msgstr "Κατάλογος Μηνυμάτων Αλληλογραφίας:"
-
-#: interfaces/users.glade.h:57
-msgid "Create home for new users:"
-msgstr ""
-
-#: interfaces/users.glade.h:58
-msgid "Min/max values for automatic UID/GID"
-msgstr ""
-
-#: interfaces/users.glade.h:59
-msgid "Maximum UID:"
-msgstr ""
-
-#: interfaces/users.glade.h:60
-msgid "Minimum UID:"
-msgstr ""
-
-#: interfaces/users.glade.h:61
-msgid "Minimum GID:"
-msgstr ""
-
-#: interfaces/users.glade.h:62
-msgid "Maximum GID:"
-msgstr ""
-
-#: interfaces/users.glade.h:63
-msgid "Password expiration"
-msgstr ""
-
-#: interfaces/users.glade.h:64
-msgid "Days a password may be used:"
-msgstr ""
-
-#: interfaces/users.glade.h:65
-msgid "Minimum days allowed between password changes:"
-msgstr ""
-
-#: interfaces/users.glade.h:66
-msgid ""
-"Days between warning and\n"
-" password expiration:  "
-msgstr ""
-
-#: interfaces/users.glade.h:68
-msgid "Minimum  password length:"
-msgstr ""
-
-#
-#: interfaces/users.glade.h:69
-msgid "Defaults"
-msgstr "Εξ' ορισμού"
-
-#: interfaces/users.glade.h:70
-msgid "Show system users and groups"
-msgstr ""
-
-#
-#: interfaces/users.glade.h:71
-#, fuzzy
-msgid "window2"
-msgstr "Σινδος1"
-
-#: interfaces/users.glade.h:72
-msgid ""
-"EXPERIMENTAL NIS support.\n"
-"It's only available if You have NIS\n"
-"and when You click on \"More Options\"."
-msgstr ""
-
-#
-#: interfaces/users.glade.h:75
-msgid "New User"
-msgstr "Νέος Χρήστης"
-
-#: interfaces/users.glade.h:76
-msgid "New Group"
-msgstr "Νέα Ομάδα"
-
-#: interfaces/users.glade.h:78
-msgid "Settings for selected user and group"
-msgstr ""
-
-#: interfaces/users.glade.h:79
+#: interfaces/users.glade.in.h:13
 msgid ""
 "Change the settings and options for the\n"
 "selected user or group, like a users password\n"
 "or a groups name or members."
 msgstr ""
 
-#: src/boot/boot-settings.c:218
-msgid "Not Implemented yet, sorry."
+#: interfaces/users.glade.in.h:16
+#, fuzzy
+msgid "Check password _quality"
+msgstr "Έλεγχος ποιότητας κωδικού"
+
+#: interfaces/users.glade.in.h:18
+msgid ""
+"Congratulations, the new user has been created.\n"
+"Please click \"Finish\" to save your changes. "
 msgstr ""
 
-#: src/boot/callbacks.c:57
-#, c-format
-msgid "Are you sure you want to delete %s?"
+#
+#: interfaces/users.glade.in.h:20
+#, fuzzy
+msgid "Contact information"
+msgstr "Ρύθμιση:"
+
+#: interfaces/users.glade.in.h:21
+msgid "Copy..."
 msgstr ""
 
-#: src/boot/e-table.c:247
-msgid "Linux"
+#: interfaces/users.glade.in.h:22
+msgid "Days between warning and password expiration:"
 msgstr ""
 
-#: src/boot/e-table.c:251
+#
+#: interfaces/users.glade.in.h:23
+#, fuzzy
+msgid "Default group:"
+msgstr "Εξ' ορισμού"
+
+#
+#: interfaces/users.glade.in.h:24
+#, fuzzy
+msgid "Default shell:"
+msgstr "Εξ' ορισμού"
+
+#: interfaces/users.glade.in.h:26
+msgid ""
+"EXPERIMENTAL NIS support.\n"
+"It's only available if You have NIS\n"
+"and when You click on \"More Options\"."
+msgstr ""
+
+#: interfaces/users.glade.in.h:29
+msgid "Edit profile:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:30
+msgid "Filename"
+msgstr ""
+
+#: interfaces/users.glade.in.h:32
+#, fuzzy
+msgid "Generate _random password"
+msgstr "  Τυχαίος Κωδικός  "
+
+#
+#: interfaces/users.glade.in.h:33
+msgid "Group Settings"
+msgstr "Ρυθμίσεις Ομάδας"
+
+#: interfaces/users.glade.in.h:34
+#, fuzzy
+msgid "Group _members"
+msgstr "Μέλη Ομάδας"
+
+#: interfaces/users.glade.in.h:35 src/users/group.etspec.h:2
+#: src/users/user_settings.c:475 src/users/user_settings.c:551
+msgid "Groups"
+msgstr "Ομάδες"
+
+#
+#: interfaces/users.glade.in.h:36
+#, fuzzy
+msgid "Home _directory:"
+msgstr "Κατάλογος Χρήστη:"
+
+#
+#: interfaces/users.glade.in.h:37
+msgid "Home directory:"
+msgstr "Κατάλογος Χρήστη:"
+
+#: interfaces/users.glade.in.h:38
+msgid "Ma_ximum days a password may be used:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:39
+msgid "Main _group:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:40
+msgid "Maximum GID:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:41
+msgid "Maximum UID:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:42
+msgid "Members"
+msgstr "Μέλη"
+
+#: interfaces/users.glade.in.h:43
+msgid "Mi_nimum days between password changes:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:44
+msgid "Minimum GID:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:45
+msgid "Minimum UID:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:46
+msgid "Minimum days allowed between password changes:"
+msgstr ""
+
+#
+#: interfaces/users.glade.in.h:47
+#, fuzzy
+msgid "Ne_w:"
+msgstr "Νέο:"
+
+#: interfaces/users.glade.in.h:48
+msgid "New Group"
+msgstr "Νέα Ομάδα"
+
+#: interfaces/users.glade.in.h:49
+#, fuzzy
+msgid "New Profile"
+msgstr "Νέα Ομάδα"
+
+#
+#: interfaces/users.glade.in.h:50
+msgid "New User"
+msgstr "Νέος Χρήστης"
+
+#: interfaces/users.glade.in.h:51
+#, fuzzy
+msgid "New password"
+msgstr "Κωδικός"
+
+#: interfaces/users.glade.in.h:52
+msgid "Number of days that a password may be used:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:53
+msgid ""
+"On this page, you can define security options, such as how frequently users "
+"must change their passwords."
+msgstr ""
+
+#: interfaces/users.glade.in.h:54
+msgid ""
+"On this page, you can define the system defaults which will be assigned to "
+"new users."
+msgstr ""
+
+#: interfaces/users.glade.in.h:55
+msgid ""
+"On this page, you can select scripts and files to be copied from your "
+"account into new users' accounts."
+msgstr ""
+
+#
+#: interfaces/users.glade.in.h:56
+#, fuzzy
+msgid "Optional settings"
+msgstr "Ρυθμίσεις Διαμέρισης"
+
+#: interfaces/users.glade.in.h:57 src/users/user_settings.c:482
+#: src/users/user_settings.c:558
+msgid "Password"
+msgstr "Κωδικός"
+
+#: interfaces/users.glade.in.h:58
+#, fuzzy
+msgid "Password options"
+msgstr "Κωδικός"
+
+#: interfaces/users.glade.in.h:59
+msgid "Password options (step 2 of 2)"
+msgstr ""
+
+#
+#: interfaces/users.glade.in.h:60
+#, fuzzy
+msgid "Password set to:"
+msgstr "Κωδικός:"
+
+#: interfaces/users.glade.in.h:61
+msgid "Please enter a password for the new user. "
+msgstr ""
+
+#: interfaces/users.glade.in.h:62
+msgid ""
+"Please enter a username for the new user in the space below. Optionally, you "
+"can fill in more information to identify the user. "
+msgstr ""
+
+#: interfaces/users.glade.in.h:63
+#, fuzzy
+msgid "Profiles"
+msgstr "αρχείο"
+
+#
+#: interfaces/users.glade.in.h:64
+#, fuzzy
+msgid "Real _name:"
+msgstr "Όνομα χρήστη:"
+
+#: interfaces/users.glade.in.h:65
+msgid "Security"
+msgstr ""
+
+#: interfaces/users.glade.in.h:66
+msgid "Set password b_y hand"
+msgstr ""
+
+#: interfaces/users.glade.in.h:68
+msgid "Settings for selected user and group"
+msgstr ""
+
+#: interfaces/users.glade.in.h:69 src/common/System.directory.in.in.h:1
+msgid "System"
+msgstr ""
+
+#
+#: interfaces/users.glade.in.h:70
+#, fuzzy
+msgid "System defaults"
+msgstr "Ρυθμίσεις συστήματος"
+
+#: interfaces/users.glade.in.h:71
+msgid ""
+"This druid is designed to help you quickly \n"
+"and easily add new users to your system.\n"
+"\n"
+"To begin, click \"Next\". "
+msgstr ""
+
+#: interfaces/users.glade.in.h:75
+msgid ""
+"This is a list of the users available in the system. Create new users or "
+"edit existing user settings with this dialog."
+msgstr ""
+
+#: interfaces/users.glade.in.h:76
+msgid ""
+"This is the list of the groups available in the system. Create new groups or "
+"edit existing groups with this dialog."
+msgstr ""
+
+#: interfaces/users.glade.in.h:77
+#, fuzzy
+msgid "Us_er's groups"
+msgstr "Νέα Ομάδα"
+
+#: interfaces/users.glade.in.h:78
+msgid "Use this dialog to create a new profile."
+msgstr ""
+
+#. set window title
+#: interfaces/users.glade.in.h:79 src/users/user-druid.c:271
+msgid "User Account Wizard"
+msgstr ""
+
+#: interfaces/users.glade.in.h:80
+msgid "User Creation Druid"
+msgstr ""
+
+#: interfaces/users.glade.in.h:81
+msgid "User Identity  (step 1 of 2)"
+msgstr ""
+
+#: interfaces/users.glade.in.h:82
+#, fuzzy
+msgid "User _ID:"
+msgstr "Ταυτότητα Χρήστη:"
+
+#: interfaces/users.glade.in.h:83
+msgid ""
+"User profiles can be used a templates to facilitate the creation of new "
+"users. To edit a profile, change the settings in the following tabs."
+msgstr ""
+
+#: interfaces/users.glade.in.h:84 src/users/users.desktop.in.in.h:1
+#: src/users/users.etspec.h:7
+msgid "Users"
+msgstr "Χρήστες"
+
+#
+#: interfaces/users.glade.in.h:85
+#, fuzzy
+msgid "_Add >>"
+msgstr "Προσθήκη ->"
+
+#
+#: interfaces/users.glade.in.h:86
+#, fuzzy
+msgid "_Add group..."
+msgstr "Προσθήκη..."
+
+#
+#: interfaces/users.glade.in.h:87
+#, fuzzy
+msgid "_Add user..."
+msgstr "Προσθήκη..."
+
+#: interfaces/users.glade.in.h:89
+msgid "_Days between warning and password expiration:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:91
+msgid "_Edit profiles..."
+msgstr ""
+
+#
+#: interfaces/users.glade.in.h:92
+#, fuzzy
+msgid "_Group name:"
+msgstr "Όνομα ομάδας:"
+
+#: interfaces/users.glade.in.h:93
+msgid "_Home phone:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:95
+msgid "_Office location:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:96
+#, fuzzy
+msgid "_Profile:"
+msgstr "αρχείο"
+
+#: interfaces/users.glade.in.h:97
+msgid "_Profiles..."
+msgstr ""
+
+#: interfaces/users.glade.in.h:99
+#, fuzzy
+msgid "_Shell:"
+msgstr "Φλοιός:"
+
+#: interfaces/users.glade.in.h:100
+msgid "_Show all users and groups"
+msgstr ""
+
+#: interfaces/users.glade.in.h:102
+msgid "_Work phone:"
+msgstr ""
+
+#. set window title
+#: src/boot/boot-druid.c:395
+msgid "Boot Image Wizard"
+msgstr ""
+
+#. give our dialog an OK button and title
+#: src/boot/boot-image-editor.c:106
+msgid "Boot Image Editor"
+msgstr ""
+
+#: src/boot/boot-image.c:40
 #, fuzzy
 msgid "Unknown"
 msgstr "<άγνωστο>"
 
-#: src/boot/main.c:102
+#: src/boot/boot-image.c:41
+msgid "Windows NT"
+msgstr ""
+
+#: src/boot/boot-image.c:42
+msgid "Windows 9x"
+msgstr ""
+
+#: src/boot/boot-image.c:43
+msgid "Dos"
+msgstr ""
+
+#: src/boot/boot-image.c:44
+msgid "Linux"
+msgstr ""
+
+#: src/boot/boot-image.c:216
+#, c-format
+msgid "Invalid path: %s"
+msgstr ""
+
+#: src/boot/boot-image.c:232
+#, c-format
+msgid "Image '%s' already exists, please set another name."
+msgstr ""
+
+#: src/boot/boot-image.c:238
+#, c-format
+msgid "Invalid image name: '%s'"
+msgstr ""
+
+#: src/boot/boot-image.c:253
+#, c-format
+msgid "Invalid image: '%s'"
+msgstr ""
+
+#: src/boot/boot-image.c:271
+#, c-format
+msgid "Invalid root device: '%s'"
+msgstr ""
+
+#: src/boot/callbacks.c:61
+msgid ""
+"Without at least one boot image,\n"
+"your system will not start.\n"
+msgstr ""
+
+#: src/boot/callbacks.c:72
+#, c-format
+msgid "Are you sure you want to delete %s?"
+msgstr ""
+
+#
+#: src/boot/e-table.c:362
+#, fuzzy, c-format
+msgid "%s (default)"
+msgstr "Εξ' ορισμού"
+
+#
+#: src/boot/boot.etspec.h:1 src/users/profile.c:1032
+#, fuzzy
+msgid "Default"
+msgstr "Εξ' ορισμού"
+
+#: src/boot/boot.etspec.h:3
+msgid "Kernel Image"
+msgstr ""
+
+#
+#: src/boot/boot.etspec.h:5
+#, fuzzy
+msgid "Type"
+msgstr "Τύπος:"
+
+#: src/boot/main.c:82
 #, fuzzy
 msgid "Boot Manager Settings - Ximian Setup Tools"
 msgstr "Εργαλεία Εγκατάστασης Ximian"
 
-#: src/common/xst-dialog.c:56
+#: src/boot/boot.desktop.in.in.h:1
+#, fuzzy
+msgid "Boot"
+msgstr "Σύστημα:"
+
+#: src/boot/boot.desktop.in.in.h:2
+#, fuzzy
+msgid "Boot Manager"
+msgstr "Εκκινήσιμο"
+
+#
+#: src/common/System.directory.in.in.h:2
+#, fuzzy
+msgid "System administration"
+msgstr "Ρυθμίσεις συστήματος"
+
+#: src/common/xst-dialog.c:58
 #, c-format
 msgid "Could not find widget: %s"
 msgstr ""
 
 #
-#: src/common/xst-dialog.c:131
-msgid " Full Options >> "
-msgstr " Πλήρεις Επιλογές >>"
+#: src/common/xst-dialog.c:90
+msgid " More Options >> "
+msgstr " Περισσότερες Επιλογές >> "
 
-#: src/common/xst-dialog.c:132
+#: src/common/xst-dialog.c:91
 msgid " << Fewer Options "
 msgstr " << Λιγότερες Επιλογές "
 
-#: src/common/xst-dialog.c:342
+#: src/common/xst-dialog.c:427
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
 msgstr ""
 
-#: src/common/xst-dialog.c:410
+#: src/common/xst-dialog.c:497
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr ""
 
-#: src/common/xst-tool.c:498
+#: src/common/xst-tool.c:654
+msgid "Closing tool."
+msgstr ""
+
+#: src/common/xst-tool.c:796
+msgid "Skipping set directive..."
+msgstr ""
+
+#: src/common/xst-tool.c:889
 msgid "Skipping actual save..."
 msgstr ""
 
-#: src/common/xst-tool.c:524
+#: src/common/xst-tool.c:915
 msgid "Updating your system configuration."
 msgstr ""
 
-#: src/common/xst-tool.c:646
+#: src/common/xst-tool.c:934
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
 
-#: src/common/xst-tool.c:802
+#: src/common/xst-tool.c:1108
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr ""
 
-#: src/common/xst-tool.c:933
+#: src/common/xst-tool.c:1248
+msgid "The password you entered is invalid."
+msgstr ""
+
+#: src/common/xst-tool.c:1258
+#, c-format
+msgid ""
+"Welcome to the %s prerelease of the Ximian Setup Tools.\n"
+"\n"
+"This is still a work in progress, and so it may have serious bugs.\n"
+"Due to the nature of these tools, bugs may render your computer\n"
+"PRACTICALLY USELESS, costing time, effort and sanity points.\n"
+"\n"
+"You have been warned. Thank you for trying out this prerelease of\n"
+"the Ximian Setup Tools!\n"
+"\n"
+"--\n"
+"The Ximian Setup Tools team"
+msgstr ""
+
+#: src/common/xst-tool.c:1278
+msgid "Don't show me this again"
+msgstr ""
+
+#: src/common/xst-tool.c:1308
+msgid "\tEdit configuration in the location LOCATION."
+msgstr ""
+
+#: src/common/xst-tool.c:1308
+msgid "LOCATION"
+msgstr ""
+
+#: src/common/xst-tool.c:1345
 msgid "Pretending we are root..."
 msgstr ""
 
-#: src/common/xst-tool.c:937
+#: src/common/xst-ui.c:545
 msgid ""
-"You need full administration privileges (i.e. root)\n"
-"to run this configuration tool. You can acquire\n"
-"such privileges by running it from the GNOME Control\n"
-"Center or issuing an \"su\" command in a shell.\n"
-"\n"
-"You will be unable to make any changes. Continue anyway?"
+"Plese restart your GNOME session for\n"
+"these changes to take effect."
 msgstr ""
 
-#: src/disks/main.c:37
-msgid "Disk Partitions"
-msgstr ""
-
-#. No name, no swap
-#: src/memory/callbacks.c:547
-msgid "Path to new swap location is empty."
-msgstr ""
-
-#. It's already in there, can't add
-#: src/memory/callbacks.c:564
-#, c-format
-msgid "Swap space %s already exsists."
-msgstr ""
-
-#: src/memory/main.c:90
-msgid "Swap Management"
-msgstr ""
-
-#: src/network/callbacks.c:193
+#: src/network/callbacks.c:265
 msgid "The name of this computer"
 msgstr ""
 
-#: src/network/callbacks.c:196
+#: src/network/callbacks.c:268
 msgid "A short description of your computer"
 msgstr ""
 
-#: src/network/callbacks.c:199
+#: src/network/callbacks.c:271
 msgid "The Windows Networking workgroup for your network"
 msgstr ""
 
-#: src/network/callbacks.c:202
+#: src/network/callbacks.c:274
 msgid "The IP address of your WINS server"
 msgstr ""
 
-#: src/network/callbacks.c:205
+#: src/network/callbacks.c:277
 msgid "The DNS domain for your computer"
 msgstr ""
 
-#: src/network/callbacks.c:208
+#: src/network/callbacks.c:280
 msgid "A list of your DNS servers' IP addresses"
 msgstr ""
 
-#: src/network/callbacks.c:211
+#: src/network/callbacks.c:283
 msgid "A list of domains where hosts will be searched"
 msgstr ""
 
-#: src/network/callbacks.c:214
+#: src/network/callbacks.c:286
 msgid "The IP address of this host"
 msgstr ""
 
-#: src/network/callbacks.c:217
+#: src/network/callbacks.c:289
 msgid "Aliases for this host, one per line"
 msgstr ""
 
-#: src/network/callbacks.c:333
+#: src/network/callbacks.c:432
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr ""
 
-#: src/network/callbacks.c:425
-msgid ""
-"The host name has changed. This will prevent you\n"
-"from launching new applications,\n"
-"and so you will have to log in again.\n"
-"\n"
-"Continue anyways?"
+#
+#: src/network/callbacks.c:434
+#, fuzzy, c-format
+msgid "Remove connection %s?"
+msgstr "Συνδέσεις"
+
+#: src/network/callbacks.c:479
+#, c-format
+msgid "Activating connection ``%s.''"
 msgstr ""
 
-#: src/network/callbacks.c:429
+#: src/network/callbacks.c:502
+#, c-format
+msgid "Deactivating connection ``%s.''"
+msgstr ""
+
+#: src/network/callbacks.c:522
+msgid ""
+"You don't have SMB support installed. Please install SMB support\n"
+"in the system to enable windows networking."
+msgstr ""
+
+#
+#: src/network/callbacks.c:523
+#, fuzzy
+msgid "SMB support missing."
+msgstr "Ρυθμίσεις Εξαγωγής SMB"
+
+#: src/network/callbacks.c:564
+msgid ""
+"The host name has changed. This will prevent you\n"
+"from launching new applications, and so you will\n"
+"have to log in again.\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+
+#: src/network/callbacks.c:570
 msgid "Don't change host name"
 msgstr ""
 
-#: src/network/connection.c:43
-msgid "Other type"
+#: src/network/callbacks.c:610
+msgid ""
+"wvdial could not be found on your system.\n"
+"You need to install wvdial, or the PPP (modem)\n"
+"connections will not activate."
+msgstr ""
+
+#: src/network/callbacks.c:631
+msgid ""
+"wvdial could not be found on your system.\n"
+"You need to install wvdial, or the PPP (modem)\n"
+"connections will not activate.\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+
+#: src/network/callbacks.c:658
+msgid ""
+"The default gateway device is not activated. This\n"
+"will prevent you from connecting to the Internet.\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+
+#
+#: src/network/callbacks.c:665
+#, fuzzy
+msgid "Activate connection"
+msgstr "Τοποθεσία"
+
+#: src/network/callbacks.c:711
+msgid ""
+"The default gateway device is missing gateway\n"
+"information. Please provide this information to\n"
+"proceed, or choose another default gateway device.\n"
 msgstr ""
 
 #: src/network/connection.c:44
-msgid "Ethernet LAN card"
+msgid "Other type"
 msgstr ""
 
 #: src/network/connection.c:45
-msgid "WaveLAN wireless LAN"
+msgid "Ethernet LAN card"
 msgstr ""
 
 #: src/network/connection.c:46
-msgid "PPP: modem or transfer cable"
+msgid "WaveLAN wireless LAN"
 msgstr ""
 
 #: src/network/connection.c:47
-msgid "Parallel line"
+msgid "PPP: modem or transfer cable"
 msgstr ""
 
 #: src/network/connection.c:48
-msgid "Loopback: virtual interface"
+msgid "Parallel line"
 msgstr ""
 
 #: src/network/connection.c:49
+msgid "Infrared LAN"
+msgstr ""
+
+#: src/network/connection.c:50
+msgid "Loopback: virtual interface"
+msgstr ""
+
+#: src/network/connection.c:51
 #, fuzzy
 msgid "Unknown type"
 msgstr "Άγνωστος Χρήστης"
 
 #
-#: src/network/connection.c:475
+#: src/network/connection.c:791 src/network/connection.c:822
 msgid "Active"
 msgstr "Ενεργό"
 
-#: src/network/connection.c:475
+#: src/network/connection.c:792 src/network/connection.c:823
 msgid "Inactive"
 msgstr ""
 
-#: src/network/hosts.c:376
+#: src/network/connection.c:1329
+msgid ""
+"The IP address or netmask for the interface\n"
+"was left empty. Please enter valid IP\n"
+"addresses in those fields to continue."
+msgstr ""
+
+#: src/network/connection.c:1336
+msgid ""
+"The IP address or remote address for the\n"
+"interface was left empty. Please enter valid\n"
+"IP addresses in those fields to continue."
+msgstr ""
+
+#: src/network/connection.c:1342
+msgid ""
+"You chose to set the DNS servers for this\n"
+"connection manually, but left the IP\n"
+"address for the primary DNS empty. Please\n"
+"enter the IP for the primary DNS or uncheck\n"
+"the manual DNS option."
+msgstr ""
+
+#: src/network/hosts.c:380
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr ""
 
-#: src/network/main.c:113
+#: src/network/main.c:174
 msgid "\tRun the internet conection druid."
 msgstr ""
 
 #
-#: src/network/main.c:120
+#: src/network/main.c:181
 msgid "Network Settings"
 msgstr "Ρυθμίσεις Δικτύου"
 
@@ -1985,147 +3021,924 @@ msgid ""
 msgstr ""
 
 #: src/network/ppp-druid.c:227
+#, c-format
 msgid ""
-"You are about to create an account named with the following information:"
+"You are about to create an account named with the following information:\n"
+"\n"
+"Account Name: %s\n"
+"\n"
+"Phone number: %s\n"
+"\n"
+"User name: %s\n"
+"\n"
+"Password: %s"
 msgstr ""
 
-#: src/shares/main.c:58
-msgid "Network Shares"
+#: src/network/network.desktop.in.in.h:1
+msgid "Network adapter setup."
 msgstr ""
 
-#: src/time/main.c:302
+#
+#: src/network/network.desktop.in.in.h:2
+#, fuzzy
+msgid "Networking"
+msgstr "Δίκτυο"
+
+#: src/time/main.c:397
+msgid ""
+"You don't have NTP support installed. Please install NTP support\n"
+"in the system to enable server synchronization."
+msgstr ""
+
+#: src/time/main.c:398
+msgid "NTP support missing."
+msgstr ""
+
+#: src/time/main.c:632
 msgid "Time and Date Settings"
 msgstr ""
 
-#: src/users/callbacks.c:192
-msgid "Settings for the selected user and group"
+#: src/time/time.desktop.in.in.h:2
+msgid "Time, date and timezone."
 msgstr ""
 
-#: src/users/callbacks.c:413
-#, c-format
-msgid "Password set to \"%s\"."
+#: src/users/callbacks.c:88
+msgid "Can't create new user. Check your profile settings."
 msgstr ""
 
-#: src/users/callbacks.c:452
-msgid ""
-"The password and its confirmation\n"
-"must match."
+#: src/users/callbacks.c:97
+msgid "Can't create new user. Too many users probably."
 msgstr ""
 
-#: src/users/callbacks.c:459
+#: src/users/main.c:97
+msgid "Show All"
+msgstr ""
+
+#
+#: src/users/main.c:124
+#, fuzzy
+msgid "User name contains"
+msgstr "Ρυθμίσεις Χρήστη"
+
+#: src/users/main.c:125
+#, fuzzy
+msgid "User ID is"
+msgstr "Ταυτότητα Χρήστη:"
+
+#
+#: src/users/main.c:126
+#, fuzzy
+msgid "Group name contains"
+msgstr "Ρυθμίσεις Χρήστη"
+
+#
+#: src/users/main.c:127
+#, fuzzy
+msgid "User GID is"
+msgstr "Ρυθμίσεις Χρήστη"
+
+#: src/users/main.c:299
+msgid "Users and Groups"
+msgstr ""
+
+#: src/users/passwd.c:266
+msgid "Passwords doesn't match."
+msgstr ""
+
+#: src/users/passwd.c:271
 #, c-format
 msgid ""
 "Bad password: %s.\n"
 "Please try with a new password."
 msgstr ""
 
-#. Set desc
-#: src/users/e-table.c:494
-msgid "Settings for group "
-msgstr "Ρυθμίσεις ομάδας"
-
-#: src/users/e-table.c:557
-msgid "Settings for user "
-msgstr "Ρυθμίσεις χρήστη "
-
-#: src/users/main.c:164
-msgid "Show All"
-msgstr ""
-
-#
-#: src/users/main.c:189
-#, fuzzy
-msgid "User name contains"
-msgstr "Ρυθμίσεις Χρήστη"
-
-#
-#: src/users/main.c:190
-#, fuzzy
-msgid "User GID contains"
-msgstr "Ρυθμίσεις Χρήστη"
-
-#: src/users/main.c:259
-msgid "Users and Groups"
-msgstr ""
-
-#: src/users/user_group.c:273
+#: src/users/user_group.c:330
 msgid "The username is empty."
 msgstr ""
 
-#: src/users/user_group.c:277
+#: src/users/user_group.c:334
+msgid "The username is too long."
+msgstr ""
+
+#: src/users/user_group.c:337 src/users/user_group.c:358
+#: src/users/user_group.c:442
+msgid "root user shouldn't be modified."
+msgstr ""
+
+#: src/users/user_group.c:341
 msgid "Please set a valid username, using only lower-case letters."
 msgstr ""
 
-#: src/users/user_group.c:281
-msgid "Username already exsists."
+#: src/users/user_group.c:345
+#, c-format
+msgid ""
+"Username \"%s\" already exists.\n"
+"\n"
+"Please select a different Username"
 msgstr ""
 
-#: src/users/user_group.c:315
-msgid "Such user id already exsists."
+#: src/users/user_group.c:356 src/users/user_group.c:546
+msgid "User id must be a positive number."
 msgstr ""
 
-#: src/users/user_group.c:344
+#: src/users/user_group.c:360
+msgid "Such user id already exists."
+msgstr ""
+
+#: src/users/user_group.c:383
+#, c-format
+msgid "Invalid character '%c' in comment."
+msgstr ""
+
+#: src/users/user_group.c:399
+msgid "Please give shell with full path."
+msgstr ""
+
+#: src/users/user_group.c:436
 msgid "Home directory must not be empty."
 msgstr ""
 
-#: src/users/user_group.c:386
-msgid ""
-"Please set a valid main group name, with only lower-case letters,\n"
-"or select one from pull-down menu."
+#: src/users/user_group.c:439
+msgid "Please enter full path for home directory."
 msgstr ""
 
-#: src/users/user_group.c:409
+#: src/users/user_group.c:447
+msgid "Part of the path to the home directory is a file."
+msgstr ""
+
+#: src/users/user_group.c:448
+msgid "There is a loop in the path to the home directory."
+msgstr ""
+
+#: src/users/user_group.c:449
+msgid "Not enough memory to check the home directory."
+msgstr ""
+
+#: src/users/user_group.c:450
+msgid "The path to the home directory is too long."
+msgstr ""
+
+#: src/users/user_group.c:482
+msgid "Group name is not valid."
+msgstr ""
+
+#: src/users/user_group.c:485 src/users/user_group.c:550
+msgid "Such group id already exists."
+msgstr ""
+
+#: src/users/user_group.c:488
+msgid "Group does not exist. Create new?"
+msgstr ""
+
+#: src/users/user_group.c:507
 msgid "Group name is empty."
 msgstr ""
 
-#: src/users/user_group.c:413
+#: src/users/user_group.c:511
+msgid "The group name is too long."
+msgstr ""
+
+#: src/users/user_group.c:515
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr ""
 
-#: src/users/user_group.c:417
-msgid "Group already exsists."
-msgstr ""
-
-#: src/users/user_group.c:451
-msgid "Such group id already exsists."
+#: src/users/user_group.c:519
+msgid "Group already exists."
 msgstr ""
 
 #
-#: src/users/user_group.c:807
+#: src/users/user_group.c:820
 #, c-format
 msgid "Password for User %s"
 msgstr "Κωδικός για το Χρήστη %s"
 
-#: src/users/user_group.c:834
+#: src/users/user_group.c:854
 msgid "The root user must not be deleted."
 msgstr ""
 
-#: src/users/user_group.c:841
+#: src/users/user_group.c:861
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr ""
 
-#: src/users/user_group.c:864
+#: src/users/user_group.c:884
 msgid "Create New Group"
 msgstr ""
 
-#: src/users/user_group.c:928
+#: src/users/user_group.c:944
 msgid "The root group must not be deleted."
 msgstr ""
 
-#: src/users/user_group.c:935
+#: src/users/user_group.c:951
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr ""
 
-#: src/users/user_group.c:980
+#: src/users/user_group.c:996
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Ρυθμίσεις Ομάδας %s"
 
+#: src/users/user_group.c:1391
+msgid "The home directory does not exist, or its path is invalid."
+msgstr ""
+
+#: src/users/user_group.c:1395
+msgid "Couldn't get access to the home directory."
+msgstr ""
+
+#. We shouldn't fall here: the other cases are in the error checks.
+#: src/users/user_group.c:1400
+msgid "There was an error trying to access the home directory."
+msgstr ""
+
+#: src/users/user_group.c:1408
+msgid ""
+"The home directory already exists. This will break the new user's "
+"permissions."
+msgstr ""
+
+#: src/users/user_group.c:1413
+msgid "The home directory path exists, but it is not a directory."
+msgstr ""
+
+#: src/users/user_group.c:1417
+msgid "The home directory is not owned by the user."
+msgstr ""
+
+#: src/users/user_group.c:1421
+msgid "The user doesn't have permission to read from the home directory."
+msgstr ""
+
+#: src/users/user_group.c:1425
+msgid "The user doesn't have permission to write in the home directory."
+msgstr ""
+
+#: src/users/user_group.c:1429
+msgid ""
+"The user doesn't have permission to use (``execute'') the home directory."
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:1
+msgid "Banner Removal (Junkbuster)"
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:3
+#, fuzzy
+msgid "Enable"
+msgstr "Ενεργοποιημένο"
+
+#: interfaces/internetsharing.glade.in.h:4
+#, fuzzy
+msgid "Enable :"
+msgstr "Ενεργοποιημένο"
+
+#: interfaces/internetsharing.glade.in.h:5
+msgid "Firewall"
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:6
+msgid "IP Forwarding"
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:7
+msgid "Internet Sharing"
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:8
+msgid "Internet Sharing --Advanced Mode"
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:9
+msgid ""
+"The internet sharing tool allows you to share your internet conection with "
+"other computers on the network."
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:10
+msgid "Web Cache (squid)"
+msgstr ""
+
+#: interfaces/location-manager.glade.in.h:1
+msgid "                           "
+msgstr ""
+
+#: interfaces/location-manager.glade.in.h:3
+msgid ":"
+msgstr ":"
+
+#: interfaces/location-manager.glade.in.h:4
+msgid "AM"
+msgstr "ΠΜ"
+
+#: interfaces/location-manager.glade.in.h:5
+msgid "Boston Office"
+msgstr ""
+
 #
-#~ msgid "Network"
-#~ msgstr "Δίκτυο"
+#: interfaces/location-manager.glade.in.h:6
+#, fuzzy
+msgid "Choose Location"
+msgstr "Τοποθεσία"
+
+#: interfaces/location-manager.glade.in.h:7
+msgid "Copy"
+msgstr ""
+
+#
+#: interfaces/location-manager.glade.in.h:8
+#, fuzzy
+msgid "Copy Location"
+msgstr "Τοποθεσία"
+
+#
+#: interfaces/location-manager.glade.in.h:9
+#, fuzzy
+msgid "Current:"
+msgstr "Σχόλιο:"
+
+#
+#: interfaces/location-manager.glade.in.h:13
+#, fuzzy
+msgid "Edit Date/Time"
+msgstr "Ημερομηνία/ώρα"
+
+#
+#: interfaces/location-manager.glade.in.h:14
+#, fuzzy
+msgid "Edit Location"
+msgstr "Τοποθεσία"
+
+#: interfaces/location-manager.glade.in.h:15
+msgid "Edit:"
+msgstr ""
+
+#: interfaces/location-manager.glade.in.h:16
+msgid "Helsinki Office"
+msgstr ""
+
+#: interfaces/location-manager.glade.in.h:17
+msgid "Keep clock synchronized with selected servers"
+msgstr ""
+
+#
+#: interfaces/location-manager.glade.in.h:18
+msgid "Location"
+msgstr "Τοποθεσία"
+
+#
+#: interfaces/location-manager.glade.in.h:20
+#, fuzzy
+msgid "Location:"
+msgstr "Τοποθεσία"
+
+#
+#: interfaces/location-manager.glade.in.h:21
+#, fuzzy
+msgid "Locations"
+msgstr "Τοποθεσία"
+
+#: interfaces/location-manager.glade.in.h:22
+msgid "Mexico CIty "
+msgstr ""
+
+#
+#: interfaces/location-manager.glade.in.h:24
+#, fuzzy
+msgid "New Location"
+msgstr "Τοποθεσία"
+
+#
+#: interfaces/location-manager.glade.in.h:25
+#, fuzzy
+msgid "New Name:"
+msgstr "Όνομα"
+
+#
+#: interfaces/location-manager.glade.in.h:26
+#, fuzzy
+msgid "New name:"
+msgstr "Όνομα χρήστη:"
+
+#: interfaces/location-manager.glade.in.h:27
+msgid "PM"
+msgstr "ΜΜ"
+
+#
+#: interfaces/location-manager.glade.in.h:29
+#, fuzzy
+msgid "Rename"
+msgstr "Διαγραφή"
+
+#
+#: interfaces/location-manager.glade.in.h:30
+#, fuzzy
+msgid "Rename Location"
+msgstr "Τοποθεσία"
+
+#: interfaces/location-manager.glade.in.h:31
+msgid "Rollback-location-management-mockup"
+msgstr ""
+
+#
+#: interfaces/location-manager.glade.in.h:32
+msgid "Select servers..."
+msgstr "Επιλογή εξυπηρετητών..."
+
+#: interfaces/location-manager.glade.in.h:33
+msgid "Set time zone..."
+msgstr ""
+
+#: interfaces/location-manager.glade.in.h:37
+msgid ""
+"Use this tool to manage all the different locations where you could possibly "
+"want to use your stinking laptop."
+msgstr ""
+
+#: interfaces/location-manager.glade.in.h:38
+msgid "_Help"
+msgstr ""
+
+#: interfaces/print.glade.in.h:1
+msgid "/dev/lp0 (LPT1)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:2
+msgid "/dev/lp1 (LPT2)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:3
+msgid "/dev/ttyS0 (COM1)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:4
+msgid "/dev/ttyS1 (COM2)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:5
+msgid "/dev/ttyS2 (COM3)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:6
+msgid "/dev/ttyS3 (COM4)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:7
+msgid "1200x1200"
+msgstr ""
+
+#: interfaces/print.glade.in.h:8
+msgid "1200x600"
+msgstr ""
+
+#: interfaces/print.glade.in.h:9
+msgid "16 colors"
+msgstr ""
+
+#: interfaces/print.glade.in.h:10
+msgid "256 colors"
+msgstr ""
+
+#: interfaces/print.glade.in.h:11
+msgid "300x300"
+msgstr ""
+
+#: interfaces/print.glade.in.h:12
+msgid "400x400"
+msgstr ""
+
+#: interfaces/print.glade.in.h:13
+msgid "600x600"
+msgstr ""
+
+#: interfaces/print.glade.in.h:14
+msgid "A3"
+msgstr ""
+
+#: interfaces/print.glade.in.h:15
+msgid "A4"
+msgstr ""
+
+#
+#: interfaces/print.glade.in.h:16
+#, fuzzy
+msgid "Add Printer..."
+msgstr "Προσθήκη..."
+
+#: interfaces/print.glade.in.h:17
+msgid "Add a New Printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:19
+msgid ""
+"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+msgstr ""
+
+#: interfaces/print.glade.in.h:20
+msgid "Convert _Linefeeds"
+msgstr ""
+
+#: interfaces/print.glade.in.h:22
+msgid "Document Pages per Sheet"
+msgstr ""
+
+#
+#: interfaces/print.glade.in.h:23
+#, fuzzy
+msgid "Driver"
+msgstr "Εξυπηρετητές"
+
+#: interfaces/print.glade.in.h:24
+msgid "E_xplicitly Eject Last Page"
+msgstr ""
+
+#: interfaces/print.glade.in.h:25
+msgid "High Color"
+msgstr ""
+
+#: interfaces/print.glade.in.h:26
+msgid "Legal"
+msgstr ""
+
+#: interfaces/print.glade.in.h:27
+msgid "Letter"
+msgstr ""
+
+#: interfaces/print.glade.in.h:28
+#, fuzzy
+msgid "Name of the printer."
+msgstr "Ψευδώνυμα άλλων υπολογιστών."
+
+#: interfaces/print.glade.in.h:29
+msgid "Name of the server the printer is connected to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:30
+msgid "Name the server uses for the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:31
+msgid "Novell _Netware (NCP) Printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:32
+msgid "Number of colors to print in."
+msgstr ""
+
+#: interfaces/print.glade.in.h:34
+msgid "P_aper Size:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:35
+msgid "P_ort Number:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:36
+msgid "Port number the server is listening to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:37
+msgid "Port the printer is connected to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:38
+msgid "Print one page per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:39
+msgid "Print resolution."
+msgstr ""
+
+#
+#: interfaces/print.glade.in.h:40
+#, fuzzy
+msgid "Printer Settings"
+msgstr "Ρυθμίσεις Διαμέρισης"
+
+#: interfaces/print.glade.in.h:41
+msgid "Printer connected to a port on your machine."
+msgstr ""
+
+#: interfaces/print.glade.in.h:42
+msgid "Printer listening directly for network connections."
+msgstr ""
+
+#: interfaces/print.glade.in.h:43
+msgid "Printer shared on a Windows (SMB) network."
+msgstr ""
+
+#: interfaces/print.glade.in.h:44
+msgid "Printer shared using the Novell Netware (NCP) protocol."
+msgstr ""
+
+#: interfaces/print.glade.in.h:45
+msgid "Printer shared using the Unix (lpd) print protocol."
+msgstr ""
+
+#
+#: interfaces/print.glade.in.h:46
+#, fuzzy
+msgid "R_esolution:"
+msgstr "Επιλογή:"
+
+#: interfaces/print.glade.in.h:47
+msgid "Remote UNIX (_lpd) Printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:48
+msgid "Remote _Windows (SMB) printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:49
+msgid "SMB workgroup the server is in."
+msgstr ""
+
+#: interfaces/print.glade.in.h:50
+msgid "Scale pages down and print eight per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:51
+msgid "Scale pages down and print four per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:52
+msgid "Scale pages down and print two per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:53
+msgid "Select the type of printer to add:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:54
+msgid "Send an EOF after the print job to help eject the last page."
+msgstr ""
+
+#: interfaces/print.glade.in.h:55
+msgid "Send text documents raw to the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:57
+msgid "Size of the paper in the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:58
+msgid "The password used to connect to the server."
+msgstr ""
+
+#: interfaces/print.glade.in.h:59
+msgid ""
+"This is the list of the configured printers available on the system. Create "
+"new printers or edit existing printer settings with this dialog."
+msgstr ""
+
+#: interfaces/print.glade.in.h:60
+msgid "True Color"
+msgstr ""
+
+#: interfaces/print.glade.in.h:61
+msgid "Username used to connect to the server."
+msgstr ""
+
+#: interfaces/print.glade.in.h:62
+msgid "_1"
+msgstr ""
+
+#: interfaces/print.glade.in.h:63
+msgid "_2"
+msgstr ""
+
+#: interfaces/print.glade.in.h:64
+msgid "_4"
+msgstr ""
+
+#: interfaces/print.glade.in.h:65
+msgid "_8"
+msgstr ""
+
+#: interfaces/print.glade.in.h:66
+msgid "_Color Depth:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:67
+#, fuzzy
+msgid "_Device Name:"
+msgstr "Συσκευή:"
+
+#: interfaces/print.glade.in.h:68
+msgid "_Direct Network Printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:69
+msgid "_Fast Text Printing"
+msgstr ""
+
+#
+#: interfaces/print.glade.in.h:70
+#, fuzzy
+msgid "_Hostname:"
+msgstr "Όνομα συστήματος:"
+
+#
+#: interfaces/print.glade.in.h:71
+#, fuzzy
+msgid "_Local Printer"
+msgstr "Τοπική διαδρομή:"
+
+#: interfaces/print.glade.in.h:74
+#, fuzzy
+msgid "_Remote Name:"
+msgstr "IP συστήματος:"
+
+#: src/users/e-search-bar/e-search-bar.c:140
+msgid "Sear_ch"
+msgstr ""
+
+#: src/users/profile.c:542
+msgid "Choose the file"
+msgstr ""
+
+#: src/users/profile.c:684
+msgid "Profile Editor"
+msgstr ""
+
+#: src/users/profile.c:885
+msgid "Profile with given name already exists."
+msgstr ""
+
+#: src/users/profile.c:888
+msgid "Profile name must not be empty."
+msgstr ""
+
+#
+#. name
+#: src/users/profile.c:1033
+#, fuzzy
+msgid "Default profile"
+msgstr "Τοποθεσία"
+
+#: src/users/profile.c:1349
+msgid "Can't delete Default"
+msgstr ""
+
+#. FIXME: list ALL known vars.
+#: src/users/profile.c:1475
+#, c-format
+msgid ""
+"Unknown variable '%s'.\n"
+"Currently we support only '%s'."
+msgstr ""
+
+#. give our dialog an OK button and title
+#: src/users/user-account-editor.c:109
+msgid "User Account Editor"
+msgstr ""
+
+#: src/users/user_settings.c:180
+#, c-format
+msgid ""
+"Invalid character '%c'.\n"
+"This field doesn't accept control characters ',' ':' and '='."
+msgstr ""
+
+#
+#: src/users/user_settings.c:468 src/users/user_settings.c:529
+#: src/users/user_settings.c:544
+#, fuzzy
+msgid "Identity"
+msgstr "Αναγνώριση"
+
+#
+#: src/users/user_settings.c:522
+#, fuzzy
+msgid "Real name:"
+msgstr "Όνομα χρήστη:"
+
+#: src/users/net_group.etspec.h:1 src/users/users.etspec.h:3
+#, fuzzy
+msgid "Group"
+msgstr "Ομάδες"
+
+#
+#: src/users/profiles.etspec.h:1 src/users/users.etspec.h:1
+msgid "Comment"
+msgstr "Σχόλιο"
+
+#: src/users/group.etspec.h:1 src/users/users.etspec.h:2
+msgid "GID"
+msgstr ""
+
+#: src/users/users.etspec.h:4
+msgid "Home"
+msgstr ""
+
+#: src/users/users.etspec.h:5
+#, fuzzy
+msgid "Shell"
+msgstr "Φλοιός:"
+
+#: src/users/users.etspec.h:6
+msgid "UID"
+msgstr ""
+
+#: src/users/users.desktop.in.in.h:2
+#, fuzzy
+msgid "Users and groups."
+msgstr "Νέα Ομάδα"
+
+#: src/users/net_user.etspec.h:1
+msgid "User"
+msgstr "Χρήστης"
+
+#: src/users/profiles.etspec.h:2
+#, fuzzy
+msgid "Profile"
+msgstr "αρχείο"
+
+#
+#~ msgid "window1"
+#~ msgstr "Σινδος1"
+
+#~ msgid "%P %%"
+#~ msgstr "%P %%"
+
+#~ msgid "label54"
+#~ msgstr "label54"
+
+#~ msgid "label51"
+#~ msgstr "label51"
+
+#~ msgid "label52"
+#~ msgstr "label52"
+
+#, fuzzy
+#~ msgid "label57"
+#~ msgstr "label27"
+
+#
+#~ msgid "Change"
+#~ msgstr "Αλλαγή"
+
+#~ msgid "Netmask:"
+#~ msgstr "Μάσκα:"
+
+#~ msgid "Host IP:"
+#~ msgstr "IP συστήματος:"
+
+#~ msgid "User:"
+#~ msgstr "Χρήστης:"
+
+#~ msgid "SMB"
+#~ msgstr "SMB"
+
+#
+#~ msgid "Local path:"
+#~ msgstr "Τοπική διαδρομή:"
+
+#
+#~ msgid "New import"
+#~ msgstr "Νέα εισαγωγή"
+
+#
+#~ msgid "User Settings"
+#~ msgstr "Ρυθμίσεις Χρήστη"
+
+#
+#, fuzzy
+#~ msgid "Full Name:"
+#~ msgstr " Ονόματα"
+
+#
+#~ msgid "Remove <-"
+#~ msgstr "Διαγραφή <-"
+
+#~ msgid "label27"
+#~ msgstr "label27"
+
+#~ msgid "label26"
+#~ msgstr "label26"
+
+#~ msgid "Change Password"
+#~ msgstr "Αλλαγή Κωδικού"
+
+#, fuzzy
+#~ msgid "Password..."
+#~ msgstr "Κωδικός"
+
+#
+#~ msgid "Mailbox directory:"
+#~ msgstr "Κατάλογος Μηνυμάτων Αλληλογραφίας:"
+
+#
+#, fuzzy
+#~ msgid "window2"
+#~ msgstr "Σινδος1"
+
+#
+#~ msgid " Full Options >> "
+#~ msgstr " Πλήρεις Επιλογές >>"
+
+#~ msgid "Settings for group "
+#~ msgstr "Ρυθμίσεις ομάδας"
 
 #~ msgid "This device is active"
 #~ msgstr "Αυτή η συσκευή είναι ενεργή"
@@ -2133,14 +3946,5 @@ msgstr "Ρυθμίσεις Ομάδας %s"
 #~ msgid "PPP"
 #~ msgstr "PPP"
 
-#~ msgid "AM"
-#~ msgstr "ΠΜ"
-
-#~ msgid "PM"
-#~ msgstr "ΜΜ"
-
 #~ msgid "label1"
 #~ msgstr "label1"
-
-#~ msgid "Settings for User %s"
-#~ msgstr "Ρυθμίσεις για Χρήστη %s"
