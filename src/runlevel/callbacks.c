@@ -131,7 +131,10 @@ callbacks_service_toggled (GtkTreeView *treeview, GtkTreeIter iter, GtkTreeViewC
 				    -1);
 
 		runlevels = xst_xml_element_find_first (service, "runlevels");
-		
+
+		if (runlevels == NULL) 
+			runlevels = xst_xml_element_add (service, "runlevels");
+
 		/* the image will have the next states:   started --> stopped --> do nothing --> ... */
 		if (image == start_icon) {
 			/* The state turns to stopped */
@@ -142,7 +145,7 @@ callbacks_service_toggled (GtkTreeView *treeview, GtkTreeIter iter, GtkTreeViewC
 			     node = xst_xml_element_find_next (node, "runlevel"))
 			{
 				level = xst_xml_get_child_content (node, "number");
-				if (atoi (level) == ncol - 1) {
+				if (atoi (level) == ncol - 2) {
 					g_free (level);
 					xst_xml_set_child_content (node, "action", "stop");
 					break;
@@ -160,7 +163,7 @@ callbacks_service_toggled (GtkTreeView *treeview, GtkTreeIter iter, GtkTreeViewC
 			     node = xst_xml_element_find_next (node, "runlevel"))
 			{
 				level = xst_xml_get_child_content (node, "number");
-				if (atoi (level) == ncol - 1) {
+				if (atoi (level) == ncol - 2) {
 					g_free (level);
 					xst_xml_element_destroy (node);
 					break;
@@ -181,7 +184,7 @@ callbacks_service_toggled (GtkTreeView *treeview, GtkTreeIter iter, GtkTreeViewC
 			node = xst_xml_element_add (runlevels, "runlevel");
 			xst_xml_element_add (node, "number");
 			xst_xml_element_add (node, "action");
-			buf = g_strdup_printf ("%i", ncol - 1);
+			buf = g_strdup_printf ("%i", ncol - 2);
 			xst_xml_set_child_content (node, "number", buf);
 			xst_xml_set_child_content (node, "action", "start");
 			g_free (buf);
