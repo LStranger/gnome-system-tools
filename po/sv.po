@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-05-22 03:01+0200\n"
-"PO-Revision-Date: 2001-05-22 03:01+0200\n"
+"POT-Creation-Date: 2001-05-22 17:45+0200\n"
+"PO-Revision-Date: 2001-05-22 17:35+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -763,7 +763,7 @@ msgid "Detected"
 msgstr "Upptäckt"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:40 src/boot/e-table.c:43
 msgid "Device"
 msgstr "Enhet"
 
@@ -810,6 +810,7 @@ msgid "Mount this partition"
 msgstr "Montera denna partition"
 
 #: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:32
+#: src/shares/tables.c:75
 msgid "Mounted"
 msgstr "Monterad"
 
@@ -995,6 +996,7 @@ msgid "Existing:"
 msgstr "Existerande:"
 
 #: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:20
+#: src/shares/tables.c:72
 msgid "Host"
 msgstr "Värd"
 
@@ -1500,7 +1502,7 @@ msgstr "Bläddringsbar"
 msgid "Client"
 msgstr "Klient"
 
-#: interfaces/shares.glade.in.h:8
+#: interfaces/shares.glade.in.h:8 src/shares/tables.c:78
 msgid "Clients"
 msgstr "Klienter"
 
@@ -1580,7 +1582,7 @@ msgstr ""
 msgid "Mount"
 msgstr "Montera"
 
-#: interfaces/shares.glade.in.h:30
+#: interfaces/shares.glade.in.h:30 src/shares/tables.c:74
 msgid "Mount Point"
 msgstr "Monteringspunkt"
 
@@ -1596,11 +1598,13 @@ msgstr "Monteringsalternativ"
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.in.h:36
+#: interfaces/shares.glade.in.h:36 src/boot/e-table.c:40
+#: src/shares/tables.c:76
 msgid "Name"
 msgstr "Namn"
 
-#: interfaces/shares.glade.in.h:39
+#: interfaces/shares.glade.in.h:39 src/shares/tables.c:73
+#: src/shares/tables.c:77
 msgid "Path"
 msgstr "Sökväg"
 
@@ -1663,7 +1667,7 @@ msgstr ""
 msgid "Username:"
 msgstr "Användarnamn:"
 
-#: interfaces/shares.glade.in.h:52
+#: interfaces/shares.glade.in.h:52 src/shares/tables.c:79
 msgid "Writable"
 msgstr "Skrivbar"
 
@@ -1875,8 +1879,8 @@ msgstr "Gruppmedlemmar"
 msgid "Group name:"
 msgstr "Gruppnamn:"
 
-#: interfaces/users.glade.in.h:36 src/users/user_settings.c:330
-#: src/users/user_settings.c:397
+#: interfaces/users.glade.in.h:36 src/users/e-table.c:50
+#: src/users/user_settings.c:333 src/users/user_settings.c:400
 msgid "Groups"
 msgstr "Grupper"
 
@@ -1972,8 +1976,8 @@ msgstr ""
 msgid "Optional settings"
 msgstr "Valfria inställningar"
 
-#: interfaces/users.glade.in.h:59 src/users/user_settings.c:337
-#: src/users/user_settings.c:404
+#: interfaces/users.glade.in.h:59 src/users/user_settings.c:340
+#: src/users/user_settings.c:407
 msgid "Password"
 msgstr "Lösenord"
 
@@ -2080,7 +2084,7 @@ msgid "Use this dialog to create a new profile."
 msgstr "Använd detta dialogfönster för att skapa en ny profil."
 
 #. set window title
-#: interfaces/users.glade.in.h:85 src/users/user-druid.c:268
+#: interfaces/users.glade.in.h:85 src/users/user-druid.c:271
 msgid "User Account Wizard"
 msgstr "Guide för användarkonton"
 
@@ -2108,7 +2112,7 @@ msgstr ""
 msgid "User's groups"
 msgstr "Användarens grupper"
 
-#: interfaces/users.glade.in.h:92
+#: interfaces/users.glade.in.h:92 src/users/e-table.c:43
 msgid "Users"
 msgstr "Användare"
 
@@ -2121,13 +2125,30 @@ msgstr "Inte implementerat än, tyvärr."
 msgid "Are you sure you want to delete %s?"
 msgstr "Är du säker på att du vill ta bort %s?"
 
-#: src/boot/e-table.c:323
+#: src/boot/e-table.c:39 src/users/profile.c:976
+msgid "Default"
+msgstr "Standard"
+
+#: src/boot/e-table.c:41
+msgid "Type"
+msgstr "Typ"
+
+#: src/boot/e-table.c:42
+msgid "Kernel Image"
+msgstr "Kärnavbildsfil"
+
+#: src/boot/e-table.c:333
 msgid "Linux"
 msgstr "Linux"
 
-#: src/boot/e-table.c:327
+#: src/boot/e-table.c:337
 msgid "Other"
 msgstr "Annat"
+
+#: src/boot/e-table.c:347
+#, c-format
+msgid "%s (default)"
+msgstr "%s (standard)"
 
 #: src/boot/main.c:93
 msgid "Boot Manager Settings - Ximian Setup Tools"
@@ -2428,6 +2449,14 @@ msgstr ""
 msgid "New Shares Admin"
 msgstr "Administrera nya utdelningar"
 
+#: src/shares/tables.c:80
+msgid "Pattern"
+msgstr "Mönster"
+
+#: src/shares/tables.c:81
+msgid "Write"
+msgstr "Skriv"
+
 #: src/shares/validate.c:164
 msgid ""
 "Failed to create the path you requested:\n"
@@ -2520,7 +2549,7 @@ msgstr ""
 "Du måste ange den lokala monteringspunkten, d.v.s. en\n"
 "katalog där importen kommer att monteras."
 
-#: src/time/main.c:367
+#: src/time/main.c:384
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -2528,13 +2557,45 @@ msgstr ""
 "Du har inte NTP-stöd installerat. Installera NTP-stöd på systemet\n"
 "för att möjliggöra serversynkronisering."
 
-#: src/time/main.c:368
+#: src/time/main.c:385
 msgid "NTP support missing."
 msgstr "Stöd för NTP saknas."
 
-#: src/time/main.c:655
+#: src/time/main.c:618
 msgid "Time and Date Settings"
 msgstr "Inställningar för tid och datum"
+
+#: src/users/callbacks.c:88
+msgid "Can't create new user. Check your profile settings."
+msgstr "Kan inte skapa ny användare. Kontrollera dina profilinställningar."
+
+#: src/users/callbacks.c:97
+msgid "Can't create new user. Too many users probably."
+msgstr "Kan inte skapa ny användare. Troligtvis för många användare."
+
+#: src/users/e-table.c:44
+msgid "UID"
+msgstr "UID"
+
+#: src/users/e-table.c:45
+msgid "Home"
+msgstr "Hem"
+
+#: src/users/e-table.c:46
+msgid "Shell"
+msgstr "Skal"
+
+#: src/users/e-table.c:47 src/users/profile.c:63
+msgid "Comment"
+msgstr "Kommentar"
+
+#: src/users/e-table.c:48
+msgid "Group"
+msgstr "Grupp"
+
+#: src/users/e-table.c:49
+msgid "GID"
+msgstr "GID"
 
 #: src/users/main.c:95
 msgid "Show All"
@@ -2560,11 +2621,11 @@ msgstr "Användar-GID är"
 msgid "Users and Groups"
 msgstr "Användare och grupper"
 
-#: src/users/passwd.c:200
+#: src/users/passwd.c:202
 msgid "Passwords doesn't match."
 msgstr "Lösenorden stämmer inte överens."
 
-#: src/users/passwd.c:204
+#: src/users/passwd.c:206
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -2644,34 +2705,34 @@ msgstr "Var vänlig och ange ett giltigt gruppnamn, med endast små bokstäver."
 msgid "Group already exists."
 msgstr "Gruppen finns redan."
 
-#: src/users/user_group.c:781
+#: src/users/user_group.c:776
 #, c-format
 msgid "Password for User %s"
 msgstr "Lösenord för användaren %s"
 
-#: src/users/user_group.c:815
+#: src/users/user_group.c:810
 msgid "The root user must not be deleted."
 msgstr "Användaren root får inte tas bort."
 
-#: src/users/user_group.c:822
+#: src/users/user_group.c:817
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/user_group.c:845
+#: src/users/user_group.c:840
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/user_group.c:905
+#: src/users/user_group.c:900
 msgid "The root group must not be deleted."
 msgstr "Gruppen root får inte tas bort."
 
-#: src/users/user_group.c:912
+#: src/users/user_group.c:907
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/user_group.c:957
+#: src/users/user_group.c:952
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
@@ -3039,37 +3100,37 @@ msgstr "Lpr-baserad utskrift"
 msgid "Sear_ch"
 msgstr "S_ök"
 
-#: src/users/profile.c:510
+#: src/users/profile.c:62
+msgid "Profile"
+msgstr "Profil"
+
+#: src/users/profile.c:517
 msgid "Choose the file"
 msgstr "Välj fil"
 
-#: src/users/profile.c:622
+#: src/users/profile.c:629
 msgid "Profile Editor"
 msgstr "Profilredigerare"
 
-#: src/users/profile.c:822
+#: src/users/profile.c:829
 msgid "Profile with given name already exists."
 msgstr "En profil med det angivna namnet finns redan."
 
-#: src/users/profile.c:825
+#: src/users/profile.c:832
 msgid "Profile name must not be empty."
 msgstr "Profilnamn får inte vara tomt."
 
-#: src/users/profile.c:969
-msgid "Default"
-msgstr "Standard"
-
 #. name
-#: src/users/profile.c:970
+#: src/users/profile.c:977
 msgid "Default profile"
 msgstr "Standardprofil"
 
-#: src/users/profile.c:1286
+#: src/users/profile.c:1293
 msgid "Can't delete Default"
 msgstr "Kan inte ta bort Standard"
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1412
+#: src/users/profile.c:1419
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -3079,12 +3140,12 @@ msgstr ""
 "För tillfället stöder vi bara \"%s\"."
 
 #. give our dialog an OK button and title
-#: src/users/user-account-editor.c:98
+#: src/users/user-account-editor.c:101
 msgid "User Account Editor"
 msgstr "Redigerare för användarkonton"
 
-#: src/users/user_settings.c:323 src/users/user_settings.c:376
-#: src/users/user_settings.c:390
+#: src/users/user_settings.c:326 src/users/user_settings.c:379
+#: src/users/user_settings.c:393
 msgid "Identity"
 msgstr "Identitet"
 
@@ -3095,9 +3156,6 @@ msgstr "Import och export av kataloger"
 #: src/shares/shares.desktop.in.in.h:2
 msgid "Shares"
 msgstr "Utdelningar"
-
-#~ msgid "Days betweem warning and password expiration:"
-#~ msgstr "Antalet dagar mellan varning och utgång av lösenord:"
 
 #~ msgid "window1"
 #~ msgstr "window1"
@@ -3208,6 +3266,9 @@ msgstr "Utdelningar"
 
 #~ msgid "Copy Profile"
 #~ msgstr "Kopiera profil"
+
+#~ msgid "Days betweem warning and password expiration:"
+#~ msgstr "Antalet dagar mellan varning och utgång av lösenord:"
 
 #~ msgid ""
 #~ "Please set a valid main group name, with only lower-case letters,\n"
@@ -3325,9 +3386,6 @@ msgstr "Utdelningar"
 
 #~ msgid "Remember this import between boots"
 #~ msgstr "Kom ihåg denna import mellan uppstarter"
-
-#~ msgid "Comment"
-#~ msgstr "Kommentar"
 
 #~ msgid ""
 #~ "The directories in your machine may be made available to others through the "
