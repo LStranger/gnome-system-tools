@@ -31,8 +31,10 @@
 #include "xst-su.h"
 #include "xst-xml.h"
 
-#include <bonobo.h>
-#include <config-archiver/archiver-client.h>
+#ifdef XST_HAVE_ARCHIVER
+  #include <bonobo.h>
+  #include <config-archiver/archiver-client.h>
+#endif
 
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
@@ -89,7 +91,7 @@ static XstReportHookEntry common_report_hooks[] = {
 	{ NULL,               NULL,                       -1,                       FALSE,       NULL }
 };
 
-static gchar *location_id;    /* Location in which we are editing */
+static gchar *location_id = NULL;    /* Location in which we are editing */
 
 /* --- Report hook and signal callbacks --- */
 
@@ -909,7 +911,7 @@ xst_tool_run_get_directive_va (XstTool *tool, const gchar *report_sign, const gc
 	
 	if (tool->xml_document == NULL)
 		tool->xml_document = g_string_new ("");
-	
+
 	if (location_id == NULL)
 		report_progress (tool, report_sign? _(report_sign): NULL);
 
@@ -1015,6 +1017,9 @@ xst_tool_load (XstTool *tool)
 		tool->config = xst_tool_run_get_directive
 			(tool, _("Scanning your system configuration."), "get", NULL);
 	} else {
+#ifndef XST_HAVE_ARCHIVER
+		g_assert_not_reached ();
+#else	
 		CORBA_Environment ev;
 		ConfigArchiver_Archive archive;
 		ConfigArchiver_Location location;
@@ -1049,7 +1054,9 @@ xst_tool_load (XstTool *tool)
 		bonobo_object_release_unref (archive, NULL);
 
 		CORBA_exception_free (&ev);
+#endif	
 	}
+
 
 	if (tool->config)
 		gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_GUI]);
@@ -1070,10 +1077,12 @@ xst_tool_save_directive_callback (XstDirectiveEntry *entry)
 gboolean
 xst_tool_save (XstTool *tool)
 {
+#ifdef XST_HAVE_ARCHIVER
 	CORBA_Environment ev;
 	ConfigArchiver_Archive archive;
 	ConfigArchiver_Location location;
 	gchar *backend_id;
+#endif	
 
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);
@@ -1091,6 +1100,7 @@ xst_tool_save (XstTool *tool)
 	}
 #endif
 
+#ifdef XST_HAVE_ARCHIVER
 	CORBA_exception_init (&ev);
 
 	/* Archive data with the archiver */
@@ -1124,6 +1134,8 @@ xst_tool_save (XstTool *tool)
 
 	CORBA_exception_free (&ev);
 
+#endif
+	
 	if (location_id == NULL)
 		xst_tool_run_set_directive (tool, tool->config, _("Updating your system configuration."),
 					    "set", NULL);
@@ -1574,12 +1586,16 @@ try_show_usage_warning (void)
 void
 xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
+#ifdef XST_HAVE_ARCHIVER
 	CORBA_ORB orb;
+#endif	
 
 	struct poptOption xst_options[] =
 	{
+#ifdef XST_HAVE_ARCHIVER	
 		{ "location", '\0', POPT_ARG_STRING, &location_id, 0,
 		  N_("	Edit configuration in the location LOCATION."), N_("LOCATION") },
+#endif	
 		
 		{NULL, '\0', 0, NULL, 0}
 	};
@@ -1612,10 +1628,12 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 
 	glade_gnome_init ();
 
+#ifdef XST_HAVE_ARCHIVER	
 	orb = oaf_init (argc, argv);
 	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
 		g_critical ("Cannot initialize bonobo");
 	bonobo_activate ();
+#endif
 
 	if (geteuid () == 0) {
 		root_access = ROOT_ACCESS_REAL;
