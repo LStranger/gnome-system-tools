@@ -30,68 +30,34 @@
 
 typedef struct _XstNetworkInterfaceDescription XstNetworkInterfaceDescription;
 
-struct XstNetworkInterfaceDescription {
+struct _XstNetworkInterfaceDescription {
 	const gchar * description;
 	XstConnectionType type;
 	const gchar * icon;
 	const gchar * name;
-}
+};
 
-static const XstNetworkInterfaceDescription xst_interfaces [] = {
-	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "networking.png",  "eth"   },
+static const XstNetworkInterfaceDescription xst_iface_desc [] = {
+	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "networking.png",  "other_type"},
+	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth"   },
 	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "networking.png",  "wvlan" },
-	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xmp",      "ppp"   },
-	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"    },
+	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp"   },
 	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "networking.png",  "plip"  },
-	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "networking.png",  NULL},
+	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"    },
 	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "networking.png",  NULL},
+	{ NULL, XST_CONNECTION_UNKNOWN, NULL, NULL}
 };
-
-#if 0
-	typedef struct {
-		gchar *name;
-		XstConnectionType type;
-	} NameType;
-
-	NameType table[] = {
-		{ "eth", CONNECTION_ETH },
-		{ "wvlan", CONNECTION_WVLAN },
-		{ "ppp", CONNECTION_PPP },
-		{ "lo", CONNECTION_LO },
-		{ "plip", CONNECTION_PLIP },
-		{ NULL, CONNECTION_OTHER }
-	};
-
-
-ConnectionType xst_net_interfaces_types[] = {
-	CONNECTION_ETH,
-	CONNECTION_WVLAN,
-	CONNECTION_PPP,
-	CONNECTION_LO,
-	CONNECTION_PLIP,
-	CONNECTION_OTHER,
-	CONNECTION_UNKNOWN
-};
-gchar *icons [CONNECTION_LAST] = {
-	"networking.png",
-	"16_ethernet.xpm",
-	"gnome-laptop.png",
-	"16_ppp.xpm",
-	"networking.png",
-	"networking.png"
-};
-#endif
 
 
 /* sigh more libglade callbacks */
-static void on_status_enabled_toggled (GtkWidget *w, Connection *cxn);
-static void on_connection_ok_clicked (GtkWidget *w, Connection *cxn);
-static void on_connection_cancel_clicked (GtkWidget *w, Connection *cxn);
-static void on_connection_config_dialog_destroy (GtkWidget *w, Connection *cxn);
-static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Connection *cxn);
-static void on_connection_modified (GtkWidget *w, Connection *cxn);
-static void on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn);
-static void on_ppp_peerdns_toggled (GtkWidget *w, Connection *cxn);
+static void on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn);
+static void on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn);
+static void on_connection_cancel_clicked (GtkWidget *w, XstConnection *cxn);
+static void on_connection_config_dialog_destroy (GtkWidget *w, XstConnection *cxn);
+static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, XstConnection *cxn);
+static void on_connection_modified (GtkWidget *w, XstConnection *cxn);
+static void on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn);
+static void on_ppp_peerdns_toggled (GtkWidget *w, XstConnection *cxn);
 
 #define W(s) my_get_widget (cxn->xml, (s))
 
@@ -103,8 +69,8 @@ static void on_ppp_peerdns_toggled (GtkWidget *w, Connection *cxn);
 #define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), !cxn->xx)
 	
 
-static GdkPixmap *mini_pm[CONNECTION_LAST];
-static GdkBitmap *mini_mask[CONNECTION_LAST];
+static GdkPixmap *mini_pm[XST_CONNECTION_LAST];
+static GdkBitmap *mini_mask[XST_CONNECTION_LAST];
 
 static GdkPixmap *active_pm[2];
 static GdkBitmap *active_mask[2];
@@ -253,10 +219,6 @@ connection_xml_wvsection_search (xmlNode *node, gchar *section_name, gchar *type
 			break;
 	}
 
-	if (!node)
-		g_warning ("connection_xml_wvsection_search: section %s type %s not found.",
-				 section_name, type);
-	
 	return node;
 }
 
@@ -444,7 +406,7 @@ connection_config_type_to_str (IPConfigType type)
 }
 
 static void
-connection_set_modified (Connection *cxn, gboolean state)
+connection_set_modified (XstConnection *cxn, gboolean state)
 {
 	if (cxn->frozen || !xst_tool_get_access (tool))
 		return;
@@ -468,7 +430,7 @@ load_icon (const gchar *file, GdkPixmap **pixmap, GdkBitmap **mask)
 	}
 	g_free (path);
 	
-	pb2 = gdk_pixbuf_scale_simple (pb, 24, 24, GDK_INTERP_BILINEAR);
+	pb2 = gdk_pixbuf_scale_simple (pb, 16, 16, GDK_INTERP_BILINEAR);
 	gdk_pixbuf_unref (pb);
 	
 	gdk_pixbuf_render_pixmap_and_mask (pb2, pixmap, mask, 127);
@@ -480,19 +442,17 @@ connection_init_icons (void)
 {
 	XstConnectionType i;
 
-	for (i = CONNECTION_OTHER; i < CONNECTION_LAST; i++)
-		load_icon (icons[i], &mini_pm[i], &mini_mask[i]);
+	for (i = XST_CONNECTION_OTHER; i < XST_CONNECTION_LAST; i++)
+		load_icon (xst_iface_desc[i].icon, &mini_pm[i], &mini_mask[i]);
 
 	load_icon ("gnome-light-off.png" /* "connection-inactive.xpm" */,
-                   
 		   &active_pm[0], &active_mask[0]);
 	load_icon ("gnome-light-on.png" /*"connection-active.xpm" */,
-		   
 		   &active_pm[1], &active_mask[1]);
 }
 
 static void
-update_row (Connection *cxn)
+update_row (XstConnection *cxn)
 {
 	GtkWidget *clist;
 	int row;
@@ -516,7 +476,7 @@ update_row (Connection *cxn)
 }
 
 static void
-add_connection_to_list (Connection *cxn, gpointer null)
+add_connection_to_list (XstConnection *cxn, gpointer null)
 {
 	GtkWidget *clist;
 	int row;
@@ -525,6 +485,10 @@ add_connection_to_list (Connection *cxn, gpointer null)
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 
 	row = gtk_clist_append (GTK_CLIST (clist), text);
+/*	gtk_clist_set_shift (GTK_CLIST (clist), row, 0, 0, 0);
+	gtk_clist_set_shift (GTK_CLIST (clist), row, 1, 0, 0);
+	gtk_clist_set_shift (GTK_CLIST (clist), row, 2, 4, 0);
+	gtk_clist_set_row_height (GTK_CLIST (clist), 24);*/
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
 
 	update_row (cxn);
@@ -541,11 +505,11 @@ connection_description_from_type (XstConnectionType type)
 {
 	gint i;
 
-	for (i = 0; types[i] != CONNECTION_UNKNOWN; i++)
-		if (type == types[i])
+	for (i = 0; xst_iface_desc[i].type != XST_CONNECTION_UNKNOWN; i++)
+		if (type == xst_iface_desc[i].type)
 			break;
 
-	return g_strdup (descriptions[i]);
+	return g_strdup (xst_iface_desc[i].description);
 }
 
 extern gchar *
@@ -555,7 +519,7 @@ connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection)
 }
 
 static void
-connection_get_ppp_from_node (xmlNode *node, Connection *cxn)
+connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 {
 	cxn->wvsection = connection_xml_get_str (node, "wvsection");
 	if (cxn->wvsection) {
@@ -584,10 +548,10 @@ connection_get_ppp_from_node (xmlNode *node, Connection *cxn)
 	cxn->ppp_options = connection_xml_get_str (node, "ppp_options");
 }
 
-Connection *
+XstConnection *
 connection_new_from_type_add (XstConnectionType type, xmlNode *root)
 {
-	Connection *cxn;
+	XstConnection *cxn;
 	
 	cxn = connection_new_from_type (type, root);
 	add_connection_to_list (cxn, NULL);
@@ -595,12 +559,12 @@ connection_new_from_type_add (XstConnectionType type, xmlNode *root)
 	return cxn;
 }
 
-Connection *
+XstConnection *
 connection_new_from_type (XstConnectionType type, xmlNode *root)
 {
-	Connection *cxn;
+	XstConnection *cxn;
 
-	cxn = g_new0 (Connection, 1);
+	cxn = g_new0 (XstConnection, 1);
 	cxn->type = type;
 	
 	/* set up some defaults */
@@ -611,22 +575,22 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	
 #warning FIXME: figure out a new device correctly
 	switch (cxn->type) {
-	case CONNECTION_ETH:
+	case XST_CONNECTION_ETH:
 		cxn->dev = g_strdup ("eth0");
 		break;
-	case CONNECTION_WVLAN:
+	case XST_CONNECTION_WVLAN:
 		cxn->dev = g_strdup ("wvlan0");
 		break;
-	case CONNECTION_PPP:
+	case XST_CONNECTION_PPP:
 		cxn->user = TRUE;
 		cxn->peerdns = TRUE;
 		cxn->autoboot = FALSE;
 		cxn->dev = connection_dev_get_next (root, "ppp");
 		break;
-	case CONNECTION_LO:
+	case XST_CONNECTION_LO:
 		cxn->dev = g_strdup ("lo");
 		break;
-	case CONNECTION_PLIP:
+	case XST_CONNECTION_PLIP:
 		cxn->autoboot = FALSE;
 		cxn->dev = g_strdup ("plip0");
 		break;
@@ -640,10 +604,10 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	return cxn;
 }
 
-Connection *
+XstConnection *
 connection_new_from_node (xmlNode *node)
 {
-	Connection *cxn;
+	XstConnection *cxn;
 	char *s = NULL;
 
 	s = connection_xml_get_str (node, "dev");
@@ -653,7 +617,7 @@ connection_new_from_node (xmlNode *node)
 		g_free (cxn->dev);
 		cxn->dev = s;
 	} else
-		cxn = connection_new_from_type_add (CONNECTION_OTHER, node->parent);
+		cxn = connection_new_from_type_add (XST_CONNECTION_OTHER, node->parent);
 
 	cxn->node = node;
 	
@@ -685,7 +649,7 @@ connection_new_from_node (xmlNode *node)
 	}
 
 	/* PPP stuff */
-	if (cxn->type == CONNECTION_PPP)
+	if (cxn->type == XST_CONNECTION_PPP)
 		connection_get_ppp_from_node (cxn->node, cxn);
 
 	update_row (cxn);
@@ -693,20 +657,20 @@ connection_new_from_node (xmlNode *node)
 	return cxn;
 }
 
-Connection *
+XstConnection *
 connection_new_from_dev_name (char *dev_name, xmlNode *root)
 {
 	int i;
 
-	for (i = 0; table[i].name; i++)
-		if (strstr (dev_name, table[i].name) == dev_name)
+	for (i = 0; xst_iface_desc[i].name; i++)
+		if (strstr (dev_name, xst_iface_desc[i].name) == dev_name)
 			break;
 
-	return connection_new_from_type_add (table[i].type, root);
+	return connection_new_from_type_add (xst_iface_desc[i].type, root);
 }
 
 void
-connection_free (Connection *cxn)
+connection_free (XstConnection *cxn)
 {
 	if (cxn->node)
 		xst_xml_element_destroy (cxn->node);
@@ -733,7 +697,7 @@ connection_free (Connection *cxn)
 }
 
 static void
-update_status (Connection *cxn)
+update_status (XstConnection *cxn)
 {
 	gnome_pixmap_load_file (GNOME_PIXMAP (W ("status_icon")),
 				GTK_TOGGLE_BUTTON (W ("status_enabled"))->active
@@ -742,14 +706,14 @@ update_status (Connection *cxn)
 }
 
 static void
-on_status_enabled_toggled (GtkWidget *w, Connection *cxn)
+on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn)
 {
 	connection_set_modified (cxn, TRUE);
 	update_status (cxn);
 }
 
 static void
-empty_general (Connection *cxn)
+empty_general (XstConnection *cxn)
 {
 	GET_STR ("connection_", name);
 	GET_BOOL ("status_", autoboot);
@@ -758,7 +722,7 @@ empty_general (Connection *cxn)
 }
 
 static void
-empty_ip (Connection *cxn)
+empty_ip (XstConnection *cxn)
 {
 	cxn->ip_config = cxn->tmp_ip_config;
 	GET_BOOL ("status_", dhcp_dns);
@@ -770,12 +734,12 @@ empty_ip (Connection *cxn)
 }
 
 static void
-empty_wvlan (Connection *cxn)
+empty_wvlan (XstConnection *cxn)
 {
 }
 
 static void
-empty_ppp (Connection *cxn)
+empty_ppp (XstConnection *cxn)
 {
 	GET_STR ("ppp_", phone_number);
 	GET_STR ("ppp_", login);
@@ -784,7 +748,7 @@ empty_ppp (Connection *cxn)
 }
 
 static void
-empty_ppp_adv (Connection *cxn)
+empty_ppp_adv (XstConnection *cxn)
 {
 	GET_STR ("ppp_", serial_port);
 	GET_BOOL ("ppp_", stupid);
@@ -796,16 +760,16 @@ empty_ppp_adv (Connection *cxn)
 }
 
 static void
-connection_config_save (Connection *cxn)
+connection_config_save (XstConnection *cxn)
 {
 	empty_general (cxn);
 
 	switch (cxn->type) {
-	case CONNECTION_WVLAN:
+	case XST_CONNECTION_WVLAN:
 		empty_wvlan (cxn);
 		empty_ip (cxn);
 		break;
-	case CONNECTION_PPP:
+	case XST_CONNECTION_PPP:
 		empty_ppp (cxn);
 		empty_ppp_adv (cxn);
 		break;
@@ -819,20 +783,20 @@ connection_config_save (Connection *cxn)
 }
 
 static void
-on_connection_ok_clicked (GtkWidget *w, Connection *cxn)
+on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
 {
 	connection_config_save (cxn);
 	gtk_widget_destroy (cxn->window);
 }
 
 static void
-on_connection_cancel_clicked (GtkWidget *wi, Connection *cxn)
+on_connection_cancel_clicked (GtkWidget *wi, XstConnection *cxn)
 {
 	gtk_widget_destroy (cxn->window);
 }
 
 static void
-on_connection_config_dialog_destroy (GtkWidget *w, Connection *cxn)
+on_connection_config_dialog_destroy (GtkWidget *w, XstConnection *cxn)
 {
 	gtk_object_unref (GTK_OBJECT (cxn->xml));
 	cxn->xml = NULL;
@@ -841,25 +805,25 @@ on_connection_config_dialog_destroy (GtkWidget *w, Connection *cxn)
 }
 
 static gint
-on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Connection *cxn)
+on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, XstConnection *cxn)
 {
 	return FALSE;
 }
 
 static void
-on_connection_modified (GtkWidget *w, Connection *cxn)
+on_connection_modified (GtkWidget *w, XstConnection *cxn)
 {
 	connection_set_modified (cxn, TRUE);
 }
 
 static void
-on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn)
+on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn)
 {
 #warning FIXME: implement on_wvlan_adhoc_toggled
 }
 
 static void
-on_ppp_peerdns_toggled (GtkWidget *w, Connection *cxn)
+on_ppp_peerdns_toggled (GtkWidget *w, XstConnection *cxn)
 {
 	gboolean active;
 
@@ -872,7 +836,7 @@ on_ppp_peerdns_toggled (GtkWidget *w, Connection *cxn)
 }
 
 static void
-fill_general (Connection *cxn)
+fill_general (XstConnection *cxn)
 {
 	gtk_label_set_text (GTK_LABEL (W ("connection_dev")), cxn->dev);
 	SET_STR ("connection_", name);
@@ -883,7 +847,7 @@ fill_general (Connection *cxn)
 }
 
 static void
-update_ip_config (Connection *cxn)
+update_ip_config (XstConnection *cxn)
 {
 	IPConfigType ip;
 
@@ -897,7 +861,7 @@ update_ip_config (Connection *cxn)
 static void
 ip_config_menu_cb (GtkWidget *w, gpointer data)
 {
-	Connection *cxn;
+	XstConnection *cxn;
 	IPConfigType ip;
 
 	cxn = gtk_object_get_user_data (GTK_OBJECT (w));
@@ -921,7 +885,7 @@ ip_config_menu_cb (GtkWidget *w, gpointer data)
 }
 
 static void
-fill_ip (Connection *cxn)
+fill_ip (XstConnection *cxn)
 {
 	GtkWidget *menu, *menuitem, *omenu;
 	IPConfigType i;
@@ -956,13 +920,13 @@ fill_ip (Connection *cxn)
 }
 
 static void
-fill_wvlan (Connection *cxn)
+fill_wvlan (XstConnection *cxn)
 {
 
 }
 
 static void
-fill_ppp (Connection *cxn)
+fill_ppp (XstConnection *cxn)
 {
 	SET_STR ("ppp_", phone_number);
 	SET_STR ("ppp_", login);
@@ -971,7 +935,7 @@ fill_ppp (Connection *cxn)
 }
 
 static void
-fill_ppp_adv (Connection *cxn)
+fill_ppp_adv (XstConnection *cxn)
 {
 	gnome_entry_load_history (GNOME_ENTRY (W ("ppp_serial_port_g")));
 	SET_STR ("ppp_", serial_port);
@@ -985,7 +949,7 @@ fill_ppp_adv (Connection *cxn)
 }
 
 static void
-hookup_callbacks (Connection *cxn)
+hookup_callbacks (XstConnection *cxn)
 {
 	int i;
 	WidgetSignal signals[] = {
@@ -1005,7 +969,7 @@ hookup_callbacks (Connection *cxn)
 }
 
 void
-connection_configure (Connection *cxn)
+connection_configure (XstConnection *cxn)
 {
 	GtkWidget *nb;
 /*	GtkWidget *hb, *qm;*/
@@ -1042,7 +1006,7 @@ connection_configure (Connection *cxn)
 
 	/* would like to do this as a switch */
 	nb = W ("connection_nb");
-	if (cxn->type == CONNECTION_PPP) {
+	if (cxn->type == XST_CONNECTION_PPP) {
 		fill_ppp (cxn);
 		fill_ppp_adv (cxn);
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
@@ -1057,7 +1021,7 @@ connection_configure (Connection *cxn)
 											    W ("ppp_adv_vbox")));
 	}
        
-	if (cxn->type == CONNECTION_WVLAN)
+	if (cxn->type == XST_CONNECTION_WVLAN)
 		fill_wvlan (cxn);
 	else
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
@@ -1072,7 +1036,7 @@ connection_configure (Connection *cxn)
 }
 
 void
-connection_save_to_node (Connection *cxn, xmlNode *root)
+connection_save_to_node (XstConnection *cxn, xmlNode *root)
 {
 	gchar *s;
 	xmlNode *node;
@@ -1102,7 +1066,7 @@ connection_save_to_node (Connection *cxn, xmlNode *root)
 	g_free (s);
 
 	/* PPP stuff */
-	if (cxn->type == CONNECTION_PPP) {
+	if (cxn->type == XST_CONNECTION_PPP) {
 		if (!cxn->wvsection)
 			cxn->wvsection = connection_wvsection_name_generate (cxn->dev, root);
 		connection_xml_save_str_to_node (node, "wvsection", cxn->wvsection);

@@ -245,7 +245,7 @@ update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 void
 on_connection_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
 {
-	Connection *cxn;
+	XstConnection *cxn;
 	connection_row_selected = row;
 
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
@@ -268,7 +268,7 @@ void
 on_connection_configure_clicked (GtkWidget *w, gpointer null)
 {
 	GtkWidget *clist;
-	Connection *cxn;
+	XstConnection *cxn;
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
@@ -280,7 +280,7 @@ void
 on_connection_delete_clicked (GtkWidget *w, gpointer null)
 {
 	GtkWidget *clist, *d;
-	Connection *cxn;
+	XstConnection *cxn;
 	gint res;
 	gchar *txt;
 
@@ -303,10 +303,10 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 void
 on_connection_add_clicked (GtkWidget *w, gpointer null)
 {
-	Connection *cxn;
+	XstConnection *cxn;
 	GtkWidget *d, *ppp, *eth, *wvlan, *plip, *clist;
 	gint res, row;
-	ConnectionType cxn_type;
+	XstConnectionType cxn_type;
 	
 	d = xst_dialog_get_widget (tool->main_dialog, "connection_type_dialog");
 
@@ -324,15 +324,15 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 		return;
 
 	if (GTK_TOGGLE_BUTTON (ppp)->active)
-		cxn_type = CONNECTION_PPP;
+		cxn_type = XST_CONNECTION_PPP;
 	else if (GTK_TOGGLE_BUTTON (eth)->active)
-		cxn_type = CONNECTION_ETH;
+		cxn_type = XST_CONNECTION_ETH;
 	else if (GTK_TOGGLE_BUTTON (wvlan)->active)
-		cxn_type = CONNECTION_WVLAN;
+		cxn_type = XST_CONNECTION_WVLAN;
 	else if (GTK_TOGGLE_BUTTON (plip)->active)
-		cxn_type = CONNECTION_PLIP;
+		cxn_type = XST_CONNECTION_PLIP;
 	else
-		cxn_type = CONNECTION_UNKNOWN;
+		cxn_type = XST_CONNECTION_UNKNOWN;
 
 	cxn = connection_new_from_type_add (cxn_type, xst_xml_doc_get_root (tool->config));
 	connection_save_to_node (cxn, xst_xml_doc_get_root (tool->config));

@@ -47,7 +47,7 @@ typedef struct {
 	GladeXML *xml;
 	xmlNode *node;
 	
-	ConnectionType type;
+	XstConnectionType type;
 
 	gboolean modified;
 	gboolean frozen;
@@ -92,20 +92,20 @@ typedef struct {
 	gchar *dns1;
 	gchar *dns2;
 	gchar *ppp_options;
-} Connection;
+} XstConnection;
 
 extern void connection_init_icons (void);
-extern Connection *connection_new_from_node (xmlNode *node);
-extern Connection *connection_new_from_dev_name (char *dev_name, xmlNode *root);
-extern Connection *connection_new_from_type (ConnectionType type, xmlNode *root);
-extern Connection *connection_new_from_type_add (ConnectionType type, xmlNode *root);
+extern XstConnection *connection_new_from_node (xmlNode *node);
+extern XstConnection *connection_new_from_dev_name (char *dev_name, xmlNode *root);
+extern XstConnection *connection_new_from_type (XstConnectionType type, xmlNode *root);
+extern XstConnection *connection_new_from_type_add (XstConnectionType type, xmlNode *root);
 extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection);
 extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
 
-extern void connection_free (Connection *);
+extern void connection_free (XstConnection *);
 
-extern void connection_configure (Connection *cxn);
+extern void connection_configure (XstConnection *cxn);
 
-extern void connection_save_to_node (Connection *cxn, xmlNode *node);
+extern void connection_save_to_node (XstConnection *cxn, xmlNode *node);
 
 #endif /* CONNECTION_H */

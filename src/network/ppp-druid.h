@@ -30,7 +30,7 @@
 typedef struct {
 	GladeXML *glade;
 	XstTool *tool;
-	Connection *cxn;
+	XstConnection *cxn;
 
 	GtkWidget *win;
 	GnomeDruid *druid;

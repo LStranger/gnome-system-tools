@@ -87,12 +87,12 @@ static gchar *ppp_druid_get_serial_port (PppDruid *ppp)
 static void ppp_druid_save (PppDruid *ppp)
 {
 	xmlNode *root;
-	Connection *cxn;
+	XstConnection *cxn;
 	
 	g_return_if_fail (ppp != NULL);
 
 	root = xst_xml_doc_get_root (ppp->tool->config);
-	cxn = connection_new_from_type (CONNECTION_PPP, root);
+	cxn = connection_new_from_type (XST_CONNECTION_PPP, root);
 	ppp->cxn = cxn;
 
 	cxn->serial_port = ppp_druid_get_serial_port (ppp);
