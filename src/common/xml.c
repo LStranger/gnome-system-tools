@@ -331,7 +331,7 @@ xml_element_get_bool_attr (xmlNodePtr node, char *attr)
 	if (s)
 	{
 		if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
-		xmlFree (s);
+		g_free (s);
 	}
 
 	return (r);
