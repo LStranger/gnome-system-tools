@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-01 14:48+0200\n"
-"PO-Revision-Date: 2004-05-01 17:43+0200\n"
+"POT-Creation-Date: 2004-05-04 03:51+0200\n"
+"PO-Revision-Date: 2004-05-04 12:24+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -229,7 +229,7 @@ msgid "Finished"
 msgstr "Dokončeno"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:52
-#: src/network/connection.c:1870
+#: src/network/connection.c:1873
 msgid "Manual"
 msgstr "Ruční"
 
@@ -519,34 +519,34 @@ msgstr "Povolit kontrolu nad připojením všem _uživatelům"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:30 src/network/connection.c:1872
-msgid "BOOTP"
-msgstr "BOOTP"
+#: interfaces/network.glade.in.h:30 src/network/connection.c:1875
+msgid "Automatic (BOOTP)"
+msgstr "Automatické (BOOTP)"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:31 src/network/connection.c:1874
+msgid "Automatic (DHCP)"
+msgstr "Automatické (DHCP)"
+
+#: interfaces/network.glade.in.h:32
 msgid "Co_nfiguration:"
 msgstr "Nasta_vení:"
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "Typ připojení"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Připojení"
 
 #. set window titles
-#: interfaces/network.glade.in.h:34 src/network/network-druid.c:63
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "Vytvářím nové připojení k síti"
 
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:36
 msgid "Current network profile:"
 msgstr "Aktuální síťový profil:"
-
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1871
-msgid "DHCP"
-msgstr "DHCP"
 
 #: interfaces/network.glade.in.h:37
 msgid "DNS"
@@ -1490,24 +1490,24 @@ msgstr "Použít je nyní?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Chyba při připojení signálu `%s' ve widgetu `%s'"
 
-#: src/common/gst-tool.c:796
+#: src/common/gst-tool.c:800
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Vynechává se direktiva %s..."
 
-#: src/common/gst-tool.c:923
+#: src/common/gst-tool.c:927
 msgid "Skipping actual save..."
 msgstr "Vynechává se skutečné uložení..."
 
-#: src/common/gst-tool.c:997
+#: src/common/gst-tool.c:1001
 msgid "The configuration could not be loaded"
 msgstr "Nastavení nemohlo být načteno"
 
-#: src/common/gst-tool.c:998
+#: src/common/gst-tool.c:1002
 msgid "There was an error running the backend script"
 msgstr "Při spuštění podpůrného skriptu došlo k chybě"
 
-#: src/common/gst-tool.c:1480
+#: src/common/gst-tool.c:1484
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1516,7 +1516,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Vítejte v předběžné verzi %s "
 "Systémových nástrojů GNOME</span>"
 
-#: src/common/gst-tool.c:1483
+#: src/common/gst-tool.c:1487
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1530,15 +1530,15 @@ msgstr ""
 "úsilí a zdravý rozum. Byli jste varováni. Děkujeme vám za vyzkoušení této "
 "předběžné verze Systémových nástrojů GNOME!"
 
-#: src/common/gst-tool.c:1504
+#: src/common/gst-tool.c:1508
 msgid "Warning"
 msgstr "Varování"
 
-#: src/common/gst-tool.c:1524
+#: src/common/gst-tool.c:1528
 msgid "Don't show me this again"
 msgstr "Nezobrazovat příště"
 
-#: src/common/gst-tool.c:1598
+#: src/common/gst-tool.c:1602
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
@@ -1733,11 +1733,11 @@ msgstr "/Nasta_vit"
 msgid "Status"
 msgstr "Stav"
 
-#: src/network/connection.c:1721 src/network/connection.c:1731
+#: src/network/connection.c:1724 src/network/connection.c:1734
 msgid "Error in IP address"
 msgstr "Chyba v IP adrese"
 
-#: src/network/connection.c:1722
+#: src/network/connection.c:1725
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1745,7 +1745,7 @@ msgstr ""
 "IP adresa nebo síťová maska pro rozhraní byla ponechána prázdná. Pokračujte "
 "prosím zadáním platných IP adres do těchto polí."
 
-#: src/network/connection.c:1732
+#: src/network/connection.c:1735
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1753,11 +1753,11 @@ msgstr ""
 "IP adresa nebo vzdálená adresa pro rozhraní byla ponechána prázdná. "
 "Pokračujte prosím zadáním platných IP adres do těchto polí."
 
-#: src/network/connection.c:1740
+#: src/network/connection.c:1743
 msgid "Error in DNS servers"
 msgstr "Chyba v serverech DNS"
 
-#: src/network/connection.c:1741
+#: src/network/connection.c:1744
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1767,11 +1767,11 @@ msgstr ""
 "primární server DNS jste ponechali prázdnou. Zadejte prosím IP adresu pro "
 "primární DNS server nebo odškrtněte volbu pro ruční nastavení DNS."
 
-#: src/network/connection.c:1748
+#: src/network/connection.c:1751
 msgid "Invalid modem device"
 msgstr "Neplatné zařízení modemu"
 
-#: src/network/connection.c:1749
+#: src/network/connection.c:1752
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1779,11 +1779,11 @@ msgstr ""
 "Zařízení modemu, které bude připojení používat, bylo ponecháno prázdné. "
 "Pokračujte prosím zadáním zařízení nebo stisknutím \"autodetekovat\"."
 
-#: src/network/connection.c:1754
+#: src/network/connection.c:1757
 msgid "Invalid phone number"
 msgstr "Neplatné telefonní číslo"
 
-#: src/network/connection.c:1755
+#: src/network/connection.c:1758
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1791,20 +1791,20 @@ msgstr ""
 "Telefonní číslo, které bude připojení používat, bylo ponecháno prázdné. "
 "Pokračujte prosím zadáním platného telefonního čísla."
 
-#: src/network/connection.c:2123
+#: src/network/connection.c:2126
 msgid "Nonexisting interface"
 msgstr "Neexistující rozhraní"
 
-#: src/network/connection.c:2124
+#: src/network/connection.c:2127
 #, c-format
 msgid "The interface \"%s\" doesn't exist."
 msgstr "Rozhraní \"%s\" neexistuje."
 
-#: src/network/connection.c:2127
+#: src/network/connection.c:2130
 msgid "Invalid interface"
 msgstr "Neplatné rozhraní"
 
-#: src/network/connection.c:2128
+#: src/network/connection.c:2131
 msgid "The loopback interface cannot be configured."
 msgstr "Rozhraní loopback nemůže být nastavováno."
 
@@ -2267,7 +2267,9 @@ msgstr "ID uživatele root by nemělo být měněno"
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
-msgstr "Několik uživatelů může sdílet jedno ID uživatele, ale není to obvyklé a může to způsobit bezpečnostní problémy"
+msgstr ""
+"Několik uživatelů může sdílet jedno ID uživatele, ale není to obvyklé a může "
+"to způsobit bezpečnostní problémy"
 
 #: src/users/user-settings.c:485
 #, c-format
