@@ -1950,6 +1950,11 @@
 	      <class>GtkCheckButton</class>
 	      <name>status_user</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>toggled</name>
+		<handler>on_connection_modified</handler>
+		<last_modification_time>Sun, 15 Jul 2001 06:07:25 GMT</last_modification_time>
+	      </signal>
 	      <label>Allow activation control for all _users</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
@@ -2121,6 +2126,11 @@
 	    <class>GtkOptionMenu</class>
 	    <name>connection_config</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_connection_modified</handler>
+	      <last_modification_time>Sun, 15 Jul 2001 06:07:57 GMT</last_modification_time>
+	    </signal>
 	    <items>Manual
 DHCP
 BOOTP
@@ -2958,6 +2968,11 @@ BOOTP
 		<class>GtkCheckButton</class>
 		<name>ppp_persist</name>
 		<can_focus>True</can_focus>
+		<signal>
+		  <name>toggled</name>
+		  <handler>on_connection_modified</handler>
+		  <last_modification_time>Sun, 15 Jul 2001 06:08:51 GMT</last_modification_time>
+		</signal>
 		<label>_Retry if the connection drops or fails to start</label>
 		<active>False</active>
 		<draw_indicator>True</draw_indicator>
@@ -3235,6 +3250,11 @@ BOOTP
 		<class>GtkEntry</class>
 		<name>ppp_dns1</name>
 		<can_focus>True</can_focus>
+		<signal>
+		  <name>changed</name>
+		  <handler>on_connection_modified</handler>
+		  <last_modification_time>Sun, 15 Jul 2001 06:10:16 GMT</last_modification_time>
+		</signal>
 		<editable>True</editable>
 		<text_visible>True</text_visible>
 		<text_max_length>0</text_max_length>
@@ -3259,6 +3279,11 @@ BOOTP
 		<class>GtkEntry</class>
 		<name>ppp_dns2</name>
 		<can_focus>True</can_focus>
+		<signal>
+		  <name>changed</name>
+		  <handler>on_connection_modified</handler>
+		  <last_modification_time>Sun, 15 Jul 2001 06:10:29 GMT</last_modification_time>
+		</signal>
 		<editable>True</editable>
 		<text_visible>True</text_visible>
 		<text_max_length>0</text_max_length>
@@ -3288,6 +3313,11 @@ BOOTP
 		  <handler>on_ppp_peerdns_toggled</handler>
 		  <last_modification_time>Sat, 24 Feb 2001 19:33:57 GMT</last_modification_time>
 		</signal>
+		<signal>
+		  <name>toggled</name>
+		  <handler>on_connection_modified</handler>
+		  <last_modification_time>Sun, 15 Jul 2001 06:09:55 GMT</last_modification_time>
+		</signal>
 		<label>Set _DNS servers manually</label>
 		<active>False</active>
 		<draw_indicator>True</draw_indicator>
@@ -3313,6 +3343,11 @@ BOOTP
 	    <class>GtkCheckButton</class>
 	    <name>ppp_stupid</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_connection_modified</handler>
+	      <last_modification_time>Sun, 15 Jul 2001 06:09:11 GMT</last_modification_time>
+	    </signal>
 	    <label>_Start PPP as soon as modem connects</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
@@ -3336,6 +3371,11 @@ BOOTP
 	    <class>GtkCheckButton</class>
 	    <name>ppp_set_default_gw</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_connection_modified</handler>
+	      <last_modification_time>Sun, 15 Jul 2001 06:09:28 GMT</last_modification_time>
+	    </signal>
 	    <label>Set as default _route</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
@@ -3359,6 +3399,11 @@ BOOTP
 	    <class>GtkEntry</class>
 	    <name>ppp_ppp_options</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>on_connection_modified</handler>
+	      <last_modification_time>Sun, 15 Jul 2001 06:10:44 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -3627,6 +3672,11 @@ BOOTP
 	  <class>GtkCheckButton</class>
 	  <name>ptp_remote_is_gateway</name>
 	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>toggled</name>
+	    <handler>on_connection_modified</handler>
+	    <last_modification_time>Sun, 15 Jul 2001 06:11:04 GMT</last_modification_time>
+	  </signal>
 	  <label>_Use remote IP as default gateway</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
