@@ -67,5 +67,8 @@ xmlNodePtr basic_user_find_nth (xmlNodePtr parent, int n);
 int basic_group_count (xmlNodePtr parent);
 xmlNodePtr basic_group_find_nth (xmlNodePtr parent, int n);
 
+void adv_user_settings (gboolean show);
+void adv_user_settings_new (void);
+
 
 #endif /* USER_GROUP_H */

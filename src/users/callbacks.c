@@ -73,6 +73,7 @@ on_complexity_clicked (GtkButton *button, gpointer user_data)
 		tool_set_complexity (TOOL_COMPLEXITY_BASIC);
 		e_table_state (FALSE);
 	}
+	user_actions_set_sensitive (FALSE);
 }
 
 /* Main window callbacks */
@@ -115,14 +116,14 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	{
 		id = atoi (tmp_list->data);
 		tmp_list = tmp_list->next;
-		
+
 		if (id == gid)
 		{
 			found = TRUE;
 			break;
 		}
 	}
-	
+
 	if (!found)
 		g_warning ("The GID for the main user's group was not found.");
 	else
@@ -132,17 +133,22 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
 		g_free (txt);
 	}
-	
+
 	comment = e_table_get_user ("comment");
 	w0 = tool_widget_get ("user_settings_comment");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	my_gtk_entry_set_text (w0, comment);
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+		adv_user_settings (TRUE);
 	
 	w0 = tool_widget_get ("user_settings_dialog");
 	txt = g_strdup_printf (_("Settings for User %s"), name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
-	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (0));
 	g_free (txt);
+
+	/* Add 0 to windows data refering that we are not making new user */
+	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (0));
 	gtk_widget_show (w0);
 }
 
@@ -183,6 +189,9 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	w0 = tool_widget_get ("user_settings_group");
 	user_fill_settings_group (GTK_COMBO (w0), comp);
 	my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+		adv_user_settings_new ();
 
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
@@ -334,6 +343,9 @@ user_settings_dialog_close (void)
 	w0 = tool_widget_get ("user_settings_group");
 	list = gtk_container_children (GTK_CONTAINER (w0));
 	g_list_free (list);
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+		adv_user_settings (FALSE);
 
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_object_remove_data (GTK_OBJECT (w0), "new");

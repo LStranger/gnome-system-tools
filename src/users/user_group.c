@@ -139,6 +139,18 @@ user_add (void)
 
 	e_table_add_user (new_user_name);
 	e_table_change_user_full ("login", new_user_name, "gid", gid);
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+	{
+		gchar *new_shell;
+
+		new_shell = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get
+						("user_settings_shell"))));
+
+		/* TODO Check if shell is valid */
+		if (strlen (new_shell) > 0)
+			e_table_change_user_full ("login", new_user_name, "shell", new_shell);
+	}
 	
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
@@ -190,7 +202,7 @@ user_update (void)
 
 		e_table_change_user ("login", new_login);
 	}
-	
+
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
 	comment = e_table_get_user ("comment");
@@ -202,7 +214,27 @@ user_update (void)
 	}
 	else if (strcmp (new_comment, comment))
 		e_table_change_user ("comment", new_comment);
-	
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+	{
+		gchar *shell, *new_shell;
+
+		shell = e_table_get_user ("shell");
+		new_shell = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get
+						("user_settings_shell"))));
+
+		/* TODO Check if shell is valid */
+		if (shell == NULL)
+		{
+			if (strlen (new_shell) > 0)
+				e_table_change_user ("shell", new_shell);
+		}
+		else if (strcmp (new_shell, shell))
+			e_table_change_user ("shell", new_shell);
+
+		g_free (shell);
+	}
+
 	/* Get selected group name */
 	
 	w0 = tool_widget_get ("user_settings_group");
@@ -824,5 +856,41 @@ basic_group_find_nth (xmlNodePtr parent, int n)
 	}
 
 	return node;
+}
+
+void
+adv_user_settings (gboolean show)
+{
+	GtkWidget *w0, *w1;
+
+	w0 = tool_widget_get ("user_settings_shell_label");
+	w1 = tool_widget_get ("user_settings_shell");
+
+	if (show)
+	{
+		gtk_widget_show (w0);
+
+		gtk_entry_set_text (GTK_ENTRY (w1), e_table_get_user ("shell"));
+		gtk_widget_show (w1);
+	}
+	else
+	{
+		gtk_widget_hide (w0);
+
+		gtk_entry_set_text (GTK_ENTRY (w1), "");
+		gtk_widget_hide (w1);
+	}
+}
+
+void
+adv_user_settings_new (void)
+{
+	GtkWidget *w0;
+
+	w0 = tool_widget_get ("user_settings_shell_label");
+	gtk_widget_show (w0);
+
+	w0 = tool_widget_get ("user_settings_shell");
+	gtk_widget_show (w0);
 }
 
