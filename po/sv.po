@@ -1,15 +1,16 @@
 # Swedish messages for GNOME System Tools.
-# Copyright (C) 2000, 2001, 2002, 2003 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
 # Christian Rose <menthos@menthos.com>, 2000, 2001, 2002, 2003.
-# Martin Norbäck <d95mback@dtek.chalmers.se>, 2000.
+# Martin Norbäck <d95mback@dtek.chalmers.se>, 2000, 2004.
 #
 # $Id$
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
-"POT-Creation-Date: 2003-11-01 23:17+0100\n"
-"PO-Revision-Date: 2003-11-01 23:18+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-03-25 18:39+0100\n"
+"PO-Revision-Date: 2004-03-25 18:39+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -49,10 +50,16 @@ msgid "Last GST version executed"
 msgstr "Senaste GST-version som körts"
 
 #: gnome-system-tools.schemas.in.h:8
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr ""
+"Föredraget startprogram som startadministrationsverktyget kommer att "
+"konfigurera"
+
+#: gnome-system-tools.schemas.in.h:9
 msgid "Remote hosts"
 msgstr "Fjärrvärdar"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:10
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -61,7 +68,7 @@ msgstr ""
 "läge. Det avancerade läget är tänkt att visa färre alternativ än det "
 "avancerade"
 
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:11
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
@@ -69,21 +76,32 @@ msgstr ""
 "GST kan utföra fjärrkonfiguration genom SSH. Aktivera detta alternativ för "
 "att använda denna funktion"
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:12
 msgid "The last GST version that this computer has run"
 msgstr "Den senaste GST-versionen som denna dator har kört"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:13
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr ""
+"Denna nyckel lagrar det startprogram som startadministrationsverktyget "
+"kommer att konfigurera om det finns fler än ett installerat, och om det inte "
+"är inställt eller giltigt kommer startadministrationsverktyget att fråga "
+"användaren"
+
+#: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
 msgstr "Huruvida verktygen ska använda fjärradministration eller inte"
 
-#: gnome-system-tools.schemas.in.h:13
+#: gnome-system-tools.schemas.in.h:15
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Huruvida användaradministrationsverktyget ska visa alla användare och "
 "grupper eller inte"
 
-#: gnome-system-tools.schemas.in.h:14
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Huruvida varningsdialogen ska visas eller inte"
 
@@ -165,9 +183,9 @@ msgstr "<span weight=\"bold\">Start av datorn</span>"
 msgid "Ask at boot"
 msgstr "Fråga vid uppstart"
 
-#: interfaces/boot.glade.in.h:20
-msgid "Boot Image Assistant"
-msgstr "Startavbildsassistent"
+#: interfaces/boot.glade.in.h:20 src/boot/main.c:73
+msgid "Boot Manager Settings"
+msgstr "Inställningar för starthanterare"
 
 #: interfaces/boot.glade.in.h:21
 msgid ""
@@ -187,11 +205,21 @@ msgstr "Klicka på \"Framåt\" för att fortsätta"
 msgid "Confirmation"
 msgstr "Bekräftelse"
 
-#: interfaces/boot.glade.in.h:24
+#. set window title
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
+#: src/boot/boot-druid.c:441
+msgid "Creating a new boot image"
+msgstr "Skapar en ny startavbild"
+
+#: interfaces/boot.glade.in.h:25
+msgid "Don't ask me again"
+msgstr "Fråga mig inte igen"
+
+#: interfaces/boot.glade.in.h:26
 msgid "Enable IDE SCSI emulation"
 msgstr "Använd SCSI-emulering för IDE"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:27
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -199,20 +227,12 @@ msgstr ""
 "Ange ett namn för startavbilden, och ange vilken typ av operativsystem det "
 "är."
 
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:40
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:43
 msgid "Finished"
 msgstr "Klart"
 
-#: interfaces/boot.glade.in.h:27
-msgid "Image Settings (Step 1 of 2)"
-msgstr "Avbildsinställningar (steg 1 av 2)"
-
-#: interfaces/boot.glade.in.h:28
-msgid "Image Settings (Step 2 of 2)"
-msgstr "Avbildsinställningar (steg 2 av 2)"
-
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1786
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
+#: src/network/connection.c:1858
 msgid "Manual"
 msgstr "Manuell"
 
@@ -225,29 +245,32 @@ msgid "Number of colors:"
 msgstr "Antal färger:"
 
 #: interfaces/boot.glade.in.h:32
-msgid "Other Operating System (Step 2 of 2)"
-msgstr "Annat operativsystem (steg 2 av 2)"
-
-#: interfaces/boot.glade.in.h:33
 msgid "Other parameters:"
 msgstr "Andra parametrar:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:33
 msgid "Password"
 msgstr "Lösenord"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:34
 msgid "Protect with password"
 msgstr "Skydda med lösenord"
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:35
 msgid "Resolution:"
 msgstr "Upplösning:"
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:36
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr ""
 "Sekunder att vänta innan standardkärnan eller -operativsystemet startas"
+
+#: interfaces/boot.glade.in.h:37
+msgid ""
+"Several bootloaders have been found in the system, please select which do "
+"you want to configure"
+msgstr ""
+"Flera startprogram har hittats på systemet, välj vilket du vill konfigurera"
 
 #: interfaces/boot.glade.in.h:38
 msgid "Specify the partition on which the operating system is installed."
@@ -255,139 +278,134 @@ msgstr "Ange den partition som operativsystemet är installerat på."
 
 #: interfaces/boot.glade.in.h:39
 msgid ""
-"The new boot image has been added.\n"
-"\n"
-"Please click \"Apply\" to save your changes. "
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
 msgstr ""
-"Den nya startavbilden har lagts till.\n"
-"\n"
-"Klicka på \"Verkställ\" för att spara dina ändringar."
+"Den nya startavbilden har lagts till. Klicka på \"Verkställ\" för att spara "
+"dina ändringar."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:40
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
-"image to your system.\n"
-"\n"
-"To begin, click \"Forward\". "
+"image to your system."
 msgstr ""
 "Denna assistent är gjord för att hjälpa dig att snabbt och enkelt lägga till "
-"en ny startavbild (boot image) till ditt system.\n"
-"\n"
-"För att börja klickar du på \"Framåt\". "
+"en ny startavbild (boot image) till ditt system."
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:41
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Använd detta dialogfönster för att ändra kärnparametrar."
 
-#: interfaces/boot.glade.in.h:46
+#: interfaces/boot.glade.in.h:42
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Använd detta verktyg för att ange vilka operativsystem som användare kan "
 "välja vid uppstart."
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:43
 msgid "Video modes (only frame buffer)"
 msgstr "Videolägen (endast rambuffert)"
 
-#: interfaces/boot.glade.in.h:48 interfaces/network.glade.in.h:92
+#: interfaces/boot.glade.in.h:44
 msgid "_Add..."
 msgstr "_Lägg till..."
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:45
 msgid "_Device:"
 msgstr "_Enhet:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:46
 msgid "_Edit"
 msgstr "_Redigera"
 
-#: interfaces/boot.glade.in.h:51 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Sökväg till _initrd-avbild:"
 
-#: interfaces/boot.glade.in.h:52
+#: interfaces/boot.glade.in.h:48
 msgid "_Kernel image path:"
 msgstr "Sökväg till _kärnavbild:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:49
 msgid "_Name:"
 msgstr "_Namn:"
 
-#: interfaces/boot.glade.in.h:54
+#: interfaces/boot.glade.in.h:50
 msgid "_Operating system:"
 msgstr "_Operativsystem:"
 
-#: interfaces/boot.glade.in.h:55
+#: interfaces/boot.glade.in.h:51
 msgid "_Parameters:"
 msgstr "_Parametrar:"
 
-#: interfaces/boot.glade.in.h:56
+#: interfaces/boot.glade.in.h:52
 msgid "_Root file system device:"
 msgstr "Enhet för _rotfilsystem:"
 
 #: interfaces/common.glade.in.h:2
 msgid ""
-"<span weight=\"bold\">The platform you are running is not supported by this "
-"tool.</span>\n"
-"\n"
-"If you know for sure that it works like one of the platforms listed below, "
-"you can select that and continue.\n"
-"\n"
-"Note, however, that this might damage the system configuration or downright "
-"cripple your computer."
+"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
+"supported by this tool</span>"
 msgstr ""
-"<span weight=\"bold\">Den plattform som du använder stöds inte av detta "
-"verktyg.</span>\n"
-"Om du är säker på att det fungerar som en av de plattformar som anges nedan "
-"kan du välja den och fortsätta.\n"
-"\n"
-"Observera dock att detta kan skada systemkonfigurationen eller rentav "
-"förstöra data på din dator."
+"<span weight=\"bold\" size=\"larger\">Den plattform som du använder stöds "
+"inte av detta verktyg</span>"
 
-#: interfaces/common.glade.in.h:7
+#: interfaces/common.glade.in.h:3
 msgid ""
-"<span weight=\"bold\">To run this tool, you need administrator privileges.</"
-"span>\n"
-"\n"
-"To acquire such privileges, enter your root password below. If you don't\n"
-"specify a password, you will be unable to modify your system configuration."
+"<span weight=\"bold\" size=\"larger\">To run this tool, you need "
+"administrator privileges</span>"
 msgstr ""
-"<span weight=\"bold\">För att köra detta verktyg behöver du "
-"administratörsrättigheter.</span>\n"
-"\n"
-"För att få sådana rättigheter anger du rootlösenordet nedan. Om du inte\n"
-"anger ett lösenord kommer du inte att kunna ändra din systemkonfiguration."
+"<span weight=\"bold\" size=\"larger\">För att kunna köra detta verktyg "
+"behöver du administratörsrättigheter</span>"
 
-#: interfaces/common.glade.in.h:11
+#: interfaces/common.glade.in.h:4
 msgid "Complexity"
 msgstr "Komplexitet"
 
-#: interfaces/common.glade.in.h:12
+#: interfaces/common.glade.in.h:5
 msgid "Enter Password"
 msgstr "Ange lösenord"
 
-#: interfaces/common.glade.in.h:13
+#: interfaces/common.glade.in.h:6
+msgid ""
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
+msgstr ""
+"Om du är säker på att det fungerar som en av de plattformar som anges nedan "
+"kan du välja denna och fortsätta. Observera dock att detta kan skada "
+"systemkonfigurationen eller rentav förstöra data på din dator."
+
+#: interfaces/common.glade.in.h:7
 msgid "Remote administration"
 msgstr "Fjärradministration"
 
-#: interfaces/common.glade.in.h:14
+#: interfaces/common.glade.in.h:8
 msgid "Run _Without Password"
 msgstr "Kör _utan lösenord"
 
-#: interfaces/common.glade.in.h:15
+#: interfaces/common.glade.in.h:9
 msgid "Scanning system configuration..."
 msgstr "Läser igenom systemkonfigurationen..."
 
-#: interfaces/common.glade.in.h:16
+#: interfaces/common.glade.in.h:10
+msgid ""
+"To acquire such privileges, enter your root password below. If you don't "
+"specify a password, you will be  unable to modify your system configuration."
+msgstr ""
+"För att få sådana rättigheter anger du rootlösenordet nedan. Om du inte "
+"anger ett lösenord kommer du inte att kunna ändra din systemkonfiguration."
+
+#: interfaces/common.glade.in.h:11
 msgid "Unsupported Platform"
 msgstr "Plattformen stöds inte"
 
-#: interfaces/common.glade.in.h:17
+#: interfaces/common.glade.in.h:12
 msgid "Use this window to select the computer you wish to configure"
 msgstr "Använda detta fönster för att välja den dator du vill konfigurera"
 
-#: interfaces/common.glade.in.h:18 interfaces/network.glade.in.h:114
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:110
 msgid "_Password:"
 msgstr "_Lösenord:"
 
@@ -468,144 +486,160 @@ msgid "Account"
 msgstr "Konto"
 
 #: interfaces/network.glade.in.h:21
+msgid "Activate"
+msgstr "Aktivera"
+
+#: interfaces/network.glade.in.h:22
 msgid "Activate when the computer _starts"
 msgstr "Aktivera när datorn _startar"
 
-#: interfaces/network.glade.in.h:22 src/network/network-druid.c:412
-msgid "Address configuration (Step 1 of 2)"
-msgstr "Adresskonfiguration (steg 1 av 2)"
+#: interfaces/network.glade.in.h:23
+msgid "Address configuration"
+msgstr "Adresskonfiguration"
 
-#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:14
+#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
 msgid "Advanced"
 msgstr "Avancerat"
 
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:25
 msgid "Advanced PPP connection tuning."
 msgstr "Avancerad finjustering av PPP-anslutning."
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:26
 msgid "Aliases of other computers."
 msgstr "Alias på andra datorer."
 
-#: interfaces/network.glade.in.h:26
+#: interfaces/network.glade.in.h:27
 msgid "Allow activation control for all _users"
 msgstr "Tillåt aktiveringskontroll för alla _användare"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:28
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:28 src/network/connection.c:1788
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1860
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:30
 msgid "Co_nfiguration:"
 msgstr "Ko_nfiguration:"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:31
 msgid "Connection _name:"
 msgstr "Anslutnings_namn:"
 
-#: interfaces/network.glade.in.h:31 src/network/network-druid.c:449
-#: src/network/network-druid.c:460
-msgid "Connection name (Step 3 of 3)"
-msgstr "Anslutningsnamn (steg 3 av 3)"
-
 #: interfaces/network.glade.in.h:32
+msgid "Connection name"
+msgstr "Anslutningsnamn"
+
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "Anslutningstyp"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Anslutningar"
 
-#: interfaces/network.glade.in.h:34
-msgid "Create a new network connection"
-msgstr "Skapa en ny nätverksanslutning"
+#. set window titles
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
+msgid "Creating a new network connection"
+msgstr "Skapar en ny nätverksanslutning"
 
-#: interfaces/network.glade.in.h:35 src/network/connection.c:1787
+#: interfaces/network.glade.in.h:36
+msgid "Current network profile:"
+msgstr "Aktuell nätverksprofil:"
+
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1859
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "D_omännamn:"
+
+#: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
 msgstr "Standardgatewayenhet:"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:41
 msgid "Device:"
 msgstr "Enhet:"
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:42
 msgid "Domain / _Workgroup:"
 msgstr "Domän/A_rbetsgrupp:"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:44
 msgid "General"
 msgstr "Allmänt"
 
-#: interfaces/network.glade.in.h:42 src/network/main.c:214
+#: interfaces/network.glade.in.h:45
 msgid "Hosts"
 msgstr "Värdar"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:46
 msgid "How the names of other computers are found."
 msgstr "Hur namnen på andra datorer hittas."
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:47
 msgid "How this computer is identified."
 msgstr "Hur denna dator identifieras."
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:48
 msgid "How to access other computers."
 msgstr "Hur åtkomst av andra datorer ska ske."
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:49
 msgid "How to dial up to the Internet."
 msgstr "Hur uppringning till Internet ska ske."
 
-#: interfaces/network.glade.in.h:47
-msgid "ISP phone number (Step 1 of 3)"
-msgstr "Internetleverantörens telefonnummer (steg 1 av 3)"
+#: interfaces/network.glade.in.h:50
+msgid "ISP phone number"
+msgstr "Internetleverantörens telefonnummer"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:51
 msgid "Interface properties"
 msgstr "Gränssnittsegenskaper"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:52
+msgid ""
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr ""
+"Lista med domäner som systemet kommer att försöka lägga till ett värdnamn om "
+"det inte redan är ett av de angivna"
+
+#: interfaces/network.glade.in.h:54
 msgid "Modem _volume:"
 msgstr "Modem_volym:"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:55
 msgid "Network name:"
 msgstr "Nätverksnamn:"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:56
 msgid "Network profiles"
 msgstr "Nätverksprofiler"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:57
 msgid "Network profiles can be used to store different network configurations."
 msgstr ""
 "Nätverksprofiler kan användas för att lagra olika nätverkskonfigurationer."
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:58
 msgid "Networking Settings"
 msgstr "Nätverksinställningar"
 
-#: interfaces/network.glade.in.h:55
-msgid "New network connection"
-msgstr "Ny nätverksanslutning"
-
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:59
 msgid "New network profile"
 msgstr "Ny nätverksprofil"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:60
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -613,7 +647,7 @@ msgstr ""
 "Sedan anger du det användarnamn och lösenord som din Internetleverantör "
 "tilldelade dig."
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:61
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -621,43 +655,43 @@ msgstr ""
 "Ange nu den adress som denna nätverksenhet kommer att ha, och den "
 "fjärradress till vilken den kommer att anslutas."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:62
 msgid "Now, please enter the address that this network device will have."
 msgstr "Ange nu den adress som denna nätverksenhet kommer att ha."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:63
 msgid "Now, please give this connection a name."
 msgstr "Ge nu denna anslutning ett namn."
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:64
 msgid "Number to _access an external line:"
 msgstr "Nummer för att komma _åt en extern linje:"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:65
 msgid "Number to get to an _external line:"
 msgstr "Nummer för att få en _extern linje:"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:66
 msgid "PPPD _options:"
 msgstr "PPPD-_alternativ:"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:67
 msgid "Pa_ssword (confirm):"
 msgstr "L_ösenord (bekräfta):"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:68
 msgid "Phone _number:"
 msgstr "Telefon_nummer:"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:69
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
-"number is provided by your ISP. "
+"number is provided by your ISP."
 msgstr ""
 "Ange det telefonnummer som du använder för att ansluta till Internet. Detta "
-"nummer tillhandahåller din Internetleverantör. "
+"nummer tillhandahåller din Internetleverantör."
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:70
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
@@ -665,35 +699,50 @@ msgstr ""
 "Välj den trådlösa enhet som du vill konfigurera och ställ in nätverksnamnet "
 "för detta gränssnitt"
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:71
 msgid "Please, give this network profile a name and a description."
 msgstr "Ge denna nätverksprofil ett namn och en beskrivning."
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:72
 msgid "Please, select which type of connection you would like to add."
 msgstr "Välj den typ av anslutning som du vill lägga till."
 
-#: interfaces/network.glade.in.h:70 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:73 interfaces/users.glade.in.h:38
 msgid "Profile _name:"
 msgstr "Profil_namn:"
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:74
 msgid "Pulses"
 msgstr "Pulsval"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:75
 msgid "Se_condary:"
 msgstr "Se_kundär:"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:76
 msgid "Set _DNS servers manually"
 msgstr "Ange _DNS-servrar manuellt"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:77
 msgid "Set modem as default _route to internet"
 msgstr "Ställ in modemet som standard_rutt till Internet"
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:78
+msgid ""
+"This assistant will help you configure a new \n"
+"network connection."
+msgstr ""
+"Denna assistent kommer att hjälpa dig\n"
+"konfigurera en ny nätverksanslutning."
+
+#: interfaces/network.glade.in.h:80
+msgid ""
+"This is the list of IP addresses that the system will use as name servers"
+msgstr ""
+"Detta är listan med IP-adresser som systemet kommer att använda som "
+"namnservrar"
+
+#: interfaces/network.glade.in.h:81
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -701,191 +750,169 @@ msgstr ""
 "För att fortsätta konfigurera din nätverksanslutning klickar du på \"Nästa"
 "\". För att avsluta klickar du på \"Avbryt\"."
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:82
 msgid "Tones"
 msgstr "Tonval"
 
-#: interfaces/network.glade.in.h:77
+#: interfaces/network.glade.in.h:83
 msgid "Use \"Auto\" if unsure."
 msgstr "Använd \"Automatisk\" om du är osäker."
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:84
 msgid "Use this dialog for setting the configuration for this interface"
 msgstr ""
 "Använd detta dialogfönster för att ställa in konfigurationen för detta "
 "gränssnitt"
 
-#: interfaces/network.glade.in.h:79
-msgid "Username and password (Step 2 of 3)"
-msgstr "Användarnamn och lösenord (steg 2 av 3)"
+#: interfaces/network.glade.in.h:85
+msgid "Username and password"
+msgstr "Användarnamn och lösenord"
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:86
 msgid "WI_NS server:"
 msgstr "WI_NS-server:"
-
-#: interfaces/network.glade.in.h:81
-msgid ""
-"Welcome to the Network Connection druid.\n"
-"\n"
-"This druid will help you configure a new \n"
-"network connection. \n"
-"\n"
-"Click the \"Next\" button to begin."
-msgstr ""
-"Välkommen till guiden nätverksanslutning.\n"
-"\n"
-"Denna guide kommer att hjälpa dig konfigurera\n"
-"en ny nätverksanslutning.\n"
-"\n"
-"Klicka på knappen \"Nästa\" för att börja."
 
 #: interfaces/network.glade.in.h:87
 msgid "Wireless device:"
 msgstr "Trådlös enhet:"
 
 #: interfaces/network.glade.in.h:88
-msgid "Wireless settings (Step 1 of 3)"
-msgstr "Trådlösa inställningar (steg 1 av 3)"
+msgid "Wireless settings"
+msgstr "Trådlösa inställningar"
 
 #: interfaces/network.glade.in.h:89
 msgid ""
-"You are about to create a new network connection.\n"
-"\n"
-"Please click \"Apply\" to save your changes."
+"You are about to create a new network connection. Please click \"Apply\" to "
+"save your changes."
 msgstr ""
-"Du kommer nu att skapa en ny nätverksanslutning.\n"
-"\n"
-"Klicka på \"Verkställ\" för att spara dina ändringar."
+"Du kommer nu att skapa en ny nätverksanslutning. Klicka på \"Verkställ\" för "
+"att spara dina ändringar."
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:90
 msgid "_Autodetect"
 msgstr "_Detektera automatiskt"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:91
 msgid "_Comment:"
 msgstr "_Kommentar:"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:92
 msgid "_Configuration:"
 msgstr "_Konfiguration:"
 
-#: interfaces/network.glade.in.h:96
-msgid "_Configure"
-msgstr "_Konfigurera"
+#: interfaces/network.glade.in.h:93
+msgid "_Deactivate"
+msgstr "_Inaktivera"
 
-#: interfaces/network.glade.in.h:97 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
 msgid "_Delete"
 msgstr "_Ta bort"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:95
 msgid "_Description:"
 msgstr "_Beskrivning:"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:96
 msgid "_Dial type:"
 msgstr "_Uppringningstyp:"
 
-#: interfaces/network.glade.in.h:100
-msgid "_Domain name:"
-msgstr "_Domännamn:"
-
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:97
 msgid "_Enable Windows networking"
 msgstr "_Använd Windows-nätverk"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:98
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:99
 msgid "_Gateway address:"
 msgstr "_Gateway-adress:"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:100
 msgid "_Hostname:"
 msgstr "_Värdnamn:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:101
 msgid "_IP address:"
 msgstr "_IP-adress:"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:102
 msgid "_IR LAN"
 msgstr "_IR-LAN"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:103
 msgid "_Local IP address:"
 msgstr "_Lokal IP-adress:"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:104
 msgid "_Local IP:"
 msgstr "_Lokalt IP:"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:105
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:106
 msgid "_Modem port:"
 msgstr "_Modemport:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:107
 msgid "_Network Profiles"
 msgstr "_Nätverksprofiler"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:108
 msgid "_Network name:"
 msgstr "_Nätverksnamn:"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:109
 msgid "_Parallel Line"
 msgstr "_Parallellinje"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:111
 msgid "_Phone number:"
 msgstr "_Telefonnummer:"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:112
 msgid "_Primary:"
 msgstr "_Primär:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:113
 msgid "_Remote IP address:"
 msgstr "_Fjärr-IP-adress:"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:114
 msgid "_Remote IP:"
 msgstr "_Fjärr-IP:"
 
-#: interfaces/network.glade.in.h:119
+#: interfaces/network.glade.in.h:115
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Försök igen om anslutningen bryts eller inte startar"
 
-#: interfaces/network.glade.in.h:120
+#: interfaces/network.glade.in.h:116
 msgid "_Save Current"
 msgstr "_Spara aktuell"
 
-#: interfaces/network.glade.in.h:121
+#: interfaces/network.glade.in.h:117
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Starta PPP så fort som modemet ansluter"
 
-#: interfaces/network.glade.in.h:122
+#: interfaces/network.glade.in.h:118
 msgid "_Subnet mask:"
 msgstr "_Subnätmask:"
 
-#: interfaces/network.glade.in.h:123
+#: interfaces/network.glade.in.h:119
 msgid "_Update DNS when this connection becomes active"
 msgstr "_Uppdatera DNS när denna anslutning blir aktiv"
 
-#: interfaces/network.glade.in.h:124
+#: interfaces/network.glade.in.h:120
 msgid "_Use remote IP as default gateway"
 msgstr "_Använd fjärr-IP-numret som standardgateway"
 
-#: interfaces/network.glade.in.h:125 interfaces/users.glade.in.h:66
+#: interfaces/network.glade.in.h:121 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
-#: interfaces/network.glade.in.h:126
+#: interfaces/network.glade.in.h:122
 msgid "_Wireless"
 msgstr "_Trådlöst"
 
@@ -910,24 +937,32 @@ msgid "Description:"
 msgstr "Beskrivning:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr "Parametrar:"
-
-#: interfaces/services.glade.in.h:7
-msgid "Priority:"
-msgstr "Prioritet:"
-
-#: interfaces/services.glade.in.h:8
 msgid "Service _Properties"
 msgstr "Tjänste_egenskaper"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:7
 msgid "Service:"
 msgstr "Tjänst:"
 
-#: interfaces/services.glade.in.h:10
+#: interfaces/services.glade.in.h:8
+msgid "Status:"
+msgstr "Status:"
+
+#: interfaces/services.glade.in.h:9
 msgid "Use this tool to specify which services to run"
 msgstr "Använd detta verktyg för att ange de tjänster som ska köras"
+
+#: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "_Sortera listan efter uppstartssekvens"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Start"
+msgstr "_Starta"
+
+#: interfaces/services.glade.in.h:12
+msgid "_Startup sequence:"
+msgstr "_Uppstartssekvens:"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1157,10 +1192,10 @@ msgstr "Användar_lösenord:"
 #: interfaces/users.glade.in.h:46
 msgid ""
 "User profiles can be used as templates to facilitate the creation of new "
-"users. "
+"users."
 msgstr ""
 "Användarprofiler kan användas som mallar för att underlätta skapandet av nya "
-"användare. "
+"användare."
 
 #: interfaces/users.glade.in.h:47
 msgid "Users"
@@ -1219,26 +1254,22 @@ msgid "_Profile:"
 msgstr "_Profil:"
 
 #: interfaces/users.glade.in.h:62
-msgid "_Profiles..."
-msgstr "_Profiler..."
-
-#: interfaces/users.glade.in.h:63
 msgid "_Real name:"
 msgstr "_Verkligt namn:"
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:63
 msgid "_Shell:"
 msgstr "_Skal:"
 
-#: interfaces/users.glade.in.h:65
+#: interfaces/users.glade.in.h:64
 msgid "_User's groups:"
 msgstr "_Användarens grupper:"
 
-#: interfaces/users.glade.in.h:67
+#: interfaces/users.glade.in.h:66
 msgid "_Work phone:"
 msgstr "_Jobbtelefon:"
 
-#: interfaces/users.glade.in.h:68
+#: interfaces/users.glade.in.h:67
 msgid "profiles_table"
 msgstr "profiltabell"
 
@@ -1247,12 +1278,16 @@ msgstr "profiltabell"
 msgid "vga=%s is not a valid vga value"
 msgstr "vga=%s är inte ett giltigt vga-värde"
 
-#. set window title
-#: src/boot/boot-druid.c:407
-msgid "Boot Image Wizard"
-msgstr "Guide för startavbild"
+#: src/boot/boot-druid.c:430
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "Skapar en ny startavbild (%d av %d)"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:466
+#: src/boot/boot-druid.c:431
+msgid "Finished creating a new boot image"
+msgstr "Slutförde skapandet av en ny startavbild"
+
+#: src/boot/boot-image.c:40 src/network/profile.c:468
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -1309,7 +1344,7 @@ msgstr "Ogiltig rotenhet: \"%s\""
 msgid "_Module path:"
 msgstr "_Modulsökväg:"
 
-#: src/boot/boot-settings.c:360 src/users/user-settings.c:502
+#: src/boot/boot-settings.c:360 src/users/user-settings.c:472
 msgid "Password confirmation isn't correct."
 msgstr "Lösenordsbekräftelsen är inte korrekt."
 
@@ -1329,7 +1364,7 @@ msgstr "Redigerare för startavbild"
 msgid "Boot Append Editor"
 msgstr "Redigerare för starttillägg"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1337,12 +1372,12 @@ msgstr ""
 "Ditt system kommer inte att starta\n"
 "utan minst en startavbild.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Är du säker på att du vill ta bort \"%s\"?"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -1350,10 +1385,6 @@ msgid ""
 msgstr ""
 "Filen \"%s\" saknas eller kunde inte läsas:\n"
 "Konfigurationen kommer att vara tom."
-
-#: src/boot/main.c:73
-msgid "Boot Manager Settings"
-msgstr "Inställningar för starthanterare"
 
 #: src/boot/table.c:41
 msgid "Name"
@@ -1363,7 +1394,7 @@ msgstr "Namn"
 msgid "Default"
 msgstr "Standard"
 
-#: src/boot/table.c:43 src/network/connection.c:479
+#: src/boot/table.c:43 src/network/connection.c:485
 msgid "Type"
 msgstr "Typ"
 
@@ -1371,7 +1402,7 @@ msgstr "Typ"
 msgid "Kernel Image"
 msgstr "Kärnavbildsfil"
 
-#: src/boot/table.c:45 src/network/connection.c:495
+#: src/boot/table.c:45 src/network/connection.c:501
 msgid "Device"
 msgstr "Enhet"
 
@@ -1379,7 +1410,8 @@ msgstr "Enhet"
 msgid "/_Add ..."
 msgstr "/_Lägg till..."
 
-#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Egenskaper"
 
@@ -1389,16 +1421,22 @@ msgid "/_Delete"
 msgstr "/_Ta bort"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "Kunde inte ansluta till datorn."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "Lösenordet du angav är ogiltigt."
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr ""
+"Kunde inte köra \"%s\". Kontrollera att du har rättigheter att köra det."
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "Ett oväntat fel har inträffat."
 
@@ -1415,7 +1453,7 @@ msgstr " Fler _alternativ"
 msgid " Fewer _Options"
 msgstr " Färre _alternativ"
 
-#: src/common/gst-dialog.c:504
+#: src/common/gst-dialog.c:507
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1423,21 +1461,21 @@ msgstr ""
 "Det finns ändringar som inte har verkställts.\n"
 "Verkställ dem nu?"
 
-#: src/common/gst-dialog.c:621
+#: src/common/gst-dialog.c:624
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/gst-tool.c:820
+#: src/common/gst-tool.c:822
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Hoppar över %s-direktiv..."
 
-#: src/common/gst-tool.c:951
+#: src/common/gst-tool.c:953
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/gst-tool.c:1024
+#: src/common/gst-tool.c:1026
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1445,92 +1483,56 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-# Felrapporterat i http://bugzilla.gnome.org/show_bug.cgi?id=126006
-#: src/common/gst-tool.c:1323
-#, c-format
-msgid "%s"
-msgstr "%s"
-
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
-"Welcome to the %s prerelease of the GNOME System Tools.\n"
-"\n"
-"This is still a work in progress, and so it may have serious bugs.\n"
-"Due to the nature of these tools, bugs may render your computer\n"
-"PRACTICALLY USELESS, costing time, effort and sanity points.\n"
-"\n"
-"You have been warned. Thank you for trying out this prerelease of\n"
-"the GNOME System Tools!\n"
-"\n"
-"--\n"
-"The GNOME System Tools team"
+"<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
+"GNOME System Tools</span>"
 msgstr ""
-"Välkommen till förhandsversion %s av GNOME-systemverktygen.\n"
-"\n"
-"Det här är ett pågående arbete och det kan därför ha allvarliga fel.\n"
-"På grund av naturen hos dessa verktyg kan fel göra din dator\n"
-"PRAKTISKT TAGET OANVÄNDBAR, och kosta tid, arbetstid och gråa hår.\n"
-"\n"
-"Du har nu blivit varnad. Tack för att du provar denna förhandsversion\n"
-"av GNOME-systemverktygen!\n"
-"\n"
-"--\n"
-"Teamet bakom GNOME-systemverktygen"
+"<span weight=\"bold\" size=\"larger\">Välkommen till förhandsversion %s av "
+"GNOME-systemverktygen</span>"
 
-#: src/common/gst-tool.c:1529
+#: src/common/gst-tool.c:1511
+msgid ""
+"This is still a work in progress, and so it may have serious bugs. Due to "
+"the nature of these tools, bugs may render your computer <span weight=\"bold"
+"\">practically useless</span>, costing time, effort and sanity points. You "
+"have been warned. Thank you for trying out this prerelease of the GNOME "
+"System Tools!"
+msgstr ""
+"Det här är ett pågående arbete och det kan därför ha allvarliga fel. På "
+"grund av naturen hos dessa verktyg kan fel göra din dator <span weight=\"bold"
+"\">praktiskt taget oanvändbar</span>, och kosta tid, arbetstid och gråa hår. "
+"Du har nu blivit varnad. Tack för att du provar denna förhandsversion av "
+"GNOME-systemverktygen!"
+
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Varning"
 
-#: src/common/gst-tool.c:1538
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Visa inte detta igen"
 
-#: src/common/gst-tool.c:1604
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "GNOME-systemverktygen"
 
-#: src/common/gst-ui.c:396
+#: src/common/gst-ui.c:389
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "Starta om din GNOME-session för att dessa ändringar ska börja gälla."
 
-#: src/network/callbacks.c:116 src/services/table.c:55
-msgid "Active"
-msgstr "Aktiv"
-
-#: src/network/callbacks.c:119
-msgid "Activating"
-msgstr "Aktiverar"
-
-#: src/network/callbacks.c:130
-msgid "Inactive"
-msgstr "Inaktiv"
-
-#: src/network/callbacks.c:133
-msgid "Deactivating"
-msgstr "Deaktiverar"
-
-#: src/network/callbacks.c:455
+#: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Ta bort anslutningen %s: \"%s\"?"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:367
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Ta bort anslutningen %s?"
 
-#: src/network/callbacks.c:523
-#, c-format
-msgid "Activating connection ``%s.''"
-msgstr "Aktiverar anslutningen \"%s\"."
-
-#: src/network/callbacks.c:561
-#, c-format
-msgid "Deactivating connection ``%s.''"
-msgstr "Kopplar från anslutningen \"%s\"."
-
-#: src/network/callbacks.c:600
+#: src/network/callbacks.c:463
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1538,11 +1540,11 @@ msgstr ""
 "Du har inte SMB-stöd installerat. Installera SMB-stöd på systemet för att "
 "möjliggöra nätverksanslutning till windows."
 
-#: src/network/callbacks.c:603
+#: src/network/callbacks.c:466
 msgid "SMB support missing."
 msgstr "Stöd för SMB saknas."
 
-#: src/network/callbacks.c:654
+#: src/network/callbacks.c:522
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1550,7 +1552,7 @@ msgstr ""
 "Värdnamnet har ändrats. Detta kommer att hindra dig från att starta nya "
 "program, och därför kommer du att behöva logga in igen. Fortsätta ändå?"
 
-#: src/network/callbacks.c:702
+#: src/network/callbacks.c:570
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1558,7 +1560,7 @@ msgstr ""
 "wvdial kunde inte hittas på ditt system. Du måste installera wvdial, annars "
 "kommer inte PPP-anslutningarna (modemanslutningarna) att kunna aktiveras."
 
-#: src/network/callbacks.c:729
+#: src/network/callbacks.c:597
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1567,7 +1569,7 @@ msgstr ""
 "kommer inte PPP-anslutningarna (modemanslutningarna) att kunna aktiveras. "
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:624
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1575,15 +1577,15 @@ msgstr ""
 "Standardgatewayenheten är inte aktiverad. Detta kommer att hindra dig från "
 "att ansluta till Internet. Fortsätta ändå?"
 
-#: src/network/callbacks.c:811
+#: src/network/callbacks.c:675
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
-"this information to proceed, or choose another default gateway device. "
+"this information to proceed, or choose another default gateway device."
 msgstr ""
 "Standardgatewayenheten saknar information om gateway. Ange denna information "
 "för att fortsätta, eller välj en annan standardgatewayenhet."
 
-#: src/network/callbacks.c:857
+#: src/network/callbacks.c:721
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1593,17 +1595,17 @@ msgstr ""
 "saknade anslutningar under anslutningsfliken. Installera rpm-paketet redhat-"
 "config-network för att undvika detta."
 
-#: src/network/callbacks.c:894
+#: src/network/callbacks.c:758
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Vill du aktivera gränssnittet %s?"
 
-#: src/network/callbacks.c:904
+#: src/network/callbacks.c:768
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Vill du inaktivera gränssnittet %s?"
 
-#: src/network/callbacks.c:989
+#: src/network/callbacks.c:855
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1611,19 +1613,19 @@ msgstr ""
 "Kunde inte automatiskt detektera modemenheten. Kontrollera att den inte är "
 "upptagen och att den är korrekt ansluten"
 
-#: src/network/callbacks.c:1041
+#: src/network/callbacks.c:907
 msgid "Silent"
 msgstr "Tyst"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:909
 msgid "Low"
 msgstr "Låg"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:911
 msgid "Medium"
 msgstr "Mellan"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:913
 msgid "Loud"
 msgstr "Högljudd"
 
@@ -1663,15 +1665,15 @@ msgstr "Okänd gränssnittstyp"
 msgid "/_Configure"
 msgstr "/_Konfigurera"
 
-#: src/network/connection.c:507
+#: src/network/connection.c:513
 msgid "Status"
 msgstr "Status"
 
-#: src/network/connection.c:516 src/network/profiles-table.c:62
+#: src/network/connection.c:522 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Beskrivning"
 
-#: src/network/connection.c:1659
+#: src/network/connection.c:1722
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1679,7 +1681,7 @@ msgstr ""
 "IP-adressen eller nätmasken för gränssnittet lämnades tom. Ange giltiga IP-"
 "adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:1666
+#: src/network/connection.c:1729
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1687,7 +1689,7 @@ msgstr ""
 "IP-adressen eller fjärradressen för gränssnittet lämnades tom. Ange giltiga "
 "IP-adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:1672
+#: src/network/connection.c:1735
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1698,10 +1700,30 @@ msgstr ""
 "primära DNS-servern eller avmarkera alternativet att välja DNS-servrarna "
 "manuellt."
 
-#: src/network/connection.c:2028
+#: src/network/connection.c:1741
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr ""
+"Modemenheten som anslutningen kommer att använda lämnades tom. Ange en enhet "
+"eller tryck \"detektera automatiskt\" för att fortsätta."
+
+#: src/network/connection.c:1746
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr ""
+"Telefonnumret som anslutningen kommer att använda lämnades tom. Ange ett "
+"giltigt telefonnummer för att fortsätta."
+
+#: src/network/connection.c:2108
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Gränssnittet %s finns inte."
+
+#: src/network/connection.c:2110
+msgid " The loopback interface cannot be configured."
+msgstr " Loopback-gränssnittet kan inte konfigureras."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1711,49 +1733,50 @@ msgstr "IP-adress"
 msgid "Aliases"
 msgstr "Alias"
 
-#: src/network/main.c:254
-msgid "Run the connection druid."
-msgstr "Kör anslutningsguiden."
+#: src/network/main.c:190
+msgid "Run the connection assistant."
+msgstr "Kör anslutningsassistenten."
 
-#: src/network/main.c:255
-msgid "Run the PPP connection druid."
-msgstr "Kör PPP-anslutningsguiden."
+#: src/network/main.c:191
+msgid "Run the PPP connection assistant."
+msgstr "Kör PPP-anslutningsassistenten."
 
-#: src/network/main.c:256
-msgid "Run the ethernet connection druid."
-msgstr "Kör Ethernetanslutningsguiden."
+#: src/network/main.c:192
+msgid "Run the ethernet connection assistant."
+msgstr "Kör Ethernetanslutningsassistenten."
 
-#: src/network/main.c:257
-msgid "Run the wlan connection druid."
-msgstr "Kör wlan-anslutningsguiden."
+#: src/network/main.c:193
+msgid "Run the wlan connection assistant."
+msgstr "Kör wlan-anslutningsassistenten."
 
-#: src/network/main.c:258
-msgid "Run the parallel port connection druid."
-msgstr "Kör parallellportsanslutningsguiden."
+#: src/network/main.c:194
+msgid "Run the parallel port connection assistant."
+msgstr "Kör parallellportsanslutningsassistenten."
 
-#: src/network/main.c:259
-msgid "Run the irlan connection druid."
-msgstr "Kör irlan-anslutningsguiden."
+#: src/network/main.c:195
+msgid "Run the irlan connection assistant."
+msgstr "Kör irlan-anslutningsassistenten."
 
-#: src/network/main.c:260
+#: src/network/main.c:196
 msgid "Configure a network interface"
 msgstr "Konfigurera ett nätverksgränssnitt"
 
-#: src/network/main.c:260
+#: src/network/main.c:196
 msgid "interface"
 msgstr "gränssnitt"
 
-#: src/network/main.c:267
+#: src/network/main.c:203
 msgid "Network Settings"
 msgstr "Nätverksinställningar"
 
-#: src/network/network-druid.c:425
-msgid "Address configuration (Step 2 of 3)"
-msgstr "Adresskonfiguration (steg 2 av 3)"
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Skapar en ny nätverksanslutning (%d av %d)"
 
-#: src/network/network-druid.c:446
-msgid "Connection name (Step 2 of 2)"
-msgstr "Anslutningsnamn (steg 2 av 2)"
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "Slutförde skapandet av en ny nätverksanslutning"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -1772,16 +1795,28 @@ msgstr "Är du säker på att du vill ta bort profilen %s?"
 msgid "Profile name"
 msgstr "Profilnamn"
 
-#: src/services/callbacks.c:45
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "Ingen beskrivning tillgänglig."
 
-#: src/services/callbacks.c:301
+#: src/services/callbacks.c:250
+msgid "Running"
+msgstr "Kör"
+
+#: src/services/callbacks.c:254
+msgid "Stopped"
+msgstr "Stoppad"
+
+#: src/services/callbacks.c:259
+msgid "Could not get info"
+msgstr "Kunde inte få tag i information"
+
+#: src/services/callbacks.c:325
 #, c-format
 msgid "Settings for service %s"
 msgstr "Inställningar för tjänsten %s"
 
-#: src/services/main.c:62
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "Tjänsteinställningar"
 
@@ -1793,7 +1828,11 @@ msgstr "Konfigurera vilka tjänster som körs då systemet startar"
 msgid "Services"
 msgstr "Tjänster"
 
-#: src/services/table.c:65
+#: src/services/table.c:79
+msgid "Active"
+msgstr "Aktiv"
+
+#: src/services/table.c:88
 msgid "Service"
 msgstr "Tjänst"
 
@@ -1801,11 +1840,11 @@ msgstr "Tjänst"
 msgid "Time Zone"
 msgstr "Tidszon"
 
-#: src/time/main.c:427
+#: src/time/main.c:423
 msgid "Time Servers"
 msgstr "Tidsservrar"
 
-#: src/time/main.c:505
+#: src/time/main.c:501
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1813,7 +1852,7 @@ msgstr ""
 "Du har inte NTP-stöd körandes. Kör NTP-stöd på systemet för att aktivera "
 "serversynkronisering."
 
-#: src/time/main.c:812
+#: src/time/main.c:808
 msgid "Time and Date Settings"
 msgstr "Inställningar för tid och datum"
 
@@ -1825,53 +1864,53 @@ msgstr "Ändra systemtid, datum och tidszon."
 msgid "Time and Date"
 msgstr "Tid och datum"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "Skapa ny profil"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Inställningar för profilen %s"
 
-#: src/users/group-settings.c:111
+#: src/users/group-settings.c:89
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/group-settings.c:165 src/users/user-settings.c:457
+#: src/users/group-settings.c:143 src/users/user-settings.c:427
 msgid "User id must be a positive number."
 msgstr "Användar-id måste vara ett positivt tal."
 
-#: src/users/group-settings.c:169
+#: src/users/group-settings.c:147
 msgid "Such group id already exists."
 msgstr "Ett sådant gruppid finns redan."
 
-#: src/users/group-settings.c:191
+#: src/users/group-settings.c:169
 msgid "Group name is empty."
 msgstr "Gruppnamnet är tomt."
 
-#: src/users/group-settings.c:195
+#: src/users/group-settings.c:173
 msgid "The group name is too long."
 msgstr "Gruppnamnet är för långt."
 
-#: src/users/group-settings.c:199
+#: src/users/group-settings.c:177
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Var vänlig och ange ett giltigt gruppnamn, med endast små bokstäver."
 
-#: src/users/group-settings.c:203
+#: src/users/group-settings.c:181
 msgid "Group already exists."
 msgstr "Gruppen finns redan."
 
-#: src/users/group-settings.c:272
+#: src/users/group-settings.c:250
 msgid "The root group must not be deleted."
 msgstr "Gruppen root får inte tas bort."
 
-#: src/users/group-settings.c:279
+#: src/users/group-settings.c:257
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/group-settings.c:342
+#: src/users/group-settings.c:314
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
@@ -1884,23 +1923,23 @@ msgstr "Grupp"
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:122
+#: src/users/main.c:120
 msgid "User name contains"
 msgstr "Användarnamnet innehåller"
 
-#: src/users/main.c:123
+#: src/users/main.c:121
 msgid "User ID is"
 msgstr "Användar-ID är"
 
-#: src/users/main.c:124
+#: src/users/main.c:122
 msgid "Group name contains"
 msgstr "Gruppnamnet innehåller"
 
-#: src/users/main.c:125
+#: src/users/main.c:123
 msgid "User GID is"
 msgstr "Användar-GID är"
 
-#: src/users/main.c:316 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Användare och grupper"
 
@@ -1971,32 +2010,32 @@ msgstr "/_Lägg till användare..."
 msgid "/_Add group ..."
 msgstr "/_Lägg till grupp..."
 
-#: src/users/user-settings.c:120
+#: src/users/user-settings.c:104
 msgid "The root user must not be deleted."
 msgstr "Användaren root får inte tas bort."
 
-#: src/users/user-settings.c:127
+#: src/users/user-settings.c:111
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/user-settings.c:208
+#: src/users/user-settings.c:191
 msgid "User Account Editor"
 msgstr "Redigerare för användarkonton"
 
-#: src/users/user-settings.c:335
+#: src/users/user-settings.c:305
 msgid "The username is empty."
 msgstr "Användarnamnet är tomt."
 
-#: src/users/user-settings.c:343
+#: src/users/user-settings.c:313
 msgid "The username is too long."
 msgstr "Användarnamnet är för långt."
 
-#: src/users/user-settings.c:347
+#: src/users/user-settings.c:317
 msgid "root username shouldn't be modified."
 msgstr "root-användarnamnet bör inte ändras."
 
-#: src/users/user-settings.c:351
+#: src/users/user-settings.c:321
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -2004,7 +2043,7 @@ msgstr ""
 "Var vänlig och ange ett giltigt användarnamn som består av en liten bokstav "
 "följt av små bokstäver och siffror."
 
-#: src/users/user-settings.c:355
+#: src/users/user-settings.c:325
 #, c-format
 msgid ""
 "Username \"%s\" already exists.\n"
@@ -2015,40 +2054,40 @@ msgstr ""
 "\n"
 "Välj ett annat användarnamn"
 
-#: src/users/user-settings.c:377
+#: src/users/user-settings.c:347
 #, c-format
 msgid "Invalid character '%c' in comment."
 msgstr "Ogiltigt tecken \"%c\" i kommentar."
 
-#: src/users/user-settings.c:423
+#: src/users/user-settings.c:393
 msgid "Home directory must not be empty."
 msgstr "Hemkatalogen får inte vara tom."
 
-#: src/users/user-settings.c:426
+#: src/users/user-settings.c:396
 msgid "Please enter full path for home directory."
 msgstr "Ange den fullständiga sökvägen till hemkatalogen."
 
-#: src/users/user-settings.c:429
+#: src/users/user-settings.c:399
 msgid "root home shouldn't be modified."
 msgstr "root-hemkatalogen bör inte ändras."
 
-#: src/users/user-settings.c:459
+#: src/users/user-settings.c:429
 msgid "root uid shouldn't be modified."
 msgstr "root-uid:t bör inte ändras."
 
-#: src/users/user-settings.c:461
+#: src/users/user-settings.c:431
 msgid "Such user id already exists."
 msgstr "Ett sådant användarid finns redan."
 
-#: src/users/user-settings.c:481
+#: src/users/user-settings.c:451
 msgid "Please give shell with full path."
 msgstr "Ange skalet med en fullständig sökväg."
 
-#: src/users/user-settings.c:499
+#: src/users/user-settings.c:469
 msgid "Password must not be empty."
 msgstr "Lösenord får inte vara tomt."
 
-#: src/users/user-settings.c:778
+#: src/users/user-settings.c:746
 #, c-format
 msgid "Settings for User %s"
 msgstr "Inställningar för användaren %s"
@@ -2078,10 +2117,49 @@ msgstr "Skal"
 msgid "Add or remove users and groups"
 msgstr "Lägg till eller ta bort användare och grupper"
 
+#~ msgid "The platform you are running is not supported by this tool"
+#~ msgstr "Den plattform som du använder stöds inte av detta verktyg"
+
+#~ msgid "To run this tool, you need administrator privileges"
+#~ msgstr ""
+#~ "För att kunna köra detta verktyg behöver du administratörsrättigheter"
+
+#~ msgid "Ac_tivate"
+#~ msgstr "Ak_tivera"
+
+#~ msgid "_Domain name:"
+#~ msgstr "_Domännamn:"
+
+#~ msgid "Domain name:"
+#~ msgstr "Domännamn:"
+
+#~ msgid "This assistant will help you configure a new network connection."
+#~ msgstr ""
+#~ "Denna assistent kommer att hjälpa dig konfigurera en ny "
+#~ "nätverksanslutning."
+
+#~ msgid "Welcome to the %s prerelease of the GNOME System Tools"
+#~ msgstr "Välkommen till förhandsversion %s av GNOME-systemverktygen"
+
+#~ msgid "The loopback interface cannot be configured."
+#~ msgstr "Loopback-gränssnittet kan inte konfigureras."
+
+#~ msgid "Boot Image Assistant"
+#~ msgstr "Startavbildsassistent"
+
+#~ msgid "Image Settings (Step 1 of 2)"
+#~ msgstr "Avbildsinställningar (steg 1 av 2)"
+
+#~ msgid "Image Settings (Step 2 of 2)"
+#~ msgstr "Avbildsinställningar (steg 2 av 2)"
+
+#~ msgid "Other Operating System (Step 2 of 2)"
+#~ msgstr "Annat operativsystem (steg 2 av 2)"
+
 #~ msgid ""
 #~ "The new boot image has been added.\n"
 #~ "\n"
-#~ "Please click \"Apply\" to save your changes."
+#~ "Please click \"Apply\" to save your changes. "
 #~ msgstr ""
 #~ "Den nya startavbilden har lagts till.\n"
 #~ "\n"
@@ -2091,39 +2169,112 @@ msgstr "Lägg till eller ta bort användare och grupper"
 #~ "This assistant is designed to help you quickly and easily add a new boot "
 #~ "image to your system.\n"
 #~ "\n"
-#~ "To begin, click \"Forward\"."
+#~ "To begin, click \"Forward\". "
 #~ msgstr ""
 #~ "Denna assistent är gjord för att hjälpa dig att snabbt och enkelt lägga "
 #~ "till en ny startavbild (boot image) till ditt system.\n"
 #~ "\n"
-#~ "För att börja klickar du på \"Framåt\"."
+#~ "För att börja klickar du på \"Framåt\". "
+
+#~ msgid "Address configuration (Step 1 of 2)"
+#~ msgstr "Adresskonfiguration (steg 1 av 2)"
+
+#~ msgid "Connection name (Step 3 of 3)"
+#~ msgstr "Anslutningsnamn (steg 3 av 3)"
+
+#~ msgid "ISP phone number (Step 1 of 3)"
+#~ msgstr "Internetleverantörens telefonnummer (steg 1 av 3)"
+
+#~ msgid "New network connection"
+#~ msgstr "Ny nätverksanslutning"
+
+#~ msgid ""
+#~ "Please enter the phone number you use to connect to the internet. This "
+#~ "number is provided by your ISP. "
+#~ msgstr ""
+#~ "Ange det telefonnummer som du använder för att ansluta till Internet. "
+#~ "Detta nummer tillhandahåller din Internetleverantör. "
+
+#~ msgid "Username and password (Step 2 of 3)"
+#~ msgstr "Användarnamn och lösenord (steg 2 av 3)"
+
+#~ msgid ""
+#~ "Welcome to the Network Connection druid.\n"
+#~ "\n"
+#~ "This druid will help you configure a new \n"
+#~ "network connection. \n"
+#~ "\n"
+#~ "Click the \"Next\" button to begin."
+#~ msgstr ""
+#~ "Välkommen till guiden nätverksanslutning.\n"
+#~ "\n"
+#~ "Denna guide kommer att hjälpa dig konfigurera\n"
+#~ "en ny nätverksanslutning.\n"
+#~ "\n"
+#~ "Klicka på knappen \"Nästa\" för att börja."
+
+#~ msgid "Wireless settings (Step 1 of 3)"
+#~ msgstr "Trådlösa inställningar (steg 1 av 3)"
+
+#~ msgid "_Configure"
+#~ msgstr "_Konfigurera"
+
+#~ msgid "Parameters:"
+#~ msgstr "Parametrar:"
+
+#~ msgid "Priority:"
+#~ msgstr "Prioritet:"
+
+#~ msgid ""
+#~ "User profiles can be used as templates to facilitate the creation of new "
+#~ "users. "
+#~ msgstr ""
+#~ "Användarprofiler kan användas som mallar för att underlätta skapandet av "
+#~ "nya användare. "
+
+#~ msgid "_Profiles..."
+#~ msgstr "_Profiler..."
+
+#~ msgid "Boot Image Wizard"
+#~ msgstr "Guide för startavbild"
+
+# Felrapporterat i http://bugzilla.gnome.org/show_bug.cgi?id=126006
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid "Activating"
+#~ msgstr "Aktiverar"
+
+#~ msgid "Inactive"
+#~ msgstr "Inaktiv"
+
+#~ msgid "Deactivating"
+#~ msgstr "Deaktiverar"
+
+#~ msgid "Activating connection ``%s.''"
+#~ msgstr "Aktiverar anslutningen \"%s\"."
+
+#~ msgid "Deactivating connection ``%s.''"
+#~ msgstr "Kopplar från anslutningen \"%s\"."
+
+#~ msgid ""
+#~ "The default gateway device is missing gateway information. Please provide "
+#~ "this information to proceed, or choose another default gateway device. "
+#~ msgstr ""
+#~ "Standardgatewayenheten saknar information om gateway. Ange denna "
+#~ "information för att fortsätta, eller välj en annan standardgatewayenhet."
+
+#~ msgid "Address configuration (Step 2 of 3)"
+#~ msgstr "Adresskonfiguration (steg 2 av 3)"
+
+#~ msgid "Connection name (Step 2 of 2)"
+#~ msgstr "Anslutningsnamn (steg 2 av 2)"
 
 #~ msgid "Network profile"
 #~ msgstr "Nätverksprofil"
 
-#~ msgid ""
-#~ "Please enter the phone number you use to connect to the internet. This "
-#~ "number is provided by your ISP."
-#~ msgstr ""
-#~ "Ange det telefonnummer som du använder för att ansluta till Internet. "
-#~ "Detta nummer tillhandahåller din Internetleverantör."
-
-#~ msgid ""
-#~ "User profiles can be used as templates to facilitate the creation of new "
-#~ "users."
-#~ msgstr ""
-#~ "Användarprofiler kan användas som mallar för att underlätta skapandet av "
-#~ "nya användare."
-
 #~ msgid "%s."
 #~ msgstr "%s."
-
-#~ msgid ""
-#~ "The default gateway device is missing gateway information. Please provide "
-#~ "this information to proceed, or choose another default gateway device."
-#~ msgstr ""
-#~ "Standardgatewayenheten saknar information om gateway. Ange denna "
-#~ "information för att fortsätta, eller välj en annan standardgatewayenhet."
 
 #~ msgid "Time Zone:"
 #~ msgstr "Tidszon:"
@@ -2158,9 +2309,6 @@ msgstr "Lägg till eller ta bort användare och grupper"
 
 #~ msgid "Wireless settings:"
 #~ msgstr "Trådlösa inställningar:"
-
-#~ msgid "Wireless settings"
-#~ msgstr "Trådlösa inställningar"
 
 #~ msgid "Account name:"
 #~ msgstr "Kontonamn:"
@@ -3993,9 +4141,6 @@ msgstr "Lägg till eller ta bort användare och grupper"
 #~ msgid "Profile Settings"
 #~ msgstr "Profilinställningar"
 
-#~ msgid "Connection name"
-#~ msgstr "Anslutningsnamn"
-
 #~ msgid "Account name (Step 3 of 3)"
 #~ msgstr "Kontonamn (steg 3 av 3)"
 
@@ -4009,17 +4154,8 @@ msgstr "Lägg till eller ta bort användare och grupper"
 #~ msgid "Connection Type"
 #~ msgstr "Anslutningstyp"
 
-#~ msgid "ISP phone number"
-#~ msgstr "Internetleverantörens telefonnummer"
-
-#~ msgid "Username and password"
-#~ msgstr "Användarnamn och lösenord"
-
 #~ msgid "Account name"
 #~ msgstr "Kontonamn"
-
-#~ msgid "Address configuration"
-#~ msgstr "Adresskonfiguration"
 
 #~ msgid "Connection Name (Step 2 of 2)"
 #~ msgstr "Anslutningsnamn (steg 2 av 2)"
@@ -4373,12 +4509,6 @@ msgstr "Lägg till eller ta bort användare och grupper"
 #~ msgid "Password for User %s"
 #~ msgstr "Lösenord för användaren %s"
 
-#~ msgid "Ac_tivate"
-#~ msgstr "Ak_tivera"
-
-#~ msgid "D_eactivate"
-#~ msgstr "_Inaktivera"
-
 #~ msgid "Show All"
 #~ msgstr "Visa allt"
 
@@ -4639,9 +4769,6 @@ msgstr "Lägg till eller ta bort användare och grupper"
 
 #~ msgid "_New..."
 #~ msgstr "_Ny..."
-
-#~ msgid "Create a new location"
-#~ msgstr "Skapa en ny plats"
 
 #~ msgid "_Copy..."
 #~ msgstr "_Kopiera..."
