@@ -1,3 +1,16 @@
+2002-01-02  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (xst_tool_idle_run_directives): Removed debugs,
+	exhaust the queue on one pass. Set tool idle id to 0.
+	(xst_tool_idle_run_directives_add): Only add if not running
+	a directive. Set tool idle id to newly created id.
+	(xst_tool_idle_run_directives_remove): det tool idle id to 0.
+	(xst_tool_queue_directive): idle_queue_directive exists no more.
+	Just add the entry to the list here and then call
+	idle_run_directives_add.
+
+	Removed debug global "the" and the corresponding debug g_prints.
+
 2001-12-20  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-tool.c (xst_tool_type_init): connect the delete_event

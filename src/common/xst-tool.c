@@ -32,8 +32,8 @@
 #include "xst-xml.h"
 
 #ifdef XST_HAVE_ARCHIVER
-  #include <bonobo.h>
-  #include <config-archiver/archiver-client.h>
+#  include <bonobo.h>
+#  include <config-archiver/archiver-client.h>
 #endif
 
 #include <gnome.h>
@@ -66,8 +66,6 @@ static enum {
 	ROOT_ACCESS_SIMULATED_DISABLED,
 	ROOT_ACCESS_REAL
 } root_access = ROOT_ACCESS_NONE;
-
-gchar *the;
 
 static GtkObjectClass *parent_class;
 static gint xsttool_signals [LAST_SIGNAL] = { 0 };
@@ -496,9 +494,7 @@ report_progress (XstTool *tool, const gchar *label)
 					     report_progress_tick, NULL, tool, NULL);
 	tool->input_block = FALSE;
 
-/*	xst_tool_idle_run_directives_remove (tool);*/
 	gtk_main ();
-/*	xst_tool_idle_run_directives_add (tool);*/
 
 	if (tool->input_id)
 		gtk_input_remove (tool->input_id);
@@ -666,57 +662,37 @@ xst_tool_init_backend (XstTool *tool)
 static gint
 xst_tool_idle_run_directives (gpointer data)
 {
-	static gint a = 0;
 	XstTool           *tool = data;
 	XstDirectiveEntry *entry;
-
-	if (!tool->directive_queue) {
-#if 0	
-		g_print ("\nno queue\n");
-#endif	
-		return FALSE;
+	
+	while (tool->directive_queue)
+	{
+		entry = tool->directive_queue->data;
+		tool->directive_queue = g_slist_remove (tool->directive_queue, entry);
+		entry->callback (entry);
+		g_free (entry);
 	}
 
-	a++;
-#if 0	
-	g_print ("idles: %d\n", a);
-#endif	
+	tool->directive_queue_idle_id = 0;
 
-	entry = tool->directive_queue->data;
-	tool->directive_queue = g_slist_remove (tool->directive_queue, entry);
-	entry->callback (entry);
-	g_free (entry);
-
-#if 0	
-	g_print ("running %d\n", tool->directive_running);
-#endif	
-	a--;
-
-	return TRUE;
+	return FALSE;
 }
 
 static void
 xst_tool_idle_run_directives_add (XstTool *tool)
 {
-	gtk_idle_add_priority (GTK_PRIORITY_LOW, xst_tool_idle_run_directives, tool);
+	if (!tool->directive_queue_idle_id && !tool->directive_running)
+		tool->directive_queue_idle_id = 
+			gtk_idle_add_priority (GTK_PRIORITY_LOW, xst_tool_idle_run_directives, tool);
 }
 
 static void
 xst_tool_idle_run_directives_remove (XstTool *tool)
 {
-	gtk_idle_remove_by_data (tool);
-}
-
-static gint
-xst_tool_idle_queue_directive (gpointer data)
-{
-	XstDirectiveEntry *entry = data;
-	XstTool *tool = entry->tool;
-
-	tool->directive_queue = g_slist_append (tool->directive_queue, entry);
-	xst_tool_idle_run_directives_add (tool);
-
-	return FALSE;
+	if (tool->directive_queue_idle_id) {
+		gtk_idle_remove (tool->directive_queue_idle_id);
+		tool->directive_queue_idle_id = 0;
+	}
 }
 
 static void
@@ -819,7 +795,7 @@ xst_tool_default_set_directive_callback (XstDirectiveEntry *entry)
 				    entry->directive, NULL);
 }
 
-/* All parameters except directive can be NULL. Last argument must be NULL.
+/* All parameters except directive can be NULL.
    NULL report_sign makes no report window to be shown when directive is run.
    NULL callback runs the default directive callback, which runs a set directive.
    data is for closure. in_xml is an input xml that may be required by the directive. */
@@ -842,7 +818,8 @@ xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer dat
 	entry->report_sign = report_sign;
 	entry->directive   = directive;
 
-	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT, xst_tool_idle_queue_directive, entry);
+	tool->directive_queue = g_slist_append (tool->directive_queue, entry);
+	xst_tool_idle_run_directives_add (tool);
 }
 
 /* As specified, escapes :: to \:: and \ to \\ and joins the strings. */
@@ -880,8 +857,6 @@ xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 
 	g_return_if_fail (tool->backend_pid >= 0);
 
-	the = g_strdup (directive);
-
        	directive_line = xst_tool_join_directive (directive, ap);
 	g_string_append_c (directive_line, '\n');
 	
@@ -892,21 +867,20 @@ xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 	g_string_free (directive_line, TRUE);
 }
 
-xmlDoc *
+static xmlDoc *
 xst_tool_run_get_directive_va (XstTool *tool, const gchar *report_sign, const gchar *directive, va_list ap)
 {
 	xmlDoc *xml;
 	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
-
-	if (tool->directive_running)
-		g_print ("\n%s\n", the);
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
 
 	if (tool->backend_pid < 0)
 		xst_tool_init_backend (tool);
+	
 	tool->directive_running = TRUE;
+	xst_tool_idle_run_directives_remove (tool);
 
 	xst_tool_send_directive (tool, directive, ap);
 
@@ -930,6 +904,8 @@ xst_tool_run_get_directive_va (XstTool *tool, const gchar *report_sign, const gc
 	xml = xst_tool_read_xml_from_backend (tool);
 	
 	tool->directive_running = FALSE;
+	xst_tool_idle_run_directives_add (tool);
+	
 	return xml;
 }
 
@@ -942,7 +918,7 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar
 	return xst_tool_run_get_directive_va (tool, report_sign, directive, ap);
 }
 
-xmlDoc *
+static xmlDoc *
 xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
 			       const gchar *report_sign, const gchar *directive, va_list ap)
 {
@@ -951,14 +927,13 @@ xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
 	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
-
-	if (tool->directive_running)
-		g_print ("\n%s\n", the);
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
 
 	if (tool->backend_pid < 0)
 		xst_tool_init_backend (tool);
+
 	tool->directive_running = TRUE;
+	xst_tool_idle_run_directives_remove (tool);
 
 	/* don't actually run if we are just pretending */
 	if (root_access == ROOT_ACCESS_SIMULATED) {
@@ -988,6 +963,8 @@ xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
 	xml_out = xst_tool_read_xml_from_backend (tool);
 
 	tool->directive_running = FALSE;
+	xst_tool_idle_run_directives_add (tool);
+
 	return xml_out;
 }
 
@@ -999,15 +976,6 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 	
 	va_start (ap, directive);
 	return xst_tool_run_set_directive_va (tool, xml, report_sign, directive, ap);
-}
-
-gboolean
-xst_tool_directive_running (XstTool *tool)
-{
-	g_return_val_if_fail (tool != NULL, TRUE);
-	g_return_val_if_fail (XST_IS_TOOL (tool), TRUE);
-	
-	return tool->directive_running;
 }
 
 gboolean
@@ -1376,6 +1344,7 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 
 	tool->directive_running = FALSE;
 	tool->directive_queue   = NULL;
+	tool->directive_queue_idle_id = 0;
 }
 
 XstTool *
