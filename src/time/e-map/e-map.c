@@ -107,7 +107,7 @@ static gint e_map_expose (GtkWidget *widget, GdkEventExpose *event);
 static gint e_map_key_press (GtkWidget *widget, GdkEventKey *event);
 static void e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustment *vadj);
 
-static void update_render_pixbuf (EMap *map, ArtFilterLevel interp);
+static void update_render_pixbuf (EMap *map, ArtFilterLevel interp, gboolean render_overlays);
 static void set_scroll_area (EMap *view);
 static void request_paint_area (EMap *view, GdkRectangle *area);
 static void scroll_to (EMap *view, int x, int y);
@@ -315,7 +315,7 @@ e_map_realize (GtkWidget *widget)
 	widget->style = gtk_style_attach (widget->style, widget->window);
 
 	gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
-	update_render_pixbuf (E_MAP (widget), GDK_INTERP_BILINEAR);
+	update_render_pixbuf (E_MAP (widget), GDK_INTERP_BILINEAR, TRUE);
 }
 
 
@@ -389,7 +389,7 @@ e_map_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 		request_paint_area (E_MAP (widget), &area);
 	}
 
-	update_render_pixbuf (view, GDK_INTERP_BILINEAR);
+	update_render_pixbuf (view, GDK_INTERP_BILINEAR, TRUE);
 }
 
 
@@ -646,9 +646,10 @@ e_map_new ()
 }
 
 
-/* Coordinate translation
- * 
- * These functions translate coordinates between longitude/latitude and
+/* --- Coordinate translation --- */
+
+
+/* These functions translate coordinates between longitude/latitude and
  * the image x/y offsets, using the equidistant cylindrical projection.
  * 
  * Longitude E <-180, 180]
@@ -832,7 +833,7 @@ e_map_remove_point (EMap *map, EMapPoint *point)
 		/* FIXME: Re-scaling the whole pixbuf is more than a little
 		 * overkill when just one point is removed */
 
-		update_render_pixbuf (map, GDK_INTERP_BILINEAR);
+		update_render_pixbuf (map, GDK_INTERP_BILINEAR, TRUE);
 		repaint_point (map, point);
 	}
 	
@@ -963,7 +964,7 @@ repaint_visible (EMap *map)
 static void
 update_and_paint (EMap *map)
 {
-	update_render_pixbuf (map, GDK_INTERP_BILINEAR);
+	update_render_pixbuf (map, GDK_INTERP_BILINEAR, TRUE);
 	repaint_visible (map);
 }
 
@@ -981,7 +982,7 @@ load_map_background (EMap *view, gchar *name)
 
 	if (priv->map_pixbuf) gdk_pixbuf_unref (priv->map_pixbuf);
 	priv->map_pixbuf = pb0;
-	update_render_pixbuf (view, GDK_INTERP_BILINEAR);
+	update_render_pixbuf (view, GDK_INTERP_BILINEAR, TRUE);
 
 	return (TRUE);
 }
@@ -1002,7 +1003,7 @@ load_map_background (EMap *view, gchar *name)
 
 
 static void
-update_render_pixbuf (EMap *map, ArtFilterLevel interp)
+update_render_pixbuf (EMap *map, ArtFilterLevel interp, gboolean render_overlays)
 {
 	EMapPrivate *priv;
 	EMapPoint *point;
@@ -1052,12 +1053,15 @@ update_render_pixbuf (EMap *map, ArtFilterLevel interp)
 			  zoom, zoom,	/* Scale (x, y) */
 			  interp);
 	
-	/* Add points */
-
-	for (i = 0; i < priv->points->len; i++)
+	if (render_overlays)
 	{
-		point = g_ptr_array_index (priv->points, i);
-		update_render_point (map, point);
+		/* Add points */
+
+		for (i = 0; i < priv->points->len; i++)
+		{
+			point = g_ptr_array_index (priv->points, i);
+			update_render_point (map, point);
+		}
 	}
 }
 
@@ -1502,7 +1506,6 @@ zoom_in_smooth (EMap *map)
 	GdkWindow *window;
 	int width, height;
 	int win_width, win_height;
-	int win_center_x, win_center_y;
 	int target_width, target_height;
 	double x, y;
 
@@ -1522,12 +1525,11 @@ zoom_in_smooth (EMap *map)
 	scroll_to (map, x, y);
 #endif
 
+	update_render_pixbuf (map, GDK_INTERP_BILINEAR, FALSE);
+	repaint_visible (map);
 	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
 
-	win_center_x = x /* - priv->xofs */;
-	win_center_y = y /* - priv->yofs */;
-
-	blowup_window_area (window, priv->xofs, priv->yofs, win_center_x, win_center_y, width, height, 1.68);
+	blowup_window_area (window, priv->xofs, priv->yofs, x, y, width, height, 1.68);
 }
 
 
@@ -1546,23 +1548,13 @@ zoom_in (EMap *map)
 	area.height = GTK_WIDGET (map)->allocation.height;
 
 	priv->zoom_state = E_MAP_ZOOMED_IN;
-	update_render_pixbuf (map, GDK_INTERP_NEAREST);
+
+	update_render_pixbuf (map, GDK_INTERP_BILINEAR, TRUE);
 
 	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
-
-#ifdef DEBUG
-	printf ("Translated coordinates: (%.1f, %.1f)\n", x, y);
-#endif
-
 	priv->xofs = CLAMP (priv->xofs + x - area.width / 2.0, 0, E_MAP_GET_WIDTH (map) - area.width);
 	priv->yofs = CLAMP (priv->yofs + y - area.height / 2.0, 0, E_MAP_GET_HEIGHT (map) - area.height);
 
-#ifdef DEBUG
-	printf ("Final offsets: (%d, %d)\n---\n", priv->xofs, priv->yofs);
-#endif
-
-	request_paint_area (map, &area);
-	update_render_pixbuf (map, GDK_INTERP_BILINEAR);
 	request_paint_area (map, &area);
 }
 
@@ -1586,7 +1578,7 @@ zoom_out (EMap *map)
 	priv->yofs /= 2;
 
 	priv->zoom_state = E_MAP_ZOOMED_OUT;
-	update_render_pixbuf (map, GDK_INTERP_BILINEAR);
+	update_render_pixbuf (map, GDK_INTERP_BILINEAR, TRUE);
 
 	request_paint_area (map, &area);
 }
