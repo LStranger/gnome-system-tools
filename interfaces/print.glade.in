@@ -2,8 +2,8 @@
 <GTK-Interface>
 
 <project>
-  <name>Users Admin</name>
-  <program_name>users-admin</program_name>
+  <name>Print Admin</name>
+  <program_name>print-admin</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
   <pixmaps_directory>../../../share/ximian-setup-tools/pixmaps</pixmaps_directory>
@@ -23,7 +23,7 @@
   <class>GnomeDialog</class>
   <name>printer_settings_dialog</name>
   <visible>False</visible>
-  <title>User Settings</title>
+  <title>Printer Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>True</modal>
@@ -126,7 +126,7 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label56</name>
+	      <name>settings_conn_namelabel</name>
 	      <label>_Name</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -134,6 +134,7 @@
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <default_focus_target>settings_conn_name</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -152,7 +153,7 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label321</name>
+	      <name>settings_conn_hostlabel</name>
 	      <label>_Hostname</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -160,7 +161,6 @@
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
-	      <focus_target>user</focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -179,7 +179,7 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label123</name>
+	      <name>settings_conn_queuelabel</name>
 	      <label>_Remote Name</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -187,7 +187,6 @@
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
-	      <focus_target>password</focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -206,7 +205,8 @@
 
 	    <widget>
 	      <class>GtkEntry</class>
-	      <name>name</name>
+	      <name>settings_conn_name</name>
+	      <width>90</width>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -230,7 +230,8 @@
 
 	    <widget>
 	      <class>GtkEntry</class>
-	      <name>host</name>
+	      <name>settings_conn_host</name>
+	      <width>90</width>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -254,7 +255,8 @@
 
 	    <widget>
 	      <class>GtkEntry</class>
-	      <name>queue</name>
+	      <name>settings_conn_queue</name>
+	      <width>90</width>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>False</text_visible>
@@ -278,7 +280,7 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label88</name>
+	      <name>settings_conn_workglabel</name>
 	      <label>_Workgroup</label>
 	      <justify>GTK_JUSTIFY_RIGHT</justify>
 	      <wrap>False</wrap>
@@ -286,7 +288,6 @@
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
-	      <focus_target>workgroup</focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -305,7 +306,8 @@
 
 	    <widget>
 	      <class>GtkEntry</class>
-	      <name>workgroup</name>
+	      <name>settings_conn_workgroup</name>
+	      <width>90</width>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -329,7 +331,7 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label323</name>
+	      <name>settings_conn_userlabel</name>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
 	      <label>_Username</label>
@@ -339,7 +341,7 @@
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
-	      <default_focus_target>user</default_focus_target>
+	      <default_focus_target>settings_conn_user</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -358,7 +360,8 @@
 
 	    <widget>
 	      <class>GtkEntry</class>
-	      <name>user</name>
+	      <name>settings_conn_user</name>
+	      <width>90</width>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
@@ -384,7 +387,7 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label324</name>
+	      <name>settings_conn_passlabel</name>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
 	      <label>_Password</label>
@@ -394,7 +397,7 @@
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
-	      <default_focus_target>password</default_focus_target>
+	      <default_focus_target>settings_conn_password</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -413,7 +416,7 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label325</name>
+	      <name>settings_conn_portlabel</name>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
 	      <label>P_ort Number</label>
@@ -423,7 +426,7 @@
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
-	      <default_focus_target>port</default_focus_target>
+	      <default_focus_target>settings_conn_port</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -442,7 +445,8 @@
 
 	    <widget>
 	      <class>GtkEntry</class>
-	      <name>password</name>
+	      <name>settings_conn_password</name>
+	      <width>90</width>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
@@ -468,7 +472,8 @@
 
 	    <widget>
 	      <class>GtkEntry</class>
-	      <name>port</name>
+	      <name>settings_conn_port</name>
+	      <width>90</width>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
@@ -494,7 +499,7 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label326</name>
+	      <name>settings_conn_devicelabel</name>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
 	      <label>_Device Name</label>
@@ -504,7 +509,7 @@
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
-	      <default_focus_target>device</default_focus_target>
+	      <default_focus_target>settings_conn_device</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -523,10 +528,11 @@
 
 	    <widget>
 	      <class>GtkOptionMenu</class>
-	      <name>device</name>
+	      <name>settings_conn_device</name>
+	      <width>90</width>
 	      <can_focus>True</can_focus>
-	      <items>/dev/lp0 (LPR1)
-/dev/lp1 (LPR2)
+	      <items>/dev/lp0 (LPT1)
+/dev/lp1 (LPT2)
 /dev/ttyS0 (COM1)
 /dev/ttyS1 (COM2)
 /dev/ttyS2 (COM3)
@@ -553,8 +559,8 @@
 
 	<widget>
 	  <class>GtkFrame</class>
-	  <name>frame1</name>
-	  <label>Settings</label>
+	  <name>driverframe</name>
+	  <label>Driver</label>
 	  <label_xalign>0</label_xalign>
 	  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	  <child>
@@ -586,33 +592,7 @@
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label328</name>
-		<label>Driver</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>1</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
-		  <top_attach>0</top_attach>
-		  <bottom_attach>1</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<name>label329</name>
+		<name>settings_driver_resolutionlabel</name>
 		<label>R_esolution</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
@@ -620,7 +600,6 @@
 		<yalign>0.5</yalign>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
-		<focus_target>user</focus_target>
 		<child>
 		  <left_attach>0</left_attach>
 		  <right_attach>1</right_attach>
@@ -639,7 +618,7 @@
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label330</name>
+		<name>settings_driver_paperlabel</name>
 		<label>P_aper Size</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
@@ -647,7 +626,6 @@
 		<yalign>0.5</yalign>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
-		<focus_target>password</focus_target>
 		<child>
 		  <left_attach>0</left_attach>
 		  <right_attach>1</right_attach>
@@ -666,7 +644,7 @@
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label331</name>
+		<name>settings_options_colorlabel</name>
 		<label>_Color Depth</label>
 		<justify>GTK_JUSTIFY_RIGHT</justify>
 		<wrap>False</wrap>
@@ -674,7 +652,6 @@
 		<yalign>0.5</yalign>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
-		<focus_target>workgroup</focus_target>
 		<child>
 		  <left_attach>0</left_attach>
 		  <right_attach>1</right_attach>
@@ -692,29 +669,44 @@
 	      </widget>
 
 	      <widget>
-		<class>GtkList</class>
-		<name>driver</name>
-		<height>100</height>
-		<selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		<class>GtkScrolledWindow</class>
+		<name>scrolledwindow1</name>
+		<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+		<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 		<child>
-		  <left_attach>1</left_attach>
+		  <left_attach>0</left_attach>
 		  <right_attach>2</right_attach>
 		  <top_attach>0</top_attach>
 		  <bottom_attach>1</bottom_attach>
 		  <xpad>0</xpad>
 		  <ypad>0</ypad>
 		  <xexpand>False</xexpand>
-		  <yexpand>False</yexpand>
+		  <yexpand>True</yexpand>
 		  <xshrink>False</xshrink>
 		  <yshrink>False</yshrink>
 		  <xfill>True</xfill>
 		  <yfill>True</yfill>
 		</child>
+
+		<widget>
+		  <class>GtkViewport</class>
+		  <name>viewport1</name>
+		  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+		  <widget>
+		    <class>GtkList</class>
+		    <name>settings_driver_driverlist</name>
+		    <height>100</height>
+		    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		  </widget>
+		</widget>
 	      </widget>
 
 	      <widget>
 		<class>GtkOptionMenu</class>
-		<name>resolution</name>
+		<name>settings_driver_resolution</name>
 		<can_focus>True</can_focus>
 		<items>300x300
 400x400
@@ -730,7 +722,7 @@
 		  <bottom_attach>2</bottom_attach>
 		  <xpad>0</xpad>
 		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
+		  <xexpand>True</xexpand>
 		  <yexpand>False</yexpand>
 		  <xshrink>False</xshrink>
 		  <yshrink>False</yshrink>
@@ -741,7 +733,7 @@
 
 	      <widget>
 		<class>GtkOptionMenu</class>
-		<name>papersize</name>
+		<name>settings_driver_papersize</name>
 		<can_focus>True</can_focus>
 		<items>Letter
 Legal
@@ -756,7 +748,7 @@ A3
 		  <bottom_attach>3</bottom_attach>
 		  <xpad>0</xpad>
 		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
+		  <xexpand>True</xexpand>
 		  <yexpand>False</yexpand>
 		  <xshrink>False</xshrink>
 		  <yshrink>False</yshrink>
@@ -767,7 +759,7 @@ A3
 
 	      <widget>
 		<class>GtkOptionMenu</class>
-		<name>colordepth</name>
+		<name>settings_driver_color</name>
 		<can_focus>True</can_focus>
 		<items>16 colors
 256 colors
@@ -782,7 +774,7 @@ True Color
 		  <bottom_attach>4</bottom_attach>
 		  <xpad>0</xpad>
 		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
+		  <xexpand>True</xexpand>
 		  <yexpand>False</yexpand>
 		  <xshrink>False</xshrink>
 		  <yshrink>False</yshrink>
@@ -798,7 +790,7 @@ True Color
       <widget>
 	<class>GtkFrame</class>
 	<name>frame2</name>
-	<label>Settings</label>
+	<label>Options</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
@@ -810,7 +802,7 @@ True Color
 	<widget>
 	  <class>GtkTable</class>
 	  <name>table22</name>
-	  <rows>2</rows>
+	  <rows>3</rows>
 	  <columns>2</columns>
 	  <homogeneous>True</homogeneous>
 	  <row_spacing>2</row_spacing>
@@ -818,9 +810,9 @@ True Color
 
 	  <widget>
 	    <class>GtkCheckButton</class>
-	    <name>EOF</name>
+	    <name>settings_option_eof</name>
 	    <can_focus>True</can_focus>
-	    <label>Explicitly Eject Last Page</label>
+	    <label>_Explicitly Eject Last Page</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -841,9 +833,9 @@ True Color
 
 	  <widget>
 	    <class>GtkCheckButton</class>
-	    <name>linefeeds</name>
+	    <name>settings_option_lf</name>
 	    <can_focus>True</can_focus>
-	    <label>Convert Linefeeds</label>
+	    <label>Convert _Linefeeds</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -864,9 +856,9 @@ True Color
 
 	  <widget>
 	    <class>GtkCheckButton</class>
-	    <name>fasttext</name>
+	    <name>settings_option_fasttext</name>
 	    <can_focus>True</can_focus>
-	    <label>Fast Text Printing</label>
+	    <label>_Fast Text Printing</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -886,19 +878,19 @@ True Color
 	  </widget>
 
 	  <widget>
-	    <class>GtkVBox</class>
-	    <name>vbox457</name>
+	    <class>GtkHBox</class>
+	    <name>hbox26</name>
 	    <homogeneous>False</homogeneous>
 	    <spacing>0</spacing>
 	    <child>
-	      <left_attach>1</left_attach>
+	      <left_attach>0</left_attach>
 	      <right_attach>2</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>False</xexpand>
-	      <yexpand>False</yexpand>
+	      <yexpand>True</yexpand>
 	      <xshrink>False</xshrink>
 	      <yshrink>False</yshrink>
 	      <xfill>True</xfill>
@@ -907,14 +899,14 @@ True Color
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label332</name>
-	      <label>Number of Pages per Sheet:</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <name>settings_option_mpagelabel</name>
+	      <label>Document Pages per Sheet</label>
+	      <justify>GTK_JUSTIFY_LEFT</justify>
 	      <wrap>False</wrap>
 	      <xalign>0.5</xalign>
 	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>2</ypad>
+	      <xpad>4</xpad>
+	      <ypad>0</ypad>
 	      <child>
 		<padding>0</padding>
 		<expand>False</expand>
@@ -923,71 +915,63 @@ True Color
 	    </widget>
 
 	    <widget>
-	      <class>GtkHBox</class>
-	      <name>hbox26</name>
-	      <homogeneous>False</homogeneous>
-	      <spacing>0</spacing>
+	      <class>GtkRadioButton</class>
+	      <name>settings_option_mpage1</name>
+	      <can_focus>True</can_focus>
+	      <label>1	</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <group>pages_per_sheet</group>
 	      <child>
-		<padding>0</padding>
+		<padding>6</padding>
 		<expand>True</expand>
 		<fill>True</fill>
 	      </child>
+	    </widget>
 
-	      <widget>
-		<class>GtkRadioButton</class>
-		<name>mpage_1</name>
-		<can_focus>True</can_focus>
-		<label>1	</label>
-		<active>False</active>
-		<draw_indicator>True</draw_indicator>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
+	    <widget>
+	      <class>GtkRadioButton</class>
+	      <name>settings_option_mpage2</name>
+	      <can_focus>True</can_focus>
+	      <label>2</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <group>pages_per_sheet</group>
+	      <child>
+		<padding>6</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
+	    </widget>
 
-	      <widget>
-		<class>GtkRadioButton</class>
-		<name>mpage_2</name>
-		<can_focus>True</can_focus>
-		<label>2</label>
-		<active>False</active>
-		<draw_indicator>True</draw_indicator>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
+	    <widget>
+	      <class>GtkRadioButton</class>
+	      <name>settings_option_mpage4</name>
+	      <can_focus>True</can_focus>
+	      <label>4</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <group>pages_per_sheet</group>
+	      <child>
+		<padding>6</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
+	    </widget>
 
-	      <widget>
-		<class>GtkRadioButton</class>
-		<name>mpage_4</name>
-		<can_focus>True</can_focus>
-		<label>4</label>
-		<active>False</active>
-		<draw_indicator>True</draw_indicator>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkRadioButton</class>
-		<name>mpage_8</name>
-		<can_focus>True</can_focus>
-		<label>8</label>
-		<active>False</active>
-		<draw_indicator>True</draw_indicator>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
+	    <widget>
+	      <class>GtkRadioButton</class>
+	      <name>settings_option_mpage8</name>
+	      <can_focus>True</can_focus>
+	      <label>8</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <group>pages_per_sheet</group>
+	      <child>
+		<padding>6</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
 	    </widget>
 	  </widget>
 	</widget>
@@ -1253,6 +1237,7 @@ True Color
 <widget>
   <class>GnomeDialog</class>
   <name>new_printer_type_dialog</name>
+  <title>Add a New Printer</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
@@ -1349,7 +1334,7 @@ True Color
 
 	<widget>
 	  <class>GtkRadioButton</class>
-	  <name>radiobutton13</name>
+	  <name>new_local</name>
 	  <can_focus>True</can_focus>
 	  <label>_Local Printer</label>
 	  <active>False</active>
@@ -1364,7 +1349,7 @@ True Color
 
 	<widget>
 	  <class>GtkRadioButton</class>
-	  <name>radiobutton14</name>
+	  <name>new_smb</name>
 	  <can_focus>True</can_focus>
 	  <label>Remote _Windows (SMB) printer</label>
 	  <active>True</active>
@@ -1379,7 +1364,7 @@ True Color
 
 	<widget>
 	  <class>GtkRadioButton</class>
-	  <name>radiobutton15</name>
+	  <name>new_lpd</name>
 	  <sensitive>False</sensitive>
 	  <can_focus>True</can_focus>
 	  <label>Network UNIX (_lpd) Printer</label>
@@ -1395,7 +1380,7 @@ True Color
 
 	<widget>
 	  <class>GtkRadioButton</class>
-	  <name>radiobutton16</name>
+	  <name>new_ncp</name>
 	  <sensitive>False</sensitive>
 	  <can_focus>True</can_focus>
 	  <label>Novell _Netware (NCP) Printer</label>
@@ -1411,7 +1396,7 @@ True Color
 
 	<widget>
 	  <class>GtkRadioButton</class>
-	  <name>radiobutton17</name>
+	  <name>new_direct</name>
 	  <sensitive>False</sensitive>
 	  <can_focus>True</can_focus>
 	  <label>_Direct Network Printer</label>
