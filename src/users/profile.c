@@ -34,6 +34,8 @@
 #include "callbacks.h"
 #include "e-table.h"
 
+#define PROFILE_TABLE_SPEC "profile.etspec"
+
 typedef struct
 {
 	XstDialog       *dialog;
@@ -208,7 +210,9 @@ create_profile_table (XstDialog *xd)
 
 	spec = xst_conf_get_string (tool, "profiles");
 	if (!spec) {
-		spec = xst_load_etspec (tool, "profiles");
+		spec = xst_ui_load_etspec (tool->etspecs_common_path, PROFILE_TABLE_SPEC);
+		if (!spec)
+			g_error ("create_profile_table: Couldn't make table.");
 		xst_conf_set_string (tool, "profiles", spec);
 	}
 	

@@ -38,6 +38,11 @@
 #include "callbacks.h"
 #include "user-group-xml.h"
 
+#define USER_TABLE_SPEC "users.etspec"
+#define GROUP_TABLE_SPEC "group.etspec"
+#define NET_USER_TABLE_SPEC "net_user.etspec"
+#define NET_GROUP_TABLE_SPEC "net_group.etspec"
+
 extern XstTool *tool;
 
 GtkWidget *user_table;
@@ -504,7 +509,9 @@ create_user_table (void)
 
 	spec = xst_conf_get_string (tool, "user_spec");
 	if (!spec) {
-		spec = xst_load_etspec (tool, "users");
+		spec = xst_ui_load_etspec (tool->etspecs_common_path, USER_TABLE_SPEC);
+		if (!spec)
+			return;
 		xst_conf_set_string (tool, "user_spec", spec);
 	}
 
@@ -558,7 +565,9 @@ create_group_table (void)
 
 	spec = xst_conf_get_string (tool, "group_spec");
 	if (!spec) {
-		spec = xst_load_etspec (tool, "group");
+		spec = xst_ui_load_etspec (tool->etspecs_common_path, GROUP_TABLE_SPEC);
+		if (!spec)
+			return;
 		xst_conf_set_string (tool, "group_spec", spec);
 	}
 
@@ -608,7 +617,9 @@ create_network_group_table (GtkWidget *paned)
 
 	spec = xst_conf_get_string (tool, "net_group_spec");
 	if (!spec) {
-		spec = xst_load_etspec (tool, "net_group");
+		spec = xst_ui_load_etspec (tool->etspecs_common_path, NET_GROUP_TABLE_SPEC);
+		if (!spec)
+			return;
 		xst_conf_set_string (tool, "net_group_spec", spec);
 	}
 	net_group_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, spec, NULL);
@@ -643,7 +654,9 @@ create_network_user_table (GtkWidget *paned)
 
 	spec = xst_conf_get_string (tool, "net_user_spec");
 	if (!spec) {
-		spec = xst_load_etspec (tool, "net_user");
+		spec = xst_ui_load_etspec (tool->etspecs_common_path, NET_USER_TABLE_SPEC);
+		if (!spec)
+			return;
 		xst_conf_set_string (tool, "net_user_spec", spec);
 	}
 	net_user_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, spec, NULL);
