@@ -56,6 +56,14 @@ GstDialogSignal signals[] = {
 	{ "statichost_add",          "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "statichost_delete",       "clicked",         G_CALLBACK (on_hosts_delete_clicked) },
 	{ "statichost_delete",       "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
+	{ "dns_server_add_button",   "clicked",         G_CALLBACK (on_dns_search_add_button_clicked) },
+	{ "dns_server_add_button",   "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
+	{ "search_domain_add_button","clicked",         G_CALLBACK (on_dns_search_add_button_clicked) },
+	{ "search_domain_add_button","clicked",         G_CALLBACK (gst_dialog_modify_cb) },
+	{ "dns_server_del_button",   "clicked",         G_CALLBACK (on_dns_search_del_button_clicked) },
+	{ "dns_server_del_button",   "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
+	{ "search_domain_del_button","clicked",         G_CALLBACK (on_dns_search_del_button_clicked) },
+	{ "search_domain_del_button","clicked",         G_CALLBACK (gst_dialog_modify_cb) },
 
 /*	{ "dns_list",                "focus_in_event",  G_CALLBACK (update_hint) },*/
 /*	{ "search_list",             "focus_in_event",  G_CALLBACK (update_hint) },*/
@@ -128,13 +136,6 @@ static const GstWidgetPolicy policies[] = {
 	{ "wins_use",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
 /*	{ "samba_frame",             GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },*/
 	{ "winsserver",              GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "dns_table",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "domain",                  GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "domain_label",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "dns_list",                GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "dns_list_label",          GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "search_list",             GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "search_list_label",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "network_profiles_button", GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, TRUE  },
 	{ NULL }
 };
@@ -192,14 +193,6 @@ connect_signals (GstDialog *main_dialog, GstDialogSignal *sigs, GstDialogSignal 
 
 	g_signal_connect (G_OBJECT (main_dialog), "complexity_change",
 			  G_CALLBACK (update_complexity), NULL);
-
-	w = gst_dialog_get_widget (tool->main_dialog, "dns_list");
-	g_signal_connect (G_OBJECT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (w))),
-			  "changed", G_CALLBACK (gst_dialog_modify_cb), tool->main_dialog);
-
-	w = gst_dialog_get_widget (tool->main_dialog, "search_list");
-	g_signal_connect (G_OBJECT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (w))),
-			  "changed", G_CALLBACK (gst_dialog_modify_cb), tool->main_dialog);
 
 	gst_dialog_connect_signals (main_dialog, sigs);
 	gst_dialog_connect_signals_after (main_dialog, sigs_after);

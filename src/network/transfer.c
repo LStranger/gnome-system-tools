@@ -46,8 +46,8 @@ TransStringEntry transfer_string_entry_table[] =
 
 TransStringList transfer_string_list_table[] =
 {
-	{ "nameserver", "dns_list" },
-	{ "searchdomain", "search_list" },
+	{ "nameserver", "dns_list", "dns_server_entry"},
+	{ "searchdomain", "search_list", "search_domain_entry"},
 	{ 0, 0 }
 };
 
@@ -137,22 +137,26 @@ transfer_string_list_xml_to_gui (GstTool *tool, xmlNodePtr root)
 {
 	xmlNodePtr  node;
 	GtkWidget  *w;
+	GtkWidget  *e;
 	gint        i;
 	gchar      *s;
 
 	for (i = 0; transfer_string_list_table[i].xml_path; i++) {
 		w = gst_dialog_get_widget (tool->main_dialog, transfer_string_list_table [i].list);
-
-		gst_ui_text_view_clear (GTK_TEXT_VIEW (w));
+		e = gst_dialog_get_widget (tool->main_dialog, transfer_string_list_table [i].entry);
 
 		for (node = gst_xml_element_find_first (root, transfer_string_list_table [i].xml_path); 
 		     node; 
 		     node = gst_xml_element_find_next (node, transfer_string_list_table [i].xml_path)) {
 			if ((s = gst_xml_element_get_content (node))) {
-				gst_ui_text_view_add_text (GTK_TEXT_VIEW (w), s);
-				gst_ui_text_view_add_text (GTK_TEXT_VIEW (w), "\n");
+				dns_search_list_append (w, s);
+				
 			}
 		}
+
+		gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (
+							 GTK_TREE_VIEW (w)));
+		gtk_entry_set_text (GTK_ENTRY (e), "");
 	}
 }
 
@@ -171,9 +175,11 @@ static void
 transfer_string_list_gui_to_xml (GstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *widget;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gboolean valid;
 	int i;
-	gchar *text, *pos = NULL;
-	gchar *end;
+	gchar *text;
 	xmlNodePtr node;
 
 	for (i = 0; transfer_string_list_table [i].xml_path; i++)
@@ -184,22 +190,18 @@ transfer_string_list_gui_to_xml (GstTool *tool, xmlNodePtr root)
 
 		/* Add branches corresponding to listed data */
 		widget = gst_dialog_get_widget (tool->main_dialog, transfer_string_list_table[i].list);
-		text = gst_ui_text_view_get_text (GTK_TEXT_VIEW (widget));
+		model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
 
-		end = text + strlen (text);
-		for (; text < end; text = pos + 1) {
-			pos = (gchar *) strchr (text, '\n');
-			if (pos)
-				*pos = 0;
-			
-			if (transfer_string_is_empty (text))
-				continue;
+		valid = gtk_tree_model_get_iter_first (model, &iter);
+		while (valid) {
+			gtk_tree_model_get (model, &iter, 0, &text, -1);
 
-			node = gst_xml_element_add (root, transfer_string_list_table [i].xml_path);
-			gst_xml_element_set_content (node, text);
+			if (!transfer_string_is_empty (text)) {
+				node = gst_xml_element_add (root, transfer_string_list_table [i].xml_path);
+				gst_xml_element_set_content (node, text);
+			}
 
-			if (!pos)
-				break;
+			valid = gtk_tree_model_iter_next (model, &iter);
 		}
 	}
 }

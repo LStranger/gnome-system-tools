@@ -66,6 +66,7 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 
 	tool = user_data;
 	connection_init_gui (tool);
+	dns_search_init_gui (tool);
 	hosts_init_gui (tool);
 	profiles_table_create (tool);
 }
@@ -397,12 +398,12 @@ init_editable_filters (GstDialog *dialog)
 		{ "network_connection_other_gateway", EF_ALLOW_IP },
 		{ "network_connection_plip_local_ip", EF_ALLOW_IP },
 		{ "network_connection_plip_remote_ip", EF_ALLOW_IP },
+		{ "dns_server_entry",    EF_ALLOW_IP },
+		{ "search_domain_entry", EF_ALLOW_ENTER | EF_ALLOW_TEXT },
 		{ NULL,          EF_ALLOW_NONE }
 	};
 
 	struct tmp s1[] = {
-		{ "dns_list",    EF_ALLOW_ENTER },
-		{ "search_list", EF_ALLOW_ENTER | EF_ALLOW_TEXT },
 		{ "alias",       EF_ALLOW_ENTER | EF_ALLOW_TEXT },
 		{ NULL,          EF_ALLOW_NONE }
 	};
@@ -1052,6 +1053,139 @@ on_volume_format_value (GtkWidget *widget, gdouble value, gpointer data)
 		string = g_strdup_printf (_("Loud"));
 
 	return string;
+}
+
+/* Dns tab callbacks */
+void 
+on_dns_search_add_button_clicked (GtkWidget *button, gpointer gdata)
+{
+	GtkWidget *treeview;
+	GtkWidget *entry;
+
+	if (strcmp (gtk_widget_get_name (GTK_WIDGET (button)),
+		    "dns_server_add_button") == 0) {
+		treeview = gst_dialog_get_widget (tool->main_dialog,
+					       "dns_list");
+		entry = gst_dialog_get_widget (tool->main_dialog,
+					       "dns_server_entry");
+	}
+	else if (strcmp (gtk_widget_get_name (GTK_WIDGET (button)),
+			 "search_domain_add_button") == 0) {
+		treeview = gst_dialog_get_widget (tool->main_dialog,
+					       "search_list");
+		entry = gst_dialog_get_widget (tool->main_dialog,
+					       "search_domain_entry");
+	}
+
+	dns_search_list_append (treeview, gtk_entry_get_text (
+					GTK_ENTRY (entry)));
+}
+
+void 
+on_dns_search_del_button_clicked (GtkWidget *widget, gpointer gdata)
+{
+	GtkWidget *treeview;
+	GtkWidget *entry;
+
+	if (strcmp (gtk_widget_get_name (GTK_WIDGET (widget)),
+		    "dns_server_del_button") == 0) {
+		treeview = gst_dialog_get_widget (tool->main_dialog,
+						  "dns_list");
+		entry = gst_dialog_get_widget (tool->main_dialog,
+					       "dns_server_entry");
+	}
+	else if (strcmp (gtk_widget_get_name (GTK_WIDGET (widget)),
+			 "search_domain_del_button") == 0) {
+		treeview = gst_dialog_get_widget (tool->main_dialog,
+						  "search_list");
+		entry = gst_dialog_get_widget (tool->main_dialog,
+					       "search_domain_entry");
+	}
+	else if (strcmp (gtk_widget_get_name (GTK_WIDGET (widget)),
+			 "dns_list") == 0) {
+		treeview = widget;
+		entry = gst_dialog_get_widget (tool->main_dialog,
+					       "dns_server_entry");
+	}
+	else if (strcmp (gtk_widget_get_name (GTK_WIDGET (widget)),
+			 "search_list") == 0) {
+		treeview = widget;
+		entry = gst_dialog_get_widget (tool->main_dialog,
+					       "search_domain_entry");
+	}
+
+	dns_search_list_remove (treeview, entry);
+}
+
+void
+on_dns_search_entry_changed (GtkWidget *widget, gpointer gdata)
+{
+	GtkWidget *list;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GtkTreeSelection *selection;
+	gboolean valid;
+	gchar const *text;
+	gchar *buf;
+
+	list = (GtkWidget *) gdata;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
+	text = gtk_entry_get_text (GTK_ENTRY (widget));
+	
+	if ((!gst_dns_search_is_in_list (list, text)) &&
+	    (strlen (text) > 0))
+		gtk_tree_selection_unselect_all (selection);
+	else {
+		model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+		valid = gtk_tree_model_get_iter_first (model, &iter);
+
+		while (valid) {
+			gtk_tree_model_get (model, &iter, 0, &buf, -1);
+
+			if (strcmp (buf, text) == 0) {
+				g_free (buf);
+				gtk_tree_selection_select_iter (selection, &iter);
+				break;
+			}
+
+			g_free (buf);
+			valid = gtk_tree_model_iter_next (model, &iter);
+		}
+	}
+
+	gst_dns_search_update_sensitivity (list);
+	gtk_widget_show_all (list);
+}
+
+gboolean
+on_dns_search_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
+{
+	GtkTreePath *path;
+	GtkItemFactory *factory;
+
+	factory = (GtkItemFactory *) gdata;
+
+	if (event->button == 3)
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (treeview));
+		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
+		{
+			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
+			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
+
+			gtk_item_factory_popup (factory, event->x_root, event->y_root,
+						event->button, event->time);
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
+
+void
+on_dns_search_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_dns_search_del_button_clicked (callback_data, NULL);
 }
 
 /* Hosts tab callbacks */

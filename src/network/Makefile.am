@@ -23,6 +23,7 @@ network_admin_SOURCES = \
 	callbacks.c		callbacks.h	\
 	transfer.c		transfer.h	\
 	connection.c		connection.h	\
+	dns.c			dns.h		\
 	hosts.c			hosts.h		\
 	profile.c		profile.h	\
 	profiles-table.c	profiles-table.h \

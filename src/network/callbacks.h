@@ -93,6 +93,14 @@ gboolean on_ip_address_focus_out (GtkWidget*, GdkEventFocus*, GstConnection*);
 void on_ppp_autodetect_modem_clicked (GtkWidget*, GstConnection*);
 gchar* on_volume_format_value (GtkWidget*, gdouble, gpointer);
 
+/* DNS tab callbacks */
+void on_dns_search_add_button_clicked (GtkWidget *button, gpointer gdata);
+void on_dns_search_del_button_clicked (GtkWidget *button, gpointer gdata);
+void on_dns_search_entry_changed      (GtkWidget *entry, gpointer gdata);
+gboolean on_dns_search_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
+void on_dns_search_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_dns_search_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget);
+
 /* Hosts tab callbacks */
 void on_hosts_ip_changed (GtkEditable*, gpointer);
 void on_hosts_alias_changed (GtkTextBuffer*, gpointer);

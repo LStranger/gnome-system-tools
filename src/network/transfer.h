@@ -45,6 +45,7 @@ struct _TransStringList
   gchar *xml_path;           /* Path repeats for each item, forms list */
 
   gchar *list;
+  gchar *entry;
 };
 
 
