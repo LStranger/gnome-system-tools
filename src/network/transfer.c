@@ -40,6 +40,7 @@ TransStringEntry transfer_string_entry_table[] =
 {
 	{ "hostname", "hostname", 0, 0 },
 	{ "domain", "domain", 0, 0 },
+	{ "smbuse", NULL, "samba_use", 0 },
 	{ "workgroup", "workgroup", 0, 0 },
 	{ "description", "description", 0, 0 },
 	{ "winsuse", NULL, "wins_use", 0 },	
