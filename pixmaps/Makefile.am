@@ -1,4 +1,5 @@
 pixmaps_DATA = \
+	32_wrench_logo.png			\
 	computer.png  				\
 	boot.png				\
 	boot_wrench.png 			\
@@ -32,3 +33,5 @@ pixmaps_DATA = \
 
 
 EXTRA_DIST = $(pixmaps_DATA)
+
+
