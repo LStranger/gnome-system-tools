@@ -21,7 +21,3 @@ gchar *s = N_(".");
 gchar *s = N_("Use DHCP server");
 gchar *s = N_("Enable automatically at boot");
 gchar *s = N_("Primary networking");
-gchar *s = N_("Name Resolution Administration");
-gchar *s = N_("Scanning your system configuration.\n"
-              "\n"
-              "This could take a few seconds; please hold on in the meantime.");
