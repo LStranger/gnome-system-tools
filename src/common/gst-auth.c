@@ -48,6 +48,7 @@
 
 #include "gst-auth.h"
 #include "gst-tool.h"
+#include "gst-hig-dialog.h"
 
 #define GST_AUTH_RESPONSE_NP 1
 
@@ -55,24 +56,27 @@ static int root;			/* if we are root, no password is
 					   required */
 
 static void
-gst_auth_display_error_message (gchar *error_message)
+gst_auth_display_error_message (GstTool *tool, gchar *primary_text, gchar *secondary_text)
 {
 	GtkWidget *error_dialog;
-	
-	error_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-					       GTK_MESSAGE_ERROR,
-					       GTK_BUTTONS_OK,
-					       error_message);
+
+	error_dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					   GTK_DIALOG_MODAL,
+					   GST_HIG_MESSAGE_ERROR,
+					   primary_text,
+					   secondary_text,
+					   GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					   NULL);
 	gtk_dialog_run (GTK_DIALOG (error_dialog));
 	gtk_widget_destroy (error_dialog);
-	g_free (error_message);
 }
 
 static gboolean
 gst_auth_wait_child (GstTool *tool)
 {
 	gint status, pid;
-	gchar *error_message;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
 	gchar *auth_command;
 
 	pid = waitpid (tool->backend_pid, &status, WNOHANG);
@@ -81,10 +85,14 @@ gst_auth_wait_child (GstTool *tool)
 		if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS(status) < 255)) {
 			if (tool->remote_config) {
 				/* the proccess was running ssh */
-				error_message = g_strdup_printf (_("Could not connect to the computer."));
+				primary_text   = g_strdup (_("Could not connect to the computer"));
+				secondary_text = g_strdup (_("Check that you have access to this network "
+							     "and that the computer is actually working and running SSHD"));
 			} else {
 				/* the proccess was running su */
-				error_message = g_strdup_printf (_("The password you entered is invalid."));
+				primary_text   = g_strdup (_("The password you entered is invalid"));
+				secondary_text = g_strdup (_("Check that you typed it correctly "
+							     "and that you haven't activated caps lock"));
 			}
 		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS (status) == 255)) {
 			if (tool->remote_config)
@@ -92,14 +100,17 @@ gst_auth_wait_child (GstTool *tool)
 			else
 				auth_command = "su";
 
-			error_message = g_strdup_printf (_("Could not run \"%s\". "
-							   "Check that you have permissions to run it."),
-							 auth_command);
+			primary_text   = g_strdup_printf (_("Could not run \"%s\""), auth_command);
+			secondary_text = g_strdup (_("Check that you have permissions to run it."));
 		} else {
-			error_message = g_strdup_printf (_("An unexpected error has occurred."));
+			primary_text   = g_strdup (_("An unexpected error has ocurred."));
+			secondary_text = NULL;
 		}
 
-		gst_auth_display_error_message (error_message);
+		gst_auth_display_error_message (tool, primary_text, secondary_text);
+
+		g_free (primary_text);
+		g_free (secondary_text);
 		exit (0);
 	}
 

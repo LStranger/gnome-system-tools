@@ -27,6 +27,7 @@
 #include "gst-dialog.h"
 #include "gst-conf.h"
 #include "gst-marshal.h"
+#include "gst-hig-dialog.h"
 
 #ifdef GST_DEBUG
 /* define to x for debugging output */
@@ -499,18 +500,19 @@ gst_dialog_ask_apply (GstDialog *dialog)
                 /* Changes have been made. */
                 GtkWidget *w;
                 gint       res;
-                                                                                
-                w = gtk_message_dialog_new (GTK_WINDOW (dialog),
-                                            GTK_DIALOG_MODAL,
-                                            GTK_MESSAGE_QUESTION,
-                                            GTK_BUTTONS_YES_NO,
-                                            _("There are changes which haven't been applied.\n"
-                                              "Apply them now?"));
-                                                                                
+
+		w = gst_hig_dialog_new (GTK_WINDOW (dialog),
+					GTK_DIALOG_MODAL,
+					GST_HIG_MESSAGE_QUESTION,
+					_("There are changes which haven't been applied"),
+					_("Apply them now?"),
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
+					NULL);
                 res = gtk_dialog_run (GTK_DIALOG (w));
                 gtk_widget_destroy (w);
                                                                                 
-                if (res == GTK_RESPONSE_YES)
+                if (res == GTK_RESPONSE_APPLY)
                         apply_config (dialog);
         }
 }

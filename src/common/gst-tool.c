@@ -32,6 +32,7 @@
 #include "gst-auth.h"
 #include "gst-xml.h"
 #include "gst-marshal.h"
+#include "gst-hig-dialog.h"
 
 #ifdef GST_HAVE_ARCHIVER
 #  include <bonobo.h>
@@ -990,11 +991,13 @@ gst_tool_load_try (GstTool *tool)
 	if (!gst_tool_load (tool)) {
 		GtkWidget *d;
 
-		d = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
-					    GTK_BUTTONS_CLOSE,
-					    _("There was an error running the backend script,\n"
-					      "and the configuration could not be loaded."));
-
+		d = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					GTK_DIALOG_MODAL,
+					GST_HIG_MESSAGE_ERROR,
+					_("The configuration could not be loaded"),
+					_("There was an error running the backend script"),
+					GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					NULL);
 		gtk_dialog_run (GTK_DIALOG (d));
 		gtk_widget_destroy (d);
 		
