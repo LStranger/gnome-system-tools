@@ -866,8 +866,64 @@ empty_ptp (XstConnection *cxn)
 	}
 }
 
+static gboolean
+strempty (gchar *str)
+{
+	return (!str || !*str);
+}
+
+static gboolean
+connection_validate (XstConnection *cxn)
+{
+	gchar *error = NULL;
+	
+	switch (cxn->type) {
+	case XST_CONNECTION_ETH:
+	case XST_CONNECTION_WVLAN:
+	case XST_CONNECTION_UNKNOWN:
+		if (cxn->ip_config == IP_MANUAL &&
+		    (strempty (cxn->address) ||
+		     strempty (cxn->netmask)))
+			error = _("The IP address or netmask for the interface\n"
+				  "was left empty. Please enter valid IP\n"
+				  "addresses in those fields to continue.");
+		break;
+	case XST_CONNECTION_PLIP:
+		if (strempty (cxn->address) ||
+		    strempty (cxn->remote_address))
+			error = _("The IP address or remote address for the\n"
+				  "interface was left empty. Please enter valid\n"
+				  "IP addresses in those fields to continue.");
+		break;
+	case XST_CONNECTION_PPP:
+		if (!cxn->update_dns && strempty (cxn->dns1))
+			error = _("You chose to set the DNS servers for this\n"
+				  "connection manually, but left the IP\n"
+				  "address for the primary DNS empty. Please\n"
+				  "enter the IP for the primary DNS or uncheck\n"
+				  "the manual DNS option.");
+		break;
+	default:
+		break;
+	}
+
+	if (error) {
+		GtkWidget *message;
+		
+		message = gnome_message_box_new (error, GNOME_MESSAGE_BOX_WARNING,
+						 GNOME_STOCK_BUTTON_OK,
+						 NULL);
+		if (cxn->window)
+			gnome_dialog_set_parent (GNOME_DIALOG (message), GTK_WINDOW (cxn->window));
+		gnome_dialog_run_and_close (GNOME_DIALOG (message));
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
 static void
-connection_config_save (XstConnection *cxn)
+connection_empty_gui (XstConnection *cxn)
 {
 	empty_general (cxn);
 
@@ -887,18 +943,41 @@ connection_config_save (XstConnection *cxn)
 		empty_ip (cxn);
 		break;
 	}
+}	
 
+static gboolean
+connection_config_save (XstConnection *cxn)
+{
+	XstConnection *tmp = g_new0 (XstConnection, 1);
+
+	tmp->window = cxn->window;
+	tmp->xml = cxn->xml;
+	tmp->type = cxn->type;
+	tmp->modified = cxn->modified;
+	tmp->creating = cxn->creating;
+	tmp->frozen = cxn->frozen;
+	
+	connection_empty_gui (tmp);
+	if (!connection_validate (tmp)) {
+		connection_free (tmp);
+		return FALSE;
+	}
+
+	connection_empty_gui (cxn);
 	connection_set_modified (cxn, FALSE);
-	connection_update_row (cxn);	
+	connection_update_row (cxn);
+
+	return TRUE;
 }
 
 static void
 on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
 {
-	cxn->creating = FALSE;
+	if (connection_config_save (cxn))
+		gtk_widget_destroy (cxn->window);
+		
 	if (cxn->modified)
-		connection_config_save (cxn);
-	gtk_widget_destroy (cxn->window);
+		cxn->creating = FALSE;
 }
 
 static void

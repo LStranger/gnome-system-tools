@@ -1,3 +1,14 @@
+2001-05-29  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.c (connection_validate): Check if
+	the information for a connection is consistent.
+	Display error message if not.
+	(strempty): helper.
+	(connection_config_save): Validate connection
+	info befor accepting changes.
+	(connection_empty_gui): Sepparated from
+	connection_config_save.
+
 2001-05-28  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* connection.c (hookup_callbacks): Do IP checks on
