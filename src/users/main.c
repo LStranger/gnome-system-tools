@@ -120,10 +120,7 @@ update_complexity (void)
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_container"),
 						 complexity == XST_DIALOG_ADVANCED);
 
-	actions_set_sensitive (FALSE);
-
-	clear_all_tables ();
-	populate_all_tables ();
+/*	actions_set_sensitive (FALSE); */
 }
 
 static void

@@ -463,16 +463,13 @@ user_cursor_change (ETable *table, gint row, gpointer user_data)
 	ETreePath *path;
 	ETreeModel *model;
 	gchar *buf, *label;
-	xmlNodePtr node;
 
 	active_table = TABLE_USER;
-	
+
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
-	node = e_tree_model_node_get_data (model, path);
 
-	node = xst_xml_element_find_first (node, "login");
-	buf = xst_xml_element_get_content (node);
+	buf = xst_xml_get_child_content (e_tree_model_node_get_data (model, path), "login");
 
 	label = g_strconcat (_("Settings for user "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
@@ -489,16 +486,13 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 	ETreePath *path;
 	ETreeModel *model;
 	gchar *buf, *label;
-	xmlNodePtr node;
 
 	active_table = TABLE_GROUP;
 	
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
-	node = e_tree_model_node_get_data (model, path);
 
-	node = xst_xml_element_find_first (node, "name");
-	buf = xst_xml_element_get_content (node);
+	buf = xst_xml_get_child_content (e_tree_model_node_get_data (model, path), "name");
 
 	label = g_strconcat (_("Settings for group "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
@@ -810,7 +804,9 @@ populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node)
 
 	g_return_if_fail (model != NULL);
 	g_return_if_fail (root_path != NULL);
-	g_return_if_fail (root_node != NULL);
+
+	if (!root_node) /* no NIS for example. */
+		return;
 
 	e_tree_model_freeze (model);
 	for (node = root_node->childs; node; node = node->next)
@@ -870,11 +866,48 @@ create_tables (void)
 	return FALSE;
 }
 
+static gboolean
+table_set_cursor_node (ETable *table, xmlNodePtr old_node)
+{
+	ETreeModel *model;
+	ETreePath *path;
+	xmlNodePtr node;
+	gboolean found;
+
+	found = FALSE;
+	
+	if (!old_node)
+		return found;
+	
+	model = E_TREE_MODEL (table->model);
+	path = e_tree_model_get_root (model);
+	for (path = e_tree_model_node_get_first_child (model, path);
+		path;
+		path = e_tree_model_node_get_next (model, path))
+	{
+
+		node = e_tree_model_node_get_data (model, path);
+
+		if (node == old_node)
+		{
+			e_table_set_cursor_row (table, e_tree_model_row_of_node (model, path));
+			found = TRUE;
+			break;
+		}
+	}
+
+	return found;
+}
+
 void
 tables_set_state (gboolean state)
 {
 	ETable *u_table;
 	ETable *g_table;
+	xmlNodePtr u_node, g_node;
+	ETreeModel *model;
+	ETreePath *path;
+	gint row;
 
 	u_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	g_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
@@ -890,8 +923,31 @@ tables_set_state (gboolean state)
 		e_table_set_state (g_table, basic_group_state);
 	}
 
-	e_table_model_changed (u_table->model);
-	e_table_model_changed (g_table->model);
+	u_node = g_node = NULL;
+	
+	/* Get selected user node */
+	model = E_TREE_MODEL (u_table->model);
+	row = e_table_get_cursor_row (u_table);
+	if (row >= 0)
+	{
+		path = e_tree_model_node_at_row (model, row);
+		u_node = e_tree_model_node_get_data (model, path);
+	}
+
+	/* Get selected group node */
+	model = E_TREE_MODEL (g_table->model);
+	row = e_table_get_cursor_row (g_table);
+	if (row >= 0)
+	{
+		path = e_tree_model_node_at_row (model, row);
+		g_node = e_tree_model_node_get_data (model, path);
+	}
+	
+	clear_all_tables ();
+	populate_all_tables ();
+
+	user_actions_set_sensitive (table_set_cursor_node (u_table, u_node));
+	group_actions_set_sensitive (table_set_cursor_node (g_table, g_node));
 }
 
 static ETable *

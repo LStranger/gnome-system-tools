@@ -1,3 +1,12 @@
+2001-02-27  Tambet Ingo  <tambet@ximian.com>
+
+	* main.c (update_complexity): Moved tables flush/fill and widgets sensitivity stuff
+	from here.
+
+	* e-table.c (tables_set_state): Save selected node before flush nad restore selection
+	after new fill.
+	(table_set_cursor_node): New function, to set selection by node.
+
 2001-02-22  Chema Celorio  <chema@celorio.com>
 
 	* add xst_ prefix to the xml_ functions
