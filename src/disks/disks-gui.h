@@ -50,11 +50,14 @@ enum {
 };
 
 gchar *        gst_storage_get_human_readable_size (const gulong size);
-GdkPixbuf *    gst_storage_get_icon (const gchar *icon_name);
-gfloat         gst_storage_get_float_size (const gulong size);
+GdkPixbuf *    gst_storage_get_icon            (const gchar *icon_name);
+gfloat         gst_storage_get_float_size      (const gulong size);
 
-void           gst_storage_gui_setup (GstDisksConfig *cfg);
-void           gst_disks_gui_set_device_speed (GstDisksStorage *storage);
+void           gst_disks_gui_setup_mounted     (GtkWidget *status_label,
+						GtkWidget *mount_button,
+						gboolean mounted);
+void           gst_storage_gui_setup           (GstDisksConfig *cfg);
+void           gst_disks_gui_set_device_speed  (GstDisksStorage *storage);
 void           gst_storage_partition_gui_setup (GtkWidget *treeview, GList *partitions);
 
 #endif /* __DISKS_GUI_H */

@@ -213,25 +213,6 @@ get_partition_name (const gchar *device)
 		return _(g_strdup_printf ("Partition %s", last));
 	else
 		return _(g_strdup ("Unknown"));
-/*		c = 'a';
-		while (((last = g_strrstr (device, c)) == NULL) &&
-		       (c <= 'z')) {
-			c ++;
-	}
-	
-	ret = g_strdup_printf ("Partition %s", ++ last);
-	if ((last = g_strrstr (device, "a")) != NULL)
-		ret = g_strdup_printf ("Partition %s", ++ last);
-	else if ((last = g_strrstr (device, "b")) != NULL)
-		ret = g_strdup_printf ("Partition %s", ++ last);
-	else if ((last = g_strrstr (device, "c")) != NULL)
-		ret = g_strdup_printf ("Partition %s", ++ last);
-	else if ((last = g_strrstr (device, "d")) != NULL)
-		ret = g_strdup_printf ("Partition %s", ++ last);
-	else
-		ret = g_strdup ("Unknown");
-
-		return (_(ret));*/
 }
 		
 
@@ -338,7 +319,7 @@ storage_partition_get_property (GObject  *object, guint prop_id, GValue *value,
 }
 
 gchar *
-gst_disks_storage_partition_get_human_readable_type (GstPartitionType type)
+gst_disks_storage_partition_get_human_readable_typefs (GstPartitionType type)
 {
 	gchar *filesystems[] = {
 		"Extended 2", "Extended 3",
@@ -353,7 +334,7 @@ gst_disks_storage_partition_get_human_readable_type (GstPartitionType type)
 }
 
 GstPartitionType
-gst_disks_storage_get_type_from_name (const gchar *name)
+gst_disks_storage_partition_get_typefs_from_name (const gchar *name)
 {
 	if (g_ascii_strcasecmp (name, "ext2") == 0)
 		return PARTITION_TYPE_EXT2;
@@ -376,3 +357,29 @@ gst_disks_storage_get_type_from_name (const gchar *name)
 		return PARTITION_TYPE_UNKNOWN;
 }
 
+gchar *
+gst_disks_storage_partition_get_typefs (GstPartitionType type)
+{
+	switch (type) {
+	case PARTITION_TYPE_EXT2:
+		return g_strdup ("ext2");
+	case PARTITION_TYPE_EXT3:
+		return g_strdup ("ext3");
+	case PARTITION_TYPE_REISERFS:
+		return g_strdup ("reiserfs");
+	case PARTITION_TYPE_XFS:
+		return g_strdup ("xfs");
+	case PARTITION_TYPE_JFS:
+		return g_strdup ("jfs");
+	case PARTITION_TYPE_VFAT:
+		return g_strdup ("vfat");
+	case PARTITION_TYPE_NTFS:
+		return g_strdup ("ntfs");
+	case  PARTITION_TYPE_UNKNOWN:
+		return g_strdup ("auto");
+	default:
+		/* Partition type not mountable */
+		return NULL;
+	}
+}
+		

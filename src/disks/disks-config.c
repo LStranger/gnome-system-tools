@@ -40,7 +40,6 @@ gst_disks_config_new (void)
 	cfg = g_new0 (GstDisksConfig, 1);
 
 	cfg->storages = NULL;
-	/*cfg->num_storages = 0;*/
 
 	return cfg;
 }
@@ -52,5 +51,4 @@ gst_disks_config_add_storage (GstDisksConfig *cfg, GstDisksStorage *storage)
 	g_return_if_fail (GST_IS_DISKS_STORAGE (storage));
 	
 	cfg->storages = g_list_append (cfg->storages, (gpointer) storage);
-	/*cfg->num_storages ++;*/
 }

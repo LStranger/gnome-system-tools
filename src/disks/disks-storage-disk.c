@@ -43,7 +43,6 @@ static void storage_disk_init       (GstDisksStorageDisk      *storage);
 static void storage_disk_class_init (GstDisksStorageDiskClass *klass);
 static void storage_disk_finalize   (GObject                  *object);
 
-GtkWidget*  storage_disk_get_properties_widget   (GstDisksStorage *storage);
 static void storage_disk_setup_properties_widget (GstDisksStorage *storage);
 
 static GObjectClass *parent_class = NULL;
@@ -93,7 +92,6 @@ storage_disk_class_init (GstDisksStorageDiskClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	storage_class->get_properties_widget   = storage_disk_get_properties_widget;
 	storage_class->setup_properties_widget = storage_disk_setup_properties_widget;
 	
 	object_class->finalize = storage_disk_finalize;
@@ -115,16 +113,6 @@ storage_disk_finalize (GObject *object)
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
-GtkWidget*
-storage_disk_get_properties_widget (GstDisksStorage *storage)
-{
-	GtkWidget *widget;
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "disk_properties");
-
-	return widget;
-}
-
 static void
 storage_disk_setup_properties_widget (GstDisksStorage *storage)
 {
@@ -134,14 +122,7 @@ storage_disk_setup_properties_widget (GstDisksStorage *storage)
 
 	disk = GST_DISKS_STORAGE_DISK (storage);
 
-	speed_label = gst_dialog_get_widget (tool->main_dialog, "disk_speed_label");
-	g_object_get (G_OBJECT (storage), "speed", &speed, NULL);
-	if (speed == NULL) {
-		gst_disks_gui_set_device_speed (storage);
-	} else {
-		gtk_label_set_text (GTK_LABEL (speed_label), speed);
-		
-	}
+	gst_disks_gui_setup_disk_properties (disk);
 }
 
 GstDisksStorage*

@@ -54,7 +54,6 @@ static void storage_cdrom_set_property (GObject *object, guint prop_id,
 static void storage_cdrom_get_property (GObject *object, guint prop_id,
 					GValue *value, GParamSpec *spec);
 
-static GtkWidget*  storage_cdrom_get_properties_widget   (GstDisksStorage *storage);
 static void        storage_cdrom_setup_properties_widget (GstDisksStorage *storage);
 
 static GObjectClass *parent_class = NULL;
@@ -115,7 +114,6 @@ storage_cdrom_class_init (GstDisksStorageCdromClass *klass)
 	object_class->set_property = storage_cdrom_set_property;
 	object_class->get_property = storage_cdrom_get_property;
 
-	storage_class->get_properties_widget   = storage_cdrom_get_properties_widget;
 	storage_class->setup_properties_widget = storage_cdrom_setup_properties_widget;
 
 	g_object_class_install_property (object_class, PROP_PLAY_AUDIO,
@@ -156,16 +154,6 @@ storage_cdrom_finalize (GObject *object)
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
-static GtkWidget *
-storage_cdrom_get_properties_widget (GstDisksStorage *storage)
-{
-	GtkWidget *widget;
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "cdrom_properties");
-	
-	return widget;
-}
-
 static void 
 storage_cdrom_setup_properties_widget (GstDisksStorage *storage)
 {
@@ -175,44 +163,7 @@ storage_cdrom_setup_properties_widget (GstDisksStorage *storage)
 
 	cdrom = GST_DISKS_STORAGE_CDROM (storage);
 
-	g_object_get (G_OBJECT (storage), "speed", &speed,
-		      "device", &device, NULL);
-
-	gtk_label_set_text (
-		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_device_label")),
-		device);
-	
-	if (speed == NULL) {
-		gst_disks_gui_set_device_speed (storage);
-	} else {
-		gtk_label_set_text (
-			GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_speed_label")),
-			speed);
-	}
-		
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "play_audio_check")),
-		cdrom->priv->play_audio);
-	
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_cdr_check")),
-		cdrom->priv->write_cdr);
-					      
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_cdrw_check")),
-		cdrom->priv->write_cdrw);
-	
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "read_dvd_check")),
-		cdrom->priv->read_dvd);
-
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_dvdr_check")),
-		cdrom->priv->write_dvdr);
-
-	gtk_toggle_button_set_active (
-		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_dvdram_check")),
-		cdrom->priv->write_dvdram);
+	gst_disks_gui_setup_cdrom_properties (cdrom);
 }
 
 GstDisksStorage*

@@ -32,6 +32,7 @@
 #include "disks-config.h"
 #include "disks-storage.h"
 #include "disks-storage-disk.h"
+#include "disks-storage-cdrom.h"
 #include "disks-storage-partition.h"
 #include "disks-gui.h"
 #include "callbacks.h"
@@ -153,7 +154,7 @@ gst_storage_list_set (GtkWidget *treeview, GList *storages)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GList *list;
+	GList *list = NULL;
 	GstDisksStorage *dsk;
 	gint i;
 	gchar *icon, *name;
@@ -279,7 +280,27 @@ gst_storage_partition_gui_setup (GtkWidget *treeview, GList *partitions)
 		}
 		list = g_list_next (list);
 	}
-	
+}
+
+void
+gst_disks_gui_setup_mounted (GtkWidget *status_label, GtkWidget *mount_button, gboolean mounted)
+{
+	GtkWidget *icon, *label;
+
+	icon = gst_dialog_get_widget (tool->main_dialog, "mount_button_icon");
+	label = gst_dialog_get_widget (tool->main_dialog, "mount_button_label");
+
+	if (mounted) {
+		gtk_label_set_text (GTK_LABEL (status_label), _("Accessible"));
+		gtk_label_set_label (GTK_LABEL (label), _("_Disable"));
+		gtk_image_set_from_stock (GTK_IMAGE (icon), GTK_STOCK_UNDO,
+					  GTK_ICON_SIZE_BUTTON);
+	} else {
+		gtk_label_set_text (GTK_LABEL (status_label), _("Inccessible"));
+		gtk_label_set_label (GTK_LABEL (label), _("_Enable"));
+		gtk_image_set_from_stock (GTK_IMAGE (icon), GTK_STOCK_REDO,
+					  GTK_ICON_SIZE_BUTTON);
+	}
 }
 
 void
@@ -297,6 +318,9 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 	GtkTreeModel *model;
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
+	GtkWidget *change_mp_button;
+	GtkWidget *mount_button;
+	GtkWidget *point_entry;
 	GList *list;
 
 	g_return_if_fail (cfg != NULL);
@@ -311,6 +335,18 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 	
 	treeview = gst_partition_list_new ();
 
+	/* Point entry change, we have to update the partition object */
+	point_entry = gst_dialog_get_widget (tool->main_dialog, "point_entry");
+	g_signal_connect (G_OBJECT (point_entry), "changed",
+			  G_CALLBACK (gst_on_point_entry_changed),
+			  (gpointer) treeview);
+
+	/* Mount/Umount button clicked */
+	mount_button = gst_dialog_get_widget (tool->main_dialog, "mount_button");
+	g_signal_connect (G_OBJECT (mount_button), "clicked",
+			  G_CALLBACK (gst_on_mount_button_clicked),
+			  (gpointer) treeview);
+
 	treeview = gst_storage_list_new ();
 
 	gst_storage_list_set (treeview, list);
@@ -322,5 +358,85 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 	
 	gtk_widget_show_all (treeview);
 
+	/* Change Mount Point button callback */
+	change_mp_button = gst_dialog_get_widget (tool->main_dialog, "change_mp_button");
+	g_signal_connect (G_OBJECT (change_mp_button), "clicked",
+			  G_CALLBACK (gst_on_change_mp_button_clicked), NULL);
 }
 
+/* Porperties Widgets */
+
+/* Disk */
+void gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
+{
+	gchar *speed, *device;
+
+	g_object_get (G_OBJECT (disk), "speed", &speed,
+		      "device", &device, NULL);
+	
+	gtk_label_set_text (
+		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "disk_device_label")),
+		device);
+	
+	if (speed == NULL) {
+		gst_disks_gui_set_device_speed (GST_DISKS_STORAGE (disk));
+	} else {
+		gtk_label_set_text (
+			GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "disk_speed_label")),
+			speed);
+	}
+}
+
+/* CDROM */
+void gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
+{
+	gchar *speed, *device;
+	gboolean play_audio, write_cdr, write_cdrw, read_dvd;
+	gboolean write_dvdr, write_dvdram;
+		
+	
+	g_object_get (G_OBJECT (cdrom), "speed", &speed,
+		      "device", &device, NULL);
+
+	gtk_label_set_text (
+		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_device_label")),
+		device);
+
+	if (speed == NULL) {
+		gst_disks_gui_set_device_speed (GST_DISKS_STORAGE (cdrom));
+	} else {
+		gtk_label_set_text (
+			GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_speed_label")),
+			speed);
+	}
+
+	g_object_get (G_OBJECT (cdrom), "play_audio", &play_audio, "write_cdr", &write_cdr,
+		      "write_cdrw", &write_cdrw, "read_dvd", &read_dvd, 
+		      "write_dvdr", &write_dvdr, "write_dvdram", &write_dvdram, NULL);
+	
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "play_audio_check")),
+		play_audio);
+
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_cdr_check")),
+		write_cdr);
+
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_cdrw_check")),
+		write_cdrw);
+
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "read_dvd_check")),
+		read_dvd);
+
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_dvdr_check")),
+		write_dvdr);
+
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_dvdram_check")),
+		write_dvdram);
+	
+}
+	

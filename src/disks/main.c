@@ -28,7 +28,6 @@
 #endif
 
 #include <gnome.h>
-/*#include <gdk-pixbuf/gdk-pixbuf.h>*/
 #include <glade/glade.h>
 
 #include <stdlib.h>
@@ -46,14 +45,6 @@ static void
 connect_signals (GstTool *tool)
 {
 	GstDialogSignal signals[] = {
-		{ "disk_update_speed_button",  "clicked",
-		  G_CALLBACK (gst_disks_storage_update_device_speed) },
-		{ "cdrom_update_speed_button", "clicked",
-		  G_CALLBACK (gst_disks_storage_update_device_speed) },
-/*{ "boot_delete",   "clicked", G_CALLBACK (on_boot_delete_clicked) },
-		{ "boot_settings", "clicked", G_CALLBACK (on_boot_settings_clicked) },
-		{ "boot_add",      "clicked", G_CALLBACK (on_boot_add_clicked) },
-		{ "boot_timeout",  "changed", G_CALLBACK (gst_dialog_modify_cb) },*/
 		{ NULL }
 	};
 
@@ -86,6 +77,11 @@ main (gint argc, gchar *argv[])
 	/* on_main_dialog_update_complexity (tool->main_dialog, tool); */
 
 	/* gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "hbox_properties")); */
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (
+					    gst_dialog_get_widget (tool->main_dialog,
+								   "properties_notebook")),
+				    FALSE);
+									
 
 	gst_tool_main (tool, FALSE);
 

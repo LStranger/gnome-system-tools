@@ -257,7 +257,7 @@ gst_disks_storage_add_child (GstDisksStorage *storage, GstDisksStorage *child)
 	storage->priv->children = g_list_append (storage->priv->children, child);
 }
 
-GtkWidget*
+/*GtkWidget*
 gst_disks_storage_get_properties_widget (GstDisksStorage *storage)
 {
 	g_return_val_if_fail (GST_IS_DISKS_STORAGE (storage), NULL);
@@ -267,7 +267,7 @@ gst_disks_storage_get_properties_widget (GstDisksStorage *storage)
 	} else {
 		return NULL;
 	}
-}
+}*/
 
 void
 gst_disks_storage_setup_properties_widget (GstDisksStorage *storage)

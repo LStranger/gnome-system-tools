@@ -147,7 +147,7 @@ transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
 				buf = gst_xml_get_child_content (part_node, "type");
 				if (buf) {
 					g_object_set (G_OBJECT (part), "type",
-						      gst_disks_storage_get_type_from_name (buf),
+						      gst_disks_storage_partition_get_typefs_from_name (buf),
 						      NULL);
 					g_free (buf);
 				}

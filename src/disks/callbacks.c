@@ -44,6 +44,11 @@ enum {
 	TAB_PARTITIONS
 };
 
+enum {
+	TAB_PROP_DISK,
+	TAB_PROP_CDROM
+};
+
 void
 gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 {
@@ -57,7 +62,7 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 	GtkWidget        *treeview;
 	GList            *partitions;
 	gulong            size;
-	GtkWidget        *properties, *scrolled_properties, *scrolled_viewport, *hbox_properties;
+	GtkWidget        *properties_notebook;
 	GtkWidget        *label_properties;
 	GList            *box_children;
 
@@ -91,41 +96,24 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 								       st_model, device));
 			}
 			
-			/* Properties widget */
-			hbox_properties = gst_dialog_get_widget (tool->main_dialog, "hbox_properties");
-			properties = gst_disks_storage_get_properties_widget (storage);
-
-			if (properties) {
-				box_children = gtk_container_get_children (
-					GTK_CONTAINER (hbox_properties));
-				if (box_children) {
-					g_object_ref (G_OBJECT (box_children->data));
-					gtk_container_remove (GTK_CONTAINER (hbox_properties),
-							      GTK_WIDGET (box_children->data));
-
-					g_object_ref (G_OBJECT (properties));
-					gtk_widget_unparent (properties);
-					gtk_box_pack_start (GTK_BOX (hbox_properties), properties,
-							    TRUE, TRUE, 0);
-					gst_disks_storage_setup_properties_widget (storage);
-				} else {
-					g_object_ref (G_OBJECT (properties));
-					gtk_widget_unparent (properties);
-					gtk_box_pack_start (GTK_BOX (hbox_properties), properties,
-							    TRUE, TRUE, 0);
-					gst_disks_storage_setup_properties_widget (storage);
-				}
+			/* Properties Notebook */
+			properties_notebook = gst_dialog_get_widget (tool->main_dialog,
+								     "properties_notebook");
+			if (GST_IS_DISKS_STORAGE_DISK (storage)) {
+				gtk_widget_show (properties_notebook);
+				gtk_notebook_set_current_page (GTK_NOTEBOOK (properties_notebook),
+							       TAB_PROP_DISK);
+				
+				gst_disks_storage_setup_properties_widget (storage);
+			} else if (GST_IS_DISKS_STORAGE_CDROM (storage)) {
+				gtk_widget_show (properties_notebook);
+				gtk_notebook_set_current_page (GTK_NOTEBOOK (properties_notebook),
+							       TAB_PROP_CDROM);
+				
+				gst_disks_storage_setup_properties_widget (storage);
 			} else {
-				box_children = gtk_container_get_children (
-					GTK_CONTAINER (hbox_properties));
-				if (box_children) {
-					g_object_ref (G_OBJECT (box_children->data));
-					gtk_container_remove (GTK_CONTAINER (hbox_properties),
-							      GTK_WIDGET (box_children->data));
-				}
+				gtk_widget_hide (properties_notebook);
 			}
-			
-			gtk_widget_show_all (hbox_properties);
 
 			if (GST_IS_DISKS_STORAGE_DISK (storage)) {		
 				g_object_get (G_OBJECT (storage), "children", &partitions, NULL);
@@ -157,18 +145,15 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 	}
 }
 
-void 
-gst_on_partition_list_selection_change (GtkTreeSelection *selection, gpointer gdata)
+static void
+gst_partition_properties_refresh (GstDisksStoragePartition *part)
 {
-	GtkWidget       *notebook;
-	GtkTreeModel    *model;
-	GtkTreeIter      iter;
-	GstDisksStoragePartition *part;
 	GtkWidget *device_label;
 	GtkWidget *point_entry;
 	GtkWidget *size_progress;
-	GtkWidget *properties_table;
-	GtkWidget *fs_option_menu;
+	GtkWidget *fs_label;
+	GtkWidget *mount_button, *status_label;
+	GtkWidget *change_mp_button;
 	gchar *point, *device;
 	GstPartitionType type;
 	gulong size, free;
@@ -176,83 +161,226 @@ gst_on_partition_list_selection_change (GtkTreeSelection *selection, gpointer gd
 
 	point_entry = gst_dialog_get_widget (tool->main_dialog, "point_entry");
 	size_progress = gst_dialog_get_widget (tool->main_dialog, "size_progress");
-	fs_option_menu = gst_dialog_get_widget (tool->main_dialog, "fs_option_menu");
+	fs_label = gst_dialog_get_widget (tool->main_dialog, "fs_label");
 	device_label = gst_dialog_get_widget (tool->main_dialog, "device_label");
+	mount_button = gst_dialog_get_widget (tool->main_dialog, "mount_button");
+	status_label = gst_dialog_get_widget (tool->main_dialog, "status_label");
+	change_mp_button = gst_dialog_get_widget (tool->main_dialog, "change_mp_button");
+
+	if (part) {
+		g_object_get (G_OBJECT (part), "type", &type, "point", &point,
+			      "size", &size, "device", &device,
+			      "free", &free, "mounted", &mounted,
+			      "listed", &listed, NULL);
+		
+		gtk_widget_set_sensitive (size_progress, TRUE);
+		gtk_widget_set_sensitive (device_label, TRUE);
+		
+		if (point)
+			gtk_entry_set_text (GTK_ENTRY (point_entry), point);
+		else
+			gtk_entry_set_text (GTK_ENTRY (point_entry), "");
+		
+		if (type == PARTITION_TYPE_SWAP) {
+			gtk_widget_set_sensitive (change_mp_button, FALSE);
+			gtk_widget_set_sensitive (mount_button, FALSE);
+			gtk_editable_set_editable (GTK_EDITABLE (point_entry), FALSE);
+		} else {
+			gtk_widget_set_sensitive (change_mp_button, TRUE);
+			gtk_widget_set_sensitive (mount_button, TRUE);
+			gtk_editable_set_editable (GTK_EDITABLE (point_entry), TRUE);
+		}
+		
+		gtk_label_set_text (GTK_LABEL (device_label), device);
+		
+		gtk_label_set_text (GTK_LABEL (fs_label),
+				    gst_disks_storage_partition_get_human_readable_typefs (type));
+		
+		gst_disks_gui_setup_mounted (status_label, mount_button, mounted);
+		
+		if (mounted) {
+			gtk_progress_bar_set_fraction (
+				GTK_PROGRESS_BAR (size_progress),
+				(1 - ((gfloat)(free) / size)));
+			
+			if (free) {
+				gtk_progress_bar_set_text (
+					GTK_PROGRESS_BAR (size_progress),
+					g_strdup_printf ("%s (%s Free)",
+							 gst_storage_get_human_readable_size (size),
+							 gst_storage_get_human_readable_size (free))
+					);
+			}
+			else {
+				gtk_progress_bar_set_text (
+					GTK_PROGRESS_BAR (size_progress),
+					g_strdup_printf ("%s",
+							 gst_storage_get_human_readable_size (size))
+					);
+			}
+		}
+		else {
+			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
+			gtk_progress_bar_set_text (
+				GTK_PROGRESS_BAR (size_progress),
+				g_strdup_printf ("%s (Free space not available)",
+						 gst_storage_get_human_readable_size (size)));
+		}
+	} else {
+		gtk_entry_set_text (GTK_ENTRY (point_entry), "");
+		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), "");
+		gtk_label_set_text (GTK_LABEL (fs_label), "");
+		gtk_label_set_text (GTK_LABEL (device_label), "");
+
+		gtk_widget_set_sensitive (size_progress, FALSE);
+		gtk_widget_set_sensitive (device_label, FALSE);
+	}
+}
+
+void 
+gst_on_partition_list_selection_change (GtkTreeSelection *selection, gpointer gdata)
+{
+	GtkWidget       *notebook;
+	GtkTreeModel    *model;
+	GtkTreeIter      iter;
+	GstDisksStoragePartition *part = NULL;
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
 		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
-			g_object_get (G_OBJECT (part), "type", &type, "point", &point,
-				      "size", &size, "device", &device,
-				      "free", &free, "mounted", &mounted,
-				      "listed", &listed, NULL);
+			gst_partition_properties_refresh (part);
+		}
+	} else {
+		gst_partition_properties_refresh (part); /* part == NULL */
+	}
+}
 
-			/* gtk_widget_set_sensitive (point_entry, TRUE); */
-			gtk_widget_set_sensitive (size_progress, TRUE);
-			/* gtk_widget_set_sensitive (fs_option_menu, TRUE); */
-			gtk_widget_set_sensitive (device_label, TRUE);
+void
+gst_on_point_entry_changed (GtkWidget *entry, gpointer gdata)
+{
+	GtkWidget        *treeview;
+	GtkTreeModel     *model;
+	GtkTreeIter       iter;
+	GtkTreeSelection *selection;
+	GstDisksStoragePartition *part;
+	const gchar *point;
 
-			if (point)
-				gtk_entry_set_text (GTK_ENTRY (point_entry), point);
-			else
-				gtk_entry_set_text (GTK_ENTRY (point_entry), g_strdup (""));
+	treeview = (GtkWidget *) gdata;
 
-			gtk_label_set_text (GTK_LABEL (device_label), device);
-			
-			gtk_option_menu_set_history (GTK_OPTION_MENU (fs_option_menu), type);
-			
-			properties_table = gst_dialog_get_widget (tool->main_dialog,
-								  "partition_properties_table");
-			if (mounted) {
-				gtk_widget_set_sensitive (properties_table, TRUE);
+	point = gtk_entry_get_text (GTK_ENTRY (entry));
+
+	if (point == NULL || strlen (point) <= 0)
+		return;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
+		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
+			g_object_set (G_OBJECT (part), "point", point, NULL);
+		}
+	}
+}
+
+static gboolean
+gst_disks_partition_mount (GstDisksStoragePartition *part)
+{
+	xmlDoc *xml;
+	xmlNodePtr root, part_node;
+	gchar *device, *typefs, *point;
+	gboolean mounted, listed;
+	gchar *buf;
+	GstPartitionType type;
+
+	g_object_get (G_OBJECT (part), "type", &type, "point", &point,
+		      "device", &device, "mounted", &mounted,
+		      "listed", &listed, NULL);
+	typefs = gst_disks_storage_partition_get_typefs (type);
+
+	xml = gst_tool_run_get_directive (tool, NULL, "mount",
+					  device, typefs, point,
+					  mounted ? "1" : "0",
+					  listed  ? "1" : "0",
+					  NULL);
+	if (!xml) {
+		return FALSE;
+	}
+
+	root = gst_xml_doc_get_root (xml);
+	if (root) {
+		buf = gst_xml_get_child_content (root, "error");
+		if (buf) {
+			g_warning ("%s", buf);
+			gst_xml_doc_destroy (xml);
+			g_free (buf);
+
+			return FALSE;
+		} else {
+			part_node = gst_xml_element_find_first (root, "partition");
+			if (part_node) {
+				buf = gst_xml_get_child_content (part_node, "typefs");
+				if (buf) {
+					g_object_set (G_OBJECT (part), "type",
+						      gst_disks_storage_partition_get_typefs_from_name (buf),
+						      NULL);
+					g_free (buf);
+				}
+
+				buf = gst_xml_get_child_content (part_node, "point");
+				if (buf) {
+					g_object_set (G_OBJECT (part), "point",
+						      buf, NULL);
+					g_free (buf);
+				}
 				
-				gtk_progress_bar_set_fraction (
-					GTK_PROGRESS_BAR (size_progress),
-					(1 - ((gfloat)(free) / size)));
-
-				if (free) {
-					gtk_progress_bar_set_text (
-						GTK_PROGRESS_BAR (size_progress),
-						g_strdup_printf ("%s (%s Free)",
-								 gst_storage_get_human_readable_size (size),
-								 gst_storage_get_human_readable_size (free))
-						);
-				}
-				else {
-					gtk_progress_bar_set_text (
-						GTK_PROGRESS_BAR (size_progress),
-						g_strdup_printf ("%s",
-								 gst_storage_get_human_readable_size (size))
-						);
+				buf = gst_xml_get_child_content (part_node, "free");
+				if (buf) {
+					g_object_set (G_OBJECT (part), "free",
+						      (gulong) g_ascii_strtoull (buf, NULL, 10),
+						      NULL);
+					g_free (buf);
 				}
 			}
-			else if (listed) {
-				gtk_widget_set_sensitive (properties_table, TRUE);
+				
+			g_object_set (G_OBJECT (part), "mounted", !mounted, NULL);
+			
+			gst_xml_doc_destroy (xml);
 
-				gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
-				gtk_progress_bar_set_text (
-					GTK_PROGRESS_BAR (size_progress),
-					g_strdup_printf ("%s (Free space not available)",
-							 gst_storage_get_human_readable_size (size)));
-			}
-			else {
-				gtk_widget_set_sensitive (properties_table, FALSE);
+			return TRUE;
+		}
+		
+		
+	} else {
+		return FALSE;
+	}
+}
+		
 
-				gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
-				gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), "");
+	
+void
+gst_on_mount_button_clicked (GtkWidget *button, gpointer gdata)
+{
+	GtkWidget        *treeview;
+	GtkTreeModel     *model;
+	GtkTreeIter       iter;
+	GtkTreeSelection *selection;
+	GtkWidget        *status_label;
+	GstDisksStoragePartition *part;
+	gboolean mounted;
+
+	treeview = (GtkWidget *) gdata;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
+		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
+			if (gst_disks_partition_mount (part)) {
+				status_label = gst_dialog_get_widget (tool->main_dialog, "status_label");
+				g_object_get (G_OBJECT (part), "mounted", &mounted, NULL);
+				/*gst_disks_gui_setup_mounted (status_label, button, mounted);*/
+				gst_partition_properties_refresh (part);
 			}
 		}
-	} else { /* There is no partitions */
-		gtk_entry_set_text (GTK_ENTRY (point_entry), "");
-		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
-		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), "");
-		gtk_option_menu_set_history (GTK_OPTION_MENU (fs_option_menu), PARTITION_TYPE_UNKNOWN);
-		gtk_label_set_text (GTK_LABEL (device_label), "");
-
-		/* gtk_widget_set_sensitive (point_entry, FALSE); */
-		gtk_widget_set_sensitive (size_progress, FALSE);
-		/* gtk_widget_set_sensitive (fs_option_menu, FALSE); */
-		gtk_widget_set_sensitive (device_label, FALSE);
 	}
 }
 
@@ -301,8 +429,8 @@ gst_disks_storage_get_device_speed_cb (GstDirectiveEntry *entry)
 	speed_label = gst_dialog_get_widget (tool->main_dialog,
 					     g_strdup_printf ("%s_speed_label", media));
 
-	g_object_set (G_OBJECT (storage), "speed", _("(Getting ...)"), NULL);
-	gtk_label_set_text (GTK_LABEL (speed_label), _("(Getting ...)"));
+	g_object_set (G_OBJECT (storage), "speed", _("Getting ..."), NULL);
+	gtk_label_set_text (GTK_LABEL (speed_label), _("Getting ..."));
 
 	g_object_get (G_OBJECT (storage), "device", &device, NULL);
 	xml = gst_tool_run_get_directive (entry->tool, entry->report_sign,
@@ -332,24 +460,38 @@ gst_disks_storage_get_device_speed_cb (GstDirectiveEntry *entry)
 	g_free (media);
 }
 
-
-void 
-gst_disks_storage_update_device_speed (GtkWidget *w, gpointer gdata)
+static void
+gst_change_mount_point (GtkWidget *button, gpointer gdata)
 {
-	GstDisksStorage *storage;
-	GtkWidget *treeview;
-	GtkTreeSelection *selection;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
+	GtkWidget *filesel;
+	GtkWidget *point_entry;
 
-	treeview = gst_dialog_get_widget (tool->main_dialog, "storage_list");
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-	if (gtk_tree_selection_get_selected (GTK_TREE_SELECTION (selection), &model, &iter)) {
-		gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &storage, -1);
-		if (!GST_IS_DISKS_STORAGE (storage)) {
-			return;
-		}
-	}
+	filesel = (GtkWidget *) gdata;
 
-	gst_disks_gui_set_device_speed (storage);
+	point_entry = gst_dialog_get_widget (tool->main_dialog, "point_entry");
+
+	gtk_entry_set_text (GTK_ENTRY (point_entry),
+			    gtk_file_selection_get_filename (GTK_FILE_SELECTION (filesel)));
+}
+
+void
+gst_on_change_mp_button_clicked (GtkWidget *w, gpointer gdata)
+{
+	GtkWidget *filesel;
+
+	filesel = gtk_file_selection_new (_("Select New Mount Point Path"));
+
+	g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
+			  "clicked", G_CALLBACK (gst_change_mount_point),
+			  (gpointer) filesel);
+	
+	g_signal_connect_swapped (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
+				  "clicked", G_CALLBACK (gtk_widget_destroy),
+				  (gpointer) filesel);
+	
+	g_signal_connect_swapped (G_OBJECT (GTK_FILE_SELECTION (filesel)->cancel_button),
+				 "clicked", G_CALLBACK (gtk_widget_destroy),
+				 (gpointer) filesel);
+
+	gtk_widget_show (filesel);
 }
