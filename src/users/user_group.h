@@ -61,6 +61,7 @@ typedef struct {
 UserAccount *user_account_get_default (void);
 UserAccount *user_account_get_by_node (xmlNodePtr node);
 void         user_account_save        (UserAccount *account);
+gchar       *user_account_check       (UserAccount *account);
 void         user_account_destroy     (UserAccount *account);
 
 
@@ -76,10 +77,8 @@ gboolean check_node_complexity (xmlNodePtr node);
 gboolean  check_user_root (xmlNodePtr node, const gchar *field, const gchar *value);
 gchar    *check_user_login (xmlNodePtr node, const gchar *login);
 gchar    *check_user_uid (xmlNodePtr node, const gchar *val);
-gchar    *check_user_comment (xmlNodePtr, const gchar *val);
 gchar    *check_user_home (xmlNodePtr node, const gchar *val);
 gchar    *check_user_shell (xmlNodePtr node, const gchar *val);
-gint      check_user_group (UserAccount *account, const gchar *val, gchar **error);
 
 gboolean check_group_name (GtkWindow *xd, xmlNodePtr node, const gchar *name);
 gboolean check_group_gid (GtkWindow *xd, xmlNodePtr node, const gchar *val);

@@ -554,45 +554,21 @@ user_account_gui_save (UserAccountGui *gui)
 	account->new = gui->account->new;
 	
 	buf = gtk_entry_get_text (gui->name);
-	if ((error = check_user_login (node, buf)))
-		goto err;
 	account->name = g_strdup (buf);
 	
 	account->comment = user_account_gui_save_comment (gui);
 	
 	buf = gtk_entry_get_text (gui->home);
-	if ((error = check_user_home (node, buf)))
-		goto err;
 	account->home = g_strdup (buf);
 	
 	buf = gtk_entry_get_text (GTK_ENTRY (gui->shell->entry));
-	if ((error = check_user_shell (node, buf)))
-		goto err;
 	account->shell = g_strdup (buf);
 	
 	buf = g_strdup_printf ("%d", gtk_spin_button_get_value_as_int (gui->uid));
-	if ((error = check_user_uid (node, buf))) {
-		g_free (buf);
-		goto err;
-	}
 	account->uid = (buf);
 
 	buf = gtk_entry_get_text (GTK_ENTRY (gui->group->entry));
-	switch (check_user_group (account, buf, &error)) {
-	case -1: /* Name is not valid */
-		goto err;
-		break;
-	case 0: /* Valid, exists */		
-		account->group = g_strdup (buf);
-		break;
-	case 1: /* Valid, new */
-		account->group = g_strdup (buf);
-		break;
-	default:
-		g_warning ("user_account_gui_save: Shouldn't be here.");
-		break;
-	}
-	g_free (error);
+	account->group = g_strdup (buf);
 
 	/* Password */
 	if (gtk_toggle_button_get_active (gui->pwd_random)) {
@@ -607,9 +583,11 @@ user_account_gui_save (UserAccountGui *gui)
 			gchar *buf1 = gtk_entry_get_text (gui->pwd1);
 
 			buf = gtk_entry_get_text (gui->pwd2);
-			if ((error = passwd_check (buf1, buf, gtk_toggle_button_get_active (gui->quality))))
-				goto err;
-			else
+			if ((error = passwd_check (buf1, buf, gtk_toggle_button_get_active (gui->quality)))) {
+				user_account_gui_error (parent, error);
+				user_account_destroy (account);
+				return FALSE;
+			} else
 				account->password = g_strdup (buf);
 		} else
 			account->password = NULL;
@@ -622,16 +600,16 @@ user_account_gui_save (UserAccountGui *gui)
 	account->extra_groups = NULL;
 	while (gtk_clist_get_text (gui->member, row++, 0, &buf))
 		account->extra_groups = g_slist_prepend (account->extra_groups, buf);
-	
-	user_account_destroy (gui->account);
-	gui->account = account;
-	
-	return TRUE;
 
-err:
-	user_account_gui_error (parent, error);
-	user_account_destroy (account);
-	return FALSE;
+	if ((error = user_account_check (account))) {
+		user_account_gui_error (parent, error);
+		user_account_destroy (account);
+		return FALSE;
+	} else {
+		user_account_destroy (gui->account);
+		gui->account = account;
+		return TRUE;
+	}
 }
 
 void

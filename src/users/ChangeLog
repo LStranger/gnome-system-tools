@@ -1,3 +1,12 @@
+2001-06-08  Tambet Ingo  <tambet@ximian.com>
+
+	* user_group.c (user_account_check): Implement, centralizes all different checks.
+	(user_account_check_group): Cleaned.
+	(user_account_check_comment): Implement, fixes bug #3238.
+	(check_user_comment): Removed, was empty and useless anyway.
+
+	* user_settings.c (user_account_gui_save): Cleaned, checking is moved to proper place.
+
 2001-06-07  Tambet Ingo  <tambet@ximian.com>
 
 	* e-search-bar/Makefile.am: GAL_CFLAGS -> XST_CFLAGS (thanks, clahey).

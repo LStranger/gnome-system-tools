@@ -354,11 +354,28 @@ check_user_uid (xmlNodePtr node, const gchar *val)
 	return buf;
 }
 
-gchar *
-check_user_comment (xmlNodePtr node, const gchar *val)
+static gchar *
+user_account_check_comment (UserAccount *account)
 {
-	/* What could be wrong with comment? */
-	return NULL;
+	gint i;
+	gchar *buf = NULL;	
+	gchar *comment;
+
+	/* comment can be empty, no error */
+	if (!account->comment)
+		return buf;
+
+	comment = g_strjoinv (NULL, account->comment);
+	
+	for (i = 0; i < strlen (comment); i++) {
+		if (!isspace (comment[i]) && !isalnum (comment[i])) {
+			buf = g_strdup (N_("Invalid comment"));
+			break;
+		}
+	}
+
+	g_free (comment);
+	return buf;
 }
 
 gchar *
@@ -424,20 +441,21 @@ parse_group (UserAccount *account, const gchar *val)
 	return buf;
 }
 
-gint
-check_user_group (UserAccount *account, const gchar *val, gchar **error)
+static gint
+user_account_check_group (UserAccount *account, gchar **error)
 {
 	xmlNodePtr group_node;
 	gchar *group;
 	gint retval;
-
-	group = parse_group (account, val);
+	gchar *group_name = account->group;	
+	
+	group = parse_group (account, group_name);
 	group_node = get_corresp_field (account->node);
 
 	if (!is_valid_name (group)) {
 		*error = g_strdup (_("Group name is not valid."));
 		retval = -1;
-	} else if (node_exists (group_node, "group", val)) {
+	} else if (node_exists (group_node, "group", group_name)) {
 		*error = g_strdup (_("Such group id already exists."));
 		retval = 0;
 	} else {
@@ -1292,6 +1310,33 @@ user_account_save (UserAccount *account)
 
 	current_table_update_row (TABLE_USER);
 	xst_dialog_modify (tool->main_dialog);
+}
+
+gchar *
+user_account_check (UserAccount *account)
+{
+	gchar *buf;
+	xmlNodePtr node = account->node;	
+
+	if ((buf = check_user_login (node, account->name)))
+		return buf;
+
+	if ((buf = user_account_check_comment (account)))
+		return buf;
+	
+	if ((buf = check_user_home (node, account->home)))
+		return buf;
+
+	if ((buf = check_user_shell (node, account->shell)))
+		return buf;
+
+	if ((buf = check_user_uid (node, account->uid)))
+		return buf;
+
+	if ((user_account_check_group (account, &buf)) < 0)
+		return buf;
+			
+	return NULL;
 }
 
 void
