@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ximian-setup-tools\n"
-"POT-Creation-Date: 2001-02-19 12:41+0300\n"
-"PO-Revision-Date: 2001-02-19 12:53+03:00\n"
+"POT-Creation-Date: 2001-02-21 20:58+0300\n"
+"PO-Revision-Date: 2001-02-21 21:01+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgid "Swap Settings"
 msgstr "õÓÔÁÎÏ×ËÉ ĞÏÄËÁŞËÉ"
 
 #: interfaces/disks.glade.h:9 interfaces/memory.glade.h:14
-#: interfaces/network.glade.h:44
+#: interfaces/network.glade.h:47
 msgid "Device:"
 msgstr "õÓÔÒÏÊÓÔ×Ï:"
 
@@ -155,7 +155,7 @@ msgid "Aliases Settings"
 msgstr "õÓÔÁÎÏ×ËÉ ĞÓÅ×ÄÏÎÉÍÏ×"
 
 #: interfaces/nameresolution.glade.h:8 interfaces/network.glade.h:34
-#: interfaces/network.glade.h:56
+#: interfaces/network.glade.h:60
 msgid "IP address:"
 msgstr "IP-ÁÄÒÅÓÁ:"
 
@@ -309,11 +309,11 @@ msgstr "ïÓÎÏ×ÎÙÅ ÕÓÔÁÎÏ×ËÉ"
 msgid "Main group:"
 msgstr "ïÓÎÏ×ÎÁÑ ÇÒÕĞĞÁ:"
 
-#: interfaces/network.glade.h:70 interfaces/users.glade.h:10
+#: interfaces/network.glade.h:74 interfaces/users.glade.h:10
 msgid "User name:"
 msgstr "éÍÑ ĞÏÌØÚÏ×ÁÔÅÌÑ:"
 
-#: interfaces/network.glade.h:45 interfaces/shares.glade.h:20
+#: interfaces/network.glade.h:48 interfaces/shares.glade.h:20
 #: interfaces/users.glade.h:11
 msgid "Comment:"
 msgstr "ëÏÍÍÅÎÔÁÒÉÊ:"
@@ -582,7 +582,7 @@ msgstr "óÅÔØ Windows"
 msgid "WINS server:"
 msgstr "óÅÒ×ÅÒ WINS:"
 
-#: interfaces/network.glade.h:15 interfaces/network.glade.h:49
+#: interfaces/network.glade.h:15 interfaces/network.glade.h:53
 msgid "General"
 msgstr "ïÂİÉÅ"
 
@@ -590,7 +590,7 @@ msgstr "ïÂİÉÅ"
 msgid "How other computers are accessed."
 msgstr "ëÁË ÂÕÄÕÔ ÄÏÓÔÕĞÎÙ ÄÒÕÇÉÅ ËÏÍĞØÀÔÅÒÙ."
 
-#: interfaces/network.glade.h:18 interfaces/network.glade.h:46
+#: interfaces/network.glade.h:18 interfaces/network.glade.h:49
 msgid "Status"
 msgstr "óÏÓÔÏÑÎÉÅ"
 
@@ -641,7 +641,7 @@ msgstr "DNS"
 msgid "Aliases of other computers."
 msgstr "ğÓÅ×ÄÏÎÉÍÙ ÄÌÑ ÄÒÕÇÉÈ ËÏÍĞØÀÔÅÒÏ×."
 
-#: interfaces/network.glade.h:31 src/network/connection.c:119
+#: interfaces/network.glade.h:31 src/network/connection.c:227
 msgid "Active"
 msgstr "áËÔÉ×ÎÙÊ"
 
@@ -666,140 +666,138 @@ msgid "Hosts"
 msgstr "èÏÓÔÙ"
 
 #: interfaces/network.glade.h:41
-msgid "Connection Settings"
-msgstr "õÓÔÁÎÏ×ËÉ ÓÏÅÄÉÎÅÎÉÊ"
-
-#: interfaces/network.glade.h:42
-msgid "I can't think of anything for this page."
-msgstr "îÅ ÍÏÇÕ ÎÉŞÅÇÏ ĞÒÉÄÕÍÁÔØ ÄÌÑ ÜÔÏÊ ÓÔÒÁÎÉÃÙ."
-
-#: interfaces/network.glade.h:43
-msgid "Connection"
-msgstr "óÏÅÄÉÎÅÎÉÅ"
-
-#: interfaces/network.glade.h:47
-msgid "Activate this connection when the computer starts"
-msgstr ""
-"áËÔÉ×ÉÒÏ×ÁÔØ ÜÔÏ ÓÏÅÄÉÎÅÎÉÅ ĞÒÉ ÚÁĞÕÓËÅ "
-"ËÏÍĞØÀÔÅÒÁ"
-
-#: interfaces/network.glade.h:48
-msgid "This device is active"
-msgstr "üÔÏ ÕÓÔÒÏÊÓÔ×Ï ÁËÔÉ×ÎÏ"
-
-#: interfaces/network.glade.h:50
-msgid "How the IP address for this connection is determined"
-msgstr ""
-"ëÁË ÏĞÒÅÄÅÌÑÔÓÑ IP-ÁÄÒÅÓ ÄÌÑ ÜÔÏÇÏ "
-"ÓÏÅÄÉÎÅÎÉÑ"
-
-#: interfaces/network.glade.h:51
-msgid "Configuration:"
-msgstr "îÁÓÔÒÏÊËÁ:"
-
-#: interfaces/network.glade.h:52 src/network/connection.c:474
-msgid "Manual"
-msgstr "÷ÒÕŞÎÕÀ"
-
-#: interfaces/network.glade.h:53 src/network/connection.c:475
-msgid "DHCP"
-msgstr "DHCP"
-
-#: interfaces/network.glade.h:54 src/network/connection.c:476
-msgid "BOOTP"
-msgstr "BOOTP"
-
-#: interfaces/network.glade.h:55
-msgid "Update DNS settings when this connection becomes active"
-msgstr ""
-"ïÂÎÏ×ÌÑÔØ ÕÓÔÁÎÏ×ËÉ DNS ËÏÇÄÁ ÜÔÏ "
-"ÓÏÅÄÉÎÅÎÉÅ ÓÔÁÎÏ×ÉÔÓÑ ÁËÔÉ×ÎÙÍ"
-
-#: interfaces/network.glade.h:57
-msgid "Subnet mask:"
-msgstr "íÁÓËÁ ĞÏÄÓÅÔÉ:"
-
-#: interfaces/network.glade.h:58
-msgid "Gateway address:"
-msgstr "áÄÒÅÓ ÛÌÀÚÁ:"
-
-#: interfaces/network.glade.h:59
-msgid "IP Settings"
-msgstr "õÓÔÁÎÏ×ËÉ IP"
-
-#: interfaces/network.glade.h:60
-msgid "Wireless networking settings."
-msgstr "õÓÔÁÎÏ×ËÉ ÂÅÓĞÒÏ×ÏÄÎÏÊ ÓÅÔÉ."
-
-#: interfaces/network.glade.h:61
-msgid "Ad-Hoc mode"
-msgstr "òÅÖÉÍ Ad-Hoc"
-
-#: interfaces/network.glade.h:62
-msgid "Ad-Hoc Settings"
-msgstr "õÓÔÁÎÏ×ËÉ Ad-Hoc"
-
-#: interfaces/network.glade.h:63
-msgid "Session ID:"
-msgstr "ID ÓÅÁÎÓÁ:"
-
-#: interfaces/network.glade.h:64
-msgid "Frequency (GHz):"
-msgstr "şÁÓÔÏÔÁ (ççÃ):"
-
-#: interfaces/network.glade.h:65
-msgid "2.422"
-msgstr "2.422"
-
-#: interfaces/network.glade.h:66
-msgid "Channel:"
-msgstr "ëÁÎÁÌ:"
-
-#: interfaces/network.glade.h:67
-msgid "WaveLAN"
-msgstr "WaveLAN"
-
-#: interfaces/network.glade.h:68
-msgid "How to dial up to the internet."
-msgstr "ëÁË ĞÏÄËÌÀŞÁÔØÓÑ Ë ÉÎÔÅÒÎÅÔ ĞÏ ÍÏÄÅÍÕ."
-
-#: interfaces/network.glade.h:69
-msgid "Phone number:"
-msgstr "îÏÍÅÒ ÔÅÌÅÆÏÎÁ:"
-
-#: interfaces/network.glade.h:71 interfaces/shares.glade.h:12
-msgid "Password:"
-msgstr "ğÁÒÏÌØ:"
-
-#: interfaces/network.glade.h:72
-msgid "Modem port:"
-msgstr "ğÏÒÔ ÍÏÄÅÍÁ:"
-
-#: interfaces/network.glade.h:73
-msgid "PPP"
-msgstr "PPP"
-
-#: interfaces/network.glade.h:74
-msgid "More Options >>"
-msgstr "äÏĞÏÌÎÉÔÅÌØÎÙÅ ĞÁÒÁÍÅÔÒÙ >>"
-
-#: interfaces/network.glade.h:75
 msgid "Select which type of connection you would like to add."
 msgstr ""
 "÷ÙÂÅÒÉÔÅ ÔÉĞ ÓÏÅÄÉÎÅÎÉÑ, ËÏÔÏÒÙÊ ×Ù "
 "ÈÏÔÉÔÅ ÄÏÂÁ×ÉÔØ."
 
-#: interfaces/network.glade.h:76
+#: interfaces/network.glade.h:42
 msgid "Ethernet"
 msgstr "Ethernet"
 
-#: interfaces/network.glade.h:77
+#: interfaces/network.glade.h:43
 msgid "Wavelan"
 msgstr "Wavelan"
 
-#: interfaces/network.glade.h:78
+#: interfaces/network.glade.h:44
 msgid "Modem (PPP)"
 msgstr "íÏÄÅÍ (PPP)"
+
+#: interfaces/network.glade.h:45
+msgid ""
+"Unspecific data, such as activation management. The comment will help you "
+"identify the interface in the future."
+msgstr "îÅÕËÁÚÁÎÎÙÅ ÄÁÎÎÙÅ, ÔÁËÉÅ ËÁË ÕĞÒÁ×ÌÅÎÉÅ ÁËÔÉ×ÁÃÉÅÊ. ëÏÍÍÅÎÔÁÒÉÊ ĞÏÍÏÖÅÔ ×ÁÍ ÏĞÒÅÄÅÌÉÔØ ÉÎÔÅÒÆÅÊÓ × ÂÕÄÕİÅÍ."
+
+#: interfaces/network.glade.h:46
+msgid "Connection"
+msgstr "óÏÅÄÉÎÅÎÉÅ"
+
+#: interfaces/network.glade.h:50
+msgid "This device is active"
+msgstr "üÔÏ ÕÓÔÒÏÊÓÔ×Ï ÁËÔÉ×ÎÏ"
+
+#: interfaces/network.glade.h:51
+msgid "Activate this connection when the computer starts"
+msgstr ""
+"áËÔÉ×ÉÒÏ×ÁÔØ ÜÔÏ ÓÏÅÄÉÎÅÎÉÅ ĞÒÉ ÚÁĞÕÓËÅ "
+"ËÏÍĞØÀÔÅÒÁ"
+
+#: interfaces/network.glade.h:52
+msgid "Allow activation control for all users"
+msgstr "ğÏÚ×ÏÌÉÔØ ÕĞÒÁ×ÌÅÎÉÅ ÁËÔÉ×ÁÃÉÅÊ ÄÌÑ ×ÓÅÈ ĞÏÌØÚÏ×ÁÔÅÌÅÊ"
+
+#: interfaces/network.glade.h:54
+msgid "How the IP address for this connection is determined"
+msgstr ""
+"ëÁË ÏĞÒÅÄÅÌÑÔÓÑ IP-ÁÄÒÅÓ ÄÌÑ ÜÔÏÇÏ "
+"ÓÏÅÄÉÎÅÎÉÑ"
+
+#: interfaces/network.glade.h:55
+msgid "Configuration:"
+msgstr "îÁÓÔÒÏÊËÁ:"
+
+#: interfaces/network.glade.h:56 src/network/connection.c:584
+msgid "Manual"
+msgstr "÷ÒÕŞÎÕÀ"
+
+#: interfaces/network.glade.h:57 src/network/connection.c:585
+msgid "DHCP"
+msgstr "DHCP"
+
+#: interfaces/network.glade.h:58 src/network/connection.c:586
+msgid "BOOTP"
+msgstr "BOOTP"
+
+#: interfaces/network.glade.h:59
+msgid "Update DNS settings when this connection becomes active"
+msgstr ""
+"ïÂÎÏ×ÌÑÔØ ÕÓÔÁÎÏ×ËÉ DNS ËÏÇÄÁ ÜÔÏ "
+"ÓÏÅÄÉÎÅÎÉÅ ÓÔÁÎÏ×ÉÔÓÑ ÁËÔÉ×ÎÙÍ"
+
+#: interfaces/network.glade.h:61
+msgid "Subnet mask:"
+msgstr "íÁÓËÁ ĞÏÄÓÅÔÉ:"
+
+#: interfaces/network.glade.h:62
+msgid "Gateway address:"
+msgstr "áÄÒÅÓ ÛÌÀÚÁ:"
+
+#: interfaces/network.glade.h:63
+msgid "IP Settings"
+msgstr "õÓÔÁÎÏ×ËÉ IP"
+
+#: interfaces/network.glade.h:64
+msgid "Wireless networking settings."
+msgstr "õÓÔÁÎÏ×ËÉ ÂÅÓĞÒÏ×ÏÄÎÏÊ ÓÅÔÉ."
+
+#: interfaces/network.glade.h:65
+msgid "Ad-Hoc mode"
+msgstr "òÅÖÉÍ Ad-Hoc"
+
+#: interfaces/network.glade.h:66
+msgid "Ad-Hoc Settings"
+msgstr "õÓÔÁÎÏ×ËÉ Ad-Hoc"
+
+#: interfaces/network.glade.h:67
+msgid "Session ID:"
+msgstr "ID ÓÅÁÎÓÁ:"
+
+#: interfaces/network.glade.h:68
+msgid "Frequency (GHz):"
+msgstr "şÁÓÔÏÔÁ (ççÃ):"
+
+#: interfaces/network.glade.h:69
+msgid "2.422"
+msgstr "2.422"
+
+#: interfaces/network.glade.h:70
+msgid "Channel:"
+msgstr "ëÁÎÁÌ:"
+
+#: interfaces/network.glade.h:71
+msgid "WaveLAN"
+msgstr "WaveLAN"
+
+#: interfaces/network.glade.h:72
+msgid "How to dial up to the internet."
+msgstr "ëÁË ĞÏÄËÌÀŞÁÔØÓÑ Ë ÉÎÔÅÒÎÅÔ ĞÏ ÍÏÄÅÍÕ."
+
+#: interfaces/network.glade.h:73
+msgid "Phone number:"
+msgstr "îÏÍÅÒ ÔÅÌÅÆÏÎÁ:"
+
+#: interfaces/network.glade.h:75 interfaces/shares.glade.h:12
+msgid "Password:"
+msgstr "ğÁÒÏÌØ:"
+
+#: interfaces/network.glade.h:76
+msgid "Modem port:"
+msgstr "ğÏÒÔ ÍÏÄÅÍÁ:"
+
+#: interfaces/network.glade.h:77
+msgid "PPP"
+msgstr "PPP"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -882,7 +880,10 @@ msgstr "ğÏÚ×ÏÌÉÔØ ÚÁĞÉÓØ ÜÔÉÍ ËÌÉÅÎÔÁÍ"
 msgid ""
 "Imports are directories wich reside in other computers and are accessible "
 "through the network."
-msgstr "éÍĞÏÒÔ -- ÜÔÏ ËÁÔÁÌÏÇÉ, ËÏÔÏÒÙÅ ÒÁÓĞÏÌÏÖÅÎÙ ÎÁ ÄÒÕÇÉÈ ËÏÍĞØÀÔÅÒÁÈ É ÄÏÓÔÕĞÎÙ ŞÅÒÅÚ ÓÅÔØ."
+msgstr ""
+"éÍĞÏÒÔ -- ÜÔÏ ËÁÔÁÌÏÇÉ, ËÏÔÏÒÙÅ "
+"ÒÁÓĞÏÌÏÖÅÎÙ ÎÁ ÄÒÕÇÉÈ ËÏÍĞØÀÔÅÒÁÈ É "
+"ÄÏÓÔÕĞÎÙ ŞÅÒÅÚ ÓÅÔØ."
 
 #: interfaces/shares.glade.h:31
 msgid "Location"
@@ -964,7 +965,12 @@ msgid ""
 "The directories in your machine may be made available to others through the "
 "network using exports. SMB exports are compatible with Microsoft Windows "
 "(TM) and Unix or Linux machines with Samba installed."
-msgstr "ëÁÔÁÌÏÇÉ ÎÁ ×ÁÛÅÍ ËÏÍĞØÀÔÅÒÅ ÍÏÇÕÔ ÂÙÔØ ÄÏÓÔÕĞÎÙ ÄÒÕÇÍÉÍ ŞÅÒÅÚ ÓÅÔØ Ó ÉÓĞÏÌØÚÏ×ÁÎÉÅÍ ÜËÓĞÏÒÔÁ. üËÓĞÏÒÔ SMB ÓÏ×ÍÅÓÔÉÍ Ó MS Windows (TM) É ËÏÍĞØÀÔÅÒÁÍÉ Unix ÉÌÉ Linux, ÎÁ ËÏÔÏÒÙÈ ÕÓÔÁÎÏ×ÌÅÎÁ Samba."
+msgstr ""
+"ëÁÔÁÌÏÇÉ ÎÁ ×ÁÛÅÍ ËÏÍĞØÀÔÅÒÅ ÍÏÇÕÔ ÂÙÔØ "
+"ÄÏÓÔÕĞÎÙ ÄÒÕÇÍÉÍ ŞÅÒÅÚ ÓÅÔØ Ó "
+"ÉÓĞÏÌØÚÏ×ÁÎÉÅÍ ÜËÓĞÏÒÔÁ. üËÓĞÏÒÔ SMB "
+"ÓÏ×ÍÅÓÔÉÍ Ó MS Windows (TM) É ËÏÍĞØÀÔÅÒÁÍÉ Unix "
+"ÉÌÉ Linux, ÎÁ ËÏÔÏÒÙÈ ÕÓÔÁÎÏ×ÌÅÎÁ Samba."
 
 #: interfaces/shares.glade.h:59
 msgid "SMB exports"
@@ -986,7 +992,10 @@ msgstr "ëÌÉÅÎÔ"
 msgid ""
 "NFS exports are used to share directories with Unix or Linux machines over "
 "the network."
-msgstr "üËÓĞÏÒÔ NFS ÉÓĞÏÌØÚÕÅÔÓÑ ÄÌÑ ÓÏ×ÍÅÓÔÎÏÇÏ ÄÏÓÔÕĞÁ ŞÅÒÅÚ ÓÅÔØ Ë ËÁÔÁÌÏÇÁÍ Ó ËÏÍĞØÀÔÅÒÏ× Unix ÉÌÉ Linux."
+msgstr ""
+"üËÓĞÏÒÔ NFS ÉÓĞÏÌØÚÕÅÔÓÑ ÄÌÑ ÓÏ×ÍÅÓÔÎÏÇÏ "
+"ÄÏÓÔÕĞÁ ŞÅÒÅÚ ÓÅÔØ Ë ËÁÔÁÌÏÇÁÍ Ó "
+"ËÏÍĞØÀÔÅÒÏ× Unix ÉÌÉ Linux."
 
 #: interfaces/shares.glade.h:71
 msgid "NFS exports"
@@ -1448,7 +1457,7 @@ msgid "Settings for Alias %s"
 msgstr "õÓÔÁÎÏ×ËÉ ÄÌÑ ĞÓÅ×ÄÏÎÉÍÏ× %s"
 
 #. Changes have been made.
-#: src/nameresolution/callbacks.c:651 src/network/connection.c:368
+#: src/nameresolution/callbacks.c:651
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
@@ -1512,9 +1521,12 @@ msgid ""
 "platform. In the future, you will be able to specify\n"
 "one at this point, but today we'll just quit."
 msgstr ""
-"óÅÒ×ÅÒÎÁÑ ĞÏÄÓÉÓÔÅÍÁ ÎÅ ÓÍÏÇÌÁ ÏĞÒÅÄÅÌÉÔØ ÔÉĞ ×ÁÛÅÇÏ\n"
-"ËÏÍĞØÀÔÅÒÁ. ÷ ÂÕÄÕİÅÍ, ×Ù ÓÍÏÖÅÔÅ ÕËÁÚÁÔØ ÏÄÉÎ × ÜÔÏÍ\n"
-"ÍÅÓÔÅ, ÎÏ ÓÅÇÏÄÎÑ ÍÙ ĞÒÏÓÔÏ ĞÒÅÒÙ×ÁÅÍ ×ÙĞÏÌÎÅÎÉÅ."
+"óÅÒ×ÅÒÎÁÑ ĞÏÄÓÉÓÔÅÍÁ ÎÅ ÓÍÏÇÌÁ "
+"ÏĞÒÅÄÅÌÉÔØ ÔÉĞ ×ÁÛÅÇÏ\n"
+"ËÏÍĞØÀÔÅÒÁ. ÷ ÂÕÄÕİÅÍ, ×Ù ÓÍÏÖÅÔÅ ÕËÁÚÁÔØ "
+"ÏÄÉÎ × ÜÔÏÍ\n"
+"ÍÅÓÔÅ, ÎÏ ÓÅÇÏÄÎÑ ÍÙ ĞÒÏÓÔÏ ĞÒÅÒÙ×ÁÅÍ "
+"×ÙĞÏÌÎÅÎÉÅ."
 
 #: src/common/xst-tool.c:87
 msgid ""
@@ -1522,9 +1534,12 @@ msgid ""
 "by this tool. In the future, you will be able to specify\n"
 "another platform at this point, but today we'll just quit."
 msgstr ""
-"ğÌÁÔÆÏÒÍÁ, ËÏÔÏÒÕÀ ×Ù ÉÓĞÏÌØÚÕÅÔÅ, × ÎÁÓÔÏÑİÉÊ ÍÏÍÅÎÔ ÎÅ ĞÏÄÄÅÒÖÉ×ÁÅÔÓÑ\n"
-"ÜÔÏÊ ĞÒÏÇÒÁÍÍÏÊ. ÷ ÂÕÄÕİÅÍ ×Ù ÓÍÏÖÅÔÅ ÕËÁÚÁÔØ ÄÒÕÇÕÀ ĞÌÁÔÆÏÒÍÕ × ÜÔÏÍ\n"
-"ÍÅÓÔÅ, ÎÏ ÓÅÇÏÄÎÑ ÍÙ ĞÒÏÓÔÏ ĞÒÅÒÙ×ÁÅÍ ×ÙĞÏÌÎÅÎÉÅ."
+"ğÌÁÔÆÏÒÍÁ, ËÏÔÏÒÕÀ ×Ù ÉÓĞÏÌØÚÕÅÔÅ, × "
+"ÎÁÓÔÏÑİÉÊ ÍÏÍÅÎÔ ÎÅ ĞÏÄÄÅÒÖÉ×ÁÅÔÓÑ\n"
+"ÜÔÏÊ ĞÒÏÇÒÁÍÍÏÊ. ÷ ÂÕÄÕİÅÍ ×Ù ÓÍÏÖÅÔÅ "
+"ÕËÁÚÁÔØ ÄÒÕÇÕÀ ĞÌÁÔÆÏÒÍÕ × ÜÔÏÍ\n"
+"ÍÅÓÔÅ, ÎÏ ÓÅÇÏÄÎÑ ÍÙ ĞÒÏÓÔÏ ĞÒÅÒÙ×ÁÅÍ "
+"×ÙĞÏÌÎÅÎÉÅ."
 
 #: src/common/xst-tool.c:382
 msgid "Skipping actual save..."
@@ -1540,7 +1555,8 @@ msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
-"ğÒÉ ÚÁĞÕÓËÅ ÓÅÒ×ÅÒÎÏÇÏ ÓÃÅÎÁÒÉÑ ×ÏÚÎÉËÌÁ ÏÛÉÂËÁ,\n"
+"ğÒÉ ÚÁĞÕÓËÅ ÓÅÒ×ÅÒÎÏÇÏ ÓÃÅÎÁÒÉÑ ×ÏÚÎÉËÌÁ "
+"ÏÛÉÂËÁ,\n"
 "ËÏÎÆÉÇÕÒÁÃÉÑ ÎÅ ÍÏÖÅÔ ÂÙÔØ ÚÁÇÒÕÖÅÎÁ."
 
 #: src/common/xst-tool.c:648
@@ -1575,7 +1591,8 @@ msgstr ""
 #. No name, no swap
 #: src/memory/callbacks.c:546
 msgid "Path to new swap location is empty."
-msgstr "ğÕÔØ Ë ÎÏ×ÏÍÕ ÒÁÓĞÏÌÏÖÅÎÉÀ ĞÏÄËÁŞËÉ ĞÕÓÔ."
+msgstr ""
+"ğÕÔØ Ë ÎÏ×ÏÍÕ ÒÁÓĞÏÌÏÖÅÎÉÀ ĞÏÄËÁŞËÉ ĞÕÓÔ."
 
 #. It's already in there, can't add
 #: src/memory/callbacks.c:563
@@ -1633,30 +1650,42 @@ msgstr ""
 msgid "Remove this connection?"
 msgstr "õÄÁÌÉÔØ ÜÔÏ ÓÏÅÄÉÎÅÎÉÅ?"
 
-#: src/network/connection.c:119
+#: src/network/connection.c:227
 msgid "Inactive"
 msgstr "îÅÁËÔÉ×ÎÏÅ"
 
-#: src/network/connection.c:235
-msgid "Ethernet connection"
-msgstr "Ethernet-ÓÏÅÄÉÎÅÎÉÅ"
+#: src/network/connection.c:262
+msgid "Ethernet LAN card"
+msgstr "ëÁÒÔÁ ì÷ó Ethernet"
 
-#: src/network/connection.c:239
-msgid "WaveLAN connection"
-msgstr "WaveLAN-ÓÏÅÄÉÎÅÎÉÅ"
+#: src/network/connection.c:263
+msgid "WaveLAN wireless LAN"
+msgstr "âÅÓĞÒÏ×ÏÄÎÁÑ ì÷ó WaveLAN"
 
-#: src/network/connection.c:243
-msgid "PPP connection"
-msgstr "PPP-ÓÏÅÄÉÎÅÎÉÅ"
+#: src/network/connection.c:264
+msgid "PPP: modem or transfer cable"
+msgstr "PPP: ÍÏÄÅÍ ÉÌÉ ËÁÂÅÌØ"
 
-#: src/network/connection.c:247
-msgid "Unknown type connection"
-msgstr "îÅÉÚ×ÅÓÔÎÙÊ ÔÉĞ ÓÏÅÄÉÎÅÎÉÑ"
+#: src/network/connection.c:265
+msgid "Loopback: virtual interface"
+msgstr "Loopback: ×ÉÒÔÕÁÌØÎÙÊ ÉÎÔÅÒÆÅÊÓ"
 
-#: src/network/main.c:91
+#: src/network/connection.c:266
+msgid "Parallel line"
+msgstr "ğÁÒÁÌÌÅÌØÎÁÑ ÌÉÎÉÑ"
+
+#: src/network/connection.c:267
+msgid "Other type"
+msgstr "äÒÕÇÏÊ ÔÉĞ"
+
+#: src/network/connection.c:268
+msgid "Unknown type"
+msgstr "îÅÉÚ×ÅÓÔÎÙÊ ÔÉĞ"
+
+#: src/network/main.c:92
 msgid "Run the internet conection druid."
-msgstr "úÁĞÕÓÔÉÔØ ĞÏÍÏİÎÉËÁ ĞÏ ÓÏÅÄÉÎÅÎÉÀ Ó Internet"
+msgstr "úÁĞÕÓÔÉÔØ ĞÏÍÏİÎÉËÁ ĞÏ ÓÏÅÄÉÎÅÎÉÀ Ó Internet."
 
-#: src/network/main.c:118
+#: src/network/main.c:119
 msgid "Network Settings"
 msgstr "óÅÔÅ×ÙÅ ÕÓÔÁÎÏ×ËÉ"
