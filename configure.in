@@ -24,6 +24,12 @@ AC_PROG_MAKE_SET
 dnl glib-genmarshal
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 
+SYSTEM_TOOLS_BACKENDS_REQUIRED=1.1.90
+GTK_REQUIRED=2.6.0
+LIBGLADE_REQUIRED=2.4.0
+LIBGNOMEUI_REQUIRED=2.9.0
+GCONF_REQUIRED=2.2.0
+
 dnl =====================================================
 dnl search for su
 dnl =====================================================
@@ -110,11 +116,11 @@ dnl Check for Module versions
 dnl =====================================================
 
 PKG_CHECK_MODULES(GST_DEPENDS,[
-			   gtk+-2.0 >= 2.5.5
-			   libgnomeui-2.0 >= 1.109.0
-			   libglade-2.0 >= 1.99.5
-			   libxml-2.0 >= 2.4.12
-			   gconf-2.0 >= 2.2.0
+			   gtk+-2.0 >= $GTK_REQUIRED
+			   libgnomeui-2.0 >= $LIBGNOMEUI_REQUIRED
+			   libglade-2.0 >= $LIBGLADE_REQUIRED
+			   gconf-2.0 >= $GCONF_REQUIRED
+			   system-tools-backends >= $SYSTEM_TOOLS_BACKENDS_REQUIRED
 			   ])
 
 dnl =====================================================
@@ -157,7 +163,7 @@ AM_CONDITIONAL(BUILD_DISKS, test x$enable_disks = xyes)
 AM_CONDITIONAL(BUILD_SHARES, test x$enable_shares = xyes)
 
 dnl =====================================================
-dnl END: Check for Module versions
+dnl END: Check for GST Modules to build
 dnl =====================================================
 
 dnl ========================================================
@@ -183,13 +189,8 @@ dnl ========================================================
 dnl Set SCRIPTS_DIR & PIXMAPS_DIR 
 dnl ========================================================
 
-if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${ac_default_prefix}/${DATADIRNAME}/setup-tool-backends/scripts", [path where scripts backend will be installed])
-  scriptsdir="${ac_default_prefix}/${DATADIRNAME}/setup-tool-backends/scripts"
-else
-  AC_DEFINE_UNQUOTED(SCRIPTS_DIR,"${prefix}/${DATADIRNAME}/setup-tool-backends/scripts", [path where scripts backend will be installed])
-  scriptsdir="${prefix}/${DATADIRNAME}/setup-tool-backends/scripts"
-fi
+AM_PATH_SYSTEM_TOOLS_BACKENDS($SYSTEM_TOOLS_BACKENDS_REQUIRED)
+AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "$STB_SCRIPTS_DIR", [System Tools backends dir])
 
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [pixmaps directory])
@@ -275,12 +276,6 @@ dnl ===========================
 dnl END: NAUTILUS EXTENSION
 dnl ===========================
 
-dnl ===========================
-dnl Configure the backends
-dnl ==========================
-
-AC_CONFIG_SUBDIRS(backends)
-
 AC_OUTPUT([
 Makefile
 doc/Makefile
@@ -323,9 +318,13 @@ gnome-system-tools.pc
 echo "
 
 Configuration (GST):
-"
-dnl	if test x${have_archiver} = xtrue; then echo "	Archiver support: yes"; else echo "	Archiver support: no"; fi
-echo "	The scripts are expected at : ${scriptsdir}
-	Compiler:		${CC} 
-"
+	Boot tool:         ${enable_boot}
+	Disks tool:        ${enable_disks}
+	Services tool:     ${enable_services}
+	Users tool:        ${enable_users}
+	Network tool:      ${enable_network}
+	Time tool:         ${enable_time}
+	Shares tool:       ${enable_shares}
 
+	Compiler:          ${CC} 
+"
