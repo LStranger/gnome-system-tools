@@ -134,3 +134,17 @@ xst_util_nice_path_dup (gchar *path)
 
 	return (path1);
 }
+
+gchar *
+xst_util_strcasestr (const gchar *haystack, const gchar *needle)
+{
+	gchar *haystack_low, *needle_low;
+
+	haystack_low = g_strdup (haystack);
+	needle_low   = g_strdup (needle);
+
+	g_strdown (haystack_low);
+	g_strdown (needle_low);
+
+	return strstr (haystack_low, needle_low);
+}

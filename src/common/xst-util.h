@@ -25,4 +25,6 @@ void   xst_util_nice_hostname     (gchar *hostname);
 gchar *xst_util_nice_hostname_dup (gchar *hostname);
 gchar *xst_util_nice_path_dup     (gchar *path);
 
+gchar *xst_util_strcasestr        (const gchar *haystack, const gchar *needle);
+
 #endif /* XST_UTIL_H */
