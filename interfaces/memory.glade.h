@@ -5,13 +5,13 @@
  */
 
 gchar *s = N_("Memory administration");
+gchar *s = N_("Physical Memory:");
+gchar *s = N_("Swap Memory:");
 gchar *s = N_("These are the swap areas available:");
 gchar *s = N_("Enabled");
 gchar *s = N_("Device");
 gchar *s = N_("Priority");
 gchar *s = N_("Size");
-gchar *s = N_("Enable");
-gchar *s = N_("Disable");
 gchar *s = N_("Create...");
 gchar *s = N_("Remove");
 gchar *s = N_("Settings...");
@@ -29,3 +29,8 @@ gchar *s = N_("Browse...");
 gchar *s = N_("Swap device");
 gchar *s = N_("Enable this swap space");
 gchar *s = N_("Use non-default priority");
+gchar *s = N_("Size:");
+gchar *s = N_("Mb");
+gchar *s = N_("Select  Swap File");
+gchar *s = N_("OK");
+gchar *s = N_("Cancel");
