@@ -19,9 +19,8 @@ gchar *s = N_("Size:");
 gchar *s = N_("Priority:");
 gchar *s = N_("New Swap Device");
 gchar *s = N_("Swap type:");
-gchar *s = N_("partition\n"
-              "file\n"
-              "");
+gchar *s = N_("partition");
+gchar *s = N_("file");
 gchar *s = N_("Enabled");
 gchar *s = N_("Settings");
 gchar *s = N_("MB");
