@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
 "Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
-"POT-Creation-Date: 2003-12-23 20:47+0000\n"
-"PO-Revision-Date: 2003-12-23 21:00+0000\n"
+"POT-Creation-Date: 2003-12-28 16:43+0000\n"
+"PO-Revision-Date: 2003-12-28 16:50+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -380,12 +380,12 @@ msgid " "
 msgstr " "
 
 #: interfaces/disks.glade.in.h:3
-msgid "<b>CDROM Properties</b>"
-msgstr "<b>Propriedades CDROM</b>"
+msgid "<b>Configuration</b>"
+msgstr "<b>Configuração</b>"
 
 #: interfaces/disks.glade.in.h:4
-msgid "<b>Disk Properties</b>"
-msgstr "<b>Propriedades Disco</b>"
+msgid "<b>General Information</b>"
+msgstr "<b>Informação Geral</b>"
 
 #: interfaces/disks.glade.in.h:5
 msgid "<b>Partition List</b>"
@@ -404,108 +404,132 @@ msgid "<b>Storage Properties</b>"
 msgstr "<b>Propriedades Armazenamento</b>"
 
 #: interfaces/disks.glade.in.h:9
+msgid "<b>Supported Features</b>"
+msgstr "<b>Funcionalidades Suportadas</b>"
+
+#: interfaces/disks.glade.in.h:10
 msgid ""
 "<big><b>Storage Settings</b></big>\n"
-"Configure your hard disks and storages devices."
+"Configure your hard disks and storage devices."
 msgstr ""
 "<big><b>Definições de Armazenamento</b></big>\n"
 "Configure os seus discos rígidos e dispositivos de armazenamento."
 
-#: interfaces/disks.glade.in.h:11
-msgid "Can Read DVD"
-msgstr "Capaz de Ler DVD"
-
 #: interfaces/disks.glade.in.h:12
-msgid "Can Write CD-R"
-msgstr "Capaz de Escrever CD-R"
+msgid "CD-ROM"
+msgstr "CD-ROM"
 
 #: interfaces/disks.glade.in.h:13
-msgid "Can Write CD-RW"
-msgstr "Capaz de Escrever CD-RW"
-
-#: interfaces/disks.glade.in.h:14
-msgid "Can Write DVD-R"
-msgstr "Capaz de Escrever DVD-R"
-
-#: interfaces/disks.glade.in.h:15
-msgid "Can Write DVD-RAM"
-msgstr "Capaz de Escrever DVD-RAM"
-
-#: interfaces/disks.glade.in.h:16
-msgid "Can play audio"
-msgstr "Capaz de reproduzir audio"
-
-#: interfaces/disks.glade.in.h:17
-msgid "DMA"
-msgstr "DMA"
-
-#: interfaces/disks.glade.in.h:18
 msgid "Device: "
 msgstr "Dispositivo: "
 
-#: interfaces/disks.glade.in.h:19
+#: interfaces/disks.glade.in.h:14
+msgid "Enable DMA"
+msgstr "Activar DMA"
+
+#: interfaces/disks.glade.in.h:15
 msgid "Extended 2"
 msgstr "Extended 2"
 
-#: interfaces/disks.glade.in.h:20
+#: interfaces/disks.glade.in.h:16
 msgid "Extended 3"
 msgstr "Extended 3"
 
-#: interfaces/disks.glade.in.h:21
+#: interfaces/disks.glade.in.h:17
 msgid "FAT"
 msgstr "FAT"
 
-#: interfaces/disks.glade.in.h:22
+#: interfaces/disks.glade.in.h:18
 msgid "Filesystem:"
 msgstr "Sistema de ficheiros:"
 
-#: interfaces/disks.glade.in.h:23
+#: interfaces/disks.glade.in.h:19 src/disks/disks-storage-disk.c:83
+msgid "Hard Disk"
+msgstr "Disco Rígido"
+
+#: interfaces/disks.glade.in.h:20
 msgid "JFS"
 msgstr "JFS"
 
-#: interfaces/disks.glade.in.h:24
+#: interfaces/disks.glade.in.h:21
 msgid "Memory Swap"
 msgstr "Swap de Memória"
 
-#: interfaces/disks.glade.in.h:25
+#: interfaces/disks.glade.in.h:22
 msgid "Mount Point:"
 msgstr "Ponto de Montagem:"
 
-#: interfaces/disks.glade.in.h:26
+#: interfaces/disks.glade.in.h:23
 msgid "NTFS"
 msgstr "NTFS"
 
-#: interfaces/disks.glade.in.h:27 src/disks/callbacks.c:312
+#: interfaces/disks.glade.in.h:24 src/disks/callbacks.c:312
 #: src/disks/callbacks.c:313 src/disks/callbacks.c:328
 #: src/disks/callbacks.c:329
 msgid "Not Available"
 msgstr "Indisponível"
 
-#: interfaces/disks.glade.in.h:28
+#: interfaces/disks.glade.in.h:25
 msgid "Partitions"
 msgstr "Partições"
 
-#: interfaces/disks.glade.in.h:29
+#: interfaces/disks.glade.in.h:26
+msgid "Play Audio"
+msgstr "Reproduzir Audio"
+
+#: interfaces/disks.glade.in.h:27
 msgid "Properties"
 msgstr "Propriedades"
 
-#: interfaces/disks.glade.in.h:30
+#: interfaces/disks.glade.in.h:28
+msgid "Read DVD"
+msgstr "Ler DVD"
+
+#: interfaces/disks.glade.in.h:29
 msgid "Reiser FS"
 msgstr "Reiser FS"
 
-#: interfaces/disks.glade.in.h:31
+#: interfaces/disks.glade.in.h:30
 msgid "Size:"
 msgstr "Tamanho:"
 
-#: interfaces/disks.glade.in.h:32
+#: interfaces/disks.glade.in.h:31
 msgid "Speed"
 msgstr "Velocidade"
 
+#: interfaces/disks.glade.in.h:32
+msgid "Speed:"
+msgstr "Velocidade:"
+
 #: interfaces/disks.glade.in.h:33
+msgid "Type:"
+msgstr "Tipo:"
+
+#: interfaces/disks.glade.in.h:34
+msgid "Type: "
+msgstr "Tipo: "
+
+#: interfaces/disks.glade.in.h:35
+msgid "Write CD-R"
+msgstr "Escrever CD-R"
+
+#: interfaces/disks.glade.in.h:36
+msgid "Write CD-RW"
+msgstr "Escrever CD-RW"
+
+#: interfaces/disks.glade.in.h:37
+msgid "Write DVD-R"
+msgstr "Escrever DVD-R"
+
+#: interfaces/disks.glade.in.h:38
+msgid "Write DVD-RAM"
+msgstr "Escrever DVD-RAM"
+
+#: interfaces/disks.glade.in.h:39
 msgid "XFS"
 msgstr "XFS"
 
-#: interfaces/disks.glade.in.h:34
+#: interfaces/disks.glade.in.h:40
 msgid "_Format"
 msgstr "_Formatar"
 
@@ -1543,16 +1567,16 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Sinal de erro de ligação `%s' no widget `%s'"
 
-#: src/common/gst-tool.c:820
+#: src/common/gst-tool.c:822
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "A ignorar a directiva %s..."
 
-#: src/common/gst-tool.c:951
+#: src/common/gst-tool.c:953
 msgid "Skipping actual save..."
 msgstr "A ignorar gravação actual..."
 
-#: src/common/gst-tool.c:1024
+#: src/common/gst-tool.c:1026
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1560,7 +1584,7 @@ msgstr ""
 "Ocorreu um erro ao executar o script de backen,\n"
 "e a configuração não pode ser carregada."
 
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1507
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1569,7 +1593,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Bem vindo ao pré lançamento %s das "
 "Ferramentas de Sistema GNOME.</span>"
 
-#: src/common/gst-tool.c:1508
+#: src/common/gst-tool.c:1510
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1583,15 +1607,15 @@ msgstr ""
 "esforço e sanidade mental. Foi avisado. Obrigado por testar esta versão de "
 "pré-lançamento das Ferramentas de Sistema GNOME!"
 
-#: src/common/gst-tool.c:1529
+#: src/common/gst-tool.c:1531
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/common/gst-tool.c:1549
+#: src/common/gst-tool.c:1551
 msgid "Don't show me this again"
 msgstr "Não voltar a mostrar esta mensagem"
 
-#: src/common/gst-tool.c:1623
+#: src/common/gst-tool.c:1625
 msgid "GNOME System Tools"
 msgstr "Ferramentas Sistema GNOME"
 
@@ -1610,10 +1634,6 @@ msgstr "/_Formatar"
 #: src/disks/disks-storage-cdrom.c:103
 msgid "CDROM"
 msgstr "CDROM"
-
-#: src/disks/disks-storage-disk.c:83
-msgid "Hard Disk"
-msgstr "Disco Rígido"
 
 #: src/disks/disks-storage-floppy.c:71
 msgid "Floppy"
@@ -2229,6 +2249,15 @@ msgstr "Consola"
 msgid "Add or remove users and groups"
 msgstr "Adicionar ou remover utilizadores e grupos"
 
+#~ msgid "<b>CDROM Properties</b>"
+#~ msgstr "<b>Propriedades CDROM</b>"
+
+#~ msgid "<b>Disk Properties</b>"
+#~ msgstr "<b>Propriedades Disco</b>"
+
+#~ msgid "DMA"
+#~ msgstr "DMA"
+
 #~ msgid "_Configure"
 #~ msgstr "_Configurar"
 
@@ -2811,9 +2840,6 @@ msgstr "Adicionar ou remover utilizadores e grupos"
 #~ msgid "Remember details of this partition"
 #~ msgstr "Recordar detalhes desta partição"
 
-#~ msgid "Type:"
-#~ msgstr "Tipo:"
-
 #~ msgid "VFAT (Windows 95 and newer)"
 #~ msgstr "VFAT (Windows 95 ou posterior)"
 
@@ -3002,9 +3028,6 @@ msgstr "Adicionar ou remover utilizadores e grupos"
 
 #~ msgid "Disable"
 #~ msgstr "Desabilitar"
-
-#~ msgid "Enable :"
-#~ msgstr "Activar :"
 
 #~ msgid "End of Range"
 #~ msgstr "Fim Intervalo"
