@@ -45,12 +45,13 @@ static XstBootImageTypeTable boot_image_type_table[] = {
 	{ NULL,             -1 }	
 };
 
-static guint
-boot_image_count (void)
+gint
+boot_image_count (xmlNodePtr root)
 {
 	guint       count;
 	xmlNodePtr  n;
-	xmlNodePtr  root = xst_xml_doc_get_root (tool->config);
+
+	g_return_val_if_fail (root != NULL, -1);
 	
 	for (count = 0, n = xst_xml_element_find_first (root, "entry");
 	     n != NULL;
@@ -64,14 +65,17 @@ boot_image_new (void)
 {
 	BootImage *image;
 	guint      count;
+	xmlNodePtr root;
 
-	count = boot_image_count ();
-	if (count >= MAX_IMAGES)
+	root = xst_xml_doc_get_root (tool->config);
+	
+	count = boot_image_count (root);
+	if (count >= MAX_IMAGES || count < 0)
 		return NULL;
 	
 	image = g_new0 (BootImage, 1);
 	image->new = TRUE;
-	image->node = xst_xml_doc_get_root (tool->config);
+	image->node = root;
 
 	return image;
 }

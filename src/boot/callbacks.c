@@ -49,20 +49,31 @@ reply_cb (gint val, gpointer data)
 void
 on_boot_delete_clicked (GtkButton *button, gpointer data)
 {
-	xmlNodePtr node;
-	gchar *label, *buf;
-	GtkWindow *parent;
-	GnomeDialog *dialog;
+	xmlNodePtr   node;
+	gchar       *label, *buf;
+	gint         count;
+	GtkWidget   *d;
 	
 	g_return_if_fail (xst_tool_get_access (tool));
+
+	count = boot_image_count (xst_xml_doc_get_root (tool->config));
+	if (count <= 1) {
+		d = gnome_error_dialog_parented (_("Without at least one boot image,\n"
+						   "your system will not start.\n"),
+						 GTK_WINDOW (tool->main_dialog));
+		
+		gnome_dialog_run_and_close (GNOME_DIALOG (d));
+		return;
+	}
+
 	g_return_if_fail (node = get_selected_node ());
 
 	label = xst_xml_get_child_content (node, "label");
 	buf = g_strdup_printf (_("Are you sure you want to delete %s?"), label);
 
-	parent = GTK_WINDOW (tool->main_dialog);
-	dialog = GNOME_DIALOG (gnome_question_dialog_parented (buf, reply_cb, NULL, parent));
-	gnome_dialog_run (dialog);
+	d = gnome_question_dialog_parented (buf, reply_cb, NULL,
+					    GTK_WINDOW (tool->main_dialog));
+	gnome_dialog_run_and_close (GNOME_DIALOG (d));
 	g_free (label);
 	g_free (buf);
 	

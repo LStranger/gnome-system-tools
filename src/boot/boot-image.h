@@ -68,6 +68,7 @@ gchar            *boot_image_valid_root   (BootImage *image);
 gchar            *boot_image_check        (BootImage *image);
 
 /* Helpers */
+gint              boot_image_count        (xmlNodePtr root);
 gchar            *type_to_label           (XstBootImageType type);
 XstBootImageType  label_to_type           (const gchar *label);
 GList            *type_labels_list        (void);
