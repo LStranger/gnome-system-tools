@@ -44,6 +44,9 @@ void on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn);
 static GdkPixmap *mini_pm[CONNECTION_LAST];
 static GdkBitmap *mini_mask[CONNECTION_LAST];
 
+static GdkPixmap *active_pm[2];
+static GdkBitmap *active_mask[2];
+
 static void
 connection_set_modified (Connection *cxn, gboolean state)
 {
@@ -54,33 +57,47 @@ connection_set_modified (Connection *cxn, gboolean state)
 	cxn->modified = state;
 }
 
+static void
+load_icon (char *file, GdkPixmap **pixmap, GdkBitmap **mask)
+{
+	GdkPixbuf *pb, *pb2;
+	char *path;
+
+	path = g_concat_dir_and_file (PIXMAPS_DIR, file);
+	
+	pb = gdk_pixbuf_new_from_file (path);
+	g_free (path);
+
+	if (!pb)
+		return;
+	
+	pb2 = gdk_pixbuf_scale_simple (pb, 16, 16, GDK_INTERP_BILINEAR);
+	gdk_pixbuf_unref (pb);
+	
+	gdk_pixbuf_render_pixmap_and_mask (pb2, pixmap, mask, 127);
+	gdk_pixbuf_unref (pb2);
+}
+
 void
 init_icons (void)
 {
 	ConnectionType i;
-	GdkPixbuf *pb, *pb2;
-	char *path;
 	char *icons[CONNECTION_LAST] = {
 		"networking.png",
 		"networking.png",
 		"gnome-laptop.png",
-		"gnome-modem.png"
+		"connection-modem.png"
 	};
 
-	for (i = CONNECTION_OTHER; i < CONNECTION_LAST; i++) {
-		path = g_concat_dir_and_file (PIXMAPS_DIR, icons[i]);
-		
-		pb = gdk_pixbuf_new_from_file (path);
-		g_free (path);
-		if (!pb) 
-			continue;
-		
-		pb2 = gdk_pixbuf_scale_simple (pb, 20, 20, GDK_INTERP_BILINEAR);
-		gdk_pixbuf_unref (pb);
-		
-		gdk_pixbuf_render_pixmap_and_mask (pb2, &mini_pm[i], &mini_mask[i], 127);
-		gdk_pixbuf_unref (pb2);
-	}
+	for (i = CONNECTION_OTHER; i < CONNECTION_LAST; i++)
+		load_icon (icons[i], &mini_pm[i], &mini_mask[i]);
+
+	load_icon ("gnome-light-off.png" /* "connection-inactive.xpm" */,
+                   
+		   &active_pm[0], &active_mask[0]);
+	load_icon ("gnome-light-on.png" /*"connection-active.xpm" */,
+		   
+		   &active_pm[1], &active_mask[1]);
 }
 
 static void
@@ -96,6 +113,10 @@ update_row (Connection *cxn)
 	
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
 	
+	gtk_clist_set_pixmap (GTK_CLIST (clist), row, 0, 
+			      active_pm[cxn->active ? 1 : 0], 
+			      active_mask[cxn->active ? 1 : 0]);
+
 	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1, s, GNOME_PAD_SMALL,
 			       mini_pm[cxn->type], mini_mask[cxn->type]);
 

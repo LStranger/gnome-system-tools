@@ -1,10 +1,12 @@
 pixmaps_DATA = \
 computer.png  \
+connection-active.xpm \
+connection-inactive.xpm \
+connection-modem.png \
 disks.png  \
 gnome-laptop.png \
 gnome-light-on.png \
 gnome-light-off.png \
-gnome-modem.png \
 hst.png  \
 memory.png  \
 nameresolution.png  \
