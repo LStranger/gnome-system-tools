@@ -197,8 +197,8 @@ dnl Variables for ximian_archiverConf.sh.in
 dnl =======================================
 
 XIMIAN_ARCHIVER_LIBDIR='-L${libdir}'
-XIMIAN_ARCHIVER_LIBS="$($GNOME_CONFIG --libs gnome libglade xml)"
-XIMIAN_ARCHIVER_INCLUDEDIR="$($GNOME_CONFIG --cflags gnome libglade xml)"
+XIMIAN_ARCHIVER_LIBS="$($GNOME_CONFIG --libs gnome libglade xml gnomecanvaspixbuf)"
+XIMIAN_ARCHIVER_INCLUDEDIR="$($GNOME_CONFIG --cflags gnome libglade xml gnomecanvaspixbuf)"
 
 AC_SUBST(XIMIAN_ARCHIVER_LIBDIR)
 AC_SUBST(XIMIAN_ARCHIVER_LIBS)
