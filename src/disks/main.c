@@ -36,7 +36,7 @@
 #include "gst-report-hook.h"
 
 #include "transfer.h"
-#include "disks.h"
+#include "disks-config.h"
 #include "callbacks.h"
 
 GstTool *tool;
