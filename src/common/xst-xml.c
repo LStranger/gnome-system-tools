@@ -27,9 +27,6 @@
 #include <unistd.h>
 #include <string.h>
 #include <glib.h>
-#include <tree.h>  /* libxml */
-#include <parser.h>  /* libxml */
-#include <xmlmemory.h>  /* libxml */
 
 #include "xst-xml.h"
 
@@ -85,7 +82,7 @@ xst_xml_element_find_first (xmlNodePtr parent, const gchar *name)
 	g_return_val_if_fail (parent != NULL, NULL);
 	g_return_val_if_fail (name != NULL, NULL);
 
-	for (node = parent->childs; node;)
+	for (node = parent->children; node;)
 	{
 		if (node->name && !strcmp (name, node->name)) break;
 		node = node->next;
@@ -119,7 +116,7 @@ xst_xml_element_find_nth (xmlNodePtr parent, const gchar *name, int n)
 
 	g_return_val_if_fail (parent != NULL, NULL);
 
-	for (node = parent->childs; node;)
+	for (node = parent->children; node;)
 	{
 		if (!strcmp (name, node->name))
 		{
@@ -159,7 +156,7 @@ xst_xml_element_get_content (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, NULL);
 	
-	for (n0 = node->childs; n0; n0 = n0->next)
+	for (n0 = node->children; n0; n0 = n0->next)
 	{
 		if (n0->type == XML_TEXT_NODE)
 		{
@@ -188,7 +185,7 @@ xst_xml_element_peek_content (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, NULL);
 	
-	for (n0 = node->childs; n0; n0 = n0->next)
+	for (n0 = node->children; n0; n0 = n0->next)
 	{
 		if (n0->type == XML_TEXT_NODE)
 		{
@@ -344,7 +341,7 @@ xst_xml_element_destroy_children (xmlNodePtr parent)
 
 	g_return_if_fail (parent != NULL);
 	
-	for (node = parent->childs; node;)
+	for (node = parent->children; node;)
 	{
 		node_next = node->next;
 		xmlUnlinkNode (node);
@@ -378,7 +375,7 @@ xst_xml_parent_childs (xmlNodePtr parent)
 
 	g_return_val_if_fail (parent != NULL, 0);
 
-	for (node = parent->childs; node; ret++)
+	for (node = parent->children; node; ret++)
 		node = node->next;
 
 	return ret;

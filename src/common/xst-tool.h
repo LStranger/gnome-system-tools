@@ -22,7 +22,6 @@
 #ifndef XST_TOOL_H
 #define XST_TOOL_H
 
-#include <tree.h>
 #include <gtk/gtkobject.h>
 #include <glade/glade.h>
 #include <popt.h>

@@ -223,7 +223,7 @@ load_glade_common (const gchar *widget)
 	GladeXML *xml;
 
 	glade_common_path = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
-	xml = glade_xml_new (glade_common_path, widget);
+	xml = glade_xml_new (glade_common_path, widget, NULL);
 	g_free (glade_common_path);
 
 	return xml;
@@ -251,7 +251,7 @@ xst_su_get_password (gchar **password)
 	else if (result == 1)
 		return 0;   /* Run unprivileged */
 
-	*password = gtk_entry_get_text (GTK_ENTRY (password_entry));
+	*password = g_strdup (gtk_entry_get_text (GTK_ENTRY (password_entry)));
 	if (!*password)
 		*password = g_strdup ("");
 

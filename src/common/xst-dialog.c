@@ -459,6 +459,8 @@ close_cb (GtkWidget *w, gpointer data)
 static void
 help_cb (GtkWidget *w, gpointer data)
 {
+#warning FIXME	
+#if 0
 	GnomeHelpMenuEntry help_entry = { NULL, "index.html" };
 	XstDialog *dialog;
 
@@ -472,6 +474,9 @@ help_cb (GtkWidget *w, gpointer data)
 	gnome_help_display (NULL, &help_entry);
 
 	g_free (help_entry.name);
+#else
+	g_warning ("FIXME ! Port help_cb to 2.0\n");
+#endif
 }
 
 void

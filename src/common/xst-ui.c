@@ -30,7 +30,6 @@
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 #include <gal/e-table/e-table-specification.h>
 
 #include "checked.xpm"
@@ -97,7 +96,7 @@ void
 xst_ui_combo_remove_by_label (GtkCombo *combo, const gchar *label)
 {
 	GtkWidget *item;
-	gchar *buf;
+	const gchar *buf;
 	
 	g_return_if_fail (combo != NULL);
 	g_return_if_fail (GTK_IS_COMBO (combo));
@@ -121,7 +120,7 @@ xst_ui_image_widget_create_canvas (gchar *filename)
 	gchar *filename_dup;
 
 	filename_dup = g_strdup (filename);
-	pixbuf = gdk_pixbuf_new_from_file (filename_dup);
+	pixbuf = gdk_pixbuf_new_from_file (filename_dup, NULL);
 
 	if (!pixbuf) {
 		g_warning ("Pixmap %s not found.", filename_dup);

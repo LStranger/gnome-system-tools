@@ -1,8 +1,9 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #include <glib.h>
-#include <tree.h>    /* libxml */
-#include <parser.h>  /* libxml */
 
+#include <libxml/tree.h>
+#include <libxml/parser.h>
+#include <libxml/xmlmemory.h>
 
 xmlNodePtr     xst_xml_doc_get_root             (xmlDocPtr doc);
 void           xst_xml_doc_dump                 (xmlDocPtr doc);

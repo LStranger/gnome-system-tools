@@ -22,8 +22,6 @@
 #ifndef XST_PLATFORM_H
 #define XST_PLATFORM_H
 
-#include <tree.h>
-
 #include "xst-types.h"
 #include "xst-tool.h"
 

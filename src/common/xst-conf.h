@@ -26,7 +26,7 @@
 #include "xst-types.h"
 #include "xst-tool.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 void     xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value);
 gboolean xst_conf_get_boolean (XstTool *tool, const gchar *key);
@@ -35,6 +35,6 @@ gint     xst_conf_get_integer (XstTool *tool, const gchar *key);
 void     xst_conf_set_string  (XstTool *tool, const gchar *key, const gchar *value);
 gchar *  xst_conf_get_string  (XstTool *tool, const gchar *key);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* XST_CONF_H */

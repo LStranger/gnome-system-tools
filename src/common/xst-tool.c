@@ -38,8 +38,6 @@
 
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
-#include <parser.h>
-#include <memory.h>
 
 #include <stdio.h>
 #include <fcntl.h>
@@ -232,7 +230,7 @@ xst_tool_load_glade_common (XstTool *tool, const gchar *widget)
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (tool->glade_common_path != NULL, NULL);
 
-	xml = glade_xml_new (tool->glade_common_path, widget);
+	xml = glade_xml_new (tool->glade_common_path, widget, NULL);
 
 	if (!xml) {
 		g_error ("Could not load %s\n", tool->glade_common_path);
@@ -250,7 +248,7 @@ xst_tool_load_glade (XstTool *tool, const gchar *widget)
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (tool->glade_path != NULL, NULL);
 
-	xml = glade_xml_new (tool->glade_path, widget);
+	xml = glade_xml_new (tool->glade_path, widget, NULL);
 
 	if (!xml) {
 		g_error ("Could not load %s\n", tool->glade_path);

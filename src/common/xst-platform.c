@@ -23,8 +23,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <tree.h>
-
 #include "xst-platform.h"
 #include "xst-report-line.h"
 #include "xst-xml.h"

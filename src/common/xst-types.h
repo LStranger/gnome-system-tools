@@ -23,7 +23,7 @@
 #define XST_TYPES_H
 
 #include <glib.h>
-#include <tree.h>    /* libxml */
+#include <libxml/tree.h>
 
 #define XST_CONF_ROOT "/xst"
 
