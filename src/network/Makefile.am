@@ -76,4 +76,4 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
 	$(INSTALL_DATA) $(srcdir)/network.pam $(DESTDIR)$(sysconfdir)/pam.d/network-admin
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(security) $(DESTDIR)$(sysconfdir)/security/console.apps/network-admin
+	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/network-admin

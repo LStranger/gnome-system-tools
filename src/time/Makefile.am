@@ -81,4 +81,4 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
 	$(INSTALL_DATA) $(srcdir)/time.pam $(DESTDIR)$(sysconfdir)/pam.d/time-admin
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(security) $(DESTDIR)$(sysconfdir)/security/console.apps/time-admin
+	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/time-admin

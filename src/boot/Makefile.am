@@ -81,4 +81,4 @@ install-data-local: $(desktop).menu $(desktop).cc
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
 	$(INSTALL_DATA) $(srcdir)/boot.pam $(DESTDIR)$(sysconfdir)/pam.d/boot-admin
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(security) $(DESTDIR)$(sysconfdir)/security/console.apps/boot-admin
+	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/boot-admin
