@@ -1,0 +1,153 @@
+<!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
+
+<!ENTITY VERSION "0.6">
+]>
+
+<article id="index" lang="en">
+
+  <artheader>
+    <title>Swap Management</title>
+    <copyright>
+      <year>2001</year>
+      <holder>Kevin Breit</holder>
+    </copyright>
+
+    <legalnotice id="legalnotice">
+      <para>
+	Permission is granted to copy, distribute and/or modify this document
+	under the terms of the 
+	<ulink type="help" url="gnome-help:fdl">
+	  <citetitle>
+	    GNU Free Documentation License
+	  </citetitle>
+	</ulink>, Version 1.1 or any later version 
+	published by the Free Software Foundation with no Invariant Sections, 
+	no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license
+	can be found <ulink type="help" url="gnome-help:fdl">here</ulink>.
+      </para>
+      <para>
+	Many of the names used by companies to distinguish their products and
+	services are claimed as trademarks. Where those names appear in any
+	GNOME documentation, and those trademarks are made aware to the members
+	of the GNOME Documentation Project, the names have been printed in caps
+	or initial caps.
+      </para>
+    </legalnotice>
+
+    <releaseinfo>
+      This manual describes version &VERSION; of the Swap Management utility in
+      Ximain Setup Tools.  It was last updated on 01/01/69.
+    </releaseinfo>
+    
+  </artheader>
+
+  <sect1 id="intro">
+    <title>Introduction</title>
+    <para>
+      The Swap Management utility helps you control the size and settings of
+      your swap partition(s) and files.
+    </para>
+    <sect2 id="whats-swap">
+      <title>What is Swap?</title>
+      <para>
+	Swap is an extension of memory.  Your system will have RAM in it.
+	However, sometimes that is not enough and the RAM fills up.  The
+	computer then uses your swap space alongside your memory.
+      </para>
+    </sect2>
+  </sect1>
+  
+  <sect1 id="interface">
+    <title>Interface Overview</title>
+    <para>
+      <figure id="main-interface">
+	<title>Swap Management Interface</title>
+	<screenshot>
+	  <screeninfo>Main Window</screeninfo>
+	  <graphic fileref="fig/main_layout.png" srccredit="Kevin Breit"></graphic>
+	</screenshot>
+      </figure>
+    </para>
+
+    <para>
+      <inlinegraphic fileref="fig/full-1.png"></inlinegraphic>
+      <guilabel>Partition Overview</guilabel>
+      This is where your total memory information is shown.  It displays the
+      physical memory (RAM) and your swap memory.
+    </para>
+    
+    <para>
+      <inlinegraphic fileref="fig/full-2.png"></inlinegraphic>
+      <guilabel>Available Swap Areas</guilabel>
+      This section shows you each swap's information.  It shows if its
+      enabled or not, the device name it has, the priority, and the size of
+      the swap.
+    </para>
+    
+    <para>
+      <inlinegraphic fileref="fig/full-3.png"></inlinegraphic>
+      <guilabel>Actions</guilabel>
+      This is where you can get access to help, increase or decrease your
+      option choice, apply your changes to the system, or close the window.
+    </para>
+  </sect1>
+  
+  <sect1 id="using-swap-man">
+    <title>Using the Swap Manager</title>
+    <para>
+      The Swap Manager lets you do basic, administrative tasks on your swap
+      partitions.  You can add swap files, remove swap files, and edit
+      properties of swap files.
+    </para>
+    <sect2 id="using-swap-add">
+      <title>Adding Swap</title>
+      <para>
+	Swap can easily be added by clicking on the <guibutton>Add</guibutton>.
+	A window then appears letting you configure the specifics on your
+	partition.  In the <guilabel>Path</guilabel> box, put the name and the
+	directory of the swap file you want to create.
+      </para>
+      <example>
+	<title>Swap File Path</title>
+	<para>
+	  /swapfile1
+	</para>
+      </example>
+      <para>
+	In the size, select the size of your partition in megabytes.  It is
+	recommended that you use powers of 2 (4, 8, 16, 32, 64, 128, 256, etc.).
+      </para>
+      <para>
+	The priority is...
+      </para>
+      <para>
+	Click <guibutton>OK</guibutton> and the window will disappear, and your
+	new swap file will be added to the list of swap partitions and files.
+	Press <guibutton>Apply</guibutton> to finalize your changes.
+      </para>
+    </sect2>
+    <sect2 id="using-swap-delete">
+      <title>Deleting Swap</title>
+      <para>
+	In the main window, select your partition which you want to delete.
+	Pressing <guibutton>Remove</guibutton> will remove your swap after a
+	confimation.  Pressing <guibutton>Apply</guibutton> will complete the
+	removal of the swap.
+      </para>
+    </sect2>
+    <sect2 id="using-swap-settings">
+      <title>Editing Swap Configuration</title>
+      <para>
+	Your current swap files can be edited using the
+	<guibutton>Settings</guibutton>.  Clicking
+	<guibutton>Settings</guibutton> will open up the configuration for the
+	swap partition which is selected.  Through this, you can configure the
+	size and the priority of the partition.  Clicking on the arrows will
+	change these options.  By clicking on the <guilabel>Enabled</guilabel>
+	checkbox, you can enable or disable the swap partition.  Clicking
+	<guibutton>OK</guibutton> and <guibutton>Apply</guibutton> will make the
+	changes for you.
+      </para>
+    </sect2>
+  </sect1>
+</article>
