@@ -104,6 +104,11 @@ static const XstWidgetPolicy policies[] = {
 	{ NULL }
 };
 
+static XstReportHookEntry report_hooks[] = {
+	{ "file_locate_tool_failed", callbacks_tool_not_found_hook,  XST_REPORT_HOOK_LOAD, TRUE,  NULL },
+	{ NULL,                      NULL,                           -1,                   FALSE, NULL }
+};
+
 static void
 update_notebook_complexity (XstTool *tool, XstDialogComplexity complexity)
 {
@@ -194,6 +199,7 @@ main (int argc, char *argv[])
 		/*xst_dialog_add_apply_hook (tool->main_dialog, callbacks_update_connections_hook, NULL);*/
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_dialer_hook,       tool);
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_gateway_hook,      tool);
+		xst_tool_add_report_hooks (tool, report_hooks);
 		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 		xst_dialog_enable_complexity (tool->main_dialog);
 		xst_dialog_set_widget_policies (tool->main_dialog, policies);

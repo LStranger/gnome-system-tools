@@ -43,7 +43,6 @@ extern XstTool *tool;
 
 static int connection_row_selected = -1;
 
-
 static void
 scrolled_window_scroll_bottom (GtkWidget *sw)
 {
@@ -117,10 +116,15 @@ poll_connections_cb (XstDirectiveEntry *entry)
 			g_return_if_fail (cxn != NULL);
 			g_return_if_fail (cxn->dev != NULL);
 
-			if (cxn->activation == ACTIVATION_NONE)
-				continue;
-			
 			if (!strcmp (cxn->dev, dev)) {
+				if (cxn->activation == ACTIVATION_NONE) {
+					if (active != cxn->enabled) {
+						cxn->enabled = active;
+						cxn->activation = (active)? ACTIVATION_UP : ACTIVATION_DOWN;
+					} else
+						continue;
+				}
+				
 				if (cxn->activation == ACTIVATION_UP) {
 					if (active) {
 						cxn->activation = ACTIVATION_NONE;
@@ -161,7 +165,7 @@ poll_connections (gpointer data)
 {
 	XstTool *tool = data;
 	
-	g_print ("si\n");
+	g_print ("-\n");
 
 	xst_tool_queue_directive (tool, poll_connections_cb, tool, NULL, NULL, "list_ifaces");
 	
@@ -188,7 +192,7 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 		/* The connections tab */
 		if (page_num == 1 && first) {
 			first = FALSE;
-			gtk_timeout_add (2000, poll_connections, tool);
+			gtk_timeout_add (500, poll_connections, tool);
 		}
 	}
 #endif	
@@ -352,6 +356,7 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length,
 	if (! (rules & EF_STATIC_HOST))
 		tool_modified_cb ();
 #endif
+	return;
 }
 
 /* yeah, I don't like this formatting either */
@@ -671,10 +676,7 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 	entry = xst_dialog_get_widget (dialog, "hostname");
 	hostname_new = gtk_entry_get_text (GTK_ENTRY (entry));
 
-	res = strcmp (hostname_new, hostname_old);
-	g_free (hostname_old);
-	
-	if (res)
+	if (strcmp (hostname_new, hostname_old))
 	{
 		gchar *text = _("The host name has changed. This will prevent you\n"
 				"from launching new applications, and so you will\n"
@@ -693,12 +695,15 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 		case 0:
 			gtk_entry_set_text (GTK_ENTRY (entry), hostname_old);
 		case 1:
+			g_free (hostname_old);
 			return TRUE;
 		case 2:
+			g_free (hostname_old);
 			return FALSE;
 		}
 	}
 
+	g_free (hostname_old);
 	return TRUE;
 }
 
@@ -856,5 +861,28 @@ callbacks_check_gateway_hook (XstDialog *dialog, gpointer data)
 		return callbacks_check_manual_gatewaydev (tool);
 
 	connection_default_gw_set_auto (tool);
+	return TRUE;
+}
+
+gboolean
+callbacks_tool_not_found_hook (XstTool *tool, XstReportLine *rline, gpointer data)
+{
+	if (! strcmp (rline->argv[0], "redhat-config-network-cmd")) {
+		gchar *text = _("The program redhat-config-network-cmd could not\n"
+				"be found. This could render missing connections\n"
+				"under the connections tab. Please install the\n"
+				"redhat-config-network rpm package to avoid this.");
+		GtkWidget *message;
+		
+		message = gnome_message_box_new (text, GNOME_MESSAGE_BOX_WARNING,
+						 GNOME_STOCK_BUTTON_OK,
+						 NULL);
+		gnome_dialog_set_parent (GNOME_DIALOG (message), GTK_WINDOW (tool->main_dialog));
+		gnome_dialog_run_and_close (GNOME_DIALOG (message));
+	}
+
+	g_print (rline->argv[0]);
+	g_print ("\n");
+
 	return TRUE;
 }

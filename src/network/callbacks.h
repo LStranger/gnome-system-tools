@@ -87,4 +87,6 @@ gboolean callbacks_update_connections_hook (XstDialog *dialog, gpointer data);
 gboolean callbacks_check_dialer_hook       (XstDialog *dialog, gpointer data);
 gboolean callbacks_check_gateway_hook      (XstDialog *dialog, gpointer data);
 
+gboolean callbacks_tool_not_found_hook     (XstTool *tool, XstReportLine *rline, gpointer data);
+
 #endif /*  __CALLBACKS_H__  */

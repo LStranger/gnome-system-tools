@@ -1,3 +1,17 @@
+2001-12-11  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* main.c (main): add the new check_hostname hook.
+
+	* callbacks.c (callbacks_check_hostname_hook): was using freed memory
+	to set the old entrie's value. fixed.
+	(callbacks_tool_not_found_hook): Warn the user if some important program
+	ran by the backend was not found.
+
+2001-10-17  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* callbacks.c (poll_connections_cb): Quick hack to make the
+	clist change if an interface changed status by an external program.
+
 2001-12-02  Chema Celorio  <chema@celorio.com>
 
 	* move more stuff into CommonMakefile
