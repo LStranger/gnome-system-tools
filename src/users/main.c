@@ -214,7 +214,7 @@ update_complexity (void)
 	XstDialogComplexity complexity = tool->main_dialog->complexity;
 
 	update_notebook_complexity (complexity);
-	update_searchbar_complexity (complexity);
+	update_searchbar_complexity (complexity);	
 	tables_update_complexity (complexity);
 }
 
@@ -303,8 +303,13 @@ main (int argc, char *argv[])
 
 	xst_dialog_enable_complexity (tool->main_dialog);
 	xst_dialog_set_widget_policies (tool->main_dialog, policies);
-	
-	xst_tool_main (tool, FALSE);
 
+	/* This sucks, but calculating the needed size for simple mode based on the
+	 * hidden widgets plus the tabs size is going to be ugly. Chema
+	 */
+	gtk_window_set_default_size (GTK_WINDOW (tool->main_dialog), 550, 400);
+
+	xst_tool_main (tool, FALSE);
+	
 	return 0;
 }
