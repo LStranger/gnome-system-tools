@@ -33,7 +33,7 @@ users_admin_SOURCES = \
 	user-account-editor.c user-account-editor.h
 
 toolpixmaps =
-etspecs = 
+etspecs = group.etspec  net_group.etspec  net_user.etspec  profiles.etspec  users.etspec
 etspecs_DATA = $(etspecs)
 desktop = $(toolname).desktop
 
