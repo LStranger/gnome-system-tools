@@ -84,6 +84,7 @@ on_table_clicked (GtkTreeSelection *selection, gpointer data)
 
 	treeview = (GtkTreeView *) data;
 	cont = 0;
+
 	gtk_tree_selection_selected_foreach (selection, counter , &cont);
    
 	if (users_table == GTK_WIDGET (treeview))
@@ -102,6 +103,51 @@ on_table_clicked (GtkTreeSelection *selection, gpointer data)
 		else
 			gst_dialog_widget_set_user_sensitive (tool->main_dialog, "profile_settings", FALSE);
 	}
+}
+
+gboolean
+on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
+{
+	GtkTreePath *path;
+	GtkItemFactory *factory;
+	GtkTreeSelection* selection;
+	gint cont;
+
+	factory = (GtkItemFactory *) gdata;
+
+	cont = 0;
+
+	selection = gtk_tree_view_get_selection (treeview);
+	gtk_tree_selection_selected_foreach (selection, counter , &cont);
+	
+	if (event->button == 3)
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (treeview));
+		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
+		{
+			if (cont < 1)
+			{
+				gtk_tree_selection_unselect_all (selection);
+				gtk_tree_selection_select_path (selection, path);
+			}
+
+			if (cont > 1)
+				gtk_widget_set_sensitive (gtk_item_factory_get_widget_by_action (factory,
+												 POPUP_SETTINGS),
+							  FALSE);
+			else
+				gtk_widget_set_sensitive (gtk_item_factory_get_widget_by_action (factory,
+												 POPUP_SETTINGS),
+							  TRUE);
+
+			gtk_tree_path_free (path);
+			
+			gtk_item_factory_popup (factory, event->x_root, event->y_root,
+						event->button, event->time);
+		}
+	}
+	
+	return FALSE;
 }
 
 /* Users Tab */
@@ -276,6 +322,33 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 
 	gtk_tree_selection_unselect_all (selection);
 	actions_set_sensitive (NODE_GROUP, FALSE);
+}
+
+void
+on_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	if (GTK_WIDGET (callback_data) == groups_table)
+		on_group_new_clicked (callback_data, NULL);
+	else if (GTK_WIDGET (callback_data) == users_table)
+		on_user_new_clicked (callback_data, NULL);
+}
+
+void
+on_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	if (GTK_WIDGET (callback_data) == groups_table)
+		on_group_settings_clicked (callback_data, NULL);
+	else if (GTK_WIDGET (callback_data) == users_table)
+		on_user_settings_clicked (callback_data, NULL);
+}
+
+void
+on_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	if (GTK_WIDGET (callback_data) == groups_table)
+		on_group_delete_clicked (callback_data, NULL);
+	else if (GTK_WIDGET (callback_data) == users_table)
+		on_user_delete_clicked (callback_data, NULL);
 }
 
 #ifdef NIS

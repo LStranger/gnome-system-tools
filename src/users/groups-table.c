@@ -36,15 +36,15 @@
 #include "callbacks.h"
 #include "user-group-xml.h"
 
+extern GstTool *tool;
+
+GtkWidget *groups_table;
+
 GroupsTableConfig groups_table_config [] = {
 	{ N_("Group"),	TRUE,	TRUE},
 	{ N_("GID"),	TRUE,	FALSE},
 	{NULL}
 };
-
-extern GstTool *tool;
-
-GtkWidget *groups_table;
 
 static void
 add_group_columns (GtkTreeView *treeview)
@@ -89,6 +89,7 @@ create_groups_table (void)
 {
 	GtkTreeModel *model;
 	GtkTreeSelection *selection;
+	GtkItemFactory *item_factory;
 	
 	model = create_groups_model ();
 	
@@ -102,9 +103,14 @@ create_groups_table (void)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (groups_table));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
+	item_factory = popup_item_factory_create (groups_table);
+	
 	g_signal_connect (G_OBJECT (selection), "changed",
 			  G_CALLBACK (on_table_clicked),
 			  (gpointer) groups_table);
+	g_signal_connect (G_OBJECT (groups_table), "button_press_event",
+			  G_CALLBACK (on_table_button_press),
+			  (gpointer) item_factory);
 }
 
 static char*

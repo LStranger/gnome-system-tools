@@ -43,6 +43,43 @@ extern GstTool *tool;
 extern GtkWidget *users_table;
 extern GtkWidget *groups_table;
 
+GtkItemFactoryEntry users_popup_menu_items[] = {
+	{ N_("/_Add User ..."), NULL, G_CALLBACK (on_popup_add_activate), POPUP_ADD, "<StockItem>", GTK_STOCK_ADD },
+	{ "/", NULL, NULL, POPUP_SEPARATOR, "<Separator>", NULL },
+	{ N_("/_Properties"), NULL, G_CALLBACK (on_popup_settings_activate), POPUP_SETTINGS, "<StockItem>", GTK_STOCK_PROPERTIES },
+	{ N_("/_Delete"), NULL, G_CALLBACK (on_popup_delete_activate), POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+};
+
+GtkItemFactoryEntry groups_popup_menu_items[] = {
+	{ N_("/_Add group ..."), NULL, G_CALLBACK (on_popup_add_activate), POPUP_ADD, "<StockItem>", GTK_STOCK_ADD },
+	{ "/", NULL, NULL, POPUP_SEPARATOR, "<Separator>", NULL },
+	{ N_("/_Properties"), NULL, G_CALLBACK (on_popup_settings_activate), POPUP_SETTINGS, "<StockItem>", GTK_STOCK_PROPERTIES },
+	{ N_("/_Delete"), NULL, G_CALLBACK (on_popup_delete_activate), POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+};
+
+static gchar *
+item_factory_trans (const char *path, gpointer data)
+{
+	return _((gchar*)path);
+}
+
+GtkItemFactory *
+popup_item_factory_create (GtkWidget *widget)
+{
+	GtkItemFactory *item_factory;
+
+	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
+	gtk_item_factory_set_translate_func (item_factory, item_factory_trans,
+					     NULL, NULL);
+	if (widget == users_table)
+		gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (users_popup_menu_items),
+					       users_popup_menu_items, (gpointer) users_table);
+	else if (widget == groups_table)
+		gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (groups_popup_menu_items),
+					       groups_popup_menu_items, (gpointer) groups_table);
+	return item_factory;
+}
+
 void
 create_gtk_tree_list (GtkWidget *list)
 {

@@ -30,19 +30,30 @@
 #include "gst.h"
 
 /* Main dialog general callbacks */
-void on_showall_toggled (GtkToggleButton*, gpointer);
-void on_table_clicked (GtkTreeSelection*, gpointer);
+void      on_showall_toggled (GtkToggleButton*, gpointer);
+void      on_table_clicked (GtkTreeSelection*, gpointer);
+gboolean  on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
+void      on_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void      on_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void      on_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget);
+
 
 /* Main dialog callbacks, users tab */
 void on_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_user_settings_clicked (GtkButton *button, gpointer data);
 void on_user_delete_clicked (GtkButton *button, gpointer user_data);
+/*void on_users_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_users_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_users_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget);*/
 void on_profile_settings_dialog_clicked (GtkButton *, gpointer);
 
 /* Main dialog callbacks, groups tab */
 void on_group_new_clicked (GtkButton*, gpointer);
 void on_group_settings_clicked (GtkButton*, gpointer);
 void on_group_delete_clicked (GtkButton*, gpointer);
+/*void on_groups_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_groups_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_groups_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget);*/
 
 #ifdef NIS
 void on_network_delete_clicked (GtkWidget *button, gpointer user_data);

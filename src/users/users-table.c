@@ -36,6 +36,11 @@
 #include "callbacks.h"
 #include "user-group-xml.h"
 
+extern GstTool *tool;
+
+GtkWidget *users_table;
+GArray *users_array;
+
 TableConfig users_table_config [] = {
 	/*Column name,          Adv_state_show,	Basic_state_show*/
 	{ N_("User"),		TRUE,		TRUE},
@@ -46,11 +51,6 @@ TableConfig users_table_config [] = {
 	{ N_("Group"),		FALSE,		TRUE},
 	{NULL}
 };
-
-extern GstTool *tool;
-
-GtkWidget *users_table;
-GArray *users_array;
 
 static void
 add_user_columns (GtkTreeView *treeview)
@@ -95,11 +95,14 @@ create_users_model (void)
 	return GTK_TREE_MODEL (model);
 }
 
+
+
 void
 create_users_table (void)
 {
 	GtkTreeSelection *selection;
 	GtkTreeModel *model;
+	GtkItemFactory *item_factory;
 	
 	model = create_users_model ();
 	
@@ -113,9 +116,14 @@ create_users_table (void)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
+	item_factory = popup_item_factory_create (users_table);
+
 	g_signal_connect (G_OBJECT (selection), "changed",
 			  G_CALLBACK (on_table_clicked),
 			  (gpointer) users_table);
+	g_signal_connect (G_OBJECT (users_table), "button_press_event",
+			  G_CALLBACK (on_table_button_press),
+			  (gpointer) item_factory);
 }
 
 static char*
