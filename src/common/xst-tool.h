@@ -85,8 +85,11 @@ struct _XstToolClass {
 
 GtkType      xst_tool_get_type            (void);
 
-XstTool     *xst_tool_init                (const char *name, const char *title, 
-					   int argc, char *argv []);
+#include <popt.h>
+
+XstTool     *xst_tool_init                (const char *name, const char *title,
+								   int argc, char *argv [],
+								   const poptOption options);
 
 void         xst_tool_main                (XstTool *tool);
 gboolean     xst_tool_get_access          (XstTool *tool);

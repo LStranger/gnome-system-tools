@@ -161,7 +161,7 @@ main (int argc, char *argv[])
 
 	srand (time (NULL));
 
-	tool = xst_tool_init ("users", _("Users and Groups"), argc, argv);
+	tool = xst_tool_init ("users", _("Users and Groups"), argc, argv, NULL);
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
 	create_tables ();

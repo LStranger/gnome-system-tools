@@ -739,7 +739,7 @@ xst_tool_reset_report_hooks (XstTool *tool)
 }
 
 XstTool *
-xst_tool_init (const char *name, const char *title, int argc, char *argv [])
+xst_tool_init (const char *name, const char *title, int argc, char *argv [], const poptOption options)
 {
 	GtkWidget *d;
 
@@ -750,8 +750,26 @@ xst_tool_init (const char *name, const char *title, int argc, char *argv [])
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
 #endif
+
+	if (options == NULL) {
+		gnome_init (name, VERSION, argc, argv);
+	} else {
+		poptContext ctx;
+		GList *args_list = NULL;
+		char **args;
+		gint i;
+		
+		gnome_init_with_popt_table (name, VERSION, argc, argv, options, 0, &ctx);
+
+		args = (char**) poptGetArgs(ctx);
 	
-	gnome_init (name, VERSION, argc, argv);
+		for (i = 0; args && args[i]; i++) {
+			args_list = g_list_append (args_list, args[i]);
+			g_print ("-->%s<--\n", (gchar *) args_list->data);
+		}
+		poptFreeContext (ctx);
+	}
+
 	glade_gnome_init ();
 
 	if (geteuid () == 0) {

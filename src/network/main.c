@@ -83,6 +83,16 @@ XstDialogSignal signals[] = {
 	{ NULL }
 };
 
+gint internet_druid;
+
+struct poptOption options[] =
+{
+	{ "internet", '\0', 0, &internet_druid, 0,
+	  N_("Run the internet conection druid."), NULL },
+
+	{NULL, '\0', 0, NULL, 0}
+};
+
 int
 main (int argc, char *argv[])
 {
@@ -106,43 +116,26 @@ main (int argc, char *argv[])
 
 	init_hint_entries ();
 	
-	druid = FALSE;
-	for (i = 0; i < argc; i++)
-		if (!strcmp (argv[i], "--internet_druid"))
-		{
-			druid = TRUE;
-			argv[i] = "";
-			break;
-		}
-	
-	tool = xst_tool_init ("network", _("Network Settings"), argc, argv);
+	tool = xst_tool_init ("network", _("Network Settings"), argc, argv, options);
 
-	if (druid) {
+	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	xst_dialog_connect_signals (tool->main_dialog, signals);
+
+	init_icons ();
+
+	for (i=0; s[i]; i++)
+		connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);
+
+	on_network_admin_show (NULL, NULL);
+
+	if (internet_druid) {
 		PppDruid *ppp;
-		GtkWidget *d;
-		
-		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
-		
-		if (!xst_tool_load (tool)) {
-			d = gnome_ok_dialog (_("There was an error running the backend script,\n"
-							   "and the configuration could not be loaded."));
-			gnome_dialog_run_and_close (GNOME_DIALOG (d));
-			exit (1);
-		}
-		
+
 		ppp = ppp_druid_new ();
 		ppp_druid_show (ppp);
+
 		gtk_main ();
 	} else {
-		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
-		xst_dialog_connect_signals (tool->main_dialog, signals);
-		
-		init_icons ();
-		
-		for (i=0; s[i]; i++)
-			connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);
-		
-		on_network_admin_show (NULL, NULL);
 		xst_tool_main (tool);
 	}
 

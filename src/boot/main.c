@@ -98,7 +98,7 @@ connect_signals ()
 int
 main (int argc, char *argv[])
 {
-	tool = xst_tool_init ("boot", _("Boot Manager Settings - Ximian Setup Tools"), argc, argv);
+	tool = xst_tool_init ("boot", _("Boot Manager Settings - Ximian Setup Tools"), argc, argv, NULL);
 
 	xst_dialog_freeze (tool->main_dialog);
 
