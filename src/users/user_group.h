@@ -1,0 +1,100 @@
+/* user_group.c: this file is part of users-admin, a helix-setup-tool frontend 
+ * for user administration.
+ * 
+ * Copyright (C) 2000 Helix Code, Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@helixcode.com>.
+ */
+
+#ifndef __USER_GROUP_H
+#define __USER_GROUP_H
+
+#include <gnome.h>
+
+/* Just as specified in the @login_defs_prop_array in the users-conf backend: */
+
+typedef struct
+{
+	gchar *qmail_dir;
+	gchar *mailbox_dir;
+	gchar *mailbox_file;
+	gint passwd_max_day_use;
+	gint passwd_min_day_use;
+	guint passwd_min_length;
+	guint passwd_warning_advance_days;
+	guint new_user_min_id;
+	guint new_user_max_id;
+	guint new_group_min_id;
+	guint new_group_max_id;
+	gchar *del_user_additional_command;
+	gboolean create_home;
+} login_defs;
+
+extern login_defs logindefs;
+
+typedef struct
+{
+	gchar *key;			/* Unique, data-independent field */
+	gchar *login;			/* Login name */
+	gchar *password;		/* Password */
+	guint uid;			/* User id */
+	guint gid;			/* Group id */
+	gchar *comment;			/* Usually account owner's name */
+	gchar *home;			/* Home directory */
+	gchar *shell;			/* Account's shell */
+	
+	guint last_mod;			/* Days since Jan 1, 1970 that password was last changed */
+	guint passwd_min_life;		/* Days before password may be changed */
+	guint passwd_max_life;		/* Days after which password must be changed */
+	guint passwd_exp_warn;		/* Days before password is to expire that user is warned */
+	guint passwd_exp_disable;	/* Days after password expires that account is disabled */
+	gboolean is_passwd_exp_disable; /* Is this field being used? */
+	guint passwd_disable;	/* Days since Jan 1, 1970 that account is disabled */
+	gboolean is_passwd_disable; /* Is this field being used? */
+	gchar *reserved;			/* Obscure field. Passed through */
+	gboolean is_shadow;		/* true if using shadow passwords */
+} user;
+
+typedef struct
+{
+	gchar *key;
+	gchar *name;
+	gchar *password;
+	guint gid;
+	GList *users;
+} group;
+
+
+extern user *current_user;
+extern GList *user_list;
+
+extern group *current_group;
+extern GList *group_list;
+
+extern user *user_new (gchar *name);
+extern gboolean user_add (void);
+extern gboolean user_update (user *u);
+extern void user_fill_settings_group (GtkCombo *combo);
+
+extern group *group_new (void);
+extern gboolean group_add (void);
+extern gboolean group_update (group *g);
+extern GList *group_fill_members_list (void);
+extern void group_fill_all_users_list (GList *member_rows);
+
+
+#endif /* USER_GROUP_H */

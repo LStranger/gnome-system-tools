@@ -14,7 +14,9 @@ sbin_PROGRAMS = users-admin
 users_admin_SOURCES = \
 	main.c \
 	callbacks.c callbacks.h \
+	passwd.c passwd.h \
 	transfer.c transfer.h \
+	user_group.c user_group.h \
 	md5.c md5.h md5_crypt.c
 
 users_admin_CFLAGS = 

@@ -20,6 +20,9 @@
  * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@helixcode.com>.
  */
 
+#ifndef __CALLBACKS_H
+#define __CALLBACKS_H
+
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
@@ -116,4 +119,6 @@ on_group_settings_all_select_row (GtkCList *clist, gint row, gint column, GdkEve
 extern void
 on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
 		gpointer user_data);
+
+#endif /* CALLBACKS_H */
 

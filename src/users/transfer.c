@@ -30,21 +30,14 @@
 #include "global.h"
 
 #include "transfer.h"
+#include "user_group.h"
 #include "callbacks.h"
-
-GList *user_list = NULL;
-user *current_user = NULL;
-
-GList *group_list = NULL;
-group *current_group = NULL;
-
-_logindefs logindefs;
 
 /* Structure with some hard-coded defaults, just in case any of the tags is not present. */
 /* These were taken form RH 6.2's default values. Any better suggestions? */
 /* NULL means not present for string members. */
 
-const static _logindefs default_logindefs = {
+const static login_defs default_logindefs = {
 	NULL, /* qmail_dir */
 	"/var/spool/mail", /* mailbox_dir */
 	NULL, /* mailbox_file */

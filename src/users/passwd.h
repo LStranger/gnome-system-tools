@@ -1,4 +1,4 @@
-/* transfer.h: this file is part of users-admin, a helix-setup-tool frontend 
+/* passwd.c: this file is part of users-admin, a helix-setup-tool frontend 
  * for user administration.
  * 
  * Copyright (C) 2000 Helix Code, Inc.
@@ -20,14 +20,13 @@
  * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@helixcode.com>.
  */
 
-#ifndef __TRANSFER_H
-#define __TRANSFER_H
+#ifndef __PASSWD_H
+#define __PASSWD_H
 
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
+#include <glib.h>
+#include "user_group.h"
 
-void transfer_config_saved(xmlNodePtr root);
-void transfer_xml_to_gui(xmlNodePtr root);
-void transfer_gui_to_xml(xmlNodePtr root);
+extern gchar *passwd_set (user *u, gchar *new_passwd, gchar *confirm, gboolean check_quality);
+extern gchar *passwd_get_random (void);
 
-#endif /* TRANSFER_H */
+#endif /* PASSWD_H */
