@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.25.0\n"
-"POT-Creation-Date: 2003-08-19 01:59+0200\n"
-"PO-Revision-Date: 2003-08-19 01:59+0200\n"
+"POT-Creation-Date: 2003-08-23 17:21+0200\n"
+"PO-Revision-Date: 2003-08-23 17:21+0200\n"
 "Last-Translator: Slobodan Sredojević <ssl@uns.ns.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -224,7 +224,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Podešavanje datoteke sa kernelom (korak 2 od 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1744
+#: src/network/connection.c:1745
 msgid "Manual"
 msgstr "Uputstvo"
 
@@ -314,7 +314,7 @@ msgstr "_Uređaj:"
 msgid "_Edit"
 msgstr "_Uredi"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:53 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Putanja _initrd otiska:"
 
@@ -836,7 +836,7 @@ msgid "Create a new local network interface."
 msgstr "Napravi novi lokalni mrežni pristup."
 
 #: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:46
-#: src/network/connection.c:1745
+#: src/network/connection.c:1746
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1148,8 +1148,8 @@ msgstr "Pronađi..."
 msgid "Cancel"
 msgstr "Poništi"
 
-#: interfaces/memory.glade.in.h:5 src/boot/table.c:48
-#: src/network/connection.c:508
+#: interfaces/memory.glade.in.h:5 src/boot/table.c:45
+#: src/network/connection.c:498
 msgid "Device"
 msgstr "Uređaj"
 
@@ -1177,11 +1177,11 @@ msgstr "Putanja:"
 msgid "Physical memory:"
 msgstr "Fizička memorija:"
 
-#: interfaces/memory.glade.in.h:13 src/runlevel/table.c:73
+#: interfaces/memory.glade.in.h:13
 msgid "Priority"
 msgstr "Značaj"
 
-#: interfaces/memory.glade.in.h:14 interfaces/runlevel.glade.in.h:7
+#: interfaces/memory.glade.in.h:14 interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "Značaj:"
 
@@ -1263,7 +1263,7 @@ msgstr "Promeni IP adresu drugog nadimka ili njemu odgovarajuća imena."
 msgid "Delete"
 msgstr "Ukloni"
 
-#: interfaces/nameresolution.glade.in.h:10 interfaces/runlevel.glade.in.h:5
+#: interfaces/nameresolution.glade.in.h:10 interfaces/services.glade.in.h:5
 msgid "Description:"
 msgstr "Opis:"
 
@@ -1491,7 +1491,7 @@ msgstr "Dozvoli kontrolu pokretanja za sve korisnike"
 msgid "Auto"
 msgstr "Automatski"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1746
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -2371,41 +2371,39 @@ msgstr "Pogledaj dnevnike..."
 msgid "days ago"
 msgstr "dana"
 
-#: interfaces/runlevel.glade.in.h:1
+#: interfaces/services.glade.in.h:1
 msgid "<span weight=\"bold\">Description</span>"
 msgstr "<span weight=\"bold\">Opis</span>"
 
-#: interfaces/runlevel.glade.in.h:2
+#: interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">Opšte informacije</span>"
 
-#: interfaces/runlevel.glade.in.h:3
+#: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">Podešavanje servisa</span>"
 
-#: interfaces/runlevel.glade.in.h:4
+#: interfaces/services.glade.in.h:4
 msgid "Click on an item in the list to show it's description."
 msgstr "Pritisnite na stavku u spisku kako bi videli njen opis."
 
-#: interfaces/runlevel.glade.in.h:6
+#: interfaces/services.glade.in.h:6
 msgid "Parameters:"
 msgstr "Parametri:"
 
-#: interfaces/runlevel.glade.in.h:8
+#: interfaces/services.glade.in.h:8
 msgid "Service _Properties"
 msgstr "Osobine _usluge"
 
-#: interfaces/runlevel.glade.in.h:9
+#: interfaces/services.glade.in.h:9
 msgid "Service:"
 msgstr "Usluga:"
 
-#: interfaces/runlevel.glade.in.h:10
-msgid ""
-"Use this tool to specify which services to run and the runlevel for the "
-"services."
+#: interfaces/services.glade.in.h:10
+msgid "Use this tool to specify which services to run"
 msgstr ""
 "Koristite ovaj program kako bi odlučili koji uslužni programi će biti "
-"pokrenuti i u kojem radnom režimu."
+"pokrenuti"
 
 #: interfaces/shares.glade.in.h:3
 msgid " Edit clients... "
@@ -2551,7 +2549,7 @@ msgstr "Opcije priključivanja"
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.in.h:42 src/boot/table.c:44
+#: interfaces/shares.glade.in.h:42 src/boot/table.c:41
 msgid "Name"
 msgstr "Ime"
 
@@ -3093,38 +3091,46 @@ msgstr "DOS(DOS)"
 
 #: src/boot/boot-image.c:44
 msgid "Linux"
-msgstr "Linuks(Linux)"
+msgstr "Linuks"
 
 #: src/boot/boot-image.c:45
 msgid "Linux swap"
 msgstr "Linuks virtualni prostor"
 
-#: src/boot/boot-image.c:271
+#: src/boot/boot-image.c:46
+msgid "GNU/Hurd"
+msgstr "GNU/Hurd"
+
+#: src/boot/boot-image.c:278
 #, c-format
 msgid "Invalid path: %s"
 msgstr "Netačna putanja: %s"
 
-#: src/boot/boot-image.c:287
+#: src/boot/boot-image.c:294
 #, c-format
 msgid "Image '%s' already exists, please set another name."
-msgstr "Datoteka sa kernelom '%s' već postoji, molim postavite drugo ime."
+msgstr "Datoteka sa kernelom „%s“ već postoji, molim postavite drugo ime."
 
-#: src/boot/boot-image.c:293
+#: src/boot/boot-image.c:300
 #, c-format
 msgid "Invalid image name: '%s'"
-msgstr "Pogrešno ime datoteke sa kernelom: '%s'"
+msgstr "Pogrešno ime datoteke sa kernelom: „%s“"
 
-#: src/boot/boot-image.c:306
+#: src/boot/boot-image.c:313
 #, c-format
 msgid "Invalid image: '%s'"
-msgstr "Pogrešan kernel: '%s'"
+msgstr "Pogrešan kernel: „%s“"
 
-#: src/boot/boot-image.c:324
+#: src/boot/boot-image.c:331
 #, c-format
 msgid "Invalid root device: '%s'"
-msgstr "Netačan koreni uređaj: '%s'"
+msgstr "Neispravan osnovni uređaj: „%s“"
 
-#: src/boot/boot-settings.c:344 src/users/user-settings.c:502
+#: src/boot/boot-settings.c:43
+msgid "_Module path:"
+msgstr "_Putanja modula:"
+
+#: src/boot/boot-settings.c:360 src/users/user-settings.c:502
 msgid "Password confirmation isn't correct."
 msgstr "Potvrda lozinke nije ispravna."
 
@@ -3136,15 +3142,15 @@ msgstr "Podizanje operativnog sistema"
 msgid "Boot Manager"
 msgstr "Upravljanje podizanjem operativnog sistema"
 
-#: src/boot/callbacks.c:79
+#: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
 msgstr "Program za izbor slike kernela"
 
-#: src/boot/callbacks.c:173
+#: src/boot/callbacks.c:169
 msgid "Boot Append Editor"
 msgstr "Dodavanje parametara pri podizanju operativnog sistema"
 
-#: src/boot/callbacks.c:403
+#: src/boot/callbacks.c:390
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3152,12 +3158,12 @@ msgstr ""
 "Bez barem jedne datoteke sa kernelom, \n"
 "Vaš sistem se neće pokrenuti.\n"
 
-#: src/boot/callbacks.c:418
+#: src/boot/callbacks.c:405
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Da li ste sigurni da želite da uklonite '%s'?"
 
-#: src/boot/callbacks.c:463 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:450
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3170,27 +3176,27 @@ msgstr ""
 msgid "Boot Manager Settings"
 msgstr "Podešavanja podizanja operativnog sistema"
 
-#: src/boot/table.c:45
+#: src/boot/table.c:42
 msgid "Default"
 msgstr "Podrazumevano"
 
-#: src/boot/table.c:46 src/network/connection.c:492
+#: src/boot/table.c:43 src/network/connection.c:482
 msgid "Type"
 msgstr "Vrsta"
 
-#: src/boot/table.c:47
+#: src/boot/table.c:44
 msgid "Kernel Image"
 msgstr "Datoteka sa kernelom"
 
-#: src/boot/table.c:53
+#: src/boot/table.c:50
 msgid "/_Add ..."
 msgstr "/_Dodaj ..."
 
-#: src/boot/table.c:55 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Osobine"
 
-#: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Ukloni"
 
@@ -3299,7 +3305,7 @@ msgstr ""
 "Molim ponovo pokrenite GNOM okruženje\n"
 "kako bi promene uzele maha."
 
-#: src/network/callbacks.c:115
+#: src/network/callbacks.c:115 src/services/table.c:55
 msgid "Active"
 msgstr "Aktivno"
 
@@ -3455,17 +3461,17 @@ msgstr ""
 "pod jezičkom za veze. Molim instalirajte\n"
 "redhat-config-network rpm paket kako se ovo ne bi dogodilo."
 
-#: src/network/callbacks.c:912
+#: src/network/callbacks.c:900
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Da li želite da omogućite pristup %s?"
 
-#: src/network/callbacks.c:924
+#: src/network/callbacks.c:910
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Da li želite da onemogućite pristup %s?"
 
-#: src/network/callbacks.c:998
+#: src/network/callbacks.c:983
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -3473,23 +3479,23 @@ msgstr ""
 "Ne mogu automatski pronaći modemski urećaj. Proverite da nije modem u "
 "upotrebi i da je pravilno priključen"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:1028
 msgid "Silent"
 msgstr "Tiho"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:1030
 msgid "Low"
 msgstr "Slabo"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:1032
 msgid "Medium"
 msgstr "Srednje"
 
-#: src/network/callbacks.c:1049
+#: src/network/callbacks.c:1034
 msgid "Loud"
 msgstr "Glasno"
 
-#: src/network/callbacks.c:1215
+#: src/network/callbacks.c:1200
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Da li sigurno želite da uklonite drugi nadimak za %s?"
@@ -3526,15 +3532,15 @@ msgstr "Loopback sprega"
 msgid "Unknown interface type"
 msgstr "Nepoznata vrsta sprege"
 
-#: src/network/connection.c:520
+#: src/network/connection.c:510
 msgid "Status"
 msgstr "Stanje"
 
-#: src/network/connection.c:529 src/network/profiles-table.c:62
+#: src/network/connection.c:519 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Opis"
 
-#: src/network/connection.c:1625
+#: src/network/connection.c:1626
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3544,7 +3550,7 @@ msgstr ""
 "nisu popunjeni. Molim navedite ispravne IP\n"
 "adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1632
+#: src/network/connection.c:1633
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3554,7 +3560,7 @@ msgstr ""
 "pristup nisu popunjeni. Molim navedite ispravne IP\n"
 "adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1638
+#: src/network/connection.c:1639
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3568,7 +3574,7 @@ msgstr ""
 "primarni DNS ili isključite mogućnost ručnog\n"
 "postavljanja DNS opcija."
 
-#: src/network/connection.c:2194
+#: src/network/connection.c:2195
 msgid "Autodetecting modem device"
 msgstr "Automatsko prepoznavanje modema"
 
@@ -3670,34 +3676,34 @@ msgstr ""
 "\n"
 "Lozinka: %s"
 
-#: src/network/profiles-table.c:53
-msgid "Profile name"
-msgstr "Ime skupa podešavanja"
-
 #: src/network/profile.c:43
 #, c-format
 msgid "Are you sure you want to delete profile %s?"
 msgstr "Da li ste sigurni da želite da uklonite skup podešavanja %s?"
 
-#: src/runlevel/callbacks.c:49
+#: src/network/profiles-table.c:53
+msgid "Profile name"
+msgstr "Ime skupa podešavanja"
+
+#: src/services/callbacks.c:45
 msgid "No description available."
 msgstr "Opis nije dostupan."
 
-#: src/runlevel/main.c:75
-msgid "Runlevel Settings"
-msgstr "Podešavanja radnog režima"
+#: src/services/main.c:62
+msgid "Services Settings"
+msgstr "Podešavanje uslužnih programa"
 
-#: src/runlevel/runlevel.desktop.in.in.h:1
-msgid "Runlevel"
-msgstr "Radni režim"
+#: src/services/services.desktop.in.in.h:1
+msgid "Services"
+msgstr "Uslužni programi"
 
-#: src/runlevel/runlevel.desktop.in.in.h:2
-msgid "Runlevel Services Manager"
-msgstr "Upravnik servisima radnih režima"
+#: src/services/services.desktop.in.in.h:2
+msgid "Services Manager"
+msgstr "Upravljanje uslužnim programima"
 
-#: src/runlevel/table.c:86
+#: src/services/table.c:65
 msgid "Service"
-msgstr "Servis"
+msgstr "Uslužni program"
 
 #: src/time/main.c:310
 msgid "Time Zone - GNOME System Tools"
@@ -3975,6 +3981,12 @@ msgstr "Napomene"
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
 msgstr "Korisnici i grupe."
+
+#~ msgid "Runlevel Settings"
+#~ msgstr "Podešavanja radnog režima"
+
+#~ msgid "Runlevel"
+#~ msgstr "Radni režim"
 
 #~ msgid "Scanning your system configuration."
 #~ msgstr "Pretražujem sistemska podešavanja."
