@@ -14,6 +14,8 @@ void list_add_word(GtkList *list, GtkWidget *editable);
 void clist_add_ip(GtkCList *clist, GtkWidget *w_ip_1, GtkWidget *w_ip_2,
 		  GtkWidget *w_ip_3, GtkWidget *w_ip_4);
 
+void clist_add_word(GtkCList *clist, GtkWidget *editable);
+
 void set_ctree_checkmark(GtkCTree *ctree, GtkCTreeNode *node,
 			 gint column, gboolean state);
 

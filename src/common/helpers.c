@@ -121,6 +121,7 @@ ip_num_valid (gchar *strnum)
 	return ((num >= 0) && (num <= 255));
 }
 
+
 gboolean
 list_add_ip (GtkList *list, GtkWidget *w_ip)
 {
@@ -142,8 +143,8 @@ list_add_ip (GtkList *list, GtkWidget *w_ip)
 	}
 	
 	if ((i < 4) || (ip_next) ||
-			(atoi(ip_num[3]) == 0) || (atoi(ip_num[3]) == 255) ||
-			(atoi(ip_num[0]) == 0) || (atoi(ip_num[0]) == 255))
+	    (atoi(ip_num[3]) == 0) || (atoi(ip_num[3]) == 255) ||
+	    (atoi(ip_num[0]) == 0) || (atoi(ip_num[0]) == 255))
 		success = FALSE;
 	else
 	{
@@ -190,6 +191,37 @@ list_add_word (GtkList *list, GtkWidget *editable)
 	gtk_widget_show (item);
 	list_add = g_list_append (list_add, item);
 	gtk_list_append_items (GTK_LIST (list), list_add);
+}
+
+
+void
+clist_add_word (GtkCList *clist, GtkWidget *editable)
+{
+	gchar *text;
+	gchar *row_data[3];
+
+	text = gtk_editable_get_chars (GTK_EDITABLE (editable), 0, -1);
+	g_strstrip (text);
+
+	if (strchr (text, ' '))
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (editable));
+		gtk_editable_select_region (GTK_EDITABLE (editable), 0, -1);
+		g_free(text);
+		return;
+	}
+
+	if (!strlen (text)) return;
+
+	gtk_editable_delete_text (GTK_EDITABLE (editable), 0, -1);
+	gtk_widget_grab_focus (GTK_WIDGET (editable));
+
+	row_data[0] = text;
+	row_data[1] = "";
+	row_data[2] = NULL;
+	gtk_clist_select_row (clist, gtk_clist_append (clist, row_data), -1);
+	
+	g_free(text);
 }
 
 
