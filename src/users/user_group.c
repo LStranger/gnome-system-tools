@@ -47,11 +47,7 @@
 extern GstTool *tool;
 GList *groups_list = NULL;
 
-/* Local globals */
 /* Static prototypes */
-
-/*static void group_settings_prepare (ug_data *ud);
-  static GList *get_group_users (xmlNodePtr group_node);*/
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 
@@ -463,20 +459,29 @@ my_g_list_remove_duplicates (GList *list1, GList *list2)
 gchar *
 find_new_id (xmlNodePtr parent, xmlNodePtr profile)
 {
-	gint umin, umax, gmin, gmax;
-	gchar *field, *buf, *key;
-	guint id;
-	guint min, max;
-	guint ret = 0;
+	gint umin, umax, gmin, gmax, id, min, max;
+	gchar *field, *buf, *key, *data;
+	gint ret = 0;
 	xmlNodePtr n0;
 
 	g_return_val_if_fail (parent != NULL, NULL);
 	
 	if (profile != NULL) {
-		umin = g_strtod ((gchar *) gst_xml_get_child_content (profile, "umin"), NULL);
-		umax = g_strtod ((gchar *) gst_xml_get_child_content (profile, "umax"), NULL);
-		gmin = g_strtod ((gchar *) gst_xml_get_child_content (profile, "gmin"), NULL);
-		gmax = g_strtod ((gchar *) gst_xml_get_child_content (profile, "gmax"), NULL);
+		data = gst_xml_get_child_content (profile, "umin");
+		umin = g_strtod (data, NULL);
+		g_free (data);
+
+		data = gst_xml_get_child_content (profile, "umax");
+		umax = g_strtod (data, NULL);
+		g_free (data);
+		
+		data = gst_xml_get_child_content (profile, "gmin");
+		gmin = g_strtod (data, NULL);
+		g_free (data);
+
+		data = gst_xml_get_child_content (profile, "gmax");
+		gmax = g_strtod (data, NULL);
+		g_free (data);
 	} else {
 		umin = 0;
 		umax = 60000;
