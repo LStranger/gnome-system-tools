@@ -14,7 +14,7 @@
 
 <widget>
   <class>GnomeDialog</class>
-  <name>simple_mode</name>
+  <name>simple_mode_</name>
   <title>Internet Sharing -- Simple Mode</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -672,9 +672,32 @@
 
     <widget>
       <class>GtkFrame</class>
-      <name>frame9</name>
+      <name>frame14</name>
       <border_width>3</border_width>
-      <label>Gateway</label>
+      <label>Internet Sharing</label>
+      <label_xalign>0</label_xalign>
+      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>checkbutton11</name>
+	<can_focus>True</can_focus>
+	<label>Enable</label>
+	<active>True</active>
+	<draw_indicator>True</draw_indicator>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkFrame</class>
+      <name>frame13</name>
+      <border_width>3</border_width>
+      <label>Enable :</label>
       <label_xalign>0</label_xalign>
       <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
       <child>
@@ -685,32 +708,42 @@
 
       <widget>
 	<class>GtkVBox</class>
-	<name>vbox12</name>
+	<name>vbox16</name>
 	<homogeneous>False</homogeneous>
 	<spacing>0</spacing>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox12</name>
-	  <border_width>3</border_width>
-	  <homogeneous>False</homogeneous>
-	  <spacing>3</spacing>
+	  <class>GtkCheckButton</class>
+	  <name>checkbutton5</name>
+	  <can_focus>True</can_focus>
+	  <label>IP Forwarding</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
 	  <child>
 	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox16</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
 	  </child>
 
 	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label39</name>
-	    <label>Name:</label>
-	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>False</wrap>
-	    <xalign>7.45058e-09</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
+	    <class>GtkCheckButton</class>
+	    <name>checkbutton10</name>
+	    <can_focus>True</can_focus>
+	    <label>DHCP</label>
+	    <active>True</active>
+	    <draw_indicator>True</draw_indicator>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -719,33 +752,18 @@
 	  </widget>
 
 	  <widget>
-	    <class>GtkEntry</class>
-	    <name>entry19</name>
-	    <can_focus>True</can_focus>
-	    <editable>True</editable>
-	    <text_visible>True</text_visible>
-	    <text_max_length>0</text_max_length>
-	    <text></text>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label40</name>
-	    <label>IP Mask:</label>
-	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <name>label57</name>
+	    <label>IP range :</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
-	    <xalign>7.45058e-09</xalign>
+	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
 	      <padding>0</padding>
-	      <expand>False</expand>
+	      <expand>True</expand>
 	      <fill>False</fill>
 	    </child>
 	  </widget>
@@ -757,27 +775,55 @@
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
-	    <text></text>
+	    <text>192.168.100.x</text>
 	    <child>
 	      <padding>0</padding>
 	      <expand>True</expand>
 	      <fill>True</fill>
 	    </child>
 	  </widget>
+	</widget>
 
-	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>checkbutton3</name>
-	    <can_focus>True</can_focus>
-	    <label>Enable sharing</label>
-	    <active>True</active>
-	    <draw_indicator>True</draw_indicator>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>checkbutton7</name>
+	  <can_focus>True</can_focus>
+	  <label>Firewall</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>checkbutton8</name>
+	  <can_focus>True</can_focus>
+	  <label>Web Cache (squid)</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>checkbutton9</name>
+	  <can_focus>True</can_focus>
+	  <label>Banner Removal (Junkbuster)</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
 	</widget>
       </widget>
     </widget>
@@ -820,7 +866,7 @@
 	    <name>clist3</name>
 	    <can_focus>True</can_focus>
 	    <columns>3</columns>
-	    <column_widths>93,116,70</column_widths>
+	    <column_widths>93,92,70</column_widths>
 	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 	    <show_titles>True</show_titles>
 	    <shadow_type>GTK_SHADOW_IN</shadow_type>
@@ -916,7 +962,6 @@
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
 	      <label>Add client...</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
 	    <widget>
@@ -925,7 +970,6 @@
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
 	      <label>Settings...</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
 	    <widget>
@@ -934,7 +978,6 @@
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
 	      <label>Delete</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 	  </widget>
 
@@ -949,6 +992,127 @@
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>simple_mode</name>
+  <title>Internet Sharing --Simple Mode</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>445</default_width>
+  <default_height>272</default_height>
+  <allow_shrink>True</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox14</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox14</name>
+      <border_width>3</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap13</name>
+	<filename>networking.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label50</name>
+	<label> When butter beatles battle with their paddles in a bottle, and the bottle's on a poodle and the poodle's eating noodles, we call that a ...........</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>True</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap14</name>
+	<filename>32_wrench_logo.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkFrame</class>
+      <name>frame12</name>
+      <border_width>3</border_width>
+      <label>Internet Sharing</label>
+      <label_xalign>0</label_xalign>
+      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>vbox15</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox15</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>3</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>checkbutton4</name>
+	    <can_focus>True</can_focus>
+	    <label>Enable</label>
+	    <active>True</active>
+	    <draw_indicator>True</draw_indicator>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
