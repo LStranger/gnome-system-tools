@@ -6,7 +6,7 @@ SUBDIRS = interfaces backends pixmaps src po
 EXTRA_DIST = \
 	HACKING 		\
 	BUGS			\
-	ximian-setup-tools.spec \
+	gnome-system-tools.spec \
 	intltool-extract.in	\
 	intltool-merge.in 	\
 	intltool-update.in \
