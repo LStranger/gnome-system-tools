@@ -326,8 +326,8 @@ e_table_del (gchar del)
 	}
 	
 	etm = E_TABLE_MODEL (table->model);
-	e_table_model_row_deleted (etm, row);
 	e_table_model_changed (etm);
+	e_table_model_row_deleted (etm, row);
 }
 
 void
