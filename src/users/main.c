@@ -58,9 +58,9 @@ static XstDialogSignal signals[] = {
 	{ "group_settings_add",          "clicked",              on_group_settings_add_clicked },
 	{ "group_settings_remove",       "clicked",              on_group_settings_remove_clicked },
 	{ "group_settings_members",      "select_row",           on_group_settings_members_select_row },
-	/* { "group_settings_members",      "unselect_row",         on_group_settings_members_unselect_row }, */
+	{ "group_settings_members",      "unselect_row",         on_group_settings_members_select_row },
 	{ "group_settings_all",          "select_row",           on_group_settings_all_select_row },
-	/* { "group_settings_all",          "unselect_row",         on_group_settings_all_unselect_row }, */
+	{ "group_settings_all",          "unselect_row",         on_group_settings_all_select_row },
 	{ "user_new",                    "clicked",              on_user_new_clicked },
 	{ "user_delete",                 "clicked",              on_user_delete_clicked },
 	{ "user_chpasswd",               "clicked",              on_user_chpasswd_clicked },
@@ -77,8 +77,7 @@ set_access_sensitivity (void)
 {
 	char *access_no[] = {"user_new", "user_chpasswd", "group_new",
 					 "user_settings_basic", "user_settings_advanced",
-					 "group_settings_name_label", "group_settings_add",
-					 "group_settings_remove", "defs_min_uid", "defs_max_uid",
+					 "group_settings_name_label", "defs_min_uid", "defs_max_uid",
 					 "defs_min_gid", "defs_max_gid", "defs_passwd_max_days",
 					 "defs_passwd_min_days", "defs_passwd_warn",
 					 "defs_passwd_min_len", "defs_mail_dir",
@@ -119,8 +118,6 @@ update_complexity (void)
 
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_container"),
 						 complexity == XST_DIALOG_ADVANCED);
-
-/*	actions_set_sensitive (FALSE); */
 }
 
 static void
