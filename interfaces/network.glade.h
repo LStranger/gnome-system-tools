@@ -27,7 +27,8 @@ gchar *s = N_("Default Gateway Device:");
 gchar *s = N_("Use \"Auto\" if unsure.");
 gchar *s = N_("Auto");
 gchar *s = N_("Connections");
-gchar *s = N_("How the names of other computers are found.");
+gchar *s = N_("How the names of other\n"
+              "computers are found.");
 gchar *s = N_("_Domain:");
 gchar *s = N_("*");
 gchar *s = N_("DNS _Servers:");
