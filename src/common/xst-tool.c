@@ -35,6 +35,7 @@
 #include <config-archiver/archiver-client.h>
 
 #include <gnome.h>
+#include <libgnomeui/gnome-window-icon.h>
 #include <parser.h>
 #include <memory.h>
 
@@ -1255,7 +1256,7 @@ xst_tool_get_type (void)
 void
 xst_tool_construct (XstTool *tool, const char *name, const char *title)
 {
-	char *s, *t;
+	char *s, *t, *u;
 
 	g_return_if_fail (name != NULL);
 
@@ -1265,11 +1266,14 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 	
 	s = g_strdup_printf ("%s_admin", name);
 	t = g_strdup_printf (_("%s - Ximian Setup Tools"), title);
+	u = g_strdup_printf (PIXMAPS_DIR "/%s.png", name);
 	
 	tool->main_dialog = xst_dialog_new (tool, s, t);
+	gnome_window_icon_set_from_file (GTK_WINDOW (tool->main_dialog), u);
 
 	g_free (s);
 	g_free (t);
+	g_free (u);
 
 	gtk_signal_connect (GTK_OBJECT (tool->main_dialog),
 			    "apply",
