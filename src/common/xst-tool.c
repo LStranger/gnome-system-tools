@@ -515,7 +515,6 @@ report_progress (XstTool *tool, const gchar *label)
 	xst_tool_clear_supported_platforms (tool);
 	report_clear_lines (tool);
 
-	gtk_label_set_text (GTK_LABEL (tool->report_label), label);
 #if 0
 	set_arrow (tool, GTK_ARROW_DOWN);
 	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 0.0);
@@ -523,9 +522,14 @@ report_progress (XstTool *tool, const gchar *label)
 	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
 					     report_progress_tick, NULL, tool, NULL);
 
-	gtk_signal_connect_after (GTK_OBJECT (tool->report_window), "delete-event",
-				  GTK_SIGNAL_FUNC (report_window_close_cb), NULL);
-	gtk_widget_show (tool->report_window);
+	if (label) {
+		gtk_label_set_text (GTK_LABEL (tool->report_label), label);
+		gtk_signal_connect_after (GTK_OBJECT (tool->report_window), "delete-event",
+					  GTK_SIGNAL_FUNC (report_window_close_cb), NULL);
+		gtk_widget_show (tool->report_window);
+		while (gtk_events_pending ())
+			gtk_main_iteration ();
+	}
 	
 	gtk_main ();
 
@@ -780,7 +784,7 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 	tool->report_hook_type = XST_REPORT_HOOK_SAVE;
 
 	if (location_id == NULL)
-		report_progress (tool, _(report_sign));
+		report_progress (tool, report_sign? _(report_sign): NULL);
 
 	/* This is tipicaly to just read the end of request string,
 	   but a set directive may return some XML too. */
