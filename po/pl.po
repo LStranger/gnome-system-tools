@@ -9,8 +9,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2002-04-11 23:31+0200\n"
-"PO-Revision-Date: 2002-04-11 23:32+0200\n"
+"POT-Creation-Date: 2002-04-26 00:44+0200\n"
+"PO-Revision-Date: 2002-04-26 00:47+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -629,7 +629,8 @@ msgid "Model:"
 msgstr "Model:"
 
 #: interfaces/display.glade.h:1 interfaces/display.glade.h:1
-#: interfaces/nameresolution.glade.h:1 interfaces/nameresolution.glade.h:1
+#: interfaces/display.glade.in.h:1 interfaces/nameresolution.glade.h:1
+#: interfaces/nameresolution.glade.h:1 interfaces/nameresolution.glade.in.h:1
 msgid "<unknown>"
 msgstr "<nieznany>"
 
@@ -669,10 +670,6 @@ msgstr "label50"
 #: interfaces/display.glade.h:1 interfaces/display.glade.in.h:1
 msgid "Probe again"
 msgstr "Wykryj ponownie"
-
-#: interfaces/display.glade.in.h:1 interfaces/nameresolution.glade.in.h:1
-msgid "&lt;unknown&gt;"
-msgstr "&lt;nieznana&gt;"
 
 #: interfaces/font.glade.h:1
 msgid "Select the fonts you want to install."
@@ -749,7 +746,9 @@ msgstr ""
 "Internetem z innymi komputerami w sieci."
 
 #: interfaces/internetsharing.glade.h:1
-#: interfaces/internetsharing.glade.in.h:1 src/internetsharing/main.c:1
+#: interfaces/internetsharing.glade.in.h:1 src/dhcpd/dhcpd.desktop.in.in.h:1
+#: src/internetsharing/internetsharing.desktop.in.in.h:1
+#: src/internetsharing/main.c:1
 msgid "Internet Sharing"
 msgstr "Współdzielenie Internetu"
 
@@ -2778,11 +2777,13 @@ msgstr "_Zmodyfikuj klientów... "
 msgid "Export Clients"
 msgstr "Klienci eksportu"
 
-#: interfaces/shares.glade.in.h:1
+#: interfaces/shares.glade.in.h:1 src/shares/export-settings.c:1
+#: src/shares/import-settings.c:1
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.in.h:1
+#: interfaces/shares.glade.in.h:1 src/shares/export-settings.c:1
+#: src/shares/import-settings.c:1
 msgid "Samba"
 msgstr "Samba"
 
@@ -2851,10 +2852,11 @@ msgid "Group _members"
 msgstr "_Członkowie grupy"
 
 #: interfaces/users.glade.h:1 interfaces/users.glade.h:1
+#: interfaces/users.glade.in.h:1
 msgid "_Add >>"
 msgstr "_Dodaj >>"
 
-#: interfaces/users.glade.h:1
+#: interfaces/users.glade.h:1 interfaces/users.glade.in.h:1
 msgid "<< _Remove"
 msgstr "<< _Usuń"
 
@@ -3251,21 +3253,9 @@ msgstr "_Dostępne grupy"
 msgid "Us_er's groups"
 msgstr "Grupy _użytkownika"
 
-#: interfaces/users.glade.h:1
+#: interfaces/users.glade.h:1 interfaces/users.glade.in.h:1
 msgid "<< _Remove "
 msgstr "<< _Usuń "
-
-#: interfaces/users.glade.in.h:1
-msgid "&lt;&lt; _Remove"
-msgstr "&lt;&lt; _Usuń"
-
-#: interfaces/users.glade.in.h:1
-msgid "&lt;&lt; _Remove "
-msgstr "&lt;&lt; _Usuń "
-
-#: interfaces/users.glade.in.h:1
-msgid "_Add &gt;&gt;"
-msgstr "_Dodaj &gt;&gt;"
 
 #. set window title
 #: src/boot/boot-druid.c:1
@@ -3514,6 +3504,14 @@ msgstr "Nie można uruchomić w trybie uproszczonym."
 msgid "DHCP server configurator"
 msgstr "Konfiguracja serwera DHCP"
 
+#: src/disks/disks.desktop.in.in.h:1
+msgid "Disks"
+msgstr "Dyski"
+
+#: src/disks/disks.desktop.in.in.h:1
+msgid "Local fixed media."
+msgstr "Lokalne niewymienne nośniki"
+
 #: src/disks/main.c:1
 msgid "Disk Partitions"
 msgstr "Partycje dyskowe"
@@ -3549,6 +3547,14 @@ msgstr ""
 "http://bugzilla.ximian.com\n"
 "Dziękujemy!"
 
+#: src/display/display.desktop.in.in.h:1
+msgid "Display"
+msgstr "Ekran"
+
+#: src/display/display.desktop.in.in.h:1
+msgid "Display Configuration"
+msgstr "Konfiguracja ekranu"
+
 #: src/display/main.c:1
 msgid "X Display Configuration"
 msgstr "Konfiguracja ekranu X"
@@ -3580,6 +3586,14 @@ msgstr "Wyszukiwanie czcionek."
 #: src/font/callbacks.c:1
 msgid "Select file or dir"
 msgstr "Wybór pliku lub katalogu"
+
+#: src/font/font.desktop.in.in.h:1
+msgid "Font"
+msgstr "Czcionka"
+
+#: src/font/font.desktop.in.in.h:1
+msgid "Font Manager"
+msgstr "Menedżer czcionek"
 
 #: src/font/main.c:1
 msgid "Font Settings"
@@ -3712,6 +3726,7 @@ msgstr "_Lokalizacja"
 
 #: src/location-manager/location-manager-dialog.c:1
 #: src/location-manager/location-manager-dialog.c:1
+#: src/location-manager/location-manager.desktop.in.in.h:1
 msgid "Location Manager"
 msgstr "Menedżer lokalizacji"
 
@@ -3754,6 +3769,10 @@ msgstr "Czy na pewno chcesz usunąć lokalizację %s?"
 msgid "Ximian Setup Tools Location Manager"
 msgstr "Menedżer lokalizacji Ximian Setup Tools"
 
+#: src/location-manager/location-manager.desktop.in.in.h:1
+msgid "Sets up configuration profiles"
+msgstr "Ustawia profile konfiguracyjne"
+
 # c-format
 #: src/memory/callbacks.c:1
 #, c-format
@@ -3774,6 +3793,14 @@ msgstr "Przestrzeń wymiany %s już istnieje."
 #: src/memory/main.c:1
 msgid "Swap Management"
 msgstr "Zarządzanie przestrzenią wymiany"
+
+#: src/memory/memory.desktop.in.in.h:1
+msgid "Memory"
+msgstr "Pamięć"
+
+#: src/memory/memory.desktop.in.in.h:1
+msgid "Memory settings."
+msgstr "Ustawienia pamięci"
 
 #: src/network/callbacks.c:1 src/network/connection.c:1
 msgid "Active"
@@ -3849,7 +3876,7 @@ msgstr "Unieaktywnianie połączenia \"%s\"."
 
 #: src/network/callbacks.c:1
 msgid ""
-"You don't have SMB support installed. Please installSMB support\n"
+"You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
 msgstr ""
 "Nie została zainstalowana obsługa SMB. Aby uaktywnić obsługę sieci\n"
@@ -4091,6 +4118,14 @@ msgstr "Czy usunąć %s?"
 msgid "Print tool"
 msgstr "Narzędzie wydruku"
 
+#: src/print/print.desktop.in.in.h:1
+msgid "Print"
+msgstr "Wydruk"
+
+#: src/print/print.desktop.in.in.h:1
+msgid "lpr based Printer Admin"
+msgstr "Administracja wydrukami opartymi na lpr"
+
 #: src/print/print.etspec.h:1
 msgid "Paper"
 msgstr "Papier"
@@ -4147,6 +4182,14 @@ msgstr "Zapis"
 #: src/shares/main.c:1
 msgid "New Shares Admin"
 msgstr "Administracja nowymi udziałami"
+
+#: src/shares/shares.desktop.in.in.h:1
+msgid "Directory import & export"
+msgstr "Import i eksport katalogów"
+
+#: src/shares/shares.desktop.in.in.h:1
+msgid "Shares"
+msgstr "Udziały"
 
 #: src/shares/tables.c:1
 #, c-format
