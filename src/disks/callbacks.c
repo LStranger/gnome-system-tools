@@ -27,7 +27,6 @@
 
 #include <gnome.h>
 #include "gst.h"
-#include "gst-hig-dialog.h"
 
 #include "disks-storage.h"
 #include "disks-storage-disk.h"
@@ -347,22 +346,15 @@ gst_on_format_button_clicked (GtkWidget *button, gpointer gdata)
 
 						  if ((g_ascii_strcasecmp (current_point, point) != 0) &&
 							 (gst_disks_gui_get_mount_point_is_busy (point))) {
-								msgdialog = gst_hig_dialog_new (GTK_WINDOW (dialog),
-														  GTK_DIALOG_MODAL,
-														  GST_HIG_MESSAGE_ERROR,
-														  NULL, NULL,
-														  GTK_STOCK_OK, GTK_RESPONSE_OK,
-														  NULL);
-
-								gst_hig_dialog_set_primary_text (
-									   GST_HIG_DIALOG (msgdialog),
-									   _("Access Path \"%s\" already in use"),
-									   point);
-								gst_hig_dialog_set_secondary_text (
-									   GST_HIG_DIALOG (msgdialog),
-									   _("Access Path \"%s\" is already being "
-										"used by other partition"), point);
-								
+								msgdialog = gtk_message_dialog_new (GTK_WINDOW (dialog),
+															 GTK_DIALOG_MODAL,
+															 GTK_MESSAGE_ERROR,
+															 GTK_BUTTONS_CLOSE,
+															 _("Access Path \"%s\" already in use"),
+															 point);
+								gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (msgdialog),
+																  _("Access Path \"%s\" is already being "
+																    "used by other partition"), point);
 								gtk_dialog_run (GTK_DIALOG (msgdialog));
 								gtk_widget_destroy (msgdialog);
 								
@@ -371,21 +363,17 @@ gst_on_format_button_clicked (GtkWidget *button, gpointer gdata)
 								break;
 						  }
 
-						  msgdialog = gst_hig_dialog_new (GTK_WINDOW (dialog),
-												    GTK_DIALOG_MODAL,
-												    GST_HIG_MESSAGE_WARNING,
-												    NULL,
-												    _("Formatting a partition implies "
-													 "that all data in that partition "
-													 "will be lost."),
-												    GTK_STOCK_NO, GTK_RESPONSE_NO,
-												    GTK_STOCK_YES, GTK_RESPONSE_YES,
-												    NULL);
-
-						  gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (msgdialog),
-													_("Are you sure you want to "
-													  "format \"%s (%s)\"?"),
-													name, device);
+						  msgdialog = gtk_message_dialog_new (GTK_WINDOW (dialog),
+													   GTK_DIALOG_MODAL,
+													   GTK_MESSAGE_WARNING,
+													   GTK_BUTTONS_YES_NO,
+													   _("Are you sure you want to "
+														"format \"%s (%s)\"?"),
+													   name, device);
+						  gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (msgdialog),
+														    _("Formatting a partition implies "
+															 "that all data in that partition "
+															 "will be lost."));
 
 						  if (gtk_dialog_run (GTK_DIALOG (msgdialog)) != GTK_RESPONSE_YES) {
 								gtk_widget_destroy (msgdialog);

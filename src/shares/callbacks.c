@@ -28,7 +28,6 @@
 #include <gtk/gtk.h>
 
 #include "gst.h"
-#include "gst-hig-dialog.h"
 #include "table.h"
 #include "callbacks.h"
 #include "share-settings.h"
@@ -178,14 +177,18 @@ on_delete_share_clicked (GtkWidget *widget, gpointer data)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table));
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-		dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
-					     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					     GST_HIG_MESSAGE_WARNING,
-					     _("Are you sure you want to delete this share?"),
-					     _("Other computers in your network will stop viewing this"),
-					     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-					     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
-					     NULL);
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+						 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+						 GTK_MESSAGE_WARNING,
+						 GTK_BUTTONS_NONE,
+						 _("Are you sure you want to delete this share?"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  _("Other computers in your network will stop viewing this"));
+		gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+					GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+					NULL);
+
 		response = gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 
