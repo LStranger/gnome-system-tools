@@ -73,7 +73,7 @@ all-local: $(desktop).menu $(desktop).cc $(security)
 install-data-local: $(desktop).menu $(desktop).cc
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
 ##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
-	$(INSTALL_DATA) $(srcdir)/boot.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/boot.desktop
+	$(INSTALL_DATA) boot.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/boot.desktop
 ##	$(INSTALL_DATA) $(srcdir)/boot.desktop.cc $(DESTDIR)$(datadir)/control-center/System/boot.desktop
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	rm -f $(DESTDIR)$(bindir)/boot-admin
@@ -81,4 +81,4 @@ install-data-local: $(desktop).menu $(desktop).cc
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
 	$(INSTALL_DATA) $(srcdir)/boot.pam $(DESTDIR)$(sysconfdir)/pam.d/boot-admin
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/boot-admin
+	$(INSTALL_DATA) $(security) $(DESTDIR)$(sysconfdir)/security/console.apps/boot-admin

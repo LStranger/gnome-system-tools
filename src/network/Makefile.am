@@ -67,7 +67,7 @@ all-local: $(desktop).menu $(desktop).cc $(security)
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
 ##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
-	$(INSTALL_DATA) $(srcdir)/network.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/network.desktop
+	$(INSTALL_DATA) network.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/network.desktop
 ##	$(INSTALL_DATA) $(srcdir)/network.desktop.cc $(DESTDIR)$(datadir)/control-center/System/network.desktop
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	rm -f $(DESTDIR)$(bindir)/network-admin
@@ -75,4 +75,4 @@ install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
 	$(INSTALL_DATA) $(srcdir)/network.pam $(DESTDIR)$(sysconfdir)/pam.d/network-admin
 	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/network-admin
+	$(INSTALL_DATA) $(security) $(DESTDIR)$(sysconfdir)/security/console.apps/network-admin
