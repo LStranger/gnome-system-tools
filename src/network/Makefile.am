@@ -6,7 +6,8 @@
 ##
 
 @XML_I18N_MERGE_DESKTOP_RULE@
-@XST_TOOL_DESKTOP_IN_RULE@
+###@__X_ST_TOOL_DESKTOP_IN_RULE@
+include ../common/CommonMakefile
 
 toolname = network
 bin_PROGRAMS = network-admin
