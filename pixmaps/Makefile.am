@@ -2,7 +2,6 @@ pixmaps_DATA = \
 	32_wrench_logo.png       \
 	computer.png             \
 	boot.png                 \
-	boot_wrench.png          \
 	connection-active.xpm    \
 	connection-inactive.xpm  \
 	16_ethernet.xpm          \
