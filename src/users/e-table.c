@@ -50,13 +50,18 @@
 #define USER_COLS 1
 #define GROUP_COLS 1
 
-#define USER_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"integer\"/> <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/></ETableSpecification>"
+#define USER_SPEC "<ETableSpecification cursor-mode=\"line\"> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"integer\"/> <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/><ETableColumn model_col=\"4\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/></ETableSpecification>"
 
-#define GROUP_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
+#define GROUP_SPEC "<ETableSpecification cursor-mode=\"line\"> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/><ETableColumn model_col=\"1\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"integer\"/> </ETableSpecification>"
 
 #define ADV_USER_STATE "<ETableState><column source=\"0\"/><column source=\"1\"/><column source=\"2\"/><column source=\"3\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
 
-#define BASIC_USER_STATE "<ETableState><column source=\"0\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
+#define BASIC_USER_STATE "<ETableState><column source=\"0\"/><column source=\"4\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
+
+#define ADV_GROUP_STATE "<ETableState><column source=\"0\"/><column source=\"1\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState>"
+
+#define BASIC_GROUP_STATE "<ETableState><column source=\"0\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState>"
+
 
 /* Local globals */
 
@@ -136,6 +141,9 @@ user_value_at (ETableModel *etm, int col, int row, void *data)
 		case 3:
 			field = g_strdup ("shell");
 			break;
+		case 4:
+			field = g_strdup ("comment");
+			break;
 		default:
 			g_warning ("Wrong col nr: %d", col);
 			return NULL;
@@ -159,6 +167,7 @@ group_value_at (ETableModel *etm, int col, int row, void *data)
 {
 	xmlNodePtr parent = data;
 	xmlNodePtr node, name;
+	gchar *field;
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
 		node = basic_group_find_nth (parent, row);
@@ -171,7 +180,22 @@ group_value_at (ETableModel *etm, int col, int row, void *data)
 		return NULL;
 	}
 
-	name = xml_element_find_first (node, "name");
+	switch (col)
+	{
+		case 0:
+			field = g_strdup ("name");
+			break;
+		case 1:
+			field = g_strdup ("gid");
+			break;
+		default:
+			g_warning ("group_value_at: wrong col %d.", col);
+			return NULL;
+	}
+	
+	name = xml_element_find_first (node, field);
+	g_free (field);
+
 	if (!name)
 	{
 		g_warning ("value_at: Can't get name for row %d\n", row);
@@ -201,6 +225,9 @@ user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *da
 		case 3:
 			field = g_strdup ("shell");
 			break;
+		case 4:
+			field = g_strdup ("comment");
+			break;
 		default:
 			g_warning ("Wrong col nr: %d", col);
 			return;
@@ -208,6 +235,32 @@ user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *da
 
 	e_table_change_user (field, val);
 	g_free (field);
+
+	tool_set_modified(TRUE);
+}
+
+static void
+group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
+{
+	gchar *field;
+
+	switch (col)
+	{
+		case 0:
+			field = g_strdup ("name");
+			break;
+		case 1:
+			field = g_strdup ("gid");
+			break;
+		default:
+			g_warning ("Wrong col nr: %d", col);
+			return;
+	}
+
+	e_table_change_group (field, val);
+	g_free (field);
+
+	tool_set_modified(TRUE);
 }
 
 /* This function checks if cell is editable. */
@@ -351,7 +404,7 @@ e_table_create (void)
 	e_table_model = e_table_simple_new (col_count,
                                            group_row_count,
                                            group_value_at,
-                                           NULL,
+                                           group_set_value_at,
                                            is_cell_editable,
                                            duplicate_value,
                                            free_value,
@@ -360,7 +413,8 @@ e_table_create (void)
                                            value_to_string,
                                            groups_node);
 
-	group_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, GROUP_SPEC, NULL);
+	group_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, GROUP_SPEC,
+			BASIC_GROUP_STATE);
 
 	if (!group_table)
 		g_warning ("e-table: Can't make group table");
@@ -884,10 +938,15 @@ void
 e_table_state (gboolean state)
 {
 	if (state)
+	{
 		e_table_set_state (E_TABLE (user_table), ADV_USER_STATE);
-			
+		e_table_set_state (E_TABLE (group_table), ADV_GROUP_STATE);
+	}
 	else
+	{
 		e_table_set_state (E_TABLE (user_table), BASIC_USER_STATE);
+		e_table_set_state (E_TABLE (group_table), BASIC_GROUP_STATE);
+	}
 
 	e_table_model_changed (E_TABLE (user_table)->model);
 	e_table_model_changed (E_TABLE (group_table)->model);
