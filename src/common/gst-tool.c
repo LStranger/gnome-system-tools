@@ -913,7 +913,9 @@ gst_tool_load (GstTool *tool)
   
 	if (tool->config) {
 		xmlFreeDoc (tool->config);
+		xmlFreeDoc (tool->original_config);
 		tool->config = NULL;
+		tool->original_config = NULL;
 	}
 
 	if (tool->run_again)
@@ -921,6 +923,7 @@ gst_tool_load (GstTool *tool)
 
 	if (location_id == NULL) {
 		tool->config = gst_tool_run_get_directive (tool, NULL, "get", NULL);
+		tool->original_config = xmlCopyDoc (tool->config, 1);
 	} else {
 #ifndef GST_HAVE_ARCHIVER
 		g_assert_not_reached ();
@@ -970,7 +973,7 @@ gst_tool_load (GstTool *tool)
 }
 
 gboolean
-gst_tool_save (GstTool *tool)
+gst_tool_save (GstTool *tool, gboolean restore)
 {
 #ifdef GST_HAVE_ARCHIVER
 	CORBA_Environment ev;
@@ -1031,8 +1034,13 @@ gst_tool_save (GstTool *tool)
 
 #endif
 	
-	if (location_id == NULL)
-		gst_tool_run_set_directive (tool, tool->config, NULL, "set", NULL);
+	if (location_id == NULL) {
+		if (restore)
+			gst_tool_run_set_directive (tool, tool->original_config, NULL, "set", NULL);
+		else
+			gst_tool_run_set_directive (tool, tool->config, NULL, "set", NULL);
+	}
+	
 	gst_dialog_thaw_visible (tool->main_dialog);
 
 	return TRUE;  /* FIXME: Determine if it really worked. */
@@ -1041,7 +1049,13 @@ gst_tool_save (GstTool *tool)
 void
 gst_tool_save_cb (GtkWidget *w, GstTool *tool)
 {
-	gst_tool_save (tool);
+	gst_tool_save (tool, FALSE);
+}
+
+void
+gst_tool_restore_cb (GtkWidget *w, GstTool *tool)
+{
+	gst_tool_save (tool, TRUE);
 }
 
 void
@@ -1370,6 +1384,10 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	g_signal_connect (G_OBJECT (tool->main_dialog),
 			  "apply",
 			  G_CALLBACK (gst_tool_save_cb),
+			  tool);
+	g_signal_connect (G_OBJECT (tool->main_dialog),
+			  "restore",
+			  G_CALLBACK (gst_tool_restore_cb),
 			  tool);
 
 	tool->report_hook_list = NULL;

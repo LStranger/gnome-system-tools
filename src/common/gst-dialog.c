@@ -38,6 +38,7 @@
 enum {
 	BOGUS,
 	APPLY,
+	RESTORE,
 	COMPLEXITY_CHANGE,
 	LAST_SIGNAL
 };
@@ -234,6 +235,15 @@ gst_dialog_class_init (GstDialogClass *klass)
 			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
+	gstdialog_signals[RESTORE] =
+		g_signal_new ("restore",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (GstDialogClass, restore),
+			      NULL, NULL,
+			      gst_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
 	
 	gstdialog_signals[COMPLEXITY_CHANGE] =
 		g_signal_new ("complexity_change",
@@ -419,6 +429,19 @@ complexity_cb (GtkWidget *w, gpointer data)
 }
 
 static void
+restore_config (gpointer data)
+{
+	GstDialog *dialog;
+
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (GST_IS_DIALOG (data));
+
+	dialog = GST_DIALOG (data);
+
+	g_signal_emit (G_OBJECT (dialog), gstdialog_signals[RESTORE], 0);
+}
+
+static void
 apply_config (gpointer data)
 {
 	GstDialog *dialog;
@@ -432,8 +455,6 @@ apply_config (gpointer data)
 		return;
 
 	g_signal_emit (G_OBJECT (dialog), gstdialog_signals[APPLY], 0);
-
-	gst_dialog_set_modified (dialog, FALSE);
 }
 
 void
@@ -481,6 +502,20 @@ dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
 }
 
 static void
+apply_cb (GtkWidget *w, gpointer data)
+{
+	GstDialog *dialog;
+
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (GST_IS_DIALOG (data));
+
+	dialog = GST_DIALOG (data);
+
+	if (gst_dialog_get_modified (dialog))
+		apply_config (dialog);
+}
+
+static void
 cancel_cb (GtkWidget *w, gpointer data)
 {
 	GstDialog *dialog;
@@ -489,6 +524,9 @@ cancel_cb (GtkWidget *w, gpointer data)
 	g_return_if_fail (GST_IS_DIALOG (data));
 
 	dialog = GST_DIALOG (data);
+
+	if (gst_dialog_get_modified (dialog))
+		restore_config (dialog);
 
 	dialog_close (dialog);
 }
@@ -504,9 +542,9 @@ accept_cb (GtkWidget *w, gpointer data)
 	dialog = GST_DIALOG (data);
 
 	if (gst_dialog_get_modified (dialog))
-		apply_config (data);
+		apply_config (dialog);
 	
-	dialog_close (data);
+	dialog_close (dialog);
 }
 
 static void
@@ -622,6 +660,8 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 	w = glade_xml_get_widget (xml, "complexity_button_image");
 	dialog->complexity_button_image = w;
 
+	w = glade_xml_get_widget (xml, "apply");
+	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (apply_cb), dialog);
 	w = glade_xml_get_widget (xml, "cancel");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (cancel_cb), dialog);
 

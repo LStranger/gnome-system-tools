@@ -72,6 +72,7 @@ struct _GstDialogClass {
 	GnomeAppClass parent_class;
 
 	void (*apply)             (GstDialog *);
+	void (*restore)           (GstDialog *);
 	void (*complexity_change) (GstDialog *);
 };
 

@@ -1,3 +1,4 @@
+
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* 
  * Copyright (C) 2001 Ximian, Inc.
@@ -63,6 +64,7 @@ struct _GstTool {
 
 	/* configuration */
 	xmlDoc  *config;
+	xmlDoc  *original_config;
 
 	GstDialog *main_dialog;
 
@@ -137,7 +139,7 @@ GstTool     *gst_tool_new                 (void);
 void         gst_tool_construct           (GstTool *tool, 
 					   const char *name, const char *title);
 
-gboolean     gst_tool_save                (GstTool *tool);
+gboolean     gst_tool_save                (GstTool*, gboolean);
 void         gst_tool_save_cb             (GtkWidget *w, GstTool *tool);
 gboolean     gst_tool_load                (GstTool *tool);
 void         gst_tool_load_try            (GstTool *tool);
