@@ -248,7 +248,7 @@ static struct {
 	  GTK_SIGNAL_FUNC (NULL) }
 };
 
-static void
+static gboolean
 construct (UserDruid *druid)
 {
 	GtkWidget *widget;
@@ -256,6 +256,9 @@ construct (UserDruid *druid)
 	int i;
 
 	account = user_account_get_default ();
+	if (!account)
+		return FALSE;
+
 	druid->gui = user_account_gui_new (account, GTK_WIDGET (druid));
 
 	/* get our toplevel widget and reparent it */
@@ -298,6 +301,8 @@ construct (UserDruid *druid)
 	
 	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd2), "changed", password_changed, druid);
 	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd2), "activate", druid_entry_activate, druid);
+
+	return TRUE;
 }
 
 UserDruid *
@@ -306,7 +311,11 @@ user_druid_new (void)
 	UserDruid *new;
 
 	new = (UserDruid *) gtk_type_new (user_druid_get_type ());
-	construct (new);
 
-	return new;
+	if (construct (new))
+		return new;
+	else {
+		gtk_widget_destroy (GTK_WIDGET (new));
+		return NULL;
+	}
 }

@@ -1,7 +1,24 @@
+2001-05-22  Tambet Ingo  <tambet@ximian.com>
+
+	* user_settings.c (user_account_gui_error): If no given parent just use unparented error dialog.
+	(user_account_gui_destroy): Free and destroy only if there is anything to free or destroy.
+
+	* user_group.c (find_new_id): return NULL if can't get new id.
+	(user_account_get_default): Check return values, act accordingly.
+
+	* user-druid.c (user_druid_new): return NULL on error.
+
+	* user-account-editor.c (user_account_editor_new): return NULL if account == NULL
+
+	* callbacks.c (on_user_new_clicked): Give appropriate error if something is wrong.
+
+	* profile.c (profile_table_from_xml): Disable reading profile skel files.
+
 2001-05-21  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* e-table.c, profile.c: Marked to translate the ETableSpecification labels.
 	
+>>>>>>> 1.94
 2001-05-20  Theo van Klaveren <t.vanklaveren@student.utwente.nl>
 
 	* passwd.c: Conditionally include <crypt.h>.

@@ -80,12 +80,23 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 
 	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED) {
 		UserAccount *account = user_account_get_default ();
-		UserAccountEditor *editor = user_account_editor_new (account);
-		
-		gtk_widget_show (GTK_WIDGET (editor));
+		UserAccountEditor *editor = user_account_editor_new (account);		
+
+		if (editor)
+			gtk_widget_show (GTK_WIDGET (editor));
+		else {
+			gchar *error = g_strdup (N_("Can't create new user. Check your profile settings."));
+			user_account_gui_error (NULL, error);
+		}			
 	} else {
 		UserDruid *druid = user_druid_new ();
-		gtk_widget_show (GTK_WIDGET (druid));
+
+		if (druid)
+			gtk_widget_show (GTK_WIDGET (druid));
+		else {
+			gchar *error = g_strdup (N_("Can't create new user. Too many users probably."));
+			user_account_gui_error (NULL, error);
+		}
 	}
 }
 

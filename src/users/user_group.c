@@ -669,27 +669,21 @@ find_new_id (xmlNodePtr parent)
 	g_return_val_if_fail (parent != NULL, NULL);
 	
 	pf = profile_table_get_profile (NULL);
-	if (!strcmp (parent->name, "userdb"))
-	{
+	if (!strcmp (parent->name, "userdb")) {
 		field = g_strdup ("uid");
 		min = pf->umin;
 		max = pf->umax;
-	}
-
-	else if (!strcmp (parent->name, "groupdb"))
-	{
+	} else if (!strcmp (parent->name, "groupdb")) {
 		field = g_strdup ("gid");
 		min = pf->gmin;
 		max = pf->gmax;
+	} else {
+		g_warning ("find_new_id: Unknown data source: %s.", parent->name);
+		return NULL;
 	}
 
-	else
-		return NULL;
-
-	for (n0 = parent->childs; n0; n0 = n0->next)
-	{
+	for (n0 = parent->childs; n0; n0 = n0->next) {
 		buf = xst_xml_get_child_content (n0, field);
-
 		if (!buf)
 			continue;
 
@@ -705,6 +699,7 @@ find_new_id (xmlNodePtr parent)
 	if (ret >= min && ret <= max)
 		return g_strdup_printf ("%d", ret);
 
+	g_warning ("find_new_id: failed: %d >= %d && %d <= %d", ret, max, ret, min);
 	return NULL;
 }
 
@@ -714,7 +709,7 @@ find_new_key (xmlNodePtr parent)
 	/* TODO: Possibily mix together find_new_id and find_new_key. */
 	gchar *buf;
 	gint id;
-	gint ret = 0;
+	gint ret = -1;
 	xmlNodePtr n0;
 
 	g_return_val_if_fail (parent != NULL, NULL);
@@ -1198,14 +1193,28 @@ UserAccount *
 user_account_get_default (void)
 {
 	UserAccount *account;
+	xmlNodePtr node;
+	gchar *uid;
 	Profile *pf = profile_table_get_profile (NULL);
 
+	node = get_user_root_node ();
+	if (!node) {
+		g_warning ("user_account_get_default: Couldn't get node for user.");
+		return NULL;
+	}
+
+	uid = find_new_id (node);
+	if (!uid) {
+		g_warning ("user_account_get_default: Couldn't get uid for user.");
+		return NULL;
+	}
+	
 	account = g_new0 (UserAccount, 1);
 
-	account->node = get_user_root_node ();
+	account->node = node;
 	account->new = TRUE;
 
-	account->uid = find_new_id (account->node);
+	account->uid = uid;
 	account->group = g_strdup (pf->group);
 	account->shell = g_strdup (pf->shell);
 	account->home = g_strdup (pf->home_prefix);

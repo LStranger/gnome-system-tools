@@ -182,6 +182,9 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 {
 	UserAccountGui *gui;
 
+	if (!account)
+		return NULL;
+	
 	gui = g_new0 (UserAccountGui, 1);
 	gui->account = account;
 	gui->xml = glade_xml_new (tool->glade_path, NULL);
@@ -582,7 +585,12 @@ err:
 void
 user_account_gui_error (GtkWindow *parent, gchar *error)
 {
-	GtkWidget *d = gnome_error_dialog_parented (error, parent);
+	GtkWidget *d;
+
+	if (parent)
+		d = gnome_error_dialog_parented (error, parent);
+	else
+		d = gnome_error_dialog (error);
 
 	gnome_dialog_run (GNOME_DIALOG (d));
 	g_free (error);
@@ -591,7 +599,9 @@ user_account_gui_error (GtkWindow *parent, gchar *error)
 void
 user_account_gui_destroy (UserAccountGui *gui)
 {
-	user_account_destroy (gui->account);
-	gtk_object_unref (GTK_OBJECT (gui->xml));
-	g_free (gui);
+	if (gui) {
+		user_account_destroy (gui->account);
+		gtk_object_unref (GTK_OBJECT (gui->xml));
+		g_free (gui);
+	}
 }

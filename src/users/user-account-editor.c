@@ -89,10 +89,13 @@ cancel_clicked (GtkWidget *widget, gpointer data)
 	gtk_widget_destroy (GTK_WIDGET (editor));
 }
 
-static void
+static gboolean
 construct (UserAccountEditor *editor, UserAccount *account)
 {
 	editor->gui = user_account_gui_new (account, GTK_WIDGET (editor));
+
+	if (!editor->gui)
+		return FALSE;
 
 	/* give our dialog an OK button and title */
 	gtk_window_set_title (GTK_WINDOW (editor), _("User Account Editor"));
@@ -111,6 +114,8 @@ construct (UserAccountEditor *editor, UserAccount *account)
 				     editor);
 
 	user_account_gui_setup (editor->gui, GNOME_DIALOG (editor)->vbox);
+
+	return TRUE;
 }
 
 UserAccountEditor *
@@ -119,7 +124,11 @@ user_account_editor_new (UserAccount *account)
 	UserAccountEditor *new;
 
 	new = (UserAccountEditor *) gtk_type_new (user_account_editor_get_type ());
-	construct (new, account);
 
-	return new;
+	if (construct (new, account))
+		return new;
+	else {
+		gtk_widget_destroy (GTK_WIDGET (new));
+		return NULL;
+	}
 }

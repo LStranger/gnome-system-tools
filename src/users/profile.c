@@ -1092,8 +1092,8 @@ profile_table_from_xml (xmlNodePtr root)
 				case 10: pf->pwd_random   = xst_xml_element_get_bool_attr (n0, "set"); break;
 				case 11: pf->comment      = xst_xml_element_get_content (n0); break;
 				case 12: pf->name         = xst_xml_element_get_content (n0); break;
-				case 13: pf->files        = profile_files (NULL, n0, ""); break;
-//				case 13: pf->files        = get_files (n0); break;
+				case 13: pf->files        = NULL; break;
+				/* case 13: pf->files        = profile_files (NULL, n0, ""); break; */
 					
 				default: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
 				}
