@@ -1,7 +1,7 @@
 /*
  * Archivo de cadenas traducibles generado por Glade.
- * Añada este archivo a su POTFILES.in de su proyecto.
- * NO lo compile como parte de su aplicación.
+ * AÃ±ada este archivo a su POTFILES.in de su proyecto.
+ * NO lo compile como parte de su aplicaciÃ³n.
  */
 
 gchar *s = N_("window1");
