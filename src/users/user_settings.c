@@ -289,3 +289,13 @@ user_settings_destroy (UserSettings *us)
 	gtk_object_remove_data (GTK_OBJECT (us->dialog), "UserSettings");
 	g_free (us);
 }
+
+void
+user_settings_helper (UserSettings *us)
+{
+	/* In basic complexity mode user doesn't see all fields, so we have to fill them. */
+
+	/* Hardcoded homedir preffix - BAD */
+	gtk_entry_set_text (us->basic->home,
+			    g_strdup_printf ("/home/%s", gtk_entry_get_text (us->basic->name)));
+}

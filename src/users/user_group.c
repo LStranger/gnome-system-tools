@@ -129,60 +129,6 @@ get_db_node (xmlNodePtr node)
 	return NULL;
 }
 
-void
-adv_user_settings (xmlNodePtr node, gboolean show)
-{
-	GtkWidget *win, *adv, *w0;
-	gchar *content;
-
-	win = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	adv = xst_dialog_get_widget (tool->main_dialog, "user_settings_advanced");
-
-	if (show)
-	{
-		g_return_if_fail (node != NULL);
-
-		/* Shell. */
-		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-		content = xst_xml_get_child_content (node, "shell");
-		gtk_entry_set_text (GTK_ENTRY (w0), content);
-		g_free (content);
-		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-
-		/* Home dir. */
-		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-		content = xst_xml_get_child_content (node, "home");
-		gtk_entry_set_text (GTK_ENTRY (w0), content);
-		g_free (content);
-		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-
-		/* User ID. */
-		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-		content = xst_xml_get_child_content (node, "uid");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (content, NULL));
-		g_free (content);
-		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-
-		/* Show advanced frame. */
-		gtk_widget_show (adv);
-	}
-	else
-	{
-		/* Clear home, shell and user id. */
-		gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-												    "user_settings_shell")), "");
-		
-		gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-												    "user_settings_home")), "");
-		
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (
-			xst_dialog_get_widget (tool->main_dialog, "user_settings_uid")), 0);
-
-		/* Hide advanced frame. */
-		gtk_widget_hide (adv);
-	}
-}
-
 static gboolean
 user_filter (xmlNodePtr node)
 {

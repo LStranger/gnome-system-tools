@@ -275,6 +275,7 @@ on_user_settings_clicked (GnomeDialog *dialog, gint button_number, gpointer user
 	switch (button_number)
 	{
 	case 0:
+		user_settings_helper (us);
 		if (user_update (us))
 		{
 			xst_dialog_modify (tool->main_dialog);

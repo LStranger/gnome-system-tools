@@ -64,5 +64,6 @@ struct _UserSettings
 
 void user_settings_prepare (xmlNodePtr user_node);
 void user_settings_destroy (UserSettings *us);
+void user_settings_helper (UserSettings *us);
 
 #endif /* USER_SETTINGS_H */
