@@ -12,10 +12,15 @@
   <property name="modal">False</property>
   <property name="resizable">True</property>
   <property name="destroy_with_parent">False</property>
+  <property name="decorated">True</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
 
   <child>
     <widget class="GtkVBox" id="disks_admin">
-      <property name="width_request">760</property>
+      <property name="width_request">778</property>
       <property name="height_request">445</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
@@ -35,6 +40,10 @@
 	      <property name="yalign">0.5</property>
 	      <property name="xscale">1</property>
 	      <property name="yscale">1</property>
+	      <property name="top_padding">0</property>
+	      <property name="bottom_padding">0</property>
+	      <property name="left_padding">0</property>
+	      <property name="right_padding">0</property>
 
 	      <child>
 		<widget class="GtkImage" id="image16">
@@ -83,6 +92,10 @@ Configure your hard disks and storage devices.</property>
 	      <property name="yalign">0.5</property>
 	      <property name="xscale">0</property>
 	      <property name="yscale">0.5</property>
+	      <property name="top_padding">0</property>
+	      <property name="bottom_padding">0</property>
+	      <property name="left_padding">0</property>
+	      <property name="right_padding">0</property>
 
 	      <child>
 		<widget class="GtkImage" id="image17">
@@ -356,6 +369,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="label" translatable="yes">Enable DMA</property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -723,6 +737,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="sensitive">False</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -747,6 +762,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="sensitive">False</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -771,6 +787,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="sensitive">False</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -795,6 +812,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="sensitive">False</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -819,6 +837,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="sensitive">False</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -867,6 +886,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="sensitive">False</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -1060,6 +1080,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="label" translatable="yes">Enable DMA</property>
 				  <property name="use_underline">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				  <property name="active">False</property>
 				  <property name="inconsistent">False</property>
 				  <property name="draw_indicator">True</property>
@@ -1372,38 +1393,31 @@ Configure your hard disks and storage devices.</property>
 				  <property name="sensitive">False</property>
 				  <property name="can_default">True</property>
 				  <property name="can_focus">True</property>
-				  <property name="label">gtk-remove</property>
-				  <property name="use_stock">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
-				</widget>
-			      </child>
-
-			      <child>
-				<widget class="GtkButton" id="button4">
-				  <property name="visible">True</property>
-				  <property name="sensitive">False</property>
-				  <property name="can_default">True</property>
-				  <property name="can_focus">True</property>
-				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 
 				  <child>
-				    <widget class="GtkAlignment" id="alignment5">
+				    <widget class="GtkAlignment" id="alignment16">
 				      <property name="visible">True</property>
 				      <property name="xalign">0.5</property>
 				      <property name="yalign">0.5</property>
 				      <property name="xscale">0</property>
 				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
 
 				      <child>
-					<widget class="GtkHBox" id="hbox29">
+					<widget class="GtkHBox" id="hbox39">
 					  <property name="visible">True</property>
 					  <property name="homogeneous">False</property>
 					  <property name="spacing">2</property>
 
 					  <child>
-					    <widget class="GtkImage" id="image19">
+					    <widget class="GtkImage" id="image30">
 					      <property name="visible">True</property>
-					      <property name="stock">gtk-execute</property>
+					      <property name="stock">gtk-add</property>
 					      <property name="icon_size">4</property>
 					      <property name="xalign">0.5</property>
 					      <property name="yalign">0.5</property>
@@ -1418,9 +1432,9 @@ Configure your hard disks and storage devices.</property>
 					  </child>
 
 					  <child>
-					    <widget class="GtkLabel" id="label283">
+					    <widget class="GtkLabel" id="label318">
 					      <property name="visible">True</property>
-					      <property name="label" translatable="yes">_Format</property>
+					      <property name="label" translatable="yes">_Create</property>
 					      <property name="use_underline">True</property>
 					      <property name="use_markup">False</property>
 					      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1441,6 +1455,19 @@ Configure your hard disks and storage devices.</property>
 				      </child>
 				    </widget>
 				  </child>
+				</widget>
+			      </child>
+
+			      <child>
+				<widget class="GtkButton" id="button8">
+				  <property name="visible">True</property>
+				  <property name="sensitive">False</property>
+				  <property name="can_default">True</property>
+				  <property name="can_focus">True</property>
+				  <property name="label">gtk-delete</property>
+				  <property name="use_stock">True</property>
+				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 				</widget>
 			      </child>
 			    </widget>
@@ -1496,7 +1523,7 @@ Configure your hard disks and storage devices.</property>
 			      <property name="column_spacing">6</property>
 
 			      <child>
-				<widget class="GtkLabel" id="label239">
+				<widget class="GtkLabel" id="part_fs_tit_label">
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Filesystem:</property>
 				  <property name="use_underline">False</property>
@@ -1520,7 +1547,7 @@ Configure your hard disks and storage devices.</property>
 			      </child>
 
 			      <child>
-				<widget class="GtkLabel" id="label240">
+				<widget class="GtkLabel" id="part_point_tit_label">
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Access Path:</property>
 				  <property name="use_underline">False</property>
@@ -1544,7 +1571,7 @@ Configure your hard disks and storage devices.</property>
 			      </child>
 
 			      <child>
-				<widget class="GtkLabel" id="label241">
+				<widget class="GtkLabel" id="part_size_tit_label">
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Size:</property>
 				  <property name="use_underline">False</property>
@@ -1568,7 +1595,7 @@ Configure your hard disks and storage devices.</property>
 			      </child>
 
 			      <child>
-				<widget class="GtkLabel" id="label242">
+				<widget class="GtkLabel" id="part_device_tit_label">
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Device: </property>
 				  <property name="use_underline">False</property>
@@ -1616,7 +1643,7 @@ Configure your hard disks and storage devices.</property>
 			      </child>
 
 			      <child>
-				<widget class="GtkLabel" id="label293">
+				<widget class="GtkLabel" id="part_status_tit_label">
 				  <property name="visible">True</property>
 				  <property name="label" translatable="yes">Status: </property>
 				  <property name="use_underline">False</property>
@@ -1668,6 +1695,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 
 				  <child>
 				    <widget class="GtkAlignment" id="alignment7">
@@ -1676,6 +1704,10 @@ Configure your hard disks and storage devices.</property>
 				      <property name="yalign">0.5</property>
 				      <property name="xscale">0</property>
 				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
 
 				      <child>
 					<widget class="GtkHBox" id="hbox31">
@@ -1740,6 +1772,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 
 				  <child>
 				    <widget class="GtkAlignment" id="alignment6">
@@ -1748,6 +1781,10 @@ Configure your hard disks and storage devices.</property>
 				      <property name="yalign">0.5</property>
 				      <property name="xscale">0</property>
 				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
 
 				      <child>
 					<widget class="GtkHBox" id="hbox30">
@@ -1869,34 +1906,11 @@ Configure your hard disks and storage devices.</property>
 			      </child>
 
 			      <child>
-				<widget class="GtkLabel" id="part_fs_label">
-				  <property name="visible">True</property>
-				  <property name="label" translatable="yes"></property>
-				  <property name="use_underline">False</property>
-				  <property name="use_markup">False</property>
-				  <property name="justify">GTK_JUSTIFY_LEFT</property>
-				  <property name="wrap">False</property>
-				  <property name="selectable">False</property>
-				  <property name="xalign">0</property>
-				  <property name="yalign">0.5</property>
-				  <property name="xpad">0</property>
-				  <property name="ypad">0</property>
-				</widget>
-				<packing>
-				  <property name="left_attach">2</property>
-				  <property name="right_attach">5</property>
-				  <property name="top_attach">1</property>
-				  <property name="bottom_attach">2</property>
-				  <property name="x_options">fill</property>
-				  <property name="y_options"></property>
-				</packing>
-			      </child>
-
-			      <child>
 				<widget class="GtkButton" id="part_browse_button">
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 
 				  <child>
 				    <widget class="GtkAlignment" id="alignment8">
@@ -1905,6 +1919,10 @@ Configure your hard disks and storage devices.</property>
 				      <property name="yalign">0.5</property>
 				      <property name="xscale">0</property>
 				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
 
 				      <child>
 					<widget class="GtkHBox" id="hbox32">
@@ -1959,6 +1977,107 @@ Configure your hard disks and storage devices.</property>
 				  <property name="right_attach">5</property>
 				  <property name="top_attach">4</property>
 				  <property name="bottom_attach">5</property>
+				  <property name="x_options">fill</property>
+				  <property name="y_options"></property>
+				</packing>
+			      </child>
+
+			      <child>
+				<widget class="GtkLabel" id="part_fs_label">
+				  <property name="visible">True</property>
+				  <property name="label" translatable="yes"></property>
+				  <property name="use_underline">False</property>
+				  <property name="use_markup">False</property>
+				  <property name="justify">GTK_JUSTIFY_LEFT</property>
+				  <property name="wrap">False</property>
+				  <property name="selectable">False</property>
+				  <property name="xalign">0</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+				<packing>
+				  <property name="left_attach">2</property>
+				  <property name="right_attach">4</property>
+				  <property name="top_attach">1</property>
+				  <property name="bottom_attach">2</property>
+				  <property name="x_options">fill</property>
+				  <property name="y_options"></property>
+				</packing>
+			      </child>
+
+			      <child>
+				<widget class="GtkButton" id="part_format_button">
+				  <property name="visible">True</property>
+				  <property name="can_focus">True</property>
+				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
+
+				  <child>
+				    <widget class="GtkAlignment" id="alignment13">
+				      <property name="visible">True</property>
+				      <property name="xalign">0.5</property>
+				      <property name="yalign">0.5</property>
+				      <property name="xscale">0</property>
+				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
+
+				      <child>
+					<widget class="GtkHBox" id="hbox37">
+					  <property name="visible">True</property>
+					  <property name="homogeneous">False</property>
+					  <property name="spacing">2</property>
+
+					  <child>
+					    <widget class="GtkImage" id="image26">
+					      <property name="visible">True</property>
+					      <property name="stock">gtk-execute</property>
+					      <property name="icon_size">4</property>
+					      <property name="xalign">0.5</property>
+					      <property name="yalign">0.5</property>
+					      <property name="xpad">0</property>
+					      <property name="ypad">0</property>
+					    </widget>
+					    <packing>
+					      <property name="padding">0</property>
+					      <property name="expand">False</property>
+					      <property name="fill">False</property>
+					    </packing>
+					  </child>
+
+					  <child>
+					    <widget class="GtkLabel" id="label315">
+					      <property name="visible">True</property>
+					      <property name="label" translatable="yes">_Format</property>
+					      <property name="use_underline">True</property>
+					      <property name="use_markup">False</property>
+					      <property name="justify">GTK_JUSTIFY_LEFT</property>
+					      <property name="wrap">False</property>
+					      <property name="selectable">False</property>
+					      <property name="xalign">0.5</property>
+					      <property name="yalign">0.5</property>
+					      <property name="xpad">0</property>
+					      <property name="ypad">0</property>
+					    </widget>
+					    <packing>
+					      <property name="padding">0</property>
+					      <property name="expand">False</property>
+					      <property name="fill">False</property>
+					    </packing>
+					  </child>
+					</widget>
+				      </child>
+				    </widget>
+				  </child>
+				</widget>
+				<packing>
+				  <property name="left_attach">4</property>
+				  <property name="right_attach">5</property>
+				  <property name="top_attach">1</property>
+				  <property name="bottom_attach">2</property>
 				  <property name="x_options">fill</property>
 				  <property name="y_options"></property>
 				</packing>
@@ -2056,6 +2175,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 
 				  <child>
 				    <widget class="GtkAlignment" id="alignment9">
@@ -2064,6 +2184,10 @@ Configure your hard disks and storage devices.</property>
 				      <property name="yalign">0.5</property>
 				      <property name="xscale">0</property>
 				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
 
 				      <child>
 					<widget class="GtkHBox" id="hbox33">
@@ -2217,6 +2341,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 
 				  <child>
 				    <widget class="GtkAlignment" id="alignment10">
@@ -2225,6 +2350,10 @@ Configure your hard disks and storage devices.</property>
 				      <property name="yalign">0.5</property>
 				      <property name="xscale">0</property>
 				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
 
 				      <child>
 					<widget class="GtkHBox" id="hbox34">
@@ -2289,6 +2418,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 
 				  <child>
 				    <widget class="GtkAlignment" id="alignment11">
@@ -2297,6 +2427,10 @@ Configure your hard disks and storage devices.</property>
 				      <property name="yalign">0.5</property>
 				      <property name="xscale">0</property>
 				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
 
 				      <child>
 					<widget class="GtkHBox" id="hbox35">
@@ -2476,6 +2610,7 @@ Configure your hard disks and storage devices.</property>
 				  <property name="visible">True</property>
 				  <property name="can_focus">True</property>
 				  <property name="relief">GTK_RELIEF_NORMAL</property>
+				  <property name="focus_on_click">True</property>
 
 				  <child>
 				    <widget class="GtkAlignment" id="alignment12">
@@ -2484,6 +2619,10 @@ Configure your hard disks and storage devices.</property>
 				      <property name="yalign">0.5</property>
 				      <property name="xscale">0</property>
 				      <property name="yscale">0</property>
+				      <property name="top_padding">0</property>
+				      <property name="bottom_padding">0</property>
+				      <property name="left_padding">0</property>
+				      <property name="right_padding">0</property>
 
 				      <child>
 					<widget class="GtkHBox" id="hbox36">
@@ -2720,8 +2859,13 @@ Configure your hard disks and storage devices.</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
   <property name="modal">True</property>
-  <property name="resizable">True</property>
-  <property name="destroy_with_parent">False</property>
+  <property name="resizable">False</property>
+  <property name="destroy_with_parent">True</property>
+  <property name="decorated">True</property>
+  <property name="skip_taskbar_hint">False</property>
+  <property name="skip_pager_hint">False</property>
+  <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
+  <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
   <property name="has_separator">False</property>
 
   <child internal-child="vbox">
@@ -2736,23 +2880,25 @@ Configure your hard disks and storage devices.</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
 
 	  <child>
-	    <widget class="GtkButton" id="button5">
+	    <widget class="GtkButton" id="fmt_cancel_button">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="label">gtk-cancel</property>
 	      <property name="use_stock">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-6</property>
 	    </widget>
 	  </child>
 
 	  <child>
-	    <widget class="GtkButton" id="button6">
+	    <widget class="GtkButton" id="fmt_format_button">
 	      <property name="visible">True</property>
 	      <property name="can_default">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
+	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-3</property>
 
 	      <child>
@@ -2762,6 +2908,10 @@ Configure your hard disks and storage devices.</property>
 		  <property name="yalign">0.5</property>
 		  <property name="xscale">0</property>
 		  <property name="yscale">0</property>
+		  <property name="top_padding">0</property>
+		  <property name="bottom_padding">0</property>
+		  <property name="left_padding">0</property>
+		  <property name="right_padding">0</property>
 
 		  <child>
 		    <widget class="GtkHBox" id="hbox28">
@@ -2816,153 +2966,231 @@ Configure your hard disks and storage devices.</property>
 	<packing>
 	  <property name="padding">0</property>
 	  <property name="expand">False</property>
-	  <property name="fill">True</property>
+	  <property name="fill">False</property>
 	  <property name="pack_type">GTK_PACK_END</property>
 	</packing>
       </child>
 
       <child>
-	<widget class="GtkTable" id="table1">
-	  <property name="border_width">6</property>
+	<widget class="GtkVBox" id="vbox76">
 	  <property name="visible">True</property>
-	  <property name="n_rows">4</property>
-	  <property name="n_columns">2</property>
 	  <property name="homogeneous">False</property>
-	  <property name="row_spacing">6</property>
-	  <property name="column_spacing">6</property>
+	  <property name="spacing">6</property>
 
 	  <child>
-	    <widget class="GtkLabel" id="label284">
+	    <widget class="GtkFrame" id="frame1">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Partition: </property>
-	      <property name="use_underline">False</property>
-	      <property name="use_markup">False</property>
-	      <property name="justify">GTK_JUSTIFY_LEFT</property>
-	      <property name="wrap">False</property>
-	      <property name="selectable">False</property>
-	      <property name="xalign">0</property>
-	      <property name="yalign">0.5</property>
-	      <property name="xpad">0</property>
-	      <property name="ypad">0</property>
-	    </widget>
-	    <packing>
-	      <property name="left_attach">0</property>
-	      <property name="right_attach">1</property>
-	      <property name="top_attach">0</property>
-	      <property name="bottom_attach">1</property>
-	      <property name="x_options">fill</property>
-	      <property name="y_options"></property>
-	    </packing>
-	  </child>
-
-	  <child>
-	    <widget class="GtkLabel" id="label286">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Format Type: </property>
-	      <property name="use_underline">False</property>
-	      <property name="use_markup">False</property>
-	      <property name="justify">GTK_JUSTIFY_LEFT</property>
-	      <property name="wrap">False</property>
-	      <property name="selectable">False</property>
-	      <property name="xalign">0</property>
-	      <property name="yalign">0.5</property>
-	      <property name="xpad">0</property>
-	      <property name="ypad">0</property>
-	    </widget>
-	    <packing>
-	      <property name="left_attach">0</property>
-	      <property name="right_attach">1</property>
-	      <property name="top_attach">1</property>
-	      <property name="bottom_attach">2</property>
-	      <property name="x_options">fill</property>
-	      <property name="y_options"></property>
-	    </packing>
-	  </child>
-
-	  <child>
-	    <widget class="GtkOptionMenu" id="fmt_fs_option_menu">
-	      <property name="visible">True</property>
-	      <property name="sensitive">False</property>
-	      <property name="can_focus">True</property>
-	      <property name="history">0</property>
+	      <property name="label_xalign">0</property>
+	      <property name="label_yalign">0.5</property>
+	      <property name="shadow_type">GTK_SHADOW_NONE</property>
 
 	      <child>
-		<widget class="GtkMenu" id="menu2">
+		<widget class="GtkAlignment" id="alignment17">
+		  <property name="visible">True</property>
+		  <property name="xalign">0.5</property>
+		  <property name="yalign">0.5</property>
+		  <property name="xscale">1</property>
+		  <property name="yscale">1</property>
+		  <property name="top_padding">0</property>
+		  <property name="bottom_padding">0</property>
+		  <property name="left_padding">12</property>
+		  <property name="right_padding">0</property>
 
 		  <child>
-		    <widget class="GtkMenuItem" id="menuitem1">
+		    <widget class="GtkTable" id="table1">
+		      <property name="border_width">6</property>
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Extended 2</property>
-		      <property name="use_underline">True</property>
-		    </widget>
-		  </child>
+		      <property name="n_rows">3</property>
+		      <property name="n_columns">2</property>
+		      <property name="homogeneous">False</property>
+		      <property name="row_spacing">6</property>
+		      <property name="column_spacing">6</property>
 
-		  <child>
-		    <widget class="GtkMenuItem" id="menuitem2">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Extended 3</property>
-		      <property name="use_underline">True</property>
-		    </widget>
-		  </child>
+		      <child>
+			<widget class="GtkLabel" id="label284">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">Device: </property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_LEFT</property>
+			  <property name="wrap">False</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+			<packing>
+			  <property name="left_attach">0</property>
+			  <property name="right_attach">1</property>
+			  <property name="top_attach">0</property>
+			  <property name="bottom_attach">1</property>
+			  <property name="x_options">fill</property>
+			  <property name="y_options"></property>
+			</packing>
+		      </child>
 
-		  <child>
-		    <widget class="GtkMenuItem" id="menuitem3">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Reiser FS</property>
-		      <property name="use_underline">True</property>
-		    </widget>
-		  </child>
+		      <child>
+			<widget class="GtkLabel" id="label286">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">Format Type: </property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_LEFT</property>
+			  <property name="wrap">False</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+			<packing>
+			  <property name="left_attach">0</property>
+			  <property name="right_attach">1</property>
+			  <property name="top_attach">1</property>
+			  <property name="bottom_attach">2</property>
+			  <property name="x_options">fill</property>
+			  <property name="y_options"></property>
+			</packing>
+		      </child>
 
-		  <child>
-		    <widget class="GtkMenuItem" id="menuitem4">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">XFS</property>
-		      <property name="use_underline">True</property>
-		    </widget>
-		  </child>
+		      <child>
+			<widget class="GtkLabel" id="label289">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">Access Path: </property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_LEFT</property>
+			  <property name="wrap">False</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+			<packing>
+			  <property name="left_attach">0</property>
+			  <property name="right_attach">1</property>
+			  <property name="top_attach">2</property>
+			  <property name="bottom_attach">3</property>
+			  <property name="x_options">fill</property>
+			  <property name="y_options"></property>
+			</packing>
+		      </child>
 
-		  <child>
-		    <widget class="GtkMenuItem" id="menuitem5">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">JFS</property>
-		      <property name="use_underline">True</property>
-		    </widget>
-		  </child>
+		      <child>
+			<widget class="GtkComboBoxEntry" id="fmt_mount_point_combo">
+			  <property name="visible">True</property>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">2</property>
+			  <property name="bottom_attach">3</property>
+			  <property name="y_options">fill</property>
+			</packing>
+		      </child>
 
-		  <child>
-		    <widget class="GtkMenuItem" id="menuitem6">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">FAT</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_fat2_activate" last_modification_time="Tue, 25 Nov 2003 18:27:09 GMT"/>
-		    </widget>
-		  </child>
+		      <child>
+			<widget class="GtkComboBox" id="fmt_filesys_combo">
+			  <property name="visible">True</property>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">1</property>
+			  <property name="bottom_attach">2</property>
+			  <property name="y_options">fill</property>
+			</packing>
+		      </child>
 
-		  <child>
-		    <widget class="GtkMenuItem" id="menuitem7">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">NTFS</property>
-		      <property name="use_underline">True</property>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkMenuItem" id="menuitem8">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Memory Swap</property>
-		      <property name="use_underline">True</property>
+		      <child>
+			<widget class="GtkLabel" id="fmt_partition_label">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes"></property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_LEFT</property>
+			  <property name="wrap">False</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">0</property>
+			  <property name="bottom_attach">1</property>
+			  <property name="y_options"></property>
+			</packing>
+		      </child>
 		    </widget>
 		  </child>
 		</widget>
 	      </child>
+
+	      <child>
+		<widget class="GtkLabel" id="label319">
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">&lt;b&gt;Format Options&lt;/b&gt;</property>
+		  <property name="use_underline">False</property>
+		  <property name="use_markup">True</property>
+		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+		  <property name="wrap">False</property>
+		  <property name="selectable">False</property>
+		  <property name="xalign">0.5</property>
+		  <property name="yalign">0.5</property>
+		  <property name="xpad">0</property>
+		  <property name="ypad">0</property>
+		</widget>
+		<packing>
+		  <property name="type">label_item</property>
+		</packing>
+	      </child>
 	    </widget>
 	    <packing>
-	      <property name="left_attach">1</property>
-	      <property name="right_attach">2</property>
-	      <property name="top_attach">1</property>
-	      <property name="bottom_attach">2</property>
-	      <property name="x_options">fill</property>
-	      <property name="y_options"></property>
+	      <property name="padding">0</property>
+	      <property name="expand">True</property>
+	      <property name="fill">True</property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkExpander" id="expander1">
+	      <property name="visible">True</property>
+	      <property name="can_focus">True</property>
+	      <property name="expanded">False</property>
+	      <property name="spacing">0</property>
+
+	      <child>
+		<placeholder/>
+	      </child>
+
+	      <child>
+		<widget class="GtkLabel" id="label316">
+		  <property name="visible">True</property>
+		  <property name="label" translatable="yes">&lt;b&gt;Advanced Options&lt;/b&gt;</property>
+		  <property name="use_underline">False</property>
+		  <property name="use_markup">True</property>
+		  <property name="justify">GTK_JUSTIFY_LEFT</property>
+		  <property name="wrap">False</property>
+		  <property name="selectable">False</property>
+		  <property name="xalign">0.5</property>
+		  <property name="yalign">0.5</property>
+		  <property name="xpad">0</property>
+		  <property name="ypad">0</property>
+		</widget>
+		<packing>
+		  <property name="type">label_item</property>
+		</packing>
+	      </child>
+	    </widget>
+	    <packing>
+	      <property name="padding">0</property>
+	      <property name="expand">True</property>
+	      <property name="fill">True</property>
 	    </packing>
 	  </child>
 
@@ -2970,85 +3198,13 @@ Configure your hard disks and storage devices.</property>
 	    <widget class="GtkProgressBar" id="fmt_progress">
 	      <property name="visible">True</property>
 	      <property name="orientation">GTK_PROGRESS_LEFT_TO_RIGHT</property>
-	      <property name="fraction">0.34</property>
+	      <property name="fraction">0</property>
 	      <property name="pulse_step">0.1</property>
 	    </widget>
 	    <packing>
-	      <property name="left_attach">0</property>
-	      <property name="right_attach">2</property>
-	      <property name="top_attach">3</property>
-	      <property name="bottom_attach">4</property>
-	      <property name="x_options">fill</property>
-	      <property name="y_options"></property>
-	    </packing>
-	  </child>
-
-	  <child>
-	    <widget class="GtkLabel" id="fmt_partition_label">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">/dev/hda1</property>
-	      <property name="use_underline">False</property>
-	      <property name="use_markup">False</property>
-	      <property name="justify">GTK_JUSTIFY_LEFT</property>
-	      <property name="wrap">False</property>
-	      <property name="selectable">False</property>
-	      <property name="xalign">0</property>
-	      <property name="yalign">0.5</property>
-	      <property name="xpad">0</property>
-	      <property name="ypad">0</property>
-	    </widget>
-	    <packing>
-	      <property name="left_attach">1</property>
-	      <property name="right_attach">2</property>
-	      <property name="top_attach">0</property>
-	      <property name="bottom_attach">1</property>
-	      <property name="x_options">fill</property>
-	      <property name="y_options"></property>
-	    </packing>
-	  </child>
-
-	  <child>
-	    <widget class="GtkLabel" id="label289">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Mount Point: </property>
-	      <property name="use_underline">False</property>
-	      <property name="use_markup">False</property>
-	      <property name="justify">GTK_JUSTIFY_LEFT</property>
-	      <property name="wrap">False</property>
-	      <property name="selectable">False</property>
-	      <property name="xalign">0</property>
-	      <property name="yalign">0.5</property>
-	      <property name="xpad">0</property>
-	      <property name="ypad">0</property>
-	    </widget>
-	    <packing>
-	      <property name="left_attach">0</property>
-	      <property name="right_attach">1</property>
-	      <property name="top_attach">2</property>
-	      <property name="bottom_attach">3</property>
-	      <property name="x_options">fill</property>
-	      <property name="y_options"></property>
-	    </packing>
-	  </child>
-
-	  <child>
-	    <widget class="GtkEntry" id="fmt_mount_point_entry">
-	      <property name="visible">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="editable">True</property>
-	      <property name="visibility">True</property>
-	      <property name="max_length">0</property>
-	      <property name="text" translatable="yes">/home</property>
-	      <property name="has_frame">True</property>
-	      <property name="invisible_char" translatable="yes">*</property>
-	      <property name="activates_default">False</property>
-	    </widget>
-	    <packing>
-	      <property name="left_attach">1</property>
-	      <property name="right_attach">2</property>
-	      <property name="top_attach">2</property>
-	      <property name="bottom_attach">3</property>
-	      <property name="y_options"></property>
+	      <property name="padding">0</property>
+	      <property name="expand">True</property>
+	      <property name="fill">True</property>
 	    </packing>
 	  </child>
 	</widget>
