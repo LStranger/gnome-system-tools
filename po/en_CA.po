@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-17 16:14-0400\n"
+"POT-Creation-Date: 2004-05-31 16:16-0400\n"
 "PO-Revision-Date: 2004-05-17 16:15-0400\n"
-"Last-Translator: Alexander Winston <alexander.winston@comcast.net>\n"
+"Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -793,6 +793,7 @@ msgid "_Deactivate"
 msgstr "_Deactivate"
 
 #: interfaces/network.glade.in.h:93 interfaces/users.glade.in.h:55
+#: src/users/table.c:48
 msgid "_Delete"
 msgstr "_Delete"
 
@@ -1413,13 +1414,12 @@ msgstr "Device"
 msgid "/_Add ..."
 msgstr "/_Add ..."
 
-#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
-#: src/users/table.c:56
+#: src/boot/table.c:52
 msgid "/_Properties"
 msgstr "/_Properties"
 
 #: src/boot/table.c:53 src/network/connection.c:65 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/network/hosts.c:43
 msgid "/_Delete"
 msgstr "/_Delete"
 
@@ -1723,7 +1723,7 @@ msgstr "Unknown interface type"
 msgid "/_Configure"
 msgstr "/_Configure"
 
-#: src/network/connection.c:487 src/services/table.c:79
+#: src/network/connection.c:487 src/services/table.c:86
 msgid "Active"
 msgstr "Active"
 
@@ -1863,7 +1863,7 @@ msgstr "Configure network devices and connections"
 msgid "Networking"
 msgstr "Networking"
 
-#: src/network/profile.c:51 src/users/profile-settings.c:204
+#: src/network/profile.c:51 src/users/profile-settings.c:215
 msgid "You won't be able to recover this profile after hitting \"apply\""
 msgstr "You won't be able to recover this profile after hitting \"apply\""
 
@@ -1884,24 +1884,24 @@ msgstr "Description"
 msgid "No description available."
 msgstr "No description available."
 
-#: src/services/callbacks.c:259
+#: src/services/callbacks.c:245
 msgid "Running"
 msgstr "Running"
 
-#: src/services/callbacks.c:263
+#: src/services/callbacks.c:249
 msgid "Stopped"
 msgstr "Stopped"
 
-#: src/services/callbacks.c:268
+#: src/services/callbacks.c:254
 msgid "Could not get info"
 msgstr "Could not get info"
 
-#: src/services/callbacks.c:334
+#: src/services/callbacks.c:320
 #, c-format
 msgid "Settings for service %s"
 msgstr "Settings for service %s"
 
-#: src/services/main.c:61
+#: src/services/main.c:62
 msgid "Services Settings"
 msgstr "Services Settings"
 
@@ -1913,29 +1913,29 @@ msgstr "Configure which services will be run when the system starts"
 msgid "Services"
 msgstr "Services"
 
-#: src/services/table.c:88
+#: src/services/table.c:95
 msgid "Service"
 msgstr "Service"
 
-#: src/time/main.c:314
+#: src/time/main.c:310
 msgid "Time Zone"
 msgstr "Time Zone"
 
-#: src/time/main.c:424
+#: src/time/main.c:420
 msgid "Time Servers"
 msgstr "Time Servers"
 
-#: src/time/main.c:506
+#: src/time/main.c:501
 msgid "NTP support is not running"
 msgstr "NTP support is not running"
 
-#: src/time/main.c:507
+#: src/time/main.c:502
 msgid ""
 "Please run NTP support in the system to enable time server synchronization"
 msgstr ""
 "Please run NTP support in the system to enable time server synchronization"
 
-#: src/time/main.c:819
+#: src/time/main.c:814
 msgid "Time and Date Settings"
 msgstr "Time and Date Settings"
 
@@ -1947,15 +1947,15 @@ msgstr "Change system time, date, and timezone"
 msgid "Time and Date"
 msgstr "Time and Date"
 
-#: src/users/callbacks.c:572
+#: src/users/callbacks.c:589
 msgid "Error saving profile"
 msgstr "Error saving profile"
 
-#: src/users/callbacks.c:607
+#: src/users/callbacks.c:624
 msgid "Create New profile"
 msgstr "Create New profile"
 
-#: src/users/callbacks.c:641
+#: src/users/callbacks.c:658
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Settings for profile %s"
@@ -1980,8 +1980,8 @@ msgstr "root group ID should not be modified"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
-#: src/users/user-settings.c:352 src/users/user-settings.c:446
-#: src/users/user-settings.c:482
+#: src/users/user-settings.c:355 src/users/user-settings.c:449
+#: src/users/user-settings.c:485
 msgid "This would leave the system unusable"
 msgstr "This would leave the system unusable"
 
@@ -2059,23 +2059,23 @@ msgstr "Group"
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:120
+#: src/users/main.c:121
 msgid "User name contains"
 msgstr "User name contains"
 
-#: src/users/main.c:121
+#: src/users/main.c:122
 msgid "User ID is"
 msgstr "User ID is"
 
-#: src/users/main.c:122
+#: src/users/main.c:123
 msgid "Group name contains"
 msgstr "Group name contains"
 
-#: src/users/main.c:123
+#: src/users/main.c:124
 msgid "User GID is"
 msgstr "User GID is"
 
-#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:315 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Users and Groups"
 
@@ -2092,27 +2092,27 @@ msgstr ""
 "Bad password: %s.\n"
 "Please try with a new password."
 
-#: src/users/profile-settings.c:114
+#: src/users/profile-settings.c:122
 msgid "The profile must have a name"
 msgstr "The profile must have a name"
 
-#: src/users/profile-settings.c:119
+#: src/users/profile-settings.c:127
 msgid "The profile must have a default home"
 msgstr "The profile must have a default home"
 
-#: src/users/profile-settings.c:124 src/users/profile-settings.c:129
+#: src/users/profile-settings.c:132 src/users/profile-settings.c:137
 msgid "The profile must have a default shell"
 msgstr "The profile must have a default shell"
 
-#: src/users/profile-settings.c:193
+#: src/users/profile-settings.c:204
 msgid "The default profile must not be deleted."
 msgstr "The default profile must not be deleted."
 
-#: src/users/profile-settings.c:194
+#: src/users/profile-settings.c:205
 msgid "This is the default profile for setting new users' data"
 msgstr "This is the default profile for setting new users' data"
 
-#: src/users/profile-settings.c:203
+#: src/users/profile-settings.c:214
 #, c-format
 msgid "Delete profile \"%s\""
 msgstr "Delete profile \"%s\""
@@ -2126,29 +2126,25 @@ msgstr "Profile"
 msgid "Comment"
 msgstr "Comment"
 
-#: src/users/search-bar/search-bar.c:200
-msgid "_Search"
-msgstr "_Search"
-
-#: src/users/search-bar/search-bar.c:238
+#: src/users/search-bar/search-bar.c:225
 msgid "C_lear"
 msgstr "C_lear"
 
-#: src/users/search-bar/search-bar.c:346
+#: src/users/search-bar/search-bar.c:326
 msgid "Choice"
 msgstr "Choice"
 
-#: src/users/search-bar/search-bar.c:356
+#: src/users/search-bar/search-bar.c:336
 msgid "Text"
 msgstr "Text"
 
-#: src/users/table.c:47
-msgid "/_Add User ..."
-msgstr "/_Add User ..."
+#: src/users/table.c:46
+msgid "_Add"
+msgstr "_Add"
 
-#: src/users/table.c:54
-msgid "/_Add group ..."
-msgstr "/_Add group ..."
+#: src/users/table.c:47
+msgid "_Properties"
+msgstr "_Properties"
 
 #: src/users/user-settings.c:104
 msgid "The root user can not be deleted."
@@ -2159,37 +2155,37 @@ msgstr "The root user can not be deleted."
 msgid "Are you sure you want to delete user %s?"
 msgstr "Are you sure you want to delete user %s?"
 
-#: src/users/user-settings.c:217
+#: src/users/user-settings.c:219
 msgid "User Account Editor"
 msgstr "User Account Editor"
 
-#: src/users/user-settings.c:332
+#: src/users/user-settings.c:335
 msgid "The username is empty."
 msgstr "The username is empty."
 
-#: src/users/user-settings.c:333
+#: src/users/user-settings.c:336
 msgid "A username must be specified"
 msgstr "A username must be specified"
 
 #. = sizeof (ut.ut_name)
-#: src/users/user-settings.c:339 src/users/user-settings.c:344
+#: src/users/user-settings.c:342 src/users/user-settings.c:347
 msgid "The username is too long."
 msgstr "The username is too long."
 
-#: src/users/user-settings.c:340 src/users/user-settings.c:345
+#: src/users/user-settings.c:343 src/users/user-settings.c:348
 #, c-format
 msgid "The username should have less than %i characters for being valid"
 msgstr "The username should have less than %i characters for being valid"
 
-#: src/users/user-settings.c:351
+#: src/users/user-settings.c:354
 msgid "Root username shouldn't be modified."
 msgstr "Root username shouldn't be modified."
 
-#: src/users/user-settings.c:357
+#: src/users/user-settings.c:360
 msgid "Username has invalid characters"
 msgstr "Username has invalid characters"
 
-#: src/users/user-settings.c:358
+#: src/users/user-settings.c:361
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -2197,37 +2193,37 @@ msgstr ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
 
-#: src/users/user-settings.c:363
+#: src/users/user-settings.c:366
 #, c-format
 msgid "Username \"%s\" already exists"
 msgstr "Username \"%s\" already exists"
 
-#: src/users/user-settings.c:364
+#: src/users/user-settings.c:367
 msgid "Please select a different username"
 msgstr "Please select a different username"
 
-#: src/users/user-settings.c:389
+#: src/users/user-settings.c:392
 msgid "Invalid character in comment."
 msgstr "Invalid character in comment."
 
-#: src/users/user-settings.c:390
+#: src/users/user-settings.c:393
 #, c-format
 msgid "Check that invalid character '%c' is not used"
 msgstr "Check that invalid character '%c' is not used"
 
-#: src/users/user-settings.c:438
+#: src/users/user-settings.c:441
 msgid "Home directory must not be empty."
 msgstr "Home directory must not be empty."
 
-#: src/users/user-settings.c:439
+#: src/users/user-settings.c:442
 msgid "Make sure you provide a home directory"
 msgstr "Make sure you provide a home directory"
 
-#: src/users/user-settings.c:441
+#: src/users/user-settings.c:444
 msgid "Incomplete path in home directory"
 msgstr "Incomplete path in home directory"
 
-#: src/users/user-settings.c:442
+#: src/users/user-settings.c:445
 msgid ""
 "Please enter full path for home directory.\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
@@ -2235,23 +2231,23 @@ msgstr ""
 "Please enter full path for home directory.\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
 
-#: src/users/user-settings.c:445
+#: src/users/user-settings.c:448
 msgid "root home shouldn't be modified."
 msgstr "root home shouldn't be modified."
 
-#: src/users/user-settings.c:478
+#: src/users/user-settings.c:481
 msgid "Invalid user ID"
 msgstr "Invalid user ID"
 
-#: src/users/user-settings.c:479
+#: src/users/user-settings.c:482
 msgid "User id must be a positive number."
 msgstr "User id must be a positive number."
 
-#: src/users/user-settings.c:481
+#: src/users/user-settings.c:484
 msgid "root user ID should not be modified"
 msgstr "root user ID should not be modified"
 
-#: src/users/user-settings.c:498
+#: src/users/user-settings.c:501
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
@@ -2259,16 +2255,16 @@ msgstr ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
 
-#: src/users/user-settings.c:503
+#: src/users/user-settings.c:506
 #, c-format
 msgid "User ID %s already exists"
 msgstr "User ID %s already exists"
 
-#: src/users/user-settings.c:520
+#: src/users/user-settings.c:523
 msgid "Incomplete path in shell"
 msgstr "Incomplete path in shell"
 
-#: src/users/user-settings.c:521
+#: src/users/user-settings.c:524
 msgid ""
 "Please enter full path for shell.\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
@@ -2276,23 +2272,23 @@ msgstr ""
 "Please enter full path for shell.\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
 
-#: src/users/user-settings.c:543
+#: src/users/user-settings.c:546
 msgid "Password can not be empty."
 msgstr "Password cannot be empty."
 
-#: src/users/user-settings.c:544
+#: src/users/user-settings.c:547
 msgid "A password must be provided"
 msgstr "A password must be provided"
 
-#: src/users/user-settings.c:546
+#: src/users/user-settings.c:549
 msgid "Password confirmation isn't correct."
 msgstr "Password confirmation isn't correct."
 
-#: src/users/user-settings.c:547
+#: src/users/user-settings.c:550
 msgid "Check that you have provided the same password in both text fields"
 msgstr "Check that you have provided the same password in both text fields"
 
-#: src/users/user-settings.c:830
+#: src/users/user-settings.c:826
 #, c-format
 msgid "Settings for User %s"
 msgstr "Settings for User %s"
@@ -2322,5 +2318,3 @@ msgstr "Shell"
 msgid "Add or remove users and groups"
 msgstr "Add or remove users and groups"
 
-#~ msgid "Status"
-#~ msgstr "Status"
