@@ -21,7 +21,7 @@ sub image_widget_hack
   {
     chomp $input;
     $input =~ s/^([ \t]*)(.*)/\1\2\n\1/;
-    $input .= "<creation_function>xst_ui_create_image_widget</creation_function>\n";
+    $input .= "<creation_function>xst_ui_image_widget_create</creation_function>\n";
   }
   elsif ($tag_name eq "filename")
   {
