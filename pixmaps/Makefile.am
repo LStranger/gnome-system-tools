@@ -15,7 +15,8 @@ pixmaps_DATA = \
 	boot.png                 \
 	desktop_icons.png        \
 	disks.png                \
-	display.png			\
+	display.png              \
+	font-tool.png            \
 	gnome-laptop.png         \
 	gnome-light-on.png       \
 	gnome-light-off.png      \
