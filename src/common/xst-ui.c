@@ -125,6 +125,12 @@ GtkWidget *xst_ui_create_image_widget(gchar *name,
 	if (string1) {
 		filename = g_strdup(string1);
 		pixbuf = gdk_pixbuf_new_from_file(filename);
+
+		if (!pixbuf) {
+			g_warning ("Pixmap %s not found.", filename);
+			return NULL;
+		}
+		
 		width = gdk_pixbuf_get_width(pixbuf);
 		height = gdk_pixbuf_get_height(pixbuf);
 
