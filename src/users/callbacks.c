@@ -342,7 +342,7 @@ on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton
 		current_group = gtk_clist_get_row_data (clist, row);
 		
 		group_actions_set_sensitive (TRUE);
-		label = g_strdup_printf (_("Settings for group "), current_group->name);
+		label = g_strdup_printf (_("Settings for group %s"), current_group->name);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
 		g_free (label);
 	}
