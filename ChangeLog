@@ -1,3 +1,14 @@
+2001-05-21  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* SUPPORTED: Took OpenLinux out of the verification matrix.
+
+2001-05-20  Theo van Klaveren <t.vanklaveren@student.utwente.nl>
+
+	* SUPPORTED: Added FreeBSD.
+	* acconfig.h: Added new variable HAVE_CRYPT_H.
+	* configure.in: Fix warnings when cracklib is not found. Do not bail
+	out when <crypt.h> is not found, instead don't define HAVE_CRYPT_H.
+
 2001-05-21  Carlos Perelló Marín <carlos@gnome-db.org>
 
         * Makefile.am: s/backends/backend

@@ -10,3 +10,4 @@
 #undef PIXMAPS_DIR
 #undef SCRIPTS_DIR
 #undef INTERFACES_DIR
+#undef HAVE_CRYPT_H
