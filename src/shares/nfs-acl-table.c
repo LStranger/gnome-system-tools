@@ -62,7 +62,6 @@ void
 nfs_acl_table_create (void)
 {
 	GtkWidget        *table = gst_dialog_get_widget (tool->main_dialog, "share_nfs_acl");
-	GtkTreeSelection *selection;
 	GtkTreeModel     *model;
 
 	model = create_nfs_acl_table_model ();
@@ -107,7 +106,6 @@ nfs_acl_table_insert_elements (GstShareNFS *share)
 	GtkTreeIter   iter;
 	gboolean      valid, read_only;
 	gchar        *element;
-	GSList       *list = NULL;
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 	valid = gtk_tree_model_get_iter_first (model, &iter);

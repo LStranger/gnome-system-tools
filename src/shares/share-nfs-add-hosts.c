@@ -72,7 +72,6 @@ share_nfs_create_combo (void)
 {
 	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "share_nfs_host_type");
 	GtkListStore *store;
-	GtkTreeIter   iter;
 
 	store = gtk_list_store_new (NFS_HOST_COL_LAST,
 				    GDK_TYPE_PIXBUF,

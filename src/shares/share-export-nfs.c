@@ -198,7 +198,6 @@ gst_share_nfs_add_acl_element (GstShareNFS *share,
 			       gboolean     read_only)
 {
 	GstShareACLElement *elem;
-	GSList *list;
 
 	g_return_if_fail (share != NULL);
 	g_return_if_fail (GST_IS_SHARE_NFS (share));
