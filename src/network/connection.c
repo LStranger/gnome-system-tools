@@ -482,6 +482,9 @@ connection_init_gui (XstTool *tool)
 void
 connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean enabled)
 {
+	g_return_if_fail (GTK_IS_CLIST (clist));
+	g_return_if_fail (text != NULL);
+	
 	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1,
 			       text,
 			       GNOME_PAD_SMALL,
@@ -496,17 +499,25 @@ connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 	gint row, i;
 	XstConnection *cxn2;
 
+	g_return_if_fail (cxn != NULL);
+	g_return_if_fail (cxn->dev != NULL);
+	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 
 	if (enabled)
 		for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 			cxn2 = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+
+			g_return_if_fail (cxn2 != NULL);
+			g_return_if_fail (cxn2->dev != NULL);
+			
 			if (!strcmp (cxn->dev, cxn2->dev))
 				connection_update_row_enabled (cxn2, FALSE);
 		}
 
 	cxn->enabled = enabled;
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
+	g_return_if_fail (row > -1);
 	connection_set_row_pixtext (clist, row, enabled ? _("To activate") :
 				    _("To inactivate"), enabled);
 	xst_dialog_modify (tool->main_dialog);
@@ -518,12 +529,19 @@ connection_update_row (XstConnection *cxn)
 	GtkWidget *clist;
 	gint row;
 
+	g_return_if_fail (cxn != NULL);
+	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
 
-	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
-			       mini_pm[cxn->type], mini_mask[cxn->type]);
+	g_return_if_fail (row > -1);
+	g_return_if_fail (GTK_IS_CLIST (clist));
+	g_return_if_fail (cxn->dev != NULL);
+
+	if (cxn->type != XST_CONNECTION_UNKNOWN)
+		gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
+				       mini_pm[cxn->type], mini_mask[cxn->type]);
 
 	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name);
 	gtk_clist_sort (GTK_CLIST (clist));
@@ -535,7 +553,10 @@ void
 connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 {
 	int row;
-	char *text[3] = { NULL };
+	char *text[3] = { "Error", NULL };
+
+	g_return_if_fail (GTK_IS_CLIST (clist));
+	g_return_if_fail (cxn != NULL);
 
 	row = gtk_clist_append (GTK_CLIST (clist), text);
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
@@ -663,8 +684,9 @@ connection_new_from_node (xmlNode *node)
 		cxn = connection_new_from_dev_name (s, node->parent);
 		g_free (cxn->dev);
 		cxn->dev = s;
-	} else
+	} else {
 		cxn = connection_new_from_type (XST_CONNECTION_OTHER, node->parent);
+	}
 
 	cxn->node = node;
 	
@@ -873,12 +895,15 @@ static void
 on_connection_cancel_clicked (GtkWidget *w, XstConnection *cxn)
 {
 	GtkCList *list;
+	gint row;
 
 	gtk_widget_destroy (cxn->window);
 	
 	if (cxn->creating) {
 		list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list"));
-		gtk_clist_remove (list, gtk_clist_find_row_from_data (list, cxn));
+		row = gtk_clist_find_row_from_data (list, cxn);
+		g_return_if_fail (row > -1);
+		gtk_clist_remove (list, row);
 		connection_free (cxn);
 		xst_dialog_modify (tool->main_dialog);
 	}

@@ -257,6 +257,8 @@ on_connection_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent
 
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 
+	g_return_if_fail (cxn != NULL);
+
 	if (!strcmp (cxn->dev, "lo"))
 		connection_actions_set_sensitive (FALSE);
 	else
@@ -474,9 +476,11 @@ callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
 	XstConnection *cxn;
 
 	clist = xst_dialog_get_widget (dialog, "connection_list");
+	g_return_if_fail (GTK_IS_CLIST (clist));
 
 	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+		g_return_if_fail (cxn != NULL);
 		connection_set_row_pixtext (clist, i, cxn->enabled ? _("Active") :
 					    _("Inactive"), cxn->enabled);
 	}
