@@ -104,7 +104,15 @@ static gboolean tool_interface_load()
 
   /* TODO: Try some local paths here (e.g. if uninstalled). */
 
-  if (tool_context->interface) return TRUE;
+  if (tool_context->interface)
+  {
+    path = g_strjoin("-", tool_context->task, "admin", NULL);
+    tool_context->top_window = tool_widget_get(path);
+    g_free(path);
+
+    return TRUE;
+  }
+  
   return FALSE;
 }
 
@@ -356,6 +364,12 @@ void tool_set_modified(gboolean state)
   }
 
   tool_context->modified = state;
+}
+
+
+GtkWidget *tool_get_top_window()
+{
+  return(tool_context->top_window);
 }
 
 

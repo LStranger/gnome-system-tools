@@ -25,6 +25,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "helpers.h"
+#include "tool.h"
 
 #include "checked.xpm"
 #include "unchecked.xpm"
@@ -69,6 +70,7 @@ ip_entry_is_valid (GtkEditable *ip_entry)
 gboolean
 check_ip_number(GtkEditable * editable)
 {
+  GtkWidget *dialog;
 	gint nr_val;
 	gint nr_len;
 
@@ -77,8 +79,10 @@ check_ip_number(GtkEditable * editable)
 
 	if (nr_val > 255 || nr_len == 0)
 	{
-		gnome_ok_dialog("IP Address numbers are in the range [0-255]\n"
-			"and can't be empty.");
+		dialog = gnome_ok_dialog_parented("IP Address numbers are in the range [0-255]\n"
+			"and can't be empty.", GTK_WINDOW(tool_get_top_window()));
+    
+    gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
 
 		gtk_widget_grab_focus (GTK_WIDGET (editable));
 		gtk_entry_select_region (GTK_ENTRY (editable), 0, -1);
