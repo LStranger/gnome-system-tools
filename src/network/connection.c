@@ -1036,6 +1036,7 @@ connection_default_gw_find_item (GtkWidget *omenu, gchar *dev)
 	for (l = g_object_get_data (G_OBJECT (omenu), "list");
 	     l; l = l->next) {
 		value = g_object_get_data (G_OBJECT (l->data), "value");
+
 		if (!strcmp (dev, value))
 			return l->data;
 	}
@@ -1065,6 +1066,9 @@ connection_default_gw_add (GstConnection *cxn)
 	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+
+	if (!cxn->gateway || !*cxn->gateway)
+		return;
 
 	if (connection_default_gw_find_item (omenu, dev))
 		return;
@@ -1096,7 +1100,10 @@ connection_default_gw_remove (gchar *dev)
 	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
-	g_return_if_fail ((item = connection_default_gw_find_item (omenu, dev)));
+	item = connection_default_gw_find_item (omenu, dev);
+
+	if (!item)
+		return;
 	
 	l = g_object_get_data (G_OBJECT (omenu), "list");
 	l = g_list_remove (l, item);

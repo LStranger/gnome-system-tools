@@ -326,6 +326,7 @@ transfer_gatewaydev_to_xml (GstTool *tool, xmlNodePtr root)
 		return;
 	
 	dev = g_object_get_data (G_OBJECT (tool), "gatewaydev");
+
 	node = gst_xml_element_find_first (root, "gatewaydev");
 	if (!node)
 		node = gst_xml_element_add (root, "gatewaydev");
@@ -352,7 +353,7 @@ transfer_xml_to_gatewaydev (GstTool *tool, xmlNodePtr root)
 
 	if (dev) {
 		connection_default_gw_init (tool, dev);
-		g_free (dev);
+		g_object_set_data (G_OBJECT (tool), "gatewaydev", dev);
 	}
 }
 

@@ -790,6 +790,11 @@ on_connection_ok_clicked (GtkWidget *w, gpointer data)
 		cxn->creating = FALSE;
 		gst_dialog_modify (tool->main_dialog);
 
+		if (cxn->gateway && *cxn->gateway)
+			connection_default_gw_add (cxn);
+		else
+			connection_default_gw_remove (cxn->dev);
+
 		if (standalone) {
 			gtk_widget_set_sensitive (window, FALSE);
 			connection_save_to_node (cxn, gst_xml_doc_get_root (tool->config));
