@@ -309,6 +309,9 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 	{
 		settings_dev_list (GTK_COMBO_BOX (gui->device), image->type);
 
+		if (!image->new)
+			boot_settings_set_type (gui, type_to_label (image->type));
+
 		if (image->image)
 			gst_ui_entry_set_text (GTK_ENTRY (GTK_BIN (gui->device)->child), image->image);
 	}
