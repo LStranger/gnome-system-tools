@@ -50,7 +50,7 @@ $(directory): $(directory).in
 all-local: $(directory)
 
 install-data-local: $(directory)
-	$(mkinstalldirs) $(DESTDIR)$(Systemdir)
-	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
+##	$(mkinstalldirs) $(DESTDIR)$(Systemdir)
+##	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
 	$(mkinstalldirs) $(DESTDIR)$(Systemdirp)
 	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdirp)/.directory

@@ -72,9 +72,9 @@ all-local: $(desktop).menu $(desktop).cc $(security)
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
+##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
 	$(INSTALL_DATA) $(srcdir)/time.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/time.desktop
-	$(INSTALL_DATA) $(srcdir)/time.desktop.cc $(DESTDIR)$(datadir)/control-center/System/time.desktop
+##	$(INSTALL_DATA) $(srcdir)/time.desktop.cc $(DESTDIR)$(datadir)/control-center/System/time.desktop
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	rm -f $(DESTDIR)$(bindir)/time-admin
 	ln -s consolehelper $(DESTDIR)$(bindir)/time-admin
