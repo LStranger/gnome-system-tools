@@ -495,7 +495,7 @@ ntp_use_toggled (GtkWidget *w, GstDialog *dialog)
 		GtkWidget *dialog;
 		
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
-		dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, _("You don't have NTP support installed. Please install NTP support\nin the system to enable server synchronization."));
+		dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, _("You don't have NTP support running. Please run NTP support\nin the system to enable server synchronization."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		return;
