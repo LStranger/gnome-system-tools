@@ -61,6 +61,7 @@ pixmaps_DATA = \
 	turbolinux.png           \
 	unsupported-distro.png   \
 	users-groups.png         \
+	users_wrench.png         \
 	users.png                \
 	warning.png              \
 	wavelan-16.png           \
