@@ -402,8 +402,7 @@ static void scroll_to(EMap * view, int x, int y)
   xofs = x - priv->xofs;
   yofs = y - priv->yofs;
 
-  if (xofs == 0 && yofs == 0)
-    return;
+  if (xofs == 0 && yofs == 0) return;
 
   priv->xofs = x;
   priv->yofs = y;
@@ -777,9 +776,7 @@ static void zoom_in_smooth(EMap *map)
   target_height = win_height / 4;
 
 #if 0
-  scroll_to(map,
-            priv->zoom_target.x + (priv->zoom_target.width / 2),
-            priv->zoom_target.y + (priv->zoom_target.height / 2));
+  scroll_to(map, x, y);
 #endif
 
   e_map_world_to_window(map, priv->zoom_target_long,
