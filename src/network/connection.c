@@ -67,7 +67,7 @@ static void on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn);
 #define GET_STR(yy_prefix,xx) g_free (cxn->xx); cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (W (yy_prefix#xx)), 0, -1)
 #define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (W (yy_prefix#xx))->active
 #define GET_BOOL_NOT(yy_prefix,xx) GET_BOOL(yy_prefix,xx); cxn->xx = !cxn->xx;
-#define SET_STR(yy_prefix,xx) my_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx)
+#define SET_STR(yy_prefix,xx) xst_ui_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx)
 #define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), cxn->xx)
 #define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), !cxn->xx)
 	
@@ -99,12 +99,6 @@ my_get_widget (GladeXML *glade, const gchar *name)
 		g_warning ("my_get_widget: Unexistent widget %s", name);
 
 	return w;
-}
-
-static void
-my_entry_set_text (GtkEntry *w, gchar *txt)
-{
-	gtk_entry_set_text (w, (txt)? txt: "");
 }
 
 static gint
