@@ -24,6 +24,5 @@ gchar *s = N_("Name:");
 gchar *s = N_("Image:");
 gchar *s = N_("Device:");
 gchar *s = N_("Optional");
+gchar *s = N_("Append: ");
 gchar *s = N_("Root:");
-gchar *s = N_("This kernel requires additional parameters");
-gchar *s = N_("Add...");
