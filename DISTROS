@@ -1,5 +1,15 @@
-SUPORTED DISTROS/UNIX VARIANTS
------------------------------
+Supported platforms/linux distributions
+=======================================
+
+This is the list of platforms that Ximian will focus to support. The XST are
+a community effort so in no way is this list limiting the supported systems.
+Contributions to the XST for support of other distributions or UNIX variants
+is very much appreciated.
+
+Please note that the following list is NOT a list of supported
+distributions, but rather a list of distributions we are planning to
+support.
+
 REDHAT   - Red Hat Linux 6.0, 6.1, 6.2, and 7.0 
 DEBIAN   - Debian GNU/Linux (Woody and Potato) 
 SUSE     - SuSE 6.3, 6.4, and 7.0 
@@ -11,15 +21,29 @@ YELLOW   - Yellow Dog Linux Champion Server 1.2 el
 SOLARIS  - Solaris 7 and 8 on UltraSparc 
 HPUX     - HP-UX
 
-This is the lists that Ximian will focus to support. The XST are
-a community effort so in no way is this list limiting the
-supported systems. Contributions to the XST for support of
-other distributions or UNIX variants is very much appreciated.
 
-Please note that the above list is NOT a list of supported
-distributiuons, but rather a list of distributions we are
-planning to support.
+Verification matrix
+===================
+
+This is a matrix describing the current status of tool platform/distribution
+support.
+
+        Red Hat    Debian  SuSE     MDK    PPC  Turbo  Cal  Yel  Sol    HPUX
+        6.0 6.2    2.1     6.3 7.0  6.1    any  6.0    2.4  1.2  7.0    10.0
+          6.1 7.0    2.2     6.4      7.0                          8.0    11.0
+
+Boot     ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Disks    ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Memory   ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Network  ? ? + ?    - -     - - -    ? ?    ?    ?      ?    ?    - -     - -
+Shares   ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Time     ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Users    ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
 
 
+Legend
+------
 
-
+[+]  Working, some testing done.
+[?]  Thought to be working, but not tested.
+[-]  Not working.
