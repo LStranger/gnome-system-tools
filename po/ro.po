@@ -1,0 +1,2214 @@
+# Romanian translation for gnome-system-tools
+# Copyright (C) 2004, Free Software Foundation, Inc
+# Mişu Moldovan <dumol@go.ro>
+
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-system-tools\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-09-11 11:49+0200\n"
+"PO-Revision-Date: 2004-09-12 01:51+0300\n"
+"Last-Translator: Mişu Moldovan <dumol@go.ro>\n"
+"Language-Team: Romanian <gnomero-list@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: gnome-system-tools.schemas.in.h:1
+msgid ""
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr ""
+"Listă separată prin virgulă de gazde ce pot fi accesate de GST la activarea "
+"opţiunii de configurare la distanţă"
+
+#: gnome-system-tools.schemas.in.h:2
+msgid "Last GST version executed"
+msgstr "Ultima versiune pornită de GST"
+
+#: gnome-system-tools.schemas.in.h:3
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr "Manager de boot preferat configurat de boot-admin"
+
+#: gnome-system-tools.schemas.in.h:4
+msgid "Remote hosts"
+msgstr "Gazde la distanţă"
+
+#: gnome-system-tools.schemas.in.h:5
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
+msgstr ""
+"GST poate face administrare la distanţă prin SSH, activaţi această opţiune "
+"pentru a utiliza această facilitate"
+
+#: gnome-system-tools.schemas.in.h:6
+msgid "The last GST version that this computer has run"
+msgstr "Ultima versiune GST pornită pe acest calculator"
+
+#: gnome-system-tools.schemas.in.h:7
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr ""
+"Această cheie precizează managerul de boot configurat de boot-admin"
+"dacă sunt mai multe instalate"
+
+#: gnome-system-tools.schemas.in.h:8
+msgid "Whether the tools will use remote administration or not"
+msgstr "Specifică dacă se va utiliza administrare la distanţă"
+
+#: gnome-system-tools.schemas.in.h:9
+msgid "Whether the users-admin tool should show all users and groups or not"
+msgstr "Specifică dacă users-admin va arăta toţi utilizatorii şi toate grupurile"
+
+#: gnome-system-tools.schemas.in.h:10
+msgid "Whether the warning dialog should be shown or not"
+msgstr "Specifică dacă fereastra de avertizare ar trebui arătată"
+
+#: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
+#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
+#: interfaces/users.glade.in.h:1
+msgid "*"
+msgstr "*"
+
+#: interfaces/boot.glade.in.h:2
+msgid "/dev/hda"
+msgstr "/dev/hda"
+
+#: interfaces/boot.glade.in.h:3
+msgid "/dev/hdb"
+msgstr "/dev/hdb"
+
+#: interfaces/boot.glade.in.h:4
+msgid "/dev/hdc"
+msgstr "/dev/hdc"
+
+#: interfaces/boot.glade.in.h:5
+msgid "/dev/hdd"
+msgstr "/dev/hdd"
+
+#: interfaces/boot.glade.in.h:6
+msgid "<b>Security</b>"
+msgstr "<b>Securitate</b>"
+
+#: interfaces/boot.glade.in.h:7
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
+"Use this tool to specify which operating systems users can choose at startup"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Setări manager de boot</span>\n"
+"Utilizaţi această unealtă pentru a specifica sistemele de operare care vor "
+"putea fi alese la pornirea calculatorului"
+
+#: interfaces/boot.glade.in.h:9
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
+"span>\n"
+"\n"
+"please select which do you want to configure"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">S-au găsit mai mulţi manageri de boot"
+"</span>\n"
+"\n"
+"Selectaţi unul pentru configurare"
+
+#: interfaces/boot.glade.in.h:12 interfaces/users.glade.in.h:6
+msgid "<span weight=\"bold\">Basic Settings</span>"
+msgstr "<span weight=\"bold\">Setări principale</span>"
+
+#: interfaces/boot.glade.in.h:13
+msgid "<span weight=\"bold\">Image Settings</span>"
+msgstr "<span weight=\"bold\">Setări imagine</span>"
+
+#: interfaces/boot.glade.in.h:14
+msgid "<span weight=\"bold\">Other Settings</span>"
+msgstr "<span weight=\"bold\">Alte setări</span>"
+
+#: interfaces/boot.glade.in.h:15
+msgid "<span weight=\"bold\">Starting the Computer</span>"
+msgstr "<span weight=\"bold\">Pornire calculator</span>"
+
+#: interfaces/boot.glade.in.h:16
+msgid "Ask at boot"
+msgstr "Întreabă la pornire"
+
+#: interfaces/boot.glade.in.h:17 src/boot/main.c:70
+msgid "Boot Manager Settings"
+msgstr "Setări manager de boot"
+
+#: interfaces/boot.glade.in.h:18
+msgid ""
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition. Optionally, you may also enter append parameters which are passed "
+"to the kernel at boot time."
+msgstr ""
+"Alegeţi o imagine de kernel pentru pornire şi o partiţie care să fie "
+"montată în rădăcină. Opţional puteţi adăuga parametri de boot pentru "
+"acest kernel."
+
+#: interfaces/boot.glade.in.h:19
+msgid "Click \"Forward\" to continue"
+msgstr "„Înainte” pentru a continua"
+
+#: interfaces/boot.glade.in.h:20
+msgid "Confirmation"
+msgstr "Confirmare"
+
+#. set window title
+#: interfaces/boot.glade.in.h:21 src/boot/boot-druid.c:441
+#: src/boot/boot-druid.c:453
+msgid "Creating a new boot image"
+msgstr "Creez o nouă imagine de boot"
+
+#: interfaces/boot.glade.in.h:22
+msgid "Don't ask me again"
+msgstr "Nu mă mai întreba"
+
+#: interfaces/boot.glade.in.h:23
+msgid "Enable IDE SCSI emulation"
+msgstr "Activare emulare IDE SCSI"
+
+#: interfaces/boot.glade.in.h:24
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr ""
+"Introduceţi un nume pentru imaginea de boot şi specificaţi ce fel de sistem"
+"de operare este."
+
+#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:45
+msgid "Finished"
+msgstr "Terminat"
+
+#: interfaces/boot.glade.in.h:26 src/network/connection.c:1612
+msgid "Manual"
+msgstr "Manual"
+
+#: interfaces/boot.glade.in.h:27
+msgid "Number of colors:"
+msgstr "Număr de culori:"
+
+#: interfaces/boot.glade.in.h:28
+msgid "Other parameters:"
+msgstr "Alţi parametri:"
+
+#: interfaces/boot.glade.in.h:29
+msgid "Password"
+msgstr "Parolă"
+
+#: interfaces/boot.glade.in.h:30
+msgid "Protect with password"
+msgstr "Protejează cu parolă"
+
+#: interfaces/boot.glade.in.h:31
+msgid "Resolution:"
+msgstr "Rezoluţie:"
+
+#: interfaces/boot.glade.in.h:32
+msgid "Seconds to wait before loading default kernel or OS"
+msgstr "Secunde de aşteptare înainte de pornirea sistemului de operare implicit"
+
+#: interfaces/boot.glade.in.h:33
+msgid "Specify the partition on which the operating system is installed."
+msgstr "Specificaţi partiţia pe care este instalat sistemul de operare."
+
+#: interfaces/boot.glade.in.h:34
+msgid ""
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
+msgstr ""
+"Noua imagine de boot a fost adăugată. Alegeţi „Aplică” pentru a salva "
+"modificările."
+
+#: interfaces/boot.glade.in.h:35
+msgid ""
+"This assistant is designed to help you quickly and easily add a new boot "
+"image to your system."
+msgstr ""
+"Acest asistent vă va ajuta să adăugaţi rapid şi uşor o nouă imagine de kernel"
+" în managerul de boot."
+
+#: interfaces/boot.glade.in.h:36
+msgid "Video modes (only frame buffer)"
+msgstr "Moduri video (doar framebuffer)"
+
+#: interfaces/boot.glade.in.h:37
+msgid "_Add..."
+msgstr "_Adaugă..."
+
+#: interfaces/boot.glade.in.h:38
+msgid "_Device:"
+msgstr "_Dispozitiv:"
+
+#: interfaces/boot.glade.in.h:39
+msgid "_Edit"
+msgstr "_Editare"
+
+#: interfaces/boot.glade.in.h:40 src/boot/boot-settings.c:43
+msgid "_Initrd image path:"
+msgstr "Calea imaginii _initrd:"
+
+#: interfaces/boot.glade.in.h:41
+msgid "_Kernel image path:"
+msgstr "Calea imaginii de _kernel:"
+
+#: interfaces/boot.glade.in.h:42
+msgid "_Name:"
+msgstr "_Nume:"
+
+#: interfaces/boot.glade.in.h:43
+msgid "_Operating system:"
+msgstr "Sistem de _operare:"
+
+#: interfaces/boot.glade.in.h:44
+msgid "_Parameters:"
+msgstr "_Parametri:"
+
+#: interfaces/boot.glade.in.h:45
+msgid "_Root file system device:"
+msgstr "Dispozitiv cu sistemul rădăcină de fişiere:"
+
+#: interfaces/common.glade.in.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
+"supported by this tool</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Platforma utilizată nu este suportată "
+"de această unealtă</span>"
+
+#: interfaces/common.glade.in.h:3
+msgid ""
+"<span weight=\"bold\" size=\"larger\">To run this tool, you need "
+"administrator privileges</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Pentru a utiliza această unealtă "
+"aveţi nevoie de privilegii de administrator</span>"
+
+#: interfaces/common.glade.in.h:4
+msgid "Enter Password"
+msgstr "Introduceţi parola"
+
+#: interfaces/common.glade.in.h:5
+msgid ""
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
+msgstr ""
+"Dacă sunteţi sigur(ă) că este identică cu una dintre platformele listate mai "
+"jos, selectaţi-o şi continuaţi. Atenţie însă, o alegere greşită vă poate "
+"invalida configuraţia sistemului, chiar într-un mod ireversibil."
+
+#: interfaces/common.glade.in.h:6
+msgid "Remote administration"
+msgstr "Administrare la distanţă"
+
+#: interfaces/common.glade.in.h:7
+msgid "Run _Without Password"
+msgstr "Porneşte _fără parolă"
+
+#: interfaces/common.glade.in.h:8
+msgid "Scanning system configuration..."
+msgstr "Scanez configuraţia sistemului..."
+
+#: interfaces/common.glade.in.h:9
+msgid ""
+"To acquire such privileges, enter your root password below. If you don't "
+"specify a password, you will be  unable to modify your system configuration."
+msgstr ""
+"Pentru a obţine aceste privilegii introduceţi mai jos parola de „root”. Dacă "
+"nu o aveţi, nu veţi putea modifica configuraţia sistemului."
+
+#: interfaces/common.glade.in.h:10
+msgid "Unsupported Platform"
+msgstr "Platformă nesuportată"
+
+#: interfaces/common.glade.in.h:11
+msgid "Use this window to select the computer you wish to configure"
+msgstr "Utilizaţi această fereastră pentru a selecta calculatorul pe care "
+"doriţi să-l configuraţi"
+
+#: interfaces/common.glade.in.h:12 interfaces/network.glade.in.h:102
+msgid "_Password:"
+msgstr "_Parolă:"
+
+#: interfaces/network.glade.in.h:2
+msgid ""
+"/dev/modem\n"
+"/dev/ttyS0\n"
+"/dev/ttyS1\n"
+"/dev/ttyS2\n"
+"/dev/ttyS3\n"
+msgstr ""
+"/dev/modem\n"
+"/dev/ttyS0\n"
+"/dev/ttyS1\n"
+"/dev/ttyS2\n"
+"/dev/ttyS3\n"
+
+#: interfaces/network.glade.in.h:8
+msgid "<b>Profile Settings</b>"
+msgstr "<b>Setări profil</b>"
+
+#: interfaces/network.glade.in.h:9
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
+"Use this tool for configuring the way your system access to other computers"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Setări reţea</span>\n"
+"Utilizaţi această unealtă pentru a configura accesul acestui sistem la alte "
+"calculatoare din reţea"
+
+#: interfaces/network.glade.in.h:11
+msgid "<span weight=\"bold\">Access Settings</span>"
+msgstr "<span weight=\"bold\">Setări acces</span>"
+
+#: interfaces/network.glade.in.h:12
+msgid "<span weight=\"bold\">Account Data</span>"
+msgstr "<span weight=\"bold\">Date cont</span>"
+
+#: interfaces/network.glade.in.h:13
+msgid "<span weight=\"bold\">Connection settings</span>"
+msgstr "<span weight=\"bold\">Setări conexiune</span>"
+
+#: interfaces/network.glade.in.h:14
+msgid "<span weight=\"bold\">Connection</span>"
+msgstr "<span weight=\"bold\">Conexiune</span>"
+
+#: interfaces/network.glade.in.h:15
+msgid "<span weight=\"bold\">DNS Servers</span>"
+msgstr "<span weight=\"bold\">Servere DNS</span>"
+
+#: interfaces/network.glade.in.h:16
+msgid "<span weight=\"bold\">Host Settings</span>"
+msgstr "<span weight=\"bold\">Setări gazdă</span>"
+
+#: interfaces/network.glade.in.h:17
+msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
+msgstr "<span weight=\"bold\">Date ISP</span>"
+
+#: interfaces/network.glade.in.h:18
+msgid "<span weight=\"bold\">PPP Settings</span>"
+msgstr "<span weight=\"bold\">Setări modem</span>"
+
+#: interfaces/network.glade.in.h:19
+msgid "<span weight=\"bold\">Search Domains</span>"
+msgstr "<span weight=\"bold\">Domenii de căutare</span>"
+
+#: interfaces/network.glade.in.h:20
+msgid "<span weight=\"bold\">Windows Networking</span>"
+msgstr "<span weight=\"bold\">Reţele Windows</span>"
+
+#: interfaces/network.glade.in.h:21
+msgid "<span weight=\"bold\">Wireless settings:</span>"
+msgstr "<span weight=\"bold\">Setări wireless:</span>"
+
+#: interfaces/network.glade.in.h:22
+msgid "A_liases:"
+msgstr "A_liasuri:"
+
+#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:15
+msgid "Account"
+msgstr "Cont"
+
+#: interfaces/network.glade.in.h:24
+msgid "Activate"
+msgstr "Activare"
+
+#: interfaces/network.glade.in.h:25
+msgid "Activate connection"
+msgstr "Activare conexiune"
+
+#: interfaces/network.glade.in.h:26
+msgid "Activate when the computer _starts"
+msgstr "Acti_vare la pornirea calculatorului"
+
+#: interfaces/network.glade.in.h:27
+msgid "Add DNS server"
+msgstr "Adăugare server DNS"
+
+#: interfaces/network.glade.in.h:28
+msgid "Add search domain"
+msgstr "Adăugare domeniu de căutare"
+
+#: interfaces/network.glade.in.h:29
+msgid "Address configuration"
+msgstr "Configurare adresă"
+
+#: interfaces/network.glade.in.h:30 interfaces/users.glade.in.h:16
+msgid "Advanced"
+msgstr "Avansate"
+
+#: interfaces/network.glade.in.h:31
+msgid "Allow activation control for all _users"
+msgstr "Permite (de)activarea pentru toţi _utilizatorii"
+
+#: interfaces/network.glade.in.h:32
+msgid "Co_nfiguration:"
+msgstr "Co_nfigurare:"
+
+#: interfaces/network.glade.in.h:33
+msgid "Connection type"
+msgstr "Tip conexiune"
+
+#: interfaces/network.glade.in.h:34
+msgid "Connections"
+msgstr "Conexiuni"
+
+#. set window titles
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:72
+msgid "Creating a new network connection"
+msgstr "Creez o nouă conexiune de reţea"
+
+#: interfaces/network.glade.in.h:36
+msgid "Current network profile:"
+msgstr "Profilul de reţea curent"
+
+#: interfaces/network.glade.in.h:37
+msgid "DNS"
+msgstr "DNS"
+
+#: interfaces/network.glade.in.h:38
+msgid "DNS Servers"
+msgstr "Servere DNS"
+
+#: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "Nume d_omeniu:"
+
+#: interfaces/network.glade.in.h:40
+msgid "Default gateway device:"
+msgstr "Gateway implicit:"
+
+#: interfaces/network.glade.in.h:41
+msgid "Delete DNS server"
+msgstr "Ştergere server DNS"
+
+#: interfaces/network.glade.in.h:42
+msgid "Delete search domain"
+msgstr "Ştergere domeniu de căutare"
+
+#: interfaces/network.glade.in.h:43
+msgid "Device:"
+msgstr "Dispozitiv:"
+
+#: interfaces/network.glade.in.h:44
+msgid "Domain / _Workgroup:"
+msgstr "Domeniu / _Workgroup:"
+
+#: interfaces/network.glade.in.h:46
+msgid "General"
+msgstr "Generale"
+
+#: interfaces/network.glade.in.h:47
+msgid "Hosts"
+msgstr "Gazde"
+
+#: interfaces/network.glade.in.h:48
+msgid "ISP phone number"
+msgstr "Număr dial-up"
+
+#: interfaces/network.glade.in.h:49
+msgid "Interface properties"
+msgstr "Proprietăţi interfaţă"
+
+#: interfaces/network.glade.in.h:50
+msgid ""
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr ""
+"Listă de domenii pe care sistemul va încerca să le adăuge unui nume de gazdă "
+"în cazul în care nu se specifică domeniul"
+
+#: interfaces/network.glade.in.h:51
+msgid "Modem _volume:"
+msgstr "_Volum modem:"
+
+#: interfaces/network.glade.in.h:52
+msgid "Network name:"
+msgstr "Nume reţea:"
+
+#: interfaces/network.glade.in.h:53
+msgid "Network profiles"
+msgstr "Profiluri reţea"
+
+#: interfaces/network.glade.in.h:54
+msgid "Networking Settings"
+msgstr "Setări reţea"
+
+#: interfaces/network.glade.in.h:55
+msgid "New network profile"
+msgstr "Nou profil reţea"
+
+#: interfaces/network.glade.in.h:56
+msgid ""
+"Next, please enter the user name and password which were assigned to you by "
+"your ISP."
+msgstr ""
+"Apoi introduceţi numele de utilizator şi parola ce v-au fost asignate de "
+"către compania ISP."
+
+#: interfaces/network.glade.in.h:57
+msgid ""
+"Now, please enter the address that this network device will have, and the "
+"remote address to which it will be connected."
+msgstr ""
+"Acum introduceţi adresa acestui dispozitiv de reţea şi adresa la distanţă "
+"la care va fi conectat."
+
+#: interfaces/network.glade.in.h:58
+msgid "Now, please enter the address that this network device will have."
+msgstr "Acum introduceţi adresa ce va fi asociată acestui dispozitiv de reţea."
+
+#: interfaces/network.glade.in.h:59
+msgid ""
+"Now, please specify if this connection should be enabled, this means that "
+"the configuration will be applied when the assistant finishes."
+msgstr ""
+"Acum specificăti dacă această conexiune trebuie activată (adică dacă se vor "
+"aplica modificările configuraţiei la închiderea asistentului)."
+
+#: interfaces/network.glade.in.h:60
+msgid "Number to _access an external line:"
+msgstr "Număr de _accesat pe linia externă:"
+
+#: interfaces/network.glade.in.h:61
+msgid "Number to get to an _external line:"
+msgstr "Număr de format pentru a obţine _ton:"
+
+#: interfaces/network.glade.in.h:62
+msgid "PPPD _options:"
+msgstr "_Opţiuni modem:"
+
+#: interfaces/network.glade.in.h:63
+msgid "Pa_ssword (confirm):"
+msgstr "_Parolă (confirmaţi):"
+
+#: interfaces/network.glade.in.h:64
+msgid "Phone _number:"
+msgstr "_Număr de telefon:"
+
+#: interfaces/network.glade.in.h:65
+msgid ""
+"Please enter the phone number you use to connect to the internet. This "
+"number is provided by your ISP."
+msgstr ""
+"Vă rugăm să introduceţi un număr de telefon de apelat pentru a realiza "
+"conexiunea la internet. Acest număr vă este furnizat de către compania ISP."
+
+#: interfaces/network.glade.in.h:66
+msgid ""
+"Please select the wireless device that you want to configure and set the "
+"network name for this interface"
+msgstr ""
+"Selectaţi dispozitivul wireless de configurat şi numele de reţea pentru "
+"această interfaţă"
+
+#: interfaces/network.glade.in.h:67
+msgid "Please, select which type of connection you would like to add."
+msgstr "Selectaţi ce tip de conexiune doriţi să adăugaţi"
+
+#: interfaces/network.glade.in.h:68 interfaces/users.glade.in.h:39
+msgid "Profile _name:"
+msgstr "_Nume profil:"
+
+#: interfaces/network.glade.in.h:69
+msgid "Se_condary:"
+msgstr "Se_cundar:"
+
+#: interfaces/network.glade.in.h:70
+msgid "Search Domains"
+msgstr "Domenii de căutare"
+
+#: interfaces/network.glade.in.h:71
+msgid "Set _DNS servers manually"
+msgstr "Setări manuale servere _DNS"
+
+#: interfaces/network.glade.in.h:72
+msgid "Set modem as default _route to internet"
+msgstr "Setare _rută implicită către internet prin modem"
+
+#: interfaces/network.glade.in.h:73
+msgid ""
+"This assistant will help you configure a new \n"
+"network connection."
+msgstr ""
+"Acest asistent vă va ajuta să configuraţi o nouă \n"
+"conexiune de reţea."
+
+#: interfaces/network.glade.in.h:75
+msgid ""
+"This is the list of IP addresses that the system will use as name servers"
+msgstr ""
+"Aceasta este o listă de adrese IP utilizate ca servere DNS"
+
+#: interfaces/network.glade.in.h:76
+msgid ""
+"To continue configuring your network connection, click \"Next\". To quit, "
+"click \"Cancel\"."
+msgstr ""
+"Pentru a continua configurarea conexiunii de reţea, alegeţi „Următorul”. "
+"Pentru a ieşi alegeţi „Renunţă”."
+
+#: interfaces/network.glade.in.h:77
+msgid "Username and password"
+msgstr "Nume utilizator şi parolă"
+
+#: interfaces/network.glade.in.h:78
+msgid "WI_NS server:"
+msgstr "Server WI_NS:"
+
+#: interfaces/network.glade.in.h:79
+msgid "Wireless device:"
+msgstr "Dispozitiv wireless:"
+
+#: interfaces/network.glade.in.h:80
+msgid "Wireless settings"
+msgstr "Setări wireless"
+
+#: interfaces/network.glade.in.h:81
+msgid ""
+"You are about to create a new network connection. Please click \"Apply\" to "
+"save your changes."
+msgstr ""
+"Sunteţi pe cale de a crea o nouă conexiune de reţea. Alegeţi „Aplică„ pentru "
+"a salva schimbările efectuate"
+
+#: interfaces/network.glade.in.h:82
+msgid "_Apply and activate connection"
+msgstr "_Aplică şi activează conexiunea"
+
+#: interfaces/network.glade.in.h:83
+msgid "_Autodetect"
+msgstr "_Autodetectare"
+
+#: interfaces/network.glade.in.h:84
+msgid "_Configuration:"
+msgstr "_Configuraţie:"
+
+#: interfaces/network.glade.in.h:85
+msgid "_Deactivate"
+msgstr "_Deactivează"
+
+#: interfaces/network.glade.in.h:86 interfaces/users.glade.in.h:53
+#: src/boot/table.c:52 src/network/connection.c:64 src/network/dns.c:39
+#: src/network/hosts.c:42 src/users/table.c:48
+msgid "_Delete"
+msgstr "Şter_ge"
+
+#: interfaces/network.glade.in.h:87
+msgid "_Description:"
+msgstr "_Descriere:"
+
+#: interfaces/network.glade.in.h:88
+msgid "_Dial type:"
+msgstr "Tip t_on:"
+
+#: interfaces/network.glade.in.h:89
+msgid "_Enable Windows networking"
+msgstr "_Activare „Windows networking”"
+
+#: interfaces/network.glade.in.h:90
+msgid "_Ethernet"
+msgstr "_Ethernet"
+
+#: interfaces/network.glade.in.h:91
+msgid "_Gateway address:"
+msgstr "Adresă _gateway:"
+
+#: interfaces/network.glade.in.h:92
+msgid "_Hostname:"
+msgstr "Nume _gazdă:"
+
+#: interfaces/network.glade.in.h:93
+msgid "_IP address:"
+msgstr "Adresă _IP:"
+
+#: interfaces/network.glade.in.h:94
+msgid "_IR LAN"
+msgstr "Reţea _IP"
+
+#: interfaces/network.glade.in.h:95
+msgid "_Local IP address:"
+msgstr "Adresă IP _locală:"
+
+#: interfaces/network.glade.in.h:96
+msgid "_Local IP:"
+msgstr "IP _local:"
+
+#: interfaces/network.glade.in.h:97
+msgid "_Modem (PPP)"
+msgstr "_Modem (PPP)"
+
+#: interfaces/network.glade.in.h:98
+msgid "_Modem port:"
+msgstr "Port _modem:"
+
+#: interfaces/network.glade.in.h:99
+msgid "_Network Profiles"
+msgstr "_Profiluri reţea:"
+
+#: interfaces/network.glade.in.h:100
+msgid "_Network name:"
+msgstr "_Nume reţea:"
+
+#: interfaces/network.glade.in.h:101
+msgid "_Parallel Line"
+msgstr "Cablu _paralel"
+
+#: interfaces/network.glade.in.h:103
+msgid "_Phone number:"
+msgstr "Număr _telefon:"
+
+#: interfaces/network.glade.in.h:104
+msgid "_Primary:"
+msgstr "_Primar:"
+
+#: interfaces/network.glade.in.h:105
+msgid "_Remote IP address:"
+msgstr "Adresă IP la _distanţă:"
+
+#: interfaces/network.glade.in.h:106
+msgid "_Remote IP:"
+msgstr "_IP la distanţă:"
+
+#: interfaces/network.glade.in.h:107
+msgid "_Retry if the connection breaks or fails to start"
+msgstr "_Reîncearcă dacă nu se realizează conexiunea"
+
+#: interfaces/network.glade.in.h:108
+msgid "_Save Current"
+msgstr "_Salvează setările curente"
+
+#: interfaces/network.glade.in.h:109
+msgid "_Start PPP as soon as modem connects"
+msgstr "_Porneşte PPP deîndată ce modemul se conectează"
+
+#: interfaces/network.glade.in.h:110
+msgid "_Subnet mask:"
+msgstr "Mască _subnet:"
+
+#: interfaces/network.glade.in.h:111
+msgid "_Update DNS when this connection becomes active"
+msgstr "Actuali_zează setările DNS la activarea conexiunii"
+
+#: interfaces/network.glade.in.h:112
+msgid "_Use remote IP as default gateway"
+msgstr "_Utilizează IP-ul la distanţă ca un gateway implicit"
+
+#: interfaces/network.glade.in.h:113 interfaces/users.glade.in.h:63
+msgid "_Username:"
+msgstr "Nume _utilizator:"
+
+#: interfaces/network.glade.in.h:114
+msgid "_Wireless"
+msgstr "_Wireless"
+
+#: interfaces/network.glade.in.h:115
+msgid "new DNS server"
+msgstr "nou server DNS"
+
+#: interfaces/network.glade.in.h:116
+msgid "new search domain"
+msgstr "nou domeniu de căutare"
+
+#: interfaces/services.glade.in.h:1
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
+"use this tool to specify which services to run at boot time"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Setări servicii</span>\n"
+"Utilizaţi această unealtă pentru a specifica serviciile iniţializate la boot"
+
+#: interfaces/services.glade.in.h:3
+msgid "<span weight=\"bold\">General Information</span>"
+msgstr "<span weight=\"bold\">Informaţii generale</span>"
+
+#: interfaces/services.glade.in.h:4
+msgid "<span weight=\"bold\">Service Settings</span>"
+msgstr "<span weight=\"bold\">Setări servicii</span>"
+
+#: interfaces/services.glade.in.h:5
+msgid "Description:"
+msgstr "Descriere:"
+
+#: interfaces/services.glade.in.h:6
+msgid "Service _Properties"
+msgstr "_Proprietăţi serviciu"
+
+#: interfaces/services.glade.in.h:7
+msgid "Service:"
+msgstr "Serviciu:"
+
+#: interfaces/services.glade.in.h:8
+msgid "Status:"
+msgstr "Status:"
+
+#: interfaces/services.glade.in.h:9
+msgid "_Order list by startup sequence"
+msgstr "_Ordonează lista ca la pornire"
+
+#: interfaces/services.glade.in.h:10
+msgid "_Start"
+msgstr "_Start"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Startup sequence:"
+msgstr "_Secvenţă pornire:"
+
+#: interfaces/time.glade.in.h:1
+msgid "(unconfigured)"
+msgstr "(neconfigurat)"
+
+#: interfaces/time.glade.in.h:3
+msgid ":"
+msgstr ":"
+
+#: interfaces/time.glade.in.h:4
+msgid "<b>Selection</b>"
+msgstr "<b>Selecţie</b>"
+
+#: interfaces/time.glade.in.h:5
+msgid "<b>Time zone</b>"
+msgstr "<b>Fus orar</b>"
+
+#: interfaces/time.glade.in.h:6
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
+"Use this tool for setting your current date, time and time zone"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Setări oră şi dată</span>\n"
+"Utilizaţi această unealtă pentru a seta ora, data şi fusul orar"
+
+#: interfaces/time.glade.in.h:8
+msgid "<span weight=\"bold\">Time Configuration</span>"
+msgstr "<span weight=\"bold\">Configurări timp</span>"
+
+#: interfaces/time.glade.in.h:9
+msgid "Add NTP Server"
+msgstr "Adăugare server NTP"
+
+#: interfaces/time.glade.in.h:10
+msgid "NTP server"
+msgstr "Server NTP"
+
+#: interfaces/time.glade.in.h:11
+msgid "S_ynchronize clock with Internet servers:"
+msgstr "Sincroni_zează cu serverele din internet:"
+
+#: interfaces/time.glade.in.h:12
+msgid "Se_lect Servers..."
+msgstr "Se_lectare servere..."
+
+#: interfaces/time.glade.in.h:13
+msgid "Time servers"
+msgstr "Servere timp"
+
+#: interfaces/time.glade.in.h:14
+msgid "Time zone"
+msgstr "Fus orar"
+
+#: interfaces/time.glade.in.h:15
+msgid "Time zone:"
+msgstr "Fus orar:"
+
+#: interfaces/time.glade.in.h:16
+msgid "_Date:"
+msgstr "_Dată:"
+
+#: interfaces/time.glade.in.h:17
+msgid "_Select Time Zone..."
+msgstr "_Selectare fus orar..."
+
+#: interfaces/time.glade.in.h:18
+msgid "_Time:"
+msgstr "_Timp:"
+
+#: interfaces/time.glade.in.h:19
+msgid "date"
+msgstr "dată"
+
+#: interfaces/time.glade.in.h:20
+msgid "hours"
+msgstr "ore"
+
+#: interfaces/time.glade.in.h:21
+msgid "minutes"
+msgstr "minute"
+
+#: interfaces/time.glade.in.h:22
+msgid "seconds"
+msgstr "secunde"
+
+#: interfaces/users.glade.in.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
+"Use this tool for configuring users and groups settings in your system"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Setări utilizatori şi grupuri</span>\n"
+"Utilizaţi această unealtă pentru a schimba setările utilizatorilor şi ale "
+"grupurilor din sistem"
+
+#: interfaces/users.glade.in.h:4
+msgid "<span weight=\"bold\">Advanced Settings</span>"
+msgstr "<span weight=\"bold\">Setări avansate</span>"
+
+#: interfaces/users.glade.in.h:5
+msgid "<span weight=\"bold\">Automatic UID/GID</span>"
+msgstr "<span weight=\"bold\">UID/GID automat</span>"
+
+#: interfaces/users.glade.in.h:7
+msgid "<span weight=\"bold\">Contact Information</span>"
+msgstr "<span weight=\"bold\">Informaţii de contact</span>"
+
+#: interfaces/users.glade.in.h:8
+msgid "<span weight=\"bold\">Group Members</span>"
+msgstr "<span weight=\"bold\">Membri grup</span>"
+
+#: interfaces/users.glade.in.h:9
+msgid "<span weight=\"bold\">Optional Settings</span>"
+msgstr "<span weight=\"bold\">Setări opţionale</span>"
+
+#: interfaces/users.glade.in.h:10
+msgid "<span weight=\"bold\">Password Settings</span>"
+msgstr "<span weight=\"bold\">Setări parolă</span>"
+
+#: interfaces/users.glade.in.h:11
+msgid "<span weight=\"bold\">Password</span>"
+msgstr "<span weight=\"bold\">Parolă</span>"
+
+#: interfaces/users.glade.in.h:12
+msgid "<span weight=\"bold\">Profile Settings</span>"
+msgstr "<span weight=\"bold\">Setări profil</span>"
+
+#: interfaces/users.glade.in.h:13
+msgid "<span weight=\"bold\">System Defaults</span>"
+msgstr "<span weight=\"bold\">Setări implicite</span>"
+
+#: interfaces/users.glade.in.h:14
+msgid "<span weight=\"bold\">User Profile</span>"
+msgstr "<span weight=\"bold\">Profil utilizator</span>"
+
+#: interfaces/users.glade.in.h:17
+msgid "Assign a random password by default"
+msgstr "Implicit asignează o parolă aleatoare"
+
+#: interfaces/users.glade.in.h:18
+msgid "Check password _quality"
+msgstr "Verifică _calitatea parolei"
+
+#: interfaces/users.glade.in.h:19
+msgid "Con_firmation:"
+msgstr "Con_firmare:"
+
+#: interfaces/users.glade.in.h:20
+msgid "Days between warning and password expiration:"
+msgstr "Zile de avertizare la expirarea parolei"
+
+#: interfaces/users.glade.in.h:21
+msgid "Default _group:"
+msgstr "_Grup implicit:"
+
+#: interfaces/users.glade.in.h:22
+msgid "Default _shell:"
+msgstr "_Shell implicit:"
+
+#: interfaces/users.glade.in.h:23
+msgid "Generate _random password"
+msgstr "Generează o parolă aleatoa_re"
+
+#: interfaces/users.glade.in.h:24
+msgid "Group _ID:"
+msgstr "_ID grup:"
+
+#: interfaces/users.glade.in.h:25
+msgid "Group _members:"
+msgstr "_Membri grup:"
+
+#: interfaces/users.glade.in.h:26
+msgid "Group _name:"
+msgstr "_Nume grup:"
+
+#: interfaces/users.glade.in.h:27
+msgid "Group properties"
+msgstr "Proprietăţi grup"
+
+#: interfaces/users.glade.in.h:28
+msgid "Groups"
+msgstr "Grupuri"
+
+#: interfaces/users.glade.in.h:29
+msgid "Ma_ximum days a password may be used:"
+msgstr "Durata maximă în zile pentru o parolă:"
+
+#: interfaces/users.glade.in.h:30
+msgid "Maximum UID:"
+msgstr "UID maxim:"
+
+#: interfaces/users.glade.in.h:31
+msgid "Mi_nimum days between password changes:"
+msgstr "Minimum de zile între două parole consecutive:"
+
+#: interfaces/users.glade.in.h:32
+msgid "Minimum GID:"
+msgstr "GID minim:"
+
+#: interfaces/users.glade.in.h:33
+msgid "Minimum UID:"
+msgstr "UID minim:"
+
+#: interfaces/users.glade.in.h:34
+msgid "Minimum days allowed between password changes:"
+msgstr "Minimum de zile între două parole consecutive:"
+
+#: interfaces/users.glade.in.h:35
+msgid "Number of days that a password may be used:"
+msgstr "Număr de zile în care parola poate fi utilizată:"
+
+#: interfaces/users.glade.in.h:36
+msgid "O_ffice location:"
+msgstr "Locaţie _birou:"
+
+#: interfaces/users.glade.in.h:37
+msgid "Other Groups"
+msgstr "Alte grupuri"
+
+#: interfaces/users.glade.in.h:38
+msgid "Password set to: "
+msgstr "Parola este: "
+
+#: interfaces/users.glade.in.h:40
+msgid "Set password b_y hand"
+msgstr "Setare _manuală parolă"
+
+#: interfaces/users.glade.in.h:41
+msgid "Show a_ll users and groups"
+msgstr "Arată t_oţi utilizatorii şi toate grupurile"
+
+#: interfaces/users.glade.in.h:42
+msgid "User _ID:"
+msgstr "_ID utilizator:"
+
+#: interfaces/users.glade.in.h:43
+msgid "User _password:"
+msgstr "_Parolă utilizator"
+
+#: interfaces/users.glade.in.h:44
+msgid "User profiles"
+msgstr "Profiluri utilizatori"
+
+#: interfaces/users.glade.in.h:45
+msgid "Users"
+msgstr "Utilizatori"
+
+#: interfaces/users.glade.in.h:46
+msgid "_Add Group..."
+msgstr "_Adăugare grup..."
+
+#: interfaces/users.glade.in.h:47
+msgid "_Add Profile..."
+msgstr "_Adăugare profil..."
+
+#: interfaces/users.glade.in.h:48
+msgid "_Add User..."
+msgstr "_Adăugare utilizator..."
+
+#: interfaces/users.glade.in.h:49
+msgid "_All users:"
+msgstr "T_oţii utilizatorii:"
+
+#: interfaces/users.glade.in.h:50
+msgid "_Available groups:"
+msgstr "Grupuri _disponibile"
+
+#: interfaces/users.glade.in.h:51
+msgid "_Comments"
+msgstr "_Comentarii"
+
+#: interfaces/users.glade.in.h:52
+msgid "_Days between warning and password expiration:"
+msgstr "_Zile de avertizare la expirarea parolei:"
+
+#: interfaces/users.glade.in.h:54
+msgid "_Edit User Profiles..."
+msgstr "_Editare profil utilizator..."
+
+#: interfaces/users.glade.in.h:55
+msgid "_Generate Password"
+msgstr "_Generare parolă"
+
+#: interfaces/users.glade.in.h:56
+msgid "_Home directory:"
+msgstr "Director _propriu:"
+
+#: interfaces/users.glade.in.h:57
+msgid "_Home phone:"
+msgstr "Telefon _acasă:"
+
+#: interfaces/users.glade.in.h:58
+msgid "_Main group:"
+msgstr "Grup p_rincipal:"
+
+#: interfaces/users.glade.in.h:59
+msgid "_Profile:"
+msgstr "_Profil:"
+
+#: interfaces/users.glade.in.h:60
+msgid "_Real name:"
+msgstr "Nume _real:"
+
+#: interfaces/users.glade.in.h:61
+msgid "_Shell:"
+msgstr "_Shell:"
+
+#: interfaces/users.glade.in.h:62
+msgid "_User's groups:"
+msgstr "Gr_upuri proprii:"
+
+#: interfaces/users.glade.in.h:64
+msgid "_Work phone:"
+msgstr "Telefon ser_viciu:"
+
+#: src/boot/boot-append-gui.c:140
+msgid "32,768"
+msgstr "32.768"
+
+#: src/boot/boot-append-gui.c:141
+msgid "65,536"
+msgstr "65.536"
+
+#: src/boot/boot-append-gui.c:142
+msgid "16,777,216"
+msgstr "16.777.216"
+
+#: src/boot/boot-append-gui.c:252
+msgid "Invalid VGA value"
+msgstr "Valoare VGA invalidă"
+
+#: src/boot/boot-append-gui.c:257
+#, c-format
+msgid "\"%s\" is not a valid VGA value"
+msgstr "„%s” nu este o valoare validă VGA"
+
+#: src/boot/boot-druid.c:112
+msgid "Error creating boot image"
+msgstr "Eroare la crearea imaginii de boot"
+
+#: src/boot/boot-druid.c:442
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "Creez o nouă imagine de boot (%d din %d)"
+
+#: src/boot/boot-druid.c:443
+msgid "Finished creating a new boot image"
+msgstr "Crearea unei nou imagini de boot s-a terminat"
+
+#: src/boot/boot-image.c:40 src/network/profile.c:490
+msgid "Unknown"
+msgstr "Necunoscut"
+
+#: src/boot/boot-image.c:41
+msgid "Windows NT"
+msgstr "Windows NT"
+
+#: src/boot/boot-image.c:42
+msgid "Windows 9x"
+msgstr "Windows 9x"
+
+#: src/boot/boot-image.c:43
+msgid "Dos"
+msgstr "DOS"
+
+#: src/boot/boot-image.c:44
+msgid "Linux"
+msgstr "Linux"
+
+#: src/boot/boot-image.c:45
+msgid "Linux swap"
+msgstr "Swap Linux"
+
+#: src/boot/boot-image.c:46
+msgid "GNU/Hurd"
+msgstr "GNU/Hurd"
+
+#: src/boot/boot-image.c:276
+#, c-format
+msgid "\"%s\" is an invalid path"
+msgstr "„%s” este o cale invalidă"
+
+#: src/boot/boot-image.c:292
+#, c-format
+msgid "\"%s\" already exists, please set another name"
+msgstr "„%s” există deja, setaţi un alt nume"
+
+#: src/boot/boot-image.c:298
+#, c-format
+msgid "Invalid image name: \"%s\""
+msgstr "Nume imagine invalid:; „%s”"
+
+#: src/boot/boot-image.c:311
+#, c-format
+msgid "Invalid image: \"%s\""
+msgstr "Imagine invalidă: „%s”"
+
+#: src/boot/boot-image.c:329
+#, c-format
+msgid "Invalid root device: \"%s\""
+msgstr "Dispozitiv rădăcină invalid: „%s”"
+
+#: src/boot/boot-settings.c:44
+msgid "_Module path:"
+msgstr "Cale _modul:"
+
+#: src/boot/boot-settings.c:405
+msgid "Password confirmation is not correct"
+msgstr "Parola nu a fost corect confirmată"
+
+#: src/boot/boot-settings.c:429
+msgid "Error modifying boot image"
+msgstr "Eroare la modifarea imaginii de boot"
+
+#: src/boot/boot.desktop.in.in.h:1
+msgid "Boot"
+msgstr "Boot"
+
+#: src/boot/boot.desktop.in.in.h:2
+msgid "Configure the system boot process"
+msgstr "Configuraţi procesul de boot al sistemului"
+
+#: src/boot/callbacks.c:82
+msgid "Boot Image Editor"
+msgstr "Editor imagine de boot"
+
+#: src/boot/callbacks.c:180
+msgid "Boot Append Editor"
+msgstr "Editor parametri de boot"
+
+#: src/boot/callbacks.c:412
+msgid "Error deleting boot image"
+msgstr "Eroare la ştergerea parametrilor de boot"
+
+#: src/boot/callbacks.c:413
+msgid "Without at least one boot image your computer will not start"
+msgstr "Fără cel puţin o imagine de boot, calculatorul nu va mai pornit"
+
+#: src/boot/callbacks.c:434
+msgid "This may leave this operating system unbootable"
+msgstr "Aceasta poate invalida pornirea acestui sistem de operare"
+
+#: src/boot/callbacks.c:439
+#, c-format
+msgid "Are you sure you want to delete \"%s\"?"
+msgstr "Sigur doriţi să ştergeţi „%s”?"
+
+#: src/boot/callbacks.c:464
+msgid "The configuration will show empty"
+msgstr "Configuraţia va rămâne goală"
+
+#: src/boot/callbacks.c:469
+#, c-format
+msgid "The file \"%s\" is missing or could not be read"
+msgstr "Fişierul „%s” lipseşte sau nu a putut fi citit"
+
+#: src/boot/table.c:41
+msgid "Name"
+msgstr "Nume"
+
+#: src/boot/table.c:42
+msgid "Default"
+msgstr "Implicit"
+
+#: src/boot/table.c:43 src/network/connection.c:490
+msgid "Type"
+msgstr "Tip"
+
+#: src/boot/table.c:44
+msgid "Kernel Image"
+msgstr "Imagine kernel"
+
+#: src/boot/table.c:45 src/network/connection.c:506
+msgid "Device"
+msgstr "Dispozitiv"
+
+#: src/boot/table.c:50 src/network/connection.c:62 src/users/table.c:46
+msgid "_Add"
+msgstr "_Adaugă"
+
+#: src/boot/table.c:51 src/network/connection.c:63 src/users/table.c:47
+msgid "_Properties"
+msgstr "_Proprietăţi"
+
+#. the proccess was running ssh
+#: src/common/gst-auth.c:89
+msgid "The tool could not connect to the computer"
+msgstr "Nu am reuşit să mă conectez la calculator"
+
+#: src/common/gst-auth.c:90
+msgid ""
+"Check that you have access to this network and that the computer is actually "
+"working and running SSHD"
+msgstr ""
+"Verificaţi dacă aveţi acces la acea reţea şi dacă respectivul calculator este"
+" pornit şi are un server SSH pornit"
+
+#. the proccess was running su
+#: src/common/gst-auth.c:94
+msgid "The entered password is invalid"
+msgstr "Parola introdusă nu este validă"
+
+#: src/common/gst-auth.c:95
+msgid ""
+"Check that you typed it correctly and that you haven't activated the \"caps "
+"lock\" key"
+msgstr ""
+"Verificaţi dacă aţi introdus corect parola şi dacă nu cumva aveţi tasta "
+"„Caps Lock” apăsată"
+
+#: src/common/gst-auth.c:104
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Nu am putut porni „%s”"
+
+#: src/common/gst-auth.c:105
+msgid "Check that you have permissions to run this command"
+msgstr "Verificaţi dacă aveţi drepturile necesare pentru a utiliza această comandă"
+
+#: src/common/gst-auth.c:107
+msgid "An unexpected error has ocurred"
+msgstr "A intervenit o eroare neaşteptată"
+
+#: src/common/gst-dialog.c:60
+#, c-format
+msgid "Could not find widget: %s"
+msgstr "Nu am găsit widget-ul: %s"
+
+#: src/common/gst-dialog.c:382
+msgid "There are changes which have not been applied"
+msgstr "Unele modificări nu au fost aplicate"
+
+#: src/common/gst-dialog.c:383
+msgid "Apply them now?"
+msgstr "Le aplic acum?"
+
+#: src/common/gst-dialog.c:477
+#, c-format
+msgid "Error connection signal `%s' in widget `%s'"
+msgstr "Semnal de conectare eronată „%s” în widget-ul „%s”"
+
+#: src/common/gst-tool.c:1017
+msgid "The configuration could not be loaded"
+msgstr "Configuraţia nu a putut fi încărcată"
+
+#: src/common/gst-tool.c:1018
+msgid "There was an error running the backend script"
+msgstr "A intervenit o eroare la execuţia scriptului backend"
+
+#: src/common/gst-tool.c:1491
+#, c-format
+msgid "Welcome to the %s prerelease of the GNOME System Tools"
+msgstr "Bun venit în GNOME System Tools, versiunea preliminară %s"
+
+#: src/common/gst-tool.c:1493
+msgid ""
+"This is still a work in progress, and so it may have serious bugs. Due to "
+"the nature of these tools, bugs may render your computer <span weight=\"bold"
+"\">practically useless</span>, costing time, effort and sanity points. You "
+"have been warned. Thank you for trying out this prerelease of the GNOME "
+"System Tools!"
+msgstr ""
+"Această versiune este una imatură şi poate avea probleme serioase. Datorită "
+"naturii uneltelor din acest pachet, eventualele probleme pot conduce la "
+"<span weight=\"bold\">invalidarea</span> sistemului de operare sau a "
+"anumitor componente ale sale. Aceasta este o avertizare cât se poate de "
+"serioasă. Vă mulţumim pentru curajul de a încerca o versiune preliminară "
+"GNOME System Tools!"
+
+#: src/common/gst-tool.c:1514
+msgid "Warning"
+msgstr "Avertizare"
+
+#: src/common/gst-tool.c:1534
+msgid "Don't show me this again"
+msgstr "Nu mă mai avertiza"
+
+#: src/common/gst-tool.c:1610
+msgid "GNOME System Tools"
+msgstr "GNOME System Tools"
+
+#: src/common/gst-tool.c:1771
+msgid "Could not display help"
+msgstr "Nu am putut afişa ajutorul"
+
+#: src/network/callbacks.c:403
+msgid ""
+"This will disable any network connection with this interface as soon as you "
+"press \"apply\""
+msgstr ""
+"Aceasta va dezactiva orice conexiune de reţea a acestei interfeţe deîndată "
+"ce veţi apăsa „Aplică”"
+
+#: src/network/callbacks.c:408
+#, c-format
+msgid "Are you sure you want to delete connection \"%s\"?"
+msgstr "Sunteţi sigur(ă) că doriţi să ştergeţi conexiunea „%s”?"
+
+#: src/network/callbacks.c:516
+msgid "SMB Support is not running"
+msgstr "Suportul SMB nu este pornit"
+
+#: src/network/callbacks.c:517
+msgid ""
+"You don't have SMB support installed. Please install SMB support in the "
+"system to enable file sharing in Windows networks"
+msgstr ""
+"Nu trebuie să aveţi suportul SMB instalat. Instalaţi suportul SMB pentru "
+"a activa partajarea fişierelor într-o reţea Windows"
+
+#: src/network/callbacks.c:581
+msgid "The host name has changed"
+msgstr "Numele gazdei s-a schimbat"
+
+#: src/network/callbacks.c:582
+msgid ""
+"This will prevent you from launching new applications, and so you will have "
+"to log in again. Continue anyway?"
+msgstr ""
+"Aceasta va preveni lansarea de noi aplicaţii, aşa că va trebui să vă trebui "
+"să vă autentificaţi din nou. Continuaţi oricum?"
+
+#: src/network/callbacks.c:586
+msgid "Change _Host name"
+msgstr "Schimbare nume _gazdă"
+
+#: src/network/callbacks.c:629 src/network/callbacks.c:656
+msgid "Wvdial command not found"
+msgstr "Comanda „wvdial” nu a fost găsită"
+
+#: src/network/callbacks.c:630
+msgid ""
+"wvdial could not be found on your system. You need to install wvdial, or the "
+"PPP (modem) connections will not activate"
+msgstr ""
+"Comanda „wvdial” nu a fost găsită. Trebuie să instalaţi „wvdial”, altfel "
+"conexiunile prin modem (PPP) nu vor fi activate"
+
+#: src/network/callbacks.c:657
+msgid ""
+"wvdial could not be found on your system. You need to install wvdial, or the "
+"PPP (modem) connections will not activate. Continue anyway?"
+msgstr ""
+"Comanda „wvdial” nu a fost găsită. Trebuie să instalaţi „wvdial”, altfel "
+"conexiunile prin modem (PPP) nu vor fi activate. Continuaţi oricum?"
+
+#: src/network/callbacks.c:661 src/network/callbacks.c:688
+msgid "_Continue"
+msgstr "_Continuă"
+
+#: src/network/callbacks.c:684
+msgid "The default gateway device is not activated"
+msgstr "Dispozitivul gateway implicit nu este activat"
+
+#: src/network/callbacks.c:685
+msgid "This will prevent you from connecting to the Internet. Continue anyway?"
+msgstr "Aceasta va împiedica conexiunea la internet. Continuaţi oricum?"
+
+#: src/network/callbacks.c:733
+msgid "The default gateway device is missing gateway information"
+msgstr "Dispozitivului gateway implicit îi lipsesc informaţiile despre gateway"
+
+#: src/network/callbacks.c:734
+msgid ""
+"Please provide this information to proceed, or choose another default "
+"gateway device"
+msgstr ""
+"Introduceţi aceste informaţii pentru a continua sau alegeţi un alt dispozitiv"
+" gateway implicit"
+
+#: src/network/callbacks.c:779
+msgid "The program redhat-config-network-cmd could not be found"
+msgstr "Programul „redhat-config-network-cmd” nu a fost găsit"
+
+#: src/network/callbacks.c:780
+msgid ""
+"This could render missing connections under the connections tab. Please "
+"install the redhat-config-network rpm package to avoid this"
+msgstr ""
+"Aceasta ar putea conduce la conexiuni lipsă în tabul conexiunilor. Instalaţi "
+"pachetul rpm „redhat-config-network” pentru a evita acest lucru"
+
+#: src/network/callbacks.c:811
+#, c-format
+msgid "Do you want to enable interface \"%s\"?"
+msgstr "Doriţi să activaţi interfaţa „%s”?"
+
+#: src/network/callbacks.c:812
+msgid "This will enable network access through this interface"
+msgstr "Astfel se va activa accesul la reţea prin această interfaţă"
+
+#: src/network/callbacks.c:813
+msgid "_Enable"
+msgstr "_Activare"
+
+#: src/network/callbacks.c:815
+#, c-format
+msgid "Do you want to disable interface \"%s\"?"
+msgstr "Doriţi să dezactivaţi interfaţa „%s”?"
+
+#: src/network/callbacks.c:816
+msgid "This will disable network access through this interface"
+msgstr "Astfel se va dezactiva accesul la reţea prin această interfaţă"
+
+#: src/network/callbacks.c:817
+msgid "_Disable"
+msgstr "_Dezactivează"
+
+#: src/network/callbacks.c:953
+msgid "Could not autodetect modem device"
+msgstr "Nu am putut detecta automat modemul"
+
+#: src/network/callbacks.c:954
+msgid ""
+"Check that the device is not busy and that is correctly attached to the "
+"computer"
+msgstr ""
+"Verificaţi dacă nu cumva este ocupat sau greşit conectat la calculator"
+
+#: src/network/callbacks.c:1007
+msgid "Silent"
+msgstr "Silenţios"
+
+#: src/network/callbacks.c:1009
+msgid "Low"
+msgstr "Încet"
+
+#: src/network/callbacks.c:1011
+msgid "Medium"
+msgstr "Mediu"
+
+#: src/network/callbacks.c:1013
+msgid "Loud"
+msgstr "Tare"
+
+#: src/network/connection.c:46
+msgid "Other type"
+msgstr "Alt tip"
+
+#: src/network/connection.c:47 src/network/connection.c:48
+#: src/network/connection.c:49 src/network/connection.c:50
+msgid "Ethernet LAN card"
+msgstr "Placă de reţea"
+
+#: src/network/connection.c:51
+msgid "Wireless LAN card"
+msgstr "Placă wireless"
+
+#: src/network/connection.c:52 src/network/connection.c:53
+msgid "Modem or transfer cable"
+msgstr "Cablu de transfer sau modem"
+
+#: src/network/connection.c:54
+msgid "Parallel line"
+msgstr "Cablu paralel"
+
+#: src/network/connection.c:55
+msgid "Infrared LAN"
+msgstr "Reţea infraroşu"
+
+#: src/network/connection.c:56
+msgid "Loopback interface"
+msgstr "Interfaţă loopback"
+
+#: src/network/connection.c:57
+msgid "Unknown interface type"
+msgstr "Interfaţă necunoscută"
+
+#: src/network/connection.c:477 src/services/table.c:86
+msgid "Active"
+msgstr "Activ"
+
+#: src/network/connection.c:1613
+msgid "Automatic (DHCP)"
+msgstr "Automatic (DHCP)"
+
+#: src/network/connection.c:1614
+msgid "Automatic (BOOTP)"
+msgstr "Automatic (BOOTP)"
+
+#: src/network/connection.c:1632
+msgid "Tones"
+msgstr "Ton"
+
+#: src/network/connection.c:1633
+msgid "Pulses"
+msgstr "Puls"
+
+#: src/network/connection.c:1734 src/network/connection.c:1744
+msgid "Error in IP address"
+msgstr "Eroare în adresa IP"
+
+#: src/network/connection.c:1735
+msgid ""
+"The IP address or netmask for the interface was left empty. Please enter "
+"valid IP addresses in those fields to continue"
+msgstr ""
+"Adresa IP sau masca de reţea pentru această interfaţă sunt necompletate. Completaţi aceste câmpuri cu adrese IP valide pentru a continua"
+
+#: src/network/connection.c:1745
+msgid ""
+"The IP address or remote address for the interface was left empty. Please "
+"enter valid IP addresses in those fields to continue"
+msgstr ""
+"Adresa IP locală sau cea la distanţă pentru această interfaţă sunt necompletate. Completaţi aceste câmpuri cu adrese IP valide pentru a continua"
+
+#: src/network/connection.c:1753
+msgid "Error in domain name servers"
+msgstr "Eroare la serverele DNS"
+
+#: src/network/connection.c:1754
+msgid ""
+"You chose to set the domain name servers for this connection manually, but "
+"left the IP address for the primary name server empty. Please enter the IP "
+"for the primary domain name server or uncheck the manual DNS option"
+msgstr ""
+"Aţi ales să setaţi manual serverele DNS pentru această conexiune, dar "
+"aţi lăsat necompletat câmpul serverului DNS primar. Introduceţi "
+"IP-ul pentru serverul primar DNS sau alegeţi setările automate DNS."
+
+#: src/network/connection.c:1761
+msgid "Invalid modem device"
+msgstr "Dispozitiv modem invalid"
+
+#: src/network/connection.c:1762
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue"
+msgstr ""
+"Dispozitivul tip modem setat pentru această conexiune a rămas necompletat. "
+"Introduceţi calea unui dispozitiv sau alegeţi „Autodetect” pentru a continua."
+
+#: src/network/connection.c:1767
+msgid "Invalid phone number"
+msgstr "Număr de telefon invalid"
+
+#: src/network/connection.c:1768
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue"
+msgstr ""
+"Numărul de telefon pentru această conexiune a rămas necompletat. Introduceţi un număr valid de telefon pentru a continua"
+
+#: src/network/connection.c:2094
+#, c-format
+msgid "The interface \"%s\" doesn't exist"
+msgstr "Interfaţa „%s” nu există"
+
+#: src/network/connection.c:2098
+msgid "Invalid interface"
+msgstr "Interfaţă invalidă"
+
+#: src/network/connection.c:2099
+msgid "The loopback interface cannot be configured"
+msgstr "Interfaţa loopback nu poate fi configurată"
+
+#: src/network/dns.c:148 src/network/hosts.c:158
+msgid "IP Address"
+msgstr "Adresă IP"
+
+#: src/network/hosts.c:166
+msgid "Aliases"
+msgstr "Aliasuri"
+
+#: src/network/main.c:203
+msgid "Run the connection assistant."
+msgstr "Pornire asistent de conectare."
+
+#: src/network/main.c:204
+msgid "Run the PPP connection assistant."
+msgstr "Pornire asistent de conectare prin modem."
+
+#: src/network/main.c:205
+msgid "Run the ethernet connection assistant."
+msgstr "Pornire asistent de conectare prin reţea."
+
+#: src/network/main.c:206
+msgid "Run the wlan connection assistant."
+msgstr "Pornire asistent de conectare wireless"
+
+#: src/network/main.c:207
+msgid "Run the parallel port connection assistant."
+msgstr "Pornire asistent de conectare prin cablu paralel."
+
+#: src/network/main.c:208
+msgid "Run the irlan connection assistant."
+msgstr "Pornire asistent de conectat prin infraroşu"
+
+#: src/network/main.c:209
+msgid "Configure a network interface"
+msgstr "Configurare interfaţă reţea"
+
+#: src/network/main.c:209
+msgid "interface"
+msgstr "interfaţă"
+
+#: src/network/main.c:216
+msgid "Network Settings"
+msgstr "Setări reţea"
+
+#: src/network/network-druid.c:73
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Creez o nouă conexiune prin reţea (%d din %d)"
+
+#: src/network/network-druid.c:74
+msgid "Finished creating a new network connection"
+msgstr "Crearea noii conexiuni prin reţea s-a terminat"
+
+#: src/network/network.desktop.in.in.h:1
+msgid "Configure network devices and connections"
+msgstr "Configurare conexiuni şi dispozitive de reţea"
+
+#: src/network/network.desktop.in.in.h:2
+msgid "Networking"
+msgstr "Reţea"
+
+#: src/network/profile.c:51 src/users/profile-settings.c:215
+msgid "You will not be able to recover this profile after pressing \"apply\""
+msgstr "Nu veţi putea recupera acest profil după ce veţi alege „Aplică”"
+
+#: src/network/profile.c:55
+#, c-format
+msgid "Are you sure you want to delete profile \"%s\"?"
+msgstr "Sunteţi sigur(ă) că doriţi ştergerea profilului „%s”"
+
+#: src/network/profiles-table.c:53
+msgid "Profile name"
+msgstr "Nume profil"
+
+#: src/network/profiles-table.c:62
+msgid "Description"
+msgstr "Descriere"
+
+#: src/services/callbacks.c:46
+msgid "No description available."
+msgstr "Nici o descriere nu e disponibilă."
+
+#: src/services/callbacks.c:217
+msgid "Running"
+msgstr "Pornit"
+
+#: src/services/callbacks.c:221
+msgid "Stopped"
+msgstr "Oprit"
+
+#: src/services/callbacks.c:226
+msgid "Could not get info"
+msgstr "Nu am putut obţine detalii"
+
+#: src/services/callbacks.c:292
+#, c-format
+msgid "Settings for service %s"
+msgstr "Setări pentru serviciul %s"
+
+#: src/services/main.c:62
+msgid "Services Settings"
+msgstr "Setări servicii"
+
+#: src/services/services.desktop.in.in.h:1
+msgid "Configure which services will be run when the system starts"
+msgstr "Configurarea serviciilor ce vor fi pornite la iniţializarea sistemului"
+
+#: src/services/services.desktop.in.in.h:2
+msgid "Services"
+msgstr "Servicii"
+
+#: src/services/table.c:95
+msgid "Service"
+msgstr "Serviciu"
+
+#: src/time/main.c:461
+msgid "NTP support is not running"
+msgstr "Suportul NTP nu este activat"
+
+#: src/time/main.c:462
+msgid ""
+"Please run NTP support in the system to enable synchronization of your local "
+"time server with internet time servers"
+msgstr ""
+"Activaţi suportul NTP pentru a permite sincronizarea ceasului sistemului cu "
+"serverele NTP din internet"
+
+#: src/time/main.c:760
+msgid "Time and Date Settings"
+msgstr "Setări oră şi dată"
+
+#: src/time/time.desktop.in.in.h:1
+msgid "Change system time, date, and timezone"
+msgstr "Setare oră, dată şi fus orar"
+
+#: src/time/time.desktop.in.in.h:2
+msgid "Time and Date"
+msgstr "Oră şi dată"
+
+#: src/users/callbacks.c:569
+msgid "Error saving profile"
+msgstr "Eroare la salvarea profilului"
+
+#: src/users/callbacks.c:609
+msgid "Create New profile"
+msgstr "Creează profil nou"
+
+#: src/users/callbacks.c:643
+#, c-format
+msgid "Settings for profile %s"
+msgstr "Setări pentru profilul %s"
+
+#: src/users/group-settings.c:90
+msgid "Create New Group"
+msgstr "Creează un grup nou"
+
+#. Check if gid is available
+#: src/users/group-settings.c:163 src/users/group-settings.c:171
+msgid "Invalid group ID"
+msgstr "ID invalid de grup"
+
+#: src/users/group-settings.c:164
+msgid "Group ID must be a positive number"
+msgstr "ID-ul de grup trebuie să fie un număr pozitiv"
+
+#. if group is root
+#: src/users/group-settings.c:167
+msgid "Group ID of the \"root\" user should not be modified"
+msgstr "ID-ul de grup al utilizatorului „root” nu ar trebui modificat"
+
+#: src/users/group-settings.c:168 src/users/group-settings.c:214
+#: src/users/group-settings.c:284 src/users/user-settings.c:105
+#: src/users/user-settings.c:355 src/users/user-settings.c:450
+#: src/users/user-settings.c:486
+msgid "This would leave the system unusable"
+msgstr "Aceasta va avea drept rezultat un sistem instabil"
+
+#: src/users/group-settings.c:172
+#, c-format
+msgid "Group ID %s already exists"
+msgstr "ID-ul de grup %s există deja"
+
+#. If empty.
+#: src/users/group-settings.c:197
+msgid "Group name is empty"
+msgstr "Numele grupului este gol"
+
+#: src/users/group-settings.c:198
+msgid "A group name must be specified"
+msgstr "Trebuie specificat numele grupului"
+
+#. If too long.
+#: src/users/group-settings.c:201
+msgid "The group name is too long"
+msgstr "Numele grupului este prea lung"
+
+#: src/users/group-settings.c:202
+#, c-format
+msgid "The group name should have less than %i characters for being valid"
+msgstr "Numele grupului trebuie să aibă cel puţin %i caractere pentru a fi valid"
+
+#. if invalid.
+#: src/users/group-settings.c:205
+msgid "Group name has invalid characters"
+msgstr "Numele grupului conţine caractere invalide"
+
+#: src/users/group-settings.c:206
+msgid "Please set a valid group name, using only lower case letters"
+msgstr "Setaţi un nume de grup valid utilizând doar litere mici"
+
+#. if !exist.
+#: src/users/group-settings.c:209
+#, c-format
+msgid "Group \"%s\" already exists"
+msgstr "Grupul „%s” există deja"
+
+#: src/users/group-settings.c:210
+msgid "Please select a different group name"
+msgstr "Alegeţi un alt nume de grup"
+
+#. if it's the root group
+#: src/users/group-settings.c:213
+msgid "Group name of the \"root\" user should not be modified"
+msgstr "Numele grupului utilizatorului „root” nu ar trebui modificat"
+
+#: src/users/group-settings.c:283
+msgid "The group \"root\" should not be deleted"
+msgstr "Grupul „root” nu ar trebui şters"
+
+#: src/users/group-settings.c:298
+msgid "This may leave files with invalid group ID in the filesystem"
+msgstr "Aceasta poate avea ca rezultat fişiere cu un ID de grup invalid"
+
+#: src/users/group-settings.c:303
+#, c-format
+msgid "Are you sure you want to delete group \"%s\"?"
+msgstr "Sunteţi sigur(ă) că vreţi să ştergeţi grupul „%s”"
+
+#: src/users/group-settings.c:358
+#, c-format
+msgid "Settings for Group %s"
+msgstr "Setări pentru grupul %s"
+
+#: src/users/groups-table.c:44
+msgid "Group"
+msgstr "Grup"
+
+#: src/users/groups-table.c:45
+msgid "GID"
+msgstr "GID"
+
+#: src/users/main.c:124
+msgid "User name contains"
+msgstr "Numele utilizatorului conţine"
+
+#: src/users/main.c:125
+msgid "User ID is"
+msgstr "ID-ul utilizatorului este"
+
+#: src/users/main.c:126
+msgid "Group name contains"
+msgstr "Numele grupului conţine"
+
+#: src/users/main.c:127
+msgid "User GID is"
+msgstr "GID-ul utilizatorului este"
+
+#: src/users/main.c:246 src/users/users.desktop.in.in.h:2
+msgid "Users and Groups"
+msgstr "Utilizatori şi grupuri"
+
+#: src/users/passwd.c:266
+msgid "Passwords do not match"
+msgstr "Parolele nu sunt identice"
+
+#: src/users/passwd.c:271
+#, c-format
+msgid ""
+"Bad password: %s.\n"
+"Please try with a new password"
+msgstr ""
+"Parolă greşită: %s.\n"
+"Reintroduceţi noua parolă"
+
+#: src/users/profile-settings.c:122
+msgid "The profile must have a name"
+msgstr "Profilul trebuie să aibă un nume"
+
+#: src/users/profile-settings.c:127
+msgid "The profile must have a default home"
+msgstr "Profilul trebuie să aibă un director propriu"
+
+#: src/users/profile-settings.c:132 src/users/profile-settings.c:137
+msgid "The profile must have a default shell"
+msgstr "Profilul trebuie să aibă un shell implicit"
+
+#: src/users/profile-settings.c:204
+msgid "The default profile should not be deleted"
+msgstr "Profilul implicit nu trebuie şters"
+
+#: src/users/profile-settings.c:205
+msgid "This profile is used for setting default data for new users"
+msgstr "Acest profil este utilizat pentru setările implicite ale noilor utilizatori"
+
+#: src/users/profile-settings.c:214
+#, c-format
+msgid "Delete profile \"%s\"?"
+msgstr "Şterg profilul „%s”"
+
+#. Column name,          Adv_state_show,	Basic_state_show
+#: src/users/profiles-table.c:38
+msgid "Profile"
+msgstr "Profil"
+
+#: src/users/profiles-table.c:39
+msgid "Comment"
+msgstr "Comentariu"
+
+#: src/users/search-bar/search-bar.c:225
+msgid "C_lear"
+msgstr "Şter_ge"
+
+#: src/users/search-bar/search-bar.c:326
+msgid "Choice"
+msgstr "Alegere"
+
+#: src/users/search-bar/search-bar.c:336
+msgid "Text"
+msgstr "Text"
+
+#: src/users/user-settings.c:104
+msgid "The \"root\" user should not be deleted"
+msgstr "Utilizatorul „root” nu ar trebui şters"
+
+#: src/users/user-settings.c:120
+#, c-format
+msgid "Are you sure you want to delete user \"%s\"?"
+msgstr "Sunteţi sigur(ă) că doriţi să ştergeţi utilizatorul „%s”"
+
+#: src/users/user-settings.c:219
+msgid "User Account Editor"
+msgstr "Editor conturi utilizatori"
+
+#: src/users/user-settings.c:335
+msgid "The user name is empty"
+msgstr "Numele utilizatorului este gol"
+
+#: src/users/user-settings.c:336
+msgid "A user name must be specified"
+msgstr "Trebuie specificat numele utilizatorului"
+
+#. = sizeof (ut.ut_name)
+#: src/users/user-settings.c:342 src/users/user-settings.c:347
+msgid "The user name is too long"
+msgstr "Numele utilizatorului este prea lung"
+
+#: src/users/user-settings.c:343 src/users/user-settings.c:348
+#, c-format
+msgid "The user name should have less than %i characters for being valid"
+msgstr "Numele utilizatorului ar trebui să aibe mai puţin de %i caractere pentru a fi valid"
+
+#: src/users/user-settings.c:354
+msgid "User name for the \"root\" user should not be modified"
+msgstr "Numele utilizatorului „root” nu ar trebui modificat"
+
+#: src/users/user-settings.c:360
+msgid "User name has invalid characters"
+msgstr "Numele utilizatorului conţine caractere invalide"
+
+#: src/users/user-settings.c:361
+msgid ""
+"Please set a valid user name consisting of a lower case letter followed by "
+"lower case letters and numbers"
+msgstr ""
+"Introduceţi un nume de utilizator valid, format dintr-o literă mică urmată "
+"de litere mici şi numere"
+
+#: src/users/user-settings.c:367
+#, c-format
+msgid "User name \"%s\" already exists"
+msgstr "Numele de utilizator „%s” există deja"
+
+#: src/users/user-settings.c:368
+msgid "Please select a different user name"
+msgstr "Alegeţi un alt nume de utilizator"
+
+#: src/users/user-settings.c:393
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr "Caracter invalid „%c” în comentariu"
+
+#: src/users/user-settings.c:394
+msgid "Check that this character is not used"
+msgstr "Verficaţi ca acest caracter să nu fie folosit"
+
+#: src/users/user-settings.c:442
+msgid "Home directory should not be empty"
+msgstr "Directorului propriu nu ar trebui să fie nul"
+
+#: src/users/user-settings.c:443
+msgid "Make sure you provide a home directory"
+msgstr "Verificaţi numele directorului propriu"
+
+#: src/users/user-settings.c:445
+msgid "Incomplete path in home directory"
+msgstr "Cale incompletă pentru directorul propriu"
+
+#: src/users/user-settings.c:446
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>"
+msgstr ""
+"Introduceţi calea completă pentru directorul propriu\n"
+"<span size=\"smaller\">de ex.: /home/alex</span>"
+
+#: src/users/user-settings.c:449
+msgid "Home directory of the \"root\" user should not be modified"
+msgstr "Directorul propriu al utilizatorului „root” nu ar trebui modificat"
+
+#: src/users/user-settings.c:482
+msgid "Invalid user ID"
+msgstr "ID utilizator invalid"
+
+#: src/users/user-settings.c:483
+msgid "User ID must be a positive number"
+msgstr "ID-ul utilizatorului trebuie să fie un număr pozitiv"
+
+#: src/users/user-settings.c:485
+msgid "User ID of the \"root\" user should not be modified"
+msgstr "ID-ul utilizatorului „root” nu ar trebui modificat"
+
+#: src/users/user-settings.c:502
+msgid ""
+"Several users may share a single user ID, but it's not common and may lead "
+"to security problems"
+msgstr ""
+"E posibil ca mai mulţi utilizatori să împartă acelaşi ID, dar nu este recomandabil şi poate conduce la probleme de securitate"
+
+#: src/users/user-settings.c:507
+#, c-format
+msgid "User ID %s already exists"
+msgstr "ID-ul utilizator %s există deja"
+
+#: src/users/user-settings.c:524
+msgid "Incomplete path in shell"
+msgstr "Cale incompletă pentru shell"
+
+#: src/users/user-settings.c:525
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/sh</span>"
+msgstr ""
+"Introduceţi o cale completă pentru shell\n"
+"<span size=\"smaller\">de ex.: /bin/sh</span>"
+
+#: src/users/user-settings.c:547
+msgid "Password should not be empty"
+msgstr "Parola nu ar trebui să fie nulă"
+
+#: src/users/user-settings.c:548
+msgid "A password must be provided"
+msgstr "Trebuie să alegeţi o parolă"
+
+#: src/users/user-settings.c:550
+msgid "Password confirmation isn't correct"
+msgstr "Parolele nu sunt identice"
+
+#: src/users/user-settings.c:551
+msgid "Check that you have provided the same password in both text fields"
+msgstr "Verificaţi ca parolele din cele două câmpuri să fie identice"
+
+#: src/users/user-settings.c:827
+#, c-format
+msgid "Settings for User %s"
+msgstr "Setări pentru utilizatorul %s"
+
+#: src/users/users-table.c:45
+msgid "User"
+msgstr "Utilizator"
+
+#: src/users/users-table.c:46
+msgid "Home"
+msgstr "Acasă"
+
+#: src/users/users-table.c:47
+msgid "User details"
+msgstr "Detalii utilizator"
+
+#: src/users/users-table.c:48
+msgid "UID"
+msgstr "UID"
+
+#: src/users/users-table.c:49
+msgid "Shell"
+msgstr "Shell"
+
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Adăugaţi sau ştergeţi utilizatori şi grupuri"
+
