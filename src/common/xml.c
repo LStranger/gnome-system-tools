@@ -26,8 +26,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <glib.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
+#include <tree.h> /* libxml */
+#include <parser.h>/* libxml */
 
 #include "xml.h"
 

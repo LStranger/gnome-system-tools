@@ -3,9 +3,13 @@
 SUBDIRS = e-map
 
 INCLUDES = \
-	-I$(top_srcdir)/src/common \
-	-I$(top_srcdir)/intl \
-	$(GNOME_INCLUDEDIR)
+	-I$(top_srcdir)/src/common 	\
+	-I$(top_srcdir)/intl 		\
+	$(GNOME_INCLUDEDIR)		\
+	$(GNOME_CFLAGS) 		\
+	$(GDK_PIXBUF_CFLAGS) 		\
+	$(LIBGLADE_CFLAGS)		\
+	$(GNOME_XML_CFLAGS)
 
 bin_PROGRAMS = time-admin
 
@@ -13,10 +17,8 @@ time_admin_SOURCES = \
 	main.c \
 	tz.c tz.h \
 	tz-map.c tz-map.h \
- 	timeserv.c timeserv.h \
- 	transfer.c transfer.h
-
-time_admin_CFLAGS = $(GNOME_CFLAGS) $(GDK_PIXBUF_CFLAGS) $(LIBGLADE_CFLAGS)
+	timeserv.c timeserv.h \
+	transfer.c transfer.h
 
 time_admin_LDADD = \
 $(GNOME_LIBDIR) \

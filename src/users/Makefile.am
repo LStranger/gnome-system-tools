@@ -1,9 +1,13 @@
 ## Process this file with automake to produce Makefile.in
 
 INCLUDES = \
-	-I$(top_srcdir)/src/common \
-	-I$(top_srcdir)/intl \
-	$(GNOME_INCLUDEDIR)
+	-I$(top_srcdir)/src/common 	\
+	-I$(top_srcdir)/intl 		\
+	$(GNOME_INCLUDEDIR)		\
+	$(GNOME_CFLAGS) 		\
+	$(GDK_PIXBUF_CFLAGS) 		\
+	$(LIBGLADE_CFLAGS)		\
+	$(GNOME_XML_CFLAGS)
 
 bin_PROGRAMS = users-admin
 
@@ -12,7 +16,7 @@ users_admin_SOURCES = \
 	callbacks.c callbacks.h \
 	transfer.c transfer.h
 
-users_admin_CFLAGS = $(GNOME_CFLAGS) $(GDK_PIXBUF_CFLAGS) $(LIBGLADE_CFLAGS)
+users_admin_CFLAGS = 
 
 users_admin_LDADD = \
 $(GNOME_LIBDIR) \
