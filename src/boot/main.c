@@ -52,10 +52,6 @@ static XstDialogSignal signals[] = {
 	{ NULL }
 };
 
-static void set_access_sensitivity (void)
-{
-}
-
 static void
 update_complexity (void)
 {
