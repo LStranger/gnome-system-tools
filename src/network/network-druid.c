@@ -371,6 +371,8 @@ network_druid_set_page_next (GnomeDruid *druid)
 				druid_data->cxn->type = network_druid_selected_option (druid);
 		
 			if (druid_data->cxn->type == GST_CONNECTION_PPP) {
+				callbacks_check_dialer (druid_data->window, tool);
+				
 				druid_data->current_page = NETWORK_DRUID_PPP_1;
 				next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
 										     "network_connection_ppp_page1"));

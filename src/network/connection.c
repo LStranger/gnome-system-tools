@@ -1957,6 +1957,8 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 		fill_ppp (cxn);
 		fill_ppp_adv (cxn);
 
+		callbacks_check_dialer (window, tool);
+
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 	} else if (cxn->type == GST_CONNECTION_WLAN) {
 		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
