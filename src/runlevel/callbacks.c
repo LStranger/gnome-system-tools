@@ -75,7 +75,7 @@ service_get_parameters (gchar *script)
 		parameters_list = g_list_append (parameters_list, param);
 	}
 
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);	
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
 }
 
 /* callbacks */
@@ -333,7 +333,10 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 
 	/* we don't need this menu anymore */
 	gtk_option_menu_remove_menu (GTK_OPTION_MENU (option_menu));
-	g_list_free (parameters_list);
 	g_free (description);
 	g_free (script);
+
+	/* we need to free the list and put it again to NULL, it may be used again */
+	g_list_free (parameters_list);
+	parameters_list = NULL;
 }
