@@ -71,7 +71,7 @@ load_icon (char *file, GdkPixmap **pixmap, GdkBitmap **mask)
 	if (!pb)
 		return;
 	
-	pb2 = gdk_pixbuf_scale_simple (pb, 16, 16, GDK_INTERP_BILINEAR);
+	pb2 = gdk_pixbuf_scale_simple (pb, 24, 24, GDK_INTERP_BILINEAR);
 	gdk_pixbuf_unref (pb);
 	
 	gdk_pixbuf_render_pixmap_and_mask (pb2, pixmap, mask, 127);
@@ -84,7 +84,7 @@ init_icons (void)
 	ConnectionType i;
 	char *icons[CONNECTION_LAST] = {
 		"networking.png",
-		"networking.png",
+		"connection-ethernet.png",
 		"gnome-laptop.png",
 		"connection-modem.png"
 	};
@@ -105,24 +105,23 @@ update_row (Connection *cxn)
 {
 	GtkWidget *clist;
 	int row;
-	char *s;
 
 	clist = tool_widget_get ("connection_list");
 
-	s = g_strdup_printf ("%s: %s", cxn->device, cxn->description);
-	
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
-	
-	gtk_clist_set_pixmap (GTK_CLIST (clist), row, 0, 
-			      active_pm[cxn->active ? 1 : 0], 
-			      active_mask[cxn->active ? 1 : 0]);
 
-	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1, s, GNOME_PAD_SMALL,
+	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->device, GNOME_PAD_SMALL,
 			       mini_pm[cxn->type], mini_mask[cxn->type]);
+	
+	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1,
+			       cxn->active ? _("Active") : _("Inactive"),
+			       GNOME_PAD_SMALL,
+			       active_pm[cxn->active ? 1 : 0], 
+			       active_mask[cxn->active ? 1 : 0]);
+
+	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->description);
 
 	tool_set_modified (TRUE);
-
-	g_free (s);
 }
 
 static void
@@ -178,7 +177,7 @@ connection_new_from_type (ConnectionType type)
 	/* set up some defaults */
 	cxn->autoboot = TRUE;
 	cxn->dhcp_dns = TRUE;
-	cxn->ip_config = IP_DHCP;
+	cxn->ip_config = cxn->tmp_ip_config = IP_DHCP;
 
 	cxn->ip      = g_strdup ("10.0.1.10");
 	cxn->subnet  = g_strdup ("255.255.0.0");
@@ -195,10 +194,33 @@ connection_free (Connection *cxn)
 #warning FIXME: implement
 }
 
+static void
+update_status (Connection *cxn)
+{
+	gnome_pixmap_load_file (GNOME_PIXMAP (W ("status_icon")),
+				cxn->active
+				? PIXMAPS_DIR "/gnome-light-on.png"
+				: PIXMAPS_DIR "/gnome-light-off.png");
+
+	gtk_label_set_text (GTK_LABEL (W("status_label")),
+			    cxn->active
+			    ? _("This device is currently active.")
+			    : _("This device is not currently active."));
+
+	gtk_label_set_text (GTK_LABEL (W("status_button_label")),
+			    cxn->active
+			    ? _("Deactivate")
+			    : _("Activate"));
+}
+
 void
 on_status_button_clicked (GtkWidget *w, Connection *cxn)
 {
-	
+	cxn->active = !cxn->active;
+
+	connection_set_modified (cxn, TRUE);
+	update_status (cxn);
+	update_row (cxn);
 }
 
 void
@@ -335,29 +357,78 @@ fill_general (Connection *cxn)
 	gtk_entry_set_text (GTK_ENTRY (W ("connection_desc")),
 			    cxn->description);
 
-	gnome_pixmap_load_file (GNOME_PIXMAP (W ("status_icon")),
-				cxn->active
-				? PIXMAPS_DIR "/gnome-light-on.png"
-				: PIXMAPS_DIR "/gnome-light-off.png");
-
-	gtk_label_set_text (GTK_LABEL (W("status_label")),
-			    cxn->active
-			    ? _("This device is currently active.")
-			    : _("This device is not currently active."));
-
-	gtk_label_set_text (GTK_LABEL (W("status_button_label")),
-			    cxn->active
-			    ? _("Deactivate")
-			    : _("Activate"));
+	update_status (cxn);
 
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_boot")), cxn->autoboot);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_dhcp")), cxn->dhcp_dns);
 }
 
 static void
+update_ip_config (Connection *cxn)
+{
+	IPConfigType ip;
+
+	ip = cxn->tmp_ip_config;
+
+	gtk_widget_set_sensitive (W ("status_dhcp"), ip != IP_MANUAL);
+	gtk_widget_set_sensitive (W ("ip_table"), ip == IP_MANUAL);
+}
+
+static void
+ip_config_menu_cb (GtkWidget *w, gpointer data)
+{
+	Connection *cxn;
+	IPConfigType ip;
+
+	cxn = gtk_object_get_user_data (GTK_OBJECT (w));
+
+	if (cxn->frozen)
+		return;
+
+	ip = GPOINTER_TO_INT (data);
+
+	if (cxn->tmp_ip_config == ip)
+		return;
+
+	cxn->tmp_ip_config = GPOINTER_TO_INT (data);
+
+	connection_set_modified (cxn, TRUE);
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_dhcp")),
+				      ip != IP_MANUAL);
+
+	update_ip_config (cxn);
+}
+
+static void
 fill_ip (Connection *cxn)
 {
-	gtk_option_menu_set_history (GTK_OPTION_MENU (W ("connection_config")), cxn->ip_config);
+	GtkWidget *menu, *menuitem, *omenu;
+	IPConfigType i;
+
+	char *blah[] = {
+		N_("Manual"),
+		N_("DHCP"),
+		N_("BOOTP")
+	};
+
+	omenu = W ("connection_config");
+
+	menu = gtk_menu_new ();
+	for (i = 0; i < 3; i++) {
+		menuitem = gtk_menu_item_new_with_label (_(blah[i]));
+		gtk_object_set_user_data (GTK_OBJECT (menuitem), cxn);
+		gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
+				    GTK_SIGNAL_FUNC (ip_config_menu_cb),
+				    GINT_TO_POINTER (i));
+		gtk_menu_append (GTK_MENU (menu), menuitem);
+	}
+	gtk_widget_show_all (menu);
+
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), cxn->ip_config);	
+
+	update_ip_config (cxn);
 
 	gtk_entry_set_text (GTK_ENTRY (W ("ip_address")), cxn->ip);
 	gtk_entry_set_text (GTK_ENTRY (W ("ip_subnet")), cxn->subnet);
@@ -391,6 +462,7 @@ hookup_callbacks (Connection *cxn)
 		{ "on_connection_apply_clicked", on_connection_apply_clicked },
 		{ "on_connection_close_clicked", on_connection_close_clicked },
 		{ "on_connection_config_dialog_delete_event", on_connection_config_dialog_delete_event },
+		{ "on_status_button_clicked", on_status_button_clicked },
 		{ "connection_modified", connection_modified },
 		{ "connection_destroy", connection_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },

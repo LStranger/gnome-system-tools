@@ -152,6 +152,9 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	
 	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("statichost_list")), 0, TRUE);
 	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("statichost_list")), 1, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("connection_list")), 0, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("connection_list")), 1, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("connection_list")), 2, TRUE);
 }
 
 void
