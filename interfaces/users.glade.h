@@ -46,7 +46,6 @@ gchar *s = N_("Add User...");
 gchar *s = N_("Settings...");
 gchar *s = N_("Password...");
 gchar *s = N_("Delete");
-gchar *s = N_("Show system users");
 gchar *s = N_("Users");
 gchar *s = N_("Users may be grouped to share resources with others.");
 gchar *s = N_("Add Group...");
@@ -69,6 +68,7 @@ gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
 gchar *s = N_("Defaults");
+gchar *s = N_("Show system users and groups");
 gchar *s = N_("window2");
 gchar *s = N_("EXPERIMENTAL NIS support.\n"
               "It's only available if You have NIS\n"
