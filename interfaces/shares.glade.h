@@ -44,6 +44,7 @@ gchar *s = N_("Add");
 gchar *s = N_("Remove");
 gchar *s = N_("Settings");
 gchar *s = N_("NFS exports");
+gchar *s = N_(" Advanced >> ");
 gchar *s = N_("Import Settings");
 gchar *s = N_("Type:");
 gchar *s = N_("Host:");

@@ -6,7 +6,7 @@
   <program_name>time-admin</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <pixmaps_directory>/usr/local/share/helix-setup-tools/pixmaps</pixmaps_directory>
   <language>C</language>
   <gnome_support>True</gnome_support>
   <gettext_support>True</gettext_support>
@@ -20,6 +20,11 @@
   <width>405</width>
   <height>315</height>
   <visible>False</visible>
+  <signal>
+    <name>delete_event</name>
+    <handler>delete_event</handler>
+    <last_modification_time>Tue, 22 Aug 2000 09:57:56 GMT</last_modification_time>
+  </signal>
   <title>Time Administration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>

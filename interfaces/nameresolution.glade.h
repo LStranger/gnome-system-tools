@@ -37,7 +37,4 @@ gchar *s = N_("Add IP");
 gchar *s = N_("Remove IP");
 gchar *s = N_("Set aliases");
 gchar *s = N_("Static names");
-gchar *s = N_("Name Resolution Administration");
-gchar *s = N_("Scanning your system configuration.\n"
-              "\n"
-              "This could take a few seconds; please hold on in the meantime.");
+gchar *s = N_(" Advanced >> ");

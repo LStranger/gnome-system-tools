@@ -21,3 +21,4 @@ gchar *s = N_(".");
 gchar *s = N_("Use DHCP server");
 gchar *s = N_("Enable automatically at boot");
 gchar *s = N_("Primary networking");
+gchar *s = N_(" Advanced >> ");

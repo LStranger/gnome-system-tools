@@ -117,6 +117,16 @@ static gboolean tool_interface_load()
 		tool_context->top_window = tool_widget_get (path);
 		g_free (path);
 		
+		if (!tool_context->top_window)
+		{
+			path = g_strjoin ("_", tool_context->task, "admin", NULL);
+			tool_context->top_window = tool_widget_get (path);
+			g_free (path);
+		}
+		
+		if (!tool_context->top_window)
+		        g_error ("Undefined toplevel window in Glade file.");
+
 		return TRUE;
 	}
 	
@@ -468,6 +478,13 @@ static void reply_cb(gint val, gpointer data)
 }
 
 
+void tool_user_close(GtkWidget *widget, gpointer data)
+{
+	/* TODO: Check for changes and optionally ask for confirmation */
+	gtk_main_quit ();
+}
+
+
 ToolContext *tool_init(gchar *task, int argc, char *argv[])
 {
 	ToolContext *tc;
@@ -476,7 +493,6 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
 
 	s = g_strjoin ("-", task, "admin", NULL);
 	gnome_init (s, VERSION, argc, argv);
-	g_free (s);
 
 	glade_gnome_init ();
 	tc = tool_context_new (task);
@@ -502,10 +518,19 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
 	tool_config_load ();
 	tool_splash_hide ();
 
+	/* Connect the close and delete signals to generic handlers */
+
+	gtk_signal_connect (GTK_OBJECT (tool_widget_get ("close")),
+			    "clicked", tool_user_close, NULL);
+
+	gtk_signal_connect (GTK_OBJECT (tool_get_top_window ()),
+			    "delete_event", tool_user_close, NULL);
+
 	/* Make sure apply starts out as insensitive */
 
 	w0 = tool_widget_get ("apply");
 	if (w0) gtk_widget_set_sensitive (w0, FALSE);
 
+	g_free (s);
 	return (tc);
 }
