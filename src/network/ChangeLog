@@ -1,5 +1,11 @@
 2001-12-20  Arturo Espinosa Aldama  <arturo@ximian.com>
 
+	* transfer.c (transfer_string_list_gui_to_xml): Skip
+	(transfer_string_is_empty): Check if a string is not
+	composed of alnums.
+	(transfer_string_list_gui_to_xml): skip empty lines.
+	This avoids empty entries in /etc/resolv.conf.
+
 	* connection.c (connection_init_clist): Made the colum
 	titles passive: they don't do anything.
 

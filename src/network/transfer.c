@@ -20,6 +20,8 @@
 
 /* Functions for transferring information between XML tree and UI */
 
+#include <ctype.h>
+
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
@@ -166,6 +168,18 @@ transfer_string_list_xml_to_gui (XstTool *tool, xmlNodePtr root)
 }
 
 
+static gboolean
+transfer_string_is_empty (gchar *str)
+{
+	gchar    *s;
+
+	for (s = str; *s; s++)
+		if (isalnum (*s))
+			return FALSE;
+	return TRUE;
+}
+
+
 static void
 transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
@@ -187,13 +201,13 @@ transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 
 		end = text + strlen (text);
 		for (; text < end; text = pos + 1) {
-			if (!*text)
-				continue;
-
 			pos = strchr (text, '\n');
 			if (pos)
 				*pos = 0;
 			
+			if (transfer_string_is_empty (text))
+				continue;
+
 			node = xst_xml_element_add (root, transfer_string_list_table [i].xml_path);
 			xst_xml_element_set_content (node, text);
 
