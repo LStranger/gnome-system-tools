@@ -45,17 +45,17 @@ GtkWidget *net_user_table;
 
 const gchar *user_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
-  <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"4\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
+  <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"my_cell\" compare=\"id_compare\"/> \
+  <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
+  <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
+  <ETableColumn model_col=\"4\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
 </ETableSpecification>";
 
 const gchar *group_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"1\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
+  <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
+  <ETableColumn model_col=\"1\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"my_cell\" compare=\"id_compare\"/> \
 </ETableSpecification>";
 
 const gchar *net_group_spec = "\
@@ -373,10 +373,14 @@ static ETableExtras *
 create_extras (void)
 {
 	ETableExtras *extras;
+	ECell *ec;
 
 	extras = e_table_extras_new ();
 	e_table_extras_add_compare (extras, "id_compare", id_compare);
 
+	ec = e_cell_text_new (NULL, GTK_JUSTIFY_CENTER);
+	e_table_extras_add_cell (extras, "my_cell", ec);
+	
 	return extras;
 }
 static void
