@@ -382,7 +382,8 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 	GstDialog *dialog;
 	GstTimeTool *time_tool;
 	gint result;
-	gchar *tz_name, *old_tz_name;
+	gchar *tz_name = NULL;
+	gchar *old_tz_name = NULL;
 	TzLocation *tz_location;
 	gint correction;
 
@@ -402,7 +403,7 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 
 	old_tz_name = gst_time_tool_get_time_zone_name (time_tool);
 
-	if (strcmp (tz_name, old_tz_name) != 0) {
+	if ((!old_tz_name) || ((old_tz_name) && (strcmp (tz_name, old_tz_name) != 0))) {
 		correction = tz_location_set_locally (tz_location);
 		gst_time_tool_set_time_zone_name (time_tool, tz_name);
 		gst_time_set_from_localtime (time_tool, correction);
