@@ -94,13 +94,13 @@ boot_value_at (ETableModel *etc, int col, int row, void *data)
 		return boot_value_label (node);
 		break;
 	case COL_TYPE:
-		return boot_value_type (node);
+		return boot_value_type (node, FALSE);
 		break;
 	case COL_IMAGE:
-		return boot_value_image (node);
+		return boot_value_image (node, FALSE);
 		break;
 	case COL_DEV:
-		return boot_value_dev (node);
+		return boot_value_dev (node, FALSE);
 		break;
 	default:
 		return NULL;
@@ -227,7 +227,7 @@ boot_value_label (xmlNodePtr node)
 }
 
 void *
-boot_value_type (xmlNodePtr node)
+boot_value_type (xmlNodePtr node, gboolean bare)
 {
 	xmlNodePtr n;
 	gchar *label, *def;
@@ -249,6 +249,9 @@ boot_value_type (xmlNodePtr node)
 	if (!buf)
 		buf = g_strdup (_("Unknown"));
 
+	if (bare)
+		return buf;
+
 	label = xml_get_child_content (node, "label");
 	def = xml_get_child_content (xml_doc_get_root (tool->config), "default");
 
@@ -263,7 +266,7 @@ boot_value_type (xmlNodePtr node)
 }
 
 void *
-boot_value_image (xmlNodePtr node)
+boot_value_image (xmlNodePtr node, gboolean bare)
 {
 	gchar *buf;
 	
@@ -272,12 +275,15 @@ boot_value_image (xmlNodePtr node)
 	buf = xml_get_child_content (node, "image");
 	if (!buf)
 		return NULL;
+
+	if (bare)
+		return buf;
 	
 	return g_strdup_printf ("  %s", buf);
 }
 
 void *
-boot_value_dev (xmlNodePtr node)
+boot_value_dev (xmlNodePtr node, gboolean bare)
 {
 	gchar *buf;
 	
@@ -286,6 +292,9 @@ boot_value_dev (xmlNodePtr node)
 	buf = xml_get_child_content (node, "other");
 	if (!buf)
 		return NULL;
+
+	if (bare)
+		return buf;
 	
 	return g_strdup_printf ("  %s", buf);
 }

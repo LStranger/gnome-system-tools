@@ -40,9 +40,9 @@ extern void create_table (xmlNodePtr root);
 extern void boot_table_update_state (void);
 
 void *boot_value_label (xmlNodePtr node);
-void *boot_value_type (xmlNodePtr node);
-void *boot_value_image (xmlNodePtr node);
-void *boot_value_dev (xmlNodePtr node);
+void *boot_value_type (xmlNodePtr node, gboolean bare);
+void *boot_value_image (xmlNodePtr node, gboolean bare);
+void *boot_value_dev (xmlNodePtr node, gboolean bare);
 void *boot_value_root (xmlNodePtr node);
 
 void boot_value_set_default (xmlNodePtr node);

@@ -57,19 +57,17 @@ boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 	for (i = 0; boot_types[i]; i++)
 		list = g_list_prepend (list, (void *)boot_types[i]);
 
-	gtk_entry_set_text (GTK_ENTRY (state->type->entry), boot_value_type (node));
-
 	gtk_combo_set_popdown_strings (state->type, list);
 
 	/* All entries */
 	my_gtk_entry_set_text (state->basic_name, boot_value_label (node));
 	my_gtk_entry_set_text (state->adv_name, boot_value_label (node));
-	my_gtk_entry_set_text (state->type->entry, boot_value_type (node));
+	my_gtk_entry_set_text (state->type->entry, boot_value_type (node, TRUE));
 
 	if (xml_element_find_first (node, "image"))
 	{
 		/* We have Linux, so hide device, show image and 'other' frame */
-		my_gtk_entry_set_text (state->image_entry, boot_value_image (node));
+		my_gtk_entry_set_text (state->image_entry, boot_value_image (node, TRUE));
 
 		gtk_widget_show (state->image_label);
 		gtk_widget_show (GTK_WIDGET (state->image));
@@ -82,7 +80,7 @@ boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 
 	else
 	{
-		my_gtk_entry_set_text (state->device->entry, boot_value_dev (node));
+		my_gtk_entry_set_text (state->device->entry, boot_value_dev (node, TRUE));
 		
 		gtk_widget_hide (GTK_WIDGET (state->image));
 		gtk_widget_hide (state->image_label);
