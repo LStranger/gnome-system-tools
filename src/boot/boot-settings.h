@@ -5,29 +5,35 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
+#include "boot-image.h"
+
+
+
 typedef struct {
-	GtkWidget *dialog;
-	GtkEntry *basic_name;
+	GtkWidget *top;
+	BootImage *image;
+	GladeXML *xml;
+
+	GtkEntry *name;
 	GtkCombo *type;
 
-	GtkWidget *settings;
-	GtkEntry *adv_name;
 	GtkWidget *device_label;
-	GtkCombo *device;
+	GtkCombo  *device;
 	GtkWidget *image_label;
-	GtkWidget *image;
-	GtkEntry *image_entry;
-
+	GtkWidget *image_widget;
+	GtkEntry  *image_entry;
 	GtkWidget *optional;
 	GtkEntry *root;
 	GtkEntry *append;
+} BootSettingsGui;
 
-	XstDialogComplexity complexity;
-} BootSettingsDialog;
+BootSettingsGui *boot_settings_gui_new      (BootImage *image, GtkWidget *parent);
+void             boot_settings_gui_setup    (BootSettingsGui *gui, GtkWidget *top);
+gboolean         boot_settings_gui_save     (BootSettingsGui *gui);
+void             boot_settings_gui_error    (GtkWindow *parent, gchar *error);
+void             boot_settings_gui_destroy  (BootSettingsGui *gui);
 
-BootSettingsDialog *boot_settings_prepare (xmlNodePtr node);
-void boot_settings_affect (BootSettingsDialog *state);
-
-extern void on_boot_settings_clicked (GtkButton *button, gpointer user_data);
+/* Callbacks */ 
+void             on_boot_settings_clicked   (GtkButton *button, gpointer data);
 
 #endif /* BOOT_SETTINGS_H */

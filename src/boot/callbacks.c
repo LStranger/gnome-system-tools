@@ -47,8 +47,8 @@ reply_cb (gint val, gpointer data)
 
 /* Main window callbacks */
 
-extern void
-on_boot_delete_clicked (GtkButton *button, gpointer user_data)
+void
+on_boot_delete_clicked (GtkButton *button, gpointer data)
 {
 	xmlNodePtr node;
 	gchar *label, *buf;
@@ -75,8 +75,8 @@ on_boot_delete_clicked (GtkButton *button, gpointer user_data)
 	actions_set_sensitive (FALSE);
 }
 
-extern void
-on_boot_default_clicked (GtkButton *button, gpointer user_data)
+void
+on_boot_default_clicked (GtkButton *button, gpointer data)
 {
 	xmlNodePtr node;
 	gchar *label;
@@ -89,8 +89,8 @@ on_boot_default_clicked (GtkButton *button, gpointer user_data)
 	xst_dialog_modify (tool->main_dialog);
 }
 
-extern void
-on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer user_data)
+void
+on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer data)
 {
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout"),
 						 gtk_toggle_button_get_active (toggle));
@@ -138,29 +138,3 @@ buttons_set_visibility (void)
 		break;
 	}
 }
-
-void
-boot_settings_dialog_complexity (gboolean state)
-{
-	GtkRequisition req;
-	GtkWidget *win;
-	gint i;
-	gchar *widgets[] = { "boot_settings_append", "boot_settings_root",
-			     "boot_settings_append_label", "boot_settings_root_label",
-			     NULL };
-
-	if (!state) {
-		for (i = 0; widgets[i]; i++)
-			gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
-	} else {
-		for (i = 0; widgets[i]; i++)
-			gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
-	}
-
-	/* Resize to minimum size */
-
-	win = xst_dialog_get_widget (tool->main_dialog, "boot_settings_dialog");
-	gtk_widget_size_request (win, &req);
-	gtk_window_set_default_size (GTK_WINDOW (win), req.width, req.height);
-}
-

@@ -27,6 +27,8 @@
 #include <gnome.h>
 #include <gal/e-table/e-table-simple.h>
 
+#include "boot-image.h"
+
 enum {
 	COL_DEFAULT,
 	COL_LABEL,
@@ -40,20 +42,26 @@ enum {
 extern void create_table (xmlNodePtr root);
 extern void boot_table_update_state (void);
 
-void *boot_value_label (xmlNodePtr node);
-void *boot_value_type (xmlNodePtr node, gboolean bare);
-void *boot_value_image (xmlNodePtr node, gboolean bare);
-void *boot_value_dev (xmlNodePtr node, gboolean bare);
-void *boot_value_root (xmlNodePtr node);
-void *boot_value_append (xmlNodePtr node);
+void             *boot_value_label       (xmlNodePtr node);
+gboolean          boot_value_default     (const gchar *label);
+XstBootImageType  boot_value_type        (xmlNodePtr node);
+gchar            *boot_value_type_char   (xmlNodePtr node, gboolean bare);
+void             *boot_value_image       (xmlNodePtr node, gboolean bare);
+void             *boot_value_dev         (xmlNodePtr node, gboolean bare);
+void             *boot_value_root        (xmlNodePtr node);
+void             *boot_value_append      (xmlNodePtr node);
+
+
+gchar            *type_to_label          (XstBootImageType type);
+XstBootImageType  label_to_type          (const gchar *label);
 
 void boot_value_set_default (xmlNodePtr node);
-void boot_value_set_label (xmlNodePtr node, gchar *val);
-void boot_value_set_type (xmlNodePtr node, gchar *val);
-void boot_value_set_image (xmlNodePtr node, gchar *val);
+void boot_value_set_label (xmlNodePtr node, const gchar *val);
+void boot_value_set_image (xmlNodePtr node, const gchar *val);
 void boot_value_set_dev (xmlNodePtr node, gchar *val);
-void boot_value_set_root (xmlNodePtr node, gchar *val);
-void boot_value_set_append (xmlNodePtr node, gchar *val);
+void boot_value_set_root (xmlNodePtr node, const gchar *val);
+void boot_value_set_append (xmlNodePtr node, const gchar *val);
+void boot_value_set_type (xmlNodePtr node, XstBootImageType type);
 
 xmlNodePtr get_selected_node (void);
 void boot_table_delete (void);

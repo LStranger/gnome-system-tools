@@ -1,8 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* callbacks.h: this file is part of boot-admin, a ximian-setup-tool frontend 
+/* boot-image.h: this file is part of boot-admin, a ximian-setup-tool frontend 
  * for boot administration.
  * 
- * Copyright (C) 2000-2001 Ximian, Inc.
+ * Copyright (C) 2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -21,20 +21,37 @@
  * Authors: Tambet Ingo <tambet@ximian.com>.
  */
 
-#ifndef __CALLBACKS_H
-#define __CALLBACKS_H
+#ifndef BOOT_IMAGE_H
+#define BOOT_IMAGE_H
 
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
-void      on_boot_delete_clicked    (GtkButton *button, gpointer data);
-void      on_boot_settings_clicked  (GtkButton *button, gpointer data);
-void      on_boot_add_clicked       (GtkButton *button, gpointer data);
-void      on_boot_default_clicked   (GtkButton *button, gpointer data);
-void      on_boot_prompt_toggled    (GtkToggleButton *toggle, gpointer data);
+#include "xst.h"
 
-void      actions_set_sensitive     (gboolean state);
-void      buttons_set_visibility    (void);
+typedef enum {
+	TYPE_UNKNOWN,
+	TYPE_WINNT,
+	TYPE_WIN9X,
+	TYPE_DOS,
+	TYPE_LINUX
+} XstBootImageType;
 
-#endif /* CALLBACKS_H */
+typedef struct {
+	xmlNodePtr node;
+	gboolean new;
+	XstBootImageType type;
+	gboolean is_default;
+	
+	gchar *label;
+	gchar *image;
+	gchar *root;
+	gchar *append;	       	
+} BootImage;
 
+BootImage *boot_image_new         (void);
+BootImage *boot_image_get_by_node (xmlNodePtr node);
+void       boot_image_save        (BootImage *image);
+void       boot_image_destroy     (BootImage *image);
+
+#endif /* BOOT_IMAGE_H */

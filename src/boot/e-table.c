@@ -88,13 +88,13 @@ boot_value_at (ETableModel *etc, int col, int row, void *data)
 		return boot_value_label (node);
 		break;
 	case COL_TYPE:
-		return boot_value_type (node, FALSE);
+		return boot_value_type_char (node, FALSE);
 		break;
 	case COL_IMAGE:
 		return boot_value_image (node, FALSE);
 		break;
 	case COL_DEV:
-		return boot_value_dev (node, FALSE);
+		return boot_value_image (node, FALSE);
 		break;
 	default:
 		return NULL;
@@ -298,7 +298,7 @@ boot_value_label (xmlNodePtr node)
 	return xst_xml_get_child_content (node, "label");
 }
 
-static gboolean
+gboolean
 boot_value_default (const gchar *label)
 {
 	gchar *def;
@@ -315,37 +315,87 @@ boot_value_default (const gchar *label)
 	return retval;
 }
 
-void *
-boot_value_type (xmlNodePtr node, gboolean bare)
+typedef struct {
+	gchar *label;
+	XstBootImageType type;
+} XstBootImageTypeTable;
+
+static XstBootImageTypeTable boot_image_type_table[] = {
+	{ N_("Unknown"), TYPE_UNKNOWN },
+	{ N_("Windows NT"), TYPE_WINNT },
+	{ N_("Windows 9x"), TYPE_WIN9X },
+	{ N_("Dos"), TYPE_DOS },
+	{ N_("Linux"), TYPE_LINUX },
+	{ NULL, -1 }	
+};
+
+gchar *
+type_to_label (XstBootImageType type)
+{
+	gint i;
+
+	for (i = 0; boot_image_type_table[i].label; i++)
+		if (type == boot_image_type_table[i].type)
+			return g_strdup (boot_image_type_table[i].label);
+
+	g_warning ("type_to_label: unknown type.");
+	return g_strdup ("");
+}
+
+XstBootImageType
+label_to_type (const gchar *label)
+{
+	gint i;
+
+	for (i = 0; boot_image_type_table[i].label; i++)
+		if (!strcmp (label, boot_image_type_table[i].label))
+			return boot_image_type_table[i].type;
+
+	g_warning ("label_to_type: unknown label.");
+	return TYPE_UNKNOWN;
+}
+
+XstBootImageType
+boot_value_type (xmlNodePtr node)
 {
 	xmlNodePtr n;
-	gchar *label;
-	gchar *buf = NULL;
+	XstBootImageType type = TYPE_UNKNOWN;
 	
-	g_return_val_if_fail (node != NULL, NULL);
+	g_return_val_if_fail (node != NULL, type);
 
 	n = xst_xml_element_find_first (node, "XstPartitionType");
-	if (n)
+	if (n) {
+		gchar *buf;
+		
 		buf = xst_xml_element_get_content (n);
-
-	else
-	{
-		n = xst_xml_element_find_first (node, "image");
-		if (n)
-			buf = g_strdup (_("Linux"));
+		type =  label_to_type (buf);
+		g_free (buf);
+		return type;
 	}
 
-	if (!buf)
-		buf = g_strdup (_("Other"));
+	n = xst_xml_element_find_first (node, "image");
+	if (n)
+		type = TYPE_LINUX;
+	
+	return type;
+}
 
-	if (bare)
-		return buf;
+gchar *
+boot_value_type_char (xmlNodePtr node, gboolean bare)
+{
+	XstBootImageType type;
+	gchar *buf, *label;
 
-	label = xst_xml_get_child_content (node, "label");
-	if (label) {
-		if (boot_value_default (label))
-			buf = g_strdup_printf (_("%s (default)"), buf);
-		g_free (label);
+	type = boot_value_type (node);
+	buf = type_to_label (type);
+
+	if (!bare) {
+		label = xst_xml_get_child_content (node, "label");
+		if (label) {
+			if (boot_value_default (label))
+				buf = g_strdup_printf (_("%s (default)"), buf);
+			g_free (label);
+		}
 	}
 	
 	return buf;
@@ -359,26 +409,14 @@ boot_value_image (xmlNodePtr node, gboolean bare)
 	g_return_val_if_fail (node != NULL, NULL);
 	
 	buf = xst_xml_get_child_content (node, "image");
-	if (!buf)
-		return NULL;
+	if (!buf) {
+		buf = xst_xml_get_child_content (node, "other");
+		if (!buf)
+			return g_strdup ("");
+	}
 
-	if (bare)
-		return buf;
+	/* TODO: fix memory leak */
 	
-	return g_strdup_printf ("  %s", buf);
-}
-
-void *
-boot_value_dev (xmlNodePtr node, gboolean bare)
-{
-	gchar *buf;
-	
-	g_return_val_if_fail (node != NULL, NULL);
-
-	buf = xst_xml_get_child_content (node, "other");
-	if (!buf)
-		return NULL;
-
 	if (bare)
 		return buf;
 	
@@ -432,62 +470,114 @@ boot_value_set_default (xmlNodePtr node)
 }
 
 void
-boot_value_set_label (xmlNodePtr node, gchar *val)
+boot_value_set_label (xmlNodePtr node, const gchar *val)
 {
+	xmlNodePtr n0;
 	gchar *old_name = NULL;
 	
 	g_return_if_fail (node != NULL);
 
-	old_name = xst_xml_get_child_content (node, "label");
-	xst_xml_set_child_content (node, "label", val);
+	n0 = xst_xml_element_find_first (node, "label");
+	if (n0)
+		old_name = xst_xml_element_get_content (n0);
 	
+	if (val && strlen (val) > 0) {
+		if (!n0)
+			n0 = xst_xml_element_add (node, "label");
+		xst_xml_element_set_content (n0, val);
+	} else {
+		if (n0)
+			xst_xml_element_destroy (n0);
+
+		/* TODO: remove default label */
+		return;
+	}
+
 	if (old_name) {
 		if (boot_value_default (old_name))
 			boot_value_set_default (node);
 		g_free (old_name);
-	}
+	}	
 }
 
 void
-boot_value_set_image (xmlNodePtr node, gchar *val)
+boot_value_set_image (xmlNodePtr node, const gchar *val)
 {
+	xmlNodePtr n0;
+	
 	g_return_if_fail (node != NULL);
 
-	xst_xml_set_child_content (node, "image", val);
+	n0 = xst_xml_element_find_first (node, "image");
+	if (val && strlen (val) > 0) {
+		if (!n0)
+			n0 = xst_xml_element_add (node, "image");
+		xst_xml_element_set_content (n0, val);
+	} else {
+		if (n0)
+			xst_xml_element_destroy (n0);
+	}
 }
 
 void
 boot_value_set_dev (xmlNodePtr node, gchar *val)
 {
+	/* TODO: remove, use boot_value_set_image */
 	g_return_if_fail (node != NULL);
 
 	xst_xml_set_child_content (node, "other", val);
 }
 
 void
-boot_value_set_root (xmlNodePtr node, gchar *val)
+boot_value_set_root (xmlNodePtr node, const gchar *val)
 {
+	xmlNodePtr n0;
+	
 	g_return_if_fail (node != NULL);
 
-	xst_xml_set_child_content (node, "root", val);
+	n0 = xst_xml_element_find_first (node, "root");
+	if (val && strlen (val) > 0) {
+		if (!n0)
+			n0 = xst_xml_element_add (node, "root");
+		xst_xml_element_set_content (n0, val);
+	} else {
+		if (n0)
+			xst_xml_element_destroy (n0);
+	}
 }
 
 void
-boot_value_set_append (xmlNodePtr node, gchar *val)
+boot_value_set_append (xmlNodePtr node, const gchar *val)
 {
+	xmlNodePtr n0;
+	
 	g_return_if_fail (node != NULL);
 
-	if (strlen (val) < 1) {
-		xmlNodePtr append = xst_xml_element_find_first (node, "append");
-
-		if (append)
-			xst_xml_element_destroy (append);
+	n0 = xst_xml_element_find_first (node, "append");
+	if (val && strlen (val) > 0) {
+		if (!n0)
+			n0 = xst_xml_element_add (node, "append");
+		xst_xml_element_set_content (n0, val);
 	} else {
-		if (strstr (val, " ") && !strstr (val, "\""))
-			val = g_strconcat ("\"", val, "\"", NULL);
-	
-		xst_xml_set_child_content (node, "append", val);
+		if (n0)
+			xst_xml_element_destroy (n0);
 	}
+}
+
+void
+boot_value_set_type (xmlNodePtr node, XstBootImageType type)
+{
+	gchar *buf;
+	xmlNodePtr n0;
+	
+	g_return_if_fail (node != NULL);
+
+	buf = type_to_label (type);
+	n0 = xst_xml_element_find_first (node, "XstPartitionType");
+	if (!n0)
+		n0 = xst_xml_element_add (node, "XstPartitionType");
+
+	xst_xml_element_set_content (n0, buf);
+	g_free (buf);
 }
 
 xmlNodePtr
