@@ -183,6 +183,36 @@ adv_user_settings (xmlNodePtr node, gboolean show)
 	}
 }
 
+static gboolean
+user_filter (xmlNodePtr node)
+{
+	gchar *buf;
+	gchar **ar;
+	gboolean ret;
+
+	ret = FALSE;
+	buf = user_query_string_get ();
+	ar = g_strsplit (buf, " ", 3);
+	
+	g_free (buf);
+	
+	if (!strcmp (ar[0], "all"))
+		ret = TRUE;
+
+	else
+	{
+		buf = xst_xml_get_child_content (node, ar[1]);
+		if (buf && strstr (buf, ar[2]))
+			ret = TRUE;
+
+		g_free (buf);
+	}
+	
+	g_strfreev (ar);
+	
+	return ret;
+}
+
 gboolean
 check_node_complexity (xmlNodePtr node)
 {
@@ -201,7 +231,12 @@ check_node_complexity (xmlNodePtr node)
 	get_min_max (db_node, &min, &max);
 
 	if (!strcmp (db_node->name, "userdb"))
+	{
+		if (!user_filter (node))
+			return FALSE;
+		
 		field = g_strdup ("uid");
+	}
 
 	else if (!strcmp (db_node->name, "groupdb"))
 		field = g_strdup ("gid");
@@ -1433,4 +1468,25 @@ my_gtk_clist_append (GtkCList *list, gchar *text)
 	entry[1] = NULL;
 
 	return gtk_clist_append (list, entry);
+}
+
+
+static gchar *user_search_string;
+
+void
+user_query_string_set (gchar *str)
+{
+	if (user_search_string)
+		g_free (user_search_string);
+
+	user_search_string = g_strdup (str);
+}
+
+gchar *
+user_query_string_get (void)
+{
+	if (!user_search_string)
+		user_search_string = g_strdup ("all");
+	
+	return g_strdup (user_search_string);
 }

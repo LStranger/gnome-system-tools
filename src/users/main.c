@@ -40,6 +40,7 @@
 #include "transfer.h"
 #include "e-table.h"
 #include "callbacks.h"
+#include "e-search-bar/e-search-bar.h"
 
 XstTool *tool;
 
@@ -159,6 +160,95 @@ connect_signals (void)
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 }
 
+static ESearchBarItem user_search_menu_items[] = {
+	{ N_("Show All"), 0 },
+	{ NULL, -1}
+};
+
+static void
+user_menu_activated (ESearchBar *esb, int id, gpointer user_data)
+{
+	switch (id)
+	{
+	case 0:
+		user_query_string_set ("all");
+		tables_update_content ();
+		break;
+	default:
+		g_warning ("user_menu_activated: shouldn't be here.");
+		break;
+	}
+}
+
+enum {
+	ESB_USER_NAME,
+	ESB_USER_GID,
+};
+
+static ESearchBarItem user_search_option_items[] = {
+	{ N_("User name contains"), ESB_USER_NAME },
+	{ N_("User GID contains"), ESB_USER_GID },
+	{ NULL, -1 }
+};
+
+static void
+user_query_changed (ESearchBar *esb, gpointer user_data)
+{
+	gchar *search_word, *search_query;
+	int search_type;
+
+	gtk_object_get (GTK_OBJECT (esb),
+			"text", &search_word,
+			"option_choice", &search_type,
+			NULL);
+
+	if (search_word && strlen (search_word))
+	{
+		switch (search_type)
+		{
+		case ESB_USER_NAME:
+			search_query = g_strdup_printf ("contains login %s",
+							search_word);
+			break;
+		case ESB_USER_GID:
+			search_query = g_strdup_printf ("contains gid %s",
+							search_word);
+			break;
+		default:
+			search_query = g_strdup ("all");
+			break;
+		}
+	}
+
+	else
+		search_query = g_strdup ("all");
+	
+	user_query_string_set (search_query);
+	tables_update_content ();
+	
+	g_free (search_query);
+	g_free (search_word);
+}
+
+static void
+create_searchbar (void)
+{
+	GtkWidget *box;
+	ESearchBar *search;
+
+	box = xst_dialog_get_widget (tool->main_dialog, "user_parent");
+	
+	search = E_SEARCH_BAR (e_search_bar_new (user_search_menu_items,
+						 user_search_option_items));
+	gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (search),
+			    FALSE, FALSE, 0);
+	gtk_widget_show (GTK_WIDGET (search));
+	gtk_signal_connect (GTK_OBJECT (search), "query_changed",
+			    GTK_SIGNAL_FUNC (user_query_changed), 0);
+	gtk_signal_connect (GTK_OBJECT (search), "menu_activated",
+			    GTK_SIGNAL_FUNC (user_menu_activated), 0);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -170,6 +260,7 @@ main (int argc, char *argv[])
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
 	create_tables ();
+	create_searchbar ();
 	connect_signals ();
 
 	xst_dialog_enable_complexity (tool->main_dialog);
