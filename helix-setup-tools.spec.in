@@ -43,14 +43,20 @@ make DESTDIR=$RPM_BUILD_ROOT install
 
 %files
 %doc README AUTHORS COPYING HACKING NEWS ChangeLog doc
-%config %{sysconfdir}/pam.d/*-admin
-%config %{sysconfdir}/security/console.apps/*-admin
+%config %{sysconfdir}/pam.d/*
+%config %{sysconfdir}/security/console.apps/*
 %{_prefix}/bin/*
 %{_prefix}/sbin/*
+%{_prefix}/lib/*
+%{_prefix}/include/helix-archiver/*.h
 %{_prefix}/share/%{name}/interfaces/*.glade
 %{_prefix}/share/%{name}/scripts/*-conf
 %{_prefix}/share/%{name}/pixmaps/*.png
+%{_prefix}/share/hcm/default/*.xml
+%{_prefix}/share/hcm/glade/*.glade
 #%{_prefix}/share/control-center/System/.directory
 %{_prefix}/share/control-center/System/*.desktop
 #%{_prefix}/share/gnome/apps/Settings/System/.directory
 %{_prefix}/share/gnome/apps/Settings/System/*.desktop
+%{_prefix}/share/gnome/help/*/C/*.html
+%{_prefix}/share/locale/*/*/*.mo
