@@ -34,117 +34,101 @@
 #include "profile-settings.h"
 
 extern GstTool *tool;
-/*GList *groups_list = NULL;*/
 extern GList *groups_list;
 
 ProfileWidget profile_widgets [] = {
-	/* widget name                    xml label         widget type */
-	{ "profile_settings_name",        "name",           PROFILE_WIDGET_ENTRY },
-	{ "profile_settings_comment",     "comment",        PROFILE_WIDGET_ENTRY },
-	{ "profile_settings_home",        "home_prefix",    PROFILE_WIDGET_ENTRY },
-	{ "profile_settings_shell_entry", "shell",          PROFILE_WIDGET_ENTRY },
-	{ "profile_settings_group",       "group",          PROFILE_WIDGET_OPTION_MENU },
-	{ "profile_settings_maxdays",     "pwd_maxdays",    PROFILE_WIDGET_SPIN_BUTTON },
-	{ "profile_settings_mindays",     "pwd_mindays",    PROFILE_WIDGET_SPIN_BUTTON },
-	{ "profile_settings_between",     "pwd_warndays",   PROFILE_WIDGET_SPIN_BUTTON },
-	{ "profile_settings_minuid",      "umin",           PROFILE_WIDGET_SPIN_BUTTON },
-	{ "profile_settings_mingid",      "gmin",           PROFILE_WIDGET_SPIN_BUTTON },
-	{ "profile_settings_maxuid",      "umax",           PROFILE_WIDGET_SPIN_BUTTON },
-	{ "profile_settings_maxgid",      "gmax",           PROFILE_WIDGET_SPIN_BUTTON },
-	{NULL}
+	/* widget name                    xml label       */
+	{ "profile_settings_name",        "name"          },
+	{ "profile_settings_comment",     "comment"       },
+	{ "profile_settings_home",        "home_prefix"   },
+	{ "profile_settings_shell_entry", "shell",        },
+	{ "profile_settings_group",       "group",        },
+	{ "profile_settings_maxdays",     "pwd_maxdays",  },
+	{ "profile_settings_mindays",     "pwd_mindays",  },
+	{ "profile_settings_between",     "pwd_warndays", },
+	{ "profile_settings_minuid",      "umin",         },
+	{ "profile_settings_mingid",      "gmin",         },
+	{ "profile_settings_maxuid",      "umax",         },
+	{ "profile_settings_maxgid",      "gmax",         },
+	{ NULL }
 };
 
 void
 profile_settings_clear_dialog ()
 {
-	   GtkWidget *widget;
-	   ProfileWidget *w;
+	GtkWidget *widget;
+	ProfileWidget *w;
 
-	   for (w = profile_widgets;
-		w->name != NULL;
-		w++)
-	   {
-		   widget = gst_dialog_get_widget (tool->main_dialog, w->name);
-		   switch (w->widget_type)
-		   {
-		   case PROFILE_WIDGET_ENTRY:
-			   gtk_entry_set_text (GTK_ENTRY (widget), "");
-			   break;
-		   case PROFILE_WIDGET_SPIN_BUTTON:
-			   gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), 0);
-			   break;
-		   case PROFILE_WIDGET_OPTION_MENU:
-			   gtk_option_menu_remove_menu (GTK_OPTION_MENU (widget));
-			   break;
-		   default:
-			   g_warning ("Should not be here");
-		   }
-	   }
+	for (w = profile_widgets; w->name; w++) {
+		widget = gst_dialog_get_widget (tool->main_dialog, w->name);
+
+		if (GTK_IS_SPIN_BUTTON (widget))
+			gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), 0);
+		else if (GTK_IS_ENTRY (widget))
+			gtk_entry_set_text (GTK_ENTRY (widget), "");
+		else if (GTK_IS_OPTION_MENU (widget))
+			gtk_option_menu_remove_menu (GTK_OPTION_MENU (widget));
+		else
+			g_warning ("Should not be here");
+	}
 }
 
 void
 profile_settings_save_data (xmlNodePtr node)
 {
-	   GtkWidget *widget;
-	   ProfileWidget *w;
+	GtkWidget *widget;
+	ProfileWidget *w;
 
-	   for (w = profile_widgets;
-		w->name != NULL;
-		w++)
-	   {
-		   widget = gst_dialog_get_widget (tool->main_dialog, w->name);
-		   switch (w->widget_type)
-		   {
-		   case PROFILE_WIDGET_ENTRY:
-			   gst_xml_element_add_with_content (node, w->xml_tag, gtk_entry_get_text (GTK_ENTRY (widget)));
-			   break;
-		   case PROFILE_WIDGET_SPIN_BUTTON:
-			   gst_xml_element_add_with_content (node,
-							     w->xml_tag,
-							     g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (widget))));
-			   break;
-		   case PROFILE_WIDGET_OPTION_MENU:
-			   gst_xml_element_add_with_content (node,
-							     w->xml_tag,
-							     g_list_nth_data (groups_list, gtk_option_menu_get_history (GTK_OPTION_MENU (widget))));
-			   break;
-		   default:
-			   g_warning ("Should not be here");
-		   }
-	   }
+	for (w = profile_widgets; w->name; w++) {
+		widget = gst_dialog_get_widget (tool->main_dialog, w->name);
+
+		if (GTK_IS_SPIN_BUTTON (widget)) {
+			gst_xml_element_add_with_content (node,
+							  w->xml_tag,
+							  g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (widget))));
+		} else if (GTK_IS_ENTRY (widget)) {
+			gst_xml_element_add_with_content (node, w->xml_tag, gtk_entry_get_text (GTK_ENTRY (widget)));
+		} else if (GTK_IS_OPTION_MENU (widget)) {
+			gst_xml_element_add_with_content (node,
+							  w->xml_tag,
+							  g_list_nth_data (groups_list, gtk_option_menu_get_history (GTK_OPTION_MENU (widget))));
+		} else {
+			g_warning ("Should not be here");
+		}
+	}
 	   
-	   gst_xml_element_add_with_content (node, "mailbox_dir", "/var/mail");
-	   gst_xml_element_add_with_content (node, "skel_dir", "/etc/skel/");
-	   gst_xml_element_add_with_content (node, "login_defs", "1");
+	gst_xml_element_add_with_content (node, "mailbox_dir", "/var/mail");
+	gst_xml_element_add_with_content (node, "skel_dir",    "/etc/skel/");
+	gst_xml_element_add_with_content (node, "login_defs",  "1");
 }
 
 gchar*
 profile_settings_check (void)
 {
-	   GtkWidget *widget;
-	   gchar *value;
+	GtkWidget *widget;
+	gchar *value;
 	   
-	   widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_name");
-	   value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
-	   if (strlen (value) <= 0)
-			 return _("The profile must have a name");
+	widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_name");
+	value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
+	if (strlen (value) <= 0)
+		return _("The profile must have a name");
 
-	   widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_home");
-	   value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
-	   if (strlen (value) <= 0)
-			 return _("The profile must have a default home");
+	widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_home");
+	value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
+	if (strlen (value) <= 0)
+		return _("The profile must have a default home");
 
-	   widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
-	   value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
-	   if (strlen (value) <= 0)
-			 return _("The profile must have a default shell");
+	widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
+	value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
+	if (strlen (value) <= 0)
+		return _("The profile must have a default shell");
 
-	   widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
-	   value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
-	   if (strlen (value) <= 0)
-			 return _("The profile must have a default shell");
+	widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
+	value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
+	if (strlen (value) <= 0)
+		return _("The profile must have a default shell");
 	   
-	   return NULL;
+	return NULL;
 }
 
 void
@@ -156,53 +140,47 @@ profile_settings_set_data (xmlNodePtr node)
 	GList *element;
 	gint counter = 0;
 
-	for (w = profile_widgets;
-	     w->name != NULL;
-	     w++)
-	{
+	for (w = profile_widgets; w->name; w++) {
 		widget = gst_dialog_get_widget (tool->main_dialog, w->name);
-		switch (w->widget_type)
-		{
-		case PROFILE_WIDGET_ENTRY:
-			value = gst_xml_get_child_content (node, w->xml_tag);
-			gtk_entry_set_text (GTK_ENTRY (widget), value);
-			g_free (value);
-			break;
-		case PROFILE_WIDGET_SPIN_BUTTON:
-			value = gst_xml_get_child_content (node, w->xml_tag);
+		value = gst_xml_get_child_content (node, w->xml_tag);
+
+		if (!value)
+			continue;
+
+		if (GTK_IS_SPIN_BUTTON (widget))
 			gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), g_ascii_strtod (value, NULL));
-			g_free (value);
-			break;
-		case PROFILE_WIDGET_OPTION_MENU:
-			value = gst_xml_get_child_content (node, w->xml_tag);
+		else if (GTK_IS_ENTRY (widget))
+			gtk_entry_set_text (GTK_ENTRY (widget), value);
+		else if (GTK_IS_OPTION_MENU (widget)) {
 			element = g_list_first (groups_list);
 
-			while ((element != NULL) && (strcmp (element->data, value) != 0))
-			{
+			while ((element != NULL) && (strcmp (element->data, value) != 0)) {
 				element = element->next;
 				counter++;
 			}
 			gtk_option_menu_set_history (GTK_OPTION_MENU (widget), counter);
-			g_free (value);
-			break;
-		default:
+		} else {
 			g_warning ("Should not be here");
 		}
-	}	
+
+		g_free (value);
+	}
 }
 
 static gboolean
 check_profile_delete (xmlNodePtr node)
 {
 	gchar *profile_name, *primary_text, *secondary_text;
-	GtkWindow *parent;
-	GtkWidget *dialog;
+	GtkWidget *dialog, *parent;
+	gboolean  is_default;
 	gint reply;
 
 	g_return_val_if_fail (node != NULL, FALSE);
 
-	parent = GTK_WINDOW (tool->main_dialog);
-	profile_name = gst_xml_get_child_content (node, "name");
+	profile_name = gst_xml_get_child_content   (node, "name");
+	is_default   = gst_xml_element_get_boolean (node, "default");
+
+	parent = gst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
 
 	if (!profile_name)
 	{
@@ -210,9 +188,9 @@ check_profile_delete (xmlNodePtr node)
 		return FALSE;
 	}
 
-	if (strcmp (profile_name, "Default") == 0)
+	if (is_default)
 	{
-		primary_text   = g_strdup (_("The profile \"Default\" must not be deleted."));
+		primary_text   = g_strdup (_("The default profile must not be deleted."));
 		secondary_text = g_strdup (_("This is the default profile for setting new users' data"));
 		show_error_message ("profile_settings_dialog", primary_text, secondary_text);
 		g_free (profile_name);
@@ -225,7 +203,7 @@ check_profile_delete (xmlNodePtr node)
 	primary_text   = g_strdup_printf (_("Delete profile \"%s\""), profile_name);
 	secondary_text = g_strdup_printf (_("You won't be able to recover this profile after hitting \"apply\""));
 
-	dialog = gst_hig_dialog_new (parent,
+	dialog = gst_hig_dialog_new (GTK_WINDOW (parent),
 				     GTK_DIALOG_MODAL,
 				     GST_HIG_MESSAGE_WARNING,
 				     primary_text,

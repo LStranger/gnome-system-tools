@@ -21,16 +21,9 @@
  * Authors: Carlos Garnacho Parro <garnacho@tuxerver.net>.
  */
 
-enum {
-	PROFILE_WIDGET_ENTRY,
-	PROFILE_WIDGET_SPIN_BUTTON,
-	PROFILE_WIDGET_OPTION_MENU
-};
-
 typedef struct {
 	gchar *name;
 	gchar *xml_tag;
-	gint widget_type;
 } ProfileWidget;
 		
 

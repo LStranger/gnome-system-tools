@@ -121,7 +121,10 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gd
 	cont = 0;
 
 	if (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS) {
-		on_user_settings_clicked (NULL, NULL);
+		if (GTK_WIDGET (treeview) == groups_table)
+			on_group_settings_clicked (NULL, NULL);
+		else if (GTK_WIDGET (treeview) == users_table)
+			on_user_settings_clicked (NULL, NULL);
 	}
 	
 	selection = gtk_tree_view_get_selection (treeview);
@@ -603,6 +606,9 @@ on_profile_new_clicked (GtkButton *button, gpointer data)
 
 	gtk_window_set_title (GTK_WINDOW (dialog), _("Create New profile"));
 
+	if (!GTK_WIDGET_VISIBLE (gst_dialog_get_widget (tool->main_dialog, "user_optional_settings")))
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "profile_settings_password"));
+
 	gtk_widget_show (dialog);
 }
 
@@ -636,6 +642,9 @@ on_profile_settings_clicked (GtkButton *button, gpointer data)
 	gtk_window_set_title (GTK_WINDOW (dialog), window_title);
 	g_free (profile_name);
 	g_free (window_title);
+
+	if (!GTK_WIDGET_VISIBLE (gst_dialog_get_widget (tool->main_dialog, "user_optional_settings")))
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "profile_settings_password"));
 
 	gtk_widget_show (dialog);
 }
