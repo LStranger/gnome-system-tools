@@ -1,3 +1,20 @@
+2001-06-26  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* user_settings.c (warnings_join): Make text for the warning dialog
+	from the collected warnings list.
+	(gui_warnings_cb): Sets the reply status.
+	(user_account_gui_warnings): Show warnings with a gnome dialog, asking
+	if you want to proceed or fix them.
+	(user_account_gui_save): If there are warnings, show dialog notifying.
+
+	* user_group.c (user_account_check_home_warnings): Check correctness
+	for the home directory, building a list of warnings.
+	(user_account_check_home): Do some more checks about the home directory,
+	using stat.
+	(user_account_check_warnings): Build a list of warnings related to
+	an user account.
+	(user_account_destroy_warnings): Erase list.
+
 2001-06-25  Tambet Ingo  <tambet@ximian.com>
 
 	* profile.c: Made e-table f-ns more readable by giving names to cols.

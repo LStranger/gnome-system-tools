@@ -25,6 +25,11 @@
 #include <ctype.h>
 #include <gnome.h>
 
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <errno.h>
+
 #include "callbacks.h"
 #include "user_group.h"
 #include "e-table.h"
@@ -421,7 +426,8 @@ user_account_check_home (UserAccount *account)
 {
 	gchar *home = account->home;
 	xmlNodePtr node = account->node;
-
+	struct stat s;
+	
 	if (!home || (strlen (home) < 1))
 		return g_strdup (N_("Home directory must not be empty."));
 
@@ -430,6 +436,16 @@ user_account_check_home (UserAccount *account)
 
 	if (!check_user_root (node, "home", home))
 		return g_strdup (N_("root user shouldn't be modified."));
+
+	if (stat (home, &s))
+	{
+		switch (errno) {
+		case ENOTDIR: return _("Part of the path to the home directory is a file.");         
+		case ELOOP:   return _("There is a loop in the path to the home directory.");        
+		case ENOMEM:  return _("Not enough memory to check the home directory.");            
+		case ENAMETOOLONG: return _("The path to the home directory is too long.");          
+		}
+	}
 
 	return NULL;
 }
@@ -1349,6 +1365,76 @@ user_account_check (UserAccount *account)
 		return buf;
 			
 	return NULL;
+}
+
+static GList *
+user_account_check_home_warnings (UserAccount *account, GList *warnings)
+{
+	gchar *home = account->home;
+	struct stat s;
+
+	if (stat (home, &s))
+	{
+		gchar *text = NULL;
+		
+		switch (errno) {
+		case ENOENT:
+			if (!account->new)
+				text = _("The home directory does not exist, or its path is invalid.");
+			break;
+		case EACCES: text = _("Couldn't get access to the home directory."); break;
+		default:
+			if (!account->new)
+				/* We shouldn't fall here: the other cases are in the error checks. */
+				text = _("There was an error trying to access the home directory.");
+		}
+
+		if (text)
+			warnings = g_list_append (warnings, text);
+	} else {
+		if (!S_ISDIR (s.st_mode))
+			warnings = g_list_append
+				(warnings, _("The home directory path exists, but it is not a directory."));
+		if (!account->new) {
+			if (account->uid && (s.st_uid != atoi (account->uid)))
+				warnings = g_list_append
+					(warnings, _("The home directory is not owned by the user."));
+			else {
+				if (!s.st_mode & S_IRUSR)
+					warnings = g_list_append
+						(warnings, _("The user doesn't have permission to read from the home directory."));
+				if (!s.st_mode & S_IWUSR)
+					warnings = g_list_append
+						(warnings, _("The user doesn't have permission to write in the home directory."));
+				if (!s.st_mode & S_IRUSR)
+					warnings = g_list_append
+						(warnings, _("The user doesn't have permission to use (``execute'') the home directory."));
+			}
+		}
+	}
+		
+	return warnings;
+}
+
+GList *
+user_account_check_warnings (UserAccount *account)
+{
+	GList *warnings = NULL;
+
+	warnings = user_account_check_home_warnings (account, warnings);
+
+	return warnings;
+}
+
+void
+user_account_destroy_warnings (GList *warnings)
+{
+	GList *l, *l2;
+
+	for (l2 = l = warnings; l2; l = l2) {
+		l2 = l->next;
+		g_list_remove_link (warnings, l);
+	}
 }
 
 void

@@ -630,12 +630,70 @@ user_account_gui_save_comment (UserAccountGui *gui)
 	return val;
 }
 
+static gchar *
+warnings_join (GList *warnings)
+{
+	GList *l;
+	gchar *text = NULL;
+	gchar *text2;
+
+	for (l = warnings; l; l = l->next) {
+		text2 = text;
+		if (text)
+			text = g_strdup_printf ("%s\n%s", text, (gchar *) l->data);
+		else
+			text = g_strdup ((gchar *) l->data);
+		g_free (text2);
+	}
+
+	text2 = text;
+	text = g_strdup_printf ("The information you just entered created the following warnings:\n\n%s\n\nContinue anyways?", text);
+	g_free (text2);
+
+	return text;
+}
+
+static void
+gui_warnings_cb (gint button, gpointer data)
+{
+	gboolean *reply = (gboolean *) data;
+
+	if (button == 0) /* Yes button */
+		*reply = TRUE;
+	else /* No button */
+		*reply = FALSE;
+}
+
+static gboolean
+user_account_gui_warnings (GtkWindow *parent, GList *warnings)
+{
+	GtkWidget *d;
+	gchar *text;
+	gboolean reply;
+	
+	g_return_val_if_fail (warnings != NULL, TRUE);
+
+	text = warnings_join (warnings);
+	g_return_val_if_fail (text != NULL, TRUE);
+
+	if (parent)
+		d = gnome_question_dialog_parented (text, gui_warnings_cb, &reply, parent);
+	else
+		d = gnome_question_dialog (text, gui_warnings_cb, &reply);
+
+	gnome_dialog_run (GNOME_DIALOG (d));
+	g_free (text);
+
+	return reply;
+}
+
 gboolean
 user_account_gui_save (UserAccountGui *gui)
 {
 	UserAccount *account;
 	xmlNodePtr node = gui->account->node;
 	GtkWindow *parent = GTK_WINDOW (gui->top);
+	GList *warnings;
 	gchar *buf, *error;
 	gint row = 0;
 
@@ -695,11 +753,18 @@ user_account_gui_save (UserAccountGui *gui)
 		user_account_gui_error (parent, error);
 		user_account_destroy (account);
 		return FALSE;
-	} else {
-		user_account_destroy (gui->account);
-		gui->account = account;
-		return TRUE;
+	} else if ((warnings = user_account_check_warnings (account))) {
+		if (!user_account_gui_warnings (parent, warnings)) {
+			user_account_destroy_warnings (warnings);
+			user_account_destroy (account);
+			return FALSE;
+		}
+		user_account_destroy_warnings (warnings);
 	}
+
+	user_account_destroy (gui->account);
+	gui->account = account;
+	return TRUE;
 }
 
 void

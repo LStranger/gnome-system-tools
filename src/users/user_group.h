@@ -58,11 +58,13 @@ typedef struct {
 } UserAccount;
 
 
-UserAccount *user_account_new         (const gchar *profile);
-UserAccount *user_account_get_by_node (xmlNodePtr node);
-void         user_account_save        (UserAccount *account);
-gchar       *user_account_check       (UserAccount *account);
-void         user_account_destroy     (UserAccount *account);
+UserAccount *user_account_new              (const gchar *profile);
+UserAccount *user_account_get_by_node      (xmlNodePtr node);
+void         user_account_save             (UserAccount *account);
+gchar       *user_account_check            (UserAccount *account);
+GList       *user_account_check_warnings   (UserAccount *account);
+void         user_account_destroy_warnings (GList *warnings);
+void         user_account_destroy          (UserAccount *account);
 
 
 xmlNodePtr get_root_node (gint tbl);

@@ -84,10 +84,10 @@ typedef struct {
 	GtkSpinButton   *days;
 } UserAccountGui;
 
-UserAccountGui *user_account_gui_new     (UserAccount *account, GtkWidget *parent);
-void            user_account_gui_setup   (UserAccountGui *gui, GtkWidget *top);
-gboolean        user_account_gui_save    (UserAccountGui *gui);
-void            user_account_gui_error   (GtkWindow *parent, gchar *error);
-void            user_account_gui_destroy (UserAccountGui *gui);
+UserAccountGui *user_account_gui_new      (UserAccount *account, GtkWidget *parent);
+void            user_account_gui_setup    (UserAccountGui *gui, GtkWidget *top);
+gboolean        user_account_gui_save     (UserAccountGui *gui);
+void            user_account_gui_error    (GtkWindow *parent, gchar *error);
+void            user_account_gui_destroy  (UserAccountGui *gui);
 
 #endif /* USER_SETTINGS_H */
