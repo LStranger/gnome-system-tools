@@ -3,7 +3,10 @@
  * Add this file to your project's POTFILES.in.
  * DO NOT compile it as part of your application.
  */
+
+gchar *s = N_("Hardware Administration");
 gchar *s = N_("label1");
 gchar *s = N_("Add...");
 gchar *s = N_("Remove");
 gchar *s = N_("Settings...");
+gchar *s = N_(" Advanced >> ");
