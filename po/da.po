@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-08 20:48+0100\n"
-"PO-Revision-Date: 2003-12-08 20:45+0100\n"
+"POT-Creation-Date: 2003-12-27 19:10+0100\n"
+"PO-Revision-Date: 2003-12-27 19:10+0100\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -110,8 +110,8 @@ msgid "Whether the warning dialog should be shown or not"
 msgstr "Om advarselsvinduet skal vises eller ej"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
+#: interfaces/disks.glade.in.h:2 interfaces/network.glade.in.h:1
+#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -222,12 +222,12 @@ msgid ""
 msgstr ""
 "Indtast et navn for startaftrykket og angiv hvilket styresystem det er."
 
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:40
+#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:42
 msgid "Finished"
 msgstr "Fuldført"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1786
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:51
+#: src/network/connection.c:1843
 msgid "Manual"
 msgstr "Manuelt"
 
@@ -294,7 +294,7 @@ msgstr ""
 msgid "Video modes (only frame buffer)"
 msgstr "Videotilstande (kun framebuffer)"
 
-#: interfaces/boot.glade.in.h:41 interfaces/network.glade.in.h:85
+#: interfaces/boot.glade.in.h:41
 msgid "_Add..."
 msgstr "_Tilføj..."
 
@@ -392,9 +392,167 @@ msgstr "Ikke-understøttet platform"
 msgid "Use this window to select the computer you wish to configure"
 msgstr "Benyt dette vindue til at vælge den maskine du vil konfigurere"
 
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:107
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:108
 msgid "_Password:"
 msgstr "_Adgangskode:"
+
+#: interfaces/disks.glade.in.h:1
+msgid " "
+msgstr " "
+
+#: interfaces/disks.glade.in.h:3
+msgid "<b>Configuration</b>"
+msgstr "<b>Konfiguration</b>"
+
+#: interfaces/disks.glade.in.h:4
+msgid "<b>General Information</b>"
+msgstr "<b>Generelle oplysninger<b>"
+
+#: interfaces/disks.glade.in.h:5
+msgid "<b>Partition List</b>"
+msgstr "<b>Partitionsliste</b>"
+
+#: interfaces/disks.glade.in.h:6
+msgid "<b>Partition Properties</b>"
+msgstr "<b>Partitionsegenskaber</b>"
+
+#: interfaces/disks.glade.in.h:7
+msgid "<b>Storage List</b>"
+msgstr "<b>Lagerliste</b>"
+
+#: interfaces/disks.glade.in.h:8
+msgid "<b>Storage Properties</b>"
+msgstr "<b>Lageregenskaber</b>"
+
+#: interfaces/disks.glade.in.h:9
+msgid "<b>Supported Features</b>"
+msgstr "<b>Understøttede faciliteter</b>"
+
+#: interfaces/disks.glade.in.h:10
+msgid ""
+"<big><b>Storage Settings</b></big>\n"
+"Configure your hard disks and storage devices."
+msgstr ""
+"<big><b>Lagerindstillinger</b></big>\n"
+"Konfigurér dine harddiske og lagerenheder."
+
+#: interfaces/disks.glade.in.h:12
+msgid "CD-ROM"
+msgstr "Cd-rom"
+
+#: interfaces/disks.glade.in.h:13
+msgid "Device: "
+msgstr "Enhed: "
+
+#: interfaces/disks.glade.in.h:14
+msgid "Enable DMA"
+msgstr "Aktivér DMA"
+
+#: interfaces/disks.glade.in.h:15
+msgid "Extended 2"
+msgstr "Extended 2"
+
+#: interfaces/disks.glade.in.h:16
+msgid "Extended 3"
+msgstr "Extended 3"
+
+#: interfaces/disks.glade.in.h:17
+msgid "FAT"
+msgstr "FAT"
+
+#: interfaces/disks.glade.in.h:18
+msgid "Filesystem:"
+msgstr "Filsystem:"
+
+#: interfaces/disks.glade.in.h:19 src/disks/disks-storage-disk.c:83
+msgid "Hard Disk"
+msgstr "Harddisk"
+
+#: interfaces/disks.glade.in.h:20
+msgid "JFS"
+msgstr "JFS"
+
+#: interfaces/disks.glade.in.h:21
+msgid "Memory Swap"
+msgstr "Reservehukommelse"
+
+#: interfaces/disks.glade.in.h:22
+msgid "Mount Point:"
+msgstr "Monteringspunkt:"
+
+#: interfaces/disks.glade.in.h:23
+msgid "NTFS"
+msgstr "NTFS"
+
+#: interfaces/disks.glade.in.h:24 src/disks/callbacks.c:312
+#: src/disks/callbacks.c:313 src/disks/callbacks.c:328
+#: src/disks/callbacks.c:329
+msgid "Not Available"
+msgstr "Ikke tilgængelig"
+
+#: interfaces/disks.glade.in.h:25
+msgid "Partitions"
+msgstr "Partitioner"
+
+#: interfaces/disks.glade.in.h:26
+msgid "Play Audio"
+msgstr "Afspil lyd"
+
+#: interfaces/disks.glade.in.h:27
+msgid "Properties"
+msgstr "Egenskaber"
+
+#: interfaces/disks.glade.in.h:28
+msgid "Read DVD"
+msgstr "Læs dvd"
+
+#: interfaces/disks.glade.in.h:29
+msgid "Reiser FS"
+msgstr "Reiser-FS"
+
+#: interfaces/disks.glade.in.h:30
+msgid "Size:"
+msgstr "Størrelse:"
+
+#: interfaces/disks.glade.in.h:31
+msgid "Speed"
+msgstr "Hastighed"
+
+#: interfaces/disks.glade.in.h:32
+msgid "Speed:"
+msgstr "Hastighed:"
+
+#: interfaces/disks.glade.in.h:33
+msgid "Type:"
+msgstr "Type:"
+
+#: interfaces/disks.glade.in.h:34
+msgid "Type: "
+msgstr "Type: "
+
+#: interfaces/disks.glade.in.h:35
+msgid "Write CD-R"
+msgstr "Skriv cd-r"
+
+#: interfaces/disks.glade.in.h:36
+msgid "Write CD-RW"
+msgstr "Skriv cd-rw"
+
+#: interfaces/disks.glade.in.h:37
+msgid "Write DVD-R"
+msgstr "Skriv dvd-r"
+
+#: interfaces/disks.glade.in.h:38
+msgid "Write DVD-RAM"
+msgstr "Skriv dvd-ram"
+
+#: interfaces/disks.glade.in.h:39
+msgid "XFS"
+msgstr "XFS"
+
+#: interfaces/disks.glade.in.h:40
+msgid "_Format"
+msgstr "_Formatér"
 
 #: interfaces/network.glade.in.h:2
 msgid "/dev/modem"
@@ -473,147 +631,155 @@ msgid "Account"
 msgstr "Konto"
 
 #: interfaces/network.glade.in.h:21
+msgid "Activate"
+msgstr "Aktivér"
+
+#: interfaces/network.glade.in.h:22
 msgid "Activate when the computer _starts"
 msgstr "Aktivér når maskinen _starter"
 
-#: interfaces/network.glade.in.h:22
+#: interfaces/network.glade.in.h:23
 msgid "Address configuration"
 msgstr "Adressekonfiguration"
 
-#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:14
+#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
 msgid "Advanced"
 msgstr "Avanceret"
 
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:25
 msgid "Advanced PPP connection tuning."
 msgstr "Avancerede indstillinger for PPP-forbindelse."
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:26
 msgid "Aliases of other computers."
 msgstr "Aliaser for andre maskiner."
 
-#: interfaces/network.glade.in.h:26
+#: interfaces/network.glade.in.h:27
 msgid "Allow activation control for all _users"
 msgstr "Tillad aktiveringskontrol for alle br_ugere"
 
 # bemærk: skal synkroniseres med ovenstående
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:28
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:28 src/network/connection.c:1788
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:30
 msgid "Co_nfiguration:"
 msgstr "Ko_nfiguration:"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:31
 msgid "Connection _name:"
 msgstr "Forbindelses_navn:"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:32
 msgid "Connection name"
 msgstr "Forbindelsesnavn"
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "Forbindelsestype"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Forbindelser"
 
 #. set window titles
-#: interfaces/network.glade.in.h:34 src/network/network-druid.c:63
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "Oprettelse af ny netværksforbindelse"
 
-#: interfaces/network.glade.in.h:35 src/network/connection.c:1787
+#: interfaces/network.glade.in.h:36
+msgid "Current network profile:"
+msgstr "Aktuelle netværksprofil:"
+
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:39
 msgid "Default gateway device:"
 msgstr "Standardadgangspunkt:"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:40
 msgid "Device:"
 msgstr "Enhed:"
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:41
 msgid "Domain / _Workgroup:"
 msgstr "Domæne/arbejds_gruppe:"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:43
 msgid "General"
 msgstr "Generelt"
 
-#: interfaces/network.glade.in.h:42 src/network/main.c:217
+#: interfaces/network.glade.in.h:44
 msgid "Hosts"
 msgstr "Værter"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:45
 msgid "How the names of other computers are found."
 msgstr "Måden navne på andre maskiner bliver fundet på."
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:46
 msgid "How this computer is identified."
 msgstr "Hvordan denne maskine identificeres."
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:47
 msgid "How to access other computers."
 msgstr "Hvordan andre maskiner tilgås."
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:48
 msgid "How to dial up to the Internet."
 msgstr "Hvordan der forbindes til internettet."
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:49
 msgid "ISP phone number"
 msgstr "Udbyders telefonnummer"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:50
 msgid "Interface properties"
 msgstr "Forbindelsesegenskaber"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:52
 msgid "Modem _volume:"
 msgstr "Modem_lydstyrke:"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:53
 msgid "Network name:"
 msgstr "Netværksnavn:"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:54
 msgid "Network profiles"
 msgstr "Netværksprofiler"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:55
 msgid "Network profiles can be used to store different network configurations."
 msgstr ""
 "Netværksprofiler kan bruges til at gemme forskellige netværkskonfigurationer."
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Networking Settings"
 msgstr "Netværksindstillinger"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "New network profile"
 msgstr "Ny netværksprofil"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr "Indtast nu brugernavnet og adgangskoden som udbyderen har tildelt dig."
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -621,35 +787,35 @@ msgstr ""
 "Indtast den adresse som denne netværksenhed skal have og den fjerne adresse "
 "som den skal forbindes til."
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid "Now, please enter the address that this network device will have."
 msgstr "Indtast den adresse som denne netværksenhed skal have."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid "Now, please give this connection a name."
 msgstr "Giv denne forbindelse et navn."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Number to _access an external line:"
 msgstr "Nummer til at _opnå en ekstern linje:"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Number to get to an _external line:"
 msgstr "Nummer til at opnå en _ekstern linje:"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid "PPPD _options:"
 msgstr "_Tilvalg til pppd:"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:65
 msgid "Pa_ssword (confirm):"
 msgstr "Ad_gangskode (bekræft):"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:66
 msgid "Phone _number:"
 msgstr "Telefon_nummer:"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:67
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
@@ -657,7 +823,7 @@ msgstr ""
 "Indtast det telefonnummer du bruger til at koble dig til internettet med. "
 "Dette nummer oplyser internetudbyderen dig om."
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
@@ -665,42 +831,42 @@ msgstr ""
 "Vælg den trådløse enhed som du ønsker at konfigurere, og angiv netværknavnet "
 "for denne forbindelse"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
 msgid "Please, give this network profile a name and a description."
 msgstr "Giv denne netværksprofil et navn og en beskrivelse."
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:70
 msgid "Please, select which type of connection you would like to add."
 msgstr "Vælg hvilken type forbindelse du vil tilføje."
 
-#: interfaces/network.glade.in.h:69 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:71 interfaces/users.glade.in.h:38
 msgid "Profile _name:"
 msgstr "Profil_navn:"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:72
 msgid "Pulses"
 msgstr "Pulser"
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:73
 msgid "Se_condary:"
 msgstr "Sek_undær:"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:74
 msgid "Set _DNS servers manually"
 msgstr "Angiv _DNS-servere manuelt"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:75
 msgid "Set modem as default _route to internet"
 msgstr "Benyt modem som standard_rute til internettet"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:76
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
 msgstr ""
 "Denne hjælper guider dig gennem konfigureringen af en ny netværksforbindelse."
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:78
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -708,35 +874,35 @@ msgstr ""
 "Klik på \"Næste\" for at fortsætte med at konfigurere forbindelsen. Klik på "
 "\"Annullér\" for at afbryde."
 
-#: interfaces/network.glade.in.h:77
+#: interfaces/network.glade.in.h:79
 msgid "Tones"
 msgstr "Toner"
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:80
 msgid "Use \"Auto\" if unsure."
 msgstr "Brug 'Automatisk' hvis du er usikker."
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:81
 msgid "Use this dialog for setting the configuration for this interface"
 msgstr "Benyt dette vindue til at angive konfigurationen til grænsefladen"
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:82
 msgid "Username and password"
 msgstr "Brugernavn og adgangskode"
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:83
 msgid "WI_NS server:"
 msgstr "WI_NS-servere:"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:84
 msgid "Wireless device:"
 msgstr "Trådløs enhed:"
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:85
 msgid "Wireless settings"
 msgstr "Trådløse indstillinger"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:86
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
@@ -744,135 +910,135 @@ msgstr ""
 "Du skal til at oprette en ny netværksforbindelse. Klik på \"Anvend\" for at "
 "gemme ændringerne."
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:87
 msgid "_Autodetect"
 msgstr "_Find automatisk"
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:88
 msgid "_Comment:"
 msgstr "_Kommentar:"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:89
 msgid "_Configuration:"
 msgstr "_Konfiguration:"
 
-#: interfaces/network.glade.in.h:89
-msgid "_Configure"
-msgstr "_Konfigurér"
+#: interfaces/network.glade.in.h:90
+msgid "_Deactivate"
+msgstr "_Deaktivér"
 
-#: interfaces/network.glade.in.h:90 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:91 interfaces/users.glade.in.h:55
 msgid "_Delete"
 msgstr "_Slet"
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:92
 msgid "_Description:"
 msgstr "_Beskrivelse:"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:93
 msgid "_Dial type:"
 msgstr "_Opkaldstype:"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:94
 msgid "_Domain name:"
 msgstr "_Domænenavn:"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:95
 msgid "_Enable Windows networking"
 msgstr "_Aktivér Windows-netværk"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:96
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:97
 msgid "_Gateway address:"
 msgstr "_Adgangspunktadresse:"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:98
 msgid "_Hostname:"
 msgstr "V_ærtsnavn:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:99
 msgid "_IP address:"
 msgstr "_IP-adresse:"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:100
 msgid "_IR LAN"
 msgstr "_IR-LAN"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:101
 msgid "_Local IP address:"
 msgstr "_Lokal IP-adresse:"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:102
 msgid "_Local IP:"
 msgstr "_Lokal IP:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:103
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:104
 msgid "_Modem port:"
 msgstr "_Modem-port:"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:105
 msgid "_Network Profiles"
 msgstr "_Netværksprofiler"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:106
 msgid "_Network name:"
 msgstr "_Netværksnavn:"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:107
 msgid "_Parallel Line"
 msgstr "_Parallel linje"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:109
 msgid "_Phone number:"
 msgstr "_Telefonnummer:"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:110
 msgid "_Primary:"
 msgstr "_Primær:"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:111
 msgid "_Remote IP address:"
 msgstr "_Fjern IP-adresse:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:112
 msgid "_Remote IP:"
 msgstr "Ekste_rn IP:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:113
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "Prøv _igen hvis forbindelsen mistes eller ikke starter"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:114
 msgid "_Save Current"
 msgstr "_Gem aktuel"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:115
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Start PPP så snart modemet kobler til"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:116
 msgid "_Subnet mask:"
 msgstr "_Undernetmaske:"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:117
 msgid "_Update DNS when this connection becomes active"
 msgstr "_Opdatér DNS når denne forbindelse bliver aktiveret"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:118
 msgid "_Use remote IP as default gateway"
 msgstr "Benyt _ekstern IP som standardadgangspunkt"
 
-#: interfaces/network.glade.in.h:118 interfaces/users.glade.in.h:65
+#: interfaces/network.glade.in.h:119 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "Br_ugernavn:"
 
-#: interfaces/network.glade.in.h:119
+#: interfaces/network.glade.in.h:120
 msgid "_Wireless"
 msgstr "_Trådløs"
 
@@ -897,24 +1063,28 @@ msgid "Description:"
 msgstr "Beskrivelse:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr "Parametre:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "Prioritet:"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "_Indstillinger for tjeneste"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Service:"
 msgstr "Tjeneste:"
+
+#: interfaces/services.glade.in.h:9
+msgid "Status:"
+msgstr "Status:"
 
 #: interfaces/services.glade.in.h:10
 msgid "Use this tool to specify which services to run"
 msgstr "Benyt dette værktøj til at angive hvilke tjenester der skal køres"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Start"
+msgstr "_Start"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1241,7 +1411,8 @@ msgstr "Oprettelse af nyt startaftryk (%d af %d)"
 msgid "Finished creating a new boot image"
 msgstr "Færdig med oprettelse af nyt startaftryk"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:466
+#: src/boot/boot-image.c:40 src/disks/disks-storage-partition.c:128
+#: src/disks/disks-storage.c:101 src/network/profile.c:467
 msgid "Unknown"
 msgstr "Ukendt"
 
@@ -1368,12 +1539,14 @@ msgstr "Enhed"
 msgid "/_Add ..."
 msgstr "/_Tilføj..."
 
-#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Egenskaber"
 
-#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/disks/disks-gui.c:44 src/network/connection.c:60
+#: src/network/dns.c:39 src/network/hosts.c:43 src/users/table.c:50
+#: src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Slet"
 
@@ -1418,16 +1591,16 @@ msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fejl ved forbindelse af signalet '%s' i kontrollen '%s'"
 
 # hm, ikke særligt kønt
-#: src/common/gst-tool.c:820
+#: src/common/gst-tool.c:822
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Springer over %s-direktiv..."
 
-#: src/common/gst-tool.c:951
+#: src/common/gst-tool.c:953
 msgid "Skipping actual save..."
 msgstr "Springer over faktisk gemning..."
 
-#: src/common/gst-tool.c:1024
+#: src/common/gst-tool.c:1026
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1435,7 +1608,7 @@ msgstr ""
 "Der opstod en fejl ved kørsel af bagendeprogrammet,\n"
 "og opsætningen kunne ikke indlæses."
 
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1507
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1444,7 +1617,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Velkommen til præversion %s af "
 "systemværktøjerne til Gnome</span>"
 
-#: src/common/gst-tool.c:1508
+#: src/common/gst-tool.c:1510
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1458,15 +1631,15 @@ msgstr ""
 "fra din side. Du er blevet advaret. Tak, fordi du prøver denne tidlige "
 "udgave af systemværktøjerne!"
 
-#: src/common/gst-tool.c:1529
+#: src/common/gst-tool.c:1531
 msgid "Warning"
 msgstr "Advarsel"
 
-#: src/common/gst-tool.c:1549
+#: src/common/gst-tool.c:1551
 msgid "Don't show me this again"
 msgstr "Vis ikke dette vindue igen"
 
-#: src/common/gst-tool.c:1623
+#: src/common/gst-tool.c:1625
 msgid "GNOME System Tools"
 msgstr "Systemværktøjer"
 
@@ -1476,43 +1649,53 @@ msgstr ""
 "Genstart venligst din Gnome-session for at få disse ændringer til at træde i "
 "kraft."
 
-#: src/network/callbacks.c:116 src/services/table.c:55
-msgid "Active"
-msgstr "Aktiv"
+#: src/disks/callbacks.c:304 src/disks/callbacks.c:305
+msgid "(Getting ...)"
+msgstr "(Henter...)"
 
-#: src/network/callbacks.c:119
-msgid "Activating"
-msgstr "Aktiverende"
+#: src/disks/disks-gui.c:43
+msgid "/_Format"
+msgstr "/_Formatér"
 
-#: src/network/callbacks.c:130
-msgid "Inactive"
-msgstr "Inaktiv"
+#: src/disks/disks-storage-cdrom.c:103
+msgid "CDROM"
+msgstr "Cdrom"
 
-#: src/network/callbacks.c:133
-msgid "Deactivating"
-msgstr "Deaktiverende"
+#: src/disks/disks-storage-floppy.c:71
+msgid "Floppy"
+msgstr "Diskette"
 
-#: src/network/callbacks.c:455
+#: src/disks/disks-storage-partition.c:260
+msgid "Swap Partition"
+msgstr "Swappartition"
+
+#: src/disks/disks-storage.c:100
+msgid "Unknown Storage"
+msgstr "Ukendt lager"
+
+#: src/disks/disks.desktop.in.in.h:1
+msgid "Configure the system disks"
+msgstr "Konfigurér systemets diske"
+
+#: src/disks/disks.desktop.in.in.h:2
+msgid "Disks"
+msgstr "Drev"
+
+#: src/disks/main.c:76
+msgid "Disks Manager"
+msgstr "Styring af diske"
+
+#: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Fjern forbindelsen %s: \"%s\"?"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:367
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Fjern forbindelsen %s?"
 
-#: src/network/callbacks.c:523
-#, c-format
-msgid "Activating connection ``%s.''"
-msgstr "Aktiverer forbindelsen '%s'."
-
-#: src/network/callbacks.c:561
-#, c-format
-msgid "Deactivating connection ``%s.''"
-msgstr "Deaktiverer forbindelsen '%s'."
-
-#: src/network/callbacks.c:600
+#: src/network/callbacks.c:463
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1520,11 +1703,11 @@ msgstr ""
 "Du har ikke SMB-understøttelse installeret. Installér venligst SMB-"
 "understøttelse på systemet for at benytte Windows-netværk."
 
-#: src/network/callbacks.c:603
+#: src/network/callbacks.c:466
 msgid "SMB support missing."
 msgstr "SMB-understøttelse mangler."
 
-#: src/network/callbacks.c:654
+#: src/network/callbacks.c:518
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1532,7 +1715,7 @@ msgstr ""
 "Værtsnavnet er ændret. Dette vil hindre dig i at starte nye programmer, så "
 "du må logge på igen. Fortsæt alligevel?"
 
-#: src/network/callbacks.c:702
+#: src/network/callbacks.c:566
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1540,7 +1723,7 @@ msgstr ""
 "'wvdial' blev ikke fundet på systemet. Du bliver nødt til at installere "
 "'wvdial', ellers kan modemforbindelserne ikke aktiveres."
 
-#: src/network/callbacks.c:729
+#: src/network/callbacks.c:593
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1548,7 +1731,7 @@ msgstr ""
 "'wvdial' blev ikke fundet på systemet. Du bliver nødt til at installere "
 "wvdial, ellers kan modemforbindelserne ikke aktiveres. Fortsæt alligevel?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:620
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1556,7 +1739,7 @@ msgstr ""
 "Standardadgangspunktenheden er ikke aktiveret. Dette vil hindre dig i at få "
 "forbindelse til internettet. Fortsæt alligevel?"
 
-#: src/network/callbacks.c:811
+#: src/network/callbacks.c:675
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1565,7 +1748,7 @@ msgstr ""
 "disse oplysninger for at fortsætte, eller vælg en anden "
 "standardadgangspunktenhed."
 
-#: src/network/callbacks.c:857
+#: src/network/callbacks.c:721
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1575,17 +1758,17 @@ msgstr ""
 "manglende forbindelser på forbindelsesfanebladet. Installér venligst redhat-"
 "config-network RPM-pakken for at undgå dette."
 
-#: src/network/callbacks.c:894
+#: src/network/callbacks.c:758
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Vil du aktivere forbindelsen %s?"
 
-#: src/network/callbacks.c:904
+#: src/network/callbacks.c:768
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Vil du deaktivere forbindelsen %s?"
 
-#: src/network/callbacks.c:989
+#: src/network/callbacks.c:855
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1593,19 +1776,19 @@ msgstr ""
 "Kunne ikke finde modemenhed automatisk. Kontrollér at modemet er korrekt "
 "forbundet til computeren og ikke er optaget."
 
-#: src/network/callbacks.c:1041
+#: src/network/callbacks.c:907
 msgid "Silent"
 msgstr "Stum"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:909
 msgid "Low"
 msgstr "Svag"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:911
 msgid "Medium"
 msgstr "Mellem"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:913
 msgid "Loud"
 msgstr "Kraftig"
 
@@ -1653,7 +1836,7 @@ msgstr "Status"
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: src/network/connection.c:1659
+#: src/network/connection.c:1707
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1661,7 +1844,7 @@ msgstr ""
 "IP-adressen eller -netmasken for forbindelsen mangler. Indtast venligst "
 "gyldige IP-adresser i de felter for at fortsætte."
 
-#: src/network/connection.c:1666
+#: src/network/connection.c:1714
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1669,7 +1852,7 @@ msgstr ""
 "IP-adressen eller fjernadressen for forbindelsen mangler. Indtast venligst "
 "gyldige IP-adresser i de felter for at fortsætte."
 
-#: src/network/connection.c:1672
+#: src/network/connection.c:1720
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1679,7 +1862,23 @@ msgstr ""
 "udeladt IP-adressen for den primære DNS. Indtast venligst adressen på den "
 "primære DNS eller fravælg manuel DNS-angivelse."
 
-#: src/network/connection.c:2028
+#: src/network/connection.c:1726
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr ""
+"Modemenheden til forbindelsen mangler. Indtast venligst en enhed eller tryk "
+"på \"find automatisk\" for at fortsætte."
+
+#: src/network/connection.c:1731
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr ""
+"Telefonnummeret til forbindelsen mangler. Indtast venligst et gyldigt "
+"telefonnummer for at fortsætte."
+
+#: src/network/connection.c:2082
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Grænsefladen %s eksisterer ikke."
@@ -1692,39 +1891,39 @@ msgstr "IP-adresse"
 msgid "Aliases"
 msgstr "Aliaser"
 
-#: src/network/main.c:257
+#: src/network/main.c:190
 msgid "Run the connection assistant."
 msgstr "Kør hjælperen til forbindelser."
 
-#: src/network/main.c:258
+#: src/network/main.c:191
 msgid "Run the PPP connection assistant."
 msgstr "Kør hjælperen til PPP-forbindelser."
 
-#: src/network/main.c:259
+#: src/network/main.c:192
 msgid "Run the ethernet connection assistant."
 msgstr "Kør hjælperen til Ethernet-forbindelser."
 
-#: src/network/main.c:260
+#: src/network/main.c:193
 msgid "Run the wlan connection assistant."
 msgstr "Kør hjælperen til trådløse forbindelser."
 
-#: src/network/main.c:261
+#: src/network/main.c:194
 msgid "Run the parallel port connection assistant."
 msgstr "Kør hjælperen til parallel port-forbindelser."
 
-#: src/network/main.c:262
+#: src/network/main.c:195
 msgid "Run the irlan connection assistant."
 msgstr "Kør hjælperen til infrarød port-forbindelser."
 
-#: src/network/main.c:263
+#: src/network/main.c:196
 msgid "Configure a network interface"
 msgstr "Konfigurér en netværksforbindelse"
 
-#: src/network/main.c:263
+#: src/network/main.c:196
 msgid "interface"
 msgstr "forbindelse"
 
-#: src/network/main.c:270
+#: src/network/main.c:203
 msgid "Network Settings"
 msgstr "Indstillinger for netværk"
 
@@ -1754,16 +1953,28 @@ msgstr "Er du sikker på at du vil slette profilen %s?"
 msgid "Profile name"
 msgstr "Profilnavn"
 
-#: src/services/callbacks.c:45
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "Ingen beskrivelse tilgængelig."
 
-#: src/services/callbacks.c:301
+#: src/services/callbacks.c:239
+msgid "Running"
+msgstr "Kører"
+
+#: src/services/callbacks.c:243
+msgid "Stopped"
+msgstr "Stoppet"
+
+#: src/services/callbacks.c:248
+msgid "Could not get info"
+msgstr "Kunne ikke skaffe oplysninger"
+
+#: src/services/callbacks.c:300
 #, c-format
 msgid "Settings for service %s"
 msgstr "Indstillinger for tjenesten %s"
 
-#: src/services/main.c:62
+#: src/services/main.c:58
 msgid "Services Settings"
 msgstr "Tjenesteindstillinger"
 
@@ -1775,7 +1986,11 @@ msgstr "Konfigurér hvilke tjenester der vil blive kørt når systemet starter"
 msgid "Services"
 msgstr "Tjenester"
 
-#: src/services/table.c:65
+#: src/services/table.c:78
+msgid "Active"
+msgstr "Aktiv"
+
+#: src/services/table.c:88
 msgid "Service"
 msgstr "Tjeneste"
 
@@ -1783,11 +1998,11 @@ msgstr "Tjeneste"
 msgid "Time Zone"
 msgstr "Tidszone"
 
-#: src/time/main.c:428
+#: src/time/main.c:423
 msgid "Time Servers"
 msgstr "Tidsservere"
 
-#: src/time/main.c:506
+#: src/time/main.c:501
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1795,7 +2010,7 @@ msgstr ""
 "NTP-understøttelse kører ikke. Kør venligst NTP-understøttelse på systemet "
 "for at tillade serversynkronisering."
 
-#: src/time/main.c:813
+#: src/time/main.c:808
 msgid "Time and Date Settings"
 msgstr "Indstillinger for dato og klokkeslet"
 
@@ -2062,6 +2277,24 @@ msgstr "Skal"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Tilføj eller fjern brugere og grupper"
+
+#~ msgid "_Configure"
+#~ msgstr "_Konfigurér"
+
+#~ msgid "Parameters:"
+#~ msgstr "Parametre:"
+
+#~ msgid "Activating"
+#~ msgstr "Aktiverende"
+
+#~ msgid "Inactive"
+#~ msgstr "Inaktiv"
+
+#~ msgid "Activating connection ``%s.''"
+#~ msgstr "Aktiverer forbindelsen '%s'."
+
+#~ msgid "Deactivating connection ``%s.''"
+#~ msgstr "Deaktiverer forbindelsen '%s'."
 
 #~ msgid "Other Operating System (Step 2 of 2)"
 #~ msgstr "Andet styresystem (trin 2 af 2)"
@@ -2456,9 +2689,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ msgid "Network adapter setup."
 #~ msgstr "Opsætning af netværkskort"
 
-#~ msgid "Services Manager"
-#~ msgstr "Styring af tjenester"
-
 #~ msgid "Time"
 #~ msgstr "Tid"
 
@@ -2588,17 +2818,8 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ msgid "Open settings dialog for selected import"
 #~ msgstr "Åbn indstillingsvinduet for den valgte importering"
 
-#~ msgid "Partition"
-#~ msgstr "Partition"
-
-#~ msgid "Partition Settings"
-#~ msgstr "Indstillinger for partition"
-
 #~ msgid "Remember details of this partition"
 #~ msgstr "Husk detaljerne for denne partition"
-
-#~ msgid "Type:"
-#~ msgstr "Type:"
 
 #~ msgid "VFAT (Windows 95 and newer)"
 #~ msgstr "VFAT (Windows 95 og nyere)"
@@ -2787,9 +3008,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ msgid "Disable"
 #~ msgstr "Deaktivér"
 
-#~ msgid "Enable :"
-#~ msgstr "Aktivér: "
-
 #~ msgid "End of Range"
 #~ msgstr "Intervallets start"
 
@@ -2896,9 +3114,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 
 #~ msgid "Choose Location"
 #~ msgstr "Vælg sted"
-
-#~ msgid "Copy"
-#~ msgstr "Kopiér"
 
 #~ msgid "Copy Location"
 #~ msgstr "Kopiér sted"
@@ -3029,9 +3244,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 
 #~ msgid "Size"
 #~ msgstr "Størrelse"
-
-#~ msgid "Size:"
-#~ msgstr "Størrelse:"
 
 #~ msgid "Swap Settings"
 #~ msgstr "Indstillinger for swap"
@@ -3313,9 +3525,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ msgid "Send text documents raw to the printer."
 #~ msgstr "Send tekstdokumenter råt til printeren."
 
-#~ msgid "Settings..."
-#~ msgstr "Indstillinger..."
-
 #~ msgid "Size of the paper in the printer."
 #~ msgstr "Størrelsen af papiret i printeren."
 
@@ -3503,9 +3712,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ "Importeringer er mapper som ligger på andre maskiner og er tilgængelige "
 #~ "via nettet."
 
-#~ msgid "Mount Point"
-#~ msgstr "Monteringspunkt"
-
 #~ msgid "Mount p_oint:"
 #~ msgstr "M_onteringspunkt:"
 
@@ -3517,9 +3723,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 
 #~ msgid "Mounting options"
 #~ msgstr "Monteringstilvalg"
-
-#~ msgid "NFS"
-#~ msgstr "NFS"
 
 #~ msgid "P_ublic"
 #~ msgstr "Offentlig"
@@ -4083,9 +4286,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ msgid "Pattern"
 #~ msgstr "Mønster"
 
-#~ msgid "Write"
-#~ msgstr "Skrive"
-
 # den engelske original er misvisende
 #~ msgid "New Shares Admin"
 #~ msgstr "Delinger"
@@ -4601,9 +4801,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 #~ msgid "You don't have the requirements to install DHCP service?"
 #~ msgstr "Du har ikke kravene til at installere en DHCP-tjeneste?"
 
-#~ msgid "Disks"
-#~ msgstr "Drev"
-
 #~ msgid "Local fixed media."
 #~ msgstr "Lokale faste medier."
 
@@ -4618,9 +4815,6 @@ msgstr "Tilføj eller fjern brugere og grupper"
 
 #~ msgid "Options for the location manager"
 #~ msgstr "Indstillinger til stedhåndteringen"
-
-#~ msgid "Memory"
-#~ msgstr "Hukommelse"
 
 #~ msgid "Memory settings."
 #~ msgstr "Hukommelsesindstillinger"
