@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-06 03:57+0200\n"
-"PO-Revision-Date: 2004-05-06 14:13+0200\n"
+"POT-Creation-Date: 2004-05-12 04:03+0200\n"
+"PO-Revision-Date: 2004-05-12 13:25+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -229,7 +229,7 @@ msgid "Finished"
 msgstr "Dokončeno"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:52
-#: src/network/connection.c:1883
+#: src/network/connection.c:1891
 msgid "Manual"
 msgstr "Ruční"
 
@@ -519,11 +519,11 @@ msgstr "Povolit kontrolu nad připojením všem _uživatelům"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:30 src/network/connection.c:1885
+#: interfaces/network.glade.in.h:30 src/network/connection.c:1893
 msgid "Automatic (BOOTP)"
 msgstr "Automatické (BOOTP)"
 
-#: interfaces/network.glade.in.h:31 src/network/connection.c:1884
+#: interfaces/network.glade.in.h:31 src/network/connection.c:1892
 msgid "Automatic (DHCP)"
 msgstr "Automatické (DHCP)"
 
@@ -1287,7 +1287,7 @@ msgstr "Vytvářím nový zaváděcí obraz (%d z %d)"
 msgid "Finished creating a new boot image"
 msgstr "Tvorba nového zaváděcího obrazu dokončena"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:481
+#: src/boot/boot-image.c:40 src/network/profile.c:482
 msgid "Unknown"
 msgstr "Neznámý"
 
@@ -1509,14 +1509,10 @@ msgstr "Při spuštění podpůrného skriptu došlo k chybě"
 
 #: src/common/gst-tool.c:1484
 #, c-format
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
-"GNOME System Tools</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Vítejte v předběžné verzi %s "
-"Systémových nástrojů GNOME</span>"
+msgid "Welcome to the %s prerelease of the GNOME System Tools"
+msgstr "Vítejte v předběžné verzi %s Systémových nástrojů GNOME"
 
-#: src/common/gst-tool.c:1487
+#: src/common/gst-tool.c:1486
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1530,11 +1526,11 @@ msgstr ""
 "úsilí a zdravý rozum. Byli jste varováni. Děkujeme vám za vyzkoušení této "
 "předběžné verze Systémových nástrojů GNOME!"
 
-#: src/common/gst-tool.c:1508
+#: src/common/gst-tool.c:1507
 msgid "Warning"
 msgstr "Varování"
 
-#: src/common/gst-tool.c:1528
+#: src/common/gst-tool.c:1527
 msgid "Don't show me this again"
 msgstr "Nezobrazovat příště"
 
@@ -1542,7 +1538,7 @@ msgstr "Nezobrazovat příště"
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
-#: src/network/callbacks.c:361
+#: src/network/callbacks.c:365
 msgid ""
 "This will disable any network connection with this interface as soon as you "
 "hit \"apply\"."
@@ -1550,16 +1546,16 @@ msgstr ""
 "Toto zakáže všechna připojení k síti přes toto rozhraní, jakmile stisknete "
 "\"použít\"."
 
-#: src/network/callbacks.c:366
+#: src/network/callbacks.c:370
 #, c-format
 msgid "Are you sure you want to delete connection \"%s\"?"
 msgstr "Jste si jisti, že chcete odstranit spojení \"%s\"?"
 
-#: src/network/callbacks.c:456
+#: src/network/callbacks.c:460
 msgid "SMB Support is not running"
 msgstr "Podpora SMB neběží"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:461
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1567,11 +1563,11 @@ msgstr ""
 "nemáte nainstalovanou podporu SMB. Nainstalujte prosím podporu SMB na váš "
 "systém a pak můžete povolit síťování s Windows."
 
-#: src/network/callbacks.c:521
+#: src/network/callbacks.c:525
 msgid "Host name has changed"
 msgstr "Jméno počítače bylo změněno"
 
-#: src/network/callbacks.c:522
+#: src/network/callbacks.c:526
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1579,15 +1575,15 @@ msgstr ""
 "To vám znemožní spouštět nové aplikace, budete se muset znovu přihlásit. "
 "Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:526
+#: src/network/callbacks.c:530
 msgid "Change _Host name"
 msgstr "Změnit _název počítače"
 
-#: src/network/callbacks.c:569
+#: src/network/callbacks.c:573
 msgid "Wvdial missing"
 msgstr "Wvdial chybí"
 
-#: src/network/callbacks.c:570
+#: src/network/callbacks.c:574
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1595,11 +1591,11 @@ msgstr ""
 "Nebylo možné na vašem systému nalézt wvdial. Musíte nainstalovat wvdial, "
 "jinak se připojení PPP (modem) nebudou aktivovat. "
 
-#: src/network/callbacks.c:596
+#: src/network/callbacks.c:600
 msgid "Wvdial not found"
 msgstr "Wvdial nenalezen"
 
-#: src/network/callbacks.c:597
+#: src/network/callbacks.c:601
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1607,23 +1603,23 @@ msgstr ""
 "Nebylo možné na vašem systému nalézt wvdial. Musíte nainstalovat wvdial, "
 "jinak se připojení PPP (modem) nebudou aktivovat. Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:601 src/network/callbacks.c:628
+#: src/network/callbacks.c:605 src/network/callbacks.c:632
 msgid "_Continue"
 msgstr "_Pokračovat"
 
-#: src/network/callbacks.c:624
+#: src/network/callbacks.c:628
 msgid "The default gateway device is not activated"
 msgstr "Zařízení implicitní brány není aktivováno"
 
-#: src/network/callbacks.c:625
+#: src/network/callbacks.c:629
 msgid "This will prevent you from connecting to the Internet. Continue anyway?"
 msgstr "To vám znemožní připojit se k Internetu. Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:673
+#: src/network/callbacks.c:677
 msgid "The default gateway device is missing gateway information"
 msgstr "Zařízení implicitní brány chybí informace o bráně"
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:678
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device."
@@ -1631,11 +1627,11 @@ msgstr ""
 "Zadejte tyto informace, chcete-li pokračovat, nebo vyberte jiné zařízení "
 "implicitní brány."
 
-#: src/network/callbacks.c:719
+#: src/network/callbacks.c:723
 msgid "The program redhat-config-network-cmd could not be found"
 msgstr "Program redhat-config-network-cmd nebyl nalezen"
 
-#: src/network/callbacks.c:720
+#: src/network/callbacks.c:724
 msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this."
@@ -1643,53 +1639,53 @@ msgstr ""
 "Díky tomu nebudou dostupná připojení pod odrážkou připojení. Abyste tomu "
 "zamezili, nainstalujte prosím rpm balíček redhat-config-network."
 
-#: src/network/callbacks.c:751
+#: src/network/callbacks.c:755
 #, c-format
 msgid "Do you want to enable interface \"%s\"?"
 msgstr "Chcete povolit rozhraní \"%s\"?"
 
-#: src/network/callbacks.c:752
+#: src/network/callbacks.c:756
 msgid "This will enable network access through this interface"
 msgstr "Toto povolí přístup k síti přes toto rozhraní"
 
-#: src/network/callbacks.c:753
+#: src/network/callbacks.c:757
 msgid "_Enable"
 msgstr "Po_volit"
 
-#: src/network/callbacks.c:755
+#: src/network/callbacks.c:759
 #, c-format
 msgid "Do you want to disable interface \"%s\"?"
 msgstr "Chcete zakázat rozhraní \"%s\"?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:760
 msgid "This will disable network access through this interface"
 msgstr "Toto zakáže přístup k síti přes toto rozhraní"
 
-#: src/network/callbacks.c:757
+#: src/network/callbacks.c:761
 msgid "_Disable"
 msgstr "_Zakázat"
 
-#: src/network/callbacks.c:864
+#: src/network/callbacks.c:868
 msgid "Could not autodetect modem device"
 msgstr "Nemohu autodetekovat zařízení modemu"
 
-#: src/network/callbacks.c:865
+#: src/network/callbacks.c:869
 msgid "Check that it's not busy and that it's correctly attached"
 msgstr "Zkontrolujte, že se nepoužívá a že je správně připojen"
 
-#: src/network/callbacks.c:919
+#: src/network/callbacks.c:923
 msgid "Silent"
 msgstr "Tichá"
 
-#: src/network/callbacks.c:921
+#: src/network/callbacks.c:925
 msgid "Low"
 msgstr "Nízká"
 
-#: src/network/callbacks.c:923
+#: src/network/callbacks.c:927
 msgid "Medium"
 msgstr "Střední"
 
-#: src/network/callbacks.c:925
+#: src/network/callbacks.c:929
 msgid "Loud"
 msgstr "Hlasitá"
 
@@ -1734,11 +1730,11 @@ msgstr "/Nasta_vit"
 msgid "Active"
 msgstr "Aktivní"
 
-#: src/network/connection.c:1734 src/network/connection.c:1744
+#: src/network/connection.c:1742 src/network/connection.c:1752
 msgid "Error in IP address"
 msgstr "Chyba v IP adrese"
 
-#: src/network/connection.c:1735
+#: src/network/connection.c:1743
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1746,7 +1742,7 @@ msgstr ""
 "IP adresa nebo síťová maska pro rozhraní byla ponechána prázdná. Pokračujte "
 "prosím zadáním platných IP adres do těchto polí."
 
-#: src/network/connection.c:1745
+#: src/network/connection.c:1753
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1754,11 +1750,11 @@ msgstr ""
 "IP adresa nebo vzdálená adresa pro rozhraní byla ponechána prázdná. "
 "Pokračujte prosím zadáním platných IP adres do těchto polí."
 
-#: src/network/connection.c:1753
+#: src/network/connection.c:1761
 msgid "Error in DNS servers"
 msgstr "Chyba v serverech DNS"
 
-#: src/network/connection.c:1754
+#: src/network/connection.c:1762
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1768,11 +1764,11 @@ msgstr ""
 "primární server DNS jste ponechali prázdnou. Zadejte prosím IP adresu pro "
 "primární DNS server nebo odškrtněte volbu pro ruční nastavení DNS."
 
-#: src/network/connection.c:1761
+#: src/network/connection.c:1769
 msgid "Invalid modem device"
 msgstr "Neplatné zařízení modemu"
 
-#: src/network/connection.c:1762
+#: src/network/connection.c:1770
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1780,11 +1776,11 @@ msgstr ""
 "Zařízení modemu, které bude připojení používat, bylo ponecháno prázdné. "
 "Pokračujte prosím zadáním zařízení nebo stisknutím \"autodetekovat\"."
 
-#: src/network/connection.c:1767
+#: src/network/connection.c:1775
 msgid "Invalid phone number"
 msgstr "Neplatné telefonní číslo"
 
-#: src/network/connection.c:1768
+#: src/network/connection.c:1776
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1792,20 +1788,20 @@ msgstr ""
 "Telefonní číslo, které bude připojení používat, bylo ponecháno prázdné. "
 "Pokračujte prosím zadáním platného telefonního čísla."
 
-#: src/network/connection.c:2136
+#: src/network/connection.c:2144
 msgid "Nonexisting interface"
 msgstr "Neexistující rozhraní"
 
-#: src/network/connection.c:2137
+#: src/network/connection.c:2145
 #, c-format
 msgid "The interface \"%s\" doesn't exist."
 msgstr "Rozhraní \"%s\" neexistuje."
 
-#: src/network/connection.c:2140
+#: src/network/connection.c:2148
 msgid "Invalid interface"
 msgstr "Neplatné rozhraní"
 
-#: src/network/connection.c:2141
+#: src/network/connection.c:2149
 msgid "The loopback interface cannot be configured."
 msgstr "Rozhraní loopback nemůže být nastavováno."
 
