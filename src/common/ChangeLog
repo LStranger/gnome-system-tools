@@ -1,3 +1,10 @@
+2001-01-18  Chema Celorio  <chema@celorio.com>
+
+	* xml.c (xml_doc_read_from_backend): remove, it was not beeing
+	used and was duplicated with common/tool.c#tool_config_load
+	(xml_doc_write_to_backend): ditto
+	(get_backend_path): remove, not beeing used. Why was it inside xml.c ?
+
 2001-01-17  Tambet Ingo  <tambet@ximian.com>
 
 	* Changelog: Clean up my mess.
