@@ -1,6 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #include "text.h"
 #include "xst-types.h"
+#include "xst-report-hook.h"
+#include "xst-report-line.h"
 #include "xst-xml.h"
 #include "xst-widget.h"
 #include "xst-tool.h"
