@@ -95,6 +95,7 @@ void                xst_dialog_freeze_visible      (XstDialog *xd);
 void                xst_dialog_thaw_visible        (XstDialog *xd);
 
 gboolean            xst_dialog_get_modified        (XstDialog *xd);
+void                xst_dialog_set_modified        (XstDialog *xd, gboolean state);
 void                xst_dialog_modify              (XstDialog *xd);
 void                xst_dialog_modify_cb           (GtkWidget *w, gpointer data);
 
@@ -108,5 +109,6 @@ void                xst_dialog_set_widget_policies (XstDialog *xd, const XstWidg
 void                xst_dialog_set_widget_user_modes (XstDialog *xd, const XstWidgetUserPolicy *xwup);
 
 void                xst_dialog_add_apply_hook      (XstDialog *xd, XstDialogHookFunc func, gpointer data);
+gboolean            xst_dialog_run_apply_hooks     (XstDialog *xd);
 
 #endif /* XST_DIALOG_H */

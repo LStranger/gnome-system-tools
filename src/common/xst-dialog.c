@@ -169,6 +169,15 @@ xst_dialog_get_modified (XstDialog *xd)
 }
 
 void
+xst_dialog_set_modified (XstDialog *xd, gboolean state)
+{
+	g_return_if_fail (xd != NULL);
+	g_return_if_fail (XST_IS_DIALOG (xd));
+
+	gtk_widget_set_sensitive (xd->apply_button, state);
+}
+
+void
 xst_dialog_modify (XstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
@@ -179,7 +188,7 @@ xst_dialog_modify (XstDialog *xd)
 	if (xd->frozen || !xst_tool_get_access (xd->tool))
 		return;
 
-	gtk_widget_set_sensitive (xd->apply_button, TRUE);
+	xst_dialog_set_modified (xd, TRUE);
 }
 
 void
@@ -263,6 +272,21 @@ xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc func, gpointer data)
 	entry->func = func;
 
 	xd->apply_hook_list = g_list_append (xd->apply_hook_list, entry);
+}
+
+gboolean
+xst_dialog_run_apply_hooks (XstDialog *xd)
+{
+	XstDialogHookEntry *hookentry;
+	GList *l;
+	
+	for (l = xd->apply_hook_list; l; l = l->next) {
+		hookentry = l->data;
+		if (! (hookentry->func) (xd, hookentry->data))
+			return FALSE;
+	}
+
+	return TRUE;
 }
 
 void
@@ -375,23 +399,18 @@ static void
 apply_cb (GtkWidget *w, gpointer data)
 {
 	XstDialog *dialog;
-	XstDialogHookEntry *hookentry;
-	GList *l;
 
 	g_return_if_fail (data != NULL);
 	g_return_if_fail (XST_IS_DIALOG (data));
 
 	dialog = XST_DIALOG (data);
 
-	for (l = dialog->apply_hook_list; l; l = l->next) {
-		hookentry = l->data;
-		if (! (hookentry->func) (dialog, hookentry->data))
-			return;
-	}
-	
+	if (!xst_dialog_run_apply_hooks (dialog))
+		return;
+
 	gtk_signal_emit (GTK_OBJECT (dialog), xstdialog_signals[APPLY]);
 
-	gtk_widget_set_sensitive (dialog->apply_button, FALSE);
+	xst_dialog_set_modified (dialog, FALSE);
 }
 
 static void
@@ -548,7 +567,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	w = glade_xml_get_widget (xml, "close");
 	gtk_signal_connect (GTK_OBJECT (w), "clicked", close_cb, dialog);
 	
-	gtk_widget_set_sensitive (dialog->apply_button,      FALSE);
+	xst_dialog_set_modified (dialog, FALSE);
 	gtk_widget_hide (dialog->complexity_button);
 
 	dialog->complexity = XST_DIALOG_NONE;
