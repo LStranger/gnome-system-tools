@@ -35,6 +35,11 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
+#ifdef __FreeBSD__
+#include <errno.h>
+#include <libutil.h>
+#endif
+
 #include "xst-su.h"
 
 /* ABORT() kills GTK if we're not root, else it just exits.
@@ -55,6 +60,24 @@
 /* OPEN_TTY() is supposed to return a file descriptor to a pseudo-terminal.
  */
 #define OPEN_TTY() getpt()
+
+#ifdef __FreeBSD__
+/* FreeBSD doesn't have getpt(). This function emulates it's behaviour. */
+int getpt (void);
+
+int
+getpt ()
+{
+	int master, slave;
+
+	if (openpty (&master, &slave, NULL, NULL, NULL) < 0) {
+		/* Simulate getpt()'s only error condition. */
+		errno = ENOENT;
+		return -1;
+	}
+	return master;
+}
+#endif
 
 static int root;			/* if we are root, no password is
                                            required */
@@ -164,7 +187,7 @@ exec_su (gchar *exec_path, gchar *user, gchar *pwd)
 #endif
 
 		sleep (1);
-		execlp ("su", "su", "-m", "-c", exec_p, user_p, NULL);
+		execlp ("su", "su", "-m", user_p, "-c", exec_p, NULL);
 
 		_exit (0);
 	}

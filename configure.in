@@ -152,7 +152,13 @@ dnl =====================================================
 XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
 XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
 
-XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/src/common/libsetuptool.a "
+case $host in
+*-*-freebsd* )
+	XST_LIBS="$XST_LIBS -lutil"
+	;;
+esac;
+
+XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/src/common/libsetuptool.a"
 XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
 
 XST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"

@@ -149,6 +149,8 @@ tz_info_from_location (TzLocation *loc)
 {
 	TzInfo *tzinfo;
 	gchar *str;
+	time_t curtime;
+	struct tm *curzone;
 	
 	g_return_val_if_fail (loc != NULL, NULL);
 	g_return_val_if_fail (loc->zone != NULL, NULL);
@@ -159,15 +161,25 @@ tz_info_from_location (TzLocation *loc)
 	tzset ();
 	g_free (str);
 	tzinfo = g_new0 (TzInfo, 1);
+
+	curtime = time (NULL);
+	curzone = localtime (&curtime);
 	
-	g_print ("%s %s %ld %d\n",tzname[0], tzname[1], timezone, daylight);
+	g_print ("%s %s %d\n", curzone->tm_zone, 
+				&curzone->tm_zone[curzone->tm_isdst],
+				curzone->tm_isdst);
 	
 	/* Currently this solution doesnt seem to work - I get that */
 	/* America/Phoenix uses daylight savings, which is wrong    */
-	tzinfo->tzname_normal = (tzname[0]) ? g_strdup (tzname[0]) : NULL;
-	tzinfo->tzname_daylight = (tzname[1]) ? g_strdup (tzname[1]) : NULL;
-	tzinfo->utc_offset = timezone;
-	tzinfo->daylight = daylight;
+	tzinfo->tzname_normal = g_strdup (curzone->tm_zone);
+	if (curzone->tm_isdst) 
+		tzinfo->tzname_daylight =
+			g_strdup (&curzone->tm_zone[curzone->tm_isdst]);
+	else
+		tzinfo->tzname_daylight = NULL;
+
+	tzinfo->utc_offset = curzone->tm_gmtoff;
+	tzinfo->daylight = curzone->tm_isdst;
 	
 	return tzinfo;
 }

@@ -1,3 +1,9 @@
+2001-05-30  Theo van Klaveren <t.vanklaveren@student.utwente.nl>
+
+	* xst-su.c (getpt): Implement this GNU libc extention for FreeBSD
+	using the openpty(3) function in libutil. Also fix argument order
+	to 'su'.
+
 2001-05-29  Miguel de Icaza  <miguel@ximian.com>
 
 	* xst-tool.c (report_progress_tick): Process as much data as

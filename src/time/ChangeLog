@@ -1,3 +1,9 @@
+2001-05-30  Theo van Klaveren <t.vanklaveren@student.utwente.nl>
+
+	* tz.c (tz_info_from_location): Fix this function on FreeBSD by
+	using the normal POSIX API for the timezone stuff (localtime(3)
+	and struct tm).
+
 2001-05-29  Chema Celorio  <chema@celorio.com>
 
 	* xst-spin-button.c (xst_spin_button_get_shadow_type): remove a warning
