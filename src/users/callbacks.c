@@ -77,6 +77,8 @@ extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
+	GList *i;
+	group *g;
 	
 	g_return_if_fail (current_user != NULL);
 
@@ -88,6 +90,17 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	w0 = tool_widget_get ("user_settings_group");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	fill_user_settings_group (GTK_COMBO (w0));
+	for (i = g_list_first (group_list); i; i = g_list_next (i)) 
+	{
+		g = (group *) i->data;
+		if (g->gid == current_user->gid)
+			break;
+	}
+	
+	if (!i)
+		g_warning ("The GID for the main user's group was not found in group_list.");
+	else
+		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), g->name);
 	
 	w0 = tool_widget_get ("user_settings_comment");
 	gtk_widget_set_sensitive (w0, tool_get_access());
@@ -290,7 +303,7 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	GtkList *list;
 	GList *tmplist;
 	group *g;
-
+																			 
 	w0 = tool_widget_get ("user_settings_name");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
 
@@ -299,10 +312,10 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	/* If login name is changed and is at least 3 letters long (is that correct?) */
 	if (strcmp (txt, current_user->login))
 	{
-		if (strlen (txt) < 3)
+		if (strlen (txt) < 1)
 		{
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					("Username is too short", win));
+					("Username is empty.", win));
 			
 			gnome_dialog_run (dialog);
 		}
@@ -333,8 +346,7 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	/* Get selected group name */
 
 	w0 = tool_widget_get ("user_settings_group");
-	label = GTK_BIN (w0)->child;
-	gtk_label_get (GTK_LABEL (label), &txt);
+	txt = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
 
 	/* Now find group's gid */
 
@@ -342,11 +354,15 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	{
 		g = (group *)tmplist->data;
 		if (!strcmp (g->name, txt))
-		{
-			current_user->gid = g->gid;
 			break;
-		}
 	}
+	
+	if (!tmplist)
+		g_warning ("Couldn't find the GID for the selected group.");
+	else
+		current_user->gid = g->gid;
+	
+	g_free (txt);
 				
 	tool_set_modified(TRUE);
 	/* Clean up dialog, it's easiest to just call *_cancel_* function */
