@@ -382,21 +382,17 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		if (c == '\n') {
 			/* End of line */
 
-			if (tool->line_len < 1)
-			{
+			if (!strcmp (tool->line, "end")) {
 				/* End of report */
-
 				tool->report_finished = TRUE;
 			}
-			else
-			{
-				/* Report line; add to list */
-				rline = xst_report_line_new_from_string (tool->line);
-
-				if (rline)
-					tool->report_line_list = g_slist_append (tool->report_line_list,
-										 rline);
-			}
+			
+		        /* Report line; add to list */
+			rline = xst_report_line_new_from_string (tool->line);
+			
+			if (rline)
+				tool->report_line_list = g_slist_append (tool->report_line_list,
+									 rline);
 
 			tool->line [0] = '\0';
 			tool->line_len = 0;
