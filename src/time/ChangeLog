@@ -1,3 +1,20 @@
+2001-10-10  Hans Petter Jansson  <hpj@ximian.com>
+
+	* main.c (update_tz): No longer acts as a signal callback.
+	(timezone_button_clicked): Store the timezone name in the tool,
+	not in the sub-dialog widget. Allow timezone selection to be
+	cancelled.
+	(xst_time_tool_set_time_zone_name): Implement.
+
+	* time-tool.h: Add time_zone_name to XstTimeTool, prettify all.
+
+	* transfer.c (transfer_timezone_xml_to_gui): Set the timezone
+	in the tool, and request an UI update from there.
+	(transfer_timezone_gui_to_xml): Get the timezone from the tool.
+
+	* tz-map.c (e_tz_map_get_selected_tz_name): Make code comprehensible.
+	(button_pressed): Make code comprehensible and more robust.
+
 2001-07-30  Abel Cheung  <maddog@linux.org.hk>
 
 	* main.c (ntp_servers): More working open-access ntp servers from

@@ -199,14 +199,17 @@ transfer_string_calendar_gui_to_xml (XstTool *tool, TransTree *trans_tree, xmlNo
 static void
 transfer_timezone_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
+	XstTimeTool *time_tool;
 	xmlNodePtr node;
 	char *s;
+
+	time_tool = XST_TIME_TOOL (tool);
 	
 	node = xst_xml_element_find_first (root, "timezone");
 	if (!node) return;
 	
 	s = xst_xml_element_get_content (node);
-	e_tz_map_set_tz_from_name (tzmap, s);
+	xst_time_tool_set_time_zone_name (time_tool, s);
 	
 	g_free (s);
 }
@@ -215,12 +218,15 @@ transfer_timezone_xml_to_gui (XstTool *tool, xmlNodePtr root)
 static void
 transfer_timezone_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
+	XstTimeTool *time_tool;
 	xmlNodePtr node;
 	
+	time_tool = XST_TIME_TOOL (tool);
+
 	node = xst_xml_element_find_first (root, "timezone");
 	if (!node) node = xst_xml_element_add (root, "timezone");
 	
-	xst_xml_element_set_content (node, e_tz_map_get_selected_tz_name (tzmap));
+	xst_xml_element_set_content (node, time_tool->time_zone_name);
 }
 
 

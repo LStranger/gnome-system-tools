@@ -24,15 +24,18 @@ struct _XstTimeTool {
 	gint sec;
 	gint min;
 	gint hrs;
+
+	gchar *time_zone_name;
 };
 
 struct _XstTimeToolClass {
 	XstToolClass parent_class;
 };
 
-GtkType xst_time_tool_get_type (void);
-void    xst_time_update (XstTimeTool *tool);
+GtkType xst_time_tool_get_type           (void);
+void    xst_time_update                  (XstTimeTool *tool);
 
-void xst_time_clock_stop  (XstTimeTool *tool);
-void xst_time_clock_start (XstTimeTool *tool);
+void    xst_time_clock_stop              (XstTimeTool *tool);
+void    xst_time_clock_start             (XstTimeTool *tool);
 
+void    xst_time_tool_set_time_zone_name (XstTimeTool *time_tool, gchar *name);

@@ -131,7 +131,16 @@ e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 gchar *
 e_tz_map_get_selected_tz_name (ETzMap *tzmap)
 {
-	return (gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo"))->entry)));
+	GtkWidget  *location_combo;
+	GtkWidget  *location_entry;
+	gchar      *entry_text;
+
+	location_combo = xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
+	location_entry = GTK_COMBO (location_combo)->entry;
+
+	entry_text     = gtk_entry_get_text (GTK_ENTRY (location_entry));
+
+	return entry_text;
 }
 
 
@@ -235,19 +244,30 @@ button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 	        e_map_zoom_out (tzmap->map);
 	else
 	{
+		GtkWidget  *location_combo;
+		GtkWidget  *location_entry;
+		TzLocation *tz_location;
+		gchar      *entry_text, *entry_text_new;
+
 		if (e_map_get_magnification (tzmap->map) <= 1.0)
 		        e_map_zoom_to_location (tzmap->map, longitude, latitude);
-	
+
 		if (tzmap->point_selected)
 		        e_map_point_set_color_rgba (tzmap->map,
 						    tzmap->point_selected,
 						    TZ_MAP_POINT_NORMAL_RGBA);
 		tzmap->point_selected = tzmap->point_hover;
-		
-		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo"))->entry),
-				    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
-		
-		xst_dialog_modify (tzmap->tool->main_dialog);
+
+		location_combo = xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
+		location_entry = GTK_COMBO (location_combo)->entry;
+		tz_location    = e_tz_map_location_from_point (tzmap, tzmap->point_selected);
+
+		entry_text     = gtk_entry_get_text (GTK_ENTRY (location_entry));
+		entry_text_new = tz_location_get_zone (tz_location);
+
+		if (!entry_text || !entry_text_new || strcmp (entry_text, entry_text_new)) {
+			gtk_entry_set_text (GTK_ENTRY (location_entry), entry_text_new);
+		}
 	}
 	
 	return TRUE;

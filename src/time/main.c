@@ -46,7 +46,7 @@
 ETzMap *tzmap;
 
 static void timezone_button_clicked (GtkWidget *w, gpointer data);
-static void update_tz (GtkWidget *w, gpointer data);
+static void update_tz (XstTimeTool *time_tool);
 static void server_button_clicked (GtkWidget *w, gpointer data);
 static void ntp_use_toggled (GtkWidget *w, XstDialog *dialog);
 
@@ -121,7 +121,7 @@ static XstDialogSignal signals[] = {
 	{ "ntp_use",           "toggled",            ntp_use_toggled },
 	{ "timeserver_button", "clicked",            server_button_clicked },
 	{ "location_combo",    "set_focus_child",    xst_dialog_modify_cb },
-	{ "tz_combo_entry",    "changed",            update_tz },
+	/*	{ "tz_combo_entry",    "changed",            update_tz }, */
 	{ "ntp_list",          "selection_changed",  xst_dialog_modify_cb },
 	{ "ntp_add_server",    "clicked",            on_ntp_addserver },
 	{ "ntp_add_server",    "clicked",            xst_dialog_modify_cb },
@@ -342,17 +342,31 @@ static void
 timezone_button_clicked (GtkWidget *w, gpointer data)
 {
 	static GtkWidget *d = NULL;
+	XstDialog *dialog;
+	XstTimeTool *time_tool;
+	gint result;
+
+	dialog = XST_DIALOG (data);
+	time_tool = XST_TIME_TOOL (xst_dialog_get_tool (dialog));
 
 	if (!d) {
-		d = xst_dialog_get_widget (XST_DIALOG (data), "Time zone");
+		d = xst_dialog_get_widget (dialog, "Time zone");
 		gnome_dialog_close_hides (GNOME_DIALOG (d), TRUE);
+	}
+
+	if (time_tool->time_zone_name) {
+		e_tz_map_set_tz_from_name (tzmap, time_tool->time_zone_name);
 	}
 
 	gtk_widget_show (d);
 	gdk_window_show (d->window);
 	gdk_window_raise (d->window);
 
-	gnome_dialog_run_and_close (GNOME_DIALOG (d));
+	result = gnome_dialog_run_and_close (GNOME_DIALOG (d));
+	if (result == 0) {
+		xst_time_tool_set_time_zone_name (time_tool, e_tz_map_get_selected_tz_name (tzmap));
+		xst_dialog_modify (dialog);
+	}
 }
 
 static void
@@ -373,13 +387,26 @@ server_button_clicked (GtkWidget *w, gpointer data)
 }
 
 static void
-update_tz (GtkWidget *w, gpointer data)
+update_tz (XstTimeTool *time_tool)
 {
 	GtkWidget *l;
 
-	l = xst_dialog_get_widget (XST_DIALOG (data), "tzlabel");
-	gtk_label_set_text (GTK_LABEL (l), gtk_entry_get_text (GTK_ENTRY (w)));
+	l = xst_dialog_get_widget (XST_DIALOG (XST_TOOL (time_tool)->main_dialog), "tzlabel");
+
+	if (time_tool->time_zone_name) {
+		gtk_label_set_text (GTK_LABEL (l), time_tool->time_zone_name);
+	}
 }      
+
+void
+xst_time_tool_set_time_zone_name (XstTimeTool *time_tool, gchar *name)
+{
+	if (time_tool->time_zone_name) {
+		g_free (time_tool->time_zone_name);
+	}
+	time_tool->time_zone_name = g_strdup (name);
+	update_tz (time_tool);
+}
 
 static void
 ntp_use_toggled (GtkWidget *w, XstDialog *dialog)
