@@ -171,78 +171,48 @@ storage_cdrom_setup_properties_widget (GstDisksStorage *storage)
 {
 	GstDisksStorageCdrom *cdrom;
 	GtkWidget *speed_label;
-	gchar *speed;
+	gchar *speed, *device;
 
 	cdrom = GST_DISKS_STORAGE_CDROM (storage);
 
-	speed_label = gst_dialog_get_widget (tool->main_dialog, "cdrom_speed_label");
-	g_object_get (G_OBJECT (storage), "speed", &speed, NULL);
+	g_object_get (G_OBJECT (storage), "speed", &speed,
+		      "device", &device, NULL);
+
+	gtk_label_set_text (
+		GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_device_label")),
+		device);
+	
 	if (speed == NULL) {
 		gst_disks_gui_set_device_speed (storage);
 	} else {
-		gtk_label_set_text (GTK_LABEL (speed_label), speed);
+		gtk_label_set_text (
+			GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "cdrom_speed_label")),
+			speed);
 	}
 		
-
-	if (cdrom->priv->play_audio) {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "play_audio_image")),
-			GTK_STOCK_YES, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	} else {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "play_audio_image")),
-			GTK_STOCK_NO, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	}
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "play_audio_check")),
+		cdrom->priv->play_audio);
 	
-	if (cdrom->priv->write_cdr) {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_cdr_image")),
-			GTK_STOCK_YES, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	} else {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_cdr_image")),
-			GTK_STOCK_NO, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	}
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_cdr_check")),
+		cdrom->priv->write_cdr);
+					      
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_cdrw_check")),
+		cdrom->priv->write_cdrw);
+	
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "read_dvd_check")),
+		cdrom->priv->read_dvd);
 
-	if (cdrom->priv->write_cdrw) {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_cdrw_image")),
-			GTK_STOCK_YES, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	} else {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_cdrw_image")),
-			GTK_STOCK_NO, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	}
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_dvdr_check")),
+		cdrom->priv->write_dvdr);
 
-	if (cdrom->priv->read_dvd) {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "read_dvd_image")),
-			GTK_STOCK_YES, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	} else {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "read_dvd_image")),
-			GTK_STOCK_NO, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	}
-
-	if (cdrom->priv->write_dvdr) {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_dvdr_image")),
-			GTK_STOCK_YES, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	} else {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_dvdr_image")),
-			GTK_STOCK_NO, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	}
-
-	if (cdrom->priv->write_dvdram) {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_dvdram_image")),
-			GTK_STOCK_YES, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	} else {
-		gtk_image_set_from_stock (
-			GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "write_dvdram_image")),
-			GTK_STOCK_NO, GTK_ICON_SIZE_SMALL_TOOLBAR);
-	}
+	gtk_toggle_button_set_active (
+		GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "write_dvdram_check")),
+		cdrom->priv->write_dvdram);
 }
 
 GstDisksStorage*
