@@ -17,8 +17,6 @@
 #include "e-map/e-map.h"
 #include "tz-map.h"
 
-extern XstTool *tool;
-
 TransStringSpin transfer_string_spin_table[] =
 {
 #if 0
@@ -51,7 +49,7 @@ TransTree trans_tree =
 
 
 static void
-transfer_string_spin_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
+transfer_string_spin_xml_to_gui (XstTool *tool, TransTree *trans_tree, xmlNodePtr root)
 {
 	int i;
 	xmlNodePtr node, subnode;
@@ -81,7 +79,7 @@ transfer_string_spin_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
 
 
 static void
-transfer_string_spin_gui_to_xml (TransTree *trans_tree, xmlNodePtr root)
+transfer_string_spin_gui_to_xml (XstTool *tool, TransTree *trans_tree, xmlNodePtr root)
 {
 	int i;
 	xmlNodePtr node, subnode;
@@ -107,7 +105,7 @@ transfer_string_spin_gui_to_xml (TransTree *trans_tree, xmlNodePtr root)
 
 
 static void
-transfer_string_calendar_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
+transfer_string_calendar_xml_to_gui (XstTool *tool, TransTree *trans_tree, xmlNodePtr root)
 {
 	int i;
 	xmlNodePtr node, subnode;
@@ -155,7 +153,7 @@ transfer_string_calendar_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
 
 
 static void
-transfer_string_calendar_gui_to_xml (TransTree *trans_tree, xmlNodePtr root)
+transfer_string_calendar_gui_to_xml (XstTool *tool, TransTree *trans_tree, xmlNodePtr root)
 {
 	int i;
 	xmlNodePtr node, subnode;
@@ -197,7 +195,7 @@ transfer_string_calendar_gui_to_xml (TransTree *trans_tree, xmlNodePtr root)
 
 
 static void
-transfer_timezone_xml_to_gui (xmlNodePtr root)
+transfer_timezone_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	xmlNodePtr node;
 	char *s;
@@ -213,7 +211,7 @@ transfer_timezone_xml_to_gui (xmlNodePtr root)
 
 
 static void
-transfer_timezone_gui_to_xml (xmlNodePtr root)
+transfer_timezone_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	xmlNodePtr node;
 	
@@ -238,7 +236,7 @@ server_list_cb (GtkWidget *item, gpointer data)
 
 
 static void
-transfer_servers_xml_to_gui (xmlNodePtr root)
+transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *ntp_list, *item;
 	GList *list_add = NULL;
@@ -294,7 +292,7 @@ server_list_get_cb (GtkWidget *item, gpointer data)
 
 
 static void
-transfer_servers_gui_to_xml (xmlNodePtr root)
+transfer_servers_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *ntp_list;
 	xmlNodePtr node;
@@ -311,7 +309,7 @@ transfer_servers_gui_to_xml (xmlNodePtr root)
 
 
 static void
-transfer_sync_toggle_xml_to_gui (xmlNodePtr root)
+transfer_sync_toggle_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *toggle;
 	xmlNodePtr node;
@@ -327,7 +325,7 @@ transfer_sync_toggle_xml_to_gui (xmlNodePtr root)
 
 
 static void
-transfer_sync_toggle_gui_to_xml (xmlNodePtr root)
+transfer_sync_toggle_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *toggle;
 	xmlNodePtr node;
@@ -343,7 +341,7 @@ transfer_sync_toggle_gui_to_xml (xmlNodePtr root)
 
 
 static void
-transfer_time_gui_to_system ()
+transfer_time_gui_to_system (XstTool *tool)
 {
 	struct tm tm;
 	struct timeval tv;
@@ -377,7 +375,7 @@ transfer_time_gui_to_system ()
 
 
 static void
-transfer_time_system_to_gui ()
+transfer_time_system_to_gui (XstTool *tool)
 {
 	struct tm *tm;
 	time_t tt;
@@ -401,6 +399,25 @@ transfer_time_system_to_gui ()
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (second_widget), (gfloat) tm->tm_sec);
 }
 
+static void
+transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
+{
+	xmlNodePtr node;
+	gboolean res;
+	gchar *str;
+
+	res = FALSE;
+	node = xst_xml_element_find_first (root, "ntpinstalled");
+
+	if (node) {
+		gtk_object_set_data (GTK_OBJECT (tool), "tool_configured", (gpointer) TRUE);
+		str = xst_xml_element_get_content (node);
+		res = (*str == '1')? TRUE: FALSE;
+		g_free (str);
+	}
+
+	gtk_object_set_data (GTK_OBJECT (tool), "ntpinstalled", (gpointer) res);
+}
 
 void
 transfer_xml_to_gui (XstTool *tool, gpointer data)
@@ -409,12 +426,13 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 
 	root = xst_xml_doc_get_root (tool->config);
 
-	transfer_string_calendar_xml_to_gui (&trans_tree, root);
-	transfer_string_spin_xml_to_gui (&trans_tree, root);
-	transfer_timezone_xml_to_gui (root);
-	transfer_servers_xml_to_gui (root);
-	transfer_sync_toggle_xml_to_gui (root);
-	transfer_time_system_to_gui ();
+	transfer_string_calendar_xml_to_gui (tool, &trans_tree, root);
+	transfer_string_spin_xml_to_gui (tool, &trans_tree, root);
+	transfer_timezone_xml_to_gui (tool, root);
+	transfer_servers_xml_to_gui (tool, root);
+	transfer_sync_toggle_xml_to_gui (tool, root);
+	transfer_time_system_to_gui (tool);
+	transfer_misc_xml_to_tool (tool, root);
 }
 
 
@@ -425,10 +443,10 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 
 	root = xst_xml_doc_get_root (tool->config);
 
-	transfer_time_gui_to_system ();
-	transfer_string_calendar_gui_to_xml (&trans_tree, root);
-	transfer_string_spin_gui_to_xml (&trans_tree, root);
-	transfer_timezone_gui_to_xml (root);
-	transfer_servers_gui_to_xml (root);
-	transfer_sync_toggle_gui_to_xml (root);
+	transfer_time_gui_to_system (tool);
+	transfer_string_calendar_gui_to_xml (tool, &trans_tree, root);
+	transfer_string_spin_gui_to_xml (tool, &trans_tree, root);
+	transfer_timezone_gui_to_xml (tool, root);
+	transfer_servers_gui_to_xml (tool, root);
+	transfer_sync_toggle_gui_to_xml (tool, root);
 }

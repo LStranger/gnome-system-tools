@@ -1,3 +1,16 @@
+2001-04-24  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* main.c (ntp_use_toggled): Get a warning if you don't have NTP support.
+	Warning fixes.
+	* transfer.c: Pass the tool parameter all over the place, avoiding tool
+	global use.
+	(transfer_misc_xml_to_tool): Get gui-independent parameters here, such as
+	ntpinstalled.
+	* tz.c: Warning fixes.
+	* e-map/e-map-test.c: Warning fixes.
+	* e-map/e-map.c: Warning fixes.
+	
+
 2001-03-30  Tambet Ingo  <tambet@ximian.com>
 
 	* Makefile.am: Add gconf cflags.

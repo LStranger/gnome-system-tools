@@ -92,7 +92,6 @@ static XstDialogSignal signals[] = {
 	{ "minute",            "changed",            xst_dialog_modify_cb },
 	{ "second",            "changed",            xst_dialog_modify_cb },
 	{ "timezone_button",   "clicked",            timezone_button_clicked },
-	{ "ntp_use",           "toggled",            xst_dialog_modify_cb },
 	{ "ntp_use",           "toggled",            ntp_use_toggled },
 	{ "timeserver_button", "clicked",            server_button_clicked },
 	{ "location_combo",    "set_focus_child",    xst_dialog_modify_cb },
@@ -184,7 +183,7 @@ clock_tick (gpointer data)
 }
 
 
-static void
+/*static void
 tz_select_combo (GtkList *list, GtkWidget *widget, gpointer data)
 {
 	GtkListItem *li;
@@ -194,7 +193,7 @@ tz_select_combo (GtkList *list, GtkWidget *widget, gpointer data)
 	gtk_label_get (GTK_LABEL (GTK_BIN (li)->child), &text);
 	
 	e_tz_map_set_tz_from_name (tzmap, text);
-}
+}*/
 
 static void
 timezone_button_clicked (GtkWidget *w, gpointer data)
@@ -242,15 +241,31 @@ update_tz (GtkWidget *w, gpointer data)
 static void
 ntp_use_toggled (GtkWidget *w, gpointer data)
 {
-	XstDialog *xd;      
+	gboolean active, configured, ntp_installed;
+	XstDialog *xd;
 
+	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
+	configured = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "tool_configured");
+	ntp_installed = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "ntpinstalled");
+	
+	if (configured && !ntp_installed && active) {
+		GtkWidget *dialog;
+		
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
+		dialog = gnome_ok_dialog (_("You don't have NTP support installed. Please install NTP support\nin the system to enable server synchronization."));
+		gtk_window_set_title (GTK_WINDOW (dialog), _("NTP support missing."));
+		gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+		return;
+	}
+
+	if (ntp_installed)
+		xst_dialog_modify_cb (w, data);
+	
 	xd = XST_DIALOG (data);
-
-	gtk_widget_set_sensitive (xst_dialog_get_widget (xd, "timeserver_button"),
-				  GTK_TOGGLE_BUTTON (w)->active);
+	gtk_widget_set_sensitive (xst_dialog_get_widget (xd, "timeserver_button"), active);
 }
 
-static void
+/*static void
 connect_signals ()
 {	
 #if 0
@@ -277,12 +292,12 @@ connect_signals ()
 	glade_xml_signal_connect_data (xml, "ntp_use_toggled",         ntp_use_toggled,         tool->main_dialog);
 #endif
 
-}
+}*/
 
 static void
 adjust (const char *s, gint max)
 {
-	GtkAdjustment *adj;
+	GtkObject *adj;
 	GtkWidget *w;
 
 	w = xst_dialog_get_widget (tool->main_dialog, s);
@@ -292,7 +307,7 @@ adjust (const char *s, gint max)
 	adj = gtk_adjustment_new (0.0, 0.0, max - 1.0,
 				  1.0, 5.0, 5.0);
 
-	gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (w), adj);
+	gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (w), GTK_ADJUSTMENT (adj));
 	gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (w), TRUE);	
 }
 

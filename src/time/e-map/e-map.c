@@ -1436,7 +1436,7 @@ blowup_window_area (GdkWindow *window, gint area_x, gint area_y, gint target_x, 
 	AxisType strong_axis;
 	gfloat axis_factor, axis_counter;
 	gint zoom_chunk;
-	gint divisor_width, divisor_height;
+	gint divisor_width = 0, divisor_height = 0;
 	gint divide_width_index, divide_height_index;
 	gint area_width, area_height;
 	gint i, j;

@@ -8,7 +8,8 @@ EMapPoint *point = NULL, *highlight_point = NULL;
 int id;
 
 
-static gint flash(gpointer data)
+static gint
+flash(gpointer data)
 {
 	if (!point) return TRUE;
 
@@ -21,7 +22,8 @@ static gint flash(gpointer data)
 }
 
 
-gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer user_data)
+static gboolean
+motion (GtkWidget *widget, GdkEventMotion *event, gpointer user_data)
 {
 	double longitude, latitude;
 	
@@ -41,7 +43,8 @@ gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer user_data)
 }
 
 
-gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
+static gboolean
+button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 {
 	double longitude, latitude;
 	
@@ -61,7 +64,8 @@ gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 }
 
 
-int main(int argc, char *argv[])
+int
+main (int argc, char *argv[])
 {
 	gnome_init("e-map-test", "0.0.0", argc, argv);
   

@@ -59,7 +59,7 @@ tz_load_db (void)
 	}
 	tzfile = fopen (tz_data_file, "r");
 	if (!tzfile) {
-		g_warning ("Could not open *%s*\n", tzfile);
+		g_warning ("Could not open *%s*\n", tz_data_file);
 		g_free (tz_data_file);
 		return NULL;
 	}
