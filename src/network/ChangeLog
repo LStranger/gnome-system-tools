@@ -1,3 +1,12 @@
+2001-02-24  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.c (connection_xml_wvsection_search): specify type you are looking for.
+	(connection_xml_wvsection_get_inherits_node): for the code's sake. Also, improves
+	wvdial support, as this function looks for the Defaults section if the section
+	doesn't inherit anything.
+	(connection_xml_wvsection_node_get_str): Finally, a compact function that gets it
+	right too.
+
 2001-02-23  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* connection.h: struc Connection: use gchar, gint and gfloat types. file field.

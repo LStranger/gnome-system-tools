@@ -171,32 +171,82 @@ connection_xml_wvsection_has_name (xmlNode *node, gchar *name)
 	return !cmp;
 }
 
+/* Use type == NULL if you don't care about the type. */
 static xmlNode *
-connection_xml_wvsection_search (xmlNode *node, gchar *section_name)
+connection_xml_wvsection_search (xmlNode *node, gchar *section_name, gchar *type)
 {
+	gchar *types[] = { "dialer", "modem", NULL };
+	gint i;
+
+	/* Check that type is valid */
+	if (type) {
+		for (i = 0; type[i]; i++)
+			if (!strcmp (types[i], type))
+				break;
+
+		g_return_val_if_fail (types[i] != NULL, NULL);
+	}
+	
+	g_return_val_if_fail (section_name != NULL, NULL);
+	
 	for (node = xst_xml_element_find_first (node, "dialing");
 		node; node = xst_xml_element_find_next (node, "dialing"))
 	{
-		if (!connection_xml_wvsection_is_type (node, "dialer"))
+		if (type && !connection_xml_wvsection_is_type (node, type))
 			continue;
 		
 		if (connection_xml_wvsection_has_name (node, section_name))
 			break;
 	}
+
+	if (!node)
+		g_warning ("connection_xml_wvsection_search: section %s type %s not found.",
+				 section_name, type);
 	
 	return node;
 }
-static gchar *
-connection_xml_wvsection_get_str (xmlNode *node, gchar *section_name, gchar *elem)
+
+static xmlNode *
+connection_xml_wvsection_get_inherits_node (xmlNode *root, xmlNode *node)
 {
-	xmlNode *subnode;
-	gchar *ret, *value;
-	gchar *inherits = NULL;
-	gchar *c;
+	gchar *prefix[] = { "Dialer ", "Modem", NULL };
+	gchar *inherits, *c;
+	gint i;
+	xmlNode *inherit_node;
 
-	ret = NULL;
+	g_return_val_if_fail (root != NULL, NULL);
+	g_return_val_if_fail (node != NULL, NULL);
 
-	subnode = connection_xml_wvsection_search (node, section_name);
+	inherits = connection_xml_get_str (node, "inherits");
+	if (inherits) {
+		for (i = 0; prefix[i]; i++)
+			if (strstr (inherits, prefix[i]) == inherits)
+				break;
+		
+		g_return_val_if_fail (prefix[i] != NULL, NULL);
+		
+		c = inherits + strlen (prefix[i]);
+		inherit_node = connection_xml_wvsection_search (root, c, NULL);
+		g_free (inherits);
+		
+		g_return_val_if_fail (inherit_node != node, NULL);
+		if (inherit_node)
+			return inherit_node;
+		
+		g_warning ("connection_xml_wvsection_get_inherits: inherited section doesn't exist.");
+	}
+	
+	inherit_node = connection_xml_wvsection_search (root, "Defaults", "dialer");
+	if (inherit_node == node)
+		return NULL;
+	return inherit_node;
+}
+
+static gchar *
+connection_xml_wvsection_node_get_str (xmlNode *node, xmlNode *subnode, gchar *elem)
+{
+	gchar *value;
+
 	if (subnode) {
 		/* Found the section */
 		value = connection_xml_get_str (subnode, elem);
@@ -205,18 +255,21 @@ connection_xml_wvsection_get_str (xmlNode *node, gchar *section_name, gchar *ele
 			return value;
 		} else {
 			/* Value not found. Try inherited section. */
-			inherits = connection_xml_get_str (subnode, inherits);
-			if (!inherits)
-				/* Doesn't inherit. Finally, value not found. */
-				return NULL;
-			
-			c = strchr (inherits, ' ');
-			return connection_xml_wvsection_get_str (node, c, elem);
+			subnode = connection_xml_wvsection_get_inherits_node (node, subnode);
+			return connection_xml_wvsection_node_get_str (node, subnode, elem);
 		}
 	}
 
-	g_warning ("connection_xml_wvsection_get_str: section %s not found.", section_name);
 	return NULL;
+}
+
+static gchar *
+connection_xml_wvsection_get_str (xmlNode *node, gchar *section_name, gchar *elem)
+{
+	xmlNode *subnode;
+	
+	subnode = connection_xml_wvsection_search (node, section_name, "dialer");
+	return connection_xml_wvsection_node_get_str (node, subnode, elem);
 }
 
 static gboolean
@@ -236,13 +289,13 @@ connection_xml_wvsection_get_boolean (xmlNode *node, gchar *section_name, gchar 
 }
 
 static xmlNode *
-connection_xml_wvsection_add (xmlNode *node, gchar *section_name)
+connection_xml_wvsection_add (xmlNode *node, gchar *section_name, gchar *type)
 {
 	xmlNode *subnode;
 
 	subnode = xst_xml_element_add (node, "dialing");
 	connection_xml_save_str_to_node (subnode, "name", section_name);
-	connection_xml_save_str_to_node (subnode, "type", "dialer");
+	connection_xml_save_str_to_node (subnode, "type", type);
 
 	return subnode;
 }
@@ -252,9 +305,9 @@ connection_xml_wvsection_save_str_to_node (xmlNode *node, gchar *section_name, g
 {
 	xmlNode *subnode;
 
-	subnode = connection_xml_wvsection_search (node, section_name);
+	subnode = connection_xml_wvsection_search (node, section_name, "dialer");
 	if (!subnode)
-		subnode = connection_xml_wvsection_add (node, section_name);
+		subnode = connection_xml_wvsection_add (node, section_name, "dialer");
 
 	connection_xml_save_str_to_node (subnode, node_name, str);
 }
@@ -729,15 +782,13 @@ on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn)
 
 static void
 fill_general (Connection *cxn)
-{	
-	gtk_label_set_text (GTK_LABEL (W ("connection_device")), cxn->dev);
-	my_entry_set_text (GTK_ENTRY (W ("connection_name")), cxn->name);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_enabled")), cxn->autoboot);
+{
+	gtk_label_set_text (GTK_LABEL (W ("connection_dev")), cxn->dev);
+	SET_STR ("connection_", name);
+	SET_BOOL ("status_", enabled);
 	update_status (cxn);
-	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_autoboot")), cxn->autoboot);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_user")), cxn->user);
+	SET_BOOL ("status_", autoboot);
+	SET_BOOL ("status_", user);
 }
 
 static void
@@ -747,7 +798,7 @@ update_ip_config (Connection *cxn)
 
 	ip = cxn->tmp_ip_config;
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_dhcp_dns")), cxn->dhcp_dns);
+	SET_BOOL ("status_", dhcp_dns);
 	gtk_widget_set_sensitive (W ("status_dhcp_dns"), ip != IP_MANUAL);
 	gtk_widget_set_sensitive (W ("ip_table"), ip == IP_MANUAL);
 }
