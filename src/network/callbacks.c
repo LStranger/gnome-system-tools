@@ -399,6 +399,12 @@ on_host_aliases_delete_clicked (GtkWidget *widget, gpointer data)
 }
 
 void
+on_host_aliases_dialog_changed (GtkWidget *widget, gpointer data)
+{
+  host_aliases_check_fields ();
+}
+
+void
 on_dialog_changed (GtkWidget *widget, gpointer data)
 {
   GstNetworkTool *network_tool = GST_NETWORK_TOOL (tool);

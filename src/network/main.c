@@ -45,6 +45,8 @@ static GstDialogSignal signals[] = {
   { "host_aliases_add",             "clicked", G_CALLBACK (on_host_aliases_add_clicked) },
   { "host_aliases_properties",      "clicked", G_CALLBACK (on_host_aliases_properties_clicked) },
   { "host_aliases_delete",          "clicked", G_CALLBACK (on_host_aliases_delete_clicked) },
+  /* host aliases dialog */
+  { "host_alias_address",           "changed", G_CALLBACK (on_host_aliases_dialog_changed) },
   /* connection dialog */
   { "connection_device_active",     "clicked", G_CALLBACK (on_iface_active_changed) },
   { "connection_ppp_device_active", "clicked", G_CALLBACK (on_iface_active_changed) },
@@ -129,6 +131,19 @@ init_filters (void)
   gst_filter_init (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "connection_dial_prefix")), GST_FILTER_PHONE);
 }
 
+static void
+set_text_buffers_callback (void)
+{
+  GtkWidget *textview;
+  GtkTextBuffer *buffer;
+
+  textview = gst_dialog_get_widget (tool->main_dialog, "host_alias_list");
+  buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (textview));
+
+  g_signal_connect (G_OBJECT (buffer), "changed",
+		    G_CALLBACK (on_host_aliases_dialog_changed), NULL);
+}
+
 int
 main (int argc, gchar *argv[])
 {
@@ -148,6 +163,7 @@ main (int argc, gchar *argv[])
 
   gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
   gst_dialog_connect_signals (tool->main_dialog, signals);
+  set_text_buffers_callback ();
   gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook, NULL);
   init_filters ();
 

@@ -35,5 +35,6 @@ void           host_aliases_add_from_xml   (xmlNodePtr);
 void           host_aliases_extract_to_xml (GtkTreeIter*, xmlNodePtr);
 void           host_aliases_run_dialog     (GtkTreeIter*);
 void           host_aliases_clear          (void);
+void           host_aliases_check_fields   (void);
 
 #endif /* __HOSTS_H_ */

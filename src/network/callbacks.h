@@ -47,6 +47,8 @@ gboolean on_table_popup_menu   (GtkWidget*, gpointer);
 void  on_host_aliases_add_clicked        (GtkWidget*, gpointer);
 void  on_host_aliases_properties_clicked (GtkWidget*, gpointer);
 void  on_host_aliases_delete_clicked     (GtkWidget*, gpointer);
+void  on_host_aliases_dialog_changed     (GtkWidget*, gpointer);
+
 
 void  on_dialog_changed (GtkWidget*, gpointer);
 
