@@ -503,28 +503,31 @@ xst_ui_entry_set_text (void *entry, const gchar *str)
  * Return Value: TRUE if logout, FALSE if not.
  **/
 gboolean
-xst_ui_logout_dialog (void)
+xst_ui_logout_dialog (const gchar *message)
 {
+	GtkWidget *dialog;
+
+	dialog = gnome_ok_dialog (N_("Restart your X server for these changes to have effect."));
+	gnome_dialog_run_and_close (GNOME_DIALOG( dialog));
+
+	return FALSE;
+	
+	/* Cause it isn't working, let's just suggest user to restart X. */	
+#if 0	
 	GtkWidget *dialog;
 	gint retval;
 	GnomeClient *client = gnome_master_client ();
-
-	dialog = gnome_question_dialog (N_("You are about to logout from\n"
-					   "your graphical session.\n"
-					   "It is recommended you close all\n"
-					   "your running programs.\n\n"
-					   "Restart now?"),
-					NULL, NULL);
+	
+	dialog = gnome_question_dialog (message, NULL, NULL);
 
 	retval = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
 
 	if (retval)
 		return FALSE;
 
-	/* Yes, let's end our gnome-session. */
-	
 	gnome_client_request_save (client, GNOME_SAVE_BOTH,
 				   TRUE, GNOME_INTERACT_ERRORS, FALSE, TRUE);
 
 	return TRUE;
+#endif		
 }
