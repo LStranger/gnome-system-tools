@@ -30,53 +30,76 @@
 #define E_MAP_CLASS(klass)    (GTK_CHECK_CLASS_CAST ((klass), TYPE_E_MAP, EMapClass))
 #define IS_E_MAP(obj)         (GTK_CHECK_TYPE ((obj), TYPE_E_MAP))
 #define IS_E_MAP_CLASS(klass) (GTK_CHECK_CLASS_TYPE ((klass), TYPE_E_MAP))
+
 typedef struct _EMap EMap;
 typedef struct _EMapClass EMapClass;
+typedef struct _EMapPoint EMapPoint;
 
 struct _EMap
 {
-  GtkWidget widget;
+	GtkWidget widget;
 
-  /* Private data */
-  gpointer priv;
+	/* Private data */
+	gpointer priv;
 };
 
 struct _EMapClass
 {
-  GtkWidgetClass parent_class;
+	GtkWidgetClass parent_class;
 
-  /* Notification signals */
-  void (*zoom_fit) (EMap * view);
+	/* Notification signals */
+	void (*zoom_fit) (EMap * view);
 
-  /* GTK+ scrolling interface */
-  void (*set_scroll_adjustments) (GtkWidget * widget,
-                                  GtkAdjustment * hadj, GtkAdjustment * vadj);
+	/* GTK+ scrolling interface */
+	void (*set_scroll_adjustments) (GtkWidget * widget,
+					GtkAdjustment * hadj,
+					GtkAdjustment * vadj);
 };
 
-GtkType e_map_get_type(void);
-EMap *e_map_new(void);
+/* The definition of Dot */
 
-void e_map_set_smooth_zoom(EMap *map,
-                           gboolean state);
+struct _EMapPoint
+{
+	gchar *name;  /* Can be NULL */
+	double longitude, latitude;
+	guint32 rgba;
+	gpointer user_data;
+};
 
-gboolean e_map_get_smooth_zoom(EMap *map);
 
-void e_map_window_to_world(EMap *map,
-                           double win_x,
-                           double win_y,
-                           double *world_longitude,
-                           double *world_latitude);
+GtkType
+e_map_get_type (void);
 
-void e_map_world_to_window(EMap *map,
-                           double world_longitude,
-                           double world_latitude,
-                           double *win_x,
-                           double *win_y);
+EMap *
+e_map_new (void);
 
-void e_map_zoom_to_site(EMap *map,
-                        double longitude,
-                        double latitude);
+void
+e_map_set_smooth_zoom (EMap *map,
+		       gboolean state);
 
-void e_map_zoom_out(EMap *map);
+gboolean
+e_map_get_smooth_zoom (EMap *map);
+
+void
+e_map_window_to_world (EMap *map,
+		       double win_x,
+		       double win_y,
+		       double *world_longitude,
+		       double *world_latitude);
+
+void
+e_map_world_to_window (EMap *map,
+		       double world_longitude,
+		       double world_latitude,
+		       double *win_x,
+		       double *win_y);
+
+void
+e_map_zoom_to_site (EMap *map,
+		    double longitude,
+		    double latitude);
+
+void
+e_map_zoom_out (EMap *map);
 
 #endif
