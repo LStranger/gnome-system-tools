@@ -126,6 +126,12 @@ connection_xml_save_boolean_to_node (xmlNode *node, gchar *node_name, gboolean b
 	connection_xml_save_str_to_node (node, node_name, bool? "1": "0");
 }
 
+static void
+connection_xml_destroy (xmlNodePtr node, gchar *node_name)
+{
+	gst_xml_element_destroy_children_by_name (node, node_name);
+}
+
 static gboolean
 connection_xml_wvsection_is_type (xmlNode *node, gchar *type)
 {
@@ -2138,16 +2144,24 @@ connection_save_to_node (GstConnection *cxn, xmlNode *root)
 		connection_xml_save_boolean_to_node (node, "update_dns", cxn->update_dns);
 
 	/* TCP/IP general paramaters */
-	connection_set_bcast_and_network (cxn);
-	connection_xml_save_str_to_node (node, "address", cxn->address);
-	connection_xml_save_str_to_node (node, "netmask", cxn->netmask);
-	connection_xml_save_str_to_node (node, "broadcast", cxn->broadcast);
-	connection_xml_save_str_to_node (node, "network", cxn->network);
-	connection_xml_save_str_to_node (node, "gateway", cxn->gateway);
-
 	s = connection_config_type_to_str (cxn->ip_config);
 	connection_xml_save_str_to_node (node, "bootproto", s);
 	g_free (s);
+
+	if (cxn->ip_config == IP_MANUAL) {
+		connection_set_bcast_and_network (cxn);
+		connection_xml_save_str_to_node (node, "address", cxn->address);
+		connection_xml_save_str_to_node (node, "netmask", cxn->netmask);
+		connection_xml_save_str_to_node (node, "broadcast", cxn->broadcast);
+		connection_xml_save_str_to_node (node, "network", cxn->network);
+		connection_xml_save_str_to_node (node, "gateway", cxn->gateway);
+	} else {
+		connection_xml_destroy (node, "address");
+		connection_xml_destroy (node, "netmask");
+		connection_xml_destroy (node, "broadcast");
+		connection_xml_destroy (node, "network");
+		connection_xml_destroy (node, "gateway");
+	}
 
 	/* PPP stuff */
 	if (cxn->type == GST_CONNECTION_PPP) {
