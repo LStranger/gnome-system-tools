@@ -31,69 +31,57 @@
 extern GstTool *tool;
 
 static void
-transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
+transfer_populate_menu (GstTool *tool, xmlNodePtr root)
 {
-	xmlNodePtr runlevels = gst_xml_element_find_first (root, "runlevels");
-	xmlNodePtr runlevel;
-	GtkWidget *menu_item, *menu_shell;
-	GstWidget *option_menu;
-	gchar *first_runlevel, *str;
-	gboolean has_default = FALSE;
-	gint n_option, n_items = 0;
+	xmlNodePtr    runlevels, runlevel;
+	GstWidget    *menu;
+	GtkTreeModel *model;
+	gchar        *name, *desc, *first_runlevel;
+	gboolean      is_default, has_default;
+	gint          n_items, n_option;
 	
-	option_menu = gst_dialog_get_gst_widget (tool->main_dialog, "runlevels_menu");
-	gtk_option_menu_remove_menu (GTK_OPTION_MENU (option_menu->widget));
-	
-	menu_shell = gtk_menu_new ();
+	runlevels = gst_xml_element_find_first (root, "runlevels");
+	menu      = gst_dialog_get_gst_widget (tool->main_dialog, "runlevels_menu");
+	model     = gtk_combo_box_get_model (GTK_COMBO_BOX (menu->widget));
+	n_items   = 0;
+
+	gtk_list_store_clear (GTK_LIST_STORE (model));
 
 	for (runlevel = gst_xml_element_find_first (runlevels, "runlevel");
 	     runlevel != NULL;
 	     runlevel = gst_xml_element_find_next (runlevel, "runlevel"))
 	{
-		str = gst_xml_get_child_content (runlevel, "number");
-		
+		name = gst_xml_get_child_content (runlevel, "number");
+		desc = gst_xml_get_child_content (runlevel, "description");
+		is_default = gst_xml_element_get_boolean (runlevel, "default");
+
 		/* we save the first runlevel, just if there is no default runlevel */
 		if (n_items == 0)
-			first_runlevel = str;
-		
-		menu_item = gtk_menu_item_new_with_label (gst_xml_get_child_content (runlevel,
-										     "description"));
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu_shell), menu_item);
+			first_runlevel = name;
 
-		g_signal_connect (G_OBJECT (menu_item), "activate",
-				  G_CALLBACK (on_runlevel_changed), str);
+		gtk_combo_box_append_text (GTK_COMBO_BOX (menu->widget), desc);
 
-		g_object_set_data (G_OBJECT (menu_item), "runlevel", str);
-
-		if (gst_xml_get_child_content (runlevel, "default") != NULL) {
-			/* It's the default runlevel */
+		if (is_default) {
 			has_default = TRUE;
 			n_option = n_items;
-			g_object_set_data (G_OBJECT (option_menu->widget), "default_runlevel", str);
-			g_object_set_data (G_OBJECT (menu_item), "default", GINT_TO_POINTER (TRUE));
-			change_runlevel (str);
+			g_object_set_data (G_OBJECT (menu->widget), "default_runlevel", name);
 		}
 
 		n_items++;
 	}
 
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu->widget), menu_shell);
-
 	if (n_items == 1) {
 		/* it's has only one runlevel, we should hide the runlevels list at all */
-		option_menu->advanced = GST_WIDGET_MODE_HIDDEN;
-		gst_widget_apply_policy (option_menu);
-	} else {
-		gtk_widget_show_all (menu_shell);
+		menu->advanced = GST_WIDGET_MODE_HIDDEN;
+		gst_widget_apply_policy (menu);
 	}
 
 	if (has_default) {
-		gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu->widget), n_option);
-		g_object_set_data (G_OBJECT (option_menu->widget), "default_item", GINT_TO_POINTER (n_option));
+		gtk_combo_box_set_active (GTK_COMBO_BOX (menu->widget), n_option);
+		g_object_set_data (G_OBJECT (menu->widget), "default_item", GINT_TO_POINTER (n_option));
 	} else {
 		/* there isn't a default, so we load the first runlevel in the list */
-		gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu->widget), 0);
-		change_runlevel (first_runlevel);
+		gtk_combo_box_set_active (GTK_COMBO_BOX (menu->widget), 0);
 	}
 }
 
@@ -104,6 +92,6 @@ transfer_xml_to_gui (GstTool *tool, gpointer data)
 	root = gst_xml_doc_get_root(tool->config);
 	g_return_if_fail (root != NULL);
 
-	transfer_populate_option_menu (tool, root);
+	transfer_populate_menu (tool, root);
 	hide_sequence_ordering_toggle_button (root);
 }

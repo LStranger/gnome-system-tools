@@ -51,28 +51,31 @@ service_get_description (xmlNodePtr service)
 static gchar*
 get_current_runlevel (GstTool *tool)
 {
-	GtkWidget *option_menu, *menu, *selected_option;
-	
-	option_menu = gst_dialog_get_widget (tool->main_dialog, "runlevels_menu");
-	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
-	selected_option = gtk_menu_get_active (GTK_MENU (menu));
+	GtkWidget    *combo;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gchar        *str = NULL;
 
-	return g_object_get_data (G_OBJECT (selected_option), "runlevel");
+	combo = gst_dialog_get_widget (tool->main_dialog, "runlevels_menu");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
+		gtk_tree_model_get (model, &iter, 0, &str, -1);
+
+	return str;
 }
 
 static gboolean
 current_runlevel_is_default (GstTool *tool)
 {
-	GtkWidget *option_menu, *menu, *selected_option;
-	gboolean default_runlevel;
-	
-	option_menu = gst_dialog_get_widget (tool->main_dialog, "runlevels_menu");
-	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
-	selected_option = gtk_menu_get_active (GTK_MENU (menu));
+	GtkWidget *menu;
+	gchar     *runlevel, *default_runlevel;
 
-	default_runlevel = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (selected_option), "default"));
+	menu = gst_dialog_get_widget (tool->main_dialog, "runlevels_menu");
+	runlevel = get_current_runlevel (tool);
+	default_runlevel = g_object_get_data (G_OBJECT (menu), "default_runlevel");
 
-	return default_runlevel;
+	return (strcmp (runlevel, default_runlevel) == 0);
 }
 
 /* if we are changing the same runlevel than the default,
@@ -172,16 +175,6 @@ callbacks_set_buttons_sensitive (gboolean enabled)
 	gtk_widget_set_sensitive (settings_button, enabled);
 }
 
-static void
-callbacks_description_changed (xmlNodePtr service)
-{
-	gchar *description = service_get_description (service);
-	GtkWidget *label = gst_dialog_get_widget (tool->main_dialog, "description_label");
-
-	gtk_label_set_text (GTK_LABEL (label), description);
-	g_free (description);
-}
-
 void
 on_services_table_select_row (GtkTreeSelection *selection, gpointer data)
 {
@@ -190,18 +183,10 @@ on_services_table_select_row (GtkTreeSelection *selection, gpointer data)
 	GtkTreeIter iter;
 	xmlNodePtr service;
 
-	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+	if (gtk_tree_selection_get_selected (selection, &model, &iter))
 		callbacks_set_buttons_sensitive (TRUE);
-
-		/* get the xmlNodePtr */
-		gtk_tree_model_get (model, &iter, COL_POINTER, &service, -1);
-
-		/* Change the description label */
-		callbacks_description_changed (service);
-
-	} else {
+	else
 		callbacks_set_buttons_sensitive (FALSE);
-	}
 }
 
 void
@@ -337,6 +322,8 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 
 	dialog_service_get_status (script);
 
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
+
 	response = gtk_dialog_run (GTK_DIALOG (dialog));
 
 	if (response == RESPONSE_STOP_SERVICE)
@@ -355,7 +342,26 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 void
 on_runlevel_changed (GtkWidget *widget, gpointer data)
 {
-	change_runlevel (data);
+	xmlNodePtr  root, runlevels, node;
+	gchar      *runlevel, *desc, *name;
+
+	root      = gst_xml_doc_get_root(tool->config);
+	runlevels = gst_xml_element_find_first (root, "runlevels");
+	runlevel  = get_current_runlevel (tool);
+	
+	for (node = gst_xml_element_find_first (runlevels, "runlevel");
+	     node;
+	     node = gst_xml_element_find_next (node, "runlevel"))
+	{
+		name = gst_xml_get_child_content (node, "number");
+		desc = gst_xml_get_child_content (node, "description");
+
+		if (strcmp (runlevel, desc) == 0)
+			change_runlevel (name);
+
+		g_free (name);
+		g_free (desc);
+	}
 }
 
 void
@@ -397,14 +403,31 @@ on_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *wid
 	on_settings_button_clicked (widget, callback_data);
 }
 
+static void
+do_popup_menu (GtkWidget *popup, GdkEventButton *event)
+{
+	gint button, event_time;
+
+	if (!popup)
+		return;
+
+	if (event) {
+		button     = event->button;
+		event_time = event->time;
+	} else {
+		button     = 0;
+		event_time = gtk_get_current_event_time ();
+	}
+
+	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, NULL, NULL,
+			button, event_time);
+}
+
 gboolean
-on_table_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer data)
+on_table_button_press_event (GtkWidget *widget, GdkEventButton *event, GtkWidget *popup)
 {
 	GtkTreePath *path;
-	GtkItemFactory *item_factory;
 	GtkTreeView *treeview = GTK_TREE_VIEW (widget);
-
-	item_factory = (GtkItemFactory *) data;
 
 	if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_BASIC)
 		return;
@@ -417,14 +440,20 @@ on_table_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer 
 			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
 			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
 
-			gtk_item_factory_popup (item_factory, event->x_root, event->y_root,
-						event->button, event->time);
+			do_popup_menu (popup, event);
 		}
 
 		return TRUE;
 	}
 
 	return FALSE;
+}
+
+gboolean
+on_table_popup_menu (GtkWidget *widget, GtkWidget *popup)
+{
+	do_popup_menu (popup, NULL);
+	return TRUE;
 }
 
 void
@@ -449,20 +478,24 @@ void
 on_dialog_complexity_change (GtkWidget *widget, GstTool *tool)
 {
 	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
-	GstWidget *option_menu = gst_dialog_get_gst_widget (tool->main_dialog, "runlevels_menu");
-	gchar *runlevel;
+	GstWidget *menu = gst_dialog_get_gst_widget (tool->main_dialog, "runlevels_menu");
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gchar *default_runlevel;
 	gint n_option;
 
 	hide_sequence_ordering_toggle_button (root);
 
-	if ((option_menu->advanced != GST_WIDGET_MODE_HIDDEN) &&
+	if ((menu->advanced != GST_WIDGET_MODE_HIDDEN) &&
 	    (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_BASIC))
 	{
-		runlevel = g_object_get_data (G_OBJECT (option_menu->widget), "default_runlevel");
-		n_option = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (option_menu->widget),
+		default_runlevel = g_object_get_data (G_OBJECT (menu->widget),
+						      "default_runlevel");
+
+		n_option = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu->widget),
 							       "default_item"));
-		
-		gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu->widget), n_option);
-		change_runlevel (runlevel);
+
+		gtk_combo_box_set_active (GTK_COMBO_BOX (menu), n_option);
+		change_runlevel (default_runlevel);
 	}
 }

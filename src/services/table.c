@@ -32,9 +32,16 @@
 #include "table.h"
 #include "callbacks.h"
 
-GtkItemFactoryEntry popup_menu_items[] = {
-	{ N_("/_Properties"), NULL, G_CALLBACK (on_popup_settings_activate), POPUP_SETTINGS, "<StockItem>", GTK_STOCK_PROPERTIES }
+GtkActionEntry popup_menu_items[] = {
+	{ "Properties", GTK_STOCK_PROPERTIES, "_Properties", NULL, NULL, G_CALLBACK (on_popup_settings_activate) },
 };
+
+const gchar *ui_description =
+	"<ui>"
+	"  <popup name='MainMenu'>"
+	"    <menuitem action='Properties'/>"
+	"  </popup>"
+	"</ui>";
 
 typedef struct TreeItem_ TreeItem;
 	
@@ -46,24 +53,24 @@ struct TreeItem_ {
 
 extern GstTool *tool;
 
-static gchar*
-table_item_factory_trans (const gchar *path, gpointer data)
+static GtkWidget*
+table_popup_menu_create (GtkTreeView *treeview)
 {
-	return _((gchar *) path);
-}
+	GtkUIManager   *ui_manager;
+	GtkActionGroup *action_group;
+	GtkWidget      *popup;
 
-static GtkItemFactory*
-table_popup_item_factory_create (GtkTreeView *treeview)
-{
-	GtkItemFactory *item_factory;
+	action_group = gtk_action_group_new ("MenuActions");
+	gtk_action_group_add_actions (action_group, popup_menu_items, G_N_ELEMENTS (popup_menu_items), treeview);
 
-	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
-	gtk_item_factory_set_translate_func (item_factory, table_item_factory_trans,
-						  NULL, NULL);
-	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (popup_menu_items),
-				       popup_menu_items, treeview);
+	ui_manager = gtk_ui_manager_new ();
+	gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
 
-	return item_factory;
+	if (!gtk_ui_manager_add_ui_from_string (ui_manager, ui_description, -1, NULL))
+		return NULL;
+
+	popup = gtk_ui_manager_get_widget (ui_manager, "/MainMenu");
+	return popup;
 }
 
 static void
@@ -119,10 +126,10 @@ create_model (void)
 void
 table_create (void)
 {
-	GtkWidget *runlevel_table = gst_dialog_get_widget (tool->main_dialog, "runlevel_table");
-	GtkTreeModel *model;
-	GtkItemFactory *item_factory;
+	GtkWidget        *runlevel_table = gst_dialog_get_widget (tool->main_dialog, "runlevel_table");
+	GtkTreeModel     *model;
 	GtkTreeSelection *selection;
+	GtkWidget        *menu;
 	
 	model = create_model ();
 
@@ -131,9 +138,11 @@ table_create (void)
 	
 	add_columns (GTK_TREE_VIEW (runlevel_table));
 
-	item_factory = table_popup_item_factory_create (GTK_TREE_VIEW (runlevel_table));
+	menu = table_popup_menu_create (GTK_TREE_VIEW (runlevel_table));
 	g_signal_connect (G_OBJECT (runlevel_table), "button_press_event",
-			  G_CALLBACK (on_table_button_press_event), item_factory);
+			  G_CALLBACK (on_table_button_press_event), menu);
+	g_signal_connect (G_OBJECT (runlevel_table), "popup_menu",
+			  G_CALLBACK (on_table_popup_menu), menu);
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (runlevel_table));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
