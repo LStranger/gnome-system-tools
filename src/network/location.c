@@ -75,7 +75,7 @@ const gchar *general_tags[] = {
 
 const gchar *interface_tags[] = {
   "address", "auto", "bootproto", "broadcast", "debug", "dial_command",
-  "external_line", "file", "netmask", "network", "noauth", "persist",
+  "essid", "external_line", "file", "key", "netmask", "network", "noauth", "persist",
   "phone_number", "section", "serial_hwctl", "serial_port", "set_default_gw",
   "update_dns", "volume", "user", NULL
 };
