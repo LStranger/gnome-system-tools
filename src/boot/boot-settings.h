@@ -32,7 +32,7 @@ typedef struct {
 
 BootSettingsGui *boot_settings_gui_new      (BootImage *image, GtkWidget *parent);
 void             boot_settings_gui_setup    (BootSettingsGui *gui, GtkWidget *top);
-gboolean         boot_settings_gui_save     (BootSettingsGui *gui);
+gboolean         boot_settings_gui_save     (BootSettingsGui *gui, gboolean check);
 void             boot_settings_gui_error    (GtkWindow *parent, gchar *error);
 void             boot_settings_gui_destroy  (BootSettingsGui *gui);
 

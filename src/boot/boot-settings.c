@@ -163,8 +163,8 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 }
 
 gboolean
-boot_settings_gui_save (BootSettingsGui *gui)
-{
+boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
+{	
 	BootImage *image = gui->image;
 
 	if (image->label) g_free (image->label);
@@ -182,6 +182,14 @@ boot_settings_gui_save (BootSettingsGui *gui)
 	else
 		image->image = g_strdup (gtk_entry_get_text (GTK_ENTRY (gui->device->entry)));
 
+	if (check) {
+		gchar *error = boot_image_check (image);
+		if (error) {
+			boot_settings_gui_error (GTK_WINDOW (gui->top), error);
+			return FALSE;
+		}
+	}
+	
 	boot_table_update ();
 	xst_dialog_modify (tool->main_dialog);
 

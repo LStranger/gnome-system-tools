@@ -75,7 +75,7 @@ ok_clicked (GtkWidget *widget, gpointer data)
 {
 	BootImageEditor *editor = data;
 
-	if (boot_settings_gui_save (editor->gui)) {
+	if (boot_settings_gui_save (editor->gui, TRUE)) {
 		boot_image_save (editor->gui->image);
 		gtk_widget_destroy (GTK_WIDGET (editor));
 	}

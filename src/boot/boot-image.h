@@ -57,13 +57,20 @@ typedef struct {
 	gchar *append;	       	
 } BootImage;
 
-BootImage *boot_image_new         (void);
-BootImage *boot_image_get_by_node (xmlNodePtr node);
-void       boot_image_save        (BootImage *image);
-void       boot_image_destroy     (BootImage *image);
+BootImage        *boot_image_new          (void);
+BootImage        *boot_image_get_by_node  (xmlNodePtr node);
+void              boot_image_save         (BootImage *image);
+void              boot_image_destroy      (BootImage *image);
+
+gchar            *boot_image_valid_label  (BootImage *image);
+gchar            *boot_image_valid_device (BootImage *image);
+gchar            *boot_image_valid_root   (BootImage *image);
+gchar            *boot_image_check        (BootImage *image);
 
 /* Helpers */
-gchar            *type_to_label          (XstBootImageType type);
-XstBootImageType  label_to_type          (const gchar *label);
-GList            *type_labels_list       (void);
+gchar            *type_to_label           (XstBootImageType type);
+XstBootImageType  label_to_type           (const gchar *label);
+GList            *type_labels_list        (void);
+
+
 #endif /* BOOT_IMAGE_H */

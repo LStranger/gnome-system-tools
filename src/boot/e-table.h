@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* e-table.h: this file is part of users-admin, a ximian-setup-tool frontend 
+/* e-table.h: this file is part of boot-admin, a ximian-setup-tool frontend 
  * for boot administration.
  * 
  * Copyright (C) 2001 Ximian, Inc.
@@ -39,30 +39,30 @@ enum {
 	COL_LAST,
 };
 
-extern void create_table (xmlNodePtr root);
-extern void boot_table_update_state (void);
+void              create_table            (xmlNodePtr root);
+void              boot_table_update_state (void);
 
-void             *boot_value_label       (xmlNodePtr node);
-gboolean          boot_value_default     (const gchar *label);
-XstBootImageType  boot_value_type        (xmlNodePtr node);
-gchar            *boot_value_type_char   (xmlNodePtr node, gboolean bare);
-void             *boot_value_image       (xmlNodePtr node, gboolean bare);
-void             *boot_value_device      (xmlNodePtr node, gboolean bare);
-void             *boot_value_root        (xmlNodePtr node);
-void             *boot_value_append      (xmlNodePtr node);
+void             *boot_value_label        (xmlNodePtr node);
+gboolean          boot_value_default      (const gchar *label);
+XstBootImageType  boot_value_type         (xmlNodePtr node);
+gchar            *boot_value_type_char    (xmlNodePtr node, gboolean bare);
+void             *boot_value_image        (xmlNodePtr node, gboolean bare);
+void             *boot_value_device       (xmlNodePtr node, gboolean bare);
+void             *boot_value_root         (xmlNodePtr node);
+void             *boot_value_append       (xmlNodePtr node);
 
 
-void boot_value_set_default (xmlNodePtr node);
-void boot_value_set_label (xmlNodePtr node, const gchar *val);
-void boot_value_set_image (xmlNodePtr node, const gchar *val);
-void boot_value_set_dev (xmlNodePtr node, gchar *val);
-void boot_value_set_root (xmlNodePtr node, const gchar *val);
-void boot_value_set_append (xmlNodePtr node, const gchar *val);
-void boot_value_set_type (xmlNodePtr node, XstBootImageType type);
+void              boot_value_set_default  (xmlNodePtr node);
+void              boot_value_set_label    (xmlNodePtr node, const gchar *val);
+void              boot_value_set_image    (xmlNodePtr node, const gchar *val, XstBootImageType type);
+void              boot_value_set_dev      (xmlNodePtr node, gchar *val);
+void              boot_value_set_root     (xmlNodePtr node, const gchar *val);
+void              boot_value_set_append   (xmlNodePtr node, const gchar *val);
+void              boot_value_set_type     (xmlNodePtr node, XstBootImageType type);
 
-xmlNodePtr get_selected_node (void);
-void boot_table_delete (void);
-void boot_table_update (void);
-xmlNodePtr boot_table_add (void);
+xmlNodePtr        get_selected_node       (void);
+void              boot_table_delete       (void);
+void              boot_table_update       (void);
+xmlNodePtr        boot_table_add          (void);
 
 #endif /* E_TABLE_H */

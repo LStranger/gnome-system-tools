@@ -216,7 +216,7 @@ table_connect_signals (ETable *table)
 			    (gpointer)table);
 }
 
-extern void
+void
 create_table (xmlNodePtr root)
 {
 	ETableModel *model;
@@ -500,30 +500,27 @@ boot_value_set_label (xmlNodePtr node, const gchar *val)
 }
 
 void
-boot_value_set_image (xmlNodePtr node, const gchar *val)
+boot_value_set_image (xmlNodePtr node, const gchar *val, XstBootImageType type)
 {
 	xmlNodePtr n0;
+	gchar buf[6]; /* (strlen ('image') || strlen ('other')) + 1; */
 	
 	g_return_if_fail (node != NULL);
 
-	n0 = xst_xml_element_find_first (node, "image");
+	if (type == TYPE_LINUX)
+		strncpy (buf, "image", 6);
+	else
+		strncpy (buf, "other", 6);
+
+	n0 = xst_xml_element_find_first (node, buf);
 	if (val && strlen (val) > 0) {
 		if (!n0)
-			n0 = xst_xml_element_add (node, "image");
+			n0 = xst_xml_element_add (node, buf);
 		xst_xml_element_set_content (n0, val);
 	} else {
 		if (n0)
 			xst_xml_element_destroy (n0);
 	}
-}
-
-void
-boot_value_set_dev (xmlNodePtr node, gchar *val)
-{
-	/* TODO: remove, use boot_value_set_image */
-	g_return_if_fail (node != NULL);
-
-	xst_xml_set_child_content (node, "other", val);
 }
 
 void
@@ -593,7 +590,7 @@ get_selected_node (void)
 	return NULL;
 }
 
-extern void
+void
 boot_table_update_state (void)
 {
 	ETable *table;

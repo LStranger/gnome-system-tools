@@ -90,6 +90,16 @@ druid_cancel (GtkWidget *w, gpointer data)
 	druid_exit ((BootDruid *) data);
 }
 
+static void
+druid_show_error (BootDruid *druid, gchar *error)
+{
+	GtkWidget *d;
+
+	d = gnome_error_dialog_parented (error, GTK_WINDOW (druid));
+	gnome_dialog_run (GNOME_DIALOG (d));
+	g_free (error);
+}
+
 /* Identity Page */
 static void
 identity_check (BootDruid *druid)
@@ -123,11 +133,21 @@ identity_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static gboolean
 identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-	BootDruid *config = data;
-	GnomeDruidPage *next_page;
-	XstBootImageType type;
-	gchar *buf;
+	GnomeDruidPage   *next_page;
+	XstBootImageType  type;
+	gchar            *buf;
+	gchar            *error;
+	BootDruid        *config = data;
 
+	boot_settings_gui_save (config->gui, FALSE);
+	
+	error = boot_image_valid_label (config->gui->image);
+	if (error != NULL) {
+		druid_show_error (config, error);
+		identity_prepare (page, druid, data);
+		return TRUE;
+	}
+	
 	buf = gtk_entry_get_text (GTK_ENTRY (config->gui->type->entry));
 	type = label_to_type (buf);
 
@@ -176,8 +196,18 @@ other_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static gboolean
 other_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-	BootDruid *config = data;
 	GnomeDruidPage *next_page;
+	gchar          *error;
+	BootDruid      *config = data;
+
+	boot_settings_gui_save (config->gui, FALSE);
+	
+	error = boot_image_valid_device (config->gui->image);
+	if (error != NULL) {
+		druid_show_error (config, error);
+		other_prepare (page, druid, data);
+		return TRUE;
+	}
 
 	next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml, "druidFinishPage"));	
 	gnome_druid_set_page (druid, next_page);
@@ -219,14 +249,35 @@ image_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static gboolean
 image_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
+	gchar     *error;
+	BootDruid *config = data;
+
+	boot_settings_gui_save (config->gui, FALSE);
+	
+	error = boot_image_valid_device (config->gui->image);
+	if (error != NULL) {
+		druid_show_error (config, error);
+		image_prepare (page, druid, data);
+		return TRUE;
+	}
+	
+	error = boot_image_valid_root (config->gui->image);
+	if (error != NULL) {
+		druid_show_error (config, error);
+		gtk_widget_grab_focus (GTK_WIDGET (config->gui->root));
+		identity_prepare (page, druid, data);
+		return TRUE;
+	}
+	
+
 	return FALSE;
 }
 
 static gboolean
 image_back (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-	BootDruid *config = data;
 	GnomeDruidPage *next_page;
+	BootDruid      *config = data;
 
 	next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml, "druidIdentityPage"));	
 	gnome_druid_set_page (druid, next_page);
@@ -255,18 +306,18 @@ druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
 	BootDruid *config = data;
 
-	boot_settings_gui_save (config->gui);
+	boot_settings_gui_save (config->gui, TRUE);
 	boot_image_save (config->gui->image);
 	druid_exit (config);
 }
 
 static gboolean
 druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
-{
-	BootDruid *config = data;
-	GnomeDruidPage *next_page;
-	XstBootImageType type;
-	gchar *buf;
+{	
+	GnomeDruidPage   *next_page;
+	XstBootImageType  type;
+	gchar            *buf;
+	BootDruid        *config = data;
 
 	buf = gtk_entry_get_text (GTK_ENTRY (config->gui->type->entry));
 	type = label_to_type (buf);
@@ -283,11 +334,11 @@ druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 }
 
 static struct {
-	gchar *name;
-	GtkSignalFunc next_func;
-	GtkSignalFunc prepare_func;
-	GtkSignalFunc back_func;
-	GtkSignalFunc finish_func;
+	gchar         *name;
+	GtkSignalFunc  next_func;
+	GtkSignalFunc  prepare_func;
+	GtkSignalFunc  back_func;
+	GtkSignalFunc  finish_func;
 } pages[] = {
 	{ "druidStartPage",
 	  GTK_SIGNAL_FUNC (NULL),
@@ -326,7 +377,7 @@ construct (BootDruid *druid)
 {
 	GtkWidget *widget, *vbox;
 	BootImage *image;
-	int i;
+	int        i;
 
 	image = boot_image_new ();
 	if (!image)
