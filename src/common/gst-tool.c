@@ -601,6 +601,7 @@ gst_tool_kill_tool_cb (GstDirectiveEntry *entry)
 	gst_tool_kill_backend_cb (entry);
 
 	g_object_unref (G_OBJECT (tool));
+	exit (0);
 }
 
 /* kills the whole tool */
