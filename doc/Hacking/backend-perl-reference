@@ -11,7 +11,8 @@ XST Perl backend reference
 
 0    Style
 0.1    Indenting
-0.2    Function calls
+0.2    Comments
+0.3    Function calls
 
 1    Framework
 1.1    Initialization
@@ -22,7 +23,7 @@ XST Perl backend reference
 2.2    Progress
 
 3    XML handling
-4    Parsing system files
+4    Configuration file I/O
 5    Running system utilities
 6    Controlling services and daemons
 
@@ -50,8 +51,39 @@ Jansson (hpj@ximian.com), who wrote this.
 0.1  Indenting
      ---------
 
+For Perl backends, we use two-space indents (no tabs). In some places,
+it's also possible to indent or space out code so it lines up in columns. Use
+your best judgement in these cases.
 
-0.2  Function calls
+Every Perl source file should have an Emacs formatting directive at the
+beginning. The two first lines might look like this:
+
+|  #/usr/bin/env perl
+|  #-*- Mode: perl; tab-width: 2; indent-tabs-mode: f; c-basic-offset: 2 -*-
+
+
+0.2  Comments
+     --------
+
+Comment your code liberally. Comments fall into two categories: Line comments
+and block comments. Try to use more of the latter. Sometimes there's source
+that has known problems; this should have a FIXME: comment describing the
+problem attached to it. If you think something might cause non-fatal
+problems, like slowness, point it out with a NOTE: comment. In general, if
+you have an idea for improvements, but not the time to implement it, describe
+it in a TODO: comment, so that someone else can do it if they come across it.
+
+An instruction with a line comment:
+
+|  push(@cf_statichosts, $enabled);  # Boolean; 1 = enabled.
+
+A block comment:
+
+|  # We list each config file type with as many alternate locations as
+|  # possible. They are tried in array order. First found = used.
+
+
+0.3  Function calls
      --------------
 
 Whenever you call a function, be it in your own code or in a library, prefix
@@ -153,10 +185,17 @@ roughly how much of the processing has been done.
 2.1  Messages
      --------
 
+
+
 |  &be_report_info(id, text);
 |  &be_report_warning(id, text);
 |  &be_report_error(id, text);
 |  &be_report_fatal(id, text);
+
+If the user invokes the backend with --verbose, each message will be written
+in a human-readable fashion to stderr. If the user specifies --report, it
+will be written in a machine-readable fashion (with message IDs included) to
+stdout. If neither was specified, nothing will be output.
 
 
 2.2  Progress
@@ -169,8 +208,8 @@ roughly how much of the processing has been done.
    ------------
 
 
-4  Parsing system files
-   --------------------
+4  Configuration file I/O
+   ----------------------
 
 
 5  Running system utilities
