@@ -57,7 +57,7 @@ sub subst {
     $ret = $pre . $PIXMAPSDIR . $input;
   } elsif (($$stack[$max - 1] eq "widget") &&
 		 ($$stack[$max] eq "filename")) {
-    $ret = $pre . "../pixmaps/" . $input;
+    $ret = "$pre$PIXMAPSDIR/$input";
   } elsif (($$stack[$max] eq "watermark_image") ||
 		 ($$stack[$max] eq "logo_image")) {
     $ret = $pre . "../pixmaps/" . $input;

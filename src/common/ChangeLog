@@ -1,3 +1,11 @@
+2001-03-21  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-ui.c (xst_ui_create_image_widget): stolen from evolution's
+	  e-util/e-gui-utils.c, creates an aa canvas with a gdk_pixbuf
+	  item inside. Called from libglade: don't use this by hand: just
+	  add GnomePixmaps in the glade files and they'll be replaced
+	  by Custom widgets created by calling this function.
+
 2001-03-21  Tambet Ingo  <tambet@ximian.com>
 
 	* global.h: Added xst-ui.h

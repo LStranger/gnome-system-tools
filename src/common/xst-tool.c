@@ -27,6 +27,7 @@
 #include "xst-report-line.h"
 #include "xst-report-hook.h"
 #include "xst-platform.h"
+#include "xst-ui.h"
 
 #include <gnome.h>
 #include <parser.h>
@@ -904,6 +905,10 @@ xst_tool_init (const char *name, const char *title, int argc, char *argv [], con
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
 #endif
+
+	/* This is to fool the linker: do not delete, even if it doesn't
+	   make sense. Arturo Espinosa <arturo@ximian.com> */
+	xst_ui_create_image_widget (NULL, NULL, NULL, 0, 0);
 
 	if (options == NULL) {
 		gnome_init (name, VERSION, argc, argv);

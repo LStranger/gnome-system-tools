@@ -51,6 +51,14 @@ AC_CHECK_LIB(crypt, crypt, ,[
 AC_CHECK_HEADER(crypt.h, ,[
   AC_MSG_ERROR(crypt.h header file not found.)])
 
+dnl GdkPixbuf checking
+AC_MSG_CHECKING(for Gdkpixbuf libraries)
+if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
+    AC_MSG_RESULT(found)
+else
+    AC_MSG_ERROR(Did not find gdkpixbuf installed)
+fi
+  
 dnl Gnome App Lib checking
 AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.4.99.0)
 if gnome-config --libs gal > /dev/null 2>&1; then
@@ -70,6 +78,12 @@ GAL_CFLAGS="`gnome-config --cflags gal`"
 
 AC_SUBST(GAL_LIBS)
 AC_SUBST(GAL_CFLAGS)
+
+GDK_PIXBUF_LIBS="`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`"
+GDK_PIXBUF_CFLAGS="`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf`"
+
+AC_SUBST(GDK_PIXBUF_LIBS)
+AC_SUBST(GDK_PIXBUF_CFLAGS)
 
 dnl Add the languages which your application supports here.
 ALL_LINGUAS="az da de es fr gl hu it ja ko no pl pt_BR ru sk sv tr uk wa"
