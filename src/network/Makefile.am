@@ -20,11 +20,7 @@ network_admin_SOURCES = \
 	ppp-druid.c	ppp-druid.h
 
 network_admin_LDADD = \
-$(GNOME_LIBDIR) \
-$(GNOMEUI_LIBS) \
-$(GNOME_XML_LIB) \
-$(GDK_PIXBUF_LIBS) \
-$(LIBGLADE_LIBS) \
+$(XST_LIBS) \
 $(INTLLIBS) \
 ../common/libsetuptool.a
 

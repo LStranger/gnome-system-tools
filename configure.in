@@ -100,12 +100,29 @@ GAL_CFLAGS="`gnome-config --cflags gal`"
 AC_SUBST(GAL_LIBS)
 AC_SUBST(GAL_CFLAGS)
 
-
 GDK_PIXBUF_LIBS="`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`"
 GDK_PIXBUF_CFLAGS="`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf`"
 
 AC_SUBST(GDK_PIXBUF_LIBS)
 AC_SUBST(GDK_PIXBUF_CFLAGS)
+
+
+
+dnl ==================================
+dnl XST_LIBS
+dnl ==================================
+
+XST_LIBS="`gnome-config --libs gal print gdk_pixbuff gnomecanvaspixbuff libglade xml`"
+XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuff gnomecanvaspixbuff libglade xml`"
+
+AC_SUBST(XST_LIBS)
+AC_SUBST(XST_FLAGS)
+
+dnl ==================================
+dnl END: XST_LIBS
+dnl ==================================
+
+
 
 dnl Add the languages which your application supports here.
 ALL_LINGUAS="az da de es fr gl hu it ja ko no pl pt_BR ru sk sv tr uk wa"
