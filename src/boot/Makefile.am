@@ -3,12 +3,7 @@
 INCLUDES = \
 	-I$(top_srcdir)/src/common 	\
 	-I$(top_srcdir)/intl 		\
-	$(GNOME_INCLUDEDIR)		\
-	$(GNOME_CFLAGS) 		\
-	$(GDK_PIXBUF_CFLAGS) 		\
-	$(LIBGLADE_CFLAGS)		\
-	$(GNOME_XML_CFLAGS)		\
-	$(GAL_CFLAGS)
+	$(XST_CFLAGS)
 
 bin_PROGRAMS = boot-admin
 
@@ -22,13 +17,8 @@ boot_admin_SOURCES = \
 boot_admin_CFLAGS = 
 
 boot_admin_LDADD = \
-$(GNOME_LIBDIR) \
-$(GNOMEUI_LIBS) \
-$(GNOME_XML_LIB) \
-$(GDK_PIXBUF_LIBS) \
-$(LIBGLADE_LIBS) \
+$(XST_LIBS) \
 $(INTLLIBS) \
-$(GAL_LIBS) \
 ../common/libsetuptool.a
 
 #desktop = boot.desktop

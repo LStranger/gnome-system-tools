@@ -5,12 +5,7 @@ SUBDIRS = e-search-bar
 INCLUDES = \
 	-I$(top_srcdir)/src/common 	\
 	-I$(top_srcdir)/intl 		\
-	$(GNOME_INCLUDEDIR)		\
-	$(GNOME_CFLAGS) 		\
-	$(GDK_PIXBUF_CFLAGS) 		\
-	$(LIBGLADE_CFLAGS)		\
-	$(GNOME_XML_CFLAGS)		\
-	$(GAL_CFLAGS)
+	$(XST_CFLAGS)
 
 bin_PROGRAMS = users-admin
 
@@ -31,13 +26,7 @@ users_admin_SOURCES = \
 users_admin_CFLAGS = 
 
 users_admin_LDADD = \
-$(GNOME_LIBDIR) \
-$(GNOMEUI_LIBS) \
-$(GNOME_XML_LIB) \
-$(GDK_PIXBUF_LIBS) \
-$(LIBGLADE_LIBS) \
-$(INTLLIBS) \
-$(GAL_LIBS) \
+$(XST_LIBS) \
 ../common/libsetuptool.a \
 ./e-search-bar/libesearchbar.a
 

@@ -1,10 +1,7 @@
 noinst_LIBRARIES = libsetuptool.a
 
 INCLUDES =		\
-	$(GNOME_CFLAGS) 	\
-	$(GDK_PIXBUF_CFLAGS) 	\
-	$(LIBGLADE_CFLAGS) 	\
-	$(GNOME_XML_CFLAGS)	\
+	$(XST_CFLAGS) 	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 libsetuptool_a_SOURCES =                 \
