@@ -810,7 +810,7 @@ callbacks_check_manual_gatewaydev (GstTool *tool)
 			GtkWidget *dialog;
 			gchar *txt = _("The default gateway device is missing gateway "
 				       "information. Please provide this information to "
-				       "proceed, or choose another default gateway device. ");
+				       "proceed, or choose another default gateway device.");
 
 			dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 							 GTK_DIALOG_MODAL,
