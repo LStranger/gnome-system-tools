@@ -33,6 +33,7 @@ enable_iface (GstIface *iface)
   gboolean   success;
 
   success = gst_iface_enable (iface);
+  gst_iface_set_auto (iface, success);
 
   if (!success)
     {
@@ -337,7 +338,10 @@ enable_disable_iface (GstNetworkTool *network_tool, gboolean enable)
       if (enable)
 	enable_iface (iface);
       else
-	gst_iface_disable (iface);
+        {
+	  gst_iface_disable (iface);
+	  gst_iface_set_auto (iface, FALSE);
+	}
 
       ifaces_model_modify_interface_at_iter (&iter);
       g_object_unref (iface);
@@ -348,6 +352,8 @@ enable_disable_iface (GstNetworkTool *network_tool, gboolean enable)
       /* update gateway settings */
       if (gtk_combo_box_get_active (network_tool->gateways_list) == -1)
 	gtk_combo_box_set_active (network_tool->gateways_list, 0);
+
+      gst_dialog_modify (tool->main_dialog);
     }
 }
 
