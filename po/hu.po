@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools 0.2.0\n"
-"POT-Creation-Date: 2000-11-21 12:26+0100\n"
-"PO-Revision-Date: 2000-11-08 01:02+0100\n"
+"POT-Creation-Date: 2000-12-01 09:44+0100\n"
+"PO-Revision-Date: 2000-12-01 10:31+01:00\n"
 "Last-Translator: Róbert Ványi <robi@mora.u-szeged.hu>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -97,9 +97,10 @@ msgstr "Ezen partícó felcsatolása"
 msgid "Open settings dialog for selected import"
 msgstr "Beállítások dialógus a kiválasztott importhoz"
 
-#: interfaces/disks.glade.h:21 interfaces/shares.glade.h:20
-#: interfaces/shares.glade.h:34 interfaces/shares.glade.h:39
-#: interfaces/shares.glade.h:45
+#: interfaces/disks.glade.h:21 interfaces/nameresolution.glade.h:40
+#: interfaces/shares.glade.h:20 interfaces/shares.glade.h:34
+#: interfaces/shares.glade.h:39 interfaces/shares.glade.h:45
+#: interfaces/users.glade.h:14 interfaces/users.glade.h:21
 msgid "Settings"
 msgstr "Beállítások"
 
@@ -111,10 +112,11 @@ msgstr "Ezen parcíció részleteinek megjegyzése"
 msgid "Disks & partitions"
 msgstr "Lemezek & partíciók"
 
+#. Translation: respect the spaces before and after, and the minus than signs.
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
-#: interfaces/nameresolution.glade.h:40 interfaces/networking.glade.h:24
-#: interfaces/shares.glade.h:47 interfaces/time.glade.h:48
-#: interfaces/users.glade.h:23
+#: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:15
+#: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
+#: interfaces/users.glade.h:23 src/common/tool.c:504
 msgid " Advanced >> "
 msgstr " Haladó >> "
 
@@ -135,26 +137,34 @@ msgid "Mount point:"
 msgstr "Csatolási pont:"
 
 #: interfaces/disks.glade.h:29
-msgid ""
-"Automatic (detect when mounting)\n"
-"Ext2 (Linux)\n"
-"FAT (DOS)\n"
-"VFAT (Windows 95 and newer)\n"
-"FAT32 (Windows 98 and newer)\n"
-"NTFS (Windows NT & 2000)\n"
-msgstr ""
-"Automatikus (felismerése felcsatoláskor)\n"
-"Ext2 (Linux)\n"
-"FAT (DOS)\n"
-"VFAT (Windows 95 és újabbak)\n"
-"FAT32 (Windows 98 és újabbak)\n"
-"NTFS (Windows NT & 2000)\n"
+msgid "Automatic (detect when mounting)"
+msgstr "Automatikus (felcsatolásnál felismeri)"
 
-#: interfaces/disks.glade.h:36 interfaces/shares.glade.h:58
+#: interfaces/disks.glade.h:30
+msgid "Ext2 (Linux)"
+msgstr "Ext2 (Linux)"
+
+#: interfaces/disks.glade.h:31
+msgid "FAT (DOS)"
+msgstr "FAT (DOS)"
+
+#: interfaces/disks.glade.h:32
+msgid "VFAT (Windows 95 and newer)"
+msgstr "VFAT (Windows 95 és újabb)"
+
+#: interfaces/disks.glade.h:33
+msgid "FAT32 (Windows 98 and newer)"
+msgstr "FAT32 (Windows 98 és újabb)"
+
+#: interfaces/disks.glade.h:34
+msgid "NTFS (Windows NT & 2000)"
+msgstr "NTFS (Windows NT & 2000)"
+
+#: interfaces/disks.glade.h:35 interfaces/shares.glade.h:57
 msgid "Choose a mount point"
 msgstr "Válassz csatolási pontot"
 
-#: interfaces/disks.glade.h:37
+#: interfaces/disks.glade.h:36
 msgid "Check for errors on startup"
 msgstr "Hibaellenõrzés induláskor"
 
@@ -167,97 +177,128 @@ msgstr "Hibaellenõrzés induláskor"
 msgid "Name Resolution Administration"
 msgstr "Névfeloldás adminisztáció"
 
-#: interfaces/nameresolution.glade.h:8 interfaces/nameresolution.glade.h:9
-msgid "<unknown>"
-msgstr "<ismeretlen>"
+#: interfaces/nameresolution.glade.h:8
+msgid "Let the computer know its name, function and network surroundings."
+msgstr "Mondd meg a számítógépnek a nevét, rendeltetését és a hálózai beállításait."
+
+#: interfaces/nameresolution.glade.h:9
+msgid "Host"
+msgstr "Kiszolgáló"
 
 #: interfaces/nameresolution.glade.h:10
 msgid "Host name:"
 msgstr "Kiszolgáló neve:"
 
-#: interfaces/nameresolution.glade.h:11
-msgid "Domain:"
-msgstr "Tartomány:"
-
-#: interfaces/nameresolution.glade.h:12
-msgid "Workgroup:"
-msgstr "Munkacsoport:"
-
-#: interfaces/nameresolution.glade.h:13
-msgid "Description:"
-msgstr "Leírás:"
-
-#: interfaces/nameresolution.glade.h:14 interfaces/nameresolution.glade.h:15
+#: interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:15
 msgid "Reverse:"
 msgstr "Visszafele:"
 
-#: interfaces/nameresolution.glade.h:16
+#: interfaces/nameresolution.glade.h:12 interfaces/nameresolution.glade.h:16
+msgid "<unknown>"
+msgstr "<ismeretlen>"
+
+#: interfaces/nameresolution.glade.h:13
+msgid "Domain"
+msgstr "Tartomány"
+
+#: interfaces/nameresolution.glade.h:14
+msgid "Domain:"
+msgstr "Tartomány:"
+
+#: interfaces/nameresolution.glade.h:17
+msgid "Workgroup:"
+msgstr "Munkacsoport:"
+
+#: interfaces/nameresolution.glade.h:18
+msgid "Description:"
+msgstr "Leírás:"
+
+#: interfaces/nameresolution.glade.h:19
 msgid "Identification"
 msgstr "Azonosítás"
 
-#: interfaces/nameresolution.glade.h:17 interfaces/nameresolution.glade.h:18
-#: interfaces/nameresolution.glade.h:19 interfaces/nameresolution.glade.h:24
-#: interfaces/nameresolution.glade.h:25 interfaces/nameresolution.glade.h:26
-#: interfaces/nameresolution.glade.h:33 interfaces/nameresolution.glade.h:34
-#: interfaces/nameresolution.glade.h:35 interfaces/networking.glade.h:9
-#: interfaces/networking.glade.h:10 interfaces/networking.glade.h:11
-#: interfaces/networking.glade.h:15 interfaces/networking.glade.h:16
-#: interfaces/networking.glade.h:17 interfaces/networking.glade.h:18
-#: interfaces/networking.glade.h:19 interfaces/networking.glade.h:20
-msgid "."
-msgstr "."
+#: interfaces/nameresolution.glade.h:20
+msgid "Domain Name Service (DNS)"
+msgstr "Névfeloldás (DNS)"
 
-#: interfaces/nameresolution.glade.h:20 interfaces/nameresolution.glade.h:28
-#: interfaces/shares.glade.h:32 interfaces/shares.glade.h:40
-#: interfaces/shares.glade.h:43 interfaces/time.glade.h:45
+#: interfaces/nameresolution.glade.h:21 interfaces/nameresolution.glade.h:31
+#: interfaces/nameresolution.glade.h:50
+msgid "New:"
+msgstr "Új:"
+
+#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
+#: interfaces/nameresolution.glade.h:49
+msgid "Existing:"
+msgstr "Létezõ:"
+
+#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:27
+#: interfaces/nameresolution.glade.h:46 interfaces/shares.glade.h:32
+#: interfaces/shares.glade.h:40 interfaces/shares.glade.h:43
+#: interfaces/time.glade.h:13
 msgid "Add"
 msgstr "Hozáadás"
 
-#: interfaces/memory.glade.h:16 interfaces/nameresolution.glade.h:21
-#: interfaces/nameresolution.glade.h:29 interfaces/shares.glade.h:33
-#: interfaces/shares.glade.h:41 interfaces/shares.glade.h:44
-msgid "Remove"
-msgstr "Eltávolítás"
+#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:28
+#: interfaces/nameresolution.glade.h:37 interfaces/nameresolution.glade.h:47
+#: interfaces/users.glade.h:10 interfaces/users.glade.h:18
+msgid "Delete"
+msgstr "Törlés"
 
-#: interfaces/nameresolution.glade.h:22
-msgid "DNS servers"
-msgstr "Névkiszolgálók"
-
-#: interfaces/nameresolution.glade.h:23
+#: interfaces/nameresolution.glade.h:25
 msgid "Use WINS server:"
 msgstr "WINS szerver haszálata:"
 
-#: interfaces/nameresolution.glade.h:27
-msgid "WINS resolution"
-msgstr "WINS feloldás"
+#: interfaces/nameresolution.glade.h:26
+msgid "Servers"
+msgstr "Kiszolgálók"
+
+#: interfaces/nameresolution.glade.h:29
+msgid " Move Up"
+msgstr " Fel"
 
 #: interfaces/nameresolution.glade.h:30
-msgid "Search domains"
+msgid "Move Down"
+msgstr " Le"
+
+#: interfaces/nameresolution.glade.h:33
+msgid "Search Domains"
 msgstr "Alapértelmezett tartományok"
 
-#: interfaces/nameresolution.glade.h:31
+#: interfaces/nameresolution.glade.h:34
 msgid "IP address"
 msgstr "IP cím"
 
-#: interfaces/nameresolution.glade.h:32
-msgid "Aliases"
-msgstr "Alias-ok"
+#: interfaces/nameresolution.glade.h:35
+msgid "Names"
+msgstr "Nevek"
 
 #: interfaces/nameresolution.glade.h:36
-msgid "Add IP"
-msgstr "IP hozzáadása"
+msgid "New Alias"
+msgstr "Új aliaszok"
 
-#: interfaces/nameresolution.glade.h:37
-msgid "Remove IP"
-msgstr "IP eltávolítása"
-
-#: interfaces/nameresolution.glade.h:38
-msgid "Set aliases"
-msgstr "Alias-ok beállítása"
+#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:207
+msgid "Settings for the selected alias"
+msgstr "A kiválasztott aliasz beállításai"
 
 #: interfaces/nameresolution.glade.h:39
-msgid "Static names"
-msgstr "Statikus nevek"
+msgid "Change the alias' IP address or its corresponding names."
+msgstr "Az aliasz IP címének vagy nevének megváltoztatása."
+
+#: interfaces/nameresolution.glade.h:41 interfaces/nameresolution.glade.h:45
+msgid "Aliases"
+msgstr "Aliaszok"
+
+#: interfaces/nameresolution.glade.h:43
+msgid "Aliases Settings"
+msgstr "Aliaszok beállításai"
+
+#: interfaces/nameresolution.glade.h:44
+msgid "IP address:"
+msgstr "IP cím:"
+
+#: interfaces/nameresolution.glade.h:48
+msgid "label48"
+msgstr "cimke48"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -272,27 +313,27 @@ msgstr "Hálózati adminisztráció"
 msgid "Interface:"
 msgstr "Interfész:"
 
-#: interfaces/networking.glade.h:12
+#: interfaces/networking.glade.h:9
 msgid "Gateway IP:"
 msgstr "Átjáró IP:"
 
-#: interfaces/networking.glade.h:13
+#: interfaces/networking.glade.h:10
 msgid "Netmask:"
 msgstr "Hálózati maszk:"
 
-#: interfaces/networking.glade.h:14
+#: interfaces/networking.glade.h:11
 msgid "Host IP:"
 msgstr "Kiszolgáló IP:"
 
-#: interfaces/networking.glade.h:21
+#: interfaces/networking.glade.h:12
 msgid "Use DHCP server"
 msgstr "DHCP szerver használata"
 
-#: interfaces/networking.glade.h:22
+#: interfaces/networking.glade.h:13
 msgid "Enable automatically at boot"
 msgstr "Automatikus élesztés a gép indulásakor"
 
-#: interfaces/networking.glade.h:23
+#: interfaces/networking.glade.h:14
 msgid "Primary networking"
 msgstr "Elsõdleges hálózat"
 
@@ -354,15 +395,15 @@ msgstr "Elérési út"
 msgid "Enabled"
 msgstr "Engedélyezett"
 
-#: interfaces/shares.glade.h:26 interfaces/shares.glade.h:63
+#: interfaces/shares.glade.h:26 interfaces/shares.glade.h:62
 msgid "Browseable"
 msgstr "Böngészhetõ"
 
-#: interfaces/shares.glade.h:27 interfaces/shares.glade.h:64
+#: interfaces/shares.glade.h:27 interfaces/shares.glade.h:63
 msgid "Public"
 msgstr "Nyilvános"
 
-#: interfaces/shares.glade.h:28 interfaces/shares.glade.h:65
+#: interfaces/shares.glade.h:28 interfaces/shares.glade.h:64
 msgid "Writable"
 msgstr "Írható"
 
@@ -373,6 +414,11 @@ msgstr "Megjegyzés"
 #: interfaces/shares.glade.h:30 interfaces/shares.glade.h:42
 msgid "Export"
 msgstr "Megosztások"
+
+#: interfaces/memory.glade.h:16 interfaces/shares.glade.h:33
+#: interfaces/shares.glade.h:41 interfaces/shares.glade.h:44
+msgid "Remove"
+msgstr "Eltávolítás"
 
 #: interfaces/shares.glade.h:35
 msgid "SMB exports"
@@ -415,42 +461,42 @@ msgid "Password:"
 msgstr "Jelszó:"
 
 #: interfaces/shares.glade.h:55
-msgid ""
-"SMB\n"
-"NFS\n"
-msgstr ""
-"SMB\n"
-"NFS\n"
+msgid "SMB"
+msgstr "SMB"
 
-#: interfaces/shares.glade.h:59
+#: interfaces/shares.glade.h:56
+msgid "NFS"
+msgstr "NFS"
+
+#: interfaces/shares.glade.h:58
 msgid "SMB Export Settings"
 msgstr "SMB megosztás beállítások"
 
-#: interfaces/shares.glade.h:60 interfaces/shares.glade.h:67
+#: interfaces/shares.glade.h:59 interfaces/shares.glade.h:66
 msgid "Local path:"
 msgstr "Helyi elérési út:"
 
-#: interfaces/shares.glade.h:61
+#: interfaces/shares.glade.h:60
 msgid "Export name:"
 msgstr "Megosztás neve:"
 
-#: interfaces/shares.glade.h:62 interfaces/users.glade.h:27
+#: interfaces/shares.glade.h:61 interfaces/users.glade.h:27
 msgid "Comment:"
 msgstr "Megjegyzés:"
 
-#: interfaces/shares.glade.h:66
+#: interfaces/shares.glade.h:65
 msgid "NFS Export Settings"
 msgstr "NFS megosztás beállítások"
 
-#: interfaces/shares.glade.h:68
+#: interfaces/shares.glade.h:67
 msgid "NFS Client Settings"
 msgstr "NFS kliens beállítások"
 
-#: interfaces/shares.glade.h:69
+#: interfaces/shares.glade.h:68
 msgid "Client pattern:"
 msgstr "Kliens minta:"
 
-#: interfaces/shares.glade.h:70
+#: interfaces/shares.glade.h:69
 msgid "Allow writing from these clients"
 msgstr "Írás engedélyezése ezeknek a klienseknek"
 
@@ -476,83 +522,14 @@ msgid "Date/time"
 msgstr "Dátum/idõ"
 
 #: interfaces/time.glade.h:12
-msgid ""
-"(GMT -1100) Midway Island, Samoa\n"
-"(GMT -1000) Hawaii\n"
-"(GMT -0900) Alaska\n"
-"(GMT -0800) Pacific Time (US & Canada); Tijuana\n"
-"(GMT -0700) Arizona\n"
-"(GMT -0600) Central Time (US & Canada); Mexico City, Tegucigalpa, "
-"Saskatchewan\n"
-"(GMT -0500) Eastern Time (US & Canada); Bogota, Lima, Quito\n"
-"(GMT -0400) Atlantic Time (Canada); Caracas, La Paz, Santiago\n"
-"(GMT -0345) Guyana\n"
-"(GMT -0300) Brazil\n"
-"(GMT -0200) Mid-Atlantic\n"
-"(GMT -0100) Azores, Cape Verde Islands\n"
-"(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lisbon, London\n"
-"(GMT +0100) Amsterdam, Berlin, Bern, Rome, Oslo, Vienna\n"
-"(GMT +0200) Athens, Istanbul, Minsk, Bucharest, Cairo\n"
-"(GMT +0300) Baghdad, Kuwait, Moscow, Volgograd\n"
-"(GMT +0330) Tehran\n"
-"(GMT +0400) Abu Dhabi, Muscat, Baku, Tblisi\n"
-"(GMT +0430) Kabul\n"
-"(GMT +0500) Ekaterinburg, Islamabad, Karachi\n"
-"(GMT +0530) Bombay, Calcutta, Madras, New Delhi\n"
-"(GMT +0600) Astana, Almaty, Dhaka, Colombo\n"
-"(GMT +0630) Rangoon, Kuala Lumpur\n"
-"(GMT +0700) Bangkok, Hanoi, Jakarta\n"
-"(GMT +0800) Singapore, Taipei\n"
-"(GMT +0900) Seoul, Yakutsk\n"
-"(GMT +0930) Adelaide, Darwin\n"
-"(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok\n"
-"(GMT +1100) Magadan, Solomon Islands, New Caledonia\n"
-"(GMT +1200) Auckland, Wellington, Fiji, Kamchatka\n"
-msgstr ""
-"(GMT -1100) Midway Szigetek, Szamoa\n"
-"(GMT -1000) Hawaii\n"
-"(GMT -0900) Alaszka\n"
-"(GMT -0800) Csendes óceáni idõ (US & Kanada); Tijuana\n"
-"(GMT -0700) Arizona\n"
-"(GMT -0600) Közép idõ (US & Kanada); Mexikóváros, Tegucigalpa, Saskatchewan\n"
-"(GMT -0500) Keleti idõ (US & Kanada); Bogota, Lima, Quito\n"
-"(GMT -0400) Atlanti idõ (KCanada); Caracas, La Paz, Santiago\n"
-"(GMT -0345) Guyana\n"
-"(GMT -0300) Brazília\n"
-"(GMT -0200) Közép-atlanti\n"
-"(GMT -0100) Azori szigetek, Cape Verde szigetek\n"
-"(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lisbon, London\n"
-"(GMT +0100) Amsterdam, Bécs, Berlin, Bern, Budapest, Róma, Oslo\n"
-"(GMT +0200) Athén, Istanbul, Minsk, Bukarest, Kairó\n"
-"(GMT +0300) Bagdad, Kuwait, Moszkva, Volgográd\n"
-"(GMT +0330) Tehrán\n"
-"(GMT +0400) Abu Dhabi, Muscat, Baku, Tbiliszi\n"
-"(GMT +0430) Kabul\n"
-"(GMT +0500) Jekatyerinburg, Islamabad, Karachi\n"
-"(GMT +0530) Bombay, Calcutta, Madras, Új Delhi\n"
-"(GMT +0600) Astana, Almaty, Dhaka, Colombo\n"
-"(GMT +0630) Rangoon, Kuala Lumpur\n"
-"(GMT +0700) Bangkok, Hanoi, Jakarta\n"
-"(GMT +0800) Szingapúr, Taipei\n"
-"(GMT +0900) Szöul, Jakutsk\n"
-"(GMT +0930) Adelaide, Darwin\n"
-"(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok\n"
-"(GMT +1100) Magadan, Solomon Islands, New Caledonia\n"
-"(GMT +1200) Auckland, Wellington, Fiji, Kamcsatka\n"
-
-#: interfaces/time.glade.h:43
-msgid "(GMT -1000) Hawaii"
-msgstr "(GMT -1000) Hawaii"
-
-#: interfaces/time.glade.h:44
 msgid "Time zone"
 msgstr "Idõzóna"
 
-#: interfaces/time.glade.h:46
+#: interfaces/time.glade.h:14
 msgid "Keep clock in sync with selected servers"
 msgstr "Az óra szinkronban tartása a kiválasztott kiszolgálókkal"
 
-#: interfaces/time.glade.h:47
+#: interfaces/time.glade.h:15
 msgid "Time servers"
 msgstr "Idõkiszolgálók"
 
@@ -575,14 +552,10 @@ msgstr ""
 "ablakban."
 
 #: interfaces/users.glade.h:9
-msgid "New User..."
-msgstr "Új felhasználó..."
+msgid "New User"
+msgstr "Új felhasználó"
 
-#: interfaces/users.glade.h:10 interfaces/users.glade.h:18
-msgid "Delete"
-msgstr "Törlés"
-
-#: interfaces/users.glade.h:11
+#: interfaces/users.glade.h:11 src/users/callbacks.c:220
 msgid "Settings for the selected user"
 msgstr "A kiválasztott felhasználó beállításai"
 
@@ -592,14 +565,9 @@ msgstr ""
 "A felhasználó jelszavának, vagy egyéb beállításainak, például nevének "
 "megváltoztatása"
 
-#: interfaces/users.glade.h:13
-msgid "Change Password..."
-msgstr "Jelszó megváltoztatása..."
-
-#: interfaces/memory.glade.h:17 interfaces/users.glade.h:14
-#: interfaces/users.glade.h:21
-msgid "Settings..."
-msgstr "Beállítások..."
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:28
+msgid "Change Password"
+msgstr "Jelszó megváltoztatása"
 
 #: interfaces/users.glade.h:15
 msgid "Users"
@@ -611,8 +579,8 @@ msgstr ""
 "A felhasználók csoportba oszthatók, hogy erõforrásokat osszanak meg másokkal."
 
 #: interfaces/users.glade.h:17
-msgid "New Group..."
-msgstr "Új csoport..."
+msgid "New Group"
+msgstr "Új csoport"
 
 #: interfaces/users.glade.h:19
 msgid "Settings for the selected group"
@@ -638,10 +606,6 @@ msgstr "Fõ csoport:"
 #: interfaces/users.glade.h:26
 msgid "User name:"
 msgstr "Felhasználó neve:"
-
-#: interfaces/users.glade.h:28
-msgid "Change Password"
-msgstr "Jelszó megváltoztatása"
 
 #: interfaces/users.glade.h:29
 msgid "New password:"
@@ -724,63 +688,71 @@ msgstr "Prioritás"
 msgid "Create..."
 msgstr "Létrehoz..."
 
+#: interfaces/memory.glade.h:17
+msgid "Settings..."
+msgstr "Beállítások..."
+
 #: interfaces/memory.glade.h:19
 msgid "Available partitions:"
 msgstr "Elérhetõ partíciók:"
 
-#: interfaces/memory.glade.h:23 interfaces/memory.glade.h:34
+#: interfaces/memory.glade.h:23 interfaces/memory.glade.h:33
 msgid "Size:"
 msgstr "Méret:"
 
 #: interfaces/memory.glade.h:24
-msgid ""
-"Swap Partition\n"
-"Swap File\n"
-msgstr ""
-"Swap partíció\n"
-"Swap fájl\n"
+msgid "Swap Partition"
+msgstr "Swap partíció"
 
-#: interfaces/memory.glade.h:27
+#: interfaces/memory.glade.h:25
+msgid "Swap File"
+msgstr "Swap fájl"
+
+#: interfaces/memory.glade.h:26
 msgid "Megabytes"
 msgstr "Megabájt"
 
-#: interfaces/memory.glade.h:28 interfaces/memory.glade.h:32
+#: interfaces/memory.glade.h:27 interfaces/memory.glade.h:31
 msgid "Enable this swap space"
 msgstr "Ezen swapterület engedélyezése"
 
-#: interfaces/memory.glade.h:29
+#: interfaces/memory.glade.h:28
 msgid "Use non-default priority:"
 msgstr "Nem alapértelmezett prioritás használata:"
 
-#: interfaces/memory.glade.h:30
+#: interfaces/memory.glade.h:29
 msgid "Browse..."
 msgstr "Keres..."
 
-#: interfaces/memory.glade.h:31
+#: interfaces/memory.glade.h:30
 msgid "Swap device"
 msgstr "Swap eszköz"
 
-#: interfaces/memory.glade.h:33
+#: interfaces/memory.glade.h:32
 msgid "Use non-default priority"
 msgstr "Nem alapértelmezett prioritás használata"
 
-#: interfaces/memory.glade.h:35
+#: interfaces/memory.glade.h:34
 msgid "Mb"
 msgstr "Mb"
 
-#: interfaces/memory.glade.h:36
+#: interfaces/memory.glade.h:35
 msgid "Select  Swap File"
 msgstr "Swapfájl kiválasztása"
 
-#: interfaces/memory.glade.h:37
+#: interfaces/memory.glade.h:36
 msgid "OK"
 msgstr "OK"
 
-#: interfaces/memory.glade.h:38
+#: interfaces/memory.glade.h:37
 msgid "Cancel"
 msgstr "Mégse"
 
-#: src/common/tool.c:585
+#: src/common/tool.c:506
+msgid " << Basic "
+msgstr " << Alap "
+
+#: src/common/tool.c:594
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -806,49 +778,67 @@ msgstr "Meg kell adnod az új swap terület elérési útvonalát!"
 msgid "It's already used as swap space!"
 msgstr "Ez már használt swap teület!"
 
-#: src/users/callbacks.c:114
+#: src/nameresolution/callbacks.c:57
+msgid ""
+"The IP address must have the form of four digits\n"
+"sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
+"except for the first and last ones, which must be in the range of 1 to 254."
+msgstr ""
+"Az IP címek négy ponttal (.) elválsztott számból állnak.\n"
+"A számok értéke 0 és 255 között lehet, kivéve az elsõt és az utolsót,\n"
+"ami 1 és 254 közé kell essen."
+
+#: src/nameresolution/callbacks.c:193
+msgid "Settings for alias of "
+msgstr "A következõ aliasz beállításai:"
+
+#: src/users/callbacks.c:135
 #, c-format
 msgid "Settings for User %s"
 msgstr "A következõ felhasználó beállításai: %s"
 
-#: src/users/callbacks.c:133
+#: src/users/callbacks.c:153
 #, c-format
 msgid "Password for User %s"
 msgstr "%s felhasználó jelszava"
 
-#: src/users/callbacks.c:173
+#: src/users/callbacks.c:200
+msgid "The root user must not be deleted."
+msgstr "A root felhasználót nem szabad törölni!"
+
+#: src/users/callbacks.c:207
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következõ felhasználót: %s?"
 
-#: src/users/callbacks.c:216
+#: src/users/callbacks.c:249
 #, c-format
 msgid "Settings for Group %s"
 msgstr "A következõ csoport beállításai: %s"
 
-#: src/users/callbacks.c:235
+#: src/users/callbacks.c:268
 msgid "Create New Group"
 msgstr "Új csoport létrehozása"
 
-#: src/users/callbacks.c:251
+#: src/users/callbacks.c:294
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következõ csoportot: %s?"
 
-#: src/users/callbacks.c:373
+#: src/users/callbacks.c:414
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "A beállított jelszó: \"%s\"."
 
 #. Bad confirmation
-#: src/users/callbacks.c:411
+#: src/users/callbacks.c:449
 msgid ""
 "The password and its confirmation\n"
 "must match."
 msgstr "A jelszó mind a két alkalommal meg kell egyezzen."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:417
+#: src/users/callbacks.c:455
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -858,7 +848,7 @@ msgstr ""
 "Próbáld meg másik jelszóval."
 
 #. Changes have been made.
-#: src/users/callbacks.c:583
+#: src/users/callbacks.c:620
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
@@ -866,20 +856,20 @@ msgstr ""
 "Nincs minden változás alkalmazva.\n"
 "Alkalmazás most?"
 
-#: src/users/user_group.c:89
+#: src/users/user_group.c:55
 msgid "Username is empty."
 msgstr "Nincs felhasználói név megadva"
 
-#: src/users/user_group.c:106
+#: src/users/user_group.c:72
 #, c-format
 msgid "User %s already exists."
 msgstr "A következõ felhasználó már létezik: %s"
 
-#: src/users/user_group.c:121
+#: src/users/user_group.c:87
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "Kérlek adj meg érvényes felhasználói nevet, csak kisbetûket használj."
 
-#: src/users/user_group.c:154
+#: src/users/user_group.c:120
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from the pull-down menu."
@@ -888,26 +878,143 @@ msgstr ""
 "használj,\n"
 "vagy válassz ki egy csoportot a legördülõ menübõl."
 
-#: src/users/user_group.c:225
+#: src/users/user_group.c:176
 msgid "The username is empty."
 msgstr "Nincs felhasználói név megadva."
 
-#: src/users/user_group.c:369
+#: src/users/user_group.c:307
 msgid "The group name is empty."
 msgstr "Csoportnév nincs megadva."
 
-#: src/users/user_group.c:386
+#: src/users/user_group.c:324
 #, c-format
 msgid "Group %s already exists."
 msgstr "A következõ csoport már létezik: %s."
 
-#: src/users/user_group.c:402
+#: src/users/user_group.c:340
 msgid "Please set a valid group name, with only lower-case letters."
 msgstr "Kérlek adj meg érvényes csoportnevet, csak kisbetûket használj."
 
-#: src/users/user_group.c:454
+#: src/users/user_group.c:382
 msgid "Group name is empty."
 msgstr "Csoportnév nincs megadva."
+
+#~ msgid ""
+#~ "Automatic (detect when mounting)\n"
+#~ "Ext2 (Linux)\n"
+#~ "FAT (DOS)\n"
+#~ "VFAT (Windows 95 and newer)\n"
+#~ "FAT32 (Windows 98 and newer)\n"
+#~ "NTFS (Windows NT & 2000)\n"
+#~ msgstr ""
+#~ "Automatikus (felismerése felcsatoláskor)\n"
+#~ "Ext2 (Linux)\n"
+#~ "FAT (DOS)\n"
+#~ "VFAT (Windows 95 és újabbak)\n"
+#~ "FAT32 (Windows 98 és újabbak)\n"
+#~ "NTFS (Windows NT & 2000)\n"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "WINS resolution"
+#~ msgstr "WINS feloldás"
+
+#~ msgid "Add IP"
+#~ msgstr "IP hozzáadása"
+
+#~ msgid "Remove IP"
+#~ msgstr "IP eltávolítása"
+
+#~ msgid "Set aliases"
+#~ msgstr "Alias-ok beállítása"
+
+#~ msgid "Static names"
+#~ msgstr "Statikus nevek"
+
+#~ msgid ""
+#~ "SMB\n"
+#~ "NFS\n"
+#~ msgstr ""
+#~ "SMB\n"
+#~ "NFS\n"
+
+#~ msgid ""
+#~ "(GMT -1100) Midway Island, Samoa\n"
+#~ "(GMT -1000) Hawaii\n"
+#~ "(GMT -0900) Alaska\n"
+#~ "(GMT -0800) Pacific Time (US & Canada); Tijuana\n"
+#~ "(GMT -0700) Arizona\n"
+#~ "(GMT -0600) Central Time (US & Canada); Mexico City, Tegucigalpa, "
+#~ "Saskatchewan\n"
+#~ "(GMT -0500) Eastern Time (US & Canada); Bogota, Lima, Quito\n"
+#~ "(GMT -0400) Atlantic Time (Canada); Caracas, La Paz, Santiago\n"
+#~ "(GMT -0345) Guyana\n"
+#~ "(GMT -0300) Brazil\n"
+#~ "(GMT -0200) Mid-Atlantic\n"
+#~ "(GMT -0100) Azores, Cape Verde Islands\n"
+#~ "(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lisbon, London\n"
+#~ "(GMT +0100) Amsterdam, Berlin, Bern, Rome, Oslo, Vienna\n"
+#~ "(GMT +0200) Athens, Istanbul, Minsk, Bucharest, Cairo\n"
+#~ "(GMT +0300) Baghdad, Kuwait, Moscow, Volgograd\n"
+#~ "(GMT +0330) Tehran\n"
+#~ "(GMT +0400) Abu Dhabi, Muscat, Baku, Tblisi\n"
+#~ "(GMT +0430) Kabul\n"
+#~ "(GMT +0500) Ekaterinburg, Islamabad, Karachi\n"
+#~ "(GMT +0530) Bombay, Calcutta, Madras, New Delhi\n"
+#~ "(GMT +0600) Astana, Almaty, Dhaka, Colombo\n"
+#~ "(GMT +0630) Rangoon, Kuala Lumpur\n"
+#~ "(GMT +0700) Bangkok, Hanoi, Jakarta\n"
+#~ "(GMT +0800) Singapore, Taipei\n"
+#~ "(GMT +0900) Seoul, Yakutsk\n"
+#~ "(GMT +0930) Adelaide, Darwin\n"
+#~ "(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok\n"
+#~ "(GMT +1100) Magadan, Solomon Islands, New Caledonia\n"
+#~ "(GMT +1200) Auckland, Wellington, Fiji, Kamchatka\n"
+#~ msgstr ""
+#~ "(GMT -1100) Midway Szigetek, Szamoa\n"
+#~ "(GMT -1000) Hawaii\n"
+#~ "(GMT -0900) Alaszka\n"
+#~ "(GMT -0800) Csendes óceáni idõ (US & Kanada); Tijuana\n"
+#~ "(GMT -0700) Arizona\n"
+#~ "(GMT -0600) Közép idõ (US & Kanada); Mexikóváros, Tegucigalpa, Saskatchewan\n"
+#~ "(GMT -0500) Keleti idõ (US & Kanada); Bogota, Lima, Quito\n"
+#~ "(GMT -0400) Atlanti idõ (KCanada); Caracas, La Paz, Santiago\n"
+#~ "(GMT -0345) Guyana\n"
+#~ "(GMT -0300) Brazília\n"
+#~ "(GMT -0200) Közép-atlanti\n"
+#~ "(GMT -0100) Azori szigetek, Cape Verde szigetek\n"
+#~ "(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lisbon, London\n"
+#~ "(GMT +0100) Amsterdam, Bécs, Berlin, Bern, Budapest, Róma, Oslo\n"
+#~ "(GMT +0200) Athén, Istanbul, Minsk, Bukarest, Kairó\n"
+#~ "(GMT +0300) Bagdad, Kuwait, Moszkva, Volgográd\n"
+#~ "(GMT +0330) Tehrán\n"
+#~ "(GMT +0400) Abu Dhabi, Muscat, Baku, Tbiliszi\n"
+#~ "(GMT +0430) Kabul\n"
+#~ "(GMT +0500) Jekatyerinburg, Islamabad, Karachi\n"
+#~ "(GMT +0530) Bombay, Calcutta, Madras, Új Delhi\n"
+#~ "(GMT +0600) Astana, Almaty, Dhaka, Colombo\n"
+#~ "(GMT +0630) Rangoon, Kuala Lumpur\n"
+#~ "(GMT +0700) Bangkok, Hanoi, Jakarta\n"
+#~ "(GMT +0800) Szingapúr, Taipei\n"
+#~ "(GMT +0900) Szöul, Jakutsk\n"
+#~ "(GMT +0930) Adelaide, Darwin\n"
+#~ "(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok\n"
+#~ "(GMT +1100) Magadan, Solomon Islands, New Caledonia\n"
+#~ "(GMT +1200) Auckland, Wellington, Fiji, Kamcsatka\n"
+
+#~ msgid "(GMT -1000) Hawaii"
+#~ msgstr "(GMT -1000) Hawaii"
+
+#~ msgid "Change Password..."
+#~ msgstr "Jelszó megváltoztatása..."
+
+#~ msgid ""
+#~ "Swap Partition\n"
+#~ "Swap File\n"
+#~ msgstr ""
+#~ "Swap partíció\n"
+#~ "Swap fájl\n"
 
 #~ msgid "Hardware Administration"
 #~ msgstr "Hardver adminisztráció"
@@ -918,14 +1025,8 @@ msgstr "Csoportnév nincs megadva."
 #~ msgid "Add..."
 #~ msgstr "Hozzáadás..."
 
-#~ msgid "label24"
-#~ msgstr "cimke24"
-
 #~ msgid "label25"
 #~ msgstr "cimke25"
-
-#~ msgid "Settings for user "
-#~ msgstr "A felhasználó beállításai"
 
 #~ msgid "Settings for group "
 #~ msgstr "A csoport beállításai"
