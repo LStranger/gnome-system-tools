@@ -2055,34 +2055,39 @@ void
 connection_configure_device (xmlNodePtr root, gchar *interface)
 {
 	xmlNodePtr node = gst_xml_element_find_first (root, "interface");
+	xmlNodePtr dev_node = NULL;
 	gchar *dev;
 	gboolean found = FALSE;
 	GstConnection *connection;
-	gchar *txt;
+	gchar *txt = NULL;
 	GtkWidget *dialog;
 
-	for (node = gst_xml_element_find_first (root, "interface");
-	     node != NULL;
-	     node = gst_xml_element_find_next (node, "interface"))
-	{
-		dev = gst_xml_get_child_content (node, "dev");
+	if (strcmp (interface, "lo") != 0) {
+		for (node = gst_xml_element_find_first (root, "interface");
+		     node != NULL;
+		     node = gst_xml_element_find_next (node, "interface"))
+		{
+			dev = gst_xml_get_child_content (node, "dev");
 
-		if (strcmp (dev, interface) == 0) {
-			g_free (dev);
-			break;
-		}
+			if (strcmp (dev, interface) == 0)
+				dev_node = node;
 		
-		g_free (dev);
+			g_free (dev);
+		}
+
+		if (!dev_node)
+			txt = g_strdup_printf (_("The interface %s doesn't exist."), interface);
+	} else {
+		txt = g_strdup_printf (_(" The loopback interface cannot be configured."));
 	}
 
-	if (node != NULL) {
-		connection = connection_new_from_node (node, FALSE);
+	if (!txt) {
+		connection = connection_new_from_node (dev_node, FALSE);
 		connection_configure (connection);
 	} else {
-		txt = g_strdup_printf (_("The interface %s doesn't exist."), interface);
 		dialog = gtk_message_dialog_new (NULL,
 						 GTK_DIALOG_MODAL,
-						 GTK_MESSAGE_QUESTION,
+						 GTK_MESSAGE_ERROR,
 						 GTK_BUTTONS_CLOSE,
 						 txt);
 		gtk_dialog_run (GTK_DIALOG (dialog));
