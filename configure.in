@@ -71,29 +71,29 @@ dnl =====================================================
 dnl Cracklib checking
 dnl =====================================================
 
-AC_CHECK_LIB(crack, FascistCheck, ,[
-  AC_MSG_WARN()
-  AC_MSG_WARN(---------- Building without cracklib is not recommended. ----------)
-  AC_MSG_WARN()
-  AC_MSG_WARN(-- If you are looking for cracklib you can try  :)
-  AC_MSG_WARN(--    http://www.users.dircon.co.uk/~crypto/)
-  AC_MSG_WARN(--    or :)
-  AC_MSG_WARN(--    http://www.rpmfind.net/linux/rpm2html/search.php?query=cracklib)
-  AC_MSG_WARN(--    or :)
-  AC_MSG_WARN(--    apt-get install cracklib2-dev)
-  AC_MSG_WARN()])
-if test x"$HAVE_LIBCRACK" = xyes ; then
-  AC_CHECK_HEADER(crack.h, ,[
-  AC_MSG_ERROR(cracklib crack.h header file not found.)])
-fi
+dnl AC_CHECK_LIB(crack, FascistCheck, ,[
+dnl   AC_MSG_WARN()
+dnl   AC_MSG_WARN(---------- Building without cracklib is not recommended. ----------)
+dnl   AC_MSG_WARN()
+dnl   AC_MSG_WARN(-- If you are looking for cracklib you can try  :)
+dnl   AC_MSG_WARN(--    http://www.users.dircon.co.uk/~crypto/)
+dnl   AC_MSG_WARN(--    or :)
+dnl   AC_MSG_WARN(--    http://www.rpmfind.net/linux/rpm2html/search.php?query=cracklib)
+dnl   AC_MSG_WARN(--    or :)
+dnl   AC_MSG_WARN(--    apt-get install cracklib2-dev)
+dnl   AC_MSG_WARN()])
+dnl if test x"$HAVE_LIBCRACK" = xyes ; then
+dnl   AC_CHECK_HEADER(crack.h, ,[
+dnl   AC_MSG_ERROR(cracklib crack.h header file not found.)])
+dnl fi
 
-GST_CRACK_LIB_LOCATION="/usr/lib/"
-AC_ARG_WITH(cracklib-dict,
-[  --with-cracklib-dict[=DIR]       specify a cracklib dir ],[
-  if test "$withval" != "no"; then
-    GST_CRACK_LIB_LOCATION=$withval
-  fi  
-])
+dnl GST_CRACK_LIB_LOCATION="/usr/lib/"
+dnl AC_ARG_WITH(cracklib-dict,
+dnl [  --with-cracklib-dict[=DIR]       specify a cracklib dir ],[
+dnl   if test "$withval" != "no"; then
+dnl     GST_CRACK_LIB_LOCATION=$withval
+dnl   fi
+dnl ])
 
 AC_CHECK_LIB(crypt, crypt, ,[
   AC_MSG_ERROR(crypt library is required.)])
