@@ -10,6 +10,7 @@ pixmaps_DATA = \
 	connection-modem.png      \
 	boot.png                  \
 	debian.png                \
+	disks.png		  \
 	fedora.png		  \
 	freebsd.png               \
 	gentoo.png                \
