@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 0.27\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-22 22:42+0200\n"
-"PO-Revision-Date: 2003-09-22 22:42+0200\n"
+"POT-Creation-Date: 2003-09-27 09:34+0200\n"
+"PO-Revision-Date: 2003-09-27 09:34+0200\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -371,7 +371,7 @@ msgstr "Komplexität"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Passworteingabe - GNOME-Systemwerkzeuge"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1636
 msgid "GNOME System Tools"
 msgstr "GNOME-Systemwerkzeuge"
 
@@ -1477,7 +1477,7 @@ msgstr ""
 "Benutzerprofile können als Vorlagen verwendet werden, um das Anlegen neuer "
 "Benutzer zu erleichtern. "
 
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:75
 msgid "Users"
 msgstr "Benutzer"
 
@@ -1634,8 +1634,8 @@ msgid "Boot"
 msgstr "Systemstart"
 
 #: src/boot/boot.desktop.in.in.h:2
-msgid "Boot Manager"
-msgstr "Bootmanager"
+msgid "Configure the system boot process"
+msgstr "Den Boot-Vorgang konfigurieren"
 
 #: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
@@ -1731,7 +1731,7 @@ msgstr " Mehr _Optionen"
 msgid " Fewer _Options"
 msgstr " Weniger _Optionen"
 
-#: src/common/gst-dialog.c:476
+#: src/common/gst-dialog.c:454
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1739,21 +1739,21 @@ msgstr ""
 "Einige Änderungen wurden noch nicht angewandt.\n"
 "Jetzt anwenden?"
 
-#: src/common/gst-dialog.c:592
+#: src/common/gst-dialog.c:552
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fehlerhaftes Verbindungssignal »%s« in Widget »%s«"
 
-#: src/common/gst-tool.c:944
+#: src/common/gst-tool.c:853
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Anweisung %s wird übersprungen..."
 
-#: src/common/gst-tool.c:1094
+#: src/common/gst-tool.c:993
 msgid "Skipping actual save..."
 msgstr "Derzeitiges Sichern wird übersprungen..."
 
-#: src/common/gst-tool.c:1156
+#: src/common/gst-tool.c:1055
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1761,12 +1761,12 @@ msgstr ""
 "Während der Ausführung des Backend-Skripts\n"
 "ist ein Fehler aufgetreten. Die Konfiguration konnte nicht geladen werden."
 
-#: src/common/gst-tool.c:1522
+#: src/common/gst-tool.c:1359
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - GNOME-Systemwerkzeuge"
 
-#: src/common/gst-tool.c:1700
+#: src/common/gst-tool.c:1537
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1794,11 +1794,11 @@ msgstr ""
 "--\n"
 "Das GNOME-Systemwerkzeuge-Team"
 
-#: src/common/gst-tool.c:1724
+#: src/common/gst-tool.c:1561
 msgid "Warning"
 msgstr "Warnung"
 
-#: src/common/gst-tool.c:1733
+#: src/common/gst-tool.c:1570
 msgid "Don't show me this again"
 msgstr "Diesen Dialog nicht mehr anzeigen"
 
@@ -2139,8 +2139,8 @@ msgid "Connection name (Step 2 of 2)"
 msgstr "Verbindungsname (Schritt 2 von 2)"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Einrichtung eines Netzwerkadapters"
+msgid "Configure network devices and connections"
+msgstr "Netzerwerkschnittstellen und -verbindungen konfigurieren"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
@@ -2220,26 +2220,26 @@ msgid "Services Settings"
 msgstr "Diensteinstellungen"
 
 #: src/services/services.desktop.in.in.h:1
-msgid "Services"
-msgstr "Dienste"
+msgid "Configure which services will be run when the system starts"
+msgstr "Festlegen, welche Dienste beim Systemstart ausgeführt werden sollen"
 
 #: src/services/services.desktop.in.in.h:2
-msgid "Services Manager"
-msgstr "Dienste verwalten"
+msgid "Services"
+msgstr "Dienste"
 
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Dienst"
 
-#: src/time/main.c:310
+#: src/time/main.c:303
 msgid "Time Zone - GNOME System Tools"
 msgstr "Zeitzone - GNOME-Systemwerkzeuge"
 
-#: src/time/main.c:428
+#: src/time/main.c:417
 msgid "Time Servers - GNOME System Tools"
 msgstr "Zeit-Server - GNOME-Systemwerkzeuge"
 
-#: src/time/main.c:500
+#: src/time/main.c:495
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2248,17 +2248,17 @@ msgstr ""
 "Unterstützung auf dem System aus, um die Server-Synchronisation to "
 "aktivieren."
 
-#: src/time/main.c:789
+#: src/time/main.c:784
 msgid "Time and Date Settings"
 msgstr "Zeit- und Datumseinstellungen"
 
 #: src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Zeit"
+msgid "Change system time, date, and timezone"
+msgstr "Systemzeit, Datum und Zeitzone festlegen"
 
 #: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
-msgstr "Zeit, Datum und Zeitzone."
+msgid "Time and Date"
+msgstr "Datum und Uhrzeit"
 
 #: src/users/callbacks.c:598
 msgid "Create New profile"
@@ -2335,7 +2335,7 @@ msgstr "Gruppenname enthält"
 msgid "User GID is"
 msgstr "Kennung der Benutzergruppe ist"
 
-#: src/users/main.c:321
+#: src/users/main.c:321 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Benutzer und Gruppen"
 
@@ -2509,1189 +2509,6 @@ msgstr "Befehlszeile"
 msgid "Comments"
 msgstr "Kommentar"
 
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Benutzer und Gruppen."
-
-#~ msgid "Default runlevel"
-#~ msgstr "Vorgabe-Runlevel"
-
-#~ msgid "Dialog complexity for the runlevel-admin tool"
-#~ msgstr "Dialog-Komplexität des Runlevel-Administrationswerkzeugs"
-
-#~ msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
-#~ msgstr ""
-#~ "Runlevel, das das Runlevel-Administrationswerkzeug im grundlegenden Modus "
-#~ "als Vorgabe verwendet"
-
-#~ msgid "Advanced mode not yet implemented. Sorry."
-#~ msgstr "Komplexer Modus noch nicht implementiert. Entschuldigung."
-
-#~ msgid "DHCP Server"
-#~ msgstr "DHCP-Server"
-
-#~ msgid "DHCP server configuration"
-#~ msgstr "Konfiguration des DHCP-Servers"
-
-#~ msgid "DHCP server configuration "
-#~ msgstr "Konfiguration des DHCP-Servers"
-
-#~ msgid "DNS_1 :"
-#~ msgstr "DNS _1:"
-
-#~ msgid "DNS_2 :"
-#~ msgstr "DNS _2:"
-
-#~ msgid "E_nabled"
-#~ msgstr "_Aktiviert"
-
-#~ msgid "Host Info : "
-#~ msgstr "Rechnerinfos:"
-
-#~ msgid "Hosts :"
-#~ msgstr "Rechner:"
-
-#~ msgid "Hosts Editor"
-#~ msgstr "Rechner-Editor"
-
-#~ msgid "Ip Address"
-#~ msgstr "IP-Adresse"
-
-#~ msgid "Range _End :"
-#~ msgstr "Bereichs_ende:"
-
-#~ msgid "Range _Start :"
-#~ msgstr "Bereichs_anfang:"
-
-#~ msgid "Router :"
-#~ msgstr "Router:"
-
-#~ msgid "Subnet _Mask :"
-#~ msgstr "_Subnetzmaske:"
-
-#~ msgid "_Add"
-#~ msgstr "_Hinzufügen"
-
-#~ msgid "_Comment :"
-#~ msgstr "_Kommentar:"
-
-#~ msgid "_Domain :"
-#~ msgstr "_Domäne:"
-
-#~ msgid "_Edit Hosts..."
-#~ msgstr "Rechner _bearbeiten..."
-
-#~ msgid "_Hostname :"
-#~ msgstr "_Rechnername:"
-
-#~ msgid "_IP address :"
-#~ msgstr "_IP-Adresse:"
-
-#~ msgid "_MAC address :"
-#~ msgstr "_MAC-Adresse:"
-
-#~ msgid "host"
-#~ msgstr "Rechner"
-
-#~ msgid "Add an unlisted import"
-#~ msgstr "Nicht aufgelisteten Import hinzufügen"
-
-#~ msgid "Add partition"
-#~ msgstr "Partitionen hinzufügen"
-
-#~ msgid "Automatic (detect when mounting)"
-#~ msgstr "Automatisch (Beim Einbinden erkennen)"
-
-#~ msgid "Check for errors on startup"
-#~ msgstr "Beim Start auf Fehler überprüfen"
-
-#~ msgid "Choose a mount point"
-#~ msgstr "Einen Einbindepunkt wählen"
-
-#~ msgid "Disks & partitions"
-#~ msgstr "Platten & Partitionen"
-
-#~ msgid ""
-#~ "Disks are divided into several pieces, called partitions. Each partition "
-#~ "is dedicated for a specific storage task, such as virtual memory or home "
-#~ "directories for your users."
-#~ msgstr ""
-#~ "Platten sind in kleine Bereiche eingeteilt, Partitionen genannt. Jeder "
-#~ "Partition ist eine bestimmte Aufgabe zugewiesen, wie z.B. die virtueller "
-#~ "Speicher oder Heim-Verzeichnis für die Benutzer."
-
-#~ msgid "Ext2 (Linux)"
-#~ msgstr "Ext2 (Linux)"
-
-#~ msgid "FAT (DOS)"
-#~ msgstr "FAT (DOS)"
-
-#~ msgid "FAT32 (Windows 98 and newer)"
-#~ msgstr "FAT32 (Windows 98 und neuer)"
-
-#~ msgid "Mount point:"
-#~ msgstr "Einbindepunkt:"
-
-#~ msgid "Mount this partition"
-#~ msgstr "Diese Partition einbinden"
-
-#~ msgid "NTFS (Windows NT & 2000)"
-#~ msgstr "NTFS (Windows NT, 2000 und XP)"
-
-#~ msgid "Open settings dialog for selected import"
-#~ msgstr "Einstellungen-Dialog für gewählten Import öffnen"
-
-#~ msgid "Partition"
-#~ msgstr "Partition"
-
-#~ msgid "Partition Settings"
-#~ msgstr "Partitionseinstellungen"
-
-#~ msgid "Remember details of this partition"
-#~ msgstr "Die Details dieser Patition merken"
-
-#~ msgid "Type:"
-#~ msgstr "Typ:"
-
-#~ msgid "VFAT (Windows 95 and newer)"
-#~ msgstr "VFAT (Windows 95 und neuer)"
-
-#~ msgid "reiserfs (Linux)"
-#~ msgstr "ReiserFS (Linux)"
-
-#~ msgid "ufs (FreeBSD)"
-#~ msgstr "ufs (FreeBSD)"
-
-#~ msgid "<unknown>"
-#~ msgstr "<unbekannt>"
-
-#~ msgid "Appearance"
-#~ msgstr "Aussehen"
-
-#~ msgid "Colors"
-#~ msgstr "Farben"
-
-#~ msgid "Colors:"
-#~ msgstr "Farben:"
-
-#~ msgid "Down"
-#~ msgstr "Runter"
-
-#~ msgid "Left"
-#~ msgstr "Links"
-
-#~ msgid "Model:"
-#~ msgstr "Modell:"
-
-#~ msgid "Monitor information"
-#~ msgstr "Monitor-Informationen"
-
-#~ msgid "Narrower"
-#~ msgstr "Schmäler"
-
-#~ msgid "Probe again"
-#~ msgstr "Nochmal testen"
-
-#~ msgid "Refresh rate:"
-#~ msgstr "Wiederholrate:"
-
-#~ msgid "Resolution"
-#~ msgstr "Auflösung"
-
-#~ msgid "Restart X"
-#~ msgstr "X neu starten"
-
-#~ msgid "Right"
-#~ msgstr "Rechts"
-
-#~ msgid "Shift my display:"
-#~ msgstr "Meine Anzeige verschieben:"
-
-#~ msgid "Shorter"
-#~ msgstr "Kürzer"
-
-#~ msgid "Stretch my display:"
-#~ msgstr "Meine Anzeige strecken:"
-
-#~ msgid "Taller"
-#~ msgstr "Höher"
-
-#~ msgid "Test current setting"
-#~ msgstr "Aktuelle Einstellungen testen"
-
-#~ msgid "Up"
-#~ msgstr "Hoch"
-
-#~ msgid "Use this tool to configure your monitor."
-#~ msgstr "Verwenden Sie dieses Werkzeug, um Ihren Monitor zu konfigurieren."
-
-#~ msgid "Vendor:"
-#~ msgstr "Hersteller:"
-
-#~ msgid "Wider"
-#~ msgstr "Breiter"
-
-#~ msgid "_Restore settings"
-#~ msgstr "Einstellungen _wiederherstellen"
-
-#~ msgid "Add font..."
-#~ msgstr "Schrift hinzufügen..."
-
-#~ msgid "Delete font"
-#~ msgstr "Schrift löschen"
-
-#~ msgid "Font family"
-#~ msgstr "Schriftfamilie"
-
-#~ msgid "Font size:"
-#~ msgstr "Schriftgröße:"
-
-#~ msgid "Preview"
-#~ msgstr "Vorschau"
-
-#~ msgid "Select the fonts you want to install."
-#~ msgstr "Wählen Sie den Schriften aus, die installiert werden sollen."
-
-#~ msgid "Style"
-#~ msgstr "Stil"
-
-#~ msgid "   Configure...   "
-#~ msgstr "   Konfigurieren... "
-
-#~ msgid " Exit and come back later after installing."
-#~ msgstr " Beenden und nach der Installation zurückkehren "
-
-#~ msgid " Keep the current configuration."
-#~ msgstr " Die derzeitige Konfiguration beibehalten."
-
-#~ msgid " Never mind, don't use it then."
-#~ msgstr " Macht nichts, dann eben nicht verwenden."
-
-#~ msgid " No, I'll manually configure the local network computers."
-#~ msgstr ""
-#~ " Nein, Ich werde die lokal vernetzten Computer selbst konfigurieren."
-
-#~ msgid " No, I'll set it up later by myself."
-#~ msgstr " Nein, Ich werde es später selbst einrichten."
-
-#~ msgid " No, exit this druid and continue later."
-#~ msgstr " Nein, diesen Assistenten beenden und später fortfahren."
-
-#~ msgid " No, overwrite with new defaults (recommended)"
-#~ msgstr " Nein, mit neuen Voreinstellungen überschreiben (empfohen)"
-
-#~ msgid ""
-#~ " Overwrite with the default internet sharing configuration (recommended)."
-#~ msgstr ""
-#~ " Mit der vorgegebenen Konfiguration für Internetfreigaben überschreiben "
-#~ "(empfohlen)."
-
-#~ msgid ""
-#~ " Yes, I'll set the local network computers to use automatic IP "
-#~ "assignment  (recommended)."
-#~ msgstr ""
-#~ " Ja, die lokalen Netzwerk-Computer sollen automatische IP-Zuweisung "
-#~ "verwenden (empfohlen)"
-
-#~ msgid " Yes, keep the current DHCP configuration."
-#~ msgstr " Ja, die derzeitige DHCP-Konfiguration beibehalten."
-
-#~ msgid " Yes, launch network tool (recommended)."
-#~ msgstr " Ja, Netzwerkwerkzeuge starten (empfohlen)."
-
-#~ msgid ""
-#~ "A local network connection was not detected.\n"
-#~ "Would you like to configure one?\n"
-#~ msgstr ""
-#~ "Es wurde keine lokale Netzwerkverbindung erkannt.\n"
-#~ "Wollen Sie eines konfigurieren?\n"
-
-#~ msgid ""
-#~ "A local network interface has been detected, but it's not active.\n"
-#~ "Would you like to activate it now?\n"
-#~ msgstr ""
-#~ "Es wurde eine lokale Netzwerkschnittstelle erkannt, diese ist jedoch "
-#~ "nicht aktiviert.\n"
-#~ "Soll sie jetzt aktiviert werden?\n"
-
-#~ msgid ""
-#~ "A previous DHCP configuration has been detected. \n"
-#~ "Do you want to keep this configuration?"
-#~ msgstr ""
-#~ "Es wurde eine vorherige DHCP-Konfiguration festgestellt. \n"
-#~ "Wollen Sie diese Konfiguration beibehalten?"
-
-#~ msgid "Banner Removal (Junkbuster)"
-#~ msgstr "Banner-Entfernung (Junkbuster)"
-
-#~ msgid "Configure DHCP Service"
-#~ msgstr "DHCP-Dienst konfigurieren"
-
-#~ msgid ""
-#~ "Congratulations! This computer is now\n"
-#~ "configured to share its Internet connection.\n"
-#~ msgstr ""
-#~ "Glückwunsch! Dieser Computer ist jetzt\n"
-#~ "für die Internet-Verbindungsfreigabe konfiguriert.\n"
-
-#~ msgid "DHCP service configuration."
-#~ msgstr "Konfiguration des DHCP-Dienstes."
-
-#~ msgid "DHCP service requirements."
-#~ msgstr "Anforderungen des DHCP-Dienstes"
-
-#~ msgid "Disable"
-#~ msgstr "Deaktivieren"
-
-#~ msgid "Enable :"
-#~ msgstr "Aktivieren:"
-
-#~ msgid "End of Range"
-#~ msgstr "Außerhalb des Bereichs"
-
-#~ msgid "Firewall"
-#~ msgstr "Firewall"
-
-#~ msgid "IP Forwarding"
-#~ msgstr "IP-Forwarding"
-
-#~ msgid "Internet Sharing"
-#~ msgstr "Internet-Verbindungsfreigabe"
-
-#~ msgid "Internet Sharing --Advanced Mode"
-#~ msgstr "Internet-Verbindungsfreigabe -- erweiterter Modus"
-
-#~ msgid "Internet Sharing Configuration Druid"
-#~ msgstr "Assistent zur Konfiguration der Internet-Verbindungsfreigabe"
-
-#~ msgid "Internet Sharing Druid"
-#~ msgstr "Assistent für Internet-Verbindungsfreigabe"
-
-#~ msgid "Internet sharing configuration."
-#~ msgstr "Konfiguration der Internet-Verbindungsfreigabe."
-
-#~ msgid "Local network interface activation."
-#~ msgstr "Aktivierung der lokalen Netzwerkkarte."
-
-#~ msgid "Start of Range"
-#~ msgstr "Anfang des Bereichs"
-
-#~ msgid ""
-#~ "The Internet sharing tool allows you to share your Internet conection "
-#~ "with other computers on the network."
-#~ msgstr ""
-#~ "Das Werkzeug für die Internet-Freigabe erlaubt Ihnen, Ihre "
-#~ "Internetverbindung anderen Computern in Ihrem Netz zur Verfügung zu "
-#~ "stellen."
-
-#~ msgid "Web Cache (squid)"
-#~ msgstr "Web-Cache (squid)"
-
-#~ msgid ""
-#~ "Welcome to the Internet Sharing Configuration Druid.\n"
-#~ "\n"
-#~ "This druid will help you to configure and share\n"
-#~ "your Internet connection.\n"
-#~ "\n"
-#~ "You should have already installed and configured a local\n"
-#~ "network connection, such as an Ethernet or waveLAN\n"
-#~ "card, and an internet connection, such as a modem.\n"
-#~ "\n"
-#~ "If you haven't, you will be given the option to launch the\n"
-#~ "Network Tool to configure them before continuing."
-#~ msgstr ""
-#~ "WIllkommen beim Druiden zur Konfiguration der\n"
-#~ "Internet-Verbindungsfreigabe\n"
-#~ "\n"
-#~ "Dieser Assistent wird Ihnen dabei helfen,\n"
-#~ "Ihre Internetverbindung zu konfigurieren\n"
-#~ "und freizugeben\n"
-#~ "\n"
-#~ "Es muss zumindest eine lokale Netzwerk-Schnittstelle,\n"
-#~ "wie z.B. eine Ethernet- oder WaveLAN-Karte sowie\n"
-#~ "eine Internetverbindung, wie ein Modem, installiert\n"
-#~ "und konfiguriert sein.\n"
-#~ "Falls dies noch nicht geschehen ist, wird Ihnen die Möglichkeit\n"
-#~ "gegeben, das Netzwerkwerkzeug zu starten, um diese vor\n"
-#~ "dem Fortfahren zu konfigurieren."
-
-#~ msgid ""
-#~ "Would you like to give the automatic network\n"
-#~ "address assignment service (DHCP)?\n"
-#~ msgstr ""
-#~ "Wollen Sie den automatischen Netzwerk-Adress-\n"
-#~ "zuweisungsdienst (DHCP) bereitstellen?\n"
-
-#~ msgid "Yes (recommended)."
-#~ msgstr " Ja (empfohlen)."
-
-#~ msgid ""
-#~ "You already have an internet sharing configuration.\n"
-#~ "Do you want to keep it, or use the druid's defaults?\n"
-#~ msgstr ""
-#~ "Ihre Internet-Verbindungsfreigabe ist bereits konfiguriert.\n"
-#~ "Wollen Sie diese Konfiguration behalten oder die\n"
-#~ "Vorgaben des Assistenten verwenden?\n"
-
-#~ msgid ""
-#~ "You don't have a DHCP server installed, or\n"
-#~ "some other related component is missing."
-#~ msgstr ""
-#~ "Es ist kein DHCP-Server installiert oder\n"
-#~ "eine andere damit zusammenhängende\n"
-#~ "Komponente fehlt."
-
-#~ msgid "\n"
-#~ msgstr "\n"
-
-#~ msgid "                           "
-#~ msgstr "                           "
-
-#~ msgid "AM"
-#~ msgstr "AM"
-
-#~ msgid "Boston Office"
-#~ msgstr "Büro Boston"
-
-#~ msgid "Choose Location"
-#~ msgstr "Standort wählen"
-
-#~ msgid "Copy"
-#~ msgstr "Kopieren"
-
-#~ msgid "Copy Location"
-#~ msgstr "Standort kopieren"
-
-#~ msgid "Current:"
-#~ msgstr "Aktuell:"
-
-#~ msgid "Date"
-#~ msgstr "Datum"
-
-#~ msgid "Date/Time "
-#~ msgstr "Datum/Zeit"
-
-#~ msgid "Date/time"
-#~ msgstr "Datum/Zeit"
-
-#~ msgid "Edit Date/Time"
-#~ msgstr "Datum/Zeit bearbeiten"
-
-#~ msgid "Edit Location"
-#~ msgstr "Standort bearbeiten"
-
-#~ msgid "Edit:"
-#~ msgstr "Bearbeiten:"
-
-#~ msgid "Helsinki Office"
-#~ msgstr "Büro Helsinki"
-
-#~ msgid "Keep clock synchronized with selected servers"
-#~ msgstr "Uhr mit gewählten Servern synchron halten"
-
-#~ msgid "Location"
-#~ msgstr "Standort"
-
-#~ msgid "Location Management"
-#~ msgstr "Standortverwaltung"
-
-#~ msgid "Location:"
-#~ msgstr "Standort:"
-
-#~ msgid "Locations"
-#~ msgstr "Standorte"
-
-#~ msgid "Mexico CIty "
-#~ msgstr "Mexiko Stadt"
-
-#~ msgid "Name:"
-#~ msgstr "Name:"
-
-#~ msgid "New Location"
-#~ msgstr "Neuer Standort"
-
-#~ msgid "New Name:"
-#~ msgstr "Neuer Name:"
-
-#~ msgid "New name:"
-#~ msgstr "Neuer Name:"
-
-#~ msgid "PM"
-#~ msgstr "PM"
-
-#~ msgid "Rename"
-#~ msgstr "Umbenennen"
-
-#~ msgid "Rename Location"
-#~ msgstr "Standort umbenennen"
-
-#~ msgid "Rollback-location-management-mockup"
-#~ msgstr "Rollback-location-management-mockup"
-
-#~ msgid "Select servers..."
-#~ msgstr "Server wählen..."
-
-#~ msgid "Set time zone..."
-#~ msgstr "Zeitzone festlegen..."
-
-#~ msgid "Time server"
-#~ msgstr "Zeit-Server"
-
-#~ msgid "Time zone"
-#~ msgstr "Zeitzone"
-
-#~ msgid ""
-#~ "Use this tool to manage all the different locations where you could "
-#~ "possibly want to use your stinking laptop."
-#~ msgstr ""
-#~ "Verwenden Sie dieses Werkzeug, um die verschiedenen Standorte zu "
-#~ "verwalten, an denen Sie z.B. Ihren Laptop benutzen möchten."
-
-#~ msgid "_Help"
-#~ msgstr "_Hilfe"
-
-#~ msgid "_Settings..."
-#~ msgstr "_Einstellungen..."
-
-#~ msgid "Available partitions:"
-#~ msgstr "Verfügbare Partitionen:"
-
-#~ msgid "Available swap areas"
-#~ msgstr "Verfügbare Swap-Bereiche"
-
-#~ msgid "Browse..."
-#~ msgstr "Auswählen..."
-
-#~ msgid "Cancel"
-#~ msgstr "Abbrechen"
-
-#~ msgid "Enabled"
-#~ msgstr "Aktiviert"
-
-#~ msgid "MB"
-#~ msgstr "MB"
-
-#~ msgid "New Swap Device"
-#~ msgstr "Neues Swap-Gerät"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Path:"
-#~ msgstr "Pfad:"
-
-#~ msgid "Physical memory:"
-#~ msgstr "Physikalischer Speicher:"
-
-#~ msgid "Priority"
-#~ msgstr "Priorität"
-
-#~ msgid "Select  Swap File"
-#~ msgstr "Swap-Datei wählen"
-
-#~ msgid "Size"
-#~ msgstr "Größe"
-
-#~ msgid "Size:"
-#~ msgstr "Größe:"
-
-#~ msgid "Swap Settings"
-#~ msgstr "Swap-Einstellungen"
-
-#~ msgid "Swap memory:"
-#~ msgstr "Swap-Speicher:"
-
-#~ msgid "Swap type:"
-#~ msgstr "Swap-Typ:"
-
-#~ msgid "_Remove"
-#~ msgstr "Ent_fernen"
-
-#~ msgid "_Settings"
-#~ msgstr "E_instellungen"
-
-#~ msgid "file"
-#~ msgstr "Datei"
-
-#~ msgid "partition"
-#~ msgstr "Partition"
-
-#~ msgid " Move Up"
-#~ msgstr " Hoch bewegen"
-
-#~ msgid " Names"
-#~ msgstr " Namen"
-
-#~ msgid ""
-#~ "Assign aliases to IP addresses that may not be registered in the DNS or "
-#~ "WINS servers, or to override or set new names for commonly used IP "
-#~ "addresses. "
-#~ msgstr ""
-#~ "Aliase IP-Adressen zuweisen, die evtl. nicht bei DNS- oder WINS-Servern "
-#~ "registriert sind, oder zum Übergehen oder Setzen neuer Namen für häufig "
-#~ "genutzte IP-Adressen."
-
-#~ msgid "Change the alias' IP address or its corresponding names."
-#~ msgstr "Die IP-Adresse des Alias oder die dazugehörigen Namen ändern."
-
-#~ msgid "Domain"
-#~ msgstr "Domäne"
-
-#~ msgid "Domain Lookup Order"
-#~ msgstr "Domänen Suchordnung"
-
-#~ msgid "Domain Name Service (DNS)"
-#~ msgstr "Domain Name Service (DNS)"
-
-#~ msgid "Domain:"
-#~ msgstr "Domäne:"
-
-#~ msgid "Existing:"
-#~ msgstr "Vorhanden:"
-
-#~ msgid "Host"
-#~ msgstr "Rechner"
-
-#~ msgid "Host name:"
-#~ msgstr "Rechnername:"
-
-#~ msgid "IP address"
-#~ msgstr "IP-Adresse"
-
-#~ msgid "IP address:"
-#~ msgstr "IP-Adresse:"
-
-#~ msgid "Identification"
-#~ msgstr "Identifikation"
-
-#~ msgid "Let the computer know its name, function and network surroundings."
-#~ msgstr ""
-#~ "Dem Computer seinen Namen, Funktion und Netzwerkumgebung wissen lassen."
-
-#~ msgid "Move Down"
-#~ msgstr "Runter bewegen"
-
-#~ msgid "New Alias"
-#~ msgstr "Neuer Alias"
-
-#~ msgid "New domain:"
-#~ msgstr "Neue Domäne:"
-
-#~ msgid "New server:"
-#~ msgstr "Neuer Server:"
-
-#~ msgid "New:"
-#~ msgstr "Neu:"
-
-#~ msgid "Reverse:"
-#~ msgstr "Umgekehrt:"
-
-#~ msgid "Search Domains"
-#~ msgstr "Domänen suchen"
-
-#~ msgid "Servers"
-#~ msgstr "Server"
-
-#~ msgid "Settings for the selected alias"
-#~ msgstr "Einstellungen für den gewählten Alias"
-
-#~ msgid "Use WINS server:"
-#~ msgstr "WINS-Server verwenden:"
-
-#~ msgid "Workgroup:"
-#~ msgstr "Arbeitsgruppe:"
-
-#~ msgid "/dev/lp0 (LPT1)"
-#~ msgstr "/dev/lp0 (LPT1)"
-
-#~ msgid "/dev/lp1 (LPT2)"
-#~ msgstr "/dev/lp1 (LPT2)"
-
-#~ msgid "/dev/ttyS0 (COM1)"
-#~ msgstr "/dev/ttyS0 (COM1)"
-
-#~ msgid "/dev/ttyS1 (COM2)"
-#~ msgstr "/dev/ttyS1 (COM2)"
-
-#~ msgid "/dev/ttyS2 (COM3)"
-#~ msgstr "/dev/ttyS2 (COM3)"
-
-#~ msgid "/dev/ttyS3 (COM4)"
-#~ msgstr "/dev/ttyS3 (COM4)"
-
-#~ msgid "1200x1200"
-#~ msgstr "1200x1200"
-
-#~ msgid "1200x600"
-#~ msgstr "1200x600"
-
-#~ msgid "16 colors"
-#~ msgstr "16 Farben"
-
-#~ msgid "256 colors"
-#~ msgstr "256 Farben"
-
-#~ msgid "300x300"
-#~ msgstr "300x300"
-
-#~ msgid "400x400"
-#~ msgstr "400x400"
-
-#~ msgid "600x600"
-#~ msgstr "600x600"
-
-#~ msgid "A3"
-#~ msgstr "A3"
-
-#~ msgid "A4"
-#~ msgstr "A4"
-
-#~ msgid "Add Printer..."
-#~ msgstr "Drucker hinzufügen..."
-
-#~ msgid "Add a New Printer"
-#~ msgstr "Einen neuen Drucker hinzufügen"
-
-#~ msgid "Connection"
-#~ msgstr "Verbindung"
-
-#~ msgid ""
-#~ "Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
-#~ msgstr ""
-#~ "PC-Zeilenvorschübe ins Unix-Format konvertieren. Hilft, "
-#~ "»Treppenstufentext« zu vermeiden."
-
-#~ msgid "Convert _Linefeeds"
-#~ msgstr "_Zeilenvorschübe konvertieren"
-
-#~ msgid "Document Pages per Sheet"
-#~ msgstr "Dokumentseiten pro Blatt"
-
-#~ msgid "Driver"
-#~ msgstr "Treiber"
-
-#~ msgid "E_xplicitly Eject Last Page"
-#~ msgstr "E_xplizit letzte Seite ausgeben"
-
-#~ msgid "High Color"
-#~ msgstr "High Color"
-
-#~ msgid "Legal"
-#~ msgstr "Legal"
-
-#~ msgid "Letter"
-#~ msgstr "Letter"
-
-#~ msgid "Name of the printer."
-#~ msgstr "Name des Druckers."
-
-#~ msgid "Name of the server the printer is connected to."
-#~ msgstr "Name des Servers, mit dem der Drucker verbunden ist."
-
-#~ msgid "Name the server uses for the printer."
-#~ msgstr "Name, den der Server für den Drucker verwendet."
-
-#~ msgid "Novell _Netware (NCP) Printer"
-#~ msgstr "Novell _Netware-Drucker (NCP)"
-
-#~ msgid "Number of colors to print in."
-#~ msgstr "Anzahl der Farben, die gedruckt werden sollen."
-
-#~ msgid "Options"
-#~ msgstr "Optionen"
-
-#~ msgid "P_aper Size:"
-#~ msgstr "P_apiergröße:"
-
-#~ msgid "P_ort Number:"
-#~ msgstr "P_ort-Nummer:"
-
-#~ msgid "Port number the server is listening to."
-#~ msgstr "Port-Nummer an dem der Server horcht."
-
-#~ msgid "Port the printer is connected to."
-#~ msgstr "Port, mit dem der Drucker verbunden ist."
-
-#~ msgid "Print one page per sheet."
-#~ msgstr "Eine Seite pro Blatt drucken."
-
-#~ msgid "Print resolution."
-#~ msgstr "Druckauflösung:"
-
-#~ msgid "Printer Settings"
-#~ msgstr "Druckereinstellungen"
-
-#~ msgid "Printer connected to a port on your machine."
-#~ msgstr "Drucker ist an einen Port Ihres Computers angeschlossen."
-
-#~ msgid "Printer listening directly for network connections."
-#~ msgstr "Drucker, der direkt an Netzwerkverbindungen horcht."
-
-#~ msgid "Printer shared on a Windows (SMB) network."
-#~ msgstr "Drucker in einem Windows-Netzwerk (SMB)."
-
-#~ msgid "Printer shared using the Novell Netware (NCP) protocol."
-#~ msgstr ""
-#~ "Druckerfreigabe unter Verwendung des Novell Netware-Protokolls (NCP)."
-
-#~ msgid "Printer shared using the Unix (lpd) print protocol."
-#~ msgstr "Druckerfreigabe unter Verwendung des UNIX-Druckprotokolls (lpd)."
-
-#~ msgid "R_esolution:"
-#~ msgstr "_Auflösung:"
-
-#~ msgid "Remote UNIX (_lpd) Printer"
-#~ msgstr "Entfernter UNIX-Drucker (_lpd)"
-
-#~ msgid "Remote _Windows (SMB) printer"
-#~ msgstr "Entfernter _Windows-Drucker (SMB)"
-
-#~ msgid "SMB workgroup the server is in."
-#~ msgstr "SMB-Arbeitsgruppe, in der der Server ist."
-
-#~ msgid "Scale pages down and print eight per sheet."
-#~ msgstr "Seiten verkleinern und acht Seiten pro Blatt drucken."
-
-#~ msgid "Scale pages down and print four per sheet."
-#~ msgstr "Seiten·verkleinern·und·vier·Seiten·pro·Blatt·drucken."
-
-#~ msgid "Scale pages down and print two per sheet."
-#~ msgstr "Seiten·verkleinern·und·zwei·Seiten·pro·Blatt·drucken."
-
-#~ msgid "Select the type of printer to add:"
-#~ msgstr "Wählen Sie den hinzuzufügenden Druckertyp:"
-
-#~ msgid "Send an EOF after the print job to help eject the last page."
-#~ msgstr ""
-#~ "Ein EOF nach dem Druck-Job schicken, um beim Auswerfen der letzten Seite "
-#~ "zu helfen."
-
-#~ msgid "Send text documents raw to the printer."
-#~ msgstr "Textdokumente im Rohformat an den Drucker schicken."
-
-#~ msgid "Settings..."
-#~ msgstr "Einstellungen..."
-
-#~ msgid "Size of the paper in the printer."
-#~ msgstr "Größe des Papiers im Drucker."
-
-#~ msgid "The password used to connect to the server."
-#~ msgstr "Das verwendete Passwort, um mit den Server zu verbinden."
-
-#~ msgid ""
-#~ "This is the list of the configured printers available on the system. "
-#~ "Create new printers or edit existing printer settings with this dialog."
-#~ msgstr ""
-#~ "Dies ist die Liste der auf diesem System verfügbaren Drucker. Mit Hilfe "
-#~ "dieses Dialogs können sie neue Drucker hinzufügen oder Bestehende "
-#~ "bearbeiten."
-
-#~ msgid "True Color"
-#~ msgstr "Echtfarben"
-
-#~ msgid "Username used to connect to the server."
-#~ msgstr "Der verwendete Benutzername, um mit dem Server zu verbinden."
-
-#~ msgid "_1"
-#~ msgstr "_1"
-
-#~ msgid "_2"
-#~ msgstr "_2"
-
-#~ msgid "_4"
-#~ msgstr "_4"
-
-#~ msgid "_8"
-#~ msgstr "_8"
-
-#~ msgid "_Color Depth:"
-#~ msgstr "_Farbtiefe:"
-
-#~ msgid "_Device Name:"
-#~ msgstr "_Gerätename:"
-
-#~ msgid "_Direct Network Printer"
-#~ msgstr "_Direkter Netzwerkdrucker"
-
-#~ msgid "_Fast Text Printing"
-#~ msgstr "_Schnelles Textdrucken"
-
-#~ msgid "_Local Printer"
-#~ msgstr "_Lokaler Drucker"
-
-#~ msgid "_Remote Name:"
-#~ msgstr "_Entfernter Name:"
-
-#~ msgid "_Workgroup:"
-#~ msgstr "_Arbeitsgruppe:"
-
-#~ msgid "Advanced..."
-#~ msgstr "Komplex..."
-
-#~ msgid "Change to this Location"
-#~ msgstr "Diesen Standort ändern"
-
-#~ msgid "Configuration Restoration"
-#~ msgstr "Wiederherstellung der Konfiguration"
-
-#~ msgid "Create..."
-#~ msgstr "Hinzufügen..."
-
-#~ msgid "Destroy..."
-#~ msgstr "Löschen..."
-
-#~ msgid "Edit this Location"
-#~ msgstr "Diesen Standort bearbeiten"
-
-#~ msgid "Location name:"
-#~ msgstr "Standort-Name:"
-
-#~ msgid "Parent Location:"
-#~ msgstr "Übergeordneter Standort:"
-
-#~ msgid "Rename..."
-#~ msgstr "Umbenennen..."
-
-#~ msgid "Restore all tools"
-#~ msgstr "Alle Werkzeuge wiederherstellen"
-
-#~ msgid "Restore configuration from"
-#~ msgstr "Konfiguration wiederherstellen von"
-
-#~ msgid "Restore only"
-#~ msgstr "Nur wiederherstellen"
-
-#~ msgid "View Logs..."
-#~ msgstr "Protokolle betrachten..."
-
-#~ msgid "days ago"
-#~ msgstr "Tage zuvor"
-
-#~ msgid " Edit clients... "
-#~ msgstr " Clients bearbeiten... "
-
-#~ msgid " _Edit clients... "
-#~ msgstr " Clients _bearbeiten... "
-
-#~ msgid "Access control"
-#~ msgstr "Zugangskontrolle"
-
-#~ msgid "Add..."
-#~ msgstr "Hinzufügen..."
-
-#~ msgid "Allow writing"
-#~ msgstr "Schreiben erlauben"
-
-#~ msgid "Browseable"
-#~ msgstr "In Freigabeliste anzeigen"
-
-#~ msgid "Client"
-#~ msgstr "Client"
-
-#~ msgid "Clients"
-#~ msgstr "Clients"
-
-#~ msgid "Comment:"
-#~ msgstr "Kommentar:"
-
-#~ msgid "Do not _remount this share after computer reboots"
-#~ msgstr "Diese Freigabe nach dem Booten nicht e_rneut einbinden"
-
-#~ msgid "Do not remount this share after computer reboots"
-#~ msgstr "Diese Freigabe nach dem Booten nicht erneut einbinden"
-
-#~ msgid "Export"
-#~ msgstr "Export"
-
-#~ msgid "Export Clients"
-#~ msgstr "Clients exportieren"
-
-#~ msgid "Export Settings"
-#~ msgstr "Exporteinstellungen"
-
-#~ msgid "Export _type:"
-#~ msgstr "Export_typ:"
-
-#~ msgid "Export type:"
-#~ msgstr "Exporttyp:"
-
-#~ msgid "Exports"
-#~ msgstr "Exporte"
-
-#~ msgid ""
-#~ "Exports are used to share directories on your computer with other "
-#~ "computers over the network. "
-#~ msgstr ""
-#~ "Exporte werden dazu verwendet, anderen Computern über das Netzwerk den "
-#~ "Zugriff auf Ihre Verzeichnisse zu ermöglichen."
-
-#~ msgid "Host:"
-#~ msgstr "Rechner:"
-
-#~ msgid "If the mount point does not exist, it will be created."
-#~ msgstr "Falls der Einbindungspunkt nicht existiert, wird er angelegt."
-
-#~ msgid "Import"
-#~ msgstr "Importieren"
-
-#~ msgid "Import Settings"
-#~ msgstr "Importeinstellungen"
-
-#~ msgid "Import Settings--NFS Options"
-#~ msgstr "Importeinstellungen--NFS-Optionen"
-
-#~ msgid "Import Settings--Samba Options (Obsolete)"
-#~ msgstr "Importeinstellungen--Samba-Optionen (Überholt)"
-
-#~ msgid "Import _type:"
-#~ msgstr "Import_typ:"
-
-#~ msgid "Import type:"
-#~ msgstr "Importtyp:"
-
-#~ msgid "Imports"
-#~ msgstr "Importe"
-
-#~ msgid ""
-#~ "Imports are directories which reside in other computers and are "
-#~ "accessible to you through the network."
-#~ msgstr ""
-#~ "Importe sind Verzeichnisse, die sich auf anderen Computern befinden und "
-#~ "auf die über das Netzwerk zugegriffen werden kann."
-
-#~ msgid "Mount Point"
-#~ msgstr "Einbindepunkt"
-
-#~ msgid "Mount p_oint:"
-#~ msgstr "Einbindungs_punkt:"
-
-#~ msgid "Mounted"
-#~ msgstr "Eingebunden"
-
-#~ msgid "Mounting Options"
-#~ msgstr "Einhänge-Optionen"
-
-#~ msgid "Mounting options"
-#~ msgstr "Einbindungsoptionen"
-
-#~ msgid "NFS"
-#~ msgstr "NFS"
-
-#~ msgid "P_ublic"
-#~ msgstr "Ö_ffentlich"
-
-#~ msgid "Pass_word:"
-#~ msgstr "Pass_wort:"
-
-#~ msgid "Path"
-#~ msgstr "Pfad"
-
-#~ msgid "Pattern:"
-#~ msgstr "Muster:"
-
-#~ msgid "Public"
-#~ msgstr "Öffentlich"
-
-#~ msgid "Restrict access to this share to specific clients"
-#~ msgstr "Zugang dieser Freigabe auf bestimmte Clients beschränken"
-
-#~ msgid "Samba"
-#~ msgstr "Samba"
-
-#~ msgid "Update"
-#~ msgstr "Aktualisieren"
-
-#~ msgid ""
-#~ "Use this dialog to create a new export, or to edit the settings of an "
-#~ "existing export."
-#~ msgstr ""
-#~ "Verwenden Sie diesen Dialog, um neue Exporte zu erzeugen oder vorhandene "
-#~ "zu bearbeiten."
-
-#~ msgid ""
-#~ "Use this dialog to create a new import, or to edit the settings of an "
-#~ "existing import."
-#~ msgstr ""
-#~ "Verwenden Sie diesen Dialog, um einen Import zu erzeugen oder einen "
-#~ "vorhandenen Import zu bearbeiten."
-
-#~ msgid ""
-#~ "Use this dialog to define the client patterns which determine who has "
-#~ "access to your NFS share. Client patterns are typically of the form "
-#~ "\"10.10.10.*\" or \" *.gnome.org\".  "
-#~ msgstr ""
-#~ "Verwenden Sie diesen Dialog um das Client-Muster festzulegen, das "
-#~ "festlegt, wer Zugriff auf Ihre NFS-Freigabe hat. Dies hat typischerweise "
-#~ "die Form »10.10.10.*« oder »*.gnome.org«."
-
-#~ msgid "Writable"
-#~ msgstr "Schreibzugriff"
-
-#~ msgid "_Browseable"
-#~ msgstr "In Freigabeliste _anzeigen"
-
-#~ msgid "_Enable"
-#~ msgstr "_Aktivieren"
-
-#~ msgid "_Host:"
-#~ msgstr "_Rechner:"
-
-#~ msgid "_Mount"
-#~ msgstr "_Einbinden"
-
-#~ msgid "_Mounted"
-#~ msgstr "_Eingebunden"
-
-#~ msgid "_Path:"
-#~ msgstr "_Pfad:"
-
-#~ msgid "_Restrict access to this share to specific clients"
-#~ msgstr "Zugang dieser Freigabe auf bestimmte Clients besch_ränken"
-
-#~ msgid "_Scan"
-#~ msgstr "Einle_sen"
-
-#~ msgid "_Writable"
-#~ msgstr "_Schreibzugriff"
-
-#~ msgid "add/edit clients"
-#~ msgstr "Clients hinzufügen/bearbeiten"
-
-#~ msgid "advanced mode--main window"
-#~ msgstr "komplexer Modus--Hauptfenster"
-
-#~ msgid "export settings--NFS options"
-#~ msgstr "Exporteinstellungen--NFS-Optionen"
-
-#~ msgid "export settings--Samba options"
-#~ msgstr "Exporteinstellungen--Samba-Optionen"
-
-#~ msgid "simple mode--main window"
-#~ msgstr "einfacher Modus--Hauptfenster"
-
-#~ msgid "System"
-#~ msgstr "System"
-
-#~ msgid "Scanning your system configuration."
-#~ msgstr "Systemkonfiguration wird analysiert."
-
-#~ msgid "Updating your system configuration."
-#~ msgstr "Ihre Systemkonfiguration wird aktualisiert."
-
-#~ msgid "Pretending we are root..."
-#~ msgstr "Vorgeben, »root« zu sein..."
-
-#~ msgid "Runlevel Settings"
-#~ msgstr "Runlevel-Einstellungen"
-
-#~ msgid "Runlevel"
-#~ msgstr "Runlevel"
-
-#~ msgid "Profile name:"
-#~ msgstr "Profilname:"
-
-#~ msgid "Warning message goes here..\n"
-#~ msgstr "Warnungen erscheinen hier...\n"
-
-#~ msgid "Time Zone:"
-#~ msgstr "Zeitzone:"
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Benutzer und Gruppen hinzufügen oder entfernen"
