@@ -40,13 +40,16 @@ static void on_connection_config_dialog_destroy (GtkWidget *w, Connection *cxn);
 static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Connection *cxn);
 static void on_connection_modified (GtkWidget *w, Connection *cxn);
 static void on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn);
+static void on_ppp_peerdns_toggled (GtkWidget *w, Connection *cxn);
 
 #define W(s) my_get_widget (cxn->xml, (s))
 
-#define GET_STR(yy_prefix,xx) g_free (cxn->xx); cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (W (yy_prefix#xx)), 0, -1);
-#define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (W (yy_prefix#xx))->active;
-#define SET_STR(yy_prefix,xx) my_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx);
-#define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), cxn->xx);
+#define GET_STR(yy_prefix,xx) g_free (cxn->xx); cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (W (yy_prefix#xx)), 0, -1)
+#define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (W (yy_prefix#xx))->active
+#define GET_BOOL_NOT(yy_prefix,xx) GET_BOOL(yy_prefix,xx); cxn->xx = !cxn->xx;
+#define SET_STR(yy_prefix,xx) my_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx)
+#define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), cxn->xx)
+#define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), !cxn->xx)
 	
 
 static GdkPixmap *mini_pm[CONNECTION_LAST];
@@ -517,6 +520,7 @@ connection_get_ppp_from_node (xmlNode *node, Connection *cxn)
 	cxn->persist = connection_xml_get_boolean (node, "persist");
 	cxn->serial_port = connection_xml_get_str (node, "serial_port");
 	cxn->set_default_gw = connection_xml_get_boolean (node, "set_default_gw");
+	cxn->peerdns = connection_xml_get_boolean (node, "peerdns");
 	cxn->dns1 = connection_xml_get_str (node, "dns1");
 	cxn->dns2 = connection_xml_get_str (node, "dns2");
 	cxn->ppp_options = connection_xml_get_str (node, "ppp_options");
@@ -622,6 +626,7 @@ connection_new_from_type (ConnectionType type)
 		cxn->dev = g_strdup ("wvlan0");
 		break;
 	case CONNECTION_PPP:
+		cxn->peerdns = TRUE;
 		cxn->autoboot = FALSE;
 		cxn->dev = g_strdup ("ppp0");
 		break;
@@ -712,6 +717,7 @@ empty_ppp_adv (Connection *cxn)
 	GET_STR ("ppp_", serial_port);
 	GET_BOOL ("ppp_", stupid);
 	GET_BOOL ("ppp_", set_default_gw);
+	GET_BOOL_NOT ("ppp_", peerdns);
 	GET_STR ("ppp_", dns1);
 	GET_STR ("ppp_", dns2);
 	GET_STR ("ppp_", ppp_options);
@@ -778,6 +784,19 @@ static void
 on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn)
 {
 #warning FIXME: implement on_wvlan_adhoc_toggled
+}
+
+static void
+on_ppp_peerdns_toggled (GtkWidget *w, Connection *cxn)
+{
+	gboolean active;
+
+	active = GTK_TOGGLE_BUTTON (W ("ppp_peerdns"))->active;
+
+	gtk_widget_set_sensitive (W ("ppp_dns1_label"), active);
+	gtk_widget_set_sensitive (W ("ppp_dns2_label"), active);
+	gtk_widget_set_sensitive (W ("ppp_dns1"), active);
+	gtk_widget_set_sensitive (W ("ppp_dns2"), active);
 }
 
 static void
@@ -886,6 +905,7 @@ fill_ppp_adv (Connection *cxn)
 	SET_STR ("ppp_", serial_port);
 	SET_BOOL ("ppp_", stupid);
 	SET_BOOL ("ppp_", set_default_gw);
+	SET_BOOL_NOT ("ppp_", peerdns);
 	SET_STR ("ppp_", dns1);
 	SET_STR ("ppp_", dns2);
 	SET_STR ("ppp_", ppp_options);
@@ -903,6 +923,7 @@ hookup_callbacks (Connection *cxn)
 		{ "on_connection_modified", on_connection_modified },
 		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
+		{ "on_ppp_peerdns_toggled", on_ppp_peerdns_toggled },
 		{ NULL } };
 
 	for (i = 0; signals[i].hname; i++)
@@ -1018,6 +1039,7 @@ connection_save_to_node (Connection *cxn, xmlNode *root)
 		connection_xml_save_boolean_to_node (node, "persist", cxn->persist);
 		connection_xml_save_str_to_node (node, "serial_port", cxn->serial_port);
 		connection_xml_save_boolean_to_node (node, "set_default_gw", cxn->set_default_gw);
+		connection_xml_save_boolean_to_node (node, "peerdns", cxn->peerdns);
 		connection_xml_save_str_to_node (node, "dns1", cxn->dns1);
 		connection_xml_save_str_to_node (node, "dns2", cxn->dns2);
 		connection_xml_save_str_to_node (node, "ppp_options", cxn->ppp_options);

@@ -89,6 +89,7 @@ typedef struct {
 	gchar *wvsection;
 	gboolean stupid;
 	gboolean set_default_gw;
+	gboolean peerdns;
 	gchar *dns1;
 	gchar *dns2;
 	gchar *ppp_options;
