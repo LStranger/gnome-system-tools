@@ -109,7 +109,7 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 	apply_widget_policies (xd);
 	gtk_label_set_text (GTK_LABEL (GTK_BIN (xd->complexity_button)->child), _(label[c]));
 
-	gtk_signal_emit (GTK_OBJECT (xd), xstdialog_signals[COMPLEXITY_CHANGE]);
+	g_signal_emit (G_OBJECT (xd), xstdialog_signals[COMPLEXITY_CHANGE], 0);
 }
 
 void
@@ -443,7 +443,7 @@ apply_cb (GtkWidget *w, gpointer data)
 	if (!xst_dialog_run_apply_hooks (dialog))
 		return;
 
-	gtk_signal_emit (GTK_OBJECT (dialog), xstdialog_signals[APPLY]);
+	g_signal_emit (G_OBJECT (dialog), xstdialog_signals[APPLY], 0);
 
 	xst_dialog_set_modified (dialog, FALSE);
 }
@@ -476,7 +476,7 @@ dialog_close (XstDialog *dialog)
 	gtk_widget_hide (GTK_WIDGET (dialog));
 
 	if (dialog == dialog->tool->main_dialog)
-		gtk_signal_emit_by_name (GTK_OBJECT (dialog->tool), "close");
+		g_signal_emit_by_name (GTK_OBJECT (dialog->tool), "close");
 }
 
 static void
@@ -586,7 +586,8 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gtk_box_pack_start (GTK_BOX (w), dialog->child, TRUE, TRUE, 0);
 
 	w = glade_xml_get_widget (xml, "help");
-
+#warning FIXME
+#if 0
 	if (gtk_stock_lookup (GTK_STOCK_HELP, &item)) {
 		GtkWidget *img;		
 
@@ -594,6 +595,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 		gtk_container_add (GTK_CONTAINER (w), img);
 		gtk_widget_show (img);
 	}
+#endif
 
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (help_cb), dialog);
 	/* FIXME: help button hidden until the help files are ready. */
