@@ -1,9 +1,8 @@
-
 /* Map widget.
  *
- * Copyright (C) 2000 Hans Petter Jansson
+ * Copyright (C) 2000 Helix Code, Inc.
  *
- * Author: Hans Petter Jansson <hpj@helixcode.com>
+ * Authors: Hans Petter Jansson <hpj@helixcode.com>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
