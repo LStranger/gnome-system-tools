@@ -580,7 +580,10 @@ static void
 gst_tool_kill_backend_cb (GstDirectiveEntry *entry)
 {
 	GstTool *tool = entry->tool;
-	
+
+	/* removes the g_timeout that's waiting for the backend to die */
+	g_source_remove (tool->timeout_id);
+
 	/* The backend was never called. No problem! */
 	/* For further reference check http://www.xs4all.nl/~pjbrink/apekool/050/045-en.html */
 	if (tool->backend_pid > 0) {
@@ -1179,9 +1182,6 @@ on_remote_hosts_list_selection_changed (GtkTreeSelection *selection, gpointer da
 		if (tool->backend_pid > 0) {
 			gst_dialog_ask_apply (tool->main_dialog);
 			gst_dialog_set_modified (tool->main_dialog, FALSE);
-
-			/* removes the g_timeout that's waiting for the backend to die */
-			g_source_remove (tool->timeout_id);
 
 			/* stops the backend */
 			gst_tool_kill_backend (tool, NULL);

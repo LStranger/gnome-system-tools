@@ -637,7 +637,7 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 
 	if (GTK_WIDGET_TOPLEVEL (dialog->child)) {
 		g_error ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
-			 "You just need to add the widget inside a GtkWindow so that it can be deparented it.", widget);
+			 "You just need to add the widget inside a GtkWindow so that it can be deparented.", widget);
 	}
 
 	gtk_widget_ref (dialog->child);
