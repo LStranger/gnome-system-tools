@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-14 12:44-0400\n"
-"PO-Revision-Date: 2004-10-14 19:30-0400\n"
+"POT-Creation-Date: 2004-10-17 15:03-0400\n"
+"PO-Revision-Date: 2004-10-17 19:30-0400\n"
 "Last-Translator: Adam Weinberger <adamw@gnome.org>\n"
 "Language-Team: English/Canada <adamw@FreeBSD.org>\n"
 "MIME-Version: 1.0\n"
@@ -71,8 +71,8 @@ msgid "Whether the warning dialog should be shown or not"
 msgstr "Whether the warning dialogue should be shown or not"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
+#: interfaces/network.glade.in.h:1 interfaces/shares.glade.in.h:1
+#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -697,7 +697,7 @@ msgstr "_Deactivate"
 
 #: interfaces/network.glade.in.h:87 interfaces/users.glade.in.h:52
 #: src/boot/table.c:52 src/network/connection.c:64 src/network/dns.c:39
-#: src/network/hosts.c:42 src/users/table.c:49
+#: src/network/hosts.c:42 src/shares/table.c:41 src/users/table.c:49
 msgid "_Delete"
 msgstr "_Delete"
 
@@ -864,6 +864,90 @@ msgstr "_Start"
 #: interfaces/services.glade.in.h:11
 msgid "_Startup sequence:"
 msgstr "_Startup sequence:"
+
+#: interfaces/shares.glade.in.h:2
+msgid "<b>Allowed hosts</b>"
+msgstr "<b>Allowed hosts</b>"
+
+#: interfaces/shares.glade.in.h:3
+msgid "<b>Hosts settings</b>"
+msgstr "<b>Hosts settings</b>"
+
+#: interfaces/shares.glade.in.h:4
+msgid "<b>Share properties</b>"
+msgstr "<b>Share properties</b>"
+
+#: interfaces/shares.glade.in.h:5
+msgid "<b>Shared folder</b>"
+msgstr "<b>Shared folder</b>"
+
+#: interfaces/shares.glade.in.h:6
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Shared folders configuration</span>\n"
+"Use this tool for making available folders to your local network neighborhood"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Shared folders configuration</span>\n"
+"Use this tool for making available folders to your local network neighbourhood"
+
+#: interfaces/shares.glade.in.h:8
+msgid "Add allowed hosts"
+msgstr "Add allowed hosts"
+
+#: interfaces/shares.glade.in.h:9
+msgid "Allow _browsing folder"
+msgstr "Allow _browsing folder"
+
+#: interfaces/shares.glade.in.h:10
+msgid "Allowed hosts:"
+msgstr "Allowed hosts:"
+
+#: interfaces/shares.glade.in.h:11
+msgid "Comment:"
+msgstr "Comment:"
+
+#: interfaces/shares.glade.in.h:12
+msgid "Host name:"
+msgstr "Host name:"
+
+#: interfaces/shares.glade.in.h:13
+msgid "IP address:"
+msgstr "IP address:"
+
+#: interfaces/shares.glade.in.h:14
+msgid "Name:"
+msgstr "Name:"
+
+#: interfaces/shares.glade.in.h:15
+msgid "Netmask:"
+msgstr "Netmask:"
+
+#: interfaces/shares.glade.in.h:16
+msgid "Network:"
+msgstr "Network:"
+
+#: interfaces/shares.glade.in.h:17 src/shares/nfs-acl-table.c:55
+msgid "Read only"
+msgstr "Read only"
+
+#: interfaces/shares.glade.in.h:18
+msgid "Share folder"
+msgstr "Share folder"
+
+#: interfaces/shares.glade.in.h:19
+msgid "Share with:"
+msgstr "Share with:"
+
+#: interfaces/shares.glade.in.h:20
+msgid "_Add host"
+msgstr "_Add host"
+
+#: interfaces/shares.glade.in.h:21
+msgid "_Path:"
+msgstr "_Path:"
+
+#: interfaces/shares.glade.in.h:22
+msgid "_Read only"
+msgstr "_Read only"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1330,11 +1414,13 @@ msgstr "Kernel Image"
 msgid "Device"
 msgstr "Device"
 
-#: src/boot/table.c:50 src/network/connection.c:62 src/users/table.c:47
+#: src/boot/table.c:50 src/network/connection.c:62 src/shares/table.c:39
+#: src/users/table.c:47
 msgid "_Add"
 msgstr "_Add"
 
-#: src/boot/table.c:51 src/network/connection.c:63 src/users/table.c:48
+#: src/boot/table.c:51 src/network/connection.c:63 src/shares/table.c:40
+#: src/users/table.c:48
 msgid "_Properties"
 msgstr "_Properties"
 
@@ -1828,6 +1914,79 @@ msgstr "Services"
 #: src/services/table.c:95
 msgid "Service"
 msgstr "Service"
+
+#: src/shares/callbacks.c:184
+msgid "Are you sure you want to delete this share?"
+msgstr "Are you sure you want to delete this share?"
+
+#: src/shares/callbacks.c:185
+msgid "Other computers in your network will stop viewing this"
+msgstr "Other computers in your network will stop viewing this"
+
+#: src/shares/component/GST_Shares_Component.server.in.in.h:1
+msgid "GST Shares admin component"
+msgstr "GST Shares admin component"
+
+#: src/shares/component/GST_Shares_Component.server.in.in.h:2
+msgid "GST Shares sharing operations"
+msgstr "GST Shares sharing operations"
+
+#: src/shares/component/GST_Shares_Component.server.in.in.h:3
+msgid "_Share Folder"
+msgstr "_Share Folder"
+
+#: src/shares/main.c:76
+msgid "Add a shared path, modifies it if it already exists"
+msgstr "Add a shared path. Modifies it if it already exists"
+
+#: src/shares/main.c:76
+msgid "Path"
+msgstr "Path"
+
+#: src/shares/main.c:83
+msgid "Shared folders settings"
+msgstr "Shared folders settings"
+
+#: src/shares/nfs-acl-table.c:49
+msgid "Allowed host/network"
+msgstr "Allowed host/network"
+
+#: src/shares/share-nfs-add-hosts.c:112
+#, c-format
+msgid "Hosts in the %s network"
+msgstr "Hosts in the %s network"
+
+#: src/shares/share-nfs-add-hosts.c:144
+msgid "Specify hostname"
+msgstr "Specify hostname"
+
+#: src/shares/share-nfs-add-hosts.c:151
+msgid "Specify IP address"
+msgstr "Specify IP address"
+
+#: src/shares/share-nfs-add-hosts.c:158
+msgid "Specify network"
+msgstr "Specify network"
+
+#: src/shares/share-settings.c:123
+msgid "Do not share"
+msgstr "Do not share"
+
+#: src/shares/share-settings.c:130
+msgid "SMB"
+msgstr "SMB"
+
+#: src/shares/share-settings.c:136
+msgid "NFS"
+msgstr "NFS"
+
+#: src/shares/shares.desktop.in.in.h:1
+msgid "Configure which folders are available for your network neighborhood"
+msgstr "Configure which folders are available for your network neighbourhood"
+
+#: src/shares/shares.desktop.in.in.h:2
+msgid "Shares"
+msgstr "Shares"
 
 #: src/time/main.c:461
 msgid "NTP support is not running"
