@@ -14,6 +14,7 @@ interfaces = \
 	rollback-location-management.glade \
 	display.glade					\
 	print.glade					\
+	runlevel.glade					\
 	font.glade
 
 interfaces_DATA = $(interfaces)
