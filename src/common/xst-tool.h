@@ -110,6 +110,7 @@ void         xst_tool_construct           (XstTool *tool,
 gboolean     xst_tool_save                (XstTool *tool);
 void         xst_tool_save_cb             (GtkWidget *w, XstTool *tool);
 gboolean     xst_tool_load                (XstTool *tool);
+void         xst_tool_load_try            (XstTool *tool);
 void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 
 GladeXML    *xst_tool_load_glade_common   (XstTool *tool, const gchar *widget);

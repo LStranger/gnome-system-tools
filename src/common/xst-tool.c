@@ -633,7 +633,7 @@ xst_tool_load (XstTool *tool)
 }
 
 void
-xst_tool_main (XstTool *tool)
+xst_tool_load_try (XstTool *tool)
 {
 	GtkWidget *d;
 
@@ -649,7 +649,12 @@ xst_tool_main (XstTool *tool)
 		}
 	}
 	while (tool->run_again);
+}
 
+void
+xst_tool_main (XstTool *tool)
+{
+	xst_tool_load_try (tool);
 	xst_dialog_thaw (tool->main_dialog);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	gtk_main ();
