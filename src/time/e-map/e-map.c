@@ -417,24 +417,11 @@ e_map_button_press (GtkWidget *widget, GdkEventButton *event)
 {
 	EMap *view;
 	EMapPrivate *priv;
-	double lat, lng;
 
 	view = E_MAP (widget);
 	priv = view->priv;
 
 	if (!GTK_WIDGET_HAS_FOCUS (widget)) gtk_widget_grab_focus (widget);
-#if 0
-	if (event->button != 1)
-	{
-		e_map_zoom_out(view);
-		return TRUE;
-	}
-
-	/* Zoom to clicked location */
-
-	e_map_window_to_world(view, event->x, event->y, &lat, &lng);
-	e_map_zoom_to_site(view, lat, lng);
-#endif
 	return TRUE;
 }
 
