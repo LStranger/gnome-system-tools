@@ -64,6 +64,8 @@ static gchar *find_new_id (xmlNodePtr parent);
 static gchar *find_new_key (xmlNodePtr parent);
 static void reply_cb (gint val, gpointer data);
 static gint char_sort_func (gconstpointer a, gconstpointer b);
+static GList *my_g_list_remove_duplicates (GList *list1, GList *list2);
+static void my_gtk_clist_set_pixtext (GtkCList *list, gchar *txt);
 
 /* Global functions */
 
@@ -551,15 +553,19 @@ user_new_prepare (ug_data *ud)
 {
 	GtkWidget *w0;
 	gboolean adv;
+	GtkCList *list;
 
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	user_fill_settings_group (GTK_COMBO (w0), ud->node);
 
+	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gall"));
+	my_gtk_clist_append_items (list, get_user_list ("login", get_corresp_field(ud->node)));
+	
 	if (adv)
 		adv_user_new (ud->node);
-
+	
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
 	gtk_object_set_data (GTK_OBJECT (w0), "data", ud);
@@ -578,14 +584,14 @@ user_update (ug_data *ud)
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
 	new_name = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-													"user_settings_name")));
+									 "user_settings_name")));
 	old_name = xst_xml_get_child_content (ud->node, "login");
 	
 	if (!check_user_login (ud->node, new_name))
 		ok = FALSE;
 
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-													"user_settings_comment")));
+								    "user_settings_comment")));
 	if (!check_user_comment (ud->node, buf))
 		ok = FALSE;
 
@@ -816,11 +822,13 @@ user_settings_groups (ug_data *ud)
 	GtkCList *list;
 	gchar *buf;
 	xmlNodePtr gnode;
+	GList *users, *items, *members;
 
+	/* Members */
 	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember"));
 	gtk_clist_set_auto_sort (list, TRUE);
 	
-	/* Primary group */
+	/* Members Primary group */
 	buf = xst_xml_get_child_content (ud->node, "gid");
 	gnode = get_corresp_field (get_db_node (ud->node));
 	gnode = get_node_by_data (gnode, "gid", buf);
@@ -828,13 +836,20 @@ user_settings_groups (ug_data *ud)
 	buf = xst_xml_get_child_content (gnode, "name");
 
 	if (buf)
-	{
-		my_gtk_clist_append (list, g_strdup_printf ("(%s)", buf));
-		g_free (buf);
-	}
+		my_gtk_clist_set_pixtext (list, buf);
 	
-	/* Secondary groups */
-	my_gtk_clist_append_items (list, get_user_groups (ud->node));
+	/* Members Secondary groups */
+	members = get_user_groups (ud->node);
+	my_gtk_clist_append_items (list, members);
+
+	/* Others */
+	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gall"));
+	gtk_clist_set_auto_sort (list, TRUE);
+
+	users = get_user_list ("login", gnode);
+	items = my_g_list_remove_duplicates (users, members);
+	
+	my_gtk_clist_append_items (list, items);
 }
 
 static void
@@ -843,15 +858,11 @@ user_settings_prepare (ug_data *ud)
 	GtkWidget *w0;
 	gchar *txt;
 	gchar *login, *comment, *name = NULL;
-	gboolean adv;
 	xmlNodePtr group_node;
 	GtkRequisition req;
 
 	g_return_if_fail (ud != NULL);
 	g_return_if_fail (login = xst_xml_get_child_content (ud->node, "login"));
-
-	/* Get tool state (advanced/basic) */
-	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
 	/* Fill login name entry */
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_name");
@@ -885,10 +896,9 @@ user_settings_prepare (ug_data *ud)
 	g_free (comment);
 
 	/* If state == advanced, fill advanced settings too. */
-	if (adv)
+	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
 		adv_user_settings (ud->node, TRUE);
 
-	
 	user_settings_groups (ud);
 	
 	/* Set dialog's title and show it */
@@ -1380,52 +1390,15 @@ group_fill_members_list (xmlNodePtr node)
 static void
 group_fill_all_users_list (xmlNodePtr node, GList *exclude)
 {
-	GList *tmp_list, *member;
+	GList *users, *items;
 	GtkCList *clist;
-	gchar *name, *gname;
-	gboolean found;
-	gchar *entry[2];
-	gboolean adv;
-
-	/* TODO: Clean it up like group_fill_members_list () */
-
-	entry[1] = NULL;
 
 	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
+	users = get_user_list ("login", node);
+	items = my_g_list_remove_duplicates (users, exclude);
+	
 	gtk_clist_set_auto_sort (clist, TRUE);
-	gtk_clist_freeze (clist);
-
-	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
-	tmp_list = get_user_list ("login", node);
-	while (tmp_list)
-	{
-		gname = tmp_list->data;
-		tmp_list = tmp_list->next;
-
-		found = FALSE;
-
-		member = exclude;
-		while (member)
-		{
-			name = member->data;
-			member = member->next;
-
-			if (!strcmp (name, gname))
-			{
-				found = TRUE;
-				break;
-			}
-		}
-
-		if (!found)
-		{
-			entry[0] = gname;
-			gtk_clist_append (clist, entry);
-		}
-	}
-	g_list_free (tmp_list);
-
-	gtk_clist_thaw (clist);
+	my_gtk_clist_append_items (clist, items);
 }
 
 static void
@@ -1584,16 +1557,69 @@ my_gtk_clist_append_items (GtkCList *list, GList *items)
 	gtk_clist_thaw (list);
 }
 
-void
+gint
 my_gtk_clist_append (GtkCList *list, gchar *text)
 {
 	gchar *entry[2];
 	
-	g_return_if_fail (list != NULL);
-	g_return_if_fail (GTK_IS_CLIST (list));
+	g_return_val_if_fail (list != NULL, -1);
+	g_return_val_if_fail (GTK_IS_CLIST (list), -1);
 
 	entry[0] = text;
 	entry[1] = NULL;
 
-	gtk_clist_append (list, entry);
+	return gtk_clist_append (list, entry);
+}
+
+/* for GLists of strings only */
+static GList *
+my_g_list_remove_duplicates (GList *list1, GList *list2)
+{
+	GList *new_list, *tmp_list;
+	gboolean found;
+
+	new_list = NULL;
+	
+	while (list1)
+	{
+		found = FALSE;
+		tmp_list = list2;
+		while (tmp_list)
+		{
+			if (!strcmp (list1->data, tmp_list->data))
+				found = TRUE;
+
+			tmp_list = tmp_list->next;
+		}
+		
+		if (!found)
+			new_list = g_list_prepend (new_list, list1->data);
+
+		list1 = list1->next;
+	}
+
+	return new_list;
+}
+
+static void
+my_gtk_clist_set_pixtext (GtkCList *list, gchar *txt)
+{
+	static GdkPixmap *pixmap;
+	static GdkBitmap *mask;
+	GtkWidget *window;
+	GtkStyle *style;
+	gint row;
+	
+
+	if (!pixmap)
+	{
+		window = GTK_WIDGET (tool->main_dialog);
+		style = gtk_widget_get_style (window);
+		pixmap = gdk_pixmap_create_from_xpm (window->window, &mask,
+						     &style->bg[GTK_STATE_NORMAL],
+						     "/usr/share/pixmaps/yes.xpm");
+	}
+
+	row = my_gtk_clist_append (list, txt);
+	gtk_clist_set_pixtext (list, row, 0, txt, 5, pixmap, mask);
 }

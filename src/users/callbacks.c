@@ -309,6 +309,87 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	}
 }
 
+void
+on_user_settings_add_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkCList *all, *members;
+	gchar *name;
+	gint row;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	all = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gall"));
+	members = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember"));
+
+	while (all->selection)
+	{
+		row = GPOINTER_TO_INT (all->selection->data);
+		gtk_clist_get_text (all, row, 0, &name);
+		my_gtk_clist_append (members, g_strdup (name));
+		gtk_clist_remove (all, row);
+	}
+}
+
+void
+on_user_settings_remove_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkCList *all, *members;
+	gchar *name;
+	gint row;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	all = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gall"));
+	members = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember"));
+
+	while (members->selection)
+	{
+		row = GPOINTER_TO_INT (members->selection->data);
+		gtk_clist_get_text (members, row, 0, &name);
+		my_gtk_clist_append (all, g_strdup (name));
+		gtk_clist_remove (members, row);
+	}
+}
+
+void
+on_user_settings_gmember_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
+				     gpointer user_data)
+{
+	GtkWidget *remove, *primary;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	remove = xst_dialog_get_widget (tool->main_dialog, "user_settings_remove");
+	primary = xst_dialog_get_widget (tool->main_dialog, "user_settings_primary");
+
+	if (!clist->selection)
+	{
+		gtk_widget_set_sensitive (remove,  FALSE);
+		gtk_widget_set_sensitive (primary, FALSE);
+	}
+	else
+	{
+		gtk_widget_set_sensitive (remove,  TRUE);
+		gtk_widget_set_sensitive (primary, TRUE);
+	}
+}
+
+void
+on_user_settings_gall_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
+				     gpointer user_data)
+{
+	GtkWidget *w0;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_add");
+
+	if (!clist->selection)
+		gtk_widget_set_sensitive (w0, FALSE);
+	else
+		gtk_widget_set_sensitive (w0, TRUE);
+}
+
 /* Password settings callbacks */
 
 static void
@@ -479,12 +560,9 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkCList *all, *members;
 	gchar *name;
-	gchar *entry[2];
 	gint row;
 
 	g_return_if_fail (xst_tool_get_access (tool));
-
-	entry[1] = NULL;
 
 	all = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
 	members = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
@@ -493,9 +571,8 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 	{
 		row = GPOINTER_TO_INT (all->selection->data);
 		gtk_clist_get_text (all, row, 0, &name);
-		entry[0] = g_strdup (name);
+		my_gtk_clist_append (members, g_strdup (name));
 		gtk_clist_remove (all, row);
-		gtk_clist_append (members, entry);
 	}
 }
 
@@ -505,12 +582,9 @@ on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 	/* TODO: Maybe mix with previous func? */
 	GtkCList *all, *members;
 	gchar *name;
-	gchar *entry[2];
 	gint row;
 
 	g_return_if_fail (xst_tool_get_access (tool));
-
-	entry[1] = NULL;
 
 	all = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
 	members = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
@@ -519,9 +593,8 @@ on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 	{
 		row = GPOINTER_TO_INT (members->selection->data);
 		gtk_clist_get_text (members, row, 0, &name);
-		entry[0] = g_strdup (name);
+		my_gtk_clist_append (all, g_strdup (name));
 		gtk_clist_remove (members, row);
-		gtk_clist_append (all, entry);
 	}
 }
 

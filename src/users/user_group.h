@@ -92,7 +92,7 @@ extern gboolean check_group_delete (xmlNodePtr node);
 
 /* Helpers */
 void my_gtk_clist_append_items (GtkCList *list, GList *items);
-void my_gtk_clist_append (GtkCList *list, gchar *text);
+gint my_gtk_clist_append (GtkCList *list, gchar *text);
 
 #endif /* USER_GROUP_H */
 
