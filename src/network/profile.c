@@ -229,9 +229,7 @@ profile_compare_tag_list (xmlNodePtr current, xmlNodePtr profile, gchar *list[])
 		value1 = gst_xml_get_child_content (current, *string);
 		value2 = gst_xml_get_child_content (profile, *string);
 
-		if (((value1 != NULL) && (value2 != NULL) && (strcmp (value1, value2) != 0)) ||
-		    ((value1 == NULL) && (value2 != NULL) && (strlen (value2) > 0)) ||
-		    ((value1 != NULL) && (value2 == NULL) && (strlen (value1) > 0)))
+		if (COMPARE_TAGS (value1, value2))
 			value = FALSE;
 
 		g_free (value1);
@@ -275,9 +273,7 @@ profile_compare_list (xmlNodePtr current, xmlNodePtr profile, gchar *tag)
 		value1 = gst_xml_element_get_content (node1);
 		value2 = gst_xml_element_get_content (node2);
 
-		if (((value1 != NULL) && (value2 != NULL) && (strcmp (value1, value2) != 0)) ||
-		    ((value1 == NULL) && (value2 != NULL) && (strlen (value2) > 0)) ||
-		    ((value1 != NULL) && (value2 == NULL) && (strlen (value1) > 0)))
+		if (COMPARE_TAGS (value1, value2))
 			value = FALSE;
 
 		g_free (value1);
@@ -304,9 +300,7 @@ profile_compare_statichosts (xmlNodePtr current, xmlNodePtr profile)
 		ip1 = gst_xml_get_child_content (node1, "ip");
 		ip2 = gst_xml_get_child_content (node2, "ip");
 
-		if (((ip1 != NULL) && (ip2 != NULL) && (strcmp (ip1, ip2) != 0)) ||
-		    ((ip1 == NULL) && (ip2 != NULL) && (strlen (ip2) > 0)) &&
-		    ((ip1 != NULL) && (ip2 == NULL) && (strlen (ip1) > 0)))
+		if (COMPARE_TAGS (ip1, ip2))
 			value = FALSE;
 		else
 			value = profile_compare_list (node1, node2, "alias");

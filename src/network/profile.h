@@ -22,6 +22,10 @@
 #ifndef __PROFILE_H__
 #define __PROFILE_H__
 
+#define COMPARE_TAGS(VAL1, VAL2) (((VAL1 != NULL) && (VAL2 != NULL) && (strcmp (VAL1, VAL2) != 0)) || \
+				  ((VAL1 == NULL) && (VAL2 != NULL) && (strlen (VAL2) > 0)) || \
+				  ((VAL1 != NULL) && (VAL2 == NULL) && (strlen (VAL1) > 0)))
+
 #include "gst.h"
 
 gboolean profile_delete (xmlNodePtr);
