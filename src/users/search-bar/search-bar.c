@@ -399,7 +399,7 @@ search_bar_construct (SearchBar *search_bar,
 	add_search_button (search_bar);
 	add_clear_button (search_bar);
 
-	add_spacer (search_bar);
+//	add_spacer (search_bar);
 }
 
 void

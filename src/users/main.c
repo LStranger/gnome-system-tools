@@ -276,6 +276,24 @@ create_searchbar (void)
 }
 
 static void
+create_button_sizegroup (void)
+{
+	GtkWidget *users_buttonvbox, *groups_buttonvbox;
+	GtkSizeGroup *button_sizegroup;
+
+	button_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	
+	users_buttonvbox = gst_dialog_get_widget (tool->main_dialog,
+						  "users_buttonvbox");
+
+	groups_buttonvbox = gst_dialog_get_widget (tool->main_dialog,
+						   "groups_buttonvbox");
+
+	gtk_size_group_add_widget (button_sizegroup, users_buttonvbox);
+	gtk_size_group_add_widget (button_sizegroup, groups_buttonvbox);
+}
+
+static void
 main_window_prepare (void)
 {
 	/* For random password generation. */
@@ -283,6 +301,8 @@ main_window_prepare (void)
 
 	create_tables ();
 	create_searchbar ();
+
+	create_button_sizegroup ();
 
 	/* General complexity update */
 	update_complexity ();
