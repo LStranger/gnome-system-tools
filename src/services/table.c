@@ -46,7 +46,7 @@ const gchar *ui_description =
 typedef struct TreeItem_ TreeItem;
 	
 struct TreeItem_ {
-	const gchar *service;
+	gchar *service;
 	gboolean active;
 	gint priority;
 };
@@ -188,11 +188,10 @@ table_value_active (xmlNodePtr node, gchar *runlevel)
 			if (str && runlevel && (strcmp (str, runlevel) == 0)) {
 				action = gst_xml_get_child_content (rl, "action");
 
-				if (strcmp (action, "start") == 0) {
-					g_free (action);
-
+				if (strcmp (action, "start") == 0)
 					value = TRUE;
-				}
+
+				g_free (action);
 			}
 
 			g_free (str);
@@ -206,11 +205,15 @@ static gint
 table_value_priority (xmlNodePtr node)
 {
 	gchar *str = gst_xml_get_child_content (node, "priority");
+	gint   val;
 
 	if (!str)
 		return 0;
+
+	val = (gint) g_strtod (str, NULL);
+	g_free (str);
 	
-	return (gint) g_strtod (str, NULL);
+	return val;
 }
 
 static TreeItem*
@@ -250,6 +253,9 @@ table_populate (xmlNodePtr root, gchar *runlevel)
 				    COL_PRIORITY, item->priority,
 				    COL_POINTER, service,
 		                    -1);
+
+		g_free (item->service);
+		g_free (item);
 	}
 	
 }

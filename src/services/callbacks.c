@@ -88,7 +88,7 @@ toggle_service (GstTool *tool, xmlNodePtr service, gchar* runlevel, gboolean sta
 		{
 			r = gst_xml_get_child_content (node, "number");
 
-			if (strcmp (r, runlevel) == 0) {
+			if (r && strcmp (r, runlevel) == 0) {
 				gst_xml_set_child_content (node, "action", action);
 				found = TRUE;
 			}
@@ -182,17 +182,17 @@ on_service_priority_changed (GtkWidget *spin_button, gpointer data)
 	/* if the new value is equal to the old value, don't do nothing */
 	old_value = gst_xml_get_child_content (service, "priority");
 
-	if (strcmp (old_value, value) == 0)
-		return;
+	if (strcmp (old_value, value) != 0) {
+		gst_xml_set_child_content (service, "priority", value);
 
-	gst_xml_set_child_content (service, "priority", value);
+		gtk_tree_store_set (GTK_TREE_STORE (model), &iter, COL_PRIORITY, val, -1);
+		gtk_tree_view_scroll_to_cell (runlevel_table, path, NULL, TRUE, 0.5, 0.5);
 
-	gtk_tree_store_set (GTK_TREE_STORE (model), &iter, COL_PRIORITY, val, -1);
-	gtk_tree_view_scroll_to_cell (runlevel_table, path, NULL, TRUE, 0.5, 0.5);
-
-	gst_dialog_modify (tool->main_dialog);
+		gst_dialog_modify (tool->main_dialog);
+	}
 
 	g_free (value);
+	g_free (old_value);
 }
 
 static void

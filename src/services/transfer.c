@@ -74,6 +74,9 @@ transfer_populate_menu (GstTool *tool, xmlNodePtr root)
 			g_object_set_data (G_OBJECT (menu->widget), "default_runlevel", name);
 		}
 
+		g_free (desc);
+		g_free (name);
+
 		n_items++;
 	}
 
