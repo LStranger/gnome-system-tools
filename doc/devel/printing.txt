@@ -24,14 +24,32 @@ Index
 1  Printcap
 -----------
 
+The system printcap, reflecting its "printing capabilities", resides in /etc/printcap. Its format is
+modeled after that of /etc/termcap - i.e. it's fairly hard to read. When you're looking for configured
+printers, or want to add/remove printers, this is the place to start.
 
+Simplified for our uses, the format goes as indicated below. Note that angle brackets <> are used here to
+indicate option classes, and are not part of the format.
+
+<printername>|<alias>|<alias>:sd=<spooldir>:lp=<device>:if=<filter>:mx#<maxjobsizeinK>:sh:
+<printername>|<alias>|<alias>:sd=<spooldir>:lp=<device>:if=<filter>:mx#<maxjobsizeinK>:sh:
+...
+
+"sh" here is a boolean option whose presence means "suppress headers". This prevents any banner pages
+from being printed with each job, and is generally a good thing to be able to specify. An example from
+the real world:
+
+lp:sd=/var/spool/lpd/lp:mx#0:sh:lp=/dev/lp0:if=/var/spool/lpd/lp/filter:
+
+The printcap(5) manpage has more details about the formatting of this file.
 
 2  Filters
 ----------
 
 Different distributions handle magic filtering of print files differently. A magic filter determines
 the type of file being printed, and converts it, sometimes through several steps, to printer-specific
-output. Ghostscript is a traditional step in this pipeline.
+output. Ghostscript is a traditional step in this pipeline, if you're printing graphics to a
+non-postscript printer.
 
 2.1  Red Hat
 ------------
@@ -138,4 +156,6 @@ Red Hat has a printer metadatabase for their native (and aging) PrintTool. This 
 itself. This file is _only_ used in the interface, presenting the user with options to choose
 from when configuring a printer. The selected options are then written to the .cfg files (see
 sections [2.1.1-2.1.3]). So, this file is irrelevant after the printer is configured.
+
+Apart from this, Red Hat doesn't seem to have a concept of printer drivers.
 
