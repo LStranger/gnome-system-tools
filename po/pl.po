@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-03 08:18+0100\n"
+"POT-Creation-Date: 2004-03-03 20:23+0100\n"
 "PO-Revision-Date: 2002-05-29 18:42+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -232,7 +232,7 @@ msgid "Finished"
 msgstr "Zakończone"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
-#: src/network/connection.c:1843
+#: src/network/connection.c:1849
 msgid "Manual"
 msgstr "Ręczna"
 
@@ -516,7 +516,7 @@ msgstr "Możliwość uaktywniania przez każdego _użytkownika"
 msgid "Auto"
 msgstr "Automatycznie"
 
-#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1851
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -549,7 +549,7 @@ msgstr "Tworzenie nowego połączenia sieciowego"
 msgid "Current network profile:"
 msgstr "Bieżący profil sieciowy:"
 
-#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1850
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -953,10 +953,14 @@ msgid "Use this tool to specify which services to run"
 msgstr "Narzędzie to pozwala na wybór, które usługi powinny być uruchamiane"
 
 #: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "_Uporządkowanie listy według kolejności uruchamiania"
+
+#: interfaces/services.glade.in.h:11
 msgid "_Start"
 msgstr "U_ruchom"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:12
 msgid "_Startup sequence:"
 msgstr "Ko_lejność uruchamiania:"
 
@@ -1360,7 +1364,7 @@ msgstr "Edytor ustawień obrazu startowego"
 msgid "Boot Append Editor"
 msgstr "Edytor obrazu startowego"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1368,12 +1372,12 @@ msgstr ""
 "Nie będzie można uruchomić systemu\n"
 "brz przynajmniej jednego obrazu startowego.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Czy na pewno chcesz usunąć \"%s\"?"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -1390,7 +1394,7 @@ msgstr "Nazwa"
 msgid "Default"
 msgstr "Domyślny"
 
-#: src/boot/table.c:43 src/network/connection.c:479
+#: src/boot/table.c:43 src/network/connection.c:485
 msgid "Type"
 msgstr "Typ"
 
@@ -1398,7 +1402,7 @@ msgstr "Typ"
 msgid "Kernel Image"
 msgstr "Obraz jądra"
 
-#: src/boot/table.c:45 src/network/connection.c:495
+#: src/boot/table.c:45 src/network/connection.c:501
 msgid "Device"
 msgstr "Urządzenie"
 
@@ -1417,16 +1421,22 @@ msgid "/_Delete"
 msgstr "/_Usuń"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "Nie można połączyć się z komputerem."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "Wprowadzone hasło jest niepoprawne."
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr ""
+"Nie można uruchomić \"%s\". Sprawdź czy masz uprawnienia do uruchomienia go."
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "Wystąpił nieoczekiwany błąd."
 
@@ -1473,7 +1483,7 @@ msgstr ""
 "Podczas uruchamiania skryptu przetwarzającego wystąpił błąd.\n"
 "Nie można wczytać konfiguracji."
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1482,7 +1492,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Witaj we wstępnym wydaniu %s Narzędzi "
 "systemowych GNOME</span>"
 
-#: src/common/gst-tool.c:1513
+#: src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1497,15 +1507,15 @@ msgstr ""
 "ostrzeżenia. Dziękujemy za wypróbowanie tej testowej\n"
 "wersji Narzędzi Systemowych GNOME!"
 
-#: src/common/gst-tool.c:1534
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Ostrzeżenie"
 
-#: src/common/gst-tool.c:1554
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Bez wyświetlania tego komunikatu w przyszłości"
 
-#: src/common/gst-tool.c:1628
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "Narzędzia konfiguracyjne GNOME"
 
@@ -1658,15 +1668,15 @@ msgstr "Nieznany typ interfejsu"
 msgid "/_Configure"
 msgstr "/S_konfiguruj"
 
-#: src/network/connection.c:507
+#: src/network/connection.c:513
 msgid "Status"
 msgstr "Stan"
 
-#: src/network/connection.c:516 src/network/profiles-table.c:62
+#: src/network/connection.c:522 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Opis"
 
-#: src/network/connection.c:1707
+#: src/network/connection.c:1713
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1674,7 +1684,7 @@ msgstr ""
 "Nie podano adresu IP interfejsu lub maski sieciowej. Aby kontynuować, należy "
 "wpisać poprawny adres oraz maskę do odpowiednich pól."
 
-#: src/network/connection.c:1714
+#: src/network/connection.c:1720
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1682,7 +1692,7 @@ msgstr ""
 "Nie został podany adres IP interfejsu lub zdalny adres IP. Aby kontynuować, "
 "należy podać poprawne adresy IP."
 
-#: src/network/connection.c:1720
+#: src/network/connection.c:1726
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1692,7 +1702,7 @@ msgstr ""
 "głównego serwera. Wprowadź adres głównego serwera DNS lub zrezygnuj z opcji "
 "ręcznego określenia serwerów."
 
-#: src/network/connection.c:1726
+#: src/network/connection.c:1732
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1700,7 +1710,7 @@ msgstr ""
 "Urządzenie modemu używane przez połączenie nie zostało określone. Podaj "
 "urządzenie lub naciśnij \"automatyczne wykrywanie\" aby kontynuować."
 
-#: src/network/connection.c:1731
+#: src/network/connection.c:1737
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1708,10 +1718,14 @@ msgstr ""
 "Nie podano numeru telefonu używanego przy połączeniu. Wprowadź prawidłowy "
 "numer telefonu aby kontynuować."
 
-#: src/network/connection.c:2082
+#: src/network/connection.c:2085
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Interfejs %s nie istnieje."
+
+#: src/network/connection.c:2087
+msgid " The loopback interface cannot be configured."
+msgstr " Nie można skonfigurować interfejsu pętli zwrotnej."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1788,24 +1802,24 @@ msgstr "Nazwa profilu"
 msgid "No description available."
 msgstr "Brak dostępnego opisu."
 
-#: src/services/callbacks.c:247
+#: src/services/callbacks.c:250
 msgid "Running"
 msgstr "Uruchomiony"
 
-#: src/services/callbacks.c:251
+#: src/services/callbacks.c:254
 msgid "Stopped"
 msgstr "Zatrzymany"
 
-#: src/services/callbacks.c:256
+#: src/services/callbacks.c:259
 msgid "Could not get info"
 msgstr "Nie można pobrać informacji"
 
-#: src/services/callbacks.c:322
+#: src/services/callbacks.c:325
 #, c-format
 msgid "Settings for service %s"
 msgstr "Ustawienia dla usługi %s"
 
-#: src/services/main.c:58
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "Ustawienia usług"
 
@@ -1817,7 +1831,7 @@ msgstr "Konfiguracja usług uruchamianych podczas rozruchu systemu"
 msgid "Services"
 msgstr "Usługi"
 
-#: src/services/table.c:78
+#: src/services/table.c:79
 msgid "Active"
 msgstr "Aktywny"
 
@@ -1853,11 +1867,11 @@ msgstr "Zmiana czasu, daty i strefy czasowej"
 msgid "Time and Date"
 msgstr "Czas i data"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "Tworzenie nowego profilu"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Ustawienia profilu %s"
