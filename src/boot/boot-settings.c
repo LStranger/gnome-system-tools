@@ -147,7 +147,7 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 	gtk_combo_set_popdown_strings (gui->type, type_labels_list ());
 	
 	xst_ui_entry_set_text (gui->name, image->label);
-	xst_ui_entry_set_text (gui->type->entry, type_to_label (image->type));
+	xst_ui_entry_set_text (gui->type->entry, _(type_to_label (image->type)));
 	xst_ui_entry_set_text (gui->root, image->root);
 	xst_ui_entry_set_text (gui->append, image->append);
 

@@ -21,6 +21,10 @@
  * Authors: Tambet Ingo <tambet@ximian.com>.
  */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include "xst.h"
 #include "boot-image.h"
 #include "e-table.h"
@@ -163,7 +167,7 @@ type_labels_list (void)
 	GList *list = NULL;
 
 	for (i = 0; boot_image_type_table[i].label; i++)
-		list = g_list_prepend (list, boot_image_type_table[i].label);
+		list = g_list_prepend (list, _(boot_image_type_table[i].label));
 	
 	return list;
 }
