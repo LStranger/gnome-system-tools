@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools (CVS)\n"
-"POT-Creation-Date: 2001-08-25 22:04+0200\n"
+"POT-Creation-Date: 2001-09-22 23:03+0200\n"
 "PO-Revision-Date: 2001-08-25 22:04+0200\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -14,494 +14,534 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: backend/report.pl.in:162
+#: backend/report.pl.in:215
 msgid "Start of work report."
 msgstr "Start des Arbeitsberichts."
 
-#: backend/report.pl.in:163
+#: backend/report.pl.in:216
 msgid "End of work report."
 msgstr "Ende des Arbeitsberichts."
 
-#: backend/report.pl.in:164
+#: backend/report.pl.in:217
 #, c-format
 msgid "%d"
 msgstr "%d"
 
-#: backend/report.pl.in:165
+#: backend/report.pl.in:218
 #, c-format
 msgid "%s."
 msgstr "%s."
 
-#: backend/report.pl.in:167
+#: backend/report.pl.in:220
+#, fuzzy, c-format
+msgid "Unknown major [%s] in report [%s]."
+msgstr "Unbekannte initd-Operation [%s}."
+
+#: backend/report.pl.in:221
+#, fuzzy, c-format
+msgid "Unknown minor [%s]."
+msgstr "Unbekannte initd-Operation [%s}."
+
+#: backend/report.pl.in:223
 #, c-format
 msgid "Running directive [%s] with args [%s]."
 msgstr "Anweisung [%s] wird mit [%s] ausgeführt."
 
-#: backend/report.pl.in:168
+#: backend/report.pl.in:224
 #, c-format
 msgid "Directive [%s] not supported."
 msgstr "Anweisung [%s] wird nicht unterstützt."
 
-#: backend/report.pl.in:169
+#: backend/report.pl.in:225
 #, c-format
 msgid "Directive [%s] structure has wrong format."
 msgstr "Struktur von Anweisung [%s] hat das falsches Format."
 
-#: backend/report.pl.in:170
+#: backend/report.pl.in:226
 #, c-format
 msgid "Directive [%s] requires exactly [%s] args in [%s]."
 msgstr "Anweisung [%s] benötigt genau [%s] Argumente in [%s]."
 
-#: backend/report.pl.in:171
+#: backend/report.pl.in:227
 #, c-format
 msgid "Directive [%s] requires at least [%s] args in [%s]."
 msgstr "Anweisung [%s] benötigt mindestens [%s] Argumente in [%s]."
 
-#: backend/report.pl.in:173
+#: backend/report.pl.in:229
 #, c-format
 msgid "Supported: [%s]"
 msgstr "Unterstützt: [%s]"
 
-#: backend/report.pl.in:174
+#: backend/report.pl.in:230
 #, c-format
 msgid "Your platform [%s] is not supported."
 msgstr "Ihre Plattform [%s] wird nicht unterstützt."
 
-#: backend/report.pl.in:175
+#: backend/report.pl.in:231
 msgid "Unable to determine host platform."
 msgstr "Art der Plattform kann nicht ermittelt werden."
 
-#: backend/report.pl.in:176
+#: backend/report.pl.in:232
 #, c-format
 msgid "Configuring for platform [%s]."
 msgstr "Konfiguaration der Plattform [%s]."
 
-#: backend/report.pl.in:177
+#: backend/report.pl.in:233
 #, c-format
 msgid "No parse/replace table for platform [%s]."
 msgstr "Keine Parse-/Ersetzungstabelle für Platform [%s]."
 
-#: backend/report.pl.in:179
+#: backend/report.pl.in:235
 #, c-format
 msgid "Unexpected tag [%s]."
 msgstr "Unerwarteter Tag [%s]."
 
-#: backend/report.pl.in:180
+#: backend/report.pl.in:236
 #, c-format
 msgid "Unexpected argument [%s] to tag [%s]."
 msgstr "Unerwartetes Argument [%s] an Tag [%s]."
 
-#: backend/report.pl.in:182
+#: backend/report.pl.in:238
+#, c-format
+msgid "Could not copy file [%s] to [%s]."
+msgstr "Datei [%s] konnte nicht nach [%s] kopiert werden."
+
+#: backend/report.pl.in:239
 #, c-format
 msgid "Could not open [%s] for reading."
 msgstr "[%s] konnte nicht zum Lesen geöffnet werden."
 
-#: backend/report.pl.in:183
+#: backend/report.pl.in:240
 #, c-format
 msgid "Reading options from [%s]."
 msgstr "Optionen werden von [%s] gelesen."
 
-#: backend/report.pl.in:184
+#: backend/report.pl.in:241
 #, c-format
 msgid "Failed to write to [%s]."
 msgstr "Schreiben nach [%s] ist fehlgeschlagen."
 
-#: backend/report.pl.in:185
+#: backend/report.pl.in:242
 #, c-format
 msgid "Could not find [%s] for writing. Creating [%s]."
 msgstr "[%s] konnte nicht zum Schreiben gefunden werden. [%s] wird erstellt."
 
-#: backend/report.pl.in:186
+#: backend/report.pl.in:243
 #, c-format
 msgid "Writing to [%s]."
 msgstr "Schreiben auf [%s]."
 
-#: backend/report.pl.in:187
+#: backend/report.pl.in:244
 #, fuzzy, c-format
 msgid "Failed to pipe command [%s] for reading."
 msgstr "[%s] konnte nicht zum Lesen geöffnet werden."
 
-#: backend/report.pl.in:188
+#: backend/report.pl.in:245
 #, fuzzy, c-format
 msgid "Piping command [%s] for reading."
 msgstr "[%s] konnte nicht zum Lesen geöffnet werden."
 
-#: backend/report.pl.in:189
+#: backend/report.pl.in:246
 #, c-format
 msgid "Directory [%s] created."
 msgstr "Verzeichnis [%s] angelegt."
 
-#: backend/report.pl.in:190
+#: backend/report.pl.in:247
 #, c-format
 msgid "Backup directory [%s] was rotated."
 msgstr "Wiederherstellungsverzeichnis [%s] wurde durchgereicht."
 
-#: backend/report.pl.in:191
+#: backend/report.pl.in:248
 #, c-format
 msgid "Saved backup for [%s]."
 msgstr "Sicherung für [%s] wurde gespeichert."
 
-#: backend/report.pl.in:192
+#: backend/report.pl.in:249
 #, c-format
 msgid "No file to patch: [%s]."
 msgstr "Keine zu patchende Datei: [%s]."
 
-#: backend/report.pl.in:193
+#: backend/report.pl.in:250
 #, c-format
 msgid "Could not find [%s] for patching. Creating [%s]."
 msgstr "[%s] konnte nicht zum Patchen gefunden werden. [%s] wird erstellt."
 
-#: backend/report.pl.in:194
+#: backend/report.pl.in:251
 #, c-format
 msgid "Found [%s]. Patching [%s]."
 msgstr "[%s] gefunden. [%s] wird gepatcht."
 
-#: backend/report.pl.in:195
+#: backend/report.pl.in:252
 #, c-format
 msgid "Loading file [%s] to buffer."
 msgstr "[%s] wird in den Puffer geladen."
 
-#: backend/report.pl.in:196
+#: backend/report.pl.in:253
 #, c-format
 msgid "Saving buffer to file [%s]."
 msgstr "Puffer wird in Datei [%s] gespeichert."
 
-#: backend/report.pl.in:197
+#: backend/report.pl.in:254
 #, c-format
 msgid "Running command [%s]."
 msgstr "Befehl [%s] ausgeführt."
 
-#: backend/report.pl.in:198
+#: backend/report.pl.in:255
 #, c-format
 msgid "Removing file [%s]."
 msgstr "Datei wird [%s] entfernt."
 
-#: backend/report.pl.in:199
+#: backend/report.pl.in:256
 #, c-format
 msgid "Found tool [%s]."
 msgstr "Werkzeug [%s] gefunden."
 
-#: backend/report.pl.in:200
+#: backend/report.pl.in:257
 #, c-format
 msgid "Couldn't find tool [%s]."
 msgstr "Werkzeug [%s] konnte nicht gefunden werden."
 
-#: backend/report.pl.in:202
+#: backend/report.pl.in:259
 #, c-format
 msgid "Parsing option [%s]."
 msgstr "Option [%s] wird geparst."
 
-#: backend/report.pl.in:203
+#: backend/report.pl.in:260
 #, c-format
 msgid "Trivialy passing [%s]."
 msgstr "Einfaches Durchgehen [%s]."
 
-#: backend/report.pl.in:204 backend/report.pl.in:247
+#: backend/report.pl.in:261 backend/report.pl.in:305
 #, c-format
 msgid "Getting option [%s] from [%s]."
 msgstr "Option [%s] wird von [%s] bezogen."
 
-#: backend/report.pl.in:205 backend/report.pl.in:206
+#: backend/report.pl.in:262 backend/report.pl.in:263
 #, c-format
 msgid "Getting configuration from [%s]."
 msgstr "Konfiguration wird von [%s] bezogen."
 
-#: backend/report.pl.in:207
+#: backend/report.pl.in:264
 #, c-format
 msgid "Getting shell option [%s] from [%s]."
 msgstr "Shell-Optionen [%s] werden von [%s] bezogen."
 
-#: backend/report.pl.in:208
+#: backend/report.pl.in:265
 #, c-format
 msgid "Getting keyword [%s] from [%s]."
 msgstr "Schlüsselwort [%s] wird von [%s] bezogen."
 
-#: backend/report.pl.in:209
+#: backend/report.pl.in:266
 #, c-format
 msgid "Getting information from [%s]."
 msgstr "Informationen werden von [%s] bezogen."
 
-#: backend/report.pl.in:210
+#: backend/report.pl.in:267
 #, c-format
 msgid "Getting chat information from [%s]."
 msgstr "Chat-Information wird von [%s] bezogen."
 
-#: backend/report.pl.in:211
+#: backend/report.pl.in:268
 #, c-format
 msgid "Getting option [%s] from [%s], section [%s]."
 msgstr "Option [%s] wird von [%s], Bereich [%s] bezogen."
 
-#: backend/report.pl.in:212
+#: backend/report.pl.in:269
 #, c-format
 msgid "Getting option [%s] from interface [%s]."
 msgstr "Option [%s] wird von Schnittstelle [%s] bezogen."
 
-#: backend/report.pl.in:213
+#: backend/report.pl.in:270
 #, c-format
 msgid "Getting keyword [%s] from interface [%s]."
 msgstr "Schlüsselwort [%s] wird von Schnittstelle [%s] bezogen."
 
-#: backend/report.pl.in:214
+#: backend/report.pl.in:271
 #, c-format
 msgid "Keyword for interface [%s] in [%s] had unexpected value."
 msgstr "Schlüsselwort für Schnittstelle [%s] in [%s] hatte unerwartenden Wert."
 
-#: backend/report.pl.in:216
+#: backend/report.pl.in:273
 #, c-format
 msgid "Replacing key [%s] in [%s]."
 msgstr "Schlüssel [%s] in [%s] wird ersetzt."
 
-#: backend/report.pl.in:217
+#: backend/report.pl.in:274
 #, c-format
 msgid "Replacing shell var [%s] in [%s]."
 msgstr "Shell-Variable [%s] in [%s] wird ersetzt."
 
-#: backend/report.pl.in:218
+#: backend/report.pl.in:275
 #, c-format
 msgid "Replacing keyword [%s] in [%s]."
 msgstr "Schlüsselwort [%s] in [%s] wird ersetzt."
 
-#: backend/report.pl.in:219
+#: backend/report.pl.in:276
 #, c-format
 msgid "Replacing contents of file [%s]."
 msgstr "Inhalt der Datei [%s] wird ersetzt."
 
-#: backend/report.pl.in:220
+#: backend/report.pl.in:277
 #, c-format
 msgid "Replacing values in [%s]."
 msgstr "Werte in [%s] werden ersetzt."
 
-#: backend/report.pl.in:221
+#: backend/report.pl.in:278
 #, c-format
 msgid "Replacing variable [%s] in section [%s] of [%s]."
 msgstr "Variable [%s] in Bereich [%s] von [%s] werden ersetzt."
 
-#: backend/report.pl.in:222
+#: backend/report.pl.in:279
 #, c-format
 msgid "Removing section [%s] from [%s]."
 msgstr "Eintrag [%s] wird von [%s] entfernt."
 
-#: backend/report.pl.in:223
+#: backend/report.pl.in:280
 #, c-format
 msgid "Replacing option [%s] from interface [%s]."
 msgstr "Option [%s] von Schnittstelle [%s] wird ersetzt."
 
-#: backend/report.pl.in:224
+#: backend/report.pl.in:281
 #, c-format
 msgid "Replacing keyword [%s] from interface [%s]."
 msgstr "Schlüsselwort [%s] von Schnittstelle [%s] wird ersetzt."
 
-#: backend/report.pl.in:226
+#: backend/report.pl.in:283
 #, c-format
 msgid "Service [%s] is running."
 msgstr "Dienst [%s] läuft."
 
-#: backend/report.pl.in:227
+#: backend/report.pl.in:284
 #, c-format
 msgid "Service [%s] is stopped."
 msgstr "Dienst [%s] ist angehalten."
 
-#: backend/report.pl.in:228
+#: backend/report.pl.in:285
+#, c-format
+msgid "No SystemV support for platform [%s]."
+msgstr "Keine SystemV-Unterstützung für Plattform [%s]."
+
+#: backend/report.pl.in:286
 #, c-format
 msgid "Could not find SystemV scripts for service [%s]."
 msgstr "SystemV-Skripte für Dienst [%s} konnten nicht gefunden werden."
 
-#: backend/report.pl.in:229
+#: backend/report.pl.in:287
 #, c-format
 msgid "Could not find SystemV runlevel [%s] directory [%s]."
 msgstr "SystemV-Runlevel [%s] Verzeichnis [%s] konnte nicht gefunden werden."
 
-#: backend/report.pl.in:230
+#: backend/report.pl.in:288
 #, c-format
 msgid "Removed SystemV link [%s]."
 msgstr "SystemV-Verknüpfung [%s] wurde entfernt."
 
-#: backend/report.pl.in:231
+#: backend/report.pl.in:289
 #, c-format
 msgid "Created SystemV link [%s]."
 msgstr "SystemV-Verknüpfung [%s] wurde erzeugt."
 
-#: backend/report.pl.in:232
+#: backend/report.pl.in:290
 #, c-format
 msgid "Unknown initd operation [%s]."
 msgstr "Unbekannte initd-Operation [%s}."
 
-#: backend/report.pl.in:233
+#: backend/report.pl.in:291
 #, c-format
 msgid "Service [%s] %s."
 msgstr "Dienst [%s] %s."
 
-#: backend/report.pl.in:234
+#: backend/report.pl.in:292
 #, c-format
-msgid "Service [%s] cound not be %s."
+msgid "Service [%s] could not be %s."
 msgstr "Dienst [%s] konnte nicht %s sein."
 
-#: backend/report.pl.in:236
+#: backend/report.pl.in:294
 msgid "Loading ISP configurations."
 msgstr "ISP-Konfigurationen werden geladen."
 
-#: backend/report.pl.in:237
+#: backend/report.pl.in:295
 msgid "Finding active interfaces."
 msgstr "Aktive Scnhnittstellen werden gesucht."
 
-#: backend/report.pl.in:238
+#: backend/report.pl.in:296
 #, c-format
 msgid "Checking if interface [%s] is active."
 msgstr "Überprüfung ob Schnittstelle [%s] aktiv ist."
 
-#: backend/report.pl.in:239
+#: backend/report.pl.in:297
 #, c-format
 msgid "Setting hostname to [%s]."
 msgstr "Hostname wird auf [%s] festgelegt."
 
-#: backend/report.pl.in:240
+#: backend/report.pl.in:298
 msgid "Saving ISP configurations."
 msgstr "ISP-Konfigurationen werden gespeichert."
 
-#: backend/report.pl.in:241
+#: backend/report.pl.in:299
 #, c-format
 msgid "Removing entry [%s] from [%s]."
 msgstr "Eintrag [%s] wird von [%s] entfernt."
 
-#: backend/report.pl.in:242
+#: backend/report.pl.in:300
 #, c-format
 msgid "Configuring interface [%s]."
 msgstr "Schnittstelle [%s] wird konfiguriert."
 
-#: backend/report.pl.in:243
+#: backend/report.pl.in:301
 #, c-format
 msgid "Activating interface [%s]."
 msgstr "Schnittstelle [%s] wird aktiviert."
 
-#: backend/report.pl.in:244
+#: backend/report.pl.in:302
 #, c-format
 msgid "Deactivating interface [%s]."
 msgstr "Schnittstelle [%s] wird deaktiviert."
 
-#: backend/report.pl.in:245
+#: backend/report.pl.in:303
 msgid "Setting up interfaces."
 msgstr "Schnittstellen werden konfiguriert."
 
-#: backend/report.pl.in:246
+#: backend/report.pl.in:304
 #, c-format
 msgid "Getting PAP/CHAP password for [%s] from [%s]."
 msgstr "PAP/CHAP-Passwort für [%s] wird von [%s] empfangen."
 
-#: backend/report.pl.in:248
+#: backend/report.pl.in:306
 #, c-format
 msgid "Setting option [%s] in [%s]."
 msgstr "Option [%s] in [%s] wird gesetzt."
 
-#: backend/report.pl.in:249
+#: backend/report.pl.in:307
 #, c-format
 msgid "Setting connect option in [%s]."
 msgstr "Verbindungsoption in [%s] wird gesetzt."
 
-#: backend/report.pl.in:250
+#: backend/report.pl.in:308
 #, c-format
 msgid "Getting additional options from [%s]."
 msgstr "Zusätzliche Optionen von [%s] werden empfangen."
 
-#: backend/report.pl.in:251
+#: backend/report.pl.in:309
 #, c-format
 msgid "Setting additional options in [%s]."
 msgstr "Zusätzliche Optionen in [%s] werden gesetzt."
 
-#: backend/report.pl.in:252
+#: backend/report.pl.in:310
 #, c-format
 msgid "Boot method [%s] for interface [%s] not supported."
 msgstr "Boot-Methode [%s] für Schnittstelle [%s] wird nicht unterstützt."
 
-#: backend/report.pl.in:253
+#: backend/report.pl.in:311
 #, c-format
 msgid "Getting remote address for interface [%s]."
 msgstr "Entfernte Adresse für Schnittstelle [%s] wird empfangen."
 
-#: backend/report.pl.in:254
+#: backend/report.pl.in:312
 #, c-format
 msgid "Setting remote address for interface [%s]."
 msgstr "Entfernte Adresse für Schnittstelle [%s] wird gesetzt."
 
-#: backend/report.pl.in:255
+#: backend/report.pl.in:313
 msgid "Ensuring loopback interface configuration."
 msgstr "Loopback-Schnittstellenkonfiguration wird sichergestellt."
 
-#: backend/report.pl.in:257
+#: backend/report.pl.in:315
+#, c-format
+msgid "Mounting [%s] on [%s]."
+msgstr "[%s] wird auf [%s] eingehängt."
+
+#: backend/report.pl.in:316
+#, c-format
+msgid "Failed to mount [%s] on [%s]."
+msgstr "[%s] konnte nicht unter [%s] eingehängt werden."
+
+#: backend/report.pl.in:317
+#, c-format
+msgid "Unmounting [%s] from [%s]."
+msgstr "[%s] wird von [%s] ausgehängt."
+
+#: backend/report.pl.in:318
+#, c-format
+msgid "Failed to unmount [%s] from [%s]."
+msgstr "Aushängen von [%s] von [%s] fehlgeschlagen."
+
+#: backend/report.pl.in:320
 msgid "Failed to run lilo."
 msgstr "lilo konnte nicht gestartet werden."
 
-#: backend/report.pl.in:258
+#: backend/report.pl.in:321
 msgid "Succesfully executed lilo."
 msgstr "lilo erfolgreich ausgeführt."
 
-#: backend/report.pl.in:259
+#: backend/report.pl.in:322
 #, c-format
 msgid "Failed to open boot configuration file [%s]."
 msgstr "Das Öffnen der Boot-Konfigurationsdatei [%s] ist fehlgeschlagen."
 
-#: backend/report.pl.in:261
+#: backend/report.pl.in:324
 #, c-format
 msgid "Adding [%s] to fstab."
 msgstr "[%s] wird in fstab hinzugefügt."
 
-#: backend/report.pl.in:262
+#: backend/report.pl.in:325
 #, c-format
 msgid "Looking for partitions on [%s]."
 msgstr "Nach Partitionen auf [%s] wird gesucht."
 
-#: backend/report.pl.in:263
+#: backend/report.pl.in:326
 #, c-format
 msgid "Querying size of [%s]."
 msgstr "Größe von [%s] wird abgefragt."
 
-#: backend/report.pl.in:264
+#: backend/report.pl.in:327
 #, c-format
 msgid "Mounting [%s]."
 msgstr "[%s] wird eingehängt."
 
-#: backend/report.pl.in:265
+#: backend/report.pl.in:328
 #, c-format
 msgid "Unmounting [%s]."
 msgstr "[%s] wird ausgehängt."
 
-#: backend/report.pl.in:266
+#: backend/report.pl.in:329
 msgid "Could not find mount tools. No mounting done."
 msgstr "Einhänge-Werkzeuge konnten nicht gefunden werden. Nichts eingehängt."
 
-#: backend/report.pl.in:268
+#: backend/report.pl.in:331
 #, c-format
 msgid "Found swap entry [%s]."
 msgstr "Swap-Eintrag [%s] gefunden."
 
-#: backend/report.pl.in:269
+#: backend/report.pl.in:332
 msgid "Looking for swap entries."
 msgstr "Nach Swap-Einträgen wird gesucht."
 
-#: backend/report.pl.in:271
+#: backend/report.pl.in:334
 #, c-format
 msgid "No printtool setup in directory [%s]."
 msgstr "Kein 'printtool setup' in Verzeichnis [%s]."
 
-#: backend/report.pl.in:273
+#: backend/report.pl.in:336
 msgid "Scanning timezones."
 msgstr "Zeitzonen werden eingelesen."
 
-#: backend/report.pl.in:274
+#: backend/report.pl.in:337
 #, c-format
 msgid "Scanning timezones: [%s]."
 msgstr "Zeitzonen werden eingelesen: [%s]."
 
-#: backend/report.pl.in:275
+#: backend/report.pl.in:338
 #, c-format
 msgid "Setting timezone as [%s]."
 msgstr "Zeitzone für [%s] wird eingestellt."
 
-#: backend/report.pl.in:276
+#: backend/report.pl.in:339
 #, c-format
 msgid "Setting local time as [%s]."
 msgstr "Lokale Zeit für [%s] wird eingestellt."
 
-#: backend/report.pl.in:278
+#: backend/report.pl.in:341
 msgid "Getting user database."
 msgstr "Benutzerdatenbank wird empfangen."
 
@@ -524,8 +564,8 @@ msgid ""
 "Optionally, you may also enter append parameters which are passed to the\n"
 "kernel at boot time."
 msgstr ""
-"Wählen Sie einen Kernel zum Booten und eine einzuhängende Partition als "
-"root-Partition.\n"
+"Wählen Sie einen Kernel zum Booten und eine einzuhängende Partition als root-"
+"Partition.\n"
 "Optional können Sie auch append-Parameter, die an den Kernel zur Boot-Zeit "
 "weitergegeben\n"
 "werden, angeben."
@@ -542,7 +582,7 @@ msgstr ""
 "Geben Sie einen Namen für das Boot-Abbild an. Geben Sie ausserdem an, um "
 "welches Betriebssystem es sich handelt."
 
-#: interfaces/boot.glade.in.h:9 interfaces/internetsharing.glade.in.h:22
+#: interfaces/boot.glade.in.h:9 interfaces/internetsharing.glade.in.h:30
 #: interfaces/network.glade.in.h:36 interfaces/users.glade.in.h:31
 msgid "Finished"
 msgstr "Fertig"
@@ -670,7 +710,7 @@ msgstr "Passwort:"
 msgid "Run without password"
 msgstr "Ohne Passwort starten"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:847
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:848
 msgid "Scanning your system configuration."
 msgstr "Systemkonfiguration wird analysiert."
 
@@ -901,62 +941,66 @@ msgid "Narrower"
 msgstr "Enger"
 
 #: interfaces/display.glade.in.h:14
+msgid "Probe again"
+msgstr "Nochmal testen"
+
+#: interfaces/display.glade.in.h:15
 msgid "Refresh rate:"
 msgstr "Weiderholungsrate:"
 
-#: interfaces/display.glade.in.h:15
+#: interfaces/display.glade.in.h:16
 msgid "Resolution"
 msgstr "Auflösung"
 
-#: interfaces/display.glade.in.h:16
+#: interfaces/display.glade.in.h:17
 msgid "Resolution:"
 msgstr "Auflösung:"
 
-#: interfaces/display.glade.in.h:17
+#: interfaces/display.glade.in.h:18
 msgid "Restart X"
 msgstr "X neustarten"
 
-#: interfaces/display.glade.in.h:18
+#: interfaces/display.glade.in.h:19
 msgid "Right"
 msgstr "Rechts"
 
-#: interfaces/display.glade.in.h:19
+#: interfaces/display.glade.in.h:20
 msgid "Shift my display:"
 msgstr "Meine Anzeige wechseln"
 
-#: interfaces/display.glade.in.h:20
+#: interfaces/display.glade.in.h:21
 msgid "Shorter"
 msgstr "Kürzer"
 
-#: interfaces/display.glade.in.h:21
+#: interfaces/display.glade.in.h:22
 msgid "Stretch my display:"
 msgstr "Meine Anzeige strecken:"
 
-#: interfaces/display.glade.in.h:22
+#: interfaces/display.glade.in.h:23
 msgid "Taller"
 msgstr "Weiter"
 
-#: interfaces/display.glade.in.h:23
+#: interfaces/display.glade.in.h:24
 msgid "Test current setting"
 msgstr "Aktuelle Einstellungen testen"
 
-#: interfaces/display.glade.in.h:24
+#: interfaces/display.glade.in.h:25
 msgid "Up"
 msgstr "Hoch"
 
-#: interfaces/display.glade.in.h:25
+#: interfaces/display.glade.in.h:26
 msgid "Use this tool to configure your monitor."
 msgstr "Verwenden Sie dieses Werkzeug um Ihren Monitor zu konfigurieren."
 
-#: interfaces/display.glade.in.h:26
+#: interfaces/display.glade.in.h:27
 msgid "Vendor:"
 msgstr "Hersteller:"
 
-#: interfaces/display.glade.in.h:27
+#: interfaces/display.glade.in.h:28
 msgid "Wider"
 msgstr "Weiter"
 
-#: interfaces/display.glade.in.h:28
+#: interfaces/display.glade.in.h:29
 msgid "_Restore settings"
 msgstr "Einstellungen wiederherstellen"
 
@@ -1257,7 +1301,7 @@ msgstr "Aktivierungskontrolle für alle Benutzer erlauben"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1554
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1552
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -1281,8 +1325,8 @@ msgstr "Verbindungen"
 msgid "Create a new Internet Connection "
 msgstr "Neue Internetverbindung anlegen"
 
-#: interfaces/internetsharing.glade.in.h:18 interfaces/network.glade.in.h:27
-#: src/network/connection.c:1553
+#: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.in.h:27
+#: src/network/connection.c:1551
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1358,7 +1402,7 @@ msgstr "IP-Adresse"
 msgid "IP Settings"
 msgstr "IP-Einstellungen"
 
-#: interfaces/network.glade.in.h:48 src/network/connection.c:1552
+#: interfaces/network.glade.in.h:48 src/network/connection.c:1550
 msgid "Manual"
 msgstr "Manuell"
 
@@ -1444,8 +1488,8 @@ msgstr ""
 
 #: interfaces/network.glade.in.h:69
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click "
-"\"Cancel\"."
+"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
+"\"."
 msgstr ""
 "Um mit der Konfiguration Ihres Zugangs fortzufahren, drücken Sie \"Weiter\". "
 "Um abzubrechen klicken Sie \"Abbrechen\"."
@@ -2523,7 +2567,7 @@ msgstr ""
 "Die Datei ``%s'' fehlt oder konnte nicht gelesen werden:\n"
 "Die Konfiguration wird nicht vorhanden sein."
 
-#: src/boot/e-table.c:362
+#: src/boot/e-table.c:365
 #, c-format
 msgid "%s (default)"
 msgstr "%s (Vorgaben)"
@@ -2582,23 +2626,23 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fehlerhaftes Verbindungssignal `%s' in Widget `%s'"
 
-#: src/common/xst-tool.c:656
+#: src/common/xst-tool.c:657
 msgid "Closing tool."
 msgstr "Werkzeug wird geschlossen."
 
-#: src/common/xst-tool.c:798
+#: src/common/xst-tool.c:799
 msgid "Skipping set directive..."
 msgstr ""
 
-#: src/common/xst-tool.c:910
+#: src/common/xst-tool.c:911
 msgid "Skipping actual save..."
 msgstr "Derzeitiges Sichern wird übersprungen..."
 
-#: src/common/xst-tool.c:950
+#: src/common/xst-tool.c:951
 msgid "Updating your system configuration."
 msgstr "Ihre Systemkonfiguration wird aktualisiert."
 
-#: src/common/xst-tool.c:969
+#: src/common/xst-tool.c:970
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2606,16 +2650,16 @@ msgstr ""
 "Während der Ausführung des Backend-Skripts\n"
 "ist ein Fehler aufgetreten. Die Konfiguration konnte nicht geladen werden."
 
-#: src/common/xst-tool.c:1143
+#: src/common/xst-tool.c:1144
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1328
+#: src/common/xst-tool.c:1329
 msgid "The password you entered is invalid."
 msgstr "Das von Ihnen angegebene Passwort ist ungültig."
 
-#: src/common/xst-tool.c:1338
+#: src/common/xst-tool.c:1339
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2642,23 +2686,23 @@ msgstr ""
 "--\n"
 "Das Ximian Setup Tools-Team"
 
-#: src/common/xst-tool.c:1358
+#: src/common/xst-tool.c:1359
 msgid "Don't show me this again"
 msgstr "Dies nicht mehr anzeigen"
 
-#: src/common/xst-tool.c:1390
+#: src/common/xst-tool.c:1391
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tKonfiguration im Standort STANDORT bearbeiten."
 
-#: src/common/xst-tool.c:1390
+#: src/common/xst-tool.c:1391
 msgid "LOCATION"
 msgstr "STANDORT"
 
-#: src/common/xst-tool.c:1432
+#: src/common/xst-tool.c:1433
 msgid "Pretending we are root..."
 msgstr "Vorgeben root zu sein..."
 
-#: src/common/xst-ui.c:545
+#: src/common/xst-ui.c:546
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
@@ -2842,7 +2886,7 @@ msgstr "Aktiv"
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/network/connection.c:1329
+#: src/network/connection.c:1327
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2852,7 +2896,7 @@ msgstr ""
 "ist leer. Bitte geben Sie gültige IP-Adressen in diesen\n"
 "Feldern an, um fortzufahren."
 
-#: src/network/connection.c:1336
+#: src/network/connection.c:1334
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2862,7 +2906,7 @@ msgstr ""
 "Schnittstelle ist leer. Bitte geben Sie gültige\n"
 "IP-Adressen in diesen Feldern an, um fortzufahren."
 
-#: src/network/connection.c:1342
+#: src/network/connection.c:1340
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2976,8 +3020,8 @@ msgstr "Zeit, Datum, Zeitzone."
 #: src/users/callbacks.c:88
 msgid "Can't create new user. Check your profile settings."
 msgstr ""
-"Neuer Benutzer kann nicht angelegt werden. Überprüfen Sie Ihre "
-"Profil-Einstellungen."
+"Neuer Benutzer kann nicht angelegt werden. Überprüfen Sie Ihre Profil-"
+"Einstellungen."
 
 #: src/users/callbacks.c:97
 msgid "Can't create new user. Too many users probably."
@@ -3022,25 +3066,25 @@ msgstr ""
 "Falsches Passwort: %s.\n"
 "Bitte versuchen Sie es mit einem neuen."
 
-#: src/users/user_group.c:330
+#: src/users/user_group.c:339
 msgid "The username is empty."
 msgstr "Der Benutzername ist leer."
 
-#: src/users/user_group.c:334
+#: src/users/user_group.c:343
 msgid "The username is too long."
 msgstr "Der Benutzername ist zu lang."
 
-#: src/users/user_group.c:337 src/users/user_group.c:358
-#: src/users/user_group.c:442
+#: src/users/user_group.c:346 src/users/user_group.c:367
+#: src/users/user_group.c:451
 msgid "root user shouldn't be modified."
 msgstr "Der root-Benutzer sollte nicht verändert werden."
 
-#: src/users/user_group.c:341
+#: src/users/user_group.c:350
 msgid "Please set a valid username, using only lower-case letters."
 msgstr ""
 "Bitte geben Sie einen gültigen Benutzernamen ein (nur Kleinbuchstaben)."
 
-#: src/users/user_group.c:345
+#: src/users/user_group.c:354
 #, c-format
 msgid ""
 "Username \"%s\" already exists.\n"
@@ -3051,124 +3095,124 @@ msgstr ""
 "\n"
 "Bitten wählen Sie einen anderen Benutzername"
 
-#: src/users/user_group.c:356 src/users/user_group.c:546
+#: src/users/user_group.c:365 src/users/user_group.c:555
 msgid "User id must be a positive number."
 msgstr "Benutzerkennung muss eine positive Zahl sein."
 
-#: src/users/user_group.c:360
+#: src/users/user_group.c:369
 msgid "Such user id already exists."
 msgstr "Diese Benuterkennung existiert bereits."
 
-#: src/users/user_group.c:383
+#: src/users/user_group.c:392
 #, c-format
 msgid "Invalid character '%c' in comment."
 msgstr "Ungültiges Zeichen '%c' im Kommentar."
 
-#: src/users/user_group.c:399
+#: src/users/user_group.c:408
 msgid "Please give shell with full path."
 msgstr "Bitte Kommandozeile mit vollem Pfad angeben."
 
-#: src/users/user_group.c:436
+#: src/users/user_group.c:445
 msgid "Home directory must not be empty."
 msgstr "Heimatverzeichnis darf nicht leer sein."
 
-#: src/users/user_group.c:439
+#: src/users/user_group.c:448
 msgid "Please enter full path for home directory."
 msgstr "Bitte vollen Pfad oder Heimverzeichnis angeben."
 
-#: src/users/user_group.c:447
+#: src/users/user_group.c:456
 msgid "Part of the path to the home directory is a file."
 msgstr "Teil des Pfades zum Heimatverzeichnis ist eine Datei."
 
-#: src/users/user_group.c:448
+#: src/users/user_group.c:457
 msgid "There is a loop in the path to the home directory."
 msgstr "Es gibt eine Schleife im Pfad zum Heimatverzeichnis."
 
-#: src/users/user_group.c:449
+#: src/users/user_group.c:458
 msgid "Not enough memory to check the home directory."
 msgstr ""
 "Es steht nicht genügend Speicher zur Verfügung, um Ihr Heimatverzeichnis zu "
 "überprüfen."
 
-#: src/users/user_group.c:450
+#: src/users/user_group.c:459
 msgid "The path to the home directory is too long."
 msgstr "Der Pfad zu Ihrem Heimatverzeichnis ist zu lang."
 
-#: src/users/user_group.c:482
+#: src/users/user_group.c:491
 msgid "Group name is not valid."
 msgstr "Gruppenname ist ungültig."
 
-#: src/users/user_group.c:485 src/users/user_group.c:550
+#: src/users/user_group.c:494 src/users/user_group.c:559
 msgid "Such group id already exists."
 msgstr "Diese Gruppekennung existiert bereits."
 
-#: src/users/user_group.c:488
+#: src/users/user_group.c:497
 msgid "Group does not exist. Create new?"
 msgstr "Gruppe existiert nicht. Neue anlegen?"
 
-#: src/users/user_group.c:507
+#: src/users/user_group.c:516
 msgid "Group name is empty."
 msgstr "Gruppenname ist leer."
 
-#: src/users/user_group.c:511
+#: src/users/user_group.c:520
 msgid "The group name is too long."
 msgstr "Der Gruppenname ist zu lang."
 
-#: src/users/user_group.c:515
+#: src/users/user_group.c:524
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Bitte geben Sie einen gültigen Gruppennamen ein (nur Kleinbuchstaben)."
 
-#: src/users/user_group.c:519
+#: src/users/user_group.c:528
 msgid "Group already exists."
 msgstr "Gruppe existiert bereits."
 
-#: src/users/user_group.c:820
+#: src/users/user_group.c:829
 #, c-format
 msgid "Password for User %s"
 msgstr "Passwort für Benutzer %s"
 
-#: src/users/user_group.c:854
+#: src/users/user_group.c:863
 msgid "The root user must not be deleted."
 msgstr "Der root-Benutzer darf nicht gelöscht werden."
 
-#: src/users/user_group.c:861
+#: src/users/user_group.c:870
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Sind Sie sicher, dass Sie den Benutzer %s löschen wollen?"
 
-#: src/users/user_group.c:884
+#: src/users/user_group.c:893
 msgid "Create New Group"
 msgstr "Neue Gruppe erstellen"
 
-#: src/users/user_group.c:944
+#: src/users/user_group.c:953
 msgid "The root group must not be deleted."
 msgstr "Die root-Gruppe darf nicht gelöscht werden."
 
-#: src/users/user_group.c:951
+#: src/users/user_group.c:960
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Sind Sie sicher, dass Sie die Gruppe %s löschen wollen?"
 
-#: src/users/user_group.c:996
+#: src/users/user_group.c:1005
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Einstellungen für Gruppe %s"
 
-#: src/users/user_group.c:1391
+#: src/users/user_group.c:1400
 msgid "The home directory does not exist, or its path is invalid."
 msgstr ""
 "Das Heimatverzeichnis existiert nicht, oder der Pfad ist nicht richtig."
 
-#: src/users/user_group.c:1395
+#: src/users/user_group.c:1404
 msgid "Couldn't get access to the home directory."
 msgstr "Es konnte kein Zugriff auf das Heimatverzeichnis erlangt werden."
 
 #. We shouldn't fall here: the other cases are in the error checks.
-#: src/users/user_group.c:1400
+#: src/users/user_group.c:1409
 msgid "There was an error trying to access the home directory."
 msgstr "Es trat ein Fehler während des Zugriffs auf das Heimatverzeichnis auf."
 
-#: src/users/user_group.c:1408
+#: src/users/user_group.c:1417
 msgid ""
 "The home directory already exists. This will break the new user's "
 "permissions."
@@ -3176,23 +3220,23 @@ msgstr ""
 "Das Heimatverzeichnis existiert bereits. Dies wird die Rechte des neuen "
 "Benutzers verändern."
 
-#: src/users/user_group.c:1413
+#: src/users/user_group.c:1422
 msgid "The home directory path exists, but it is not a directory."
 msgstr "Der Heimatverzeichnispfad existiert, jedoch ist es kein Verzeichnis."
 
-#: src/users/user_group.c:1417
+#: src/users/user_group.c:1426
 msgid "The home directory is not owned by the user."
 msgstr "Der Benutzer hat keine Rechte für sein Heimatverzeichnis."
 
-#: src/users/user_group.c:1421
+#: src/users/user_group.c:1430
 msgid "The user doesn't have permission to read from the home directory."
 msgstr "Der Benutzer hat keine Rechte von dem Heimatverzeichnis zu lesen."
 
-#: src/users/user_group.c:1425
+#: src/users/user_group.c:1434
 msgid "The user doesn't have permission to write in the home directory."
 msgstr "Der Benutzer hat keine Rechte von dem Heimatverzeichnis zu schreiben."
 
-#: src/users/user_group.c:1429
+#: src/users/user_group.c:1438
 msgid ""
 "The user doesn't have permission to use (``execute'') the home directory."
 msgstr ""
@@ -3200,185 +3244,210 @@ msgstr ""
 "verwenden."
 
 #: interfaces/internetsharing.glade.in.h:1
-msgid " Don't use it."
-msgstr " Es nicht verwenden."
+msgid "   Configure...   "
+msgstr " Konfigurieren... "
 
 #: interfaces/internetsharing.glade.in.h:2
-msgid " Exit."
-msgstr " Beenden."
+msgid " Exit and come back later after installing."
+msgstr " Beenden und später, nach der Installation zurückkehren "
 
 #: interfaces/internetsharing.glade.in.h:3
-msgid " No, (Overwrite)"
-msgstr " Nein, (Überschreiben)"
+msgid " Keep the current configuration."
+msgstr "Die derzeitige Konfiguration behalten."
 
 #: interfaces/internetsharing.glade.in.h:4
-msgid " No, Installed  manually"
-msgstr " Nein, manuell installiert"
+msgid " Never mind, don't use it then."
+msgstr " Macht nichts, dann eben nicht verwenden."
 
 #: interfaces/internetsharing.glade.in.h:5
-msgid " No."
-msgstr " Nein."
+msgid " No, I'll manually configure the local network computers."
+msgstr " Nein, Ich werde die lokal vernetzten Computer selber konfigurieren."
 
 #: interfaces/internetsharing.glade.in.h:6
-msgid " Yes, Launch network tool. (Recommended)"
-msgstr " Ja, Netzwerkwerkzeuge starten. (Empfohlen)"
+msgid " No, I'll set it up later by myself."
+msgstr " Nein, Ich werde es später selber einrichten."
 
 #: interfaces/internetsharing.glade.in.h:7
-msgid " Yes."
-msgstr " Ja."
+msgid " No, exit this druid and continue later."
+msgstr " Nein, diesen Druiden beenden und später weitermachen."
 
 #: interfaces/internetsharing.glade.in.h:8
-msgid " Yes. (Recommended)"
-msgstr " Ja. (Empfohlen)"
+msgid " No, overwrite with new defaults (recommended)"
+msgstr " Nein, mit Voreinstellungen überschreiben (empfohen)"
 
 #: interfaces/internetsharing.glade.in.h:9
 msgid ""
-"A previous DHCP configuration has been detected. \n"
-"Do you want to keep this configuration?\n"
-"\r\r"
+" Overwrite with the default internet sharing configuration (recommended)."
 msgstr ""
-"Eine vorherige DHCP-Konfiguration wurde festgestellt. \n"
-"Wollen Sie diese KOnfiguration behalten?\n"
-"\r\r"
+" Mit der vorgegebenen Konfiguration für Internetfreigaben überschreiben "
+"(empfohlen)."
+
+#: interfaces/internetsharing.glade.in.h:10
+msgid ""
+" Yes, I'll set the local network computers to use automatic IP assignment  "
+"(recommended)."
+msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:11
+msgid " Yes, keep the current DHCP configuration."
+msgstr " Ja, die derzeitige DHCP-Konfiguration behalten."
 
 #: interfaces/internetsharing.glade.in.h:12
-msgid "Activate Local Interface Network"
-msgstr "Lokales Netzwerk aktivieren"
+msgid " Yes, launch network tool (recommended)."
+msgstr " Ja, Netzwerkwerkzeuge starten (empfohlen)"
 
 #: interfaces/internetsharing.glade.in.h:13
-msgid "Banner Removal (Junkbuster)"
-msgstr "Banner-Entfernung (Junkbuster)"
-
-#: interfaces/internetsharing.glade.in.h:14
-msgid "Configure DHCP Service"
-msgstr "DHCP-Dienst konfigurieren"
+msgid ""
+"A local network connection was not detected.\n"
+"Would you like to configure one?"
+msgstr ""
+"Lokales Netzwerk wurde nicht erkannt.\n"
+"Wollen Sie eines konfigurieren?"
 
 #: interfaces/internetsharing.glade.in.h:15
 msgid ""
-"Congratulation! you have installed \n"
-"Internet Sharing Tool."
+"A local network interface has been detected, but it's not active.\n"
+"Would you like to activate it now?"
 msgstr ""
-"Glückwunsch! Sie haben die\n"
-"Internetfreigabe-Werkzeuge installiert."
+"Lokales Netzwerk wurde erkannt, es ist aber deaktiviert.\n"
+"Wollen Sie es nun aktivieren?"
 
 #: interfaces/internetsharing.glade.in.h:17
-msgid "Create a new Local Interface Network"
-msgstr "Neues lokales Netzwerk anlegen"
+msgid ""
+"A previous DHCP configuration has been detected. \n"
+"Do you want to keep this configuration?"
+msgstr ""
+"Eine vorherige DHCP-Konfiguration wurde festgestellt. \n"
+"Wollen Sie diese Konfiguration behalten?"
 
 #: interfaces/internetsharing.glade.in.h:19
-msgid "DHCP Service Requirements"
-msgstr "Erforderliche Komponenten für DHCP-Dienst"
+msgid "Banner Removal (Junkbuster)"
+msgstr "Banner-Entfernung (Junkbuster)"
 
 #: interfaces/internetsharing.glade.in.h:20
+msgid "Configure DHCP Service"
+msgstr "DHCP-Dienst konfigurieren"
+
+#: interfaces/internetsharing.glade.in.h:21
+msgid ""
+"Congratulations! This computer is now\n"
+"configured to share its Internet connection."
+msgstr ""
+"Glückwunsch! Dieser Computer ist jetzt\n"
+"für die Internet-Verbindungsfreigabe konfiguriert."
+
+#: interfaces/internetsharing.glade.in.h:23
+msgid "Create a new local network interface."
+msgstr "Neues lokales Netzwerk anlegen."
+
+#: interfaces/internetsharing.glade.in.h:25
+msgid "DHCP service configuration."
+msgstr "Konfiguration des DHCP-Dienstes."
+
+#: interfaces/internetsharing.glade.in.h:26
+msgid "DHCP service requirements."
+msgstr "Anforderungen des DHCP-Dienstes"
+
+#: interfaces/internetsharing.glade.in.h:27
+msgid "Disable"
+msgstr "Deaktivieren"
+
+#: interfaces/internetsharing.glade.in.h:28
 msgid "Enable :"
 msgstr "Aktivieren :"
 
-#: interfaces/internetsharing.glade.in.h:21
-msgid "End range"
-msgstr ""
+#: interfaces/internetsharing.glade.in.h:29
+msgid "End of Range"
+msgstr "Außerhalb des Bereichs"
 
-#: interfaces/internetsharing.glade.in.h:23
+#: interfaces/internetsharing.glade.in.h:31
 msgid "Firewall"
 msgstr "Firewall"
 
-#: interfaces/internetsharing.glade.in.h:24
-msgid "Firewall configuration"
-msgstr "Firewall-Konfiguration"
-
-#: interfaces/internetsharing.glade.in.h:25
+#: interfaces/internetsharing.glade.in.h:32
 msgid "IP Forwarding"
 msgstr "IP Forwarding"
 
-#: interfaces/internetsharing.glade.in.h:26
-msgid "Install DHCP Service"
-msgstr "DHCP-Dienst installieren"
-
-#: interfaces/internetsharing.glade.in.h:27
+#: interfaces/internetsharing.glade.in.h:33
 msgid "Internet Sharing"
 msgstr "Internet-Freigabe (NAT)"
 
-#: interfaces/internetsharing.glade.in.h:28
+#: interfaces/internetsharing.glade.in.h:34
 msgid "Internet Sharing --Advanced Mode"
 msgstr "Internet-verbindungsfreigabe -- erweitertes Modus"
 
-#: interfaces/internetsharing.glade.in.h:29
+#: interfaces/internetsharing.glade.in.h:35
+msgid "Internet Sharing Configuration Druid"
+msgstr "Druide für Konfiguration der Internet-Freigabe"
+
+#: interfaces/internetsharing.glade.in.h:36
 msgid "Internet Sharing Druid"
-msgstr "Druide für Internet-Freigabe (NAT)"
+msgstr "Druide für Internet-Freigabe"
 
-#: interfaces/internetsharing.glade.in.h:30
-msgid "Internet Sharing Tool"
-msgstr "Internet-Freigabe (NAT)"
+#: interfaces/internetsharing.glade.in.h:37
+msgid "Internet sharing configuration."
+msgstr "Konfiguration der Internet-Freigabe"
 
-#: interfaces/internetsharing.glade.in.h:31
+#: interfaces/internetsharing.glade.in.h:38
+msgid "Local network interface activation."
+msgstr "Aktivierung der lokalen Netzwerkkarte."
+
+#: interfaces/internetsharing.glade.in.h:39
+msgid "Start of Range"
+msgstr "Anfang des Bereichs"
+
+#: interfaces/internetsharing.glade.in.h:40
+#, fuzzy
 msgid ""
-"Local interface network has been detected, but it's not active.\n"
-"Would you like to activate it?"
-msgstr ""
-"Lokales Netzwerk wurde erkannt, es ist aber deaktiviert.\n"
-"Wollen Sie es aktivieren?"
-
-#: interfaces/internetsharing.glade.in.h:33
-msgid "Start rage"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:34
-msgid ""
-"The internet sharing tool allows you to share your internet conection with "
+"The Internet sharing tool allows you to share your Internet conection with "
 "other computers on the network."
 msgstr ""
 "Das Werkzeug für die Internet-Freigabe erlaubt Ihnen Ihre Internetverbindung "
 "anderen Computern in Ihrem Netz zur Verfügung zu stellen."
 
-#: interfaces/internetsharing.glade.in.h:35
+#: interfaces/internetsharing.glade.in.h:41
 msgid "Web Cache (squid)"
 msgstr "Web Cache (squid)"
 
-#: interfaces/internetsharing.glade.in.h:36
+#: interfaces/internetsharing.glade.in.h:42
 msgid ""
-"Welcome to the Internet Sharing Tool \n"
+"Welcome to the Internet Sharing Configuration Druid.\n"
 "\n"
-"This druid will help you to configure \n"
-"and share your internet connection.\n"
+"This druid will help you to configure and share\n"
+"your Internet connection.\n"
 "\n"
-"At least, you must have installed a local\n"
-"Interface network."
+"You should have already installed and configured a local\n"
+"network connection, such as an Ethernet or waveLAN\n"
+"card, and an internet connection, such as a modem.\n"
+"\n"
+"If you haven't, you will be given the option to launch the\n"
+"Network Tool to configure them before continuing."
 msgstr ""
 
-#: interfaces/internetsharing.glade.in.h:43
-msgid "Would you like to install DHCP service ?"
-msgstr "Möchten Sie den DHCP-Dienst installieren ?"
-
-#: interfaces/internetsharing.glade.in.h:44
+#: interfaces/internetsharing.glade.in.h:53
 msgid ""
-"You don't have installed a local Interface network.\n"
-"Would you like to install it?"
+"Would you like to give the automatic network\n"
+"address assignment service (DHCP)?"
 msgstr ""
-"Sie haben kein lokales Netzwerk installiert.\n"
-"Möchten Sie es installieren?"
 
-#: interfaces/internetsharing.glade.in.h:46
-msgid ""
-"You don't have installed the requirements to use \n"
-" DHCP service?"
-msgstr ""
-"Sie haben die erforderlichen Komponenten für \n"
-"den DHCP-Dienst installiert."
+#: interfaces/internetsharing.glade.in.h:55
+msgid "Yes (recommended)."
+msgstr " Ja (empfohlen)i."
 
-#: interfaces/internetsharing.glade.in.h:48
+#: interfaces/internetsharing.glade.in.h:56
+#, fuzzy
 msgid ""
-"You have a previous configuration of firewall.\n"
-"Do you want to keep this configuration?"
+"You already have an internet sharing configuration.\n"
+"Do you want to keep it, or use the druid's defaults?"
 msgstr ""
 "Sie haben eine vorherige Konfiguration der Firewall.\n"
 "Wollen Sie diese Konfiguration behalten?"
 
-#: interfaces/internetsharing.glade.in.h:50
-msgid "configure DHCP"
-msgstr "DHCP konfigurieren"
-
-#: interfaces/internetsharing.glade.in.h:51
-msgid "enable"
-msgstr "aktivieren"
+#: interfaces/internetsharing.glade.in.h:58
+msgid ""
+"You don't have a DHCP server installed, or\n"
+"some other related component is missing."
+msgstr ""
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "                           "
@@ -3875,3 +3944,57 @@ msgstr "Benutzer"
 #: src/users/profiles.etspec.h:2
 msgid "Profile"
 msgstr "Profil"
+
+#~ msgid " Don't use it."
+#~ msgstr " Es nicht verwenden."
+
+#~ msgid " Exit."
+#~ msgstr " Beenden."
+
+#~ msgid " No, (Overwrite)"
+#~ msgstr " Nein, (Überschreiben)"
+
+#~ msgid " No, Installed  manually"
+#~ msgstr " Nein, manuell installiert"
+
+#~ msgid " No."
+#~ msgstr " Nein."
+
+#~ msgid " Yes."
+#~ msgstr " Ja."
+
+#~ msgid "Activate Local Interface Network"
+#~ msgstr "Lokales Netzwerk aktivieren"
+
+#~ msgid ""
+#~ "Congratulation! you have installed \n"
+#~ "Internet Sharing Tool."
+#~ msgstr ""
+#~ "Glückwunsch! Sie haben die\n"
+#~ "Internetfreigabe-Werkzeuge installiert."
+
+#~ msgid "Install DHCP Service"
+#~ msgstr "DHCP-Dienst installieren"
+
+#~ msgid "Would you like to install DHCP service ?"
+#~ msgstr "Möchten Sie den DHCP-Dienst installieren ?"
+
+#~ msgid ""
+#~ "You don't have installed a local Interface network.\n"
+#~ "Would you like to install it?"
+#~ msgstr ""
+#~ "Sie haben kein lokales Netzwerk installiert.\n"
+#~ "Möchten Sie es installieren?"
+
+#~ msgid ""
+#~ "You don't have installed the requirements to use \n"
+#~ " DHCP service?"
+#~ msgstr ""
+#~ "Sie haben die erforderlichen Komponenten für \n"
+#~ "den DHCP-Dienst installiert."
+
+#~ msgid "configure DHCP"
+#~ msgstr "DHCP konfigurieren"
+
+#~ msgid "enable"
+#~ msgstr "aktivieren"
