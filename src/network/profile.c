@@ -97,6 +97,7 @@ profile_save_interfaces (xmlNodePtr source, xmlNodePtr dest)
 		"dev",
 		"enabled",
 		"file",
+		"gateway",
 		"name",
 		"netmask",
 		"network",
