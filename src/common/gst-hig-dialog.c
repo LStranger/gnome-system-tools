@@ -228,8 +228,8 @@ gst_hig_dialog_get_message_type (GstHigDialog *dialog)
     return GST_HIG_MESSAGE_WARNING;
   else if (strcmp (stock_id, GTK_STOCK_DIALOG_ERROR) == 0)
     return GST_HIG_MESSAGE_ERROR;
-	else if (strcmp (stock_id, GTK_STOCK_DIALOG_AUTHENTICATION) == 0)
-		return GST_HIG_MESSAGE_AUTHENTICATION;
+/*	else if (strcmp (stock_id, GTK_STOCK_DIALOG_AUTHENTICATION) == 0)
+	return GST_HIG_MESSAGE_AUTHENTICATION;*/
   else
 	  {
       g_assert_not_reached (); 
@@ -261,9 +261,9 @@ setup_type (GstHigDialog      *dialog,
     case GST_HIG_MESSAGE_ERROR:
       stock_id = GTK_STOCK_DIALOG_ERROR;
       break;
-		case GST_HIG_MESSAGE_AUTHENTICATION:
+/*		case GST_HIG_MESSAGE_AUTHENTICATION:
 			stock_id = GTK_STOCK_DIALOG_AUTHENTICATION;
-			break;
+			break; */
     default:
       g_warning ("Unknown GstHigMessageType %d", type);
       break;
@@ -443,7 +443,10 @@ gst_hig_dialog_set_text (GtkLabel    *label,
 {
 	gchar *msg;
 
+	/* FIXME: it's for Gtk+2.4
 	msg = g_markup_vprintf_escaped (message_format, args);
+  */
+	msg = g_strdup_vprintf (message_format, args);
 	gtk_label_set_markup (label, msg);
 
 	g_free (msg);
