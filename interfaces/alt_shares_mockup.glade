@@ -1,0 +1,1384 @@
+<?xml version="1.0"?>
+<GTK-Interface>
+
+<project>
+  <name>shares_mockup</name>
+  <program_name>shares_mockup</program_name>
+  <directory></directory>
+  <source_directory>src</source_directory>
+  <pixmaps_directory>../pixmaps</pixmaps_directory>
+  <language>C</language>
+  <gnome_support>True</gnome_support>
+  <gettext_support>True</gettext_support>
+  <gnome_help_support>True</gnome_help_support>
+</project>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>main_window (simple mode)</name>
+  <title>simple mode--main window</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>446</default_width>
+  <default_height>315</default_height>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkNotebook</class>
+    <name>notebook1</name>
+    <can_focus>True</can_focus>
+    <show_tabs>True</show_tabs>
+    <show_border>True</show_border>
+    <tab_pos>GTK_POS_TOP</tab_pos>
+    <scrollable>False</scrollable>
+    <tab_hborder>2</tab_hborder>
+    <tab_vborder>2</tab_vborder>
+    <popup_enable>False</popup_enable>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox4</name>
+      <border_width>3</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox9</name>
+	<border_width>3</border_width>
+	<homogeneous>False</homogeneous>
+	<spacing>8</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap3</name>
+	  <filename>shares.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkEventBox</class>
+	  <name>eventbox2</name>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label23</name>
+	    <label>Imports are directories which reside in other computers and are accessible to you through the network.</label>
+	    <justify>GTK_JUSTIFY_FILL</justify>
+	    <wrap>True</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap4</name>
+	  <filename>32_wrench_logo.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox10</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>scrolledwindow2</name>
+	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkCList</class>
+	    <name>clist21</name>
+	    <can_focus>True</can_focus>
+	    <columns>4</columns>
+	    <column_widths>65,89,91,37</column_widths>
+	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	    <show_titles>True</show_titles>
+	    <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label264</name>
+	      <label>Host</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label265</name>
+	      <label>Path</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label266</name>
+	      <label>Mount Point</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label267</name>
+	      <label>Mounted</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox5</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label27</name>
+	    <label>
+</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVButtonBox</class>
+	    <name>vbuttonbox3</name>
+	    <layout_style>GTK_BUTTONBOX_START</layout_style>
+	    <spacing>0</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>27</child_min_height>
+	    <child_ipad_x>7</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button4</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Add...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button5</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Settings...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button21</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Delete</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label20</name>
+      <label>Imports</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox7</name>
+      <border_width>3</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox52</name>
+	<border_width>3</border_width>
+	<homogeneous>False</homogeneous>
+	<spacing>8</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap9</name>
+	  <filename>shares.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkEventBox</class>
+	  <name>eventbox5</name>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label194</name>
+	    <label>Exports are used to share directories on your computer with other computers over the network. </label>
+	    <justify>GTK_JUSTIFY_FILL</justify>
+	    <wrap>True</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap10</name>
+	  <filename>32_wrench_logo.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox18</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>scrolledwindow7</name>
+	  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_NEVER</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkCList</class>
+	    <name>clist27</name>
+	    <can_focus>True</can_focus>
+	    <columns>3</columns>
+	    <column_widths>80,80,80</column_widths>
+	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	    <show_titles>True</show_titles>
+	    <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label294</name>
+	      <label>Name</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label295</name>
+	      <label>Path</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label296</name>
+	      <label>Comment</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox8</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label44</name>
+	    <label>
+</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVButtonBox</class>
+	    <name>vbuttonbox5</name>
+	    <layout_style>GTK_BUTTONBOX_START</layout_style>
+	    <spacing>0</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>27</child_min_height>
+	    <child_ipad_x>7</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button7</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Add...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button9</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Settings...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button20</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Delete</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame28</name>
+	<label>Properties</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox103</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>3</spacing>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label299</name>
+	    <label>Clients:</label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>7.45058e-09</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>entry27</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVButtonBox</class>
+	    <name>vbuttonbox16</name>
+	    <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
+	    <spacing>10</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>0</child_min_height>
+	    <child_ipad_x>7</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button45</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Permissions...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label21</name>
+      <label>Exports</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>main_window (advanced mode)</name>
+  <title>advanced mode--main window</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkNotebook</class>
+    <name>notebook2</name>
+    <can_focus>True</can_focus>
+    <show_tabs>True</show_tabs>
+    <show_border>True</show_border>
+    <tab_pos>GTK_POS_TOP</tab_pos>
+    <scrollable>False</scrollable>
+    <tab_hborder>2</tab_hborder>
+    <tab_vborder>2</tab_vborder>
+    <popup_enable>False</popup_enable>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox22</name>
+      <border_width>3</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox68</name>
+	<border_width>3</border_width>
+	<homogeneous>False</homogeneous>
+	<spacing>8</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap15</name>
+	  <filename>shares.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkEventBox</class>
+	  <name>eventbox8</name>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label198</name>
+	    <label>Imports are directories which reside in other computers and are accessible to you through the network.</label>
+	    <justify>GTK_JUSTIFY_FILL</justify>
+	    <wrap>True</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap16</name>
+	  <filename>32_wrench_logo.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox69</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>scrolledwindow3</name>
+	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkCList</class>
+	    <name>clist23</name>
+	    <can_focus>True</can_focus>
+	    <columns>4</columns>
+	    <column_widths>70,68,85,37</column_widths>
+	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	    <show_titles>True</show_titles>
+	    <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label272</name>
+	      <label>Host</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label273</name>
+	      <label>Path</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label274</name>
+	      <label>Mount Point</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label275</name>
+	      <label>Mounted</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox23</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label202</name>
+	    <label>
+</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVButtonBox</class>
+	    <name>vbuttonbox9</name>
+	    <layout_style>GTK_BUTTONBOX_START</layout_style>
+	    <spacing>0</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>27</child_min_height>
+	    <child_ipad_x>7</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button22</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Add...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button24</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Settings...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button33</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Delete</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button36</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Mount</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label203</name>
+      <label>Imports</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox24</name>
+      <border_width>3</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox70</name>
+	<border_width>3</border_width>
+	<homogeneous>False</homogeneous>
+	<spacing>8</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap17</name>
+	  <filename>shares.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkEventBox</class>
+	  <name>eventbox9</name>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label204</name>
+	    <label>Exports are used to share directories on your computer with other computers over the network. </label>
+	    <justify>GTK_JUSTIFY_FILL</justify>
+	    <wrap>True</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap18</name>
+	  <filename>32_wrench_logo.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox71</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>scrolledwindow8</name>
+	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkCList</class>
+	    <name>clist24</name>
+	    <can_focus>True</can_focus>
+	    <columns>3</columns>
+	    <column_widths>80,80,80</column_widths>
+	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	    <show_titles>True</show_titles>
+	    <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label276</name>
+	      <label>Name</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label277</name>
+	      <label>Path</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label278</name>
+	      <label>Comment</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox25</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label208</name>
+	    <label>
+</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVButtonBox</class>
+	    <name>vbuttonbox10</name>
+	    <layout_style>GTK_BUTTONBOX_START</layout_style>
+	    <spacing>0</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>27</child_min_height>
+	    <child_ipad_x>7</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button25</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Add...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button27</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Settings...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button35</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Delete</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button37</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Enable</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame27</name>
+	<label>Properties</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox102</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>3</spacing>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label293</name>
+	    <label>Clients:</label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>7.45058e-09</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>entry26</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVButtonBox</class>
+	    <name>vbuttonbox15</name>
+	    <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
+	    <spacing>10</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>0</child_min_height>
+	    <child_ipad_x>7</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button44</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Permissions...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label209</name>
+      <label>Exports</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>add/edit clients</name>
+  <title>add/edit clients</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>284</default_width>
+  <default_height>255</default_height>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox32</name>
+    <border_width>3</border_width>
+    <homogeneous>False</homogeneous>
+    <spacing>3</spacing>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox91</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap23</name>
+	<filename>shares.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label247</name>
+	<label>Use this dialog to define the client patterns which determine who has access to your NFS share. Client patterns are typically of the form &quot;10.10.10.*&quot; or &quot; *.gnome.org&quot;.  </label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>True</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap24</name>
+	<filename>settings.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkFrame</class>
+      <name>frame18</name>
+      <label>Client</label>
+      <label_xalign>0</label_xalign>
+      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox92</name>
+	<border_width>3</border_width>
+	<homogeneous>False</homogeneous>
+	<spacing>3</spacing>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label248</name>
+	  <label>Pattern:</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkEntry</class>
+	  <name>entry13</name>
+	  <can_focus>True</can_focus>
+	  <editable>True</editable>
+	  <text_visible>True</text_visible>
+	  <text_max_length>61</text_max_length>
+	  <text></text>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>checkbutton10</name>
+	  <can_focus>True</can_focus>
+	  <label>Allow writing</label>
+	  <active>False</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	    <pack>GTK_PACK_END</pack>
+	  </child>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox93</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>scrolledwindow6</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkCList</class>
+	  <name>clist28</name>
+	  <can_focus>True</can_focus>
+	  <columns>2</columns>
+	  <column_widths>177,80</column_widths>
+	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	  <show_titles>True</show_titles>
+	  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label297</name>
+	    <label>Clients for &lt;export name&gt;</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label298</name>
+	    <label>Writable</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+</GTK-Interface>
