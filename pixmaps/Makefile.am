@@ -4,6 +4,7 @@ pixmaps_DATA = \
 	16_ppp.xpm                \
 	16_plip.xpm               \
 	computer.png              \
+	conectiva.png		  \
 	connection-ethernet.png   \
 	connection-modem.png      \
 	boot.png                  \
