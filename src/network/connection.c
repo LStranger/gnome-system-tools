@@ -523,40 +523,39 @@ connection_list_select_row (GtkTreeSelection *selection, gpointer data)
 static void
 on_connection_list_clicked (GtkWidget *w, gpointer data)
 {
-   GtkTreePath *path;
-   GtkTreeViewColumn *column;
-   GtkTreeModel *model;
-   GtkTreeIter iter;
-   GList *column_list;
-   gint ncol;
-   GdkPixbuf *stat_icon;
-   XstConnection *cxn;
+	GtkTreePath *path;
+	GtkTreeViewColumn *column;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GList *column_list;
+	gint ncol;
+	GdkPixbuf *stat_icon;
+	XstConnection *cxn;
 
-   cxn = connection_list_get_active ();
-   column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
-   gtk_tree_view_get_cursor (GTK_TREE_VIEW (w), &path, &column);
+	cxn = connection_list_get_active ();
+	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
+	gtk_tree_view_get_cursor (GTK_TREE_VIEW (w), &path, &column);
 							  
-   ncol = g_list_index (column_list, column) + 1;
+	ncol = g_list_index (column_list, column) + 1;
 
-   if (ncol == CONNECTION_LIST_COL_STAT_PIX)
-   {
-      model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
-      gtk_tree_model_get_iter (model, &iter, path);
-      
-      if (!cxn->enabled)
-      {
-	 if (cxn->type != XST_CONNECTION_LO)
-	    on_connection_activate_clicked (w, NULL);
-      }
-      else
-      {
-	 if (cxn->type != XST_CONNECTION_LO)
-	    on_connection_deactivate_clicked (w, NULL);
-      }
-   }
-   g_list_free (column_list);
-   gtk_tree_path_free (path);
-	   		      
+	if (ncol == CONNECTION_LIST_COL_STAT_PIX)
+	{
+		model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
+		gtk_tree_model_get_iter (model, &iter, path);
+		
+		if (!cxn->enabled)
+		{
+			if (cxn->type != XST_CONNECTION_LO)
+				on_connection_activate_clicked (w, NULL);
+		}
+		else
+		{
+			if (cxn->type != XST_CONNECTION_LO)
+				on_connection_deactivate_clicked (w, NULL);
+		}
+	}
+	g_list_free (column_list);
+	gtk_tree_path_free (path);
 }
 
 static void
