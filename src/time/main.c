@@ -39,7 +39,6 @@
 #include "transfer.h"
 #include "e-map/e-map.h"
 #include "tz-map.h"
-#include "xst-spin-button.h"
 
 ETzMap *tzmap;
 
@@ -169,6 +168,7 @@ xst_time_clock_tick (gpointer time_tool)
 
 	xst_dialog_freeze (xst_tool->main_dialog);
 
+#if 0
 	/* Seconds */
 	adjustment = XST_SPIN_BUTTON (tool->seconds)->adjustment;
 	if (adjustment->value != adjustment->upper) {
@@ -191,7 +191,9 @@ xst_time_clock_tick (gpointer time_tool)
 		gtk_adjustment_set_value (adjustment, adjustment->value + 1);
 		return TRUE;
 	}
-
+#endif
+	g_print ("Clock tick ..\n");
+	
 	xst_dialog_thaw (xst_tool->main_dialog);
 	
 	return TRUE;
@@ -314,27 +316,29 @@ xst_time_tool_new (void)
 static void
 xst_time_load_widgets (XstTimeTool *tool)
 {
-	GtkWidget *hbox;
-	GtkObject *adjustment;
 	XstDialog *dialog = XST_TOOL (tool)->main_dialog;
 
-	hbox = xst_dialog_get_widget (dialog, "clock_hbox");
+	tool->seconds = xst_dialog_get_widget (dialog, "second");
+	tool->minutes = xst_dialog_get_widget (dialog, "minute");
+	tool->hours   = xst_dialog_get_widget (dialog, "hour");
 
-	adjustment = gtk_adjustment_new (1, 1, 60, 1, 1, 1);
+#if 0
+	adjustment = gtk_adjustment_new (1, 0, 59, 1, 1, 1);
 	tool->seconds = xst_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
 	gtk_widget_show (tool->seconds);
 	
-	adjustment = gtk_adjustment_new (1, 1, 60, 1, 1, 1);
+	adjustment = gtk_adjustment_new (1, 0, 59, 1, 1, 1);
 	tool->minutes = xst_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
 	gtk_widget_show (tool->minutes);
 
-	adjustment = gtk_adjustment_new (1, 1, 60, 1, 1, 1);	
+	adjustment = gtk_adjustment_new (1, 0, 50, 1, 1, 1);	
 	tool->hours   = xst_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
 	gtk_widget_show (tool->hours);
 
 	gtk_box_pack_start (GTK_BOX (hbox), tool->hours,   FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), tool->minutes, FALSE, FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (hbox), tool->seconds, FALSE, FALSE, 0);
+#endif	
 }
 
 int

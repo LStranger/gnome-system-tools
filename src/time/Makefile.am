@@ -18,8 +18,7 @@ time_admin_SOURCES = \
 	tz.c              tz.h \
 	tz-map.c          tz-map.h \
 	timeserv.c        timeserv.h \
-	transfer.c        transfer.h \
-	xst-spin-button.c xst-spin-button.h
+	transfer.c        transfer.h 
 
 time_admin_LDADD = \
 $(GNOME_LIBDIR) \
