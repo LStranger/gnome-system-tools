@@ -23,6 +23,7 @@
 
 #include "xst-tool.h"
 #include "xst-dialog.h"
+#include "xst-report-line.h"
 #include "xst-report-hook.h"
 
 #include <gnome.h>
@@ -49,10 +50,78 @@ static enum {
 static GtkObjectClass *parent_class;
 static gint xsttool_signals[LAST_SIGNAL] = { 0 };
 
+static gboolean platform_unknown_cb (XstTool *tool, guint id, const gchar *message);
+static gboolean platform_unsupported_cb (XstTool *tool, guint id, const gchar *message);
+static gboolean platform_add_supported_cb (XstTool *tool, guint id, const gchar *message);
+static gboolean platform_set_current_cb (XstTool *tool, guint id, const gchar *message);
+
 static XstReportHookEntry common_report_hooks[] = {
-/*	{ 101, report_end_cb, XST_REPORT_HOOK_LOAD,     FALSE }, */
-	{ 0,   NULL,          -1,                       FALSE }
+	{ 599, platform_unknown_cb,        XST_REPORT_HOOK_LOADSAVE, FALSE },  /* Unable to guess platform */
+	{ 598, platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },  /* Unsupported platform */
+	{ 296, platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE  },  /* Supported: [platform] */
+	{ 295, platform_set_current_cb,    XST_REPORT_HOOK_LOAD,     FALSE },  /* Configuring for [platform] */
+	{ 0,   NULL,                       -1,                       FALSE }
 };
+
+/* --- Report hook callbacks --- */
+
+static gboolean
+platform_unknown_cb (XstTool *tool, guint id, const gchar *message)
+{
+	GtkWidget *d;
+
+	d = gnome_ok_dialog (_("The backend was unable to guess your computer's\n"
+			       "platform. In the future, you will be able to specify\n"
+			       "one at this point, but today we'll just quit."));
+
+	gnome_dialog_run_and_close (GNOME_DIALOG (d));
+	exit (1);
+}
+
+static gboolean
+platform_unsupported_cb (XstTool *tool, guint id, const gchar *message)
+{
+	GtkWidget *d;
+
+	d = gnome_ok_dialog (_("The platform you're running is currently not supported\n"
+			       "by this tool. In the future, you will be able to specify\n"
+			       "another platform at this point, but today we'll just quit."));
+
+	gnome_dialog_run_and_close (GNOME_DIALOG (d));
+	exit (1);
+}
+
+static gboolean
+platform_add_supported_cb (XstTool *tool, guint id, const gchar *message)
+{
+	/* TODO: Build list of supported platforms as these come in. They
+	 * will be needed for the choose-a-platform list if the tool
+	 * breaks (platform_unknown_cb () or platform_unsupported_cb ()). */
+
+	return TRUE;
+}
+
+static gboolean
+platform_set_current_cb (XstTool *tool, guint id, const gchar *message)
+{
+	/* TODO: Store name of currently configured-for platform
+	 * in tool. This can be specified on --set, to ensure that
+	 * --platform is the same as it was on --get. */
+
+	return TRUE;
+}
+
+/* --- XstTool --- */
+
+void
+xst_tool_add_supported_platform (XstTool *tool, const gchar *platform)
+{
+}
+
+void
+xst_tool_clear_supported_platforms (XstTool *tool)
+{
+}
 
 GladeXML *
 xst_tool_load_glade_common (XstTool *tool, const gchar *widget)
@@ -104,24 +173,73 @@ set_arrow (XstTool *tool, GtkArrowType arrow)
 {
 	gtk_notebook_set_page (GTK_NOTEBOOK (tool->report_notebook),
 			       arrow == GTK_ARROW_UP ? 0 : 1);
-			       
 }
 
 static void
-report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
+report_dispatch_lines (XstTool *tool)
 {
-	XstTool *tool;
-	char c;
+	GSList *list;
+	XstReportLine *rline;
 	GtkAdjustment *vadj;
 	char *report_text[] = {
 		NULL,
 		NULL
 	};
 
-	tool = XST_TOOL (data);
-
 	vadj = gtk_scrolled_window_get_vadjustment (
 		GTK_SCROLLED_WINDOW (tool->report_scrolled));
+
+	for (list = tool->report_line_list; list; list = g_slist_next (list))
+	{
+		rline = (XstReportLine *) list->data;
+
+		if (xst_report_line_get_handled (rline))
+			continue;
+
+		if (xst_report_line_get_id (rline) < 100) {
+			/* Progress update */
+
+			gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress),
+						     xst_report_line_get_id (rline) / 100.0);
+		} else {
+			gboolean scroll;
+			
+			/* Report line */
+			
+			gtk_entry_set_text (GTK_ENTRY (tool->report_entry),
+					    xst_report_line_get_message (rline));
+			
+			if (vadj->value >= vadj->upper - vadj->page_size)
+				scroll = TRUE;
+			else
+				scroll = FALSE;
+
+			/* FIXME: Is g_strdup () right? gtk_clist_append () expects
+			 * non-const... */
+
+			report_text [1] = g_strdup (xst_report_line_get_message (rline));
+			gtk_clist_append (GTK_CLIST (tool->report_list), report_text);
+
+			if (scroll)
+				gtk_adjustment_set_value (vadj, vadj->upper - vadj->page_size);
+
+			tool->report_dispatch_pending = TRUE;
+			xst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
+			tool->report_dispatch_pending = FALSE;
+		}
+
+		xst_report_line_set_handled (rline, TRUE);
+	}
+}
+
+static void
+report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
+{
+	XstTool *tool;
+	XstReportLine *rline;
+	char c;
+
+	tool = XST_TOOL (data);
 
 #warning FIXME: make this not suck
 	if (!tool->line) {
@@ -132,44 +250,26 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 
 	/* NOTE: The read() being done here is inefficient, but we're not
 	 * going to handle any large amount of data */
-	
+
 	if (read (fd, &c, 1) > 0) {
 		if (c == '\n') {
-			/* End of line. Take action. */
-			if (tool->line_len < 3) {
-				/* End of headers. We're done. */				
-				gtk_main_quit ();
-			} else {
-				if (tool->line [0] == '0') {
-					/* Progress update */
-					
-					gtk_progress_set_percentage (GTK_PROGRESS(tool->report_progress),
-								     (gfloat) ((tool->line [1] - '0') * 0.1) +
-								     (tool->line [2] - '0') * 0.01);
-				} else {
-					gboolean scroll;
+			/* End of line */
 
-					/* Report line */
-					
-					gtk_entry_set_text (GTK_ENTRY (tool->report_entry), tool->line + 4);
+			if (tool->line_len < 3)
+			{
+				/* End of report */
 
-					if (vadj->value >= vadj->upper - vadj->page_size)
-						scroll = TRUE;
-					else
-						scroll = FALSE;
+				tool->report_finished = TRUE;
+			}
+			else
+			{
+				/* Report line; add to list */
 
-					report_text[1] = tool->line + 4;
-					gtk_clist_append (GTK_CLIST (tool->report_list), report_text);
+				rline = xst_report_line_new_from_string (tool->line);
 
-					if (scroll)
-						gtk_adjustment_set_value (vadj, vadj->upper - vadj->page_size);
-
-					xst_tool_invoke_report_hooks (tool, tool->report_hook_type,
-								      (tool->line [0] - '0') * 100 +
-								      (tool->line [1] - '0') * 10 +
-								      (tool->line [2] - '0'),
-								      tool->line + 4);
-				}
+				if (rline)
+					tool->report_line_list = g_slist_append (tool->report_line_list,
+										 rline);
 			}
 
 			tool->line [0] = '\0';
@@ -183,6 +283,12 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 			tool->line [tool->line_len] = '\0';
 		}
 	}
+
+	if (!tool->report_dispatch_pending)
+		report_dispatch_lines (tool);
+
+	if (tool->report_finished && !tool->report_dispatch_pending)
+		gtk_main_quit ();
 }
 
 static void
@@ -572,10 +678,13 @@ xst_tool_add_report_hooks (XstTool *tool, XstReportHookEntry *report_hook_table)
 }
 
 void
-xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, guint id, const gchar *message)
+xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, XstReportLine *rline)
 {
 	GSList *list;
 	XstReportHook *hook;
+	guint id;
+
+	id = xst_report_line_get_id (rline);
 
 	for (list = tool->report_hook_list; list; list = g_slist_next (list))
 	{
@@ -583,8 +692,8 @@ xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, guint id, c
 
 		if (hook->id == id && (hook->allow_repeat || !hook->invoked) &&
 		    (hook->type == XST_REPORT_HOOK_LOADSAVE || hook->type == type)) {
-			hook->func (tool, id, message);
 			hook->invoked = TRUE;
+			hook->func (tool, id, xst_report_line_get_message (rline));
 		}
 	}
 }

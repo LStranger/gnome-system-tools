@@ -65,9 +65,15 @@ struct _XstTool {
 
 	char *line;
 	int line_len;
-	XstReportHookType report_hook_type;
+	GSList *report_line_list;
+	gboolean report_dispatch_pending;
+	gboolean report_finished;
 
+	XstReportHookType report_hook_type;
 	GSList *report_hook_list;
+
+	gchar *current_platform;      /* Always set from backend report */
+	GSList *supported_platforms;  /* Gets set only if backend breaks */
 };
 
 struct _XstToolClass {
@@ -100,8 +106,10 @@ GladeXML    *xst_tool_load_glade          (XstTool *tool, const gchar *widget);
 XstDialog   *xst_tool_get_dialog          (XstTool *tool);
 
 void         xst_tool_add_report_hooks    (XstTool *tool, XstReportHookEntry *report_hook_table);
-void         xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type,
-					   guint id, const gchar *message);
+void         xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, XstReportLine *rline);
 void         xst_tool_reset_report_hooks  (XstTool *tool);
+
+void         xst_tool_add_supported_platform    (XstTool *tool, const gchar *platform);
+void         xst_tool_clear_supported_platforms (XstTool *tool);
 
 #endif /* XST_TOOL_H */

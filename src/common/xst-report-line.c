@@ -29,6 +29,8 @@ xst_report_line_new (guint id, gchar *message)
 {
 	XstReportLine *xrl;
 
+	g_return_val_if_fail (message != NULL, NULL);
+
 	xrl = g_new0 (XstReportLine, 1);
 	xrl->id = id;
 	xrl->message = g_strdup (message);
@@ -46,7 +48,7 @@ xst_report_line_new_from_string (gchar *string)
 	g_return_val_if_fail (strlen (string) > 2, NULL);
 	g_return_val_if_fail (strchr (string, ' ') != NULL, NULL);
 
-	parts = g_strsplit (string, " ", 2);
+	parts = g_strsplit (string, " ", 1);
 	xrl = xst_report_line_new (atoi (parts [0]), parts [1]);
 	g_strfreev (parts);
 
