@@ -68,6 +68,12 @@
 GtkWidget *user_table;
 GtkWidget *group_table;
 
+/* FIXME:
+ * This is a hack: I don't know how to get current row number (e_table_get_current_row doesn't work)
+ * when e-table is sorted by some other column, not by initial sort. */
+gint user_row;
+gint group_row;
+
 /* ETreeSimple callbacks
  * These are the callbacks that define the behaviour of our custom model.
  */
@@ -329,6 +335,7 @@ select_row (ETable *et, int row)
 
 	if (et == E_TABLE (user_table))
 	{
+		user_row = row;
 		user_actions_set_sensitive (TRUE);
 		label = g_strconcat (_("Settings for user "), txt, NULL);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
@@ -338,6 +345,7 @@ select_row (ETable *et, int row)
 
 	if (et == E_TABLE (group_table))
 	{
+		group_row = row;
 		group_actions_set_sensitive (TRUE);
 		label = g_strconcat ("Settings for group ", txt, NULL);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
@@ -519,10 +527,11 @@ e_table_get_current_user (void)
 	xmlNodePtr root, node;
 
 	etm = E_TABLE (user_table)->model;
-	row = e_table_get_cursor_row (E_TABLE (user_table));
+
+	/* row = e_table_get_cursor_row (E_TABLE (user_table)); */
+	row = user_row;
 
 	root = E_TABLE_SIMPLE (etm)->data;
-
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
                 node = basic_user_find_nth (root, row);
@@ -548,7 +557,8 @@ e_table_del_user (xmlNodePtr node)
 
 	xml_element_destroy (node);
 
-	row = e_table_get_cursor_row (E_TABLE (user_table));
+/*	row = e_table_get_cursor_row (E_TABLE (user_table)); */
+	row = user_row;
 	etm = E_TABLE_MODEL (E_TABLE (user_table)->model);
 
 	e_table_model_row_deleted (etm, row);
@@ -565,7 +575,8 @@ e_table_change_user (xmlNodePtr parent, gchar *field, gchar *val)
 	g_return_if_fail (parent != NULL);
 
 	etm = E_TABLE (user_table)->model;
-	row = e_table_get_cursor_row (E_TABLE (user_table));
+	/* row = e_table_get_cursor_row (E_TABLE (user_table)); */
+	row = user_row;
 
 	node = xml_element_find_first (parent, field);
 	if (!node)
@@ -640,7 +651,8 @@ e_table_get_current_group (void)
 	xmlNodePtr root, node;
 
 	etm = E_TABLE (group_table)->model;
-	row = e_table_get_cursor_row (E_TABLE (group_table));
+	/* row = e_table_get_cursor_row (E_TABLE (group_table)); */
+	row = group_row;
 
 	root = E_TABLE_SIMPLE (etm)->data;
 
@@ -668,8 +680,9 @@ e_table_del_group (xmlNodePtr node)
 
 	xml_element_destroy (node);
 
-	row = e_table_get_cursor_row (E_TABLE (group_table));
+	/* row = e_table_get_cursor_row (E_TABLE (group_table)); */
 	etm = E_TABLE_MODEL (E_TABLE (group_table)->model);
+	row = group_row;
 
 	e_table_model_row_deleted (etm, row);
 	e_table_model_changed (etm);
@@ -686,7 +699,8 @@ e_table_change_group (xmlNodePtr parent, gchar *field, gchar *val)
 	g_return_if_fail (parent != NULL);
 
 	etm = E_TABLE (group_table)->model;
-	row = e_table_get_cursor_row (E_TABLE (group_table));
+	/* row = e_table_get_cursor_row (E_TABLE (group_table)); */
+	row = group_row;
 
 	node = xml_element_find_first (parent, field);
 	if (!node)
