@@ -26,13 +26,13 @@
   <default_height>272</default_height>
   <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
+  <auto_shrink>True</auto_shrink>
 
   <widget>
     <class>GtkVBox</class>
     <name>internetsharing_admin</name>
     <homogeneous>False</homogeneous>
-    <spacing>0</spacing>
+    <spacing>8</spacing>
 
     <widget>
       <class>GtkHBox</class>
@@ -89,57 +89,7 @@
     <widget>
       <class>GtkFrame</class>
       <name>frame14</name>
-      <border_width>3</border_width>
       <label>Internet Sharing</label>
-      <label_xalign>0</label_xalign>
-      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>True</fill>
-      </child>
-
-      <widget>
-	<class>GtkHBox</class>
-	<name>hbox12</name>
-	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
-
-	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>enable_button</name>
-	  <can_focus>True</can_focus>
-	  <label>enable</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>configure_dhcp</name>
-	  <can_focus>True</can_focus>
-	  <label>configure DHCP</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkFrame</class>
-      <name>enable_frame</name>
-      <border_width>3</border_width>
-      <label>Enable :</label>
       <label_xalign>0</label_xalign>
       <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
       <child>
@@ -149,99 +99,32 @@
       </child>
 
       <widget>
-	<class>GtkVBox</class>
-	<name>vbox16</name>
-	<homogeneous>False</homogeneous>
+	<class>GtkHButtonBox</class>
+	<name>hbuttonbox1</name>
+	<border_width>8</border_width>
+	<layout_style>GTK_BUTTONBOX_SPREAD</layout_style>
 	<spacing>0</spacing>
+	<child_min_width>0</child_min_width>
+	<child_min_height>0</child_min_height>
+	<child_ipad_x>0</child_ipad_x>
+	<child_ipad_y>0</child_ipad_y>
 
 	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>ipforwarding_button</name>
+	  <class>GtkButton</class>
+	  <name>configure_button</name>
+	  <can_default>True</can_default>
 	  <can_focus>True</can_focus>
-	  <label>IP Forwarding</label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
+	  <label>   Configure...   </label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	</widget>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>dhcp_hbox</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>dhcp_button</name>
-	    <can_focus>True</can_focus>
-	    <label>DHCP</label>
-	    <active>True</active>
-	    <draw_indicator>True</draw_indicator>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>Placeholder</class>
-	  </widget>
-
-	  <widget>
-	    <class>Placeholder</class>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>firewall_button</name>
+	  <class>GtkButton</class>
+	  <name>disable_button</name>
+	  <can_default>True</can_default>
 	  <can_focus>True</can_focus>
-	  <label>Firewall</label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>webcache_button</name>
-	  <can_focus>True</can_focus>
-	  <label>Web Cache (squid)</label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>junkbuster_button</name>
-	  <can_focus>True</can_focus>
-	  <label>Banner Removal (Junkbuster)</label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
+	  <label>Disable</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	</widget>
       </widget>
     </widget>
@@ -980,6 +863,125 @@ Internet Sharing Tool.</text>
 	    </child>
 	  </widget>
 	</widget>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window1</name>
+  <visible>False</visible>
+  <title>window1</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkFrame</class>
+    <name>enable_frame</name>
+    <border_width>3</border_width>
+    <label>Enable :</label>
+    <label_xalign>0</label_xalign>
+    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox16</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>ipforwarding_button</name>
+	<can_focus>True</can_focus>
+	<label>IP Forwarding</label>
+	<active>True</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>dhcp_hbox</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>dhcp_button</name>
+	  <can_focus>True</can_focus>
+	  <label>DHCP</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>Placeholder</class>
+	</widget>
+
+	<widget>
+	  <class>Placeholder</class>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>firewall_button</name>
+	<can_focus>True</can_focus>
+	<label>Firewall</label>
+	<active>True</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>webcache_button</name>
+	<can_focus>True</can_focus>
+	<label>Web Cache (squid)</label>
+	<active>True</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>junkbuster_button</name>
+	<can_focus>True</can_focus>
+	<label>Banner Removal (Junkbuster)</label>
+	<active>True</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
       </widget>
     </widget>
   </widget>

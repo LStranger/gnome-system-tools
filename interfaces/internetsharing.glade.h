@@ -7,54 +7,49 @@
 gchar *s = N_("Internet Sharing --Advanced Mode");
 gchar *s = N_("The internet sharing tool allows you to share your internet conection with other computers on the network.");
 gchar *s = N_("Internet Sharing");
-gchar *s = N_("Enable");
-gchar *s = N_("Enable :");
-gchar *s = N_("IP Forwarding");
-gchar *s = N_("DHCP");
-gchar *s = N_("Firewall");
-gchar *s = N_("Web Cache (squid)");
-gchar *s = N_("Banner Removal (Junkbuster)");
-gchar *s = N_("window1");
+gchar *s = N_("   Configure...   ");
+gchar *s = N_("Disable");
+gchar *s = N_("Internet Sharing Druid");
 gchar *s = N_("Internet Sharing Tool");
 gchar *s = N_("Welcome to the Internet Sharing Tool \n"
               "\n"
-              "This Druid will help you to configure \n"
-              "your DHCP service.\n"
+              "This druid will help you to configure \n"
+              "and share your internet connection.\n"
               "\n"
               "At least, you must have installed a local\n"
-              "Interface Network.");
+              "Interface network.");
 gchar *s = N_("Create a new Local Interface Network");
-gchar *s = N_("You don't have install local Interface Network\n"
+gchar *s = N_("You don't have installed a local Interface network.\n"
               "Would you like to install it?\n"
               "");
-gchar *s = N_(" Yes, Launch Network Tool. (Recommended)");
-gchar *s = N_(" No, Install  Manually");
+gchar *s = N_(" Yes, Launch network tool. (Recommended)");
+gchar *s = N_(" No, Installed  manually");
 gchar *s = N_("Activate Local Interface Network");
-gchar *s = N_("Do you want to activate your local Interface \n"
-              "Network, right now?\n"
+gchar *s = N_("Local interface network has been detected, but it's not active.\n"
+              "Would you like to activate it?\n"
               "");
 gchar *s = N_(" Yes. (Recommended)");
 gchar *s = N_(" No.");
 gchar *s = N_("Firewall configuration");
-gchar *s = N_("Local Interface Network has been detected\n"
+gchar *s = N_("You have a previous configuration of firewall.\n"
               "Do you want to keep this configuration?\n"
               "");
 gchar *s = N_(" Yes.");
 gchar *s = N_(" No, (Overwrite)");
 gchar *s = N_("Install DHCP Service");
-gchar *s = N_("Do you want to use DHCP service?\n"
+gchar *s = N_("Would you like to install DHCP service ?\n"
               "\n"
               "");
 gchar *s = N_(" Yes.");
 gchar *s = N_(" No.");
 gchar *s = N_("DHCP Service Requirements");
-gchar *s = N_("You don't have the requirements to install DHCP service?\n"
-              "\n"
+gchar *s = N_("You don't have installed the requirements to use \n"
+              " DHCP service?\n"
               "");
 gchar *s = N_(" Don't use it.");
 gchar *s = N_(" Exit.");
 gchar *s = N_("Configure DHCP Service");
-gchar *s = N_("DHCP configuration has been detected \n"
+gchar *s = N_("A previous DHCP configuration has been detected. \n"
               "Do you want to keep this configuration?\n"
               "\r\r");
 gchar *s = N_(" Yes.");
@@ -62,3 +57,12 @@ gchar *s = N_(" No, (Overwrite)");
 gchar *s = N_("Finished");
 gchar *s = N_("Congratulation! you have installed \n"
               "Internet Sharing Tool.");
+gchar *s = N_("Start rage");
+gchar *s = N_("End range");
+gchar *s = N_("window1");
+gchar *s = N_("Enable :");
+gchar *s = N_("IP Forwarding");
+gchar *s = N_("DHCP");
+gchar *s = N_("Firewall");
+gchar *s = N_("Web Cache (squid)");
+gchar *s = N_("Banner Removal (Junkbuster)");
