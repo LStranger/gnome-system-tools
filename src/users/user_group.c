@@ -284,7 +284,21 @@ check_user_comment (xmlNodePtr node, gchar *val)
 gboolean
 check_user_home (xmlNodePtr node, gchar *val)
 {
-	/* TODO: check home. */
+	GtkWindow *win;
+	GnomeDialog *dialog;
+
+	/* I think every user has to have home dir... FIXME, if I'm wrong. */
+
+	if (strlen (val) < 1)
+	{
+		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented
+				(_("Home directory must not be empty."), win));
+
+		gnome_dialog_run (dialog);
+		gtk_widget_grab_focus (tool_widget_get ("user_settings_home"));
+		return FALSE;
+	}
 
 	return TRUE;
 }
@@ -869,22 +883,31 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 
 	buf = get_group_by_data (node->parent, "name", buf, "gid");
 	xml_set_child_content (node, "gid", buf);
-		
-	/* Advanced? */
-	if (!adv)
-		return;
 
-	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")));
-	xml_set_child_content (node, "shell", buf);
-
-	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home")));
+	/* TODO hardcoded default shell and home dir prefix are BAD */
+	/* Home */
+	buf = adv ?
+		gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home"))) :
+		g_strdup_printf ("home/%s", gtk_entry_get_text
+					  (GTK_ENTRY (tool_widget_get ("user_settings_name"))));
+	
 	xml_set_child_content (node, "home", buf);
 
-	id = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool_widget_get
-				("user_settings_uid")));
+	/* Shell */
+	buf = adv ?
+		gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_shell"))) :
+		g_strdup ("/bin/bash");
 
-	xml_set_child_content (node, "uid", g_strdup_printf ("%d", id));
+	xml_set_child_content (node, "shell", buf);
 
+	/* UID */
+	if (adv)
+	{
+		id = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool_widget_get
+													 ("user_settings_uid")));
+		
+		xml_set_child_content (node, "uid", g_strdup_printf ("%d", id));
+	}
 }
 
 static xmlNodePtr

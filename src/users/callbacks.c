@@ -220,7 +220,6 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	}
 }
 
-
 /* Password settings callbacks */
 
 static void

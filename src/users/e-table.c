@@ -29,6 +29,7 @@
 #include <gal/e-table/e-tree-simple.h>
 #include <gal/e-table/e-tree-model.h>
 #include <gal/e-table/e-table-scrolled.h>
+#include <gal/e-table/e-cell-text.h>
 #include <gal/e-paned/e-hpaned.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
