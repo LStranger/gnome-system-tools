@@ -41,6 +41,11 @@
 
 XstTool *tool;
 
+static XstDialogSignal signals[] = {
+	{ "boot_delete", "clicked", on_boot_delete_clicked },
+	{ NULL }
+};
+
 static void set_access_sensitivity (void)
 {
 }
@@ -51,6 +56,8 @@ update_complexity ()
 	XstDialogComplexity complexity;
 
 	complexity = tool->main_dialog->complexity;
+
+	boot_table_update_state ();
 }
 
 static void
@@ -72,9 +79,7 @@ connect_signals ()
 					GTK_SIGNAL_FUNC (update_complexity),
 					NULL);
 
-	
-	/* Why not in xst_dialog ? */
-	glade_xml_signal_autoconnect (tool->main_dialog->gui);
+	xst_dialog_connect_signals (tool->main_dialog, signals);
 }
 
 int
@@ -86,8 +91,7 @@ main (int argc, char *argv[])
 
 	connect_signals ();
 
-	/* Not yet */
-/*	xst_dialog_enable_complexity (tool->main_dialog); */
+	xst_dialog_enable_complexity (tool->main_dialog);
 
 	xst_dialog_thaw (tool->main_dialog);
 	

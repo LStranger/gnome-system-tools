@@ -1,0 +1,11 @@
+2001-02-08  Tambet Ingo  <tambet@ximian.com>
+
+	* main.c (update_complexity): update ETable.
+	(main): Enable complexity.
+	(connect_signals): Connect signals using xst_dialog_connect_signals.
+
+	* e-table.c: Split ETableSpec to spec and state.
+	(boot_value_image): Show ONLY images.
+	(boot_value_dev): New function, show devices.
+	(boot_table_update_state): New function. Change ETable state.
+

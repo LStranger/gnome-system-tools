@@ -31,18 +31,13 @@ enum {
 	COL_TYPE,
 	COL_LABEL,
 	COL_IMAGE,
+	COL_DEV,
 
 	COL_LAST,
 };
 
-typedef struct _BootData BootData;
-
-struct _BootData {
-	int row;
-	xmlNodePtr node;
-};
-
 extern void create_table (xmlNodePtr root);
+extern void boot_table_update_state (void);
 
 xmlNodePtr get_selected_node (void);
 

@@ -43,17 +43,32 @@ const gchar *table_spec = "\
   <ETableColumn model_col=\"0\" _title=\"Default\" expansion=\"1.0\" minimum_width=\"16\" resizable=\"false\" cell=\"checkbox\" compare=\"integer\"/> \
   <ETableColumn model_col=\"1\" _title=\"Type\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
   <ETableColumn model_col=\"2\" _title=\"Label\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
-  <ETableColumn model_col=\"3\" _title=\"Image\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
-  <ETableState> \
-    <column source=\"0\"/> \
-    <column source=\"1\"/> \
-    <column source=\"2\"/> \
-    <column source=\"3\"/> \
-    <grouping> \
-      <leaf column=\"0\" ascending=\"false\"/> \
-    </grouping> \
-  </ETableState> \
+  <ETableColumn model_col=\"3\" _title=\"Image\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"4\" _title=\"Device\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
 </ETableSpecification>";
+
+const gchar *basic_boot_state = "\
+<ETableState> \
+  <column source=\"0\"/> \
+  <column source=\"1\"/> \
+  <column source=\"2\"/> \
+  <grouping> \
+    <leaf column=\"0\" ascending=\"false\"/> \
+  </grouping> \
+</ETableState>";
+
+const gchar *adv_boot_state = "\
+<ETableState> \
+  <column source=\"0\"/> \
+  <column source=\"1\"/> \
+  <column source=\"2\"/> \
+  <column source=\"3\"/> \
+  <column source=\"4\"/> \
+  <grouping> \
+    <leaf column=\"0\" ascending=\"false\"/> \
+  </grouping> \
+</ETableState>";
+
 
 /* Static prototypes */
 void init_array (void);
@@ -61,6 +76,7 @@ void *boot_value_default (xmlNodePtr node);
 void *boot_value_label (xmlNodePtr node);
 void *boot_value_type (xmlNodePtr node);
 void *boot_value_image (xmlNodePtr node);
+void *boot_value_dev (xmlNodePtr node);
 
 static int
 boot_col_count (ETableModel *etc, void *data)
@@ -94,6 +110,9 @@ boot_value_at (ETableModel *etc, int col, int row, void *data)
 		break;
 	case COL_IMAGE:
 		return boot_value_image (node);
+		break;
+	case COL_DEV:
+		return boot_value_dev (node);
 		break;
 	default:
 		return NULL;
@@ -202,7 +221,7 @@ create_table (xmlNodePtr root)
 						   boot_value_to_string,
 						   NULL);
 
-	boot_table = e_table_scrolled_new (model, extras, table_spec, NULL);
+	boot_table = e_table_scrolled_new (model, extras, table_spec, basic_boot_state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", boot_cursor_change, NULL);
@@ -292,21 +311,17 @@ boot_value_type (xmlNodePtr node)
 void *
 boot_value_image (xmlNodePtr node)
 {
-	xmlNodePtr n;
-	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	n = xml_element_find_first (node, "image");
+	return xml_get_child_content (node, "image");
+}
 
-	if (n)
-		return xml_element_get_content (n);
+void *
+boot_value_dev (xmlNodePtr node)
+{
+	g_return_val_if_fail (node != NULL, NULL);
 
-	n = xml_element_find_first (node, "other");
-
-	if (n)
-		return xml_element_get_content (n);
-
-	return NULL;
+	return xml_get_child_content (node, "other");
 }
 
 xmlNodePtr
@@ -321,4 +336,20 @@ get_selected_node (void)
 		return g_array_index (boot_array, xmlNodePtr, row);;
 
 	return NULL;
+}
+
+extern void
+boot_table_update_state (void)
+{
+	ETable *table;
+	XstDialogComplexity complexity;
+
+	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
+	complexity = tool->main_dialog->complexity;
+
+	if (complexity == XST_DIALOG_BASIC)
+		e_table_set_state (table, basic_boot_state);
+
+	else
+		e_table_set_state (table, adv_boot_state);
 }
