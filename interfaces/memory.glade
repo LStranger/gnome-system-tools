@@ -12,13 +12,12 @@
   <gettext_support>True</gettext_support>
   <output_main_file>False</output_main_file>
   <output_translatable_strings>True</output_translatable_strings>
-  <translatable_strings_file>memory.glade.h</translatable_strings_file>
+  <translatable_strings_file>memory-admin.glade.h</translatable_strings_file>
 </project>
 
 <widget>
   <class>GnomeApp</class>
   <name>memory-admin</name>
-  <visible>False</visible>
   <title>Memory administration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -161,12 +160,12 @@
 	  <name>swap_areas_list</name>
 	  <can_focus>True</can_focus>
 	  <signal>
-	    <name>select-row</name>
+	    <name>select_row</name>
 	    <handler>select_row_cb</handler>
-	    <last_modification_time>Thu, 13 Jul 2000 19:42:38 GMT</last_modification_time>
+	    <last_modification_time>Wed, 30 Aug 2000 11:15:46 GMT</last_modification_time>
 	  </signal>
-	  <columns>3</columns>
-	  <column_widths>37,168,59</column_widths>
+	  <columns>4</columns>
+	  <column_widths>43,161,37,44</column_widths>
 	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 	  <show_titles>True</show_titles>
 	  <shadow_type>GTK_SHADOW_IN</shadow_type>
@@ -179,8 +178,8 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <child_name>CList:title</child_name>
-	    <name>label6</name>
-	    <label>Enable</label>
+	    <name>label17</name>
+	    <label>Enabled</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
@@ -192,7 +191,7 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <child_name>CList:title</child_name>
-	    <name>label7</name>
+	    <name>label18</name>
 	    <label>Device</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -205,8 +204,21 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <child_name>CList:title</child_name>
-	    <name>label8</name>
+	    <name>label19</name>
 	    <label>Priority</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label20</name>
+	    <label>Size</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
@@ -565,7 +577,6 @@
       <widget>
 	<class>GtkSpinButton</class>
 	<name>size_widget</name>
-	<sensitive>False</sensitive>
 	<can_focus>True</can_focus>
 	<climb_rate>1</climb_rate>
 	<digits>0</digits>
@@ -598,7 +609,6 @@
       <widget>
 	<class>GtkOptionMenu</class>
 	<name>type_widget</name>
-	<sensitive>False</sensitive>
 	<can_focus>True</can_focus>
 	<items>Swap Partition
 Swap File
