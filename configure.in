@@ -1,30 +1,29 @@
-dnl Process this file with autoconf to produce a configure script.
+AC_INIT(ximian-setup-tools, 0.99.0, http://bugzilla.gnome.org/enter_bug.cgi?product=Ximian%20Setup%20Tools)
 
-AC_INIT(configure.in)
-
-AM_INIT_AUTOMAKE(ximian-setup-tools, 0.12.0)
 AM_CONFIG_HEADER(config.h)
+AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
-dnl Pick up the Gnome macros.
-AM_ACLOCAL_INCLUDE(macros)
+AM_MAINTAINER_MODE
 
-GNOME_INIT
+GNOME_COMMON_INIT
+GNOME_PLATFORM_GNOME_2(yes, force)
+
+dnl Checking the above
+AC_CONFIG_SRCDIR(src/common/xst-tool.c)
+
+AM_PROG_LIBTOOL
+
 AC_ISC_POSIX
 AC_PROG_CC
 AM_PROG_CC_STDC
-AM_PROG_LIBTOOL
 AC_HEADER_STDC
-AM_PROG_XML_I18N_TOOLS
-
-GNOME_COMPILE_WARNINGS
-GNOME_X_CHECKS
-GNOME_XML_CHECK
-AM_PATH_GDK_PIXBUF
-AM_PATH_LIBGLADE(,,"gnome")
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
 
 dnl =====================================================
 dnl Cracklib checking
 dnl =====================================================
+
 AC_CHECK_LIB(crack, FascistCheck, ,[
   AC_MSG_WARN()
   AC_MSG_WARN(---------- Building without cracklib is not recommended. ----------)
@@ -56,144 +55,23 @@ AC_SUBST(XST_CRACK_LIB_LOCATION)
 XST_CRACK_LIB_CFLAGS="-DXST_CRACK_LIB_DICT_PATH=\"\\\"\$(XST_CRACK_LIB_LOCATION)\\\"\""
 AC_SUBST(XST_CRACK_LIB_CFLAGS)
 
-
-
 dnl =====================================================
 dnl END: Cracklib checking
 dnl =====================================================
 
 dnl =====================================================
-dnl GdkPixbuf checking
+dnl Check for Module versions
 dnl =====================================================
 
-AC_MSG_CHECKING(for Gdkpixbuf libraries)
-if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
-    AC_MSG_RESULT(found)
-else
-    AC_MSG_ERROR(Did not find gdkpixbuf installed)
-fi
+PKG_CHECK_MODULES(XST_DEPENDS,[
+			   libgnomeui-2.0 >= 1.109.0
+			   libglade-2.0 >= 1.99.5
+			   gal-2.0 >= 0.0.0
+			   libxml-2.0 >= 2.4.12
+			   ])
 
 dnl =====================================================
-dnl END: GdkPixbuf checking
-dnl =====================================================
-
-dnl =====================================================
-dnl Libglade check
-dnl =====================================================
-
-AC_MSG_CHECKING(for libglade libraries)
-if gnome-config --libs libglade > /dev/null 2>&1; then
-    AC_MSG_RESULT(found)
-else
-    AC_MSG_ERROR(Did not find libglade installed)
-fi
-
-dnl =====================================================
-dnl END: Libglade check
-dnl =====================================================
-
-dnl =====================================================
-dnl GAL checking
-dnl =====================================================
-
-AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.11.99.4)
-if gnome-config --libs gal > /dev/null 2>&1; then
-	vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
-		 awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-	if test "$vers" -ge 119904; then
-		AC_MSG_RESULT(found)
-	 else
-		AC_MSG_ERROR(You need at least GNOME Application libs 0.11.99.4 for this version of ximian-setup-tools)
-	fi
-else
-	AC_MSG_ERROR(Did not find GnomeAppLib (GAL) installed)
-fi
-dnl =====================================================
-dnl END: GAL checking
-dnl =====================================================
-
-dnl =====================================================
-dnl GnomePrint checking
-dnl =====================================================
-
-AC_MSG_CHECKING(for GnomePrint libraries >= 0.34)
-if gnome-config --libs print > /dev/null 2>&1; then
-     verstxt=`gnome-config --modversion print`
-	vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" -e 's/cvs$//' -e 's/pre$//' | \
-		 awk 'BEGIN { FS = "."; } { print $1 * 1000+ $2;}'`
-     if test "$vers" -ge 34; then
-		AC_MSG_RESULT(found)
-	 else
-		AC_MSG_ERROR(You need at least gnome print 0.34 for this version of ximian-setup-tools)
-	fi
-else
-	AC_MSG_ERROR(Did not find gnome-print installed)
-fi
-
-dnl =====================================================
-dnl END: GnomePrint checking
-dnl =====================================================
-
-dnl =====================================================
-dnl Ximian archiver checking
-dnl =====================================================
-
-try_archiver=false
-have_archiver=false
-
-AC_ARG_WITH(archiver,
-	[--{with,without}-archiver    Compile with archiver support or without it],
-	if test x$withval = xno; then
-		try_archiver=false
-	fi
-	if test x$withval = xyes; then
-		try_archiver=true
-	fi
-)
-
-ARCHIVER_CFLAGS=""
-ARCHIVER_LIBS=""
-if $try_archiver; then
-     AC_MSG_CHECKING(for config_archiver >= 1.5.11)   
-	if gnome-config --libs config_archiver > /dev/null 2>&1; then
-	     archiver_vers=`gnome-config --modversion config_archiver | sed -e "s/config-archiver-//" -e 's/cvs$//' -e 's/pre$//' | \
-				     awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-		archiver_vers_string=`gnome-config --modversion config_archiver | sed -e "s/config-archiver-//"`
-		if test "$archiver_vers" -ge 1051100; then
-		     AC_MSG_RESULT([found $archiver_vers_string])
-		else
-		     AC_MSG_ERROR(You need at least Control Center 1.5.11 for this version of ximian-setup-tools (CVS module gnome-control-center) if you want to build xst with archiver support) 
-          fi
-		
-		dnl ======================================================
-		dnl Bonobo Checking (only when building with the archiver)
-		dnl ======================================================
-		AC_MSG_CHECKING(for bonobo)   
-		if gnome-config --libs bonobo > /dev/null 2>&1; then
-		     AC_MSG_RESULT([found])
-		else
-		     AC_MSG_ERROR(You need Bonobo for this version of ximian-setup-tools (CVS module gnome-control-center) if you want to build xst with archiver support) 
-		fi
-		
-	     have_archiver=true
-		AC_DEFINE(XST_HAVE_ARCHIVER)
-	     ARCHIVER_CFLAGS="`gnome-config --cflags config_archiver bonobo`"
-	     ARCHIVER_LIBS="`gnome-config --libs config_archiver bonobo`"
-	else
-		have_archiver=false
-		AC_MSG_ERROR(You need at least Control Center 1.5.11 for this version of ximian-setup-tools (CVS module gnome-control-center))
-	fi
-fi
-AM_CONDITIONAL(XST_HAVE_ARCHIVER, $have_archiver);
-AC_SUBST(ARCHIVER_CFLAGS)
-AC_SUBST(ARCHIVER_LIBS)
-
-
-
-
-
-dnl =====================================================
-dnl END: Ximian Archiver
+dnl END: Check for Module versions
 dnl =====================================================
 
 dnl ========================================================
@@ -201,21 +79,22 @@ dnl Transtlations
 dnl ========================================================
 
 ALL_LINGUAS="az ca da de el es fr gl hu it ja ko nn no pl pt_BR ru sk sv tr uk wa zh_TW"
-AM_GNOME_GETTEXT
+dnl GETTEXT_PACKAGE=foo	  
+dnl AC_SUBST(GETTEXT_PACKAGE)
+dnl AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+AM_GLIB_GNU_GETTEXT
 
-if test "x${DATADIRNAME}" = "x"; then
-  DATADIRNAME=share
-fi
-
-dnl Set PACKAGE_LOCALE_DIR in config.h.
-if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale")
-else
-  AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale")
-fi
+# AM_GNOME_GETTEXT above substs $DATADIRNAME
+# this is the directory where the *.{mo,gmo} files are installed
+gnomelocaledir='${prefix}/${DATADIRNAME}/locale'
+AC_SUBST(gnomelocaledir)
 
 dnl ========================================================
 dnl END : Translations
+dnl ========================================================
+
+dnl ========================================================
+dnl Set SCRIPTS_DIR & PIXMAPS_DIR 
 dnl ========================================================
 
 if test "x${prefix}" = "xNONE"; then
@@ -246,6 +125,11 @@ else
   AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${prefix}/${DATADIRNAME}/control-center/capplets/System")
 fi
 
+AC_SUBST(scriptsdir)
+AC_SUBST(pixmapsdir)
+AC_SUBST(interfacesdir)
+AC_SUBST(etspecsdir)
+
 dnl ==============================================================
 dnl END: Set SCRIPTS_DIR & PIXMAPS_DIR 
 dnl ==============================================================
@@ -254,11 +138,8 @@ dnl =====================================================
 dnl XST_LIBS & XST_CFLAGS 
 dnl =====================================================
 
-XST_LIBS="`gnome-config --libs gnome print gal gdk_pixbuf gnomecanvaspixbuf libglade xml`"
-XST_CFLAGS="`gnome-config --cflags gnome print gal gdk_pixbuf gnomecanvaspixbuf libglade xml`"
-
-XST_LIBS="$XST_LIBS $ARCHIVER_LIBS"
-XST_CFLAGS="$XST_CFLAGS $ARCHIVER_CFLAGS"
+XST_LIBS="$XST_DEPENDS_LIBS"
+XST_CFLAGS="$XST_DEPENDS_CFLAGS $XST_CRACK_LIB_CFLAGS"
 
 case $host in
 *-*-freebsd* )
@@ -268,6 +149,7 @@ esac;
 
 XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/src/common/libsetuptool.a"
 XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
+
 XST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
 XST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(etspecs)"
 XST_TOOL_DEPENDENCIES="\$(top_builddir)/src/common/libsetuptool.a"
@@ -284,11 +166,6 @@ dnl ==================================
 dnl END: XST_LIBS & XST_FLAGS
 dnl ==================================
 
-AC_SUBST(scriptsdir)
-AC_SUBST(pixmapsdir)
-AC_SUBST(interfacesdir)
-AC_SUBST(etspecsdir)
-
 
 dnl ===========================
 dnl Configure the backends
@@ -299,7 +176,6 @@ AC_CONFIG_SUBDIRS(backend)
 AC_OUTPUT([
 Makefile
 ximian-setup-tools.spec
-macros/Makefile
 intl/Makefile
 interfaces/Makefile
 pixmaps/Makefile
@@ -338,3 +214,5 @@ Configuration (XST):
 echo "	The scripts are expected at : ${scriptsdir}
 	Compiler:		${CC} 
 "
+
+cat message-of-doom

@@ -1,3 +1,7 @@
+#undef PACKAGE
+#undef GETTEXT_PACKAGE
+#undef VERSION
+
 #undef ENABLE_NLS
 #undef HAVE_CATGETS
 #undef HAVE_GETTEXT
@@ -14,4 +18,5 @@
 #undef HAVE_CRYPT_H
 #undef FRONTEND_DIR
 #undef DESKTOP_DATA_DIR
-#undef XST_HAVE_ARCHIVER
+
+@BOTTOM@
