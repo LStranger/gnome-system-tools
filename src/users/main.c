@@ -34,16 +34,24 @@
 #include "transfer.h"
 #include "callbacks.h"
 
-
-void delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata);
-
-
-void
-delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
+void 
+do_quit (void)
 {
-	gtk_main_quit ();
+	/* TODO: Check for changes and optionally ask for confirmation */
+	 gtk_main_quit ();
 }
 
+void 
+on_users_admin_delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
+{
+	 do_quit ();
+}
+
+void 
+on_close_clicked(GtkButton *button, gpointer data)
+{
+	do_quit();
+}
 
 int
 main (int argc, char *argv[])
