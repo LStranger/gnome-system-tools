@@ -175,7 +175,6 @@ user_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, v
 	xmlNodePtr node;
 	gchar *field;
 
-	/* TODO: check, if new value is valid. */
 	g_return_if_fail (tool_get_access ());
 
 	node = e_tree_model_node_get_data (etm, path);
@@ -185,18 +184,33 @@ user_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, v
 	switch (col)
 	{
 		case 0:
+			if (!check_user_login (node, (gpointer)val))
+				return;
+
 			field = g_strdup ("login");
 			break;
 		case 1:
+			if (!check_user_uid (node, (gpointer)val))
+				return;
+
 			field = g_strdup ("uid");
 			break;
 		case 2:
+			if (!check_user_home (node, (gpointer)val))
+				return;
+
 			field = g_strdup ("home");
 			break;
 		case 3:
+			if (!check_user_shell (node, (gpointer)val))
+				return;
+
 			field = g_strdup ("shell");
 			break;
 		case 4:
+			if (!check_user_comment (node, (gpointer)val))
+				return;
+
 			field = g_strdup ("comment");
 			break;
 		default:
@@ -216,7 +230,6 @@ group_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, 
 	xmlNodePtr node;
 	gchar *field;
 
-	/* TODO: check, if new value is valid. */
 	g_return_if_fail (tool_get_access ());
 
 	node = e_tree_model_node_get_data (etm, path);
@@ -226,9 +239,15 @@ group_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, 
 	switch (col)
 	{
 		case 0:
+			if (!check_group_name (node, (gpointer)val))
+				return;
+
 			field = g_strdup ("name");
 			break;
 		case 1:
+			if (!check_group_gid (node, (gpointer)val))
+				return;
+
 			field = g_strdup ("gid");
 			break;
 		default:

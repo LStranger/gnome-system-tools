@@ -36,11 +36,6 @@ login_defs logindefs;
 
 /* Static prototypes */
 
-static gboolean check_login (xmlNodePtr node);
-static gboolean check_comment (void);
-static gint check_user_group (xmlNodePtr node);
-static gboolean check_user_advanced (xmlNodePtr node);
-static gboolean check_group_name (xmlNodePtr node);
 static void adv_user_new (xmlNodePtr node);
 static xmlNodePtr user_add_blank_xml (xmlNodePtr parent);
 static void user_update_xml (xmlNodePtr node, gboolean adv);
@@ -217,6 +212,193 @@ check_node_complexity (xmlNodePtr node)
 		return FALSE;
 }
 
+gboolean
+check_user_login (xmlNodePtr node, gchar *login)
+{
+	gchar *buf = NULL;
+
+	g_return_val_if_fail (node != NULL, FALSE);
+	g_return_val_if_fail (login != NULL, FALSE);
+
+	/* If !empty. */
+	if (strlen (login) < 1)
+		buf = g_strdup (_("The username is empty."));
+
+	/* if valid. */
+	else if (!is_valid_name (login))
+		buf = g_strdup (_("Please set a valid username, using only lower-case letters."));
+
+	/* if !exsist. */
+	else if (node_exsists (node, "login", login))
+		buf = g_strdup (_("Username already exsists."));
+
+	/* If anything is wrong. */
+	if (buf)
+	{
+		GtkWindow *win;
+		GnomeDialog *dialog;
+
+		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, win));
+		gnome_dialog_run (dialog);
+		g_free (buf);
+		gtk_widget_grab_focus (tool_widget_get ("user_settings_name"));
+
+		return FALSE;
+	}
+
+	else
+		return TRUE;
+}
+
+gboolean
+check_user_uid (xmlNodePtr node, gchar *val)
+{
+	gboolean retval = TRUE;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+
+	/* Check if uid is available */
+
+	if (node_exsists (node, "uid", val))
+	{
+		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented
+				(_("Such user id already exsists."), win));
+
+		gnome_dialog_run (dialog);
+		gtk_widget_grab_focus (tool_widget_get ("user_settings_uid"));
+		retval = FALSE;
+	}
+
+	return retval;
+}
+
+gboolean
+check_user_comment (xmlNodePtr node, gchar *val)
+{
+	/* What could be wrong with comment? */
+	return TRUE;
+}
+
+gboolean
+check_user_home (xmlNodePtr node, gchar *val)
+{
+	/* TODO: check home. */
+
+	return TRUE;
+}
+
+gboolean
+check_user_shell (xmlNodePtr node, gchar *val)
+{
+	/* TODO: check shell. */
+
+	return TRUE;
+}
+
+gint
+check_user_group (xmlNodePtr node)
+{
+	GtkCombo *combo;
+	gchar *buf;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+	xmlNodePtr group_node, db_node;
+
+	g_return_val_if_fail (node != NULL, -1);
+
+	db_node = get_db_node (node);
+	if (!db_node)
+		return -1;
+
+	combo = GTK_COMBO (tool_widget_get ("user_settings_group"));
+	buf = gtk_editable_get_chars (GTK_EDITABLE (combo->entry), 0, -1);
+	
+	group_node = get_corresp_field (db_node, NULL, NULL);
+
+	/* We have to give childs to node_exsists, cause it gets parent inside */
+	if (node_exsists (group_node->childs, "name", buf))
+		return 0;
+
+	if (!is_valid_name (buf))
+	{
+		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented(_(
+				"Please set a valid main group name, with only lower-case letters,"
+				"\nor select one from pull-down menu."), win));
+
+		gnome_dialog_run (dialog);
+		gtk_widget_grab_focus (GTK_WIDGET (combo));
+
+		return -1;
+	}
+
+	/* Group not found, but name is valid. */
+	return 1;
+}
+
+gboolean
+check_group_name (xmlNodePtr node, gchar *name)
+{
+	gchar *buf = NULL;
+
+	g_return_val_if_fail (node != NULL, FALSE);
+	g_return_val_if_fail (name != NULL, FALSE);
+
+	/* If !empty. */
+	if (strlen (name) < 1)
+		buf = g_strdup (_("Group name is empty."));
+
+	/* if valid. */
+	else if (!is_valid_name (name))
+		buf = g_strdup (_("Please set a valid group name, using only lower-case letters."));
+
+	/* if !exsist. */
+	else if (node_exsists (node, "name", name))
+		buf = g_strdup (_("Group already exsists."));
+
+	/* If anything is wrong. */
+	if (buf)
+	{
+		GtkWindow *win;
+		GnomeDialog *dialog;
+
+		win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, win));
+		gnome_dialog_run (dialog);
+		g_free (buf);
+		gtk_widget_grab_focus (tool_widget_get ("group_settings_name"));
+
+		return FALSE;
+	}
+
+	else
+		return TRUE;
+}
+
+gboolean
+check_group_gid (xmlNodePtr node, gchar *val)
+{
+	gboolean retval = TRUE;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+
+	/* Check if gid is available */
+
+	if (node_exsists (node, "gid", val))
+	{
+		win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented
+				(_("Such group id already exsists."), win));
+
+		gnome_dialog_run (dialog);
+		retval = FALSE;
+	}
+
+	return retval;
+}
+
 /* Extern functions */
 
 /* User related */
@@ -338,6 +520,7 @@ user_update (xmlNodePtr node)
 	gboolean ok = TRUE;
 	gboolean adv;
 	gint group;
+	gchar *buf;
 	xmlNodePtr user_node;
 	gboolean new = FALSE;   /* FALSE == update, TRUE == new */
 
@@ -349,10 +532,12 @@ user_update (xmlNodePtr node)
 		new = TRUE;
 	}
 
-	if (!check_login (node))
+	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_name")));
+	if (!check_user_login (node, buf))
 		ok = FALSE;
 
-	if (!check_comment ())
+	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_comment")));
+	if (!check_user_comment (node, buf))
 		ok = FALSE;
 
 	group = check_user_group (node);
@@ -374,8 +559,24 @@ user_update (xmlNodePtr node)
 	}
 
 	if (adv)
-		if (!check_user_advanced (node))
+	{
+		GtkSpinButton *spin = GTK_SPIN_BUTTON (tool_widget_get ("user_settings_uid"));
+		gint i = gtk_spin_button_get_value_as_int (spin);
+
+		buf = g_strdup_printf ("%d", i);
+		if (!check_user_uid (node, buf))
 			ok = FALSE;
+
+		g_free (buf);
+
+		buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home")));
+		if (!check_user_home (node, buf))
+			ok = FALSE;
+
+		buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")));
+		if (!check_user_shell (node, buf))
+			ok = FALSE;
+	}
 
 	if (ok)
 	{
@@ -519,18 +720,20 @@ group_update (xmlNodePtr node)
 {
 	gboolean ok = TRUE;
 	gboolean adv;
+	gchar *buf;
 	xmlNodePtr group_node;
 	gboolean new = FALSE;   /* FALSE == update, TRUE == new */
 
 	adv = (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED);
-	
+
 	if (strcmp (node->name, "group"))
 	{
 		/* Must be <groupdb> or friends, action is new user. */
 		new = TRUE;
 	}
 
-	if (!check_group_name (node))
+	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("group_settings_name")));
+	if (!check_group_name (node, buf))
 		ok = FALSE;
 
 	if (ok)
@@ -594,169 +797,6 @@ check_group_delete (xmlNodePtr node)
 
 /* Static functions */
 
-static gboolean
-check_login (xmlNodePtr node)
-{
-	GtkEntry *entry;
-	gchar *login;
-	gchar *buf = NULL;
-
-	/* Get data */
-	entry = GTK_ENTRY (tool_widget_get ("user_settings_name"));
-	login = gtk_entry_get_text (entry);
-
-	/* If !empty. */
-	if (strlen (login) < 1)
-		buf = g_strdup (_("The username is empty."));
-
-	/* if valid. */
-	else if (!is_valid_name (login))
-		buf = g_strdup (_("Please set a valid username, using only lower-case letters."));
-
-	/* if !exsist. */
-	else if (node_exsists (node, "login", login))
-		buf = g_strdup (_("Username already exsists."));
-
-	/* If anything is wrong. */
-	if (buf)
-	{
-		GtkWindow *win;
-		GnomeDialog *dialog;
-
-		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, win));
-		gnome_dialog_run (dialog);
-		g_free (buf);
-		gtk_widget_grab_focus (GTK_WIDGET (entry));
-
-		return FALSE;
-	}
-
-	else
-		return TRUE;
-}
-
-static gboolean
-check_comment (void)
-{
-	/* What could be wrong with comment? */
-	return TRUE;
-}
-
-static gint
-check_user_group (xmlNodePtr node)
-{
-	GtkCombo *combo;
-	gchar *buf;
-	GtkWindow *win;
-	GnomeDialog *dialog;
-	xmlNodePtr group_node, db_node;
-
-	g_return_val_if_fail (node != NULL, -1);
-
-	db_node = get_db_node (node);
-	if (!db_node)
-		return -1;
-
-	combo = GTK_COMBO (tool_widget_get ("user_settings_group"));
-	buf = gtk_editable_get_chars (GTK_EDITABLE (combo->entry), 0, -1);
-	
-	group_node = get_corresp_field (db_node, NULL, NULL);
-
-	/* We have to give childs to node_exsists, cause it gets parent inside */
-	if (node_exsists (group_node->childs, "name", buf))
-		return 0;
-
-	if (!is_valid_name (buf))
-	{
-		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented(_(
-				"Please set a valid main group name, with only lower-case letters,"
-				"\nor select one from pull-down menu."), win));
-
-		gnome_dialog_run (dialog);
-		gtk_widget_grab_focus (GTK_WIDGET (combo));
-
-		return -1;
-	}
-
-	/* Group not found, but name is valid. */
-	return 1;
-}
-
-static gboolean
-check_user_advanced (xmlNodePtr node)
-{
-	gint id;
-	gchar *val;
-	gboolean retval = TRUE;
-	GtkWindow *win;
-	GtkSpinButton *spin;
-	GnomeDialog *dialog;
-
-	/* Check if uid is available */
-
-	spin = GTK_SPIN_BUTTON (tool_widget_get ("user_settings_uid"));
-	id = gtk_spin_button_get_value_as_int (spin);
-
-	val = g_strdup_printf ("%d", id);
-
-	if (node_exsists (node, "uid", val))
-	{
-		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented
-				(_("Such user id already exsists."), win));
-
-		gnome_dialog_run (dialog);
-		gtk_widget_grab_focus (GTK_WIDGET (spin));
-		retval = FALSE;
-	}
-
-	g_free (val);
-	return retval;
-}
-
-static gboolean
-check_group_name (xmlNodePtr node)
-{
-	GtkEntry *entry;
-	gchar *name;
-	gchar *buf = NULL;
-
-	/* Get data */
-	entry = GTK_ENTRY (tool_widget_get ("group_settings_name"));
-	name = gtk_entry_get_text (entry);
-
-	/* If !empty. */
-	if (strlen (name) < 1)
-		buf = g_strdup (_("Group name is empty."));
-
-	/* if valid. */
-	else if (!is_valid_name (name))
-		buf = g_strdup (_("Please set a valid group name, using only lower-case letters."));
-
-	/* if !exsist. */
-	else if (node_exsists (node, "name", name))
-		buf = g_strdup (_("Group already exsists."));
-
-	/* If anything is wrong. */
-	if (buf)
-	{
-		GtkWindow *win;
-		GnomeDialog *dialog;
-
-		win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, win));
-		gnome_dialog_run (dialog);
-		g_free (buf);
-		gtk_widget_grab_focus (GTK_WIDGET (entry));
-
-		return FALSE;
-	}
-
-	else
-		return TRUE;
-}
 
 static void
 adv_user_new (xmlNodePtr node)
@@ -945,7 +985,7 @@ node_exsists (xmlNodePtr node, gchar *name, gchar *val)
 {
 	xmlNodePtr n0;
 	gchar *buf;
-	xmlNodePtr parent = node->parent;
+	xmlNodePtr parent = get_db_node (node);
 
 	for (n0 = parent->childs; n0; n0 = n0->next)
 	{
@@ -1103,7 +1143,7 @@ group_fill_members_list (xmlNodePtr node)
 	entry[1] = NULL;
 
 	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
-	gtk_clist_set_auto_sort (clist, TRUE); /* TODO: Sort it after everything is inserted. */
+	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_freeze (clist);
 
 	tmp_list = get_group_users (node);
@@ -1242,19 +1282,27 @@ is_valid_name (gchar *str)
 static gchar *
 find_new_id (xmlNodePtr parent)
 {
-	/* TODO: Check if it's in valid range */
 	gchar *field, *buf;
 	gint id;
+	gint min, max;
 	gint ret = 0;
 	xmlNodePtr n0;
 
 	g_return_val_if_fail (parent != NULL, NULL);
 
 	if (!strcmp (parent->name, "userdb"))
+	{
 		field = g_strdup ("uid");
+		min = logindefs.new_user_min_id;
+		max = logindefs.new_user_max_id;
+	}
 
 	else if (!strcmp (parent->name, "groupdb"))
+	{
 		field = g_strdup ("gid");
+		min = logindefs.new_group_min_id;
+		max = logindefs.new_group_max_id;
+	}
 
 	else
 		return NULL;
@@ -1273,8 +1321,12 @@ find_new_id (xmlNodePtr parent)
 			ret = id;
 	}
 	g_free (field);
+	ret++;
 
-	return g_strdup_printf ("%d", ++ret);
+	if (ret >= min && ret <= max)
+		return g_strdup_printf ("%d", ret);
+
+	return NULL;
 }
 
 static gchar *

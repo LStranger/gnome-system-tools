@@ -53,6 +53,14 @@ xmlNodePtr get_nis_group_root_node (void);
 gchar *my_xml_element_get_content (xmlNodePtr node);
 void adv_user_settings (xmlNodePtr node, gboolean show);
 gboolean check_node_complexity (xmlNodePtr node);
+gboolean check_user_login (xmlNodePtr node, gchar *login);
+gboolean check_user_uid (xmlNodePtr node, gchar *val);
+gboolean check_user_comment (xmlNodePtr, gchar *val);
+gint check_user_group (xmlNodePtr node);
+gboolean check_user_home (xmlNodePtr node, gchar *val);
+gboolean check_user_shell (xmlNodePtr node, gchar *val);
+gboolean check_group_name (xmlNodePtr node, gchar *name);
+gboolean check_group_gid (xmlNodePtr node, gchar *val);
 
 /* Extern functions */
 /* User related */

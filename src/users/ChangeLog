@@ -1,3 +1,12 @@
+2001-01-22  Tambet Ingo  <tambet@ximian.com>
+
+	* e-table.c (group_set_value_at): now checks whether name and gid are valid.
+	(user_set_value_at): checks all cols before settings.
+
+	* user_group.c (check_group_gid): new function.
+	(check_user_shell): new blank function.
+	(check_user_home): new blank function.
+
 2001-01-19  Tambet Ingo  <tambet@ximian.com>
 
 	* callbacks.c: Added empty functions (on_network_delete_clicked),
