@@ -70,7 +70,7 @@ static int root;			/* if we are root, no password is
 
 /* This is the signal callback that answers to the forked su command */
 static void
-on_terminal_child_exited (GtkWidget *term, gint pid, gint status, gpointer data)
+on_terminal_child_exited (GtkWidget *reaper, gint pid, gint status, gpointer data)
 {
 	GtkWidget *error_dialog;
 	
@@ -85,6 +85,29 @@ on_terminal_child_exited (GtkWidget *term, gint pid, gint status, gpointer data)
 	}
 
 	_exit (0);
+}
+
+/* finds out the path in which the tool is */
+static gchar*
+get_tool_path (gchar *argv0)
+{
+	gchar *program_name = g_path_get_basename (argv0);
+
+	if (strcmp (argv0, program_name) == 0) {
+		/* we are calling the tool without any path, because root user may not have
+		 * the tool's path in his $PATH, we find out the absolute path
+		 */
+		g_free (program_name);
+
+		return g_find_program_in_path (argv0);
+	} else {
+		/* if argv[0] is not equal to the tool basename, then it's already
+		 * an absolute of relative path, and it doesn't need the full path to run
+		 */
+		g_free (program_name);
+
+		return argv0;
+	}
 }
 
 /* runs a term with su in it */
@@ -103,7 +126,7 @@ xst_su_run_term (gint argc, gchar *argv[], gchar *user)
 
 	g_assert (argv && argv[0]);
 
-	str = g_string_new (argv[0]);
+	str = g_string_new (get_tool_path (argv[0]));
 	for (i = 1; i < argc; i++) {
 		g_string_append_c (str, ' ');
 		g_string_append (str, argv[i]);
