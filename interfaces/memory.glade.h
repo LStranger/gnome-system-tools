@@ -4,7 +4,7 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Memory administration");
+gchar *s = N_("Memory Administration");
 gchar *s = N_("Swap Memory:");
 gchar *s = N_("Physical Memory:");
 gchar *s = N_("Available swap areas");
@@ -19,19 +19,25 @@ gchar *s = N_(" Advanced >> ");
 gchar *s = N_("Available partitions:");
 gchar *s = N_("Device");
 gchar *s = N_("Size");
-gchar *s = N_("Path:");
-gchar *s = N_("Size:");
-gchar *s = N_("Swap Partition");
-gchar *s = N_("Swap File");
-gchar *s = N_("Megabytes");
-gchar *s = N_("Enable this swap space");
-gchar *s = N_("Use non-default priority:");
-gchar *s = N_("Browse...");
-gchar *s = N_("Swap device");
-gchar *s = N_("Enable this swap space");
-gchar *s = N_("Use non-default priority");
-gchar *s = N_("Size:");
-gchar *s = N_("Mb");
 gchar *s = N_("Select  Swap File");
 gchar *s = N_("OK");
 gchar *s = N_("Cancel");
+gchar *s = N_("Swap Settings");
+gchar *s = N_("Device:");
+gchar *s = N_("Enabled");
+gchar *s = N_("Settings");
+gchar *s = N_("Size:");
+gchar *s = N_("Priority:");
+gchar *s = N_("MB");
+gchar *s = N_("New Swap Device");
+gchar *s = N_("Swap type:");
+gchar *s = N_("partition\n"
+              "file\n"
+              "");
+gchar *s = N_("Enabled");
+gchar *s = N_("Settings");
+gchar *s = N_("Path:");
+gchar *s = N_("Priority:");
+gchar *s = N_("Size:");
+gchar *s = N_("MB");
+gchar *s = N_("Browse...");
