@@ -35,9 +35,29 @@
 int
 main (int argc, char *argv[])
 {
+	int i;
+	char *s[] = { 
+		"wins_ip",
+		"dns_list",
+		"search_list",
+		"ip",
+		"alias",
+		NULL
+	};
+	EditableFilterRules e[] = {
+		EF_ALLOW_NONE,
+		EF_ALLOW_ENTER,
+		EF_ALLOW_ENTER | EF_ALLOW_TEXT| EF_ALLOW_SPACE,
+		EF_STATIC_HOST,
+		EF_STATIC_HOST | EF_ALLOW_ENTER | EF_ALLOW_TEXT | EF_ALLOW_SPACE
+	};
+	
 	init_hint_entries ();
 	tool_init ("network", argc, argv);
 	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
+
+	for (i=0; s[i]; i++)
+		connect_editable_filter (tool_widget_get (s[i]), e[i]);
 
 	tool_set_frozen (TRUE);
 	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));

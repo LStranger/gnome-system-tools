@@ -21,6 +21,8 @@
 #  include <config.h>
 #endif
 
+#include <ctype.h>
+
 #include <gnome.h>
 
 #include "global.h"
@@ -30,7 +32,6 @@
 
 #define d(x) x
 
-static int reply;
 GtkWidget *searchdomain_entry_selected = NULL;
 GtkWidget *aliases_settings_entry_selected = NULL;
 GtkWidget *dns_entry_selected = NULL;
@@ -41,21 +42,68 @@ int statichost_row_selected = -1;
 #define DNS_ROW_SELECTED gtk_list_child_position (GTK_LIST (tool_widget_get ("dns_list")), dns_entry_selected)
 
 
-/* --- helpers */
+/* libglade callbacks */
+void on_network_notebook_switch_page (GtkWidget *notebook, 
+				      GtkNotebookPage *page,
+				      gint page_num, gpointer user_data);
 
-static void reply_cb (gint val, gpointer data);
-static void searchdomain_actions_set_sensitive (gboolean state);
-static void statichost_actions_set_sensitive (gboolean state);
-static void aliases_settings_actions_set_sensitive (gboolean state);
-static void listitem_children_swap (GtkWidget *src, GtkWidget *dest);
-static void searchdomain_entry_add (void);
-static void aliases_settings_dialog_close (void);
-static void aliases_settings_list_fill (void);
-static void aliases_settings_entry_add (void);
-static void scrolled_window_scroll_bottom (GtkWidget *sw);
-static GtkWidget *list_delete_entry (GtkList *list, GtkWidget *entry);
+void on_statichost_changed (GtkWidget *w, gpointer null);
 
-extern void 
+void on_statichost_add_clicked (GtkWidget *w, gpointer null);
+void on_statichost_update_clicked (GtkWidget *w, gpointer null);
+void on_statichost_delete_clicked (GtkWidget *w, gpointer null);
+
+void on_statichost_list_select_row (GtkCList *clist, gint row, gint column, 
+				    GdkEvent * event, gpointer user_data);
+void on_statichost_list_unselect_row (GtkCList *clist, gint row, gint column, 
+				      GdkEvent * event, gpointer user_data);
+
+gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
+
+void on_connection_configure_clicked (GtkWidget *w, gpointer null);
+void on_connection_delete_clicked (GtkWidget *w, gpointer null);
+void on_connection_add_clicked (GtkWidget *w, gpointer null);
+
+void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
+void on_samba_use_toggled (GtkWidget *w, gpointer null);
+
+static void
+statichost_actions_set_sensitive (gboolean state)
+{
+	gtk_widget_set_sensitive (tool_widget_get ("statichost_delete"), state);
+	gtk_widget_set_sensitive (tool_widget_get ("statichost_update"), state); 
+}
+
+static char *
+fixup_text_list (GtkWidget *text)
+{
+	char *s2, *s;
+
+	g_return_val_if_fail (text != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_EDITABLE (text), NULL);
+
+	s = gtk_editable_get_chars (GTK_EDITABLE (text), 0, -1);
+	
+	for (s2 = strchr (s, '\n'); s2; s2 = strchr (s2, '\n'))
+		*s2 = ' ';
+
+	return s;
+}
+
+static char *
+fixdown_text_list (char *s)
+{
+	char *s2;
+
+	g_return_val_if_fail (s != NULL, NULL);
+
+	for (s2 = strchr (s, ' '); s2; s2 = strchr (s2, ' '))
+		*s2 = '\n';
+
+	return s;
+}
+
+void 
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
 	char *access_no[] = { 
@@ -95,7 +143,7 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("statichost_list")), 1, TRUE);
 }
 
-extern void
+void
 on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 																				gint page_num, gpointer user_data)
 {
@@ -105,229 +153,10 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 		gtk_widget_grab_focus (tool_widget_get (entry[page_num]));
 }
 
-#if 0
-static void
-dns_ip_add (void)
-{
-	gchar *txt;
-	GtkWindow *parent;
-	GnomeDialog *dialog;
-	
-	parent = GTK_WINDOW (tool_widget_get ("nameresolution_admin"));
-
-	if (!list_add_ip (GTK_LIST (tool_widget_get ("dns_list")), tool_widget_get ("dns_ip")))
-	{
-		txt = _("The IP address must have the form of four digits\nsepparated by a dot (.), being these digits in the range of 0 to 255,\nexcept for the first and last ones, which must be in the range of 1 to 254.");
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
-		gnome_dialog_run (dialog);
-	}
-	
-	scrolled_window_scroll_bottom (tool_widget_get ("dns_sw"));
-}
-
-
-extern void
-on_dns_list_select_child (GtkList * list, GtkWidget * widget, gpointer user_data)
-{
-	dns_entry_selected = widget;
-	gtk_widget_set_sensitive (tool_widget_get ("dns_delete"), tool_get_access ());
-}
-
-
-extern void
-on_dns_list_unselect_child (GtkList * list, GtkWidget * widget, gpointer user_data)
-{
-	dns_entry_selected = NULL;
-	gtk_widget_set_sensitive (tool_widget_get ("dns_delete"), FALSE);
-}
-
-
-extern void
-on_dns_ip_activate (GtkEditable * editable, gpointer user_data)
-{
-	char *ip;
-	
-	ip = gtk_editable_get_chars (editable, 0, -1);
-	if (strlen (ip) > 0)
-		dns_ip_add ();
-	g_free (ip);
-}
-
-
-extern void
-on_dns_ip_add_clicked (GtkButton * button, gpointer user_data)
-{
-	dns_ip_add ();
-}
-
-
-extern void
-on_dns_delete_clicked (GtkButton * button, gpointer user_data)
-{
-	g_return_if_fail (tool_get_access ());
-
-	dns_entry_selected = list_delete_entry (GTK_LIST (tool_widget_get ("dns_list")), 
-						dns_entry_selected);
-}
-
-extern void
-on_wins_use_toggled (GtkToggleButton * togglebutton, gpointer user_data)
-{
-	gtk_widget_set_sensitive (tool_widget_get ("wins_ip"),
-				  gtk_toggle_button_get_active (togglebutton));
-}
-
-
-static void
-searchdomain_entry_add (void)
-{
-	GtkWidget *item, *editable, *list;
-	GList *list_add = NULL;
-	gchar *text, *c, c2;
-	gint max;
-	
-	g_return_if_fail (tool_get_access ());
-	
-	editable = tool_widget_get ("searchdomain");
-	
-	text = gtk_editable_get_chars (GTK_EDITABLE (editable), 0, -1);
-	g_strstrip (text);
-	g_return_if_fail (strlen (text));
-	
-	for (c2 = '.', c = text; *c; c2 = *c, c++)
-		if (! ((*c >= 'a' && *c <= 'z') ||
-					 (*c >= 'A' && *c <= 'Z') ||
-					 (*c >= '0' && *c <= '9') ||
-					 (*c == '.' && c2 != '.')))
-		{
-			GnomeDialog *dialog;
-		  GtkWindow *parent;
-			gchar *txt;
-			
-			parent = GTK_WINDOW (tool_widget_get ("nameresolution_admin"));
-			txt = _("The domain may only contain letters, numbers and dots (.),\nwhich may work as sub-domain separators.");
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
-			gnome_dialog_run (dialog);
-			
-			return;
-		}
-
-	gtk_editable_delete_text (GTK_EDITABLE (editable), 0, -1);
-
-	list = tool_widget_get ("searchdomain_list");
-	max = (gint) gtk_object_get_data (GTK_OBJECT (list), "max");
-	gtk_object_set_data (GTK_OBJECT (list), "max", (gpointer) ++max);
-											 
-	item = gtk_list_item_new_with_label (text);
-	gtk_widget_show (item);
-	list_add = g_list_append (list_add, item);
-	gtk_list_append_items (GTK_LIST (list), list_add);
-	gtk_list_select_child (GTK_LIST (list), item);
-	
-	tool_set_modified (TRUE);
-	
-	scrolled_window_scroll_bottom (tool_widget_get ("searchdomain_sw"));
-	
-	gtk_widget_grab_focus (GTK_WIDGET (editable));
-}
-
-
-extern void
-on_searchdomain_list_select_child (GtkList * list, GtkWidget * widget, gpointer user_data)
-{
-	searchdomain_entry_selected = widget;
-	searchdomain_actions_set_sensitive (TRUE);
-}
-
-
-extern void
-on_searchdomain_list_unselect_child (GtkList * list, GtkWidget * widget, gpointer user_data)
-{
-	searchdomain_entry_selected = NULL;
-	searchdomain_actions_set_sensitive (FALSE);
-}
-
-
-extern void
-on_searchdomain_activate (GtkEditable * editable, gpointer user_data)
-{
-	char *domain;
-	
-	domain = gtk_editable_get_chars (editable, 0, -1);
-	if (strlen (domain) > 0)
-		searchdomain_entry_add ();
-	g_free (domain);
-}
-
-
-extern void
-on_searchdomain_add_clicked (GtkButton * button, gpointer user_data)
-{
-	searchdomain_entry_add ();
-}
-
-
-extern void
-on_searchdomain_delete_clicked (GtkButton * button, gpointer user_data)
-{
-	g_return_if_fail (tool_get_access ());
-
-	searchdomain_entry_selected = list_delete_entry (GTK_LIST (tool_widget_get ("searchdomain_list")),
-																									 searchdomain_entry_selected);
-}
-
-
-extern void
-on_searchdomain_move_up_clicked        (GtkButton       *button,
-																				gpointer         user_data)
-{
-	GtkList *w;
-	GtkWidget *src, *dest;
-	
-	g_return_if_fail (tool_get_access ());
-	g_return_if_fail (SEARCHDOMAIN_ROW_SELECTED != -1);
-	g_return_if_fail (SEARCHDOMAIN_ROW_SELECTED != 0);
-	
-	w = GTK_LIST (tool_widget_get ("searchdomain_list"));
-
-	src = g_list_nth (w->children, SEARCHDOMAIN_ROW_SELECTED)->data;
-	dest = g_list_nth (w->children, SEARCHDOMAIN_ROW_SELECTED - 1)->data;
-		
-	listitem_children_swap (src, dest);
-	gtk_list_select_child (w, dest);
-	tool_set_modified (TRUE);
-}
-
-
-extern void
-on_searchdomain_move_down_clicked      (GtkButton       *button,
-																				gpointer         user_data)
-{
-	GtkList *w;
-	GtkWidget *src, *dest;
-	gint max;
-	
-	w = GTK_LIST (tool_widget_get ("searchdomain_list"));
-	max = (gint) gtk_object_get_data (GTK_OBJECT (w), "max");
-	
-	g_return_if_fail (tool_get_access ());
-	g_return_if_fail (SEARCHDOMAIN_ROW_SELECTED != -1);
-	g_return_if_fail (SEARCHDOMAIN_ROW_SELECTED != max - 1);
-
-	src = g_list_nth (w->children, SEARCHDOMAIN_ROW_SELECTED)->data;
-	dest = g_list_nth (w->children, SEARCHDOMAIN_ROW_SELECTED + 1)->data;
-		
-	listitem_children_swap (src, dest);
-	gtk_list_select_child (w, dest);
-	tool_set_modified (TRUE);
-}
-#endif
-
-extern void
+void
 on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
 {
 	gchar *row_data;
-	gchar *label;
 	GtkWidget *w;
 	gint pos = 0;
 
@@ -344,13 +173,16 @@ on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent
 
 	pos = 0;
 	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")), row, 2, &row_data);
+	row_data = fixdown_text_list (g_strdup (row_data));
+	
 	w = tool_widget_get ("alias");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
+	g_free (row_data);
 }
 
 
-extern void
+void
 on_statichost_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
 {
 	GtkWidget *w;
@@ -365,11 +197,10 @@ on_statichost_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEve
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 }
 
-extern void
+void
 on_statichost_changed (GtkWidget *w, gpointer null)
 {
 	gboolean enabled;
-	char *ip;
 
 	enabled = tool_get_access () &&
 		gtk_text_get_length (GTK_TEXT (tool_widget_get ("alias"))) &&
@@ -380,10 +211,69 @@ on_statichost_changed (GtkWidget *w, gpointer null)
 				  GTK_WIDGET_SENSITIVE (tool_widget_get ("statichost_delete")));
 }
 
-extern void
-on_statichost_add_clicked (GtkButton * button, gpointer user_data)
+static gboolean
+is_char_ok (char c, EditableFilterRules rules)
 {
-	GtkWidget *clist;
+	return isdigit (c) || c == '.' || 
+		((rules & EF_ALLOW_ENTER) && c == '\n') ||
+		((rules & EF_ALLOW_SPACE) && c == ' ') ||
+		((rules & EF_ALLOW_TEXT) && isalpha (c));
+}
+
+void
+filter_editable (GtkEditable *editable, const gchar *text, gint length, gint *pos, gpointer data)
+{
+	int i, l = 0;
+	char *s = NULL;
+	EditableFilterRules rules = GPOINTER_TO_INT (data);
+
+	d(g_print ("got: (%d) `%.*s'\n", length, length, text));
+
+	/* thou shalt optimize for the common case */
+	if (length == 1) {
+		if (is_char_ok (*text, rules))
+			goto text_changed_success;
+		else
+			goto text_changed_fail;
+	}
+
+	/* if it is a paste we have to check all of things */
+	s = g_new0 (char, length);
+
+	for (i=0; i<length; i++)
+		if (is_char_ok (text[i], rules))
+			s[l++] = text[i];
+		else
+			d(g_print ("rejecting: (%d) `%c'\n", text[i], text[i]));
+
+	if (l == length)
+		goto text_changed_success;
+
+	d(g_print ("setting: (%d) `%.*s'\n", l, l, s));
+
+ text_changed_fail:
+	gdk_beep ();
+	
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
+	if (s) {
+		gtk_signal_handler_block_by_func (GTK_OBJECT (editable),
+						  filter_editable, data);
+		gtk_editable_insert_text (editable, s, l, pos);
+		gtk_signal_handler_unblock_by_func (GTK_OBJECT (editable),
+						    filter_editable, data);
+	}
+	return;
+
+ text_changed_success:
+	d(g_message ("success!"));
+	if (! (rules & EF_STATIC_HOST))
+		tool_modified_cb ();
+}
+
+void
+on_statichost_add_clicked (GtkWidget * button, gpointer user_data)
+{
+	GtkWidget *clist, *w;
 	char *entry[4];
 	int row;
 
@@ -394,25 +284,29 @@ on_statichost_add_clicked (GtkButton * button, gpointer user_data)
 	entry[1] = gtk_editable_get_chars (
 		GTK_EDITABLE (tool_widget_get ("ip")), 0, -1);
 
-#warning FIXME: clean up this next string
-	entry[2] = gtk_editable_get_chars (
-		GTK_EDITABLE (tool_widget_get ("alias")), 0, -1);
+	entry[2] = fixup_text_list (tool_widget_get ("alias"));
 		
 	clist = tool_widget_get ("statichost_list");
 
 	row = gtk_clist_append (GTK_CLIST (clist), entry);
-		
+
+	w = tool_widget_get ("alias");
+
+#if 0
+	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
+	gtk_editable_insert_text (GTK_EDITABLE (w), entry[2], strlen (entry[2]), &pos);
+#endif
 
 	set_clist_checkmark (GTK_CLIST (clist), row, 0, TRUE);
 }
 
 
-extern void
-on_statichost_delete_clicked (GtkButton * button, gpointer user_data)
+void
+on_statichost_delete_clicked (GtkWidget * button, gpointer user_data)
 {
 	gchar *txt, *name;
-	GtkWindow *parent;
-	GnomeDialog *dialog;
+	GtkWidget *parent, *dialog;
+	gint res;
 
 	g_return_if_fail (tool_get_access());
 	g_return_if_fail (statichost_row_selected != -1);
@@ -422,11 +316,11 @@ on_statichost_delete_clicked (GtkButton * button, gpointer user_data)
 			    statichost_row_selected, 2, &name);
 
 	txt = g_strdup_printf (_("Are you sure you want to delete the aliases for %s?"), name);
-	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
-	gnome_dialog_run (dialog);
+	dialog = gnome_question_dialog_parented (txt, NULL, NULL, GTK_WINDOW (parent));
+	res = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
 	g_free (txt);
 
-	if (reply) return;
+	if (res) return;
 		
 	gtk_clist_remove (GTK_CLIST (tool_widget_get ("statichost_list")), statichost_row_selected);
 	tool_set_modified (TRUE);
@@ -434,9 +328,10 @@ on_statichost_delete_clicked (GtkButton * button, gpointer user_data)
 }
 
 void
-on_statichost_update_clicked (GtkWidget *w, gpointer null)
+on_statichost_update_clicked (GtkWidget *b, gpointer null)
 {
-	GtkWidget *clist;
+	GtkWidget *clist, *w;
+	char *s;
 
 	g_return_if_fail (tool_get_access());
 
@@ -446,370 +341,19 @@ on_statichost_update_clicked (GtkWidget *w, gpointer null)
 			    gtk_editable_get_chars (
 				    GTK_EDITABLE (tool_widget_get ("ip")), 0, -1));
 	
-#warning FIXME: clean up this next string
-	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 2,
-			    gtk_editable_get_chars (
-				    GTK_EDITABLE (tool_widget_get ("alias")), 0, -1));
+	w = tool_widget_get ("alias");
+	s = fixup_text_list (w);
+
+	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 2, s);
+
+#if 0
+	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
+	gtk_editable_insert_text (GTK_EDITABLE (w), s, strlen (s), &pos);
+#endif
+	g_free (s);
 
 	set_clist_checkmark (GTK_CLIST (clist), statichost_row_selected, 0, TRUE);
 }
-
-#if 0
-extern void
-on_statichost_settings_clicked (GtkButton * button, gpointer user_data)
-{
-	GtkWidget *w0;
-	gchar *txt, *ip;
-	
-	g_return_if_fail (statichost_row_selected != -1);
-
-	w0 = tool_widget_get ("aliases_settings_ip");
-	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")), 
-											statichost_row_selected, 0, &ip);
-	gtk_entry_set_text (GTK_ENTRY (w0), ip);
-
-	/* Show alias settings dialog */
-	
-	w0 = tool_widget_get ("aliases_settings_dialog");
-	txt = g_strdup_printf (_("Settings for Alias %s"), ip);
-	gtk_window_set_title (GTK_WINDOW (w0), txt);
-	g_free (txt);
-	gtk_widget_set_sensitive (tool_widget_get ("aliases_settings_ok"), FALSE);
-	gtk_widget_show (w0);
-	
-	/* Fill aliases list */
-	aliases_settings_list_fill ();
-}
-
-
-extern gboolean
-on_aliases_settings_dialog_delete_event  (GtkWidget       *widget,
-                                          GdkEvent        *event,
-                                          gpointer         user_data)
-{
-	aliases_settings_dialog_close ();
-	return TRUE;
-}
-
-
-extern void
-on_aliases_settings_dialog_show (GtkWidget *w, gpointer user_data)
-{
-	if (tool_get_access ())
-		gtk_widget_grab_focus (tool_widget_get ("aliases_settings_new"));
-}
-
-extern void
-on_aliases_settings_ip_changed (GtkWidget *w, gpointer user_data)
-{
-	gtk_widget_set_sensitive (tool_widget_get ("aliases_settings_ok"), TRUE);
-}
-
-
-extern void
-on_aliases_settings_list_select_child (GtkList *list, GtkWidget *widget, gpointer user_data)
-{
-	aliases_settings_entry_selected = widget;
-	aliases_settings_actions_set_sensitive (TRUE);
-}
-
-extern void
-on_aliases_settings_list_unselect_child (GtkList *list, GtkWidget *widget, gpointer user_data)
-{
-	aliases_settings_entry_selected = NULL;
-	aliases_settings_actions_set_sensitive (FALSE);
-}
-
-
-extern void
-on_aliases_settings_new_activate (GtkEditable *editable, gpointer user_data)
-{
-	char *new_alias;
-	
-	new_alias = gtk_editable_get_chars (editable, 0, -1);
-	if (strlen (new_alias) > 0)
-		aliases_settings_entry_add ();
-	g_free (new_alias);
-}
-
-
-extern void
-on_aliases_settings_add_clicked (GtkWidget *w, gpointer user_data)
-{
-	aliases_settings_entry_add ();
-}
-
-
-extern void
-on_aliases_settings_delete_clicked (GtkWidget *w, gpointer user_data)
-{
-	g_return_if_fail (tool_get_access ());
-	
-	aliases_settings_entry_selected = list_delete_entry (GTK_LIST (tool_widget_get ("aliases_settings_list")),
-																											 aliases_settings_entry_selected);
-	
-	gtk_widget_set_sensitive (tool_widget_get ("aliases_settings_ok"), TRUE);
-}
-
-
-extern void
-on_aliases_settings_ok_clicked (GtkWidget *w, gpointer user_data)
-{
-	gboolean is_new;
-	gchar *ip, *text;
-	GString *aliases;
-	GList *l;
-	GtkWidget *clist;
-
-	if (tool_get_access ())
-	{
-		clist = tool_widget_get ("statichost_list");
-		is_new = (gboolean) (gtk_object_get_data 
-												 (GTK_OBJECT (tool_widget_get ("aliases_settings_dialog")), "new"));
-		
-		if (is_new)
-		{
-			gchar *entry[] = {"", "", NULL};
-			statichost_row_selected = gtk_clist_append (GTK_CLIST (clist), entry);
-			gtk_clist_select_row (GTK_CLIST (clist), statichost_row_selected, 0);
-			scrolled_window_scroll_bottom (tool_widget_get ("statichost_sw"));
-		}
-
-		aliases = g_string_new (NULL);
-			
-		ip = gtk_editable_get_chars (GTK_EDITABLE (tool_widget_get ("aliases_settings_ip")), 0, -1);
-		gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 0, ip);
-		
-		for (l = GTK_LIST (tool_widget_get ("aliases_settings_list"))->children; l; l = l->next)
-		{
-			gtk_label_get (GTK_LABEL (GTK_BIN (l->data)->child), &text);
-			if (l->prev)
-				g_string_append_c (aliases, ' ');
-			g_string_append (aliases, text);
-		}
-		
-		gtk_clist_set_text (GTK_CLIST (tool_widget_get ("statichost_list")),
-												statichost_row_selected, 1, aliases->str);
-		g_string_free (aliases, TRUE);
-		tool_set_modified (TRUE);
-	}
-	
-	aliases_settings_dialog_close ();
-}
-
-
-extern void
-on_aliases_settings_cancel_clicked (GtkWidget *w, gpointer user_data)
-{
-	aliases_settings_dialog_close ();
-}
-#endif
-
-/* Helper functions */
-
-static void
-reply_cb (gint val, gpointer data)
-{
-	reply = val;
-}
-
-#if 0
-static void
-searchdomain_actions_set_sensitive (gboolean state)
-{
-	GtkWidget *w;
-	
-	if (tool_get_access())
-	{
-		gtk_widget_set_sensitive (tool_widget_get ("searchdomain_delete"), state);
-		
-		gtk_widget_set_sensitive (tool_widget_get ("searchdomain_move_up"), FALSE);
-		gtk_widget_set_sensitive (tool_widget_get ("searchdomain_move_down"), FALSE);
-		
-		if (state)
-		{
-			if (SEARCHDOMAIN_ROW_SELECTED != 0)
-				gtk_widget_set_sensitive (tool_widget_get ("searchdomain_move_up"), TRUE);
-			
-			w = tool_widget_get ("searchdomain_list");
-			if (SEARCHDOMAIN_ROW_SELECTED != (gint) gtk_object_get_data (GTK_OBJECT (w), "max") - 1)
-				gtk_widget_set_sensitive (tool_widget_get ("searchdomain_move_down"), TRUE);
-		}
-	}
-}
-#endif
-
-static void
-statichost_actions_set_sensitive (gboolean state)
-{
-	gtk_widget_set_sensitive (tool_widget_get ("statichost_delete"), state);
-	gtk_widget_set_sensitive (tool_widget_get ("statichost_update"), state); 
-}
-
-#if 0
-static void
-aliases_settings_actions_set_sensitive (gboolean state)
-{
-	if (tool_get_access())
-	{
-		if (g_list_length (GTK_LIST (tool_widget_get ("aliases_settings_list"))->children) < 2)
-			state = FALSE;
-		
-		gtk_widget_set_sensitive (tool_widget_get ("aliases_settings_delete"), state);
-	}
-}
-
-static void 
-listitem_children_swap (GtkWidget *src, GtkWidget *dest)
-{
-	GtkWidget *src_child, *dest_child;
-	
-	src_child = GTK_BIN (src)->child;
-	dest_child = GTK_BIN (dest)->child;
-
-	gtk_widget_ref (dest_child);
-	gtk_container_remove (GTK_CONTAINER (dest), dest_child);
-	gtk_widget_reparent (src_child, dest);
-	gtk_container_add (GTK_CONTAINER (src), dest_child);
-	gtk_widget_unref (dest_child);
-	
-	gtk_widget_draw_default (src_child);
-	gtk_widget_draw_default (dest_child);
-}
-
-static void
-aliases_settings_dialog_close (void)
-{
-	GtkWidget *w0;
-
-	w0 = tool_widget_get ("aliases_settings_ip");
-	gtk_entry_set_text (GTK_ENTRY (w0), "");
-
-	w0 = tool_widget_get ("aliases_settings_new");
-	gtk_entry_set_text (GTK_ENTRY (w0), "");
-
-	w0 = tool_widget_get ("aliases_settings_list");
-	gtk_list_remove_items (GTK_LIST (w0), GTK_LIST (w0)->children);
-	
-	w0 = tool_widget_get ("aliases_settings_dialog");
-	gtk_object_remove_data (GTK_OBJECT (w0), "new");
-	gtk_widget_hide (w0);
-}
-
-static void
-aliases_settings_list_fill (void)
-{
-	gchar *aliases, **split;
-	GList *l;
-	GtkWidget *item;
-	int i;
-	
-	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")),
-											statichost_row_selected, 1, &aliases);
-	split = g_strsplit (aliases, " ", -1);
-	
-	for (l = NULL, i = 0; split[i]; i++)
-	{
-		item = gtk_list_item_new_with_label (split[i]);
-		gtk_widget_show (item);
-		l = g_list_append (l, item);
-	}
-	
-	gtk_list_append_items (GTK_LIST (tool_widget_get ("aliases_settings_list")), l);
-	
-	g_strfreev (split);
-}
-
-static void
-aliases_settings_entry_add (void)
-{
-	GtkWidget *item, *editable, *list;
-	GList *list_add = NULL;
-	gchar *text, *c, c2;
-	
-	g_return_if_fail (tool_get_access ());
-	
-	editable = tool_widget_get ("aliases_settings_new");
-	gtk_widget_grab_focus (GTK_WIDGET (editable));
-	
-	text = gtk_editable_get_chars (GTK_EDITABLE (editable), 0, -1);
-	g_strstrip (text);
-	g_return_if_fail (strlen (text));
-	
-	for (c2 = '.', c = text; *c; c2 = *c, c++)
-		if (! ((*c >= 'a' && *c <= 'z') ||
-					 (*c >= 'A' && *c <= 'Z') ||
-					 (*c >= '0' && *c <= '9') ||
-					 (*c == '.' && c2 != '.')))
-		{
-			GnomeDialog *dialog;
-		  GtkWindow *parent;
-			gchar *txt;
-			
-			parent = GTK_WINDOW (tool_widget_get ("nameresolution_admin"));
-			txt = _("The alias entry may only contain letters, numbers and dots (.),\nwhich may work as sub-domain separators.");
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
-			gnome_dialog_run (dialog);
-			
-			return;
-		}
-
-	gtk_editable_delete_text (GTK_EDITABLE (editable), 0, -1);
-
-	item = gtk_list_item_new_with_label (text);
-	gtk_widget_show (item);
-	list_add = g_list_append (list_add, item);
-	
-	list = tool_widget_get ("aliases_settings_list");
-	gtk_list_append_items (GTK_LIST (list), list_add);
-	gtk_list_select_child (GTK_LIST (list), item);
-	
-	scrolled_window_scroll_bottom (tool_widget_get ("aliases_settings_sw"));
-	
-	gtk_widget_set_sensitive (tool_widget_get ("aliases_settings_ok"), TRUE);
-	gtk_widget_grab_focus (GTK_WIDGET (editable));
-}
-
-static void
-scrolled_window_scroll_bottom (GtkWidget *sw)
-{
-	GtkAdjustment *adj;
-	
-	while (gtk_events_pending ())
-		gtk_main_iteration ();
-	
-	adj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));
-	gtk_adjustment_set_value (adj, adj->upper - adj->page_size);
-}
-
-static GtkWidget *
-list_delete_entry (GtkList *list, GtkWidget *entry)
-{
-	GList *l;
-	GtkWidget *item = NULL;
-	
-	g_return_val_if_fail (entry != NULL, NULL);
-	
-	for (l = list->children; l; l = l->next)
-		if (l->data == entry)
-	  {
-			if (l->next)
-				item = l->next->data;
-			else if (l->prev)
-				item = l->prev->data;
-			else
-				item = NULL;
-			break;
-		}
-	
-	gtk_widget_destroy (entry);
-	
-	if (item)
-		gtk_list_select_child (list, item);
-	
-	return item;
-}
-#endif
 
 /* yeah, I don't like this formatting either */
 static const char *hint_entry[][3] = { {
@@ -852,13 +396,13 @@ init_hint_entries (void)
 	help_hash = g_hash_table_new (g_str_hash, g_str_equal);
 
 	for (i=0; hint_entry[i][0]; i++)
-		g_hash_table_insert (help_hash, hint_entry[i][0], hint_entry[i]);
+		g_hash_table_insert (help_hash, (char *)hint_entry[i][0], hint_entry[i]);
 }
 
 gint
 update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 {
-	char *name;
+	const char *name;
 	char **entry;
 	GtkWidget *label;
 

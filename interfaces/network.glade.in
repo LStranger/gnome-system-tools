@@ -351,11 +351,6 @@
 	      <handler>update_hint</handler>
 	      <last_modification_time>Tue, 26 Dec 2000 23:51:59 GMT</last_modification_time>
 	    </signal>
-	    <signal>
-	      <name>changed</name>
-	      <handler>tool_modified_cb</handler>
-	      <last_modification_time>Fri, 29 Dec 2000 03:43:44 GMT</last_modification_time>
-	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -741,7 +736,7 @@
 	<widget>
 	  <class>GtkScrolledWindow</class>
 	  <name>scrolledwindow4</name>
-	  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
 	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
 	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
@@ -768,11 +763,6 @@
 	      <name>focus_in_event</name>
 	      <handler>update_hint</handler>
 	      <last_modification_time>Wed, 27 Dec 2000 00:38:21 GMT</last_modification_time>
-	    </signal>
-	    <signal>
-	      <name>changed</name>
-	      <handler>tool_modified_cb</handler>
-	      <last_modification_time>Fri, 29 Dec 2000 03:45:05 GMT</last_modification_time>
 	    </signal>
 	    <editable>True</editable>
 	    <text></text>
@@ -816,7 +806,7 @@
 	<widget>
 	  <class>GtkScrolledWindow</class>
 	  <name>scrolledwindow5</name>
-	  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
 	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
 	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
@@ -843,11 +833,6 @@
 	      <name>focus_in_event</name>
 	      <handler>update_hint</handler>
 	      <last_modification_time>Wed, 27 Dec 2000 00:38:29 GMT</last_modification_time>
-	    </signal>
-	    <signal>
-	      <name>changed</name>
-	      <handler>tool_modified_cb</handler>
-	      <last_modification_time>Fri, 29 Dec 2000 03:45:13 GMT</last_modification_time>
 	    </signal>
 	    <editable>True</editable>
 	    <text></text>
@@ -1140,7 +1125,7 @@
 	    <signal>
 	      <name>changed</name>
 	      <handler>on_statichost_changed</handler>
-	      <last_modification_time>Tue, 02 Jan 2001 17:38:39 GMT</last_modification_time>
+	      <last_modification_time>Fri, 05 Jan 2001 04:41:06 GMT</last_modification_time>
 	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
@@ -1165,7 +1150,7 @@
 	  <widget>
 	    <class>GtkScrolledWindow</class>
 	    <name>scrolledwindow8</name>
-	    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
 	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
 	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
@@ -1196,7 +1181,7 @@
 	      <signal>
 		<name>changed</name>
 		<handler>on_statichost_changed</handler>
-		<last_modification_time>Tue, 02 Jan 2001 17:38:31 GMT</last_modification_time>
+		<last_modification_time>Fri, 05 Jan 2001 04:40:55 GMT</last_modification_time>
 	      </signal>
 	      <editable>True</editable>
 	      <text></text>
@@ -2517,6 +2502,22 @@ auto
 	<expand>False</expand>
 	<fill>True</fill>
       </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>connection_help</name>
+	<can_focus>True</can_focus>
+	<relief>GTK_RELIEF_NORMAL</relief>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>Placeholder</class>
+	</widget>
+      </widget>
 
       <widget>
 	<class>GtkButton</class>
