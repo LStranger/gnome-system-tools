@@ -31,15 +31,13 @@
 #include "callbacks.h"
 #include "transfer.h"
 #include "e-table.h"
+#include "boot-settings.h"
 
 XstTool *tool;
 
 static int reply;
 
-const gchar *boot_types[] = { "Windows NT", "Windows 9x", "dos", "Linux", NULL };
-
 static void boot_settings_dialog_clean (void);
-static void boot_settings_dialog_prepare (void);
 static gboolean boot_settings_dialog_affect (void);
 
 static void my_gtk_entry_set_text (void *entry, gchar *str);
@@ -76,44 +74,15 @@ on_boot_delete_clicked (GtkButton *button, gpointer user_data)
 }
 
 extern void
-on_boot_settings_clicked (GtkButton *button, gpointer user_data)
+on_boot_default_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *d;
-	gint res;
+	xmlNodePtr node;
+	gchar *label;
 
-	d = xst_dialog_get_widget (tool->main_dialog, "boot_settings_dialog");
+	node = get_selected_node ();
+	label = xml_get_child_content (node, "label");
 
-	boot_settings_dialog_prepare ();
-	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
-
-	if (res)
-		return;
-
-	/* affect */
-	boot_settings_dialog_affect ();
-	boot_table_update ();
-	xst_dialog_modify (tool->main_dialog);
-}
-
-extern void
-on_boot_add_clicked (GtkButton *button, gpointer user_data)
-{
-	GtkWidget *d;
-	gint res;
-
-	d = xst_dialog_get_widget (tool->main_dialog, "boot_settings_dialog");
-
-	boot_settings_dialog_clean ();
-	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
-
-	if (res)
-		return;
-
-	/* affect */
-	boot_table_add ();
-	boot_settings_dialog_affect ();
-	boot_table_update ();
-	xst_dialog_modify (tool->main_dialog);
+	xml_set_child_content (xml_doc_get_root (tool->config), "default", label);
 }
 
 extern void
@@ -138,63 +107,6 @@ boot_settings_dialog_clean (void)
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
 										    (tool->main_dialog,
 											"boot_settings_default")), FALSE);
-}
-
-static void
-boot_settings_dialog_prepare (void)
-{
-	xmlNodePtr node;
-	GList *list = NULL;
-	gchar *buf, *image_label;
-	gint i;
-
-	node = get_selected_node ();
-
-	/* Label */
-	my_gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-											    "boot_settings_label")),
-					(gchar *)boot_value_label (node));
-
-	/* Image */
-
-	buf = (gchar *)boot_value_image (node);
-
-	if (!buf)
-	{
-		buf = (gchar *)boot_value_dev (node);
-		image_label = g_strdup (_("Device:"));
-		boot_settings_dialog_complexity (FALSE); /* To hide append and root */
-	}
-
-	else
-	{
-		image_label = g_strdup (_("Image:"));
-		boot_settings_dialog_complexity (tool->main_dialog->complexity == XST_DIALOG_ADVANCED);
-	}
-
-	gtk_label_set_text (GTK_LABEL (xst_dialog_get_widget (tool->main_dialog,
-											    "boot_settings_image_label")),
-					image_label);
-
-	my_gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-												  "boot_settings_image")), buf);
-
-	/* Type combo */
-	
-	for (i = 0; boot_types[i]; i++)
-		list = g_list_prepend (list, (void *)boot_types[i]);
-
-	gtk_combo_set_popdown_strings (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog,
-														"boot_settings_type")),
-							 list);
-	
-	/* Default toggle */
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
-										    (tool->main_dialog,
-											"boot_settings_default")),
-							(gboolean)boot_value_default (node));
-
 }
 
 static gboolean

@@ -29,6 +29,7 @@
 extern void on_boot_delete_clicked (GtkButton *button, gpointer user_data);
 extern void on_boot_settings_clicked (GtkButton *button, gpointer user_data);
 extern void on_boot_add_clicked (GtkButton *button, gpointer user_data);
+extern void on_boot_default_clicked (GtkButton *button, gpointer user_data);
 extern void on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer user_data);
 
 void boot_settings_dialog_complexity (gboolean state);

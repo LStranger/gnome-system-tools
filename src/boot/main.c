@@ -45,6 +45,7 @@ static XstDialogSignal signals[] = {
 	{ "boot_delete",   "clicked", on_boot_delete_clicked },
 	{ "boot_settings", "clicked", on_boot_settings_clicked },
 	{ "boot_add",      "clicked", on_boot_add_clicked },
+	{ "boot_default",  "clicked", on_boot_default_clicked },
 	{ "boot_prompt",   "toggled", on_boot_prompt_toggled },
 	{ NULL }
 };
@@ -62,11 +63,17 @@ update_complexity ()
 
 	boot_table_update_state ();
 
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_add"),
-						 complexity == XST_DIALOG_ADVANCED);
-	
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_delete"),
-						 complexity == XST_DIALOG_ADVANCED);
+	if (complexity == XST_DIALOG_BASIC)
+	{
+		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
+		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
+	}
+
+	else
+	{
+		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
+		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
+	}
 }
 
 static void

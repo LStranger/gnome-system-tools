@@ -42,30 +42,26 @@ const gchar *table_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
   <ETableColumn model_col=\"0\" _title=\"Default\" expansion=\"1.0\" minimum_width=\"16\" resizable=\"true\" cell=\"checkbox\" compare=\"integer\"/> \
   <ETableColumn model_col=\"1\" _title=\"Type\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
-  <ETableColumn model_col=\"2\" _title=\"Label\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
-  <ETableColumn model_col=\"3\" _title=\"Image\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"2\" _title=\"Name\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
+  <ETableColumn model_col=\"3\" _title=\"Kernel Image\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
   <ETableColumn model_col=\"4\" _title=\"Device\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
 </ETableSpecification>";
 
 const gchar *basic_boot_state = "\
 <ETableState> \
-  <column source=\"0\"/> \
   <column source=\"1\"/> \
   <column source=\"2\"/> \
   <grouping> \
-    <leaf column=\"0\" ascending=\"false\"/> \
   </grouping> \
 </ETableState>";
 
 const gchar *adv_boot_state = "\
 <ETableState> \
-  <column source=\"0\"/> \
   <column source=\"1\"/> \
   <column source=\"2\"/> \
   <column source=\"3\"/> \
   <column source=\"4\"/> \
   <grouping> \
-    <leaf column=\"0\" ascending=\"false\"/> \
   </grouping> \
 </ETableState>";
 
@@ -162,24 +158,6 @@ boot_cursor_change (ETable *table, gint row, gpointer user_data)
 	actions_set_sensitive (TRUE);
 }
 
-static void
-boot_double_click (ETable *table, int row, int col, GdkEvent *event)
-{
-	xmlNodePtr node, n;
-	gchar *label;
-
-	if (col != COL_DEFAULT)
-		return;
-	
-	node = g_array_index (boot_array, xmlNodePtr, row);
-	label = xml_get_child_content (node, "label");
-
-	n = xml_doc_get_root (tool->config);
-	xml_set_child_content (n, "default", label);
-
-	e_table_model_changed (table->model);
-}
-
 static ETableExtras *
 create_extras (void)
 {
@@ -221,7 +199,6 @@ create_table (xmlNodePtr root)
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", boot_cursor_change, NULL);
-	gtk_signal_connect (GTK_OBJECT (table), "double_click", boot_double_click, NULL);
 	
 	container = xst_dialog_get_widget (tool->main_dialog, "table_holder");
 	gtk_container_add (GTK_CONTAINER (container), boot_table);
@@ -291,15 +268,13 @@ boot_value_type (xmlNodePtr node)
 	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	n = xml_element_find_first (node, "image");
+	n = xml_element_find_first (node, "type");
+	if (n)
+		return xml_element_get_content (n);
 
+	n = xml_element_find_first (node, "image");
 	if (n)
 		return (_("Linux"));
-
-	n = xml_element_find_first (node, "other");
-
-	if (n)
-		return (_("Other"));
 
 	return (_("Unknown"));
 }
@@ -318,6 +293,14 @@ boot_value_dev (xmlNodePtr node)
 	g_return_val_if_fail (node != NULL, NULL);
 
 	return xml_get_child_content (node, "other");
+}
+
+void *
+boot_value_root (xmlNodePtr node)
+{
+	g_return_val_if_fail (node != NULL, NULL);
+
+	return xml_get_child_content (node, "root");
 }
 
 /* Set value functions */
@@ -385,6 +368,13 @@ boot_value_set_dev (xmlNodePtr node, gchar *val)
 	xml_set_child_content (node, "other", val);
 }
 
+void boot_value_set_root (xmlNodePtr node, gchar *val)
+{
+	g_return_if_fail (node != NULL);
+
+	xml_set_child_content (node, "root", val);
+}
+
 
 xmlNodePtr
 get_selected_node (void)
@@ -445,7 +435,7 @@ boot_table_update (void)
 	e_table_model_row_changed (table->model, row);
 }
 
-void
+xmlNodePtr
 boot_table_add (void)
 {
 	ETable *table;
@@ -463,5 +453,7 @@ boot_table_add (void)
 	
 	e_table_model_row_inserted (table->model, row);
 	e_table_set_cursor_row (table, row);
+
+	return node;
 }
 
