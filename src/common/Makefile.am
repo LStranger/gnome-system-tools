@@ -22,6 +22,7 @@ libsetuptool_a_SOURCES =				\
 	gst-conf.c		gst-conf.h		\
 	gst-auth.c		gst-auth.h		\
 	gst-hig-dialog.c	gst-hig-dialog.h	\
+	gst-filter.c		gst-filter.h		\
 	gst.h						\
 	gst-marshal.h					\
 	gst-types.h

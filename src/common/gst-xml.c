@@ -400,7 +400,9 @@ gst_xml_set_child_content (xmlNodePtr parent, const gchar *child, const gchar *v
 
 	g_return_if_fail (parent != NULL);
 	g_return_if_fail (child != NULL);
-	g_return_if_fail (val != NULL);
+
+	if (!val)
+		return;
 
 	node = gst_xml_element_find_first (parent, child);
 	if (!node)
@@ -433,5 +435,3 @@ gst_xml_element_set_boolean (xmlNodePtr parent, const gchar *child, const gboole
 {
 	gst_xml_set_child_content (parent, child, val? "1": "0");
 }
-
-

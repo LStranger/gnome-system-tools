@@ -45,10 +45,10 @@
 #include <gconf/gconf-client.h>
 
 #include <stdio.h>
-#include <fcntl.h>
 #include <errno.h>
 
 #include <sys/types.h>
+#include <sys/poll.h>
 #include <sys/wait.h>
 #include <signal.h>
 
@@ -106,6 +106,12 @@ static gboolean platform_unsupported_cb   (GstTool *tool, GstReportLine *rline, 
 static gboolean report_finished_cb        (GstTool *tool, GstReportLine *rline, gpointer data);
 
 static void report_dispatch (GstTool *tool);
+static void poll_backend    (GstTool *tool);
+
+static void gst_tool_show_report_window (GstTool *tool, const gchar *report);
+static void gst_tool_hide_report_window (GstTool *tool);
+
+static gchar* gst_tool_read_line_from_backend (GstTool *tool);
 
 static GstReportHookEntry common_report_hooks[] = {
 /*        key                 function                    type                      allow_repeat user_data */
@@ -652,13 +658,13 @@ gst_tool_read_xml_from_backend (GstTool *tool)
 	gchar *buffer = NULL;
 
 	if (!tool->xml_document)
-		return NULL;
+		tool->xml_document = g_string_new ("");
 
 	do {
 		g_free (buffer);
 		buffer = gst_tool_read_line_from_backend (tool);
 		g_string_append (tool->xml_document, buffer);
-	} while (g_strrstr (buffer, GST_TOOL_EOR "\r\n") == NULL);
+	} while (g_strrstr (buffer, GST_TOOL_EOR) == NULL);
 
 	g_free (buffer);
 
@@ -769,6 +775,8 @@ gst_tool_run_get_directive_va (GstTool *tool, const gchar *report_sign, const gc
 	tool->directive_running = TRUE;
 	gst_tool_idle_run_directives_remove (tool);
 
+	gst_dialog_freeze_visible (tool->main_dialog);
+	gst_tool_show_report_window (tool, report_sign);
 	gst_tool_send_directive (tool, directive, ap);
 
 	/* FIXME: Instead of doing the following, we should pass around a value describing
@@ -777,19 +785,11 @@ gst_tool_run_get_directive_va (GstTool *tool, const gchar *report_sign, const gc
 
 	xmlSubstituteEntitiesDefault (TRUE);
 
-	/* LibXML support for parsing from memory is good, but parsing from
-	 * opened filehandles is not supported unless you write your own feed
-	 * mechanism. Let's just load it all into memory, then. Also, refusing
-	 * enormous documents can be considered a plus. </dystopic> */
-	
-	if (tool->xml_document == NULL)
-		tool->xml_document = g_string_new ("");
-
-	if (location_id == NULL)
-		report_progress (tool);
-
+	report_progress (tool);
 	xml = gst_tool_read_xml_from_backend(tool);
 
+	gst_tool_hide_report_window (tool);
+	gst_dialog_thaw_visible (tool->main_dialog);
 	tool->directive_running = FALSE;
 	gst_tool_idle_run_directives_add (tool);
 	
@@ -827,24 +827,25 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 		return NULL;
 	}
 
+	gst_dialog_freeze_visible (tool->main_dialog);
+	gst_tool_show_report_window (tool, report_sign);
 	gst_tool_send_directive (tool, directive, ap);
 
 	if (xml)
 		gst_tool_write_xml_to_backend (tool, xml);
 
-	/* This is tipicaly to just read the end of request string,
-	   but a set directive may return some XML too. */
-	xml_out = gst_tool_read_xml_from_backend (tool);
-
 	/* FIXME: Instead of doing the following, we should pass around a value describing
 	 * tool I/O mode (as opposed to a string to report_progress ()). */
 	tool->report_hook_type = GST_REPORT_HOOK_SAVE;
 
-	if (location_id == NULL)
-		report_progress (tool);
+	report_progress (tool);
 
-	gst_tool_read_junk_from_backend (tool, GST_TOOL_EOR "\r\n");
+	/* This is tipicaly to just read the end of request string,
+	   but a set directive may return some XML too. */
+	xml_out = gst_tool_read_xml_from_backend (tool);
 
+	gst_tool_hide_report_window (tool);
+	gst_dialog_thaw_visible (tool->main_dialog);
 	tool->directive_running = FALSE;
 	gst_tool_idle_run_directives_add (tool);
 
@@ -1230,18 +1231,28 @@ gst_tool_create_remote_hosts_list (GtkTreeView *list, GstTool *tool)
 static void
 gst_tool_type_init (GstTool *tool)
 {
-	GladeXML *xml;
+	GdkPixbuf *pixbuf;
+	GladeXML  *xml;
 
+	tool->icon_theme = gtk_icon_theme_get_default ();
 	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
 
-	tool->report_gui = xml  = gst_tool_load_glade_common (tool, "report_window");
+	/* load the report window */
+	xml = gst_tool_load_glade_common (tool, "report_window");
 
-	tool->report_window     = glade_xml_get_widget (xml, "report_window");
+	tool->report_window = glade_xml_get_widget (xml, "report_window");
 	g_signal_connect (G_OBJECT (tool->report_window), "delete_event",
 			  G_CALLBACK (report_window_close_cb), tool);
 
-	tool->report_label      = glade_xml_get_widget (xml, "report_label");
+	tool->report_label    = glade_xml_get_widget (xml, "report_label");
+	tool->report_progress = glade_xml_get_widget (xml, "report_progress");
+	tool->report_pixmap   = glade_xml_get_widget (xml, "report_pixmap");
 
+	pixbuf = gtk_icon_theme_load_icon (tool->icon_theme, "gnome-system-config", 48, 0, NULL);
+	gtk_image_set_from_pixbuf (GTK_IMAGE (tool->report_pixmap), pixbuf);
+	gdk_pixbuf_unref (pixbuf);
+
+	/* load the platforms list */
 	xml = gst_tool_load_glade_common (tool, "platform_dialog");
 	tool->platform_list = glade_xml_get_widget (xml, "platform_list");
 	gst_tool_create_platform_list (GTK_TREE_VIEW (tool->platform_list), tool);
@@ -1249,6 +1260,7 @@ gst_tool_type_init (GstTool *tool)
 	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
 	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
 
+	/* load the remote config dialog */
 	xml = gst_tool_load_glade_common (tool, "remote_dialog");
 	tool->remote_dialog = glade_xml_get_widget (xml, "remote_dialog");
 	tool->remote_hosts_list = glade_xml_get_widget (xml, "remote_hosts_list");
@@ -1329,7 +1341,8 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	gst_tool_add_report_hooks (tool, common_report_hooks);
 
 	tool->backend_pid = -1;
-	tool->backend_master_fd = -1;
+	tool->write_fd = -1;
+	tool->read_fd = -1;
 	gst_tool_set_close_func (tool, gst_tool_kill_tool, NULL);
 
 	tool->directive_running = FALSE;
@@ -1373,7 +1386,6 @@ gst_tool_set_xml_funcs (GstTool *tool, GstXmlFunc load_cb, GstXmlFunc save_cb, g
 
 	if (save_cb)
 		g_signal_connect (G_OBJECT (tool), "fill_xml", G_CALLBACK (save_cb), data);
-
 }
 
 void
@@ -1569,43 +1581,24 @@ try_show_usage_warning (void)
 }
 
 void
-gst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
+gst_init (const gchar *app_name, int argc, char *argv [], GOptionEntry *entries)
 {
-	GnomeProgram *program;
-	struct poptOption gst_options[] =
-	{
-		{NULL, '\0', 0, NULL, 0}
-	};
+	GnomeProgram   *program;
+	GOptionContext *context;
 
 	bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
 	bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
 	textdomain (GETTEXT_PACKAGE);
 
-#warning FIXME	
-#if 0	
-        gnomelib_register_popt_table (gst_options, "general GST options");
+	if (entries) {
+		context = g_option_context_new (NULL);
+		g_option_context_add_main_entries (context, entries, GETTEXT_PACKAGE);
+		g_option_context_add_group (context, gtk_get_option_group (TRUE));
+		g_option_context_parse (context, &argc, &argv, NULL);
+	}
 
-	if (options == NULL) {
-		gnome_init (app_name, VERSION, argc, argv);
-	} else {
-		poptContext ctx;
-		GList *args_list = NULL;
-		char **args;
-		gint i;
-		
-		gnome_init_with_popt_table (app_name, VERSION, argc, argv, options, 0, &ctx);
-
-		args = (char**) poptGetArgs(ctx);
-	
-		for (i = 0; args && args[i]; i++) {
-			args_list = g_list_append (args_list, args[i]);
-		}
-		poptFreeContext (ctx);
-	}	
-#endif
  	program = gnome_program_init (app_name, VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
-				      GNOME_PARAM_POPT_TABLE, options,
 				      GNOME_PARAM_APP_DATADIR, DATADIR,
 				      GNOME_PARAM_HUMAN_READABLE_NAME,
 				      _("GNOME System Tools"),
@@ -1629,51 +1622,51 @@ is_string_complete (gchar *str, GSList *list)
 }
 
 static gchar*
-gst_tool_read_from_backend_va (GstTool *tool, gchar *needle, va_list ap)
+read_everything (GstTool *tool, gchar *needle, va_list ap)
 {
-	GString *str = g_string_new ("");
-	gboolean may_exit = FALSE;
-	gint i = 0;
-	gchar c, *ptr, *arg;
-	GSList *list = NULL;
+	GString *str  = g_string_new ("");
+	GSList  *list = NULL;
+	gchar   *arg, *ptr, c;
 
 	list = g_slist_prepend (list, needle);
 
 	while ((arg = va_arg (ap, char*)) != NULL)
 		list = g_slist_prepend (list, arg);
+
 	va_end (ap);
 
 	while (!is_string_complete (str->str, list)) {
-		c = fgetc (tool->backend_stream);
-		i++;
-		
-		if (*str->str)
-			g_string_append_c (str, c);
-		else {
-			/* the string is still empty, read with O_NONBLOCK until
-			 *  it gets a char, this is done for not blocking the UI
-			 */
-			if (c != EOF) {
-				g_string_append_c (str, c);
-				fcntl (tool->backend_master_fd, F_SETFL, 0);
-			}
-			
-			usleep (500);
-		}
+		c = fgetc (tool->read_stream);
 
-		/* ugly hack for redrawing UI without too much overload */
-		if (i == REDRAW_NCHARS) {
-			while (gtk_events_pending ())
-				gtk_main_iteration ();
-			i = 0;
-		}
+		if (c != EOF)
+			g_string_append_c (str, c);
 	}
 
-	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 	ptr = str->str;
 	g_string_free (str, FALSE);
 
 	return ptr;
+}
+
+static void
+poll_backend (GstTool *tool)
+{
+	struct pollfd fd;
+
+	fd.fd = tool->read_fd;
+	fd.events = POLLIN || POLLPRI;
+
+	while (poll (&fd, 1, 100) <= 0) {
+		while (gtk_events_pending ())
+			gtk_main_iteration ();
+	}
+}
+
+static gchar*
+gst_tool_read_from_backend_va (GstTool *tool, gchar *needle, va_list ap)
+{
+	poll_backend (tool);
+	return read_everything (tool, needle, ap);
 }
 
 gchar*
@@ -1685,32 +1678,18 @@ gst_tool_read_from_backend (GstTool *tool, gchar *needle, ...)
 	return gst_tool_read_from_backend_va (tool, needle, ap);
 }
 
-gchar*
+static gchar*
 gst_tool_read_line_from_backend (GstTool *tool)
 {
 	gchar line[1000];
 
-	fcntl (tool->backend_master_fd, F_SETFL, 0);
-	fgets (line, 1000, tool->backend_stream);
-	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
+	poll_backend (tool);
+	fgets (line, 1000, tool->read_stream);
 
 	while (gtk_events_pending ())
 		gtk_main_iteration ();
 
 	return g_strdup (line);
-}
-
-void
-gst_tool_read_junk_from_backend (GstTool *tool, gchar *needle)
-{
-	gchar *buffer = NULL;
-
-	do {
-		g_free (buffer);
-		buffer = gst_tool_read_line_from_backend (tool);
-	} while (g_strrstr (buffer, needle) == NULL);
-
-	g_free (buffer);
 }
 
 void
@@ -1722,8 +1701,10 @@ gst_tool_write_xml_to_backend (GstTool *tool, xmlDoc *doc)
 
 	xmlDocDumpMemory (doc, &xml, &size);
 	string = (gchar *) xml;
-	
+
 	gst_tool_write_to_backend (tool, string);
+	gst_tool_write_to_backend (tool, GST_TOOL_EOR "\n");
+
 	xmlFree (xml);
 }
 
@@ -1734,11 +1715,8 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 	int ret;
 	gchar *p;
 
-	/* turn the descriptor blocking for writing the configuration */
-	fcntl (tool->backend_master_fd, F_SETFL, 0);
-
 	do {
-		ret = fputc (string [nread], tool->backend_stream);
+		ret = fputc (string [nread], tool->write_stream);
 
 		if (ret != EOF)
 			nread++;
@@ -1749,9 +1727,7 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 				gtk_main_iteration ();
 	} while (nread < strlen (string));
 
-	while (fflush (tool->backend_stream) != 0);
-
-	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
+	while (fflush (tool->write_stream) != 0);
 }
 
 void
@@ -1780,4 +1756,53 @@ gst_tool_show_help (GstTool *tool, gchar *section)
 	}
 
 	g_free (help_file);
+}
+
+static gboolean
+gst_tool_report_progress_animate (GstTool *tool)
+{
+	gtk_progress_bar_pulse (GTK_PROGRESS_BAR (tool->report_progress));
+	return TRUE;
+}
+
+static gboolean
+gst_tool_report_window_timeout (GstTool *tool)
+{
+	gtk_window_set_transient_for (GTK_WINDOW (tool->report_window), GTK_WINDOW (tool->main_dialog));
+	gtk_widget_show (tool->report_window);
+	tool->report_timeout_id = 0;
+	return FALSE;
+}
+
+static void
+gst_tool_show_report_window (GstTool *tool, const gchar *report)
+{
+	gchar *markup;
+
+	g_return_if_fail (tool->report_timeout_id == 0);
+
+	if (report) {
+		markup = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>", report);
+		gtk_label_set_markup (GTK_LABEL (tool->report_label), markup);
+		g_free (markup);
+
+		tool->report_timeout_id = g_timeout_add (2000, (GSourceFunc) gst_tool_report_window_timeout, tool);
+		tool->report_animate_id = g_timeout_add (150,  (GSourceFunc) gst_tool_report_progress_animate, tool);
+	}
+}
+
+static void
+gst_tool_hide_report_window (GstTool *tool)
+{
+	if (tool->report_timeout_id) {
+		g_source_remove (tool->report_timeout_id);
+		tool->report_timeout_id = 0;
+	}
+
+	if (tool->report_animate_id) {
+		g_source_remove (tool->report_animate_id);
+		tool->report_animate_id = 0;
+	}
+
+	gtk_widget_hide (tool->report_window);
 }

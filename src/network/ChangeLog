@@ -1,3 +1,200 @@
+2004-12-20  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* location.c: use the "save_profiles" and "set_profile" directives
+	for changing profiles
+
+2004-12-20  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* callbacks.c (enable_iface): added, common function that shows a
+	dialog if there was any error. (on_connection_ok_clicked),
+	(enable_disable_iface): use enable_iface ()
+	* network-iface.c (gst_iface_enable): added report text to the
+	directive
+
+2004-12-14  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* address-list.[ch] (gst_address_list_clear): added
+	* callbacks.c: update button status when clicking ok in the interface
+	configuration dialog
+	* connection.c: fixed some indenting
+	* hosts.[ch] (host_aliases_clear): added
+	* ifaces-list.[ch] (ifaces_model_set_interface_from_node_at_iter),
+	(ifaces_model_set_interface_at_iter): added.
+	(ifaces_model_add_iface_from_node),
+	(ifaces_model_add_iface): use them to add new ifaces
+	(ifaces_model_clear): added
+	* network-iface.c, network-iface-ethernet.c, network-iface-wireless.c,
+	network-iface-irlan.c, network-iface-plip.c, network-iface-modem.c:
+	implemented _get_iface_type.
+	* transfer.[ch]: clear dialog before applying config, export some
+	functions for saving locations
+	* location.[ch]: added files for managing locations/profiles
+	* Makefile.am: ditto
+	* gst-network-tool.[ch]: added locations widget
+
+2004-12-02  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface-modem.c: silly me, s/dial_type/dial_command/
+
+2004-12-02  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface-modem.c: fixed dial_prefix getting/setting in XML
+
+2004-12-01  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* callbacks.[ch], connection.[ch], main.c: added some more IP addresses
+	checking
+	* connection.c: really save the phone number for modem connections
+	* network-iface-modem.c: handled wvdial sections and provider names,
+	this might be an internal detail in the backend, though.
+
+2004-12-01  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* address-list.c, main.c: handled IP address parsing/filtering
+
+2004-11-29  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* address-list.c, connection.c: fixed some compile warnings
+	* main.c, ifaces-list.[ch], connection.[ch], callbacks.c: readded
+	command line option
+	* network-iface-modem.c: added _get_xml implementation
+
+2004-11-29  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* address-list.c: added DnD
+
+2004-11-29  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* address-list.c, hosts.c: added popup menus
+	* callbacks.[ch], ifaces-list.[ch]: generalized a bit the popup menu
+	stuff.
+
+2004-11-27  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* ifaces-list.c: fixed context menu for ifaces, now it
+	enables/disables correctly
+
+2004-11-27  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* callbacks.[ch], connection.[ch], main.c: handled dialog changing and
+	fields checking.
+	* callbacks.c: fixed a compile warning
+	* connection.c: fixed a function indent
+
+2004-11-26  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* callbacks.[ch] (callbacks_check_hostname_hook): added
+	* main.c: added apply hook for checking when the hostname is changed
+
+2004-11-26  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* callbacks.[ch] (on_detect_modem_clicked): added
+	(enable_disable_iface): warn when the iface could not be enabled
+	(on_host_aliases_delete_clicked): added gst_dialog_modify()
+	* connection.[ch], main.c: added some modem detection stuff
+	* hosts.c (host_aliases_run_dialog): added a gst_dialog_modify()
+
+2004-11-24  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* connection.[ch] (modem_dialog_prepare), (modem_dialog_save): added.
+	Handled modem GUI.
+	* network-iface-modem.[ch]: added missing properties
+
+2004-11-23  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface-modem.[ch]: added files to handle PPP devices
+	* Makefile.am: ditto
+	* connection.c, gst-network-tool.h, ifaces-list.c: began to handle
+	PPP devices
+	* callbacks.c: somewhat prettify code
+
+2004-11-22  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* ifaces-list.[ch] (gateways_combo_get_selected): added
+	* transfer.c: save gateway settings
+
+2004-11-22  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* hosts.[ch]: abstracted a bit more, made it able to save the config
+	* transfer.[ch]: somewhat improved
+
+2004-11-22  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* hosts.[ch]: added for handling /etc/hosts editing
+	* Makefile.am: ditto
+	* callbacks.[ch], gst-network-tool.[ch], main.c, transfer.c: handled
+	hosts aliases editing
+
+2004-11-20  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* callbacks.c, network-iface.[ch]: made it able to enable ifaces
+
+2004-11-18  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* callbacks.[ch], main.c, network-iface.c: it now disables interfaces
+	* transfer.c: do not delete loopback based on interface type, not dev
+	name
+	* connection.c, callbacks.c: moved a g_object_ref/unref to make the
+	code easier to read
+
+2004-11-17  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface-ethernet.c: fixed silly bug that got me annoyed, woo!
+	* network-iface-plip.c: added "bootproto" tag
+
+2004-11-17  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface-ethernet.c, network-iface-plip.c,
+	network-iface-wireless.c, network-iface.c, transfer.c: more iface
+	saving, fixed some issues generating the XML
+
+2004-11-16  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface-ethernet.c: improved config saving
+	* network-iface.c: handled "file" tag
+	* transfer.c: delete all ifaces but loopback
+
+2004-11-16  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface.c network-iface-ethernet.c: implemented (get_xml)
+
+2004-11-15  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* connection.c (wireless_essid_get_model),
+	(wireless_dialog_prepare_essid_entry): added networks scanning
+	feature
+
+	* gst-network-tool.[ch]: added icon theme
+
+2004-11-10  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* address-list.[ch], main.c, transfer.[ch]: made it begin to save
+	information
+
+2004-11-09  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* ifaces-list.[ch], transfer.c: update the gatewaydev from the XML
+
+2004-11-08  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* network-iface-wireless.[ch] (gst_iface_wireless_new_from_xml):
+	get the parent class configuration before checking that it's
+	configured
+
+2004-11-08  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* address-list.[ch], gst-network-tool.[ch], ifaces-list.[ch],
+	network-iface.[ch], network-iface-ethernet.[ch],
+	network-iface-irlan.[ch], network-iface-plip.[ch],
+	network-iface-wireless.[ch]: Added files for the new network tool
+
+	* callbacks.[ch], connection.[ch], main.c, transfer.[ch], Makefile.am: 
+	Modified files for the new network tool
+
+	* dns.[ch], hosts.[ch], network-druid.[ch], profile.[ch],
+	profiles-table.[ch]: deleted files, any missing functionality will be
+	reimplemented
+
 2004-11-03  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* Release 1.1

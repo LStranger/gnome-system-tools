@@ -23,7 +23,7 @@
 #define GST_TOOL_H
 
 #include <glade/glade.h>
-#include <popt.h>
+#include <gtk/gtk.h>
 
 #include "gst-types.h"
 
@@ -57,14 +57,17 @@ struct _GstTool {
 
 	/* backend process */
 	int backend_pid;
-	int backend_master_fd;
+	int write_fd;
+	int read_fd;
 
-	FILE *backend_stream;
+	FILE *write_stream;
+	FILE *read_stream;
 
 	/* configuration */
 	xmlDoc  *config;
 	xmlDoc  *original_config;
 
+	GtkIconTheme *icon_theme;
 	GstDialog *main_dialog;
 
 	/* Remote configuration stuff */
@@ -84,11 +87,12 @@ struct _GstTool {
 	GtkWidget *remote_hosts_list;
 
 	/* Progress report widgets */
-	GladeXML  *report_gui;
-	GtkWidget *report_arrow;
-
 	GtkWidget *report_window;
 	GtkWidget *report_label;
+	GtkWidget *report_progress;
+	GtkWidget *report_pixmap;
+	guint      report_timeout_id;
+	guint      report_animate_id;
 
 	GString *line;
 	GString *xml_document;
@@ -125,7 +129,7 @@ GtkType      gst_tool_get_type            (void);
 
 void         gst_init                     (const gchar *app_name,
 					   int argc, char *argv [],
-					   const poptOption options);
+					   GOptionEntry *entries);
 
 void         gst_tool_main                (GstTool *tool, gboolean no_main_loop);
 void         gst_tool_main_with_hidden_dialog (GstTool *tool, gboolean no_main_loop);
@@ -173,7 +177,6 @@ void         gst_tool_clear_supported_platforms (GstTool *tool);
 void         gst_tool_process_startup (GstTool*);
 
 gchar*       gst_tool_read_from_backend (GstTool*, gchar*, ...);
-gchar*       gst_tool_read_line_from_backend (GstTool*);
 void         gst_tool_read_junk_from_backend (GstTool*, gchar*);
 void         gst_tool_write_to_backend (GstTool*, gchar*);
 void         gst_tool_write_xml_to_backend (GstTool*, xmlDoc*);

@@ -1,8 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef __GST_DNS_H__
-#define __GST_DNS_H__
-
-/* Copyright (C) 2000-2001 Ximian, Inc.
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -18,23 +15,30 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos García Campos <elkalmail@yahoo.es>
+ * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
  */
 
-enum {
-	DNS_SEARCH_LIST_COL,
-	DNS_SEARCH_LIST_COL_LAST
-};
+#ifndef __GST_FILTER_
+#define __GST_FILTER_
+
+#include <gtk/gtk.h>
 
 enum {
-	DNS_SEARCH_POPUP_NONE,
-	DNS_SEARCH_POPUP_DELETE
+  GST_FILTER_IP,
+  GST_FILTER_IPV4,
+  GST_FILTER_IPV6
 };
 
-void     dns_search_init_gui          (GstTool *tool);
-void     dns_search_list_append       (GtkWidget *treeview, const gchar *text);
-void     dns_search_list_remove       (GtkWidget *treeview, GtkWidget *entry);
-gboolean gst_dns_search_is_in_list    (GtkWidget *list, const gchar *ip_str);
-void     gst_dns_search_update_sensitivity (GtkWidget *list);
+typedef enum {
+  GST_ADDRESS_IPV4,
+  GST_ADDRESS_IPV6,
+  GST_ADDRESS_INCOMPLETE,
+  GST_ADDRESS_IPV4_INCOMPLETE,
+  GST_ADDRESS_IPV6_INCOMPLETE,
+  GST_ADDRESS_ERROR
+} GstAddressRet;
 
-#endif /* __GST_DNS_H__ */
+GstAddressRet gst_filter_check_ip_address (const gchar*);
+void          gst_filter_init             (GtkEntry*, gint);
+
+#endif /* __GST_FILTER_ */

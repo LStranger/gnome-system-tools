@@ -8,6 +8,56 @@
 	* CommonMakefile: start-here seems to be definitely deprecated,
 	stop installing .desktop files in $(sysconfdir)/X11/sysconfig/
 
+2004-12-20  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-tool.c: made it not to block when su fails
+
+2004-12-20  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-auth.c, gst-tool.[ch]: improved IO with backends, now updates
+	the GUI while waiting for data to read.
+	* gst-tool.[ch]: readded reports window, with a more modern look, use
+	it if the directive has report text and lasts for >2 secs.
+
+2004-12-15  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-tool.[ch], gst-auth.c: made comunication a lot more sane, now 
+	there are two fds instead of one.
+
+2004-12-14  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-tool.c: removed a gst_xml_doc_dump()
+
+2004-12-14  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-xml.c (gst_xml_set_child_content): do not output any warning if
+	val == NULL
+
+2004-12-13  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-tool.c: put error = NULL in some gconf calls, we're not caring
+	about the error here.
+
+2004-12-01  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-filter.c (gst_filter_check_ip_address): handled NULL strings
+
+2004-12-01  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-filter.[ch]: added for making generic GtkEntry filters
+	* gst.h, Makefile.am: added gst-filter.h
+
+2004-10-29  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+        * gst-tool.[ch] (gst_init): use GOption instead of popt
+
+2004-11-20  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* gst-tool.c (gst_tool_run_set_directive_va): made it really able
+	to get some XML from the backend. 
+	(gst_tool_write_xml_to_backend) send the end of request. 
+	(gst_tool_read_junk_from_backend) removed.
+
 2004-11-05  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* gst-platform.c, gst-tool.c: Added archlinux pixmap

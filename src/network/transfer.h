@@ -1,5 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* Copyright (C) 2000-2001 Ximian, Inc.
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* Copyright (C) 2004 Carlos Garnacho Parro.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -15,60 +15,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Hans Petter Jansson <hpj@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
  */
 
-#include <glade/glade.h>
+#include "gst.h"
 
-/* Structures for tables detailing the information types in the XML
-   tree, and what widgets they correspond to. */
-
-extern GladeXML *glade_interface;
-
-typedef struct _TransStringEntry TransStringEntry;
-typedef struct _TransStringList TransStringList;
-typedef struct _TransStringCList2 TransStringCList2;
-typedef struct _TransStringIPEntry TransStringIPEntry;
-
-struct _TransStringEntry
-{
-  gchar *xml_path;
-
-  gchar *editable;
-  gchar *toggle;
-  int unknown_verbose;      /* Whether to put <unknown> if not found in XML */
-};
-
-
-struct _TransStringList
-{
-  gchar *xml_path;           /* Path repeats for each item, forms list */
-
-  gchar *list;
-  gchar *entry;
-};
-
-
-struct _TransStringCList2
-{
-  gchar *xml_path;
-  gchar *xml_path_field_1;
-  gchar *xml_path_field_2;
-
-  gchar *clist;
-};
-
-
-struct _TransStringIPEntry
-{
-  gchar *xml_path;
-
-  gchar *editable;
-  gchar *toggle;
-};
-
-
-void transfer_profile_to_gui (GstTool*,gpointer);
-void transfer_xml_to_gui     (GstTool*, gpointer);
-void transfer_gui_to_xml     (GstTool*, gpointer);
-void transfer_misc_xml_to_tool (GstTool*, xmlNodePtr);
+void  transfer_xml_to_gui         (GstTool*, gpointer);
+void  transfer_gui_to_xml         (GstTool*, gpointer);
+void  transfer_xml_profile_to_gui (GstTool*, xmlNodePtr);

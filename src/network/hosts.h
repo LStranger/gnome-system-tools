@@ -1,8 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef __GST_HOSTS_H__
-#define __GST_HOSTS_H__
-
-/* Copyright (C) 2000-2001 Ximian, Inc.
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 2 -*- */
+/* Copyright (C) 2004 Carlos Garnacho
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -18,47 +15,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Hans Petter Jansson <hpj@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Carlos Garnacho Parro  <carlosg@gnome.org>
  */
 
-#define STATICHOST_UI_STRING "statichost"
+#ifndef __HOSTS_H_
+#define __HOSTS_H_
+
+#include <gtk/gtk.h>
+#include "gst.h"
 
 enum {
-	STATICHOST_LIST_COL_IP,
-	STATICHOST_LIST_COL_ALIAS,
-
-	STATICHOST_LIST_COL_LAST
+  COL_HOST_IP,
+  COL_HOST_ALIASES,
+  COL_HOST_LAST
 };
 
-enum {
-	HOSTS_POPUP_NONE,
-	HOSTS_POPUP_DELETE
-};
+GtkTreeView*   host_aliases_list_create    (void);
+void           host_aliases_add_from_xml   (xmlNodePtr);
+void           host_aliases_extract_to_xml (GtkTreeIter*, xmlNodePtr);
+void           host_aliases_run_dialog     (GtkTreeIter*);
+void           host_aliases_clear          (void);
 
-typedef struct {
-	GtkWidget *list;
-	GtkWidget *ip;
-	GtkWidget *alias;
-	GtkWidget *button_delete;
-	GtkWidget *button_add;
-} GstStatichostUI;
-
-void gst_hosts_update_sensitivity (void);
-
-void on_hosts_changed        (GtkWidget *w, gpointer null);
-void on_hosts_add_clicked    (GtkWidget * button, gpointer user_data);
-void on_hosts_delete_clicked (GtkWidget * button, gpointer user_data);
-void on_hosts_update_clicked (GtkWidget *b, gpointer null);
-
-void on_hosts_ip_changed     (GtkEditable *w, gpointer not_used);
-
-void hosts_init_gui          (GstTool *tool);
-void hosts_list_append       (GstTool *tool, const gchar *text[]);
-void hosts_list_remove       (GstTool *tool, const gchar *ip);
-gboolean hosts_list_get_selected (gchar **ip, gchar **alias);
-void hosts_list_save         (GstTool *tool, xmlNodePtr root);
-void hosts_list_clear        (GstTool *tool);
-
-gboolean gst_hosts_ip_is_in_list (const gchar*);
-
-#endif /* __GST_HOSTS_H__ */
+#endif /* __HOSTS_H_ */

@@ -27,9 +27,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <fcntl.h>
 #include <signal.h>
 #include <pwd.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
@@ -123,8 +123,10 @@ static void
 gst_auth_run_term (GstTool *tool, gchar *args[])
 {
 	struct termios t;
+	int p[2];
 
-	tool->backend_pid = forkpty (&tool->backend_master_fd, NULL, NULL, NULL);
+	pipe (p);
+	tool->backend_pid = forkpty (&tool->write_fd, NULL, NULL, NULL);
 
 	if (tool->backend_pid < 0) {
 		g_warning ("could not fork to backend");
@@ -137,19 +139,28 @@ gst_auth_run_term (GstTool *tool, gchar *args[])
 		unsetenv("LANG");
 		unsetenv("LANGUAGE");
 
+		dup2 (p[1], 1);
+		dup2 (p[1], 2);
+		close (p[0]);
+
 		execv (args[0], args);
 		exit (255);
 	} else {
 #ifndef __FreeBSD__
 		/* Linux's su works ok with echo disabling */
-		tcgetattr (tool->backend_master_fd, &t);
+/*		tcgetattr (tool->write_fd, &t);
 		t.c_lflag ^= ECHO;
-		tcsetattr (tool->backend_master_fd, TCSANOW, &t);
+		tcsetattr (tool->write_fd, TCSANOW, &t);
+*/
 #endif
-		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
+		close (p[1]);
 
-		tool->timeout_id = g_timeout_add (1000, (GSourceFunc) gst_auth_wait_child, tool);
-		tool->backend_stream = fdopen (tool->backend_master_fd, "a+");
+		tool->read_fd      = p[0];
+		tool->timeout_id   = g_timeout_add (1000, (GSourceFunc) gst_auth_wait_child, tool);
+		tool->read_stream  = fdopen (tool->read_fd, "r");
+		tool->write_stream = fdopen (tool->write_fd, "w");
+		setvbuf (tool->read_stream, NULL, _IONBF, 0);
+		fcntl (tool->read_fd, F_SETFL, 0);
 	}
 }
 
@@ -286,9 +297,10 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 
 #ifdef __FreeBSD__
 	/* FreeBSD seems to have weird issues with su and echo disabling */
-	tcgetattr (tool->backend_master_fd, &t);
+/*	tcgetattr (tool->write_fd, &t);
 	t.c_lflag ^= ECHO;
-	tcsetattr (tool->backend_master_fd, TCSANOW, &t);
+	tcsetattr (tool->write_fd, TCSANOW, &t);
+*/
 #endif
 }
 

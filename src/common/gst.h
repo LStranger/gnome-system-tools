@@ -10,3 +10,4 @@
 #include "gst-ui.h"
 #include "gst-util.h"
 #include "gst-conf.h"
+#include "gst-filter.h"

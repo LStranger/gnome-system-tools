@@ -18,15 +18,21 @@ EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 
 network_admin_LDADD = $(GST_TOOL_LIBS) 
 network_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES)
-network_admin_SOURCES = \
-	main.c \
-	callbacks.c		callbacks.h	\
-	transfer.c		transfer.h	\
-	connection.c		connection.h	\
-	dns.c			dns.h		\
-	hosts.c			hosts.h		\
-	profile.c		profile.h	\
-	profiles-table.c	profiles-table.h \
-	network-druid.c		network-druid.h
+network_admin_SOURCES = 			\
+	address-list.c	address-list.h		\
+	gst-network-tool.c gst-network-tool.h	\
+	transfer.c transfer.h			\
+	network-iface.c network-iface.h		\
+	network-iface-ethernet.c network-iface-ethernet.h	\
+	network-iface-wireless.c network-iface-wireless.h	\
+	network-iface-irlan.c network-iface-irlan.h		\
+	network-iface-plip.c network-iface-plip.h		\
+	network-iface-modem.c network-iface-modem.h		\
+	ifaces-list.c ifaces-list.h		\
+	callbacks.c callbacks.h			\
+	connection.c connection.h		\
+	hosts.c hosts.h				\
+	location.c location.h			\
+	main.c 
 
 toolpixmaps =
