@@ -1,3 +1,65 @@
+GNOME System Tools Version 0.92.0, 2004-09-01
+---------------------------------------------
+
+The GNOME System Tools version 0.92.0 "Better later than never" have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The GNOME System Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
+
+Right now the GNOME System Tools fully support various distros/OS such as: Redhat, Mandrake, SuSE, Fedora, Debian, Gentoo, Slackware, FreeBSD, OpenNA, PLD, Vine and Specifix.
+
+WARNING: By default, only the users, network and time tools will be built, for compiling the other tools you can do:
+
+  --enable-services
+  --enable-boot
+
+at configure time
+
+
+Changes since last release
+==========================
+
+  General
+  =======
+  - Various memleaks fixed (me)
+  - Fixed backends calling in FreeBSD (Joe Marcus Clarke)
+  - Added support for the recently branched FreeBSD 6.x (Joe Marcus Clarke)
+  - Added support for SuSE 9.1 (me)
+
+  Boot
+  ====
+  - Create a devices.map if it doesn't exist (me)
+
+  ... plus other lots of bugfixing
+
+  Thanks to Joe Marcus Clarke for submitting patches
+
+  Thanks to everybody I've forgot to thank
+
+  Translations
+  ============
+  - be (Christian Neumair)
+  - bn (Runa Bhattacharjee)
+  - bs (Akagic Amila)
+  - da (Martin Willemoes Hansen)
+  - el (Kostas Papadimas)
+  - es (Francisco Javier F. Serrador)
+  - eu (Iñaki Larrañaga)
+  - fi (Ilkka Tuohela)
+  - ja (Takeshi AIHANA)
+  - ko (Changwoo Ryu)
+  - ms (Hasbullah Bin Pit)
+  - nb, no (Kjartan Maraas)
+  - nl (Vincent van Adrighem)
+  - ta (Jayaradha)
+  - sq (Laurent Dhima)
+  - sr, sr@Latn (Danilo Šegan)
+  - uk (Maxim Dziumanenko)
+  
+Downloading
+===========
+You can get it from : ftp://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/0.92/
+
+
 GNOME System Tools Version 0.91.0, 2004-08-20
 ---------------------------------------------
 
