@@ -204,7 +204,16 @@ setup_advanced (BootSettingsGui *gui, GtkWidget *parent)
 static void
 setup_basic (BootSettingsGui *gui, GtkWidget *parent)
 {
-	/*gtk_widget_hide (gui->other_frame);*/
+	if (gui->image->type == TYPE_LINUX)
+	{
+		gtk_widget_show (gui->image_frame);
+		gtk_widget_hide (gui->other_frame);
+	}
+	else
+	{
+		gtk_widget_show (gui->other_frame);
+		gtk_widget_hide (gui->image_frame);
+	}
 }
 
 static gint *
