@@ -112,7 +112,6 @@ main (int argc, char *argv[])
 		EF_STATIC_HOST,
 		EF_STATIC_HOST | EF_ALLOW_ENTER | EF_ALLOW_TEXT | EF_ALLOW_SPACE
 	};
-	gboolean druid;
 
 	init_hint_entries ();
 	
