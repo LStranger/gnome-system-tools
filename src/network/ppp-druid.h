@@ -18,8 +18,26 @@
  * Authors: Arturo Espinosa <arturo@ximian.com>
  */
 
-#ifndef CONNECTION_H
-#define CONNECTION_H
+#ifndef PPP_DRUID_H
+#define PPP_DRUID_H
 
+typedef struct {
+	GladeXML *glade;
 
-#endif /* CONNECTION_H */
+	GtkWidget *win;
+	GnomeDruid *druid;
+
+	GtkWidget *phone;
+	GtkWidget *login;
+	GtkWidget *passwd;
+	GtkWidget *profile;
+
+	gboolean error_state;
+	gint current_page;
+
+} PppDruid;
+	
+extern PppDruid *ppp_druid_new (void);
+extern void ppp_druid_show (PppDruid *ppp);
+
+#endif /* PPP_DRUID_H */

@@ -32,6 +32,8 @@
 #include "transfer.h"
 #include "callbacks.h"
 
+#include "ppp-druid.h"
+
 XstTool *tool = NULL;
 
 
@@ -114,6 +116,12 @@ main (int argc, char *argv[])
 		connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);
 
 	on_network_admin_show (NULL, NULL);
+
+	{
+		PppDruid *ppp;
+		ppp = ppp_druid_new ();
+		ppp_druid_show (ppp);
+	}
 
 	xst_tool_main (tool);
 
