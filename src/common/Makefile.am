@@ -4,17 +4,25 @@ INCLUDES =		\
 	$(GNOME_CFLAGS) 	\
 	$(GDK_PIXBUF_CFLAGS) 	\
 	$(LIBGLADE_CFLAGS) 	\
-	$(GNOME_XML_CFLAGS)
-
+	$(GNOME_XML_CFLAGS)	\
+	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 libsetuptool_a_SOURCES = \
-	xml.c xml.h \
-	helpers.c helpers.h \
-	text.c text.h \
-	tool.c tool.h \
-	global.h \
-	checked.xpm unchecked.xpm reading.xpm \
-	gnomesupport.h
+	xml.c		\
+	xml.h		\
+	helpers.c	\
+	helpers.h	\
+	text.c		\
+	text.h		\
+	global.h	\
+	checked.xpm 	\
+	unchecked.xpm 	\
+	reading.xpm	\
+	xst-dialog.c	\
+	xst-dialog.h	\
+	xst-tool.c	\
+	xst-tool.h	\
+	xst-types.h
 
 ccenterdir = $(datadir)/control-center
 Systemdir = $(ccenterdir)/System

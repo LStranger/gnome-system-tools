@@ -74,18 +74,20 @@ struct _XstToolClass {
 
 GtkType      xst_tool_get_type          (void);
 
-XstTool     *xst_tool_init              (const gchar *name, int argc, char *argv []);
+XstTool     *xst_tool_init              (const char *name, const char *title, 
+					 int argc, char *argv []);
 void         xst_tool_main              (XstTool *tool);
-gboolean     xst_tool_get_access        (void);
+gboolean     xst_tool_get_access        (XstTool *tool);
 
-XstTool     *xst_tool_new               (const gchar *name);
-void         xst_tool_construct         (XstTool *tool, const char *name);
+XstTool     *xst_tool_new               (const char *name, const char *title);
+void         xst_tool_construct         (XstTool *tool, 
+					 const char *name, const char *title);
 
 gboolean     xst_tool_save              (XstTool *tool);
 gboolean     xst_tool_load              (XstTool *tool);
 
-GladeXml    *xst_tool_load_glade_common (XstTool *tool, const gchar *widget);
-GladeXml    *xst_tool_load_glade        (XstTool *tool, const gchar *widget);
+GladeXML    *xst_tool_load_glade_common (XstTool *tool, const gchar *widget);
+GladeXML    *xst_tool_load_glade        (XstTool *tool, const gchar *widget);
 
 XstDialog   *xst_tool_get_dialog        (XstTool *tool);
 

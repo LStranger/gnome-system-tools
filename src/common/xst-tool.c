@@ -21,6 +21,14 @@
 #include <config.h>
 
 #include "xst-tool.h"
+#include "xst-dialog.h"
+
+#include <gnome.h>
+#include <parser.h>
+#include <memory.h>
+
+#include <stdio.h>
+#include <fcntl.h>
 
 #define XST_DEBUG 1
 
@@ -31,15 +39,15 @@ enum {
 };
 
 static enum {
-	ROOT_ACCESS_NONE
-	ROOT_ACCESS_SIMULATED
+	ROOT_ACCESS_NONE,
+	ROOT_ACCESS_SIMULATED,
 	ROOT_ACCESS_REAL
 } root_access = ROOT_ACCESS_NONE;
 
-static GnomeAppClass *parent_class;
+static GtkObjectClass *parent_class;
 static gint xsttool_signals[LAST_SIGNAL] = { 0 };
 
-GladeXml *
+GladeXML *
 xst_tool_load_glade_common (XstTool *tool, const gchar *widget)
 {
 	g_return_val_if_fail (tool != NULL, NULL);
@@ -49,7 +57,7 @@ xst_tool_load_glade_common (XstTool *tool, const gchar *widget)
 	return glade_xml_new (tool->glade_common_path, widget);
 }
 
-GladeXml *
+GladeXML *
 xst_tool_load_glade (XstTool *tool, const gchar *widget)
 {
 	g_return_val_if_fail (tool != NULL, NULL);
@@ -90,7 +98,6 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 {
 	XstTool *tool;
 	char c;
-	GtkWidget *bar, *report, *report_list, *report_list_scrolled_window;
 	GtkAdjustment *vadj;
 	char *report_text[] = {
 		NULL,
@@ -138,7 +145,7 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 					else
 						scroll = FALSE;
 						
-					report_text[1] = line + 4;
+					report_text[1] = tool->line + 4;
 					gtk_clist_append (GTK_CLIST (tool->report_list), report_text);
 							  
 					
@@ -152,10 +159,10 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		} else {
 			/* Add character to end of current line */
 			
-			line = g_realloc (line, MAX (line_len + 2, 1024));
-			line [line_len] = c;
-			line_len++;
-			line [line_len] = '\0';
+			tool->line = g_realloc (tool->line, MAX (tool->line_len + 2, 1024));
+			tool->line [tool->line_len] = c;
+			tool->line_len++;
+			tool->line [tool->line_len] = '\0';
 		}
 	}
 }
@@ -193,8 +200,8 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 	gtk_main ();
 	gtk_timeout_remove (cb_id);
 	
-	gtk_widget_hide (report->report_window);
-	gtk_clist_clear (GTK_CLIST (report->report_list));
+	gtk_widget_hide (tool->report_window);
+	gtk_clist_clear (GTK_CLIST (tool->report_list));
 }
 
 gboolean
@@ -203,7 +210,6 @@ xst_tool_save (XstTool *tool)
 	FILE *f;
 	int fd_xml [2], fd_report [2];
 	int t;
-	gchar *path;
 
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);
@@ -211,7 +217,7 @@ xst_tool_save (XstTool *tool)
 
 	g_return_val_if_fail (root_access != ROOT_ACCESS_NONE, FALSE);
 
-	gtk_signal_emit (GTK_OJECT (tool), xsttool_signals[FILL_XML]);
+	gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_XML]);
 
 #ifdef XST_DEBUG
 	/* don't actually save if we are just pretending */
@@ -247,7 +253,7 @@ xst_tool_save (XstTool *tool)
 		dup2 (fd_report [1], STDOUT_FILENO);
 
 		execl (tool->script_path, tool->script_path, "--set", "--progress", "--report", NULL);
-		g_error ("Unable to run backend: %s", path);
+		g_error ("Unable to run backend: %s", tool->script_path);
 	}
   
 	return TRUE;  /* FIXME: Determine if it really worked. */
@@ -267,7 +273,7 @@ xst_tool_load (XstTool *tool)
 	xmlSubstituteEntitiesDefault (TRUE);
 
 	if (tool->config) {
-		xmlDocFree (tool->config);
+		xmlFreeDoc (tool->config);
 		tool->config = NULL;
 	}
 
@@ -287,7 +293,7 @@ xst_tool_load (XstTool *tool)
 		 * mechanism. Let's just load it all into memory, then. Also, refusing
 		 * enormous documents can be considered a plus. </dystopic> */
 
-		report_progress (fd [0], _("Scanning your system configuration."));
+		report_progress (tool, fd [0], _("Scanning your system configuration."));
 
 		p = g_malloc (102400);
 		fcntl(fd [0], F_SETFL, 0);  /* Let's block */
@@ -313,11 +319,11 @@ xst_tool_load (XstTool *tool)
 		dup2 (fd [1], STDOUT_FILENO);
 
 		execl (tool->script_path, tool->script_path, "--get", "--progress", "--report", NULL);
-		g_error ("Unable to run backend: %s", path);
+		g_error ("Unable to run backend: %s", tool->script_path);
 	}
 	
 	if (tool->config)
-		gtk_signal_emit (GTK_OJECT (tool), xsttool_signals[FILL_GUI]);
+		gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_GUI]);
 
 	return tool->config != NULL;
 }
@@ -327,16 +333,23 @@ xst_tool_main (XstTool *tool)
 {
 	GtkWidget *d;
 
-	xst_tool_freeze (tool);
+#warning FIXME: really should have a global lock, methinks
+	xst_dialog_freeze (tool->main_dialog);
 	if (!xst_tool_load (tool)) {
 		d = gnome_ok_dialog (_("There was an error running the backend script,\n"
 				       "and the configuration could not be loaded."));
-		gnome_dialog_run_and_close (d);
+		gnome_dialog_run_and_close (GNOME_DIALOG (d));
 		exit (1);
 	}
-	xst_tool_thaw (tool);
+	xst_dialog_thaw (tool->main_dialog);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	gtk_main ();
+}
+
+static void
+xst_tool_destroy (XstTool *tool)
+{
+	parent_class->destroy (GTK_OBJECT (tool));
 }
 
 static void
@@ -346,7 +359,7 @@ xst_tool_class_init (XstToolClass *klass)
 
 	object_class = (GtkObjectClass *)klass;
 
-	parent_class = gtk_type_class (GNOME_TYPE_APP);
+	parent_class = gtk_type_class (GTK_TYPE_OBJECT);
 
 	xsttool_signals[FILL_GUI] = 
 		gtk_signal_new ("fill_gui",
@@ -373,35 +386,35 @@ static void
 visibility_toggled (GtkWidget *w, gpointer data)
 {
 	XstTool *tool;
-	gboolean shown;
+	gboolean show;
 	GtkAdjustment *vadj;
-	
+
 	tool = XST_TOOL (data);
 
 	show = GTK_TOGGLE_BUTTON (w)->active;
 	vadj = gtk_scrolled_window_get_vadjustment (
-		GTK_SCROLLED_WINDOW (tool->progress_scrolled));
+		GTK_SCROLLED_WINDOW (tool->report_scrolled));
 
 	if (show) {
-		gtk_widget_hide (tool->progress_down);
-		gtk_widget_show (tool->progress_up);
-		gtk_widget_set_usize (tool->progress_scrolled, -1, 140);
-		gtk_widget_show (tool->progress_scrolled);
+		gtk_widget_hide (tool->report_down);
+		gtk_widget_show (tool->report_up);
+		gtk_widget_set_usize (tool->report_scrolled, -1, 140);
+		gtk_widget_show (tool->report_scrolled);
 		gtk_adjustment_set_value (vadj, vadj->upper - vadj->page_size);
 		gtk_adjustment_value_changed (vadj);
 	} else { 
-		gtk_widget_hide (tool->progress_up);
-		gtk_widget_show (tool->progress_down);
-		gtk_widget_hide (tool->progress_scrolled);
+		gtk_widget_hide (tool->report_up);
+		gtk_widget_show (tool->report_down);
+		gtk_widget_hide (tool->report_scrolled);
 		if (tool->timeout_done)
 			gtk_main_quit();
 	}
 }
 
 static void
-xst_tool_init (XstTool *tool)
+xst_tool_type_init (XstTool *tool)
 {
-	GladeXml *xml;
+	GladeXML *xml;
 	GtkWidget *w;
 
 	xml = xst_tool_load_glade_common (tool, "report_window");
@@ -436,57 +449,45 @@ xst_tool_get_type (void)
 			sizeof (XstTool),
 			sizeof (XstToolClass),
 			(GtkClassInitFunc) xst_tool_class_init,
-			(GtkObjectInitFunc) xst_tool_init,
+			(GtkObjectInitFunc) xst_tool_type_init,
 			NULL, NULL, NULL
 		};
 
-		xsttool_type = gtk_type_unique (GNOME_TYPE_APP, &xsttool_info);
+		xsttool_type = gtk_type_unique (GTK_TYPE_OBJECT, &xsttool_info);
 	}
 
 	return xsttool_type;
 }
 
 void
-xst_tool_construct (XstTool *tool, const char *name)
+xst_tool_construct (XstTool *tool, const char *name, const char *title)
 {
-	char *title, *appname;
-
 	g_return_if_fail (name != NULL);
-
-	title   = g_strdup_printf (_("%s - Ximian Setup Tools"), name);
-	appname = g_strdup_printf ("%-admin", name);	
-
-	gnome_app_construct (GNOME_APP (tool), appname, title);
-
-	g_free (appname);
-	g_free (title);
 
 	tool->name               = g_strdup (name);
 	tool->glade_path         = g_strdup_printf ("%s/%s.glade",     INTERFACES_DIR, name);
 	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
 	tool->script_path        = g_strdup_printf ("%s/%s-conf",      SCRIPTS_DIR,    name);
 	
-	tool->dialog      = xst_dialog_new (tool);
+	tool->main_dialog = xst_dialog_new (tool, name, title);
 }
 
 XstTool *
-xst_tool_new (const char *name)
+xst_tool_new (const char *name, const char *title)
 {
 	XstTool *tool;
 	g_return_val_if_fail (name != NULL, NULL);
        
 	tool = XST_TOOL (gtk_type_new (XST_TYPE_TOOL));
-	xst_tool_construct (tool, name);
+	xst_tool_construct (tool, name, title);
 
 	return tool;
 }
 
 XstTool *
-xst_tool_init (const char *name, int argc, char *argv [])
+xst_tool_init (const char *name, const char *title, int argc, char *argv [])
 {
 	GtkWidget *d;
-	int retval;
-	char *s;
 
 	g_return_val_if_fail (name != NULL, NULL);
 
@@ -519,5 +520,5 @@ xst_tool_init (const char *name, int argc, char *argv [])
 		root_access = ROOT_ACCESS_NONE;
 	}
 
-	return xst_tool_new (name);
+	return xst_tool_new (name, title);
 }

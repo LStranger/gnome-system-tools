@@ -21,7 +21,10 @@
 #ifndef XST_DIALOG_H
 #define XST_DIALOG_H
 
+#include <libgnomeui/gnome-app.h>
+#include <glade/glade.h>
 #include "xst-types.h"
+#include "xst-tool.h"
 
 #define XST_TYPE_DIALOG        (xst_dialog_get_type ())
 #define XST_DIALOG(o)          (GTK_CHECK_CAST ((o),  XST_TYPE_DIALOG, XstDialog))
@@ -39,13 +42,10 @@ struct _XstDialog {
 
 	/* Common widgets */
 	GtkWidget *apply_button;
-	GtkWidget *close_button;
 	GtkWidget *complexity_button;
-	GtkWidget *help_button;
 
 	XstDialogComplexity complexity;
-	gboolean frozen;
-	gboolean modified;
+	gboolean            frozen;
 };
 
 struct _XstDialogClass {
@@ -57,8 +57,13 @@ struct _XstDialogClass {
 
 GtkType             xst_dialog_get_type       (void);
 
-XstDialog          *xst_dialog_new            (XstTool *tool, const char *widget);
-void                xst_dialog_free           (XstDialog *xd);
+XstDialog          *xst_dialog_new            (XstTool *tool, 
+					       const char *widget, 
+					       const char *title);
+void                xst_dialog_construct      (XstDialog *dialog,
+					       XstTool *tool, 
+					       const char *widget, 
+					       const char *title);
 
 XstDialogComplexity xst_dialog_get_complexity (XstDialog *xd);
 void                xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c);
@@ -68,5 +73,7 @@ void                xst_dialog_thaw           (XstDialog *xd);
 
 gboolean            xst_dialog_get_modified   (XstDialog *xd);
 void                xst_dialog_modify         (XstDialog *xd);
+
+GtkWidget          *xst_dialog_get_widget     (XstDialog *xd, const char *widget);
 
 #endif /* XST_DIALOG_H */
