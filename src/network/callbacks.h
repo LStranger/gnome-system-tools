@@ -53,10 +53,6 @@ extern void on_network_notebook_switch_page (GtkWidget *notebook,
 void filter_editable (GtkEditable *e, const gchar *text, 
 		      gint length, gint *pos, gpointer data);
 
-#define connect_editable_filter(w, r) g_signal_connect (G_OBJECT (w), "insert_text", \
-			                                  G_CALLBACK (filter_editable), \
-			                                  GINT_TO_POINTER (r))
-
 
 /* libglade callbacks */
 void on_network_notebook_switch_page (GtkWidget *notebook, 

@@ -182,9 +182,20 @@ statichost_list_select_row (GtkTreeSelection *selection, gpointer data)
 		gtk_tree_model_get (model, &iter, STATICHOST_LIST_COL_ALIAS, &buf, -1);
 		buf = fixdown_text_list (buf);
 
+		/* block the "changed" signal from the alias text view */
+		g_signal_handlers_block_by_func (G_OBJECT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (ui->alias))),
+						 G_CALLBACK (on_hosts_alias_changed), NULL);
+
 		gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
-		gst_ui_text_view_add_text (GTK_TEXT_VIEW (ui->alias), buf);
+/*		gst_ui_text_view_add_text (GTK_TEXT_VIEW (ui->alias), buf);*/
+		gtk_text_buffer_set_text (GTK_TEXT_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (ui->alias))),
+					  buf, -1);
 		g_free (buf);
+
+		/* unblock again the "changed" signal again */
+		g_signal_handlers_unblock_by_func (G_OBJECT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (ui->alias))),
+						   G_CALLBACK (on_hosts_alias_changed), NULL);
+
 	} else {
 		/* Unselect row */
 		gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));

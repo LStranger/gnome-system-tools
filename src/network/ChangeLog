@@ -1,3 +1,11 @@
+2003-06-23  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* callbacks.[ch], connection.c: removed the connect_editable_filter 
+	define
+	* hosts.c: block the "changed" signal from the alias text view when
+	the hosts treeview was clicked, it made the "apply" button turn
+	sensitive
+
 2003-06-11  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* callbacks.c: removed some unused code. fixed /etc/hosts edition,

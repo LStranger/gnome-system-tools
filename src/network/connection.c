@@ -1839,7 +1839,9 @@ hookup_callbacks (GstConnection *cxn)
 		glade_xml_signal_connect_data (cxn->xml, signals[i].hname,
 					       signals[i].signalfunc, cxn);
 	for (i = 0; s[i].name; i++)
-		connect_editable_filter (W (s[i].name), s[i].rule);
+		g_signal_connect (G_OBJECT (W (s[i].name)), "insert_text",
+				  G_CALLBACK (filter_editable),
+				  GINT_TO_POINTER (s[i].rule));
 }
 
 

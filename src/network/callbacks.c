@@ -415,7 +415,10 @@ init_editable_filters (GstDialog *dialog)
 	};
 
 	for (i = 0; s[i].name; i++)
-		connect_editable_filter (gst_dialog_get_widget (dialog, s[i].name), s[i].rule);
+		g_signal_connect (G_OBJECT (gst_dialog_get_widget (dialog, s[i].name)),
+				  "insert_text",
+				  G_CALLBACK (filter_editable),
+				  GINT_TO_POINTER (s[i].rule));
 
 #warning FIXME
 	return;
@@ -425,7 +428,7 @@ init_editable_filters (GstDialog *dialog)
 		GtkWidget *w = gst_dialog_get_widget (dialog, s1[i].name);
 
 		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
-		g_signal_connect (G_OBJECT (buffer), "insert_text",
+		g_signal_connect (G_OBJECT (buffer), "changed",
 				  G_CALLBACK (filter_editable),
 				  GINT_TO_POINTER (s1[i].rule));
 	}
