@@ -123,25 +123,80 @@ identity_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static gboolean
 identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-	return FALSE;
+	BootDruid *config = data;
+	GnomeDruidPage *next_page;
+	XstBootImageType type;
+	gchar *buf;
+
+	buf = gtk_entry_get_text (GTK_ENTRY (config->gui->type->entry));
+	type = label_to_type (buf);
+
+	if (type == TYPE_LINUX)
+		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
+								    "druidImagePage"));
+	else
+		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
+								    "druidOtherPage"));
+	
+	gnome_druid_set_page (druid, next_page);
+	return TRUE;
+}
+
+/* Other Page */
+static void
+other_check (BootDruid *druid)
+{
+	gchar *buf;
+
+	/* TODO: Improve check */ 
+	buf = gtk_entry_get_text (GTK_ENTRY (druid->gui->device->entry));
+	if (strlen (buf) > 0)
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE);
+	else
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE);
+}
+
+static void
+other_changed (GtkWidget *widget, gpointer data)
+{
+	BootDruid *druid = data;
+	
+	other_check (druid);
+}
+
+static void
+other_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
+{
+	BootDruid *config = data;
+
+	gtk_widget_grab_focus (config->gui->device->entry);
+	other_check (config);
+}
+
+static gboolean
+other_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
+{
+	BootDruid *config = data;
+	GnomeDruidPage *next_page;
+
+	next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml, "druidFinishPage"));	
+	gnome_druid_set_page (druid, next_page);
+
+	return TRUE;
 }
 
 /* Image Page */
 static void
 image_check (BootDruid *druid)
 {
-/*	gchar *pwd1, *pwd2;
-	gboolean quality;
+	gchar *buf;
 
-	pwd1 = gtk_entry_get_text (druid->gui->pwd1);
-	pwd2 = gtk_entry_get_text (druid->gui->pwd2);
-	quality = gtk_toggle_button_get_active (druid->gui->quality);
-	
-	if (strlen (pwd1) > 0 && !strcmp (pwd1, pwd2))
+	/* TODO: Improve check */ 
+	buf = gtk_entry_get_text (druid->gui->image_entry);
+	if (strlen (buf) > 0)
 		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE);
 	else
 		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE);
-*/
 }
 
 static void
@@ -155,30 +210,28 @@ image_changed (GtkWidget *widget, gpointer data)
 static void
 image_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-/*	BootDruid *config = data;
+	BootDruid *config = data;
 
-	gtk_widget_grab_focus (GTK_WIDGET (config->gui->));
+	gtk_widget_grab_focus (GTK_WIDGET (config->gui->image_entry));
 	image_check (config);
-*/
 }
 
 static gboolean
 image_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
-/*	gchar *pwd1, *pwd2, *error;
-	gboolean quality;
-	BootDruid *config = data;
+	return FALSE;
+}
 
-	pwd1 = gtk_entry_get_text (config->gui->pwd1);
-	pwd2 = gtk_entry_get_text (config->gui->pwd2);
-	quality = gtk_toggle_button_get_active (config->gui->quality);
-	
-	if ((error = passwd_check (pwd1, pwd2, quality))) {
-		boot_account_gui_error (GTK_WINDOW (config->gui->top), error);
-		return TRUE;
-	} else
-		return FALSE;
-*/
+static gboolean
+image_back (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
+{
+	BootDruid *config = data;
+	GnomeDruidPage *next_page;
+
+	next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml, "druidIdentityPage"));	
+	gnome_druid_set_page (druid, next_page);
+
+	return TRUE;
 }
 
 /* Common stuff */
@@ -207,6 +260,28 @@ druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 	druid_exit (config);
 }
 
+static gboolean
+druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
+{
+	BootDruid *config = data;
+	GnomeDruidPage *next_page;
+	XstBootImageType type;
+	gchar *buf;
+
+	buf = gtk_entry_get_text (GTK_ENTRY (config->gui->type->entry));
+	type = label_to_type (buf);
+
+	if (type == TYPE_LINUX)
+		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
+								    "druidImagePage"));
+	else
+		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
+								    "druidOtherPage"));
+	
+	gnome_druid_set_page (druid, next_page);
+	return TRUE;
+}
+
 static struct {
 	gchar *name;
 	GtkSignalFunc next_func;
@@ -224,15 +299,20 @@ static struct {
 	  GTK_SIGNAL_FUNC (identity_prepare),
 	  GTK_SIGNAL_FUNC (NULL),
 	  GTK_SIGNAL_FUNC (NULL) },
+	{ "druidOtherPage",
+	  GTK_SIGNAL_FUNC (other_next),
+	  GTK_SIGNAL_FUNC (other_prepare),
+	  GTK_SIGNAL_FUNC (NULL),
+	  GTK_SIGNAL_FUNC (NULL) },
 	{ "druidImagePage",
 	  GTK_SIGNAL_FUNC (image_next),
 	  GTK_SIGNAL_FUNC (image_prepare),
-	  GTK_SIGNAL_FUNC (NULL),
+	  GTK_SIGNAL_FUNC (image_back),
 	  GTK_SIGNAL_FUNC (NULL) },
 	{ "druidFinishPage",
 	  GTK_SIGNAL_FUNC (NULL),
 	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL),
+	  GTK_SIGNAL_FUNC (druid_finish_back),
 	  GTK_SIGNAL_FUNC (druid_finish) },
 	{ NULL,
 	  GTK_SIGNAL_FUNC (NULL),
@@ -244,7 +324,7 @@ static struct {
 static gboolean
 construct (BootDruid *druid)
 {
-	GtkWidget *widget;
+	GtkWidget *widget, *vbox;
 	BootImage *image;
 	int i;
 
@@ -286,14 +366,36 @@ construct (BootDruid *druid)
 					    pages[i].finish_func, druid);
 	}
 	gtk_signal_connect (GTK_OBJECT (druid->druid), "cancel", druid_cancel, druid);
+
+	/* Reparent "interesting" widgets. */
 	
+	vbox = glade_xml_get_widget (druid->gui->xml, "druid_identity_vbox");
+	widget = druid->gui->basic_frame;
+	gtk_widget_reparent (widget, vbox);
+	gtk_box_set_child_packing (GTK_BOX (vbox), widget, FALSE, FALSE, 0, GTK_PACK_START);
+
+	vbox = glade_xml_get_widget (druid->gui->xml, "druid_image_vbox");
+	widget = druid->gui->image_frame;
+	gtk_widget_reparent (widget, vbox);
+	gtk_box_set_child_packing (GTK_BOX (vbox), widget, FALSE, FALSE, 0, GTK_PACK_START);
+
+	vbox = glade_xml_get_widget (druid->gui->xml, "druid_other_vbox");
+	widget = druid->gui->other_frame;
+	gtk_widget_reparent (widget, vbox);
+	gtk_box_set_child_packing (GTK_BOX (vbox), widget, FALSE, FALSE, 0, GTK_PACK_START);
+		
 	boot_settings_gui_setup (druid->gui, NULL);
+
+	/* Connect druid specific signals. */
 	
 	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "changed", identity_changed, druid);
-	gtk_signal_connect (GTK_OBJECT (druid->gui->type), "activate", druid_entry_activate, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->type->entry), "activate", druid_entry_activate, druid);
 	
-	gtk_signal_connect (GTK_OBJECT (druid->gui->image), "changed", image_changed, druid);
-//	gtk_signal_connect (GTK_OBJECT (druid->gui->), "activate", druid_entry_activate, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->image_entry), "changed", image_changed, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->append), "activate", druid_entry_activate, druid);
+
+	gtk_signal_connect (GTK_OBJECT (druid->gui->device->entry), "changed", other_changed, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->device->entry), "activate", druid_entry_activate, druid);
 
 	return TRUE;
 }

@@ -52,9 +52,6 @@ void             *boot_value_root        (xmlNodePtr node);
 void             *boot_value_append      (xmlNodePtr node);
 
 
-gchar            *type_to_label          (XstBootImageType type);
-XstBootImageType  label_to_type          (const gchar *label);
-
 void boot_value_set_default (xmlNodePtr node);
 void boot_value_set_label (xmlNodePtr node, const gchar *val);
 void boot_value_set_image (xmlNodePtr node, const gchar *val);

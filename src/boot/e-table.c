@@ -315,46 +315,6 @@ boot_value_default (const gchar *label)
 	return retval;
 }
 
-typedef struct {
-	gchar *label;
-	XstBootImageType type;
-} XstBootImageTypeTable;
-
-static XstBootImageTypeTable boot_image_type_table[] = {
-	{ N_("Unknown"), TYPE_UNKNOWN },
-	{ N_("Windows NT"), TYPE_WINNT },
-	{ N_("Windows 9x"), TYPE_WIN9X },
-	{ N_("Dos"), TYPE_DOS },
-	{ N_("Linux"), TYPE_LINUX },
-	{ NULL, -1 }	
-};
-
-gchar *
-type_to_label (XstBootImageType type)
-{
-	gint i;
-
-	for (i = 0; boot_image_type_table[i].label; i++)
-		if (type == boot_image_type_table[i].type)
-			return g_strdup (boot_image_type_table[i].label);
-
-	g_warning ("type_to_label: unknown type.");
-	return g_strdup ("");
-}
-
-XstBootImageType
-label_to_type (const gchar *label)
-{
-	gint i;
-
-	for (i = 0; boot_image_type_table[i].label; i++)
-		if (!strcmp (label, boot_image_type_table[i].label))
-			return boot_image_type_table[i].type;
-
-	g_warning ("label_to_type: unknown label.");
-	return TYPE_UNKNOWN;
-}
-
 XstBootImageType
 boot_value_type (xmlNodePtr node)
 {

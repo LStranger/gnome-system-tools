@@ -7,24 +7,27 @@
 
 #include "boot-image.h"
 
-
-
 typedef struct {
 	GtkWidget *top;
 	BootImage *image;
-	GladeXML *xml;
+	GladeXML  *xml;
 
-	GtkEntry *name;
-	GtkCombo *type;
+	/* Basic frame */
+	GtkWidget *basic_frame;
+	GtkEntry  *name;
+	GtkCombo  *type;
 
-	GtkWidget *device_label;
-	GtkCombo  *device;
-	GtkWidget *image_label;
+	/* Image frame */
+	GtkWidget *image_frame;
 	GtkWidget *image_widget;
 	GtkEntry  *image_entry;
-	GtkWidget *optional;
-	GtkEntry *root;
-	GtkEntry *append;
+	GtkEntry  *root;
+	GtkEntry  *append;
+
+	/* Other frame */
+	GtkWidget *other_frame;
+	GtkCombo  *device;
+	
 } BootSettingsGui;
 
 BootSettingsGui *boot_settings_gui_new      (BootImage *image, GtkWidget *parent);

@@ -34,11 +34,9 @@
 #include "e-table.h"
 
 #include "boot-image-editor.h"
+#include "boot-druid.h"
 
 XstTool *tool;
-
-/* TODO: use struct from e-table.c */
-const gchar *boot_types[] = { "Windows NT", "Windows 9x", "Dos", "Linux", "Unknown", NULL };
 
 void
 on_boot_settings_clicked (GtkButton *button, gpointer data)
@@ -58,28 +56,21 @@ on_boot_settings_clicked (GtkButton *button, gpointer data)
 void
 on_boot_add_clicked (GtkButton *button, gpointer data)
 {
-	GtkWidget *d;
+	BootDruid *druid;
 
-	d = gnome_error_dialog (_("Not Implemented yet, sorry."));
-	gnome_dialog_run (GNOME_DIALOG(d));
-	
-/*	BootSettingsDialog *state;
-	GtkWidget *d;
-	xmlNodePtr node;
-	gint res;
+	if (xst_tool_get_access (tool)) {
+		druid = boot_druid_new ();
 
-	d = xst_dialog_get_widget (tool->main_dialog, "boot_settings_dialog");
+		gtk_widget_show (GTK_WIDGET (druid));
+	}
+}
 
-	state = boot_settings_prepare (NULL);
-	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
+static void
+gui_grab_focus (GtkWidget *w, gpointer data)
+{
+	GtkWidget *widget = GTK_WIDGET (data);
 
-	if (res)
-		return;
-
-	node = boot_table_add ();
-	boot_settings_affect (node);
-	boot_table_update ();
-	xst_dialog_modify (tool->main_dialog); */
+	gtk_widget_grab_focus (widget);
 }
 
 BootSettingsGui *
@@ -95,70 +86,50 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->xml = glade_xml_new (tool->glade_path, NULL);
 	gui->top = parent;
 
+	/* Basic frame */
+	gui->basic_frame = glade_xml_get_widget (gui->xml, "settings_basic_frame");
 	gui->name = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_name"));
 	gui->type = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_type"));
 
-	gui->device = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_device"));
-	gui->device_label = glade_xml_get_widget (gui->xml, "settings_device_label");
-
-	gui->image_label = glade_xml_get_widget (gui->xml, "settings_image_label");
-	gui->image_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image_entry"));	
+	/* Image frame */
+	gui->image_frame = glade_xml_get_widget (gui->xml, "settings_image_frame");
 	gui->image_widget = glade_xml_get_widget (gui->xml, "settings_image");
-	
-	gui->optional = glade_xml_get_widget (gui->xml, "settings_optional_frame");
+	gui->image_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image_entry"));	
 	gui->root = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_root"));
 	gui->append = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_append"));
 
-	/* TODO: connect signals for checks, keyboard nav, etc */
+	/* Other frame */
+	gui->other_frame = glade_xml_get_widget (gui->xml, "settings_other_frame");
+	gui->device = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_device"));
+
+	/* Connect signals */
+	gtk_signal_connect (GTK_OBJECT (gui->name), "activate",
+			    GTK_SIGNAL_FUNC (gui_grab_focus), (gpointer) gui->type->entry);
+	gtk_signal_connect (GTK_OBJECT (gui->image_entry), "activate",
+			    GTK_SIGNAL_FUNC (gui_grab_focus), (gpointer) gui->root);
+	gtk_signal_connect (GTK_OBJECT (gui->root), "activate",
+			    GTK_SIGNAL_FUNC (gui_grab_focus), (gpointer) gui->append);
 
 	return gui;
-}
-
-static void
-gui_setup_boot_types (BootSettingsGui *gui)
-{
-	gint i;
-	GList *list = NULL;
-
-	for (i = 0; boot_types[i]; i++)
-		list = g_list_prepend (list, (void *)boot_types[i]);
-
-	gtk_combo_set_popdown_strings (gui->type, list);
-}
-
-static void
-setup_advanced_add (BootSettingsGui *gui, GtkWidget *parent)
-{
 }
 
 static void
 setup_advanced (BootSettingsGui *gui, GtkWidget *parent)
 {
 	if (gui->image->type == TYPE_LINUX) {
-		gtk_widget_hide (gui->device_label);
-		gtk_widget_hide (GTK_WIDGET (gui->device));
-
-		gtk_widget_show (GTK_WIDGET (gui->optional));
-		gtk_widget_show (gui->image_label);
-		gtk_widget_show (GTK_WIDGET (gui->image_widget));
+		gtk_widget_show (gui->image_frame);
+		gtk_widget_hide (gui->other_frame);
 	} else {
-		gtk_widget_hide (gui->image_label);
-		gtk_widget_hide (GTK_WIDGET (gui->image_widget));
-		gtk_widget_hide (GTK_WIDGET (gui->optional));
-
-		gtk_widget_show (gui->device_label);
-		gtk_widget_show (GTK_WIDGET (gui->device));
+		gtk_widget_hide (gui->image_frame);
+		gtk_widget_show (gui->other_frame);
 	}
 }
 
 static void
 setup_basic (BootSettingsGui *gui, GtkWidget *parent)
 {
-	gtk_widget_hide (GTK_WIDGET (gui->optional));
-	gtk_widget_hide (gui->image_label);		
-	gtk_widget_hide (GTK_WIDGET (gui->image_widget));
-	gtk_widget_hide (gui->device_label);
-	gtk_widget_hide (GTK_WIDGET (gui->device));
+	gtk_widget_hide (gui->other_frame);
+	gtk_widget_hide (gui->image_frame);
 }
 
 void
@@ -166,7 +137,7 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 {
 	BootImage *image = gui->image;
 
-	gui_setup_boot_types (gui);
+	gtk_combo_set_popdown_strings (gui->type, type_labels_list ());
 	
 	xst_ui_entry_set_text (gui->name, image->label);
 	xst_ui_entry_set_text (gui->type->entry, type_to_label (image->type));
@@ -176,9 +147,7 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 	xst_ui_entry_set_text (gui->image_entry, image->image);
 	xst_ui_entry_set_text (gui->device->entry, image->image);
 
-	if (image->new) {
-		setup_advanced_add (gui, top);
-	} else {
+	if (!image->new) {
 		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
 			setup_advanced (gui, top);
 		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_BASIC)

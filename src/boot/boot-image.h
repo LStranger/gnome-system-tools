@@ -38,6 +38,11 @@ typedef enum {
 } XstBootImageType;
 
 typedef struct {
+	gchar *label;
+	XstBootImageType type;
+} XstBootImageTypeTable;
+
+typedef struct {
 	xmlNodePtr node;
 	gboolean new;
 	XstBootImageType type;
@@ -54,4 +59,8 @@ BootImage *boot_image_get_by_node (xmlNodePtr node);
 void       boot_image_save        (BootImage *image);
 void       boot_image_destroy     (BootImage *image);
 
+/* Helpers */
+gchar            *type_to_label          (XstBootImageType type);
+XstBootImageType  label_to_type          (const gchar *label);
+GList            *type_labels_list       (void);
 #endif /* BOOT_IMAGE_H */
