@@ -72,14 +72,15 @@ profile_save_tag_list (xmlNodePtr source, xmlNodePtr dest, gchar *list[])
 static void
 profile_save_list (xmlNodePtr source, xmlNodePtr dest, gchar *tag)
 {
-	xmlNodePtr node, nameserver;
+	xmlNodePtr node, element;
 
 	for (node = gst_xml_element_find_first (source, tag);
 	     node != NULL;
 	     node = gst_xml_element_find_next (node, tag))
 	{
-		nameserver = gst_xml_element_add (dest, tag);
-		gst_xml_element_set_content (nameserver, gst_xml_element_get_content (node));
+		element = gst_xml_element_add (dest, tag);
+
+		gst_xml_element_set_content (element, gst_xml_element_get_content (node));
 	}
 }
 
@@ -210,7 +211,7 @@ profile_save_current (const gchar *name, const gchar *description, GstTool *tool
 
 	/* store the current configuration */
 	profile_save_general_data (root, new_profile);
-	profile_save_list (root, new_profile, "nameservers");
+	profile_save_list (root, new_profile, "nameserver");
 	profile_save_list (root, new_profile, "searchdomain");
 	profile_save_statichosts (root, new_profile);
 	profile_save_interfaces (root, new_profile);
@@ -400,7 +401,7 @@ static gboolean
 profile_compare_with_current_configuration (xmlNodePtr current, xmlNodePtr profile)
 {
 	return (profile_compare_general_data (current, profile) &&
-		profile_compare_list (current, profile, "nameservers") &&
+		profile_compare_list (current, profile, "nameserver") &&
 		profile_compare_list (current, profile, "searchdomain") &&
 		profile_compare_statichosts (current, profile) &&
 		profile_compare_interfaces (current, profile) &&
@@ -443,7 +444,7 @@ profile_set_active (xmlNodePtr profile, GstTool *tool)
 
 	profile_save_general_data (profile, root);
 	
-	profile_set_active_list (profile, root, "nameservers");
+	profile_set_active_list (profile, root, "nameserver");
 	profile_set_active_list (profile, root, "searchdomain");
 	profile_set_active_statichosts (profile, root);
 	profile_set_active_interfaces (profile, root);

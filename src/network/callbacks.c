@@ -1567,12 +1567,18 @@ on_network_profile_option_selected (GtkWidget *widget, gpointer data)
 	GtkTreeModel *connection_model = gtk_tree_view_get_model (GTK_TREE_VIEW (connection_table));
 	GtkWidget *statichost_table = gst_dialog_get_widget (tool->main_dialog, "statichost_list");
 	GtkTreeModel *statichost_model = gtk_tree_view_get_model (GTK_TREE_VIEW (statichost_table));
+	GtkWidget *dns_table = gst_dialog_get_widget (tool->main_dialog, "dns_list");
+	GtkTreeModel *dns_model = gtk_tree_view_get_model (GTK_TREE_VIEW (dns_table));
+	GtkWidget *search_table = gst_dialog_get_widget (tool->main_dialog, "search_list");
+	GtkTreeModel *search_model = gtk_tree_view_get_model (GTK_TREE_VIEW (search_table));
 	xmlNodePtr profile = (xmlNodePtr) data;
 	
 	profile_set_active (profile, tool);
 
-	gtk_list_store_clear (GTK_LIST_STORE (connection_model));	
-	gtk_list_store_clear (GTK_LIST_STORE (statichost_model));	
+	gtk_list_store_clear (GTK_LIST_STORE (connection_model));
+	gtk_list_store_clear (GTK_LIST_STORE (statichost_model));
+	gtk_list_store_clear (GTK_LIST_STORE (dns_model));
+	gtk_list_store_clear (GTK_LIST_STORE (search_model));
 	
 	transfer_profile_to_gui (tool, NULL);
 }
