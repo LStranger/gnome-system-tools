@@ -68,6 +68,14 @@ const static _logindefs default_logindefs = {
 	TRUE /* create_home */
 };
 
+
+gchar *user_tags[] = {
+		"key", "login", "password", "uid", "gid", "comment", "home", "shell", "last_mod",
+		"passwd_max_life", "passwd_exp_warn", "passwd_exp_disable", "passwd_disable",
+		"reserved", "is_shadow", NULL
+};
+
+
 /* Helper functions */
 
 static guint
@@ -142,11 +150,6 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 	xmlNodePtr users_node, node, n0;
 	user *u;
 	
-	gchar *user_tags[] = {
-		"key", "login", "password", "uid", "gid", "comment", "home", "shell", "last_mod", 
-		"passwd_max_life", "passwd_exp_warn", "passwd_exp_disable", "passwd_disable", "reserved",
-		"is_shadow", NULL
-	};
 	gchar *tag;
 	gint i;
 
@@ -334,6 +337,133 @@ transfer_group_list_to_gui (void)
 	current_group = gtk_object_get_data (item, group_list_data_key);
 }
 
+static void
+transfer_user_list_glist_to_xml (xmlNodePtr root)
+{
+	xmlNodePtr userdb_node, node;
+	GList *tmplist;
+	user *u;
+	gint i;
+	gchar *tag;
+	gchar *buf = (gchar *)g_malloc (15);	/*Max buf size for non-char tags */
+
+	/* Delete old users and make a new ones */
+	/* Should we sort it first by key? */
+	
+	userdb_node = xml_element_find_first (root, "userdb");
+	xml_element_destroy_children (userdb_node);
+
+	for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
+	{
+		u = (user *)tmplist->data;
+		
+		node = xml_element_add (userdb_node, "user");
+
+		for (i = 0, tag = user_tags[0]; tag; i++, tag = user_tags[i])
+		{
+			switch (i)
+			{
+				case  0:
+				       xml_element_add_with_content (node, "key", u->key);
+				       break;
+				case  1:
+				       xml_element_add_with_content (node, "login", u->login);
+				       break;
+				case 2:
+				       xml_element_add_with_content (node, "password", u->password);
+				       break;
+				case 3:
+				       sprintf (buf, "%d", u->uid);
+				       xml_element_add_with_content (node, "uid", buf);
+				       break;
+				case 4:
+				       sprintf (buf, "%d", u->gid);
+				       xml_element_add_with_content (node, "gid", buf);
+				       break;
+				case 5:
+				       xml_element_add_with_content (node, "comment", u->comment);
+				       break;
+				case 6:
+				       xml_element_add_with_content (node, "home", u->home);
+				       break;
+				case 7:
+				       xml_element_add_with_content (node, "shell", u->shell);
+				       break;
+				case 8:
+				       sprintf (buf, "%d", u->last_mod);
+				       xml_element_add_with_content (node, "last_mod", buf);
+				       break;
+				case 9:
+				       sprintf (buf, "%d", u->passwd_max_life);
+				       xml_element_add_with_content (node, "passwd_max_life", buf);
+				       break;
+				case 10:
+				       sprintf (buf, "%d", u->passwd_exp_warn);
+				       xml_element_add_with_content (node, "passwd_exp_warn", buf);
+				       break;
+				case 11:
+				       sprintf (buf, "%d", u->passwd_exp_disable);
+				       xml_element_add_with_content (node, "passwd_exp_disable",
+						       buf);
+				       break;
+				case 12:
+				       sprintf (buf, "%d", u->passwd_disable);
+				       xml_element_add_with_content (node, "passwd_disable", buf);
+				       break;
+				case 13:
+				       xml_element_add_with_content (node, "reserved", u->reserved);
+				       break;
+				case 14:
+				       sprintf (buf, "%d", u->is_shadow);
+				       xml_element_add_with_content (node, "is_shadow", buf);
+				       break;
+			}
+		}
+	}
+	g_free (buf);
+}
+
+
+static void
+transfer_group_list_glist_to_xml (xmlNodePtr root)
+{
+	xmlNodePtr groupdb_node, users_node, node, u_node;
+	group *g;
+	GList *tmplist, *list;
+	gchar *buf = (gchar *)g_malloc (15);	/*Max buf size for non-char tags */
+
+	
+	/* Delete old users and make a new ones */
+	/* Should we sort it first by key? */
+	
+	groupdb_node = xml_element_find_first (root, "groupdb");
+	xml_element_destroy_children (groupdb_node);
+
+	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+	{
+		g = (group *)tmplist->data;
+		node = xml_element_add (groupdb_node, "group");
+
+		sprintf (buf, "%d", g->key);
+		xml_element_add_with_content (node, "key", buf);
+		xml_element_add_with_content (node, "name", g->name);
+		xml_element_add_with_content (node, "password", g->password);
+
+		sprintf (buf, "%d", g->gid);
+		xml_element_add_with_content (node, "gid", buf);
+
+		users_node = xml_element_add (node, "users");
+
+		for (list = g_list_first (g->users); list; list = g_list_next (list))
+
+		{
+			buf = (gchar *)list->data;
+			u_node = xml_element_add (users_node, "user");
+			xml_element_set_content (u_node, buf);
+		}
+	}
+	g_free (buf);
+}
 
 gint
 user_sort_by_uid (gconstpointer a, gconstpointer b)
@@ -388,4 +518,7 @@ transfer_xml_to_gui (xmlNodePtr root)
 void
 transfer_gui_to_xml (xmlNodePtr root)
 {
+	transfer_user_list_glist_to_xml (root);
+	transfer_group_list_glist_to_xml (root);
 }
+

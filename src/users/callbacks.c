@@ -60,6 +60,7 @@ on_close_clicked(GtkButton *button, gpointer data)
 void
 on_apply_clicked (GtkButton *button, gpointer user_data)
 {
+	transfer_gui_to_xml (xml_doc_get_root (tool_config_get_xml()));
  	tool_config_save();
 	tool_set_modified(FALSE);
 }
