@@ -525,7 +525,6 @@ systems to choose from at startup.</property>
 
 	  <child>
 	    <widget class="GtkLabel" id="label83">
-	      <property name="visible">True</property>
 	      <property name="label" translatable="yes">Boot _type:</property>
 	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
@@ -571,7 +570,6 @@ systems to choose from at startup.</property>
 
 	  <child>
 	    <widget class="GtkCombo" id="settings_type">
-	      <property name="visible">True</property>
 	      <property name="value_in_list">True</property>
 	      <property name="allow_empty">False</property>
 	      <property name="case_sensitive">False</property>
@@ -795,7 +793,7 @@ systems to choose from at startup.</property>
 	      <property name="visible">True</property>
 	      <property name="max_saved">10</property>
 	      <property name="directory_entry">False</property>
-	      <property name="modal">False</property>
+	      <property name="modal">True</property>
 
 	      <child internal-child="entry">
 		<widget class="GtkEntry" id="settings_image_entry">
@@ -816,27 +814,6 @@ systems to choose from at startup.</property>
 	      <property name="right_attach">4</property>
 	      <property name="top_attach">1</property>
 	      <property name="bottom_attach">2</property>
-	      <property name="y_options"></property>
-	    </packing>
-	  </child>
-
-	  <child>
-	    <widget class="GtkEntry" id="settings_root">
-	      <property name="visible">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="editable">True</property>
-	      <property name="visibility">True</property>
-	      <property name="max_length">0</property>
-	      <property name="text" translatable="yes"></property>
-	      <property name="has_frame">True</property>
-	      <property name="invisible_char" translatable="yes">*</property>
-	      <property name="activates_default">False</property>
-	    </widget>
-	    <packing>
-	      <property name="left_attach">2</property>
-	      <property name="right_attach">4</property>
-	      <property name="top_attach">2</property>
-	      <property name="bottom_attach">3</property>
 	      <property name="y_options"></property>
 	    </packing>
 	  </child>
@@ -909,6 +886,45 @@ systems to choose from at startup.</property>
 	      <property name="top_attach">3</property>
 	      <property name="bottom_attach">4</property>
 	      <property name="x_options">fill</property>
+	      <property name="y_options"></property>
+	    </packing>
+	  </child>
+
+	  <child>
+	    <widget class="GtkCombo" id="settings_root_combo">
+	      <property name="visible">True</property>
+	      <property name="value_in_list">False</property>
+	      <property name="allow_empty">True</property>
+	      <property name="case_sensitive">False</property>
+	      <property name="enable_arrow_keys">True</property>
+	      <property name="enable_arrows_always">False</property>
+
+	      <child internal-child="entry">
+		<widget class="GtkEntry" id="settings_root">
+		  <property name="visible">True</property>
+		  <property name="can_focus">True</property>
+		  <property name="editable">False</property>
+		  <property name="visibility">True</property>
+		  <property name="max_length">0</property>
+		  <property name="text" translatable="yes"></property>
+		  <property name="has_frame">True</property>
+		  <property name="invisible_char" translatable="yes">*</property>
+		  <property name="activates_default">False</property>
+		</widget>
+	      </child>
+
+	      <child internal-child="list">
+		<widget class="GtkList" id="combo-list1">
+		  <property name="visible">True</property>
+		  <property name="selection_mode">GTK_SELECTION_BROWSE</property>
+		</widget>
+	      </child>
+	    </widget>
+	    <packing>
+	      <property name="left_attach">2</property>
+	      <property name="right_attach">4</property>
+	      <property name="top_attach">2</property>
+	      <property name="bottom_attach">3</property>
 	      <property name="y_options"></property>
 	    </packing>
 	  </child>
@@ -1108,9 +1124,9 @@ To begin, click &quot;Next&quot;. </property>
 	<widget class="GnomeDruidPageStandard" id="druidIdentityPage">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">Image Settings (Step 1 of 2)</property>
-	  <property name="title_foreground">#8080081fe948</property>
-	  <property name="background">#77801601e948</property>
-	  <property name="logo_background">#8080081fbb46</property>
+	  <property name="title_foreground">#ee00bfffebb8</property>
+	  <property name="background">#4e180839ebb8</property>
+	  <property name="logo_background">#5a400820ff73</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">
@@ -1225,9 +1241,9 @@ To begin, click &quot;Next&quot;. </property>
 	<widget class="GnomeDruidPageStandard" id="druidOtherPage">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">Other Settings (Step 2 of 2)</property>
-	  <property name="title_foreground">#8080081fe948</property>
-	  <property name="background">#77801601e948</property>
-	  <property name="logo_background">#8080081fbb46</property>
+	  <property name="title_foreground">#ee00bfffebb8</property>
+	  <property name="background">#c8c00839ebb8</property>
+	  <property name="logo_background">#5a400820ff73</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">
@@ -1342,9 +1358,9 @@ To begin, click &quot;Next&quot;. </property>
 	<widget class="GnomeDruidPageStandard" id="druidImagePage">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">Image (Step 2 of 2)</property>
-	  <property name="title_foreground">#8080081fe948</property>
-	  <property name="background">#77801601e948</property>
-	  <property name="logo_background">#8080081fbb46</property>
+	  <property name="title_foreground">#ee00bfffebb8</property>
+	  <property name="background">#a358083bebb8</property>
+	  <property name="logo_background">#5a400820ff73</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">

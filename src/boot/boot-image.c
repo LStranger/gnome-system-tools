@@ -355,7 +355,7 @@ type_to_label (GstBootImageType type)
 			return g_strdup (boot_image_type_table[i].label);
 
 	g_warning ("type_to_label: unknown type.");
-	return g_strdup ("");
+	return g_strdup (boot_image_type_table[0].label);
 }
 
 GstBootImageType
@@ -364,10 +364,9 @@ label_to_type (const gchar *label)
 	gint i;
 
 	for (i = 0; boot_image_type_table[i].label; i++)
-		if (!strcmp (label, boot_image_type_table[i].label))
+		if (strcmp (label, boot_image_type_table[i].label) == 0)
 			return boot_image_type_table[i].type;
 
-	g_warning ("label_to_type: unknown label '%s'.", label);
 	return TYPE_UNKNOWN;
 }
 
@@ -382,3 +381,4 @@ type_labels_list (void)
 	
 	return list;
 }
+

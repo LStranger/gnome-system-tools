@@ -84,6 +84,54 @@ on_boot_add_clicked (GtkButton *button, gpointer data)
 	}
 }
 
+static GList *
+settings_dev_list (GstBootImageType ctype)
+{
+	GList *list = NULL;
+
+	xmlNodePtr  root;
+	xmlNodePtr  part;
+	xmlNodePtr  node;
+
+	gchar *dev;
+	gchar *type;
+
+	root = gst_xml_doc_get_root (tool->config);
+	part = gst_xml_element_find_first (root, "partitions");
+	for (node = gst_xml_element_find_first (part, "partition");
+	     node; node = gst_xml_element_find_next (node, "partition"))
+	{
+		dev = gst_xml_get_child_content (node, "dev");
+		type = gst_xml_get_child_content (node, "type");
+		if (ctype == label_to_type (type))
+			list = g_list_append (list, g_strdup (dev));
+	}
+
+	return (list);
+}
+
+static void
+on_type_entry_change (GtkWidget *w, gpointer data)
+{
+	BootSettingsGui *gui;
+	const gchar *buf;
+	GstBootImageType type;
+
+	gui = (BootSettingsGui *) data;
+
+	buf = gtk_entry_get_text (GTK_ENTRY (gui->type->entry));
+	
+	if (strlen (buf) > 0)
+	{
+		type = label_to_type (buf);
+		if (type == TYPE_LINUX)
+			gtk_combo_set_popdown_strings (gui->root, settings_dev_list (type));
+		else
+			gtk_combo_set_popdown_strings (gui->device, settings_dev_list (type));
+	}	
+	return;
+}
+
 static void
 gui_grab_focus (GtkWidget *w, gpointer data)
 {
@@ -109,12 +157,13 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->basic_frame = glade_xml_get_widget (gui->xml, "settings_basic_frame");
 	gui->name = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_name"));
 	gui->type = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_type"));
+	/*gui->type_label = GTK_LABEL (glade_xml_get_widget (gui->xml, "boot_type_label"));*/
 
 	/* Image frame */
 	gui->image_frame = glade_xml_get_widget (gui->xml, "settings_image_frame");
 	gui->image_widget = glade_xml_get_widget (gui->xml, "settings_image");
 	gui->image_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image_entry"));	
-	gui->root = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_root"));
+	gui->root = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_root_combo"));
 	gui->append = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_append"));
 	gui->append_browse = GTK_BUTTON (glade_xml_get_widget (gui->xml, "settings_append_browse"));
 
@@ -125,9 +174,11 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (gui->name), "activate",
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->type->entry);
+	g_signal_connect (G_OBJECT (gui->type->entry), "changed",
+	G_CALLBACK (on_type_entry_change), (gpointer) gui);
 	g_signal_connect (G_OBJECT (gui->image_entry), "activate",
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->root);
-	g_signal_connect (G_OBJECT (gui->root), "activate",
+	g_signal_connect (G_OBJECT (gui->root->entry), "activate",
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->append);
 	g_signal_connect (G_OBJECT (gui->append_browse), "clicked",
 	                  G_CALLBACK (on_boot_append_browse_clicked), (gpointer) gui);
@@ -138,35 +189,85 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 static void
 setup_advanced (BootSettingsGui *gui, GtkWidget *parent)
 {
-	if (gui->image->type == TYPE_LINUX) {
+	if (gui->image->type == TYPE_LINUX)
+	{
 		gtk_widget_show (gui->image_frame);
 		gtk_widget_hide (gui->other_frame);
-	} else {
-		gtk_widget_hide (gui->image_frame);
+	}
+	else
+	{
 		gtk_widget_show (gui->other_frame);
+		gtk_widget_hide (gui->image_frame);
 	}
 }
 
 static void
 setup_basic (BootSettingsGui *gui, GtkWidget *parent)
 {
-	gtk_widget_hide (gui->other_frame);
-	gtk_widget_hide (gui->image_frame);
+	/*gtk_widget_hide (gui->other_frame);*/
 }
+
+static gint *
+compare (gconstpointer a, gconstpointer b)
+{
+	return (GINT_TO_POINTER(strcmp (a,b)));
+}
+
+GList *
+settings_type_list (void)
+{
+	GList *list = NULL;
+
+	xmlNodePtr  root;
+	xmlNodePtr  part;
+	xmlNodePtr  node;
+
+	gchar *dev;
+	gchar *type;
+	
+	root = gst_xml_doc_get_root (tool->config);
+	part = gst_xml_element_find_first (root, "partitions");
+	for (node = gst_xml_element_find_first (part, "partition");
+	     node; node = gst_xml_element_find_next (node, "partition"))
+	{
+		dev = gst_xml_get_child_content (node, "dev");
+		type = type_to_label (label_to_type (gst_xml_get_child_content (node, "type")));
+		if (g_list_find_custom (list, type, (GCompareFunc)compare) == NULL)
+			list = g_list_append (list, g_strdup (type));
+	}
+
+	return (list);
+}
+
 
 void
 boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 {
 	BootImage *image = gui->image;
+	GList *type_list;
+	gchar *error;
 
-	gtk_combo_set_popdown_strings (gui->type, type_labels_list ());
+	if (image->type == TYPE_LINUX)
+	{
+		gtk_combo_set_popdown_strings (gui->root, settings_dev_list (image->type));
+		if (image->root)
+		  gst_ui_entry_set_text (GTK_ENTRY (gui->root->entry), image->root);
+	}
+	else
+	{
+		gtk_combo_set_popdown_strings (gui->device, settings_dev_list (image->type));
+		if (image->image)
+		  gst_ui_entry_set_text (GTK_ENTRY (gui->device->entry), image->image);
+	}
 	
+	gst_ui_entry_set_text (gui->type->entry, type_to_label (image->type));
 	gst_ui_entry_set_text (gui->name, image->label);
-	gst_ui_entry_set_text (gui->type->entry, _(type_to_label (image->type)));
-	gst_ui_entry_set_text (gui->root, image->root);
 	gst_ui_entry_set_text (gui->append, image->append);
 
-	gst_ui_entry_set_text (gui->image_entry, image->image);
+	if (error = boot_image_valid_root (image))
+		gst_ui_entry_set_text (gui->image_entry, "");
+	else
+		gst_ui_entry_set_text (gui->image_entry, image->image);
 	gst_ui_entry_set_text (gui->device->entry, image->image);
 
 	if (!image->new) {
@@ -189,13 +290,19 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 
 	image->type = label_to_type (gtk_entry_get_text (GTK_ENTRY (gui->type->entry)));
 	image->label = g_strdup (gtk_entry_get_text (gui->name));	
-	image->root = g_strdup (gtk_entry_get_text (gui->root));
-	image->append = g_strdup (gtk_entry_get_text (gui->append));
 
 	if (image->type == TYPE_LINUX)
+	{
+		image->root = g_strdup (gtk_entry_get_text (GTK_ENTRY (gui->root->entry)));
+		image->append = g_strdup (gtk_entry_get_text (gui->append));
 		image->image = g_strdup (gtk_entry_get_text (gui->image_entry));
+	}
 	else
+	{
+		image->root = g_strdup ("");
+		image->append = g_strdup ("");
 		image->image = g_strdup (gtk_entry_get_text (GTK_ENTRY (gui->device->entry)));
+	}
 
 	if (check) {
 		gchar *error = boot_image_check (image);

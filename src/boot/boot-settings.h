@@ -16,12 +16,13 @@ typedef struct {
 	GtkWidget *basic_frame;
 	GtkEntry  *name;
 	GtkCombo  *type;
+	/*GtkLabel  *type_label;*/
 
 	/* Image frame */
 	GtkWidget *image_frame;
 	GtkWidget *image_widget;
 	GtkEntry  *image_entry;
-	GtkEntry  *root;
+	GtkCombo  *root;
 	GtkEntry  *append;
 	GtkButton *append_browse;
 
@@ -36,7 +37,7 @@ void             boot_settings_gui_setup    (BootSettingsGui *gui, GtkWidget *to
 gboolean         boot_settings_gui_save     (BootSettingsGui *gui, gboolean check);
 void             boot_settings_gui_error    (GtkWindow *parent, gchar *error);
 void             boot_settings_gui_destroy  (BootSettingsGui *gui);
-
+GList            *settings_type_list        (void);
 /* Callbacks */ 
 
 void             on_boot_add_clicked        (GtkButton *button, gpointer data);

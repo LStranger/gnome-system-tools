@@ -73,5 +73,4 @@ gchar            *type_to_label           (GstBootImageType type);
 GstBootImageType  label_to_type           (const gchar *label);
 GList            *type_labels_list        (void);
 
-
 #endif /* BOOT_IMAGE_H */

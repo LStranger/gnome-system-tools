@@ -1,7 +1,7 @@
 /*
- * Datei für übersetzbare Zeichenketten, erzeugt durch Glade.
- * Fügen Sie diese Datei zur POTFILES.in Ihres Projektes hinzu.
- * Compilieren Sie sie NICHT als Teil Ihrer Anwendung.
+ * Archivo de cadenas traducibles generado por Glade.
+ * Añada este archivo a su POTFILES.in de su proyecto.
+ * NO lo compile como parte de su aplicación.
  */
 
 gchar *s = N_("Use this tool to set the installed operating\n"
@@ -21,8 +21,8 @@ gchar *s = N_("_Append:");
 gchar *s = N_("*");
 gchar *s = N_("<span weight=\"bold\">Image Settings</span>");
 gchar *s = N_("*");
-gchar *s = N_("*");
 gchar *s = N_("_Edit parameters");
+gchar *s = N_("*");
 gchar *s = N_("<span weight=\"bold\">Other Settings</span>");
 gchar *s = N_("_Device:");
 gchar *s = N_("*");

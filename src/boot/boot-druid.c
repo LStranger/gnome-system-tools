@@ -151,16 +151,22 @@ identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 		identity_prepare (page, druid, data);
 		return TRUE;
 	}
-	
+
 	buf = gtk_entry_get_text (GTK_ENTRY (config->gui->type->entry));
 	type = label_to_type (buf);
 
 	if (type == TYPE_LINUX)
+	{
+		gst_ui_entry_set_text (config->gui->root->entry, "");
 		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
 								    "druidImagePage"));
+	}
 	else
+	{
+		gst_ui_entry_set_text (config->gui->device->entry, "");
 		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
 								    "druidOtherPage"));
+	}
 	
 	gnome_druid_set_page (druid, next_page);
 	return TRUE;
@@ -222,7 +228,7 @@ static void
 image_check (BootDruid *druid)
 {
 	const gchar *buf = gtk_entry_get_text (druid->gui->image_entry);
-	const gchar *buf2 = gtk_entry_get_text (druid->gui->root);
+	const gchar *buf2 = gtk_entry_get_text (GTK_ENTRY (druid->gui->root->entry));
 	gboolean enabled = ((strlen (buf) > 0) && (strlen (buf2) > 0))?TRUE : FALSE;
 	
 	/* TODO: Improve check */ 
@@ -233,7 +239,7 @@ static void
 image_changed (GtkWidget *widget, gpointer data)
 {
 	BootDruid *druid = data;
-	
+
 	image_check (druid);
 }
 
@@ -253,7 +259,6 @@ image_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	gchar     *error;
 	BootDruid *config = data;
 	
-
 	boot_settings_gui_save (config->gui, FALSE);
 	
 	error = boot_image_valid_device (config->gui->image);
@@ -329,7 +334,7 @@ druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 	else
 		next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml,
 								    "druidOtherPage"));
-	
+
 	gnome_druid_set_page (druid, next_page);
 	return TRUE;
 }
@@ -381,12 +386,11 @@ construct (BootDruid *druid)
 		return FALSE;
 
 	druid->gui = boot_settings_gui_new (image, GTK_WIDGET (druid));
-	
-	/* get our toplevel widget and reparent it */
+
+        /* get our toplevel widget and reparent it */
 	widget = glade_xml_get_widget (druid->gui->xml, "druid_druid");
 	gtk_widget_reparent (widget, GTK_WIDGET (druid));
 	druid->druid = GNOME_DRUID (widget);
-
 	
 	/* set window title */
 	gtk_window_set_title (GTK_WINDOW (druid), _("Boot Image Wizard"));
@@ -432,17 +436,19 @@ construct (BootDruid *druid)
 	gtk_box_set_child_packing (GTK_BOX (vbox), widget, TRUE, TRUE, 0, GTK_PACK_START);
 		
 	boot_settings_gui_setup (druid->gui, NULL);
-
+	gtk_combo_set_popdown_strings (druid->gui->type, settings_type_list ());
+	
 	/* Connect druid specific signals. */
 	
-	g_signal_connect (G_OBJECT (druid->gui->name), "changed", G_CALLBACK (identity_changed), druid);
+	g_signal_connect (G_OBJECT (druid->gui->name), "changed",
+			  G_CALLBACK (identity_changed), druid);
 	g_signal_connect (G_OBJECT (druid->gui->type->entry), "activate",
 			  G_CALLBACK (druid_entry_activate), druid);
 	
 	g_signal_connect (G_OBJECT (druid->gui->image_entry), "changed",
 			  G_CALLBACK (image_changed), druid);
-	g_signal_connect (G_OBJECT (druid->gui->root), "changed",
-	          G_CALLBACK (image_changed), druid);
+	g_signal_connect (G_OBJECT (druid->gui->root->entry), "changed",
+			  G_CALLBACK (image_changed), druid);
 	g_signal_connect (G_OBJECT (druid->gui->append), "activate",
 			  G_CALLBACK (druid_entry_activate), druid);
 
