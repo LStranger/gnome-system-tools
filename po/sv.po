@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
-"POT-Creation-Date: 2003-09-13 08:18+0200\n"
-"PO-Revision-Date: 2003-09-13 08:19+0200\n"
+"POT-Creation-Date: 2003-09-26 16:33+0200\n"
+"PO-Revision-Date: 2003-09-26 16:35+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -369,7 +369,7 @@ msgstr "Komplexitet"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Ange lösenord - GNOME-systemverktygen"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1636
 msgid "GNOME System Tools"
 msgstr "GNOME-systemverktygen"
 
@@ -1463,7 +1463,7 @@ msgstr ""
 "Användarprofiler kan användas som mallar för att underlätta skapandet av nya "
 "användare. "
 
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:75
 msgid "Users"
 msgstr "Användare"
 
@@ -1619,8 +1619,8 @@ msgid "Boot"
 msgstr "Start"
 
 #: src/boot/boot.desktop.in.in.h:2
-msgid "Boot Manager"
-msgstr "Starthanterare"
+msgid "Configure the system boot process"
+msgstr "Konfigurera systemstartprocessen"
 
 #: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
@@ -1712,10 +1712,10 @@ msgid " More _Options"
 msgstr " Fler _alternativ"
 
 #: src/common/gst-dialog.c:93
-msgid " Less _Options"
+msgid " Fewer _Options"
 msgstr " Färre _alternativ"
 
-#: src/common/gst-dialog.c:476
+#: src/common/gst-dialog.c:454
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1723,21 +1723,21 @@ msgstr ""
 "Det finns ändringar som inte har verkställts.\n"
 "Verkställ dem nu?"
 
-#: src/common/gst-dialog.c:592
+#: src/common/gst-dialog.c:552
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/gst-tool.c:944
+#: src/common/gst-tool.c:853
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Hoppar över %s-direktiv..."
 
-#: src/common/gst-tool.c:1094
+#: src/common/gst-tool.c:993
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/gst-tool.c:1156
+#: src/common/gst-tool.c:1055
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1745,12 +1745,12 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/gst-tool.c:1522
+#: src/common/gst-tool.c:1359
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - GNOME-systemverktygen"
 
-#: src/common/gst-tool.c:1700
+#: src/common/gst-tool.c:1537
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1777,11 +1777,11 @@ msgstr ""
 "--\n"
 "Teamet bakom GNOME-systemverktygen"
 
-#: src/common/gst-tool.c:1724
+#: src/common/gst-tool.c:1561
 msgid "Warning"
 msgstr "Varning"
 
-#: src/common/gst-tool.c:1733
+#: src/common/gst-tool.c:1570
 msgid "Don't show me this again"
 msgstr "Visa inte detta igen"
 
@@ -2122,8 +2122,8 @@ msgid "Connection name (Step 2 of 2)"
 msgstr "Anslutningsnamn (steg 2 av 2)"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Konfiguration av nätverkskort."
+msgid "Configure network devices and connections"
+msgstr "Konfigurera nätverksenheter och nätverksanslutningar"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
@@ -2202,26 +2202,26 @@ msgid "Services Settings"
 msgstr "Tjänsteinställningar"
 
 #: src/services/services.desktop.in.in.h:1
-msgid "Services"
-msgstr "Tjänster"
+msgid "Configure which services will be run when the system starts"
+msgstr "Konfigurera vilka tjänster som körs då systemet startar"
 
 #: src/services/services.desktop.in.in.h:2
-msgid "Services Manager"
-msgstr "Tjänstehanterare"
+msgid "Services"
+msgstr "Tjänster"
 
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Tjänst"
 
-#: src/time/main.c:310
+#: src/time/main.c:303
 msgid "Time Zone - GNOME System Tools"
 msgstr "Tidszon - GNOME-systemverktygen"
 
-#: src/time/main.c:428
+#: src/time/main.c:417
 msgid "Time Servers - GNOME System Tools"
 msgstr "Tidsservrar - GNOME-systemverktygen"
 
-#: src/time/main.c:500
+#: src/time/main.c:495
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2229,23 +2229,23 @@ msgstr ""
 "Du har inte NTP-stöd körandes. Kör NTP-stöd på\n"
 "systemet för att aktivera serversynkronisering."
 
-#: src/time/main.c:789
+#: src/time/main.c:784
 msgid "Time and Date Settings"
 msgstr "Inställningar för tid och datum"
 
 #: src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Tid"
+msgid "Change system time, date, and timezone"
+msgstr "Ändra systemtid, datum och tidszon."
 
 #: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
-msgstr "Tid, datum och tidszon."
+msgid "Time and Date"
+msgstr "Tid och datum"
 
-#: src/users/callbacks.c:592
+#: src/users/callbacks.c:598
 msgid "Create New profile"
 msgstr "Skapa ny profil"
 
-#: src/users/callbacks.c:623
+#: src/users/callbacks.c:629
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Inställningar för profilen %s"
@@ -2316,7 +2316,7 @@ msgstr "Gruppnamnet innehåller"
 msgid "User GID is"
 msgstr "Användar-GID är"
 
-#: src/users/main.c:321
+#: src/users/main.c:321 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Användare och grupper"
 
@@ -2490,9 +2490,27 @@ msgstr "Skal"
 msgid "Comments"
 msgstr "Kommentarer"
 
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Användare och grupper."
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Lägg till eller ta bort användare och grupper"
+
+#~ msgid "Boot Manager"
+#~ msgstr "Starthanterare"
+
+#~ msgid " Less _Options"
+#~ msgstr " Färre _alternativ"
+
+#~ msgid "Network adapter setup."
+#~ msgstr "Konfiguration av nätverkskort."
+
+#~ msgid "Services Manager"
+#~ msgstr "Tjänstehanterare"
+
+#~ msgid "Time"
+#~ msgstr "Tid"
+
+#~ msgid "Users and groups."
+#~ msgstr "Användare och grupper."
 
 #~ msgid "Configure a network interface."
 #~ msgstr "Konfigurera ett nätverksgränssnitt."
@@ -3890,9 +3908,6 @@ msgstr "Användare och grupper."
 #~ "Det här är en lista över de grupper som finns på ditt system. Du kan "
 #~ "skapa nya grupper eller redigera existerande grupper med detta "
 #~ "dialogfönster."
-
-#~ msgid " Fewer _Options"
-#~ msgstr " Färre _alternativ"
 
 #~ msgid "_Network profile"
 #~ msgstr "_Nätverksprofil"
