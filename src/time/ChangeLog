@@ -1,3 +1,9 @@
+2001-05-12  Hans Petter Jansson  <hpj@ximian.com>
+
+	* main.c (clock_tick): Put the freeze/thaw back in, since without them
+	  the dialog would appear modified to the common code. Changed the
+	  common code to prevent flickering instead.
+
 2001-05-10  Chema Celorio  <chema@celorio.com>
 
 	* main.c (clock_tick): remove the blinking BUG
