@@ -32,6 +32,9 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <glade/glade.h>
 
+#include <time.h>
+#include <stdlib.h>
+
 #include "global.h"
 
 #include "transfer.h"
@@ -40,6 +43,11 @@
 int
 main (int argc, char *argv[])
 {
+	
+	/* For random password generation. */
+	
+	srand (time (NULL));
+	
 #ifdef ENABLE_NLS
 	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain (PACKAGE);

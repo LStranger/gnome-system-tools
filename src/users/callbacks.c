@@ -32,6 +32,11 @@
 #include "callbacks.h"
 #include "transfer.h"
 
+#include <stdlib.h>
+#include <crack.h>
+
+#define CRACK_DICT_PATH "/usr/lib/cracklib_dict"
+#define RANDOM_PASSWD_SIZE 6
 
 #define USER 1
 #define GROUP 2
@@ -93,6 +98,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget *w0;
 	GList *i;
 	group *g;
+	gchar *txt;
 	
 	g_return_if_fail (current_user != NULL);
 
@@ -120,6 +126,9 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	my_gtk_entry_set_text (w0, current_user->comment);
 	
 	w0 = tool_widget_get ("user_settings_dialog");
+	txt = g_strdup_printf ("Settings for User %s", current_user->login);
+	gtk_window_set_title (GTK_WINDOW (w0), txt);
+	g_free (txt);
 	gtk_widget_show (w0);
 }
 
@@ -131,12 +140,10 @@ on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 	
 	g_return_if_fail (tool_get_access());
 
-	w0 = tool_widget_get ("user_passwd_label");
-	txt = g_strdup_printf ("Changing password for %s", current_user->login);
-	gtk_label_set_text (GTK_LABEL (w0), txt);
-	g_free (txt);
-	
 	w0 = tool_widget_get ("user_passwd_dialog");
+	txt = g_strdup_printf ("Password for User %s", current_user->login);
+	gtk_window_set_title (GTK_WINDOW (w0), txt);
+	g_free (txt);
 	gtk_widget_show (w0);
 }
 
@@ -162,6 +169,7 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	
 	w0 = tool_widget_get ("user_settings_dialog");
+	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
 	gtk_widget_show (w0);
 }
 
@@ -226,7 +234,8 @@ extern void
 on_group_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-	GList *member_rows;	
+	GList *member_rows;
+	gchar *txt;
 	
 	g_return_if_fail (current_group != NULL);
 
@@ -243,6 +252,9 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	/* Show group settings dialog */
 	
 	w0 = tool_widget_get ("group_settings_dialog");
+	txt = g_strdup_printf ("Settings for Group %s", current_group->name);
+	gtk_window_set_title (GTK_WINDOW (w0), txt);
+	g_free (txt);
 	gtk_widget_show (w0);
 }
 
@@ -255,15 +267,13 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 
 	current_group = NULL;
 
-	w0 = tool_widget_get ("group_settings_name");
-	gtk_widget_set_sensitive (w0, tool_get_access());
-	
 	/* Fill all users list */
 	fill_all_users_list (NULL);
 
 	/* Show group settings dialog */
 	
 	w0 = tool_widget_get ("group_settings_dialog");
+	gtk_window_set_title (GTK_WINDOW (w0), "Create New Group");
 	gtk_widget_show (w0);
 }
 
@@ -324,8 +334,8 @@ on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton
 
 /* User settings callbacks */
 
-extern void
-on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
+static void
+user_settings_dialog_close (void)
 {
 	GtkWidget *w0;
 	GtkObject *list_item;
@@ -357,6 +367,18 @@ on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 }
 
 extern void
+on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
+{
+	user_settings_dialog_close ();
+}
+
+extern void
+on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data)
+{
+	user_settings_dialog_close ();
+}
+
+extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	gboolean retval;
@@ -376,14 +398,14 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	{
 		tool_set_modified(TRUE);
 		/* Clean up dialog, it's easiest to just call *_cancel_* function */
-		on_user_settings_cancel_clicked (NULL, NULL);
+		user_settings_dialog_close ();
 	}
 }
 
 /* Password settings callbacks */
 
-extern void
-on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data)
+static void
+user_passwd_dialog_close (void)
 {
 	GtkWidget *w0;
 
@@ -392,16 +414,61 @@ on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data)
 }
 
 extern void
+on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data)
+{
+	user_passwd_dialog_close ();
+}
+
+extern void
+on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer user_data)
+{
+	user_passwd_dialog_close ();
+}
+
+extern void
+on_user_passwd_random_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkEntry *entry1, *entry2;
+	GtkWidget *win;
+	GnomeDialog *dialog;
+	gchar alphanum[] = "0ab1cd2ef3gh4ij5kl6mn7op8qr9st0uvwxyz0AB1CD2EF3GH4IJ5KL6MN7OP8QR9ST0UVWXYZ";
+	gchar random_passwd[RANDOM_PASSWD_SIZE + 1];
+	gchar *txt;
+	gint i, len;
+	
+	win = tool_widget_get ("user_passwd_dialog");
+	entry1 = GTK_ENTRY (tool_widget_get ("user_passwd_new"));
+	entry2 = GTK_ENTRY (tool_widget_get ("user_passwd_confirmation"));
+	
+	len = strlen (alphanum);
+	random_passwd[RANDOM_PASSWD_SIZE] = random_passwd[0] = 0;
+	
+	while (FascistCheck (random_passwd, CRACK_DICT_PATH))
+		for (i = 0; i < RANDOM_PASSWD_SIZE; i++) 
+			random_passwd[i] = alphanum [(gint) ((((float) len) * rand () / (RAND_MAX + 1.0)))];
+
+	my_gtk_entry_set_text (entry1, random_passwd);
+	my_gtk_entry_set_text (entry2, random_passwd);
+	
+	txt = g_strdup_printf ("Password set to \"%s\".", random_passwd);
+	dialog = GNOME_DIALOG (gnome_ok_dialog_parented (txt, GTK_WINDOW (win)));
+	gnome_dialog_run (dialog);
+	g_free (txt);
+}
+
+extern void
 on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkEntry *entry1, *entry2;
+	GtkToggleButton *quality;
 	gchar *new_passwd, *confirm;
 	GtkWidget *win;
 	GnomeDialog *dialog;
-	gchar *msg;
+	gchar *msg, *check_err;
 	
 	entry1 = GTK_ENTRY (tool_widget_get ("user_passwd_new"));
 	entry2 = GTK_ENTRY (tool_widget_get ("user_passwd_confirmation"));
+	quality = GTK_TOGGLE_BUTTON (tool_widget_get ("user_passwd_quality"));
 	win = tool_widget_get ("user_passwd_dialog");
 
 	new_passwd = gtk_entry_get_text (entry1);
@@ -422,16 +489,15 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		
 		gnome_dialog_run (dialog);
 	}
-	else if (strlen (new_passwd) < logindefs.passwd_min_length)
+	else if (gtk_toggle_button_get_active (quality) &&
+					 (check_err = FascistCheck (new_passwd, CRACK_DICT_PATH)))
 	{
-		msg = g_strdup_printf ("The password is too short:\nit must be at least %d "
-			"characters long.", logindefs.passwd_min_length);
-
+		msg = g_strdup_printf ("Bad password: %s.", check_err);
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (msg, GTK_WINDOW (win)));
-		gnome_dialog_run (dialog);
 		g_free (msg);
+		gnome_dialog_run (dialog);
 	}
-	else		
+	else
 	{
 		/* FIXME crypt password!!! how? crypt? */
 		/* it depends on the crypt method of the system. We'll have to
@@ -462,8 +528,8 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 
 /* Group settings dialog */
 
-extern void
-on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
+static void
+group_settings_dialog_close (void)
 {
 	GtkWidget *w0;
 	GtkObject *list_item;
@@ -497,6 +563,18 @@ on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 }
 
 extern void
+on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
+{
+	group_settings_dialog_close ();
+}
+
+extern void
+on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data)
+{
+	group_settings_dialog_close ();
+}
+
+extern void
 on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	gboolean retval;
@@ -513,7 +591,7 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	{
 		tool_set_modified(TRUE);
 		/* Clear list and hide dialog */
-		on_group_settings_cancel_clicked (NULL, NULL);
+		group_settings_dialog_close ();
 	}
 }
 

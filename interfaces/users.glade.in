@@ -23,6 +23,11 @@
   <class>GnomeApp</class>
   <name>users_admin</name>
   <visible>False</visible>
+  <signal>
+    <name>delete_event</name>
+    <handler>on_users_admin_delete_event</handler>
+    <last_modification_time>Tue, 07 Nov 2000 05:57:25 GMT</last_modification_time>
+  </signal>
   <title>User Account Administration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -227,6 +232,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:14:16 GMT</last_modification_time>
 		    </signal>
 		    <label>New User...</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -241,6 +247,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:47:54 GMT</last_modification_time>
 		    </signal>
 		    <label>Delete</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 
@@ -377,6 +384,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:45:05 GMT</last_modification_time>
 		    </signal>
 		    <label>Change Password...</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -391,6 +399,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:15:10 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings...</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -559,6 +568,7 @@
 		    <last_modification_time>Wed, 25 Oct 2000 20:45:21 GMT</last_modification_time>
 		  </signal>
 		  <label>New Group...</label>
+		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 
 		<widget>
@@ -573,6 +583,7 @@
 		    <last_modification_time>Wed, 25 Oct 2000 20:47:17 GMT</last_modification_time>
 		  </signal>
 		  <label>Delete</label>
+		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 	      </widget>
 
@@ -707,6 +718,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 15:59:22 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings...</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -766,6 +778,7 @@
 	  <can_default>True</can_default>
 	  <can_focus>True</can_focus>
 	  <label> Advanced &gt;&gt; </label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -800,6 +813,7 @@
 	      <last_modification_time>Mon, 23 Oct 2000 20:36:59 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 
 	  <widget>
@@ -807,7 +821,13 @@
 	    <name>close</name>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_close_clicked</handler>
+	      <last_modification_time>Tue, 07 Nov 2000 05:56:50 GMT</last_modification_time>
+	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 	</widget>
       </widget>
@@ -819,6 +839,11 @@
   <class>GnomeDialog</class>
   <name>user_settings_dialog</name>
   <visible>False</visible>
+  <signal>
+    <name>delete_event</name>
+    <handler>on_user_settings_dialog_delete_event</handler>
+    <last_modification_time>Tue, 07 Nov 2000 05:57:47 GMT</last_modification_time>
+  </signal>
   <title>User Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1089,6 +1114,11 @@
   <class>GnomeDialog</class>
   <name>user_passwd_dialog</name>
   <visible>False</visible>
+  <signal>
+    <name>delete_event</name>
+    <handler>on_user_passwd_dialog_delete_event</handler>
+    <last_modification_time>Tue, 07 Nov 2000 05:58:25 GMT</last_modification_time>
+  </signal>
   <title>Change Password</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1158,7 +1188,7 @@
     <widget>
       <class>GtkTable</class>
       <name>table3</name>
-      <rows>2</rows>
+      <rows>3</rows>
       <columns>2</columns>
       <homogeneous>False</homogeneous>
       <row_spacing>8</row_spacing>
@@ -1269,23 +1299,77 @@
 	  <yfill>False</yfill>
 	</child>
       </widget>
-    </widget>
 
-    <widget>
-      <class>GtkLabel</class>
-      <name>user_passwd_label</name>
-      <label></label>
-      <justify>GTK_JUSTIFY_CENTER</justify>
-      <wrap>False</wrap>
-      <xalign>0.5</xalign>
-      <yalign>0.5</yalign>
-      <xpad>0</xpad>
-      <ypad>0</ypad>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox10</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>True</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>True</yfill>
+	</child>
+
+	<widget>
+	  <class>GtkAlignment</class>
+	  <name>alignment14</name>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xscale>0</xscale>
+	  <yscale>1</yscale>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>user_passwd_quality</name>
+	    <can_focus>True</can_focus>
+	    <label>Check quality.</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkAlignment</class>
+	  <name>alignment13</name>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xscale>0</xscale>
+	  <yscale>1</yscale>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>user_passwd_random</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_user_passwd_random_clicked</handler>
+	      <last_modification_time>Tue, 07 Nov 2000 06:15:53 GMT</last_modification_time>
+	    </signal>
+	    <label>  Random Password  </label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
+	  </widget>
+	</widget>
+      </widget>
     </widget>
   </widget>
 </widget>
@@ -1294,6 +1378,11 @@
   <class>GnomeDialog</class>
   <name>group_settings_dialog</name>
   <visible>False</visible>
+  <signal>
+    <name>delete_event</name>
+    <handler>on_group_settings_dialog_delete_event</handler>
+    <last_modification_time>Tue, 07 Nov 2000 05:58:42 GMT</last_modification_time>
+  </signal>
   <title>Group Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1529,6 +1618,7 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
 		</signal>
 		<label>Add -&gt;</label>
+		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1547,6 +1637,7 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
 		</signal>
 		<label>Remove &lt;-</label>
+		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
