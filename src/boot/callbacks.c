@@ -38,7 +38,12 @@ XstTool *tool;
 
 static int reply;
 
-static void reply_cb (gint val, gpointer data);
+static void
+reply_cb (gint val, gpointer data)
+{
+	reply = val;
+	gtk_main_quit ();
+}
 
 /* Main window callbacks */
 
@@ -105,11 +110,10 @@ actions_set_sensitive (gboolean state)
 
 	complexity = tool->main_dialog->complexity;
 
-	if (xst_tool_get_access (tool) && complexity == XST_DIALOG_ADVANCED)
-	{
+	if (xst_tool_get_access (tool) && complexity == XST_DIALOG_ADVANCED) {
 		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_add"), TRUE);
 		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_delete"),
-							 state);
+					  state);
 	}
 	
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
@@ -126,9 +130,11 @@ buttons_set_visibility (void)
 		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
 		break;
 	case XST_DIALOG_BASIC:
-	default:
 		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
 		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
+		break;
+	default:
+		g_warning ("Unknown complexity.");
 		break;
 	}
 }
@@ -143,14 +149,10 @@ boot_settings_dialog_complexity (gboolean state)
 			     "boot_settings_append_label", "boot_settings_root_label",
 			     NULL };
 
-	if (!state)
-	{
+	if (!state) {
 		for (i = 0; widgets[i]; i++)
 			gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
-	}
-
-	else
-	{
+	} else {
 		for (i = 0; widgets[i]; i++)
 			gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
 	}
@@ -162,9 +164,3 @@ boot_settings_dialog_complexity (gboolean state)
 	gtk_window_set_default_size (GTK_WINDOW (win), req.width, req.height);
 }
 
-static void
-reply_cb (gint val, gpointer data)
-{
-	reply = val;
-	gtk_main_quit ();
-}

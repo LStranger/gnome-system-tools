@@ -137,7 +137,7 @@ transfer_globals_gui_to_xml (xmlNodePtr root)
 
 		node = xst_xml_element_find_first (root, "timeout");
 		if (!node)
-			xst_xml_element_add (root, "timeout");
+			node = xst_xml_element_add (root, "timeout");
 
 		/* We need timeout in tenths of seconds, so multiply by 10 */
 		xst_xml_element_set_content (node, g_strdup_printf ("%d", val * 10));
