@@ -235,7 +235,7 @@ xst_xml_element_get_attribute (xmlNodePtr node, const gchar *attr)
 	{
 		if (a0->name && !strcmp (a0->name, attr))
 		{
-			text = xmlNodeGetContent (a0->val);
+			text = xmlNodeGetContent (a0->children);
 			break;
 		}
 	}
