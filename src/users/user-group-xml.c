@@ -27,6 +27,8 @@
 
 #include "user_group.h"
 
+void generic_set_value (xmlNodePtr node, const gchar *name, gchar *value);
+
 gchar *
 generic_value_string (xmlNodePtr node, const gchar *name)
 {
@@ -76,6 +78,59 @@ user_value_group (xmlNodePtr user_node)
 	return buf;
 }
 
+static gboolean
+is_valid_name (gchar *str)
+{
+	if (!str || !*str)
+		return FALSE;
+
+	for (;*str; str++)
+	{
+		if (((*str < 'a') || (*str > 'z')) &&
+				((*str < '0') || (*str > '9')))
+
+			return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+node_exists (xmlNodePtr node, gchar *name, gchar *val)
+{
+	xmlNodePtr n0;
+	gchar *buf;
+	xmlNodePtr parent;
+	gboolean self;
+
+	parent = get_db_node (node);
+	if (parent == node)
+		self = FALSE;
+	else
+		self = TRUE;
+
+	for (n0 = parent->childs; n0; n0 = n0->next)
+	{
+		if (self && n0 == node)
+			continue;  /* Self */
+
+		buf = xst_xml_get_child_content (n0, name);
+
+		if (!buf)
+			continue;  /* No content */
+
+		if (!strcmp (val, buf))
+		{
+			g_free (buf);  /* Woohoo! found! */
+			return TRUE;
+		}
+
+		g_free (buf);
+	}
+
+	return FALSE;
+}
+
 
 
 static gboolean
@@ -92,7 +147,7 @@ user_check_login (XstDialog *xd, xmlNodePtr node, gchar *login)
 	else if (!is_valid_name (login)) /*TODO: re */
 		buf = g_strdup (_("Please set a valid username, using only lower-case letters."));
 
-	else if (node_exsists (node, "login", login)) /* TODO: re */
+	else if (node_exists (node, "login", login)) /* TODO: re */
 		buf = g_strdup (_("Username already exsists."));
 
 	if (buf)
@@ -127,7 +182,7 @@ user_check_home (XstDialog *xd, xmlNodePtr node, gchar *val)
 static gboolean
 user_check_uid (XstDialog *xd, xmlNodePtr node, gchar *val)
 {
-	if (node_exsists (node, "uid", val)) /* TODO: re */
+	if (node_exists (node, "uid", val)) /* TODO: re */
 	{
 		GnomeDialog *dialog;
 		
@@ -147,42 +202,12 @@ user_check_gid (XstDialog *xd, xmlNodePtr node, gchar *val)
 	return TRUE;
 }
 
-static gint
-check_user_group (XstDialog *xd, xmlNodePtr node, gchar *val)
-{
-	gchar *buf;
-	GnomeDialog *dialog;
-	xmlNodePtr group_node;
-
-	g_return_val_if_fail (us != NULL, -1);
-
-	buf = parse_group (us); /* TODO: re */
-	group_node = get_corresp_field (us->node);
-
-	if (node_exsists (group_node, "name", buf)) /* TODO: re */
-		return 0;
-
-	if (!is_valid_name (buf)) /* TODO: re */
-	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented(_(
-			"Please set a valid main group name, with only lower-case letters,"
-			"\nor select one from pull-down menu."),
-												 GTK_WINDOW (xd)));
-
-		gnome_dialog_run (dialog);
-		return -1;
-	}
-
-	/* Group not found, but name is valid. */
-	return 1;
-}
-
 
 void
 generic_set_value (xmlNodePtr node, const gchar *name, gchar *value)
 {
-	g_return_val_if_fail (node != NULL, NULL);
-	g_return_val_if_fail (name != NULL, NULL);
+	g_return_if_fail (node != NULL);
+	g_return_if_fail (name != NULL);
 
 	xst_xml_set_child_content (node, (gchar *)name, value);
 }
@@ -252,31 +277,3 @@ user_set_value_gid (XstDialog *xd, xmlNodePtr node, gchar *value)
 
 	return FALSE;
 }
-
-gboolean
-user_set_value_group (XstDialog *xd, xmlNodePtr node, gchar *value)
-{
-	gint val;
-	
-	val = user_check_group (xd, node, value);
-
-	switch (val) {
-	case 0: /* Group exists */
-		
-		xst_dialog_modify (xd);
-		retval = TRUE;
-		break;
-	case 1: /* New valid group */
-		
-		xst_dialog_modify (xd);
-		retval = TRUE;
-		break;
-	case -1:
-	default:
-		retval = FALSE;
-		break;
-	}
-
-	return retval;
-}
-

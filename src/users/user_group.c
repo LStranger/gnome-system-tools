@@ -39,6 +39,8 @@ static int reply;
 
 login_defs logindefs;
 
+gint check_user_group (UserSettings *us);
+
 /* Static prototypes */
 
 static void group_settings_prepare (ug_data *ud);
