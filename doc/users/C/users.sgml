@@ -1,0 +1,193 @@
+<!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
+
+<!ENTITY VERSION "0.0">
+]>
+
+<article id="index" lang="en">
+
+  <artheader>
+    <title>Swap Management</title>
+    <copyright>
+      <year>2001</year>
+      <holder>Kevin Breit</holder>
+    </copyright>
+
+    <legalnotice id="legalnotice">
+      <para>
+	Permission is granted to copy, distribute and/or modify this document
+	under the terms of the 
+	<ulink type="help" url="gnome-help:fdl">
+	  <citetitle>
+	    GNU Free Documentation License
+	  </citetitle>
+	</ulink>, Version 1.1 or any later version 
+	published by the Free Software Foundation with no Invariant Sections, 
+	no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license
+	can be found <ulink type="help" url="gnome-help:fdl">here</ulink>.
+      </para>
+      <para>
+	Many of the names used by companies to distinguish their products and
+	services are claimed as trademarks. Where those names appear in any
+	GNOME documentation, and those trademarks are made aware to the members
+	of the GNOME Documentation Project, the names have been printed in caps
+	or initial caps.
+      </para>
+    </legalnotice>
+
+    <releaseinfo>
+      This manual describes version &VERSION; of the Swap Management utility in
+      Ximain Setup Tools.  It was last updated on 01/01/69.
+    </releaseinfo>
+    
+  </artheader>
+
+  <sect1 id="intro">
+    <title>Introduction</title>
+    <para>
+      Each person who uses a Linux/Unix system has the ability to be given a
+      user.  The user account allows them to configure their own preferences,
+      secure their private work from others, and even let them have their
+      desktop look entirely different from the person using the same computer on
+      another user account.  This however isn't a very easy task to do for an
+      administrator with lots of users.  The Users and Groups tool in Ximian
+      Setup Tools strives to make this experience easier for administrators.
+    </para>
+  </sect1>
+
+<!--
+  <sect1 id="interface">
+    <title>Interface</title>
+    <para>
+      THIS APP HAS NO INTERFACE!
+    </para>
+  </sect1>
+-->
+
+  <sect1 id="basic"
+    <title>Basic Mode</title>
+    <sect2 id="basic-new">
+      <para>
+	Using basic mode to add users gives you an advantage of having a druid
+	help you through the creation process.  This is especially useful if you
+	are creating an account for your first time.  However, if you're more
+	experienced, you may wish to use the advanced setup.
+      </para>
+      <para>
+	You can start by clicking <guibutton>Add User</guibutton>.  This will
+	present you with a druid.  After you hit <guibutton>Next</guibutton>,
+	you will need to enter the persons username.  This may be virtually
+	anything you want.  It is recommended that you make it easy to type. 
+	You can also enter the user's real name, office location that they work
+	at, work phone number, and home phone number.  Those are optional
+	properties though.
+      </para>
+      <para>
+	The second screen has the password setup.  You will need to enter the
+	password twice to confirm that there weren't any typos.  You may also
+	choose to <guilabel>Check password quality</guilabel>.  This will check
+	for length and how random of a word it is.
+      </para>
+      <para>
+	The last screen simply tells you that you have completed the process of
+	adding a user.  Press <guibutton>Finish</guibutton> to complete your
+	process.
+      </para>
+    </sect2>
+
+    <sect2 id="basic-editing">
+      <title>Editing Users</title>
+      <para>
+	Not only can Ximian Setup Tools add users, but it can also configure a
+	users account, even after it has been added.  To do this, select your
+	user and click <guibutton>Settings</guibutton>.
+      </para>
+      <para>
+	In this, you can edit their username, personal information, or even
+	change their password.  As when creating an account, the personal
+	information is optional.  The only mandatory parts of this screen is the
+	username and the password.
+      </para>
+    </sect2>
+
+    <sect2 id="basic-delete">
+      <title>Deleting Users</title>
+      <para>
+	Deleting users is easy.  All you do is select the user you wish to
+	delete, and press the <guibutton>Delete</guibutton> at right.
+      </para>
+      <tip>
+	<title>Lots of old users?</title>
+	<para>
+	  Do you need to delete multiple users.  Just hold the ctrl button while
+	  you click on each users name.  This will let you delete all the users
+	  in one swipe.  If you need to delete multiple users that are adjacent
+	  in the list, hold shift and click on the first and last user you want
+	  to delete.  This will select those two and everything inbetween.
+	</para>
+      </tip>
+    </sect2>
+  </sect1>
+  <sect1 id="advanced">
+    <title>Advanced Options</title>
+    <para>
+      The advanced options are only for those users who are experienced enough
+      to deal with creating users without a druid and for managing groups.  If
+      you aren't confident in using the advanced mode, you should probably drop
+      back to the basic mode by clicking on <guibutton>Fewer
+      Options</guibutton>.
+    </para>
+    <sect2 id="advanced-add">
+      <title>Adding Users</title>
+      <para>
+	By pressing the <guibutton>Add user</guibutton> you open up a window.
+	The only mandatory information is the username.  Profiles <!-- link to
+	profiles section later --> are templates for creating users out of.  For
+	more information on profiles, refer to the profiles section.
+      </para>
+      <para>
+	The <guilabel>Groups</guilabel> tab lets you configure your groups.
+	Groups allow you to configure users with similar permissions.
+      </para>
+      <example id="groups-ex">
+	<title>Groups</title>
+	<para>
+	  A company keeps all their accounting information in one file.  They want
+	  the accounting people to have access to this file, but they don't want
+	  the marketing department to be able to read it.  They would create a
+	  group called 'accounting' assign permissions based on that.
+	</para>
+      </example>
+      <para>
+	For more information on groups, refer to the chgrp, group, or chmod man
+	pages.
+      </para>
+      <para>
+	The <guilabel>Password</guilabel> tab has options for your passwords
+	such as how a password is created, setting the password manually, and
+	password expiration.
+      </para>
+    </sect2>
+    <sect2 id="profiles">
+      <title>Profiles</title>
+      <para>
+	Profiles are meant to make creating similar users easier.  They allow
+	properties which will be static from user to user to be preset in the
+	new users with the profile.  You can control the system defaults such as
+	home directory and shell, automatic UID/GID (User ID/Group ID)
+	generation, and password experation information.
+      </para>
+      <example id="profile-ex">
+	<title>Profiles</title>
+	<para>
+	  A company has an accounting department, and they just hired 50 new
+	  employees.  They want all the new users to have the same group, their
+	  home directory to be in /home/accounting/$user, and have their password
+	  expire after 30 days.  They would create a profile that specified this.
+	  When the administrator creates these users, he just needs to specify
+	  that they all apply to the accounting profile.  The desired properties
+	  of each user is preset.
+	</para>
+      </example>
+    </sect2>
+  </sect1>
+</article>
