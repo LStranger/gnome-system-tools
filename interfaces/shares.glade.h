@@ -4,68 +4,106 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Import Settings");
-gchar *s = N_("Type:");
-gchar *s = N_("Host:");
-gchar *s = N_("Path:");
-gchar *s = N_("User:");
-gchar *s = N_("Password:");
-gchar *s = N_("Mount point:");
-gchar *s = N_("SMB");
-gchar *s = N_("NFS");
-gchar *s = N_("Choose a mount point");
-gchar *s = N_("SMB Export Settings");
-gchar *s = N_("Local path:");
-gchar *s = N_("Export name:");
-gchar *s = N_("Comment:");
-gchar *s = N_("Browseable");
-gchar *s = N_("Public");
-gchar *s = N_("Writable");
-gchar *s = N_("NFS Export Settings");
-gchar *s = N_("Local path:");
-gchar *s = N_("NFS Client Settings");
-gchar *s = N_("Client pattern:");
-gchar *s = N_("Allow writing from these clients");
-gchar *s = N_("window1");
-gchar *s = N_("Imports are directories wich reside in other computers and are accessible through the network.");
-gchar *s = N_("Location");
-gchar *s = N_("Detected");
-gchar *s = N_("Listed");
-gchar *s = N_("Mounted");
-gchar *s = N_("User");
-gchar *s = N_("Password");
+gchar *s = N_("simple mode--main window");
+gchar *s = N_("Imports are directories which reside in other computers and are accessible to you through the network.");
+gchar *s = N_("Host");
+gchar *s = N_("Path");
 gchar *s = N_("Mount Point");
-gchar *s = N_("Import");
-gchar *s = N_("Add an unlisted import");
-gchar *s = N_("New import");
-gchar *s = N_("Mount this import");
-gchar *s = N_("Open settings dialog for selected import");
-gchar *s = N_("Settings");
-gchar *s = N_("Remember this import between boots");
+gchar *s = N_("Mounted");
+gchar *s = N_("\n"
+              "");
+gchar *s = N_("Add...");
+gchar *s = N_("Settings...");
+gchar *s = N_("Delete");
 gchar *s = N_("Imports");
+gchar *s = N_("Exports are used to share directories on your computer with other computers over the network. ");
 gchar *s = N_("Name");
 gchar *s = N_("Path");
-gchar *s = N_("Enabled");
-gchar *s = N_("Browseable");
-gchar *s = N_("Public");
+gchar *s = N_("Clients");
 gchar *s = N_("Writable");
-gchar *s = N_("Comment");
-gchar *s = N_("Export");
+gchar *s = N_("\n"
+              "");
+gchar *s = N_("Add...");
+gchar *s = N_("Settings...");
+gchar *s = N_("Delete");
+gchar *s = N_("Exports");
+gchar *s = N_("advanced mode--main window");
+gchar *s = N_("Imports are directories which reside in other computers and are accessible to you through the network.");
+gchar *s = N_("\n"
+              "");
+gchar *s = N_("Add...");
+gchar *s = N_("Settings...");
+gchar *s = N_("Delete");
+gchar *s = N_("Mount");
+gchar *s = N_("Imports");
+gchar *s = N_("Exports are used to share directories on your computer with other computers over the network. ");
+gchar *s = N_("\n"
+              "");
+gchar *s = N_("Add...");
+gchar *s = N_("Settings...");
+gchar *s = N_("Delete");
+gchar *s = N_("Enable");
+gchar *s = N_("Exports");
+gchar *s = N_("export settings--NFS options");
+gchar *s = N_("Use this dialog to create a new export, or to edit the settings of an existing export.");
+gchar *s = N_("Export type:");
 gchar *s = N_("Enabled");
-gchar *s = N_("Add");
-gchar *s = N_("Remove");
-gchar *s = N_("Settings");
-gchar *s = N_("The directories in your machine may be made available to others through the network using exports. SMB exports are compatible with Microsoft Windows (TM) and Unix or Linux machines with Samba installed.");
-gchar *s = N_("SMB exports");
-gchar *s = N_("Export/clients");
-gchar *s = N_("Allow writing");
-gchar *s = N_("Client");
-gchar *s = N_("Settings");
-gchar *s = N_("Add");
-gchar *s = N_("Remove");
+gchar *s = N_("NFS\n"
+              "Samba\n"
+              "");
 gchar *s = N_("Export");
-gchar *s = N_("Add");
-gchar *s = N_("Remove");
-gchar *s = N_("Settings");
-gchar *s = N_("NFS exports are used to share directories with Unix or Linux machines over the network.");
-gchar *s = N_("NFS exports");
+gchar *s = N_("Name:");
+gchar *s = N_("Path:");
+gchar *s = N_("Comment:");
+gchar *s = N_("Access Control");
+gchar *s = N_("Restrict access to this share to specific clients");
+gchar *s = N_(" Edit clients... ");
+gchar *s = N_("export settings--Samba options");
+gchar *s = N_("Use this dialog to create a new export, or to edit the settings of an existing export.");
+gchar *s = N_("Export type:");
+gchar *s = N_("Enabled");
+gchar *s = N_("NFS\n"
+              "Samba\n"
+              "");
+gchar *s = N_("Export");
+gchar *s = N_("Name:");
+gchar *s = N_("Path:");
+gchar *s = N_("Comment:");
+gchar *s = N_("Access Control");
+gchar *s = N_("Browseable");
+gchar *s = N_("Writable");
+gchar *s = N_("Public");
+gchar *s = N_("add/edit clients");
+gchar *s = N_("Use this dialog to define the client patterns which determine who has access to your NFS share. Client patterns are typically of the form \"10.10.10.*\" or \" *.gnome.org\".  ");
+gchar *s = N_("Client");
+gchar *s = N_("Pattern:");
+gchar *s = N_("Allow writing");
+gchar *s = N_("Clients for <export name>");
+gchar *s = N_("Import Settings--NFS Options");
+gchar *s = N_("Use this dialog to create a new import, or to edit the settings of an existing import.");
+gchar *s = N_("Import type:");
+gchar *s = N_("NFS\n"
+              "Samba\n"
+              "");
+gchar *s = N_("Mounted");
+gchar *s = N_("Import");
+gchar *s = N_("Host:");
+gchar *s = N_("Path:");
+gchar *s = N_("Mounting Options");
+gchar *s = N_("Mount point:");
+gchar *s = N_("Do not remount this share after computer reboots");
+gchar *s = N_("Import Settings--Samba Options");
+gchar *s = N_("Use this dialog to create a new import, or to edit the settings of an existing import.");
+gchar *s = N_("Import type:");
+gchar *s = N_("NFS\n"
+              "Samba\n"
+              "");
+gchar *s = N_("Mounted");
+gchar *s = N_("Import");
+gchar *s = N_("Host:");
+gchar *s = N_("Path:");
+gchar *s = N_("Username:");
+gchar *s = N_("Password:");
+gchar *s = N_("Mounting Options");
+gchar *s = N_("Mount point:");
+gchar *s = N_("Do not remount this share after computer reboots");
