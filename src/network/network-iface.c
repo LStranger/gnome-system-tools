@@ -497,7 +497,7 @@ gst_iface_get_desc (GstIface *iface)
   else
     text = N_("The interface %s is active");
 
-  secondary = g_strdup_printf (text, iface->_priv->dev);
+  secondary = g_strdup_printf (_(text), iface->_priv->dev);
   message = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>\n%s",
 			     primary, secondary );
 
