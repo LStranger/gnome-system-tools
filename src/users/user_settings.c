@@ -210,7 +210,7 @@ user_settings_shells_fill (UserSettings *us)
 }
 
 
-static void
+void
 user_settings_basic_fill (UserSettings *us)
 {
 	/* Fill "Basic" tab widgets. */
@@ -241,7 +241,7 @@ user_settings_basic_fill (UserSettings *us)
 	}
 }
 
-static void
+void
 user_settings_group_fill (UserSettings *us)
 {
 	/* Fill "Groups" tab widgets. */
@@ -273,7 +273,7 @@ user_settings_group_fill (UserSettings *us)
 	}
 }
 
-static void
+void
 user_settings_pwd_fill (UserSettings *us)
 {
 	gchar *buf;
@@ -327,7 +327,7 @@ user_settings_prepare (xmlNodePtr user_node)
 
 	us = g_new (UserSettings, 1);
 	
-	us->dialog = GNOME_DIALOG (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
+	us->dialog = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	us->node  = user_node;
 	us->table = TABLE_USER;
 	us->basic = user_settings_basic_prepare ();

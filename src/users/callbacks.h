@@ -46,9 +46,11 @@ void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 
 void on_pro_name_changed (GtkEditable *editable, gpointer user_data);
 void on_pro_del_clicked (GtkButton *button, gpointer user_data);
-void on_pro_save_clicked (GtkButton *button, gpointer user_data);
 void on_pro_new_clicked (GtkButton *button, gpointer user_data);
 void on_pro_copy_clicked (GtkButton *button, gpointer user_data);
+void on_pro_settings_clicked (GtkButton *button, gpointer user_data);
+void pro_settings_button_clicked (GnomeDialog *dialog, gint button_number, gpointer user_data);
+
 
 void on_user_settings_dialog_show (GtkWidget *button, gpointer user_data);
 void on_user_settings_dialog_delete_event (GnomeDialog *dialog, gpointer user_data);

@@ -30,6 +30,7 @@
 typedef struct
 {
 	gchar *name;
+	gchar *comment;
 	
 	guint pwd_maxdays;
 	guint pwd_mindays;
@@ -53,8 +54,12 @@ typedef struct
 
 extern ProfileTable *profile_table;
 
+void create_profile_table (void);
+void populate_profile_table (void);
+
+
 void     profile_save    (gchar *name);
-gboolean profile_add     (Profile *old_pf, const gchar *new_name, gboolean select); 
+Profile *profile_add     (Profile *old_pf, const gchar *new_name, gboolean select); 
 void     profile_destroy (Profile *pf);
 
 

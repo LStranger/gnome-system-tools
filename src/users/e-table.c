@@ -243,8 +243,7 @@ user_value_at (ETableModel *etm, int col, int row, void *model_data)
 	if (!node)
 		return NULL;
 
-	switch (col)
-	{
+	switch (col) {
 	case COL_USER_LOGIN:   return user_value_login (node); break;
 	case COL_USER_UID:     return user_value_uid_string (node); break;
 	case COL_USER_HOME:    return user_value_home (node); break;

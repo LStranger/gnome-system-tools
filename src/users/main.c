@@ -40,6 +40,7 @@
 #include "transfer.h"
 #include "e-table.h"
 #include "callbacks.h"
+#include "profile.h"
 #include "e-search-bar/e-search-bar.h"
 
 XstTool *tool;
@@ -76,9 +77,10 @@ static XstDialogSignal signals[] = {
 	{ "user_settings_add",           "clicked",       on_user_settings_add_clicked },
 	{ "user_settings_remove",        "clicked",       on_user_settings_remove_clicked },
 	{ "pro_del",                     "clicked",       on_pro_del_clicked },
-	{ "pro_save",                    "clicked",       on_pro_save_clicked },
 	{ "pro_new",                     "clicked",       on_pro_new_clicked },
 	{ "pro_copy",                    "clicked",       on_pro_copy_clicked },
+	{ "pro_settings",                "clicked",       on_pro_settings_clicked },
+	{ "profile_editor_dialog",       "clicked",       pro_settings_button_clicked },
 	{ "user_passwd_change",          "clicked",       on_user_passwd_change_clicked },
 	{ "user_passwd_random",          "clicked",       on_user_passwd_random_clicked },
 	{ NULL }};
@@ -271,6 +273,7 @@ main_window_prepare (void)
 	
 	config_clists ();
 	create_tables ();
+	create_profile_table ();
 	create_searchbar ();
 }
 

@@ -23,6 +23,9 @@
 
 #include <stdlib.h>
 #include <gnome.h>
+#include <gal/e-table/e-table-scrolled.h>
+#include <gal/e-table/e-table-memory.h>
+#include <gal/e-table/e-table-memory-callbacks.h>
 
 #include "global.h"
 #include "profile.h"
@@ -31,10 +34,10 @@
 
 typedef struct
 {
-	GtkCombo *name;
-	GnomeFileEntry *home_prefix;
-	GtkCombo *shell;
-	GtkEntry *group;
+	GtkCombo        *name;
+	GnomeFileEntry  *home_prefix;
+	GtkCombo        *shell;
+	GtkEntry        *group;
 	GtkSpinButton   *umin;
 	GtkSpinButton   *umax;
 	GtkSpinButton   *gmin;
@@ -47,9 +50,167 @@ typedef struct
 
 extern XstTool *tool;
 ProfileTable *profile_table;
+GtkWidget *table;
+
 static ProfileTab *pft;
 
 void on_home_activate (GtkEditable *editable, gpointer user_data);
+
+const gchar *table_spec = "\
+<ETableSpecification cursor-mode=\"line\"> \
+  <ETableColumn model_col=\"0\" _title=\"Profile\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"1\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableState> \
+    <column source=\"0\"/> \
+    <column source=\"1\"/> \
+    <grouping> \
+      <leaf column=\"0\" ascending=\"true\"/> \
+    </grouping> \
+  </ETableState> \
+</ETableSpecification>";
+
+static int
+col_count (ETableModel *etm, void *data)
+{
+        return 0;
+}
+
+static void *
+duplicate_value (ETableModel *etm, int col, const void *value, void *data)
+{
+        return g_strdup (value);
+}
+
+static void
+free_value (ETableModel *etm, int col, void *value, void *data)
+{
+        g_free (value);
+}
+
+static void *
+initialize_value (ETableModel *etm, int col, void *data)
+{
+        return g_strdup ("");
+}
+
+static gboolean
+value_is_empty (ETableModel *etm, int col, const void *value, void *data)
+{
+        return !(value && *(char *)value);
+}
+
+static char *
+value_to_string (ETableModel *etm, int col, const void *value, void *data)
+{
+	return (gchar *)value;
+}
+
+static void
+set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
+{
+}
+
+static gboolean
+is_editable (ETableModel *etm, int col, int row, void *model_data)
+{
+	return FALSE;
+}
+
+static void *
+value_at (ETableModel *etm, int col, int row, void *model_data)
+{
+	Profile *pf = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
+
+	switch (col) {
+	case 0:
+		return pf->name;
+		break;
+	case 1:
+		return pf->comment;
+		break;
+	default:
+		return NULL;
+	}
+}
+
+static void
+et_insert (gpointer key, gpointer value, gpointer user_data)
+{
+	ETable *et;
+	ETableModel *model;
+
+	et = e_table_scrolled_get_table (E_TABLE_SCROLLED (table));
+	model = et->model;
+	
+	e_table_memory_insert (E_TABLE_MEMORY (model), -1, value);
+}
+
+static void
+et_remove (Profile *pf)
+{
+	ETable *et;
+	gint row;
+
+	et = e_table_scrolled_get_table (E_TABLE_SCROLLED (table));
+	if ((row = e_table_get_cursor_row (et)) >= 0)
+		e_table_memory_remove (E_TABLE_MEMORY (et->model), row);
+}
+
+static void
+et_cursor_change (ETable *table, gint row, gpointer user_data)
+{
+	Profile *pf = e_table_memory_get_data (E_TABLE_MEMORY (table->model), row);
+
+	profile_table_set_selected (pf->name);
+	tables_update_content ();
+}
+
+void
+create_profile_table (void)
+{
+	ETableModel *model;
+	GtkWidget *container;
+
+	model = e_table_memory_callbacks_new (col_count,
+					      value_at,
+					      set_value_at,
+					      is_editable,
+					      duplicate_value,
+					      free_value,
+					      initialize_value,
+					      value_is_empty,
+					      value_to_string,
+					      NULL);
+	
+	table = e_table_scrolled_new (model, NULL, table_spec, NULL);
+	gtk_signal_connect (GTK_OBJECT (e_table_scrolled_get_table (E_TABLE_SCROLLED (table))),
+			    "cursor_change",
+			    et_cursor_change,
+			    NULL);
+
+	container = xst_dialog_get_widget (tool->main_dialog, "profiles_holder");
+	gtk_container_add (GTK_CONTAINER (container), table);
+	gtk_widget_show (table);
+}
+
+void
+populate_profile_table (void)
+{
+	ETable *et;
+	ETableModel *model;
+
+	et = e_table_scrolled_get_table (E_TABLE_SCROLLED (table));
+	model = et->model;
+	
+	e_table_memory_freeze (E_TABLE_MEMORY (model));
+
+	g_hash_table_foreach (profile_table->hash, et_insert, NULL);
+
+	e_table_memory_thaw (E_TABLE_MEMORY (model));
+}
+
+/* End of ETable */
+
 
 static guint
 my_atoi (gchar *str) 
@@ -193,19 +354,25 @@ profile_save (gchar *name)
 	}
 }	
 
-gboolean
+Profile *
 profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 {	
 	Profile *pf;
 	GtkWidget *d;
+	gchar *buf = NULL;
 
 	pf = profile_table_get_profile (new_name);
 	if (pf)
-	{
-		d = gnome_error_dialog_parented (N_("Sorry, profile with given name already exists."),
-						 GTK_WINDOW (tool->main_dialog));
+		buf = g_strdup (N_("Profile with given name already exists."));
+
+	if (strlen (new_name) < 1)
+		buf = g_strdup (N_("Profile name must not be empty."));
+
+	if (buf) {
+		d = gnome_error_dialog_parented (buf, GTK_WINDOW (tool->main_dialog));
 		gnome_dialog_run (GNOME_DIALOG (d));
-		return FALSE;
+		g_free (buf);
+		return NULL;
 	}
 	
 	pf = g_new0 (Profile, 1);
@@ -232,7 +399,7 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 
 	profile_table_add_profile (pf, select);
 
-	return TRUE;
+	return pf;
 }
 
 void
@@ -285,6 +452,7 @@ profile_get_default (void)
 	
 	pf = g_new (Profile, 1);
 	pf->name = g_strdup (N_("Default"));
+	pf->comment = g_strdup (N_("Default profile"));
 
 	/* FIXME: Bad bad hardcoded values. */
 	pf->home_prefix = g_strdup ("/home/$user");
@@ -311,8 +479,8 @@ profile_table_from_xml (xmlNodePtr root)
 	Profile *pf;
 	gchar *profile_tags[] = {
 		"home_prefix", "shell", "group", "pwd_maxdays",
-		"pwd_mindays", "pwd_warndays", "umin",
-		"umax", "gmin", "gmax", "pwd_random", "name", NULL
+		"pwd_mindays", "pwd_warndays", "umin","umax",
+		"gmin", "gmax", "pwd_random", "comment", "name", NULL
 	};
 	gchar *tag;
 	gint i;
@@ -324,18 +492,14 @@ profile_table_from_xml (xmlNodePtr root)
 		return;
 
 	pf_node = xst_xml_element_find_first (node, "profile");	
-	while (pf_node)
-	{
+	while (pf_node)	{
 		pf = g_new (Profile, 1);
 		pf->logindefs = FALSE;
-		for (i = 0, tag = profile_tags[0]; tag; i++, tag = profile_tags[i]) 
-		{
+		for (i = 0, tag = profile_tags[0]; tag; i++, tag = profile_tags[i]) {
 			n0 = xst_xml_element_find_first (pf_node, tag);
 			
-			if (n0) 
-			{
-				switch (i)
-				{
+			if (n0) {
+				switch (i) {
 				case  0: pf->home_prefix  = xst_xml_element_get_content (n0); break;
 				case  1: pf->shell        = xst_xml_element_get_content (n0); break;
 				case  2: pf->group        = xst_xml_element_get_content (n0); break;
@@ -347,7 +511,8 @@ profile_table_from_xml (xmlNodePtr root)
 				case  8: pf->gmin         = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  9: pf->gmax         = my_atoi (xst_xml_element_get_content (n0)); break;
 				case 10: pf->pwd_random   = xst_xml_element_get_bool_attr (n0, "set"); break;
-				case 11: pf->name         = xst_xml_element_get_content (n0); break;
+				case 11: pf->comment      = xst_xml_element_get_content (n0); break;
+				case 12: pf->name         = xst_xml_element_get_content (n0); break;
 					
 				default: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
 				}
@@ -422,6 +587,7 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 	node = xst_xml_element_add (root, "profile");
 
 	xst_xml_element_add_with_content (node, "name",        pf->name);
+	xst_xml_element_add_with_content (node, "comment",     pf->comment);
 	xst_xml_element_add_with_content (node, "home_prefix", pf->home_prefix);
 	xst_xml_element_add_with_content (node, "shell",       pf->shell);
 	xst_xml_element_add_with_content (node, "group",       pf->group);
@@ -474,6 +640,8 @@ profile_table_add_profile (Profile *pf, gboolean select)
 
 	if (!pft)
 		profile_tab_init ();
+
+	et_insert (NULL, pf, NULL);
 	
 	/* add name to combo box */
 	gtk_signal_handler_block_by_func (GTK_OBJECT (pft->name->entry),
@@ -528,6 +696,7 @@ profile_table_del_profile (gchar *name)
 				profile_table->selected = NULL;
 
 			xst_ui_combo_remove_by_label (pft->name, buf);
+			et_remove (pf);
 			retval = TRUE;
 		}
 	}

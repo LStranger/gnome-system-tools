@@ -55,6 +55,8 @@ struct _UserSettingsGroup
 struct _UserSettingsPwd
 {
 	GtkToggleButton *quality;
+	GtkEntry *pwd1;
+	GtkEntry *pwd2;
 	GtkWidget *optional;
 	GtkSpinButton *min;
 	GtkSpinButton *max;
@@ -63,7 +65,7 @@ struct _UserSettingsPwd
 
 struct _UserSettings
 {
-	GnomeDialog       *dialog;
+	GtkWidget         *dialog;
 	UserSettingsBasic *basic;
 	UserSettingsGroup *group;
 	UserSettingsPwd   *pwd;
@@ -73,8 +75,11 @@ struct _UserSettings
 };
 
 
-void user_settings_prepare (xmlNodePtr user_node);
-void user_settings_destroy (UserSettings *us);
+void user_settings_prepare    (xmlNodePtr user_node);
+void user_settings_basic_fill (UserSettings *us);
+void user_settings_group_fill (UserSettings *us);
+void user_settings_pwd_fill   (UserSettings *us);
+void user_settings_destroy    (UserSettings *us);
 
 GtkWidget *
 password_request_dialog (const gchar *prompt, const guint8 min_length,

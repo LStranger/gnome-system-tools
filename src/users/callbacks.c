@@ -36,6 +36,7 @@
 #include "e-table.h"
 #include "user_settings.h"
 #include "profile.h"
+#include "user-druid.h"
 
 XstTool *tool;
 
@@ -88,7 +89,10 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	user_settings_prepare (get_root_node (TABLE_USER));
+	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
+		user_settings_prepare (get_root_node (TABLE_USER));
+	else
+		user_druid_run (get_root_node (TABLE_USER));
 }
 
 void
@@ -227,16 +231,6 @@ on_pro_del_clicked (GtkButton *button, gpointer user_data)
 		xst_dialog_modify (tool->main_dialog);
 }
 
-void
-on_pro_save_clicked (GtkButton *button, gpointer user_data)
-{
-	g_return_if_fail (xst_tool_get_access (tool));
-	
-	profile_save (NULL);
-	xst_dialog_modify (tool->main_dialog);
-	tables_update_content ();
-}
-
 enum
 {
 	PROFILE_ERROR,
@@ -245,17 +239,14 @@ enum
 };
 
 static void
-pro_ask_name (gchar *string, gpointer user_data)
+pro_ask_name (gint action)
 {
-	Profile *pf;
-	gint action;
+	gchar *buf;
+	Profile *new, *pf = NULL;
 
-	if (!string)
-		return;
-
-	pf = NULL;
-	action = GPOINTER_TO_INT (user_data);
-
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+								    "profile_new_name")));
+	
 	switch (action)
 	{
 	case PROFILE_NEW:
@@ -271,46 +262,94 @@ pro_ask_name (gchar *string, gpointer user_data)
 		return;
 	}
 
-	if (profile_add (pf, string, TRUE))
+	new = profile_add (pf, buf, TRUE);
+	if (new) {
+		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+									    "profile_new_comment")));
+		new->comment = g_strdup (buf);
 		xst_dialog_modify (tool->main_dialog);
+	}
+		
+}
+
+static void
+pro_prepare (gint action)
+{
+	GtkWidget *w;
 	
-	g_free (string);
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+								    "profile_new_name")), "");
+
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+								    "profile_new_comment")), "");
+
+	w = xst_dialog_get_widget (tool->main_dialog, "profile_new_copy");
+	
+	if (action == PROFILE_COPY)
+		gtk_widget_show (w);
+	else
+		gtk_widget_hide (w);
 }
 
 void
 on_pro_new_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *d;
+	gint res;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	d = gnome_request_dialog (FALSE,
-				  N_("Name of new profile"),
-				  NULL,
-				  15,
-				  pro_ask_name,
-				  GINT_TO_POINTER (PROFILE_NEW),
-				  GTK_WINDOW (tool->main_dialog));
+	d = xst_dialog_get_widget (tool->main_dialog, "profile_new_dialog");
+	pro_prepare (PROFILE_NEW);
+	res = gnome_dialog_run (GNOME_DIALOG (d));
 
-	gnome_dialog_run (GNOME_DIALOG (d));
+	if (res)
+		return;
+
+	pro_ask_name (PROFILE_NEW);
 }
 
 void
 on_pro_copy_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *d;
+	gint res;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 	
-	d = gnome_request_dialog (FALSE,
-				  N_("Name of new profile"),
-				  NULL,
-				  15,
-				  pro_ask_name,
-				  GINT_TO_POINTER (PROFILE_COPY),
-				  GTK_WINDOW (tool->main_dialog));
+	d = xst_dialog_get_widget (tool->main_dialog, "profile_new_dialog");
+	pro_prepare (PROFILE_COPY);
+	res = gnome_dialog_run (GNOME_DIALOG (d));
 
-	gnome_dialog_run (GNOME_DIALOG (d));
+	if (res)
+		return;
+
+	pro_ask_name (PROFILE_COPY);
+}
+
+void
+on_pro_settings_clicked (GtkButton *button, gpointer user_data)
+{
+	gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "profile_editor_dialog"));
+}
+
+void
+pro_settings_button_clicked (GnomeDialog *dialog, gint button_number, gpointer user_data)
+{
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	switch (button_number)
+	{
+	case 0:
+		profile_save (NULL);
+		xst_dialog_modify (tool->main_dialog);
+		tables_update_content ();
+		break;
+	default:
+		break;
+	}
+
+	gtk_widget_hide (GTK_WIDGET (dialog));
 }
 
 /* User settings callbacks */

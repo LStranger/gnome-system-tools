@@ -24,7 +24,8 @@ users_admin_SOURCES = \
 	e-table.c e-table.h  \
 	user_settings.c user_settings.h \
 	profile.c profile.h \
-	user-group-xml.c user-group-xml.h
+	user-group-xml.c user-group-xml.h \
+	user-druid.c user-druid.h
 
 users_admin_CFLAGS = 
 
