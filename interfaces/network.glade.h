@@ -45,6 +45,7 @@ gchar *s = N_("_Modem (PPP)");
 gchar *s = N_("_Ethernet");
 gchar *s = N_("_Wavelan");
 gchar *s = N_("_Parallel Line");
+gchar *s = N_("_IR LAN");
 gchar *s = N_("Connection Settings");
 gchar *s = N_("Use the comment to identify the interface in the future. Activation management lets you set who and when will activate connections.");
 gchar *s = N_("Connection");
