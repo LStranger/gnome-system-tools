@@ -307,74 +307,79 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 static void
 transfer_user_list_to_gui (void)
 {
-	GList *u, *rows = NULL;
-	GtkList *list;
+	GList *tmp_list;
+	GtkCList *list;
 	user *current_u;
-	GtkWidget *list_item;
-	GtkObject *item;
+	gchar *entry[2];
+	gint row;
 
-	/* Ok, first our users should be sorted by login */
-	user_list = g_list_sort (user_list, user_sort_by_login);
+	entry[1] = NULL;
 
-	list = GTK_LIST (tool_widget_get ("user_list"));
+	list = GTK_CLIST (tool_widget_get ("user_list"));
+	gtk_clist_set_auto_sort (list, TRUE); 
 
-	for (u = g_list_first (user_list); u; u = g_list_next (u))
+	gtk_clist_freeze (list);
+	
+	tmp_list = user_list;
+	while (tmp_list)
 	{
-		current_u = (user *)u->data;
+		current_u = tmp_list->data;
+		tmp_list = tmp_list->next;
+		
 		if (current_u->uid >= logindefs.new_user_min_id &&
-				current_u->uid <= logindefs.new_user_max_id) 
+				current_u->uid <= logindefs.new_user_max_id)
 		{
-			list_item = gtk_list_item_new_with_label (current_u->login);
-			gtk_widget_show (list_item);
-			gtk_object_set_data (GTK_OBJECT (list_item), user_list_data_key, current_u);
-			rows = g_list_append (rows, list_item);
+			entry[0] = current_u->login;
+			row = gtk_clist_append (list, entry);
+			gtk_clist_set_row_data (list, row, current_u);
 		}
 	}
 
-	gtk_list_append_items (list, rows);
+	gtk_clist_thaw (list);
 
 	/* Select first item (and make it current) */
 
-	gtk_list_select_item (list, 0);
-	u = list->selection;
-	item = GTK_OBJECT (u->data);
-	current_user = gtk_object_get_data (item, user_list_data_key);
+	gtk_clist_select_row (list, 0, 0);
+	current_user = gtk_clist_get_row_data (list, 0); 
 }
 
 static void
 transfer_group_list_to_gui (void)
 {
-	GList *g, *rows = NULL;
-	GtkList *list;
+	GList *tmp_list;
+	GtkCList *list;
 	group *current_g;
-	GtkWidget *list_item;
-	GtkObject *item;
+	gchar *entry[2];
+	gint row;
 
-	/* Ok, first our groups should be sorted by name */
-	group_list = g_list_sort (group_list, group_sort_by_name);
+	entry[1] = NULL;
 
-	list = GTK_LIST (tool_widget_get ("group_list"));
+	list = GTK_CLIST (tool_widget_get ("group_list"));
+	gtk_clist_set_auto_sort (list, TRUE); 
 
-	for (g = g_list_first (group_list); g; g = g_list_next (g))
+	gtk_clist_freeze (list);
+	
+	tmp_list = group_list;
+	while (tmp_list)
 	{
-		current_g = (group *)g->data;
+		current_g = tmp_list->data;
+		tmp_list = tmp_list->next;
+
 /*		if (current_g->gid >= logindefs.new_group_min_id &&
 				current_g->gid <= logindefs.new_group_max_id) */
 		{
-			list_item = gtk_list_item_new_with_label (current_g->name);
-			gtk_widget_show (list_item);
-			gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, current_g);
-			rows = g_list_append (rows, list_item);
+			entry[0] = current_g->name;
+			row = gtk_clist_append (list, entry);
+			gtk_clist_set_row_data (list, row, current_g);
 		}
 	}
 
-	gtk_list_append_items (list, rows);
+	gtk_clist_thaw (list);
 
 	/* Select first item (and make it current) */
-	gtk_list_select_item (list, 0);
-	g = list->selection;
-	item = GTK_OBJECT (g->data);
-	current_group = gtk_object_get_data (item, group_list_data_key);
+
+	gtk_clist_select_row (list, 0, 0);
+	current_group = gtk_clist_get_row_data (list, 0);
 }
 
 static void

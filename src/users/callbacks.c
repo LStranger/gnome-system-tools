@@ -171,8 +171,8 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	gchar *txt;
 	GtkWindow *parent;
 	GnomeDialog *dialog;
-	GtkList *list;
-	GList *selection;
+	GtkCList *clist;
+	gint row;
 
 	g_return_if_fail (tool_get_access());
 	
@@ -187,37 +187,30 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
+		clist = GTK_CLIST (tool_widget_get ("user_list"));
+		row = gtk_clist_find_row_from_data (clist, current_user);
 		user_list = g_list_remove (user_list, current_user);
-		
-		list = GTK_LIST (tool_widget_get ("user_list"));
-		selection = g_list_copy (list->selection);
-		gtk_list_remove_items (list, selection);
-		g_list_free (selection);
+		gtk_clist_remove (clist, row);
 		current_user = NULL;
 		tool_set_modified (TRUE);
 	}
 }
 
 extern void
-on_user_list_selection_changed (GtkWidget *list, gpointer user_data)
+on_user_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
+		gpointer user_data)
 {
-	GList *current;
-	GtkObject *list_item;
-
-	current = GTK_LIST (list)->selection;
-
-	if (!current) 
+	if (row < 0) 
 	{
 		user_actions_set_sensitive (FALSE);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), 
-												 "Settings for the selected user");
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")),
+				"Settings for the selected user");
 	} 
 	else 
 	{
 		gchar *label;
 		
-		list_item = GTK_OBJECT (current->data);
-		current_user = gtk_object_get_data (list_item, user_list_data_key);
+		current_user = gtk_clist_get_row_data (clist, row);
 		
 		user_actions_set_sensitive (TRUE);
 		label = g_strconcat ("Settings for user ", current_user->login, NULL);
@@ -280,8 +273,9 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	gchar *txt;
 	GtkWindow *parent;
 	GnomeDialog *dialog;
-	GtkList *list;
-	GList *selection;
+	GtkCList *clist;
+	gint row;
+	
 
 	txt = g_strdup_printf ("Are you sure you want to delete group %s?", current_group->name);
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
@@ -293,36 +287,31 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
+		clist = GTK_CLIST (tool_widget_get ("group_list"));
+		row = gtk_clist_find_row_from_data (clist, current_group);
 		group_list = g_list_remove (group_list, current_group);
-		
-		list = GTK_LIST (tool_widget_get ("group_list"));
-		selection = g_list_copy (list->selection);
-		gtk_list_remove_items (list, selection);
-		g_list_free (selection);
+		gtk_clist_remove (clist, row);
+		current_group = NULL;
 		tool_set_modified (TRUE);
 	}
 }
 
 extern void
-on_group_list_selection_changed (GtkWidget *list, gpointer user_data)
+on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
+		gpointer user_data)
 {
-	GList *current;
-	GtkObject *list_item;
-
-	current = GTK_LIST (list)->selection;
-
-	if (!current)
+	if (row < 0)
 	{
 		group_actions_set_sensitive (FALSE);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), 
-												 "Settings for the selected group");
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")),
+				"Settings for the selected group");
+		
 	}
 	else
 	{
 		gchar *label;
 		
-		list_item = GTK_OBJECT (current->data);
-		current_group = gtk_object_get_data (list_item, group_list_data_key);
+		current_group = gtk_clist_get_row_data (clist, row);
 		
 		group_actions_set_sensitive (TRUE);
 		label = g_strconcat ("Settings for group ", current_group->name, NULL);
@@ -460,8 +449,9 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		 * Arturo. */
 		
 /*		msg = g_strdup_printf ("Password for %s updated.", current_user->login);*/
-		dialog = GNOME_DIALOG (gnome_ok_dialog_parented (
-												   "The password manipulation routines are not ready yet.", GTK_WINDOW (win)));
+		dialog = GNOME_DIALOG (gnome_ok_dialog_parented ("The password manipulation "
+					"routines are not ready yet.", GTK_WINDOW (win)));
+		
 		gnome_dialog_run (dialog);
 /*		g_free (msg);*/
 
@@ -763,10 +753,11 @@ update_user (void)
 	GtkWindow *win;
 	GnomeDialog *dialog;
 	gchar *txt;
-	GtkWidget *label, *list_item;
-	GtkList *list;
+	GtkCList *list;
 	GList *tmplist;
-	group *g;																		 
+	group *g;
+	gint row;
+	
 	w0 = tool_widget_get ("user_settings_name");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
 
@@ -789,11 +780,9 @@ update_user (void)
 			g_free (current_user->login);
 			current_user->login = g_strdup (txt);
 
-			list = GTK_LIST (tool_widget_get ("user_list"));
-			tmplist = g_list_copy (list->selection);
-			list_item = (GtkWidget *)tmplist->data;
-			label = GTK_BIN (list_item)->child;
-			gtk_label_set_text (GTK_LABEL (label), txt);			
+			list = GTK_CLIST (tool_widget_get ("user_list"));
+			row = gtk_clist_find_row_from_data (list, current_user);
+			gtk_clist_set_text (list, row, 0, txt);
 		}
 	}
 
@@ -845,11 +834,14 @@ add_user (void)
 	GtkWindow *win;
 	GnomeDialog *dialog;
 	gchar *new_user_name, *new_group_name, *new_comment, *tmp;
-	GtkWidget *list_item;
-	GtkList *list;
-	GList *tmplist;
+	GtkCList *clist;
+	GList *tmp_list;
 	group *g, *new_group;
 	user *new_user, *current_u;
+	gchar *entry[2];
+	gint row;
+
+	entry[1] = NULL;
 
 	w0 = tool_widget_get ("user_settings_name");
 	new_user_name = gtk_entry_get_text (GTK_ENTRY (w0));
@@ -869,9 +861,13 @@ add_user (void)
 
 	/* Check if user exists */
 
-	for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
+	tmp_list = user_list;
+
+	while (tmp_list)
 	{
-		current_u = (user *)tmplist->data;
+		current_u = tmp_list->data;
+		tmp_list = tmp_list->next;
+
 		if (!strcmp (current_u->login, new_user_name))
 		{
 			tmp = g_strdup_printf ("User %s already exists.", new_user_name);
@@ -888,7 +884,9 @@ add_user (void)
 	
 	if (!is_valid_name (new_user_name))
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid username, using only lower-case letters.", win));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid username,"
+				       " using only lower-case letters.", win));
+		
 		gnome_dialog_run (dialog);
 		return FALSE;
 	}
@@ -901,20 +899,26 @@ add_user (void)
 
 	/* Now find new group's gid, if it exists */
 
-	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+	tmp_list = group_list;
+	while (tmp_list)
 	{
-		g = (group *)tmplist->data;
+		g = tmp_list->data;
+		tmp_list = tmp_list->next;
+
 		if (!strcmp (g->name, new_group_name))
 		break;
 	}
 	
-	if (!tmplist)
+	if (!tmp_list)
 	{
 		/* New group: check that it is a valid group name */
 		
 		if (!is_valid_name (new_group_name))
 		{
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid main gruop name, with only lower-case letters,\nor select one from the pull-down menu.", win));
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid "
+					"main group name, with only lower-case letters,\n"
+					"or select one from the pull-down menu.", win));
+			
 			gnome_dialog_run (dialog);
 			return FALSE;
 		}
@@ -925,14 +929,13 @@ add_user (void)
 		new_group->name = g_strdup (new_group_name);
 		group_list = g_list_append (group_list, new_group);
 		
-		/* Add to the GtkList. */
+		/* Add to the GtkCList. */
 		
-		list = GTK_LIST (tool_widget_get ("group_list"));
-		list_item = gtk_list_item_new_with_label (new_group_name);
-		gtk_widget_show (list_item);
-		gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, new_group);
-		tmplist = g_list_append (NULL, list_item);
-		gtk_list_append_items (list, tmplist);
+		clist = GTK_CLIST (tool_widget_get ("group_list"));
+
+		entry[0] = new_group_name;
+		row =  gtk_clist_append (clist, entry);
+		gtk_clist_set_row_data (clist, row, new_group);
 	}
 	else
 		new_group = g;
@@ -948,19 +951,17 @@ add_user (void)
 		new_user->comment = g_strdup (new_comment);
 	user_list = g_list_append (user_list, new_user);
 	
-	/* Add to the user_list GtkList */
+	/* Add to the user_list GtkCList */
 	
-	list = GTK_LIST (tool_widget_get ("user_list"));
-	list_item = gtk_list_item_new_with_label (new_user_name);
-	gtk_widget_show (list_item);
-	gtk_object_set_data (GTK_OBJECT (list_item), user_list_data_key, new_user);
-	tmplist = g_list_append (NULL, list_item);
-	gtk_list_append_items (list, tmplist);
-
+	clist = GTK_CLIST (tool_widget_get ("user_list"));
+	
+	entry[0] = new_user_name;
+	row = gtk_clist_append (clist, entry);
+	gtk_clist_set_row_data (clist, row, new_user);
+	
 	/* Select current user in users list (last one)*/
 
-	tmplist = list->children;
-	gtk_list_select_item (list, g_list_length (tmplist) - 1);
+	gtk_clist_select_row (clist, row, 0);
 	current_user = new_user;
 
 	return TRUE;
@@ -975,6 +976,8 @@ update_group (void)
 	gchar *txt;
 	GList *selection;
 	GtkList *list;
+	GtkCList *clist;
+	gint row;
 	
 	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
 
@@ -997,11 +1000,9 @@ update_group (void)
 			g_free (current_group->name);
 			current_group->name = g_strdup (txt);
 
-			list = GTK_LIST (tool_widget_get ("group_list"));
-			selection = g_list_copy (list->selection);
-			list_item = (GtkWidget *)selection->data;
-			label = GTK_BIN (list_item)->child;
-			gtk_label_set_text (GTK_LABEL (label), txt);
+			clist = GTK_CLIST (tool_widget_get ("group_list"));
+			row = gtk_clist_find_row_from_data (clist, current_group);
+			gtk_clist_set_text (clist, row, 0, txt);
 		}
 	}
 
@@ -1046,7 +1047,12 @@ add_group (void)
 	gchar *new_group_name, *tmp;
 	GList *selection = NULL;
 	GtkList *list;
+	GtkCList *clist;
 	group *tmpgroup, *current_g;
+	gint row;
+	gchar *entry[2];
+
+	entry[1] = NULL;
 	
 	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
 
@@ -1095,13 +1101,11 @@ add_group (void)
 	tmpgroup = make_default_group ();
 	tmpgroup->name = g_strdup (new_group_name);
 
-	list = GTK_LIST (tool_widget_get ("group_list"));
-	list_item = gtk_list_item_new_with_label (new_group_name);
-	gtk_widget_show (list_item);
-	gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, tmpgroup);
-	selection = g_list_append (selection, list_item);
-	gtk_list_append_items (list, selection);
-
+	clist = GTK_CLIST (tool_widget_get ("group_list"));
+	entry[0] = new_group_name;
+	row = gtk_clist_append (clist, entry);
+	gtk_clist_set_row_data (clist, row, tmpgroup);
+	
 	/* Add group members */
 
 	list = GTK_LIST (tool_widget_get ("group_settings_members"));
@@ -1118,11 +1122,11 @@ add_group (void)
 	current_group = tmpgroup;
 	group_list = g_list_append (group_list, current_group);
 
-	/* Select current group in group list (last one). */
+	/* Select current group in group list */
 
-	selection = list->children;
-	gtk_list_select_item (list, g_list_length (selection) - 1);
-	
+	row = gtk_clist_find_row_from_data (clist, current_group);
+	gtk_clist_select_row (clist, row, 0);
+
 	return TRUE;
 }
 

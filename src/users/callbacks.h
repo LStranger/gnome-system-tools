@@ -60,7 +60,9 @@ extern void
 on_user_delete_clicked (GtkButton *button, gpointer user_data);
 
 extern void
-on_user_list_selection_changed (GtkWidget *list, gpointer user_data);
+on_user_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
+		gpointer user_data);
+
 
 
 extern void
@@ -73,7 +75,8 @@ extern void
 on_group_delete_clicked (GtkButton *button, gpointer user_data);
 
 extern void
-on_group_list_selection_changed (GtkWidget *list, gpointer user_data);
+on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
+		gpointer user_data);
 
 
 
