@@ -16,12 +16,14 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Jacob Berkman <jacob@ximian.com>
+ *          Hans Petter Jansson <hpj@ximian.com>
  */
 
 #include <config.h>
 
 #include "xst-tool.h"
 #include "xst-dialog.h"
+#include "xst-report-hook.h"
 
 #include <gnome.h>
 #include <parser.h>
@@ -46,6 +48,11 @@ static enum {
 
 static GtkObjectClass *parent_class;
 static gint xsttool_signals[LAST_SIGNAL] = { 0 };
+
+static XstReportHookEntry common_report_hooks[] = {
+/*	{ 101, report_end_cb, XST_REPORT_HOOK_LOAD,     FALSE }, */
+	{ 0,   NULL,          -1,                       FALSE }
+};
 
 GladeXML *
 xst_tool_load_glade_common (XstTool *tool, const gchar *widget)
@@ -145,19 +152,23 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 					/* Report line */
 					
 					gtk_entry_set_text (GTK_ENTRY (tool->report_entry), tool->line + 4);
-						           
-					
+
 					if (vadj->value >= vadj->upper - vadj->page_size)
 						scroll = TRUE;
 					else
 						scroll = FALSE;
-						
+
 					report_text[1] = tool->line + 4;
 					gtk_clist_append (GTK_CLIST (tool->report_list), report_text);
-							  
-					
+
 					if (scroll)
 						gtk_adjustment_set_value (vadj, vadj->upper - vadj->page_size);
+
+					xst_tool_invoke_report_hooks (tool, tool->report_hook_type,
+								      (tool->line [0] - '0') * 100 +
+								      (tool->line [1] - '0') * 10 +
+								      (tool->line [2] - '0'),
+								      tool->line + 4);
 				}
 			}
 
@@ -225,6 +236,10 @@ xst_tool_save (XstTool *tool)
 
 	gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_XML]);
 
+	/* FIXME: Instead of doing the following, we should pass around a value describing
+	 * tool I/O mode (as opposed to a string to report_progress ()). */
+	tool->report_hook_type = XST_REPORT_HOOK_SAVE;
+
 #ifdef XST_DEBUG
 	/* don't actually save if we are just pretending */
 	if (root_access == ROOT_ACCESS_SIMULATED) {
@@ -282,6 +297,10 @@ xst_tool_load (XstTool *tool)
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);	
 	g_return_val_if_fail (tool->script_path, FALSE);
   
+	/* FIXME: Instead of doing the following, we should pass around a value describing
+	 * tool I/O mode (as opposed to a string to report_progress ()). */
+	tool->report_hook_type = XST_REPORT_HOOK_LOAD;
+
 	xmlSubstituteEntitiesDefault (TRUE);
 
 	if (tool->config) {
@@ -501,6 +520,9 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 			    "apply",
 			    GTK_SIGNAL_FUNC (xst_tool_save_cb),
 			    tool);
+
+	tool->report_hook_list = NULL;
+	xst_tool_add_report_hooks (tool, common_report_hooks);
 }
 
 XstTool *
@@ -528,6 +550,53 @@ xst_tool_set_xml_funcs (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, g
 		gtk_signal_connect (GTK_OBJECT (tool), "fill_xml", GTK_SIGNAL_FUNC (save_cb), data);
 }
 
+void
+xst_tool_add_report_hooks (XstTool *tool, XstReportHookEntry *report_hook_table)
+{
+	XstReportHook *hook;
+	int i;
+
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (XST_IS_TOOL (tool));
+	g_return_if_fail (report_hook_table != NULL);
+
+	for (i = 0; report_hook_table [i].id; i++)
+        {
+		hook = xst_report_hook_new_from_entry (&report_hook_table [i]);
+
+		if (!hook)
+			continue;
+
+		tool->report_hook_list = g_slist_append (tool->report_hook_list, hook);
+	}
+}
+
+void
+xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, guint id, const gchar *message)
+{
+	GSList *list;
+	XstReportHook *hook;
+
+	for (list = tool->report_hook_list; list; list = g_slist_next (list))
+	{
+		hook = (XstReportHook *) list->data;
+
+		if (hook->id == id && (hook->allow_repeat || !hook->invoked) &&
+		    (hook->type == XST_REPORT_HOOK_LOADSAVE || hook->type == type)) {
+			hook->func (tool, id, message);
+			hook->invoked = TRUE;
+		}
+	}
+}
+
+void
+xst_tool_reset_report_hooks (XstTool *tool)
+{
+	GSList *list;
+
+	for (list = tool->report_hook_list; list; list = g_slist_next (list))
+		((XstReportHook *) list->data)->invoked = FALSE;
+}
 
 XstTool *
 xst_tool_init (const char *name, const char *title, int argc, char *argv [])

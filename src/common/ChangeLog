@@ -1,3 +1,15 @@
+2001-02-09  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-report-hook.[ch]: Implement. This is the framework that
+	  allows tools to react to report messages.
+
+	* xst-tool.[ch]: Add report hook functions to XstTool. Add a
+	  skeleton table for common hooks.
+
+	* xst-types.h: Add types needed for XstReportHook.
+
+	* Makefile.am: Add xst-report-hook.[ch] to build.
+
 2001-02-06  jacob berkman  <jacob@ximian.com>
 
 	* xst-dialog.[ch]: add a _connect_signals() function

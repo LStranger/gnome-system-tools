@@ -65,6 +65,9 @@ struct _XstTool {
 
 	char *line;
 	int line_len;
+	XstReportHookType report_hook_type;
+
+	GSList *report_hook_list;
 };
 
 struct _XstToolClass {
@@ -74,26 +77,31 @@ struct _XstToolClass {
 	void (*fill_xml) (XstTool *xt);
 };
 
-GtkType      xst_tool_get_type          (void);
+GtkType      xst_tool_get_type            (void);
 
-XstTool     *xst_tool_init              (const char *name, const char *title, 
-					 int argc, char *argv []);
+XstTool     *xst_tool_init                (const char *name, const char *title, 
+					   int argc, char *argv []);
 
-void         xst_tool_main              (XstTool *tool);
-gboolean     xst_tool_get_access        (XstTool *tool);
+void         xst_tool_main                (XstTool *tool);
+gboolean     xst_tool_get_access          (XstTool *tool);
 
-XstTool     *xst_tool_new               (const char *name, const char *title);
-void         xst_tool_construct         (XstTool *tool, 
-					 const char *name, const char *title);
+XstTool     *xst_tool_new                 (const char *name, const char *title);
+void         xst_tool_construct           (XstTool *tool, 
+					   const char *name, const char *title);
 
-gboolean     xst_tool_save              (XstTool *tool);
-void         xst_tool_save_cb           (GtkWidget *w, XstTool *tool);
-gboolean     xst_tool_load              (XstTool *tool);
-void         xst_tool_set_xml_funcs     (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
+gboolean     xst_tool_save                (XstTool *tool);
+void         xst_tool_save_cb             (GtkWidget *w, XstTool *tool);
+gboolean     xst_tool_load                (XstTool *tool);
+void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 
-GladeXML    *xst_tool_load_glade_common (XstTool *tool, const gchar *widget);
-GladeXML    *xst_tool_load_glade        (XstTool *tool, const gchar *widget);
+GladeXML    *xst_tool_load_glade_common   (XstTool *tool, const gchar *widget);
+GladeXML    *xst_tool_load_glade          (XstTool *tool, const gchar *widget);
 
-XstDialog   *xst_tool_get_dialog        (XstTool *tool);
+XstDialog   *xst_tool_get_dialog          (XstTool *tool);
+
+void         xst_tool_add_report_hooks    (XstTool *tool, XstReportHookEntry *report_hook_table);
+void         xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type,
+					   guint id, const gchar *message);
+void         xst_tool_reset_report_hooks  (XstTool *tool);
 
 #endif /* XST_TOOL_H */

@@ -15,33 +15,40 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Jacob Berkman <jacob@ximian.com>
+ * Authors: Hans Petter Jansson <hpj@ximian.com>
  */
 
-#ifndef XST_TYPES_H
-#define XST_TYPES_H
+#include <config.h>
 
-typedef enum {
-	XST_DIALOG_BASIC,
-	XST_DIALOG_INTERMEDIATE,
-	XST_DIALOG_ADVANCED
-} XstDialogComplexity;
+#include "xst-report-hook.h"
 
-typedef enum {
-	XST_REPORT_HOOK_LOAD,
-	XST_REPORT_HOOK_SAVE,
-	XST_REPORT_HOOK_LOADSAVE
-} XstReportHookType;
 
-typedef struct _XstTool             XstTool;
-typedef struct _XstToolClass        XstToolClass;
+XstReportHook *
+xst_report_hook_new (guint id, XstReportHookFunc func, XstReportHookType type,
+                     gboolean allow_repeat)
+{
+	XstReportHook *xrh;
 
-typedef struct _XstDialog           XstDialog;
-typedef struct _XstDialogClass      XstDialogClass;
+	xrh = g_new0 (XstReportHook, 1);
+	xrh->id = id;
+	xrh->func = func;
+	xrh->type = type;
+	xrh->allow_repeat = allow_repeat;
+	xrh->invoked = 0;
 
-typedef struct _XstDialogSignal     XstDialogSignal;
+	return xrh;
+}
 
-typedef struct _XstReportHook       XstReportHook;
-typedef struct _XstReportHookEntry  XstReportHookEntry;
 
-#endif /* XST_TYPES_H */
+XstReportHook *
+xst_report_hook_new_from_entry (XstReportHookEntry *entry)
+{
+	return xst_report_hook_new (entry->id, entry->func, entry->type, entry->allow_repeat);
+}
+
+
+void
+xst_report_hook_destroy (XstReportHook *xrh)
+{
+	g_free (xrh);
+}

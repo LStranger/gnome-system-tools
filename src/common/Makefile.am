@@ -23,7 +23,9 @@ libsetuptool_a_SOURCES = \
 	xst-dialog.h	\
 	xst-tool.c	\
 	xst-tool.h	\
-	xst-types.h
+	xst-types.h	\
+	xst-report-hook.c \
+	xst-report-hook.h
 
 #	tool.c		\
 #	tool.h
