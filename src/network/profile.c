@@ -53,6 +53,7 @@ profile_delete (xmlNodePtr node)
 	}
 }
 
+/* profile saving functions */
 static void
 profile_save_tag_list (xmlNodePtr source, xmlNodePtr dest, gchar *list[])
 {
@@ -61,7 +62,7 @@ profile_save_tag_list (xmlNodePtr source, xmlNodePtr dest, gchar *list[])
 
 	for (string = list; *string != NULL; string++) {
 		value = gst_xml_get_child_content (source, *string);
-		if (value != NULL)
+		if ((value != NULL) && (strlen (value) != 0))
 			gst_xml_element_add_with_content (dest, *string, value);
 
 		g_free (value);
@@ -170,13 +171,7 @@ profile_save_statichosts (xmlNodePtr source, xmlNodePtr dest)
 		gst_xml_element_add_with_content (new_statichost, "ip",
 						  gst_xml_get_child_content (node, "ip"));
 
-		for (alias = gst_xml_element_find_first (node, "alias");
-		     alias != NULL;
-		     alias = gst_xml_element_find_next (alias, "alias"))
-		{
-			new_alias = gst_xml_element_add (new_statichost, "alias");
-			gst_xml_element_set_content (new_alias, gst_xml_element_get_content (alias));
-		}
+		profile_save_list (node, new_statichost, "alias");
 	}
 }
 
@@ -222,6 +217,201 @@ profile_save_current (const gchar *name, const gchar *description, GstTool *tool
 	profile_save_dialing (root, new_profile);
 }
 
+/* functions for comparing a profile with the current configuration */
+static gboolean
+profile_compare_tag_list (xmlNodePtr current, xmlNodePtr profile, gchar *list[])
+{
+	gchar **string = list;
+	gchar *value1, *value2;
+	gboolean value = TRUE;
+       
+	while ((*string != NULL) && (value == TRUE)) {
+		value1 = gst_xml_get_child_content (current, *string);
+		value2 = gst_xml_get_child_content (profile, *string);
+
+		if (((value1 != NULL) && (value2 != NULL) && (strcmp (value1, value2) != 0)) ||
+		    ((value1 == NULL) && (value2 != NULL) && (strlen (value2) > 0)) ||
+		    ((value1 != NULL) && (value2 == NULL) && (strlen (value1) > 0)))
+			value = FALSE;
+
+		g_free (value1);
+		g_free (value2);
+		string++;
+	} 
+
+	return value;
+}
+
+static gboolean
+profile_compare_general_data (xmlNodePtr current, xmlNodePtr profile)
+{
+	gchar *list[] = {
+		"hostname",
+		"domain",
+		"smbdesc",
+		"smbuse",
+		"winsserver",
+		"winsuse",
+		"workgroup",
+		"gateway",
+		"gatewaydev",
+		NULL
+	};
+
+	profile_compare_tag_list (current, profile, list);
+}
+
+static gboolean
+profile_compare_list (xmlNodePtr current, xmlNodePtr profile, gchar *tag)
+{
+	xmlNodePtr node1, node2;
+	gchar *value1, *value2;
+	gboolean value = TRUE;
+
+	node1 = gst_xml_element_find_first (current, tag);
+	node2 = gst_xml_element_find_first (profile, tag);
+
+	while ((node1 != NULL) && (node2 != NULL) && (value == TRUE)) {
+		value1 = gst_xml_element_get_content (node1);
+		value2 = gst_xml_element_get_content (node2);
+
+		if (((value1 != NULL) && (value2 != NULL) && (strcmp (value1, value2) != 0)) ||
+		    ((value1 == NULL) && (value2 != NULL) && (strlen (value2) > 0)) ||
+		    ((value1 != NULL) && (value2 == NULL) && (strlen (value1) > 0)))
+			value = FALSE;
+
+		g_free (value1);
+		g_free (value2);
+
+		node1 = gst_xml_element_find_next (node1, tag);
+		node2 = gst_xml_element_find_next (node2, tag);
+	} 
+
+	return value;
+}
+
+static gboolean
+profile_compare_statichosts (xmlNodePtr current, xmlNodePtr profile)
+{
+	xmlNodePtr node1, node2, alias_node1, alias_node2;
+	gchar *ip1, *ip2;
+	gboolean value = TRUE;
+
+	node1 = gst_xml_element_find_first (current, "statichost");
+	node2 = gst_xml_element_find_first (profile, "statichost");
+
+	while ((node1 != NULL) && (node2 != NULL) && (value == TRUE)) {
+		ip1 = gst_xml_get_child_content (node1, "ip");
+		ip2 = gst_xml_get_child_content (node2, "ip");
+
+		if (((ip1 != NULL) && (ip2 != NULL) && (strcmp (ip1, ip2) != 0)) ||
+		    ((ip1 == NULL) && (ip2 != NULL) && (strlen (ip2) > 0)) &&
+		    ((ip1 != NULL) && (ip2 == NULL) && (strlen (ip1) > 0)))
+			value = FALSE;
+		else
+			value = profile_compare_list (node1, node2, "alias");
+
+		g_free (ip1);
+		g_free (ip2);
+
+		node1 = gst_xml_element_find_next (node1, "statichost");
+		node2 = gst_xml_element_find_next (node2, "statichost");
+	}
+
+	return value;
+}
+
+static gboolean
+profile_compare_interfaces (xmlNodePtr current, xmlNodePtr profile)
+{
+	xmlNodePtr node1, node2;
+	gboolean value = TRUE;
+	gchar *list [] = {
+		"address",
+		"auto",
+		"bootproto",
+		"broadcast",
+		"debug",
+		"dev",
+		"file",
+		"name",
+		"netmask",
+		"network",
+		"noauth",
+		"persist",
+		"serial_hwctl",
+		"serial_port",
+		"set_default_gw",
+		"update_dns",
+		"user",
+		"wvsection",
+		NULL
+	};
+
+	node1 = gst_xml_element_find_first (current, "interface");
+	node2 = gst_xml_element_find_first (profile, "interface");
+
+	while ((node1 != NULL) && (node2 != NULL) && (value == TRUE)) {
+		value = profile_compare_tag_list (node1, node2, list);
+
+		node1 = gst_xml_element_find_next (node1, "interface");
+		node2 = gst_xml_element_find_next (node2, "interface");
+	}
+
+	return value;
+}
+
+static gboolean
+profile_compare_dialing (xmlNodePtr current, xmlNodePtr profile)
+{
+	xmlNodePtr node1, node2;
+	gboolean value = TRUE;
+	gchar *list[] = {
+		"device",
+		"dial_command",
+		"init1",
+		"init2",
+		"init3",
+		"init4",
+		"init5",
+		"init6",
+		"init7",
+		"init8",
+		"init9",
+		"login",
+		"name",
+		"password",
+		"phone",
+		"speed",
+		"stupid",
+		"type",
+		"volume",
+		NULL
+	};
+
+	node1 = gst_xml_element_find_first (current, "dialing");
+	node2 = gst_xml_element_find_first (profile, "dialing");
+
+	while ((node1 != NULL) && (node2 != NULL) && (value == TRUE)) {
+		value = profile_compare_tag_list (node1, node2, list);
+
+		node1 = gst_xml_element_find_next (node1, "dialing");
+		node2 = gst_xml_element_find_next (node2, "dialing");
+	} 
+
+	return value;
+}
+
+static gboolean
+profile_compare_with_current_configuration (xmlNodePtr current, xmlNodePtr profile)
+{
+	return (profile_compare_general_data (current, profile) &&
+		profile_compare_list (current, profile, "nameservers") &&
+		profile_compare_list (current, profile, "searchdomain") &&
+		profile_compare_statichosts (current, profile) &&
+		profile_compare_interfaces (current, profile) &&
+		profile_compare_dialing (current, profile));
+}
 
 /* stuff to active a profile */
 static void
@@ -276,15 +466,17 @@ profile_populate_option_menu (GstTool *tool, xmlNodePtr root)
 	GtkWidget *menu = gtk_menu_new ();
 	GtkWidget *menu_item;
 	gchar *profile_name;
-	gint counter = 0;
-	
+	gint counter = 1;
+	gint default_profile = 0;
+
+	menu_item = gtk_menu_item_new_with_label (_("Unknown"));
+	gtk_widget_set_sensitive (menu_item, FALSE);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
 	for (node = gst_xml_element_find_first (profiledb, "profile");
 	     node != NULL;
 	     node = gst_xml_element_find_next (node, "profile"))
 	{
-		counter++;
-		
 		profile_name = gst_xml_get_child_content (node, "name");
 
 		/* set the option menu entry */
@@ -294,16 +486,15 @@ profile_populate_option_menu (GstTool *tool, xmlNodePtr root)
 		
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
 
+		if (profile_compare_with_current_configuration (root, node))
+			default_profile = counter;
+
 		g_free (profile_name);
+		counter++;
 	}
 
-	if (counter == 0) {
-		/* set unsensitive the option menu */
-		gtk_widget_set_sensitive (profiles_menu, FALSE);
-	} else {
-		/* show the menu and attach it to the option menu */
-		gtk_widget_set_sensitive (profiles_menu, TRUE);
-		gtk_widget_show_all (menu);
-		gtk_option_menu_set_menu (GTK_OPTION_MENU (profiles_menu), menu);
-	}
+	gtk_widget_set_sensitive (profiles_menu, TRUE);
+	gtk_widget_show_all (menu);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (profiles_menu), menu);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (profiles_menu), default_profile);
 }
