@@ -2,6 +2,10 @@
 
 	* xst-ui.c (xst_ui_logout_dialog): Minor sign fix. Use _()
 	instead of N_(). If message is not NULL, use that instead.
+	(xst_ui_create_image_widget): calls helper. fixed style.
+	(xst_ui_create_image_widget_canvas): helper.
+	(xst_ui_image_set_pix): Changes the pixmap of an antialiased
+	image.
 
 2001-07-20  Arturo Espinosa Aldama  <arturo@ximian.com>
 
@@ -331,7 +335,7 @@ Thu Jul 12 12:22:56 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
 	(timeout_cb): #ifdef out
 	(set_arrow): ditto
 	(xst_fool_the_linker): implement
-	(xst_init): remove the call to xst_ui_create_image_widgte and
+	(xst_init): remove the call to xst_ui_create_image_widget and
 	the "nice" message that acompanied it.
 
 	* xst-platform.h: upd. header

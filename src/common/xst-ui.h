@@ -6,6 +6,7 @@
 
 GtkWidget *xst_ui_list_get_list_item_by_name      (GtkList *list, const gchar *label);
 void       xst_ui_combo_remove_by_label           (GtkCombo *combo, const gchar *label);
+void       xst_ui_image_set_pix                   (GtkWidget *widget, gchar *filename);
 GtkWidget *xst_ui_create_image_widget             (gchar *name, gchar *string1, gchar *string2,
 						   gint int1, gint int2);
 gint       xst_ui_option_menu_get_selected_row    (GtkOptionMenu *option_menu);
