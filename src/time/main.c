@@ -300,6 +300,11 @@ int main(int argc, char *argv[])
 {
   GtkWidget *window;
 
+#ifdef ENABLE_NLS
+	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
+	textdomain (PACKAGE);
+#endif
+  
   tool_init("time", argc, argv);
   populate_ntp_list();
   init_map_canvas();
