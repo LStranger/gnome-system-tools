@@ -56,7 +56,7 @@ static char *ntp_servers[] =
 	"ntp1.cmc.ec.gc.ca (Eastern Canada)",
 	"ntp2.cmc.ec.gc.ca (Eastern Canada)",
 	"clock.tricity.wsu.edu (Washington, USA)",
-	"wuarchive.wustl.edu (Washington, USA)",
+	"wuarchive.wustl.edu (Missouri, USA)",
 	"clock.psu.edu (Pennsylvania, USA)",
 	"constellation.ecn.uoknor.edu (Oklahoma, USA)",
 	"gilbreth.ecn.purdue.edu (Indiana, USA)",
