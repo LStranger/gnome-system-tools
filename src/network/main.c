@@ -44,6 +44,8 @@ main (int argc, char *argv[])
 	tool_set_frozen (FALSE);
 
 	gtk_widget_show (tool_get_top_window ());
+	on_network_admin_show (NULL, NULL);
+
 	gtk_main ();
 
 	return 0;

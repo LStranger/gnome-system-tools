@@ -28,13 +28,7 @@
 #include "callbacks.h"
 #include "transfer.h"
 
-
-/* Local globals */
-
-GnomeHelpMenuEntry help_entry =
-{
-	"nameresolution-admin", "index.html"
-};
+#define d(x) x
 
 static int reply;
 GtkWidget *searchdomain_entry_selected = NULL;
@@ -79,11 +73,12 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	char *unsensitive[] = {
 		"connection_delete",
 		"connection_configure",
+		"statichost_add",
 		"statichost_update",
 		"statichost_delete",
 		NULL };
 	int i;
-	
+
 	/* Those widgets that won't be available if you don't have the access. */
 	for (i = 0; access_no[i]; i++)
 		gtk_widget_set_sensitive (tool_widget_get (access_no[i]), tool_get_access());
@@ -110,7 +105,7 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 		gtk_widget_grab_focus (tool_widget_get (entry[page_num]));
 }
 
-
+#if 0
 static void
 dns_ip_add (void)
 {
@@ -172,15 +167,14 @@ on_dns_delete_clicked (GtkButton * button, gpointer user_data)
 	g_return_if_fail (tool_get_access ());
 
 	dns_entry_selected = list_delete_entry (GTK_LIST (tool_widget_get ("dns_list")), 
-																					dns_entry_selected);
+						dns_entry_selected);
 }
-
 
 extern void
 on_wins_use_toggled (GtkToggleButton * togglebutton, gpointer user_data)
 {
-	gtk_widget_set_sensitive (tool_widget_get ("wins_ip"), 
-														gtk_toggle_button_get_active (togglebutton));
+	gtk_widget_set_sensitive (tool_widget_get ("wins_ip"),
+				  gtk_toggle_button_get_active (togglebutton));
 }
 
 
@@ -327,7 +321,7 @@ on_searchdomain_move_down_clicked      (GtkButton       *button,
 	gtk_list_select_child (w, dest);
 	tool_set_modified (TRUE);
 }
-
+#endif
 
 extern void
 on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
@@ -371,6 +365,20 @@ on_statichost_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEve
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 }
 
+extern void
+on_statichost_changed (GtkWidget *w, gpointer null)
+{
+	gboolean enabled;
+	char *ip;
+
+	enabled = tool_get_access () &&
+		gtk_text_get_length (GTK_TEXT (tool_widget_get ("alias"))) &&
+		check_ip_entry (GTK_ENTRY (tool_widget_get ("ip")), FALSE);
+			
+	gtk_widget_set_sensitive (tool_widget_get ("statichost_add"), enabled);
+	gtk_widget_set_sensitive (tool_widget_get ("statichost_update"), enabled && 
+				  GTK_WIDGET_SENSITIVE (tool_widget_get ("statichost_delete")));
+}
 
 extern void
 on_statichost_add_clicked (GtkButton * button, gpointer user_data)
@@ -468,7 +476,6 @@ on_aliases_settings_dialog_show (GtkWidget *w, gpointer user_data)
 	if (tool_get_access ())
 		gtk_widget_grab_focus (tool_widget_get ("aliases_settings_new"));
 }
-#endif
 
 extern void
 on_aliases_settings_ip_changed (GtkWidget *w, gpointer user_data)
@@ -483,7 +490,6 @@ on_aliases_settings_list_select_child (GtkList *list, GtkWidget *widget, gpointe
 	aliases_settings_entry_selected = widget;
 	aliases_settings_actions_set_sensitive (TRUE);
 }
-
 
 extern void
 on_aliases_settings_list_unselect_child (GtkList *list, GtkWidget *widget, gpointer user_data)
@@ -575,7 +581,7 @@ on_aliases_settings_cancel_clicked (GtkWidget *w, gpointer user_data)
 {
 	aliases_settings_dialog_close ();
 }
-
+#endif
 
 /* Helper functions */
 
@@ -585,7 +591,7 @@ reply_cb (gint val, gpointer data)
 	reply = val;
 }
 
-
+#if 0
 static void
 searchdomain_actions_set_sensitive (gboolean state)
 {
@@ -609,7 +615,7 @@ searchdomain_actions_set_sensitive (gboolean state)
 		}
 	}
 }
-
+#endif
 
 static void
 statichost_actions_set_sensitive (gboolean state)
@@ -618,7 +624,7 @@ statichost_actions_set_sensitive (gboolean state)
 	gtk_widget_set_sensitive (tool_widget_get ("statichost_update"), state); 
 }
 
-
+#if 0
 static void
 aliases_settings_actions_set_sensitive (gboolean state)
 {
@@ -781,6 +787,7 @@ list_delete_entry (GtkList *list, GtkWidget *entry)
 	
 	return item;
 }
+#endif
 
 /* yeah, I don't like this formatting either */
 static const char *hint_entry[][3] = { {
