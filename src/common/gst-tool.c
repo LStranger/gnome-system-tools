@@ -1343,7 +1343,7 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	hosts = gconf_client_get_string (client, remote_hosts_key, &error);
 
 	tool->remote_config = ((do_remote_conf) && (hosts != NULL) && (strcmp (SSH_PATH, "") != 0));
-	if (hosts != NULL) 
+	if (tool->remote_config && hosts)
 		tool->remote_hosts = g_strsplit (hosts, ",", -1);
 
 	g_free (hosts);

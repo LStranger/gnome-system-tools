@@ -159,17 +159,18 @@ gst_auth_get_auth_required (GstTool *tool)
 {
 	const gchar  *answer = "yes\n";
 	gboolean      cont   = FALSE;
-	gchar        *str;
+	gchar        *s, *str;
 	gint          ret;
 
 	while (!cont) {
-		str = gst_tool_read_from_backend (tool, "assword:", "/no)?", "\n", NULL);
+		s   = gst_tool_read_from_backend (tool, "assword:", "/no)?", "\n", NULL);
+		str = g_ascii_strup (s, -1);
 
 		/* FIXME: hope that someday we can get rid of this ssh output string parsing */
-		if (g_strrstr (g_ascii_strup (str, -1), "AUTHENTICITY") != NULL) {
+		if (g_strrstr (str, "AUTHENTICITY") != NULL) {
 			/* it's the "add to known hosts list" ssh's message, just answer "yes" */
 			gst_tool_write_to_backend (tool, (gchar *) answer);
-		} else if (g_strrstr (g_ascii_strup (str, -1), "PASSWORD") != NULL) {
+		} else if (g_strrstr (str, "PASSWORD") != NULL) {
 			/* it's asking for the password */
 			cont = TRUE;
 			ret  = GST_AUTH_PASSWORD;
@@ -180,6 +181,7 @@ gst_auth_get_auth_required (GstTool *tool)
 			ret  = GST_AUTH_PASSWORDLESS;
 		}
 
+		g_free (s);
 		g_free (str);
 	}
 
