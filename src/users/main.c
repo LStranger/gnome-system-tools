@@ -118,12 +118,7 @@ enum {
 	ESB_USER_GID,
 };
 
-static ESearchBarItem user_search_items_basic[] = {
-	{ N_("User name contains"), ESB_USER_NAME },
-	{ NULL, -1 }
-};
-
-static ESearchBarItem user_search_items_adv[] = {
+static ESearchBarItem user_search_option_items[] = {
 	{ N_("User name contains"), ESB_USER_NAME },
 	{ N_("User ID is"), ESB_USER_UID },
 	{ N_("Group name contains"), ESB_GROUP_NAME },
@@ -178,25 +173,21 @@ user_query_changed (ESearchBar *esb, gpointer user_data)
 
 static void
 update_searchbar_complexity (XstDialogComplexity complexity)
-{
-	ESearchBarItem *items;
+{	
 	ESearchBar *esb = E_SEARCH_BAR (gtk_object_get_data (GTK_OBJECT (tool->main_dialog),
 					"SearchBar"));
 
 	switch (complexity) {
 	case XST_DIALOG_BASIC:
-		items = user_search_items_basic;
+		gtk_widget_hide (GTK_WIDGET (esb));
 		break;
 	case XST_DIALOG_ADVANCED:
-		items = user_search_items_adv;
+		gtk_widget_show (GTK_WIDGET (esb));
 		break;
 	default:
 		g_warning ("update_searchbar_complexity: Unsupported complexity.");
 		return;
 	}
-	
-	
-	e_search_bar_set_option (esb, items);
 }
 
 static void
@@ -262,32 +253,22 @@ create_searchbar (void)
 {
 	GtkWidget *table;
 	ESearchBar *search;
-	ESearchBarItem *item;
 
 	table = xst_dialog_get_widget (tool->main_dialog, "user_parent");
 
-	switch (tool->main_dialog->complexity) {
-	case XST_DIALOG_BASIC:
-		item = user_search_items_basic;
-		break;
-	case XST_DIALOG_ADVANCED:
-		item = user_search_items_adv;
-		break;
-	default:
-		g_warning ("create_searchbar: Wrong complexity");
-		return;
-	}
-	
-	search = E_SEARCH_BAR (e_search_bar_new (user_search_menu_items, item));
+	search = E_SEARCH_BAR (e_search_bar_new (user_search_menu_items, user_search_option_items));
 	gtk_table_attach (GTK_TABLE (table), GTK_WIDGET (search), 0, 1, 0, 1,
 			  GTK_FILL, GTK_FILL, 0, 0);
-	gtk_widget_show (GTK_WIDGET (search));
+
 	gtk_signal_connect (GTK_OBJECT (search), "query_changed",
 			    GTK_SIGNAL_FUNC (user_query_changed), 0);
 	gtk_signal_connect (GTK_OBJECT (search), "menu_activated",
 			    GTK_SIGNAL_FUNC (user_menu_activated), 0);
+	gtk_object_set_data (GTK_OBJECT (tool->main_dialog), "SearchBar",
+			     (gpointer) search);
 
-	gtk_object_set_data (GTK_OBJECT (tool->main_dialog), "SearchBar", (gpointer) search);
+	/* Show/hide */
+	update_searchbar_complexity (tool->main_dialog->complexity);
 }
 
 static void

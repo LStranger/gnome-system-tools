@@ -511,7 +511,7 @@ create_user_table (void)
 	if (!spec) {
 		spec = xst_ui_load_etspec (tool->etspecs_common_path, USER_TABLE_SPEC);
 		if (!spec)
-			return;
+			g_error ("create_user_table: Couldn't create table.");
 		xst_conf_set_string (tool, "user_spec", spec);
 	}
 
@@ -567,7 +567,7 @@ create_group_table (void)
 	if (!spec) {
 		spec = xst_ui_load_etspec (tool->etspecs_common_path, GROUP_TABLE_SPEC);
 		if (!spec)
-			return;
+			g_error ("create_user_table: Couldn't create table.");
 		xst_conf_set_string (tool, "group_spec", spec);
 	}
 
@@ -619,7 +619,7 @@ create_network_group_table (GtkWidget *paned)
 	if (!spec) {
 		spec = xst_ui_load_etspec (tool->etspecs_common_path, NET_GROUP_TABLE_SPEC);
 		if (!spec)
-			return;
+			g_error ("create_user_table: Couldn't create table.");
 		xst_conf_set_string (tool, "net_group_spec", spec);
 	}
 	net_group_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, spec, NULL);
@@ -656,7 +656,7 @@ create_network_user_table (GtkWidget *paned)
 	if (!spec) {
 		spec = xst_ui_load_etspec (tool->etspecs_common_path, NET_USER_TABLE_SPEC);
 		if (!spec)
-			return;
+			g_error ("create_user_table: Couldn't create table.");
 		xst_conf_set_string (tool, "net_user_spec", spec);
 	}
 	net_user_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, spec, NULL);
