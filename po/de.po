@@ -2,12 +2,13 @@
 # Copyright (C) 2000, 2001 Free Software Foundation, Inc.
 # Christian Meyer <chrisime@gnome.org>, 2000, 2001.
 # Kai Lahmann <kl@linuxfaqs.de>, 2001.
+# Christian Neumair <chris@gnome-de.org>, 2002.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-setup-tools HEAD\n"
-"POT-Creation-Date: 2002-09-21 10:57+0200\n"
-"PO-Revision-Date: 2002-09-21 10:57+0100\n"
+"Project-Id-Version: gnome-system-tools HEAD\n"
+"POT-Creation-Date: 2002-10-03 12:26+0200\n"
+"PO-Revision-Date: 2002-10-03 12:23+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -268,8 +269,9 @@ msgstr ""
 "Werkzeug auszuführen.</span>\n"
 "\n"
 "Geben Sie das »root«-Passwort unten ein, um die nötigen Rechte zu erhalten. "
-"Falls Sie kein Passwort angeben, wird es Ihnen nicht möglich sein, die "
-"Systemkonfiguration zu verändern."
+"Falls Sie kein\n"
+"Passwort angeben, wird es Ihnen nicht möglich sein, die Systemkonfiguration "
+"zu verändern."
 
 #: interfaces/common.glade.h:21 interfaces/common.glade.in.h:15
 #: interfaces/network.glade.h:116 interfaces/network.glade.in.h:52
@@ -469,7 +471,7 @@ msgstr "Beim Start auf Fehler überprüfen"
 #: interfaces/disks.glade.h:22 interfaces/disks.glade.in.h:8
 #: interfaces/memory.glade.h:8 interfaces/memory.glade.h:34
 #: interfaces/memory.glade.h:44 interfaces/memory.glade.in.h:5
-#: src/boot/boot.etspec.h:2 src/network/connection.c:481
+#: src/network/connection.c:481
 msgid "Device"
 msgstr "Gerät"
 
@@ -622,7 +624,7 @@ msgstr "1280x1024"
 
 #: interfaces/display.glade.h:23 interfaces/display.glade.in.h:15
 msgid "Refresh rate:"
-msgstr "Weiderholrate:"
+msgstr "Wiederholrate:"
 
 #: interfaces/display.glade.h:24 interfaces/display.glade.in.h:20
 msgid "Shift my display:"
@@ -2541,7 +2543,6 @@ msgstr ""
 "Zugriff auf Ihre Verzeichnisse zu ermöglichen."
 
 #: interfaces/shares.glade.h:20 interfaces/shares.glade.in.h:40
-#: src/boot/boot.etspec.h:4
 msgid "Name"
 msgstr "Name"
 
@@ -3271,12 +3272,12 @@ msgid "_Groups"
 msgstr "_Gruppen"
 
 #. set window title
-#: src/boot/boot-druid.c:401
+#: src/boot/boot-druid.c:391
 msgid "Boot Image Wizard"
 msgstr "Systemstart-Abbildungsassistent"
 
 #. give our dialog an OK button and title
-#: src/boot/boot-image-editor.c:107
+#: src/boot/boot-image-editor.c:108
 msgid "Boot Image Editor"
 msgstr "Systemstart-Abbildungseditor"
 
@@ -3300,28 +3301,28 @@ msgstr "DOS"
 msgid "Linux"
 msgstr "Linux"
 
-#: src/boot/boot-image.c:236
+#: src/boot/boot-image.c:261
 #, c-format
 msgid "Invalid path: %s"
 msgstr "Ungültiger Pfad: %s"
 
-#: src/boot/boot-image.c:252
+#: src/boot/boot-image.c:277
 #, c-format
 msgid "Image '%s' already exists, please set another name."
 msgstr ""
 "Abbild »%s« exisitiert bereits. Bitte verwenden Sie einen anderen Namen."
 
-#: src/boot/boot-image.c:258
+#: src/boot/boot-image.c:283
 #, c-format
 msgid "Invalid image name: '%s'"
 msgstr "Ungültiger Abbildname »%s«"
 
-#: src/boot/boot-image.c:273
+#: src/boot/boot-image.c:298
 #, c-format
 msgid "Invalid image: '%s'"
 msgstr "Ungültiges Abbild »%s«"
 
-#: src/boot/boot-image.c:291
+#: src/boot/boot-image.c:316
 #, c-format
 msgid "Invalid root device: '%s'"
 msgstr "Ungültiges Gerät »%s« mit Wurzelverzeichnis"
@@ -3334,19 +3335,7 @@ msgstr "Systemstart"
 msgid "Boot Manager"
 msgstr "Bootmanager"
 
-#: src/boot/boot.etspec.h:1
-msgid "Default"
-msgstr "Vorgabe"
-
-#: src/boot/boot.etspec.h:3
-msgid "Kernel Image"
-msgstr "Kernel-Abbild"
-
-#: src/boot/boot.etspec.h:5
-msgid "Type"
-msgstr "Typ"
-
-#: src/boot/callbacks.c:95
+#: src/boot/callbacks.c:105
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3354,12 +3343,12 @@ msgstr ""
 "Ohne Systemstart-Eintrag kann\n"
 "das System nicht gestartet werden.\n"
 
-#: src/boot/callbacks.c:106
+#: src/boot/callbacks.c:120
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Sind Sie sicher, dass Sie »%s« löschen wollen?"
 
-#: src/boot/callbacks.c:175 src/runlevel/callbacks.c:56
+#: src/boot/callbacks.c:194 src/runlevel/callbacks.c:56
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3367,11 +3356,6 @@ msgid ""
 msgstr ""
 "Die Datei »%s« fehlt oder konnte nicht gelesen werden:\n"
 "Die Konfiguration wird leer angezeigt."
-
-#: src/boot/e-table.c:375
-#, c-format
-msgid "%s (default)"
-msgstr "%s (Vorgabe)"
 
 #: src/boot/main.c:75
 msgid "Boot Manager Settings"
@@ -3477,7 +3461,7 @@ msgstr "Dies nicht mehr zeigen"
 msgid "Pretending we are root..."
 msgstr "Vorgeben, »root« zu sein..."
 
-#: src/common/xst-ui.c:434
+#: src/common/xst-ui.c:396
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
@@ -4040,3 +4024,15 @@ msgstr "Einstellungen für Gruppe %s"
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
 msgstr "Benutzer und Gruppen."
+
+#~ msgid "Default"
+#~ msgstr "Vorgabe"
+
+#~ msgid "Kernel Image"
+#~ msgstr "Kernel-Abbild"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "%s (default)"
+#~ msgstr "%s (Vorgabe)"
