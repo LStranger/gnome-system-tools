@@ -1,5 +1,12 @@
 2003-09-13  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
+	* user-settings.c (user_new_prepare): made it to generate the groups
+	  option menu before the profiles option menu, so the group values
+	  are set correctly from the default profile when adding a new user.
+	  Fixes bug #113423
+
+2003-09-13  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
 	* callbacks.c: make unsensitive the buttons beside the profiles table 
 	  when adding or modifying a profile, fixes bug #122174. 
 	  make unsensitive buttons beside all tables when the number of

@@ -220,10 +220,10 @@ user_new_prepare (ug_data *ud)
 	g_object_set_data (G_OBJECT (user_settings_members), "list", user_settings_members_list);
 	
 	/* Fill menus */
-	option_menu_add_profiles (gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu"));
 	option_menu_add_groups (gst_dialog_get_widget (tool->main_dialog, "user_settings_group"), TRUE);
 	combo_add_shells (gst_dialog_get_widget (tool->main_dialog, "user_settings_shell"));
-	
+	option_menu_add_profiles (gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu"));
+
 #ifdef HAVE_LIBCRACK
 	/* If we have libcrack, password quality check is enabled */
 	button = gst_dialog_get_widget (tool->main_dialog, "user_passwd_quality");
