@@ -132,7 +132,7 @@ network_druid_get_connection_data (GnomeDruid *druid)
 		GtkWidget *name = gst_dialog_get_widget (tool->main_dialog, "network_connection_name");
 		gchar *modem = connection_autodetect_modem ();
 
-		if (strlen (modem) == 0)
+		if (!modem || (modem && (strlen (modem) == 0)))
 			modem = g_strdup_printf ("/dev/modem");
 
 		cxn->serial_port = modem;
