@@ -1,0 +1,9 @@
+2001-11-22  Hans Petter Jansson  <hpj@ximian.com>
+
+	* Start ChangeLog.
+
+	* e-map.c (e_map_finalize): Unref pixbufs.
+	(SET_PIXEL_RGB): Get rid of this monstrosity.
+	(update_render_pixbuf): Avoid worst-case scale to 1x1.
+	(put_pixel_with_clipping): Implement.
+	(update_render_point): Use put_pixel_with_clipping(). Make readable.
