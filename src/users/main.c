@@ -47,7 +47,7 @@ static void set_access_sensitivity (void)
 		                   "user_settings_basic", "user_settings_advanced",
 		                   "group_settings_name_label", "group_settings_add", 
 		                   "group_settings_remove", NULL};
-	char *access_yes[] = {"user_list_sw", "group_list_sw", NULL};
+	char *access_yes[] = {"users_holder", "groups_holder", NULL};
 	char *unsensitive[] = {"user_delete", "user_settings", "user_chpasswd", "group_delete",
 		                     "group_settings", NULL};
 	int i;

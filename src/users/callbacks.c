@@ -421,6 +421,7 @@ on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data)
 	user_settings_dialog_close ();
 }
 
+
 extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
