@@ -61,8 +61,6 @@ struct _XstTool {
 	GtkWidget *platform_list;
 	GtkWidget *platform_ok_button;
 
-	gint platform_selected_row;
-
 	/* Progress report widgets */
 	GladeXML  *report_gui;
 	GtkWidget *report_arrow;

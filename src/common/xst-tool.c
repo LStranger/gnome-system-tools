@@ -60,6 +60,13 @@ enum {
 	LAST_SIGNAL
 };
 
+enum {
+	PLATFORM_LIST_COL_NAME,
+	PLATFORM_LIST_COL_PLATFORM,
+
+	PLATFORM_LIST_COL_LAST
+};
+
 static enum {
 	ROOT_ACCESS_NONE,
 	ROOT_ACCESS_SIMULATED,
@@ -94,54 +101,29 @@ static gchar *location_id = NULL;    /* Location in which we are editing */
 /* --- Report hook and signal callbacks --- */
 
 static void
-platform_list_select_row_cb (GtkCList *clist, gint row, gint column, GdkEvent *event,
-			     gpointer data)
+platform_list_selection_changed (GtkTreeSelection *selection, gpointer data)
 {
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	XstPlatform *platform;
+	gboolean selected;
 	XstTool *tool;
 
 	tool = (XstTool *) data;
-	tool->platform_selected_row = row;
-	gtk_widget_set_sensitive (tool->platform_ok_button, TRUE);
-}
-
-static void
-platform_list_unselect_row_cb (GtkCList *clist, gint row, gint column, GdkEvent *event,
-			       gpointer data)
-{
-	XstTool *tool;
-
-	tool = (XstTool *) data;
-	tool->platform_selected_row = -1;
-	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
-}
-
-static void
-platform_dialog_close_cb (GtkWidget *dialog, XstTool *tool)
-{
-	exit (0);
-}
-
-static void
-platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
-{
-	if (ret == -1 || ret == 1)
-		exit (0);
-
-	/* Locate the selected platform and set it up as the current one. */
 
 	if (tool->current_platform)
-		xst_platform_free (tool->current_platform);
+			xst_platform_free (tool->current_platform);
 
-	tool->current_platform =
-		xst_platform_dup ((XstPlatform *)
-				 g_slist_nth_data (tool->supported_platforms_list,
-						   tool->platform_selected_row));
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, PLATFORM_LIST_COL_PLATFORM, &platform, -1);
+		tool->current_platform = xst_platform_dup (platform);
+		selected = TRUE;
+	} else {
+		tool->current_platform = NULL;
+		selected = FALSE;
+	}
 
-	g_assert (tool->current_platform);
-
-	g_signal_handlers_disconnect_by_func (G_OBJECT (tool->platform_dialog),
-					      platform_dialog_close_cb,
-					      tool);
+	gtk_widget_set_sensitive (tool->platform_ok_button, selected);
 }
 
 static gboolean
@@ -557,12 +539,20 @@ static void
 xst_tool_run_platform_dialog (XstTool *tool)
 {
 	GSList *list;
+	gint result;
 	XstPlatform *platform;
-	char *platform_text[1];
+	char *platform_text;
+	GtkTreeView *tree;
+	GtkListStore *store;
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeSelection *select;
+	GtkTreeIter iter;
 
-	/* Fill in the platform GtkCList */
+	/* Fill in the platform list */
 
-	gtk_clist_clear (GTK_CLIST (tool->platform_list));
+	tree = GTK_TREE_VIEW (tool->platform_list);
+	store = gtk_list_store_new (PLATFORM_LIST_COL_LAST, G_TYPE_STRING, G_TYPE_POINTER);
 
 	tool->supported_platforms_list = xst_tool_get_supported_platforms (tool);
 
@@ -570,27 +560,38 @@ xst_tool_run_platform_dialog (XstTool *tool)
 	     list = g_slist_next (list))
 	{
 		platform = (XstPlatform *) list->data;
+		platform_text = (char *) xst_platform_get_name (platform);
 
-		platform_text [0] = (char *) xst_platform_get_name (platform);
-		gtk_clist_append (GTK_CLIST (tool->platform_list), platform_text);
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter,
+				    PLATFORM_LIST_COL_NAME, platform_text,
+				    PLATFORM_LIST_COL_PLATFORM, platform,
+				    -1);
 	}
 
-	/* Prepare dialog and show it */
+	renderer = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes (_("Platform"),
+							   renderer,
+							   "text",
+							   PLATFORM_LIST_COL_NAME,
+							   NULL);
+	gtk_tree_view_append_column (tree, column);
 
-	tool->platform_selected_row = -1;
+	gtk_tree_view_set_model (tree, GTK_TREE_MODEL (store));
+	select = gtk_tree_view_get_selection (tree);
+	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
 
-	g_signal_connect (G_OBJECT (tool->platform_list), "select-row",
-			  G_CALLBACK (platform_list_select_row_cb), tool);
-	g_signal_connect (G_OBJECT (tool->platform_list), "unselect-row",
-			  G_CALLBACK (platform_list_unselect_row_cb), tool);
-	g_signal_connect (G_OBJECT (tool->platform_dialog), "clicked",
-			  G_CALLBACK (platform_unsupported_clicked_cb), tool);
-	g_signal_connect (G_OBJECT (tool->platform_dialog), "close",
-			  G_CALLBACK (platform_dialog_close_cb), tool);
+	g_signal_connect (G_OBJECT (select), "changed",
+			  G_CALLBACK (platform_list_selection_changed),
+			  (gpointer) tool);
 
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
 
-	gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
+	result = gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
+	if (result != GTK_RESPONSE_OK)
+		exit (0);
+
+	gtk_widget_destroy (tool->platform_dialog);
 }
 
 static void
