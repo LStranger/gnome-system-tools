@@ -74,3 +74,5 @@ void tool_splash_show(void);
 void tool_splash_hide(void);
 
 ToolContext *tool_init(gchar *tast, int argc, char *argv[]);
+
+void tool_user_close(GtkWidget *widget, gpointer data);
