@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-17 14:41-0400\n"
-"PO-Revision-Date: 2004-05-13 15:34-0300\n"
+"POT-Creation-Date: 2004-06-01 03:48+0200\n"
+"PO-Revision-Date: 2004-06-01 08:58-0300\n"
 "Last-Translator: Raphael Higino <raphaelh@uai.com.br>\n"
 "Language-Team: GNOME-BR <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -923,6 +923,7 @@ msgstr "_Desativar"
 
 # interfaces/boot.glade.h:11
 #: interfaces/network.glade.in.h:93 interfaces/users.glade.in.h:55
+#: src/users/table.c:48
 msgid "_Delete"
 msgstr "E_xcluir"
 
@@ -1707,14 +1708,13 @@ msgstr "Dispositivo"
 msgid "/_Add ..."
 msgstr "/_Adicionar..."
 
-#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
-#: src/users/table.c:56
+#: src/boot/table.c:52
 msgid "/_Properties"
 msgstr "/_Propriedades"
 
 # interfaces/boot.glade.h:11
 #: src/boot/table.c:53 src/network/connection.c:65 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/network/hosts.c:43
 msgid "/_Delete"
 msgstr "/_Excluir"
 
@@ -2046,7 +2046,7 @@ msgid "/_Configure"
 msgstr "/_Configurar"
 
 # src/network/connection.c:434
-#: src/network/connection.c:487 src/services/table.c:79
+#: src/network/connection.c:487 src/services/table.c:86
 msgid "Active"
 msgstr "Ativo"
 
@@ -2209,7 +2209,7 @@ msgstr "Configurar dispositivos de rede e conexões"
 msgid "Networking"
 msgstr "Rede"
 
-#: src/network/profile.c:51 src/users/profile-settings.c:204
+#: src/network/profile.c:51 src/users/profile-settings.c:215
 msgid "You won't be able to recover this profile after hitting \"apply\""
 msgstr "Você não poderá recuperar este perfil depois de clicar em \"Aplicar\""
 
@@ -2234,27 +2234,27 @@ msgstr "Descrição"
 msgid "No description available."
 msgstr "Sem descrição disponível."
 
-#: src/services/callbacks.c:259
+#: src/services/callbacks.c:245
 msgid "Running"
 msgstr "Rodando"
 
-#: src/services/callbacks.c:263
+#: src/services/callbacks.c:249
 msgid "Stopped"
 msgstr "Parado"
 
 # src/common/xst-dialog.c:55
-#: src/services/callbacks.c:268
+#: src/services/callbacks.c:254
 msgid "Could not get info"
 msgstr "Não foi possível obter informação"
 
 # src/users/user_group.c:878
-#: src/services/callbacks.c:334
+#: src/services/callbacks.c:320
 #, c-format
 msgid "Settings for service %s"
 msgstr "Configurações para o serviço %s"
 
 # interfaces/nameresolution.glade.h:7
-#: src/services/main.c:61
+#: src/services/main.c:62
 msgid "Services Settings"
 msgstr "Configurações dos Serviços"
 
@@ -2274,27 +2274,27 @@ msgstr "Serviços"
 # interfaces/memory.glade.h:8
 # interfaces/memory.glade.h:36
 # interfaces/network.glade.h:17
-#: src/services/table.c:88
+#: src/services/table.c:95
 msgid "Service"
 msgstr "Serviço"
 
 # interfaces/time.glade.h:15
 # interfaces/time.glade.h:22
-#: src/time/main.c:314
+#: src/time/main.c:310
 msgid "Time Zone"
 msgstr "Fuso Horário"
 
 # interfaces/time.glade.h:27
-#: src/time/main.c:424
+#: src/time/main.c:420
 msgid "Time Servers"
 msgstr "Servidores de Horário"
 
 # interfaces/shares.glade.h:17
-#: src/time/main.c:506
+#: src/time/main.c:501
 msgid "NTP support is not running"
 msgstr "O suporte a NTP não está sendo executado"
 
-#: src/time/main.c:507
+#: src/time/main.c:502
 msgid ""
 "Please run NTP support in the system to enable time server synchronization"
 msgstr ""
@@ -2302,7 +2302,7 @@ msgstr ""
 "com servidores de horário"
 
 # src/time/main.c:301
-#: src/time/main.c:819
+#: src/time/main.c:814
 msgid "Time and Date Settings"
 msgstr "Configurações de Data e Horário"
 
@@ -2316,17 +2316,17 @@ msgstr "Alterar hora, data e fuso horário do sistema"
 msgid "Time and Date"
 msgstr "Data e Hora"
 
-#: src/users/callbacks.c:572
+#: src/users/callbacks.c:589
 msgid "Error saving profile"
 msgstr "Erro ao salvar o perfil"
 
 # src/users/user_group.c:714
-#: src/users/callbacks.c:607
+#: src/users/callbacks.c:624
 msgid "Create New profile"
 msgstr "Criar Novo perfil"
 
 # src/users/user_group.c:922
-#: src/users/callbacks.c:641
+#: src/users/callbacks.c:658
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Configurações para o perfil %s"
@@ -2353,8 +2353,8 @@ msgstr "O ID do grupo root não deve ser modificado"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
-#: src/users/user-settings.c:352 src/users/user-settings.c:446
-#: src/users/user-settings.c:482
+#: src/users/user-settings.c:355 src/users/user-settings.c:449
+#: src/users/user-settings.c:485
 msgid "This would leave the system unusable"
 msgstr "Isso inutilizaria o sistema"
 
@@ -2445,27 +2445,27 @@ msgid "GID"
 msgstr "GID"
 
 # interfaces/users.glade.h:7
-#: src/users/main.c:120
+#: src/users/main.c:121
 msgid "User name contains"
 msgstr "Nome do usuário contém"
 
 # interfaces/users.glade.h:13
-#: src/users/main.c:121
+#: src/users/main.c:122
 msgid "User ID is"
 msgstr "ID do usuário é:"
 
 # interfaces/users.glade.h:7
-#: src/users/main.c:122
+#: src/users/main.c:123
 msgid "Group name contains"
 msgstr "Nome do grupo contém"
 
 # interfaces/users.glade.h:7
-#: src/users/main.c:123
+#: src/users/main.c:124
 msgid "User GID is"
 msgstr "GID do grupo é"
 
 # src/users/main.c:164
-#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:315 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Usuários e Grupos"
 
@@ -2484,30 +2484,30 @@ msgstr ""
 "Senha ruim: %s. \n"
 "Por favor, tente com uma nova senha."
 
-#: src/users/profile-settings.c:114
+#: src/users/profile-settings.c:122
 msgid "The profile must have a name"
 msgstr "O perfil deve ter um nome"
 
-#: src/users/profile-settings.c:119
+#: src/users/profile-settings.c:127
 msgid "The profile must have a default home"
 msgstr "O perfil deve ter uma pasta de usuário padrão"
 
-#: src/users/profile-settings.c:124 src/users/profile-settings.c:129
+#: src/users/profile-settings.c:132 src/users/profile-settings.c:137
 msgid "The profile must have a default shell"
 msgstr "O perfil deve ter uma shell padrão"
 
 # src/users/user_group.c:684
-#: src/users/profile-settings.c:193
+#: src/users/profile-settings.c:204
 msgid "The default profile must not be deleted."
 msgstr "O perfil padrão não deve ser excluído."
 
-#: src/users/profile-settings.c:194
+#: src/users/profile-settings.c:205
 msgid "This is the default profile for setting new users' data"
 msgstr "Este é o perfil padrão para definir os dados dos novos usuários"
 
 # interfaces/users.glade.h:42
 # interfaces/users.glade.h:68
-#: src/users/profile-settings.c:203
+#: src/users/profile-settings.c:214
 #, c-format
 msgid "Delete profile \"%s\""
 msgstr "Excluir o perfil \"%s\""
@@ -2523,35 +2523,27 @@ msgstr "Perfil"
 msgid "Comment"
 msgstr "Comentário"
 
-# interfaces/nameresolution.glade.h:41
-#: src/users/search-bar/search-bar.c:200
-msgid "_Search"
-msgstr "_Procurar"
-
 # interfaces/memory.glade.h:23
-#: src/users/search-bar/search-bar.c:238
+#: src/users/search-bar/search-bar.c:225
 msgid "C_lear"
 msgstr "_Limpar"
 
-#: src/users/search-bar/search-bar.c:346
+#: src/users/search-bar/search-bar.c:326
 msgid "Choice"
 msgstr "Escolha"
 
-#: src/users/search-bar/search-bar.c:356
+#: src/users/search-bar/search-bar.c:336
 msgid "Text"
 msgstr "Texto"
 
-# interfaces/hardware.glade.h:9
-# interfaces/network.glade.h:20
-#: src/users/table.c:47
-msgid "/_Add User ..."
-msgstr "/_Adicionar Usuário ..."
+# interfaces/boot.glade.h:10
+#: src/users/table.c:46
+msgid "_Add"
+msgstr "_Adicionar"
 
-# interfaces/hardware.glade.h:9
-# interfaces/network.glade.h:20
-#: src/users/table.c:54
-msgid "/_Add group ..."
-msgstr "/_Adicionar grupo ..."
+#: src/users/table.c:47
+msgid "_Properties"
+msgstr "_Propriedades"
 
 # src/users/user_group.c:684
 #: src/users/user-settings.c:104
@@ -2564,42 +2556,42 @@ msgstr "O usuário root não pode ser excluído."
 msgid "Are you sure you want to delete user %s?"
 msgstr "Você tem certeza de que deseja excluir o usuário %s?"
 
-#: src/users/user-settings.c:217
+#: src/users/user-settings.c:219
 msgid "User Account Editor"
 msgstr "Editor de Contas de Usuário"
 
 # src/users/user_group.c:230
-#: src/users/user-settings.c:332
+#: src/users/user-settings.c:335
 msgid "The username is empty."
 msgstr "O nome do usuário está vazio."
 
 # src/users/user_group.c:684
-#: src/users/user-settings.c:333
+#: src/users/user-settings.c:336
 msgid "A username must be specified"
 msgstr "O nome do usuário deve ser especificado."
 
 # src/users/user_group.c:230
 #. = sizeof (ut.ut_name)
-#: src/users/user-settings.c:339 src/users/user-settings.c:344
+#: src/users/user-settings.c:342 src/users/user-settings.c:347
 msgid "The username is too long."
 msgstr "O nome do usuário é grande demais."
 
-#: src/users/user-settings.c:340 src/users/user-settings.c:345
+#: src/users/user-settings.c:343 src/users/user-settings.c:348
 #, c-format
 msgid "The username should have less than %i characters for being valid"
 msgstr "O nome do usuário deve ter menos de %i caracteres para ser válido"
 
 # src/users/user_group.c:684
-#: src/users/user-settings.c:351
+#: src/users/user-settings.c:354
 msgid "Root username shouldn't be modified."
 msgstr "O nome do usuário root não deve ser modificado."
 
-#: src/users/user-settings.c:357
+#: src/users/user-settings.c:360
 msgid "Username has invalid characters"
 msgstr "O nome do usuário tem caracteres inválidos"
 
 # src/users/user_group.c:234
-#: src/users/user-settings.c:358
+#: src/users/user-settings.c:361
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -2608,38 +2600,38 @@ msgstr ""
 "seguida por letras minúsculas e números."
 
 # src/users/user_group.c:272
-#: src/users/user-settings.c:363
+#: src/users/user-settings.c:366
 #, c-format
 msgid "Username \"%s\" already exists"
 msgstr "O nome de usuário \"%s\" já existe"
 
-#: src/users/user-settings.c:364
+#: src/users/user-settings.c:367
 msgid "Please select a different username"
 msgstr "Por favor, escolha um nome de usuário diferente"
 
-#: src/users/user-settings.c:389
+#: src/users/user-settings.c:392
 msgid "Invalid character in comment."
 msgstr "Caractere inválido no comentário."
 
-#: src/users/user-settings.c:390
+#: src/users/user-settings.c:393
 #, c-format
 msgid "Check that invalid character '%c' is not used"
 msgstr "Verifique se o caractere inválido '%c' não está sendo usado"
 
 # src/users/user_group.c:301
-#: src/users/user-settings.c:438
+#: src/users/user-settings.c:441
 msgid "Home directory must not be empty."
 msgstr "O diretório pessoal não deve estar vazio."
 
-#: src/users/user-settings.c:439
+#: src/users/user-settings.c:442
 msgid "Make sure you provide a home directory"
 msgstr "Certifique-se de digitar uma pasta pessoal"
 
-#: src/users/user-settings.c:441
+#: src/users/user-settings.c:444
 msgid "Incomplete path in home directory"
 msgstr "Caminho completo para a pasta pessoal"
 
-#: src/users/user-settings.c:442
+#: src/users/user-settings.c:445
 msgid ""
 "Please enter full path for home directory.\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
@@ -2648,24 +2640,24 @@ msgstr ""
 "<span size=\"smaller\">p.ex.: /home/luciana</span>"
 
 # src/users/user_group.c:684
-#: src/users/user-settings.c:445
+#: src/users/user-settings.c:448
 msgid "root home shouldn't be modified."
 msgstr "O diretório pessoal do root não deve ser modificado."
 
-#: src/users/user-settings.c:478
+#: src/users/user-settings.c:481
 msgid "Invalid user ID"
 msgstr "ID do usuário inválido"
 
-#: src/users/user-settings.c:479
+#: src/users/user-settings.c:482
 msgid "User id must be a positive number."
 msgstr "O ID de usuário deve ser um número positivo."
 
 # src/users/user_group.c:684
-#: src/users/user-settings.c:481
+#: src/users/user-settings.c:484
 msgid "root user ID should not be modified"
 msgstr "O ID do usuário root não deve ser modificado"
 
-#: src/users/user-settings.c:498
+#: src/users/user-settings.c:501
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
@@ -2674,16 +2666,16 @@ msgstr ""
 "comum e pode levar a problemas de segurança"
 
 # src/users/user_group.c:272
-#: src/users/user-settings.c:503
+#: src/users/user-settings.c:506
 #, c-format
 msgid "User ID %s already exists"
 msgstr "O ID de usuário %s já existe"
 
-#: src/users/user-settings.c:520
+#: src/users/user-settings.c:523
 msgid "Incomplete path in shell"
 msgstr "Caminho incompleto na shell"
 
-#: src/users/user-settings.c:521
+#: src/users/user-settings.c:524
 msgid ""
 "Please enter full path for shell.\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
@@ -2692,25 +2684,25 @@ msgstr ""
 "<span size=\"smaller\">p.ex.: /bin/sh</span>"
 
 # src/users/user_group.c:301
-#: src/users/user-settings.c:543
+#: src/users/user-settings.c:546
 msgid "Password can not be empty."
 msgstr "A senha não pode ser vazia."
 
 # src/users/user_group.c:301
-#: src/users/user-settings.c:544
+#: src/users/user-settings.c:547
 msgid "A password must be provided"
 msgstr "A senha deve ser fornecida."
 
-#: src/users/user-settings.c:546
+#: src/users/user-settings.c:549
 msgid "Password confirmation isn't correct."
 msgstr "A confirmação da senha não está correta."
 
-#: src/users/user-settings.c:547
+#: src/users/user-settings.c:550
 msgid "Check that you have provided the same password in both text fields"
 msgstr "Verifique se você digitou a mesma senha em ambas as caixas de texto"
 
 # src/users/user_group.c:878
-#: src/users/user-settings.c:830
+#: src/users/user-settings.c:826
 #, c-format
 msgid "Settings for User %s"
 msgstr "Configurações para o usuário %s"
@@ -2743,6 +2735,20 @@ msgstr "Shell"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Adicionar ou remover usuários e grupos"
+
+# interfaces/nameresolution.glade.h:41
+#~ msgid "_Search"
+#~ msgstr "_Procurar"
+
+# interfaces/hardware.glade.h:9
+# interfaces/network.glade.h:20
+#~ msgid "/_Add User ..."
+#~ msgstr "/_Adicionar Usuário ..."
+
+# interfaces/hardware.glade.h:9
+# interfaces/network.glade.h:20
+#~ msgid "/_Add group ..."
+#~ msgstr "/_Adicionar grupo ..."
 
 # interfaces/network.glade.h:59
 # src/network/connection.c:841
