@@ -274,7 +274,7 @@ gst_auth_do_ssh_authentication (GstTool *tool, gchar *host)
 	gchar *ssh_args[6];
 	GString *command;
 
-	command = g_string_new ("`pkg-config --variable=backenddir gnome-system-tools`");
+	command = g_string_new ("`pkg-config --variable=backenddir system-tools-backends`");
 	g_string_append (command, "/");
 	g_string_append (command, tool->script_name);
 	g_string_append (command, " --report");
