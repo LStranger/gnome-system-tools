@@ -26,7 +26,9 @@ boot_admin_SOURCES = \
 	boot-settings.c	boot-settings.h \
 	boot-image.c		boot-image.h    \
 	boot-image-editor.c boot-image-editor.h \
-	boot-druid.c		boot-druid.h
+	boot-druid.c		boot-druid.h    \
+	boot-append-editor.c    boot-append-editor.h   \
+	boot-append-gui.c       boot-append-gui.h
 
 toolpixmaps =
 etspecs = 

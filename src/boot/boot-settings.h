@@ -23,6 +23,7 @@ typedef struct {
 	GtkEntry  *image_entry;
 	GtkEntry  *root;
 	GtkEntry  *append;
+	GtkButton *append_browse;
 
 	/* Other frame */
 	GtkWidget *other_frame;

@@ -335,6 +335,7 @@ boot_table_update (void)
 	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
 
 	boot_table_clear ();
+	callbacks_actions_set_sensitive (FALSE);
 	table_populate (root);
 }
 

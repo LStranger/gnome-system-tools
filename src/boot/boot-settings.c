@@ -34,6 +34,8 @@
 #include "table.h"
 
 #include "boot-image-editor.h"
+#include "boot-append-gui.h"
+#include "boot-append-editor.h"
 #include "boot-druid.h"
 
 extern XstTool *tool;
@@ -114,6 +116,7 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->image_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image_entry"));	
 	gui->root = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_root"));
 	gui->append = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_append"));
+	gui->append_browse = GTK_BUTTON (glade_xml_get_widget (gui->xml, "settings_append_browse"));
 
 	/* Other frame */
 	gui->other_frame = glade_xml_get_widget (gui->xml, "settings_other_frame");
@@ -126,6 +129,8 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->root);
 	g_signal_connect (G_OBJECT (gui->root), "activate",
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->append);
+	g_signal_connect (G_OBJECT (gui->append_browse), "clicked",
+	                  G_CALLBACK (on_boot_append_browse_clicked), (gpointer) gui);
 
 	return gui;
 }
