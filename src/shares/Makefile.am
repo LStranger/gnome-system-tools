@@ -10,7 +10,7 @@ include ../common/CommonMakefile
 toolname = shares
 bin_PROGRAMS = shares-admin
 
-## SUBDIRS =
+SUBDIRS = component
 CPPFLAGS =
 INCLUDES = $(GST_TOOL_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)
