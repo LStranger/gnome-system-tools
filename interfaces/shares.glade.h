@@ -92,11 +92,26 @@ gchar *s = N_("Path:");
 gchar *s = N_("Mounting Options");
 gchar *s = N_("Mount point:");
 gchar *s = N_("Do not remount this share after computer reboots");
+gchar *s = N_("Import Settings--Samba Options (Obsolete)");
+gchar *s = N_("Use this dialog to create a new import, or to edit the settings of an existing import.");
+gchar *s = N_("Import type:");
+gchar *s = N_("Samba\n"
+              "NFS\n"
+              "");
+gchar *s = N_("Mounted");
+gchar *s = N_("Import");
+gchar *s = N_("Host:");
+gchar *s = N_("Path:");
+gchar *s = N_("Username:");
+gchar *s = N_("Password:");
+gchar *s = N_("Mounting Options");
+gchar *s = N_("Mount point:");
+gchar *s = N_("Do not remount this share after computer reboots");
 gchar *s = N_("Import Settings--Samba Options");
 gchar *s = N_("Use this dialog to create a new import, or to edit the settings of an existing import.");
 gchar *s = N_("Import type:");
-gchar *s = N_("NFS\n"
-              "Samba\n"
+gchar *s = N_("Samba\n"
+              "NFS\n"
               "");
 gchar *s = N_("Mounted");
 gchar *s = N_("Import");
