@@ -279,15 +279,16 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	else
 		cxn_type = XST_CONNECTION_UNKNOWN;
 
-	cxn = connection_new_from_type_add (cxn_type, xst_xml_doc_get_root (tool->config));
+	cxn = connection_new_from_type (cxn_type, xst_xml_doc_get_root (tool->config));
 	cxn->creating = TRUE;
 	connection_save_to_node (cxn, xst_xml_doc_get_root (tool->config));
-	/* connection_configure (cxn); */
+	connection_configure (cxn);
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	connection_add_to_list (cxn, clist);
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
 	gtk_clist_select_row (GTK_CLIST (clist), row, 0);
 	scrolled_window_scroll_bottom (xst_dialog_get_widget (tool->main_dialog, "connection_list_sw"));
-	connection_configure (cxn);
+        /* connection_configure (cxn);*/
 }
 
 void
@@ -367,22 +368,27 @@ on_dns_dhcp_toggled (GtkWidget *w, gpointer null)
 void
 on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
-	gboolean active, smb_installed;
+	gboolean active, configured, smb_installed;
 
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "samba_frame", active);
+	configured = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "tool_configured");
+	smb_installed = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "smbinstalled");
 	
-	if (active) {
-		smb_installed = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "smbinstalled");
-		if (!smb_installed) {
-			GtkWidget *dialog;
-			
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
-			dialog = gnome_ok_dialog (_("You don't have SMB support installed. Please install SMB support\nin the system to enable windows networking."));
-			gtk_window_set_title (GTK_WINDOW (dialog), _("SMB support missing."));
-			gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
-		}
+	if (configured && !smb_installed && active) {
+		GtkWidget *dialog;
+		
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
+		dialog = gnome_ok_dialog (_("You don't have SMB support installed. Please install SMB support\nin the system to enable windows networking."));
+		gtk_window_set_title (GTK_WINDOW (dialog), _("SMB support missing."));
+		gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+		return;
 	}
+
+	if (smb_installed) {
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "samba_frame", active);
+		xst_dialog_modify_cb (w, null);
+	} else
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "samba_frame", active);
 }
 
 void

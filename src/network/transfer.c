@@ -395,6 +395,7 @@ transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
 	node = xst_xml_element_find_first (root, "smbinstalled");
 
 	if (node) {
+		gtk_object_set_data (GTK_OBJECT (tool), "tool_configured", (gpointer) TRUE);
 		str = xst_xml_element_get_content (node);
 		res = (*str == '1')? TRUE: FALSE;
 		g_free (str);

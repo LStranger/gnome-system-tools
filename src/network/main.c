@@ -44,7 +44,6 @@ XstDialogSignal signals[] = {
 	{ "hostname",              "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
 	{ "hostname",              "changed",         xst_dialog_modify_cb },
 	{ "samba_use",             "toggled",         on_samba_use_toggled },
-	{ "samba_use",             "toggled",         xst_dialog_modify_cb },
 	{ "description",           "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
 	{ "description",           "changed",         xst_dialog_modify_cb },
 	{ "workgroup",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
@@ -160,7 +159,7 @@ main (int argc, char *argv[])
 		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 		xst_dialog_set_widget_policies (tool->main_dialog, policies);
 		
-		connection_init_icons ();
+		connection_init_gui (tool);
 
 		for (i=0; s[i]; i++)
 			connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);

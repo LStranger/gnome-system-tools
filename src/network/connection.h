@@ -27,6 +27,8 @@
 #include <glade/glade.h>
 #include <gtk/gtkwidget.h>
 
+#include "global.h"
+
 typedef enum {
 	XST_CONNECTION_UNKNOWN = -1,
 	XST_CONNECTION_OTHER,
@@ -100,7 +102,7 @@ typedef struct {
 	gchar *remote_address;
 } XstConnection;
 
-extern void connection_init_icons (void);
+extern void connection_init_gui (XstTool *tool);
 extern XstConnection *connection_new_from_node (xmlNode *node);
 extern XstConnection *connection_new_from_dev_name (char *dev_name, xmlNode *root);
 extern XstConnection *connection_new_from_type (XstConnectionType type, xmlNode *root);
@@ -108,6 +110,7 @@ extern XstConnection *connection_new_from_type_add (XstConnectionType type, xmlN
 extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection);
 extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
 extern void connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean enabled);
+extern void connection_add_to_list (XstConnection *cxn, GtkWidget *clist);
 extern void connection_update_row_enabled (XstConnection *cxn, gboolean enabled);
 extern void connection_update_row (XstConnection *cxn);
 extern void connection_free (XstConnection *);

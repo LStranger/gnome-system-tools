@@ -355,7 +355,6 @@ connection_dev_get_next (xmlNode *root, gchar *dev_type)
 	{
 		dev = xst_xml_get_child_content (node, "dev");
 
-#warning Arturo, i added this returns but that is not the correct solution. Chema
 		g_return_val_if_fail (dev != NULL, NULL);
 		g_return_val_if_fail (dev_type != NULL, NULL);
 		
@@ -429,8 +428,39 @@ load_icon (const gchar *file, GdkPixmap **pixmap, GdkBitmap **mask)
 	gdk_pixbuf_unref (pb2);
 }
 
+static gchar *
+connection_get_cell_text (const GtkCListRow *row, gint col)
+{
+	return row->cell[col].u.text;
+}
+
+static gint
+connection_clist_cmp (GtkCList *clist, gconstpointer p1, gconstpointer p2)
+{
+	gint res;
+
+	/* Compare dev cols */
+	res = strcmp (connection_get_cell_text (p1, 0),
+		      connection_get_cell_text (p2, 0));
+	if (res)
+		return res;
+
+	/* Compare comment cols */
+	return strcmp (connection_get_cell_text (p1, 2),
+		       connection_get_cell_text (p2, 2));
+}
+
+static void
+connection_init_clist (XstTool *tool)
+{
+	GtkWidget *clist;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	gtk_clist_set_compare_func (GTK_CLIST (clist), connection_clist_cmp);
+}
+
 extern void
-connection_init_icons (void)
+connection_init_gui (XstTool *tool)
 {
 	XstConnectionType i;
 
@@ -441,6 +471,8 @@ connection_init_icons (void)
 		   &active_pm[0], &active_mask[0]);
 	load_icon ("gnome-light-on.png" /*"connection-active.xpm" */,
 		   &active_pm[1], &active_mask[1]);
+
+	connection_init_clist (tool);
 }
 
 void
@@ -492,27 +524,23 @@ connection_update_row (XstConnection *cxn)
 	connection_update_row_enabled (cxn, cxn->enabled);
 	
 	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name);
+	gtk_clist_sort (GTK_CLIST (clist));
 
 	xst_dialog_modify (tool->main_dialog);
 }
 
-static void
-add_connection_to_list (XstConnection *cxn, gpointer null)
+void
+connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 {
-	GtkWidget *clist;
 	int row;
 	char *text[3] = { NULL };
 
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-
 	row = gtk_clist_append (GTK_CLIST (clist), text);
-/*	gtk_clist_set_shift (GTK_CLIST (clist), row, 0, 0, 0);
-	gtk_clist_set_shift (GTK_CLIST (clist), row, 1, 0, 0);
-	gtk_clist_set_shift (GTK_CLIST (clist), row, 2, 4, 0);
-	gtk_clist_set_row_height (GTK_CLIST (clist), 24);*/
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
 
 	connection_update_row (cxn);
+
+	return;
 }
 
 /*static void
@@ -576,17 +604,6 @@ connection_get_ptp_from_node (xmlNode *node, XstConnection *cxn)
 }
 	
 XstConnection *
-connection_new_from_type_add (XstConnectionType type, xmlNode *root)
-{
-	XstConnection *cxn;
-	
-	cxn = connection_new_from_type (type, root);
-	add_connection_to_list (cxn, NULL);
-
-	return cxn;
-}
-
-XstConnection *
 connection_new_from_type (XstConnectionType type, xmlNode *root)
 {
 	XstConnection *cxn;
@@ -644,7 +661,7 @@ connection_new_from_node (xmlNode *node)
 		g_free (cxn->dev);
 		cxn->dev = s;
 	} else
-		cxn = connection_new_from_type_add (XST_CONNECTION_OTHER, node->parent);
+		cxn = connection_new_from_type (XST_CONNECTION_OTHER, node->parent);
 
 	cxn->node = node;
 	
@@ -686,6 +703,7 @@ connection_new_from_node (xmlNode *node)
 		break;
 	}
 
+	connection_add_to_list (cxn, xst_dialog_get_widget (tool->main_dialog, "connection_list"));
 	connection_update_row (cxn);
 
 	return cxn;
@@ -700,7 +718,7 @@ connection_new_from_dev_name (char *dev_name, xmlNode *root)
 		if (strstr (dev_name, xst_iface_desc[i].name) == dev_name)
 			break;
 
-	return connection_new_from_type_add (xst_iface_desc[i].type, root);
+	return connection_new_from_type (xst_iface_desc[i].type, root);
 }
 
 void
