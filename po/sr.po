@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.25.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-25 23:09+0100\n"
-"PO-Revision-Date: 2003-11-24 03:03+0100\n"
+"POT-Creation-Date: 2003-12-11 19:00+0100\n"
+"PO-Revision-Date: 2003-12-11 19:02+0100\n"
 "Last-Translator: Слободан Средојевић <ssl@uns.ns.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -207,7 +207,7 @@ msgid "Finished"
 msgstr "Завршено"
 
 #: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1786
+#: src/network/connection.c:1859
 msgid "Manual"
 msgstr "Упутство"
 
@@ -482,7 +482,7 @@ msgstr "Дозволи контролу покретања _свим корис�
 msgid "Auto"
 msgstr "Аутоматски"
 
-#: interfaces/network.glade.in.h:28 src/network/connection.c:1788
+#: interfaces/network.glade.in.h:28 src/network/connection.c:1861
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -511,7 +511,7 @@ msgstr "Везе"
 msgid "Creating a new network connection"
 msgstr "Правим нову мрежну везу"
 
-#: interfaces/network.glade.in.h:35 src/network/connection.c:1787
+#: interfaces/network.glade.in.h:35 src/network/connection.c:1860
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -732,7 +732,7 @@ msgstr ""
 
 #: interfaces/network.glade.in.h:86
 msgid "_Autodetect"
-msgstr "_Аутоматски пронађи"
+msgstr "_Сам пронађи"
 
 #: interfaces/network.glade.in.h:87
 msgid "_Comment:"
@@ -1226,7 +1226,7 @@ msgstr "Стварам нови отисак за подизање (%d од %d)"
 msgid "Finished creating a new boot image"
 msgstr "Готово стварање новог отиска за подизање"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:466
+#: src/boot/boot-image.c:40 src/network/profile.c:467
 msgid "Unknown"
 msgstr "Непознат"
 
@@ -1458,43 +1458,17 @@ msgstr "Гномови системски алати (GNOME System Tools)"
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "Поново покрените окружење Гном како би промене узеле маха."
 
-#: src/network/callbacks.c:116 src/services/table.c:55
-msgid "Active"
-msgstr "Активно"
-
-#: src/network/callbacks.c:119
-msgid "Activating"
-msgstr "Активирам"
-
-#: src/network/callbacks.c:130
-msgid "Inactive"
-msgstr "Неактивно"
-
-#: src/network/callbacks.c:133
-msgid "Deactivating"
-msgstr "Деактивирам"
-
-#: src/network/callbacks.c:455
+#: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Уклањате везу %s: „%s“?"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:367
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Уклањате везу %s?"
 
-#: src/network/callbacks.c:523
-#, c-format
-msgid "Activating connection ``%s.''"
-msgstr "Активирам везу „%s“."
-
-#: src/network/callbacks.c:561
-#, c-format
-msgid "Deactivating connection ``%s.''"
-msgstr "Деактивирам везу „%s“."
-
-#: src/network/callbacks.c:600
+#: src/network/callbacks.c:508
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1502,11 +1476,11 @@ msgstr ""
 "Немате инсталирану SMB подршку. Молим инсталирајте SMB подршку на систему "
 "како би омогућили виндоуз умрежавање."
 
-#: src/network/callbacks.c:603
+#: src/network/callbacks.c:511
 msgid "SMB support missing."
 msgstr "SMB подршка недостаје."
 
-#: src/network/callbacks.c:654
+#: src/network/callbacks.c:562
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1515,7 +1489,7 @@ msgstr ""
 "ћете морати да се\n"
 "пријавите на систем поново. Настављате ли, без обзира на то?"
 
-#: src/network/callbacks.c:702
+#: src/network/callbacks.c:610
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1523,7 +1497,7 @@ msgstr ""
 "Не могу пронаћи програм wvdial на Вашем систему. Потребно је да инсталирате "
 "wvdial јер се Ваше PPP модемске везе неће активирати."
 
-#: src/network/callbacks.c:729
+#: src/network/callbacks.c:637
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1532,7 +1506,7 @@ msgstr ""
 "wvdial јер се Ваше PPP модемске везе неће активирати. Да ли настављате, без "
 "обзира на то?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:664
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1540,7 +1514,7 @@ msgstr ""
 "Подразумевани уређај за пролаз није активиран. Ово ће Вас спречити у "
 "повезивању на интернет. Да ли настављате, без обзира на то?"
 
-#: src/network/callbacks.c:811
+#: src/network/callbacks.c:719
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1549,7 +1523,7 @@ msgstr ""
 "попуните тражене податке како би наставили или изаберите други уређај за "
 "мрежни пролаз."
 
-#: src/network/callbacks.c:857
+#: src/network/callbacks.c:765
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1559,17 +1533,17 @@ msgstr ""
 "неприказивања веза у листу за везе. Молим инсталирајте redhat-config-network "
 "rpm пакет како се ово не би догодило."
 
-#: src/network/callbacks.c:894
+#: src/network/callbacks.c:802
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Да ли желите да омогућите приступ %s?"
 
-#: src/network/callbacks.c:904
+#: src/network/callbacks.c:812
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Да ли желите да онемогућите приступ %s?"
 
-#: src/network/callbacks.c:989
+#: src/network/callbacks.c:899
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1577,19 +1551,19 @@ msgstr ""
 "Не могу аутоматски пронаћи модемски урећај. Проверите да није модем у "
 "употреби и да је правилно прикључен"
 
-#: src/network/callbacks.c:1041
+#: src/network/callbacks.c:951
 msgid "Silent"
 msgstr "Тихо"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:953
 msgid "Low"
 msgstr "Слабо"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:955
 msgid "Medium"
 msgstr "Средње"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:957
 msgid "Loud"
 msgstr "Гласно"
 
@@ -1637,7 +1611,7 @@ msgstr "Стање"
 msgid "Description"
 msgstr "Опис"
 
-#: src/network/connection.c:1659
+#: src/network/connection.c:1723
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1645,7 +1619,7 @@ msgstr ""
 "ИП адреса или мрежна маска за приступ нису попуњени. Молим наведите исправне "
 "IP адресе у овим пољима како би наставили."
 
-#: src/network/connection.c:1666
+#: src/network/connection.c:1730
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1653,7 +1627,7 @@ msgstr ""
 "ИП адреса или адреса удаљеног рачунара за приступ нису попуњени. Молим "
 "наведите исправне ИП адресе у овим пољима како би наставили."
 
-#: src/network/connection.c:1672
+#: src/network/connection.c:1736
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1663,14 +1637,26 @@ msgstr ""
 "попунили IP адресе за примарни DNS. Молим попуните IP адресе за примарни DNS "
 "или искључите могућност ручног постављања DNS опција."
 
-#: src/network/connection.c:2028
+#: src/network/connection.c:1742
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr "Модемски уређај за приступ није попуњен. Унесите уређај или притисните „сам пронађи“ да наставите."
+
+#: src/network/connection.c:1747
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr "Број телефона за приступ није попуњен. Унесите исправан број телефона да наставите."
+
+#: src/network/connection.c:2101
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Уређај %s не постоји."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
-msgstr "IP адреса"
+msgstr "ИП адреса"
 
 #: src/network/hosts.c:182
 msgid "Aliases"
@@ -1758,6 +1744,10 @@ msgstr "Подесите који услужни програми се покр�
 #: src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "Услужни програми"
+
+#: src/services/table.c:55
+msgid "Active"
+msgstr "Активно"
 
 #: src/services/table.c:65
 msgid "Service"
@@ -2043,6 +2033,21 @@ msgstr "Интерпретатор наредби"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Додајте или уклоните кориснике и групе"
+
+#~ msgid "Activating"
+#~ msgstr "Активирам"
+
+#~ msgid "Inactive"
+#~ msgstr "Неактивно"
+
+#~ msgid "Deactivating"
+#~ msgstr "Деактивирам"
+
+#~ msgid "Activating connection ``%s.''"
+#~ msgstr "Активирам везу „%s“."
+
+#~ msgid "Deactivating connection ``%s.''"
+#~ msgstr "Деактивирам везу „%s“."
 
 #~ msgid "Connection name (Step 3 of 3)"
 #~ msgstr "Име везе (корак 3 од 3)"
