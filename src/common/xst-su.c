@@ -33,10 +33,12 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
-#include <pty.h>
 
 #include <gnome.h>
+#include <gtk/gtk.h>
 #include <glade/glade.h>
+#include <vte/vte.h>
+#include <vte/reaper.h>
 
 #ifdef __FreeBSD__
 # include <errno.h>
@@ -65,124 +67,73 @@
 static int root;			/* if we are root, no password is
 					   required */
 
-static gint
+/* This is the signal callback that answers to the forked su command */
+static void
+on_terminal_child_exited (GtkWidget *term, gint pid, gint status, gpointer data)
+{
+	GtkWidget *error_dialog;
+	
+	if (WIFEXITED (status) && WEXITSTATUS (status) && (WEXITSTATUS(status) < 255)) {
+		error_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+						       GTK_MESSAGE_ERROR,
+						       GTK_BUTTONS_OK,
+						       _("The password you entered is invalid."));
+
+		gtk_dialog_run (GTK_DIALOG (error_dialog));
+		gtk_widget_destroy (error_dialog);
+	}
+
+	_exit (0);
+}
+
+static void
 exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 {
-	gchar *exec_p, *user_p;  /* command to execute, user name */
-	pid_t pid;
-	int t_fd, i;
 	GString *str;
-	gint fd;
+	GtkWidget *term = vte_terminal_new ();
+	VteReaper *reaper = vte_reaper_get ();
+	gchar *args[5], *string;
+	int i;
+	int pid, status;
 
-#if 0
-	exec_p = g_strdup (exec_path);
-#endif
+	g_signal_connect (G_OBJECT (reaper), "child-exited",
+			  G_CALLBACK (on_terminal_child_exited), NULL);
 
 	g_assert (argv && argv[0]);
+
 	str = g_string_new (argv[0]);
 	for (i = 1; i < argc; i++) {
 		g_string_append_c (str, ' ');
 		g_string_append (str, argv[i]);
 	}
 
-	exec_p = str->str;
+	args[0] = g_strdup (SU_PATH);
+	args[1] = (user ? user : "root");
+	args[2] = g_strdup ("-c");
+	args[3] = str->str;
+	args[4] = NULL;
+
 	g_string_free (str, 0);
 
-#if 0
-	if (asprintf (&exec_p, "%s&", exec_path) < 0) {
-		perror ("Unable to allocate memory chunk");
-		return 0;
-	}
-#endif
-
-	user_p = (user ? user : "root");
-
 	if ((pwd == NULL) || (*pwd == '\0'))
-		return 0;
+		return;
+	
+	vte_terminal_fork_command (VTE_TERMINAL (term),
+					 args[0],
+					 args,
+					 NULL,
+					 NULL,
+					 FALSE, FALSE, FALSE);
 
-	pid = forkpty (&fd, NULL, NULL, NULL);
+	usleep (1000000);
+	vte_terminal_feed_child (VTE_TERMINAL (term), pwd, -1);
 
-	if (pid < 0) {
-		perror ("unable to fork a new process\n");
-		ABORT (root);
-	}
+	memset (pwd, 0, strlen (pwd));
 
-	if (pid > 0) {
-		/* This is the parent process */
-		char *buf = g_malloc0 (20);
-		int status;
-		struct passwd *pw;
-		char *env, *home;
-		
-		/* We have rights to run X (obviously).  We need to ensure the
-		 * destination user has the right stuff in the environment
-		 * to be able to continue to run X.
-		 * su will change $HOME to the new users home, so we will
-		 * need an XAUTHORITY / ICEAUTHORITY pointing to the
-		 * authorization files.
-		 */
-
-		if ((home = getenv ("HOME")) == NULL) {
-			if ((env = getenv ("USER")) == NULL)
-				pw = getpwuid(getuid());
-			else
-				pw = getpwnam(env);
-			if (pw)
-				home = pw->pw_dir;
-			else {
-				perror ("Unable to find home directory");
-				_exit (-1);
-			}
-		}
-
-		if ((env = getenv ("XAUTHORITY")) == NULL) {
-			if (asprintf (&env, "XAUTHORITY=%s/.Xauthority", home) > 0)
-				putenv (env);
-			else {
-				perror ("Unable to allocate memory chunk");
-				_exit (-1);
-			}
-		}
-
-		if ((env = getenv ("ICEAUTHORITY")) == NULL) {
-			if (asprintf (&env, "ICEAUTHORITY=%s/.ICEauthority", home) > 0)
-				putenv (env);
-			else {
-				perror ("Unable to allocate memory chunk");
-				_exit (-1);
-			}
-		}
-		
-		/* just read the password prompt, we don't really need it, but
-		 * it's just to ensure that the password is sent after the prompt */
-		read (fd, buf, 20);
-
-		/* Send the password */
-		write (fd, pwd, strlen (pwd));
-
-		/* read all the trash from the file descriptor and clear buffer */
-		while (read (fd, buf, 20) > 0);
-		bzero (buf, 20);
-
-		/* wait child process */
-		waitpid (pid, &status, 0);
-		
-		if (WIFEXITED (status) && WEXITSTATUS (status) && (WEXITSTATUS(status) < 255)) {
-			return 0;
-		}
-		else {
-			memset (pwd, 0, strlen (pwd));
-			_exit (0);
-		}
-	}
-	else {
-		/* This is the child process */
-		execl (SU_PATH, SU_PATH, user_p, "-c", exec_p, NULL);
-
-		_exit (1);
-	}
-
-	return 0;
+	/* when the user authenticates, the current proccess forks to launch again the tool
+	 * with root uid, so this proccess is only needed to wait for its son, so it idles with gtk_main ()
+	 */
+	gtk_main ();
 }
 
 void

@@ -1588,30 +1588,17 @@ authenticate (int argc, char *argv[])
 	gchar *password;
 	gint result;
 
-	for (;;)
-	{
-		result = xst_su_get_password (&password);
+	result = xst_su_get_password (&password);
 
-		if (result < 0)
-			exit (0);
-		else if (result == 0)
-			return;
+	if (result < 0)
+		exit (0);
+	else if (result == 0)
+		return;
 
-		/* If successful, the following never returns */
+	xst_su_run_with_password (argc, argv, password);
 
-		xst_su_run_with_password (argc, argv, password);
-
-		if (strlen (password))
-			memset (password, 0, strlen (password));
-
-		error_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
-						       GTK_MESSAGE_ERROR,
-						       GTK_BUTTONS_OK,
-						       _("The password you entered is invalid."));
-
-		gtk_dialog_run (GTK_DIALOG (error_dialog));
-		gtk_widget_destroy (error_dialog);
-	}
+	if (strlen (password) > 0)
+		memset (password, 0, strlen (password));
 }
 
 static void
