@@ -114,8 +114,14 @@ extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
+	gchar *txt;
 	
 	g_return_if_fail (tool_get_access());
+
+	w0 = tool_widget_get ("user_passwd_label");
+	txt = g_strdup_printf ("Changing password for %s", current_user->login);
+	gtk_label_set_text (GTK_LABEL (w0), txt);
+	g_free (txt);
 	
 	w0 = tool_widget_get ("user_passwd_dialog");
 	gtk_widget_show (w0);
@@ -426,9 +432,15 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		/* it depends on the crypt method of the system. We'll have to
 		 * first identify the method, through magic, and then use crypt
 		 * and steal some code for MD5 crypt */
-		
+				
 		g_free (current_user->password);
 		current_user->password = g_strdup (new);
+
+		msg = g_strdup_printf ("Password for %s updated.", current_user->login);
+		dialog = GNOME_DIALOG (gnome_ok_dialog_parented (msg, GTK_WINDOW (win)));
+		gnome_dialog_run (dialog);
+		g_free (msg);
+
 		gtk_widget_hide (win);
 		tool_set_modified (TRUE);
 	}
