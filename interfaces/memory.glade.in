@@ -60,6 +60,14 @@
 
       <widget>
 	<class>GtkButton</class>
+	<name>browse_cancel</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
 	<name>browse_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
@@ -74,14 +82,6 @@
 	  <last_modification_time>Tue, 05 Sep 2000 14:08:35 GMT</last_modification_time>
 	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
-      </widget>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>browse_cancel</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
 
@@ -167,21 +167,6 @@
 
   <widget>
     <class>GtkButton</class>
-    <child_name>FileSel:ok_button</child_name>
-    <name>file_ok</name>
-    <can_default>True</can_default>
-    <can_focus>True</can_focus>
-    <signal>
-      <name>clicked</name>
-      <handler>file_ok_cb</handler>
-      <last_modification_time>Mon, 04 Sep 2000 08:26:23 GMT</last_modification_time>
-    </signal>
-    <label>OK</label>
-    <relief>GTK_RELIEF_NORMAL</relief>
-  </widget>
-
-  <widget>
-    <class>GtkButton</class>
     <child_name>FileSel:cancel_button</child_name>
     <name>file_cancel</name>
     <can_default>True</can_default>
@@ -192,6 +177,21 @@
       <last_modification_time>Mon, 04 Sep 2000 08:26:32 GMT</last_modification_time>
     </signal>
     <label>Cancel</label>
+    <relief>GTK_RELIEF_NORMAL</relief>
+  </widget>
+
+  <widget>
+    <class>GtkButton</class>
+    <child_name>FileSel:ok_button</child_name>
+    <name>file_ok</name>
+    <can_default>True</can_default>
+    <can_focus>True</can_focus>
+    <signal>
+      <name>clicked</name>
+      <handler>file_ok_cb</handler>
+      <last_modification_time>Mon, 04 Sep 2000 08:26:23 GMT</last_modification_time>
+    </signal>
+    <label>OK</label>
     <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 </widget>
@@ -241,6 +241,14 @@
 
       <widget>
 	<class>GtkButton</class>
+	<name>settings_cancel</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
 	<name>settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
@@ -250,14 +258,6 @@
 	  <last_modification_time>Wed, 20 Dec 2000 15:23:17 GMT</last_modification_time>
 	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
-      </widget>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>settings_cancel</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
 
@@ -573,19 +573,6 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>create_ok</name>
-	<can_default>True</can_default>
-	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_create_ok_clicked</handler>
-	  <last_modification_time>Wed, 17 Jan 2001 15:39:57 GMT</last_modification_time>
-	</signal>
-	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
-      </widget>
-
-      <widget>
-	<class>GtkButton</class>
 	<name>create_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
@@ -595,6 +582,19 @@
 	  <last_modification_time>Wed, 17 Jan 2001 15:46:13 GMT</last_modification_time>
 	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>create_ok</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_create_ok_clicked</handler>
+	  <last_modification_time>Wed, 17 Jan 2001 15:39:57 GMT</last_modification_time>
+	</signal>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
     </widget>
 
