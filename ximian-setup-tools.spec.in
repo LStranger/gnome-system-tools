@@ -28,6 +28,8 @@ The Ximian Setup Tools solve all these problems, giving you a simple graphical i
 %changelog
 * Wed Nov 29 2000 Ross Golder <rossigee@bigfoot.com>
 - Knocked up preliminary RPM spec file, based on gnome-core spec.
+* Chema Celorio <chema@ximian.com>
+- Fixed http://bugzilla.ximian.com/show_bug.cgi?id=1644
 
 %prep
 %setup -q
@@ -48,14 +50,14 @@ make DESTDIR=$RPM_BUILD_ROOT install
 %{_prefix}/bin/*
 %{_prefix}/sbin/*
 %{_prefix}/lib/*
-%{_prefix}/include/helix-archiver/*.h
+%{_prefix}/include/ximian-archiver/*.h
 %{_prefix}/share/%{name}/interfaces/*.glade
 %{_prefix}/share/%{name}/scripts/*
 %{_prefix}/share/%{name}/pixmaps/*.png
 %{_prefix}/share/hcm/default/*.xml
 %{_prefix}/share/hcm/glade/*.glade
 #%{_prefix}/share/control-center/System/.directory
-%{_prefix}/share/control-center/System/*.desktop
+#%{_prefix}/share/control-center/System/*.desktop
 #%{_prefix}/share/gnome/apps/Settings/System/.directory
 %{_prefix}/share/gnome/apps/Settings/System/*.desktop
 %{_prefix}/share/gnome/help/*/C/*.html
