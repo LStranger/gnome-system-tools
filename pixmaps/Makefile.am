@@ -4,8 +4,11 @@ pixmaps_DATA = \
 	boot.png				\
 	boot_wrench.png 			\
 	connection-active.xpm 			\
-	connection-ethernet.png 		\
 	connection-inactive.xpm 		\
+	16_ethernet.xpm				\
+	16_loopback.xpm				\
+	16_ppp.xpm				\
+	connection-ethernet.png 		\
 	connection-modem.png 			\
 	disks.png  				\
 	gnome-laptop.png 			\
