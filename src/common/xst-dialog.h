@@ -102,6 +102,8 @@ void                xst_dialog_modify_cb           (GtkWidget *w, gpointer data)
 GtkWidget          *xst_dialog_get_widget          (XstDialog *xd, const char *widget);
 XstWidget          *xst_dialog_get_xst_widget      (XstDialog *xd, const gchar *name);
 
+XstTool            *xst_dialog_get_tool            (XstDialog *xd);
+
 void                xst_dialog_widget_set_user_mode (XstDialog *xs, const gchar *name, XstWidgetMode mode);
 void                xst_dialog_widget_set_user_sensitive (XstDialog *xd, const gchar *name, gboolean state);
 

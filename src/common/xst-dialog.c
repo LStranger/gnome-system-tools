@@ -347,6 +347,12 @@ xst_dialog_get_xst_widget (XstDialog *xd, const gchar *name)
 	return (xw);
 }
 
+XstTool *
+xst_dialog_get_tool (XstDialog *xd)
+{
+	return xd->tool;
+}
+
 void
 xst_dialog_widget_set_user_mode (XstDialog *xd, const gchar *name, XstWidgetMode mode)
 {
