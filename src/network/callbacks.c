@@ -87,6 +87,7 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	gtk_clist_set_column_auto_resize (list, 2, TRUE);
 }
 
+#ifdef POLL_HACK
 static void
 poll_connections_cb (XstDirectiveEntry *entry)
 {
@@ -166,15 +167,15 @@ poll_connections (gpointer data)
 	
 	return TRUE;
 }
-
+#endif	
+	
 void
 on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 				 gint page_num, gpointer user_data)
 {
 	GtkWidget *w;
 	gchar *entry[] = { "hostname", "connection_list", "domain", "statichost_list" };
-	static gboolean first = TRUE;
-	
+
 	if (xst_tool_get_access (tool) && entry[page_num]) {
 		w = xst_dialog_get_widget (tool->main_dialog, entry[page_num]);
 		if (w)
@@ -182,10 +183,13 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 	}
 
 #ifdef POLL_HACK
-	/* The connections tab */
-	if (page_num == 1 && first) {
-		first = FALSE;
-		gtk_timeout_add (2000, poll_connections, tool);
+	{
+		static gboolean first = TRUE;
+		/* The connections tab */
+		if (page_num == 1 && first) {
+			first = FALSE;
+			gtk_timeout_add (2000, poll_connections, tool);
+		}
 	}
 #endif	
 }
