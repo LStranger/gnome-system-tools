@@ -86,14 +86,14 @@ gst_auth_wait_child (GstTool *tool)
 		if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS(status) < 255)) {
 			if (tool->remote_config) {
 				/* the proccess was running ssh */
-				primary_text   = g_strdup (_("Could not connect to the computer"));
+				primary_text   = g_strdup (_("The tool could not connect to the computer"));
 				secondary_text = g_strdup (_("Check that you have access to this network "
 							     "and that the computer is actually working and running SSHD"));
 			} else {
 				/* the proccess was running su */
-				primary_text   = g_strdup (_("The password you entered is invalid"));
+				primary_text   = g_strdup (_("The entered password is invalid"));
 				secondary_text = g_strdup (_("Check that you typed it correctly "
-							     "and that you haven't activated caps lock"));
+							     "and that you haven't activated the \"caps lock\" key"));
 			}
 		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS (status) == 255)) {
 			if (tool->remote_config)
@@ -102,9 +102,9 @@ gst_auth_wait_child (GstTool *tool)
 				auth_command = "su";
 
 			primary_text   = g_strdup_printf (_("Could not run \"%s\""), auth_command);
-			secondary_text = g_strdup (_("Check that you have permissions to run it."));
+			secondary_text = g_strdup (_("Check that you have permissions to run this command"));
 		} else {
-			primary_text   = g_strdup (_("An unexpected error has ocurred."));
+			primary_text   = g_strdup (_("An unexpected error has ocurred"));
 			secondary_text = NULL;
 		}
 

@@ -504,7 +504,7 @@ gst_dialog_ask_apply (GstDialog *dialog)
 		w = gst_hig_dialog_new (GTK_WINDOW (dialog),
 					GTK_DIALOG_MODAL,
 					GST_HIG_MESSAGE_QUESTION,
-					_("There are changes which haven't been applied"),
+					_("There are changes which have not been applied"),
 					_("Apply them now?"),
 					GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					GTK_STOCK_APPLY, GTK_RESPONSE_APPLY,
