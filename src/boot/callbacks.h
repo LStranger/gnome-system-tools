@@ -25,7 +25,6 @@
 #define __CALLBACKS_H
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
 
 void	  on_boot_table_cursor_changed	(GtkTreeSelection*, gpointer);
 void      on_boot_delete_clicked    (GtkButton *button, gpointer data);

@@ -24,9 +24,6 @@
 #ifndef __TRANSFER_H
 #define __TRANSFER_H
 
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
-
 typedef struct _TransStringCList TransStringCList;
 
 struct _TransStringCList

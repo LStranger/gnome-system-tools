@@ -19,8 +19,6 @@
  */
 
 #include <glade/glade.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
 
 /* Structures for tables detailing the information types in the XML
    tree, and what widgets they correspond to. */
