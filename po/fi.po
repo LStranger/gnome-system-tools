@@ -8,12 +8,13 @@ msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-08-23 19:49+0300\n"
-"PO-Revision-Date: 2004-06-16 21:57+0200\n"
+"PO-Revision-Date: 2004-06-24 00:57+0300\n"
 "Last-Translator: Ilkka Tuohela <hile@iki.fi>\n"
-"Language-Team: Gnome Finnish Translation Team <laatu@gnome-fi.org>\n"
+"Language-Team: Finnish <gnome-fi-laatu@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: gnome-system-tools.schemas.in.h:1
 msgid ""
@@ -96,24 +97,25 @@ msgid "<b>Security</b>"
 msgstr "<b>Turvallisuus</b>"
 
 #: interfaces/boot.glade.in.h:7
-#, fuzzy
 msgid ""
 "<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
 "Use this tool to specify which operating systems users can choose at startup"
 msgstr ""
+"<span size=\"larger\" weight=\"bold\">Käynnistyslataimen asetukset</span>\n"
 "Määrittele tällä työkalulla, mitä käyttöjärjestelmiä käyttäjät voivat valita "
 "käynnistyksessä."
 
 #: interfaces/boot.glade.in.h:9
-#, fuzzy
 msgid ""
 "<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
 "span>\n"
 "\n"
 "please select which do you want to configure"
 msgstr ""
-"Järjestelmästä löytyi useita käynnistyksenlataajia. Valitse, minkä asetuksia "
-"haluat muokata."
+"<span size=\"larger\" weight=\"bold\">Järjestelmässä on useita "
+"käynnistyksenlataajia</span>\n"
+"\n"
+"Valitse minkä asetuksia haluat muokata."
 
 #: interfaces/boot.glade.in.h:12 interfaces/users.glade.in.h:6
 msgid "<span weight=\"bold\">Basic Settings</span>"
@@ -175,7 +177,8 @@ msgstr "Käytä IDE-SCSI emulaatiota"
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
-msgstr "Anna käynnistyskuvan nimi ja määritä, mikä käyttöjärjestelmä se on."
+msgstr "Anna käynnistyskuvan nimi ja määritä, minkä tyyppinen "
+"käyttöjärjestelmä se on."
 
 #: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:45
 msgid "Finished"
@@ -817,10 +820,12 @@ msgid ""
 "<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
 "use this tool to specify which services to run at boot time"
 msgstr ""
+"<span size=\"larger\" weight=\"bold\">Palvelujen asetukset</span>\n"
+"Tällä työkalulla määritellään mitkä palvelut suoritetaan käynnistettäessä"
 
 #: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">General Information</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Yleiset tiedot</span>"
 
 #: interfaces/services.glade.in.h:4
 msgid "<span weight=\"bold\">Service Settings</span>"
@@ -1300,7 +1305,7 @@ msgstr "Halutako varmasti poistaa levykuvan \"%s\"?"
 
 #: src/boot/callbacks.c:464
 msgid "The configuration will show empty"
-msgstr ""
+msgstr "Määrittely näkyy tyhjänä"
 
 #: src/boot/callbacks.c:469
 #, c-format
@@ -1390,7 +1395,7 @@ msgstr "Otetaanko ne nyt käyttöön?"
 #: src/common/gst-dialog.c:477
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
-msgstr ""
+msgstr "Virheellinen yhdistämissignaali `%s' säätimessä `%s'"
 
 #: src/common/gst-tool.c:1002
 msgid "The configuration could not be loaded"
@@ -1413,6 +1418,11 @@ msgid ""
 "have been warned. Thank you for trying out this prerelease of the GNOME "
 "System Tools!"
 msgstr ""
+"Tämä on vielä kehityksessä oleva ohjelmisto ja saatta siten sisältää vakavia "
+"vikoja. Näiden työkalujen luonteesta johtuen virheet saattavat <span "
+"weight=\"bold\"> tehdä tietokoneestasi lähes käyttökelvottoman</span> tai "
+"tuhlata aikaa ja vaivaa. Sinua on varoitettu. Kiitos että kokeilet "
+"Gnonen järjestelmätyökalujen esiversiota!"
 
 #: src/common/gst-tool.c:1498
 msgid "Warning"
@@ -1435,6 +1445,8 @@ msgid ""
 "This will disable any network connection with this interface as soon as you "
 "press \"apply\""
 msgstr ""
+"Valinta sulkee kaikki tätä verkkoliityntää käyttävät verkkoyhteydet heti "
+"kun painat \"Toteuta\" nappia"
 
 
 #: src/network/callbacks.c:408
@@ -1451,6 +1463,8 @@ msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable file sharing in Windows networks"
 msgstr ""
+"SMB-tukea ei ole asennettu. Ole hyvä ja asenna SMB-tuki, jotta voit jakaa "
+"tiedostoja Windows-verkoissa."
 
 #: src/network/callbacks.c:581
 msgid "The host name has changed"
@@ -1461,6 +1475,8 @@ msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
 msgstr ""
+"Tämä estää sinua käynnistämästä uusia ohjelmia, kunnes olet kirjautunut "
+"uudestaan sisään. Jatketaanko joka tapauksessa?"
 
 #: src/network/callbacks.c:586
 msgid "Change _Host name"
@@ -1475,12 +1491,16 @@ msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate"
 msgstr ""
+"Ohjelmaa wvdial ei löytynyt järjestelmästä. Jos et asenna vwdialia eivät "
+"modeemiyhteydet PPP:llä ole käytettävissä"
 
 #: src/network/callbacks.c:657
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
 msgstr ""
+"Ohjelmaa wvdial ei löytynyt järjestelmästä. Jos et asenna vwdialia eivät "
+"modeemiyhteydet PPP:llä ole käytettävissä. Jatketaanko joka tapauksessa?"
 
 #: src/network/callbacks.c:661 src/network/callbacks.c:688
 msgid "_Continue"
@@ -1488,120 +1508,127 @@ msgstr "_Jatka"
 
 #: src/network/callbacks.c:684
 msgid "The default gateway device is not activated"
-msgstr ""
+msgstr "Oletusyhdyskäytävän laite ei ole aktivoitu"
 
 #: src/network/callbacks.c:685
 msgid "This will prevent you from connecting to the Internet. Continue anyway?"
-msgstr ""
+msgstr "Tämä estää sinua ottamasta yhteyttä Internetiin. Jatkataanko joka "
+"tapauksessa?"
 
 #: src/network/callbacks.c:733
 msgid "The default gateway device is missing gateway information"
-msgstr ""
+msgstr "Oletusyhdyskäytävän laitteestaa puuttuu yhdyskäytävän tiedot"
 
 #: src/network/callbacks.c:734
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device"
 msgstr ""
+"Syötä tarvittavat tiedot jatkaaksesi tai valitse toinen yhdyskäytävälaite"
 
 #: src/network/callbacks.c:779
 msgid "The program redhat-config-network-cmd could not be found"
-msgstr ""
+msgstr "Ohjelmaa rehdat-config-network ei löytynyt"
 
 #: src/network/callbacks.c:780
 msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this"
 msgstr ""
+"Tästä voi seurata yhtyksiä, jotka eivät ole käytettävissä välilehdessä "
+"verkkoyhteydet. Asenna redhat-config-network rpm-paketti niin pääset "
+"tästä virheestä eroon"
 
 #: src/network/callbacks.c:811
 #, c-format
 msgid "Do you want to enable interface \"%s\"?"
-msgstr ""
+msgstr "Haluatko ottaa verkkolaitteen \"%s\" käyttöön?"
 
 #: src/network/callbacks.c:812
 msgid "This will enable network access through this interface"
-msgstr ""
+msgstr "Tämä mahdollistaa verkon käytön tämän verkkolaitteen kautta"
 
 #: src/network/callbacks.c:813
 msgid "_Enable"
-msgstr ""
+msgstr "_Käytä"
 
 #: src/network/callbacks.c:815
 #, c-format
 msgid "Do you want to disable interface \"%s\"?"
-msgstr ""
+msgstr "Haluatko poistaa verkkolaitten \"%s\" käytöstä?"
 
 #: src/network/callbacks.c:816
 msgid "This will disable network access through this interface"
-msgstr ""
+msgstr "Tämä estää verkon käytön tämän verkkolaitteen kautta"
 
 #: src/network/callbacks.c:817
 msgid "_Disable"
-msgstr ""
+msgstr "_Poista käytöstä"
 
 #: src/network/callbacks.c:953
 msgid "Could not autodetect modem device"
-msgstr ""
+msgstr "Modeemin laitetta ei voitu tunnistaa automaattisesti"
 
 #: src/network/callbacks.c:954
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer"
 msgstr ""
+"Tarkista ettei laite ole käytössä ja että se on oikein kytketty "
+"tietokoneeseen"
 
 #: src/network/callbacks.c:1007
 msgid "Silent"
-msgstr ""
+msgstr "Äänetön"
 
 #: src/network/callbacks.c:1009
 msgid "Low"
-msgstr ""
+msgstr "Hiljainen"
 
 #: src/network/callbacks.c:1011
 msgid "Medium"
-msgstr ""
+msgstr "Keskitaso"
 
 #: src/network/callbacks.c:1013
 msgid "Loud"
-msgstr ""
+msgstr "Kova"
 
 #: src/network/connection.c:46
 msgid "Other type"
-msgstr ""
+msgstr "Muun tyyppinen"
 
 #: src/network/connection.c:47 src/network/connection.c:48
 #: src/network/connection.c:49 src/network/connection.c:50
 msgid "Ethernet LAN card"
-msgstr ""
+msgstr "Ethernet lähiverkkokortti"
 
 #: src/network/connection.c:51
 msgid "Wireless LAN card"
-msgstr ""
+msgstr "Langaton lähiverkkokortti"
 
 #: src/network/connection.c:52 src/network/connection.c:53
 msgid "Modem or transfer cable"
-msgstr ""
+msgstr "Modeemi tai siirtokaapeli"
 
 #: src/network/connection.c:54
 msgid "Parallel line"
-msgstr ""
+msgstr "Rinnakkaisportti"
 
 #: src/network/connection.c:55
 msgid "Infrared LAN"
-msgstr ""
+msgstr "Infrapunaverkko"
 
 #: src/network/connection.c:56
 msgid "Loopback interface"
-msgstr ""
+msgstr "Loopback-verkkolaite"
 
 #: src/network/connection.c:57
 msgid "Unknown interface type"
-msgstr ""
+msgstr "Tuntematon verkkolaitteen tyyppi"
 
 #: src/network/connection.c:477 src/services/table.c:86
 msgid "Active"
-msgstr ""
+msgstr "Aktiivinen"
 
 #: src/network/connection.c:1613
 msgid "Automatic (DHCP)"
@@ -1621,23 +1648,27 @@ msgstr "Pulssi"
 
 #: src/network/connection.c:1734 src/network/connection.c:1744
 msgid "Error in IP address"
-msgstr ""
+msgstr "Virhe IP-osoitteessa"
 
 #: src/network/connection.c:1735
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue"
 msgstr ""
+"Verkkolaitteen IP-osoite tai verkkopeite oli jätetty tyhjäksi. Syötä "
+"molempiin kenttiin kelvolliset IP-osoitteet jatkaaksesi"
 
 #: src/network/connection.c:1745
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue"
 msgstr ""
+"Verkkolaitteen IP-osoite tai etäosoite oli jätetty tyhjäksi. Syötä molempiin "
+"kenttiin kelvolliset IP-osoitteet jatkaaksesi"
 
 #: src/network/connection.c:1753
 msgid "Error in domain name servers"
-msgstr ""
+msgstr "Virhe nimipalvelimissa"
 
 #: src/network/connection.c:1754
 msgid ""
@@ -1645,312 +1676,320 @@ msgid ""
 "left the IP address for the primary name server empty. Please enter the IP "
 "for the primary domain name server or uncheck the manual DNS option"
 msgstr ""
+"Valitsit tälle verkkoyhteydelle nimipalvelimien käsinsyötön, mutta jätit "
+"ensisijaisen nimipalvelimen IP-osoitteen syöttämättä. Syötä ensisijaisen "
+"nimipalvelimen osoite tai poista valinta \"DNS-palvelinten käsinsyöttö\"" 
 
 #: src/network/connection.c:1761
 msgid "Invalid modem device"
-msgstr ""
+msgstr "Virheellinen modeemilaite"
 
 #: src/network/connection.c:1762
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue"
 msgstr ""
+"Yhteyden käyttämä modeemilaite oli jätetty tyhjäksi. Syötä käytettävä laite "
+"tai valitse \"automaattinen valinta\" jatkaaksesi."
 
 #: src/network/connection.c:1767
 msgid "Invalid phone number"
-msgstr ""
+msgstr "Virheellinen puhelinnumero"
 
 #: src/network/connection.c:1768
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue"
 msgstr ""
+"Yhteyden käyttämä puhelinnumero oli jätetty tyhjäksi. Syötä kelvollinen "
+"puhelinnumero jatkaaksesi"
 
 #: src/network/connection.c:2094
 #, c-format
 msgid "The interface \"%s\" doesn't exist"
-msgstr ""
+msgstr "Verkkolaitetta \"%s\" ei ole olemassa"
 
 #: src/network/connection.c:2098
 msgid "Invalid interface"
-msgstr ""
+msgstr "Virheellinen verkkolaite"
 
 #: src/network/connection.c:2099
 msgid "The loopback interface cannot be configured"
-msgstr ""
+msgstr "Loopback-verkkolaitetta ei voida käyttää verkkoyhteyksiin"
 
 #: src/network/dns.c:148 src/network/hosts.c:158
 msgid "IP Address"
-msgstr ""
+msgstr "IP-osoite"
 
 #: src/network/hosts.c:166
 msgid "Aliases"
-msgstr ""
+msgstr "Aliakset"
 
 #: src/network/main.c:203
 msgid "Run the connection assistant."
-msgstr ""
+msgstr "Suorita yhteysapulainen"
 
 #: src/network/main.c:204
 msgid "Run the PPP connection assistant."
-msgstr ""
+msgstr "Suorita PPP-yhteyden apulainen."
 
 #: src/network/main.c:205
 msgid "Run the ethernet connection assistant."
-msgstr ""
+msgstr "Suorita Ethernet-yhteyden apulainen."
 
 #: src/network/main.c:206
 msgid "Run the wlan connection assistant."
-msgstr ""
+msgstr "Suorita langattoman yhteyden apulainen."
 
 #: src/network/main.c:207
 msgid "Run the parallel port connection assistant."
-msgstr ""
+msgstr "Suorita rinnaisporttiyhteyden apulainen."
 
 #: src/network/main.c:208
 msgid "Run the irlan connection assistant."
-msgstr ""
+msgstr "Suoritta infrapunayhteyden apulainen"
 
 #: src/network/main.c:209
 msgid "Configure a network interface"
-msgstr ""
+msgstr "Määrittele verkkolaite"
 
 #: src/network/main.c:209
 msgid "interface"
-msgstr ""
+msgstr "verkkolaite"
 
 #: src/network/main.c:216
 msgid "Network Settings"
-msgstr ""
+msgstr "Verkon asetukset"
 
 #: src/network/network-druid.c:73
 #, c-format
 msgid "Creating a new network connection (%d of %d)"
-msgstr ""
+msgstr "Luodaan uutta verkkoyhteyttä (%d %d:stä)"
 
 #: src/network/network-druid.c:74
 msgid "Finished creating a new network connection"
-msgstr ""
+msgstr "Uuden verkkoyhteyden määrittely on valmis"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
-msgstr ""
+msgstr "Määrittele verkkolaitteiden ja yhteyksien asetuksia"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
-msgstr ""
+msgstr "Verkkoasetukset"
 
 #: src/network/profile.c:51 src/users/profile-settings.c:215
 msgid "You will not be able to recover this profile after pressing \"apply\""
-msgstr ""
-
+msgstr "Et voi palauttaa tätä profiilia valittuasi \"Toteuta\""
 #: src/network/profile.c:55
 #, c-format
 msgid "Are you sure you want to delete profile \"%s\"?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa profiilin \"%s\"?"
 
 #: src/network/profiles-table.c:53
 msgid "Profile name"
-msgstr ""
+msgstr "Profiilin nimi"
 
 #: src/network/profiles-table.c:62
 msgid "Description"
-msgstr ""
+msgstr "Kuvaus"
 
 #: src/services/callbacks.c:46
 msgid "No description available."
-msgstr ""
+msgstr "Ei kuvausta."
 
 #: src/services/callbacks.c:217
 msgid "Running"
-msgstr ""
+msgstr "Käytössä"
 
 #: src/services/callbacks.c:221
 msgid "Stopped"
-msgstr ""
+msgstr "Pysäytetty"
 
 #: src/services/callbacks.c:226
 msgid "Could not get info"
-msgstr ""
+msgstr "Tietoja ei voitu hakea"
 
 #: src/services/callbacks.c:292
 #, c-format
 msgid "Settings for service %s"
-msgstr ""
+msgstr "Palvelun %s asetukset"
 
 #: src/services/main.c:62
 msgid "Services Settings"
-msgstr ""
+msgstr "Palveluiden asetukset"
 
 #: src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
-msgstr ""
+msgstr "Määrittele mitä palveluita suoritetaan järjestelmän käynnistyessä"
 
 #: src/services/services.desktop.in.in.h:2
 msgid "Services"
-msgstr ""
+msgstr "Palvelut"
 
 #: src/services/table.c:95
 msgid "Service"
-msgstr ""
+msgstr "Palvelu"
 
 #: src/time/main.c:461
 msgid "NTP support is not running"
-msgstr ""
+msgstr "NTP-tuki ei ole käytössä"
 
 #: src/time/main.c:462
 msgid ""
 "Please run NTP support in the system to enable synchronization of your local "
 "time server with internet time servers"
 msgstr ""
+"Käynnistä NTP-tuki järjestelmässä, jos haluat synkronoida paikallisen "
+"kellopalvelimesi Internetin kellopalvelinten kanssa"
 
 #: src/time/main.c:757
 msgid "Time and Date Settings"
-msgstr ""
+msgstr "Ajan ja päiväyksen asetukset"
 
 #: src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
-msgstr ""
+msgstr "Muuta järjestelmän aikaa, päiväystä ja aikavyöhykettä"
 
 #: src/time/time.desktop.in.in.h:2
 msgid "Time and Date"
-msgstr ""
+msgstr "Aika ja päiväys"
 
 #: src/users/callbacks.c:569
 msgid "Error saving profile"
-msgstr ""
+msgstr "Virhe tallennettaessa profiilia"
 
 #: src/users/callbacks.c:609
 msgid "Create New profile"
-msgstr ""
+msgstr "Luo uusi profiili"
 
 #: src/users/callbacks.c:643
 #, c-format
 msgid "Settings for profile %s"
-msgstr ""
+msgstr "Profiilin %s asetukset"
 
 #: src/users/group-settings.c:90
 msgid "Create New Group"
-msgstr ""
+msgstr "Luo uusi ryhmä"
 
 #. Check if gid is available
 #: src/users/group-settings.c:163 src/users/group-settings.c:171
 msgid "Invalid group ID"
-msgstr ""
+msgstr "Virheellinen ryhmän ID"
 
 #: src/users/group-settings.c:164
 msgid "Group ID must be a positive number"
-msgstr ""
+msgstr "Ryhmän ID:n täytyy olla positiivinen kokonaisluku"
 
 #. if group is root
 #: src/users/group-settings.c:167
 msgid "Group ID of the \"root\" user should not be modified"
-msgstr ""
+msgstr "Käyttäjän \"root\" ryhmätunnistetta ei pidä vaihtaa"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
 #: src/users/user-settings.c:355 src/users/user-settings.c:450
 #: src/users/user-settings.c:486
 msgid "This would leave the system unusable"
-msgstr ""
+msgstr "Tämä voi jättää järjestelmän turvattomaksi"
 
 #: src/users/group-settings.c:172
 #, c-format
 msgid "Group ID %s already exists"
-msgstr ""
+msgstr "Ryhmän ID %s on jo olemassa"
 
 #. If empty.
 #: src/users/group-settings.c:197
 msgid "Group name is empty"
-msgstr ""
+msgstr "Ryhmän nimi on tyhjä"
 
 #: src/users/group-settings.c:198
 msgid "A group name must be specified"
-msgstr ""
+msgstr "Ryhmän nimi täytyy määritellä"
 
 #. If too long.
 #: src/users/group-settings.c:201
 msgid "The group name is too long"
-msgstr ""
+msgstr "Ryhmän nimi on liian pitkä"
 
 #: src/users/group-settings.c:202
 #, c-format
 msgid "The group name should have less than %i characters for being valid"
-msgstr ""
+msgstr "Ryhmän nimessä saa olla enintään %i merkkiä"
 
 #. if invalid.
 #: src/users/group-settings.c:205
 msgid "Group name has invalid characters"
-msgstr ""
+msgstr "Ryhmän nimessä on virheellisiä merkkejä"
 
 #: src/users/group-settings.c:206
 msgid "Please set a valid group name, using only lower case letters"
-msgstr ""
+msgstr "Määrittele ryhmän nimi, jossa on vain pieniä kirjaimia"
 
 #. if !exist.
 #: src/users/group-settings.c:209
 #, c-format
 msgid "Group \"%s\" already exists"
-msgstr ""
+msgstr "Ryhmä \"%s\" on jo olemassa"
 
 #: src/users/group-settings.c:210
 msgid "Please select a different group name"
-msgstr ""
+msgstr "Valitse toinen ryhmän nimi"
 
 #. if it's the root group
 #: src/users/group-settings.c:213
 msgid "Group name of the \"root\" user should not be modified"
-msgstr ""
+msgstr "Käyttäjän \"root\" ryhmän nimeä ei pidä vaihtaa"
 
 #: src/users/group-settings.c:283
 msgid "The group \"root\" should not be deleted"
-msgstr ""
+msgstr "Ryhmää \"root\" ei pidä poistaa"
 
 #: src/users/group-settings.c:298
 msgid "This may leave files with invalid group ID in the filesystem"
-msgstr ""
+msgstr "Tämä voi jättää järjestelmäään tiedostoja, joilla on väärä ryhmän ID"
 
 #: src/users/group-settings.c:303
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa ryhmän \"%s\"?"
 
 #: src/users/group-settings.c:358
 #, c-format
 msgid "Settings for Group %s"
-msgstr ""
+msgstr "Ryhmän %s asetukset"
 
 #: src/users/groups-table.c:44
 msgid "Group"
-msgstr ""
+msgstr "Ryhmä"
 
 #: src/users/groups-table.c:45
 msgid "GID"
-msgstr ""
+msgstr "ID"
 
 #: src/users/main.c:124
 msgid "User name contains"
-msgstr ""
+msgstr "Käyttäjätunnus sisältää"
 
 #: src/users/main.c:125
 msgid "User ID is"
-msgstr ""
+msgstr "Käyttäjän ID on"
 
 #: src/users/main.c:126
 msgid "Group name contains"
-msgstr ""
+msgstr "Ryhmän nimi sisältää"
 
 #: src/users/main.c:127
 msgid "User GID is"
-msgstr ""
+msgstr "Käyttäjän ryhmätunnus on"
 
 #: src/users/main.c:246 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
-msgstr ""
+msgstr "Käyttäjät ja ryhmät"
 
 #: src/users/passwd.c:266
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Salasanat eivät täsmää"
 
 #: src/users/passwd.c:271
 #, c-format
@@ -1958,215 +1997,226 @@ msgid ""
 "Bad password: %s.\n"
 "Please try with a new password"
 msgstr ""
+"Virheellinen salasana: %s.\n"
+"Kokeile uudella salasanalla"
 
 #: src/users/profile-settings.c:122
 msgid "The profile must have a name"
-msgstr ""
+msgstr "Profiililla täytyy olla nimi"
 
 #: src/users/profile-settings.c:127
 msgid "The profile must have a default home"
-msgstr ""
+msgstr "Profiililla täytyy olla oletuskotihakemisto"
 
 #: src/users/profile-settings.c:132 src/users/profile-settings.c:137
 msgid "The profile must have a default shell"
-msgstr ""
+msgstr "Profiililla tulee olla oletuskomentotulkki"
 
 #: src/users/profile-settings.c:204
 msgid "The default profile should not be deleted"
-msgstr ""
+msgstr "Oletusprofiilia ei tulisi poistaa"
 
 #: src/users/profile-settings.c:205
 msgid "This profile is used for setting default data for new users"
-msgstr ""
+msgstr "Tätä profiilia käytetään oletustietojen asettamiseen uusille "
+"käyttäjille"
 
 #: src/users/profile-settings.c:214
 #, c-format
 msgid "Delete profile \"%s\"?"
-msgstr ""
+msgstr "Poistetaanko profiili \"%s\"?"
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: src/users/profiles-table.c:38
 msgid "Profile"
-msgstr ""
+msgstr "Profiili"
 
 #: src/users/profiles-table.c:39
 msgid "Comment"
-msgstr ""
+msgstr "Kommentti"
 
 #: src/users/search-bar/search-bar.c:225
 msgid "C_lear"
-msgstr ""
+msgstr "_Tyhjennä"
 
 #: src/users/search-bar/search-bar.c:326
 msgid "Choice"
-msgstr ""
+msgstr "Valinta"
 
 #: src/users/search-bar/search-bar.c:336
 msgid "Text"
-msgstr ""
+msgstr "Teksti"
 
 #: src/users/user-settings.c:104
 msgid "The \"root\" user should not be deleted"
-msgstr ""
+msgstr "Käyttäjää \"root\" ei tule poistaa"
 
 #: src/users/user-settings.c:120
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
-msgstr ""
+msgstr "Haluatko varmasti poistaa käyttäjän \"%s\"?"
 
 #: src/users/user-settings.c:219
 msgid "User Account Editor"
-msgstr ""
+msgstr "Käyttäjätunnusten muokkain"
 
 #: src/users/user-settings.c:335
 msgid "The user name is empty"
-msgstr ""
+msgstr "Käyttäjäntunnus ei ole määritelty"
 
 #: src/users/user-settings.c:336
 msgid "A user name must be specified"
-msgstr ""
+msgstr "Käyttäjätunnus tulee määritellä"
 
 #. = sizeof (ut.ut_name)
 #: src/users/user-settings.c:342 src/users/user-settings.c:347
 msgid "The user name is too long"
-msgstr ""
+msgstr "Käyttäjätunnus on liian pitkä"
 
 #: src/users/user-settings.c:343 src/users/user-settings.c:348
 #, c-format
 msgid "The user name should have less than %i characters for being valid"
-msgstr ""
+msgstr "Käyttäjätunnuksessa saa olla enintään %i merkkiä"
 
 #: src/users/user-settings.c:354
 msgid "User name for the \"root\" user should not be modified"
-msgstr ""
+msgstr "Käyttäjän \"root\" käyttäjätunnusta ei tule muuttaa"
 
 #: src/users/user-settings.c:360
 msgid "User name has invalid characters"
-msgstr ""
+msgstr "Käyttäjätunnuksessa on virheellisiä merkkejä"
 
 #: src/users/user-settings.c:361
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers"
 msgstr ""
+"Valitse käyttäjätunnus, joka alkaa pienellä kirjaimella ja jossa tämän jälkeen "
+"on pieniä kirjamia ja numberoita"
 
 #: src/users/user-settings.c:367
 #, c-format
 msgid "User name \"%s\" already exists"
-msgstr ""
+msgstr "Käyttäjätunnus \"%s\" on jo olemassa"
 
 #: src/users/user-settings.c:368
 msgid "Please select a different user name"
-msgstr ""
+msgstr "Valitse toinen käyttäjätunnus"
 
 #: src/users/user-settings.c:393
 #, c-format
 msgid "Invalid character \"%c\" in comment"
-msgstr ""
+msgstr "Virheellinen merkki \"%c\" kommentissa"
 
 #: src/users/user-settings.c:394
 msgid "Check that this character is not used"
-msgstr ""
+msgstr "Tarkista ettei tätä merkkiä käytetä"
 
 #: src/users/user-settings.c:442
 msgid "Home directory should not be empty"
-msgstr ""
+msgstr "Kenttä kotihakemisto ei saa olla tyhjä"
 
 #: src/users/user-settings.c:443
 msgid "Make sure you provide a home directory"
-msgstr ""
+msgstr "Muista aina antaa kotihakemisto"
 
 #: src/users/user-settings.c:445
 msgid "Incomplete path in home directory"
-msgstr ""
+msgstr "Polku kotihakemistoon ei ole täydellinen"
 
 #: src/users/user-settings.c:446
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
 msgstr ""
+"Anna kotihakemiston koko polku\n"
+"<span size=\"smaller\">esimerkiksi /home/jaakko</span>"
 
 #: src/users/user-settings.c:449
 msgid "Home directory of the \"root\" user should not be modified"
-msgstr ""
+msgstr "Käyttäjän \"root\" kotihakemistoa ei pidä muuttaa"
 
 #: src/users/user-settings.c:482
 msgid "Invalid user ID"
-msgstr ""
+msgstr "Virheellinen käyttäjän ID"
 
 #: src/users/user-settings.c:483
 msgid "User ID must be a positive number"
-msgstr ""
+msgstr "Käyttäjän ID:n täytyy olla positiivinen numero"
 
 #: src/users/user-settings.c:485
 msgid "User ID of the \"root\" user should not be modified"
-msgstr ""
+msgstr "Käyttäjän \"root\" ID:tä ei pidä muuttaa"
 
 #: src/users/user-settings.c:502
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
 msgstr ""
+"Useammalla käyttäjällä voi olla sama ID, mutta se ei ole yleistä ja saattaa "
+"johtaa turvallisuusongelmiin"
 
 #: src/users/user-settings.c:507
 #, c-format
 msgid "User ID %s already exists"
-msgstr ""
+msgstr "Käyttäjän ID %s on jo olemassa"
 
 #: src/users/user-settings.c:524
 msgid "Incomplete path in shell"
-msgstr ""
+msgstr "Epätäydellinen polku komentotulkille"
 
 #: src/users/user-settings.c:525
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
 msgstr ""
+"Anna komentotulkin koko polku\n"
+"<span size=\"smaller\">esimerkiksi /bin/sh</span>"
 
 #: src/users/user-settings.c:547
 msgid "Password should not be empty"
-msgstr ""
+msgstr "Salasanan ei pidä olla tyhjä"
 
 #: src/users/user-settings.c:548
 msgid "A password must be provided"
-msgstr ""
+msgstr "Salasana on pakko antaa"
 
 #: src/users/user-settings.c:550
 msgid "Password confirmation isn't correct"
-msgstr ""
+msgstr "Salasanan varmistus epäonnistui"
 
 #: src/users/user-settings.c:551
 msgid "Check that you have provided the same password in both text fields"
-msgstr ""
+msgstr "Varmista että kirjoitit saman salasanan molempiin tekstikenttiin"
 
 #: src/users/user-settings.c:827
 #, c-format
 msgid "Settings for User %s"
-msgstr ""
+msgstr "Käyttäjän %s asetukset"
 
 #: src/users/users-table.c:45
 msgid "User"
-msgstr ""
+msgstr "Käyttäjä"
 
 #: src/users/users-table.c:46
 msgid "Home"
-msgstr ""
+msgstr "Kotihakemisto"
 
 #: src/users/users-table.c:47
 msgid "User details"
-msgstr ""
+msgstr "Käyttäjän yksityöskohdat"
 
 #: src/users/users-table.c:48
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #: src/users/users-table.c:49
 msgid "Shell"
-msgstr ""
+msgstr "Komentotulkki"
 
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
-msgstr ""
+msgstr "Lisää tai poista käyttäjiä ja ryhmiä"
 
 #~ msgid "Dialog complexity for the boot-admin tool"
 #~ msgstr "Lo"
