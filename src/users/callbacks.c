@@ -49,7 +49,6 @@
 
 /* Local globals */
 static int reply;
-static const gchar *GROUP_MEMBER_DATA_KEY = "group_member_name";
 static gchar *pam_passwd_files[] = { "/etc/pam.d/passwd", NULL };
 
 
@@ -345,16 +344,18 @@ static void
 user_settings_dialog_close (void)
 {
 	GtkWidget *w0;
-	GtkObject *list_item;
+	GtkCList *clist;
 	GList *list;
+	gint row;
 
 	/* set current current user if it's not set */
 	if (!current_user)
 	{
-		w0 = tool_widget_get ("user_list");
-		list = GTK_LIST (w0)->selection;
-		list_item = GTK_OBJECT (list->data);
-		current_user = gtk_object_get_data (list_item, user_list_data_key);
+		clist = GTK_CLIST (tool_widget_get ("user_list"));
+		list = clist->selection;
+		row = GPOINTER_TO_INT (list->data);
+		
+		current_user = gtk_clist_get_row_data (clist, row);
 	}
 
 	/* Clear up entries */
@@ -519,16 +520,18 @@ static void
 group_settings_dialog_close (void)
 {
 	GtkWidget *w0;
-	GtkObject *list_item;
-	GList *members, *current;
+	GtkCList *clist;
+	GList *current;
+	gint row;
 
 	/* set current current group if it's not set */
 	if (!current_group)
 	{
-		w0 = tool_widget_get ("group_list");
-		current = GTK_LIST (w0)->selection;
-		list_item = GTK_OBJECT (current->data);
-		current_group = gtk_object_get_data (list_item, group_list_data_key);
+		clist = GTK_CLIST (tool_widget_get ("group_list"));
+		current = clist->selection;
+		row = GPOINTER_TO_INT (current->data);
+		
+		current_group = gtk_clist_get_row_data (clist, row);
 	}
 	/* Clear group name */
 
@@ -538,12 +541,10 @@ group_settings_dialog_close (void)
 	/* Clear both lists. Do we have to free some memory also? */
 
 	w0 = tool_widget_get ("group_settings_all");
-	members = GTK_LIST (w0)->children;
-	gtk_list_remove_items (GTK_LIST (w0), members);
+	gtk_clist_clear (GTK_CLIST (w0));
 
 	w0 = tool_widget_get ("group_settings_members");
-	members = GTK_LIST (w0)->children;
-	gtk_list_remove_items (GTK_LIST (w0), members);
+	gtk_clist_clear (GTK_CLIST (w0));
 
 	w0 = tool_widget_get ("group_settings_dialog");
 	gtk_widget_hide (w0);
@@ -585,22 +586,24 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkList *all, *members;
+	GtkCList *all, *members;
 	GList *selection;
-	GtkWidget *list_item;
-	GtkLabel *label;
 	gchar *name;
+	gchar *entry[2];
+	gint row;
 
-	all = GTK_LIST (tool_widget_get ("group_settings_all"));
-	members = GTK_LIST (tool_widget_get ("group_settings_members"));
+	entry[1] = NULL;
+
+	all = GTK_CLIST (tool_widget_get ("group_settings_all"));
+	members = GTK_CLIST (tool_widget_get ("group_settings_members"));
 
 	selection = g_list_copy (all->selection);
-	list_item = (GtkWidget *)selection->data;
-	gtk_widget_reparent (list_item, GTK_WIDGET (members));
+	row = GPOINTER_TO_INT (selection->data);
 
-	label = GTK_LABEL (GTK_BIN (list_item)->child);
-	gtk_label_get (label, &name);
-	gtk_object_set_data (GTK_OBJECT (list_item), GROUP_MEMBER_DATA_KEY, name);
+	gtk_clist_get_text (all, row, 0, &name);
+	entry[0] = g_strdup (name);
+	gtk_clist_remove (all, row);
+	gtk_clist_append (members, entry);
 
 	g_list_free (selection);
 }
@@ -608,30 +611,37 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkList *all, *members;
+	GtkCList *all, *members;
 	GList *selection;
-	GtkWidget *list_item;
+	gchar *name;
+	gchar *entry[2];
+	gint row;
 
-	all = GTK_LIST (tool_widget_get ("group_settings_all"));
-	members = GTK_LIST (tool_widget_get ("group_settings_members"));
+	entry[1] = NULL;
+
+	all = GTK_CLIST (tool_widget_get ("group_settings_all"));
+	members = GTK_CLIST (tool_widget_get ("group_settings_members"));
 
 	selection = g_list_copy (members->selection);
-	list_item = (GtkWidget *)selection->data;
+	row = GPOINTER_TO_INT (selection->data);
 
-	gtk_object_remove_data (GTK_OBJECT (list_item), GROUP_MEMBER_DATA_KEY);
-	
-	gtk_widget_reparent (list_item, GTK_WIDGET (all));
+	gtk_clist_get_text (members, row, 0, &name);
+	entry[0] = g_strdup (name);
+	gtk_clist_remove (members, row);
+	gtk_clist_append (all, entry);
+
 	g_list_free (selection);
 }
 
 
 extern void
-on_group_settings_all_selection_changed (GtkWidget *list, gpointer user_data)
+on_group_settings_all_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
+		gpointer user_data)
 {
 	GList *current;
 	GtkWidget *w0;
 
-	current = GTK_LIST (list)->selection;
+	current = clist->selection;
 	
 	if (tool_get_access())
 	{
@@ -645,12 +655,13 @@ on_group_settings_all_selection_changed (GtkWidget *list, gpointer user_data)
 }
 	
 extern void
-on_group_settings_members_selection_changed (GtkWidget *list, gpointer user_data)
+on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
+		gpointer user_data)
 {
 	GList *current;
 	GtkWidget *w0;
 
-	current = GTK_LIST (list)->selection;
+	current = clist->selection;
 
 	if (tool_get_access())
 	{
@@ -675,56 +686,62 @@ reply_cb (gint val, gpointer data)
 static GList *
 fill_group_members_list (void)
 {
-	GList *u;
+	GList *tmp_list;
 	GList *member_rows = NULL;
-	GtkList *list;
-	GtkWidget *list_item;
+	GtkCList *clist;
+	gint row;
+	gchar *entry[2];
 
+	entry[1] = NULL;
 
-	list = GTK_LIST (tool_widget_get ("group_settings_members"));
+	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
+	gtk_clist_set_auto_sort (clist, TRUE);
+	gtk_clist_freeze (clist);
 
-	for (u = g_list_first (current_group->users); u; u = g_list_next (u))
+	tmp_list = current_group->users;
+
+	while (tmp_list)
 	{
-		list_item = gtk_list_item_new_with_label ((gchar *)u->data);
-		gtk_widget_show (list_item);
-		gtk_object_set_data (GTK_OBJECT (list_item), GROUP_MEMBER_DATA_KEY,
-				((gchar *)u->data));
+		entry[0] = tmp_list->data;
+		tmp_list = tmp_list->next;
 		
-		member_rows = g_list_append (member_rows, list_item);
-		
+		row = gtk_clist_append (clist, entry);
+		member_rows = g_list_append (member_rows, entry[0]);
 	}
 
-	gtk_list_append_items (list, member_rows);
-
+	gtk_clist_thaw (clist);
 	return member_rows;
 }
 
 static void
 fill_all_users_list (GList *member_rows)
 {
-	GList *u;
-	GList *all_rows = NULL;
-	GtkList *list;
+	GList *tmp_list, *member;
+	GtkCList *clist;
 	user *current_u;
-	GtkWidget *list_item;
-	GList *tmplist;
 	gchar *name;
-	GtkObject *item;
 	gboolean found;
+	gchar *entry[2];
 
-	
-	list = GTK_LIST (tool_widget_get ("group_settings_all"));
-	for (u = g_list_first (user_list); u; u = g_list_next (u))
+	entry[1] = NULL;
+
+	clist = GTK_CLIST (tool_widget_get ("group_settings_all"));
+	gtk_clist_set_auto_sort (clist, TRUE);
+	gtk_clist_freeze (clist);
+
+	tmp_list = user_list;
+	while (tmp_list)
 	{
-		current_u = (user *)u->data;
+		current_u = tmp_list->data;
+		tmp_list = tmp_list->next;
+
 		found = FALSE;
 
-		/* Find, if not in members */
-
-		for (tmplist = g_list_first (member_rows); tmplist; tmplist = g_list_next (tmplist))
+		member = member_rows;
+		while (member)
 		{
-			item = GTK_OBJECT (tmplist->data);
-			name = gtk_object_get_data (item, GROUP_MEMBER_DATA_KEY);
+			name = member->data;
+			member = member->next;
 
 			if (!strcmp (name, current_u->login))
 			{
@@ -735,13 +752,12 @@ fill_all_users_list (GList *member_rows)
 
 		if (!found)
 		{
-			list_item = gtk_list_item_new_with_label (current_u->login);
-			gtk_widget_show (list_item);
-			all_rows = g_list_append (all_rows, list_item);
+			entry[0] = current_u-> login;
+			gtk_clist_append (clist, entry);
 		}
 	}
 
-	gtk_list_append_items (list, all_rows);
+	gtk_clist_thaw (clist);
 }
 
 static void
@@ -1035,12 +1051,11 @@ add_user (void)
 static gboolean
 update_group (void)
 {
-	GtkWidget *w0, *label, *list_item;
+	GtkWidget *w0;
 	GtkWindow *win;
 	GnomeDialog *dialog;
 	gchar *txt;
 	GList *selection;
-	GtkList *list;
 	GtkCList *clist;
 	gint row;
 	
@@ -1072,46 +1087,44 @@ update_group (void)
 	}
 
 	/* Update group members also */
-
-	list = GTK_LIST (tool_widget_get ("group_settings_members"));
-
-
 	/* First, free our old users list ... */
-	for (selection = g_list_first (current_group->users); selection;
-			selection = g_list_next (selection))
 
+	selection = current_group->users;
+	while (selection)
 	{
-		txt = (gchar *)selection->data;
+		txt = selection->data;
+		selection = selection->next;
+
 		g_free (txt);
 	}
-
+	
 	g_list_free (current_group->users);
 	current_group->users = NULL;
 
-	
 	/* ... and then, build new one */
-	for (selection = g_list_first (list->children); selection;
-			selection = g_list_next (selection))
 
+	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
+
+	row = 0;
+	while (TRUE)
 	{
-		list_item = (GtkWidget *)selection->data;
-		label = GTK_BIN (list_item)->child;
-		gtk_label_get (GTK_LABEL (label), &txt);
+		if (!gtk_clist_get_text (clist, row++, 0, &txt))
+			break;
+
 		current_group->users = g_list_append (current_group->users, g_strdup (txt));
 	}
-	
+
 	return TRUE;
 }
 
 static gboolean
 add_group (void)
 {
-	GtkWidget *w0, *label, *list_item;
+	GtkWidget *w0;
 	GtkWindow *win;
 	GnomeDialog *dialog;
 	gchar *new_group_name, *tmp;
 	GList *selection = NULL;
-	GtkList *list;
 	GtkCList *clist;
 	group *tmpgroup, *current_g;
 	gint row;
@@ -1173,17 +1186,17 @@ add_group (void)
 	
 	/* Add group members */
 
-	list = GTK_LIST (tool_widget_get ("group_settings_members"));
+	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
 
-	for (selection = g_list_first (list->children); selection;
-			selection = g_list_next (selection))
+	row = 0;
+	while (TRUE)
 	{
-		list_item = (GtkWidget *)selection->data;
-		label = GTK_BIN (list_item)->child;
-		gtk_label_get (GTK_LABEL (label), &new_group_name);
-		tmpgroup->users = g_list_append (tmpgroup->users, g_strdup (new_group_name));
+		if (!gtk_clist_get_text (clist, row++, 0, &tmp))
+			break;
+
+		tmpgroup->users = g_list_append (tmpgroup->users, g_strdup (tmp));
 	}
-	
+
 	current_group = tmpgroup;
 	group_list = g_list_append (group_list, current_group);
 

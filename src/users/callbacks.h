@@ -48,7 +48,8 @@ on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data);
 extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data);
 
-
+extern void
+on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data);
 
 extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
@@ -78,13 +79,21 @@ extern void
 on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
 		gpointer user_data);
 
-
+extern void
+on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data);
 
 extern void
 on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data);
 
 extern void
 on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data);
+
+extern void
+on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer user_data);
+
+extern void
+on_user_passwd_random_clicked (GtkButton *button, gpointer user_data);
+
 
 extern void
 on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data);
@@ -101,8 +110,10 @@ extern void
 on_group_settings_remove_clicked (GtkButton *button, gpointer user_data);
 
 extern void
-on_group_settings_all_selection_changed (GtkWidget *list, gpointer user_data);
+on_group_settings_all_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
+		gpointer user_data);
 
 extern void
-on_group_settings_members_selection_changed (GtkWidget *list, gpointer user_data);
+on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
+		gpointer user_data);
 
