@@ -313,11 +313,28 @@ boot_value_label (xmlNodePtr node)
 	return xst_xml_get_child_content (node, "label");
 }
 
+static gboolean
+boot_value_default (const gchar *label)
+{
+	gchar *def;
+	gboolean retval = FALSE;
+	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
+
+	def = xst_xml_get_child_content (root, "default");
+	
+	if (def) {		
+		if (label && !strcmp (label, def))
+			retval = TRUE;
+		g_free (def);
+	}
+	return retval;
+}
+
 void *
 boot_value_type (xmlNodePtr node, gboolean bare)
 {
 	xmlNodePtr n;
-	gchar *label, *def;
+	gchar *label;
 	gchar *buf = NULL;
 	
 	g_return_val_if_fail (node != NULL, NULL);
@@ -340,15 +357,12 @@ boot_value_type (xmlNodePtr node, gboolean bare)
 		return buf;
 
 	label = xst_xml_get_child_content (node, "label");
-	def = xst_xml_get_child_content (xst_xml_doc_get_root (tool->config), "default");
-
-	if (def && !strcmp (def, label))
-	{
-		buf = g_strdup_printf (_("%s (default)"), buf);
-		g_free (def);
+	if (label) {
+		if (boot_value_default (label))
+			buf = g_strdup_printf (_("%s (default)"), buf);
 		g_free (label);
 	}
-
+	
 	return buf;
 }
 
@@ -435,9 +449,18 @@ boot_value_set_default (xmlNodePtr node)
 void
 boot_value_set_label (xmlNodePtr node, gchar *val)
 {
+	gchar *old_name = NULL;
+	
 	g_return_if_fail (node != NULL);
 
+	old_name = xst_xml_get_child_content (node, "label");
 	xst_xml_set_child_content (node, "label", val);
+	
+	if (old_name) {
+		if (boot_value_default (old_name))
+			boot_value_set_default (node);
+		g_free (old_name);
+	}
 }
 
 void
@@ -456,27 +479,30 @@ boot_value_set_dev (xmlNodePtr node, gchar *val)
 	xst_xml_set_child_content (node, "other", val);
 }
 
-void boot_value_set_root (xmlNodePtr node, gchar *val)
+void
+boot_value_set_root (xmlNodePtr node, gchar *val)
 {
 	g_return_if_fail (node != NULL);
 
 	xst_xml_set_child_content (node, "root", val);
 }
 
-void boot_value_set_append (xmlNodePtr node, gchar *val)
+void
+boot_value_set_append (xmlNodePtr node, gchar *val)
 {
 	g_return_if_fail (node != NULL);
 
-	if (strlen (val) < 1)
-	{
-		xst_xml_element_destroy (xst_xml_element_find_first (node, "append"));
-		return;
+	if (strlen (val) < 1) {
+		xmlNodePtr append = xst_xml_element_find_first (node, "append");
+
+		if (append)
+			xst_xml_element_destroy (append);
+	} else {
+		if (strstr (val, " ") && !strstr (val, "\""))
+			val = g_strconcat ("\"", val, "\"", NULL);
+	
+		xst_xml_set_child_content (node, "append", val);
 	}
-	
-	if (strstr (val, " ") && !strstr (val, "\""))
-		val = g_strconcat ("\"", val, "\"", NULL);
-	
-	xst_xml_set_child_content (node, "append", val);
 }
 
 xmlNodePtr

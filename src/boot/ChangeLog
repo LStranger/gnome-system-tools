@@ -1,3 +1,10 @@
+2001-05-23  Tambet Ingo  <tambet@ximian.com>
+
+	* e-table.c (boot_value_set_append): Destroy xml node only if needed.
+	(boot_value_default): Implement.
+	(boot_value_type): use (boot_value_default).
+	(boot_value_set_label): Set new default if default label is changed.
+
 2001-05-21  Carlos Perelló Marín <carlos@gnome-db.org>
 
 	* e-table.c: Marked to translate the ETableSpecification labels and other strings.
