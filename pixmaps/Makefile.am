@@ -32,6 +32,7 @@ pixmaps_DATA = \
 	services.png		  \
 	settings.png              \
 	slackware.png             \
+	specifix.png              \
 	suse.png                  \
 	talk-userlist.png         \
 	time.png                  \

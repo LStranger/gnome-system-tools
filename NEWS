@@ -1,6 +1,83 @@
-==============
-Version 0.90.0
-==============
+GNOME System Tools Version 0.91.0, 2004-08-20
+---------------------------------------------
+
+The GNOME System Tools version 0.91.0 "Freedom of speech" have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The GNOME System Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
+
+Right now the GNOME System Tools fully support various distros/OS such as: Redhat, Mandrake, SuSE, Fedora, Debian, Gentoo, Slackware, FreeBSD, OpenNA, PLD, Vine and Specifix.
+
+WARNING: By default, only the users, network and time tools will be built, for compiling the other tools you can do:
+
+  --enable-services
+  --enable-boot
+
+at configure time
+
+
+Changes since last release
+==========================
+
+  General
+  =======
+  - Improved communication with su/ssh, now works with users that don't need password for becoming root (me)
+  - Added support for Vine Linux 3.0 and 3.1 (Daisuke SUZUKI)
+  - Added support for Specifix Linux (Ken VanDine)
+  - Fixed debian detection (Frederic Peters)
+  - Changed "Black Panther Linux" to "Black Panther OS" (me)
+  - Fixed Encode module detection with perl < 5.8 (Joe Marcus Clarke)
+
+  Boot
+  ====
+  - Fixed name verification (me)
+  - Defaulted timeout to 0 if it's not defined (me)
+
+  Network
+  =======
+  - Fixed interfaces activation/deactivation in Slackware (me)
+
+  Users
+  =====
+  - Verify that the user data has changed before running chfn (me)
+  - Show all the groups when adding/modifying an user (me)
+
+  ... plus other lots of bugfixing
+
+  Thanks to Joe Marcus Clarke, Daisuke SUZUKI and Ken VanDine for submitting patches
+
+  Thanks to everybody I've forgot to thank
+
+  Translations
+  ============
+  - bg (Vladimir "Kaladan" Petkov)
+  - bn (Runa Bhattacharjee)
+  - cs (Miloslav Trmac)
+  - da (Martin Willemoes Hansen)
+  - en_CA (Adam Weinberger)
+  - en_GB (David Lodge)
+  - es (Francisco Javier F. Serrador)
+  - fr (Jean-Michel Ardantz)
+  - gu (Ankit Patel)
+  - hu (Gabor Kelemen)
+  - ja (Takeshi AIHANA)
+  - lt (Žygimantas Beručka)
+  - nl (Vincent van Adrighem)
+  - no (Kjartan Maraas)
+  - pa (Amanpreet Singh Alam)
+  - pl (PL Team)
+  - pt (Duarte Loreto)
+  - pt_BR (Estêvão Samuel Procópio)
+  - sq (Laurent Dhima)
+  - sr, sr@Latn (Danilo Šegan)
+  - zh_CN (Funda Wang)
+  
+Downloading
+===========
+You can get it from : ftp://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/0.91/
+
+
+GNOME System Tools Version 0.90.0, 2004-07-19
+---------------------------------------------
 
 The GNOME System Tools version 0.90.0 "Untitled" have been released.
 
