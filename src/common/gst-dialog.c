@@ -450,6 +450,17 @@ dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
 	cancel_cb (w, data);
 }
 
+static gboolean
+dialog_key_press_event_cb (GtkWidget *w, GdkEventKey *event, gpointer data)
+{
+	if (event->keyval == GDK_Escape) {
+		cancel_cb (w, data);
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
 static void
 dialog_connect_signals (GstDialog *dialog, GstDialogSignal *signals, gboolean connect_after)
 {       
@@ -550,7 +561,7 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 
 	g_signal_connect (G_OBJECT (dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
 	g_signal_connect (G_OBJECT (tool->remote_dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
-
+	g_signal_connect (G_OBJECT (dialog), "key-press-event", G_CALLBACK (dialog_key_press_event_cb), dialog);
 }
 
 GstDialog *
