@@ -20,6 +20,28 @@ gchar *s = N_("Settings for the selected group");
 gchar *s = N_("Change the group's options like its name and members.");
 gchar *s = N_("Settings");
 gchar *s = N_("Groups");
+gchar *s = N_("Default system settings can\n"
+              " be edited in advnced mode.");
+gchar *s = N_("System settings");
+gchar *s = N_("Directory where \n"
+              "mailboxes reside:");
+gchar *s = N_("Create home directory\n"
+              " for new users:");
+gchar *s = N_("Min/max values for automatic UID/GID");
+gchar *s = N_("Minimum UID:");
+gchar *s = N_("Maximum UID:");
+gchar *s = N_("Minimum GID:");
+gchar *s = N_("Maximum GID:");
+gchar *s = N_("Password settings");
+gchar *s = N_("Maximum number of days \n"
+              "a password may be used:");
+gchar *s = N_("Minimum number of days allowed\n"
+              " between password changes:");
+gchar *s = N_("Number of days warning given\n"
+              " before a password expires:");
+gchar *s = N_("Minimum acceptable\n"
+              " password length:");
+gchar *s = N_("Defaults");
 gchar *s = N_(" Advanced >> ");
 gchar *s = N_("User Settings");
 gchar *s = N_("Basic settings");
