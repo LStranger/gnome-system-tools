@@ -1,4 +1,4 @@
-interfaces = \
+	interfaces = \
 	common.glade					\
 	disks.glade 					\
 	dhcpd.glade					\
@@ -19,11 +19,10 @@ interfaces = \
 interfaces_DATA = $(interfaces)
 
 EXTRA_DIST = \
-	fix.pl				\
 	$(interfaces:.glade=.glade.in)	\
 	$(interfaces:.glade=.glade.h)
 
 CLEANFILES = $(interfaces)
 
-$(interfaces): %.glade: %.glade.in fix.pl
-	$(top_srcdir)/interfaces/fix.pl $(pixmapsdir) < $< > $@
+$(interfaces): %.glade: %.glade.in
+	libglade-convert $< > $@
