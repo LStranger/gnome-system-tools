@@ -38,17 +38,6 @@ XstTool *tool;
 const gchar *boot_types[] = { "Windows NT", "Windows 9x", "dos", "Linux", "Unknown", NULL };
 
 static void
-my_gtk_entry_set_text (void *entry, gchar *str)
-{
-	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
-}
-
-static void
-boot_settings_clean (BootSettingsDialog *state)
-{
-}
-
-static void
 boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 {
 	gint i;
@@ -61,16 +50,16 @@ boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 	gtk_combo_set_popdown_strings (state->type, list);
 
 	/* All entries */
-	my_gtk_entry_set_text (state->basic_name, boot_value_label (node));
-	my_gtk_entry_set_text (state->adv_name, boot_value_label (node));
-	my_gtk_entry_set_text (state->type->entry, boot_value_type (node, TRUE));
-	my_gtk_entry_set_text (state->root, boot_value_root (node));
-	my_gtk_entry_set_text (state->append, boot_value_append (node));
+	xst_ui_entry_set_text (state->basic_name, boot_value_label (node));
+	xst_ui_entry_set_text (state->adv_name, boot_value_label (node));
+	xst_ui_entry_set_text (state->type->entry, boot_value_type (node, TRUE));
+	xst_ui_entry_set_text (state->root, boot_value_root (node));
+	xst_ui_entry_set_text (state->append, boot_value_append (node));
 
 	if (xst_xml_element_find_first (node, "image"))
 	{
 		/* We have Linux, so hide device, show image and 'other' frame */
-		my_gtk_entry_set_text (state->image_entry, boot_value_image (node, TRUE));
+		xst_ui_entry_set_text (state->image_entry, boot_value_image (node, TRUE));
 
 		gtk_widget_show (state->image_label);
 		gtk_widget_show (GTK_WIDGET (state->image));
@@ -83,7 +72,7 @@ boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 
 	else
 	{
-		my_gtk_entry_set_text (state->device->entry, boot_value_dev (node, TRUE));
+		xst_ui_entry_set_text (state->device->entry, boot_value_dev (node, TRUE));
 		
 		gtk_widget_hide (GTK_WIDGET (state->image));
 		gtk_widget_hide (state->image_label);
@@ -153,8 +142,6 @@ boot_settings_prepare (xmlNodePtr node)
 
 	if (node)
 		boot_settings_populate (state, node);
-	else
-		boot_settings_clean (state);
 
 	return state;
 }
