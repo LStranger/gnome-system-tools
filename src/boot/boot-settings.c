@@ -51,7 +51,6 @@ static void
 boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 {
 	gint i;
-	gchar *buf;
 	GList *list = NULL;
 
 	/* Type combo */
@@ -93,17 +92,6 @@ boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 
 		gtk_widget_hide (GTK_WIDGET (state->optional));
 	}
-
-	/* Default? */
-	
-	buf = xml_get_child_content (xml_doc_get_root (tool->config), "default");
-	if (!strcmp (buf, boot_value_label (node)))
-	 	gtk_toggle_button_set_active (state->deflt, TRUE);
-	else
-		gtk_toggle_button_set_active (state->deflt, FALSE);
-
-	g_free (buf);
-
 		
 	if (state->complexity == XST_DIALOG_ADVANCED)
 	{
@@ -143,9 +131,6 @@ boot_settings_init (BootSettingsDialog *state)
 												"settings_image_entry"));
 	
 	state->image = xst_dialog_get_widget (tool->main_dialog, "settings_image");
-	state->deflt = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog,
-												    "settings_default"));
-
 	state->optional = xst_dialog_get_widget (tool->main_dialog, "settings_optional");
 	state->root = GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "settings_root"));
 	state->complexity = tool->main_dialog->complexity;
@@ -187,11 +172,6 @@ boot_settings_affect (BootSettingsDialog *state)
 	if (state->complexity == XST_DIALOG_ADVANCED)
 	{
 		boot_value_set_label (node, gtk_entry_get_text (state->adv_name));
-
-		if (gtk_toggle_button_get_active (state->deflt))
-			xml_set_child_content (xml_doc_get_root (tool->config),
-							   "default",
-							   xml_get_child_content (node, "label"));
 		
 		if (xml_element_find_first (node, "image"))
 			boot_value_set_image (node, gtk_entry_get_text (state->image_entry));
@@ -231,7 +211,12 @@ on_boot_settings_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_boot_add_clicked (GtkButton *button, gpointer user_data)
 {
-	BootSettingsDialog *state;
+	GtkWidget *d;
+
+	d = gnome_error_dialog (_("Not Implemented yet, sorry."));
+	gnome_dialog_run (GNOME_DIALOG(d));
+	
+/*	BootSettingsDialog *state;
 	GtkWidget *d;
 	xmlNodePtr node;
 	gint res;
@@ -244,9 +229,8 @@ on_boot_add_clicked (GtkButton *button, gpointer user_data)
 	if (res)
 		return;
 
-	/* affect */
 	node = boot_table_add ();
 	boot_settings_affect (node);
 	boot_table_update ();
-	xst_dialog_modify (tool->main_dialog);
+	xst_dialog_modify (tool->main_dialog); */
 }

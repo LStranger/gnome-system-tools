@@ -37,10 +37,6 @@ XstTool *tool;
 
 static int reply;
 
-static void boot_settings_dialog_clean (void);
-static gboolean boot_settings_dialog_affect (void);
-
-static void my_gtk_entry_set_text (void *entry, gchar *str);
 static void reply_cb (gint val, gpointer data);
 
 /* Main window callbacks */
@@ -83,6 +79,8 @@ on_boot_default_clicked (GtkButton *button, gpointer user_data)
 	label = xml_get_child_content (node, "label");
 
 	xml_set_child_content (xml_doc_get_root (tool->config), "default", label);
+	boot_table_update ();
+	xst_dialog_modify (tool->main_dialog);
 }
 
 extern void
@@ -92,46 +90,6 @@ on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer user_data)
 						 gtk_toggle_button_get_active (toggle));
 
 	xst_dialog_modify (tool->main_dialog);
-}
-
-static void
-boot_settings_dialog_clean (void)
-{
-	gint i;
-	gchar *widget[] = { "boot_settings_label", "boot_settings_image", "boot_settings_append",
-					"boot_settings_root", NULL };
-
-	for (i = 0; widget[i]; i++)
-		gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, widget[i])),"");
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
-										    (tool->main_dialog,
-											"boot_settings_default")), FALSE);
-}
-
-static gboolean
-boot_settings_dialog_affect (void)
-{
-	xmlNodePtr node;
-
-	node = get_selected_node ();
-
-	boot_value_set_label (node, gtk_entry_get_text
-					  (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-												  "boot_settings_label"))));
-	
-	boot_value_set_image (node, gtk_entry_get_text
-					  (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-												  "boot_settings_image"))));
-
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
-											   (tool->main_dialog,
-											    "boot_settings_default"))))
-	{
-		boot_value_set_default (node);
-	}
-	
-	return TRUE;
 }
 
 /* Helpers */
@@ -151,6 +109,8 @@ actions_set_sensitive (gboolean state)
 	}
 	
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
+    	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_default"),
+						 state);
 }
 
 void
@@ -181,13 +141,6 @@ boot_settings_dialog_complexity (gboolean state)
 	gtk_widget_size_request (win, &req);
 	gtk_window_set_default_size (GTK_WINDOW (win), req.width, req.height);
 }
-
-static void
-my_gtk_entry_set_text (void *entry, gchar *str)
-{
-	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
-}
-
 
 static void
 reply_cb (gint val, gpointer data)

@@ -91,11 +91,8 @@ boot_value_at (ETableModel *etc, int col, int row, void *data)
 
 	switch (col)
 	{
-	case COL_DEFAULT:
-		return boot_value_default (node);
-		break;
 	case COL_LABEL:
-		return boot_value_label (node);
+		return boot_value_label_default (node);
 		break;
 	case COL_TYPE:
 		return boot_value_type (node);
@@ -223,34 +220,27 @@ init_array (void)
 }
 
 void *
-boot_value_default (xmlNodePtr node)
+boot_value_label_default (xmlNodePtr node)
 {
 	xmlNodePtr n;
 	gchar *def, *label;
-	gboolean ret = FALSE;
 
 	g_return_val_if_fail (node != NULL, NULL);
-	
-	n = xml_doc_get_root (tool->config);
-
-	def = xml_get_child_content (n, "default");
-	if (!def)
-		return NULL;
 
 	label = xml_get_child_content (node, "label");
 	if (!label)
-	{
-		g_free (def);
 		return NULL;
+
+	n = xml_doc_get_root (tool->config);
+
+	def = xml_get_child_content (n, "default");
+	if (def && !strcmp (def, label))
+	{
+		label = g_strdup_printf ("%s (default)", label);
+		g_free (def);
 	}
 
-	if (!strcmp (def, label))
-		ret = TRUE;
-
-	g_free (def);
-	g_free (label);
-
-	return ((void *)ret);
+	return label;
 }
 
 void *

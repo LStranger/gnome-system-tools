@@ -16,7 +16,6 @@ typedef struct {
 	GtkWidget *image_label;
 	GtkWidget *image;
 	GtkEntry *image_entry;
-	GtkToggleButton *deflt;
 
 	GtkWidget *optional;
 	GtkEntry *root;

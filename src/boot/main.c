@@ -47,6 +47,7 @@ static XstDialogSignal signals[] = {
 	{ "boot_add",      "clicked", on_boot_add_clicked },
 	{ "boot_default",  "clicked", on_boot_default_clicked },
 	{ "boot_prompt",   "toggled", on_boot_prompt_toggled },
+	{ "boot_timeout",  "changed", xst_dialog_modify_cb },
 	{ NULL }
 };
 
@@ -86,10 +87,6 @@ connect_signals ()
 	gtk_signal_connect (GTK_OBJECT (tool), "fill_xml",
 					GTK_SIGNAL_FUNC (transfer_gui_to_xml),
 					NULL);
-
-	gtk_signal_connect_object (GTK_OBJECT (tool->main_dialog), "apply",
-						  GTK_SIGNAL_FUNC (xst_tool_save),
-						  GTK_OBJECT (tool));
 
 	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change",
 					GTK_SIGNAL_FUNC (update_complexity),
