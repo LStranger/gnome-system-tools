@@ -172,14 +172,14 @@ e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 static gboolean
 update_map (GtkWidget *w, gpointer data)
 {
-   ETzMap *tzmap;
+	ETzMap *tzmap;
    
-   tzmap = (ETzMap *) data;
+	tzmap = (ETzMap *) data;
    
-   if (strlen (gtk_entry_get_text (GTK_ENTRY(w))) > 0)
-      e_tz_map_set_tz_from_name (tzmap, g_strdup (gtk_entry_get_text (GTK_ENTRY(w))));
+	if (strlen (gtk_entry_get_text (GTK_ENTRY(w))) > 0)
+		e_tz_map_set_tz_from_name (tzmap, g_strdup (gtk_entry_get_text (GTK_ENTRY(w))));
       
-   return TRUE;
+	return TRUE;
 }
                                  
 gchar *
@@ -286,24 +286,24 @@ motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 static gboolean
 out_map (GtkWidget *w, GdkEventCrossing *event, gpointer data)
 {
-   ETzMap *tzmap;
-   char *old_zone;
+	ETzMap *tzmap;
+	char *old_zone;
    
-   tzmap = (ETzMap *) data;
+	tzmap = (ETzMap *) data;
 
-   if (event->mode != GDK_CROSSING_NORMAL)
-      return FALSE;
+	if (event->mode != GDK_CROSSING_NORMAL)
+		return FALSE;
    
-   if (tzmap->point_hover && tzmap->point_hover != tzmap->point_selected)
-      e_map_point_set_color_rgba (tzmap->map, tzmap->point_hover, TZ_MAP_POINT_NORMAL_RGBA);
+	if (tzmap->point_hover && tzmap->point_hover != tzmap->point_selected)
+		e_map_point_set_color_rgba (tzmap->map, tzmap->point_hover, TZ_MAP_POINT_NORMAL_RGBA);
 
-   tzmap->point_hover = NULL;
+	tzmap->point_hover = NULL;
    
-   gtk_label_get (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label), &old_zone);
-   if (strcmp (old_zone, ""))
-      gtk_label_set_text (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label), "");
+	gtk_label_get (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label), &old_zone);
+	if (strcmp (old_zone, ""))
+		gtk_label_set_text (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label), "");
    
-   return TRUE;
+	return TRUE;
 }
    
 static gboolean
