@@ -10,7 +10,7 @@ include ../common/CommonMakefile
 toolname = shares
 bin_PROGRAMS = shares-admin
 
-SUBDIRS = component
+SUBDIRS = nautilus
 CPPFLAGS =
 INCLUDES = $(GST_TOOL_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)

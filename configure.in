@@ -115,8 +115,6 @@ PKG_CHECK_MODULES(GST_DEPENDS,[
 			   libglade-2.0 >= 1.99.5
 			   libxml-2.0 >= 2.4.12
 			   gconf-2.0 >= 2.2.0
-			   bonobo-activation-2.0 >= 2.8.0
-			   gnome-vfs-2.0 >= 2.8.0
 			   ])
 
 dnl =====================================================
@@ -263,6 +261,21 @@ dnl END: GST_LIBS & GST_FLAGS
 dnl ==================================
 
 dnl ===========================
+dnl NAUTILUS EXTENSION
+dnl ===========================
+
+PKG_CHECK_MODULES(NAUTILUS,[
+	   libnautilus-extension >= 2.9.3
+	   ])
+
+AC_SUBST(NAUTILUS_LIBS)
+AC_SUBST(NAUTILUS_CFLAGS)
+
+dnl ===========================
+dnl END: NAUTILUS EXTENSION
+dnl ===========================
+
+dnl ===========================
 dnl Configure the backends
 dnl ==========================
 
@@ -300,7 +313,7 @@ src/services/services.desktop.in
 src/services/Makefile
 src/shares/shares.desktop.in
 src/shares/Makefile
-src/shares/component/Makefile
+src/shares/nautilus/Makefile
 src/disks/disks.desktop.in
 src/disks/Makefile
 po/Makefile.in
