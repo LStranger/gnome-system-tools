@@ -451,3 +451,12 @@ xst_ui_load_etspec (const gchar *common_path, const gchar *name)
 	
 	return table_spec;
 }
+
+void
+xst_ui_entry_set_text (void *entry, const gchar *str)
+{
+	g_return_if_fail (entry != NULL);
+	g_return_if_fail (GTK_IS_ENTRY (entry));
+	
+	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
+}
