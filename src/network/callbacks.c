@@ -357,12 +357,14 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 void
 on_dns_dhcp_toggled (GtkWidget *w, gpointer null)
 {
-	char *ws[] = { "domain", "dns_list", "domain_label", "dns_list_label", NULL };
-	int i, b;
+	gchar *ws[] = { "domain", "domain_label", "dns_list", "dns_list_label",
+			"search_list", "search_list_label", NULL };
+	gint i;
+	gboolean active;
 
-	b = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
-	for (i=0; ws[i]; i++)
-		xst_dialog_widget_set_user_sensitive (tool->main_dialog, ws [i], b);
+	active = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
+	for (i = 0; ws[i]; i++)
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, ws[i], active);
 }
 
 void
