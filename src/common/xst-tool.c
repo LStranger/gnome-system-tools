@@ -489,7 +489,10 @@ report_progress (XstTool *tool, const gchar *label)
 					  GTK_SIGNAL_FUNC (report_window_close_cb), NULL);
 		gtk_widget_show_all (tool->report_window);
 		while (gtk_events_pending ())
+		{
 			gtk_main_iteration ();
+			usleep (5000);
+		}
 	}
 	
 	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
@@ -687,17 +690,25 @@ xst_tool_read_xml_from_backend (XstTool *tool)
 	if (!tool->xml_document)
 		return NULL;
 	
+	fcntl (tool->backend_read_fd, F_SETFL, O_NONBLOCK);
+
 	while (! xst_tool_end_of_request (tool->xml_document)) {
-		t = read (tool->backend_read_fd, buffer, sizeof (buffer) - 1);
-		if (t == 0)
-			break;
-		buffer [t] = 0;
-		g_string_append (tool->xml_document, buffer);
-		
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
+
+		t = read (tool->backend_read_fd, buffer, sizeof (buffer) - 1);
+
+		if (t == 0)
+			break;
+		if (t == -1)
+			t = 0;
+
+		buffer [t] = 0;
+		g_string_append (tool->xml_document, buffer);
 	}
 	
+	fcntl (tool->backend_read_fd, F_SETFL, 0);
+
 	if (tool->xml_document->str[0] == '<') {
 		xml = xmlParseDoc (tool->xml_document->str);
 	} else {

@@ -1,3 +1,10 @@
+2001-07-26  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-tool.c (xst_tool_read_xml_from_backend): Hack to allow interface
+	  to update while waiting for XML from backend.
+	  (report_progress): Introduce a delay to allow events based on replies
+	  from X server to be processed (prevents blank window here).
+
 Wed Jul 25 14:43:43 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-tool.c (xst_tool_init_backend): Remove ACCESS_SIMULATED
