@@ -122,25 +122,27 @@ table_value_active (xmlNodePtr node, gint runlevel)
 	xmlNodePtr rl;
 	gchar *number, *action;
 
-	for (rl = gst_xml_element_find_first (runlevels, "runlevel");
-	     rl != NULL;
-	     rl = gst_xml_element_find_next (rl, "runlevel"))
-	{
-		number = gst_xml_get_child_content (rl, "number");
+	if (runlevels) {
+		for (rl = gst_xml_element_find_first (runlevels, "runlevel");
+		     rl != NULL;
+		     rl = gst_xml_element_find_next (rl, "runlevel"))
+		{
+			number = gst_xml_get_child_content (rl, "number");
 
-		if (g_ascii_isdigit (number[0])) {
-			if (atoi (number) == runlevel) {
-				action = gst_xml_get_child_content (rl, "action");
+			if (g_ascii_isdigit (number[0])) {
+				if (atoi (number) == runlevel) {
+					action = gst_xml_get_child_content (rl, "action");
 
-				if (strcmp (action, "start") == 0) {
-					g_free (action);
+					if (strcmp (action, "start") == 0) {
+						g_free (action);
 
-					value = TRUE;
+						value = TRUE;
+					}
 				}
 			}
-		}
 
-		g_free (number);
+			g_free (number);
+		}
 	}
 
 	return value;
