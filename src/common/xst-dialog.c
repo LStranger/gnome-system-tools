@@ -549,10 +549,9 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	i = gnome_stock_pixmap_widget (w, GNOME_STOCK_PIXMAP_HELP);
 	gtk_widget_show (i);
 	gtk_container_add (GTK_CONTAINER (w), i);
-
-	
-	w = glade_xml_get_widget (xml, "help");
 	gtk_signal_connect (GTK_OBJECT (w), "clicked", help_cb, dialog);
+	/* FIXME: help button hidden until the help files are ready. */
+	gtk_widget_hide (w);
 
 	w = glade_xml_get_widget (xml, "complexity");
 	gtk_signal_connect (GTK_OBJECT (w), "clicked", complexity_cb, dialog);
