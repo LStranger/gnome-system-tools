@@ -33,8 +33,8 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 
-GtkWidget *
-xst_ui_list_get_list_item_by_name (GtkList *list, const gchar *label)
+static GtkWidget *
+get_list_item_by_name (GList *list, const gchar *label)
 {
 	GList *items, *children;
 	GtkWidget *listitem;
@@ -42,9 +42,8 @@ xst_ui_list_get_list_item_by_name (GtkList *list, const gchar *label)
 	GtkWidget *child;
 	
 	g_return_val_if_fail (list != NULL, NULL);
-	g_return_val_if_fail (GTK_IS_LIST (list), NULL);
 
-	items = gtk_container_children (GTK_CONTAINER (list));
+	items = list;
 
 	while (items)
 	{
@@ -71,6 +70,19 @@ xst_ui_list_get_list_item_by_name (GtkList *list, const gchar *label)
 	}
 
 	return NULL;
+}
+
+GtkWidget *
+xst_ui_list_get_list_item_by_name (GtkList *list, const gchar *label)
+{
+	GList *items;
+	
+	g_return_val_if_fail (list != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_LIST (list), NULL);
+
+	items = gtk_container_children (GTK_CONTAINER (list));
+
+	return get_list_item_by_name (items, label);
 }
 
 void
@@ -135,4 +147,46 @@ GtkWidget *xst_ui_create_image_widget(gchar *name,
 		return alignment;
 	} else
 		return NULL;
+}
+
+/**
+ * xst_ui_option_menu_get_selected_row: Returns index of selected label in GtkOptionMenu.
+ * @option_menu: GtkOptionMenu to examine.
+ *
+ * This is a hack that makes it easier (possible) to define GtkOptionMenu choices in Glade
+ * without adding special-case code to add signals to every GtkMenuItem that invoke
+ * handlers based on the item selected. It is a bit rough, we could probably do without
+ * comparing labels and just go directly for widget pointers, which would allow us to deal
+ * with any kind of widget. Glade just does labels, though.
+ *
+ * Since the selected widget is taken out of the menu's list and placed in the OptionMenu
+ * container, we temporarily select row 0, and when we find out which row is selected, we
+ * re-select it. If anyone knows how to do this better, tell me how.
+ *
+ * Return value: List index in the range [0 .. n - 1], or -1 if the selected item is not a
+ * label.
+ **/
+gint
+xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
+{
+	GtkWidget *selected, *found;
+	GList *menu_items;
+	gchar *label;
+	gint row;
+
+	selected = GTK_WIDGET (GTK_BIN (option_menu)->child);
+	if (!GTK_IS_LABEL (selected))
+		return -1;
+
+	gtk_label_get (GTK_LABEL (selected), &label);
+	gtk_option_menu_set_history (option_menu, 0);
+	menu_items = GTK_MENU_SHELL (gtk_option_menu_get_menu (option_menu))->children;
+
+	found = get_list_item_by_name (menu_items, label);
+	if (!found)
+		return 0;
+
+	row = g_list_index (menu_items, found);
+	gtk_option_menu_set_history (option_menu, row);
+	return row;
 }

@@ -1,3 +1,11 @@
+2001-04-04  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-ui.[ch] (get_list_item_by_name): Moved out of
+	  xst_ui_list_get_list_item_by_name ().
+		(xst_ui_list_get_list_item_by_name): Use get_list_item_by_name ().
+		(xst_ui_option_menu_get_selected_row): Implement. Returns index of
+		selected item in a GtkOptionMenu. Uses get_list_item_by_name ().
+
 2001-04-03  Hans Petter Jansson  <hpj@ximian.com>
 
 	* xst-dialog.h: Fixed proto for xst_dialog_add_apply_hook ().
