@@ -49,8 +49,8 @@ extern XstTool *tool;
 /* Local globals */
 /* Static prototypes */
 
-//static void group_settings_prepare (ug_data *ud);
-//static GList *get_group_users (xmlNodePtr group_node);
+/*static void group_settings_prepare (ug_data *ud);
+  static GList *get_group_users (xmlNodePtr group_node);*/
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 
@@ -76,48 +76,27 @@ get_root_node (gint tbl)
 
 	switch (tbl)
 	{
-	case TABLE_USER:
+	case NODE_USER:
 		node = xst_xml_element_find_first (root, "userdb");
 		break;
-	case TABLE_GROUP:
+	case NODE_GROUP:
 		node = xst_xml_element_find_first (root, "groupdb");
 		break;
-/*	case TABLE_NET_USER:
+/*	case NODE_NET_USER:
 		node = xst_xml_element_find_first (root, "nis_userdb");
 		break;
-	case TABLE_NET_GROUP:
+	case NODE_NET_GROUP:
 		node = xst_xml_element_find_first (root, "nis_groupdb");
 		break;*/
+	case NODE_PROFILE:
+		node = xst_xml_element_find_first (root, "profiledb");
+		break;
 	default:
 		node = NULL;
 		break;
 	}
 
 	return node;
-}
-
-xmlNodePtr
-get_user_root_node (void)
-{
-	return xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "userdb");
-}
-
-xmlNodePtr
-get_group_root_node (void)
-{
-	return xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "groupdb");
-}
-
-xmlNodePtr
-get_nis_group_root_node (void)
-{
-	return xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "nis_groupdb");
-}
-
-xmlNodePtr
-get_nis_user_root_node (void)
-{
-	return xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "nis_userdb");
 }
 
 xmlNodePtr
@@ -361,26 +340,6 @@ get_node_by_data (xmlNodePtr dbnode, const gchar *field, const gchar *fdata)
 	return NULL;
 }
 
-GList *
-get_user_list (gchar *field, xmlNodePtr group_node)
-{
-	GList *list = NULL;
-	xmlNodePtr node, u;
-
-	node = get_corresp_field (group_node);
-
-	for (u = xst_xml_element_find_first (node, "user");
-	     u;
-	     u = xst_xml_element_find_next (u, "user"))
-	{
-
-		if (check_node_visibility (u))
-			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
-	}
-
-	return list;
-}
-
 /* for GLists of strings only */
 GList *
 my_g_list_remove_duplicates (GList *list1, GList *list2)
@@ -501,28 +460,6 @@ find_new_key (xmlNodePtr parent)
 }
 
 /* User related */
-
-
-void
-user_passwd_dialog_prepare (xmlNodePtr node)
-{
-	GtkWidget *w0;
-	gchar *txt, *name;
-
-	name = xst_xml_get_child_content (node, "login");
-
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
-	txt = g_strdup_printf (_("Password for User %s"), name);
-	g_free (name);
-	gtk_window_set_title (GTK_WINDOW (w0), txt);
-	g_free (txt);
-	gtk_widget_show (w0);
-	g_object_set_data (G_OBJECT (w0), "name", node);
-
-#ifndef HAVE_LIBCRACK
-	gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "user_passwd_quality"));
-#endif
-}
 
 #if 0
 /* Not used at the moment, if'ed out to get rid of complier warning. */

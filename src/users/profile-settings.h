@@ -1,8 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* table.h: this file is part of users-admin, a ximian-setup-tool frontend 
+/* profile-settings.h: this file is part of users-admin, a gnome-system-tool frontend 
  * for user administration.
  * 
- * Copyright (C) 2001 Ximian, Inc.
+ * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -18,26 +18,24 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>
+ * Authors: Carlos Garnacho Parro <garnacho@tuxerver.net>.
  */
 
-#ifndef __TABLE_H
-#define __TABLE_H
+enum {
+	PROFILE_WIDGET_ENTRY,
+	PROFILE_WIDGET_SPIN_BUTTON,
+	PROFILE_WIDGET_OPTION_MENU
+};
 
-#include <gnome.h>
+typedef struct {
+	gchar *name;
+	gchar *xml_tag;
+	gint widget_type;
+} ProfileWidget;
+		
 
-#include "user_group.h"
-
-#define COLOR_NORMAL "black"
-
-/* User and group lists creation function */
-GtkWidget*		create_gtk_tree_list		(GtkWidget*);
-void			populate_gtk_tree_list		(GtkTreeView*, GList*);
-
-/* User and group tables manipulation functions */
-void			construct_tables		(void);
-void			update_tables_complexity	(XstDialogComplexity);
-void			populate_all_tables		(void);
-xmlNodePtr		get_selected_row_node		(gint);
-
-#endif /* __TABLE_H */
+void       profile_settings_clear_dialog  (void);
+void       profile_settings_save_data     (xmlNodePtr);
+gchar*     profile_settings_check         (void);
+void       profile_settings_add_shells    (void);
+gboolean   profile_delete                 (xmlNodePtr);

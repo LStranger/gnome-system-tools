@@ -1,8 +1,8 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* table.h: this file is part of users-admin, a ximian-setup-tool frontend 
+/* profiless-table.h: this file is part of users-admin, a gnome-system-tool frontend 
  * for user administration.
  * 
- * Copyright (C) 2001 Ximian, Inc.
+ * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -18,26 +18,28 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>
+ * Authors: Carlos Garnacho Parro <garnacho@tuxerver.net>
  */
 
-#ifndef __TABLE_H
-#define __TABLE_H
+#ifndef _PROFILES_TABLE_H
+#define _PROFILES_TABLE_H
 
-#include <gnome.h>
+enum {
+	   COL_PROFILE_NAME,
+	   COL_PROFILE_COMMENT,
+	   COL_PROFILE_POINTER,
 
-#include "user_group.h"
+	   COL_PROFILE_LAST
+};
 
-#define COLOR_NORMAL "black"
+typedef struct 
+{
+	gchar *name;
+	gboolean advanced_state_showable;
+	gboolean basic_state_showable;
+} ProfilesTableConfig;
 
-/* User and group lists creation function */
-GtkWidget*		create_gtk_tree_list		(GtkWidget*);
-void			populate_gtk_tree_list		(GtkTreeView*, GList*);
+void   profiles_table_construct       (void);
+void   profiles_table_update_content  (void);
 
-/* User and group tables manipulation functions */
-void			construct_tables		(void);
-void			update_tables_complexity	(XstDialogComplexity);
-void			populate_all_tables		(void);
-xmlNodePtr		get_selected_row_node		(gint);
-
-#endif /* __TABLE_H */
+#endif /* _PROFILES_TABLE_H */

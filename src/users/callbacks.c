@@ -39,6 +39,8 @@
 #include "users-table.h"
 #include "group-settings.h"
 #include "groups-table.h"
+#include "profile-settings.h"
+#include "profiles-table.h"
 #include "search-bar/search-bar.h"
 
 extern XstTool *tool;
@@ -69,35 +71,37 @@ on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
 void
 counter (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-   int *cont;
+	int *cont = (int *) data;
 
-   cont = (int *) data;
-
-   (*cont) ++;
+	(*cont) ++;
 }
 
 void
 on_table_clicked (GtkTreeSelection *selection, gpointer data)
 {
-   GtkTreeView *treeview;
-   int cont;
+	GtkTreeView *treeview;
+	int cont;
 
-   treeview = (GtkTreeView *) data;
-   cont = 0;
-   gtk_tree_selection_selected_foreach (selection, counter , &cont);
+	treeview = (GtkTreeView *) data;
+	cont = 0;
+	gtk_tree_selection_selected_foreach (selection, counter , &cont);
    
-   if (users_table == GTK_WIDGET (treeview))
-      actions_set_sensitive (TABLE_USER, TRUE);
-   else
-      actions_set_sensitive (TABLE_GROUP, TRUE);
-   if (cont > 1)
-   {
-      if (users_table == GTK_WIDGET (treeview))
-	 xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", FALSE);
-      else
-	 xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", FALSE);
-   }
-   
+	if (users_table == GTK_WIDGET (treeview))
+		actions_set_sensitive (NODE_USER, TRUE);
+	else if (groups_table == GTK_WIDGET (treeview))
+		actions_set_sensitive (NODE_GROUP, TRUE);
+	else
+		actions_set_sensitive (NODE_PROFILE, TRUE);
+	
+	if (cont > 1)
+	{
+		if (users_table == GTK_WIDGET (treeview))
+			xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", FALSE);
+		else if (groups_table == GTK_WIDGET (treeview))
+			xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", FALSE);
+		else
+			xst_dialog_widget_set_user_sensitive (tool->main_dialog, "profile_settings", FALSE);
+	}
 }
 
 /* Users Tab */
@@ -112,7 +116,7 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	ud = g_new (ug_data, 1);
 
 	ud->is_new = TRUE;
-	ud->table = TABLE_USER;
+	ud->table = NODE_USER;
 	ud->node = get_root_node (ud->table);
 
 	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED) {
@@ -135,8 +139,8 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	ud = g_new (ug_data, 1);
 
 	ud->is_new = FALSE;
-	ud->table = TABLE_USER;
-	ud->node = get_selected_row_node (TABLE_USER);
+	ud->table = NODE_USER;
+	ud->node = get_selected_row_node (NODE_USER);
 
 	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED) {
 		/* user settings dialog */
@@ -179,7 +183,16 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	}
 
 	gtk_tree_selection_unselect_all (selection);
-	actions_set_sensitive (TABLE_USER, FALSE);
+	actions_set_sensitive (NODE_USER, FALSE);
+}
+
+void
+on_profile_settings_dialog_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkWidget *profile_window = xst_dialog_get_widget (tool->main_dialog, "profiles_dialog");
+	
+	gtk_dialog_run (GTK_DIALOG (profile_window));
+	gtk_widget_hide (profile_window);
 }
 
 /* Groups tab */
@@ -187,7 +200,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 void
 on_group_table_clicked (GtkTreeSelection *selection, gpointer user_data)
 {
-	actions_set_sensitive (TABLE_GROUP, TRUE);
+	actions_set_sensitive (NODE_GROUP, TRUE);
 }
 
 void
@@ -200,7 +213,7 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	gd = g_new (ug_data, 1);
 
 	gd->is_new = TRUE;
-	gd->table = TABLE_GROUP;
+	gd->table = NODE_GROUP;
 	gd->node = get_root_node (gd->table);
 
 	group_new_prepare (gd);
@@ -214,8 +227,8 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	gd = g_new (ug_data, 1);
 
 	gd->is_new = FALSE;
-	gd->table = TABLE_GROUP;
-	gd->node = get_selected_row_node (TABLE_GROUP);
+	gd->table = NODE_GROUP;
+	gd->node = get_selected_row_node (NODE_GROUP);
 
 	group_settings_prepare (gd);
 }
@@ -248,7 +261,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	}
 
 	gtk_tree_selection_unselect_all (selection);
-	actions_set_sensitive (TABLE_GROUP, FALSE);
+	actions_set_sensitive (NODE_GROUP, FALSE);
 }
 
 #ifdef NIS
@@ -270,12 +283,12 @@ on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 	if (!strcmp (node->name, "user"))
 	{
 		delete = check_login_delete (node);
-		tbl = TABLE_NET_USER;
+		tbl = NODE_NET_USER;
 	}
 	else if (!strcmp (node->name, "group"))
 	{
 		delete = check_group_delete (node);
-		tbl = TABLE_NET_GROUP;
+		tbl = NODE_NET_GROUP;
 	}
 
 	if (delete)
@@ -284,7 +297,7 @@ on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 		if (delete_selected_node (tbl))
 			xst_xml_element_destroy (node);
 
-		actions_set_sensitive (TABLE_GROUP, FALSE);
+		actions_set_sensitive (NODE_GROUP, FALSE);
 	}
 }
 
@@ -293,7 +306,7 @@ on_network_user_new_clicked (GtkButton *button, gpointer user_data)
 {
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	user_settings_prepare (get_root_node (TABLE_NET_USER));
+	user_settings_prepare (get_root_node (NODE_NET_USER));
 }
 
 void
@@ -306,7 +319,7 @@ on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 	ud = g_new (ug_data, 1);
 
 	ud->new = TRUE;
-	ud->table = TABLE_NET_GROUP;
+	ud->table = NODE_NET_GROUP;
 	ud->node = get_root_node (ud->table);
 
 	group_new_prepare (ud);
@@ -417,6 +430,123 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	}
 }
 
+/* Profile settings dialog callbacks */
+void
+on_profile_settings_dialog_delete_event (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *dialog = xst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
+	xmlNodePtr node = g_object_get_data (G_OBJECT (dialog), "data");
+
+	if (node != NULL) {
+		/* we are in settings mode, we have to unref the data */
+		g_object_steal_data (G_OBJECT (dialog), "data");
+	}
+	
+	profile_settings_clear_dialog ();
+	gtk_widget_hide (dialog);
+}
+
+void
+on_profile_settings_ok_clicked (GtkButton *button, gpointer data)
+{
+	GtkWidget *dialog = xst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
+	xmlNodePtr node = g_object_get_data (G_OBJECT (dialog), "data");
+	gchar *error = profile_settings_check ();
+
+	if (error != NULL) {
+		/* the profile cannot be added/modified, show the error and exit */
+		show_error_message ("profile_settings_dialog", error);
+	} else {
+		/* the profile is OK, we can add/modify it */
+		if (node == NULL) {
+			/* it's a new profile, we have to create a node before saving changes */
+			node = xst_xml_element_add (get_root_node (NODE_PROFILE), "profile");
+		}
+
+		profile_settings_save_data (node);
+
+		profile_settings_clear_dialog ();
+		gtk_widget_hide (dialog);
+
+		profiles_table_update_content ();
+
+		xst_dialog_modify (tool->main_dialog);
+	}
+}
+
+/* Profile settings callbacks */
+
+void
+on_profile_new_clicked (GtkButton *button, gpointer data)
+{
+	GtkWidget *dialog = xst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
+
+	profile_settings_add_shells ();
+	profile_settings_add_groups ();
+
+	gtk_widget_show (dialog);
+}
+
+
+void
+on_profile_settings_clicked (GtkButton *button, gpointer data)
+{
+	GtkWidget *dialog =xst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
+	GtkWidget *profiles_table = xst_dialog_get_widget (tool->main_dialog, "profiles_table");
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (profiles_table));
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+	GtkTreePath *path;
+	xmlNodePtr node;
+
+	gtk_tree_view_get_cursor (GTK_TREE_VIEW (profiles_table), &path, NULL);
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter, COL_PROFILE_POINTER, &node, -1);
+
+	profile_settings_add_shells ();
+	profile_settings_add_groups ();
+	profile_settings_set_data (node);
+
+	g_object_set_data (G_OBJECT (dialog), "data", node);
+
+	gtk_widget_show (dialog);
+}
+
+static void
+on_profile_delete_clicked_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+	xmlNodePtr node;
+
+	g_return_if_fail (xst_tool_get_access (tool));
+	
+	gtk_tree_model_get (model, iter, COL_PROFILE_POINTER, &node, -1);
+
+	if ((profile_delete (node)) == TRUE)
+		* (gboolean *) data = TRUE;
+}
+
+void
+on_profile_delete_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkWidget *profiles_table = xst_dialog_get_widget (tool->main_dialog, "profiles_table");
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (profiles_table));
+	gboolean deleted = FALSE;
+	
+	gtk_tree_selection_selected_foreach (selection, on_profile_delete_clicked_foreach, &deleted);
+	
+	/* At this point changed will be TRUE if any of the selected users has been deleted,
+	 * the apply button must be set sensitive and the table must be updated */
+	if (deleted == TRUE) {
+		xst_dialog_modify (tool->main_dialog);
+		profiles_table_update_content ();
+	}
+
+	gtk_tree_selection_unselect_all (selection);
+	actions_set_sensitive (NODE_PROFILE, FALSE);
+}
+
+/* general callbacks */
+
 void
 on_add_remove_button_clicked (GtkButton *button, gpointer user_data)
 {
@@ -491,23 +621,28 @@ actions_set_sensitive (gint table, gboolean state)
 {
 	switch (table)
 	{
-	case TABLE_USER:
+	case NODE_USER:
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_new",      TRUE);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_delete",   state);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", state);
 		break;
-	case TABLE_GROUP:
+	case NODE_GROUP:
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_new",      TRUE);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_delete",   state);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", state);
 		break;
-/*	case TABLE_NET_USER:
-	case TABLE_NET_GROUP:
+/*	case NODE_NET_USER:
+	case NODE_NET_GROUP:
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_group_new", TRUE);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_user_new",  TRUE);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_delete",    state);
 		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_settings",  state);
 		break;*/
+	case NODE_PROFILE:
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "profile_new",      TRUE);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "profile_settings", state);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "profile_delete",   state);
+		break;
 	default:
 		g_warning ("actions_set_sensitive: Shouldn't be here.");
 		return;

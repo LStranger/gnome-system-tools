@@ -7,6 +7,7 @@
  * Authors:
  *  Chris Lahey <clahey@ximian.com>
  *  Ettore Perazzoli <ettore@ximian.com>
+ *  Carlos Garnacho Parro <garnacho@tuxerver.net> (GTK2 adaption)
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as

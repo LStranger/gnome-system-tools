@@ -37,6 +37,7 @@ void on_table_clicked (GtkTreeSelection*, gpointer);
 void on_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_user_settings_clicked (GtkButton *button, gpointer data);
 void on_user_delete_clicked (GtkButton *button, gpointer user_data);
+void on_profile_settings_dialog_clicked (GtkButton *, gpointer);
 
 /* Main dialog callbacks, groups tab */
 void on_group_new_clicked (GtkButton*, gpointer);
@@ -63,6 +64,15 @@ void on_user_settings_passwd_changed (GtkEntry*, gpointer);
 void on_group_settings_dialog_show (GtkWidget*, gpointer);
 void on_group_settings_dialog_delete_event (GtkWidget*, gpointer);
 void on_group_settings_ok_clicked (GtkButton*, gpointer);
+
+/* Profile settings dialog callbacks */
+void on_profile_settings_dialog_delete_event (GtkWidget*, gpointer);
+void on_profile_settings_ok_clicked (GtkButton*, gpointer);
+
+/* profiles dialog callbacks */
+void on_profile_new_clicked (GtkButton*, gpointer);
+void on_profile_settings_clicked (GtkButton*, gpointer);
+void on_profile_delete_clicked (GtkButton *, gpointer);
 
 /* general callbacks */
 void on_add_remove_button_clicked (GtkButton *button, gpointer user_data);

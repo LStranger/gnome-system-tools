@@ -60,7 +60,7 @@ static XstDialogSignal signals[] = {
 	{ "user_passwd_random_new",		"clicked",		G_CALLBACK (on_user_settings_passwd_random_new) },
 	{ "user_passwd_entry1",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
 	{ "user_passwd_entry2",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
-/*	{ "user_settings_profile_button",	"clicked",		G_CALLBACK (profile_table_run) },*/
+/*	{ "user_settings_profile_button",	"clicked",		G_CALLBACK (on_profile_settings_dialog_clicked) },*/
 	
 	/* Group settings dialog callbacks */
 	{ "group_settings_dialog",		"delete_event",  	G_CALLBACK (on_group_settings_dialog_delete_event) },
@@ -70,11 +70,22 @@ static XstDialogSignal signals[] = {
 	{ "group_settings_add",			"clicked",       	G_CALLBACK (on_add_remove_button_clicked) },
 	{ "group_settings_remove",		"clicked",       	G_CALLBACK (on_add_remove_button_clicked) },
 
+	/* Profile settings dialog callbacks */
+	{ "profile_settings_dialog",            "delete_event",         G_CALLBACK (on_profile_settings_dialog_delete_event) },
+	{ "profile_settings_cancel",            "clicked",              G_CALLBACK (on_profile_settings_dialog_delete_event) },
+	{ "profile_settings_ok",                "clicked",              G_CALLBACK (on_profile_settings_ok_clicked) },
+	
+	
+	/* Profile dialog callbacks */
+	{ "profile_new",                        "clicked",              G_CALLBACK (on_profile_new_clicked) },
+	{ "profile_settings",                   "clicked",              G_CALLBACK (on_profile_settings_clicked) },
+	{ "profile_delete",                     "clicked",              G_CALLBACK (on_profile_delete_clicked) },
+
 	/* Main dialog callbacks, users tab */
 	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
 	{ "user_settings",             		"clicked",       	G_CALLBACK (on_user_settings_clicked) },
 	{ "user_delete",                	"clicked",       	G_CALLBACK (on_user_delete_clicked) },
-/*	{ "user_profiles",               	"clicked",       	G_CALLBACK (profile_table_run) },*/
+	{ "user_profiles",               	"clicked",       	G_CALLBACK (on_profile_settings_dialog_clicked) },
 	
 	/* Main dialog callbacks, groups tab */
 	{ "group_new",				"clicked",		G_CALLBACK (on_group_new_clicked) },
@@ -89,13 +100,15 @@ static const XstWidgetPolicy policies[] = {
 	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "user_settings",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 /* Hiding user_profiles for now, until next release when profiles UI is given a face-lift */
-	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_HIDDEN, TRUE,  TRUE  },
 	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_HIDDEN,    TRUE,  TRUE  },
 	{ "groups_table",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "group_new",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "group_delete",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "group_settings",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "group_settings_name_label", XST_WIDGET_MODE_SENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE, TRUE  },
+	{ "profile_new",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "profile_delete",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "profile_settings",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "network_user_new",       XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "network_group_new",      XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "network_delete",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },

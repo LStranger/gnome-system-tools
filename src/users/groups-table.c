@@ -146,7 +146,7 @@ void
 populate_groups_table (void)
 {
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (groups_table));
-	xmlNodePtr root = get_group_root_node ();
+	xmlNodePtr root = get_root_node (NODE_GROUP);
 	GtkTreeIter iter;
 	xmlNodePtr group;
 	

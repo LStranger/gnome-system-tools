@@ -33,6 +33,7 @@
 #include "table.h"
 #include "users-table.h"
 #include "groups-table.h"
+#include "profiles-table.h"
 #include "user_group.h"
 #include "callbacks.h"
 #include "user-group-xml.h"
@@ -118,6 +119,7 @@ construct_tables (void)
 {
 	construct_users_table ();
 	construct_groups_table ();
+	construct_profiles_table ();
 }
 
 void 
@@ -131,6 +133,7 @@ populate_all_tables (void)
 {
 	populate_users_table ();
 	populate_groups_table ();
+	populate_profiles_table ();
 }
 
 void 
@@ -150,11 +153,11 @@ xmlNodePtr get_selected_row_node (gint tbl)
 	gint column;
 	
 	switch (tbl) {
-		case TABLE_USER:
+		case NODE_USER:
 			table = GTK_TREE_VIEW (users_table);
 			column = COL_USER_POINTER;
 			break;
-		case TABLE_GROUP:
+		case NODE_GROUP:
 			table = GTK_TREE_VIEW (groups_table);
 			column = COL_GROUP_POINTER;
 			break;

@@ -556,13 +556,13 @@ get_group_users (xmlNodePtr group_node)
 }
 
 GList *
-get_list_from_node (gchar *field, xmlNodePtr node)
+get_list_from_node (gchar *field, gint table)
 {
 	GList *list = NULL;
 	xmlNodePtr n, u;
 	gchar *key;
 
-	n = get_corresp_field (node);
+	n = get_root_node (table);
 
 	if (!n)
 		return NULL;

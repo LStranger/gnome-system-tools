@@ -52,7 +52,7 @@ static void
 create_groups_lists (xmlNodePtr node, GList **user_settings_all_list, GList **user_settings_members_list)
 {
 	*user_settings_members_list = user_get_groups (node);
-	*user_settings_all_list = my_g_list_remove_duplicates (get_list_from_node ("name", node), *user_settings_members_list);
+	*user_settings_all_list = my_g_list_remove_duplicates (get_list_from_node ("name", NODE_GROUP), *user_settings_members_list);
 }
 
 static void
@@ -179,7 +179,7 @@ groups_combo_setup (gchar *entry)
 
 	ud = g_object_get_data (G_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog")), "data");
 
-	groups = get_list_from_node ("name", ud->node);
+	groups = get_list_from_node ("name", NODE_GROUP);
 	
 	g_return_if_fail (groups != NULL);
 	

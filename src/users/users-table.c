@@ -30,6 +30,7 @@
 
 #include "xst.h"
 
+#include "table.h"
 #include "users-table.h"
 #include "user_group.h"
 #include "callbacks.h"
@@ -160,7 +161,7 @@ void
 populate_users_table (void)
 {
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
-	xmlNodePtr root = get_user_root_node ();
+	xmlNodePtr root = get_root_node (NODE_USER);
 	GtkTreeIter iter;
 	xmlNodePtr user;
 	

@@ -44,7 +44,7 @@ static void
 create_users_lists (xmlNodePtr node, GList **group_settings_all_list, GList **group_settings_members_list)
 {
 	*group_settings_members_list = get_group_users (node);
-	*group_settings_all_list = my_g_list_remove_duplicates (get_list_from_node ("login", node), *group_settings_members_list);
+	*group_settings_all_list = my_g_list_remove_duplicates (get_list_from_node ("login", NODE_USER), *group_settings_members_list);
 }
 
 

@@ -30,7 +30,9 @@ users_admin_SOURCES = \
 	users-table.c users-table.h \
 	groups-table.c groups-table.h \
 	table.c table.h  \
-	user-group-xml.c user-group-xml.h 
+	user-group-xml.c user-group-xml.h \
+	profiles-table.c profiles-table.h \
+	profile-settings.c profile-settings.h
 
 toolpixmaps =
 etspecs = 

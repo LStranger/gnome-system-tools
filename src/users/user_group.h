@@ -32,6 +32,15 @@
 
 #define IDMAX 100000
 
+enum {
+	NODE_USER,
+	NODE_GROUP,
+	NODE_DEFAULT,
+	NODE_NET_GROUP,
+	NODE_NET_USER,
+	NODE_PROFILE
+};
+
 typedef struct
 {
 	xmlNodePtr node;
@@ -40,10 +49,6 @@ typedef struct
 } ug_data;
 
 xmlNodePtr get_root_node (gint tbl);
-xmlNodePtr get_user_root_node (void);
-xmlNodePtr get_group_root_node (void);
-xmlNodePtr get_nis_group_root_node (void);
-xmlNodePtr get_nis_user_root_node (void);
 xmlNodePtr get_db_node (xmlNodePtr node);
 gchar *my_xst_xml_element_get_content (xmlNodePtr node);
 gboolean check_node_visibility (xmlNodePtr node);
@@ -58,19 +63,9 @@ gchar    *check_user_shell (xmlNodePtr node, const gchar *val);
 gboolean get_min_max (xmlNodePtr db_node, gint *min, gint *max);
 xmlNodePtr get_corresp_field (xmlNodePtr node);
 xmlNodePtr get_node_by_data (xmlNodePtr dbnode, const gchar *field, const gchar *fdata);
-GList *get_user_list (gchar *field, xmlNodePtr group_node);
 GList *my_g_list_remove_duplicates (GList *list1, GList *list2);
 gchar *find_new_id (xmlNodePtr parent);
 gchar *find_new_key (xmlNodePtr parent);
-
-/* User related */
-/*
-void settings_prepare (ug_data *ud);
-void user_new_prepare (ug_data *ud);
-void user_passwd_dialog_prepare (xmlNodePtr node);
-gboolean check_login_delete (xmlNodePtr node);
-*/
-/* Group related */
 
 /* Helpers */
 gboolean is_valid_name (const gchar*);

@@ -96,7 +96,7 @@ void		user_update_xml		(xmlNodePtr, UserAccountData*, gboolean);
 void		del_user_groups		(xmlNodePtr);
 
 GList *		get_group_users		(xmlNodePtr);
-GList *		get_list_from_node	(gchar*, xmlNodePtr);
+GList *		get_list_from_node	(gchar*, gint);
 GList *		get_profile_list	(void);
 
 gchar*		group_xml_get_gid	(xmlNodePtr, gchar*);
