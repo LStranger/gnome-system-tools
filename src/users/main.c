@@ -257,10 +257,6 @@ create_searchbar (void)
 void
 quit_cb (XstTool *tool, gpointer data)
 {
-	g_print("closing and cleaning\n");
-
-	clear_all_tables ();
-	destroy_tables ();
 }
 
 int
