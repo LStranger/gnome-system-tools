@@ -1,4 +1,27 @@
+2001-05-15  Tambet Ingo  <tambet@ximian.com>
+
+	* user_group.c (user_account_add): Removed, unified with (user_account_save).
+
+	* user_settings.c (setup_advanced_add): Implement.
+	(setup_basic_add): Implement.
+	(setup_basic): Implement.
+	(setup_advanced): Implement.
+
+	* user-group-xml.c (user_set_groups): Don't modify group GSList here!
+
+	* user_group.c (user_account_get_default): strdup profile fields to avoid memory corruption.
+
 2001-05-14  Tambet Ingo  <tambet@ximian.com>
+
+	* profile.c (pro_name_changed): Moved here from callbacks.c
+	(pro_del_clicked): Ditto.
+	(pro_ask_name): Ditto.
+	(pro_prepare): Ditto.
+	(pro_new_clicked): Ditto.
+	(pro_copy_clicked): Ditto.
+	(profile_tab_connect_signals): Implement. Add xst_dialog_modify callbacks.
+	(profile_update_ui): Block those signals until we change ui programmatically.
+	(profile_table_run): Implement. 
 
 	* user-account-editor.c: New file.
 

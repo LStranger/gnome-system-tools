@@ -33,14 +33,19 @@ typedef struct {
 	GtkWidget *top;
 	UserAccount *account;
 	GladeXML *xml;
-	
+
+	GtkWidget *basic_frame;
 	GtkEntry *name;
 	GtkEntry *comment;
 	GtkEntry *home;
 	GtkCombo *shell;
 	GtkSpinButton *uid;
 	GtkWidget *advanced;
+	GtkWidget *profile_box;
+	GtkOptionMenu *profile_menu;
 
+	GtkWidget *group_box;
+	GtkWidget *group_extra;
 	GtkCombo  *group;
 	GtkCList  *all;
 	GtkCList  *member;
@@ -48,6 +53,7 @@ typedef struct {
 	GtkWidget *remove;
 	GtkWidget *set_primary;
 
+	GtkWidget *pwd_frame;
 	GtkToggleButton *quality;
 	GtkEntry *pwd1;
 	GtkEntry *pwd2;
@@ -57,7 +63,7 @@ typedef struct {
 	GtkSpinButton *days;
 } UserAccountGui;
 
-UserAccountGui *user_account_gui_new     (UserAccount *account);
+UserAccountGui *user_account_gui_new     (UserAccount *account, GtkWidget *parent);
 void            user_account_gui_setup   (UserAccountGui *gui, GtkWidget *top);
 gboolean        user_account_gui_save    (UserAccountGui *gui);
 void            user_account_gui_error   (GtkWindow *parent, gchar *error);

@@ -42,7 +42,6 @@ struct _UserAccountEditor {
 	GnomeDialog parent;
 	
 	UserAccountGui *gui;
-	GtkNotebook *notebook;
 };
 
 typedef struct _UserAccountEditor UserAccountEditor;

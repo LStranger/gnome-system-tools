@@ -183,7 +183,6 @@ user_set_groups (xmlNodePtr user_node, GSList *list)
 
 				group_users = xst_xml_element_add (group_users, "user");
 				xst_xml_element_set_content (group_users, user_name);
-				list = g_slist_remove (list, group_name);
 			}
 		}
 		g_free (buf);

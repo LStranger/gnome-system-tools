@@ -60,6 +60,7 @@ typedef struct
 
 typedef struct {
 	xmlNodePtr node;
+	gboolean new;
 	
 	gchar *name;
 	gchar *comment;
@@ -79,7 +80,6 @@ typedef struct {
 
 UserAccount *user_account_get_default (void);
 UserAccount *user_account_get_by_node (xmlNodePtr node);
-void         user_account_add         (UserAccount *acocunt);
 void         user_account_save        (UserAccount *account);
 void         user_account_destroy     (UserAccount *account);
 

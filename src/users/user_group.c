@@ -1209,11 +1209,12 @@ user_account_get_default (void)
 	account = g_new0 (UserAccount, 1);
 
 	account->node = get_user_root_node ();
+	account->new = TRUE;
 
 	account->uid = find_new_id (account->node);
-	account->group = pf->group;
-	account->shell = pf->shell;
-	account->home = pf->home_prefix;
+	account->group = g_strdup (pf->group);
+	account->shell = g_strdup (pf->shell);
+	account->home = g_strdup (pf->home_prefix);
 	
 	account->pwd_maxdays = pf->pwd_maxdays;
 	account->pwd_mindays = pf->pwd_mindays;
@@ -1230,6 +1231,7 @@ user_account_get_by_node (xmlNodePtr node)
 	account = g_new0 (UserAccount, 1);
 
 	account->node = node;
+	account->new = FALSE;
 
 	account->name = user_value_login (node);
 	account->comment = user_value_comment (node);
@@ -1254,6 +1256,12 @@ user_account_save (UserAccount *account)
 	gchar *buf;
 	xmlNodePtr node = account->node;
 
+	if (account->new) {
+		node = account->node = user_add_blank_xml (account->node);
+		current_table_new_row (node, TABLE_USER);
+		group_add (account, account->group);
+	}
+	
 	user_set_value_login (node, account->name);
 	user_set_value_comment (node, account->comment);
 	user_set_value_uid_string (node, account->uid);
@@ -1279,14 +1287,6 @@ user_account_save (UserAccount *account)
 }
 
 void
-user_account_add (UserAccount *account)
-{
-	account->node = user_add_blank_xml (account->node);
-	current_table_new_row (account->node, TABLE_USER);
-	user_account_save (account);
-}
-
-void
 user_account_destroy (UserAccount *account)
 {
 	if (account->name) g_free (account->name);
@@ -1296,7 +1296,7 @@ user_account_destroy (UserAccount *account)
 	if (account->uid) g_free (account->uid);
 	if (account->group) g_free (account->group);
 
-	g_slist_free (account->extra_groups);
+	if (account->extra_groups) g_slist_free (account->extra_groups);
 	
 	g_free (account);
 }

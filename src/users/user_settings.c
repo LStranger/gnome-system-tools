@@ -26,6 +26,7 @@
 
 #include "xst.h"
 #include "user_settings.h"
+#include "profile.h"
 
 extern XstTool *tool;
 
@@ -132,21 +133,27 @@ get_group_list (gchar *field, xmlNodePtr user_node)
 }
 
 UserAccountGui *
-user_account_gui_new (UserAccount *account)
+user_account_gui_new (UserAccount *account, GtkWidget *parent)
 {
 	UserAccountGui *gui;
 
 	gui = g_new0 (UserAccountGui, 1);
 	gui->account = account;
 	gui->xml = glade_xml_new (tool->glade_path, NULL);
+	gui->top = parent;
 
+	gui->basic_frame = glade_xml_get_widget (gui->xml, "user_settings_basic");
 	gui->name    = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_name"));
 	gui->comment = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_comment"));
 	gui->home    = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_home"));
 	gui->shell   = GTK_COMBO (glade_xml_get_widget (gui->xml, "user_settings_shell"));
 	gui->uid     = GTK_SPIN_BUTTON (glade_xml_get_widget (gui->xml, "user_settings_uid"));
 	gui->advanced = glade_xml_get_widget (gui->xml, "user_settings_advanced");
+	gui->profile_box = glade_xml_get_widget (gui->xml, "user_settings_profile_box");
+	gui->profile_menu = GTK_OPTION_MENU (glade_xml_get_widget (gui->xml, "user_settings_profile_menu"));
 
+	gui->group_box = glade_xml_get_widget (gui->xml, "user_settings_group_box");
+	gui->group_extra = glade_xml_get_widget (gui->xml, "user_settings_group_extra");
 	gui->group   = GTK_COMBO (glade_xml_get_widget (gui->xml, "user_settings_group"));
 	gui->all     = GTK_CLIST (glade_xml_get_widget (gui->xml, "user_settings_gall"));
 	gui->member  = GTK_CLIST (glade_xml_get_widget (gui->xml, "user_settings_gmember"));
@@ -154,6 +161,7 @@ user_account_gui_new (UserAccount *account)
 	gui->remove  = glade_xml_get_widget (gui->xml, "user_settings_remove");
 	gui->set_primary = glade_xml_get_widget (gui->xml, "user_settings_primary");
 
+	gui->pwd_frame = glade_xml_get_widget (gui->xml, "user_passwd_frame");
 	gui->pwd1 = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_passwd_entry1"));
 	gui->pwd2 = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_passwd_entry2"));
 	gui->quality = GTK_TOGGLE_BUTTON (glade_xml_get_widget (gui->xml, "user_passwd_quality"));
@@ -226,26 +234,117 @@ user_account_groups_setup (GtkCombo *combo, xmlNodePtr node)
 	g_list_free (items);
 }
 
+
 static void
-user_settings_complexity (UserAccountGui *gui)
+setup_advanced_add (UserAccountGui *gui, GtkWidget *notebook)
 {
-	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED) {
-		gtk_widget_show (gui->advanced);
-		gtk_widget_show (gui->optional);
-	} else {
-		gtk_widget_hide (gui->advanced);
-		gtk_widget_hide (gui->optional);
+	GtkWidget *box, *label;
+	GSList *list = profile_table_get_list ();
+	Profile *pf = profile_table_get_profile (NULL);
+
+	/* Reparent widgets */
+	box = gtk_vbox_new (FALSE, 3);
+	gtk_widget_reparent (GTK_WIDGET (gui->basic_frame), box);
+	gtk_box_set_child_packing (GTK_BOX (box),
+				   GTK_WIDGET (gui->basic_frame),
+				   FALSE, FALSE, 0, GTK_PACK_START);
+	gtk_widget_reparent (GTK_WIDGET (gui->profile_box), box);
+	gtk_box_set_child_packing (GTK_BOX (box),
+				   GTK_WIDGET (gui->profile_box),
+				   FALSE, FALSE, 0, GTK_PACK_START);
+	label = gtk_label_new (_("Identity"));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
+	gtk_widget_show_all (box);
+
+	box = gtk_vbox_new (FALSE, 3);
+	gtk_widget_reparent (GTK_WIDGET (gui->group_box), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->group_extra), box);
+	label = gtk_label_new (_("Groups"));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
+	gtk_widget_show_all (box);
+	
+	box = gtk_vbox_new (FALSE, 3);
+	gtk_widget_reparent (GTK_WIDGET (gui->pwd_frame), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->optional), box);
+	label = gtk_label_new (_("Password"));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
+	gtk_widget_show_all (box);
+
+	while (list) {
+		xst_ui_option_menu_add_string (gui->profile_menu, list->data);
+		list = list->next;
 	}
+	g_slist_free (list);
+	xst_ui_option_menu_set_selected_string (gui->profile_menu, pf->name);
+}
+
+static void
+setup_basic_add (UserAccountGui *gui, GtkWidget *notebook)
+{
+	GtkWidget *widget, *container;
+	
+	container = glade_xml_get_widget (gui->xml, "user_druid_identity");
+	widget = glade_xml_get_widget (gui->xml, "user_settings_basic");
+	gtk_widget_reparent (widget, container);
+	gtk_widget_show_all (container);
+
+	container = glade_xml_get_widget (gui->xml, "user_druid_password");
+	widget = glade_xml_get_widget (gui->xml, "user_passwd_frame");
+	gtk_widget_reparent (widget, container);
+	gtk_widget_show_all (container);
+}
+
+static void
+setup_basic (UserAccountGui *gui, GtkWidget *notebook)
+{
+	GtkWidget *box, *label;
+
+	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+
+	/* Reparent widgets */
+	box = gtk_vbox_new (FALSE, 3);
+	gtk_widget_reparent (GTK_WIDGET (gui->basic_frame), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->pwd_frame), box);
+	label = gtk_label_new (_("Identity"));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
+	gtk_widget_show_all (box);
+}
+
+static void
+setup_advanced (UserAccountGui *gui, GtkWidget *notebook)
+{
+	GtkWidget *box, *label;
+
+	/* Reparent widgets */
+	box = gtk_vbox_new (FALSE, 3);
+	gtk_widget_reparent (GTK_WIDGET (gui->basic_frame), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->advanced), box);
+	label = gtk_label_new (_("Identity"));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
+	gtk_widget_show_all (box);
+
+	box = gtk_vbox_new (FALSE, 3);
+	gtk_widget_reparent (GTK_WIDGET (gui->group_box), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->group_extra), box);
+	label = gtk_label_new (_("Groups"));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
+	gtk_widget_show_all (box);
+	
+	box = gtk_vbox_new (FALSE, 3);
+	gtk_widget_reparent (GTK_WIDGET (gui->pwd_frame), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->optional), box);
+	label = gtk_label_new (_("Password"));
+	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
+	gtk_widget_show_all (box);
 }
 
 void
 user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 {
+	GtkWidget *notebook;
 	GList *users, *items;
 	UserAccount *account = gui->account;
 	
-	gui->top = top;
-
 	user_account_shells_setup (gui);
 	user_account_groups_setup (gui->group, account->node);
 	
@@ -266,9 +365,24 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 	gtk_spin_button_set_value (gui->max, account->pwd_maxdays);
 	gtk_spin_button_set_value (gui->days, account->pwd_warndays);
 
-	gtk_widget_show_all (top);
+	/* Make notebook */
+	notebook = gtk_notebook_new ();
+	gtk_widget_show (notebook);
+	gtk_container_add (GTK_CONTAINER (top), notebook);
+
+	if (account->new) {
+		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
+			setup_advanced_add (gui, notebook);
+		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_BASIC)
+			setup_basic_add (gui, notebook);
+	} else {
+		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
+			setup_advanced (gui, notebook);
+		
+		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_BASIC)
+			setup_basic (gui, notebook);
+	}
 	
-	user_settings_complexity (gui);
 }
 
 gboolean
@@ -282,6 +396,7 @@ user_account_gui_save (UserAccountGui *gui)
 
 	account = g_new0 (UserAccount, 1);
 	account->node = node;
+	account->new = gui->account->new;
 	
 	buf = gtk_entry_get_text (gui->name);
 	if ((error = check_user_login (node, buf)))
@@ -346,7 +461,7 @@ user_account_gui_error (GtkWindow *parent, gchar *error)
 void
 user_account_gui_destroy (UserAccountGui *gui)
 {
-	gtk_object_unref (GTK_OBJECT (gui->xml));
 	user_account_destroy (gui->account);
+	gtk_object_unref (GTK_OBJECT (gui->xml));
 	g_free (gui);
 }

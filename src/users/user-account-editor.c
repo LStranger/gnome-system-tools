@@ -92,11 +92,7 @@ cancel_clicked (GtkWidget *widget, gpointer data)
 static void
 construct (UserAccountEditor *editor, UserAccount *account)
 {
-	editor->gui = user_account_gui_new (account);
-
-	/* get our toplevel widget and reparent it */
-	editor->notebook = GTK_NOTEBOOK (glade_xml_get_widget (editor->gui->xml, "user_settings_notebook"));
-	gtk_widget_reparent (GTK_WIDGET (editor->notebook), GNOME_DIALOG (editor)->vbox);
+	editor->gui = user_account_gui_new (account, GTK_WIDGET (editor));
 
 	/* give our dialog an OK button and title */
 	gtk_window_set_title (GTK_WINDOW (editor), _("User Account Editor"));
@@ -114,7 +110,7 @@ construct (UserAccountEditor *editor, UserAccount *account)
 				     GTK_SIGNAL_FUNC (cancel_clicked),
 				     editor);
 
-	user_account_gui_setup (editor->gui, GTK_WIDGET (editor));
+	user_account_gui_setup (editor->gui, GNOME_DIALOG (editor)->vbox);
 }
 
 UserAccountEditor *

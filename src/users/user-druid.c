@@ -227,10 +227,7 @@ druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 
 	user_account_gui_save (config->gui);
 
-	group_add (config->gui->account,
-		   config->gui->account->group);
-
-	user_account_add (config->gui->account);
+	user_account_save (config->gui->account);
 	
 	buf = gtk_entry_get_text (config->gui->pwd1);
 	passwd_set (config->gui->account->node, buf);
@@ -275,12 +272,12 @@ static struct {
 static void
 construct (UserDruid *druid)
 {
-	GtkWidget *widget, *container;
+	GtkWidget *widget;
 	UserAccount *account;
 	int i;
 
 	account = user_account_get_default ();
-	druid->gui = user_account_gui_new (account);
+	druid->gui = user_account_gui_new (account, GTK_WIDGET (druid));
 
 	/* get our toplevel widget and reparent it */
 	widget = glade_xml_get_widget (druid->gui->xml, "user_druid_druid");
@@ -314,15 +311,7 @@ construct (UserDruid *druid)
 					    pages[i].finish_func, druid);
 	}
 	gtk_signal_connect (GTK_OBJECT (druid->druid), "cancel", druid_cancel, druid);
-
-	container = glade_xml_get_widget (druid->gui->xml, "user_druid_identity");
-	widget = glade_xml_get_widget (druid->gui->xml, "user_settings_basic");
-	gtk_widget_reparent (widget, container);
-
-	container = glade_xml_get_widget (druid->gui->xml, "user_druid_password");
-	widget = glade_xml_get_widget (druid->gui->xml, "user_passwd_frame");
-	gtk_widget_reparent (widget, container);
-
+	
 	user_account_gui_setup (druid->gui, GTK_WIDGET (druid));
 	
 	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "changed", identity_changed, druid);
