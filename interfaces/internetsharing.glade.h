@@ -42,7 +42,7 @@ gchar *s = N_("Would you like to give the automatic network\n"
               "address assignment service (DHCP)?\n"
               "");
 gchar *s = N_(" Yes, I'll set the local network computers to use automatic IP assignment  (recommended).");
-gchar *s = N_(" No, I'll manually configure the computers on the local network.");
+gchar *s = N_(" No, I'll manually configure the local network computers.");
 gchar *s = N_("DHCP service requirements.");
 gchar *s = N_("You don't have a DHCP server installed, or\n"
               "some other related component is missing.");
