@@ -57,8 +57,10 @@ static GList *get_user_groups (xmlNodePtr user_node);
 static void user_fill_settings_group (GtkCombo *combo, xmlNodePtr node);
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
-static void del_group_users (xmlNodePtr node);
-static void add_group_users (xmlNodePtr node, gchar *name);
+static void del_group_users (xmlNodePtr group_node);
+static void add_group_users (xmlNodePtr group_node, gchar *name);
+static void del_user_groups (xmlNodePtr user_node);
+static void add_user_groups (xmlNodePtr user_node, gchar *group_name);
 static gboolean is_valid_name (gchar *str);
 static gchar *find_new_id (xmlNodePtr parent);
 static gchar *find_new_key (xmlNodePtr parent);
@@ -348,7 +350,7 @@ check_user_group (xmlNodePtr node)
 	group_node = get_corresp_field (node);
 
 	/* We have to give childs to node_exsists, cause it gets parent inside */
-	if (node_exsists (group_node->childs, "name", buf))
+	if (node_exsists (group_node, "name", buf))
 		return 0;
 
 	if (!is_valid_name (buf))
@@ -464,8 +466,11 @@ get_min_max (xmlNodePtr db_node, gint *min, gint *max)
 xmlNodePtr
 get_corresp_field (xmlNodePtr node)
 {
-	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
-	
+	xmlNodePtr root;
+
+	g_return_val_if_fail (node != NULL, NULL);
+
+	root = xst_xml_doc_get_root (tool->config);
 	node = get_db_node (node);
 
 	if (!strcmp (node->name, "userdb"))
@@ -744,8 +749,8 @@ group_update (ug_data *ud)
 
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
-
-	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "group_settings_name")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+								    "group_settings_name")));
 	if (!check_group_name (ud->node, buf))
 		ok = FALSE;
 
@@ -1009,50 +1014,56 @@ user_add_blank_xml (xmlNodePtr parent)
 static void
 user_update_xml (xmlNodePtr node, gboolean adv)
 {
+	GtkCList *clist;
 	gchar *buf;
-	gint id;
+	gint id, row;
 	xmlNodePtr group_node;
 
 	/* Login */
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-													"user_settings_name")));
+								    "user_settings_name")));
 	
 	xst_xml_set_child_content (node, "login", buf);
 
 	/* Comment */
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-													"user_settings_comment")));
+								    "user_settings_comment")));
 	
 	xst_xml_set_child_content (node, "comment", buf);
 
-	/* Group */
+	/* Main group */
 	buf = gtk_entry_get_text (
 			GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog,
-												"user_settings_group"))->entry));
+								     "user_settings_group"))->entry));
 
 	group_node = get_corresp_field (get_db_node (node));
 	group_node = get_node_by_data (group_node, "name", buf);
 	buf = xst_xml_get_child_content (group_node, "gid");
-	
 	xst_xml_set_child_content (node, "gid", buf);
+
+	/* Secondary groups */
+	del_user_groups (node);
+	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember"));
+
+	row = 0;
+	while (gtk_clist_get_text (clist, row++, 0, &buf))
+		add_user_groups (node, buf);
 
 	/* TODO hardcoded default shell and home dir prefix are BAD */
 	/* Home */
 	buf = adv ?
 		gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-												    "user_settings_home"))) :
-		
+								      "user_settings_home"))) :
 		g_strdup_printf ("/home/%s", gtk_entry_get_text
-					  (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-												  "user_settings_name"))));
+				 (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+								    "user_settings_name"))));
 	
 	xst_xml_set_child_content (node, "home", buf);
 
 	/* Shell */
 	buf = adv ?
 		gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-												    "user_settings_shell"))) :
-		
+								      "user_settings_shell"))) :
 		g_strdup ("/bin/bash");
 
 	xst_xml_set_child_content (node, "shell", buf);
@@ -1061,8 +1072,8 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 	if (adv)
 	{
 		id = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
-									    (xst_dialog_get_widget (tool->main_dialog,
-													    "user_settings_uid")));
+						       (xst_dialog_get_widget (tool->main_dialog,
+									       "user_settings_uid")));
 		
 		xst_xml_set_child_content (node, "uid", g_strdup_printf ("%d", id));
 	}
@@ -1128,7 +1139,8 @@ group_update_xml (xmlNodePtr node, gboolean adv)
 	gint row = 0;
 
 	/* Name */
-	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "group_settings_name")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+								    "group_settings_name")));
 	xst_xml_set_child_content (node, "name", buf);
 
 	/* Users */
@@ -1184,11 +1196,18 @@ node_exsists (xmlNodePtr node, gchar *name, gchar *val)
 {
 	xmlNodePtr n0;
 	gchar *buf;
-	xmlNodePtr parent = get_db_node (node);
+	xmlNodePtr parent;
+	gboolean self;
+
+	parent = get_db_node (node);
+	if (parent == node)
+		self = FALSE;
+	else
+		self = TRUE;
 
 	for (n0 = parent->childs; n0; n0 = n0->next)
 	{
-		if (n0 == node)
+		if (self && n0 == node)
 			continue;  /* Self */
 
 		buf = xst_xml_get_child_content (n0, name);
@@ -1396,11 +1415,13 @@ group_fill_all_users_list (xmlNodePtr node, GList *exclude)
 }
 
 static void
-del_group_users (xmlNodePtr node)
+del_group_users (xmlNodePtr group_node)
 {
-	g_return_if_fail (node != NULL);
+	xmlNodePtr node;
+	
+	g_return_if_fail (group_node != NULL);
 
-	node = xst_xml_element_find_first (node, "users");
+	node = xst_xml_element_find_first (group_node, "users");
 	if (!node)
 		return;
 
@@ -1408,18 +1429,95 @@ del_group_users (xmlNodePtr node)
 }
 
 static void
-add_group_users (xmlNodePtr node, gchar *name)
+add_group_users (xmlNodePtr group_node, gchar *name)
 {
 	xmlNodePtr user;
 
-	g_return_if_fail (node != NULL);
+	g_return_if_fail (group_node != NULL);
 
-	user = xst_xml_element_find_first (node, "users");
+	user = xst_xml_element_find_first (group_node, "users");
 	if (!user)
-		user = xst_xml_element_add (node, "users");
+		user = xst_xml_element_add (group_node, "users");
 
 	user = xst_xml_element_add (user, "user");
 	xst_xml_element_set_content (user, name);
+}
+
+static void
+del_user_groups (xmlNodePtr user_node)
+{
+	xmlNodePtr group_node, g, group_users, tmp_node;
+	gchar *user_name, *buf;
+	gboolean found;
+
+	g_return_if_fail (user_node != NULL);
+
+	group_node = get_corresp_field (user_node);
+	user_name = xst_xml_get_child_content (user_node, "login");
+
+	for (g = xst_xml_element_find_first (group_node, "group");
+	     g;
+	     g = xst_xml_element_find_next (g, "group"))
+	{
+		
+		group_users = xst_xml_element_find_first (g, "users");
+
+		group_users = xst_xml_element_find_first (group_users, "user");
+		while (group_users)
+		{
+			found = FALSE;
+			buf = xst_xml_element_get_content (group_users);
+			if (buf)
+			{
+				if (!strcmp (user_name, buf))
+					found = TRUE;
+				
+				g_free (buf);
+			}
+
+			tmp_node = group_users;
+			group_users = xst_xml_element_find_next (group_users, "user");
+			if (found)
+				xst_xml_element_destroy (tmp_node);
+		}
+	}
+
+	g_free (user_name);
+}
+
+static void
+add_user_groups (xmlNodePtr user_node, gchar *group_name)
+{
+	xmlNodePtr group_node, g, group_users;
+	gchar *user_name, *buf;
+
+	g_return_if_fail (user_node != NULL);
+
+	group_node = get_corresp_field (user_node);
+	user_name = xst_xml_get_child_content (user_node, "login");
+
+	for (g = xst_xml_element_find_first (group_node, "group");
+	     g;
+	     g = xst_xml_element_find_next (g, "group"))
+	{
+
+		buf = xst_xml_get_child_content (g, "name");
+		if (strcmp (buf, group_name))
+		{
+			g_free (buf);
+			continue;
+		}
+
+		g_free (buf);
+		group_users = xst_xml_element_find_first (g, "users");
+		if (!group_users)
+			group_users = xst_xml_element_add (g, "users");
+
+		group_users = xst_xml_element_add (group_users, "user");
+		xst_xml_element_set_content (group_users, user_name);
+	}
+
+	g_free (user_name);
 }
 
 static gboolean
