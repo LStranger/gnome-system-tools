@@ -1,6 +1,10 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* Functions for transferring information between XML tree and UI */
 
+#include <time.h>
+#include <sys/time.h>
+#include <unistd.h>
+
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
@@ -17,16 +21,20 @@ extern XstTool *tool;
 
 TransStringSpin transfer_string_spin_table[] =
 {
+#if 0
 	{ "hour", "hour" },
 	{ "minute", "minute" },
 	{ "second", "second" },
+#endif
 	{ 0, 0 }
 };
 
 
 TransStringCalendar transfer_string_calendar_table[] =
 {
+#if 0
 	{ "year", "month", "monthday", /* <-> */ "calendar" },
+#endif
 	{ 0, 0, 0, 0 }
 };
 
@@ -50,7 +58,7 @@ transfer_string_spin_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
 	char *s;
 	GtkWidget *spin;
 	TransStringSpin *transfer_string_spin_table;
-	
+
 	transfer_string_spin_table = trans_tree->transfer_string_spin_table;
 	if (!transfer_string_spin_table) return;
 
@@ -334,6 +342,66 @@ transfer_sync_toggle_gui_to_xml (xmlNodePtr root)
 }
 
 
+static void
+transfer_time_gui_to_system ()
+{
+	struct tm tm;
+	struct timeval tv;
+	guint year = 0, month = 0, day = 0;
+	GtkWidget *hour_widget,
+		  *minute_widget,
+		  *second_widget,
+		  *calendar_widget;
+
+	memset (&tm, 0, sizeof (tm));
+	memset (&tv, 0, sizeof (tv));
+
+	hour_widget     = xst_dialog_get_widget (tool->main_dialog, "hour");
+	minute_widget   = xst_dialog_get_widget (tool->main_dialog, "minute");
+	second_widget   = xst_dialog_get_widget (tool->main_dialog, "second");
+	calendar_widget = xst_dialog_get_widget (tool->main_dialog, "calendar");
+
+	gtk_calendar_get_date (GTK_CALENDAR (calendar_widget), &year, &month, &day);
+
+	tm.tm_year  = year - 1900;
+	tm.tm_mon   = month;
+	tm.tm_mday  = day;
+	tm.tm_hour  = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (hour_widget));
+	tm.tm_min   = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (minute_widget));
+	tm.tm_sec   = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (second_widget));
+	tm.tm_isdst = -1;  /* FIXME: Is this right? */
+
+	tv.tv_sec = mktime (&tm);
+	settimeofday (&tv, NULL);
+}
+
+
+static void
+transfer_time_system_to_gui ()
+{
+	struct tm *tm;
+	time_t tt;
+	GtkWidget *hour_widget,
+		  *minute_widget,
+		  *second_widget,
+		  *calendar_widget;
+
+	hour_widget     = xst_dialog_get_widget (tool->main_dialog, "hour");
+	minute_widget   = xst_dialog_get_widget (tool->main_dialog, "minute");
+	second_widget   = xst_dialog_get_widget (tool->main_dialog, "second");
+	calendar_widget = xst_dialog_get_widget (tool->main_dialog, "calendar");
+
+	tt = time (NULL);
+	tm = localtime (&tt);
+
+	gtk_calendar_select_month (GTK_CALENDAR (calendar_widget), tm->tm_mon, tm->tm_year + 1900);
+	gtk_calendar_select_day   (GTK_CALENDAR (calendar_widget), tm->tm_mday);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (hour_widget), (gfloat) tm->tm_hour);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (minute_widget), (gfloat) tm->tm_min);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (second_widget), (gfloat) tm->tm_sec);
+}
+
+
 void
 transfer_xml_to_gui (XstTool *tool, gpointer data)
 {
@@ -346,6 +414,7 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	transfer_timezone_xml_to_gui (root);
 	transfer_servers_xml_to_gui (root);
 	transfer_sync_toggle_xml_to_gui (root);
+	transfer_time_system_to_gui ();
 }
 
 
@@ -356,6 +425,7 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 
 	root = xst_xml_doc_get_root (tool->config);
 
+	transfer_time_gui_to_system ();
 	transfer_string_calendar_gui_to_xml (&trans_tree, root);
 	transfer_string_spin_gui_to_xml (&trans_tree, root);
 	transfer_timezone_gui_to_xml (root);

@@ -1,3 +1,14 @@
+2001-03-14  Hans Petter Jansson  <hpj@ximian.com>
+
+	* transfer.c (transfer_time_gui_to_system): Implement.
+	  (transfer_time_system_to_gui): Implement.
+	  (transfer_xml_to_gui): Use transfer_time_system_to_gui().
+	  (transfer_gui_to_xml): Use transfer_time_gui_to_system().
+
+	  Eliminated time transfer to XML. Now does direct system calls in the
+	  frontend (I'm not sure I like this from an architecture viewpoint,
+	  but oh well).
+
 2001-03-09  JP Rosevear  <jpr@ximian.com>
 
 	* transfer.c (transfer_string_calendar_gui_to_xml): correct typo
