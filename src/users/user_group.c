@@ -699,7 +699,7 @@ find_new_id (xmlNodePtr parent)
 	if (ret >= min && ret <= max)
 		return g_strdup_printf ("%d", ret);
 
-	g_warning ("find_new_id: failed: %d >= %d && %d <= %d", ret, max, ret, min);
+	g_warning ("find_new_id: failed: %d >= %d && %d <= %d", ret, min, ret, max);
 	return NULL;
 }
 
