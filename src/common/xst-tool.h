@@ -163,7 +163,7 @@ void         xst_tool_reset_report_hooks  (XstTool *tool);
 void         xst_tool_add_supported_platform    (XstTool *tool, XstPlatform *platform);
 void         xst_tool_clear_supported_platforms (XstTool *tool);
 
-
+#define __full_tool_name(parameter) "Xst" #parameter "Tool"
 
 /*
  * Handy define to reduce the boilerplate code
@@ -190,7 +190,7 @@ xst_ ## name ## _tool_get_type (void)\
 	static GtkType type = 0;\
 	if (!type) {\
 		GtkTypeInfo info = {\
-			"XstIshareTool",\
+			__full_tool_name (Name),\
 			sizeof (Xst ## Name ## Tool),\
 			sizeof (Xst ## Name ## ToolClass),\
 			(GtkClassInitFunc)  xst_foo_tool_class_init,\
