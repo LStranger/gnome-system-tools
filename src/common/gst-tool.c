@@ -929,8 +929,8 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 	xmlDoc *xml_out;
 	gchar *eor = g_strconcat ("\n", GST_TOOL_EOR, "\n", NULL);
 
+	int n;
 	gchar buf;
-	GString *buffer;
 
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
@@ -951,21 +951,19 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 	if (xml) {
 		f = fdopen (dup (tool->backend_master_fd), "w");
 		xmlDocDump (f, xml);
-		fprintf (f, eor);
 
 		fflush (f);
 		fclose (f);
 
 		/* read all output from the fd, this is done because a single fd is user for
 		 * reading and writing */
-		buffer = g_string_new ("");
-
+		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 		do {
-			read (tool->backend_master_fd, &buf, 1);
-			g_string_append_c (buffer, buf);
-		} while (g_strrstr (buffer->str, GST_TOOL_EOR) != NULL);
+			n = read (tool->backend_master_fd, &buf, 1);
+		} while (n >= 0);
+		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 
-		g_string_free (buffer, TRUE);
+		write (tool->backend_master_fd, eor, strlen (eor));
 	}
 
 
