@@ -8,6 +8,33 @@
 
 # The first argument must be $(pixmapsdir).
 
+$IN_AA_IMAGE_WIDGET_HACK = 0;
+
+sub image_widget_hack
+{
+  my ($tag_name, $input) = @_;
+
+     if ($tag_name eq "child" || $tag_name eq "widget") { $IN_AA_IMAGE_WIDGET_HACK = 0; }
+  elsif ($tag_name eq "class") { $input =~ s/GnomePixmap/Custom/; }
+  elsif ($tag_name eq "name") {
+    
+    chomp $input;
+    $input =~ s/^([ \t]*)(.*)/\1\2\n\1/;
+    $input .= "<creation_function>xst_ui_create_image_widget</creation_function>\n";
+    
+  } elsif ($tag_name eq "filename") {
+    
+    chomp $input;
+    $input =~ s/^([ \t]*)(.*)/\1\2\n\1/;
+    $input =~ s/filename>/string1>/g;
+    $input .= "<string2></string2><int1>0</int1><int2>0</int2>\n";
+    
+  }
+
+  return $input;
+}
+    
+
 sub subst {
   my $stack = $_[0];
   my $input = $_[1];
@@ -18,7 +45,12 @@ sub subst {
   $pre = $`;
   $ret = $input2;
   $max = $#stack;
-  
+
+  if (($$stack[$max] eq "class") &&
+      ($input =~ /^GnomePixmap/)) {
+    $IN_AA_IMAGE_WIDGET_HACK = 1;
+  }
+
   if (($$stack[$max - 1] eq "project") &&
 	 ($$stack[$max] eq "pixmaps_directory")) {
     $input =~ s/^[^<]*//;
@@ -30,6 +62,8 @@ sub subst {
 		 ($$stack[$max] eq "logo_image")) {
     $ret = $pre . "../pixmaps/" . $input;
   }
+  
+  return &image_widget_hack ($$stack[$max], $ret) if $IN_AA_IMAGE_WIDGET_HACK == 1;
   
   return $ret;
 }
