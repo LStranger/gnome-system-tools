@@ -1,3 +1,57 @@
+GNOME System Tools Version 1.0.2, 2004-09-13
+------------------------------------------
+
+The GNOME System Tools version 1.0.2 "Nothing to put here" have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The GNOME System Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
+
+Right now the GNOME System Tools fully support various distros/OS such as: Redhat, Mandrake, SuSE, Fedora, Debian, Gentoo, Slackware, FreeBSD, OpenNA, PLD, Vine and Specifix.
+
+WARNING: By default, only the users, network and time tools will be built, for compiling the other tools you can do:
+
+  --enable-services
+  --enable-boot
+
+at configure time
+
+
+Changes since last release
+==========================
+
+  General
+  =======
+  - fixed build issues (Jamesh, Heikki Tauriainen, me)
+  - fixed configuration files generation from scratch (me)
+  - fixed crash with newer Gtk/Glib
+
+  Network
+  =======
+  - Improved debian wireless essid and WEP key parsing (me)
+
+  Boot
+  ====
+  - Fixed crash when the partitions table can't be found (me)
+
+  Translations
+  ============
+  - bg (Stoycho Stanchev)
+  - ca (Josep Puigdemont i Casamajó)
+  - en_CA (Adam Weinberger)
+  - eu (Iñaki Larrañaga)
+  - fi (Pauli Virtanen)
+  - fr (Luc Rebert)
+  - id (Mohammad DAMT)
+  - ru (Russian team)
+  - sk (Ivan Noris)
+  - sv (Christian Rose, Johan Hammar)
+  - it (Francesco Marletta)
+  - zh_TW (GNOME HK team)
+  
+Downloading
+===========
+You can get it from : ftp://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/1.0/
+
+
 GNOME System Tools Version 1.0, 2004-09-13
 ------------------------------------------
 
