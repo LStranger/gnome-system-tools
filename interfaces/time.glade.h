@@ -10,8 +10,9 @@ gchar *s = N_("Date");
 gchar *s = N_("Time");
 gchar *s = N_(":");
 gchar *s = N_(":");
-gchar *s = N_("AM");
-gchar *s = N_("PM");
+gchar *s = N_("AM\n"
+              "PM\n"
+              "");
 gchar *s = N_("Time zone");
 gchar *s = N_("(unconfigured)");
 gchar *s = N_("Set time zone...");
