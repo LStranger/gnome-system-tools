@@ -34,6 +34,8 @@
   <widget>
     <class>GtkVBox</class>
     <name>font_admin</name>
+    <width>429</width>
+    <height>392</height>
     <homogeneous>False</homogeneous>
     <spacing>0</spacing>
 
@@ -320,7 +322,28 @@
 	  </widget>
 
 	  <widget>
-	    <class>Placeholder</class>
+	    <class>GtkFrame</class>
+	    <name>frame5</name>
+	    <label>Preview</label>
+	    <label_xalign>0</label_xalign>
+	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkVBox</class>
+	      <name>previewbox</name>
+	      <border_width>4</border_width>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+
+	      <widget>
+		<class>Placeholder</class>
+	      </widget>
+	    </widget>
 	  </widget>
 	</widget>
 

@@ -11,5 +11,6 @@ gchar *s = N_("label329");
 gchar *s = N_("Style");
 gchar *s = N_("label332");
 gchar *s = N_("Font size:");
+gchar *s = N_("Preview");
 gchar *s = N_("Add font...");
 gchar *s = N_("Delete font");
