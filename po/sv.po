@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
-"POT-Creation-Date: 2003-08-24 02:01+0200\n"
-"PO-Revision-Date: 2003-08-24 02:02+0200\n"
+"POT-Creation-Date: 2003-09-13 08:18+0200\n"
+"PO-Revision-Date: 2003-09-13 08:19+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -215,7 +215,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Avbildsinställningar (steg 2 av 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1745
+#: src/network/connection.c:1753
 msgid "Manual"
 msgstr "Manuell"
 
@@ -369,7 +369,7 @@ msgstr "Komplexitet"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Ange lösenord - GNOME-systemverktygen"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1790
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
 msgid "GNOME System Tools"
 msgstr "GNOME-systemverktygen"
 
@@ -537,7 +537,7 @@ msgstr "Tillåt aktiveringskontroll för alla användare"
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1755
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -577,7 +577,7 @@ msgstr "Skapa en ny Internetanslutning "
 msgid "Create a new network connection"
 msgstr "Skapa en ny nätverksanslutning"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1746
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1754
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1553,7 +1553,7 @@ msgstr "vga=%s är inte ett giltigt vga-värde"
 msgid "Boot Image Wizard"
 msgstr "Guide för startavbild"
 
-#: src/boot/boot-image.c:40
+#: src/boot/boot-image.c:40 src/network/profile.c:466
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -1723,7 +1723,7 @@ msgstr ""
 "Det finns ändringar som inte har verkställts.\n"
 "Verkställ dem nu?"
 
-#: src/common/gst-dialog.c:571
+#: src/common/gst-dialog.c:592
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
@@ -1733,11 +1733,11 @@ msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 msgid "Skipping %s directive..."
 msgstr "Hoppar över %s-direktiv..."
 
-#: src/common/gst-tool.c:1098
+#: src/common/gst-tool.c:1094
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/gst-tool.c:1160
+#: src/common/gst-tool.c:1156
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1745,12 +1745,12 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/gst-tool.c:1513
+#: src/common/gst-tool.c:1522
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - GNOME-systemverktygen"
 
-#: src/common/gst-tool.c:1691
+#: src/common/gst-tool.c:1700
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1777,11 +1777,11 @@ msgstr ""
 "--\n"
 "Teamet bakom GNOME-systemverktygen"
 
-#: src/common/gst-tool.c:1715
+#: src/common/gst-tool.c:1724
 msgid "Warning"
 msgstr "Varning"
 
-#: src/common/gst-tool.c:1724
+#: src/common/gst-tool.c:1733
 msgid "Don't show me this again"
 msgstr "Visa inte detta igen"
 
@@ -1891,7 +1891,7 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:708
+#: src/network/callbacks.c:709
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1902,7 +1902,7 @@ msgstr ""
 "PPP-anslutningarna (modemanslutningarna) att\n"
 "kunna aktiveras."
 
-#: src/network/callbacks.c:734
+#: src/network/callbacks.c:736
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1917,7 +1917,7 @@ msgstr ""
 "\n"
 "Fortsätt ändå?"
 
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:763
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -1929,7 +1929,7 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:816
+#: src/network/callbacks.c:818
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -1939,7 +1939,7 @@ msgstr ""
 "gateway. Ange denna information för att fortsätta,\n"
 "eller välj en annan standardgatewayenhet.\n"
 
-#: src/network/callbacks.c:862
+#: src/network/callbacks.c:864
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -1951,17 +1951,17 @@ msgstr ""
 "under anslutningsfliken. Installera rpm-pkatet\n"
 "redhat-config-network för att undvika detta."
 
-#: src/network/callbacks.c:900
+#: src/network/callbacks.c:902
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Vill du aktivera gränssnittet %s?"
 
-#: src/network/callbacks.c:910
+#: src/network/callbacks.c:912
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Vill du inaktivera gränssnittet %s?"
 
-#: src/network/callbacks.c:983
+#: src/network/callbacks.c:999
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1969,23 +1969,23 @@ msgstr ""
 "Kunde inte automatiskt detektera modemenheten. Kontrollera att den inte är "
 "upptagen och att den är korrekt ansluten"
 
-#: src/network/callbacks.c:1028
+#: src/network/callbacks.c:1044
 msgid "Silent"
 msgstr "Tyst"
 
-#: src/network/callbacks.c:1030
+#: src/network/callbacks.c:1046
 msgid "Low"
 msgstr "Låg"
 
-#: src/network/callbacks.c:1032
+#: src/network/callbacks.c:1048
 msgid "Medium"
 msgstr "Mellan"
 
-#: src/network/callbacks.c:1034
+#: src/network/callbacks.c:1050
 msgid "Loud"
 msgstr "Högljudd"
 
-#: src/network/callbacks.c:1200
+#: src/network/callbacks.c:1216
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Är du säker på att du vill ta bort aliasen för %s?"
@@ -2030,7 +2030,7 @@ msgstr "Status"
 msgid "Description"
 msgstr "Beskrivning"
 
-#: src/network/connection.c:1626
+#: src/network/connection.c:1634
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2040,7 +2040,7 @@ msgstr ""
 "lämnades tom. Ange giltiga IP-adresser i de\n"
 "fälten för att fortsätta."
 
-#: src/network/connection.c:1633
+#: src/network/connection.c:1641
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2050,7 +2050,7 @@ msgstr ""
 "gränssnittet lämnades tom. Ange giltiga\n"
 "IP-adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:1639
+#: src/network/connection.c:1647
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2064,7 +2064,12 @@ msgstr ""
 "för den primära DNS-servern eller avmarkera\n"
 "alternativet att välja DNS-servrarna manuellt."
 
-#: src/network/connection.c:2195
+#: src/network/connection.c:2037
+#, c-format
+msgid "The interface %s doesn't exist."
+msgstr "Gränssnittet %s finns inte."
+
+#: src/network/connection.c:2245
 msgid "Autodetecting modem device"
 msgstr "Detekterar automatiskt modemenhet"
 
@@ -2076,31 +2081,39 @@ msgstr "IP-adress"
 msgid "Aliases"
 msgstr "Alias"
 
-#: src/network/main.c:220
+#: src/network/main.c:221
 msgid "Run the connection druid."
 msgstr "Kör anslutningsguiden."
 
-#: src/network/main.c:221
+#: src/network/main.c:222
 msgid "Run the PPP connection druid."
 msgstr "Kör PPP-anslutningsguiden."
 
-#: src/network/main.c:222
+#: src/network/main.c:223
 msgid "Run the ethernet connection druid."
 msgstr "Kör Ethernetanslutningsguiden."
 
-#: src/network/main.c:223
+#: src/network/main.c:224
 msgid "Run the wlan connection druid."
 msgstr "Kör wlan-anslutningsguiden."
 
-#: src/network/main.c:224
+#: src/network/main.c:225
 msgid "Run the parallel port connection druid."
 msgstr "Kör parallellportsanslutningsguiden."
 
-#: src/network/main.c:225
+#: src/network/main.c:226
 msgid "Run the irlan connection druid."
 msgstr "Kör irlan-anslutningsguiden."
 
-#: src/network/main.c:232
+#: src/network/main.c:227
+msgid "Configure a network interface"
+msgstr "Konfigurera ett nätverksgränssnitt"
+
+#: src/network/main.c:227
+msgid "interface"
+msgstr "gränssnitt"
+
+#: src/network/main.c:234
 msgid "Network Settings"
 msgstr "Nätverksinställningar"
 
@@ -2481,6 +2494,12 @@ msgstr "Kommentarer"
 msgid "Users and groups."
 msgstr "Användare och grupper."
 
+#~ msgid "Configure a network interface."
+#~ msgstr "Konfigurera ett nätverksgränssnitt."
+
+#~ msgid "Interface"
+#~ msgstr "Gränssnitt"
+
 #~ msgid "Default runlevel"
 #~ msgstr "Standardkörnivå"
 
@@ -2800,9 +2819,6 @@ msgstr "Användare och grupper."
 #~ msgstr ""
 #~ "Gratulerar! Din dator är nu konfigurerad\n"
 #~ "att dela ut dess Internetanslutning.\n"
-
-#~ msgid "Create a new local network interface."
-#~ msgstr "Skapa ett nytt lokalt nätverksgränssnitt."
 
 #~ msgid "DHCP service configuration."
 #~ msgstr "DHCP-tjänstkonfiguration."
@@ -5763,9 +5779,6 @@ msgstr "Användare och grupper."
 
 #~ msgid "Networking Administration"
 #~ msgstr "Nätverksadministration"
-
-#~ msgid "Interface:"
-#~ msgstr "Gränssnitt:"
 
 #~ msgid "Gateway IP:"
 #~ msgstr "Gateway-IP:"
