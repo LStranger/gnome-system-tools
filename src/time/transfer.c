@@ -18,183 +18,98 @@
 #include "e-map/e-map.h"
 #include "tz-map.h"
 
-
-TransStringSpin transfer_string_spin_table[] =
+static gint
+get_int_from_node (xmlNodePtr node)
 {
-#if 0
-	{ "hour", "hour" },
-	{ "minute", "minute" },
-	{ "second", "second" },
-#endif
-	{ 0, 0 }
-};
+	gint   val;
+	gchar *s;
 
-
-TransStringCalendar transfer_string_calendar_table[] =
-{
-#if 0
-	{ "year", "month", "monthday", /* <-> */ "calendar" },
-#endif
-	{ 0, 0, 0, 0 }
-};
-
-
-TransTree trans_tree =
-{
-	0,
-	0,
-	0,
-	0,
-	transfer_string_calendar_table,
-	transfer_string_spin_table
-};
-
-
-static void
-transfer_string_spin_xml_to_gui (XstTool *tool, TransTree *trans_tree, xmlNodePtr root)
-{
-	int i;
-	xmlNodePtr node, subnode;
-	char *s;
-	GtkWidget *spin;
-	TransStringSpin *transfer_string_spin_table;
-
-	transfer_string_spin_table = trans_tree->transfer_string_spin_table;
-	if (!transfer_string_spin_table) return;
-
-	subnode = xst_xml_element_find_first (root, "local_time");
-	g_return_if_fail (subnode != NULL);
-	
-	for (i = 0; transfer_string_spin_table [i].xml_path; i++)
+	s = xst_xml_element_get_content (node);
+	if (!s || !strlen (s))
 	{
-		node = xst_xml_element_find_first (subnode, transfer_string_spin_table [i].xml_path);
-		
-		if (node && (s = xst_xml_element_get_content (node)))
-		{
-			spin = xst_dialog_get_widget (tool->main_dialog, transfer_string_spin_table [i].spin);
-			gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), (gfloat) atoi (s));
-			
-			g_free (s);
-		}
+		g_warning ("XML node did not contain any value!");
+		return -1;
 	}
+
+	val = atoi (s);
+	g_free (s);
+
+	return val;
 }
 
-
-static void
-transfer_string_spin_gui_to_xml (XstTool *tool, TransTree *trans_tree, xmlNodePtr root)
+static gint
+get_int_from_named_child (xmlNodePtr node, gchar *name)
 {
-	int i;
-	xmlNodePtr node, subnode;
-	char *s;
-	GtkWidget *spin;
-	TransStringSpin *transfer_string_spin_table;
-	
-	transfer_string_spin_table = trans_tree->transfer_string_spin_table;
-	if (!transfer_string_spin_table) return;
-	
-	subnode = xst_xml_element_find_first (root, "local_time");
-	g_return_if_fail (subnode != NULL);
-	
-	for (i = 0; transfer_string_spin_table [i].xml_path; i++)
-	{
-		spin = xst_dialog_get_widget (tool->main_dialog, transfer_string_spin_table [i].spin);
-		s = g_strdup_printf ("%d", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spin)));
-		node = xst_xml_element_find_first (subnode, transfer_string_spin_table [i].xml_path);
-		xst_xml_element_set_content (node, s);
-		g_free (s);
-	}
+	xmlNodePtr child;
+
+	child = xst_xml_element_find_first (node, name);
+	g_return_val_if_fail (child != NULL, -1);
+
+	return get_int_from_node (child);
 }
 
-
 static void
-transfer_string_calendar_xml_to_gui (XstTool *tool, TransTree *trans_tree, xmlNodePtr root)
+set_node_from_int (xmlNodePtr node, gint val)
 {
-	int i;
-	xmlNodePtr node, subnode;
-	char *s;
-	GtkWidget *calendar;
-	TransStringCalendar *transfer_string_calendar_table;
-	guint year = 0, month = 0, day = 0;
-	
-	transfer_string_calendar_table = trans_tree->transfer_string_calendar_table;
-	if (!transfer_string_calendar_table) return;
+	gchar *s;
 
-	subnode = xst_xml_element_find_first (root, "local_time");
-	g_return_if_fail (subnode != NULL);
-	
-	for (i = 0; transfer_string_calendar_table [i].calendar; i++)
-	{
-		calendar = xst_dialog_get_widget (tool->main_dialog, transfer_string_calendar_table [i].calendar);
-		
-		node = xst_xml_element_find_first (subnode,
-						   transfer_string_calendar_table [i].xml_year_path);
-		if (node && (s = xst_xml_element_get_content (node)))
-		{
-			year = atoi (s);
-			g_free (s);
-		}
-		
-		node = xst_xml_element_find_first (root, transfer_string_calendar_table [i].xml_month_path);
-		if (node && (s = xst_xml_element_get_content (node)))
-		{
-			month = atoi (s);
-			g_free (s);
-		}
-		
-		node = xst_xml_element_find_first (root, transfer_string_calendar_table[i].xml_day_path);
-		if (node && (s = xst_xml_element_get_content (node)))
-		{
-			day = atoi (s);
-			g_free (s);
-		}
-		
-		gtk_calendar_select_month (GTK_CALENDAR (calendar), month, year);
-		gtk_calendar_select_day (GTK_CALENDAR (calendar), day);
-	}
+	s = g_strdup_printf ("%d", val);
+	xst_xml_element_set_content (node, s);
+	g_free (s);
 }
 
-
 static void
-transfer_string_calendar_gui_to_xml (XstTool *tool, TransTree *trans_tree, xmlNodePtr root)
+set_named_child_from_int (xmlNodePtr node, gchar *name, gint val)
 {
-	int i;
-	xmlNodePtr node, subnode;
-	char *s;
-	GtkWidget *calendar;
-	TransStringCalendar *transfer_string_calendar_table;
-	guint year = 0, month = 0, day = 0;
-	
-	transfer_string_calendar_table = trans_tree->transfer_string_calendar_table;
-	if (!transfer_string_calendar_table) return;
-	
-	subnode = xst_xml_element_find_first (root, "local_time");
-	g_return_if_fail (subnode != NULL);
-	
-	for (i = 0; transfer_string_calendar_table [i].calendar; i++)
-	{
-		calendar = xst_dialog_get_widget (tool->main_dialog, transfer_string_calendar_table [i].calendar);
-		gtk_calendar_get_date (GTK_CALENDAR (calendar), &year, &month, &day);
-		
-		node = xst_xml_element_find_first (subnode,
-						   transfer_string_calendar_table [i].xml_year_path);
-		s = g_strdup_printf ("%d", year);
-		xst_xml_element_set_content (node, s);
-		g_free (s);
-		
-		node = xst_xml_element_find_first (subnode,
-						   transfer_string_calendar_table [i].xml_month_path);
-		s = g_strdup_printf ("%d", month);
-		xst_xml_element_set_content (node, s);
-		g_free (s);
-		
-		node = xst_xml_element_find_first (subnode,
-						   transfer_string_calendar_table [i].xml_day_path);
-		s = g_strdup_printf ("%d", day);
-		xst_xml_element_set_content (node, s);
-		g_free (s);
-	}
+	xmlNodePtr child;
+
+	child = xst_xml_element_find_first (node, name);
+	g_return_if_fail (child != NULL);
+
+	set_node_from_int (child, val);
 }
 
+static void
+transfer_time_xml_to_gui (XstTool *xst_tool, xmlNodePtr root)
+{
+	XstTimeTool *tool = XST_TIME_TOOL (xst_tool);
+	xmlNodePtr   local_time_node;
+	struct tm    tm;
+
+	local_time_node = xst_xml_element_find_first (root, "local_time");
+	g_return_if_fail (local_time_node != NULL);
+
+	tm.tm_year = get_int_from_named_child (local_time_node, "year") - 1900;
+	tm.tm_mon  = get_int_from_named_child (local_time_node, "month");
+	tm.tm_mday = get_int_from_named_child (local_time_node, "monthday");
+	tm.tm_hour = get_int_from_named_child (local_time_node, "hour");
+	tm.tm_min  = get_int_from_named_child (local_time_node, "minute");
+	tm.tm_sec  = get_int_from_named_child (local_time_node, "second");
+
+	xst_time_set_full (tool, &tm);
+}
+
+static void
+transfer_time_gui_to_xml (XstTool *xst_tool, xmlNodePtr root)
+{
+	XstTimeTool *tool = XST_TIME_TOOL (xst_tool);
+	GtkWidget   *calendar_widget;
+	guint        year = 0, month = 0, day = 0;
+	xmlNodePtr   local_time_node;
+
+	local_time_node = xst_xml_element_find_first (root, "local_time");
+	g_return_if_fail (local_time_node != NULL);
+
+	calendar_widget = xst_dialog_get_widget (xst_tool->main_dialog, "calendar");
+	gtk_calendar_get_date (GTK_CALENDAR (calendar_widget), &year, &month, &day);
+
+	set_named_child_from_int (local_time_node, "year",     year);
+	set_named_child_from_int (local_time_node, "month",    month + 1);
+	set_named_child_from_int (local_time_node, "monthday", day);
+	set_named_child_from_int (local_time_node, "hour",     tool->hrs);
+	set_named_child_from_int (local_time_node, "minute",   tool->min);
+	set_named_child_from_int (local_time_node, "second",   tool->sec);
+}
 
 static void
 transfer_timezone_xml_to_gui (XstTool *tool, xmlNodePtr root)
@@ -214,7 +129,6 @@ transfer_timezone_xml_to_gui (XstTool *tool, xmlNodePtr root)
 	g_free (s);
 }
 
-
 static void
 transfer_timezone_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
@@ -229,9 +143,7 @@ transfer_timezone_gui_to_xml (XstTool *tool, xmlNodePtr root)
 	xst_xml_element_set_content (node, time_tool->time_zone_name);
 }
 
-
 static GtkWidget *server_entry_found;
-
 
 static void
 server_list_cb (GtkWidget *item, gpointer data)
@@ -241,7 +153,6 @@ server_list_cb (GtkWidget *item, gpointer data)
 	gtk_label_get (GTK_LABEL (GTK_BIN (item)->child), &entry_text);
 	if (strstr (entry_text, data)) server_entry_found = item;
 }
-
 
 static void
 transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
@@ -280,7 +191,6 @@ transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 	gtk_list_append_items (GTK_LIST (ntp_list), list_add);
 }
 
-
 static void
 server_list_get_cb (GtkWidget *item, gpointer data)
 {
@@ -298,7 +208,6 @@ server_list_get_cb (GtkWidget *item, gpointer data)
 	}
 }
 
-
 static void
 transfer_servers_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
@@ -315,7 +224,6 @@ transfer_servers_gui_to_xml (XstTool *tool, xmlNodePtr root)
 	gtk_container_foreach (GTK_CONTAINER (ntp_list), server_list_get_cb, node);
 }
 
-
 static void
 transfer_sync_toggle_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
@@ -331,7 +239,6 @@ transfer_sync_toggle_xml_to_gui (XstTool *tool, xmlNodePtr root)
 				      xst_xml_element_get_bool_attr (node, "active"));
 }
 
-
 static void
 transfer_sync_toggle_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
@@ -345,48 +252,6 @@ transfer_sync_toggle_gui_to_xml (XstTool *tool, xmlNodePtr root)
 	
 	xst_xml_element_set_bool_attr (node, "active",
 				   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle)));
-}
-
-
-static void
-transfer_time_gui_to_system (XstTool *xst_tool)
-{
-	XstTimeTool *tool = XST_TIME_TOOL (xst_tool);
-	struct tm tm;
-	struct timeval tv;
-	guint year = 0, month = 0, day = 0;
-	GtkWidget *calendar_widget;
-
-	memset (&tm, 0, sizeof (tm));
-	memset (&tv, 0, sizeof (tv));
-
-	calendar_widget = xst_dialog_get_widget (xst_tool->main_dialog, "calendar");
-
-	gtk_calendar_get_date (GTK_CALENDAR (calendar_widget), &year, &month, &day);
-
-	tm.tm_year  = year - 1900;
-	tm.tm_mon   = month;
-	tm.tm_mday  = day;
-	tm.tm_hour  = tool->hrs;
-	tm.tm_min   = tool->min;
-	tm.tm_sec   = tool->sec;
-	tm.tm_isdst = -1;  /* FIXME: Is this right? */
-
-	tv.tv_sec = mktime (&tm);
-
-	putenv ("TZ=");
-	settimeofday (&tv, NULL);
-
-	xst_time_clock_start (tool);
-}
-
-
-static void
-transfer_time_system_to_gui (XstTool *xst_tool)
-{
-	XstTimeTool *tool = XST_TIME_TOOL (xst_tool);
-
-	xst_time_set_from_localtime (tool, 0);
 }
 
 static void
@@ -416,12 +281,10 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 
 	root = xst_xml_doc_get_root (tool->config);
 
-	transfer_string_calendar_xml_to_gui (tool, &trans_tree, root);
-	transfer_string_spin_xml_to_gui (tool, &trans_tree, root);
+	transfer_time_xml_to_gui (tool, root);
 	transfer_timezone_xml_to_gui (tool, root);
 	transfer_servers_xml_to_gui (tool, root);
 	transfer_sync_toggle_xml_to_gui (tool, root);
-	transfer_time_system_to_gui (tool);
 	transfer_misc_xml_to_tool (tool, root);
 }
 
@@ -433,9 +296,7 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 
 	root = xst_xml_doc_get_root (tool->config);
 
-	transfer_time_gui_to_system (tool);
-	transfer_string_calendar_gui_to_xml (tool, &trans_tree, root);
-	transfer_string_spin_gui_to_xml (tool, &trans_tree, root);
+	transfer_time_gui_to_xml (tool, root);
 	transfer_timezone_gui_to_xml (tool, root);
 	transfer_servers_gui_to_xml (tool, root);
 	transfer_sync_toggle_gui_to_xml (tool, root);

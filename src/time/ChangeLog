@@ -1,3 +1,23 @@
+2001-11-15  Hans Petter Jansson  <hpj@ximian.com>
+
+	* transfer.c (transfer_string_spin_table): Remove.
+	(transfer_string_calendar_table): Remove.
+	(trans_tree): Remove.
+	(transfer_string_spin_xml_to_gui): Remove.
+	(transfer_string_spin_gui_to_xml): Remove.
+	(transfer_string_calendar_xml_to_gui): Remove.
+	(transfer_string_calendar_gui_to_xml): Remove.
+	(transfer_time_gui_to_system): Remove.
+	(transfer_time_system_to_gui): Remove.
+	(get_int_from_node): Implement.
+	(get_int_from_named_child): Implement.
+	(set_node_from_int): Implement.
+	(set_named_child_from_int): Implement.
+	(transfer_time_xml_to_gui): Implement.
+	(transfer_time_gui_to_xml): Implement.
+	(transfer_xml_to_gui): Get localtime from backend.
+	(transfer_gui_to_xml): Set localtime in backend.
+
 2001-10-13  Hans Petter Jansson  <hpj@ximian.com>
 
 	* tz.c: Removed some forgotten debug.
