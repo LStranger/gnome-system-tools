@@ -167,7 +167,7 @@ connection_new_from_node (xmlNode *node)
 		cxn = connection_new_from_type (CONNECTION_OTHER);
 	
 	
-	subnode = xml_element_find_first (node, "method");
+	subnode = xml_element_find_first (node, "bootproto");
 	if (subnode) {
 		s = xml_element_get_content (subnode);
 		if (s) {
