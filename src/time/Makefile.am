@@ -32,7 +32,7 @@ $(INTLLIBS) \
 
 desktop = time.desktop
 
-EXTRA_DIST = $(desktop)
+EXTRA_DIST = $(desktop) time.pam
 
 CLEANFILES = $(desktop).menu $(desktop).cc
 
@@ -45,8 +45,12 @@ $(desktop).cc: $(desktop)
 all-local: $(desktop).menu $(desktop).cc
 
 install-data-local:
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
 	$(INSTALL_DATA) $(srcdir)/time.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/time.desktop
 	$(INSTALL_DATA) $(srcdir)/time.desktop.cc $(DESTDIR)$(datadir)/control-center/System/time.desktop
-	$(INSTALL) -d $(DESTDIR)$(bindir)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	rm -f $(DESTDIR)$(bindir)/time-admin
 	ln -s consolehelper $(DESTDIR)$(bindir)/time-admin
+	$(mkinstalldirs) $(sysconfdir)/pam.d
+	$(INSTALL_DATA) $(srcdir)/time.pam $(sysconfdir)/pam.d/time-admin

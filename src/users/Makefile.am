@@ -30,7 +30,7 @@ $(INTLLIBS) \
 
 desktop = users.desktop
 
-EXTRA_DIST = $(desktop).in
+EXTRA_DIST = $(desktop).in users.pam
 
 CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc
 
@@ -46,8 +46,12 @@ $(desktop).cc: $(desktop)
 all-local: $(desktop).menu $(desktop).cc
 
 install-data-local: $(desktop).menu $(desktop).cc
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
 	$(INSTALL_DATA) $(srcdir)/users.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/users.desktop
 	$(INSTALL_DATA) $(srcdir)/users.desktop.cc $(DESTDIR)$(datadir)/control-center/System/users.desktop
-	$(INSTALL) -d $(DESTDIR)$(bindir)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	rm -f $(DESTDIR)$(bindir)/users-admin
 	ln -s consolehelper $(DESTDIR)$(bindir)/users-admin
+	$(mkinstalldirs) $(sysconfdir)/pam.d
+	$(INSTALL_DATA) $(srcdir)/users.pam $(sysconfdir)/pam.d/users-admin
