@@ -1406,6 +1406,7 @@ add_user_groups (xmlNodePtr user_node, gchar *group_name)
 
 		group_users = xst_xml_element_add (group_users, "user");
 		xst_xml_element_set_content (group_users, user_name);
+		break;
 	}
 
 	g_free (user_name);

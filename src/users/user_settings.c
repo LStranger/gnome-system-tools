@@ -232,7 +232,7 @@ user_settings_group_fill (UserSettings *us)
 
 	/* Others */
 
-	users = get_user_list ("login", dbnode);
+	users = get_group_list ("name", us->node);
 	items = my_g_list_remove_duplicates (users, members);
 	
 	my_gtk_clist_append_items (us->group->all, items);
