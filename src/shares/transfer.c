@@ -33,6 +33,9 @@ transfer_xml_to_gui (GstTool *tool, gpointer data)
 	root   = gst_xml_doc_get_root (tool->config);
 	export = gst_xml_element_find_first (root, "exports");
 
+	if (!export)
+		return;
+
 	for (export = gst_xml_element_find_first (export, "export");
 	     export;
 	     export = gst_xml_element_find_next (export, "export")) {
@@ -55,6 +58,9 @@ transfer_gui_to_xml (GstTool *tool, gpointer data)
 
 	root   = gst_xml_doc_get_root (tool->config);
 	export = gst_xml_element_find_first (root, "exports");
+
+	if (!export)
+		export = gst_xml_element_add (root, "exports");
 
 	gst_xml_element_destroy_children (export);
 
