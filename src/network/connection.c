@@ -1736,7 +1736,7 @@ on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection 
 {
 	connection_check_netmask_gui (cxn);
 
-        return TRUE;
+        return FALSE;
 }
 
 static void
