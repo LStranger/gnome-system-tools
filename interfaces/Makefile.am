@@ -7,7 +7,8 @@ network.glade \
 networking.glade \
 shares.glade \
 time.glade \
-users.glade
+users.glade \
+boot.glade
 
 interfaces_DATA = $(interfaces)
 
@@ -30,7 +31,9 @@ shares.glade.h \
 time.glade.in \
 time.glade.h \
 users.glade.in \
-users.glade.h
+users.glade.h \
+boot.glade.in \
+boot.glade.h
 
 CLEANFILES = $(interfaces)
 
