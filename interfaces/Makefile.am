@@ -12,7 +12,8 @@ interfaces = \
 	internetsharing.glade			\
 	rollback-location-management.glade \
 	display.glade					\
-	print.glade
+	print.glade					\
+	font.glade
 
 interfaces_DATA = $(interfaces)
 
