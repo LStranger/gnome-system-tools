@@ -45,9 +45,9 @@ static gboolean user_group_adv_mode = FALSE;
 
 extern void user_group_free (user_group *ug)
 {
-	g_free (key);
-	g_free (name);
-	g_free (password);
+	g_free (ug->key);
+	g_free (ug->name);
+	g_free (ug->password);
 }
 
 extern gboolean user_group_is_system (user_group *ug)
@@ -99,7 +99,7 @@ user_new (gchar *name)
 
 extern void user_free (user *u)
 {
-	user_group_free (u->ug);
+	user_group_free (&u->ug);
 	g_free (u->comment);
 	g_free (u->home);
 	g_free (u->shell);
@@ -414,7 +414,7 @@ group_free (group *g)
 {
 	GList *i, *j;
 	
-	user_group_free (g->ug);
+	user_group_free (&g->ug);
 	
 	for (i = g->users; i; i = j)
 	{

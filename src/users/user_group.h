@@ -95,15 +95,18 @@ extern GList *group_list;
 extern GList *group_basic_list;
 extern GList *group_adv_list;
 
+extern void user_group_free (user_group *ug);
 extern gboolean user_group_is_system (user_group *ug);
 
 extern user *user_new (gchar *name);
+extern void user_free (user *u);
 extern gboolean user_add (void);
 extern gboolean user_update (user *u);
 extern void user_fill_settings_group (GtkCombo *combo);
 extern GList *user_current_list (void);
 
 extern group *group_new (void);
+extern void group_free (group *u);
 extern gboolean group_add (void);
 extern gboolean group_update (group *g);
 extern GList *group_fill_members_list (void);
