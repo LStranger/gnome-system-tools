@@ -23,17 +23,6 @@
   <class>GnomeDialog</class>
   <name>user_settings_dialog</name>
   <visible>False</visible>
-  <signal>
-    <name>delete_event</name>
-    <handler>on_user_settings_dialog_delete_event</handler>
-    <last_modification_time>Tue, 07 Nov 2000 05:57:47 GMT</last_modification_time>
-  </signal>
-  <signal>
-    <name>show</name>
-    <handler>on_user_settings_dialog_show</handler>
-    <after>True</after>
-    <last_modification_time>Tue, 19 Dec 2000 17:44:34 GMT</last_modification_time>
-  </signal>
   <title>User Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -43,7 +32,7 @@
   <auto_shrink>False</auto_shrink>
   <wmclass_class>users_admin</wmclass_class>
   <auto_close>False</auto_close>
-  <hide_on_close>False</hide_on_close>
+  <hide_on_close>True</hide_on_close>
 
   <widget>
     <class>GtkVBox</class>
@@ -79,11 +68,6 @@
 	<name>user_settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_user_settings_ok_clicked</handler>
-	  <last_modification_time>Tue, 24 Oct 2000 11:39:47 GMT</last_modification_time>
-	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
 
@@ -92,11 +76,6 @@
 	<name>user_settings_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_user_settings_cancel_clicked</handler>
-	  <last_modification_time>Tue, 24 Oct 2000 11:36:22 GMT</last_modification_time>
-	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
@@ -707,16 +686,6 @@
 		<width>100</width>
 		<height>150</height>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>select_row</name>
-		  <handler>on_group_settings_members_select_row</handler>
-		  <last_modification_time>Wed, 08 Nov 2000 15:04:45 GMT</last_modification_time>
-		</signal>
-		<signal>
-		  <name>unselect_row</name>
-		  <handler>on_group_settings_members_select_row</handler>
-		  <last_modification_time>Thu, 09 Nov 2000 12:18:08 GMT</last_modification_time>
-		</signal>
 		<columns>1</columns>
 		<column_widths>80</column_widths>
 		<selection_mode>GTK_SELECTION_EXTENDED</selection_mode>
@@ -766,16 +735,6 @@
 		<class>GtkCList</class>
 		<name>user_settings_gall</name>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>select_row</name>
-		  <handler>on_group_settings_all_select_row</handler>
-		  <last_modification_time>Wed, 08 Nov 2000 15:04:36 GMT</last_modification_time>
-		</signal>
-		<signal>
-		  <name>unselect_row</name>
-		  <handler>on_group_settings_all_select_row</handler>
-		  <last_modification_time>Thu, 09 Nov 2000 12:16:02 GMT</last_modification_time>
-		</signal>
 		<columns>1</columns>
 		<column_widths>80</column_widths>
 		<selection_mode>GTK_SELECTION_EXTENDED</selection_mode>
@@ -820,11 +779,6 @@
   <class>GnomeDialog</class>
   <name>user_passwd_dialog</name>
   <visible>False</visible>
-  <signal>
-    <name>delete_event</name>
-    <handler>on_user_passwd_dialog_delete_event</handler>
-    <last_modification_time>Tue, 07 Nov 2000 05:58:25 GMT</last_modification_time>
-  </signal>
   <title>Change Password</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -870,11 +824,6 @@
 	<name>user_passwd_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_user_passwd_ok_clicked</handler>
-	  <last_modification_time>Tue, 24 Oct 2000 12:56:35 GMT</last_modification_time>
-	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
 
@@ -883,11 +832,6 @@
 	<name>user_passwd_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_user_passwd_cancel_clicked</handler>
-	  <last_modification_time>Tue, 24 Oct 2000 12:56:20 GMT</last_modification_time>
-	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
@@ -1113,11 +1057,6 @@
 		<class>GtkButton</class>
 		<name>user_passwd_random</name>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_user_passwd_random_clicked</handler>
-		  <last_modification_time>Tue, 07 Nov 2000 06:15:53 GMT</last_modification_time>
-		</signal>
 		<label>  Random Password  </label>
 	      </widget>
 	    </widget>
@@ -1146,17 +1085,6 @@
   <class>GnomeDialog</class>
   <name>group_settings_dialog</name>
   <visible>False</visible>
-  <signal>
-    <name>delete_event</name>
-    <handler>on_group_settings_dialog_delete_event</handler>
-    <last_modification_time>Tue, 07 Nov 2000 05:58:42 GMT</last_modification_time>
-  </signal>
-  <signal>
-    <name>show</name>
-    <handler>on_group_settings_dialog_show</handler>
-    <after>True</after>
-    <last_modification_time>Tue, 19 Dec 2000 17:26:40 GMT</last_modification_time>
-  </signal>
   <title>Group Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1202,11 +1130,6 @@
 	<name>group_settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_group_settings_ok_clicked</handler>
-	  <last_modification_time>Tue, 24 Oct 2000 15:59:30 GMT</last_modification_time>
-	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
 
@@ -1215,11 +1138,6 @@
 	<name>group_settings_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
-	<signal>
-	  <name>clicked</name>
-	  <handler>on_group_settings_cancel_clicked</handler>
-	  <last_modification_time>Tue, 24 Oct 2000 15:59:40 GMT</last_modification_time>
-	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
@@ -1387,11 +1305,6 @@
 		<name>group_settings_add</name>
 		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_group_settings_add_clicked</handler>
-		  <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
-		</signal>
 		<label>Add -&gt;</label>
 		<child>
 		  <padding>0</padding>
@@ -1405,11 +1318,6 @@
 		<name>group_settings_remove</name>
 		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_group_settings_remove_clicked</handler>
-		  <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
-		</signal>
 		<label>Remove &lt;-</label>
 		<child>
 		  <padding>0</padding>
@@ -1474,16 +1382,6 @@
 	      <width>100</width>
 	      <height>150</height>
 	      <can_focus>True</can_focus>
-	      <signal>
-		<name>select_row</name>
-		<handler>on_group_settings_members_select_row</handler>
-		<last_modification_time>Wed, 08 Nov 2000 15:04:45 GMT</last_modification_time>
-	      </signal>
-	      <signal>
-		<name>unselect_row</name>
-		<handler>on_group_settings_members_select_row</handler>
-		<last_modification_time>Thu, 09 Nov 2000 12:18:08 GMT</last_modification_time>
-	      </signal>
 	      <columns>1</columns>
 	      <column_widths>80</column_widths>
 	      <selection_mode>GTK_SELECTION_EXTENDED</selection_mode>
@@ -1533,16 +1431,6 @@
 	      <class>GtkCList</class>
 	      <name>group_settings_all</name>
 	      <can_focus>True</can_focus>
-	      <signal>
-		<name>select_row</name>
-		<handler>on_group_settings_all_select_row</handler>
-		<last_modification_time>Wed, 08 Nov 2000 15:04:36 GMT</last_modification_time>
-	      </signal>
-	      <signal>
-		<name>unselect_row</name>
-		<handler>on_group_settings_all_select_row</handler>
-		<last_modification_time>Thu, 09 Nov 2000 12:16:02 GMT</last_modification_time>
-	      </signal>
 	      <columns>1</columns>
 	      <column_widths>80</column_widths>
 	      <selection_mode>GTK_SELECTION_EXTENDED</selection_mode>
@@ -1757,11 +1645,6 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_user_new_clicked</handler>
-		  <last_modification_time>Tue, 24 Oct 2000 11:14:16 GMT</last_modification_time>
-		</signal>
 		<label>Add User...</label>
 	      </widget>
 
@@ -1771,11 +1654,6 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_user_delete_clicked</handler>
-		  <last_modification_time>Tue, 24 Oct 2000 11:47:54 GMT</last_modification_time>
-		</signal>
 		<label>Settings...</label>
 	      </widget>
 
@@ -1967,11 +1845,6 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_group_new_clicked</handler>
-		  <last_modification_time>Wed, 25 Oct 2000 20:45:21 GMT</last_modification_time>
-		</signal>
 		<label>Add Group...</label>
 	      </widget>
 
@@ -1981,12 +1854,6 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_group_delete_clicked</handler>
-		  <data>group_settings_frame</data>
-		  <last_modification_time>Thu, 01 Feb 2001 17:59:44 GMT</last_modification_time>
-		</signal>
 		<label>Settings...</label>
 	      </widget>
 
@@ -2942,11 +2809,6 @@ and when You click on &quot;More Options&quot;.</label>
 	      <sensitive>False</sensitive>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>on_network_user_new_clicked</handler>
-		<last_modification_time>Wed, 03 Jan 2001 14:40:59 GMT</last_modification_time>
-	      </signal>
 	      <label>New User</label>
 	    </widget>
 
@@ -2956,11 +2818,6 @@ and when You click on &quot;More Options&quot;.</label>
 	      <sensitive>False</sensitive>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>on_network_group_new_clicked</handler>
-		<last_modification_time>Wed, 03 Jan 2001 14:55:37 GMT</last_modification_time>
-	      </signal>
 	      <label>New Group</label>
 	    </widget>
 
@@ -2970,11 +2827,6 @@ and when You click on &quot;More Options&quot;.</label>
 	      <sensitive>False</sensitive>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>on_network_delete_clicked</handler>
-		<last_modification_time>Wed, 03 Jan 2001 09:08:35 GMT</last_modification_time>
-	      </signal>
 	      <label>Delete</label>
 	    </widget>
 	  </widget>
