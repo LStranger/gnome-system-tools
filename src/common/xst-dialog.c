@@ -87,7 +87,6 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 {
 	char *label[] = {
 		N_(" More Options >> "),
-		N_(" Full Options >> "),
 		N_(" << Fewer Options ")
 	};
 
