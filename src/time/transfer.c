@@ -358,9 +358,6 @@ transfer_time_gui_to_system (XstTool *xst_tool)
 
 	gtk_calendar_get_date (GTK_CALENDAR (calendar_widget), &year, &month, &day);
 
-	g_print ("Transfering gui to system %d\"%d'%d\n",
-		 tool->hrs, tool->min, tool->sec);
-	
 	tm.tm_year  = year - 1900;
 	tm.tm_mon   = month;
 	tm.tm_mday  = day;
