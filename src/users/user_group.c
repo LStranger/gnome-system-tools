@@ -1243,7 +1243,7 @@ user_account_get_by_node (xmlNodePtr node)
 	account->new = FALSE;
 
 	account->name = user_value_login (node);
-	account->comment = user_value_comment (node);
+	account->comment = user_value_comment_array (node);
 	account->uid = user_value_uid_string (node);
 	account->home = user_value_home (node);
 	account->shell = user_value_shell (node);
@@ -1269,7 +1269,7 @@ user_account_save (UserAccount *account)
 		node = account->node = user_add_blank_xml (account->node);
 	
 	user_set_value_login (node, account->name);
-	user_set_value_comment (node, account->comment);
+	user_set_value_comment_array (node, account->comment);
 	user_set_value_uid_string (node, account->uid);
 	user_set_value_shell (node, account->shell);
 
@@ -1298,7 +1298,7 @@ void
 user_account_destroy (UserAccount *account)
 {
 	if (account->name)     g_free (account->name);
-	if (account->comment)  g_free (account->comment);
+	if (account->comment)  g_strfreev (account->comment);
 	if (account->home)     g_free (account->home);
 	if (account->shell)    g_free (account->shell);
 	if (account->uid)      g_free (account->uid);

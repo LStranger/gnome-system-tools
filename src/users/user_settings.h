@@ -37,6 +37,9 @@ typedef struct {
 	GtkWidget *basic_frame;
 	GtkEntry *name;
 	GtkEntry *comment;
+	GtkEntry *office;
+	GtkEntry *wphone;
+	GtkEntry *hphone;
 	GtkEntry *home;
 	GtkCombo *shell;
 	GtkSpinButton *uid;

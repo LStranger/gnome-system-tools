@@ -226,6 +226,20 @@ user_set_groups (xmlNodePtr user_node, GSList *list)
 	g_free (user_name);
 }
 
+gchar **
+user_value_comment_array (xmlNodePtr node)
+{
+	gchar **buf = NULL;
+	gchar *comment;
+
+	comment = generic_value_string (node, "comment");	
+	if (comment)
+		buf =  g_strsplit (comment, ",", 4);
+
+	g_free (comment);
+	return buf;
+}
+
 void
 generic_set_value_string (xmlNodePtr node, const gchar *name, const gchar *value)
 {
@@ -245,6 +259,43 @@ generic_set_value_integer (xmlNodePtr node, const gchar *name, gint value)
 
 	buf = g_strdup_printf ("%d", value);
 	xst_xml_set_child_content (node, (gchar *)name, buf);
+	g_free (buf);
+}
+
+void
+user_set_value_comment_array (xmlNodePtr node, gchar **comment)
+{
+	gint i, len;
+	gchar *buf;
+
+	/* Empty comment field if no new comment */
+	if (!comment) {
+		generic_set_value_string (node, "comment", "");
+		return;
+	}
+
+	/* All this hassle is to remove empty "," from the ebd of comment */
+	
+	/* Get len of **comment */
+	len = 0;
+	for (i = 0; i < 4; i++) {
+		if (comment[i])
+			len++;
+		else
+			break;
+	}
+	
+	/* Get rid of empty parts */
+	for (i = len - 1; i >= 0; i--) {
+		if (strlen (comment[i]) < 1) {
+			g_free (comment[i]);
+			comment[i] = NULL;
+		} else
+			break;
+	}
+
+	buf = g_strjoinv (",", comment);	
+	generic_set_value_string (node, "comment", buf);
 	g_free (buf);
 }
 

@@ -1,3 +1,16 @@
+2001-06-07  Tambet Ingo  <tambet@ximian.com>
+
+	* user_settings.c: Fixes buf #3015
+	(user_account_comment_setup): Implement.
+	(user_account_gui_save_comment): Implement.
+
+	* user_group.c (user_account_get_by_node): Changed UserAccount->comment to be **gchar.
+
+	* user-group-xml.c (user_set_value_comment_array): Implement.
+	(user_value_comment_array): Implement.
+
+	* user-druid.c (construct): Changed last entry on druid's first page.
+
 2001-06-01  Chema Celorio  <chema@celorio.com>
 
 	* passwd.c (passwd_check): add #ifdef HAVE_CRACKLIB so that it

@@ -193,6 +193,9 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->basic_frame = glade_xml_get_widget (gui->xml, "user_settings_basic");
 	gui->name    = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_name"));
 	gui->comment = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_comment"));
+	gui->office  = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_office"));
+	gui->wphone  = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_wphone"));
+	gui->hphone  = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_hphone"));
 	gui->home    = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_home"));
 	gui->shell   = GTK_COMBO (glade_xml_get_widget (gui->xml, "user_settings_shell"));
 	gui->uid     = GTK_SPIN_BUTTON (glade_xml_get_widget (gui->xml, "user_settings_uid"));
@@ -252,6 +255,12 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 
 	gtk_signal_connect (GTK_OBJECT (gui->name), "activate",
 			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->comment);
+	gtk_signal_connect (GTK_OBJECT (gui->comment), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->office);
+	gtk_signal_connect (GTK_OBJECT (gui->office), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->wphone);
+	gtk_signal_connect (GTK_OBJECT (gui->wphone), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->hphone);
 	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "activate",
 			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->pwd2);
 	gtk_signal_connect (GTK_OBJECT (gui->uid), "activate",
@@ -412,6 +421,29 @@ setup_advanced (UserAccountGui *gui, GtkWidget *notebook)
 	gtk_widget_show_all (box);
 }
 
+static void
+user_account_comment_setup (UserAccountGui *gui)
+{
+	gint i;
+	gchar **comment = gui->account->comment;
+	GtkEntry *entries[] = {
+		GTK_ENTRY (gui->comment),
+		GTK_ENTRY (gui->office),
+		GTK_ENTRY (gui->wphone),
+		GTK_ENTRY (gui->hphone)
+	};
+
+	if (!comment)
+		return;
+	
+	for (i = 0; i < 4; i++) {
+		if (comment[i] == NULL)
+			break;
+		else
+			xst_ui_entry_set_text (entries[i], comment[i]);
+	}
+}
+
 void
 user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 {
@@ -421,9 +453,10 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 	
 	user_account_shells_setup (gui);
 	user_account_groups_setup (gui->group, account->node);
+	user_account_comment_setup (gui);
 	
 	xst_ui_entry_set_text (gui->name, account->name);
-	xst_ui_entry_set_text (gui->comment, account->comment);
+	
 	xst_ui_entry_set_text (gui->home, account->home);
 	xst_ui_entry_set_text (GTK_ENTRY (gui->shell->entry), account->shell);
 	gtk_spin_button_set_value (gui->uid, atoi (account->uid));
@@ -488,6 +521,25 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 	}
 }
 
+static gchar**
+user_account_gui_save_comment (UserAccountGui *gui)
+{
+	gchar *buf;
+	gchar **val;
+
+	buf = g_strjoin (",",
+			 gtk_entry_get_text (gui->comment),
+			 gtk_entry_get_text (gui->office),
+			 gtk_entry_get_text (gui->wphone),
+			 gtk_entry_get_text (gui->hphone),
+			 NULL);
+
+	val = g_strsplit (buf, ",", 4);
+	g_free (buf);
+	
+	return val;
+}
+
 gboolean
 user_account_gui_save (UserAccountGui *gui)
 {
@@ -506,10 +558,7 @@ user_account_gui_save (UserAccountGui *gui)
 		goto err;
 	account->name = g_strdup (buf);
 	
-	buf = gtk_entry_get_text (gui->comment);
-	if ((error = check_user_comment (node, buf)))
-		goto err;
-	account->comment = g_strdup (buf);
+	account->comment = user_account_gui_save_comment (gui);
 	
 	buf = gtk_entry_get_text (gui->home);
 	if ((error = check_user_home (node, buf)))

@@ -43,7 +43,7 @@ typedef struct {
 	gboolean new;
 	
 	gchar *name;
-	gchar *comment;
+	gchar **comment;
 	gchar *uid;
 	gchar *group;
 	gchar *home;

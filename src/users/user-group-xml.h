@@ -24,16 +24,19 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
-gchar    *generic_value_string      (xmlNodePtr node, const gchar *name);
-gint      generic_value_integer     (xmlNodePtr node, const gchar *name);
-gpointer  generic_value_string_peek (xmlNodePtr parent, const gchar *name);
-void      generic_set_value_string  (xmlNodePtr node, const gchar *name, const gchar *value);
-void      generic_set_value_integer (xmlNodePtr node, const gchar *name, gint value);
-gchar    *user_value_group          (xmlNodePtr user_node);
-gpointer  user_value_group_peek     (xmlNodePtr user_node);
-void      user_set_value_group      (xmlNodePtr user_node, const gchar *value);
-GSList   *user_get_groups           (xmlNodePtr user_node);
-void      user_set_groups           (xmlNodePtr user_node, GSList *list);
+gchar    *generic_value_string         (xmlNodePtr node, const gchar *name);
+gint      generic_value_integer        (xmlNodePtr node, const gchar *name);
+gpointer  generic_value_string_peek    (xmlNodePtr parent, const gchar *name);
+void      generic_set_value_string     (xmlNodePtr node, const gchar *name, const gchar *value);
+void      generic_set_value_integer    (xmlNodePtr node, const gchar *name, gint value);
+gchar    *user_value_group             (xmlNodePtr user_node);
+gpointer  user_value_group_peek        (xmlNodePtr user_node);
+void      user_set_value_group         (xmlNodePtr user_node, const gchar *value);
+GSList   *user_get_groups              (xmlNodePtr user_node);
+void      user_set_groups              (xmlNodePtr user_node, GSList *list);
+gchar   **user_value_comment_array     (xmlNodePtr node);
+void      user_set_value_comment_array (xmlNodePtr node, gchar **comment);
+
 
 #define user_value_login(node)       (generic_value_string (node, "login"))
 #define user_value_home(node)        (generic_value_string (node, "home"))

@@ -297,7 +297,8 @@ construct (UserDruid *druid)
 	user_account_gui_setup (druid->gui, NULL);
 	
 	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "changed", identity_changed, druid);
-	gtk_signal_connect (GTK_OBJECT (druid->gui->comment), "activate", druid_entry_activate, druid);
+	gtk_signal_connect (GTK_OBJECT (druid->gui->hphone), "activate",
+			    GTK_SIGNAL_FUNC (druid_entry_activate), druid);
 	
 	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd2), "changed", password_changed, druid);
 	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd2), "activate", druid_entry_activate, druid);
