@@ -109,8 +109,8 @@ construct (BootImageEditor *editor, BootImage *image)
 	gtk_window_set_policy (GTK_WINDOW (editor), FALSE, TRUE, TRUE);
 	gtk_window_set_modal (GTK_WINDOW (editor), TRUE);
 	gtk_dialog_add_buttons (GTK_DIALOG (editor),
-				GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
 				GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+				GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
 				NULL);
 
 	g_signal_connect (G_OBJECT (editor), "response",
