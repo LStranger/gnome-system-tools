@@ -66,7 +66,7 @@ struct _user
 	guint passwd_exp_warn;		/* Days before password is to expire that user is warned */
 	guint passwd_exp_disable;	/* Days after password expires that account is disabled */
 	gboolean is_passwd_exp_disable; /* Is this field being used? */
-  guint passwd_disable;	/* Days since Jan 1, 1970 that account is disabled */
+	guint passwd_disable;	/* Days since Jan 1, 1970 that account is disabled */
 	gboolean is_passwd_disable; /* Is this field being used? */
 	gchar *reserved;			/* Obscure field. Passed through */
 	gboolean is_shadow;		/* true if using shadow passwords */
@@ -91,9 +91,6 @@ extern group *current_group;
 extern GList *group_list;
 
 extern _logindefs logindefs;
-
-extern const gchar *user_list_data_key;
-extern const gchar *group_list_data_key;
 
 void transfer_config_saved(xmlNodePtr root);
 void transfer_xml_to_gui(xmlNodePtr root);

@@ -24,6 +24,7 @@
 #  include <config.h>
 #endif
 
+#include <ctype.h>
 #include <gnome.h>
 #include "global.h"
 
@@ -102,9 +103,10 @@ extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-	GList *i;
-	group *g;
+	GList *tmp_list;
+	group *g = NULL;
 	gchar *txt;
+	gboolean found = FALSE;
 	
 	g_return_if_fail (current_user != NULL);
 
@@ -115,14 +117,21 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	w0 = tool_widget_get ("user_settings_group");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	fill_user_settings_group (GTK_COMBO (w0));
-	for (i = g_list_first (group_list); i; i = g_list_next (i)) 
+
+	tmp_list = group_list;
+	while (tmp_list)
 	{
-		g = (group *) i->data;
+		g = tmp_list->data;
+		tmp_list = tmp_list->next;
+		
 		if (g->gid == current_user->gid)
+		{
+			found = TRUE;
 			break;
+		}
 	}
 	
-	if (!i)
+	if (!found)
 		g_warning ("The GID for the main user's group was not found in group_list.");
 	else
 		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), g->name);
@@ -170,10 +179,10 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	fill_user_settings_group (GTK_COMBO (w0));
 	my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
 
-	
+
 	w0 = tool_widget_get ("user_settings_comment");
 	gtk_widget_set_sensitive (w0, tool_get_access());
-	
+
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
 	gtk_widget_show (w0);
@@ -202,7 +211,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	else
 	{
 		clist = GTK_CLIST (tool_widget_get ("user_list"));
-		row = gtk_clist_find_row_from_data (clist, current_user);
+		row = GPOINTER_TO_INT (clist->selection->data);
 		user_list = g_list_remove (user_list, current_user);
 		gtk_clist_remove (clist, row);
 		current_user = NULL;
@@ -214,7 +223,7 @@ extern void
 on_user_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
 		gpointer user_data)
 {
-	if (row < 0) 
+	if (!clist->selection) 
 	{
 		user_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")),
@@ -298,13 +307,14 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
+	g_free (txt);
 
 	if (reply)
 		return;
 	else
 	{
 		clist = GTK_CLIST (tool_widget_get ("group_list"));
-		row = gtk_clist_find_row_from_data (clist, current_group);
+		row = GPOINTER_TO_INT (clist->selection->data), 
 		group_list = g_list_remove (group_list, current_group);
 		gtk_clist_remove (clist, row);
 		current_group = NULL;
@@ -316,7 +326,7 @@ extern void
 on_group_list_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event, 
 		gpointer user_data)
 {
-	if (row < 0)
+	if (!clist->selection)
 	{
 		group_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")),
@@ -344,21 +354,20 @@ static void
 user_settings_dialog_close (void)
 {
 	GtkWidget *w0;
-	GtkCList *clist;
 	GList *list;
+	GtkCList *clist;
 	gint row;
 
 	/* set current current user if it's not set */
 	if (!current_user)
 	{
 		clist = GTK_CLIST (tool_widget_get ("user_list"));
-		list = clist->selection;
-		row = GPOINTER_TO_INT (list->data);
+		row = GPOINTER_TO_INT (clist->selection->data);
 		
 		current_user = gtk_clist_get_row_data (clist, row);
 	}
 
-	/* Clear up entries */
+	/* Clean up entries */
 
 	w0 = tool_widget_get ("user_settings_name");
 	gtk_entry_set_text (GTK_ENTRY (w0), "");
@@ -521,15 +530,13 @@ group_settings_dialog_close (void)
 {
 	GtkWidget *w0;
 	GtkCList *clist;
-	GList *current;
 	gint row;
 
 	/* set current current group if it's not set */
 	if (!current_group)
 	{
 		clist = GTK_CLIST (tool_widget_get ("group_list"));
-		current = clist->selection;
-		row = GPOINTER_TO_INT (current->data);
+		row = GPOINTER_TO_INT (clist->selection->data);
 		
 		current_group = gtk_clist_get_row_data (clist, row);
 	}
@@ -587,7 +594,6 @@ extern void
 on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkCList *all, *members;
-	GList *selection;
 	gchar *name;
 	gchar *entry[2];
 	gint row;
@@ -597,22 +603,18 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 	all = GTK_CLIST (tool_widget_get ("group_settings_all"));
 	members = GTK_CLIST (tool_widget_get ("group_settings_members"));
 
-	selection = g_list_copy (all->selection);
-	row = GPOINTER_TO_INT (selection->data);
+	row = GPOINTER_TO_INT (all->selection->data);
 
 	gtk_clist_get_text (all, row, 0, &name);
 	entry[0] = g_strdup (name);
 	gtk_clist_remove (all, row);
 	gtk_clist_append (members, entry);
-
-	g_list_free (selection);
 }
 
 extern void
 on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkCList *all, *members;
-	GList *selection;
 	gchar *name;
 	gchar *entry[2];
 	gint row;
@@ -622,15 +624,12 @@ on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 	all = GTK_CLIST (tool_widget_get ("group_settings_all"));
 	members = GTK_CLIST (tool_widget_get ("group_settings_members"));
 
-	selection = g_list_copy (members->selection);
-	row = GPOINTER_TO_INT (selection->data);
+	row = GPOINTER_TO_INT (members->selection->data);
 
 	gtk_clist_get_text (members, row, 0, &name);
 	entry[0] = g_strdup (name);
 	gtk_clist_remove (members, row);
 	gtk_clist_append (all, entry);
-
-	g_list_free (selection);
 }
 
 
@@ -638,16 +637,13 @@ extern void
 on_group_settings_all_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
 		gpointer user_data)
 {
-	GList *current;
 	GtkWidget *w0;
 
-	current = clist->selection;
-	
 	if (tool_get_access())
 	{
 		w0 = tool_widget_get ("group_settings_add");
 
-		if (!current)
+		if (!clist->selection)
 			gtk_widget_set_sensitive (w0, FALSE);
 		else
 			gtk_widget_set_sensitive (w0, TRUE);
@@ -658,16 +654,13 @@ extern void
 on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
 		gpointer user_data)
 {
-	GList *current;
 	GtkWidget *w0;
-
-	current = clist->selection;
 
 	if (tool_get_access())
 	{
 		w0 = tool_widget_get ("group_settings_remove");
 
-		if (!current)
+		if (!clist->selection)
 			gtk_widget_set_sensitive (w0, FALSE);
 		else
 			gtk_widget_set_sensitive (w0, TRUE);
@@ -776,8 +769,6 @@ fill_user_settings_group (GtkCombo *combo)
 static void 
 do_quit (void)
 {
-	/* TODO: Check for changes and optionally ask for confirmation */
-	
 	if (GTK_WIDGET_IS_SENSITIVE (tool_widget_get ("apply")))
 	{
 		/* Changes have been made. */
@@ -786,7 +777,9 @@ do_quit (void)
 		GnomeDialog *dialog;
 		
 		parent = GTK_WINDOW (tool_widget_get ("users_admin"));
-		dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
+		dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL,
+				parent));
+
 		gnome_dialog_run (dialog);
 		
 		if (!reply)
@@ -833,11 +826,16 @@ update_user (void)
 	GtkWidget *w0;
 	GtkWindow *win;
 	GnomeDialog *dialog;
-	gchar *txt;
+	gchar *txt, *new_group_name;
 	GtkCList *list;
-	GList *tmplist;
-	group *g;
+	GList *tmp_list;
+	group *g = NULL;
+	group *new_group;
 	gint row;
+	gboolean found = FALSE;
+	gchar *entry[2];
+
+	entry[1] = NULL;
 	
 	w0 = tool_widget_get ("user_settings_name");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
@@ -856,15 +854,21 @@ update_user (void)
 			gtk_widget_grab_focus (w0);
 			return FALSE;
 		}
-		else
-		{
-			g_free (current_user->login);
-			current_user->login = g_strdup (txt);
 
-			list = GTK_CLIST (tool_widget_get ("user_list"));
-			row = gtk_clist_find_row_from_data (list, current_user);
-			gtk_clist_set_text (list, row, 0, txt);
+		if (!is_valid_name (txt))
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (
+			("Please set a valid username, using only lower-case letters."), win));
+			gnome_dialog_run (dialog);
+			return FALSE;
 		}
+
+		g_free (current_user->login);
+		current_user->login = g_strdup (txt);
+
+		list = GTK_CLIST (tool_widget_get ("user_list"));
+		row = gtk_clist_find_row_from_data (list, current_user);
+		gtk_clist_set_text (list, row, 0, txt);
 	}
 
 	w0 = tool_widget_get ("user_settings_comment");
@@ -884,24 +888,53 @@ update_user (void)
 	/* Get selected group name */
 
 	w0 = tool_widget_get ("user_settings_group");
-	txt = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
+	new_group_name = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
 
 	/* Now find group's gid */
 
-	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+	tmp_list = group_list;
+	while (tmp_list)
 	{
-		g = (group *)tmplist->data;
-		if (!strcmp (g->name, txt))
+		g = tmp_list->data;
+		tmp_list = tmp_list->next;
+
+		if (!strcmp (g->name, new_group_name))
+		{
+			found = TRUE;
 			break;
+		}
 	}
 	
-	if (!tmplist)
+	if (!found)
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (_("Select main group."), win));
-		gnome_dialog_run (dialog);
-		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
-		return FALSE;
+		/* New group: check that it is a valid group name */
+
+		if (!is_valid_name (new_group_name))
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (
+				"Please set a valid main group name, with only lower-case letters,"
+				"\nor select one from pull-down menu.", win));
+
+			gnome_dialog_run (dialog);
+			return FALSE;
+		}
+
+		/* Cool: create new group */
+
+		new_group = make_default_group ();
+		new_group->name = g_strdup (new_group_name);
+		group_list = g_list_append (group_list, new_group);
+		current_user->gid = new_group->gid;
+
+		/* Add to CList */
+
+		list = GTK_CLIST (tool_widget_get ("group_list"));
+
+		entry[0] = new_group_name;
+		row = gtk_clist_append (list, entry);
+		gtk_clist_set_row_data (list, row, new_group);
 	}
+	
 	else
 		current_user->gid = g->gid;
 
@@ -917,9 +950,11 @@ add_user (void)
 	gchar *new_user_name, *new_group_name, *new_comment, *tmp;
 	GtkCList *clist;
 	GList *tmp_list;
-	group *g, *new_group;
+	group *g = NULL;
+	group *new_group;
 	user *new_user, *current_u;
 	gchar *entry[2];
+	gboolean found = FALSE;
 	gint row;
 
 	entry[1] = NULL;
@@ -943,7 +978,6 @@ add_user (void)
 	/* Check if user exists */
 
 	tmp_list = user_list;
-
 	while (tmp_list)
 	{
 		current_u = tmp_list->data;
@@ -987,10 +1021,13 @@ add_user (void)
 		tmp_list = tmp_list->next;
 
 		if (!strcmp (g->name, new_group_name))
-		break;
+		{
+			found = TRUE;
+			break;
+		}
 	}
 	
-	if (!tmp_list)
+	if (!found)
 	{
 		/* New group: check that it is a valid group name */
 		
@@ -1148,9 +1185,13 @@ add_group (void)
 	}
 	
 	/* Find if group with given name already exists */
-	for (selection = g_list_first (group_list); selection; selection = g_list_next (selection))
+
+	selection = group_list;
+	while (selection)
 	{
-		current_g = (group *)selection->data;
+		current_g = selection->data;
+		selection = selection->next;
+
 		if (!strcmp (current_g->name, new_group_name))
 		{
 			tmp = g_strdup_printf (_("Group %s already exists."), new_group_name);
@@ -1250,7 +1291,7 @@ make_default_user (gchar *name)
 static guint
 find_new_id (gchar from, gchar what)
 {
-	GList *tmplist;
+	GList *tmp_list;
 	group *current_g;
 	user *current_u;
 	guint ret = 0;
@@ -1258,10 +1299,13 @@ find_new_id (gchar from, gchar what)
 	if (from == GROUP)
 	{
 		ret = logindefs.new_group_min_id;
-		
-		for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+
+		tmp_list = group_list;
+		while (tmp_list)
 		{
-			current_g = (group *)tmplist->data;
+			current_g = tmp_list->data;
+			tmp_list = tmp_list->next;
+
 			if (ret <= current_g->gid)
 				ret = current_g->gid + 1;
 		}
@@ -1274,13 +1318,17 @@ find_new_id (gchar from, gchar what)
 		
 		return ret;
 	}
+
 	else if (from == USER && what == UID)
 	{
 		ret = logindefs.new_user_min_id;
-		
-		for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
+
+		tmp_list = user_list;
+		while (tmp_list)
 		{
-			current_u = (user *)tmplist->data;
+			current_u = tmp_list->data;
+			tmp_list = tmp_list->next;
+
 			if (ret <= current_u->uid)
 				ret = current_u->uid + 1;
 		}
@@ -1304,7 +1352,7 @@ find_new_id (gchar from, gchar what)
 static gchar *
 find_new_key (gchar from)
 {
-	GList *tmplist;
+	GList *tmp_list;
 	group *current_g;
 	user *current_u;
 	guint ret = 0;
@@ -1313,9 +1361,12 @@ find_new_key (gchar from)
 
 	if (from == GROUP)
 	{
-		for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+		tmp_list = group_list;
+		while (tmp_list)
 		{
-			current_g = (group *)tmplist->data;
+			current_g = tmp_list->data;
+			tmp_list = tmp_list->next;
+
 			tmp = atoi (current_g->key);
 			if (ret <= tmp)
 				ret = tmp + 1;
@@ -1328,9 +1379,12 @@ find_new_key (gchar from)
 
 	if (from == USER)
 	{
-		for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
+		tmp_list = user_list;
+		while (tmp_list)
 		{
-			current_u = (user *)tmplist->data;
+			current_u = tmp_list->data;
+			tmp_list = tmp_list->next;
+
 			tmp = atoi (current_u->key);
 			if (ret <= tmp)
 				ret = tmp + 1;
@@ -1352,14 +1406,14 @@ is_valid_name (gchar *str)
 {
 	if (!str || !*str)
 		return FALSE;
- 
+
 	for (;*str; str++)
 	{
 		if (((*str < 'a') || (*str > 'z')) &&
 				((*str < '0') || (*str > '9')))
 			return FALSE;
 	}
-	
+
 	return TRUE;
 }
 

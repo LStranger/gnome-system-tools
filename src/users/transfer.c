@@ -40,15 +40,6 @@ group *current_group = NULL;
 
 _logindefs logindefs;
 
-const gchar *user_list_data_key = "user_list_data";
-const gchar *group_list_data_key = "group_list_data";
-
-/* Prototypes */
-gint user_sort_by_uid (gconstpointer a, gconstpointer b);
-gint user_sort_by_login (gconstpointer a, gconstpointer b);
-gint group_sort_by_name (gconstpointer a, gconstpointer b);
-
-
 /* Structure with some hard-coded defaults, just in case any of the tags is not present. */
 /* These were taken form RH 6.2's default values. Any better suggestions? */
 /* NULL means not present for string members. */
@@ -386,7 +377,7 @@ static void
 transfer_user_list_glist_to_xml (xmlNodePtr root)
 {
 	xmlNodePtr userdb_node, node;
-	GList *tmplist;
+	GList *tmp_list;
 	user *u;
 	gint i;
 	gchar *tag;
@@ -399,10 +390,12 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 	userdb_node = xml_element_find_first (root, "userdb");
 	xml_element_destroy_children (userdb_node);
 
-	for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
+	tmp_list = user_list;
+	while (tmp_list)
 	{
-		u = (user *)tmplist->data;
-		
+		u = tmp_list->data;
+		tmp_list = tmp_list->next;
+
 		node = xml_element_add (userdb_node, "user");
 
 		for (i = 0, tag = user_tags[0]; tag; i++, tag = user_tags[i])
@@ -454,7 +447,7 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 {
 	xmlNodePtr groupdb_node, users_node, node, u_node;
 	group *g;
-	GList *tmplist, *list;
+	GList *tmp_list, *list;
 	gchar buf[15]; /*Max buf size for non-char tags */
 	gchar *tmp;
 
@@ -465,9 +458,12 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 	groupdb_node = xml_element_find_first (root, "groupdb");
 	xml_element_destroy_children (groupdb_node);
 
-	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+	tmp_list = group_list;
+	while (tmp_list)
 	{
-		g = (group *)tmplist->data;
+		g = tmp_list->data;
+		tmp_list = tmp_list->next;
+
 		node = xml_element_add (groupdb_node, "group");
 
 		xml_element_add_with_content (node, "key", g->key);
@@ -479,53 +475,17 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 
 		users_node = xml_element_add (node, "users");
 
-		for (list = g_list_first (g->users); list; list = g_list_next (list))
-
+		list = g->users;
+		while (list)
 		{
 			tmp = list->data;
+			list = list->next;
+
 			u_node = xml_element_add (users_node, "user");
 			xml_element_set_content (u_node, tmp);
 		}
 	}
 }
-
-gint
-user_sort_by_uid (gconstpointer a, gconstpointer b)
-{
-	user *u_a, *u_b;
-
-	u_a = (user *)a;
-	u_b = (user *)b;
-	
-	if (u_a->uid > u_b->uid) return 1;
-	if (u_a->uid == u_b->uid) return 0;
-	
-	return -1;
-}
-
-gint
-user_sort_by_login (gconstpointer a, gconstpointer b)
-{
-	user *u_a, *u_b;
-
-	u_a = (user *)a;
-	u_b = (user *)b;
-	
-	return (strcmp (u_a->login, u_b->login));
-}
-
-gint
-group_sort_by_name (gconstpointer a, gconstpointer b)
-{
-	group *g_a, *g_b;
-
-	g_a = (group *)a;
-	g_b = (group *)b;
-
-	return (strcmp (g_a->name, g_b->name));
-}
-
-
 
 void
 transfer_xml_to_gui (xmlNodePtr root)
