@@ -819,86 +819,69 @@ settings_prepare (ug_data *ud)
 gboolean
 user_update (UserSettings *us)
 {
-	gboolean ok = TRUE;
 	gint group, i;
 	gchar *buf;
-	gchar *old_name, *new_name;
+	gchar *new_name;
 
 	new_name = gtk_entry_get_text (us->basic->name);
-	old_name = xst_xml_get_child_content (us->node, "login");
 	
 	if (!check_user_login (XST_DIALOG (us->dialog), us->node, new_name))
-		ok = FALSE;
+		return FALSE;
 
 	buf = gtk_entry_get_text (us->basic->comment);
 	if (!check_user_comment (XST_DIALOG (us->dialog), us->node, buf))
-		ok = FALSE;
+		return FALSE;
 
 	group = check_user_group (us);
-	switch (group)
-	{
-		case 0:
-			/* Group exsisted, everything is ok. */
-			break;
-		case 1:
-			/* Make new group */
-			if (ok)
-				group_add_from_user (us);
-			break;
-		case -1:
-		default:
-			/* Error. */
-			ok = FALSE;
-			break;
+	switch (group) {
+	case 0:
+		/* Group exsisted, everything is ok. */
+		break;
+	case 1:
+		/* Make new group */
+		group_add_from_user (us);
+		break;
+	case -1:
+	default:
+		/* Error. */
+		return FALSE;
 	}
 
 	i = gtk_spin_button_get_value_as_int (us->basic->uid);
-	
 	buf = g_strdup_printf ("%d", i);
-	if (!check_user_uid (XST_DIALOG (us->dialog), us->node, buf))
-		ok = FALSE;
-
+	if (!check_user_uid (XST_DIALOG (us->dialog), us->node, buf)) {
+		g_free (buf);
+		return FALSE;
+	}
 	g_free (buf);
 
 	buf = gtk_entry_get_text (us->basic->home);
 	if (!check_user_home (XST_DIALOG (us->dialog), us->node, buf))
-		ok = FALSE;
+		return FALSE;
 
 	buf = gtk_entry_get_text (GTK_ENTRY (us->basic->shell->entry));
 	if (!check_user_shell (XST_DIALOG (us->dialog), us->node, buf))
-		ok = FALSE;
-
+		return FALSE;
 	
-	if (ok)
-	{
-		if (us->new)
-		{
-			/* Add new user, update table. */
-			us->node = user_add_blank_xml (us->node);
-			user_update_xml (us);
-			current_table_new_row (us->node, us->table);
+	if (us->new) {
+		/* Add new user, update table. */
+		us->node = user_add_blank_xml (us->node);
+		user_update_xml (us);
+		current_table_new_row (us->node, us->table);
 
-			/* Ask for password too */
-			if (!check_passwd (us->node))
-				user_password_change (us->node);
-
-			return ok;
-		}
-
-		else
-		{
-			/* Entered data ok, not new: just update. */
-			user_update_xml (us);
-			group_update_users (us->node, old_name, new_name);
-			current_table_update_row (us->table);
-
-			g_free (new_name);
-			
-			return ok;
-		}
+		/* Ask for password too */
+		if (!check_passwd (us->node))
+			user_password_change (us->node);
+	} else {
+		gchar *old_name = xst_xml_get_child_content (us->node, "login");
+		/* Entered data ok, not new: just update. */
+		user_update_xml (us);
+		group_update_users (us->node, old_name, new_name);
+		g_free (old_name);
+		current_table_update_row (us->table);
 	}
 
-	return FALSE;
+	return TRUE;
 }
 
 void

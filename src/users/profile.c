@@ -31,10 +31,13 @@
 #include "profile.h"
 #include "user_group.h"
 #include "callbacks.h"
+#include "e-table.h"
 
 typedef struct
 {
-	GtkCombo        *name;
+	GtkOptionMenu   *system_menu;
+	GtkOptionMenu   *files_menu;
+	GtkOptionMenu   *security_menu;
 	GnomeFileEntry  *home_prefix;
 	GtkCombo        *shell;
 	GtkEntry        *group;
@@ -161,8 +164,10 @@ et_cursor_change (ETable *table, gint row, gpointer user_data)
 {
 	Profile *pf = e_table_memory_get_data (E_TABLE_MEMORY (table->model), row);
 
-	profile_table_set_selected (pf->name);
-	tables_update_content ();
+	if (pf) {
+		profile_table_set_selected (pf->name);
+		tables_update_content ();
+	}
 }
 
 void
@@ -250,7 +255,9 @@ profile_tab_init (void)
 	xd = tool->main_dialog;
 	pft = g_new (ProfileTab, 1);
 	
-	pft->name = GTK_COMBO (xst_dialog_get_widget (xd, "pro_name"));
+	pft->system_menu = GTK_OPTION_MENU (xst_dialog_get_widget (xd, "pro_system_menu"));
+	pft->files_menu = GTK_OPTION_MENU (xst_dialog_get_widget (xd, "pro_files_menu"));
+	pft->security_menu = GTK_OPTION_MENU (xst_dialog_get_widget (xd, "pro_security_menu"));
 
 	pft->home_prefix = GNOME_FILE_ENTRY (xst_dialog_get_widget (xd, "pro_home"));
 	pft->shell       = GTK_COMBO (xst_dialog_get_widget (xd, "pro_shell"));
@@ -281,16 +288,6 @@ profile_fill (Profile *pf)
 	if (!pft)
 		profile_tab_init ();
 
-	gtk_signal_handler_block_by_func (GTK_OBJECT (pft->name->entry),
-					  GTK_SIGNAL_FUNC (on_pro_name_changed),
-					  NULL);
-	
-	gtk_entry_set_text (GTK_ENTRY (pft->name->entry), pf->name);
-
-	gtk_signal_handler_unblock_by_func (GTK_OBJECT (pft->name->entry),
-					    GTK_SIGNAL_FUNC (on_pro_name_changed),
-					    NULL);
-	
 	my_gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
 					pf->home_prefix);
 	my_gtk_entry_set_text (GTK_ENTRY (pft->shell->entry), pf->shell);
@@ -336,9 +333,9 @@ profile_save (gchar *name)
 	pf = (Profile *)g_hash_table_lookup (profile_table->hash, buf);
 	g_free (buf);
 
-	if (pf)
-	{
-		profile_save_entry (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)), &pf->home_prefix);
+	if (pf)	{
+		profile_save_entry (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
+				    &pf->home_prefix);
 		profile_save_entry (GTK_ENTRY (GTK_COMBO (pft->shell)->entry), &pf->shell);
 		profile_save_entry (GTK_ENTRY (pft->group), &pf->group);
 		
@@ -469,6 +466,7 @@ profile_get_default (void)
 	pf->pwd_random = FALSE;
 	pf->logindefs = TRUE;
 
+	profile_fill (pf);
 	profile_table_add_profile (pf, TRUE);
 }
 
@@ -634,7 +632,9 @@ profile_table_to_xml (xmlNodePtr root)
 void
 profile_table_add_profile (Profile *pf, gboolean select)
 {
-	GtkWidget *li;
+	GtkWidget *menu_item;
+	GtkOptionMenu *om[] = { pft->system_menu, pft->files_menu, pft->security_menu, NULL };
+	gint i;
 	
 	g_hash_table_insert (profile_table->hash, pf->name, pf);
 
@@ -642,17 +642,15 @@ profile_table_add_profile (Profile *pf, gboolean select)
 		profile_tab_init ();
 
 	et_insert (NULL, pf, NULL);
+
+	i = 0;
+	while (om[i]) {
+		menu_item = xst_ui_option_menu_add_string (om[i], pf->name);
+		gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				    GTK_SIGNAL_FUNC (on_pro_name_changed), pf->name);
+		i++;
+	}
 	
-	/* add name to combo box */
-	gtk_signal_handler_block_by_func (GTK_OBJECT (pft->name->entry),
-					  GTK_SIGNAL_FUNC (on_pro_name_changed),
-					  NULL);
-	li = gtk_list_item_new_with_label (pf->name);
-	gtk_widget_show (li);
-	gtk_container_add (GTK_CONTAINER (pft->name->list), li);
-	gtk_signal_handler_unblock_by_func (GTK_OBJECT (pft->name->entry),
-					  GTK_SIGNAL_FUNC (on_pro_name_changed),
-					  NULL);
 	if (select || g_hash_table_size (profile_table->hash) == 1)
 	{
 		profile_table->selected = pf->name;
@@ -695,7 +693,10 @@ profile_table_del_profile (gchar *name)
 			if (g_hash_table_size (profile_table->hash) == 0)
 				profile_table->selected = NULL;
 
-			xst_ui_combo_remove_by_label (pft->name, buf);
+			xst_ui_option_menu_remove_string (pft->system_menu, buf);
+			xst_ui_option_menu_remove_string (pft->files_menu, buf);
+			xst_ui_option_menu_remove_string (pft->security_menu, buf);
+			
 			et_remove (pf);
 			retval = TRUE;
 		}

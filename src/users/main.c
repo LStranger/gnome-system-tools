@@ -79,7 +79,7 @@ static XstDialogSignal signals[] = {
 	{ "pro_del",                     "clicked",       on_pro_del_clicked },
 	{ "pro_new",                     "clicked",       on_pro_new_clicked },
 	{ "pro_copy",                    "clicked",       on_pro_copy_clicked },
-	{ "pro_settings",                "clicked",       on_pro_settings_clicked },
+	{ "user_profiles",               "clicked",       on_pro_settings_clicked },
 	{ "profile_editor_dialog",       "clicked",       pro_settings_button_clicked },
 	{ "user_passwd_change",          "clicked",       on_user_passwd_change_clicked },
 	{ "user_passwd_random",          "clicked",       on_user_passwd_random_clicked },
@@ -93,6 +93,7 @@ static const XstWidgetPolicy policies[] = {
 	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "user_settings",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "groups_holder",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "group_new",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "group_delete",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
@@ -140,11 +141,13 @@ connect_signals (void)
 
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 
+#ifdef OLD
 	gtk_signal_connect (GTK_OBJECT (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog,
 									  "pro_name"))->entry),
 			    "changed",
 			    GTK_SIGNAL_FUNC (on_pro_name_changed),
 			    NULL);
+#endif	
 }
 
 static void

@@ -213,12 +213,9 @@ on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 /* Profiles tab */
 
 void
-on_pro_name_changed (GtkEditable *editable, gpointer user_data)
+on_pro_name_changed (GtkMenuItem *menu_item, gpointer user_data)
 {
-	gchar *buf;
-
-	buf = gtk_editable_get_chars (editable, 0, -1);
-	profile_table_set_selected (buf);
+	profile_table_set_selected ((gchar *) user_data);
 	tables_update_content ();
 }
 
@@ -242,10 +239,8 @@ static void
 pro_ask_name (gint action)
 {
 	gchar *buf;
+	GtkWidget *w0;
 	Profile *new, *pf = NULL;
-
-	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								    "profile_new_name")));
 	
 	switch (action)
 	{
@@ -253,7 +248,10 @@ pro_ask_name (gint action)
 		break;
 		
 	case PROFILE_COPY:
-		pf = profile_table_get_profile (NULL);
+		w0 = xst_dialog_get_widget (tool->main_dialog, "profile_new_menu");
+		buf = xst_ui_option_menu_get_selected_string (GTK_OPTION_MENU (w0));
+		pf = profile_table_get_profile (buf);
+		g_free (buf);
 		break;
 		
 	case PROFILE_ERROR:
@@ -262,6 +260,8 @@ pro_ask_name (gint action)
 		return;
 	}
 
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+								    "profile_new_name")));
 	new = profile_add (pf, buf, TRUE);
 	if (new) {
 		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
@@ -276,19 +276,20 @@ static void
 pro_prepare (gint action)
 {
 	GtkWidget *w;
-	
-	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								    "profile_new_name")), "");
+
+	w = xst_dialog_get_widget (tool->main_dialog, "profile_new_name");
+	gtk_entry_set_text (GTK_ENTRY (w), "");
+	gtk_widget_grab_focus (w);
 
 	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 								    "profile_new_comment")), "");
 
 	w = xst_dialog_get_widget (tool->main_dialog, "profile_new_copy");
 	
-	if (action == PROFILE_COPY)
-		gtk_widget_show (w);
-	else
+	if (action == PROFILE_NEW)
 		gtk_widget_hide (w);
+	else
+		gtk_widget_show (w);
 }
 
 void
