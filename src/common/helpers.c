@@ -29,9 +29,6 @@
 
 #include "helpers.h"
 
-#include "checked.xpm"
-#include "unchecked.xpm"
-
 /* define to x for debugging */
 #define d(x)
 
@@ -320,107 +317,4 @@ check_ip_entry (GtkEntry *entry, gboolean allow_mask)
 	g_return_val_if_fail (GTK_IS_ENTRY (entry), FALSE);
 
 	return check_ip_string (gtk_entry_get_text (entry), allow_mask);
-}
-
-/* --- CTree checkmarks --- */
-
-
-GdkPixmap *checked_pixmap = NULL, *unchecked_pixmap = NULL;
-GdkBitmap *checked_mask = NULL, *unchecked_mask = NULL;
-
-
-void
-set_ctree_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column, gboolean state)
-{
-	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-
-	if (state)
-	{
-		if (!checked_pixmap)
-		{
-			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) checked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &checked_pixmap, &checked_mask, 1);
-		}
-
-		pixmap = checked_pixmap;
-		mask = checked_mask;
-	}
-	else
-	{
-		if (!unchecked_pixmap)
-		{
-			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) unchecked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &unchecked_pixmap, &unchecked_mask, 1);
-		}
-
-		pixmap = unchecked_pixmap;
-		mask = unchecked_mask;
-	}
-
-	gtk_ctree_node_set_pixmap (ctree, node, column, pixmap, mask);
-}
-
-
-gboolean
-get_ctree_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column)
-{
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-
-	gtk_ctree_node_get_pixmap (ctree, node, column, &pixmap, &mask);
-
-	if (pixmap == checked_pixmap) return (TRUE);
-	return (FALSE);
-}
-
-
-/* --- CList checkmarks --- */
-
-
-void
-set_clist_checkmark (GtkCList *clist, gint row, gint column, gboolean state)
-{
-	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-
-	if (state)
-	{
-		if (!checked_pixmap)
-		{
-			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) checked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &checked_pixmap, &checked_mask, 1);
-		}
-
-		pixmap = checked_pixmap;
-		mask = checked_mask;
-	}
-	else
-	{
-		if (!unchecked_pixmap)
-		{
-			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) unchecked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &unchecked_pixmap, &unchecked_mask, 1);
-		}
-
-		pixmap = unchecked_pixmap;
-		mask = unchecked_mask;
-	}
-
-	gtk_clist_set_pixmap (clist, row, column, pixmap, mask);
-}
-
-
-gboolean
-get_clist_checkmark (GtkCList *clist, gint row, gint column)
-{
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-
-	gtk_clist_get_pixmap (clist, row, column, &pixmap, &mask);
-
-	if (pixmap == checked_pixmap) return (TRUE);
-	return (FALSE);
 }

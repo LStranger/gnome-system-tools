@@ -26,12 +26,19 @@
 #include <gnome.h>
 #include "xst-ui.h"
 
-
 /* For xst_ui_create_image_widget */
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gnome-canvas-pixbuf.h>
+
+#include "checked.xpm"
+#include "unchecked.xpm"
+
+
+GdkPixmap *checked_pixmap = NULL, *unchecked_pixmap = NULL;
+GdkBitmap *checked_mask = NULL, *unchecked_mask = NULL;
+
 
 static GtkWidget *
 get_list_item_by_name (GList *list, const gchar *label)
@@ -189,4 +196,94 @@ xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
 	row = g_list_index (menu_items, found);
 	gtk_option_menu_set_history (option_menu, row);
 	return row;
+}
+
+void
+xst_ui_clist_set_checkmark (GtkCList *clist, gint row, gint column, gboolean state)
+{
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	if (state)
+	{
+		if (!checked_pixmap)
+		{
+			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) checked_xpm);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &checked_pixmap, &checked_mask, 1);
+		}
+
+		pixmap = checked_pixmap;
+		mask = checked_mask;
+	}
+	else
+	{
+		if (!unchecked_pixmap)
+		{
+			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) unchecked_xpm);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &unchecked_pixmap, &unchecked_mask, 1);
+		}
+
+		pixmap = unchecked_pixmap;
+		mask = unchecked_mask;
+	}
+
+	gtk_clist_set_pixmap (clist, row, column, pixmap, mask);
+}
+
+gboolean
+xst_ui_clist_get_checkmark (GtkCList *clist, gint row, gint column)
+{
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	gtk_clist_get_pixmap (clist, row, column, &pixmap, &mask);
+
+	if (pixmap == checked_pixmap) return (TRUE);
+	return (FALSE);
+}
+
+void
+xst_ui_ctree_set_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column, gboolean state)
+{
+	GdkPixbuf *pixbuf;
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	if (state)
+	{
+		if (!checked_pixmap)
+		{
+			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) checked_xpm);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &checked_pixmap, &checked_mask, 1);
+		}
+
+		pixmap = checked_pixmap;
+		mask = checked_mask;
+	}
+	else
+	{
+		if (!unchecked_pixmap)
+		{
+			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) unchecked_xpm);
+			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &unchecked_pixmap, &unchecked_mask, 1);
+		}
+
+		pixmap = unchecked_pixmap;
+		mask = unchecked_mask;
+	}
+
+	gtk_ctree_node_set_pixmap (ctree, node, column, pixmap, mask);
+}
+
+gboolean
+xst_ui_ctree_get_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column)
+{
+	GdkPixmap *pixmap;
+	GdkBitmap *mask;
+
+	gtk_ctree_node_get_pixmap (ctree, node, column, &pixmap, &mask);
+
+	if (pixmap == checked_pixmap) return (TRUE);
+	return (FALSE);
 }
