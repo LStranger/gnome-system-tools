@@ -142,7 +142,7 @@ systems to choose from at startup.</label>
 	    <name>table_holder</name>
 	    <border_width>4</border_width>
 	    <width>400</width>
-	    <height>300</height>
+	    <height>230</height>
 	    <homogeneous>False</homogeneous>
 	    <spacing>0</spacing>
 	    <child>
@@ -273,7 +273,7 @@ systems to choose from at startup.</label>
 	      <handler>on_boot_prompt_toggled</handler>
 	      <last_modification_time>Wed, 07 Feb 2001 00:51:01 GMT</last_modification_time>
 	    </signal>
-	    <label>Wait</label>
+	    <label>_Wait</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -312,13 +312,14 @@ systems to choose from at startup.</label>
 	    <class>GtkLabel</class>
 	    <name>boot_timeout_label</name>
 	    <sensitive>False</sensitive>
-	    <label>seconds before loading default kernel or OS</label>
+	    <label>_seconds before loading default kernel or OS</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>boot_timeout</focus_target>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -462,13 +463,14 @@ operating system to your computer.</label>
       <widget>
 	<class>GtkLabel</class>
 	<name>label55</name>
-	<label>Boot type:</label>
+	<label>Boot _type:</label>
 	<justify>GTK_JUSTIFY_LEFT</justify>
 	<wrap>False</wrap>
 	<xalign>7.45058e-09</xalign>
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
+	<default_focus_target>combo-entry4</default_focus_target>
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
@@ -488,13 +490,14 @@ operating system to your computer.</label>
       <widget>
 	<class>GtkLabel</class>
 	<name>label60</name>
-	<label>Name:</label>
+	<label>_Name:</label>
 	<justify>GTK_JUSTIFY_LEFT</justify>
 	<wrap>False</wrap>
 	<xalign>7.45058e-09</xalign>
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
+	<focus_target>settings_b_name</focus_target>
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
@@ -598,13 +601,14 @@ operating system to your computer.</label>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label56</name>
-	  <label>Name:</label>
+	  <label>N_ame:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>7.45058e-09</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>settings_a_name</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -624,13 +628,14 @@ operating system to your computer.</label>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>settings_image_label</name>
-	  <label>Image:</label>
+	  <label>_Image:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>7.45058e-09</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>settings_image_entry</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -707,13 +712,14 @@ operating system to your computer.</label>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>settings_device_label</name>
-	  <label>Device:</label>
+	  <label>_Device:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>combo-entry3</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -828,13 +834,14 @@ operating system to your computer.</label>
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label58</name>
-	    <label>Root:</label>
+	    <label>_Root:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>settings_root</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -854,13 +861,14 @@ operating system to your computer.</label>
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label62</name>
-	    <label>Append:</label>
+	    <label>_Append:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>settings_append</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>

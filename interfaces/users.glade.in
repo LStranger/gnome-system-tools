@@ -105,13 +105,14 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>group_settings_name_label</name>
-	  <label>Group name:</label>
+	  <label>_Group name:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0.5</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>group_settings_name</focus_target>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -161,13 +162,14 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label21</name>
-	    <label>All users</label>
+	    <label>All _users</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>group_settings_all</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -187,13 +189,14 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label22</name>
-	    <label>Group members</label>
+	    <label>Group _members</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>group_settings_members</focus_target>
 	    <child>
 	      <left_attach>2</left_attach>
 	      <right_attach>3</right_attach>
@@ -244,7 +247,7 @@
 		<name>group_settings_add</name>
 		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
-		<label>Add -&gt;</label>
+		<label>_Add &gt;&gt;</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
@@ -258,7 +261,7 @@
 		<name>group_settings_remove</name>
 		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
-		<label>Remove &lt;-</label>
+		<label>&lt;&lt; _Remove</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
@@ -585,7 +588,7 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<label>Add user...</label>
+		<label>_Add user...</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
@@ -595,7 +598,7 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<label>Settings...</label>
+		<label>_Settings...</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
@@ -605,7 +608,7 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<label>Delete</label>
+		<label>_Delete</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
@@ -614,7 +617,7 @@
 		<name>user_profiles</name>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<label>Profiles...</label>
+		<label>_Profiles...</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
@@ -840,7 +843,7 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<label>Add group...</label>
+		<label>_Add group...</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
@@ -850,7 +853,7 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<label>Settings...</label>
+		<label>_Settings...</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
@@ -860,7 +863,7 @@
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<label>Delete</label>
+		<label>_Delete</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
@@ -899,7 +902,7 @@
 	<border_width>3</border_width>
 	<visible>False</visible>
 	<can_focus>True</can_focus>
-	<label>Show all users and groups</label>
+	<label>_Show all users and groups</label>
 	<active>False</active>
 	<draw_indicator>True</draw_indicator>
 	<child>
@@ -1894,13 +1897,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
       <widget>
 	<class>GtkLabel</class>
 	<name>label105</name>
-	<label>Name:</label>
+	<label>_Name:</label>
 	<justify>GTK_JUSTIFY_LEFT</justify>
 	<wrap>False</wrap>
 	<xalign>0</xalign>
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
+	<focus_target>profile_new_name</focus_target>
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
@@ -1920,13 +1924,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
       <widget>
 	<class>GtkLabel</class>
 	<name>label106</name>
-	<label>Comment:</label>
+	<label>_Comment:</label>
 	<justify>GTK_JUSTIFY_CENTER</justify>
 	<wrap>False</wrap>
 	<xalign>0</xalign>
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
+	<focus_target>profile_new_comment</focus_target>
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
@@ -2007,13 +2012,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
       <widget>
 	<class>GtkLabel</class>
 	<name>label104</name>
-	<label>Inherit settings from:</label>
+	<label>_Inherit settings from:</label>
 	<justify>GTK_JUSTIFY_CENTER</justify>
 	<wrap>False</wrap>
 	<xalign>0.5</xalign>
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
+	<default_focus_target>profile_new_menu</default_focus_target>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
@@ -3312,13 +3318,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>user_settings_comment_label</name>
-	  <label>Comment:</label>
+	  <label>_Comment:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>user_settings_comment</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -3338,13 +3345,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label12</name>
-	  <label>Username:</label>
+	  <label>_Username:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>user_settings_name</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -3390,13 +3398,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label28</name>
-	  <label>User ID:</label>
+	  <label>User _ID:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>7.45058e-09</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>user_settings_uid</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -3416,13 +3425,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label29</name>
-	  <label>Home directory:</label>
+	  <label>_Home directory:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>7.45058e-09</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>user_settings_home</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -3442,13 +3452,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>user_settings_shell_label</name>
-	  <label>Shell:</label>
+	  <label>_Shell:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <default_focus_target>combo-entry4</default_focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -3575,13 +3586,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
       <widget>
 	<class>GtkLabel</class>
 	<name>label147</name>
-	<label>Profile:</label>
+	<label>_Profile:</label>
 	<justify>GTK_JUSTIFY_LEFT</justify>
 	<wrap>False</wrap>
 	<xalign>0.5</xalign>
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
+	<focus_target>user_settings_profile_menu</focus_target>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
@@ -3631,7 +3643,7 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	  <class>GtkRadioButton</class>
 	  <name>user_passwd_manual</name>
 	  <can_focus>True</can_focus>
-	  <label>Set password by hand</label>
+	  <label>Set password b_y hand</label>
 	  <active>True</active>
 	  <draw_indicator>True</draw_indicator>
 	  <group>password</group>
@@ -3646,7 +3658,7 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	  <class>GtkRadioButton</class>
 	  <name>user_passwd_random</name>
 	  <can_focus>True</can_focus>
-	  <label>Generate random password</label>
+	  <label>Generate _random password</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
 	  <group>password</group>
@@ -3696,13 +3708,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label145</name>
-	      <label>New:</label>
+	      <label>Ne_w:</label>
 	      <justify>GTK_JUSTIFY_LEFT</justify>
 	      <wrap>False</wrap>
 	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <default_focus_target>user_passwd_entry1</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -3773,7 +3786,7 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	      <name>user_passwd_quality</name>
 	      <visible>False</visible>
 	      <can_focus>True</can_focus>
-	      <label>Check password quality</label>
+	      <label>Check password _quality</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -3795,13 +3808,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label146</name>
-	      <label>Confirm:</label>
+	      <label>C_onfirm:</label>
 	      <justify>GTK_JUSTIFY_LEFT</justify>
 	      <wrap>False</wrap>
 	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <default_focus_target>user_passwd_entry2</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -4041,13 +4055,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label62</name>
-	  <label>Maximum days a password may be used:</label>
+	  <label>Ma_ximum days a password may be used:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>True</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>user_passwd_max</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -4067,13 +4082,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label63</name>
-	  <label>Minimum days between password changes:</label>
+	  <label>Mi_nimum days between password changes:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>True</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>user_passwd_min</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -4093,13 +4109,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label64</name>
-	  <label>Days between warning and password expiration:</label>
+	  <label>_Days between warning and password expiration:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>True</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>user_passwd_days</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -4133,13 +4150,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
       <widget>
 	<class>GtkLabel</class>
 	<name>label13</name>
-	<label>Main group:</label>
+	<label>Main _group:</label>
 	<justify>GTK_JUSTIFY_LEFT</justify>
 	<wrap>False</wrap>
 	<xalign>0</xalign>
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
+	<default_focus_target>combo-entry1</default_focus_target>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
@@ -4201,13 +4219,14 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label55</name>
-	  <label>Available groups</label>
+	  <label>A_vailable groups</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0.5</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>user_settings_gall</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -4227,7 +4246,7 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label56</name>
-	  <label>User's groups</label>
+	  <label>Us_er's groups</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0.5</xalign>
@@ -4284,7 +4303,7 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	      <name>user_settings_add</name>
 	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
-	      <label>Add -&gt;</label>
+	      <label>_Add &gt;&gt;</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	      <child>
 		<padding>0</padding>
@@ -4298,7 +4317,7 @@ Please click &quot;Finish&quot; to save your changes. </text>
 	      <name>user_settings_remove</name>
 	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
-	      <label>Remove &lt;-</label>
+	      <label>&lt;&lt; _Remove </label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	      <child>
 		<padding>0</padding>

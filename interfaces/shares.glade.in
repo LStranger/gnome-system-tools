@@ -533,6 +533,8 @@
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
+  <default_width>500</default_width>
+  <default_height>400</default_height>
   <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
@@ -679,7 +681,7 @@
 	      <name>imports_add_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Add...</label>
+	      <label>_Add...</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
@@ -688,7 +690,7 @@
 	      <name>imports_settings_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Settings...</label>
+	      <label>_Settings...</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
@@ -697,7 +699,7 @@
 	      <name>imports_delete_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Delete</label>
+	      <label>_Delete</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
@@ -706,7 +708,7 @@
 	      <name>imports_mount_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Mount</label>
+	      <label>_Mount</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
@@ -715,7 +717,7 @@
 	      <name>imports_scan_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Scan</label>
+	      <label>_Scan</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 	  </widget>
@@ -866,7 +868,7 @@
 	      <name>exports_add_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Add...</label>
+	      <label>_Add...</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
@@ -875,7 +877,7 @@
 	      <name>exports_settings_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Settings...</label>
+	      <label>_Settings...</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
@@ -884,7 +886,7 @@
 	      <name>exports_delete_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Delete</label>
+	      <label>_Delete</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
@@ -893,7 +895,7 @@
 	      <name>exports_enable_button</name>
 	      <can_default>True</can_default>
 	      <can_focus>True</can_focus>
-	      <label>Enable</label>
+	      <label>_Enable</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 	  </widget>
@@ -2961,13 +2963,14 @@ NFS
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label253</name>
-	  <label>Import type:</label>
+	  <label>Import _type:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>7.45058e-09</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>import_settings_type</focus_target>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -2994,7 +2997,7 @@ NFS
 	  <class>GtkCheckButton</class>
 	  <name>import_settings_mounted</name>
 	  <can_focus>True</can_focus>
-	  <label>Mounted</label>
+	  <label>_Mounted</label>
 	  <active>True</active>
 	  <draw_indicator>True</draw_indicator>
 	  <child>
@@ -3032,13 +3035,14 @@ NFS
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label254</name>
-	    <label>Host:</label>
+	    <label>_Host:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>entry15</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3058,13 +3062,14 @@ NFS
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label255</name>
-	    <label>Path:</label>
+	    <label>_Path:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>import_settings_path</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3192,13 +3197,14 @@ NFS
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>import_settings_password_label</name>
-	    <label>Password:</label>
+	    <label>Pass_word:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>import_settings_password</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3218,13 +3224,14 @@ NFS
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>import_settings_user_label</name>
-	    <label>Username:</label>
+	    <label>_Username:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>import_settings_user</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3278,13 +3285,14 @@ NFS
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label256</name>
-	      <label>Mount point:</label>
+	      <label>Mount p_oint:</label>
 	      <justify>GTK_JUSTIFY_LEFT</justify>
 	      <wrap>False</wrap>
 	      <xalign>7.45058e-09</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <default_focus_target>entry16</default_focus_target>
 	      <child>
 		<padding>0</padding>
 		<expand>False</expand>
@@ -3332,7 +3340,7 @@ NFS
 	      <class>GtkCheckButton</class>
 	      <name>import_settings_no_remount</name>
 	      <can_focus>True</can_focus>
-	      <label>Do not remount this share after computer reboots</label>
+	      <label>Do not _remount this share after computer reboots</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -3491,13 +3499,14 @@ NFS
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label276</name>
-	  <label>Export type:</label>
+	  <label>Export _type:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
 	  <xalign>7.45058e-09</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>export_settings_type</focus_target>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -3586,13 +3595,14 @@ NFS
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label277</name>
-	    <label>Name:</label>
+	    <label>_Name:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>export_settings_name</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3612,13 +3622,14 @@ NFS
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label278</name>
-	    <label>Path:</label>
+	    <label>_Path:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>entry30</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3638,13 +3649,14 @@ NFS
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label279</name>
-	    <label>Comment:</label>
+	    <label>_Comment:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>7.45058e-09</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>export_settings_comment</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3755,7 +3767,7 @@ NFS
 	      <class>GtkCheckButton</class>
 	      <name>export_settings_browseable</name>
 	      <can_focus>True</can_focus>
-	      <label>Browseable</label>
+	      <label>_Browseable</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -3769,7 +3781,7 @@ NFS
 	      <class>GtkCheckButton</class>
 	      <name>export_settings_writable</name>
 	      <can_focus>True</can_focus>
-	      <label>Writable</label>
+	      <label>_Writable</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -3783,7 +3795,7 @@ NFS
 	      <class>GtkCheckButton</class>
 	      <name>export_settings_public</name>
 	      <can_focus>True</can_focus>
-	      <label>Public</label>
+	      <label>P_ublic</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -3820,7 +3832,7 @@ NFS
 	    <class>GtkCheckButton</class>
 	    <name>export_settings_restrict_toggle</name>
 	    <can_focus>True</can_focus>
-	    <label>Restrict access to this share to specific clients</label>
+	    <label>_Restrict access to this share to specific clients</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -3834,7 +3846,7 @@ NFS
 	    <class>GtkButton</class>
 	    <name>export_settings_clients_button</name>
 	    <can_focus>True</can_focus>
-	    <label> Edit clients... </label>
+	    <label> _Edit clients... </label>
 	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
 	      <padding>0</padding>

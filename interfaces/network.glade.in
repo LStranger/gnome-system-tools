@@ -129,13 +129,14 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label10</name>
-	  <label>Host name:</label>
+	  <label>_Host name:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>hostname</focus_target>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -183,7 +184,7 @@
 	  <handler>xst_dialog_modify_cb</handler>
 	  <last_modification_time>Fri, 29 Dec 2000 03:43:13 GMT</last_modification_time>
 	</signal>
-	<label>Enable windows networking (Samba)</label>
+	<label>_Enable windows networking (Samba)</label>
 	<active>False</active>
 	<draw_indicator>True</draw_indicator>
 	<child>
@@ -219,13 +220,14 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label12</name>
-	    <label>Description:</label>
+	    <label>_Description:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>description</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -279,13 +281,14 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label13</name>
-	    <label>Workgroup:</label>
+	    <label>_Workgroup:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>workgroup</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -379,7 +382,7 @@
 	      <handler>on_wins_use_toggled</handler>
 	      <last_modification_time>Wed, 28 Feb 2001 00:56:18 GMT</last_modification_time>
 	    </signal>
-	    <label>WINS server:</label>
+	    <label>WI_NS server:</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -589,7 +592,7 @@
 	    <handler>on_connection_add_clicked</handler>
 	    <last_modification_time>Wed, 27 Dec 2000 21:37:38 GMT</last_modification_time>
 	  </signal>
-	  <label>Add...</label>
+	  <label>_Add...</label>
 	  <relief>GTK_RELIEF_NORMAL</relief>
 	</widget>
 
@@ -608,7 +611,7 @@
 	    <handler>xst_dialog_modify_cb</handler>
 	    <last_modification_time>Fri, 29 Dec 2000 03:43:59 GMT</last_modification_time>
 	  </signal>
-	  <label>Delete...</label>
+	  <label>_Delete...</label>
 	  <relief>GTK_RELIEF_NORMAL</relief>
 	</widget>
 
@@ -622,7 +625,7 @@
 	    <handler>on_connection_configure_clicked</handler>
 	    <last_modification_time>Wed, 27 Dec 2000 21:38:16 GMT</last_modification_time>
 	  </signal>
-	  <label>Configure...</label>
+	  <label>_Configure...</label>
 	  <relief>GTK_RELIEF_NORMAL</relief>
 	</widget>
       </widget>
@@ -656,7 +659,7 @@
 	    <sensitive>False</sensitive>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
-	    <label>Activate</label>
+	    <label>Ac_tivate</label>
 	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 
@@ -666,7 +669,7 @@
 	    <sensitive>False</sensitive>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
-	    <label>Deactivate</label>
+	    <label>D_eactivate</label>
 	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 	</widget>
@@ -778,13 +781,14 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>domain_label</name>
-	  <label>Domain:</label>
+	  <label>_Domain:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>domain</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -879,13 +883,14 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>dns_list_label</name>
-	  <label>DNS Servers:</label>
+	  <label>DNS _Servers:</label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
-	  <wrap>True</wrap>
+	  <wrap>False</wrap>
 	  <xalign>0</xalign>
 	  <yalign>0</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>dns_list</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -946,13 +951,14 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>search_list_label</name>
-	  <label>Search Domains:</label>
+	  <label>Sea_rch Domains:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
 	  <yalign>7.45058e-09</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <focus_target>search_list</focus_target>
 	  <child>
 	    <left_attach>0</left_attach>
 	    <right_attach>1</right_attach>
@@ -1145,13 +1151,14 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label77</name>
-	    <label>IP address:</label>
+	    <label>_IP address:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ip</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -1205,13 +1212,14 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label78</name>
-	    <label>Aliases:</label>
+	    <label>A_liases:</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>alias</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -1262,7 +1270,7 @@
 		<handler>xst_dialog_modify_cb</handler>
 		<last_modification_time>Fri, 29 Dec 2000 03:45:25 GMT</last_modification_time>
 	      </signal>
-	      <label>Add</label>
+	      <label>_Add</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	      <child>
 		<padding>0</padding>
@@ -1286,7 +1294,7 @@
 		<handler>xst_dialog_modify_cb</handler>
 		<last_modification_time>Fri, 29 Dec 2000 03:45:44 GMT</last_modification_time>
 	      </signal>
-	      <label>Delete</label>
+	      <label>_Delete</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	      <child>
 		<padding>0</padding>
@@ -1534,7 +1542,7 @@
 	    <class>GtkRadioButton</class>
 	    <name>connection_type_ppp</name>
 	    <can_focus>True</can_focus>
-	    <label>Modem (PPP)</label>
+	    <label>_Modem (PPP)</label>
 	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>connection_group</group>
@@ -1549,7 +1557,7 @@
 	    <class>GtkRadioButton</class>
 	    <name>connection_type_eth</name>
 	    <can_focus>True</can_focus>
-	    <label>Ethernet</label>
+	    <label>_Ethernet</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>connection_group</group>
@@ -1564,7 +1572,7 @@
 	    <class>GtkRadioButton</class>
 	    <name>connection_type_wvlan</name>
 	    <can_focus>True</can_focus>
-	    <label>Wavelan</label>
+	    <label>_Wavelan</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>connection_group</group>
@@ -1579,7 +1587,7 @@
 	    <class>GtkRadioButton</class>
 	    <name>connection_type_plip</name>
 	    <can_focus>True</can_focus>
-	    <label>Parallel Line</label>
+	    <label>_Parallel Line</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>connection_group</group>
@@ -1791,13 +1799,14 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label97</name>
-	      <label>Comment:</label>
+	      <label>_Comment:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
 	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <focus_target>connection_name</focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -1897,7 +1906,7 @@
 	      <class>GtkCheckButton</class>
 	      <name>status_user</name>
 	      <can_focus>True</can_focus>
-	      <label>Allow activation control for all users</label>
+	      <label>Allow activation control for all _users</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -1925,7 +1934,7 @@
 		<handler>on_connection_modified</handler>
 		<last_modification_time>Thu, 11 Jan 2001 20:14:23 GMT</last_modification_time>
 	      </signal>
-	      <label>Activate when the computer starts</label>
+	      <label>Activate when the computer _starts</label>
 	      <active>True</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -2049,13 +2058,14 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label99</name>
-	    <label>Configuration:</label>
+	    <label>_Configuration:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <default_focus_target>connection_config</default_focus_target>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -2089,7 +2099,7 @@ BOOTP
 	    <handler>on_connection_modified</handler>
 	    <last_modification_time>Thu, 11 Jan 2001 21:29:54 GMT</last_modification_time>
 	  </signal>
-	  <label>Update DNS when this connection becomes active</label>
+	  <label>_Update DNS when this connection becomes active</label>
 	  <active>True</active>
 	  <draw_indicator>True</draw_indicator>
 	  <child>
@@ -2116,13 +2126,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label59</name>
-	    <label>IP address:</label>
+	    <label>_IP address:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ip_address</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -2142,13 +2153,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label60</name>
-	    <label>Subnet mask:</label>
+	    <label>_Subnet mask:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ip_netmask</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -2168,13 +2180,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label62</name>
-	    <label>Gateway address:</label>
+	    <label>_Gateway address:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ip_gateway</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -2384,7 +2397,7 @@ BOOTP
 	    <handler>on_connection_modified</handler>
 	    <last_modification_time>Thu, 11 Jan 2001 20:55:52 GMT</last_modification_time>
 	  </signal>
-	  <label>Ad-Hoc mode</label>
+	  <label>_Ad-Hoc mode</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
 	  <child>
@@ -2419,13 +2432,14 @@ BOOTP
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label105</name>
-	      <label>Session ID:</label>
+	      <label>_Session ID:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
 	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <focus_target>wvlan_essid</focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -2445,13 +2459,14 @@ BOOTP
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label106</name>
-	      <label>Frequency (GHz):</label>
+	      <label>_Frequency (GHz):</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
 	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <focus_target>wvlan_freq</focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -2529,13 +2544,14 @@ BOOTP
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label108</name>
-	      <label>Channel:</label>
+	      <label>_Channel:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
 	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <focus_target>wvlan_channel</focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -2698,13 +2714,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label111</name>
-	    <label>Phone number:</label>
+	    <label>Phone _number:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ppp_phone_number</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -2753,13 +2770,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label112</name>
-	    <label>User name:</label>
+	    <label>_User name:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ppp_login</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -2837,13 +2855,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label113</name>
-	    <label>Password:</label>
+	    <label>_Password:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <default_focus_target>ppp_password</default_focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -2895,7 +2914,7 @@ BOOTP
 		<class>GtkCheckButton</class>
 		<name>ppp_persist</name>
 		<can_focus>True</can_focus>
-		<label>Restart if connection cuts or fails to start</label>
+		<label>_Restart if connection cuts or fails to start</label>
 		<active>False</active>
 		<draw_indicator>True</draw_indicator>
 		<child>
@@ -3023,13 +3042,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label129</name>
-	    <label>Modem port:</label>
+	    <label>_Modem port:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ppp_serial_port</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3116,13 +3136,14 @@ BOOTP
 	      <widget>
 		<class>GtkLabel</class>
 		<name>ppp_dns1_label</name>
-		<label>Primary:</label>
+		<label>_Primary:</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
 		<xalign>0</xalign>
 		<yalign>0.5</yalign>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
+		<focus_target>ppp_dns1</focus_target>
 		<child>
 		  <left_attach>0</left_attach>
 		  <right_attach>1</right_attach>
@@ -3142,13 +3163,14 @@ BOOTP
 	      <widget>
 		<class>GtkLabel</class>
 		<name>ppp_dns2_label</name>
-		<label>Secondary:</label>
+		<label>_Secondary:</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
 		<xalign>0</xalign>
 		<yalign>0.5</yalign>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
+		<focus_target>ppp_dns2</focus_target>
 		<child>
 		  <left_attach>0</left_attach>
 		  <right_attach>1</right_attach>
@@ -3222,7 +3244,7 @@ BOOTP
 		  <handler>on_ppp_peerdns_toggled</handler>
 		  <last_modification_time>Sat, 24 Feb 2001 19:33:57 GMT</last_modification_time>
 		</signal>
-		<label>Set DNS servers manually</label>
+		<label>Set _DNS servers manually</label>
 		<active>False</active>
 		<draw_indicator>True</draw_indicator>
 		<child>
@@ -3247,7 +3269,7 @@ BOOTP
 	    <class>GtkCheckButton</class>
 	    <name>ppp_stupid</name>
 	    <can_focus>True</can_focus>
-	    <label>Start PPP as soon as modem connects</label>
+	    <label>_Start PPP as soon as modem connects</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -3270,7 +3292,7 @@ BOOTP
 	    <class>GtkCheckButton</class>
 	    <name>ppp_set_default_gw</name>
 	    <can_focus>True</can_focus>
-	    <label>Set as default route</label>
+	    <label>Set as _default route</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -3316,13 +3338,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label132</name>
-	    <label>Pppd options:</label>
+	    <label>Pppd _options:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ppp_ppp_options</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3446,13 +3469,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label151</name>
-	    <label>Local IP:</label>
+	    <label>_Local IP:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ptp_address</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3472,13 +3496,14 @@ BOOTP
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label152</name>
-	    <label>Remote IP:</label>
+	    <label>_Remote IP:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
+	    <focus_target>ptp_remote_address</focus_target>
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
@@ -3558,7 +3583,7 @@ BOOTP
 	  <class>GtkCheckButton</class>
 	  <name>ptp_remote_is_gateway</name>
 	  <can_focus>True</can_focus>
-	  <label>Use remote IP as default gateway</label>
+	  <label>_Use remote IP as default gateway</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
 	  <child>
