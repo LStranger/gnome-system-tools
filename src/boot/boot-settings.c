@@ -140,6 +140,8 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->password = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_password"));
 	gui->password_confirm = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_password_confirm"));
 
+	boot_settings_fill_type_list (gui);
+
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (gui->type), "changed",
 			  G_CALLBACK (on_type_entry_change), (gpointer) gui);
