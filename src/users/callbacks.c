@@ -86,7 +86,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gboolean found = FALSE;
 	gchar *login, *comment, *name = NULL;
 	gint gid, id = 0;
-	gboolean comp;
+	gboolean comp = FALSE;
 
 	g_return_if_fail (login = e_table_get_user ("login"));
 
@@ -94,16 +94,14 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	my_gtk_entry_set_text (w0, login);
 
-	w0 = tool_widget_get ("user_settings_group");
-	gtk_widget_set_sensitive (w0, tool_get_access());
-	user_fill_settings_group (GTK_COMBO (w0));
-
-	gid = atoi (e_table_get_user ("gid"));
-
 	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
 		comp = TRUE;
-	else
-		comp = FALSE;
+
+	w0 = tool_widget_get ("user_settings_group");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	user_fill_settings_group (GTK_COMBO (w0), comp);
+
+	gid = atoi (e_table_get_user ("gid"));
 
 	tmp_list = get_group_list ("gid", comp);
 	while (tmp_list)
@@ -168,11 +166,15 @@ extern void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
+	gboolean comp = FALSE;
 	
 	g_return_if_fail (tool_get_access());
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		comp = TRUE;
 	
 	w0 = tool_widget_get ("user_settings_group");
-	user_fill_settings_group (GTK_COMBO (w0));
+	user_fill_settings_group (GTK_COMBO (w0), comp);
 	my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
 
 	w0 = tool_widget_get ("user_settings_dialog");

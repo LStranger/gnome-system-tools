@@ -46,71 +46,19 @@ typedef struct
 
 extern login_defs logindefs;
 
-typedef enum
-{
-	USER_GROUP_TYPE_USER,
-	USER_GROUP_TYPE_GROUP
-} UserGroupType;
-
-typedef struct
-{
-	UserGroupType type;
-	gchar *key; /* Unique, data-independent field */
-	gchar *name; /* Login or group name */
-	gchar *password;
-	guint id; /* UID or GID */
-} user_group;
-
-typedef struct
-{
-	user_group ug;
-	guint gid;			/* Group id */
-	gchar *comment;			/* Usually account owner's name */
-	gchar *home;			/* Home directory */
-	gchar *shell;			/* Account's shell */
-	
-	guint last_mod;			/* Days since Jan 1, 1970 that password was last changed */
-	guint passwd_min_life;		/* Days before password may be changed */
-	guint passwd_max_life;		/* Days after which password must be changed */
-	guint passwd_exp_warn;		/* Days before password is to expire that user is warned */
-	guint passwd_exp_disable;	/* Days after password expires that account is disabled */
-	gboolean is_passwd_exp_disable; /* Is this field being used? */
-	guint passwd_disable;	/* Days since Jan 1, 1970 that account is disabled */
-	gboolean is_passwd_disable; /* Is this field being used? */
-	gchar *reserved;			/* Obscure field. Passed through */
-	gboolean is_shadow;		/* true if using shadow passwords */
-} user;
-
-typedef struct
-{
-	user_group ug;
-	GList *users;
-} group;
-
-
-extern GList *user_basic_list;
-extern GList *user_adv_list;
-extern GList *group_basic_list;
-extern GList *group_adv_list;
-
-extern void user_group_free (user_group *ug);
-extern gboolean user_group_is_system (user_group *ug);
-
-extern user *user_new (gchar *name);
-extern void user_free (user *u);
 extern gboolean user_add (void);
 extern gboolean user_update (void);
-extern void user_fill_settings_group (GtkCombo *combo);
+extern void user_fill_settings_group (GtkCombo *combo, gboolean adv);
 extern GList *user_current_list (void);
 
-extern group *group_new (void);
-extern void group_free (group *u);
 extern gboolean group_add (void);
 extern gboolean group_update (void);
+extern gchar *find_new_id (gchar from);
+extern gchar *find_new_key (gchar from);
 extern GList *group_fill_members_list (void);
 extern void group_fill_all_users_list (GList *member_rows);
-extern GList *group_current_list (void);
 extern GList *get_group_list (gchar *field, gboolean adv);
+extern GList *get_user_list (gchar *field, gboolean adv);
 extern gchar *get_group_by_data (gchar *field, gchar *fdata, gchar *data);
 
 

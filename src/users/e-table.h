@@ -46,3 +46,7 @@ gchar *e_table_get_group_by_data (gchar *field, gchar *fdata, gchar *data);
 
 void e_table_del_group_users (void);
 void e_table_add_group_users (gchar *name);
+
+void e_table_add_group (gchar *new_name);
+void e_table_add_user (gchar *login);
+
