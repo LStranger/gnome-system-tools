@@ -36,7 +36,8 @@
    an XstHostsPageInfo struct with all the stuff but it does
    not work with our signals connecting system */
 static int hosts_row_selected = -1;
-static gboolean updating = FALSE; 
+static gboolean updating = FALSE;
+static gboolean hack = FALSE;
 
 extern XstTool *tool;
 
@@ -128,42 +129,29 @@ xst_hosts_unselect_all (void)
 	updating = FALSE;
 }
 
-/**
- * xst_hosts_select_by_ip:
- * @ip_str: 
- * 
- * Given an ip as a string, it selects it inside the gtclist
- **/
 static void
-xst_hosts_select_by_ip (const gchar *ip_str)
+my_gtk_clist_select_row (GtkCList *clist, gint row, gint unused)
 {
-	GtkCList *clist;
-	gchar *ip;
+	GtkScrolledWindow *s_win;
+	GtkAdjustment * vadjustment;
+	gdouble move_to;
 	gint rows;
-	gint row;
+	g_return_if_fail (GTK_IS_CLIST (clist));
 
-	g_return_if_fail (ip_str != NULL);
+	s_win = GTK_SCROLLED_WINDOW (xst_dialog_get_widget (tool->main_dialog, "hosts_window"));
+	vadjustment = gtk_scrolled_window_get_vadjustment (s_win);
+	rows = clist->rows;
 
-	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list"));
+	move_to = ((((gdouble) row) - 1) / ((gdouble) rows)) * (vadjustment->upper - vadjustment->page_size) * 2;
+	if (move_to > (vadjustment->upper - vadjustment->page_size))
+	    move_to = vadjustment->upper - vadjustment->page_size;
+
+	if (!hack)
+		gtk_adjustment_set_value (vadjustment, move_to);
+
 	updating = TRUE;
-	gtk_clist_unselect_all (clist);
+	gtk_clist_select_row (clist, row, -1);
 	updating = FALSE;
-	rows = GTK_CLIST(clist)->rows;
-
-	for (row = 0; row < rows; row++)
-	{
-		gtk_clist_get_text (clist, row, 0, &ip);
-		if (strcmp (ip, ip_str) == 0)
-			break;
-	}
-
-	if (row != rows) {
-		updating = TRUE;
-		gtk_clist_select_row (clist, row, -1);
-		updating = FALSE;
-	}
-
-	return;
 }
 
 /**
@@ -180,10 +168,12 @@ xst_hosts_select_row (gint row)
 	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list"));
 
 	updating = TRUE;
+
 	if (row == -1)
 		gtk_clist_unselect_all (clist);
 	else
-		gtk_clist_select_row (clist, row, -1);
+		my_gtk_clist_select_row (clist, row, -1);
+
 	updating = FALSE;
 }
 
@@ -282,18 +272,6 @@ on_hosts_ip_changed (GtkEditable *ip, gpointer not_used)
 	if (row != hosts_row_selected)
 		xst_hosts_select_row (row);
 
-#if 0	
-	if (hosts_row_selected == -1) {
-		GtkWidget *alias;
-		alias = xst_dialog_get_widget (tool->main_dialog, "alias");
-		updating = TRUE;
-		g_print ("b3\n");
-		gtk_editable_delete_text (GTK_EDITABLE (ip), 0, -1);
-		updating = FALSE;
-	}
-#endif	
-
-
 }
 
 void
@@ -347,9 +325,11 @@ on_hosts_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * ev
 		pos = 0;
 		gtk_clist_get_text (GTK_CLIST (clist), row, 0, &row_data);
 		w = xst_dialog_get_widget (tool->main_dialog, "ip");
-		g_print ("b6\n");
+
+		hack = TRUE;
 		gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 		gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
+		hack = FALSE;
 	}
 
 	updating = TRUE;
@@ -359,7 +339,6 @@ on_hosts_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * ev
 	row_data = fixdown_text_list (g_strdup (row_data));
 	
 	w = xst_dialog_get_widget (tool->main_dialog, "alias");
-	g_print ("b7\n");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
 	g_free (row_data);
