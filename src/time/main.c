@@ -795,11 +795,13 @@ gst_time_connect_calendar_signals (GstTimeTool *tool)
 static void
 gst_time_configure_calendar (GstTimeTool *tool)
 {
-	gint firstday;
+	gint firstday = 0;
 	GtkWidget *calendar = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "calendar");
 
+#ifndef __FreeBSD__
 	setlocale (LC_ALL, "");
 	firstday = (int) *(nl_langinfo (_NL_TIME_FIRST_WEEKDAY));
+#endif
 
 	if (firstday == 1) 
 		gtk_calendar_display_options (GTK_CALENDAR (calendar), GTK_CALENDAR_WEEK_START_MONDAY | GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES);
