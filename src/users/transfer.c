@@ -1,4 +1,7 @@
-/* Copyright (C) 2000 Helix Code, Inc.
+/* transfer.c: this file is part of users-admin, a helix-setup-tool frontend 
+ * for user administration.
+ * 
+ * Copyright (C) 2000 Helix Code, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -14,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambeti@sa.ee>.
+ * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@helixcode.com>.
  */
 
 /* Functions for transferring information between XML tree and UI */
@@ -45,6 +48,83 @@ gint user_sort_by_login (gconstpointer a, gconstpointer b);
 gint group_sort_by_name (gconstpointer a, gconstpointer b);
 
 
+/* Global, with some hard-coded defaults, just in case any of the tags is not present. */
+/* These were taken form RH 6.2's default values. Any better suggestions? */
+/* NULL is not present for string members. */
+
+const static _logindefs default_logindefs = {
+	NULL, /* qmail_dir */
+	"/var/spool/mail", /* mailbox_dir */
+	NULL, /* mailbox_file */
+	99999, /* passwd_max_day_use */
+	0, /* passwd_min_day_use */
+	5, /* passwd_min_length */
+	7, /* passwd_warning_advance_days */
+	500, /* new_user_min_id */
+	60000, /* new_user_max_id */
+	500, /* new_group_min_id */
+	60000, /* new_group_max_id */
+	NULL, /* del_user_additional_command */
+	TRUE /* create_home */
+};
+
+
+static void
+transfer_logindefs_from_xml (xmlNodePtr root)
+{
+	xmlNodePtr node, n0;
+	gchar *logindefs_tags[] = {
+		"qmail_dir", "mailbox_dir", "mailbox_file", "passwd_max_day_use",
+		"passwd_min_day_use", "passwd_min_length", "passwd_warning_advance_days", "new_user_min_id",
+		"new_user_max_id", "new_group_min_id", "new_group_max_id", "del_user_additional_command",
+		"create_home", NULL
+	};
+	gchar *tag;
+	gint i;
+
+	/* Assign defaults */
+	
+	logindefs = default_logindefs;
+	
+	/* Find login.defs */
+	
+	node = xml_element_find_first (root, "logindefs");
+	if (!node)
+	{
+		g_warning ("transfer_logindefs_from_xml: couldn't find logindefs node.");
+		return;
+	}
+
+	/* make login.defs struct */
+
+	for (i = 0, tag = logindefs_tags[i]; tag; i++, tag = logindefs_tags[i]) 
+	{
+		n0 = xml_element_find_first (node, tag);
+
+		if (n0) 
+		{
+			switch (i)
+			{
+			 case  0: logindefs.qmail_dir = xml_element_get_content (n0); break;
+			 case  1: logindefs.mailbox_dir = xml_element_get_content (n0); break;
+			 case  2: logindefs.mailbox_file = xml_element_get_content (n0); break;
+			 case  3: logindefs.passwd_max_day_use = atoi (xml_element_get_content (n0)); break;
+			 case  4: logindefs.passwd_min_day_use = atoi (xml_element_get_content (n0)); break;
+			 case  5: logindefs.passwd_min_length = atoi (xml_element_get_content (n0)); break;
+			 case  6: logindefs.passwd_warning_advance_days = atoi (xml_element_get_content (n0)); break;
+			 case  7: logindefs.new_user_min_id = atoi (xml_element_get_content (n0)); break;
+			 case  8: logindefs.new_user_max_id = atoi (xml_element_get_content (n0)); break;
+			 case  9: logindefs.new_group_min_id = atoi (xml_element_get_content (n0)); break;
+			 case 10: logindefs.new_group_max_id = atoi (xml_element_get_content (n0)); break;
+			 case 11: logindefs.del_user_additional_command = xml_element_get_content (n0); break;
+			 case 12: logindefs.create_home = atoi (xml_element_get_content (n0)); break;
+			 case 13: g_warning ("transfer_logindefs_from_xml: we shouldn't be here."); break;
+			}
+		}
+	}
+}
+
+
 static void
 transfer_user_list_xml_to_glist (xmlNodePtr root)
 {
@@ -55,15 +135,20 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 	
 	users_node = xml_element_find_first (root, "userdb");
 	if (!users_node)
+	{
+		g_warning ("transfer_user_list_xml_to_glist: couldn't find userdb node.");
 		return;
+	}
 	
 	for (node = xml_element_find_first (users_node, "user");
-			node;
-		       	node = xml_element_find_next (node, "user"))
+			 node;
+			 node = xml_element_find_next (node, "user"))
 	{
 
 		u = g_new0 (user, 1);
 
+		/* FIXME: This assumes a special order in the XML data. There is not such, and this should
+		 * be supported. See transfer_logindefs_from_xml for an easy method for this. */
 		n0 = xml_element_find_first (node, "key");
 		if (n0) u->key = atoi (xml_element_get_content (n0));
 
@@ -113,58 +198,10 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 		n0 = xml_element_find_first (node, "is_shadow");
 		if (n0) u->is_shadow = atoi (xml_element_get_content (n0));
 
-
-
 		user_list = g_list_append (user_list, u);
 	}
 }
 
-
-static void
-transfer_logindefs_from_xml (xmlNodePtr root)
-{
-	xmlNodePtr node, n0;
-
-	/* Find login.defs */
-	
-	node = xml_element_find_first (root, "logindefs");
-	if (!node)
-		return;
-
-	/* make login.defs struct */
-
-	n0 = xml_element_find_first (node, "passwd_max_day_use");
-	if (n0) logindefs.passwd_max_day_use = atoi (xml_element_get_content (n0));
-
-	n0 = xml_element_find_first (node, "new_group_min_id");
-	if (n0) logindefs.new_group_min_id = atoi (xml_element_get_content (n0));
-
-	n0 = xml_element_find_first (node, "passwd_min_length");
-	if (n0) logindefs.passwd_min_length = atoi (xml_element_get_content (n0));
-
-	n0 = xml_element_find_first (node, "new_group_max_id");
-	if (n0) logindefs.new_group_max_id = atoi (xml_element_get_content (n0));
-
-	n0 = xml_element_find_first (node, "new_user_min_id");
-	if (n0) logindefs.new_user_min_id = atoi (xml_element_get_content (n0));
-
-	n0 = xml_element_find_first (node, "passwd_warning_advance_days");
-	if (n0) logindefs.passwd_warning_advance_days = atoi (xml_element_get_content (n0));
-
-	n0 = xml_element_find_first (node, "new_user_max_id");
-	if (n0) logindefs.new_user_max_id = atoi (xml_element_get_content (n0));
-
-	n0 = xml_element_find_first (node, "mailbox_dir");
-	if (n0) logindefs.mailbox_dir = xml_element_get_content (n0);
-
-/*	FIXME yes/no
- * 	n0 = xml_element_find_first (node, "create_home");
-	if (n0)	logindefs.create_home = xml_element_get_content (n0);
-*/
-
-	n0 = xml_element_find_first (node, "passwd_min_day_use");
-	if (n0) logindefs.passwd_min_day_use = atoi (xml_element_get_content (n0));
-}
 
 static void
 transfer_group_list_xml_to_glist (xmlNodePtr root)
@@ -176,8 +213,11 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 	
 	users_node = xml_element_find_first (root, "groupdb");
 	if (!users_node)
+	{
+		g_warning ("transfer_group_list_xml_to_glist: couldn't find groupdb node.");
 		return;
-	
+	}
+
 	for (node = xml_element_find_first (users_node, "group");
 			node;
 		       	node = xml_element_find_next (node, "group"))
@@ -223,6 +263,7 @@ transfer_user_list_to_gui (void)
 
 	for (u = g_list_first (user_list), num_rows = 0; u; u = g_list_next (u), num_rows++)
 	{
+		
 		current_u = (user *)u->data;
 		list_item = gtk_list_item_new_with_label (current_u->login);
 		gtk_widget_show (list_item);

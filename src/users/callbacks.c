@@ -1,4 +1,7 @@
-/* Copyright (C) 2000 Helix Code, Inc.
+/* callbacks.c: this file is part of users-admin, a helix-setup-tool frontend 
+ * for user administration.
+ * 
+ * Copyright (C) 2000 Helix Code, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -14,7 +17,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambeti@sa.ee>.
+ * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@helixcode.com>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -37,12 +40,18 @@ static void reply_cb (gint val, gpointer data);
 
 /* Main button callbacks */
 
-void
-on_cancel_clicked (GtkButton *button, gpointer user_data)
+static void 
+do_quit (void)
 {
-	gtk_main_quit ();
+	/* TODO: Check for changes and optionally ask for confirmation */
+	 gtk_main_quit ();
 }
 
+extern void 
+on_close_clicked(GtkButton *button, gpointer data)
+{
+	do_quit();
+}
 
 void
 on_apply_clicked (GtkButton *button, gpointer user_data)
@@ -54,7 +63,13 @@ on_apply_clicked (GtkButton *button, gpointer user_data)
 /* Main window callbacks */
 /* Users tab */
 
-void
+extern void 
+on_users_admin_delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
+{
+	 do_quit ();
+}
+
+extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
@@ -69,7 +84,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_show (w0);
 }
 
-void
+extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
@@ -78,12 +93,12 @@ on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_show (w0);
 }
 
-void
+extern void
 on_new_user_clicked (GtkButton *button, gpointer user_data)
 {
 }
 
-void
+extern void
 on_user_delete_clicked (GtkButton *button, gpointer user_data)
 {
 	gchar *txt;
@@ -111,7 +126,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 
 }
 
-void
+extern void
 on_user_list_selection_changed (GtkWidget *list, gpointer user_data)
 {
 	GList *current;
@@ -128,7 +143,7 @@ on_user_list_selection_changed (GtkWidget *list, gpointer user_data)
 
 /* Groups tab */
 
-void
+extern void
 on_group_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
@@ -157,7 +172,7 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_show (w0);
 }
 
-void
+extern void
 on_group_list_selection_changed (GtkWidget *list, gpointer user_data)
 {
 	GList *current;
@@ -176,7 +191,7 @@ on_group_list_selection_changed (GtkWidget *list, gpointer user_data)
 
 /* User settings callbacks */
 
-void
+extern void
 on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
@@ -185,14 +200,14 @@ on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_hide (w0);
 }
 
-void
+extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
 }
 
 /* Password settings callbacks */
 
-void
+extern void
 on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
@@ -201,7 +216,7 @@ on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_hide (w0);
 }
 
-void
+extern void
 on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkEntry *entry1, *entry2;
@@ -259,7 +274,7 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 
 /* Group settings dialog */
 
-void
+extern void
 on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
@@ -268,7 +283,7 @@ on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_hide (w0);
 }
 
-void
+extern void
 on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
 }
