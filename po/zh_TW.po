@@ -1,51 +1,49 @@
-# translation of gnome-system-tools.HEAD.po to 
 # traditional Chinese translation for gnome-system-tools.
-# Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
-# Abel Cheung <maddog@linux.org.hk>, 2001-2003.
+# Copyright (C) 2001, 02, 03, 04, 05 Free Software Foundation, Inc.
+# Abel Cheung <maddog@linuxhall.org>, 2001-2003.
 # Chao-Hsiung Liao <pesder.liao@msa.hinet.net>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools 0.92.0\n"
+"Project-Id-Version: gnome-system-tools 1.2.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-12 19:52+0200\n"
-"PO-Revision-Date: 2004-09-13 10:40+0800\n"
+"POT-Creation-Date: 2005-03-08 07:09+0800\n"
+"PO-Revision-Date: 2005-03-08 07:22+0800\n"
 "Last-Translator: Chao-Hsiung Liao <pesder.liao@msa.hinet.net>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.3.1\n"
 
-#: gnome-system-tools.schemas.in.h:1
+#: ../gnome-system-tools.schemas.in.h:1
 msgid ""
 "Comma separated list of hosts that the GST will be able to access when the "
 "remote configuration option is enabled"
 msgstr "以逗號分隔的主機清單，在啟用遠端組態選項時，GST 將可以存取它們。"
 
-#: gnome-system-tools.schemas.in.h:2
+#: ../gnome-system-tools.schemas.in.h:2
 msgid "Last GST version executed"
 msgstr "最後一次執行 GST 時的版本"
 
-#: gnome-system-tools.schemas.in.h:3
+#: ../gnome-system-tools.schemas.in.h:3
 msgid "Preferred bootloader that boot-admin will configure"
 msgstr "設定 boot-admin 時喜好的開機載入程式"
 
-#: gnome-system-tools.schemas.in.h:4
+#: ../gnome-system-tools.schemas.in.h:4
 msgid "Remote hosts"
 msgstr "遠端主機"
 
-#: gnome-system-tools.schemas.in.h:5
+#: ../gnome-system-tools.schemas.in.h:5
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
 msgstr "GST 可以透過 SSH 進行遠端組態，請啟用此選項以使用這個功能。"
 
-#: gnome-system-tools.schemas.in.h:6
+#: ../gnome-system-tools.schemas.in.h:6
 msgid "The last GST version that this computer has run"
 msgstr "本電腦最後一次執行 GST 時的 GST 版本"
 
-#: gnome-system-tools.schemas.in.h:7
+#: ../gnome-system-tools.schemas.in.h:7
 msgid ""
 "This key stores the bootloader that boot-admin will configure if there are "
 "more than one installed, if it's not set or isn't valid, then boot-admin "
@@ -54,53 +52,39 @@ msgstr ""
 "這個機碼儲存了當安裝一個以上的開機載入程式時，boot-admin 要設定哪一個。如果沒"
 "有設定或無法使用，boot-admin 會詢問使用者。"
 
-#: gnome-system-tools.schemas.in.h:8
+#: ../gnome-system-tools.schemas.in.h:8
 msgid "Whether the tools will use remote administration or not"
 msgstr "此工具是否使用遠端系統管理"
 
-#: gnome-system-tools.schemas.in.h:9
+#: ../gnome-system-tools.schemas.in.h:9
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "users-admin 工具應否顯示所有帳戶及群組"
 
-#: gnome-system-tools.schemas.in.h:10
+#: ../gnome-system-tools.schemas.in.h:10
 msgid "Whether the warning dialog should be shown or not"
 msgstr "應否顯示警告訊息對話方塊"
 
-#: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
-msgid "*"
-msgstr "*"
-
-#: interfaces/boot.glade.in.h:2
+#: ../interfaces/boot.glade.in.h:1
 msgid "/dev/hda"
 msgstr "/dev/hda"
 
-#: interfaces/boot.glade.in.h:3
+#: ../interfaces/boot.glade.in.h:2
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: interfaces/boot.glade.in.h:4
+#: ../interfaces/boot.glade.in.h:3
 msgid "/dev/hdc"
 msgstr "/dev/hdc"
 
-#: interfaces/boot.glade.in.h:5
+#: ../interfaces/boot.glade.in.h:4
 msgid "/dev/hdd"
 msgstr "/dev/hdd"
 
-#: interfaces/boot.glade.in.h:6
+#: ../interfaces/boot.glade.in.h:5
 msgid "<b>Security</b>"
 msgstr "<b>安全性</b>"
 
-#: interfaces/boot.glade.in.h:7
-msgid ""
-"<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
-"Use this tool to specify which operating systems users can choose at startup"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">開機管理程式設定</span>\n"
-"本工具可以設定啟動電腦時使用者可選擇的作業系統。"
-
-#: interfaces/boot.glade.in.h:9
+#: ../interfaces/boot.glade.in.h:6
 msgid ""
 "<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
 "span>\n"
@@ -112,31 +96,31 @@ msgstr ""
 "\n"
 "請選擇您要設定哪一個"
 
-#: interfaces/boot.glade.in.h:12 interfaces/users.glade.in.h:6
+#: ../interfaces/boot.glade.in.h:9 ../interfaces/users.glade.in.h:3
 msgid "<span weight=\"bold\">Basic Settings</span>"
 msgstr "<span weight=\"bold\">基本設定</span>"
 
-#: interfaces/boot.glade.in.h:13
+#: ../interfaces/boot.glade.in.h:10
 msgid "<span weight=\"bold\">Image Settings</span>"
 msgstr "<span weight=\"bold\">影像檔設定</span>"
 
-#: interfaces/boot.glade.in.h:14
+#: ../interfaces/boot.glade.in.h:11
 msgid "<span weight=\"bold\">Other Settings</span>"
 msgstr "<span weight=\"bold\">其它設定</span>"
 
-#: interfaces/boot.glade.in.h:15
+#: ../interfaces/boot.glade.in.h:12
 msgid "<span weight=\"bold\">Starting the Computer</span>"
 msgstr "<span weight=\"bold\">啟動電腦</span>"
 
-#: interfaces/boot.glade.in.h:16
+#: ../interfaces/boot.glade.in.h:13
 msgid "Ask at boot"
 msgstr "在啟動電腦時詢問"
 
-#: interfaces/boot.glade.in.h:17 src/boot/main.c:70
+#: ../interfaces/boot.glade.in.h:14 ../src/boot/main.c:70
 msgid "Boot Manager Settings"
 msgstr "啟動總管設定"
 
-#: interfaces/boot.glade.in.h:18
+#: ../interfaces/boot.glade.in.h:15
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -145,141 +129,147 @@ msgstr ""
 "請選取作為啟動系統用的核心影像檔，及它所掛載的 root 分割區。另外也可以輸入啟"
 "動系統時核心所接受的 append 參數。"
 
-#: interfaces/boot.glade.in.h:19
+#: ../interfaces/boot.glade.in.h:16
 msgid "Click \"Forward\" to continue"
 msgstr "請按「下一頁」繼續"
 
-#: interfaces/boot.glade.in.h:20
+#: ../interfaces/boot.glade.in.h:17
 msgid "Confirmation"
 msgstr "確認密碼"
 
 #. set window title
-#: interfaces/boot.glade.in.h:21 src/boot/boot-druid.c:441
-#: src/boot/boot-druid.c:453
+#: ../interfaces/boot.glade.in.h:18 ../src/boot/boot-druid.c:441
+#: ../src/boot/boot-druid.c:453
 msgid "Creating a new boot image"
 msgstr "建立新的啟動影像檔"
 
-#: interfaces/boot.glade.in.h:22
+#: ../interfaces/boot.glade.in.h:19
 msgid "Don't ask me again"
 msgstr "不要再詢問我"
 
-#: interfaces/boot.glade.in.h:23
+#: ../interfaces/boot.glade.in.h:20
 msgid "Enable IDE SCSI emulation"
 msgstr "將 IDE 裝置模擬為 SCSI"
 
-#: interfaces/boot.glade.in.h:24
+#: ../interfaces/boot.glade.in.h:21
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
 msgstr "請輸入系統啟動影像檔的名稱，及指定它會啟動的作業系統。"
 
-#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:45
+#: ../interfaces/boot.glade.in.h:22
 msgid "Finished"
 msgstr "完成"
 
-#: interfaces/boot.glade.in.h:26 src/network/connection.c:1612
+#: ../interfaces/boot.glade.in.h:23
 msgid "Manual"
 msgstr "手動"
 
-#: interfaces/boot.glade.in.h:27
+#: ../interfaces/boot.glade.in.h:24
 msgid "Number of colors:"
 msgstr "顏色數目:"
 
-#: interfaces/boot.glade.in.h:28
+#: ../interfaces/boot.glade.in.h:25
 msgid "Other parameters:"
 msgstr "其它參數:"
 
-#: interfaces/boot.glade.in.h:29
+#: ../interfaces/boot.glade.in.h:26
 msgid "Password"
 msgstr "密碼"
 
-#: interfaces/boot.glade.in.h:30
+#: ../interfaces/boot.glade.in.h:27
 msgid "Protect with password"
 msgstr "以密碼保護"
 
-#: interfaces/boot.glade.in.h:31
+#: ../interfaces/boot.glade.in.h:28
 msgid "Resolution:"
 msgstr "解析度:"
 
-#: interfaces/boot.glade.in.h:32
+#: ../interfaces/boot.glade.in.h:29
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "載入預設的核心或作業系統前等待指定秒數:"
 
-#: interfaces/boot.glade.in.h:33
+#: ../interfaces/boot.glade.in.h:30
+msgid "Select a kernel image"
+msgstr "選擇核心影像檔"
+
+#: ../interfaces/boot.glade.in.h:31
+msgid "Select an initrd image"
+msgstr "選擇 initrd 影像檔"
+
+#: ../interfaces/boot.glade.in.h:32
 msgid "Specify the partition on which the operating system is installed."
 msgstr "指定作業系統安裝在哪個分割區。"
 
-#: interfaces/boot.glade.in.h:34
+#: ../interfaces/boot.glade.in.h:33
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
 msgstr "已經加入了新的系統啟動影像檔。請按「套用」儲存修改後的設定。"
 
-#: interfaces/boot.glade.in.h:35
+#: ../interfaces/boot.glade.in.h:34
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
 msgstr "本輔助程式可協助您輕鬆而快速的新增啟動系統用的影像檔。"
 
-#: interfaces/boot.glade.in.h:36
+#: ../interfaces/boot.glade.in.h:35
 msgid "Video modes (only frame buffer)"
 msgstr "畫面模式 (只適用於 framebuffer)"
 
-#: interfaces/boot.glade.in.h:37
+#: ../interfaces/boot.glade.in.h:36
 msgid "_Add..."
 msgstr "新增(_A)..."
 
-#: interfaces/boot.glade.in.h:38
+#: ../interfaces/boot.glade.in.h:37
 msgid "_Device:"
 msgstr "裝置(_D):"
 
-#: interfaces/boot.glade.in.h:39
+#: ../interfaces/boot.glade.in.h:38
 msgid "_Edit"
 msgstr "修改(_E)"
 
-#: interfaces/boot.glade.in.h:40 src/boot/boot-settings.c:43
+#: ../interfaces/boot.glade.in.h:39 ../src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "_Initrd 影像檔路徑:"
 
-#: interfaces/boot.glade.in.h:41
+#: ../interfaces/boot.glade.in.h:40
 msgid "_Kernel image path:"
 msgstr "核心影像檔路徑(_K):"
 
-#: interfaces/boot.glade.in.h:42
+#: ../interfaces/boot.glade.in.h:41
 msgid "_Name:"
 msgstr "名稱(_N):"
 
-#: interfaces/boot.glade.in.h:43
+#: ../interfaces/boot.glade.in.h:42
 msgid "_Operating system:"
 msgstr "作業系統(_O):"
 
-#: interfaces/boot.glade.in.h:44
+#: ../interfaces/boot.glade.in.h:43
 msgid "_Parameters:"
 msgstr "參數(_P):"
 
-#: interfaces/boot.glade.in.h:45
+#: ../interfaces/boot.glade.in.h:44
 msgid "_Root file system device:"
 msgstr "根目錄檔案系統所在裝置(_R):"
 
-#: interfaces/common.glade.in.h:2
+#: ../interfaces/common.glade.in.h:1
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">請輸入 root 的密碼</span>"
+
+#: ../interfaces/common.glade.in.h:2
 msgid ""
 "<span weight=\"bold\" size=\"larger\">The platform you are running is not "
 "supported by this tool</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">您所執行的平臺尚未被本工具支援</span>"
-
-#: interfaces/common.glade.in.h:3
-msgid ""
-"<span weight=\"bold\" size=\"larger\">To run this tool, you need "
-"administrator privileges</span>"
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">要執行這個工具，您需要系統管理者權限</"
-"span>"
+"<span weight=\"bold\" size=\"larger\">本工具尚未支援您所使用的平臺</span>"
 
-#: interfaces/common.glade.in.h:4
+#: ../interfaces/common.glade.in.h:3
 msgid "Enter Password"
 msgstr "輸入密碼"
 
-#: interfaces/common.glade.in.h:5
+#: ../interfaces/common.glade.in.h:4
 msgid ""
 "If you know for sure that it works like one of the platforms listed below, "
 "you can select that and continue. Note, however, that this might damage the "
@@ -288,45 +278,43 @@ msgstr ""
 "如果肯定本系統和以下列出的其中一種作業平台運作方式類似，則可以選取該平台並繼"
 "續。可是請注意，這樣做有可能會破壞系統的設定甚至令電腦作廢。"
 
-#: interfaces/common.glade.in.h:6
+#: ../interfaces/common.glade.in.h:5
 msgid "Remote administration"
 msgstr "遠端系統管理"
 
-#: interfaces/common.glade.in.h:7
+#: ../interfaces/common.glade.in.h:6
 msgid "Run _Without Password"
 msgstr "不輸入密碼而執行(_W)"
 
-#: interfaces/common.glade.in.h:8
-msgid "Scanning system configuration..."
-msgstr "正在掃描系統組態..."
-
-#: interfaces/common.glade.in.h:9
+#: ../interfaces/common.glade.in.h:7
+#, fuzzy
 msgid ""
-"To acquire such privileges, enter your root password below. If you don't "
-"specify a password, you will be  unable to modify your system configuration."
+"To use this tool, you need administrator privileges, if you don't provide a "
+"password, you will be unable to modify your system configuration."
 msgstr ""
 "要獲取此權限，請在以下欄位輸入 root 的密碼。如果不指定密碼，將無法修改系統設"
 "定。"
 
-#: interfaces/common.glade.in.h:10
+#: ../interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
 msgstr "不支援的平台"
 
-#: interfaces/common.glade.in.h:11
+#: ../interfaces/common.glade.in.h:9
 msgid "Use this window to select the computer you wish to configure"
 msgstr "使用這個視窗來選擇您想要設定的電腦"
 
-#: interfaces/common.glade.in.h:12 interfaces/network.glade.in.h:102
+#: ../interfaces/common.glade.in.h:10
 msgid "_Password:"
 msgstr "密碼(_P):"
 
-#: interfaces/network.glade.in.h:2
+#: ../interfaces/network.glade.in.h:1
+#, fuzzy
 msgid ""
 "/dev/modem\n"
 "/dev/ttyS0\n"
 "/dev/ttyS1\n"
 "/dev/ttyS2\n"
-"/dev/ttyS3\n"
+"/dev/ttyS3"
 msgstr ""
 "/dev/modem\n"
 "/dev/ttyS0\n"
@@ -334,1046 +322,893 @@ msgstr ""
 "/dev/ttyS2\n"
 "/dev/ttyS3\n"
 
-#: interfaces/network.glade.in.h:8
-msgid "<b>Profile Settings</b>"
-msgstr "<b>設定組合內容</b>"
-
-#: interfaces/network.glade.in.h:9
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
-"Use this tool for configuring the way your system access to other computers"
+#: ../interfaces/network.glade.in.h:6
+msgid "<b>Account data</b>"
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">網路設定</span>\n"
-"使用這個工具來設定您的系統存取其他電腦的方式"
 
-#: interfaces/network.glade.in.h:11
-msgid "<span weight=\"bold\">Access Settings</span>"
-msgstr "<span weight=\"bold\">設定使用權限</span>"
+#: ../interfaces/network.glade.in.h:7
+msgid "<b>Connection settings</b>"
+msgstr "<b>連線設定</b>"
 
-#: interfaces/network.glade.in.h:12
-msgid "<span weight=\"bold\">Account Data</span>"
-msgstr "<span weight=\"bold\">帳號資料</span>"
+#: ../interfaces/network.glade.in.h:8
+msgid "<b>Connection</b>"
+msgstr "<b>連線</b>"
 
-#: interfaces/network.glade.in.h:13
-msgid "<span weight=\"bold\">Connection settings</span>"
-msgstr "<span weight=\"bold\">連線設定</span>"
+#: ../interfaces/network.glade.in.h:9
+msgid "<b>DNS Servers</b>"
+msgstr "<b>DNS 伺服器</b>"
 
-#: interfaces/network.glade.in.h:14
-msgid "<span weight=\"bold\">Connection</span>"
-msgstr "<span weight=\"bold\">連線</span>"
+#: ../interfaces/network.glade.in.h:10
+msgid "<b>Host Settings</b>"
+msgstr "<b>主機設定</b>"
 
-#: interfaces/network.glade.in.h:15
-msgid "<span weight=\"bold\">DNS Servers</span>"
-msgstr "<span weight=\"bold\">DNS 伺服器</span>"
+#: ../interfaces/network.glade.in.h:11
+msgid "<b>Internet service provider data</b>"
+msgstr "<b>網路服務供應商資料</b>"
 
-#: interfaces/network.glade.in.h:16
-msgid "<span weight=\"bold\">Host Settings</span>"
-msgstr "<span weight=\"bold\">主機設定</span>"
+#: ../interfaces/network.glade.in.h:12
+msgid "<b>Modem settings</b>"
+msgstr "<b>數據機設定</b>"
 
-#: interfaces/network.glade.in.h:17
-msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
-msgstr "<span weight=\"bold\">網路服務供應商資料</span>"
+#: ../interfaces/network.glade.in.h:13
+msgid "<b>Search Domains</b>"
+msgstr "<b>搜尋網域</b>"
 
-#: interfaces/network.glade.in.h:18
-msgid "<span weight=\"bold\">PPP Settings</span>"
-msgstr "<span weight=\"bold\">PPP 設定</span>"
+#: ../interfaces/network.glade.in.h:14
+msgid "<b>Wireless settings</b>"
+msgstr "<b>無線網路設定</b>"
 
-#: interfaces/network.glade.in.h:19
-msgid "<span weight=\"bold\">Search Domains</span>"
-msgstr "<span weight=\"bold\">搜尋網域</span>"
+#: ../interfaces/network.glade.in.h:15
+msgid "Aliases:"
+msgstr "別稱:"
 
-#: interfaces/network.glade.in.h:20
-msgid "<span weight=\"bold\">Windows Networking</span>"
-msgstr "<span weight=\"bold\">Windows 網路</span>"
-
-#: interfaces/network.glade.in.h:21
-msgid "<span weight=\"bold\">Wireless settings:</span>"
-msgstr "<span weight=\"bold\">無線網路設定</span>"
-
-#: interfaces/network.glade.in.h:22
-msgid "A_liases:"
-msgstr "別稱(_L):"
-
-#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:15
-msgid "Account"
-msgstr "帳號"
-
-#: interfaces/network.glade.in.h:24
-msgid "Activate"
-msgstr "活化"
-
-#: interfaces/network.glade.in.h:25
-msgid "Activate connection"
-msgstr "令連線生效"
-
-#: interfaces/network.glade.in.h:26
-msgid "Activate when the computer _starts"
-msgstr "當電腦啟動時生效(_S)"
-
-#: interfaces/network.glade.in.h:27
-msgid "Add DNS server"
-msgstr "加入 DNS 伺服器"
-
-#: interfaces/network.glade.in.h:28
-msgid "Add search domain"
-msgstr "加入搜尋網域"
-
-#: interfaces/network.glade.in.h:29
-msgid "Address configuration"
-msgstr "地址設定"
-
-#: interfaces/network.glade.in.h:30 interfaces/users.glade.in.h:16
-msgid "Advanced"
-msgstr "進階"
-
-#: interfaces/network.glade.in.h:31
-msgid "Allow activation control for all _users"
-msgstr "允許所有使用者控制連線(_U)"
-
-#: interfaces/network.glade.in.h:32
-msgid "Co_nfiguration:"
-msgstr "組態(_N):"
-
-#: interfaces/network.glade.in.h:33
-msgid "Connection type"
-msgstr "連線方式"
-
-#: interfaces/network.glade.in.h:34
+#: ../interfaces/network.glade.in.h:16
 msgid "Connections"
 msgstr "連線"
 
-#. set window titles
-#: interfaces/network.glade.in.h:35 src/network/network-druid.c:72
-msgid "Creating a new network connection"
-msgstr "建立新的網路連線"
-
-#: interfaces/network.glade.in.h:36
-msgid "Current network profile:"
-msgstr "目前的網路設定檔:"
-
-#: interfaces/network.glade.in.h:37
+#: ../interfaces/network.glade.in.h:17
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:38
-msgid "DNS Servers"
-msgstr "DNS 伺服器"
-
-#: interfaces/network.glade.in.h:39
+#: ../interfaces/network.glade.in.h:18
 msgid "D_omain name:"
 msgstr "網域名稱(_O):"
 
-#: interfaces/network.glade.in.h:40
-msgid "Default gateway device:"
-msgstr "預設通訊閘裝置:"
+#: ../interfaces/network.glade.in.h:19
+msgid "Default _gateway device:"
+msgstr "預設通訊閘裝置(_G):"
 
-#: interfaces/network.glade.in.h:41
-msgid "Delete DNS server"
-msgstr "刪除 DNS 伺服器"
-
-#: interfaces/network.glade.in.h:42
-msgid "Delete search domain"
-msgstr "刪除搜尋網域"
-
-#: interfaces/network.glade.in.h:43
+#: ../interfaces/network.glade.in.h:20
 msgid "Device:"
 msgstr "裝置:"
 
-#: interfaces/network.glade.in.h:44
-msgid "Domain / _Workgroup:"
-msgstr "網域/工作群組(_W):"
-
-#: interfaces/network.glade.in.h:46
+#: ../interfaces/network.glade.in.h:21 ../interfaces/users.glade.in.h:20
 msgid "General"
 msgstr "一般"
 
-#: interfaces/network.glade.in.h:47
+#: ../interfaces/network.glade.in.h:22
+msgid "Host alias settings"
+msgstr ""
+
+#: ../interfaces/network.glade.in.h:23
 msgid "Hosts"
 msgstr "主機"
 
-#: interfaces/network.glade.in.h:48
-msgid "ISP phone number"
-msgstr "ISP 電話號碼"
+#: ../interfaces/network.glade.in.h:24 ../interfaces/shares.glade.in.h:15
+msgid "IP address:"
+msgstr "IP 地址:"
 
-#: interfaces/network.glade.in.h:49
+#: ../interfaces/network.glade.in.h:25
 msgid "Interface properties"
 msgstr "介面屬性"
 
-#: interfaces/network.glade.in.h:50
-msgid ""
-"List of domains that the system will try to append to a hostname if there "
-"isn't already one specified"
-msgstr "當沒有指定網域名稱時，系統會嘗試將加到主機名稱的網域名稱清單"
-
-#: interfaces/network.glade.in.h:51
-msgid "Modem _volume:"
-msgstr "數據機音量(_V):"
-
-#: interfaces/network.glade.in.h:52
-msgid "Network name:"
-msgstr "網站名稱:"
-
-#: interfaces/network.glade.in.h:53
-msgid "Network profiles"
-msgstr "網路設定檔"
-
-#: interfaces/network.glade.in.h:54
-msgid "Networking Settings"
-msgstr "網路設定"
-
-#: interfaces/network.glade.in.h:55
-msgid "New network profile"
-msgstr "新增網路設定"
-
-#: interfaces/network.glade.in.h:56
-msgid ""
-"Next, please enter the user name and password which were assigned to you by "
-"your ISP."
-msgstr "然後，請輸入由 ISP 提供的登入名稱及密碼。"
-
-#: interfaces/network.glade.in.h:57
-msgid ""
-"Now, please enter the address that this network device will have, and the "
-"remote address to which it will be connected."
-msgstr "現在請輸入本網路裝置所使用的位址及它將會連接的遠端位址。"
-
-#: interfaces/network.glade.in.h:58
-msgid "Now, please enter the address that this network device will have."
-msgstr "現在請輸入這個網路裝置本身所使用的位址。"
-
-#: interfaces/network.glade.in.h:59
-msgid ""
-"Now, please specify if this connection should be enabled, this means that "
-"the configuration will be applied when the assistant finishes."
-msgstr "現在請決定是否要啟用這個連線，這表示當此輔助程式結束時就會套用這個組態。"
-
-#: interfaces/network.glade.in.h:60
-msgid "Number to _access an external line:"
-msgstr "存取外部線路的號碼(_A):"
-
-#: interfaces/network.glade.in.h:61
-msgid "Number to get to an _external line:"
-msgstr "取得外部線路的號碼(_E):"
-
-#: interfaces/network.glade.in.h:62
-msgid "PPPD _options:"
-msgstr "PPPD 選項(_O):"
-
-#: interfaces/network.glade.in.h:63
-msgid "Pa_ssword (confirm):"
-msgstr "密碼 (再次確定)(_S):"
-
-#: interfaces/network.glade.in.h:64
-msgid "Phone _number:"
-msgstr "電話號碼(_N):"
-
-#: interfaces/network.glade.in.h:65
-msgid ""
-"Please enter the phone number you use to connect to the internet. This "
-"number is provided by your ISP."
-msgstr "請輸入用來連接至網際網路的電話號碼。該號碼是由 ISP 提供的。"
-
-#: interfaces/network.glade.in.h:66
-msgid ""
-"Please select the wireless device that you want to configure and set the "
-"network name for this interface"
-msgstr "請選擇您想要設定的無線網路裝置並設定介面的網路名稱"
-
-#: interfaces/network.glade.in.h:67
-msgid "Please, select which type of connection you would like to add."
-msgstr "請選取想新增的連線方式。"
-
-#: interfaces/network.glade.in.h:68 interfaces/users.glade.in.h:39
-msgid "Profile _name:"
-msgstr "設定檔名稱(_N):"
-
-#: interfaces/network.glade.in.h:69
-msgid "Se_condary:"
-msgstr "次要(_C):"
-
-#: interfaces/network.glade.in.h:70
-msgid "Search Domains"
-msgstr "搜尋網域"
-
-#: interfaces/network.glade.in.h:71
-msgid "Set _DNS servers manually"
-msgstr "手動設定 DNS 伺服器(_D)"
-
-#: interfaces/network.glade.in.h:72
-msgid "Set modem as default _route to internet"
-msgstr "指定數據機為預設的閘道(_R)"
-
-#: interfaces/network.glade.in.h:73
-msgid ""
-"This assistant will help you configure a new \n"
-"network connection."
+#: ../interfaces/network.glade.in.h:26
+msgid "Location name:"
 msgstr ""
-"這個輔助程式會幫助您設定新的\n"
-"網路連線。"
 
-#: interfaces/network.glade.in.h:75
-msgid "This is the list of IP addresses that the system will use as name servers"
-msgstr "這是系統用來當做名稱伺服器的 IP 位址清單"
+#: ../interfaces/network.glade.in.h:27
+msgid "Location:"
+msgstr "位置:"
 
-#: interfaces/network.glade.in.h:76
+#: ../interfaces/network.glade.in.h:28
+msgid "Modem"
+msgstr "數據機"
+
+#: ../interfaces/network.glade.in.h:29
+msgid "Network name (_ESSID):"
+msgstr "網路名稱(_ESSID):"
+
+#: ../interfaces/network.glade.in.h:30
 msgid ""
-"To continue configuring your network connection, click \"Next\". To quit, "
-"click \"Cancel\"."
-msgstr "請按「下一頁」繼續設定網路連線。想離開，請按「取消」。"
+"Off\n"
+"Low\n"
+"Medium\n"
+"Loud"
+msgstr ""
 
-#: interfaces/network.glade.in.h:77
-msgid "Username and password"
-msgstr "登入名稱及密碼"
+#: ../interfaces/network.glade.in.h:34
+msgid "Options"
+msgstr "選項"
 
-#: interfaces/network.glade.in.h:78
-msgid "WI_NS server:"
-msgstr "WINS 伺服器(_N):"
+#: ../interfaces/network.glade.in.h:35
+msgid "P_assword"
+msgstr "密碼(_A)"
 
-#: interfaces/network.glade.in.h:79
-msgid "Wireless device:"
-msgstr "無線網路裝置:"
+#: ../interfaces/network.glade.in.h:36
+msgid "Select location name"
+msgstr ""
 
-#: interfaces/network.glade.in.h:80
-msgid "Wireless settings"
-msgstr "無線網路設定"
+#: ../interfaces/network.glade.in.h:37
+msgid "This device is _configured"
+msgstr ""
 
-#: interfaces/network.glade.in.h:81
+#: ../interfaces/network.glade.in.h:38
 msgid ""
-"You are about to create a new network connection. Please click \"Apply\" to "
-"save your changes."
-msgstr "現在準備新增網路連線。請按「套用」儲存設定。"
+"Tones\n"
+"Pulses"
+msgstr ""
+"音頻\n"
+"脈衝"
 
-#: interfaces/network.glade.in.h:82
-msgid "_Apply and activate connection"
-msgstr "套用並令連線生效(_A)"
+#: ../interfaces/network.glade.in.h:40
+msgid "WEP _key:"
+msgstr ""
 
-#: interfaces/network.glade.in.h:83
+#: ../interfaces/network.glade.in.h:41 ../src/network/ifaces-list.c:33
+msgid "_Activate"
+msgstr ""
+
+#: ../interfaces/network.glade.in.h:42
 msgid "_Autodetect"
 msgstr "自動偵測(_A)"
 
-#: interfaces/network.glade.in.h:84
+#: ../interfaces/network.glade.in.h:43
 msgid "_Configuration:"
 msgstr "設定(_C):"
 
-#: interfaces/network.glade.in.h:85
+#: ../interfaces/network.glade.in.h:44 ../src/network/ifaces-list.c:34
 msgid "_Deactivate"
 msgstr "停止使用(_D)"
 
-#: interfaces/network.glade.in.h:86 interfaces/users.glade.in.h:53
-#: src/boot/table.c:52 src/network/connection.c:64 src/network/dns.c:39
-#: src/network/hosts.c:42 src/users/table.c:48
-msgid "_Delete"
-msgstr "刪除(_D)"
+#: ../interfaces/network.glade.in.h:45
+msgid "_Dial prefix:"
+msgstr ""
 
-#: interfaces/network.glade.in.h:87
-msgid "_Description:"
-msgstr "說明(_D):"
-
-#: interfaces/network.glade.in.h:88
+#: ../interfaces/network.glade.in.h:46
 msgid "_Dial type:"
 msgstr "撥號方式(_D):"
 
-#: interfaces/network.glade.in.h:89
-msgid "_Enable Windows networking"
-msgstr "啟用 Windows 網路(_E)"
-
-#: interfaces/network.glade.in.h:90
-msgid "_Ethernet"
-msgstr "_Ethernet"
-
-#: interfaces/network.glade.in.h:91
+#: ../interfaces/network.glade.in.h:47
 msgid "_Gateway address:"
 msgstr "通訊閘地址(_G):"
 
-#: interfaces/network.glade.in.h:92
+#: ../interfaces/network.glade.in.h:48
 msgid "_Hostname:"
 msgstr "主機名稱(_H):"
 
-#: interfaces/network.glade.in.h:93
+#: ../interfaces/network.glade.in.h:49
 msgid "_IP address:"
 msgstr "_IP 地址:"
 
-#: interfaces/network.glade.in.h:94
-msgid "_IR LAN"
-msgstr "紅外線網路(_I)"
-
-#: interfaces/network.glade.in.h:95
-msgid "_Local IP address:"
-msgstr "本地 IP 地址(_L):"
-
-#: interfaces/network.glade.in.h:96
+#: ../interfaces/network.glade.in.h:50
 msgid "_Local IP:"
 msgstr "本機 IP(_L):"
 
-#: interfaces/network.glade.in.h:97
-msgid "_Modem (PPP)"
-msgstr "數據機[PPP](_M)"
-
-#: interfaces/network.glade.in.h:98
+#: ../interfaces/network.glade.in.h:51
 msgid "_Modem port:"
 msgstr "數據機通訊埠(_M):"
 
-#: interfaces/network.glade.in.h:99
-msgid "_Network Profiles"
-msgstr "網路設定檔(_N)"
-
-#: interfaces/network.glade.in.h:100
-msgid "_Network name:"
-msgstr "網路名稱(_N):"
-
-#: interfaces/network.glade.in.h:101
-msgid "_Parallel Line"
-msgstr "並列埠纜線(_P)"
-
-#: interfaces/network.glade.in.h:103
+#: ../interfaces/network.glade.in.h:52
 msgid "_Phone number:"
 msgstr "電話號碼(_P):"
 
-#: interfaces/network.glade.in.h:104
-msgid "_Primary:"
-msgstr "主要(_P):"
-
-#: interfaces/network.glade.in.h:105
-msgid "_Remote IP address:"
-msgstr "遠端 IP 位址(_R):"
-
-#: interfaces/network.glade.in.h:106
+#: ../interfaces/network.glade.in.h:53
 msgid "_Remote IP:"
 msgstr "遠端 IP(_R):"
 
-#: interfaces/network.glade.in.h:107
+#: ../interfaces/network.glade.in.h:54
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "如果連線中斷或無法啟用時重新連線(_R)"
 
-#: interfaces/network.glade.in.h:108
-msgid "_Save Current"
-msgstr "儲存目前的設定(_S)"
+#: ../interfaces/network.glade.in.h:55
+msgid "_Set modem as default route to internet"
+msgstr "指定數據機為預設的通訊閘(_S)"
 
-#: interfaces/network.glade.in.h:109
-msgid "_Start PPP as soon as modem connects"
-msgstr "數據機連線時立刻啟動 PPP(_S)"
-
-#: interfaces/network.glade.in.h:110
+#: ../interfaces/network.glade.in.h:56
 msgid "_Subnet mask:"
 msgstr "子網路遮罩(_S):"
 
-#: interfaces/network.glade.in.h:111
-msgid "_Update DNS when this connection becomes active"
-msgstr "當此網路連線生效時更新 DNS(_U)"
-
-#: interfaces/network.glade.in.h:112
-msgid "_Use remote IP as default gateway"
-msgstr "使用遠端 IP 作為預設通訊閘(_U)"
-
-#: interfaces/network.glade.in.h:113 interfaces/users.glade.in.h:63
+#: ../interfaces/network.glade.in.h:57 ../interfaces/users.glade.in.h:60
 msgid "_Username:"
 msgstr "使用者名稱(_U):"
 
-#: interfaces/network.glade.in.h:114
-msgid "_Wireless"
-msgstr "無線網路(_W)"
+#: ../interfaces/network.glade.in.h:58
+msgid "_Volume:"
+msgstr "數據機音量(_V):"
 
-#: interfaces/network.glade.in.h:115
-msgid "new DNS server"
-msgstr "新增 DNS 伺服器"
-
-#: interfaces/network.glade.in.h:116
-msgid "new search domain"
-msgstr "新增搜尋網域"
-
-#: interfaces/services.glade.in.h:1
-msgid ""
-"<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
-"use this tool to specify which services to run at boot time"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">服務設定</span>\n"
-"使用這個工具來指定開機時要執行哪些服務"
-
-#: interfaces/services.glade.in.h:3
+#: ../interfaces/services.glade.in.h:1
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">一般資訊</span>"
 
-#: interfaces/services.glade.in.h:4
+#: ../interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">服務設定</span>"
 
-#: interfaces/services.glade.in.h:5
+#: ../interfaces/services.glade.in.h:3
 msgid "Description:"
 msgstr "描述:"
 
-#: interfaces/services.glade.in.h:6
+#: ../interfaces/services.glade.in.h:4
 msgid "Service _Properties"
 msgstr "服務屬性(_P)"
 
-#: interfaces/services.glade.in.h:7
+#: ../interfaces/services.glade.in.h:5
 msgid "Service:"
 msgstr "服務:"
 
-#: interfaces/services.glade.in.h:8
+#: ../interfaces/services.glade.in.h:6
 msgid "Status:"
 msgstr "狀態:"
 
-#: interfaces/services.glade.in.h:9
+#: ../interfaces/services.glade.in.h:7
 msgid "_Order list by startup sequence"
 msgstr "以啟動順序來排序清單(_O)"
 
-#: interfaces/services.glade.in.h:10
+#: ../interfaces/services.glade.in.h:8
 msgid "_Start"
 msgstr "啟動(_S)"
 
-#: interfaces/services.glade.in.h:11
+#: ../interfaces/services.glade.in.h:9
 msgid "_Startup sequence:"
 msgstr "啟動順序(_S):"
 
-#: interfaces/time.glade.in.h:1
+#: ../interfaces/shares.glade.in.h:1
+msgid "<b>Allowed hosts</b>"
+msgstr "<b>允許的主機</b>"
+
+#: ../interfaces/shares.glade.in.h:2
+msgid "<b>Hosts settings</b>"
+msgstr "<b>主機設定</b>"
+
+#: ../interfaces/shares.glade.in.h:3
+msgid "<b>Share properties</b>"
+msgstr "<b>共享內容</b>"
+
+#: ../interfaces/shares.glade.in.h:4
+msgid "<b>Shared folder</b>"
+msgstr "<b>共享資料夾</b>"
+
+#: ../interfaces/shares.glade.in.h:5
+msgid "<b>WINS server</b>"
+msgstr "<b>WINS 伺服器</b>"
+
+#: ../interfaces/shares.glade.in.h:6
+msgid "<b>Windows sharing Settings</b>"
+msgstr "<b>Windows 共享資料夾設定</b>"
+
+#: ../interfaces/shares.glade.in.h:7
+msgid "Add allowed hosts"
+msgstr "加入允許的主機"
+
+#: ../interfaces/shares.glade.in.h:8
+msgid "Allow _browsing folder"
+msgstr "允許瀏覽資料夾(_B)"
+
+#: ../interfaces/shares.glade.in.h:9
+msgid "Allowed hosts:"
+msgstr "允許的主機："
+
+#: ../interfaces/shares.glade.in.h:10
+msgid "Comment:"
+msgstr "備註："
+
+#: ../interfaces/shares.glade.in.h:11
+msgid "Do not use WINS server"
+msgstr "不使用 WINS 伺服器"
+
+#: ../interfaces/shares.glade.in.h:12
+msgid "Domain / _Workgroup"
+msgstr "網域/工作群組(_W)"
+
+#: ../interfaces/shares.glade.in.h:13
+msgid "General Windows sharing settings"
+msgstr ""
+
+#: ../interfaces/shares.glade.in.h:14
+msgid "Host name:"
+msgstr "主機名稱:"
+
+#: ../interfaces/shares.glade.in.h:16
+msgid "Name:"
+msgstr "名稱："
+
+#: ../interfaces/shares.glade.in.h:17
+msgid "Netmask:"
+msgstr "子網路遮罩:"
+
+#: ../interfaces/shares.glade.in.h:18
+msgid "Network:"
+msgstr "網路："
+
+#: ../interfaces/shares.glade.in.h:19 ../src/shares/nfs-acl-table.c:55
+msgid "Read only"
+msgstr "唯讀"
+
+#: ../interfaces/shares.glade.in.h:20
+msgid "Share folder"
+msgstr "共享資料夾"
+
+#: ../interfaces/shares.glade.in.h:21
+msgid "Share with:"
+msgstr ""
+
+#: ../interfaces/shares.glade.in.h:22
+msgid "This computer is a WINS server"
+msgstr ""
+
+#: ../interfaces/shares.glade.in.h:23
+msgid "Use WINS Server"
+msgstr "使用 WINS 伺服器"
+
+#: ../interfaces/shares.glade.in.h:24
+msgid "Windows sharing settings"
+msgstr "Windows 分享資料夾設定"
+
+#: ../interfaces/shares.glade.in.h:25
+msgid "_Add host"
+msgstr "加入主機(_A)"
+
+#: ../interfaces/shares.glade.in.h:26
+msgid "_Host description:"
+msgstr "主機描述字句(_H):"
+
+#: ../interfaces/shares.glade.in.h:27
+msgid "_Path:"
+msgstr "路徑(_P):"
+
+#: ../interfaces/shares.glade.in.h:28
+msgid "_Read only"
+msgstr "唯讀(_R)"
+
+#: ../interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
 msgstr "（未設定）"
 
-#: interfaces/time.glade.in.h:3
+#: ../interfaces/time.glade.in.h:2
 msgid ":"
 msgstr ":"
 
-#: interfaces/time.glade.in.h:4
+#: ../interfaces/time.glade.in.h:3
 msgid "<b>Selection</b>"
 msgstr "<b>選擇區</b>"
 
-#: interfaces/time.glade.in.h:5
+#: ../interfaces/time.glade.in.h:4
 msgid "<b>Time zone</b>"
 msgstr "<b>時區</b>"
 
-#: interfaces/time.glade.in.h:6
-msgid ""
-"<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
-"Use this tool for setting your current date, time and time zone"
-msgstr ""
-"<span size=\"larger\" weight=\"bold\">時刻與日期設定</span>\n"
-"使用這個工具來設定您目前的日期、時刻與時區"
-
-#: interfaces/time.glade.in.h:8
-msgid "<span weight=\"bold\">Time Configuration</span>"
-msgstr "<span weight=\"bold\">時間組態</span>"
-
-#: interfaces/time.glade.in.h:9
+#: ../interfaces/time.glade.in.h:5
 msgid "Add NTP Server"
 msgstr "加入 NTP 伺服器"
 
-#: interfaces/time.glade.in.h:10
+#: ../interfaces/time.glade.in.h:6
 msgid "NTP server"
 msgstr "NTP 伺服器"
 
-#: interfaces/time.glade.in.h:11
+#: ../interfaces/time.glade.in.h:7
 msgid "S_ynchronize clock with Internet servers:"
 msgstr "透過網際網路的伺服器校對系統時間(_Y):"
 
-#: interfaces/time.glade.in.h:12
+#: ../interfaces/time.glade.in.h:8
 msgid "Se_lect Servers..."
 msgstr "選取伺服器(_L)..."
 
-#: interfaces/time.glade.in.h:13
+#: ../interfaces/time.glade.in.h:9
 msgid "Time servers"
 msgstr "時刻校對伺服器"
 
-#: interfaces/time.glade.in.h:14
+#: ../interfaces/time.glade.in.h:10
 msgid "Time zone"
 msgstr "時區"
 
-#: interfaces/time.glade.in.h:15
+#: ../interfaces/time.glade.in.h:11
 msgid "Time zone:"
 msgstr "時區:"
 
-#: interfaces/time.glade.in.h:16
+#: ../interfaces/time.glade.in.h:12
 msgid "_Date:"
 msgstr "日期(_D):"
 
-#: interfaces/time.glade.in.h:17
+#: ../interfaces/time.glade.in.h:13
 msgid "_Select Time Zone..."
 msgstr "選取時區(_S)..."
 
-#: interfaces/time.glade.in.h:18
+#: ../interfaces/time.glade.in.h:14
 msgid "_Time:"
 msgstr "時間(_T):"
 
-#: interfaces/time.glade.in.h:19
-msgid "date"
-msgstr "日期"
-
-#: interfaces/time.glade.in.h:20
-msgid "hours"
-msgstr "小時"
-
-#: interfaces/time.glade.in.h:21
-msgid "minutes"
-msgstr "分鐘"
-
-#: interfaces/time.glade.in.h:22
-msgid "seconds"
-msgstr "秒鐘"
-
-#: interfaces/users.glade.in.h:2
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
-"Use this tool for configuring users and groups settings in your system"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">使用者與群組設定</span>\n"
-"使用這個工具來設定您系統中的使用者與群組"
-
-#: interfaces/users.glade.in.h:4
+#: ../interfaces/users.glade.in.h:1
 msgid "<span weight=\"bold\">Advanced Settings</span>"
 msgstr "<span weight=\"bold\">進階設定</span>"
 
-#: interfaces/users.glade.in.h:5
+#: ../interfaces/users.glade.in.h:2
 msgid "<span weight=\"bold\">Automatic UID/GID</span>"
 msgstr "<span weight=\"bold\">自動安排 UID/GID</span>"
 
-#: interfaces/users.glade.in.h:7
+#: ../interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Contact Information</span>"
 msgstr "<span weight=\"bold\">聯絡資料</span>"
 
-#: interfaces/users.glade.in.h:8
+#: ../interfaces/users.glade.in.h:5
 msgid "<span weight=\"bold\">Group Members</span>"
 msgstr "<span weight=\"bold\">群組成員</span>"
 
-#: interfaces/users.glade.in.h:9
+#: ../interfaces/users.glade.in.h:6
 msgid "<span weight=\"bold\">Optional Settings</span>"
 msgstr "<span weight=\"bold\">選擇性設定</span>"
 
-#: interfaces/users.glade.in.h:10
+#: ../interfaces/users.glade.in.h:7
 msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">密碼設定</span>"
 
-#: interfaces/users.glade.in.h:11
+#: ../interfaces/users.glade.in.h:8
 msgid "<span weight=\"bold\">Password</span>"
 msgstr "<span weight=\"bold\">密碼</span>"
 
-#: interfaces/users.glade.in.h:12
+#: ../interfaces/users.glade.in.h:9
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">設定檔內容</span>"
 
-#: interfaces/users.glade.in.h:13
+#: ../interfaces/users.glade.in.h:10
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">系統預設值</span>"
 
-#: interfaces/users.glade.in.h:14
+#: ../interfaces/users.glade.in.h:11
 msgid "<span weight=\"bold\">User Profile</span>"
 msgstr "<span weight=\"bold\">使用者設定檔</span>"
 
-#: interfaces/users.glade.in.h:17
+#: ../interfaces/users.glade.in.h:12
+msgid "Account"
+msgstr "帳號"
+
+#: ../interfaces/users.glade.in.h:13
+msgid "Advanced"
+msgstr "進階"
+
+#: ../interfaces/users.glade.in.h:14
 msgid "Assign a random password by default"
 msgstr "預設會安排隨機的密碼"
 
-#: interfaces/users.glade.in.h:18
+#: ../interfaces/users.glade.in.h:15
 msgid "Check password _quality"
 msgstr "檢查密碼的質素(_Q)"
 
-#: interfaces/users.glade.in.h:19
+#: ../interfaces/users.glade.in.h:16
 msgid "Con_firmation:"
 msgstr "確認密碼(_F):"
 
-#: interfaces/users.glade.in.h:20
+#: ../interfaces/users.glade.in.h:17
 msgid "Days between warning and password expiration:"
 msgstr "密碼過期前，於指定日數發出警告："
 
-#: interfaces/users.glade.in.h:21
+#: ../interfaces/users.glade.in.h:18
 msgid "Default _group:"
 msgstr "預設群組(_G):"
 
-#: interfaces/users.glade.in.h:22
+#: ../interfaces/users.glade.in.h:19
 msgid "Default _shell:"
 msgstr "預設命令殼(_S):"
 
-#: interfaces/users.glade.in.h:23
+#: ../interfaces/users.glade.in.h:21
 msgid "Generate _random password"
 msgstr "產生隨機密碼(_R)"
 
-#: interfaces/users.glade.in.h:24
+#: ../interfaces/users.glade.in.h:22
 msgid "Group _ID:"
 msgstr "群組識別碼(_I):"
 
-#: interfaces/users.glade.in.h:25
+#: ../interfaces/users.glade.in.h:23
 msgid "Group _members:"
 msgstr "群組成員(_M):"
 
-#: interfaces/users.glade.in.h:26
+#: ../interfaces/users.glade.in.h:24
 msgid "Group _name:"
 msgstr "群組名稱(_N):"
 
-#: interfaces/users.glade.in.h:27
+#: ../interfaces/users.glade.in.h:25
 msgid "Group properties"
 msgstr "群組屬性"
 
-#: interfaces/users.glade.in.h:28
+#: ../interfaces/users.glade.in.h:26
 msgid "Groups"
 msgstr "群組"
 
-#: interfaces/users.glade.in.h:29
+#: ../interfaces/users.glade.in.h:27
 msgid "Ma_ximum days a password may be used:"
 msgstr "密碼可使用的日數上限(_X):"
 
-#: interfaces/users.glade.in.h:30
+#: ../interfaces/users.glade.in.h:28
 msgid "Maximum UID:"
 msgstr "UID 值上限:"
 
-#: interfaces/users.glade.in.h:31
+#: ../interfaces/users.glade.in.h:29
 msgid "Mi_nimum days between password changes:"
 msgstr "密碼使用了指定的日數後方可修改(_N):"
 
-#: interfaces/users.glade.in.h:32
+#: ../interfaces/users.glade.in.h:30
 msgid "Minimum GID:"
 msgstr "GID 值下限:"
 
-#: interfaces/users.glade.in.h:33
+#: ../interfaces/users.glade.in.h:31
 msgid "Minimum UID:"
 msgstr "UID 值下限:"
 
-#: interfaces/users.glade.in.h:34
+#: ../interfaces/users.glade.in.h:32
 msgid "Minimum days allowed between password changes:"
 msgstr "密碼使用了指定的日數後方可修改："
 
-#: interfaces/users.glade.in.h:35
+#: ../interfaces/users.glade.in.h:33
 msgid "Number of days that a password may be used:"
 msgstr "密碼可使用的日數:"
 
-#: interfaces/users.glade.in.h:36
+#: ../interfaces/users.glade.in.h:34
 msgid "O_ffice location:"
 msgstr "公司位置(_F):"
 
-#: interfaces/users.glade.in.h:37
-msgid "Other Groups"
-msgstr "其它群組"
-
-#: interfaces/users.glade.in.h:38
+#: ../interfaces/users.glade.in.h:35
 msgid "Password set to: "
 msgstr "密碼設定為:"
 
-#: interfaces/users.glade.in.h:40
+#: ../interfaces/users.glade.in.h:36
+#, fuzzy
+msgid "Privileges"
+msgstr "使用者權限"
+
+#: ../interfaces/users.glade.in.h:37
+msgid "Profile _name:"
+msgstr "設定檔名稱(_N):"
+
+#: ../interfaces/users.glade.in.h:38
 msgid "Set password b_y hand"
 msgstr "自行設定密碼(_Y)"
 
-#: interfaces/users.glade.in.h:41
+#: ../interfaces/users.glade.in.h:39
 msgid "Show a_ll users and groups"
 msgstr "顯示所有使用者及群組(_L)"
 
-#: interfaces/users.glade.in.h:42
+#: ../interfaces/users.glade.in.h:40
 msgid "User _ID:"
 msgstr "使用者識別碼(_I):"
 
-#: interfaces/users.glade.in.h:43
+#: ../interfaces/users.glade.in.h:41
 msgid "User _password:"
 msgstr "使用者密碼(_P):"
 
-#: interfaces/users.glade.in.h:44
+#: ../interfaces/users.glade.in.h:42
+msgid "User privileges"
+msgstr "使用者權限"
+
+#: ../interfaces/users.glade.in.h:43
 msgid "User profiles"
 msgstr "使用者設定檔"
 
-#: interfaces/users.glade.in.h:45
+#: ../interfaces/users.glade.in.h:44
 msgid "Users"
 msgstr "使用者"
 
-#: interfaces/users.glade.in.h:46
+#: ../interfaces/users.glade.in.h:45
 msgid "_Add Group..."
 msgstr "新增群組(_A)..."
 
-#: interfaces/users.glade.in.h:47
+#: ../interfaces/users.glade.in.h:46
 msgid "_Add Profile..."
 msgstr "新增設定檔(_A)"
 
-#: interfaces/users.glade.in.h:48
+#: ../interfaces/users.glade.in.h:47
 msgid "_Add User..."
 msgstr "新增使用者(_A)..."
 
-#: interfaces/users.glade.in.h:49
+#: ../interfaces/users.glade.in.h:48
 msgid "_All users:"
 msgstr "所有使用者(_A):"
 
-#: interfaces/users.glade.in.h:50
-msgid "_Available groups:"
-msgstr "現有的群組(_A):"
-
-#: interfaces/users.glade.in.h:51
+#: ../interfaces/users.glade.in.h:49
 msgid "_Comments"
 msgstr "備註(_C)"
 
-#: interfaces/users.glade.in.h:52
+#: ../interfaces/users.glade.in.h:50
 msgid "_Days between warning and password expiration:"
 msgstr "密碼過期前，於指定日數發出警告(_D):"
 
-#: interfaces/users.glade.in.h:54
+#: ../interfaces/users.glade.in.h:51 ../src/boot/table.c:52
+#: ../src/network/address-list.c:71 ../src/network/hosts.c:35
+#: ../src/shares/table.c:41 ../src/users/table.c:49
+msgid "_Delete"
+msgstr "刪除(_D)"
+
+#: ../interfaces/users.glade.in.h:52
 msgid "_Edit User Profiles..."
 msgstr "修改使用者設定檔(_E)..."
 
-#: interfaces/users.glade.in.h:55
-msgid "_Generate Password"
-msgstr "產生密碼(_G)"
+#: ../interfaces/users.glade.in.h:53
+msgid "_Generate"
+msgstr "產生(_G)"
 
-#: interfaces/users.glade.in.h:56
+#: ../interfaces/users.glade.in.h:54
 msgid "_Home directory:"
 msgstr "個人目錄(_H):"
 
-#: interfaces/users.glade.in.h:57
+#: ../interfaces/users.glade.in.h:55
 msgid "_Home phone:"
 msgstr "住宅電話(_H):"
 
-#: interfaces/users.glade.in.h:58
+#: ../interfaces/users.glade.in.h:56
 msgid "_Main group:"
 msgstr "主群組(_M):"
 
-#: interfaces/users.glade.in.h:59
+#: ../interfaces/users.glade.in.h:57
 msgid "_Profile:"
 msgstr "設定檔(_P):"
 
-#: interfaces/users.glade.in.h:60
+#: ../interfaces/users.glade.in.h:58
 msgid "_Real name:"
 msgstr "真實姓名(_R):"
 
-#: interfaces/users.glade.in.h:61
+#: ../interfaces/users.glade.in.h:59
 msgid "_Shell:"
 msgstr "命令殼(_S):"
 
-#: interfaces/users.glade.in.h:62
-msgid "_User's groups:"
-msgstr "使用者所屬群組(_U):"
-
-#: interfaces/users.glade.in.h:64
+#: ../interfaces/users.glade.in.h:61
 msgid "_Work phone:"
 msgstr "工作電話(_W):"
 
-#: src/boot/boot-append-gui.c:140
+#: ../src/boot/boot-append-gui.c:139
 msgid "32,768"
 msgstr "32,768"
 
-#: src/boot/boot-append-gui.c:141
+#: ../src/boot/boot-append-gui.c:140
 msgid "65,536"
 msgstr "65,536"
 
-#: src/boot/boot-append-gui.c:142
+#: ../src/boot/boot-append-gui.c:141
 msgid "16,777,216"
 msgstr "16,777,216"
 
-#: src/boot/boot-append-gui.c:252
+#: ../src/boot/boot-append-gui.c:252
 msgid "Invalid VGA value"
 msgstr "無效的 VGA 數值"
 
-#: src/boot/boot-append-gui.c:257
+#: ../src/boot/boot-append-gui.c:254
 #, c-format
 msgid "\"%s\" is not a valid VGA value"
 msgstr "“%s” 不是有效的 vga 數值"
 
-#: src/boot/boot-druid.c:112
+#: ../src/boot/boot-druid.c:112
 msgid "Error creating boot image"
 msgstr "建立開機影像檔時發生錯誤"
 
-#: src/boot/boot-druid.c:442
+#: ../src/boot/boot-druid.c:442
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "正在建立新的開機影像檔( %d 之 %d)"
 
-#: src/boot/boot-druid.c:443
+#: ../src/boot/boot-druid.c:443
 msgid "Finished creating a new boot image"
 msgstr "已完成建立新的開機影像檔"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:490
+#: ../src/boot/boot-image.c:40
 msgid "Unknown"
 msgstr "不詳"
 
-#: src/boot/boot-image.c:41
+#: ../src/boot/boot-image.c:41
 msgid "Windows NT"
 msgstr "Windows NT"
 
-#: src/boot/boot-image.c:42
+#: ../src/boot/boot-image.c:42
 msgid "Windows 9x"
 msgstr "Windows 9x"
 
-#: src/boot/boot-image.c:43
+#: ../src/boot/boot-image.c:43
 msgid "Dos"
 msgstr "Dos"
 
-#: src/boot/boot-image.c:44
+#: ../src/boot/boot-image.c:44
 msgid "Linux"
 msgstr "Linux"
 
-#: src/boot/boot-image.c:45
+#: ../src/boot/boot-image.c:45
 msgid "Linux swap"
 msgstr "Linux swap"
 
-#: src/boot/boot-image.c:46
+#: ../src/boot/boot-image.c:46
 msgid "GNU/Hurd"
 msgstr "GNU/Hurd"
 
-#: src/boot/boot-image.c:276
+#: ../src/boot/boot-image.c:276
 #, c-format
 msgid "\"%s\" is an invalid path"
 msgstr "“%s” 不是有效的路徑"
 
-#: src/boot/boot-image.c:292
+#: ../src/boot/boot-image.c:292
 #, c-format
 msgid "\"%s\" already exists, please set another name"
 msgstr "‘%s’已經存在，請設定其它名稱。"
 
-#: src/boot/boot-image.c:298
+#: ../src/boot/boot-image.c:298
 #, c-format
 msgid "Invalid image name: \"%s\""
 msgstr "無效的影像檔名稱：‘%s’"
 
-#: src/boot/boot-image.c:311
+#: ../src/boot/boot-image.c:311
 #, c-format
 msgid "Invalid image: \"%s\""
 msgstr "無效的影像檔：‘%s’"
 
-#: src/boot/boot-image.c:329
+#: ../src/boot/boot-image.c:329
 #, c-format
 msgid "Invalid root device: \"%s\""
 msgstr "無效的 root 裝置：‘%s’"
 
-#: src/boot/boot-settings.c:44
+#: ../src/boot/boot-settings.c:43
 msgid "_Module path:"
 msgstr "模組路徑(_M):"
 
-#: src/boot/boot-settings.c:405
+#: ../src/boot/boot-settings.c:406
 msgid "Password confirmation is not correct"
 msgstr "確認密碼並不正確"
 
-#: src/boot/boot-settings.c:429
+#: ../src/boot/boot-settings.c:431
 msgid "Error modifying boot image"
 msgstr "修正開機影像檔時發生錯誤"
 
-#: src/boot/boot.desktop.in.in.h:1
+#: ../src/boot/boot.desktop.in.in.h:1
 msgid "Boot"
 msgstr "系統啟動"
 
-#: src/boot/boot.desktop.in.in.h:2
+#: ../src/boot/boot.desktop.in.in.h:2
 msgid "Configure the system boot process"
 msgstr "設定系統開機程序"
 
-#: src/boot/callbacks.c:82
+#: ../src/boot/callbacks.c:81
 msgid "Boot Image Editor"
 msgstr "系統啟動影像檔編輯器"
 
-#: src/boot/callbacks.c:180
+#: ../src/boot/callbacks.c:179
 msgid "Boot Append Editor"
 msgstr "啟動系統 Append 參數編輯器"
 
-#: src/boot/callbacks.c:412
+#: ../src/boot/callbacks.c:412
 msgid "Error deleting boot image"
 msgstr "刪除開機影像檔時發生錯誤"
 
-#: src/boot/callbacks.c:413
+#: ../src/boot/callbacks.c:414
 msgid "Without at least one boot image your computer will not start"
 msgstr "沒有任何系統啟動影像檔，系統將會無法啟動。"
 
-#: src/boot/callbacks.c:434
-msgid "This may leave this operating system unbootable"
-msgstr "這樣可能會讓這個作業系統無法開機"
-
-#: src/boot/callbacks.c:439
+#: ../src/boot/callbacks.c:433
 #, c-format
 msgid "Are you sure you want to delete \"%s\"?"
 msgstr "是否確定刪除“%s”？"
 
+#: ../src/boot/callbacks.c:435
+msgid "This may leave this operating system unbootable"
+msgstr "這樣可能會讓這個作業系統無法開機"
+
 # FIXME: Join this entry together with the entry below -- Abel
-#: src/boot/callbacks.c:464
+#: ../src/boot/callbacks.c:464
 msgid "The configuration will show empty"
 msgstr "回復至"
 
-#: src/boot/callbacks.c:469
+#: ../src/boot/callbacks.c:466
 #, c-format
 msgid "The file \"%s\" is missing or could not be read"
 msgstr "缺少了或是無法讀入檔案“%s”"
 
-#: src/boot/table.c:41
+#: ../src/boot/table.c:41
 msgid "Name"
 msgstr "名稱"
 
-#: src/boot/table.c:42
+#: ../src/boot/table.c:42
 msgid "Default"
 msgstr "預設"
 
-#: src/boot/table.c:43 src/network/connection.c:490
+#: ../src/boot/table.c:43
 msgid "Type"
 msgstr "類型"
 
-#: src/boot/table.c:44
+#: ../src/boot/table.c:44
 msgid "Kernel Image"
 msgstr "核心影像檔"
 
-#: src/boot/table.c:45 src/network/connection.c:506
+#: ../src/boot/table.c:45
 msgid "Device"
 msgstr "裝置"
 
-#: src/boot/table.c:50 src/network/connection.c:62 src/users/table.c:46
+#: ../src/boot/table.c:50 ../src/network/address-list.c:70
+#: ../src/network/hosts.c:33 ../src/shares/table.c:39 ../src/users/table.c:47
 msgid "_Add"
 msgstr "加入(_A)"
 
-#: src/boot/table.c:51 src/network/connection.c:63 src/users/table.c:47
+#: ../src/boot/table.c:51 ../src/network/hosts.c:34
+#: ../src/network/ifaces-list.c:32 ../src/shares/table.c:40
+#: ../src/users/table.c:48
 msgid "_Properties"
 msgstr "屬性(_P)"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:89
+#: ../src/common/gst-auth.c:88
 msgid "The tool could not connect to the computer"
 msgstr "此工具無法連接到這臺電腦"
 
-#: src/common/gst-auth.c:90
+#: ../src/common/gst-auth.c:89
 msgid ""
 "Check that you have access to this network and that the computer is actually "
 "working and running SSHD"
 msgstr "請檢查您是否能存取網路，而該電腦也確實在運作並執行 SSHD"
 
 #. the proccess was running su
-#: src/common/gst-auth.c:94
+#: ../src/common/gst-auth.c:93
 msgid "The entered password is invalid"
 msgstr "輸入的密碼無效"
 
-#: src/common/gst-auth.c:95
+#: ../src/common/gst-auth.c:94
 msgid ""
 "Check that you typed it correctly and that you haven't activated the \"caps "
 "lock\" key"
 msgstr "請檢查您是否正確輸入並且沒有按到 caps lock 鍵"
 
-#: src/common/gst-auth.c:104
+#: ../src/common/gst-auth.c:103
 #, c-format
 msgid "Could not run \"%s\""
 msgstr "無法執行“%s”"
 
-#: src/common/gst-auth.c:105
+#: ../src/common/gst-auth.c:104
 msgid "Check that you have permissions to run this command"
 msgstr "請檢查您是否有權限執行此指令。"
 
-#: src/common/gst-auth.c:107
+#: ../src/common/gst-auth.c:106
 msgid "An unexpected error has ocurred"
 msgstr "發生了未預期的錯誤"
 
-#: src/common/gst-dialog.c:60
+#: ../src/common/gst-auth.c:132
+msgid "Could not execute the backend"
+msgstr ""
+
+#: ../src/common/gst-auth.c:133
+msgid "There was an error creating the child process, the tool will close now."
+msgstr ""
+
+#: ../src/common/gst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "找不到視窗元件：%s"
 
-#: src/common/gst-dialog.c:382
+#: ../src/common/gst-dialog.c:382
 msgid "There are changes which have not been applied"
 msgstr "尚有已更改的設定未生效"
 
-#: src/common/gst-dialog.c:383
+#: ../src/common/gst-dialog.c:384
 msgid "Apply them now?"
 msgstr "套用已修改的設定？"
 
-#: src/common/gst-dialog.c:477
+#: ../src/common/gst-dialog.c:491
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "將錯誤訊號‘%s’及視窗元件‘%s’建立聯繫時發生錯誤"
 
-#: src/common/gst-tool.c:1017
+#: ../src/common/gst-tool.c:1020
 msgid "The configuration could not be loaded"
 msgstr "無法載入組態"
 
-#: src/common/gst-tool.c:1018
+#: ../src/common/gst-tool.c:1022
 msgid "There was an error running the backend script"
 msgstr "執行背景模組命令稿時發生錯誤"
 
-#: src/common/gst-tool.c:1491
+#: ../src/common/gst-tool.c:1503
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "歡迎使用GNOME 系統工具的 %s 預覽版本"
 
-#: src/common/gst-tool.c:1493
+#: ../src/common/gst-tool.c:1505
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1385,554 +1220,458 @@ msgstr ""
 "可能會令電腦<span weight=\"bold\">作廢</span>，損失時間及精力。您已經被提醒"
 "了。多謝使用 GNOME 系統工具的預覽版本！"
 
-#: src/common/gst-tool.c:1514
+#: ../src/common/gst-tool.c:1526
 msgid "Warning"
 msgstr "警告"
 
-#: src/common/gst-tool.c:1534
+#: ../src/common/gst-tool.c:1546
 msgid "Don't show me this again"
 msgstr "不要再顯示"
 
-#: src/common/gst-tool.c:1610
+#: ../src/common/gst-tool.c:1603
 msgid "GNOME System Tools"
 msgstr "GNOME 系統設定工具"
 
-#: src/common/gst-tool.c:1771
+#: ../src/common/gst-tool.c:1748
 msgid "Could not display help"
 msgstr "無法顯示說明"
 
-#: src/network/callbacks.c:403
-msgid ""
-"This will disable any network connection with this interface as soon as you "
-"press \"apply\""
-msgstr "當您按下“套用”時就會停用此介面的任何網路連線"
-
-#: src/network/callbacks.c:408
-#, c-format
-msgid "Are you sure you want to delete connection \"%s\"?"
-msgstr "是否確定刪除連線“%s”？"
-
-#: src/network/callbacks.c:516
-msgid "SMB Support is not running"
-msgstr "沒有執行 SMB 支援"
-
-#: src/network/callbacks.c:517
-msgid ""
-"You don't have SMB support installed. Please install SMB support in the "
-"system to enable file sharing in Windows networks"
-msgstr "您沒有安裝 SMB 的支援。請在系統中安裝 SMB 支援以支援 Windows 網路"
-
-#: src/network/callbacks.c:581
-msgid "The host name has changed"
-msgstr "主機名稱已變更"
-
-#: src/network/callbacks.c:582
-msgid ""
-"This will prevent you from launching new applications, and so you will have "
-"to log in again. Continue anyway?"
-msgstr "這樣會妨礙啟動新的應用程式，而且需要重新登入。是否要繼續？"
-
-#: src/network/callbacks.c:586
-msgid "Change _Host name"
-msgstr "更改主機名稱(_H)"
-
-#: src/network/callbacks.c:629 src/network/callbacks.c:656
-msgid "Wvdial command not found"
-msgstr "找不到 Wvdial 指令"
-
-#: src/network/callbacks.c:630
-msgid ""
-"wvdial could not be found on your system. You need to install wvdial, or the "
-"PPP (modem) connections will not activate"
-msgstr "在系統中找不到 wvdial。您需要安裝 wvdial，否則 PPP (數據機) 連線無法啟用"
-
-#: src/network/callbacks.c:657
-msgid ""
-"wvdial could not be found on your system. You need to install wvdial, or the "
-"PPP (modem) connections will not activate. Continue anyway?"
+#: ../src/network/address-list.c:528
+msgid "Type address"
 msgstr ""
-"在系統中找不到 wvdial。您需要安裝 wvdial，否則PPP (數據機) 連線無法啟用。是否"
-"仍然要繼續？"
 
-#: src/network/callbacks.c:661 src/network/callbacks.c:688
-msgid "_Continue"
-msgstr "繼續(_C)"
+#: ../src/network/callbacks.c:44
+#, c-format
+msgid "Could not enable the interface %s"
+msgstr "無法啟用介面 %s "
 
-#: src/network/callbacks.c:684
-msgid "The default gateway device is not activated"
-msgstr "預設閘道裝置尚未啟動"
-
-#: src/network/callbacks.c:685
-msgid "This will prevent you from connecting to the Internet. Continue anyway?"
-msgstr "這樣會妨礙連線至網際網路。是否仍然繼續？"
-
-#: src/network/callbacks.c:733
-msgid "The default gateway device is missing gateway information"
-msgstr "預設的閘道器裝置遺失閘道器資訊"
-
-#: src/network/callbacks.c:734
+#: ../src/network/callbacks.c:48
 msgid ""
-"Please provide this information to proceed, or choose another default "
-"gateway device"
-msgstr "請提供這項資訊再繼續，或是另選預設閘道器裝置"
-
-#: src/network/callbacks.c:779
-msgid "The program redhat-config-network-cmd could not be found"
-msgstr "找不到 redhat-config-network-cmd 程式"
-
-#: src/network/callbacks.c:780
-msgid ""
-"This could render missing connections under the connections tab. Please "
-"install the redhat-config-network rpm package to avoid this"
+"Check that the settings are apropriate for this network and that the "
+"computer is correctly connected to it."
 msgstr ""
-"這樣會令連線設定失去有關連線的資訊。如要避免此情況發生，請安裝 redhat-config-"
-"network rpm 套件"
 
-#: src/network/callbacks.c:811
-#, c-format
-msgid "Do you want to enable interface \"%s\"?"
-msgstr "是否確定啟用介面“%s”？"
-
-#: src/network/callbacks.c:812
-msgid "This will enable network access through this interface"
-msgstr "這樣會啟用透過這個介面的網路存取"
-
-#: src/network/callbacks.c:813
-msgid "_Enable"
-msgstr "啟用(_E)"
-
-#: src/network/callbacks.c:815
-#, c-format
-msgid "Do you want to disable interface \"%s\"?"
-msgstr "是否確定停用介面“%s”？"
-
-#: src/network/callbacks.c:816
-msgid "This will disable network access through this interface"
-msgstr "這樣會停用透過這個介面的網路存取"
-
-#: src/network/callbacks.c:817
-msgid "_Disable"
-msgstr "停用(_D)"
-
-#: src/network/callbacks.c:953
+#: ../src/network/callbacks.c:235
 msgid "Could not autodetect modem device"
 msgstr "無法自動偵測數據機裝置"
 
-#: src/network/callbacks.c:954
+#: ../src/network/callbacks.c:238
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer"
 msgstr "請確定它不是正在使用中，而且是正確地連接至電腦"
 
-#: src/network/callbacks.c:1007
-msgid "Silent"
-msgstr "靜音"
+#: ../src/network/callbacks.c:449
+msgid "The host name has changed"
+msgstr "主機名稱已變更"
 
-#: src/network/callbacks.c:1009
-msgid "Low"
-msgstr "小"
-
-#: src/network/callbacks.c:1011
-msgid "Medium"
-msgstr "中"
-
-#: src/network/callbacks.c:1013
-msgid "Loud"
-msgstr "大"
-
-#: src/network/connection.c:46
-msgid "Other type"
-msgstr "其它類型"
-
-#: src/network/connection.c:47 src/network/connection.c:48
-#: src/network/connection.c:49 src/network/connection.c:50
-msgid "Ethernet LAN card"
-msgstr "Ethernet 網路卡"
-
-#: src/network/connection.c:51
-msgid "Wireless LAN card"
-msgstr "無線網路卡"
-
-#: src/network/connection.c:52 src/network/connection.c:53
-msgid "Modem or transfer cable"
-msgstr "數據機或傳輸線"
-
-#: src/network/connection.c:54
-msgid "Parallel line"
-msgstr "並列埠纜線"
-
-#: src/network/connection.c:55
-msgid "Infrared LAN"
-msgstr "紅外線網路"
-
-#: src/network/connection.c:56
-msgid "Loopback interface"
-msgstr "Loopback 虛擬界面"
-
-#: src/network/connection.c:57
-msgid "Unknown interface type"
-msgstr "介面類型不詳"
-
-#: src/network/connection.c:477 src/services/table.c:86
-msgid "Active"
-msgstr "使用中"
-
-#: src/network/connection.c:1613
-msgid "Automatic (DHCP)"
-msgstr "自動 (DHCP)"
-
-#: src/network/connection.c:1614
-msgid "Automatic (BOOTP)"
-msgstr "自動 (BOOTP)"
-
-#: src/network/connection.c:1632
-msgid "Tones"
-msgstr "音頻"
-
-#: src/network/connection.c:1633
-msgid "Pulses"
-msgstr "脈衝"
-
-#: src/network/connection.c:1734 src/network/connection.c:1744
-msgid "Error in IP address"
-msgstr "IP 位址錯誤"
-
-#: src/network/connection.c:1735
+#: ../src/network/callbacks.c:452
 msgid ""
-"The IP address or netmask for the interface was left empty. Please enter "
-"valid IP addresses in those fields to continue"
-msgstr ""
-"網路界面的 IP 位址或 netmask 是空白的。請在這些欄位中填上有效的 IP 位址再繼"
-"續"
+"This will prevent you from launching new applications, and so you will have "
+"to log in again. Continue anyway?"
+msgstr "這樣會妨礙啟動新的應用程式，而且需要重新登入。是否要繼續？"
 
-#: src/network/connection.c:1745
-msgid ""
-"The IP address or remote address for the interface was left empty. Please "
-"enter valid IP addresses in those fields to continue"
-msgstr ""
-"網路界面的 IP 位址或遠端位址是空白的。請在這些欄位中填上有效的 IP 位址再繼"
-"續"
+#: ../src/network/callbacks.c:458
+msgid "Change _Host name"
+msgstr "更改主機名稱(_H)"
 
-#: src/network/connection.c:1753
-msgid "Error in domain name servers"
-msgstr "網域名稱伺服器錯誤"
+#: ../src/network/connection.c:56
+msgid "Static IP address"
+msgstr "固定 IP 地址"
 
-#: src/network/connection.c:1754
-msgid ""
-"You chose to set the domain name servers for this connection manually, but "
-"left the IP address for the primary name server empty. Please enter the IP "
-"for the primary domain name server or uncheck the manual DNS option"
-msgstr ""
-"您已經選擇自行設定本連線的 DNS 伺服器，但主 DNS 的 IP 地址是空白的。請輸入主"
-"DNS 的 IP 或不選擇手動設定 DNS"
+#: ../src/network/connection.c:57
+msgid "DHCP"
+msgstr "DHCP"
 
-#: src/network/connection.c:1761
-msgid "Invalid modem device"
-msgstr "無效的數據機裝置"
-
-#: src/network/connection.c:1762
-msgid ""
-"The modem device that the connection will use was left empty. Please enter a "
-"device or press \"autodetect\" to continue"
-msgstr "此連線所使用的數據機是空白的。請填上一個裝置或按“自動偵測”再繼續"
-
-#: src/network/connection.c:1767
-msgid "Invalid phone number"
-msgstr "無效的電話號碼"
-
-#: src/network/connection.c:1768
-msgid ""
-"The phone number that the connection will use was left empty. Please enter a "
-"valid phone number to continue"
-msgstr "此連線所使用的電話號碼是空白的。請填上有效的電話號碼再繼續"
-
-#: src/network/connection.c:2094
-#, c-format
-msgid "The interface \"%s\" doesn't exist"
-msgstr "介面“%s”不存在"
-
-#: src/network/connection.c:2098
-msgid "Invalid interface"
-msgstr "無效的介面"
-
-#: src/network/connection.c:2099
-msgid "The loopback interface cannot be configured"
-msgstr "不能設定 loopback 介面"
-
-#: src/network/dns.c:148 src/network/hosts.c:158
+#: ../src/network/hosts.c:88
 msgid "IP Address"
 msgstr "IP 地址"
 
-#: src/network/hosts.c:166
+#: ../src/network/hosts.c:96
 msgid "Aliases"
 msgstr "別稱"
 
-#: src/network/main.c:203
-msgid "Run the connection assistant."
-msgstr "執行連線精靈。"
+#: ../src/network/location.c:141
+msgid "Create location"
+msgstr ""
 
-#: src/network/main.c:204
-msgid "Run the PPP connection assistant."
-msgstr "執行 PPP 連線精靈。"
+#: ../src/network/location.c:149
+msgid "Delete current location"
+msgstr "刪除目前位置"
 
-#: src/network/main.c:205
-msgid "Run the ethernet connection assistant."
-msgstr "執行 ethernet 連線精靈。"
+#: ../src/network/location.c:363
+msgid "Do you want to remove this location?"
+msgstr "您確定要刪除這個位置？"
 
-#: src/network/main.c:206
-msgid "Run the wlan connection assistant."
-msgstr "執行無線網路連線精靈。"
+#: ../src/network/location.c:436
+#, fuzzy
+msgid "Changing profile"
+msgstr "儲存設定檔時發生錯誤"
 
-#: src/network/main.c:207
-msgid "Run the parallel port connection assistant."
-msgstr "執行並列埠連線精靈。"
+#: ../src/network/main.c:108
+msgid "The interface does not exist"
+msgstr "介面不存在"
 
-#: src/network/main.c:208
-msgid "Run the irlan connection assistant."
-msgstr "執行紅外線網路連線精靈。"
+#: ../src/network/main.c:110
+#, fuzzy
+msgid ""
+"Check that it is correctly typed and that it is correctly supported by your "
+"system."
+msgstr "請確定它不是正在使用中，而且是正確地連接至電腦"
 
-#: src/network/main.c:209
+#: ../src/network/main.c:155
 msgid "Configure a network interface"
 msgstr "設定網路界面"
 
-#: src/network/main.c:209
-msgid "interface"
-msgstr "介面"
+#: ../src/network/main.c:155
+msgid "INTERFACE"
+msgstr ""
 
-#: src/network/main.c:216
-msgid "Network Settings"
+#: ../src/network/main.c:156
+#, fuzzy
+msgid "Configure the first network interface with a specific type"
+msgstr "設定網路界面"
+
+#: ../src/network/main.c:156
+msgid "TYPE"
+msgstr ""
+
+#: ../src/network/main.c:163
+msgid "Network settings"
 msgstr "網路設定"
 
-#: src/network/network-druid.c:73
-#, c-format
-msgid "Creating a new network connection (%d of %d)"
-msgstr "建立新的網路連線 (%d 之 %d)"
-
-#: src/network/network-druid.c:74
-msgid "Finished creating a new network connection"
-msgstr "新增網路連線完成"
-
-#: src/network/network.desktop.in.in.h:1
+#: ../src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
 msgstr "設定網路裝置與連線"
 
-#: src/network/network.desktop.in.in.h:2
+#: ../src/network/network.desktop.in.in.h:2
 msgid "Networking"
 msgstr "網路"
 
-#: src/network/profile.c:51 src/users/profile-settings.c:215
-msgid "You will not be able to recover this profile after pressing \"apply\""
-msgstr "在按下“套用”之後您將無法復原此設定檔"
+#: ../src/network/network-iface-ethernet.c:305
+msgid "Ethernet connection"
+msgstr "乙太網路連線生效"
 
-#: src/network/profile.c:55
-#, c-format
-msgid "Are you sure you want to delete profile \"%s\"?"
-msgstr "是否確定刪除設定檔“%s”？"
+#: ../src/network/network-iface-irlan.c:125
+msgid "Infrared connection"
+msgstr "紅外線裝置連線"
 
-#: src/network/profiles-table.c:53
-msgid "Profile name"
-msgstr "設定檔名稱"
+#: ../src/network/network-iface-isdn.c:311
+msgid "ISDN connection"
+msgstr "ISDN 連線"
 
-#: src/network/profiles-table.c:62
-msgid "Description"
-msgstr "描述"
+#: ../src/network/network-iface-modem.c:251
+msgid "Modem connection"
+msgstr "數據機連線"
 
-#: src/services/callbacks.c:46
+#: ../src/network/network-iface-plip.c:213
+msgid "Parallel port connection"
+msgstr "並列埠連線"
+
+#: ../src/network/network-iface-wireless.c:214
+msgid "Wireless connection"
+msgstr "無線網路連線"
+
+#: ../src/network/network-iface.c:410
+#, fuzzy, c-format
+msgid "Activating interface \"%s\""
+msgstr "無效的介面"
+
+#: ../src/network/network-iface.c:494
+#, fuzzy, c-format
+msgid "The interface %s is not configured"
+msgstr "不能設定 loopback 介面"
+
+#: ../src/network/network-iface.c:496
+#, fuzzy, c-format
+msgid "The interface %s is not active"
+msgstr "介面“%s”不存在"
+
+#: ../src/network/network-iface.c:498
+#, fuzzy, c-format
+msgid "The interface %s is active"
+msgstr "介面“%s”不存在"
+
+#: ../src/services/callbacks.c:46
 msgid "No description available."
 msgstr "無法提供任何說明。"
 
-#: src/services/callbacks.c:217
+#: ../src/services/callbacks.c:217
 msgid "Running"
 msgstr "執行中"
 
-#: src/services/callbacks.c:221
+#: ../src/services/callbacks.c:221
 msgid "Stopped"
 msgstr "已停止"
 
-#: src/services/callbacks.c:226
+#: ../src/services/callbacks.c:226
 msgid "Could not get info"
 msgstr "無法取得資訊"
 
-#: src/services/callbacks.c:292
+#: ../src/services/callbacks.c:292
 #, c-format
 msgid "Settings for service %s"
 msgstr "服務 %s 的設定"
 
-#: src/services/main.c:62
+#: ../src/services/main.c:62
 msgid "Services Settings"
 msgstr "服務設定值"
 
-#: src/services/services.desktop.in.in.h:1
+#: ../src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
 msgstr "設定當系統啟動時要執行哪項服務"
 
-#: src/services/services.desktop.in.in.h:2
+#: ../src/services/services.desktop.in.in.h:2
 msgid "Services"
 msgstr "服務"
 
-#: src/services/table.c:95
+#: ../src/services/table.c:86
+msgid "Active"
+msgstr "使用中"
+
+#: ../src/services/table.c:95
 msgid "Service"
 msgstr "服務"
 
-#: src/time/main.c:461
+#: ../src/shares/callbacks.c:184
+msgid "Are you sure you want to delete this share?"
+msgstr "您確定要刪除這個共享？"
+
+#: ../src/shares/callbacks.c:186
+msgid "Other computers in your network will stop viewing this"
+msgstr "其它在您的網路上的電腦會停止查看此分享"
+
+#: ../src/shares/main.c:86
+msgid "Add a shared path, modifies it if it already exists"
+msgstr "加入共享的路徑，如果它已存在請修改它"
+
+#: ../src/shares/main.c:86
+msgid "PATH"
+msgstr ""
+
+#: ../src/shares/main.c:93
+msgid "Shared folders settings"
+msgstr "共享資料夾設定"
+
+#: ../src/shares/nautilus/nautilus-shares.c:129
+msgid "_Share folder"
+msgstr "共享資料夾(_S)"
+
+#: ../src/shares/nautilus/nautilus-shares.c:130
+#, fuzzy
+msgid "Share this folder with other computers"
+msgstr "此工具無法連接到這臺電腦"
+
+#: ../src/shares/nfs-acl-table.c:49
+msgid "Allowed host/network"
+msgstr "允許的主機/網路"
+
+#: ../src/shares/share-nfs-add-hosts.c:112
+#, c-format
+msgid "Hosts in the %s network"
+msgstr "主機在 %s 網路"
+
+#: ../src/shares/share-nfs-add-hosts.c:144
+msgid "Specify hostname"
+msgstr "指定主機名稱"
+
+#: ../src/shares/share-nfs-add-hosts.c:151
+msgid "Specify IP address"
+msgstr "指定 IP 地址"
+
+#: ../src/shares/share-nfs-add-hosts.c:158
+msgid "Specify network"
+msgstr "指定網路"
+
+#: ../src/shares/share-settings.c:121
+msgid "Do not share"
+msgstr "不共享"
+
+#: ../src/shares/share-settings.c:129
+msgid "SMB"
+msgstr "SMB"
+
+#: ../src/shares/share-settings.c:137
+msgid "NFS"
+msgstr "NFS"
+
+#: ../src/shares/shares.desktop.in.in.h:1
+msgid "Configure which folders are available for your network neighborhood"
+msgstr "設定那一個資料夾共享給您的網路芳鄰"
+
+#: ../src/shares/shares.desktop.in.in.h:2
+msgid "Shared folders"
+msgstr "共享資料夾"
+
+#: ../src/shares/transfer.c:42
+msgid "Sharing services are not installed"
+msgstr ""
+
+#: ../src/shares/transfer.c:44
+msgid ""
+"You need to install at least either Samba or NFS in order to share your "
+"folders. The tool will close now."
+msgstr ""
+
+#: ../src/time/main.c:461
 msgid "NTP support is not running"
 msgstr "沒有執行 NTP 支援"
 
-#: src/time/main.c:462
+#: ../src/time/main.c:463
 msgid ""
 "Please run NTP support in the system to enable synchronization of your local "
 "time server with internet time servers"
 msgstr "請在系統安裝 NTP 支援，令時間校對服務生效"
 
-#: src/time/main.c:760
+#: ../src/time/main.c:759
 msgid "Time and Date Settings"
 msgstr "時間及日期設定"
 
-#: src/time/time.desktop.in.in.h:1
+#: ../src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
 msgstr "改變系統時刻、日期及時區。"
 
-#: src/time/time.desktop.in.in.h:2
+#: ../src/time/time.desktop.in.in.h:2
 msgid "Time and Date"
 msgstr "時刻及日期設定"
 
-#: src/users/callbacks.c:569
+#: ../src/users/callbacks.c:569
 msgid "Error saving profile"
 msgstr "儲存設定檔時發生錯誤"
 
-#: src/users/callbacks.c:609
+#: ../src/users/callbacks.c:611
 msgid "Create New profile"
 msgstr "建立新的設定檔"
 
-#: src/users/callbacks.c:643
+#: ../src/users/callbacks.c:647
 #, c-format
 msgid "Settings for profile %s"
 msgstr "設定檔 %s 的設定值"
 
-#: src/users/group-settings.c:90
+#: ../src/users/group-settings.c:89
 msgid "Create New Group"
 msgstr "建立新的群組"
 
 #. Check if gid is available
-#: src/users/group-settings.c:163 src/users/group-settings.c:171
+#: ../src/users/group-settings.c:162 ../src/users/group-settings.c:170
 msgid "Invalid group ID"
 msgstr "無效的群組 ID"
 
-#: src/users/group-settings.c:164
+#: ../src/users/group-settings.c:163
 msgid "Group ID must be a positive number"
 msgstr "群組 ID 必須為正數"
 
 #. if group is root
-#: src/users/group-settings.c:167
+#: ../src/users/group-settings.c:166
 msgid "Group ID of the \"root\" user should not be modified"
 msgstr "不應修改 \"root\" 使用者的群組 ID"
 
-#: src/users/group-settings.c:168 src/users/group-settings.c:214
-#: src/users/group-settings.c:284 src/users/user-settings.c:105
-#: src/users/user-settings.c:355 src/users/user-settings.c:450
-#: src/users/user-settings.c:486
+#: ../src/users/group-settings.c:167 ../src/users/group-settings.c:213
+#: ../src/users/group-settings.c:283 ../src/users/user-settings.c:72
+#: ../src/users/user-settings.c:303 ../src/users/user-settings.c:398
+#: ../src/users/user-settings.c:434
 msgid "This would leave the system unusable"
 msgstr "這樣會讓系統停留在無法使用的狀態"
 
-#: src/users/group-settings.c:172
+#: ../src/users/group-settings.c:171
 #, c-format
 msgid "Group ID %s already exists"
 msgstr "群組 ID %s 已經存在"
 
 #. If empty.
-#: src/users/group-settings.c:197
+#: ../src/users/group-settings.c:196
 msgid "Group name is empty"
 msgstr "群組名稱是空的"
 
-#: src/users/group-settings.c:198
+#: ../src/users/group-settings.c:197
 msgid "A group name must be specified"
 msgstr "必須指定群組名稱"
 
 #. If too long.
-#: src/users/group-settings.c:201
+#: ../src/users/group-settings.c:200
 msgid "The group name is too long"
 msgstr "群組名稱過長"
 
-#: src/users/group-settings.c:202
+#: ../src/users/group-settings.c:201
 #, c-format
 msgid "The group name should have less than %i characters for being valid"
 msgstr "群組名稱應小於 %i 個字元才可以"
 
 #. if invalid.
-#: src/users/group-settings.c:205
+#: ../src/users/group-settings.c:204
 msgid "Group name has invalid characters"
 msgstr "群組名稱含有不正確的字元。"
 
-#: src/users/group-settings.c:206
+#: ../src/users/group-settings.c:205
 msgid "Please set a valid group name, using only lower case letters"
 msgstr "請設定有效的群組名稱，當中只含有小寫字母"
 
 #. if !exist.
-#: src/users/group-settings.c:209
+#: ../src/users/group-settings.c:208
 #, c-format
 msgid "Group \"%s\" already exists"
 msgstr "群組“%s”已經存在"
 
-#: src/users/group-settings.c:210
+#: ../src/users/group-settings.c:209
 msgid "Please select a different group name"
 msgstr "請選擇不同的群組名稱"
 
 #. if it's the root group
-#: src/users/group-settings.c:213
+#: ../src/users/group-settings.c:212
 msgid "Group name of the \"root\" user should not be modified"
 msgstr "不應修改 \"root\" 使用者的群組名稱"
 
-#: src/users/group-settings.c:283
+#: ../src/users/group-settings.c:282
 msgid "The group \"root\" should not be deleted"
 msgstr "不應刪除 \"root\" 群組"
 
-#: src/users/group-settings.c:298
-msgid "This may leave files with invalid group ID in the filesystem"
-msgstr "這樣可能會在檔案系統中留下具有無效的群組 ID 的檔案"
-
-#: src/users/group-settings.c:303
+#: ../src/users/group-settings.c:297
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
 msgstr "是否確定刪除群組 \"%s\"？"
 
-#: src/users/group-settings.c:358
+#: ../src/users/group-settings.c:299
+msgid "This may leave files with invalid group ID in the filesystem"
+msgstr "這樣可能會在檔案系統中留下具有無效的群組 ID 的檔案"
+
+#: ../src/users/group-settings.c:359
 #, c-format
 msgid "Settings for Group %s"
 msgstr "群組 %s 的設定"
 
-#: src/users/groups-table.c:44
+#: ../src/users/groups-table.c:44
 msgid "Group"
 msgstr "群組"
 
-#: src/users/groups-table.c:45
+#: ../src/users/groups-table.c:45
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:124
+#: ../src/users/main.c:122
 msgid "User name contains"
 msgstr "使用者名稱含有"
 
-#: src/users/main.c:125
+#: ../src/users/main.c:123
 msgid "User ID is"
 msgstr "使用者識別碼為"
 
-#: src/users/main.c:126
+#: ../src/users/main.c:124
 msgid "Group name contains"
 msgstr "群組名稱含有"
 
-#: src/users/main.c:127
+#: ../src/users/main.c:125
 msgid "User GID is"
 msgstr "群組識別碼為"
 
-#: src/users/main.c:246 src/users/users.desktop.in.in.h:2
+#: ../src/users/main.c:244 ../src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "使用者及群組"
 
-#: src/users/passwd.c:266
+#: ../src/users/passwd.c:165
 msgid "Passwords do not match"
 msgstr "密碼不符"
 
-#: src/users/passwd.c:271
+#: ../src/users/passwd.c:170
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1941,92 +1680,102 @@ msgstr ""
 "密碼不能使用：%s。\n"
 "請嘗試輸入新的密碼"
 
-#: src/users/profile-settings.c:122
+#: ../src/users/profile-settings.c:122
 msgid "The profile must have a name"
 msgstr "必須指定設定檔的名稱"
 
-#: src/users/profile-settings.c:127
+#: ../src/users/profile-settings.c:127
 msgid "The profile must have a default home"
 msgstr "設定檔中必須指定使用者預設的個人目錄"
 
-#: src/users/profile-settings.c:132 src/users/profile-settings.c:137
+#: ../src/users/profile-settings.c:132 ../src/users/profile-settings.c:137
 msgid "The profile must have a default shell"
 msgstr "設定檔中必須指定使用者預設的 shell"
 
-#: src/users/profile-settings.c:204
+#: ../src/users/profile-settings.c:205
 msgid "The default profile should not be deleted"
 msgstr "不可刪除“Default”設定檔"
 
-#: src/users/profile-settings.c:205
+#: ../src/users/profile-settings.c:206
 msgid "This profile is used for setting default data for new users"
 msgstr "這個設定檔是用來設定新使用者的預設資料"
 
-#: src/users/profile-settings.c:214
+#: ../src/users/profile-settings.c:215
 #, c-format
 msgid "Delete profile \"%s\"?"
 msgstr "是否刪除設定檔“%s”？"
 
+#: ../src/users/profile-settings.c:217
+msgid "You will not be able to recover this profile after pressing \"apply\""
+msgstr "在按下“套用”之後您將無法復原此設定檔"
+
 #. Column name,          Adv_state_show,	Basic_state_show
-#: src/users/profiles-table.c:38
+#: ../src/users/profiles-table.c:38
 msgid "Profile"
 msgstr "設定檔"
 
-#: src/users/profiles-table.c:39
+#: ../src/users/profiles-table.c:39
 msgid "Comment"
 msgstr "備註"
 
-#: src/users/search-bar/search-bar.c:225
+#: ../src/users/search-bar/search-bar.c:225
 msgid "C_lear"
 msgstr "清除(_L)"
 
-#: src/users/search-bar/search-bar.c:326
+#: ../src/users/search-bar/search-bar.c:326
 msgid "Choice"
 msgstr "選擇"
 
-#: src/users/search-bar/search-bar.c:336
+#: ../src/users/search-bar/search-bar.c:336
 msgid "Text"
 msgstr "文字"
 
-#: src/users/user-settings.c:104
+#: ../src/users/user-settings.c:71
 msgid "The \"root\" user should not be deleted"
 msgstr "不可刪除 \"root\" 使用者"
 
-#: src/users/user-settings.c:120
+#: ../src/users/user-settings.c:81
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "是否確定刪除使用者 \"%s\"？"
 
-#: src/users/user-settings.c:219
+#: ../src/users/user-settings.c:83
+msgid ""
+"This will disable the access of this user to the system, but his home "
+"directory will not be deleted"
+msgstr ""
+
+#: ../src/users/user-settings.c:187
 msgid "User Account Editor"
 msgstr "帳號編輯程式"
 
-#: src/users/user-settings.c:335
+#: ../src/users/user-settings.c:283
 msgid "The user name is empty"
 msgstr "使用者名稱是空的"
 
-#: src/users/user-settings.c:336
+#: ../src/users/user-settings.c:284
 msgid "A user name must be specified"
 msgstr "必須指定使用者名稱"
 
 #. = sizeof (ut.ut_name)
-#: src/users/user-settings.c:342 src/users/user-settings.c:347
+#: ../src/users/user-settings.c:290 ../src/users/user-settings.c:295
 msgid "The user name is too long"
 msgstr "使用者名稱過長"
 
-#: src/users/user-settings.c:343 src/users/user-settings.c:348
+#: ../src/users/user-settings.c:291 ../src/users/user-settings.c:296
 #, c-format
 msgid "The user name should have less than %i characters for being valid"
 msgstr "使用者名稱應該小於 %i 個字元才可以"
 
-#: src/users/user-settings.c:354
+#: ../src/users/user-settings.c:302
 msgid "User name for the \"root\" user should not be modified"
 msgstr "不應修改 \"root\" 使用者名稱"
 
-#: src/users/user-settings.c:360
+#: ../src/users/user-settings.c:308
 msgid "User name has invalid characters"
 msgstr "使用者名稱含有無效的字"
 
-#: src/users/user-settings.c:361
+#: ../src/users/user-settings.c:309
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers"
@@ -2034,37 +1783,37 @@ msgstr ""
 "請設定有效的使用者名稱，第一個字元只可以是小寫字母，其它的必須是小寫字母或數"
 "字"
 
-#: src/users/user-settings.c:367
+#: ../src/users/user-settings.c:315
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "該使用者名稱 \"%s\" 已經存在"
 
-#: src/users/user-settings.c:368
+#: ../src/users/user-settings.c:316
 msgid "Please select a different user name"
 msgstr "請另選使用者名稱"
 
-#: src/users/user-settings.c:393
+#: ../src/users/user-settings.c:341
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "備註中出現無效的字元\"%c\""
 
-#: src/users/user-settings.c:394
+#: ../src/users/user-settings.c:342
 msgid "Check that this character is not used"
 msgstr "請檢查有無使用此不正確的字元"
 
-#: src/users/user-settings.c:442
+#: ../src/users/user-settings.c:390
 msgid "Home directory should not be empty"
 msgstr "個人目錄不可留空"
 
-#: src/users/user-settings.c:443
+#: ../src/users/user-settings.c:391
 msgid "Make sure you provide a home directory"
 msgstr "請確定您已提供個人目錄"
 
-#: src/users/user-settings.c:445
+#: ../src/users/user-settings.c:393
 msgid "Incomplete path in home directory"
 msgstr "個人目錄含有不完整的路徑"
 
-#: src/users/user-settings.c:446
+#: ../src/users/user-settings.c:394
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
@@ -2072,38 +1821,39 @@ msgstr ""
 "請輸入家目錄的完整路徑。\n"
 "<span size=\"smaller\">例: /home/john</span>"
 
-#: src/users/user-settings.c:449
+#: ../src/users/user-settings.c:397
 msgid "Home directory of the \"root\" user should not be modified"
 msgstr "不應修改 \"root\" 使用者的家目錄"
 
-#: src/users/user-settings.c:482
+#: ../src/users/user-settings.c:430
 msgid "Invalid user ID"
 msgstr "無效的使用者 ID"
 
-#: src/users/user-settings.c:483
+#: ../src/users/user-settings.c:431
 msgid "User ID must be a positive number"
 msgstr "使用者識別碼必須為正數"
 
-#: src/users/user-settings.c:485
+#: ../src/users/user-settings.c:433
 msgid "User ID of the \"root\" user should not be modified"
 msgstr "不應修改 \"root\" 使用者的使用者 ID"
 
-#: src/users/user-settings.c:502
-msgid ""
-"Several users may share a single user ID, but it's not common and may lead "
-"to security problems"
-msgstr "有的使用者可能會共享單一的使用者 ID ，但這並不普遍而且可能導致安全性的問題"
-
-#: src/users/user-settings.c:507
+#: ../src/users/user-settings.c:451
 #, c-format
 msgid "User ID %s already exists"
 msgstr "使用者 ID %s 已經存在"
 
-#: src/users/user-settings.c:524
+#: ../src/users/user-settings.c:453
+msgid ""
+"Several users may share a single user ID, but it's not common and may lead "
+"to security problems"
+msgstr ""
+"有的使用者可能會共享單一的使用者 ID ，但這並不普遍而且可能導致安全性的問題"
+
+#: ../src/users/user-settings.c:471
 msgid "Incomplete path in shell"
 msgstr "shell 含有不完整的路徑"
 
-#: src/users/user-settings.c:525
+#: ../src/users/user-settings.c:472
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
@@ -2111,48 +1861,556 @@ msgstr ""
 "請輸入 shell 的完整路徑\n"
 "<span size=\"smaller\">例: /bin/sh</span>"
 
-#: src/users/user-settings.c:547
+#: ../src/users/user-settings.c:494
 msgid "Password should not be empty"
 msgstr "密碼不可留空"
 
-#: src/users/user-settings.c:548
+#: ../src/users/user-settings.c:495
 msgid "A password must be provided"
 msgstr "必須提供密碼"
 
-#: src/users/user-settings.c:550
+#: ../src/users/user-settings.c:497
 msgid "Password confirmation isn't correct"
 msgstr "確認密碼程序失敗"
 
-#: src/users/user-settings.c:551
+#: ../src/users/user-settings.c:498
 msgid "Check that you have provided the same password in both text fields"
 msgstr "請檢查您是否在兩個文字欄位中提供相同的密碼"
 
-#: src/users/user-settings.c:827
+#: ../src/users/user-settings.c:772
 #, c-format
 msgid "Settings for User %s"
 msgstr "使用者 %s 的設定"
 
-#: src/users/users-table.c:45
+#: ../src/users/users-table.c:45
 msgid "User"
 msgstr "使用者"
 
-#: src/users/users-table.c:46
+#: ../src/users/users-table.c:46
 msgid "Home"
 msgstr "個人目錄"
 
-#: src/users/users-table.c:47
+#: ../src/users/users-table.c:47
 msgid "User details"
 msgstr "使用者詳細資訊"
 
-#: src/users/users-table.c:48
+#: ../src/users/users-table.c:48
 msgid "UID"
 msgstr "UID"
 
-#: src/users/users-table.c:49
+#: ../src/users/users-table.c:49
 msgid "Shell"
 msgstr "命令殼"
 
-#: src/users/users.desktop.in.in.h:1
+#: ../src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "新增或移除使用者及群組"
 
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid ""
+#~ "<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
+#~ "Use this tool to specify which operating systems users can choose at "
+#~ "startup"
+#~ msgstr ""
+#~ "<span size=\"larger\" weight=\"bold\">開機管理程式設定</span>\n"
+#~ "本工具可以設定啟動電腦時使用者可選擇的作業系統。"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">To run this tool, you need "
+#~ "administrator privileges</span>"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">要執行這個工具，您需要系統管理者權限"
+#~ "</span>"
+
+#~ msgid "Scanning system configuration..."
+#~ msgstr "正在掃描系統組態..."
+
+#~ msgid "<b>Profile Settings</b>"
+#~ msgstr "<b>設定組合內容</b>"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
+#~ "Use this tool for configuring the way your system access to other "
+#~ "computers"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">網路設定</span>\n"
+#~ "使用這個工具來設定您的系統存取其他電腦的方式"
+
+#~ msgid "<span weight=\"bold\">Access Settings</span>"
+#~ msgstr "<span weight=\"bold\">設定使用權限</span>"
+
+#~ msgid "<span weight=\"bold\">Account Data</span>"
+#~ msgstr "<span weight=\"bold\">帳號資料</span>"
+
+#~ msgid "<span weight=\"bold\">Connection settings</span>"
+#~ msgstr "<span weight=\"bold\">連線設定</span>"
+
+#~ msgid "<span weight=\"bold\">Connection</span>"
+#~ msgstr "<span weight=\"bold\">連線</span>"
+
+#~ msgid "<span weight=\"bold\">DNS Servers</span>"
+#~ msgstr "<span weight=\"bold\">DNS 伺服器</span>"
+
+#~ msgid "<span weight=\"bold\">Host Settings</span>"
+#~ msgstr "<span weight=\"bold\">主機設定</span>"
+
+#~ msgid "<span weight=\"bold\">PPP Settings</span>"
+#~ msgstr "<span weight=\"bold\">PPP 設定</span>"
+
+#~ msgid "<span weight=\"bold\">Search Domains</span>"
+#~ msgstr "<span weight=\"bold\">搜尋網域</span>"
+
+#~ msgid "<span weight=\"bold\">Windows Networking</span>"
+#~ msgstr "<span weight=\"bold\">Windows 網路</span>"
+
+#~ msgid "<span weight=\"bold\">Wireless settings:</span>"
+#~ msgstr "<span weight=\"bold\">無線網路設定</span>"
+
+#~ msgid "Activate when the computer _starts"
+#~ msgstr "當電腦啟動時生效(_S)"
+
+#~ msgid "Add DNS server"
+#~ msgstr "加入 DNS 伺服器"
+
+#~ msgid "Add search domain"
+#~ msgstr "加入搜尋網域"
+
+#~ msgid "Address configuration"
+#~ msgstr "地址設定"
+
+#~ msgid "Allow activation control for all _users"
+#~ msgstr "允許所有使用者控制連線(_U)"
+
+#~ msgid "Co_nfiguration:"
+#~ msgstr "組態(_N):"
+
+#~ msgid "Connection type"
+#~ msgstr "連線方式"
+
+#~ msgid "Creating a new network connection"
+#~ msgstr "建立新的網路連線"
+
+#~ msgid "Current network profile:"
+#~ msgstr "目前的網路設定檔:"
+
+#~ msgid "Delete DNS server"
+#~ msgstr "刪除 DNS 伺服器"
+
+#~ msgid "ISP phone number"
+#~ msgstr "ISP 電話號碼"
+
+#~ msgid ""
+#~ "List of domains that the system will try to append to a hostname if there "
+#~ "isn't already one specified"
+#~ msgstr "當沒有指定網域名稱時，系統會嘗試將加到主機名稱的網域名稱清單"
+
+#~ msgid "Network profiles"
+#~ msgstr "網路設定檔"
+
+#~ msgid "Networking Settings"
+#~ msgstr "網路設定"
+
+#~ msgid "New network profile"
+#~ msgstr "新增網路設定"
+
+#~ msgid ""
+#~ "Next, please enter the user name and password which were assigned to you "
+#~ "by your ISP."
+#~ msgstr "然後，請輸入由 ISP 提供的登入名稱及密碼。"
+
+#~ msgid ""
+#~ "Now, please enter the address that this network device will have, and the "
+#~ "remote address to which it will be connected."
+#~ msgstr "現在請輸入本網路裝置所使用的位址及它將會連接的遠端位址。"
+
+#~ msgid "Now, please enter the address that this network device will have."
+#~ msgstr "現在請輸入這個網路裝置本身所使用的位址。"
+
+#~ msgid ""
+#~ "Now, please specify if this connection should be enabled, this means that "
+#~ "the configuration will be applied when the assistant finishes."
+#~ msgstr ""
+#~ "現在請決定是否要啟用這個連線，這表示當此輔助程式結束時就會套用這個組態。"
+
+#~ msgid "Number to _access an external line:"
+#~ msgstr "存取外部線路的號碼(_A):"
+
+#~ msgid "Number to get to an _external line:"
+#~ msgstr "取得外部線路的號碼(_E):"
+
+#~ msgid "PPPD _options:"
+#~ msgstr "PPPD 選項(_O):"
+
+#~ msgid "Pa_ssword (confirm):"
+#~ msgstr "密碼 (再次確定)(_S):"
+
+#~ msgid "Phone _number:"
+#~ msgstr "電話號碼(_N):"
+
+#~ msgid ""
+#~ "Please enter the phone number you use to connect to the internet. This "
+#~ "number is provided by your ISP."
+#~ msgstr "請輸入用來連接至網際網路的電話號碼。該號碼是由 ISP 提供的。"
+
+#~ msgid ""
+#~ "Please select the wireless device that you want to configure and set the "
+#~ "network name for this interface"
+#~ msgstr "請選擇您想要設定的無線網路裝置並設定介面的網路名稱"
+
+#~ msgid "Please, select which type of connection you would like to add."
+#~ msgstr "請選取想新增的連線方式。"
+
+#~ msgid "Se_condary:"
+#~ msgstr "次要(_C):"
+
+#~ msgid "Set _DNS servers manually"
+#~ msgstr "手動設定 DNS 伺服器(_D)"
+
+#~ msgid ""
+#~ "This assistant will help you configure a new \n"
+#~ "network connection."
+#~ msgstr ""
+#~ "這個輔助程式會幫助您設定新的\n"
+#~ "網路連線。"
+
+#~ msgid ""
+#~ "This is the list of IP addresses that the system will use as name servers"
+#~ msgstr "這是系統用來當做名稱伺服器的 IP 位址清單"
+
+#~ msgid ""
+#~ "To continue configuring your network connection, click \"Next\". To quit, "
+#~ "click \"Cancel\"."
+#~ msgstr "請按「下一頁」繼續設定網路連線。想離開，請按「取消」。"
+
+#~ msgid "Username and password"
+#~ msgstr "登入名稱及密碼"
+
+#~ msgid "Wireless device:"
+#~ msgstr "無線網路裝置:"
+
+#~ msgid ""
+#~ "You are about to create a new network connection. Please click \"Apply\" "
+#~ "to save your changes."
+#~ msgstr "現在準備新增網路連線。請按「套用」儲存設定。"
+
+#~ msgid "_Apply and activate connection"
+#~ msgstr "套用並令連線生效(_A)"
+
+#~ msgid "_Ethernet"
+#~ msgstr "_Ethernet"
+
+#~ msgid "_IR LAN"
+#~ msgstr "紅外線網路(_I)"
+
+#~ msgid "_Local IP address:"
+#~ msgstr "本地 IP 地址(_L):"
+
+#~ msgid "_Modem (PPP)"
+#~ msgstr "數據機[PPP](_M)"
+
+#~ msgid "_Network Profiles"
+#~ msgstr "網路設定檔(_N)"
+
+#~ msgid "_Network name (ESSID):"
+#~ msgstr "網路名稱(ESSID):"
+
+#~ msgid "_Parallel Line"
+#~ msgstr "並列埠纜線(_P)"
+
+#~ msgid "_Primary:"
+#~ msgstr "主要(_P):"
+
+#~ msgid "_Remote IP address:"
+#~ msgstr "遠端 IP 位址(_R):"
+
+#~ msgid "_Save Current"
+#~ msgstr "儲存目前的設定(_S)"
+
+#~ msgid "_Start PPP as soon as modem connects"
+#~ msgstr "數據機連線時立刻啟動 PPP(_S)"
+
+#~ msgid "_Update DNS when this connection becomes active"
+#~ msgstr "當此網路連線生效時更新 DNS(_U)"
+
+#~ msgid "_Use remote IP as default gateway"
+#~ msgstr "使用遠端 IP 作為預設通訊閘(_U)"
+
+#~ msgid "_WEP key:"
+#~ msgstr "_WEP key:"
+
+#~ msgid "_Wireless"
+#~ msgstr "無線網路(_W)"
+
+#~ msgid "new search domain"
+#~ msgstr "新增搜尋網域"
+
+#~ msgid ""
+#~ "<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
+#~ "use this tool to specify which services to run at boot time"
+#~ msgstr ""
+#~ "<span size=\"larger\" weight=\"bold\">服務設定</span>\n"
+#~ "使用這個工具來指定開機時要執行哪些服務"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">Shared folders configuration</"
+#~ "span>\n"
+#~ "Use this tool for making available folders to your local network "
+#~ "neighborhood"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">共享資料夾設定</span>\n"
+#~ "使用這個工具來您的共享資料夾給本地網路中的芳鄰"
+
+#~ msgid ""
+#~ "<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
+#~ "Use this tool for setting your current date, time and time zone"
+#~ msgstr ""
+#~ "<span size=\"larger\" weight=\"bold\">時刻與日期設定</span>\n"
+#~ "使用這個工具來設定您目前的日期、時刻與時區"
+
+#~ msgid "<span weight=\"bold\">Time Configuration</span>"
+#~ msgstr "<span weight=\"bold\">時間組態</span>"
+
+#~ msgid "date"
+#~ msgstr "日期"
+
+#~ msgid "hours"
+#~ msgstr "小時"
+
+#~ msgid "minutes"
+#~ msgstr "分鐘"
+
+#~ msgid "seconds"
+#~ msgstr "秒鐘"
+
+#~ msgid ""
+#~ "<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
+#~ "Use this tool for configuring users and groups settings in your system"
+#~ msgstr ""
+#~ "<span weight=\"bold\" size=\"larger\">使用者與群組設定</span>\n"
+#~ "使用這個工具來設定您系統中的使用者與群組"
+
+#~ msgid ""
+#~ "This will disable any network connection with this interface as soon as "
+#~ "you press \"OK\" in the main window"
+#~ msgstr "當您在主視窗點選「確定」後，會立即停用本介面的任何網路連接"
+
+#~ msgid "Are you sure you want to delete connection \"%s\"?"
+#~ msgstr "是否確定刪除連線“%s”？"
+
+#~ msgid "SMB Support is not running"
+#~ msgstr "沒有執行 SMB 支援"
+
+#~ msgid ""
+#~ "You don't have SMB support installed. Please install SMB support in the "
+#~ "system to enable file sharing in Windows networks"
+#~ msgstr "您沒有安裝 SMB 的支援。請在系統中安裝 SMB 支援以支援 Windows 網路"
+
+#~ msgid "Wvdial command not found"
+#~ msgstr "找不到 Wvdial 指令"
+
+#~ msgid ""
+#~ "wvdial could not be found on your system. You need to install wvdial, or "
+#~ "the PPP (modem) connections will not activate"
+#~ msgstr ""
+#~ "在系統中找不到 wvdial。您需要安裝 wvdial，否則 PPP (數據機) 連線無法啟用"
+
+#~ msgid ""
+#~ "wvdial could not be found on your system. You need to install wvdial, or "
+#~ "the PPP (modem) connections will not activate. Continue anyway?"
+#~ msgstr ""
+#~ "在系統中找不到 wvdial。您需要安裝 wvdial，否則PPP (數據機) 連線無法啟用。"
+#~ "是否仍然要繼續？"
+
+#~ msgid "_Continue"
+#~ msgstr "繼續(_C)"
+
+#~ msgid "The default gateway device is not activated"
+#~ msgstr "預設閘道裝置尚未啟動"
+
+#~ msgid ""
+#~ "This will prevent you from connecting to the Internet. Continue anyway?"
+#~ msgstr "這樣會妨礙連線至網際網路。是否仍然繼續？"
+
+#~ msgid "The default gateway device is missing gateway information"
+#~ msgstr "預設的閘道器裝置遺失閘道器資訊"
+
+#~ msgid ""
+#~ "Please provide this information to proceed, or choose another default "
+#~ "gateway device"
+#~ msgstr "請提供這項資訊再繼續，或是另選預設閘道器裝置"
+
+#~ msgid "The program redhat-config-network-cmd could not be found"
+#~ msgstr "找不到 redhat-config-network-cmd 程式"
+
+#~ msgid ""
+#~ "This could render missing connections under the connections tab. Please "
+#~ "install the redhat-config-network rpm package to avoid this"
+#~ msgstr ""
+#~ "這樣會令連線設定失去有關連線的資訊。如要避免此情況發生，請安裝 redhat-"
+#~ "config-network rpm 套件"
+
+#~ msgid "This will enable network access through this interface"
+#~ msgstr "這樣會啟用透過這個介面的網路存取"
+
+#~ msgid "_Enable"
+#~ msgstr "啟用(_E)"
+
+#~ msgid "Do you want to disable interface \"%s\"?"
+#~ msgstr "是否確定停用介面“%s”？"
+
+#~ msgid "This will disable network access through this interface"
+#~ msgstr "這樣會停用透過這個介面的網路存取"
+
+#~ msgid "_Disable"
+#~ msgstr "停用(_D)"
+
+#~ msgid "Silent"
+#~ msgstr "靜音"
+
+#~ msgid "Low"
+#~ msgstr "小"
+
+#~ msgid "Medium"
+#~ msgstr "中"
+
+#~ msgid "Loud"
+#~ msgstr "大"
+
+#~ msgid "Other type"
+#~ msgstr "其它類型"
+
+#~ msgid "Ethernet LAN card"
+#~ msgstr "Ethernet 網路卡"
+
+#~ msgid "Wireless LAN card"
+#~ msgstr "無線網路卡"
+
+#~ msgid "Modem or transfer cable"
+#~ msgstr "數據機或傳輸線"
+
+#~ msgid "Parallel line"
+#~ msgstr "並列埠纜線"
+
+#~ msgid "Infrared LAN"
+#~ msgstr "紅外線網路"
+
+#~ msgid "Loopback interface"
+#~ msgstr "Loopback 虛擬界面"
+
+#~ msgid "Unknown interface type"
+#~ msgstr "介面類型不詳"
+
+#~ msgid "Automatic (DHCP)"
+#~ msgstr "自動 (DHCP)"
+
+#~ msgid "Automatic (BOOTP)"
+#~ msgstr "自動 (BOOTP)"
+
+#~ msgid "Tones"
+#~ msgstr "音頻"
+
+#~ msgid "Error in IP address"
+#~ msgstr "IP 位址錯誤"
+
+#~ msgid ""
+#~ "The IP address or netmask for the interface was left empty. Please enter "
+#~ "valid IP addresses in those fields to continue"
+#~ msgstr ""
+#~ "網路界面的 IP 位址或 netmask 是空白的。請在這些欄位中填上有效的 IP 位址再"
+#~ "繼續"
+
+#~ msgid ""
+#~ "The IP address or remote address for the interface was left empty. Please "
+#~ "enter valid IP addresses in those fields to continue"
+#~ msgstr ""
+#~ "網路界面的 IP 位址或遠端位址是空白的。請在這些欄位中填上有效的 IP 位址再繼"
+#~ "續"
+
+#~ msgid "Error in domain name servers"
+#~ msgstr "網域名稱伺服器錯誤"
+
+#~ msgid ""
+#~ "You chose to set the domain name servers for this connection manually, "
+#~ "but left the IP address for the primary name server empty. Please enter "
+#~ "the IP for the primary domain name server or uncheck the manual DNS option"
+#~ msgstr ""
+#~ "您已經選擇自行設定本連線的 DNS 伺服器，但主 DNS 的 IP 地址是空白的。請輸入"
+#~ "主DNS 的 IP 或不選擇手動設定 DNS"
+
+#~ msgid "Invalid modem device"
+#~ msgstr "無效的數據機裝置"
+
+#~ msgid ""
+#~ "The modem device that the connection will use was left empty. Please "
+#~ "enter a device or press \"autodetect\" to continue"
+#~ msgstr "此連線所使用的數據機是空白的。請填上一個裝置或按“自動偵測”再繼續"
+
+#~ msgid "Invalid phone number"
+#~ msgstr "無效的電話號碼"
+
+#~ msgid ""
+#~ "The phone number that the connection will use was left empty. Please "
+#~ "enter a valid phone number to continue"
+#~ msgstr "此連線所使用的電話號碼是空白的。請填上有效的電話號碼再繼續"
+
+#~ msgid "Run the connection assistant."
+#~ msgstr "執行連線精靈。"
+
+#~ msgid "Run the PPP connection assistant."
+#~ msgstr "執行 PPP 連線精靈。"
+
+#~ msgid "Run the ethernet connection assistant."
+#~ msgstr "執行 ethernet 連線精靈。"
+
+#~ msgid "Run the wlan connection assistant."
+#~ msgstr "執行無線網路連線精靈。"
+
+#~ msgid "Run the irlan connection assistant."
+#~ msgstr "執行紅外線網路連線精靈。"
+
+#~ msgid "interface"
+#~ msgstr "介面"
+
+#~ msgid "Creating a new network connection (%d of %d)"
+#~ msgstr "建立新的網路連線 (%d 之 %d)"
+
+#~ msgid "Finished creating a new network connection"
+#~ msgstr "新增網路連線完成"
+
+#~ msgid "Are you sure you want to delete profile \"%s\"?"
+#~ msgstr "是否確定刪除設定檔“%s”？"
+
+#~ msgid "Profile name"
+#~ msgstr "設定檔名稱"
+
+#~ msgid "Description"
+#~ msgstr "描述"
+
+#~ msgid "GST Shares admin component"
+#~ msgstr "GST 分享管理元件"
+
+#~ msgid "GST Shares sharing operations"
+#~ msgstr "GST 分享管理動作"
+
+#~ msgid "_Share Folder"
+#~ msgstr "共享資料夾(_S)"
+
+#~ msgid "Path"
+#~ msgstr "路徑"
+
+#~ msgid "Shares"
+#~ msgstr "共享"
+
+#~ msgid "Other Groups"
+#~ msgstr "其它群組"
+
+#~ msgid "_Available groups:"
+#~ msgstr "現有的群組(_A):"
+
+#~ msgid "_Generate Password"
+#~ msgstr "產生密碼(_G)"
+
+#~ msgid "_User's groups:"
+#~ msgstr "使用者所屬群組(_U):"
