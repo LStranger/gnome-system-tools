@@ -174,8 +174,8 @@ connection_xml_wvsection_has_name (xmlNode *node, gchar *name)
 static xmlNode *
 connection_xml_wvsection_search (xmlNode *node, gchar *section_name)
 {
-	for (node = xml_element_find_first (node, "dialing");
-		node; node = xml_element_find_next (node, "dialing"))
+	for (node = xst_xml_element_find_first (node, "dialing");
+		node; node = xst_xml_element_find_next (node, "dialing"))
 	{
 		if (!connection_xml_wvsection_is_type (node, "dialer"))
 			continue;
@@ -240,7 +240,7 @@ connection_xml_wvsection_add (xmlNode *node, gchar *section_name)
 {
 	xmlNode *subnode;
 
-	subnode = xml_element_add (node, "dialing");
+	subnode = xst_xml_element_add (node, "dialing");
 	connection_xml_save_str_to_node (subnode, "name", section_name);
 	connection_xml_save_str_to_node (subnode, "type", "dialer");
 
@@ -915,7 +915,7 @@ connection_save_to_node (Connection *cxn, xmlNode *root)
 	xmlNode *node;
 	
 	if (!cxn->node)
-		cxn->node = xml_element_add (root, "interface");
+		cxn->node = xst_xml_element_add (root, "interface");
 	
 	node = cxn->node;
 		
