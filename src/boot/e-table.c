@@ -683,9 +683,9 @@ boot_table_add (void)
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 
 	root = xst_xml_doc_get_root (tool->config);
-	node = xst_xml_element_add (root, "entry");
-
+	
 	newkey = boot_table_get_new_key (root);
+	node = xst_xml_element_add (root, "entry");
 	xst_xml_element_add_with_content (node, "key", newkey);
 	g_free (newkey);
 	
