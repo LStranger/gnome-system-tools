@@ -35,6 +35,8 @@
 
 typedef struct
 {
+	XstDialog       *dialog;
+	
 	GtkOptionMenu   *system_menu;
 	GtkOptionMenu   *files_menu;
 	GtkOptionMenu   *security_menu;
@@ -197,26 +199,11 @@ et_cursor_set (Profile *pf)
 	}
 }
 
-static XstDialogSignal signals[] = {
-	{ "pro_del",                     "clicked",       on_pro_del_clicked },
-	{ "pro_new",                     "clicked",       on_pro_new_clicked },
-	{ "pro_copy",                    "clicked",       on_pro_copy_clicked },	
-/*	{ "profile_editor_dialog",       "clicked",       pro_settings_button_clicked }, */
-	{ NULL }
-};
-
-void
-create_profile_table (void)
+static void
+create_profile_table (XstDialog *xd)
 {
 	ETableModel *model;
 	GtkWidget *container;
-	XstDialog *d;
-
-	d = xst_dialog_new (tool, "pro_dialog", _("Profile Editor"));
-	gtk_signal_connect (GTK_OBJECT (d), "apply", GTK_SIGNAL_FUNC (on_pro_apply_clicked), NULL);
-	xst_dialog_connect_signals (d, signals);
-	
-	gtk_object_set_data (GTK_OBJECT (tool), PROFILE_DIALOG, d);
 	
 	model = e_table_memory_callbacks_new (col_count,
 					      value_at,
@@ -234,8 +221,8 @@ create_profile_table (void)
 			    "cursor_change",
 			    et_cursor_change,
 			    NULL);
-	
-	container = xst_dialog_get_widget (d, "profiles_holder");
+
+	container = xst_dialog_get_widget (xd, "profiles_holder");
 	gtk_container_add (GTK_CONTAINER (container), table);
 	gtk_widget_show (table);
 }
@@ -249,6 +236,150 @@ my_atoi (gchar *str)
 	if (!str || !*str)
 		return 0;
 	return atoi (str);
+}
+
+/* Profiles callbacks */
+
+static void
+pro_name_changed (GtkMenuItem *menu_item, gpointer data)
+{
+	profile_table_set_selected ((gchar *) data);
+	tables_update_content ();
+}
+
+static void
+pro_del_clicked (GtkButton *button, gpointer data)
+{
+	XstDialog *xd = XST_DIALOG (data);
+	
+	g_return_if_fail (xst_tool_get_access (tool));
+	
+	if (profile_table_del_profile (NULL))
+		xst_dialog_modify (xd);
+}
+
+enum
+{
+	PROFILE_ERROR,
+	PROFILE_NEW,
+	PROFILE_COPY,
+};
+
+static void
+pro_ask_name (XstDialog *xd, gint action)
+{
+	gchar *buf;
+	GtkWidget *w0;
+	Profile *new, *pf = NULL;
+	
+	switch (action)
+	{
+	case PROFILE_NEW:
+		break;
+		
+	case PROFILE_COPY:
+		w0 = xst_dialog_get_widget (xd, "profile_new_menu");
+		buf = xst_ui_option_menu_get_selected_string (GTK_OPTION_MENU (w0));
+		pf = profile_table_get_profile (buf);
+		g_free (buf);
+		break;
+		
+	case PROFILE_ERROR:
+	default:
+		g_warning ("pro_ask_name: Shouldn't be here");
+		return;
+	}
+
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (xd, "profile_new_name")));
+	new = profile_add (pf, buf, TRUE);
+	if (new) {
+		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (xd, "profile_new_comment")));
+		new->comment = g_strdup (buf);
+		xst_dialog_modify (xd);
+	}
+	
+}
+
+static void
+pro_prepare (XstDialog *xd, gint action)
+{
+	GtkWidget *w;
+
+	w = xst_dialog_get_widget (xd, "profile_new_name");
+	gtk_entry_set_text (GTK_ENTRY (w), "");
+	gtk_widget_grab_focus (w);
+
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (xd, "profile_new_comment")), "");
+
+	w = xst_dialog_get_widget (xd, "profile_new_copy");
+	
+	if (action == PROFILE_NEW)
+		gtk_widget_hide (w);
+	else {
+		GtkWidget *menu = xst_dialog_get_widget (xd, "profile_new_menu");
+		GSList *list = profile_table_get_list ();
+		Profile *pf = profile_table_get_profile (NULL);
+
+		xst_ui_option_menu_clear (GTK_OPTION_MENU (menu));
+
+		while (list) {
+			xst_ui_option_menu_add_string (GTK_OPTION_MENU (menu), list->data);
+			list = list->next;
+		}
+		g_slist_free (list);
+		xst_ui_option_menu_set_selected_string (GTK_OPTION_MENU (menu), pf->name);
+	
+		gtk_widget_show (w);
+	}
+}
+
+static void
+pro_new_clicked (GtkButton *button, gpointer data)
+{
+	GtkWidget *d;
+	gint res;
+	XstDialog *xd = XST_DIALOG (data);
+
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	d = xst_dialog_get_widget (xd, "profile_new_dialog");
+	pro_prepare (xd, PROFILE_NEW);
+	res = gnome_dialog_run (GNOME_DIALOG (d));
+
+	if (res)
+		return;
+
+	pro_ask_name (xd, PROFILE_NEW);
+}
+
+static void
+pro_copy_clicked (GtkButton *button, gpointer data)
+{
+	GtkWidget *d;
+	gint res;
+	XstDialog *xd = XST_DIALOG (data);
+	
+	g_return_if_fail (xst_tool_get_access (tool));
+	
+	d = xst_dialog_get_widget (xd, "profile_new_dialog");
+	pro_prepare (xd, PROFILE_COPY);
+	res = gnome_dialog_run (GNOME_DIALOG (d));
+
+	if (res)
+		return;
+
+	pro_ask_name (xd, PROFILE_COPY);
+}
+
+static void
+pro_apply_clicked (XstDialog *xd, gpointer user_data)
+{
+	g_return_if_fail (xst_tool_get_access (tool));
+
+	profile_save (NULL);
+	tables_update_content ();
+
+	xst_dialog_modify (tool->main_dialog);
 }
 
 static void
@@ -273,13 +404,64 @@ profile_tab_prefill (void)
 	}
 }
 
+static XstDialogSignal signals[] = {
+	{ "pro_del",                     "clicked",       pro_del_clicked },
+	{ "pro_new",                     "clicked",       pro_new_clicked },
+	{ "pro_copy",                    "clicked",       pro_copy_clicked },
+	{ NULL }
+};
+
 static void
-profile_tab_init (XstDialog *xd)
+connect_modify_cb (XstDialog *xd, GtkWidget *widget)
 {
+	gtk_signal_connect (GTK_OBJECT (widget), "changed",
+			    GTK_SIGNAL_FUNC (xst_dialog_modify_cb), xd);
+}
+
+static void
+profile_tab_connect_signals (XstDialog *xd)
+{
+	gint i;
+	GtkWidget *widgets[] = {
+		GTK_WIDGET (pft->shell->entry),
+		GTK_WIDGET (pft->group),
+		GTK_WIDGET (pft->umin),
+		GTK_WIDGET (pft->umax),
+		GTK_WIDGET (pft->gmin),
+		GTK_WIDGET (pft->gmax),
+		GTK_WIDGET (pft->pwd_mindays),
+		GTK_WIDGET (pft->pwd_maxdays),
+		GTK_WIDGET (pft->pwd_warndays),
+		NULL
+	};		
+	
+	xst_dialog_connect_signals (xd, signals);
+	
+	gtk_signal_connect (GTK_OBJECT (gnome_file_entry_gtk_entry (pft->home_prefix)),
+			    "activate",
+			    GTK_SIGNAL_FUNC (on_home_activate),
+			    (gpointer) pft->home_prefix);
+
+	gtk_signal_connect (GTK_OBJECT (xd), "apply", GTK_SIGNAL_FUNC (pro_apply_clicked), xd);
+
+	for (i = 0; widgets[i]; i++)
+		connect_modify_cb (xd, widgets[i]);
+
+	connect_modify_cb (xd, gnome_file_entry_gtk_entry (pft->home_prefix));
+}
+
+static void
+profile_tab_init ()
+{
+	XstDialog *xd;
+	
 	if (pft)
 		return;
 	
 	pft = g_new (ProfileTab, 1);
+
+	xd = xst_dialog_new (tool, "pro_dialog", _("Profile Editor"));
+	pft->dialog = xd;
 	
 	pft->system_menu = GTK_OPTION_MENU (xst_dialog_get_widget (xd, "pro_system_menu"));
 	pft->files_menu = GTK_OPTION_MENU (xst_dialog_get_widget (xd, "pro_files_menu"));
@@ -299,12 +481,56 @@ profile_tab_init (XstDialog *xd)
 	pft->pwd_warndays = GTK_SPIN_BUTTON   (xst_dialog_get_widget (xd, "pro_between"));
 	pft->pwd_random   = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (xd, "pro_random"));
 
+	create_profile_table (xd);
+	
 	profile_tab_prefill ();
 
-	gtk_signal_connect (GTK_OBJECT (gnome_file_entry_gtk_entry (pft->home_prefix)),
-			    "activate",
-			    GTK_SIGNAL_FUNC (on_home_activate),
-			    (gpointer) pft->home_prefix);
+	profile_tab_connect_signals (xd);
+}
+
+static void
+signals_block_cb (GtkWidget *widget)
+{
+	gtk_signal_handler_block_by_func (GTK_OBJECT (widget),
+					  GTK_SIGNAL_FUNC (xst_dialog_modify_cb),
+					  pft->dialog);
+}
+
+static void
+signals_unblock_cb (GtkWidget *widget)
+{
+	gtk_signal_handler_unblock_by_func (GTK_OBJECT (widget),
+					    GTK_SIGNAL_FUNC (xst_dialog_modify_cb),
+					    pft->dialog);
+}
+
+static void
+profile_tab_signals_block (gboolean block)
+{
+	void (*func)(GtkWidget *widget);
+	gint i;
+	GtkWidget *widgets[] = {
+		GTK_WIDGET (pft->shell->entry),
+		GTK_WIDGET (pft->group),
+		GTK_WIDGET (pft->umin),
+		GTK_WIDGET (pft->umax),
+		GTK_WIDGET (pft->gmin),
+		GTK_WIDGET (pft->gmax),
+		GTK_WIDGET (pft->pwd_mindays),
+		GTK_WIDGET (pft->pwd_maxdays),
+		GTK_WIDGET (pft->pwd_warndays),
+		NULL
+	};
+	
+	if (block)
+		func = signals_block_cb;
+	else
+		func = signals_unblock_cb;
+
+	for (i = 0; widgets[i]; i++)
+		func (widgets[i]);
+
+	func (gnome_file_entry_gtk_entry (pft->home_prefix));
 }
 
 static void
@@ -313,6 +539,8 @@ profile_update_ui (Profile *pf)
 	GtkOptionMenu *om[] = { pft->system_menu, pft->files_menu, pft->security_menu, NULL };
 	gint i;
 
+	profile_tab_signals_block (TRUE);
+	
 	et_cursor_set (pf);
 	
 	for (i = 0; om[i]; i++)
@@ -332,6 +560,8 @@ profile_update_ui (Profile *pf)
 	gtk_spin_button_set_value (pft->pwd_mindays,  (gfloat) pf->pwd_mindays);
 	gtk_spin_button_set_value (pft->pwd_warndays, (gfloat) pf->pwd_warndays);
 	gtk_toggle_button_set_active (pft->pwd_random, pf->pwd_random);
+
+	profile_tab_signals_block (FALSE);
 }
 
 static void
@@ -347,6 +577,14 @@ profile_save_entry (GtkEntry *entry, gchar **data)
 		*data = g_strdup (buf);
 	} else
 		my_gtk_entry_set_text (entry, *data);
+}
+
+void
+profile_table_run (void)
+{
+	g_return_if_fail (pft->dialog != NULL);
+	
+	gtk_widget_show (GTK_WIDGET (pft->dialog));
 }
 
 void
@@ -448,20 +686,15 @@ profile_destroy (Profile *pf)
 void
 profile_table_init (void)
 {
-	XstDialog *xd;
-	
-	if (!profile_table)
-	{
+	if (!profile_table) {
 		profile_table = g_new (ProfileTable, 1);
 
 		profile_table->selected = NULL;
 		profile_table->hash = g_hash_table_new (g_str_hash, g_str_equal);
 	}
 
-	if (!pft) {
-		xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
-		profile_tab_init (xd);
-	}
+	if (!pft)
+		profile_tab_init ();
 }
 
 void
@@ -695,7 +928,7 @@ profile_table_add_profile (Profile *pf, gboolean select)
 
 		if (option_menus[i].signal) {
 			gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
-					    GTK_SIGNAL_FUNC (on_pro_name_changed), pf->name);
+					    GTK_SIGNAL_FUNC (pro_name_changed), pf->name);
 		}
 		i++;
 	}

@@ -49,12 +49,6 @@ void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 #endif
 
-void on_pro_name_changed (GtkMenuItem *menu_item, gpointer user_data);
-void on_pro_del_clicked (GtkButton *button, gpointer user_data);
-void on_pro_new_clicked (GtkButton *button, gpointer user_data);
-void on_pro_copy_clicked (GtkButton *button, gpointer user_data);
-void on_pro_apply_clicked (XstDialog *xd, gpointer user_data);
-
 void on_user_settings_clicked (GtkButton *button, gpointer data);
 
 void on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data);

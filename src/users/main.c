@@ -62,7 +62,7 @@ static XstDialogSignal signals[] = {
 	{ "user_new",                    "clicked",       on_user_new_clicked },
 	{ "user_delete",                 "clicked",       on_user_delete_clicked },
 	{ "user_settings",               "clicked",       on_user_settings_clicked },
-	{ "user_profiles",               "clicked",       on_user_profiles_clicked },
+	{ "user_profiles",               "clicked",       profile_table_run },
 	{ "group_new",                   "clicked",       on_group_new_clicked },
 	{ "group_delete",                "clicked",       on_group_delete_clicked },
 	{ "showall",                     "toggled",       on_showall_toggled },
@@ -241,7 +241,6 @@ main_window_prepare (void)
 	
 	config_clists ();
 	create_tables ();
-	create_profile_table ();
 	create_searchbar ();
 }
 

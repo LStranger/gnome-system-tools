@@ -58,8 +58,7 @@ typedef struct
 
 extern ProfileTable *profile_table;
 
-void create_profile_table (void);
-
+void profile_table_run    (void);
 
 void     profile_save    (gchar *name);
 Profile *profile_add     (Profile *old_pf, const gchar *new_name, gboolean select); 
