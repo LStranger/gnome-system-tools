@@ -94,7 +94,13 @@ tool_load_image (char *image_name)
 GtkWidget *
 tool_widget_get (gchar *name)
 {
-	return (glade_xml_get_widget (tool_context->interface, name));
+	GtkWidget *ret;
+	
+	ret = glade_xml_get_widget (tool_context->interface, name);
+	if (ret == NULL)
+		g_warning ("tool_widget_get: widget %s not found.", name);
+	
+	return (ret);
 }
 
 
