@@ -158,7 +158,6 @@ extern GstConnectionErrorType connection_default_gw_check_manual (GstConnection 
 extern void connection_default_gw_fix (GstConnection *cxn, GstConnectionErrorType error);
 extern void connection_default_gw_set_manual (GstTool *tool, GstConnection *cxn);
 extern void connection_default_gw_set_auto (GstTool *tool);
-extern void connection_update_complexity (GstTool *tool, GstDialogComplexity complexity);
 extern void connection_actions_set_sensitive (gboolean state);
 extern void connection_free (GstConnection *);
 extern void connection_configure (GstConnection *cxn);

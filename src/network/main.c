@@ -162,81 +162,14 @@ GstDialogSignal signals_after[] = {
 	{ NULL }
 };
 
-static const GstWidgetPolicy policies[] = {
-	/* Name                      Basic                        Advanced           Require-Root   Default */
-	{ "connection_delete",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_configure",    GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_activate",     GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_deactivate",   GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_def_gw_hbox",  GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "statichost_table",        GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "statichost_add",          GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "statichost_delete",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "samba_use",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "description_label",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
-	{ "smbdesc",                 GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
-	{ "workgroup_label",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
-	{ "workgroup",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
-	{ "wins_use",                GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
-	{ "winsserver",              GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "network_profiles_button", GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, TRUE  },
-	{ NULL }
-};
-
 static GstReportHookEntry report_hooks[] = {
 	{ "file_locate_tool_failed", callbacks_tool_not_found_hook,  GST_REPORT_HOOK_LOAD, TRUE,  NULL },
 	{ NULL,                      NULL,                           -1,                   FALSE, NULL }
 };
 
 static void
-update_notebook_complexity (GstTool *tool, GstDialogComplexity complexity)
-{
-	GtkWidget *hosts;
-	GtkNotebook *notebook;
-	gint pageno;
-
-	notebook = GTK_NOTEBOOK (gst_dialog_get_widget (tool->main_dialog, "network_admin_notebook"));
-	hosts    = gst_dialog_get_widget (tool->main_dialog, "hosts_container");
-	pageno   = gtk_notebook_page_num (notebook, hosts);
-
-	switch (complexity) {
-	case GST_DIALOG_BASIC:
-		g_return_if_fail (pageno != -1);
-
-		if (gtk_notebook_get_current_page (notebook) == pageno)
-			gtk_notebook_set_current_page (notebook, pageno - 1);
-		gtk_widget_ref (hosts);
-		gtk_widget_unparent (hosts);
-		gtk_notebook_remove_page (notebook, pageno);
-		break;
-	case GST_DIALOG_ADVANCED:
-		if (pageno != -1)
-			return;
-
-		gtk_notebook_append_page (notebook, hosts,
-					  gtk_label_new (_("Hosts")));
-		gtk_widget_unref (hosts);
-		break;
-	default:
-		g_warning ("update_notebook_complexity: Unsupported complexity.");
-	}
-}
-
-static void
-update_complexity (GstDialog *dialog, gpointer data)
-{
-	update_notebook_complexity (dialog->tool, dialog->complexity);
-	connection_update_complexity (dialog->tool, dialog->complexity);
-}
-
-static void
 connect_signals (GstDialog *main_dialog, GstDialogSignal *sigs, GstDialogSignal *sigs_after)
 {
-	GtkWidget *w;
-
-	g_signal_connect (G_OBJECT (main_dialog), "complexity_change",
-			  G_CALLBACK (update_complexity), NULL);
-
 	gst_dialog_connect_signals (main_dialog, sigs);
 	gst_dialog_connect_signals_after (main_dialog, sigs_after);
 }
@@ -303,7 +236,6 @@ main (int argc, char *argv[])
 
 		connect_signals (tool->main_dialog, signals, signals_after);
 		init_editable_filters (tool->main_dialog);
-		gst_dialog_set_widget_policies (tool->main_dialog, policies);
 
 		gst_tool_main_with_hidden_dialog (tool, TRUE);
 
@@ -322,13 +254,10 @@ main (int argc, char *argv[])
 		gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_gateway_hook,      tool);
 		gst_tool_add_report_hooks (tool, report_hooks);
 		gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
-		gst_dialog_enable_complexity (tool->main_dialog);
-		gst_dialog_set_widget_policies (tool->main_dialog, policies);
 
 		init_editable_filters (tool->main_dialog);
 
 		on_network_admin_show (NULL, tool);
-		update_complexity (tool->main_dialog, NULL);
 
 		gst_tool_main (tool, TRUE);
 		

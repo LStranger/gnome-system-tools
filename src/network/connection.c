@@ -1271,60 +1271,6 @@ connection_add_to_list (GstConnection *cxn)
 	connection_default_gw_add (cxn);
 }
 
-static void
-connection_update_complexity_advanced (GstTool *tool)
-{
-	GstConnection   *cxn;
-	GstConnectionUI *ui;
-	GtkTreeModel    *model;
-
-	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
-
-	cxn = g_object_steal_data (G_OBJECT (model), "lo");
-	if (cxn)
-		connection_add_to_list (cxn);
-}
-
-static gboolean
-update_complexity_basic_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
-{
-	GstConnection *cxn;
-
-	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
-	if (cxn->type == GST_CONNECTION_LO) {
-		g_object_set_data (G_OBJECT (model), "lo", cxn);
-		gtk_list_store_remove (GTK_LIST_STORE (model), iter);
-		return TRUE;
-	}
-
-	return FALSE;
-}
-
-static void
-connection_update_complexity_basic (GstTool *tool)
-{
-	GstConnectionUI *ui;
-	GtkTreeModel    *model;
-
-	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
-
-	gtk_tree_model_foreach (model, update_complexity_basic_cb, NULL);
-}
-
-void
-connection_update_complexity (GstTool *tool, GstDialogComplexity complexity)
-{
-	switch (complexity) {
-	case GST_DIALOG_BASIC:
-		connection_update_complexity_basic (tool);
-		break;
-	case GST_DIALOG_ADVANCED:
-		connection_update_complexity_advanced (tool);
-	}
-}
-
 static gchar *
 connection_description_from_type (GstConnectionType type)
 {
@@ -2077,7 +2023,7 @@ connection_actions_set_sensitive (gboolean state)
 	};
 
 	for (i = 0; names[i]; i++)
-		gst_dialog_widget_set_user_sensitive (tool->main_dialog, names[i], state);
+		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, names[i]), state);
 }
 
 void

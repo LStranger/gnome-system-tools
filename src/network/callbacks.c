@@ -469,12 +469,13 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 		return;
 	}
 
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "description_label", active);
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "smbdesc", active);
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup_label", active);
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup", active);
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_use", active);
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "winsserver", active & wins_active);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "description_label"), active);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "smbdesc"), active);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "workgroup_label"), active);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "workgroup"), active);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "wins_use"), active);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "winsserver"), active);
+
 	if (smb_installed) {
 		gst_xml_element_set_boolean (root, "smbuse", active);
 		gst_dialog_modify (tool->main_dialog);
@@ -488,8 +489,8 @@ on_wins_use_toggled (GtkWidget *w, gpointer null)
 	gboolean wins_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 	gboolean smb_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (smb));
 	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
-	
-	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "winsserver", wins_active & smb_active);
+
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "winsserver"), wins_active && smb_active);
 
 	gst_xml_element_set_boolean (root, "winsuse", wins_active & smb_active);
 	gst_dialog_modify (tool->main_dialog);

@@ -308,7 +308,6 @@ transfer_interfaces_to_gui (GstTool *tool, xmlNodePtr root)
 	}
 
 	callbacks_update_connections_hook (tool->main_dialog, NULL);
-	connection_update_complexity (tool, tool->main_dialog->complexity);
 }
 
 static void
@@ -340,15 +339,17 @@ transfer_xml_to_gatewaydev (GstTool *tool, xmlNodePtr root)
 	gboolean unsup;
 	
 	unsup = gst_xml_element_get_boolean (root, "gwdevunsup");
+	
 	if (unsup) {
 		g_object_set_data (G_OBJECT (tool), "gwdevunsup", (gpointer) TRUE);
-		gst_dialog_widget_set_user_mode (tool->main_dialog,
-						 "connection_def_gw_hbox",
-						 GST_WIDGET_MODE_HIDDEN);
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog,
+							"connection_def_gw_hbox"));
+
 		return;
 	}
-		
+
 	dev = gst_xml_get_child_content (root, "gatewaydev");
+
 	if (dev) {
 		connection_default_gw_init (tool, dev);
 		g_free (dev);
