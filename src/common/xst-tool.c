@@ -1627,7 +1627,7 @@ authenticate (int argc, char *argv[])
 static void
 try_show_usage_warning (void)
 {
-	gchar *key, *version_key;;
+	gchar *key, *version_key;
 	gboolean value;
 	gchar *version;
 	GConfClient *client;
