@@ -66,7 +66,7 @@ main (int argc, char *argv[])
 	gst_dialog_connect_signals (tool->main_dialog, signals);
 	
 	gst_dialog_enable_complexity (tool->main_dialog);
-	
+
 	gst_tool_main (tool,FALSE);
 	
 	return 0;

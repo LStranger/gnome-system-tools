@@ -93,6 +93,23 @@ transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
 	}
 }
 
+/* check the first service, if it doesn't have priority,
+ * hide the "order by startup sequence" button */
+void transfer_check_show_startup_sequence_button (xmlNodePtr root) {
+	xmlNodePtr services, service, priority;
+
+	services = gst_xml_element_find_first (root, "services");
+	g_return_if_fail (services != NULL);
+
+	service = gst_xml_element_find_first (services, "service");
+	g_return_if_fail (service != NULL);
+
+	priority = gst_xml_element_find_first (service, "priority");
+
+	if (!priority)
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "sequence_ordering"));
+}
+
 void
 transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
@@ -101,4 +118,5 @@ transfer_xml_to_gui (GstTool *tool, gpointer data)
 	g_return_if_fail (root != NULL);
 
 	transfer_populate_option_menu (tool, root);
+	transfer_check_show_startup_sequence_button (root);
 }

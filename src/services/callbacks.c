@@ -296,7 +296,7 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	/* get the priority, if it doesn't exist, we simply hide the spinbutton */
 	p = gst_xml_get_child_content (service, "priority");
 
-	if (p == NULL) {
+	if (!p) {
 		gtk_widget_hide (service_priority);
 		gtk_widget_hide (service_priority_label);
 	} else {
