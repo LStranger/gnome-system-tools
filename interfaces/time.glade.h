@@ -45,3 +45,4 @@ gchar *s = N_("Time zone");
 gchar *s = N_("Add");
 gchar *s = N_("Keep clock in sync with selected servers");
 gchar *s = N_("Time servers");
+gchar *s = N_(" Advanced >> ");
