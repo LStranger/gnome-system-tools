@@ -11,7 +11,6 @@ toolname = users
 bin_PROGRAMS = users-admin
 
 SUBDIRS = search-bar
-CPPFLAGS =
 INCLUDES = $(GST_TOOL_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)
 EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)

@@ -11,7 +11,6 @@ toolname = shares
 bin_PROGRAMS = shares-admin
 
 SUBDIRS = nautilus
-CPPFLAGS =
 INCLUDES = $(GST_TOOL_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)
 EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
