@@ -1,16 +1,16 @@
 # Lithuanian translation of gnome-system-tools.
 # Copyright (C) 2004 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-system-tools package.
-# Žygimantas Beručka <uid0@tuxfamily.org>, 2004.
+# Žygimantas Beručka <uid0@akl.lt>, 2004.
 # 
 # 
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-03 09:42+0200\n"
-"PO-Revision-Date: 2004-02-03 09:42+0200\n"
-"Last-Translator: Žygimantas Beručka <uid0@tuxfamily.org>\n"
+"POT-Creation-Date: 2004-03-03 15:03+0200\n"
+"PO-Revision-Date: 2004-03-03 14:58+0200\n"
+"Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -224,7 +224,7 @@ msgid "Finished"
 msgstr "Baigta"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
-#: src/network/connection.c:1843
+#: src/network/connection.c:1849
 msgid "Manual"
 msgstr "Rankinis"
 
@@ -510,7 +510,7 @@ msgstr "Leisti aktyvavimo valdymą visiems _vartotojams"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1851
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -543,7 +543,7 @@ msgstr "Kuriu naują tinklo prisijungimą"
 msgid "Current network profile:"
 msgstr "Dabartinis tinklo profilis:"
 
-#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1850
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -945,10 +945,14 @@ msgid "Use this tool to specify which services to run"
 msgstr "Šį įrankį naudok tam, kad nurodyti kokias paslaugas leisti"
 
 #: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "_Rodyti sąrašą paleidimo eilės tvarka"
+
+#: interfaces/services.glade.in.h:11
 msgid "_Start"
 msgstr "_Pradėti"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:12
 msgid "_Startup sequence:"
 msgstr "_Paleidimo eilės tvarka:"
 
@@ -1337,7 +1341,7 @@ msgstr "Slaptažodžio patvirtinimas neteisingas."
 
 #: src/boot/boot.desktop.in.in.h:1
 msgid "Boot"
-msgstr "Įkeltis"
+msgstr "Įkelties nustatymai"
 
 #: src/boot/boot.desktop.in.in.h:2
 msgid "Configure the system boot process"
@@ -1351,7 +1355,7 @@ msgstr "Įkelties bylos redaktorius"
 msgid "Boot Append Editor"
 msgstr "Įkelties parametrų redaktorius"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1359,12 +1363,12 @@ msgstr ""
 "Be mažiausiai vienos įkelties bylos,\n"
 "sistema nepasikraus.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Ar tikrai norite pašalinti '%s'?"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -1381,7 +1385,7 @@ msgstr "Pavadinimas"
 msgid "Default"
 msgstr "Įprastas"
 
-#: src/boot/table.c:43 src/network/connection.c:479
+#: src/boot/table.c:43 src/network/connection.c:485
 msgid "Type"
 msgstr "Tipas"
 
@@ -1389,7 +1393,7 @@ msgstr "Tipas"
 msgid "Kernel Image"
 msgstr "Branduolio byla"
 
-#: src/boot/table.c:45 src/network/connection.c:495
+#: src/boot/table.c:45 src/network/connection.c:501
 msgid "Device"
 msgstr "Įrenginys"
 
@@ -1408,16 +1412,23 @@ msgid "/_Delete"
 msgstr "/_Pašalinti"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "Negaliu prisijingti prie kompiuterio."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "Įvestas slaptažodis yra neteisingas."
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr ""
+"Negaliu paleisti „%s“. Patikrinkit ar Jūs turit leidimą paleisti šią "
+"programą."
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "Įvyko nenumatyta klaida."
 
@@ -1464,7 +1475,7 @@ msgstr ""
 "Leidžiant foninį skriptą įvyko klaida,\n"
 "ir konfigūracija negalėjo būti įkelta."
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1473,7 +1484,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Sveiki atvykę į %s GNOME System Tools "
 "bandomajį leidimą.</span>"
 
-#: src/common/gst-tool.c:1513
+#: src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1487,15 +1498,15 @@ msgstr ""
 "proto. Jūs buvote įspėta(-s). Ačiū, kad išbandote šį bandomąjį GNOME System "
 "Tools leidimą!"
 
-#: src/common/gst-tool.c:1534
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Įspėjimas"
 
-#: src/common/gst-tool.c:1554
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Daugiau šito nerodyti"
 
-#: src/common/gst-tool.c:1628
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "GNOME Sistemos Įrankiai"
 
@@ -1646,15 +1657,15 @@ msgstr "Nežinomas sąsajos tipas"
 msgid "/_Configure"
 msgstr "/_Konfigūruoti"
 
-#: src/network/connection.c:507
+#: src/network/connection.c:513
 msgid "Status"
 msgstr "Būklė"
 
-#: src/network/connection.c:516 src/network/profiles-table.c:62
+#: src/network/connection.c:522 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Aprašymas"
 
-#: src/network/connection.c:1707
+#: src/network/connection.c:1713
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1662,7 +1673,7 @@ msgstr ""
 "Sąsajos IP adresas ir tinklo kaukė buvo neįrašyti. Norėdami tęsti Jūs turite "
 "šiuose laukeliuose įvesti tinkamus IP adresus."
 
-#: src/network/connection.c:1714
+#: src/network/connection.c:1720
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1670,7 +1681,7 @@ msgstr ""
 "Sąsajos IP adresas arba nuotolinis adresas buvo neįrašyti. Norėdami tęsti, "
 "Jūs turite šiuose langeliuose įvesti tinkamus IP adresus."
 
-#: src/network/connection.c:1720
+#: src/network/connection.c:1726
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1680,7 +1691,7 @@ msgstr ""
 "DNS IP tuščią. Prašom įvesti pirminio DNS IP arba atjunkite rankinio DNS "
 "nurodymo nustatymą."
 
-#: src/network/connection.c:1726
+#: src/network/connection.c:1732
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1688,7 +1699,7 @@ msgstr ""
 "Prisijungimo naudojamas modemo įrenginys buvo paliktas tuščias. Prašau "
 "įvesti įrenginį arba spauskit \"autodetect\", kad tęsti."
 
-#: src/network/connection.c:1731
+#: src/network/connection.c:1737
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1696,10 +1707,14 @@ msgstr ""
 "Telefono numeris, kurį naudos prisijungimas, buvo neparašytas. Norint tęsti, "
 "Jūs turite įvesti tinkamą telefono numerį."
 
-#: src/network/connection.c:2082
+#: src/network/connection.c:2085
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Sąsaja %s neegzistuoja."
+
+#: src/network/connection.c:2087
+msgid " The loopback interface cannot be configured."
+msgstr "Loopback sąsaja negali būti sukonfigūruota."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1760,7 +1775,7 @@ msgstr "Konfigūruokite tinklo įrenginius ir prisijungimus"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
-msgstr "Tinklai"
+msgstr "Tinklo nustatymai"
 
 #: src/network/profile.c:43
 #, c-format
@@ -1775,24 +1790,24 @@ msgstr "Profilio vardas"
 msgid "No description available."
 msgstr "Nėra aprašymo."
 
-#: src/services/callbacks.c:247
+#: src/services/callbacks.c:250
 msgid "Running"
 msgstr "Veikia"
 
-#: src/services/callbacks.c:251
+#: src/services/callbacks.c:254
 msgid "Stopped"
 msgstr "Sustabdyta"
 
-#: src/services/callbacks.c:256
+#: src/services/callbacks.c:259
 msgid "Could not get info"
 msgstr "Negelėjau gauti informacijos"
 
-#: src/services/callbacks.c:322
+#: src/services/callbacks.c:325
 #, c-format
 msgid "Settings for service %s"
 msgstr "Paslaugos %s nustatymai"
 
-#: src/services/main.c:58
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "Paslaugų nustatymai"
 
@@ -1802,9 +1817,9 @@ msgstr "Konfigūruokite kokios paslaugos bus paleidžiamos startuojant sistemai"
 
 #: src/services/services.desktop.in.in.h:2
 msgid "Services"
-msgstr "Paslaugos"
+msgstr "Paslaugų nustatymai"
 
-#: src/services/table.c:78
+#: src/services/table.c:79
 msgid "Active"
 msgstr "Aktyvus"
 
@@ -1834,17 +1849,17 @@ msgstr "Laiko ir datos nustatymai"
 
 #: src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
-msgstr "Keisk sistemos laiką, datą ir laiko jusotą"
+msgstr "Keiskite sistemos laiką, datą ir laiko jusotą"
 
 #: src/time/time.desktop.in.in.h:2
 msgid "Time and Date"
-msgstr "Laikas ir data"
+msgstr "Laiko ir datos nustatymai"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "Sukurti naują profilį"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Profilio %s nustatymai"
@@ -1918,7 +1933,7 @@ msgstr "Vartotojo GID yra"
 
 #: src/users/main.c:314 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
-msgstr "Vartojai ir grupės"
+msgstr "Vartojų ir grupių nustatymai"
 
 #: src/users/passwd.c:266
 msgid "Passwords doesn't match."
@@ -2092,455 +2107,4 @@ msgstr "Šelas"
 
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
-msgstr "Pridėk arba šalink vartotojus ir grupes"
-
-#~ msgid "Priority:"
-#~ msgstr "Pirmenybė:"
-
-#~ msgid " "
-#~ msgstr " "
-
-#~ msgid "<b>Configuration</b>"
-#~ msgstr "<b>Konfikūracija</b>"
-
-#~ msgid "<b>General Information</b>"
-#~ msgstr "<b>Pagrindinė informacija</b>"
-
-#~ msgid "<b>Partition List</b>"
-#~ msgstr "<b>Skirnių sąrašas</b>"
-
-#~ msgid "<b>Partition Properties</b>"
-#~ msgstr "<b>Skirsnio nustatymai</b>"
-
-#~ msgid "<b>Storage List</b>"
-#~ msgstr "<b>Kaupiklių sąrašas</b>"
-
-#~ msgid "<b>Storage Properties</b>"
-#~ msgstr "<b>Kaupiklio nustatymai</b>"
-
-#~ msgid "CD-ROM"
-#~ msgstr "CD-ROM"
-
-#~ msgid "Device: "
-#~ msgstr "Įrenginys: "
-
-#~ msgid "Enable DMA"
-#~ msgstr "Įjungti DMA"
-
-#~ msgid "FAT"
-#~ msgstr "FAT"
-
-#~ msgid "Filesystem:"
-#~ msgstr "Bylų sistema:"
-
-#~ msgid "Hard Disk"
-#~ msgstr "Kietasis diskas"
-
-#~ msgid "JFS"
-#~ msgstr "JFS"
-
-#~ msgid "Mount Point:"
-#~ msgstr "Montavimo vieta:"
-
-#~ msgid "NTFS"
-#~ msgstr "NTFS"
-
-#~ msgid "Not Available"
-#~ msgstr "Neprieinamas"
-
-#~ msgid "Partitions"
-#~ msgstr "Skirsniai"
-
-#~ msgid "Play Audio"
-#~ msgstr "Groti Audio"
-
-#~ msgid "Properties"
-#~ msgstr "Nustatymai"
-
-#~ msgid "Read DVD"
-#~ msgstr "Skaityti DVD"
-
-#~ msgid "Reiser FS"
-#~ msgstr "Reiser FS"
-
-#~ msgid "Size:"
-#~ msgstr "Dydis:"
-
-#~ msgid "Speed"
-#~ msgstr "Greitis"
-
-#~ msgid "Speed:"
-#~ msgstr "Greitis:"
-
-#~ msgid "Type:"
-#~ msgstr "Tipas:"
-
-#~ msgid "Type: "
-#~ msgstr "Tipas: "
-
-#~ msgid "Write CD-R"
-#~ msgstr "Rašyti CD-R"
-
-#~ msgid "Write CD-RW"
-#~ msgstr "Rašyti CD-RW"
-
-#~ msgid "Write DVD-R"
-#~ msgstr "Rašyti DVD-R"
-
-#~ msgid "Write DVD-RAM"
-#~ msgstr "Rašyti DVD-RAM"
-
-#~ msgid "XFS"
-#~ msgstr "XFS"
-
-#~ msgid "_Format"
-#~ msgstr "_Formatas"
-
-#~ msgid "(Getting ...)"
-#~ msgstr "(Gaunu...)"
-
-#~ msgid "/_Format"
-#~ msgstr "/_Formatas"
-
-#~ msgid "CDROM"
-#~ msgstr "CDROM"
-
-#~ msgid "Floppy"
-#~ msgstr "Diskelis"
-
-#~ msgid "Swap Partition"
-#~ msgstr "Swap skirsnis"
-
-#~ msgid "Unknown Storage"
-#~ msgstr "Nežinomas kaupiklis"
-
-#~ msgid "Configure the system disks"
-#~ msgstr "Konfigūruoti sistemos diskus"
-
-#~ msgid "Disks"
-#~ msgstr "Diskai"
-
-#~ msgid "Disks Manager"
-#~ msgstr "Diskų tvarkyklė"
-
-#~ msgid "Boot Image Assistant"
-#~ msgstr "Įkelties bylos padėjėjas"
-
-#~ msgid "Image Settings (Step 1 of 2)"
-#~ msgstr "Įkelties bylos nustatymai (1 žingsnis iš 2)"
-
-#~ msgid "Image Settings (Step 2 of 2)"
-#~ msgstr "Įkelties bylos nustaymai (2 žingsnis iš 2)"
-
-#~ msgid "Other Operating System (Step 2 of 2)"
-#~ msgstr "Kita operacinė sistema (2 žingsnis iš 2)"
-
-#~ msgid "Enter Password - GNOME System Tools"
-#~ msgstr "Įvesk slaptažodį - GNOME Sistemos Įrankiai"
-
-#~ msgid "2.422"
-#~ msgstr "2.422"
-
-#~ msgid "3. Account name"
-#~ msgstr "3. Sąskaitos vardas"
-
-#~ msgid "<span weight=\"bold\">Activation</span>"
-#~ msgstr "<span weight=\"bold\">Aktyvavimas</span>"
-
-#~ msgid "<span weight=\"bold\">Ad-Hoc Settings</span>"
-#~ msgstr "<span weight=\"bold\">Ad-Hoc nustatymai</span>"
-
-#~ msgid "Account name:"
-#~ msgstr "Sąskaitos vardas:"
-
-#~ msgid "Activate when the computer starts"
-#~ msgstr "Aktyvuoti kai kompiuteris startuoja"
-
-#~ msgid "Add New Internet Connection"
-#~ msgstr "Pridėti naują Interneto prisijungimą"
-
-#~ msgid "Allow activation control for all users"
-#~ msgstr "Leisti aktyvavimo valdymą visiems vartotojams"
-
-#~ msgid "Connection Settings"
-#~ msgstr "Prisijungimo nustatymai"
-
-#~ msgid "Connection active"
-#~ msgstr "Prisijungimas aktyvus"
-
-#~ msgid "Connection name (Step 3 of 3)"
-#~ msgstr "Prisijingimo vardas (3 žingsnis iš 3)"
-
-#~ msgid "Create a new internet connection "
-#~ msgstr "Sukurti naują Interneto prisijungimą "
-
-#~ msgid ""
-#~ "First, please enter the phone number you use to connect to the internet. "
-#~ "This number is provided by your ISP. "
-#~ msgstr ""
-#~ "Pirmiausia, prašau įvesk telefono numerį kurį tu naudosi prisijungimui "
-#~ "prie Interneto. Šį numerį tau suteikti turėjo tavo IPT. "
-
-#~ msgid ""
-#~ "How the IP address for this connection\n"
-#~ "is determined."
-#~ msgstr "Kaip nustatomas šio kompiuterio IP."
-
-#~ msgid ""
-#~ "How the IP addresses for this connection \n"
-#~ "are determined."
-#~ msgstr "Kaip nustatomas šio prisijungimo IP."
-
-#~ msgid "IP Settings"
-#~ msgstr "IP nustatymai"
-
-#~ msgid "ISP phone number (Step 1 of 3)"
-#~ msgstr "IPT telefono numeris (1 žingsnis iš 3)"
-
-#~ msgid "Network profiles - GNOME System Tools"
-#~ msgstr "Tinklo profiliai - GNOME Sistemos Įrankiai"
-
-#~ msgid "New Connection Type"
-#~ msgstr "Naujo jungimosi tipas"
-
-#~ msgid "New network connection"
-#~ msgstr "Naujas tinklo jungimasis"
-
-#~ msgid "New network profile - GNOME System Tools"
-#~ msgstr "Naujas tinklo profilis - GNOME Sistemos Įrankiai"
-
-#~ msgid "Password (confirm):"
-#~ msgstr "Slaptažodis (patvirtink):"
-
-#~ msgid "Password:"
-#~ msgstr "Slaptažodis:"
-
-#~ msgid "Phone number:"
-#~ msgstr "Telefono numeris:"
-
-#~ msgid "Sea_rch domains:"
-#~ msgstr "Paieškos s_ritys:"
-
-#~ msgid ""
-#~ "Select which type of connection\n"
-#~ "you would like to add."
-#~ msgstr ""
-#~ "Pasirink kokį prisijungimo tipą\n"
-#~ "nori pridėti."
-
-#~ msgid ""
-#~ "To continue configuring your account, click \"Next\". To quit, click "
-#~ "\"Cancel\".\n"
-#~ msgstr ""
-#~ "Norint tęsti konfigūruoti abonentą, spausk \"Kitas\", kad išeiti, spausk "
-#~ "\"Atšaukti\".\n"
-
-#~ msgid "Username and password (Step 2 of 3)"
-#~ msgstr "Vertotojo vardas ir slaptažodis (2 žingsnis iš 3)"
-
-#~ msgid "Username:"
-#~ msgstr "Vartotojo vardas:"
-
-#~ msgid "Warning message goes here."
-#~ msgstr "Čia eina įspėjimo žinutė."
-
-#~ msgid "Warning message goes here.\n"
-#~ msgstr "Čia eina įspėjimo žinutė.\n"
-
-#~ msgid "WaveLAN"
-#~ msgstr "WaveLAN"
-
-#~ msgid "_Ad-Hoc mode"
-#~ msgstr "_Ad-Hoc rėžimas"
-
-#~ msgid "_Channel:"
-#~ msgstr "_Kanalas:"
-
-#~ msgid "_Frequency (GHz):"
-#~ msgstr "_Dažnis (GHz):"
-
-#~ msgid "_Session ID:"
-#~ msgstr "_Sesijos ID:"
-
-#~ msgid "_Wavelan"
-#~ msgstr "_Wavelan"
-
-#~ msgid "Parameters:"
-#~ msgstr "Parametrai:"
-
-#~ msgid "Add"
-#~ msgstr "Pridėti"
-
-#~ msgid "Click \"Next\" to continue"
-#~ msgstr "Spausk \"Sekantis\", kad tęsti"
-
-#~ msgid ""
-#~ "Congratulations, the new user has been created.\n"
-#~ "Please click \"Finish\" to save your changes. "
-#~ msgstr ""
-#~ "Sveikinimai, naujas vartojas sukurtas.\n"
-#~ "Spausk \"Baigti\", kad išsaugoti pakeitimus. "
-
-#~ msgid "Delete"
-#~ msgstr "Pašalinti"
-
-#~ msgid ""
-#~ "EXPERIMENTAL NIS support.\n"
-#~ "It's only available if You have NIS\n"
-#~ "and when You click on \"More Settings\"."
-#~ msgstr ""
-#~ "EKSPERIMENTINIS NIS palaikymas.\n"
-#~ "Jis prieinamas tik jeigu Jūs turite NIS\n"
-#~ "ir kai Jūs paspausite \"Daugiau nuostatų\"."
-
-#~ msgid "Edit profile:"
-#~ msgstr "Keisti profilį:"
-
-#~ msgid "Enter Password (Step 2 of 2)"
-#~ msgstr "Įvesk slaptažodį (2 žingsnis iš 2)"
-
-#~ msgid "New Group"
-#~ msgstr "Nauja grupė"
-
-#~ msgid "New User"
-#~ msgstr "Naujas vartotojas"
-
-#~ msgid ""
-#~ "On this page, you can select scripts and files to be copied from your "
-#~ "account into new users' accounts."
-#~ msgstr ""
-#~ "Šiame puslapyje, tu gali pasirinkti skriptus ir bylas kurios bus "
-#~ "nukopijuotos iš tavo sąskaitos į naujo vartotojo sąskaitą."
-
-#~ msgid "Please enter a password for the new user. "
-#~ msgstr "Prašau įvesk naujo vartotojo slaptažodį. "
-
-#~ msgid "Settings"
-#~ msgstr "Nustatymai"
-
-#~ msgid "Settings for selected user and group"
-#~ msgstr "Pažymėto vartotojo ir grupės nustatymai"
-
-#~ msgid "User Account Wizard"
-#~ msgstr "Vartotojo sąskaitos vedlys"
-
-#~ msgid "User Creation Druid"
-#~ msgstr "Vartotojų sukūrimo vedlys"
-
-#~ msgid "User Identity (Step 1 of 2)"
-#~ msgstr "Vartotojo asmenybė (1 žingsnis iš 2)"
-
-#~ msgid "User Profiles - GNOME System Tools"
-#~ msgstr "Vartotojų profiliai - GNOME Sistemos Įrankiai"
-
-#~ msgid "_Profiles..."
-#~ msgstr "_Profiliai..."
-
-#~ msgid "Boot Image Wizard"
-#~ msgstr "Įkelties bylos vedlys"
-
-#~ msgid "%s - GNOME System Tools"
-#~ msgstr "%s - GNOME Sistemos Įrankiai"
-
-#~ msgid "Activating"
-#~ msgstr "Aktyvuojama"
-
-#~ msgid "Inactive"
-#~ msgstr "Neaktyvus"
-
-#~ msgid "The name of this computer"
-#~ msgstr "Šio kompiuterio vardas"
-
-#~ msgid "A short description of your computer"
-#~ msgstr "Trumpas tavo kompiuterio aprašymas"
-
-#~ msgid "The Windows Networking workgroup for your network"
-#~ msgstr "Windows Tinklų tavo tinklo darbo grupė"
-
-#~ msgid "The IP address of your WINS server"
-#~ msgstr "Tavo WINS serverio adresas"
-
-#~ msgid "The DNS domain for your computer"
-#~ msgstr "DNS sritis tavo kompiuteriui"
-
-#~ msgid "A list of your DNS servers' IP addresses"
-#~ msgstr "Tavo DNS serverių IP adresų sąrašas"
-
-#~ msgid "A list of domains where hosts will be searched"
-#~ msgstr "Sričių sąrašas kuriose bus ieškoma hostų"
-
-#~ msgid "The IP address of this host"
-#~ msgstr "Šio kompiuterio IP adresas"
-
-#~ msgid "Aliases for this host, one per line"
-#~ msgstr "Šio hosto alijasai, vienas eilutėje"
-
-#~ msgid "Activating connection ``%s.''"
-#~ msgstr "Aktyvuojamas prisijungimas ``%s.''"
-
-#~ msgid "Deactivating connection ``%s.''"
-#~ msgstr "Deaktyvuojamas prisijungimas ``%s.''"
-
-#~ msgid "Are you sure you want to delete the aliases for %s?"
-#~ msgstr "Ar tikrai nori pašalinti %s alijasus?"
-
-#~ msgid "Autodetecting modem device"
-#~ msgstr "Bandoma automatiškai rasti modemo įrenginį"
-
-#~ msgid "Connection name (Step 2 of 2)"
-#~ msgstr "Jungimosi pavadinimas (2 žingsnis iš 2)"
-
-#~ msgid ""
-#~ "The phone number must be composed of\n"
-#~ "only numbers or commas (,)."
-#~ msgstr ""
-#~ "Telefono numeris turi susidėti tik iš skaičių\n"
-#~ " arba kablelių (,)."
-
-#~ msgid ""
-#~ "The password and its confirmation\n"
-#~ "must be the same."
-#~ msgstr ""
-#~ "Slaptažodis ir jo patvirtinimas turi\n"
-#~ "būti tokie patys."
-
-#~ msgid ""
-#~ "If you are specifying a password,\n"
-#~ "you should specify a user name."
-#~ msgstr ""
-#~ "Jeigu tu nurodai slaptažodį, tu\n"
-#~ "turi nurodyti ir vartotojo vardą."
-
-#~ msgid ""
-#~ "Please set a name for this account,\n"
-#~ "using only space, letters and numbers."
-#~ msgstr ""
-#~ "Prašau pasirink vardą šiai sąskaitai,\n"
-#~ "naudojant tik tarpus, raides ir skaičius."
-
-#~ msgid ""
-#~ "You are about to create an account named with the following information:\n"
-#~ "\n"
-#~ "Account Name: %s\n"
-#~ "\n"
-#~ "Phone number: %s\n"
-#~ "\n"
-#~ "User name: %s\n"
-#~ "\n"
-#~ "Password: %s"
-#~ msgstr ""
-#~ "Tu ketini sukurti sąskaitą susidedančią iš sekančių duomenų:\n"
-#~ "\n"
-#~ "Sąskaitos pavadinimas: %s\n"
-#~ "\n"
-#~ "Telefono numeris: %s\n"
-#~ "\n"
-#~ "Vartotojo vardas: %s\n"
-#~ "\n"
-#~ "Slaptažodis: %s"
-
-#~ msgid "Time Zone - GNOME System Tools"
-#~ msgstr "Laiko juosta - GNOME Sistemos Įrankiai"
-
-#~ msgid "Time Servers - GNOME System Tools"
-#~ msgstr "Laiko serveriai - GNOME Sistemos Įrankiai"
+msgstr "Pridėkite ir šalinkite vartotojus bei grupes"
