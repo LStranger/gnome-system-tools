@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.25.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-14 01:43+0100\n"
-"PO-Revision-Date: 2003-11-14 01:45+0100\n"
+"POT-Creation-Date: 2003-11-23 01:19+0100\n"
+"PO-Revision-Date: 2003-11-23 01:20+0100\n"
 "Last-Translator: Slobodan Sredojević <ssl@uns.ns.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -167,10 +167,6 @@ msgid "Ask at boot"
 msgstr "Pitaj pri podizanju sistema"
 
 #: interfaces/boot.glade.in.h:20
-msgid "Boot Image Assistant"
-msgstr "Pomoćnik za datoteku sa kernelom"
-
-#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -180,13 +176,19 @@ msgstr ""
 "priključuje kao korena particija. Dodatno, takođe možete pridodati parametre "
 "koji se prosleđuju kernelu prilikom podizanja operativnog sistema."
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:21
 msgid "Click \"Forward\" to continue"
 msgstr "Pritisnite „Napred“ za nastavak rada"
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:22
 msgid "Confirmation"
 msgstr "Potvrđivanje"
+
+#. set window title
+#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
+#: src/boot/boot-druid.c:441
+msgid "Creating a new boot image"
+msgstr "Stvaram novi otisak za podizanje"
 
 #: interfaces/boot.glade.in.h:24
 msgid "Enable IDE SCSI emulation"
@@ -204,68 +206,52 @@ msgstr ""
 msgid "Finished"
 msgstr "Završeno"
 
-#: interfaces/boot.glade.in.h:27
-msgid "Image Settings (Step 1 of 2)"
-msgstr "Podešavanje datoteke sa kernelom (korak 1 od 2)"
-
-#: interfaces/boot.glade.in.h:28
-msgid "Image Settings (Step 2 of 2)"
-msgstr "Podešavanje datoteke sa kernelom (korak 2 od 2)"
-
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:49
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
 #: src/network/connection.c:1786
 msgid "Manual"
 msgstr "Uputstvo"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:28
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Izmeni podešavanja za operativni sistem ili kernel."
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:29
 msgid "Number of colors:"
 msgstr "Broj boja:"
 
-#: interfaces/boot.glade.in.h:32
-msgid "Other Operating System (Step 2 of 2)"
-msgstr "Drugi operativni sistem (korak 2 od 2)"
-
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:30
 msgid "Other parameters:"
 msgstr "Ostali parametri:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:31
 msgid "Password"
 msgstr "Lozinka"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:32
 msgid "Protect with password"
 msgstr "Zaštiti pomoću lozinke"
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:33
 msgid "Resolution:"
 msgstr "Rezolucija:"
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:34
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr ""
 "Broj sekundi posle kojih se učitava podrazumevani kernel ili operativni "
 "sistem"
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:35
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Navedite particiju na kojoj je instaliran operativni sistem."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:36
 msgid ""
-"The new boot image has been added.\n"
-"\n"
-"Please click \"Apply\" to save your changes."
-msgstr ""
-"Dodali ste novu datoteku za podizanje.\n"
-"\n"
-"Molim pritisnite „Primeni“ kako bi sačuvali izmene. "
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
+msgstr "Dodali ste novu datoteku za podizanje. Pritisnite „Primeni“ kako bi sačuvali izmene."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:37
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -273,54 +259,54 @@ msgstr ""
 "Pomoćnik je tu kako bi Vam pomogao da brzo i lako izaberete novu datoteku za "
 "podizanje sistema."
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:38
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Koristite ovo prozorče za izmenu parametara jezgra."
 
-#: interfaces/boot.glade.in.h:44
+#: interfaces/boot.glade.in.h:39
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Koristite ovaj program kako bi postavili izbor instaliranih operativnih "
 "sistema pri podizanju sistema."
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:40
 msgid "Video modes (only frame buffer)"
 msgstr "Video režimi (samo frejmbafer)"
 
-#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:85
+#: interfaces/boot.glade.in.h:41 interfaces/network.glade.in.h:85
 msgid "_Add..."
 msgstr "_Dodaj..."
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:42
 msgid "_Device:"
 msgstr "_Uređaj:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:43
 msgid "_Edit"
 msgstr "_Uredi"
 
-#: interfaces/boot.glade.in.h:49 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Putanja do initrd datot_eke:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:45
 msgid "_Kernel image path:"
 msgstr "_Putanja do datoteke sa jezgrom:"
 
-#: interfaces/boot.glade.in.h:51
+#: interfaces/boot.glade.in.h:46
 msgid "_Name:"
 msgstr "_Ime:"
 
-#: interfaces/boot.glade.in.h:52
+#: interfaces/boot.glade.in.h:47
 msgid "_Operating system:"
 msgstr "_Operativni sistem:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:48
 msgid "_Parameters:"
 msgstr "_Parametri:"
 
-#: interfaces/boot.glade.in.h:54
+#: interfaces/boot.glade.in.h:49
 msgid "_Root file system device:"
 msgstr "U_ređaj sa osnovnim sistemom datoteka:"
 
@@ -738,7 +724,9 @@ msgstr "Bežična podešavanja (korak 1 od 3)"
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
-msgstr "Upravo stvarate novu mrežnu vezu. Pritisnite „Primeni“ kako biste sačuvali promene."
+msgstr ""
+"Upravo stvarate novu mrežnu vezu. Pritisnite „Primeni“ kako biste sačuvali "
+"promene."
 
 #: interfaces/network.glade.in.h:86
 msgid "_Autodetect"
@@ -1231,10 +1219,14 @@ msgstr "Tabela _postavki"
 msgid "vga=%s is not a valid vga value"
 msgstr "vga=%s nije tačna vga vrednost"
 
-#. set window title
-#: src/boot/boot-druid.c:407
-msgid "Creating a new boot image"
-msgstr "Stvaram novi otisak za podizanje"
+#: src/boot/boot-druid.c:430
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "Stvaram novi otisak za podizanje (%d od %d)"
+
+#: src/boot/boot-druid.c:431
+msgid "Finished creating a new boot image"
+msgstr "Gotovo stvaranje novog otiska za podizanje"
 
 #: src/boot/boot-image.c:40 src/network/profile.c:466
 msgid "Unknown"
@@ -2052,6 +2044,18 @@ msgstr "Interpretator naredbi"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Dodajte ili uklonite korisnike i grupe"
+
+#~ msgid "Boot Image Assistant"
+#~ msgstr "Pomoćnik za datoteku sa kernelom"
+
+#~ msgid "Image Settings (Step 1 of 2)"
+#~ msgstr "Podešavanje datoteke sa kernelom (korak 1 od 2)"
+
+#~ msgid "Image Settings (Step 2 of 2)"
+#~ msgstr "Podešavanje datoteke sa kernelom (korak 2 od 2)"
+
+#~ msgid "Other Operating System (Step 2 of 2)"
+#~ msgstr "Drugi operativni sistem (korak 2 od 2)"
 
 #~ msgid "New network connection"
 #~ msgstr "Nova mrežna veza"
