@@ -1,4 +1,4 @@
-interfaces_DATA = \
+interfaces = \
 common.glade \
 disks.glade \
 hardware.glade \
@@ -8,6 +8,8 @@ networking.glade \
 shares.glade \
 time.glade \
 users.glade
+
+interfaces_DATA = $(interfaces)
 
 EXTRA_DIST = $(interfaces_DATA) \
 common.glade.h \
@@ -20,7 +22,7 @@ shares.glade.h \
 time.glade.h \
 users.glade.h
 
-CLEANFILES = users.glade
+CLEANFILES = $(interfaces)
 
-users.glade: %.glade: %.glade.in
+$(interfaces): %.glade: %.glade.in
 	sed 's#<pixmaps_directory>.*</pixmaps_directory>#<pixmaps_directory>'$(pixmapsdir)'</pixmaps_directory>#' < $< > $@
