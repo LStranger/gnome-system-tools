@@ -1677,13 +1677,13 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 {
 	gint ntotal = 0;
 	gint nread = 0;
-	gint ret;
+	int ret;
 	gchar *p;
 
 	do {
 		ret = fputc (string [nread], tool->backend_stream);
 
-		if (ret >= 0)
+		if (ret != EOF)
 			nread++;
 	} while (nread < strlen (string));
 
