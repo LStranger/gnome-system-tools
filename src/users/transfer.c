@@ -288,85 +288,6 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 	}
 }
 
-
-static void
-transfer_user_list_to_gui (void)
-{
-	GList *tmp_list;
-	GtkCList *list;
-	user *current_u;
-	gchar *entry[2];
-	gint row;
-
-	entry[1] = NULL;
-
-	list = GTK_CLIST (tool_widget_get ("user_list"));
-	gtk_clist_set_auto_sort (list, TRUE); 
-
-	gtk_clist_freeze (list);
-	
-	tmp_list = user_list;
-	while (tmp_list)
-	{
-		current_u = tmp_list->data;
-		tmp_list = tmp_list->next;
-		
-		if (current_u->uid >= logindefs.new_user_min_id &&
-				current_u->uid <= logindefs.new_user_max_id)
-		{
-			entry[0] = current_u->login;
-			row = gtk_clist_append (list, entry);
-			gtk_clist_set_row_data (list, row, current_u);
-		}
-	}
-
-	gtk_clist_thaw (list);
-
-	/* Select first item (and make it current) */
-
-	gtk_clist_select_row (list, 0, 0);
-	current_user = gtk_clist_get_row_data (list, 0); 
-}
-
-static void
-transfer_group_list_to_gui (void)
-{
-	GList *tmp_list;
-	GtkCList *list;
-	group *current_g;
-	gchar *entry[2];
-	gint row;
-
-	entry[1] = NULL;
-
-	list = GTK_CLIST (tool_widget_get ("group_list"));
-	gtk_clist_set_auto_sort (list, TRUE); 
-
-	gtk_clist_freeze (list);
-	
-	tmp_list = group_list;
-	while (tmp_list)
-	{
-		current_g = tmp_list->data;
-		tmp_list = tmp_list->next;
-
-/*		if (current_g->gid >= logindefs.new_group_min_id &&
-				current_g->gid <= logindefs.new_group_max_id) */
-		{
-			entry[0] = current_g->name;
-			row = gtk_clist_append (list, entry);
-			gtk_clist_set_row_data (list, row, current_g);
-		}
-	}
-
-	gtk_clist_thaw (list);
-
-	/* Select first item (and make it current) */
-
-	gtk_clist_select_row (list, 0, 0);
-	current_group = gtk_clist_get_row_data (list, 0);
-}
-
 static void
 transfer_user_list_glist_to_xml (xmlNodePtr root)
 {
@@ -488,10 +409,7 @@ transfer_xml_to_gui (xmlNodePtr root)
 	transfer_user_list_xml_to_glist (root);
 	transfer_group_list_xml_to_glist (root);
 
-	e_table_user_create ();
-/*	transfer_user_list_to_gui (); 
-	transfer_group_list_to_gui ();
-*/
+	e_table_create ();
 }
 
 void

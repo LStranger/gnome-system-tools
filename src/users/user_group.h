@@ -1,4 +1,4 @@
-/* user_group.c: this file is part of users-admin, a helix-setup-tool frontend 
+/* user_group.h: this file is part of users-admin, a helix-setup-tool frontend 
  * for user administration.
  * 
  * Copyright (C) 2000 Helix Code, Inc.
