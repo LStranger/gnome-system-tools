@@ -36,16 +36,19 @@
 #include "reading.xpm"
 
 
+/* --- Internals --- */
+
+
 ToolContext *tool_context = NULL;
 
 
 static gchar *
 make_script_name (char *task)
 {
-  gchar *name;
+	gchar *name;
   
-  name = g_strjoin ("-", task, "conf", NULL);
-  return(name);
+	name = g_strjoin ("-", task, "conf", NULL);
+	return(name);
 }
 
 
@@ -75,127 +78,134 @@ make_glade_path (char *task)
 
 GtkWidget *tool_widget_get(gchar *name)
 {
-  return(glade_xml_get_widget(tool_context->interface, name));
+	return(glade_xml_get_widget (tool_context->interface, name));
 }
 
 
 GtkWidget *tool_widget_get_common(gchar *name)
 {
-  return(glade_xml_get_widget(tool_context->common_interface, name));
+	return(glade_xml_get_widget (tool_context->common_interface, name));
 }
 
 
 static gboolean tool_interface_load()
 {
-  gchar *path;
+	gchar *path;
+	
+	path = make_glade_path (tool_context->task);
 
-  path = make_glade_path(tool_context->task);
-  tool_context->interface = glade_xml_new(path, NULL);
-  if (tool_context->interface)
-    glade_xml_signal_autoconnect(tool_context->interface);
-  else
-    g_error("Could not load tool interface from %s", path);
-  g_free(path);
+	tool_context->interface = glade_xml_new (path, NULL);
+	if (tool_context->interface)
+	        glade_xml_signal_autoconnect (tool_context->interface);
+	else
+	        g_error ("Could not load tool interface from %s", path);
 
-  path = make_glade_path("common");
-  tool_context->common_interface = glade_xml_new(path, NULL);
-  if (!tool_context->common_interface) g_error("Could not load common interface elements from %s", path);
-  g_free(path);
+	g_free(path);
+	path = make_glade_path("common");
 
-  /* TODO: Try some local paths here (e.g. if uninstalled). */
+	tool_context->common_interface = glade_xml_new (path, NULL);
+	if (!tool_context->common_interface)
+	        g_error ("Could not load common interface elements from %s", path);
 
-  if (tool_context->interface)
-  {
-    path = g_strjoin("-", tool_context->task, "admin", NULL);
-    tool_context->top_window = tool_widget_get(path);
-    g_free(path);
+	g_free(path);
 
-    return TRUE;
-  }
-  
-  return FALSE;
+	/* TODO: Try some local paths here (e.g. if uninstalled). */
+	
+	if (tool_context->interface)
+	{
+		path = g_strjoin ("-", tool_context->task, "admin", NULL);
+		tool_context->top_window = tool_widget_get (path);
+		g_free (path);
+		
+		return TRUE;
+	}
+	
+	return FALSE;
 }
 
 
 static ToolContext *tool_context_new(gchar *task)
 {
-  ToolContext *tc;
+	ToolContext *tc;
   
-  tc = g_new(ToolContext, 1);
-  memset(tc, 0, sizeof(*tc));
-  tc->task = g_strdup(task);
+	tc = g_new (ToolContext, 1);
+	memset(tc, 0, sizeof (*tc));
+	tc->task = g_strdup (task);
 
-  tool_context = tc;
-  tool_interface_load(tc);
-  tool_set_modified(FALSE);
-  return(tc);
+	tool_context = tc;
+	tool_interface_load (tc);
+	tool_set_modified (FALSE);
+	return(tc);
 }
 
 
 void tool_context_destroy(ToolContext *tc)
 {
-  g_assert(tc->task);
+	g_assert(tc->task);
 
-  g_free(tc->task);
-  /* TODO: Free interface */
-  /* TODO: Free config */
-  g_free(tc);
+	g_free(tc->task);
+	/* TODO: Free interface */
+	/* TODO: Free config */
+	g_free(tc);
 }
 
 
 static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 {
-  char c;
-  GtkWidget *bar;
-  gfloat p;
+	char c;
+	GtkWidget *bar;
+	gfloat p;
 
-  bar = tool_widget_get_common("progress");
+	bar = tool_widget_get_common("progress");
   
-  if (read(fd, &c, 1) < 1) return;
+	if (read(fd, &c, 1) < 1) return;
   
-  if (tool_context->read_state == TOOL_READ_PROGRESS_MAX)
-  {
-    if (c - '0' < 10 && c - '0' >= 0)
-    {
-      tool_context->progress_max *= 10;
-      tool_context->progress_max += (c - '0');
-    }
-    else
-      tool_context->read_state = TOOL_READ_PROGRESS_DONE;
-  }
-  else if (c != '.') gtk_main_quit();
-  else
-  {
-    /* Update progressbar */
-
-    tool_context->progress_done += 1;
-
-    if (!tool_context->progress_max) p = 0.0;
-    else p = (gfloat) tool_context->progress_done / tool_context->progress_max;
-    if (p > 1.0) p = 1.0;
-
-    gtk_progress_set_percentage(GTK_PROGRESS(bar), p);
-  }
+	if (tool_context->read_state == TOOL_READ_PROGRESS_MAX)
+	{
+		if (c - '0' < 10 && c - '0' >= 0)
+		{
+			tool_context->progress_max *= 10;
+			tool_context->progress_max += (c - '0');
+		}
+		else
+		        tool_context->read_state = TOOL_READ_PROGRESS_DONE;
+	}
+	else if (c != '.') gtk_main_quit ();
+	else
+	{
+		/* Update progressbar */
+		
+		tool_context->progress_done += 1;
+		
+		if (!tool_context->progress_max) p = 0.0;
+		else p = (gfloat) tool_context->progress_done / tool_context->progress_max;
+		if (p > 1.0) p = 1.0;
+		
+		gtk_progress_set_percentage (GTK_PROGRESS(bar), p);
+	}
 }
 
 
 static void read_progress(int fd)
 {
-  guint input_id;
-  
-  tool_context->progress_max = 0;
-  tool_context->read_state = TOOL_READ_PROGRESS_MAX;
-  input_id = gtk_input_add_full(fd, GDK_INPUT_READ, read_progress_tick,
-                                NULL, NULL, NULL);
-  gtk_main();
-  
-  gtk_input_remove(input_id);
+	guint input_id;
+
+	tool_context->progress_max = 0;
+	tool_context->read_state = TOOL_READ_PROGRESS_MAX;
+	input_id = gtk_input_add_full (fd, GDK_INPUT_READ, read_progress_tick,
+				       NULL, NULL, NULL);
+	gtk_main();
+
+	gtk_input_remove (input_id);
 }
+
+
+/* --- Exported interface --- */
 
 
 gboolean tool_config_load()
 {
-  ToolContext *tc;
+	ToolContext *tc;
 	int fd[2];
 	int t, len;
 	char *p;
@@ -203,8 +213,8 @@ gboolean tool_config_load()
 	char *argv[] = { 0, "--get", "--progress", 0 };
 	gchar *path;
 
-  tc = tool_context;
-  g_assert(tc->task);
+	tc = tool_context;
+	g_assert (tc->task);
   
 	xmlSubstituteEntitiesDefault (TRUE);
 
@@ -226,12 +236,13 @@ gboolean tool_config_load()
 		 * mechanism. Let's just load it all into memory, then. Also, refusing
 		 * enormous documents can be considered a plus. </dystopic> */
 
-    read_progress(fd[0]);
+		read_progress (fd[0]);
 
 		p = malloc (102400);
-    fcntl(fd[0], F_SETFL, 0);  /* Let's block */
-		for (len = 0; (t = read (fd[0], p + len, 102399 - len)); ) len += t;
-    
+		fcntl(fd[0], F_SETFL, 0);  /* Let's block */
+		for (len = 0; (t = read (fd[0], p + len, 102399 - len)); )
+		  len += t;
+
 		if (len < 1 || len == 102399)
 		{
 			free (p);
@@ -266,7 +277,7 @@ gboolean tool_config_load()
 
 gboolean tool_config_save()
 {
-  ToolContext *tc;
+	ToolContext *tc;
 	FILE *f;
 	int fd[2];
 	int t;
@@ -274,9 +285,9 @@ gboolean tool_config_save()
 	char *argv[] = { 0, "--set", 0 };
 	gchar *path;
 
-  tc = tool_context;
-  g_assert(tc->task);
-  g_assert(tc->config);
+	tc = tool_context;
+	g_assert (tc->task);
+	g_assert (tc->config);
 
 	pipe (fd);
 
@@ -308,84 +319,84 @@ gboolean tool_config_save()
 		g_error ("Unable to run backend: %s", path);
 	}
   
-  return TRUE;  /* FIXME: Determine if it really worked. */
+	return TRUE;  /* FIXME: Determine if it really worked. */
 }
 
 
 xmlDocPtr tool_config_get_xml()
 {
-  return(tool_context->config);
+	return (tool_context->config);
 }
 
 
 void tool_config_set_xml(xmlDocPtr xml)
 {
-  tool_context->config = xml;
+	tool_context->config = xml;
 }
 
 
 gboolean tool_get_frozen()
 {
-  return(tool_context->frozen);
+	return (tool_context->frozen);
 }
 
 
 void tool_set_frozen(gboolean state)
 {
-  tool_context->frozen = state;
+	tool_context->frozen = state;
 }
 
 
 gboolean tool_get_modified()
 {
-  return(tool_context->modified);
+	return (tool_context->modified);
 }
 
 
 void tool_set_modified(gboolean state)
 {
-  GtkWidget *w0;
+	GtkWidget *w0;
 
-  if (tool_get_frozen() || !tool_get_access()) return;
+	if (tool_get_frozen() || !tool_get_access()) return;
 
-  if (state)
-  {
-    w0 = tool_widget_get("apply");
-    if (w0) gtk_widget_set_sensitive(w0, TRUE);
-  }
-  else
-  {
-    w0 = tool_widget_get("apply");
-    if (w0) gtk_widget_set_sensitive(w0, FALSE);
-  }
+	if (state)
+	{
+		w0 = tool_widget_get("apply");
+		if (w0) gtk_widget_set_sensitive(w0, TRUE);
+	}
+	else
+	{
+		w0 = tool_widget_get("apply");
+		if (w0) gtk_widget_set_sensitive(w0, FALSE);
+	}
 
-  tool_context->modified = state;
+	tool_context->modified = state;
 }
 
 
 gboolean tool_get_access()
 {
-  return(tool_context->access);
+	return (tool_context->access);
 }
 
 
 void tool_set_access(gboolean state)
 {
-  GtkWidget *w0;
+	GtkWidget *w0;
 
-  if (!state)
-  {
-    w0 = tool_widget_get("apply");
-    if (w0) gtk_widget_set_sensitive(w0, FALSE);
-  }
+	if (!state)
+	{
+		w0 = tool_widget_get ("apply");
+		if (w0) gtk_widget_set_sensitive (w0, FALSE);
+	}
 
-  tool_context->access = state;
+	tool_context->access = state;
 }
 
 
 ToolComplexity tool_get_complexity()
 {
-	return(tool_context->complexity);
+	return (tool_context->complexity);
 }
 
 
@@ -400,50 +411,50 @@ void tool_set_complexity(ToolComplexity complexity)
 
 GtkWidget *tool_get_top_window()
 {
-  return(tool_context->top_window);
+	return (tool_context->top_window);
 }
 
 
 void tool_modified_cb()
 {
-  tool_set_modified(TRUE);
+	tool_set_modified (TRUE);
 }
 
 
 static void
 handle_events_immediately()
 {
-  while (gtk_events_pending()) gtk_main_iteration();
-  usleep(100000);
-  while (gtk_events_pending()) gtk_main_iteration();
+	while (gtk_events_pending ()) gtk_main_iteration ();
+	usleep(100000);
+	while (gtk_events_pending ()) gtk_main_iteration ();
 }
 
 
 void tool_splash_show()
 {
-  GtkWidget *w0;
+	GtkWidget *w0;
   
-  /* FIXME: Keep track of created GnomePixmap, to avoid duplicates if
-   * splash is shown multiple times. */
+	/* FIXME: Keep track of created GnomePixmap, to avoid duplicates if
+	 * splash is shown multiple times. */
 
-  w0 = gnome_pixmap_new_from_xpm_d(reading_xpm);
+	w0 = gnome_pixmap_new_from_xpm_d (reading_xpm);
 
-  gtk_box_pack_end(GTK_BOX(tool_widget_get_common("reading_box")),
-                   w0, TRUE, TRUE, 0);
+	gtk_box_pack_end (GTK_BOX (tool_widget_get_common("reading_box")),
+			  w0, TRUE, TRUE, 0);
 
-  w0 = tool_widget_get_common("reading");
-  gtk_widget_show_all(w0);
+	w0 = tool_widget_get_common ("reading");
+	gtk_widget_show_all (w0);
 
-  handle_events_immediately();
+	handle_events_immediately ();
 }
 
 
 void tool_splash_hide()
 {
-  GtkWidget *w0;
+	GtkWidget *w0;
 
-  w0 = tool_widget_get_common("reading");
-  gtk_widget_hide(w0);
+	w0 = tool_widget_get_common("reading");
+	gtk_widget_hide (w0);
 }
 
 
@@ -453,47 +464,47 @@ static int reply;
 static void reply_cb(gint val, gpointer data)
 {
   reply = val;
-  gtk_main_quit();
+  gtk_main_quit ();
 }
 
 
 ToolContext *tool_init(gchar *task, int argc, char *argv[])
 {
-  ToolContext *tc;
-  GtkWidget *w0;
-  gchar *s;
+	ToolContext *tc;
+	GtkWidget *w0;
+	gchar *s;
 
-  s = g_strjoin("-", task, "admin", NULL);
-  gnome_init(s, VERSION, argc, argv);
-  g_free(s);
+	s = g_strjoin ("-", task, "admin", NULL);
+	gnome_init (s, VERSION, argc, argv);
+	g_free (s);
 
-  glade_gnome_init();
-  tc = tool_context_new(task);
+	glade_gnome_init ();
+	tc = tool_context_new (task);
 
 	if (geteuid () != 0)
 	{
 		gnome_ok_cancel_dialog (_("You need full administration privileges (i.e. root)\n"
-                              "to run this configuration tool. You can acquire\n"
-                              "such privileges by issuing an \"su\" command in a shell.\n\n"
-                              "Continue anyway?"), reply_cb, NULL);
+					  "to run this configuration tool. You can acquire\n"
+					  "such privileges by issuing an \"su\" command in a shell.\n\n"
+					  "Continue anyway?"), reply_cb, NULL);
 
 		gtk_main ();
 
 		if (reply) exit(1);
     
-    tool_set_access(FALSE);
+		tool_set_access (FALSE);
 	}
-  else
-    tool_set_access(TRUE);
+	else
+	      tool_set_access (TRUE);
 
-  tool_splash_show();
-  tool_config_load();
-  tool_splash_hide();
+	tool_splash_show ();
+	tool_config_load ();
+	tool_splash_hide ();
 
-  /* Make sure apply starts out as insensitive */
+	/* Make sure apply starts out as insensitive */
 
-  w0 = tool_widget_get("apply");
-  if (w0) gtk_widget_set_sensitive(w0, FALSE);
+	w0 = tool_widget_get ("apply");
+	if (w0) gtk_widget_set_sensitive (w0, FALSE);
 
-  return(tc);
+	return (tc);
 }

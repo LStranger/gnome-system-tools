@@ -110,8 +110,7 @@ xml_doc_read_from_backend (char *backend_name)
 		g_error ("Unable to run backend.");
 	}
 
-	if (!doc)
-		g_error ("Unable to load XML from backend.");
+	if (!doc) g_error ("Unable to load XML from backend.");
 
 	return (doc);
 }
@@ -174,8 +173,7 @@ xml_element_find_first (xmlNodePtr parent, char *name)
 
 	for (node = parent->childs; node;)
 	{
-		if (!strcmp (name, node->name))
-			break;
+		if (!strcmp (name, node->name)) break;
 		node = node->next;
 	}
 
@@ -190,8 +188,7 @@ xml_element_find_next (xmlNodePtr sibling, char *name)
 
 	for (node = sibling->next; node;)
 	{
-		if (!strcmp (name, node->name))
-			break;
+		if (!strcmp (name, node->name)) break;
 		node = node->next;
 	}
 
@@ -238,8 +235,7 @@ xml_element_add_with_content (xmlNodePtr node, char *name, char *content)
 	xmlNodePtr n0;
 
 	n0 = xml_element_find_first (node, name);
-	if (!n0)
-		n0 = xml_element_add (node, name);
+	if (!n0) n0 = xml_element_add (node, name);
 
 	xml_element_set_content (n0, content);
 }
@@ -280,8 +276,7 @@ xml_element_get_bool_attr (xmlNodePtr node, char *attr)
 	s = xml_element_get_attribute (node, attr);
 	if (s)
 	{
-		if (strchr ("yYtT", s[0]))
-			r = TRUE;	/* Yes, true */
+		if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
 		free (s);
 	}
 
@@ -309,8 +304,7 @@ xml_element_get_state (xmlNodePtr node, char *element)
 		s = xml_element_get_attribute (elem, "state");
 		if (s)
 		{
-			if (strchr ("yYtT", s[0]))
-				r = TRUE;	/* Yes, true */
+			if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
 			free (s);
 		}
 	}
@@ -325,8 +319,7 @@ xml_element_set_state (xmlNodePtr node, char *element, gboolean state)
 	xmlNodePtr elem;
 
 	elem = xml_element_find_first (node, element);
-	if (!elem)
-		elem = xml_element_add (node, element);
+	if (!elem) elem = xml_element_add (node, element);
 	xml_element_set_attribute (elem, "state", state ? "true" : "false");
 }
 

@@ -6,9 +6,10 @@
 
 typedef struct _ToolContext ToolContext;
 
+
 typedef enum
 {
-  TOOL_STATE_FROZEN, TOOL_STATE_UNMODIFIED, TOOL_STATE_MODIFIED
+	TOOL_STATE_FROZEN, TOOL_STATE_UNMODIFIED, TOOL_STATE_MODIFIED
 }
 ToolState;
 
@@ -20,10 +21,10 @@ ToolComplexity;
 
 typedef enum
 {
-  TOOL_READ_PROGRESS_MAX,
-  TOOL_READ_PROGRESS_DONE
+	TOOL_READ_PROGRESS_MAX, TOOL_READ_PROGRESS_DONE
 }
 ToolReadState;
+
 
 struct _ToolContext
 {
@@ -31,13 +32,12 @@ struct _ToolContext
 	xmlDocPtr config;
 	GladeXML *interface;
 	GladeXML *common_interface;
-  GtkWidget *top_window;
-  gboolean frozen, modified, access;
+	GtkWidget *top_window;
+	gboolean frozen, modified, access;
 	ToolComplexity complexity;
 
-  ToolReadState read_state;
-  guint progress_max,
-        progress_done;
+	ToolReadState read_state;
+	guint progress_max, progress_done;
 };
 
 

@@ -68,40 +68,42 @@ ip_entry_is_valid (GtkEditable *ip_entry)
 
 
 gboolean
-check_ip_number(GtkEditable * editable)
+check_ip_number(GtkEditable *editable)
 {
-  GtkWidget *dialog;
+	GtkWidget *dialog;
 	gint nr_val;
 	gint nr_len;
 
-	nr_val = atoi (gtk_editable_get_chars(editable, 0, -1));
-	nr_len = strlen (gtk_editable_get_chars(editable, 0, -1));
+	nr_val = atoi (gtk_editable_get_chars (editable, 0, -1));
+	nr_len = strlen (gtk_editable_get_chars (editable, 0, -1));
 
 	if (nr_val > 255 || nr_len == 0)
 	{
 		dialog = gnome_ok_dialog_parented("IP Address numbers are in the range [0-255]\n"
-			"and can't be empty.", GTK_WINDOW(tool_get_top_window()));
+			"and can't be empty.", GTK_WINDOW (tool_get_top_window()));
     
-    gtk_window_set_modal(GTK_WINDOW(dialog), TRUE);
+		gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
 		gtk_widget_grab_focus (GTK_WIDGET (editable));
 		gtk_entry_select_region (GTK_ENTRY (editable), 0, -1);
 		return FALSE;
 	}
 
-	else
-		return TRUE;
+	return TRUE;
 }
 
 
 void
-list_add_ip (GtkList * list, GtkWidget * w_ip_1, GtkWidget * w_ip_2, GtkWidget * w_ip_3, GtkWidget * w_ip_4)
+list_add_ip (GtkList *list, GtkWidget *w_ip_1, GtkWidget *w_ip_2, GtkWidget *w_ip_3, GtkWidget *w_ip_4)
 {
 	gchar *ip, *ip1, *ip2, *ip3, *ip4;
 	GtkWidget *item;
 	GList *list_add = 0;
 
-	if (!ip_first_entry_is_valid (GTK_EDITABLE (w_ip_1)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_2)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_3)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_4)))
+	if (!ip_first_entry_is_valid (GTK_EDITABLE (w_ip_1)) ||
+	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_2)) ||
+	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_3)) ||
+	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_4)))
 		return;
 
 	ip1 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_1), 0, -1);
@@ -125,7 +127,7 @@ list_add_ip (GtkList * list, GtkWidget * w_ip_1, GtkWidget * w_ip_2, GtkWidget *
 
 
 void
-list_add_word (GtkList * list, GtkWidget * editable)
+list_add_word (GtkList *list, GtkWidget *editable)
 {
 	GtkWidget *item;
 	GList *list_add = NULL;
@@ -141,8 +143,7 @@ list_add_word (GtkList * list, GtkWidget * editable)
 		return;
 	}
 
-	if (!strlen (text))
-		return;
+	if (!strlen (text)) return;
 
 	gtk_editable_delete_text (GTK_EDITABLE (editable), 0, -1);
 	gtk_widget_grab_focus (GTK_WIDGET (editable));
@@ -155,12 +156,15 @@ list_add_word (GtkList * list, GtkWidget * editable)
 
 
 void
-clist_add_ip (GtkCList * clist, GtkWidget * w_ip_1, GtkWidget * w_ip_2, GtkWidget * w_ip_3, GtkWidget * w_ip_4)
+clist_add_ip (GtkCList *clist, GtkWidget *w_ip_1, GtkWidget *w_ip_2, GtkWidget *w_ip_3, GtkWidget *w_ip_4)
 {
 	gchar *ip, *ip1, *ip2, *ip3, *ip4;
 	gchar *row_data[3];
 
-	if (!ip_first_entry_is_valid (GTK_EDITABLE (w_ip_1)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_2)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_3)) || !ip_entry_is_valid (GTK_EDITABLE (w_ip_4)))
+	if (!ip_first_entry_is_valid (GTK_EDITABLE (w_ip_1)) ||
+	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_2)) ||
+	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_3)) ||
+	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_4)))
 		return;
 
 	ip1 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_1), 0, -1);
@@ -193,7 +197,7 @@ GdkBitmap *checked_mask = NULL, *unchecked_mask = NULL;
 
 
 void
-set_ctree_checkmark (GtkCTree * ctree, GtkCTreeNode * node, gint column, gboolean state)
+set_ctree_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column, gboolean state)
 {
 	GdkPixbuf *pixbuf;
 	GdkPixmap *pixmap;
@@ -227,15 +231,14 @@ set_ctree_checkmark (GtkCTree * ctree, GtkCTreeNode * node, gint column, gboolea
 
 
 gboolean
-get_ctree_checkmark (GtkCTree * ctree, GtkCTreeNode * node, gint column)
+get_ctree_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column)
 {
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
 
 	gtk_ctree_node_get_pixmap (ctree, node, column, &pixmap, &mask);
 
-	if (pixmap == checked_pixmap)
-		return (TRUE);
+	if (pixmap == checked_pixmap) return (TRUE);
 	return (FALSE);
 }
 
@@ -244,7 +247,7 @@ get_ctree_checkmark (GtkCTree * ctree, GtkCTreeNode * node, gint column)
 
 
 void
-set_clist_checkmark (GtkCList * clist, gint row, gint column, gboolean state)
+set_clist_checkmark (GtkCList *clist, gint row, gint column, gboolean state)
 {
 	GdkPixbuf *pixbuf;
 	GdkPixmap *pixmap;
@@ -278,14 +281,13 @@ set_clist_checkmark (GtkCList * clist, gint row, gint column, gboolean state)
 
 
 gboolean
-get_clist_checkmark (GtkCList * clist, gint row, gint column)
+get_clist_checkmark (GtkCList *clist, gint row, gint column)
 {
 	GdkPixmap *pixmap;
 	GdkBitmap *mask;
 
 	gtk_clist_get_pixmap (clist, row, column, &pixmap, &mask);
 
-	if (pixmap == checked_pixmap)
-		return (TRUE);
+	if (pixmap == checked_pixmap) return (TRUE);
 	return (FALSE);
 }
