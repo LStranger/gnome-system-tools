@@ -451,6 +451,7 @@ static void reply_cb(gint val, gpointer data)
 ToolContext *tool_init(gchar *task, int argc, char *argv[])
 {
   ToolContext *tc;
+  GtkWidget *w0;
   gchar *s;
 
   s = g_strjoin("-", task, "admin", NULL);
@@ -479,6 +480,13 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
   tool_splash_show();
   tool_config_load();
   tool_splash_hide();
-  
+
+  /* Make sure ok/apply start out as insensitive */
+
+  w0 = tool_widget_get("ok");
+  if (w0) gtk_widget_set_sensitive(w0, FALSE);
+  w0 = tool_widget_get("apply");
+  if (w0) gtk_widget_set_sensitive(w0, FALSE);
+
   return(tc);
 }
