@@ -167,16 +167,51 @@ Time
     reflected in /etc/ntp.conf.
 
 
+Shares
+======
 
+Note: Testing shares properly requires a second machine, preferably one that
+already has working Samba and NFS shares set up, so it's possible to test
+actual sharing.
 
+1)  Start shares-admin as a normal user, enter the root password in the
+    dialog, and wait for the scanning your system configuration dialog to
+		disappear.
 
+2)  Change to the exports tab, and look at the list of exports (if any
+    exists). On the command line, run smbclient -L <hostname> and verify that
+    the list of shares corresponds to the list in shares-admin.
 
+3)  Click the Add... button. Use type: Samba, and give the export a name and
+    comment, and point it at an existing directory. Set it to browseable and
+    public, click ok, and click Apply.
 
+4)  Run smbclient -L <hostname> again and verify that the new share you added
+    shows up on the list.
 
+5)  On another machine, use smbmount to mount the share you just created.
+    Verify that it can be read, but not written to.
 
+6)  Change the settings of the newly added share to writable, and apply.
+    Remount the share on the other machine if necessary, then verify that the
+    share can be written to.
 
+7)  Switch to the Imports tab. Click add, and enter the information for a
+    samba share from the other machine. Mount it on an existing mountpoint.
+    Make sure "mounted" and "Do not remount this share after computer
+    reboots" are checked. Click ok, and apply. Verify that the share is
+    actually mounted at the mountpoint you specified.
 
+8)  Change the settings of the import to uncheck "Do not remount this share
+    after computer reboots", and apply. Verify that the import is still
+    mounted, then check /etc/fstab to verify that the settings seem sane. On
+    the commandline, do umount <mountpoint> and then mount <mountpoint>, and
+    verify that the import is still mounted.
 
+9)  Repeat above procedures, but for NFS shares.
+
+10) Delete the added shares, and verify that they are no longer listed (use
+    smbclient -L <hostname> for Samba shares).
 
 
 
