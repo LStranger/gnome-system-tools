@@ -30,8 +30,8 @@
 #include "xst-ui.h"
 #include "xst-su.h"
 
-#include <config-archiver/archive.h>
-#include <config-archiver/location.h>
+#include <bonobo.h>
+#include <config-archiver/archiver-client.h>
 
 #include <gnome.h>
 #include <parser.h>
@@ -844,12 +844,27 @@ xst_tool_load (XstTool *tool)
 		tool->config = xst_tool_run_get_directive
 			(tool, _("Scanning your system configuration."), "get", NULL);
 	} else {
-		Archive *archive;
-		Location *location;
+		CORBA_Environment ev;
+		ConfigArchiver_Archive archive;
+		ConfigArchiver_Location location;
 		gchar *backend_id;
 
-		archive = ARCHIVE (archive_load (TRUE));
-		location = archive_get_location (archive, location_id);
+		CORBA_exception_init (&ev);
+
+		archive = bonobo_get_object ("archive:global-archive", "IDL:ConfigArchiver/Archive:1.0", &ev);
+
+		if (BONOBO_EX (&ev) || archive == CORBA_OBJECT_NIL) {
+			g_critical ("Could not resolve the archive moniker");
+			return FALSE;
+		}
+
+		location = ConfigArchiver_Archive_getLocation (archive, location_id, &ev);
+
+		if (BONOBO_EX (&ev) || location == CORBA_OBJECT_NIL) {
+			g_critical ("Could not get the location %s", location_id);
+			return FALSE;
+		}
+
 		backend_id = strrchr (tool->script_path, '/');
 
 		if (backend_id != NULL)
@@ -857,9 +872,12 @@ xst_tool_load (XstTool *tool)
 		else
 			backend_id = tool->script_path;
 
-		tool->config = location_load_rollback_data (location, NULL, 0, backend_id, TRUE);
+		tool->config = location_client_load_rollback_data (location, NULL, 0, backend_id, TRUE, &ev);
 
-		archive_close (archive);
+		bonobo_object_release_unref (location, NULL);
+		bonobo_object_release_unref (archive, NULL);
+
+		CORBA_exception_free (&ev);
 	}
 
 	if (tool->config)
@@ -871,8 +889,9 @@ xst_tool_load (XstTool *tool)
 gboolean
 xst_tool_save (XstTool *tool)
 {
-	Archive *archive;
-	Location *location;
+	CORBA_Environment ev;
+	ConfigArchiver_Archive archive;
+	ConfigArchiver_Location location;
 	gchar *backend_id;
 
 	g_return_val_if_fail (tool != NULL, FALSE);
@@ -891,24 +910,38 @@ xst_tool_save (XstTool *tool)
 	}
 #endif
 
+	CORBA_exception_init (&ev);
+
 	/* Archive data with the archiver */
-	archive = ARCHIVE (archive_load (TRUE));
+	archive = bonobo_get_object ("archive:global-archive", "IDL:ConfigArchiver/Archive:1.0", &ev);
 
-	if (location_id == NULL)
-		location = archive_get_current_location (archive);
-	else
-		location = archive_get_location (archive, location_id);
+	if (BONOBO_EX (&ev) || archive == CORBA_OBJECT_NIL) {
+		g_critical ("Could not resolve the archive moniker");
+	} else {
+		if (location_id == NULL)
+			location = ConfigArchiver_Archive__get_currentLocation (archive, &ev);
+		else
+			location = ConfigArchiver_Archive_getLocation (archive, location_id, &ev);
 
-	backend_id = strrchr (tool->script_path, '/');
+		if (BONOBO_EX (&ev) || location == CORBA_OBJECT_NIL) {
+			g_critical ("Could not get location %s", location_id);
+			return FALSE;
+		}
 
-	if (backend_id != NULL)
-		backend_id++;
-	else
-		backend_id = tool->script_path;
+		backend_id = strrchr (tool->script_path, '/');
 
-	location_store_xml (location, backend_id, tool->config, STORE_MASK_PREVIOUS);
+		if (backend_id != NULL)
+			backend_id++;
+		else
+			backend_id = tool->script_path;
 
-	archive_close (archive);
+		location_client_store_xml (location, backend_id, tool->config, ConfigArchiver_STORE_MASK_PREVIOUS, &ev);
+
+		bonobo_object_release_unref (location, &ev);
+		bonobo_object_release_unref (archive, &ev);
+	}
+
+	CORBA_exception_free (&ev);
 
 	if (location_id == NULL)
 		xst_tool_run_set_directive (tool, tool->config,
@@ -1336,6 +1369,8 @@ try_show_usage_warning (void)
 void
 xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
+	CORBA_ORB orb;
+
 	struct poptOption xst_options[] =
 	{
 		{ "location", '\0', POPT_ARG_STRING, &location_id, 0,
@@ -1371,6 +1406,11 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 	}
 
 	glade_gnome_init ();
+
+	orb = oaf_init (argc, argv);
+	if (bonobo_init (orb, CORBA_OBJECT_NIL, CORBA_OBJECT_NIL) == FALSE)
+		g_critical ("Cannot initialize bonobo");
+	bonobo_activate ();
 
 	if (geteuid () == 0) {
 		root_access = ROOT_ACCESS_REAL;
