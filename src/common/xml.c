@@ -201,6 +201,29 @@ xml_element_find_next (xmlNodePtr sibling, char *name)
 
 
 xmlNodePtr
+xml_element_find_nth (xmlNodePtr parent, char *name, int n)
+{
+	xmlNodePtr node;
+	gint i = 0;
+
+	g_return_val_if_fail (parent != NULL, NULL);
+
+	for (node = parent->childs; node;)
+	{
+		if (!strcmp (name, node->name))
+		{
+			if (i == n)
+				break;
+			i++;
+		}
+		node = node->next;
+	}
+
+	return (node);
+}
+
+
+xmlNodePtr
 xml_element_add (xmlNodePtr parent, char *name)
 {
 	return (xmlNewChild (parent, NULL, name, NULL));
@@ -389,4 +412,18 @@ xml_element_destroy_children_by_name (xmlNodePtr parent, char *name)
 		xmlFreeNode (node);
 		node = node_next;
 	}
+}
+
+int
+xml_parent_childs (xmlNodePtr parent)
+{
+	xmlNodePtr node;
+	gint ret = 0;
+
+	g_return_val_if_fail (parent != NULL, 0);
+
+	for (node = parent->childs; node; ret++)
+		node = node->next;
+
+	return ret;
 }

@@ -11,6 +11,7 @@ void xml_doc_dump(xmlDocPtr doc);
 
 xmlNodePtr xml_element_find_first(xmlNodePtr parent, char *name);
 xmlNodePtr xml_element_find_next(xmlNodePtr sibling, char *name);
+xmlNodePtr xml_element_find_nth (xmlNodePtr parent, char *name, int n);
 
 xmlNodePtr xml_element_add(xmlNodePtr parent, char *name);
 void xml_element_add_with_content(xmlNodePtr node, char *name, char *content);
@@ -30,3 +31,6 @@ void xml_element_set_state(xmlNodePtr node, char *element, gboolean state);
 void xml_element_destroy(xmlNodePtr node);
 void xml_element_destroy_children(xmlNodePtr parent);
 void xml_element_destroy_children_by_name(xmlNodePtr parent, char *name);
+
+int xml_parent_childs (xmlNodePtr parent);
+
