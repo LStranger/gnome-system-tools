@@ -17,6 +17,7 @@ pixmaps_DATA = \
 	desktop_icons.png        \
 	disks.png                \
 	display.png              \
+	fedora.png		 \
 	font.png            	 \
 	freebsd.png              \
 	gentoo.png               \
