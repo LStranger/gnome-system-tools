@@ -221,6 +221,9 @@ Use this tool for setting your current date, time and time zone</property>
 		  <property name="snap_to_ticks">False</property>
 		  <property name="wrap">False</property>
 		  <property name="adjustment">0 -100 100 1 10 10</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">hours</atkproperty>
+		  </accessibility>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -261,6 +264,9 @@ Use this tool for setting your current date, time and time zone</property>
 		  <property name="snap_to_ticks">False</property>
 		  <property name="wrap">False</property>
 		  <property name="adjustment">0 -100 100 1 10 10</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">minutes</atkproperty>
+		  </accessibility>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -301,6 +307,9 @@ Use this tool for setting your current date, time and time zone</property>
 		  <property name="snap_to_ticks">False</property>
 		  <property name="wrap">False</property>
 		  <property name="adjustment">0 -100 100 1 10 10</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">seconds</atkproperty>
+		  </accessibility>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -324,6 +333,9 @@ Use this tool for setting your current date, time and time zone</property>
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="display_options">GTK_CALENDAR_SHOW_HEADING|GTK_CALENDAR_SHOW_DAY_NAMES</property>
+	      <accessibility>
+		<atkproperty name="AtkObject::accessible_name" translatable="yes">date</atkproperty>
+	      </accessibility>
 	    </widget>
 	    <packing>
 	      <property name="left_attach">2</property>
@@ -919,6 +931,9 @@ Use this tool for setting your current date, time and time zone</property>
 		  <property name="has_frame">True</property>
 		  <property name="invisible_char" translatable="yes">*</property>
 		  <property name="activates_default">False</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">NTP server</atkproperty>
+		  </accessibility>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -935,6 +950,9 @@ Use this tool for setting your current date, time and time zone</property>
 		  <property name="use_stock">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <property name="focus_on_click">True</property>
+		  <accessibility>
+		    <atkproperty name="AtkObject::accessible_name" translatable="yes">Add NTP Server</atkproperty>
+		  </accessibility>
 		  <signal name="clicked" handler="on_ntp_addserver"/>
 		  <signal name="clicked" handler="gst_dialog_modify_cb"/>
 		</widget>
