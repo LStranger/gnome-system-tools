@@ -107,9 +107,7 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 	{
 		platform = (XstPlatform *) list->data;
 
-		/* FIXME: gtk_clist_append () doesn't take const. Is this right? */
-
-		platform_text [0] = g_strdup (xst_platform_get_name (platform));
+		platform_text [0] = xst_platform_get_name (platform);
 		gtk_clist_append (GTK_CLIST (tool->platform_list), platform_text);
 	}
 
