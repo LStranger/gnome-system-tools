@@ -112,11 +112,11 @@ dnl ==================================
 dnl XST_LIBS
 dnl ==================================
 
-XST_LIBS="`gnome-config --libs gal print gdk_pixbuff gnomecanvaspixbuff libglade xml`"
-XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuff gnomecanvaspixbuff libglade xml`"
+XST_LIBS="`gnome-config --libs gal print gdk_pixbuff gnomecanvaspixbuf libglade xml`"
+XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuff gnomecanvaspixbuf libglade xml`"
 
 AC_SUBST(XST_LIBS)
-AC_SUBST(XST_FLAGS)
+AC_SUBST(XST_CFLAGS)
 
 dnl ==================================
 dnl END: XST_LIBS
