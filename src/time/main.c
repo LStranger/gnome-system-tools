@@ -242,6 +242,10 @@ connect_signals ()
 			    GTK_SIGNAL_FUNC (transfer_gui_to_xml),
 			    NULL);
 
+	gtk_signal_connect_object (GTK_OBJECT (tool->main_dialog), "apply",
+				   GTK_SIGNAL_FUNC (xst_tool_save),
+				   GTK_OBJECT (tool));
+
 	glade_xml_signal_connect_data (xml, "timezone_button_clicked", timezone_button_clicked, tool->main_dialog);
 	glade_xml_signal_connect_data (xml, "server_button_clicked",   server_button_clicked,   tool->main_dialog);
 	glade_xml_signal_connect_data (xml, "xst_dialog_modify_cb",    xst_dialog_modify_cb,    tool->main_dialog);
