@@ -675,10 +675,11 @@ callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
 
 		switch (res) {
 		case GTK_RESPONSE_OK:
-			gtk_entry_set_text (GTK_ENTRY (entry), hostname_old);
-		case GTK_RESPONSE_CANCEL:
 			g_free (hostname_old);
 			return TRUE;
+		case GTK_RESPONSE_CANCEL:
+			gtk_entry_set_text (GTK_ENTRY (entry), hostname_old);
+			return FALSE;
 		default:
 			g_free (hostname_old);
 			return FALSE;
