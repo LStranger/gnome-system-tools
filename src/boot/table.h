@@ -63,8 +63,7 @@ void              boot_table_update_state (GstDialogComplexity);
 
 gchar            *boot_value_label        (xmlNodePtr node); 
 gchar            *boot_value_append       (xmlNodePtr node); 
-gboolean          boot_value_default_as_boolean (xmlNodePtr node);
-GdkPixbuf*        boot_value_default      (xmlNodePtr node);
+gboolean          boot_value_default      (xmlNodePtr node);
 GstBootImageType  boot_value_type         (xmlNodePtr node);
 gchar            *boot_value_type_char    (xmlNodePtr node, gboolean bare);
 void             *boot_value_image        (xmlNodePtr node, gboolean bare);

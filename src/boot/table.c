@@ -37,9 +37,6 @@ extern GstTool *tool;
 GtkWidget *boot_table = NULL;
 GtkTreeIter default_entry_iter;
 
-GdkPixbuf *selected_icon;
-GdkPixbuf *not_selected_icon;
-
 BootTableConfig boot_table_config [] = {
 	{ N_("Name"),		TRUE,	TRUE },
 	{ N_("Default"),        TRUE,   TRUE },
@@ -86,12 +83,8 @@ table_create (void)
 	GtkItemFactory *item_factory;
 	gint i;
 
-	/* We create the pixbufs we are going to use in the table */
-	selected_icon = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gnome-light-on.png", NULL);
-	not_selected_icon = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gnome-light-off.png", NULL);
-	
-	model = GTK_TREE_MODEL (gtk_tree_store_new (BOOT_LIST_COL_LAST, G_TYPE_STRING, GDK_TYPE_PIXBUF,
-	                                            G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
+	model = GTK_TREE_MODEL (gtk_tree_store_new (BOOT_LIST_COL_LAST, G_TYPE_STRING, G_TYPE_BOOLEAN,
+                                                    G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
 
 	boot_table = gst_dialog_get_widget (tool->main_dialog, "boot_table");
 	gtk_tree_view_set_model (GTK_TREE_VIEW (boot_table), model);
@@ -99,12 +92,23 @@ table_create (void)
 
 	for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
 		if (i == BOOT_LIST_COL_DEFAULT) {
-			renderer = gtk_cell_renderer_pixbuf_new ();
-			column = gtk_tree_view_column_new_with_attributes (_(boot_table_config [i].name), renderer, "pixbuf", i, NULL);
+			renderer = gtk_cell_renderer_toggle_new ();
+			gtk_cell_renderer_toggle_set_radio (GTK_CELL_RENDERER_TOGGLE (renderer), TRUE);
+
+			/* We add the signal that will change the default option */
+			g_signal_connect (G_OBJECT (renderer), "toggled",
+					  G_CALLBACK (on_boot_table_default_toggled), boot_table);
+			column = gtk_tree_view_column_new_with_attributes (_(boot_table_config [i].name),
+									   renderer,
+									   "active", i,
+									   NULL);
 		} else {
 			renderer = gtk_cell_renderer_text_new ();
 
-			column = gtk_tree_view_column_new_with_attributes (_(boot_table_config [i].name), renderer, "text", i, NULL);
+			column = gtk_tree_view_column_new_with_attributes (_(boot_table_config [i].name),
+									   renderer,
+									   "text", i,
+									   NULL);
 			gtk_tree_view_column_set_resizable (column, TRUE);
 			gtk_tree_view_column_set_sort_column_id (column, i);
 		}
@@ -121,9 +125,6 @@ table_create (void)
 
 	item_factory = boot_popup_item_factory_create ();
 	
-	/* We add the signal that will change the default option */
-	g_signal_connect (G_OBJECT (boot_table), "cursor-changed",
-			  G_CALLBACK (on_boot_table_clicked), NULL);
 	g_signal_connect (G_OBJECT (boot_table), "button_press_event",
 			  G_CALLBACK (on_boot_table_button_press),
 			  (gpointer) item_factory);
@@ -179,29 +180,21 @@ boot_value_label (xmlNodePtr node)
 }
 
 gboolean
-boot_value_default_as_boolean (xmlNodePtr node)
+boot_value_default (xmlNodePtr node)
 {
 	gchar *name, *def;
+	gboolean value;
 	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
 	
 	def = gst_xml_get_child_content (root, "default");
 	name = gst_xml_get_child_content (node, "label");
 
-	if ((name) && (strcmp (name, def) == 0)) {
-		return TRUE;
-	} else {
-		return FALSE;
-	}
-}
+	value = ((name) && (strcmp (name, def) == 0));
 
-GdkPixbuf*
-boot_value_default (xmlNodePtr node)
-{
-	if (boot_value_default_as_boolean (node) == TRUE) {
-		return selected_icon;
-	} else {
-		return not_selected_icon;
-	}
+	g_free (def);
+	g_free (name);
+
+	return value;
 }
 
 GstBootImageType
@@ -348,7 +341,6 @@ boot_value_password (xmlNodePtr node)
 void
 table_populate (xmlNodePtr root)
 {
-	GdkPixbuf *selected;
 	xmlNodePtr node;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (boot_table));
@@ -359,7 +351,7 @@ table_populate (xmlNodePtr root)
 		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 		gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
 				    BOOT_LIST_COL_LABEL, boot_value_label (node),
-				    BOOT_LIST_COL_DEFAULT,   boot_value_default (node),
+				    BOOT_LIST_COL_DEFAULT, boot_value_default (node),
 				    BOOT_LIST_COL_TYPE, boot_value_type_char (node, FALSE),
 				    BOOT_LIST_COL_IMAGE, boot_value_image (node, FALSE),
 				    BOOT_LIST_COL_DEV, boot_value_device (node, FALSE),
@@ -367,7 +359,7 @@ table_populate (xmlNodePtr root)
 				    -1);
 
 		/* we save the default entry, so it's easier to search */
-		if (boot_value_default_as_boolean (node))
+		if (boot_value_default (node))
 			default_entry_iter = iter;
 	}
 }
@@ -418,7 +410,7 @@ boot_value_set_label (xmlNodePtr node, const gchar *val)
 
 	n0 = gst_xml_element_find_first (node, "label");
 	if (n0)
-		is_default = boot_value_default_as_boolean (node);
+		is_default = boot_value_default (node);
 	else
 		is_default = FALSE;
 

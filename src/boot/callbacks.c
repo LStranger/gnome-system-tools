@@ -41,10 +41,6 @@ extern GstTool *tool;
 extern GtkWidget *boot_table;
 extern GtkTreeIter default_entry_iter;
 
-extern GdkPixbuf *selected_icon;
-extern GdkPixbuf *not_selected_icon;
-
-
 void
 on_boot_add_clicked (GtkButton *button, gpointer data)
 {
@@ -236,47 +232,38 @@ on_boot_append_browse_clicked (GtkButton *button, gpointer data)
 	}
 }
 
-gboolean
-on_boot_table_clicked (GtkWidget *w, gpointer data)
+void
+on_boot_table_default_toggled (GtkWidget *w, gchar *path_str, gpointer data)
 {
-	GtkTreePath *path;
-	GtkTreeViewColumn *column;
-	GtkTreeModel *model;
+	GtkTreeView *treeview = GTK_TREE_VIEW (data);
+	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
+	GtkTreeModel *model = gtk_tree_view_get_model (treeview);
 	GtkTreeIter iter;
-	GList *column_list;
-	gint ncol;
 	xmlNodePtr node;
 	gchar *label;
 
-	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (w), &path, &column);
+	gtk_tree_model_get_iter (model, &iter, path);
 
-	ncol = g_list_index (column_list, column);
+	/* we get the selected entry iter and unselect it */
+	gtk_tree_store_set (GTK_TREE_STORE (model),
+			    &default_entry_iter,
+			    BOOT_LIST_COL_DEFAULT, GINT_TO_POINTER (FALSE),
+			    -1);
 
-	if (ncol == BOOT_LIST_COL_DEFAULT) {
-		model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
-		gtk_tree_model_get_iter (model, &iter, path);		
-		
-		/* we get the selected entry iter and unselect it */
-		gtk_tree_store_set (GTK_TREE_STORE (model), &default_entry_iter, BOOT_LIST_COL_DEFAULT, not_selected_icon, -1);
-		
-		/* we set as selected the current iter */
-		gtk_tree_store_set (GTK_TREE_STORE (model), &iter, BOOT_LIST_COL_DEFAULT, selected_icon, -1);
-		g_object_set_data (G_OBJECT (w), "default", &iter);
+	/* we set as selected the current iter */
+	gtk_tree_store_set (GTK_TREE_STORE (model),
+			    &iter,
+			    BOOT_LIST_COL_DEFAULT, GINT_TO_POINTER (TRUE),
+			    -1);
 
-		/* we set the current iter as the default */
-		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
-		label = gst_xml_get_child_content (node, "label");
-		gst_xml_set_child_content (gst_xml_doc_get_root (tool->config), "default", label);
-		default_entry_iter = iter;
+	/* we set the current iter as the default */
+	gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
+	label = gst_xml_get_child_content (node, "label");
+	gst_xml_set_child_content (gst_xml_doc_get_root (tool->config), "default", label);
+	default_entry_iter = iter;
 
-		gst_dialog_modify (tool->main_dialog);
-	}
-	
-	g_list_free (column_list);
+	gst_dialog_modify (tool->main_dialog);
 	gtk_tree_path_free (path);
-	
-	return FALSE;
 }
 
 void
