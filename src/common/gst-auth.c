@@ -119,7 +119,7 @@ gst_auth_wait_child (GstTool *tool)
 }
 
 /* runs a term with su in it */
-void
+static void
 gst_auth_run_term (GstTool *tool, gchar *args[])
 {
 	struct termios t;
@@ -153,30 +153,37 @@ gst_auth_run_term (GstTool *tool, gchar *args[])
 	}
 }
 
-/* writes the password to the term with su in it */
-void
-gst_auth_write_password (GstTool *tool, gchar *pwd)
+/* it guesses whether we have to type password or not */
+static gint
+gst_auth_get_auth_required (GstTool *tool)
 {
-	gchar *answer = "yes\n";
-	gboolean cont = FALSE;
-	gchar *str;
-	
-	/* read all the su or ssh output and flush the descriptors */
+	const gchar  *answer = "yes\n";
+	gboolean      cont   = FALSE;
+	gchar        *str;
+	gint          ret;
+
 	while (!cont) {
-		str = gst_tool_read_from_backend (tool, "assword:", "/no)?", NULL);
+		str = gst_tool_read_from_backend (tool, "assword:", "/no)?", "\n", NULL);
 
 		/* FIXME: hope that someday we can get rid of this ssh output string parsing */
 		if (g_strrstr (g_ascii_strup (str, -1), "AUTHENTICITY") != NULL) {
 			/* it's the "add to known hosts list" ssh's message, just answer "yes" */
-			gst_tool_write_to_backend (tool, answer);
+			gst_tool_write_to_backend (tool, (gchar *) answer);
 		} else if (g_strrstr (g_ascii_strup (str, -1), "PASSWORD") != NULL) {
+			/* it's asking for the password */
 			cont = TRUE;
+			ret  = GST_AUTH_PASSWORD;
+		} else if (g_strrstr (str, "\n") != NULL) {
+			/* this is the last case to test, it's the CR
+			   used to synchronize communication */
+			cont = TRUE;
+			ret  = GST_AUTH_PASSWORDLESS;
 		}
 
 		g_free (str);
 	}
 
-	gst_tool_write_to_backend (tool, pwd);
+	return ret;
 }
 
 static GladeXML *
@@ -192,7 +199,7 @@ load_glade_common (const gchar *widget)
 	return xml;
 }
 
-gint
+static void
 gst_auth_get_password (gchar **password)
 {
 	GladeXML *xml;
@@ -223,9 +230,7 @@ gst_auth_get_password (gchar **password)
 	g_free (blank);
 
 	gtk_widget_destroy (password_dialog);
-	/* FIXME: I added this because if you click "OK", the dialog
-	 * never goes away.  Is it really needed?
-	 */
+
 	while (gtk_events_pending ())
 		gtk_main_iteration ();
 
@@ -234,19 +239,12 @@ gst_auth_get_password (gchar **password)
 		/* Run privileged with password */
 		if (!*password)
 			*password = g_strdup ("");
-		return GST_AUTH_RUN_AS_ROOT;
-		break;
-	case GST_AUTH_RESPONSE_NP:
-		/* Run unprivileged */
-		return GST_AUTH_RUN_AS_USER;
 		break;
 	default:
 		/* Cancel */
-		return GST_AUTH_CANCEL;
+		exit (0);
 		break;
 	}
-
-	g_assert ("Not reached");
 }
 
 /* this is done because we need to synchronize with the backend */
@@ -269,32 +267,20 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 {
 	gchar *password;
 	gint result;
-
-	gchar buffer[40];
-	gint size;
 	struct termios t;
 
 	gst_auth_run_term (tool, args);
+	result = gst_auth_get_auth_required (tool);
 
-	if ((geteuid () == 0) && (tool->remote_config == FALSE)) {
-		/* only avoid password requesting when the user is already root and works locally */
-		tool->root_access = ROOT_ACCESS_REAL;
-	} else {
-		result = gst_auth_get_password (&password);
+	if (result == GST_AUTH_PASSWORD) {
+		gst_auth_get_password (&password);
+		gst_tool_write_to_backend (tool, password);
 
-		if (result == GST_AUTH_RUN_AS_ROOT) {
-			gst_auth_write_password (tool, password);
-			/* gst_auth_read_output (tool); */
-
-			if (strlen (password) > 0)
-				memset (password, 0, strlen (password));
-			tool->root_access = ROOT_ACCESS_REAL;
-		} else if (result == GST_AUTH_RUN_AS_USER) {
-			tool->root_access = ROOT_ACCESS_NONE;
-		} else {
-			exit (0);
-		}
+		if (strlen (password) > 0)
+			memset (password, 0, strlen (password));
 	}
+
+	tool->root_access = ROOT_ACCESS_REAL;
 
 #ifdef __FreeBSD__
 	/* FreeBSD seems to have weird issues with su and echo disabling */
@@ -302,7 +288,6 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 	t.c_lflag ^= ECHO;
 	tcsetattr (tool->backend_master_fd, TCSANOW, &t);
 #endif
-
 }
 
 static void

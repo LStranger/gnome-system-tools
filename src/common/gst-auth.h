@@ -25,14 +25,10 @@
 #include "gst-types.h"
 
 enum {
-	GST_AUTH_RUN_AS_ROOT,
-	GST_AUTH_RUN_AS_USER,
-	GST_AUTH_CANCEL
-};
+	GST_AUTH_PASSWORDLESS,
+	GST_AUTH_PASSWORD
+} AuthRequired;
 
-void gst_su_run_term          (GstTool*, gchar**);
-void gst_su_write_password    (GstTool*, gchar*);
-gint gst_su_get_password      (gchar **password);
 void gst_auth_do_ssh_authentication (GstTool*, gchar*);
 void gst_auth_do_su_authentication (GstTool*);
 #endif /* GST_AUTH_H */
