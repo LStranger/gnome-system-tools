@@ -37,15 +37,40 @@ GList *group_list = NULL;
 
 login_defs logindefs;
 
+extern gboolean user_group_is_system (user_group *ug)
+{
+	guint min, max;
+	
+	if (ug->type == USER_GROUP_TYPE_USER)
+	{
+		min = logindefs.new_user_min_id;
+		max = logindefs.new_user_max_id;
+	}
+	else if (ug->type == USER_GROUP_TYPE_GROUP)
+	{
+		min = logindefs.new_group_min_id;
+		max = logindefs.new_group_max_id;
+	}
+	else
+	{
+		g_warning ("Shouldn't be here.");
+		return FALSE;
+	}
+	
+	return (ug->id <= max && ug->id >= min);
+}
+
 extern user *
 user_new (gchar *name)
 {
 	user *u;
 
 	u = g_new0 (user, 1);
-	u->key = find_new_key (USER);
-	u->uid = find_new_id (USER);
-	u->login = g_strdup (name);
+	u->ug.type = USER_GROUP_TYPE_USER;
+	u->ug.key = find_new_key (USER);
+	u->ug.id = find_new_id (USER);
+	if (name)
+		u->ug.name = g_strdup (name);
 	u->passwd_min_life = logindefs.passwd_min_day_use;
 	u->passwd_max_life = logindefs.passwd_max_day_use;
 	u->passwd_exp_warn = logindefs.passwd_warning_advance_days;
@@ -101,7 +126,7 @@ user_add (void)
 		current_u = tmp_list->data;
 		tmp_list = tmp_list->next;
 
-		if (!strcmp (current_u->login, new_user_name))
+		if (!strcmp (current_u->ug.name, new_user_name))
 		{
 			tmp = g_strdup_printf (_("User %s already exists."), new_user_name);
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented (tmp, win));
@@ -138,7 +163,7 @@ user_add (void)
 		g = tmp_list->data;
 		tmp_list = tmp_list->next;
 
-		if (!strcmp (g->name, new_group_name))
+		if (!strcmp (g->ug.name, new_group_name))
 		{
 			found = TRUE;
 			break;
@@ -162,7 +187,7 @@ user_add (void)
 		/* Cool: create group. */
 		
 		new_group = group_new ();
-		new_group->name = g_strdup (new_group_name);
+		new_group->ug.name = g_strdup (new_group_name);
 		group_list = g_list_append (group_list, new_group);
 		
 		/* Add to the GtkCList. */
@@ -179,7 +204,7 @@ user_add (void)
 	/* Everything should be ok, let's create a new user */
 
 	new_user = user_new (new_user_name);
-	new_user->gid = new_group->gid;
+	new_user->gid = new_group->ug.id;
 	
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
@@ -217,7 +242,7 @@ user_update (user *u)
 	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
 
 	/* If login name is changed and isn't empty */
-	if (strcmp (txt, u->login))
+	if (strcmp (txt, u->ug.name))
 	{
 		if (strlen (txt) < 1)
 		{
@@ -237,8 +262,8 @@ user_update (user *u)
 			return FALSE;
 		}
 
-		g_free (u->login);
-		u->login = g_strdup (txt);
+		g_free (u->ug.name);
+		u->ug.name = g_strdup (txt);
 
 		e_table_changed (USER, FALSE);
 	}
@@ -270,7 +295,7 @@ user_update (user *u)
 		g = tmp_list->data;
 		tmp_list = tmp_list->next;
 
-		if (!strcmp (g->name, new_group_name))
+		if (!strcmp (g->ug.name, new_group_name))
 		{
 			found = TRUE;
 			break;
@@ -294,9 +319,9 @@ user_update (user *u)
 		/* Cool: create new group */
 
 		new_group = group_new ();
-		new_group->name = g_strdup (new_group_name);
+		new_group->ug.name = g_strdup (new_group_name);
 		group_list = g_list_append (group_list, new_group);
-		u->gid = new_group->gid;
+		u->gid = new_group->ug.id;
 
 		/* Add to CList */
 
@@ -308,7 +333,7 @@ user_update (user *u)
 	}
 	
 	else
-		u->gid = g->gid;
+		u->gid = g->ug.id;
 
 	return TRUE;
 }
@@ -320,7 +345,7 @@ user_fill_settings_group (GtkCombo *combo)
 
 	items = NULL;
 	for (u = g_list_first (group_list); u; u = g_list_next (u))
-		items = g_list_append (items, ((group *) u->data)->name);
+		items = g_list_append (items, ((group *) u->data)->ug.name);
 
 	items = g_list_sort (items, char_sort_func);
 
@@ -331,16 +356,17 @@ user_fill_settings_group (GtkCombo *combo)
 extern group *
 group_new (void)
 {
-	group *gr;
+	group *g;
 	
-	gr = g_new0 (group, 1);
+	g = g_new0 (group, 1);
 
-	gr->users = NULL;
-	gr->password = g_strdup ("x");
-	gr->gid = find_new_id (GROUP);
-	gr->key = find_new_key (GROUP);
+	g->users = NULL;
+	g->ug.type = USER_GROUP_TYPE_GROUP;
+	g->ug.key = find_new_key (GROUP);
+	g->ug.password = g_strdup ("x");
+	g->ug.id = find_new_id (GROUP);
 
-	return gr;
+	return g;
 }
 
 extern gboolean
@@ -381,7 +407,7 @@ group_add (void)
 		current_g = selection->data;
 		selection = selection->next;
 
-		if (!strcmp (current_g->name, new_group_name))
+		if (!strcmp (current_g->ug.name, new_group_name))
 		{
 			tmp = g_strdup_printf (_("Group %s already exists."), new_group_name);
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented (tmp, win));
@@ -408,7 +434,7 @@ group_add (void)
 	/* Everything should be ok and we can add new group */
 
 	tmpgroup = group_new ();
-	tmpgroup->name = g_strdup (new_group_name);
+	tmpgroup->ug.name = g_strdup (new_group_name);
 
 	e_table_changed (GROUP, TRUE);
 	
@@ -446,7 +472,7 @@ group_update (group *g)
 	w0 = tool_widget_get ("group_settings_name");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
 
-	if (strcmp (g->name, txt))
+	if (strcmp (g->ug.name, txt))
 	{
 		if (strlen (txt) < 1)
 		{
@@ -459,8 +485,8 @@ group_update (group *g)
 		}
 		else
 		{
-			g_free (g->name);
-			g->name = g_strdup (txt);
+			g_free (g->ug.name);
+			g->ug.name = g_strdup (txt);
 
 			e_table_changed (GROUP, FALSE);
 		}
@@ -510,8 +536,8 @@ find_new_id (gchar from)
 			current_g = tmp_list->data;
 			tmp_list = tmp_list->next;
 
-			if (ret <= current_g->gid)
-				ret = current_g->gid + 1;
+			if (ret <= current_g->ug.id)
+				ret = current_g->ug.id + 1;
 		}
 		
 		if (ret > logindefs.new_group_max_id)
@@ -533,8 +559,8 @@ find_new_id (gchar from)
 			current_u = tmp_list->data;
 			tmp_list = tmp_list->next;
 
-			if (ret <= current_u->uid)
-				ret = current_u->uid + 1;
+			if (ret <= current_u->ug.id)
+				ret = current_u->ug.id + 1;
 		}
 		
 		if (ret > logindefs.new_user_max_id)
@@ -571,7 +597,7 @@ find_new_key (gchar from)
 			current_g = tmp_list->data;
 			tmp_list = tmp_list->next;
 
-			tmp = atoi (current_g->key);
+			tmp = atoi (current_g->ug.key);
 			if (ret <= tmp)
 				ret = tmp + 1;
 		}
@@ -589,7 +615,7 @@ find_new_key (gchar from)
 			current_u = tmp_list->data;
 			tmp_list = tmp_list->next;
 
-			tmp = atoi (current_u->key);
+			tmp = atoi (current_u->ug.key);
 			if (ret <= tmp)
 				ret = tmp + 1;
 		}
@@ -693,7 +719,7 @@ group_fill_all_users_list (GList *member_rows)
 			name = member->data;
 			member = member->next;
 
-			if (!strcmp (name, current_u->login))
+			if (!strcmp (name, current_u->ug.name))
 			{
 				found = TRUE;
 				break;
@@ -702,7 +728,7 @@ group_fill_all_users_list (GList *member_rows)
 
 		if (!found)
 		{
-			entry[0] = current_u-> login;
+			entry[0] = current_u->ug.name;
 			gtk_clist_append (clist, entry);
 		}
 	}

@@ -93,7 +93,7 @@ col_count (ETableModel *etm, void *data)
 static int
 row_count (ETableModel *etm, void *data)
 {
-	return g_list_length ((GList *)data);
+	return g_list_length ((GList *) data);
 }
 
 /* This function returns the value at a particular point in our ETableModel. */
@@ -102,23 +102,10 @@ value_at (ETableModel *etm, int col, int row, void *data)
 {
 	GList *tmp_list = data;
 
-	if (E_TABLE (user_table)->model == etm)
-	{
-		user *u;
+	user_group *ug;
 
-		u = g_list_nth_data (tmp_list, row);
-		return u->login;
-	}
-	
-	if (E_TABLE (group_table)->model == etm)
-	{
-		group *g;
-
-		g = g_list_nth_data (tmp_list, row);
-		return g->name;
-	}
-
-	return NULL;
+	ug = g_list_nth_data (tmp_list, row++);
+	return ug->name;
 }
 
 /* This function sets value at a particular point in our ETableModel. */
@@ -127,27 +114,11 @@ set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
 	GList *tmp_list = data;
 
-	if (E_TABLE (user_table)->model == etm)
-	{
-		user *u;
+	user_group *ug;
 
-		u = g_list_nth_data (tmp_list, row);
-		g_free (u->login);
-		u->login = g_strdup (val);
-		return;
-	}
-
-	if (E_TABLE (group_table)->model == etm)
-	{
-		group *g;
-
-		g = g_list_nth_data (tmp_list, row);
-		g_free (g->name);
-		g->name = g_strdup (val);
-		return;
-	}
-
-	return;
+	ug = g_list_nth_data (tmp_list, row++);
+	g_free (ug->name);
+	ug->name = g_strdup (val);
 }
 
 /* This function checks if cell is editable. */
@@ -200,36 +171,38 @@ static void
 select_row (ETable *et, int row)
 {
 	ETableModel *etm;
-	gchar *txt, *label;
+	GList *l;
+	gchar *txt, *label, *fmt, *frame_name;
+	user_group *ug;
 
 	etm = E_TABLE_MODEL (et->model);
 	txt = e_table_model_value_at (etm, 0, row);
 
 	if (et == E_TABLE (user_table))
 	{
-		user *u;
-
-		u = g_list_nth_data (user_list, row);
 		user_actions_set_sensitive (TRUE);
-		label = g_strconcat (_("Settings for user "), u->login, NULL);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
-		g_free (label);
-		return;
+		l = user_list;
+		frame_name = "user_settings_frame";
+		fmt = _("Settings for user ");
 	}
-
-	if (et == E_TABLE (group_table))
+	else if (et == E_TABLE (group_table))
 	{
-		group *g;
-
-		g = g_list_nth_data (group_list, row);
 		group_actions_set_sensitive (TRUE);
-		label = g_strconcat ("Settings for group ", g->name, NULL);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
-		g_free (label);
+		l = group_list;
+		frame_name = "group_settings_frame";
+		fmt = _("Settings for group ");
+	}
+	else
+	{
+		g_warning ("Shouldn't be here.");
 		return;
 	}
-
-	return;
+	
+	ug = g_list_nth_data (l, row++);
+	
+	label = g_strconcat (fmt, ug->name, NULL);
+	gtk_frame_set_label (GTK_FRAME (tool_widget_get (frame_name)), label);
+	g_free (label);
 }
 
 /* Public functions */
@@ -318,9 +291,12 @@ e_table_del (gchar del)
 		tmp_list = g_list_nth (group_list, row);
 		group_list = g_list_remove (group_list, tmp_list->data);
 	}
-
+	
 	else
+	{
+		g_warning ("Shouldn't be here.");
 		return;
+	}
 	
 	etm = E_TABLE_MODEL (table->model);
 	e_table_model_row_deleted (etm, row);

@@ -178,7 +178,7 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 			 node = xml_element_find_next (node, "user"))
 	{
 
-		u = g_new0 (user, 1);
+		u = user_new (NULL);
 
 		/* For every property in the user */
 		for (i = 0, tag = user_tags[0]; tag; i++, tag = user_tags[i])
@@ -189,10 +189,10 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 			{
 				switch (i)
 				{
-				 case  0: u->key = my_xml_element_get_content (n0); break;
-				 case  1: u->login = my_xml_element_get_content (n0); break;
-				 case  2: u->password = my_xml_element_get_content (n0); break;
-				 case  3: u->uid = my_atoi (my_xml_element_get_content (n0)); break;
+				 case  0: u->ug.key = my_xml_element_get_content (n0); break;
+				 case  1: u->ug.name = my_xml_element_get_content (n0); break;
+				 case  2: u->ug.password = my_xml_element_get_content (n0); break;
+				 case  3: u->ug.id = my_atoi (my_xml_element_get_content (n0)); break;
 				 case  4: u->gid = my_atoi (my_xml_element_get_content (n0)); break;
 				 case  5: u->comment = my_xml_element_get_content (n0); break;
 				 case  6: u->home = my_xml_element_get_content (n0); break;
@@ -253,7 +253,7 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 			 node = xml_element_find_next (node, "group"))
 	{
 
-		g = g_new0 (group, 1);
+		g = group_new ();
 		
 		for (i = 0, tag = group_tags[0]; tag; i++, tag = group_tags[i])
 		{
@@ -263,10 +263,10 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 			{
 				switch (i)
 				{
-				 case 0: g->key = my_xml_element_get_content (n0); break;
-				 case 1: g->name = g_strdup (my_xml_element_get_content (n0)); break;
-				 case 2: g->password = g_strdup (my_xml_element_get_content (n0)); break;
-				 case 3: g->gid = my_atoi (my_xml_element_get_content (n0)); break;
+				 case 0: g->ug.key = my_xml_element_get_content (n0); break;
+				 case 1: g->ug.name = g_strdup (my_xml_element_get_content (n0)); break;
+				 case 2: g->ug.password = g_strdup (my_xml_element_get_content (n0)); break;
+				 case 3: g->ug.id = my_atoi (my_xml_element_get_content (n0)); break;
 				}
 			}
 		}
@@ -317,10 +317,10 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 		{
 			switch (i)
 			{
-			 case  0: str = u->key; break;
-			 case  1: str = u->login; break;
-			 case  2: str = u->password; break;
-			 case  3: snprintf (buf, 15, "%d", u->uid); str = buf; break;
+			 case  0: str = u->ug.key; break;
+			 case  1: str = u->ug.name; break;
+			 case  2: str = u->ug.password; break;
+			 case  3: snprintf (buf, 15, "%d", u->ug.id); str = buf; break;
 			 case  4: snprintf (buf, 15, "%d", u->gid); str = buf; break;
 			 case  5: str = u->comment; break;
 			 case  6: str = u->home; break;
@@ -381,11 +381,11 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 
 		node = xml_element_add (groupdb_node, "group");
 
-		xml_element_add_with_content (node, "key", g->key);
-		xml_element_add_with_content (node, "name", g->name);
-		xml_element_add_with_content (node, "password", g->password);
+		xml_element_add_with_content (node, "key", g->ug.key);
+		xml_element_add_with_content (node, "name", g->ug.name);
+		xml_element_add_with_content (node, "password", g->ug.password);
 
-		snprintf (buf, 15, "%d", g->gid);
+		snprintf (buf, 15, "%d", g->ug.id);
 		xml_element_add_with_content (node, "gid", buf);
 
 		users_node = xml_element_add (node, "users");

@@ -46,12 +46,24 @@ typedef struct
 
 extern login_defs logindefs;
 
+typedef enum
+{
+	USER_GROUP_TYPE_USER,
+	USER_GROUP_TYPE_GROUP
+} UserGroupType;
+
 typedef struct
 {
-	gchar *key;			/* Unique, data-independent field */
-	gchar *login;			/* Login name */
-	gchar *password;		/* Password */
-	guint uid;			/* User id */
+	UserGroupType type;
+	gchar *key; /* Unique, data-independent field */
+	gchar *name; /* Login or group name */
+	gchar *password;
+	guint id; /* UID or GID */
+} user_group;
+
+typedef struct
+{
+	user_group ug;
 	guint gid;			/* Group id */
 	gchar *comment;			/* Usually account owner's name */
 	gchar *home;			/* Home directory */
@@ -71,10 +83,7 @@ typedef struct
 
 typedef struct
 {
-	gchar *key;
-	gchar *name;
-	gchar *password;
-	guint gid;
+	user_group ug;
 	GList *users;
 } group;
 
@@ -82,6 +91,7 @@ typedef struct
 extern GList *user_list;
 extern GList *group_list;
 
+extern gboolean user_group_is_system (user_group *ug);
 extern user *user_new (gchar *name);
 extern gboolean user_add (void);
 extern gboolean user_update (user *u);
