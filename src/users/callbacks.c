@@ -25,17 +25,21 @@
 #endif
 
 #include <gnome.h>
-#include <sys/stat.h>
-#include <unistd.h>
 #include "global.h"
 
 #include "callbacks.h"
 #include "transfer.h"
 
+/* All this for password generation and crypting. */
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <crack.h>
+#include <crypt.h>
+#include "md5.h"
 
-#define CRACK_DICT_PATH "/usr/lib/cracklib_dict."
+#define CRACK_DICT_PATH "/usr/lib/cracklib_dict"
 #define RANDOM_PASSWD_SIZE 6
 
 #define USER 1
@@ -46,6 +50,7 @@
 /* Local globals */
 static int reply;
 static const gchar *GROUP_MEMBER_DATA_KEY = "group_member_name";
+static gchar *pam_passwd_files[] = { "/etc/pam.d/passwd", NULL };
 
 
 /* Prototypes */
@@ -66,6 +71,8 @@ static user *make_default_user (gchar *name);
 static guint find_new_id (gchar from, gchar what);
 static gchar *find_new_key (gchar from);
 static gboolean is_valid_name (gchar *str);
+static gboolean passwd_uses_md5 (void);
+static void passwd_rand_str (gchar *str, gint len);
 
 /* Main button callbacks */
 
@@ -431,21 +438,17 @@ on_user_passwd_random_clicked (GtkButton *button, gpointer user_data)
 	GtkEntry *entry1, *entry2;
 	GtkWidget *win;
 	GnomeDialog *dialog;
-	gchar alphanum[] = "0ab1cd2ef3gh4ij5kl6mn7op8qr9st0uvwxyz0AB1CD2EF3GH4IJ5KL6MN7OP8QR9ST0UVWXYZ";
 	gchar random_passwd[RANDOM_PASSWD_SIZE + 1];
 	gchar *txt;
-	gint i, len;
 	
 	win = tool_widget_get ("user_passwd_dialog");
 	entry1 = GTK_ENTRY (tool_widget_get ("user_passwd_new"));
 	entry2 = GTK_ENTRY (tool_widget_get ("user_passwd_confirmation"));
 	
-	len = strlen (alphanum);
-	random_passwd[RANDOM_PASSWD_SIZE] = random_passwd[0] = 0;
+	*random_passwd = 0;
 	
 	while (FascistCheck (random_passwd, CRACK_DICT_PATH))
-		for (i = 0; i < RANDOM_PASSWD_SIZE; i++) 
-			random_passwd[i] = alphanum [(gint) ((((float) len) * rand () / (RAND_MAX + 1.0)))];
+		passwd_rand_str (random_passwd, RANDOM_PASSWD_SIZE);
 
 	my_gtk_entry_set_text (entry1, random_passwd);
 	my_gtk_entry_set_text (entry2, random_passwd);
@@ -504,8 +507,11 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		 * first identify the method, through magic, and then use crypt
 		 * and steal some code for MD5 crypt */
 				
-/*		g_free (current_user->password);
-		current_user->password = g_strdup (new_passwd);*/
+		g_free (current_user->password);
+		if (passwd_uses_md5 ()) 
+			current_user->password = crypt_md5 (new_passwd, "helixcod");
+		else
+			current_user->password = crypt (new_passwd, "hc");
 
 		/* I understand the need of feedback for the user, but this
 		 * dialog is being more of an obstacle, and is not actually true,
@@ -1361,3 +1367,129 @@ is_valid_name (gchar *str)
 	
 	return TRUE;
 }
+
+static gboolean
+passwd_uses_md5 (void)
+{
+	gint i;
+	gint fd = -1;
+	gint last_line = 1;
+	static gboolean been_here = FALSE;
+	static gboolean found = FALSE;
+	GScanner *scanner;
+	GScannerConfig scanner_config =
+	{
+		(
+		 " \t\r\n"
+		 )			/* cset_skip_characters */,
+		(
+		 G_CSET_a_2_z
+		 "_/.="
+		 G_CSET_A_2_Z
+		 )			/* cset_identifier_first */,
+		(
+		 G_CSET_a_2_z
+		 "_/.="
+		 G_CSET_A_2_Z
+		 "1234567890"
+		 G_CSET_LATINS
+		 G_CSET_LATINC
+		 )			/* cset_identifier_nth */,
+		( "#\n" )		/* cpair_comment_single */,
+		
+		FALSE			/* case_sensitive */,
+		
+		TRUE			/* skip_comment_multi */,
+		TRUE			/* skip_comment_single */,
+		TRUE			/* scan_comment_multi */,
+		TRUE			/* scan_identifier */,
+		FALSE			/* scan_identifier_1char */,
+		FALSE			/* scan_identifier_NULL */,
+		FALSE			/* scan_symbols */,
+		FALSE			/* scan_binary */,
+		FALSE			/* scan_octal */,
+		FALSE			/* scan_float */,
+		FALSE			/* scan_hex */,
+		FALSE			/* scan_hex_dollar */,
+		FALSE			/* scan_string_sq */,
+		FALSE			/* scan_string_dq */,
+		FALSE			/* numbers_2_int */,
+		FALSE			/* int_2_float */,
+		FALSE			/* identifier_2_string */,
+		FALSE			/* char_2_token */,
+		FALSE			/* symbol_2_token */,
+		FALSE			/* scope_0_fallback */,
+	};
+	
+	if (been_here)
+		return found;
+	
+	for (i = 0; pam_passwd_files[i]; i++)
+		if ((fd = open (pam_passwd_files[i], O_RDONLY)) != -1)
+			break;
+	
+	if (fd == -1)
+		return FALSE;
+	
+	found = FALSE;
+	scanner = g_scanner_new (&scanner_config);
+	g_scanner_input_file (scanner, fd);
+	
+	/* Scan the file, until the md5 argument for /lib/security/pam_pwdb.so
+	 * in the module-type password is found, or EOF */
+	while ((g_scanner_get_next_token (scanner) != G_TOKEN_EOF) && !found)
+	{
+		
+		/* Has a password module directive been found? */
+		if ((scanner->token == G_TOKEN_IDENTIFIER) &&
+				(scanner->position == 8) &&
+				(!strcmp (scanner->value.v_identifier, "password")))
+		{
+			last_line = scanner->line;
+			g_scanner_get_next_token (scanner);
+			g_scanner_get_next_token (scanner);
+			
+			/* Check that the following arguments are for /lib/security/pam_pwdb.so. */
+			if ((scanner->token == G_TOKEN_IDENTIFIER) &&
+					(!strcmp (scanner->value.v_identifier, "/lib/security/pam_pwdb.so")))
+				
+				/* Cool: search all identifiers on the same line */
+				while ((g_scanner_peek_next_token (scanner) != G_TOKEN_EOF) && 
+							 (scanner->next_line == last_line) &&
+							 !found)
+			    {
+						g_scanner_get_next_token (scanner);
+				
+						/* Is this the md5 argument? */
+						if ((scanner->token == G_TOKEN_IDENTIFIER) &&
+								(!strcmp (scanner->value.v_identifier, "md5")))
+						{
+							found = TRUE;
+							break;
+						}
+					}
+		}
+	}
+	
+	g_scanner_destroy (scanner);
+	close (fd);
+	
+	return found;
+}
+
+/* str must be a string of len + 1 allocated gchars */
+static void
+passwd_rand_str (gchar *str, gint len)
+{
+ 	gchar alphanum[] = "0ab1cd2ef3gh4ij5kl6mn7op8qr9st0uvwxyz0AB1CD2EF3GH4IJ5KL6MN7OP8QR9ST0UVWXYZ";
+	gint i, alnum_len;
+	
+	alnum_len = strlen (alphanum);
+	str[len] = str[0] = 0;
+	
+	for (i = 0; i < len; i++) 
+		str[i] = alphanum [(gint) ((((float) len) * rand () / (RAND_MAX + 1.0)))];
+}
+
+	
+	
