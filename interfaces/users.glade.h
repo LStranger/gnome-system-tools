@@ -61,7 +61,7 @@ gchar *s = N_("Finished");
 gchar *s = N_("Congratulations, the new user has been created.\n"
               "Please click \"Finish\" to save your changes. ");
 gchar *s = N_("New Profile");
-gchar *s = N_("Use this dialog to creat a new profile.");
+gchar *s = N_("Use this dialog to create a new profile.");
 gchar *s = N_("Name:");
 gchar *s = N_("Comment:");
 gchar *s = N_("Inherit settings from:");
