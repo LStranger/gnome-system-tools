@@ -44,7 +44,6 @@ struct _ETzMap
 
 /* --- Fake widget --- */
 
-ETzMap *e_tz_map_new ();
-
+ETzMap *e_tz_map_new (void);
 
 #endif
