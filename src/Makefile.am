@@ -1,1 +1,2 @@
-SUBDIRS = common network shares disks memory users time boot print internetsharing display location-manager
+SUBDIRS = common network shares disks users time boot print internetsharing display
+#location-manager memory

@@ -46,6 +46,7 @@ pixmaps_DATA = \
 	panel_left.png			\
 	panel_right.png		\
 	panel_mid.png			\
+	display.png			\
 	desktop_icons.png
 
 EXTRA_DIST = $(pixmaps_DATA)
