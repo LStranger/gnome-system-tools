@@ -44,6 +44,19 @@ gchar *tool_text_size_from_kb(guint size_kb)
 }
 
 
+gchar *tool_text_size_from_mb(guint size_mb)
+{
+  gchar *r;
+
+  if (size_mb >= 1000)
+    r = g_strdup_printf("%.1fG", (double) size_mb / 1000.0);
+  else
+    r = g_strdup_printf("%.1fM", (double) size_mb);
+
+  return(r);
+}
+
+
 gchar *tool_text_description_from_device(const gchar *devin)
 {
   char *r;

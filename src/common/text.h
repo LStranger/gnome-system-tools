@@ -27,4 +27,5 @@
 
 
 gchar *tool_text_size_from_kb(guint size_kb);
+gchar *tool_text_size_from_mb(guint size_mb);
 gchar *tool_text_description_from_device(const gchar *devin);
