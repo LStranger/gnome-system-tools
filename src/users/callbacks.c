@@ -35,7 +35,7 @@
 #include <stdlib.h>
 #include <crack.h>
 
-#define CRACK_DICT_PATH "/usr/lib/cracklib_dict"
+#define CRACK_DICT_PATH "/usr/lib/cracklib_dict."
 #define RANDOM_PASSWD_SIZE 6
 
 #define USER 1
@@ -492,7 +492,7 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	else if (gtk_toggle_button_get_active (quality) &&
 					 (check_err = FascistCheck (new_passwd, CRACK_DICT_PATH)))
 	{
-		msg = g_strdup_printf ("Bad password: %s.", check_err);
+		msg = g_strdup_printf ("Bad password: %s.\nPlease try with a new password.", check_err);
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (msg, GTK_WINDOW (win)));
 		g_free (msg);
 		gnome_dialog_run (dialog);
