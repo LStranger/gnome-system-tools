@@ -740,7 +740,6 @@ static void
 gst_tool_send_directive (GstTool *tool, const gchar *directive, va_list ap)
 {
 	GString *directive_line;
-	FILE *f;
 	gchar *buffer;
 
 	g_return_if_fail (tool->backend_pid >= 0);
@@ -805,9 +804,7 @@ static xmlDoc *
 gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 			       const gchar *report_sign, const gchar *directive, va_list ap)
 {
-	FILE *f;
 	xmlDoc *xml_out;
-
 	int n;
 	gchar buf;
 
@@ -1037,19 +1034,17 @@ gst_tool_load_try (GstTool *tool)
 static void
 tool_main_do (GstTool *tool, gboolean no_main_loop, gboolean show_main_dialog)
 {
-	gst_dialog_freeze_visible (tool->main_dialog);
-
 	if (show_main_dialog)
 		gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	
+	gst_dialog_freeze_visible (tool->main_dialog);
+
 	if (tool->remote_config == TRUE) {
 		/* run the ssh client */
 		gst_tool_fill_remote_hosts_list (tool, tool->remote_hosts);
 		gtk_widget_show (tool->remote_dialog);
 	} else {
 		/* run the su command */
-		gst_dialog_freeze_visible (tool->main_dialog);
-
 		gst_auth_do_su_authentication (tool);
 
 		gst_tool_process_startup (tool);
