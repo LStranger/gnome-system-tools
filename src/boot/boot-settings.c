@@ -73,6 +73,7 @@ on_type_entry_change (GtkWidget *w, gpointer data)
 	BootSettingsGui *gui;
 	const gchar *buf;
 	GstBootImageType type;
+	BootImage *image;
 
 	gui = (BootSettingsGui *) data;
 
@@ -82,7 +83,12 @@ on_type_entry_change (GtkWidget *w, gpointer data)
 	{
 		type = label_to_type (buf);
 		if (type == TYPE_LINUX)
+		{
 			gtk_combo_set_popdown_strings (gui->root, settings_dev_list (type));
+			image = gui->image;
+			if (image->root)
+				gst_ui_entry_set_text (GTK_ENTRY (gui->root->entry), image->root);
+		}
 		else if (type != TYPE_LINSWAP)
 			gtk_combo_set_popdown_strings (gui->device, settings_dev_list (type));
 	}	
@@ -222,7 +228,7 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 	{
 		gtk_combo_set_popdown_strings (gui->root, settings_dev_list (image->type));
 		if (image->root)
-		  gst_ui_entry_set_text (GTK_ENTRY (gui->root->entry), image->root);
+			gst_ui_entry_set_text (GTK_ENTRY (gui->root->entry), image->root);
 
 		if (error = boot_image_valid_initrd (image))
 			gst_ui_entry_set_text (gui->initrd_entry, "");
