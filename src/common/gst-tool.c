@@ -54,7 +54,7 @@
 #define BUFFER_SIZE 2048
 #define GST_DEBUG 1
 #define GST_TOOL_EOR "<!-- GST: end of request -->"
-#define REDRAW_NCHARS 500
+#define REDRAW_NCHARS 50
 
 /* Define this if you want the frontend to run the backend under strace */
 /*#define GST_DEBUG_STRACE_BACKEND*/
@@ -1597,6 +1597,21 @@ gst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 	try_show_usage_warning ();
 }
 
+static gboolean
+is_string_complete (gchar *str, GSList *list)
+{
+	GSList *elem;
+	
+	if (strlen (str) == 0)
+		return FALSE;
+
+	for (elem = list; elem; elem = g_slist_next (elem))
+		if (g_strrstr (str, elem->data) != NULL)
+			return TRUE;
+
+	return FALSE;
+}
+
 static gchar*
 gst_tool_read_from_backend_va (GstTool *tool, gchar *needle, va_list ap)
 {
@@ -1604,7 +1619,7 @@ gst_tool_read_from_backend_va (GstTool *tool, gchar *needle, va_list ap)
 	gboolean may_exit = FALSE;
 	gint i = 0;
 	gchar c, *ptr, *arg;
-	GSList *elem, *list = NULL;
+	GSList *list = NULL;
 
 	list = g_slist_prepend (list, needle);
 
@@ -1612,22 +1627,30 @@ gst_tool_read_from_backend_va (GstTool *tool, gchar *needle, va_list ap)
 		list = g_slist_prepend (list, arg);
 	va_end (ap);
 
-	fcntl (tool->backend_master_fd, F_SETFL, 0);
-
-	while (!may_exit) {
+	while (!is_string_complete (str->str, list)) {
 		c = fgetc (tool->backend_stream);
-		g_string_append_c (str, c);
-
 		i++;
+		
+		if (*str->str)
+			g_string_append_c (str, c);
+		else {
+			/* the string is still empty, read with O_NONBLOCK until
+			 *  it gets a char, this is done for not blocking the UI
+			 */
+			if (c != EOF) {
+				g_string_append_c (str, c);
+				fcntl (tool->backend_master_fd, F_SETFL, 0);
+			}
+			
+			usleep (500);
+		}
 
 		/* ugly hack for redrawing UI without too much overload */
-		if (i % REDRAW_NCHARS == 0)
+		if (i == REDRAW_NCHARS) {
 			while (gtk_events_pending ())
 				gtk_main_iteration ();
-
-		for (elem = list; elem; elem = g_slist_next (elem))
-			if (g_strrstr (str->str, elem->data) != NULL)
-				may_exit = TRUE;
+			i = 0;
+		}
 	}
 
 	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);

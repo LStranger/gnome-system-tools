@@ -1,6 +1,12 @@
+2004-04-14  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* gst-tool.c: improvements reading data from the backend, not it
+	  reads with O_NONBLOCK until it gets a char, so the UI doesn't
+	  freeze
+
 2004-04-08  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
-	* gst-auch.c, gst-tool.[ch]: yet another BE/FE communication 
+	* gst-auth.c, gst-tool.[ch]: yet another BE/FE communication 
 	  improvement, now all the xml reading stuff is done 
 	  synchronously to avoid problems when reading from a pty with 
 	  O_NONBLOCK
