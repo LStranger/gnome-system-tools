@@ -738,6 +738,71 @@ connection_list_update (void)
 	}
 }
 
+/* Polls the backend and updates the active interfaces */
+gboolean
+connection_poll_stat (GstTool *tool)
+{
+	gchar *dev;
+	gboolean enabled, found, valid;
+	GstConnection *cxn;
+	xmlDoc *doc;
+	xmlNodePtr root, node;
+	GtkWidget *ifaces_list;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	/* if the tool is running remotely, we don't want this function to be run */
+	if (tool->remote_config)
+		return FALSE;
+
+	doc = gst_tool_run_get_directive (tool, NULL, "list_ifaces", NULL);
+
+	/* couldn't access the backend, return safely */
+	if (!doc)
+		return TRUE;
+	
+	root = gst_xml_doc_get_root (doc);
+
+	ifaces_list = gst_dialog_get_widget (tool->main_dialog, "connection_list");
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ifaces_list));
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+		
+	while (valid) {
+		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+		node = gst_xml_element_find_first (root, "interface");
+		found = FALSE;
+
+		while (!found && node) {
+			dev = gst_xml_get_child_content (node, "dev");
+
+			if (strcmp (cxn->dev, dev) == 0) {
+				found = TRUE;
+				enabled = gst_xml_element_get_boolean (node, "active");
+			}
+
+			node = gst_xml_element_find_next (node, "interface");
+			g_free (dev);
+			}
+
+		/* the interface might be activating/deactivating during the poll
+		   in this case we shouldn't change the state */
+		if ((found) && (cxn->activation == ACTIVATION_NONE))
+			cxn->enabled = enabled;
+		else if (!found)
+			cxn->enabled = FALSE;
+		
+		cxn->activation = ACTIVATION_NONE;
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    CONNECTION_LIST_COL_STAT, cxn->enabled, -1);
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+
+	gst_xml_doc_destroy (doc);
+	
+	return TRUE;
+}
+
 GstConnection *
 connection_find_by_dev (GtkWidget *list, gchar *dev)
 {
@@ -1334,7 +1399,6 @@ connection_new_from_type (GstConnectionType type, xmlNode *root)
 	cxn->file = NULL;
 
 	cxn->activation = ACTIVATION_NONE;
-	cxn->bulb_state = FALSE;
 	
 	/* set up some defaults */
 	cxn->user = FALSE;

@@ -91,7 +91,6 @@ typedef struct {
 	
 	GstConnectionType type;
 	ActivationType    activation;
-	gboolean          bulb_state;
 
 	gboolean modified;
 	gboolean creating;
@@ -181,8 +180,10 @@ void     connection_check_netmask_gui (GtkWidget*, GtkWidget*);
 void     connection_set_modified (GstConnection*, gboolean);
 
 gchar *connection_find_new_device (xmlNodePtr, GstConnectionType);
-gchar*   connection_autodetect_modem (void);
 void connection_set_bcast_and_network (GstConnection *cxn);
+
+gboolean connection_poll_stat (GstTool*);
+gchar*   connection_autodetect_modem (void);
 
 gint connection_get_count (GstTool*);
 
