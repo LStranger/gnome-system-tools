@@ -41,6 +41,10 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <signal.h>
+
 #define XST_DEBUG 1
 
 enum {
@@ -495,12 +499,11 @@ report_window_close_cb (GtkWidget *window, gpointer data)
 }
 
 static void
-report_progress (XstTool *tool, int fd, const gchar *label)
+report_progress (XstTool *tool, const gchar *label)
 {
 #if 0
 	gint cb_id;
 #endif	
-
 	tool->timeout_done = FALSE;
 	tool->report_list_visible = FALSE;
 	tool->report_finished = FALSE;
@@ -514,8 +517,8 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 	set_arrow (tool, GTK_ARROW_DOWN);
 	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 0.0);
 #endif
-	tool->input_id = gtk_input_add_full (fd, GDK_INPUT_READ, report_progress_tick,
-					     NULL, tool, NULL);
+	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
+					     report_progress_tick, NULL, tool, NULL);
 
 	gtk_signal_connect_after (GTK_OBJECT (tool->report_window), "delete-event",
 				  GTK_SIGNAL_FUNC (report_window_close_cb), NULL);
@@ -544,29 +547,258 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 #endif
 }
 
+static void
+xst_tool_init_backend (XstTool *tool)
+{
+	int fd_read [2], fd_write [2];
+
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (XST_IS_TOOL (tool));
+	g_return_if_fail (tool->script_path != NULL);
+	g_return_if_fail (root_access != ROOT_ACCESS_NONE);
+	g_return_if_fail (tool->backend_pid < 0);
+	
+#ifdef XST_DEBUG
+	/* don't actually run if we are just pretending */
+	if (root_access == ROOT_ACCESS_SIMULATED) {
+		g_warning (_("Skipping backend init..."));
+		return;
+	}
+#endif
+
+#if 0
+	/* found this code in old xst_tool_load. Dunno what it is for location_id != NULL. */
+	if (location_id == NULL) {
+		pipe (fd);
+		t = fork ();
+	} else {
+		fd[0] = STDIN_FILENO;
+		fd[1] = -1;
+		t = 1;
+	}
+#endif	
+
+	pipe (fd_read);
+	pipe (fd_write);
+
+	tool->backend_pid = fork ();
+	if (tool->backend_pid < 0) {
+		g_warning ("Unable to fork.");
+		tool->backend_pid = -1;
+		return;
+	} else if (tool->backend_pid) {
+		/* Parent */
+
+		close (fd_read  [1]); /* Close writing end of read pipe */
+		close (fd_write [0]); /* Close reading end of write pipe */
+
+		tool->backend_read_fd  = fd_read  [0];
+		tool->backend_write_fd = fd_write [1];
+
+		fcntl (tool->backend_read_fd, F_SETFL, 0);  /* Let's block */
+	} else {
+		/* Child */
+
+		/* For the child, things are upside-down */
+		close (fd_read  [0]); /* Close reading end of read pipe */
+		close (fd_write [1]); /* Close writing end of write pipe */
+
+		dup2 (fd_read  [1], STDOUT_FILENO);
+		dup2 (fd_write [0],  STDIN_FILENO);
+
+		if (tool->current_platform)
+			execl (tool->script_path, tool->script_path,
+			       "--progress", "--report", "--platform",
+			       xst_platform_get_name (tool->current_platform), NULL);
+		else
+			execl (tool->script_path, tool->script_path, "--progress",
+			       "--report", NULL);
+/* Very useful for debugging purposes. */
+/*			execl ("/usr/bin/strace", "/usr/bin/strace", tool->script_path, "--progress",
+			"--report", NULL);*/
+		
+		g_error ("Unable to run backend: %s", tool->script_path);
+	}
+}
+
+static void
+xst_tool_kill_backend (XstTool *tool, gpointer data)
+{
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (XST_IS_TOOL (tool));
+	
+	/* The backend was never called. No problem! */
+	/* For further reference check http://www.xs4all.nl/~pjbrink/apekool/050/045-en.html */
+	if (tool->backend_pid < 0)
+		return;
+
+	xst_tool_run_set_directive (tool, NULL, "end", NULL);
+	waitpid (tool->backend_pid, NULL, 0);
+}
+
+static gboolean
+xst_tool_end_of_request (gchar *str)
+{
+	const gchar *eor = "\n<!-- XST: end of request -->\n";
+	gint len, eorlen, i;
+
+	len = strlen (str);
+	eorlen = strlen (eor);
+	if (len < eorlen)
+		return FALSE;
+
+	for (i = 0; i < eorlen; i++)
+		if (eor[eorlen - i - 1] != str[len - i -1])
+			return FALSE;
+
+	str[len - eorlen + 1] = 0;
+
+	return TRUE;
+}
+
+static void
+xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
+{
+	GString *directive_line;
+	gchar *arg;
+	FILE *f;
+
+	directive_line = g_string_new (directive);
+	while ((arg = va_arg (ap, char *)) != NULL) {
+		g_string_append (directive_line, "::");
+		g_string_append (directive_line, arg);
+	}
+	va_end (ap);
+	g_string_append_c (directive_line, '\n');
+	
+	if (tool->backend_pid < 0)
+		xst_tool_init_backend (tool);
+
+	f = fdopen (dup (tool->backend_write_fd), "w");
+	fprintf (f, directive_line->str);
+	fclose (f);
+
+	g_string_free (directive_line, TRUE);
+}
+
+xmlDoc *
+xst_tool_run_get_directive (XstTool *tool, const gchar *directive, ...)
+{
+	va_list ap;
+	xmlDoc *xml;
+	char buffer [2048];
+	int t;
+	
+	g_return_val_if_fail (tool != NULL, NULL);
+	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
+
+	va_start (ap, directive);
+	xst_tool_send_directive (tool, directive, ap);
+
+	/* FIXME: Instead of doing the following, we should pass around a value describing
+	 * tool I/O mode (as opposed to a string to report_progress ()). */
+	tool->report_hook_type = XST_REPORT_HOOK_LOAD;
+
+	xmlSubstituteEntitiesDefault (TRUE);
+
+	/* LibXML support for parsing from memory is good, but parsing from
+	 * opened filehandles is not supported unless you write your own feed
+	 * mechanism. Let's just load it all into memory, then. Also, refusing
+	 * enormous documents can be considered a plus. </dystopic> */
+	
+	if (tool->xml_document == NULL)
+		tool->xml_document = g_string_new ("");
+	
+	if (location_id == NULL)
+		report_progress (tool, _("Scanning your system configuration."));
+
+	while (! xst_tool_end_of_request (tool->xml_document->str)) {
+		t = read (tool->backend_read_fd, buffer, sizeof (buffer) - 1);
+		if (t == 0)
+			break;
+		buffer [t] = 0;
+		g_string_append (tool->xml_document, buffer);
+		
+		while (gtk_events_pending ())
+			gtk_main_iteration ();
+	}
+	
+	if (tool->xml_document->str[0] == '<') {
+		xml = xmlParseDoc (tool->xml_document->str);
+	} else {
+		xml = NULL;
+	}
+
+	g_string_free (tool->xml_document, TRUE);
+	tool->xml_document = NULL;
+	
+	return xml;
+}
+
+void
+xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml, const gchar *directive, ...)
+{
+	va_list ap;
+	FILE *f;
+	
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (XST_IS_TOOL (tool));
+
+	va_start (ap, directive);
+	xst_tool_send_directive (tool, directive, ap);
+
+	if (xml) {
+		f = fdopen (dup (tool->backend_write_fd), "w");
+		xmlDocDump (f, xml);
+		fclose (f);
+	}
+
+	/* FIXME: Instead of doing the following, we should pass around a value describing
+	 * tool I/O mode (as opposed to a string to report_progress ()). */
+	tool->report_hook_type = XST_REPORT_HOOK_SAVE;
+
+	if (location_id == NULL)
+		report_progress (tool, _("Updating your system configuration."));
+}
+
+
+gboolean
+xst_tool_load (XstTool *tool)
+{
+	g_return_val_if_fail (tool != NULL, FALSE);
+	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);	
+	g_return_val_if_fail (tool->script_path, FALSE);
+  
+	if (tool->config) {
+		xmlFreeDoc (tool->config);
+		tool->config = NULL;
+	}
+
+	if (tool->run_again)
+		return TRUE;
+
+	tool->config = xst_tool_run_get_directive (tool, "get", NULL);
+	
+	if (tool->config)
+		gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_GUI]);
+
+	return tool->config != NULL;
+}
+
 gboolean
 xst_tool_save (XstTool *tool)
 {
-	FILE *f;
-	int fd_xml [2], fd_report [2];
-	int t;
 	Archive *archive;
 	Location *location;
 	gchar *backend_id;
 
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);
-	g_return_val_if_fail (tool->script_path, FALSE);
-
 	g_return_val_if_fail (root_access != ROOT_ACCESS_NONE, FALSE);
 
 	xst_dialog_freeze_visible (tool->main_dialog);
 
 	gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_XML]);
-
-	/* FIXME: Instead of doing the following, we should pass around a value describing
-	 * tool I/O mode (as opposed to a string to report_progress ()). */
-	tool->report_hook_type = XST_REPORT_HOOK_SAVE;
 
 #ifdef XST_DEBUG
 	/* don't actually save if we are just pretending */
@@ -600,45 +832,7 @@ xst_tool_save (XstTool *tool)
 		return TRUE;
 	}
 
-	pipe (fd_xml);
-	pipe (fd_report);
-
-	t = fork ();
-	if (t < 0) {
-		g_error ("Unable to fork.");
-	} else if (t) {
-		/* Parent */
-
-		close (fd_xml [0]);	/* Close reading end of XML pipe */
-		close (fd_report [1]);  /* Close writing end of report pipe */
-
-		f = fdopen (fd_xml [1], "w");
-
-		xmlDocDump (f, tool->config);
-		
-		fclose (f);
-		
-		report_progress (tool, fd_report [0], _("Updating your system configuration."));
-		close (fd_report [0]);
-
-	} else {
-		/* Child */
-
-		close (fd_xml [1]);	/* Close writing end of XML pipe */
-		close (fd_report [0]);  /* Close reading end of report pipe */
-		dup2 (fd_xml [0], STDIN_FILENO);
-		dup2 (fd_report [1], STDOUT_FILENO);
-
-		if (tool->current_platform)
-			execl (tool->script_path, tool->script_path,
-			       "--set", "--progress", "--report", "--platform",
-			       xst_platform_get_name (tool->current_platform), NULL);
-		else
-			execl (tool->script_path, tool->script_path, "--set", "--progress",
-			       "--report", NULL);
-
-		g_error ("Unable to run backend: %s", tool->script_path);
-	}
+	xst_tool_run_set_directive (tool, tool->config, "set", NULL);
 
 	xst_dialog_thaw_visible (tool->main_dialog);
 	return TRUE;  /* FIXME: Determine if it really worked. */
@@ -648,95 +842,6 @@ void
 xst_tool_save_cb (GtkWidget *w, XstTool *tool)
 {
 	xst_tool_save (tool);
-}
-
-gboolean
-xst_tool_load (XstTool *tool)
-{
-	int fd [2];
-	int t;
-
-	g_return_val_if_fail (tool != NULL, FALSE);
-	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);	
-	g_return_val_if_fail (tool->script_path, FALSE);
-  
-	/* FIXME: Instead of doing the following, we should pass around a value describing
-	 * tool I/O mode (as opposed to a string to report_progress ()). */
-	tool->report_hook_type = XST_REPORT_HOOK_LOAD;
-
-	xmlSubstituteEntitiesDefault (TRUE);
-
-	if (tool->config) {
-		xmlFreeDoc (tool->config);
-		tool->config = NULL;
-	}
-
-	if (location_id == NULL) {
-		pipe (fd);
-		t = fork ();
-	} else {
-		fd[0] = STDIN_FILENO;
-		fd[1] = -1;
-		t = 1;
-	}
-
-	if (t < 0) {
-		g_error ("Unable to fork.");
-	} else if (t) {
-		char buffer [2048];
-		
-		/* Parent */
-
-		close (fd [1]);	/* Close writing end */
-
-		/* LibXML support for parsing from memory is good, but parsing from
-		 * opened filehandles is not supported unless you write your own feed
-		 * mechanism. Let's just load it all into memory, then. Also, refusing
-		 * enormous documents can be considered a plus. </dystopic> */
-
-		if (location_id == NULL)
-			report_progress (tool, fd [0], _("Scanning your system configuration."));
-
-		if (tool->run_again)
-			return TRUE;
-
-		if (tool->xml_document == NULL)
-			tool->xml_document = g_string_new ("");
-		
-		fcntl(fd [0], F_SETFL, 0);  /* Let's block */
-
-		while ((t = read (fd [0], buffer, sizeof (buffer)-1)) != 0){
-			buffer [t] = 0;
-			g_string_append (tool->xml_document, buffer);
-		}
-		
-		tool->config = xmlParseDoc (tool->xml_document->str);
-		g_string_free (tool->xml_document, TRUE);
-		tool->xml_document = NULL;
-		close (fd [0]);
-	} else {
-		/* Child */
-
-		close (fd [0]);	/* Close reading end */
-		dup2 (fd [1], STDOUT_FILENO);
-
-		if (tool->current_platform)
-			execl (tool->script_path, tool->script_path,
-			       "--get", "--progress", "--report", "--platform",
-			       xst_platform_get_name (tool->current_platform),
-			       NULL);
-		else
-			execl (tool->script_path, tool->script_path, "--get", "--progress",
-			       "--report", NULL);
-
-		g_error ("Unable to run backend %s: %s", tool->script_path,
-			 g_strerror (errno));
-	}
-	
-	if (tool->config)
-		gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_GUI]);
-
-	return tool->config != NULL;
 }
 
 void
@@ -939,6 +1044,9 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 
 	tool->report_hook_list = NULL;
 	xst_tool_add_report_hooks (tool, common_report_hooks);
+
+	tool->backend_pid = tool->backend_read_fd = tool->backend_write_fd = -1;
+	xst_tool_set_close_func (tool, xst_tool_kill_backend, NULL);
 }
 
 XstTool *

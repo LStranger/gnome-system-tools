@@ -1,3 +1,25 @@
+2001-06-29  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (report_progress): No longer requires the fd: it
+	comes with the tool now.
+	(xst_tool_init_backend): Forks and launches the backend, setting
+	up file descriptors and stuff. Note that it's quite useful to
+	launch the backend with strace when debugging (at the execl).
+	(xst_tool_kill_backend): Send the backend the "end" directive,
+	then wait for it to dye. Would a timeout with some killing action
+	be useful here?
+	(xst_tool_end_of_request): Check if the string ends with the magic
+	"end of request" string. If so, truncate magic str and return TRUE.
+	(xst_tool_send_directive): Create a directive line using the
+	directive and the va_list as arguments and send it to the backend.
+	(xst_tool_run_get_directive): Run a "get" type directive, returning
+	resulting parsed XML.
+	(xst_tool_run_set_directive): Run a "set" type directive, which may require
+	an xmlDoc to be passed. xml may be NULL to specify no xml.
+	(xst_tool_load): This function shrank a lot by using the new functions.
+	(xst_tool_save): Same. Just a particular case, with some other GUI and
+	archiver instructions.
+
 2001-06-25  Tambet Ingo  <tambet@ximian.com>
 
 	* xst-dialog.c (xst_dialog_construct): Hide complexity button

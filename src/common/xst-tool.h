@@ -47,6 +47,11 @@ struct _XstTool {
 	char *script_path;
 	char *etspecs_common_path;
 
+	/* backend process */
+	int backend_pid;
+	int backend_read_fd;
+	int backend_write_fd;
+
 	/* configuration */
 	xmlDoc  *config;
 
@@ -115,6 +120,13 @@ gboolean     xst_tool_save                (XstTool *tool);
 void         xst_tool_save_cb             (GtkWidget *w, XstTool *tool);
 gboolean     xst_tool_load                (XstTool *tool);
 void         xst_tool_load_try            (XstTool *tool);
+
+/* All undefined arguments in these directive functions must be (const gchar *) type.
+   They will become arguments in the directive line passed to the backend. Last arg must be NULL. */
+xmlDoc      *xst_tool_run_get_directive   (XstTool *tool, const gchar *directive, ...);
+/* xml can be NULL, in which case no XML will be sent to the backend. */
+void         xst_tool_run_set_directive   (XstTool *tool, xmlDoc *xml, const gchar *directive, ...);
+
 void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 void         xst_tool_set_close_func      (XstTool *tool, XstCloseFunc close_cb, gpointer data);
 
