@@ -1198,7 +1198,6 @@ connection_str_to_addr (gchar *str)
 static gchar *
 connection_addr_to_str (gchar *addr)
 {
-	gint i;
 	gchar *str;
 
 	str = g_strdup_printf ("%d.%d.%d.%d",
