@@ -210,6 +210,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:14:16 GMT</last_modification_time>
 		    </signal>
 		    <label>New User</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -224,6 +225,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:47:54 GMT</last_modification_time>
 		    </signal>
 		    <label>Delete</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 
@@ -360,6 +362,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:45:05 GMT</last_modification_time>
 		    </signal>
 		    <label>Change Password</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -374,6 +377,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:15:10 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -518,6 +522,7 @@
 		    <last_modification_time>Wed, 25 Oct 2000 20:45:21 GMT</last_modification_time>
 		  </signal>
 		  <label>New Group</label>
+		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 
 		<widget>
@@ -532,6 +537,7 @@
 		    <last_modification_time>Wed, 25 Oct 2000 20:47:17 GMT</last_modification_time>
 		  </signal>
 		  <label>Delete</label>
+		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 	      </widget>
 
@@ -666,6 +672,7 @@
 		      <last_modification_time>Tue, 24 Oct 2000 15:59:22 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -729,6 +736,7 @@
 	    <last_modification_time>Fri, 24 Nov 2000 07:33:40 GMT</last_modification_time>
 	  </signal>
 	  <label> Advanced &gt;&gt; </label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -763,6 +771,7 @@
 	      <last_modification_time>Mon, 23 Oct 2000 20:36:59 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 
 	  <widget>
@@ -776,6 +785,7 @@
 	      <last_modification_time>Tue, 07 Nov 2000 05:56:50 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
+	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 	</widget>
       </widget>
@@ -791,6 +801,12 @@
     <name>delete_event</name>
     <handler>on_user_settings_dialog_delete_event</handler>
     <last_modification_time>Tue, 07 Nov 2000 05:57:47 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>show</name>
+    <handler>on_user_settings_dialog_show</handler>
+    <after>True</after>
+    <last_modification_time>Tue, 19 Dec 2000 17:44:34 GMT</last_modification_time>
   </signal>
   <title>User Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
@@ -880,7 +896,7 @@
 
 	<widget>
 	  <class>GtkFrame</class>
-	  <name>frame8</name>
+	  <name>user_settings_basic</name>
 	  <label>Basic settings</label>
 	  <label_xalign>0</label_xalign>
 	  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
@@ -1328,13 +1344,10 @@
     </widget>
 
     <widget>
-      <class>GtkTable</class>
-      <name>table3</name>
-      <rows>3</rows>
-      <columns>2</columns>
+      <class>GtkVBox</class>
+      <name>vbox12</name>
       <homogeneous>False</homogeneous>
-      <row_spacing>8</row_spacing>
-      <column_spacing>8</column_spacing>
+      <spacing>8</spacing>
       <child>
 	<padding>0</padding>
 	<expand>True</expand>
@@ -1343,173 +1356,239 @@
       </child>
 
       <widget>
-	<class>GtkEntry</class>
-	<name>user_passwd_new</name>
-	<can_focus>True</can_focus>
-	<editable>True</editable>
-	<text_visible>False</text_visible>
-	<text_max_length>0</text_max_length>
-	<text></text>
-	<child>
-	  <left_attach>1</left_attach>
-	  <right_attach>2</right_attach>
-	  <top_attach>0</top_attach>
-	  <bottom_attach>1</bottom_attach>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <xexpand>True</xexpand>
-	  <yexpand>False</yexpand>
-	  <xshrink>False</xshrink>
-	  <yshrink>False</yshrink>
-	  <xfill>True</xfill>
-	  <yfill>False</yfill>
-	</child>
-      </widget>
-
-      <widget>
-	<class>GtkLabel</class>
-	<name>label16</name>
-	<label>New password:</label>
-	<justify>GTK_JUSTIFY_RIGHT</justify>
-	<wrap>False</wrap>
-	<xalign>1</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<child>
-	  <left_attach>0</left_attach>
-	  <right_attach>1</right_attach>
-	  <top_attach>0</top_attach>
-	  <bottom_attach>1</bottom_attach>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <xexpand>False</xexpand>
-	  <yexpand>False</yexpand>
-	  <xshrink>False</xshrink>
-	  <yshrink>False</yshrink>
-	  <xfill>True</xfill>
-	  <yfill>False</yfill>
-	</child>
-      </widget>
-
-      <widget>
-	<class>GtkLabel</class>
-	<name>label17</name>
-	<label>Confirmation:</label>
-	<justify>GTK_JUSTIFY_RIGHT</justify>
-	<wrap>False</wrap>
-	<xalign>1</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<child>
-	  <left_attach>0</left_attach>
-	  <right_attach>1</right_attach>
-	  <top_attach>1</top_attach>
-	  <bottom_attach>2</bottom_attach>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <xexpand>False</xexpand>
-	  <yexpand>False</yexpand>
-	  <xshrink>False</xshrink>
-	  <yshrink>False</yshrink>
-	  <xfill>True</xfill>
-	  <yfill>False</yfill>
-	</child>
-      </widget>
-
-      <widget>
-	<class>GtkEntry</class>
-	<name>user_passwd_confirmation</name>
-	<can_focus>True</can_focus>
-	<editable>True</editable>
-	<text_visible>False</text_visible>
-	<text_max_length>0</text_max_length>
-	<text></text>
-	<child>
-	  <left_attach>1</left_attach>
-	  <right_attach>2</right_attach>
-	  <top_attach>1</top_attach>
-	  <bottom_attach>2</bottom_attach>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <xexpand>True</xexpand>
-	  <yexpand>False</yexpand>
-	  <xshrink>False</xshrink>
-	  <yshrink>False</yshrink>
-	  <xfill>True</xfill>
-	  <yfill>False</yfill>
-	</child>
-      </widget>
-
-      <widget>
 	<class>GtkHBox</class>
-	<name>hbox10</name>
+	<name>hbox13</name>
 	<homogeneous>False</homogeneous>
 	<spacing>0</spacing>
 	<child>
-	  <left_attach>0</left_attach>
-	  <right_attach>2</right_attach>
-	  <top_attach>2</top_attach>
-	  <bottom_attach>3</bottom_attach>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <xexpand>False</xexpand>
-	  <yexpand>True</yexpand>
-	  <xshrink>False</xshrink>
-	  <yshrink>False</yshrink>
-	  <xfill>True</xfill>
-	  <yfill>True</yfill>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
 	</child>
 
 	<widget>
 	  <class>GtkAlignment</class>
 	  <name>alignment14</name>
+	  <border_width>8</border_width>
 	  <xalign>0.5</xalign>
 	  <yalign>0.5</yalign>
-	  <xscale>0</xscale>
+	  <xscale>1</xscale>
 	  <yscale>1</yscale>
 	  <child>
 	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
+	    <expand>False</expand>
+	    <fill>False</fill>
 	  </child>
 
 	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>user_passwd_quality</name>
-	    <can_focus>True</can_focus>
-	    <label>Check quality</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
+	    <class>GnomePixmap</class>
+	    <name>pixmap5</name>
+	    <filename>users.png</filename>
 	  </widget>
 	</widget>
 
 	<widget>
-	  <class>GtkAlignment</class>
-	  <name>alignment13</name>
+	  <class>GtkLabel</class>
+	  <name>label30</name>
+	  <label>Enter a new password manually, or have one randomly assigned.</label>
+	  <justify>GTK_JUSTIFY_LEFT</justify>
+	  <wrap>True</wrap>
 	  <xalign>0.5</xalign>
 	  <yalign>0.5</yalign>
-	  <xscale>0</xscale>
-	  <yscale>1</yscale>
+	  <xpad>8</xpad>
+	  <ypad>0</ypad>
 	  <child>
 	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
+	    <expand>False</expand>
+	    <fill>False</fill>
 	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame9</name>
+	<label>Change Password</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkTable</class>
+	  <name>table3</name>
+	  <border_width>8</border_width>
+	  <rows>3</rows>
+	  <columns>2</columns>
+	  <homogeneous>False</homogeneous>
+	  <row_spacing>8</row_spacing>
+	  <column_spacing>8</column_spacing>
 
 	  <widget>
-	    <class>GtkButton</class>
-	    <name>user_passwd_random</name>
+	    <class>GtkEntry</class>
+	    <name>user_passwd_new</name>
 	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_user_passwd_random_clicked</handler>
-	      <last_modification_time>Tue, 07 Nov 2000 06:15:53 GMT</last_modification_time>
-	    </signal>
-	    <label>  Random Password  </label>
+	    <editable>True</editable>
+	    <text_visible>False</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label16</name>
+	    <label>New:</label>
+	    <justify>GTK_JUSTIFY_RIGHT</justify>
+	    <wrap>False</wrap>
+	    <xalign>1</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label17</name>
+	    <label>Confirm:</label>
+	    <justify>GTK_JUSTIFY_RIGHT</justify>
+	    <wrap>False</wrap>
+	    <xalign>1</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>user_passwd_confirmation</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>False</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkHBox</class>
+	    <name>hbox10</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>True</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkAlignment</class>
+	      <name>alignment13</name>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xscale>0</xscale>
+	      <yscale>1</yscale>
+	      <child>
+		<padding>0</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkButton</class>
+		<name>user_passwd_random</name>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_user_passwd_random_clicked</handler>
+		  <last_modification_time>Tue, 07 Nov 2000 06:15:53 GMT</last_modification_time>
+		</signal>
+		<label>  Random Password  </label>
+		<relief>GTK_RELIEF_NORMAL</relief>
+	      </widget>
+	    </widget>
 	  </widget>
 	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>user_passwd_quality</name>
+	<can_focus>True</can_focus>
+	<label>Check password quality</label>
+	<active>False</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
       </widget>
     </widget>
   </widget>
@@ -1523,6 +1602,12 @@
     <name>delete_event</name>
     <handler>on_group_settings_dialog_delete_event</handler>
     <last_modification_time>Tue, 07 Nov 2000 05:58:42 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>show</name>
+    <handler>on_group_settings_dialog_show</handler>
+    <after>True</after>
+    <last_modification_time>Tue, 19 Dec 2000 17:26:40 GMT</last_modification_time>
   </signal>
   <title>Group Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
@@ -1615,7 +1700,7 @@
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>label20</name>
+	  <name>group_settings_name_label</name>
 	  <label>Group name:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
@@ -1760,6 +1845,7 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
 		</signal>
 		<label>Add -&gt;</label>
+		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1778,6 +1864,7 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
 		</signal>
 		<label>Remove &lt;-</label>
+		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>

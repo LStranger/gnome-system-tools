@@ -24,6 +24,7 @@ gchar *s = N_("Add");
 gchar *s = N_("Delete");
 gchar *s = N_("Use WINS server:");
 gchar *s = N_("Servers");
+gchar *s = N_("Domain Lookup Order");
 gchar *s = N_("Add");
 gchar *s = N_("Delete");
 gchar *s = N_(" Move Up");
