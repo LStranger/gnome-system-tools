@@ -2,15 +2,16 @@
 # Copyright (C) 2001 Free Software Foundation, Inc.
 # Carlos Perelló Marín <carlos@hispalinux.es>, 2000,2001
 # Arturo Espinosa <arturo@ximian.com>, 2001
-# Héctor García Álvarez <hector@scouts-es.org>, 2001
-#
+# Héctor García Álvarez <hector@scouts-es.org>, 2001,2002
+# Héctor García Álvarez <hector@scouts-es.org>, 2002.
+# 
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.5\n"
-"POT-Creation-Date: 2002-02-10 22:47-0600\n"
-"PO-Revision-Date: 2001-06-21 01:14+0200\n"
-"Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
-"Language-Team: Spanish\n"
+"POT-Creation-Date: 2002-03-04 19:40+0100\n"
+"PO-Revision-Date: 2002-03-19 18:36+0100\n"
+"Last-Translator: hector <hector@scouts-es.org>\n"
+"Language-Team:  <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,9 +26,9 @@ msgstr ""
 #: interfaces/internetsharing.glade.h:62 interfaces/memory.glade.h:31
 #: interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:14
 #: interfaces/network.glade.h:138 interfaces/print.glade.h:68
-#: interfaces/users.glade.h:17
+#: interfaces/time.glade.h:22 interfaces/users.glade.h:17
 msgid "window1"
-msgstr ""
+msgstr "Ventana1"
 
 #: interfaces/boot.glade.h:8 interfaces/boot.glade.in.h:25
 msgid ""
@@ -63,7 +64,6 @@ msgid "_Settings..."
 msgstr "_Opciones..."
 
 #: interfaces/boot.glade.h:13
-#, fuzzy
 msgid "D_efault"
 msgstr "Pr_edeterminado"
 
@@ -87,7 +87,7 @@ msgstr "_segundos antes de cargar el núcleo o SO predeterminado"
 #: interfaces/boot.glade.h:17 interfaces/display.glade.h:7
 #: interfaces/display.glade.h:35 interfaces/users.glade.h:30
 msgid "window2"
-msgstr ""
+msgstr "ventana2"
 
 #: interfaces/boot.glade.h:18 interfaces/boot.glade.in.h:13
 msgid "Modify the settings for an operating system or kernel."
@@ -135,12 +135,10 @@ msgid "_Device:"
 msgstr "_Dispositivo:"
 
 #: interfaces/boot.glade.h:28 interfaces/boot.glade.h:29
-#, fuzzy
 msgid "Boot Image Druid"
 msgstr "Asistente para las imágenes de arranque"
 
 #: interfaces/boot.glade.h:30
-#, fuzzy
 msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new boot images to your system.\n"
@@ -158,11 +156,11 @@ msgstr "Identidad de la imagen (paso 1 de 2)"
 
 #: interfaces/boot.glade.h:35 interfaces/boot.glade.in.h:8
 msgid ""
-"Enter a name for the boot image, and specify what kind of operating system "
-"it is."
+"Enter a name for the boot image, and specify what kind of operating system it "
+"is."
 msgstr ""
-"Escriba un nombre para la imagen, y especifique que tipo de sistema "
-"operativo es."
+"Escriba un nombre para la imagen, y especifique que tipo de sistema operativo "
+"es."
 
 #: interfaces/boot.glade.h:36 interfaces/boot.glade.h:39
 #: interfaces/boot.glade.h:44 interfaces/boot.glade.in.h:7
@@ -176,7 +174,6 @@ msgid "Other  (step 2 of 2)"
 msgstr "Otro (paso 2 de 2)"
 
 #: interfaces/boot.glade.h:38
-#, fuzzy
 msgid "Specify the partition the the operating system is installed on."
 msgstr ""
 "Especificar la partición en la que está instalado el sistema operativo."
@@ -253,7 +250,7 @@ msgid "Ximian Setup Tools"
 msgstr "Ximian Setup Tools"
 
 #: interfaces/common.glade.h:8 interfaces/common.glade.in.h:4
-#: src/common/xst-tool.c:1012
+#: src/common/xst-tool.c:1013
 msgid "Scanning your system configuration."
 msgstr "Buscando la configuración de su sistema."
 
@@ -278,18 +275,20 @@ msgstr ""
 "herramienta. Si sabe con seguridad que funciona como alguna de las "
 "plataformas listadas a  continuación, puede seleccionarla y continuar.\n"
 "\n"
-"Eso sí, tenga presente, que esto puede dañar la configuración de su sistema "
-"o dejar el ordenador inutilizable."
+"Eso sí, tenga presente, que esto puede dañar la configuración de su sistema o "
+"dejar el ordenador inutilizable."
 
 #: interfaces/common.glade.h:15
 msgid "label57"
-msgstr ""
+msgstr "label57"
 
 #: interfaces/common.glade.h:16 interfaces/common.glade.in.h:14
+#: src/common/xst-su.c:241
 msgid "Ximian Setup Tools - Password"
 msgstr "Ximian Setup Tools - Clave"
 
 #: interfaces/common.glade.h:17 interfaces/common.glade.in.h:3
+#: src/common/xst-su.c:246
 msgid "Run without password"
 msgstr "Ejecutar sin contraseña"
 
@@ -300,8 +299,8 @@ msgid ""
 "To acquire such privileges, enter your root password below. If you don't\n"
 "specify a password, you will be unable to modify your system configuration."
 msgstr ""
-"Para utilizar esta herramienta, necesita privilegios de administrador.\n"
-"\n"
+"Para utilizar esta herramienta, necesita privilegios de "
+"administrador.\n\n"
 "Para adquirir dichos privilegios, escriba la contraseña de root. Si no\n"
 "escribe una contraseña, no podrá modificar la configuración del sistema."
 
@@ -317,117 +316,97 @@ msgstr "Contraseña:"
 #. * DO NOT compile it as part of your application.
 #.
 #: interfaces/dhcpd.glade.h:7
-#, fuzzy
 msgid "DHCP Server"
-msgstr "Servidores DNS"
+msgstr "Servidor DHCP"
 
 #: interfaces/dhcpd.glade.h:8
-#, fuzzy
 msgid "DHCP server configuration"
-msgstr "Servicio de configuración DHCP."
+msgstr "Configuración del servidor DHCP"
 
 #: interfaces/dhcpd.glade.h:9
-#, fuzzy
 msgid "DHCP server configuration "
-msgstr "Servicio de configuración DHCP."
+msgstr "Configuración del servidor DHCP "
 
 #: interfaces/dhcpd.glade.h:10
-#, fuzzy
 msgid "E_nabled"
-msgstr "Activado"
+msgstr "A_ctivado"
 
 #: interfaces/dhcpd.glade.h:11
-#, fuzzy
 msgid "Subnet _Mask :"
-msgstr "Máscara de _sub-red:"
+msgstr "Máscara de _sub-red :"
 
 #: interfaces/dhcpd.glade.h:12
 msgid "Range _End :"
-msgstr ""
+msgstr "Fin d_e rango :"
 
 #: interfaces/dhcpd.glade.h:13
-#, fuzzy
 msgid "Range _Start :"
-msgstr "Reiniciar las X"
+msgstr "Inicio de r_ango"
 
 #: interfaces/dhcpd.glade.h:14
-#, fuzzy
 msgid "_Domain :"
-msgstr "_Dominio:"
+msgstr "_Dominio :"
 
 #: interfaces/dhcpd.glade.h:15
-#, fuzzy
 msgid "DNS_2 :"
-msgstr "DNS"
+msgstr "DNS_2 :"
 
 #: interfaces/dhcpd.glade.h:16
-#, fuzzy
 msgid "DNS_1 :"
-msgstr "DNS"
+msgstr "DNS_1 :"
 
 #: interfaces/dhcpd.glade.h:17
-#, fuzzy
 msgid "_Edit Hosts..."
-msgstr "_Editar..."
+msgstr "_Editar servidores..."
 
 #: interfaces/dhcpd.glade.h:18
-#, fuzzy
 msgid "Router :"
-msgstr "IP _remota:"
+msgstr "Router :"
 
 #: interfaces/dhcpd.glade.h:19
 msgid "Advanced mode not yet implemented. Sorry."
-msgstr ""
+msgstr "El modo avanzado no está implementado todavia. Perdone."
 
 #: interfaces/dhcpd.glade.h:20
-#, fuzzy
 msgid "Hosts Editor"
-msgstr "Editor de las imágenes de arranque"
+msgstr "Editor de servidores"
 
 #: interfaces/dhcpd.glade.h:21
-#, fuzzy
 msgid "Hosts :"
-msgstr "Máquinas"
+msgstr "Máquinas :"
 
 #: interfaces/dhcpd.glade.h:22
-#, fuzzy
 msgid "host"
-msgstr "Servidor"
+msgstr "máquina"
 
 #: interfaces/dhcpd.glade.h:23
-#, fuzzy
 msgid "Ip Address"
 msgstr "Dirección IP"
 
 #: interfaces/dhcpd.glade.h:24
-#, fuzzy
 msgid "Host Info : "
-msgstr "Nombre del servidor:"
+msgstr "Información de la máquina :"
 
 #: interfaces/dhcpd.glade.h:25
-#, fuzzy
 msgid "_Hostname :"
-msgstr "_Nombre del servidor:"
+msgstr "_Nombre del servidor :"
 
 #: interfaces/dhcpd.glade.h:26
-#, fuzzy
 msgid "_MAC address :"
-msgstr "Dirección _IP:"
+msgstr "Dirección _MAC :"
 
 #: interfaces/dhcpd.glade.h:27
-#, fuzzy
 msgid "_IP address :"
-msgstr "Dirección _IP:"
+msgstr "Dirección _IP :"
 
 #: interfaces/dhcpd.glade.h:28
-#, fuzzy
 msgid "_Comment :"
-msgstr "_Comentario:"
+msgstr "_Comentario :"
 
 #: interfaces/dhcpd.glade.h:29 interfaces/memory.glade.h:37
 #: interfaces/memory.glade.h:47 interfaces/memory.glade.in.h:22
 #: interfaces/network.glade.h:39 interfaces/network.glade.in.h:91
-#: interfaces/time.glade.h:25 interfaces/time.glade.in.h:17
+#: interfaces/time.glade.h:21 interfaces/time.glade.in.h:17
 msgid "_Add"
 msgstr "_Añadir"
 
@@ -692,7 +671,7 @@ msgstr "Apariencia"
 
 #: interfaces/display.glade.h:42 interfaces/users.glade.h:69
 msgid "window3"
-msgstr ""
+msgstr "window3"
 
 #: interfaces/display.glade.h:43 interfaces/display.glade.in.h:26
 msgid "Use this tool to configure your monitor."
@@ -705,7 +684,7 @@ msgstr "Resolución"
 
 #: interfaces/display.glade.h:45
 msgid "label49"
-msgstr ""
+msgstr "label49"
 
 #: interfaces/display.glade.h:46 interfaces/display.glade.in.h:24
 msgid "Test current setting"
@@ -717,55 +696,51 @@ msgstr "Colores"
 
 #: interfaces/display.glade.h:48
 msgid "label50"
-msgstr ""
+msgstr "label50"
 
 #: interfaces/display.glade.h:49 interfaces/display.glade.in.h:14
 msgid "Probe again"
 msgstr "Probar otra vez"
 
 #: interfaces/font.glade.h:8
-#, fuzzy
 msgid "Select the fonts you want to install."
-msgstr "Seleccione el tipo de impresora a añadir:"
+msgstr "Seleccione la fuente que quiere instalar"
 
 #: interfaces/font.glade.h:9
 msgid "Font family"
-msgstr ""
+msgstr "Familia tipográfica"
 
 #: interfaces/font.glade.h:10
 msgid "label329"
-msgstr ""
+msgstr "label329"
 
 #: interfaces/font.glade.h:11
 msgid "Style"
-msgstr ""
+msgstr "Estilo"
 
 #: interfaces/font.glade.h:12
 msgid "label332"
-msgstr ""
+msgstr "label332"
 
 #: interfaces/font.glade.h:13
 msgid "Font size:"
-msgstr ""
+msgstr "Tamaño de fuente:"
 
 #: interfaces/font.glade.h:14
-#, fuzzy
 msgid "Add font..."
-msgstr "Añadir Impresora..."
+msgstr "Añadir fuente"
 
 #: interfaces/font.glade.h:15
-#, fuzzy
 msgid "Delete font"
-msgstr "Borrar"
+msgstr "Borrar fuente"
 
 #: interfaces/font.glade.h:16
-#, fuzzy
 msgid "Preview"
-msgstr "Dispositivo"
+msgstr "Vista previa"
 
 #: interfaces/hardware.glade.h:8
 msgid "label1"
-msgstr ""
+msgstr "etiqueta1"
 
 #: interfaces/hardware.glade.h:9 interfaces/shares.glade.h:15
 #: interfaces/shares.glade.h:26 interfaces/shares.glade.in.h:5
@@ -774,9 +749,8 @@ msgid "Add..."
 msgstr "Añadir..."
 
 #: interfaces/hardware.glade.h:10
-#, fuzzy
 msgid "Remove"
-msgstr "_Eliminar"
+msgstr "Eliminar"
 
 #: interfaces/hardware.glade.h:11 interfaces/print.glade.h:71
 #: interfaces/print.glade.in.h:56 interfaces/shares.glade.h:16
@@ -795,7 +769,6 @@ msgid "Internet Sharing --Advanced Mode"
 msgstr "Compartición de Internet --Modo Avanzado"
 
 #: interfaces/internetsharing.glade.h:8
-#, fuzzy
 msgid ""
 "The internet sharing tool allows you to share your internet conection with "
 "other computers on the network."
@@ -829,7 +802,6 @@ msgid "Internet Sharing Configuration Druid"
 msgstr "Asistente de Configuració de la Compartición de Internet"
 
 #: interfaces/internetsharing.glade.h:14
-#, fuzzy
 msgid ""
 "Welcome to the Internet Sharing Configuration Druid\n"
 "\n"
@@ -840,16 +812,14 @@ msgid ""
 "network interface, such as an ethernet or waveLAN card\n"
 "and an internet connection, such as a modem."
 msgstr ""
-"Bienevenido al asistente de configuración de compartición de Internet.\n"
+"Bienvenido al asistente de configuración de compartición de Internet.\n"
 "\n"
-"Este asistente te ayudará a configurar y compartir tu conexión de Internet.\n"
+"Este asistente te ayudará a configurar \n"
+"y compartir tu conexión de Internet.\n"
 "\n"
 "Ya deberías haber instalado y configurado una conexión de red\n"
 "local, como una Ethernet o una tarjeta waveLAN,\n"
-"y una conexión a Internet, como un modem.\n"
-"\n"
-"Si no lo has hecho, tendras la opción de ejecutar la herramienta de red\n"
-"para configurarlas antes de continuar."
+"y una conexión a Internet, como un modem."
 
 #: interfaces/internetsharing.glade.h:22
 #: interfaces/internetsharing.glade.in.h:23
@@ -857,13 +827,12 @@ msgid "Create a new local network interface."
 msgstr "Crear una nueva interfaz de red local."
 
 #: interfaces/internetsharing.glade.h:23
-#, fuzzy
 msgid ""
 "A local network connection was not detected.\n"
 "Would you like to configure one?\n"
 msgstr ""
 "No se ha detectado una conexión de red local.\n"
-"¿Te gustaría configurar una?"
+"¿Te gustaría configurar una?\n"
 
 #: interfaces/internetsharing.glade.h:26
 #: interfaces/internetsharing.glade.in.h:12
@@ -881,13 +850,12 @@ msgid "Local network interface activation."
 msgstr "Activación de la intefaz de red local."
 
 #: interfaces/internetsharing.glade.h:29
-#, fuzzy
 msgid ""
 "A local network interface has been detected, but it's not active.\n"
 "Would you like to activate it now?\n"
 msgstr ""
 "Se ha detectado una interfaz de red local, pero no está activa.\n"
-"¿Querias activarla ahora?"
+"¿Querias activarla ahora?\n"
 
 #: interfaces/internetsharing.glade.h:32
 #: interfaces/internetsharing.glade.in.h:55
@@ -905,13 +873,12 @@ msgid "Internet sharing configuration."
 msgstr "Configuración de la compartición de Internet."
 
 #: interfaces/internetsharing.glade.h:35
-#, fuzzy
 msgid ""
 "You already have an internet sharing configuration.\n"
 "Do you want to keep it, or use the druid's defaults?\n"
 msgstr ""
 "Ya tienes una configuración de compartición de Internet.\n"
-"¿Quieres conservarla, o usar los valores por defecto del asistente?"
+"¿Quieres conservarla, o usar los valores por defecto del asistente?\n"
 
 #: interfaces/internetsharing.glade.h:38
 #: interfaces/internetsharing.glade.in.h:3
@@ -932,13 +899,12 @@ msgid "DHCP service configuration."
 msgstr "Servicio de configuración DHCP."
 
 #: interfaces/internetsharing.glade.h:41
-#, fuzzy
 msgid ""
 "Would you like to give the automatic network\n"
 "address assignment service (DHCP)?\n"
 msgstr ""
-"¿Querias activar el servicio de asignación automático\n"
-"de direcciones de red (DHCP)?"
+"¿Quieres activar el servicio de asignación\n"
+"automático de direcciones de red (DHCP)?\n"
 
 #: interfaces/internetsharing.glade.h:44
 #: interfaces/internetsharing.glade.in.h:10
@@ -984,13 +950,12 @@ msgid "Configure DHCP Service"
 msgstr "Configurar los servicios DHCP"
 
 #: interfaces/internetsharing.glade.h:52
-#, fuzzy
 msgid ""
 "A previous DHCP configuration has been detected. \n"
 "Do you want to keep this configuration?\n"
 msgstr ""
 "Se ha detectado una configuración previa de DHCP. \n"
-"¿Quiere mantener esta configuración?"
+"¿Quiere mantener esta configuración?\n"
 
 #: interfaces/internetsharing.glade.h:54
 #: interfaces/internetsharing.glade.in.h:11
@@ -1003,21 +968,18 @@ msgid " No, overwrite with new defaults (recommended)"
 msgstr " No, sobreescribe con nuevos valores por defecto (recomendado)"
 
 #: interfaces/internetsharing.glade.h:57
-#, fuzzy
 msgid ""
 "Congratulations! Your computer will now be\n"
 "configured to share its internet connection.\n"
 msgstr ""
-"¡Enhorabuena! Este ordenador va ha ser configurado\n"
-"para compartir su conexión a Internet."
+"¡Enhorabuena! Este ordenador está configurado\n"
+"para compartir su conexión a Internet.\n"
 
 #: interfaces/internetsharing.glade.h:60
-#, fuzzy
 msgid "Start rage"
-msgstr "Comienzo del rango"
+msgstr "Comienzo de rango"
 
 #: interfaces/internetsharing.glade.h:61
-#, fuzzy
 msgid "End range"
 msgstr "Fin del rango"
 
@@ -1114,8 +1076,8 @@ msgid ""
 "If you haven't, you will be given the option to launch the\n"
 "Network Tool to configure them before continuing."
 msgstr ""
-"Bienevenido al asistente de configuración de compartición de Internet.\n"
-"\n"
+"Bienevenido al asistente de configuración de compartición de "
+"Internet.\n\n"
 "Este asistente te ayudará a configurar y compartir tu conexión de Internet.\n"
 "\n"
 "Ya deberías haber instalado y configurado una conexión de red\n"
@@ -1187,17 +1149,17 @@ msgstr "                           "
 
 #: interfaces/location-manager.glade.h:14
 msgid "label86"
-msgstr ""
+msgstr "label86"
 
 #: interfaces/location-manager.glade.h:15
 msgid "label87"
-msgstr ""
+msgstr "label87"
 
 #: interfaces/location-manager.glade.h:16 interfaces/shares.glade.h:13
 #: interfaces/shares.glade.h:24 interfaces/shares.glade.h:32
 #: interfaces/shares.glade.h:41
 msgid "\n"
-msgstr ""
+msgstr "\n"
 
 #: interfaces/location-manager.glade.h:19
 #: interfaces/location-manager.glade.in.h:38
@@ -1344,11 +1306,11 @@ msgstr "Fecha/Hora "
 #: interfaces/location-manager.glade.in.h:28 interfaces/time.glade.h:8
 #: interfaces/time.glade.in.h:5
 msgid ""
-"Please select the current date and time. You can also specify a time zone "
-"and a time server."
+"Please select the current date and time. You can also specify a time zone and "
+"a time server."
 msgstr ""
-"Seleccione el día y hora actual. Puede también especificar una zona horaria "
-"y un servidor de hora."
+"Seleccione el día y hora actual. Puede también especificar una zona horaria y "
+"un servidor de hora."
 
 #: interfaces/location-manager.glade.h:43
 #: interfaces/location-manager.glade.in.h:18
@@ -1835,8 +1797,8 @@ msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who will activate connections, and when."
 msgstr ""
-"Emplear el comentario para identificar la interfaz en el futuro. El gestor "
-"de activaciones le permite establecer quien y cuando activará conexiones."
+"Emplear el comentario para identificar la interfaz en el futuro. El gestor de "
+"activaciones le permite establecer quien y cuando activará conexiones."
 
 #: interfaces/network.glade.h:51 interfaces/network.glade.in.h:22
 #: interfaces/print.glade.h:8 interfaces/print.glade.in.h:18
@@ -2053,8 +2015,8 @@ msgstr "1. Número de teléfono del ISP"
 
 #: interfaces/network.glade.h:111 interfaces/network.glade.in.h:38
 msgid ""
-"First, please enter the phone number you use to connect to the internet. "
-"This number is provided by your ISP. "
+"First, please enter the phone number you use to connect to the internet. This "
+"number is provided by your ISP. "
 msgstr ""
 "Para empezar, introduzca el número de teléfono que emplea para conectarse a "
 "internet. Este número se lo facilitará su ISP. "
@@ -2065,18 +2027,16 @@ msgstr "Número de teléfono:"
 
 #: interfaces/network.glade.h:113 interfaces/network.glade.h:124
 #: interfaces/network.glade.h:129
-#, fuzzy
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
-"\".\n"
+"To continue configuring your account, click \"Next\". To quit, click "
+"\"Cancel\".\n"
 msgstr ""
 "Para continuar configurando su cuenta, pulse «Siguiente». Para salir, pulse "
-"«Cancelar»."
+"«Cancelar».\n"
 
 #: interfaces/network.glade.h:115
-#, fuzzy
 msgid "Warning message goes here.\n"
-msgstr "Aviso aquí va un mensaje."
+msgstr "Aquí va un mensaje de aviso.\n"
 
 #: interfaces/network.glade.h:117 interfaces/network.glade.in.h:2
 msgid "2. Username and password"
@@ -2087,8 +2047,8 @@ msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr ""
-"A continuación, introduzca el nombre de usuario y la contraseña que le "
-"asignó su ISP."
+"A continuación, introduzca el nombre de usuario y la contraseña que le asignó "
+"su ISP."
 
 #: interfaces/network.glade.h:119 interfaces/network.glade.in.h:55
 msgid "Password (confirm):"
@@ -2099,9 +2059,8 @@ msgid "User name:"
 msgstr "Nombre del usuario:"
 
 #: interfaces/network.glade.h:122 interfaces/network.glade.h:131
-#, fuzzy
 msgid "Warning message goes here..\n"
-msgstr "Aquí va un mensaje de aviso.."
+msgstr "Aquí va un mensaje de aviso..\n"
 
 #: interfaces/network.glade.h:126 interfaces/network.glade.in.h:4
 msgid "3. Account name"
@@ -2145,8 +2104,8 @@ msgstr "Permite el control de activación para todos los usuarios"
 
 #: interfaces/network.glade.in.h:70
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
-"\"."
+"To continue configuring your account, click \"Next\". To quit, click "
+"\"Cancel\"."
 msgstr ""
 "Para continuar configurando su cuenta, pulse «Siguiente». Para salir, pulse "
 "«Cancelar»."
@@ -2274,7 +2233,7 @@ msgstr "Profundidad del color:"
 
 #: interfaces/print.glade.h:35
 msgid "label328"
-msgstr ""
+msgstr "label328"
 
 #: interfaces/print.glade.h:36 interfaces/print.glade.in.h:39
 msgid "Print resolution."
@@ -2563,8 +2522,8 @@ msgstr "modo simple-ventana principal"
 #: interfaces/shares.glade.h:8 interfaces/shares.glade.h:31
 #: interfaces/shares.glade.in.h:32
 msgid ""
-"Imports are directories which reside in other computers and are accessible "
-"to you through the network."
+"Imports are directories which reside in other computers and are accessible to "
+"you through the network."
 msgstr ""
 "Importaciones son directorios que residen en otros ordenadores y están "
 "accesibles mediante la red."
@@ -2651,11 +2610,12 @@ msgstr "Tipo exportado:"
 
 #: interfaces/shares.glade.h:52 interfaces/shares.glade.h:66
 #: interfaces/shares.glade.h:91
-#, fuzzy
 msgid ""
 "NFS\n"
 "Samba\n"
-msgstr "Samba"
+msgstr ""
+"NFS\n"
+"Samba\n"
 
 #: interfaces/shares.glade.h:55 interfaces/shares.glade.h:69
 #: interfaces/shares.glade.h:139 interfaces/shares.glade.in.h:15
@@ -2774,11 +2734,12 @@ msgstr "Configuración para importar--Opciones de Samba (Obsoleto)"
 
 #: interfaces/shares.glade.h:104 interfaces/shares.glade.h:119
 #: interfaces/shares.glade.h:136
-#, fuzzy
 msgid ""
 "Samba\n"
 "NFS\n"
-msgstr "Samba"
+msgstr ""
+"Samba\n"
+"NFS\n"
 
 #: interfaces/shares.glade.h:111 interfaces/shares.glade.in.h:56
 msgid "Username:"
@@ -2873,7 +2834,15 @@ msgstr "_Mantener el reloj sincronizado con los servidores seleccionados"
 msgid "Select _servers..."
 msgstr "Seleccionar _servidores..."
 
-#: interfaces/time.glade.h:19 interfaces/time.glade.in.h:7
+#: interfaces/time.glade.h:19 interfaces/time.glade.in.h:15
+msgid "Time servers"
+msgstr "Servidores de hora"
+
+#: interfaces/time.glade.h:20 interfaces/time.glade.in.h:9
+msgid "Select the servers you wish to use for time synchronization."
+msgstr "Seleccione los servidores que quiera emplear para sincronizar la hora."
+
+#: interfaces/time.glade.h:23 interfaces/time.glade.in.h:7
 msgid ""
 "Select a time zone by clicking on \n"
 "one of the dots on the map."
@@ -2881,21 +2850,13 @@ msgstr ""
 "Seleccione una zona horaria pulsando en\n"
 "uno de los puntos del mapa."
 
-#: interfaces/time.glade.h:21 interfaces/time.glade.in.h:13
+#: interfaces/time.glade.h:25 interfaces/time.glade.in.h:13
 msgid "Time Zones"
 msgstr "Zonas horarias"
 
-#: interfaces/time.glade.h:22 interfaces/time.glade.in.h:11
+#: interfaces/time.glade.h:26 interfaces/time.glade.in.h:11
 msgid "Selection:"
 msgstr "Selección:"
-
-#: interfaces/time.glade.h:23 interfaces/time.glade.in.h:15
-msgid "Time servers"
-msgstr "Servidores de hora"
-
-#: interfaces/time.glade.h:24 interfaces/time.glade.in.h:9
-msgid "Select the servers you wish to use for time synchronization."
-msgstr "Seleccione los servidores que quiera emplear para sincronizar la hora."
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -2937,16 +2898,16 @@ msgstr "<< _Eliminar"
 
 #: interfaces/users.glade.h:15 interfaces/users.glade.h:130
 msgid "label27"
-msgstr ""
+msgstr "label27"
 
 #: interfaces/users.glade.h:16 interfaces/users.glade.h:131
 msgid "label26"
-msgstr ""
+msgstr "label26"
 
 #: interfaces/users.glade.h:18 interfaces/users.glade.in.h:76
 msgid ""
-"This is a list of the users available in the system. Create new users or "
-"edit existing user settings with this dialog."
+"This is a list of the users available in the system. Create new users or edit "
+"existing user settings with this dialog."
 msgstr ""
 "Esta es la lista de los usuarios disponibles en el sistema. Cree nuevos "
 "usuarios o edite las opciones de los ya existentes con este diálogo."
@@ -3020,15 +2981,15 @@ msgstr ""
 
 #: interfaces/users.glade.h:42
 msgid "label79"
-msgstr ""
+msgstr "label79"
 
 #: interfaces/users.glade.h:43 interfaces/users.glade.in.h:56
 msgid ""
-"On this page, you can select scripts and files to be copied from your "
-"account into new users' accounts."
+"On this page, you can select scripts and files to be copied from your account "
+"into new users' accounts."
 msgstr ""
-"En esta página, puede seleccionar scripts y archivos que se copiarán desde "
-"su cuenta a la cuenta de los nuevos usuarios."
+"En esta página, puede seleccionar scripts y archivos que se copiarán desde su "
+"cuenta a la cuenta de los nuevos usuarios."
 
 #: interfaces/users.glade.h:44 interfaces/users.glade.h:76
 #: interfaces/users.glade.h:88 interfaces/users.glade.in.h:29
@@ -3041,7 +3002,7 @@ msgstr "Nombre de archivo"
 
 #: interfaces/users.glade.h:48
 msgid "label152"
-msgstr ""
+msgstr "label152"
 
 #. set window title
 #: interfaces/users.glade.h:49 interfaces/users.glade.in.h:80
@@ -3074,8 +3035,8 @@ msgid ""
 "Please enter a username for the new user in the space below. Optionally, you "
 "can fill in more information to identify the user. "
 msgstr ""
-"Introduzca un nombre de usuario para el nuevo usuario en el espacio de "
-"abajo. Puede también introducir más información para identificar al usuario. "
+"Introduzca un nombre de usuario para el nuevo usuario en el espacio de abajo. "
+"Puede también introducir más información para identificar al usuario. "
 
 #: interfaces/users.glade.h:58 interfaces/users.glade.in.h:60
 msgid "Password options (step 2 of 2)"
@@ -3205,7 +3166,7 @@ msgstr "Seguridad"
 
 #: interfaces/users.glade.h:95
 msgid "window5"
-msgstr ""
+msgstr "window5"
 
 #: interfaces/users.glade.h:96 interfaces/users.glade.in.h:10
 msgid "Basic settings"
@@ -3282,7 +3243,7 @@ msgstr "C_onfirmación:"
 
 #: interfaces/users.glade.h:115
 msgid "label148"
-msgstr ""
+msgstr "label148"
 
 #: interfaces/users.glade.h:116 interfaces/users.glade.in.h:61
 msgid "Password set to:"
@@ -3290,7 +3251,7 @@ msgstr "Establecer contraseña a:"
 
 #: interfaces/users.glade.h:117
 msgid "label151"
-msgstr ""
+msgstr "label151"
 
 #: interfaces/users.glade.h:118 interfaces/users.glade.in.h:52
 msgid "New password"
@@ -3298,7 +3259,7 @@ msgstr "Nueva contraseña"
 
 #: interfaces/users.glade.h:119
 msgid "label149"
-msgstr ""
+msgstr "label149"
 
 #: interfaces/users.glade.h:120 interfaces/users.glade.in.h:57
 msgid "Optional settings"
@@ -3442,20 +3403,20 @@ msgstr "Opciones del gestor de arranque - Ximian Setup Tools"
 msgid "System administration"
 msgstr "Administrador del sistema"
 
-#: src/common/xst-dialog.c:59
+#: src/common/xst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "No puedo encontrar el widget: %s"
 
-#: src/common/xst-dialog.c:91
+#: src/common/xst-dialog.c:92
 msgid " More Options >> "
 msgstr " Más opciones >> "
 
-#: src/common/xst-dialog.c:92
+#: src/common/xst-dialog.c:93
 msgid " << Fewer Options "
 msgstr " << Menos opciones "
 
-#: src/common/xst-dialog.c:464
+#: src/common/xst-dialog.c:465
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3463,25 +3424,25 @@ msgstr ""
 "Existen cambios que no se han aplicado.\n"
 "¿Quiere aplicarlos ahora?"
 
-#: src/common/xst-dialog.c:539
+#: src/common/xst-dialog.c:540
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Se ha producido un error al conectar la señal '%s' con el widget '%s'"
 
-#: src/common/xst-tool.c:954
+#: src/common/xst-tool.c:955
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Saltándose la directiva %s..."
 
-#: src/common/xst-tool.c:1092
+#: src/common/xst-tool.c:1093
 msgid "Skipping actual save..."
 msgstr "Saltándose el guardado actual..."
 
-#: src/common/xst-tool.c:1134
+#: src/common/xst-tool.c:1135
 msgid "Updating your system configuration."
 msgstr "Actualizando la configuración de su sistema."
 
-#: src/common/xst-tool.c:1153
+#: src/common/xst-tool.c:1154
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3489,16 +3450,16 @@ msgstr ""
 "Se produjo un error al ejecutar el script del backend,\n"
 "y la configuración no ha podido ser cargada."
 
-#: src/common/xst-tool.c:1376
+#: src/common/xst-tool.c:1377
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1568
+#: src/common/xst-tool.c:1569
 msgid "The password you entered is invalid."
 msgstr "La contraseña que ha introducido es incorrecta"
 
-#: src/common/xst-tool.c:1578
+#: src/common/xst-tool.c:1579
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -3527,16 +3488,19 @@ msgstr ""
 "--\n"
 "El equipo de las Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1601
+#: src/common/xst-tool.c:1597
+msgid "Warning"
+msgstr "Aviso"
+
+#: src/common/xst-tool.c:1606
 msgid "Don't show me this again"
 msgstr "No vuelva a mostrarme esto"
 
-#: src/common/xst-tool.c:1669
-#, fuzzy
+#: src/common/xst-tool.c:1675
 msgid "Ximian Setup Tool"
-msgstr "Ximian Setup Tools"
+msgstr "Ximian Setup Tool"
 
-#: src/common/xst-tool.c:1677
+#: src/common/xst-tool.c:1683
 msgid "Pretending we are root..."
 msgstr "Intentando ser root..."
 
@@ -3549,17 +3513,16 @@ msgstr ""
 "que estos cambios tomen efecto."
 
 #: src/dhcpd/callbacks.c:56
-#, fuzzy
 msgid ""
 "You don't have the DHCP server package installed.\n"
 "You need to install it to enable the service."
 msgstr ""
-"No tienes el servidor DHCP instalado, o\n"
-"falta algún otro componente relacionado."
+"No tienes el paquete del servidor DHCP instalado.\n"
+"Necesitas instalarlo para activar el servicio."
 
 #: src/dhcpd/callbacks.c:58
 msgid "DHCPd not installed."
-msgstr ""
+msgstr "DHCPd no está instalado."
 
 #: src/dhcpd/dhcpd.c:109
 msgid ""
@@ -3569,28 +3532,26 @@ msgstr ""
 
 #: src/dhcpd/dhcpd.c:111
 msgid "Can't run in simple mode."
-msgstr ""
+msgstr "No puede ejecutarse en modo simple."
 
 #: src/dhcpd/main.c:96
-#, fuzzy
 msgid "DHCP server configurator"
-msgstr "Servicio de configuración DHCP."
+msgstr "Configuración del servidor DHCP"
 
 #: src/disks/main.c:39
-#, fuzzy
 msgid "Disk Partitions"
-msgstr "Discos y particiones"
+msgstr "Particiones de disco"
 
 #. run test
-#: src/display/callbacks.c:137
+#: src/display/callbacks.c:187
 msgid "Testing current settings."
 msgstr "Probando configuración actual."
 
-#: src/display/callbacks.c:159
+#: src/display/callbacks.c:209
 msgid "Restoring settings..."
 msgstr "Reestablecer configuración..."
 
-#: src/display/callbacks.c:179
+#: src/display/callbacks.c:232
 msgid ""
 "Going to probe X server. The screen will flicker\n"
 "several times.\n"
@@ -3600,7 +3561,7 @@ msgstr ""
 "varias veces.\n"
 "Por favor sea paciente."
 
-#: src/display/callbacks.c:202
+#: src/display/callbacks.c:256
 msgid ""
 "Unable to probe your X server.\n"
 "Please report it through\n"
@@ -3633,18 +3594,16 @@ msgid "16 million colors"
 msgstr "16 millones de colores"
 
 #: src/font/callbacks.c:42
-#, fuzzy
 msgid "Searching fonts."
-msgstr "Buscar dominios"
+msgstr "Buscando fuentes."
 
 #: src/font/callbacks.c:60
 msgid "Select file or dir"
-msgstr ""
+msgstr "Seleccione archivo o directorio"
 
 #: src/font/main.c:53
-#, fuzzy
 msgid "Font Settings"
-msgstr "Opciones de la importación"
+msgstr "Configuración de las fuentes"
 
 #: src/internetsharing/ishare-druid.c:40
 msgid ""
@@ -3689,22 +3648,19 @@ msgstr ""
 #: src/location-manager/gui-backend-list.c:436
 #, c-format
 msgid "Could not launch configuration tool: %s"
-msgstr ""
+msgstr "No pude ejecutar la herramienta de configuración: %s"
 
 #: src/location-manager/location-dialog.c:181
-#, fuzzy
 msgid "Create new location"
-msgstr "Crea una nueva conexión a internet "
+msgstr "Crea una nueva localización"
 
 #: src/location-manager/location-dialog.c:186
-#, fuzzy
 msgid "Copy a location"
-msgstr "Copiar Ubicación"
+msgstr "Copiar una ubicación"
 
 #: src/location-manager/location-dialog.c:191
-#, fuzzy
 msgid "Rename a location"
-msgstr "Renombrar Ubicación"
+msgstr "Renombrar una ubicación"
 
 #: src/location-manager/location-dialog.c:330
 msgid "You must supply a name"
@@ -3712,83 +3668,72 @@ msgstr ""
 
 #: src/location-manager/location-dialog.c:337
 msgid "You already have a location by that name"
-msgstr ""
+msgstr "Ya existe una ubicación con ese nombre"
 
 #: src/location-manager/location-manager-dialog.c:98
 msgid "_New..."
-msgstr ""
+msgstr "_Nuevo..."
 
 #: src/location-manager/location-manager-dialog.c:99
-#, fuzzy
 msgid "Create a new location"
-msgstr "Crea una nueva conexión a internet "
+msgstr "Crear una nueva ubicación"
 
 #: src/location-manager/location-manager-dialog.c:101
-#, fuzzy
 msgid "_Copy..."
-msgstr "Copiar..."
+msgstr "_Copiar..."
 
 #: src/location-manager/location-manager-dialog.c:102
 msgid "Create a new location identical to the selected one"
 msgstr ""
 
 #: src/location-manager/location-manager-dialog.c:104
-#, fuzzy
 msgid "_Rename..."
-msgstr "Renombrar..."
+msgstr "_Renombrar..."
 
 #: src/location-manager/location-manager-dialog.c:105
-#, fuzzy
 msgid "Rename the selected location"
-msgstr "Renombrar Ubicación"
+msgstr "Renombrar la ubicación seleccionada"
 
 #: src/location-manager/location-manager-dialog.c:108
-#, fuzzy
 msgid "Delete the selected location"
-msgstr "Opciones para el alias seleccionado"
+msgstr "Borrar la ubicación seleccionada"
 
 #: src/location-manager/location-manager-dialog.c:111
-#, fuzzy
 msgid "_Apply..."
-msgstr "_Añadir..."
+msgstr "_Aplicar..."
 
 #: src/location-manager/location-manager-dialog.c:112
 msgid "Apply the changes"
-msgstr ""
+msgstr "Aplicar cambios"
 
 #: src/location-manager/location-manager-dialog.c:119
-#, fuzzy
 msgid "Edit settings for the selected backend"
-msgstr "Opciones para el alias seleccionado"
+msgstr "Editar opciones para el backend seleccionado"
 
 #: src/location-manager/location-manager-dialog.c:121
-#, fuzzy
 msgid "_Select"
-msgstr "_Borrar"
+msgstr "_Seleccionar"
 
 #: src/location-manager/location-manager-dialog.c:122
 msgid "Select the selected backend for this location"
-msgstr ""
+msgstr "Elegir el backend seleccionado para esta localización"
 
 #: src/location-manager/location-manager-dialog.c:124
-#, fuzzy
 msgid "_Deselect"
-msgstr "_Borrar"
+msgstr "_Deseleccionar"
 
 #: src/location-manager/location-manager-dialog.c:125
 msgid "Deselect the selected backend for this location"
 msgstr ""
 
 #: src/location-manager/location-manager-dialog.c:136
-#, fuzzy
 msgid "_Location"
-msgstr "Ubicación"
+msgstr "_Ubicación"
 
 #: src/location-manager/location-manager-dialog.c:192
 #: src/location-manager/location-manager-dialog.c:512
-#, fuzzy
 msgid "Location Manager"
-msgstr "Administración Ubicaciones"
+msgstr "Administrador de ubicaciones"
 
 #: src/location-manager/location-manager-dialog.c:267
 msgid ""
@@ -3812,35 +3757,33 @@ msgid "You cannot delete the default location"
 msgstr ""
 
 #: src/location-manager/location-manager-dialog.c:444
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you wish to destroy the location %s?"
-msgstr "¿Está seguro que desea borrar el alias de %s?"
+msgstr "¿Está seguro que desea borrar la ubicación %s?"
 
 #: src/location-manager/location-manager-dialog.c:515
-#, fuzzy
 msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximian Setup Tools - Clave"
+msgstr "Ximian Setup Tools Administrador de Ubicaciones"
 
 #: src/memory/callbacks.c:189
-#, fuzzy, c-format
+#, c-format
 msgid "Are You sure you want to remove %s?"
 msgstr "¿Está seguro que desea borrar %s?"
 
 #. No name, no swap
 #: src/memory/callbacks.c:547
 msgid "Path to new swap location is empty."
-msgstr ""
+msgstr "La ruta a la nueva ubicación de la memoria swap está vacia."
 
 #. It's already in there, can't add
 #: src/memory/callbacks.c:564
-#, fuzzy, c-format
+#, c-format
 msgid "Swap space %s already exists."
-msgstr "Ese id de usuario ya existe."
+msgstr "El espacio de swap %s ya existe."
 
 #: src/memory/main.c:92
-#, fuzzy
 msgid "Swap Management"
-msgstr "Administración Ubicaciones"
+msgstr "Administración de memoria swap"
 
 #: src/network/callbacks.c:123 src/network/connection.c:821
 #: src/network/connection.c:852
@@ -4147,24 +4090,21 @@ msgstr ""
 "Contraseña: %s"
 
 #: src/print/callbacks.c:144
-#, fuzzy, c-format
+#, c-format
 msgid "Delete %s?"
-msgstr "Borrar"
+msgstr "¿Borrar %s?"
 
 #: src/print/main.c:103
-#, fuzzy
 msgid "Print tool"
-msgstr "Cerrando herramienta."
+msgstr "Herramienta de impresión"
 
 #: src/print/print.etspec.h:2
-#, fuzzy
 msgid "Paper"
-msgstr "Patrón"
+msgstr "Papel"
 
 #: src/print/print.etspec.h:4
-#, fuzzy
 msgid "Share"
-msgstr "Más corto"
+msgstr "Compartir"
 
 #: src/print/print.etspec.h:5
 msgid "Spool"
@@ -4172,41 +4112,36 @@ msgstr ""
 
 #. give our dialog an OK button and title
 #: src/print/settings-editor.c:122
-#, fuzzy
 msgid "Printer Settings Editor"
-msgstr "Opciones de la impresora"
+msgstr "Editor de opciones de la impresora"
 
 #: src/print/settings-gui.c:86
-#, fuzzy
 msgid "High color"
 msgstr "Color de alta densidad"
 
 #: src/print/settings-gui.c:87
-#, fuzzy
 msgid "True color"
-msgstr "Color verdadero"
+msgstr "Color real"
 
 #: src/print/settings.c:43
-#, fuzzy
 msgid "Local"
-msgstr "IP _local:"
+msgstr "Local"
 
 #: src/print/settings.c:44
 msgid "UNIX"
-msgstr ""
+msgstr "UNIX"
 
 #: src/print/settings.c:45
-#, fuzzy
 msgid "Windows"
-msgstr "Windows 9x"
+msgstr "Windows"
 
 #: src/print/settings.c:46
 msgid "Novell"
-msgstr ""
+msgstr "Novell"
 
 #: src/print/settings.c:47
 msgid "JetDirect"
-msgstr ""
+msgstr "JetDirect"
 
 #: src/shares/export_clients.etspec.h:1
 msgid "Pattern"
@@ -4446,7 +4381,11 @@ msgstr ""
 "Debe especificar un patrón de cliente, p.e.\n"
 "«*.micolegio.edu» o «192.168.0.1/24»."
 
-#: src/time/main.c:433
+#: src/time/main.c:375
+msgid "Ximian Setup Tools - Timezone"
+msgstr "Ximian Setup Tools - Zona horaria"
+
+#: src/time/main.c:487
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -4454,11 +4393,11 @@ msgstr ""
 "No tiene instalado el soporte para NTP. Instálelo en su sistema\n"
 "para habilitar la sincronización con servidores."
 
-#: src/time/main.c:434
+#: src/time/main.c:488
 msgid "NTP support missing."
 msgstr "Falta el soporte para NTP."
 
-#: src/time/main.c:698
+#: src/time/main.c:758
 msgid "Time and Date Settings"
 msgstr "Configuración de hora y fecha"
 
@@ -4774,20 +4713,3 @@ msgstr "Interprete de comandos"
 msgid "UID"
 msgstr "UID"
 
-#, fuzzy
-#~ msgid ""
-#~ "A previous DHCP configuration has been detected. \n"
-#~ "Do you want to keep this configuration?\n"
-#~ "\r\r"
-#~ msgstr ""
-#~ "Se ha detectado una configuración previa de DHCP. \n"
-#~ "¿Quiere mantener esta configuración?"
-
-#~ msgid "\tEdit configuration in the location LOCATION."
-#~ msgstr "\tEditar configuración en la ubicación LOCATION."
-
-#~ msgid "LOCATION"
-#~ msgstr "UBICACIÓN"
-
-#~ msgid "Default profile"
-#~ msgstr "Perfil predeterminado"
