@@ -599,7 +599,7 @@ profile_tab_prefill (void)
 	GtkWidget *li;
 
 	root = xst_xml_doc_get_root (tool->config);
-	root = xst_xml_element_find_first (root, "shells");
+	root = xst_xml_element_find_first (root, "shelldb");
 
 	if (!root)
 		return;
@@ -669,6 +669,11 @@ profile_tab_connect_signals (ProfileTab *p)
 	gtk_signal_connect (GTK_OBJECT (w), "activate",
 			    GTK_SIGNAL_FUNC (profile_tab_grab_focus),
 			    (gpointer) p->shell->entry);
+
+	gtk_signal_connect (GTK_OBJECT (p->pwd_random), "toggled",
+			    GTK_SIGNAL_FUNC (xst_dialog_modify_cb),
+			    (gpointer) p->dialog);
+
 }
 
 static void
@@ -772,7 +777,6 @@ profile_tab_signals_block (gboolean block)
 static void
 profile_update_ui (Profile *pf)
 {
-	GSList *tmp;
 	GtkOptionMenu *om[] = { pft->system_menu, pft->files_menu,
 				pft->security_menu, NULL };
 	gint i;
@@ -799,15 +803,6 @@ profile_update_ui (Profile *pf)
 	gtk_spin_button_set_value (pft->pwd_warndays, (gfloat) pf->pwd_warndays);
 	gtk_toggle_button_set_active (pft->pwd_random, pf->pwd_random);
 
-	gtk_clist_clear (pft->file_list);
-	gtk_clist_freeze (pft->file_list);
-	tmp = pf->files;
-	while (tmp) {
-		add_file_row (pft->file_list, tmp->data);
-		tmp = tmp->next;
-	}
-	gtk_clist_thaw (pft->file_list);
-	
 	profile_tab_signals_block (FALSE);
 }
 
@@ -839,7 +834,6 @@ profile_save (gchar *name)
 {
 	gchar *buf;
 	Profile *pf;
-	gint row = 0;
 	
 	if (name)
 		buf = g_strdup (name);
@@ -866,9 +860,7 @@ profile_save (gchar *name)
 		pf->pwd_warndays = gtk_spin_button_get_value_as_int (pft->pwd_warndays);
 		pf->pwd_random = gtk_toggle_button_get_active (pft->pwd_random);
 
-		pf->files = NULL;
-		while (gtk_clist_get_text (pft->file_list, row++, 0, &buf))
-			pf->files = g_slist_prepend (pf->files, g_strdup (buf));
+		/* FIXME: add skel_dir */
 	}
 }	
 
@@ -877,7 +869,6 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 {	
 	Profile *pf;
 	GtkWidget *d;
-	GSList *tmp;
 	gchar *buf = NULL;
 
 	pf = profile_table_get_profile (new_name);
@@ -913,12 +904,7 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 		pf->pwd_mindays = old_pf->pwd_mindays;
 		pf->pwd_warndays = old_pf->pwd_warndays;
 		pf->pwd_random = old_pf->pwd_random;
-
-		tmp = old_pf->files;
-		while (tmp) {
-			pf->files = g_slist_prepend (pf->files, tmp->data);
-			tmp = tmp->next;
-		}
+		pf->files = g_strdup (old_pf->files);
 	}
 
 	profile_table_add_profile (pf, select);
@@ -936,9 +922,7 @@ profile_destroy (Profile *pf)
 	g_free (pf->home_prefix);
 	g_free (pf->shell);
 	g_free (pf->group);
-
-	/* TODO: free strings in pf->files */
-	g_slist_free (pf->files);
+	g_free (pf->files);
 	
 	g_free (pf);
 }
@@ -971,6 +955,7 @@ profile_table_destroy (void)
 	g_free (profile_table);
 }
 
+#if 0
 static GSList *
 get_files (xmlNodePtr files)
 {
@@ -985,6 +970,7 @@ get_files (xmlNodePtr files)
 
 	return list;
 }
+#endif
 
 #define XST_USER_DATA_DIR "/var/cache/xst/"
 
@@ -1024,87 +1010,6 @@ profile_files (GSList **list, xmlNodePtr root, const gchar *prefix)
 	return *list;
 }
 
-/* Structure with some hard-coded defaults, just in case any of the tags is not present. */
-/* These were taken form RH 6.2's default values. Any better suggestions? */
-/* NULL means not present for string members. */
-
-const static Profile default_profile = {
-	(N_("Default")),         /* name */
-	(N_("Default profile")), /* comment */
-	99999,                   /* pwd_maxdays */
-	0,                       /* pwd_mindays */
-	7,                       /* pwd_warndays */
-	500,                     /* umin */
-	60000,                   /* umax */
-	500,                     /* gmin */
-	60000,                   /* gmax */
-	"/home/$user",           /* home_prefix */
-	"/bin/bash",            /* shell */
-	"$user",                 /* group */
-	FALSE,                   /* pwd_random */
-	TRUE,                    /* logindefs */
-	NULL                     /* files */
-};
-
-static Profile *
-profile_get_default (xmlNodePtr root)
-{
-	Profile *pf;
-	xmlNodePtr node, n0;
-	gchar *tag;
-	gint i;
-	gchar *logindefs_tags[] = {
-		"passwd_max_day_use", "passwd_min_day_use", "passwd_warning_advance_days",
-		"new_user_min_id", "new_user_max_id", "new_group_min_id", "new_group_max_id",
-		"files", NULL
-	};
-
-	node = xst_xml_element_find_first (root, "logindefs");
-	if (!node) {
-		g_warning ("profile_get_default: Can't find logindefs tag.");
-		return NULL;
-	}
-	
-	pf = g_new0 (Profile, 1);
-	
-	/* Assign defaults */	
-	pf->name = g_strdup (default_profile.name);
-	pf->comment = g_strdup (default_profile.comment);
-	pf->home_prefix = g_strdup (default_profile.home_prefix);
-	pf->shell = g_strdup (default_profile.shell);
-	pf->group = g_strdup (default_profile.group);
-	pf->umin = default_profile.umin;
-	pf->umax = default_profile.umax;
-	pf->gmin = default_profile.gmin;
-	pf->gmax = default_profile.gmax;
-	pf->pwd_maxdays = default_profile.pwd_maxdays;
-	pf->pwd_mindays = default_profile.pwd_mindays;
-	pf->pwd_warndays = default_profile.pwd_warndays;
-	pf->pwd_random = default_profile.pwd_random;
-	pf->logindefs = default_profile.logindefs;
-	
-	for (i = 0, tag = logindefs_tags[0]; tag; i++, tag = logindefs_tags[i]) {
-		n0 = xst_xml_element_find_first (node, tag);
-
-		if (n0) {
-			switch (i) {
-			case  0: pf->pwd_maxdays  = my_atoi (xst_xml_element_get_content (n0)); break;
-			case  1: pf->pwd_mindays  = my_atoi (xst_xml_element_get_content (n0)); break;
-			case  2: pf->pwd_warndays = my_atoi (xst_xml_element_get_content (n0)); break;
-			case  3: pf->umin         = my_atoi (xst_xml_element_get_content (n0)); break;
-			case  4: pf->umax         = my_atoi (xst_xml_element_get_content (n0)); break;
-			case  5: pf->gmin         = my_atoi (xst_xml_element_get_content (n0)); break;
-			case  6: pf->gmax         = my_atoi (xst_xml_element_get_content (n0)); break;
-			case  7: pf->files        = get_files (n0); break;
-				
-			default: g_warning ("profile_get_default: Shouldn't be here."); break;
-			}
-		}
-	}
-
-	return pf;
-}
-
 void
 profile_table_from_xml (xmlNodePtr root)
 {
@@ -1114,22 +1019,21 @@ profile_table_from_xml (xmlNodePtr root)
 		"home_prefix", "shell", "group", "pwd_maxdays",
 		"pwd_mindays", "pwd_warndays", "umin","umax",
 		"gmin", "gmax", "pwd_random", "comment", "name",
-		"files", NULL
+		"files", "login_defs", NULL
 	};
 	gchar *tag;
 	gint i;
 
-	if ((pf = profile_get_default (root)))
+/*	if ((pf = profile_get_default (root)))
 		profile_table_add_profile (pf, TRUE);
-	
-	node = xst_xml_element_find_first (root, "profiles");
+*/	
+	node = xst_xml_element_find_first (root, "profiledb");
 	if (!node)
 		return;
 
 	pf_node = xst_xml_element_find_first (node, "profile");	
 	while (pf_node)	{
 		pf = g_new (Profile, 1);
-		pf->logindefs = FALSE;
 		for (i = 0, tag = profile_tags[0]; tag; i++, tag = profile_tags[i]) {
 			n0 = xst_xml_element_find_first (pf_node, tag);
 			
@@ -1149,8 +1053,8 @@ profile_table_from_xml (xmlNodePtr root)
 				case 11: pf->comment      = xst_xml_element_get_content (n0); break;
 				case 12: pf->name         = xst_xml_element_get_content (n0); break;
 				case 13: pf->files        = NULL; break;
-				/* case 13: pf->files        = profile_files (NULL, n0, ""); break; */
-					
+				case 14: pf->logindefs    = my_atoi (xst_xml_element_get_content (n0)); break;
+
 				default: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
 				}
 			}
@@ -1160,6 +1064,7 @@ profile_table_from_xml (xmlNodePtr root)
 	}
 }
 
+#if 0
 static void
 set_files (xmlNodePtr root, GSList *list)
 {
@@ -1178,47 +1083,7 @@ set_files (xmlNodePtr root, GSList *list)
 		tmp = tmp->next;
 	}
 }
-
-static void
-save_logindefs_xml (Profile *pf, xmlNodePtr root)
-{
-	gint i, val;
-	xmlNodePtr node;
-	gchar *buf;
-	gchar *nodes[] = { "new_user_min_id", "new_user_max_id", "new_group_min_id",
-			   "new_group_max_id", "passwd_max_day_use", "passwd_min_day_use",
-			   "passwd_warning_advance_days", NULL };
-
-	/* FIXME: */
-	root = xst_xml_doc_get_root (tool->config);
-	root = xst_xml_element_find_first (root, "logindefs");
-
-	for (i = 0; nodes[i]; i++)
-	{
-		switch (i)
-		{
-		case 0: val = pf->umin; break;
-		case 1: val = pf->umax; break;
-		case 2: val = pf->gmin; break;
-		case 3: val = pf->gmax; break;
-		case 4: val = pf->pwd_maxdays; break;
-		case 5: val = pf->pwd_mindays; break;
-		case 6: val = pf->pwd_warndays; break;
-		default:
-			g_warning ("save_logindefs_xml: Shouldn't be here");
-			continue;
-		}
-
-		buf = g_strdup_printf ("%d", val);
-
-		node = xst_xml_element_find_first (root, nodes[i]);
-		if (!node)
-			node = xst_xml_element_add (root, nodes[i]);
-
-		xst_xml_element_set_content (node, buf);
-		g_free (buf);
-	}
-}
+#endif
 
 static void
 save_xml (gpointer key, gpointer value, gpointer user_data)
@@ -1234,11 +1099,6 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 	root = user_data;
 	pf = value;
 
-	if (pf->logindefs) { /* Logindefs is "fake" profile. */
-		save_logindefs_xml (pf, root);
-		return;
-	}
-
 	node = xst_xml_element_add (root, "profile");
 
 	xst_xml_element_add_with_content (node, "name",        pf->name);
@@ -1248,7 +1108,12 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 	xst_xml_element_add_with_content (node, "group",       pf->group);
 	xst_xml_element_set_bool_attr (xst_xml_element_add (node, "pwd_random"),
 				       "set", pf->pwd_random);
-	set_files (node, pf->files);
+
+	if (pf->logindefs)
+		xst_xml_element_add_with_content (node, "login_defs",  "1");
+	
+	/* FIXME
+	   set_files (node, pf->files); */
 	
 	for (i = 0; nodes[i]; i++)
 	{
@@ -1277,10 +1142,10 @@ profile_table_to_xml (xmlNodePtr root)
 {
 	xmlNodePtr node;
 	
-	node = xst_xml_element_find_first (root, "profiles");
+	node = xst_xml_element_find_first (root, "profiledb");
 
 	if (!node)
-		node = xst_xml_element_add (root, "profiles");
+		node = xst_xml_element_add (root, "profiledb");
 	else
 		xst_xml_element_destroy_children (node);
 

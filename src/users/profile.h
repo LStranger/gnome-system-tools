@@ -48,7 +48,7 @@ typedef struct
 	gchar *group;
 	gboolean pwd_random;
 	gboolean logindefs;
-	GSList *files;
+	gchar *files;
 } Profile;
 
 typedef struct

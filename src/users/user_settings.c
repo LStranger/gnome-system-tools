@@ -368,7 +368,7 @@ user_account_shells_setup (UserAccountGui *gui)
 	GtkWidget *li;
 
 	root = xst_xml_doc_get_root (tool->config);
-	root = xst_xml_element_find_first (root, "shells");
+	root = xst_xml_element_find_first (root, "shelldb");
 
 	if (!root)
 		return;
