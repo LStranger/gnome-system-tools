@@ -46,3 +46,4 @@ gchar *s = N_("label49");
 gchar *s = N_("Test current setting");
 gchar *s = N_("Colors");
 gchar *s = N_("label50");
+gchar *s = N_("Probe again");
