@@ -90,7 +90,6 @@ network_druid_clear (GnomeDruid *druid, gboolean destroy_data)
 		"network_connection_ppp_login",
 		"network_connection_ppp_passwd1",
 		"network_connection_ppp_passwd2",
-		"network_connection_name",
 		NULL
 	};
 	gint i;
@@ -109,6 +108,9 @@ network_druid_clear (GnomeDruid *druid, gboolean destroy_data)
 	widget = gst_dialog_get_widget (tool->main_dialog, "connection_type_modem_option");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
 
+	widget = gst_dialog_get_widget (tool->main_dialog, "network_connection_activate");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+
 	widget = gst_dialog_get_widget (tool->main_dialog, "network_connection_page1");
 	gnome_druid_set_page (druid, GNOME_DRUID_PAGE (widget));
 
@@ -123,16 +125,16 @@ network_druid_get_connection_data (GnomeDruid *druid)
 	GstTool *tool = druid_data->tool;
 	GstConnection *cxn = druid_data->cxn;
 	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	GtkWidget *activate = gst_dialog_get_widget (tool->main_dialog, "network_connection_activate");
 
 	if (cxn->type == GST_CONNECTION_PPP) {
 		GtkWidget *phone = gst_dialog_get_widget (tool->main_dialog, "network_connection_ppp_phone");
 		GtkWidget *external_line = gst_dialog_get_widget (tool->main_dialog, "network_connection_external_line");
 		GtkWidget *login = gst_dialog_get_widget (tool->main_dialog, "network_connection_ppp_login");
 		GtkWidget *passwd = gst_dialog_get_widget (tool->main_dialog, "network_connection_ppp_passwd1");
-		GtkWidget *name = gst_dialog_get_widget (tool->main_dialog, "network_connection_name");
 		gchar *modem = connection_autodetect_modem ();
 
-		if (!modem || (modem && (strlen (modem) == 0)))
+		if (!(modem && *modem))
 			modem = g_strdup_printf ("/dev/modem");
 
 		cxn->serial_port = modem;
@@ -140,17 +142,12 @@ network_druid_get_connection_data (GnomeDruid *druid)
 		cxn->external_line = g_strdup (gtk_entry_get_text (GTK_ENTRY (external_line)));
 		cxn->login = g_strdup (gtk_entry_get_text (GTK_ENTRY (login)));
 		cxn->password = g_strdup (gtk_entry_get_text (GTK_ENTRY (passwd)));
-		cxn->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (name)));
 		cxn->dev = connection_find_new_device (root, cxn->type);
 		
 		cxn->wvsection = connection_wvsection_name_generate (cxn->dev, root);
 		cxn->persist = TRUE;
 		cxn->set_default_gw = TRUE;
 		cxn->update_dns = TRUE;
-		cxn->user = TRUE;
-		cxn->autoboot = FALSE;
-
-		return cxn;
 	} else if (cxn->type == GST_CONNECTION_PLIP) {
 		GtkWidget *local_ip = gst_dialog_get_widget (tool->main_dialog,
 							     "network_connection_plip_local_ip");
@@ -158,20 +155,13 @@ network_druid_get_connection_data (GnomeDruid *druid)
 							     "network_connection_plip_remote_ip");
 		GtkWidget *gateway = gst_dialog_get_widget (tool->main_dialog,
 							    "network_connection_plip_gateway");
-		GtkWidget *name = gst_dialog_get_widget (tool->main_dialog,
-							 "network_connection_name");
 
 		cxn->address = g_strdup (gtk_entry_get_text (GTK_ENTRY (local_ip)));
 		cxn->remote_address = g_strdup (gtk_entry_get_text (GTK_ENTRY (remote_ip)));
-		cxn->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (name)));
+
 		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gateway)))
 			cxn->gateway = g_strdup (cxn->remote_address);
 		cxn->dev = connection_find_new_device (root, cxn->type);
-
-		cxn->user = TRUE;
-		cxn->autoboot = FALSE;
-
-		return cxn;
 	} else {
 		GtkWidget *type = gst_dialog_get_widget (tool->main_dialog,
 							 "network_connection_other_config_type");
@@ -181,8 +171,6 @@ network_druid_get_connection_data (GnomeDruid *druid)
 							    "network_connection_other_ip_mask");
 		GtkWidget *gateway = gst_dialog_get_widget (tool->main_dialog,
 							    "network_connection_other_gateway");
-		GtkWidget *name = gst_dialog_get_widget (tool->main_dialog,
-							 "network_connection_name");
 
 		if (cxn->type == GST_CONNECTION_WLAN) {
 			GtkWidget *device = gst_dialog_get_widget (tool->main_dialog,
@@ -199,16 +187,15 @@ network_druid_get_connection_data (GnomeDruid *druid)
 		cxn->address = g_strdup (gtk_entry_get_text (GTK_ENTRY (ip_address)));
 		cxn->netmask = g_strdup (gtk_entry_get_text (GTK_ENTRY (ip_mask)));
 		cxn->gateway = g_strdup (gtk_entry_get_text (GTK_ENTRY (gateway)));
-		cxn->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (name)));
 		connection_set_bcast_and_network (cxn);
-
-		cxn->user = TRUE;
-		cxn->autoboot = TRUE;
-
-		return cxn;
 	}
-	
-	return NULL;
+
+	cxn->name = connection_description_from_type (cxn->type);
+	cxn->enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (activate));
+	cxn->autoboot = cxn->enabled;
+	cxn->user = TRUE;
+
+	return cxn;
 }
 
 static GstConnectionType
@@ -342,8 +329,8 @@ network_druid_check_page (GnomeDruid *druid, NetworkDruidPages page_number)
 	case NETWORK_DRUID_PPP_2:
 		cont = network_druid_check_login_password (druid);
 		break;
-	case NETWORK_DRUID_NAME:
-		cont = network_druid_check_entry (druid, "network_connection_name");
+	case NETWORK_DRUID_ACTIVATE:
+		cont = TRUE;
 		break;
 	}
 
@@ -354,6 +341,7 @@ gboolean
 network_druid_set_page_next (GnomeDruid *druid)
 {
 	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
+	gboolean standalone = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (druid), "standalone"));
 	GstTool *tool = druid_data->tool;
 	GnomeDruidPage *next_page;
 	GtkWidget *selected_option;
@@ -371,7 +359,8 @@ network_druid_set_page_next (GnomeDruid *druid)
 				druid_data->cxn->type = network_druid_selected_option (druid);
 		
 			if (druid_data->cxn->type == GST_CONNECTION_PPP) {
-				callbacks_check_dialer (druid_data->window, tool);
+				if (!standalone)
+					callbacks_check_dialer (GTK_WINDOW (druid_data->window), tool);
 				
 				druid_data->current_page = NETWORK_DRUID_PPP_1;
 				next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
@@ -442,17 +431,19 @@ network_druid_set_page_next (GnomeDruid *druid)
 		break;
 	case NETWORK_DRUID_OTHER_1:
 	case NETWORK_DRUID_PLIP_1:
-		druid_data->current_page = NETWORK_DRUID_NAME;
-		next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
-								     "network_connection_page_name"));
+	case NETWORK_DRUID_PPP_2:
+		if (standalone) {
+			druid_data->current_page = NETWORK_DRUID_FINISH;
+			next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+									     "network_connection_page_finish"));
+		} else {
+			druid_data->current_page = NETWORK_DRUID_ACTIVATE;
+			next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+									     "network_connection_page_activate"));
+		}
+
 		gnome_druid_set_page (druid, next_page);
 		return TRUE;
-		break;
-	case NETWORK_DRUID_PPP_2:
-		druid_data->current_page = NETWORK_DRUID_NAME;
-		next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
-								     "network_connection_page_name"));
-		return FALSE;
 		break;
 	}
 
@@ -465,6 +456,7 @@ gboolean
 network_druid_set_page_back (GnomeDruid *druid)
 {
 	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
+	gboolean standalone = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (druid), "standalone"));
 	GnomeDruidPage *back_page;
 
 	g_return_val_if_fail (druid_data != NULL, FALSE);
@@ -497,7 +489,7 @@ network_druid_set_page_back (GnomeDruid *druid)
 		gnome_druid_set_page (druid, back_page);
 
 		return TRUE;
-	} else if ((druid_data->current_page == NETWORK_DRUID_NAME) &&
+	} else if ((druid_data->current_page == NETWORK_DRUID_ACTIVATE) &&
 		   (druid_data->cxn->type == GST_CONNECTION_PLIP)) {
 		druid_data->current_page = NETWORK_DRUID_PLIP_1;
 		back_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
@@ -505,12 +497,29 @@ network_druid_set_page_back (GnomeDruid *druid)
 		gnome_druid_set_page (druid, back_page);
 		
 		return TRUE;
-	} else if ((druid_data->current_page == NETWORK_DRUID_NAME) &&
+	} else if ((druid_data->current_page == NETWORK_DRUID_ACTIVATE) &&
 		   (druid_data->cxn->type != GST_CONNECTION_PPP)) {
 		druid_data->current_page = NETWORK_DRUID_OTHER_1;
 		back_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
 								     "network_connection_other_page1"));
 
+		gnome_druid_set_page (druid, back_page);
+
+		return TRUE;
+	} else if ((druid_data->current_page == NETWORK_DRUID_FINISH) && standalone) {
+		if (druid_data->cxn->type == GST_CONNECTION_PLIP) {
+			druid_data->current_page = NETWORK_DRUID_PLIP_1;
+			back_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+									     "network_connection_plip_page1"));
+		} else if (druid_data->cxn->type == GST_CONNECTION_PPP) {
+			druid_data->current_page = NETWORK_DRUID_PPP_1;
+			back_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+									     "network_connection_ppp_page2"));
+		} else {
+			druid_data->current_page = NETWORK_DRUID_OTHER_1;
+			back_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+									     "network_connection_other_page1"));
+		}
 		gnome_druid_set_page (druid, back_page);
 
 		return TRUE;
@@ -574,7 +583,7 @@ network_druid_set_window_title (GnomeDruid *druid)
 		page_type = DRUID_NORMAL_PAGE;
 		current_page = 2;
 		break;
-	case NETWORK_DRUID_NAME:
+	case NETWORK_DRUID_ACTIVATE:
 		page_type = DRUID_NORMAL_PAGE;
 
 		if ((druid_data->cxn->type == GST_CONNECTION_WLAN) ||

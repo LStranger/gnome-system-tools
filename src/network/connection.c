@@ -44,7 +44,7 @@ struct _GstNetworkInterfaceDescription {
 static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ N_("Other type"),              GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
 	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
-	{ N_("Wireless LAN card"),    GST_CONNECTION_WLAN,    "wavelan-16.png",  "wlan",       NULL },
+	{ N_("Wireless LAN card"),       GST_CONNECTION_WLAN,    "wavelan-16.png",  "wlan",       NULL },
 	{ N_("Modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
 	{ N_("Parallel line"),           GST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
 	{ N_("Infrared LAN"),            GST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
@@ -464,7 +464,6 @@ connection_list_model_new (void)
 				    G_TYPE_STRING,
 				    G_TYPE_STRING,
 				    G_TYPE_BOOLEAN,
-				    G_TYPE_STRING,
 				    G_TYPE_POINTER);
 	return GTK_TREE_MODEL (store);
 }
@@ -515,16 +514,6 @@ connection_list_add_columns (GtkTreeView *treeview)
 							NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_clickable (col, TRUE);
-	gtk_tree_view_append_column (treeview, col);
-	                                                                    
-	/* Description */
-	text_renderer = gtk_cell_renderer_text_new ();
-	col = gtk_tree_view_column_new_with_attributes (_("Description"), text_renderer,
-							"text", CONNECTION_LIST_COL_DESCR,
-							NULL);
-	gtk_tree_view_column_set_resizable (col, TRUE);
-	gtk_tree_view_column_set_sort_column_id (col, 4);
-
 	gtk_tree_view_append_column (treeview, col);
 }
 
@@ -690,7 +679,6 @@ connection_list_append (GstConnection *cxn)
 			    CONNECTION_LIST_COL_DEV_TYPE, connection_get_dev_type (cxn),
 			    CONNECTION_LIST_COL_DEVICE,   cxn->dev,
 			    CONNECTION_LIST_COL_STAT,     connection_get_stat (cxn),
-			    CONNECTION_LIST_COL_DESCR,    cxn->name,
 			    CONNECTION_LIST_COL_DATA,     cxn,
 			    -1);
 }
@@ -1284,7 +1272,7 @@ connection_add_to_list (GstConnection *cxn)
 	connection_default_gw_add (cxn);
 }
 
-static gchar *
+gchar *
 connection_description_from_type (GstConnectionType type)
 {
 	gint i;
@@ -1641,7 +1629,6 @@ connection_set_bcast_and_network (GstConnection *cxn)
 static void
 empty_general (GstConnection *cxn)
 {
-	GET_STR ("connection_", name);
 	GET_BOOL ("status_", autoboot);
 	GET_BOOL ("status_", user);
 }
@@ -1804,7 +1791,6 @@ static void
 fill_general (GstConnection *cxn)
 {
 	gtk_label_set_text (GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "connection_dev")), cxn->dev);
-	SET_STR ("connection_", name);
 	SET_BOOL ("status_", autoboot);
 	SET_BOOL ("status_", user);
 }
@@ -1964,7 +1950,7 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 		fill_ppp (cxn);
 		fill_ppp_adv (cxn);
 
-		callbacks_check_dialer (window, tool);
+		callbacks_check_dialer (GTK_WINDOW (window), tool);
 
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 	} else if (cxn->type == GST_CONNECTION_WLAN) {
@@ -2383,4 +2369,16 @@ connection_get_count (GstTool *tool)
 	}
 
 	return count;
+}
+
+void
+connection_apply_and_activate (GstTool *tool, GstConnection *cxn)
+{
+	gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog), "apply", tool);
+	gst_tool_run_set_directive (tool,
+				    NULL, NULL,
+				    "enable_iface",
+				    (cxn->file)? cxn->file : cxn->dev,
+				    "1",
+				    NULL);
 }

@@ -96,17 +96,9 @@ void
 on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 				 gint page_num, gpointer user_data)
 {
-	GtkWidget *w;
-	gchar *entry[] = { "hostname", "connection_list_sw", "domain", "statichost_list" };
 	static guint timeout_id = 0;
 
-	if (gst_tool_get_access (tool) && entry[page_num]) {
-		w = gst_dialog_get_widget (tool->main_dialog, entry[page_num]);
-		if (w)
-			gtk_widget_grab_focus (w);
-	}
-
-	if (page_num == 1) {
+	if (page_num == 0) {
 		timeout_id = g_timeout_add (1000, (GSourceFunc) connection_poll_stat, tool);
 	} else {
 		if (timeout_id) {
@@ -348,6 +340,7 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog, "network_connection_druid"));
 
 	network_druid_new (druid, druid_window, tool, GST_CONNECTION_UNKNOWN);
+	gtk_window_set_transient_for (GTK_WINDOW (druid_window), GTK_WINDOW (tool->main_dialog));
 	gtk_widget_show_all (druid_window);
 }
 
@@ -1242,13 +1235,13 @@ on_network_druid_page_prepare (GnomeDruidPage *druid_page, GnomeDruid *druid, gp
 		"network_connection_plip_local_ip",
 		"network_connection_ppp_phone",
 		"network_connection_ppp_login",
-		"network_connection_name",
+		"network_connection_activate",
 		NULL
 	};
 
 	if (druid_data == NULL)
 		return;
-	
+
 	g_signal_stop_emission_by_name (druid_page, "prepare");
 	network_druid_check_page (druid, druid_data->current_page);
 
@@ -1285,7 +1278,10 @@ on_network_druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer
 		connection_add_to_list (cxn);
 		connection_list_select_connection (cxn);
 
-		gst_dialog_modify (tool->main_dialog);
+		if (cxn->enabled)
+			connection_apply_and_activate (tool, cxn);
+		else
+			gst_dialog_modify (tool->main_dialog);
 
 		network_druid_clear (druid, FALSE);
 		gtk_widget_hide (window);
@@ -1293,7 +1289,7 @@ on_network_druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer
 		connection_save_to_node (cxn, root);
 		gst_dialog_modify (tool->main_dialog);
 
-		gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog), "apply", tool);
+		connection_apply_and_activate (tool, cxn);
 		gtk_main_quit ();
 	}
 }

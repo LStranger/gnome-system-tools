@@ -45,7 +45,6 @@ enum {
 	CONNECTION_LIST_COL_DEV_TYPE,
 	CONNECTION_LIST_COL_DEVICE,
 	CONNECTION_LIST_COL_STAT,
-	CONNECTION_LIST_COL_DESCR,
 
 	CONNECTION_LIST_COL_DATA,
 	CONNECTION_LIST_COL_LAST
@@ -183,7 +182,9 @@ void connection_set_bcast_and_network (GstConnection *cxn);
 
 gboolean connection_poll_stat (GstTool*);
 gchar*   connection_autodetect_modem (void);
+gchar*   connection_description_from_type (GstConnectionType);
 void     connection_enable (GstConnection*, gboolean);
+void     connection_apply_and_enable (GstTool*, GstConnection*);
 
 gint connection_get_count (GstTool*);
 

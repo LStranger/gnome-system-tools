@@ -82,14 +82,14 @@ GstDialogSignal signals[] = {
 	{ "network_connection_plip_page1",   "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_ppp_page1",    "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_ppp_page2",    "next",   G_CALLBACK (on_network_druid_page_next) },
-	{ "network_connection_page_name",         "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_page_activate", "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_page2",        "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_wireless_page",  "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_other_page1",  "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_plip_page1",  "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_ppp_page1",    "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_ppp_page2",    "back",   G_CALLBACK (on_network_druid_page_back) },
-	{ "network_connection_page_name",    "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_page_activate", "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_page_finish",  "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_wireless_device_entry", "changed", G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_essid", "changed", G_CALLBACK (on_network_druid_entry_changed) },
@@ -103,7 +103,6 @@ GstDialogSignal signals[] = {
 	{ "network_connection_ppp_login",    "changed",   G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_ppp_passwd1",  "changed",   G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_ppp_passwd2",  "changed",   G_CALLBACK (on_network_druid_entry_changed) },
-	{ "network_connection_name",         "changed",   G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_page_finish",  "finish",    G_CALLBACK (on_network_druid_finish) },
 	{ "network_connection_other_ip_address", "focus_out_event", G_CALLBACK (on_network_druid_ip_address_focus_out) },
 
@@ -121,7 +120,6 @@ GstDialogSignal signals[] = {
 	{ "ip_address", "focus_out_event", G_CALLBACK (on_ip_address_focus_out) },
 	{ "ip_netmask", "focus_out_event", G_CALLBACK (on_ip_address_focus_out) },
 	{ "ppp_update_dns", "toggled", G_CALLBACK (on_ppp_update_dns_toggled) },
-	{ "connection_name", "changed", G_CALLBACK (on_connection_modified) },
 	{ "status_autoboot", "toggled", G_CALLBACK (on_connection_modified) },
 	{ "status_user", "toggled", G_CALLBACK (on_connection_modified) },
 	{ "wlan_essid", "changed", G_CALLBACK (on_connection_modified) },
@@ -150,15 +148,14 @@ GstDialogSignal signals[] = {
 };
 
 GstDialogSignal signals_after[] = {
-	{ "network_connection_page1", "prepare", G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_page2", "prepare", G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_page2",         "prepare", G_CALLBACK (on_network_druid_page_prepare) },
 	{ "network_connection_wireless_page", "prepare", G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_other_page1", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_plip_page1", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_ppp_page1", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_ppp_page2", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_page_name", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_page_finish", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_other_page1",   "prepare", G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_plip_page1",    "prepare", G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_ppp_page1",     "prepare", G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_ppp_page2",     "prepare", G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_page_activate", "prepare", G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_page_finish",   "prepare", G_CALLBACK (on_network_druid_page_prepare) },
 	{ NULL }
 };
 
@@ -256,7 +253,6 @@ main (int argc, char *argv[])
 		gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
 		init_editable_filters (tool->main_dialog);
-
 		on_network_admin_show (NULL, tool);
 
 		gst_tool_main (tool, TRUE);
@@ -265,7 +261,8 @@ main (int argc, char *argv[])
 			g_signal_emit_by_name (G_OBJECT (gst_dialog_get_widget (tool->main_dialog, "connection_add")),
 					       "clicked",
 					       NULL);
-
+		on_network_notebook_switch_page (gst_dialog_get_widget (tool->main_dialog, "network_admin_notebook"),
+						 NULL, 0, NULL);
 		gtk_main ();
 	}
 		
