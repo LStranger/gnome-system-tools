@@ -852,13 +852,11 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 }
 
 XstTool *
-xst_tool_new (const char *name, const char *title)
+xst_tool_new (void)
 {
 	XstTool *tool;
-	g_return_val_if_fail (name != NULL, NULL);
 
 	tool = XST_TOOL (gtk_type_new (XST_TYPE_TOOL));
-	xst_tool_construct (tool, name, title);
 
 	return tool;
 }
@@ -937,13 +935,10 @@ xst_tool_reset_report_hooks (XstTool *tool)
 		((XstReportHook *) list->data)->invoked = FALSE;
 }
 
-XstTool *
-xst_tool_init (const char *name, const char *title, int argc, char *argv [], const poptOption options)
+void
+xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
 	GtkWidget *d;
-
-	g_return_val_if_fail (name != NULL, NULL);
-	g_return_val_if_fail (title != NULL, NULL);
 
 #ifdef ENABLE_NLS
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
@@ -956,14 +951,14 @@ xst_tool_init (const char *name, const char *title, int argc, char *argv [], con
 	xst_ui_create_image_widget (NULL, NULL, NULL, 0, 0);
 
 	if (options == NULL) {
-		gnome_init (name, VERSION, argc, argv);
+		gnome_init (app_name, VERSION, argc, argv);
 	} else {
 		poptContext ctx;
 		GList *args_list = NULL;
 		char **args;
 		gint i;
 		
-		gnome_init_with_popt_table (name, VERSION, argc, argv, options, 0, &ctx);
+		gnome_init_with_popt_table (app_name, VERSION, argc, argv, options, 0, &ctx);
 
 		args = (char**) poptGetArgs(ctx);
 	
@@ -996,6 +991,4 @@ xst_tool_init (const char *name, const char *title, int argc, char *argv [], con
 		
 		root_access = ROOT_ACCESS_NONE;
 	}
-
-	return xst_tool_new (name, title);
 }

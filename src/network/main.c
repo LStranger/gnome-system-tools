@@ -119,7 +119,9 @@ main (int argc, char *argv[])
 		{NULL, '\0', 0, NULL, 0}
 	};
 
-	tool = xst_tool_init ("network", _("Network Settings"), argc, argv, options);
+	xst_init ("network-admin", argc, argv, options);
+	tool = xst_tool_new ();
+	xst_tool_construct (tool , "network", _("Network Settings"));
 
 	if (internet_druid) {
 		PppDruid *ppp;

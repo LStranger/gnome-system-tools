@@ -310,7 +310,10 @@ adjust (const char *s, gint max)
 int
 main (int argc, char *argv[])
 {
-	tool = xst_tool_init ("time", _("Time and Date Settings"), argc, argv, NULL);
+
+	xst_init ("time-admin", argc, argv, NULL);
+	tool = xst_tool_new ();
+	xst_tool_construct (tool, "time", _("Time and Date Settings"));
 
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	xst_dialog_connect_signals (tool->main_dialog, signals);

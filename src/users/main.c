@@ -89,8 +89,7 @@ static const XstWidgetPolicy policies[] = {
 	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "user_settings",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_HIDDEN,    TRUE,  TRUE  },
-#warning I disabled profiles for the release because it is not really working 
+	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "groups_holder",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "group_new",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "group_delete",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
@@ -272,7 +271,10 @@ main_window_prepare (void)
 int
 main (int argc, char *argv[])
 {
-	tool = xst_tool_init ("users", _("Users and Groups"), argc, argv, NULL);
+	xst_init ("users-admin", argc, argv, NULL);
+	tool = xst_tool_new ();
+	xst_tool_construct (tool, "users", _("Users and Groups"));
+	
 	xst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
 	main_window_prepare ();
