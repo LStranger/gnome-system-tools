@@ -198,6 +198,7 @@ xst_ui_image_widget_get (GladeXML *gui, gchar *name)
 
 	container = glade_xml_get_widget   (gui, "report_pixmap");
 	children  = gtk_container_children (GTK_CONTAINER (container));
+	g_return_val_if_fail (children != NULL, NULL);
 	return children->data;
 }
 
