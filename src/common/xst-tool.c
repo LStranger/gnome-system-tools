@@ -783,21 +783,42 @@ xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer dat
 	return g_slist_length (tool->directive_queue);
 }
 
+/* As specified, escapes :: to \:: and \ to \\ and joins the strings. */
+static GString *
+xst_tool_join_directive (const gchar *directive, va_list ap)
+{
+	GString *str;
+	gchar   *arg, *s;
+	
+	str = g_string_new (directive);
+	while ((arg = va_arg (ap, char *)) != NULL) {
+		g_string_append (str, "::");
+		for (s = arg; *s; s++) {
+			switch (*s) {
+			case '\\':
+				g_string_append_c (str, '\\');
+				break;
+			case ':':
+				if (*(s + 1) == ':')
+					g_string_append_c (str, '\\');
+			}
+			g_string_append_c (str, *s);
+		}
+	}
+	va_end (ap);
+
+	return str;
+}
+
 static void
 xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 {
 	GString *directive_line;
-	gchar *arg;
 	FILE *f;
 
 	g_return_if_fail (tool->backend_pid >= 0);
 
-	directive_line = g_string_new (directive);
-	while ((arg = va_arg (ap, char *)) != NULL) {
-		g_string_append (directive_line, "::");
-		g_string_append (directive_line, arg);
-	}
-	va_end (ap);
+	directive_line = xst_tool_join_directive (directive, ap);
 	g_string_append_c (directive_line, '\n');
 	
 	f = fdopen (dup (tool->backend_write_fd), "w");

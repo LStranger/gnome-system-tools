@@ -1,3 +1,12 @@
+2001-10-17  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-report-line.c (xst_report_line_new_from_string): bugs
+	bug bugs.
+	(xst_report_line_parse_string): g_list_free frees all the list.
+
+	* xst-tool.c (xst_tool_join_directive): escapes :: to \:: and
+	\ to \\ and joins the strings.
+
 2001-10-16  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-report-line.c (xst_report_line_parse_string): Unescape

@@ -120,16 +120,14 @@ xst_report_line_parse_string (gchar *string)
 {
 	gchar *s;
 	GString *str;
-	GList *list, *l, *tmp;
+	GList *list, *l;
 	gchar **parts;
 	gint i;
 
 	g_return_val_if_fail (string != NULL, NULL);
 
-	list = NULL;
-
 	str = g_string_new ("");
-	list = g_list_append (list, str);
+	list = g_list_append (NULL, str);
 	for (s = string; *s; s++) {
 		switch (*s) {
 		case '\\':
@@ -151,7 +149,7 @@ xst_report_line_parse_string (gchar *string)
 		case ':':
 			if (*(s + 1) == ':') {
 				str = g_string_new ("");
-				list = g_list_append (list, str);
+				g_list_append (list, str);
 				s++;
 				break;
 			}
@@ -165,15 +163,14 @@ xst_report_line_parse_string (gchar *string)
 
 	parts = g_new0 (gchar *, g_list_length (list) + 1);
 
-	for (i = 0, l = list; tmp; i++, l = tmp) {
+	for (i = 0, l = list; l; i++, l = l->next) {
 		str = (GString *) l->data;
 		parts[i] = str->str;
 		g_string_free (str, FALSE);
-		
-		tmp = l->next;
-		g_list_free (l);
 	}
 
+	g_list_free (list);
+	
 	return parts;
 }
 
@@ -187,7 +184,8 @@ xst_report_line_new_from_string (gchar *string)
 	g_return_val_if_fail (strlen (string) > 1, NULL);
 	parts = xst_report_line_parse_string (string);
 
-	if (g_list_length (parts) < 3) {
+	/* must have at least major, minor and format */
+	if (!parts[2]) {
 		g_warning ("xst_report_line_new_from_string: Error in report string [%s]", string);
 		g_strfreev (parts);
 		return NULL;
@@ -200,7 +198,7 @@ xst_report_line_new_from_string (gchar *string)
 	xrl = xst_report_line_new (major, parts[1], parts[2], &parts[3]);
 	g_strfreev (parts);
 
-	return NULL;
+	return xrl;
 }
 
 void
