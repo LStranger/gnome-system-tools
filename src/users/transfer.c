@@ -33,6 +33,7 @@
 #include "user_group.h"
 #include "callbacks.h"
 #include "e-table.h"
+#include "network.h"
 
 /* Structure with some hard-coded defaults, just in case any of the tags is not present. */
 /* These were taken form RH 6.2's default values. Any better suggestions? */
@@ -250,6 +251,7 @@ transfer_xml_to_gui (xmlNodePtr root)
 {
 	transfer_logindefs_from_xml (root);
 	transfer_logindefs_to_gui ();
+	network_populate (root);
 }
 
 void

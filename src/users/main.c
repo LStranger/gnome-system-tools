@@ -40,6 +40,7 @@
 #include "transfer.h"
 #include "e-table.h"
 #include "callbacks.h"
+#include "network.h"
 
 static void set_access_sensitivity (void)
 {
@@ -91,8 +92,9 @@ main (int argc, char *argv[])
 	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
 	
 	tool_set_frozen(TRUE);
-	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
 	e_table_create ();
+	network_create ();
+	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
 	tool_set_frozen(FALSE);
 
   
