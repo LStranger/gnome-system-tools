@@ -368,8 +368,11 @@ user_account_check_comment (UserAccount *account)
 	comment = g_strjoinv (NULL, account->comment);
 	
 	for (i = 0; i < strlen (comment); i++) {
-		if (!isspace (comment[i]) && !isalnum (comment[i])) {
-			buf = g_strdup (N_("Invalid comment"));
+		if (iscntrl (comment[i]) || comment[i] == ',' ||
+		    comment[i] == '=' || comment[i] == ':') {
+
+			buf = g_strdup_printf (N_("Invalid character '%c' in comment."),
+						  comment[i]);
 			break;
 		}
 	}

@@ -22,6 +22,7 @@
  */
 
 #include <stdlib.h>
+#include <ctype.h>
 #include <gnome.h>
 
 #include "xst.h"
@@ -158,6 +159,40 @@ user_account_passwd_changed (GtkEditable *entry, gpointer data)
 }
 
 static void
+user_account_comment_changed (GtkEditable *editable, gchar *new_text, gint new_text_length,
+			      gint *position, gpointer data)
+{
+	gint i;
+	gchar *buf = NULL;
+	UserAccountGui *gui = data;
+	
+	gtk_signal_handler_block_by_func (GTK_OBJECT (editable),
+					  GTK_SIGNAL_FUNC (user_account_comment_changed),
+					  data);
+
+	for (i = 0; i < new_text_length; i++) {
+		if (iscntrl (new_text[i]) || new_text[i] == ',' ||
+		    new_text[i] == '=' || new_text[i] == ':') {
+			buf = g_strdup_printf (N_("Invalid character '%c'.\n"
+				"This field doesn't accept control characters ',' ':' and '='."),
+					       new_text[i]);
+			break;
+		}
+	}
+
+	if (buf)
+		user_account_gui_error (GTK_WINDOW (gui->top), buf);
+	else
+		gtk_editable_insert_text (editable, new_text, new_text_length, position);	
+
+	gtk_signal_handler_unblock_by_func (GTK_OBJECT (editable),
+					    GTK_SIGNAL_FUNC (user_account_comment_changed),
+					    data);
+	
+	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
+}
+
+static void
 user_account_grab_focus (GtkWidget *w, gpointer data)
 {
 	GtkWidget *widget = GTK_WIDGET (data);
@@ -192,6 +227,66 @@ get_group_list (gchar *field, xmlNodePtr user_node)
 	}
 
 	return list;
+}
+
+static void
+user_account_connect_signals (UserAccountGui *gui)
+{
+	gtk_signal_connect (GTK_OBJECT (gui->profile_button), "clicked",
+			    GTK_SIGNAL_FUNC (profile_table_run), NULL);
+	
+	gtk_signal_connect (GTK_OBJECT (gui->add), "clicked",
+			    GTK_SIGNAL_FUNC (user_account_gui_add), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->remove), "clicked",
+			    GTK_SIGNAL_FUNC (user_account_gui_remove), gui);
+
+	gtk_signal_connect (GTK_OBJECT (gui->all), "select_row",
+			    GTK_SIGNAL_FUNC (user_account_gui_all_select), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->all), "unselect_row",
+			    GTK_SIGNAL_FUNC (user_account_gui_all_select), gui);
+
+	gtk_signal_connect (GTK_OBJECT (gui->member), "select_row",
+			    GTK_SIGNAL_FUNC (user_account_gui_member_select), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->member), "unselect_row",
+			    GTK_SIGNAL_FUNC (user_account_gui_member_select), gui);
+
+	gtk_signal_connect (GTK_OBJECT (gui->pwd_manual), "toggled",
+			    GTK_SIGNAL_FUNC (user_account_passwd_toggled), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->pwd_random), "toggled",
+			    GTK_SIGNAL_FUNC (user_account_passwd_toggled), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->pwd_random_new), "clicked",
+			    GTK_SIGNAL_FUNC (user_account_passwd_random_new), gui);
+
+	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "changed",
+			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
+	gtk_signal_connect (GTK_OBJECT (gui->pwd2), "changed",
+			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
+
+	gtk_signal_connect (GTK_OBJECT (gui->name), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->comment);
+	gtk_signal_connect (GTK_OBJECT (gui->comment), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->office);
+	gtk_signal_connect (GTK_OBJECT (gui->office), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->wphone);
+	gtk_signal_connect (GTK_OBJECT (gui->wphone), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->hphone);
+	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->pwd2);
+	gtk_signal_connect (GTK_OBJECT (gui->uid), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->home);
+	
+	gtk_signal_connect (GTK_OBJECT (gui->comment), "insert-text",
+			    GTK_SIGNAL_FUNC (user_account_comment_changed),
+			    (gpointer) gui);
+	gtk_signal_connect (GTK_OBJECT (gui->office), "insert-text",
+			    GTK_SIGNAL_FUNC (user_account_comment_changed),
+			    (gpointer) gui);
+	gtk_signal_connect (GTK_OBJECT (gui->wphone), "insert-text",
+			    GTK_SIGNAL_FUNC (user_account_comment_changed),
+			    (gpointer) gui);
+	gtk_signal_connect (GTK_OBJECT (gui->hphone), "insert-text",
+			    GTK_SIGNAL_FUNC (user_account_comment_changed),
+			    (gpointer) gui);	
 }
 
 UserAccountGui *
@@ -245,49 +340,8 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->max  = GTK_SPIN_BUTTON (glade_xml_get_widget (gui->xml, "user_passwd_max"));
 	gui->days = GTK_SPIN_BUTTON (glade_xml_get_widget (gui->xml, "user_passwd_days"));
 
-	gtk_signal_connect (GTK_OBJECT (gui->profile_button), "clicked",
-			    GTK_SIGNAL_FUNC (profile_table_run), NULL);
+	user_account_connect_signals (gui);
 	
-	gtk_signal_connect (GTK_OBJECT (gui->add), "clicked",
-			    GTK_SIGNAL_FUNC (user_account_gui_add), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->remove), "clicked",
-			    GTK_SIGNAL_FUNC (user_account_gui_remove), gui);
-
-	gtk_signal_connect (GTK_OBJECT (gui->all), "select_row",
-			    GTK_SIGNAL_FUNC (user_account_gui_all_select), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->all), "unselect_row",
-			    GTK_SIGNAL_FUNC (user_account_gui_all_select), gui);
-
-	gtk_signal_connect (GTK_OBJECT (gui->member), "select_row",
-			    GTK_SIGNAL_FUNC (user_account_gui_member_select), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->member), "unselect_row",
-			    GTK_SIGNAL_FUNC (user_account_gui_member_select), gui);
-
-	gtk_signal_connect (GTK_OBJECT (gui->pwd_manual), "toggled",
-			    GTK_SIGNAL_FUNC (user_account_passwd_toggled), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->pwd_random), "toggled",
-			    GTK_SIGNAL_FUNC (user_account_passwd_toggled), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->pwd_random_new), "clicked",
-			    GTK_SIGNAL_FUNC (user_account_passwd_random_new), gui);
-
-	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "changed",
-			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->pwd2), "changed",
-			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
-
-	gtk_signal_connect (GTK_OBJECT (gui->name), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->comment);
-	gtk_signal_connect (GTK_OBJECT (gui->comment), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->office);
-	gtk_signal_connect (GTK_OBJECT (gui->office), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->wphone);
-	gtk_signal_connect (GTK_OBJECT (gui->wphone), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->hphone);
-	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->pwd2);
-	gtk_signal_connect (GTK_OBJECT (gui->uid), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->home);
-
 	return gui;
 }
 

@@ -1,3 +1,12 @@
+2001-06-25  Tambet Ingo  <tambet@ximian.com>
+
+	* user_settings.c (user_account_comment_changed): Implement.
+	(user_account_connect_signals): Implement, moved signal connection here
+	from (user_account_gui_new). Added new signals to check comment on the fly.
+	Fixes bug #3471
+
+	* user_group.c (user_account_check_comment): Improved check.
+
 2001-06-14  Tambet Ingo  <tambet@ximian.com>
 
 	* user_settings.c (user_account_gui_profile_changed): Implement.
