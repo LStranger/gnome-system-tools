@@ -20,6 +20,7 @@ server.png  \
 settings.png  \
 shares.png  \
 time.png  \
+timezone.png  \
 users-groups.png  \
 users.png  \
 world_map-960.png
