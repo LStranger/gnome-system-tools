@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
-"POT-Creation-Date: 2003-08-02 15:39+0200\n"
-"PO-Revision-Date: 2003-08-02 15:40+0200\n"
+"POT-Creation-Date: 2003-08-11 18:11+0200\n"
+"PO-Revision-Date: 2003-08-11 18:12+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,39 +17,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: gnome-system-tools.schemas.in.h:1
+msgid ""
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr ""
+"Kommaseparerad lista med värdar som GST kommer att komma åt då alternativet "
+"för fjärrkonfiguration är aktiverat"
+
+#: gnome-system-tools.schemas.in.h:2
 msgid "Default runlevel"
 msgstr "Standardkörnivå"
 
-#: gnome-system-tools.schemas.in.h:2
+#: gnome-system-tools.schemas.in.h:3
 msgid "Dialog complexity for the boot-admin tool"
 msgstr "Dialogkomplexitet för startadministrationsverktyget"
 
-#: gnome-system-tools.schemas.in.h:3
+#: gnome-system-tools.schemas.in.h:4
 msgid "Dialog complexity for the network-admin tool"
 msgstr "Dialogkomplexitet för nätverksadministrationsverktyget"
 
-#: gnome-system-tools.schemas.in.h:4
+#: gnome-system-tools.schemas.in.h:5
 msgid "Dialog complexity for the runlevel-admin tool"
 msgstr "Dialogkomplexitet för körnivåadministrationsverktyget"
 
-#: gnome-system-tools.schemas.in.h:5
+#: gnome-system-tools.schemas.in.h:6
 msgid "Dialog complexity for the time-admin tool"
 msgstr "Dialogkomplexitet för tidsadministrationsverktyget"
 
-#: gnome-system-tools.schemas.in.h:6
+#: gnome-system-tools.schemas.in.h:7
 msgid "Dialog complexity for the users-admin tool"
 msgstr "Dialogkomplexitet för användaradministrationsverktyget"
 
-#: gnome-system-tools.schemas.in.h:7
+#: gnome-system-tools.schemas.in.h:8
 msgid "Last GST version executed"
 msgstr "Senaste GST-version som körts"
 
-#: gnome-system-tools.schemas.in.h:8
+#: gnome-system-tools.schemas.in.h:9
+msgid "Remote hosts"
+msgstr "Fjärrvärdar"
+
+#: gnome-system-tools.schemas.in.h:10
 msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
 msgstr ""
 "Körnivå som körnivåadministrationsverktyget visar som standard i grundläget"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:11
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -58,17 +70,29 @@ msgstr ""
 "läge. Det avancerade läget är tänkt att visa färre alternativ än det "
 "avancerade"
 
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:12
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
+msgstr ""
+"GST kan utföra fjärrkonfiguration genom SSH. Aktivera detta alternativ för "
+"att använda denna funktion"
+
+#: gnome-system-tools.schemas.in.h:13
 msgid "The last GST version that this computer has run"
 msgstr "Den senaste GST-versionen som denna dator har kört"
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:14
+msgid "Whether the tools will use remote administration or not"
+msgstr "Huruvida verktygen ska använda fjärradministration eller inte"
+
+#: gnome-system-tools.schemas.in.h:15
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Huruvida användaradministrationsverktyget ska visa alla användare och "
 "grupper eller inte"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Huruvida varningsdialogen ska visas eller inte"
 
@@ -192,7 +216,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Avbildsinställningar (steg 2 av 2)"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1730
+#: src/network/connection.c:1744
 msgid "Manual"
 msgstr "Manuell"
 
@@ -340,23 +364,35 @@ msgstr "Komplexitet"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Ange lösenord - GNOME-systemverktygen"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1700
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1783
 msgid "GNOME System Tools"
 msgstr "GNOME-systemverktygen"
 
 #: interfaces/common.glade.in.h:14
+msgid "Remote administration"
+msgstr "Fjärradministration"
+
+#: interfaces/common.glade.in.h:15
 msgid "Run _Without Password"
 msgstr "Kör _utan lösenord"
 
-#: interfaces/common.glade.in.h:15
+#: interfaces/common.glade.in.h:16
 msgid "Scanning system configuration..."
 msgstr "Läser igenom systemkonfigurationen..."
 
-#: interfaces/common.glade.in.h:16
+#: interfaces/common.glade.in.h:17
 msgid "Unsupported Platform"
 msgstr "Plattformen stöds inte"
 
-#: interfaces/common.glade.in.h:17 interfaces/network.glade.in.h:164
+#: interfaces/common.glade.in.h:18
+msgid ""
+"Use this window to select the computer\n"
+"you wish to configure"
+msgstr ""
+"Använda detta fönster för att välja\n"
+"den dator du vill konfigurera"
+
+#: interfaces/common.glade.in.h:20 interfaces/network.glade.in.h:164
 #: interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Lösenord:"
@@ -781,7 +817,7 @@ msgid "Create a new local network interface."
 msgstr "Skapa ett nytt lokalt nätverksgränssnitt."
 
 #: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:46
-#: src/network/connection.c:1731
+#: src/network/connection.c:1745
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1437,7 +1473,7 @@ msgstr "Tillåt aktiveringskontroll för alla användare"
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1732
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1746
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -3142,6 +3178,20 @@ msgstr "/_Egenskaper"
 msgid "/_Delete"
 msgstr "/_Ta bort"
 
+#. the proccess was running ssh
+#: src/common/gst-auth.c:82
+msgid "Could not connect to the computer."
+msgstr "Kunde inte ansluta till datorn."
+
+#. the proccess was running su
+#: src/common/gst-auth.c:85 src/common/gst-auth.c:234
+msgid "The password you entered is invalid."
+msgstr "Lösenordet du angav är ogiltigt."
+
+#: src/common/gst-auth.c:88
+msgid "An unexpected error has occurred."
+msgstr "Ett oväntat fel har inträffat."
+
 #: src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
@@ -3155,7 +3205,7 @@ msgstr " Fler _alternativ"
 msgid " Less _Options"
 msgstr " Färre _alternativ"
 
-#: src/common/gst-dialog.c:479
+#: src/common/gst-dialog.c:476
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3163,33 +3213,21 @@ msgstr ""
 "Det finns ändringar som inte har verkställts.\n"
 "Verkställ dem nu?"
 
-#: src/common/gst-dialog.c:565
+#: src/common/gst-dialog.c:571
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/gst-su.c:83
-msgid "The password you entered is invalid."
-msgstr "Lösenordet du angav är ogiltigt."
-
-#: src/common/gst-tool.c:962
+#: src/common/gst-tool.c:944
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Hoppar över %s-direktiv..."
 
-#: src/common/gst-tool.c:1020
-msgid "Scanning your system configuration."
-msgstr "Läser av din systemkonfiguration."
-
-#: src/common/gst-tool.c:1100
+#: src/common/gst-tool.c:1091
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/gst-tool.c:1142
-msgid "Updating your system configuration."
-msgstr "Uppdaterar din systemkonfiguration."
-
-#: src/common/gst-tool.c:1163
+#: src/common/gst-tool.c:1153
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3197,12 +3235,12 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/gst-tool.c:1409
+#: src/common/gst-tool.c:1506
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - GNOME-systemverktygen"
 
-#: src/common/gst-tool.c:1600
+#: src/common/gst-tool.c:1684
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -3229,17 +3267,13 @@ msgstr ""
 "--\n"
 "Teamet bakom GNOME-systemverktygen"
 
-#: src/common/gst-tool.c:1624
+#: src/common/gst-tool.c:1708
 msgid "Warning"
 msgstr "Varning"
 
-#: src/common/gst-tool.c:1633
+#: src/common/gst-tool.c:1717
 msgid "Don't show me this again"
 msgstr "Visa inte detta igen"
-
-#: src/common/gst-tool.c:1707
-msgid "Pretending we are root..."
-msgstr "Låtsas att vi är root..."
 
 #: src/common/gst-ui.c:396
 msgid ""
@@ -3486,7 +3520,7 @@ msgstr "Status"
 msgid "Description"
 msgstr "Beskrivning"
 
-#: src/network/connection.c:1611
+#: src/network/connection.c:1625
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3496,7 +3530,7 @@ msgstr ""
 "lämnades tom. Ange giltiga IP-adresser i de\n"
 "fälten för att fortsätta."
 
-#: src/network/connection.c:1618
+#: src/network/connection.c:1632
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3506,7 +3540,7 @@ msgstr ""
 "gränssnittet lämnades tom. Ange giltiga\n"
 "IP-adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:1624
+#: src/network/connection.c:1638
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3520,7 +3554,7 @@ msgstr ""
 "för den primära DNS-servern eller avmarkera\n"
 "alternativet att välja DNS-servrarna manuellt."
 
-#: src/network/connection.c:2180
+#: src/network/connection.c:2194
 msgid "Autodetecting modem device"
 msgstr "Detekterar automatiskt modemenhet"
 
@@ -3933,6 +3967,35 @@ msgstr "Kommentarer"
 msgid "Users and groups."
 msgstr "Användare och grupper."
 
+#~ msgid ""
+#~ "Comma separated list of hosts that GST will be able to access when the "
+#~ "remote configuration option is enabled"
+#~ msgstr ""
+#~ "Kommaseparerad lista med värdar som GST kommer att komma åt då "
+#~ "alternativet för fjärrkonfiguration är aktiverat"
+
+#~ msgid ""
+#~ "GST are able to do remote configuration through SSH, enable this option "
+#~ "to use this feature"
+#~ msgstr ""
+#~ "GST kan utföra fjärrkonfiguration genom SSH. Aktivera detta alternativ "
+#~ "för att använda denna funktion"
+
+#~ msgid "Remote Administration"
+#~ msgstr "Fjärradministration"
+
+#~ msgid "Use this window to select the computer you wish to configure"
+#~ msgstr "Använda detta fönster för att välja den dator du vill konfigurera"
+
+#~ msgid "Scanning your system configuration."
+#~ msgstr "Läser av din systemkonfiguration."
+
+#~ msgid "Updating your system configuration."
+#~ msgstr "Uppdaterar din systemkonfiguration."
+
+#~ msgid "Pretending we are root..."
+#~ msgstr "Låtsas att vi är root..."
+
 #~ msgid "Number of colors"
 #~ msgstr "Antal färger"
 
@@ -3992,9 +4055,6 @@ msgstr "Användare och grupper."
 
 #~ msgid "System"
 #~ msgstr "System"
-
-#~ msgid "System administration"
-#~ msgstr "Systemadministration"
 
 #~ msgid "Internet Service Provider Data"
 #~ msgstr "Data för Internetleverantör"
