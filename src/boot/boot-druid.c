@@ -255,12 +255,13 @@ other_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 image_check (BootDruid *druid)
 {
-	const gchar *buf = gtk_entry_get_text (druid->gui->image_entry);
+	const gchar *buf = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (druid->gui->image_widget));
 	const gchar *buf2 = gtk_entry_get_text (GTK_ENTRY (GTK_BIN (druid->gui->root)->child));
-	gboolean enabled = ((strlen (buf) > 0) && (strlen (buf2) > 0))?TRUE : FALSE;
+	gboolean enabled = (buf && buf2 && (strlen (buf) > 0) && (strlen (buf2) > 0)) ? TRUE : FALSE;
 	
 	/* TODO: Improve check */ 
 	gnome_druid_set_buttons_sensitive (druid->druid, TRUE, enabled, TRUE, FALSE);
+	g_free (buf);
 }
 
 static void
@@ -280,7 +281,7 @@ image_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	gtk_window_set_title (GTK_WINDOW (config), title);
 	g_free (title);
 
-	gtk_widget_grab_focus (GTK_WIDGET (config->gui->image_entry));
+	gtk_widget_grab_focus (GTK_WIDGET (config->gui->image_widget));
 	g_signal_stop_emission_by_name (page, "prepare");
 	image_check (config);
 }
@@ -502,7 +503,7 @@ construct (BootDruid *druid)
 	g_signal_connect (G_OBJECT (druid->gui->type), "changed",
 			  G_CALLBACK (identity_changed), druid);
 	
-	g_signal_connect (G_OBJECT (druid->gui->image_entry), "changed",
+	g_signal_connect (G_OBJECT (druid->gui->image_widget), "selection-changed",
 			  G_CALLBACK (image_changed), druid);
 	g_signal_connect (G_OBJECT (GTK_BIN (druid->gui->root)->child), "changed",
 			  G_CALLBACK (image_changed), druid);

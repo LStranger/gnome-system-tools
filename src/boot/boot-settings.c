@@ -125,11 +125,9 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	/* Image frame */
 	gui->image_frame = glade_xml_get_widget (gui->xml, "settings_image_frame");
 	gui->image_widget = glade_xml_get_widget (gui->xml, "settings_image");
-	gui->image_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image_entry"));	
 	gui->root = glade_xml_get_widget (gui->xml, "settings_root");
 	gui->initrd_label = glade_xml_get_widget (gui->xml, "settings_initrd_label");
 	gui->initrd_widget = glade_xml_get_widget (gui->xml, "settings_initrd");
-	gui->initrd_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_initrd_entry"));
 	gui->append = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_append"));
 	gui->append_browse = GTK_BUTTON (glade_xml_get_widget (gui->xml, "settings_append_browse"));
 
@@ -282,9 +280,9 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 			gst_ui_entry_set_text (GTK_ENTRY (GTK_BIN (gui->root)->child), image->root);
 
 		if (error = boot_image_valid_initrd (image))
-			gst_ui_entry_set_text (gui->initrd_entry, "");
+			gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (gui->initrd_widget), "/boot");
 		else
-			gst_ui_entry_set_text (gui->initrd_entry, image->initrd);
+			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (gui->initrd_widget), image->initrd);
 
 		gst_ui_entry_set_text (gui->append, image->append);
 		boot_settings_set_type (gui, type_to_label (image->type));
@@ -297,9 +295,9 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 			gst_ui_entry_set_text (GTK_ENTRY (GTK_BIN (gui->root)->child), image->root);
 
 		if (error = boot_image_valid_module (image))
-			gst_ui_entry_set_text (gui->initrd_entry, "");
+			gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (gui->initrd_widget), "/boot");
 		else
-			gst_ui_entry_set_text (gui->initrd_entry, image->module);
+			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (gui->initrd_widget), image->module);
 
 		gst_ui_entry_set_text (gui->append, image->append);
 		boot_settings_set_type (gui, type_to_label (image->type));
@@ -317,10 +315,10 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 	
 	gst_ui_entry_set_text (gui->name, image->label);
 
-	if (error = boot_image_valid_root (image))
-		gst_ui_entry_set_text (gui->image_entry, "");
+	if (error = boot_image_valid_root (image) || !image->image)
+		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (gui->image_widget), "/boot");
 	else
-		gst_ui_entry_set_text (gui->image_entry, image->image);
+		gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (gui->image_widget), image->image);
 
 	gst_ui_entry_set_text (GTK_BIN (gui->device)->child, image->image);
 
@@ -382,15 +380,15 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 	{
 		image->root = g_strdup (gtk_entry_get_text (GTK_ENTRY (GTK_BIN (gui->root)->child)));
 		image->append = g_strdup (gtk_entry_get_text (gui->append));
-		image->image = g_strdup (gtk_entry_get_text (gui->image_entry));
-		image->initrd = g_strdup (gtk_entry_get_text (gui->initrd_entry));
+		image->image = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (gui->image_widget));
+		image->initrd = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (gui->initrd_widget));
 	}
 	else if (image->type == TYPE_HURD)
 	{
 		image->root = g_strdup (gtk_entry_get_text (GTK_ENTRY (GTK_BIN (gui->root)->child)));
 		image->append = g_strdup (gtk_entry_get_text (gui->append));
-		image->image = g_strdup (gtk_entry_get_text (gui->image_entry));
-		image->module = g_strdup (gtk_entry_get_text (gui->initrd_entry));
+		image->image = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (gui->image_widget));
+		image->module = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (gui->initrd_widget));
 	}
 	else
 	{

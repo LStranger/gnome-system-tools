@@ -18,12 +18,10 @@ typedef struct {
 
 	/* Image frame */
 	GtkWidget *image_frame;
-	GtkWidget *image_widget;
-	GtkEntry  *image_entry;
+	GtkEntry  *image_widget;
 	GtkWidget *root;
 	GtkWidget *initrd_label;
 	GtkWidget *initrd_widget;
-	GtkEntry  *initrd_entry;
 	GtkEntry  *append;
 	GtkButton *append_browse;
 
