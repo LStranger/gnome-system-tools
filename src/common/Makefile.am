@@ -9,7 +9,6 @@ INCLUDES =		\
 
 libsetuptool_a_SOURCES =              \
 	xst-xml.c	xst-xml.h                 \
-	helpers.c	helpers.h                 \
 	text.c text.h		                    \
 	xst-widget.c xst-widget.h           \
 	xst-dialog.c xst-dialog.h	          \
