@@ -1481,14 +1481,13 @@ try_show_usage_warning (void)
 	gchar *version;
 	GConfClient *client;
 	GError *error = NULL;
-	gchar *warning_title = g_strdup_printf (_("<span weight=\"bold\" size=\"larger\">"
-						  "Welcome to the %s prerelease of the GNOME System Tools"
-						  "</span>"), VERSION);
-	gchar *warning = _("This is still a work in progress, and so it may have serious bugs. "
-			   "Due to the nature of these tools, bugs may render your computer "
-			   "<span weight=\"bold\">practically useless</span>, costing time, effort and sanity points. "
-			   "You have been warned. Thank you for trying out this prerelease of "
-			   "the GNOME System Tools!");
+	gchar *title         = g_strdup_printf (_("Welcome to the %s prerelease of the GNOME System Tools"), VERSION);
+	gchar *warning_title = g_strdup_printf ("<span weight=\"bold\" size=\"larger\">%s</span>", title);
+	gchar *warning       = _("This is still a work in progress, and so it may have serious bugs. "
+				 "Due to the nature of these tools, bugs may render your computer "
+				 "<span weight=\"bold\">practically useless</span>, costing time, effort and sanity points. "
+				 "You have been warned. Thank you for trying out this prerelease of "
+				 "the GNOME System Tools!");
 
 	client = gconf_client_get_default ();
 
@@ -1557,6 +1556,7 @@ try_show_usage_warning (void)
 	}
 
 	g_free (warning_title);
+	g_free (title);
 	g_free (key);
 }
 
