@@ -422,17 +422,14 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 	if (!tool->line)
 		tool->line = g_string_new ("");
 
-	/* NOTE: The read() being done here is inefficient, but we're not
-	 * going to handle any large amount of data */
-
-	while ((n = read (fd, buffer, sizeof (buffer)-1)) != 0){
+	while ((n = read (fd, buffer, sizeof (buffer) - 1)) != 0) {
 
 		buffer [n] = 0;
 		
-		for (i = 0; (i < n); i++){
+		for (i = 0; (i < n); i++) {
 			char c = buffer [i];
 			
-			if (c == '\n'){
+			if (c == '\n') {
 				/* End of line */
 				
 				/* Report line; add to list */
@@ -461,13 +458,13 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 
  full_break:
 
-	if (n <= 0){
+	if (n <= 0) {
 		/* Zero-length read; pipe closed unexpectedly */
 
 		tool->report_finished = TRUE;
 	}
 
-	if (tool->report_finished){
+	if (tool->report_finished) {
 		if (n > 0)
 			tool->xml_document = g_string_new (&buffer [i]);
 		g_string_free (tool->line, TRUE);
@@ -624,7 +621,7 @@ gboolean
 xst_tool_load (XstTool *tool)
 {
 	int fd [2];
-	int t, len;
+	int t;
 
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);	
@@ -1029,6 +1026,53 @@ authenticate (gchar *exec_path)
 	}
 }
 
+static void
+try_show_usage_warning (void)
+{
+	gchar *key;
+	gboolean value;
+	gchar *first_run_text =
+		_("Welcome to the " VERSION " prerelease of the Ximian Setup Tools.\n\n"
+		  "This is still a work in progress, and so it may have serious bugs.\n"
+		  "Due to the nature of these tools, bugs may render your computer\n"
+		  "PRACTICALLY USELESS, costing time, effort and sanity points.\n\n"
+		  "You have been warned. Thank you for trying out this prerelease of\n"
+		  "the Ximian Setup Tools!\n\n"
+		  "--\nThe Ximian Setup Tools team");
+
+	key = g_strjoin ("/", XST_CONF_ROOT, "global", "previously-run-" VERSION, NULL);
+
+	value = gnome_config_get_bool (key);
+
+	if (!value)
+	{
+		GnomeDialog *dialog;
+		GtkWidget *w0, *w1, *w2;
+
+		dialog = GNOME_DIALOG (gnome_warning_dialog (first_run_text));
+		w0 = gtk_container_children (GTK_CONTAINER (GTK_BIN (GTK_BIN (dialog)->child)->child))->data;
+		w1 = GTK_WIDGET (gtk_check_button_new_with_label (_("Don't show me this again")));
+		gtk_widget_ref (w1);
+		w2 = GTK_WIDGET (gtk_alignment_new (1.0, 0.0, 0.0, 0.0));
+		gtk_container_add (GTK_CONTAINER (w2), w1);
+		gtk_box_pack_end (GTK_BOX (w0), w2, TRUE, TRUE, 0);
+		gtk_widget_show (w1);
+		gtk_widget_show (w2);
+
+		gnome_dialog_run_and_close (dialog);
+
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w1)))
+		{
+			gnome_config_set_bool (key, TRUE);
+			gnome_config_sync ();
+		}
+
+		gtk_widget_unref (w1);
+	}
+
+	g_free (key);
+}
+
 void
 xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
@@ -1069,4 +1113,6 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 		authenticate (argv [0]);
 		root_access = ROOT_ACCESS_NONE;
 	}
+
+	try_show_usage_warning ();
 }
