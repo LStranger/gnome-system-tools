@@ -2141,12 +2141,12 @@ connection_configure_device (xmlNodePtr root, gchar *interface)
 		}
 
 		if (!dev_node) {
-			primary_text   = g_strdup (_("Nonexisting interface"));
-			secondary_text = g_strdup_printf (_("The interface \"%s\" doesn't exist."), interface);
+			primary_text   = g_strdup_printf (_("The interface \"%s\" doesn't exist"), interface);
+			secondary_text = NULL;
 		}
 	} else {
 		primary_text   = g_strdup (_("Invalid interface"));
-		secondary_text = g_strdup (_("The loopback interface cannot be configured."));
+		secondary_text = g_strdup (_("The loopback interface cannot be configured"));
 	}
 
 	if (!primary_text) {
