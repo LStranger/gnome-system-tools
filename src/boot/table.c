@@ -182,14 +182,16 @@ boot_value_label (xmlNodePtr node)
 gboolean
 boot_value_default (xmlNodePtr node)
 {
-	gchar *name, *def;
-	gboolean value;
+	gchar *name = NULL;
+	gchar *def = NULL;
+	gboolean value = FALSE;
 	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
 	
 	def = gst_xml_get_child_content (root, "default");
 	name = gst_xml_get_child_content (node, "label");
 
-	value = ((name) && (strcmp (name, def) == 0));
+	if (def && name)
+		value = (strcmp (name, def) == 0);
 
 	g_free (def);
 	g_free (name);
