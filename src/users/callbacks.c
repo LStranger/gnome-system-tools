@@ -411,10 +411,3 @@ actions_set_sensitive (gint table, gboolean state)
 		return;
 	}
 }
-
-void
-my_gtk_entry_set_text (void *entry, gchar *str)
-{
-	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
-}
-

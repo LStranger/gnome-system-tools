@@ -422,16 +422,16 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 	user_account_shells_setup (gui);
 	user_account_groups_setup (gui->group, account->node);
 	
-	my_gtk_entry_set_text (gui->name, account->name);
-	my_gtk_entry_set_text (gui->comment, account->comment);
-	my_gtk_entry_set_text (gui->home, account->home);
-	my_gtk_entry_set_text (GTK_ENTRY (gui->shell->entry), account->shell);
+	xst_ui_entry_set_text (gui->name, account->name);
+	xst_ui_entry_set_text (gui->comment, account->comment);
+	xst_ui_entry_set_text (gui->home, account->home);
+	xst_ui_entry_set_text (GTK_ENTRY (gui->shell->entry), account->shell);
 	gtk_spin_button_set_value (gui->uid, atoi (account->uid));
 
 	gtk_clist_set_auto_sort (gui->all, TRUE);
 	gtk_clist_set_auto_sort (gui->member, TRUE);
 	
-	my_gtk_entry_set_text (GTK_ENTRY (gui->group->entry), account->group);
+	xst_ui_entry_set_text (GTK_ENTRY (gui->group->entry), account->group);
 	my_gtk_clist_append_items (gui->member, (GList *)account->extra_groups);
 	/* Others */
 	users = get_group_list ("name", account->node);

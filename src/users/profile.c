@@ -750,10 +750,10 @@ profile_update_ui (Profile *pf)
 	for (i = 0; om[i]; i++)
 		xst_ui_option_menu_set_selected_string (om[i], pf->name);
 	
-	my_gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
+	xst_ui_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
 					pf->home_prefix);
-	my_gtk_entry_set_text (GTK_ENTRY (pft->shell->entry), pf->shell);
-	my_gtk_entry_set_text (GTK_ENTRY (pft->group), pf->group);
+	xst_ui_entry_set_text (GTK_ENTRY (pft->shell->entry), pf->shell);
+	xst_ui_entry_set_text (GTK_ENTRY (pft->group), pf->group);
 	
 	gtk_spin_button_set_value (pft->umin, (gfloat) pf->umin);
 	gtk_spin_button_set_value (pft->umax, (gfloat) pf->umax);
@@ -789,7 +789,7 @@ profile_save_entry (GtkEntry *entry, gchar **data)
 			g_free (*data);
 		*data = g_strdup (buf);
 	} else
-		my_gtk_entry_set_text (entry, *data);
+		xst_ui_entry_set_text (entry, *data);
 }
 
 void

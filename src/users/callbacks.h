@@ -64,7 +64,6 @@ void on_group_settings_members_select_row (GtkCList *clist, gint row, gint colum
 					   GdkEventButton *event, gpointer user_data);
 
 void actions_set_sensitive (gint table, gboolean state);
-void my_gtk_entry_set_text (void *entry, gchar *str);
 
 void on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer data);
 

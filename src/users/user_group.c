@@ -41,10 +41,8 @@ static int reply;
 /* Static prototypes */
 
 static void group_settings_prepare (ug_data *ud);
-static void group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_name);
 static void group_update_xml (xmlNodePtr node, gboolean adv);
 static GList *get_group_users (xmlNodePtr group_node);
-static GList *get_group_mainusers (xmlNodePtr group_node);
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 static void del_group_users (xmlNodePtr group_node);
@@ -933,7 +931,7 @@ group_settings_prepare (ug_data *ud)
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
 	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-	my_gtk_entry_set_text (w0, name);
+	xst_ui_entry_set_text (w0, name);
 
 	/* Fill group members */
 	member_rows = group_fill_members_list (ud->node);
@@ -996,6 +994,8 @@ group_update_xml (xmlNodePtr node, gboolean adv)
 		add_group_users (node, buf);
 }
 
+#if 0
+/* Not used at the moment, if'ed out to get rid of complier warning. */
 static void
 group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_name)
 {
@@ -1035,6 +1035,7 @@ group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_name)
 		}
 	}
 }
+#endif
 
 static GList *
 get_group_users (xmlNodePtr group_node)
@@ -1057,6 +1058,8 @@ get_group_users (xmlNodePtr group_node)
 	return userlist;
 }
 
+#if 0
+/* Not used at the moment, if'ed out to get rid of complier warning. */
 static GList *
 get_group_mainusers (xmlNodePtr group_node)
 {
@@ -1088,6 +1091,7 @@ get_group_mainusers (xmlNodePtr group_node)
 	g_free (gid);
 	return userlist;
 }
+#endif
 
 static GList *
 group_fill_members_list (xmlNodePtr node)
