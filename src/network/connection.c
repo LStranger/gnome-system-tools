@@ -383,6 +383,7 @@ hookup_callbacks (Connection *cxn)
 void
 connection_configure (Connection *cxn)
 {
+	GtkWidget *nb;
 	char *s;
 
 	if (cxn->window) {
@@ -407,16 +408,21 @@ connection_configure (Connection *cxn)
 	fill_general (cxn);
 	fill_ip      (cxn);
 
-	switch (cxn->type) {
-	case CONNECTION_WVLAN:
-		fill_wvlan (cxn);
-		break;
-	case CONNECTION_PPP:
+	/* would like to do this as a switch */
+	nb = W ("connection_nb");
+	if (cxn->type == CONNECTION_PPP)
 		fill_ppp (cxn);
-		break;
-	default:
-		break;
-	}
+	else
+		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
+					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+								 W ("ppp_vbox")));
+       
+	if (cxn->type == CONNECTION_WVLAN)
+		fill_wvlan (cxn);
+	else
+		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
+					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+								 W ("wvlan_vbox")));
 
 	cxn->frozen = FALSE;
 
