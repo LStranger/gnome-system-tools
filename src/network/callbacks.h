@@ -65,9 +65,9 @@ gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
 void on_connection_add_clicked (GtkWidget *w, gpointer null);
 void on_connection_delete_clicked (GtkWidget *w, gpointer null);
 void on_connection_configure_clicked (GtkWidget *w, gpointer null);
-void on_connection_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget);
-void on_connection_popup_configure_activate (gpointer callback_data, guint action, GtkWidget *widget);
-void on_connection_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_connection_popup_add_activate (GtkAction*, gpointer);
+void on_connection_popup_configure_activate (GtkAction*, gpointer);
+void on_connection_popup_delete_activate (GtkAction*, gpointer);
 void on_connection_activate_button_clicked (GtkWidget*, gpointer);
 void on_connection_deactivate_button_clicked (GtkWidget*, gpointer);
 
@@ -103,7 +103,7 @@ gchar* on_volume_format_value (GtkWidget*, gdouble, gpointer);
 void on_dns_search_add_button_clicked (GtkWidget *button, gpointer gdata);
 void on_dns_search_del_button_clicked (GtkWidget *button, gpointer gdata);
 void on_dns_search_entry_changed      (GtkWidget *entry, gpointer gdata);
-void on_dns_search_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_dns_search_popup_del_activate (GtkAction*, gpointer);
 void on_drag_data_received (GtkTreeView*, GdkDragContext*, gint, gint, GtkSelectionData*, guint, guint);
 void on_drag_data_get (GtkTreeView*, GdkDragContext*, GtkSelectionData*, guint, guint, gpointer);
 
@@ -112,7 +112,7 @@ void on_hosts_ip_changed (GtkEditable*, gpointer);
 void on_hosts_alias_changed (GtkTextBuffer*, gpointer);
 void on_hosts_add_clicked (GtkWidget*, gpointer);
 void on_hosts_delete_clicked (GtkWidget*, gpointer);
-void on_hosts_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_hosts_popup_del_activate (GtkAction*, gpointer);
 
 
 /* Network connection druid callbacks */
@@ -132,5 +132,8 @@ void on_network_profile_new_clicked (GtkWidget*, gpointer);
 void on_network_profile_delete_clicked (GtkWidget*, gpointer);
 void on_network_profile_table_selection_changed (GtkWidget*, gpointer);
 void on_network_profile_option_selected (GtkWidget*, gpointer);
+
+/* helpers */
+GtkWidget* create_popup_menu (GtkWidget*, GtkActionEntry*, gint, const gchar*);
 
 #endif /*  __CALLBACKS_H__  */

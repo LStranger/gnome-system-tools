@@ -69,13 +69,33 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	profiles_table_create (tool);
 }
 
+static void
+do_popup_menu (GtkTreeView *treeview, GtkWidget *popup, GdkEventButton *event)
+{
+	GtkTreePath  *path;
+	GtkUIManager *ui_manager;
+	gint          button, event_time;
+
+	if (event) {
+		button     = event->button;
+		event_time = event->time;
+	} else {
+		button     = 0;
+		event_time = gtk_get_current_event_time ();
+	}
+
+	gtk_menu_popup (GTK_MENU (popup),
+			NULL, NULL, NULL, NULL,
+			button, event_time);
+}
+
 gboolean
 callbacks_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
 {
 	GtkTreePath *path;
-	GtkItemFactory *factory;
+	GtkWidget   *popup;
 
-	factory = (GtkItemFactory *) gdata;
+	popup = GTK_WIDGET (gdata);
 
 	if (event->button == 3)
 	{
@@ -85,8 +105,7 @@ callbacks_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer g
 			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
 			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
 
-			gtk_item_factory_popup (factory, event->x_root, event->y_root,
-						event->button, event->time);
+			do_popup_menu (treeview, popup, event);
 		}
 		return TRUE;
 	}
@@ -389,19 +408,19 @@ on_connection_configure_clicked (GtkWidget *w, gpointer null)
 }
 
 void
-on_connection_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_connection_popup_add_activate (GtkAction *action, gpointer callback_data)
 {
 	on_connection_add_clicked (callback_data, NULL);
 }
 
 void
-on_connection_popup_configure_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_connection_popup_configure_activate (GtkAction *action, gpointer callback_data)
 {
 	on_connection_configure_clicked (callback_data, NULL);
 }
 
 void
-on_connection_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_connection_popup_delete_activate (GtkAction *action, gpointer callback_data)
 {
 	on_connection_delete_clicked (callback_data, NULL);
 }
@@ -1036,7 +1055,7 @@ on_dns_search_entry_changed (GtkWidget *widget, gpointer gdata)
 }
 
 void
-on_dns_search_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_dns_search_popup_del_activate (GtkAction *action, gpointer callback_data)
 {
 	on_dns_search_del_button_clicked (callback_data, NULL);
 }
@@ -1208,7 +1227,7 @@ on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 }
 
 void
-on_hosts_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_hosts_popup_del_activate (GtkAction *action, gpointer callback_data)
 {
 	on_hosts_delete_clicked (callback_data, NULL);
 }
@@ -1525,4 +1544,27 @@ on_drag_data_received (GtkTreeView *treeview,
 	gtk_drag_finish (context, TRUE, TRUE, GDK_CURRENT_TIME);
 
 	gst_dialog_modify (tool->main_dialog);
+}
+
+GtkWidget *
+create_popup_menu (GtkWidget *widget, GtkActionEntry *menu_items, gint nitems, const gchar *ui_description)
+{
+	GtkUIManager   *ui_manager;
+	GtkActionGroup *action_group;
+	GtkWidget      *popup;
+
+	g_return_val_if_fail (widget != NULL, NULL);
+
+	action_group = gtk_action_group_new ("MenuActions");
+	gtk_action_group_add_actions (action_group, menu_items, nitems, widget);
+
+	ui_manager = gtk_ui_manager_new ();
+	gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
+
+	if (!gtk_ui_manager_add_ui_from_string (ui_manager, ui_description, -1, NULL))
+		return NULL;
+
+	popup = gtk_ui_manager_get_widget (ui_manager, "/MainMenu");
+
+	return popup;
 }

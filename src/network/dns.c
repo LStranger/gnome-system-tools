@@ -35,31 +35,16 @@
 
 extern GstTool *tool;
 
-GtkItemFactoryEntry dns_search_popup_menu_items[] = {
-	{ N_("/_Delete"), NULL, G_CALLBACK (on_dns_search_popup_del_activate), DNS_SEARCH_POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+GtkActionEntry dns_search_popup_menu_items [] = {
+	{ "Delete", GTK_STOCK_DELETE, N_("_Delete"), NULL, NULL, G_CALLBACK (on_dns_search_popup_del_activate) },
 };
 
-static char *
-dns_search_item_factory_trans (const char *path, gpointer data)
-{
-	return _((gchar*)path);
-}
-
-static GtkItemFactory *
-dns_search_popup_item_factory_create (GtkWidget *treeview)
-{
-	GtkItemFactory *item_factory;
-
-	g_return_val_if_fail (treeview != NULL, NULL);
-	
-	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
-	gtk_item_factory_set_translate_func (item_factory, dns_search_item_factory_trans,
-					     NULL, NULL);
-	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (dns_search_popup_menu_items),
-				       dns_search_popup_menu_items, (gpointer) treeview);
-
-	return item_factory;
-}
+const gchar *dns_search_ui_description =
+	"<ui>"
+	"  <popup name='MainMenu'>"
+	"    <menuitem action='Delete'/>"
+	"  </popup>"
+	"</ui>";
 
 gboolean 
 gst_dns_search_is_in_list (GtkWidget *list, const gchar *ip_str)
@@ -208,8 +193,7 @@ dns_search_gui_setup (GstTool *tool, const gchar *listname, const gchar *entryna
 	GtkWidget        *treeview;
 	GtkTreeSelection *select;
 	GtkTreeModel     *model;
-	GtkWidget        *entry;
-	GtkItemFactory   *item_factory;
+	GtkWidget        *entry, *popup;
 	GtkTargetEntry   target = { "dns", GTK_TARGET_SAME_WIDGET, 0 };
 
 	g_return_if_fail (tool != NULL);
@@ -235,11 +219,14 @@ dns_search_gui_setup (GstTool *tool, const gchar *listname, const gchar *entryna
 			  G_CALLBACK (on_dns_search_entry_changed),
 			  (gpointer) treeview);
 
-	item_factory = dns_search_popup_item_factory_create (treeview);
+	popup = create_popup_menu (treeview,
+				   dns_search_popup_menu_items,
+				   G_N_ELEMENTS (dns_search_popup_menu_items),
+				   dns_search_ui_description);
 
 	g_signal_connect (G_OBJECT (treeview), "button_press_event",
 			  G_CALLBACK (callbacks_button_press),
-			  (gpointer) item_factory);
+			  (gpointer) popup);
 	g_signal_connect (G_OBJECT (treeview), "drag-data-get",
 			  G_CALLBACK (on_drag_data_get),
 			  NULL);

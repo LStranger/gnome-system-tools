@@ -38,32 +38,16 @@
    not work with our signals connecting system */
 extern GstTool *tool;
 
-
-GtkItemFactoryEntry hosts_popup_menu_items[] = {
-	{ N_("/_Delete"), NULL, G_CALLBACK (on_hosts_popup_del_activate), HOSTS_POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+GtkActionEntry hosts_popup_menu_items [] = {
+	{ "Delete", GTK_STOCK_DELETE, N_("_Delete"), NULL, NULL, G_CALLBACK (on_hosts_popup_del_activate) },
 };
 
-static char *
-hosts_item_factory_trans (const char *path, gpointer data)
-{
-	return _((gchar*)path);
-}
-
-static GtkItemFactory *
-hosts_popup_item_factory_create (GtkWidget *treeview)
-{
-	GtkItemFactory *item_factory;
-
-	g_return_val_if_fail (treeview != NULL, NULL);
-
-	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
-	gtk_item_factory_set_translate_func (item_factory, hosts_item_factory_trans,
-					     NULL, NULL);
-	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (hosts_popup_menu_items),
-				       hosts_popup_menu_items, (gpointer) treeview);
-
-	return item_factory;
-}
+const gchar *hosts_ui_description =
+	"<ui>"
+	"  <popup name='MainMenu'>"
+	"    <menuitem action='Delete'/>"
+	"  </popup>"
+	"</ui>";
 
 static char *
 fixdown_text_list (char *s)
@@ -239,7 +223,7 @@ statichost_list_new (GstTool *tool)
 	GtkWidget        *treeview;
 	GtkTreeSelection *select;
 	GtkTreeModel     *model;
-	GtkItemFactory   *item_factory;
+	GtkWidget        *popup;
 
 	model = statichost_list_model_new ();
 
@@ -254,11 +238,14 @@ statichost_list_new (GstTool *tool)
 	g_signal_connect (G_OBJECT (select), "changed",
 			  G_CALLBACK (statichost_list_select_row), NULL);
 
-	item_factory = hosts_popup_item_factory_create (treeview);
+	popup = create_popup_menu (treeview,
+				   hosts_popup_menu_items,
+				   G_N_ELEMENTS (hosts_popup_menu_items),
+				   hosts_ui_description);
 
 	g_signal_connect (G_OBJECT (treeview), "button_press_event",
 			  G_CALLBACK (callbacks_button_press),
-			  (gpointer) item_factory);
+			  (gpointer) popup);
 
 	gtk_widget_show_all (treeview);
 
