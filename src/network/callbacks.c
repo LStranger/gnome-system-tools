@@ -610,8 +610,8 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 	gboolean active, configured, smb_installed;
 
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
-	configured = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "tool_configured");
-	smb_installed = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "smbinstalled");
+	configured = (gboolean) g_object_get_data (G_OBJECT (tool), "tool_configured");
+	smb_installed = (gboolean) g_object_get_data (G_OBJECT (tool), "smbinstalled");
 	
 	if (configured && !smb_installed && active) {
 		GtkWidget *dialog;
@@ -851,8 +851,8 @@ callbacks_check_gateway_hook (XstDialog *dialog, gpointer data)
 	XstTool *tool;
 
 	tool = XST_TOOL (data);
-	if (!gtk_object_get_data (GTK_OBJECT (tool), "gwdevunsup") &&
-	    gtk_object_get_data (GTK_OBJECT (tool), "gatewaydev"))
+	if (!g_object_get_data (G_OBJECT (tool), "gwdevunsup") &&
+	    g_object_get_data (G_OBJECT (tool), "gatewaydev"))
 		return callbacks_check_manual_gatewaydev (tool);
 
 	connection_default_gw_set_auto (tool);

@@ -63,6 +63,7 @@ e_tz_map_new (XstTimeTool *tool)
 	tzmap->tzdb = tz_load_db ();
 	if (!tzmap->tzdb)
 		g_error ("Unable to load system timezone database.");
+	
 	tzmap->map = e_map_new ();
 	if (!tzmap->map)
 		g_error ("Unable to create map widget.");
@@ -72,16 +73,15 @@ e_tz_map_new (XstTimeTool *tool)
 	for (i = 0; g_ptr_array_index(locs, i); i++)
 	{
 		tzl = g_ptr_array_index (locs, i);
-		
 		e_map_add_point (tzmap->map, NULL, tzl->longitude, tzl->latitude,
 				 TZ_MAP_POINT_NORMAL_RGBA);
 	}
 	
 	gtk_timeout_add (100, flash_selected_point, (gpointer) tzmap);
-        gtk_signal_connect(GTK_OBJECT (tzmap->map), "motion-notify-event",
-			   GTK_SIGNAL_FUNC (motion), (gpointer) tzmap);
-	gtk_signal_connect(GTK_OBJECT(tzmap->map), "button-press-event",
-			   GTK_SIGNAL_FUNC (button_pressed), (gpointer) tzmap);
+        g_signal_connect(G_OBJECT (tzmap->map), "motion-notify-event",
+			 G_CALLBACK (motion), (gpointer) tzmap);
+	g_signal_connect(G_OBJECT(tzmap->map), "button-press-event",
+			 G_CALLBACK (button_pressed), (gpointer) tzmap);
 	
 	return tzmap;
 }
@@ -167,7 +167,7 @@ e_tz_map_get_selected_tz_name (ETzMap *tzmap)
 	location_combo = xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
 	location_entry = GTK_COMBO (location_combo)->entry;
 
-	entry_text     = gtk_entry_get_text (GTK_ENTRY (location_entry));
+	entry_text     = (gchar *) gtk_entry_get_text (GTK_ENTRY (location_entry));
 
 	return entry_text;
 }
@@ -291,7 +291,7 @@ button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 		location_entry = GTK_COMBO (location_combo)->entry;
 		tz_location    = e_tz_map_location_from_point (tzmap, tzmap->point_selected);
 
-		entry_text     = gtk_entry_get_text (GTK_ENTRY (location_entry));
+		entry_text     = (gchar *) gtk_entry_get_text (GTK_ENTRY (location_entry));
 		entry_text_new = tz_location_get_zone (tz_location);
 
 		if (!entry_text || !entry_text_new || strcmp (entry_text, entry_text_new)) {

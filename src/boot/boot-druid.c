@@ -41,18 +41,19 @@ boot_druid_get_type (void)
 	static GtkType type = 0;
 
 	if (!type) {
-		GtkTypeInfo type_info = {
-			"BootDruid",
-			sizeof (BootDruid),
+		static const GTypeInfo type_info = {
 			sizeof (BootDruidClass),
-			(GtkClassInitFunc) boot_druid_class_init,
-			(GtkObjectInitFunc) NULL,
-			/* reserved_1 */ NULL,
-			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL,
+			NULL, /* base_init */
+			NULL, /* base finalize */
+			(GClassInitFunc) boot_druid_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BootDruid),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) NULL
 		};
-
-		type = gtk_type_unique (gtk_window_get_type (), &type_info);
+		
+		type = g_type_register_static (gtk_window_get_type (), "BootDruid", &type_info, 0);
 	}
 
 	return type;
@@ -466,7 +467,7 @@ boot_druid_new (void)
 {
 	BootDruid *new;
 
-	new = (BootDruid *) gtk_type_new (boot_druid_get_type ());
+	new = (BootDruid *) g_type_create_instance (boot_druid_get_type ());
 
 	if (construct (new))
 		return new;

@@ -42,7 +42,7 @@ XstTool *tool;
 static void 
 connect_signals (XstTool *tool) 
 {
-	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change", GTK_SIGNAL_FUNC (on_main_dialog_update_complexity), NULL);
+	g_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change", G_CALLBACK (on_main_dialog_update_complexity), NULL);
 }
 
 
@@ -55,6 +55,7 @@ main (int argc, char *argv[])
 	};
 	
 	xst_init ("runlevel-admin", argc, argv, NULL);
+	
 	tool = xst_tool_new();
 	xst_tool_construct (tool, "runlevel", _("Runlevel Settings"));
 	table_construct (tool);

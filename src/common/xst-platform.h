@@ -39,6 +39,7 @@ gint             xst_platform_cmp                  (XstPlatform *a, XstPlatform 
 void             xst_platform_free                 (XstPlatform *platform);
 
 const gchar     *xst_platform_get_key              (XstPlatform *platform);
+const GdkPixbuf *xst_platform_get_pixmap           (XstPlatform *platform);
 const gchar     *xst_platform_get_name             (XstPlatform *platform);
 
 #endif /* XST_PLATFORM_H */

@@ -248,7 +248,7 @@ on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 void
 on_user_settings_passwd_changed (GtkEntry *entry, gpointer data)
 {
-	gtk_object_set_data (GTK_OBJECT (entry), "changed", GINT_TO_POINTER (TRUE));
+	g_object_set_data (G_OBJECT (entry), "changed", GINT_TO_POINTER (TRUE));
 }
 
 
@@ -274,7 +274,7 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer data)
 	g_return_if_fail (xst_tool_get_access (tool));
 
 	widget = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	ud = gtk_object_get_data (GTK_OBJECT (widget), "data");
+	ud = g_object_get_data (G_OBJECT (widget), "data");
 
 	if (user_update (ud))
 	{
@@ -338,7 +338,7 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (xst_tool_get_access (tool));
 
 	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
-	gd = gtk_object_get_data (GTK_OBJECT (widget), "data");
+	gd = g_object_get_data (G_OBJECT (widget), "data");
 
 	if (group_update (gd))
 	{
@@ -359,8 +359,8 @@ on_add_remove_button_clicked (GtkButton *button, gpointer user_data)
 	
 	g_return_if_fail (xst_tool_get_access (tool));
 	
-	in = gtk_object_get_data (GTK_OBJECT (button), "in");
-	out = gtk_object_get_data (GTK_OBJECT (button), "out");
+	in = g_object_get_data (G_OBJECT (button), "in");
+	out = g_object_get_data (G_OBJECT (button), "out");
 	
 	g_return_if_fail (in != NULL || out != NULL);
 	
@@ -400,7 +400,7 @@ on_list_select_row (GtkTreeView *list)
 	GtkWidget *widget;
 	gchar *data;
 	
-	data = gtk_object_get_data (GTK_OBJECT (list), "button");
+	data = g_object_get_data (G_OBJECT (list), "button");
 	
 	gtk_tree_view_get_cursor (list, &path, NULL);
 	widget = xst_dialog_get_widget (tool->main_dialog, data);

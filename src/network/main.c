@@ -117,7 +117,7 @@ update_notebook_complexity (XstTool *tool, XstDialogComplexity complexity)
 		g_return_if_fail (pageno != -1);
 
 		if (gtk_notebook_get_current_page (notebook) == pageno)
-			gtk_notebook_set_page (notebook, pageno - 1);
+			gtk_notebook_set_current_page (notebook, pageno - 1);
 		gtk_widget_ref (hosts);
 		gtk_widget_unparent (hosts);
 		gtk_notebook_remove_page (notebook, pageno);

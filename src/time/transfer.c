@@ -6,9 +6,6 @@
 #include <unistd.h>
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
-#include <glade/glade.h>
 
 #include "xst.h"
 #include "time-tool.h"
@@ -182,7 +179,7 @@ transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 		s = xst_xml_element_get_content (node);
 		
 		server_entry_found = NULL;
-		gtk_tree_model_foreach (GTK_TREE_MODEL (store), server_list_cb, s);
+		gtk_tree_model_foreach (GTK_TREE_MODEL (store), (GtkTreeModelForeachFunc) server_list_cb, s);
 		
 		if (server_entry_found) {
 			gtk_tree_selection_select_iter (selection, server_entry_found);
@@ -202,13 +199,17 @@ static void
 server_list_get_cb (GtkWidget *item, gpointer data)
 {
 	xmlNodePtr node = data;
-	char *s;
+	char *s, *p;
 	
 	if (GTK_WIDGET_STATE (item) == GTK_STATE_SELECTED)
 	{
 		gtk_label_get (GTK_LABEL (GTK_BIN (item)->child), &s);
 		s = g_strdup (s);
-		if (strchr (s, ' ')) *(strchr (s, ' ')) = '\0';  /* Kill comments */
+		
+		p = (char *) strchr (s, ' ');
+		if (p) 
+			*p = '\0';  /* Kill comments */
+		
 		node = xst_xml_element_add (node, "server");
 		xst_xml_element_set_content (node, s);
 		g_free (s);
@@ -272,13 +273,13 @@ transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
 	node = xst_xml_element_find_first (root, "ntpinstalled");
 
 	if (node) {
-		gtk_object_set_data (GTK_OBJECT (tool), "tool_configured", (gpointer) TRUE);
+		g_object_set_data (G_OBJECT (tool), "tool_configured", (gpointer) TRUE);
 		str = xst_xml_element_get_content (node);
 		res = (*str == '1')? TRUE: FALSE;
 		g_free (str);
 	}
 
-	gtk_object_set_data (GTK_OBJECT (tool), "ntpinstalled", (gpointer) res);
+	g_object_set_data (G_OBJECT (tool), "ntpinstalled", (gpointer) res);
 }
 
 void

@@ -28,10 +28,10 @@
 #include "xst-tool.h"
 
 #define XST_TYPE_DIALOG        (xst_dialog_get_type ())
-#define XST_DIALOG(o)          (GTK_CHECK_CAST ((o),  XST_TYPE_DIALOG, XstDialog))
-#define XST_DIALOG_CLASS(c)    (GTK_CHECK_CLASS_CAST ((c), XST_TYPE_DIALOG, XstDialogClass))
-#define XST_IS_DIALOG(o)       (GTK_CHECK_TYPE ((o), XST_TYPE_DIALOG))
-#define XST_IS_DIALOG_CLASS(c) (GTK_CHECK_CLASS_TYPE ((c), XST_TYPE_DIALOG))
+#define XST_DIALOG(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o),  XST_TYPE_DIALOG, XstDialog))
+#define XST_DIALOG_CLASS(c)    (G_TYPE_CHECK_CLASS_CAST ((c), XST_TYPE_DIALOG, XstDialogClass))
+#define XST_IS_DIALOG(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), XST_TYPE_DIALOG))
+#define XST_IS_DIALOG_CLASS(c) (G_TYPE_CHECK_CLASS_TYPE ((c), XST_TYPE_DIALOG))
 
 typedef gboolean (*XstDialogHookFunc) (XstDialog *dialog, gpointer data);
 

@@ -270,7 +270,7 @@ xst_dialog_init (XstDialog *dialog)
 GtkType
 xst_dialog_get_type (void)
 {
-	static GtkType xstdialog_type = 0;
+	static GType xstdialog_type = 0;
 
 	if (xstdialog_type == 0) {
 		GTypeInfo xstdialog_info = {
@@ -285,10 +285,7 @@ xst_dialog_get_type (void)
 			(GInstanceInitFunc) xst_dialog_init
 		};
 
-		xstdialog_type = g_type_register_static (GNOME_TYPE_APP,
-							 "XstDialog",
-							 &xstdialog_info,
-							 0);
+		xstdialog_type = g_type_register_static (GNOME_TYPE_APP, "XstDialog", &xstdialog_info, 0);
 	}
 
 	return xstdialog_type;
@@ -639,7 +636,7 @@ xst_dialog_new (XstTool *tool, const char *widget, const char *title)
 	g_return_val_if_fail (widget != NULL, NULL);
 	g_return_val_if_fail (title != NULL, NULL);
 
-	dialog = XST_DIALOG (gtk_type_new (XST_TYPE_DIALOG));
+	dialog = XST_DIALOG (g_type_create_instance (XST_TYPE_DIALOG));
 	
 	xst_dialog_construct (dialog, tool, widget, title);
 

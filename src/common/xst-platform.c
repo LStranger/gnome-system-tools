@@ -27,6 +27,15 @@
 #include "xst-report-line.h"
 #include "xst-xml.h"
 
+/* Images used for distros/OS's */
+GdkPixbuf *redhat;
+GdkPixbuf *debian;
+GdkPixbuf *mandrake;
+GdkPixbuf *turbolinux;
+GdkPixbuf *slackware;
+GdkPixbuf *suse;
+GdkPixbuf *freebsd;
+
 XstPlatform *
 xst_platform_new (const gchar *key, const gchar *name)
 {
@@ -116,6 +125,26 @@ xst_platform_get_key (XstPlatform *platform)
 	g_return_val_if_fail (platform != NULL, NULL);
 	
 	return (platform->key);
+}
+
+const GdkPixbuf*
+xst_platform_get_pixmap (XstPlatform *platform)
+{
+	if (g_ascii_strncasecmp (platform->name, "Debian", 6) == 0)
+		return debian;
+	else if (g_ascii_strncasecmp (platform->name, "Red Hat", 7) == 0)
+		return redhat;
+	else if (g_ascii_strncasecmp (platform->name, "Linux Mandrake", 14) == 0)
+		return mandrake;
+	else if (g_ascii_strncasecmp (platform->name, "SuSE", 4) == 0)
+		return suse;
+	else if (g_ascii_strncasecmp (platform->name, "Turbolinux", 10) == 0)
+		return turbolinux;
+	else if (g_ascii_strncasecmp (platform->name, "Slackware", 9) == 0)
+		return slackware;
+	else if (g_ascii_strncasecmp (platform->name, "FreeBSD", 7) == 0)
+		return freebsd;
+	else return NULL;
 }
 
 const gchar *

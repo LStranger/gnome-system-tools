@@ -46,7 +46,7 @@ container_get_label_string (GtkWidget *container)
 	gchar *buf = NULL;
 	GtkWidget *child;
 	
-	children = gtk_container_children (GTK_CONTAINER (container));
+	children = gtk_container_get_children (GTK_CONTAINER (container));
 	if (!children)
 		return NULL;
 
@@ -77,38 +77,6 @@ get_list_item_by_name (GList *list, const gchar *label)
 	}
 
 	return NULL;
-}
-
-GtkWidget *
-xst_ui_list_get_list_item_by_name (GtkList *list, const gchar *label)
-{
-	GList *items;
-	
-	g_return_val_if_fail (list != NULL, NULL);
-	g_return_val_if_fail (GTK_IS_LIST (list), NULL);
-
-	items = gtk_container_children (GTK_CONTAINER (list));
-
-	return get_list_item_by_name (items, label);
-}
-
-void
-xst_ui_combo_remove_by_label (GtkCombo *combo, const gchar *label)
-{
-	GtkWidget *item;
-	const gchar *buf;
-	
-	g_return_if_fail (combo != NULL);
-	g_return_if_fail (GTK_IS_COMBO (combo));
-
-	if (!label)
-		buf = gtk_entry_get_text (GTK_ENTRY (combo->entry));
-	else
-		buf = (void *)label;
-	
-	item = xst_ui_list_get_list_item_by_name (GTK_LIST (combo->list), buf);
-	if (item)
-		gtk_widget_destroy (item);
 }
 
 static GtkWidget *
@@ -184,7 +152,7 @@ xst_ui_image_set_pix (GtkWidget *widget, gchar *filename)
 	canvas = xst_ui_image_widget_create_canvas (filename);
 	g_return_if_fail (canvas != NULL);
 		
-	child = gtk_container_children (GTK_CONTAINER (widget));
+	child = gtk_container_get_children (GTK_CONTAINER (widget));
 	gtk_container_remove (GTK_CONTAINER (widget), child->data);
 	gtk_container_add (GTK_CONTAINER (widget), canvas);
 }
@@ -196,7 +164,7 @@ xst_ui_image_widget_get (GladeXML *gui, gchar *name)
 	GtkWidget *container;
 
 	container = glade_xml_get_widget   (gui, "report_pixmap");
-	children  = gtk_container_children (GTK_CONTAINER (container));
+	children  = gtk_container_get_children (GTK_CONTAINER (container));
 	g_return_val_if_fail (children != NULL, NULL);
 	return children->data;
 }
@@ -338,7 +306,7 @@ xst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
 	
 	item = gtk_menu_item_new_with_label (string);
 	gtk_widget_show (item);
-	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 
 	if (new_menu)
 		gtk_option_menu_set_menu (option_menu, menu);
@@ -392,96 +360,6 @@ xst_ui_option_menu_clear (GtkOptionMenu *option_menu)
 	
 	menu = gtk_option_menu_get_menu (option_menu);
 	gtk_container_foreach (GTK_CONTAINER (menu), menu_clear, NULL);
-}
-
-void
-xst_ui_clist_set_checkmark (GtkCList *clist, gint row, gint column, gboolean state)
-{
-	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-
-	if (state)
-	{
-		if (!checked_pixmap)
-		{
-			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) checked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &checked_pixmap, &checked_mask, 1);
-		}
-
-		pixmap = checked_pixmap;
-		mask = checked_mask;
-	}
-	else
-	{
-		if (!unchecked_pixmap)
-		{
-			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) unchecked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &unchecked_pixmap, &unchecked_mask, 1);
-		}
-
-		pixmap = unchecked_pixmap;
-		mask = unchecked_mask;
-	}
-
-	gtk_clist_set_pixmap (clist, row, column, pixmap, mask);
-}
-
-gboolean
-xst_ui_clist_get_checkmark (GtkCList *clist, gint row, gint column)
-{
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-
-	gtk_clist_get_pixmap (clist, row, column, &pixmap, &mask);
-
-	if (pixmap == checked_pixmap) return (TRUE);
-	return (FALSE);
-}
-
-void
-xst_ui_ctree_set_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column, gboolean state)
-{
-	GdkPixbuf *pixbuf;
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-
-	if (state)
-	{
-		if (!checked_pixmap)
-		{
-			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) checked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &checked_pixmap, &checked_mask, 1);
-		}
-
-		pixmap = checked_pixmap;
-		mask = checked_mask;
-	}
-	else
-	{
-		if (!unchecked_pixmap)
-		{
-			pixbuf = gdk_pixbuf_new_from_xpm_data ((const char **) unchecked_xpm);
-			gdk_pixbuf_render_pixmap_and_mask (pixbuf, &unchecked_pixmap, &unchecked_mask, 1);
-		}
-
-		pixmap = unchecked_pixmap;
-		mask = unchecked_mask;
-	}
-
-	gtk_ctree_node_set_pixmap (ctree, node, column, pixmap, mask);
-}
-
-gboolean
-xst_ui_ctree_get_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column)
-{
-	GdkPixmap *pixmap;
-	GdkBitmap *mask;
-
-	gtk_ctree_node_get_pixmap (ctree, node, column, &pixmap, &mask);
-
-	if (pixmap == checked_pixmap) return (TRUE);
-	return (FALSE);
 }
 
 /**

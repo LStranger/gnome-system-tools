@@ -22,6 +22,7 @@
  * Authors: Hans Petter Jansson <hpj@ximian.com>
  *          Jacob Berkman <jacob@ximian.com>
  *          Chema Celorio <chema@ximian.com>
+ *          Carlos Garnacho Parro <garparr@teleline.es>
  */
 
 #include <config.h>
@@ -35,7 +36,6 @@
 
 #include "xst.h"
 #include "time-tool.h"
-#include "xst-spin-button.h"
 
 #include "tz.h"
 #include "timeserv.h"
@@ -111,26 +111,25 @@ static char *ntp_servers[] =
 	"time1.stupi.se (Stockholm, Sweden)",
 	"goodtime.ijs.si (Ljubljana, Slovenia)",
 	"ntp2.ja.net (UK)",
-	0
+	NULL
 };
 
 static XstDialogSignal signals[] = {
-	{ "calendar",          "day_selected",       xst_dialog_modify_cb },
-	{ "calendar",          "month_changed",      xst_dialog_modify_cb },
-	{ "timezone_button",   "clicked",            timezone_button_clicked },
-	{ "ntp_use",           "toggled",            ntp_use_toggled },
-	{ "timeserver_button", "clicked",            server_button_clicked },
-	{ "location_combo",    "set_focus_child",    xst_dialog_modify_cb },
+	{ "calendar",          "day_selected",       G_CALLBACK (xst_dialog_modify_cb) },
+	{ "calendar",          "month_changed",      G_CALLBACK (xst_dialog_modify_cb) },
+	{ "timezone_button",   "clicked",            G_CALLBACK (timezone_button_clicked) },
+	{ "ntp_use",           "toggled",            G_CALLBACK (ntp_use_toggled) },
+	{ "timeserver_button", "clicked",            G_CALLBACK (server_button_clicked) },
+	{ "location_combo",    "set_focus_child",    G_CALLBACK (xst_dialog_modify_cb) },
 #warning FIXME
 #if 0
-	{ "tz_combo_entry",    "changed",            update_tz },
+	{ "tz_combo_entry",    "changed",            G_CALLBACK (update_tz) },
 #endif
         /* Changed the Signal for the GtkTreeView --AleX
 	  { "ntp_list",          "selection_changed",  xst_dialog_modify_cb },*/
-	{ "ntp_list2",          "cursor_changed",  xst_dialog_modify_cb },
-//#endif
-	{ "ntp_add_server",    "clicked",            on_ntp_addserver },
-	{ "ntp_add_server",    "clicked",            xst_dialog_modify_cb },
+	{ "ntp_list2",         "cursor_changed",     G_CALLBACK (xst_dialog_modify_cb) },
+	{ "ntp_add_server",    "clicked",            G_CALLBACK (on_ntp_addserver) },
+	{ "ntp_add_server",    "clicked",            G_CALLBACK (xst_dialog_modify_cb) },
 	{ NULL }
 };
 
@@ -189,14 +188,13 @@ xst_time_init_timezone (XstTimeTool *time_tool)
 	
 	locs = tz_get_locations (e_tz_map_get_tz_db (tzmap));
 	
-	for (i = 0; i < locs->len; i++) {
+	for (i = 0; g_ptr_array_index (locs, i); i++) {
 		combo_locs = g_list_append (combo_locs,
 					    g_strdup (tz_location_get_zone (g_ptr_array_index (locs, i))));
 	}
 
 	w = xst_dialog_get_widget (tool->main_dialog, "location_combo");
 	gtk_combo_set_popdown_strings (GTK_COMBO (w), combo_locs);
-
 }
 
 #define is_leap_year(yyy) ((((yyy % 4) == 0) && ((yyy % 100) != 0)) || ((yyy % 400) == 0));
@@ -253,89 +251,12 @@ xst_time_update_date (XstTimeTool *tool, gint add)
 }
 #undef is_leap_year
 
-static void
-xst_time_update_hours (XstTimeTool *tool, gint add)
-{
-	gchar buf [3];
-
-	if (add != 0) {
-		tool->hrs += add;
-		if (tool->hrs < 0) {
-			tool->hrs += 24;
-			xst_time_update_date (tool, -1);
-		}
-		if (tool->hrs > 23) {
-			tool->hrs -= 24;
-			xst_time_update_date (tool, 1);
-		}
-	}
-
-	snprintf (buf, 3, "%2d", tool->hrs);
-	gtk_entry_set_text (GTK_ENTRY (tool->hours), buf);
-}
-
-static void
-xst_time_update_minutes (XstTimeTool *tool, gint add)
-{
-	gchar buf [3];
-
-	if (add != 0) {
-		tool->min += add;
-		if (tool->min < 0) {
-			tool->min += 60;
-			xst_time_update_hours (tool, -1);
-		}
-		if (tool->min > 59) {
-			tool->min -= 60;
-			xst_time_update_hours (tool, 1);
-		}
-	}
-
-	snprintf (buf, 3, "%02d", tool->min);
-	gtk_entry_set_text (GTK_ENTRY (tool->minutes), buf);
-}
-
-static void
-xst_time_update_seconds (XstTimeTool *tool, gint add)
-{
-	gchar buf [3];
-	gint start_pos;
-	gint end_pos;
-
-	if (add != 0) {
-		tool->sec += add;
-		if (tool->sec < 0) {
-			tool->sec += 60;
-			xst_time_update_minutes (tool, -1);
-		}
-		if (tool->sec > 59) {
-			tool->sec -= 60;
-			xst_time_update_minutes (tool, 1);
-		}
-	}
-
-	/* We want to keep the selected text when we are 
-	 * ticking.
-	 */
-#warning FIXME
-#if 0
-	I dont think this is needed anymore --James
-	start_pos = GTK_EDITABLE(tool->seconds)->selection_start_pos;
-        end_pos   = GTK_EDITABLE(tool->seconds)->selection_end_pos;
-#endif
-	snprintf (buf, 3, "%02d", tool->sec);
-	gtk_entry_set_text (GTK_ENTRY (tool->seconds), buf);
-	if (GTK_WIDGET_HAS_FOCUS (tool->seconds))
-	    gtk_editable_select_region (GTK_EDITABLE (tool->seconds),
-					start_pos, end_pos);
-}
-
 void
 xst_time_update (XstTimeTool *tool)
 {
-	xst_time_update_seconds (tool, 0);
-	xst_time_update_minutes (tool, 0);
-	xst_time_update_hours   (tool, 0);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->seconds), (gfloat) tool->sec);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->minutes), (gfloat) tool->min);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->hours), (gfloat) tool->hrs);
 }
 
 static gboolean
@@ -358,7 +279,7 @@ xst_time_clock_tick (gpointer time_tool)
 		delta = tm->tm_sec - tool->sec;
 		if (delta < 0)
 			delta += 60;
-		xst_time_update_seconds (tool, delta);
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->seconds), (gfloat) delta);
 	}
 
 	xst_dialog_thaw (xst_tool->main_dialog);
@@ -476,21 +397,9 @@ server_button_clicked (GtkWidget *w, gpointer data)
 
 	dialog = XST_DIALOG (data);
 	
-	if (!d) {
-	     /* Taken Out to change from GnomeDialog to GtkDialog --AleX
-		d = xst_dialog_get_widget (XST_DIALOG (data), "Time servers");
-		gnome_dialog_close_hides (GNOME_DIALOG (d), TRUE);
-	      */
+	if (!d) 
 	      d = server_construct_dialog (dialog);
-	}
 
-	gtk_widget_show (d);
-      /* Taken Out in the same manner --AleX
-	gdk_window_show (d->window);
-	gdk_window_raise (d->window);
-
-	gnome_dialog_run_and_close (GNOME_DIALOG (d));
-      */
 	gtk_dialog_run (GTK_DIALOG (d));
 	gtk_widget_hide (d);
 }
@@ -523,16 +432,16 @@ ntp_use_toggled (GtkWidget *w, XstDialog *dialog)
 	gboolean active, configured, ntp_installed;
 
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
-	configured = (gboolean) gtk_object_get_data (GTK_OBJECT (dialog->tool), "tool_configured");
-	ntp_installed = (gboolean) gtk_object_get_data (GTK_OBJECT (dialog->tool), "ntpinstalled");
+	configured = (gboolean) g_object_get_data (G_OBJECT (dialog->tool), "tool_configured");
+	ntp_installed = (gboolean) g_object_get_data (G_OBJECT (dialog->tool), "ntpinstalled");
 	
 	if (configured && !ntp_installed && active) {
 		GtkWidget *dialog;
 		
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
-		dialog = gnome_ok_dialog (_("You don't have NTP support installed. Please install NTP support\nin the system to enable server synchronization."));
-		gtk_window_set_title (GTK_WINDOW (dialog), _("NTP support missing."));
-		gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+		dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_CLOSE, _("You don't have NTP support installed. Please install NTP support\nin the system to enable server synchronization."));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
 		return;
 	}
 
@@ -554,7 +463,7 @@ xst_time_tool_type_init (XstTimeTool *tool)
 static XstTool *
 xst_time_tool_new (void)
 {
-	return XST_TOOL (gtk_type_new (XST_TYPE_TIME_TOOL));
+	return XST_TOOL (g_type_create_instance (XST_TYPE_TIME_TOOL));
 }
 
 static void 
@@ -568,8 +477,8 @@ xst_time_key_press_event_cb (GtkWidget *widget, GdkEventKey *event, XstTimeTool 
 	    (event->keyval == GDK_Down) ||
 	    (event->keyval == GDK_Page_Up) ||
 	    (event->keyval == GDK_Page_Down))
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (widget),
-					      "key_press_event");
+		g_signal_stop_emission_by_name (GTK_OBJECT (widget),
+					        "key_press_event");
 
 	
 	xst_time_clock_stop (tool);
@@ -585,7 +494,7 @@ xst_time_filter (GtkEntry *entry, const gchar *new_text,
 	gchar new_val_string [4];
 	gint new_val;
 	gint max = (widget == tool->hours) ? 24 : 60;
-
+	
 	if (tool->ticking)
 		return;
 	if (length > 1)
@@ -609,7 +518,7 @@ xst_time_filter (GtkEntry *entry, const gchar *new_text,
 	    (strlen (new_val_string) > 2) ||
 	    (new_val >= GPOINTER_TO_INT (max))) {
 		gdk_beep ();
-		gtk_signal_emit_stop_by_name (GTK_OBJECT (entry), "insert_text");
+		g_signal_stop_emission_by_name (GTK_OBJECT (entry), "insert_text");
 		return;
 	}
 
@@ -633,85 +542,76 @@ xst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, XstTimeTool *tool)
 
 	if (widget == tool->seconds) {
 		tool->sec = num;
-		xst_time_update_seconds (tool, 0);
 	} else if (widget == tool->minutes) {
 		tool->min = num;
-		xst_time_update_minutes (tool, 0);
 	} else if (widget == tool->hours) {
 		tool->hrs = num;
-		xst_time_update_hours (tool, 0);
 	}
 
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), (gfloat) num);
 	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "focus_out_event");
 }
 
 static void
-xst_time_spin (XstSpinButton *button,
-	       XstTimeTool *tool,
-	       gboolean up)
+xst_time_change (GtkSpinButton *widget, gpointer data)
 {
-	GtkWidget *widget;
-	
-	g_return_if_fail (XST_IS_SPIN_BUTTON (button));
+	XstTimeTool *tool = data;
+	gint value = gtk_spin_button_get_value (widget);
+
+	g_return_if_fail (GTK_IS_SPIN_BUTTON (widget));
 	g_return_if_fail (XST_IS_TIME_TOOL (tool));
 
-	widget = GTK_WIDGET (button);
+	if (widget == GTK_SPIN_BUTTON (tool->seconds)) {
+		if (value > 59) {
+			gtk_spin_button_set_value (widget, value - 60);
+			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->minutes), GTK_SPIN_STEP_FORWARD, 1);
+		} else if (value < 0) {
+			gtk_spin_button_set_value (widget, value + 60);
+			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->minutes), GTK_SPIN_STEP_BACKWARD, 1);
+		}
+	} else if (widget == GTK_SPIN_BUTTON (tool->minutes)) {
+		if (value > 59) {
+			gtk_spin_button_set_value (widget, value - 60);
+			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->hours), GTK_SPIN_STEP_FORWARD, 1);
+		} else if (value < 0) {
+			gtk_spin_button_set_value (widget, value + 60);
+			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->hours), GTK_SPIN_STEP_BACKWARD, 1);
+		}
+	} else if (widget == GTK_SPIN_BUTTON (tool->hours)) {
+		if (value > 23) {
+			gtk_spin_button_set_value (widget, value - 24);
+			xst_time_update_date (tool, +1);
+		} else if (value < 0) {
+			xst_time_update_date (tool, -1);
+			gtk_spin_button_set_value (widget, value + 24);
+		}
+	}
+
 	xst_dialog_modify (XST_TOOL (tool)->main_dialog);
 	xst_time_clock_stop (tool);
-
-	if (widget == tool->seconds)
-		xst_time_update_seconds (tool, up ? 1 : -1);
-	else if (widget == tool->minutes)
-		xst_time_update_minutes (tool, up ? 1 : -1);
-	else if (widget == tool->hours) 
-		xst_time_update_hours   (tool, up ? 1 : -1);
-}
-	       
-static void
-xst_time_spin_up (XstSpinButton *spin, XstTimeTool *tool)
-{
-	xst_time_spin (spin, tool, TRUE);
-}
-
-static void
-xst_time_spin_down (XstSpinButton *spin, XstTimeTool *tool)
-{
-	xst_time_spin (spin, tool, FALSE);
+	
+	/* We have to set it to 01 instead of 1, it's more pretty */
+	gtk_entry_set_text (GTK_ENTRY (widget), g_strdup_printf ("%02d", value));
 }
 
 static GtkWidget *
-xst_time_spin_button_create (XstTimeTool *tool)
+xst_time_spin_button_create (XstTimeTool *tool, gchar *label)
 {
-	GtkWidget *spin;
-
-	/* what was the point of having a custom spin button?  --James
-	spin = xst_spin_button_new ();
-	*/
-	spin = gtk_spin_button_new_with_range (0, 60, 1);
+	GtkWidget *spin = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog, label);
 	
-#warning FIXME
-#if 0
-	xst_spin_button_set_numeric (XST_SPIN_BUTTON (spin), FALSE);
-	xst_spin_button_set_wrap    (XST_SPIN_BUTTON (spin), TRUE);
-#endif
-
-	gtk_signal_connect (GTK_OBJECT (spin), "insert_text",
-			    GTK_SIGNAL_FUNC (xst_time_filter),
-			    tool);
-	gtk_signal_connect (GTK_OBJECT (spin), "key_press_event",
-			    GTK_SIGNAL_FUNC (xst_time_key_press_event_cb),
-			    tool);
-	gtk_signal_connect_after (GTK_OBJECT (spin), "focus_out_event",
-			    GTK_SIGNAL_FUNC (xst_time_focus_out),
-			    tool);
-
-	gtk_signal_connect (GTK_OBJECT (spin), "spin_up",
-			    GTK_SIGNAL_FUNC (xst_time_spin_up),
-			    tool);
-	gtk_signal_connect (GTK_OBJECT (spin), "spin_down",
-			    GTK_SIGNAL_FUNC (xst_time_spin_down),
-			    tool);
-
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), 0);
+	g_signal_connect (G_OBJECT (spin), "insert_text",
+			  G_CALLBACK (xst_time_filter),
+			  tool);
+	g_signal_connect (G_OBJECT (spin), "key_press_event",
+			  G_CALLBACK (xst_time_key_press_event_cb),
+			  tool);
+	g_signal_connect_after (G_OBJECT (spin), "focus_out_event",
+			        G_CALLBACK (xst_time_focus_out),
+			        tool);
+	g_signal_connect (G_OBJECT (spin), "value-changed",
+			  G_CALLBACK (xst_time_change), 
+			  tool);
 	return spin;
 }
 
@@ -719,24 +619,11 @@ static void
 xst_time_load_widgets (XstTimeTool *tool)
 {
 	XstDialog *dialog = XST_TOOL (tool)->main_dialog;
-	GtkWidget *hbox;
-	GtkWidget *label;
-
-	hbox = xst_dialog_get_widget (dialog, "clock_hbox");
 	
-	tool->seconds = xst_time_spin_button_create (tool);
-	tool->minutes = xst_time_spin_button_create (tool);
-	tool->hours   = xst_time_spin_button_create (tool);
-	tool->map_hover_label = xst_dialog_get_widget (dialog, "location_label");
-
-	gtk_box_pack_start_defaults (GTK_BOX (hbox), tool->hours);
-	label =	gtk_label_new (":");
-	gtk_box_pack_start_defaults (GTK_BOX (hbox), label);
-	gtk_box_pack_start_defaults (GTK_BOX (hbox), tool->minutes);
-	label =	gtk_label_new (":");
-	gtk_box_pack_start_defaults (GTK_BOX (hbox), label);
-	gtk_box_pack_start_defaults (GTK_BOX (hbox), tool->seconds);
-	gtk_widget_show_all (hbox);
+	tool->seconds = xst_time_spin_button_create (tool, "seconds");
+	tool->minutes = xst_time_spin_button_create (tool, "minutes");
+	tool->hours   = xst_time_spin_button_create (tool, "hours");
+	tool->map_hover_label = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog, "location_label");
 }
 
 void

@@ -16,11 +16,10 @@ INCLUDES = $(XST_TOOL_CFLAGS)
 CLEANFILES = $(XST_TOOL_CLEANFILES)
 EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
 
-time_admin_LDADD = $(XST_TOOL_LIBS) ./e-map/e_map_test-e-map.o
-time_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES) ./e-map/e_map_test-e-map.o
+time_admin_LDADD = $(XST_TOOL_LIBS) ./e-map/e-map.o
+time_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES) ./e-map/e-map.o
 time_admin_SOURCES = \
 	main.c            time-tool.h \
-	xst-spin-button.c xst-spin-button.h \
 	tz.c              tz.h \
 	tz-map.c          tz-map.h \
 	timeserv.c        timeserv.h \

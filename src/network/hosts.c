@@ -69,7 +69,7 @@ fixup_text_list (GtkWidget *text)
 
 	s = xst_ui_text_view_get_text (GTK_TEXT_VIEW (text));
 
-	for (s2 = strchr (s, '\n'); s2; s2 = strchr (s2, '\n'))
+	for (s2 = (gchar *) strchr (s, '\n'); s2; s2 = (gchar *) strchr (s2, '\n'))
 		*s2 = ' ';
 
 	return s;
@@ -82,7 +82,7 @@ fixdown_text_list (char *s)
 
 	g_return_val_if_fail (s != NULL, NULL);
 
-	for (s2 = strchr (s, ' '); s2; s2 = strchr (s2, ' '))
+	for (s2 = (gchar *) strchr (s, ' '); s2; s2 = (gchar *) strchr (s2, ' '))
 		*s2 = '\n';
 
 	return s;
@@ -298,7 +298,6 @@ on_hosts_alias_changed (GtkTextBuffer *w, gpointer not_used)
 void
 on_hosts_add_clicked (GtkWidget * button, gpointer user_data)
 {
-	GtkWidget *clist;
 	gchar *entry[STATICHOST_LIST_COL_LAST];
 	int row;
 	XstStatichostUI *ui;
@@ -310,7 +309,7 @@ on_hosts_add_clicked (GtkWidget * button, gpointer user_data)
 	entry[STATICHOST_LIST_COL_IP] = gtk_editable_get_chars (GTK_EDITABLE (ui->ip), 0, -1);
 	entry[STATICHOST_LIST_COL_ALIAS] = fixup_text_list (ui->alias);
 
-	hosts_list_append (tool, entry);
+	hosts_list_append (tool, (const gchar**) entry);
 
 	xst_hosts_select_row (entry[STATICHOST_LIST_COL_IP]);
 }
@@ -583,7 +582,7 @@ hosts_list_get_selected (gchar **ip, gchar **alias)
 {
 	gchar *entry[STATICHOST_LIST_COL_LAST];
 
-	if (hosts_list_get (NULL, &entry)) {
+	if (hosts_list_get (NULL, entry)) {
 		*ip = entry[STATICHOST_LIST_COL_IP];
 		*alias = entry[STATICHOST_LIST_COL_ALIAS];
 

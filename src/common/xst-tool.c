@@ -18,6 +18,7 @@
  *
  * Authors: Jacob Berkman <jacob@ximian.com>
  *          Hans Petter Jansson <hpj@ximian.com>
+ *          Carlos Garnacho Parro <garparr@teleline.es>
  */
 
 #include <config.h>
@@ -52,19 +53,20 @@
 /* Define this if you want the frontend to run the backend under strace */
 /*#define XST_DEBUG_STRACE_BACKEND*/
 
+extern GdkPixbuf *redhat;
+extern GdkPixbuf *debian;
+extern GdkPixbuf *mandrake;
+extern GdkPixbuf *turbolinux;
+extern GdkPixbuf *slackware;
+extern GdkPixbuf *suse;
+extern GdkPixbuf *freebsd;
+
 enum {
 	BOGUS,
 	FILL_GUI,
 	FILL_XML,
 	CLOSE,
 	LAST_SIGNAL
-};
-
-enum {
-	PLATFORM_LIST_COL_NAME,
-	PLATFORM_LIST_COL_PLATFORM,
-
-	PLATFORM_LIST_COL_LAST
 };
 
 static enum {
@@ -101,29 +103,43 @@ static gchar *location_id = NULL;    /* Location in which we are editing */
 /* --- Report hook and signal callbacks --- */
 
 static void
-platform_list_selection_changed (GtkTreeSelection *selection, gpointer data)
+on_platform_list_select_row (GtkWidget *list, gpointer data)
 {
-	GtkTreeIter iter;
-	GtkTreeModel *model;
-	XstPlatform *platform;
-	gboolean selected;
-	XstTool *tool;
+	GtkTreePath *path;
+	gint *index;
+	XstTool *tool = (XstTool *) data;
+	
+	gtk_tree_view_get_cursor (GTK_TREE_VIEW (list), &path, NULL);
+	
+	if (!path)
+		return;
+	
+	index = gtk_tree_path_get_indices (path);
+	tool->platform_selected_row = *index;
+	
+	gtk_widget_set_sensitive (tool->platform_ok_button, TRUE);
+}
 
-	tool = (XstTool *) data;
+static void
+on_platform_dialog_close (GtkWidget *dialog, XstTool *tool)
+{
+	exit (0);
+}
+
+static void
+on_platform_ok_clicked (GtkWidget *dialog, XstTool *tool)
+{
+	/* Locate the selected platform and set it up as the current one. */
 
 	if (tool->current_platform)
-			xst_platform_free (tool->current_platform);
+		xst_platform_free (tool->current_platform);
 
-	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-		gtk_tree_model_get (model, &iter, PLATFORM_LIST_COL_PLATFORM, &platform, -1);
-		tool->current_platform = xst_platform_dup (platform);
-		selected = TRUE;
-	} else {
-		tool->current_platform = NULL;
-		selected = FALSE;
-	}
+	tool->current_platform =
+		xst_platform_dup ((XstPlatform *)
+				 g_slist_nth_data (tool->supported_platforms_list,
+						   tool->platform_selected_row));
 
-	gtk_widget_set_sensitive (tool->platform_ok_button, selected);
+	g_assert (tool->current_platform);
 }
 
 static gboolean
@@ -536,62 +552,63 @@ xst_tool_get_supported_platforms (XstTool *tool)
 }
 
 static void
-xst_tool_run_platform_dialog (XstTool *tool)
+xst_tool_create_distro_images (void)
+{
+	debian = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/debian.png", NULL);
+	redhat = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/redhat.png", NULL);
+	mandrake = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/mandrake.png", NULL);
+	turbolinux = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/turbolinux.png", NULL);
+	slackware = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/slackware.png", NULL);
+	suse = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/suse.png", NULL);
+	freebsd = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/freebsd.png", NULL);
+}
+
+static void
+xst_tool_fill_platform_tree (XstTool *tool)
 {
 	GSList *list;
-	gint result;
 	XstPlatform *platform;
-	char *platform_text;
-	GtkTreeView *tree;
-	GtkListStore *store;
-	GtkCellRenderer *renderer;
-	GtkTreeViewColumn *column;
-	GtkTreeSelection *select;
+	GtkTreeModel *model;
 	GtkTreeIter iter;
+	gchar *label = NULL;
 
-	/* Fill in the platform list */
+	xst_tool_create_distro_images ();
 
-	tree = GTK_TREE_VIEW (tool->platform_list);
-	store = gtk_list_store_new (PLATFORM_LIST_COL_LAST, G_TYPE_STRING, G_TYPE_POINTER);
-
+	/* Fill in the platform GtkTreeView */
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (tool->platform_list));
+	
 	tool->supported_platforms_list = xst_tool_get_supported_platforms (tool);
-
-	for (list = tool->supported_platforms_list; list;
-	     list = g_slist_next (list))
-	{
+	
+	for (list = tool->supported_platforms_list; list; list = g_slist_next (list)) {
 		platform = (XstPlatform *) list->data;
-		platform_text = (char *) xst_platform_get_name (platform);
-
-		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter,
-				    PLATFORM_LIST_COL_NAME, platform_text,
-				    PLATFORM_LIST_COL_PLATFORM, platform,
-				    -1);
+		
+		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+		gtk_tree_store_set (GTK_TREE_STORE (model), &iter, 
+		                    0, xst_platform_get_pixmap (platform), 
+		                    1, xst_platform_get_name (platform), 
+		                    -1);
 	}
+}
 
-	renderer = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes (_("Platform"),
-							   renderer,
-							   "text",
-							   PLATFORM_LIST_COL_NAME,
-							   NULL);
-	gtk_tree_view_append_column (tree, column);
+static void
+xst_tool_run_platform_dialog (XstTool *tool)
+{
 
-	gtk_tree_view_set_model (tree, GTK_TREE_MODEL (store));
-	select = gtk_tree_view_get_selection (tree);
-	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
+	
+	/* Connect signals */
+	g_signal_connect (G_OBJECT (tool->platform_list), "cursor-changed", G_CALLBACK (on_platform_list_select_row), tool);
+	g_signal_connect (G_OBJECT (tool->platform_ok_button), "clicked", G_CALLBACK (on_platform_ok_clicked), tool);
+	g_signal_connect (G_OBJECT (tool->platform_dialog), "delete_event", G_CALLBACK (on_platform_dialog_close), tool);
+	g_signal_connect (G_OBJECT (tool->platform_cancel_button), "clicked", G_CALLBACK (on_platform_dialog_close), tool);
 
-	g_signal_connect (G_OBJECT (select), "changed",
-			  G_CALLBACK (platform_list_selection_changed),
-			  (gpointer) tool);
+	xst_tool_fill_platform_tree (tool);
+
+	/* Prepare dialog and show it */
+	tool->platform_selected_row = -1;
 
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
-
-	result = gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
-	if (result != GTK_RESPONSE_OK)
-		exit (0);
-
-	gtk_widget_destroy (tool->platform_dialog);
+	gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
+	gtk_widget_hide (tool->platform_dialog);
 }
 
 static void
@@ -699,7 +716,7 @@ xst_tool_idle_run_directives_add (XstTool *tool)
 {
 	if (!tool->directive_queue_idle_id && !tool->directive_running)
 		tool->directive_queue_idle_id = 
-			gtk_idle_add_priority (GTK_PRIORITY_LOW, xst_tool_idle_run_directives, tool);
+			gtk_idle_add_priority (G_PRIORITY_LOW, xst_tool_idle_run_directives, tool);
 }
 
 static void
@@ -1054,9 +1071,9 @@ xst_tool_load (XstTool *tool)
 	}
 
 
-	if (tool->config)
-		gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_GUI]);
-
+	if (tool->config){
+		g_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_GUI], 0);
+	}
 	return tool->config != NULL;
 }
 
@@ -1086,7 +1103,7 @@ xst_tool_save (XstTool *tool)
 
 	xst_dialog_freeze_visible (tool->main_dialog);
 
-	gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_XML]);
+	g_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_XML], 0);
 
 #ifdef XST_DEBUG
 	/* don't actually save if we are just pretending */
@@ -1158,6 +1175,8 @@ xst_tool_load_try (XstTool *tool)
 					      "and the configuration could not be loaded."));
 
 		gtk_dialog_run (GTK_DIALOG (d));
+		gtk_widget_destroy (d);
+		
 		exit (0);
 	}
 }
@@ -1195,7 +1214,6 @@ xst_tool_class_init (XstToolClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
-#if 1
 	xsttool_signals[FILL_GUI] = 
 		g_signal_new ("fill_gui",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -1219,32 +1237,7 @@ xst_tool_class_init (XstToolClass *klass)
 			      G_STRUCT_OFFSET (XstToolClass, close),
 			      NULL, NULL,
 			      xst_marshal_VOID__VOID,
-			      GTK_TYPE_NONE, 0);
-#else	
-	xsttool_signals[FILL_GUI] = 
-		gtk_signal_new ("fill_gui",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (XstToolClass, fill_gui),
-				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
-
-	xsttool_signals[FILL_XML] = 
-		gtk_signal_new ("fill_xml",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (XstToolClass, fill_xml),
-				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
-
-	xsttool_signals[CLOSE] = 
-		gtk_signal_new ("close",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (XstToolClass, close),
-				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
-#endif	
+			      G_TYPE_NONE, 0);
 
 #if 0	
 	gtk_object_class_add_signals (object_class, xsttool_signals, LAST_SIGNAL);
@@ -1286,10 +1279,50 @@ visibility_toggled (GtkWidget *w, gpointer data)
 
 #endif
 
+static GtkWidget*
+xst_tool_create_platform_list ()
+{
+	GtkTreeModel *model = GTK_TREE_MODEL (gtk_tree_store_new (2, GDK_TYPE_PIXBUF, G_TYPE_STRING));
+	
+	GtkWidget *list;
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	
+	list = gtk_tree_view_new_with_model (model);
+	g_object_unref (model);
+	
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list), TRUE);
+	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list), FALSE);
+	
+	/* Insert the pixmaps cell */
+	renderer = gtk_cell_renderer_pixbuf_new ();
+	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
+	
+	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (list),
+	                                             -1,
+	                                             "",
+	                                             renderer,
+	                                             "pixbuf", 0,
+						     NULL);
+
+	/* Insert the text cell */
+	column = gtk_tree_view_get_column (GTK_TREE_VIEW (list), 0);
+	
+	renderer = gtk_cell_renderer_text_new ();
+	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
+
+	gtk_tree_view_column_pack_end (column, renderer, TRUE);
+	gtk_tree_view_column_add_attribute (column, renderer, "text", 1);
+	
+	gtk_widget_show_all (list);
+	return list;
+}
+
 static void
 xst_tool_type_init (XstTool *tool)
 {
 	GladeXML *xml;
+	GtkWidget *sw;
 
 	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
 
@@ -1298,8 +1331,8 @@ xst_tool_type_init (XstTool *tool)
 	tool->report_gui = xml  = xst_tool_load_glade_common (tool, "report_window");
 
 	tool->report_window     = glade_xml_get_widget (xml, "report_window");
-	gtk_signal_connect (GTK_OBJECT (tool->report_window), "delete_event",
-			    GTK_SIGNAL_FUNC (report_window_close_cb), tool);
+	g_signal_connect (GTK_OBJECT (tool->report_window), "delete_event",
+			    G_CALLBACK (report_window_close_cb), tool);
 #if 0
 	tool->report_scrolled   = glade_xml_get_widget (xml, "report_list_scrolled_window");
 	tool->report_progress   = glade_xml_get_widget (xml, "report_progress");
@@ -1329,27 +1362,42 @@ xst_tool_type_init (XstTool *tool)
 #endif
 
 	xml = xst_tool_load_glade_common (tool, "platform_dialog");
-	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
-	tool->platform_list      = glade_xml_get_widget (xml, "platform_list");
+	
+        tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
 	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
+	tool->platform_cancel_button = glade_xml_get_widget (xml, "platform_cancel_button");
+			
+	
+	/* We get the scrolled window that will contain the list and embed the GtkTreeView into it */
+	sw = glade_xml_get_widget (xml, "platform_list_holder");
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
+	tool->platform_list = xst_tool_create_platform_list ();
+	gtk_container_add (GTK_CONTAINER (sw), tool->platform_list);
+
+	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
+	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
+	tool->platform_cancel_button = glade_xml_get_widget (xml, "platform_cancel_button");		
 }
 
 GtkType
 xst_tool_get_type (void)
 {
-	static GtkType xsttool_type = 0;
+	static GType xsttool_type = 0;
 
-	if (!xsttool_type) {
-		GtkTypeInfo xsttool_info = {
-			"XstTool",
-			sizeof (XstTool),
+	if (xsttool_type == 0) {
+		GTypeInfo xsttool_info = {
 			sizeof (XstToolClass),
-			(GtkClassInitFunc) xst_tool_class_init,
-			(GtkObjectInitFunc) xst_tool_type_init,
-			NULL, NULL, NULL
+			NULL, /* base_init */
+			NULL, /* base finalize */
+			(GClassInitFunc) xst_tool_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (XstTool),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) xst_tool_type_init
 		};
-
-		xsttool_type = gtk_type_unique (GTK_TYPE_OBJECT, &xsttool_info);
+		
+		xsttool_type = g_type_register_static (GTK_TYPE_OBJECT, "XstTool", &xsttool_info, 0);
 	}
 
 	return xsttool_type;
@@ -1393,10 +1441,10 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 	g_free (t);
 	g_free (u);
 
-	gtk_signal_connect (GTK_OBJECT (tool->main_dialog),
-			    "apply",
-			    GTK_SIGNAL_FUNC (xst_tool_save_cb),
-			    tool);
+	g_signal_connect (G_OBJECT (tool->main_dialog),
+			  "apply",
+			  G_CALLBACK (xst_tool_save_cb),
+			  tool);
 
 	tool->report_hook_list = NULL;
 	memset (&tool->report_hook_defaults, 0, sizeof (XstReportHook *) * XST_MAJOR_MAX);
@@ -1415,7 +1463,7 @@ xst_tool_new (void)
 {
 	XstTool *tool;
 
-	tool = XST_TOOL (gtk_type_new (XST_TYPE_TOOL));
+	tool = XST_TOOL (g_type_create_instance (XST_TYPE_TOOL));
 
 	return tool;
 }
@@ -1427,10 +1475,11 @@ xst_tool_set_xml_funcs (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, g
 	g_return_if_fail (XST_IS_TOOL (tool));
 
 	if (load_cb)
-		gtk_signal_connect (GTK_OBJECT (tool), "fill_gui", GTK_SIGNAL_FUNC (load_cb), data);
+		g_signal_connect (G_OBJECT (tool), "fill_gui", G_CALLBACK (load_cb), data);
 
 	if (save_cb)
-		gtk_signal_connect (GTK_OBJECT (tool), "fill_xml", GTK_SIGNAL_FUNC (save_cb), data);
+		g_signal_connect (G_OBJECT (tool), "fill_xml", G_CALLBACK (save_cb), data);
+
 }
 
 void
@@ -1440,7 +1489,8 @@ xst_tool_set_close_func (XstTool *tool, XstCloseFunc close_cb, gpointer data)
 	g_return_if_fail (XST_IS_TOOL (tool));
 
 	if (close_cb)
-		gtk_signal_connect (GTK_OBJECT (tool), "close", GTK_SIGNAL_FUNC (close_cb), data);
+		g_signal_connect (GTK_OBJECT (tool), "close", G_CALLBACK (close_cb), data);
+
 }
 
 void
@@ -1590,12 +1640,12 @@ try_show_usage_warning (void)
 {
 	gchar *key;
 	gboolean value;
-	gchar *warning = g_strdup_printf(_("Welcome to the %s release of the "
+	gchar *warning = g_strdup_printf(_("Welcome to the %s prerelease of the "
 		  "GNOME System Tools.\n\n"
 		  "This is still a work in progress, and so it may have serious bugs.\n"
 		  "Due to the nature of these tools, bugs may render your computer\n"
 		  "PRACTICALLY USELESS, costing time, effort and sanity points.\n\n"
-		  "You have been warned. Thank you for trying out this release of\n"
+		  "You have been warned. Thank you for trying out this prerelease of\n"
 		  "the GNOME System Tools!\n\n"
 		  "--\nThe GNOME System Tools team"), VERSION);
 	key = g_strjoin ("/", XST_CONF_ROOT, "global", "previously-run-" VERSION, NULL);

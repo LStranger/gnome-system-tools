@@ -13,10 +13,12 @@ pixmaps_DATA = \
 	background.jpeg		\
 	big-monitor.png		\
 	boot.png                 \
+	debian.png               \
 	desktop_icons.png        \
 	disks.png                \
 	display.png              \
 	font.png            	\
+	freebsd.png              \
 	gnome-laptop.png         \
 	gnome-light-on.png       \
 	gnome-light-off.png      \
@@ -28,6 +30,7 @@ pixmaps_DATA = \
 	internetsharing.png	     \
 	irda-16.png              \
 	irda-48.png              \
+	mandrake.png             \
 	memory.png               \
 	nameresolution.png       \
 	nameresolution_alias.png \
@@ -44,14 +47,18 @@ pixmaps_DATA = \
 	ppp.png                  \
 	print.png                \
 	reading.png              \
+	redhat.png               \
 	runlevel.png		 \
 	server.png               \
 	settings.png             \
 	shares.png               \
-	talk-userlist.png		\
+	slackware.png            \
+	suse.png                 \
+	talk-userlist.png        \
 	test-colors.png		\
 	time.png                 \
 	timezone.png             \
+	turbolinux.png           \
 	unsupported-distro.png   \
 	users-groups.png         \
 	users.png                \

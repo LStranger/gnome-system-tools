@@ -33,18 +33,19 @@ boot_image_editor_get_type (void)
 	static GtkType type = 0;
 
 	if (!type) {
-		static const GtkTypeInfo type_info = {
-			"BootImageEditor",
-			sizeof (BootImageEditor),
+		static const GTypeInfo type_info = {
 			sizeof (BootImageEditorClass),
-			(GtkClassInitFunc) boot_image_editor_class_init,
-			(GtkObjectInitFunc) NULL,
-			/* reserved_1 */ NULL,
-			/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL,
+			NULL, /* base_init */
+			NULL, /* base finalize */
+			(GClassInitFunc) boot_image_editor_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (BootImageEditor),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) NULL
 		};
-
-		type = gtk_type_unique (GTK_TYPE_DIALOG, &type_info);
+		
+		type = g_type_register_static (GTK_TYPE_DIALOG, "BootImageEditor", &type_info, 0);
 	}
 
 	return type;
@@ -127,7 +128,7 @@ boot_image_editor_new (BootImage *image)
 	if (!image)
 		return NULL;
 	
-	new = (BootImageEditor *) gtk_type_new (boot_image_editor_get_type ());
+	new = (BootImageEditor *) g_type_create_instance (boot_image_editor_get_type ());
 	if (construct (new, image))
 		return new;
 	else {

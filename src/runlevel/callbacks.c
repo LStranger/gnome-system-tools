@@ -54,9 +54,9 @@ callbacks_conf_read_failed_hook (XstTool *tool, XstReportLine *rline, gpointer d
 	gchar *txt;
 
 	txt = g_strdup_printf (_("The file ``%s'' is missing or could not be read:\nThe configuration will show empty."), rline->argv[0]);
-        
-	dialog = gnome_error_dialog_parented (txt, GTK_WINDOW (tool->main_dialog));
-	gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+	
+	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog), GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, txt);
+        gtk_dialog_run (GTK_DIALOG (dialog));
 	
 	g_free (txt);
 

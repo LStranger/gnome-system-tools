@@ -99,7 +99,7 @@ impl_destroy (GtkObject *object)
 	dropdown_button = DROPDOWN_BUTTON (object);
 	priv = dropdown_button->priv;
 
-	gtk_accel_group_unref (priv->accel_group);
+	g_object_unref (priv->accel_group);
 	gtk_widget_destroy (priv->menu);
 
 	g_free (priv);
@@ -231,7 +231,7 @@ dropdown_button_new (const char *label_text,
 	g_return_val_if_fail (menu != NULL, NULL);
 	g_return_val_if_fail (GTK_IS_MENU (menu), NULL);
 
-	widget = gtk_type_new (dropdown_button_get_type ());
+	widget = GTK_WIDGET (g_type_create_instance (dropdown_button_get_type ()));
 
 	dropdown_button_construct (DROPDOWN_BUTTON (widget), label_text, menu);
 	return widget;
@@ -240,21 +240,22 @@ dropdown_button_new (const char *label_text,
 GtkType
 dropdown_button_get_type (void)
 {
-	static GtkType type = 0;
+	static GType type = 0;
 
 	if (!type) {
-		static const GtkTypeInfo info = {
-			"DropdownButton",
-			sizeof (DropdownButton),
+		static const GTypeInfo info = {
 			sizeof (DropdownButtonClass),
-			(GtkClassInitFunc) class_init,
-			(GtkObjectInitFunc) init,
-			/* reserved_1 */ NULL,
-		       	/* reserved_2 */ NULL,
-			(GtkClassInitFunc) NULL,
+			NULL, /* base_init */
+			NULL, /* base finalize */
+			(GClassInitFunc) class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (DropdownButton),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) init
 		};
-		
-		type = gtk_type_unique (gtk_hbox_get_type (), &info);
+
+		type = g_type_register_static (gtk_hbox_get_type (), "DropdownButton", &info, 0);
 	}
 
 	return type;

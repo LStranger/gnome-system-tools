@@ -23,9 +23,6 @@
 #include <ctype.h>
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
-#include <glade/glade.h>
 
 #include "xst.h"
 
@@ -190,7 +187,7 @@ transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 
 		end = text + strlen (text);
 		for (; text < end; text = pos + 1) {
-			pos = strchr (text, '\n');
+			pos = (gchar *) strchr (text, '\n');
 			if (pos)
 				*pos = 0;
 			
@@ -304,16 +301,16 @@ transfer_gatewaydev_to_xml (XstTool *tool, xmlNodePtr root)
 	gchar *dev, *gateway;
 	xmlNodePtr node;
 
-	gateway = gtk_object_get_data (GTK_OBJECT (tool), "gateway");
+	gateway = g_object_get_data (G_OBJECT (tool), "gateway");
 	node = xst_xml_element_find_first (root, "gateway");
 	if (!node)
 		node = xst_xml_element_add (root, "gateway");
 	xst_xml_element_set_content (node, (gateway)? gateway: "");
 		
-	if (gtk_object_get_data (GTK_OBJECT (tool), "gwdevunsup"))
+	if (g_object_get_data (G_OBJECT (tool), "gwdevunsup"))
 		return;
 	
-	dev = gtk_object_get_data (GTK_OBJECT (tool), "gatewaydev");
+	dev = g_object_get_data (G_OBJECT (tool), "gatewaydev");
 	node = xst_xml_element_find_first (root, "gatewaydev");
 	if (!node)
 		node = xst_xml_element_add (root, "gatewaydev");
@@ -328,7 +325,7 @@ transfer_xml_to_gatewaydev (XstTool *tool, xmlNodePtr root)
 	
 	unsup = xst_xml_element_get_boolean (root, "gwdevunsup");
 	if (unsup) {
-		gtk_object_set_data (GTK_OBJECT (tool), "gwdevunsup", (gpointer) TRUE);
+		g_object_set_data (G_OBJECT (tool), "gwdevunsup", (gpointer) TRUE);
 		xst_dialog_widget_set_user_mode (tool->main_dialog,
 						 "connection_def_gw_hbox",
 						 XST_WIDGET_MODE_HIDDEN);
@@ -354,19 +351,19 @@ transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
 	gboolean res;
 
 	if (xst_xml_element_find_first (root, "smbinstalled"))
-		gtk_object_set_data (GTK_OBJECT (tool), "tool_configured", (gpointer) TRUE);
+		g_object_set_data (G_OBJECT (tool), "tool_configured", (gpointer) TRUE);
 	
 	res = xst_xml_element_get_boolean (root, "smbinstalled");
-	gtk_object_set_data (GTK_OBJECT (tool), "smbinstalled", (gpointer) res);
+	g_object_set_data (G_OBJECT (tool), "smbinstalled", (gpointer) res);
 
 	res = xst_xml_element_get_boolean (root, "dialinstalled");
-	gtk_object_set_data (GTK_OBJECT (tool), "dialinstalled", (gpointer) res);
+	g_object_set_data (G_OBJECT (tool), "dialinstalled", (gpointer) res);
 
 	res = xst_xml_element_get_boolean (root, "smartdhcpcd");
-	gtk_object_set_data (GTK_OBJECT (tool), "smartdhcpcd", (gpointer) res);
+	g_object_set_data (G_OBJECT (tool), "smartdhcpcd", (gpointer) res);
 
 	res = xst_xml_element_get_boolean (root, "userifacectl");
-	gtk_object_set_data (GTK_OBJECT (tool), "userifacectl", (gpointer) res);
+	g_object_set_data (G_OBJECT (tool), "userifacectl", (gpointer) res);
 
 	transfer_xml_to_gatewaydev (tool, root);
 }

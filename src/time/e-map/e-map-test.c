@@ -67,7 +67,7 @@ button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 int
 main (int argc, char *argv[])
 {
-	gnome_init("e-map-test", "0.0.0", argc, argv);
+	gtk_init (&argc, &argv);
   
 	window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 	scroll = gtk_scrolled_window_new(GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
@@ -81,10 +81,10 @@ main (int argc, char *argv[])
 	e_map_add_point(E_MAP(map), NULL, 10.0, 0.0, 0xf010d0ff);
 	point = e_map_add_point(E_MAP(map), NULL, 25.0, 40.0, 0xf010d0ff);
 	
-	gtk_signal_connect(GTK_OBJECT (map), "motion-notify-event",
-			   GTK_SIGNAL_FUNC (motion), NULL);
-	gtk_signal_connect(GTK_OBJECT(map), "button-press-event",
-			   GTK_SIGNAL_FUNC (button_pressed), NULL);
+	g_signal_connect(G_OBJECT (map), "motion-notify-event",
+			 G_CALLBACK (motion), NULL);
+	g_signal_connect(G_OBJECT(map), "button-press-event",
+			 G_CALLBACK (button_pressed), NULL);
 
 	gtk_widget_show_all(window);
 	id = gtk_timeout_add(100, flash, NULL);

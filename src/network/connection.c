@@ -406,7 +406,7 @@ load_pixbuf (const gchar *file)
 	GdkPixbuf *pb, *pb2;
 	gchar     *path;
 
-	path = g_concat_dir_and_file (PIXMAPS_DIR, file);
+	path = g_strconcat (PIXMAPS_DIR, "/", file, NULL);
 	pb = gdk_pixbuf_new_from_file (path, NULL);
 	g_free (path);
 
@@ -869,9 +869,9 @@ connection_default_gw_find_item (GtkWidget *omenu, gchar *dev)
 	GList *l;
 	gchar *value;
 
-	for (l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
+	for (l = g_object_get_data (G_OBJECT (omenu), "list");
 	     l; l = l->next) {
-		value = gtk_object_get_data (GTK_OBJECT (l->data), "value");
+		value = g_object_get_data (G_OBJECT (l->data), "value");
 		if (!strcmp (dev, value))
 			return l->data;
 	}
@@ -882,7 +882,7 @@ connection_default_gw_find_item (GtkWidget *omenu, gchar *dev)
 static void
 connection_default_gw_activate (GtkMenuItem *item, gpointer data)
 {
-	gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", data);
+	g_object_set_data (G_OBJECT (tool), "gatewaydev", data);
 }
 
 void
@@ -907,16 +907,16 @@ connection_default_gw_add (XstConnection *cxn)
 	
 	cpy = g_strdup (dev);
 	item = gtk_menu_item_new_with_label (dev);
-	gtk_signal_connect (GTK_OBJECT (item), "activate",
-			    GTK_SIGNAL_FUNC (connection_default_gw_activate),
+	g_signal_connect (G_OBJECT (item), "activate",
+			    G_CALLBACK (connection_default_gw_activate),
 			    (gpointer) cpy);
-	gtk_object_set_data (GTK_OBJECT (item), "value", cpy);
+	g_object_set_data (G_OBJECT (item), "value", cpy);
 	gtk_widget_show (item);
-	gtk_menu_append (GTK_MENU (menu), item);
+	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
 	
-	l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
+	l = g_object_get_data (G_OBJECT (omenu), "list");
 	l = g_list_append (l, item);
-	gtk_object_set_data (GTK_OBJECT (omenu), "list", l);
+	g_object_set_data (G_OBJECT (omenu), "list", l);
 }
 
 void
@@ -934,11 +934,11 @@ connection_default_gw_remove (gchar *dev)
 
 	g_return_if_fail ((item = connection_default_gw_find_item (omenu, dev)));
 	
-	l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
+	l = g_object_get_data (G_OBJECT (omenu), "list");
 	l = g_list_remove (l, item);
-	gtk_object_set_data (GTK_OBJECT (omenu), "list", l);
+	g_object_set_data (G_OBJECT (omenu), "list", l);
 
-	cpy = gtk_object_get_data (GTK_OBJECT (item), "value");
+	cpy = g_object_get_data (G_OBJECT (item), "value");
 	g_free (cpy);
 	
 	gtk_widget_destroy (item);
@@ -956,8 +956,8 @@ connection_default_gw_init (XstTool *tool, gchar *dev)
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
 	item = gtk_menu_get_active (GTK_MENU (menu));
-	gtk_signal_connect (GTK_OBJECT (item), "activate",
-			    GTK_SIGNAL_FUNC (connection_default_gw_activate),
+	g_signal_connect (G_OBJECT (item), "activate",
+			    G_CALLBACK (connection_default_gw_activate),
 			    (gpointer) NULL);
 	/* Strange bug caused the "Auto" item to be unsensitive the first time. */
 	gtk_menu_shell_select_item (GTK_MENU_SHELL (menu), item);
@@ -966,7 +966,7 @@ connection_default_gw_init (XstTool *tool, gchar *dev)
 	if (item) {
 		GList *l;
 
-		l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
+		l = g_object_get_data (G_OBJECT (omenu), "list");
 		
 		gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), g_list_index (l, item) + 1);
 		gtk_menu_shell_select_item (GTK_MENU_SHELL (menu), item);
@@ -980,7 +980,7 @@ connection_default_gw_get_connection (XstTool *tool)
 	XstConnectionUI *ui;
 
 	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
-	dev = gtk_object_get_data (GTK_OBJECT (tool), "gatewaydev");
+	dev = g_object_get_data (G_OBJECT (tool), "gatewaydev");
 	g_return_val_if_fail (dev != NULL, NULL);
 
 	return connection_find_by_dev (ui->list, dev);
@@ -1042,14 +1042,14 @@ connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
 {
 	gchar *gateway;
 
-	gateway = gtk_object_get_data (GTK_OBJECT (tool), "gateway");
+	gateway = g_object_get_data (G_OBJECT (tool), "gateway");
 	if (gateway)
 		g_free (gateway);
 	gateway = NULL;
 
 	if (!cxn) {
-		gtk_object_set_data (GTK_OBJECT (tool), "gateway", NULL);
-		gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", NULL);
+		g_object_set_data (G_OBJECT (tool), "gateway", NULL);
+		g_object_set_data (G_OBJECT (tool), "gatewaydev", NULL);
 		return;
 	}
 
@@ -1065,16 +1065,16 @@ connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
 			gateway = g_strdup (cxn->remote_address);
 		break;
 	case XST_CONNECTION_PPP:
-		gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", NULL);
+		g_object_set_data (G_OBJECT (tool), "gatewaydev", NULL);
 		break;
 	case XST_CONNECTION_LO:
 	default:
-		gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", NULL);
+		g_object_set_data (G_OBJECT (tool), "gatewaydev", NULL);
 		g_warning ("connection_default_gw_set_manual: shouldn't be here.");
 		break;
 	}
 
-	gtk_object_set_data (GTK_OBJECT (tool), "gateway", gateway);
+	g_object_set_data (G_OBJECT (tool), "gateway", gateway);
 }
 
 void
@@ -1766,7 +1766,7 @@ ip_config_menu_cb (GtkWidget *w, gpointer data)
 	XstConnection *cxn;
 	IPConfigType ip;
 
-	cxn = gtk_object_get_user_data (GTK_OBJECT (w));
+	cxn = g_object_get_data (G_OBJECT (w), "user_data");
 
 	if (cxn->frozen)
 		return;
@@ -1803,11 +1803,11 @@ fill_ip (XstConnection *cxn)
 	menu = gtk_menu_new ();
 	for (i = 0; i < 3; i++) {
 		menuitem = gtk_menu_item_new_with_label (_(bootproto_labels[i]));
-		gtk_object_set_user_data (GTK_OBJECT (menuitem), cxn);
-		gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
-				    GTK_SIGNAL_FUNC (ip_config_menu_cb),
-				    GINT_TO_POINTER (i));
-		gtk_menu_append (GTK_MENU (menu), menuitem);
+		g_object_set_data (G_OBJECT (menuitem), "user_data", cxn);
+		g_signal_connect (G_OBJECT (menuitem), "activate",
+				  G_CALLBACK (ip_config_menu_cb),
+				  GINT_TO_POINTER (i));
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
 	}
 	gtk_widget_show_all (menu);
 
@@ -2019,7 +2019,7 @@ connection_configure (XstConnection *cxn)
 
 	cxn->frozen = TRUE;
 
-	s = g_concat_dir_and_file (INTERFACES_DIR, "network.glade");
+	s = g_strconcat (INTERFACES_DIR, "/", "network.glade", NULL);
 	cxn->xml = glade_xml_new (s, "connection_config_dialog", NULL);
 
 	g_assert (cxn->xml);
@@ -2158,8 +2158,7 @@ connection_list_has_dialer (XstTool *tool)
 	if (!need_dialer)
 		return TRUE;
 
-	has_dialer = (gboolean) gtk_object_get_data (GTK_OBJECT (tool),
-						     "dialinstalled");
+	has_dialer = (gboolean) g_object_get_data (G_OBJECT (tool), "dialinstalled");
 
 	return has_dialer;
 }

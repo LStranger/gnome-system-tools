@@ -36,7 +36,6 @@
 #include "group-settings.h"
 
 extern XstTool *tool;
-static int reply;
 
 GtkWidget *group_settings_all = NULL;
 GtkWidget *group_settings_members = NULL;
@@ -66,27 +65,27 @@ create_users_lists (void)
 	/* We create the widgets, connect signals and attach data if they haven't been created already */
 	if (group_settings_all == NULL) {
 		group_settings_all = create_gtktree_list (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
-		gtk_object_set_data (GTK_OBJECT (group_settings_all), "button", "group_settings_add");
-		gtk_signal_connect (GTK_OBJECT (group_settings_all),
-		                    "cursor_changed",
-		                    G_CALLBACK (on_list_select_row),
-		                    NULL);
+		g_object_set_data (G_OBJECT (group_settings_all), "button", "group_settings_add");
+		g_signal_connect (G_OBJECT (group_settings_all),
+		                  "cursor_changed",
+		                  G_CALLBACK (on_list_select_row),
+		                  NULL);
 
 		group_settings_members = create_gtktree_list (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
-		gtk_object_set_data (GTK_OBJECT (group_settings_members), "button", "group_settings_remove");
-		gtk_signal_connect (GTK_OBJECT (group_settings_members),
-		                    "cursor_changed",
-		                    G_CALLBACK (on_list_select_row),
-		                    NULL);
+		g_object_set_data (G_OBJECT (group_settings_members), "button", "group_settings_remove");
+		g_signal_connect (G_OBJECT (group_settings_members),
+		                  "cursor_changed",
+		                  G_CALLBACK (on_list_select_row),
+		                  NULL);
 		
 		/* We also need to attach some data to the 'add' and 'remove' buttons */
 		add_button = xst_dialog_get_widget (tool->main_dialog, "group_settings_add");
-		gtk_object_set_data (GTK_OBJECT (add_button), "in", group_settings_all);
-		gtk_object_set_data (GTK_OBJECT (add_button), "out", group_settings_members);
+		g_object_set_data (G_OBJECT (add_button), "in", group_settings_all);
+		g_object_set_data (G_OBJECT (add_button), "out", group_settings_members);
 		
 		remove_button = xst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
-		gtk_object_set_data (GTK_OBJECT (remove_button), "in", group_settings_members);
-		gtk_object_set_data (GTK_OBJECT (remove_button), "out", group_settings_all);
+		g_object_set_data (G_OBJECT (remove_button), "in", group_settings_members);
+		g_object_set_data (G_OBJECT (remove_button), "out", group_settings_all);
 	}
 }
 
@@ -112,7 +111,7 @@ group_new_prepare (ug_data *gd)
 		g_free (buf);
 	}
 
-	gtk_object_set_data (GTK_OBJECT (widget), "data", gd);
+	g_object_set_data (G_OBJECT (widget), "data", gd);
 	gtk_widget_show (widget);
 }
 
@@ -142,9 +141,9 @@ group_settings_dialog_close (void)
 	
 	/* Clear group data attached to the dialog */
 	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
-	gd = gtk_object_get_data (GTK_OBJECT (widget), "data");
+	gd = g_object_get_data (G_OBJECT (widget), "data");
 	g_free (gd);
-	gtk_object_remove_data (GTK_OBJECT (widget), "data");
+	g_object_steal_data (G_OBJECT (widget), "data");
 	gtk_widget_hide (widget);
 }
 
@@ -239,18 +238,13 @@ group_update (ug_data *gd)
 	return TRUE;
 }
 
-static void
-reply_cb (gint val, gpointer data)
-{
-        reply = val;
-}
-
 static gboolean
 check_group_delete (xmlNodePtr node)
 {
 	gchar *name, *txt;
 	GtkWindow *parent;
-	GnomeDialog *dialog;
+	GtkWidget *dialog;
+	gint reply;
 
 	g_return_val_if_fail (node != NULL, FALSE);
 
@@ -265,21 +259,21 @@ check_group_delete (xmlNodePtr node)
 
 	if (strcmp (name, "root") == 0)
 	{
-		g_free (name);
 		txt = g_strdup (_("The root group must not be deleted."));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
-		gnome_dialog_run (dialog);
+		show_error_message ("group_settings_dialog", txt);
+		g_free (name);
 		g_free (txt);
 		return FALSE;
 	}
 
 	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), name);
-	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
-	gnome_dialog_run (dialog);
+	dialog = gtk_message_dialog_new (parent, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_YES_NO, txt);
+	reply = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
 	g_free (txt);
 	g_free (name);
 	
-	if (reply)
+	if (reply == GTK_RESPONSE_NO)
 		return FALSE;
         else
 		return TRUE;
@@ -334,7 +328,7 @@ group_settings_dialog_prepare (ug_data *gd)
 	g_free (name);
 	g_free (txt);
 
-	gtk_object_set_data (GTK_OBJECT (w0), "data", gd);
+	g_object_set_data (G_OBJECT (w0), "data", gd);
 	gtk_widget_show (w0);
 }
 

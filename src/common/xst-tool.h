@@ -29,10 +29,10 @@
 #include "xst-types.h"
 
 #define XST_TYPE_TOOL        (xst_tool_get_type ())
-#define XST_TOOL(o)          (GTK_CHECK_CAST ((o),  XST_TYPE_TOOL, XstTool))
-#define XST_TOOL_CLASS(c)    (GTK_CHECK_CLASS_CAST ((c), XST_TYPE_TOOL, XstToolClass))
-#define XST_IS_TOOL(o)       (GTK_CHECK_TYPE ((o), XST_TYPE_TOOL))
-#define XST_IS_TOOL_CLASS(c) (GTK_CHECK_CLASS_TYPE ((c), XST_TYPE_TOOL))
+#define XST_TOOL(o)          (G_TYPE_CHECK_INSTANCE_CAST ((o),  XST_TYPE_TOOL, XstTool))
+#define XST_TOOL_CLASS(c)    (G_TYPE_CHECK_CLASS_CAST ((c), XST_TYPE_TOOL, XstToolClass))
+#define XST_IS_TOOL(o)       (G_TYPE_CHECK_INSTANCE_TYPE ((o), XST_TYPE_TOOL))
+#define XST_IS_TOOL_CLASS(c) (G_TYPE_CHECK_CLASS_TYPE ((c), XST_TYPE_TOOL))
 
 typedef void (*XstXmlFunc)   (XstTool *tool, gpointer data);
 typedef void (*XstCloseFunc) (XstTool *tool, gpointer data);
@@ -60,6 +60,9 @@ struct _XstTool {
 	GtkWidget *platform_dialog;
 	GtkWidget *platform_list;
 	GtkWidget *platform_ok_button;
+	GtkWidget *platform_cancel_button;
+	
+	gint platform_selected_row;
 
 	/* Progress report widgets */
 	GladeXML  *report_gui;
@@ -180,18 +183,21 @@ static void xst_ ## name ## _tool_type_init (Xst ## Name ## Tool *tool);\
 GtkType \
 xst_ ## name ## _tool_get_type (void)\
 {\
-	static GtkType type = 0;\
+	static GType type = 0;\
 	if (!type) {\
-		GtkTypeInfo info = {\
-			__full_tool_name (Name),\
-			sizeof (Xst ## Name ## Tool),\
+		GTypeInfo info = {\
 			sizeof (Xst ## Name ## ToolClass),\
-			(GtkClassInitFunc)  xst_foo_tool_class_init,\
-			(GtkObjectInitFunc) xst_ ## name ## _tool_type_init,\
-			NULL, NULL, NULL\
+			NULL,\
+			NULL,\
+			(GClassInitFunc)  xst_foo_tool_class_init,\
+			NULL,\
+			NULL,\
+			sizeof (Xst ## Name ## Tool),\
+			0,\
+			(GInstanceInitFunc) xst_ ## name ## _tool_type_init,\
 		};\
-\
-		type = gtk_type_unique (XST_TYPE_TOOL, &info);\
+		\
+		type = g_type_register_static (XST_TYPE_TOOL, __full_tool_name (Name), &info, 0);\
 	}\
 	return type;\
 }

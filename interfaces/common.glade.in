@@ -120,17 +120,14 @@
 
   <child internal-child="vbox">
     <widget class="GtkVBox" id="dialog-vbox1">
-      <property name="border_width">2</property>
       <property name="visible">True</property>
       <property name="homogeneous">False</property>
       <property name="spacing">8</property>
 
       <child internal-child="action_area">
 	<widget class="GtkHButtonBox" id="dialog-action_area1">
-	  <property name="border_width">5</property>
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
-	  <property name="spacing">10</property>
 
 	  <child>
 	    <widget class="GtkButton" id="button3">
@@ -223,7 +220,8 @@ Note, however, that this might damage the system configuration or downright crip
 	  </child>
 
 	  <child>
-	    <widget class="GtkScrolledWindow" id="scrolledwindow3">
+	    <widget class="GtkScrolledWindow" id="platform_list_holder">
+	      <property name="height_request">250</property>
 	      <property name="visible">True</property>
 	      <property name="can_focus">True</property>
 	      <property name="hscrollbar_policy">GTK_POLICY_AUTOMATIC</property>
@@ -232,21 +230,7 @@ Note, however, that this might damage the system configuration or downright crip
 	      <property name="window_placement">GTK_CORNER_TOP_LEFT</property>
 
 	      <child>
-		<widget class="GtkViewport" id="viewport1">
-		  <property name="visible">True</property>
-		  <property name="shadow_type">GTK_SHADOW_IN</property>
-
-		  <child>
-		    <widget class="GtkTreeView" id="platform_list">
-		      <property name="visible">True</property>
-		      <property name="can_focus">True</property>
-		      <property name="headers_visible">False</property>
-		      <property name="rules_hint">False</property>
-		      <property name="reorderable">False</property>
-		      <property name="enable_search">False</property>
-		    </widget>
-		  </child>
-		</widget>
+		<placeholder/>
 	      </child>
 	    </widget>
 	    <packing>
@@ -285,7 +269,6 @@ Note, however, that this might damage the system configuration or downright crip
 	<widget class="GtkHButtonBox" id="dialog-action_area3">
 	  <property name="visible">True</property>
 	  <property name="layout_style">GTK_BUTTONBOX_END</property>
-	  <property name="spacing">8</property>
 
 	  <child>
 	    <widget class="GtkButton" id="button9">
@@ -480,7 +463,7 @@ specify a password, you will be unable to modify your system configuration.</pro
       <property name="visible">True</property>
       <property name="allow_floating">True</property>
 
-      <child internal-child="BonoboDock:contents">
+      <child>
 	<widget class="GtkVBox" id="tool_vbox">
 	  <property name="border_width">4</property>
 	  <property name="visible">True</property>

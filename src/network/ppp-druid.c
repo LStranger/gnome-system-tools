@@ -60,7 +60,7 @@ ppp_druid_connect_signals (PppDruid *ppp, XstDialogSignal *signals)
 	g_return_if_fail (ppp != NULL);
 
 	for (i = 0; signals[i].widget; i++)
-		gtk_signal_connect_after (GTK_OBJECT (my_get_widget (ppp->glade, signals[i].widget)),
+		g_signal_connect_after (G_OBJECT (my_get_widget (ppp->glade, signals[i].widget)),
 							 signals[i].signal_name, signals[i].func, ppp);
 }
 
@@ -69,7 +69,7 @@ ppp_druid_exit (PppDruid *ppp)
 {
 	g_return_if_fail (ppp != NULL);
 
-	gtk_object_unref (GTK_OBJECT (ppp->glade));
+	g_object_unref (G_OBJECT (ppp->glade));
 	gtk_widget_destroy (ppp->win);
 	gtk_main_quit ();
 }
@@ -421,7 +421,7 @@ ppp_druid_new (XstTool *tool)
 	ppp->current_page = 0;
 	ppp->druid        = GNOME_DRUID (my_get_widget (ppp->glade, "druid"));
 	ppp->win          = my_get_widget (ppp->glade, "window");
-	gtk_object_set_data (GTK_OBJECT (ppp->win), "ppp", ppp);
+	g_object_set_data (G_OBJECT (ppp->win), "ppp", ppp);
 	
 	ppp->phone   = my_get_widget (ppp->glade, "phone");
 	ppp->login   = my_get_widget (ppp->glade, "login");
