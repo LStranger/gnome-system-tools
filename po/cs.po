@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-14 11:30+0200\n"
-"PO-Revision-Date: 2004-10-14 14:34+0200\n"
+"POT-Creation-Date: 2004-10-18 11:31+0200\n"
+"PO-Revision-Date: 2004-10-18 11:49+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -74,8 +74,8 @@ msgid "Whether the warning dialog should be shown or not"
 msgstr "Jestli se má zobrazovat dialog s varováním"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
+#: interfaces/network.glade.in.h:1 interfaces/shares.glade.in.h:1
+#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -700,7 +700,7 @@ msgstr "_Deaktivovat"
 
 #: interfaces/network.glade.in.h:87 interfaces/users.glade.in.h:52
 #: src/boot/table.c:52 src/network/connection.c:64 src/network/dns.c:39
-#: src/network/hosts.c:42 src/users/table.c:49
+#: src/network/hosts.c:42 src/shares/table.c:41 src/users/table.c:49
 msgid "_Delete"
 msgstr "O_dstranit"
 
@@ -867,6 +867,90 @@ msgstr "_Spustit"
 #: interfaces/services.glade.in.h:11
 msgid "_Startup sequence:"
 msgstr "_Sekvence spouštění:"
+
+#: interfaces/shares.glade.in.h:2
+msgid "<b>Allowed hosts</b>"
+msgstr "<b>Povolené počítače</b>"
+
+#: interfaces/shares.glade.in.h:3
+msgid "<b>Hosts settings</b>"
+msgstr "<b>Nastavení počítačů</b>"
+
+#: interfaces/shares.glade.in.h:4
+msgid "<b>Share properties</b>"
+msgstr "<b>Vlastnosti sdílení</b>"
+
+#: interfaces/shares.glade.in.h:5
+msgid "<b>Shared folder</b>"
+msgstr "<b>Sdílený adresář</b>"
+
+#: interfaces/shares.glade.in.h:6
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Shared folders configuration</span>\n"
+"Use this tool for making available folders to your local network neighborhood"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Nastavení sdílených adresářů</span>\n"
+"Použijte tento nástroj zpřístupnění adresářů vašim místním okolním počítačům "
+
+#: interfaces/shares.glade.in.h:8
+msgid "Add allowed hosts"
+msgstr "Přidat povolené počítače"
+
+#: interfaces/shares.glade.in.h:9
+msgid "Allow _browsing folder"
+msgstr "Povolit _procházení adresáře"
+
+#: interfaces/shares.glade.in.h:10
+msgid "Allowed hosts:"
+msgstr "Povolené počítače:"
+
+#: interfaces/shares.glade.in.h:11
+msgid "Comment:"
+msgstr "Poznámka:"
+
+#: interfaces/shares.glade.in.h:12
+msgid "Host name:"
+msgstr "Název počítače:"
+
+#: interfaces/shares.glade.in.h:13
+msgid "IP address:"
+msgstr "IP adresa:"
+
+#: interfaces/shares.glade.in.h:14
+msgid "Name:"
+msgstr "Název:"
+
+#: interfaces/shares.glade.in.h:15
+msgid "Netmask:"
+msgstr "Maska sítě:"
+
+#: interfaces/shares.glade.in.h:16
+msgid "Network:"
+msgstr "Síť:"
+
+#: interfaces/shares.glade.in.h:17 src/shares/nfs-acl-table.c:55
+msgid "Read only"
+msgstr "Jen pro čtení"
+
+#: interfaces/shares.glade.in.h:18
+msgid "Share folder"
+msgstr "Sdílet adresář"
+
+#: interfaces/shares.glade.in.h:19
+msgid "Share with:"
+msgstr "Sdílet s:"
+
+#: interfaces/shares.glade.in.h:20
+msgid "_Add host"
+msgstr "_Přidat počítač"
+
+#: interfaces/shares.glade.in.h:21
+msgid "_Path:"
+msgstr "_Cesta:"
+
+#: interfaces/shares.glade.in.h:22
+msgid "_Read only"
+msgstr "_Jen pro čtení"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1303,7 +1387,7 @@ msgstr "To může způsobit, že operační systém nepůjde zavést"
 #: src/boot/callbacks.c:439
 #, c-format
 msgid "Are you sure you want to delete \"%s\"?"
-msgstr "Jste si jisti, že chcete odstranit \"%s\"?"
+msgstr "Opravdu chcete odstranit \"%s\"?"
 
 #: src/boot/callbacks.c:464
 msgid "The configuration will show empty"
@@ -1334,11 +1418,13 @@ msgstr "Obraz jádra"
 msgid "Device"
 msgstr "Zařízení"
 
-#: src/boot/table.c:50 src/network/connection.c:62 src/users/table.c:47
+#: src/boot/table.c:50 src/network/connection.c:62 src/shares/table.c:39
+#: src/users/table.c:47
 msgid "_Add"
 msgstr "Přid_at"
 
-#: src/boot/table.c:51 src/network/connection.c:63 src/users/table.c:48
+#: src/boot/table.c:51 src/network/connection.c:63 src/shares/table.c:40
+#: src/users/table.c:48
 msgid "_Properties"
 msgstr "_Vlastnosti"
 
@@ -1399,20 +1485,20 @@ msgstr "Použít je nyní?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Chyba při připojení signálu `%s' ve widgetu `%s'"
 
-#: src/common/gst-tool.c:1018
+#: src/common/gst-tool.c:1017
 msgid "The configuration could not be loaded"
 msgstr "Nastavení nemohlo být načteno"
 
-#: src/common/gst-tool.c:1019
+#: src/common/gst-tool.c:1018
 msgid "There was an error running the backend script"
 msgstr "Při spuštění podpůrného skriptu došlo k chybě"
 
-#: src/common/gst-tool.c:1492
+#: src/common/gst-tool.c:1491
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Vítejte v předběžné verzi %s Systémových nástrojů GNOME"
 
-#: src/common/gst-tool.c:1494
+#: src/common/gst-tool.c:1493
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1426,19 +1512,19 @@ msgstr ""
 "úsilí a zdravý rozum. Byli jste varováni. Děkujeme vám za vyzkoušení této "
 "předběžné verze Systémových nástrojů GNOME!"
 
-#: src/common/gst-tool.c:1515
+#: src/common/gst-tool.c:1514
 msgid "Warning"
 msgstr "Varování"
 
-#: src/common/gst-tool.c:1535
+#: src/common/gst-tool.c:1534
 msgid "Don't show me this again"
 msgstr "Nezobrazovat příště"
 
-#: src/common/gst-tool.c:1611
+#: src/common/gst-tool.c:1610
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
-#: src/common/gst-tool.c:1772
+#: src/common/gst-tool.c:1771
 msgid "Could not display help"
 msgstr "Nemohu zobrazit nápovědu"
 
@@ -1446,12 +1532,14 @@ msgstr "Nemohu zobrazit nápovědu"
 msgid ""
 "This will disable any network connection with this interface as soon as you "
 "press \"OK\" in the main window"
-msgstr "Toto zakáže všechna připojení k síti přes toto rozhraní, jakmile stisknete \"Budiž\" v hlavním okně"
+msgstr ""
+"Toto zakáže všechna připojení k síti přes toto rozhraní, jakmile stisknete "
+"\"Budiž\" v hlavním okně"
 
 #: src/network/callbacks.c:409
 #, c-format
 msgid "Are you sure you want to delete connection \"%s\"?"
-msgstr "Jste si jisti, že chcete odstranit spojení \"%s\"?"
+msgstr "Opravdu chcete odstranit spojení \"%s\"?"
 
 #: src/network/callbacks.c:517
 msgid "SMB Support is not running"
@@ -1782,7 +1870,7 @@ msgstr "Po stisknutí \"použít\" nebudete moci tento profil obnovit"
 #: src/network/profile.c:55
 #, c-format
 msgid "Are you sure you want to delete profile \"%s\"?"
-msgstr "Jste si jisti, že chcete odstranit profil \"%s\"?"
+msgstr "Opravdu chcete odstranit profil \"%s\"?"
 
 #: src/network/profiles-table.c:53
 msgid "Profile name"
@@ -1828,6 +1916,79 @@ msgstr "Služby"
 #: src/services/table.c:95
 msgid "Service"
 msgstr "Služba"
+
+#: src/shares/callbacks.c:184
+msgid "Are you sure you want to delete this share?"
+msgstr "Opravdu chcete odstranit toto sdílení?"
+
+#: src/shares/callbacks.c:185
+msgid "Other computers in your network will stop viewing this"
+msgstr "Jiné počítače ve vaší síti si to přestanou prohlížet"
+
+#: src/shares/component/GST_Shares_Component.server.in.in.h:1
+msgid "GST Shares admin component"
+msgstr "Komponenta administrace GST Shares"
+
+#: src/shares/component/GST_Shares_Component.server.in.in.h:2
+msgid "GST Shares sharing operations"
+msgstr "Operace sdílení GST Shares"
+
+#: src/shares/component/GST_Shares_Component.server.in.in.h:3
+msgid "_Share Folder"
+msgstr "_Sdílet adresář"
+
+#: src/shares/main.c:76
+msgid "Add a shared path, modifies it if it already exists"
+msgstr "Přidat sdílenou cestu, upraví ji, pokud už existuje"
+
+#: src/shares/main.c:76
+msgid "Path"
+msgstr "Cesta"
+
+#: src/shares/main.c:83
+msgid "Shared folders settings"
+msgstr "Nastavení sdílených adresářů"
+
+#: src/shares/nfs-acl-table.c:49
+msgid "Allowed host/network"
+msgstr "Povolený počítač/síť"
+
+#: src/shares/share-nfs-add-hosts.c:112
+#, c-format
+msgid "Hosts in the %s network"
+msgstr "Počítače v síti %s"
+
+#: src/shares/share-nfs-add-hosts.c:144
+msgid "Specify hostname"
+msgstr "Zadejte jméno počítače"
+
+#: src/shares/share-nfs-add-hosts.c:151
+msgid "Specify IP address"
+msgstr "Zadejte IP adresu"
+
+#: src/shares/share-nfs-add-hosts.c:158
+msgid "Specify network"
+msgstr "Zadejte síť"
+
+#: src/shares/share-settings.c:123
+msgid "Do not share"
+msgstr "Nesdílet"
+
+#: src/shares/share-settings.c:130
+msgid "SMB"
+msgstr "SMB"
+
+#: src/shares/share-settings.c:136
+msgid "NFS"
+msgstr "NFS"
+
+#: src/shares/shares.desktop.in.in.h:1
+msgid "Configure which folders are available for your network neighborhood"
+msgstr "Nastavit, které adresáře jsou k dispozici pro vaše okolní počítače"
+
+#: src/shares/shares.desktop.in.in.h:2
+msgid "Shares"
+msgstr "Sdílení"
 
 #: src/time/main.c:461
 msgid "NTP support is not running"
@@ -1950,7 +2111,7 @@ msgstr "To možná nechá v systému souborů soubory s neplatným ID skupiny"
 #: src/users/group-settings.c:303
 #, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
-msgstr "Jste si jisti, že chcete odstranit skupinu \"%s\"?"
+msgstr "Opravdu chcete odstranit skupinu \"%s\"?"
 
 #: src/users/group-settings.c:358
 #, c-format
