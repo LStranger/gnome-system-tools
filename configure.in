@@ -10,8 +10,6 @@ AM_CONFIG_HEADER(config.h)
 AM_MAINTAINER_MODE
 AC_PROG_INTLTOOL
 
-GNOME_PLATFORM_GNOME_2(yes, force)
-
 dnl Checking the above
 AC_CONFIG_SRCDIR(src/common/gst-tool.c)
 
@@ -113,6 +111,7 @@ dnl Check for Module versions
 dnl =====================================================
 
 PKG_CHECK_MODULES(GST_DEPENDS,[
+			   gtk+-2.0 >= 2.4.0
 			   libgnomeui-2.0 >= 1.109.0
 			   libglade-2.0 >= 1.99.5
 			   libxml-2.0 >= 2.4.12
