@@ -4,18 +4,6 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Memory Administration");
-gchar *s = N_("Swap Memory:");
-gchar *s = N_("Physical Memory:");
-gchar *s = N_("Available swap areas");
-gchar *s = N_("Enabled");
-gchar *s = N_("Device");
-gchar *s = N_("Priority");
-gchar *s = N_("Size");
-gchar *s = N_("Create...");
-gchar *s = N_("Remove");
-gchar *s = N_("Settings...");
-gchar *s = N_(" More Options >> ");
 gchar *s = N_("Available partitions:");
 gchar *s = N_("Device");
 gchar *s = N_("Size");
@@ -40,3 +28,14 @@ gchar *s = N_("Priority:");
 gchar *s = N_("Size:");
 gchar *s = N_("MB");
 gchar *s = N_("Browse...");
+gchar *s = N_("window1");
+gchar *s = N_("Swap Memory:");
+gchar *s = N_("Physical Memory:");
+gchar *s = N_("Available swap areas");
+gchar *s = N_("Enabled");
+gchar *s = N_("Device");
+gchar *s = N_("Priority");
+gchar *s = N_("Size");
+gchar *s = N_("Create...");
+gchar *s = N_("Remove");
+gchar *s = N_("Settings...");

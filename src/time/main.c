@@ -168,22 +168,6 @@ clock_tick(gpointer data)
 }
 
 
-void
-on_apply_clicked(GtkButton *button, gpointer data)
-{
-	transfer_gui_to_xml(&trans_tree, xml_doc_get_root(tool_config_get_xml()));
-	tool_config_save();
-	tool_set_modified(FALSE);
-}
-
-
-void
-on_help_clicked(GtkButton *button, gpointer data)
-{
-	/* TODO: Have some help handy */
-}
-
-
 void tz_select_combo (GtkList *list, GtkWidget *widget, gpointer data)
 {
 	GtkListItem *li;
@@ -213,6 +197,8 @@ int
 main(int argc, char *argv[])
 {
 	tool_init("time", argc, argv);
+	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
+
 	populate_ntp_list();
 	init_timezone_selection();
 	connect_signals();

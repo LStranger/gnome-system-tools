@@ -16,478 +16,6 @@
 </project>
 
 <widget>
-  <class>GnomeApp</class>
-  <name>disks_admin</name>
-  <width>580</width>
-  <height>305</height>
-  <visible>False</visible>
-  <title>Disks Administration</title>
-  <type>GTK_WINDOW_TOPLEVEL</type>
-  <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
-  <allow_grow>True</allow_grow>
-  <auto_shrink>False</auto_shrink>
-  <wmclass_class>disks_admin</wmclass_class>
-  <enable_layout_config>True</enable_layout_config>
-
-  <widget>
-    <class>GnomeDock</class>
-    <child_name>GnomeApp:dock</child_name>
-    <name>dock1</name>
-    <allow_floating>True</allow_floating>
-    <child>
-      <padding>0</padding>
-      <expand>True</expand>
-      <fill>True</fill>
-    </child>
-
-    <widget>
-      <class>GtkVBox</class>
-      <child_name>GnomeDock:contents</child_name>
-      <name>vbox1</name>
-      <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
-
-      <widget>
-	<class>GtkNotebook</class>
-	<name>notebook1</name>
-	<border_width>4</border_width>
-	<can_focus>True</can_focus>
-	<show_tabs>True</show_tabs>
-	<show_border>True</show_border>
-	<tab_pos>GTK_POS_TOP</tab_pos>
-	<scrollable>False</scrollable>
-	<tab_hborder>2</tab_hborder>
-	<tab_vborder>2</tab_vborder>
-	<popup_enable>False</popup_enable>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkTable</class>
-	  <name>table2</name>
-	  <border_width>4</border_width>
-	  <rows>3</rows>
-	  <columns>1</columns>
-	  <homogeneous>False</homogeneous>
-	  <row_spacing>4</row_spacing>
-	  <column_spacing>4</column_spacing>
-
-	  <widget>
-	    <class>GtkScrolledWindow</class>
-	    <name>scrolledwindow4</name>
-	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>0</top_attach>
-	      <bottom_attach>2</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>True</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
-	    </child>
-
-	    <widget>
-	      <class>GtkCTree</class>
-	      <name>disks</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>select_row</name>
-		<handler>on_disks_select_row</handler>
-		<last_modification_time>Thu, 31 Aug 2000 01:23:15 GMT</last_modification_time>
-	      </signal>
-	      <signal>
-		<name>unselect_row</name>
-		<handler>on_disks_unselect_row</handler>
-		<last_modification_time>Thu, 31 Aug 2000 01:24:47 GMT</last_modification_time>
-	      </signal>
-	      <columns>8</columns>
-	      <column_widths>131,53,34,48,40,49,37,80</column_widths>
-	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	      <show_titles>True</show_titles>
-	      <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CTree:title</child_name>
-		<name>label99</name>
-		<label>Device</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CTree:title</child_name>
-		<name>label100</name>
-		<label>Detected</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CTree:title</child_name>
-		<name>label101</name>
-		<label>Listed</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CTree:title</child_name>
-		<name>label102</name>
-		<label>Mounted</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CTree:title</child_name>
-		<name>label103</name>
-		<label>Size</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CTree:title</child_name>
-		<name>label104</name>
-		<label>Bootable</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CTree:title</child_name>
-		<name>label105</name>
-		<label>Check</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CTree:title</child_name>
-		<name>label106</name>
-		<label>Mount point</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-	      </widget>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkFrame</class>
-	    <name>frame5</name>
-	    <label>Partition</label>
-	    <label_xalign>0</label_xalign>
-	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>2</top_attach>
-	      <bottom_attach>3</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
-	    </child>
-
-	    <widget>
-	      <class>GtkTable</class>
-	      <name>table3</name>
-	      <border_width>4</border_width>
-	      <rows>2</rows>
-	      <columns>2</columns>
-	      <homogeneous>False</homogeneous>
-	      <row_spacing>2</row_spacing>
-	      <column_spacing>4</column_spacing>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>new_launch</name>
-		<tooltip>Add an unlisted import</tooltip>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_partition_new_launched</handler>
-		  <last_modification_time>Sat, 02 Sep 2000 15:34:12 GMT</last_modification_time>
-		</signal>
-		<label>Add partition</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
-		  <top_attach>0</top_attach>
-		  <bottom_attach>1</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkCheckButton</class>
-		<name>mounted_toggle</name>
-		<sensitive>False</sensitive>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>toggled</name>
-		  <handler>tool_modified_cb</handler>
-		  <last_modification_time>Tue, 22 Aug 2000 11:26:51 GMT</last_modification_time>
-		</signal>
-		<signal>
-		  <name>toggled</name>
-		  <handler>on_mounted_toggled</handler>
-		  <last_modification_time>Tue, 22 Aug 2000 11:36:20 GMT</last_modification_time>
-		</signal>
-		<label>Mount this partition</label>
-		<active>False</active>
-		<draw_indicator>True</draw_indicator>
-		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>settings_launch</name>
-		<sensitive>False</sensitive>
-		<tooltip>Open settings dialog for selected import</tooltip>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_partition_settings_launched</handler>
-		  <last_modification_time>Sat, 02 Sep 2000 15:21:26 GMT</last_modification_time>
-		</signal>
-		<label>Settings</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkCheckButton</class>
-		<name>listed_toggle</name>
-		<sensitive>False</sensitive>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>toggled</name>
-		  <handler>tool_modified_cb</handler>
-		  <last_modification_time>Tue, 22 Aug 2000 11:26:38 GMT</last_modification_time>
-		</signal>
-		<signal>
-		  <name>toggled</name>
-		  <handler>on_listed_toggled</handler>
-		  <last_modification_time>Tue, 22 Aug 2000 11:36:13 GMT</last_modification_time>
-		</signal>
-		<label>Remember details of this partition</label>
-		<active>False</active>
-		<draw_indicator>True</draw_indicator>
-		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
-		  <top_attach>0</top_attach>
-		  <bottom_attach>1</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-	    </widget>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <child_name>Notebook:tab</child_name>
-	  <name>label12</name>
-	  <label>Disks &amp; partitions</label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
-	  <wrap>False</wrap>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkAlignment</class>
-	<name>alignment1</name>
-	<border_width>4</border_width>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xscale>1</xscale>
-	<yscale>1</yscale>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-
-	<widget>
-	  <class>GtkHSeparator</class>
-	  <name>hseparator1</name>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkHBox</class>
-	<name>hbox1</name>
-	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-
-	<widget>
-	  <class>GtkButton</class>
-	  <name>complexity</name>
-	  <can_default>True</can_default>
-	  <can_focus>True</can_focus>
-	  <label> More Options &gt;&gt; </label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkHButtonBox</class>
-	  <name>hbuttonbox1</name>
-	  <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
-	  <spacing>0</spacing>
-	  <child_min_width>89</child_min_width>
-	  <child_min_height>27</child_min_height>
-	  <child_ipad_x>0</child_ipad_x>
-	  <child_ipad_y>0</child_ipad_y>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	    <pack>GTK_PACK_END</pack>
-	  </child>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <name>apply</name>
-	    <can_default>True</can_default>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_apply_clicked</handler>
-	      <last_modification_time>Mon, 23 Oct 2000 20:34:26 GMT</last_modification_time>
-	    </signal>
-	    <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
-	    <relief>GTK_RELIEF_NORMAL</relief>
-	  </widget>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <name>close</name>
-	    <can_default>True</can_default>
-	    <can_focus>True</can_focus>
-	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
-	    <relief>GTK_RELIEF_NORMAL</relief>
-	  </widget>
-	</widget>
-      </widget>
-    </widget>
-  </widget>
-</widget>
-
-<widget>
   <class>GnomeDialog</class>
   <name>partition_settings_dialog</name>
   <visible>False</visible>
@@ -765,6 +293,365 @@ NTFS (Windows NT &amp; 2000)
 	  <yfill>False</yfill>
 	</child>
       </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window1</name>
+  <visible>False</visible>
+  <title>window1</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkNotebook</class>
+    <name>disks_admin</name>
+    <border_width>4</border_width>
+    <width>560</width>
+    <height>275</height>
+    <can_focus>True</can_focus>
+    <show_tabs>True</show_tabs>
+    <show_border>True</show_border>
+    <tab_pos>GTK_POS_TOP</tab_pos>
+    <scrollable>False</scrollable>
+    <tab_hborder>2</tab_hborder>
+    <tab_vborder>2</tab_vborder>
+    <popup_enable>False</popup_enable>
+
+    <widget>
+      <class>GtkTable</class>
+      <name>table2</name>
+      <border_width>4</border_width>
+      <rows>3</rows>
+      <columns>1</columns>
+      <homogeneous>False</homogeneous>
+      <row_spacing>4</row_spacing>
+      <column_spacing>4</column_spacing>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>scrolledwindow4</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>True</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>True</yfill>
+	</child>
+
+	<widget>
+	  <class>GtkCTree</class>
+	  <name>disks</name>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>select_row</name>
+	    <handler>on_disks_select_row</handler>
+	    <last_modification_time>Thu, 31 Aug 2000 01:23:15 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>unselect_row</name>
+	    <handler>on_disks_unselect_row</handler>
+	    <last_modification_time>Thu, 31 Aug 2000 01:24:47 GMT</last_modification_time>
+	  </signal>
+	  <columns>8</columns>
+	  <column_widths>131,53,34,48,40,49,37,80</column_widths>
+	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	  <show_titles>True</show_titles>
+	  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>label99</name>
+	    <label>Device</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>label100</name>
+	    <label>Detected</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>label101</name>
+	    <label>Listed</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>label102</name>
+	    <label>Mounted</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>label103</name>
+	    <label>Size</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>label104</name>
+	    <label>Bootable</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>label105</name>
+	    <label>Check</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CTree:title</child_name>
+	    <name>label106</name>
+	    <label>Mount point</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame5</name>
+	<label>Partition</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>True</yfill>
+	</child>
+
+	<widget>
+	  <class>GtkTable</class>
+	  <name>table3</name>
+	  <border_width>4</border_width>
+	  <rows>2</rows>
+	  <columns>2</columns>
+	  <homogeneous>False</homogeneous>
+	  <row_spacing>2</row_spacing>
+	  <column_spacing>4</column_spacing>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>new_launch</name>
+	    <tooltip>Add an unlisted import</tooltip>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_partition_new_launched</handler>
+	      <last_modification_time>Sat, 02 Sep 2000 15:34:12 GMT</last_modification_time>
+	    </signal>
+	    <label>Add partition</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>mounted_toggle</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>tool_modified_cb</handler>
+	      <last_modification_time>Tue, 22 Aug 2000 11:26:51 GMT</last_modification_time>
+	    </signal>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_mounted_toggled</handler>
+	      <last_modification_time>Tue, 22 Aug 2000 11:36:20 GMT</last_modification_time>
+	    </signal>
+	    <label>Mount this partition</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>settings_launch</name>
+	    <sensitive>False</sensitive>
+	    <tooltip>Open settings dialog for selected import</tooltip>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_partition_settings_launched</handler>
+	      <last_modification_time>Sat, 02 Sep 2000 15:21:26 GMT</last_modification_time>
+	    </signal>
+	    <label>Settings</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>listed_toggle</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>tool_modified_cb</handler>
+	      <last_modification_time>Tue, 22 Aug 2000 11:26:38 GMT</last_modification_time>
+	    </signal>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>on_listed_toggled</handler>
+	      <last_modification_time>Tue, 22 Aug 2000 11:36:13 GMT</last_modification_time>
+	    </signal>
+	    <label>Remember details of this partition</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label12</name>
+      <label>Disks &amp; partitions</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
     </widget>
   </widget>
 </widget>

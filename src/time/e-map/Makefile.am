@@ -1,12 +1,12 @@
-INCLUDES = $(GNOME_INCLUDEDIR)
+INCLUDES = $(GNOME_INCLUDEDIR) $(GNOME_XML_CFLAGS)
 LDADD = -lm
 
 noinst_PROGRAMS = \
 e-map-test
 
 e_map_test_CFLAGS = \
-  $(GNOME_CFLAGS) \
-  $(GDK_PIXBUF_CFLAGS)
+	$(GNOME_CFLAGS) \
+	$(GDK_PIXBUF_CFLAGS)
 
 e_map_test_LDADD = \
   $(GNOME_LIBDIR) \

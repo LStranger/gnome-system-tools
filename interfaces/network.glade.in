@@ -16,13 +16,8 @@
 
 <widget>
   <class>GtkWindow</class>
-  <name>network_admin</name>
+  <name>network_admin_win</name>
   <visible>False</visible>
-  <signal>
-    <name>delete_event</name>
-    <handler>on_network_admin_delete_event</handler>
-    <last_modification_time>Wed, 27 Dec 2000 22:17:26 GMT</last_modification_time>
-  </signal>
   <signal>
     <name>show</name>
     <handler>on_network_admin_show</handler>
@@ -37,1101 +32,75 @@
   <auto_shrink>False</auto_shrink>
 
   <widget>
-    <class>GtkVBox</class>
-    <name>vbox1</name>
-    <border_width>4</border_width>
-    <homogeneous>False</homogeneous>
-    <spacing>4</spacing>
+    <class>GtkNotebook</class>
+    <name>network_admin</name>
+    <can_focus>True</can_focus>
+    <signal>
+      <name>switch_page</name>
+      <handler>on_network_notebook_switch_page</handler>
+      <last_modification_time>Wed, 27 Dec 2000 21:39:33 GMT</last_modification_time>
+    </signal>
+    <show_tabs>True</show_tabs>
+    <show_border>True</show_border>
+    <tab_pos>GTK_POS_TOP</tab_pos>
+    <scrollable>False</scrollable>
+    <tab_hborder>2</tab_hborder>
+    <tab_vborder>2</tab_vborder>
+    <popup_enable>False</popup_enable>
 
     <widget>
-      <class>GtkNotebook</class>
-      <name>network_notebook</name>
-      <can_focus>True</can_focus>
-      <signal>
-	<name>switch_page</name>
-	<handler>on_network_notebook_switch_page</handler>
-	<last_modification_time>Wed, 27 Dec 2000 21:39:33 GMT</last_modification_time>
-      </signal>
-      <show_tabs>True</show_tabs>
-      <show_border>True</show_border>
-      <tab_pos>GTK_POS_TOP</tab_pos>
-      <scrollable>False</scrollable>
-      <tab_hborder>2</tab_hborder>
-      <tab_vborder>2</tab_vborder>
-      <popup_enable>False</popup_enable>
-      <child>
-	<padding>0</padding>
-	<expand>True</expand>
-	<fill>True</fill>
-      </child>
+      <class>GtkVBox</class>
+      <name>general_vbox</name>
+      <border_width>4</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>4</spacing>
 
       <widget>
-	<class>GtkVBox</class>
-	<name>general_vbox</name>
-	<border_width>4</border_width>
+	<class>GtkHBox</class>
+	<name>hbox7</name>
 	<homogeneous>False</homogeneous>
 	<spacing>4</spacing>
-
-	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox7</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>4</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label10</name>
-	    <label>Host name:</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkEntry</class>
-	    <name>hostname</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>focus_in_event</name>
-	      <handler>update_hint</handler>
-	      <last_modification_time>Tue, 26 Dec 2000 23:51:27 GMT</last_modification_time>
-	    </signal>
-	    <editable>True</editable>
-	    <text_visible>True</text_visible>
-	    <text_max_length>0</text_max_length>
-	    <text></text>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>samba_use</name>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>toggled</name>
-	    <handler>on_samba_use_toggled</handler>
-	    <last_modification_time>Wed, 27 Dec 2000 21:38:58 GMT</last_modification_time>
-	  </signal>
-	  <label>Enable windows networking (Samba)</label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkFrame</class>
-	  <name>frame1</name>
-	  <label>Windows Networking</label>
-	  <label_xalign>0</label_xalign>
-	  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkTable</class>
-	    <name>table1</name>
-	    <border_width>4</border_width>
-	    <rows>3</rows>
-	    <columns>2</columns>
-	    <homogeneous>False</homogeneous>
-	    <row_spacing>4</row_spacing>
-	    <column_spacing>4</column_spacing>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <name>label12</name>
-	      <label>Description:</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <child>
-		<left_attach>0</left_attach>
-		<right_attach>1</right_attach>
-		<top_attach>0</top_attach>
-		<bottom_attach>1</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkEntry</class>
-	      <name>description</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>focus_in_event</name>
-		<handler>update_hint</handler>
-		<last_modification_time>Tue, 26 Dec 2000 23:51:39 GMT</last_modification_time>
-	      </signal>
-	      <editable>True</editable>
-	      <text_visible>True</text_visible>
-	      <text_max_length>0</text_max_length>
-	      <text></text>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>0</top_attach>
-		<bottom_attach>1</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>True</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <name>label13</name>
-	      <label>Workgroup:</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <child>
-		<left_attach>0</left_attach>
-		<right_attach>1</right_attach>
-		<top_attach>1</top_attach>
-		<bottom_attach>2</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkEntry</class>
-	      <name>workgroup</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>focus_in_event</name>
-		<handler>update_hint</handler>
-		<last_modification_time>Tue, 26 Dec 2000 23:51:50 GMT</last_modification_time>
-	      </signal>
-	      <editable>True</editable>
-	      <text_visible>True</text_visible>
-	      <text_max_length>0</text_max_length>
-	      <text></text>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>1</top_attach>
-		<bottom_attach>2</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>True</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <name>label71</name>
-	      <label>WINS server:</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <child>
-		<left_attach>0</left_attach>
-		<right_attach>1</right_attach>
-		<top_attach>2</top_attach>
-		<bottom_attach>3</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkEntry</class>
-	      <name>wins_ip</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>focus_in_event</name>
-		<handler>update_hint</handler>
-		<last_modification_time>Tue, 26 Dec 2000 23:51:59 GMT</last_modification_time>
-	      </signal>
-	      <editable>True</editable>
-	      <text_visible>True</text_visible>
-	      <text_max_length>0</text_max_length>
-	      <text></text>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>2</top_attach>
-		<bottom_attach>3</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>True</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-	  </widget>
-	</widget>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>general_help</name>
-	  <height>140</height>
-	  <label></label>
-	  <justify>GTK_JUSTIFY_LEFT</justify>
-	  <wrap>True</wrap>
-	  <xalign>0</xalign>
-	  <yalign>0</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkLabel</class>
-	<child_name>Notebook:tab</child_name>
-	<name>label1</name>
-	<label>General</label>
-	<justify>GTK_JUSTIFY_CENTER</justify>
-	<wrap>False</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-      </widget>
-
-      <widget>
-	<class>GtkVBox</class>
-	<name>vbox3</name>
-	<border_width>4</border_width>
-	<homogeneous>False</homogeneous>
-	<spacing>4</spacing>
-
-	<widget>
-	  <class>GtkScrolledWindow</class>
-	  <name>scrolledwindow1</name>
-	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkCList</class>
-	    <name>connection_list</name>
-	    <can_focus>True</can_focus>
-	    <columns>3</columns>
-	    <column_widths>64,31,80</column_widths>
-	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	    <show_titles>True</show_titles>
-	    <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <child_name>CList:title</child_name>
-	      <name>label15</name>
-	      <label>Enabled</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	    </widget>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <child_name>CList:title</child_name>
-	      <name>label16</name>
-	      <label>Icon</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	    </widget>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <child_name>CList:title</child_name>
-	      <name>label17</name>
-	      <label>Connection description</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	    </widget>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkHButtonBox</class>
-	  <name>connections_bbox</name>
-	  <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
-	  <spacing>30</spacing>
-	  <child_min_width>85</child_min_width>
-	  <child_min_height>27</child_min_height>
-	  <child_ipad_x>7</child_ipad_x>
-	  <child_ipad_y>0</child_ipad_y>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <name>connection_add</name>
-	    <can_default>True</can_default>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_connection_add_clicked</handler>
-	      <last_modification_time>Wed, 27 Dec 2000 21:37:38 GMT</last_modification_time>
-	    </signal>
-	    <label>Add...</label>
-	    <relief>GTK_RELIEF_NORMAL</relief>
-	  </widget>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <name>connection_delete</name>
-	    <can_default>True</can_default>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_connection_delete_clicked</handler>
-	      <last_modification_time>Wed, 27 Dec 2000 21:37:53 GMT</last_modification_time>
-	    </signal>
-	    <label>Delete</label>
-	    <relief>GTK_RELIEF_NORMAL</relief>
-	  </widget>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <name>connection_configure</name>
-	    <can_default>True</can_default>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>clicked</name>
-	      <handler>on_connection_configure_clicked</handler>
-	      <last_modification_time>Wed, 27 Dec 2000 21:38:16 GMT</last_modification_time>
-	    </signal>
-	    <label>Configure...</label>
-	    <relief>GTK_RELIEF_NORMAL</relief>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkHSeparator</class>
-	  <name>hseparator4</name>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <name>connection_help</name>
-	  <label></label>
-	  <justify>GTK_JUSTIFY_LEFT</justify>
-	  <wrap>True</wrap>
-	  <xalign>0</xalign>
-	  <yalign>0</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkLabel</class>
-	<child_name>Notebook:tab</child_name>
-	<name>label2</name>
-	<label>Connections</label>
-	<justify>GTK_JUSTIFY_CENTER</justify>
-	<wrap>False</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-      </widget>
-
-      <widget>
-	<class>GtkVBox</class>
-	<name>dns_vbox</name>
-	<border_width>4</border_width>
-	<homogeneous>False</homogeneous>
-	<spacing>4</spacing>
-
-	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>dns_dhcp</name>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>toggled</name>
-	    <handler>dns_dhcp_toggled</handler>
-	    <last_modification_time>Wed, 27 Dec 2000 16:57:33 GMT</last_modification_time>
-	  </signal>
-	  <label>Obtain DNS information from DHCP / BOOTP server</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkTable</class>
-	  <name>table6</name>
-	  <rows>3</rows>
-	  <columns>2</columns>
-	  <homogeneous>False</homogeneous>
-	  <row_spacing>4</row_spacing>
-	  <column_spacing>4</column_spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label55</name>
-	    <label>Domain:</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>0</top_attach>
-	      <bottom_attach>1</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>False</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>False</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkScrolledWindow</class>
-	    <name>scrolledwindow4</name>
-	    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	    <child>
-	      <left_attach>1</left_attach>
-	      <right_attach>2</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>True</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
-	    </child>
-
-	    <widget>
-	      <class>GtkText</class>
-	      <name>dns_list</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>focus_in_event</name>
-		<handler>update_hint</handler>
-		<last_modification_time>Wed, 27 Dec 2000 00:38:21 GMT</last_modification_time>
-	      </signal>
-	      <editable>True</editable>
-	      <text></text>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkEntry</class>
-	    <name>domain</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>focus_in_event</name>
-	      <handler>update_hint</handler>
-	      <last_modification_time>Wed, 27 Dec 2000 00:38:12 GMT</last_modification_time>
-	    </signal>
-	    <editable>True</editable>
-	    <text_visible>True</text_visible>
-	    <text_max_length>0</text_max_length>
-	    <text></text>
-	    <child>
-	      <left_attach>1</left_attach>
-	      <right_attach>2</right_attach>
-	      <top_attach>0</top_attach>
-	      <bottom_attach>1</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>False</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkScrolledWindow</class>
-	    <name>scrolledwindow5</name>
-	    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	    <child>
-	      <left_attach>1</left_attach>
-	      <right_attach>2</right_attach>
-	      <top_attach>2</top_attach>
-	      <bottom_attach>3</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>False</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
-	    </child>
-
-	    <widget>
-	      <class>GtkText</class>
-	      <name>search_list</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>focus_in_event</name>
-		<handler>update_hint</handler>
-		<last_modification_time>Wed, 27 Dec 2000 00:38:29 GMT</last_modification_time>
-	      </signal>
-	      <editable>True</editable>
-	      <text></text>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label82</name>
-	    <label>DNS Servers:</label>
-	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>True</wrap>
-	    <xalign>0</xalign>
-	    <yalign>0</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>False</xexpand>
-	      <yexpand>True</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label81</name>
-	    <label>Search Domains:</label>
-	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>True</wrap>
-	    <xalign>0</xalign>
-	    <yalign>0</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>2</top_attach>
-	      <bottom_attach>3</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>False</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
-	    </child>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkHSeparator</class>
-	  <name>hseparator3</name>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <name>dns_help</name>
-	  <label></label>
-	  <justify>GTK_JUSTIFY_LEFT</justify>
-	  <wrap>True</wrap>
-	  <xalign>0</xalign>
-	  <yalign>0</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkLabel</class>
-	<child_name>Notebook:tab</child_name>
-	<name>label3</name>
-	<label>DNS</label>
-	<justify>GTK_JUSTIFY_CENTER</justify>
-	<wrap>False</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-      </widget>
-
-      <widget>
-	<class>GtkVBox</class>
-	<name>vbox13</name>
-	<border_width>4</border_width>
-	<homogeneous>False</homogeneous>
-	<spacing>4</spacing>
-
-	<widget>
-	  <class>GtkScrolledWindow</class>
-	  <name>scrolledwindow7</name>
-	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkCList</class>
-	    <name>statichost_list</name>
-	    <can_focus>True</can_focus>
-	    <signal>
-	      <name>select_row</name>
-	      <handler>on_statichost_list_select_row</handler>
-	      <last_modification_time>Wed, 27 Dec 2000 21:33:03 GMT</last_modification_time>
-	    </signal>
-	    <signal>
-	      <name>unselect_row</name>
-	      <handler>on_statichost_list_unselect_row</handler>
-	      <last_modification_time>Wed, 27 Dec 2000 21:51:29 GMT</last_modification_time>
-	    </signal>
-	    <columns>2</columns>
-	    <column_widths>102,80</column_widths>
-	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	    <show_titles>True</show_titles>
-	    <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <child_name>CList:title</child_name>
-	      <name>label84</name>
-	      <label>IP address</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	    </widget>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <child_name>CList:title</child_name>
-	      <name>label85</name>
-	      <label>Names</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	    </widget>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkHSeparator</class>
-	  <name>hseparator1</name>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>True</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkAlignment</class>
-	  <name>alignment1</name>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xscale>1</xscale>
-	  <yscale>1</yscale>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkTable</class>
-	    <name>statichost_table</name>
-	    <rows>3</rows>
-	    <columns>3</columns>
-	    <homogeneous>False</homogeneous>
-	    <row_spacing>4</row_spacing>
-	    <column_spacing>4</column_spacing>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <name>label77</name>
-	      <label>IP address:</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <child>
-		<left_attach>0</left_attach>
-		<right_attach>1</right_attach>
-		<top_attach>0</top_attach>
-		<bottom_attach>1</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkEntry</class>
-	      <name>ip</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>focus_in_event</name>
-		<handler>update_hint</handler>
-		<last_modification_time>Wed, 27 Dec 2000 20:54:02 GMT</last_modification_time>
-	      </signal>
-	      <editable>True</editable>
-	      <text_visible>True</text_visible>
-	      <text_max_length>0</text_max_length>
-	      <text></text>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>0</top_attach>
-		<bottom_attach>1</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>True</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkScrolledWindow</class>
-	      <name>scrolledwindow8</name>
-	      <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-	      <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>1</top_attach>
-		<bottom_attach>2</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>True</yfill>
-	      </child>
-
-	      <widget>
-		<class>GtkText</class>
-		<name>alias</name>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>focus_in_event</name>
-		  <handler>update_hint</handler>
-		  <last_modification_time>Wed, 27 Dec 2000 20:54:11 GMT</last_modification_time>
-		</signal>
-		<editable>True</editable>
-		<text></text>
-	      </widget>
-	    </widget>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <name>label78</name>
-	      <label>Names:</label>
-	      <justify>GTK_JUSTIFY_LEFT</justify>
-	      <wrap>False</wrap>
-	      <xalign>0</xalign>
-	      <yalign>0</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <child>
-		<left_attach>0</left_attach>
-		<right_attach>1</right_attach>
-		<top_attach>1</top_attach>
-		<bottom_attach>2</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>True</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkCheckButton</class>
-	      <name>statichost_enabled</name>
-	      <sensitive>False</sensitive>
-	      <can_focus>True</can_focus>
-	      <label>Enable this alias</label>
-	      <active>True</active>
-	      <draw_indicator>True</draw_indicator>
-	      <child>
-		<left_attach>0</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>2</top_attach>
-		<bottom_attach>3</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkVBox</class>
-	      <name>vbox14</name>
-	      <homogeneous>False</homogeneous>
-	      <spacing>4</spacing>
-	      <child>
-		<left_attach>2</left_attach>
-		<right_attach>3</right_attach>
-		<top_attach>0</top_attach>
-		<bottom_attach>3</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>True</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>True</yfill>
-	      </child>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>statichost_add</name>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_statichost_add_clicked</handler>
-		  <last_modification_time>Wed, 27 Dec 2000 22:06:32 GMT</last_modification_time>
-		</signal>
-		<label>Add</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>statichost_update</name>
-		<sensitive>False</sensitive>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_statichost_delete_clicked</handler>
-		  <last_modification_time>Wed, 27 Dec 2000 22:07:04 GMT</last_modification_time>
-		</signal>
-		<label>Update</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>statichost_delete</name>
-		<sensitive>False</sensitive>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_statichost_delete_clicked</handler>
-		  <last_modification_time>Wed, 27 Dec 2000 22:06:53 GMT</last_modification_time>
-		</signal>
-		<label>Delete</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
-	    </widget>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkHSeparator</class>
-	  <name>hseparator5</name>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <name>hosts_help</name>
-	  <label></label>
-	  <justify>GTK_JUSTIFY_LEFT</justify>
+	  <name>label10</name>
+	  <label>Host name:</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
 	  <xalign>0</xalign>
-	  <yalign>0</yalign>
+	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkEntry</class>
+	  <name>hostname</name>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>focus_in_event</name>
+	    <handler>update_hint</handler>
+	    <last_modification_time>Tue, 26 Dec 2000 23:51:27 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>changed</name>
+	    <handler>tool_modified_cb</handler>
+	    <last_modification_time>Fri, 29 Dec 2000 03:42:50 GMT</last_modification_time>
+	  </signal>
+	  <editable>True</editable>
+	  <text_visible>True</text_visible>
+	  <text_max_length>0</text_max_length>
+	  <text></text>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
@@ -1141,47 +110,22 @@
       </widget>
 
       <widget>
-	<class>GtkLabel</class>
-	<child_name>Notebook:tab</child_name>
-	<name>label72</name>
-	<label>Hosts</label>
-	<justify>GTK_JUSTIFY_CENTER</justify>
-	<wrap>False</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkHSeparator</class>
-      <name>hseparator2</name>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>False</fill>
-      </child>
-    </widget>
-
-    <widget>
-      <class>GtkHBox</class>
-      <name>hbox1</name>
-      <homogeneous>False</homogeneous>
-      <spacing>12</spacing>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>True</fill>
-      </child>
-
-      <widget>
-	<class>GtkButton</class>
-	<name>complexity</name>
-	<border_width>4</border_width>
+	<class>GtkCheckButton</class>
+	<name>samba_use</name>
 	<can_focus>True</can_focus>
-	<label> More Options &gt;&gt; </label>
-	<relief>GTK_RELIEF_NORMAL</relief>
+	<signal>
+	  <name>toggled</name>
+	  <handler>on_samba_use_toggled</handler>
+	  <last_modification_time>Wed, 27 Dec 2000 21:38:58 GMT</last_modification_time>
+	</signal>
+	<signal>
+	  <name>toggled</name>
+	  <handler>tool_modified_cb</handler>
+	  <last_modification_time>Fri, 29 Dec 2000 03:43:13 GMT</last_modification_time>
+	</signal>
+	<label>Enable windows networking (Samba)</label>
+	<active>True</active>
+	<draw_indicator>True</draw_indicator>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
@@ -1190,13 +134,218 @@
       </widget>
 
       <widget>
+	<class>GtkFrame</class>
+	<name>samba_frame</name>
+	<label>Windows Networking</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkTable</class>
+	  <name>table1</name>
+	  <border_width>4</border_width>
+	  <rows>3</rows>
+	  <columns>2</columns>
+	  <homogeneous>False</homogeneous>
+	  <row_spacing>4</row_spacing>
+	  <column_spacing>4</column_spacing>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label12</name>
+	    <label>Description:</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>description</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>focus_in_event</name>
+	      <handler>update_hint</handler>
+	      <last_modification_time>Tue, 26 Dec 2000 23:51:39 GMT</last_modification_time>
+	    </signal>
+	    <signal>
+	      <name>changed</name>
+	      <handler>tool_modified_cb</handler>
+	      <last_modification_time>Fri, 29 Dec 2000 03:43:25 GMT</last_modification_time>
+	    </signal>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label13</name>
+	    <label>Workgroup:</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>workgroup</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>focus_in_event</name>
+	      <handler>update_hint</handler>
+	      <last_modification_time>Tue, 26 Dec 2000 23:51:50 GMT</last_modification_time>
+	    </signal>
+	    <signal>
+	      <name>changed</name>
+	      <handler>tool_modified_cb</handler>
+	      <last_modification_time>Fri, 29 Dec 2000 04:10:11 GMT</last_modification_time>
+	    </signal>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label71</name>
+	    <label>WINS server:</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>wins_ip</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>focus_in_event</name>
+	      <handler>update_hint</handler>
+	      <last_modification_time>Tue, 26 Dec 2000 23:51:59 GMT</last_modification_time>
+	    </signal>
+	    <signal>
+	      <name>changed</name>
+	      <handler>tool_modified_cb</handler>
+	      <last_modification_time>Fri, 29 Dec 2000 03:43:44 GMT</last_modification_time>
+	    </signal>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
 	<class>GtkLabel</class>
-	<name>label9</name>
+	<name>general_help</name>
+	<height>140</height>
 	<label></label>
-	<justify>GTK_JUSTIFY_CENTER</justify>
-	<wrap>False</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>True</wrap>
+	<xalign>0</xalign>
+	<yalign>0</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
 	<child>
@@ -1205,14 +354,158 @@
 	  <fill>True</fill>
 	</child>
       </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label1</name>
+      <label>General</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox3</name>
+      <border_width>4</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>4</spacing>
 
       <widget>
-	<class>GtkButton</class>
-	<name>apply</name>
-	<border_width>4</border_width>
-	<can_focus>True</can_focus>
-	<stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
-	<relief>GTK_RELIEF_NORMAL</relief>
+	<class>GtkScrolledWindow</class>
+	<name>scrolledwindow1</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkCList</class>
+	  <name>connection_list</name>
+	  <can_focus>True</can_focus>
+	  <columns>3</columns>
+	  <column_widths>64,31,80</column_widths>
+	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	  <show_titles>True</show_titles>
+	  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label15</name>
+	    <label>Enabled</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label16</name>
+	    <label>Icon</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label17</name>
+	    <label>Connection description</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHButtonBox</class>
+	<name>connections_bbox</name>
+	<layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
+	<spacing>30</spacing>
+	<child_min_width>85</child_min_width>
+	<child_min_height>27</child_min_height>
+	<child_ipad_x>7</child_ipad_x>
+	<child_ipad_y>0</child_ipad_y>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <name>connection_add</name>
+	  <can_default>True</can_default>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_connection_add_clicked</handler>
+	    <last_modification_time>Wed, 27 Dec 2000 21:37:38 GMT</last_modification_time>
+	  </signal>
+	  <label>Add...</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <name>connection_delete</name>
+	  <can_default>True</can_default>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_connection_delete_clicked</handler>
+	    <last_modification_time>Wed, 27 Dec 2000 21:37:53 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>tool_modified_cb</handler>
+	    <last_modification_time>Fri, 29 Dec 2000 03:43:59 GMT</last_modification_time>
+	  </signal>
+	  <label>Delete</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
+	</widget>
+
+	<widget>
+	  <class>GtkButton</class>
+	  <name>connection_configure</name>
+	  <can_default>True</can_default>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>clicked</name>
+	    <handler>on_connection_configure_clicked</handler>
+	    <last_modification_time>Wed, 27 Dec 2000 21:38:16 GMT</last_modification_time>
+	  </signal>
+	  <label>Configure...</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHSeparator</class>
+	<name>hseparator4</name>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
@@ -1221,18 +514,696 @@
       </widget>
 
       <widget>
-	<class>GtkButton</class>
-	<name>close</name>
-	<border_width>4</border_width>
+	<class>GtkLabel</class>
+	<name>connection_help</name>
+	<label></label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>True</wrap>
+	<xalign>0</xalign>
+	<yalign>0</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label2</name>
+      <label>Connections</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>dns_vbox</name>
+      <border_width>4</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>4</spacing>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>dns_dhcp</name>
 	<can_focus>True</can_focus>
-	<stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
-	<relief>GTK_RELIEF_NORMAL</relief>
+	<signal>
+	  <name>toggled</name>
+	  <handler>on_dns_dhcp_toggled</handler>
+	  <last_modification_time>Thu, 28 Dec 2000 22:08:04 GMT</last_modification_time>
+	</signal>
+	<signal>
+	  <name>toggled</name>
+	  <handler>tool_modified_cb</handler>
+	  <last_modification_time>Fri, 29 Dec 2000 03:44:41 GMT</last_modification_time>
+	</signal>
+	<label>Obtain DNS information from DHCP / BOOTP server</label>
+	<active>False</active>
+	<draw_indicator>True</draw_indicator>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
 	  <fill>False</fill>
 	</child>
       </widget>
+
+      <widget>
+	<class>GtkTable</class>
+	<name>dns_table</name>
+	<rows>3</rows>
+	<columns>2</columns>
+	<homogeneous>False</homogeneous>
+	<row_spacing>4</row_spacing>
+	<column_spacing>4</column_spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>domain_label</name>
+	  <label>Domain:</label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <left_attach>0</left_attach>
+	    <right_attach>1</right_attach>
+	    <top_attach>0</top_attach>
+	    <bottom_attach>1</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>False</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>False</yfill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>scrolledwindow4</name>
+	  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	  <child>
+	    <left_attach>1</left_attach>
+	    <right_attach>2</right_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>True</xexpand>
+	    <yexpand>True</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>True</yfill>
+	  </child>
+
+	  <widget>
+	    <class>GtkText</class>
+	    <name>dns_list</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>focus_in_event</name>
+	      <handler>update_hint</handler>
+	      <last_modification_time>Wed, 27 Dec 2000 00:38:21 GMT</last_modification_time>
+	    </signal>
+	    <signal>
+	      <name>changed</name>
+	      <handler>tool_modified_cb</handler>
+	      <last_modification_time>Fri, 29 Dec 2000 03:45:05 GMT</last_modification_time>
+	    </signal>
+	    <editable>True</editable>
+	    <text></text>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkEntry</class>
+	  <name>domain</name>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>focus_in_event</name>
+	    <handler>update_hint</handler>
+	    <last_modification_time>Wed, 27 Dec 2000 00:38:12 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>changed</name>
+	    <handler>tool_modified_cb</handler>
+	    <last_modification_time>Fri, 29 Dec 2000 03:44:49 GMT</last_modification_time>
+	  </signal>
+	  <editable>True</editable>
+	  <text_visible>True</text_visible>
+	  <text_max_length>0</text_max_length>
+	  <text></text>
+	  <child>
+	    <left_attach>1</left_attach>
+	    <right_attach>2</right_attach>
+	    <top_attach>0</top_attach>
+	    <bottom_attach>1</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>True</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>False</yfill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>scrolledwindow5</name>
+	  <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	  <child>
+	    <left_attach>1</left_attach>
+	    <right_attach>2</right_attach>
+	    <top_attach>2</top_attach>
+	    <bottom_attach>3</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>False</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>True</yfill>
+	  </child>
+
+	  <widget>
+	    <class>GtkText</class>
+	    <name>search_list</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>focus_in_event</name>
+	      <handler>update_hint</handler>
+	      <last_modification_time>Wed, 27 Dec 2000 00:38:29 GMT</last_modification_time>
+	    </signal>
+	    <signal>
+	      <name>changed</name>
+	      <handler>tool_modified_cb</handler>
+	      <last_modification_time>Fri, 29 Dec 2000 03:45:13 GMT</last_modification_time>
+	    </signal>
+	    <editable>True</editable>
+	    <text></text>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>dns_list_label</name>
+	  <label>DNS Servers:</label>
+	  <justify>GTK_JUSTIFY_LEFT</justify>
+	  <wrap>True</wrap>
+	  <xalign>0</xalign>
+	  <yalign>0</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <left_attach>0</left_attach>
+	    <right_attach>1</right_attach>
+	    <top_attach>1</top_attach>
+	    <bottom_attach>2</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>False</xexpand>
+	    <yexpand>True</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>True</yfill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label81</name>
+	  <label>Search Domains:</label>
+	  <justify>GTK_JUSTIFY_LEFT</justify>
+	  <wrap>True</wrap>
+	  <xalign>0</xalign>
+	  <yalign>0</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <left_attach>0</left_attach>
+	    <right_attach>1</right_attach>
+	    <top_attach>2</top_attach>
+	    <bottom_attach>3</bottom_attach>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <xexpand>False</xexpand>
+	    <yexpand>False</yexpand>
+	    <xshrink>False</xshrink>
+	    <yshrink>False</yshrink>
+	    <xfill>True</xfill>
+	    <yfill>True</yfill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHSeparator</class>
+	<name>hseparator3</name>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>dns_help</name>
+	<label></label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>True</wrap>
+	<xalign>0</xalign>
+	<yalign>0</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label3</name>
+      <label>DNS</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox13</name>
+      <border_width>4</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>4</spacing>
+
+      <widget>
+	<class>GtkScrolledWindow</class>
+	<name>scrolledwindow7</name>
+	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkCList</class>
+	  <name>statichost_list</name>
+	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>select_row</name>
+	    <handler>on_statichost_list_select_row</handler>
+	    <last_modification_time>Wed, 27 Dec 2000 21:33:03 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>unselect_row</name>
+	    <handler>on_statichost_list_unselect_row</handler>
+	    <last_modification_time>Wed, 27 Dec 2000 21:51:29 GMT</last_modification_time>
+	  </signal>
+	  <columns>2</columns>
+	  <column_widths>102,80</column_widths>
+	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	  <show_titles>True</show_titles>
+	  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label84</name>
+	    <label>IP address</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label85</name>
+	    <label>Names</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHSeparator</class>
+	<name>hseparator1</name>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkAlignment</class>
+	<name>alignment1</name>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xscale>1</xscale>
+	<yscale>1</yscale>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkTable</class>
+	  <name>statichost_table</name>
+	  <rows>3</rows>
+	  <columns>3</columns>
+	  <homogeneous>False</homogeneous>
+	  <row_spacing>4</row_spacing>
+	  <column_spacing>4</column_spacing>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label77</name>
+	    <label>IP address:</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>ip</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>focus_in_event</name>
+	      <handler>update_hint</handler>
+	      <last_modification_time>Wed, 27 Dec 2000 20:54:02 GMT</last_modification_time>
+	    </signal>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkScrolledWindow</class>
+	    <name>scrolledwindow8</name>
+	    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkText</class>
+	      <name>alias</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>focus_in_event</name>
+		<handler>update_hint</handler>
+		<last_modification_time>Wed, 27 Dec 2000 20:54:11 GMT</last_modification_time>
+	      </signal>
+	      <editable>True</editable>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label78</name>
+	    <label>Names:</label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>statichost_enabled</name>
+	    <sensitive>False</sensitive>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>toggled</name>
+	      <handler>tool_modified_cb</handler>
+	      <last_modification_time>Fri, 29 Dec 2000 03:45:54 GMT</last_modification_time>
+	    </signal>
+	    <label>Enable this alias</label>
+	    <active>True</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVBox</class>
+	    <name>vbox14</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>4</spacing>
+	    <child>
+	      <left_attach>2</left_attach>
+	      <right_attach>3</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>statichost_add</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_statichost_add_clicked</handler>
+		<last_modification_time>Wed, 27 Dec 2000 22:06:32 GMT</last_modification_time>
+	      </signal>
+	      <signal>
+		<name>clicked</name>
+		<handler>tool_modified_cb</handler>
+		<last_modification_time>Fri, 29 Dec 2000 03:45:25 GMT</last_modification_time>
+	      </signal>
+	      <label>Add</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>statichost_update</name>
+	      <sensitive>False</sensitive>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_statichost_update_clicked</handler>
+		<last_modification_time>Thu, 28 Dec 2000 22:31:38 GMT</last_modification_time>
+	      </signal>
+	      <signal>
+		<name>clicked</name>
+		<handler>tool_modified_cb</handler>
+		<last_modification_time>Fri, 29 Dec 2000 03:45:35 GMT</last_modification_time>
+	      </signal>
+	      <label>Update</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>statichost_delete</name>
+	      <sensitive>False</sensitive>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_statichost_delete_clicked</handler>
+		<last_modification_time>Wed, 27 Dec 2000 22:06:53 GMT</last_modification_time>
+	      </signal>
+	      <signal>
+		<name>clicked</name>
+		<handler>tool_modified_cb</handler>
+		<last_modification_time>Fri, 29 Dec 2000 03:45:44 GMT</last_modification_time>
+	      </signal>
+	      <label>Delete</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHSeparator</class>
+	<name>hseparator5</name>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>hosts_help</name>
+	<label></label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>False</wrap>
+	<xalign>0</xalign>
+	<yalign>0</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label72</name>
+      <label>Hosts</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
     </widget>
   </widget>
 </widget>

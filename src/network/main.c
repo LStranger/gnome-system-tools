@@ -37,6 +37,8 @@ main (int argc, char *argv[])
 {
 	init_hint_entries ();
 	tool_init ("network", argc, argv);
+	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
+
 	tool_set_frozen (TRUE);
 	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
 	tool_set_frozen (FALSE);

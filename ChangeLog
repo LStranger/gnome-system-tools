@@ -1,3 +1,29 @@
+2000-12-29  Jacob "Ulysses" Berkman  <jacob@helixcode.com>
+
+	* src/time/e-map/Makefile.am (INCLUDES): add XML cflags
+
+	* src/common/tool.c (various): some small cleanups
+	(tool_interface_load): load the toplevel window from the common
+	.glade, and reparent the tool's content child into it.  Also muck
+	with the button sensitivity
+	(tool_config_save): if we have a to_xml cb, call it
+	(tool_set_complexity): if we have a complexity cb, call it
+	(tool_set_complexity_func): set the complexity cb's
+	(tool_set_xml_funcs): set the xml transfer cb's
+	(tool_user_help): show the tool's help
+	(tool_user_complexity): toggle complexity
+	(tool_user_apply): save the config
+	(tool_user_close): if there are changes, pop up a dialog asking
+	whether to save or not.
+	(tool_user_delete): window-deletion callback which just calls the
+	close button
+	(tool_init): if SET_ME_UP_HARDER is set in the env, pretend we are
+	root (for test purposes)
+	(tool_init): fixup button sensitivity
+
+	* interfaces/*.glade.in: 
+	* src/*/*.c: make things work with new APIs
+
 2000-12-28  Jacob "Ulysses" Berkman  <jacob@helixcode.com>
 
 	* src/users/callbacks.c (on_user_settings_clicked): free name

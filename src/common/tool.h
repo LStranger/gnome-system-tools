@@ -1,6 +1,6 @@
 #include <glib.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
+#include <tree.h>
+#include <parser.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
@@ -26,6 +26,8 @@ typedef enum
 }
 ToolReadState;
 
+typedef void (*UpdateComplexityFunc) (ToolComplexity);
+typedef void (*ToolXMLFunc) (xmlNode *);
 
 struct _ToolContext
 {
@@ -34,8 +36,12 @@ struct _ToolContext
 	GladeXML *interface;
 	GladeXML *common_interface;
 	GtkWidget *top_window;
+	GtkWidget *child;
 	gboolean frozen, modified, access;
 	ToolComplexity complexity;
+	UpdateComplexityFunc complexity_func;
+	ToolXMLFunc to_gui;
+	ToolXMLFunc to_xml;
 };
 
 
@@ -64,6 +70,10 @@ void tool_set_access(gboolean state);
 
 ToolComplexity tool_get_complexity(void);
 void tool_set_complexity(ToolComplexity complexity);
+
+void tool_set_complexity_func (UpdateComplexityFunc func);
+void tool_set_xml_funcs (ToolXMLFunc to_gui, ToolXMLFunc to_xml);
+
 
 GtkWidget *tool_get_top_window(void);
 

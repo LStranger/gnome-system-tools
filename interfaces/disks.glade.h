@@ -4,7 +4,19 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Disks Administration");
+gchar *s = N_("Partition Settings");
+gchar *s = N_("Type:");
+gchar *s = N_("Device:");
+gchar *s = N_("Mount point:");
+gchar *s = N_("Automatic (detect when mounting)");
+gchar *s = N_("Ext2 (Linux)");
+gchar *s = N_("FAT (DOS)");
+gchar *s = N_("VFAT (Windows 95 and newer)");
+gchar *s = N_("FAT32 (Windows 98 and newer)");
+gchar *s = N_("NTFS (Windows NT & 2000)");
+gchar *s = N_("Choose a mount point");
+gchar *s = N_("Check for errors on startup");
+gchar *s = N_("window1");
 gchar *s = N_("Device");
 gchar *s = N_("Detected");
 gchar *s = N_("Listed");
@@ -21,16 +33,3 @@ gchar *s = N_("Open settings dialog for selected import");
 gchar *s = N_("Settings");
 gchar *s = N_("Remember details of this partition");
 gchar *s = N_("Disks & partitions");
-gchar *s = N_(" More Options >> ");
-gchar *s = N_("Partition Settings");
-gchar *s = N_("Type:");
-gchar *s = N_("Device:");
-gchar *s = N_("Mount point:");
-gchar *s = N_("Automatic (detect when mounting)");
-gchar *s = N_("Ext2 (Linux)");
-gchar *s = N_("FAT (DOS)");
-gchar *s = N_("VFAT (Windows 95 and newer)");
-gchar *s = N_("FAT32 (Windows 98 and newer)");
-gchar *s = N_("NTFS (Windows NT & 2000)");
-gchar *s = N_("Choose a mount point");
-gchar *s = N_("Check for errors on startup");

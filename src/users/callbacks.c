@@ -38,54 +38,10 @@
 static int reply;
 
 /* Prototypes */
-static void reply_cb (gint val, gpointer data);
-static void do_quit (void);
 static void my_gtk_entry_set_text (void *entry, gchar *str);
-
-
-/* Main button callbacks */
-
-extern void 
-on_close_clicked(GtkButton *button, gpointer data)
-{
-	do_quit();
-}
-
-extern void
-on_apply_clicked (GtkButton *button, gpointer user_data)
-{
-	transfer_gui_to_xml (xml_doc_get_root (tool_config_get_xml()));
- 	tool_config_save();
-	tool_set_modified(FALSE);
-}
-
-extern void
-on_complexity_clicked (GtkButton *button, gpointer user_data)
-{
-	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
-	{
-		tool_set_complexity (TOOL_COMPLEXITY_ADVANCED);
-		e_table_state (TRUE);
-		gtk_widget_set_sensitive (tool_widget_get ("defs_container"), TRUE);
-	}
-
-	else if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-	{
-		tool_set_complexity (TOOL_COMPLEXITY_BASIC);
-		e_table_state (FALSE);
-		gtk_widget_set_sensitive (tool_widget_get ("defs_container"), FALSE);
-	}
-	user_actions_set_sensitive (FALSE);
-}
 
 /* Main window callbacks */
 /* Users tab */
-
-extern void 
-on_users_admin_delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
-{
-	 do_quit ();
-}
 
 extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
@@ -235,6 +191,15 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
 	gtk_widget_show (w0);
+}
+
+static int reply;
+
+static void
+reply_cb (gint val, gpointer data)
+{
+	reply = val;
+	gtk_main_quit ();
 }
 
 extern void
@@ -693,37 +658,6 @@ on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, Gd
 	}
 }
 
-
-/* Helper functions */
-
-static void
-reply_cb (gint val, gpointer data)
-{
-	reply = val;
-}
-
-static void 
-do_quit (void)
-{
-	if (GTK_WIDGET_IS_SENSITIVE (tool_widget_get ("apply")))
-	{
-		/* Changes have been made. */
-		gchar *txt = _("There are changes which haven't been applyed.\nApply now?");
-		GtkWindow *parent;
-		GnomeDialog *dialog;
-		
-		parent = GTK_WINDOW (tool_widget_get ("users_admin"));
-		dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL,
-				parent));
-
-		gnome_dialog_run (dialog);
-		
-		if (!reply)
-			tool_config_save();
-	}
-
-	gtk_main_quit ();
-}
 
 void
 user_actions_set_sensitive (gboolean state)

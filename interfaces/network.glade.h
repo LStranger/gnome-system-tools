@@ -33,7 +33,6 @@ gchar *s = N_("Add");
 gchar *s = N_("Update");
 gchar *s = N_("Delete");
 gchar *s = N_("Hosts");
-gchar *s = N_(" More Options >> ");
 gchar *s = N_("Connection Settings");
 gchar *s = N_("Name");
 gchar *s = N_("Description");

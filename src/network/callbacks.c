@@ -50,7 +50,6 @@ int statichost_row_selected = -1;
 /* --- helpers */
 
 static void reply_cb (gint val, gpointer data);
-static void do_quit (void);
 static void searchdomain_actions_set_sensitive (gboolean state);
 static void statichost_actions_set_sensitive (gboolean state);
 static void aliases_settings_actions_set_sensitive (gboolean state);
@@ -74,8 +73,7 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 
 	char *access_yes[] = {
 		"dns_list", 
-		"searchdomain_list", 
-		"aliases_settings_list", 
+		"search_list", 
 		NULL} ;
 
 	char *unsensitive[] = {
@@ -375,7 +373,7 @@ on_statichost_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEve
 
 
 extern void
-on_statichost_new_clicked (GtkButton * button, gpointer user_data)
+on_statichost_add_clicked (GtkButton * button, gpointer user_data)
 {
 	GtkWidget *w0;
 	
@@ -420,7 +418,13 @@ on_statichost_delete_clicked (GtkButton * button, gpointer user_data)
 	}
 }
 
+void
+on_statichost_update_clicked (GtkWidget *w, gpointer null)
+{
+	g_message ("statichost update");
+}
 
+#if 0
 extern void
 on_statichost_settings_clicked (GtkButton * button, gpointer user_data)
 {
@@ -464,7 +468,7 @@ on_aliases_settings_dialog_show (GtkWidget *w, gpointer user_data)
 	if (tool_get_access ())
 		gtk_widget_grab_focus (tool_widget_get ("aliases_settings_new"));
 }
-
+#endif
 
 extern void
 on_aliases_settings_ip_changed (GtkWidget *w, gpointer user_data)
@@ -573,37 +577,6 @@ on_aliases_settings_cancel_clicked (GtkWidget *w, gpointer user_data)
 }
 
 
-/* --- */
-
-extern void
-on_help_clicked (GtkButton * button, gpointer user_data)
-{
-	gnome_help_display(NULL, &help_entry);
-}
-
-extern void 
-on_close_clicked(GtkButton *button, gpointer data)
-{
-	do_quit();
-}
-
-extern void
-on_apply_clicked (GtkButton * button, gpointer user_data)
-{
-	transfer_gui_to_xml (xml_doc_get_root (tool_config_get_xml()));
-	tool_config_save ();
-	tool_set_modified (FALSE);
-}
-
-
-extern gboolean 
-on_network_admin_delete_event (GtkWidget * widget, GdkEvent * event, gpointer user_data)
-{
-	do_quit ();
-	return TRUE;
-}
-
-
 /* Helper functions */
 
 static void
@@ -657,30 +630,6 @@ aliases_settings_actions_set_sensitive (gboolean state)
 		gtk_widget_set_sensitive (tool_widget_get ("aliases_settings_delete"), state);
 	}
 }
-
-
-static void 
-do_quit (void)
-{
-	if (GTK_WIDGET_IS_SENSITIVE (tool_widget_get ("apply")))
-	{
-		/* Changes have been made. */
-		gchar *txt = _("There are changes which haven't been applyed.\nApply now?");
-		GtkWindow *parent;
-		GnomeDialog *dialog;
-		
-		parent = GTK_WINDOW (tool_widget_get ("nameresolution_admin"));
-		dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
-
-		gnome_dialog_run (dialog);
-		
-		if (!reply)
-			tool_config_save();
-	}
-
-	gtk_main_quit ();
-}
-
 
 static void 
 listitem_children_swap (GtkWidget *src, GtkWidget *dest)
@@ -898,3 +847,39 @@ update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 
 	return FALSE;
 }
+
+void
+on_connection_configure_clicked (GtkWidget *w, gpointer null)
+{
+	g_message ("connection configure");
+}
+
+void
+on_connection_delete_clicked (GtkWidget *w, gpointer null)
+{
+	g_message ("connection delete");
+}
+
+void
+on_connection_add_clicked (GtkWidget *w, gpointer null)
+{
+	g_message ("connection add");
+}
+
+void
+on_dns_dhcp_toggled (GtkWidget *w, gpointer null)
+{
+	char *ws[] = { "domain", "dns_list", "domain_label", "dns_list_label", NULL };
+	int i, b;
+
+	b = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
+	for (i=0; ws[i]; i++)
+		gtk_widget_set_sensitive (tool_widget_get (ws[i]), b);
+
+}
+
+void
+on_samba_use_toggled (GtkWidget *w, gpointer null)
+{
+	gtk_widget_set_sensitive (tool_widget_get ("samba_frame"),
+				  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));}

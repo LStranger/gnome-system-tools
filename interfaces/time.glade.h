@@ -4,7 +4,7 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Time Administration");
+gchar *s = N_("window1");
 gchar *s = N_(":");
 gchar *s = N_(":");
 gchar *s = N_("Time of day:");
@@ -13,4 +13,3 @@ gchar *s = N_("Time zone");
 gchar *s = N_("Add");
 gchar *s = N_("Keep clock in sync with selected servers");
 gchar *s = N_("Time servers");
-gchar *s = N_(" More Options >> ");

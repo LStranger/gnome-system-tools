@@ -69,6 +69,16 @@ static void set_access_sensitivity (void)
 		gtk_widget_set_sensitive (tool_widget_get (unsensitive[i]), FALSE);
 }
 
+static void
+update_complexity (ToolComplexity complexity)
+{
+	e_table_state (complexity == TOOL_COMPLEXITY_ADVANCED);
+	gtk_widget_set_sensitive (tool_widget_get ("defs_container"),
+				  complexity == TOOL_COMPLEXITY_ADVANCED);
+
+	user_actions_set_sensitive (FALSE);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -77,7 +87,9 @@ main (int argc, char *argv[])
 	srand (time (NULL));
 
 	tool_init("users", argc, argv);
-
+	tool_set_complexity_func (update_complexity);
+	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
+	
 	tool_set_frozen(TRUE);
 	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
 	e_table_create ();

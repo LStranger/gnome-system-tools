@@ -203,6 +203,8 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 	       		 "new_group_max_id", "passwd_max_day_use", "passwd_min_day_use",
 			 "passwd_warning_advance_days", "passwd_min_length", NULL};
 
+	g_message ("saving to XML");
+
 	root = xml_element_find_first (root, "logindefs");
 
 	/* System settings. */

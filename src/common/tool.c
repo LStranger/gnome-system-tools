@@ -27,8 +27,8 @@
 #include <fcntl.h>
 #include <glib.h>
 #include <gnome.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
+#include <tree.h>
+#include <parser.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include "tool.h"
@@ -36,6 +36,12 @@
 
 /*#include "reading.xpm"*/
 
+/* libglade callbacks */
+void tool_read_report_visible_toggle (GtkWidget *, gpointer);
+void tool_user_apply (GtkWidget *, gpointer);
+gint tool_user_delete (GtkWidget *, GdkEvent *, gpointer);
+void tool_user_help (GtkWidget *w, gpointer);
+void tool_user_complexity (GtkWidget *w, gpointer);
 
 /* --- Internals --- */
 
@@ -46,10 +52,7 @@ ToolContext *tool_context = NULL;
 static gchar *
 make_script_name (char *task)
 {
-	gchar *name;
-  
-	name = g_strjoin ("-", task, "conf", NULL);
-	return(name);
+	return g_strconcat (task, "-conf", NULL);
 }
 
 
@@ -59,7 +62,7 @@ make_script_path (char *task)
 	gchar *name, *path;
 
 	name = make_script_name (task);
-	path = g_strjoin ("/", SCRIPTS_DIR, name, NULL);
+	path = g_concat_dir_and_file (SCRIPTS_DIR, name);
 	g_free (name);
 	return (path);
 }
@@ -68,12 +71,7 @@ make_script_path (char *task)
 static gchar *
 make_glade_path (char *task)
 {
-	gchar *path0, *path1;
-
-	path0 = g_strjoin ("/", INTERFACES_DIR, task, NULL);
-	path1 = g_strjoin (".", path0, "glade", NULL);
-	g_free (path0);
-	return (path1);
+	return g_strdup_printf ("%s/%s.glade", INTERFACES_DIR, task);
 }
 
 
@@ -83,7 +81,7 @@ tool_load_image (char *image_name)
 	GdkPixbuf *pixbuf;
 	gchar *path;
 
-	path = g_strjoin ("/", PIXMAPS_DIR, image_name, NULL);
+	path = g_concat_dir_and_file (PIXMAPS_DIR, image_name);
 	pixbuf = gdk_pixbuf_new_from_file (path);
 	if (!pixbuf) g_warning ("Couldn't load image \"%s\".", path);
 	g_free (path);
@@ -114,6 +112,7 @@ tool_widget_get_common (gchar *name)
 static gboolean
 tool_interface_load ()
 {
+	GtkWidget *vbox, *icon, *button;
 	gchar *path;
 	
 	/* Load interface from Glade file */
@@ -138,18 +137,31 @@ tool_interface_load ()
 	
 	glade_xml_signal_autoconnect (tool_context->common_interface);
 
-	/* Locate and save a pointer to the top level window */
+	/* Locate and save a pointer to the top level window and child widget */
 
-	path = g_strjoin ("_", tool_context->task, "admin", NULL);
-	tool_context->top_window = tool_widget_get (path);
+	tool_context->top_window = tool_widget_get_common ("tool_window");
+	vbox = tool_widget_get_common ("tool_vbox");
+
+	path = g_strconcat (tool_context->task, "_admin", NULL);
+	tool_context->child = tool_widget_get (path);
 	g_free (path);
 
-	if (!tool_context->top_window)
+#warning FIXME: this really needs to be a dialog
+	if (!tool_context->child)
 	        g_error ("Undefined toplevel window in Glade file.");
-	else
-	        return TRUE;
-	 
-	return FALSE;
+
+	gtk_widget_ref (tool_context->child);
+	gtk_widget_unparent (tool_context->child);
+
+	gtk_box_pack_start (GTK_BOX (vbox), tool_context->child,
+			    TRUE, TRUE, 0);
+
+	button = tool_widget_get_common ("help");
+	icon = gnome_stock_pixmap_widget (button, GNOME_STOCK_PIXMAP_HELP);
+	gtk_widget_show (icon);
+	gtk_container_add (GTK_CONTAINER (button), icon);
+
+	return TRUE;
 }
 
 
@@ -158,8 +170,7 @@ tool_context_new (gchar *task)
 {
 	ToolContext *tc;
   
-	tc = g_new (ToolContext, 1);
-	memset (tc, 0, sizeof (*tc));
+	tc = g_new0 (ToolContext, 1);
 	tc->task = g_strdup (task);
 
 	tool_context = tc;
@@ -227,8 +238,8 @@ static gboolean timeout_done = FALSE;
 static gboolean report_list_visible = FALSE;
 
 
-static void
-tool_read_report_visible_toggle (void)
+void
+tool_read_report_visible_toggle (GtkWidget *w, gpointer null)
 {
 	GtkAdjustment *vadj;
 	
@@ -482,6 +493,9 @@ tool_config_save ()
 	g_assert (tc->task);
 	g_assert (tc->config);
 
+	if (tc->to_xml)
+		tc->to_xml (xml_doc_get_root (tc->config));
+
 	pipe (fd);
 
 	t = fork ();
@@ -553,20 +567,10 @@ gboolean tool_get_modified()
 void
 tool_set_modified (gboolean state)
 {
-	GtkWidget *w0;
+	if (tool_get_frozen() || !tool_get_access())
+		return;
 
-	if (tool_get_frozen() || !tool_get_access()) return;
-
-	if (state)
-	{
-		w0 = tool_widget_get("apply");
-		if (w0) gtk_widget_set_sensitive(w0, TRUE);
-	}
-	else
-	{
-		w0 = tool_widget_get("apply");
-		if (w0) gtk_widget_set_sensitive(w0, FALSE);
-	}
+	gtk_widget_set_sensitive (tool_widget_get_common ("apply"), state);
 
 	tool_context->modified = state;
 }
@@ -586,7 +590,7 @@ tool_set_access (gboolean state)
 
 	if (!state)
 	{
-		w0 = tool_widget_get ("apply");
+		w0 = tool_widget_get_common ("apply");
 		if (w0) gtk_widget_set_sensitive (w0, FALSE);
 	}
 
@@ -611,7 +615,7 @@ tool_set_complexity (ToolComplexity complexity)
 	/* TODO: Invoke callbacks that update the interface to match
 	 * the new complexity level. */
 	
-	button = tool_widget_get ("complexity");
+	button = tool_widget_get_common ("complexity");
 	label = GTK_BIN (button)->child;
 	
 	switch (complexity)
@@ -624,16 +628,41 @@ tool_set_complexity (ToolComplexity complexity)
 		txt = _(" Full Options >> ");
 		break;
 	 case TOOL_COMPLEXITY_ADVANCED:
-		txt = _(" << Few Options ");
+		txt = _(" << Fewer Options ");
 		break;
 	 default:
 		g_warning ("Unexpected complexity level.");
 	}
 	
 	gtk_label_set_text (GTK_LABEL (label), txt);
+
+	if (tool_context->complexity_func)
+		tool_context->complexity_func (complexity);
 }
 
-static void tool_set_initial_complexity (void)
+void
+tool_set_complexity_func (UpdateComplexityFunc func)
+{
+	g_return_if_fail (tool_context != NULL);
+	g_return_if_fail (func != NULL);
+
+	tool_context->complexity_func = func;
+	gtk_widget_set_sensitive (tool_widget_get_common ("complexity"), func != NULL);
+}
+
+void
+tool_set_xml_funcs (ToolXMLFunc to_gui, ToolXMLFunc to_xml)
+{
+	g_return_if_fail (tool_context != NULL);
+	g_return_if_fail (to_gui != NULL);
+	g_return_if_fail (to_xml != NULL);
+
+	tool_context->to_gui = to_gui;
+	tool_context->to_xml = to_xml;
+}
+
+static void 
+tool_set_initial_complexity (void)
 {
 	/* FIXME: we need to remember (gnome-config) the last complexity set. */
 	tool_set_complexity (TOOL_COMPLEXITY_BASIC);
@@ -702,34 +731,93 @@ reply_cb (gint val, gpointer data)
 	gtk_main_quit ();
 }
 
+void
+tool_user_help (GtkWidget *w, gpointer null)
+{
+	GnomeHelpMenuEntry help_entry = { NULL, "index.html" };
+	help_entry.name = g_strconcat (tool_context->task, "-admin", NULL);
+
+	gnome_help_display (NULL, &help_entry);
+
+	g_free (help_entry.name);
+}
+
+void
+tool_user_complexity (GtkWidget *w, gpointer null)
+{
+	switch (tool_get_complexity ()) {
+	case TOOL_COMPLEXITY_BASIC:
+		tool_set_complexity (TOOL_COMPLEXITY_ADVANCED);
+		break;
+	case TOOL_COMPLEXITY_ADVANCED:
+		tool_set_complexity (TOOL_COMPLEXITY_BASIC);
+		break;
+	default:
+		break;
+	}
+}
+
+void
+tool_user_apply (GtkWidget *w, gpointer null)
+{
+	tool_config_save ();
+	tool_set_modified (FALSE);
+}
 
 void
 tool_user_close (GtkWidget *widget, gpointer data)
 {
 	/* TODO: Check for changes and optionally ask for confirmation */
+	if (tool_get_modified ())
+	{
+		/* Changes have been made. */
+		GtkWidget *w;
+		
+		w = gnome_question_dialog_parented (
+			_("There are changes which haven't been applyed.\nApply now?"),
+			reply_cb, NULL, GTK_WINDOW (tool_context->top_window));
+
+		gnome_dialog_run (GNOME_DIALOG (w));
+		
+		if (!reply)
+			tool_config_save();
+	}
+
 	gtk_main_quit ();
 }
 
+gint
+tool_user_delete (GtkWidget *w, GdkEvent *e, gpointer null)
+{
+	tool_user_close (w, null);
+	return FALSE;
+}
 
 ToolContext *
 tool_init (gchar *task, int argc, char *argv [])
 {
 	ToolContext *tc;
-	GtkWidget *w0;
-	gchar *s;
+	gchar *s, *s1;
 
 #ifdef ENABLE_NLS
 	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain (PACKAGE);
 #endif
 
-	s = g_strjoin ("_", task, "admin", NULL);
+	s = g_strconcat (task, "_admin", NULL);
 	gnome_init (s, VERSION, argc, argv);
 
 	glade_gnome_init ();
 	tc = tool_context_new (task);
 
-	if (geteuid () != 0)
+	if (geteuid () == 0)
+		tool_set_access (TRUE);
+	else if (getenv ("SET_ME_UP_HARDER"))
+	{
+		g_warning (_("Pretending we are root..."));
+		tool_set_access (TRUE);
+	}
+	else
 	{
 		gnome_ok_cancel_dialog (_("You need full administration privileges (i.e. root)\n"
 					  "to run this configuration tool. You can acquire\n"
@@ -743,30 +831,29 @@ tool_init (gchar *task, int argc, char *argv [])
 
 		tool_set_access (FALSE);
 	}
-	else
-		tool_set_access (TRUE);
 
 	tool_splash_show ();
 	tool_config_load ();
 	tool_splash_hide ();
 
-	/* Connect the close and delete signals to generic handlers */
+	/* Make sure apply and complexity start out as insensitive */
 
-	gtk_signal_connect (GTK_OBJECT (tool_widget_get ("close")),
-			    "clicked", tool_user_close, NULL);
+	gtk_widget_set_sensitive (tool_widget_get_common ("apply"), FALSE);
+	gtk_widget_set_sensitive (tool_widget_get_common ("complexity"), FALSE);
 
-	gtk_signal_connect (GTK_OBJECT (tool_get_top_window ()),
-			    "delete_event", tool_user_close, NULL);
+	s1 = g_strconcat (task, "-admin", NULL);
+	s = gnome_help_file_find_file (s1, "index.html");
 
-	/* Make sure apply starts out as insensitive */
+	gtk_widget_set_sensitive (tool_widget_get_common ("help"),
+				  s && g_file_exists (s));
 
-	w0 = tool_widget_get ("apply");
-	if (w0) gtk_widget_set_sensitive (w0, FALSE);
-	
-	/* Desensitize the complexity button.
-	 * 
+	g_free (s);
+	g_free (s1);
+
+	/*
 	 * NOTE: This is temporary, until we have more complexity levels
-	 * for at least one tool */
+	 * for at least one tool
+	*/
 
 	tool_set_initial_complexity ();
 
