@@ -407,7 +407,7 @@ report_progress (int fd, gchar *label)
   
 	gtk_progress_set_percentage (GTK_PROGRESS (tool_widget_get_common ("report_progress")),
 				     1.0);
-	cb_id = gtk_timeout_add (3000, (GtkFunction) timeout_cb, NULL);
+	cb_id = gtk_timeout_add (1500, (GtkFunction) timeout_cb, NULL);
 	gtk_main ();
 	gtk_timeout_remove (cb_id);
 	
@@ -712,7 +712,7 @@ static void
 handle_events_immediately ()
 {
 	while (gtk_events_pending ()) gtk_main_iteration ();
-	usleep(50000);
+	usleep(100000);
 	while (gtk_events_pending ()) gtk_main_iteration ();
 }
 
