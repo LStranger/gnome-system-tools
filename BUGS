@@ -1,58 +1,45 @@
 This is a hopefully, but probably not, complete list of known bugs and
-annoyances in XST. Patches for them are, of course, welcome.
+annoyances in XST. It's provided here as a convenience for bugreporters, to
+avoid a roundtrip to Ximian Bugzilla ( http://bugzilla.ximian.com/ ) 
+Patches for these problems are, of course, welcome.
 
-Last updated: 20010515.
+
+Last updated: 20010524.
 
 
 
 All tools/shared code:
 
-* The prompt for distribution dialog doesn't properly sort the options. (All
-  platforms)
-
-* There's no Debian directory in the CVS tree. (Debian)
-
 * XST does not use xml-i18n-tools. (All platforms)
-
 
 
 
 Boot-admin:
 
-* Settings dialog has string [custom widget creation failed] in upper left
-  corner instead of icon. (Debian Woody)
+* Changes are not applied if the image label is changed (All platforms)
 
 
 
 Network-admin:
 
-* Doesn't support the format of /etc/network/interfaces in Woody,
-  specifically doesn't recognize mapping stanzas.
-
-* Additional Ethernet interfaces all get the name eth0. (RH 7.0)
-
-* Windows networking settings doesn't have good defaults. (RH 7.0)
-
-* Obtain DNS info from DHCP server does nothing. (All platforms)
-
-* Update DNS settings when connection becomes active does nothing. (All
-  platforms)
-
-* Adding an entry to Search Domains and then going to another tab and
-  clicking Apply causes a crash, while the same without changing tabs works.
-  (RH 7.0)
+* Doesn't fully support the format of /etc/network/interfaces in Woody,
+  specifically doesn't recognize mapping stanzas. (Debian Woody)
 
 
 
 Disks-admin:
 
-No known issues.
+* Does not properly use the selection of an unsupported platform (All
+  unsupported platforms)
+
+* Does nothing when asked to mount a partition on a nonexistent mountpoint
+  (All platforms)
 
 
 
 Memory-admin:
 
-No known issues.
+* Deactivating swap does nothing (All platforms)
 
 
 
@@ -64,7 +51,7 @@ Root-manager:
 
 Shares-admin:
 
-No known issues.
+* Exports window lets you add blanks (All platforms)
 
 
 
@@ -73,18 +60,14 @@ Time-admin:
 * Doesn't support systems where the hardware clock is set to GMT. (All
   platforms)
 	
-* Timezone offset problems. (Debian Woody)
-
 * The current time displays seconds below 10 without a 0 prefixed. (All
   platforms)
-
 
 
 
 Users-admin:
 
 * Problem with finding cracklib's data files in the new user druid, makes
-  entire tool quit without warning. (Debian Woody) FIXED.
+  entire tool quit without warning. (Debian Woody)
   
-
-* New user druid fails with "Such user ID already exists". (Debian Woody)
+* Changing homedir to nonexistent directory gives no warnings (All platforms)
