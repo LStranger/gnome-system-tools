@@ -9,8 +9,8 @@ $(desktop): %.desktop: %.desktop.in
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
 	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/gnome/apps/Settings/System/$(desktop)
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets/System
-	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center/capplets/System/$(desktop)
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center-2/capplets
+	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center-2/capplets/$(desktop)
 
 install-data-am: install-etspecsDATA install-data-local
 
