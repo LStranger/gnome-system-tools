@@ -48,7 +48,8 @@ static TzLocation *e_tz_map_location_from_point (ETzMap *tzmap, EMapPoint *point
 static gboolean flash_selected_point (gpointer data);
 static gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer data);
 static gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data);
-
+static gboolean update_map (GtkWidget *w, gpointer data);
+static gboolean out_map (GtkWidget *w,GdkEventCrossing *event, gpointer data);
 
 ETzMap *
 e_tz_map_new (XstTimeTool *tool)
@@ -56,6 +57,8 @@ e_tz_map_new (XstTimeTool *tool)
 	ETzMap *tzmap;
 	GPtrArray *locs;
 	TzLocation *tzl;
+	GtkWidget *location_combo;
+	GtkWidget *location_entry;
 	int i;
 
 	tzmap = g_new0 (ETzMap, 1);
@@ -68,6 +71,9 @@ e_tz_map_new (XstTimeTool *tool)
 	if (!tzmap->map)
 		g_error ("Unable to create map widget.");
 
+	gtk_widget_set_events (GTK_WIDGET (tzmap->map), gtk_widget_get_events (GTK_WIDGET (tzmap->map)) | 
+	      GDK_LEAVE_NOTIFY_MASK | GDK_VISIBILITY_NOTIFY_MASK);
+	
 	locs = tz_get_locations (tzmap->tzdb);
 	
 	for (i = 0; g_ptr_array_index(locs, i); i++)
@@ -82,6 +88,13 @@ e_tz_map_new (XstTimeTool *tool)
 			 G_CALLBACK (motion), (gpointer) tzmap);
 	g_signal_connect(G_OBJECT(tzmap->map), "button-press-event",
 			 G_CALLBACK (button_pressed), (gpointer) tzmap);
+        g_signal_connect(G_OBJECT (tzmap->map), "leave-notify-event",
+	                 G_CALLBACK (out_map), (gpointer) tzmap);
+	
+	location_combo = xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
+	location_entry = GTK_COMBO (location_combo)->entry;
+	g_signal_connect (G_OBJECT (location_entry), "changed",
+	                 G_CALLBACK (update_map), (gpointer) tzmap);
 	
 	return tzmap;
 }
@@ -156,7 +169,19 @@ e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
 }
 
-
+static gboolean
+update_map (GtkWidget *w, gpointer data)
+{
+   ETzMap *tzmap;
+   
+   tzmap = (ETzMap *) data;
+   
+   if (strlen (gtk_entry_get_text (GTK_ENTRY(w))) > 0)
+      e_tz_map_set_tz_from_name (tzmap, g_strdup (gtk_entry_get_text (GTK_ENTRY(w))));
+      
+   return TRUE;
+}
+                                 
 gchar *
 e_tz_map_get_selected_tz_name (ETzMap *tzmap)
 {
@@ -259,6 +284,29 @@ motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 
 
 static gboolean
+out_map (GtkWidget *w, GdkEventCrossing *event, gpointer data)
+{
+   ETzMap *tzmap;
+   char *old_zone;
+   
+   tzmap = (ETzMap *) data;
+
+   if (event->mode != GDK_CROSSING_NORMAL)
+      return FALSE;
+   
+   if (tzmap->point_hover && tzmap->point_hover != tzmap->point_selected)
+      e_map_point_set_color_rgba (tzmap->map, tzmap->point_hover, TZ_MAP_POINT_NORMAL_RGBA);
+
+   tzmap->point_hover = NULL;
+   
+   gtk_label_get (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label), &old_zone);
+   if (strcmp (old_zone, ""))
+      gtk_label_set_text (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label), "");
+   
+   return TRUE;
+}
+   
+static gboolean
 button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 {
 	ETzMap *tzmap;
@@ -298,6 +346,6 @@ button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 			gtk_entry_set_text (GTK_ENTRY (location_entry), entry_text_new);
 		}
 	}
-	
+
 	return TRUE;
 }
