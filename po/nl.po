@@ -3,13 +3,14 @@
 # Copyright (C) 2002,2003 Free Software Foundation, Inc.
 # Ronald Bultje <rbultje@ronald.bitfreak.net>, 2002.
 # Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>, 2003
+# Tino Meinen <a.t.meinen@chello.nl>, 2003
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-26 12:36+0200\n"
-"PO-Revision-Date: 2003-07-21 21:53+0100\n"
+"POT-Creation-Date: 2003-09-04 20:53+0200\n"
+"PO-Revision-Date: 2003-09-05 23:34+0200\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -21,36 +22,36 @@ msgid ""
 "Comma separated list of hosts that the GST will be able to access when the "
 "remote configuration option is enabled"
 msgstr ""
+"Een lijst met hosts, gescheiden door komma's, die GNOME System Tools kan "
+"gebruiken als systeembeheer op afstand mogelijk is"
 
 #: gnome-system-tools.schemas.in.h:2
 msgid "Dialog complexity for the boot-admin tool"
-msgstr "Complexiteit van het dialoogvenster Opstarten"
+msgstr "Complexiteit van het dialoogvenster: opstarten"
 
 #: gnome-system-tools.schemas.in.h:3
 msgid "Dialog complexity for the network-admin tool"
-msgstr "Complexiteit van het dialoogvenster Netwerk"
+msgstr "Complexiteit van het dialoogvenster: netwerk"
 
 #: gnome-system-tools.schemas.in.h:4
-#, fuzzy
 msgid "Dialog complexity for the services-admin tool"
-msgstr "Complexiteit van het dialoogvenster gebruikers"
+msgstr "Complexiteit van het dialoogvenster: voorzieningen"
 
 #: gnome-system-tools.schemas.in.h:5
 msgid "Dialog complexity for the time-admin tool"
-msgstr "Complexiteit van het dialoogvenster tijd"
+msgstr "Complexiteit van het dialoogvenster: tijd"
 
 #: gnome-system-tools.schemas.in.h:6
 msgid "Dialog complexity for the users-admin tool"
-msgstr "Complexiteit van het dialoogvenster gebruikers"
+msgstr "Complexiteit van het dialoogvenster: gebruikers"
 
 #: gnome-system-tools.schemas.in.h:7
 msgid "Last GST version executed"
 msgstr "Versienummer laatste GST"
 
 #: gnome-system-tools.schemas.in.h:8
-#, fuzzy
 msgid "Remote hosts"
-msgstr "IP aan ande_re kant:"
+msgstr "Hosts op afstand"
 
 #: gnome-system-tools.schemas.in.h:9
 msgid ""
@@ -61,20 +62,22 @@ msgstr ""
 "De basisstand is bedoeld om minder opties weer te geven dan de geavanceerde "
 "stand."
 
+# tooltip
 #: gnome-system-tools.schemas.in.h:10
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
 msgstr ""
+"De GNOME System Tools zijn in staat om via SSH op afstand te configureren. "
+"Met deze optie kunt u deze functie activeren"
 
 #: gnome-system-tools.schemas.in.h:11
 msgid "The last GST version that this computer has run"
 msgstr "De laatst actieve GST-versie op deze computer"
 
 #: gnome-system-tools.schemas.in.h:12
-#, fuzzy
 msgid "Whether the tools will use remote administration or not"
-msgstr "Of gebruikersbeheer alle gebruikers en groepen moet weergeven of niet"
+msgstr "Of systeembeheer op afstand mogelijk is of niet"
 
 #: gnome-system-tools.schemas.in.h:13
 msgid "Whether the users-admin tool should show all users and groups or not"
@@ -140,7 +143,7 @@ msgstr "800x600"
 
 #: interfaces/boot.glade.in.h:14
 msgid "<b>Security</b>"
-msgstr ""
+msgstr "<b>Veiligheid</b>"
 
 #: interfaces/boot.glade.in.h:15 interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Basic Settings</span>"
@@ -212,7 +215,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Image-instellingen (stap 2 van 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1745
+#: src/network/connection.c:1752
 msgid "Manual"
 msgstr "Handmatig"
 
@@ -238,7 +241,7 @@ msgstr "Wachtwoord"
 
 #: interfaces/boot.glade.in.h:37
 msgid "Protect with password"
-msgstr ""
+msgstr "Beveiligen met wachtwoord"
 
 #: interfaces/boot.glade.in.h:38
 msgid "Resolution:"
@@ -309,8 +312,7 @@ msgstr "_Initrd imagepad:"
 msgid "_Kernel image path:"
 msgstr "_Kernel imagepad:"
 
-#: interfaces/boot.glade.in.h:55 interfaces/print.glade.in.h:72
-#: interfaces/shares.glade.in.h:68
+#: interfaces/boot.glade.in.h:55
 msgid "_Name:"
 msgstr "_Naam:"
 
@@ -368,13 +370,13 @@ msgstr "Complexiteit"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Wachtwoord invoeren - GNOME System Tools"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1786
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
 #: interfaces/common.glade.in.h:14
 msgid "Remote administration"
-msgstr ""
+msgstr "Systeembeheer op afstand"
 
 #: interfaces/common.glade.in.h:15
 msgid "Run _Without Password"
@@ -393,6 +395,8 @@ msgid ""
 "Use this window to select the computer\n"
 "you wish to configure"
 msgstr ""
+"Gebruik dit venster om de computer te\n"
+"selecteren die u wilt gaan configureren"
 
 #: interfaces/common.glade.in.h:20 interfaces/network.glade.in.h:164
 msgid "_Password:"
@@ -534,7 +538,7 @@ msgstr "Alle gebruikers toestaan om verbinding te activeren"
 msgid "Auto"
 msgstr "Automatisch"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1754
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -574,7 +578,7 @@ msgstr "Een nieuwe internetverbinding maken "
 msgid "Create a new network connection"
 msgstr "Een nieuwe netwerkverbinding maken"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1746
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1753
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1068,8 +1072,7 @@ msgstr "DNS verversen als de verbinding actief wordt"
 msgid "_Use remote IP as default gateway"
 msgstr "Gebr_uik IP van andere kant als standaard-gateway"
 
-#: interfaces/network.glade.in.h:176 interfaces/print.glade.in.h:75
-#: interfaces/shares.glade.in.h:73 interfaces/users.glade.in.h:94
+#: interfaces/network.glade.in.h:176 interfaces/users.glade.in.h:94
 msgid "_Username:"
 msgstr "_Gebruikersnaam:"
 
@@ -1114,9 +1117,8 @@ msgid "Service:"
 msgstr "Voorziening:"
 
 #: interfaces/services.glade.in.h:10
-#, fuzzy
 msgid "Use this tool to specify which services to run"
-msgstr "Gebruik dit programma om de voorzieningen te beheren per runlevel."
+msgstr "Gebruik dit onderdeel om de voorzieningen per runlevel te beheren"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1574,7 +1576,7 @@ msgstr "Linux swap"
 
 #: src/boot/boot-image.c:46
 msgid "GNU/Hurd"
-msgstr ""
+msgstr "GNU/Hurd"
 
 #: src/boot/boot-image.c:278
 #, c-format
@@ -1601,10 +1603,10 @@ msgstr "Onjuist image: '%s'"
 msgid "Invalid root device: '%s'"
 msgstr "Onjuist opstartapparaat: '%s'"
 
+# Map ipv pad gebruikt
 #: src/boot/boot-settings.c:43
-#, fuzzy
 msgid "_Module path:"
-msgstr "_Modem poort:"
+msgstr "_Module-map:"
 
 #: src/boot/boot-settings.c:360 src/users/user-settings.c:502
 msgid "Password confirmation isn't correct."
@@ -1686,9 +1688,8 @@ msgstr "/Verwij_deren"
 
 #. the proccess was running ssh
 #: src/common/gst-auth.c:82
-#, fuzzy
 msgid "Could not connect to the computer."
-msgstr "Hoe andere computers te benaderen."
+msgstr "Kon geen verbinding met de computer maken."
 
 #. the proccess was running su
 #: src/common/gst-auth.c:85 src/common/gst-auth.c:234
@@ -1697,7 +1698,7 @@ msgstr "Het opgegeven wachtwoord is onjuist."
 
 #: src/common/gst-auth.c:88
 msgid "An unexpected error has occurred."
-msgstr ""
+msgstr "Er is een onverwachte fout opgetreden."
 
 #: src/common/gst-dialog.c:60
 #, c-format
@@ -1720,7 +1721,7 @@ msgstr ""
 "Sommige veranderingen zijn nog niet toegepast.\n"
 "Wilt u deze nu toepassen?"
 
-#: src/common/gst-dialog.c:571
+#: src/common/gst-dialog.c:583
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fout bij het verbinden van signaal '%s' aan widget '%s'"
@@ -1742,12 +1743,12 @@ msgstr ""
 "Er was een foutmelding tijdens het uitvoeren van het werkscript,\n"
 "en de configuratie kon niet worden geladen."
 
-#: src/common/gst-tool.c:1509
+#: src/common/gst-tool.c:1522
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - GNOME System Tools"
 
-#: src/common/gst-tool.c:1687
+#: src/common/gst-tool.c:1700
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1774,11 +1775,11 @@ msgstr ""
 "--\n"
 "Het GNOME System Tools team"
 
-#: src/common/gst-tool.c:1711
+#: src/common/gst-tool.c:1724
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: src/common/gst-tool.c:1720
+#: src/common/gst-tool.c:1733
 msgid "Don't show me this again"
 msgstr "Laat dit niet meer zien"
 
@@ -2027,7 +2028,7 @@ msgstr "Status"
 msgid "Description"
 msgstr "Beschrijving"
 
-#: src/network/connection.c:1626
+#: src/network/connection.c:1633
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2037,7 +2038,7 @@ msgstr ""
 "leeggelaten. Vul a.u.b. een geldige waarde\n"
 "in voor beide velden."
 
-#: src/network/connection.c:1633
+#: src/network/connection.c:1640
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2047,7 +2048,7 @@ msgstr ""
 "de interface werd leeggelaten. Vul a.u.b.\n"
 "een geldige waarde in voor beide velden."
 
-#: src/network/connection.c:1639
+#: src/network/connection.c:1646
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2061,7 +2062,7 @@ msgstr ""
 "IP in als eerste DNS server of kies niet voor\n"
 "handmatige DNS instellingen."
 
-#: src/network/connection.c:2195
+#: src/network/connection.c:2202
 msgid "Autodetecting modem device"
 msgstr "Modemapparaat automatisch detecteren"
 
@@ -2182,19 +2183,16 @@ msgid "No description available."
 msgstr "Geen beschrijving beschikbaar."
 
 #: src/services/main.c:62
-#, fuzzy
 msgid "Services Settings"
-msgstr "Alias instellingen"
+msgstr "Voorzieningen instellingen"
 
 #: src/services/services.desktop.in.in.h:1
-#, fuzzy
 msgid "Services"
-msgstr "Voorziening"
+msgstr "Voorzieningen"
 
 #: src/services/services.desktop.in.in.h:2
-#, fuzzy
 msgid "Services Manager"
-msgstr "Runlevel Voorzieningenbeheer"
+msgstr "Voorzieningenbeheer"
 
 #: src/services/table.c:65
 msgid "Service"
