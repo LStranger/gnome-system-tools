@@ -50,6 +50,7 @@ static void update_tz (XstTimeTool *time_tool);
 static void server_button_clicked (GtkWidget *w, gpointer data);
 static void ntp_use_toggled (GtkWidget *w, XstDialog *dialog);
 static void xst_time_calendar_change_cb (GtkCalendar *, gpointer);
+static void on_server_list_element_toggled (GtkCellRendererToggle*, gchar*, gpointer);
 
 static char *ntp_servers[] =
 {
@@ -86,7 +87,7 @@ static char *ntp_servers[] =
 	"ntp.adelaide.edu.au (South Australia)",
 	"ntp.shim.org (Singapore, Asia)",
 	"time.nuri.net (Korea, Asia)",
-	"ntp.cs.mu.oz.au (Melbourne, Austrilia)",
+	"ntp.cs.mu.oz.au (Melbourne, Australia)",
 	"ntp.mel.nml.csiro.au (Melbourne, Australia)",
 	"ntp.nml.csiro.au (Sydney, Australia)",
 	"ntp.per.nml.csiro.au (Perth, Australia)",
@@ -127,8 +128,8 @@ static XstDialogSignal signals[] = {
 	{ "tz_combo_entry",    "changed",            G_CALLBACK (update_tz) },
 #endif
         /* Changed the Signal for the GtkTreeView --AleX
-	  { "ntp_list",          "selection_changed",  xst_dialog_modify_cb },*/
-	{ "ntp_list2",         "cursor_changed",     G_CALLBACK (xst_dialog_modify_cb) },
+	   { "ntp_list",          "selection_changed",  xst_dialog_modify_cb },
+	   { "ntp_list2",         "cursor_changed",     G_CALLBACK (xst_dialog_modify_cb) },*/
 	{ "ntp_add_server",    "clicked",            G_CALLBACK (on_ntp_addserver) },
 	{ "ntp_add_server",    "clicked",            G_CALLBACK (xst_dialog_modify_cb) },
 	{ NULL }
@@ -152,21 +153,29 @@ xst_time_populate_ntp_list (XstTimeTool *time_tool)
 
 
 	/* set the model */
-	store = gtk_list_store_new (1, G_TYPE_STRING);
+	store = gtk_list_store_new (2, G_TYPE_BOOLEAN, G_TYPE_STRING);
 	gtk_tree_view_set_model (GTK_TREE_VIEW (ntp_list),
 				 GTK_TREE_MODEL (store));
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (ntp_list), TRUE);
 
+	/* create the first column, it contains 2 cell renderers */
+	column = gtk_tree_view_column_new ();
 
-	/* create the first column */
+	cell = gtk_cell_renderer_toggle_new ();
+	gtk_tree_view_column_pack_start (column, cell, FALSE);
+	gtk_tree_view_column_add_attribute (column, cell, "active", 0);
+	g_object_set_data (G_OBJECT (cell), "tool", tool);
+	g_signal_connect (G_OBJECT (cell), "toggled", G_CALLBACK (on_server_list_element_toggled), store);
+	
 	cell = gtk_cell_renderer_text_new ();
-	column = gtk_tree_view_column_new_with_attributes ("Servers", cell,
-							   "text", 0, NULL);
+	gtk_tree_view_column_pack_end (column, cell, TRUE);
+	gtk_tree_view_column_add_attribute (column, cell, "text", 1);
+
 	gtk_tree_view_append_column (GTK_TREE_VIEW (ntp_list), column);
 	
 	for (i = 0; ntp_servers[i]; i++) {
 		gtk_list_store_append (store, &iter);
-		gtk_list_store_set (store, &iter, 0, ntp_servers[i], -1);
+		gtk_list_store_set (store, &iter, 0, FALSE, 1, ntp_servers[i], -1);
 	}
 }
 
@@ -316,6 +325,49 @@ timezone_construct_dialog (XstDialog *dialog)
 			    TRUE, 8);
 
 	return GTK_WIDGET (d);
+}
+
+static void
+on_server_list_element_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
+{
+	GtkListStore *store = (GtkListStore *)data;
+	GtkTreeModel *model = GTK_TREE_MODEL (store);
+	GtkTreeIter iter;
+	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
+	XstTool *tool = g_object_get_data (G_OBJECT (cell), "tool");
+	gboolean toggle;
+	gchar *server, *p;
+	xmlNodePtr root, node;
+
+	root = xst_xml_doc_get_root (tool->config);
+	node = xst_xml_element_find_first (root, "sync");
+	if (!node) 
+		node = xst_xml_element_add (root, "sync");
+
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter, 0, &toggle, 1, &server, -1);
+
+	p = (char *) strchr (server, ' ');
+	if (p) 
+		*p = '\0';  /* Kill comments */
+	
+	if (toggle == TRUE) {
+		/* Toggle is set to true, we have to delete entry in XML and set toggle to FALSE */
+		toggle = FALSE;
+		for (node = xst_xml_element_find_first (node, "server"); node != NULL; node = xst_xml_element_find_next (node, "server")) {
+			if (strcmp (server, xst_xml_element_get_content (node)) == 0) 
+				xst_xml_element_destroy (node);
+		}
+	} else {
+		/* Toggle is set to false, we have to add a server entry in the XML and set toggle to TRUE */
+		toggle = TRUE;
+		node = xst_xml_element_add (node, "server");
+				xst_xml_element_set_content (node, server);
+	}
+
+	gtk_list_store_set (store, &iter, 0, toggle, -1);
+	gtk_tree_path_free (path);
+	xst_dialog_modify (tool->main_dialog);
 }
 
 static void

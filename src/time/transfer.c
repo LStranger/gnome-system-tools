@@ -140,7 +140,7 @@ transfer_timezone_gui_to_xml (XstTool *tool, xmlNodePtr root)
 	xst_xml_element_set_content (node, time_tool->time_zone_name);
 }
 
-static GtkTreeIter *server_entry_found;
+static gboolean server_entry_found;
 
 static void
 server_list_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter,
@@ -149,10 +149,12 @@ server_list_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter,
 	char *text;
 	GValue value = {0, };    /* Initialized the variable --AleX */
 
-	gtk_tree_model_get_value (model, iter, 0, &value);
+	gtk_tree_model_get_value (model, iter, 1, &value);
 	
-	if (strstr (g_value_get_string (&value), data))
-		server_entry_found = gtk_tree_iter_copy (iter);
+	if (strstr (g_value_get_string (&value), data)) {
+		gtk_list_store_set (GTK_LIST_STORE (model), iter, 0, TRUE, -1);
+		server_entry_found = TRUE;
+	}
 }
 
 static void
@@ -178,18 +180,13 @@ transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 	{
 		s = xst_xml_element_get_content (node);
 		
-		server_entry_found = NULL;
+		server_entry_found = FALSE;
 		gtk_tree_model_foreach (GTK_TREE_MODEL (store), (GtkTreeModelForeachFunc) server_list_cb, s);
 		
-		if (server_entry_found) {
-			gtk_tree_selection_select_iter (selection, server_entry_found);
-		}
-		else
-		{
+		if (!server_entry_found) {
 			gtk_list_store_append (store, &iter);
-			gtk_list_store_set (store, &iter, 0, g_strdup (s), -1);
-		}
-		
+			gtk_list_store_set (store, &iter, 0, TRUE, 1, g_strdup (s), -1);
+		}		
 		
 		g_free (s);
 	}
@@ -306,6 +303,6 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 
 	transfer_time_gui_to_xml (tool, root);
 	transfer_timezone_gui_to_xml (tool, root);
-	transfer_servers_gui_to_xml (tool, root);
+	//	transfer_servers_gui_to_xml (tool, root);
 	transfer_sync_toggle_gui_to_xml (tool, root);
 }

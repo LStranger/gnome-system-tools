@@ -41,6 +41,6 @@ on_ntp_addserver (GtkButton *button, XstDialog *dialog)
 	gtk_widget_grab_focus (GTK_WIDGET (ntp_entry));
 	
 	gtk_list_store_append (store, &iter);
-	gtk_list_store_set (store, &iter, 0, g_strdup (text), -1);
+	gtk_list_store_set (store, &iter, 0, FALSE, 1, g_strdup (text), -1);
 
 }
