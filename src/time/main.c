@@ -310,7 +310,7 @@ timezone_construct_dialog (GstDialog *dialog)
 	g_return_if_fail (dialog!=NULL);
 	g_return_if_fail (GST_IS_DIALOG(dialog));
 	
-	d = gtk_dialog_new_with_buttons (_("Time Zone - GNOME System Tools"),
+	d = gtk_dialog_new_with_buttons (_("Time Zone"),
 					      NULL,
 					      GTK_DIALOG_MODAL |
 					      GTK_DIALOG_NO_SEPARATOR,
@@ -424,7 +424,7 @@ server_construct_dialog (GstDialog *dialog)
 	g_return_if_fail (dialog!=NULL);
 	g_return_if_fail (GST_IS_DIALOG(dialog));
 
-	d = gtk_dialog_new_with_buttons (_("Time Servers - GNOME System Tools"),
+	d = gtk_dialog_new_with_buttons (_("Time Servers"),
 					      NULL,
 					      GTK_DIALOG_MODAL |
 					      GTK_DIALOG_NO_SEPARATOR,
