@@ -41,6 +41,13 @@ XstTool *tool;
 /* "global" callbacks :) */
 
 void
+on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
+			 guint page_num, gpointer user_dat)
+{
+	set_active_table (page_num);
+}
+
+void
 on_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	ug_data *ud;

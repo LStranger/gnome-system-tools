@@ -465,7 +465,7 @@ user_cursor_change (ETable *table, gint row, gpointer user_data)
 	ETreeModel *model;
 	gchar *buf, *label;
 
-	active_table = TABLE_USER;
+	set_active_table (TABLE_USER);
 
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
@@ -488,7 +488,7 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 	ETreeModel *model;
 	gchar *buf, *label;
 
-	active_table = TABLE_GROUP;
+	set_active_table (TABLE_GROUP);
 	
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
@@ -513,7 +513,7 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 	xmlNodePtr node, u_node;
 	gchar *name, *buf, *user;
 
-	active_table = TABLE_NET_GROUP;
+	set_active_table (TABLE_NET_GROUP);
 
 	/* Get group name */
 	model = E_TREE_MODEL (table->model);
@@ -576,7 +576,7 @@ net_user_cursor_change (ETable *table, gint row, gpointer user_data)
 	gchar *buf, *label;
 	xmlNodePtr node;
 
-	active_table = TABLE_NET_USER;
+	set_active_table (TABLE_NET_USER);
 	
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
@@ -1077,4 +1077,10 @@ current_table_new_row (ug_data *ud)
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_get_root (model);
 	e_tree_model_node_insert (model, path, -1, ud->node);
+}
+
+void
+set_active_table (guint tbl)
+{
+	active_table = tbl;
 }

@@ -27,6 +27,9 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
+void on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
+			      guint page_num, gpointer user_data);
+
 void on_settings_clicked (GtkButton *button, gpointer user_data);
 
 void on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
@@ -60,18 +63,8 @@ void on_group_settings_remove_clicked (GtkButton *button, gpointer user_data);
 void on_group_settings_all_select_row (GtkCList *clist, gint row, gint column,
 		GdkEventButton *event, gpointer user_data);
 
-/*
-void on_group_settings_all_unselect_row (GtkCList *clist, gint row, gint column,
-	       GdkEventButton *event, gpointer user_data);
-*/
-
 void on_group_settings_members_select_row (GtkCList *clist, gint row, gint column,
 		GdkEventButton *event, gpointer user_data);
-
-/* 
-void on_group_settings_members_unselect_row (GtkCList *clist, gint row, gint column,
-	       GdkEventButton *event, gpointer user_data);
-*/
 
 void actions_set_sensitive (gboolean state);
 void user_actions_set_sensitive (gboolean state);

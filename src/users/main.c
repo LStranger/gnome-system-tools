@@ -44,6 +44,7 @@
 XstTool *tool;
 
 static XstDialogSignal signals[] = {
+	{ "users_admin",                 "switch_page",          on_notebook_switch_page },
 	{ "user_settings_dialog",        "delete_event",         on_user_settings_dialog_delete_event },
 	{ "user_settings_dialog",        "show",                 on_user_settings_dialog_show },
 	{ "user_settings_ok",            "clicked",              on_user_settings_ok_clicked },

@@ -73,6 +73,7 @@ xmlNodePtr get_selected_node (void);
 gboolean delete_selected_node (gint tbl);
 void current_table_update_row (ug_data *ud);
 void current_table_new_row (ug_data *ud);
+void set_active_table (guint tbl);
 
 
 #endif /* E_TABLE_H */
