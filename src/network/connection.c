@@ -2245,7 +2245,7 @@ connection_autodetect_modem (void)
 	xmlDoc *doc = gst_tool_run_get_directive (tool, _("Autodetecting modem device"), "detect_modem", NULL);
 	GtkWidget *w;
 
-	g_return_if_fail (doc != NULL);
+	g_return_val_if_fail (doc != NULL, NULL);
 
 	root = gst_xml_doc_get_root (doc);
 	return  gst_xml_get_child_content (root, "device");

@@ -995,7 +995,7 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
 	gchar *dev = connection_autodetect_modem ();
 	GtkWidget *w;
 
-	if (strcmp (dev, "") == 0) {
+	if ((!dev) || (strcmp (dev, "") == 0)) {
 		w = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
 					    _("Could not autodetect modem device, check that this is not busy and that it's correctly attached"));
 		gtk_dialog_run (GTK_DIALOG (w));
@@ -1004,8 +1004,9 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
 		w = glade_xml_get_widget (cxn->xml, "ppp_serial_port");
 		gtk_entry_set_text (GTK_ENTRY (w), dev);
 	}
-	
-	g_free (dev);
+
+	if (dev)
+		g_free (dev);
 }
 
 void

@@ -1,3 +1,9 @@
+2003-10-12  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* callbacks.c, connection.c: made it not to crash when the user hits
+	  when the backend cannot answer to the modem_detect directive
+	  (because it's already busy with another directive)
+
 2003-10-11  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* callbacks.c: (callbacks_check_hostname_hook) fixed an ancient and
