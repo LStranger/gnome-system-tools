@@ -85,6 +85,7 @@ tool_load_image (char *image_name)
 
 	path = g_strjoin ("/", PIXMAPS_DIR, image_name, NULL);
 	pixbuf = gdk_pixbuf_new_from_file (path);
+	if (!pixbuf) g_warning ("Couldn't load image \"%s\".", path);
 	g_free (path);
 	return pixbuf;
 }

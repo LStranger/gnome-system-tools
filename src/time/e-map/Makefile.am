@@ -12,7 +12,10 @@ e_map_test_CFLAGS = \
 e_map_test_LDADD = \
   $(GNOME_LIBDIR) \
   $(GNOMEUI_LIBS) \
-  $(GDK_PIXBUF_LIBS)
+  $(GNOME_XML_LIB) \
+  $(GDK_PIXBUF_LIBS) \
+  $(LIBGLADE_LIBS) \
+  ../../common/libsetuptool.a
 
 e_map_test_SOURCES = \
   e-map.c e-map.h \
