@@ -34,6 +34,7 @@
 #include "user_group.h"
 #include "callbacks.h"
 #include "e-table.h"
+#include "profile.h"
 
 extern XstTool *tool;
 
@@ -237,6 +238,7 @@ void
 transfer_xml_to_gui (XstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
+	Profile *pf;
 
 	root = xst_xml_doc_get_root (tool->config);
 
@@ -245,6 +247,11 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	
 	/* Popuplate tables */
 	populate_all_tables ();
+
+	/* Profiles */
+	profile_table_init ();
+	pf = profile_get_default ();
+	profile_table_add_profile (pf, TRUE);
 }
 
 void

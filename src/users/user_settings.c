@@ -192,7 +192,7 @@ user_settings_basic_fill (UserSettings *us)
 	/* Fill "Basic" tab widgets. */
 	gchar *buf;
 
-	if (us->node != get_db_node (us->node)) /* user node (not userdb), not new. */
+	if (!us->new)
 	{
 		gtk_entry_set_text (us->basic->name,
 				    xst_xml_get_child_content (us->node, "login"));
@@ -260,7 +260,7 @@ user_settings_pwd_fill (UserSettings *us)
 {
 	gchar *buf;
 	
-	if (us->node != get_db_node (us->node)) /* user node (not userdb), not new. */
+	if (!us->new)
 	{
 		buf = xst_xml_get_child_content (us->node, "passwd_min_life");
 		gtk_spin_button_set_value (us->pwd->min, g_strtod (buf, NULL));
@@ -313,7 +313,7 @@ user_settings_prepare (xmlNodePtr user_node)
 	us->group = user_settings_group_prepare ();
 	us->pwd   = user_settings_pwd_prepare ();
 
-	if (user_node == get_db_node (user_node))
+	if (user_node == get_db_node (user_node))  /* user node (not userdb), not new. */
 		us->new = TRUE;
 	else
 		us->new = FALSE;
