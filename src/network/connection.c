@@ -1747,6 +1747,7 @@ connection_configure (XstConnection *cxn)
 	cxn->xml = glade_xml_new (s, "connection_config_dialog");
 
 	g_assert (cxn->xml);
+	g_free (s);
 
 	hookup_callbacks (cxn);
 

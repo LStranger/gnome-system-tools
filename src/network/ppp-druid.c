@@ -389,21 +389,22 @@ extern PppDruid *ppp_druid_new (XstTool *tool)
 
 
 	ppp = g_new0 (PppDruid, 1);
-	ppp->glade = tool->main_dialog->gui;
-	ppp->tool = tool;
-
-	ppp->error_state = FALSE;
-	ppp->current_page = 0;
-
-	ppp->win = my_get_widget (ppp->glade, "window");
-	gtk_object_set_data (GTK_OBJECT (ppp->win), "ppp", ppp);
-	ppp->druid = GNOME_DRUID (my_get_widget (ppp->glade, "druid"));
 	
-	ppp->phone = my_get_widget (ppp->glade, "phone");
-	ppp->login = my_get_widget (ppp->glade, "login");
-	ppp->passwd = my_get_widget (ppp->glade, "passwd");
+	ppp->glade = tool->main_dialog->gui;
+	ppp->tool  = tool;
+
+	ppp->error_state  = FALSE;
+	ppp->current_page = 0;
+	ppp->druid        = GNOME_DRUID (my_get_widget (ppp->glade, "druid"));
+	ppp->win          = my_get_widget (ppp->glade, "window");
+	gtk_object_set_data (GTK_OBJECT (ppp->win), "ppp", ppp);
+	
+	ppp->phone   = my_get_widget (ppp->glade, "phone");
+	ppp->login   = my_get_widget (ppp->glade, "login");
+	ppp->passwd  = my_get_widget (ppp->glade, "passwd");
 	ppp->passwd2 = my_get_widget (ppp->glade, "passwd2");
 	ppp->profile = my_get_widget (ppp->glade, "profile");
+
 	ppp_druid_connect_signals (ppp, signals);
 
 	return ppp;
