@@ -4,12 +4,15 @@ XST - 0.4
 The Ximian Setup Tools 0.4.0 codenamed "Perris Valley" has been released.
 
 The Ximian Setup Tools are a set of cross plataform configration utilities
-for Linux and other Unices They are divided in a front end and backend so
-that the GUI is identical across linux distributions and unix variants.
-The are a replacement for the distribution/system specific configurations
-tools with a user friendly interface in mind.
+for Linux and other Unices. Internaly they are divided in a front end and
+backend, the front ends knows nothing about the underlying system and provides
+the same user interface across the different types of systems. The backend
+knows how to read and write configuration information. The Ximian Setup Tools
+do not impose a new database to the system they work with the default
+configuration files so that configuration can still be done by hand or by
+other tools.
 
-The current tools include :
+The current set of tools include :
 
 - Network admin
    
