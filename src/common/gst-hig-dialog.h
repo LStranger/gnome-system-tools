@@ -74,7 +74,7 @@ struct _GstHigDialogClass
 };
 
 GType      gst_hig_dialog_get_type (void);
-GType      gtk_message_type_get_type (void);
+GType      gst_hig_message_type_get_type (void);
 
 GtkWidget* gst_hig_dialog_new      (GtkWindow         *parent,
                                     GtkDialogFlags     flags,
