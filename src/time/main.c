@@ -35,7 +35,6 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "gst.h"
-#include "gst-hig-dialog.h"
 #include "time-tool.h"
 
 #include "tz.h"
@@ -455,16 +454,16 @@ ntp_use_toggled (GtkWidget *w, GstDialog *dialog)
 		
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
 
-		message = gst_hig_dialog_new (GTK_WINDOW (dialog),
-					      GTK_DIALOG_MODAL,
-					      GST_HIG_MESSAGE_INFO,
-					      _("NTP support is not running"),
-					      _("Please run NTP support in the system to enable "
-						"synchronization of your local time server with internet time servers"),
-					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-					      NULL);
+		message = gtk_message_dialog_new (GTK_WINDOW (dialog),
+						  GTK_DIALOG_MODAL,
+						  GTK_MESSAGE_INFO,
+						  GTK_BUTTONS_CLOSE,
+						  _("NTP support is not running"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  _("Please run NTP support in the system to enable "
+							    "synchronization of your local time server with "
+							    "internet time servers"));
 		gtk_dialog_run (GTK_DIALOG (message));
-
 		gtk_widget_destroy (message);
 		return;
 	}
