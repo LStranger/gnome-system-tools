@@ -37,7 +37,8 @@ typedef enum {
 	TYPE_WINNT,
 	TYPE_WIN9X,
 	TYPE_DOS,
-	TYPE_LINUX
+	TYPE_LINUX,
+        TYPE_LINSWAP
 } GstBootImageType;
 
 typedef struct {

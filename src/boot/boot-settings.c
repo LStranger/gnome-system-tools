@@ -83,7 +83,7 @@ on_type_entry_change (GtkWidget *w, gpointer data)
 		type = label_to_type (buf);
 		if (type == TYPE_LINUX)
 			gtk_combo_set_popdown_strings (gui->root, settings_dev_list (type));
-		else
+		else if (type != TYPE_LINSWAP)
 			gtk_combo_set_popdown_strings (gui->device, settings_dev_list (type));
 	}	
 	return;
@@ -198,7 +198,8 @@ settings_type_list (void)
 	{
 		dev = gst_xml_get_child_content (node, "dev");
 		type = type_to_label (label_to_type (gst_xml_get_child_content (node, "type")));
-		if (g_list_find_custom (list, type, (GCompareFunc)compare) == NULL)
+		if ((g_list_find_custom (list, type, (GCompareFunc)compare) == NULL) &&
+		    (label_to_type (type) != TYPE_LINSWAP))
 			list = g_list_append (list, g_strdup (type));
 	}
 

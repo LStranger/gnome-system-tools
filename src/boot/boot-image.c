@@ -42,6 +42,7 @@ static GstBootImageTypeTable boot_image_type_table[] = {
 	{ N_("Windows 9x"), TYPE_WIN9X },
 	{ N_("Dos"),        TYPE_DOS },
 	{ N_("Linux"),      TYPE_LINUX },
+	{ N_("Linux swap"), TYPE_LINSWAP },
 	{ NULL,             -1 }	
 };
 
