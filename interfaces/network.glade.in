@@ -6,7 +6,7 @@
   <program_name>network</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
-  <pixmaps_directory>../pixmaps</pixmaps_directory>
+  <pixmaps_directory></pixmaps_directory>
   <language>C</language>
   <gnome_support>True</gnome_support>
   <gettext_support>True</gettext_support>
@@ -496,6 +496,7 @@
       <widget>
 	<class>GtkScrolledWindow</class>
 	<name>connection_list_sw</name>
+	<border_width>3</border_width>
 	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
 	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
@@ -507,63 +508,7 @@
 	</child>
 
 	<widget>
-	  <class>GtkCList</class>
-	  <name>connection_list</name>
-	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>select_row</name>
-	    <handler>on_connection_list_select_row</handler>
-	    <last_modification_time>Tue, 16 Jan 2001 23:52:14 GMT</last_modification_time>
-	  </signal>
-	  <signal>
-	    <name>unselect_row</name>
-	    <handler>on_connection_list_unselect_row</handler>
-	    <last_modification_time>Tue, 16 Jan 2001 23:52:18 GMT</last_modification_time>
-	  </signal>
-	  <columns>3</columns>
-	  <column_widths>80,80,80</column_widths>
-	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	  <show_titles>True</show_titles>
-	  <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <child_name>CList:title</child_name>
-	    <name>label116</name>
-	    <label>Device</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <child_name>CList:title</child_name>
-	    <name>label117</name>
-	    <label>Status</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <child_name>CList:title</child_name>
-	    <name>label118</name>
-	    <label>Description</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	  </widget>
+	  <class>Placeholder</class>
 	</widget>
       </widget>
 
@@ -1123,40 +1068,7 @@
 	</child>
 
 	<widget>
-	  <class>GtkCList</class>
-	  <name>statichost_list</name>
-	  <can_focus>True</can_focus>
-	  <columns>2</columns>
-	  <column_widths>80,80</column_widths>
-	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	  <show_titles>True</show_titles>
-	  <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <child_name>CList:title</child_name>
-	    <name>label133</name>
-	    <label>IP Address</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <child_name>CList:title</child_name>
-	    <name>label134</name>
-	    <label>Aliases</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	  </widget>
+	  <class>Placeholder</class>
 	</widget>
       </widget>
 
@@ -1472,14 +1384,14 @@
       <child_ipad_y>0</child_ipad_y>
       <child>
 	<padding>0</padding>
-	<expand>False</expand>
+	<expand>True</expand>
 	<fill>True</fill>
 	<pack>GTK_PACK_END</pack>
       </child>
 
       <widget>
 	<class>GtkButton</class>
-	<name>button24</name>
+	<name>button31</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
@@ -1487,7 +1399,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>button26</name>
+	<name>button32</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
@@ -1496,7 +1408,7 @@
 
     <widget>
       <class>GtkTable</class>
-      <name>table8</name>
+      <name>connection_type_table</name>
       <rows>2</rows>
       <columns>2</columns>
       <homogeneous>False</homogeneous>
@@ -3793,7 +3705,7 @@ Click the &quot;Next&quot; button to begin.</text>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
       <textbox_color>255,255,255</textbox_color>
-      <logo_image>memory_wrench.png</logo_image>
+      <logo_image>../pixmaps/memory_wrench.png</logo_image>
       <watermark_image>xstdruidbg-3.png</watermark_image>
     </widget>
 

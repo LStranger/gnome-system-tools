@@ -6,7 +6,7 @@
   <program_name>boot-admin</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
-  <pixmaps_directory>../pixmaps</pixmaps_directory>
+  <pixmaps_directory></pixmaps_directory>
   <language>C</language>
   <gnome_support>True</gnome_support>
   <gettext_support>True</gettext_support>
@@ -138,19 +138,22 @@ systems to choose from at startup.</label>
 	  </child>
 
 	  <widget>
-	    <class>Custom</class>
-	    <name>custom1</name>
-	    <width>400</width>
-	    <height>230</height>
-	    <creation_function>table_create</creation_function>
-	    <int1>0</int1>
-	    <int2>0</int2>
-	    <last_modification_time>Wed, 25 Jul 2001 15:26:13 GMT</last_modification_time>
+	    <class>GtkScrolledWindow</class>
+	    <name>boot_table_sw</name>
+	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	    <border_width>4</border_width>
 	    <child>
 	      <padding>0</padding>
 	      <expand>True</expand>
 	      <fill>True</fill>
 	    </child>
+
+	    <widget>
+	      <class>Placeholder</class>
+	    </widget>
 	  </widget>
 
 	  <widget>
@@ -347,24 +350,6 @@ systems to choose from at startup.</label>
     <name>boot_settings_editor</name>
     <homogeneous>False</homogeneous>
     <spacing>8</spacing>
-
-    <widget>
-      <class>GtkHButtonBox</class>
-      <child_name>GnomeDialog:action_area</child_name>
-      <name>hbuttonbox1</name>
-      <layout_style>GTK_BUTTONBOX_END</layout_style>
-      <spacing>8</spacing>
-      <child_min_width>85</child_min_width>
-      <child_min_height>27</child_min_height>
-      <child_ipad_x>7</child_ipad_x>
-      <child_ipad_y>0</child_ipad_y>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>True</fill>
-	<pack>GTK_PACK_END</pack>
-      </child>
-    </widget>
 
     <widget>
       <class>GtkHBox</class>
@@ -863,7 +848,7 @@ To begin, click &quot;Next&quot;. </text>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
       <textbox_color>255,255,255</textbox_color>
-      <logo_image>boot.png</logo_image>
+      <logo_image>../pixmaps/boot.png</logo_image>
       <watermark_image>xstdruidbg-3.png</watermark_image>
     </widget>
 
@@ -874,7 +859,7 @@ To begin, click &quot;Next&quot;. </text>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
-      <logo_image>boot.png</logo_image>
+      <logo_image>../pixmaps/boot.png</logo_image>
 
       <widget>
 	<class>GtkVBox</class>
@@ -982,7 +967,7 @@ To begin, click &quot;Next&quot;. </text>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
-      <logo_image>boot.png</logo_image>
+      <logo_image>../pixmaps/boot.png</logo_image>
 
       <widget>
 	<class>GtkVBox</class>
@@ -1090,7 +1075,7 @@ To begin, click &quot;Next&quot;. </text>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
-      <logo_image>boot.png</logo_image>
+      <logo_image>../pixmaps/boot.png</logo_image>
 
       <widget>
 	<class>GtkVBox</class>
@@ -1203,7 +1188,7 @@ Please click &quot;Finish&quot; to save your changes. </text>
       <textbox_color>255,255,255</textbox_color>
       <text_color>0,0,0</text_color>
       <title_color>255,255,255</title_color>
-      <logo_image>boot.png</logo_image>
+      <logo_image>../pixmaps/boot.png</logo_image>
       <watermark_image>xstdruidbg-3.png</watermark_image>
     </widget>
   </widget>
