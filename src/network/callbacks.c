@@ -437,7 +437,7 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	GtkWidget *druid_window = gst_dialog_get_widget (tool->main_dialog, "network_connection_window");
 	GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog, "network_connection_druid"));
 
-	network_druid_new (druid, tool, GST_CONNECTION_UNKNOWN);
+	network_druid_new (druid, druid_window, tool, GST_CONNECTION_UNKNOWN);
 	gtk_widget_show_all (druid_window);
 }
 
@@ -1375,7 +1375,8 @@ on_network_druid_page_prepare (GnomeDruidPage *druid_page, GnomeDruid *druid, gp
 		NULL
 	};
 
-	g_return_if_fail (druid_data != NULL);
+	if (druid_data == NULL)
+		return;
 	
 	g_signal_stop_emission_by_name (druid_page, "prepare");
 	network_druid_check_page (druid, druid_data->current_page);
@@ -1384,6 +1385,8 @@ on_network_druid_page_prepare (GnomeDruidPage *druid_page, GnomeDruid *druid, gp
 		gtk_widget_grab_focus (gst_dialog_get_widget (druid_data->tool->main_dialog,
 							      next_default_focus [druid_data->current_page]));
 	}
+
+	network_druid_set_window_title (druid);
 }
 
 void

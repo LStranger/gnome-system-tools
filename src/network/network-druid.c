@@ -50,13 +50,19 @@ network_druid_fill_wireless_devices_list (GstTool *tool)
 }
 
 void
-network_druid_new (GnomeDruid *druid, GstTool *tool, GstConnectionType type)
+network_druid_new (GnomeDruid *druid, GtkWidget *window, GstTool *tool, GstConnectionType type)
 {
 	NetworkDruidData *druid_data = g_new0 (NetworkDruidData, 1);
 
+	druid_data->window = window;
 	druid_data->tool = tool;
 	druid_data->current_page = NETWORK_DRUID_START;
 	druid_data->cxn = connection_new_from_type (type, gst_xml_doc_get_root (tool->config));
+
+	/* set window titles */
+	druid_data->first_page_title = N_("Creating a new network connection");
+	druid_data->title = N_("Creating a new network connection (%d of %d)");
+	druid_data->finish_title = N_("Finished creating a new network connection");
 
 	if (type == GST_CONNECTION_UNKNOWN)
 		druid_data->fixed_type = FALSE;
@@ -408,8 +414,6 @@ network_druid_set_page_next (GnomeDruid *druid)
 				g_free (image_path);
 				gdk_pixbuf_unref (image);
 
-				gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
-								     _("Address configuration (Step 1 of 2)"));
 				gnome_druid_set_page (druid, next_page);
 			
 				return TRUE;
@@ -421,8 +425,6 @@ network_druid_set_page_next (GnomeDruid *druid)
 		druid_data->current_page = NETWORK_DRUID_OTHER_1;
 		next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
 								     "network_connection_other_page1"));
-		gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
-						     _("Address configuration (Step 2 of 3)"));
 
 		/* set the wireless image to the druid */
 		image_path = g_strdup_printf (PIXMAPS_DIR "/wavelan-48.png");
@@ -441,24 +443,13 @@ network_druid_set_page_next (GnomeDruid *druid)
 		druid_data->current_page = NETWORK_DRUID_NAME;
 		next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
 								     "network_connection_page_name"));
-		if (druid_data->cxn->type != GST_CONNECTION_WLAN)
-			gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
-							     _("Connection name (Step 2 of 2)"));
-		else
-			gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
-							     _("Connection name (Step 3 of 3)"));
-
 		gnome_druid_set_page (druid, next_page);
-		
 		return TRUE;
 		break;
 	case NETWORK_DRUID_PPP_2:
 		druid_data->current_page = NETWORK_DRUID_NAME;
 		next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
 								     "network_connection_page_name"));
-		gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
-						     _("Connection name (Step 3 of 3)"));
-
 		return FALSE;
 		break;
 	}
@@ -526,4 +517,84 @@ network_druid_set_page_back (GnomeDruid *druid)
 	druid_data->current_page--;
 
 	return FALSE;
+}
+
+void
+network_druid_set_window_title (GnomeDruid *druid)
+{
+	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
+	gint total_pages;
+	gint current_page;
+	NetworkDruidPageType page_type;
+	gchar *title;
+
+	/* let's guess the total number of pages that the assistant will have */
+	switch (druid_data->cxn->type) {
+	case GST_CONNECTION_PPP:
+	case GST_CONNECTION_WLAN:
+		total_pages = 3;
+		break;
+	case GST_CONNECTION_ETH:
+	case GST_CONNECTION_PLIP:
+	case GST_CONNECTION_IRLAN:
+	default:
+		total_pages = 2;
+		break;
+	}
+
+	/* ok, now let's go for the current page */
+	switch (druid_data->current_page) {
+	case NETWORK_DRUID_START:
+	case NETWORK_DRUID_CONNECTION_TYPE:
+		page_type = DRUID_START_PAGE;
+		break;
+	case NETWORK_DRUID_WIRELESS:
+		page_type = DRUID_NORMAL_PAGE;
+		current_page = 1;
+		break;
+	case NETWORK_DRUID_OTHER_1:
+		page_type = DRUID_NORMAL_PAGE;
+
+		if (druid_data->cxn->type == GST_CONNECTION_WLAN)
+			current_page = 2;
+		else
+			current_page = 1;
+		break;
+	case NETWORK_DRUID_PLIP_1:
+		page_type = DRUID_NORMAL_PAGE;
+		current_page = 1;
+		break;
+	case NETWORK_DRUID_PPP_1:
+		page_type = DRUID_NORMAL_PAGE;
+		current_page = 1;
+		break;
+	case NETWORK_DRUID_PPP_2:
+		page_type = DRUID_NORMAL_PAGE;
+		current_page = 2;
+		break;
+	case NETWORK_DRUID_NAME:
+		page_type = DRUID_NORMAL_PAGE;
+
+		if ((druid_data->cxn->type == GST_CONNECTION_WLAN) ||
+		    (druid_data->cxn->type == GST_CONNECTION_PPP))
+			current_page = 3;
+		else
+			current_page = 2;
+		break;
+	case NETWORK_DRUID_FINISH:
+		page_type = DRUID_FINISH_PAGE;
+		break;
+	}
+
+	if (page_type == DRUID_START_PAGE)
+	gtk_window_set_title (GTK_WINDOW (druid_data->window),
+				      druid_data->first_page_title);
+	else if (page_type == DRUID_FINISH_PAGE)
+		gtk_window_set_title (GTK_WINDOW (druid_data->window),
+				      druid_data->finish_title);
+	else {
+		title = g_strdup_printf (druid_data->title, current_page, total_pages);
+		gtk_window_set_title (GTK_WINDOW (druid_data->window), title);
+		g_free (title);
+	}
 }

@@ -148,12 +148,15 @@ GstDialogSignal signals[] = {
 };
 
 GstDialogSignal signals_after[] = {
+	{ "network_connection_page1", "prepare", G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_page2", "prepare", G_CALLBACK (on_network_druid_page_prepare) },
 	{ "network_connection_wireless_page", "prepare", G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_other_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_plip_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_ppp_page1",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_ppp_page2",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
-	{ "network_connection_page_name",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_other_page1", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_plip_page1", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_ppp_page1", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_ppp_page2", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_page_name", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_page_finish", "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
 	{ NULL }
 };
 
@@ -289,7 +292,7 @@ main (int argc, char *argv[])
 
 		connect_signals (tool->main_dialog, signals, signals_after);
 		init_editable_filters (tool->main_dialog);
-		network_druid_new (druid, tool, type);
+		network_druid_new (druid, druid_window, tool, type);
 		gtk_widget_show_all (druid_window);
 
 		gst_tool_main_with_hidden_dialog (tool, FALSE);
