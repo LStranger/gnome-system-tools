@@ -57,15 +57,15 @@ msgstr "Administration af diske"
 msgid "Device"
 msgstr "Enhed"
 
-#: interfaces/disks.glade.h:9 interfaces/shares.glade.h:9
+#: interfaces/disks.glade.h:9 interfaces/shares.glade.h:10
 msgid "Detected"
 msgstr "Fundet"
 
-#: interfaces/disks.glade.h:10 interfaces/shares.glade.h:10
+#: interfaces/disks.glade.h:10 interfaces/shares.glade.h:11
 msgid "Listed"
 msgstr "Listet"
 
-#: interfaces/disks.glade.h:11 interfaces/shares.glade.h:11
+#: interfaces/disks.glade.h:11 interfaces/shares.glade.h:12
 msgid "Mounted"
 msgstr "Monteret"
 
@@ -90,7 +90,7 @@ msgstr "Monteringspunkt"
 msgid "Partition"
 msgstr "Partition"
 
-#: interfaces/disks.glade.h:17 interfaces/shares.glade.h:16
+#: interfaces/disks.glade.h:17 interfaces/shares.glade.h:17
 msgid "Add an unlisted import"
 msgstr "Tilføj en ikke-listet import"
 
@@ -102,14 +102,14 @@ msgstr "Tilføj partition"
 msgid "Mount this partition"
 msgstr "Montér denne partition"
 
-#: interfaces/disks.glade.h:20 interfaces/shares.glade.h:19
+#: interfaces/disks.glade.h:20 interfaces/shares.glade.h:20
 msgid "Open settings dialog for selected import"
 msgstr "Åbn dialogen indstillinger for valgt import"
 
 #: interfaces/disks.glade.h:21 interfaces/memory.glade.h:28
 #: interfaces/memory.glade.h:37 interfaces/nameresolution.glade.h:42
-#: interfaces/shares.glade.h:20 interfaces/shares.glade.h:34
-#: interfaces/shares.glade.h:39 interfaces/shares.glade.h:45
+#: interfaces/shares.glade.h:21 interfaces/shares.glade.h:35
+#: interfaces/shares.glade.h:40 interfaces/shares.glade.h:46
 #: interfaces/users.glade.h:14 interfaces/users.glade.h:21
 msgid "Settings"
 msgstr "Indstillinger"
@@ -125,7 +125,7 @@ msgstr "Diske og partitioner"
 #. Translation: respect the spaces before and after, and the minus than signs.
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
 #: interfaces/nameresolution.glade.h:44 interfaces/networking.glade.h:15
-#: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
+#: interfaces/shares.glade.h:48 interfaces/time.glade.h:16
 #: interfaces/users.glade.h:39 src/common/tool.c:621
 msgid " More Options >> "
 msgstr " Flere valgmuligheder >> "
@@ -134,7 +134,7 @@ msgstr " Flere valgmuligheder >> "
 msgid "Partition Settings"
 msgstr "Indstillinger for partition"
 
-#: interfaces/disks.glade.h:26 interfaces/shares.glade.h:49
+#: interfaces/disks.glade.h:26 interfaces/shares.glade.h:50
 msgid "Type:"
 msgstr "Type:"
 
@@ -142,7 +142,7 @@ msgstr "Type:"
 msgid "Device:"
 msgstr "Enhed:"
 
-#: interfaces/disks.glade.h:28 interfaces/shares.glade.h:54
+#: interfaces/disks.glade.h:28 interfaces/shares.glade.h:55
 msgid "Mount point:"
 msgstr "Monteringspunkt:"
 
@@ -170,7 +170,7 @@ msgstr "FAT32 (Windows 98 og nyere)"
 msgid "NTFS (Windows NT & 2000)"
 msgstr "NTFS (Windows NT & 2000)"
 
-#: interfaces/disks.glade.h:35 interfaces/shares.glade.h:57
+#: interfaces/disks.glade.h:35 interfaces/shares.glade.h:58
 msgid "Choose a mount point"
 msgstr "Vælg et monteringspunkt"
 
@@ -241,8 +241,8 @@ msgid "Existing:"
 msgstr "Eksisterende:"
 
 #: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:28
-#: interfaces/nameresolution.glade.h:48 interfaces/shares.glade.h:32
-#: interfaces/shares.glade.h:40 interfaces/shares.glade.h:43
+#: interfaces/nameresolution.glade.h:48 interfaces/shares.glade.h:33
+#: interfaces/shares.glade.h:41 interfaces/shares.glade.h:44
 #: interfaces/time.glade.h:13
 msgid "Add"
 msgstr "Tilføj"
@@ -374,157 +374,165 @@ msgid "Shares Administration"
 msgstr "Administration af delte resurser"
 
 #: interfaces/shares.glade.h:8
+msgid ""
+"Imports are directories wich reside in other computers and are accessible "
+"through the network."
+msgstr ""
+"Importer er kataloger som ligger på andre maskiner og er tilgængelige "
+"via nettet."
+
+#: interfaces/shares.glade.h:9
 msgid "Location"
 msgstr "Placering"
 
-#: interfaces/shares.glade.h:12
+#: interfaces/shares.glade.h:13
 msgid "User"
 msgstr "Bruger"
 
-#: interfaces/shares.glade.h:13
+#: interfaces/shares.glade.h:14
 msgid "Password"
 msgstr "Adgangskode"
 
-#: interfaces/shares.glade.h:14
+#: interfaces/shares.glade.h:15
 msgid "Mount Point"
 msgstr "Monteringspunkt"
 
-#: interfaces/shares.glade.h:15
+#: interfaces/shares.glade.h:16
 msgid "Import"
 msgstr "Importér"
 
-#: interfaces/shares.glade.h:17
+#: interfaces/shares.glade.h:18
 msgid "New import"
 msgstr "Ny import"
 
-#: interfaces/shares.glade.h:18
+#: interfaces/shares.glade.h:19
 msgid "Mount this import"
 msgstr "Montér denne import"
 
-#: interfaces/shares.glade.h:21
+#: interfaces/shares.glade.h:22
 msgid "Remember this import between boots"
 msgstr "Husk denne import mellem opstarter"
 
-#: interfaces/shares.glade.h:22
+#: interfaces/shares.glade.h:23
 msgid "Imports"
 msgstr "Importér"
 
-#: interfaces/shares.glade.h:23
+#: interfaces/shares.glade.h:24
 msgid "Name"
 msgstr "Navn"
 
-#: interfaces/shares.glade.h:24
+#: interfaces/shares.glade.h:25
 msgid "Path"
 msgstr "Sti"
 
 #: interfaces/memory.glade.h:11 interfaces/memory.glade.h:27
-#: interfaces/memory.glade.h:36 interfaces/shares.glade.h:25
-#: interfaces/shares.glade.h:31
+#: interfaces/memory.glade.h:36 interfaces/shares.glade.h:26
+#: interfaces/shares.glade.h:32
 msgid "Enabled"
 msgstr "Aktiveret"
 
-#: interfaces/shares.glade.h:26 interfaces/shares.glade.h:62
+#: interfaces/shares.glade.h:27 interfaces/shares.glade.h:63
 msgid "Browseable"
 msgstr "Læsbar"
 
-#: interfaces/shares.glade.h:27 interfaces/shares.glade.h:63
+#: interfaces/shares.glade.h:28 interfaces/shares.glade.h:64
 msgid "Public"
 msgstr "Offentlig"
 
-#: interfaces/shares.glade.h:28 interfaces/shares.glade.h:64
+#: interfaces/shares.glade.h:29 interfaces/shares.glade.h:65
 msgid "Writable"
 msgstr "Skrivbar"
 
-#: interfaces/shares.glade.h:29
+#: interfaces/shares.glade.h:30
 msgid "Comment"
 msgstr "Kommentar"
 
-#: interfaces/shares.glade.h:30 interfaces/shares.glade.h:42
+#: interfaces/shares.glade.h:31 interfaces/shares.glade.h:43
 msgid "Export"
 msgstr "Eksportér"
 
-#: interfaces/memory.glade.h:16 interfaces/shares.glade.h:33
-#: interfaces/shares.glade.h:41 interfaces/shares.glade.h:44
+#: interfaces/memory.glade.h:16 interfaces/shares.glade.h:34
+#: interfaces/shares.glade.h:42 interfaces/shares.glade.h:45
 msgid "Remove"
 msgstr "Fjern"
 
-#: interfaces/shares.glade.h:35
+#: interfaces/shares.glade.h:36
 msgid "SMB exports"
 msgstr "SMB-eksporter"
 
-#: interfaces/shares.glade.h:36
+#: interfaces/shares.glade.h:37
 msgid "Export/clients"
 msgstr "Eksport/klienter"
 
-#: interfaces/shares.glade.h:37
+#: interfaces/shares.glade.h:38
 msgid "Allow writing"
 msgstr "Tillad skriving"
 
-#: interfaces/shares.glade.h:38
+#: interfaces/shares.glade.h:39
 msgid "Client"
 msgstr "Klient"
 
-#: interfaces/shares.glade.h:46
+#: interfaces/shares.glade.h:47
 msgid "NFS exports"
 msgstr "NFS-eksporter"
 
-#: interfaces/shares.glade.h:48
+#: interfaces/shares.glade.h:49
 msgid "Import Settings"
 msgstr "Indstillinger for import"
 
-#: interfaces/shares.glade.h:50
+#: interfaces/shares.glade.h:51
 msgid "Host:"
 msgstr "Vært:"
 
-#: interfaces/memory.glade.h:38 interfaces/shares.glade.h:51
+#: interfaces/memory.glade.h:38 interfaces/shares.glade.h:52
 msgid "Path:"
 msgstr "Sti:"
 
-#: interfaces/shares.glade.h:52
+#: interfaces/shares.glade.h:53
 msgid "User:"
 msgstr "Bruger:"
 
-#: interfaces/shares.glade.h:53
+#: interfaces/shares.glade.h:54
 msgid "Password:"
 msgstr "Adgangskode:"
 
-#: interfaces/shares.glade.h:55
+#: interfaces/shares.glade.h:56
 msgid "SMB"
 msgstr "SMB"
 
-#: interfaces/shares.glade.h:56
+#: interfaces/shares.glade.h:57
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.h:58
+#: interfaces/shares.glade.h:59
 msgid "SMB Export Settings"
 msgstr "Indstillinger for SMB-eksport"
 
-#: interfaces/shares.glade.h:59 interfaces/shares.glade.h:66
+#: interfaces/shares.glade.h:60 interfaces/shares.glade.h:67
 msgid "Local path:"
 msgstr "Lokal sti:"
 
-#: interfaces/shares.glade.h:60
+#: interfaces/shares.glade.h:61
 msgid "Export name:"
 msgstr "Eksportnavn:"
 
-#: interfaces/shares.glade.h:61 interfaces/users.glade.h:44
+#: interfaces/shares.glade.h:62 interfaces/users.glade.h:44
 msgid "Comment:"
 msgstr "Kommentar:"
 
-#: interfaces/shares.glade.h:65
+#: interfaces/shares.glade.h:66
 msgid "NFS Export Settings"
 msgstr "Indstillinger for NFS-eksport"
 
-#: interfaces/shares.glade.h:67
+#: interfaces/shares.glade.h:68
 msgid "NFS Client Settings"
 msgstr "Indstillinger for NFS-klient"
 
-#: interfaces/shares.glade.h:68
+#: interfaces/shares.glade.h:69
 msgid "Client pattern:"
 msgstr "Klientmønster:"
 
-#: interfaces/shares.glade.h:69
+#: interfaces/shares.glade.h:70
 msgid "Allow writing from these clients"
 msgstr "Tillad skriving fra disse klienter"
 
@@ -624,8 +632,8 @@ msgid ""
 "These are global values that will affect the creation of new users. They are "
 "only available when you click \"More Options\"."
 msgstr ""
-"Dette er globale værdier, som vil påvirke oprettelsen af nye brugere. De "
-"er kun tilstede når du klikker på 'Flere valgmuligheder'"
+"Dette er globale værdier, som vil påvirke oprettelsen af nye brugere. De er "
+"kun tilstede når du klikker på 'Flere valgmuligheder'"
 
 #: interfaces/users.glade.h:24
 msgid "System settings"
