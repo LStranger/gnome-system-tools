@@ -37,6 +37,7 @@
 /* --- Forward declarations of internal functions --- */
 
 
+static TzLocation *e_tz_map_location_from_point (ETzMap *tzmap, EMapPoint *point);
 static gboolean flash_selected_point (gpointer data);
 static gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer data);
 static gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data);
@@ -81,6 +82,43 @@ TzDB *e_tz_map_get_tz_db (ETzMap *tzmap)
 }
 
 
+void e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
+{
+	TzLocation *tz_loc = NULL;
+	TzDB *tz_db;
+	GPtrArray *locs;
+	double l_longitude = 0.0, l_latitude = 0.0;
+	int i;
+
+	tz_db = e_tz_map_get_tz_db (tzmap);
+	locs = tz_get_locations (tz_db);
+
+	for (i = 0; i < locs->len; i++)
+	{
+		tz_loc = g_ptr_array_index (locs, i);
+
+		if (!strcmp(tz_location_get_zone(tz_loc), name))
+		{
+			tz_location_get_position (tz_loc,
+						  &l_longitude, &l_latitude);
+			break;
+		}
+	}
+
+	tzmap->point_selected =
+	  e_map_get_closest_point (tzmap->map, l_longitude, l_latitude, FALSE);
+
+	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (tool_widget_get ("location_combo"))->entry),
+			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
+}
+
+
+gchar *e_tz_map_get_selected_tz_name (ETzMap *tzmap)
+{
+	return (gtk_entry_get_text (GTK_ENTRY (GTK_COMBO (tool_widget_get ("location_combo"))->entry)));
+}
+
+
 static TzLocation *e_tz_map_location_from_point (ETzMap *tzmap, EMapPoint *point)
 {
 	TzLocation *tz_loc = NULL;
@@ -108,7 +146,7 @@ static TzLocation *e_tz_map_location_from_point (ETzMap *tzmap, EMapPoint *point
 			break;
 		}
 	}
-	
+
 	return (tz_loc);
 }
 
@@ -188,6 +226,8 @@ static gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer da
 		
 		gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (tool_widget_get ("location_combo"))->entry),
 				    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
+		
+		tool_set_modified (TRUE);
 	}
 	
 	return TRUE;

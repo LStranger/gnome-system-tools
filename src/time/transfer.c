@@ -9,6 +9,8 @@
 
 #include "transfer.h"
 #include "tz.h"
+#include "e-map/e-map.h"
+#include "tz-map.h"
 
 
 static void transfer_string_spin_xml_to_gui(TransTree *trans_tree, xmlNodePtr root)
@@ -145,7 +147,8 @@ static void transfer_timezone_xml_to_gui(xmlNodePtr root)
   if (!node) return;
   
   s = xml_element_get_content(node);
-/*  activate_zone_by_name(s); */  /* FIXME */
+  e_tz_map_set_tz_from_name (tzmap, s);
+  
   free(s);
 }
 
@@ -157,16 +160,7 @@ static void transfer_timezone_gui_to_xml(xmlNodePtr root)
   node = xml_element_find_first(root, "timezone");
   if (!node) node = xml_element_add(root, "timezone");
 
-  /* FIXME */
-  
-#if 0
-  
-  if (active_zone != -1)
-    xml_element_set_content(node, canvas_zones[active_zone].name);
-  else
-    xml_element_destroy(node);
-
-#endif
+  xml_element_set_content(node, e_tz_map_get_selected_tz_name (tzmap));
 }
 
 
