@@ -28,9 +28,62 @@
 
 #include "global.h"
 
+typedef struct _XstNetworkInterfaceDescription XstNetworkInterfaceDescription;
+
+struct XstNetworkInterfaceDescription {
+	const gchar * description;
+	XstConnectionType type;
+	const gchar * icon;
+	const gchar * name;
+}
+
+static const XstNetworkInterfaceDescription xst_interfaces [] = {
+	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "networking.png",  "eth"   },
+	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "networking.png",  "wvlan" },
+	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xmp",      "ppp"   },
+	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"    },
+	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "networking.png",  "plip"  },
+	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "networking.png",  NULL},
+	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "networking.png",  NULL},
+};
+
+#if 0
+	typedef struct {
+		gchar *name;
+		XstConnectionType type;
+	} NameType;
+
+	NameType table[] = {
+		{ "eth", CONNECTION_ETH },
+		{ "wvlan", CONNECTION_WVLAN },
+		{ "ppp", CONNECTION_PPP },
+		{ "lo", CONNECTION_LO },
+		{ "plip", CONNECTION_PLIP },
+		{ NULL, CONNECTION_OTHER }
+	};
+
+
+ConnectionType xst_net_interfaces_types[] = {
+	CONNECTION_ETH,
+	CONNECTION_WVLAN,
+	CONNECTION_PPP,
+	CONNECTION_LO,
+	CONNECTION_PLIP,
+	CONNECTION_OTHER,
+	CONNECTION_UNKNOWN
+};
+gchar *icons [CONNECTION_LAST] = {
+	"networking.png",
+	"16_ethernet.xpm",
+	"gnome-laptop.png",
+	"16_ppp.xpm",
+	"networking.png",
+	"networking.png"
+};
+#endif
+
 
 /* sigh more libglade callbacks */
-
 static void on_status_enabled_toggled (GtkWidget *w, Connection *cxn);
 static void on_connection_ok_clicked (GtkWidget *w, Connection *cxn);
 static void on_connection_cancel_clicked (GtkWidget *w, Connection *cxn);
@@ -400,18 +453,20 @@ connection_set_modified (Connection *cxn, gboolean state)
 }
 
 static void
-load_icon (char *file, GdkPixmap **pixmap, GdkBitmap **mask)
+load_icon (const gchar *file, GdkPixmap **pixmap, GdkBitmap **mask)
 {
 	GdkPixbuf *pb, *pb2;
 	char *path;
 
 	path = g_concat_dir_and_file (PIXMAPS_DIR, file);
-	
 	pb = gdk_pixbuf_new_from_file (path);
-	g_free (path);
 
-	if (!pb)
+	if (!pb) {
+		g_warning ("Could not load pixmap %s\n", path);
+		g_free (path);
 		return;
+	}
+	g_free (path);
 	
 	pb2 = gdk_pixbuf_scale_simple (pb, 24, 24, GDK_INTERP_BILINEAR);
 	gdk_pixbuf_unref (pb);
@@ -423,15 +478,7 @@ load_icon (char *file, GdkPixmap **pixmap, GdkBitmap **mask)
 extern void
 connection_init_icons (void)
 {
-	ConnectionType i;
-	char *icons[CONNECTION_LAST] = {
-		"networking.png",
-		"connection-ethernet.png",
-		"gnome-laptop.png",
-		"connection-modem.png",
-		"networking.png",
-		"networking.png"
-	};
+	XstConnectionType i;
 
 	for (i = CONNECTION_OTHER; i < CONNECTION_LAST; i++)
 		load_icon (icons[i], &mini_pm[i], &mini_mask[i]);
@@ -490,28 +537,8 @@ add_connections_to_list (void)
 }*/
 
 static gchar *
-connection_description_from_type (ConnectionType type)
+connection_description_from_type (XstConnectionType type)
 {
-	gchar *descriptions[] = {
-		N_("Ethernet LAN card"),
-		N_("WaveLAN wireless LAN"),
-		N_("PPP: modem or transfer cable"),
-		N_("Loopback: virtual interface"),
-		N_("Parallel line"),
-		N_("Other type"),
-		N_("Unknown type")
-	};
-
-	ConnectionType types[] = {
-		CONNECTION_ETH,
-		CONNECTION_WVLAN,
-		CONNECTION_PPP,
-		CONNECTION_LO,
-		CONNECTION_PLIP,
-		CONNECTION_OTHER,
-		CONNECTION_UNKNOWN
-	};
-
 	gint i;
 
 	for (i = 0; types[i] != CONNECTION_UNKNOWN; i++)
@@ -558,7 +585,7 @@ connection_get_ppp_from_node (xmlNode *node, Connection *cxn)
 }
 
 Connection *
-connection_new_from_type_add (ConnectionType type, xmlNode *root)
+connection_new_from_type_add (XstConnectionType type, xmlNode *root)
 {
 	Connection *cxn;
 	
@@ -569,7 +596,7 @@ connection_new_from_type_add (ConnectionType type, xmlNode *root)
 }
 
 Connection *
-connection_new_from_type (ConnectionType type, xmlNode *root)
+connection_new_from_type (XstConnectionType type, xmlNode *root)
 {
 	Connection *cxn;
 
@@ -669,20 +696,6 @@ connection_new_from_node (xmlNode *node)
 Connection *
 connection_new_from_dev_name (char *dev_name, xmlNode *root)
 {
-	typedef struct {
-		gchar *name;
-		ConnectionType type;
-	} NameType;
-
-	NameType table[] = {
-		{ "eth", CONNECTION_ETH },
-		{ "wvlan", CONNECTION_WVLAN },
-		{ "ppp", CONNECTION_PPP },
-		{ "lo", CONNECTION_LO },
-		{ "plip", CONNECTION_PLIP },
-		{ NULL, CONNECTION_OTHER }
-	};
-
 	int i;
 
 	for (i = 0; table[i].name; i++)
