@@ -1,77 +1,44 @@
 pixmaps_DATA = \
-	48_wrench_logo.png       \
-	32_wrench_logo.png       \
 	16_ethernet.xpm          \
 	16_loopback.xpm          \
 	16_ppp.xpm               \
 	16_plip.xpm              \
 	computer.png             \
-	connection-active.xpm    \
 	connection-ethernet.png  \
-	connection-inactive.xpm  \
 	connection-modem.png     \
-	background.jpeg		 \
-	big-monitor.png		 \
 	boot.png                 \
 	debian.png               \
-	desktop_icons.png        \
-	disks.png                \
-	display.png              \
 	fedora.png		 \
 	font.png            	 \
 	freebsd.png              \
 	gentoo.png               \
-	gnome-laptop.png         \
-	gnome-light-on.png       \
-	gnome-light-off.png      \
-	gstdruidbg.png           \
-	hst.png                  \
-	init-anim-1.png          \
-	init-anim-2.png          \
-	init-anim-3.png          \
-	internet-share.png       \
-	internetsharing.png	 \
 	irda-16.png              \
 	irda-48.png              \
 	mandrake.png             \
-	memory.png               \
 	nameresolution.png       \
 	nameresolution_alias.png \
 	nameresolution_id.png    \
 	network.png              \
 	openna.png               \
-	panel_bottom_left.png	 \
-	panel_bottom_mid.png	 \
-	panel_bottom_right.png	 \
-	panel_top_left.png	 \
-	panel_top_mid.png	 \
-	panel_top_right.png	 \
-	passwd.png               \
 	pld.png                  \
 	plip-48.png              \
 	ppp.png                  \
-	print.png                \
 	reading.png              \
 	redhat.png               \
 	server.png               \
 	services.png		 \
 	settings.png             \
-	shares.png               \
 	slackware.png            \
 	suse.png                 \
 	talk-userlist.png        \
-	test-colors.png		 \
 	time.png                 \
 	timezone.png             \
 	turbolinux.png           \
 	unsupported-distro.png   \
 	users-groups.png         \
-	users_wrench.png         \
 	users.png                \
-	warning.png              \
 	wavelan-16.png           \
 	wavelan-48.png           \
-	world_map-960.png        \
-	ximian30.png
+	world_map-960.png 
 
 EXTRA_DIST = $(pixmaps_DATA)
