@@ -1,5 +1,10 @@
 2004-08-29  Carlos Garnacho Parro  <carlosg@gnome.org>
 
+	* tz.c: reverted some g_free()'s, stupid putenv doesn't like them
+	freed
+
+2004-08-29  Carlos Garnacho Parro  <carlosg@gnome.org>
+
 	* main.c, timeserv.c, transfer.c, tz.c: fixed some memleaks
 
 2004-08-20  Carlos Garnacho Parro  <garnacho@tuxerver.net>

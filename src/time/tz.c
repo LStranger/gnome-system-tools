@@ -176,8 +176,6 @@ tz_location_set_locally (TzLocation *loc)
 
 	str = g_strdup_printf ("TZ=%s", loc->zone);
 	putenv (str);
-	g_free (str);
-
 #if 0
 	curtime = time (NULL);
 	curzone = localtime (&curtime);
@@ -206,7 +204,6 @@ tz_info_from_location (TzLocation *loc)
 	
 	str = g_strdup_printf ("TZ=%s", loc->zone);
 	putenv (str);
-	g_free (str);
 	
 #if 0
 	tzset ();
