@@ -1,6 +1,17 @@
 2001-07-23  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* connection.c (on_ip_address_focus_out): minor style edit.
+	(connection_type_is_lan): helper.
+	Added IRLAN support all over the place.
+	(connection_default_gw_check_manual): IRLAN is same as
+	ETH and WVLAN.
+	(connection_default_gw_set_manual): same.
+	(connection_type_is_lan): same.
+	(connection_new_from_type): same.
+	(connection_validate): same.
+	(connection_empty_gui): Made eth case explicit. Added irlan.
+	(fill_ip): Renamed "blah" array (wtf?) to bootproto_labels.
+	Waiting for IRLAN icon to be produced. #3059 marked NOTABUG.
 
 2001-07-19  Joakim Ziegler  <joakim@ximian.com>
 

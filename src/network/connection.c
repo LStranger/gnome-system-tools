@@ -41,14 +41,15 @@ struct _XstNetworkInterfaceDescription {
 };
 
 static const XstNetworkInterfaceDescription xst_iface_desc [] = {
-	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "network.png",  "other_type"},
-	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth"   },
-	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "network.png",  "wvlan" },
-	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp"   },
-	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "16_plip.xpm",  "plip"  },
-	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"    },
-	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "network.png",  NULL},
-	{ NULL, XST_CONNECTION_UNKNOWN, NULL, NULL}
+	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "network.png",     "other_type" },
+	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth"        },
+	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "network.png",     "wvlan"      },
+	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp"        },
+	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "16_plip.xpm",     "plip"       },
+	{ N_("Infrared LAN"),                 XST_CONNECTION_IRLAN,   "network.png",     "irlan"      },
+	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"         },
+	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "network.png",     NULL         },
+	{ NULL,                               XST_CONNECTION_UNKNOWN, NULL,              NULL         }
 };
 
 
@@ -622,6 +623,7 @@ connection_default_gw_check_manual (XstConnection *cxn, gboolean ignore_enabled)
 	switch (cxn->type) {
 	case XST_CONNECTION_ETH:
 	case XST_CONNECTION_WVLAN:
+	case XST_CONNECTION_IRLAN:
 		if (cxn->ip_config == IP_MANUAL && (!cxn->gateway || !*cxn->gateway))
 			return XST_CONNECTION_ERROR_STATIC;
 		break;
@@ -679,6 +681,7 @@ connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
 	switch (cxn->type) {
 	case XST_CONNECTION_ETH:
 	case XST_CONNECTION_WVLAN:
+	case XST_CONNECTION_IRLAN:
 		if (cxn->ip_config == IP_MANUAL)
 			gateway = g_strdup (cxn->gateway);
 		break;
@@ -698,6 +701,15 @@ connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
 	gtk_object_set_data (GTK_OBJECT (tool), "gateway", gateway);
 }
 
+static gboolean
+connection_type_is_lan (XstConnectionType type)
+{
+	return (type == XST_CONNECTION_ETH ||
+		type == XST_CONNECTION_WVLAN ||
+		type == XST_CONNECTION_IRLAN);
+
+}
+
 static XstConnection *
 connection_default_gw_find_static (XstTool *tool)
 {
@@ -710,8 +722,7 @@ connection_default_gw_find_static (XstTool *tool)
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
 
 		/* Try fo find an active ethernet or wavelan connection with a static gateway definded */
-		if (cxn->enabled &&
-		    (cxn->type == XST_CONNECTION_ETH || cxn->type == XST_CONNECTION_WVLAN) &&
+		if (cxn->enabled && connection_type_is_lan (cxn->type) &&
 		    (cxn->ip_config == IP_MANUAL) &&
 		    (cxn->gateway && *cxn->gateway))
 			return cxn;
@@ -987,6 +998,9 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	case XST_CONNECTION_WVLAN:
 		cxn->dev = g_strdup ("wvlan0");
 		break;
+	case XST_CONNECTION_IRLAN:
+		cxn->dev = g_strdup ("irlan0");
+		break;
 	case XST_CONNECTION_PPP:
 		cxn->user = TRUE;
 		cxn->autoboot = FALSE;
@@ -1212,6 +1226,7 @@ connection_validate (XstConnection *cxn)
 	switch (cxn->type) {
 	case XST_CONNECTION_ETH:
 	case XST_CONNECTION_WVLAN:
+	case XST_CONNECTION_IRLAN:
 	case XST_CONNECTION_UNKNOWN:
 		if (cxn->ip_config == IP_MANUAL &&
 		    (strempty (cxn->address) ||
@@ -1271,6 +1286,8 @@ connection_empty_gui (XstConnection *cxn)
 	case XST_CONNECTION_PLIP:
 		empty_ptp (cxn);
 		break;
+	case XST_CONNECTION_ETH:
+	case XST_CONNECTION_IRLAN:
 	default:
 		empty_ip (cxn);
 		break;
@@ -1455,7 +1472,7 @@ fill_ip (XstConnection *cxn)
 	GtkWidget *menu, *menuitem, *omenu;
 	IPConfigType i;
 
-	char *blah[] = {
+	char *bootproto_labels[] = {
 		N_("Manual"),
 		N_("DHCP"),
 		N_("BOOTP")
@@ -1465,7 +1482,7 @@ fill_ip (XstConnection *cxn)
 
 	menu = gtk_menu_new ();
 	for (i = 0; i < 3; i++) {
-		menuitem = gtk_menu_item_new_with_label (_(blah[i]));
+		menuitem = gtk_menu_item_new_with_label (_(bootproto_labels[i]));
 		gtk_object_set_user_data (GTK_OBJECT (menuitem), cxn);
 		gtk_signal_connect (GTK_OBJECT (menuitem), "activate",
 				    GTK_SIGNAL_FUNC (ip_config_menu_cb),
@@ -1653,6 +1670,7 @@ connection_updatedns_supported (XstConnection *cxn)
 	case XST_CONNECTION_WVLAN:
 	case XST_CONNECTION_PPP:
 	case XST_CONNECTION_PLIP:
+	case XST_CONNECTION_IRLAN:
 		return TRUE;
 	case XST_CONNECTION_OTHER:
 	case XST_CONNECTION_LO:
