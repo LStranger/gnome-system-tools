@@ -594,7 +594,10 @@ connection_iter (GstConnection *cxn, GtkTreeIter *iter)
 	while (valid) {
 		gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &c, -1);
 
-		if (!strcmp (cxn->file, c->file))
+		/* we've got two possibilities here, cxn->may be NULL, in such case
+		 * we need to compare with the interface */
+		if (((cxn->file != NULL) && (strcmp (cxn->file, c->file) == 0)) ||
+		    ((cxn->file == NULL) && (strcmp (cxn->dev, c->dev) == 0)))
 			return TRUE;
 
 		valid = gtk_tree_model_iter_next (model, iter);
@@ -685,7 +688,10 @@ connection_list_remove (GstConnection *cxn)
 	valid = gtk_tree_model_get_iter_first (model, &iter);
 	while (valid) {
 		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &c, -1);
-		if (!strcmp (c->dev, cxn->dev)) {
+
+		/* cxn->file may be NULL if we try to delete a recently created interface */
+		if (((cxn->file != NULL) && (strcmp (c->file, cxn->file) == 0)) ||
+		    ((cxn->file == NULL) && (strcmp (c->dev, cxn->dev) == 0))) {
 			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 			break;
 		}
