@@ -1285,11 +1285,12 @@ connection_config_save (XstConnection *cxn)
 static void
 on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
 {
-	if (connection_config_save (cxn))
-		gtk_widget_destroy (cxn->window);
-		
-	if (cxn->modified)
+	if (cxn->modified) {
+		if (connection_config_save (cxn))
+			gtk_widget_destroy (cxn->window);
 		cxn->creating = FALSE;
+	} else
+		gtk_widget_destroy (cxn->window);
 }
 
 static void
@@ -1328,6 +1329,7 @@ on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, XstConnec
 static void
 on_connection_modified (GtkWidget *w, XstConnection *cxn)
 {
+	g_warning ("si");
 	connection_set_modified (cxn, TRUE);
 }
 
@@ -1591,6 +1593,26 @@ connection_configure (XstConnection *cxn)
 	gtk_widget_show (cxn->window);
 }
 
+static gboolean
+connection_updatedns_supported (XstConnection *cxn)
+{
+	switch (cxn->type) {
+	case XST_CONNECTION_ETH:
+	case XST_CONNECTION_WVLAN:
+	case XST_CONNECTION_PPP:
+	case XST_CONNECTION_PLIP:
+		return TRUE;
+	case XST_CONNECTION_OTHER:
+	case XST_CONNECTION_LO:
+	case XST_CONNECTION_UNKNOWN:
+	case XST_CONNECTION_LAST:
+	default:
+		return FALSE;
+	}
+
+	return FALSE;
+}
+
 void
 connection_save_to_node (XstConnection *cxn, xmlNode *root)
 {
@@ -1609,7 +1631,8 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 	connection_xml_save_boolean_to_node (node, "user", cxn->user);
 	connection_xml_save_boolean_to_node (node, "auto", cxn->autoboot);
 	connection_xml_save_boolean_to_node (node, "enabled", cxn->enabled);
-	connection_xml_save_boolean_to_node (node, "update_dns", cxn->update_dns);
+	if (connection_updatedns_supported (cxn))
+		connection_xml_save_boolean_to_node (node, "update_dns", cxn->update_dns);
 
 	/* TCP/IP general paramaters */
 	connection_xml_save_str_to_node (node, "address", cxn->address);

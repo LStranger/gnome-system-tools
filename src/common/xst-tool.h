@@ -123,9 +123,11 @@ void         xst_tool_load_try            (XstTool *tool);
 
 /* All undefined arguments in these directive functions must be (const gchar *) type.
    They will become arguments in the directive line passed to the backend. Last arg must be NULL. */
-xmlDoc      *xst_tool_run_get_directive   (XstTool *tool, const gchar *directive, ...);
+xmlDoc      *xst_tool_run_get_directive   (XstTool *tool, const gchar *report_sign,
+					   const gchar *directive, ...);
 /* xml can be NULL, in which case no XML will be sent to the backend. */
-xmlDoc      *xst_tool_run_set_directive   (XstTool *tool, xmlDoc *xml, const gchar *directive, ...);
+xmlDoc      *xst_tool_run_set_directive   (XstTool *tool, xmlDoc *xml,
+					   const gchar *report_sign, const gchar *directive, ...);
 
 void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 void         xst_tool_set_close_func      (XstTool *tool, XstCloseFunc close_cb, gpointer data);

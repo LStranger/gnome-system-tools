@@ -1311,6 +1311,8 @@ user_account_save (UserAccount *account)
 	gchar *buf;
 	xmlNodePtr node = account->node;
 
+	account->modified = FALSE;
+
 	if (account->new)
 		node = account->node = user_add_blank_xml (account->node);
 	

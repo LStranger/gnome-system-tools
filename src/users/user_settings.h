@@ -33,6 +33,7 @@ typedef struct {
 	GtkWidget       *top;
 	UserAccount     *account;
 	GladeXML        *xml;
+	gboolean         allow_modify;
 
 	/* Basic settings frame */
 	GtkWidget       *basic_frame;
@@ -49,6 +50,7 @@ typedef struct {
 	GtkWidget       *advanced;
 	GtkEntry        *home;
 	GtkCombo        *shell;
+	GtkEntry        *shell_entry;
 	GtkSpinButton   *uid;
 
 	/* Profile selection box */
@@ -60,6 +62,7 @@ typedef struct {
 	GtkWidget       *group_box;
 	GtkWidget       *group_extra;
 	GtkCombo        *group;
+	GtkEntry        *group_entry;
 	GtkCList        *all;
 	GtkCList        *member;
 	GtkWidget       *add;

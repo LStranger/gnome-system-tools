@@ -230,63 +230,72 @@ get_group_list (gchar *field, xmlNodePtr user_node)
 }
 
 static void
+user_account_set_modified (GtkWidget *w, gpointer data)
+{
+	UserAccountGui *gui;
+
+	gui = (UserAccountGui *) data;
+	if (gui->allow_modify)
+		gui->account->modified = TRUE;
+}
+
+static void
 user_account_connect_signals (UserAccountGui *gui)
 {
-	gtk_signal_connect (GTK_OBJECT (gui->profile_button), "clicked",
-			    GTK_SIGNAL_FUNC (profile_table_run), NULL);
-	
-	gtk_signal_connect (GTK_OBJECT (gui->add), "clicked",
-			    GTK_SIGNAL_FUNC (user_account_gui_add), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->remove), "clicked",
-			    GTK_SIGNAL_FUNC (user_account_gui_remove), gui);
+	struct {
+		void *obj;
+		gchar *signal;
+		void *func;
+		void *data;
+		gboolean modifies;
+	} table[] = {
+		{ gui->profile_button, "clicked",      profile_table_run,              NULL, FALSE },
+		{ gui->add,            "clicked",      user_account_gui_add,           gui,  TRUE },
+		{ gui->remove,         "clicked",      user_account_gui_remove,        gui,  TRUE },
+		{ gui->all,            "select_row",   user_account_gui_all_select,    gui,  FALSE },
+		{ gui->all,            "unselect_row", user_account_gui_all_select,    gui,  FALSE },
+		{ gui->member,         "select_row",   user_account_gui_member_select, gui,  FALSE },
+		{ gui->member,         "unselect_row", user_account_gui_member_select, gui,  FALSE },
+		{ gui->pwd_manual,     "toggled",      user_account_passwd_toggled,    gui,  TRUE },
+		{ gui->pwd_random,     "toggled",      user_account_passwd_toggled,    gui,  TRUE },
+		{ gui->pwd_random_new, "clicked",      user_account_passwd_random_new, gui,  TRUE },
+		{ gui->pwd1,           "changed",      user_account_passwd_changed,    gui,  TRUE },
+		{ gui->pwd2,           "changed",      user_account_passwd_changed,    gui,  TRUE },
+		{ gui->name,           "activate",     user_account_grab_focus,        gui->comment, TRUE },
+		{ gui->comment,        "activate",     user_account_grab_focus,        gui->office, TRUE },
+		{ gui->office,         "activate",     user_account_grab_focus,        gui->wphone, TRUE },
+		{ gui->wphone,         "activate",     user_account_grab_focus,        gui->hphone, TRUE },
+		{ gui->pwd1,           "activate",     user_account_grab_focus,        gui->pwd2, FALSE },
+		{ gui->uid,            "activate",     user_account_grab_focus,        gui->home, TRUE },
+		{ gui->comment,        "insert-text",  user_account_comment_changed,   gui,  TRUE },
+		{ gui->office,         "insert-text",  user_account_comment_changed,   gui,  TRUE },
+		{ gui->wphone,         "insert-text",  user_account_comment_changed,   gui,  TRUE },
+		{ gui->hphone,         "insert-text",  user_account_comment_changed,   gui,  TRUE },
 
-	gtk_signal_connect (GTK_OBJECT (gui->all), "select_row",
-			    GTK_SIGNAL_FUNC (user_account_gui_all_select), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->all), "unselect_row",
-			    GTK_SIGNAL_FUNC (user_account_gui_all_select), gui);
+		{ gui->group_entry,    NULL,           NULL,                           NULL, TRUE },
+		{ gui->min,            NULL,           NULL,                           NULL, TRUE },
+		{ gui->max,            NULL,           NULL,                           NULL, TRUE },
+		{ gui->days,           NULL,           NULL,                           NULL, TRUE },
+		{ gui->profile_menu,   NULL,           NULL,                           NULL, TRUE },
+		{ gui->shell_entry,    NULL,           NULL,                           NULL, TRUE },
+		{ gui->home,           NULL,           NULL,                           NULL, TRUE },
+		{ NULL, NULL, NULL, NULL, FALSE }
+	};
+	gint i;
 
-	gtk_signal_connect (GTK_OBJECT (gui->member), "select_row",
-			    GTK_SIGNAL_FUNC (user_account_gui_member_select), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->member), "unselect_row",
-			    GTK_SIGNAL_FUNC (user_account_gui_member_select), gui);
-
-	gtk_signal_connect (GTK_OBJECT (gui->pwd_manual), "toggled",
-			    GTK_SIGNAL_FUNC (user_account_passwd_toggled), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->pwd_random), "toggled",
-			    GTK_SIGNAL_FUNC (user_account_passwd_toggled), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->pwd_random_new), "clicked",
-			    GTK_SIGNAL_FUNC (user_account_passwd_random_new), gui);
-
-	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "changed",
-			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
-	gtk_signal_connect (GTK_OBJECT (gui->pwd2), "changed",
-			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
-
-	gtk_signal_connect (GTK_OBJECT (gui->name), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->comment);
-	gtk_signal_connect (GTK_OBJECT (gui->comment), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->office);
-	gtk_signal_connect (GTK_OBJECT (gui->office), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->wphone);
-	gtk_signal_connect (GTK_OBJECT (gui->wphone), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->hphone);
-	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->pwd2);
-	gtk_signal_connect (GTK_OBJECT (gui->uid), "activate",
-			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->home);
-	
-	gtk_signal_connect (GTK_OBJECT (gui->comment), "insert-text",
-			    GTK_SIGNAL_FUNC (user_account_comment_changed),
-			    (gpointer) gui);
-	gtk_signal_connect (GTK_OBJECT (gui->office), "insert-text",
-			    GTK_SIGNAL_FUNC (user_account_comment_changed),
-			    (gpointer) gui);
-	gtk_signal_connect (GTK_OBJECT (gui->wphone), "insert-text",
-			    GTK_SIGNAL_FUNC (user_account_comment_changed),
-			    (gpointer) gui);
-	gtk_signal_connect (GTK_OBJECT (gui->hphone), "insert-text",
-			    GTK_SIGNAL_FUNC (user_account_comment_changed),
-			    (gpointer) gui);	
+	for (i = 0; table[i].obj; i++) {
+		if (table[i].signal)
+			gtk_signal_connect (GTK_OBJECT (table[i].obj), table[i].signal,
+					    GTK_SIGNAL_FUNC (table[i].func), table[i].data);
+		if (table[i].modifies) {
+			if (gtk_signal_lookup ("changed", GTK_OBJECT_TYPE (GTK_OBJECT (table[i].obj))))
+				gtk_signal_connect (GTK_OBJECT (table[i].obj), "changed",
+						    user_account_set_modified, gui);
+			else if (gtk_signal_lookup ("clicked", GTK_OBJECT_TYPE (GTK_OBJECT (table[i].obj))))
+				gtk_signal_connect (GTK_OBJECT (table[i].obj), "clicked",
+						    user_account_set_modified, gui);
+		}
+	}
 }
 
 UserAccountGui *
@@ -301,6 +310,7 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->account = account;
 	gui->xml = glade_xml_new (tool->glade_path, NULL);
 	gui->top = parent;
+	gui->allow_modify = TRUE;
 
 	gui->basic_frame = glade_xml_get_widget (gui->xml, "user_settings_basic");
 	gui->name    = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_name"));
@@ -311,6 +321,7 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->hphone  = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_hphone"));
 	gui->home    = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_home"));
 	gui->shell   = GTK_COMBO (glade_xml_get_widget (gui->xml, "user_settings_shell"));
+	gui->shell_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_shell_entry"));
 	gui->uid     = GTK_SPIN_BUTTON (glade_xml_get_widget (gui->xml, "user_settings_uid"));
 	gui->advanced = glade_xml_get_widget (gui->xml, "user_settings_advanced");
 	gui->profile_box = glade_xml_get_widget (gui->xml, "user_settings_profile_box");
@@ -320,6 +331,7 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->group_box = glade_xml_get_widget (gui->xml, "user_settings_group_box");
 	gui->group_extra = glade_xml_get_widget (gui->xml, "user_settings_group_extra");
 	gui->group   = GTK_COMBO (glade_xml_get_widget (gui->xml, "user_settings_group"));
+	gui->group_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_group_entry"));
 	gui->all     = GTK_CLIST (glade_xml_get_widget (gui->xml, "user_settings_gall"));
 	gui->member  = GTK_CLIST (glade_xml_get_widget (gui->xml, "user_settings_gmember"));
 	gui->add     = glade_xml_get_widget (gui->xml, "user_settings_add");
@@ -547,6 +559,8 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 	GtkWidget *notebook;
 	GList *users, *items;
 	UserAccount *account = gui->account;
+
+	gui->allow_modify = FALSE;
 	
 	user_account_shells_setup (gui);
 	user_account_groups_setup (gui->group, account->node);
@@ -609,6 +623,8 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 		gtk_widget_show (notebook);
 		gtk_container_add (GTK_CONTAINER (top), notebook);
 	}
+
+	gui->allow_modify = TRUE;
 }
 
 static gchar**

@@ -637,7 +637,7 @@ xst_tool_kill_backend (XstTool *tool, gpointer data)
 	if (tool->backend_pid < 0)
 		return;
 
-	xst_tool_run_set_directive (tool, NULL, "end", NULL);
+	xst_tool_run_set_directive (tool, NULL, _("Closing tool."), "end", NULL);
 	waitpid (tool->backend_pid, NULL, 0);
 }
 
@@ -721,7 +721,7 @@ xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 }
 
 xmlDoc *
-xst_tool_run_get_directive (XstTool *tool, const gchar *directive, ...)
+xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar *directive, ...)
 {
 	va_list ap;
 	xmlDoc *xml;
@@ -747,7 +747,7 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *directive, ...)
 		tool->xml_document = g_string_new ("");
 	
 	if (location_id == NULL)
-		report_progress (tool, _("Scanning your system configuration."));
+		report_progress (tool, _(report_sign));
 
 	xml = xst_tool_read_xml_from_backend (tool);
 	
@@ -755,7 +755,8 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *directive, ...)
 }
 
 xmlDoc *
-xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml, const gchar *directive, ...)
+xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
+			    const gchar *report_sign, const gchar *directive, ...)
 {
 	va_list ap;
 	FILE *f;
@@ -779,7 +780,7 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml, const gchar *directive, 
 	tool->report_hook_type = XST_REPORT_HOOK_SAVE;
 
 	if (location_id == NULL)
-		report_progress (tool, _("Updating your system configuration."));
+		report_progress (tool, _(report_sign));
 
 	/* This is tipicaly to just read the end of request string,
 	   but a set directive may return some XML too. */
@@ -803,7 +804,8 @@ xst_tool_load (XstTool *tool)
 	if (tool->run_again)
 		return TRUE;
 
-	tool->config = xst_tool_run_get_directive (tool, "get", NULL);
+	tool->config = xst_tool_run_get_directive (tool, _("Scanning your system configuration."),
+						   "get", NULL);
 	
 	if (tool->config)
 		gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_GUI]);
@@ -858,7 +860,8 @@ xst_tool_save (XstTool *tool)
 		return TRUE;
 	}
 
-	xst_tool_run_set_directive (tool, tool->config, "set", NULL);
+	xst_tool_run_set_directive (tool, tool->config, _("Updating your system configuration."),
+				    "set", NULL);
 
 	xst_dialog_thaw_visible (tool->main_dialog);
 	return TRUE;  /* FIXME: Determine if it really worked. */

@@ -41,6 +41,7 @@ typedef struct
 typedef struct {
 	xmlNodePtr node;
 	gboolean new;
+	gboolean modified;
 	
 	gchar *name;
 	gchar **comment;

@@ -1,3 +1,15 @@
+Sat Jul 14 12:04:31 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* user-account-editor.c (ok_clicked): Only user_account_save
+	if the account's GUI data has been modified.
+
+	* user_settings.c (user_account_connect_signals): Changed code
+	to a big table. Some widgets are connected to "clicked" or
+	"insert-text" to flag if the gui data has been modified.
+	(user_account_set_modified): Callback that sets this.
+	(user_account_gui_setup): Disable allow_mofify so that the
+	modify flag is not set when filling the dialog in.
+
 2001-07-14  Chema Celorio  <chema@celorio.com>
 
 	* main.c (main): set the usize of the window. This is not optimal

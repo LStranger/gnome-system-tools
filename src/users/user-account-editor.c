@@ -75,8 +75,12 @@ ok_clicked (GtkWidget *widget, gpointer data)
 {
 	UserAccountEditor *editor = data;
 
-	if (user_account_gui_save (editor->gui)) {
-		user_account_save (editor->gui->account);
+	if (editor->gui->account->modified) {
+		if (user_account_gui_save (editor->gui)) {
+			user_account_save (editor->gui->account);
+			gtk_widget_destroy (GTK_WIDGET (editor));
+		}
+	} else {
 		gtk_widget_destroy (GTK_WIDGET (editor));
 	}
 }
