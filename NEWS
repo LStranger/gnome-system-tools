@@ -1,3 +1,87 @@
+XST - 0.4
+---------
+
+The Ximian Setup Tools 0.4.0 codenamed "Perris Valley" has been released.
+
+The Ximian Setup Tools are a set of cross plataform configration utilities
+for Linux and other Unices They are divided in a front end and backend so
+that the GUI is identical across linux distributions and unix variants.
+The are a replacement for the distribution/system specific configurations
+tools with a user friendly interface in mind.
+
+The current tools include :
+
+- Network admin
+   
+   Allows you to configure your :
+   - hostname
+   - samba hostname and workgroup
+   - DNS servers
+   - search domains
+   - hosts (/etc/hosts)
+   - Network interfaces
+        - ppp 
+        - ethernet
+        - slip
+        - wavelan (limited support)
+  	
+- Time admin
+
+   Allows you to configure your :
+   - Date & Time
+   - Timezone
+   - NTPD servers
+   
+- Users admin
+
+    Allows you to manage :
+    - Users
+        - username / full name
+        - password
+        - home dir
+        - shell
+        - groups
+    - Groups
+    
+- Boot admin
+
+     Allows you to set :
+     - Default boot partition
+     - Partition type and label
+     - Timeout
+     - Kernel image
+     - Kernel extra parameters (append)
+     - adding or deleting partitions from the boot manager
+     
+- Shares admin
+
+- Disks admin
+
+- Memory admin
+     
+     
+     
+Verification matrix
+------------------
+
+This is a matrix describing the current status of tool platform/distribution
+support. To the best of our knowledge.
+
+        Red Hat    Debian  SuSE     MDK    PPC  Turbo  Cal  Yel  Sol    HPUX
+        6.0 6.2    2.1     6.3 7.0  6.1    any  6.0    2.4  1.2  7.0    10.0
+          6.1 7.0    2.2     6.4      7.0                          8.0    11.0
+
+Boot     ? + + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Disks    ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Memory   ? ? + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Network  ? + + +    - -     - - -    ? ?    ?    ?      ?    ?    - -     - -
+Shares   ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Time     ? + + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Users    ? + + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+
+
+
+
 XST - 0.3
 ---------
 
