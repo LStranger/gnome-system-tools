@@ -4,4 +4,4 @@ SUBDIRS = intl macros interfaces backends archiver pixmaps src doc po
 
 EXTRA_DIST = \
 	HACKING \
-	helix-setup-tools.spec
+	ximian-setup-tools.spec

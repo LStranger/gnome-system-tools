@@ -5,7 +5,7 @@ AC_INIT(configure.in)
 if test "x${prefix}" != "x/usr" || test "x${sysconfdir}" != "x/etc"
 then
   echo
-  echo "*** The Helix Setup Tools may not work with the default installation"
+  echo "*** The Ximian Setup Tools may not work with the default installation"
   echo "*** paths. If you're running Linux, and you installed most of the other"
   echo "*** GNOME components with a package manager, we suggest you configure"
   echo "*** this package like this:"
@@ -18,7 +18,7 @@ then
   sleep 5
 fi
 
-AM_INIT_AUTOMAKE(helix-setup-tools, 0.2.1)
+AM_INIT_AUTOMAKE(ximian-setup-tools, 0.2.1)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -59,7 +59,7 @@ if gnome-config --libs gal > /dev/null 2>&1; then
 	if test "$vers" -ge 49900; then
 		AC_MSG_RESULT(found)
 	 else
-		AC_MSG_ERROR(You need at least GNOME Application libs 0.4.99.0 for this version of helix-setup-tools)
+		AC_MSG_ERROR(You need at least GNOME Application libs 0.4.99.0 for this version of ximian-setup-tools)
 	fi
 else
 	AC_MSG_ERROR(Did not find GnomeAppLib (GAL) installed)
@@ -106,7 +106,7 @@ AC_SUBST(interfacesdir)
 
 AC_OUTPUT([
 Makefile
-helix-setup-tools.spec
+ximian-setup-tools.spec
 macros/Makefile
 intl/Makefile
 interfaces/Makefile
@@ -134,7 +134,7 @@ po/Makefile.in
 if test "x${prefix}" != "x/usr" || test "x${sysconfdir}" != "x/etc"
 then
   echo
-  echo "*** The Helix Setup Tools may not work with the default installation"
+  echo "*** The Ximian Setup Tools may not work with the default installation"
   echo "*** paths. If you're running Linux, and you installed most of the other"
   echo "*** GNOME components with a package manager, we suggest you configure"
   echo "*** this package like this:"
