@@ -460,8 +460,7 @@ boot_table_add (void)
 	g_array_append_val (boot_array, node);
 	
 	row = boot_array->len - 1;
-	g_print ("%d\n", row);
-
+	
 	e_table_model_row_inserted (table->model, row);
 	e_table_set_cursor_row (table, row);
 }

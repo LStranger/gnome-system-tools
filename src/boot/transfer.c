@@ -69,6 +69,41 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 	}
 }
 
+static void
+transfer_globals_gui_to_xml (xmlNodePtr root)
+{
+	xmlNodePtr node;
+	gint val;
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
+											   (tool->main_dialog, "boot_prompt"))))
+	{
+		node = xml_element_find_first (root, "prompt");
+
+		if (!node)
+			xml_element_add (root, "prompt");
+
+		val = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
+										(xst_dialog_get_widget (tool->main_dialog,
+														    "boot_timeout")));
+
+		node = xml_element_find_first (root, "timeout");
+		if (!node)
+			xml_element_add (root, "timeout");
+
+		/* We need timeout in tenths of seconds, so multiply by 10 */
+		xml_element_set_content (node, g_strdup_printf ("%d", val * 10));
+	}
+
+	else
+	{
+		node = xml_element_find_first (root, "prompt");
+
+		if (node)
+			xml_element_destroy (node);
+	}
+}
+
 void
 transfer_xml_to_gui (XstTool *tool, gpointer data)
 {
@@ -86,6 +121,6 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 	xmlNodePtr root;
 
 	root = xml_doc_get_root (tool->config);
+
+	transfer_globals_gui_to_xml (root);
 }
-
-

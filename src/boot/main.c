@@ -61,6 +61,12 @@ update_complexity ()
 	complexity = tool->main_dialog->complexity;
 
 	boot_table_update_state ();
+
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_add"),
+						 complexity == XST_DIALOG_ADVANCED);
+	
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_delete"),
+						 complexity == XST_DIALOG_ADVANCED);
 }
 
 static void

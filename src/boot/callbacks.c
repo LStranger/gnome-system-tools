@@ -36,9 +36,13 @@ XstTool *tool;
 
 static int reply;
 
+const gchar *boot_types[] = { "Windows NT", "Windows 9x", "dos", "Linux", NULL };
+
 static void boot_settings_dialog_clean (void);
 static void boot_settings_dialog_prepare (void);
 static gboolean boot_settings_dialog_affect (void);
+
+static void my_gtk_entry_set_text (void *entry, gchar *str);
 static void reply_cb (gint val, gpointer data);
 
 /* Main window callbacks */
@@ -140,17 +144,49 @@ static void
 boot_settings_dialog_prepare (void)
 {
 	xmlNodePtr node;
+	GList *list = NULL;
+	gchar *buf, *image_label;
+	gint i;
 
 	node = get_selected_node ();
 
 	/* Label */
-	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+	my_gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 											    "boot_settings_label")),
 					(gchar *)boot_value_label (node));
 
-	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-											    "boot_settings_image")),
-					(gchar *)boot_value_image (node));
+	/* Image */
+
+	buf = (gchar *)boot_value_image (node);
+
+	if (!buf)
+	{
+		buf = (gchar *)boot_value_dev (node);
+		image_label = g_strdup (_("Device:"));
+		boot_settings_dialog_complexity (FALSE); /* To hide append and root */
+	}
+
+	else
+	{
+		image_label = g_strdup (_("Image:"));
+		boot_settings_dialog_complexity (tool->main_dialog->complexity == XST_DIALOG_ADVANCED);
+	}
+
+	gtk_label_set_text (GTK_LABEL (xst_dialog_get_widget (tool->main_dialog,
+											    "boot_settings_image_label")),
+					image_label);
+
+	my_gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+												  "boot_settings_image")), buf);
+
+	/* Type combo */
+	
+	for (i = 0; boot_types[i]; i++)
+		list = g_list_prepend (list, (void *)boot_types[i]);
+
+	gtk_combo_set_popdown_strings (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog,
+														"boot_settings_type")),
+							 list);
 	
 	/* Default toggle */
 
@@ -158,6 +194,7 @@ boot_settings_dialog_prepare (void)
 										    (tool->main_dialog,
 											"boot_settings_default")),
 							(gboolean)boot_value_default (node));
+
 }
 
 static gboolean
@@ -190,7 +227,11 @@ boot_settings_dialog_affect (void)
 void
 actions_set_sensitive (gboolean state)
 {
-	if (xst_tool_get_access (tool))
+	XstDialogComplexity complexity;
+
+	complexity = tool->main_dialog->complexity;
+
+	if (xst_tool_get_access (tool) && complexity == XST_DIALOG_ADVANCED)
 	{
 		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_add"), TRUE);
 		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_delete"),
@@ -199,6 +240,42 @@ actions_set_sensitive (gboolean state)
 	
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
 }
+
+void
+boot_settings_dialog_complexity (gboolean state)
+{
+	GtkRequisition req;
+	GtkWidget *win;
+	gint i;
+	gchar *widgets[] = { "boot_settings_append", "boot_settings_root",
+					 "boot_settings_append_label", "boot_settings_root_label",
+					 NULL };
+
+	if (!state)
+	{
+		for (i = 0; widgets[i]; i++)
+			gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
+	}
+
+	else
+	{
+		for (i = 0; widgets[i]; i++)
+			gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
+	}
+
+	/* Resize to minimum size */
+
+	win = xst_dialog_get_widget (tool->main_dialog, "boot_settings_dialog");
+	gtk_widget_size_request (win, &req);
+	gtk_window_set_default_size (GTK_WINDOW (win), req.width, req.height);
+}
+
+static void
+my_gtk_entry_set_text (void *entry, gchar *str)
+{
+	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
+}
+
 
 static void
 reply_cb (gint val, gpointer data)
