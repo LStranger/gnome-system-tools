@@ -22,6 +22,7 @@
 <widget>
   <class>GnomeApp</class>
   <name>users_admin</name>
+  <visible>False</visible>
   <title>User Account Administration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -159,7 +160,12 @@
 
 		<widget>
 		  <class>GtkList</class>
-		  <name>list1</name>
+		  <name>user_list</name>
+		  <signal>
+		    <name>selection_changed</name>
+		    <handler>on_user_list_selection_changed</handler>
+		    <last_modification_time>Tue, 24 Oct 2000 11:50:31 GMT</last_modification_time>
+		  </signal>
 		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 		</widget>
 	      </widget>
@@ -195,6 +201,11 @@
 		    <name>new_user</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_new_user_clicked</handler>
+		      <last_modification_time>Tue, 24 Oct 2000 11:14:16 GMT</last_modification_time>
+		    </signal>
 		    <label>New User...</label>
 		  </widget>
 
@@ -203,6 +214,11 @@
 		    <name>user_delete</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_user_delete_clicked</handler>
+		      <last_modification_time>Tue, 24 Oct 2000 11:47:54 GMT</last_modification_time>
+		    </signal>
 		    <label>Delete</label>
 		  </widget>
 		</widget>
@@ -333,6 +349,11 @@
 		    <name>user_chpasswd</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_user_chpasswd_clicked</handler>
+		      <last_modification_time>Tue, 24 Oct 2000 11:45:05 GMT</last_modification_time>
+		    </signal>
 		    <label>Change Password...</label>
 		  </widget>
 
@@ -341,6 +362,11 @@
 		    <name>user_settings</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_user_settings_clicked</handler>
+		      <last_modification_time>Tue, 24 Oct 2000 11:15:10 GMT</last_modification_time>
+		    </signal>
 		    <label>Settings...</label>
 		  </widget>
 		</widget>
@@ -443,7 +469,12 @@
 
 	      <widget>
 		<class>GtkList</class>
-		<name>list2</name>
+		<name>group_list</name>
+		<signal>
+		  <name>selection_changed</name>
+		  <handler>on_group_list_selection_changed</handler>
+		  <last_modification_time>Tue, 24 Oct 2000 16:12:56 GMT</last_modification_time>
+		</signal>
 		<selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 	      </widget>
 	    </widget>
@@ -616,6 +647,11 @@
 		    <name>group_settings</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_group_settings_clicked</handler>
+		      <last_modification_time>Tue, 24 Oct 2000 15:59:22 GMT</last_modification_time>
+		    </signal>
 		    <label>Settings...</label>
 		  </widget>
 		</widget>
@@ -727,6 +763,7 @@
 <widget>
   <class>GnomeDialog</class>
   <name>user_settings_dialog</name>
+  <visible>False</visible>
   <title>User Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -771,6 +808,11 @@
 	<name>user_settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_user_settings_ok_clicked</handler>
+	  <last_modification_time>Tue, 24 Oct 2000 11:39:47 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
 
@@ -779,6 +821,11 @@
 	<name>user_settings_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_user_settings_cancel_clicked</handler>
+	  <last_modification_time>Tue, 24 Oct 2000 11:36:22 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
@@ -973,6 +1020,7 @@
 <widget>
   <class>GnomeDialog</class>
   <name>user_passwd_dialog</name>
+  <visible>False</visible>
   <title>Change Password</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1017,6 +1065,11 @@
 	<name>user_passwd_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_user_passwd_ok_clicked</handler>
+	  <last_modification_time>Tue, 24 Oct 2000 12:56:35 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
 
@@ -1025,6 +1078,11 @@
 	<name>user_passwd_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_user_passwd_cancel_clicked</handler>
+	  <last_modification_time>Tue, 24 Oct 2000 12:56:20 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
@@ -1048,7 +1106,7 @@
 	<name>user_passwd_new</name>
 	<can_focus>True</can_focus>
 	<editable>True</editable>
-	<text_visible>True</text_visible>
+	<text_visible>False</text_visible>
 	<text_max_length>0</text_max_length>
 	<text></text>
 	<child>
@@ -1124,7 +1182,7 @@
 	<name>user_passwd_confirmation</name>
 	<can_focus>True</can_focus>
 	<editable>True</editable>
-	<text_visible>True</text_visible>
+	<text_visible>False</text_visible>
 	<text_max_length>0</text_max_length>
 	<text></text>
 	<child>
@@ -1149,6 +1207,7 @@
 <widget>
   <class>GnomeDialog</class>
   <name>group_settings_dialog</name>
+  <visible>False</visible>
   <title>Group Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1193,6 +1252,11 @@
 	<name>group_settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_group_settings_ok_clicked</handler>
+	  <last_modification_time>Tue, 24 Oct 2000 15:59:30 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
 
@@ -1201,6 +1265,11 @@
 	<name>group_settings_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_group_settings_cancel_clicked</handler>
+	  <last_modification_time>Tue, 24 Oct 2000 15:59:40 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
