@@ -19,3 +19,4 @@ gchar *s = N_("Narrower");
 gchar *s = N_("Wider");
 gchar *s = N_("Shorter");
 gchar *s = N_("Restart X");
+gchar *s = N_("Resolution");
