@@ -35,7 +35,7 @@ AC_PATH_PROG(SU_TOOL, su)
 if test x"${SU_TOOL}" = xno; then
   AC_MSG_ERROR([su executable not found in your path - should be installed])
 else
-  AC_DEFINE_UNQUOTED(SU_PATH, "${SU_TOOL}")
+  AC_DEFINE_UNQUOTED(SU_PATH, "${SU_TOOL}", [su executable path])
 fi
 
 dnl =====================================================
@@ -49,9 +49,9 @@ dnl =====================================================
 AC_PATH_PROG(SSH_TOOL, ssh)
 if test x"${SSH_TOOL}" = xno; then
   AC_MSG_WARN([ssh executable not found in your path - should be installed if remote administration is desired])
-  AC_DEFINE_UNQUOTED(SSH_PATH, "")
+  AC_DEFINE_UNQUOTED(SSH_PATH, "", [ssh executable path])
 else
-  AC_DEFINE_UNQUOTED(SSH_PATH, "${SSH_TOOL}")
+  AC_DEFINE_UNQUOTED(SSH_PATH, "${SSH_TOOL}", [ssh executable path])
 fi
 
 dnl =====================================================
@@ -98,11 +98,11 @@ dnl   fi
 dnl ])
 
 AC_CHECK_LIB(crypt, crypt, ,[
-  AC_MSG_ERROR(crypt library is required.)])
-AC_CHECK_HEADER(crypt.h,AC_DEFINE(HAVE_CRYPT_H))
-AC_SUBST(GST_CRACK_LIB_LOCATION)
-GST_CRACK_LIB_CFLAGS="-DGST_CRACK_LIB_DICT_PATH=\"\\\"\$(GST_CRACK_LIB_LOCATION)\\\"\""
-AC_SUBST(GST_CRACK_LIB_CFLAGS)
+   AC_MSG_ERROR(crypt library is required.)])
+AC_CHECK_HEADER(crypt.h,AC_DEFINE(HAVE_CRYPT_H, "", [whether it has crypt function]))
+dnl AC_SUBST(GST_CRACK_LIB_LOCATION)
+dnl GST_CRACK_LIB_CFLAGS="-DGST_CRACK_LIB_DICT_PATH=\"\\\"\$(GST_CRACK_LIB_LOCATION)\\\"\""
+dnl AC_SUBST(GST_CRACK_LIB_CFLAGS)
 
 dnl =====================================================
 dnl END: Cracklib checking
@@ -130,7 +130,7 @@ dnl ========================================================
 ALL_LINGUAS="am az ca cs da de el es et eu fr ga gl hr hu it ja ko lt lv mk ml mn ms nl nn no pl pt pt_BR ru sk sr sr@Latn sv tr uk vi wa zh_TW"
 GETTEXT_PACKAGE=gnome-system-tools
 AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [gettext package name])
 AM_GLIB_GNU_GETTEXT
 
 # AM_GNOME_GETTEXT above substs $DATADIRNAME
@@ -147,37 +147,32 @@ dnl Set SCRIPTS_DIR & PIXMAPS_DIR
 dnl ========================================================
 
 if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${ac_default_prefix}/${DATADIRNAME}/setup-tool-backends/scripts")
+  AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${ac_default_prefix}/${DATADIRNAME}/setup-tool-backends/scripts", [path where scripts backend will be installed])
   scriptsdir="${ac_default_prefix}/${DATADIRNAME}/setup-tool-backends/scripts"
 else
-  AC_DEFINE_UNQUOTED(SCRIPTS_DIR,"${prefix}/${DATADIRNAME}/setup-tool-backends/scripts")
+  AC_DEFINE_UNQUOTED(SCRIPTS_DIR,"${prefix}/${DATADIRNAME}/setup-tool-backends/scripts", [path where scripts backend will be installed])
   scriptsdir="${prefix}/${DATADIRNAME}/setup-tool-backends/scripts"
 fi
 
 if test "x${prefix}" = "xNONE"; then
-  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
+  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [pixmaps directory])
   pixmapsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
-  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces")
+  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces", [path where glade files will be installed])
   interfacesdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
-  AC_DEFINE_UNQUOTED(ETSPECS_DIR,"${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/etspecs")
-  etspecsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/etspecs"
-  AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${ac_default_prefix}/${BINDIRNAME}")
-  AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${ac_default_prefix}/${DATADIRNAME}/control-center-2.0/capplets")
+  AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${ac_default_prefix}/${BINDIRNAME}", [frontend files path])
+  AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${ac_default_prefix}/${DATADIRNAME}/control-center-2.0/capplets", [capplets directory])
 else
-  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
+  AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps", [pixmaps directory])
   pixmapsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
-  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces")
+  AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces", [path where glade files will be installed])
   interfacesdir="${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
-  AC_DEFINE_UNQUOTED(ETSPECS_DIR,"${prefix}/${DATADIRNAME}/${PACKAGE}/etspecs")
-  etspecsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/etspecs"
-  AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${prefix}/${BINDIRNAME}")
-  AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${prefix}/${DATADIRNAME}/control-center-2.0/capplets")
+  AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${prefix}/${BINDIRNAME}", [frontend files path])
+  AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${prefix}/${DATADIRNAME}/control-center-2.0/capplets", [capplets directory])
 fi
 
 AC_SUBST(scriptsdir)
 AC_SUBST(pixmapsdir)
 AC_SUBST(interfacesdir)
-AC_SUBST(etspecsdir)
 
 dnl ==============================================================
 dnl END: Set SCRIPTS_DIR & PIXMAPS_DIR 
@@ -213,7 +208,7 @@ GST_TOOL_LIBS="$GST_LIBS -lutil \$(top_builddir)/src/common/libsetuptool.a"
 GST_TOOL_CFLAGS="$GST_CFLAGS -I\$(top_srcdir)/src/common"
 
 GST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
-GST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(etspecs)"
+GST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in" 
 GST_TOOL_DEPENDENCIES="\$(top_builddir)/src/common/libsetuptool.a"
 
 AC_SUBST(GST_LIBS)
@@ -248,6 +243,7 @@ src/time/Makefile
 src/time/e-map/Makefile
 src/boot/Makefile
 src/services/Makefile
+src/disks/Makefile
 po/Makefile.in
 gnome-system-tools.pc
 ])
