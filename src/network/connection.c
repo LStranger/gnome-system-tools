@@ -708,10 +708,9 @@ connection_find_by_dev (GtkWidget *list, gchar *dev)
 static gboolean
 connection_type_is_lan (XstConnectionType type)
 {
-	return (type == XST_CONNECTION_ETH ||
-		type == XST_CONNECTION_WVLAN ||
-		type == XST_CONNECTION_IRLAN);
-
+	return ((type == XST_CONNECTION_ETH) ||
+		(type == XST_CONNECTION_WVLAN) ||
+		(type == XST_CONNECTION_IRLAN));
 }
 
 static gboolean
@@ -720,10 +719,11 @@ default_gw_find_static_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *
 	XstConnection *cxn;
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+
 	if (cxn->enabled && connection_type_is_lan (cxn->type) &&
 	    (cxn->ip_config == IP_MANUAL) &&
 	    (cxn->gateway && *cxn->gateway)) {
-		* (XstConnection *)data = *cxn;
+		* (XstConnection **)data = cxn;
 		return TRUE;
 	}
 
@@ -753,7 +753,7 @@ default_gw_find_ppp_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *ite
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 	if (cxn->enabled && cxn->type == XST_CONNECTION_PPP && cxn->set_default_gw) {
-		* (XstConnection *)data = *cxn;
+		* (XstConnection **)data = cxn;
 		return TRUE;
 	}
 
@@ -785,7 +785,7 @@ default_gw_find_dynamic_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter 
 	if (cxn->enabled &&
 	    (cxn->type == XST_CONNECTION_ETH || cxn->type == XST_CONNECTION_WVLAN) &&
 	    (cxn->ip_config != IP_MANUAL)) {
-		* (XstConnection *)data = *cxn;
+		* (XstConnection **)data = cxn;
 		return TRUE;
 	}
 
@@ -816,7 +816,7 @@ default_gw_find_plip_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *it
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 	if (cxn->enabled && (cxn->type == XST_CONNECTION_PLIP) &&
 	    (cxn->remote_address && *cxn->remote_address)) {
-		* (XstConnection *)data = *cxn;
+		* (XstConnection **)data = cxn;
 		return TRUE;
 	}
 
