@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-06-24 12:46+0200\n"
-"PO-Revision-Date: 2003-06-24 17:22+0200\n"
+"POT-Creation-Date: 2003-07-21 12:22+0200\n"
+"PO-Revision-Date: 2003-07-21 22:49+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -192,48 +192,40 @@ msgstr "Nastavení obrazu (krok 1 ze 2)"
 msgid "Image Settings (Step 2 of 2)"
 msgstr "Nastavení obrazu (krok 2 ze 2)"
 
-#: interfaces/boot.glade.in.h:29
-msgid "Initrd image path:"
-msgstr "Cesta k obrazu initrd:"
-
-#: interfaces/boot.glade.in.h:30 interfaces/network.glade.in.h:66
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:66
 #: src/network/connection.c:1730
 msgid "Manual"
 msgstr "Ruční"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:30
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Úprava nastavení pro váš operační systém nebo jádro."
 
-#: interfaces/boot.glade.in.h:32
-msgid "Number of colors"
-msgstr "Počet barev"
+#: interfaces/boot.glade.in.h:31
+msgid "Number of colors:"
+msgstr "Počet barev:"
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:32
 msgid "Other Operating System (Step 2 of 2)"
 msgstr "Jiný operační systém (krok 2 ze 2)"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:33
 msgid "Other parameters:"
 msgstr "Jiné parametry:"
 
+#: interfaces/boot.glade.in.h:34 interfaces/display.glade.in.h:17
+msgid "Resolution:"
+msgstr "Rozlišení:"
+
 #: interfaces/boot.glade.in.h:35
-msgid "P_arameters:"
-msgstr "_Parametry:"
-
-#: interfaces/boot.glade.in.h:36 interfaces/display.glade.in.h:16
-msgid "Resolution"
-msgstr "Rozlišení"
-
-#: interfaces/boot.glade.in.h:37
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "Počet sekund před zavedením výchozího jádra nebo OS"
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:36
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Zadejte oddíl, na kterém je operační systém instalován."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:37
 msgid ""
 "The new boot image has been added.\n"
 "Please click \"Apply\" to save your changes. "
@@ -241,7 +233,7 @@ msgstr ""
 "Nový zaváděcí obraz byl přidán.\n"
 "Uložte prosím své změny stiskem tlačítka \"Dokončit\"."
 
-#: interfaces/boot.glade.in.h:41
+#: interfaces/boot.glade.in.h:39
 msgid ""
 "This assistant is designed to help you quickly \n"
 "and easily add a new boot image to your system.\n"
@@ -253,46 +245,54 @@ msgstr ""
 "\n"
 "Začněte kliknutím na \"Další\"."
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:43
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Použijte tento dialog pro upravení parametrů jádra."
 
-#: interfaces/boot.glade.in.h:46
+#: interfaces/boot.glade.in.h:44
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Použijte tento nástroj pro určení operačních systémů, ze kterých si mohou "
 "uživatelé při startu vybírat."
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:45
 msgid "Video modes (only frame buffer)"
 msgstr "Režimy videa (jen framebuffer)"
 
-#: interfaces/boot.glade.in.h:48 interfaces/network.glade.in.h:138
+#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:138
 #: interfaces/shares.glade.in.h:60
 msgid "_Add..."
 msgstr "Přid_at..."
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:47
 msgid "_Device:"
 msgstr "_Zařízení:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:48
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: interfaces/boot.glade.in.h:51
+#: interfaces/boot.glade.in.h:49
+msgid "_Initrd image path:"
+msgstr "Cesta k obrazu _initrd:"
+
+#: interfaces/boot.glade.in.h:50
 msgid "_Kernel image path:"
 msgstr "Cesta k _obrazu jádra:"
 
-#: interfaces/boot.glade.in.h:52 interfaces/print.glade.in.h:72
+#: interfaces/boot.glade.in.h:51 interfaces/print.glade.in.h:72
 #: interfaces/shares.glade.in.h:68
 msgid "_Name:"
 msgstr "_Název:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:52
 msgid "_Operating system:"
 msgstr "_Operační systém:"
+
+#: interfaces/boot.glade.in.h:53
+msgid "_Parameters:"
+msgstr "_Parametry:"
 
 #: interfaces/boot.glade.in.h:54
 msgid "_Root file system device:"
@@ -602,9 +602,9 @@ msgstr "Zjistit znovu"
 msgid "Refresh rate:"
 msgstr "Rychlost obnovení:"
 
-#: interfaces/display.glade.in.h:17
-msgid "Resolution:"
-msgstr "Rozlišení:"
+#: interfaces/display.glade.in.h:16
+msgid "Resolution"
+msgstr "Rozlišení"
 
 #: interfaces/display.glade.in.h:18
 msgid "Restart X"
@@ -2996,12 +2996,11 @@ msgstr "_Pracovní telefon:"
 msgid "profiles_table"
 msgstr "tabulka_profilů"
 
-#. give our dialog an OK button and title
-#: src/boot/boot-append-editor.c:118
+#: src/boot/boot-append-editor.c:119 src/boot/callbacks.c:165
 msgid "Boot Append Editor"
 msgstr "Editor zaváděcího příkazu"
 
-#: src/boot/boot-append-gui.c:241
+#: src/boot/boot-append-gui.c:226
 #, c-format
 msgid "vga=%s is not a valid vga value"
 msgstr "vga=%s není platná hodnota vga"
@@ -3012,7 +3011,7 @@ msgid "Boot Image Wizard"
 msgstr "Průvodce zaváděcím obrazem"
 
 #. give our dialog an OK button and title
-#: src/boot/boot-image-editor.c:108
+#: src/boot/boot-image-editor.c:108 src/boot/callbacks.c:79
 msgid "Boot Image Editor"
 msgstr "Editor zaváděcího obrazu"
 
@@ -3073,7 +3072,7 @@ msgstr "Zavedení"
 msgid "Boot Manager"
 msgstr "Správce zavádění"
 
-#: src/boot/callbacks.c:239
+#: src/boot/callbacks.c:379
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3081,12 +3080,12 @@ msgstr ""
 "Váš systém nenastartuje bez\n"
 "alespoň jednoho zaváděcího obrazu.\n"
 
-#: src/boot/callbacks.c:254
+#: src/boot/callbacks.c:394
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Jste si jisti, že chcete odstranit '%s'?"
 
-#: src/boot/callbacks.c:299 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:439 src/runlevel/callbacks.c:97
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3122,14 +3121,6 @@ msgstr "/_Vlastnosti"
 #: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/O_dstranit"
-
-#: src/common/System.directory.in.in.h:1
-msgid "System"
-msgstr "Systém"
-
-#: src/common/System.directory.in.in.h:2
-msgid "System administration"
-msgstr "Správa systému"
 
 #: src/common/gst-dialog.c:60
 #, c-format
@@ -3921,6 +3912,12 @@ msgstr "Komentář"
 msgid "Users and groups."
 msgstr "Uživatelé a skupiny."
 
+#~ msgid "System"
+#~ msgstr "Systém"
+
+#~ msgid "System administration"
+#~ msgstr "Správa systému"
+
 #~ msgid "Remove"
 #~ msgstr "Odstranit"
 
@@ -3969,17 +3966,3 @@ msgstr "Uživatelé a skupiny."
 
 #~ msgid "End range"
 #~ msgstr "Konec rozsahu"
-
-#~ msgid ""
-#~ "NFS\n"
-#~ "Samba\n"
-#~ msgstr ""
-#~ "NFS\n"
-#~ "Samba\n"
-
-#~ msgid ""
-#~ "Samba\n"
-#~ "NFS\n"
-#~ msgstr ""
-#~ "Samba\n"
-#~ "NFS\n"
