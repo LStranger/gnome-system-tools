@@ -174,6 +174,24 @@ gst_dialog_thaw_visible (GstDialog *xd)
 		gtk_widget_set_sensitive (GTK_WIDGET (xd), TRUE);
 }
 
+void
+gst_dialog_set_changed_config (GstDialog *xd, gboolean value)
+{
+	g_return_if_fail (xd != NULL);
+	g_return_if_fail (GST_IS_DIALOG (xd));
+
+	xd->config_has_changed = value;
+}
+
+gboolean
+gst_dialog_get_changed_config (GstDialog *xd)
+{
+	g_return_if_fail (xd != NULL);
+	g_return_if_fail (GST_IS_DIALOG (xd));
+
+	return xd->config_has_changed;
+}
+
 gboolean
 gst_dialog_get_modified (GstDialog *xd)
 {
@@ -190,6 +208,7 @@ gst_dialog_set_modified (GstDialog *xd, gboolean state)
 	g_return_if_fail (GST_IS_DIALOG (xd));
 
 	xd->is_modified = state;
+	gtk_widget_set_sensitive (xd->apply_button, state);
 }
 
 void
@@ -455,6 +474,8 @@ apply_config (gpointer data)
 		return;
 
 	g_signal_emit (G_OBJECT (dialog), gstdialog_signals[APPLY], 0);
+
+	gst_dialog_set_modified (dialog, FALSE);
 }
 
 void
@@ -511,6 +532,8 @@ apply_cb (GtkWidget *w, gpointer data)
 
 	dialog = GST_DIALOG (data);
 
+	gst_dialog_set_changed_config (dialog, TRUE);
+
 	if (gst_dialog_get_modified (dialog))
 		apply_config (dialog);
 }
@@ -525,7 +548,7 @@ cancel_cb (GtkWidget *w, gpointer data)
 
 	dialog = GST_DIALOG (data);
 
-	if (gst_dialog_get_modified (dialog))
+	if (gst_dialog_get_changed_config (dialog))
 		restore_config (dialog);
 
 	dialog_close (dialog);
@@ -662,6 +685,8 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 
 	w = glade_xml_get_widget (xml, "apply");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (apply_cb), dialog);
+	dialog->apply_button = w;
+	
 	w = glade_xml_get_widget (xml, "cancel");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (cancel_cb), dialog);
 
@@ -669,6 +694,7 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (accept_cb), dialog);
 	
 	gst_dialog_set_modified (dialog, FALSE);
+	gst_dialog_set_changed_config (dialog, FALSE);
 	gtk_widget_hide (dialog->complexity_button);
 
 	dialog->complexity = GST_DIALOG_NONE;
