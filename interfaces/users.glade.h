@@ -61,7 +61,7 @@ gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
 gchar *s = N_("Defaults");
-gchar *s = N_("It doesn't work yet. It's here only on testing purposes and currently uses local data.");
+gchar *s = N_("EXPERIMENTAL NIS support. ");
 gchar *s = N_("New User");
 gchar *s = N_("New Group");
 gchar *s = N_("Delete");
