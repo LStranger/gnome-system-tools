@@ -12,10 +12,11 @@ bin_PROGRAMS = time-admin
 time_admin_SOURCES = \
 	main.c \
 	tz.c tz.h \
+	tz-map.c tz-map.h \
  	timeserv.c timeserv.h \
  	transfer.c transfer.h
 
-time_admin_CFLAGS = $(GNOME_CFLAGS) $(GDK_PIXBUF_CFLAGS) $(LIBGLADE_CFLAGS) "`gnome-config --cflags gnomecanvaspixbuf`"
+time_admin_CFLAGS = $(GNOME_CFLAGS) $(GDK_PIXBUF_CFLAGS) $(LIBGLADE_CFLAGS)
 
 time_admin_LDADD = \
 $(GNOME_LIBDIR) \
@@ -26,8 +27,6 @@ $(LIBGLADE_LIBS) \
 $(INTLLIBS) \
 ../common/libsetuptool.a \
 ./e-map/e-map.o
-
-time_admin_LDFLAGS = `gnome-config --libs gnomecanvaspixbuf`
 
 EXTRA_DIST = time.desktop
 

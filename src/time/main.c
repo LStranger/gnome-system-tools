@@ -13,8 +13,12 @@
 #include "timeserv.h"
 #include "transfer.h"
 #include "e-map/e-map.h"
+#include "tz-map.h"
+
+ETzMap *tzmap;
 
 
+void init_map (void);
 void populate_ntp_list(void);
 gint clock_tick(gpointer data);
 void on_apply_clicked(GtkButton *button, gpointer data);
@@ -114,26 +118,9 @@ populate_ntp_list ()
 void
 init_map ()
 {
-	EMap *map;
-	TzDB *tzdb;
-	GPtrArray *locs;
-	TzLocation *tzl;
-	int i;
-	
-	map = e_map_new ();
+	tzmap = e_tz_map_new ();
 	gtk_container_add (GTK_CONTAINER (tool_widget_get ("map_window")),
-			   GTK_WIDGET (map));
-	
-	tzdb = tz_load_db ();
-	locs = tz_get_locations (tzdb);
-	
-	for (i = 0; g_ptr_array_index(locs, i); i++)
-	{
-		tzl = g_ptr_array_index (locs, i);
-		
-		e_map_add_point (map, NULL, tzl->longitude, tzl->latitude,
-				 0xf010d0ff);
-	}
+			   GTK_WIDGET (tzmap->map));
 }
 
 
@@ -201,14 +188,14 @@ delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
 void
 connect_signals()
 {
+#if 0
 	GtkWidget *w;
 
-#if 0
 	w = GTK_COMBO(tool_widget_get("timezone_combo"))->list;
 	gtk_signal_connect(GTK_OBJECT(w), "select-child", tz_select_combo, NULL);
 	gtk_signal_connect(GTK_OBJECT(w), "select-child", tool_modified_cb, NULL);
 #endif
-
+	
 	gtk_timeout_add(1000, clock_tick, NULL);
 }
 
