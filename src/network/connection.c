@@ -1463,6 +1463,7 @@ connection_new_from_node (xmlNode *node, gboolean add_to_list)
 		break;
 	case GST_CONNECTION_WLAN:
 		cxn->essid = gst_xml_get_child_content (node, "essid");
+		cxn->key = gst_xml_get_child_content (node, "key");
 		break;
 	default:
 		break;
@@ -1502,6 +1503,7 @@ connection_free (GstConnection *cxn)
 	g_free (cxn->gateway);
 
 	g_free (cxn->essid);
+	g_free (cxn->key);
 
 	g_free (cxn->phone_number);
 	g_free (cxn->external_line);
@@ -1671,6 +1673,7 @@ static void
 empty_wlan (GstConnection *cxn)
 {
 	GET_STR ("wlan_", essid);
+	GET_STR ("wlan_", key);
 }
 
 static void
@@ -1879,6 +1882,7 @@ static void
 fill_wlan (GstConnection *cxn)
 {
 	SET_STR ("wlan_", essid);
+	SET_STR ("wlan_", key);
 }
 
 static void
@@ -2218,8 +2222,10 @@ connection_save_to_node (GstConnection *cxn, xmlNode *root)
 		connection_xml_save_str_to_node (node, "remote_address", cxn->remote_address);
 
 	/* Wireless */
-	if (cxn->type == GST_CONNECTION_WLAN)
+	if (cxn->type == GST_CONNECTION_WLAN) {
 		connection_xml_save_str_to_node (node, "essid", cxn->essid);
+		connection_xml_save_str_to_node (node, "key", cxn->key);
+	}
 }
 
 gboolean

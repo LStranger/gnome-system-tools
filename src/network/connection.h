@@ -119,6 +119,7 @@ typedef struct {
 
 	/* Wavelan */
 	gchar *essid;
+	gchar *key;
 
 	/* PPP */
 	gchar *phone_number;

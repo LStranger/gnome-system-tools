@@ -128,6 +128,7 @@ GstDialogSignal signals[] = {
 	{ "status_autoboot", "toggled", G_CALLBACK (on_connection_modified) },
 	{ "status_user", "toggled", G_CALLBACK (on_connection_modified) },
 	{ "wlan_essid", "changed", G_CALLBACK (on_connection_modified) },
+	{ "wlan_key", "changed", G_CALLBACK (on_connection_modified) },
 	{ "connection_config", "changed", G_CALLBACK (on_connection_ip_config_changed) },
 	{ "connection_config", "changed", G_CALLBACK (on_connection_modified) },
 	{ "ip_address", "changed", G_CALLBACK (on_connection_modified) },

@@ -110,6 +110,7 @@ profile_save_interfaces (xmlNodePtr source, xmlNodePtr dest)
 		"dev",
 		"enabled",
 		"essid",
+		"key",
 		"file",
 		"gateway",
 		"name",

@@ -89,6 +89,7 @@ network_druid_clear (GnomeDruid *druid, gboolean destroy_data)
 	GtkWidget *widget;
 	gchar *entries [] = {
 		"network_connection_essid",
+		"network_connection_key",
 		"network_connection_other_ip_address",
 		"network_connection_other_ip_mask",
 		"network_connection_other_gateway",
@@ -188,8 +189,11 @@ network_druid_get_connection_data (GnomeDruid *druid)
 								   "network_connection_wireless_device");
 			GtkWidget *essid = gst_dialog_get_widget (tool->main_dialog,
 								  "network_connection_essid");
+			GtkWidget *key = gst_dialog_get_widget (tool->main_dialog,
+								  "network_connection_key");
 			cxn->dev = g_strdup (gtk_entry_get_text (GTK_ENTRY (GTK_BIN (device)->child)));
 			cxn->essid = g_strdup (gtk_entry_get_text (GTK_ENTRY (essid)));
+			cxn->key = g_strdup (gtk_entry_get_text (GTK_ENTRY (key)));
 		} else {
 			cxn->dev = connection_find_new_device (root, cxn->type);
 		}
