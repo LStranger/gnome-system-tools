@@ -556,7 +556,6 @@ xst_tool_init_backend (XstTool *tool)
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (XST_IS_TOOL (tool));
 	g_return_if_fail (tool->script_path != NULL);
-	g_return_if_fail (root_access != ROOT_ACCESS_NONE);
 	g_return_if_fail (tool->backend_pid < 0);
 	
 #ifdef XST_DEBUG
