@@ -60,7 +60,7 @@ static XstDialogSignal signals[] = {
 	{ "user_passwd_random_new",		"clicked",		G_CALLBACK (on_user_settings_passwd_random_new) },
 	{ "user_passwd_entry1",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
 	{ "user_passwd_entry2",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
-//	{ "user_settings_profile_button",	"clicked",		G_CALLBACK (profile_table_run) },
+/*	{ "user_settings_profile_button",	"clicked",		G_CALLBACK (profile_table_run) },*/
 	
 	/* Group settings dialog callbacks */
 	{ "group_settings_dialog",		"delete_event",  	G_CALLBACK (on_group_settings_dialog_delete_event) },
@@ -74,7 +74,7 @@ static XstDialogSignal signals[] = {
 	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
 	{ "user_settings",             		"clicked",       	G_CALLBACK (on_user_settings_clicked) },
 	{ "user_delete",                	"clicked",       	G_CALLBACK (on_user_delete_clicked) },
-//	{ "user_profiles",               	"clicked",       	G_CALLBACK (profile_table_run) },
+/*	{ "user_profiles",               	"clicked",       	G_CALLBACK (profile_table_run) },*/
 	
 	/* Main dialog callbacks, groups tab */
 	{ "group_new",				"clicked",		G_CALLBACK (on_group_new_clicked) },
@@ -103,26 +103,6 @@ static const XstWidgetPolicy policies[] = {
 	{ "showall",                XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ NULL }
 };
-
-static SearchBarItem user_search_menu_items[] = {
-	{ N_("Show All"), 0 },
-	{ NULL, -1}
-};
-
-static void
-user_menu_activated (SearchBar *sb, int id, gpointer user_data)
-{
-	switch (id)
-	{
-	case 0:
-		user_query_string_set ("all");
-		tables_update_content ();
-		break;
-	default:
-		g_warning ("user_menu_activated: shouldn't be here.");
-		break;
-	}
-}
 
 enum {
 	SB_USER_NAME,
@@ -192,6 +172,10 @@ update_searchbar_complexity (XstDialogComplexity complexity)
 	switch (complexity) {
 	case XST_DIALOG_BASIC:
 		gtk_widget_hide (GTK_WIDGET (sb));
+
+		/* we should also clear any previous search */
+		search_bar_clear_search (sb);
+		
 		break;
 	case XST_DIALOG_ADVANCED:
 		gtk_widget_show (GTK_WIDGET (sb));
@@ -244,7 +228,7 @@ update_complexity (void)
 
 	update_notebook_complexity (complexity);
 	update_toggle_complexity (complexity);
-//	update_searchbar_complexity (complexity);	
+	update_searchbar_complexity (complexity);
 	update_tables_complexity (complexity);
 }
 
@@ -266,14 +250,12 @@ create_searchbar (void)
 
 	table = xst_dialog_get_widget (tool->main_dialog, "user_parent");
 
-	search = SEARCH_BAR (search_bar_new (user_search_menu_items, user_search_option_items));
+	search = SEARCH_BAR (search_bar_new (user_search_option_items));
 	gtk_table_attach (GTK_TABLE (table), GTK_WIDGET (search), 0, 1, 0, 1,
 			  GTK_FILL, GTK_FILL, 0, 0);
 
 	g_signal_connect (G_OBJECT (search), "query_changed",
 			  G_CALLBACK (user_query_changed), 0);
-	g_signal_connect (G_OBJECT (search), "menu_activated",
-			  G_CALLBACK (user_menu_activated), 0);
 	g_object_set_data (G_OBJECT (tool->main_dialog), "SearchBar",
 			   (gpointer) search);
 
@@ -290,7 +272,7 @@ main_window_prepare (void)
 	/* Create tables */
 	construct_tables ();
 	
-//	create_searchbar ();
+	create_searchbar ();
 
 	/* General complexity update */
 	update_complexity ();

@@ -39,6 +39,7 @@
 #include "users-table.h"
 #include "group-settings.h"
 #include "groups-table.h"
+#include "search-bar/search-bar.h"
 
 extern XstTool *tool;
 
@@ -51,7 +52,11 @@ void
 on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
 {
 	XstDialogComplexity complexity = tool->main_dialog->complexity;
+	SearchBar *sb = SEARCH_BAR (g_object_get_data (G_OBJECT (tool->main_dialog), "SearchBar"));
 
+	/* we ought to clear previous searches */
+	search_bar_clear_search (sb);
+	
 	/* Only saves the change if we are in advanced mode, basic mode will be always FALSE (we don't need to save it) */
 	if (complexity == XST_DIALOG_ADVANCED) {
 		xst_conf_set_boolean (tool, "showall", gtk_toggle_button_get_active (toggle));

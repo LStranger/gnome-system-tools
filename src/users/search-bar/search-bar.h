@@ -47,14 +47,13 @@ struct _SearchBar
 	GtkHBox parent;
 	
 	/* item specific fields */
-	GtkWidget *dropdown;
 	GtkWidget *option;
 	GtkWidget *entry;
+	GtkWidget *search_button;
+	GtkWidget *clear_button;
 
 	/* PRIVATE */
-	GtkWidget *dropdown_holder;	/* holds the dropdown */
 	GtkWidget *option_menu;
-	GtkWidget *dropdown_menu;
 
 	int        option_choice;
 };
@@ -71,14 +70,11 @@ struct _SearchBarClass
 };
 
 GtkType    search_bar_get_type   (void);
-void       search_bar_set_menu   (SearchBar *search_bar, SearchBarItem *menu_items);
-void	   search_bar_add_menu   (SearchBar *search_bar, SearchBarItem *menu_item);
 
-void       search_bar_set_option (SearchBar *search_bar, SearchBarItem *option_items);
-void       search_bar_construct  (SearchBar *search_bar, SearchBarItem *menu_items, SearchBarItem *option_items);
-GtkWidget *search_bar_new        (SearchBarItem *menu_items, SearchBarItem *option_items);
+void       search_bar_clear_search (SearchBar *search_bar);
+void       search_bar_set_option   (SearchBar *search_bar, SearchBarItem *option_items);
 
-void       search_bar_set_menu_sensitive(SearchBar *search_bar, int id, gboolean state);
+GtkWidget *search_bar_new          (SearchBarItem *option_items);
 
 #ifdef __cplusplus
 }
