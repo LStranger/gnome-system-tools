@@ -72,7 +72,7 @@ static guint find_new_id (gchar from, gchar what);
 static gchar *find_new_key (gchar from);
 static gboolean is_valid_name (gchar *str);
 static gboolean passwd_uses_md5 (void);
-static void passwd_rand_str (gchar *str, gint len);
+static gchar *passwd_rand_str (gchar *str, gint len);
 
 /* Main button callbacks */
 
@@ -464,7 +464,7 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkEntry *entry1, *entry2;
 	GtkToggleButton *quality;
-	gchar *new_passwd, *confirm;
+	gchar *new_passwd, *confirm, salt[9];
 	GtkWidget *win;
 	GnomeDialog *dialog;
 	gchar *msg, *check_err;
@@ -502,30 +502,11 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	}
 	else
 	{
-		/* FIXME crypt password!!! how? crypt? */
-		/* it depends on the crypt method of the system. We'll have to
-		 * first identify the method, through magic, and then use crypt
-		 * and steal some code for MD5 crypt */
-				
 		g_free (current_user->password);
 		if (passwd_uses_md5 ()) 
-			current_user->password = crypt_md5 (new_passwd, "helixcod");
+			current_user->password = crypt_md5 (new_passwd, passwd_rand_str (salt, 8));
 		else
-			current_user->password = crypt (new_passwd, "hc");
-
-		/* I understand the need of feedback for the user, but this
-		 * dialog is being more of an obstacle, and is not actually true,
-		 * as the password is not updated until Apply is pressed. Maybe
-		 * we need a way to tell the user which accounts are subject to
-		 * changes.
-		 * Arturo. */
-		
-/*		msg = g_strdup_printf ("Password for %s updated.", current_user->login);*/
-		dialog = GNOME_DIALOG (gnome_ok_dialog_parented ("The password manipulation "
-					"routines are not ready yet.", GTK_WINDOW (win)));
-		
-		gnome_dialog_run (dialog);
-/*		g_free (msg);*/
+			current_user->password = crypt (new_passwd, passwd_rand_str (salt, 2));
 
 		gtk_widget_hide (win);
 		tool_set_modified (TRUE);
@@ -1478,18 +1459,17 @@ passwd_uses_md5 (void)
 }
 
 /* str must be a string of len + 1 allocated gchars */
-static void
+static gchar *
 passwd_rand_str (gchar *str, gint len)
 {
  	gchar alphanum[] = "0ab1cd2ef3gh4ij5kl6mn7op8qr9st0uvwxyz0AB1CD2EF3GH4IJ5KL6MN7OP8QR9ST0UVWXYZ";
 	gint i, alnum_len;
 	
 	alnum_len = strlen (alphanum);
-	str[len] = str[0] = 0;
+	str[len] = 0;
 	
 	for (i = 0; i < len; i++) 
 		str[i] = alphanum [(gint) ((((float) len) * rand () / (RAND_MAX + 1.0)))];
+	
+	return str;
 }
-
-	
-	
