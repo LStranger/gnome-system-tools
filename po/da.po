@@ -7,18 +7,22 @@
 #
 # Konventioner:
 #
-# option -> tilvalg (men dette er muligvis forkert i visse tilfælde)
+# option -> tilvalg (men dette er muligvis forkert i visse tilfælde)
 # swap -> swap (i mangel af bedre)
 # location -> sted (drejer sig om et fysisk sted, fx en by)
 # parent location -> ophavssted
-# system configuration -> systemopsætningen, systemets opsætning (konfiguration bliver lidt tungt)
+# system configuration -> systemopsætningen, systemets opsætning (konfiguration bliver lidt tungt)
 # ISP -> [internet]udbyder
+# time server -> tidsserver
+# Ximian Setup Tools -> Ximian administrationsværktøjer
+# ID -> id
+# snapshot -> øjebliksbillede
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.1.0\n"
-"POT-Creation-Date: 2001-06-21 20:32+0200\n"
-"PO-Revision-Date: 2001-06-21 12:37+02:00\n"
+"POT-Creation-Date: 2001-06-26 19:34+0200\n"
+"PO-Revision-Date: 2001-06-26 12:19+02:00\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -416,7 +420,6 @@ msgid "Setting remote address for interface [%s]."
 msgstr "Sætter fjernadressen for grænsefladen [%s]."
 
 #: backend/report.pl.in:233
-#, fuzzy
 msgid "Ensuring loopback interface configuration."
 msgstr "Sikrer loopback-grænsefladekonfigurationen."
 
@@ -495,7 +498,7 @@ msgid "Getting user database."
 msgstr "Henter brugerdatabase."
 
 # i hvert fald bedre end standardsted...
-#: archiver/location.c:224
+#: archiver/location.c:228
 msgid "Default Location"
 msgstr "Hjemsted"
 
@@ -683,9 +686,10 @@ msgstr ""
 "Tillykke, den nye bruger er oprettet.\n"
 "Klik på \"Færdig\" for at gemme ændringerne."
 
+# gør den valgte partition til den der startes automatisk
 #: interfaces/boot.glade.in.h:8
 msgid "D_efault"
-msgstr "_Standard"
+msgstr "_Forvalgt"
 
 #: interfaces/boot.glade.in.h:9 interfaces/network.glade.in.h:34
 #: interfaces/users.glade.in.h:30
@@ -839,10 +843,10 @@ msgid ""
 "To acquire such privileges, enter your root password below. If you don't\n"
 "specify a password, you will be unable to modify your system configuration."
 msgstr ""
-"For at køre dette værktøj skal du have administratorrettigheder.\n"
+"For at benytte dette værktøj skal du have administratorrettigheder.\n"
 "\n"
-"Indtast nedenfor din administratoradgangskode for at få disse rettigheder.\n"
-"Hvis du ikke angiver en adgangskode, kan du ikke ændre systemets opsætning."
+"Indtast din administratoradgangskode for at opnå disse rettigheder. Hvis du\n"
+"ikke angiver en adgangskode, kan du ikke ændre systemets opsætning."
 
 #: interfaces/common.glade.in.h:12
 msgid "Unsupported platform"
@@ -850,11 +854,11 @@ msgstr "Ikke-understøttet platform"
 
 #: interfaces/common.glade.in.h:13
 msgid "Ximian Setup Tools"
-msgstr "Ximian opsætningsværktøjer"
+msgstr "Ximian administrationsværktøjer"
 
 #: interfaces/common.glade.in.h:14
 msgid "Ximian Setup Tools - Password"
-msgstr "Ximian opsætningsværktøjer - adgangskode"
+msgstr "Ximian administrationsværktøjer - adgangskode"
 
 #: interfaces/disks.glade.in.h:1
 msgid "Add an unlisted import"
@@ -870,11 +874,12 @@ msgstr "Automatisk (opdag ved montering)"
 
 #: interfaces/disks.glade.in.h:4
 msgid "Bootable"
-msgstr "Kan opstarte"
+msgstr "Opstartsbar"
 
+# der angives med en afkrydsning om partitionen tjekkes
 #: interfaces/disks.glade.in.h:5
 msgid "Check"
-msgstr "Kontrollér"
+msgstr "Tjekkes"
 
 #: interfaces/disks.glade.in.h:6
 msgid "Check for errors on startup"
@@ -1628,7 +1633,7 @@ msgstr "_Sekundær:"
 
 #: interfaces/network.glade.in.h:111
 msgid "_Session ID:"
-msgstr "_Sessions-ID:"
+msgstr "_Sessions-id:"
 
 #: interfaces/network.glade.in.h:112
 msgid "_Start PPP as soon as modem connects"
@@ -1788,7 +1793,7 @@ msgstr "Monteringsmuligheder"
 
 #: interfaces/shares.glade.in.h:37
 msgid "Mounting options"
-msgstr ""
+msgstr "Monteringstilvalg"
 
 #: interfaces/shares.glade.in.h:38
 msgid "NFS"
@@ -1826,7 +1831,7 @@ msgstr "Offentlig"
 
 #: interfaces/shares.glade.in.h:48
 msgid "Restrict access to this share to specific clients"
-msgstr ""
+msgstr "Begræns adgang til denne deling til specifikke klienter"
 
 #: interfaces/shares.glade.in.h:49
 msgid "Samba"
@@ -1845,12 +1850,16 @@ msgid ""
 "Use this dialog to create a new export, or to edit the settings of an "
 "existing export."
 msgstr ""
+"Benyt dette vindue til at oprette ny eksporteringer eller til at ændre "
+"indstillingerne for en eksisterende eksportering."
 
 #: interfaces/shares.glade.in.h:53
 msgid ""
 "Use this dialog to create a new import, or to edit the settings of an "
 "existing import."
 msgstr ""
+"Benyt dette vindue til at oprette nye importeringer eller til at ændre "
+"indstillingerne for en eksisterende importering."
 
 #: interfaces/shares.glade.in.h:54
 msgid ""
@@ -1858,6 +1867,9 @@ msgid ""
 "to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
 "or \" *.gnome.org\".  "
 msgstr ""
+"Benyt dette vindue til at definere de klientmønstre der bestemmer hvem har "
+"adgang til din NFS-deling. Klientmønstre er typisk på formen '10.10.10.*' "
+"eller '*.gnome.org'."
 
 #: interfaces/shares.glade.in.h:55
 msgid "Username:"
@@ -1868,14 +1880,12 @@ msgid "Writable"
 msgstr "Skrivbar"
 
 #: interfaces/shares.glade.in.h:58
-#, fuzzy
 msgid "_Browseable"
-msgstr "Læsbar"
+msgstr "Kan _gennemses"
 
 #: interfaces/shares.glade.in.h:61
-#, fuzzy
 msgid "_Enable"
-msgstr "Aktivér"
+msgstr "_Aktivér"
 
 #: interfaces/shares.glade.in.h:62
 msgid "_Host:"
@@ -1891,7 +1901,7 @@ msgstr "_Monteret"
 
 #: interfaces/shares.glade.in.h:67
 msgid "_Restrict access to this share to specific clients"
-msgstr ""
+msgstr "_Begræns adgang til denne deling til specifikke klienter"
 
 #: interfaces/shares.glade.in.h:68
 msgid "_Scan"
@@ -1903,29 +1913,27 @@ msgstr "Br_ugernavn:"
 
 #: interfaces/shares.glade.in.h:71
 msgid "_Writable"
-msgstr "Skrivbar"
+msgstr "Skri_vbar"
 
 #: interfaces/shares.glade.in.h:72
 msgid "add/edit clients"
-msgstr "tilføj/ændr klienter"
+msgstr "Tilføj/ændr klienter"
 
 #: interfaces/shares.glade.in.h:73
 msgid "advanced mode--main window"
-msgstr ""
+msgstr "Avanceret tilstand - hovedvindue"
 
 #: interfaces/shares.glade.in.h:74
-#, fuzzy
 msgid "export settings--NFS options"
-msgstr "NFS-Indstillinger for importering"
+msgstr "NFS-indstillinger for eksportering"
 
 #: interfaces/shares.glade.in.h:75
-#, fuzzy
 msgid "export settings--Samba options"
-msgstr "NFS-Indstillinger for importering"
+msgstr "Samba-indstillinger for eksportering"
 
 #: interfaces/shares.glade.in.h:76
 msgid "simple mode--main window"
-msgstr ""
+msgstr "Simpel tilstand - hovedvindue"
 
 #: interfaces/location-manager.glade.in.h:2 interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1937,7 +1945,7 @@ msgstr "Dato"
 
 #: interfaces/location-manager.glade.in.h:11 interfaces/time.glade.in.h:3
 msgid "Date/Time "
-msgstr "Dato/klokkeslet"
+msgstr "Dato/klokkeslet "
 
 #: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.in.h:4
 msgid "Date/time"
@@ -1948,8 +1956,8 @@ msgid ""
 "Please select the current date and time. You can also specify a time zone "
 "and a time server."
 msgstr ""
-"Vælg venligst den aktuelle dato og klokkeslet. Du kan også angive en "
-"tidszone og klokkesletsserver."
+"Vælg venligst den aktuelle dato og klokkeslettet. Du kan også angive en "
+"tidszone og tidsserver."
 
 #: interfaces/time.glade.in.h:6
 msgid "Select _servers..."
@@ -1965,7 +1973,7 @@ msgstr ""
 
 #: interfaces/time.glade.in.h:9
 msgid "Select the servers you wish to use for time synchronization."
-msgstr "Vælg serverne du ønsker at bruge for tidssynkronisering."
+msgstr "Vælg de servere du ønsker at bruge til tidssynkronisering."
 
 #: interfaces/time.glade.in.h:10
 msgid "Selection:"
@@ -1973,12 +1981,12 @@ msgstr "Valg:"
 
 #: interfaces/time.glade.in.h:11
 msgid "Set time _zone..."
-msgstr "Vælg tidszone..."
+msgstr "Vælg tids_zone..."
 
 #: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:12
 #: src/time/time.desktop.in.in.h:1
 msgid "Time"
-msgstr "Klokkeslet"
+msgstr "Tid"
 
 #: interfaces/time.glade.in.h:13
 msgid "Time Zones"
@@ -1986,11 +1994,11 @@ msgstr "Tidszoner"
 
 #: interfaces/location-manager.glade.in.h:35 interfaces/time.glade.in.h:14
 msgid "Time server"
-msgstr "Klokkesletsserver"
+msgstr "Tidsserver"
 
 #: interfaces/time.glade.in.h:15
 msgid "Time servers"
-msgstr "Tidservere"
+msgstr "Tidsservere"
 
 #: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.in.h:16
 msgid "Time zone"
@@ -1998,7 +2006,7 @@ msgstr "Tidszone"
 
 #: interfaces/time.glade.in.h:18
 msgid "_Keep clock synchronized with selected servers"
-msgstr "Hold _klokken synkroniseret med udvalgte servere"
+msgstr "Hold _tiden synkroniseret med de markerede servere"
 
 #: interfaces/users.glade.in.h:1
 msgid "<< _Remove"
@@ -2021,13 +2029,12 @@ msgid "All _users"
 msgstr "Alle br_ugere"
 
 #: interfaces/users.glade.in.h:8
-msgid "Assign a random pasword by default"
-msgstr "Tilfældig adgangskode som standard"
+msgid "Assign a random password by default"
+msgstr "Tildel tilfældig adgangskode som standard"
 
 #: interfaces/users.glade.in.h:9
-#, fuzzy
 msgid "Automatic UID/GID"
-msgstr "Min/max værdier for automatis bruger-/gruppe-ID"
+msgstr "Automatiske bruger-/gruppe-id"
 
 #: interfaces/users.glade.in.h:10
 msgid "Basic settings"
@@ -2035,25 +2042,26 @@ msgstr "Grundlæggende indstillinger"
 
 #: interfaces/users.glade.in.h:11
 msgid "C_onfirm:"
-msgstr "Bekræft:"
+msgstr "B_ekræft:"
 
+# 'settings and options' er to sider af samme sag
 #: interfaces/users.glade.in.h:12
 msgid ""
 "Change the settings and options for the\n"
 "selected user or group, like a users password\n"
 "or a groups name or members."
 msgstr ""
-"Ændr indstillingerne og valgmulighederne for den\n"
-"valgte bruger eller gruppe, såsom en brugers adgangskode\n"
+"Ændr indstillingerne for den valgte bruger\n"
+"eller gruppe, som f.eks. en brugers adgangskode\n"
 "eller en gruppes medlemsnavne."
 
 #: interfaces/users.glade.in.h:15
 msgid "Check password _quality"
-msgstr "Tjek kvalitet af adgangskode"
+msgstr "Tjek _kvaliteten af adgangskoden"
 
 #: interfaces/users.glade.in.h:19
 msgid "Contact information"
-msgstr ""
+msgstr "Kontaktinformation"
 
 #: interfaces/users.glade.in.h:20
 msgid "Copy..."
@@ -2063,13 +2071,15 @@ msgstr "Kopiér..."
 msgid "Days between warning and password expiration:"
 msgstr "Dage mellem advarsel og adgangskodes udløb:"
 
+# default indgår i en overskrift og er således overflødig
 #: interfaces/users.glade.in.h:22
 msgid "Default group:"
-msgstr "Hovedgruppe:"
+msgstr "Gruppe:"
 
+# ditto
 #: interfaces/users.glade.in.h:23
 msgid "Default shell:"
-msgstr "Forvalgt kommandoskal:"
+msgstr "Kommandoskal:"
 
 #: interfaces/users.glade.in.h:25
 msgid ""
@@ -2077,19 +2087,21 @@ msgid ""
 "It's only available if You have NIS\n"
 "and when You click on \"More Options\"."
 msgstr ""
+"EKSPERIMENTEL NIS-understøttelse.\n"
+"Den er kun tilgængelig hvis du har NIS,\n"
+"og når du klikker på \"Flere indstillinger\"."
 
 #: interfaces/users.glade.in.h:28
 msgid "Edit profile:"
-msgstr "Ændr profil:"
+msgstr "Redigér profil:"
 
 #: interfaces/users.glade.in.h:29
 msgid "Filename"
 msgstr "Filnavn"
 
 #: interfaces/users.glade.in.h:31
-#, fuzzy
 msgid "Generate _random password"
-msgstr "Generér tilfældig adgangskode"
+msgstr "Generér _tilfældig adgangskode"
 
 #: interfaces/users.glade.in.h:32
 msgid "Group Settings"
@@ -2100,23 +2112,21 @@ msgid "Group _members"
 msgstr "Gruppe_medlemmer"
 
 #: interfaces/users.glade.in.h:34 src/users/group.etspec.h:2
-#: src/users/user_settings.c:405 src/users/user_settings.c:478
+#: src/users/user_settings.c:459 src/users/user_settings.c:532
 msgid "Groups"
 msgstr "Grupper"
 
 #: interfaces/users.glade.in.h:35
-#, fuzzy
 msgid "Home _directory:"
-msgstr "Hjemmekatalog:"
+msgstr "Hjemme_mappe:"
 
 #: interfaces/users.glade.in.h:36
 msgid "Home directory:"
-msgstr "Hjemmekatalog:"
+msgstr "Hjemmemappe:"
 
 #: interfaces/users.glade.in.h:37
-#, fuzzy
 msgid "Ma_ximum days a password may be used:"
-msgstr "Største antal dage en adgangskode kan bruges:"
+msgstr "St_ørste antal dage en adgangskode kan bruges:"
 
 #: interfaces/users.glade.in.h:38
 msgid "Main _group:"
@@ -2124,36 +2134,35 @@ msgstr "Hoved_gruppe:"
 
 #: interfaces/users.glade.in.h:39
 msgid "Maximum GID:"
-msgstr "Minimum gruppe-ID:"
+msgstr "Største gruppe-id:"
 
 #: interfaces/users.glade.in.h:40
 msgid "Maximum UID:"
-msgstr "Maksimum bruger-ID:"
+msgstr "Største bruger-id:"
 
 #: interfaces/users.glade.in.h:41
 msgid "Members"
 msgstr "Medlemmer"
 
 #: interfaces/users.glade.in.h:42
-#, fuzzy
 msgid "Mi_nimum days between password changes:"
-msgstr "Mindste antal dage mellem ændringer af adgangskode:"
+msgstr "Mi_ndste antal dage mellem skift af adgangskode:"
 
 #: interfaces/users.glade.in.h:43
 msgid "Minimum GID:"
-msgstr "Maksimum gruppe-ID:"
+msgstr "Mindste gruppe-id:"
 
 #: interfaces/users.glade.in.h:44
 msgid "Minimum UID:"
-msgstr "Minimum bruger-ID:"
+msgstr "Mindste bruger-id:"
 
 #: interfaces/users.glade.in.h:45
 msgid "Minimum days allowed between password changes:"
-msgstr "Mindste antal dage tilladt mellem ændringer af adgangskode:"
+msgstr "Mindste tilladte antal dage mellem skift af adgangskode:"
 
 #: interfaces/users.glade.in.h:46
 msgid "Ne_w:"
-msgstr "Ny:"
+msgstr "N_y:"
 
 #: interfaces/users.glade.in.h:47
 msgid "New Group"
@@ -2168,80 +2177,81 @@ msgid "New User"
 msgstr "Ny bruger"
 
 #: interfaces/users.glade.in.h:50
-#, fuzzy
 msgid "New password"
-msgstr "Indsæt adgangskode"
+msgstr "Ny adgangskode"
 
 #: interfaces/users.glade.in.h:51
-#, fuzzy
 msgid "Number of days that a password may be used:"
-msgstr "Største antal dage en adgangskode kan bruges:"
+msgstr "Antal dage en adgangskode kan bruges:"
 
 #: interfaces/users.glade.in.h:52
 msgid ""
 "On this page, you can define security options, such as how frequently users "
 "must change their passwords."
 msgstr ""
+"På denne side kan du tilrette sikkerhedsindstillinger som f.eks. hvor ofte "
+"brugere skal ændre deres adgangskode."
 
 #: interfaces/users.glade.in.h:53
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
 msgstr ""
+"På denne side kan du tilrette systemets forvalgte værdier som bliver tildelt "
+"nye brugere."
 
 #: interfaces/users.glade.in.h:54
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
 msgstr ""
+"På denne side kan du vælge programmer og filer som skal kopieres fra din "
+"konto til nye brugeres konto."
 
 #: interfaces/users.glade.in.h:55
-#, fuzzy
 msgid "Optional settings"
 msgstr "Valgfri indstillinger"
 
-#: interfaces/users.glade.in.h:56 src/users/user_settings.c:412
-#: src/users/user_settings.c:485
+#: interfaces/users.glade.in.h:56 src/users/user_settings.c:466
+#: src/users/user_settings.c:539
 msgid "Password"
-msgstr "Adgangskode:"
+msgstr "Adgangskode"
 
 #: interfaces/users.glade.in.h:57
 msgid "Password options"
-msgstr "Adgangskode-indstillinger"
+msgstr "Adgangskodeindstillinger"
 
 #: interfaces/users.glade.in.h:58
-#, fuzzy
 msgid "Password options (step 2 of 2)"
-msgstr "Adgangskode-indstillinger"
+msgstr "Adgangskodeindstillinger (trin 2 af 2)"
 
 #: interfaces/users.glade.in.h:59
-#, fuzzy
 msgid "Password set to:"
-msgstr "Adgangskode sat til \"%s\"."
+msgstr "Adgangskode sat til:"
 
 #: interfaces/users.glade.in.h:61
 msgid ""
 "Please enter a username for the new user in the space below. Optionally, you "
 "can fill in more information to identify the user. "
 msgstr ""
+"Indtast venligst et brugernavn til brugeren. Eventuelt kan du udfylde flere "
+"felter for at identificere brugeren."
 
 #: interfaces/users.glade.in.h:62
 msgid "Profiles"
 msgstr "Profiler"
 
 #: interfaces/users.glade.in.h:63
-#, fuzzy
 msgid "Real _name:"
-msgstr "Rigtig navn:"
+msgstr "Rigtigt _navn:"
 
 #: interfaces/users.glade.in.h:64
 msgid "Security"
 msgstr "Sikkerhed"
 
 #: interfaces/users.glade.in.h:65
-#, fuzzy
 msgid "Set password b_y hand"
-msgstr "Indsæt adgangskode"
+msgstr "Angiv adgangskode _manuelt"
 
 #: interfaces/users.glade.in.h:67
 msgid "Settings for selected user and group"
@@ -2252,9 +2262,8 @@ msgid "System"
 msgstr "System"
 
 #: interfaces/users.glade.in.h:69
-#, fuzzy
 msgid "System defaults"
-msgstr "Systemindstillinger"
+msgstr "Systemforvalg"
 
 #: interfaces/users.glade.in.h:70
 msgid ""
@@ -2263,43 +2272,46 @@ msgid ""
 "\n"
 "To begin, click \"Next\". "
 msgstr ""
+"Denne hjælper er indrettet til at hjælpe\n"
+"med hurtigt og let at tilføje nye brugere til\n"
+"systemet.\n"
+"\n"
+"Klik på \"Næste\" for at begynde."
 
+# lettere omformulering for at undgå klodsethed
 #: interfaces/users.glade.in.h:74
-#, fuzzy
+msgid ""
+"This is a list of the users available in the system. Create new users or "
+"edit existing user settings with this dialog."
+msgstr ""
+"Dette er en liste med brugere på systemet. Du kan oprette nye brugere eller "
+"redigere eksisterende brugeres indstillinger."
+
+# ditto
+#: interfaces/users.glade.in.h:75
 msgid ""
 "This is the list of the groups available in the system. Create new groups or "
 "edit existing groups with this dialog."
 msgstr ""
-"Dette er en liste med brugere som er tilgængelige på systemet. Opret nye "
-"brugere eller redigér eksisterende brugeres indstillinger med denne dialog."
-
-#: interfaces/users.glade.in.h:75
-#, fuzzy
-msgid ""
-"This is the list of the users available in the system. Create new users or "
-"edit existing user settings with this dialog."
-msgstr ""
-"Dette er en liste med brugere som er tilgængelige på systemet. Opret nye "
-"brugere eller redigér eksisterende brugeres indstillinger med denne dialog."
+"Dette er en liste med grupper på systemet. Du kan oprette nye grupper eller "
+"redigere eksisterende gruppers indstillinger."
 
 #: interfaces/users.glade.in.h:76
-#, fuzzy
 msgid "Us_er's groups"
-msgstr "Brugers grupper"
+msgstr "Bru_gers grupper"
 
 #: interfaces/users.glade.in.h:77
 msgid "Use this dialog to create a new profile."
-msgstr ""
+msgstr "Benyt dette vindue til at oprette en ny profil."
 
 #. set window title
 #: interfaces/users.glade.in.h:78 src/users/user-druid.c:271
 msgid "User Account Wizard"
-msgstr "Brugerkonto-troldmand"
+msgstr "Brugerkontohjælper"
 
 #: interfaces/users.glade.in.h:79
-#, fuzzy
 msgid "User Creation Druid"
-msgstr "Brugerindstillinger"
+msgstr "Brugeroprettelseshjælper"
 
 #: interfaces/users.glade.in.h:80
 msgid "User Identity  (step 1 of 2)"
@@ -2307,13 +2319,16 @@ msgstr "Brugeridentitet (trin 1 af 2)"
 
 #: interfaces/users.glade.in.h:81
 msgid "User _ID:"
-msgstr "Bruger-_ID:"
+msgstr "Bruger-_id:"
 
+# lettere omformulering
 #: interfaces/users.glade.in.h:82
 msgid ""
 "User profiles can be used a templates to facilitate the creation of new "
 "users. To edit a profile, change the settings in the following tabs."
 msgstr ""
+"Brugerprofiler bruges som skabeloner til at hjælpe med oprettelsen af nye "
+"brugere. Profilindstillingerne kan ændres i de følgende faneblade."
 
 #: interfaces/users.glade.in.h:83 src/users/users.desktop.in.in.h:1
 #: src/users/users.etspec.h:7
@@ -2322,43 +2337,39 @@ msgstr "Brugere"
 
 #: interfaces/users.glade.in.h:84
 msgid "_Add >>"
-msgstr "Tilføj ->"
+msgstr "_Tilføj >>"
 
 #: interfaces/users.glade.in.h:85
 msgid "_Add group..."
-msgstr "Tilføj gruppe..."
+msgstr "_Tilføj gruppe..."
 
 #: interfaces/users.glade.in.h:86
 msgid "_Add user..."
-msgstr "Tilføj bruger..."
+msgstr "_Tilføj bruger..."
 
 #: interfaces/users.glade.in.h:88
-#, fuzzy
 msgid "_Days between warning and password expiration:"
-msgstr "Dage mellem advarsel og adgangskodes udløb:"
+msgstr "_Dage mellem advarsel og adgangskodes udløb:"
 
 #: interfaces/users.glade.in.h:90
-#, fuzzy
 msgid "_Edit profiles..."
-msgstr "Ændr profil:"
+msgstr "_Redigér profiler..."
 
 #: interfaces/users.glade.in.h:91
 msgid "_Group name:"
 msgstr "_Gruppenavn:"
 
 #: interfaces/users.glade.in.h:92
-#, fuzzy
 msgid "_Home phone:"
-msgstr "V_ærtsnavn:"
+msgstr "Tlf. (_hjemme):"
 
 #: interfaces/users.glade.in.h:93
 msgid "_Inherit settings from:"
-msgstr "Arv indstillinger fra:"
+msgstr "_Nedarv indstillinger fra:"
 
 #: interfaces/users.glade.in.h:95
-#, fuzzy
 msgid "_Office location:"
-msgstr "Brugerindstillinger"
+msgstr "K_ontorplacering:"
 
 #: interfaces/users.glade.in.h:96
 msgid "_Profile:"
@@ -2370,29 +2381,29 @@ msgstr "_Profiler..."
 
 #: interfaces/users.glade.in.h:99
 msgid "_Shell:"
-msgstr "_Skal:"
+msgstr "_Kommandoskal:"
 
 #: interfaces/users.glade.in.h:100
-#, fuzzy
 msgid "_Show all users and groups"
-msgstr "Vis systembrugere og grupper"
+msgstr "_Vis alle brugere og grupper"
 
 #: interfaces/users.glade.in.h:102
-#, fuzzy
 msgid "_Work phone:"
-msgstr "Arbejdsgruppe:"
+msgstr "Tlf. (_arbejde):"
 
 #: src/boot/callbacks.c:61
 #, c-format
 msgid "Are you sure you want to delete %s?"
 msgstr "Er du sikker på at du vil slette %s?"
 
-#: src/boot/e-table.c:356
-#, fuzzy, c-format
+# 'default' angiver vist nok den partition der startes fra automatisk
+# i LILO hvis man ikke vælger en anden i menuen
+#: src/boot/e-table.c:370
+#, c-format
 msgid "%s (default)"
-msgstr "Systemindstillinger"
+msgstr "%s (forvalgt)"
 
-#: src/boot/boot.etspec.h:1 src/users/profile.c:999
+#: src/boot/boot.etspec.h:1 src/users/profile.c:1032
 msgid "Default"
 msgstr "Standard"
 
@@ -2404,14 +2415,15 @@ msgstr "Kernebillede"
 msgid "Type"
 msgstr "Type"
 
-#: src/boot/main.c:89
+#: src/boot/main.c:90
 msgid "Boot Manager Settings - Ximian Setup Tools"
-msgstr "Indstillinger for opstartshåndterer - Ximian administrationsværktøjer"
+msgstr "Indstillinger for opstartshåndtering - Ximian administrationsværktøjer"
 
 #: src/boot/boot.desktop.in.in.h:1
 msgid "Boot"
 msgstr "Opstart"
 
+# hjælpeteksten i fodmenuen - indstillinger mere sigende end håndtering
 #: src/boot/boot.desktop.in.in.h:2
 msgid "Boot Manager"
 msgstr "Opstartsindstillinger"
@@ -2419,7 +2431,7 @@ msgstr "Opstartsindstillinger"
 #: src/common/xst-dialog.c:58
 #, c-format
 msgid "Could not find widget: %s"
-msgstr "Kunne ikke finde widget: %s"
+msgstr "Kunne ikke finde kontrol: %s"
 
 #: src/common/xst-dialog.c:90
 msgid " More Options >> "
@@ -2427,7 +2439,7 @@ msgstr " Flere indstillinger >> "
 
 #: src/common/xst-dialog.c:91
 msgid " << Fewer Options "
-msgstr " << Færre valgmuligheder "
+msgstr " << Færre indstillinger "
 
 #: src/common/xst-dialog.c:408
 msgid ""
@@ -2440,11 +2452,11 @@ msgstr ""
 #: src/common/xst-dialog.c:478
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
-msgstr ""
+msgstr "Fejl ved forbindelse af signalet '%s' i kontrollen '%s'"
 
 #: src/common/xst-tool.c:574
 msgid "Skipping actual save..."
-msgstr "Overspringer faktisk gemning..."
+msgstr "Springer over faktisk gemning..."
 
 #: src/common/xst-tool.c:621
 msgid "Updating your system configuration."
@@ -2455,6 +2467,8 @@ msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
+"Der opstod en fejl ved kørsel af bagendeprogrammet,\n"
+"og opsætningen kunne ikke indlæses."
 
 #: src/common/xst-tool.c:928
 #, c-format
@@ -2463,7 +2477,7 @@ msgstr "%s - Ximian administrationsværktøjer"
 
 #: src/common/xst-tool.c:1065
 msgid "The password you entered is invalid."
-msgstr "Adgangskoden du indtastede er ugyldig."
+msgstr "Den indtastede adgangskode er ugyldig."
 
 #: src/common/xst-tool.c:1075
 #, c-format
@@ -2480,30 +2494,30 @@ msgid ""
 "--\n"
 "The Ximian Setup Tools team"
 msgstr ""
-" Velkommen til %s afprøvningsudgaven af Ximian opsætningsværktøjerne.\n"
+"Velkommen til afprøvningsudgaven %s af administrationsværktøjerne\n"
+"fra Ximian.\n"
 "\n"
-"Dette er stadigt igangværende arbejde, og kan derfor indeholde deroøse "
-"fejl.\n"
-"Pga. opsætningsværktøjernes natur, kan fejl gøre din maskine\n"
-"DELVIS UBRUGBAR, koste tid, samt en god arbejdsindsats fra din side.\n"
+"Der arbejdes stadigt meget på programmerne som derfor kan have\n"
+"alvorlige fejl. På grund af værktøjernes natur kan fejl gøre din\n"
+"maskine praktisk talt FULDSTÆNDIG UBRUGELIG, og koste tid og en\n"
+"god del arbejdsindsats fra din side.\n"
 "\n"
-"Du er blevet advaret. Tak fordi de prøver denne tidlige udgave af\n"
-"Ximian opsætningsværktøjerne!\n"
+"Du er blevet advaret. Tak fordi du prøver denne tidlige udgave af\n"
+"Ximian administrationsværktøjerne!\n"
 "\n"
-"--\n"
-"Holdet bag Ximian opsætningsværktøjerne"
+" - Holdet bag værktøjerne"
 
 #: src/common/xst-tool.c:1095
 msgid "Don't show me this again"
-msgstr "Vis mig ikke igen"
+msgstr "Vis ikke dette vindue igen"
 
 #: src/common/xst-tool.c:1125
 msgid "\tEdit configuration in the location LOCATION."
-msgstr ""
+msgstr "        Redigér opsætningen ved stedet STED."
 
 #: src/common/xst-tool.c:1162
 msgid "Pretending we are root..."
-msgstr "Vi lader som om vi er 'root'..."
+msgstr "Vi lader som om vi er root..."
 
 #: src/disks/main.c:39
 msgid "Disk Partitions"
@@ -2515,23 +2529,24 @@ msgstr "Drev"
 
 #: src/disks/disks.desktop.in.in.h:2
 msgid "Local fixed media."
-msgstr "Lokale fastgjorde medier"
+msgstr "Lokale faste medier."
 
 #: src/memory/callbacks.c:189
-#, fuzzy, c-format
+#, c-format
 msgid "Are You sure you want to remove %s?"
 msgstr "Er du sikker på at du vil slette %s?"
 
+# 'er tom' er ikke så brugervenligt for ikke-programmører
 #. No name, no swap
 #: src/memory/callbacks.c:547
 msgid "Path to new swap location is empty."
-msgstr "Sti til nyt swapsted er tom."
+msgstr "Sti til nyt swapsted ikke angivet."
 
 #. It's already in there, can't add
 #: src/memory/callbacks.c:564
-#, fuzzy, c-format
+#, c-format
 msgid "Swap space %s already exist."
-msgstr "Swapsted %s eksisterer allerede."
+msgstr "Swapstedet %s eksisterer allerede."
 
 #: src/memory/main.c:92
 msgid "Swap Management"
@@ -2539,35 +2554,35 @@ msgstr "Swap-håndtering"
 
 #: src/memory/memory.desktop.in.in.h:1
 msgid "Memory"
-msgstr "Hukommelse (Swap)"
+msgstr "Hukommelse"
 
 #: src/memory/memory.desktop.in.in.h:2
 msgid "Memory settings."
-msgstr "Hukommelses-indstillinger"
+msgstr "Hukommelsesindstillinger"
 
 #: src/network/callbacks.c:265
 msgid "The name of this computer"
-msgstr "Navnet på denne datamaskine"
+msgstr "Navnet på denne maskine"
 
 #: src/network/callbacks.c:268
 msgid "A short description of your computer"
-msgstr "En kort beskrivelse af din komputer"
+msgstr "En kort beskrivelse af maskinen"
 
 #: src/network/callbacks.c:271
 msgid "The Windows Networking workgroup for your network"
-msgstr "Indstillinger for arbejdsgruppe for Windows netværk"
+msgstr "Windows-arbejdsgruppen for netværket"
 
 #: src/network/callbacks.c:274
 msgid "The IP address of your WINS server"
-msgstr "IP-adressen for din WINS-tjener"
+msgstr "IP-adressen til din WINS-server"
 
 #: src/network/callbacks.c:277
 msgid "The DNS domain for your computer"
-msgstr "DNS-domæne for din datamaskine"
+msgstr "DNS-domænet for din maskine"
 
 #: src/network/callbacks.c:280
 msgid "A list of your DNS servers' IP addresses"
-msgstr "En liste over IP-adresser for dine DNS-tjenere"
+msgstr "En liste over IP-adresser til dine DNS-servere"
 
 #: src/network/callbacks.c:283
 msgid "A list of domains where hosts will be searched"
@@ -2579,27 +2594,29 @@ msgstr "IP-adressen for denne vært"
 
 #: src/network/callbacks.c:289
 msgid "Aliases for this host, one per line"
-msgstr "Aliaser for denne vært, et per linje"
+msgstr "Aliaser for denne vært, ét per linje"
 
 #: src/network/callbacks.c:429
 #, c-format
 msgid "Remove connection %s: ``%s''?"
-msgstr "Fjern tilkobling %s: ``%s''?"
+msgstr "Fjern forbindelsen %s: `%s'?"
 
 #: src/network/callbacks.c:431
 #, c-format
 msgid "Remove connection %s?"
-msgstr "Fjern %s-forbindelse?"
+msgstr "Fjern %s-forbindelsen?"
 
 #: src/network/callbacks.c:493
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
 msgstr ""
+"Du har ikke SMB-understøttelse installeret. Installér venligst\n"
+"SMB-understøttelse på systemet for at benytte Windows-netværk."
 
 #: src/network/callbacks.c:494
 msgid "SMB support missing."
-msgstr "SMB-eksport mangler."
+msgstr "SMB-understøttelse mangler."
 
 #: src/network/callbacks.c:531
 msgid ""
@@ -2610,8 +2627,7 @@ msgid ""
 "Continue anyway?"
 msgstr ""
 "Værtsnavnet er ændret. Dette vil hindre dig i at\n"
-"starte nye applikationer, så du\n"
-"må logge ind igen.\n"
+"starte nye parogrammer, så du må logge på igen.\n"
 "\n"
 "Fortsæt alligevel?"
 
@@ -2635,6 +2651,11 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"'wvdial' blev ikke fundet på systemet. Du\n"
+"bliver nødt til at installere wvdial, ellers\n"
+"kan PPP-forbindelserne (via modem) ikke aktiveres.\n"
+"\n"
+"Fortsæt alligevel?"
 
 #: src/network/connection.c:44
 msgid "Other type"
@@ -2642,15 +2663,15 @@ msgstr "Anden type"
 
 #: src/network/connection.c:45
 msgid "Ethernet LAN card"
-msgstr "Ethernet netværkskort"
+msgstr "Ethernet lokalnetværkskort"
 
 #: src/network/connection.c:46
 msgid "WaveLAN wireless LAN"
-msgstr "WaveLAN trådløst LAN"
+msgstr "WaveLAN trådløst lokalnet"
 
 #: src/network/connection.c:47
 msgid "PPP: modem or transfer cable"
-msgstr "PPP: modem eller overføringskabel"
+msgstr "PPP: modem eller overførselskabel"
 
 #: src/network/connection.c:48
 msgid "Parallel line"
@@ -2658,7 +2679,7 @@ msgstr "Parallel-linje"
 
 #: src/network/connection.c:49
 msgid "Loopback: virtual interface"
-msgstr "Loopback: virtuelt grænseflade"
+msgstr "Loopback: virtuel grænseflade"
 
 #: src/network/connection.c:50
 msgid "Unknown type"
@@ -2666,11 +2687,11 @@ msgstr "Ukendt type"
 
 #: src/network/connection.c:527
 msgid "To activate"
-msgstr "Til aktivering"
+msgstr "At aktivere"
 
 #: src/network/connection.c:528
 msgid "To inactivate"
-msgstr "Til deaktivering"
+msgstr "At deaktivere"
 
 #: src/network/connection.c:881
 msgid ""
@@ -2678,6 +2699,9 @@ msgid ""
 "was left empty. Please enter valid IP\n"
 "addresses in those fields to continue."
 msgstr ""
+"IP-adressen eller netmasken for forbindelsen\n"
+"mangler. Indtast venligst gyldige IP-adresser\n"
+"i de felter for at fortsætte."
 
 #: src/network/connection.c:888
 msgid ""
@@ -2685,6 +2709,9 @@ msgid ""
 "interface was left empty. Please enter valid\n"
 "IP addresses in those fields to continue."
 msgstr ""
+"IP-adressen eller fjernadressen for forbindelsen\n"
+"mangler. Indtast venligst gyldige IP-adresser\n"
+"i de felter for at fortsætte."
 
 #: src/network/connection.c:894
 msgid ""
@@ -2694,6 +2721,11 @@ msgid ""
 "enter the IP for the primary DNS or uncheck\n"
 "the manual DNS option."
 msgstr ""
+"Du har valgt at angive DNS-serverne for\n"
+"denne forbindelse manuelt, men har udeladt\n"
+"IP-adressen for den primære DNS. Indtast\n"
+"venligst adressen på den primære DNS eller\n"
+"fravælg manuel DNS-angivelse."
 
 #: src/network/hosts.c:380
 #, c-format
@@ -2702,7 +2734,7 @@ msgstr "Er du sikker på at du vil slette aliaset for %s?"
 
 #: src/network/main.c:114
 msgid "\tRun the internet conection druid."
-msgstr "\tKør vejviseren for tilkobling til internet."
+msgstr "\tKør hjælperen til internettilkobling."
 
 #: src/network/main.c:121
 msgid "Network Settings"
@@ -2713,13 +2745,15 @@ msgid ""
 "The phone number must be composed of\n"
 "only numbers or commas (,)."
 msgstr ""
+"Telefonnummeret må kun være sammensat af\n"
+"tal og kommaer (,)."
 
 #: src/network/ppp-druid.c:190
 msgid ""
 "The password and its confirmation\n"
 "must be the same."
 msgstr ""
-"Adgangskoden og dets bekræftelse\n"
+"Adgangskoden og bekræftelsen\n"
 "skal være ens."
 
 #: src/network/ppp-druid.c:193
@@ -2727,14 +2761,16 @@ msgid ""
 "If you are specifying a password,\n"
 "you should specify a user name."
 msgstr ""
+"Hvis du angiver en adgangskode,\n"
+"skal du også angive et brugernavn."
 
 #: src/network/ppp-druid.c:215
 msgid ""
 "Please set a name for this account,\n"
 "using only space, letters and numbers."
 msgstr ""
-"Venligst sæt et navn for denne konto,\n"
-"brug kun mellemrum, bogstaver og tal."
+"Vælg venligst et navn til denne konto\n"
+"med kun mellemrum, bogstaver og tal."
 
 #: src/network/ppp-druid.c:227
 #, c-format
@@ -2749,6 +2785,15 @@ msgid ""
 "\n"
 "Password: %s"
 msgstr ""
+"Du er ved at oprette en konto med følgende oplysninger:\n"
+"\n"
+"Kontonavn: %s\n"
+"\n"
+"Telefonnummer: %s\n"
+"\n"
+"Brugernavn: %s\n"
+"\n"
+"Adgangskode: %s"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Network adapter setup."
@@ -2758,9 +2803,10 @@ msgstr "Opsætning af netværkskort"
 msgid "Networking"
 msgstr "Netværk"
 
+# den engelske original er misvisende
 #: src/shares/main.c:131
 msgid "New Shares Admin"
-msgstr "Nye delte kataloger"
+msgstr "Delinger"
 
 #: src/shares/tables.c:742
 msgid "Mount"
@@ -2775,93 +2821,118 @@ msgid ""
 "Failed to create the path you requested:\n"
 "A path element is a regular file, not a directory."
 msgstr ""
+"Det mislykkedes at oprette den forespurgte sti:\n"
+"Et element i stien er en almindelig fil, ikke en mappe."
 
 #: src/shares/validate.c:167
 msgid ""
 "Failed to create the path you requested:\n"
 "A path element is a special filesystem node, not a directory."
 msgstr ""
+"Det mislykkedes at oprette den forespurgte sti:\n"
+"Et element i stien er en specialfil, ikke en mappe."
 
 #: src/shares/validate.c:170
 msgid ""
 "Failed to create the path you requested:\n"
 "You don't have access to that local location."
 msgstr ""
+"Det mislykkedes at oprette den forespurgte sti:\n"
+"Du har ikke adgang til denne lokale placering."
 
 #: src/shares/validate.c:173
 msgid "Failed to create the path you requested."
-msgstr ""
+msgstr "Det mislykkedes at oprette den forespurgte sti."
 
 #: src/shares/validate.c:181
 msgid "You need to specify a name for the export."
-msgstr ""
+msgstr "Du skal angive en navn til eksporteringen."
 
 #: src/shares/validate.c:190
 msgid ""
 "You need to specify a path, i.e. the directory\n"
 "on your computer you would like to share."
 msgstr ""
+"Du skal angive en sti, dvs. den mappe på maskinen\n"
+"som du ønsker at dele."
 
 #: src/shares/validate.c:198
 msgid ""
 "You do not have access to the path you want to share.\n"
 "Please select another one."
 msgstr ""
+"Du har ikke adgang til den sti du ønsker at dele.\n"
+"Vælg venligst en anden."
 
 #: src/shares/validate.c:205
 msgid ""
 "The path you want to share does not exist.\n"
 "Would you like to create it?"
 msgstr ""
+"Den sti du ønsker at dele, eksisterer ikke.\n"
+"Vil du oprette den?"
 
 #: src/shares/validate.c:216
 msgid ""
 "The path you want to share points to a specific file.\n"
 "You can only share directories, not files."
 msgstr ""
+"Den sti du ønsker at dele, peger på en specifik\n"
+"fil. Du kan kun dele mapper, ikke filer."
 
 #: src/shares/validate.c:224
 msgid ""
 "The path you want to share is not a directory,\n"
 "and you can only share directories."
 msgstr ""
+"Den sti du ønsker at dele, er ikke en mappe,\n"
+"og du kan kun dele mapper."
 
 #: src/shares/validate.c:236
 msgid "You need to name the host providing the import."
 msgstr ""
+"Du skal angive navnet på den vært der\n"
+"tilbyder importeringen."
 
 #: src/shares/validate.c:242
 msgid ""
 "You need to specify a path, i.e. where on the host\n"
 "the share is imported from."
 msgstr ""
+"Du skakl angive en sti, dvs. hvor på værten delingen\n"
+"importeres fra."
 
 #: src/shares/validate.c:249
 msgid ""
 "You need to specify the local point, i.e. a directory,\n"
 "where the import will be mounted."
 msgstr ""
+"Du skal angive det lokale sted, dvs. en mappe\n"
+"hvor importeringen monteres."
 
 #: src/shares/validate.c:256
 msgid ""
 "You need to specify a client pattern, e.g.\n"
 "\"*.myschool.edu\" or \"192.168.0.1/24\"."
 msgstr ""
+"Du skal angive et klientmønster, f.eks.\n"
+"\"*.undervisningssted.dk\" eller \"192.168.0.1/24\""
 
 #: src/time/main.c:371
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
 msgstr ""
+"Du har ikke NTP-understøttelse installeret. Installér venligst\n"
+"NTP-understøttelse på systemet for at tillade serversynkronisering."
 
 #: src/time/main.c:372
-#, fuzzy
 msgid "NTP support missing."
-msgstr "SMB-eksport mangler."
+msgstr "NTP-understøttelse mangler."
 
 #: src/time/main.c:606
 msgid "Time and Date Settings"
-msgstr "Indstillinger for tid og dato"
+msgstr "Indstillinger for dato og klokkeslet"
 
 #: src/time/time.desktop.in.in.h:2
 msgid "Time, date and timezone."
@@ -2869,15 +2940,15 @@ msgstr "Klokkeslet, dato og tidszone."
 
 #: src/users/callbacks.c:88
 msgid "Can't create new user. Check your profile settings."
-msgstr ""
+msgstr "Kan ikke oprette ny bruger. Tjek profilindstillingerne."
 
 #: src/users/callbacks.c:97
 msgid "Can't create new user. Too many users probably."
-msgstr ""
+msgstr "Kan ikke oprette ny bruger. Sandsynligvis er der for mange brugere."
 
 #: src/users/main.c:95
 msgid "Show All"
-msgstr "Vis alt"
+msgstr "Vis alle"
 
 #: src/users/main.c:122
 msgid "User name contains"
@@ -2885,7 +2956,7 @@ msgstr "Brugernavn indeholder"
 
 #: src/users/main.c:123
 msgid "User ID is"
-msgstr "Bruger-ID er"
+msgstr "Bruger-id er"
 
 #: src/users/main.c:124
 msgid "Group name contains"
@@ -2893,7 +2964,7 @@ msgstr "Gruppenavn indeholder"
 
 #: src/users/main.c:125
 msgid "User GID is"
-msgstr "Brugers GID er"
+msgstr "Brugers gruppe-id er"
 
 #: src/users/main.c:297
 msgid "Users and Groups"
@@ -2901,8 +2972,9 @@ msgstr "Brugere og grupper"
 
 #: src/users/passwd.c:264
 msgid "Passwords doesn't match."
-msgstr "Adgangskoder matcher ikke."
+msgstr "Adgangskoder er ikke ens."
 
+# 'bad' er her dårlig fordi det faktisk går på kvaliteten af koden
 #: src/users/passwd.c:269
 #, c-format
 msgid ""
@@ -2912,152 +2984,146 @@ msgstr ""
 "Dårlig adgangskode: %s\n"
 "Prøv venligst med en ny adgangskode."
 
+# 'tomt' er ikke så brugervenligt
 #: src/users/user_group.c:321
 msgid "The username is empty."
-msgstr "Brugernavnet er tomt."
+msgstr "Brugernavnet er ikke angivet."
 
 #: src/users/user_group.c:325
 msgid "The username is too long."
 msgstr "Brugernavnet er for langt."
 
 #: src/users/user_group.c:328 src/users/user_group.c:349
-#: src/users/user_group.c:429
+#: src/users/user_group.c:432
 msgid "root user shouldn't be modified."
-msgstr "Root-brugeren bør ikke ændres."
+msgstr "Administratorbrugeren root bør ikke ændres."
 
 #: src/users/user_group.c:332
 msgid "Please set a valid username, using only lower-case letters."
-msgstr "Sæt venligst et gyldigt brugernavn, og brug kun små bogstaver."
+msgstr "Angiv venligst et gyldigt brugernavn med kun små bogstaver."
 
 #: src/users/user_group.c:336
-#, fuzzy
 msgid "Username already exists."
-msgstr "Brugernavn eksisterer allerede."
+msgstr "Brugernavnet eksisterer allerede."
 
-#: src/users/user_group.c:347 src/users/user_group.c:523
+#: src/users/user_group.c:347 src/users/user_group.c:526
 msgid "User id must be a positive number."
-msgstr ""
+msgstr "Bruger-id'en skal være et positivt tal."
 
 #: src/users/user_group.c:351
-#, fuzzy
 msgid "Such user id already exists."
 msgstr "En sådan bruger-id eksisterer allerede."
 
-#: src/users/user_group.c:372
-msgid "Invalid comment"
-msgstr ""
+#: src/users/user_group.c:374
+#, c-format
+msgid "Invalid character '%c' in comment."
+msgstr "Ugyldigt tegn '%c' i kommentar."
 
-#: src/users/user_group.c:387
+#: src/users/user_group.c:390
 msgid "Please give shell with full path."
-msgstr "Angiv venligst skal med fuld sti."
+msgstr "Angiv venligst kommandoskal med komplet sti."
 
-#: src/users/user_group.c:423
-msgid "Home directory must not be empty."
-msgstr "Hjemmekataloget må ikke være tomt."
-
+# 'empty' dækker her over den indtastede strengs længde
 #: src/users/user_group.c:426
+msgid "Home directory must not be empty."
+msgstr "Hjemmemappen skal angives."
+
+#: src/users/user_group.c:429
 msgid "Please enter full path for home directory."
-msgstr "Angiv venligst fuld sti for hjemmekatalog."
+msgstr "Angiv venligst komplet sti til hjemmemappen."
 
-#: src/users/user_group.c:459
-#, fuzzy
+#: src/users/user_group.c:462
 msgid "Group name is not valid."
-msgstr "Gruppenavn er tomt."
+msgstr "Gruppenavn er ikke gyldigt."
 
-#: src/users/user_group.c:462 src/users/user_group.c:527
-#, fuzzy
+#: src/users/user_group.c:465 src/users/user_group.c:530
 msgid "Such group id already exists."
 msgstr "En sådan gruppe-id eksisterer allerede."
 
-#: src/users/user_group.c:465
+#: src/users/user_group.c:468
 msgid "Group does not exist. Create new?"
-msgstr ""
+msgstr "Gruppen eksisterer ikke. Opret en ny?"
 
-#: src/users/user_group.c:484
+#: src/users/user_group.c:487
 msgid "Group name is empty."
-msgstr "Gruppenavn er tomt."
+msgstr "Gruppenavn skal angives."
 
-#: src/users/user_group.c:488
+#: src/users/user_group.c:491
 msgid "The group name is too long."
 msgstr "Gruppenavnet er for langt."
 
-#: src/users/user_group.c:492
+#: src/users/user_group.c:495
 msgid "Please set a valid group name, using only lower-case letters."
-msgstr "Sæt venligst et gyldigt gruppenavn, og brug kun små bogstaver."
+msgstr "Angiv venligst et gyldigt gruppenavn med kun små bogstaver."
 
-#: src/users/user_group.c:496
-#, fuzzy
+#: src/users/user_group.c:499
 msgid "Group already exists."
-msgstr "Gruppe eksisterer allerede."
+msgstr "Gruppen eksisterer allerede."
 
-#: src/users/user_group.c:797
+#: src/users/user_group.c:800
 #, c-format
 msgid "Password for User %s"
-msgstr "Adgangskode for bruger %s"
+msgstr "Adgangskode for brugeren %s"
 
-#: src/users/user_group.c:831
+#: src/users/user_group.c:834
 msgid "The root user must not be deleted."
-msgstr "Root-brugeren må ikke slettes."
+msgstr "Administratorbrugeren root må ikke slettes."
 
-#: src/users/user_group.c:838
+#: src/users/user_group.c:841
 #, c-format
 msgid "Are you sure you want to delete user %s?"
-msgstr "Er du sikker på at du vil slette bruger %s?"
+msgstr "Er du sikker på at du vil slette brugeren %s?"
 
-#: src/users/user_group.c:861
+#: src/users/user_group.c:864
 msgid "Create New Group"
 msgstr "Opret en ny gruppe"
 
-#: src/users/user_group.c:921
+#: src/users/user_group.c:924
 msgid "The root group must not be deleted."
-msgstr "Root-gruppen må ikke slettes."
+msgstr "Administratorgruppen root må ikke slettes."
 
-#: src/users/user_group.c:928
+#: src/users/user_group.c:931
 #, c-format
 msgid "Are you sure you want to delete group %s?"
-msgstr "Er du sikker på at du vil slette gruppe %s?"
+msgstr "Er du sikker på at du vil slette gruppen %s?"
 
-#: src/users/user_group.c:973
+#: src/users/user_group.c:976
 #, c-format
 msgid "Settings for Group %s"
-msgstr "Indstillinger for gruppe %s"
+msgstr "Indstillinger for gruppen %s"
 
 #: archiver/config-manager-dialog.c:161 archiver/create-location-dialog.c:114
 msgid "Rollback and Location Management"
-msgstr ""
+msgstr "Stedhåndtering og ændringsforkastelse"
 
 #: archiver/location-list.c:344
-#, fuzzy
 msgid "Global locations"
-msgstr "Standard placering"
+msgstr "Globale steder"
 
 #: archiver/location-list.c:347
-#, fuzzy
 msgid "User locations"
-msgstr "Brugerindstillinger"
+msgstr "Brugersteder"
 
-#: archiver/location-manager-capplet/gui-backend-list.c:386
-#: archiver/location-manager-capplet/gui-backend-list.c:403
+#: archiver/location-manager-capplet/gui-backend-list.c:387
+#: archiver/location-manager-capplet/gui-backend-list.c:408
 msgid "Could not launch configuration tool"
-msgstr ""
+msgstr "Kunne ikke starte opsætningsværktøjet"
 
 #: archiver/location-manager-capplet/location-dialog.c:300
 msgid "You must supply a name"
-msgstr "Du skal give et navn"
+msgstr "Du skal angive et navn"
 
 #: archiver/location-manager-capplet/location-dialog.c:305
-#, fuzzy
 msgid "You already have a location by that name"
-msgstr "Omdøb et sted til et nyt navn"
+msgstr "Der er allerede et sted med det navn"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:99
 msgid "_New..."
-msgstr "_Ny..."
+msgstr "_Nyt..."
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:100
-#, fuzzy
 msgid "Create a new location"
-msgstr "Opret en ny Internet-forbindelse"
+msgstr "Opret et nyt sted"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:102
 msgid "_Copy..."
@@ -3065,21 +3131,19 @@ msgstr "_Kopiér..."
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:103
 msgid "Create a new location identical to the selected one"
-msgstr ""
+msgstr "Opret et nyt sted identisk med det markerede"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:105
 msgid "_Rename..."
 msgstr "Omd_øb..."
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:106
-#, fuzzy
 msgid "Rename the selected location"
-msgstr "Indstillinger for valgt alias"
+msgstr "Omdøb det markerede sted"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:109
-#, fuzzy
 msgid "Delete the selected location"
-msgstr "Indstillinger for valgt alias"
+msgstr "Slet det markerede sted"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:112
 msgid "_Apply..."
@@ -3087,38 +3151,35 @@ msgstr "_Anvend..."
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:113
 msgid "Apply the changes"
-msgstr "Anvend ændringerne"
+msgstr "Lad ændringerne træde i kraft"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:119
 msgid "_Edit..."
 msgstr "_Ændr..."
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:120
-#, fuzzy
 msgid "Edit settings for the selected backend"
-msgstr "Indstillinger for valgt bruger"
+msgstr "Ændr indstillingerne for den markerede bagende"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:122
 msgid "_Select"
-msgstr "Vælg"
+msgstr "_Vælg"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:123
 msgid "Select the selected backend for this location"
-msgstr ""
+msgstr "Vælg den markerede bagende til dette sted"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:125
-#, fuzzy
 msgid "_Deselect"
-msgstr "_Slet"
+msgstr "_Fravælg"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:126
 msgid "Deselect the selected backend for this location"
-msgstr ""
+msgstr "Fravælg den markerede bagende for dette sted"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:137
-#, fuzzy
 msgid "_Location"
-msgstr "Placering"
+msgstr "St_ed"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:139
 #: interfaces/location-manager.glade.in.h:38
@@ -3126,33 +3187,56 @@ msgid "_Help"
 msgstr "_Hjælp"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:193
-#: archiver/location-manager-capplet/location-manager-dialog.c:461
-#, fuzzy
+#: archiver/location-manager-capplet/location-manager-dialog.c:484
 msgid "Location Manager"
-msgstr "Placering"
+msgstr "Stedhåndtering"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:394
-msgid "You cannot delete the default location"
+#: archiver/location-manager-capplet/location-manager-dialog.c:256
+msgid ""
+"Could not retrieve a configuration\n"
+"snapshot. This probably means you do\n"
+"not have the Ximian Setup Tools\n"
+"installed properly."
 msgstr ""
+"Kunne ikke få fat i et øjebliksbillede\n"
+"af opsætningen. Dette betyder sandsynligvis\n"
+"at administrationsværktøjerne fra Ximian\n"
+"ikke er installeret korrekt."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:399
-#, fuzzy, c-format
+#: archiver/location-manager-capplet/location-manager-dialog.c:261
+msgid ""
+"Could not retrieve a configuration\n"
+"snapshot. This probably means you are\n"
+"running an old version of the GNOME\n"
+"control center. Please upgrade to\n"
+"at least version 1.3.2 or CVS HEAD."
+msgstr ""
+"Kunne ikke få fat i et øjebliksbillede\n"
+"af opsætningen. Dette betyder sandsynligvis\n"
+"at du kører en gammel version af\n"
+"kontrolcentret til Gnome. Opgradér venligst\n"
+"til mindst version 1.3.2 eller CVS HEAD."
+
+#: archiver/location-manager-capplet/location-manager-dialog.c:417
+msgid "You cannot delete the default location"
+msgstr "Du kan ikke slette hjemstedet."
+
+#: archiver/location-manager-capplet/location-manager-dialog.c:422
+#, c-format
 msgid "Are you sure you wish to destroy the location %s?"
-msgstr "Er du sikker på at du vil slette aliaset for %s?"
+msgstr "Er du sikker på at du vil fjerne stedet %s?"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:464
-#, fuzzy
+#: archiver/location-manager-capplet/location-manager-dialog.c:487
 msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximian opsætningsværktøjer"
+msgstr "Ximian stedhåndtering til administrationsværktøjerne"
 
 #: archiver/location-manager-capplet/main.c:37
 msgid "Operate on global backends"
-msgstr ""
+msgstr "Arbejd med globale bagender"
 
 #: archiver/location-manager-capplet/main.c:53
-#, fuzzy
 msgid "Options for the location manager"
-msgstr "Alternativer for lagring af data"
+msgstr "Indstillinger til stedhåndteringen"
 
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
@@ -3163,18 +3247,16 @@ msgid "Enable"
 msgstr "Aktivér"
 
 #: interfaces/internetsharing.glade.in.h:4
-#, fuzzy
 msgid "Enable :"
-msgstr "Aktivér"
+msgstr "Aktivér: "
 
 #: interfaces/internetsharing.glade.in.h:5
 msgid "Firewall"
-msgstr "Brandmur"
+msgstr "Dørvogterprogram"
 
 #: interfaces/internetsharing.glade.in.h:6
-#, fuzzy
 msgid "IP Forwarding"
-msgstr "SMB-eksport mangler."
+msgstr "IP-videresendelse"
 
 #: interfaces/internetsharing.glade.in.h:7 src/internetsharing/main.c:70
 msgid "Internet Sharing"
@@ -3185,17 +3267,16 @@ msgid "Internet Sharing --Advanced Mode"
 msgstr "Internetdeling - avanceret tilstand"
 
 #: interfaces/internetsharing.glade.in.h:9
-#, fuzzy
 msgid ""
 "The internet sharing tool allows you to share your internet conection with "
 "other computers on the network."
 msgstr ""
-"Eksporteringer bruges til at dele kataloger på din maskine med andre "
-"maskiner over nettet."
+"Internetdelingsværktøjet lader dig dele internetforbindelsen med andre "
+"maskiner på netværket."
 
 #: interfaces/internetsharing.glade.in.h:10
 msgid "Web Cache (squid)"
-msgstr "Webmellemlager (squid)"
+msgstr "Netmellemlager (Squid)"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "                           "
@@ -3214,36 +3295,32 @@ msgid "Boston Office"
 msgstr "Kontor i Boston"
 
 #: interfaces/location-manager.glade.in.h:6
-#, fuzzy
 msgid "Choose Location"
-msgstr "Placering"
+msgstr "Vælg sted"
 
 #: interfaces/location-manager.glade.in.h:7
 msgid "Copy"
 msgstr "Kopiér"
 
 #: interfaces/location-manager.glade.in.h:8
-#, fuzzy
 msgid "Copy Location"
-msgstr "Placering"
+msgstr "Kopiér sted"
 
 #: interfaces/location-manager.glade.in.h:9
-#, fuzzy
 msgid "Current:"
-msgstr "Kommentar:"
+msgstr "Nuværende:"
 
 #: interfaces/location-manager.glade.in.h:13
 msgid "Edit Date/Time"
 msgstr "Ændr dato/klokkeslet"
 
 #: interfaces/location-manager.glade.in.h:14
-#, fuzzy
 msgid "Edit Location"
-msgstr "Placering"
+msgstr "Redigér sted"
 
 #: interfaces/location-manager.glade.in.h:15
 msgid "Edit:"
-msgstr "Ændr:"
+msgstr "Redigér:"
 
 #: interfaces/location-manager.glade.in.h:16
 msgid "Helsinki Office"
@@ -3251,38 +3328,33 @@ msgstr "Kontor i Helsinki"
 
 #: interfaces/location-manager.glade.in.h:17
 msgid "Keep clock synchronized with selected servers"
-msgstr "Hold klokken synkroniseret med udvalgte servere"
+msgstr "Hold klokken synkroniseret med de markerede servere"
 
 #: interfaces/location-manager.glade.in.h:18
 msgid "Location"
-msgstr "Placering"
+msgstr "Sted"
 
 #: interfaces/location-manager.glade.in.h:19
-#, fuzzy
 msgid "Location Management"
-msgstr "Swap-håndtering"
+msgstr "Stedhåndtering"
 
 #: interfaces/location-manager.glade.in.h:20
-#, fuzzy
 msgid "Location:"
-msgstr "Placering"
+msgstr "Sted:"
 
 #: interfaces/location-manager.glade.in.h:21
-#, fuzzy
 msgid "Locations"
-msgstr "Placering"
+msgstr "Steder"
 
 #: interfaces/location-manager.glade.in.h:22
 msgid "Mexico CIty "
 msgstr "Mexico City"
 
 #: interfaces/location-manager.glade.in.h:24
-#, fuzzy
 msgid "New Location"
-msgstr "Placering"
+msgstr "Nyt sted"
 
 #: interfaces/location-manager.glade.in.h:25
-#, fuzzy
 msgid "New Name:"
 msgstr "Nyt navn:"
 
@@ -3300,11 +3372,11 @@ msgstr "Omdøb"
 
 #: interfaces/location-manager.glade.in.h:30
 msgid "Rename Location"
-msgstr "Omdøb placering"
+msgstr "Omdøb sted"
 
 #: interfaces/location-manager.glade.in.h:31
 msgid "Rollback-location-management-mockup"
-msgstr ""
+msgstr "Rollback-location-management-mockup"
 
 #: interfaces/location-manager.glade.in.h:32
 msgid "Select servers..."
@@ -3319,11 +3391,12 @@ msgid ""
 "Use this tool to manage all the different locations where you could possibly "
 "want to use your stinking laptop."
 msgstr ""
+"Benyt dette værktøj til at håndtere alle de forskellige steder hvor du "
+"bruger din elendige bærbare."
 
 #: interfaces/print.glade.in.h:1
-#, fuzzy
 msgid "Add Printer..."
-msgstr "Tilføj bruger..."
+msgstr "Tilføj printer..."
 
 #: interfaces/print.glade.in.h:2
 msgid "D_evice"
@@ -3331,19 +3404,19 @@ msgstr "_Enhed"
 
 #: interfaces/print.glade.in.h:4
 msgid "Dummy Printer"
-msgstr "Dum printer"
+msgstr "Dummyprinter"
 
 #: interfaces/print.glade.in.h:5
 msgid "Novel _Netware (NCP) Printer"
-msgstr "Novell _Netware (NCP) printer"
+msgstr "Novell _Netware-printer (NCP)"
 
 #: interfaces/print.glade.in.h:6
 msgid "Remote UNIX (_lpd) printer"
-msgstr "Ikke-lokal Unix (lpd) printer"
+msgstr "Fjern Unix-printer (_lpd)"
 
 #: interfaces/print.glade.in.h:7
 msgid "Remote _Windows (SMB) printer"
-msgstr "Ikke-lokal Windows (SMB) printer"
+msgstr "Fjern Windows-printer (SMB)"
 
 #: interfaces/print.glade.in.h:8
 msgid "S_erver"
@@ -3351,30 +3424,28 @@ msgstr "S_ervere"
 
 #: interfaces/print.glade.in.h:9
 msgid "S_pool"
-msgstr "s_pole"
+msgstr "K_ø"
 
 #: interfaces/print.glade.in.h:10
-#, fuzzy
 msgid "Select"
-msgstr "Valg:"
+msgstr "Vælg"
 
 #: interfaces/print.glade.in.h:12
-#, fuzzy
 msgid ""
 "This is the list of the configured printers available on the system. Create "
 "new printers or edit existing printer settings with this dialog."
 msgstr ""
-"Dette er en liste med brugere som er tilgængelige på systemet. Opret nye "
-"brugere eller redigér eksisterende brugeres indstillinger med denne dialog."
+"Dette er en liste med de opsatte printere som er tilgængelige på systemet. "
+"Du kan oprette nye printer eller redigere eksisterende printeres "
+"indstillinger."
 
 #: interfaces/print.glade.in.h:13
 msgid "User Settings"
 msgstr "Brugerindstillinger"
 
 #: interfaces/print.glade.in.h:14
-#, fuzzy
 msgid "_Direct to port printer"
-msgstr "Import og eksport af kataloger og drev"
+msgstr "_Direkte til port-printer"
 
 #: interfaces/print.glade.in.h:15
 msgid "_Filter"
@@ -3386,7 +3457,7 @@ msgstr "_Lokal printer"
 
 #: interfaces/print.glade.in.h:17
 msgid "_Password"
-msgstr "Adgangskode"
+msgstr "_Adgangskode"
 
 #: interfaces/print.glade.in.h:18
 msgid "_User"
@@ -3394,7 +3465,7 @@ msgstr "Br_uger"
 
 #: interfaces/print.glade.in.h:19
 msgid "_Workgroup"
-msgstr "Arbejdsgruppe"
+msgstr "Arbejds_gruppe"
 
 #: src/internetsharing/callbacks.c:54
 msgid ""
@@ -3402,15 +3473,17 @@ msgid ""
 "\n"
 "IP Forwarding support is needed to enable internet sharing"
 msgstr ""
+"IP-videresendelsesunderstøttelse er ikke installeret.\n"
+"\n"
+"IP-videresendelse er nødvendigt til internetdeling."
 
 #: src/internetsharing/callbacks.c:57
-#, fuzzy
 msgid "IP Forward support missing."
-msgstr "SMB-eksport mangler."
+msgstr "IP-videresendelsesunderstøttelse mangler."
 
 #: src/print/main.c:109
 msgid "Lpr based Printing"
-msgstr "LPR-baseret udskrivning"
+msgstr "Lpr-baseret udskrivning"
 
 #: src/print/print.etspec.h:2
 msgid "Paper"
@@ -3422,11 +3495,11 @@ msgstr "Opløsning"
 
 #: src/print/print.etspec.h:4
 msgid "Share"
-msgstr "Delte kataloger/drev"
+msgstr "Deling"
 
 #: src/print/print.etspec.h:5
 msgid "Spool"
-msgstr "Spole"
+msgstr "Kø"
 
 #: src/print/print.desktop.in.in.h:1
 msgid "Print"
@@ -3434,60 +3507,69 @@ msgstr "Udskrift"
 
 #: src/print/print.desktop.in.in.h:2
 msgid "lpr based Printer Admin"
-msgstr "Administrering af LPR-baseret udskrivning"
+msgstr "Administrering af lpr-baseret udskrivning"
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
-msgstr "Søg"
+msgstr "S_øg"
 
-#: src/users/profile.c:509
+#: src/users/profile.c:542
 msgid "Choose the file"
 msgstr "Vælg filen"
 
-#: src/users/profile.c:651
+#: src/users/profile.c:684
 msgid "Profile Editor"
-msgstr "Profilbearbejder"
+msgstr "Profilredigering"
 
-#: src/users/profile.c:852
-#, fuzzy
+#: src/users/profile.c:885
 msgid "Profile with given name already exists."
-msgstr "Brugernavn eksisterer allerede."
+msgstr "En profil med det angivne navn eksisterer allerede."
 
-#: src/users/profile.c:855
-#, fuzzy
+#: src/users/profile.c:888
 msgid "Profile name must not be empty."
-msgstr "Hjemmekataloget må ikke være tomt."
+msgstr "Profilnavnet skal angives."
 
 #. name
-#: src/users/profile.c:1000
+#: src/users/profile.c:1033
 msgid "Default profile"
-msgstr "Standard-profil"
+msgstr "Standardprofil"
 
-#: src/users/profile.c:1316
+#: src/users/profile.c:1349
 msgid "Can't delete Default"
-msgstr ""
+msgstr "Kan ikke slette standardprofilen"
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1442
+#: src/users/profile.c:1475
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
 "Currently we support only '%s'."
 msgstr ""
+"Ukendt variabel '%s'.\n"
+"I øjeblikket understøttes kun '%s'."
 
 #. give our dialog an OK button and title
 #: src/users/user-account-editor.c:101
 msgid "User Account Editor"
-msgstr "Brugerkontobearbejder"
+msgstr "Brugerkontoredigering"
 
-#: src/users/user_settings.c:398 src/users/user_settings.c:456
-#: src/users/user_settings.c:471
+#: src/users/user_settings.c:176
+#, c-format
+msgid ""
+"Invalid character '%c'.\n"
+"This field doesn't accept control characters ',' ':' and '='."
+msgstr ""
+"Ugyldigt tegn '%c'.\n"
+"Dette felt accepterer ikke kontroltegnene ',' ':' og '='."
+
+#: src/users/user_settings.c:452 src/users/user_settings.c:510
+#: src/users/user_settings.c:525
 msgid "Identity"
 msgstr "Identitet"
 
-#: src/users/user_settings.c:449
+#: src/users/user_settings.c:503
 msgid "Real name:"
-msgstr "Rigtig navn:"
+msgstr "Rigtigt navn:"
 
 #: src/users/net_group.etspec.h:1 src/users/users.etspec.h:3
 msgid "Group"
@@ -3499,19 +3581,19 @@ msgstr "Kommentar"
 
 #: src/users/group.etspec.h:1 src/users/users.etspec.h:2
 msgid "GID"
-msgstr ""
+msgstr "Gruppe-id"
 
 #: src/users/users.etspec.h:4
 msgid "Home"
-msgstr ""
+msgstr "Hjem"
 
 #: src/users/users.etspec.h:5
 msgid "Shell"
-msgstr "Skal:"
+msgstr "Skal"
 
 #: src/users/users.etspec.h:6
 msgid "UID"
-msgstr "Bruger-ID"
+msgstr "Bruger-id"
 
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
@@ -3522,17 +3604,16 @@ msgid "User"
 msgstr "Bruger"
 
 #: src/users/profiles.etspec.h:2
-#, fuzzy
 msgid "Profile"
-msgstr "Profiler"
+msgstr "Profil"
 
 #: src/shares/shares.desktop.in.in.h:1
 msgid "Directory import & export"
-msgstr "Import og eksport af kataloger og drev"
+msgstr "Importering og eksportering af mapper"
 
 #: src/shares/shares.desktop.in.in.h:2
 msgid "Shares"
-msgstr "Delte kataloger/drev"
+msgstr "Delinger"
 
 #: src/shares/export_clients.etspec.h:1
 msgid "Pattern"
@@ -3540,74 +3621,4 @@ msgstr "Mønster"
 
 #: src/shares/export_clients.etspec.h:2
 msgid "Write"
-msgstr "Skriv"
-
-#, fuzzy
-#~ msgid "N_ame:"
-#~ msgstr "Navn:"
-
-#~ msgid "Optional"
-#~ msgstr "Alternativ"
-
-#~ msgid "_Home directory:"
-#~ msgstr "_Hjemmekatalog:"
-
-#~ msgid "Not Implemented yet, sorry."
-#~ msgstr "Ikke implementeret endnu, beklager."
-
-#~ msgid "Linux"
-#~ msgstr "Linux"
-
-#~ msgid "Welcome to the "
-#~ msgstr "Velkommen til "
-
-#~ msgid ""
-#~ "Use this dialog to add new kernel or\n"
-#~ "operating system to your computer."
-#~ msgstr ""
-#~ "Brug denne dialog for at tilføje en ny kerne\n"
-#~ "eller operativsystem på din maskine."
-
-#~ msgid "Delete..."
-#~ msgstr "Slet..."
-
-#~ msgid "Remove <-"
-#~ msgstr "Fjern <-"
-
-#~ msgid "[ICON]"
-#~ msgstr "[IKON]"
-
-#~ msgid "Obtain DNS information from DHCP / BOOTP server"
-#~ msgstr "Hent DNS-information fra DHCP- / BOOTP-tjener"
-
-#, fuzzy
-#~ msgid " Primary group "
-#~ msgstr " Primær gruppe "
-
-#, fuzzy
-#~ msgid "Days betweem warning and password expiration:"
-#~ msgstr "Dage mellem advarsel og adgangskodes udløb:"
-
-#~ msgid "Files"
-#~ msgstr "Filer"
-
-#~ msgid ""
-#~ "You need full administration privileges (i.e. root)\n"
-#~ "to run this configuration tool. You can acquire\n"
-#~ "such privileges by running it from the GNOME Control\n"
-#~ "Center or issuing an \"su\" command in a shell.\n"
-#~ "\n"
-#~ "You will be unable to make any changes. Continue anyway?"
-#~ msgstr ""
-#~ "Du behøver fulde rettigheder for administration (f.eks root)\n"
-#~ "for at køre dette konfigurationsværktøj. Du kan opnå\n"
-#~ "disse rettigheder ved at køre kommandoen \"su\" på \n"
-#~ "kommandolinjen.\n"
-#~ "\n"
-#~ "Du vil ikke kunne lave ændringer. Fortsæt alligevel?"
-
-#~ msgid "Create home for new users:"
-#~ msgstr "Opret hjem for nye brugere:"
-
-#~ msgid "Days a password may be used:"
-#~ msgstr "Dage en adgangskode kan bruges"
+msgstr "Skrive"
