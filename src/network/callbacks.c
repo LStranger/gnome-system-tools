@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Hans Petter Jansson <hpj@helixcode.com> and Arturo Espinosa <arturo@helixcode.com>.
+ * Authors: Hans Petter Jansson <hpj@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -390,7 +390,7 @@ static const char *hint_entry[][3] = { {
 	N_("Enter a list of your DNS servers' IP addresses: 1.2.3.4, 2.3.4.5"),
 },{
 	"search_list", "dns_help",
-	N_("Enter a list of domains where hosts will be searched for (andrew.cmu.edu, res.cmu.edu, helixcode.com)") 
+	N_("Enter a list of domains where hosts will be searched for (andrew.cmu.edu, res.cmu.edu, ximian.com)") 
 },{
 	"ip", "hosts_help",
 	N_("Enter the IP address of the host: 1.2.4.9") 

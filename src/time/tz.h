@@ -2,7 +2,7 @@
  *
  * Copyright (C) 2000-2001 Ximian, Inc.
  *
- * Authors: Hans Petter Jansson <hpj@helixcode.com>
+ * Authors: Hans Petter Jansson <hpj@ximian.com>
  * 
  * Largely based on Michael Fulbright's work on Anaconda.
  *
