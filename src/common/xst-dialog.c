@@ -88,9 +88,15 @@ xst_dialog_get_complexity (XstDialog *xd)
 void
 xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 {
-	char *label[] = {
-		N_(" More Options >> "),
-		N_(" << Fewer Options "),
+	gchar *label[] = {
+		N_(" More _Options"),
+		N_(" Fewer _Options"),
+		NULL
+	};
+
+	gchar *image[] = {
+		GTK_STOCK_ADD,
+		GTK_STOCK_REMOVE,
 		NULL
 	};
 
@@ -107,7 +113,11 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 	xst_conf_set_integer (xd->tool, "complexity", xd->complexity);
 
 	apply_widget_policies (xd);
-	gtk_label_set_text (GTK_LABEL (GTK_BIN (xd->complexity_button)->child), _(label[c]));
+
+	/* set the complexity button appearance */
+	gtk_label_set_text (GTK_LABEL (xd->complexity_button_label), _(label[c]));
+	gtk_label_set_use_underline (GTK_LABEL (xd->complexity_button_label), TRUE);
+	gtk_image_set_from_stock (GTK_IMAGE (xd->complexity_button_image), image[c], GTK_ICON_SIZE_MENU);
 
 	g_signal_emit (G_OBJECT (xd), xstdialog_signals[COMPLEXITY_CHANGE], 0);
 }
@@ -594,6 +604,12 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (complexity_cb), dialog);
 
 	dialog->complexity_button = w;
+
+	w = glade_xml_get_widget (xml, "complexity_button_label");
+	dialog->complexity_button_label = w;
+
+	w = glade_xml_get_widget (xml, "complexity_button_image");
+	dialog->complexity_button_image = w;
 
 	w = glade_xml_get_widget (xml, "apply");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (apply_cb), dialog);

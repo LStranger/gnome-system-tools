@@ -57,6 +57,8 @@ struct _XstDialog {
 	/* Common widgets */
 	GtkWidget *apply_button;
 	GtkWidget *complexity_button;
+	GtkWidget *complexity_button_label;
+	GtkWidget *complexity_button_image;
 
 	XstDialogComplexity complexity;
 	gint frozen;
