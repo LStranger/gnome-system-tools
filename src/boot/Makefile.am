@@ -1,9 +1,23 @@
+##
 ## Process this file with automake to produce Makefile.in
+##
+## Please don't modify this file unless you know what you are doing
+## Please keep the Makefile.am from all the tools in sync
+##
 
-INCLUDES = $(XST_TOOL_CFLAGS)
+@XML_I18N_MERGE_DESKTOP_RULE@
+@XST_TOOL_DESKTOP_IN_RULE@
 
+toolname = boot
 bin_PROGRAMS = boot-admin
 
+SUBDIRS = 
+CPPFLAGS =
+INCLUDES = $(XST_TOOL_CFLAGS)
+CLEANFILES = $(XST_TOOL_CLEANFILES)
+EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
+
+boot_admin_LDADD = $(XST_TOOL_LIBS)
 boot_admin_SOURCES = \
 	main.c \
 	callbacks.c 		callbacks.h \
@@ -11,62 +25,10 @@ boot_admin_SOURCES = \
 	e-table.c 		e-table.h \
 	boot-settings.c	boot-settings.h 
 
-boot_admin_CFLAGS = 
-
-boot_admin_LDADD = $(XST_TOOL_LIBS)
-
-#desktop = boot.desktop
-#security = boot.security
-#EXTRA_DIST = $(desktop).in boot.pam $(security).in
-#CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
-
-toolname = boot
-desktop  = $(toolname).desktop
-security = $(toolname).security
-
+toolpixmaps =
 etspecs = boot.etspec
 etspecs_DATA = $(etspecs)
+desktop = $(toolname).desktop
 
-CLEANFILES = \
-	$(desktop) \
-	$(desktop).menu \
-	$(desktop).cc \
-	$(security)
+all-local: $(desktop)
 
-EXTRA_DIST = \
-	$(toolname).pam	\
-	$(security)		\
-	$(security).in		\
-	$(desktop).in 		\
-	$(desktop).cc		\
-	$(desktop).menu		\
-	$(etspecs)
-
-$(desktop): %.desktop: %.desktop.in
-	sed 's#Icon=.*#Icon='$(pixmapsdir)'/boot.png#' < $< > $@
-
-$(desktop).menu: $(desktop)
-	sed 's#Exec=.*#Exec=boot-admin#' < $< > $@
-
-$(desktop).cc: $(desktop)
-	sed 's#Exec=.*#Exec=boot-admin#' < $< > $@
-
-#	sed 's#Exec=.*#Exec=root-manager boot-admin#' < $< > $@
-
-$(security): $(security).in
-	sed 's#PROGRAM=.*#PROGRAM='$(DESTDIR)$(sbindir)'/boot-admin#' < $< > $@
-
-all-local: $(desktop).menu $(desktop).cc $(security)
-
-install-data-local: $(desktop).menu $(desktop).cc
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
-##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
-	$(INSTALL_DATA) boot.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/boot.desktop
-##	$(INSTALL_DATA) $(srcdir)/boot.desktop.cc $(DESTDIR)$(datadir)/control-center/System/boot.desktop
-##	$(mkinstalldirs) $(DESTDIR)$(bindir)
-##	rm -f $(DESTDIR)$(bindir)/boot-admin
-##	ln -s consolehelper $(DESTDIR)$(bindir)/boot-admin
-##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
-##	$(INSTALL_DATA) $(srcdir)/boot.pam $(DESTDIR)$(sysconfdir)/pam.d/boot-admin
-##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-##	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/boot-admin

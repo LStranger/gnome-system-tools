@@ -126,9 +126,6 @@ static void
 xst_time_init_timezone (XstTimeTool *time_tool)
 {
 	XstTool *tool = XST_TOOL (time_tool);
-#if 0	
-	GtkWidget *w2;
-#endif	
 	GtkWidget *w;
 	GPtrArray *locs;
 	GList *combo_locs = NULL;
@@ -149,16 +146,6 @@ xst_time_init_timezone (XstTimeTool *time_tool)
 	w = xst_dialog_get_widget (tool->main_dialog, "location_combo");
 	gtk_combo_set_popdown_strings (GTK_COMBO (w), combo_locs);
 
-#warning Avoid a core dump	
-#if 0
-	w = xst_dialog_get_widget (tool->main_dialog, "location_label_vbox");
-	w2 = gtk_label_new ("");
-	gtk_box_pack_end (GTK_BOX(w), w2, FALSE, FALSE, 0);
-	gtk_widget_show (w2);
-	/* gtk_misc_set_alignment (GTK_MISC (w2), 0.0, 0.5); */
-
-	gtk_object_set_data (GTK_OBJECT (tool), "location_hover", w2);
-#endif	
 }
 
 #define is_leap_year(yyy) ((((yyy % 4) == 0) && ((yyy % 100) != 0)) || ((yyy % 400) == 0));

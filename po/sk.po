@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.4.2\n"
-"POT-Creation-Date: 2001-05-25 09:23-0500\n"
+"POT-Creation-Date: 2001-05-29 13:04-0500\n"
 "PO-Revision-Date: 2001-05-15 15:27CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
 "Language-Team: Slovak <sk-i18n@rak.isternet.sk>\n"
@@ -609,50 +609,34 @@ msgid "Options for adding and removing backends"
 msgstr "Mo¾nosti pre pridávanie a odstraòovanie nástrojov"
 
 #: interfaces/boot.glade.in.h:1
-msgid "Append:"
-msgstr "Prida»:"
-
-#: interfaces/boot.glade.in.h:2
-msgid "Boot type:"
+#, fuzzy
+msgid "Boot _type:"
 msgstr "Typ bootu:"
 
-#: interfaces/boot.glade.in.h:3
+#: interfaces/boot.glade.in.h:2
 msgid "D_efault"
 msgstr "©_tandard"
 
-#: interfaces/boot.glade.in.h:4 interfaces/disks.glade.in.h:10
-#: interfaces/memory.glade.in.h:7 interfaces/network.glade.in.h:41
-msgid "Device:"
-msgstr "Zariadenie:"
-
-#: interfaces/boot.glade.in.h:5
-msgid "Image:"
-msgstr "Obraz:"
-
-#: interfaces/boot.glade.in.h:6 interfaces/location-manager.glade.in.h:23
-#: interfaces/shares.glade.in.h:37 interfaces/users.glade.in.h:48
-msgid "Name:"
+#: interfaces/boot.glade.in.h:3
+#, fuzzy
+msgid "N_ame:"
 msgstr "Meno:"
 
-#: interfaces/boot.glade.in.h:7
+#: interfaces/boot.glade.in.h:4
 msgid "Optional"
 msgstr "Voliteµné"
 
-#: interfaces/boot.glade.in.h:8
-msgid "Root:"
-msgstr "Koreò:"
-
-#: interfaces/boot.glade.in.h:9 interfaces/disks.glade.in.h:26
-#: interfaces/memory.glade.in.h:18 interfaces/nameresolution.glade.in.h:30
-#: interfaces/users.glade.in.h:71
+#: interfaces/boot.glade.in.h:5 interfaces/disks.glade.in.h:26
+#: interfaces/memory.glade.in.h:16 interfaces/nameresolution.glade.in.h:30
+#: interfaces/users.glade.in.h:63
 msgid "Settings"
 msgstr "Nastavenie"
 
-#: interfaces/boot.glade.in.h:10
+#: interfaces/boot.glade.in.h:6
 msgid "Starting your computer"
 msgstr "Spú¹»anie poèítaèa"
 
-#: interfaces/boot.glade.in.h:11
+#: interfaces/boot.glade.in.h:7
 msgid ""
 "Use this dialog to add new kernel or\n"
 "operating system to your computer."
@@ -661,7 +645,7 @@ msgstr ""
 "nového kernelu alebo operaèného\n"
 "systému do vá¹ho poèítaèa."
 
-#: interfaces/boot.glade.in.h:13
+#: interfaces/boot.glade.in.h:9
 msgid ""
 "Use this tool to set the installed operating\n"
 "systems to choose from at startup."
@@ -670,32 +654,63 @@ msgstr ""
 "systémov, z ktorých bude mo¾né pri spustení poèítaèa\n"
 "vybera»."
 
-#: interfaces/boot.glade.in.h:15
-msgid "Wait"
-msgstr "Èakanie"
-
-#: interfaces/boot.glade.in.h:16
+#: interfaces/boot.glade.in.h:11 interfaces/network.glade.in.h:87
+#: interfaces/shares.glade.in.h:57
 msgid "_Add..."
 msgstr "_Prida»..."
 
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.in.h:12
+#, fuzzy
+msgid "_Append:"
+msgstr "Prida»:"
+
+#: interfaces/boot.glade.in.h:13 interfaces/network.glade.in.h:92
+#: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:86
 msgid "_Delete"
 msgstr "_Odstráni»"
 
+#: interfaces/boot.glade.in.h:14
+#, fuzzy
+msgid "_Device:"
+msgstr "Zariadenie:"
+
+#: interfaces/boot.glade.in.h:15
+#, fuzzy
+msgid "_Image:"
+msgstr "Obraz:"
+
+#: interfaces/boot.glade.in.h:16 interfaces/shares.glade.in.h:65
+#: interfaces/users.glade.in.h:90
+#, fuzzy
+msgid "_Name:"
+msgstr "Meno:"
+
+#: interfaces/boot.glade.in.h:17
+#, fuzzy
+msgid "_Root:"
+msgstr "Koreò:"
+
 #: interfaces/boot.glade.in.h:18 interfaces/location-manager.glade.in.h:39
+#: interfaces/shares.glade.in.h:69 interfaces/users.glade.in.h:93
 msgid "_Settings..."
 msgstr "_Nastavenie..."
 
 #: interfaces/boot.glade.in.h:19
-msgid "seconds before loading default kernel or OS"
+#, fuzzy
+msgid "_Wait"
+msgstr "Èakanie"
+
+#: interfaces/boot.glade.in.h:20
+#, fuzzy
+msgid "_seconds before loading default kernel or OS"
 msgstr "sekúnd pred naèítaním ¹tandardného kernelu alebo OS"
 
 #: interfaces/common.glade.in.h:1
 msgid "Complexity"
 msgstr "Zlo¾itos»"
 
-#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:72
-#: interfaces/shares.glade.in.h:38
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:53
+#: interfaces/shares.glade.in.h:43
 msgid "Password:"
 msgstr "Heslo:"
 
@@ -710,7 +725,7 @@ msgstr "Heslo"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:641
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:643
 msgid "Scanning your system configuration."
 msgstr "Kontrolujem konfiguráciu vá¹ho systému."
 
@@ -782,11 +797,16 @@ msgstr "Vyberte bod pripojenia"
 msgid "Detected"
 msgstr "Detekovaný"
 
-#: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:40 src/boot/e-table.c:43
-#: src/print/e-table.c:43
+#: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
+#: interfaces/network.glade.in.h:32 src/boot/boot.etspec.h:2
+#: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "Zariadenie"
+
+#: interfaces/disks.glade.in.h:10 interfaces/memory.glade.in.h:6
+#: interfaces/network.glade.in.h:33
+msgid "Device:"
+msgstr "Zariadenie:"
 
 #: interfaces/disks.glade.in.h:11
 msgid "Disks & partitions"
@@ -822,7 +842,7 @@ msgstr "Zobrazený"
 msgid "Mount point"
 msgstr "Bod pripojenia"
 
-#: interfaces/disks.glade.in.h:18 interfaces/shares.glade.in.h:31
+#: interfaces/disks.glade.in.h:18 interfaces/shares.glade.in.h:34
 msgid "Mount point:"
 msgstr "Bod pripojenia:"
 
@@ -830,8 +850,8 @@ msgstr "Bod pripojenia:"
 msgid "Mount this partition"
 msgstr "Pripoji» tento oddiel"
 
-#: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:32
-#: src/shares/tables.c:79
+#: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:35
+#: src/shares/imports.etspec.h:3
 msgid "Mounted"
 msgstr "Pripojený"
 
@@ -855,7 +875,7 @@ msgstr "Nastavenie oddielu"
 msgid "Remember details of this partition"
 msgstr "Pamäta» si detaily tohoto oddielu"
 
-#: interfaces/disks.glade.in.h:27 interfaces/memory.glade.in.h:19
+#: interfaces/disks.glade.in.h:27 interfaces/memory.glade.in.h:17
 msgid "Size"
 msgstr "Veµkos»"
 
@@ -875,89 +895,96 @@ msgstr ""
 msgid "ufs (FreeBSD)"
 msgstr ""
 
-#: interfaces/memory.glade.in.h:1 interfaces/nameresolution.glade.in.h:4
-#: interfaces/network.glade.in.h:12 interfaces/shares.glade.in.h:3
-#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
-msgid "Add"
-msgstr "Prida»"
-
-#: interfaces/memory.glade.in.h:2
+#: interfaces/memory.glade.in.h:1
 msgid "Available partitions:"
 msgstr "Dostupné oddiely:"
 
-#: interfaces/memory.glade.in.h:3
+#: interfaces/memory.glade.in.h:2
 msgid "Available swap areas"
 msgstr "Dostupné odkladacie oblasti"
 
-#: interfaces/memory.glade.in.h:4
+#: interfaces/memory.glade.in.h:3
 msgid "Browse..."
 msgstr "Prechádza»..."
 
-#: interfaces/memory.glade.in.h:5
+#: interfaces/memory.glade.in.h:4
 msgid "Cancel"
 msgstr "Zru¹i»"
 
-#: interfaces/memory.glade.in.h:8 interfaces/shares.glade.in.h:13
+#: interfaces/memory.glade.in.h:7 interfaces/shares.glade.in.h:14
 msgid "Enabled"
 msgstr "Povolené"
 
-#: interfaces/memory.glade.in.h:9
+#: interfaces/memory.glade.in.h:8
 msgid "MB"
 msgstr "MB"
 
-#: interfaces/memory.glade.in.h:10
+#: interfaces/memory.glade.in.h:9
 msgid "New Swap Device"
 msgstr "Nový odkladacie zariadenie"
 
-#: interfaces/memory.glade.in.h:11
+#: interfaces/memory.glade.in.h:10
 msgid "OK"
 msgstr "OK"
 
-#: interfaces/memory.glade.in.h:12 interfaces/shares.glade.in.h:40
+#: interfaces/memory.glade.in.h:11 interfaces/shares.glade.in.h:45
 msgid "Path:"
 msgstr "Cesta:"
 
-#: interfaces/memory.glade.in.h:13
+#: interfaces/memory.glade.in.h:12
 msgid "Physical memory:"
 msgstr "Fyzická pamä»:"
 
-#: interfaces/memory.glade.in.h:14
+#: interfaces/memory.glade.in.h:13
 msgid "Priority"
 msgstr "Priorita"
 
-#: interfaces/memory.glade.in.h:15
+#: interfaces/memory.glade.in.h:14
 msgid "Priority:"
 msgstr "Priorita:"
 
-#: interfaces/memory.glade.in.h:16
-msgid "Remove"
-msgstr "Odstráni»"
-
-#: interfaces/memory.glade.in.h:17
+#: interfaces/memory.glade.in.h:15
 msgid "Select  Swap File"
 msgstr "Vybra» odkladací súbor"
 
-#: interfaces/memory.glade.in.h:20
+#: interfaces/memory.glade.in.h:18
 msgid "Size:"
 msgstr "Veµkos»:"
 
-#: interfaces/memory.glade.in.h:21
+#: interfaces/memory.glade.in.h:19
 msgid "Swap Settings"
 msgstr "Nastavenie odkladacieho priestoru"
 
-#: interfaces/memory.glade.in.h:22
+#: interfaces/memory.glade.in.h:20
 msgid "Swap memory:"
 msgstr "Odkladacia pamä»:"
 
-#: interfaces/memory.glade.in.h:23
+#: interfaces/memory.glade.in.h:21
 msgid "Swap type:"
 msgstr "Typ odkladania:"
 
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:86
+#: interfaces/time.glade.in.h:17
+#, fuzzy
+msgid "_Add"
+msgstr "Prida»"
+
+#: interfaces/memory.glade.in.h:23
+#, fuzzy
+msgid "_Remove"
+msgstr "Odstráni»"
+
+#: archiver/location-manager-capplet/location-manager-dialog.c:134
 #: interfaces/memory.glade.in.h:24
+#, fuzzy
+msgid "_Settings"
+msgstr "Nastavenie"
+
+#: interfaces/memory.glade.in.h:25
 msgid "file"
 msgstr "súbor"
 
-#: interfaces/memory.glade.in.h:25
+#: interfaces/memory.glade.in.h:26
 msgid "partition"
 msgstr "oddiel"
 
@@ -973,7 +1000,12 @@ msgstr " Mená"
 msgid "<unknown>"
 msgstr "<neznámy>"
 
-#: interfaces/nameresolution.glade.in.h:5 interfaces/network.glade.in.h:17
+#: interfaces/nameresolution.glade.in.h:4 interfaces/shares.glade.in.h:4
+#: interfaces/users.glade.in.h:4
+msgid "Add"
+msgstr "Prida»"
+
+#: interfaces/nameresolution.glade.in.h:5 interfaces/network.glade.in.h:16
 msgid "Aliases"
 msgstr "Aliasy"
 
@@ -993,13 +1025,12 @@ msgstr ""
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "Zmení IP adresu aliasu alebo odpovedajúce mená."
 
-#: interfaces/nameresolution.glade.in.h:9 interfaces/network.glade.in.h:36
-#: interfaces/print.glade.in.h:3 interfaces/shares.glade.in.h:10
-#: interfaces/users.glade.in.h:25
+#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:3
+#: interfaces/shares.glade.in.h:11 interfaces/users.glade.in.h:23
 msgid "Delete"
 msgstr "Zmaza»"
 
-#: interfaces/nameresolution.glade.in.h:10 interfaces/network.glade.in.h:39
+#: interfaces/nameresolution.glade.in.h:10
 msgid "Description:"
 msgstr "Popis:"
 
@@ -1015,7 +1046,7 @@ msgstr "Poradie hµadanie domény"
 msgid "Domain Name Service (DNS)"
 msgstr "Pomenovávacia slu¾ba DNS"
 
-#: interfaces/nameresolution.glade.in.h:14 interfaces/network.glade.in.h:42
+#: interfaces/nameresolution.glade.in.h:14
 msgid "Domain:"
 msgstr "Doména:"
 
@@ -1023,12 +1054,12 @@ msgstr "Doména:"
 msgid "Existing:"
 msgstr "Existujúce:"
 
-#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:20
-#: src/shares/tables.c:76
+#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:22
+#: src/shares/imports.etspec.h:1
 msgid "Host"
 msgstr "Hostiteµ"
 
-#: interfaces/nameresolution.glade.in.h:17 interfaces/network.glade.in.h:50
+#: interfaces/nameresolution.glade.in.h:17
 msgid "Host name:"
 msgstr "Meno hostiteµa:"
 
@@ -1036,7 +1067,7 @@ msgstr "Meno hostiteµa:"
 msgid "IP address"
 msgstr "IP adresa"
 
-#: interfaces/nameresolution.glade.in.h:19 interfaces/network.glade.in.h:60
+#: interfaces/nameresolution.glade.in.h:19
 msgid "IP address:"
 msgstr "IP adresa:"
 
@@ -1064,7 +1095,7 @@ msgstr "Nová doména:"
 msgid "New server:"
 msgstr "Nový server:"
 
-#: interfaces/nameresolution.glade.in.h:26 interfaces/users.glade.in.h:53
+#: interfaces/nameresolution.glade.in.h:26
 msgid "New:"
 msgstr "Nový:"
 
@@ -1088,7 +1119,7 @@ msgstr "Nastavenie pre vybraný alias"
 msgid "Use WINS server:"
 msgstr "Pou¾i» server WINS:"
 
-#: interfaces/nameresolution.glade.in.h:33 interfaces/network.glade.in.h:113
+#: interfaces/nameresolution.glade.in.h:33
 msgid "Workgroup:"
 msgstr "Skupina:"
 
@@ -1109,145 +1140,121 @@ msgid "3. Account name"
 msgstr "3. Meno úètu"
 
 #: interfaces/network.glade.in.h:5
+#, fuzzy
+msgid "A_liases:"
+msgstr "Aliasy:"
+
+#: interfaces/network.glade.in.h:6
+#, fuzzy
+msgid "Ac_tivate"
+msgstr "Aktivova»"
+
+#: interfaces/network.glade.in.h:7
 msgid "Account"
 msgstr "Úèet"
 
-#: interfaces/network.glade.in.h:6
+#: interfaces/network.glade.in.h:8
 msgid "Account name:"
 msgstr "Meno úètu:"
 
-#: interfaces/network.glade.in.h:7
-msgid "Activate"
-msgstr "Aktivova»"
+#: interfaces/network.glade.in.h:9
+#, fuzzy
+msgid "Activate when the computer _starts"
+msgstr "Aktivova» toto spojenie pri ¹tarte poèítaèa"
 
-#: interfaces/network.glade.in.h:8
+#: interfaces/network.glade.in.h:10
 msgid "Activate when the computer starts"
 msgstr "Aktivova» toto spojenie pri ¹tarte poèítaèa"
 
-#: interfaces/network.glade.in.h:9
+#: interfaces/network.glade.in.h:11
 msgid "Activation"
 msgstr "Aktivácia"
 
-#: interfaces/network.glade.in.h:10
+#: interfaces/network.glade.in.h:12
 msgid "Ad-Hoc Settings"
 msgstr "Ad-hoc nastavenie"
-
-#: interfaces/network.glade.in.h:11
-msgid "Ad-Hoc mode"
-msgstr "Mód Ad-hoc"
 
 #: interfaces/network.glade.in.h:13
 msgid "Add New Internet Connection"
 msgstr "Prida» nové pripojenie na Internet"
 
-#: interfaces/network.glade.in.h:14 interfaces/shares.glade.in.h:4
-#: interfaces/users.glade.in.h:5
-msgid "Add..."
-msgstr "Prida»..."
-
-#: interfaces/network.glade.in.h:15
+#: interfaces/network.glade.in.h:14
 msgid "Advanced"
 msgstr "Pokroèilé"
 
-#: interfaces/network.glade.in.h:16
+#: interfaces/network.glade.in.h:15
 msgid "Advanced PPP connection tunning."
 msgstr "Ïal¹ie mo¾nosti spojenia PPP."
 
-#: interfaces/network.glade.in.h:18
+#: interfaces/network.glade.in.h:17
 msgid "Aliases of other computers."
 msgstr "Aliasy pre ostatné poèítaèe."
 
-#: interfaces/network.glade.in.h:19
-msgid "Aliases:"
-msgstr "Aliasy:"
+#: interfaces/network.glade.in.h:18
+#, fuzzy
+msgid "Allow activation control for all _users"
+msgstr "Umo¾ni» aktiváciu v¹etkým pou¾ívateµom"
 
-#: interfaces/network.glade.in.h:20
+#: interfaces/network.glade.in.h:19
 msgid "Allow activation control for all users"
 msgstr "Umo¾ni» aktiváciu v¹etkým pou¾ívateµom"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1008
+#: interfaces/network.glade.in.h:20 src/network/connection.c:1020
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:22
-msgid "Channel:"
-msgstr "Kanál:"
-
-#: interfaces/network.glade.in.h:23 interfaces/shares.glade.in.h:9
-#: interfaces/users.glade.in.h:17
-msgid "Comment:"
-msgstr "Komentár:"
-
-#: interfaces/network.glade.in.h:24
-msgid "Configuration:"
-msgstr "Nastavenie:"
-
-#: interfaces/network.glade.in.h:25
-msgid "Configure..."
-msgstr "Nastavi»..."
-
-#: interfaces/network.glade.in.h:26
+#: interfaces/network.glade.in.h:21
 msgid "Connection"
 msgstr "Spojenie"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:22
 msgid "Connection Settings"
 msgstr "Nastavenie spojenia"
 
-#: interfaces/network.glade.in.h:28
+#: interfaces/network.glade.in.h:23
 msgid "Connection active"
 msgstr "Spojenie aktívne"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:24
 msgid "Connections"
 msgstr "Spojenia"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:25
 msgid "Create a new Internet Connection "
 msgstr "Vytvori» nové pripojenie na Internet"
 
-#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:31
-#: src/network/connection.c:1007
+#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:26
+#: src/network/connection.c:1019
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:27
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:28
 msgid "DNS Servers"
 msgstr "DNS servery"
 
-#: interfaces/network.glade.in.h:34
-msgid "DNS Servers:"
+#: interfaces/network.glade.in.h:29
+#, fuzzy
+msgid "DNS _Servers:"
 msgstr "Servery DNS:"
 
-#: interfaces/network.glade.in.h:35
-msgid "Deactivate"
+#: interfaces/network.glade.in.h:30
+#, fuzzy
+msgid "D_eactivate"
 msgstr "Deaktivova»"
 
-#: interfaces/network.glade.in.h:37
-msgid "Delete..."
-msgstr "Odstráni»..."
-
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:31
 msgid "Description"
 msgstr "Popis"
 
-#: interfaces/network.glade.in.h:43
-msgid "Enable windows networking (Samba)"
-msgstr "Povoli» sie» Windows (Samba)"
-
-#: interfaces/network.glade.in.h:44
-msgid "Ethernet"
-msgstr "Ethernet"
-
-#: interfaces/network.glade.in.h:45 interfaces/users.glade.in.h:31
+#: interfaces/network.glade.in.h:34 interfaces/users.glade.in.h:29
 msgid "Finished"
 msgstr "Dokonèené"
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:35
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
@@ -1255,79 +1262,59 @@ msgstr ""
 "Najskôr zadajte telefónne èíslo, ktoré chcete pou¾i» pre pripojenie na "
 "Internet. Toto èíslo vám povie vá¹ poskytovateµ."
 
-#: interfaces/network.glade.in.h:47
-msgid "Frequency (GHz):"
-msgstr "Frekvencia (GHz):"
-
-#: interfaces/network.glade.in.h:48
-msgid "Gateway address:"
-msgstr "Adresa brány:"
-
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:36
 msgid "General"
 msgstr "V¹eobecné"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:37
 msgid "Hosts"
 msgstr "Hostitelia"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:38
 msgid "How other computers are accessed."
 msgstr "Ako sa pristupuje k ostatným poèítaèom."
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:39
 msgid "How the IP address for this connection is determined"
 msgstr "Ako je zistená IP adresa pre toto spojenie"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:40
 msgid "How the IP addresses for this connection are determined"
 msgstr "Ako je zistená IP adresa pre toto spojenie"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:41
 msgid "How the names of other computers are found."
 msgstr "Ako sú nájdené mená ostatných poèítaèov."
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:42
 msgid "How this computer is identified."
 msgstr "Ako je identifikovaný tento poèítaè."
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:43
 msgid "How to dial up to the internet."
 msgstr "Ako sa pripoji» na Internet."
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:44
 msgid "IP Address"
 msgstr "IP adresa"
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:45
 msgid "IP Settings"
 msgstr "Nastavenie IP"
 
-#: interfaces/network.glade.in.h:61
-msgid "Local IP:"
-msgstr "Lokálne IP:"
-
-#: interfaces/network.glade.in.h:62 src/network/connection.c:1006
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1018
 msgid "Manual"
 msgstr "Ruène"
 
-#: interfaces/network.glade.in.h:63
-msgid "Modem (PPP)"
-msgstr "Modem (PPP)"
-
-#: interfaces/network.glade.in.h:64
-msgid "Modem port:"
-msgstr "Port modemu:"
-
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:47
 msgid "Networking Settings"
 msgstr "Nastavenie siete"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:48
 msgid "New Connection Type"
 msgstr "Nový typ spojenia"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:49
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -1335,7 +1322,7 @@ msgstr ""
 "Ïalej, prosím, zadajte pou¾ívateµské meno a heslo, ktoré vám bolo pridelené "
 "poskytovateµom."
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:50
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
@@ -1343,75 +1330,52 @@ msgstr ""
 "Teraz, prosím, zadajte meno tohto úètu. Toto meno bude pou¾ité pre urèenie "
 "úètu."
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:51
 msgid "Options"
 msgstr "Nastavenia"
 
-#: interfaces/network.glade.in.h:70
-msgid "Parallel Line"
-msgstr "Paralelný kábel"
-
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:52
 msgid "Password (confirm):"
 msgstr "Heslo (potvrdi»):"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:54
+#, fuzzy
+msgid "Phone _number:"
+msgstr "Telefónne èíslo:"
+
+#: interfaces/network.glade.in.h:55
 msgid "Phone number:"
 msgstr "Telefónne èíslo:"
 
-#: interfaces/network.glade.in.h:74
-msgid "Pppd options:"
+#: interfaces/network.glade.in.h:56
+#, fuzzy
+msgid "Pppd _options:"
 msgstr "Mo¾nosti pppd:"
 
-#: interfaces/network.glade.in.h:75
-msgid "Primary:"
-msgstr "Primárny:"
-
-#: interfaces/network.glade.in.h:76
-msgid "Remote IP:"
-msgstr "Vzdialené IP:"
-
-#: interfaces/network.glade.in.h:77
-msgid "Restart if connection cuts or fails to start"
-msgstr "Re¹tartova», ak spadne spojenie"
-
-#: interfaces/network.glade.in.h:78
-msgid "Search Domains:"
+#: interfaces/network.glade.in.h:57
+#, fuzzy
+msgid "Sea_rch Domains:"
 msgstr "Prehµadávané domény:"
 
-#: interfaces/network.glade.in.h:79
-msgid "Secondary:"
-msgstr "Sekundárny:"
-
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:58
 msgid "Select which type of connection you would like to add."
 msgstr "Vyberte typ spojenia, ktoré chcete prida»."
 
-#: interfaces/network.glade.in.h:81
-msgid "Session ID:"
-msgstr "ID sedenia:"
-
-#: interfaces/network.glade.in.h:82
-msgid "Set DNS servers manually"
+#: interfaces/network.glade.in.h:59
+#, fuzzy
+msgid "Set _DNS servers manually"
 msgstr "Nastavi» servery DNS ruène"
 
-#: interfaces/network.glade.in.h:83
-msgid "Set as default route"
+#: interfaces/network.glade.in.h:60
+#, fuzzy
+msgid "Set as _default route"
 msgstr "Nastavi» ako ¹tandardnú bránu"
 
-#: interfaces/network.glade.in.h:84
-msgid "Start PPP as soon as modem connects"
-msgstr "Spusti» PPP hneï po pripojení modemu"
-
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:61
 msgid "Status"
 msgstr "Stav"
 
-#: interfaces/network.glade.in.h:86
-msgid "Subnet mask:"
-msgstr "Sie»ová maska:"
-
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:62
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -1421,7 +1385,7 @@ msgstr ""
 "Sem patria dáta nového úètu, \n"
 "plus ako pokraèova»."
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:66
 #, fuzzy
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click "
@@ -1430,15 +1394,7 @@ msgstr ""
 "Ak chcete pokraèova» v nastavení vá¹ho úètu, stlaète \"Nasledujúci\". Pre "
 "skonèenie stlaète \"Zru¹i»\".\n"
 
-#: interfaces/network.glade.in.h:92
-msgid "Update DNS when this connection becomes active"
-msgstr "Aktualizova» DNS pri aktivácii tohto spojenia"
-
-#: interfaces/network.glade.in.h:93
-msgid "Use remote IP as default gateway"
-msgstr "Pou¾i» vzdialené IP ako ¹tandardnú bránu"
-
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:67
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
@@ -1446,28 +1402,25 @@ msgstr ""
 "Nabudúce pou¾ite komentár pre urèenie rozhrania. Správa aktivácie umo¾òuje "
 "nastavi» kto a kedy bude aktivova» spojenia."
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:68
 msgid "User name:"
 msgstr "Pou¾ívateµské meno:"
 
-#: interfaces/network.glade.in.h:96
-msgid "WINS server:"
+#: interfaces/network.glade.in.h:69
+#, fuzzy
+msgid "WI_NS server:"
 msgstr "Server WINS:"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:70
 #, fuzzy
 msgid "Warning message goes here.."
 msgstr "Sem patrí varovanie..\n"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:71
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.in.h:99
-msgid "Wavelan"
-msgstr "Wavelan"
-
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:72
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1492,13 +1445,170 @@ msgstr ""
 "\n"
 "Stlaèením \"Nasledujúci\" zaèneme."
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:83
 msgid "Windows Networking"
 msgstr "Sie» Windows"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:84
 msgid "Wireless networking settings."
 msgstr "Nastavenie bezdrôtovej siete."
+
+#: interfaces/network.glade.in.h:85
+#, fuzzy
+msgid "_Ad-Hoc mode"
+msgstr "Mód Ad-hoc"
+
+#: interfaces/network.glade.in.h:88
+#, fuzzy
+msgid "_Channel:"
+msgstr "Kanál:"
+
+#: interfaces/network.glade.in.h:89 interfaces/shares.glade.in.h:59
+#: interfaces/users.glade.in.h:84
+#, fuzzy
+msgid "_Comment:"
+msgstr "Komentár:"
+
+#: interfaces/network.glade.in.h:90
+#, fuzzy
+msgid "_Configuration:"
+msgstr "Nastavenie:"
+
+#: interfaces/network.glade.in.h:91
+#, fuzzy
+msgid "_Configure..."
+msgstr "Nastavi»..."
+
+#: archiver/location-manager-capplet/location-manager-dialog.c:104
+#: interfaces/network.glade.in.h:93
+#, fuzzy
+msgid "_Delete..."
+msgstr "Odstráni»..."
+
+#: interfaces/network.glade.in.h:94
+#, fuzzy
+msgid "_Description:"
+msgstr "Popis:"
+
+#: interfaces/network.glade.in.h:95
+#, fuzzy
+msgid "_Domain:"
+msgstr "Doména:"
+
+#: interfaces/network.glade.in.h:96
+#, fuzzy
+msgid "_Enable windows networking (Samba)"
+msgstr "Povoli» sie» Windows (Samba)"
+
+#: interfaces/network.glade.in.h:97
+#, fuzzy
+msgid "_Ethernet"
+msgstr "Ethernet"
+
+#: interfaces/network.glade.in.h:98
+#, fuzzy
+msgid "_Frequency (GHz):"
+msgstr "Frekvencia (GHz):"
+
+#: interfaces/network.glade.in.h:99
+#, fuzzy
+msgid "_Gateway address:"
+msgstr "Adresa brány:"
+
+#: interfaces/network.glade.in.h:100
+#, fuzzy
+msgid "_Host name:"
+msgstr "Meno hostiteµa:"
+
+#: interfaces/network.glade.in.h:101
+#, fuzzy
+msgid "_IP address:"
+msgstr "IP adresa:"
+
+#: interfaces/network.glade.in.h:102
+#, fuzzy
+msgid "_Local IP:"
+msgstr "Lokálne IP:"
+
+#: interfaces/network.glade.in.h:103
+#, fuzzy
+msgid "_Modem (PPP)"
+msgstr "Modem (PPP)"
+
+#: interfaces/network.glade.in.h:104
+#, fuzzy
+msgid "_Modem port:"
+msgstr "Port modemu:"
+
+#: interfaces/network.glade.in.h:105
+#, fuzzy
+msgid "_Parallel Line"
+msgstr "Paralelný kábel"
+
+#: interfaces/network.glade.in.h:106
+#, fuzzy
+msgid "_Password:"
+msgstr "Heslo:"
+
+#: interfaces/network.glade.in.h:107
+#, fuzzy
+msgid "_Primary:"
+msgstr "Primárny:"
+
+#: interfaces/network.glade.in.h:108
+#, fuzzy
+msgid "_Remote IP:"
+msgstr "Vzdialené IP:"
+
+#: interfaces/network.glade.in.h:109
+#, fuzzy
+msgid "_Restart if connection cuts or fails to start"
+msgstr "Re¹tartova», ak spadne spojenie"
+
+#: interfaces/network.glade.in.h:110
+#, fuzzy
+msgid "_Secondary:"
+msgstr "Sekundárny:"
+
+#: interfaces/network.glade.in.h:111
+#, fuzzy
+msgid "_Session ID:"
+msgstr "ID sedenia:"
+
+#: interfaces/network.glade.in.h:112
+#, fuzzy
+msgid "_Start PPP as soon as modem connects"
+msgstr "Spusti» PPP hneï po pripojení modemu"
+
+#: interfaces/network.glade.in.h:113
+#, fuzzy
+msgid "_Subnet mask:"
+msgstr "Sie»ová maska:"
+
+#: interfaces/network.glade.in.h:114
+#, fuzzy
+msgid "_Update DNS when this connection becomes active"
+msgstr "Aktualizova» DNS pri aktivácii tohto spojenia"
+
+#: interfaces/network.glade.in.h:115
+#, fuzzy
+msgid "_Use remote IP as default gateway"
+msgstr "Pou¾i» vzdialené IP ako ¹tandardnú bránu"
+
+#: interfaces/network.glade.in.h:116
+#, fuzzy
+msgid "_User name:"
+msgstr "Pou¾ívateµské meno:"
+
+#: interfaces/network.glade.in.h:117
+#, fuzzy
+msgid "_Wavelan"
+msgstr "Wavelan"
+
+#: interfaces/network.glade.in.h:118
+#, fuzzy
+msgid "_Workgroup:"
+msgstr "Skupina:"
 
 #: interfaces/shares.glade.in.h:1
 msgid " Edit clients... "
@@ -1506,54 +1616,73 @@ msgstr " Upravi» klientov... "
 
 #: interfaces/shares.glade.in.h:2
 #, fuzzy
+msgid " _Edit clients... "
+msgstr " Upravi» klientov... "
+
+#: interfaces/shares.glade.in.h:3
+#, fuzzy
 msgid "Access control"
 msgstr "Ovládanie prístupu"
 
-#: interfaces/shares.glade.in.h:5
+#: interfaces/shares.glade.in.h:5 interfaces/users.glade.in.h:5
+msgid "Add..."
+msgstr "Prida»..."
+
+#: interfaces/shares.glade.in.h:6
 msgid "Allow writing"
 msgstr "Povoli» zápis"
 
-#: interfaces/shares.glade.in.h:6
+#: interfaces/shares.glade.in.h:7
 msgid "Browseable"
 msgstr "Viditeµný"
 
-#: interfaces/shares.glade.in.h:7
+#: interfaces/shares.glade.in.h:8
 msgid "Client"
 msgstr "Klient"
 
-#: interfaces/shares.glade.in.h:8 src/shares/tables.c:82
+#: interfaces/shares.glade.in.h:9
 msgid "Clients"
 msgstr "Klienti"
 
-#: interfaces/shares.glade.in.h:11
+#: interfaces/shares.glade.in.h:10
+msgid "Comment:"
+msgstr "Komentár:"
+
+#: interfaces/shares.glade.in.h:12
+#, fuzzy
+msgid "Do not _remount this share after computer reboots"
+msgstr "Po re¹tarte poèítaèa nepripája» znovu tento import"
+
+#: interfaces/shares.glade.in.h:13
 msgid "Do not remount this share after computer reboots"
 msgstr "Po re¹tarte poèítaèa nepripája» znovu tento import"
 
-#: interfaces/internetsharing.glade.in.h:3 interfaces/shares.glade.in.h:12
-msgid "Enable"
-msgstr "Povoli»"
-
-#: interfaces/shares.glade.in.h:14
+#: interfaces/shares.glade.in.h:15
 msgid "Export"
 msgstr "Export"
 
-#: interfaces/shares.glade.in.h:15
+#: interfaces/shares.glade.in.h:16
 msgid "Export Clients"
 msgstr "Klienti exportu"
 
-#: interfaces/shares.glade.in.h:16
+#: interfaces/shares.glade.in.h:17
 msgid "Export Settings"
 msgstr "Nastavenie exportu"
 
-#: interfaces/shares.glade.in.h:17
+#: interfaces/shares.glade.in.h:18
+#, fuzzy
+msgid "Export _type:"
+msgstr "Typ exportu:"
+
+#: interfaces/shares.glade.in.h:19
 msgid "Export type:"
 msgstr "Typ exportu:"
 
-#: interfaces/shares.glade.in.h:18
+#: interfaces/shares.glade.in.h:20
 msgid "Exports"
 msgstr "Exporty"
 
-#: interfaces/shares.glade.in.h:19
+#: interfaces/shares.glade.in.h:21
 msgid ""
 "Exports are used to share directories on your computer with other computers "
 "over the network. "
@@ -1561,35 +1690,40 @@ msgstr ""
 "Exporty NFS sa pou¾ívajú pre zdieµanie prieèinkov medzi poèítaèmi pomocou "
 "siete."
 
-#: interfaces/shares.glade.in.h:21
+#: interfaces/shares.glade.in.h:23
 msgid "Host:"
 msgstr "Hostiteµ:"
 
-#: interfaces/shares.glade.in.h:22
+#: interfaces/shares.glade.in.h:24
 msgid "Import"
 msgstr "Import"
 
-#: interfaces/shares.glade.in.h:23
+#: interfaces/shares.glade.in.h:25
 msgid "Import Settings"
 msgstr "Nastavenie importu"
 
-#: interfaces/shares.glade.in.h:24
+#: interfaces/shares.glade.in.h:26
 msgid "Import Settings--NFS Options"
 msgstr "Nastavenie importu - Mo¾nosti NFS"
 
-#: interfaces/shares.glade.in.h:25
+#: interfaces/shares.glade.in.h:27
 msgid "Import Settings--Samba Options (Obsolete)"
 msgstr "Nastavenie importu - Mo¾nosti Samby (staré)"
 
-#: interfaces/shares.glade.in.h:26
+#: interfaces/shares.glade.in.h:28
+#, fuzzy
+msgid "Import _type:"
+msgstr "Typ importu:"
+
+#: interfaces/shares.glade.in.h:29
 msgid "Import type:"
 msgstr "Typ importu:"
 
-#: interfaces/shares.glade.in.h:27
+#: interfaces/shares.glade.in.h:30
 msgid "Imports"
 msgstr "Importy"
 
-#: interfaces/shares.glade.in.h:28
+#: interfaces/shares.glade.in.h:31
 msgid ""
 "Imports are directories which reside in other computers and are accessible "
 "to you through the network."
@@ -1597,71 +1731,81 @@ msgstr ""
 "Importy sú prieèinky, ktoré sú na iných poèítaèoch a sú prístupné pomocou "
 "siete."
 
-#: interfaces/shares.glade.in.h:29 src/shares/tables.c:777
-msgid "Mount"
-msgstr "Pripoji»"
-
-#: interfaces/shares.glade.in.h:30 src/shares/tables.c:78
+#: interfaces/shares.glade.in.h:32 src/shares/imports.etspec.h:2
 msgid "Mount Point"
 msgstr "Bod pripojenia"
 
 #: interfaces/shares.glade.in.h:33
+#, fuzzy
+msgid "Mount p_oint:"
+msgstr "Bod pripojenia:"
+
+#: interfaces/shares.glade.in.h:36
 msgid "Mounting Options"
 msgstr "Mo¾nosti pripojenia"
 
-#: interfaces/shares.glade.in.h:34
+#: interfaces/shares.glade.in.h:37
 #, fuzzy
 msgid "Mounting options"
 msgstr "Mo¾nosti pripojenia"
 
-#: interfaces/shares.glade.in.h:35
+#: interfaces/shares.glade.in.h:38
 #, fuzzy
 msgid "NFS"
 msgstr "DNS"
 
-#: interfaces/shares.glade.in.h:36 src/boot/e-table.c:40
-#: src/shares/tables.c:80
+#: interfaces/shares.glade.in.h:39 src/boot/boot.etspec.h:4
+#: src/shares/exports.etspec.h:1
 msgid "Name"
 msgstr "Meno"
 
-#: interfaces/shares.glade.in.h:39 src/shares/tables.c:77
-#: src/shares/tables.c:81
+#: interfaces/location-manager.glade.in.h:23 interfaces/shares.glade.in.h:40
+msgid "Name:"
+msgstr "Meno:"
+
+#: interfaces/shares.glade.in.h:41
+#, fuzzy
+msgid "P_ublic"
+msgstr "Verejný"
+
+#: interfaces/shares.glade.in.h:42
+#, fuzzy
+msgid "Pass_word:"
+msgstr "Heslo:"
+
+#: interfaces/shares.glade.in.h:44 src/shares/exports.etspec.h:2
+#: src/shares/imports.etspec.h:4
 msgid "Path"
 msgstr "Cesta"
 
-#: interfaces/shares.glade.in.h:41
+#: interfaces/shares.glade.in.h:46
 msgid "Pattern:"
 msgstr "Vzorka:"
 
-#: interfaces/shares.glade.in.h:42
+#: interfaces/shares.glade.in.h:47
 msgid "Public"
 msgstr "Verejný"
 
-#: interfaces/shares.glade.in.h:43
+#: interfaces/shares.glade.in.h:48
 msgid "Restrict access to this share to specific clients"
 msgstr "Obmedzi» prístup k tomuto exportu pre daných klientov"
 
-#: interfaces/shares.glade.in.h:44
+#: interfaces/shares.glade.in.h:49
 #, fuzzy
 msgid "Samba"
 msgstr ""
 "NFS\n"
 "Samba\n"
 
-#: interfaces/shares.glade.in.h:45
-msgid "Scan"
-msgstr "Hµada»"
-
-#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:46
-#: interfaces/users.glade.in.h:73
+#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:50
 msgid "Settings..."
 msgstr "Nastavenie..."
 
-#: interfaces/shares.glade.in.h:47
+#: interfaces/shares.glade.in.h:51
 msgid "Update"
 msgstr "Aktualizova»"
 
-#: interfaces/shares.glade.in.h:48
+#: interfaces/shares.glade.in.h:52
 msgid ""
 "Use this dialog to create a new export, or to edit the settings of an "
 "existing export."
@@ -1669,7 +1813,7 @@ msgstr ""
 "Pou¾ite tento dialóg pre vytvorenie nového exportu alebo pre úpravu "
 "nastavenia u¾ existujúceho."
 
-#: interfaces/shares.glade.in.h:49
+#: interfaces/shares.glade.in.h:53
 msgid ""
 "Use this dialog to create a new import, or to edit the settings of an "
 "existing import."
@@ -1677,7 +1821,7 @@ msgstr ""
 "Pou¾ite tento dialóg pre vytvorenie nového importu alebo pre úpravu "
 "nastavenia u¾ existujúceho."
 
-#: interfaces/shares.glade.in.h:50
+#: interfaces/shares.glade.in.h:54
 msgid ""
 "Use this dialog to define the client patterns which determine who has access "
 "to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
@@ -1687,31 +1831,81 @@ msgstr ""
 "prístup k va¹emu NFS exportu. Vzorky klientov sú typicky vo formáte "
 "\"10.10.10.*\" alebo \" *.gnome.org\".  "
 
-#: interfaces/shares.glade.in.h:51 interfaces/users.glade.in.h:91
+#: interfaces/shares.glade.in.h:55
 msgid "Username:"
 msgstr "Pou¾ívateµské meno:"
 
-#: interfaces/shares.glade.in.h:52 src/shares/tables.c:83
+#: interfaces/shares.glade.in.h:56 src/shares/exports.etspec.h:3
 msgid "Writable"
 msgstr "Zapisovateµný"
 
-#: interfaces/shares.glade.in.h:53
+#: interfaces/shares.glade.in.h:58
+#, fuzzy
+msgid "_Browseable"
+msgstr "Viditeµný"
+
+#: interfaces/shares.glade.in.h:61
+#, fuzzy
+msgid "_Enable"
+msgstr "Povoli»"
+
+#: interfaces/shares.glade.in.h:62
+#, fuzzy
+msgid "_Host:"
+msgstr "Hostiteµ:"
+
+#: interfaces/shares.glade.in.h:63
+#, fuzzy
+msgid "_Mount"
+msgstr "Pripoji»"
+
+#: interfaces/shares.glade.in.h:64
+#, fuzzy
+msgid "_Mounted"
+msgstr "Pripojený"
+
+#: interfaces/shares.glade.in.h:66
+#, fuzzy
+msgid "_Path:"
+msgstr "Cesta:"
+
+#: interfaces/shares.glade.in.h:67
+#, fuzzy
+msgid "_Restrict access to this share to specific clients"
+msgstr "Obmedzi» prístup k tomuto exportu pre daných klientov"
+
+#: interfaces/shares.glade.in.h:68
+#, fuzzy
+msgid "_Scan"
+msgstr "Hµada»"
+
+#: interfaces/shares.glade.in.h:70 interfaces/users.glade.in.h:96
+#, fuzzy
+msgid "_Username:"
+msgstr "Pou¾ívateµské meno:"
+
+#: interfaces/shares.glade.in.h:71
+#, fuzzy
+msgid "_Writable"
+msgstr "Zapisovateµný"
+
+#: interfaces/shares.glade.in.h:72
 msgid "add/edit clients"
 msgstr "prida»/upravi» klientov"
 
-#: interfaces/shares.glade.in.h:54
+#: interfaces/shares.glade.in.h:73
 msgid "advanced mode--main window"
 msgstr "pokroèilý mód - hlavné okno"
 
-#: interfaces/shares.glade.in.h:55
+#: interfaces/shares.glade.in.h:74
 msgid "export settings--NFS options"
 msgstr "Nastavenie exportu - Mo¾nosti NFS"
 
-#: interfaces/shares.glade.in.h:56
+#: interfaces/shares.glade.in.h:75
 msgid "export settings--Samba options"
 msgstr "Nastavenie exportu - Mo¾nosti Samby"
 
-#: interfaces/shares.glade.in.h:57
+#: interfaces/shares.glade.in.h:76
 msgid "simple mode--main window"
 msgstr "jednoduchý mód - hlavné okno"
 
@@ -1719,23 +1913,19 @@ msgstr "jednoduchý mód - hlavné okno"
 msgid "(unconfigured)"
 msgstr "(nenastavený)"
 
-#: interfaces/location-manager.glade.in.h:10 interfaces/time.glade.in.h:3
+#: interfaces/location-manager.glade.in.h:10 interfaces/time.glade.in.h:2
 msgid "Date"
 msgstr "Dátum"
 
-#: interfaces/location-manager.glade.in.h:11 interfaces/time.glade.in.h:4
+#: interfaces/location-manager.glade.in.h:11 interfaces/time.glade.in.h:3
 msgid "Date/Time "
 msgstr "Dátum/Èas "
 
-#: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.in.h:5
+#: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.in.h:4
 msgid "Date/time"
 msgstr "Dátum/Èas"
 
-#: interfaces/location-manager.glade.in.h:17 interfaces/time.glade.in.h:6
-msgid "Keep clock synchronized with selected servers"
-msgstr "Udr¾iava» hodiny synchronizované s vybranými serverami"
-
-#: interfaces/location-manager.glade.in.h:28 interfaces/time.glade.in.h:7
+#: interfaces/location-manager.glade.in.h:28 interfaces/time.glade.in.h:5
 msgid ""
 "Please select the current date and time. You can also specify a time zone "
 "and a time server."
@@ -1743,7 +1933,12 @@ msgstr ""
 "Prosím, vyberte aktuálny dátum a èas. Taktie¾  mô¾ete uvies» èasovú zónu a "
 "èasový server."
 
-#: interfaces/time.glade.in.h:8
+#: interfaces/time.glade.in.h:6
+#, fuzzy
+msgid "Select _servers..."
+msgstr "Vybra» servery..."
+
+#: interfaces/time.glade.in.h:7
 msgid ""
 "Select a time zone by clicking on \n"
 "one of the dots on the map."
@@ -1751,60 +1946,66 @@ msgstr ""
 "Vyberte èasovú zónu kliknutím na\n"
 "jeden z bodov na mape."
 
-#: interfaces/location-manager.glade.in.h:32 interfaces/time.glade.in.h:10
-msgid "Select servers..."
-msgstr "Vybra» servery..."
-
-#: interfaces/time.glade.in.h:11
+#: interfaces/time.glade.in.h:9
 msgid "Select the servers you wish to use for time synchronization."
 msgstr "Vyberte servery, ktoré chcete pou¾íva» pre synchronizáciu."
 
-#: interfaces/time.glade.in.h:12
+#: interfaces/time.glade.in.h:10
 msgid "Selection:"
 msgstr "Výber:"
 
-#: interfaces/location-manager.glade.in.h:33 interfaces/time.glade.in.h:13
-msgid "Set time zone..."
+#: interfaces/time.glade.in.h:11
+#, fuzzy
+msgid "Set time _zone..."
 msgstr "Nastavi» èasovú zónu..."
 
-#: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:14
+#: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:12
 msgid "Time"
 msgstr "Èas"
 
-#: interfaces/time.glade.in.h:15
+#: interfaces/time.glade.in.h:13
 msgid "Time Zones"
 msgstr "Èasové zóny"
 
-#: interfaces/location-manager.glade.in.h:35 interfaces/time.glade.in.h:16
+#: interfaces/location-manager.glade.in.h:35 interfaces/time.glade.in.h:14
 msgid "Time server"
 msgstr "Èasový server"
 
-#: interfaces/time.glade.in.h:17
+#: interfaces/time.glade.in.h:15
 msgid "Time servers"
 msgstr "Èasové servery"
 
-#: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.in.h:18
+#: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.in.h:16
 msgid "Time zone"
 msgstr "Èasová zóna"
 
+#: interfaces/time.glade.in.h:18
+#, fuzzy
+msgid "_Keep clock synchronized with selected servers"
+msgstr "Udr¾iava» hodiny synchronizované s vybranými serverami"
+
+#: interfaces/users.glade.in.h:1
+#, fuzzy
+msgid "<< _Remove"
+msgstr "Odstráni»"
+
 #: interfaces/users.glade.in.h:2
-msgid "Add ->"
-msgstr "Prida» ->"
+#, fuzzy
+msgid "<< _Remove "
+msgstr "Odstráni»"
 
 #: interfaces/users.glade.in.h:3
-msgid "Add group..."
-msgstr "Prida» skupinu..."
-
-#: interfaces/users.glade.in.h:4
-msgid "Add user..."
-msgstr "Prida» pou¾ívateµa..."
+#, fuzzy
+msgid "A_vailable groups"
+msgstr "Dostupné skupiny"
 
 #: interfaces/users.glade.in.h:6
 msgid "Advanced settings"
 msgstr "Ïal¹ie mo¾nosti"
 
 #: interfaces/users.glade.in.h:7
-msgid "All users"
+#, fuzzy
+msgid "All _users"
 msgstr "V¹etci pou¾ívatelia"
 
 #: interfaces/users.glade.in.h:8
@@ -1816,12 +2017,13 @@ msgid "Automatic UID/GID"
 msgstr "Automatické UID/GID"
 
 #: interfaces/users.glade.in.h:10
-msgid "Available groups"
-msgstr "Dostupné skupiny"
-
-#: interfaces/users.glade.in.h:11
 msgid "Basic settings"
 msgstr "Základné nastavenie"
+
+#: interfaces/users.glade.in.h:11
+#, fuzzy
+msgid "C_onfirm:"
+msgstr "Potvrdi»:"
 
 #: interfaces/users.glade.in.h:12
 msgid ""
@@ -1834,18 +2036,15 @@ msgstr ""
 "alebo mena skupiny a jej èlenov."
 
 #: interfaces/users.glade.in.h:15
-msgid "Check password quality"
+#, fuzzy
+msgid "Check password _quality"
 msgstr "Skontrolova» kvalitu hesla"
 
 #: interfaces/users.glade.in.h:16
 msgid "Click \"Next\" to continue"
 msgstr "Pre pokraèovanie stlaète \"Nasledujúci\""
 
-#: interfaces/users.glade.in.h:18
-msgid "Confirm:"
-msgstr "Potvrdi»:"
-
-#: interfaces/users.glade.in.h:19
+#: interfaces/users.glade.in.h:17
 msgid ""
 "Congratulations, the new user has been created.\n"
 "Please click \"Finish\" to save your changes. "
@@ -1853,23 +2052,23 @@ msgstr ""
 "Gratulujeme, vytvorili ste nového pou¾ívateµa.\n"
 "Stlaèením \"Dokonèi»\" ulo¾íte zmeny."
 
-#: interfaces/users.glade.in.h:21
+#: interfaces/users.glade.in.h:19
 msgid "Copy..."
 msgstr "Kopírova»..."
 
-#: interfaces/users.glade.in.h:22
+#: interfaces/users.glade.in.h:20
 msgid "Days between warning and password expiration:"
 msgstr "Dní medzi varovaním a vypr¹aním hesla: "
 
-#: interfaces/users.glade.in.h:23
+#: interfaces/users.glade.in.h:21
 msgid "Default group:"
 msgstr "©tandardná skupina:"
 
-#: interfaces/users.glade.in.h:24
+#: interfaces/users.glade.in.h:22
 msgid "Default shell:"
 msgstr "©tandardný shell:"
 
-#: interfaces/users.glade.in.h:26
+#: interfaces/users.glade.in.h:24
 msgid ""
 "EXPERIMENTAL NIS support.\n"
 "It's only available if You have NIS\n"
@@ -1879,102 +2078,103 @@ msgstr ""
 "Je k dispozícii iba ak máte NIS\n"
 "a kliknete na \"Podrobnej¹ie\"."
 
-#: interfaces/users.glade.in.h:29
+#: interfaces/users.glade.in.h:27
 msgid "Edit profile:"
 msgstr "Upravi» profil:"
 
-#: interfaces/users.glade.in.h:30
+#: interfaces/users.glade.in.h:28
 msgid "Filename"
 msgstr "Meno súboru"
 
-#: interfaces/users.glade.in.h:32
+#: interfaces/users.glade.in.h:30
 #, fuzzy
-msgid "Generate random password"
+msgid "Generate _random password"
 msgstr "2. Pou¾ívateµské meno a heslo"
 
-#: interfaces/users.glade.in.h:33
+#: interfaces/users.glade.in.h:31
 msgid "Group Settings"
 msgstr "Nastavenie skupín"
 
-#: interfaces/users.glade.in.h:34
-msgid "Group members"
+#: interfaces/users.glade.in.h:32
+#, fuzzy
+msgid "Group _members"
 msgstr "Èlenovia skupiny"
 
-#: interfaces/users.glade.in.h:35
-msgid "Group name:"
-msgstr "Meno skupiny:"
-
-#: interfaces/users.glade.in.h:36 src/users/e-table.c:50
+#: interfaces/users.glade.in.h:33 src/users/group.etspec.h:2
 #: src/users/user_settings.c:333 src/users/user_settings.c:403
 msgid "Groups"
 msgstr "Skupiny"
 
-#: interfaces/users.glade.in.h:37
+#: interfaces/users.glade.in.h:34
 msgid "Home directory:"
 msgstr "Domovský prieèinok:"
 
-#: interfaces/users.glade.in.h:38
-msgid "Inherit settings from:"
-msgstr "Zdedi» nastavenie od:"
+#: interfaces/users.glade.in.h:35
+#, fuzzy
+msgid "Ma_ximum days a password may be used:"
+msgstr "Heslo mô¾e by» pou¾ité max. dní:"
 
-#: interfaces/users.glade.in.h:39
-msgid "Main group:"
+#: interfaces/users.glade.in.h:36
+#, fuzzy
+msgid "Main _group:"
 msgstr "Hlavná skupina:"
 
-#: interfaces/users.glade.in.h:40
+#: interfaces/users.glade.in.h:37
 msgid "Maximum GID:"
 msgstr "Maximálne GID:"
 
-#: interfaces/users.glade.in.h:41
+#: interfaces/users.glade.in.h:38
 msgid "Maximum UID:"
 msgstr "Maximálne UID:"
 
-#: interfaces/users.glade.in.h:42
-msgid "Maximum days a password may be used:"
-msgstr "Heslo mô¾e by» pou¾ité max. dní:"
-
-#: interfaces/users.glade.in.h:43
+#: interfaces/users.glade.in.h:39
 msgid "Members"
 msgstr "Èlenovia"
 
-#: interfaces/users.glade.in.h:44
+#: interfaces/users.glade.in.h:40
+#, fuzzy
+msgid "Mi_nimum days between password changes:"
+msgstr "Minimálny poèet dní medzi zmenami hesla:"
+
+#: interfaces/users.glade.in.h:41
 msgid "Minimum GID:"
 msgstr "Minimálne GID:"
 
-#: interfaces/users.glade.in.h:45
+#: interfaces/users.glade.in.h:42
 msgid "Minimum UID:"
 msgstr "Minimálne UID:"
 
-#: interfaces/users.glade.in.h:46
+#: interfaces/users.glade.in.h:43
 msgid "Minimum days allowed between password changes:"
 msgstr "Minimálny poèet dní medzi zmenami hesla:"
 
-#: interfaces/users.glade.in.h:47
-msgid "Minimum days between password changes:"
-msgstr "Minimálny poèet dní medzi zmenami hesla:"
+#: interfaces/users.glade.in.h:44
+#, fuzzy
+msgid "Ne_w:"
+msgstr "Nový:"
 
-#: interfaces/users.glade.in.h:49
+#: interfaces/users.glade.in.h:45
 msgid "New Group"
 msgstr "Nová skupina"
 
-#: interfaces/users.glade.in.h:50
+#: interfaces/users.glade.in.h:46
 msgid "New Profile"
 msgstr "Nový profil"
 
-#: interfaces/users.glade.in.h:51
+#: interfaces/users.glade.in.h:47
 msgid "New User"
 msgstr "Nový pou¾ívateµ"
 
-#: interfaces/users.glade.in.h:52
+#: interfaces/users.glade.in.h:48
 #, fuzzy
 msgid "New password"
 msgstr "Heslo"
 
-#: interfaces/users.glade.in.h:54
+#: interfaces/users.glade.in.h:49
 msgid "Number of days that a password may be used:"
 msgstr "Heslo mô¾e by» pou¾ité max. dní:"
 
-#: interfaces/users.glade.in.h:55
+#: interfaces/users.glade.in.h:50
 msgid ""
 "On this page, you can define security options, such as how frequently users "
 "must change their passwords."
@@ -1982,7 +2182,7 @@ msgstr ""
 "Tu je mo¾né definova» mo¾nosti zabezpeèenia, napr. ako èasto si musia "
 "pou¾ívatelia meni» heslá."
 
-#: interfaces/users.glade.in.h:56
+#: interfaces/users.glade.in.h:51
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
@@ -1990,7 +2190,7 @@ msgstr ""
 "Na tejto stránke mô¾ete definova» ¹tandardné systémové nastavenie pre nových "
 "pou¾ívateµov."
 
-#: interfaces/users.glade.in.h:57
+#: interfaces/users.glade.in.h:52
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
@@ -1998,33 +2198,33 @@ msgstr ""
 "Tu je mo¾né zvoli» skripty a súbory, ktoré budú skopírované z vá¹ho úètu do "
 "úètov nových pou¾ívateµov."
 
-#: interfaces/users.glade.in.h:58
+#: interfaces/users.glade.in.h:53
 msgid "Optional settings"
 msgstr "Nepovinné nastavenie"
 
-#: interfaces/users.glade.in.h:59 src/users/user_settings.c:340
+#: interfaces/users.glade.in.h:54 src/users/user_settings.c:340
 #: src/users/user_settings.c:410
 msgid "Password"
 msgstr "Heslo"
 
-#: interfaces/users.glade.in.h:60
+#: interfaces/users.glade.in.h:55
 msgid "Password options"
 msgstr "Mo¾nosti hesiel"
 
-#: interfaces/users.glade.in.h:61
+#: interfaces/users.glade.in.h:56
 msgid "Password options (step 2 of 2)"
 msgstr "Mo¾nosti hesiel (krok 2 z 2)"
 
-#: interfaces/users.glade.in.h:62
+#: interfaces/users.glade.in.h:57
 #, fuzzy
 msgid "Password set to:"
 msgstr "Heslo:"
 
-#: interfaces/users.glade.in.h:63
+#: interfaces/users.glade.in.h:58
 msgid "Please enter a password for the new user. "
 msgstr "Zadajte heslo pre nového pou¾ívateµa: "
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:59
 msgid ""
 "Please enter a username for the new user in the space below. You may also "
 "enter a comment about the user, such as his or her real name. "
@@ -2032,52 +2232,32 @@ msgstr ""
 "Prosím, zadajte pou¾ívateµské meno pre nového pou¾ívateµa. Rovnako mô¾ete "
 "zada» komentár o pou¾ívateµovi, napr. skutoèné meno."
 
-#: interfaces/users.glade.in.h:65
-#, fuzzy
-msgid "Profile:"
-msgstr "Profily"
-
-#: interfaces/users.glade.in.h:66
+#: interfaces/users.glade.in.h:60
 msgid "Profiles"
 msgstr "Profily"
 
-#: interfaces/users.glade.in.h:67
-msgid "Profiles..."
-msgstr "Profily..."
-
-#: interfaces/users.glade.in.h:68
-msgid "Remove <-"
-msgstr "Odstráni» <-"
-
-#: interfaces/users.glade.in.h:69
+#: interfaces/users.glade.in.h:61
 msgid "Security"
 msgstr "Bezpeènos»"
 
-#: interfaces/users.glade.in.h:70
-msgid "Set password by hand"
-msgstr ""
+#: interfaces/users.glade.in.h:62
+#, fuzzy
+msgid "Set password b_y hand"
+msgstr "Heslo"
 
-#: interfaces/users.glade.in.h:72
+#: interfaces/users.glade.in.h:64
 msgid "Settings for selected user and group"
 msgstr "Nastavenie pre vybranú skupinu a pou¾ívateµa"
 
-#: interfaces/users.glade.in.h:74
-msgid "Shell:"
-msgstr "Shell:"
-
-#: interfaces/users.glade.in.h:75
-msgid "Show all users and groups"
-msgstr "Zobrazi» v¹etkých pou¾ívateµov a skupiny"
-
-#: interfaces/users.glade.in.h:76
+#: interfaces/users.glade.in.h:65
 msgid "System"
 msgstr "Systém"
 
-#: interfaces/users.glade.in.h:77
+#: interfaces/users.glade.in.h:66
 msgid "System defaults"
 msgstr "©tandardné nastavenie systému"
 
-#: interfaces/users.glade.in.h:78
+#: interfaces/users.glade.in.h:67
 msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new users to your system.\n"
@@ -2090,7 +2270,7 @@ msgstr ""
 "\n"
 "Zaènite stlaèením \"Dopredu\". "
 
-#: interfaces/users.glade.in.h:82
+#: interfaces/users.glade.in.h:71
 msgid ""
 "This is the list of the groups available in the system. Create new groups or "
 "edit existing groups with this dialog."
@@ -2098,7 +2278,7 @@ msgstr ""
 "Toto je zoznam skupín, ktoré sú na tomto systéme. Pomocou tohto dialógu "
 "vytvorte nové a upravte nastavenie u¾ existujúcich skupín."
 
-#: interfaces/users.glade.in.h:83
+#: interfaces/users.glade.in.h:72
 #, fuzzy
 msgid ""
 "This is the list of the users available in the system. Create new users or "
@@ -2107,29 +2287,35 @@ msgstr ""
 "Toto je zoznam pou¾ívateµov, ktorí sú na tomto systéme. Pomocou tohto "
 "dialógu vytvorte nových a upravte nastavenie u¾ existujúcich."
 
-#: interfaces/users.glade.in.h:84
+#: interfaces/users.glade.in.h:73
+#, fuzzy
+msgid "Us_er's groups"
+msgstr "Skupiny pou¾ívateµa"
+
+#: interfaces/users.glade.in.h:74
 #, fuzzy
 msgid "Use this dialog to create a new profile."
 msgstr "Pou¾ite tento dialóg pre vytvorenie nového profilu."
 
 #. set window title
-#: interfaces/users.glade.in.h:85 src/users/user-druid.c:271
+#: interfaces/users.glade.in.h:75 src/users/user-druid.c:271
 msgid "User Account Wizard"
 msgstr "Sprievodca úètom pou¾ívateµa"
 
-#: interfaces/users.glade.in.h:86
+#: interfaces/users.glade.in.h:76
 msgid "User Creation Druid"
 msgstr "Sprievodca vytváraním pou¾ívateµa"
 
-#: interfaces/users.glade.in.h:87
-msgid "User ID:"
-msgstr "Pou¾ívateµské ID:"
-
-#: interfaces/users.glade.in.h:88
+#: interfaces/users.glade.in.h:77
 msgid "User Identity  (step 1 of 2)"
 msgstr "Identita pou¾ívateµa  (krok 1 z 2)"
 
-#: interfaces/users.glade.in.h:89
+#: interfaces/users.glade.in.h:78
+#, fuzzy
+msgid "User _ID:"
+msgstr "Pou¾ívateµské ID:"
+
+#: interfaces/users.glade.in.h:79
 msgid ""
 "User profiles can be used a templates to facilitate the creation of new "
 "users. To edit a profile, change the settings in the following tabs."
@@ -2137,13 +2323,64 @@ msgstr ""
 "Pou¾ívateµské profily je mo¾né pou¾íva» ako ¹ablóny pre vytváranie nových "
 "pou¾ívateµovi. Pre úpravu profilu zmente nastavenie v týchto zálo¾kách."
 
-#: interfaces/users.glade.in.h:90
-msgid "User's groups"
-msgstr "Skupiny pou¾ívateµa"
-
-#: interfaces/users.glade.in.h:92 src/users/e-table.c:43
+#: interfaces/users.glade.in.h:80 src/users/users.etspec.h:7
 msgid "Users"
 msgstr "Pou¾ívatelia"
+
+#: interfaces/users.glade.in.h:81
+#, fuzzy
+msgid "_Add >>"
+msgstr "Prida» ->"
+
+#: interfaces/users.glade.in.h:82
+#, fuzzy
+msgid "_Add group..."
+msgstr "Prida» skupinu..."
+
+#: interfaces/users.glade.in.h:83
+#, fuzzy
+msgid "_Add user..."
+msgstr "Prida» pou¾ívateµa..."
+
+#: interfaces/users.glade.in.h:85
+#, fuzzy
+msgid "_Days between warning and password expiration:"
+msgstr "Dní medzi varovaním a vypr¹aním hesla: "
+
+#: interfaces/users.glade.in.h:87
+#, fuzzy
+msgid "_Group name:"
+msgstr "Meno skupiny:"
+
+#: interfaces/users.glade.in.h:88
+#, fuzzy
+msgid "_Home directory:"
+msgstr "Domovský prieèinok:"
+
+#: interfaces/users.glade.in.h:89
+#, fuzzy
+msgid "_Inherit settings from:"
+msgstr "Zdedi» nastavenie od:"
+
+#: interfaces/users.glade.in.h:91
+#, fuzzy
+msgid "_Profile:"
+msgstr "Profily"
+
+#: interfaces/users.glade.in.h:92
+#, fuzzy
+msgid "_Profiles..."
+msgstr "Profily..."
+
+#: interfaces/users.glade.in.h:94
+#, fuzzy
+msgid "_Shell:"
+msgstr "Shell:"
+
+#: interfaces/users.glade.in.h:95
+#, fuzzy
+msgid "_Show all users and groups"
+msgstr "Zobrazi» v¹etkých pou¾ívateµov a skupiny"
 
 #: src/boot/boot-settings.c:218
 msgid "Not Implemented yet, sorry."
@@ -2154,32 +2391,32 @@ msgstr "¥utujem, zatiaµ neimplementované."
 msgid "Are you sure you want to delete %s?"
 msgstr "Naozaj chcete odstráni» %s?"
 
-#: src/boot/e-table.c:39 src/users/profile.c:1004
+#: src/boot/e-table.c:335
+msgid "Linux"
+msgstr "Linux"
+
+#: src/boot/e-table.c:339
+msgid "Other"
+msgstr "Iný"
+
+#: src/boot/e-table.c:347
+#, fuzzy, c-format
+msgid "%s (default)"
+msgstr "©tandardné nastavenie systému"
+
+#: src/boot/boot.etspec.h:1 src/users/profile.c:998
 #, fuzzy
 msgid "Default"
 msgstr "©_tandard"
 
-#: src/boot/e-table.c:41 src/print/e-table.c:42
-#, fuzzy
-msgid "Type"
-msgstr "Typ:"
-
-#: src/boot/e-table.c:42
+#: src/boot/boot.etspec.h:3
 msgid "Kernel Image"
 msgstr ""
 
-#: src/boot/e-table.c:350
-msgid "Linux"
-msgstr "Linux"
-
-#: src/boot/e-table.c:354
-msgid "Other"
-msgstr "Iný"
-
-#: src/boot/e-table.c:362
-#, fuzzy, c-format
-msgid "%s (default)"
-msgstr "©tandardné nastavenie systému"
+#: src/boot/boot.etspec.h:5 src/print/print.etspec.h:6
+#, fuzzy
+msgid "Type"
+msgstr "Typ:"
 
 #: src/boot/main.c:93
 msgid "Boot Manager Settings - Ximian Setup Tools"
@@ -2211,15 +2448,15 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Signál chyby spojenia `%s' v prvku `%s'"
 
-#: src/common/xst-tool.c:545
+#: src/common/xst-tool.c:550
 msgid "Skipping actual save..."
 msgstr "Preskakujem vlastné ukladanie..."
 
-#: src/common/xst-tool.c:571
+#: src/common/xst-tool.c:573
 msgid "Updating your system configuration."
 msgstr "Aktualizujem konfiguráciu vá¹ho systému."
 
-#: src/common/xst-tool.c:695
+#: src/common/xst-tool.c:697
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2227,16 +2464,16 @@ msgstr ""
 "Nastala chyba pri spustení skriptu,\n"
 "a nastavenie nebolo mo¾né naèíta»."
 
-#: src/common/xst-tool.c:869
+#: src/common/xst-tool.c:873
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Konfiguraèné nástroje Ximian"
 
-#: src/common/xst-tool.c:1006
+#: src/common/xst-tool.c:1010
 msgid "The password you entered is invalid."
 msgstr ""
 
-#: src/common/xst-tool.c:1046
+#: src/common/xst-tool.c:1048
 msgid "Pretending we are root..."
 msgstr "Tvárim sa ako root..."
 
@@ -2264,53 +2501,53 @@ msgstr "Odkladací priestor %s u¾ existuje."
 msgid "Swap Management"
 msgstr "Správa odkladacieho priestoru"
 
-#: src/network/callbacks.c:164
+#: src/network/callbacks.c:265
 msgid "The name of this computer"
 msgstr "Meno tohoto poèítaèa"
 
-#: src/network/callbacks.c:167
+#: src/network/callbacks.c:268
 msgid "A short description of your computer"
 msgstr "Krátky popis vá¹ho poèítaèa"
 
-#: src/network/callbacks.c:170
+#: src/network/callbacks.c:271
 msgid "The Windows Networking workgroup for your network"
 msgstr "Pracovná skupina siete Windows pre va¹u sie»"
 
-#: src/network/callbacks.c:173
+#: src/network/callbacks.c:274
 msgid "The IP address of your WINS server"
 msgstr "IP adresa vá¹ho serveru WINS"
 
-#: src/network/callbacks.c:176
+#: src/network/callbacks.c:277
 msgid "The DNS domain for your computer"
 msgstr "Doména DNS pre vá¹ poèítaè"
 
-#: src/network/callbacks.c:179
+#: src/network/callbacks.c:280
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Zoznam IP adries va¹ich serverov DNS"
 
-#: src/network/callbacks.c:182
+#: src/network/callbacks.c:283
 msgid "A list of domains where hosts will be searched"
 msgstr "Zoznam domén, kde majú by» hostitelia hµadaní"
 
-#: src/network/callbacks.c:185
+#: src/network/callbacks.c:286
 msgid "The IP address of this host"
 msgstr "IP adresa tohto hostiteµa"
 
-#: src/network/callbacks.c:188
+#: src/network/callbacks.c:289
 msgid "Aliases for this host, one per line"
 msgstr "Aliasy pre tohto hostiteµa, jeden na riadku"
 
-#: src/network/callbacks.c:328
+#: src/network/callbacks.c:429
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Odstráni» spojenie %s: ``%s''?"
 
-#: src/network/callbacks.c:330
+#: src/network/callbacks.c:431
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Odstráni» spojenie %s?"
 
-#: src/network/callbacks.c:392
+#: src/network/callbacks.c:493
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2318,11 +2555,11 @@ msgstr ""
 "Nemáte nain¹talovanú podporu SMB. Prosím, nain¹talujte ju, aby\n"
 "ste mohli pou¾íva» sie» windows."
 
-#: src/network/callbacks.c:393
+#: src/network/callbacks.c:494
 msgid "SMB support missing."
 msgstr "Chýba podpora SMB."
 
-#: src/network/callbacks.c:430
+#: src/network/callbacks.c:531
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications,\n"
@@ -2336,19 +2573,19 @@ msgstr ""
 "\n"
 "Aj tak pokraèova»?"
 
-#: src/network/callbacks.c:437
+#: src/network/callbacks.c:538
 msgid "Don't change host name"
 msgstr "Nemeni» meno hostiteµa"
 
-#: src/network/callbacks.c:470
+#: src/network/callbacks.c:571
 msgid "Active"
 msgstr "Aktívne"
 
-#: src/network/callbacks.c:471
+#: src/network/callbacks.c:572
 msgid "Inactive"
 msgstr "Neaktívne"
 
-#: src/network/callbacks.c:488
+#: src/network/callbacks.c:589
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2390,11 +2627,11 @@ msgstr "Loopback: virtuálne rozhranie"
 msgid "Unknown type"
 msgstr "Neznámy typ"
 
-#: src/network/connection.c:521
+#: src/network/connection.c:533
 msgid "To activate"
 msgstr "Aktivácia"
 
-#: src/network/connection.c:522
+#: src/network/connection.c:534
 msgid "To inactivate"
 msgstr "Deaktivácia"
 
@@ -2468,17 +2705,11 @@ msgstr ""
 msgid "New Shares Admin"
 msgstr "Správa sie»ového zdieµania"
 
-#: src/shares/tables.c:84
-#, fuzzy
-msgid "Pattern"
-msgstr "Vzorka:"
+#: src/shares/tables.c:742
+msgid "Mount"
+msgstr "Pripoji»"
 
-#: src/shares/tables.c:85
-#, fuzzy
-msgid "Write"
-msgstr "Zapisovateµný"
-
-#: src/shares/tables.c:777
+#: src/shares/tables.c:742
 #, fuzzy
 msgid "Unmount"
 msgstr "Pripoji»"
@@ -2573,7 +2804,13 @@ msgstr ""
 "Musíte zada» lokálny prieèinok, ak sa má\n"
 "import pripoji»."
 
-#: src/time/main.c:384
+#: src/shares/validate.c:256
+msgid ""
+"You need to specify a client pattern, e.g.\n"
+"\"*.myschool.edu\" or \"192.168.0.1/24\"."
+msgstr ""
+
+#: src/time/main.c:371
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -2581,11 +2818,11 @@ msgstr ""
 "Nemáte nain¹talovanú podporu NTP. Prosím, nain¹talujte ju,\n"
 "aby bola mo¾ná synchronizácia."
 
-#: src/time/main.c:385
+#: src/time/main.c:372
 msgid "NTP support missing."
 msgstr "Chýba podpora NTP."
 
-#: src/time/main.c:619
+#: src/time/main.c:606
 msgid "Time and Date Settings"
 msgstr "Nastavenie èasu a dátumu"
 
@@ -2597,54 +2834,27 @@ msgstr ""
 msgid "Can't create new user. Too many users probably."
 msgstr ""
 
-#: src/users/e-table.c:44
-msgid "UID"
-msgstr ""
-
-#: src/users/e-table.c:45
-msgid "Home"
-msgstr ""
-
-#: src/users/e-table.c:46
-#, fuzzy
-msgid "Shell"
-msgstr "Shell:"
-
-#: src/users/e-table.c:47 src/users/profile.c:63
-#, fuzzy
-msgid "Comment"
-msgstr "Komentár:"
-
-#: src/users/e-table.c:48
-#, fuzzy
-msgid "Group"
-msgstr "Skupiny"
-
-#: src/users/e-table.c:49
-msgid "GID"
-msgstr ""
-
 #: src/users/main.c:95
 msgid "Show All"
 msgstr "Zobrazi» v¹etkých"
 
-#: src/users/main.c:122 src/users/main.c:127
+#: src/users/main.c:122
 msgid "User name contains"
 msgstr "Meno pou¾ívateµa obsahuje"
 
-#: src/users/main.c:128
+#: src/users/main.c:123
 msgid "User ID is"
 msgstr "Pou¾ívateµské ID je"
 
-#: src/users/main.c:129
+#: src/users/main.c:124
 msgid "Group name contains"
 msgstr "Meno skupiny obsahuje"
 
-#: src/users/main.c:130
+#: src/users/main.c:125
 msgid "User GID is"
 msgstr "GID pou¾ívateµa je"
 
-#: src/users/main.c:316
+#: src/users/main.c:297
 msgid "Users and Groups"
 msgstr "Pou¾ívatelia a skupiny"
 
@@ -2820,11 +3030,6 @@ msgstr ""
 msgid "Rename the selected location"
 msgstr "Nové meno umiestnenia"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:104
-#, fuzzy
-msgid "_Delete..."
-msgstr "Odstráni»..."
-
 #: archiver/location-manager-capplet/location-manager-dialog.c:105
 #, fuzzy
 msgid "Delete the selected location"
@@ -2874,11 +3079,6 @@ msgstr "Odstráni» daný nástroj z daného umiestnenia"
 msgid "_Location"
 msgstr "Umiestnenie"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:134
-#, fuzzy
-msgid "_Settings"
-msgstr "Nastavenie"
-
 #: archiver/location-manager-capplet/location-manager-dialog.c:135
 #: interfaces/location-manager.glade.in.h:38
 msgid "_Help"
@@ -2916,6 +3116,10 @@ msgstr "Mo¾nosti pre ukladanie dát"
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
 msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:3
+msgid "Enable"
+msgstr "Povoli»"
 
 #: interfaces/internetsharing.glade.in.h:4
 #, fuzzy
@@ -3005,6 +3209,10 @@ msgstr ""
 msgid "Helsinki Office"
 msgstr ""
 
+#: interfaces/location-manager.glade.in.h:17
+msgid "Keep clock synchronized with selected servers"
+msgstr "Udr¾iava» hodiny synchronizované s vybranými serverami"
+
 #: interfaces/location-manager.glade.in.h:18
 msgid "Location"
 msgstr "Umiestnenie"
@@ -3060,6 +3268,14 @@ msgstr "©tandardné umiestnenie"
 #: interfaces/location-manager.glade.in.h:31
 msgid "Rollback-location-management-mockup"
 msgstr ""
+
+#: interfaces/location-manager.glade.in.h:32
+msgid "Select servers..."
+msgstr "Vybra» servery..."
+
+#: interfaces/location-manager.glade.in.h:33
+msgid "Set time zone..."
+msgstr "Nastavi» èasovú zónu..."
 
 #: interfaces/location-manager.glade.in.h:37
 msgid ""
@@ -3168,64 +3384,59 @@ msgstr "Chýba podpora NTP."
 msgid "Lpr based Printing"
 msgstr ""
 
-#: src/print/e-table.c:41
-msgid "Spool"
-msgstr ""
-
-#: src/print/e-table.c:44
+#: src/print/print.etspec.h:2
 #, fuzzy
 msgid "Paper"
 msgstr "Vzorka:"
 
-#: src/print/e-table.c:45
+#: src/print/print.etspec.h:3
 #, fuzzy
 msgid "Resolution"
 msgstr "Výber:"
 
-#: src/print/e-table.c:46
+#: src/print/print.etspec.h:4
 msgid "Share"
+msgstr ""
+
+#: src/print/print.etspec.h:5
+msgid "Spool"
 msgstr ""
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
 msgstr ""
 
-#: src/users/profile.c:62
-#, fuzzy
-msgid "Profile"
-msgstr "Profily"
-
-#: src/users/profile.c:515
+#: src/users/profile.c:509
 msgid "Choose the file"
 msgstr ""
 
-#: src/users/profile.c:657
+#: src/users/profile.c:651
 #, fuzzy
 msgid "Profile Editor"
 msgstr "Profily"
 
-#: src/users/profile.c:857
+#: src/users/profile.c:851
 #, fuzzy
 msgid "Profile with given name already exists."
 msgstr "Pou¾ívateµské meno u¾ existuje."
 
-#: src/users/profile.c:860
+#: src/users/profile.c:854
 #, fuzzy
 msgid "Profile name must not be empty."
 msgstr "Domovský prieèinok nesmie by» prázdny."
 
 #. name
-#: src/users/profile.c:1005
+#: src/users/profile.c:999
 #, fuzzy
 msgid "Default profile"
 msgstr "©tandardná skupina:"
 
-#: src/users/profile.c:1321
+#: src/users/profile.c:1315
 msgid "Can't delete Default"
 msgstr ""
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1447
+#: src/users/profile.c:1441
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -3248,6 +3459,43 @@ msgstr "Identita"
 msgid "Real name:"
 msgstr "Meno súboru"
 
+#: src/users/net_group.etspec.h:1 src/users/users.etspec.h:3
+#, fuzzy
+msgid "Group"
+msgstr "Skupiny"
+
+#: src/users/profiles.etspec.h:1 src/users/users.etspec.h:1
+#, fuzzy
+msgid "Comment"
+msgstr "Komentár:"
+
+#: src/users/group.etspec.h:1 src/users/users.etspec.h:2
+msgid "GID"
+msgstr ""
+
+#: src/users/users.etspec.h:4
+msgid "Home"
+msgstr ""
+
+#: src/users/users.etspec.h:5
+#, fuzzy
+msgid "Shell"
+msgstr "Shell:"
+
+#: src/users/users.etspec.h:6
+msgid "UID"
+msgstr ""
+
+#: src/users/net_user.etspec.h:1
+#, fuzzy
+msgid "User"
+msgstr "Pou¾ívatelia"
+
+#: src/users/profiles.etspec.h:2
+#, fuzzy
+msgid "Profile"
+msgstr "Profily"
+
 #: src/shares/shares.desktop.in.in.h:1
 msgid "Directory import & export"
 msgstr ""
@@ -3256,6 +3504,22 @@ msgstr ""
 #, fuzzy
 msgid "Shares"
 msgstr "Servery"
+
+#: src/shares/export_clients.etspec.h:1
+#, fuzzy
+msgid "Pattern"
+msgstr "Vzorka:"
+
+#: src/shares/export_clients.etspec.h:2
+#, fuzzy
+msgid "Write"
+msgstr "Zapisovateµný"
+
+#~ msgid "Delete..."
+#~ msgstr "Odstráni»..."
+
+#~ msgid "Remove <-"
+#~ msgstr "Odstráni» <-"
 
 #~ msgid "window1"
 #~ msgstr "window1"

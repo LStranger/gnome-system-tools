@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.3.0\n"
-"POT-Creation-Date: 2001-05-25 09:23-0500\n"
+"POT-Creation-Date: 2001-05-29 13:04-0500\n"
 "PO-Revision-Date: 2001-03-08 22:23+0900\n"
 "Last-Translator: Young-Ho, Cha <ganadist@chollian.net>\n"
 "Language-Team: korean <ko@li.org>\n"
@@ -611,50 +611,34 @@ msgid "Options for adding and removing backends"
 msgstr ""
 
 #: interfaces/boot.glade.in.h:1
-msgid "Append:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:2
-msgid "Boot type:"
+#, fuzzy
+msgid "Boot _type:"
 msgstr "부트 형식:"
 
-#: interfaces/boot.glade.in.h:3
+#: interfaces/boot.glade.in.h:2
 msgid "D_efault"
 msgstr "기본값(_e)"
 
-#: interfaces/boot.glade.in.h:4 interfaces/disks.glade.in.h:10
-#: interfaces/memory.glade.in.h:7 interfaces/network.glade.in.h:41
-msgid "Device:"
-msgstr "장치:"
-
-#: interfaces/boot.glade.in.h:5
-msgid "Image:"
-msgstr "이미지:"
-
-#: interfaces/boot.glade.in.h:6 interfaces/location-manager.glade.in.h:23
-#: interfaces/shares.glade.in.h:37 interfaces/users.glade.in.h:48
-msgid "Name:"
+#: interfaces/boot.glade.in.h:3
+#, fuzzy
+msgid "N_ame:"
 msgstr "이름:"
 
-#: interfaces/boot.glade.in.h:7
+#: interfaces/boot.glade.in.h:4
 msgid "Optional"
 msgstr ""
 
-#: interfaces/boot.glade.in.h:8
-msgid "Root:"
-msgstr "루트:"
-
-#: interfaces/boot.glade.in.h:9 interfaces/disks.glade.in.h:26
-#: interfaces/memory.glade.in.h:18 interfaces/nameresolution.glade.in.h:30
-#: interfaces/users.glade.in.h:71
+#: interfaces/boot.glade.in.h:5 interfaces/disks.glade.in.h:26
+#: interfaces/memory.glade.in.h:16 interfaces/nameresolution.glade.in.h:30
+#: interfaces/users.glade.in.h:63
 msgid "Settings"
 msgstr "설정"
 
-#: interfaces/boot.glade.in.h:10
+#: interfaces/boot.glade.in.h:6
 msgid "Starting your computer"
 msgstr "컴퓨터 시작"
 
-#: interfaces/boot.glade.in.h:11
+#: interfaces/boot.glade.in.h:7
 msgid ""
 "Use this dialog to add new kernel or\n"
 "operating system to your computer."
@@ -662,7 +646,7 @@ msgstr ""
 "컴퓨터에 새 커널이나 운영체제를\n"
 "추가할때 이 대화상자를 사용합니다."
 
-#: interfaces/boot.glade.in.h:13
+#: interfaces/boot.glade.in.h:9
 #, fuzzy
 msgid ""
 "Use this tool to set the installed operating\n"
@@ -671,32 +655,62 @@ msgstr ""
 "컴퓨터에 새 커널이나 운영체제를\n"
 "추가할때 이 대화상자를 사용합니다."
 
-#: interfaces/boot.glade.in.h:15
-msgid "Wait"
-msgstr "대기 시간"
-
-#: interfaces/boot.glade.in.h:16
+#: interfaces/boot.glade.in.h:11 interfaces/network.glade.in.h:87
+#: interfaces/shares.glade.in.h:57
 msgid "_Add..."
 msgstr "추가(_A)..."
 
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.in.h:12
+msgid "_Append:"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:13 interfaces/network.glade.in.h:92
+#: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:86
 msgid "_Delete"
 msgstr "제거(_D)"
 
+#: interfaces/boot.glade.in.h:14
+#, fuzzy
+msgid "_Device:"
+msgstr "장치:"
+
+#: interfaces/boot.glade.in.h:15
+#, fuzzy
+msgid "_Image:"
+msgstr "이미지:"
+
+#: interfaces/boot.glade.in.h:16 interfaces/shares.glade.in.h:65
+#: interfaces/users.glade.in.h:90
+#, fuzzy
+msgid "_Name:"
+msgstr "이름:"
+
+#: interfaces/boot.glade.in.h:17
+#, fuzzy
+msgid "_Root:"
+msgstr "루트:"
+
 #: interfaces/boot.glade.in.h:18 interfaces/location-manager.glade.in.h:39
+#: interfaces/shares.glade.in.h:69 interfaces/users.glade.in.h:93
 msgid "_Settings..."
 msgstr "설정(_S)..."
 
 #: interfaces/boot.glade.in.h:19
-msgid "seconds before loading default kernel or OS"
+#, fuzzy
+msgid "_Wait"
+msgstr "대기 시간"
+
+#: interfaces/boot.glade.in.h:20
+#, fuzzy
+msgid "_seconds before loading default kernel or OS"
 msgstr "기본 커널 또는 운영체제를 시작하기전의 대기시간"
 
 #: interfaces/common.glade.in.h:1
 msgid "Complexity"
 msgstr ""
 
-#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:72
-#: interfaces/shares.glade.in.h:38
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:53
+#: interfaces/shares.glade.in.h:43
 msgid "Password:"
 msgstr "비밀번호:"
 
@@ -711,7 +725,7 @@ msgstr "암호 바꿈"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:641
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:643
 msgid "Scanning your system configuration."
 msgstr "여러분의 시스템 설정을 조사합니다."
 
@@ -782,11 +796,16 @@ msgstr "마운트 위치 선택"
 msgid "Detected"
 msgstr "발견"
 
-#: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:40 src/boot/e-table.c:43
-#: src/print/e-table.c:43
+#: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
+#: interfaces/network.glade.in.h:32 src/boot/boot.etspec.h:2
+#: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "장치"
+
+#: interfaces/disks.glade.in.h:10 interfaces/memory.glade.in.h:6
+#: interfaces/network.glade.in.h:33
+msgid "Device:"
+msgstr "장치:"
 
 #: interfaces/disks.glade.in.h:11
 msgid "Disks & partitions"
@@ -822,7 +841,7 @@ msgstr "목록"
 msgid "Mount point"
 msgstr "마운트 위치"
 
-#: interfaces/disks.glade.in.h:18 interfaces/shares.glade.in.h:31
+#: interfaces/disks.glade.in.h:18 interfaces/shares.glade.in.h:34
 msgid "Mount point:"
 msgstr "마운트 위치:"
 
@@ -830,8 +849,8 @@ msgstr "마운트 위치:"
 msgid "Mount this partition"
 msgstr "이 분할영역 마운트"
 
-#: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:32
-#: src/shares/tables.c:79
+#: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:35
+#: src/shares/imports.etspec.h:3
 msgid "Mounted"
 msgstr "마운트됨"
 
@@ -855,7 +874,7 @@ msgstr "분할영역 설정"
 msgid "Remember details of this partition"
 msgstr "이 분할영역의 상세목록 기억"
 
-#: interfaces/disks.glade.in.h:27 interfaces/memory.glade.in.h:19
+#: interfaces/disks.glade.in.h:27 interfaces/memory.glade.in.h:17
 msgid "Size"
 msgstr "크기"
 
@@ -875,91 +894,98 @@ msgstr ""
 msgid "ufs (FreeBSD)"
 msgstr ""
 
-#: interfaces/memory.glade.in.h:1 interfaces/nameresolution.glade.in.h:4
-#: interfaces/network.glade.in.h:12 interfaces/shares.glade.in.h:3
-#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
-msgid "Add"
-msgstr "추가"
-
-#: interfaces/memory.glade.in.h:2
+#: interfaces/memory.glade.in.h:1
 msgid "Available partitions:"
 msgstr "사용가능한 분할영역:"
 
-#: interfaces/memory.glade.in.h:3
+#: interfaces/memory.glade.in.h:2
 msgid "Available swap areas"
 msgstr "스왑 가능한 영역"
 
-#: interfaces/memory.glade.in.h:4
+#: interfaces/memory.glade.in.h:3
 msgid "Browse..."
 msgstr "찾아보기..."
 
-#: interfaces/memory.glade.in.h:5
+#: interfaces/memory.glade.in.h:4
 msgid "Cancel"
 msgstr "취소"
 
-#: interfaces/memory.glade.in.h:8 interfaces/shares.glade.in.h:13
+#: interfaces/memory.glade.in.h:7 interfaces/shares.glade.in.h:14
 msgid "Enabled"
 msgstr "가능"
 
-#: interfaces/memory.glade.in.h:9
+#: interfaces/memory.glade.in.h:8
 msgid "MB"
 msgstr ""
 
-#: interfaces/memory.glade.in.h:10
+#: interfaces/memory.glade.in.h:9
 msgid "New Swap Device"
 msgstr "새 스왑 장치"
 
-#: interfaces/memory.glade.in.h:11
+#: interfaces/memory.glade.in.h:10
 msgid "OK"
 msgstr "확인"
 
-#: interfaces/memory.glade.in.h:12 interfaces/shares.glade.in.h:40
+#: interfaces/memory.glade.in.h:11 interfaces/shares.glade.in.h:45
 msgid "Path:"
 msgstr "경로:"
 
-#: interfaces/memory.glade.in.h:13
+#: interfaces/memory.glade.in.h:12
 #, fuzzy
 msgid "Physical memory:"
 msgstr "물리 메모리:"
 
-#: interfaces/memory.glade.in.h:14
+#: interfaces/memory.glade.in.h:13
 msgid "Priority"
 msgstr "우선권"
 
-#: interfaces/memory.glade.in.h:15
+#: interfaces/memory.glade.in.h:14
 msgid "Priority:"
 msgstr "우선권:"
 
-#: interfaces/memory.glade.in.h:16
-msgid "Remove"
-msgstr "제거"
-
-#: interfaces/memory.glade.in.h:17
+#: interfaces/memory.glade.in.h:15
 msgid "Select  Swap File"
 msgstr "스왑파일 선택"
 
-#: interfaces/memory.glade.in.h:20
+#: interfaces/memory.glade.in.h:18
 msgid "Size:"
 msgstr "크기:"
 
-#: interfaces/memory.glade.in.h:21
+#: interfaces/memory.glade.in.h:19
 msgid "Swap Settings"
 msgstr "스왑 설정"
 
-#: interfaces/memory.glade.in.h:22
+#: interfaces/memory.glade.in.h:20
 #, fuzzy
 msgid "Swap memory:"
 msgstr "스왑 메모리:"
 
-#: interfaces/memory.glade.in.h:23
+#: interfaces/memory.glade.in.h:21
 msgid "Swap type:"
 msgstr "스왑 형식:"
 
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:86
+#: interfaces/time.glade.in.h:17
+#, fuzzy
+msgid "_Add"
+msgstr "추가"
+
+#: interfaces/memory.glade.in.h:23
+#, fuzzy
+msgid "_Remove"
+msgstr "제거"
+
+#: archiver/location-manager-capplet/location-manager-dialog.c:134
 #: interfaces/memory.glade.in.h:24
+#, fuzzy
+msgid "_Settings"
+msgstr "설정"
+
+#: interfaces/memory.glade.in.h:25
 msgid "file"
 msgstr "파일"
 
-#: interfaces/memory.glade.in.h:25
+#: interfaces/memory.glade.in.h:26
 msgid "partition"
 msgstr "분할영역"
 
@@ -975,7 +1001,12 @@ msgstr " 이름"
 msgid "<unknown>"
 msgstr "<알수없음>"
 
-#: interfaces/nameresolution.glade.in.h:5 interfaces/network.glade.in.h:17
+#: interfaces/nameresolution.glade.in.h:4 interfaces/shares.glade.in.h:4
+#: interfaces/users.glade.in.h:4
+msgid "Add"
+msgstr "추가"
+
+#: interfaces/nameresolution.glade.in.h:5 interfaces/network.glade.in.h:16
 msgid "Aliases"
 msgstr "별명"
 
@@ -995,13 +1026,12 @@ msgstr ""
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "별명이 주어진 IP주소나 해당하는 이름을 바꿉니다."
 
-#: interfaces/nameresolution.glade.in.h:9 interfaces/network.glade.in.h:36
-#: interfaces/print.glade.in.h:3 interfaces/shares.glade.in.h:10
-#: interfaces/users.glade.in.h:25
+#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:3
+#: interfaces/shares.glade.in.h:11 interfaces/users.glade.in.h:23
 msgid "Delete"
 msgstr "제거"
 
-#: interfaces/nameresolution.glade.in.h:10 interfaces/network.glade.in.h:39
+#: interfaces/nameresolution.glade.in.h:10
 msgid "Description:"
 msgstr "설명:"
 
@@ -1017,7 +1047,7 @@ msgstr "도메인 찾기 순서"
 msgid "Domain Name Service (DNS)"
 msgstr "도메인 네임 서비스 (DNS)"
 
-#: interfaces/nameresolution.glade.in.h:14 interfaces/network.glade.in.h:42
+#: interfaces/nameresolution.glade.in.h:14
 msgid "Domain:"
 msgstr "도메인:"
 
@@ -1025,12 +1055,12 @@ msgstr "도메인:"
 msgid "Existing:"
 msgstr "존재하는:"
 
-#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:20
-#: src/shares/tables.c:76
+#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:22
+#: src/shares/imports.etspec.h:1
 msgid "Host"
 msgstr "호스트"
 
-#: interfaces/nameresolution.glade.in.h:17 interfaces/network.glade.in.h:50
+#: interfaces/nameresolution.glade.in.h:17
 msgid "Host name:"
 msgstr "호스트 이름:"
 
@@ -1038,7 +1068,7 @@ msgstr "호스트 이름:"
 msgid "IP address"
 msgstr "IP 주소"
 
-#: interfaces/nameresolution.glade.in.h:19 interfaces/network.glade.in.h:60
+#: interfaces/nameresolution.glade.in.h:19
 msgid "IP address:"
 msgstr "IP 주소:"
 
@@ -1066,7 +1096,7 @@ msgstr "새 도메인:"
 msgid "New server:"
 msgstr "새 서버:"
 
-#: interfaces/nameresolution.glade.in.h:26 interfaces/users.glade.in.h:53
+#: interfaces/nameresolution.glade.in.h:26
 msgid "New:"
 msgstr "새로운:"
 
@@ -1090,7 +1120,7 @@ msgstr "선택한 별명에 대한 설정"
 msgid "Use WINS server:"
 msgstr "WINS서버 사용:"
 
-#: interfaces/nameresolution.glade.in.h:33 interfaces/network.glade.in.h:113
+#: interfaces/nameresolution.glade.in.h:33
 msgid "Workgroup:"
 msgstr "작업그룹:"
 
@@ -1111,145 +1141,121 @@ msgid "3. Account name"
 msgstr "3. 계정 이름"
 
 #: interfaces/network.glade.in.h:5
+#, fuzzy
+msgid "A_liases:"
+msgstr "별칭:"
+
+#: interfaces/network.glade.in.h:6
+#, fuzzy
+msgid "Ac_tivate"
+msgstr "활성화"
+
+#: interfaces/network.glade.in.h:7
 msgid "Account"
 msgstr "계정"
 
-#: interfaces/network.glade.in.h:6
+#: interfaces/network.glade.in.h:8
 msgid "Account name:"
 msgstr "계정 이름:"
 
-#: interfaces/network.glade.in.h:7
-msgid "Activate"
-msgstr "활성화"
+#: interfaces/network.glade.in.h:9
+#, fuzzy
+msgid "Activate when the computer _starts"
+msgstr "컴퓨터가 시작할때 이 연결을 활성화 합니다"
 
-#: interfaces/network.glade.in.h:8
+#: interfaces/network.glade.in.h:10
 msgid "Activate when the computer starts"
 msgstr "컴퓨터가 시작할때 이 연결을 활성화 합니다"
 
-#: interfaces/network.glade.in.h:9
+#: interfaces/network.glade.in.h:11
 msgid "Activation"
 msgstr "활성"
 
-#: interfaces/network.glade.in.h:10
+#: interfaces/network.glade.in.h:12
 msgid "Ad-Hoc Settings"
 msgstr "Ad-Hoc 설정"
-
-#: interfaces/network.glade.in.h:11
-msgid "Ad-Hoc mode"
-msgstr "ad-Hoc 모드"
 
 #: interfaces/network.glade.in.h:13
 msgid "Add New Internet Connection"
 msgstr "새 이더넷 연결 추가"
 
-#: interfaces/network.glade.in.h:14 interfaces/shares.glade.in.h:4
-#: interfaces/users.glade.in.h:5
-msgid "Add..."
-msgstr "추가..."
-
-#: interfaces/network.glade.in.h:15
+#: interfaces/network.glade.in.h:14
 msgid "Advanced"
 msgstr "고급"
 
-#: interfaces/network.glade.in.h:16
+#: interfaces/network.glade.in.h:15
 msgid "Advanced PPP connection tunning."
 msgstr "고급 PPP 연결 설정."
 
-#: interfaces/network.glade.in.h:18
+#: interfaces/network.glade.in.h:17
 msgid "Aliases of other computers."
 msgstr "다른 컴퓨터의 별칭"
 
-#: interfaces/network.glade.in.h:19
-msgid "Aliases:"
-msgstr "별칭:"
+#: interfaces/network.glade.in.h:18
+#, fuzzy
+msgid "Allow activation control for all _users"
+msgstr "모든 사용자에게 활성 조정을 할수 있게 허용합니다"
 
-#: interfaces/network.glade.in.h:20
+#: interfaces/network.glade.in.h:19
 msgid "Allow activation control for all users"
 msgstr "모든 사용자에게 활성 조정을 할수 있게 허용합니다"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1008
+#: interfaces/network.glade.in.h:20 src/network/connection.c:1020
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:22
-msgid "Channel:"
-msgstr "채널:"
-
-#: interfaces/network.glade.in.h:23 interfaces/shares.glade.in.h:9
-#: interfaces/users.glade.in.h:17
-msgid "Comment:"
-msgstr "설명:"
-
-#: interfaces/network.glade.in.h:24
-msgid "Configuration:"
-msgstr "설정:"
-
-#: interfaces/network.glade.in.h:25
-msgid "Configure..."
-msgstr "설정..."
-
-#: interfaces/network.glade.in.h:26
+#: interfaces/network.glade.in.h:21
 msgid "Connection"
 msgstr "연결"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:22
 msgid "Connection Settings"
 msgstr "연결 설정"
 
-#: interfaces/network.glade.in.h:28
+#: interfaces/network.glade.in.h:23
 msgid "Connection active"
 msgstr "연결 활성"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:24
 msgid "Connections"
 msgstr "연결"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:25
 msgid "Create a new Internet Connection "
 msgstr "새로운 인터넷 연결을 만듭니다 "
 
-#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:31
-#: src/network/connection.c:1007
+#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:26
+#: src/network/connection.c:1019
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:27
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:28
 msgid "DNS Servers"
 msgstr "DNS 서버"
 
-#: interfaces/network.glade.in.h:34
-msgid "DNS Servers:"
+#: interfaces/network.glade.in.h:29
+#, fuzzy
+msgid "DNS _Servers:"
 msgstr "DNS 서버:"
 
-#: interfaces/network.glade.in.h:35
-msgid "Deactivate"
+#: interfaces/network.glade.in.h:30
+#, fuzzy
+msgid "D_eactivate"
 msgstr "비활성화"
 
-#: interfaces/network.glade.in.h:37
-msgid "Delete..."
-msgstr "제거..."
-
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:31
 msgid "Description"
 msgstr "설명"
 
-#: interfaces/network.glade.in.h:43
-msgid "Enable windows networking (Samba)"
-msgstr "윈도우 네트워크 사용 (삼바)"
-
-#: interfaces/network.glade.in.h:44
-msgid "Ethernet"
-msgstr "이더넷"
-
-#: interfaces/network.glade.in.h:45 interfaces/users.glade.in.h:31
+#: interfaces/network.glade.in.h:34 interfaces/users.glade.in.h:29
 msgid "Finished"
 msgstr "완료"
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:35
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
@@ -1257,162 +1263,117 @@ msgstr ""
 "먼저, 인터넷에 연결할 때 사용할 전화번호를 입력하십시오. 이 번호는 ISP가 "
 "제공합니다. "
 
-#: interfaces/network.glade.in.h:47
-msgid "Frequency (GHz):"
-msgstr "주파수 (GHz):"
-
-#: interfaces/network.glade.in.h:48
-msgid "Gateway address:"
-msgstr "게이트웨이 주소:"
-
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:36
 msgid "General"
 msgstr "일반"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:37
 msgid "Hosts"
 msgstr "호스트"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:38
 msgid "How other computers are accessed."
 msgstr "다른 컴퓨터에 접근하는 방법"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:39
 msgid "How the IP address for this connection is determined"
 msgstr "이 연결에 대한 IP 주소를 정하는 방법"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:40
 #, fuzzy
 msgid "How the IP addresses for this connection are determined"
 msgstr "이 연결에 대한 IP 주소를 정하는 방법"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:41
 msgid "How the names of other computers are found."
 msgstr "다른 컴퓨터의 이름을 찾는 방법"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:42
 msgid "How this computer is identified."
 msgstr "컴퓨터를 인식시키는 방법"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:43
 msgid "How to dial up to the internet."
 msgstr "인터넷으로 전화거는 방법"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:44
 msgid "IP Address"
 msgstr "IP 주소"
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:45
 msgid "IP Settings"
 msgstr "IP 설정"
 
-#: interfaces/network.glade.in.h:61
-#, fuzzy
-msgid "Local IP:"
-msgstr "지역 경로:"
-
-#: interfaces/network.glade.in.h:62 src/network/connection.c:1006
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1018
 msgid "Manual"
 msgstr "수동"
 
-#: interfaces/network.glade.in.h:63
-msgid "Modem (PPP)"
-msgstr "모뎀 (PPP)"
-
-#: interfaces/network.glade.in.h:64
-msgid "Modem port:"
-msgstr "모뎀 포트:"
-
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:47
 msgid "Networking Settings"
 msgstr "네트워크 설정"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:48
 msgid "New Connection Type"
 msgstr "새 연결 형식"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:49
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr "다음, ISP에 지정된 사용자 이름과 비밀번호를 입력하십시오. "
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:50
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
 msgstr "이 계정에 이름을 주십시오. 이 이름은 계정을 인식하는데 사용됩니다."
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:51
 msgid "Options"
 msgstr "옵션"
 
-#: interfaces/network.glade.in.h:70
-msgid "Parallel Line"
-msgstr "병령 포트 라인"
-
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:52
 msgid "Password (confirm):"
 msgstr "비밀번호 (확인):"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:54
+#, fuzzy
+msgid "Phone _number:"
+msgstr "전화 번호:"
+
+#: interfaces/network.glade.in.h:55
 msgid "Phone number:"
 msgstr "전화 번호:"
 
-#: interfaces/network.glade.in.h:74
-msgid "Pppd options:"
+#: interfaces/network.glade.in.h:56
+#, fuzzy
+msgid "Pppd _options:"
 msgstr "Pppd 옵션:"
 
-#: interfaces/network.glade.in.h:75
-msgid "Primary:"
-msgstr "1차:"
-
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:57
 #, fuzzy
-msgid "Remote IP:"
-msgstr "호스트 IP:"
-
-#: interfaces/network.glade.in.h:77
-msgid "Restart if connection cuts or fails to start"
-msgstr "연결이 끊기거나 시작시 실패할때 재시작"
-
-#: interfaces/network.glade.in.h:78
-msgid "Search Domains:"
+msgid "Sea_rch Domains:"
 msgstr "도메인 검색:"
 
-#: interfaces/network.glade.in.h:79
-msgid "Secondary:"
-msgstr "2차:"
-
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:58
 msgid "Select which type of connection you would like to add."
 msgstr "추가할 연결방식을 선택합니다"
 
-#: interfaces/network.glade.in.h:81
-msgid "Session ID:"
-msgstr "세션 ID:"
-
-#: interfaces/network.glade.in.h:82
-msgid "Set DNS servers manually"
+#: interfaces/network.glade.in.h:59
+#, fuzzy
+msgid "Set _DNS servers manually"
 msgstr "수동으로 DNS서버 설정"
 
-#: interfaces/network.glade.in.h:83
-msgid "Set as default route"
+#: interfaces/network.glade.in.h:60
+#, fuzzy
+msgid "Set as _default route"
 msgstr "기본 라우트로 설정"
 
-#: interfaces/network.glade.in.h:84
-msgid "Start PPP as soon as modem connects"
-msgstr "모덴 연결을 하는 즉시 PPP 시작"
-
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:61
 msgid "Status"
 msgstr "상황"
 
-#: interfaces/network.glade.in.h:86
-msgid "Subnet mask:"
-msgstr "서브넷마스크:"
-
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:62
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -1420,7 +1381,7 @@ msgid ""
 "or finish)."
 msgstr ""
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:66
 #, fuzzy
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click "
@@ -1429,16 +1390,7 @@ msgstr ""
 "계정설정을 계속하려면, \"다음\"을 누르십시오. 그만 두려면 \"취소\"를 "
 "누르십시오. \n"
 
-#: interfaces/network.glade.in.h:92
-msgid "Update DNS when this connection becomes active"
-msgstr "연결이 활성화 되면 DNS설정 다시 바꿈"
-
-#: interfaces/network.glade.in.h:93
-#, fuzzy
-msgid "Use remote IP as default gateway"
-msgstr "기본 라우트로 설정"
-
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:67
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
@@ -1446,27 +1398,24 @@ msgstr ""
 "나중에 인터페이스를 구분하기 위해서 주석을 사용하십시오. 활성관리는 누가 "
 "언제 연결을 활성화 시키는지 설정하게 합니다."
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:68
 msgid "User name:"
 msgstr "사용자 이름:"
 
-#: interfaces/network.glade.in.h:96
-msgid "WINS server:"
+#: interfaces/network.glade.in.h:69
+#, fuzzy
+msgid "WI_NS server:"
 msgstr "WINS서버:"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:70
 msgid "Warning message goes here.."
 msgstr ""
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:71
 msgid "WaveLAN"
 msgstr "무선랜"
 
-#: interfaces/network.glade.in.h:99
-msgid "Wavelan"
-msgstr "무선랜"
-
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:72
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1492,73 +1441,247 @@ msgstr ""
 "\n"
 "시작하려면 \"다음\"을 누르십시오."
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:83
 msgid "Windows Networking"
 msgstr "윈도우 네트워크"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:84
 msgid "Wireless networking settings."
 msgstr "무선 네트워크 설정"
+
+#: interfaces/network.glade.in.h:85
+#, fuzzy
+msgid "_Ad-Hoc mode"
+msgstr "ad-Hoc 모드"
+
+#: interfaces/network.glade.in.h:88
+#, fuzzy
+msgid "_Channel:"
+msgstr "채널:"
+
+#: interfaces/network.glade.in.h:89 interfaces/shares.glade.in.h:59
+#: interfaces/users.glade.in.h:84
+#, fuzzy
+msgid "_Comment:"
+msgstr "설명:"
+
+#: interfaces/network.glade.in.h:90
+#, fuzzy
+msgid "_Configuration:"
+msgstr "설정:"
+
+#: interfaces/network.glade.in.h:91
+#, fuzzy
+msgid "_Configure..."
+msgstr "설정..."
+
+#: archiver/location-manager-capplet/location-manager-dialog.c:104
+#: interfaces/network.glade.in.h:93
+#, fuzzy
+msgid "_Delete..."
+msgstr "제거..."
+
+#: interfaces/network.glade.in.h:94
+#, fuzzy
+msgid "_Description:"
+msgstr "설명:"
+
+#: interfaces/network.glade.in.h:95
+#, fuzzy
+msgid "_Domain:"
+msgstr "도메인:"
+
+#: interfaces/network.glade.in.h:96
+#, fuzzy
+msgid "_Enable windows networking (Samba)"
+msgstr "윈도우 네트워크 사용 (삼바)"
+
+#: interfaces/network.glade.in.h:97
+#, fuzzy
+msgid "_Ethernet"
+msgstr "이더넷"
+
+#: interfaces/network.glade.in.h:98
+#, fuzzy
+msgid "_Frequency (GHz):"
+msgstr "주파수 (GHz):"
+
+#: interfaces/network.glade.in.h:99
+#, fuzzy
+msgid "_Gateway address:"
+msgstr "게이트웨이 주소:"
+
+#: interfaces/network.glade.in.h:100
+#, fuzzy
+msgid "_Host name:"
+msgstr "호스트 이름:"
+
+#: interfaces/network.glade.in.h:101
+#, fuzzy
+msgid "_IP address:"
+msgstr "IP 주소:"
+
+#: interfaces/network.glade.in.h:102
+#, fuzzy
+msgid "_Local IP:"
+msgstr "지역 경로:"
+
+#: interfaces/network.glade.in.h:103
+#, fuzzy
+msgid "_Modem (PPP)"
+msgstr "모뎀 (PPP)"
+
+#: interfaces/network.glade.in.h:104
+#, fuzzy
+msgid "_Modem port:"
+msgstr "모뎀 포트:"
+
+#: interfaces/network.glade.in.h:105
+#, fuzzy
+msgid "_Parallel Line"
+msgstr "병령 포트 라인"
+
+#: interfaces/network.glade.in.h:106
+#, fuzzy
+msgid "_Password:"
+msgstr "비밀번호:"
+
+#: interfaces/network.glade.in.h:107
+#, fuzzy
+msgid "_Primary:"
+msgstr "1차:"
+
+#: interfaces/network.glade.in.h:108
+#, fuzzy
+msgid "_Remote IP:"
+msgstr "호스트 IP:"
+
+#: interfaces/network.glade.in.h:109
+#, fuzzy
+msgid "_Restart if connection cuts or fails to start"
+msgstr "연결이 끊기거나 시작시 실패할때 재시작"
+
+#: interfaces/network.glade.in.h:110
+#, fuzzy
+msgid "_Secondary:"
+msgstr "2차:"
+
+#: interfaces/network.glade.in.h:111
+#, fuzzy
+msgid "_Session ID:"
+msgstr "세션 ID:"
+
+#: interfaces/network.glade.in.h:112
+#, fuzzy
+msgid "_Start PPP as soon as modem connects"
+msgstr "모덴 연결을 하는 즉시 PPP 시작"
+
+#: interfaces/network.glade.in.h:113
+#, fuzzy
+msgid "_Subnet mask:"
+msgstr "서브넷마스크:"
+
+#: interfaces/network.glade.in.h:114
+#, fuzzy
+msgid "_Update DNS when this connection becomes active"
+msgstr "연결이 활성화 되면 DNS설정 다시 바꿈"
+
+#: interfaces/network.glade.in.h:115
+#, fuzzy
+msgid "_Use remote IP as default gateway"
+msgstr "기본 라우트로 설정"
+
+#: interfaces/network.glade.in.h:116
+#, fuzzy
+msgid "_User name:"
+msgstr "사용자 이름:"
+
+#: interfaces/network.glade.in.h:117
+#, fuzzy
+msgid "_Wavelan"
+msgstr "무선랜"
+
+#: interfaces/network.glade.in.h:118
+#, fuzzy
+msgid "_Workgroup:"
+msgstr "작업그룹:"
 
 #: interfaces/shares.glade.in.h:1
 msgid " Edit clients... "
 msgstr ""
 
 #: interfaces/shares.glade.in.h:2
+#, fuzzy
+msgid " _Edit clients... "
+msgstr "추가(_A)..."
+
+#: interfaces/shares.glade.in.h:3
 msgid "Access control"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:5
+#: interfaces/shares.glade.in.h:5 interfaces/users.glade.in.h:5
+msgid "Add..."
+msgstr "추가..."
+
+#: interfaces/shares.glade.in.h:6
 msgid "Allow writing"
 msgstr "쓰기 허용"
 
-#: interfaces/shares.glade.in.h:6
+#: interfaces/shares.glade.in.h:7
 msgid "Browseable"
 msgstr "브라우즈 가능"
 
-#: interfaces/shares.glade.in.h:7
+#: interfaces/shares.glade.in.h:8
 msgid "Client"
 msgstr "클라이언트"
 
-#: interfaces/shares.glade.in.h:8 src/shares/tables.c:82
+#: interfaces/shares.glade.in.h:9
 #, fuzzy
 msgid "Clients"
 msgstr "클라이언트"
 
-#: interfaces/shares.glade.in.h:11
+#: interfaces/shares.glade.in.h:10
+msgid "Comment:"
+msgstr "설명:"
+
+#: interfaces/shares.glade.in.h:12
+msgid "Do not _remount this share after computer reboots"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:13
 msgid "Do not remount this share after computer reboots"
 msgstr ""
 
-#: interfaces/internetsharing.glade.in.h:3 interfaces/shares.glade.in.h:12
-#, fuzzy
-msgid "Enable"
-msgstr "가능"
-
-#: interfaces/shares.glade.in.h:14
+#: interfaces/shares.glade.in.h:15
 msgid "Export"
 msgstr "공유"
 
-#: interfaces/shares.glade.in.h:15
+#: interfaces/shares.glade.in.h:16
 #, fuzzy
 msgid "Export Clients"
 msgstr "공유/클라이언트"
 
-#: interfaces/shares.glade.in.h:16
+#: interfaces/shares.glade.in.h:17
 #, fuzzy
 msgid "Export Settings"
 msgstr "SMB 공유 설정"
 
-#: interfaces/shares.glade.in.h:17
+#: interfaces/shares.glade.in.h:18
+#, fuzzy
+msgid "Export _type:"
+msgstr "공유 이름:"
+
+#: interfaces/shares.glade.in.h:19
 #, fuzzy
 msgid "Export type:"
 msgstr "공유 이름:"
 
-#: interfaces/shares.glade.in.h:18
+#: interfaces/shares.glade.in.h:20
 #, fuzzy
 msgid "Exports"
 msgstr "공유"
 
-#: interfaces/shares.glade.in.h:19
+#: interfaces/shares.glade.in.h:21
 #, fuzzy
 msgid ""
 "Exports are used to share directories on your computer with other computers "
@@ -1567,37 +1690,42 @@ msgstr ""
 "NFS 공유는 유닉스나 리눅스 컴퓨터 사이에 네트워크를 통해서 디렉토리를 "
 "공유할때 사용됩니다."
 
-#: interfaces/shares.glade.in.h:21
+#: interfaces/shares.glade.in.h:23
 msgid "Host:"
 msgstr "호스트:"
 
-#: interfaces/shares.glade.in.h:22
+#: interfaces/shares.glade.in.h:24
 msgid "Import"
 msgstr "연결"
 
-#: interfaces/shares.glade.in.h:23
+#: interfaces/shares.glade.in.h:25
 msgid "Import Settings"
 msgstr "연결 설정"
 
-#: interfaces/shares.glade.in.h:24
+#: interfaces/shares.glade.in.h:26
 #, fuzzy
 msgid "Import Settings--NFS Options"
 msgstr "연결 설정"
 
-#: interfaces/shares.glade.in.h:25
+#: interfaces/shares.glade.in.h:27
 msgid "Import Settings--Samba Options (Obsolete)"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:26
+#: interfaces/shares.glade.in.h:28
+#, fuzzy
+msgid "Import _type:"
+msgstr "부트 형식:"
+
+#: interfaces/shares.glade.in.h:29
 #, fuzzy
 msgid "Import type:"
 msgstr "부트 형식:"
 
-#: interfaces/shares.glade.in.h:27
+#: interfaces/shares.glade.in.h:30
 msgid "Imports"
 msgstr "연결"
 
-#: interfaces/shares.glade.in.h:28
+#: interfaces/shares.glade.in.h:31
 #, fuzzy
 msgid ""
 "Imports are directories which reside in other computers and are accessible "
@@ -1605,115 +1733,172 @@ msgid ""
 msgstr ""
 "연결은 다른컴퓨터와 네트웍을 통해 접근할수 있는 컴퓨터의 디렉토리를뜻합니다."
 
-#: interfaces/shares.glade.in.h:29 src/shares/tables.c:777
-#, fuzzy
-msgid "Mount"
-msgstr "마운트됨"
-
-#: interfaces/shares.glade.in.h:30 src/shares/tables.c:78
+#: interfaces/shares.glade.in.h:32 src/shares/imports.etspec.h:2
 msgid "Mount Point"
 msgstr "마운트 위치"
 
 #: interfaces/shares.glade.in.h:33
 #, fuzzy
+msgid "Mount p_oint:"
+msgstr "마운트 위치:"
+
+#: interfaces/shares.glade.in.h:36
+#, fuzzy
 msgid "Mounting Options"
 msgstr "마운트 위치"
 
-#: interfaces/shares.glade.in.h:34
+#: interfaces/shares.glade.in.h:37
 #, fuzzy
 msgid "Mounting options"
 msgstr "마운트 위치"
 
-#: interfaces/shares.glade.in.h:35
+#: interfaces/shares.glade.in.h:38
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.in.h:36 src/boot/e-table.c:40
-#: src/shares/tables.c:80
+#: interfaces/shares.glade.in.h:39 src/boot/boot.etspec.h:4
+#: src/shares/exports.etspec.h:1
 msgid "Name"
 msgstr "이름"
 
-#: interfaces/shares.glade.in.h:39 src/shares/tables.c:77
-#: src/shares/tables.c:81
+#: interfaces/location-manager.glade.in.h:23 interfaces/shares.glade.in.h:40
+msgid "Name:"
+msgstr "이름:"
+
+#: interfaces/shares.glade.in.h:41
+#, fuzzy
+msgid "P_ublic"
+msgstr "공용"
+
+#: interfaces/shares.glade.in.h:42
+#, fuzzy
+msgid "Pass_word:"
+msgstr "비밀번호:"
+
+#: interfaces/shares.glade.in.h:44 src/shares/exports.etspec.h:2
+#: src/shares/imports.etspec.h:4
 msgid "Path"
 msgstr "경로"
 
-#: interfaces/shares.glade.in.h:41
+#: interfaces/shares.glade.in.h:46
 #, fuzzy
 msgid "Pattern:"
 msgstr "경로:"
 
-#: interfaces/shares.glade.in.h:42
+#: interfaces/shares.glade.in.h:47
 msgid "Public"
 msgstr "공용"
 
-#: interfaces/shares.glade.in.h:43
+#: interfaces/shares.glade.in.h:48
 msgid "Restrict access to this share to specific clients"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:44
+#: interfaces/shares.glade.in.h:49
 msgid "Samba"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:45
-msgid "Scan"
-msgstr ""
-
-#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:46
-#: interfaces/users.glade.in.h:73
+#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:50
 msgid "Settings..."
 msgstr "설정..."
 
-#: interfaces/shares.glade.in.h:47
+#: interfaces/shares.glade.in.h:51
 #, fuzzy
 msgid "Update"
 msgstr "날짜"
 
-#: interfaces/shares.glade.in.h:48
+#: interfaces/shares.glade.in.h:52
 msgid ""
 "Use this dialog to create a new export, or to edit the settings of an "
 "existing export."
 msgstr ""
 
-#: interfaces/shares.glade.in.h:49
+#: interfaces/shares.glade.in.h:53
 msgid ""
 "Use this dialog to create a new import, or to edit the settings of an "
 "existing import."
 msgstr ""
 
-#: interfaces/shares.glade.in.h:50
+#: interfaces/shares.glade.in.h:54
 msgid ""
 "Use this dialog to define the client patterns which determine who has access "
 "to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
 "or \" *.gnome.org\".  "
 msgstr ""
 
-#: interfaces/shares.glade.in.h:51 interfaces/users.glade.in.h:91
+#: interfaces/shares.glade.in.h:55
 #, fuzzy
 msgid "Username:"
 msgstr "사용자 이름:"
 
-#: interfaces/shares.glade.in.h:52 src/shares/tables.c:83
+#: interfaces/shares.glade.in.h:56 src/shares/exports.etspec.h:3
 msgid "Writable"
 msgstr "쓰기가능"
 
-#: interfaces/shares.glade.in.h:53
+#: interfaces/shares.glade.in.h:58
+#, fuzzy
+msgid "_Browseable"
+msgstr "브라우즈 가능"
+
+#: interfaces/shares.glade.in.h:61
+#, fuzzy
+msgid "_Enable"
+msgstr "가능"
+
+#: interfaces/shares.glade.in.h:62
+#, fuzzy
+msgid "_Host:"
+msgstr "호스트:"
+
+#: interfaces/shares.glade.in.h:63
+#, fuzzy
+msgid "_Mount"
+msgstr "마운트됨"
+
+#: interfaces/shares.glade.in.h:64
+#, fuzzy
+msgid "_Mounted"
+msgstr "마운트됨"
+
+#: interfaces/shares.glade.in.h:66
+#, fuzzy
+msgid "_Path:"
+msgstr "경로:"
+
+#: interfaces/shares.glade.in.h:67
+msgid "_Restrict access to this share to specific clients"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:68
+msgid "_Scan"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:70 interfaces/users.glade.in.h:96
+#, fuzzy
+msgid "_Username:"
+msgstr "사용자 이름:"
+
+#: interfaces/shares.glade.in.h:71
+#, fuzzy
+msgid "_Writable"
+msgstr "쓰기가능"
+
+#: interfaces/shares.glade.in.h:72
 msgid "add/edit clients"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:54
+#: interfaces/shares.glade.in.h:73
 msgid "advanced mode--main window"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:55
+#: interfaces/shares.glade.in.h:74
 msgid "export settings--NFS options"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:56
+#: interfaces/shares.glade.in.h:75
 msgid "export settings--Samba options"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:57
+#: interfaces/shares.glade.in.h:76
 msgid "simple mode--main window"
 msgstr ""
 
@@ -1721,23 +1906,19 @@ msgstr ""
 msgid "(unconfigured)"
 msgstr "(설정되지 않음)"
 
-#: interfaces/location-manager.glade.in.h:10 interfaces/time.glade.in.h:3
+#: interfaces/location-manager.glade.in.h:10 interfaces/time.glade.in.h:2
 msgid "Date"
 msgstr "날짜"
 
-#: interfaces/location-manager.glade.in.h:11 interfaces/time.glade.in.h:4
+#: interfaces/location-manager.glade.in.h:11 interfaces/time.glade.in.h:3
 msgid "Date/Time "
 msgstr "날짜/시간"
 
-#: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.in.h:5
+#: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.in.h:4
 msgid "Date/time"
 msgstr "날짜/시간"
 
-#: interfaces/location-manager.glade.in.h:17 interfaces/time.glade.in.h:6
-msgid "Keep clock synchronized with selected servers"
-msgstr "선택한 서버와 시간 동기화 유지"
-
-#: interfaces/location-manager.glade.in.h:28 interfaces/time.glade.in.h:7
+#: interfaces/location-manager.glade.in.h:28 interfaces/time.glade.in.h:5
 msgid ""
 "Please select the current date and time. You can also specify a time zone "
 "and a time server."
@@ -1745,7 +1926,12 @@ msgstr ""
 "현재 날짜와 시간을 선택하십시오. 또한 시간대와 시간 서버를 "
 "지정할수도있습니다."
 
-#: interfaces/time.glade.in.h:8
+#: interfaces/time.glade.in.h:6
+#, fuzzy
+msgid "Select _servers..."
+msgstr "서버 선택..."
+
+#: interfaces/time.glade.in.h:7
 msgid ""
 "Select a time zone by clicking on \n"
 "one of the dots on the map."
@@ -1753,55 +1939,58 @@ msgstr ""
 "지도상의 점을 클릭하여서 \n"
 "시간대를 선택합니다."
 
-#: interfaces/location-manager.glade.in.h:32 interfaces/time.glade.in.h:10
-msgid "Select servers..."
-msgstr "서버 선택..."
-
-#: interfaces/time.glade.in.h:11
+#: interfaces/time.glade.in.h:9
 msgid "Select the servers you wish to use for time synchronization."
 msgstr "시간 동기화때 사용할 서버를 선택합니다."
 
-#: interfaces/time.glade.in.h:12
+#: interfaces/time.glade.in.h:10
 msgid "Selection:"
 msgstr "선택:"
 
-#: interfaces/location-manager.glade.in.h:33 interfaces/time.glade.in.h:13
-msgid "Set time zone..."
+#: interfaces/time.glade.in.h:11
+#, fuzzy
+msgid "Set time _zone..."
 msgstr "시간대 설정..."
 
-#: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:14
+#: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:12
 msgid "Time"
 msgstr "시간"
 
-#: interfaces/time.glade.in.h:15
+#: interfaces/time.glade.in.h:13
 msgid "Time Zones"
 msgstr "시간대"
 
-#: interfaces/location-manager.glade.in.h:35 interfaces/time.glade.in.h:16
+#: interfaces/location-manager.glade.in.h:35 interfaces/time.glade.in.h:14
 msgid "Time server"
 msgstr "시간 서버"
 
-#: interfaces/time.glade.in.h:17
+#: interfaces/time.glade.in.h:15
 msgid "Time servers"
 msgstr "시간 서버"
 
-#: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.in.h:18
+#: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.in.h:16
 msgid "Time zone"
 msgstr "시간대"
 
+#: interfaces/time.glade.in.h:18
+#, fuzzy
+msgid "_Keep clock synchronized with selected servers"
+msgstr "선택한 서버와 시간 동기화 유지"
+
+#: interfaces/users.glade.in.h:1
+#, fuzzy
+msgid "<< _Remove"
+msgstr "제거"
+
 #: interfaces/users.glade.in.h:2
-msgid "Add ->"
-msgstr "추가 ->"
+#, fuzzy
+msgid "<< _Remove "
+msgstr "제거"
 
 #: interfaces/users.glade.in.h:3
 #, fuzzy
-msgid "Add group..."
-msgstr "그룹 추가..."
-
-#: interfaces/users.glade.in.h:4
-#, fuzzy
-msgid "Add user..."
-msgstr "사용자 추가..."
+msgid "A_vailable groups"
+msgstr "사용가능한 그룹:"
 
 #: interfaces/users.glade.in.h:6
 msgid "Advanced settings"
@@ -1809,7 +1998,7 @@ msgstr "고급 설정"
 
 #: interfaces/users.glade.in.h:7
 #, fuzzy
-msgid "All users"
+msgid "All _users"
 msgstr "모든 사용자"
 
 #: interfaces/users.glade.in.h:8
@@ -1823,13 +2012,13 @@ msgid "Automatic UID/GID"
 msgstr "자동 UID/GID용 최소/최대값"
 
 #: interfaces/users.glade.in.h:10
-#, fuzzy
-msgid "Available groups"
-msgstr "사용가능한 그룹:"
-
-#: interfaces/users.glade.in.h:11
 msgid "Basic settings"
 msgstr "기본 설정"
+
+#: interfaces/users.glade.in.h:11
+#, fuzzy
+msgid "C_onfirm:"
+msgstr "확인:"
 
 #: interfaces/users.glade.in.h:12
 msgid ""
@@ -1842,45 +2031,41 @@ msgstr ""
 "바꿉니다."
 
 #: interfaces/users.glade.in.h:15
-msgid "Check password quality"
+msgid "Check password _quality"
 msgstr ""
 
 #: interfaces/users.glade.in.h:16
 msgid "Click \"Next\" to continue"
 msgstr ""
 
-#: interfaces/users.glade.in.h:18
-msgid "Confirm:"
-msgstr "확인:"
-
-#: interfaces/users.glade.in.h:19
+#: interfaces/users.glade.in.h:17
 msgid ""
 "Congratulations, the new user has been created.\n"
 "Please click \"Finish\" to save your changes. "
 msgstr ""
 
-#: interfaces/users.glade.in.h:21
+#: interfaces/users.glade.in.h:19
 msgid "Copy..."
 msgstr ""
 
-#: interfaces/users.glade.in.h:22
+#: interfaces/users.glade.in.h:20
 #, fuzzy
 msgid "Days between warning and password expiration:"
 msgstr ""
 "경고와 암호 만료기간 \n"
 "사이의 기간:  "
 
-#: interfaces/users.glade.in.h:23
+#: interfaces/users.glade.in.h:21
 #, fuzzy
 msgid "Default group:"
 msgstr "주 그룹:"
 
-#: interfaces/users.glade.in.h:24
+#: interfaces/users.glade.in.h:22
 #, fuzzy
 msgid "Default shell:"
 msgstr "기본값"
 
-#: interfaces/users.glade.in.h:26
+#: interfaces/users.glade.in.h:24
 msgid ""
 "EXPERIMENTAL NIS support.\n"
 "It's only available if You have NIS\n"
@@ -1890,214 +2075,189 @@ msgstr ""
 "NIS를 사용할수 있다면 \"더 많은 옵션\n"
 " 을 클릭하여 사용할수 있습니다."
 
-#: interfaces/users.glade.in.h:29
+#: interfaces/users.glade.in.h:27
 #, fuzzy
 msgid "Edit profile:"
 msgstr "새 그룹"
 
-#: interfaces/users.glade.in.h:30
+#: interfaces/users.glade.in.h:28
 msgid "Filename"
 msgstr ""
 
-#: interfaces/users.glade.in.h:32
+#: interfaces/users.glade.in.h:30
 #, fuzzy
-msgid "Generate random password"
+msgid "Generate _random password"
 msgstr "  무작위 암호 "
 
-#: interfaces/users.glade.in.h:33
+#: interfaces/users.glade.in.h:31
 msgid "Group Settings"
 msgstr "그룹 설정"
 
-#: interfaces/users.glade.in.h:34
+#: interfaces/users.glade.in.h:32
 #, fuzzy
-msgid "Group members"
+msgid "Group _members"
 msgstr "그룹 구성원"
 
-#: interfaces/users.glade.in.h:35
-msgid "Group name:"
-msgstr "그룹 이름:"
-
-#: interfaces/users.glade.in.h:36 src/users/e-table.c:50
+#: interfaces/users.glade.in.h:33 src/users/group.etspec.h:2
 #: src/users/user_settings.c:333 src/users/user_settings.c:403
 msgid "Groups"
 msgstr "그룹"
 
-#: interfaces/users.glade.in.h:37
+#: interfaces/users.glade.in.h:34
 msgid "Home directory:"
 msgstr "홈 디렉토리:"
 
-#: interfaces/users.glade.in.h:38
-msgid "Inherit settings from:"
-msgstr ""
+#: interfaces/users.glade.in.h:35
+#, fuzzy
+msgid "Ma_ximum days a password may be used:"
+msgstr "암호가 사용될수 있는 날:"
 
-#: interfaces/users.glade.in.h:39
-msgid "Main group:"
+#: interfaces/users.glade.in.h:36
+#, fuzzy
+msgid "Main _group:"
 msgstr "주 그룹:"
 
-#: interfaces/users.glade.in.h:40
+#: interfaces/users.glade.in.h:37
 msgid "Maximum GID:"
 msgstr "최대 GID:"
 
-#: interfaces/users.glade.in.h:41
+#: interfaces/users.glade.in.h:38
 msgid "Maximum UID:"
 msgstr "최대 UID:"
 
-#: interfaces/users.glade.in.h:42
-#, fuzzy
-msgid "Maximum days a password may be used:"
-msgstr "암호가 사용될수 있는 날:"
-
-#: interfaces/users.glade.in.h:43
+#: interfaces/users.glade.in.h:39
 msgid "Members"
 msgstr "구성원"
 
-#: interfaces/users.glade.in.h:44
+#: interfaces/users.glade.in.h:40
+#, fuzzy
+msgid "Mi_nimum days between password changes:"
+msgstr "암호 변경이 허용되는 최소 기간:"
+
+#: interfaces/users.glade.in.h:41
 msgid "Minimum GID:"
 msgstr "최소 GID:"
 
-#: interfaces/users.glade.in.h:45
+#: interfaces/users.glade.in.h:42
 msgid "Minimum UID:"
 msgstr "최소 UID:"
 
-#: interfaces/users.glade.in.h:46
+#: interfaces/users.glade.in.h:43
 msgid "Minimum days allowed between password changes:"
 msgstr "암호 변경이 허용되는 최소 기간:"
 
-#: interfaces/users.glade.in.h:47
+#: interfaces/users.glade.in.h:44
 #, fuzzy
-msgid "Minimum days between password changes:"
-msgstr "암호 변경이 허용되는 최소 기간:"
+msgid "Ne_w:"
+msgstr "새로운:"
 
-#: interfaces/users.glade.in.h:49
+#: interfaces/users.glade.in.h:45
 msgid "New Group"
 msgstr "새 그룹"
 
-#: interfaces/users.glade.in.h:50
+#: interfaces/users.glade.in.h:46
 #, fuzzy
 msgid "New Profile"
 msgstr "새 그룹"
 
-#: interfaces/users.glade.in.h:51
+#: interfaces/users.glade.in.h:47
 msgid "New User"
 msgstr "새 사용자"
 
-#: interfaces/users.glade.in.h:52
+#: interfaces/users.glade.in.h:48
 #, fuzzy
 msgid "New password"
 msgstr "암호 바꿈"
 
-#: interfaces/users.glade.in.h:54
+#: interfaces/users.glade.in.h:49
 #, fuzzy
 msgid "Number of days that a password may be used:"
 msgstr "암호가 사용될수 있는 날:"
 
-#: interfaces/users.glade.in.h:55
+#: interfaces/users.glade.in.h:50
 msgid ""
 "On this page, you can define security options, such as how frequently users "
 "must change their passwords."
 msgstr ""
 
-#: interfaces/users.glade.in.h:56
+#: interfaces/users.glade.in.h:51
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
 msgstr ""
 
-#: interfaces/users.glade.in.h:57
+#: interfaces/users.glade.in.h:52
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
 msgstr ""
 
-#: interfaces/users.glade.in.h:58
+#: interfaces/users.glade.in.h:53
 #, fuzzy
 msgid "Optional settings"
 msgstr "분할영역 설정"
 
-#: interfaces/users.glade.in.h:59 src/users/user_settings.c:340
+#: interfaces/users.glade.in.h:54 src/users/user_settings.c:340
 #: src/users/user_settings.c:410
 #, fuzzy
 msgid "Password"
 msgstr "비밀번호:"
 
-#: interfaces/users.glade.in.h:60
+#: interfaces/users.glade.in.h:55
 #, fuzzy
 msgid "Password options"
 msgstr "암호 만료기간"
 
-#: interfaces/users.glade.in.h:61
+#: interfaces/users.glade.in.h:56
 msgid "Password options (step 2 of 2)"
 msgstr ""
 
-#: interfaces/users.glade.in.h:62
+#: interfaces/users.glade.in.h:57
 #, fuzzy
 msgid "Password set to:"
 msgstr "\"%s\"의 암호 설정."
 
-#: interfaces/users.glade.in.h:63
+#: interfaces/users.glade.in.h:58
 #, fuzzy
 msgid "Please enter a password for the new user. "
 msgstr ""
 "암호와 확인에 글자가 서로 일치\n"
 "하여야 합니다."
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:59
 msgid ""
 "Please enter a username for the new user in the space below. You may also "
 "enter a comment about the user, such as his or her real name. "
 msgstr ""
 
-#: interfaces/users.glade.in.h:65
-#, fuzzy
-msgid "Profile:"
-msgstr "파일"
-
-#: interfaces/users.glade.in.h:66
+#: interfaces/users.glade.in.h:60
 #, fuzzy
 msgid "Profiles"
 msgstr "파일"
 
-#: interfaces/users.glade.in.h:67
-#, fuzzy
-msgid "Profiles..."
-msgstr "파일"
-
-#: interfaces/users.glade.in.h:68
-msgid "Remove <-"
-msgstr "삭제 <-"
-
-#: interfaces/users.glade.in.h:69
+#: interfaces/users.glade.in.h:61
 msgid "Security"
 msgstr ""
 
-#: interfaces/users.glade.in.h:70
+#: interfaces/users.glade.in.h:62
 #, fuzzy
-msgid "Set password by hand"
+msgid "Set password b_y hand"
 msgstr "암호 바꿈"
 
-#: interfaces/users.glade.in.h:72
+#: interfaces/users.glade.in.h:64
 msgid "Settings for selected user and group"
 msgstr "선택한 사용자와 그룹의 설정"
 
-#: interfaces/users.glade.in.h:74
-msgid "Shell:"
-msgstr "쉘:"
-
-#: interfaces/users.glade.in.h:75
-#, fuzzy
-msgid "Show all users and groups"
-msgstr "시스템의 사용자와 그룹 보기"
-
-#: interfaces/users.glade.in.h:76
+#: interfaces/users.glade.in.h:65
 msgid "System"
 msgstr ""
 
-#: interfaces/users.glade.in.h:77
+#: interfaces/users.glade.in.h:66
 #, fuzzy
 msgid "System defaults"
 msgstr "시스템 설정"
 
-#: interfaces/users.glade.in.h:78
+#: interfaces/users.glade.in.h:67
 msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new users to your system.\n"
@@ -2105,7 +2265,7 @@ msgid ""
 "To begin, click \"Next\". "
 msgstr ""
 
-#: interfaces/users.glade.in.h:82
+#: interfaces/users.glade.in.h:71
 #, fuzzy
 msgid ""
 "This is the list of the groups available in the system. Create new groups or "
@@ -2114,7 +2274,7 @@ msgstr ""
 "이것은 시스템에 있는 사용자 목록입니다. 새 사용자를 만들거나 현재 존재하는 "
 "사용자의 설정을 이 대화상자에서 수정할수 있습니다."
 
-#: interfaces/users.glade.in.h:83
+#: interfaces/users.glade.in.h:72
 #, fuzzy
 msgid ""
 "This is the list of the users available in the system. Create new users or "
@@ -2123,41 +2283,98 @@ msgstr ""
 "이것은 시스템에 있는 사용자 목록입니다. 새 사용자를 만들거나 현재 존재하는 "
 "사용자의 설정을 이 대화상자에서 수정할수 있습니다."
 
-#: interfaces/users.glade.in.h:84
+#: interfaces/users.glade.in.h:73
+#, fuzzy
+msgid "Us_er's groups"
+msgstr "사용자의 그룹"
+
+#: interfaces/users.glade.in.h:74
 msgid "Use this dialog to create a new profile."
 msgstr ""
 
 #. set window title
-#: interfaces/users.glade.in.h:85 src/users/user-druid.c:271
+#: interfaces/users.glade.in.h:75 src/users/user-druid.c:271
 msgid "User Account Wizard"
 msgstr ""
 
-#: interfaces/users.glade.in.h:86
+#: interfaces/users.glade.in.h:76
 msgid "User Creation Druid"
 msgstr ""
 
-#: interfaces/users.glade.in.h:87
-msgid "User ID:"
-msgstr "사용자 계정:"
-
-#: interfaces/users.glade.in.h:88
+#: interfaces/users.glade.in.h:77
 msgid "User Identity  (step 1 of 2)"
 msgstr ""
 
-#: interfaces/users.glade.in.h:89
+#: interfaces/users.glade.in.h:78
+#, fuzzy
+msgid "User _ID:"
+msgstr "사용자 계정:"
+
+#: interfaces/users.glade.in.h:79
 msgid ""
 "User profiles can be used a templates to facilitate the creation of new "
 "users. To edit a profile, change the settings in the following tabs."
 msgstr ""
 
-#: interfaces/users.glade.in.h:90
-#, fuzzy
-msgid "User's groups"
-msgstr "사용자의 그룹"
-
-#: interfaces/users.glade.in.h:92 src/users/e-table.c:43
+#: interfaces/users.glade.in.h:80 src/users/users.etspec.h:7
 msgid "Users"
 msgstr "사용자"
+
+#: interfaces/users.glade.in.h:81
+#, fuzzy
+msgid "_Add >>"
+msgstr "추가 ->"
+
+#: interfaces/users.glade.in.h:82
+#, fuzzy
+msgid "_Add group..."
+msgstr "그룹 추가..."
+
+#: interfaces/users.glade.in.h:83
+#, fuzzy
+msgid "_Add user..."
+msgstr "사용자 추가..."
+
+#: interfaces/users.glade.in.h:85
+#, fuzzy
+msgid "_Days between warning and password expiration:"
+msgstr ""
+"경고와 암호 만료기간 \n"
+"사이의 기간:  "
+
+#: interfaces/users.glade.in.h:87
+#, fuzzy
+msgid "_Group name:"
+msgstr "그룹 이름:"
+
+#: interfaces/users.glade.in.h:88
+#, fuzzy
+msgid "_Home directory:"
+msgstr "홈 디렉토리:"
+
+#: interfaces/users.glade.in.h:89
+msgid "_Inherit settings from:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:91
+#, fuzzy
+msgid "_Profile:"
+msgstr "파일"
+
+#: interfaces/users.glade.in.h:92
+#, fuzzy
+msgid "_Profiles..."
+msgstr "파일"
+
+#: interfaces/users.glade.in.h:94
+#, fuzzy
+msgid "_Shell:"
+msgstr "쉘:"
+
+#: interfaces/users.glade.in.h:95
+#, fuzzy
+msgid "_Show all users and groups"
+msgstr "시스템의 사용자와 그룹 보기"
 
 #: src/boot/boot-settings.c:218
 msgid "Not Implemented yet, sorry."
@@ -2168,33 +2385,33 @@ msgstr ""
 msgid "Are you sure you want to delete %s?"
 msgstr "%s를 정말로 지우겠습니까?"
 
-#: src/boot/e-table.c:39 src/users/profile.c:1004
-#, fuzzy
-msgid "Default"
-msgstr "기본값(_e)"
-
-#: src/boot/e-table.c:41 src/print/e-table.c:42
-#, fuzzy
-msgid "Type"
-msgstr "형식:"
-
-#: src/boot/e-table.c:42
-msgid "Kernel Image"
-msgstr ""
-
-#: src/boot/e-table.c:350
+#: src/boot/e-table.c:335
 msgid "Linux"
 msgstr "리눅스"
 
-#: src/boot/e-table.c:354
+#: src/boot/e-table.c:339
 #, fuzzy
 msgid "Other"
 msgstr "다른 형식"
 
-#: src/boot/e-table.c:362
+#: src/boot/e-table.c:347
 #, fuzzy, c-format
 msgid "%s (default)"
 msgstr "시스템 설정"
+
+#: src/boot/boot.etspec.h:1 src/users/profile.c:998
+#, fuzzy
+msgid "Default"
+msgstr "기본값(_e)"
+
+#: src/boot/boot.etspec.h:3
+msgid "Kernel Image"
+msgstr ""
+
+#: src/boot/boot.etspec.h:5 src/print/print.etspec.h:6
+#, fuzzy
+msgid "Type"
+msgstr "형식:"
 
 #: src/boot/main.c:93
 msgid "Boot Manager Settings - Ximian Setup Tools"
@@ -2226,15 +2443,15 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "위젯 `%2$s'에 시그널 `%1$s'연결 오류"
 
-#: src/common/xst-tool.c:545
+#: src/common/xst-tool.c:550
 msgid "Skipping actual save..."
 msgstr ""
 
-#: src/common/xst-tool.c:571
+#: src/common/xst-tool.c:573
 msgid "Updating your system configuration."
 msgstr "여러분의 시스템 설정을 업데이트 합니다."
 
-#: src/common/xst-tool.c:695
+#: src/common/xst-tool.c:697
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2242,16 +2459,16 @@ msgstr ""
 "백엔드 스크립트를 실행하는중 오류가 발생하여,\n"
 "설정을 읽을수 없습니다."
 
-#: src/common/xst-tool.c:869
+#: src/common/xst-tool.c:873
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian 설정 도구"
 
-#: src/common/xst-tool.c:1006
+#: src/common/xst-tool.c:1010
 msgid "The password you entered is invalid."
 msgstr ""
 
-#: src/common/xst-tool.c:1046
+#: src/common/xst-tool.c:1048
 msgid "Pretending we are root..."
 msgstr "root인것 처럼 꾸미는중..."
 
@@ -2279,64 +2496,64 @@ msgstr "스왑 공간 %s이 이미 있습니다."
 msgid "Swap Management"
 msgstr "스왑 관리"
 
-#: src/network/callbacks.c:164
+#: src/network/callbacks.c:265
 msgid "The name of this computer"
 msgstr "이 컴퓨터의 이름"
 
-#: src/network/callbacks.c:167
+#: src/network/callbacks.c:268
 msgid "A short description of your computer"
 msgstr "컴퓨터의 짧은 설명"
 
-#: src/network/callbacks.c:170
+#: src/network/callbacks.c:271
 msgid "The Windows Networking workgroup for your network"
 msgstr "네트웍에서 윈도우 네트워킹 워크그룹"
 
-#: src/network/callbacks.c:173
+#: src/network/callbacks.c:274
 msgid "The IP address of your WINS server"
 msgstr "WINS 서버의 IP 주소"
 
-#: src/network/callbacks.c:176
+#: src/network/callbacks.c:277
 msgid "The DNS domain for your computer"
 msgstr "컴퓨터의 DNS 도메인"
 
-#: src/network/callbacks.c:179
+#: src/network/callbacks.c:280
 msgid "A list of your DNS servers' IP addresses"
 msgstr "DNS서버의 IP주소 목록"
 
-#: src/network/callbacks.c:182
+#: src/network/callbacks.c:283
 msgid "A list of domains where hosts will be searched"
 msgstr "호스트를 검색할 도메인 목록"
 
-#: src/network/callbacks.c:185
+#: src/network/callbacks.c:286
 msgid "The IP address of this host"
 msgstr "이 호스트의 IP 주소"
 
-#: src/network/callbacks.c:188
+#: src/network/callbacks.c:289
 msgid "Aliases for this host, one per line"
 msgstr "이 호스트에 대한 별칭"
 
-#: src/network/callbacks.c:328
+#: src/network/callbacks.c:429
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "%s 연결을 제거할까요: ``%s''?"
 
-#: src/network/callbacks.c:330
+#: src/network/callbacks.c:431
 #, fuzzy, c-format
 msgid "Remove connection %s?"
 msgstr "%s 연결을 제거할까요: ``%s''?"
 
-#: src/network/callbacks.c:392
+#: src/network/callbacks.c:493
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
 msgstr ""
 
-#: src/network/callbacks.c:393
+#: src/network/callbacks.c:494
 #, fuzzy
 msgid "SMB support missing."
 msgstr "SMB 공유 설정"
 
-#: src/network/callbacks.c:430
+#: src/network/callbacks.c:531
 #, fuzzy
 msgid ""
 "The host name has changed. This will prevent you\n"
@@ -2351,19 +2568,19 @@ msgstr ""
 "\n"
 "계속 할까요?"
 
-#: src/network/callbacks.c:437
+#: src/network/callbacks.c:538
 msgid "Don't change host name"
 msgstr "호스트 이름을 바꾸지 않음"
 
-#: src/network/callbacks.c:470
+#: src/network/callbacks.c:571
 msgid "Active"
 msgstr "활성화"
 
-#: src/network/callbacks.c:471
+#: src/network/callbacks.c:572
 msgid "Inactive"
 msgstr "비활성화"
 
-#: src/network/callbacks.c:488
+#: src/network/callbacks.c:589
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2400,12 +2617,12 @@ msgstr "루프백: 가상 인터페이스"
 msgid "Unknown type"
 msgstr "알수없는 형식"
 
-#: src/network/connection.c:521
+#: src/network/connection.c:533
 #, fuzzy
 msgid "To activate"
 msgstr "비활성화"
 
-#: src/network/connection.c:522
+#: src/network/connection.c:534
 #, fuzzy
 msgid "To inactivate"
 msgstr "비활성화"
@@ -2474,17 +2691,12 @@ msgstr "다음의 정보를 가진 계정을 만드려 합니다:"
 msgid "New Shares Admin"
 msgstr "네트워크 공유"
 
-#: src/shares/tables.c:84
+#: src/shares/tables.c:742
 #, fuzzy
-msgid "Pattern"
-msgstr "경로:"
+msgid "Mount"
+msgstr "마운트됨"
 
-#: src/shares/tables.c:85
-#, fuzzy
-msgid "Write"
-msgstr "쓰기가능"
-
-#: src/shares/tables.c:777
+#: src/shares/tables.c:742
 #, fuzzy
 msgid "Unmount"
 msgstr "마운트됨"
@@ -2561,17 +2773,23 @@ msgid ""
 "where the import will be mounted."
 msgstr ""
 
-#: src/time/main.c:384
+#: src/shares/validate.c:256
+msgid ""
+"You need to specify a client pattern, e.g.\n"
+"\"*.myschool.edu\" or \"192.168.0.1/24\"."
+msgstr ""
+
+#: src/time/main.c:371
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
 msgstr ""
 
-#: src/time/main.c:385
+#: src/time/main.c:372
 msgid "NTP support missing."
 msgstr ""
 
-#: src/time/main.c:619
+#: src/time/main.c:606
 msgid "Time and Date Settings"
 msgstr "시간과 날짜 설정"
 
@@ -2583,57 +2801,31 @@ msgstr ""
 msgid "Can't create new user. Too many users probably."
 msgstr ""
 
-#: src/users/e-table.c:44
-msgid "UID"
-msgstr ""
-
-#: src/users/e-table.c:45
-msgid "Home"
-msgstr ""
-
-#: src/users/e-table.c:46
-#, fuzzy
-msgid "Shell"
-msgstr "쉘:"
-
-#: src/users/e-table.c:47 src/users/profile.c:63
-msgid "Comment"
-msgstr "설명"
-
-#: src/users/e-table.c:48
-#, fuzzy
-msgid "Group"
-msgstr "그룹"
-
-#: src/users/e-table.c:49
-msgid "GID"
-msgstr ""
-
 #: src/users/main.c:95
 msgid "Show All"
 msgstr ""
 
-#: src/users/main.c:122 src/users/main.c:127
+#: src/users/main.c:122
 #, fuzzy
 msgid "User name contains"
 msgstr "사용자 설정"
 
-#: src/users/main.c:128
+#: src/users/main.c:123
 #, fuzzy
 msgid "User ID is"
 msgstr "사용자 계정:"
 
-#: src/users/main.c:129
+#: src/users/main.c:124
 #, fuzzy
 msgid "Group name contains"
 msgstr "그룹 설정"
 
-#: src/users/main.c:130
+#: src/users/main.c:125
 #, fuzzy
 msgid "User GID is"
 msgstr "사용자 계정:"
 
-#: src/users/main.c:316
+#: src/users/main.c:297
 msgid "Users and Groups"
 msgstr "사용자와 그룹"
 
@@ -2817,11 +3009,6 @@ msgstr ""
 msgid "Rename the selected location"
 msgstr "선택한 별명에 대한 설정"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:104
-#, fuzzy
-msgid "_Delete..."
-msgstr "제거..."
-
 #: archiver/location-manager-capplet/location-manager-dialog.c:105
 #, fuzzy
 msgid "Delete the selected location"
@@ -2871,11 +3058,6 @@ msgstr "주어진 위치에서 주어진 백엔드 제거"
 msgid "_Location"
 msgstr "위치"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:134
-#, fuzzy
-msgid "_Settings"
-msgstr "설정"
-
 #: archiver/location-manager-capplet/location-manager-dialog.c:135
 #: interfaces/location-manager.glade.in.h:38
 msgid "_Help"
@@ -2913,6 +3095,11 @@ msgstr "선택한 사용자의 설정"
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
 msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:3
+#, fuzzy
+msgid "Enable"
+msgstr "가능"
 
 #: interfaces/internetsharing.glade.in.h:4
 #, fuzzy
@@ -3001,6 +3188,10 @@ msgstr ""
 msgid "Helsinki Office"
 msgstr ""
 
+#: interfaces/location-manager.glade.in.h:17
+msgid "Keep clock synchronized with selected servers"
+msgstr "선택한 서버와 시간 동기화 유지"
+
 #: interfaces/location-manager.glade.in.h:18
 msgid "Location"
 msgstr "위치"
@@ -3056,6 +3247,14 @@ msgstr "기본 위치"
 #: interfaces/location-manager.glade.in.h:31
 msgid "Rollback-location-management-mockup"
 msgstr ""
+
+#: interfaces/location-manager.glade.in.h:32
+msgid "Select servers..."
+msgstr "서버 선택..."
+
+#: interfaces/location-manager.glade.in.h:33
+msgid "Set time zone..."
+msgstr "시간대 설정..."
 
 #: interfaces/location-manager.glade.in.h:37
 msgid ""
@@ -3161,64 +3360,59 @@ msgstr "SMB 공유 설정"
 msgid "Lpr based Printing"
 msgstr ""
 
-#: src/print/e-table.c:41
-msgid "Spool"
-msgstr ""
-
-#: src/print/e-table.c:44
+#: src/print/print.etspec.h:2
 #, fuzzy
 msgid "Paper"
 msgstr "경로:"
 
-#: src/print/e-table.c:45
+#: src/print/print.etspec.h:3
 #, fuzzy
 msgid "Resolution"
 msgstr "선택:"
 
-#: src/print/e-table.c:46
+#: src/print/print.etspec.h:4
 msgid "Share"
+msgstr ""
+
+#: src/print/print.etspec.h:5
+msgid "Spool"
 msgstr ""
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
 msgstr ""
 
-#: src/users/profile.c:62
-#, fuzzy
-msgid "Profile"
-msgstr "파일"
-
-#: src/users/profile.c:515
+#: src/users/profile.c:509
 msgid "Choose the file"
 msgstr ""
 
-#: src/users/profile.c:657
+#: src/users/profile.c:651
 #, fuzzy
 msgid "Profile Editor"
 msgstr "파일"
 
-#: src/users/profile.c:857
+#: src/users/profile.c:851
 #, fuzzy
 msgid "Profile with given name already exists."
 msgstr "사용자이름이 이미 있습니다."
 
-#: src/users/profile.c:860
+#: src/users/profile.c:854
 #, fuzzy
 msgid "Profile name must not be empty."
 msgstr "홈 디렉토리는 비어있지 않아야 합니다."
 
 #. name
-#: src/users/profile.c:1005
+#: src/users/profile.c:999
 #, fuzzy
 msgid "Default profile"
 msgstr "제거"
 
-#: src/users/profile.c:1321
+#: src/users/profile.c:1315
 msgid "Can't delete Default"
 msgstr ""
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1447
+#: src/users/profile.c:1441
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -3241,6 +3435,42 @@ msgstr "증명"
 msgid "Real name:"
 msgstr "제거"
 
+#: src/users/net_group.etspec.h:1 src/users/users.etspec.h:3
+#, fuzzy
+msgid "Group"
+msgstr "그룹"
+
+#: src/users/profiles.etspec.h:1 src/users/users.etspec.h:1
+msgid "Comment"
+msgstr "설명"
+
+#: src/users/group.etspec.h:1 src/users/users.etspec.h:2
+msgid "GID"
+msgstr ""
+
+#: src/users/users.etspec.h:4
+msgid "Home"
+msgstr ""
+
+#: src/users/users.etspec.h:5
+#, fuzzy
+msgid "Shell"
+msgstr "쉘:"
+
+#: src/users/users.etspec.h:6
+msgid "UID"
+msgstr ""
+
+#: src/users/net_user.etspec.h:1
+#, fuzzy
+msgid "User"
+msgstr "사용자"
+
+#: src/users/profiles.etspec.h:2
+#, fuzzy
+msgid "Profile"
+msgstr "파일"
+
 #: src/shares/shares.desktop.in.in.h:1
 msgid "Directory import & export"
 msgstr ""
@@ -3249,6 +3479,22 @@ msgstr ""
 #, fuzzy
 msgid "Shares"
 msgstr "서버"
+
+#: src/shares/export_clients.etspec.h:1
+#, fuzzy
+msgid "Pattern"
+msgstr "경로:"
+
+#: src/shares/export_clients.etspec.h:2
+#, fuzzy
+msgid "Write"
+msgstr "쓰기가능"
+
+#~ msgid "Delete..."
+#~ msgstr "제거..."
+
+#~ msgid "Remove <-"
+#~ msgstr "삭제 <-"
 
 #~ msgid "Obtain DNS information from DHCP / BOOTP server"
 #~ msgstr "DHCP / BOOTP 서버에서 DNS 정보 알아오기"

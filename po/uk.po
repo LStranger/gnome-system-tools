@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ximian-setup-tools\n"
-"POT-Creation-Date: 2001-05-25 09:23-0500\n"
+"POT-Creation-Date: 2001-05-29 13:04-0500\n"
 "PO-Revision-Date: 2000-11-25 17:01+0300\n"
 "Last-Translator: Yuri Syrota <rasta@renome.rovno.ua>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -611,93 +611,103 @@ msgid "Options for adding and removing backends"
 msgstr ""
 
 #: interfaces/boot.glade.in.h:1
-msgid "Append:"
-msgstr ""
+#, fuzzy
+msgid "Boot _type:"
+msgstr "Експортована назва:"
 
 #: interfaces/boot.glade.in.h:2
-msgid "Boot type:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:3
 msgid "D_efault"
 msgstr ""
 
-#: interfaces/boot.glade.in.h:4 interfaces/disks.glade.in.h:10
-#: interfaces/memory.glade.in.h:7 interfaces/network.glade.in.h:41
-msgid "Device:"
-msgstr "Пристр╕й:"
-
-#: interfaces/boot.glade.in.h:5
-msgid "Image:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:6 interfaces/location-manager.glade.in.h:23
-#: interfaces/shares.glade.in.h:37 interfaces/users.glade.in.h:48
+#: interfaces/boot.glade.in.h:3
 #, fuzzy
-msgid "Name:"
+msgid "N_ame:"
 msgstr "Назва"
 
-#: interfaces/boot.glade.in.h:7
+#: interfaces/boot.glade.in.h:4
 msgid "Optional"
 msgstr ""
 
-#: interfaces/boot.glade.in.h:8
-#, fuzzy
-msgid "Root:"
-msgstr "Хост:"
-
-#: interfaces/boot.glade.in.h:9 interfaces/disks.glade.in.h:26
-#: interfaces/memory.glade.in.h:18 interfaces/nameresolution.glade.in.h:30
-#: interfaces/users.glade.in.h:71
+#: interfaces/boot.glade.in.h:5 interfaces/disks.glade.in.h:26
+#: interfaces/memory.glade.in.h:16 interfaces/nameresolution.glade.in.h:30
+#: interfaces/users.glade.in.h:63
 msgid "Settings"
 msgstr "Параметри"
 
-#: interfaces/boot.glade.in.h:10
+#: interfaces/boot.glade.in.h:6
 #, fuzzy
 msgid "Starting your computer"
 msgstr "Параметри користувача "
 
-#: interfaces/boot.glade.in.h:11
+#: interfaces/boot.glade.in.h:7
 msgid ""
 "Use this dialog to add new kernel or\n"
 "operating system to your computer."
 msgstr ""
 
-#: interfaces/boot.glade.in.h:13
+#: interfaces/boot.glade.in.h:9
 msgid ""
 "Use this tool to set the installed operating\n"
 "systems to choose from at startup."
 msgstr ""
 
-#: interfaces/boot.glade.in.h:15
-msgid "Wait"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:16
+#: interfaces/boot.glade.in.h:11 interfaces/network.glade.in.h:87
+#: interfaces/shares.glade.in.h:57
 #, fuzzy
 msgid "_Add..."
 msgstr "Додати..."
 
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.in.h:12
+msgid "_Append:"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:13 interfaces/network.glade.in.h:92
+#: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:86
 #, fuzzy
 msgid "_Delete"
 msgstr "Стерти"
 
+#: interfaces/boot.glade.in.h:14
+#, fuzzy
+msgid "_Device:"
+msgstr "Пристр╕й:"
+
+#: interfaces/boot.glade.in.h:15
+msgid "_Image:"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:16 interfaces/shares.glade.in.h:65
+#: interfaces/users.glade.in.h:90
+#, fuzzy
+msgid "_Name:"
+msgstr "Назва"
+
+#: interfaces/boot.glade.in.h:17
+#, fuzzy
+msgid "_Root:"
+msgstr "Хост:"
+
 #: interfaces/boot.glade.in.h:18 interfaces/location-manager.glade.in.h:39
+#: interfaces/shares.glade.in.h:69 interfaces/users.glade.in.h:93
 #, fuzzy
 msgid "_Settings..."
 msgstr "Параметри..."
 
 #: interfaces/boot.glade.in.h:19
-msgid "seconds before loading default kernel or OS"
+#, fuzzy
+msgid "_Wait"
+msgstr "Для запису"
+
+#: interfaces/boot.glade.in.h:20
+msgid "_seconds before loading default kernel or OS"
 msgstr ""
 
 #: interfaces/common.glade.in.h:1
 msgid "Complexity"
 msgstr ""
 
-#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:72
-#: interfaces/shares.glade.in.h:38
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:53
+#: interfaces/shares.glade.in.h:43
 msgid "Password:"
 msgstr "Пароль:"
 
@@ -712,7 +722,7 @@ msgstr "Новий пароль:"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:641
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:643
 msgid "Scanning your system configuration."
 msgstr "Сканування конф╕╜урац╕╖ вашо╖ системи."
 
@@ -778,11 +788,16 @@ msgstr "Вибер╕ть точку монтування"
 msgid "Detected"
 msgstr "Виявлен╕"
 
-#: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:40 src/boot/e-table.c:43
-#: src/print/e-table.c:43
+#: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
+#: interfaces/network.glade.in.h:32 src/boot/boot.etspec.h:2
+#: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "Пристр╕й"
+
+#: interfaces/disks.glade.in.h:10 interfaces/memory.glade.in.h:6
+#: interfaces/network.glade.in.h:33
+msgid "Device:"
+msgstr "Пристр╕й:"
 
 #: interfaces/disks.glade.in.h:11
 msgid "Disks & partitions"
@@ -815,7 +830,7 @@ msgstr "Перерахован╕"
 msgid "Mount point"
 msgstr "Точка монтування"
 
-#: interfaces/disks.glade.in.h:18 interfaces/shares.glade.in.h:31
+#: interfaces/disks.glade.in.h:18 interfaces/shares.glade.in.h:34
 msgid "Mount point:"
 msgstr "Точка монтування:"
 
@@ -823,8 +838,8 @@ msgstr "Точка монтування:"
 msgid "Mount this partition"
 msgstr "Змонтувати цей розд╕л"
 
-#: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:32
-#: src/shares/tables.c:79
+#: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:35
+#: src/shares/imports.etspec.h:3
 msgid "Mounted"
 msgstr "Змонтован╕"
 
@@ -848,7 +863,7 @@ msgstr "Параметри розд╕лу"
 msgid "Remember details of this partition"
 msgstr "Запам'ятати детал╕ цього розд╕лу"
 
-#: interfaces/disks.glade.in.h:27 interfaces/memory.glade.in.h:19
+#: interfaces/disks.glade.in.h:27 interfaces/memory.glade.in.h:17
 msgid "Size"
 msgstr "Обсяг"
 
@@ -868,95 +883,102 @@ msgstr ""
 msgid "ufs (FreeBSD)"
 msgstr ""
 
-#: interfaces/memory.glade.in.h:1 interfaces/nameresolution.glade.in.h:4
-#: interfaces/network.glade.in.h:12 interfaces/shares.glade.in.h:3
-#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
-msgid "Add"
-msgstr "Додати"
-
-#: interfaces/memory.glade.in.h:2
+#: interfaces/memory.glade.in.h:1
 msgid "Available partitions:"
 msgstr "Доступн╕ розд╕ли:"
 
-#: interfaces/memory.glade.in.h:3
+#: interfaces/memory.glade.in.h:2
 msgid "Available swap areas"
 msgstr "Доступн╕ област╕ своп╕н╜у"
 
-#: interfaces/memory.glade.in.h:4
+#: interfaces/memory.glade.in.h:3
 msgid "Browse..."
 msgstr "Перегляд..."
 
-#: interfaces/memory.glade.in.h:5
+#: interfaces/memory.glade.in.h:4
 msgid "Cancel"
 msgstr "В╕дм╕нити"
 
-#: interfaces/memory.glade.in.h:8 interfaces/shares.glade.in.h:13
+#: interfaces/memory.glade.in.h:7 interfaces/shares.glade.in.h:14
 msgid "Enabled"
 msgstr "Дозволений"
 
-#: interfaces/memory.glade.in.h:9
+#: interfaces/memory.glade.in.h:8
 msgid "MB"
 msgstr ""
 
-#: interfaces/memory.glade.in.h:10
+#: interfaces/memory.glade.in.h:9
 #, fuzzy
 msgid "New Swap Device"
 msgstr "Пристр╕й своп╕н╜у"
 
-#: interfaces/memory.glade.in.h:11
+#: interfaces/memory.glade.in.h:10
 msgid "OK"
 msgstr "Гаразд"
 
-#: interfaces/memory.glade.in.h:12 interfaces/shares.glade.in.h:40
+#: interfaces/memory.glade.in.h:11 interfaces/shares.glade.in.h:45
 msgid "Path:"
 msgstr "Шлях:"
 
-#: interfaces/memory.glade.in.h:13
+#: interfaces/memory.glade.in.h:12
 #, fuzzy
 msgid "Physical memory:"
 msgstr "Ф╕зична пам'ять:"
 
-#: interfaces/memory.glade.in.h:14
+#: interfaces/memory.glade.in.h:13
 msgid "Priority"
 msgstr "Пр╕оритет"
 
-#: interfaces/memory.glade.in.h:15
+#: interfaces/memory.glade.in.h:14
 #, fuzzy
 msgid "Priority:"
 msgstr "Пр╕оритет"
 
-#: interfaces/memory.glade.in.h:16
-msgid "Remove"
-msgstr "Видалити"
-
-#: interfaces/memory.glade.in.h:17
+#: interfaces/memory.glade.in.h:15
 msgid "Select  Swap File"
 msgstr "Вибрати файл своп╕н╜у"
 
-#: interfaces/memory.glade.in.h:20
+#: interfaces/memory.glade.in.h:18
 msgid "Size:"
 msgstr "Обсяг:"
 
-#: interfaces/memory.glade.in.h:21
+#: interfaces/memory.glade.in.h:19
 #, fuzzy
 msgid "Swap Settings"
 msgstr "Параметри"
 
-#: interfaces/memory.glade.in.h:22
+#: interfaces/memory.glade.in.h:20
 #, fuzzy
 msgid "Swap memory:"
 msgstr "Пам'ять своп╕н╜у:"
 
-#: interfaces/memory.glade.in.h:23
+#: interfaces/memory.glade.in.h:21
 #, fuzzy
 msgid "Swap type:"
 msgstr "Пам'ять своп╕н╜у:"
 
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:86
+#: interfaces/time.glade.in.h:17
+#, fuzzy
+msgid "_Add"
+msgstr "Додати"
+
+#: interfaces/memory.glade.in.h:23
+#, fuzzy
+msgid "_Remove"
+msgstr "Видалити"
+
+#: archiver/location-manager-capplet/location-manager-dialog.c:134
 #: interfaces/memory.glade.in.h:24
+#, fuzzy
+msgid "_Settings"
+msgstr "Параметри"
+
+#: interfaces/memory.glade.in.h:25
 msgid "file"
 msgstr ""
 
-#: interfaces/memory.glade.in.h:25
+#: interfaces/memory.glade.in.h:26
 #, fuzzy
 msgid "partition"
 msgstr "Розд╕л"
@@ -974,7 +996,12 @@ msgstr "Назва"
 msgid "<unknown>"
 msgstr "<нев╕домо>"
 
-#: interfaces/nameresolution.glade.in.h:5 interfaces/network.glade.in.h:17
+#: interfaces/nameresolution.glade.in.h:4 interfaces/shares.glade.in.h:4
+#: interfaces/users.glade.in.h:4
+msgid "Add"
+msgstr "Додати"
+
+#: interfaces/nameresolution.glade.in.h:5 interfaces/network.glade.in.h:16
 msgid "Aliases"
 msgstr "Псевдон╕ми"
 
@@ -993,13 +1020,12 @@ msgstr ""
 msgid "Change the alias' IP address or its corresponding names."
 msgstr ""
 
-#: interfaces/nameresolution.glade.in.h:9 interfaces/network.glade.in.h:36
-#: interfaces/print.glade.in.h:3 interfaces/shares.glade.in.h:10
-#: interfaces/users.glade.in.h:25
+#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:3
+#: interfaces/shares.glade.in.h:11 interfaces/users.glade.in.h:23
 msgid "Delete"
 msgstr "Стерти"
 
-#: interfaces/nameresolution.glade.in.h:10 interfaces/network.glade.in.h:39
+#: interfaces/nameresolution.glade.in.h:10
 msgid "Description:"
 msgstr "Опис:"
 
@@ -1016,7 +1042,7 @@ msgstr ""
 msgid "Domain Name Service (DNS)"
 msgstr ""
 
-#: interfaces/nameresolution.glade.in.h:14 interfaces/network.glade.in.h:42
+#: interfaces/nameresolution.glade.in.h:14
 msgid "Domain:"
 msgstr "Домен:"
 
@@ -1024,13 +1050,13 @@ msgstr "Домен:"
 msgid "Existing:"
 msgstr ""
 
-#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:20
-#: src/shares/tables.c:76
+#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:22
+#: src/shares/imports.etspec.h:1
 #, fuzzy
 msgid "Host"
 msgstr "Хост:"
 
-#: interfaces/nameresolution.glade.in.h:17 interfaces/network.glade.in.h:50
+#: interfaces/nameresolution.glade.in.h:17
 msgid "Host name:"
 msgstr "Назва хоста:"
 
@@ -1038,7 +1064,7 @@ msgstr "Назва хоста:"
 msgid "IP address"
 msgstr "IP-адреса"
 
-#: interfaces/nameresolution.glade.in.h:19 interfaces/network.glade.in.h:60
+#: interfaces/nameresolution.glade.in.h:19
 #, fuzzy
 msgid "IP address:"
 msgstr "IP-адреса"
@@ -1070,7 +1096,7 @@ msgstr "Домен:"
 msgid "New server:"
 msgstr "Сервери DNS"
 
-#: interfaces/nameresolution.glade.in.h:26 interfaces/users.glade.in.h:53
+#: interfaces/nameresolution.glade.in.h:26
 msgid "New:"
 msgstr ""
 
@@ -1097,7 +1123,7 @@ msgstr "Установки для выбранного пользователя"
 msgid "Use WINS server:"
 msgstr "Використовувати сервер WINS:"
 
-#: interfaces/nameresolution.glade.in.h:33 interfaces/network.glade.in.h:113
+#: interfaces/nameresolution.glade.in.h:33
 msgid "Workgroup:"
 msgstr "Робоча група:"
 
@@ -1119,332 +1145,246 @@ msgid "3. Account name"
 msgstr ""
 
 #: interfaces/network.glade.in.h:5
+#, fuzzy
+msgid "A_liases:"
+msgstr "Псевдон╕ми"
+
+#: interfaces/network.glade.in.h:6
+#, fuzzy
+msgid "Ac_tivate"
+msgstr "Положення"
+
+#: interfaces/network.glade.in.h:7
 msgid "Account"
 msgstr ""
 
-#: interfaces/network.glade.in.h:6
+#: interfaces/network.glade.in.h:8
 #, fuzzy
 msgid "Account name:"
 msgstr "Назва хоста:"
 
-#: interfaces/network.glade.in.h:7
-#, fuzzy
-msgid "Activate"
-msgstr "Положення"
+#: interfaces/network.glade.in.h:9
+msgid "Activate when the computer _starts"
+msgstr ""
 
-#: interfaces/network.glade.in.h:8
+#: interfaces/network.glade.in.h:10
 msgid "Activate when the computer starts"
 msgstr ""
 
-#: interfaces/network.glade.in.h:9
+#: interfaces/network.glade.in.h:11
 #, fuzzy
 msgid "Activation"
 msgstr "Положення"
 
-#: interfaces/network.glade.in.h:10
+#: interfaces/network.glade.in.h:12
 #, fuzzy
 msgid "Ad-Hoc Settings"
 msgstr "Параметри"
-
-#: interfaces/network.glade.in.h:11
-msgid "Ad-Hoc mode"
-msgstr ""
 
 #: interfaces/network.glade.in.h:13
 msgid "Add New Internet Connection"
 msgstr ""
 
-#: interfaces/network.glade.in.h:14 interfaces/shares.glade.in.h:4
-#: interfaces/users.glade.in.h:5
-msgid "Add..."
-msgstr "Додати..."
-
-#: interfaces/network.glade.in.h:15
+#: interfaces/network.glade.in.h:14
 #, fuzzy
 msgid "Advanced"
 msgstr " Додатково >>"
 
-#: interfaces/network.glade.in.h:16
+#: interfaces/network.glade.in.h:15
 msgid "Advanced PPP connection tunning."
 msgstr ""
 
-#: interfaces/network.glade.in.h:18
+#: interfaces/network.glade.in.h:17
 msgid "Aliases of other computers."
 msgstr ""
 
-#: interfaces/network.glade.in.h:19
-#, fuzzy
-msgid "Aliases:"
-msgstr "Псевдон╕ми"
+#: interfaces/network.glade.in.h:18
+msgid "Allow activation control for all _users"
+msgstr ""
 
-#: interfaces/network.glade.in.h:20
+#: interfaces/network.glade.in.h:19
 msgid "Allow activation control for all users"
 msgstr ""
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1008
+#: interfaces/network.glade.in.h:20 src/network/connection.c:1020
 msgid "BOOTP"
 msgstr ""
 
-#: interfaces/network.glade.in.h:22
-#, fuzzy
-msgid "Channel:"
-msgstr "В╕дм╕нити"
-
-#: interfaces/network.glade.in.h:23 interfaces/shares.glade.in.h:9
-#: interfaces/users.glade.in.h:17
-msgid "Comment:"
-msgstr "Коментар:"
-
-#: interfaces/network.glade.in.h:24
-#, fuzzy
-msgid "Configuration:"
-msgstr "Подтверження:"
-
-#: interfaces/network.glade.in.h:25
-msgid "Configure..."
-msgstr ""
-
-#: interfaces/network.glade.in.h:26
+#: interfaces/network.glade.in.h:21
 #, fuzzy
 msgid "Connection"
 msgstr "Положення"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:22
 #, fuzzy
 msgid "Connection Settings"
 msgstr "Параметри розд╕лу"
 
-#: interfaces/network.glade.in.h:28
+#: interfaces/network.glade.in.h:23
 msgid "Connection active"
 msgstr ""
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:24
 #, fuzzy
 msgid "Connections"
 msgstr "Положення"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:25
 msgid "Create a new Internet Connection "
 msgstr ""
 
-#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:31
-#: src/network/connection.c:1007
+#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:26
+#: src/network/connection.c:1019
 msgid "DHCP"
 msgstr ""
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:27
 msgid "DNS"
 msgstr ""
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:28
 #, fuzzy
 msgid "DNS Servers"
 msgstr "Сервери DNS"
 
-#: interfaces/network.glade.in.h:34
+#: interfaces/network.glade.in.h:29
 #, fuzzy
-msgid "DNS Servers:"
+msgid "DNS _Servers:"
 msgstr "Сервери DNS"
 
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:30
 #, fuzzy
-msgid "Deactivate"
+msgid "D_eactivate"
 msgstr "Положення"
 
-#: interfaces/network.glade.in.h:37
-#, fuzzy
-msgid "Delete..."
-msgstr "Стерти"
-
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:31
 #, fuzzy
 msgid "Description"
 msgstr "Опис:"
 
-#: interfaces/network.glade.in.h:43
-msgid "Enable windows networking (Samba)"
-msgstr ""
-
-#: interfaces/network.glade.in.h:44
-msgid "Ethernet"
-msgstr ""
-
-#: interfaces/network.glade.in.h:45 interfaces/users.glade.in.h:31
+#: interfaces/network.glade.in.h:34 interfaces/users.glade.in.h:29
 msgid "Finished"
 msgstr ""
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:35
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
 msgstr ""
 
-#: interfaces/network.glade.in.h:47
-msgid "Frequency (GHz):"
-msgstr ""
-
-#: interfaces/network.glade.in.h:48
-#, fuzzy
-msgid "Gateway address:"
-msgstr "IP-адреса шлюзу:"
-
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:36
 msgid "General"
 msgstr ""
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:37
 #, fuzzy
 msgid "Hosts"
 msgstr "Хост:"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:38
 msgid "How other computers are accessed."
 msgstr ""
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:39
 msgid "How the IP address for this connection is determined"
 msgstr ""
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:40
 msgid "How the IP addresses for this connection are determined"
 msgstr ""
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:41
 msgid "How the names of other computers are found."
 msgstr ""
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:42
 msgid "How this computer is identified."
 msgstr ""
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:43
 msgid "How to dial up to the internet."
 msgstr ""
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:44
 #, fuzzy
 msgid "IP Address"
 msgstr "IP-адреса"
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:45
 #, fuzzy
 msgid "IP Settings"
 msgstr "Параметри"
 
-#: interfaces/network.glade.in.h:61
-#, fuzzy
-msgid "Local IP:"
-msgstr "Локальний шлях:"
-
-#: interfaces/network.glade.in.h:62 src/network/connection.c:1006
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1018
 msgid "Manual"
 msgstr ""
 
-#: interfaces/network.glade.in.h:63
-msgid "Modem (PPP)"
-msgstr ""
-
-#: interfaces/network.glade.in.h:64
-#, fuzzy
-msgid "Modem port:"
-msgstr "Точка монтування:"
-
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:47
 #, fuzzy
 msgid "Networking Settings"
 msgstr "Параметри користувача"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:48
 msgid "New Connection Type"
 msgstr ""
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:49
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr ""
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:50
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
 msgstr ""
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:51
 msgid "Options"
 msgstr ""
 
-#: interfaces/network.glade.in.h:70
-msgid "Parallel Line"
-msgstr ""
-
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:52
 #, fuzzy
 msgid "Password (confirm):"
 msgstr "Пароль:"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:54
+msgid "Phone _number:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:55
 msgid "Phone number:"
 msgstr ""
 
-#: interfaces/network.glade.in.h:74
-msgid "Pppd options:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:56
 #, fuzzy
-msgid "Primary:"
-msgstr "Пр╕оритет"
+msgid "Pppd _options:"
+msgstr "Пароль встановлено в \"%s\"."
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:57
 #, fuzzy
-msgid "Remote IP:"
-msgstr "Видалити IP"
-
-#: interfaces/network.glade.in.h:77
-msgid "Restart if connection cuts or fails to start"
-msgstr ""
-
-#: interfaces/network.glade.in.h:78
-#, fuzzy
-msgid "Search Domains:"
+msgid "Sea_rch Domains:"
 msgstr "Пошук домен╕в"
 
-#: interfaces/network.glade.in.h:79
-msgid "Secondary:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:58
 msgid "Select which type of connection you would like to add."
 msgstr ""
 
-#: interfaces/network.glade.in.h:81
-msgid "Session ID:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:59
 #, fuzzy
-msgid "Set DNS servers manually"
+msgid "Set _DNS servers manually"
 msgstr "Сервери DNS"
 
-#: interfaces/network.glade.in.h:83
-msgid "Set as default route"
+#: interfaces/network.glade.in.h:60
+msgid "Set as _default route"
 msgstr ""
 
-#: interfaces/network.glade.in.h:84
-msgid "Start PPP as soon as modem connects"
-msgstr ""
-
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:61
 msgid "Status"
 msgstr ""
 
-#: interfaces/network.glade.in.h:86
-#, fuzzy
-msgid "Subnet mask:"
-msgstr "Маска мереж╕:"
-
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:62
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -1452,48 +1392,36 @@ msgid ""
 "or finish)."
 msgstr ""
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:66
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click "
 "\"Cancel\"."
 msgstr ""
 
-#: interfaces/network.glade.in.h:92
-msgid "Update DNS when this connection becomes active"
-msgstr ""
-
-#: interfaces/network.glade.in.h:93
-msgid "Use remote IP as default gateway"
-msgstr ""
-
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:67
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
 msgstr ""
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:68
 msgid "User name:"
 msgstr "╤м'я користувача:"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:69
 #, fuzzy
-msgid "WINS server:"
+msgid "WI_NS server:"
 msgstr "Використовувати сервер WINS:"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:70
 msgid "Warning message goes here.."
 msgstr ""
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:71
 msgid "WaveLAN"
 msgstr ""
 
-#: interfaces/network.glade.in.h:99
-msgid "Wavelan"
-msgstr ""
-
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:72
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1508,228 +1436,452 @@ msgid ""
 "Click the \"Next\" button to begin."
 msgstr ""
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:83
 #, fuzzy
 msgid "Windows Networking"
 msgstr "Основна мережа"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:84
 msgid "Wireless networking settings."
 msgstr ""
+
+#: interfaces/network.glade.in.h:85
+msgid "_Ad-Hoc mode"
+msgstr ""
+
+#: interfaces/network.glade.in.h:88
+#, fuzzy
+msgid "_Channel:"
+msgstr "В╕дм╕нити"
+
+#: interfaces/network.glade.in.h:89 interfaces/shares.glade.in.h:59
+#: interfaces/users.glade.in.h:84
+#, fuzzy
+msgid "_Comment:"
+msgstr "Коментар:"
+
+#: interfaces/network.glade.in.h:90
+#, fuzzy
+msgid "_Configuration:"
+msgstr "Подтверження:"
+
+#: interfaces/network.glade.in.h:91
+msgid "_Configure..."
+msgstr ""
+
+#: archiver/location-manager-capplet/location-manager-dialog.c:104
+#: interfaces/network.glade.in.h:93
+#, fuzzy
+msgid "_Delete..."
+msgstr "Стерти"
+
+#: interfaces/network.glade.in.h:94
+#, fuzzy
+msgid "_Description:"
+msgstr "Опис:"
+
+#: interfaces/network.glade.in.h:95
+#, fuzzy
+msgid "_Domain:"
+msgstr "Домен:"
+
+#: interfaces/network.glade.in.h:96
+#, fuzzy
+msgid "_Enable windows networking (Samba)"
+msgstr "Основна мережа"
+
+#: interfaces/network.glade.in.h:97
+msgid "_Ethernet"
+msgstr ""
+
+#: interfaces/network.glade.in.h:98
+msgid "_Frequency (GHz):"
+msgstr ""
+
+#: interfaces/network.glade.in.h:99
+#, fuzzy
+msgid "_Gateway address:"
+msgstr "IP-адреса шлюзу:"
+
+#: interfaces/network.glade.in.h:100
+#, fuzzy
+msgid "_Host name:"
+msgstr "Назва хоста:"
+
+#: interfaces/network.glade.in.h:101
+#, fuzzy
+msgid "_IP address:"
+msgstr "IP-адреса"
+
+#: interfaces/network.glade.in.h:102
+#, fuzzy
+msgid "_Local IP:"
+msgstr "Локальний шлях:"
+
+#: interfaces/network.glade.in.h:103
+msgid "_Modem (PPP)"
+msgstr ""
+
+#: interfaces/network.glade.in.h:104
+#, fuzzy
+msgid "_Modem port:"
+msgstr "Точка монтування:"
+
+#: interfaces/network.glade.in.h:105
+msgid "_Parallel Line"
+msgstr ""
+
+#: interfaces/network.glade.in.h:106
+#, fuzzy
+msgid "_Password:"
+msgstr "Пароль:"
+
+#: interfaces/network.glade.in.h:107
+#, fuzzy
+msgid "_Primary:"
+msgstr "Пр╕оритет"
+
+#: interfaces/network.glade.in.h:108
+#, fuzzy
+msgid "_Remote IP:"
+msgstr "Видалити IP"
+
+#: interfaces/network.glade.in.h:109
+msgid "_Restart if connection cuts or fails to start"
+msgstr ""
+
+#: interfaces/network.glade.in.h:110
+msgid "_Secondary:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:111
+msgid "_Session ID:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:112
+msgid "_Start PPP as soon as modem connects"
+msgstr ""
+
+#: interfaces/network.glade.in.h:113
+#, fuzzy
+msgid "_Subnet mask:"
+msgstr "Маска мереж╕:"
+
+#: interfaces/network.glade.in.h:114
+msgid "_Update DNS when this connection becomes active"
+msgstr ""
+
+#: interfaces/network.glade.in.h:115
+msgid "_Use remote IP as default gateway"
+msgstr ""
+
+#: interfaces/network.glade.in.h:116
+#, fuzzy
+msgid "_User name:"
+msgstr "╤м'я користувача:"
+
+#: interfaces/network.glade.in.h:117
+msgid "_Wavelan"
+msgstr ""
+
+#: interfaces/network.glade.in.h:118
+#, fuzzy
+msgid "_Workgroup:"
+msgstr "Робоча група:"
 
 #: interfaces/shares.glade.in.h:1
 msgid " Edit clients... "
 msgstr ""
 
 #: interfaces/shares.glade.in.h:2
+#, fuzzy
+msgid " _Edit clients... "
+msgstr "Додати..."
+
+#: interfaces/shares.glade.in.h:3
 msgid "Access control"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:5
+#: interfaces/shares.glade.in.h:5 interfaces/users.glade.in.h:5
+msgid "Add..."
+msgstr "Додати..."
+
+#: interfaces/shares.glade.in.h:6
 msgid "Allow writing"
 msgstr "Дозволити запис"
 
-#: interfaces/shares.glade.in.h:6
+#: interfaces/shares.glade.in.h:7
 msgid "Browseable"
 msgstr "Для перегляду"
 
-#: interfaces/shares.glade.in.h:7
+#: interfaces/shares.glade.in.h:8
 msgid "Client"
 msgstr "Кл╕╓нт"
 
-#: interfaces/shares.glade.in.h:8 src/shares/tables.c:82
+#: interfaces/shares.glade.in.h:9
 #, fuzzy
 msgid "Clients"
 msgstr "Кл╕╓нт"
 
-#: interfaces/shares.glade.in.h:11
+#: interfaces/shares.glade.in.h:10
+msgid "Comment:"
+msgstr "Коментар:"
+
+#: interfaces/shares.glade.in.h:12
+msgid "Do not _remount this share after computer reboots"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:13
 msgid "Do not remount this share after computer reboots"
 msgstr ""
 
-#: interfaces/internetsharing.glade.in.h:3 interfaces/shares.glade.in.h:12
-#, fuzzy
-msgid "Enable"
-msgstr "Дозволений"
-
-#: interfaces/shares.glade.in.h:14
+#: interfaces/shares.glade.in.h:15
 msgid "Export"
 msgstr "Експорт"
 
-#: interfaces/shares.glade.in.h:15
+#: interfaces/shares.glade.in.h:16
 #, fuzzy
 msgid "Export Clients"
 msgstr "Експорт/кл╕╓нти"
 
-#: interfaces/shares.glade.in.h:16
+#: interfaces/shares.glade.in.h:17
 #, fuzzy
 msgid "Export Settings"
 msgstr "Параметри експорту SMB"
 
-#: interfaces/shares.glade.in.h:17
+#: interfaces/shares.glade.in.h:18
+#, fuzzy
+msgid "Export _type:"
+msgstr "Експортована назва:"
+
+#: interfaces/shares.glade.in.h:19
 #, fuzzy
 msgid "Export type:"
 msgstr "Експортована назва:"
 
-#: interfaces/shares.glade.in.h:18
+#: interfaces/shares.glade.in.h:20
 #, fuzzy
 msgid "Exports"
 msgstr "Експорт"
 
-#: interfaces/shares.glade.in.h:19
+#: interfaces/shares.glade.in.h:21
 msgid ""
 "Exports are used to share directories on your computer with other computers "
 "over the network. "
 msgstr ""
 
-#: interfaces/shares.glade.in.h:21
+#: interfaces/shares.glade.in.h:23
 msgid "Host:"
 msgstr "Хост:"
 
-#: interfaces/shares.glade.in.h:22
+#: interfaces/shares.glade.in.h:24
 msgid "Import"
 msgstr "╤мпорт"
 
-#: interfaces/shares.glade.in.h:23
+#: interfaces/shares.glade.in.h:25
 msgid "Import Settings"
 msgstr "╤мпорут параметр╕в"
 
-#: interfaces/shares.glade.in.h:24
+#: interfaces/shares.glade.in.h:26
 #, fuzzy
 msgid "Import Settings--NFS Options"
 msgstr "╤мпорут параметр╕в"
 
-#: interfaces/shares.glade.in.h:25
+#: interfaces/shares.glade.in.h:27
 msgid "Import Settings--Samba Options (Obsolete)"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:26
+#: interfaces/shares.glade.in.h:28
+#, fuzzy
+msgid "Import _type:"
+msgstr "╤мпорт"
+
+#: interfaces/shares.glade.in.h:29
 #, fuzzy
 msgid "Import type:"
 msgstr "╤мпорт"
 
-#: interfaces/shares.glade.in.h:27
+#: interfaces/shares.glade.in.h:30
 msgid "Imports"
 msgstr "Импорти"
 
-#: interfaces/shares.glade.in.h:28
+#: interfaces/shares.glade.in.h:31
 msgid ""
 "Imports are directories which reside in other computers and are accessible "
 "to you through the network."
 msgstr ""
 
-#: interfaces/shares.glade.in.h:29 src/shares/tables.c:777
-#, fuzzy
-msgid "Mount"
-msgstr "Змонтован╕"
-
-#: interfaces/shares.glade.in.h:30 src/shares/tables.c:78
+#: interfaces/shares.glade.in.h:32 src/shares/imports.etspec.h:2
 msgid "Mount Point"
 msgstr "Точка монтування"
 
 #: interfaces/shares.glade.in.h:33
 #, fuzzy
+msgid "Mount p_oint:"
+msgstr "Точка монтування:"
+
+#: interfaces/shares.glade.in.h:36
+#, fuzzy
 msgid "Mounting Options"
 msgstr "Точка монтування"
 
-#: interfaces/shares.glade.in.h:34
+#: interfaces/shares.glade.in.h:37
 #, fuzzy
 msgid "Mounting options"
 msgstr "Точка монтування"
 
-#: interfaces/shares.glade.in.h:35
+#: interfaces/shares.glade.in.h:38
 msgid "NFS"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:36 src/boot/e-table.c:40
-#: src/shares/tables.c:80
+#: interfaces/shares.glade.in.h:39 src/boot/boot.etspec.h:4
+#: src/shares/exports.etspec.h:1
 msgid "Name"
 msgstr "Назва"
 
-#: interfaces/shares.glade.in.h:39 src/shares/tables.c:77
-#: src/shares/tables.c:81
+#: interfaces/location-manager.glade.in.h:23 interfaces/shares.glade.in.h:40
+#, fuzzy
+msgid "Name:"
+msgstr "Назва"
+
+#: interfaces/shares.glade.in.h:41
+#, fuzzy
+msgid "P_ublic"
+msgstr "Публ╕чний"
+
+#: interfaces/shares.glade.in.h:42
+#, fuzzy
+msgid "Pass_word:"
+msgstr "Пароль:"
+
+#: interfaces/shares.glade.in.h:44 src/shares/exports.etspec.h:2
+#: src/shares/imports.etspec.h:4
 msgid "Path"
 msgstr "Шлях"
 
-#: interfaces/shares.glade.in.h:41
+#: interfaces/shares.glade.in.h:46
 #, fuzzy
 msgid "Pattern:"
 msgstr "Шлях:"
 
-#: interfaces/shares.glade.in.h:42
+#: interfaces/shares.glade.in.h:47
 msgid "Public"
 msgstr "Публ╕чний"
 
-#: interfaces/shares.glade.in.h:43
+#: interfaces/shares.glade.in.h:48
 msgid "Restrict access to this share to specific clients"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:44
+#: interfaces/shares.glade.in.h:49
 #, fuzzy
 msgid "Samba"
 msgstr ""
 "SMB\n"
 "NFS\n"
 
-#: interfaces/shares.glade.in.h:45
-msgid "Scan"
-msgstr ""
-
-#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:46
-#: interfaces/users.glade.in.h:73
+#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:50
 #, fuzzy
 msgid "Settings..."
 msgstr "Параметри..."
 
-#: interfaces/shares.glade.in.h:47
+#: interfaces/shares.glade.in.h:51
 #, fuzzy
 msgid "Update"
 msgstr "Дата/час"
 
-#: interfaces/shares.glade.in.h:48
+#: interfaces/shares.glade.in.h:52
 msgid ""
 "Use this dialog to create a new export, or to edit the settings of an "
 "existing export."
 msgstr ""
 
-#: interfaces/shares.glade.in.h:49
+#: interfaces/shares.glade.in.h:53
 msgid ""
 "Use this dialog to create a new import, or to edit the settings of an "
 "existing import."
 msgstr ""
 
-#: interfaces/shares.glade.in.h:50
+#: interfaces/shares.glade.in.h:54
 msgid ""
 "Use this dialog to define the client patterns which determine who has access "
 "to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
 "or \" *.gnome.org\".  "
 msgstr ""
 
-#: interfaces/shares.glade.in.h:51 interfaces/users.glade.in.h:91
+#: interfaces/shares.glade.in.h:55
 #, fuzzy
 msgid "Username:"
 msgstr "╤м'я користувача:"
 
-#: interfaces/shares.glade.in.h:52 src/shares/tables.c:83
+#: interfaces/shares.glade.in.h:56 src/shares/exports.etspec.h:3
 msgid "Writable"
 msgstr "Для запису"
 
-#: interfaces/shares.glade.in.h:53
+#: interfaces/shares.glade.in.h:58
+#, fuzzy
+msgid "_Browseable"
+msgstr "Для перегляду"
+
+#: interfaces/shares.glade.in.h:61
+#, fuzzy
+msgid "_Enable"
+msgstr "Дозволений"
+
+#: interfaces/shares.glade.in.h:62
+#, fuzzy
+msgid "_Host:"
+msgstr "Хост:"
+
+#: interfaces/shares.glade.in.h:63
+#, fuzzy
+msgid "_Mount"
+msgstr "Змонтован╕"
+
+#: interfaces/shares.glade.in.h:64
+#, fuzzy
+msgid "_Mounted"
+msgstr "Змонтован╕"
+
+#: interfaces/shares.glade.in.h:66
+#, fuzzy
+msgid "_Path:"
+msgstr "Шлях:"
+
+#: interfaces/shares.glade.in.h:67
+msgid "_Restrict access to this share to specific clients"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:68
+msgid "_Scan"
+msgstr ""
+
+#: interfaces/shares.glade.in.h:70 interfaces/users.glade.in.h:96
+#, fuzzy
+msgid "_Username:"
+msgstr "╤м'я користувача:"
+
+#: interfaces/shares.glade.in.h:71
+#, fuzzy
+msgid "_Writable"
+msgstr "Для запису"
+
+#: interfaces/shares.glade.in.h:72
 msgid "add/edit clients"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:54
+#: interfaces/shares.glade.in.h:73
 msgid "advanced mode--main window"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:55
+#: interfaces/shares.glade.in.h:74
 msgid "export settings--NFS options"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:56
+#: interfaces/shares.glade.in.h:75
 msgid "export settings--Samba options"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:57
+#: interfaces/shares.glade.in.h:76
 msgid "simple mode--main window"
 msgstr ""
 
@@ -1737,92 +1889,93 @@ msgstr ""
 msgid "(unconfigured)"
 msgstr ""
 
-#: interfaces/location-manager.glade.in.h:10 interfaces/time.glade.in.h:3
+#: interfaces/location-manager.glade.in.h:10 interfaces/time.glade.in.h:2
 #, fuzzy
 msgid "Date"
 msgstr "Дата/час"
 
-#: interfaces/location-manager.glade.in.h:11 interfaces/time.glade.in.h:4
+#: interfaces/location-manager.glade.in.h:11 interfaces/time.glade.in.h:3
 #, fuzzy
 msgid "Date/Time "
 msgstr "Дата/час"
 
-#: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.in.h:5
+#: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.in.h:4
 msgid "Date/time"
 msgstr "Дата/час"
 
-#: interfaces/location-manager.glade.in.h:17 interfaces/time.glade.in.h:6
-#, fuzzy
-msgid "Keep clock synchronized with selected servers"
-msgstr "Синхрон╕зувати годинники за такими серверами"
-
-#: interfaces/location-manager.glade.in.h:28 interfaces/time.glade.in.h:7
+#: interfaces/location-manager.glade.in.h:28 interfaces/time.glade.in.h:5
 msgid ""
 "Please select the current date and time. You can also specify a time zone "
 "and a time server."
 msgstr ""
 
-#: interfaces/time.glade.in.h:8
+#: interfaces/time.glade.in.h:6
+#, fuzzy
+msgid "Select _servers..."
+msgstr "Сервери DNS"
+
+#: interfaces/time.glade.in.h:7
 msgid ""
 "Select a time zone by clicking on \n"
 "one of the dots on the map."
 msgstr ""
 
-#: interfaces/location-manager.glade.in.h:32 interfaces/time.glade.in.h:10
-#, fuzzy
-msgid "Select servers..."
-msgstr "Сервери DNS"
-
-#: interfaces/time.glade.in.h:11
+#: interfaces/time.glade.in.h:9
 msgid "Select the servers you wish to use for time synchronization."
 msgstr ""
 
-#: interfaces/time.glade.in.h:12
+#: interfaces/time.glade.in.h:10
 #, fuzzy
 msgid "Selection:"
 msgstr "Опис:"
 
-#: interfaces/location-manager.glade.in.h:33 interfaces/time.glade.in.h:13
+#: interfaces/time.glade.in.h:11
 #, fuzzy
-msgid "Set time zone..."
+msgid "Set time _zone..."
 msgstr "Параметри..."
 
-#: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:14
+#: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:12
 #, fuzzy
 msgid "Time"
 msgstr "Часовий пояс"
 
-#: interfaces/time.glade.in.h:15
+#: interfaces/time.glade.in.h:13
 #, fuzzy
 msgid "Time Zones"
 msgstr "Часовий пояс"
 
-#: interfaces/location-manager.glade.in.h:35 interfaces/time.glade.in.h:16
+#: interfaces/location-manager.glade.in.h:35 interfaces/time.glade.in.h:14
 #, fuzzy
 msgid "Time server"
 msgstr "Сервери часу"
 
-#: interfaces/time.glade.in.h:17
+#: interfaces/time.glade.in.h:15
 msgid "Time servers"
 msgstr "Сервери часу"
 
-#: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.in.h:18
+#: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.in.h:16
 msgid "Time zone"
 msgstr "Часовий пояс"
 
+#: interfaces/time.glade.in.h:18
+#, fuzzy
+msgid "_Keep clock synchronized with selected servers"
+msgstr "Синхрон╕зувати годинники за такими серверами"
+
+#: interfaces/users.glade.in.h:1
+#, fuzzy
+msgid "<< _Remove"
+msgstr "Видалити"
+
 #: interfaces/users.glade.in.h:2
-msgid "Add ->"
-msgstr "Додати ->"
+#, fuzzy
+msgid "<< _Remove "
+msgstr "Видалити"
 
 #: interfaces/users.glade.in.h:3
 #, fuzzy
-msgid "Add group..."
-msgstr "Додати..."
-
-#: interfaces/users.glade.in.h:4
-#, fuzzy
-msgid "Add user..."
-msgstr "Додати..."
+msgid "A_vailable groups"
+msgstr "Доступн╕ розд╕ли:"
 
 #: interfaces/users.glade.in.h:6
 #, fuzzy
@@ -1831,7 +1984,7 @@ msgstr " Додатково >>"
 
 #: interfaces/users.glade.in.h:7
 #, fuzzy
-msgid "All users"
+msgid "All _users"
 msgstr "Вс╕ користувач╕"
 
 #: interfaces/users.glade.in.h:8
@@ -1845,13 +1998,13 @@ msgstr ""
 
 #: interfaces/users.glade.in.h:10
 #, fuzzy
-msgid "Available groups"
-msgstr "Доступн╕ розд╕ли:"
+msgid "Basic settings"
+msgstr "Параметри користувача"
 
 #: interfaces/users.glade.in.h:11
 #, fuzzy
-msgid "Basic settings"
-msgstr "Параметри користувача"
+msgid "C_onfirm:"
+msgstr "Подтверження:"
 
 #: interfaces/users.glade.in.h:12
 msgid ""
@@ -1861,252 +2014,222 @@ msgid ""
 msgstr ""
 
 #: interfaces/users.glade.in.h:15
-msgid "Check password quality"
+msgid "Check password _quality"
 msgstr ""
 
 #: interfaces/users.glade.in.h:16
 msgid "Click \"Next\" to continue"
 msgstr ""
 
-#: interfaces/users.glade.in.h:18
-#, fuzzy
-msgid "Confirm:"
-msgstr "Подтверження:"
-
-#: interfaces/users.glade.in.h:19
+#: interfaces/users.glade.in.h:17
 msgid ""
 "Congratulations, the new user has been created.\n"
 "Please click \"Finish\" to save your changes. "
 msgstr ""
 
-#: interfaces/users.glade.in.h:21
+#: interfaces/users.glade.in.h:19
 msgid "Copy..."
 msgstr ""
 
-#: interfaces/users.glade.in.h:22
+#: interfaces/users.glade.in.h:20
 msgid "Days between warning and password expiration:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:23
+#: interfaces/users.glade.in.h:21
 #, fuzzy
 msgid "Default group:"
 msgstr "Основна група:"
 
-#: interfaces/users.glade.in.h:24
+#: interfaces/users.glade.in.h:22
 msgid "Default shell:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:26
+#: interfaces/users.glade.in.h:24
 msgid ""
 "EXPERIMENTAL NIS support.\n"
 "It's only available if You have NIS\n"
 "and when You click on \"More Options\"."
 msgstr ""
 
-#: interfaces/users.glade.in.h:29
+#: interfaces/users.glade.in.h:27
 #, fuzzy
 msgid "Edit profile:"
 msgstr "Нова група..."
 
-#: interfaces/users.glade.in.h:30
+#: interfaces/users.glade.in.h:28
 msgid "Filename"
 msgstr ""
 
-#: interfaces/users.glade.in.h:32
+#: interfaces/users.glade.in.h:30
 #, fuzzy
-msgid "Generate random password"
+msgid "Generate _random password"
 msgstr "  Випадковий пароль  "
 
-#: interfaces/users.glade.in.h:33
+#: interfaces/users.glade.in.h:31
 msgid "Group Settings"
 msgstr "Параметри групи"
 
-#: interfaces/users.glade.in.h:34
+#: interfaces/users.glade.in.h:32
 #, fuzzy
-msgid "Group members"
+msgid "Group _members"
 msgstr "Члени"
 
-#: interfaces/users.glade.in.h:35
-msgid "Group name:"
-msgstr "Назва групи:"
-
-#: interfaces/users.glade.in.h:36 src/users/e-table.c:50
+#: interfaces/users.glade.in.h:33 src/users/group.etspec.h:2
 #: src/users/user_settings.c:333 src/users/user_settings.c:403
 msgid "Groups"
 msgstr "Групи"
 
-#: interfaces/users.glade.in.h:37
+#: interfaces/users.glade.in.h:34
 msgid "Home directory:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:38
-msgid "Inherit settings from:"
+#: interfaces/users.glade.in.h:35
+msgid "Ma_ximum days a password may be used:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:39
-msgid "Main group:"
+#: interfaces/users.glade.in.h:36
+#, fuzzy
+msgid "Main _group:"
 msgstr "Основна група:"
 
-#: interfaces/users.glade.in.h:40
+#: interfaces/users.glade.in.h:37
 msgid "Maximum GID:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:41
+#: interfaces/users.glade.in.h:38
 msgid "Maximum UID:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:42
-msgid "Maximum days a password may be used:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:43
+#: interfaces/users.glade.in.h:39
 msgid "Members"
 msgstr "Члени"
 
-#: interfaces/users.glade.in.h:44
+#: interfaces/users.glade.in.h:40
+msgid "Mi_nimum days between password changes:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:41
 msgid "Minimum GID:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:45
+#: interfaces/users.glade.in.h:42
 msgid "Minimum UID:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:46
+#: interfaces/users.glade.in.h:43
 msgid "Minimum days allowed between password changes:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:47
-msgid "Minimum days between password changes:"
-msgstr ""
+#: interfaces/users.glade.in.h:44
+#, fuzzy
+msgid "Ne_w:"
+msgstr "Назва"
 
-#: interfaces/users.glade.in.h:49
+#: interfaces/users.glade.in.h:45
 #, fuzzy
 msgid "New Group"
 msgstr "Нова група..."
 
-#: interfaces/users.glade.in.h:50
+#: interfaces/users.glade.in.h:46
 #, fuzzy
 msgid "New Profile"
 msgstr "Нова група..."
 
-#: interfaces/users.glade.in.h:51
+#: interfaces/users.glade.in.h:47
 #, fuzzy
 msgid "New User"
 msgstr "Новий користувач..."
 
-#: interfaces/users.glade.in.h:52
+#: interfaces/users.glade.in.h:48
 #, fuzzy
 msgid "New password"
 msgstr "Новий пароль:"
 
-#: interfaces/users.glade.in.h:54
+#: interfaces/users.glade.in.h:49
 msgid "Number of days that a password may be used:"
 msgstr ""
 
-#: interfaces/users.glade.in.h:55
+#: interfaces/users.glade.in.h:50
 msgid ""
 "On this page, you can define security options, such as how frequently users "
 "must change their passwords."
 msgstr ""
 
-#: interfaces/users.glade.in.h:56
+#: interfaces/users.glade.in.h:51
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
 msgstr ""
 
-#: interfaces/users.glade.in.h:57
+#: interfaces/users.glade.in.h:52
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
 msgstr ""
 
-#: interfaces/users.glade.in.h:58
+#: interfaces/users.glade.in.h:53
 #, fuzzy
 msgid "Optional settings"
 msgstr "Параметри розд╕лу"
 
-#: interfaces/users.glade.in.h:59 src/users/user_settings.c:340
+#: interfaces/users.glade.in.h:54 src/users/user_settings.c:340
 #: src/users/user_settings.c:410
 #, fuzzy
 msgid "Password"
 msgstr "Пароль:"
 
-#: interfaces/users.glade.in.h:60
+#: interfaces/users.glade.in.h:55
 #, fuzzy
 msgid "Password options"
 msgstr "Пароль встановлено в \"%s\"."
 
-#: interfaces/users.glade.in.h:61
+#: interfaces/users.glade.in.h:56
 msgid "Password options (step 2 of 2)"
 msgstr ""
 
-#: interfaces/users.glade.in.h:62
+#: interfaces/users.glade.in.h:57
 #, fuzzy
 msgid "Password set to:"
 msgstr "Пароль встановлено в \"%s\"."
 
-#: interfaces/users.glade.in.h:63
+#: interfaces/users.glade.in.h:58
 msgid "Please enter a password for the new user. "
 msgstr ""
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:59
 msgid ""
 "Please enter a username for the new user in the space below. You may also "
 "enter a comment about the user, such as his or her real name. "
 msgstr ""
 
-#: interfaces/users.glade.in.h:65
-#, fuzzy
-msgid "Profile:"
-msgstr "Нова група..."
-
-#: interfaces/users.glade.in.h:66
+#: interfaces/users.glade.in.h:60
 msgid "Profiles"
 msgstr ""
 
-#: interfaces/users.glade.in.h:67
-#, fuzzy
-msgid "Profiles..."
-msgstr "Нова група..."
-
-#: interfaces/users.glade.in.h:68
-msgid "Remove <-"
-msgstr "Видалити <-"
-
-#: interfaces/users.glade.in.h:69
+#: interfaces/users.glade.in.h:61
 msgid "Security"
 msgstr ""
 
-#: interfaces/users.glade.in.h:70
+#: interfaces/users.glade.in.h:62
 #, fuzzy
-msgid "Set password by hand"
+msgid "Set password b_y hand"
 msgstr "Новий пароль:"
 
-#: interfaces/users.glade.in.h:72
+#: interfaces/users.glade.in.h:64
 #, fuzzy
 msgid "Settings for selected user and group"
 msgstr "Параметри вибрано╖ групи"
 
-#: interfaces/users.glade.in.h:74
-msgid "Shell:"
-msgstr ""
-
-#: interfaces/users.glade.in.h:75
-#, fuzzy
-msgid "Show all users and groups"
-msgstr "Параметри вибрано╖ групи"
-
-#: interfaces/users.glade.in.h:76
+#: interfaces/users.glade.in.h:65
 msgid "System"
 msgstr ""
 
-#: interfaces/users.glade.in.h:77
+#: interfaces/users.glade.in.h:66
 #, fuzzy
 msgid "System defaults"
 msgstr "Параметри користувача"
 
-#: interfaces/users.glade.in.h:78
+#: interfaces/users.glade.in.h:67
 msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new users to your system.\n"
@@ -2114,7 +2237,7 @@ msgid ""
 "To begin, click \"Next\". "
 msgstr ""
 
-#: interfaces/users.glade.in.h:82
+#: interfaces/users.glade.in.h:71
 #, fuzzy
 msgid ""
 "This is the list of the groups available in the system. Create new groups or "
@@ -2123,7 +2246,7 @@ msgstr ""
 "Це список користувач╕в системи. Створ╕ть нових користувач╕в чи виправте "
 "параметри ╕снуючих за допомогою цього д╕алогового в╕кна."
 
-#: interfaces/users.glade.in.h:83
+#: interfaces/users.glade.in.h:72
 #, fuzzy
 msgid ""
 "This is the list of the users available in the system. Create new users or "
@@ -2132,43 +2255,94 @@ msgstr ""
 "Це список користувач╕в системи. Створ╕ть нових користувач╕в чи виправте "
 "параметри ╕снуючих за допомогою цього д╕алогового в╕кна."
 
-#: interfaces/users.glade.in.h:84
+#: interfaces/users.glade.in.h:73
+#, fuzzy
+msgid "Us_er's groups"
+msgstr "Нова група..."
+
+#: interfaces/users.glade.in.h:74
 msgid "Use this dialog to create a new profile."
 msgstr ""
 
 #. set window title
-#: interfaces/users.glade.in.h:85 src/users/user-druid.c:271
+#: interfaces/users.glade.in.h:75 src/users/user-druid.c:271
 #, fuzzy
 msgid "User Account Wizard"
 msgstr "Адм╕н╕стрування бюджет╕в користувач╕в"
 
-#: interfaces/users.glade.in.h:86
+#: interfaces/users.glade.in.h:76
 msgid "User Creation Druid"
 msgstr ""
 
-#: interfaces/users.glade.in.h:87
-#, fuzzy
-msgid "User ID:"
-msgstr "Користувач:"
-
-#: interfaces/users.glade.in.h:88
+#: interfaces/users.glade.in.h:77
 msgid "User Identity  (step 1 of 2)"
 msgstr ""
 
-#: interfaces/users.glade.in.h:89
+#: interfaces/users.glade.in.h:78
+#, fuzzy
+msgid "User _ID:"
+msgstr "Користувач:"
+
+#: interfaces/users.glade.in.h:79
 msgid ""
 "User profiles can be used a templates to facilitate the creation of new "
 "users. To edit a profile, change the settings in the following tabs."
 msgstr ""
 
-#: interfaces/users.glade.in.h:90
-#, fuzzy
-msgid "User's groups"
-msgstr "Нова група..."
-
-#: interfaces/users.glade.in.h:92 src/users/e-table.c:43
+#: interfaces/users.glade.in.h:80 src/users/users.etspec.h:7
 msgid "Users"
 msgstr "Користувач╕"
+
+#: interfaces/users.glade.in.h:81
+#, fuzzy
+msgid "_Add >>"
+msgstr "Додати ->"
+
+#: interfaces/users.glade.in.h:82
+#, fuzzy
+msgid "_Add group..."
+msgstr "Додати..."
+
+#: interfaces/users.glade.in.h:83
+#, fuzzy
+msgid "_Add user..."
+msgstr "Додати..."
+
+#: interfaces/users.glade.in.h:85
+msgid "_Days between warning and password expiration:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:87
+#, fuzzy
+msgid "_Group name:"
+msgstr "Назва групи:"
+
+#: interfaces/users.glade.in.h:88
+msgid "_Home directory:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:89
+msgid "_Inherit settings from:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:91
+#, fuzzy
+msgid "_Profile:"
+msgstr "Нова група..."
+
+#: interfaces/users.glade.in.h:92
+#, fuzzy
+msgid "_Profiles..."
+msgstr "Нова група..."
+
+#: interfaces/users.glade.in.h:94
+msgid "_Shell:"
+msgstr ""
+
+#: interfaces/users.glade.in.h:95
+#, fuzzy
+msgid "_Show all users and groups"
+msgstr "Параметри вибрано╖ групи"
 
 #: src/boot/boot-settings.c:218
 msgid "Not Implemented yet, sorry."
@@ -2179,32 +2353,32 @@ msgstr ""
 msgid "Are you sure you want to delete %s?"
 msgstr "Ви впевнен╕, що хочете видалити користувача %s?"
 
-#: src/boot/e-table.c:39 src/users/profile.c:1004
+#: src/boot/e-table.c:335
+msgid "Linux"
+msgstr ""
+
+#: src/boot/e-table.c:339
+msgid "Other"
+msgstr ""
+
+#: src/boot/e-table.c:347
+#, fuzzy, c-format
+msgid "%s (default)"
+msgstr "Параметри користувача"
+
+#: src/boot/boot.etspec.h:1 src/users/profile.c:998
 #, fuzzy
 msgid "Default"
 msgstr "Основна група:"
 
-#: src/boot/e-table.c:41 src/print/e-table.c:42
-#, fuzzy
-msgid "Type"
-msgstr "Тип:"
-
-#: src/boot/e-table.c:42
+#: src/boot/boot.etspec.h:3
 msgid "Kernel Image"
 msgstr ""
 
-#: src/boot/e-table.c:350
-msgid "Linux"
-msgstr ""
-
-#: src/boot/e-table.c:354
-msgid "Other"
-msgstr ""
-
-#: src/boot/e-table.c:362
-#, fuzzy, c-format
-msgid "%s (default)"
-msgstr "Параметри користувача"
+#: src/boot/boot.etspec.h:5 src/print/print.etspec.h:6
+#, fuzzy
+msgid "Type"
+msgstr "Тип:"
 
 #: src/boot/main.c:93
 msgid "Boot Manager Settings - Ximian Setup Tools"
@@ -2237,31 +2411,31 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr ""
 
-#: src/common/xst-tool.c:545
+#: src/common/xst-tool.c:550
 msgid "Skipping actual save..."
 msgstr ""
 
-#: src/common/xst-tool.c:571
+#: src/common/xst-tool.c:573
 #, fuzzy
 msgid "Updating your system configuration."
 msgstr "Сканування конф╕╜урац╕╖ вашо╖ системи."
 
-#: src/common/xst-tool.c:695
+#: src/common/xst-tool.c:697
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
 
-#: src/common/xst-tool.c:869
+#: src/common/xst-tool.c:873
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr ""
 
-#: src/common/xst-tool.c:1006
+#: src/common/xst-tool.c:1010
 msgid "The password you entered is invalid."
 msgstr ""
 
-#: src/common/xst-tool.c:1046
+#: src/common/xst-tool.c:1048
 msgid "Pretending we are root..."
 msgstr ""
 
@@ -2290,64 +2464,64 @@ msgstr "Користувач %s вже ╕сну╓."
 msgid "Swap Management"
 msgstr ""
 
-#: src/network/callbacks.c:164
+#: src/network/callbacks.c:265
 msgid "The name of this computer"
 msgstr ""
 
-#: src/network/callbacks.c:167
+#: src/network/callbacks.c:268
 msgid "A short description of your computer"
 msgstr ""
 
-#: src/network/callbacks.c:170
+#: src/network/callbacks.c:271
 msgid "The Windows Networking workgroup for your network"
 msgstr ""
 
-#: src/network/callbacks.c:173
+#: src/network/callbacks.c:274
 msgid "The IP address of your WINS server"
 msgstr ""
 
-#: src/network/callbacks.c:176
+#: src/network/callbacks.c:277
 msgid "The DNS domain for your computer"
 msgstr ""
 
-#: src/network/callbacks.c:179
+#: src/network/callbacks.c:280
 msgid "A list of your DNS servers' IP addresses"
 msgstr ""
 
-#: src/network/callbacks.c:182
+#: src/network/callbacks.c:283
 msgid "A list of domains where hosts will be searched"
 msgstr ""
 
-#: src/network/callbacks.c:185
+#: src/network/callbacks.c:286
 msgid "The IP address of this host"
 msgstr ""
 
-#: src/network/callbacks.c:188
+#: src/network/callbacks.c:289
 msgid "Aliases for this host, one per line"
 msgstr ""
 
-#: src/network/callbacks.c:328
+#: src/network/callbacks.c:429
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr ""
 
-#: src/network/callbacks.c:330
+#: src/network/callbacks.c:431
 #, fuzzy, c-format
 msgid "Remove connection %s?"
 msgstr "Положення"
 
-#: src/network/callbacks.c:392
+#: src/network/callbacks.c:493
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
 msgstr ""
 
-#: src/network/callbacks.c:393
+#: src/network/callbacks.c:494
 #, fuzzy
 msgid "SMB support missing."
 msgstr "Параметри експорту SMB"
 
-#: src/network/callbacks.c:430
+#: src/network/callbacks.c:531
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications,\n"
@@ -2356,19 +2530,19 @@ msgid ""
 "Continue anyway?"
 msgstr ""
 
-#: src/network/callbacks.c:437
+#: src/network/callbacks.c:538
 msgid "Don't change host name"
 msgstr ""
 
-#: src/network/callbacks.c:470
+#: src/network/callbacks.c:571
 msgid "Active"
 msgstr ""
 
-#: src/network/callbacks.c:471
+#: src/network/callbacks.c:572
 msgid "Inactive"
 msgstr ""
 
-#: src/network/callbacks.c:488
+#: src/network/callbacks.c:589
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2405,11 +2579,11 @@ msgstr ""
 msgid "Unknown type"
 msgstr ""
 
-#: src/network/connection.c:521
+#: src/network/connection.c:533
 msgid "To activate"
 msgstr ""
 
-#: src/network/connection.c:522
+#: src/network/connection.c:534
 msgid "To inactivate"
 msgstr ""
 
@@ -2470,17 +2644,12 @@ msgstr ""
 msgid "New Shares Admin"
 msgstr "Адм╕н╕стрування сп╕льних ресурс╕в"
 
-#: src/shares/tables.c:84
+#: src/shares/tables.c:742
 #, fuzzy
-msgid "Pattern"
-msgstr "Шлях:"
+msgid "Mount"
+msgstr "Змонтован╕"
 
-#: src/shares/tables.c:85
-#, fuzzy
-msgid "Write"
-msgstr "Для запису"
-
-#: src/shares/tables.c:777
+#: src/shares/tables.c:742
 #, fuzzy
 msgid "Unmount"
 msgstr "Змонтован╕"
@@ -2557,17 +2726,23 @@ msgid ""
 "where the import will be mounted."
 msgstr ""
 
-#: src/time/main.c:384
+#: src/shares/validate.c:256
+msgid ""
+"You need to specify a client pattern, e.g.\n"
+"\"*.myschool.edu\" or \"192.168.0.1/24\"."
+msgstr ""
+
+#: src/time/main.c:371
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
 msgstr ""
 
-#: src/time/main.c:385
+#: src/time/main.c:372
 msgid "NTP support missing."
 msgstr ""
 
-#: src/time/main.c:619
+#: src/time/main.c:606
 #, fuzzy
 msgid "Time and Date Settings"
 msgstr "Параметри кл╕╓нта NFS"
@@ -2580,56 +2755,31 @@ msgstr ""
 msgid "Can't create new user. Too many users probably."
 msgstr ""
 
-#: src/users/e-table.c:44
-msgid "UID"
-msgstr ""
-
-#: src/users/e-table.c:45
-msgid "Home"
-msgstr ""
-
-#: src/users/e-table.c:46
-msgid "Shell"
-msgstr ""
-
-#: src/users/e-table.c:47 src/users/profile.c:63
-msgid "Comment"
-msgstr "Коментар"
-
-#: src/users/e-table.c:48
-#, fuzzy
-msgid "Group"
-msgstr "Групи"
-
-#: src/users/e-table.c:49
-msgid "GID"
-msgstr ""
-
 #: src/users/main.c:95
 msgid "Show All"
 msgstr ""
 
-#: src/users/main.c:122 src/users/main.c:127
+#: src/users/main.c:122
 #, fuzzy
 msgid "User name contains"
 msgstr "Параметри користувача"
 
-#: src/users/main.c:128
+#: src/users/main.c:123
 #, fuzzy
 msgid "User ID is"
 msgstr "Користувач:"
 
-#: src/users/main.c:129
+#: src/users/main.c:124
 #, fuzzy
 msgid "Group name contains"
 msgstr "Параметри групи"
 
-#: src/users/main.c:130
+#: src/users/main.c:125
 #, fuzzy
 msgid "User GID is"
 msgstr "Користувач:"
 
-#: src/users/main.c:316
+#: src/users/main.c:297
 msgid "Users and Groups"
 msgstr ""
 
@@ -2809,11 +2959,6 @@ msgstr "Створити..."
 msgid "Rename the selected location"
 msgstr "Установки для выбранного пользователя"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:104
-#, fuzzy
-msgid "_Delete..."
-msgstr "Стерти"
-
 #: archiver/location-manager-capplet/location-manager-dialog.c:105
 #, fuzzy
 msgid "Delete the selected location"
@@ -2861,11 +3006,6 @@ msgstr ""
 msgid "_Location"
 msgstr "Положення"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:134
-#, fuzzy
-msgid "_Settings"
-msgstr "Параметри"
-
 #: archiver/location-manager-capplet/location-manager-dialog.c:135
 #: interfaces/location-manager.glade.in.h:38
 msgid "_Help"
@@ -2902,6 +3042,11 @@ msgstr "Установки для выбранного пользователя"
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
 msgstr ""
+
+#: interfaces/internetsharing.glade.in.h:3
+#, fuzzy
+msgid "Enable"
+msgstr "Дозволений"
 
 #: interfaces/internetsharing.glade.in.h:4
 #, fuzzy
@@ -2987,6 +3132,11 @@ msgstr ""
 msgid "Helsinki Office"
 msgstr ""
 
+#: interfaces/location-manager.glade.in.h:17
+#, fuzzy
+msgid "Keep clock synchronized with selected servers"
+msgstr "Синхрон╕зувати годинники за такими серверами"
+
 #: interfaces/location-manager.glade.in.h:18
 msgid "Location"
 msgstr "Положення"
@@ -3041,6 +3191,16 @@ msgstr "Положення"
 #: interfaces/location-manager.glade.in.h:31
 msgid "Rollback-location-management-mockup"
 msgstr ""
+
+#: interfaces/location-manager.glade.in.h:32
+#, fuzzy
+msgid "Select servers..."
+msgstr "Сервери DNS"
+
+#: interfaces/location-manager.glade.in.h:33
+#, fuzzy
+msgid "Set time zone..."
+msgstr "Параметри..."
 
 #: interfaces/location-manager.glade.in.h:37
 msgid ""
@@ -3145,63 +3305,58 @@ msgstr "Параметри експорту SMB"
 msgid "Lpr based Printing"
 msgstr ""
 
-#: src/print/e-table.c:41
-msgid "Spool"
-msgstr ""
-
-#: src/print/e-table.c:44
+#: src/print/print.etspec.h:2
 #, fuzzy
 msgid "Paper"
 msgstr "Шлях:"
 
-#: src/print/e-table.c:45
+#: src/print/print.etspec.h:3
 #, fuzzy
 msgid "Resolution"
 msgstr "Розп╕знавання WINS"
 
-#: src/print/e-table.c:46
+#: src/print/print.etspec.h:4
 msgid "Share"
+msgstr ""
+
+#: src/print/print.etspec.h:5
+msgid "Spool"
 msgstr ""
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
 msgstr ""
 
-#: src/users/profile.c:62
-#, fuzzy
-msgid "Profile"
-msgstr "Нова група..."
-
-#: src/users/profile.c:515
+#: src/users/profile.c:509
 msgid "Choose the file"
 msgstr ""
 
-#: src/users/profile.c:657
+#: src/users/profile.c:651
 msgid "Profile Editor"
 msgstr ""
 
-#: src/users/profile.c:857
+#: src/users/profile.c:851
 #, fuzzy
 msgid "Profile with given name already exists."
 msgstr "Користувач %s вже ╕сну╓."
 
-#: src/users/profile.c:860
+#: src/users/profile.c:854
 #, fuzzy
 msgid "Profile name must not be empty."
 msgstr "Назву групи порожня."
 
 #. name
-#: src/users/profile.c:1005
+#: src/users/profile.c:999
 #, fuzzy
 msgid "Default profile"
 msgstr "Стерти"
 
-#: src/users/profile.c:1321
+#: src/users/profile.c:1315
 msgid "Can't delete Default"
 msgstr ""
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1447
+#: src/users/profile.c:1441
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -3225,6 +3380,41 @@ msgstr "╤дентиф╕кац╕я"
 msgid "Real name:"
 msgstr "Видалити"
 
+#: src/users/net_group.etspec.h:1 src/users/users.etspec.h:3
+#, fuzzy
+msgid "Group"
+msgstr "Групи"
+
+#: src/users/profiles.etspec.h:1 src/users/users.etspec.h:1
+msgid "Comment"
+msgstr "Коментар"
+
+#: src/users/group.etspec.h:1 src/users/users.etspec.h:2
+msgid "GID"
+msgstr ""
+
+#: src/users/users.etspec.h:4
+msgid "Home"
+msgstr ""
+
+#: src/users/users.etspec.h:5
+msgid "Shell"
+msgstr ""
+
+#: src/users/users.etspec.h:6
+msgid "UID"
+msgstr ""
+
+#: src/users/net_user.etspec.h:1
+#, fuzzy
+msgid "User"
+msgstr "Користувач╕"
+
+#: src/users/profiles.etspec.h:2
+#, fuzzy
+msgid "Profile"
+msgstr "Нова група..."
+
 #: src/shares/shares.desktop.in.in.h:1
 msgid "Directory import & export"
 msgstr ""
@@ -3233,6 +3423,23 @@ msgstr ""
 #, fuzzy
 msgid "Shares"
 msgstr "Сервери DNS"
+
+#: src/shares/export_clients.etspec.h:1
+#, fuzzy
+msgid "Pattern"
+msgstr "Шлях:"
+
+#: src/shares/export_clients.etspec.h:2
+#, fuzzy
+msgid "Write"
+msgstr "Для запису"
+
+#, fuzzy
+#~ msgid "Delete..."
+#~ msgstr "Стерти"
+
+#~ msgid "Remove <-"
+#~ msgstr "Видалити <-"
 
 #, fuzzy
 #~ msgid "label57"

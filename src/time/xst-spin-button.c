@@ -523,8 +523,8 @@ xst_spin_button_size_allocate (GtkWidget     *widget,
 static GtkShadowType
 xst_spin_button_get_shadow_type (XstSpinButton *spin_button)
 {
-  GtkWidget *widget = GTK_WIDGET (spin_button);
 #if 0	
+  GtkWidget *widget = GTK_WIDGET (spin_button);
   GtkShadowType shadow_type =
     gtk_style_get_prop_experimental (widget->style,
 				     "XstSpinButton::shadow_type", -1);

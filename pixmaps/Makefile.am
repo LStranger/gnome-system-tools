@@ -19,12 +19,12 @@ pixmaps_DATA = \
 	init-anim-1.png          \
 	init-anim-2.png          \
 	init-anim-3.png          \
-	internet-share.png		\
+	internetsharing.png		\
 	memory.png               \
 	nameresolution.png       \
 	nameresolution_alias.png \
 	nameresolution_id.png    \
-	networking.png           \
+	network.png              \
 	passwd.png               \
 	print.png                \
 	reading.png              \

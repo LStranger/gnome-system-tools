@@ -1,11 +1,23 @@
+##
 ## Process this file with automake to produce Makefile.in
+##
+## Please don't modify this file unless you know what you are doing
+## Please keep the Makefile.am from all the tools in sync
+##
 
-SUBDIRS = e-search-bar
+@XML_I18N_MERGE_DESKTOP_RULE@
+@XST_TOOL_DESKTOP_IN_RULE@
 
-INCLUDES = $(XST_TOOL_CFLAGS)
-
+toolname = users
 bin_PROGRAMS = users-admin
 
+SUBDIRS = e-search-bar
+CPPFLAGS =
+INCLUDES = $(XST_TOOL_CFLAGS)
+CLEANFILES = $(XST_TOOL_CLEANFILES)
+EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
+
+users_admin_LDADD = $(XST_TOOL_LIBS) ./e-search-bar/libesearchbar.a
 users_admin_SOURCES = \
 	main.c \
 	callbacks.c callbacks.h \
@@ -20,69 +32,9 @@ users_admin_SOURCES = \
 	user-druid.c user-druid.h \
 	user-account-editor.c user-account-editor.h
 
-users_admin_CFLAGS = 
-
-users_admin_LDADD = $(XST_TOOL_LIBS) ./e-search-bar/libesearchbar.a
-
-#desktop = users.desktop
-#security = users.security
-#EXTRA_DIST = $(desktop).in users.pam $(security).in
-#CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
-
-toolname = users
-desktop  = $(toolname).desktop
-security = $(toolname).security
-
-etspecs = \
-	group.etspec		\
-	net_group.etspec	\
-	users.etspec		\
-	net_user.etspec		\
-	profiles.etspec
-
+toolpixmaps =
+etspecs = 
 etspecs_DATA = $(etspecs)
+desktop = $(toolname).desktop
 
-CLEANFILES = \
-	$(desktop) \
-	$(desktop).menu \
-	$(desktop).cc \
-	$(security)
-
-EXTRA_DIST = \
-	$(toolname).pam	\
-	$(security)		\
-	$(security).in		\
-	$(desktop).in 		\
-	$(desktop).cc		\
-	$(desktop).menu		\
-	$(etspecs)
-
-
-$(desktop): %.desktop: %.desktop.in
-	sed 's#Icon=.*#Icon='$(pixmapsdir)'/users.png#' < $< > $@
-
-$(desktop).menu: $(desktop)
-	sed 's#Exec=.*#Exec=users-admin#' < $< > $@
-
-$(desktop).cc: $(desktop)
-	sed 's#Exec=.*#Exec=users-admin#' < $< > $@
-
-#	sed 's#Exec=.*#Exec=root-manager users-admin#' < $< > $@
-
-$(security): $(security).in
-	sed 's#PROGRAM=.*#PROGRAM='$(DESTDIR)$(sbindir)'/users-admin#' < $< > $@
-
-all-local: $(desktop).menu $(desktop).cc $(security)
-
-install-data-local: $(desktop).menu $(desktop).cc
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
-##	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/System
-	$(INSTALL_DATA) users.desktop.menu $(DESTDIR)$(datadir)/gnome/apps/Settings/System/users.desktop
-##	$(INSTALL_DATA) $(srcdir)/users.desktop.cc $(DESTDIR)$(datadir)/control-center/System/users.desktop
-##	$(mkinstalldirs) $(DESTDIR)$(bindir)
-##	rm -f $(DESTDIR)$(bindir)/users-admin
-##	ln -s consolehelper $(DESTDIR)$(bindir)/users-admin
-##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/pam.d
-##	$(INSTALL_DATA) $(srcdir)/users.pam $(DESTDIR)$(sysconfdir)/pam.d/users-admin
-##	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/security/console.apps
-##	$(INSTALL_DATA) $(srcdir)/$(security) $(DESTDIR)$(sysconfdir)/security/console.apps/users-admin
+all-local: $(desktop)

@@ -53,9 +53,10 @@ gchar *s = N_("Activate when the computer _starts");
 gchar *s = N_("General");
 gchar *s = N_("How the IP address for this connection is determined");
 gchar *s = N_("_Configuration:");
-gchar *s = N_("Manual");
-gchar *s = N_("DHCP");
-gchar *s = N_("BOOTP");
+gchar *s = N_("Manual\n"
+              "DHCP\n"
+              "BOOTP\n"
+              "");
 gchar *s = N_("_Update DNS when this connection becomes active");
 gchar *s = N_("_IP address:");
 gchar *s = N_("_Subnet mask:");

@@ -152,13 +152,39 @@ dnl =====================================================
 XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
 XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
 
-XST_TOOL_LIBS="\$(top_srcdir)/src/common/libsetuptool.a $XST_LIBS"
+XST_TOOL_LIBS="\$(top_builddir)/src/common/libsetuptool.a $XST_LIBS"
 XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
+
+XST_TOOL_CLEANFILES="\$(desktop) $(desktop).in"
+XST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(desktop).in \$(desktop) \$(etspecs)"
+
+AC_DEFUN(AC_PROG_XST_TOOLS,
+[
+XST_TOOL_DESKTOP_IN_RULE='desktop = $(toolname).desktop\
+$(desktop).in: \%.desktop.in: \%.desktop.in.in\
+	sed s#Icon=.\*#Icon=$(pixmapsdir)/$(toolname).png# < $< \> $(toolname).desktop.in\
+\
+install-data-local:\
+	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System\
+	$(INSTALL_DATA) $(srcdir)/$(desktop) $(DESTDIR)$(datadir)/gnome/apps/Settings/System/$(desktop)\
+install-data-am: install-etspecsDATA install-data-local'
+	
+AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
+s%@XST_TOOL_DESKTOP_IN_RULE@%[$]XST_TOOL_DESKTOP_IN_RULE%g
+AC_DIVERT_POP()dnl
+# Redirect the config.log output again, so that the ltconfig log is not
+# clobbered by the next message.
+exec 5>>./config.log
+])
+AC_PROG_XST_TOOLS
+
 
 AC_SUBST(XST_LIBS)
 AC_SUBST(XST_CFLAGS)
 AC_SUBST(XST_TOOL_LIBS)
 AC_SUBST(XST_TOOL_CFLAGS)
+AC_SUBST(XST_TOOL_CLEANFILES)
+AC_SUBST(XST_TOOL_EXTRA_DIST)
 
 dnl ==================================
 dnl END: XST_LIBS & XST_FLAGS
