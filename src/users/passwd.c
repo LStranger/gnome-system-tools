@@ -206,13 +206,13 @@ passwd_check (gchar *pwd1, gchar *pwd2, gboolean check_quality)
 	return NULL;
 }	
 
-gchar *
+void
 passwd_set (xmlNodePtr node, const gchar *pwd)
 {
 	gchar salt[9];
 	gchar *password, *buf;
 
-	g_return_val_if_fail (node != NULL, NULL);
+	g_return_if_fail (node != NULL);
 
 	if (!pwd)
 		password = passwd_get_random (); /* TODO: memory leak, free it! */
@@ -225,6 +225,4 @@ passwd_set (xmlNodePtr node, const gchar *pwd)
 		buf = g_strdup (crypt (password, rand_str (salt, 2)));
 
 	xst_xml_set_child_content (node, "password", buf);
-
-	return password;
 }

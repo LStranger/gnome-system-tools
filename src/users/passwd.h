@@ -30,6 +30,6 @@
 
 gchar *passwd_get_random (void);
 gchar *passwd_check      (gchar *pwd1, gchar *pwd2, gboolean check_quality);
-gchar *passwd_set        (xmlNodePtr node, const gchar *pwd);
+void   passwd_set        (xmlNodePtr node, const gchar *pwd);
 
 #endif /* PASSWD_H */
