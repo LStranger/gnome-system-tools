@@ -41,7 +41,7 @@ if test x"$HAVE_LIBCRACK" = xyes ; then
   AC_MSG_ERROR(cracklib crack.h header file not found.)])
 fi
 
-XST_CRACK_LIB_LOCATION="/usr/lib/cracklib_dict"
+XST_CRACK_LIB_LOCATION="/usr/lib/"
 AC_ARG_WITH(cracklib-dict,
 [  --with-cracklib-dict[=DIR]       specify a cracklib dir ],[
   if test "$withval" != "no"; then
