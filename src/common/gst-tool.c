@@ -32,7 +32,6 @@
 #include "gst-auth.h"
 #include "gst-xml.h"
 #include "gst-marshal.h"
-#include "gst-hig-dialog.h"
 
 #ifdef GST_HAVE_ARCHIVER
 #  include <bonobo.h>
@@ -1014,13 +1013,13 @@ gst_tool_load_try (GstTool *tool)
 	if (!gst_tool_load (tool)) {
 		GtkWidget *d;
 
-		d = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
-					GTK_DIALOG_MODAL,
-					GST_HIG_MESSAGE_ERROR,
-					_("The configuration could not be loaded"),
-					_("There was an error running the backend script"),
-					GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-					NULL);
+		d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+					    GTK_DIALOG_MODAL,
+					    GTK_MESSAGE_ERROR,
+					    GTK_BUTTONS_CLOSE,
+					    _("The configuration could not be loaded"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d),
+							  _("There was an error running the backend script"));
 		gtk_dialog_run (GTK_DIALOG (d));
 		gtk_widget_destroy (d);
 		
@@ -1742,14 +1741,13 @@ gst_tool_show_help (GstTool *tool, gchar *section)
 	if (error) {
 		GtkWidget *dialog;
 
-		dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
-					     GTK_DIALOG_MODAL,
-					     GTK_MESSAGE_ERROR,
-					     _("Could not display help"),
-					     error->message,
-					     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-					     NULL);
-
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_ERROR,
+						 GTK_BUTTONS_CLOSE,
+						 _("Could not display help"));
+		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+							  error->message);
 		gtk_dialog_run (GTK_DIALOG (dialog));
 		gtk_widget_destroy (dialog);
 		g_error_free (error);

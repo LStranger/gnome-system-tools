@@ -49,7 +49,6 @@
 
 #include "gst-auth.h"
 #include "gst-tool.h"
-#include "gst-hig-dialog.h"
 
 #define GST_AUTH_RESPONSE_NP 1
 
@@ -61,13 +60,13 @@ gst_auth_display_error_message (GstTool *tool, gchar *primary_text, gchar *secon
 {
 	GtkWidget *error_dialog;
 
-	error_dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
-					   GTK_DIALOG_MODAL,
-					   GST_HIG_MESSAGE_ERROR,
-					   primary_text,
-					   secondary_text,
-					   GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-					   NULL);
+	error_dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+					       GTK_DIALOG_MODAL,
+					       GTK_MESSAGE_ERROR,
+					       GTK_BUTTONS_CLOSE,
+					       primary_text);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (error_dialog),
+						  secondary_text);
 	gtk_dialog_run (GTK_DIALOG (error_dialog));
 	gtk_widget_destroy (error_dialog);
 }
