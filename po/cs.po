@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-14 12:01+0200\n"
-"PO-Revision-Date: 2003-09-14 20:13+0200\n"
+"POT-Creation-Date: 2003-09-27 12:14+0200\n"
+"PO-Revision-Date: 2003-09-27 15:48+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -368,7 +368,7 @@ msgstr "Složitost"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Zadejte heslo - Systémové nástroje GNOME"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1636
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
@@ -1457,7 +1457,7 @@ msgstr ""
 "Uživatelské profily lze použít jako šablony pro usnadnění tvorby nových "
 "uživatelů. "
 
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:75
 msgid "Users"
 msgstr "Uživatelé"
 
@@ -1613,8 +1613,8 @@ msgid "Boot"
 msgstr "Zavedení"
 
 #: src/boot/boot.desktop.in.in.h:2
-msgid "Boot Manager"
-msgstr "Správce zavádění"
+msgid "Configure the system boot process"
+msgstr "Nastavit proces zavádění systému"
 
 #: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
@@ -1709,7 +1709,7 @@ msgstr " Více _voleb"
 msgid " Fewer _Options"
 msgstr " Méně _voleb"
 
-#: src/common/gst-dialog.c:476
+#: src/common/gst-dialog.c:454
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1717,21 +1717,21 @@ msgstr ""
 "Jsou zde změny, které nebyly použity.\n"
 "Chcete je použít nyní?"
 
-#: src/common/gst-dialog.c:592
+#: src/common/gst-dialog.c:552
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Chyba při připojení signálu `%s' v prvku `%s'"
 
-#: src/common/gst-tool.c:944
+#: src/common/gst-tool.c:853
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Vynechává se direktiva %s..."
 
-#: src/common/gst-tool.c:1094
+#: src/common/gst-tool.c:993
 msgid "Skipping actual save..."
 msgstr "Vynechává se skutečné uložení..."
 
-#: src/common/gst-tool.c:1156
+#: src/common/gst-tool.c:1055
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1739,12 +1739,12 @@ msgstr ""
 "Nastala chyba při spuštění podpůrného skriptu\n"
 "a nastavení nebylo možné načíst."
 
-#: src/common/gst-tool.c:1522
+#: src/common/gst-tool.c:1359
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Systémové nástroje GNOME"
 
-#: src/common/gst-tool.c:1700
+#: src/common/gst-tool.c:1537
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1771,11 +1771,11 @@ msgstr ""
 "--\n"
 "Váš tým aplikace Systémové nástroje GNOME"
 
-#: src/common/gst-tool.c:1724
+#: src/common/gst-tool.c:1561
 msgid "Warning"
 msgstr "Varování"
 
-#: src/common/gst-tool.c:1733
+#: src/common/gst-tool.c:1570
 msgid "Don't show me this again"
 msgstr "Nezobrazovat příště"
 
@@ -2114,8 +2114,8 @@ msgid "Connection name (Step 2 of 2)"
 msgstr "Název připojení (krok 2 ze 2)"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Nastavení síťového adaptéru."
+msgid "Configure network devices and connections"
+msgstr "Nastavit síťové zařízení a spojení"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
@@ -2195,26 +2195,26 @@ msgid "Services Settings"
 msgstr "Nastavení služeb"
 
 #: src/services/services.desktop.in.in.h:1
-msgid "Services"
-msgstr "Služby"
+msgid "Configure which services will be run when the system starts"
+msgstr "Nastavit, které služby budou spuštěny při startu systému"
 
 #: src/services/services.desktop.in.in.h:2
-msgid "Services Manager"
-msgstr "Správce služeb"
+msgid "Services"
+msgstr "Služby"
 
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Služba"
 
-#: src/time/main.c:310
+#: src/time/main.c:303
 msgid "Time Zone - GNOME System Tools"
 msgstr "Časová zóna - Systémové nástroje GNOME"
 
-#: src/time/main.c:428
+#: src/time/main.c:417
 msgid "Time Servers - GNOME System Tools"
 msgstr "Časové servery - Systémové nástroje GNOME"
 
-#: src/time/main.c:500
+#: src/time/main.c:495
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2222,17 +2222,17 @@ msgstr ""
 "Nemáte spuštěnou podporu NTP. Pro povolení synchronizace\n"
 "se serverem v systému prosím spusťte podporu NTP."
 
-#: src/time/main.c:789
+#: src/time/main.c:784
 msgid "Time and Date Settings"
 msgstr "Nastavení data a času"
 
 #: src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Čas"
+msgid "Change system time, date, and timezone"
+msgstr "Změnit systémový čas, datum a časovou zónu."
 
 #: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
-msgstr "Čas, datum a časová zóna."
+msgid "Time and Date"
+msgstr "Datum a čas"
 
 #: src/users/callbacks.c:598
 msgid "Create New profile"
@@ -2309,7 +2309,7 @@ msgstr "Název skupiny obsahuje"
 msgid "User GID is"
 msgstr "GID uživatele je"
 
-#: src/users/main.c:321
+#: src/users/main.c:321 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Uživatelé a skupiny"
 
@@ -2483,9 +2483,24 @@ msgstr "Shell"
 msgid "Comments"
 msgstr "Komentář"
 
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Uživatelé a skupiny."
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Přidat nebo odstranit uživatele a skupiny"
+
+#~ msgid "Boot Manager"
+#~ msgstr "Správce zavádění"
+
+#~ msgid "Network adapter setup."
+#~ msgstr "Nastavení síťového adaptéru."
+
+#~ msgid "Services Manager"
+#~ msgstr "Správce služeb"
+
+#~ msgid "Time"
+#~ msgstr "Čas"
+
+#~ msgid "Users and groups."
+#~ msgstr "Uživatelé a skupiny."
 
 #~ msgid "Default runlevel"
 #~ msgstr "Implicitní úroveň běhu"
@@ -2513,50 +2528,17 @@ msgstr "Uživatelé a skupiny."
 #~ msgid "E_nabled"
 #~ msgstr "Povol_en"
 
-#~ msgid "Host Info : "
-#~ msgstr "Informace o počítači: "
-
-#~ msgid "Hosts :"
-#~ msgstr "Počítače:"
-
 #~ msgid "Hosts Editor"
 #~ msgstr "Editor počítačů"
 
 #~ msgid "Ip Address"
 #~ msgstr "IP adresa"
 
-#~ msgid "Range _End :"
-#~ msgstr "Kon_ec rozsahu:"
-
-#~ msgid "Range _Start :"
-#~ msgstr "Počátek roz_sahu:"
-
-#~ msgid "Router :"
-#~ msgstr "Router :"
-
-#~ msgid "Subnet _Mask :"
-#~ msgstr "_Maska podsítě:"
-
 #~ msgid "_Add"
 #~ msgstr "Přid_at"
 
-#~ msgid "_Comment :"
-#~ msgstr "K_omentář:"
-
-#~ msgid "_Domain :"
-#~ msgstr "_Doména:"
-
 #~ msgid "_Edit Hosts..."
 #~ msgstr "_Upravit počítače..."
-
-#~ msgid "_Hostname :"
-#~ msgstr "_Název počítače:"
-
-#~ msgid "_IP address :"
-#~ msgstr "_IP adresa:"
-
-#~ msgid "_MAC address :"
-#~ msgstr "_MAC adresa:"
 
 #~ msgid "host"
 #~ msgstr "počítač"
@@ -2635,9 +2617,6 @@ msgstr "Uživatelé a skupiny."
 
 #~ msgid "Left"
 #~ msgstr "Vlevo"
-
-#~ msgid "Model:"
-#~ msgstr "Model:"
 
 #~ msgid "Monitor information"
 #~ msgstr "Informace o monitoru"
@@ -2794,9 +2773,6 @@ msgstr "Uživatelé a skupiny."
 
 #~ msgid "Disable"
 #~ msgstr "Vypnout"
-
-#~ msgid "Enable :"
-#~ msgstr "Povolit:"
 
 #~ msgid "End of Range"
 #~ msgstr "Konec rozsahu"
@@ -3179,9 +3155,6 @@ msgstr "Uživatelé a skupiny."
 #~ msgid "E_xplicitly Eject Last Page"
 #~ msgstr "E_xplicitně vysunout poslední stránku"
 
-#~ msgid "High Color"
-#~ msgstr "High Color"
-
 #~ msgid "Name of the printer."
 #~ msgstr "Název tiskárny."
 
@@ -3348,9 +3321,6 @@ msgstr "Uživatelé a skupiny."
 
 #~ msgid "View Logs..."
 #~ msgstr "Zobrazit záznamy..."
-
-#~ msgid "days ago"
-#~ msgstr "dní"
 
 #~ msgid " Edit clients... "
 #~ msgstr " Upravit klienty... "
