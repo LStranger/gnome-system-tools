@@ -47,9 +47,16 @@ typedef enum {
 	PARTITION_TYPE_SWAP,
 	PARTITION_TYPE_FREE,
 	PARTITION_TYPE_UNKNOWN,
+	PARTITION_TYPE_NONE,
 	
 	PARTITION_TYPE_NUM
 } GstPartitionTypeFs;
+
+typedef struct {
+	gchar *fs_name;
+	gchar *fs_hr_name;
+	gchar *fs_format_command;
+} GstPartitionTypeFsInfo;
 
 struct _GstDisksPartition {
         GObject               parent;
@@ -65,9 +72,14 @@ GType              gst_disks_partition_get_type (void);
 GstDisksPartition* gst_disks_partition_new      (void);
 
 void                      gst_disks_partition_setup_properties_widget   (GstDisksPartition *part);
+void                      gst_disks_partition_format                    (GstDisksPartition *part,
+									 GstPartitionTypeFs fs_type,
+									 const gchar *point);
 void                      gst_disks_partition_browse                    (GstDisksPartition *part);
 gchar                    *gst_disks_partition_get_human_readable_typefs (GstPartitionTypeFs type);
 GstPartitionTypeFs        gst_disks_partition_get_typefs_from_name      (const gchar *name);
+GstPartitionTypeFs        gst_disks_partition_get_typefs_from_hr_name   (const gchar *name);
 gchar                    *gst_disks_partition_get_typefs                (GstPartitionTypeFs type);
+GstPartitionTypeFsInfo   *gst_disks_partition_get_type_fs_info_table    ();
 
 #endif /* __GST_DISKS_PARTITION_H__  */

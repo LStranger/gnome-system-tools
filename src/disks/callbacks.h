@@ -31,7 +31,8 @@ void gst_on_storage_list_selection_change   (GtkTreeSelection *selection, gpoint
 gboolean gst_on_storage_list_button_press   (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
 void gst_on_partition_list_selection_change (GtkTreeSelection *selection, gpointer gdata);
 void gst_on_point_entry_changed             (GtkWidget *entry, gpointer gdata);
-void gst_on_mount_button_clicked            (GtkWidget *toggle, gpointer gdata);
+void gst_on_format_button_clicked           (GtkWidget *button, gpointer gdata);
+void gst_on_mount_button_clicked            (GtkWidget *button, gpointer gdata);
 void gst_on_browse_button_clicked           (GtkWidget *button, gpointer gdata);
 void gst_on_play_button_clicked             (GtkWidget *button, gpointer gdata);
 gboolean gst_on_partition_list_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);

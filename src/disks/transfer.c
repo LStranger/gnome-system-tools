@@ -421,6 +421,66 @@ gst_disks_mount_partition (GstDisksPartition *part)
 	return;
 }
 
+gboolean
+gst_disks_format_partition (GstDisksPartition *part, GstPartitionTypeFs fs_type)
+{
+	xmlDoc *xml;
+	xmlNodePtr root;
+	gchar *device, *typefs, *command;
+	gchar *buf;
+	GstPartitionTypeFsInfo *table;
+
+	g_return_val_if_fail (GST_IS_DISKS_PARTITION (part), FALSE);
+
+	g_object_get (G_OBJECT (part), "device", &device, NULL);
+
+	table = gst_disks_partition_get_type_fs_info_table ();
+	typefs = g_strdup (table[fs_type].fs_name);
+	command = g_strdup (table[fs_type].fs_format_command);
+	if (!command) {
+		/* File system not possible to format */
+		/* TODO: manage error */
+		return FALSE;
+	}
+
+	xml = gst_tool_run_get_directive (tool, NULL, "format",
+					  command, device, typefs,
+					  " ", /* TODO: format options */
+					  NULL);
+	
+	if (command) g_free (command);
+	if (typefs)  g_free (typefs);
+
+	if (!xml) {
+		/* TODO: manage error */
+		return FALSE;
+	}
+
+	root = gst_xml_doc_get_root (xml);
+	if (root) {
+		buf = gst_xml_get_child_content (root, "type");
+		if (buf) {
+			g_object_set (G_OBJECT (part), "type",
+				      gst_disks_partition_get_typefs_from_name (buf),
+				      NULL);
+			g_free (buf);
+		}
+
+		buf = gst_xml_get_child_content (root, "error");
+		if (buf) {
+			g_warning ("%s", buf); /* FIXME: manage error */
+			g_free (buf);
+			gst_xml_doc_destroy (xml);
+			
+			return FALSE;
+		}
+	}
+	
+	gst_xml_doc_destroy (xml);
+
+	return TRUE;
+}
+
 void
 gst_disks_mount_cdrom_disc_data (GstCdromDiscData *disc_data)
 {

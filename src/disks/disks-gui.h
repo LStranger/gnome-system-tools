@@ -54,14 +54,15 @@ enum {
 	PARTITION_LIST_LAST
 };
 
-gchar *        gst_storage_get_human_readable_size (const gulong size);
-GdkPixbuf *    gst_storage_get_icon            (const gchar *icon_name);
-gfloat         gst_storage_get_float_size      (const gulong size);
+gchar *        gst_storage_get_human_readable_size      (const gulong size);
+GdkPixbuf *    gst_storage_get_icon                     (const gchar *icon_name);
+gfloat         gst_storage_get_float_size               (const gulong size);
+gboolean       gst_disks_gui_get_mount_point_is_busy    (const gchar *point);
 
 void           gst_disks_gui_setup                      ();
 void           gst_disks_gui_set_device_speed           (GstDisksStorage *storage);
-/*void           gst_disks_gui_storage_list_reload        (GtkWidget *widget, gpointer gdata);*/
 void           gst_disks_gui_setup_partition_list       (GtkWidget *treeview, GList *partitions);
+void           gst_disks_gui_setup_format_dialog        (GstDisksPartition *part);
 void           gst_disks_gui_setup_storage_properties   (GstDisksStorage *storage);
 void           gst_disks_gui_setup_disk_properties      (GstDisksStorageDisk *disk);
 void           gst_disks_gui_setup_partition_properties (GstDisksPartition *part);

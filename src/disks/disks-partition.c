@@ -65,6 +65,20 @@ struct _GstDisksPartitionPriv
 	gpointer  disk;
 };
 
+static GstPartitionTypeFsInfo partition_type_fs_info[] = {
+	{ "ext2",     "Extended 2",                 "mkfs.ext2" },
+	{ "ext3",     "Extended 3",                 "mkfs.ext3" },
+	{ "reiserfs", "ReiserFS",                   "mkfs.reiserfs" },
+	{ "xfs",      "XFS",                        "mkfs.xfs" },
+	{ "jfs",      "JFS",                        "mkfs.jfs" },
+	{ "vfat",     "Windows Virtual FAT (vfat)", "mkfs.vfat" },
+	{ "ntfs",     "Windows NTFS",               NULL },
+	{ "swap",     "Memory Swap",                "mkswap" },
+	{ "empty",    "Free Space",                 NULL },
+	{ "auto",     "Unknown",                    NULL },
+	{ "none",     "Unformatted",                NULL },
+};
+
 static void partition_init       (GstDisksPartition      *storage);
 static void partition_class_init (GstDisksPartitionClass *klass);
 static void partition_finalize   (GObject                       *object);
@@ -96,6 +110,7 @@ gst_partition_typefs_get_type (void)
 		{ PARTITION_TYPE_SWAP,     "7", NULL },
 		{ PARTITION_TYPE_FREE,     "8", NULL },
 		{ PARTITION_TYPE_UNKNOWN,  "9", NULL },
+		{ PARTITION_TYPE_NONE,    "10", NULL },
 	};
 	if (!partition_typefs_type) {
 		partition_typefs_type = g_enum_register_static ("GstPartitionTypeFs", partition_typefs);
@@ -406,6 +421,16 @@ partition_mount (GstDisksMountable *mountable)
 }
 
 void
+gst_disks_partition_format (GstDisksPartition *part, GstPartitionTypeFs fs_type, const gchar *point)
+{
+	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
+	
+	if (gst_disks_format_partition (part, fs_type)) {
+		g_object_set (G_OBJECT (part), "point", point, NULL);
+	}
+}
+
+void
 gst_disks_partition_browse (GstDisksPartition *part)
 {
 	gchar *point, *browser;
@@ -428,18 +453,10 @@ gst_disks_partition_browse (GstDisksPartition *part)
 gchar *
 gst_disks_partition_get_human_readable_typefs (GstPartitionTypeFs type)
 {
-	gchar *filesystems[] = {
-		"Extended 2",
-		"Extended 3",
-		"ReiserFS", "XFS", "JFS",
-		"Windows Virtual FAT (vfat)",
-		"Windows NTFS",
-		"Memory Swap",
-		"Free Space",
-		"Unknown"
-	};
-
-	return g_strdup (filesystems[type]);
+	if (type < PARTITION_TYPE_NUM)
+		return (g_strdup (partition_type_fs_info[type].fs_hr_name));
+	else
+		return NULL;
 }
 
 GstPartitionTypeFs
@@ -464,6 +481,35 @@ gst_disks_partition_get_typefs_from_name (const gchar *name)
 		return PARTITION_TYPE_SWAP;
 	else if (g_ascii_strcasecmp (name, "empty") == 0)
 		return PARTITION_TYPE_FREE;
+	else if (g_ascii_strcasecmp (name, "none") == 0)
+		return PARTITION_TYPE_NONE;
+	else
+		return PARTITION_TYPE_UNKNOWN;
+}
+
+GstPartitionTypeFs
+gst_disks_partition_get_typefs_from_hr_name (const gchar *name)
+{
+	if (g_ascii_strcasecmp (name, "Extended 2") == 0)
+		return PARTITION_TYPE_EXT2;
+	else if (g_ascii_strcasecmp (name, "Extended 3") == 0)
+		return PARTITION_TYPE_EXT3;
+	else if (g_ascii_strcasecmp (name, "ReiserFS") == 0)
+		return PARTITION_TYPE_REISERFS;
+	else if (g_ascii_strcasecmp (name, "XFS") == 0)
+		return PARTITION_TYPE_XFS;
+	else if (g_ascii_strcasecmp (name, "JFS") == 0)
+		return PARTITION_TYPE_JFS;
+	else if (g_ascii_strcasecmp (name, "Windows Virtual FAT (vfat)") == 0)
+		return PARTITION_TYPE_VFAT;
+	else if (g_ascii_strcasecmp (name, "Windows NTFS") == 0)
+		return PARTITION_TYPE_NTFS;
+	else if (g_ascii_strcasecmp (name, "Memory Swap") == 0)
+		return PARTITION_TYPE_SWAP;
+	else if (g_ascii_strcasecmp (name, "Free Space") == 0)
+		return PARTITION_TYPE_FREE;
+	else if (g_ascii_strcasecmp (name, "Unformatted") == 0)
+		return PARTITION_TYPE_NONE;
 	else
 		return PARTITION_TYPE_UNKNOWN;
 }
@@ -471,28 +517,16 @@ gst_disks_partition_get_typefs_from_name (const gchar *name)
 gchar *
 gst_disks_partition_get_typefs (GstPartitionTypeFs type)
 {
-	switch (type) {
-	case PARTITION_TYPE_EXT2:
-		return g_strdup ("ext2");
-	case PARTITION_TYPE_EXT3:
-		return g_strdup ("ext3");
-	case PARTITION_TYPE_REISERFS:
-		return g_strdup ("reiserfs");
-	case PARTITION_TYPE_XFS:
-		return g_strdup ("xfs");
-	case PARTITION_TYPE_JFS:
-		return g_strdup ("jfs");
-	case PARTITION_TYPE_VFAT:
-		return g_strdup ("vfat");
-	case PARTITION_TYPE_NTFS:
-		return g_strdup ("ntfs");
-	case PARTITION_TYPE_FREE:
-		return g_strdup ("empty");
-	case  PARTITION_TYPE_UNKNOWN:
-		return g_strdup ("auto");
-	default:
-		/* Partition type not mountable */
+	if (type < PARTITION_TYPE_NUM)
+		return (g_strdup (partition_type_fs_info[type].fs_name));
+	else
 		return NULL;
-	}
 }
+
+GstPartitionTypeFsInfo *
+gst_disks_partition_get_type_fs_info_table ()
+{
+	return partition_type_fs_info;
+}
+
 		

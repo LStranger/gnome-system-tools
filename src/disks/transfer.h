@@ -36,6 +36,7 @@ void transfer_xml_to_gui (GstTool *tool, gpointer data);
 void transfer_gui_to_xml (GstTool *tool, gpointer data);
 
 void          gst_disks_mount_partition         (GstDisksPartition *part);
+gboolean      gst_disks_format_partition        (GstDisksPartition *part, GstPartitionTypeFs fs_type);
 void          gst_disks_mount_cdrom_disc_data   (GstCdromDiscData *disc_data);
 GstCdromDisc *gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom);
 void          gst_disks_get_disk_info_from_xml  (GstDisksStorageDisk *disk);
