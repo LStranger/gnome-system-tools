@@ -176,65 +176,105 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 #endif	
 }
 
-static gboolean
-is_ip_text_ok  (const gchar *text)
+/* gets the value of a numeric IP address section */
+static gint
+get_address_section_value (const gchar *text, gint start, gint len)
 {
-	gint i, dst, numdots;
+	gchar *c = (gchar *) &text[start];
+	gchar *str = g_strndup (c, len);
+	gint value = g_strtod (str, NULL);
+	gint i;
+
+        for (i = 0; i < len; i++) {
+		if ((str[i] < '0') || (str [i] > '9')) {
+			g_free (str);
+			return 256;
+		}
+	}
+
+	g_free (str);
+	return value;
+}
+
+/* I don't expect this function to be understood, but
+ * it works with IPv4, IPv6 and IPv4 embedded in IPv6
+ */
+static gboolean
+is_ip_text_ok (const gchar *text)
+{
+	gint i, len, numsep, section_val;
 	IpVersion ver;
+	gchar c;
+	gboolean has_double_colon, segment_has_alpha;
 
 	ver = IP_UNK;
-	dst = numdots = 0;
+	len = 0;
+	numsep = 0;
+	has_double_colon = FALSE;
+	segment_has_alpha = FALSE;
 
 	for (i = 0; text[i]; i++) {
-		/* IPv6 cases */
-		if (text[i] >= 'a' && text[i] <= 'f') {
-			if (ver == IP_V4)
-				return FALSE;
-			dst ++;
-			if (dst > 2)
-				return FALSE;
-			ver = IP_V6;
-			continue;
-		}
+		c = text[i];
+		
+		if ((c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F')) {
+			len++;
 
-		if (text[i] == ':') {
-			if (ver == IP_V4)
+			if ((ver == IP_V4) ||
+			    ((ver == IP_V6) && (i == 1) && (text[0] == ':')) ||
+			    ((ver == IP_V6) && (len > 4)))
 				return FALSE;
-			dst = 0;
-			ver = IP_V6;
-			continue;
-		}
 
-		/* IPv4 cases */
-		if (text[i] == '.') {
-			if (ver == IP_V6)
-				return FALSE;
-			if (i == 0 || text[i - 1] == '.')
-				return FALSE;
-			numdots ++;
-			if (numdots > 3)
-				return FALSE;
-			dst = 0;
-			ver = IP_V4;
-			continue;
+			if (ver == IP_UNK)
+				ver = IP_V6;
+			segment_has_alpha = TRUE;
 		}
+		else if (c >='0' && c <='9') {
+			len++;
+			section_val = get_address_section_value (text, i - len + 1, len);
 
-		if ((text[i] >= '0') && (text[i] <= '9')) {
-			dst ++;
-			if (dst == 3) {
-				if (ver == IP_V6)
-					return FALSE;
+			if (((ver == IP_V4) && ((len > 3) || (section_val > 255))) ||
+			    ((ver == IP_V6) && (i == 1) && (text[0] == ':')) ||
+			    ((ver == IP_V6) && (len > 4)) ||
+			    ((ver == IP_UNK) && (len > 4)))
+				return FALSE;
+
+			if ((ver == IP_UNK) && ((len == 4) || (section_val > 255)))
+				ver = IP_V6;
+		}
+		else if (c == '.') {
+			section_val = get_address_section_value (text, i - len, len);
+			numsep++;
+
+			if ((len == 0) ||
+			    ((ver == IP_V4) && (numsep > 3)) ||
+			    ((ver == IP_V6) && ((numsep > 6) || (len > 3) || (len == 0) || (section_val > 255))))
+				return FALSE;
+
+			if ((ver == IP_V6) && (len >= 1) && (len <= 3) && (!segment_has_alpha) && (section_val <= 255)) {
 				ver = IP_V4;
-				continue;
+				numsep = 1;
 			}
+			if ((ver == IP_UNK) && (section_val <= 255))
+				ver = IP_V4;
+			len = 0;
+		}
+		else if (c == ':') {
+			numsep++;			
 
-			if (dst > 3)
+			if ((ver == IP_V4) ||
+			    (numsep >= 8) ||
+			    ((len == 0) && (has_double_colon)))
 				return FALSE;
 
-			continue;
+			if ((numsep > 1) && (len == 0) && (!has_double_colon))
+				has_double_colon = TRUE;
+			if (ver == IP_UNK)
+				ver = IP_V6;
+			len = 0;
+			segment_has_alpha = FALSE;
 		}
-
-		return FALSE;
+		else 
+			return FALSE;
 	}
 
 	return TRUE;
@@ -276,70 +316,39 @@ void
 filter_editable (GtkEditable *editable, const gchar *text, gint length,
 		 gint *pos, gpointer data)
 {
-	int i, l = 0;
-	char *s = NULL;
+	int i = 0;
+	gchar *s = NULL;
+	gboolean success;
+	gboolean string_ok = TRUE;
 	EditableFilterRules rules = GPOINTER_TO_INT (data);
 
 	if (rules & EF_ALLOW_IP) {
-		gboolean success;
-
-		s = str_insert_text (gtk_editable_get_chars (editable, 0, -1), text, length, *pos);
+		s = g_strconcat (gtk_editable_get_chars (editable, 0, -1), text, NULL);
 		success = is_ip_text_ok (s);
 		g_free (s);
-		s = NULL;
-		
-		if (success)
-			goto text_changed_success;
-		else
-			goto text_changed_fail;
 	}
+	else {
+		while ((i < length) && (string_ok)) {
+			if (is_char_ok (text[i], rules))
+				i++;
+			else
+				string_ok = FALSE;
+		}
+
+		if (string_ok)
+			success = TRUE;
+		else
+			success = FALSE;
+	}
+
+	if (!success) {
+		gdk_beep ();
 	
-	/* thou shalt optimize for the common case */
-	if (length == 1) {
-		if (is_char_ok (*text, rules))
-			goto text_changed_success;
-		else
-			goto text_changed_fail;
+		gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
+/*		if (s) {
+			gtk_editable_insert_text (editable, s, l, pos);
+			}*/
 	}
-
-	/* if it is a paste we have to check all of things */
-	s = g_new0 (char, length);
-
-	for (i=0; i<length; i++)
-		if (is_char_ok (text[i], rules))
-			s[l++] = text[i];
-#if 0	
-		else
-			d(g_print ("rejecting: (%d) `%c'\n", text[i], text[i]));
-#endif	
-
-	if (l == length)
-		goto text_changed_success;
-
- text_changed_fail:
-	gdk_beep ();
-	
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
-	if (s) {
-#warning FIXME
-#if 0	
-		gtk_signal_handler_block_by_func (GTK_OBJECT (editable),
-						  filter_editable, data);
-#endif	
-		gtk_editable_insert_text (editable, s, l, pos);
-#if 0	
-		gtk_signal_handler_unblock_by_func (GTK_OBJECT (editable),
-						    filter_editable, data);
-#endif	
-	}
-	return;
-
- text_changed_success:
-#if 0
-	if (! (rules & EF_STATIC_HOST))
-		tool_modified_cb ();
-#endif
-	return;
 }
 
 /* yeah, I don't like this formatting either */

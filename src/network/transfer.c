@@ -196,7 +196,6 @@ transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 
 			node = xst_xml_element_add (root, transfer_string_list_table [i].xml_path);
 			xst_xml_element_set_content (node, text);
-			g_print ("%s\n", text);
 
 			if (!pos)
 				break;

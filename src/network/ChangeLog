@@ -1,3 +1,12 @@
+2003-03-11  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* callbacks.c: (filter_editable): removed these eye-hurting gotos.
+	  (is_ip_text_ok): rewritten, this is against any structured
+	  programming principle, and is eye-hurting too, but works for
+	  IPv4, IPv6 and IPv4 embedded in IPv6
+	  (get_address_section_value) added
+	* transfer.c: removed a g_print()
+
 2003-03-08  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* Release 0.24.0
