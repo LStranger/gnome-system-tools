@@ -69,14 +69,14 @@
     </schema>
     <schema>
       <key>/schemas/apps/gnome-system-tools/users/showall</key>
-	 <applyto>/apps/gnome-system-tools/users/showall</applyto>
-	 <owner>gnome</owner>
-	 <type>bool</type>
-	 <default>true</default>
-	 <locale name="C">
+      <applyto>/apps/gnome-system-tools/users/showall</applyto>
+      <owner>gnome</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
         <short>Whether the users-admin tool should show all users and groups or not</short>
         <long></long>
-	 </locale>
+      </locale>
     </schema>
     <schema>
       <key>/schemas/apps/gnome-system-tools/global/show_warning</key>
@@ -94,11 +94,34 @@
       <applyto>/apps/gnome-system-tools/global/last-version</applyto>
       <owner>gnome</owner>
       <type>string</type>
-	 <default>0</default>
+      <default>0</default>
       <locale name="C">
         <short>Last GST version executed</short>
         <long>The last GST version that this computer has run</long>
       </locale>
     </schema>
+    <schema>
+      <key>/schemas/apps/gnome-system-tools/global/remote-configuration</key>
+      <applyto>/apps/gnome-system-tools/global/remote-configuration</applyto>
+      <owner>gnome</owner>
+      <type>bool</type>
+      <default>false</default>
+      <locale name="C">
+        <short>Whether the tools will use remote administration or not</short>
+        <long>The GST are able to do remote configuration through SSH, enable this option to use this feature</long>
+      </locale>
+    </schema>
+    <schema>
+      <key>/schemas/apps/gnome-system-tools/global/remote-hosts-list</key>
+      <applyto>/apps/gnome-system-tools/global/remote-hosts-list</applyto>
+      <owner>gnome</owner>
+      <type>string</type>
+      <default>localhost</default>
+      <locale name="C">
+        <short>Remote hosts</short>
+        <long>Comma separated list of hosts that the GST will be able to access when the remote configuration option is enabled</long>
+      </locale>
+    </schema>
   </schemalist>
 </gconfschemafile>
+

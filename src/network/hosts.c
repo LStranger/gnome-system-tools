@@ -252,6 +252,21 @@ hosts_init_gui (GstTool *tool)
 }
 
 void
+hosts_list_clear (GstTool *tool)
+{
+	GstStatichostUI *ui;
+	GtkTreeModel    *model;
+
+	g_return_if_fail (tool != NULL);
+
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
+}
+
+void
 hosts_list_append (GstTool *tool, const gchar *text[])
 {
 	GstStatichostUI *ui;

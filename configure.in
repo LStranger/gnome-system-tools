@@ -41,6 +41,33 @@ dnl END: search for su
 dnl =====================================================
 
 dnl =====================================================
+dnl search for ssh
+dnl =====================================================
+
+AC_PATH_PROG(SSH_TOOL, ssh)
+if test x"${SSH_TOOL}" = xno; then
+  AC_MSG_WARN([ssh executable not found in your path - should be installed if remote administration is desired])
+  AC_DEFINE_UNQUOTED(SSH_PATH, "")
+else
+  AC_DEFINE_UNQUOTED(SSH_PATH, "${SSH_TOOL}")
+fi
+
+dnl =====================================================
+dnl END: search for ssh
+dnl =====================================================
+
+dnl =====================================================
+dnl LibUtil checking
+dnl =====================================================
+
+AC_CHECK_LIB(util, forkpty, , [AC_MSG_ERROR(Libutil library ir required.)])
+AC_CHECK_HEADER(pty.h, )
+
+dnl =====================================================
+dnl END: LibUtil checking
+dnl =====================================================
+
+dnl =====================================================
 dnl Cracklib checking
 dnl =====================================================
 
@@ -88,7 +115,6 @@ PKG_CHECK_MODULES(GST_DEPENDS,[
 			   libglade-2.0 >= 1.99.5
 			   libxml-2.0 >= 2.4.12
 			   gconf-2.0 >= 2.2.0
-			   vte >= 0.10.19
 			   ])
 
 dnl =====================================================
@@ -180,7 +206,7 @@ GST_DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISA
 GST_LIBS="$GST_DEPENDS_LIBS"
 GST_CFLAGS="$GST_DEPENDS_CFLAGS $GST_CRACK_LIB_CFLAGS $GST_DEPRECATED_FLAGS"
 
-GST_TOOL_LIBS="$GST_LIBS \$(top_builddir)/src/common/libsetuptool.a"
+GST_TOOL_LIBS="$GST_LIBS -lutil \$(top_builddir)/src/common/libsetuptool.a"
 GST_TOOL_CFLAGS="$GST_CFLAGS -I\$(top_srcdir)/src/common"
 
 GST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
@@ -241,7 +267,7 @@ echo "
 
 Configuration (GST):
 "
-	if test x${have_archiver} = xtrue; then echo "	Archiver support: yes"; else echo "	Archiver support: no"; fi
+dnl	if test x${have_archiver} = xtrue; then echo "	Archiver support: yes"; else echo "	Archiver support: no"; fi
 echo "	The scripts are expected at : ${scriptsdir}
 	Compiler:		${CC} 
 "

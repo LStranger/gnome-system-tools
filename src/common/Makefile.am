@@ -16,7 +16,7 @@ libsetuptool_a_SOURCES =				\
 	gst-ui.c		gst-ui.h		\
 	gst-util.c		gst-util.h		\
 	gst-conf.c		gst-conf.h		\
-	gst-su.c		gst-su.h		\
+	gst-auth.c		gst-auth.h		\
 	gst.h						\
 	gst-marshal.h					\
 	checked.xpm					\

@@ -1,3 +1,13 @@
+2003-08-09  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* connection.[ch]: (connection_list_clear): added
+	* hosts.[ch]: (hosts_list_clear): added
+	* profiles-table.c: (profiles_table_populate): made it to clear the
+	  table before populating it, it now may be used again
+	* transfer.c: made it to clear the hosts and connection tables 
+	  before populating them
+	* network.desktop.in.in: added startup notify
+
 2003-07-08  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* network.desktop.in.in: moved menu entry to "system tools"

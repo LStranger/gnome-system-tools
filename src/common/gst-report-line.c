@@ -181,12 +181,13 @@ gst_report_line_new_from_string (gchar *string)
 	GstReportMajor major;
 	gchar **parts;
 
-	g_return_val_if_fail (strlen (string) > 1, NULL);
+	if (strlen (string) <= 1)
+		return NULL;
+
 	parts = gst_report_line_parse_string (string);
 
 	/* must have at least major, minor and format */
 	if (!parts[2]) {
-		g_warning ("gst_report_line_new_from_string: Error in report string [%s]", string);
 		g_strfreev (parts);
 		return NULL;
 	}

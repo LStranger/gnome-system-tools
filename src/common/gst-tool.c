@@ -29,7 +29,7 @@
 #include "gst-report-hook.h"
 #include "gst-platform.h"
 #include "gst-ui.h"
-#include "gst-su.h"
+#include "gst-auth.h"
 #include "gst-xml.h"
 #include "gst-marshal.h"
 
@@ -82,16 +82,9 @@ enum {
 	PLATFORM_LIST_COL_LAST
 };
 
-static enum {
-	ROOT_ACCESS_NONE,
-	ROOT_ACCESS_SIMULATED,
-	ROOT_ACCESS_SIMULATED_DISABLED,
-	ROOT_ACCESS_REAL
-} root_access = ROOT_ACCESS_NONE;
-
 static GtkObjectClass *parent_class;
 static gint gsttool_signals [LAST_SIGNAL] = { 0 };
-static const gchar *GST_TOOL_EOR = "\n<!-- GST: end of request -->\n";
+static const gchar *GST_TOOL_EOR = "<!-- GST: end of request -->";
 
 static void     gst_tool_idle_run_directives_remove (GstTool *tool);
 static void     gst_tool_idle_run_directives_add    (GstTool *tool);
@@ -105,9 +98,9 @@ static void report_dispatch (GstTool *tool);
 static GstReportHookEntry common_report_hooks[] = {
 /*        key                 function                    type                      allow_repeat user_data */
 	{ "end",              report_finished_cb,         GST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
-	{ "platform_success", platform_set_current_cb,    GST_REPORT_HOOK_SAVE,     FALSE,       NULL }, 
-	{ "platform_unsup",   platform_unsupported_cb,    GST_REPORT_HOOK_LOADSAVE, FALSE,       NULL },
-	{ "platform_undet",   platform_unsupported_cb,    GST_REPORT_HOOK_LOADSAVE, FALSE,       NULL },
+	{ "platform_success", platform_set_current_cb,    GST_REPORT_HOOK_SAVE,     TRUE,        NULL }, 
+	{ "platform_unsup",   platform_unsupported_cb,    GST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
+	{ "platform_undet",   platform_unsupported_cb,    GST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
 	{ NULL,               NULL,                       -1,                       FALSE,       NULL }
 };
 
@@ -130,6 +123,7 @@ on_platform_list_selection_changed (GtkTreeSelection *selection, gpointer data)
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter, PLATFORM_LIST_COL_PLATFORM, &platform, -1);
 		tool->current_platform = gst_platform_dup (platform);
+
 		selected = TRUE;
 	} else {
 		tool->current_platform = NULL;
@@ -263,7 +257,7 @@ gst_tool_get_dialog (GstTool *tool)
 gboolean
 gst_tool_get_access (GstTool *tool)
 {
-	return root_access != ROOT_ACCESS_NONE;
+	return tool->root_access != ROOT_ACCESS_NONE;
 }
 
 #if 0
@@ -367,7 +361,6 @@ report_dispatch (GstTool *tool)
 			gst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
 		}
 #endif
-
 		if (strcmp (gst_report_line_get_key (rline), "progress"))
 			gst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
 		
@@ -386,7 +379,7 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 {
 	GstTool *tool;
 	GstReportLine *rline;
-	gchar buffer [512];
+	gchar buffer [500];
 	gint n, i = 0;
 
 	tool = GST_TOOL (data);
@@ -398,16 +391,17 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 
 	while ((n = read (fd, buffer, sizeof (buffer) - 1)) != 0) {
 		buffer [n] = 0;
-		
+		fflush (NULL);
+
 		for (i = 0; (i < n); i++) {
 			gchar c = buffer [i];
-			
+
 			if (c == '\n') {
 				/* End of line */
-				
+
 				/* Report line; add to list */
 				rline = gst_report_line_new_from_string (tool->line->str);
-				
+
 				if (rline)
 					tool->report_line_list = g_slist_append (
 						tool->report_line_list, rline);
@@ -492,10 +486,9 @@ report_progress (GstTool *tool, const gchar *label)
 			usleep (1);
 			gtk_main_iteration ();
 		}
-		sleep (1);
 	}
 
-	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
+	tool->input_id = gtk_input_add_full (tool->backend_master_fd, GDK_INPUT_READ,
 					     report_progress_tick, NULL, tool, NULL);
 	tool->input_block = FALSE;
 
@@ -570,6 +563,8 @@ gst_tool_fill_platform_tree (GstTool *tool)
 
 	/* Fill in the platform GtkTreeView */
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (tool->platform_list));
+
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	
 	tool->supported_platforms_list = gst_tool_get_supported_platforms (tool);
 	
@@ -587,6 +582,21 @@ gst_tool_fill_platform_tree (GstTool *tool)
 }
 
 static void
+gst_tool_fill_remote_hosts_list (GstTool *tool, gchar *hosts_list[])
+{
+	gchar **host;
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (tool->remote_hosts_list));
+	GtkTreeIter iter;
+
+	for (host = hosts_list; *host != NULL; host++) {
+		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+		gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
+				    0, *host,
+				    -1);
+	}
+}
+
+static void
 gst_tool_run_platform_dialog (GstTool *tool)
 {
 	gint result;
@@ -595,16 +605,18 @@ gst_tool_run_platform_dialog (GstTool *tool)
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
 	
 	result = gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
-	gtk_widget_destroy (tool->platform_dialog);
+	gtk_widget_hide (tool->platform_dialog);
+
 	if (result != GTK_RESPONSE_OK)
 		exit (0);
 }
 
-static void
+void
 gst_tool_process_startup (GstTool *tool)
 {
 	/* let's process those startup reports. */
 	tool->report_hook_type = GST_REPORT_HOOK_LOAD;
+
 	report_progress (tool, NULL);
 
 	/* stable version users should pass here only once,
@@ -612,72 +624,15 @@ gst_tool_process_startup (GstTool *tool)
 	while (tool->run_again) {
 		gst_tool_run_platform_dialog (tool);
 		g_assert (tool->current_platform);
-		
-		if (root_access == ROOT_ACCESS_SIMULATED)
-			root_access = ROOT_ACCESS_SIMULATED_DISABLED;
-		
+
+		if (tool->root_access == ROOT_ACCESS_SIMULATED)
+			tool->root_access = ROOT_ACCESS_SIMULATED_DISABLED;
+
 		gst_tool_run_set_directive (tool, NULL, NULL, "platform_set",
 					    gst_platform_get_key (tool->current_platform), NULL);
 
-		if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
-			root_access = ROOT_ACCESS_SIMULATED;
-	}
-}
-
-static void
-gst_tool_init_backend (GstTool *tool)
-{
-	int fd_read [2], fd_write [2];
-
-	g_return_if_fail (tool != NULL);
-	g_return_if_fail (GST_IS_TOOL (tool));
-	g_return_if_fail (tool->script_path != NULL);
-	g_return_if_fail (tool->backend_pid < 0);
-	
-	pipe (fd_read);
-	pipe (fd_write);
-
-	tool->backend_pid = fork ();
-	if (tool->backend_pid < 0) {
-		g_warning ("Unable to fork.");
-		tool->backend_pid = -1;
-		return;
-	} else if (tool->backend_pid) {
-		/* Parent */
-
-		close (fd_read  [1]); /* Close writing end of read pipe */
-		close (fd_write [0]); /* Close reading end of write pipe */
-
-		tool->backend_read_fd  = fd_read  [0];
-		tool->backend_write_fd = fd_write [1];
-
-		fcntl (tool->backend_read_fd, F_SETFL, 0);  /* Let's block */
-
-		gst_tool_process_startup (tool);
-	} else {
-		/* Child */
-
-		/* For the child, things are upside-down */
-		close (fd_read  [0]); /* Close reading end of read pipe */
-		close (fd_write [1]); /* Close writing end of write pipe */
-
-		dup2 (fd_read  [1], STDOUT_FILENO);
-		dup2 (fd_write [0],  STDIN_FILENO);
-
-		if (tool->current_platform)
-			execl (tool->script_path, tool->script_path,
-			       "--progress", "--report", "--platform",
-			       gst_platform_get_key (tool->current_platform), NULL);
-		else
-#ifndef GST_DEBUG_STRACE_BACKEND
-			execl (tool->script_path, tool->script_path, "--progress",
-			       "--report", NULL);
-#else		
-		execl ("/usr/bin/strace", "/usr/bin/strace", "-f", tool->script_path, "--progress",
-		       "--report", NULL);
-#endif					
-		
-		g_error ("Unable to run backend: %s", tool->script_path);
+		if (tool->root_access == ROOT_ACCESS_SIMULATED_DISABLED)
+			tool->root_access = ROOT_ACCESS_SIMULATED;
 	}
 }
 
@@ -725,20 +680,39 @@ gst_tool_kill_backend_cb (GstDirectiveEntry *entry)
 	/* The backend was never called. No problem! */
 	/* For further reference check http://www.xs4all.nl/~pjbrink/apekool/050/045-en.html */
 	if (tool->backend_pid > 0) {
-		if (root_access == ROOT_ACCESS_SIMULATED)
-			root_access = ROOT_ACCESS_SIMULATED_DISABLED;
-		
+		if (tool->root_access == ROOT_ACCESS_SIMULATED)
+			tool->root_access = ROOT_ACCESS_SIMULATED_DISABLED;
+
 		gst_tool_run_set_directive (tool, NULL, NULL, "end", NULL);
 		
-		if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
-			root_access = ROOT_ACCESS_SIMULATED;
-	
+		if (tool->root_access == ROOT_ACCESS_SIMULATED_DISABLED)
+			tool->root_access = ROOT_ACCESS_SIMULATED;
+
 		waitpid (tool->backend_pid, NULL, 0);
 	}
-	
-	gtk_signal_emit_by_name (GTK_OBJECT (tool), "destroy");
 }
 
+static void
+gst_tool_kill_tool_cb (GstDirectiveEntry *entry)
+{
+	GstTool *tool = entry->tool;
+
+	gst_tool_kill_backend_cb (entry);
+	
+	g_signal_emit_by_name (G_OBJECT (tool), "destroy");
+}
+
+/* kills the whole tool */
+static void
+gst_tool_kill_tool (GstTool *tool, gpointer data)
+{
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (GST_IS_TOOL (tool));
+
+	gst_tool_queue_directive (tool, gst_tool_kill_tool_cb, NULL, NULL, NULL, "end");
+}
+
+/* only kills the backend */
 static void
 gst_tool_kill_backend (GstTool *tool, gpointer data)
 {
@@ -751,20 +725,18 @@ gst_tool_kill_backend (GstTool *tool, gpointer data)
 static gboolean
 gst_tool_end_of_request (GString *string)
 {
-	gchar *str;
-	gint len, eorlen, i;
+	gchar *str, *eorpos;
+	gint len, i;
 
 	str = string->str;
 	len = strlen (str);
-	eorlen = strlen (GST_TOOL_EOR);
-	if (len < eorlen)
+
+	eorpos = g_strrstr (str, GST_TOOL_EOR);
+
+	if (eorpos == NULL)
 		return FALSE;
 
-	for (i = 0; i < eorlen; i++)
-		if (GST_TOOL_EOR[eorlen - i - 1] != str[len - i - 1])
-			return FALSE;
-
-	g_string_truncate (string, len - eorlen + 1);
+	g_string_truncate (string, strlen (str) - strlen (eorpos));
 
 	return TRUE;
 }
@@ -778,25 +750,31 @@ gst_tool_read_xml_from_backend (GstTool *tool)
 
 	if (!tool->xml_document)
 		return NULL;
-	
-	fcntl (tool->backend_read_fd, F_SETFL, O_NONBLOCK);
+
+	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 
 	while (! gst_tool_end_of_request (tool->xml_document)) {
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
+		while (g_main_context_iteration (NULL, FALSE));
 
-		t = read (tool->backend_read_fd, buffer, sizeof (buffer) - 1);
+		t = read (tool->backend_master_fd, buffer, sizeof (buffer) - 1);
+		buffer[t] = '\0';
 
-		if (t == 0)
+		fflush (NULL);
+
+		if ((t == 0))
 			break;
 		if (t == -1)
 			t = 0;
 
-		buffer [t] = 0;
-		g_string_append (tool->xml_document, buffer);
+		if (t > 0) {
+			buffer [t] = 0;
+			g_string_append (tool->xml_document, buffer);
+		}
 	}
-	
-	fcntl (tool->backend_read_fd, F_SETFL, 0);
+
+	fcntl (tool->backend_master_fd, F_SETFL, 0);
 
 	if (tool->xml_document->str[0] == '<') {
 		xml = xmlParseDoc (tool->xml_document->str);
@@ -876,15 +854,21 @@ gst_tool_send_directive (GstTool *tool, const gchar *directive, va_list ap)
 {
 	GString *directive_line;
 	FILE *f;
+	gchar buffer[512];
 
 	g_return_if_fail (tool->backend_pid >= 0);
 
        	directive_line = gst_tool_join_directive (directive, ap);
 	g_string_append_c (directive_line, '\n');
-	
-	f = fdopen (dup (tool->backend_write_fd), "w");
+
+	f = fdopen (dup (tool->backend_master_fd), "w");
 	fprintf (f, directive_line->str);
+	fflush (f);
 	fclose (f);
+
+	/* clear the buffer from the directive, this is done because there is only one
+	 * fd for reading and writing */
+	read (tool->backend_master_fd, buffer, strlen (directive_line->str));
 
 	g_string_free (directive_line, TRUE);
 }
@@ -898,9 +882,6 @@ gst_tool_run_get_directive_va (GstTool *tool, const gchar *report_sign, const gc
 	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
 
-	if (tool->backend_pid < 0)
-		gst_tool_init_backend (tool);
-	
 	tool->directive_running = TRUE;
 	gst_tool_idle_run_directives_remove (tool);
 
@@ -923,8 +904,8 @@ gst_tool_run_get_directive_va (GstTool *tool, const gchar *report_sign, const gc
 	if (location_id == NULL)
 		report_progress (tool, report_sign? _(report_sign): NULL);
 
-	xml = gst_tool_read_xml_from_backend (tool);
-	
+	xml = gst_tool_read_xml_from_backend(tool);
+
 	tool->directive_running = FALSE;
 	gst_tool_idle_run_directives_add (tool);
 	
@@ -946,19 +927,20 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 {
 	FILE *f;
 	xmlDoc *xml_out;
-	
+	gchar *eor = g_strconcat ("\n", GST_TOOL_EOR, "\n", NULL);
+
+	gint n;
+	gchar buffer[512];
+
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
-
-	if (tool->backend_pid < 0)
-		gst_tool_init_backend (tool);
 
 	tool->directive_running = TRUE;
 	gst_tool_idle_run_directives_remove (tool);
 
 	/* don't actually run if we are just pretending */
-	if (root_access == ROOT_ACCESS_SIMULATED) {
+	if (tool->root_access == ROOT_ACCESS_SIMULATED) {
 		g_warning (_("Skipping %s directive..."), directive);
 		tool->directive_running = FALSE;
 		return NULL;
@@ -967,11 +949,20 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 	gst_tool_send_directive (tool, directive, ap);
 
 	if (xml) {
-		f = fdopen (dup (tool->backend_write_fd), "w");
+		f = fdopen (dup (tool->backend_master_fd), "w");
 		xmlDocDump (f, xml);
-		fprintf (f, GST_TOOL_EOR);
+		fprintf (f, eor);
+
+		fflush (f);
 		fclose (f);
+
+		/* read all output from the fd, this is done because a single fd is user for
+		 * reading and writing */
+		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
+		while (n = read (tool->backend_master_fd, buffer, sizeof (buffer) -1) > 0) {}
+		fcntl (tool->backend_master_fd, F_SETFL, 0);
 	}
+
 
 	/* FIXME: Instead of doing the following, we should pass around a value describing
 	 * tool I/O mode (as opposed to a string to report_progress ()). */
@@ -979,6 +970,7 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 
 	if (location_id == NULL)
 		report_progress (tool, report_sign? _(report_sign): NULL);
+
 
 	/* This is tipicaly to just read the end of request string,
 	   but a set directive may return some XML too. */
@@ -1016,8 +1008,7 @@ gst_tool_load (GstTool *tool)
 		return TRUE;
 
 	if (location_id == NULL) {
-		tool->config = gst_tool_run_get_directive
-			(tool, _("Scanning your system configuration."), "get", NULL);
+		tool->config = gst_tool_run_get_directive (tool, NULL, "get", NULL);
 	} else {
 #ifndef GST_HAVE_ARCHIVER
 		g_assert_not_reached ();
@@ -1088,7 +1079,7 @@ gst_tool_save (GstTool *tool)
 
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (GST_IS_TOOL (tool), FALSE);
-	g_return_val_if_fail (root_access != ROOT_ACCESS_NONE, FALSE);
+	g_return_val_if_fail (tool->root_access != ROOT_ACCESS_NONE, FALSE);
 
 	gst_dialog_freeze_visible (tool->main_dialog);
 
@@ -1096,7 +1087,7 @@ gst_tool_save (GstTool *tool)
 
 #ifdef GST_DEBUG
 	/* don't actually save if we are just pretending */
-	if (root_access == ROOT_ACCESS_SIMULATED) {
+	if (tool->root_access == ROOT_ACCESS_SIMULATED) {
 		g_warning (_("Skipping actual save..."));
 		return TRUE;
 	}
@@ -1139,8 +1130,7 @@ gst_tool_save (GstTool *tool)
 #endif
 	
 	if (location_id == NULL)
-		gst_tool_run_set_directive (tool, tool->config, _("Updating your system configuration."),
-					    "set", NULL);
+		gst_tool_run_set_directive (tool, tool->config, NULL, "set", NULL);
 	gst_dialog_thaw_visible (tool->main_dialog);
 
 	return TRUE;  /* FIXME: Determine if it really worked. */
@@ -1175,9 +1165,24 @@ gst_tool_main (GstTool *tool, gboolean no_main_loop)
 {
 	gst_dialog_freeze_visible (tool->main_dialog);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
+	
+	if (tool->remote_config == TRUE) {
+		/* run the ssh client */
+		gst_tool_fill_remote_hosts_list (tool, tool->remote_hosts);
+		gtk_widget_show (tool->remote_dialog);
+	} else {
+		/* run the su command */
+		gst_dialog_freeze_visible (tool->main_dialog);
+		gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 
-	gst_tool_load_try (tool);
-	gst_dialog_thaw_visible (tool->main_dialog);
+		gst_auth_do_su_authentication (tool);
+
+		gst_tool_process_startup (tool);
+		gst_dialog_apply_widget_policies (tool->main_dialog);
+
+		gst_tool_load_try (tool);
+		gst_dialog_thaw_visible (tool->main_dialog);
+	}
 
 	if (!no_main_loop)
 		gtk_main ();
@@ -1311,6 +1316,85 @@ gst_tool_create_platform_list (GtkTreeView *list, GstTool *tool)
 }
 
 static void
+on_remote_hosts_list_selection_changed (GtkTreeSelection *selection, gpointer data)
+{
+	GstTool *tool = GST_TOOL (data);
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	gchar *host;
+
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		/* freeze the dialog */
+		gtk_widget_set_sensitive (tool->remote_dialog, FALSE);
+		
+		gtk_tree_model_get (model, &iter, 0, &host, -1);
+
+		if (tool->backend_pid > 0) {
+			gst_dialog_ask_apply (tool->main_dialog);
+			gst_dialog_set_modified (tool->main_dialog, FALSE);
+
+			/* removes the g_timeout that's waiting for the backend to die */
+			g_source_remove (tool->timeout_id);
+
+			/* stops the backend */
+			gst_tool_kill_backend (tool, NULL);
+
+			/* process the "end" directive */
+			while (gtk_events_pending())
+				gtk_main_iteration();
+
+			/* remove current platform info, in the new host may be another one */
+			if (tool->current_platform != NULL) {
+				gst_platform_free (tool->current_platform);
+				tool->current_platform = NULL;
+			}
+		}
+
+		gst_dialog_freeze_visible (tool->main_dialog);
+	
+		gst_auth_do_ssh_authentication (tool, host);
+		gst_tool_process_startup (tool);
+
+		gst_tool_load_try (tool);
+		gst_dialog_apply_widget_policies (tool->main_dialog);
+
+		/* thaw all the dialogs */
+		gst_dialog_thaw_visible (tool->main_dialog);
+		gtk_widget_set_sensitive (tool->remote_dialog, TRUE);
+	}
+}
+
+static void
+gst_tool_create_remote_hosts_list (GtkTreeView *list, GstTool *tool)
+{
+	GtkTreeModel *model = GTK_TREE_MODEL (gtk_tree_store_new (1, G_TYPE_STRING));
+	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
+	GtkTreeSelection *select;
+
+	g_return_if_fail (list != NULL);
+	g_return_if_fail (GTK_IS_TREE_VIEW (list));
+
+	gtk_tree_view_set_model (GTK_TREE_VIEW (list), model);
+	g_object_unref (model);
+
+	renderer = gtk_cell_renderer_text_new();
+	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (list),
+						     -1,
+						     NULL,
+						     renderer,
+						     "text", 0,
+						     NULL);
+
+	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
+	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
+
+	g_signal_connect (G_OBJECT (select), "changed",
+			  G_CALLBACK (on_remote_hosts_list_selection_changed),
+			  (gpointer) tool);
+}
+
+static void
 gst_tool_type_init (GstTool *tool)
 {
 	GladeXML *xml;
@@ -1358,6 +1442,11 @@ gst_tool_type_init (GstTool *tool)
 
 	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
 	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
+
+	xml = gst_tool_load_glade_common (tool, "remote_dialog");
+	tool->remote_dialog = glade_xml_get_widget (xml, "remote_dialog");
+	tool->remote_hosts_list = glade_xml_get_widget (xml, "remote_hosts_list");
+	gst_tool_create_remote_hosts_list (GTK_TREE_VIEW (tool->remote_hosts_list), tool);
 }
 
 GtkType
@@ -1398,13 +1487,21 @@ void
 gst_tool_construct (GstTool *tool, const char *name, const char *title)
 {
 	char *s, *t, *u;
+	GConfClient *client = gconf_client_get_default ();
+	GError *error;
+
+	gchar *remote_config_key;
+	gchar *remote_hosts_key;
+	gchar *hosts;
+	gboolean do_remote_conf;
 
 	g_return_if_fail (name != NULL);
 
 	tool->name        = g_strdup (name);
 	tool->glade_path  = g_strdup_printf ("%s/%s.glade",     INTERFACES_DIR, name);
 	tool->script_path = g_strdup_printf ("%s/%s-conf",      SCRIPTS_DIR,    name);
-	
+	tool->script_name = g_strdup_printf ("%s-conf",         name);
+
 	s = g_strdup_printf ("%s_admin", name);
 	t = g_strdup_printf (_("%s - GNOME System Tools"), title);
 	u = g_strdup_printf (PIXMAPS_DIR "/%s.png", name);
@@ -1426,12 +1523,24 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	memset (&tool->report_hook_defaults, 0, sizeof (GstReportHook *) * GST_MAJOR_MAX);
 	gst_tool_add_report_hooks (tool, common_report_hooks);
 
-	tool->backend_pid = tool->backend_read_fd = tool->backend_write_fd = -1;
-	gst_tool_set_close_func (tool, gst_tool_kill_backend, NULL);
+	tool->backend_pid = -1;
+	tool->backend_master_fd = -1;
+	gst_tool_set_close_func (tool, gst_tool_kill_tool, NULL);
 
 	tool->directive_running = FALSE;
 	tool->directive_queue   = NULL;
 	tool->directive_queue_idle_id = 0;
+
+	/* get the remote configuration gconf keys */
+	remote_config_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote-configuration", NULL);
+	remote_hosts_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote-hosts-list", NULL);
+
+	do_remote_conf = gconf_client_get_bool (client, remote_config_key, &error);
+	hosts = gconf_client_get_string (client, remote_hosts_key, &error);
+
+	tool->remote_config = ((do_remote_conf) && (hosts != NULL) && (strcmp (SSH_PATH, "") != 0));
+	if (hosts != NULL) 
+		tool->remote_hosts = g_strsplit (hosts, ",", -1);
 }
 
 GstTool *
@@ -1564,31 +1673,6 @@ gst_tool_reset_report_hooks (GstTool *tool)
 		((GstReportHook *) list->data)->invoked = FALSE;
 }
 
-/* it does authentication, first of all it runs su (just to ensure that it's completely run
- * when password is sent), then asks for password and sends it to su (if you want to run it
- * with root privileges)
- */
-static void
-authenticate (int argc, char *argv[])
-{
-	gchar *password;
-	gint result;
-
-	gst_su_run_term (argc, argv, NULL);
-
-	result = gst_su_get_password (&password);
-
-	if (result == 1) 
-		gst_su_write_password (password);
-	else if (result == -1)
-		exit (0);
-	else
-		gst_su_clear_term ();
-
-	if (strlen (password) > 0)
-		memset (password, 0, strlen (password));
-}
-
 static void
 try_show_usage_warning (void)
 {
@@ -1688,7 +1772,6 @@ gst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 	
 		for (i = 0; args && args[i]; i++) {
 			args_list = g_list_append (args_list, args[i]);
-			g_print ("-->%s<--\n", (gchar *) args_list->data);
 		}
 		poptFreeContext (ctx);
 	}	
@@ -1699,18 +1782,5 @@ gst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 				      GNOME_PARAM_HUMAN_READABLE_NAME,
 				      _("GNOME System Tools"),
 				      NULL);
-	
-	if (geteuid () == 0) {
-		root_access = ROOT_ACCESS_REAL;
-#ifdef GST_DEBUG
-	} else if (getenv ("SET_ME_UP_HARDER")) {
-		g_warning (_("Pretending we are root..."));
-		root_access = ROOT_ACCESS_SIMULATED;
-#endif
-	} else {
-		authenticate (argc, argv);
-		root_access = ROOT_ACCESS_NONE;
-	}
-
 	try_show_usage_warning ();
 }

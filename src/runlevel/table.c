@@ -258,6 +258,9 @@ table_populate (xmlNodePtr root)
 	xmlNodePtr service,services;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(gst_dialog_get_widget (tool->main_dialog, "runlevel_table")));
+
+        /* clear the table, it may have already contents */
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	
 	g_return_if_fail (root != NULL);
 	

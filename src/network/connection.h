@@ -169,6 +169,7 @@ void           connection_list_update     (void);
 gboolean       connection_list_has_dialer (GstTool *tool);
 void           connection_list_save       (GstTool *tool);
 void           connection_list_select_connection (GstConnection *cxn);
+void           connection_list_clear      (GstTool *tool);
 
 gboolean connection_config_save (GstConnection*);
 void     connection_check_netmask_gui (GstConnection*, GtkWidget*, GtkWidget*);

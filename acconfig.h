@@ -19,5 +19,6 @@
 #undef FRONTEND_DIR
 #undef DESKTOP_DATA_DIR
 #undef SU_PATH
+#undef SSH_PATH
 
 @BOTTOM@

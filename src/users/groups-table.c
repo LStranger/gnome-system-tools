@@ -141,6 +141,8 @@ populate_groups_table (void)
 	
 	g_return_if_fail (model != NULL);
 	g_return_if_fail (root != NULL);
+
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	
 	for (group = gst_xml_element_find_first (root, "group"); group != NULL; group = gst_xml_element_find_next (group, "group"))
 	{

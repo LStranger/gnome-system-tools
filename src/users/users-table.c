@@ -155,9 +155,11 @@ populate_users_table (void)
 	xmlNodePtr root = get_root_node (NODE_USER);
 	GtkTreeIter iter;
 	xmlNodePtr user;
-	
+
 	g_return_if_fail (model != NULL);
 	g_return_if_fail (root != NULL);
+
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	
 	users_array = g_array_new (FALSE, FALSE, sizeof (xmlNodePtr));
 	

@@ -599,6 +599,20 @@ connection_iter (GstConnection *cxn, GtkTreeIter *iter)
 	return FALSE;
 }
 
+void
+connection_list_clear (GstTool *tool)
+{
+	GstConnectionUI *ui;
+	GtkTreeModel    *model;
+
+	g_return_if_fail (tool != NULL);
+
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+}
+
 GtkWidget *
 connection_list_new (GstTool *tool)
 {

@@ -61,7 +61,7 @@ struct _GstDialog {
 	GtkWidget *complexity_button_image;
 
 	GstDialogComplexity complexity;
-	gint frozen;
+	gboolean frozen;
 
 	GSList *gst_widget_list;
 	GList *apply_hook_list;
@@ -110,10 +110,13 @@ GstTool            *gst_dialog_get_tool            (GstDialog *xd);
 void                gst_dialog_widget_set_user_mode (GstDialog *xs, const gchar *name, GstWidgetMode mode);
 void                gst_dialog_widget_set_user_sensitive (GstDialog *xd, const gchar *name, gboolean state);
 
+void                gst_dialog_apply_widget_policies (GstDialog*);
 void                gst_dialog_set_widget_policies (GstDialog *xd, const GstWidgetPolicy *xwp);
 void                gst_dialog_set_widget_user_modes (GstDialog *xd, const GstWidgetUserPolicy *xwup);
 
 void                gst_dialog_add_apply_hook      (GstDialog *xd, GstDialogHookFunc func, gpointer data);
 gboolean            gst_dialog_run_apply_hooks     (GstDialog *xd);
+
+void                gst_dialog_ask_apply           (GstDialog*);
 
 #endif /* GST_DIALOG_H */

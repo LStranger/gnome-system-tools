@@ -15,12 +15,12 @@ EXTRA_DIST = \
 
 
 schema_in_files = gnome-system-tools.schemas.in
-schemadir = $(sysconfdir)/gconf/schemas
+schemadir = @GCONF_SCHEMA_FILE_DIR@
 schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 @INTLTOOL_SCHEMAS_RULE@
 
 install-data-local:
-	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/gnome-system-tools.schemas
+	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(srcdir)/$(schema_DATA)
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-system-tools.pc

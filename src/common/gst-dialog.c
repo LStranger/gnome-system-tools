@@ -62,8 +62,8 @@ gst_dialog_get_widget (GstDialog *xd, const char *widget)
 	return w;
 }
 
-static void
-apply_widget_policies (GstDialog *xd)
+void
+gst_dialog_apply_widget_policies (GstDialog *xd)
 {
 	GSList *list;
 
@@ -115,7 +115,7 @@ gst_dialog_set_complexity (GstDialog *xd, GstDialogComplexity c)
 	else
 		gst_conf_set_boolean (xd->tool, "advanced_mode", FALSE);
 
-	apply_widget_policies (xd);
+	gst_dialog_apply_widget_policies (xd);
 
 	/* set the complexity button appearance */
 	gtk_label_set_text (GTK_LABEL (xd->complexity_button_label), _(label[c]));
@@ -130,11 +130,10 @@ gst_dialog_freeze (GstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
 	g_return_if_fail (GST_IS_DIALOG (xd));
-	g_return_if_fail (xd->frozen >= 0);
 
 	d(g_message ("freezing %p", xd));
 
-	xd->frozen++;
+	xd->frozen = TRUE;
 }
 
 void 
@@ -142,11 +141,10 @@ gst_dialog_thaw (GstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
 	g_return_if_fail (GST_IS_DIALOG (xd));
-	g_return_if_fail (xd->frozen >= 0);
 
 	d(g_message ("thawing %p", xd));
 
-	xd->frozen--;
+	xd->frozen = FALSE;
 }
 
 void
@@ -337,10 +335,9 @@ gst_dialog_set_widget_policies (GstDialog *xd, const GstWidgetPolicy *xwp)
 	GstWidget *xw;
 	int i;
 
-	for (i = 0; xwp [i].widget; i++)
+	for (i = 0; xwp [i].widget; i++) {
 		xw = gst_widget_new (xd, xwp [i]);
-
-	apply_widget_policies (xd);
+	}
 }
 
 void
@@ -361,7 +358,7 @@ gst_dialog_set_widget_user_modes (GstDialog *xd, const GstWidgetUserPolicy *xwup
 		gst_widget_set_user_mode (xw, xwup [i].mode);
 	}
 
-	apply_widget_policies (xd);
+	gst_dialog_apply_widget_policies (xd);
 }
 
 GstWidget *
@@ -461,8 +458,8 @@ apply_cb (GtkWidget *w, gpointer data)
 	gst_dialog_set_modified (dialog, FALSE);
 }
 
-static void
-dialog_close (GstDialog *dialog)
+void
+gst_dialog_ask_apply (GstDialog *dialog)
 {
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (GST_IS_DIALOG (dialog));
@@ -485,6 +482,15 @@ dialog_close (GstDialog *dialog)
 		if (res == GTK_RESPONSE_YES)
 			apply_cb (NULL, dialog);
 	}
+}
+
+static void
+dialog_close (GstDialog *dialog)
+{
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (GST_IS_DIALOG (dialog));
+
+	gst_dialog_ask_apply (dialog);
 
 	gtk_widget_hide (GTK_WIDGET (dialog));
 
@@ -653,7 +659,9 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 
 	gst_dialog_set_complexity (dialog, val);
 
-	g_signal_connect (GTK_OBJECT (dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
+	g_signal_connect (G_OBJECT (dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
+
+	g_signal_connect (G_OBJECT (tool->remote_dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
 
 }
 

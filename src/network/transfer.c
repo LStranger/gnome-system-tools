@@ -211,6 +211,8 @@ transfer_string_clist2_xml_to_gui (GstTool *tool, xmlNodePtr root)
 	xmlNodePtr node, nodesub;
 	char *s, *entry[3];
 
+	hosts_list_clear (tool);
+	
 	entry[0] = NULL;
 
 	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
@@ -391,6 +393,8 @@ transfer_xml_to_gui (GstTool *tool, gpointer data)
 	transfer_string_entry_xml_to_gui (tool, root);
 	transfer_string_list_xml_to_gui (tool, root);
 	transfer_string_clist2_xml_to_gui (tool, root);
+
+	connection_list_clear (tool);
 	transfer_interfaces_to_gui (tool, root);
 
 	profile_populate_option_menu (tool, root);

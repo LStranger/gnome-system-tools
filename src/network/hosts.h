@@ -52,6 +52,7 @@ void hosts_list_append       (GstTool *tool, const gchar *text[]);
 void hosts_list_remove       (GstTool *tool, const gchar *ip);
 gboolean hosts_list_get_selected (gchar **ip, gchar **alias);
 void hosts_list_save         (GstTool *tool, xmlNodePtr root);
+void hosts_list_clear        (GstTool *tool);
 
 gboolean gst_hosts_ip_is_in_list (const gchar*);
 

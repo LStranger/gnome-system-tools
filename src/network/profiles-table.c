@@ -76,6 +76,8 @@ profiles_table_populate (GstTool *tool, xmlNodePtr root)
 	xmlNodePtr profile;
 	GtkTreeIter iter;
 
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
+
 	for (profile = gst_xml_element_find_first (profiledb, "profile");
 	     profile != NULL;
 	     profile = gst_xml_element_find_next (profile, "profile"))

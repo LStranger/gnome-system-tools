@@ -135,6 +135,7 @@ transfer_xml_to_gui (GstTool *tool, gpointer data)
 	transfer_globals_xml_to_gui (root);
 	transfer_check_data (root);
 
+	boot_table_clear ();
 	table_populate (root);
 }
 

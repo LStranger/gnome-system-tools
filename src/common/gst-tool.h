@@ -37,29 +37,50 @@
 typedef void (*GstXmlFunc)   (GstTool *tool, gpointer data);
 typedef void (*GstCloseFunc) (GstTool *tool, gpointer data);
 
+typedef enum {
+	ROOT_ACCESS_NONE,
+	ROOT_ACCESS_SIMULATED,
+	ROOT_ACCESS_SIMULATED_DISABLED,
+	ROOT_ACCESS_REAL
+} RootAccess;
+
 struct _GstTool {
 	GtkObject object;
 	char *name;
+
+	RootAccess root_access;
 
 	char *glade_path;
 	char *glade_common_path;
 	char *script_path;
 	char *etspecs_common_path;
 
+	char *script_name;
+
 	/* backend process */
 	int backend_pid;
-	int backend_read_fd;
-	int backend_write_fd;
+	int backend_master_fd;
 
 	/* configuration */
 	xmlDoc  *config;
 
 	GstDialog *main_dialog;
 
+	/* Remote configuration stuff */
+	gboolean remote_config;
+	gchar **remote_hosts;
+
+	/* id of the g_timeout that is waiting for the backend to die */
+	guint timeout_id;
+
 	/* Platform selection */
 	GtkWidget *platform_dialog;
 	GtkWidget *platform_list;
 	GtkWidget *platform_ok_button;
+
+	/* Remote configuration dialog */
+	GtkWidget *remote_dialog;
+	GtkWidget *remote_hosts_list;
 
 	/* Progress report widgets */
 	GladeXML  *report_gui;
@@ -155,6 +176,8 @@ void         gst_tool_reset_report_hooks  (GstTool *tool);
 
 void         gst_tool_add_supported_platform    (GstTool *tool, GstPlatform *platform);
 void         gst_tool_clear_supported_platforms (GstTool *tool);
+
+void         gst_tool_process_startup (GstTool*);
 
 #define __full_tool_name(parameter) "Gst" #parameter "Tool"
 
