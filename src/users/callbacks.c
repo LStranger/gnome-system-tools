@@ -560,12 +560,14 @@ void
 on_profile_settings_ok_clicked (GtkButton *button, gpointer data)
 {
 	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
-	xmlNodePtr node = g_object_get_data (G_OBJECT (dialog), "data");
-	gchar *error = profile_settings_check ();
+	xmlNodePtr node   = g_object_get_data (G_OBJECT (dialog), "data");
+	gchar *error      = profile_settings_check ();
 
 	if (error != NULL) {
 		/* the profile cannot be added/modified, show the error and exit */
-		show_error_message ("profile_settings_dialog", error);
+		show_error_message ("profile_settings_dialog",
+				    _("Error saving profile"),
+				    error);
 	} else {
 		/* the profile is OK, we can add/modify it */
 		if (node == NULL) {

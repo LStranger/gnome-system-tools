@@ -27,6 +27,7 @@
 
 #include <gtk/gtk.h>
 #include "gst.h"
+#include "gst-hig-dialog.h"
 #include "user_group.h"
 #include "table.h"
 #include "user-group-xml.h"
@@ -193,7 +194,7 @@ profile_settings_set_data (xmlNodePtr node)
 static gboolean
 check_profile_delete (xmlNodePtr node)
 {
-	gchar *buf, *profile_name;
+	gchar *profile_name, *primary_text, *secondary_text;
 	GtkWindow *parent;
 	GtkWidget *dialog;
 	gint reply;
@@ -211,24 +212,37 @@ check_profile_delete (xmlNodePtr node)
 
 	if (strcmp (profile_name, "Default") == 0)
 	{
-		buf = g_strdup (_("The profile Default must not be deleted."));
-		show_error_message ("profile_settings_dialog", buf);
+		primary_text   = g_strdup (_("The profile \"Default\" must not be deleted."));
+		secondary_text = g_strdup (_("This is the default profile for setting new users' data"));
+		show_error_message ("profile_settings_dialog", primary_text, secondary_text);
 		g_free (profile_name);
-		g_free (buf);
+		g_free (primary_text);
+		g_free (secondary_text);
+
 		return FALSE;
 	}
 
-	buf = g_strdup_printf (_("Are you sure you want to delete the profile called %s?"), profile_name);
-	dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_YES_NO, buf);
+	primary_text   = g_strdup_printf (_("Delete profile \"%s\""), profile_name);
+	secondary_text = g_strdup_printf (_("You won't be able to recover this profile after hitting \"apply\""));
+
+	dialog = gst_hig_dialog_new (parent,
+				     GTK_DIALOG_MODAL,
+				     GST_HIG_MESSAGE_WARNING,
+				     primary_text,
+				     secondary_text,
+				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				     NULL);
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
-	g_free (buf);
+	g_free (primary_text);
+	g_free (secondary_text);
 	g_free (profile_name);
-	
-	if (reply == GTK_RESPONSE_NO)
-		return FALSE;
-        else
+
+	if (reply == GTK_RESPONSE_ACCEPT)
 		return TRUE;
+	else
+		return FALSE;
 }
 
 gboolean

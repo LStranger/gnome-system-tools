@@ -33,6 +33,7 @@
 #include <gnome.h>
 
 #include "gst.h"
+#include "gst-hig-dialog.h"
 #include "users-table.h"
 #include "table.h"
 #include "callbacks.h"
@@ -83,7 +84,7 @@ create_groups_gtk_trees (void)
 static gboolean
 check_user_delete (xmlNodePtr node)
 {
-	gchar *login, *buf;
+	gchar *login;
 	GtkWindow *parent;
 	GtkWidget *dialog;
 	gint reply;
@@ -93,32 +94,39 @@ check_user_delete (xmlNodePtr node)
 	parent = GTK_WINDOW (tool->main_dialog);
 	login = gst_xml_get_child_content (node, "login");
 
-	if (!login)
-	{
+	if (!login) {
 		g_warning ("check_user_delete: Can't get username");
 		return FALSE;
 	}
 
-	if (strcmp (login, "root") == 0)
-	{
-		buf = g_strdup (_("The root user must not be deleted."));
-		show_error_message ("user_settings_dialog", buf);
+	if (strcmp (login, "root") == 0) {
+		show_error_message ("user_settings_dialog",
+				    _("The root user can not be deleted."),
+				    _("This would leave the system unusable"));
 		g_free (login);
-		g_free (buf);
 		return FALSE;
 	}
 
-	buf = g_strdup_printf (_("Are you sure you want to delete user %s?"), login);
-	dialog = gtk_message_dialog_new (parent, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_YES_NO, buf);
+	dialog = gst_hig_dialog_new (parent,
+				     GTK_DIALOG_MODAL,
+				     GST_HIG_MESSAGE_WARNING,
+				     NULL,
+				     "This will disable the access of this user to the system, "
+				     "but the user's home directory wont be deleted",
+				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				     NULL);
+	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
+					 _("Are you sure you want to delete user %s?"), login);
+
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
-	g_free (buf);
 	g_free (login);
-	
-	if (reply == GTK_RESPONSE_NO)
-		return FALSE;
-        else
+
+	if (reply == GTK_RESPONSE_ACCEPT)
 		return TRUE;
+        else
+		return FALSE;
 }
 
 gboolean
@@ -294,40 +302,55 @@ is_user_root (xmlNodePtr node)
 static gboolean
 is_login_valid (xmlNodePtr node, const gchar *login)
 {
-	gchar *buf = NULL;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
 	struct utmp ut;
 
 	g_return_val_if_fail (node != NULL, FALSE);
 	g_return_val_if_fail (login != NULL, FALSE);
 
 	/* If !empty. */
-	if (strlen (login) < 1)
-		buf = g_strdup (_("The username is empty."));
+	if (strlen (login) < 1) {
+		primary_text = g_strdup (_("The username is empty."));
+		secondary_text = g_strdup (_("A username must be specified"));
+	}
 
 	/* If too long. */
 #ifdef __FreeBSD__
-	else if (strlen (login) > UT_NAMESIZE) /*  = sizeof (ut.ut_name) */
+	else if (strlen (login) > UT_NAMESIZE) { /*  = sizeof (ut.ut_name) */
+		primary_text   = g_strdup (_("The username is too long."));
+		secondary_text = g_strdup_printf (_("The username should have less than %i characters for being valid"), UT_NAMESIZE);
+	}
 #else
-	else if (strlen (login) > sizeof (ut.ut_user))
+	else if (strlen (login) > sizeof (ut.ut_user)) {
+		primary_text   = g_strdup (_("The username is too long."));
+		secondary_text = g_strdup_printf (_("The username should have less than %i characters for being valid"), sizeof (ut.ut_user));
+	}
 #endif
-		buf = g_strdup (_("The username is too long."));
 	
 	/* If user being modified is root */
-	else if ((is_user_root (node)) && (strcmp (login, "root") != 0))
-		buf = g_strdup (_("root username shouldn't be modified."));
+	else if ((is_user_root (node)) && (strcmp (login, "root") != 0)) {
+		primary_text   = g_strdup (_("Root username shouldn't be modified."));
+	        secondary_text = g_strdup (_("This would leave the system unusable"));
+	}
 
 	/* if valid. */
-	else if (!is_valid_name (login))
-		buf = g_strdup (_("Please set a valid username consisting of a lower case letter followed by lower case letters and numbers."));
+	else if (!is_valid_name (login)) {
+		primary_text   = g_strdup (_("Username has invalid characters"));
+		secondary_text = g_strdup (_("Please set a valid username consisting of a lower case letter followed by lower case letters and numbers."));
+	}
 
 	/* if !exist. */
-	else if (node_exists (node, "login", login))
-		buf = g_strdup_printf (_("Username \"%s\" already exists.\n\nPlease select a different Username"), login);
+	else if (node_exists (node, "login", login)) {
+		primary_text   = g_strdup_printf (_("Username \"%s\" already exists"), login);
+		secondary_text = g_strdup (_("Please select a different username"));
+	}
 
 	/* If anything is wrong. */
-	if (buf) {
-		show_error_message ("user_settings_dialog", buf);
-		g_free (buf);
+	if (primary_text) {
+		show_error_message ("user_settings_dialog", primary_text, secondary_text);
+		g_free (primary_text);
+		g_free (secondary_text);
 
 		return FALSE;
 	} else {
@@ -339,20 +362,23 @@ static gboolean
 is_comment_valid (gchar *name, gchar *location, gchar *wphone, gchar *hphone)
 {
 	gchar *comment = g_strjoin (" ", name, location, wphone, hphone, NULL);
-	gchar *buf = NULL;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
 	gint i;
 	
 	for (i = 0; i < strlen (comment); i++) {
 		if (iscntrl (comment[i]) || comment[i] == ',' || comment[i] == '=' || comment[i] == ':') {
-			buf = g_strdup_printf (N_("Invalid character '%c' in comment."), comment[i]);
+			primary_text   = g_strdup_printf (N_("Invalid character in comment."));
+			secondary_text = g_strdup_printf (N_("Check that invalid character '%c' is not used"), comment[i]);
 			break;
 		}
 	}
 	g_free (comment);
 
-	if (buf) {
-		show_error_message ("user_settings_dialog", buf);
-		g_free (buf);
+	if (primary_text) {
+		show_error_message ("user_settings_dialog", _(primary_text), _(secondary_text));
+		g_free (primary_text);
+		g_free (secondary_text);
 		
 		return FALSE;
 	} else {
@@ -386,17 +412,21 @@ parse_user_home (gchar *old_home, gchar *name)
 static gboolean
 is_home_valid (xmlNodePtr node, gchar *home)
 {
-	gchar *buf = NULL;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
 	struct stat s;
 	
-	if (!home || (strlen (home) < 1))
-		buf = g_strdup (N_("Home directory must not be empty."));
-
-	else if (*home != '/')
-		buf = g_strdup (N_("Please enter full path for home directory."));
-	
-	else if ((is_user_root (node)) && (strcmp (home, "/root") != 0))
-		buf = g_strdup (_("root home shouldn't be modified."));
+	if (!home || (strlen (home) < 1)) {
+		primary_text   = g_strdup (N_("Home directory must not be empty."));
+		secondary_text = g_strdup (N_("Make sure you provide a home directory"));
+	} else if (*home != '/') {
+		primary_text   = g_strdup (N_("Incomplete path in home directory"));
+		secondary_text = g_strdup (N_("Please enter full path for home directory.\n"
+					      "<span size=\"smaller\">i.e.: /home/john</span>"));
+	} else if ((is_user_root (node)) && (strcmp (home, "/root") != 0)) {
+		primary_text   = g_strdup (N_("root home shouldn't be modified."));
+		secondary_text = g_strdup (N_("This would leave the system unusable"));
+	}
 
 /*	else if (stat (home, &s))
 	{
@@ -408,9 +438,10 @@ is_home_valid (xmlNodePtr node, gchar *home)
 		}
 	}
 */
-	if (buf) {
-		show_error_message ("user_settings_dialog", buf);
-		g_free (buf);
+	if (primary_text) {
+		show_error_message ("user_settings_dialog", _(primary_text), _(secondary_text));
+		g_free (primary_text);
+		g_free (secondary_text);
 		
 		return FALSE;
 	} else {
@@ -421,19 +452,24 @@ is_home_valid (xmlNodePtr node, gchar *home)
 static gboolean
 is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 {
-	gchar *buf = NULL;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
 
-	if (!is_valid_id (uid))
-		buf = g_strdup (_("User id must be a positive number."));
-	else if ((is_user_root (node)) && (strcmp (uid, "0") != 0))
-		buf = g_strdup (_("root uid shouldn't be modified."));
-	else if (node_exists (node, "uid", uid)) {
-		buf = g_strdup (_("Such user id already exists."));
+	if (!is_valid_id (uid)) {
+		primary_text   = g_strdup (N_("Invalid user ID"));
+		secondary_text = g_strdup (N_("User id must be a positive number."));
+	} else if ((is_user_root (node)) && (strcmp (uid, "0") != 0)) {
+		primary_text   = g_strdup (N_("root uid shouldn't be modified."));
+		secondary_text = g_strdup (N_("This would leave the system unusable"));
+	} else if (node_exists (node, "uid", uid)) {
+		primary_text   = g_strdup (N_("Invalid user ID"));
+		secondary_text = g_strdup_printf (N_("User ID %s already exists."), uid);
 	}
 	
-	if (buf) {
-		show_error_message ("user_settings_dialog", buf);
-		g_free (buf);
+	if (primary_text) {
+		show_error_message ("user_settings_dialog", _(primary_text), _(secondary_text));
+		g_free (primary_text);
+		g_free (secondary_text);
 		
 		return FALSE;
 	} else {
@@ -445,14 +481,19 @@ is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 static gboolean
 is_shell_valid (const gchar *val)
 {
-	gchar *buf = NULL;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
+	
+	if (strlen (val) > 0 && *val != '/') {
+		primary_text   = g_strdup (N_("Incomplete path in shell"));
+		secondary_text = g_strdup (N_("Please enter full path for shell.\n"
+					      "<span size=\"smaller\">i.e.: /bin/sh</span>"));
+	}
 
-	if (strlen (val) > 0 && *val != '/')
-		buf = g_strdup (_("Please give shell with full path."));
-
-	if (buf) {
-		show_error_message ("user_settings_dialog", buf);
-		g_free (buf);
+	if (primary_text) {
+		show_error_message ("user_settings_dialog", _(primary_text), _(secondary_text));
+		g_free (primary_text);
+		g_free (secondary_text);
 		
 		return FALSE;
 	} else {
@@ -463,17 +504,21 @@ is_shell_valid (const gchar *val)
 static gboolean
 is_password_valid (const gchar *passwd1, const gchar *passwd2) 
 {
-	gchar *buf = NULL;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
 	
-	if (!passwd1 || !passwd2 || strlen (passwd1) < 1 || strlen (passwd2) < 1)
-		buf = g_strdup (_("Password must not be empty."));
-	
-	else if (strcmp (passwd1, passwd2) != 0)
-		buf = g_strdup (_("Password confirmation isn't correct."));
+	if (!passwd1 || !passwd2 || strlen (passwd1) < 1 || strlen (passwd2) < 1) {
+		primary_text   = g_strdup (N_("Password can not be empty."));
+		secondary_text = g_strdup (N_("A password must be provided"));
+	} else if (strcmp (passwd1, passwd2) != 0) {
+		primary_text   = g_strdup (N_("Password confirmation isn't correct."));
+		secondary_text = g_strdup (N_("Check that you have provided the same password in both text fields"));
+	}
 
-	if (buf) {
-		show_error_message ("user_settings_dialog", buf);
-		g_free (buf);
+	if (primary_text) {
+		show_error_message ("user_settings_dialog", _(primary_text), _(secondary_text));
+		g_free (primary_text);
+		g_free (secondary_text);
 		
 		return FALSE;
 	} else {

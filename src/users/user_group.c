@@ -43,6 +43,7 @@
 #include "user-settings.h"
 #include "user-group-xml.h"
 #include "passwd.h"
+#include "gst-hig-dialog.h"
 
 extern GstTool *tool;
 GList *groups_list = NULL;
@@ -143,12 +144,18 @@ option_menu_add_groups (GtkWidget *option_menu, gboolean add_user_group)
 }
 
 void
-show_error_message (gchar *parent_window, gchar *message)
+show_error_message (gchar *parent_window, gchar *primary_text, gchar *secondary_text)
 {
 	GtkWindow *xd = GTK_WINDOW (gst_dialog_get_widget (tool->main_dialog, parent_window));
 	GtkWidget *dialog;
-	
-	dialog = gtk_message_dialog_new (xd, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, message);
+
+	dialog = gst_hig_dialog_new (xd,
+				     GTK_DIALOG_MODAL,
+				     GST_HIG_MESSAGE_ERROR,
+				     primary_text,
+				     secondary_text,
+				     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+				     NULL);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 }

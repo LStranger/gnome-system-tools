@@ -28,6 +28,7 @@
 #include <gnome.h>
 
 #include "gst.h"
+#include "gst-hig-dialog.h"
 #include "groups-table.h"
 #include "table.h"
 #include "callbacks.h"
@@ -137,18 +138,22 @@ group_settings_dialog_close (void)
 static gboolean
 is_group_gid_valid (xmlNodePtr group_node, const gchar* gid)
 {
-	gchar *buf = NULL;
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
 
-	if (!is_valid_id (gid))
-		buf = g_strdup (_("User id must be a positive number."));
+	if (!is_valid_id (gid)) {
+		primary_text   = g_strdup (_("Invalid group ID"));
+		secondary_text = g_strdup (_("Group ID must be a positive number."));
+	} else if (node_exists (group_node, "gid", gid)) {
+		/* Check if gid is available */
+		primary_text   = g_strdup (_("Invalid group ID"));
+		secondary_text = g_strdup_printf (N_("Group ID %s already exists."), gid);
+	}
 	
-	/* Check if gid is available */
-	else if (node_exists (group_node, "gid", gid))
-		buf = g_strdup (_("Such group id already exists."));
-	
-	if (buf) {
-		show_error_message ("group_settings_dialog", buf);
-		g_free (buf);
+	if (primary_text) {
+		show_error_message ("group_settings_dialog", primary_text, secondary_text);
+		g_free (primary_text);
+		g_free (secondary_text);
 		
 		return FALSE;
 	}
@@ -159,31 +164,35 @@ is_group_gid_valid (xmlNodePtr group_node, const gchar* gid)
 static gboolean
 is_group_name_valid (xmlNodePtr node, const gchar *name)
 {
-	gchar *buf = NULL;
-
+	gchar *primary_text   = NULL;
+	gchar *secondary_text = NULL;
+	
 	g_return_val_if_fail (node != NULL, FALSE);
 	g_return_val_if_fail (name != NULL, FALSE);
 
-	/* If !empty. */
-	if (strlen (name) < 1)
-		buf = g_strdup (_("Group name is empty."));
-
-	/* If too long. */
-	if (strlen (name) > 16)
-		buf = g_strdup (_("The group name is too long."));
-
-	/* if invalid. */
-	else if (!is_valid_name (name))
-		buf = g_strdup (_("Please set a valid group name, using only lower-case letters."));
-
-	/* if !exist. */
-	else if (node_exists (node, "name", name))
-		buf = g_strdup (_("Group already exists."));
+	if (strlen (name) < 1) {
+		/* If empty. */
+		primary_text   = g_strdup (_("Group name is empty."));
+		secondary_text = g_strdup (_("A group name must be specified"));
+	} else if (strlen (name) > 16) {
+		/* If too long. */
+		primary_text   = g_strdup (_("The group name is too long."));
+		secondary_text = g_strdup_printf (_("The group name should have less than %i characters for being valid"), 16);
+	} else if (!is_valid_name (name)) {
+		/* if invalid. */
+		primary_text   = g_strdup (_("Group name has invalid characters"));
+		secondary_text = g_strdup (_("Please set a valid group name, using only lower case letters."));
+	} else if (node_exists (node, "name", name)) {
+		/* if !exist. */
+		primary_text   = g_strdup_printf (_("Group \"%s\" already exists."), name);
+		secondary_text = g_strdup (_("Please select a different group name"));
+	}
 
 	/* If anything is wrong. */
-	if (buf) {
-		show_error_message ("group_settings_dialog", buf);
-		g_free (buf);
+	if (primary_text) {
+		show_error_message ("group_settings_dialog", primary_text, secondary_text);
+		g_free (primary_text);
+		g_free (secondary_text);
 
 		return FALSE;
 	} else {
@@ -229,7 +238,7 @@ group_update (ug_data *gd)
 static gboolean
 check_group_delete (xmlNodePtr node)
 {
-	gchar *name, *txt;
+	gchar *name, *primary_text, *secondary_text;
 	GtkWindow *parent;
 	GtkWidget *dialog;
 	gint reply;
@@ -239,32 +248,41 @@ check_group_delete (xmlNodePtr node)
 	parent = GTK_WINDOW (tool->main_dialog);
 	name = gst_xml_get_child_content (node, "name");
 
-	if (!name)
-	{
+	if (!name) {
 		g_warning ("check_group_delete: Can't get group's name");
 		return FALSE;
 	}
 
-	if (strcmp (name, "root") == 0)
-	{
-		txt = g_strdup (_("The root group must not be deleted."));
-		show_error_message ("group_settings_dialog", txt);
+	if (strcmp (name, "root") == 0) {
+		primary_text   = g_strdup (_("Root group shouldn't be deleted."));
+	        secondary_text = g_strdup (_("This would leave the system unusable"));
+		show_error_message ("group_settings_dialog", primary_text, secondary_text);
+
 		g_free (name);
-		g_free (txt);
+		g_free (primary_text);
+		g_free (secondary_text);
+
 		return FALSE;
 	}
 
-	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), name);
-	dialog = gtk_message_dialog_new (parent, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_YES_NO, txt);
+	dialog = gst_hig_dialog_new (parent,
+				     GTK_DIALOG_MODAL,
+				     GST_HIG_MESSAGE_WARNING,
+				     NULL,
+				     _("This may leave files with invalid group ID in the filesystem"),
+				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				     NULL);
+	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
+					 _("Are you sure you want to delete group %s?"), name);
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
-	g_free (txt);
 	g_free (name);
 	
-	if (reply == GTK_RESPONSE_NO)
-		return FALSE;
-        else
+	if (reply == GTK_RESPONSE_ACCEPT)
 		return TRUE;
+        else
+		return FALSE;
 }
 
 gboolean 

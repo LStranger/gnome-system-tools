@@ -76,9 +76,9 @@ gchar *user_query_string_get (void);
 
 gint my_strcmp (gconstpointer, gconstpointer);
 
-void		show_error_message	(gchar *,gchar *);
-void            combo_add_shells        (GtkWidget*);
-void            option_menu_add_groups  (GtkWidget*, gboolean);
+void		show_error_message	 (gchar*,gchar*, gchar*);
+void            combo_add_shells         (GtkWidget*);
+void            option_menu_add_groups   (GtkWidget*, gboolean);
 void            option_menu_add_profiles (GtkWidget*);
 
 #endif /* USER_GROUP_H */
