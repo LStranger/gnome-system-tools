@@ -55,10 +55,11 @@ struct _GstDialog {
 	GtkWidget *child;
 
 	/* Common widgets */
-	GtkWidget *apply_button;
 	GtkWidget *complexity_button;
 	GtkWidget *complexity_button_label;
 	GtkWidget *complexity_button_image;
+
+	gboolean is_modified;
 
 	GstDialogComplexity complexity;
 	gboolean frozen;

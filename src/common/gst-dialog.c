@@ -179,7 +179,7 @@ gst_dialog_get_modified (GstDialog *xd)
 	g_return_val_if_fail (xd != NULL, FALSE);
 	g_return_val_if_fail (GST_IS_DIALOG (xd), FALSE);
 
-	return GTK_WIDGET_SENSITIVE (xd->apply_button);
+	return xd->is_modified;
 }
 
 void
@@ -188,7 +188,7 @@ gst_dialog_set_modified (GstDialog *xd, gboolean state)
 	g_return_if_fail (xd != NULL);
 	g_return_if_fail (GST_IS_DIALOG (xd));
 
-	gtk_widget_set_sensitive (xd->apply_button, state);
+	xd->is_modified = state;
 }
 
 void
@@ -441,7 +441,7 @@ complexity_cb (GtkWidget *w, gpointer data)
 }
 
 static void
-apply_cb (GtkWidget *w, gpointer data)
+apply_config (gpointer data)
 {
 	GstDialog *dialog;
 
@@ -461,27 +461,27 @@ apply_cb (GtkWidget *w, gpointer data)
 void
 gst_dialog_ask_apply (GstDialog *dialog)
 {
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (GST_IS_DIALOG (dialog));
+        g_return_if_fail (dialog != NULL);
+        g_return_if_fail (GST_IS_DIALOG (dialog));
 
-	if (gst_dialog_get_modified (dialog)) {
-		/* Changes have been made. */
-		GtkWidget *w;
-		gint       res;
-
-		w = gtk_message_dialog_new (GTK_WINDOW (dialog),
-					    GTK_DIALOG_MODAL,
-					    GTK_MESSAGE_QUESTION,
-					    GTK_BUTTONS_YES_NO,
-					    _("There are changes which haven't been applied.\n"
-					      "Apply them now?"));
-
-		res = gtk_dialog_run (GTK_DIALOG (w));
-		gtk_widget_destroy (w);
-
-		if (res == GTK_RESPONSE_YES)
-			apply_cb (NULL, dialog);
-	}
+        if (gst_dialog_get_modified (dialog)) {
+                /* Changes have been made. */
+                GtkWidget *w;
+                gint       res;
+                                                                                
+                w = gtk_message_dialog_new (GTK_WINDOW (dialog),
+                                            GTK_DIALOG_MODAL,
+                                            GTK_MESSAGE_QUESTION,
+                                            GTK_BUTTONS_YES_NO,
+                                            _("There are changes which haven't been applied.\n"
+                                              "Apply them now?"));
+                                                                                
+                res = gtk_dialog_run (GTK_DIALOG (w));
+                gtk_widget_destroy (w);
+                                                                                
+                if (res == GTK_RESPONSE_YES)
+                        apply_config (dialog);
+        }
 }
 
 static void
@@ -489,8 +489,6 @@ dialog_close (GstDialog *dialog)
 {
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (GST_IS_DIALOG (dialog));
-
-	gst_dialog_ask_apply (dialog);
 
 	gtk_widget_hide (GTK_WIDGET (dialog));
 
@@ -505,8 +503,22 @@ dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
 }
 
 static void
-close_cb (GtkWidget *w, gpointer data)
+cancel_cb (GtkWidget *w, gpointer data)
 {
+	dialog_close (data);
+}
+
+static void
+accept_cb (GtkWidget *w, gpointer data)
+{
+	GstDialog *dialog;
+	
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (GST_IS_DIALOG (data));
+
+	dialog = GST_DIALOG (data);
+
+	apply_config (data);
 	dialog_close (data);
 }
 
@@ -641,13 +653,11 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 	w = glade_xml_get_widget (xml, "complexity_button_image");
 	dialog->complexity_button_image = w;
 
-	w = glade_xml_get_widget (xml, "apply");
-	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (apply_cb), dialog);
+	w = glade_xml_get_widget (xml, "cancel");
+	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (cancel_cb), dialog);
 
-	dialog->apply_button = w;
-
-	w = glade_xml_get_widget (xml, "close");
-	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (close_cb), dialog);
+	w = glade_xml_get_widget (xml, "accept");
+	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (accept_cb), dialog);
 	
 	gst_dialog_set_modified (dialog, FALSE);
 	gtk_widget_hide (dialog->complexity_button);
