@@ -49,6 +49,7 @@ static void timezone_button_clicked (GtkWidget *w, gpointer data);
 static void update_tz (XstTimeTool *time_tool);
 static void server_button_clicked (GtkWidget *w, gpointer data);
 static void ntp_use_toggled (GtkWidget *w, XstDialog *dialog);
+static void xst_time_calendar_change_cb (GtkCalendar *, gpointer);
 
 static char *ntp_servers[] =
 {
@@ -115,8 +116,8 @@ static char *ntp_servers[] =
 };
 
 static XstDialogSignal signals[] = {
-	{ "calendar",          "day_selected",       G_CALLBACK (xst_dialog_modify_cb) },
-	{ "calendar",          "month_changed",      G_CALLBACK (xst_dialog_modify_cb) },
+	/*	{ "calendar",          "day_selected",       G_CALLBACK (xst_time_calendar_change_cb) },
+		{ "calendar",          "month_changed",      G_CALLBACK (xst_time_calendar_change_cb) },*/
 	{ "timezone_button",   "clicked",            G_CALLBACK (timezone_button_clicked) },
 	{ "ntp_use",           "toggled",            G_CALLBACK (ntp_use_toggled) },
 	{ "timeserver_button", "clicked",            G_CALLBACK (server_button_clicked) },
@@ -464,6 +465,15 @@ xst_time_tool_new (void)
 	return XST_TOOL (g_type_create_instance (XST_TYPE_TIME_TOOL));
 }
 
+static void
+xst_time_calendar_change_cb (GtkCalendar *calendar, gpointer data)
+{
+	XstTimeTool *tool = (XstTimeTool *)data;
+
+	xst_time_clock_stop (tool);
+	xst_dialog_modify (XST_TOOL (tool)->main_dialog);
+}
+
 static void 
 xst_time_key_press_event_cb (GtkWidget *widget, GdkEventKey *event, XstTimeTool *tool)
 {
@@ -685,6 +695,15 @@ xst_time_set_from_localtime (XstTimeTool *time_tool, gint correction)
 	xst_time_set_full (time_tool, tm);
 }
 
+void
+xst_time_connect_calendar_signals (XstTimeTool *tool)
+{
+	GtkWidget *calendar = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog, "calendar");
+
+	g_signal_connect (G_OBJECT (calendar), "day_selected", G_CALLBACK (xst_time_calendar_change_cb), tool);
+	g_signal_connect (G_OBJECT (calendar), "month_changed", G_CALLBACK (xst_time_calendar_change_cb), tool);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -696,6 +715,7 @@ main (int argc, char *argv[])
 
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	xst_dialog_connect_signals (tool->main_dialog, signals);
+	xst_time_connect_calendar_signals (XST_TIME_TOOL (tool));
 
 	xst_time_load_widgets (XST_TIME_TOOL (tool));
 	xst_time_populate_ntp_list (XST_TIME_TOOL (tool));
