@@ -41,6 +41,7 @@ TransStringEntry transfer_string_entry_table[] =
 	{ "domain", "domain", 0, 0 },
 	{ "workgroup", "workgroup", 0, 0 },
 	{ "description", "description", 0, 0 },
+	{ "winsuse", NULL, "wins_use", 0 },	
 	{ "winsserver", "wins_ip" },	
 	{ 0, 0, 0, 0 }
 };
@@ -73,11 +74,26 @@ transfer_string_entry_xml_to_gui (xmlNodePtr root)
 
 		if (node && (s = xst_xml_element_get_content (node)))
 		{
-			gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].editable)), s);
+			if (transfer_string_entry_table [i].editable)
+				gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget
+										 (tool->main_dialog,
+										  transfer_string_entry_table [i].editable)), s);
 
-			if (transfer_string_entry_table [i].toggle)
-				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].toggle)), TRUE);
+			if (transfer_string_entry_table [i].toggle) {
+				gboolean res;
 
+				res = (*s == '1')? TRUE: FALSE;
+				
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
+										(xst_dialog_get_widget
+										 (tool->main_dialog,
+										  transfer_string_entry_table [i].toggle)), res);
+				gtk_signal_emit_by_name (GTK_OBJECT
+									(xst_dialog_get_widget
+										 (tool->main_dialog,
+										  transfer_string_entry_table [i].toggle)), "toggled");
+			}
+			
 			g_free (s);
 		}
 	}
@@ -89,7 +105,7 @@ transfer_string_entry_gui_to_xml (xmlNodePtr root)
 {
 	int i;
 	xmlNodePtr node;
-	gchar *content;
+	gchar *content = NULL;
 
 	for (i = 0; transfer_string_entry_table [i].xml_path; i++)
 	{
@@ -97,7 +113,23 @@ transfer_string_entry_gui_to_xml (xmlNodePtr root)
 		if (!node)
 			node = xst_xml_element_add (root, transfer_string_entry_table [i].xml_path);
 
-		content = gtk_editable_get_chars (GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].editable)), 0, -1);
+		if (transfer_string_entry_table [i].editable)
+			content = gtk_editable_get_chars (GTK_EDITABLE
+									    (xst_dialog_get_widget
+										(tool->main_dialog,
+										 transfer_string_entry_table [i].editable)), 0, -1);
+			
+		if (transfer_string_entry_table [i].toggle) {
+			gboolean res;
+			
+			res = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
+										 (xst_dialog_get_widget
+										  (tool->main_dialog,
+										   transfer_string_entry_table [i].toggle)));
+
+			content = g_strdup ((res)? "1": "0");
+		}
+		
 		xst_xml_element_set_content (node, content);
 		g_free (content);
 	}

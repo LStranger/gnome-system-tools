@@ -49,6 +49,8 @@ XstDialogSignal signals[] = {
 	{ "workgroup",           "changed",         xst_dialog_modify_cb },
 	{ "wins_ip",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
 	{ "wins_ip",             "changed",         xst_dialog_modify_cb },
+	{ "wins_use",            "toggled",         on_wins_use_toggled },
+	{ "wins_use",            "toggled",         xst_dialog_modify_cb },
 	{ "connection_list",     "select_row",      on_connection_list_select_row },
 	{ "connection_list",     "unselect_row",    on_connection_list_unselect_row },
 	{ "connection_add",      "clicked",         on_connection_add_clicked },

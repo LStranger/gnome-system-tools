@@ -650,7 +650,12 @@ connection_new_from_node (xmlNode *node)
 	/* TCP/IP general paramaters */
 	cxn->address = connection_xml_get_str (node, "address");
 	cxn->netmask = connection_xml_get_str (node, "netmask");
+	
 	cxn->gateway = connection_xml_get_str (node, "gateway");
+	if (!cxn->gateway || !*cxn->gateway) {
+		g_free (cxn->gateway);
+		cxn->gateway = connection_xml_get_str (node->parent, "gateway");
+	}
 
 	/* PPP stuff */
 	if (cxn->type == CONNECTION_PPP)
@@ -939,6 +944,7 @@ fill_ppp_adv (Connection *cxn)
 	SET_BOOL ("ppp_", stupid);
 	SET_BOOL ("ppp_", set_default_gw);
 	SET_BOOL_NOT ("ppp_", peerdns);
+	gtk_signal_emit_by_name (GTK_OBJECT (W ("ppp_peerdns")), "toggled");
 	SET_STR ("ppp_", dns1);
 	SET_STR ("ppp_", dns2);
 	SET_STR ("ppp_", ppp_options);

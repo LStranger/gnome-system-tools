@@ -138,7 +138,7 @@ my_gtk_clist_select_row (GtkCList *clist, gint row, gint unused)
 	gint rows;
 	g_return_if_fail (GTK_IS_CLIST (clist));
 
-	s_win = GTK_SCROLLED_WINDOW (xst_dialog_get_widget (tool->main_dialog, "hosts_window"));
+	s_win = GTK_SCROLLED_WINDOW (xst_dialog_get_widget (tool->main_dialog, "statichost_list_sw"));
 	vadjustment = gtk_scrolled_window_get_vadjustment (s_win);
 	rows = clist->rows;
 
@@ -217,7 +217,7 @@ xst_hosts_update_sensitivity (void)
 	 * ADD: You can add when the ip is not in the clist already,
 	 * CHANGE : You can change when the ip is in the list 
 	 */
-	delete = (ip_is_in_list);
+	delete = (ip_is_in_list) && strcmp (ip_str, "127.0.0.1");
 	add = (strlen(ip_str) > 0) && (!ip_is_in_list);
 	change = ip_is_in_list;
 
@@ -372,6 +372,7 @@ on_hosts_add_clicked (GtkWidget * button, gpointer user_data)
 
 	xst_hosts_clear_entries ();
 	xst_hosts_unselect_all ();
+	my_gtk_clist_select_row (GTK_CLIST (clist), row, 0);
 }
 
 void

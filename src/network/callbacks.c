@@ -295,6 +295,7 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 
 	connection_free (cxn);
 	gtk_clist_remove (GTK_CLIST (clist), connection_row_selected);
+	xst_dialog_modify (tool->main_dialog);
 }
 
 void
@@ -358,4 +359,11 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "samba_frame"),
 				  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
+}
+
+void
+on_wins_use_toggled (GtkWidget *w, gpointer null)
+{
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "wins_ip"),
+						 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 }

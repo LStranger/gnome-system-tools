@@ -1,3 +1,23 @@
+2001-02-27  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* transfer.c (transfer_string_entry_table): add wins_use.
+	(transfer_string_entry_xml_to_gui): fix support for toggle buttons.
+	(transfer_string_entry_gui_to_xml): fix support for toggle buttons.
+
+	* main.c: signals for wins_use.
+
+	* hosts.c (xst_hosts_update_sensitivity): don't let loopback
+	statichost entry be modified.
+	(on_hosts_add_clicked): highlight newly added entry.
+
+	* connection.c (connection_new_from_node): take global gateway
+	param if one for the connection is not present.
+	(fill_ppp_adv): set wins_use state.
+
+	* callbacks.c (on_connection_delete_clicked): Activate "Apply".
+	(on_wins_use_toggled): callback for new check button.
+	
+
 2001-02-27  Chema Celorio  <chema@celorio.com>
 
 	* Makefile.am (EXTRA_DIST): distcheck fixes

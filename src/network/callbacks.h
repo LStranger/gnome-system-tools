@@ -62,6 +62,7 @@ void on_connection_list_unselect_row (GtkCList *clist, gint row, gint column,
 				      GdkEvent * event, gpointer user_data);
 void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
 void on_samba_use_toggled (GtkWidget *w, gpointer null);
+void on_wins_use_toggled (GtkWidget *w, gpointer null);
 
 void on_status_button_toggled (GtkWidget *w, gpointer null);
 void on_wvlan_adhoc_toggled (GtkWidget *w, gpointer null);
