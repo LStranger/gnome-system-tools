@@ -461,47 +461,14 @@ create_extras (void)
 static void
 user_cursor_change (ETable *table, gint row, gpointer user_data)
 {
-	ETreePath *path;
-	ETreeModel *model;
-	gchar *buf, *label;
-
 	set_active_table (TABLE_USER);
-
-/* new_interface	       
-	model = E_TREE_MODEL (table->model);
-	path = e_tree_model_node_at_row (model, row);
-
-	buf = xst_xml_get_child_content (e_tree_model_node_get_data (model, path), "login");
-	label = g_strconcat (_("Settings for user "), buf, NULL);
-	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-							       "user_settings_frame")), label);
-
-	g_free (label);
-	g_free (buf);
-*/
 	user_actions_set_sensitive (TRUE);
 }
 
 static void
 group_cursor_change (ETable *table, gint row, gpointer user_data)
 {
-	ETreePath *path;
-	ETreeModel *model;
-	gchar *buf, *label;
-
 	set_active_table (TABLE_GROUP);
-/* new_interface		
-	model = E_TREE_MODEL (table->model);
-	path = e_tree_model_node_at_row (model, row);
-
-	buf = xst_xml_get_child_content (e_tree_model_node_get_data (model, path), "name");
-
-	label = g_strconcat (_("Settings for group "), buf, NULL);
-	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-							       "group_settings_frame")), label);
-	g_free (label);
-	g_free (buf);
-*/
 	group_actions_set_sensitive (TRUE);
 }
 

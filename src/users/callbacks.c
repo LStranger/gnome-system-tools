@@ -367,6 +367,7 @@ on_user_settings_gmember_select_row (GtkCList *clist, gint row, gint column, Gdk
 		gtk_widget_set_sensitive (remove,  FALSE);
 		gtk_widget_set_sensitive (primary, FALSE);
 	}
+	
 	else
 	{
 		gtk_widget_set_sensitive (remove,  TRUE);

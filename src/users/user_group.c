@@ -820,15 +820,21 @@ static void
 user_settings_groups (ug_data *ud)
 {
 	GtkCList *list;
+	GtkWidget *w0;
 	gchar *buf;
 	xmlNodePtr gnode;
 	GList *users, *items, *members;
 
-	/* Members */
+	/* members */
 	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember"));
 	gtk_clist_set_auto_sort (list, TRUE);
 	
 	/* Members Primary group */
+	/* Fill groups combo, use node->parent to pass <userdb> */
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
+	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
+	user_fill_settings_group (GTK_COMBO (w0), ud->node);
+
 	buf = xst_xml_get_child_content (ud->node, "gid");
 	gnode = get_corresp_field (get_db_node (ud->node));
 	gnode = get_node_by_data (gnode, "gid", buf);
@@ -836,8 +842,8 @@ user_settings_groups (ug_data *ud)
 	buf = xst_xml_get_child_content (gnode, "name");
 
 	if (buf)
-		my_gtk_clist_set_pixtext (list, buf);
-	
+		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), buf);
+		
 	/* Members Secondary groups */
 	members = get_user_groups (ud->node);
 	my_gtk_clist_append_items (list, members);
@@ -858,7 +864,6 @@ user_settings_prepare (ug_data *ud)
 	GtkWidget *w0;
 	gchar *txt;
 	gchar *login, *comment, *name = NULL;
-	xmlNodePtr group_node;
 	GtkRequisition req;
 
 	g_return_if_fail (ud != NULL);
@@ -869,17 +874,6 @@ user_settings_prepare (ug_data *ud)
 	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	my_gtk_entry_set_text (w0, login);
 	g_free (login);
-
-	/* Fill groups combo, use node->parent to pass <userdb> */
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
-	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-	user_fill_settings_group (GTK_COMBO (w0), ud->node);
-	
-	txt = xst_xml_get_child_content (ud->node, "gid");
-	group_node = get_corresp_field (get_db_node (ud->node));
-	group_node = get_node_by_data (group_node, "gid", txt);
-	name = xst_xml_get_child_content (group_node, "name");
-	my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
 
 	/* Set label for settings_comment_entry */
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_comment_label");
