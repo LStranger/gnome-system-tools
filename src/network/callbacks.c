@@ -286,14 +286,20 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length,
 		 gint *pos, gpointer data)
 {
 	int i = 0;
-	gchar *s = NULL;
+	gchar *pre, *post, *s = NULL;
 	gboolean success;
 	gboolean string_ok = TRUE;
 	EditableFilterRules rules = GPOINTER_TO_INT (data);
 
 	if (rules & EF_ALLOW_IP) {
-		s = g_strconcat (gtk_editable_get_chars (editable, 0, -1), text, NULL);
+		pre  = gtk_editable_get_chars (editable, 0, *pos);
+		post = gtk_editable_get_chars (editable, *pos, -1);
+
+		s = g_strconcat (pre, text, post, NULL);
 		success = is_ip_text_ok (s);
+
+		g_free (pre);
+		g_free (post);
 		g_free (s);
 	} else {
 		while ((i < length) && (string_ok)) {
