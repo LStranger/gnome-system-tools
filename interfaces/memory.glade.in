@@ -6,7 +6,7 @@
   <program_name>memory-admin</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <pixmaps_directory>../../../../../usr/share/ximian-setup-tools/pixmaps</pixmaps_directory>
   <language>C</language>
   <gnome_support>True</gnome_support>
   <gettext_support>True</gettext_support>
@@ -178,7 +178,6 @@
       <last_modification_time>Mon, 04 Sep 2000 08:26:23 GMT</last_modification_time>
     </signal>
     <label>OK</label>
-    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 
   <widget>
@@ -193,7 +192,6 @@
       <last_modification_time>Mon, 04 Sep 2000 08:26:32 GMT</last_modification_time>
     </signal>
     <label>Cancel</label>
-    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 </widget>
 
@@ -802,7 +800,6 @@ file
 		<last_modification_time>Wed, 20 Dec 2000 15:51:23 GMT</last_modification_time>
 	      </signal>
 	      <label>Browse...</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	      <child>
 		<left_attach>2</left_attach>
 		<right_attach>3</right_attach>
@@ -1172,24 +1169,15 @@ file
 	</widget>
 
 	<widget>
-	  <class>GtkAlignment</class>
-	  <name>alignment3</name>
-	  <border_width>4</border_width>
-	  <xalign>1</xalign>
-	  <yalign>0.5</yalign>
-	  <xscale>0</xscale>
-	  <yscale>1</yscale>
+	  <class>GnomePixmap</class>
+	  <name>pixmap3</name>
+	  <filename>32_wrench_logo.png</filename>
 	  <child>
 	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	    <pack>GTK_PACK_END</pack>
 	  </child>
-
-	  <widget>
-	    <class>GnomePixmap</class>
-	    <name>pixmap3</name>
-	    <filename>ximian30.png</filename>
-	  </widget>
 	</widget>
       </widget>
 
@@ -1303,7 +1291,6 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:11 GMT</last_modification_time>
 	  </signal>
 	  <label>Add</label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
@@ -1322,7 +1309,6 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:19 GMT</last_modification_time>
 	  </signal>
 	  <label>Remove</label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
@@ -1341,7 +1327,6 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:27 GMT</last_modification_time>
 	  </signal>
 	  <label>Settings</label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
