@@ -96,6 +96,9 @@ void                xst_dialog_modify              (XstDialog *xd);
 void                xst_dialog_modify_cb           (GtkWidget *w, gpointer data);
 
 GtkWidget          *xst_dialog_get_widget          (XstDialog *xd, const char *widget);
+XstWidget          *xst_dialog_get_xst_widget      (XstDialog *xd, const gchar *name);
+void                xst_dialog_widget_set_user_sensitive (XstDialog *xd, const gchar *name, gboolean state);
+
 void                xst_dialog_add_apply_hook      (XstDialog *xd, XstDialogHookFunc *func, gpointer data);
 void                xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy *xwp);
 

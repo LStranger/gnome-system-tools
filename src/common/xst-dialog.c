@@ -253,6 +253,43 @@ xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy *xwp)
 	apply_widget_policies (xd);
 }
 
+XstWidget *
+xst_dialog_get_xst_widget (XstDialog *xd, const gchar *name)
+{
+	XstWidget *xw = NULL;
+	GtkWidget *widget;
+	GSList *list;
+
+	g_return_val_if_fail (xd != NULL, NULL);
+
+	widget = xst_dialog_get_widget (xd, name);
+
+	for (list = xd->xst_widget_list; list; list = g_slist_next (list))
+	{
+		if (((XstWidget *) list->data)->widget == widget)
+		{
+			xw = list->data;
+			break;
+		}
+	}
+
+	return (xw);
+}
+
+void
+xst_dialog_widget_set_user_sensitive (XstDialog *xd, const gchar *name, gboolean state)
+{
+	XstWidget *xw;
+
+	g_return_if_fail (xd != NULL);
+
+	xw = xst_dialog_get_xst_widget (xd, name);
+	g_assert (xw);
+
+	xw->user_sensitive = state;
+	xst_widget_apply_policy (xw);
+}
+
 static void
 complexity_cb (GtkWidget *w, gpointer data)
 {
