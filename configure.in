@@ -65,7 +65,7 @@ else
 	AC_MSG_ERROR(Did not find GnomeAppLib (GAL) installed)
 fi
 
-GAL_LIBS="`gnome-config --libs gal`"
+GAL_LIBS="`gnome-config --libs gal print`"
 GAL_CFLAGS="`gnome-config --cflags gal`"
 
 AC_SUBST(GAL_LIBS)
