@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.5\n"
-"POT-Creation-Date: 2001-05-21 23:17+0200\n"
+"POT-Creation-Date: 2001-05-23 02:14+0200\n"
 "PO-Revision-Date: 2001-04-19 16:59-0600\n"
 "Last-Translator: Carlos Perelló Marín <carlos@gnome-db.org>\n"
 "Language-Team: Spanish\n"
@@ -653,7 +653,7 @@ msgstr "Opciones"
 
 #: interfaces/boot.glade.in.h:10
 msgid "Starting your computer"
-msgstr "Iniciando su ordenador"
+msgstr "Al iniciar su ordenador"
 
 #: interfaces/boot.glade.in.h:11
 msgid ""
@@ -702,7 +702,7 @@ msgstr "Complejidad"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.in.h:2 src/common/xst-tool.c:626
+#: interfaces/common.glade.in.h:2 src/common/xst-tool.c:640
 msgid "Scanning your system configuration."
 msgstr "Buscando la configuración de su sistema."
 
@@ -752,7 +752,7 @@ msgstr "Revisar"
 
 #: interfaces/disks.glade.in.h:6
 msgid "Check for errors on startup"
-msgstr "Revisar errores al arranque"
+msgstr "Revisar errores durante el arranque"
 
 #: interfaces/disks.glade.in.h:7
 msgid "Choose a mount point"
@@ -764,6 +764,7 @@ msgstr "Detectado"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:6
 #: interfaces/network.glade.in.h:40 src/boot/e-table.c:43
+#: src/print/e-table.c:43
 msgid "Device"
 msgstr "Dispositivo"
 
@@ -845,6 +846,14 @@ msgstr "Tipo:"
 #: interfaces/disks.glade.in.h:29
 msgid "VFAT (Windows 95 and newer)"
 msgstr "VFAT (Windows 95 y posteriores)"
+
+#: interfaces/disks.glade.in.h:30
+msgid "reiserfs (Linux)"
+msgstr "reiserfs (Linux)"
+
+#: interfaces/disks.glade.in.h:31
+msgid "ufs (FreeBSD)"
+msgstr "ufs (FreeBSD)"
 
 #: interfaces/memory.glade.in.h:1 interfaces/nameresolution.glade.in.h:4
 #: interfaces/network.glade.in.h:12 interfaces/shares.glade.in.h:3
@@ -1406,8 +1415,8 @@ msgstr ""
 
 #: interfaces/network.glade.in.h:92
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click "
-"\"Cancel\"."
+"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
+"\"."
 msgstr ""
 "Para continuar configurando su cuenta, pulse «Siguiente». Para salir, pulse "
 "«Cancelar»."
@@ -1425,8 +1434,8 @@ msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
 msgstr ""
-"Emplear el comentario para identificar la interfaz. El gestor de "
-"activaciones le permite establecer quien y cuando activará conexiones."
+"Emplee el comentario para identificar la interfaz. El gestor de activaciones "
+"le permite establecer quien y cuando activará conexiones."
 
 #: interfaces/network.glade.in.h:96
 msgid "User name:"
@@ -1464,8 +1473,8 @@ msgid ""
 msgstr ""
 "Bienvenido al asistente para conexiones a internet. \n"
 "\n"
-"Este asistente le ayudará a configurar una nueva \n"
-"cuenta de internet. \n"
+"Este asistente le ayudará a configurar una nueva\n"
+"cuenta de acceso a internet. \n"
 "\n"
 "Antes de empezar, debe tener un módem y \n"
 "un proveedor de acceso a internet (ISP). Pídale a su \n"
@@ -1531,14 +1540,14 @@ msgstr "Tipo exportado:"
 
 #: interfaces/shares.glade.in.h:18
 msgid "Exports"
-msgstr "Exportados"
+msgstr "Exportado"
 
 #: interfaces/shares.glade.in.h:19
 msgid ""
 "Exports are used to share directories on your computer with other computers "
 "over the network. "
 msgstr ""
-"Exportar se emplea para compartir directorios de su ordenador con otros "
+"«Exportado» se emplea para compartir directorios de su ordenador con otros "
 "ordenadores mediante la red. "
 
 #: interfaces/shares.glade.in.h:21
@@ -1567,19 +1576,19 @@ msgstr "Tipo a importación:"
 
 #: interfaces/shares.glade.in.h:27
 msgid "Imports"
-msgstr "Importaciones"
+msgstr "Importado"
 
 #: interfaces/shares.glade.in.h:28
 msgid ""
 "Imports are directories which reside in other computers and are accessible "
 "to you through the network."
 msgstr ""
-"Importaciones son directorios que residen en otros ordenadores y están "
+"«Importado» son directorios que residen en otros ordenadores y están "
 "accesibles mediante la red."
 
-#: interfaces/shares.glade.in.h:29
+#: interfaces/shares.glade.in.h:29 src/shares/tables.c:769
 msgid "Mount"
-msgstr "Montado"
+msgstr "Montar"
 
 #: interfaces/shares.glade.in.h:30 src/shares/tables.c:74
 msgid "Mount Point"
@@ -1732,7 +1741,7 @@ msgstr "Seleccionar servidores..."
 
 #: interfaces/time.glade.in.h:11
 msgid "Select the servers you wish to use for time synchronization."
-msgstr "Seleccione los servidores que quiere emplear para sincronizar la hora."
+msgstr "Seleccione los servidores que quiera emplear para sincronizar la hora."
 
 #: interfaces/time.glade.in.h:12
 msgid "Selection:"
@@ -1879,7 +1888,7 @@ msgid "Group name:"
 msgstr "Nombre del grupo:"
 
 #: interfaces/users.glade.in.h:36 src/users/e-table.c:50
-#: src/users/user_settings.c:330 src/users/user_settings.c:397
+#: src/users/user_settings.c:333 src/users/user_settings.c:400
 msgid "Groups"
 msgstr "Grupos"
 
@@ -1975,8 +1984,8 @@ msgstr ""
 msgid "Optional settings"
 msgstr "Configuraciones opcionales"
 
-#: interfaces/users.glade.in.h:59 src/users/user_settings.c:337
-#: src/users/user_settings.c:404
+#: interfaces/users.glade.in.h:59 src/users/user_settings.c:340
+#: src/users/user_settings.c:407
 msgid "Password"
 msgstr "Contraseña"
 
@@ -2072,7 +2081,7 @@ msgstr ""
 #: interfaces/users.glade.in.h:83
 msgid ""
 "This is the list of the users available in the system. Create new users or "
-"edit existing user's settings with this dialog."
+"edit existing user settings with this dialog."
 msgstr ""
 "Esta es la lista de los usuarios disponibles en el sistema. Cree nuevos "
 "usuarios o edite las opciones de los ya existentes con este diálogo."
@@ -2082,7 +2091,7 @@ msgid "Use this dialog to create a new profile."
 msgstr "Utilice este dialogo para crear un nuevo perfil."
 
 #. set window title
-#: interfaces/users.glade.in.h:85 src/users/user-druid.c:268
+#: interfaces/users.glade.in.h:85 src/users/user-druid.c:271
 msgid "User Account Wizard"
 msgstr "Asistente para cuentas de usuario"
 
@@ -2128,7 +2137,7 @@ msgstr "¿Está seguro que desea borrar %s?"
 msgid "Default"
 msgstr "Predeterminado"
 
-#: src/boot/e-table.c:41
+#: src/boot/e-table.c:41 src/print/e-table.c:42
 msgid "Type"
 msgstr "Tipo"
 
@@ -2151,8 +2160,7 @@ msgstr "%s (predeterminado)"
 
 #: src/boot/main.c:93
 msgid "Boot Manager Settings - Ximian Setup Tools"
-msgstr ""
-"Opciones del gestor de arranque - Ximian Setup Tools"
+msgstr "Opciones del gestor de arranque - Ximian Setup Tools"
 
 #: src/common/xst-dialog.c:58
 #, c-format
@@ -2180,15 +2188,15 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Se ha producido un error al conectar la señal '%s' con el widget '%s'"
 
-#: src/common/xst-tool.c:530
+#: src/common/xst-tool.c:544
 msgid "Skipping actual save..."
 msgstr "Saltándose el guardado actual..."
 
-#: src/common/xst-tool.c:556
+#: src/common/xst-tool.c:570
 msgid "Updating your system configuration."
 msgstr "Actualizando la configuración de su sistema."
 
-#: src/common/xst-tool.c:680
+#: src/common/xst-tool.c:694
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2196,16 +2204,16 @@ msgstr ""
 "Se produjo un error al ejecutar el script del backend,\n"
 "y la configuración no ha podido ser cargada."
 
-#: src/common/xst-tool.c:854
+#: src/common/xst-tool.c:868
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1003
+#: src/common/xst-tool.c:1017
 msgid "Pretending we are root..."
 msgstr "Intentando ser root..."
 
-#: src/common/xst-tool.c:1007
+#: src/common/xst-tool.c:1021
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -2224,6 +2232,11 @@ msgstr ""
 #: src/disks/main.c:39
 msgid "Disk Partitions"
 msgstr "Particiones de los discos"
+
+#: src/memory/callbacks.c:189
+#, c-format
+msgid "Are You sure you want to remove %s?"
+msgstr "¿Está seguro que desea borrar %s?"
 
 #. No name, no swap
 #: src/memory/callbacks.c:547
@@ -2455,6 +2468,10 @@ msgstr "Patrón"
 msgid "Write"
 msgstr "Escribible"
 
+#: src/shares/tables.c:769
+msgid "Unmount"
+msgstr "Desmontar"
+
 #: src/shares/validate.c:164
 msgid ""
 "Failed to create the path you requested:\n"
@@ -2546,7 +2563,7 @@ msgstr ""
 "Necesita especificar un punto local, es decir, un directorio,\n"
 "donde la importación será montada."
 
-#: src/time/main.c:367
+#: src/time/main.c:384
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -2554,13 +2571,23 @@ msgstr ""
 "No tiene instalado el soporte para NTP. Instálelo en su sistema\n"
 "para habilitar la sincronización con servidores."
 
-#: src/time/main.c:368
+#: src/time/main.c:385
 msgid "NTP support missing."
 msgstr "Falta el soporte para NTP."
 
-#: src/time/main.c:655
+#: src/time/main.c:619
 msgid "Time and Date Settings"
 msgstr "Configuración de hora y fecha"
+
+#: src/users/callbacks.c:88
+msgid "Can't create new user. Check your profile settings."
+msgstr ""
+"No se puede crear un nuevo usuario. Compruebe las preferencias de su perfil."
+
+#: src/users/callbacks.c:97
+msgid "Can't create new user. Too many users probably."
+msgstr ""
+"No se puede crear un nuevo usuario. Seguramente hay demasiados usuarios."
 
 #: src/users/e-table.c:44
 msgid "UID"
@@ -2610,11 +2637,11 @@ msgstr "El GID del usuario es"
 msgid "Users and Groups"
 msgstr "Usuarios y Grupos"
 
-#: src/users/passwd.c:200
+#: src/users/passwd.c:202
 msgid "Passwords doesn't match."
 msgstr "Las contraseñas no coinciden."
 
-#: src/users/passwd.c:204
+#: src/users/passwd.c:206
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -2692,34 +2719,34 @@ msgstr "Defina un nombre de grupo válido, usando sólo letras minúsculas."
 msgid "Group already exists."
 msgstr "El grupo ya existe."
 
-#: src/users/user_group.c:781
+#: src/users/user_group.c:777
 #, c-format
 msgid "Password for User %s"
 msgstr "Contraseña para el usuario %s"
 
-#: src/users/user_group.c:815
+#: src/users/user_group.c:811
 msgid "The root user must not be deleted."
 msgstr "El usuario root no debe ser borrado."
 
-#: src/users/user_group.c:822
+#: src/users/user_group.c:818
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "¿Está seguro que desea borrar el usuario %s?"
 
-#: src/users/user_group.c:845
+#: src/users/user_group.c:841
 msgid "Create New Group"
 msgstr "Crear nuevo grupo"
 
-#: src/users/user_group.c:905
+#: src/users/user_group.c:901
 msgid "The root group must not be deleted."
 msgstr "El grupo root no debe ser borrado."
 
-#: src/users/user_group.c:912
+#: src/users/user_group.c:908
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "¿Está seguro que desea borrar el grupo %s?"
 
-#: src/users/user_group.c:957
+#: src/users/user_group.c:953
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Opciones para el grupo %s"
@@ -3081,6 +3108,22 @@ msgstr "Falta el soporte para reenvío IP."
 msgid "Lpr based Printing"
 msgstr "Impresión basada en lpr"
 
+#: src/print/e-table.c:41
+msgid "Spool"
+msgstr "Cola"
+
+#: src/print/e-table.c:44
+msgid "Paper"
+msgstr "Papel"
+
+#: src/print/e-table.c:45
+msgid "Resolution"
+msgstr "Resolución"
+
+#: src/print/e-table.c:46
+msgid "Share"
+msgstr "Compartir"
+
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
 msgstr "Bus_car"
@@ -3125,12 +3168,12 @@ msgstr ""
 "Actualmente solo soportamos '%s'."
 
 #. give our dialog an OK button and title
-#: src/users/user-account-editor.c:98
+#: src/users/user-account-editor.c:101
 msgid "User Account Editor"
 msgstr "Editor de cuentas de usuario"
 
-#: src/users/user_settings.c:323 src/users/user_settings.c:376
-#: src/users/user_settings.c:390
+#: src/users/user_settings.c:326 src/users/user_settings.c:379
+#: src/users/user_settings.c:393
 msgid "Identity"
 msgstr "Identidad"
 

@@ -46,6 +46,8 @@ AC_CHECK_LIB(crack, FascistCheck, ,[
   AC_MSG_WARN(--    http://www.users.dircon.co.uk/~crypto/)
   AC_MSG_WARN(--    or :)
   AC_MSG_WARN(--    http://www.rpmfind.net/linux/rpm2html/search.php?query=cracklib)
+  AC_MSG_WARN(--    or :)
+  AC_MSG_WARN(--    apt-get install cracklib2-dev)
   AC_MSG_WARN()])
 if test x"$HAVE_LIBCRACK" = xyes ; then
   AC_CHECK_HEADER(crack.h, ,[

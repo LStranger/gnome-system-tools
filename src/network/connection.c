@@ -561,7 +561,7 @@ connection_description_from_type (XstConnectionType type)
 		if (type == xst_iface_desc[i].type)
 			break;
 
-	return g_strdup (xst_iface_desc[i].description);
+	return g_strdup (_(xst_iface_desc[i].description));
 }
 
 extern gchar *
