@@ -344,6 +344,7 @@ gst_share_smb_new_from_xml (xmlNodePtr node)
 
 	g_return_val_if_fail (type != NULL, NULL);
 	g_return_val_if_fail (strcmp (type, "smb") == 0, NULL);
+	g_free (type);
 
 	name    = gst_xml_get_child_content (node, "name");
 	comment = gst_xml_get_child_content (node, "comment");

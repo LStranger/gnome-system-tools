@@ -135,7 +135,7 @@ gst_share_set_property (GObject      *object,
 
 	switch (prop_id) {
 	case PROP_PATH:
-		share->_priv->path    = (gchar*) g_value_dup_string (value);
+		share->_priv->path = (gchar*) g_value_dup_string (value);
 		break;
 	}
 }

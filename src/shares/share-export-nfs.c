@@ -155,6 +155,7 @@ gst_share_nfs_new_from_xml (xmlNodePtr node)
 
 	g_return_val_if_fail (type != NULL, NULL);
 	g_return_val_if_fail (strcmp (type, "nfs") == 0, NULL);
+	g_free (type);
 
 	path = gst_xml_get_child_content (node, "path");
 	share = gst_share_nfs_new (path);
