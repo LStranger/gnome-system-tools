@@ -1,16 +1,17 @@
 # translation of el.po to Greek
 # Greek gnome-system--tools translation.
-# Copyright (C) 2003 Free Software Foundation, Inc.
+# Copyright (C) 2003, 2004 Free Software Foundation, Inc.
 # kostas, 18Feb2003. 825 messages
+# kostas, 11Jan2004. 494 messages
 # Simos Xenitellis <simos@hellug.gr>, 2001.
-# Kostas Papadimas <pkst@gnome.org>, 2003.
+# Kostas Papadimas <pkst@gnome.org>, 2003, 2004.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-16 12:46+0200\n"
-"PO-Revision-Date: 2003-11-16 12:47+0200\n"
+"POT-Creation-Date: 2004-01-11 11:42+0200\n"
+"PO-Revision-Date: 2004-01-11 12:44+0200\n"
 "Last-Translator: Kostas Papadimas <pkst@gnome.org>\n"
 "Language-Team: Greek <nls@tux.hellug.gr>\n"
 "MIME-Version: 1.0\n"
@@ -90,8 +91,8 @@ msgid "Whether the warning dialog should be shown or not"
 msgstr "Αν θα εμφανίζεται ή όχι ο διάλογος  προειδοποίησης"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
+#: interfaces/disks.glade.in.h:2 interfaces/network.glade.in.h:1
+#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -168,10 +169,6 @@ msgid "Ask at boot"
 msgstr "Ερώτηση κατά το boot"
 
 #: interfaces/boot.glade.in.h:20
-msgid "Boot Image Assistant"
-msgstr "Βοηθός εικόνας Boot"
-
-#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -181,14 +178,20 @@ msgstr ""
 "root. Προαιρετικά, μπορείτε να εισάγετε παράμετρους  που θα περνάνε στον "
 "πυρήνα κατά την εκκίνηση."
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:21
 msgid "Click \"Forward\" to continue"
 msgstr "Πατήστε \"Μπροστά\" για συνέχεια"
 
 #
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:22
 msgid "Confirmation"
 msgstr "Επιβεβαίωση"
+
+#. set window title
+#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
+#: src/boot/boot-druid.c:441
+msgid "Creating a new boot image"
+msgstr "Δημιουργία μιας νέας εικόνας boot"
 
 #: interfaces/boot.glade.in.h:24
 msgid "Enable IDE SCSI emulation"
@@ -202,71 +205,57 @@ msgstr ""
 "Εισάγετε ένα όνομα για την εικόνα boot, και καθορίστε το είδος του "
 "λειτουργικού συστήματος."
 
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:40
+#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:42
 msgid "Finished"
 msgstr "Ολοκληρώθηκε"
 
-#: interfaces/boot.glade.in.h:27
-msgid "Image Settings (Step 1 of 2)"
-msgstr "Ρυθμίσεις εικόνας (βήμα 1 από 2)"
-
-#: interfaces/boot.glade.in.h:28
-msgid "Image Settings (Step 2 of 2)"
-msgstr "Ρυθμίσεις εικόνας (βήμα 2 από 2)"
-
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1786
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:51
+#: src/network/connection.c:1843
 msgid "Manual"
 msgstr "Χειρωνακτική"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:28
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Τροποποίηση των ρυθμίσεων για το λειτουργικό σύστημα ή το πυρήνα."
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:29
 msgid "Number of colors:"
 msgstr "Αριθμός χρωμάτων:"
 
-#: interfaces/boot.glade.in.h:32
-msgid "Other Operating System (Step 2 of 2)"
-msgstr "Άλλο λειτουργικό σύστημα (βήμα 2 από 2)"
-
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:30
 msgid "Other parameters:"
 msgstr "Άλλες παράμετροι:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:31
 msgid "Password"
 msgstr "Κωδικός"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:32
 msgid "Protect with password"
 msgstr "Προστασία με κωδικό"
 
 #
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:33
 msgid "Resolution:"
 msgstr "Aνάλυση:"
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:34
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "Αναμονή σε δευτερόλεπτα πριν τη φόρτωση προεπιλεγμένου πυρήνα ή λειτουργικού"
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:35
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Καθορίστε το διαμέρισμα στο οποίο είναι εγκατεστημένο το λειτουργικό."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:36
 msgid ""
-"The new boot image has been added.\n"
-"\n"
-"Please click \"Apply\" to save your changes."
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
 msgstr ""
-"Η νέα εικόνα boot προστέθηκε.\n"
-"\n"
-"Πατήστε \"Εφαρμογή\" για να αποθηκευτούν οι αλλαγές."
+"Η νέα εικόνα boot προστέθηκε. Πατήστε \"Εφαρμογή\" για να αποθηκευτούν οι "
+"αλλαγές."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:37
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -274,55 +263,55 @@ msgstr ""
 "Αυτός ο βοηθός σχεδιάστηκε για να σας βοηθήσει να προσθέσετε εύκολα και "
 "γρήγορα νέες εικόνες boot στο σύστημα σας."
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:38
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Χρήση αυτού του διαλόγου για την παραμετροποίηση παραμέτρων πυρήνα."
 
-#: interfaces/boot.glade.in.h:44
+#: interfaces/boot.glade.in.h:39
 msgid "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Χρήση αυτού του εργαλείου για τη ρύθμιση επιλογής  από τους χρήστες "
 "λειτουργικών συστημάτων κατά την εκκίνηση."
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:40
 msgid "Video modes (only frame buffer)"
 msgstr "Video modes (only framebuffer)"
 
 #
-#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:85
+#: interfaces/boot.glade.in.h:41
 msgid "_Add..."
 msgstr "_Προσθήκη..."
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:42
 msgid "_Device:"
 msgstr "_Συσκευή:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:43
 msgid "_Edit"
 msgstr "_Επεξεργασία:"
 
-#: interfaces/boot.glade.in.h:49 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Διαδρομή εικόνας _Initrd:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:45
 msgid "_Kernel image path:"
 msgstr "Διαδρομή εικόνας _πυρήνα:"
 
 #
-#: interfaces/boot.glade.in.h:51
+#: interfaces/boot.glade.in.h:46
 msgid "_Name:"
 msgstr "Ό_νομα:"
 
-#: interfaces/boot.glade.in.h:52
+#: interfaces/boot.glade.in.h:47
 msgid "_Operating system:"
 msgstr "_Λειτουργικό σύστημα:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:48
 msgid "_Parameters:"
 msgstr "_Παράμετροι:"
 
-#: interfaces/boot.glade.in.h:54
+#: interfaces/boot.glade.in.h:49
 msgid "_Root file system device:"
 msgstr "Συσκευή συστήματος αρχείων _root:"
 
@@ -391,9 +380,172 @@ msgid "Use this window to select the computer you wish to configure"
 msgstr "Χρήση αυτού του παραθύρου για τον υπολογιστή που θέλετε να ρυθμίσετε"
 
 #
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:107
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:108
 msgid "_Password:"
 msgstr "_Κωδικός:"
+
+#: interfaces/disks.glade.in.h:1
+msgid " "
+msgstr " "
+
+#
+#: interfaces/disks.glade.in.h:3
+msgid "<b>Configuration</b>"
+msgstr "<b>Ρύθμιση</b>"
+
+#: interfaces/disks.glade.in.h:4
+msgid "<b>General Information</b>"
+msgstr "<b>Γενικές Πληροφορίες</b>"
+
+#: interfaces/disks.glade.in.h:5
+msgid "<b>Partition List</b>"
+msgstr "<b>Λίστα διαμερίσματος</b>"
+
+#
+#: interfaces/disks.glade.in.h:6
+msgid "<b>Partition Properties</b>"
+msgstr "<b>Ιδιότητες διαμερίσματος</b>"
+
+#: interfaces/disks.glade.in.h:7
+msgid "<b>Storage List</b>"
+msgstr "<b>Λίστα αποθηκευτικών χώρων</b>"
+
+#
+#: interfaces/disks.glade.in.h:8
+msgid "<b>Storage Properties</b>"
+msgstr "<b>Ιδιότητες αποθηκευτικού χώρου</b>"
+
+#: interfaces/disks.glade.in.h:9
+msgid "<b>Supported Features</b>"
+msgstr "<b>Υποστηριζόμενες λειτουργίες</b>"
+
+#: interfaces/disks.glade.in.h:10
+msgid ""
+"<big><b>Storage Settings</b></big>\n"
+"Configure your hard disks and storage devices."
+msgstr ""
+".<big><b>Ρυθμίσεις αποθηκευτικοιύ χώρου</b></big>\n"
+"Ρυθμίστε τους σκληρούς δίσκους και τις συσκευές αποθήκευσης σας."
+
+#: interfaces/disks.glade.in.h:12
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#: interfaces/disks.glade.in.h:13
+msgid "Device: "
+msgstr "Συσκευή:"
+
+#: interfaces/disks.glade.in.h:14
+msgid "Enable DMA"
+msgstr "Ενεργοποίηση DMA"
+
+#: interfaces/disks.glade.in.h:15
+msgid "Extended 2"
+msgstr "Extended 2"
+
+#: interfaces/disks.glade.in.h:16
+msgid "Extended 3"
+msgstr "Extended 3"
+
+#: interfaces/disks.glade.in.h:17
+msgid "FAT"
+msgstr "FAT"
+
+#: interfaces/disks.glade.in.h:18
+msgid "Filesystem:"
+msgstr "Σύστημα αρχείων "
+
+#: interfaces/disks.glade.in.h:19 src/disks/disks-storage-disk.c:83
+msgid "Hard Disk"
+msgstr "Σκληρός δίσκος"
+
+#: interfaces/disks.glade.in.h:20
+msgid "JFS"
+msgstr "JFS"
+
+#: interfaces/disks.glade.in.h:21
+msgid "Memory Swap"
+msgstr "Μνήμη Swap"
+
+#: interfaces/disks.glade.in.h:22
+msgid "Mount Point:"
+msgstr "Σημείο προσάρτησης:"
+
+#: interfaces/disks.glade.in.h:23
+msgid "NTFS"
+msgstr "NTFS"
+
+#: interfaces/disks.glade.in.h:24 src/disks/callbacks.c:312
+#: src/disks/callbacks.c:313 src/disks/callbacks.c:328
+#: src/disks/callbacks.c:329
+msgid "Not Available"
+msgstr "Μή διαθέσιμο"
+
+#: interfaces/disks.glade.in.h:25
+msgid "Partitions"
+msgstr "Διαμερίσματα"
+
+#: interfaces/disks.glade.in.h:26
+msgid "Play Audio"
+msgstr "Αναπαραγωγή ήχου"
+
+#: interfaces/disks.glade.in.h:27
+msgid "Properties"
+msgstr "Ιδιότητες"
+
+#: interfaces/disks.glade.in.h:28
+msgid "Read DVD"
+msgstr "Ανάγνωση DVD"
+
+#: interfaces/disks.glade.in.h:29
+msgid "Reiser FS"
+msgstr "Reiser FS"
+
+#: interfaces/disks.glade.in.h:30
+msgid "Size:"
+msgstr "Μέγεθος:"
+
+#: interfaces/disks.glade.in.h:31
+msgid "Speed"
+msgstr "Ταχύτητα"
+
+#: interfaces/disks.glade.in.h:32
+msgid "Speed:"
+msgstr "Ταχύτητα:"
+
+#
+#: interfaces/disks.glade.in.h:33
+msgid "Type:"
+msgstr "Τύπος:"
+
+#
+#: interfaces/disks.glade.in.h:34
+msgid "Type: "
+msgstr "Τύπος:"
+
+#: interfaces/disks.glade.in.h:35
+msgid "Write CD-R"
+msgstr "Εγγραφή CD-R"
+
+#: interfaces/disks.glade.in.h:36
+msgid "Write CD-RW"
+msgstr "Εγγραφή CD-RW"
+
+#: interfaces/disks.glade.in.h:37
+msgid "Write DVD-R"
+msgstr "Εγγραφή DVD-R"
+
+#: interfaces/disks.glade.in.h:38
+msgid "Write DVD-RAM"
+msgstr "Εγγραφή DVD-RAM"
+
+#: interfaces/disks.glade.in.h:39
+msgid "XFS"
+msgstr "XFS"
+
+#: interfaces/disks.glade.in.h:40
+msgid "_Format"
+msgstr "_Μορφοποίηση"
 
 #: interfaces/network.glade.in.h:2
 msgid "/dev/modem"
@@ -471,153 +623,162 @@ msgstr "Ψευ_δώνυμα:"
 msgid "Account"
 msgstr "Λογαριασμός"
 
+#
 #: interfaces/network.glade.in.h:21
+msgid "Activate"
+msgstr "Ενεργοποίηση"
+
+#: interfaces/network.glade.in.h:22
 msgid "Activate when the computer _starts"
 msgstr "Ενεργοποίηση κατά την ε_κίνηση του υπολογιστή"
 
-#: interfaces/network.glade.in.h:22 src/network/network-druid.c:412
-msgid "Address configuration (Step 1 of 2)"
-msgstr "Ρύθμιση διεύθυνσης (βήμα 1 από 2)"
+#: interfaces/network.glade.in.h:23
+msgid "Address configuration"
+msgstr "Ρύθμιση διεύθυνσης"
 
 #
-#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:14
+#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
 #
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:25
 msgid "Advanced PPP connection tuning."
 msgstr "Προχωρημένες ρυθμίσεις σύνδεσης PPP "
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:26
 msgid "Aliases of other computers."
 msgstr "Ψευδώνυμα άλλων υπολογιστών."
 
-#: interfaces/network.glade.in.h:26
+#: interfaces/network.glade.in.h:27
 msgid "Allow activation control for all _users"
 msgstr "Να επιτρέπεται ο έλεγχος ενεργοποίησης για όλους τους _χρήστες"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:28
 msgid "Auto"
 msgstr "Αυτόματη"
 
-#: interfaces/network.glade.in.h:28 src/network/connection.c:1788
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
 msgid "BOOTP"
 msgstr "BOOTP"
 
 #
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:30
 msgid "Co_nfiguration:"
 msgstr "Ρύ_θμιση:"
 
 #
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:31
 msgid "Connection _name:"
 msgstr "Ό_νομα σύνδεσης:"
 
 #
-#: interfaces/network.glade.in.h:31 src/network/network-druid.c:449
-#: src/network/network-druid.c:460
-msgid "Connection name (Step 3 of 3)"
-msgstr "Όνομα σύνδεσης  (Βήμα 3 από 3)"
+#: interfaces/network.glade.in.h:32
+msgid "Connection name"
+msgstr "Όνομα σύνδεσης:"
 
 #
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "Τύπος σύνδεσης"
 
 #
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Συνδέσεις"
 
-#: interfaces/network.glade.in.h:34
+#. set window titles
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "Δημιουργία μιας νέας σύνδεσης δικτύου"
 
-#: interfaces/network.glade.in.h:35 src/network/connection.c:1787
+#: interfaces/network.glade.in.h:36
+msgid "Current network profile:"
+msgstr "Τρέχον προφίλ δικτύου"
+
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:39
 msgid "Default gateway device:"
 msgstr "Προεπιλεγμένη συσκευή Gateway:"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:40
 msgid "Device:"
 msgstr "Συσκευή:"
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:41
 msgid "Domain / _Workgroup:"
 msgstr "Τομέας / _Ομάδα Εργασίας:"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:43
 msgid "General"
 msgstr "Γενικά"
 
-#: interfaces/network.glade.in.h:42 src/network/main.c:214
+#: interfaces/network.glade.in.h:44
 msgid "Hosts"
 msgstr "Συστήματα"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:45
 msgid "How the names of other computers are found."
 msgstr "Τρόπος εύρεσης ονομάτων άλλων υπολογιστών."
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:46
 msgid "How this computer is identified."
 msgstr "Ο τρόπος της αναγνώρισης αυτου του υπολογιστή"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:47
 msgid "How to access other computers."
 msgstr "Τρόπος πρόσβασης σε άλλους υπολογιστές."
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:48
 msgid "How to dial up to the Internet."
 msgstr "Τρόπος κλήσης στο διαδίκτυο."
 
-#: interfaces/network.glade.in.h:47
-msgid "ISP phone number (Step 1 of 3)"
-msgstr "Αριθμός τηλεφώνου ISP (Βήμα 1 από 3)"
+#: interfaces/network.glade.in.h:49
+msgid "ISP phone number"
+msgstr "Αριθμός τηλεφώνου ISP"
 
 #
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:50
 msgid "Interface properties"
 msgstr "Ιδιότητες διεπαφής"
 
 #
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:52
 msgid "Modem _volume:"
 msgstr "Ένταση _μόντεμ:"
 
 #
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:53
 msgid "Network name:"
 msgstr "Όνομα δικτύου:"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:54
 msgid "Network profiles"
 msgstr "Προφίλ δικτύου"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:55
 msgid "Network profiles can be used to store different network configurations."
 msgstr ""
 "Προφίλ δικτύου που μπορούν να χρησιμοποιηθούν για την αποθήκευση "
 "διαφορετικών ρυθμίσεων δικτύου."
 
 #
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Networking Settings"
 msgstr "Ρυθμίσεις Δικτύωσης"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "New network profile"
 msgstr "Νέο προφίλ δικτύου"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -625,7 +786,7 @@ msgstr ""
 "Μετά, εισάγετε το όνομα χρήστη και τον κωδικό που σας έχουν δοθεί από τον "
 "ISP σας."
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -633,36 +794,36 @@ msgstr ""
 "Τώρα, εισάγετε την διεύθυνση που θα έχει αυτή η συσκευή δικτύου, και την "
 "απομακρυσμένη διεύθυνση  με την οποία θα συνδεθείτε."
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid "Now, please enter the address that this network device will have."
 msgstr "Τώρα, εισάγετε την διεύθυνση που θα έχει αυτή η συσκευή δικτύου."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid "Now, please give this connection a name."
 msgstr "Τώρα, δώστε ένα όνομα σε αυτή την σύνδεση."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Number to _access an external line:"
 msgstr "Αριθμός για πρόσβαση σε  εξωτερική γραμμή:"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Number to get to an _external line:"
 msgstr "Αριθμός για λήψη ε_ξωτερικής γραμμής:"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid "PPPD _options:"
 msgstr "Επιλ_ογές PPPD:"
 
 #
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:65
 msgid "Pa_ssword (confirm):"
 msgstr "Κω_δικός (επιβεβαίωση):"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:66
 msgid "Phone _number:"
 msgstr "Αριθ_μός τηλεφώνου:"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:67
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
@@ -670,7 +831,7 @@ msgstr ""
 "Παρακαλώ, καταχωρήστε τον αριθμό τηλεφώνου που θα χρησιμοποιείτε για να "
 "συνδεθείτε με το διαδίκτυο. Αυτός ο αριθμός παρέχεται από τον ISP σας. "
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
@@ -678,36 +839,36 @@ msgstr ""
 "Παρακαλώ επιλέξτε την ασύρματη συσκευή που θέλετε να ρυθμίσετε και ορίστε το "
 "όνομα δικτύου για αυτή την διεπαφή"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
 msgid "Please, give this network profile a name and a description."
 msgstr "Παρακαλώ δώστε σε ααυτό το προφίλ δικτύου ένα όνομα και μια περιγραφή"
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:70
 msgid "Please, select which type of connection you would like to add."
 msgstr "Επιλέξτε τον τύπο σύνδεσης που επιθυμείτε να προσθέσετε."
 
-#: interfaces/network.glade.in.h:69 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:71 interfaces/users.glade.in.h:38
 msgid "Profile _name:"
 msgstr "Ό_νομα προφίλ:"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:72
 msgid "Pulses"
 msgstr "Παλμοί"
 
 #
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:73
 msgid "Se_condary:"
 msgstr "Δευ_τερεύον:"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:74
 msgid "Set _DNS servers manually"
 msgstr "Χειροκίνητος ορισμός εξυπηρετητών _DNS"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:75
 msgid "Set modem as default _route to internet"
 msgstr "Καθορισμός μόντεμ ως τον προεπιλεγμένο  _route στο διαδίκτυο"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:76
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
@@ -715,7 +876,7 @@ msgstr ""
 "Αυτός ο βοηθός σας σας οδηγήσει να ρυθμίσετε μια \n"
 "νέα ρύθμιση δικτύου."
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:78
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -723,36 +884,36 @@ msgstr ""
 "Για να συνεχίσετε με την ρύθμιση της σύνδεσης σας, πατήστε  \"Επόμενο\". Για "
 "έξοδο πατήστε \"Άκυρο\"."
 
-#: interfaces/network.glade.in.h:77
+#: interfaces/network.glade.in.h:79
 msgid "Tones"
 msgstr "Τόνοι"
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:80
 msgid "Use \"Auto\" if unsure."
 msgstr "Χρήση \"Αυτόματη\" αν δεν είστε σίγουροι."
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:81
 msgid "Use this dialog for setting the configuration for this interface"
 msgstr "Χρήση του διαλόγου για τον ορισμό των ρυθμίσεων για αυτή την διεπαφή"
 
-#: interfaces/network.glade.in.h:80
-msgid "Username and password (Step 2 of 3)"
-msgstr "Όνομα και κωδικός χρήστη  (Βήμα 2 από 3)"
+#: interfaces/network.glade.in.h:82
+msgid "Username and password"
+msgstr "Όνομα και κωδικός χρήστη"
 
 #
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:83
 msgid "WI_NS server:"
 msgstr "Εξυπηρέτης WI_NS:"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:84
 msgid "Wireless device:"
 msgstr "Ασύρματη συσκευή:"
 
-#: interfaces/network.glade.in.h:83
-msgid "Wireless settings (Step 1 of 3)"
-msgstr "Ρυθμίσεις ασύρματης σύνδεσης (βήμα 1 από 3)"
+#: interfaces/network.glade.in.h:85
+msgid "Wireless settings"
+msgstr "Ρυθμίσεις ασύρματης σύνδεσης"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:86
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
@@ -760,153 +921,153 @@ msgstr ""
 "Είστε έτοιμοι να δημιουργήσετε μια νέα σύνδεση δικτύου .Πατήστε \"Εφαρμογή\" "
 "για να αποθηκευτούν οι αλλαγές."
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:87
 msgid "_Autodetect"
 msgstr "_Αυτόματος εντοπισμός"
 
 #
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:88
 msgid "_Comment:"
 msgstr "_Σχόλιο:"
 
 #
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:89
 msgid "_Configuration:"
 msgstr "_Ρύθμιση"
 
 #
-#: interfaces/network.glade.in.h:89
-msgid "_Configure"
-msgstr "Ρύ_θμιση"
+#: interfaces/network.glade.in.h:90
+msgid "_Deactivate"
+msgstr "Α_πενεργοποίηση"
 
 #
-#: interfaces/network.glade.in.h:90 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:91 interfaces/users.glade.in.h:55
 msgid "_Delete"
 msgstr "_Διαγραφή"
 
 #
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:92
 msgid "_Description:"
 msgstr "_Περιγραφή:"
 
 #
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:93
 msgid "_Dial type:"
 msgstr "Τύπος κ_λήσης::"
 
 #
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:94
 msgid "_Domain name:"
 msgstr "Όνομα _Τομέα:"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:95
 msgid "_Enable Windows networking"
 msgstr "_Ενεργοποίηση δικτύωσης Windows"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:96
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
 #
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:97
 msgid "_Gateway address:"
 msgstr "Διεύθυνση _Gateway:"
 
 #
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:98
 msgid "_Hostname:"
 msgstr "_Όνομα συστήματος:"
 
 #
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:99
 msgid "_IP address:"
 msgstr "Διεύθυνση _IP :"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:100
 msgid "_IR LAN"
 msgstr "_IR LAN"
 
 #
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:101
 msgid "_Local IP address:"
 msgstr "Το_πική διεύθυνση IP :"
 
 #
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:102
 msgid "_Local IP:"
 msgstr "Τοπι_κή IP:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:103
 msgid "_Modem (PPP)"
 msgstr "_Μόντεμ (PPP)"
 
 #
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:104
 msgid "_Modem port:"
 msgstr "Θύρα _μόντεμ:"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:105
 msgid "_Network Profiles"
 msgstr "Προφίλ _δικτύου"
 
 #
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:106
 msgid "_Network name:"
 msgstr "Όνομα _δικτύου:"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:107
 msgid "_Parallel Line"
 msgstr "_Παράλληλη γραμμή"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:109
 msgid "_Phone number:"
 msgstr "Αριθμός τηλε_φώνου:"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:110
 msgid "_Primary:"
 msgstr "Κύ_ριο:"
 
 #
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:111
 msgid "_Remote IP address:"
 msgstr "Απομακ_ρυσμένη διεύθυνση IP :"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:112
 msgid "_Remote IP:"
 msgstr "Απομακ_ρυσμένη IP:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:113
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Προσπάθεια ξανά αν η γραμμή πέσει ή αποτύχει να ξεκινήσει"
 
 #
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:114
 msgid "_Save Current"
 msgstr "Αποθήκευ_ση τρέχουσας"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:115
 msgid "_Start PPP as soon as modem connects"
 msgstr "Ε_κκίνηση  PPP μόλις συνδέεται το μόντεμ"
 
 #
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:116
 msgid "_Subnet mask:"
 msgstr "Μάσκα _Subnet:"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:117
 msgid "_Update DNS when this connection becomes active"
 msgstr "Εημέρ_ωση DNS κατά την ενεργοποίηση της σύνδεσης"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:118
 msgid "_Use remote IP as default gateway"
 msgstr "_Χρήση απομακρυσμένης IP ως την προεπιλεγμένη gateway"
 
 #
-#: interfaces/network.glade.in.h:118 interfaces/users.glade.in.h:66
+#: interfaces/network.glade.in.h:119 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "_Όνομα χρήστη:"
 
-#: interfaces/network.glade.in.h:119
+#: interfaces/network.glade.in.h:120
 msgid "_Wireless"
 msgstr "Α_σύρματη"
 
@@ -932,25 +1093,31 @@ msgid "Description:"
 msgstr "Περιγραφή:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr "Παράμετροι:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "Προτεραιότητα:"
 
 #
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "Ιδιότητες υπηρε_σίας"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Service:"
 msgstr "Υπηρεσία:"
+
+#
+#: interfaces/services.glade.in.h:9
+msgid "Status:"
+msgstr "Κατάσταση:"
 
 #: interfaces/services.glade.in.h:10
 msgid "Use this tool to specify which services to run"
 msgstr "Χρήση αυτού του εργαλείου για την ρύθμιση των εκτελούμενων υπηρεσιών"
+
+#
+#: interfaces/services.glade.in.h:11
+msgid "_Start"
+msgstr "Ένα_ρξη"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1258,28 +1425,24 @@ msgstr "Κύ_ρια ομάδα"
 msgid "_Profile:"
 msgstr " _Προφίλ:"
 
-#: interfaces/users.glade.in.h:62
-msgid "_Profiles..."
-msgstr "Προ_φίλ..."
-
 #
-#: interfaces/users.glade.in.h:63
+#: interfaces/users.glade.in.h:62
 msgid "_Real name:"
 msgstr "Α_ληθινό όνομα:"
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:63
 msgid "_Shell:"
 msgstr "Κέ_λυφος"
 
-#: interfaces/users.glade.in.h:65
+#: interfaces/users.glade.in.h:64
 msgid "_User's groups:"
 msgstr "Ομάδες χρή_στη:"
 
-#: interfaces/users.glade.in.h:67
+#: interfaces/users.glade.in.h:66
 msgid "_Work phone:"
 msgstr "Τηλέφωνο ε_ργασίας:"
 
-#: interfaces/users.glade.in.h:68
+#: interfaces/users.glade.in.h:67
 msgid "profiles_table"
 msgstr "πίνακας_προφίλ"
 
@@ -1288,12 +1451,17 @@ msgstr "πίνακας_προφίλ"
 msgid "vga=%s is not a valid vga value"
 msgstr "vga=%s δεν είναι έγκυρη τιμή vga"
 
-#. set window title
-#: src/boot/boot-druid.c:407
-msgid "Creating a new boot image"
-msgstr "Δημιουργία μιας νέας εικόνας boot"
+#: src/boot/boot-druid.c:430
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "Δημιουργία μιας νέας εικόνας boot (%d of %d)"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:466
+#: src/boot/boot-druid.c:431
+msgid "Finished creating a new boot image"
+msgstr "Ολοκληρώθηκε η δημιουργία μιας νέας εικόνας boot"
+
+#: src/boot/boot-image.c:40 src/disks/disks-storage-partition.c:128
+#: src/disks/disks-storage.c:101 src/network/profile.c:467
 msgid "Unknown"
 msgstr "Άγνωστο"
 
@@ -1425,13 +1593,15 @@ msgstr "Συσκευή"
 msgid "/_Add ..."
 msgstr "/_Προσθήκη..."
 
-#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/Ι_διότητες"
 
 #
-#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/disks/disks-gui.c:44 src/network/connection.c:60
+#: src/network/dns.c:39 src/network/hosts.c:43 src/users/table.c:50
+#: src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Διαγραφή"
 
@@ -1463,7 +1633,7 @@ msgstr "Περισσότερες Επιλ_ογές"
 msgid " Fewer _Options"
 msgstr "Λιγότερες Επιλ_ογές"
 
-#: src/common/gst-dialog.c:504
+#: src/common/gst-dialog.c:507
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1471,21 +1641,21 @@ msgstr ""
 "Αυτές είναι οι αλλαγές που δεν έχουν εφαρμοστεί.\n"
 "Να εφαρμοστούν τώρα?"
 
-#: src/common/gst-dialog.c:621
+#: src/common/gst-dialog.c:624
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Σφάλμα σινιάλου σύνδεσης `%s' σε γραφικό συστατικό `%s'"
 
-#: src/common/gst-tool.c:820
+#: src/common/gst-tool.c:822
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Παράκαμψη %s directive..."
 
-#: src/common/gst-tool.c:951
+#: src/common/gst-tool.c:953
 msgid "Skipping actual save..."
 msgstr "Παράκαμψη πραγματικής αποθήκευσης..."
 
-#: src/common/gst-tool.c:1024
+#: src/common/gst-tool.c:1026
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1493,7 +1663,7 @@ msgstr ""
 "Υπήρξε σφάλμα κατά την εκτέλεση του backend script,\n"
 "και η ρύθμιση δεν είναι δυνατόν να φορτωθεί."
 
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1507
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1502,7 +1672,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Καλώς ήλθατε στην  %s προέκδοση GNOME "
 "System Tools</span>"
 
-#: src/common/gst-tool.c:1508
+#: src/common/gst-tool.c:1510
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1517,66 +1687,73 @@ msgstr ""
 "Ευχαριστούμε που δοκιμάζετε αυτή την προέκδοση των Εργαλείων Συστήματος "
 "GNOME."
 
-#: src/common/gst-tool.c:1529
+#: src/common/gst-tool.c:1531
 msgid "Warning"
 msgstr "Προειδοποίηση"
 
-#: src/common/gst-tool.c:1549
+#: src/common/gst-tool.c:1551
 msgid "Don't show me this again"
 msgstr "Να μην εμφανιστεί αυτό το μήνυμα ξανά"
 
-#: src/common/gst-tool.c:1623
+#: src/common/gst-tool.c:1625
 msgid "GNOME System Tools"
 msgstr "Εργαλεία Συστήματος GNOME"
 
-#: src/common/gst-ui.c:396
+#: src/common/gst-ui.c:389
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr ""
 "Παρακαλώ επανεκκινήστε την συνεδρία του GNOME για να πραγματοποιηθούν οι "
 "αλλαγές."
 
-#
-#: src/network/callbacks.c:116 src/services/table.c:55
-msgid "Active"
-msgstr "Ενεργό"
+#: src/disks/callbacks.c:304 src/disks/callbacks.c:305
+msgid "(Getting ...)"
+msgstr "(Λήψη ...)"
+
+#: src/disks/disks-gui.c:43
+msgid "/_Format"
+msgstr "/_Μορφοποίηση"
+
+#: src/disks/disks-storage-cdrom.c:103
+msgid "CDROM"
+msgstr "CDROM"
+
+#: src/disks/disks-storage-floppy.c:71
+msgid "Floppy"
+msgstr "Δισκέτα"
+
+#: src/disks/disks-storage-partition.c:260
+msgid "Swap Partition"
+msgstr "Διαμέρισμα Swap"
+
+#: src/disks/disks-storage.c:100
+msgid "Unknown Storage"
+msgstr "Άγνωστος αποθηκευτικός χώρος"
+
+#: src/disks/disks.desktop.in.in.h:1
+msgid "Configure the system disks"
+msgstr "Ρύθμιση των δίσκων συστήματος"
+
+#: src/disks/disks.desktop.in.in.h:2
+msgid "Disks"
+msgstr "Δίσκοι"
+
+#: src/disks/main.c:76
+msgid "Disks Manager"
+msgstr "Διαχείριση δίσκων"
 
 #
-#: src/network/callbacks.c:119
-msgid "Activating"
-msgstr "Ενεργοποίηση"
-
-#: src/network/callbacks.c:130
-msgid "Inactive"
-msgstr "Ανενεργό"
-
-#
-#: src/network/callbacks.c:133
-msgid "Deactivating"
-msgstr "Απενεργοποίηση"
-
-#
-#: src/network/callbacks.c:455
+#: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Απομάκρυνση σύνδεσης %s: \"%s\"?"
 
 #
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:367
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Απομάκρυνση σύνδεσης %s?"
 
-#: src/network/callbacks.c:523
-#, c-format
-msgid "Activating connection ``%s.''"
-msgstr " ``%s.''"
-
-#: src/network/callbacks.c:561
-#, c-format
-msgid "Deactivating connection ``%s.''"
-msgstr "Απενεργοποίηση σύνδεσης ``%s.''"
-
-#: src/network/callbacks.c:600
+#: src/network/callbacks.c:463
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1585,11 +1762,11 @@ msgstr ""
 "στο σύστημα για να ενεργοποιήσετε το windows networking."
 
 #
-#: src/network/callbacks.c:603
+#: src/network/callbacks.c:466
 msgid "SMB support missing."
 msgstr "Η υποστήριξη SMB λείπει"
 
-#: src/network/callbacks.c:654
+#: src/network/callbacks.c:522
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1598,7 +1775,7 @@ msgstr ""
 "εφαρμογών, και έτσι θα πρέπει να μπείτε στο σύστημα ξανά. Θέλετε να "
 "συνεχίσετε οπωσδήποτε?"
 
-#: src/network/callbacks.c:702
+#: src/network/callbacks.c:570
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1606,7 +1783,7 @@ msgstr ""
 "Το wvdial δεν βρέθηκε στο σύστημα σας. Θα πρέπει να εγκαταστήσετε το wvdial, "
 "αλλιώς οι συνδέσεις PPP (μόντεμ) δεν θα είναι ενεργές."
 
-#: src/network/callbacks.c:729
+#: src/network/callbacks.c:597
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1615,7 +1792,7 @@ msgstr ""
 "αλλιώς οι συνδέσεις PPP (μόντεμ) δεν θα είναι ενεργές. Θέλετε να συνεχίσετε "
 "οπωσδήποτε?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:624
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1623,7 +1800,7 @@ msgstr ""
 "Η προεπιλεγμένη συσκευή gateway δεν είναι ενεργή. Αυτό θα σας εμποδίσει από "
 "το να συνδεθείτε στο διαδίκτυο. Θέλετε οπωσδήποτε να συνεχίσετε?"
 
-#: src/network/callbacks.c:811
+#: src/network/callbacks.c:679
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1632,7 +1809,7 @@ msgstr ""
 "gateway. Εισάγετε αυτές τις πληροφορίες για να προχωρήσετε, ή επιλέξτε μια "
 "άλλη εξ ορισμού συσκευή gateway."
 
-#: src/network/callbacks.c:857
+#: src/network/callbacks.c:725
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1642,17 +1819,17 @@ msgstr ""
 "εμφανίζει χαμένες συνδέσεις στην στήλη των συνδέσεων. Παρακαλώ εγκαταστήστε "
 "το redhat-config-network rpm ώστε να αποφύγετε αυτό."
 
-#: src/network/callbacks.c:894
+#: src/network/callbacks.c:762
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Θέλετε να ενεργοποιήσετε την διεπαφή %s?"
 
-#: src/network/callbacks.c:904
+#: src/network/callbacks.c:772
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Θέλετε να απενεργοποιήσετε την διεπαφή %s?"
 
-#: src/network/callbacks.c:989
+#: src/network/callbacks.c:859
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1660,19 +1837,19 @@ msgstr ""
 "Αδυναμία αυτόματου εντοπισμού συσκευής μόντεμ, ελέγξτε ότι δεν είναι "
 "απασχολημένο και ότι έχει συνδεθεί σωστά"
 
-#: src/network/callbacks.c:1041
+#: src/network/callbacks.c:911
 msgid "Silent"
 msgstr "Σιωπηλό"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:913
 msgid "Low"
 msgstr "Χαμηλή"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:915
 msgid "Medium"
 msgstr "Μεσαία"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:917
 msgid "Loud"
 msgstr "Δυνατή"
 
@@ -1723,7 +1900,7 @@ msgstr "Κατάσταση"
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: src/network/connection.c:1659
+#: src/network/connection.c:1707
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1731,7 +1908,7 @@ msgstr ""
 "Η διεύθυνση IP ή το netmask για την διεπαφή είναι κενή. Εισάγετε έγκυρες "
 "διευθύνσεις IP σε αυτά τα πεδία για να συνεχίσετε."
 
-#: src/network/connection.c:1666
+#: src/network/connection.c:1714
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1739,7 +1916,7 @@ msgstr ""
 "Η διεύθυνση IP ή η απομακρυσμένη διεύθυνση για την διεπαφή είναι κενή. "
 "Εισάγετε έγκυρες διευθύνσεις IP σε αυτά τα πεδία για να συνεχίσετε."
 
-#: src/network/connection.c:1672
+#: src/network/connection.c:1720
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1749,7 +1926,23 @@ msgstr ""
 "σύνδεση, αλλά αφήσατε την διεύθυνση IP κενή για το πρωτεύον DNS. Παρακαλώ "
 "εισάγετε το IP για το πρωτεύον DNS ή αποεπιλέξτε την χειροκίνητη επιλογή DNS."
 
-#: src/network/connection.c:2028
+#: src/network/connection.c:1726
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr ""
+"Η συκευή μόντεμ που η σύνδεση θα χρησιμοποιεί είναι κενή . Εισάγετε μια "
+"συσκευή ή πατήστε \"αυτόματος εντοπισμός\" για να συνεχίσετε."
+
+#: src/network/connection.c:1731
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr ""
+"Ο αριθμός τηλεφώνου που η σύνδεση θα χρησιμοποιεί είναι κενός . Εισάγετε "
+"έναν έγκυρο αριθμό τηλεφώνου για να συνεχίσετε."
+
+#: src/network/connection.c:2082
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Η διεπαφή %s δεν υπάρχει."
@@ -1763,50 +1956,51 @@ msgstr "Διεύθυνση IP"
 msgid "Aliases"
 msgstr "Ψευδώνυμα"
 
-#: src/network/main.c:254
+#: src/network/main.c:190
 msgid "Run the connection assistant."
 msgstr "Εκτέλεση του βοηθού σύνδεσης."
 
-#: src/network/main.c:255
+#: src/network/main.c:191
 msgid "Run the PPP connection assistant."
 msgstr "Εκτέλεση του βοηθού σύνδεσης PPP."
 
-#: src/network/main.c:256
+#: src/network/main.c:192
 msgid "Run the ethernet connection assistant."
 msgstr "Εκτέλεση του βοηθού σύνδεσης ethernet."
 
-#: src/network/main.c:257
+#: src/network/main.c:193
 msgid "Run the wlan connection assistant."
 msgstr "Εκτέλεση του βοηθού σύνδεσης wlan ."
 
-#: src/network/main.c:258
+#: src/network/main.c:194
 msgid "Run the parallel port connection assistant."
 msgstr "Εκτέλεση του βοηθού  σύνδεσης παράλληλης θύρας."
 
-#: src/network/main.c:259
+#: src/network/main.c:195
 msgid "Run the irlan connection assistant."
 msgstr "Εκτέλεση του βοηθού σύνδεσης irlan ."
 
-#: src/network/main.c:260
+#: src/network/main.c:196
 msgid "Configure a network interface"
 msgstr "Ρύθμιση μιας διεπαφής  δικτύου"
 
-#: src/network/main.c:260
+#: src/network/main.c:196
 msgid "interface"
 msgstr "διεπαφή"
 
 #
-#: src/network/main.c:267
+#: src/network/main.c:203
 msgid "Network Settings"
 msgstr "Ρυθμίσεις Δικτύου"
 
-#: src/network/network-druid.c:425
-msgid "Address configuration (Step 2 of 3)"
-msgstr "Ρύθμιση σύνδεσης (βήμα 2 από 3)"
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Δημιουργία μιας νέας σύνδεσης δικτύου (%d of %d)"
 
-#: src/network/network-druid.c:446
-msgid "Connection name (Step 2 of 2)"
-msgstr "Όνομα σύνδεσης (βήμα 2 από 2)"
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "Ολοκληρώθηκε η δημιουργία μιας νέας σύνδεσης δικτύου"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -1826,17 +2020,29 @@ msgstr "Είστε βέβαιοι ότι θέλετε να διαγράψετε 
 msgid "Profile name"
 msgstr "Όνομα προφίλ"
 
-#: src/services/callbacks.c:45
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "Δεν υπάρχει διάθεσιμη περιγραφή"
 
-#: src/services/callbacks.c:301
+#: src/services/callbacks.c:239
+msgid "Running"
+msgstr "Εκτελείται"
+
+#: src/services/callbacks.c:243
+msgid "Stopped"
+msgstr "Διακόπηκε"
+
+#: src/services/callbacks.c:248
+msgid "Could not get info"
+msgstr "Αδυναμία λήψης πληροφοριών"
+
+#: src/services/callbacks.c:314
 #, c-format
 msgid "Settings for service %s"
 msgstr "Ρυθμίσεις για υπηρεσία %s"
 
 #
-#: src/services/main.c:62
+#: src/services/main.c:58
 msgid "Services Settings"
 msgstr "Ρυθμίσεις υπηρεσιών"
 
@@ -1848,7 +2054,12 @@ msgstr "Ρύθμιση των υπηρεσιών που θα εκτελούντ�
 msgid "Services"
 msgstr "Υπηρεσίες"
 
-#: src/services/table.c:65
+#
+#: src/services/table.c:78
+msgid "Active"
+msgstr "Ενεργό"
+
+#: src/services/table.c:88
 msgid "Service"
 msgstr "Υπηρεσία"
 
@@ -1857,11 +2068,11 @@ msgid "Time Zone"
 msgstr "Ζώνη Ώρας"
 
 #
-#: src/time/main.c:427
+#: src/time/main.c:423
 msgid "Time Servers"
 msgstr "Εξυπηρρτητές ώρας"
 
-#: src/time/main.c:505
+#: src/time/main.c:501
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1869,7 +2080,7 @@ msgstr ""
 "Δεν έχετε εγκατεστημένη την υποστήριξη NTP. Εκτελέστε την υποστήριξη NTP στο "
 "σύστημα για να ενεργοποιήσετε τον συγχρονισμό εξυπηρετητή."
 
-#: src/time/main.c:812
+#: src/time/main.c:808
 msgid "Time and Date Settings"
 msgstr "Ρυθμίσεις 'Ωρας και Ημερομηνίας"
 
@@ -1943,25 +2154,25 @@ msgid "GID"
 msgstr "GID"
 
 #
-#: src/users/main.c:122
+#: src/users/main.c:120
 msgid "User name contains"
 msgstr "Το όνομα χρήστη περιέχει"
 
-#: src/users/main.c:123
+#: src/users/main.c:121
 msgid "User ID is"
 msgstr "Η ταυτότητα χρήστη είναι"
 
 #
-#: src/users/main.c:124
+#: src/users/main.c:122
 msgid "Group name contains"
 msgstr "Το όνομα ομάδας περιέχει"
 
 #
-#: src/users/main.c:125
+#: src/users/main.c:123
 msgid "User GID is"
 msgstr "Το GID χρήστη είναι"
 
-#: src/users/main.c:316 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Χρήστες και ομάδες"
 
