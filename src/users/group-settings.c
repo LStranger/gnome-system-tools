@@ -136,6 +136,24 @@ group_settings_dialog_close (void)
 }
 
 static gboolean
+is_group_root (xmlNodePtr node)
+{
+	gchar *group;
+
+	if (strcmp (node->name, "groupdb") == 0) {
+		/* node is set to userdb node, this means that the user is new, thus cannot be root */
+		return FALSE;
+	} else {
+		/* node isn't set to userdb node, this means that the user is being modified */
+		group = gst_xml_get_child_content (node, "name");
+	
+		if (strcmp (group, "root") == 0)
+			return TRUE;
+	}
+	return FALSE;
+}
+
+static gboolean
 is_group_gid_valid (xmlNodePtr group_node, const gchar* gid)
 {
 	gchar *primary_text   = NULL;
@@ -144,10 +162,14 @@ is_group_gid_valid (xmlNodePtr group_node, const gchar* gid)
 	if (!is_valid_id (gid)) {
 		primary_text   = g_strdup (_("Invalid group ID"));
 		secondary_text = g_strdup (_("Group ID must be a positive number."));
+	} else if (is_group_root (group_node) && (strcmp (gid, "0") != 0)) {
+		/* if group is root */
+		primary_text   = g_strdup (_("root group ID should not be modified"));
+		secondary_text = g_strdup (_("This would leave the system unusable"));
 	} else if (node_exists (group_node, "gid", gid)) {
 		/* Check if gid is available */
 		primary_text   = g_strdup (_("Invalid group ID"));
-		secondary_text = g_strdup_printf (N_("Group ID %s already exists."), gid);
+		secondary_text = g_strdup_printf (_("Group ID %s already exists."), gid);
 	}
 	
 	if (primary_text) {
@@ -186,6 +208,10 @@ is_group_name_valid (xmlNodePtr node, const gchar *name)
 		/* if !exist. */
 		primary_text   = g_strdup_printf (_("Group \"%s\" already exists."), name);
 		secondary_text = g_strdup (_("Please select a different group name"));
+	} else if (is_group_root (node) && (strcmp (name, "root") != 0)) {
+		/* if it's the root group */
+		primary_text   = g_strdup (_("Root group name should not be modified"));
+		secondary_text = g_strdup (_("This would leave the system unusable"));
 	}
 
 	/* If anything is wrong. */

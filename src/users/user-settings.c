@@ -459,7 +459,7 @@ is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 		primary_text   = g_strdup (N_("Invalid user ID"));
 		secondary_text = g_strdup (N_("User id must be a positive number."));
 	} else if ((is_user_root (node)) && (strcmp (uid, "0") != 0)) {
-		primary_text   = g_strdup (N_("root uid shouldn't be modified."));
+		primary_text   = g_strdup (N_("root user ID should not be modified"));
 		secondary_text = g_strdup (N_("This would leave the system unusable"));
 	} else if (node_exists (node, "uid", uid)) {
 		primary_text   = g_strdup (N_("Invalid user ID"));
