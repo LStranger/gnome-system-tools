@@ -1,0 +1,148 @@
+<!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
+
+<!ENTITY VERSION "0.6">
+]>
+
+<article id="index" lang="en">
+
+  <artheader>
+    <title>Time Settings</title>
+
+    <copyright>
+      <year>2001</year>
+      <holder>Kevin Breit</holder>
+    </copyright>
+
+    <legalnotice id="legalnotice">
+      <para>
+	Permission is granted to copy, distribute and/or modify this document
+	under the terms of the 
+	<ulink type="help" url="gnome-help:fdl">
+	  <citetitle>
+	    GNU Free Documentation License
+	  </citetitle>
+	</ulink>, Version 1.1 or any later version 
+	published by the Free Software Foundation with no Invariant Sections, 
+	no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license
+	can be found <ulink type="help" url="gnome-help:fdl">here</ulink>.
+      </para>
+      <para>
+	Many of the names used by companies to distinguish their products and
+	services are claimed as trademarks. Where those names appear in any
+	GNOME documentation, and those trademarks are made aware to the members
+	of the GNOME Documentation Project, the names have been printed in caps
+	or initial caps.
+      </para>
+    </legalnotice>
+
+    <releaseinfo>
+      This manual describes version &VERSION; of the Swap Management utility in
+      Ximain Setup Tools.  It was last updated on 01/01/69.
+    </releaseinfo>
+    
+  </artheader>
+  
+  <sect1 id="intro">
+    <title>Introduction</title>
+    <para>
+      The Time and Date Settings let you configure the time and date that your
+      computer displays.  It lets you configure the time zones and even if you
+      use another computer to set your computers time.
+    </para>
+  </sect1>
+
+  <sect1 id="interface">
+    <title>Interface Oveview</title>
+
+    <figure id="main-interface">
+      <title>Time and Date Configuration Interface</title>
+      <screenshot>
+	<screeninfo>Main Window</screeninfo>
+	<graphic fileref="fig/time.png" srccredit="Kevin Breit"></graphic>
+      </screenshot>
+    </figure>
+	
+    <para>
+      <inlinegraphic fileref="fig/full-1.png"></inlinegraphic>
+      <guilabel>Date</guilabel>
+      The <guilabel>Date</guilabel> section is simply made up of a calendar.
+      You click the date to select your date.
+    </para>
+
+    <para>
+      <inlinegraphic fileref="fig/full-2.png"></inlinegraphic>
+      <guilabel>Time Server</guilabel>
+      This lets you specify if there is a server you would like to connect to
+      that will set the date and time for you.
+    </para>
+
+    <para>
+      <inlinegraphic fileref="fig/full-3.png"></inlinegraphic>
+      <guilabel>Actions</guilabel>
+      This lets you access help, add or remove options, apply your changes, and
+      quit the program.
+    </para>
+
+    <para>
+      <inlinegraphic fileref="fig/full-4.png"></inlinegraphic>
+      <guilabel>Time Zone</guilabel>
+      This section lets you configure your time zone options.
+    </para>
+
+    <para>
+      <inlinegraphic fileref="fig/full-5.png"></inlinegraphic>
+      <guilabel>Time</guilabel>
+      This section lets you set the time.
+    </para>
+  </sect1>
+
+  <sect1 id="date-set">
+    <title>Setting the Date</title>
+    <para>
+      The <guilabel>Date</guilabel> section is composed of a calendar.  On the
+      top of the calendar is a bar which has the month and year.  To change the
+      month or the year, click on the arrows on either side of the the
+      property.  This will automatically update your calendar.  Once you found
+      the date to set, click on the date and click <guibutton>Apply</guibutton>.
+    </para>
+  </sect1>
+
+  <sect1 id="time-server-set">
+    <title>Setting up the Time Server</title>
+    <para>
+      The NTP protocol allows your system to contact a server and sync your time
+      to do that server.  These servers are often atomic clocks which are
+      accurate to milliseconds.
+      <!-- Incomplete -->
+    </para>
+  </sect1>
+  
+  <sect1 id="time-timezone-set">
+    <title>Setting Your Time Zone</title>
+    <para>
+      The <guilabel>Time Zone</guilabel> section shows your time zone based on
+      region and the cit you're in.  Click on the <guibutton>Set time
+      zone</guibutton> to set your time zone.
+    </para>
+    <para>
+      A map will come up with small dots.  The dots represent major cities.
+      Click on a city and the map will zoom in on the region so you can
+      precisely select a city.  Or, if you choose, you can select the region and
+      city in the pulldown menu at the bottom of the window.  Click
+      <guibutton>Close</guibutton> to close the window.  Click the
+      <guibutton>Apply</guibutton> button to save the changes or click
+      <guibutton>Close</guibutton> to remove the changes and close the window.
+    </para>
+  </sect1>
+
+  <sect1 id="time-time-set">
+    <title>Setting the Time</title>
+    <para>
+      The <guilabel>Time</guilabel> section has three input fields: the hour,
+      the minute, and the second.  To set the time, you can either delete and
+      edit each field with the numeric keys. You can also increase or decrease
+      the number using the arrow buttons at right.  Click
+      <guibutton>Apply</guibutton> to save your changes or
+      <guibutton>Close</guibutton> to cancel the changes.
+    </para>
+  </sect1>
