@@ -26,8 +26,9 @@
 #include <unistd.h>
 #include <string.h>
 #include <glib.h>
-#include <tree.h> /* libxml */
-#include <parser.h>/* libxml */
+#include <tree.h>  /* libxml */
+#include <parser.h>  /* libxml */
+#include <xmlmemory.h>  /* libxml */
 
 #include "xml.h"
 
@@ -230,14 +231,12 @@ xml_element_add (xmlNodePtr parent, char *name)
 }
 
 
-char *
+gchar *
 xml_element_get_content (xmlNodePtr node)
 {
-	char *text;
+	gchar *text = NULL, *r;
 	xmlNodePtr n0;
 
-	text = g_new0 (char, 1);
-	
 	g_return_val_if_fail (node != NULL, NULL);
 	
 	for (n0 = node->childs; n0; n0 = n0->next)
@@ -249,7 +248,15 @@ xml_element_get_content (xmlNodePtr node)
 		}
 	}
 
-	return (text);
+	if (text)
+	{
+		r = g_strdup (text);
+		xmlFree (text);
+	}
+	else
+		r = g_strdup ("");
+	
+	return (r);
 }
 
 
@@ -276,11 +283,11 @@ xml_element_add_with_content (xmlNodePtr node, char *name, char *content)
 }
 
 
-char *
+gchar *
 xml_element_get_attribute (xmlNodePtr node, char *attr)
 {
 	xmlAttrPtr a0;
-	char *text = 0;
+	gchar *text = NULL, *r = NULL;
 
 	g_return_val_if_fail (node != NULL, NULL);
 	
@@ -293,7 +300,13 @@ xml_element_get_attribute (xmlNodePtr node, char *attr)
 		}
 	}
 
-	return (text);
+	if (text)
+	{
+		r = g_strdup (text);
+		xmlFree (text);
+	}
+
+	return (r);
 }
 
 
@@ -318,7 +331,7 @@ xml_element_get_bool_attr (xmlNodePtr node, char *attr)
 	if (s)
 	{
 		if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
-		free (s);
+		xmlFree (s);
 	}
 
 	return (r);
