@@ -7,10 +7,5 @@ $(desktop): %.desktop: %.desktop.in
 		../../intltool-merge -d ../../po $(desktop).in $(desktop)
 
 desktopdir = $(datadir)/applications/
-desktop = $(toolname).desktop
 desktop_DATA = $(desktop)
-
-startheredir = $(sysconfdir)/X11/sysconfig/
-desktop = $(toolname).desktop
-starthere_DATA = $(desktop)
 
