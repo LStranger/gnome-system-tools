@@ -1052,18 +1052,8 @@
 	  <class>GtkCList</class>
 	  <name>statichost_list</name>
 	  <can_focus>True</can_focus>
-	  <signal>
-	    <name>unselect_row</name>
-	    <handler>on_statichost_list_unselect_row</handler>
-	    <last_modification_time>Wed, 03 Jan 2001 21:48:16 GMT</last_modification_time>
-	  </signal>
-	  <signal>
-	    <name>select_row</name>
-	    <handler>on_statichost_list_select_row</handler>
-	    <last_modification_time>Wed, 03 Jan 2001 21:48:22 GMT</last_modification_time>
-	  </signal>
-	  <columns>3</columns>
-	  <column_widths>48,78,80</column_widths>
+	  <columns>2</columns>
+	  <column_widths>80,80</column_widths>
 	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 	  <show_titles>True</show_titles>
 	  <shadow_type>GTK_SHADOW_IN</shadow_type>
@@ -1071,8 +1061,8 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <child_name>CList:title</child_name>
-	    <name>label90</name>
-	    <label>Active</label>
+	    <name>label133</name>
+	    <label>IP Address</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
@@ -1084,20 +1074,7 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <child_name>CList:title</child_name>
-	    <name>IP Address</name>
-	    <label>IP Addres</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <child_name>CList:title</child_name>
-	    <name>label92</name>
+	    <name>label134</name>
 	    <label>Aliases</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -1135,7 +1112,7 @@
 	<widget>
 	  <class>GtkTable</class>
 	  <name>statichost_table</name>
-	  <rows>3</rows>
+	  <rows>2</rows>
 	  <columns>3</columns>
 	  <homogeneous>False</homogeneous>
 	  <row_spacing>4</row_spacing>
@@ -1269,29 +1246,6 @@
 	  </widget>
 
 	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>statichost_enabled</name>
-	    <can_focus>True</can_focus>
-	    <label>Enable this alias</label>
-	    <active>True</active>
-	    <draw_indicator>True</draw_indicator>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>2</right_attach>
-	      <top_attach>2</top_attach>
-	      <bottom_attach>3</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>False</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>False</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
 	    <class>GtkVBox</class>
 	    <name>vbox14</name>
 	    <homogeneous>False</homogeneous>
@@ -1300,7 +1254,7 @@
 	      <left_attach>2</left_attach>
 	      <right_attach>3</right_attach>
 	      <top_attach>0</top_attach>
-	      <bottom_attach>3</bottom_attach>
+	      <bottom_attach>2</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>True</xexpand>

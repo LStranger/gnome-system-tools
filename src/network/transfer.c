@@ -179,10 +179,10 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 {
 	int i, row;
 	xmlNodePtr node, nodesub;
-	char *s, *entry[4];
+	char *s, *entry[3];
 	GtkWidget *clist;
 
-	entry[0] = entry[3] = NULL;
+	entry[0] = NULL;
 
 	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
 	{
@@ -192,7 +192,7 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 		     node = xst_xml_element_find_next (
 			     node, transfer_string_clist2_table [i].xml_path))
 		{
-			for (entry[1] = NULL, 
+			for (entry[0] = NULL, 
 				     nodesub = xst_xml_element_find_first (
 					     node, transfer_string_clist2_table [i].xml_path_field_1); 
 					     
@@ -202,19 +202,19 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 			{
 				if ((s = xst_xml_element_get_content (nodesub)))
 				{
-					if (!entry[1])
-						entry[1] = s;
+					if (!entry[0])
+						entry[0] = s;
 					else
 					{
-						entry[1] = g_strjoin (" ", entry[1], s, NULL);
+						entry[0] = g_strjoin (" ", entry[1], s, NULL);
 					}
 				}
 			}
 
-			if (!entry[1])
+			if (!entry[0])
 				continue;
 
-			for (entry[2] = NULL, 
+			for (entry[1] = NULL, 
 				     nodesub = xst_xml_element_find_first (
 					     node, transfer_string_clist2_table [i].xml_path_field_2); 
 			     nodesub; 
@@ -223,30 +223,27 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 			{
 				if ((s = xst_xml_element_get_content (nodesub)))
 				{
-					if (!entry[2])
-						entry[2] = s;
+					if (!entry[1])
+						entry[1] = s;
 					else
 					{
-						gchar *free_me = entry [2];
-						entry[2] = g_strjoin (" ", entry[2], s, NULL);
+						gchar *free_me = entry [1];
+						entry[1] = g_strjoin (" ", entry[1], s, NULL);
 						g_free (free_me);
 						g_free (s);
 					}
 				}
 			}
 
-			if (!entry[2])
+			if (!entry[1])
 				continue;
 
 			clist = xst_dialog_get_widget (tool->main_dialog, transfer_string_clist2_table [i].clist);
 
 			row = gtk_clist_append (GTK_CLIST (clist), entry);
 
-			set_clist_checkmark (GTK_CLIST (clist), row, 0, 
-					     xst_xml_element_get_bool_attr (node,"enabled"));
-
+			g_free (entry[0]);
 			g_free (entry[1]);
-			g_free (entry[2]);
 		}
 	}
 }
@@ -285,6 +282,8 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 	/* First remove any old branches in the XML tree */
 	xst_xml_element_destroy_children_by_name (root, node_name);
 
+	g_print ("Foo\n");
+	
 	rows = GTK_CLIST (widget)->rows;
 	
 	for (row = 0; row < rows; row++)
@@ -300,11 +299,6 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 		/* Enclosing element */
 		node = xst_xml_element_add (root, node_name);
 		
-/*	     xst_xml_element_set_bool_attr (node, "enabled",
-	     get_clist_checkmark (GTK_CLIST (w), row, 0));
-
-	     d(g_print ("name: (%d) %s\n", xst_xml_element_get_bool_attr (node, "enabled"), node->name));*/
-
 		col1_elem = g_strsplit (text_2, " ", 0);
 
 		for (j = 0, col0_added = FALSE; col1_elem[j]; j++)
@@ -323,6 +317,8 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 		
 		g_strfreev (col1_elem);
 	}
+
+	g_print ("END: Foo\n");
 }
 
 static void

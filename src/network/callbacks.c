@@ -165,19 +165,14 @@ on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent
 	statichost_actions_set_sensitive (TRUE);
 	
 	/* Load aliases into entry widget */
-
-	w = xst_dialog_get_widget (tool->main_dialog, "statichost_enabled");
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w),
-				      get_clist_checkmark (GTK_CLIST (clist), row, 0));
-
 	pos = 0;
-	gtk_clist_get_text (GTK_CLIST (clist), row, 1, &row_data);
+	gtk_clist_get_text (GTK_CLIST (clist), row, 0, &row_data);
 	w = xst_dialog_get_widget (tool->main_dialog, "ip");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
 
 	pos = 0;
-	gtk_clist_get_text (GTK_CLIST (clist), row, 2, &row_data);
+	gtk_clist_get_text (GTK_CLIST (clist), row, 1, &row_data);
 	row_data = fixdown_text_list (g_strdup (row_data));
 	
 	w = xst_dialog_get_widget (tool->main_dialog, "alias");
@@ -281,33 +276,29 @@ void
 on_statichost_add_clicked (GtkWidget * button, gpointer user_data)
 {
 	GtkWidget *clist, *w;
-	char *entry[4];
+	char *entry[3];
 	int row;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	entry[0] = entry[3] = NULL;
+	entry[2] = NULL;
 	
-	entry[1] = gtk_editable_get_chars (
+	entry[0] = gtk_editable_get_chars (
 		GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1);
 
-	entry[2] = fixup_text_list (xst_dialog_get_widget (tool->main_dialog, "alias"));
-		
+	entry[1] = fixup_text_list (xst_dialog_get_widget (tool->main_dialog, "alias"));
+
 	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
 
 	row = gtk_clist_append (GTK_CLIST (clist), entry);
-
-	w = xst_dialog_get_widget (tool->main_dialog, "statichost_enabled");
-	set_clist_checkmark (GTK_CLIST (clist), row, 0,
-			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 
 	w = xst_dialog_get_widget (tool->main_dialog, "alias");
 
 #if 0
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
-	gtk_editable_insert_text (GTK_EDITABLE (w), entry[2], strlen (entry[2]), &pos);
+	gtk_editable_insert_text (GTK_EDITABLE (w), entry[1], strlen (entry[1]), &pos);
 #endif
-
+	
 }
 
 
@@ -323,7 +314,7 @@ on_statichost_delete_clicked (GtkWidget * button, gpointer user_data)
 
 	parent = GTK_WIDGET (tool->main_dialog);
 	gtk_clist_get_text (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")),
-			    statichost_row_selected, 2, &name);
+			    statichost_row_selected, 1, &name);
 
 	txt = g_strdup_printf (_("Are you sure you want to delete the aliases for %s?"), name);
 	dialog = gnome_question_dialog_parented (txt, NULL, NULL, GTK_WINDOW (parent));
@@ -347,18 +338,14 @@ on_statichost_update_clicked (GtkWidget *b, gpointer null)
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
 
-	w = xst_dialog_get_widget (tool->main_dialog, "statichost_enabled");
-	set_clist_checkmark (GTK_CLIST (clist), statichost_row_selected, 0,
-			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
-
-	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 1,
+	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 0,
 			    gtk_editable_get_chars (
 				    GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1));
 	
 	w = xst_dialog_get_widget (tool->main_dialog, "alias");
 	s = fixup_text_list (w);
 
-	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 2, s);
+	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 1, s);
 
 #if 0
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
