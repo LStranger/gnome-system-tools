@@ -235,7 +235,7 @@ boot_value_type (xmlNodePtr node, gboolean bare)
 	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	n = xst_xml_element_find_first (node, "type");
+	n = xst_xml_element_find_first (node, "XstPartitionType");
 	if (n)
 		buf = xst_xml_element_get_content (n);
 

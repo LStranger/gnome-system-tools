@@ -165,7 +165,8 @@ boot_settings_affect (BootSettingsDialog *state)
 	node = get_selected_node ();
 
 	/* Type */
-	xst_xml_set_child_content (node, "type", gtk_entry_get_text (GTK_ENTRY (state->type->entry)));
+	xst_xml_set_child_content (node, "XstPartitionType",
+						  gtk_entry_get_text (GTK_ENTRY (state->type->entry)));
 	
 	if (state->complexity == XST_DIALOG_ADVANCED)
 	{
