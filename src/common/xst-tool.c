@@ -1567,35 +1567,26 @@ xst_tool_reset_report_hooks (XstTool *tool)
 		((XstReportHook *) list->data)->invoked = FALSE;
 }
 
-/**
- * xst_fool_the_linker:
- * @void: 
- * 
- * We need to keep the symbol for the create image widget function
- * so that libglade can find it to create the icons.
- **/
-void xst_fool_the_linker (void);
-void
-xst_fool_the_linker (void)
-{
-	xst_ui_image_widget_create (NULL, NULL, NULL, 0, 0);
-}
-
+/* it does authentication, first of all it runs su (just to ensure that it's completely run
+ * when password is sent), then asks for password and sends it to su (if you want to run it
+ * with root privileges)
+ */
 static void
 authenticate (int argc, char *argv[])
 {
-	GtkWidget *error_dialog;
 	gchar *password;
 	gint result;
 
+	xst_su_run_term (argc, argv, NULL);
+
 	result = xst_su_get_password (&password);
 
-	if (result < 0)
+	if (result == 1) 
+		xst_su_write_password (password);
+	else if (result == -1)
 		exit (0);
-	else if (result == 0)
-		return;
-
-	xst_su_run_with_password (argc, argv, password);
+	else
+		xst_su_clear_term ();
 
 	if (strlen (password) > 0)
 		memset (password, 0, strlen (password));

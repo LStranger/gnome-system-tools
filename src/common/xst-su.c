@@ -64,6 +64,7 @@
 
 #define XST_SU_RESPONSE_NP 1
 
+GtkWidget *term;
 static int root;			/* if we are root, no password is
 					   required */
 
@@ -86,16 +87,17 @@ on_terminal_child_exited (GtkWidget *term, gint pid, gint status, gpointer data)
 	_exit (0);
 }
 
-static void
-exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
+/* runs a term with su in it */
+void
+xst_su_run_term (gint argc, gchar *argv[], gchar *user)
 {
 	GString *str;
-	GtkWidget *term = vte_terminal_new ();
 	VteReaper *reaper = vte_reaper_get ();
 	gchar *args[5], *string;
 	int i;
 	int pid, status;
 
+	term = vte_terminal_new ();
 	g_signal_connect (G_OBJECT (reaper), "child-exited",
 			  G_CALLBACK (on_terminal_child_exited), NULL);
 
@@ -115,17 +117,18 @@ exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 
 	g_string_free (str, 0);
 
-	if ((pwd == NULL) || (*pwd == '\0'))
-		return;
-	
 	vte_terminal_fork_command (VTE_TERMINAL (term),
 					 args[0],
 					 args,
 					 NULL,
 					 NULL,
 					 FALSE, FALSE, FALSE);
+}
 
-	usleep (1000000);
+/* writes the password to the term with su in it */
+void
+xst_su_write_password (gchar *pwd)
+{
 	vte_terminal_feed_child (VTE_TERMINAL (term), pwd, -1);
 
 	memset (pwd, 0, strlen (pwd));
@@ -136,10 +139,12 @@ exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 	gtk_main ();
 }
 
+/* tries to clear the term (if user runs tool unprivileged) */
 void
-xst_su_run_with_password (int argc, char *argv[], gchar *password)
+xst_su_clear_term (void)
 {
-	exec_su (argc, argv, "root", password);
+	vte_terminal_reset (VTE_TERMINAL (term), TRUE, TRUE);
+	gtk_widget_destroy (term);
 }
 
 static GladeXML *

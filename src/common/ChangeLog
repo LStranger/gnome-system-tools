@@ -1,5 +1,14 @@
 2003-02-19  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
+	* xst-su.[ch]: changed authentication procedure, it now runs 'su' before
+	  even requesting password (just to ensure that 'su' is run and
+	  requesting password before the parent proccess sends it). removed
+	  exec_su (), added xst_su_run_term (), xst_su_write_password (),
+	  xst_su_clear_term ().
+	* xst-tool.c: ditto, removed xst_fool_the_linker () (it was unused)
+
+2003-02-19  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
 	* xst-su.c, xst-tool.c: made the exec_su () function to work with vte to launch
           the su command.
 
