@@ -5,8 +5,8 @@
  */
 
 gchar *s = N_("window1");
-gchar *s = N_("Use this tool to manage the operating systems\n"
-              "or Linux kernels on your machine.");
+gchar *s = N_("Use this tool to set the installed operating\n"
+              "systems to choose from at startup.");
 gchar *s = N_("_Add...");
 gchar *s = N_("_Delete");
 gchar *s = N_("_Settings...");
