@@ -1,2 +1,33 @@
-TODO 
+Common
+======
+- Remove all code #warnings
+- Full HIG appliance
+
+Boot
 ====
+- implement the "default" option as an RadioButton in the list, and remove the "set as default" button
+- different bootloaders have different miscelaneous options (such as boot, password, welcome text in lilo...), boot-admin should know them and show the bootloader-related options, hiding the others.
+- enable Yaboot support.
+- Can't change between "Linux" type and "other" type when editing a boot entry.
+
+Time
+====
+- There are places where the weeks begin in monday, depending on the time zone time-admin should autodetect it.
+- Changing the Combo in the "select time zone" dialog, should change the blinking dot in the map
+
+Network
+=======
+- implement the "activate" and "deactivate" buttons as a Checkbox in the list
+- take a closer look to the IPv6 support
+
+Runlevel
+========
+- Allow support for BSD init.
+- Allow priority changes in the services
+- Allow calls to the init.d scripts (start, stop,...)
+
+Users
+=====
+- Insert search bar (again) in users and groups
+- Allow the use of profiles (again)
+
