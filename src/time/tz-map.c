@@ -58,7 +58,6 @@ e_tz_map_new (GstTimeTool *tool)
 	GPtrArray *locs;
 	TzLocation *tzl;
 	GtkWidget *location_combo;
-	GtkWidget *location_entry;
 	int i;
 
 	tzmap = g_new0 (ETzMap, 1);
@@ -92,8 +91,7 @@ e_tz_map_new (GstTimeTool *tool)
 	                 G_CALLBACK (out_map), (gpointer) tzmap);
 	
 	location_combo = gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
-	location_entry = GTK_COMBO (location_combo)->entry;
-	g_signal_connect (G_OBJECT (location_entry), "changed",
+	g_signal_connect (G_OBJECT (location_combo), "changed",
 	                 G_CALLBACK (update_map), (gpointer) tzmap);
 	
 	return tzmap;
@@ -134,6 +132,31 @@ e_tz_map_get_location_by_name (ETzMap *tzmap, gchar *name)
 	return tz_loc;
 }
 
+static void
+e_tz_map_set_location_text (ETzMap *tzmap, const gchar *name)
+{
+	GtkWidget    *location_combo;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gboolean      valid;
+	gchar        *location;
+
+	location_combo = gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (location_combo));
+	valid = gtk_tree_model_get_iter_first (GTK_TREE_MODEL (model), &iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, &iter, 0, &location, -1);
+
+		if (strcmp (location, name) == 0) {
+			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (location_combo), &iter);
+			valid = FALSE;
+		} else {
+			valid = gtk_tree_model_iter_next (GTK_TREE_MODEL (model), &iter);
+		}
+	}
+}
+
 void
 e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 {
@@ -163,38 +186,46 @@ e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 					    tzmap->point_selected,
 					    TZ_MAP_POINT_NORMAL_RGBA);
 	tzmap->point_selected =
-	  e_map_get_closest_point (tzmap->map, l_longitude, l_latitude, FALSE);
-
-	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo"))->entry),
-			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
+		e_map_get_closest_point (tzmap->map, l_longitude, l_latitude, FALSE);
+	
+	e_tz_map_set_location_text (tzmap, tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
 }
 
 static gboolean
 update_map (GtkWidget *w, gpointer data)
 {
-	ETzMap *tzmap;
+	ETzMap       *tzmap;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gchar        *location;
    
 	tzmap = (ETzMap *) data;
-   
-	if (strlen (gtk_entry_get_text (GTK_ENTRY(w))) > 0)
-		e_tz_map_set_tz_from_name (tzmap, g_strdup (gtk_entry_get_text (GTK_ENTRY(w))));
-      
+
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (w), &iter)) {
+		model = gtk_combo_box_get_model (GTK_COMBO_BOX (w));
+		gtk_tree_model_get (model, &iter, 0, &location, -1);
+		e_tz_map_set_tz_from_name (tzmap, location);
+	}
+
 	return TRUE;
 }
                                  
 gchar *
 e_tz_map_get_selected_tz_name (ETzMap *tzmap)
 {
-	GtkWidget  *location_combo;
-	GtkWidget  *location_entry;
-	gchar      *entry_text;
+	GtkWidget    *location_combo;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gchar        *location = NULL;
 
 	location_combo = gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
-	location_entry = GTK_COMBO (location_combo)->entry;
 
-	entry_text     = (gchar *) gtk_entry_get_text (GTK_ENTRY (location_entry));
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (location_combo), &iter)) {
+		model = gtk_combo_box_get_model (GTK_COMBO_BOX (location_combo));
+		gtk_tree_model_get (model, &iter, 0, &location, -1);
+	}
 
-	return entry_text;
+	return location;
 }
 
 
@@ -336,15 +367,13 @@ button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 		tzmap->point_selected = tzmap->point_hover;
 
 		location_combo = gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
-		location_entry = GTK_COMBO (location_combo)->entry;
 		tz_location    = e_tz_map_location_from_point (tzmap, tzmap->point_selected);
 
-		entry_text     = (gchar *) gtk_entry_get_text (GTK_ENTRY (location_entry));
+		entry_text     = e_tz_map_get_selected_tz_name (tzmap);
 		entry_text_new = tz_location_get_zone (tz_location);
 
-		if (!entry_text || !entry_text_new || strcmp (entry_text, entry_text_new)) {
-			gtk_entry_set_text (GTK_ENTRY (location_entry), entry_text_new);
-		}
+		if (!entry_text || !entry_text_new || strcmp (entry_text, entry_text_new))
+			e_tz_map_set_location_text (tzmap, entry_text_new);
 	}
 
 	return TRUE;

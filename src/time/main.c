@@ -191,15 +191,11 @@ gst_time_init_timezone (GstTimeTool *time_tool)
 	gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (tzmap->map));
 	gtk_widget_show (GTK_WIDGET (tzmap->map));
 
-	locs = tz_get_locations (e_tz_map_get_tz_db (tzmap));
-	
-	for (i = 0; g_ptr_array_index (locs, i); i++) {
-		combo_locs = g_list_append (combo_locs,
-					    g_strdup (tz_location_get_zone (g_ptr_array_index (locs, i))));
-	}
-
 	w = gst_dialog_get_widget (tool->main_dialog, "location_combo");
-	gtk_combo_set_popdown_strings (GTK_COMBO (w), combo_locs);
+	locs = tz_get_locations (e_tz_map_get_tz_db (tzmap));
+
+	for (i = 0; g_ptr_array_index (locs, i); i++)
+		gtk_combo_box_append_text (GTK_COMBO_BOX (w), g_strdup (tz_location_get_zone (g_ptr_array_index (locs, i))));
 }
 
 #define is_leap_year(yyy) ((((yyy % 4) == 0) && ((yyy % 100) != 0)) || ((yyy % 400) == 0));
@@ -312,7 +308,7 @@ timezone_construct_dialog (GstDialog *dialog)
 	g_return_if_fail (GST_IS_DIALOG(dialog));
 	
 	d = gtk_dialog_new_with_buttons (_("Time Zone"),
-					 NULL,
+					 GTK_WINDOW (dialog),
 					 GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
 					 GTK_STOCK_CLOSE,
 					 GTK_RESPONSE_CLOSE, NULL);
@@ -422,11 +418,10 @@ server_construct_dialog (GstDialog *dialog)
 	g_return_if_fail (GST_IS_DIALOG(dialog));
 
 	d = gtk_dialog_new_with_buttons (_("Time Servers"),
-					      NULL,
-					      GTK_DIALOG_MODAL |
-					      GTK_DIALOG_NO_SEPARATOR,
-					      GTK_STOCK_CLOSE,
-					      GTK_RESPONSE_CLOSE, NULL);
+					 GTK_WINDOW (dialog),
+					 GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
+					 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					 NULL);
 
 	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (d)), 5);
 	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (d)->vbox), 2);
