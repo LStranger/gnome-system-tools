@@ -34,7 +34,7 @@
 
     <widget>
       <class>GnomeDruidPageStart</class>
-      <name>druidpagestart2</name>
+      <name>page0</name>
       <title>Create a new Internet Connection </title>
       <text>Welcome to the Internet Connection druid. 
 
@@ -58,7 +58,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
     <widget>
       <class>GnomeDruidPageStandard</class>
-      <name>druidpagestandard3</name>
+      <name>page1</name>
       <title>1. ISP phone number</title>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
@@ -178,13 +178,64 @@ Click the &quot;Next&quot; button to begin.</text>
 	      <pack>GTK_PACK_END</pack>
 	    </child>
 	  </widget>
+
+	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>page1warning</name>
+	    <xalign>1</xalign>
+	    <yalign>0.5</yalign>
+	    <xscale>0.5</xscale>
+	    <yscale>1</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	      <pack>GTK_PACK_END</pack>
+	    </child>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox9</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+
+	      <widget>
+		<class>GnomePixmap</class>
+		<name>pixmap2</name>
+		<filename>warning.png</filename>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>page1label</name>
+		<label>Warning message goes here..
+</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>True</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+	  </widget>
 	</widget>
       </widget>
     </widget>
 
     <widget>
       <class>GnomeDruidPageStandard</class>
-      <name>druidpagestandard4</name>
+      <name>page2</name>
       <title>2. Username and password</title>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
@@ -358,6 +409,56 @@ Click the &quot;Next&quot; button to begin.</text>
 	  </widget>
 
 	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>page2warning</name>
+	    <xalign>1</xalign>
+	    <yalign>0.5</yalign>
+	    <xscale>0.5</xscale>
+	    <yscale>1</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox10</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+
+	      <widget>
+		<class>GnomePixmap</class>
+		<name>pixmap3</name>
+		<filename>warning.png</filename>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>page2label</name>
+		<label>Warning message goes here..
+</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>True</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label30</name>
 	    <label>To continue configuring your account, click &quot;Next&quot;. To quit, click &quot;Cancel&quot;.
@@ -380,7 +481,7 @@ Click the &quot;Next&quot; button to begin.</text>
 
     <widget>
       <class>GnomeDruidPageStandard</class>
-      <name>druidpagestandard5</name>
+      <name>page3</name>
       <title>3. Account name</title>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
@@ -501,13 +602,64 @@ Click the &quot;Next&quot; button to begin.</text>
 	      <pack>GTK_PACK_END</pack>
 	    </child>
 	  </widget>
+
+	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>page3warning</name>
+	    <xalign>1</xalign>
+	    <yalign>0.5</yalign>
+	    <xscale>0.5</xscale>
+	    <yscale>1</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	      <pack>GTK_PACK_END</pack>
+	    </child>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox8</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+
+	      <widget>
+		<class>GnomePixmap</class>
+		<name>pixmap1</name>
+		<filename>warning.png</filename>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>page3label</name>
+		<label>Warning message goes here..
+</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>True</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+	  </widget>
 	</widget>
       </widget>
     </widget>
 
     <widget>
       <class>GnomeDruidPageFinish</class>
-      <name>druidpagefinish2</name>
+      <name>page_last</name>
       <title>Finished</title>
       <text>You have successfully completed the Internet Connection druid. 
 Your computer is now configured to connect to the internet.

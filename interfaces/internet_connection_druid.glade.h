@@ -22,16 +22,22 @@ gchar *s = N_("First, please enter the phone number you use to connect to the in
 gchar *s = N_("Phone number:");
 gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
               "");
+gchar *s = N_("Warning message goes here..\n"
+              "");
 gchar *s = N_("2. Username and password");
 gchar *s = N_("Next, please enter the user name and password which were assigned to you by your ISP.");
 gchar *s = N_("User name:");
 gchar *s = N_("Password:");
+gchar *s = N_("Warning message goes here..\n"
+              "");
 gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
               "");
 gchar *s = N_("3. Account name");
 gchar *s = N_("Now, please give this account a name. This name will be used to identify the account.");
 gchar *s = N_("Account name:");
 gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
+              "");
+gchar *s = N_("Warning message goes here..\n"
               "");
 gchar *s = N_("Finished");
 gchar *s = N_("You have successfully completed the Internet Connection druid. \n"
