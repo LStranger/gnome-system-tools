@@ -32,7 +32,7 @@ static void transfer_string_spin_xml_to_gui(TransTree *trans_tree, xmlNodePtr ro
       spin = tool_widget_get(transfer_string_spin_table[i].spin);
       gtk_spin_button_set_value(GTK_SPIN_BUTTON(spin), (gfloat) atoi(s));
 
-      free(s);
+      g_free(s);
     }
   }
 }
@@ -55,7 +55,7 @@ static void transfer_string_spin_gui_to_xml(TransTree *trans_tree, xmlNodePtr ro
     s = g_strdup_printf("%d", gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spin)));
     node = xml_element_find_first(root, transfer_string_spin_table[i].xml_path);
     xml_element_set_content(node, s);
-    free(s);
+    g_free(s);
   }
 }
 
@@ -80,21 +80,21 @@ static void transfer_string_calendar_xml_to_gui(TransTree *trans_tree, xmlNodePt
     if (node && (s = xml_element_get_content(node)))
     {
       year = atoi(s);
-      free(s);
+      g_free(s);
     }
 	  
     node = xml_element_find_first(root, transfer_string_calendar_table[i].xml_month_path);
     if (node && (s = xml_element_get_content(node)))
     {
       month = atoi(s);
-      free(s);
+      g_free(s);
     }
 
     node = xml_element_find_first(root, transfer_string_calendar_table[i].xml_day_path);
     if (node && (s = xml_element_get_content(node)))
     {
       day = atoi(s);
-      free(s);
+      g_free(s);
     }
 
     gtk_calendar_select_month(GTK_CALENDAR(calendar), month - 1, year);
@@ -123,17 +123,17 @@ static void transfer_string_calendar_gui_to_xml(TransTree *trans_tree, xmlNodePt
     node = xml_element_find_first(root, transfer_string_calendar_table[i].xml_year_path);
     s = g_strdup_printf("%d", year);
     xml_element_set_content(node, s);
-    free(s);
+    g_free(s);
 
     node = xml_element_find_first(root, transfer_string_calendar_table[i].xml_month_path);
     s = g_strdup_printf("%d", month + 1);
     xml_element_set_content(node, s);
-    free(s);
+    g_free(s);
 
     node = xml_element_find_first(root, transfer_string_calendar_table[i].xml_day_path);
     s = g_strdup_printf("%d", day);
     xml_element_set_content(node, s);
-    free(s);
+    g_free(s);
   }
 }
 
@@ -149,7 +149,7 @@ static void transfer_timezone_xml_to_gui(xmlNodePtr root)
   s = xml_element_get_content(node);
   e_tz_map_set_tz_from_name (tzmap, s);
   
-  free(s);
+  g_free(s);
 }
 
 
@@ -206,7 +206,7 @@ static void transfer_servers_xml_to_gui(xmlNodePtr root)
     }
 
     gtk_list_item_select(GTK_LIST_ITEM(item));
-    free(s);
+    g_free(s);
   }
   
   gtk_list_append_items(GTK_LIST(ntp_list), list_add);
@@ -221,11 +221,11 @@ static void server_list_get_cb(GtkWidget *item, gpointer data)
   if (GTK_WIDGET_STATE(item) == GTK_STATE_SELECTED)
   {
     gtk_label_get(GTK_LABEL(GTK_BIN(item)->child), &s);
-    s = strdup(s);
+    s = g_strdup(s);
     if (strchr(s, ' ')) *(strchr(s, ' ')) = '\0';  /* Kill comments */
     node = xml_element_add(node, "server");
     xml_element_set_content(node, s);
-    free(s);
+    g_free(s);
   }
 }
 

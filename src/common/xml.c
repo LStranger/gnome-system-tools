@@ -363,7 +363,7 @@ xml_element_get_state (xmlNodePtr node, char *element)
 		if (s)
 		{
 			if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
-			free (s);
+			g_free (s);
 		}
 	}
 
