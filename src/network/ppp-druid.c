@@ -27,7 +27,7 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "../common/global.h"
+#include "global.h"
 #include "ppp-druid.h"
 
 #define PPP_DRUID_MAX_PAGES 5
