@@ -4,6 +4,9 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Name Resolution Administration");
+gchar *s = N_("Helix Setup Tools");
 gchar *s = N_("Scanning your system configuration.");
+gchar *s = N_("%P %%");
+gchar *s = N_("Helix Setup Tools");
+gchar *s = N_("Updating your system configuration.");
 gchar *s = N_("%P %%");

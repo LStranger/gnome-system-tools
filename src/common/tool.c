@@ -172,13 +172,67 @@ void tool_context_destroy(ToolContext *tc)
 static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 {
 	char c;
-	GtkWidget *bar;
+	GtkWidget *bar, *report;
 	gfloat p;
+	static char *line = NULL;
+	static int line_len = 0;
 
-	bar = tool_widget_get_common("progress");
-  
-	if (read(fd, &c, 1) < 1) return;
-  
+	bar = tool_widget_get_common("read_progress");
+	report = tool_widget_get_common("read_report");
+	if (!line)
+	{
+		line = malloc(1);
+		line[0] = '\0';
+	}
+
+	/* NOTE: The read() being done here is inefficient, but we're not
+	 * going to handle any large amount of data */
+	
+	if (read (fd, &c, 1) > 0)
+	{
+		if (c == '\n')
+		{
+			/* End of line. Take action. */
+			
+			if (line_len < 3)
+			{
+				/* End of headers. We're done. */
+				
+				gtk_main_quit ();
+			}
+			else
+			{
+				if (line[0] == '0')
+				{
+					/* Progress update */
+
+					gtk_progress_set_percentage (GTK_PROGRESS(bar),
+								     (gfloat) ((line[1] - '0') * 0.1) +
+								              (line[2] - '0') * 0.01);
+				}
+				else
+				{
+					/* Report line */
+					
+					gtk_entry_set_text(GTK_ENTRY(report),
+							   line + 4);
+				}
+			}
+
+			line[0] = '\0';
+			line_len = 0;
+		}
+		else
+		{
+			/* Add character to end of current line */
+			
+			line = realloc(line, line_len + 2);
+			line[line_len] = c;
+			line_len++;
+			line[line_len] = '\0';
+		}
+	}
+#if 0  
 	if (tool_context->read_state == TOOL_READ_PROGRESS_MAX)
 	{
 		if (c - '0' < 10 && c - '0' >= 0)
@@ -207,6 +261,7 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 		
 		gtk_progress_set_percentage (GTK_PROGRESS(bar), p);
 	}
+#endif
 }
 
 
@@ -225,11 +280,11 @@ static void read_progress(int fd)
 
 	/* Set progress to 100% and wait a bit before closing display */
   
-  gtk_progress_set_percentage (GTK_PROGRESS (tool_widget_get_common ("progress")),
-                               1.0);
-  cb_id = gtk_timeout_add (500, (GtkFunction) gtk_main_quit, NULL);
-  gtk_main ();
-  gtk_timeout_remove (cb_id);
+	gtk_progress_set_percentage (GTK_PROGRESS (tool_widget_get_common ("read_progress")),
+				     1.0);
+	cb_id = gtk_timeout_add (500, (GtkFunction) gtk_main_quit, NULL);
+	gtk_main ();
+	gtk_timeout_remove (cb_id);
 }
 
 
@@ -243,7 +298,7 @@ gboolean tool_config_load()
 	int t, len;
 	char *p;
 	/* char *argv[] = { 0, "--get", "-v", 0 }; */
-	char *argv[] = { 0, "--get", "--progress", 0 };
+	char *argv[] = { 0, "--get", "--progress", "--report", 0 };
 	gchar *path;
 
 	tc = tool_context;
@@ -496,8 +551,8 @@ static int reply;
 
 static void reply_cb(gint val, gpointer data)
 {
-  reply = val;
-  gtk_main_quit ();
+	reply = val;
+	gtk_main_quit ();
 }
 
 
