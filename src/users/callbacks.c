@@ -183,7 +183,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 
 	if (!strcmp (u->ug.name, "root"))
 	{
-		txt = g_strdup ("You shouldn't delete root user!");
+		txt = g_strdup (_("The root user must not be deleted."));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
 		gnome_dialog_run (dialog);
 		g_free (txt);
