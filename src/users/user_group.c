@@ -141,17 +141,8 @@ user_add (void)
 	e_table_change_user_full ("login", new_user_name, "gid", gid);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-	{
-		gchar *new_shell;
+		adv_user_settings_update (new_user_name);
 
-		new_shell = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get
-						("user_settings_shell"))));
-
-		/* TODO Check if shell is valid */
-		if (strlen (new_shell) > 0)
-			e_table_change_user_full ("login", new_user_name, "shell", new_shell);
-	}
-	
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
 	if (strlen (new_comment) > 0)
@@ -216,24 +207,7 @@ user_update (void)
 		e_table_change_user ("comment", new_comment);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-	{
-		gchar *shell, *new_shell;
-
-		shell = e_table_get_user ("shell");
-		new_shell = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get
-						("user_settings_shell"))));
-
-		/* TODO Check if shell is valid */
-		if (shell == NULL)
-		{
-			if (strlen (new_shell) > 0)
-				e_table_change_user ("shell", new_shell);
-		}
-		else if (strcmp (new_shell, shell))
-			e_table_change_user ("shell", new_shell);
-
-		g_free (shell);
-	}
+		adv_user_settings_update (new_login);
 
 	/* Get selected group name */
 	
@@ -897,5 +871,31 @@ adv_user_settings_new (void)
 
 	w0 = tool_widget_get ("user_settings_advanced");
 	gtk_widget_show (w0);
+}
+
+void
+adv_user_settings_update (gchar *login)
+{
+	gchar *new_shell;
+	gchar *new_home;
+	gint new_uid;
+
+	/* Shell */
+	new_shell = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_shell"))));
+
+	/* TODO Check if shell is valid */
+	if (strlen (new_shell) > 0)
+		e_table_change_user_full ("login", login, "shell", new_shell);
+
+	/* Home */	
+	new_home = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home"))));
+	if (strlen (new_home) > 0)
+		e_table_change_user_full ("login", login, "home", new_home);
+
+	/* UID */
+	new_uid = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool_widget_get
+			("user_settings_uid")));
+
+	e_table_change_user_full ("login", login, "uid", g_strdup_printf ("%d", new_uid));
 }
 

@@ -69,6 +69,6 @@ xmlNodePtr basic_group_find_nth (xmlNodePtr parent, int n);
 
 void adv_user_settings (gboolean show);
 void adv_user_settings_new (void);
-
+void adv_user_settings_update (gchar *login);
 
 #endif /* USER_GROUP_H */
