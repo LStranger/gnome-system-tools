@@ -24,14 +24,17 @@
 
 void xst_hosts_update_sensitivity (void);
 
-void on_hosts_list_select_row   (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data);
-void on_hosts_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data);
 void on_hosts_changed        (GtkWidget *w, gpointer null);
 void on_hosts_add_clicked    (GtkWidget * button, gpointer user_data);
 void on_hosts_delete_clicked (GtkWidget * button, gpointer user_data);
 void on_hosts_update_clicked (GtkWidget *b, gpointer null);
 
-void on_hosts_ip_changed    (GtkEditable *w, gpointer not_used);
-void on_hosts_alias_changed (GtkEditable *w, gpointer not_used);
+void on_hosts_ip_changed     (GtkEditable *w, gpointer not_used);
+
+void hosts_init_gui          (XstTool *tool);
+void hosts_list_append       (XstTool *tool, const gchar *text[]);
+void hosts_list_remove       (XstTool *tool, const gchar *ip);
+gboolean hosts_list_get_selected (gchar **ip, gchar **alias);
+void hosts_list_save         (XstTool *tool, xmlNodePtr root);
 
 #endif /* __XST_HOSTS_H__ */

@@ -52,8 +52,8 @@ extern void on_network_notebook_switch_page (GtkWidget *notebook,
 void filter_editable (GtkEditable *e, const gchar *text, 
 		      gint length, gint *pos, gpointer data);
 
-#define connect_editable_filter(w, r) gtk_signal_connect (GTK_OBJECT (w), "insert_text", \
-			                                  GTK_SIGNAL_FUNC (filter_editable), \
+#define connect_editable_filter(w, r) g_signal_connect (G_OBJECT (w), "insert_text", \
+			                                  G_CALLBACK (filter_editable), \
 			                                  GINT_TO_POINTER (r))
 
 
@@ -70,10 +70,6 @@ void on_connection_delete_clicked (GtkWidget *w, gpointer null);
 void on_connection_configure_clicked (GtkWidget *w, gpointer null);
 void on_connection_activate_clicked (GtkWidget *w, gpointer null);
 void on_connection_deactivate_clicked (GtkWidget *w, gpointer null);
-void on_connection_list_select_row (GtkCList *clist, gint row, gint column,
-				    GdkEvent * event, gpointer user_data);
-void on_connection_list_unselect_row (GtkCList *clist, gint row, gint column,
-				      GdkEvent * event, gpointer user_data);
 void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
 void on_samba_use_toggled (GtkWidget *w, gpointer null);
 void on_wins_use_toggled (GtkWidget *w, gpointer null);

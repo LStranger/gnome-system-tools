@@ -125,9 +125,7 @@ extern XstConnection *connection_new_from_type (XstConnectionType type, xmlNode 
 extern XstConnection *connection_new_from_type_add (XstConnectionType type, xmlNode *root);
 extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection);
 extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
-extern void connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean enabled);
-extern void connection_add_to_list (XstConnection *cxn, GtkWidget *clist);
-extern XstConnection *connection_find_by_dev (XstTool *tool, gchar *dev);
+extern void connection_add_to_list (XstConnection *cxn);
 extern void connection_default_gw_add (XstConnection *cxn);
 extern void connection_default_gw_remove (gchar *dev);
 extern void connection_default_gw_init (XstTool *tool, gchar *dev);
@@ -136,13 +134,18 @@ extern XstConnectionErrorType connection_default_gw_check_manual (XstConnection 
 extern void connection_default_gw_fix (XstConnection *cxn, XstConnectionErrorType error);
 extern void connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn);
 extern void connection_default_gw_set_auto (XstTool *tool);
-extern void connection_update_clist_enabled_apply (GtkWidget *clist);
-extern void connection_update_row_enabled (XstConnection *cxn, gboolean enabled);
-extern void connection_update_row (XstConnection *cxn);
 extern void connection_update_complexity (XstTool *tool, XstDialogComplexity complexity);
 extern void connection_actions_set_sensitive (gboolean state);
 extern void connection_free (XstConnection *);
 extern void connection_configure (XstConnection *cxn);
 extern void connection_save_to_node (XstConnection *cxn, xmlNode *node);
+
+XstConnection *connection_list_get_active (void);
+void           connection_list_remove     (XstConnection *cxn);
+void           connection_activate        (XstConnection *cxn, gboolean activate);
+void           connection_list_update     (void);
+gboolean       connection_list_has_dialer (XstTool *tool);
+void           connection_list_save       (XstTool *tool);
+void           connection_list_select_connection (XstConnection *cxn);
 
 #endif /* CONNECTION_H */

@@ -34,22 +34,35 @@
 typedef struct _XstNetworkInterfaceDescription XstNetworkInterfaceDescription;
 
 struct _XstNetworkInterfaceDescription {
-	const gchar * description;
-	XstConnectionType type;
-	const gchar * icon;
-	const gchar * name;
+	const gchar       *description;
+	XstConnectionType  type;
+	const gchar       *icon;
+	const gchar       *name;
+	GdkPixbuf         *pixbuf;
 };
 
-static const XstNetworkInterfaceDescription xst_iface_desc [] = {
-	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "network.png",     "other_type" },
-	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth"        },
-	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "wavelan-16.png",  "wvlan"      },
-	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp"        },
-	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "16_plip.xpm",     "plip"       },
-	{ N_("Infrared LAN"),                 XST_CONNECTION_IRLAN,   "irda-16.png",     "irlan"      },
-	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"         },
-	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "network.png",     NULL         },
-	{ NULL,                               XST_CONNECTION_UNKNOWN, NULL,              NULL         }
+
+enum {
+	CONNECTION_LIST_COL_DEV_PIX,
+	CONNECTION_LIST_COL_DEVICE,
+	CONNECTION_LIST_COL_STAT_PIX,
+	CONNECTION_LIST_COL_STATUS,
+	CONNECTION_LIST_COL_DESCR,
+
+	CONNECTION_LIST_COL_DATA,
+	CONNECTION_LIST_COL_LAST
+};
+
+static XstNetworkInterfaceDescription xst_iface_desc [] = {
+	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
+	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
+	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "wavelan-16.png",  "wvlan",      NULL },
+	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
+	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
+	{ N_("Infrared LAN"),                 XST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
+	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo",         NULL },
+	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "network.png",     NULL,         NULL },
+	{ NULL,                               XST_CONNECTION_UNKNOWN, NULL,              NULL,         NULL  }
 };
 
 
@@ -72,13 +85,13 @@ static gboolean on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event
 #define SET_STR(yy_prefix,xx) xst_ui_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx)
 #define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), cxn->xx)
 #define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), !cxn->xx)
-	
 
-static GdkPixmap *mini_pm[XST_CONNECTION_LAST];
-static GdkBitmap *mini_mask[XST_CONNECTION_LAST];
+typedef struct {
+	GtkWidget *list;
+	GtkWidget *def_gw_omenu;
+} XstConnectionUI;
 
-static GdkPixmap *active_pm[2];
-static GdkBitmap *active_mask[2];
+#define CONNECTION_UI_STRING "connection_ui"
 
 /*static GSList *connections;*/
 
@@ -387,113 +400,466 @@ connection_set_modified (XstConnection *cxn, gboolean state)
 	cxn->modified = state;
 }
 
-static gint
-determine_row_height (void)
+static GdkPixbuf *
+load_pixbuf (const gchar *file)
 {
-#warning FIXME
-	return 16;
-}
-
-static void
-load_icon (GtkWidget *clist, const gchar *file, GdkPixmap **pixmap, GdkBitmap **mask)
-{
-	GdkPixbuf *new, *pb, *pb2;
-	GtkStyle *style;
-	char *path;
-	guint height;
-	guchar *data;
-
-	style = gtk_widget_get_style (clist);
-	height = determine_row_height ();
+	GdkPixbuf *pb, *pb2;
+	gchar     *path;
 
 	path = g_concat_dir_and_file (PIXMAPS_DIR, file);
 	pb = gdk_pixbuf_new_from_file (path, NULL);
-
-	if (!pb) {
-		g_warning ("Could not load pixmap %s\n", path);
-		g_free (path);
-		return;
-	}
 	g_free (path);
 
 	pb2 = gdk_pixbuf_scale_simple (pb, 16, 16, GDK_INTERP_BILINEAR);
 	gdk_pixbuf_unref (pb);
-	
-	new = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 16, height);
-	data = gdk_pixbuf_get_pixels (new);
-	memset (data, 0, height * gdk_pixbuf_get_rowstride (new));
-	gdk_pixbuf_copy_area (pb2, 0, 0, 16, 16, new, 0, 0);
-	
-	gdk_pixbuf_render_pixmap_and_mask (new, pixmap, mask, 127);
-	gdk_pixbuf_unref (new);
+
+	return pb2;
 }
 
-static gchar *
-connection_get_cell_text (const GtkCListRow *row, gint col)
+static GdkPixbuf *
+connection_get_dev_pixbuf (XstConnection *cxn)
 {
-	return row->cell[col].u.text;
+	gint i;
+
+	g_return_val_if_fail (cxn != NULL, NULL);
+
+	for (i = 0; xst_iface_desc[i].description != NULL; i++)
+		if (xst_iface_desc[i].type == cxn->type)
+			return xst_iface_desc[i].pixbuf;
+
+	return NULL;
 }
 
-static gint
-connection_clist_cmp (GtkCList *clist, gconstpointer p1, gconstpointer p2)
+static GdkPixbuf *
+connection_get_stat_pixbuf (XstConnection *cxn)
 {
-	gint res;
+	static GdkPixbuf *active;
+	static GdkPixbuf *inactive;
 
-	/* Compare dev cols */
-	res = my_strcmp (connection_get_cell_text (p1, 0),
-			 connection_get_cell_text (p2, 0));
-	if (res)
-		return res;
+	g_return_val_if_fail (cxn != NULL, NULL);
 
-	/* Compare comment cols */
-	return my_strcmp (connection_get_cell_text (p1, 2),
-			  connection_get_cell_text (p2, 2));
+	if (active == NULL)
+		active = load_pixbuf ("gnome-light-on.png");
+	if (inactive == NULL)
+		inactive = load_pixbuf ("gnome-light-off.png");
+
+	return cxn->enabled ? active : inactive;
+}
+
+static const gchar *
+connection_get_stat_string (XstConnection *cxn)
+{
+	g_return_val_if_fail (cxn != NULL, NULL);
+
+	return cxn->enabled ? _("Active") : _("Inactive");
+}
+
+static GtkTreeModel *
+connection_list_model_new (void)
+{
+	GtkListStore *store;
+
+	store = gtk_list_store_new (CONNECTION_LIST_COL_LAST,
+				    GDK_TYPE_PIXBUF,
+				    G_TYPE_STRING,
+				    GDK_TYPE_PIXBUF,
+				    G_TYPE_STRING,
+				    G_TYPE_STRING,
+				    G_TYPE_POINTER);
+	return GTK_TREE_MODEL (store);
 }
 
 static void
-connection_init_clist (GtkWidget *clist)
+connection_list_add_columns (GtkTreeView *treeview)
 {
-	GtkStyle *style;
-#warning FIXME
-	return;
-	gtk_clist_set_compare_func (GTK_CLIST (clist), connection_clist_cmp);
-	style = gtk_widget_get_style (clist);
-	gtk_clist_set_row_height (GTK_CLIST (clist), determine_row_height ());
-	gtk_clist_column_titles_passive (GTK_CLIST (clist));
+	GtkCellRenderer   *text_renderer, *pixbuf_renderer;
+	GtkTreeViewColumn *col;
+	GtkTreeModel      *model = gtk_tree_view_get_model (treeview);
+
+	/* Device */
+	col = gtk_tree_view_column_new ();
+	gtk_tree_view_column_set_title  (col, _("Device"));
+
+	pixbuf_renderer = gtk_cell_renderer_pixbuf_new ();
+
+	gtk_tree_view_column_pack_start (col, pixbuf_renderer, FALSE);
+	gtk_tree_view_column_add_attribute (col, pixbuf_renderer, "pixbuf", CONNECTION_LIST_COL_DEV_PIX);
+
+	text_renderer = gtk_cell_renderer_text_new ();
+	gtk_tree_view_column_pack_start (col, text_renderer, TRUE);
+	gtk_tree_view_column_add_attribute (col, text_renderer, "text", CONNECTION_LIST_COL_DEVICE);
+
+	gtk_tree_view_append_column (treeview, col);
+
+	/* Status */
+	col = gtk_tree_view_column_new ();
+	gtk_tree_view_column_set_title  (col, _("Status"));
+
+	pixbuf_renderer = gtk_cell_renderer_pixbuf_new ();
+
+	gtk_tree_view_column_pack_start (col, pixbuf_renderer, FALSE);
+	gtk_tree_view_column_add_attribute (col, pixbuf_renderer, "pixbuf", CONNECTION_LIST_COL_STAT_PIX);
+
+	text_renderer = gtk_cell_renderer_text_new ();
+	gtk_tree_view_column_pack_start (col, text_renderer, TRUE);
+	gtk_tree_view_column_add_attribute (col, text_renderer, "text", CONNECTION_LIST_COL_STATUS);
+
+	gtk_tree_view_append_column (treeview, col);
+
+	/* Description */
+	text_renderer = gtk_cell_renderer_text_new ();
+	col = gtk_tree_view_column_new_with_attributes (_("Description"),
+							text_renderer,
+							"text",
+							CONNECTION_LIST_COL_DESCR,
+							NULL);
+	gtk_tree_view_append_column (treeview, col);
+}
+
+static void
+connection_list_select_row (GtkTreeSelection *selection, gpointer data)
+{
+	GtkTreeIter    iter;
+	GtkTreeModel  *model;
+	XstConnection *cxn;
+
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+
+		if (cxn->type == XST_CONNECTION_LO)
+			connection_actions_set_sensitive (FALSE);
+		else
+			connection_actions_set_sensitive (TRUE);
+	} else
+		connection_actions_set_sensitive (FALSE);
+}
+
+static void
+list_get_active_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, data, -1);
+}
+
+XstConnection *
+connection_list_get_active (void)
+{	
+	XstConnectionUI  *ui;
+	GtkTreeSelection *select;
+	XstConnection    *cxn = NULL;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
+	gtk_tree_selection_selected_foreach (select, list_get_active_cb, &cxn);
+
+	return cxn;
+}
+
+static gboolean
+connection_iter (XstConnection *cxn, GtkTreeIter *iter)
+{
+	XstConnectionUI *ui;
+	XstConnection   *c;
+	GtkTreeModel    *model;
+	gboolean         valid;
+
+	g_return_val_if_fail (cxn != NULL, FALSE);
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	valid = gtk_tree_model_get_iter_first (model, iter);
+	while (valid) {
+		gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &c, -1);
+
+		if (!strcmp (cxn->dev, c->dev))
+			return TRUE;
+
+		valid = gtk_tree_model_iter_next (model, iter);
+	}
+
+	return FALSE;
+}
+
+GtkWidget *
+connection_list_new (void)
+{
+	GtkWidget        *treeview;
+	GtkTreeSelection *select;
+	GtkTreeModel     *model;
+
+	model = connection_list_model_new ();
+
+	treeview = gtk_tree_view_new_with_model (model);
+	g_object_unref (G_OBJECT (model));
+
+	connection_list_add_columns (GTK_TREE_VIEW (treeview));
+
+	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);
+	g_signal_connect (G_OBJECT (select), "changed",
+			  G_CALLBACK (connection_list_select_row), NULL);
+
+	gtk_widget_show_all (treeview);
+
+	return treeview;
+}
+
+void
+connection_list_append (XstConnection *cxn)
+{
+	XstConnectionUI *ui;
+	GtkTreeModel    *model;
+	GdkPixbuf       *pb;
+	GtkTreeIter      iter;
+	gboolean         exists;
+
+	g_return_if_fail (cxn != NULL);
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	exists = connection_iter (cxn, &iter);
+	if (!exists)
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    CONNECTION_LIST_COL_DEV_PIX,  connection_get_dev_pixbuf (cxn),
+			    CONNECTION_LIST_COL_DEVICE,   cxn->dev,
+			    CONNECTION_LIST_COL_STAT_PIX, connection_get_stat_pixbuf (cxn),
+			    CONNECTION_LIST_COL_STATUS,   connection_get_stat_string (cxn),
+			    CONNECTION_LIST_COL_DESCR,    cxn->name,
+			    CONNECTION_LIST_COL_DATA,     cxn,
+			    -1);
+}
+
+void
+connection_list_remove (XstConnection *cxn)
+{
+	XstConnectionUI *ui;
+	XstConnection   *c;
+	GtkTreeModel    *model;
+	GtkTreeIter      iter;
+	gboolean         valid;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+	while (valid) {
+		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &c, -1);
+		if (!strcmp (c->dev, cxn->dev)) {
+			gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
+			break;
+		}
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+}
+
+void
+connection_list_update (void)
+{
+	XstConnectionUI *ui;
+	XstConnection   *cxn;
+	GtkTreeModel    *model;
+	GtkTreeIter      iter;
+	gboolean         valid;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+	while (valid) {
+		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+
+		connection_list_append (cxn);
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+}
+
+XstConnection *
+connection_find_by_dev (GtkWidget *list, gchar *dev)
+{
+	XstConnection   *cxn;
+	GtkTreeModel    *model;
+	GtkTreeIter      iter;
+	gboolean         valid;
+
+	g_return_val_if_fail (list != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TREE_VIEW (list), NULL);
+	g_return_val_if_fail (dev != NULL, NULL);
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+	while (valid) {
+		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+
+		if (!strcmp (cxn->dev, dev))
+			return cxn;
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+
+	return NULL;
+}
+
+static gboolean
+connection_type_is_lan (XstConnectionType type)
+{
+	return (type == XST_CONNECTION_ETH ||
+		type == XST_CONNECTION_WVLAN ||
+		type == XST_CONNECTION_IRLAN);
+
+}
+
+static gboolean
+default_gw_find_static_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+	XstConnection *cxn;
+
+	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+	if (cxn->enabled && connection_type_is_lan (cxn->type) &&
+	    (cxn->ip_config == IP_MANUAL) &&
+	    (cxn->gateway && *cxn->gateway)) {
+		* (XstConnection *)data = *cxn;
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static XstConnection *
+connection_default_gw_find_static (XstTool *tool)
+{
+	XstConnection   *cxn;
+	XstConnectionUI *ui;
+	GtkTreeModel    *model;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	cxn = NULL;
+	gtk_tree_model_foreach (model, default_gw_find_static_cb, &cxn);
+
+	return cxn;
+}
+
+static gboolean
+default_gw_find_ppp_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+	XstConnection *cxn;
+
+	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+	if (cxn->enabled && cxn->type == XST_CONNECTION_PPP && cxn->set_default_gw) {
+		* (XstConnection *)data = *cxn;
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static XstConnection *
+connection_default_gw_find_ppp (XstTool *tool)
+{
+	XstConnection   *cxn;
+	XstConnectionUI *ui;
+	GtkTreeModel    *model;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	cxn = NULL;
+	gtk_tree_model_foreach (model, default_gw_find_ppp_cb, &cxn);
+
+	return cxn;
+}
+
+static gboolean
+default_gw_find_dynamic_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+	XstConnection *cxn;
+
+	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+	if (cxn->enabled &&
+	    (cxn->type == XST_CONNECTION_ETH || cxn->type == XST_CONNECTION_WVLAN) &&
+	    (cxn->ip_config != IP_MANUAL)) {
+		* (XstConnection *)data = *cxn;
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static XstConnection *
+connection_default_gw_find_dynamic (XstTool *tool)
+{
+	XstConnection   *cxn;
+	XstConnectionUI *ui;
+	GtkTreeModel    *model;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	cxn = NULL;
+	gtk_tree_model_foreach (model, default_gw_find_dynamic_cb, &cxn);
+
+	return cxn;
+}
+
+static gboolean
+default_gw_find_plip_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+	XstConnection *cxn;
+
+	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+	if (cxn->enabled && (cxn->type == XST_CONNECTION_PLIP) &&
+	    (cxn->remote_address && *cxn->remote_address)) {
+		* (XstConnection *)data = *cxn;
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+static XstConnection *
+connection_default_gw_find_plip (XstTool *tool)
+{
+	XstConnection   *cxn;
+	XstConnectionUI *ui;
+	GtkTreeModel    *model;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	cxn = NULL;
+	gtk_tree_model_foreach (model, default_gw_find_plip_cb, &cxn);
+
+	return cxn;
 }
 
 extern void
 connection_init_gui (XstTool *tool)
 {
-	GtkWidget *clist;
+	XstConnectionUI *ui;
+	GtkWidget *container;
 	XstConnectionType i;
 
-#warning FIXME
-	return;
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	
+	ui = g_new0 (XstConnectionUI, 1);
+
+	container = xst_dialog_get_widget (tool->main_dialog, "connection_list_sw");
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (container),
+					     GTK_SHADOW_ETCHED_IN);
+	ui->list = connection_list_new ();
+	gtk_container_add (GTK_CONTAINER (container), ui->list);
+
+	ui->def_gw_omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+
+	g_object_set_data (G_OBJECT (tool), CONNECTION_UI_STRING, (gpointer) ui);
+
 	for (i = XST_CONNECTION_OTHER; i < XST_CONNECTION_LAST; i++)
-		load_icon (clist, xst_iface_desc[i].icon, &mini_pm[i], &mini_mask[i]);
-
-	load_icon (clist, "gnome-light-off.png" /* "connection-inactive.xpm" */,
-		   &active_pm[0], &active_mask[0]);
-	load_icon (clist, "gnome-light-on.png" /*"connection-active.xpm" */,
-		   &active_pm[1], &active_mask[1]);
-
-	connection_init_clist (clist);
-}
-
-void
-connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean enabled)
-{
-	g_return_if_fail (GTK_IS_CLIST (clist));
-	g_return_if_fail (text != NULL);
-	
-	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1,
-			       text,
-			       GNOME_PAD_SMALL,
-			       active_pm[enabled ? 1 : 0], 
-			       active_mask[enabled ? 1 : 0]);
+		xst_iface_desc[i].pixbuf = load_pixbuf (xst_iface_desc[i].icon);
 }
 
 /* NULL if false, else GtkWidget in data in found node */
@@ -525,13 +891,15 @@ connection_default_gw_add (XstConnection *cxn)
 	GtkWidget *omenu, *menu, *item;
 	GList *l;
 	gchar *cpy, *dev;
+	XstConnectionUI *ui;
 
 	dev = cxn->dev;
 	
 	if (cxn->type == XST_CONNECTION_LO)
 		return;
-	
-	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
 	if (connection_default_gw_find_item (omenu, dev))
@@ -557,8 +925,11 @@ connection_default_gw_remove (gchar *dev)
 	GtkWidget *omenu, *menu, *item;
 	GList *l;
 	gchar *cpy;
-	
-	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	XstConnectionUI *ui;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+
+	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
 	g_return_if_fail ((item = connection_default_gw_find_item (omenu, dev)));
@@ -577,8 +948,11 @@ void
 connection_default_gw_init (XstTool *tool, gchar *dev)
 {
 	GtkWidget *omenu, *menu, *item;
+	XstConnectionUI *ui;
 
-	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+
+	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
 	item = gtk_menu_get_active (GTK_MENU (menu));
@@ -603,11 +977,13 @@ XstConnection *
 connection_default_gw_get_connection (XstTool *tool)
 {
 	gchar *dev;
+	XstConnectionUI *ui;
 
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	dev = gtk_object_get_data (GTK_OBJECT (tool), "gatewaydev");
 	g_return_val_if_fail (dev != NULL, NULL);
 
-	return connection_find_by_dev (tool, dev);
+	return connection_find_by_dev (ui->list, dev);
 }
 
 XstConnectionErrorType
@@ -701,98 +1077,6 @@ connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
 	gtk_object_set_data (GTK_OBJECT (tool), "gateway", gateway);
 }
 
-static gboolean
-connection_type_is_lan (XstConnectionType type)
-{
-	return (type == XST_CONNECTION_ETH ||
-		type == XST_CONNECTION_WVLAN ||
-		type == XST_CONNECTION_IRLAN);
-
-}
-
-static XstConnection *
-connection_default_gw_find_static (XstTool *tool)
-{
-	XstConnection *cxn;
-	GtkWidget *clist;
-	int i;
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
-		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-
-		/* Try fo find an active ethernet or wavelan connection with a static gateway definded */
-		if (cxn->enabled && connection_type_is_lan (cxn->type) &&
-		    (cxn->ip_config == IP_MANUAL) &&
-		    (cxn->gateway && *cxn->gateway))
-			return cxn;
-	}
-
-	return NULL;
-}
-
-static XstConnection *
-connection_default_gw_find_ppp (XstTool *tool)
-{
-	XstConnection *cxn;
-	GtkWidget *clist;
-	int i;
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
-		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-
-		/* Try fo find an active PPP connection with the default_gw bit on. */
-		if (cxn->enabled &&
-		    cxn->type == XST_CONNECTION_PPP &&
-		    cxn->set_default_gw)
-			return cxn;
-	}
-	
-	return NULL;
-}
-
-static XstConnection *
-connection_default_gw_find_dynamic (XstTool *tool)
-{
-	XstConnection *cxn;
-	GtkWidget *clist;
-	int i;
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
-		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-		/* Try fo find an active ethernet or wavelan connection with dynamic configuration */
-		if (cxn->enabled &&
-		    (cxn->type == XST_CONNECTION_ETH || cxn->type == XST_CONNECTION_WVLAN) &&
-		    (cxn->ip_config != IP_MANUAL))
-			return cxn;
-	}
-	
-	return NULL;
-}
-
-static XstConnection *
-connection_default_gw_find_plip (XstTool *tool)
-{
-	XstConnection *cxn;
-	GtkWidget *clist;
-	int i;
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
-		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-
-		/* Try fo find an active plip connection with a set remote address. */
-		if (cxn->enabled &&
-		    (cxn->type == XST_CONNECTION_PLIP) &&
-		    (cxn->remote_address && *cxn->remote_address))
-			return cxn;
-	}
-
-	return NULL;
-}
-
 void
 connection_default_gw_set_auto (XstTool *tool)
 {
@@ -808,174 +1092,67 @@ connection_default_gw_set_auto (XstTool *tool)
 }
 
 void
-connection_update_clist_enabled_apply (GtkWidget *clist)
+connection_activate (XstConnection *cxn, gboolean activate)
 {
-	gint i;
-	XstConnection *cxn;
-
-	g_return_if_fail (GTK_IS_CLIST (clist));
-
-	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
-		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-		g_return_if_fail (cxn != NULL);
-		connection_set_row_pixtext (clist, i, cxn->enabled ? _("Active") :
-					    _("Inactive"), cxn->enabled);
-	}
-}
-
-void
-connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
-{
-	XstConnection *cxn2;
-	GtkWidget *clist;
-	gint row, i;
-
 	g_return_if_fail (cxn != NULL);
-	g_return_if_fail (cxn->dev != NULL);
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 
-	if (enabled)
-		for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
-			cxn2 = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+	if (cxn->enabled == activate)
+		return;
 
-			g_return_if_fail (cxn2 != NULL);
-			g_return_if_fail (cxn2->dev != NULL);
-			
-			if (!strcmp (cxn2->dev, cxn->dev))
-				connection_update_row_enabled (cxn2, FALSE);
-		}
-
-	cxn->enabled = enabled;
-	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
-	g_return_if_fail (row > -1);
-	connection_set_row_pixtext (clist, row, enabled ? _("Active") :
-				    _("Inactive"), enabled);
-}
-
-static void
-connection_update_row_do (XstConnection *cxn)
-{
-	GtkWidget *clist;
-	gint row;
-
-	g_return_if_fail (cxn != NULL);
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-
-	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
-
-	g_return_if_fail (row > -1);
-	g_return_if_fail (GTK_IS_CLIST (clist));
-	g_return_if_fail (cxn->dev != NULL);
-
-	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
-			       mini_pm[cxn->type], mini_mask[cxn->type]);
-
-	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name ? cxn->name : "");
-	gtk_clist_sort (GTK_CLIST (clist));
-}
-
-void
-connection_update_row (XstConnection *cxn)
-{
-	connection_update_row_do (cxn);
+	cxn->enabled = activate;
+	connection_list_append (cxn);
 	xst_dialog_modify (tool->main_dialog);
 }
 
-static void
-connection_add_to_list_do (XstConnection *cxn, GtkWidget *clist)
+void
+connection_add_to_list (XstConnection *cxn)
 {
-	gint row;
-	char *text[3] = { "Error", NULL };
-	GtkStyle *style;
-
-	g_return_if_fail (GTK_IS_CLIST (clist));
 	g_return_if_fail (cxn != NULL);
 
-	row = gtk_clist_append (GTK_CLIST (clist), text);
-#warning FIXME	
-#if 0
-	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
-#endif	
-
-	style = gtk_widget_get_style (clist);
-	gtk_clist_set_shift (GTK_CLIST (clist), row, 0,
-			     determine_row_height (),
-			     determine_row_height ());
-	gtk_clist_set_shift (GTK_CLIST (clist), row, 1,
-			     determine_row_height (),
-			     determine_row_height ());
-	gtk_clist_set_shift (GTK_CLIST (clist), row, 2,
-			     determine_row_height (),
-			     determine_row_height ());
-
+	connection_list_append (cxn);
 	connection_default_gw_add (cxn);
-	connection_update_row_enabled (cxn, cxn->enabled);
-}
-
-void
-connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
-{
-#warning FIXME
-	return;
-	
-	connection_add_to_list_do (cxn, clist);
-	connection_update_row (cxn);
-	connection_update_row_enabled (cxn, cxn->enabled);
 }
 
 static void
 connection_update_complexity_advanced (XstTool *tool)
 {
+	XstConnection   *cxn;
+	XstConnectionUI *ui;
+	GtkTreeModel    *model;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	cxn = g_object_steal_data (G_OBJECT (model), "lo");
+	if (cxn)
+		connection_add_to_list (cxn);
+}
+
+static gboolean
+update_complexity_basic_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
 	XstConnection *cxn;
-	GtkWidget     *clist;
-	
-	GList *l, *l2;
 
-#warning FIXME	
-	return;
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-
-	for (l2 = l = gtk_object_get_data (GTK_OBJECT (clist), "lo"); l; l = l->next)
-	{
-		cxn = l->data;
-		connection_add_to_list_do (cxn, clist);
-		connection_update_row_do (cxn);
-		connection_update_row_enabled (cxn, cxn->enabled);
+	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+	if (cxn->type == XST_CONNECTION_LO) {
+		g_object_set_data (G_OBJECT (model), "lo", cxn);
+		gtk_list_store_remove (GTK_LIST_STORE (model), iter);
+		return TRUE;
 	}
-	
-	if (l2)
-		g_list_free (l2);
-	
-	gtk_object_remove_data (GTK_OBJECT (clist), "lo");
+
+	return FALSE;
 }
 
 static void
 connection_update_complexity_basic (XstTool *tool)
 {
-	XstConnection *cxn;
-	GtkWidget     *clist;
-	
-	GList *l;
-	gint   i;
-	
-#warning FIXME
-	return;
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	l = NULL;
-	
-	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
-		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-		if (cxn->type == XST_CONNECTION_LO) {
-			
-			l = g_list_append (l, cxn);
-			gtk_object_set_data (GTK_OBJECT (clist), "lo", l);
-			gtk_clist_remove (GTK_CLIST (clist), i);
-		}
-	}
+	XstConnectionUI *ui;
+	GtkTreeModel    *model;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	gtk_tree_model_foreach (model, update_complexity_basic_cb, NULL);
 }
 
 void
@@ -989,30 +1166,6 @@ connection_update_complexity (XstTool *tool, XstDialogComplexity complexity)
 		connection_update_complexity_advanced (tool);
 	}
 }
-
-XstConnection *
-connection_find_by_dev (XstTool *tool, gchar *dev)
-{
-	XstConnection *cxn;
-	GtkWidget *clist;
-	int i;
-	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
-		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-		if (!strcmp (cxn->dev, dev))
-			return cxn;
-	}
-
-	return NULL;
-}
-
-
-/*static void
-add_connections_to_list (void)
-{
-	g_slist_foreach (connections, (GFunc) add_connection_to_list, NULL);
-}*/
 
 static gchar *
 connection_description_from_type (XstConnectionType type)
@@ -1207,7 +1360,7 @@ connection_new_from_node (xmlNode *node)
 		break;
 	}
 
-	connection_add_to_list (cxn, xst_dialog_get_widget (tool->main_dialog, "connection_list"));
+	connection_add_to_list (cxn);
 
 	return cxn;
 }
@@ -1252,25 +1405,6 @@ connection_free (XstConnection *cxn)
 
 	g_free (cxn->remote_address);
 }
-
-/* This function may come handy again later. */
-#if 0
-static void
-update_status (XstConnection *cxn)
-{
-	gnome_pixmap_load_file (GNOME_PIXMAP (W ("status_icon")),
-				GTK_TOGGLE_BUTTON (W ("status_enabled"))->active
-				? PIXMAPS_DIR "/gnome-light-on.png"
-				: PIXMAPS_DIR "/gnome-light-off.png");
-}
-
-static void
-on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn)
-{
-	connection_set_modified (cxn, TRUE);
-/*	update_status (cxn);*/
-}
-#endif
 
 static void
 connection_check_netmask_gui (XstConnection *cxn)
@@ -1467,13 +1601,15 @@ connection_validate (XstConnection *cxn)
 
 	if (error) {
 		GtkWidget *message;
-		
-		message = gnome_message_box_new (error, GNOME_MESSAGE_BOX_WARNING,
-						 GNOME_STOCK_BUTTON_OK,
-						 NULL);
-		if (cxn->window)
-			gnome_dialog_set_parent (GNOME_DIALOG (message), GTK_WINDOW (cxn->window));
-		gnome_dialog_run_and_close (GNOME_DIALOG (message));
+
+		message = gtk_message_dialog_new (cxn->window ? GTK_WINDOW (tool->main_dialog) : NULL,
+						  GTK_DIALOG_MODAL,
+						  GTK_MESSAGE_ERROR,
+						  GTK_BUTTONS_OK,
+						  error);
+
+		gtk_dialog_run (GTK_DIALOG (message));
+		gtk_widget_destroy (message);
 		return FALSE;
 	}
 
@@ -1527,7 +1663,7 @@ connection_config_save (XstConnection *cxn)
 
 	connection_empty_gui (cxn);
 	connection_set_modified (cxn, FALSE);
-	connection_update_row (cxn);
+	connection_list_append (cxn);
 
 	return TRUE;
 }
@@ -1546,16 +1682,10 @@ on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
 static void
 on_connection_cancel_clicked (GtkWidget *w, XstConnection *cxn)
 {
-	GtkCList *list;
-	gint row;
-
 	gtk_widget_destroy (cxn->window);
-	
+
 	if (cxn->creating) {
-		list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list"));
-		row = gtk_clist_find_row_from_data (list, cxn);
-		g_return_if_fail (row > -1);
-		gtk_clist_remove (list, row);
+		connection_list_remove (cxn);
 		connection_free (cxn);
 		xst_dialog_modify (tool->main_dialog);
 	}
@@ -1564,7 +1694,7 @@ on_connection_cancel_clicked (GtkWidget *w, XstConnection *cxn)
 static void
 on_connection_config_dialog_destroy (GtkWidget *w, XstConnection *cxn)
 {
-	gtk_object_unref (GTK_OBJECT (cxn->xml));
+	g_object_unref (G_OBJECT (cxn->xml));
 	cxn->xml = NULL;
 
 	cxn->window = NULL;
@@ -1614,8 +1744,6 @@ fill_general (XstConnection *cxn)
 {
 	gtk_label_set_text (GTK_LABEL (W ("connection_dev")), cxn->dev);
 	SET_STR ("connection_", name);
-/*	SET_BOOL ("status_", enabled);
-	update_status (cxn);*/
 	SET_BOOL ("status_", autoboot);
 	SET_BOOL ("status_", user);
 }
@@ -1802,7 +1930,7 @@ connection_dialog_set_visible_pages (XstConnection *cxn)
 	nb = GTK_NOTEBOOK (W ("connection_nb"));
 
 	if (cxn->type == XST_CONNECTION_PPP) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/ppp.png");
+		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/ppp.png");
 		fill_ppp (cxn);
 		fill_ppp_adv (cxn);
 		gtk_notebook_remove_page (nb,
@@ -1819,7 +1947,7 @@ connection_dialog_set_visible_pages (XstConnection *cxn)
 	}
        
 	if (cxn->type == XST_CONNECTION_WVLAN) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/wavelan-48.png");
+		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/wavelan-48.png");
 		fill_wvlan (cxn);
 		/* FIXME: temprorarily disabling this notebook, until we get support for this. */
 		gtk_notebook_remove_page (nb,
@@ -1831,7 +1959,7 @@ connection_dialog_set_visible_pages (XstConnection *cxn)
 								 W ("wvlan_vbox")));
 
 	if (cxn->type == XST_CONNECTION_PLIP) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/plip-48.png");
+		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/plip-48.png");
 		fill_ptp (cxn);
 		gtk_notebook_remove_page (nb,
 					  gtk_notebook_page_num (nb,
@@ -1842,11 +1970,12 @@ connection_dialog_set_visible_pages (XstConnection *cxn)
 								 W ("ptp_vbox")));
 
 	if (cxn->type == XST_CONNECTION_ETH) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/connection-ethernet.png");
+		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")),
+					 PIXMAPS_DIR "/connection-ethernet.png");
 	}
 
 	if (cxn->type == XST_CONNECTION_IRLAN) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/irda-48.png");
+		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/irda-48.png");
 	}
 
 	if (cxn->type == XST_CONNECTION_LO) {
@@ -1996,4 +2125,84 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 	if (cxn->type == XST_CONNECTION_PLIP) {
 		connection_xml_save_str_to_node (node, "remote_address", cxn->remote_address);
 	}
+}
+
+gboolean
+connection_list_has_dialer (XstTool *tool)
+{
+	XstConnectionUI *ui;
+	XstConnection   *cxn;
+	GtkTreeModel    *model;
+	GtkTreeIter      iter;
+	gboolean         valid;
+	xmlNodePtr       root;
+	gboolean         has_dialer = FALSE;
+	gboolean         need_dialer = FALSE;
+
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	root = xst_xml_doc_get_root (tool->config);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+	while (valid) {
+		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+		if (cxn && cxn->type == XST_CONNECTION_PPP) {
+			need_dialer = TRUE;
+			break;
+		}
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+
+	if (!need_dialer)
+		return TRUE;
+
+	has_dialer = (gboolean) gtk_object_get_data (GTK_OBJECT (tool),
+						     "dialinstalled");
+
+	return has_dialer;
+}
+
+static gboolean
+list_save_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
+{
+	XstConnection *cxn;
+
+	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
+	connection_save_to_node (cxn, (xmlNode *)data);
+
+	return FALSE;
+}
+
+void
+connection_list_save (XstTool *tool)
+{
+	XstConnectionUI *ui;
+	XstConnection   *cxn;
+	GtkTreeModel    *model;
+	xmlNodePtr       root;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	root = xst_xml_doc_get_root (tool->config);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	gtk_tree_model_foreach (model, list_save_cb, root);
+
+	cxn = g_object_get_data (G_OBJECT (model), "lo");
+	if (cxn)
+		connection_save_to_node (cxn, root);
+}
+
+void
+connection_list_select_connection (XstConnection *cxn)
+{
+	XstConnectionUI  *ui;
+	GtkTreeSelection *select;
+	GtkTreeIter       iter;
+
+	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
+	connection_iter (cxn, &iter);
+	gtk_tree_selection_select_iter (select, &iter);
 }

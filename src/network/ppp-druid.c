@@ -236,14 +236,14 @@ ppp_druid_check_last (PppDruid *ppp)
 	const gchar *phone, *login, *profile;
 	gchar *passwd;
 	gchar *format =
-_("You are about to create an account named with the following information:\n\n"
-  "Account Name: %s\n\n"
-  "Phone number: %s\n\n"
-  "User name: %s\n\n"
-  "Password: %s");
+		_("You are about to create an account named with the following information:\n\n"
+		  "Account Name: %s\n\n"
+		  "Phone number: %s\n\n"
+		  "User name: %s\n\n"
+		  "Password: %s");
 
 	w = my_get_widget (ppp->glade, "page_last");
-	
+
 	phone = gtk_entry_get_text (GTK_ENTRY (ppp->phone));
 	login = gtk_entry_get_text (GTK_ENTRY (ppp->login));
 	passwd = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->passwd)));
@@ -251,13 +251,10 @@ _("You are about to create an account named with the following information:\n\n"
 
 	for (i = 0; i < strlen (passwd); i++)
 		passwd[i] = '*';
-	
+
 	text = g_strdup_printf (format, profile, phone, login, passwd);
 
-#warning FIXME
-#if 0	
-	gnome_druid_page_finish_set_text (w, text);
-#endif	
+	gnome_druid_page_edge_set_text (GNOME_DRUID_PAGE_EDGE (w), text);
 
 	g_free (text);
 	g_free (passwd);

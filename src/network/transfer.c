@@ -137,60 +137,26 @@ transfer_string_entry_gui_to_xml (XstTool *tool, xmlNodePtr root)
 static void
 transfer_string_list_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
-	int i;
-	xmlNodePtr node;
-	gchar *s;
-	GtkWidget *w;
-	int position;
+	xmlNodePtr  node;
+	GtkWidget  *w;
+	gint        i;
+	gchar      *s;
 
-	for (i = 0; transfer_string_list_table[i].xml_path; i++)
-	{
+	for (i = 0; transfer_string_list_table[i].xml_path; i++) {
 		w = xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table [i].list);
-		position = 0;
 
-#warning FIXME
-#if 0	
-		gtk_text_freeze (w);
-#endif	
+		xst_ui_text_view_clear (GTK_TEXT_VIEW (w));
 
-		if (TRUE)
-		{
-			GtkTextBuffer *buffer;
-
-			buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
-			gtk_text_buffer_set_text (buffer, "", 0);
-		} else {
-			gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
-		}
-		
 		for (node = xst_xml_element_find_first (root, transfer_string_list_table [i].xml_path); 
 		     node; 
-		     node = xst_xml_element_find_next (node, transfer_string_list_table [i].xml_path))
-		{
-			if ((s = xst_xml_element_get_content (node)))
-			{
-#warning FIXME	
-#if 0
-				GtkTextBuffer *buffer;
-				GtkTextIter *iter;
-
-				g_print ("f\n");
-				buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
-				gtk_text_buffer_get_end_iter (buffer, iter);
-				gtk_text_buffer_insert (buffer, iter, s, strlen (s));
-				gtk_text_buffer_get_end_iter (buffer, iter);
-				gtk_text_buffer_insert (buffer, iter, "\n", 1);
-				g_print ("f-\n");
-#endif	
+		     node = xst_xml_element_find_next (node, transfer_string_list_table [i].xml_path)) {
+			if ((s = xst_xml_element_get_content (node))) {
+				xst_ui_text_view_add_text (GTK_TEXT_VIEW (w), s);
+				xst_ui_text_view_add_text (GTK_TEXT_VIEW (w), "\n");
 			}
 		}
-#warning FIXME
-#if 0	
-		gtk_text_thaw ((w));
-#endif	
 	}
 }
-
 
 static gboolean
 transfer_string_is_empty (gchar *str)
@@ -202,7 +168,6 @@ transfer_string_is_empty (gchar *str)
 			return FALSE;
 	return TRUE;
 }
-
 
 static void
 transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
@@ -221,7 +186,7 @@ transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 
 		/* Add branches corresponding to listed data */
 		widget = xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table[i].list);
-		text = gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1);
+		text = xst_ui_text_view_get_text (GTK_TEXT_VIEW (widget));
 
 		end = text + strlen (text);
 		for (; text < end; text = pos + 1) {
@@ -234,6 +199,7 @@ transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 
 			node = xst_xml_element_add (root, transfer_string_list_table [i].xml_path);
 			xst_xml_element_set_content (node, text);
+			g_print ("%s\n", text);
 
 			if (!pos)
 				break;
@@ -241,19 +207,13 @@ transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 	}
 }
 
-
-
 static void
 transfer_string_clist2_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
-	int i, row;
+	int i;
 	xmlNodePtr node, nodesub;
 	char *s, *entry[3];
-	GtkWidget *clist;
 
-#warning FIXME
-	return;
-	
 	entry[0] = NULL;
 
 	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
@@ -310,9 +270,7 @@ transfer_string_clist2_xml_to_gui (XstTool *tool, xmlNodePtr root)
 			if (!entry[1])
 				continue;
 
-			clist = xst_dialog_get_widget (tool->main_dialog, transfer_string_clist2_table [i].clist);
-
-			row = gtk_clist_append (GTK_CLIST (clist), entry);
+			hosts_list_append (tool, entry);
 
 			g_free (entry[0]);
 			g_free (entry[1]);
@@ -320,102 +278,10 @@ transfer_string_clist2_xml_to_gui (XstTool *tool, xmlNodePtr root)
 	}
 }
 
-
-static void
-transfer_string_clist2_gui_to_xml_item (XstTool *tool, xmlNodePtr root, TransStringCList2 *specs)
-{
-	gchar *node_name;
-	gchar *field_one;
-	gchar *field_rest;
-	gchar *widget_name;
-
-	gchar *text_1;
-	gchar *text_2;
-
-	GtkWidget *widget;
-	gint row;
-	gint rows;
-	gint j;
-
-	gchar **col1_elem;
-	
-	xmlNodePtr node, node2;
-	gboolean col0_added;
-
-	node_name   = specs->xml_path;
-	field_one   = specs->xml_path_field_1;
-	field_rest  = specs->xml_path_field_2;
-	widget_name = specs->clist;
-
-	/* Get the clist */
-	widget = xst_dialog_get_widget (tool->main_dialog, widget_name);
-	g_return_if_fail (GTK_IS_CLIST (widget));
-
-	/* First remove any old branches in the XML tree */
-	xst_xml_element_destroy_children_by_name (root, node_name);
-
-	rows = GTK_CLIST (widget)->rows;
-	
-	for (row = 0; row < rows; row++)
-	{
-		if (!gtk_clist_get_text (GTK_CLIST (widget), row, 0, &text_1))
-			break;
-		if (!gtk_clist_get_text (GTK_CLIST (widget), row, 1, &text_2))
-			continue;
-		
-		if (!strlen (text_1))
-			continue;
-		
-		/* Enclosing element */
-		node = xst_xml_element_add (root, node_name);
-		
-		col1_elem = g_strsplit (text_2, " ", 0);
-
-		for (j = 0, col0_added = FALSE; col1_elem[j]; j++)
-		{
-			if (!strlen (col1_elem[j]))
-				continue;
-			if (!col0_added)
-			{
-				node2 = xst_xml_element_add (node, field_one);
-				xst_xml_element_set_content (node2, text_1);
-				col0_added = TRUE;
-			}
-			node2 = xst_xml_element_add (node, field_rest);
-			xst_xml_element_set_content (node2, col1_elem[j]);
-		}
-		
-		g_strfreev (col1_elem);
-	}
-}
-
-static void
-transfer_string_clist2_gui_to_xml (XstTool *tool, xmlNodePtr root)
-{
-	TransStringCList2 *specs;
-	gint i;
-
-	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
-	{
-		specs = &transfer_string_clist2_table [i];
-
-		transfer_string_clist2_gui_to_xml_item (tool, root, specs);
-	}
-}
-
 static void
 transfer_interfaces_to_xml (XstTool *tool, xmlNodePtr root)
 {
-	GtkWidget *clist;
-	GList *l;
-	int i;
-
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i=0; i < GTK_CLIST (clist)->rows; i++)
-		connection_save_to_node (gtk_clist_get_row_data (GTK_CLIST (clist), i), root);
-
-	for (l = gtk_object_get_data (GTK_OBJECT (clist), "lo"); l; l = l->next)
-		connection_save_to_node (l->data, root);
+	connection_list_save (tool);
 }
 
 static void
@@ -518,7 +384,6 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	transfer_misc_xml_to_tool (tool, root);
 }
 
-
 void
 transfer_gui_to_xml (XstTool *tool, gpointer data)
 {
@@ -526,7 +391,7 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 
 	transfer_string_entry_gui_to_xml (tool, root);
 	transfer_string_list_gui_to_xml (tool, root);
-	transfer_string_clist2_gui_to_xml (tool, root);
+	hosts_list_save (tool, root);
 	transfer_interfaces_to_xml (tool, root);
 	/* misc has to go last */
 	transfer_misc_tool_to_xml (tool, root);
