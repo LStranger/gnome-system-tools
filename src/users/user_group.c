@@ -51,7 +51,9 @@ static void group_update_xml (xmlNodePtr node, gboolean adv);
 static gboolean node_exsists (xmlNodePtr node, gchar *name, gchar *val);
 static GList *get_group_list (gchar *field, xmlNodePtr node, gboolean adv);
 static GList *get_user_list (gchar *field, xmlNodePtr node, gboolean adv);
-static GList *get_group_users (xmlNodePtr node);
+static GList *get_group_users (xmlNodePtr group_node);
+static GList *get_group_mainusers (xmlNodePtr group_node);
+static GList *get_user_groups (xmlNodePtr user_node);
 static void user_fill_settings_group (GtkCombo *combo, xmlNodePtr node, gboolean adv);
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
@@ -1253,14 +1255,14 @@ get_user_list (gchar *field, xmlNodePtr node, gboolean adv)
 }
 
 static GList *
-get_group_users (xmlNodePtr node)
+get_group_users (xmlNodePtr group_node)
 {
 	GList *userlist = NULL;
-	xmlNodePtr u;
+	xmlNodePtr node, u;
 
-	g_return_val_if_fail (node != NULL, NULL);
+	g_return_val_if_fail (group_node != NULL, NULL);
 
-	node = xst_xml_element_find_first (node, "users");
+	node = xst_xml_element_find_first (group_node, "users");
 	if (!node)
 	{
 		g_warning ("get_group_users: can't get current group's users node.");
@@ -1271,6 +1273,78 @@ get_group_users (xmlNodePtr node)
 		userlist = g_list_prepend (userlist, xst_xml_element_get_content (u));
 
 	return userlist;
+}
+
+static GList *
+get_group_mainusers (xmlNodePtr group_node)
+{
+	xmlNodePtr user_node, node;
+	gchar *gid, *buf;
+	GList *userlist = NULL;
+	
+	g_return_val_if_fail (group_node != NULL, NULL);
+
+	user_node = get_corresp_field (group_node);
+	gid = xst_xml_get_child_content (group_node, "gid");
+	
+	for (node = xst_xml_element_find_first (user_node, "user");
+	     node;
+	     node = xst_xml_element_find_next (node, "user"))
+	{
+
+		buf = xst_xml_get_child_content (node, "gid");
+		if (!buf)
+			continue;
+
+		if (!strcmp (buf, gid))
+			userlist = g_list_prepend (userlist,
+						   xst_xml_get_child_content (node, "login"));
+
+		g_free (buf);
+	}
+
+	g_free (gid);
+	return userlist;
+}
+
+static GList *
+get_user_groups (xmlNodePtr user_node)
+{
+	xmlNodePtr group_node, g, group_users;
+	gchar *user_name, *buf;
+	GList *grouplist = NULL;
+
+	g_return_val_if_fail (user_node != NULL, NULL);
+
+	group_node = get_corresp_field (user_node);
+	user_name = xst_xml_get_child_content (user_node, "login");
+
+	for (g = xst_xml_element_find_first (group_node, "group");
+	     g;
+	     g = xst_xml_element_find_next (g, "group"))
+	{
+		
+		group_users = xst_xml_element_find_first (g, "users");
+		for (group_users = xst_xml_element_find_first (group_users, "user");
+		     group_users;
+		     group_users = xst_xml_element_find_next (group_users, "user"))
+		{
+			buf = xst_xml_element_get_content (group_users);
+			if (!buf)
+				continue;
+
+			if (!strcmp (user_name, buf))
+			{
+				grouplist = g_list_prepend (grouplist,
+							    xst_xml_get_child_content (g, "name"));
+			}
+
+			g_free (buf);
+		}
+	}
+
+	g_free (user_name);
+	return grouplist;
 }
 
 static void

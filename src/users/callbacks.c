@@ -472,12 +472,14 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 	all = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
 	members = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
 
-	row = GPOINTER_TO_INT (all->selection->data);
-
-	gtk_clist_get_text (all, row, 0, &name);
-	entry[0] = g_strdup (name);
-	gtk_clist_remove (all, row);
-	gtk_clist_append (members, entry);
+	while (all->selection)
+	{
+		row = GPOINTER_TO_INT (all->selection->data);
+		gtk_clist_get_text (all, row, 0, &name);
+		entry[0] = g_strdup (name);
+		gtk_clist_remove (all, row);
+		gtk_clist_append (members, entry);
+	}
 }
 
 void
@@ -496,12 +498,14 @@ on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 	all = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
 	members = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
 
-	row = GPOINTER_TO_INT (members->selection->data);
-
-	gtk_clist_get_text (members, row, 0, &name);
-	entry[0] = g_strdup (name);
-	gtk_clist_remove (members, row);
-	gtk_clist_append (all, entry);
+	while (members->selection)
+	{
+		row = GPOINTER_TO_INT (members->selection->data);
+		gtk_clist_get_text (members, row, 0, &name);
+		entry[0] = g_strdup (name);
+		gtk_clist_remove (members, row);
+		gtk_clist_append (all, entry);
+	}
 }
 
 void
