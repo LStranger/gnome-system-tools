@@ -189,7 +189,14 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 		else
 		        tool_context->read_state = TOOL_READ_PROGRESS_DONE;
 	}
-	else if (c != '.') gtk_main_quit ();
+	else if (c != '.')
+	{
+		/* Progressbar's death */
+
+		/* Wait a second before removing it */
+		sleep (1);
+		gtk_main_quit ();
+	}
 	else
 	{
 		/* Update progressbar */
