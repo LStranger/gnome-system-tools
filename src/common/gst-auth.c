@@ -73,18 +73,28 @@ gst_auth_wait_child (GstTool *tool)
 {
 	gint status, pid;
 	gchar *error_message;
+	gchar *auth_command;
 
 	pid = waitpid (tool->backend_pid, &status, WNOHANG);
 
 	if (pid > 0) {
 		if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS(status) < 255)) {
-			if (tool->remote_config == TRUE) {
+			if (tool->remote_config) {
 				/* the proccess was running ssh */
 				error_message = g_strdup_printf (_("Could not connect to the computer."));
 			} else {
 				/* the proccess was running su */
 				error_message = g_strdup_printf (_("The password you entered is invalid."));
 			}
+		} else if ((WIFEXITED (status)) && (WEXITSTATUS (status)) && (WEXITSTATUS (status) == 255)) {
+			if (tool->remote_config)
+				auth_command = "ssh";
+			else
+				auth_command = "su";
+
+			error_message = g_strdup_printf (_("Could not run \"%s\". "
+							   "Check that you have permissions to run it."),
+							 auth_command);
 		} else {
 			error_message = g_strdup_printf (_("An unexpected error has occurred."));
 		}
@@ -110,6 +120,7 @@ gst_auth_run_term (GstTool *tool, gchar *args[])
 	else if (tool->backend_pid == 0) {
 		/* It's the child process */
 		execv (args[0], args);
+		exit (255);
 	} else {
 		tcgetattr (tool->backend_master_fd, &t);
 		t.c_lflag ^= ECHO;
@@ -263,8 +274,9 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 			tool->root_access = ROOT_ACCESS_REAL;
 		} else if (result == GST_AUTH_RUN_AS_USER) {
 			tool->root_access = ROOT_ACCESS_NONE;
-		} else 
+		} else {
 			exit (0);
+		}
 	}
 }
 
