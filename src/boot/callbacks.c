@@ -269,7 +269,7 @@ on_boot_table_default_toggled (GtkWidget *w, gchar *path_str, gpointer data)
 void
 on_boot_table_cursor_changed (GtkTreeSelection *selection, gpointer data)
 {
-	callbacks_actions_set_sensitive (TRUE);
+	callbacks_actions_set_sensitive (TRUE);	
 }
 
 gboolean

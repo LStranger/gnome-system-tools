@@ -218,6 +218,10 @@ boot_value_type (xmlNodePtr node)
 	n = gst_xml_element_find_first (node, "image");
 	if (n)
 		type = TYPE_LINUX;
+
+	n = gst_xml_element_find_first (node, "module");
+	if (n)
+		type = TYPE_HURD;
 	
 	return type;
 }
@@ -308,7 +312,7 @@ boot_value_append (xmlNodePtr node)
 	return buf;
 }
 
-void *
+gchar *
 boot_value_initrd (xmlNodePtr node)
 {
 	gchar *buf;
@@ -319,6 +323,18 @@ boot_value_initrd (xmlNodePtr node)
 		buf = gst_xml_get_child_content (node, "initrd");
 	if (!buf)
 		return NULL;
+
+	return buf;
+}
+
+gchar *
+boot_value_module (xmlNodePtr node)
+{
+	gchar *buf;
+
+	g_return_val_if_fail (node != NULL, NULL);
+
+	buf = gst_xml_get_child_content (node, "module");
 
 	return buf;
 }

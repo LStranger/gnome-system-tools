@@ -69,7 +69,8 @@ gchar            *boot_value_type_char    (xmlNodePtr node, gboolean bare);
 void             *boot_value_image        (xmlNodePtr node, gboolean bare);
 void             *boot_value_device       (xmlNodePtr node, gboolean bare);
 void             *boot_value_root         (xmlNodePtr node);
-void             *boot_value_initrd       (xmlNodePtr node);
+gchar            *boot_value_initrd       (xmlNodePtr node);
+gchar            *boot_value_module       (xmlNodePtr node);
 gchar            *boot_value_password     (xmlNodePtr node);
 
 void              boot_table_update       (void);

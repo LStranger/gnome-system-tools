@@ -1,5 +1,14 @@
 2003-08-21  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
+	* boot-image.[ch], boot-settings.[ch], callbacks.c, table.[ch]: added
+	  partial support for GNU/Hurd (only editing ATM, not adding)
+	* boot-settings.[ch]: (setup_advanced)(setup_basic): moved to
+	  setup_gui, they where equal
+	* table.[ch]: (boot_value_initrd): moved type from void* to gchar*,
+	  (boot_value_module): added
+
+2003-08-21  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
 	* table.[ch], callbacks.[ch], boot-image.c: made the "default" 
 	  field in the table a radio button
 

@@ -39,6 +39,9 @@
 extern GstTool *tool;
 extern GtkWidget *boot_table;
 
+gchar *initrd_label_str = N_("_Initrd image path:");
+gchar *module_label_str = N_("_Module path:");
+
 static GList *
 settings_dev_list (GstBootImageType ctype)
 {
@@ -80,7 +83,7 @@ on_type_entry_change (GtkWidget *w, gpointer data)
 	if (strlen (buf) > 0)
 	{
 		type = label_to_type (buf);
-		if (type == TYPE_LINUX)
+		if ((type == TYPE_LINUX) || (type == TYPE_HURD))
 		{
 			gtk_combo_set_popdown_strings (gui->root, settings_dev_list (type));
 			image = gui->image;
@@ -124,6 +127,7 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->image_widget = glade_xml_get_widget (gui->xml, "settings_image");
 	gui->image_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_image_entry"));	
 	gui->root = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_root_combo"));
+	gui->initrd_label = glade_xml_get_widget (gui->xml, "settings_initrd_label");
 	gui->initrd_widget = glade_xml_get_widget (gui->xml, "settings_initrd");
 	gui->initrd_entry = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_initrd_entry"));
 	gui->append = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_append"));
@@ -160,27 +164,23 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 }
 
 static void
-setup_advanced (BootSettingsGui *gui, GtkWidget *parent)
+setup_gui (BootSettingsGui *gui, GtkWidget *parent)
 {
 	if (gui->image->type == TYPE_LINUX)
 	{
 		gtk_widget_show (gui->image_frame);
 		gtk_widget_hide (gui->other_frame);
-	}
-	else
-	{
-		gtk_widget_show (gui->other_frame);
-		gtk_widget_hide (gui->image_frame);
-	}
-}
 
-static void
-setup_basic (BootSettingsGui *gui, GtkWidget *parent)
-{
-	if (gui->image->type == TYPE_LINUX)
+		gtk_label_set_text (GTK_LABEL (gui->initrd_label), _(initrd_label_str));
+		gtk_label_set_use_underline (GTK_LABEL (gui->initrd_label), TRUE);
+	}
+	else if (gui->image->type == TYPE_HURD)
 	{
 		gtk_widget_show (gui->image_frame);
 		gtk_widget_hide (gui->other_frame);
+
+		gtk_label_set_text (GTK_LABEL (gui->initrd_label), _(module_label_str));
+		gtk_label_set_use_underline (GTK_LABEL (gui->initrd_label), TRUE);
 	}
 	else
 	{
@@ -243,6 +243,19 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 
 		gst_ui_entry_set_text (gui->append, image->append);
 	}
+	else if (image->type == TYPE_HURD)
+	{
+		gtk_combo_set_popdown_strings (gui->root, settings_dev_list (image->type));
+		if (image->root)
+			gst_ui_entry_set_text (GTK_ENTRY (gui->root->entry), image->root);
+
+		if (error = boot_image_valid_module (image))
+			gst_ui_entry_set_text (gui->initrd_entry, "");
+		else
+			gst_ui_entry_set_text (gui->initrd_entry, image->module);
+
+		gst_ui_entry_set_text (gui->append, image->append);
+	}
 	else
 	{
 		gtk_combo_set_popdown_strings (gui->device, settings_dev_list (image->type));
@@ -285,12 +298,8 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 		gtk_widget_set_sensitive (GTK_WIDGET (gui->confirm_label), TRUE);
 	}
 	
-	if (!image->new) {
-		if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_ADVANCED)
-			setup_advanced (gui, top);
-		if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_BASIC)
-			setup_basic (gui, top);
-	}
+	if (!image->new)
+		setup_gui (gui, top);
 }
 
 gboolean
@@ -319,6 +328,13 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 		image->append = g_strdup (gtk_entry_get_text (gui->append));
 		image->image = g_strdup (gtk_entry_get_text (gui->image_entry));
 		image->initrd = g_strdup (gtk_entry_get_text (gui->initrd_entry));
+	}
+	else if (image->type == TYPE_HURD)
+	{
+		image->root = g_strdup (gtk_entry_get_text (GTK_ENTRY (gui->root->entry)));
+		image->append = g_strdup (gtk_entry_get_text (gui->append));
+		image->image = g_strdup (gtk_entry_get_text (gui->image_entry));
+		image->module = g_strdup (gtk_entry_get_text (gui->initrd_entry));
 	}
 	else
 	{

@@ -38,7 +38,8 @@ typedef enum {
 	TYPE_WIN9X,
 	TYPE_DOS,
 	TYPE_LINUX,
-        TYPE_LINSWAP
+        TYPE_LINSWAP,
+	TYPE_HURD
 } GstBootImageType;
 
 typedef struct {
@@ -57,6 +58,7 @@ typedef struct {
 	gchar *root;
 	gchar *append;
 	gchar *initrd;
+	gchar *module;
 	gchar *password;
 } BootImage;
 
@@ -69,6 +71,7 @@ gchar            *boot_image_valid_label  (BootImage *image);
 gchar            *boot_image_valid_device (BootImage *image);
 gchar            *boot_image_valid_root   (BootImage *image);
 gchar            *boot_image_valid_initrd (BootImage *image);
+gchar            *boot_image_valid_module (BootImage *image);
 gchar            *boot_image_check        (BootImage *image);
 
 /* Helpers */

@@ -43,7 +43,8 @@ static GstBootImageTypeTable boot_image_type_table[] = {
 	{ N_("Dos"),        TYPE_DOS },
 	{ N_("Linux"),      TYPE_LINUX },
 	{ N_("Linux swap"), TYPE_LINSWAP },
-	{ NULL,             -1 }	
+	{ N_("GNU/Hurd"),   TYPE_HURD },
+	{ NULL,             -1 }
 };
 
 gint
@@ -102,6 +103,12 @@ boot_image_get_by_node (xmlNodePtr node)
 		image->root = boot_value_root (node);
 		image->append = boot_value_append (node);
 		image->initrd = boot_value_initrd (node);
+	}
+	else if (image->type == TYPE_HURD) {
+		image->image = boot_value_image (node, TRUE);
+		image->root = boot_value_root (node);
+		image->append = boot_value_append (node);
+		image->module = boot_value_module (node);
 	}
 	else
 		image->image = boot_value_device (node, TRUE);
@@ -337,6 +344,15 @@ boot_image_valid_initrd (BootImage *image)
 		return NULL;
 
 	return boot_image_file_exists (image->initrd);
+}
+
+gchar *
+boot_image_valid_module (BootImage *image)
+{
+	if (image->module == NULL || strlen (image->module) == 0)
+		return NULL;
+
+	return boot_image_file_exists (image->module);
 }
 
 gchar *

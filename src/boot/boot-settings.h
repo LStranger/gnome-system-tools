@@ -21,6 +21,7 @@ typedef struct {
 	GtkWidget *image_widget;
 	GtkEntry  *image_entry;
 	GtkCombo  *root;
+	GtkWidget *initrd_label;
 	GtkWidget *initrd_widget;
 	GtkEntry  *initrd_entry;
 	GtkEntry  *append;
