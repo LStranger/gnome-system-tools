@@ -139,15 +139,32 @@ Users
 20) Remove the user test.
 
 
+Time
+====
 
+1)  Start time-admin as a normal user, enter the root password in the dialog,
+    and wait for the scanning your system configuration dialog to disappear.
 
+2)  Verify that the time, date, and timezone is correct, by comparing it to
+    the output of the date command, run on the command line.
 
+3)  Change the time and date to one day and one hour ahead, and apply. Verify
+    that the date command agrees.
 
+4)  Change the time and date back, apply, and verify.
 
+5)  Click the "Set time zone" button, and select a location in a very
+    different time zone. Close the time zone dialog, and apply. Verify that
+    the time, date, and time zone are the same in time-admin and in the
+    output from date.
 
+6)  Change the time zone back to the correct one, and apply again, then
+    verify.
 
-
-
+7)  Enable "Keep clock synchronized with selected servers", and click "Select
+    servers". Select a couple of servers close to you, close the server
+    selection dialog, and then apply. Check that the settings are adequately
+    reflected in /etc/ntp.conf.
 
 
 
