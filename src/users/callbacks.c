@@ -34,13 +34,14 @@
 
 /* Local globals */
 static int reply;
-const gchar *group_member_data_key = "group_member_name";
+static const gchar *GROUP_MEMBER_DATA_KEY = "group_member_name";
 
 
 /* Prototypes */
 static void reply_cb (gint val, gpointer data);
 static GList *fill_group_members_list (void);
 static void fill_all_users_list (GList *member_rows);
+static void fill_user_settings_group (GtkCombo *combo);
 static void do_quit (void);
 static void user_actions_set_sensitive (gboolean state);
 static void group_actions_set_sensitive (gboolean state);
@@ -86,6 +87,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	/* TODO: fill the main group widget with available groups. */
 	w0 = tool_widget_get ("user_settings_group");
 	gtk_widget_set_sensitive (w0, tool_get_access());
+	fill_user_settings_group (GTK_COMBO (w0));
 	
 	w0 = tool_widget_get ("user_settings_comment");
 	gtk_widget_set_sensitive (w0, tool_get_access());
@@ -444,10 +446,10 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 
 	if (strcmp (current_group->name, txt))
 	{
-		if (strlen (txt) < 3) /* how short (long) can group name be? */
+		if (strlen (txt) < 1)
 		{
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					("Group name is too short", win));
+					("Group name is empty.", win));
 			
 			gnome_dialog_run (dialog);
 		}
@@ -484,6 +486,7 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 	selection = g_list_copy (all->selection);
 	list_item = (GtkWidget *)selection->data;
 	gtk_widget_reparent (list_item, GTK_WIDGET (members));
+	g_list_free (selection);
 }
 
 extern void
@@ -499,6 +502,7 @@ on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 	selection = g_list_copy (members->selection);
 	list_item = (GtkWidget *)selection->data;
 	gtk_widget_reparent (list_item, GTK_WIDGET (all));
+	g_list_free (selection);
 }
 
 
@@ -564,7 +568,7 @@ fill_group_members_list (void)
 	{
 		list_item = gtk_list_item_new_with_label ((gchar *)u->data);
 		gtk_widget_show (list_item);
-		gtk_object_set_data (GTK_OBJECT (list_item), group_member_data_key,
+		gtk_object_set_data (GTK_OBJECT (list_item), GROUP_MEMBER_DATA_KEY,
 				((gchar *)u->data));
 		
 		member_rows = g_list_append (member_rows, list_item);
@@ -601,7 +605,7 @@ fill_all_users_list (GList *member_rows)
 		for (tmplist = g_list_first (member_rows); tmplist; tmplist = g_list_next (tmplist))
 		{
 			item = GTK_OBJECT (tmplist->data);
-			name = gtk_object_get_data (item, group_member_data_key);
+			name = gtk_object_get_data (item, GROUP_MEMBER_DATA_KEY);
 
 			if (!strcmp (name, current_u->login))
 			{
@@ -619,6 +623,19 @@ fill_all_users_list (GList *member_rows)
 	}
 
 	gtk_list_append_items (list, all_rows);
+}
+
+static void
+fill_user_settings_group (GtkCombo *combo)
+{
+	GList *u, *items;
+	
+	items = NULL;
+	for (u = g_list_first (group_list); u; u = g_list_next (u))
+		items = g_list_append (items, ((group *) u->data)->name);
+	
+	gtk_combo_set_popdown_strings (combo, items);
+	g_list_free (items);
 }
 
 static void 
