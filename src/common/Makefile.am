@@ -19,7 +19,4 @@ libsetuptool_a_SOURCES =				\
 	gst-auth.c		gst-auth.h		\
 	gst.h						\
 	gst-marshal.h					\
-	checked.xpm					\
-	unchecked.xpm					\
-	reading.xpm					\
 	gst-types.h

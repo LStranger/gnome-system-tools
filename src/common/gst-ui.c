@@ -31,13 +31,6 @@
 #include <gtk/gtksignal.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#include "checked.xpm"
-#include "unchecked.xpm"
-
-
-GdkPixmap *checked_pixmap = NULL, *unchecked_pixmap = NULL;
-GdkBitmap *checked_mask = NULL, *unchecked_mask = NULL;
-
 static gchar *
 container_get_label_string (GtkWidget *container)
 {
