@@ -40,7 +40,6 @@ static int reply;
 /* Prototypes */
 static void reply_cb (gint val, gpointer data);
 static void do_quit (void);
-static void my_gtk_entry_set_text (void *entry, gchar *str);
 
 
 /* Main button callbacks */
@@ -646,7 +645,7 @@ group_actions_set_sensitive (gboolean state)
 	gtk_widget_set_sensitive (tool_widget_get ("group_settings"), state);
 }
 
-static void
+extern void
 my_gtk_entry_set_text (void *entry, gchar *str)
 {
 	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");

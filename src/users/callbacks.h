@@ -120,8 +120,10 @@ extern void
 on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
 		gpointer user_data);
 
-void user_actions_set_sensitive (gboolean state);
-void group_actions_set_sensitive (gboolean state);
+extern void 
+user_actions_set_sensitive (gboolean state);
+extern void 
+group_actions_set_sensitive (gboolean state);
 
 #endif /* CALLBACKS_H */
 

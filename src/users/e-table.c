@@ -260,6 +260,7 @@ e_table_create (void)
 		g_warning ("e-table: Can't make user table");
 
 	gtk_signal_connect (GTK_OBJECT (user_table), "cursor_change", select_row, NULL);
+	gtk_signal_connect (GTK_OBJECT (user_table), "double_click", on_user_settings_clicked, NULL);
 
 	w0 = tool_widget_get ("users_holder");
 	gtk_container_add (GTK_CONTAINER (w0), user_table);
@@ -284,6 +285,7 @@ e_table_create (void)
 		g_warning ("e-table: Can't make group table");
 
 	gtk_signal_connect (GTK_OBJECT (group_table), "cursor_change", select_row, NULL);
+	gtk_signal_connect (GTK_OBJECT (group_table), "double_click", on_group_settings_clicked, NULL);
 
 	w0 = tool_widget_get ("groups_holder");
 	gtk_container_add (GTK_CONTAINER (w0), group_table);
