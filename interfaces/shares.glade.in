@@ -68,14 +68,61 @@
 	</child>
 
 	<widget>
-	  <class>GtkTable</class>
-	  <name>table2</name>
-	  <border_width>4</border_width>
-	  <rows>3</rows>
-	  <columns>1</columns>
+	  <class>GtkVBox</class>
+	  <name>vbox2</name>
+	  <border_width>8</border_width>
 	  <homogeneous>False</homogeneous>
-	  <row_spacing>4</row_spacing>
-	  <column_spacing>4</column_spacing>
+	  <spacing>8</spacing>
+
+	  <widget>
+	    <class>GtkHBox</class>
+	    <name>hbox9</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>8</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkAlignment</class>
+	      <name>alignment2</name>
+	      <border_width>8</border_width>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xscale>1</xscale>
+	      <yscale>1</yscale>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+
+	      <widget>
+		<class>GnomePixmap</class>
+		<name>pixmap1</name>
+		<filename>shares.png</filename>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label99</name>
+	      <label>Imports are directories wich reside in other computers and are accessible through the network.</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>True</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+	  </widget>
 
 	  <widget>
 	    <class>GtkScrolledWindow</class>
@@ -85,18 +132,9 @@
 	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
 	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>0</top_attach>
-	      <bottom_attach>2</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>True</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
 	    </child>
 
 	    <widget>
@@ -114,7 +152,7 @@
 		<last_modification_time>Tue, 22 Aug 2000 11:35:53 GMT</last_modification_time>
 	      </signal>
 	      <columns>7</columns>
-	      <column_widths>96,52,34,50,32,62,110</column_widths>
+	      <column_widths>85,52,34,50,32,62,110</column_widths>
 	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 	      <show_titles>True</show_titles>
 	      <shadow_type>GTK_SHADOW_IN</shadow_type>
@@ -219,28 +257,19 @@
 	    <label_xalign>0</label_xalign>
 	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>2</top_attach>
-	      <bottom_attach>3</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
 	    </child>
 
 	    <widget>
 	      <class>GtkTable</class>
 	      <name>table3</name>
-	      <border_width>4</border_width>
+	      <border_width>8</border_width>
 	      <rows>2</rows>
 	      <columns>2</columns>
 	      <homogeneous>False</homogeneous>
-	      <row_spacing>2</row_spacing>
+	      <row_spacing>4</row_spacing>
 	      <column_spacing>4</column_spacing>
 
 	      <widget>

@@ -5,6 +5,7 @@
  */
 
 gchar *s = N_("Shares Administration");
+gchar *s = N_("Imports are directories wich reside in other computers and are accessible through the network.");
 gchar *s = N_("Location");
 gchar *s = N_("Detected");
 gchar *s = N_("Listed");
