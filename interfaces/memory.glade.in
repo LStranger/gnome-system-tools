@@ -104,7 +104,7 @@
 
     <widget>
       <class>GtkCList</class>
-      <name>partition_list</name>
+      <name>browse_list</name>
       <can_focus>True</can_focus>
       <signal>
 	<name>select_row</name>
@@ -303,7 +303,7 @@
 
 	<widget>
 	  <class>GtkCheckButton</class>
-	  <name>enable_toggle</name>
+	  <name>settings_enable</name>
 	  <can_focus>True</can_focus>
 	  <label>Enabled</label>
 	  <active>True</active>
@@ -318,7 +318,7 @@
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>swap_device_label</name>
+	  <name>settings_device_label</name>
 	  <label></label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
@@ -442,7 +442,7 @@
 
 	  <widget>
 	    <class>GtkSpinButton</class>
-	    <name>priority_widget</name>
+	    <name>settings_priority</name>
 	    <can_focus>True</can_focus>
 	    <climb_rate>1</climb_rate>
 	    <digits>0</digits>
@@ -647,12 +647,12 @@
 
 	  <widget>
 	    <class>GtkOptionMenu</class>
-	    <name>type_widget</name>
+	    <name>create_type</name>
 	    <can_focus>True</can_focus>
 	    <signal>
 	      <name>clicked</name>
-	      <handler>on_type_widget_clicked</handler>
-	      <last_modification_time>Wed, 20 Dec 2000 15:49:27 GMT</last_modification_time>
+	      <handler>on_create_type_clicked</handler>
+	      <last_modification_time>Sat, 30 Dec 2000 13:49:07 GMT</last_modification_time>
 	    </signal>
 	    <items>partition
 file
@@ -705,7 +705,7 @@ file
 
 	    <widget>
 	      <class>GtkSpinButton</class>
-	      <name>size_widget</name>
+	      <name>create_size</name>
 	      <can_focus>True</can_focus>
 	      <climb_rate>1</climb_rate>
 	      <digits>0</digits>
@@ -867,7 +867,7 @@ file
 
 	    <widget>
 	      <class>GtkButton</class>
-	      <name>browse_button</name>
+	      <name>create_browse</name>
 	      <can_focus>True</can_focus>
 	      <signal>
 		<name>clicked</name>
@@ -918,7 +918,7 @@ file
 
 	    <widget>
 	      <class>GtkSpinButton</class>
-	      <name>create_priority_widget</name>
+	      <name>create_priority</name>
 	      <can_focus>True</can_focus>
 	      <climb_rate>1</climb_rate>
 	      <digits>0</digits>
@@ -1026,7 +1026,7 @@ file
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>total_mem</name>
+	  <name>memory_total_label</name>
 	  <label></label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
@@ -1052,7 +1052,7 @@ file
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>swap_mem</name>
+	  <name>memory_swap_label</name>
 	  <label></label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
@@ -1156,7 +1156,7 @@ file
 
       <widget>
 	<class>GtkCList</class>
-	<name>swap_areas_list</name>
+	<name>memory_list</name>
 	<border_width>4</border_width>
 	<can_focus>True</can_focus>
 	<signal>
@@ -1237,7 +1237,7 @@ file
 
       <widget>
 	<class>GtkButton</class>
-	<name>create_button</name>
+	<name>memory_create</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<signal>
@@ -1256,7 +1256,7 @@ file
 
       <widget>
 	<class>GtkButton</class>
-	<name>remove_button</name>
+	<name>memory_remove</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<signal>
@@ -1275,7 +1275,7 @@ file
 
       <widget>
 	<class>GtkButton</class>
-	<name>settings_button</name>
+	<name>memory_settings</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<signal>
