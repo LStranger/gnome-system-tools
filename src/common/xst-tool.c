@@ -58,6 +58,7 @@ enum {
 static enum {
 	ROOT_ACCESS_NONE,
 	ROOT_ACCESS_SIMULATED,
+	ROOT_ACCESS_SIMULATED_DISABLED,
 	ROOT_ACCESS_REAL
 } root_access = ROOT_ACCESS_NONE;
 
@@ -564,8 +565,15 @@ xst_tool_process_startup (XstTool *tool)
 	if (tool->run_again) {
 		xst_tool_run_platform_dialog (tool);
 		g_assert (tool->current_platform);
+		
+		if (root_access == ROOT_ACCESS_SIMULATED)
+			root_access = ROOT_ACCESS_SIMULATED_DISABLED;
+		
 		xst_tool_run_set_directive (tool, NULL, NULL, "platform_set",
 					    tool->current_platform->name);
+
+		if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
+			root_access = ROOT_ACCESS_SIMULATED;
 	}
 }
 
@@ -579,26 +587,6 @@ xst_tool_init_backend (XstTool *tool)
 	g_return_if_fail (tool->script_path != NULL);
 	g_return_if_fail (tool->backend_pid < 0);
 	
-#ifdef XST_DEBUG
-	/* don't actually run if we are just pretending */
-	if (root_access == ROOT_ACCESS_SIMULATED) {
-		g_warning (_("Skipping backend init..."));
-		return;
-	}
-#endif
-
-#if 0
-	/* found this code in old xst_tool_load. Dunno what it is for location_id != NULL. */
-	if (location_id == NULL) {
-		pipe (fd);
-		t = fork ();
-	} else {
-		fd[0] = STDIN_FILENO;
-		fd[1] = -1;
-		t = 1;
-	}
-#endif	
-
 	pipe (fd_read);
 	pipe (fd_write);
 
@@ -657,7 +645,14 @@ xst_tool_kill_backend (XstTool *tool, gpointer data)
 	if (tool->backend_pid < 0)
 		return;
 
+	if (root_access == ROOT_ACCESS_SIMULATED)
+		root_access = ROOT_ACCESS_SIMULATED_DISABLED;
+		
 	xst_tool_run_set_directive (tool, NULL, _("Closing tool."), "end", NULL);
+
+	if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
+		root_access = ROOT_ACCESS_SIMULATED;
+	
 	waitpid (tool->backend_pid, NULL, 0);
 }
 
@@ -782,6 +777,12 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 	FILE *f;
 	xmlDoc *xml_out;
 	
+	/* don't actually run if we are just pretending */
+	if (root_access == ROOT_ACCESS_SIMULATED) {
+		g_warning (_("Skipping set directive..."));
+		return NULL;
+	}
+
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
