@@ -1,0 +1,158 @@
+<!DOCTYPE article PUBLIC "-//GNOME//DTD DocBook PNG Variant V1.1//EN"[
+
+<!ENTITY VERSION "0.0">
+]>
+
+<article id="index" lang="en">
+
+  <artheader>
+    <title>Swap Management</title>
+    <copyright>
+      <year>2001</year>
+      <holder>Kevin Breit</holder>
+    </copyright>
+
+    <legalnotice id="legalnotice">
+      <para>
+	Permission is granted to copy, distribute and/or modify this document
+	under the terms of the 
+	<ulink type="help" url="gnome-help:fdl">
+	  <citetitle>
+	    GNU Free Documentation License
+	  </citetitle>
+	</ulink>, Version 1.1 or any later version 
+	published by the Free Software Foundation with no Invariant Sections, 
+	no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license
+	can be found <ulink type="help" url="gnome-help:fdl">here</ulink>.
+      </para>
+      <para>
+	Many of the names used by companies to distinguish their products and
+	services are claimed as trademarks. Where those names appear in any
+	GNOME documentation, and those trademarks are made aware to the members
+	of the GNOME Documentation Project, the names have been printed in caps
+	or initial caps.
+      </para>
+    </legalnotice>
+
+    <releaseinfo>
+      This manual describes version &VERSION; of the Swap Management utility in
+      Ximain Setup Tools.  It was last updated on 01/01/69.
+    </releaseinfo>
+    
+  </artheader>
+
+  <sect1 id="intro">
+    <title>Introduction</title>
+    <para>
+      Linux uses the <application>LILO</application> bootloader to start your
+      system.  This lets you choose whether you want to boot into Linux, any
+      Unix, Windows, or even OS/2 if you so desire.
+    </para>
+  </sect1>
+
+  <sect1 id="editing-entry">
+    <title>Editing an Entry</title>
+    <para>
+      The Boot Manager has each operating system as an entry.  To edit an entry,
+      simply click the entry you wish to edit, and hit
+      <guibutton>Settings</guibutton>.  This window lets you set the name of the
+      partition, and the boot type.  The name is what you refer to the entry as
+      when you boot up the computer.  The boot type specifies to Ximian Setup
+      Tools what the operating system to start up is.
+    </para>
+  </sect1>
+
+  <sect1 id="default">
+    <title>What is Default?</title>
+    <para>
+      The default option specifies which entry will be the default to boot up if
+      you don't answer which to boot in time.  The time that you have to specify
+      which to boot is shown in the bottom part of the main window in the
+      <guilabel>Starting your computer</guilabel>.
+    </para>
+  </sect1>
+
+  <sect1 id="advanced">
+    <title>Advanced Options</title>
+    <para>
+      The Boot Manager program gives advanced users more options to use while
+      configuring their boot manager.
+    </para>
+    <para>
+      To enable the advanced section, click on the <guibutton>More
+      Options</guibutton> button on the bottom of the main Boot Manager window.
+    </para>
+
+    <sect2 id="advanced-adding">
+      <title>Adding Entries</title>
+      <para>
+	To add a new entry to the listings, click the <guibutton>Add</guibutton>
+	button in the main window.  A druid will show up giving you help with
+	creating a new entry.
+      </para>
+      <para>
+	The first screen on the druid is a simple introduction message.  Click
+	<guibutton>Next</guibutton> to begin your configuration.  Enter the name
+	and the boot types into their respective fields.  Then you'll need to
+	select your device on the next screen.  The device is what partition
+	your image file exists on.  That is all there is to it!
+      </para>
+    </sect2>
+
+    <sect2 id="advanced-deleting">
+      <title>Deleting Entries</title>
+      <para>
+	Deleting entries is easy.  You simply select the entry and press the
+	<guibutton>Delete</guibutton> button.
+	<warning>
+	  <para>
+	    Deleting entries can render your system unable to bootup.  Make sure
+	    you have a bootdisk handy when deleting entries.
+	  </para>
+	</warning>
+      </para>
+    </sect2>
+
+    <sect2 id="advaned-modifying">
+      <title>Configuring Entries</title>
+      <para>
+	The advanced mode gives you a few more important options which you may
+	use to configure your boot loader.
+      </para>
+      <para>
+	The <!-- link to basic eventually --> advanced has the same options as
+	the basic options, including ways to specify the root device, path to
+	the image, and any arguements to append.
+      </para>
+      <variablelist>
+	<varlistentry>
+	  <term>Path</term>
+	  <listitem>
+	    <para>
+	      The path is where the image for the system exists.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Root</term>
+	  <listitem>
+	    <para>
+	      The root is the device which the path lives on.
+	    </para>
+	  </listitem>
+	</varlistentry>
+	<varlistentry>
+	  <term>Append</term>
+	  <listitem>
+	    <para>
+	      This is where you state any arguements you want to pass to the
+	      LILO prompt, including amount of memory and processor speed.  For
+	      more information on the available LILO arguements, refer to the
+	      lilo man page.
+	    </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
+    </sect2>
+  </sect1>
+</article>
