@@ -1,5 +1,7 @@
 pixmaps_DATA = \
 world_map-960.png \
+computer.png \
+reading.png \
 settings.png \
 users-groups.png \
 users.png
