@@ -109,23 +109,6 @@ static const XstWidgetPolicy policies[] = {
 int
 main (int argc, char *argv[])
 {
-	int i;
-	char *s[] = { 
-		"wins_ip",
-		"dns_list",
-		"search_list",
-		"ip",
-		"alias",
-		NULL
-	};
-	EditableFilterRules e[] = {
-		EF_ALLOW_NONE,
-		EF_ALLOW_ENTER,
-		EF_ALLOW_ENTER | EF_ALLOW_TEXT,
-		EF_STATIC_HOST,
-		EF_STATIC_HOST | EF_ALLOW_ENTER | EF_ALLOW_TEXT
-	};
-
 	gboolean internet_druid = FALSE;
 	
 	struct poptOption options[] =
@@ -136,8 +119,6 @@ main (int argc, char *argv[])
 		{NULL, '\0', 0, NULL, 0}
 	};
 
-	init_hint_entries ();
-	
 	tool = xst_tool_init ("network", _("Network Settings"), argc, argv, options);
 
 	if (internet_druid) {
@@ -158,10 +139,9 @@ main (int argc, char *argv[])
 		xst_dialog_set_widget_policies (tool->main_dialog, policies);
 		
 		connection_init_gui (tool);
+		init_hint_entries ();
+		init_editable_filters (tool->main_dialog);
 
-		for (i=0; s[i]; i++)
-			connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);
-		
 		on_network_admin_show (NULL, NULL);
 		xst_tool_main (tool);
 	}

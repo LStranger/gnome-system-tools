@@ -1,3 +1,14 @@
+2001-04-20  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* main.c (main): Moved init_editable_filters inisde else
+	clause: it's not required for the ppp druid.
+
+	* connection.c (hookup_callbacks): put some filters to the
+	entries in the connection dialog too.
+
+	* callbacks.c (is_char_ok): Allow _ and - if EF_ALLOW_TEXT.
+	(init_editable_filters): Moved code from main() to here.
+
 2001-04-19  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* main.c (main): spaces are not allowed for the alias text area.

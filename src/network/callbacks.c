@@ -102,10 +102,10 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 static gboolean
 is_char_ok (char c, EditableFilterRules rules)
 {
-	return isdigit (c) || c == '.' || 
+	return isdigit (c) || c == '.' ||
 		((rules & EF_ALLOW_ENTER) && c == '\n') ||
 		((rules & EF_ALLOW_SPACE) && c == ' ') ||
-		((rules & EF_ALLOW_TEXT) && isalpha (c));
+		((rules & EF_ALLOW_TEXT) && (isalpha (c) || c == '_' || c == '-'));
 }
 
 void
@@ -190,6 +190,25 @@ static const char *hint_entry[][3] = { {
 } };
 
 static GHashTable *help_hash;
+
+void
+init_editable_filters (XstDialog *dialog)
+{
+	gint i;
+	struct { char *name; EditableFilterRules rule; }
+	s[] = {
+		{ "wins_ip",     EF_ALLOW_NONE },
+		{ "dns_list",    EF_ALLOW_ENTER },
+		{ "search_list", EF_ALLOW_ENTER | EF_ALLOW_TEXT },
+		{ "ip",          EF_ALLOW_NONE }, 
+		{ "alias",       EF_ALLOW_ENTER | EF_ALLOW_TEXT },
+		{ "domain",      EF_ALLOW_TEXT },
+		{ NULL,          EF_ALLOW_NONE }
+	};
+
+	for (i = 0; s[i].name; i++)
+		connect_editable_filter (xst_dialog_get_widget (dialog, s[i].name), s[i].rule);
+}
 
 void
 init_hint_entries (void)

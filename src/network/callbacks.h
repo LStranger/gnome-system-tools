@@ -23,14 +23,14 @@
 
 typedef enum {
 	EF_ALLOW_NONE  = 0,
-	EF_ALLOW_TEXT  = 1,
-	EF_ALLOW_ENTER = 2,
-	EF_STATIC_HOST = 4,
-	EF_ALLOW_SPACE = 8
+	EF_ALLOW_TEXT  = 1 << 0,
+	EF_ALLOW_ENTER = 1 << 1,
+	EF_ALLOW_SPACE = 1 << 2
 } EditableFilterRules;
 
 extern xmlDocPtr doc;
 
+void init_editable_filters (XstDialog *dialog);
 void init_hint_entries (void);
 void on_network_admin_show (GtkWidget *w, gpointer null);
 
@@ -68,7 +68,6 @@ void on_samba_use_toggled (GtkWidget *w, gpointer null);
 void on_wins_use_toggled (GtkWidget *w, gpointer null);
 
 void on_status_button_toggled (GtkWidget *w, gpointer null);
-void on_wvlan_adhoc_toggled (GtkWidget *w, gpointer null);
 
 gboolean callbacks_check_hostname_hook (XstDialog *dialog, gpointer data);
 gboolean callbacks_update_connections_hook (XstDialog *dialog, gpointer data);

@@ -27,6 +27,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "connection.h"
+#include "callbacks.h"
 
 #include "global.h"
 
@@ -1052,7 +1053,7 @@ fill_ptp (XstConnection *cxn)
 static void
 hookup_callbacks (XstConnection *cxn)
 {
-	int i;
+	gint i;
 	WidgetSignal signals[] = {
 		{ "on_connection_ok_clicked", on_connection_ok_clicked },
 		{ "on_connection_cancel_clicked", on_connection_cancel_clicked },
@@ -1064,10 +1065,23 @@ hookup_callbacks (XstConnection *cxn)
 		{ "on_ppp_peerdns_toggled", on_ppp_peerdns_toggled },
 		{ NULL }
 	};
+	struct { char *name; EditableFilterRules rule; }
+	s[] = {
+		{ "ip_address",          EF_ALLOW_NONE },
+		{ "ip_netmask",          EF_ALLOW_NONE },
+		{ "ip_gateway",          EF_ALLOW_NONE },
+		{ "ppp_dns1",            EF_ALLOW_NONE },
+		{ "ppp_dns2",            EF_ALLOW_NONE },
+		{ "ptp_address",         EF_ALLOW_NONE },
+		{ "ptp_remote_address",  EF_ALLOW_NONE },
+		{ NULL,                  EF_ALLOW_NONE }
+	};
 
 	for (i = 0; signals[i].hname; i++)
 		glade_xml_signal_connect_data (cxn->xml, signals[i].hname,
 					       signals[i].signalfunc, cxn);
+	for (i = 0; s[i].name; i++)
+		connect_editable_filter (W (s[i].name), s[i].rule);
 }
 
 void
