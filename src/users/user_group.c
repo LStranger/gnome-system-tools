@@ -885,12 +885,22 @@ void
 group_new_prepare (ug_data *ud)
 {
 	GtkWidget *w0;
+	gchar     *buf;
 
 	/* Fill all users list, don't exclude anything */
 	group_fill_all_users_list (ud->node, NULL);
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), _("Create New Group"));
+
+	/* Fill in first available gid */
+	buf = find_new_id (ud->node);
+	if (buf) {
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (
+			xst_dialog_get_widget (tool->main_dialog, "group_settings_gid")), g_strtod (buf, NULL));
+		g_free (buf);
+	}
+
 	gtk_object_set_data (GTK_OBJECT (w0), "data", ud);
 	gtk_widget_show (w0);
 }
@@ -901,6 +911,7 @@ group_update (ug_data *ud)
 	gboolean ok = TRUE;
 	gboolean adv;
 	gchar *buf;
+	gint i;
 	GtkWidget *d;
 
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
@@ -910,6 +921,13 @@ group_update (ug_data *ud)
 								    "group_settings_name")));
 	if (!check_group_name (GTK_WINDOW (d), ud->node, buf))
 		ok = FALSE;
+
+	i = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (
+		xst_dialog_get_widget (tool->main_dialog, "group_settings_gid")));
+	buf = g_strdup_printf ("%d", i);
+	if (ok && !check_group_gid (GTK_WINDOW (d), ud->node, buf))
+		ok = FALSE;
+	g_free (buf);
 
 	if (ok) {
 		if (ud->new) {
@@ -982,9 +1000,16 @@ group_settings_prepare (ug_data *ud)
 	g_return_if_fail (ud != NULL);
 	g_return_if_fail (name = xst_xml_get_child_content (ud->node, "name"));
 
+	/* Set group name */
 	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
 	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	xst_ui_entry_set_text (w0, name);
+
+	/* Set group id */
+	txt = xst_xml_get_child_content (ud->node, "gid");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
+	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
 
 	/* Fill group members */
 	member_rows = group_fill_members_list (ud->node);
@@ -1032,12 +1057,19 @@ group_update_xml (xmlNodePtr node, gboolean adv)
 {
 	GtkCList *clist;
 	gchar *buf;
-	gint row = 0;
+	gint i, row = 0;
 
 	/* Name */
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 								    "group_settings_name")));
 	xst_xml_set_child_content (node, "name", buf);
+
+	/* GID */
+	i = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (
+		xst_dialog_get_widget  (tool->main_dialog, "group_settings_gid")));
+	buf = g_strdup_printf ("%d", i);
+	xst_xml_set_child_content (node, "gid", buf);
+	g_free (buf);
 
 	/* Users */
 	del_group_users (node);
