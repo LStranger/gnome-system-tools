@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-30 09:57+0100\n"
+"POT-Creation-Date: 2004-02-03 08:18+0100\n"
 "PO-Revision-Date: 2002-05-29 18:42+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <translation-team-pl@lists.sourceforge.net>\n"
@@ -51,10 +51,15 @@ msgid "Last GST version executed"
 msgstr "Ostatnio uruchamiana wersja GST"
 
 #: gnome-system-tools.schemas.in.h:8
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr ""
+"Preferowany program ładujący system, konfigurowany przez narzędzie boot-admin"
+
+#: gnome-system-tools.schemas.in.h:9
 msgid "Remote hosts"
 msgstr "Zdalne komputery"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:10
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -63,7 +68,7 @@ msgstr ""
 "zaawansowany. W trybie podstawowym wyświetlanych jest mniej opcji niż w "
 "zaawansowanym"
 
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:11
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
@@ -71,22 +76,32 @@ msgstr ""
 "Program posiada funkcję zdalnej konfiguracji za pomocą SSH, włączenie tej "
 "opcji umożliwi skorzystanie z niej"
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:12
 msgid "The last GST version that this computer has run"
 msgstr "Ostatnia wersja GST uruchamiana na tym komputerze"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:13
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr ""
+"Klucz ten przechowuje program ładujący system, który zostanie skonfigurowany "
+"przez narzędzie boot-admin, jeżeli nie jest ustawiony lub jest niepoprawny, "
+"wtedy użytkownik zostanie poproszony o wskazanie go"
+
+#: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
 msgstr ""
 "Określenie czy narzędzia będą korzystały ze zdalnej administracji czy nie"
 
-#: gnome-system-tools.schemas.in.h:13
+#: gnome-system-tools.schemas.in.h:15
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Określenie czy narzędzie users-admin powinno wyświetlać wszystkich "
 "użytkowników i grupy"
 
-#: gnome-system-tools.schemas.in.h:14
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Określenie czy okno dialogowe z ostrzeżeniem powinno być wyświetlane"
 
@@ -168,7 +183,11 @@ msgstr "<span weight=\"bold\">Uruchamianie komputera</span>"
 msgid "Ask at boot"
 msgstr "Pytanie przy uruchamianiu"
 
-#: interfaces/boot.glade.in.h:20
+#: interfaces/boot.glade.in.h:20 src/boot/main.c:73
+msgid "Boot Manager Settings"
+msgstr "Ustawienia mnedżera rozruchu systemu"
+
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -178,25 +197,29 @@ msgstr ""
 "nadrzędną. Opcjonalnie możesz też podać parametry dołączane do standardowych "
 "parametrów jądra przy jego uruchamianiu."
 
-#: interfaces/boot.glade.in.h:21
+#: interfaces/boot.glade.in.h:22
 msgid "Click \"Forward\" to continue"
 msgstr "Aby kontynuować, kliknij \"Naprzód\""
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:23
 msgid "Confirmation"
 msgstr "Potwierdzenie"
 
 #. set window title
-#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
 #: src/boot/boot-druid.c:441
 msgid "Creating a new boot image"
 msgstr "Tworzenie nowego obrazu startowego"
 
-#: interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.in.h:25
+msgid "Don't ask me again"
+msgstr "Bez zadawania tego pytania w przyszłości"
+
+#: interfaces/boot.glade.in.h:26
 msgid "Enable IDE SCSI emulation"
 msgstr "Włączona emulacja IDE SCSI"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:27
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -204,55 +227,63 @@ msgstr ""
 "Wprowadź nazwę obrazu startowego i podaj typ systemu operacyjnego, jakiemu "
 "on odpowiada."
 
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:42
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:43
 msgid "Finished"
 msgstr "Zakończone"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:51
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
 #: src/network/connection.c:1843
 msgid "Manual"
 msgstr "Ręczna"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Modyfikacja ustawień systemu operacyjnego lub jądra."
 
-#: interfaces/boot.glade.in.h:29
+#: interfaces/boot.glade.in.h:31
 msgid "Number of colors:"
 msgstr "Liczba kolorów:"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:32
 msgid "Other parameters:"
 msgstr "Inne parametry:"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "Password"
 msgstr "Hasło"
 
-#: interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.in.h:34
 msgid "Protect with password"
 msgstr "Ochrona za pomocą hasła"
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "Resolution:"
 msgstr "Rozdzielczość:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:36
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "Sekundy przed wczytaniem domyślnego jądra lub systemu"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:37
+msgid ""
+"Several bootloaders have been found in the system, please select which do "
+"you want to configure"
+msgstr ""
+"Znaleziono kilka programów ładujących system, wybierz jeden do "
+"skonfigurowania"
+
+#: interfaces/boot.glade.in.h:38
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Określ partycję, na której zainstalowany jest system operacyjny."
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:39
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
 msgstr ""
 "Został dodany nowy obraz startowy. Aby zapisać zmiany, kliknij \"Zastosuj\"."
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:40
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -260,54 +291,54 @@ msgstr ""
 "Ten druid pozwoli ci na szybkie i łatwe dodanie\n"
 "nowych obrazów startowych do systemu."
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:41
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Okno to pozwala na modyfikację parametrów jądra."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:42
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Narzędzie to pozwala na ustawienie użytkowników systemów operacyjnych "
 "wybieranych po włączeniu komputera."
 
-#: interfaces/boot.glade.in.h:40
+#: interfaces/boot.glade.in.h:43
 msgid "Video modes (only frame buffer)"
 msgstr "Tryby wyświetlania (tylko bufor ramek)"
 
-#: interfaces/boot.glade.in.h:41
+#: interfaces/boot.glade.in.h:44
 msgid "_Add..."
 msgstr "_Dodaj..."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:45
 msgid "_Device:"
 msgstr "_Urządzenie:"
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:46
 msgid "_Edit"
 msgstr "_Edycja"
 
-#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Ścieżka do obrazu _initrd:"
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:48
 msgid "_Kernel image path:"
 msgstr "Ścieżka do obrazu ją_dra:"
 
-#: interfaces/boot.glade.in.h:46
+#: interfaces/boot.glade.in.h:49
 msgid "_Name:"
 msgstr "_Nazwa:"
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:50
 msgid "_Operating system:"
 msgstr "System _operacyjny"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:51
 msgid "_Parameters:"
 msgstr "_Parametry..."
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:52
 msgid "_Root file system device:"
 msgstr "_Urządzenie głównego systemu plików:"
 
@@ -373,7 +404,7 @@ msgstr "Nieobsługiwana platforma"
 msgid "Use this window to select the computer you wish to configure"
 msgstr "Użyj tego okna w celu wybrania komputera do konfiguracji"
 
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:108
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:110
 msgid "_Password:"
 msgstr "_Hasło:"
 
@@ -527,78 +558,90 @@ msgid "DNS"
 msgstr "DNS"
 
 #: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "Nazwa _domeny:"
+
+#: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
 msgstr "Urządzenie służące za domyślną bramkę:"
 
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:41
 msgid "Device:"
 msgstr "Urządzenie:"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:42
 msgid "Domain / _Workgroup:"
 msgstr "Domena / _Grupa robocza:"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:44
 msgid "General"
 msgstr "Ogólne"
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:45
 msgid "Hosts"
 msgstr "Komputery"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:46
 msgid "How the names of other computers are found."
 msgstr "Sposób wyszukiwania nazw innych komputerów."
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:47
 msgid "How this computer is identified."
 msgstr "Identyfikacja tego komputera."
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:48
 msgid "How to access other computers."
 msgstr ""
 "Sposób uzyskiwania dostępu\n"
 "do innych komputerów."
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:49
 msgid "How to dial up to the Internet."
 msgstr "Sposób wdzwaniania do Internetu."
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:50
 msgid "ISP phone number"
 msgstr "Numer telefonu dostawcy Internetu (ISP)"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:51
 msgid "Interface properties"
 msgstr "Właściwości interfejsu"
 
 #: interfaces/network.glade.in.h:52
+msgid ""
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr ""
+"Lista domen, jakie system będzie próbował dodać do nazwy komputera, jeżeli "
+"żadna nie jest podana"
+
+#: interfaces/network.glade.in.h:54
 msgid "Modem _volume:"
 msgstr "Głośność _modemu:"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:55
 msgid "Network name:"
 msgstr "Nazwa sieciowa:"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Network profiles"
 msgstr "Profile sieciowe"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "Network profiles can be used to store different network configurations."
 msgstr ""
 "Profile sieciowe mogą być używane do przechowywania różnych konfiguracji "
 "sieciowych."
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid "Networking Settings"
 msgstr "Ustawienia sieciowe"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid "New network profile"
 msgstr "Nowy profil sieciowy"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -606,7 +649,7 @@ msgstr ""
 "Następnie, wprowadź nazwę i hasło użytkownika nadane przez twojego dostawcę "
 "Internetu."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -614,35 +657,35 @@ msgstr ""
 "Teraz wprowadź adres jaki będzie posiadało urządzenie sieciowe, oraz adres "
 "zdalny, do którego będzie połączone."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Now, please enter the address that this network device will have."
 msgstr "Teraz wprowadź adres jaki będzie posiadało urządzenie sieciowe."
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Now, please give this connection a name."
 msgstr "Nadaj teraz połączeniu nazwę."
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid "Number to _access an external line:"
 msgstr "Numer _dostępowy do linii zewnętrznej:"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:65
 msgid "Number to get to an _external line:"
 msgstr "Numer wybierania linii ze_wnętrznej:"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:66
 msgid "PPPD _options:"
 msgstr "_Opcje pppd:"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:67
 msgid "Pa_ssword (confirm):"
 msgstr "Ha_sło (potwierdzenie):"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid "Phone _number:"
 msgstr "_Numer telefonu:"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
@@ -650,7 +693,7 @@ msgstr ""
 "Wprowadź numer telefonu używany do łączenia z Internetem. Numer ten "
 "udostępniany jest przez twojego dostawcę Internetu. "
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:70
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
@@ -658,35 +701,35 @@ msgstr ""
 "Wybierz urządzenie bezprzewodowe, które chcesz skonfigurować oraz ustaw "
 "nazwę sieciową dla tego interfejsu"
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:71
 msgid "Please, give this network profile a name and a description."
 msgstr "Podaj nazwę dla tego profilu sieciowego oraz jego opis."
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:72
 msgid "Please, select which type of connection you would like to add."
 msgstr "Wybierz typ połączenia, które chcesz dodać."
 
-#: interfaces/network.glade.in.h:71 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:73 interfaces/users.glade.in.h:38
 msgid "Profile _name:"
 msgstr "_Nazwa profilu:"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:74
 msgid "Pulses"
 msgstr "Impulsy"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:75
 msgid "Se_condary:"
 msgstr "_Pomocniczy:"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:76
 msgid "Set _DNS servers manually"
 msgstr "Ręczne ustawienie serwerów _DNS"
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:77
 msgid "Set modem as default _route to internet"
 msgstr "Ustawienie domyślnego _routingu przez modem"
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:78
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
@@ -694,7 +737,13 @@ msgstr ""
 "Ten asystent pomoże ci skonfigurować nowe\n"
 "połączenie sieciowe."
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:80
+msgid ""
+"This is the list of IP addresses that the system will use as name servers"
+msgstr ""
+"Lista adresów IP używanych przez system, jako adresy serwerów nazw (DNS)"
+
+#: interfaces/network.glade.in.h:81
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -702,36 +751,36 @@ msgstr ""
 "Aby kontynuować konfigurowanie połączenia sieciowego, kliknij \"Naprzód\". "
 "Aby zakończyć, kliknij \"Anuluj\"."
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:82
 msgid "Tones"
 msgstr "Tony"
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:83
 msgid "Use \"Auto\" if unsure."
 msgstr "Jeśli nie masz pewności, wybierz \"Automatycznie\"."
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:84
 msgid "Use this dialog for setting the configuration for this interface"
 msgstr ""
 "Użyj tego okna dialogowego do ustawienia konfiguracji dla tego interfejsu"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:85
 msgid "Username and password"
 msgstr "Nazwa użytkownika i hasło"
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:86
 msgid "WI_NS server:"
 msgstr "Serwer WI_NS:"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:87
 msgid "Wireless device:"
 msgstr "Urządzenie bezprzewodowe:"
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:88
 msgid "Wireless settings"
 msgstr "Ustawienia sieci bezprzewodowej"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:89
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
@@ -739,135 +788,131 @@ msgstr ""
 "Za chwilę zostanie utworzone nowe połączenie sieciowe. Kliknij przycisk "
 "\"Zastosuj\" aby zapisać zmiany."
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:90
 msgid "_Autodetect"
 msgstr "_Automatycznie wykryj"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:91
 msgid "_Comment:"
 msgstr "K_omentarz:"
 
-#: interfaces/network.glade.in.h:89
+#: interfaces/network.glade.in.h:92
 msgid "_Configuration:"
 msgstr "_Konfiguracja:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:93
 msgid "_Deactivate"
 msgstr "_Unieaktywnij"
 
-#: interfaces/network.glade.in.h:91 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
 msgid "_Delete"
 msgstr "_Usuń"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:95
 msgid "_Description:"
 msgstr "_Opis:"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:96
 msgid "_Dial type:"
 msgstr "Typ _wdzwaniania:"
 
-#: interfaces/network.glade.in.h:94
-msgid "_Domain name:"
-msgstr "Nazwa _domeny:"
-
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:97
 msgid "_Enable Windows networking"
 msgstr "_Obsługa sieci windows"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:98
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:99
 msgid "_Gateway address:"
 msgstr "Adres _bramki:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:100
 msgid "_Hostname:"
 msgstr "Nazwa _komputera:"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:101
 msgid "_IP address:"
 msgstr "Adres _IP:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:102
 msgid "_IR LAN"
 msgstr "Sieć na po_dczerwień"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:103
 msgid "_Local IP address:"
 msgstr "Lokalny adres _IP:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:104
 msgid "_Local IP:"
 msgstr "_Lokalny IP:"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:105
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:106
 msgid "_Modem port:"
 msgstr "Port _modemu:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:107
 msgid "_Network Profiles"
 msgstr "Profile siec_iowe"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:108
 msgid "_Network name:"
 msgstr "Nowa _sieciowa:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:109
 msgid "_Parallel Line"
 msgstr "_Port równoległy"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:111
 msgid "_Phone number:"
 msgstr "Numer te_lefonu:"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:112
 msgid "_Primary:"
 msgstr "_Główny:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:113
 msgid "_Remote IP address:"
 msgstr "Zdalny adres _IP:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:114
 msgid "_Remote IP:"
 msgstr "_Zdalny IP:"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:115
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Ponawianie po nieudanym nawiązaniu połączenia lub jego zerwaniu"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:116
 msgid "_Save Current"
 msgstr "Zapisz _bieżący"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:117
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Ustawienia PPP natychmiast po połączeniu się przez modem"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:118
 msgid "_Subnet mask:"
 msgstr "_Maska podsieci:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:119
 msgid "_Update DNS when this connection becomes active"
 msgstr "_Aktualizacja DNS-a po uaktywnieniu połączenia"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:120
 msgid "_Use remote IP as default gateway"
 msgstr "_Wykorzystanie zdalnego IP jako domyślnej bramki"
 
-#: interfaces/network.glade.in.h:119 interfaces/users.glade.in.h:65
+#: interfaces/network.glade.in.h:121 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "Nazwa _użytkownika:"
 
-#: interfaces/network.glade.in.h:120
+#: interfaces/network.glade.in.h:122
 msgid "_Wireless"
 msgstr "_Sieć bezprzewodowa"
 
@@ -892,28 +937,28 @@ msgid "Description:"
 msgstr "Opis:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Priority:"
-msgstr "Priorytet:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "Właściwości _usługi"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service:"
 msgstr "Usługa:"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Status:"
 msgstr "Status:"
 
-#: interfaces/services.glade.in.h:10
+#: interfaces/services.glade.in.h:9
 msgid "Use this tool to specify which services to run"
 msgstr "Narzędzie to pozwala na wybór, które usługi powinny być uruchamiane"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:10
 msgid "_Start"
 msgstr "U_ruchom"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Startup sequence:"
+msgstr "Ko_lejność uruchamiania:"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1238,7 +1283,7 @@ msgstr "Tworzenie nowego obrazu startowego (%d z %d)"
 msgid "Finished creating a new boot image"
 msgstr "Kończenie tworzenia nowego obrazu startowego"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:467
+#: src/boot/boot-image.c:40 src/network/profile.c:468
 msgid "Unknown"
 msgstr "Nieznany"
 
@@ -1337,10 +1382,6 @@ msgstr ""
 "Nie można odnaleźć lub odczytać pliku \"%s\":\n"
 "Zostanie wyświetlona pusta konfiguracja."
 
-#: src/boot/main.c:73
-msgid "Boot Manager Settings"
-msgstr "Ustawienia mnedżera rozruchu systemu"
-
 #: src/boot/table.c:41
 msgid "Name"
 msgstr "Nazwa"
@@ -1432,7 +1473,7 @@ msgstr ""
 "Podczas uruchamiania skryptu przetwarzającego wystąpił błąd.\n"
 "Nie można wczytać konfiguracji."
 
-#: src/common/gst-tool.c:1507
+#: src/common/gst-tool.c:1510
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1441,7 +1482,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Witaj we wstępnym wydaniu %s Narzędzi "
 "systemowych GNOME</span>"
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1513
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1456,15 +1497,15 @@ msgstr ""
 "ostrzeżenia. Dziękujemy za wypróbowanie tej testowej\n"
 "wersji Narzędzi Systemowych GNOME!"
 
-#: src/common/gst-tool.c:1531
+#: src/common/gst-tool.c:1534
 msgid "Warning"
 msgstr "Ostrzeżenie"
 
-#: src/common/gst-tool.c:1551
+#: src/common/gst-tool.c:1554
 msgid "Don't show me this again"
 msgstr "Bez wyświetlania tego komunikatu w przyszłości"
 
-#: src/common/gst-tool.c:1625
+#: src/common/gst-tool.c:1628
 msgid "GNOME System Tools"
 msgstr "Narzędzia konfiguracyjne GNOME"
 
@@ -2064,1603 +2105,3 @@ msgstr "Powłoka"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Dodawanie i usuwanie użytkowników i grup"
-
-#~ msgid "Parameters:"
-#~ msgstr "Parametry:"
-
-#~ msgid "Boot Image Assistant"
-#~ msgstr "Druid ustawień obrazu startowego"
-
-#~ msgid "Image Settings (Step 1 of 2)"
-#~ msgstr "Ustawienia obrazu (krok 1 z 2)"
-
-#~ msgid "Image Settings (Step 2 of 2)"
-#~ msgstr "Ustawienia obrazu (krok 2 z 2)"
-
-#~ msgid "Other Operating System (Step 2 of 2)"
-#~ msgstr "Inny system operacyjny (krok 2 z 2)"
-
-#~ msgid "Enter Password - GNOME System Tools"
-#~ msgstr "Wprowadzanie hasła - Narzędzia konfiguracyjne GNOME"
-
-#~ msgid "2.422"
-#~ msgstr "2.422"
-
-#~ msgid "3. Account name"
-#~ msgstr "3. Nazwa konta"
-
-#~ msgid "<span weight=\"bold\">Activation</span>"
-#~ msgstr "<span weight=\"bold\">Aktywacja</span>"
-
-#~ msgid "<span weight=\"bold\">Ad-Hoc Settings</span>"
-#~ msgstr "<span weight=\"bold\">Ustawienia ad-hoc</span>"
-
-#~ msgid "Account name:"
-#~ msgstr "Nazwa konta:"
-
-#~ msgid "Activate when the computer starts"
-#~ msgstr "Uaktywnianie przy starcie systemu"
-
-#~ msgid "Activation"
-#~ msgstr "Uaktywnianie"
-
-#~ msgid "Add New Internet Connection"
-#~ msgstr "Dodanie nowego podłączenia do Internetu"
-
-#~ msgid "Allow activation control for all users"
-#~ msgstr "Możliwość uaktywniania przez każdego _użytkownika"
-
-#~ msgid "Connection Settings"
-#~ msgstr "Ustawienia połączenia"
-
-#~ msgid "Connection active"
-#~ msgstr "Aktywne połączenie"
-
-#~ msgid "Connection name (Step 3 of 3)"
-#~ msgstr "Nazwa połączenia (krok 3 z 3)"
-
-#~ msgid "Create a new internet connection "
-#~ msgstr "Nowe połączenie z Internetem "
-
-#~ msgid "DNS _Servers:"
-#~ msgstr "_Serwery DNS:"
-
-#~ msgid ""
-#~ "First, please enter the phone number you use to connect to the internet. "
-#~ "This number is provided by your ISP. "
-#~ msgstr ""
-#~ "Na początku, wprowadź numer telefonu używany do łączenia z Internetem. "
-#~ "Numer ten udostępniany jest przez twojego dostawcę Internetu. "
-
-#~ msgid ""
-#~ "How the IP address for this connection\n"
-#~ "is determined."
-#~ msgstr "Sposób określania adresu IP tego połączenia."
-
-#~ msgid ""
-#~ "How the IP addresses for this connection \n"
-#~ "are determined."
-#~ msgstr "Sposób określania adresów IP tego połączenia."
-
-#~ msgid "IP Settings"
-#~ msgstr "Ustawienia IP"
-
-#~ msgid "ISP phone number (Step 1 of 3)"
-#~ msgstr "Numer telefonu dostawcy Internetu (krok 1 z 3)"
-
-#~ msgid "Network profiles - GNOME System Tools"
-#~ msgstr "Profile sieciowe - Narzędzia systemowe GNOME"
-
-#~ msgid "New Connection Type"
-#~ msgstr "Nowy typ połączenia"
-
-#~ msgid "New network connection"
-#~ msgstr "Nowe podłączenie z Internetem"
-
-#~ msgid "New network profile - GNOME System Tools"
-#~ msgstr "Nowy profil sieciowy - Narzędzia systemowe GNOME"
-
-#~ msgid ""
-#~ "Now, please give this account a name. This name will be used to identify "
-#~ "the account."
-#~ msgstr "Nadaj teraz kontu nazwę. Będzie ona używana do jego identyfikacji."
-
-#~ msgid "Password (confirm):"
-#~ msgstr "Hasło (potwierdzenie):"
-
-#~ msgid "Password:"
-#~ msgstr "Hasło:"
-
-#~ msgid "Phone number:"
-#~ msgstr "Numer telefonu:"
-
-#~ msgid "Sea_rch domains:"
-#~ msgstr "Domeny wysz_ukiwania:"
-
-#~ msgid ""
-#~ "Select which type of connection\n"
-#~ "you would like to add."
-#~ msgstr ""
-#~ "Wybierz typ połączenia,\n"
-#~ "które chcesz dodać."
-
-#~ msgid ""
-#~ "Summary of new account data\n"
-#~ "goes here, plus indications on\n"
-#~ "how to proceed (go back, cancel\n"
-#~ "or finish)."
-#~ msgstr ""
-#~ "Będzie tutaj umieszczone zestawienie\n"
-#~ "informacji o nowym koncie oraz wskazówki\n"
-#~ "odnośnie do dalszego postępowania."
-
-#~ msgid ""
-#~ "To continue configuring your account, click \"Next\". To quit, click "
-#~ "\"Cancel\".\n"
-#~ msgstr ""
-#~ "Aby kontynuować konfigurowanie konta, kliknij \"Naprzód\". Aby zakończyć, "
-#~ "kliknij \"Anuluj\".\n"
-
-#~ msgid ""
-#~ "Use the comment to identify the interface in the future. Activation "
-#~ "management lets you set who will activate connections, and when."
-#~ msgstr ""
-#~ "Podany komentarz pozwoli ci na rozpoznanie interfejsu w przyszłości. "
-#~ "Zarządzanie uaktywnianiem pozwoli na określenie kto i kiedy będzie "
-#~ "uaktywniał połączenia."
-
-#~ msgid "Username and password (Step 2 of 3)"
-#~ msgstr "Nazwa użytkownika i hasło (krok 2 z 3)"
-
-#~ msgid "Username:"
-#~ msgstr "Nazwa użytkownika:"
-
-#~ msgid "Warning message goes here."
-#~ msgstr "Komunikat ostrzegawczy."
-
-#~ msgid "Warning message goes here.\n"
-#~ msgstr "Komunikat ostrzegawczy.\n"
-
-#~ msgid "WaveLAN"
-#~ msgstr "WaveLAN"
-
-#~ msgid ""
-#~ "Welcome to the Internet Connection druid. \n"
-#~ "\n"
-#~ "This druid will help you configure a new \n"
-#~ "Internet account. \n"
-#~ "\n"
-#~ "Before you begin, you must have a modem and\n"
-#~ "an Internet Service Provider (ISP). Please ask your \n"
-#~ "ISP for any pertinent information about your connection.\n"
-#~ "\n"
-#~ "Click the \"Next\" button to begin."
-#~ msgstr ""
-#~ "Witaj w druidzie połączenia z Internetem.\n"
-#~ "\n"
-#~ "Druid ten pomoże ci w skonfigurowaniu nowego\n"
-#~ "konta internetowego.\n"
-#~ "\n"
-#~ "Przed rozpoczęciem upewnij się, że masz modem oraz\n"
-#~ "kontakt ze swoim dostawcą usług internetowych (ISP).\n"
-#~ "W razie jakichkolwiek pytań odnoszących się do\n"
-#~ "informacji na temat połączenia, zwróć się z nimi do\n"
-#~ "swojego ISP.\n"
-#~ "\n"
-#~ "Aby rozpocząć, kliknij \"Naprzód\"."
-
-#~ msgid ""
-#~ "Welcome to the Network Connection druid. \n"
-#~ "\n"
-#~ "This druid will help you configure a new \n"
-#~ "network connection. \n"
-#~ "\n"
-#~ "Click the \"Next\" button to begin."
-#~ msgstr ""
-#~ "Witaj w druidzie połączenia z Internetem.\n"
-#~ "\n"
-#~ "Druid ten pomoże ci w skonfigurowaniu nowego\n"
-#~ "połączenia internetowego.\n"
-#~ "\n"
-#~ "Aby rozpocząć, kliknij \"Naprzód\"."
-
-#~ msgid "_Ad-Hoc mode"
-#~ msgstr "Tryb _ad-hoc"
-
-#~ msgid "_Channel:"
-#~ msgstr "_Kanał:"
-
-#~ msgid "_Frequency (GHz):"
-#~ msgstr "_Częstotliwość (GHz):"
-
-#~ msgid "_Session ID:"
-#~ msgstr "ID _sesji:"
-
-#~ msgid "_Wavelan"
-#~ msgstr "_Wavelan"
-
-#~ msgid "Add"
-#~ msgstr "Dodaj"
-
-#~ msgid ""
-#~ "Change the settings and options for the\n"
-#~ "selected user or group, like a users password\n"
-#~ "or a groups name or members."
-#~ msgstr ""
-#~ "Zmiana ustawień i opcji wybranego użytkownika\n"
-#~ "lub grupy, w tym hasła użytkownika oraz nazwy\n"
-#~ "i członków grupy."
-
-#~ msgid "Click \"Next\" to continue"
-#~ msgstr "Aby kontynuować, kliknij \"Naprzód\""
-
-#~ msgid ""
-#~ "Congratulations, the new user has been created.\n"
-#~ "Please click \"Finish\" to save your changes. "
-#~ msgstr ""
-#~ "Został stworzony nowy użytkownik.\n"
-#~ "Aby zapisać zmiany, kliknij \"Zakończ\"."
-
-#~ msgid "Delete"
-#~ msgstr "Usuń"
-
-#~ msgid ""
-#~ "EXPERIMENTAL NIS support.\n"
-#~ "It's only available if You have NIS\n"
-#~ "and when You click on \"More Settings\"."
-#~ msgstr ""
-#~ "EKSPERYMENTALNA obsługa NIS.\n"
-#~ "Jest ona dostępna tylko po kliknięciu\n"
-#~ "\"Więcej ustawień\" i przy obecności NIS-a."
-
-#~ msgid "Edit profile:"
-#~ msgstr "Zmieniany profil:"
-
-#~ msgid "Enter Password (Step 2 of 2)"
-#~ msgstr "Wprowadzanie hasła (krok 2 z 2)"
-
-#~ msgid "New Group"
-#~ msgstr "Nowa grupa"
-
-#~ msgid "New User"
-#~ msgstr "Nowy użytkownik"
-
-#~ msgid ""
-#~ "On this page, you can select scripts and files to be copied from your "
-#~ "account into new users' accounts."
-#~ msgstr ""
-#~ "Na tej stronie można wybrać skrypty i pliki, które mają być skopiowane z "
-#~ "twojego konta do kont nowych użytkowników."
-
-#~ msgid "Please enter a password for the new user. "
-#~ msgstr "Podaj hasło nowego użytkownika."
-
-#~ msgid ""
-#~ "Please enter a username for the new user in the space below. Optionally, "
-#~ "you can fill in more information to identify the user. "
-#~ msgstr ""
-#~ "Wprowadź poniżej nazwę nowego użytkownika. Opcjonalnie możesz również "
-#~ "podać więcej informacji o użytkowniku."
-
-#~ msgid "Settings"
-#~ msgstr "Ustawienia"
-
-#~ msgid "Settings for selected user and group"
-#~ msgstr "Ustawienia wybranego użytkownika i grupy"
-
-#~ msgid ""
-#~ "This druid is designed to help you quickly \n"
-#~ "and easily add new users to your system.\n"
-#~ "\n"
-#~ "To begin, click \"Next\". "
-#~ msgstr ""
-#~ "Druid ten ułatwi szybkie i proste dodanie\n"
-#~ "do systemu nowego użytkownika.\n"
-#~ "\n"
-#~ "Aby rozpocząć, kliknij \"Naprzód\"."
-
-#~ msgid "User Account Wizard"
-#~ msgstr "Druid tworzenia konta użytkownika"
-
-#~ msgid "User Creation Druid"
-#~ msgstr "Druid tworzenia użytkownika"
-
-#~ msgid "User Identity (Step 1 of 2)"
-#~ msgstr "Tożsamość użytkownika (krok 1 z 2)"
-
-#~ msgid "User Profiles - GNOME System Tools"
-#~ msgstr "Profile użytkowników - Narzędzia systemowe GNOME"
-
-#~ msgid "_Profiles..."
-#~ msgstr "_Profile..."
-
-#~ msgid "Boot Image Wizard"
-#~ msgstr "Druid ustawień obrazu startowego"
-
-#~ msgid "%s - GNOME System Tools"
-#~ msgstr "%s - Narzędzia Systemowe GNOME"
-
-#~ msgid "Activating"
-#~ msgstr "Uaktywnianie"
-
-#~ msgid "Inactive"
-#~ msgstr "Nieaktywny"
-
-#~ msgid "The name of this computer"
-#~ msgstr "Nazwa tego komputera"
-
-#~ msgid "A short description of your computer"
-#~ msgstr "Krótki opis tego komputera"
-
-#~ msgid "The Windows Networking workgroup for your network"
-#~ msgstr "Grupa robocza twojej sieci w sieci windows"
-
-#~ msgid "The IP address of your WINS server"
-#~ msgstr "Adres IP serwera WINS"
-
-#~ msgid "The DNS domain for your computer"
-#~ msgstr "Domena DNS tego komputera"
-
-#~ msgid "A list of your DNS servers' IP addresses"
-#~ msgstr "Lista adresów IP serwerów DNS"
-
-#~ msgid "A list of domains where hosts will be searched"
-#~ msgstr "Lista domen, w których wyszukiwane będą nazwy komputerów"
-
-#~ msgid "The IP address of this host"
-#~ msgstr "Adres IP tego komputera"
-
-#~ msgid "Aliases for this host, one per line"
-#~ msgstr "Aliasy tego komputera, po jednym w wierszu"
-
-#~ msgid "Activating connection ``%s.''"
-#~ msgstr "Uaktywnianie połączenia \"%s\"."
-
-#~ msgid "Deactivating connection ``%s.''"
-#~ msgstr "Unieaktywnianie połączenia \"%s\"."
-
-#~ msgid "Are you sure you want to delete the aliases for %s?"
-#~ msgstr "Czy na pewno chcesz usunąć aliasy %s?"
-
-#~ msgid "Autodetecting modem device"
-#~ msgstr "Automatyczne wykrywanie urządzenia modemu"
-
-#~ msgid "Connection name (Step 2 of 2)"
-#~ msgstr "Nazwa połączenia (krok 2 z 2)"
-
-#~ msgid ""
-#~ "The phone number must be composed of\n"
-#~ "only numbers or commas (,)."
-#~ msgstr ""
-#~ "Numer telefonu może się składać wyłącznie\n"
-#~ "z cyfr i przecinków."
-
-#~ msgid ""
-#~ "The password and its confirmation\n"
-#~ "must be the same."
-#~ msgstr "Hasło musi być zgodne z jego potwierdzeniem."
-
-#~ msgid ""
-#~ "If you are specifying a password,\n"
-#~ "you should specify a user name."
-#~ msgstr ""
-#~ "Przy podaniu hasła należy też podać\n"
-#~ "nazwę użytkownika."
-
-#~ msgid ""
-#~ "Please set a name for this account,\n"
-#~ "using only space, letters and numbers."
-#~ msgstr ""
-#~ "Podaj nazwę tego konta, używając tylko\n"
-#~ "liter, cyfr i spacji."
-
-#~ msgid ""
-#~ "You are about to create an account named with the following information:\n"
-#~ "\n"
-#~ "Account Name: %s\n"
-#~ "\n"
-#~ "Phone number: %s\n"
-#~ "\n"
-#~ "User name: %s\n"
-#~ "\n"
-#~ "Password: %s"
-#~ msgstr ""
-#~ "Zostanie stworzone konto z następującymi informacjami:\n"
-#~ "\n"
-#~ "Nazwa konta: %s\n"
-#~ "\n"
-#~ "Numer telefonu: %s\n"
-#~ "\n"
-#~ "Nazwa użytkownika: %s\n"
-#~ "\n"
-#~ "Hasło: %s"
-
-#~ msgid "Time Zone - GNOME System Tools"
-#~ msgstr "Strefa czasowa - Narzędzia Systemowe GNOME"
-
-#~ msgid "Time Servers - GNOME System Tools"
-#~ msgstr "Serwery czasu - Narzędzia Systemowe GNOME"
-
-#~ msgid "Comments"
-#~ msgstr "Komentarze"
-
-#~ msgid "Boot Manager"
-#~ msgstr "Menedżer rozruchu systemu"
-
-#~ msgid "Network adapter setup."
-#~ msgstr "Ustawienia łącznika sieciowego."
-
-#~ msgid "Services Manager"
-#~ msgstr "Menedżer usług"
-
-#~ msgid "Time"
-#~ msgstr "Czas"
-
-#~ msgid "Users and groups."
-#~ msgstr "Użytkownicy i grupy"
-
-#~ msgid "Default runlevel"
-#~ msgstr "Domyślny poziom uruchamiania"
-
-#~ msgid "Dialog complexity for the runlevel-admin tool"
-#~ msgstr "Złożoność okna dialogowego dla narzędzia runlevel-admin"
-
-#~ msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
-#~ msgstr ""
-#~ "Poziom uruchamiania wyświetlany przez narzędzie runlevel-admin jako "
-#~ "domyślny w trybie podstawowym"
-
-#~ msgid "Advanced mode not yet implemented. Sorry."
-#~ msgstr "Tryb zaawansowany nie jest jeszcze zaimplementowany."
-
-#~ msgid "DHCP Server"
-#~ msgstr "Serwer DHCP"
-
-#~ msgid "DHCP server configuration"
-#~ msgstr "Konfiguracja serwera DHCP"
-
-#~ msgid "DHCP server configuration "
-#~ msgstr "Konfiguracja serwera DHCP "
-
-#~ msgid "DNS_1 :"
-#~ msgstr "DNS_1 :"
-
-#~ msgid "DNS_2 :"
-#~ msgstr "DNS_2 :"
-
-#~ msgid "E_nabled"
-#~ msgstr "_Aktywny"
-
-#~ msgid "Host Info : "
-#~ msgstr "Informacje o komputerze ::"
-
-#~ msgid "Hosts :"
-#~ msgstr "Komputery :"
-
-#~ msgid "Hosts Editor"
-#~ msgstr "Edytor nazw komputerów"
-
-#~ msgid "Ip Address"
-#~ msgstr "Adres IP"
-
-#~ msgid "Range _End :"
-#~ msgstr "_Początek zakresu :"
-
-#~ msgid "Range _Start :"
-#~ msgstr "_Koniec zakresu :"
-
-#~ msgid "Router :"
-#~ msgstr "Router :"
-
-#~ msgid "Subnet _Mask :"
-#~ msgstr "_Maska podsieci :"
-
-#~ msgid "_Add"
-#~ msgstr "_Dodaj"
-
-#~ msgid "_Comment :"
-#~ msgstr "_Komentarz :"
-
-#~ msgid "_Domain :"
-#~ msgstr "_Domena :"
-
-#~ msgid "_Edit Hosts..."
-#~ msgstr "Z_modyfikuj komputery..."
-
-#~ msgid "_Hostname :"
-#~ msgstr "_Nazwa komputera :"
-
-#~ msgid "_IP address :"
-#~ msgstr "Adres _IP :"
-
-#~ msgid "_MAC address :"
-#~ msgstr "Adres _MAC :"
-
-#~ msgid "host"
-#~ msgstr "komputer"
-
-#~ msgid "Add an unlisted import"
-#~ msgstr "Dodaje nowy import"
-
-#~ msgid "Add partition"
-#~ msgstr "Dodaj partycję"
-
-#~ msgid "Automatic (detect when mounting)"
-#~ msgstr "Automatyczny (rozpoznawany przy montowaniu)"
-
-#~ msgid "Check for errors on startup"
-#~ msgstr "Sprawdzanie błędów przy uruchamianiu"
-
-#~ msgid "Choose a mount point"
-#~ msgstr "Wybór punktu montowania"
-
-#~ msgid "Disks & partitions"
-#~ msgstr "Dyski i partycje"
-
-#~ msgid ""
-#~ "Disks are divided into several pieces, called partitions. Each partition "
-#~ "is dedicated for a specific storage task, such as virtual memory or home "
-#~ "directories for your users."
-#~ msgstr ""
-#~ "Dyski są podzielone na mniejsze części, zwane partycjami. Każda partycja "
-#~ "jest przeznaczana do przechowywania określonych danych, takich jak np. "
-#~ "pamięć wirtualna lub katalogi domowe dla użytkowników."
-
-#~ msgid "Ext2 (Linux)"
-#~ msgstr "Ext2 (Linux)"
-
-#~ msgid "FAT (DOS)"
-#~ msgstr "FAT (DOS)"
-
-#~ msgid "FAT32 (Windows 98 and newer)"
-#~ msgstr "FAT32 (Windows 98 i nowsze)"
-
-#~ msgid "Mount point:"
-#~ msgstr "Punkt montowania:"
-
-#~ msgid "Mount this partition"
-#~ msgstr "Montowanie zaznaczonej partycji"
-
-#~ msgid "NTFS (Windows NT & 2000)"
-#~ msgstr "NTFS (Windows NT i 2000)"
-
-#~ msgid "Open settings dialog for selected import"
-#~ msgstr "Otwiera okno ustawień zaznaczonego importu"
-
-#~ msgid "Partition"
-#~ msgstr "Partycja"
-
-#~ msgid "Partition Settings"
-#~ msgstr "Ustawienia partycji"
-
-#~ msgid "Remember details of this partition"
-#~ msgstr "Zapamiętanie szczegółów zaznaczonej partycji"
-
-#~ msgid "Type:"
-#~ msgstr "Typ:"
-
-#~ msgid "VFAT (Windows 95 and newer)"
-#~ msgstr "VFAT (Windows 95 i nowsze)"
-
-#~ msgid "reiserfs (Linux)"
-#~ msgstr "reiserfs (Linux)"
-
-#~ msgid "ufs (FreeBSD)"
-#~ msgstr "ufs (FreeBSD)"
-
-#~ msgid "<unknown>"
-#~ msgstr "<nieznany>"
-
-#~ msgid "Appearance"
-#~ msgstr "Wygląd"
-
-#~ msgid "Colors"
-#~ msgstr "Kolory"
-
-#~ msgid "Colors:"
-#~ msgstr "Kolory:"
-
-#~ msgid "Down"
-#~ msgstr "Dół"
-
-#~ msgid "Left"
-#~ msgstr "Lewa"
-
-#~ msgid "Model:"
-#~ msgstr "Model:"
-
-#~ msgid "Monitor information"
-#~ msgstr "Informacje o monitorze"
-
-#~ msgid "Narrower"
-#~ msgstr "Węższy"
-
-#~ msgid "Probe again"
-#~ msgstr "Wykryj ponownie"
-
-#~ msgid "Refresh rate:"
-#~ msgstr "Częstotliwość odświeżania:"
-
-#~ msgid "Resolution"
-#~ msgstr "Rozdzielczość"
-
-#~ msgid "Restart X"
-#~ msgstr "Zrestartuj X"
-
-#~ msgid "Right"
-#~ msgstr "Prawa"
-
-#~ msgid "Shift my display:"
-#~ msgstr "Przesunięcie obrazu:"
-
-#~ msgid "Shorter"
-#~ msgstr "Niższy"
-
-#~ msgid "Stretch my display:"
-#~ msgstr "Rozciągnięcie obrazu:"
-
-#~ msgid "Taller"
-#~ msgstr "Wyższy"
-
-#~ msgid "Test current setting"
-#~ msgstr "Przetestuj ustawienie"
-
-#~ msgid "Up"
-#~ msgstr "Góra"
-
-#~ msgid "Use this tool to configure your monitor."
-#~ msgstr "Narzędzie to pozwala na skonfigurowanie monitora."
-
-#~ msgid "Vendor:"
-#~ msgstr "Sprzedawca:"
-
-#~ msgid "Wider"
-#~ msgstr "Szerszy"
-
-#~ msgid "_Restore settings"
-#~ msgstr "_Przywróć ustawienia"
-
-#~ msgid "Add font..."
-#~ msgstr "Dodaj czcionkę..."
-
-#~ msgid "Delete font"
-#~ msgstr "Usuń czcionkę"
-
-#~ msgid "Font family"
-#~ msgstr "Rodzina czcionek"
-
-#~ msgid "Font size:"
-#~ msgstr "Rozmiar czcionki:"
-
-#~ msgid "Preview"
-#~ msgstr "Podgląd"
-
-#~ msgid "Select the fonts you want to install."
-#~ msgstr "Wybierz czcionki, które chcesz zainstalować."
-
-#~ msgid "Style"
-#~ msgstr "Styl"
-
-#~ msgid "   Configure...   "
-#~ msgstr "   Skonfiguruj...   "
-
-#~ msgid " Exit and come back later after installing."
-#~ msgstr " Zakończ, aby kontynuować po zainstalowaniu."
-
-#~ msgid " Keep the current configuration."
-#~ msgstr " Zachowaj bieżącą konfigurację."
-
-#~ msgid " Never mind, don't use it then."
-#~ msgstr " Nieważne, zrezygnuj z niego."
-
-#~ msgid " No, I'll manually configure the local network computers."
-#~ msgstr " Nie, samodzielnie skonfiguruję komputery w sieci lokalnej."
-
-#~ msgid " No, I'll set it up later by myself."
-#~ msgstr " Nie, ustawię go później samodzielnie."
-
-#~ msgid " No, exit this druid and continue later."
-#~ msgstr " Nie, zakończ pracę druida, aby kontynuować później."
-
-#~ msgid " No, overwrite with new defaults (recommended)"
-#~ msgstr " Nie, nadpisz nowymi domyślnymi ustawieniami (zalecane)"
-
-#~ msgid ""
-#~ " Overwrite with the default internet sharing configuration (recommended)."
-#~ msgstr " Nadpisz domyślą konfiguracją współdzielenia Internetu (zalecane)."
-
-#~ msgid ""
-#~ " Yes, I'll set the local network computers to use automatic IP "
-#~ "assignment  (recommended)."
-#~ msgstr ""
-#~ " Tak, ustawię lokalne komputery tak, aby korzystały z automatycznego "
-#~ "przydzielania adresów IP (zalecane)."
-
-#~ msgid " Yes, keep the current DHCP configuration."
-#~ msgstr " Tak, zachowaj bieżącą konfigurację DHCP."
-
-#~ msgid " Yes, launch network tool (recommended)."
-#~ msgstr " Tak, uruchom narzędzie sieciowe (zalecane)"
-
-#~ msgid ""
-#~ "A local network connection was not detected.\n"
-#~ "Would you like to configure one?\n"
-#~ msgstr ""
-#~ "Nie wykryto lokalnego połączenia sieciowego.\n"
-#~ "Czy chcesz je skonfigurować?\n"
-
-#~ msgid ""
-#~ "A local network interface has been detected, but it's not active.\n"
-#~ "Would you like to activate it now?\n"
-#~ msgstr ""
-#~ "Wykryto lokalny interfejs sieciowy, lecz nie jest on aktywny.\n"
-#~ "Czy chcesz go teraz uaktywnić?\n"
-
-#~ msgid ""
-#~ "A previous DHCP configuration has been detected. \n"
-#~ "Do you want to keep this configuration?"
-#~ msgstr ""
-#~ "Wykryto poprzednią konfigurację DHCP.\n"
-#~ "Czy chcesz zachować tę konfigurację?"
-
-#~ msgid "Banner Removal (Junkbuster)"
-#~ msgstr "Usuwanie bannerów (Junkbuster)"
-
-#~ msgid "Configure DHCP Service"
-#~ msgstr "Konfiguracja usługi DHCP"
-
-#~ msgid ""
-#~ "Congratulations! This computer is now\n"
-#~ "configured to share its Internet connection.\n"
-#~ msgstr ""
-#~ "Gratulacje! Twój komputer jest teraz skonfigurowany\n"
-#~ "do współdzielenia połączenia z Internetem.\n"
-
-#~ msgid "DHCP service configuration."
-#~ msgstr "Konfiguracja usługi DHCP"
-
-#~ msgid "DHCP service requirements."
-#~ msgstr "Wymagania usługi DHCP."
-
-#~ msgid "Disable"
-#~ msgstr "Unieaktywnij"
-
-#~ msgid "Enable :"
-#~ msgstr "Aktywne usługi :"
-
-#~ msgid "End of Range"
-#~ msgstr "Koniec zakresu"
-
-#~ msgid "Firewall"
-#~ msgstr "Zapora ogniowa"
-
-#~ msgid "IP Forwarding"
-#~ msgstr "Przesyłanie IP"
-
-#~ msgid "Internet Sharing"
-#~ msgstr "Współdzielenie Internetu"
-
-#~ msgid "Internet Sharing --Advanced Mode"
-#~ msgstr "Współdzielenie Internetu -- tryb zaawansowany"
-
-#~ msgid "Internet Sharing Configuration Druid"
-#~ msgstr "Druid konfiguracji współdzielenia Internetu"
-
-#~ msgid "Internet Sharing Druid"
-#~ msgstr "Druid współdzielenia Internetu"
-
-#~ msgid "Internet sharing configuration."
-#~ msgstr "Konfiguracja współdzielenia Internetu."
-
-#~ msgid "Local network interface activation."
-#~ msgstr "Uaktywnienie lokalnego interfejsu sieciowego."
-
-#~ msgid "Start of Range"
-#~ msgstr "Początek zakresu"
-
-#~ msgid ""
-#~ "The Internet sharing tool allows you to share your Internet conection "
-#~ "with other computers on the network."
-#~ msgstr ""
-#~ "Narzędzie współdzielenia Internetu pozwala na dzielenie połączenia z "
-#~ "Internetem z innymi komputerami w sieci."
-
-#~ msgid "Web Cache (squid)"
-#~ msgstr "Cache WWW (squid)"
-
-#~ msgid ""
-#~ "Welcome to the Internet Sharing Configuration Druid.\n"
-#~ "\n"
-#~ "This druid will help you to configure and share\n"
-#~ "your Internet connection.\n"
-#~ "\n"
-#~ "You should have already installed and configured a local\n"
-#~ "network connection, such as an Ethernet or waveLAN\n"
-#~ "card, and an internet connection, such as a modem.\n"
-#~ "\n"
-#~ "If you haven't, you will be given the option to launch the\n"
-#~ "Network Tool to configure them before continuing."
-#~ msgstr ""
-#~ "Witaj w druidzie konfiguracji współdzielenia Internetu\n"
-#~ "\n"
-#~ "Druid ten pomoże ci w skonfigurowaniu i współdzieleniu\n"
-#~ "połączenia z Internetem.\n"
-#~ "\n"
-#~ "Musisz dysponować zainstalowanym i skonfigurowanym lokalnym\n"
-#~ "interfejsem sieciowym, takim, jak karta Ethernet lub waveLAN\n"
-#~ "oraz połączeniem z Internetem np. za pośrednictwem modemu.\n"
-#~ "\n"
-#~ "Jeśli brakuje któregoś z elementów konfiguracji, przed przejściem\n"
-#~ "dalej możesz skorzystać z narzędzia konfiguracji sieci."
-
-#~ msgid ""
-#~ "Would you like to give the automatic network\n"
-#~ "address assignment service (DHCP)?\n"
-#~ msgstr ""
-#~ "Czy chcesz skorzystać z usługi automatycznego\n"
-#~ "przydzielania adresów sieciowych (DHCP)?\n"
-
-#~ msgid "Yes (recommended)."
-#~ msgstr "Tak (zalecane)."
-
-#~ msgid ""
-#~ "You already have an internet sharing configuration.\n"
-#~ "Do you want to keep it, or use the druid's defaults?\n"
-#~ msgstr ""
-#~ "Konfiguracja współdzielenia połączenia z Internetem już istnieje.\n"
-#~ "Chcesz ją zachować, czy też użyć domyślnych ustawień druida?\n"
-
-#~ msgid ""
-#~ "You don't have a DHCP server installed, or\n"
-#~ "some other related component is missing."
-#~ msgstr ""
-#~ "Serwer DHCP nie jest zainstalowany lub brakuje\n"
-#~ "powiązanych z nim komponentów."
-
-#~ msgid "\n"
-#~ msgstr "\n"
-
-#~ msgid "                           "
-#~ msgstr "                           "
-
-#~ msgid "AM"
-#~ msgstr "AM"
-
-#~ msgid "Boston Office"
-#~ msgstr "Biuro we Wrocławiu"
-
-#~ msgid "Choose Location"
-#~ msgstr "Wybór lokalizacji"
-
-#~ msgid "Copy"
-#~ msgstr "Kopia"
-
-#~ msgid "Copy Location"
-#~ msgstr "Kopiowanie lokalizacji"
-
-#~ msgid "Current:"
-#~ msgstr "Bieżące:"
-
-#~ msgid "Date"
-#~ msgstr "Data"
-
-#~ msgid "Date/Time "
-#~ msgstr "Data/czas "
-
-#~ msgid "Date/time"
-#~ msgstr "Data/czas"
-
-#~ msgid "Edit Date/Time"
-#~ msgstr "Modyfikacja daty/czasu"
-
-#~ msgid "Edit Location"
-#~ msgstr "Modyfikacja lokalizacji"
-
-#~ msgid "Edit:"
-#~ msgstr "Modyfikacja:"
-
-#~ msgid "Helsinki Office"
-#~ msgstr "Biuro w Krakowie"
-
-#~ msgid "Keep clock synchronized with selected servers"
-#~ msgstr "Synchronizowanie zegara z wybranymi serwerami"
-
-#~ msgid "Location"
-#~ msgstr "Lokalizacja"
-
-#~ msgid "Location Management"
-#~ msgstr "Zarządzanie lokalizacją"
-
-#~ msgid "Location:"
-#~ msgstr "Lokalizacja:"
-
-#~ msgid "Locations"
-#~ msgstr "Lokalizacje"
-
-#~ msgid "Mexico CIty "
-#~ msgstr "Warszawa "
-
-#~ msgid "Name:"
-#~ msgstr "Nazwa:"
-
-#~ msgid "New Location"
-#~ msgstr "Nowa lokalizacja"
-
-#~ msgid "New Name:"
-#~ msgstr "Nowa nazwa:"
-
-#~ msgid "PM"
-#~ msgstr "PM"
-
-#~ msgid "Rename"
-#~ msgstr "Zmiana nazwy"
-
-#~ msgid "Rename Location"
-#~ msgstr "Zmień nazwę lokalizacji"
-
-#~ msgid "Rollback-location-management-mockup"
-#~ msgstr "Rollback-location-management-mockup"
-
-#~ msgid "Select servers..."
-#~ msgstr "Wybierz serwery..."
-
-#~ msgid "Set time zone..."
-#~ msgstr "Ustaw strefę czasową..."
-
-#~ msgid "Time zone"
-#~ msgstr "Strefa czasowa"
-
-#~ msgid ""
-#~ "Use this tool to manage all the different locations where you could "
-#~ "possibly want to use your stinking laptop."
-#~ msgstr ""
-#~ "Narzędzie do zarządzania różnymi lokalizacjami, w których możesz chcieć "
-#~ "wykorzystywać swojego laptopa."
-
-#~ msgid "_Help"
-#~ msgstr "Pomo_c"
-
-#~ msgid "_Settings..."
-#~ msgstr "U_stawienia..."
-
-#~ msgid "Available partitions:"
-#~ msgstr "Dostępne partycje:"
-
-#~ msgid "Available swap areas"
-#~ msgstr "Dostępne obszary wymiany"
-
-#~ msgid "Browse..."
-#~ msgstr "Przeglądaj..."
-
-#~ msgid "Cancel"
-#~ msgstr "Anuluj"
-
-#~ msgid "Enabled"
-#~ msgstr "Aktywny"
-
-#~ msgid "MB"
-#~ msgstr "MB"
-
-#~ msgid "New Swap Device"
-#~ msgstr "Nowy obszar wymiany"
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Path:"
-#~ msgstr "Ścieżka:"
-
-#~ msgid "Physical memory:"
-#~ msgstr "Pamięć fizyczna:"
-
-#~ msgid "Priority"
-#~ msgstr "Priorytet"
-
-#~ msgid "Select  Swap File"
-#~ msgstr "Wybór pliku wymiany"
-
-#~ msgid "Size"
-#~ msgstr "Rozmiar"
-
-#~ msgid "Size:"
-#~ msgstr "Rozmiar:"
-
-#~ msgid "Swap Settings"
-#~ msgstr "Ustawienia wymiany"
-
-#~ msgid "Swap memory:"
-#~ msgstr "Przestrzeń wymiany:"
-
-#~ msgid "Swap type:"
-#~ msgstr "Typ obszaru wymiany:"
-
-#~ msgid "_Remove"
-#~ msgstr "_Usuń"
-
-#~ msgid "_Settings"
-#~ msgstr "_Ustawienia"
-
-#~ msgid "file"
-#~ msgstr "plik"
-
-#~ msgid "partition"
-#~ msgstr "partycja"
-
-#~ msgid " Move Up"
-#~ msgstr " Wyżej"
-
-#~ msgid " Names"
-#~ msgstr " Nazwy"
-
-#~ msgid "Aliases Settings"
-#~ msgstr "Ustawienia aliasów"
-
-#~ msgid ""
-#~ "Assign aliases to IP addresses that may not be registered in the DNS or "
-#~ "WINS servers, or to override or set new names for commonly used IP "
-#~ "addresses. "
-#~ msgstr ""
-#~ "Przypisanie aliasów adresom IP, które mogą nie być zarejestrowane na "
-#~ "serwerach DNS lub WINS, przykrywanie istniejących nazw oraz ustawianie "
-#~ "ich dla często używanych adresów."
-
-#~ msgid "Change the alias' IP address or its corresponding names."
-#~ msgstr "Zmiana adresu IP aliasu lub odpowiadających mu nazw."
-
-#~ msgid "Domain"
-#~ msgstr "Domena"
-
-#~ msgid "Domain Lookup Order"
-#~ msgstr "Kolejność przeszukiwania domen"
-
-#~ msgid "Domain Name Service (DNS)"
-#~ msgstr "Usługa Nazw Domen (DNS)"
-
-#~ msgid "Domain:"
-#~ msgstr "Domena:"
-
-#~ msgid "Existing:"
-#~ msgstr "Istniejące:"
-
-#~ msgid "Host"
-#~ msgstr "Komputer"
-
-#~ msgid "Host name:"
-#~ msgstr "Nazwa komputera:"
-
-#~ msgid "IP address"
-#~ msgstr "Adres IP"
-
-#~ msgid "IP address:"
-#~ msgstr "Adres IP:"
-
-#~ msgid "Identification"
-#~ msgstr "Identyfikacja"
-
-#~ msgid "Let the computer know its name, function and network surroundings."
-#~ msgstr "Nazwa komputera, jego funkcja oraz otoczenie sieciowe."
-
-#~ msgid "Move Down"
-#~ msgstr "Niżej"
-
-#~ msgid "New Alias"
-#~ msgstr "Nowy alias"
-
-#~ msgid "New domain:"
-#~ msgstr "Nowa domena:"
-
-#~ msgid "New server:"
-#~ msgstr "Nowy serwer:"
-
-#~ msgid "New:"
-#~ msgstr "Nowy:"
-
-#~ msgid "Reverse:"
-#~ msgstr "Odwrotna:"
-
-#~ msgid "Search Domains"
-#~ msgstr "Przeszukiwane domeny"
-
-#~ msgid "Servers"
-#~ msgstr "Serwery"
-
-#~ msgid "Settings for the selected alias"
-#~ msgstr "Ustawienia zaznaczonego aliasu"
-
-#~ msgid "Use WINS server:"
-#~ msgstr "Wykorzystanie serwera WINS:"
-
-#~ msgid "Workgroup:"
-#~ msgstr "Grupa robocza:"
-
-#~ msgid "/dev/lp0 (LPT1)"
-#~ msgstr "/dev/lp0 (LPT1)"
-
-#~ msgid "/dev/lp1 (LPT2)"
-#~ msgstr "/dev/lp1 (LPT2)"
-
-#~ msgid "/dev/ttyS0 (COM1)"
-#~ msgstr "/dev/ttyS0 (COM1)"
-
-#~ msgid "/dev/ttyS1 (COM2)"
-#~ msgstr "/dev/ttyS1 (COM2)"
-
-#~ msgid "/dev/ttyS2 (COM3)"
-#~ msgstr "/dev/ttyS2 (COM3)"
-
-#~ msgid "/dev/ttyS3 (COM4)"
-#~ msgstr "/dev/ttyS3 (COM4)"
-
-#~ msgid "1200x1200"
-#~ msgstr "1200x1200"
-
-#~ msgid "1200x600"
-#~ msgstr "1200x600"
-
-#~ msgid "16 colors"
-#~ msgstr "16 kolorów"
-
-#~ msgid "256 colors"
-#~ msgstr "256 kolorów"
-
-#~ msgid "300x300"
-#~ msgstr "300x300"
-
-#~ msgid "400x400"
-#~ msgstr "400x400"
-
-#~ msgid "600x600"
-#~ msgstr "600x600"
-
-#~ msgid "A3"
-#~ msgstr "A3"
-
-#~ msgid "A4"
-#~ msgstr "A4"
-
-#~ msgid "Add Printer..."
-#~ msgstr "Dodaj drukarkę..."
-
-#~ msgid "Add a New Printer"
-#~ msgstr "Dodanie nowej drukarki"
-
-#~ msgid "Connection"
-#~ msgstr "Połączenie"
-
-#~ msgid ""
-#~ "Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
-#~ msgstr ""
-#~ "Konwertuje znaki końca wiersza w formacie PC na format uniksowy, usuwając "
-#~ "efekt \"schodków\"."
-
-#~ msgid "Convert _Linefeeds"
-#~ msgstr "Konwertowanie znaków _końca wiersza"
-
-#~ msgid "Document Pages per Sheet"
-#~ msgstr "Liczba stron dokumentu na arkuszu"
-
-#~ msgid "Driver"
-#~ msgstr "Sterownik"
-
-#~ msgid "E_xplicitly Eject Last Page"
-#~ msgstr "_Jawne wysuwanie ostatniej strony"
-
-#~ msgid "High Color"
-#~ msgstr "64K kolorów"
-
-#~ msgid "Legal"
-#~ msgstr "Legal"
-
-#~ msgid "Letter"
-#~ msgstr "Listowy"
-
-#~ msgid "Name of the printer."
-#~ msgstr "Nazwa drukarki"
-
-#~ msgid "Name of the server the printer is connected to."
-#~ msgstr "Nazwa serwera, do którego podłączona jest drukarka."
-
-#~ msgid "Name the server uses for the printer."
-#~ msgstr "Nazwa, używana przez serwer w odniesieniu do drukarki."
-
-#~ msgid "Novell _Netware (NCP) Printer"
-#~ msgstr "Drukarka Novell _Netware (NCP)"
-
-#~ msgid "Number of colors to print in."
-#~ msgstr "Liczba drukowanych kolorów."
-
-#~ msgid "Options"
-#~ msgstr "Opcje"
-
-#~ msgid "P_aper Size:"
-#~ msgstr "_Rozmiar papieru:"
-
-#~ msgid "P_ort Number:"
-#~ msgstr "Numer p_ortu:"
-
-#~ msgid "Port number the server is listening to."
-#~ msgstr "Numer portu, na którym nasłuchuje serwer."
-
-#~ msgid "Port the printer is connected to."
-#~ msgstr "Port, do którego jest podłączona drukarka."
-
-#~ msgid "Print one page per sheet."
-#~ msgstr "Drukuje po jednej stronie na arkuszu."
-
-#~ msgid "Print resolution."
-#~ msgstr "Rozdzielczość wydruku."
-
-#~ msgid "Printer Settings"
-#~ msgstr "Ustawienia drukarki"
-
-#~ msgid "Printer connected to a port on your machine."
-#~ msgstr "Drukarka podłączona do portu w tym komputerze."
-
-#~ msgid "Printer listening directly for network connections."
-#~ msgstr "Drukarka bezpośrednio przyjmująca połączenia z sieci."
-
-#~ msgid "Printer shared on a Windows (SMB) network."
-#~ msgstr "Drukarka współdzielona w sieci windows (SMB)."
-
-#~ msgid "Printer shared using the Novell Netware (NCP) protocol."
-#~ msgstr "Drukarka współdzielona przy użyciu protokołu Novell Netware (NCP)."
-
-#~ msgid "Printer shared using the Unix (lpd) print protocol."
-#~ msgstr ""
-#~ "Drukarka współdzielona przy użyciu uniksowego protokołu wydruku (lpd)."
-
-#~ msgid "R_esolution:"
-#~ msgstr "_Rozdzielczość:"
-
-#~ msgid "Remote UNIX (_lpd) Printer"
-#~ msgstr "Zdalna drukarka _UNIX (lpd)"
-
-#~ msgid "Remote _Windows (SMB) printer"
-#~ msgstr "Zdalna drukarka _windows (SMB)"
-
-#~ msgid "SMB workgroup the server is in."
-#~ msgstr "Grupa robocza SMB, w której jest serwer."
-
-#~ msgid "Scale pages down and print eight per sheet."
-#~ msgstr "Zmniejsza strony i drukuje po osiem stron na arkuszu."
-
-#~ msgid "Scale pages down and print four per sheet."
-#~ msgstr "Zmniejsza strony i drukuje po cztery strony na arkuszu."
-
-#~ msgid "Scale pages down and print two per sheet."
-#~ msgstr "Zmniejsza strony i drukuje po dwie strony na arkuszu."
-
-#~ msgid "Select the type of printer to add:"
-#~ msgstr "Wybierz typ dodawanej drukarki:"
-
-#~ msgid "Send an EOF after the print job to help eject the last page."
-#~ msgstr ""
-#~ "Wysyła znak EOF po każdym zadaniu wydruku, aby pomóc w wysunięciu "
-#~ "ostatniej strony."
-
-#~ msgid "Send text documents raw to the printer."
-#~ msgstr "Wysyła dokumenty tekstowe w formie surowej do drukarki."
-
-#~ msgid "Settings..."
-#~ msgstr "Ustawienia..."
-
-#~ msgid "Size of the paper in the printer."
-#~ msgstr "Rozmiar papieru w drukarce."
-
-#~ msgid "The password used to connect to the server."
-#~ msgstr "Hasło wykorzystywane przy połączeniu z serwerem."
-
-#~ msgid ""
-#~ "This is the list of the configured printers available on the system. "
-#~ "Create new printers or edit existing printer settings with this dialog."
-#~ msgstr ""
-#~ "Poniżej znajduje się lista skonfigurowanych drukarek dostępnych w "
-#~ "systemie. W oknie tym możliwe jest stworzenie nowych drukarek oraz "
-#~ "modyfikacja istniejących."
-
-#~ msgid "True Color"
-#~ msgstr "16M kolorów"
-
-#~ msgid "Username used to connect to the server."
-#~ msgstr "Nazwa użytkownika wykorzystywana przy połączeniu z serwerem."
-
-#~ msgid "_1"
-#~ msgstr "_1"
-
-#~ msgid "_2"
-#~ msgstr "_2"
-
-#~ msgid "_4"
-#~ msgstr "_4"
-
-#~ msgid "_8"
-#~ msgstr "_8"
-
-#~ msgid "_Color Depth:"
-#~ msgstr "_Głębia kolorów:"
-
-#~ msgid "_Device Name:"
-#~ msgstr "Nazwa _urządzenia:"
-
-#~ msgid "_Direct Network Printer"
-#~ msgstr "Drukarka _Direct Network"
-
-#~ msgid "_Fast Text Printing"
-#~ msgstr "_Szybkie drukowanie tekstu"
-
-#~ msgid "_Local Printer"
-#~ msgstr "Drukarka _lokalna"
-
-#~ msgid "_Remote Name:"
-#~ msgstr "_Zdalna nazwa:"
-
-#~ msgid "_Workgroup:"
-#~ msgstr "_Grupa robocza:"
-
-#~ msgid "Advanced..."
-#~ msgstr "Zaawansowane..."
-
-#~ msgid "Change to this Location"
-#~ msgstr "Zmień na tę lokalizację"
-
-#~ msgid "Configuration Restoration"
-#~ msgstr "Przywrócenie konfiguracji"
-
-#~ msgid "Create..."
-#~ msgstr "Stwórz..."
-
-#~ msgid "Destroy..."
-#~ msgstr "Usuń..."
-
-#~ msgid "Edit this Location"
-#~ msgstr "Zmodyfikuj tę lokalizację"
-
-#~ msgid "Location name:"
-#~ msgstr "Nazwa lokalizacji:"
-
-#~ msgid "Parent Location:"
-#~ msgstr "Lokalizacja nadrzędna:"
-
-#~ msgid "Rename..."
-#~ msgstr "Zmień nazwę..."
-
-#~ msgid "Restore all tools"
-#~ msgstr "Przywrócenie wszystkich narzędzi"
-
-#~ msgid "Restore configuration from"
-#~ msgstr "Przywrócenie konfiguracji sprzed"
-
-#~ msgid "Restore only"
-#~ msgstr "Przywrócenie tylko"
-
-#~ msgid "View Logs..."
-#~ msgstr "Wyświetl dziennik..."
-
-#~ msgid "days ago"
-#~ msgstr "dni"
-
-#~ msgid " Edit clients... "
-#~ msgstr " Modyfikacja klientów... "
-
-#~ msgid " _Edit clients... "
-#~ msgstr "_Zmodyfikuj klientów... "
-
-#~ msgid "Access control"
-#~ msgstr "Kontrola dostępu"
-
-#~ msgid "Add..."
-#~ msgstr "Dodaj..."
-
-#~ msgid "Allow writing"
-#~ msgstr "Pozwolenie na zapis"
-
-#~ msgid "Browseable"
-#~ msgstr "Przeglądalny"
-
-#~ msgid "Client"
-#~ msgstr "Klient"
-
-#~ msgid "Clients"
-#~ msgstr "Klienci"
-
-#~ msgid "Comment:"
-#~ msgstr "Komentarz:"
-
-#~ msgid "Do not _remount this share after computer reboots"
-#~ msgstr "Bez ponownego _montowania po ponownym uruchomieniu komputera"
-
-#~ msgid "Do not remount this share after computer reboots"
-#~ msgstr "Bez ponownego montowania po ponownym uruchomieniu komputera"
-
-#~ msgid "Export"
-#~ msgstr "Eksport"
-
-#~ msgid "Export Clients"
-#~ msgstr "Klienci eksportu"
-
-#~ msgid "Export Settings"
-#~ msgstr "Ustawienia eksportu"
-
-#~ msgid "Export _type:"
-#~ msgstr "_Typ eksportu:"
-
-#~ msgid "Export type:"
-#~ msgstr "Typ eksportu:"
-
-#~ msgid "Exports"
-#~ msgstr "Eksporty"
-
-#~ msgid ""
-#~ "Exports are used to share directories on your computer with other "
-#~ "computers over the network. "
-#~ msgstr ""
-#~ "Eskporty są używane do współdzielenia katalogów na twoim komputerze z "
-#~ "innymi komputerami w sieci."
-
-#~ msgid "Host:"
-#~ msgstr "Komputer:"
-
-#~ msgid "If the mount point does not exist, it will be created."
-#~ msgstr "Jeśli punkt montowania nie istnieje, zostanie utworzony."
-
-#~ msgid "Import"
-#~ msgstr "Import"
-
-#~ msgid "Import Settings"
-#~ msgstr "Ustawienia importu"
-
-#~ msgid "Import Settings--NFS Options"
-#~ msgstr "Ustawienia importu -- opcje NFS-a"
-
-#~ msgid "Import Settings--Samba Options (Obsolete)"
-#~ msgstr "Ustawienia importu -- opcje Samby"
-
-#~ msgid "Import _type:"
-#~ msgstr "_Typ importu:"
-
-#~ msgid "Import type:"
-#~ msgstr "Typ importu:"
-
-#~ msgid "Imports"
-#~ msgstr "Importy"
-
-#~ msgid ""
-#~ "Imports are directories which reside in other computers and are "
-#~ "accessible to you through the network."
-#~ msgstr ""
-#~ "Importy są katalogami umiejscowionymi na innych komputerach i dostępnych "
-#~ "na twoim komputerze poprzez sieć."
-
-#~ msgid "Mount Point"
-#~ msgstr "Punkt montowania"
-
-#~ msgid "Mount p_oint:"
-#~ msgstr "_Punkt montowania:"
-
-#~ msgid "Mounted"
-#~ msgstr "Zamontowana"
-
-#~ msgid "Mounting Options"
-#~ msgstr "Opcje montowania"
-
-#~ msgid "Mounting options"
-#~ msgstr "Opcje montowania"
-
-#~ msgid "NFS"
-#~ msgstr "NFS"
-
-#~ msgid "P_ublic"
-#~ msgstr "_Publiczny"
-
-#~ msgid "Pass_word:"
-#~ msgstr "_Hasło:"
-
-#~ msgid "Path"
-#~ msgstr "Ścieżka"
-
-#~ msgid "Pattern:"
-#~ msgstr "Wzorzec:"
-
-#~ msgid "Public"
-#~ msgstr "Publiczny"
-
-#~ msgid "Restrict access to this share to specific clients"
-#~ msgstr "Ograniczenie dostępu do tego zasobu do określonej grupy klientów"
-
-#~ msgid "Samba"
-#~ msgstr "Samba"
-
-#~ msgid "Update"
-#~ msgstr "Odśwież"
-
-#~ msgid ""
-#~ "Use this dialog to create a new export, or to edit the settings of an "
-#~ "existing export."
-#~ msgstr ""
-#~ "Okno to pozwala na stworzenie nowego eksportu oraz na modyfikację "
-#~ "ustawień istniejącego."
-
-#~ msgid ""
-#~ "Use this dialog to create a new import, or to edit the settings of an "
-#~ "existing import."
-#~ msgstr ""
-#~ "Okno to pozwala na stworzenie nowego importu oraz na modyfikację ustawień "
-#~ "istniejącego."
-
-#~ msgid ""
-#~ "Use this dialog to define the client patterns which determine who has "
-#~ "access to your NFS share. Client patterns are typically of the form "
-#~ "\"10.10.10.*\" or \" *.gnome.org\".  "
-#~ msgstr ""
-#~ "W oknie tym można zdefiniować wzorce opisujące klientów, mających dostęp "
-#~ "do eksportów NFS na tym komputerze. Wzorce klientów mają zwykle postać "
-#~ "\"10.10.10.*\" lub  \" *.gnome.org\"."
-
-#~ msgid "Writable"
-#~ msgstr "Zapisywalny"
-
-#~ msgid "_Browseable"
-#~ msgstr "_Przeglądalny"
-
-#~ msgid "_Enable"
-#~ msgstr "Ua_ktywnij"
-
-#~ msgid "_Host:"
-#~ msgstr "_Komputer:"
-
-#~ msgid "_Mount"
-#~ msgstr "_Zamontuj"
-
-#~ msgid "_Mounted"
-#~ msgstr "_Zamontowany"
-
-#~ msgid "_Path:"
-#~ msgstr "Ś_cieżka:"
-
-#~ msgid "_Restrict access to this share to specific clients"
-#~ msgstr "_Ograniczenie dostępu do tego zasobu do określonej grupy klientów"
-
-#~ msgid "_Scan"
-#~ msgstr "_Przeszukaj"
-
-#~ msgid "_Writable"
-#~ msgstr "_Zapisywalny"
-
-#~ msgid "add/edit clients"
-#~ msgstr "dodanie/zmiana klientów"
-
-#~ msgid "advanced mode--main window"
-#~ msgstr "Tryb zaawansowany -- główne okno"
-
-#~ msgid "export settings--NFS options"
-#~ msgstr "Ustawienia eksportu -- opcje NFS-a"
-
-#~ msgid "export settings--Samba options"
-#~ msgstr "Ustawienia eksportu -- opcje Samby"
-
-#~ msgid "simple mode--main window"
-#~ msgstr "Tryb uproszczony -- główne okno"
-
-#~ msgid "Runlevel Settings"
-#~ msgstr "Ustawienia poziomów działania"
-
-#~ msgid "Runlevel"
-#~ msgstr "Poziomy działania"
-
-#~ msgid "Scanning your system configuration."
-#~ msgstr "Analizowanie konfiguracji systemu."
-
-#~ msgid "Updating your system configuration."
-#~ msgstr "Aktualizowanie konfiguracji systemu."
-
-#~ msgid "Pretending we are root..."
-#~ msgstr "Pozorowanie posiadania praw użytkownika root..."
-
-#~ msgid "Image Settings</span>"
-#~ msgstr "Ustawienia obrazu</span>"
-
-#~ msgid "Profile name:"
-#~ msgstr "Nazwa profilu:"
-
-#~ msgid "Warning message goes here..\n"
-#~ msgstr "Komunikat ostrzegawczy...\n"
