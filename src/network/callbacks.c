@@ -99,6 +99,10 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 {
 	static guint timeout_id = 0;
 
+	/* if the tool is running remotely, we don't want this function to be run */
+	if (tool->remote_config)
+		return;
+
 	if (page_num == 0) {
 		timeout_id = g_timeout_add (1000, (GSourceFunc) connection_poll_stat, tool);
 	} else {

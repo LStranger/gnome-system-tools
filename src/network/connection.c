@@ -738,8 +738,8 @@ connection_list_update (void)
 }
 
 /* Polls the backend and updates the active interfaces */
-gboolean
-connection_poll_stat (GstTool *tool)
+static void
+connection_poll_stat_cb (GstDirectiveEntry *entry)
 {
 	gchar *dev;
 	gboolean enabled, found, valid;
@@ -752,13 +752,16 @@ connection_poll_stat (GstTool *tool)
 
 	/* if the tool is running remotely, we don't want this function to be run */
 	if (tool->remote_config)
-		return FALSE;
+		return;
 
-	doc = gst_tool_run_get_directive (tool, NULL, "list_ifaces", NULL);
+	doc = gst_tool_run_get_directive (entry->tool,
+					  entry->report_sign,
+					  entry->directive,
+					  NULL);
 
 	/* couldn't access the backend, return safely */
 	if (!doc)
-		return TRUE;
+		return;
 	
 	root = gst_xml_doc_get_root (doc);
 
@@ -798,7 +801,12 @@ connection_poll_stat (GstTool *tool)
 	}
 
 	gst_xml_doc_destroy (doc);
-	
+}
+
+gboolean
+connection_poll_stat (GstTool *tool)
+{
+	gst_tool_queue_directive (tool, connection_poll_stat_cb, NULL, NULL, NULL, "list_ifaces");
 	return TRUE;
 }
 
