@@ -621,7 +621,7 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 						 GTK_DIALOG_MODAL,
 						 GTK_MESSAGE_INFO,
 						 GTK_BUTTONS_OK,
-						 _("You don't have SMB support installed. Please install"
+						 _("You don't have SMB support installed. Please install "
 						   "SMB support\nin the system to enable windows networking."));
 
 		gtk_window_set_title (GTK_WINDOW (dialog), _("SMB support missing."));
