@@ -63,9 +63,8 @@ enum {
 	TABLE_NET_USER,
 };
 
-void clear_table (ETreeModel *model, ETreePath *root_path);
 void clear_all_tables (void);
-void populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node);
+void populate_table (ETableModel *model, xmlNodePtr root_node);
 void populate_all_tables (void);
 extern guint create_tables (void);
 void tables_update_content (void);

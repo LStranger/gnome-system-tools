@@ -73,7 +73,6 @@ profile_fill (Profile *pf)
 	if (!pft)
 		profile_tab_init ();
 
-
 	gtk_signal_handler_block_by_func (GTK_OBJECT (pft->name->entry),
 					  GTK_SIGNAL_FUNC (on_pro_name_changed),
 					  NULL);
@@ -219,6 +218,53 @@ profile_get_from_xml (xmlNodePtr root)
 	}
 }
 
+void
+profile_add (Profile *old_pf)
+{	
+	Profile *pf;
+	
+	pf = g_new (Profile, 1);
+
+	if (!old_pf)
+	{
+		/* Let's make blank profile. */
+		pf->name = NULL;
+		pf->home_prefix = NULL;
+		pf->shell = NULL;
+		pf->umin = 0;
+		pf->umax = 0;
+		pf->gmin = 0;
+		pf->gmax = 0;
+		pf->pwd_maxdays = 0;
+		pf->pwd_mindays = 0;
+		pf->pwd_warndays = 0;
+		pf->pwd_len = 0;
+		pf->logindefs = FALSE;
+	}
+
+	else
+	{
+		/* FIXME: This sucks! */
+		/* Let's make copy of old profile. */
+		pf->name = NULL;
+		
+		pf->home_prefix = g_strdup (old_pf->home_prefix);
+		pf->shell = g_strdup (old_pf->shell);
+		
+		pf->umin = old_pf->umin;
+		pf->umax = old_pf->umax;
+		pf->gmin = old_pf->gmin;
+		pf->gmax = old_pf->gmax;
+		pf->pwd_maxdays = old_pf->pwd_maxdays;
+		pf->pwd_mindays = old_pf->pwd_mindays;
+		pf->pwd_warndays = old_pf->pwd_warndays;
+		pf->pwd_len = old_pf->pwd_len;
+		pf->logindefs = FALSE;
+	}
+	
+	return pf;
+}
+
 static void
 save_xml (gpointer key, gpointer value, gpointer user_data)
 {
@@ -286,7 +332,6 @@ profile_destroy (Profile *pf)
 	if (!pf)
 		return;
 
-	/* FIXME: remove listitem from name list also */
 	g_free (pf->name);
 	g_free (pf->home_prefix);
 	g_free (pf->shell);

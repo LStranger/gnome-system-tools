@@ -27,12 +27,11 @@
 
 #include <gnome.h>
 #include "global.h"
-#include <gal/e-table/e-tree-simple.h>
-#include <gal/e-table/e-tree-model.h>
 #include <gal/e-table/e-table-scrolled.h>
+#include <gal/e-table/e-table-memory.h>
+#include <gal/e-table/e-table-memory-callbacks.h>
 #include <gal/e-table/e-cell-text.h>
 #include <gal/e-paned/e-hpaned.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "e-table.h"
 #include "user_group.h"
@@ -67,7 +66,7 @@ const gchar *group_spec = "\
 
 const gchar *net_group_spec = "\
 <ETableSpecification no-headers=\"true\" cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Group\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"tree-string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"0\" _title=\"Group\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
   <ETableState> \
     <column source=\"0\"/> \
     <grouping></grouping> \
@@ -76,7 +75,7 @@ const gchar *net_group_spec = "\
 
 const gchar *net_user_spec = "\
 <ETableSpecification no-headers=\"true\" cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"User\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"tree-string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"0\" _title=\"User\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
   <ETableState> \
     <column source=\"0\"/> \
     <grouping></grouping> \
@@ -124,7 +123,7 @@ const gchar *basic_group_state = "\
 </ETableState>";
 
 /* Static functions */
-static gchar *get_row_color (ETreeModel *etm, ETreePath *path);
+static gchar *get_row_color (ETableModel *etm, gint row);
 
 static int
 col_count (ETableModel *etm, void *data)
@@ -151,7 +150,7 @@ duplicate_value (ETableModel *etm, int col, const void *value, void *data)
 }
 
 static void
-freeze_value (ETableModel *etm, int col, void *value, void *data)
+free_value (ETableModel *etm, int col, void *value, void *data)
 {
         g_free (value);
 }
@@ -174,26 +173,20 @@ value_to_string (ETableModel *etm, int col, const void *value, void *data)
 	return (gchar *)value;
 }
 
-static GdkPixbuf *
-icon_at (ETreeModel *etm, ETreePath *path, void *model_data)
-{
-        return NULL;
-}
-
 static void
-set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, void *data)
+set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
 }
 
 static void
-user_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, void *data)
+user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
 	xmlNodePtr node;
 	gchar *field;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	node = e_tree_model_node_get_data (etm, path);
+	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
 		return;
 
@@ -241,14 +234,14 @@ user_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, v
 }
 
 static void
-group_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, void *data)
+group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
 	xmlNodePtr node;
 	gchar *field;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	node = e_tree_model_node_get_data (etm, path);
+	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
 		return;
 
@@ -278,7 +271,7 @@ group_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, 
 }
 
 static gboolean
-is_editable (ETreeModel *etm, ETreePath *path, int col, void *model_data)
+is_editable (ETableModel *etm, int col, int row, void *model_data)
 {
 	return (xst_tool_get_access (tool) &&
 		   (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED));
@@ -301,12 +294,12 @@ get_group_by_id (xmlNodePtr user_node)
 }
 
 static void *
-user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
+user_value_at (ETableModel *etm, int col, int row, void *model_data)
 {
 	xmlNodePtr node, gnode;
 	gchar *field;
 
-	node = e_tree_model_node_get_data (etm, path);
+	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
 		return NULL;
 
@@ -340,7 +333,7 @@ user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 
 		break;
 	case COL_USER_COLOR:
-		return get_row_color (etm, path);
+		return get_row_color (etm, row);
 		break;
 	default:
 		g_warning ("user_value_at: wrong col nr");
@@ -357,12 +350,12 @@ user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 }
 
 static void *
-group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
+group_value_at (ETableModel *etm, int col, int row, void *model_data)
 {
 	xmlNodePtr node;
 	gchar *field;
 
-	node = e_tree_model_node_get_data (etm, path);
+	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
 		return NULL;
 
@@ -375,7 +368,7 @@ group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 		field = g_strdup ("gid");
 		break;
 	case COL_USER_COLOR:
-		return get_row_color (etm, path);
+		return get_row_color (etm, row);
 		break;
 	default:
 		g_warning ("group_value_at: wrong col nr");
@@ -392,11 +385,11 @@ group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 }
 
 static void *
-net_group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
+net_group_value_at (ETableModel *etm, int col, int row, void *model_data)
 {
 	xmlNodePtr node;
 
-	node = e_tree_model_node_get_data (etm, path);
+	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
 		return NULL;
 
@@ -404,11 +397,11 @@ net_group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 }
 
 static void *
-net_user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
+net_user_value_at (ETableModel *etm, int col, int row, void *model_data)
 {
 	xmlNodePtr node;
 
-	node = e_tree_model_node_get_data (etm, path);
+	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
 		return NULL;
 
@@ -477,32 +470,19 @@ static void
 net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 {
 	ETable *u_table;
-	ETreeModel *model, *u_model;
-	ETreePath *path, *u_root;
 	xmlNodePtr node, u_node;
-	gchar *name, *buf, *user;
+	gchar *buf, *user;
 
 	set_active_table (TABLE_NET_GROUP);
 
 	/* Get group name */
-	model = E_TREE_MODEL (table->model);
-	path = e_tree_model_node_at_row (model, row);
-	node = e_tree_model_node_get_data (model, path);
-	name = xst_xml_get_child_content (node, "name");
+	node = e_table_memory_get_data (E_TABLE_MEMORY (table->model), row);
 
-	/* Set desc */
-	buf = g_strconcat (_("Settings for group "), name, NULL);
-	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-							       "network_settings_frame")), buf);
-	g_free (buf);
-	
 	/* Get users table */
 	u_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
-	u_model = E_TREE_MODEL (u_table->model);
-	u_root = e_tree_model_get_root (u_model);
 	
 	/* Clear net_user_table */
-	clear_table (u_model, u_root);
+	e_table_memory_clear (E_TABLE_MEMORY (u_table->model));
 	
 	/* Get group users */
 	node = xst_xml_element_find_first (node, "users");
@@ -527,7 +507,7 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 				continue;
 			}
 
-			e_tree_model_node_insert (u_model, u_root, -1, u_node);
+			e_table_memory_insert (E_TABLE_MEMORY (u_table->model), -1, u_node);
 			break;
 		}
 
@@ -540,37 +520,18 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 static void
 net_user_cursor_change (ETable *table, gint row, gpointer user_data)
 {
-	ETreePath *path;
-	ETreeModel *model;
-	gchar *buf, *label;
-	xmlNodePtr node;
-
 	set_active_table (TABLE_NET_USER);
-	
-	model = E_TREE_MODEL (table->model);
-	path = e_tree_model_node_at_row (model, row);
-	node = e_tree_model_node_get_data (model, path);
-
-	node = xst_xml_element_find_first (node, "login");
-	buf = xst_xml_element_get_content (node);
-
-	label = g_strconcat (_("Settings for user "), buf, NULL);
-	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-							       "network_settings_frame")), label);
-	g_free (label);
-	g_free (buf);
-
 	net_actions_set_sensitive (TRUE);
 }
 
 static gchar *
-get_row_color (ETreeModel *etm, ETreePath *path)
+get_row_color (ETableModel *etm, gint row)
 {
 	xmlNodePtr node, db_node;
 	gchar *buf = NULL;
 	gint id, min, max;
 
-	node = e_tree_model_node_get_data (etm, path);
+	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	db_node = get_db_node (node);
 	get_min_max (db_node, &min, &max);
 
@@ -596,30 +557,25 @@ static void
 create_user_table (void)
 {
 	ETable *table;
-	ETreeModel *model;
-	ETreePath *root_path;
+	ETableModel *model;
 	ETableExtras *extras;
 	GtkWidget *container;
 
 	extras = create_extras ();
 
-	model = e_tree_simple_new (user_col_count,
-				   duplicate_value,
-				   freeze_value,
-				   initialize_value,
-				   value_is_empty,
-				   value_to_string,
-				   icon_at,
-				   user_value_at,
-				   user_set_value_at,
-				   is_editable,
-				   NULL);
-
-	root_path = e_tree_model_node_insert (model, NULL, 0, g_strdup (""));
-	e_tree_model_root_node_set_visible (model, FALSE);
+	model = e_table_memory_callbacks_new (user_col_count,
+					      user_value_at,
+					      user_set_value_at,
+					      is_editable,
+					      duplicate_value,
+					      free_value,
+					      initialize_value,
+					      value_is_empty,
+					      value_to_string,
+					      NULL);
 
 	user_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, user_spec,
-			basic_user_state);
+					   basic_user_state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", user_cursor_change, NULL);
@@ -634,27 +590,22 @@ static void
 create_group_table (void)
 {
 	ETable *table;
-	ETreeModel *model;
-	ETreePath *root_path;
+	ETableModel *model;
 	ETableExtras *extras;
 	GtkWidget *container;
 
 	extras = create_extras ();
 
-	model = e_tree_simple_new (group_col_count,
-				   duplicate_value,
-				   freeze_value,
-				   initialize_value,
-				   value_is_empty,
-				   value_to_string,
-				   icon_at,
-				   group_value_at,
-				   group_set_value_at,
-				   is_editable,
-				   NULL);
-
-	root_path = e_tree_model_node_insert (model, NULL, 0, g_strdup (""));
-	e_tree_model_root_node_set_visible (model, FALSE);
+	model = e_table_memory_callbacks_new (group_col_count,
+					      group_value_at,
+					      group_set_value_at,
+					      is_editable,
+					      duplicate_value,
+					      free_value,
+					      initialize_value,
+					      value_is_empty,
+					      value_to_string,
+					      NULL);
 
 	group_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, group_spec,
 			basic_group_state);
@@ -672,23 +623,18 @@ static void
 create_network_group_table (GtkWidget *paned)
 {
 	ETable *table;
-	ETreeModel *model;
-	ETreePath *root_path;
+	ETableModel *model;
 
-	model = e_tree_simple_new (col_count,
-				   duplicate_value,
-				   freeze_value,
-				   initialize_value,
-				   value_is_empty,
-				   value_to_string,
-				   icon_at,
-				   net_group_value_at,
-				   set_value_at,
-				   is_editable,
-				   NULL);
-
-	root_path = e_tree_model_node_insert (model, NULL, 0, g_strdup (""));
-	e_tree_model_root_node_set_visible (model, FALSE);
+	model = e_table_memory_callbacks_new (col_count,
+					      net_group_value_at,
+					      set_value_at,
+					      is_editable,
+					      duplicate_value,
+					      free_value,
+					      initialize_value,
+					      value_is_empty,
+					      value_to_string,
+					      NULL);
 
 	net_group_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, net_group_spec, NULL);
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_group_table));
@@ -702,23 +648,18 @@ static void
 create_network_user_table (GtkWidget *paned)
 {
 	ETable *table;
-	ETreeModel *model;
-	ETreePath *root_path;
+	ETableModel *model;
 
-	model = e_tree_simple_new (col_count,
-				   duplicate_value,
-				   freeze_value,
-				   initialize_value,
-				   value_is_empty,
-				   value_to_string,
-				   icon_at,
-				   net_user_value_at,
-				   set_value_at,
-				   is_editable,
-				   NULL);
-
-	root_path = e_tree_model_node_insert (model, NULL, 0, g_strdup (""));
-	e_tree_model_root_node_set_visible (model, FALSE);
+	model = e_table_memory_callbacks_new (col_count,
+					      net_user_value_at,
+					      set_value_at,
+					      is_editable,
+					      duplicate_value,
+					      free_value,
+					      initialize_value,
+					      value_is_empty,
+					      value_to_string,
+					      NULL);
 
 	net_user_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, net_user_spec, NULL);
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
@@ -729,29 +670,9 @@ create_network_user_table (GtkWidget *paned)
 }
 
 void
-clear_table (ETreeModel *model, ETreePath *root_path)
-{
-	gint num_children, i;
-	ETreePath **paths;
-
-	g_return_if_fail (model != NULL);
-	g_return_if_fail (root_path != NULL);
-
-	num_children = e_tree_model_node_get_children (model, root_path, &paths);
-
-	e_tree_model_freeze (model);
-	for (i = 0; i < num_children; i++)
-		e_tree_model_node_remove (model, paths[i]);
-
-	e_tree_model_thaw (model);
-}
-
-void
 clear_all_tables (void)
 {
 	ETable *table[4];
-	ETreeModel *model;
-	ETreePath *path;
 	gint i;
 
 	table[0] = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
@@ -760,40 +681,33 @@ clear_all_tables (void)
 	table[3] = NULL;
 
 	for (i = 0; table[i]; i++)
-	{
-		model = E_TREE_MODEL (table[i]->model);
-		path = e_tree_model_get_root (model);
-		clear_table (model, path);
-	}
+		e_table_memory_clear (E_TABLE_MEMORY (table[i]->model));
 }
 
 void
-populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node)
+populate_table (ETableModel *model, xmlNodePtr root_node)
 {
 	xmlNodePtr node;
 
 	g_return_if_fail (model != NULL);
-	g_return_if_fail (root_path != NULL);
 
 	if (!root_node) /* no NIS for example. */
 		return;
 
-	e_tree_model_freeze (model);
+	e_table_memory_freeze (E_TABLE_MEMORY (model));
 	for (node = root_node->childs; node; node = node->next)
 	{
 		if (check_node_complexity (node))
-		    e_tree_model_node_insert (model, root_path, -1, node);
+			e_table_memory_insert (E_TABLE_MEMORY (model), -1, node);
 	}
 
-	e_tree_model_thaw (model);
+	e_table_memory_thaw (E_TABLE_MEMORY (model));
 }
 
 void
 populate_all_tables (void)
 {
 	ETable *table[4];
-	ETreeModel *model;
-	ETreePath *path;
 	xmlNodePtr node[4];
 	gint i;
 
@@ -808,11 +722,7 @@ populate_all_tables (void)
 	node[3] = NULL;
 
 	for (i = 0; table[i]; i++)
-	{
-		model = E_TREE_MODEL (table[i]->model);
-		path = e_tree_model_get_root (model);
-		populate_table (model, path, node[i]);
-	}
+		populate_table (table[i]->model, node[i]);
 }
 
 extern guint
@@ -836,31 +746,28 @@ create_tables (void)
 static gboolean
 table_set_cursor_node (ETable *table, xmlNodePtr old_node)
 {
-	ETreeModel *model;
-	ETreePath *path;
 	xmlNodePtr node;
 	gboolean found;
+	gint row;
 
-	found = FALSE;
-	
 	if (!old_node)
-		return found;
+		return FALSE;
 	
-	model = E_TREE_MODEL (table->model);
-	path = e_tree_model_get_root (model);
-	for (path = e_tree_model_node_get_first_child (model, path);
-		path;
-		path = e_tree_model_node_get_next (model, path))
+	found = FALSE;
+	row = 0;
+	while (TRUE)
 	{
-
-		node = e_tree_model_node_get_data (model, path);
+		node = e_table_memory_get_data (E_TABLE_MEMORY (table->model), row);
+		if (!node)
+			break;
 
 		if (node == old_node)
 		{
-			e_table_set_cursor_row (table, e_tree_model_row_of_node (model, path));
+			e_table_set_cursor_row (table, row);
 			found = TRUE;
 			break;
 		}
+		row++;
 	}
 
 	return found;
@@ -869,11 +776,8 @@ table_set_cursor_node (ETable *table, xmlNodePtr old_node)
 void
 tables_update_content (void)
 {
-	ETable *u_table;
-	ETable *g_table;
+	ETable *u_table, *g_table;
 	xmlNodePtr u_node, g_node;
-	ETreeModel *model;
-	ETreePath *path;
 	gint row;
 	guint saved_table;
 
@@ -886,22 +790,12 @@ tables_update_content (void)
 	u_node = g_node = NULL;
 	
 	/* Get selected user node */
-	model = E_TREE_MODEL (u_table->model);
-	row = e_table_get_cursor_row (u_table);
-	if (row >= 0)
-	{
-		path = e_tree_model_node_at_row (model, row);
-		u_node = e_tree_model_node_get_data (model, path);
-	}
+	if ((row = e_table_get_cursor_row (u_table)) >= 0)
+		u_node = e_table_memory_get_data (E_TABLE_MEMORY (u_table->model), row);
 
 	/* Get selected group node */
-	model = E_TREE_MODEL (g_table->model);
-	row = e_table_get_cursor_row (g_table);
-	if (row >= 0)
-	{
-		path = e_tree_model_node_at_row (model, row);
-		g_node = e_tree_model_node_get_data (model, path);
-	}
+	if ((row = e_table_get_cursor_row (g_table)) >= 0)
+		g_node = e_table_memory_get_data (E_TABLE_MEMORY (g_table->model), row);
 	
 	clear_all_tables ();
 	populate_all_tables ();
@@ -993,19 +887,13 @@ xmlNodePtr
 get_selected_node (void)
 {
 	ETable *table;
-	ETreePath *path;
-	ETreeModel *model;
 	gint row;
 
 	g_return_val_if_fail (table = get_current_table (), NULL);
 
 	if ((row = e_table_get_cursor_row (table)) >= 0)
-	{
-		model = E_TREE_MODEL (table->model);
-		path = e_tree_model_node_at_row (model, row);
-		return e_tree_model_node_get_data (model, path);
-	}
-
+		return e_table_memory_get_data (E_TABLE_MEMORY (table->model), row);
+	
 	return NULL;
 }
 
@@ -1013,17 +901,13 @@ gboolean
 delete_selected_node (gint tbl)
 {
 	ETable *table;
-	ETreePath *path;
-	ETreeModel *model;
 	gint row;
 
 	g_return_val_if_fail (table = get_table (tbl), FALSE);
 
 	if ((row = e_table_get_cursor_row (table)) >= 0)
 	{
-		model = E_TREE_MODEL (table->model);
-		path = e_tree_model_node_at_row (model, row);
-		e_tree_model_node_remove (model, path);
+		e_table_memory_remove (E_TABLE_MEMORY (table->model), row);
 		return TRUE;
 	}
 
@@ -1034,31 +918,21 @@ void
 current_table_update_row (gint tbl)
 {
 	ETable *table;
-	ETreeModel *model;
-	gint row;
 
 	table = get_table (tbl);
-
-	model = E_TREE_MODEL (table->model);
-	row = e_table_get_cursor_row (table);
-
-	e_table_model_row_changed (E_TABLE_MODEL (model), row);
+	e_table_model_row_changed (table->model,
+				   e_table_get_cursor_row (table));
 }
 
 void
 current_table_new_row (xmlNodePtr node, gint tbl)
 {
 	ETable *table;
-	ETreeModel *model;
-	ETreePath *path;
 
 	g_return_if_fail (node != NULL);
 
 	table = get_table (tbl);
-
-	model = E_TREE_MODEL (table->model);
-	path = e_tree_model_get_root (model);
-	e_tree_model_node_insert (model, path, -1, node);
+	e_table_memory_insert (E_TABLE_MEMORY (table->model), -1, node);
 }
 
 void
