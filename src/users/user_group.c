@@ -934,7 +934,7 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 	/* Home */
 	buf = adv ?
 		gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home"))) :
-		g_strdup_printf ("home/%s", gtk_entry_get_text
+		g_strdup_printf ("/home/%s", gtk_entry_get_text
 					  (GTK_ENTRY (tool_widget_get ("user_settings_name"))));
 	
 	xml_set_child_content (node, "home", buf);
