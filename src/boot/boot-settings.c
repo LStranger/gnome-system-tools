@@ -46,14 +46,19 @@ gchar *module_label_str = N_("_Module path:");
 static void
 settings_dev_list (GtkComboBox *combo, GstBootImageType ctype)
 {
-	xmlNodePtr  root;
-	xmlNodePtr  part;
-	xmlNodePtr  node;
-	gchar      *type;
-	gchar      *dev;
+	xmlNodePtr    root;
+	xmlNodePtr    part;
+	xmlNodePtr    node;
+	gchar        *type;
+	gchar        *dev;
+	GtkTreeModel *model;
 
 	root = gst_xml_doc_get_root (tool->config);
 	part = gst_xml_element_find_first (root, "partitions");
+
+	model = gtk_combo_box_get_model (combo);
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
 	for (node = gst_xml_element_find_first (part, "partition");
 	     node; node = gst_xml_element_find_next (node, "partition"))
 	{
