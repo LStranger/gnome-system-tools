@@ -73,11 +73,16 @@ connection_actions_set_sensitive (gboolean state)
 void 
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
-	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), 0, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), 1, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list")), 0, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list")), 1, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list")), 2, TRUE);
+	GtkCList *list;
+
+	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list"));
+	gtk_clist_set_column_auto_resize (list, 0, TRUE);
+	gtk_clist_set_column_auto_resize (list, 1, TRUE);
+	
+	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list"));
+	gtk_clist_set_column_auto_resize (list, 0, TRUE);
+	gtk_clist_set_column_auto_resize (list, 1, TRUE);
+	gtk_clist_set_column_auto_resize (list, 2, TRUE);
 }
 
 void
@@ -271,6 +276,7 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 		cxn_type = XST_CONNECTION_UNKNOWN;
 
 	cxn = connection_new_from_type_add (cxn_type, xst_xml_doc_get_root (tool->config));
+	cxn->creating = TRUE;
 	connection_save_to_node (cxn, xst_xml_doc_get_root (tool->config));
 	/* connection_configure (cxn); */
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
@@ -291,7 +297,11 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 
-	txt = g_strdup_printf (_("Remove connection %s: ``%s''?"), cxn->dev, cxn->name);
+	if (cxn->name && *cxn->name)
+		txt = g_strdup_printf (_("Remove connection %s: ``%s''?"), cxn->dev, cxn->name);
+	else
+		txt = g_strdup_printf (_("Remove connection %s?"), cxn->dev);
+		
 	d = gnome_question_dialog_parented (txt, NULL, NULL,
 								 GTK_WINDOW (tool->main_dialog));
 	g_free (txt);

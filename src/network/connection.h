@@ -52,6 +52,7 @@ typedef struct {
 	XstConnectionType type;
 
 	gboolean modified;
+	gboolean creating;
 	gboolean frozen;
 
 	/* General */

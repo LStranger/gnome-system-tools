@@ -92,7 +92,6 @@ gchar *s = N_("Advanced");
 gchar *s = N_("How the IP addresses for this connection are determined");
 gchar *s = N_("Local IP:");
 gchar *s = N_("Remote IP:");
-gchar *s = N_("Subnet mask:");
 gchar *s = N_("Use remote IP as default gateway");
 gchar *s = N_("IP Settings");
 gchar *s = N_("Add New Internet Connection");

@@ -1,3 +1,12 @@
+2001-03-22  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* callbacks.c (on_connection_delete_clicked): If the connection has
+	  no name, don't try to display it when confirming.
+	* connection.c: PLIP connections don't require the netmask param
+	  anymore.
+	* connectioin.[hc]: When creating an interface, the configure
+	  dialog comes up. If Cancel is hit, delete the interface.
+
 2001-03-16  Hans Petter Jansson  <hpj@ximian.com>
 
 	* main.c: Added widget policy table.

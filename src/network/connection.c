@@ -803,7 +803,6 @@ empty_ptp (XstConnection *cxn)
 {
 	GET_STR ("ptp_", address);
 	GET_STR ("ptp_", remote_address);
-	GET_STR ("ptp_", netmask);
 
 	g_free (cxn->gateway);
 	if (GTK_TOGGLE_BUTTON (W ("ptp_remote_is_gateway"))->active) {
@@ -842,14 +841,24 @@ connection_config_save (XstConnection *cxn)
 static void
 on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
 {
+	cxn->creating = FALSE;
 	connection_config_save (cxn);
 	gtk_widget_destroy (cxn->window);
 }
 
 static void
-on_connection_cancel_clicked (GtkWidget *wi, XstConnection *cxn)
+on_connection_cancel_clicked (GtkWidget *w, XstConnection *cxn)
 {
+	GtkCList *list;
+
 	gtk_widget_destroy (cxn->window);
+	
+	if (cxn->creating) {
+		list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list"));
+		gtk_clist_remove (list, gtk_clist_find_row_from_data (list, cxn));
+		connection_free (cxn);
+		xst_dialog_modify (tool->main_dialog);
+	}
 }
 
 static void
@@ -1012,7 +1021,6 @@ fill_ptp (XstConnection *cxn)
 	
 	SET_STR ("ptp_", address);
 	SET_STR ("ptp_", remote_address);
-	SET_STR ("ptp_", netmask);
 
 	if (cxn->gateway && cxn->remote_address && !strcmp (cxn->gateway, cxn->remote_address))
 		state = TRUE;
@@ -1052,8 +1060,6 @@ connection_configure (XstConnection *cxn)
 
 	if (cxn->window) {
 		gtk_widget_show (cxn->window);
-/*		gdk_window_show (cxn->window->window);
-		gdk_window_raise (cxn->window->window);*/
 		return;
 	}
 
@@ -1070,12 +1076,6 @@ connection_configure (XstConnection *cxn)
 
 	cxn->window = W("connection_config_dialog");
 
-/*	hb = W ("connection_help");
-	qm = gnome_stock_pixmap_widget_new (hb, GNOME_STOCK_PIXMAP_HELP);
-	gtk_widget_show (qm);
-	gtk_container_add (GTK_CONTAINER (hb), qm);
-	gtk_widget_set_sensitive (hb, FALSE);*/
-			   
 	fill_general (cxn);
 	fill_ip      (cxn);
 
