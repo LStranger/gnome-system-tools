@@ -362,7 +362,7 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 				GTK_DIALOG_MODAL,
 				GST_HIG_MESSAGE_QUESTION,
 				NULL,
-				_("This will disable any network connection with this interface as soon as you hit \"apply\"."),
+				_("This will disable any network connection with this interface as soon as you press \"apply\""),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
 				NULL);
@@ -459,7 +459,7 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 					     GST_HIG_MESSAGE_INFO,
 					     _("SMB Support is not running"),
 					     _("You don't have SMB support installed. Please install "
-					       "SMB support in the system to enable windows networking."),
+					       "SMB support in the system to enable file sharing in Windows networks"),
 					     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					     NULL);
 		gtk_dialog_run (GTK_DIALOG (dialog));
@@ -522,7 +522,7 @@ callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
 		message = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
 					      GTK_DIALOG_MODAL,
 					      GST_HIG_MESSAGE_WARNING,
-					      _("Host name has changed"),
+					      _("The host name has changed"),
 					      _("This will prevent you "
 						"from launching new applications, and so you will "
 						"have to log in again. Continue anyway?"),
@@ -570,10 +570,10 @@ callbacks_check_dialer (GtkWindow *window, GstTool *tool)
 		message = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
 					      GTK_DIALOG_MODAL,
 					      GST_HIG_MESSAGE_WARNING,
-					      _("Wvdial missing"),
+					      _("Wvdial command not found"),
 					      _("wvdial could not be found on your system. "
 						"You need to install wvdial, or the PPP (modem) "
-						"connections will not activate."),
+						"connections will not activate"),
 					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					      NULL);
 		gtk_dialog_run (GTK_DIALOG (message));
@@ -597,7 +597,7 @@ callbacks_check_dialer_hook (GstDialog *dialog, gpointer data)
 		message = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
 					      GTK_DIALOG_MODAL,
 					      GST_HIG_MESSAGE_WARNING,
-					      _("Wvdial not found"),
+					      _("Wvdial command not found"),
 					      _("wvdial could not be found on your system. "
 						"You need to install wvdial, or the PPP (modem) "
 						"connections will not activate. Continue anyway?"),
@@ -676,7 +676,7 @@ callbacks_check_manual_gatewaydev (GstTool *tool)
 						     GST_HIG_MESSAGE_ERROR,
 						     _("The default gateway device is missing gateway information"),
 						     _("Please provide this information to "
-						       "proceed, or choose another default gateway device."),
+						       "proceed, or choose another default gateway device"),
 						     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 						     NULL);
 			gtk_dialog_run (GTK_DIALOG (dialog));
@@ -723,7 +723,7 @@ callbacks_tool_not_found_hook (GstTool *tool, GstReportLine *rline, gpointer dat
 					      _("The program redhat-config-network-cmd could not be found"),
 					      _("This could render missing connections "
 						"under the connections tab. Please install the "
-						"redhat-config-network rpm package to avoid this."),
+						"redhat-config-network rpm package to avoid this"),
 					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					      NULL);
 		gtk_dialog_run (GTK_DIALOG (message));
@@ -866,7 +866,8 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 					GTK_DIALOG_MODAL,
 					GST_HIG_MESSAGE_WARNING,
 					_("Could not autodetect modem device"),
-					_("Check that it's not busy and that it's correctly attached"),
+					_("Check that the device is not busy and "
+					  "that is correctly attached to the computer"),
 					GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					NULL);
 		gtk_dialog_run (GTK_DIALOG (w));

@@ -1742,7 +1742,7 @@ connection_validate (GstConnection *cxn, GtkWidget *parent)
 			primary_text   = _("Error in IP address");
 			secondary_text = _("The IP address or netmask for the interface "
 					   "was left empty. Please enter valid IP "
-					   "addresses in those fields to continue.");
+					   "addresses in those fields to continue");
 		}
 		
 		break;
@@ -1752,30 +1752,30 @@ connection_validate (GstConnection *cxn, GtkWidget *parent)
 			primary_text   = _("Error in IP address");
 			secondary_text = _("The IP address or remote address for the "
 					   "interface was left empty. Please enter valid "
-					   "IP addresses in those fields to continue.");
+					   "IP addresses in those fields to continue");
 		}
 		
 		break;
 	case GST_CONNECTION_PPP:
 		if (!cxn->update_dns && strempty (cxn->dns1)) {
-			primary_text   = _("Error in DNS servers");
-			secondary_text = _("You chose to set the DNS servers for this "
+			primary_text   = _("Error in domain name servers");
+			secondary_text = _("You chose to set the domain name servers for this "
 					   "connection manually, but left the IP "
-					   "address for the primary DNS empty. Please "
-					   "enter the IP for the primary DNS or uncheck "
-					   "the manual DNS option.");
+					   "address for the primary name server empty. Please "
+					   "enter the IP for the primary domain name server or uncheck "
+					   "the manual DNS option");
 			
 		} else if (strempty (cxn->serial_port)) {
 			primary_text   = _("Invalid modem device");
 			secondary_text = _("The modem device that the connection "
 					   "will use was left empty. Please enter "
 					   "a device or press \"autodetect\" to "
-					   "continue.");
+					   "continue");
 		} else if (strempty (cxn->phone_number)) {
 			primary_text   = _("Invalid phone number");
 			secondary_text = _("The phone number that the connection "
 					   "will use was left empty. Please enter "
-					   "a valid phone number to continue.");
+					   "a valid phone number to continue");
 		}
 		
 		break;

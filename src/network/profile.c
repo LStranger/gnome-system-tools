@@ -48,11 +48,11 @@ profile_delete (xmlNodePtr node, GstTool *tool)
 				     GTK_DIALOG_MODAL,
 				     GST_HIG_MESSAGE_WARNING,
 				     NULL,
-				     _("You won't be able to recover this profile after hitting \"apply\""),
+				     _("You will not be able to recover this profile after pressing \"apply\""),
 				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
 				     NULL);
-	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog), _("Delete profile \"%s\"?"), name);
+	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog), _("Are you sure you want to delete profile \"%s\"?"), name);
 
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
