@@ -1,5 +1,13 @@
 2001-01-03  Jacob "Ulysses" Berkman  <jacob@helixcode.com>
 
+	* interfaces/network.glade.in: make the clist have 3 columns
+
+	* src/network/transfer.c (transfer_string_clist2_xml_to_gui): work
+	with the new 3 column clist
+
+	* src/network/callbacks.c (on_statichost_*_clicked): make all this
+	code work
+
 	* src/common/helpers.c (check_ip_string):
 	(check_ip_entry): better utility functions than the old ones
 	(which don't seem to be used anymore anyway)

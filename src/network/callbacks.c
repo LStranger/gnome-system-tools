@@ -337,13 +337,13 @@ on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent
 	/* Load aliases into entry widget */
 
 	pos = 0;
-	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")), row, 0, &row_data);
+	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")), row, 1, &row_data);
 	w = tool_widget_get ("ip");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
 
 	pos = 0;
-	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")), row, 1, &row_data);
+	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")), row, 2, &row_data);
 	w = tool_widget_get ("alias");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
@@ -383,15 +383,27 @@ on_statichost_changed (GtkWidget *w, gpointer null)
 extern void
 on_statichost_add_clicked (GtkButton * button, gpointer user_data)
 {
-	GtkWidget *w0;
-	
+	GtkWidget *clist;
+	char *entry[4];
+	int row;
+
 	g_return_if_fail (tool_get_access());
+
+	entry[0] = entry[3] = NULL;
 	
-	w0 = tool_widget_get ("aliases_settings_dialog");
-	gtk_window_set_title (GTK_WINDOW (w0), _("Create New Alias"));
-	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
-	gtk_widget_set_sensitive (tool_widget_get ("aliases_settings_ok"), FALSE);
-	gtk_widget_show (w0);
+	entry[1] = gtk_editable_get_chars (
+		GTK_EDITABLE (tool_widget_get ("ip")), 0, -1);
+
+#warning FIXME: clean up this next string
+	entry[2] = gtk_editable_get_chars (
+		GTK_EDITABLE (tool_widget_get ("alias")), 0, -1);
+		
+	clist = tool_widget_get ("statichost_list");
+
+	row = gtk_clist_append (GTK_CLIST (clist), entry);
+		
+
+	set_clist_checkmark (GTK_CLIST (clist), row, 0, TRUE);
 }
 
 
@@ -405,31 +417,41 @@ on_statichost_delete_clicked (GtkButton * button, gpointer user_data)
 	g_return_if_fail (tool_get_access());
 	g_return_if_fail (statichost_row_selected != -1);
 
-	parent = GTK_WINDOW (tool_widget_get ("nameresolution_admin"));
+	parent = tool_get_top_window ();
 	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")),
-											statichost_row_selected, 0, &name);
+			    statichost_row_selected, 2, &name);
 
 	txt = g_strdup_printf (_("Are you sure you want to delete the aliases for %s?"), name);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
 	g_free (txt);
 
-	if (reply)
-		return;
-	else
-	{
-		gtk_clist_remove (GTK_CLIST (tool_widget_get ("statichost_list")), statichost_row_selected);
-		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("statichost_settings_frame")),
-												 _("Settings for the selected alias"));
-		tool_set_modified (TRUE);
-		statichost_actions_set_sensitive (FALSE);
-	}
+	if (reply) return;
+		
+	gtk_clist_remove (GTK_CLIST (tool_widget_get ("statichost_list")), statichost_row_selected);
+	tool_set_modified (TRUE);
+	statichost_actions_set_sensitive (FALSE);
 }
 
 void
 on_statichost_update_clicked (GtkWidget *w, gpointer null)
 {
-	g_message ("statichost update");
+	GtkWidget *clist;
+
+	g_return_if_fail (tool_get_access());
+
+	clist = tool_widget_get ("statichost_list");
+
+	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 1,
+			    gtk_editable_get_chars (
+				    GTK_EDITABLE (tool_widget_get ("ip")), 0, -1));
+	
+#warning FIXME: clean up this next string
+	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 2,
+			    gtk_editable_get_chars (
+				    GTK_EDITABLE (tool_widget_get ("alias")), 0, -1));
+
+	set_clist_checkmark (GTK_CLIST (clist), statichost_row_selected, 0, TRUE);
 }
 
 #if 0

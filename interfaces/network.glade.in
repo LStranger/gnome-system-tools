@@ -998,7 +998,7 @@
 
       <widget>
 	<class>GtkScrolledWindow</class>
-	<name>scrolledwindow7</name>
+	<name>scrolledwindow9</name>
 	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
 	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
@@ -1014,17 +1014,17 @@
 	  <name>statichost_list</name>
 	  <can_focus>True</can_focus>
 	  <signal>
-	    <name>select_row</name>
-	    <handler>on_statichost_list_select_row</handler>
-	    <last_modification_time>Wed, 27 Dec 2000 21:33:03 GMT</last_modification_time>
-	  </signal>
-	  <signal>
 	    <name>unselect_row</name>
 	    <handler>on_statichost_list_unselect_row</handler>
-	    <last_modification_time>Wed, 27 Dec 2000 21:51:29 GMT</last_modification_time>
+	    <last_modification_time>Wed, 03 Jan 2001 21:48:16 GMT</last_modification_time>
 	  </signal>
-	  <columns>2</columns>
-	  <column_widths>102,80</column_widths>
+	  <signal>
+	    <name>select_row</name>
+	    <handler>on_statichost_list_select_row</handler>
+	    <last_modification_time>Wed, 03 Jan 2001 21:48:22 GMT</last_modification_time>
+	  </signal>
+	  <columns>3</columns>
+	  <column_widths>16,78,80</column_widths>
 	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 	  <show_titles>True</show_titles>
 	  <shadow_type>GTK_SHADOW_IN</shadow_type>
@@ -1032,8 +1032,8 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <child_name>CList:title</child_name>
-	    <name>label84</name>
-	    <label>IP address</label>
+	    <name>label90</name>
+	    <label>On</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
@@ -1045,7 +1045,20 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <child_name>CList:title</child_name>
-	    <name>label85</name>
+	    <name>IP Address</name>
+	    <label>IP Addres</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <child_name>CList:title</child_name>
+	    <name>label92</name>
 	    <label>Names</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>

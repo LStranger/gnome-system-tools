@@ -224,33 +224,28 @@ transfer_string_list_gui_to_xml (xmlNodePtr root)
 static void
 transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 {
-	int i;
+	int i, row;
 	xmlNodePtr node, nodesub;
-	char *s, *entry[3];
+	char *s, *entry[4];
+	GtkWidget *clist;
 
-	entry[2] = NULL;
+	entry[0] = entry[3] = NULL;
 
 	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
 	{
-		for (node = xml_element_find_first (root, transfer_string_clist2_table [i].xml_path); node; node = xml_element_find_next (node, transfer_string_clist2_table [i].xml_path))
+		for (node = xml_element_find_first (
+			     root, transfer_string_clist2_table [i].xml_path); 
+		     node; 
+		     node = xml_element_find_next (
+			     node, transfer_string_clist2_table [i].xml_path))
 		{
-			for (entry[0] = NULL, nodesub = xml_element_find_first (node, transfer_string_clist2_table [i].xml_path_field_1); nodesub; nodesub = xml_element_find_next (nodesub, transfer_string_clist2_table [i].xml_path_field_1))
-			{
-				if ((s = xml_element_get_content (nodesub)))
-				{
-					if (!entry[0])
-						entry[0] = s;
-					else
-					{
-						entry[0] = g_strjoin (" ", entry[0], s, NULL);
-					}
-				}
-			}
-
-			if (!entry[0])
-				continue;
-
-			for (entry[1] = NULL, nodesub = xml_element_find_first (node, transfer_string_clist2_table [i].xml_path_field_2); nodesub; nodesub = xml_element_find_next (nodesub, transfer_string_clist2_table [i].xml_path_field_2))
+			for (entry[1] = NULL, 
+				     nodesub = xml_element_find_first (
+					     node, transfer_string_clist2_table [i].xml_path_field_1); 
+					     
+			     nodesub; 
+			     nodesub = xml_element_find_next (
+				     nodesub, transfer_string_clist2_table [i].xml_path_field_1))
 			{
 				if ((s = xml_element_get_content (nodesub)))
 				{
@@ -266,9 +261,35 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 			if (!entry[1])
 				continue;
 
-			gtk_clist_append (GTK_CLIST (tool_widget_get (transfer_string_clist2_table [i].clist)), entry);
-			g_free (entry[0]);
+			for (entry[2] = NULL, 
+				     nodesub = xml_element_find_first (
+					     node, transfer_string_clist2_table [i].xml_path_field_2); 
+			     nodesub; 
+			     nodesub = xml_element_find_next (
+				     nodesub, transfer_string_clist2_table [i].xml_path_field_2))
+			{
+				if ((s = xml_element_get_content (nodesub)))
+				{
+					if (!entry[2])
+						entry[2] = s;
+					else
+					{
+						entry[2] = g_strjoin (" ", entry[2], s, NULL);
+					}
+				}
+			}
+
+			if (!entry[2])
+				continue;
+
+			clist = tool_widget_get (transfer_string_clist2_table [i].clist);
+
+			row = gtk_clist_append (GTK_CLIST (clist), entry);
+
+			set_clist_checkmark (GTK_CLIST (clist), row, 0, TRUE);
+
 			g_free (entry[1]);
+			g_free (entry[2]);
 		}
 	}
 }
@@ -291,9 +312,9 @@ transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 
 		/* Add branches corresponding to listed data */
 
-		for (row = 0; gtk_clist_get_text (GTK_CLIST (tool_widget_get (transfer_string_clist2_table [i].clist)), row, 0, &col0); row++)
+		for (row = 0; gtk_clist_get_text (GTK_CLIST (tool_widget_get (transfer_string_clist2_table [i].clist)), row, 1, &col0); row++)
 		{
-			if (!gtk_clist_get_text (GTK_CLIST (tool_widget_get (transfer_string_clist2_table [i].clist)), row, 1, &col1))
+			if (!gtk_clist_get_text (GTK_CLIST (tool_widget_get (transfer_string_clist2_table [i].clist)), row, 2, &col1))
 				continue;
 
 			if (!strlen (col1))
