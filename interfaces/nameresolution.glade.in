@@ -675,8 +675,8 @@
 		    <can_focus>True</can_focus>
 		    <signal>
 		      <name>clicked</name>
-		      <handler>on_dns_remove_clicked</handler>
-		      <last_modification_time>Wed, 17 May 2000 23:03:48 GMT</last_modification_time>
+		      <handler>on_dns_delete_clicked</handler>
+		      <last_modification_time>Tue, 28 Nov 2000 19:48:13 GMT</last_modification_time>
 		    </signal>
 		    <signal>
 		      <name>clicked</name>
@@ -1025,8 +1025,8 @@
 		    <can_focus>True</can_focus>
 		    <signal>
 		      <name>clicked</name>
-		      <handler>on_searchdomain_remove_clicked</handler>
-		      <last_modification_time>Wed, 17 May 2000 23:02:53 GMT</last_modification_time>
+		      <handler>on_searchdomain_delete_clicked</handler>
+		      <last_modification_time>Tue, 28 Nov 2000 19:48:27 GMT</last_modification_time>
 		    </signal>
 		    <signal>
 		      <name>clicked</name>
@@ -1045,6 +1045,7 @@
 		  <widget>
 		    <class>GtkButton</class>
 		    <name>searchdomain_move_up</name>
+		    <sensitive>False</sensitive>
 		    <can_focus>True</can_focus>
 		    <signal>
 		      <name>clicked</name>
@@ -1063,6 +1064,7 @@
 		  <widget>
 		    <class>GtkButton</class>
 		    <name>searchdomain_move_down</name>
+		    <sensitive>False</sensitive>
 		    <can_focus>True</can_focus>
 		    <signal>
 		      <name>clicked</name>
@@ -1264,8 +1266,8 @@
 		<can_focus>True</can_focus>
 		<signal>
 		  <name>clicked</name>
-		  <handler>on_statichost_add_ip_clicked</handler>
-		  <last_modification_time>Wed, 17 May 2000 23:01:24 GMT</last_modification_time>
+		  <handler>on_statichost_new_clicked</handler>
+		  <last_modification_time>Tue, 28 Nov 2000 19:57:39 GMT</last_modification_time>
 		</signal>
 		<signal>
 		  <name>clicked</name>
@@ -1283,14 +1285,14 @@
 
 	      <widget>
 		<class>GtkButton</class>
-		<name>statichost_delte</name>
+		<name>statichost_delete</name>
 		<width>100</width>
 		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
 		<signal>
 		  <name>clicked</name>
-		  <handler>on_statichost_remove_ip_clicked</handler>
-		  <last_modification_time>Wed, 17 May 2000 23:01:33 GMT</last_modification_time>
+		  <handler>on_statichost_delete_clicked</handler>
+		  <last_modification_time>Tue, 28 Nov 2000 20:02:10 GMT</last_modification_time>
 		</signal>
 		<signal>
 		  <name>clicked</name>
@@ -1310,7 +1312,7 @@
 
 	  <widget>
 	    <class>GtkFrame</class>
-	    <name>frame8</name>
+	    <name>statichost_frame</name>
 	    <label>Settings for the selected IP address</label>
 	    <label_xalign>0</label_xalign>
 	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
@@ -1392,14 +1394,14 @@
 
 		<widget>
 		  <class>GtkButton</class>
-		  <name>statichost_set_aliases</name>
+		  <name>statichost_settings</name>
 		  <width>100</width>
 		  <sensitive>False</sensitive>
 		  <can_focus>True</can_focus>
 		  <signal>
 		    <name>clicked</name>
-		    <handler>on_statichost_set_aliases_clicked</handler>
-		    <last_modification_time>Sun, 28 May 2000 21:22:56 GMT</last_modification_time>
+		    <handler>on_statichost_settings_clicked</handler>
+		    <last_modification_time>Tue, 28 Nov 2000 19:49:04 GMT</last_modification_time>
 		  </signal>
 		  <signal>
 		    <name>clicked</name>
