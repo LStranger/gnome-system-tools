@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-20 04:10+0100\n"
+"POT-Creation-Date: 2004-01-13 04:43+0100\n"
 "PO-Revision-Date: 2003-12-20 19:24+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -891,24 +891,30 @@ msgid "Description:"
 msgstr "Beschrijving:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr "Parameters:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "Prioriteit:"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "_Eigenschappen van voorziening"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Service:"
 msgstr "Voorziening:"
+
+#: interfaces/services.glade.in.h:9
+#, fuzzy
+msgid "Status:"
+msgstr "Status"
 
 #: interfaces/services.glade.in.h:10
 msgid "Use this tool to specify which services to run"
 msgstr "Gebruik dit onderdeel om de voorzieningen per runlevel te beheren"
+
+#: interfaces/services.glade.in.h:11
+#, fuzzy
+msgid "_Start"
+msgstr "Status"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1360,7 +1366,7 @@ msgstr "Apparaat"
 msgid "/_Add ..."
 msgstr "/_Toevoegen..."
 
-#: src/boot/table.c:52 src/services/table.c:37 src/users/table.c:49
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
 #: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_eigenschappen"
@@ -1410,16 +1416,16 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fout bij het verbinden van signaal '%s' aan widget '%s'"
 
-#: src/common/gst-tool.c:820
+#: src/common/gst-tool.c:822
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Directive %s wordt overgeslagen..."
 
-#: src/common/gst-tool.c:951
+#: src/common/gst-tool.c:953
 msgid "Skipping actual save..."
 msgstr "Opslaan wordt overgeslagen..."
 
-#: src/common/gst-tool.c:1024
+#: src/common/gst-tool.c:1026
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1427,7 +1433,7 @@ msgstr ""
 "Er is een fout opgetreden bij het uitvoeren van het\n"
 "script. Hierdoor kan de configuratie niet geladen worden."
 
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1507
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1436,7 +1442,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Welkom bij versie %s van de "
 "probeerversie van de GNOME System Tools</span>"
 
-#: src/common/gst-tool.c:1508
+#: src/common/gst-tool.c:1510
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1451,19 +1457,19 @@ msgstr ""
 "probeerversie\n"
 "van de GNOME System Tools!"
 
-#: src/common/gst-tool.c:1529
+#: src/common/gst-tool.c:1531
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: src/common/gst-tool.c:1549
+#: src/common/gst-tool.c:1551
 msgid "Don't show me this again"
 msgstr "Laat dit niet meer zien"
 
-#: src/common/gst-tool.c:1623
+#: src/common/gst-tool.c:1625
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
-#: src/common/gst-ui.c:396
+#: src/common/gst-ui.c:389
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "Herstart uw GNOME sessie om deze wijzigingen toe te passen."
 
@@ -1489,7 +1495,7 @@ msgstr ""
 msgid "SMB support missing."
 msgstr "SMB ondersteuning niet gevonden."
 
-#: src/network/callbacks.c:518
+#: src/network/callbacks.c:522
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1497,7 +1503,7 @@ msgstr ""
 "De computernaam is gewijzigd. Daardoor zult u geen nieuwe programma's kunnen "
 "starten en u zult zich dus opnieuw moeten aanmelden. Toch doorgaan?"
 
-#: src/network/callbacks.c:566
+#: src/network/callbacks.c:570
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1505,7 +1511,7 @@ msgstr ""
 "wvdial kon niet op uw systeem worden gevonden. U moet wvdial installeren om "
 "de PPP (modem) verbindingen te activeren."
 
-#: src/network/callbacks.c:593
+#: src/network/callbacks.c:597
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1513,7 +1519,7 @@ msgstr ""
 "wvdial kon niet op uw systeem worden gevonden. U moet wvdial installeren om "
 "de PPP (modem) verbindingen te activeren. Toch doorgaan?"
 
-#: src/network/callbacks.c:620
+#: src/network/callbacks.c:624
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1521,7 +1527,7 @@ msgstr ""
 "De standaard-gateway is niet geactiveerd. Dit zal toegang tot internet "
 "verhinderen. Toch doorgaan?"
 
-#: src/network/callbacks.c:675
+#: src/network/callbacks.c:679
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1529,7 +1535,7 @@ msgstr ""
 "Het standaard gateway-apparaat mist gateway informatie. Geef a.u.b. deze "
 "informatie op om door te gaan of kies een ander standaard gateway-apparaat."
 
-#: src/network/callbacks.c:721
+#: src/network/callbacks.c:725
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1539,17 +1545,17 @@ msgstr ""
 "missende verbindingen in het tabblad verbindingen veroorzaken. Installeer a."
 "u.b. het redhat-config-network RPM pakket om dit te voorkomen."
 
-#: src/network/callbacks.c:758
+#: src/network/callbacks.c:762
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Weet u zeker dat u het apparaat %s wilt inschakelen?"
 
-#: src/network/callbacks.c:768
+#: src/network/callbacks.c:772
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Weet u zeker dat u het apparaat %s wilt uitschakelen?"
 
-#: src/network/callbacks.c:855
+#: src/network/callbacks.c:859
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1557,19 +1563,19 @@ msgstr ""
 "Kan modemapparaat niet detecteren. Controleer dat deze correct aangesloten, "
 "ingeschakeld en niet bezet is"
 
-#: src/network/callbacks.c:907
+#: src/network/callbacks.c:911
 msgid "Silent"
 msgstr "Stil"
 
-#: src/network/callbacks.c:909
+#: src/network/callbacks.c:913
 msgid "Low"
 msgstr "Laag"
 
-#: src/network/callbacks.c:911
+#: src/network/callbacks.c:915
 msgid "Medium"
 msgstr "Middel"
 
-#: src/network/callbacks.c:913
+#: src/network/callbacks.c:917
 msgid "Loud"
 msgstr "Luid"
 
@@ -1734,16 +1740,29 @@ msgstr "Weet u zeker dat u het profiel %s wilt verwijderen?"
 msgid "Profile name"
 msgstr "Profielnaam"
 
-#: src/services/callbacks.c:45
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "Geen beschrijving beschikbaar."
 
-#: src/services/callbacks.c:297
+#: src/services/callbacks.c:247
+msgid "Running"
+msgstr "Actief"
+
+#: src/services/callbacks.c:251
+msgid "Stopped"
+msgstr "Gestopt"
+
+#: src/services/callbacks.c:256
+#, fuzzy
+msgid "Could not get info"
+msgstr "Kon widget %s niet vinden"
+
+#: src/services/callbacks.c:322
 #, c-format
 msgid "Settings for service %s"
 msgstr "Instellingen voor voorziening%s"
 
-#: src/services/main.c:61
+#: src/services/main.c:58
 msgid "Services Settings"
 msgstr "Voorzieningen instellingen"
 
@@ -1755,11 +1774,11 @@ msgstr "Configureren welke voorzieningen gestart zullen worden bij opstarten"
 msgid "Services"
 msgstr "Voorzieningen"
 
-#: src/services/table.c:79
+#: src/services/table.c:78
 msgid "Active"
 msgstr "Actief"
 
-#: src/services/table.c:89
+#: src/services/table.c:88
 msgid "Service"
 msgstr "Voorziening"
 
@@ -2043,6 +2062,9 @@ msgstr "Shell"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Gebruikers en groepen toevoegen of verwijderen"
+
+#~ msgid "Parameters:"
+#~ msgstr "Parameters:"
 
 #~ msgid "_Configure"
 #~ msgstr "In_stellen"
