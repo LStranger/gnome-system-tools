@@ -46,7 +46,6 @@ XstTool *tool;
 void quit_cb (XstTool *tool, gpointer data);
 
 static XstDialogSignal signals[] = {
-	{ "notebook",                    	"switch_page",   	G_CALLBACK (on_notebook_switch_page) },
 	{ "showall",                     	"toggled",       	G_CALLBACK (on_showall_toggled) },
 	
 	/* User settings dialog callbacks */

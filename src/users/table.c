@@ -43,9 +43,10 @@ extern GtkWidget *users_table;
 extern GtkWidget *groups_table;
 
 GtkWidget*
-create_gtktree_list (GtkWidget *sw)
+create_gtk_tree_list (GtkWidget *sw)
 {
-	GtkTreeModel *model = GTK_TREE_MODEL(gtk_tree_store_new (1, G_TYPE_STRING));
+	GtkTreeModel *model = GTK_TREE_MODEL(gtk_tree_store_new (2, G_TYPE_STRING, G_TYPE_POINTER));
+	GtkTreeSelection *selection;
 	GtkWidget *list;
 	GtkCellRenderer *renderer;
 	
@@ -55,7 +56,6 @@ create_gtktree_list (GtkWidget *sw)
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list), FALSE);
 	
 	renderer = gtk_cell_renderer_text_new ();
-	g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
 	
 	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (list),
                                                      -1,
@@ -66,10 +66,51 @@ create_gtktree_list (GtkWidget *sw)
                                                      NULL);
 	g_object_unref (model);
 	
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
+	
 	gtk_widget_show_all (list);
 	gtk_container_add (GTK_CONTAINER (sw), list);
 	
 	return list;
+}
+
+void
+clear_gtk_tree_list (GtkTreeView *list)
+{
+	GtkTreeModel *model;
+	
+	g_return_if_fail (list != NULL);
+	g_return_if_fail (GTK_IS_TREE_VIEW (list));
+	
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
+}
+
+void
+populate_gtk_tree_list (GtkTreeView *list, GList *items)
+{
+	gchar *entry;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+
+	g_return_if_fail (list != NULL);
+	g_return_if_fail (GTK_IS_TREE_VIEW (list));
+	
+	model = gtk_tree_view_get_model (list);
+
+	while (items)
+	{
+		entry = items->data;
+
+		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+		gtk_tree_store_set (GTK_TREE_STORE (model),
+		                    &iter,
+				    0, entry,
+		                    1, items,
+				    -1);
+		items = items->next;
+	}
 }
 
 void
@@ -101,63 +142,32 @@ tables_update_content (void)
 
 xmlNodePtr get_selected_row_node (gint tbl)
 {
+	xmlNodePtr node;
 	GtkTreeView *table;
-	xmlNodePtr root;
-	
-	GtkTreeModel *model;
 	GtkTreePath *path;
 	GtkTreeIter iter;
-	gchar *name;
+	GtkTreeModel *model;
+	gint column;
 	
 	switch (tbl) {
 		case TABLE_USER:
 			table = GTK_TREE_VIEW (users_table);
-			root = get_user_root_node ();
+			column = COL_USER_POINTER;
 			break;
 		case TABLE_GROUP:
 			table = GTK_TREE_VIEW (groups_table);
-			root = get_group_root_node ();
+			column = COL_GROUP_POINTER;
 			break;
 		default:
 			return NULL;
 	}
 	
-	model = gtk_tree_view_get_model (table);
-	
-	gtk_tree_view_get_cursor (table, &path, NULL);
-	gtk_tree_model_get_iter (model, &iter, path);
+        model = gtk_tree_view_get_model (table);
+        
+        gtk_tree_view_get_cursor (table, &path, NULL);
+        gtk_tree_model_get_iter (model, &iter, path);
 
-	gtk_tree_model_get (model, &iter,
-	                    0, &name,
-	                    -1);
+        gtk_tree_model_get (model, &iter, column, &node, -1);
 	
-	return find_node_with_name (root, name);
+	return node;
 }
-
-void
-delete_selected_row (gint tbl)
-{
-	GtkTreeView *table;
-	GtkTreeModel *model;
-	GtkTreePath *path;
-	GtkTreeIter iter;
-	
-	switch (tbl) {
-		case TABLE_USER:
-			table = GTK_TREE_VIEW (users_table);
-			break;
-		case TABLE_GROUP:
-			table = GTK_TREE_VIEW (groups_table);
-			break;
-	}
-	
-	model = gtk_tree_view_get_model (table);
-	gtk_tree_view_get_cursor (table, &path, NULL);
-	
-	if (!path)
-		return;
-	
-	gtk_tree_model_get_iter (model, &iter, path);
-	gtk_tree_store_remove (GTK_TREE_STORE (model), &iter);
-}
-

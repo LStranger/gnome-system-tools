@@ -39,13 +39,13 @@ enum {
 };
 
 /* User and group lists creation function */
-GtkWidget*		create_gtktree_list		(GtkWidget*);
+GtkWidget*		create_gtk_tree_list		(GtkWidget*);
+void			populate_gtk_tree_list		(GtkTreeView*, GList*);
 
 /* User and group tables manipulation functions */
 void			construct_tables		(void);
 void			update_tables_complexity	(XstDialogComplexity);
 void			populate_all_tables		(void);
 xmlNodePtr		get_selected_row_node		(gint);
-void			delete_selected_row		(gint);
 
 #endif /* __TABLE_H */

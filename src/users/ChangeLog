@@ -1,3 +1,23 @@
+2002-10-17  Carlos Garnacho Parro <garnacho@tuxerver.net>
+
+	* group_settings.c: code improvements, enabled multiple selection in
+	  the GtkTreeViews of the group settings/add dialog.
+	* callbacks.[ch]: Code improvements, added multiple deletion of
+	  users/groups.
+	  (on_notebook_switch_page) removed, it wasn't being used.
+	* groups-table.[ch]: set columns resizable and sortable, enabled multiple
+	  selection.
+	* main.c: removed notebook's "switch page" signal, it wasn't being
+	  used.
+	* user-group-xml.c: made it to insert sorted elements in the
+ 	  GtkTreeViews of the user/group settings/add dialog.
+	  (find_node_with_name) removed, it was no longer used.
+	* user-settings.c: code improvements, enabled multiple selection in
+          the GtkTreeViews of the user settings/add dialog.
+	  Made it to delete the old member groups before adding the current.
+	* users-table.[ch]: set columns resizable and sortable, enabled
+	  multiple selection.
+
 2002-09-20  Tambet Ingo  <tambet@ximian.com>
 
 	* users-table.c: Marked column headers translatable.

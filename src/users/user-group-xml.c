@@ -145,7 +145,7 @@ user_get_groups (xmlNodePtr user_node)
 				continue;
 
 			if (!strcmp (user_name, buf))
-				grouplist = g_list_prepend (grouplist, group_value_name (g));
+				grouplist = g_list_insert_sorted (grouplist, group_value_name (g), my_strcmp);
 			
 			g_free (buf);
 		}
@@ -536,42 +536,6 @@ node_exists (xmlNodePtr node, const gchar *name, const gchar *val)
 	return FALSE;
 }
 
-xmlNodePtr
-find_node_with_name (xmlNodePtr parent, gchar *name)
-{
-	gchar *key = NULL;
-	gchar *field, *buf;
-	xmlNodePtr n0;
-	
-	if (strcmp (parent->name, "userdb") == 0) {
-		key = g_strdup ("user");
-		field = g_strdup ("login");
-	} else {
-		if (strcmp (parent->name, "groupdb") == 0) {
-			key = g_strdup ("group");
-			field = g_strdup ("name");
-		}
-	}
-	
-	g_return_val_if_fail (key != NULL, NULL);
-	
-	for (n0 = xst_xml_element_find_first (parent, key); n0 != NULL; n0 = xst_xml_element_find_next (n0, key))
-	{
-		buf = xst_xml_get_child_content (n0, (gchar *)field);
-		
-		if (buf) {
-			if (strcmp (name, buf) == 0) {
-				g_free (buf);  /* Woohoo! found! */
-				return n0;
-			}
-
-			g_free (buf);
-		}
-	}
-	
-	return NULL;
-}
-
 GList *
 get_group_users (xmlNodePtr group_node)
 {
@@ -585,7 +549,7 @@ get_group_users (xmlNodePtr group_node)
 		return NULL;
 
 	for (u = xst_xml_element_find_first (node, "user"); u; u = xst_xml_element_find_next (u, "user")) {
-		userlist = g_list_prepend (userlist, xst_xml_element_get_content (u));
+		userlist = g_list_insert_sorted (userlist, xst_xml_element_get_content (u), my_strcmp);
 	}
 
 	return userlist;
@@ -613,7 +577,7 @@ get_list_from_node (gchar *field, xmlNodePtr node)
 	for (u = xst_xml_element_find_first (n, key); u != NULL; u = xst_xml_element_find_next (u, key))
 	{
 		if (check_node_visibility (u))
-			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
+			list = g_list_insert_sorted (list, xst_xml_get_child_content (u, field), my_strcmp);
 	}
 
 	return list;

@@ -43,7 +43,6 @@ TableConfig users_table_config [] = {
 	{ N_("Shell"),		TRUE,		FALSE},
 	{ N_("Comments"),	FALSE,		TRUE},
 	{ N_("Group"),		FALSE,		TRUE},
-//	{ N_("GID"),		FALSE,		FALSE},
 	{NULL}
 };
 
@@ -55,6 +54,7 @@ GArray *users_array;
 static void
 add_user_columns (GtkTreeView *treeview)
 {
+	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
 	TableConfig *i;
 	guint j;
@@ -64,15 +64,16 @@ add_user_columns (GtkTreeView *treeview)
 	     i++, j++)
 	{	
 		renderer = gtk_cell_renderer_text_new ();
-		g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
 	
-		gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (treeview),
-	                                                     -1,
-	                                                     i->name,
-	                                                     renderer,
-	                                                     "text",
-	                                                     j,
-	                                                     NULL);
+		column = gtk_tree_view_column_new_with_attributes (i->name,
+	                                                           renderer,
+	                                                           "text",
+	                                                           j,
+	                                                           NULL);
+		gtk_tree_view_column_set_resizable (column, TRUE);
+		gtk_tree_view_column_set_sort_column_id (column, j);
+
+		gtk_tree_view_insert_column (GTK_TREE_VIEW (users_table), column, j);
 	}
 }
 
@@ -88,13 +89,15 @@ create_users_model (void)
 	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
 	                            G_TYPE_STRING,
-	                            G_TYPE_INT);
+	                            G_TYPE_INT,
+	                            G_TYPE_POINTER);
 	return GTK_TREE_MODEL (model);
 }
 
 static GtkWidget*
 create_users_table (void)
 {
+	GtkTreeSelection *selection;
 	GtkTreeModel *model;
 	
 	model = create_users_model ();
@@ -107,10 +110,12 @@ create_users_table (void)
 
 	add_user_columns (GTK_TREE_VIEW (users_table));
 	
-	g_signal_connect (G_OBJECT (users_table),
-	                  "cursor_changed",
-	                  G_CALLBACK (on_user_table_clicked),
-	                  NULL);
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
+
+	g_signal_connect (G_OBJECT (selection), "changed",
+			  G_CALLBACK (on_user_table_clicked),
+			  NULL);
 	
 	return users_table;
 }
@@ -180,6 +185,7 @@ populate_users_table (void)
 					    COL_USER_SHELL, item->shell,
 					    COL_USER_COMMENT, item->comment,
 					    COL_USER_GROUP, item->group,
+			                    COL_USER_POINTER, user,
 					    -1);
 		}
 	}

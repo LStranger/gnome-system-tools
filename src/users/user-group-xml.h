@@ -95,8 +95,6 @@ xmlNodePtr	user_add_blank_xml  	(xmlNodePtr);
 void		user_update_xml		(xmlNodePtr, UserAccountData*, gboolean);
 void		del_user_groups		(xmlNodePtr);
 
-xmlNodePtr	find_node_with_name	(xmlNodePtr, gchar*);
-
 GList *		get_group_users		(xmlNodePtr);
 GList *		get_list_from_node	(gchar*, xmlNodePtr);
 GList *		get_profile_list	(void);

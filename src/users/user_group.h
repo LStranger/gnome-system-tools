@@ -39,17 +39,6 @@ typedef struct
 	gint table;
 } ug_data;
 
-GList		*extract_members_list		(GtkTreeView*);
-
-
-
-
-
-
-
-
-
-
 xmlNodePtr get_root_node (gint tbl);
 xmlNodePtr get_user_root_node (void);
 xmlNodePtr get_group_root_node (void);
@@ -59,10 +48,12 @@ xmlNodePtr get_db_node (xmlNodePtr node);
 gchar *my_xst_xml_element_get_content (xmlNodePtr node);
 gboolean check_node_visibility (xmlNodePtr node);
 
-//gboolean  check_user_root (xmlNodePtr node, const gchar *field, const gchar *value);
-//gchar    *check_user_login (xmlNodePtr node, const gchar *login);
-//gchar    *check_user_uid (xmlNodePtr node, const gchar *val);
-//gchar    *check_user_shell (xmlNodePtr node, const gchar *val);
+/*
+gboolean  check_user_root (xmlNodePtr node, const gchar *field, const gchar *value);
+gchar    *check_user_login (xmlNodePtr node, const gchar *login);
+gchar    *check_user_uid (xmlNodePtr node, const gchar *val);
+gchar    *check_user_shell (xmlNodePtr node, const gchar *val);
+*/
 
 gboolean get_min_max (xmlNodePtr db_node, gint *min, gint *max);
 xmlNodePtr get_corresp_field (xmlNodePtr node);
@@ -73,22 +64,22 @@ gchar *find_new_id (xmlNodePtr parent);
 gchar *find_new_key (xmlNodePtr parent);
 
 /* User related */
-
-//void settings_prepare (ug_data *ud);
-//void user_new_prepare (ug_data *ud);
-//void user_passwd_dialog_prepare (xmlNodePtr node);
-//gboolean check_login_delete (xmlNodePtr node);
-
+/*
+void settings_prepare (ug_data *ud);
+void user_new_prepare (ug_data *ud);
+void user_passwd_dialog_prepare (xmlNodePtr node);
+gboolean check_login_delete (xmlNodePtr node);
+*/
 /* Group related */
 
 /* Helpers */
 gboolean is_valid_name (const gchar*);
 gboolean is_valid_id (const gchar*);
 
-void my_gtktree_list_append_items (GtkTreeView *list, GList *items);
-gint my_gtktree_list_append (GtkTreeView *list, gchar *text);
 void user_query_string_set (gchar *str);
 gchar *user_query_string_get (void);
+
+gint my_strcmp (gconstpointer, gconstpointer);
 
 void		show_error_message	(gchar *,gchar *);
 

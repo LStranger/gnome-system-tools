@@ -50,6 +50,7 @@ static void
 add_group_columns (GtkTreeView *treeview)
 {
 	GtkCellRenderer *renderer;
+	GtkTreeViewColumn *column;
 	GroupsTableConfig *i;
 	guint j;
 	
@@ -58,15 +59,16 @@ add_group_columns (GtkTreeView *treeview)
 	     i++, j++)
 	{
 		renderer = gtk_cell_renderer_text_new ();
-		g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
-		
-		gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (treeview),
-		                                             -1,
-		                                             i->name,
-		                                             renderer,
-		                                             "text",
-		                                             j,
-		                                             NULL);
+
+		column = gtk_tree_view_column_new_with_attributes (i->name,
+		                                                   renderer,
+		                                                   "text",
+		                                                   j,
+		                                                   NULL);
+		gtk_tree_view_column_set_resizable (column, TRUE);
+		gtk_tree_view_column_set_sort_column_id (column, j);
+
+		gtk_tree_view_insert_column (GTK_TREE_VIEW (groups_table), column, j);
 	}
 }
 
@@ -77,7 +79,8 @@ create_groups_model (void)
 	
 	model = gtk_tree_store_new (COL_GROUP_LAST,
 	                            G_TYPE_STRING,
-	                            G_TYPE_INT);
+	                            G_TYPE_INT,
+	                            G_TYPE_POINTER);
 	return GTK_TREE_MODEL (model);
 }
 
@@ -85,6 +88,7 @@ static GtkWidget*
 create_groups_table (void)
 {
 	GtkTreeModel *model;
+	GtkTreeSelection *selection;
 	
 	model = create_groups_model ();
 	
@@ -95,12 +99,14 @@ create_groups_table (void)
         gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (groups_table), TRUE);
 	
 	add_group_columns (GTK_TREE_VIEW (groups_table));
-	
-	g_signal_connect  (G_OBJECT (groups_table),
-	                   "cursor-changed",
-	                   G_CALLBACK (on_group_table_clicked),
-	                   NULL);
-	
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (groups_table));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
+
+	g_signal_connect (G_OBJECT (selection), "changed",
+			  G_CALLBACK (on_group_table_clicked),
+			  NULL);
+
 	return groups_table;
 }
 
@@ -159,6 +165,7 @@ populate_groups_table (void)
 			                    &iter,
 					    COL_GROUP_NAME, item->group,
 					    COL_GROUP_GID, item->GID,
+			                    COL_GROUP_POINTER, group,
 					    -1);
 		}
 	}

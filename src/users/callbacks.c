@@ -18,9 +18,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>,
- *          Tambet Ingo <tambet@ximian.com> and
- *          Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Tambet Ingo <tambet@ximian.com>,
+ *          Arturo Espinosa <arturo@ximian.com> and
+ *          Carlos Garnacho Parro <garparr@teleline.es>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -36,20 +36,16 @@
 #include "passwd.h"
 #include "table.h"
 #include "user-settings.h"
+#include "users-table.h"
 #include "group-settings.h"
+#include "groups-table.h"
 
 extern XstTool *tool;
 
 extern GtkWidget *group_settings_all;
 extern GtkWidget *group_settings_members;
-
-
-void
-on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
-			 guint page_num, gpointer user_dat)
-{
-//	set_active_table (page_num);
-}
+extern GtkWidget *users_table;
+extern GtkWidget *groups_table;
 
 void
 on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
@@ -66,7 +62,7 @@ on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
 /* Users tab */
 
 void
-on_user_table_clicked (GtkWidget *w, gpointer data)
+on_user_table_clicked (GtkTreeSelection *selection, gpointer data)
 {
 	actions_set_sensitive (TABLE_USER, TRUE);
 }
@@ -111,7 +107,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 		/* user settings dialog */
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
 	} else {
-		/* user settings druid */
+		/* user settings simple dialog */
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 	}
@@ -119,22 +115,33 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	user_settings_prepare (ud);
 }
 
-void
-on_user_delete_clicked (GtkButton *button, gpointer user_data)
+static void
+on_user_delete_clicked_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
 	xmlNodePtr node;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 	
-	node = get_selected_row_node (TABLE_USER);
-	
+	gtk_tree_model_get (model, iter, COL_USER_POINTER, &node, -1);
 	delete_user (node);
+}
+
+void
+on_user_delete_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	
+	gtk_tree_selection_selected_foreach (selection, on_user_delete_clicked_foreach, NULL);
+	
+	xst_dialog_modify (tool->main_dialog);
+	users_table_update_content ();
+	actions_set_sensitive (TABLE_USER, FALSE);
 }
 
 /* Groups tab */
 
 void
-on_group_table_clicked (GtkWidget *w, gpointer user_data)
+on_group_table_clicked (GtkTreeSelection *selection, gpointer user_data)
 {
 	actions_set_sensitive (TABLE_GROUP, TRUE);
 }
@@ -169,16 +176,27 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	group_settings_prepare (gd);
 }
 
-void
-on_group_delete_clicked (GtkButton *button, gpointer user_data)
+static void
+on_group_delete_clicked_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
 	xmlNodePtr node;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 	
-	node = get_selected_row_node (TABLE_GROUP);
-	
+	gtk_tree_model_get (model, iter, COL_GROUP_POINTER, &node, -1);
 	delete_group (node);
+}
+
+void
+on_group_delete_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (groups_table));
+	
+	gtk_tree_selection_selected_foreach (selection, on_group_delete_clicked_foreach, NULL);
+	
+	xst_dialog_modify (tool->main_dialog);
+	groups_table_update_content ();
+	actions_set_sensitive (TABLE_GROUP, FALSE);
 }
 
 #ifdef NIS
@@ -351,11 +369,11 @@ void
 on_add_remove_button_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkTreeView *in, *out;
-	GtkTreeModel *in_model, *out_model;
-	GtkTreePath *path;
-	GtkTreeIter in_iter, out_iter;
-	gchar *name;
-	gint row;
+	GtkTreeSelection *selection;
+	GtkTreeIter iter;
+	GtkTreeModel *model;
+	GList *in_list, *out_list;
+	GList *element;
 	
 	g_return_if_fail (xst_tool_get_access (tool));
 	
@@ -363,48 +381,54 @@ on_add_remove_button_clicked (GtkButton *button, gpointer user_data)
 	out = g_object_get_data (G_OBJECT (button), "out");
 	
 	g_return_if_fail (in != NULL || out != NULL);
-	
-	in_model = gtk_tree_view_get_model (in);
-	out_model = gtk_tree_view_get_model (out);
-	
-	gtk_tree_view_get_cursor (in,
-	                          &path, NULL);
-	
-	g_return_if_fail (path != NULL);
-	
-	gtk_tree_model_get_iter (in_model, &in_iter, path);
-	
-	/* gets the user that is being removed from the 'in' list */
-	gtk_tree_model_get (in_model, &in_iter,
-	                    0, &name,
-	                    -1);
-	
-	/* appends the user to the 'out' list */	
-	gtk_tree_store_append (GTK_TREE_STORE (out_model), &out_iter, NULL);
-	gtk_tree_store_set (GTK_TREE_STORE (out_model),
-	                    &out_iter,
-			    0, name,
-			    -1);
 
-	/* removes the user from the 'in' list */
-	gtk_tree_store_remove (GTK_TREE_STORE (in_model), &in_iter);
+	in_list = g_object_get_data (G_OBJECT (in), "list");
+	out_list = g_object_get_data (G_OBJECT (out), "list");
+	
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (in));
+	model = gtk_tree_view_get_model (in);
+	gtk_tree_model_get_iter_first (model, &iter);
+	
+	do {
+		if (gtk_tree_selection_iter_is_selected (selection, &iter)) {
+			/* gets the user that is being removed from the 'in' list */
+			gtk_tree_model_get (model, &iter,
+	                                    1, &element,
+	                                    -1);
+			/* adds the user to the 'out' list */
+                        out_list = g_list_insert_sorted (out_list, element->data, my_strcmp);
+			
+			/* removes the user from the 'in' list */
+			in_list = g_list_remove (in_list, element->data);
+		}
+	} while (gtk_tree_model_iter_next (model, &iter));
+	
+	/* reattach GLists to GtkTreeViews */
+	g_object_set_data (G_OBJECT (in), "list", in_list);
+	g_object_set_data (G_OBJECT (out), "list", out_list);
+
+	/* Refresh the 'in' and 'out' lists */
+	clear_gtk_tree_list (in);
+	clear_gtk_tree_list (out);
+	populate_gtk_tree_list (in, in_list);
+	populate_gtk_tree_list (out, out_list);
 	
 	/* sets unsensitive the button again */
 	gtk_widget_set_sensitive (GTK_WIDGET (button), FALSE);
 }
 
 void
-on_list_select_row (GtkTreeView *list)
+on_list_select_row (GtkTreeSelection *selection, gpointer data)
 {
 	GtkTreePath *path;
+	GtkTreeView *list;
 	GtkWidget *widget;
-	gchar *data;
+	gchar *button;
 	
-	data = g_object_get_data (G_OBJECT (list), "button");
+	list = gtk_tree_selection_get_tree_view (selection);
+	button = g_object_get_data (G_OBJECT (list), "button");
 	
-	gtk_tree_view_get_cursor (list, &path, NULL);
-	widget = xst_dialog_get_widget (tool->main_dialog, data);
-	
+	widget = xst_dialog_get_widget (tool->main_dialog, button);
 	gtk_widget_set_sensitive (widget, TRUE);
 }
 

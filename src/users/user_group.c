@@ -56,24 +56,6 @@ static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 
 /* Global functions */
 
-GList*
-extract_members_list (GtkTreeView *list)
-{
-	GtkTreeModel *model = gtk_tree_view_get_model (list);
-	GtkTreeIter iter;
-	gchar *user;
-	GList *users_list = NULL;
-	
-	if (gtk_tree_model_get_iter_first (model, &iter) ==TRUE) {
-		do {
-			gtk_tree_model_get (model, &iter, 0, &user, -1);
-			users_list = g_list_prepend (users_list, user);
-		} while (gtk_tree_model_iter_next (model, &iter));
-	}
-
-	return users_list;
-}
-
 void
 show_error_message (gchar *parent_window, gchar *message)
 {
@@ -421,7 +403,7 @@ my_g_list_remove_duplicates (GList *list1, GList *list2)
 		}
 		
 		if (!found)
-			new_list = g_list_prepend (new_list, list1->data);
+			new_list = g_list_append (new_list, list1->data);
 
 		list1 = list1->next;
 	}
@@ -620,50 +602,6 @@ get_group_mainusers (xmlNodePtr group_node)
 }
 #endif
 
-void
-my_gtktree_list_append_items (GtkTreeView *list, GList *items)
-{
-	gchar *entry;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-
-	g_return_if_fail (list != NULL);
-	g_return_if_fail (GTK_IS_TREE_VIEW (list));
-	
-	model = gtk_tree_view_get_model (list);
-
-	while (items)
-	{
-		entry = items->data;
-		items = items->next;
-
-		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
-		gtk_tree_store_set (GTK_TREE_STORE (model),
-		                    &iter,
-				    0, entry,
-				    -1);
-	}
-}
-
-gint
-my_gtktree_list_append (GtkTreeView *list, gchar *text)
-{
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	
-        g_return_val_if_fail (list != NULL, -1);
-        g_return_val_if_fail (GTK_IS_TREE_VIEW (list), -1);
-	
-	gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
-	gtk_tree_store_set (GTK_TREE_STORE (model),
-	                    &iter,
-	                    0, text,
-	                    -1);
-	
-	/**/
-	return 0;
-}
-
 static gchar *user_search_string;
 
 void
@@ -682,4 +620,9 @@ user_query_string_get (void)
 		user_search_string = g_strdup ("all");
 	
 	return g_strdup (user_search_string);
+}
+
+gint my_strcmp (gconstpointer a, gconstpointer b)
+{
+	return strcmp ((const char *) a, (const char *) b);
 }

@@ -27,8 +27,9 @@
 enum {
 	COL_GROUP_NAME,
 	COL_GROUP_GID,
+	COL_GROUP_POINTER,
 
-	COL_GROUP_LAST,
+	COL_GROUP_LAST
 };
 
 typedef struct 
