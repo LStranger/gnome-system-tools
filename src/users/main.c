@@ -25,7 +25,6 @@
 #  include <config.h>
 #endif
 
-#include <gtk/gtk.h>
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
@@ -41,45 +40,78 @@
 #include "e-table.h"
 #include "callbacks.h"
 
+XstTool *tool;
+
 static void set_access_sensitivity (void)
 {
-	char *access_no[] = {"user_new", "user_chpasswd", "group_new", 
-		                   "user_settings_basic", "user_settings_advanced",
-		                   "group_settings_name_label", "group_settings_add", 
-		                   "group_settings_remove", "defs_min_uid", "defs_max_uid",
-				   "defs_min_gid", "defs_max_gid", "defs_passwd_max_days",
-				   "defs_passwd_min_days", "defs_passwd_warn", 
-				   "defs_passwd_min_len", "defs_mail_dir",
-				   "defs_create_home", NULL};
+	char *access_no[] = {"user_new", "user_chpasswd", "group_new",
+					 "user_settings_basic", "user_settings_advanced",
+					 "group_settings_name_label", "group_settings_add",
+					 "group_settings_remove", "defs_min_uid", "defs_max_uid",
+					 "defs_min_gid", "defs_max_gid", "defs_passwd_max_days",
+					 "defs_passwd_min_days", "defs_passwd_warn",
+					 "defs_passwd_min_len", "defs_mail_dir",
+					 "defs_create_home", NULL};
+	
 	char *access_yes[] = {"users_holder", "groups_holder", NULL};
 	char *unsensitive[] = {"user_delete", "user_settings", "user_chpasswd", "group_delete",
-		                     "group_settings", NULL};
+					   "group_settings", NULL};
 	int i;
 
 	/* Those widgets that won't be available if you don't have the access. */
 	for (i = 0; access_no[i]; i++)
-		gtk_widget_set_sensitive (tool_widget_get (access_no[i]), tool_get_access());
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, access_no[i]),
+							 xst_tool_get_access(tool));
 
 	/* Those widgets that will be available, even if you don't have the access. */
 	for (i = 0; access_yes[i]; i++)
-		gtk_widget_set_sensitive (tool_widget_get (access_yes[i]), TRUE);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, access_yes[i]),
+							 TRUE);
 
 	/* Those widgets you should never have access to, and will be activated later on. */
 	for (i = 0; unsensitive[i]; i++)
-		gtk_widget_set_sensitive (tool_widget_get (unsensitive[i]), FALSE);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, unsensitive[i]),
+							 FALSE);
 }
 
 static void
-update_complexity (ToolComplexity complexity)
+update_complexity ()
 {
-	tables_set_state (complexity == TOOL_COMPLEXITY_ADVANCED);
-	gtk_widget_set_sensitive (tool_widget_get ("defs_container"),
-				  complexity == TOOL_COMPLEXITY_ADVANCED);
+	XstDialogComplexity complexity;
+
+	complexity = tool->main_dialog->complexity;
+	
+	tables_set_state (complexity == XST_DIALOG_ADVANCED);
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "defs_container"),
+				  complexity == XST_DIALOG_ADVANCED);
 
 	user_actions_set_sensitive (FALSE);
 
 	clear_all_tables ();
 	populate_all_tables ();
+}
+
+static void
+connect_signals ()
+{
+	gtk_signal_connect (GTK_OBJECT (tool), "fill_gui",
+					GTK_SIGNAL_FUNC (transfer_xml_to_gui),
+					NULL);
+
+	gtk_signal_connect (GTK_OBJECT (tool), "fill_xml",
+					GTK_SIGNAL_FUNC (transfer_gui_to_xml),
+					NULL);
+
+	gtk_signal_connect_object (GTK_OBJECT (tool->main_dialog), "apply",
+						  GTK_SIGNAL_FUNC (xst_tool_save),
+						  GTK_OBJECT (tool));
+
+	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change",
+					GTK_SIGNAL_FUNC (update_complexity),
+					NULL);
+
+	/* Why not in xst_dialog ? */
+	glade_xml_signal_autoconnect (tool->main_dialog->gui);
 }
 
 int
@@ -89,19 +121,21 @@ main (int argc, char *argv[])
 
 	srand (time (NULL));
 
-	tool_init("users", argc, argv);
-	tool_set_complexity_func (update_complexity);
-	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
+	tool = xst_tool_init ("users", _("User/Group Settings - Ximian Setup Tools"), argc, argv);
 
-	tool_set_frozen(TRUE);
-	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
+	xst_dialog_freeze (tool->main_dialog);
+	
 	create_tables ();
-	tool_set_frozen(FALSE);
-  
-	gtk_widget_show (tool_get_top_window ());
-	set_access_sensitivity ();
-	gtk_main ();
+	connect_signals ();
 
+	/* What's the better way to do it? */
+	gtk_widget_set_sensitive (tool->main_dialog->complexity_button, TRUE);
+
+	set_access_sensitivity ();
+
+	xst_dialog_thaw (tool->main_dialog);
+	
+	xst_tool_main (tool);
+	
 	return 0;
 }
-

@@ -55,7 +55,7 @@ void clear_table (ETreeModel *model, ETreePath *root_path);
 void clear_all_tables (void);
 void populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node);
 void populate_all_tables (void);
-extern void create_tables (void);
+extern guint create_tables (void);
 void tables_set_state (gboolean state);
 xmlNodePtr get_selected_node (void);
 gboolean delete_selected_node (void);

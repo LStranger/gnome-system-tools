@@ -37,6 +37,8 @@
 #include "user_group.h"
 #include "callbacks.h"
 
+extern XstTool *tool;
+
 GtkWidget *user_table;
 GtkWidget *group_table;
 GtkWidget *net_group_table;
@@ -116,7 +118,6 @@ const gchar *basic_group_state = "\
   </grouping> \
 </ETableState>";
 
-
 /* Static functions */
 static gchar *get_row_color (ETreeModel *etm, ETreePath *path);
 
@@ -191,7 +192,7 @@ user_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, v
 	xmlNodePtr node;
 	gchar *field;
 
-	g_return_if_fail (tool_get_access ());
+	g_return_if_fail (xst_tool_get_access (tool));
 
 	node = e_tree_model_node_get_data (etm, path);
 	if (!node)
@@ -230,14 +231,14 @@ user_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, v
 			field = g_strdup ("comment");
 			break;
 		default:
-			g_warning ("user_set_value_at: wrong col nr: %d", col);
+			g_warning ("user_set_value_at: wrong col nr");
 			return;
 	}
 
 	xml_set_child_content (node, field, (gpointer)val);
 	g_free (field);
 
-	tool_set_modified(TRUE);
+	xst_dialog_modify (tool->main_dialog);
 }
 
 static void
@@ -246,7 +247,7 @@ group_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, 
 	xmlNodePtr node;
 	gchar *field;
 
-	g_return_if_fail (tool_get_access ());
+	g_return_if_fail (xst_tool_get_access (tool));
 
 	node = e_tree_model_node_get_data (etm, path);
 	if (!node)
@@ -267,20 +268,21 @@ group_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, 
 			field = g_strdup ("gid");
 			break;
 		default:
-			g_warning ("group_set_value_at: wrong col nr: %d", col);
+			g_warning ("group_set_value_at: wrong col nr");
 			return;
 	}
 
 	xml_set_child_content (node, field, (gpointer)val);
 	g_free (field);
 
-	tool_set_modified (TRUE);
+	xst_dialog_modify (tool->main_dialog);
 }
 
 static gboolean
 is_editable (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 {
-	return (tool_get_access () && (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED));
+	return (xst_tool_get_access (tool) &&
+		   (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED));
 }
 
 static void *
@@ -314,7 +316,7 @@ user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 		return get_row_color (etm, path);
 		break;
 	default:
-		g_warning ("user_value_at: wrong col nr: %d", col);
+		g_warning ("user_value_at: wrong col nr");
 		return NULL;
 	}
 
@@ -349,7 +351,7 @@ group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 		return get_row_color (etm, path);
 		break;
 	default:
-		g_warning ("group_value_at: wrong col nr: %d", col);
+		g_warning ("group_value_at: wrong col nr");
 		return NULL;
 	}
 
@@ -362,6 +364,17 @@ group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 	return xml_element_get_content (node);
 }
 
+static void *
+net_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
+{
+	xmlNodePtr node;
+
+	node = e_tree_model_node_get_data (etm, path);
+	if (!node)
+		return NULL;
+
+	return xml_get_child_content (node, "name");
+}
 
 static GtkWidget *
 create_container (void)
@@ -369,7 +382,7 @@ create_container (void)
 	GtkWidget *paned, *container;
 
 	paned = e_hpaned_new ();
-	container = tool_widget_get ("network_placeholder");
+	container = xst_dialog_get_widget (tool->main_dialog, "network_placeholder");
 
 	gtk_container_add (GTK_CONTAINER (container), paned);
 	e_paned_set_position (E_PANED (paned), 160); /* 160 is the width of left pane. */
@@ -422,7 +435,8 @@ user_cursor_change (ETable *table, gint row, gpointer user_data)
 	buf = xml_element_get_content (node);
 
 	label = g_strconcat ("Settings for user ", buf, NULL);
-	gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
+	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
+												"user_settings_frame")), label);
 	g_free (label);
 	g_free (buf);
 
@@ -445,7 +459,8 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 	buf = xml_element_get_content (node);
 
 	label = g_strconcat ("Settings for group ", buf, NULL);
-	gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
+	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
+												"group_settings_frame")), label);
 	g_free (label);
 	g_free (buf);
 
@@ -524,7 +539,7 @@ create_user_table (void)
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", user_cursor_change, NULL);
 	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_user_settings_clicked, NULL);
 
-	container = tool_widget_get ("users_holder");
+	container = xst_dialog_get_widget (tool->main_dialog, "users_holder");
 	gtk_container_add (GTK_CONTAINER (container), user_table);
 	gtk_widget_show (user_table);
 }
@@ -562,7 +577,7 @@ create_group_table (void)
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", group_cursor_change, NULL);
 	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_group_settings_clicked, NULL);
 
-	container = tool_widget_get ("groups_holder");
+	container = xst_dialog_get_widget (tool->main_dialog, "groups_holder");
 	gtk_container_add (GTK_CONTAINER (container), group_table);
 	gtk_widget_show (group_table);
 }
@@ -581,7 +596,7 @@ create_network_group_table (GtkWidget *paned)
 				   value_is_empty,
 				   value_to_string,
 				   icon_at,
-				   value_at,
+				   net_value_at,
 				   set_value_at,
 				   is_editable,
 				   NULL);
@@ -678,7 +693,7 @@ populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node)
 	e_tree_model_freeze (model);
 	for (node = root_node->childs; node; node = node->next)
 	{
-		if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_BASIC)
 			if (!check_node_complexity (node))
 				continue;
 
@@ -715,7 +730,7 @@ populate_all_tables (void)
 	}
 }
 
-extern void
+extern guint
 create_tables (void)
 {
 	GtkWidget *paned;
@@ -730,8 +745,7 @@ create_tables (void)
 	create_network_group_table (paned);
 	create_network_user_table (paned);
 
-	/* Popuplate tables */
-	populate_all_tables ();
+	return FALSE;
 }
 
 void
@@ -765,21 +779,24 @@ get_current_table (void)
 	ETable *table = NULL;
 	gint active_page;
 
-	w0 = tool_widget_get ("users_admin");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "users_admin");
 	active_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (w0));
 
 	switch (active_page)
 	{
-		case 0:
-			table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
-			break;
-		case 1:
-			table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
-			break;
-		default:
-			return NULL;
+	case 0:
+		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
+		break;
+	case 1:
+		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
+		break;
+	case 2:
+		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_group_table));
+		break;
+	default:
+		return NULL;
 	}
-
+	
 	return table;
 }
 

@@ -34,6 +34,8 @@
 #include "callbacks.h"
 #include "e-table.h"
 
+extern XstTool *tool;
+
 /* Structure with some hard-coded defaults, just in case any of the tags is not present. */
 /* These were taken form RH 6.2's default values. Any better suggestions? */
 /* NULL means not present for string members. */
@@ -157,17 +159,17 @@ transfer_logindefs_to_gui (void)
 
 	/* System settings. */
 
-	w0 = tool_widget_get ("defs_create_home");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "defs_create_home");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w0), logindefs.create_home);
 
-	w0 = tool_widget_get ("defs_mail_dir");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "defs_mail_dir");
 	gtk_entry_set_text (GTK_ENTRY (w0), logindefs.mailbox_dir);
 
 	/* User and group id's and passwords. */
 
 	for (i = 0; widgets[i]; i++)
 	{
-		spin = GTK_SPIN_BUTTON (tool_widget_get (widgets[i]));
+		spin = GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
 		gtk_spin_button_set_value (spin, (gfloat) values[i]);
 	}
 }
@@ -195,7 +197,7 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 
 	/* System settings. */
 
-	w0 = tool_widget_get ("defs_create_home");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "defs_create_home");
 	node = xml_element_find_first (root, "create_home");
 	if (!node)
 		node = xml_element_add (root, "create_home");
@@ -205,8 +207,7 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 	else
 		xml_element_set_content (node, "no");
 
-
-	w0 = tool_widget_get ("defs_mail_dir");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "defs_mail_dir");
 	val = gtk_editable_get_chars (GTK_EDITABLE (w0), 0, -1);
 	node = xml_element_find_first (root, "mailbox_dir");
 	if (!node)
@@ -219,7 +220,7 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 
 	for (i = 0; widgets[i]; i++)
 	{
-		spin = GTK_SPIN_BUTTON (tool_widget_get (widgets[i]));
+		spin = GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
 		val = g_strdup_printf ("%d", gtk_spin_button_get_value_as_int (spin));
 
 		node = xml_element_find_first (root, nodes[i]);
@@ -232,15 +233,26 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 }
 
 void
-transfer_xml_to_gui (xmlNodePtr root)
+transfer_xml_to_gui (XstTool *tool, gpointer data)
 {
+	xmlNodePtr root;
+
+	root = xml_doc_get_root (tool->config);
+
 	transfer_logindefs_from_xml (root);
 	transfer_logindefs_to_gui ();
+	
+	/* Popuplate tables */
+	populate_all_tables ();
 }
 
 void
-transfer_gui_to_xml (xmlNodePtr root)
+transfer_gui_to_xml (XstTool *tool, gpointer data)
 {
+	xmlNodePtr root;
+
+	root = xml_doc_get_root (tool->config);
+	
 	transfer_logindefs_to_xml (root);
 }
 

@@ -29,6 +29,8 @@
 #include "transfer.h"
 #include "e-table.h"
 
+extern XstTool *tool;
+
 /* Local globals */
 static int reply;
 
@@ -68,9 +70,9 @@ get_current_root_node (void)
 	xmlNodePtr node, root;
 	gint active_page;
 
-	w0 = tool_widget_get ("users_admin");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "users_admin");
 	active_page = gtk_notebook_get_current_page (GTK_NOTEBOOK (w0));
-	root = xml_doc_get_root (tool_config_get_xml());
+	root = xml_doc_get_root (tool->config);
 
 	switch (active_page)
 	{
@@ -91,19 +93,19 @@ get_current_root_node (void)
 xmlNodePtr
 get_user_root_node (void)
 {
-	return xml_element_find_first (xml_doc_get_root (tool_config_get_xml()), "userdb");
+	return xml_element_find_first (xml_doc_get_root (tool->config), "userdb");
 }
 
 xmlNodePtr
 get_group_root_node (void)
 {
-	return xml_element_find_first (xml_doc_get_root (tool_config_get_xml()), "groupdb");
+	return xml_element_find_first (xml_doc_get_root (tool->config), "groupdb");
 }
 
 xmlNodePtr
 get_nis_group_root_node (void)
 {
-	return xml_element_find_first (xml_doc_get_root (tool_config_get_xml()), "nis_groupdb");
+	return xml_element_find_first (xml_doc_get_root (tool->config), "nis_groupdb");
 }
 
 xmlNodePtr
@@ -140,33 +142,33 @@ adv_user_settings (xmlNodePtr node, gboolean show)
 	GtkWidget *win, *adv, *w0;
 	gchar *content;
 
-	win = tool_widget_get ("user_settings_dialog");
-	adv = tool_widget_get ("user_settings_advanced");
+	win = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
+	adv = xst_dialog_get_widget (tool->main_dialog, "user_settings_advanced");
 
 	if (show)
 	{
 		g_return_if_fail (node != NULL);
 
 		/* Shell. */
-		w0 = tool_widget_get ("user_settings_shell");
+		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
 		content = xml_get_child_content (node, "shell");
 		gtk_entry_set_text (GTK_ENTRY (w0), content);
 		g_free (content);
-		gtk_widget_set_sensitive (w0, tool_get_access());
+		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 
 		/* Home dir. */
-		w0 = tool_widget_get ("user_settings_home");
+		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_home");
 		content = xml_get_child_content (node, "home");
 		gtk_entry_set_text (GTK_ENTRY (w0), content);
 		g_free (content);
-		gtk_widget_set_sensitive (w0, tool_get_access());
+		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 
 		/* User ID. */
-		w0 = tool_widget_get ("user_settings_uid");
+		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 		content = xml_get_child_content (node, "uid");
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (content, NULL));
 		g_free (content);
-		gtk_widget_set_sensitive (w0, tool_get_access());
+		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 
 		/* Show advanced frame. */
 		gtk_widget_show (adv);
@@ -174,10 +176,14 @@ adv_user_settings (xmlNodePtr node, gboolean show)
 	else
 	{
 		/* Clear home, shell and user id. */
-		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")), "");
-		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_home")), "");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool_widget_get
-					("user_settings_uid")), 0);
+		gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+												    "user_settings_shell")), "");
+		
+		gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
+												    "user_settings_home")), "");
+		
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (
+			xst_dialog_get_widget (tool->main_dialog, "user_settings_uid")), 0);
 
 		/* Hide advanced frame. */
 		gtk_widget_hide (adv);
@@ -187,26 +193,18 @@ adv_user_settings (xmlNodePtr node, gboolean show)
 gboolean
 check_node_complexity (xmlNodePtr node)
 {
-	xmlNodePtr root_node;
-	gchar *name, *field, *content;
+	xmlNodePtr db_node;
+	gchar *field, *content;
 	gint min, max, val;
 
-	root_node = node->parent;
-	name = (gpointer) root_node->name;
+	db_node = get_db_node (node);
+	get_min_max (db_node, &min, &max);
 
-	if (!strcmp (name, "userdb"))
-	{
+	if (!strcmp (db_node->name, "userdb"))
 		field = g_strdup ("uid");
-		min = logindefs.new_user_min_id;
-		max = logindefs.new_user_max_id;
-	}
 
-	else if (!strcmp (name, "groupdb"))
-	{
+	else if (!strcmp (db_node->name, "groupdb"))
 		field = g_strdup ("gid");
-		min = logindefs.new_group_min_id;
-		max = logindefs.new_group_max_id;
-	}
 
 	else
 		return TRUE;
@@ -250,11 +248,11 @@ check_user_login (xmlNodePtr node, gchar *login)
 		GtkWindow *win;
 		GnomeDialog *dialog;
 
-		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, win));
 		gnome_dialog_run (dialog);
 		g_free (buf);
-		gtk_widget_grab_focus (tool_widget_get ("user_settings_name"));
+		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "user_settings_name"));
 
 		return FALSE;
 	}
@@ -274,12 +272,12 @@ check_user_uid (xmlNodePtr node, gchar *val)
 
 	if (node_exsists (node, "uid", val))
 	{
-		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented
 				(_("Such user id already exsists."), win));
 
 		gnome_dialog_run (dialog);
-		gtk_widget_grab_focus (tool_widget_get ("user_settings_uid"));
+		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "user_settings_uid"));
 		retval = FALSE;
 	}
 
@@ -303,12 +301,12 @@ check_user_home (xmlNodePtr node, gchar *val)
 
 	if (strlen (val) < 1)
 	{
-		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented
 				(_("Home directory must not be empty."), win));
 
 		gnome_dialog_run (dialog);
-		gtk_widget_grab_focus (tool_widget_get ("user_settings_home"));
+		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "user_settings_home"));
 		return FALSE;
 	}
 
@@ -334,7 +332,7 @@ check_user_group (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, -1);
 
-	combo = GTK_COMBO (tool_widget_get ("user_settings_group"));
+	combo = GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "user_settings_group"));
 	buf = gtk_editable_get_chars (GTK_EDITABLE (combo->entry), 0, -1);
 
 	group_node = get_corresp_field (node);
@@ -345,7 +343,7 @@ check_user_group (xmlNodePtr node)
 
 	if (!is_valid_name (buf))
 	{
-		win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented(_(
 				"Please set a valid main group name, with only lower-case letters,"
 				"\nor select one from pull-down menu."), win));
@@ -386,11 +384,11 @@ check_group_name (xmlNodePtr node, gchar *name)
 		GtkWindow *win;
 		GnomeDialog *dialog;
 
-		win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog"));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, win));
 		gnome_dialog_run (dialog);
 		g_free (buf);
-		gtk_widget_grab_focus (tool_widget_get ("group_settings_name"));
+		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "group_settings_name"));
 
 		return FALSE;
 	}
@@ -410,7 +408,7 @@ check_group_gid (xmlNodePtr node, gchar *val)
 
 	if (node_exsists (node, "gid", val))
 	{
-		win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog"));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented
 				(_("Such group id already exsists."), win));
 
@@ -446,7 +444,7 @@ get_min_max (xmlNodePtr db_node, gint *min, gint *max)
 xmlNodePtr
 get_corresp_field (xmlNodePtr node)
 {
-	xmlNodePtr root = xml_doc_get_root (tool_config_get_xml());
+	xmlNodePtr root = xml_doc_get_root (tool->config);
 	
 	node = get_db_node (node);
 
@@ -469,15 +467,15 @@ user_new_prepare (xmlNodePtr node)
 	GtkWidget *w0;
 	gboolean adv;
 
-	adv = (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED);
+	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
-	w0 = tool_widget_get ("user_settings_group");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	user_fill_settings_group (GTK_COMBO (w0), node, adv);
 
 	if (adv)
 		adv_user_new (node);
 
-	w0 = tool_widget_get ("user_settings_dialog");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
 	gtk_object_set_data (GTK_OBJECT (w0), "node", node);
 	gtk_widget_show (w0);
@@ -499,19 +497,18 @@ user_settings_prepare (xmlNodePtr node)
 	g_return_if_fail (node != NULL);
 	g_return_if_fail (login = xml_get_child_content (node, "login"));
 
-	/* Get tool state (advanced/basic */
-	adv = (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED);
-
+	/* Get tool state (advanced/basic) */
+	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
 	/* Fill login name entry */
-	w0 = tool_widget_get ("user_settings_name");
-	gtk_widget_set_sensitive (w0, tool_get_access());
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_name");
+	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	my_gtk_entry_set_text (w0, login);
 	g_free (login);
 
 	/* Fill groups combo, use node->parent to pass <userdb> */
-	w0 = tool_widget_get ("user_settings_group");
-	gtk_widget_set_sensitive (w0, tool_get_access());
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
+	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	user_fill_settings_group (GTK_COMBO (w0), node, adv);
 
 	txt = xml_get_child_content (node, "gid");
@@ -548,8 +545,8 @@ user_settings_prepare (xmlNodePtr node)
 
 	/* Fill comment entry */
 	comment = xml_get_child_content (node, "comment");
-	w0 = tool_widget_get ("user_settings_comment");
-	gtk_widget_set_sensitive (w0, tool_get_access());
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_comment");
+	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	my_gtk_entry_set_text (w0, comment);
 	g_free (comment);
 
@@ -558,7 +555,7 @@ user_settings_prepare (xmlNodePtr node)
 		adv_user_settings (node, TRUE);
 
 	/* Set dialog's title and show it */
-	w0 = tool_widget_get ("user_settings_dialog");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	txt = g_strdup_printf (_("Settings for User %s"), name);
 	g_free (name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
@@ -584,7 +581,7 @@ user_update (xmlNodePtr node)
 	xmlNodePtr user_node;
 	gboolean new = FALSE;   /* FALSE == update, TRUE == new */
 
-	adv = (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED);
+	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
 	if (strcmp (node->name, "user"))
 	{
@@ -592,11 +589,11 @@ user_update (xmlNodePtr node)
 		new = TRUE;
 	}
 
-	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_name")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_name")));
 	if (!check_user_login (node, buf))
 		ok = FALSE;
 
-	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_comment")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_comment")));
 	if (!check_user_comment (node, buf))
 		ok = FALSE;
 
@@ -620,7 +617,7 @@ user_update (xmlNodePtr node)
 
 	if (adv)
 	{
-		GtkSpinButton *spin = GTK_SPIN_BUTTON (tool_widget_get ("user_settings_uid"));
+		GtkSpinButton *spin = GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_settings_uid"));
 		gint i = gtk_spin_button_get_value_as_int (spin);
 
 		buf = g_strdup_printf ("%d", i);
@@ -629,11 +626,11 @@ user_update (xmlNodePtr node)
 
 		g_free (buf);
 
-		buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home")));
+		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_home")));
 		if (!check_user_home (node, buf))
 			ok = FALSE;
 
-		buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")));
+		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_shell")));
 		if (!check_user_shell (node, buf))
 			ok = FALSE;
 	}
@@ -673,7 +670,7 @@ user_passwd_dialog_prepare (xmlNodePtr node)
 
 	name = xml_get_child_content (node, "login");
 
-	w0 = tool_widget_get ("user_passwd_dialog");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
 	txt = g_strdup_printf (_("Password for User %s"), name);
 	g_free (name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
@@ -682,7 +679,7 @@ user_passwd_dialog_prepare (xmlNodePtr node)
 	gtk_object_set_data (GTK_OBJECT (w0), "name", node);
 
 #ifndef HAVE_LIBCRACK
-	gtk_widget_hide (tool_widget_get ("user_passwd_quality"));
+	gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "user_passwd_quality"));
 #endif
 }
 
@@ -695,7 +692,7 @@ check_login_delete (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, FALSE);
 
-	parent = GTK_WINDOW (tool_get_top_window ());
+	parent = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "users-admin"));
 	name = xml_get_child_content (node, "login");
 
 	if (!strcmp (name, "root"))
@@ -730,7 +727,7 @@ group_new_prepare (xmlNodePtr node)
 	/* Fill all users list, don't exclude anything */
 	group_fill_all_users_list (node, NULL);
 
-	w0 = tool_widget_get ("group_settings_dialog");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), _("Create New Group"));
 	gtk_object_set_data (GTK_OBJECT (w0), "node", node);
 	gtk_widget_show (w0);
@@ -746,8 +743,8 @@ group_settings_prepare (xmlNodePtr node)
 	g_return_if_fail (node != NULL);
 	g_return_if_fail (name = xml_get_child_content (node, "name"));
 
-	w0 = tool_widget_get ("group_settings_name");
-	gtk_widget_set_sensitive (w0, tool_get_access());
+	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
+	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	my_gtk_entry_set_text (w0, name);
 
 	/* Fill group members */
@@ -765,7 +762,7 @@ group_settings_prepare (xmlNodePtr node)
 
 	/* Show group settings dialog */
 
-	w0 = tool_widget_get ("group_settings_dialog");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 	txt = g_strdup_printf (_("Settings for Group %s"), name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (name);
@@ -784,7 +781,7 @@ group_update (xmlNodePtr node)
 	xmlNodePtr group_node;
 	gboolean new = FALSE;   /* FALSE == update, TRUE == new */
 
-	adv = (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED);
+	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
 	if (strcmp (node->name, "group"))
 	{
@@ -792,7 +789,7 @@ group_update (xmlNodePtr node)
 		new = TRUE;
 	}
 
-	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("group_settings_name")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "group_settings_name")));
 	if (!check_group_name (node, buf))
 		ok = FALSE;
 
@@ -829,7 +826,7 @@ check_group_delete (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, FALSE);
 
-	parent = GTK_WINDOW (tool_get_top_window ());
+	parent = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "users-admin"));
 	name = xml_get_child_content (node, "name");
 
 	if (!strcmp (name, "root"))
@@ -840,7 +837,7 @@ check_group_delete (xmlNodePtr node)
 		gnome_dialog_run (dialog);
 		g_free (txt);
 		return FALSE;
-        }
+	}
 
 	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), name);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
@@ -865,16 +862,16 @@ adv_user_new (xmlNodePtr node)
 	gfloat uid;
 
 	/* Set new first available UID */
-	w0 = tool_widget_get ("user_settings_uid");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
 	uid = g_strtod (find_new_id (node), NULL);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), uid);
 
 	/* Set bash as the default shell. */
-	/* FIXME: Maybe search for the first desirable shell for other systems */
+     /* FIXME: Maybe search for the first desirable shell for other systems */
 	w0 = tool_widget_get ("user_settings_shell");
 	gtk_entry_set_text (GTK_ENTRY (w0), "/bin/bash");
 
-	w0 = tool_widget_get ("user_settings_advanced");
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_advanced");
 	gtk_widget_show (w0);
 }
 
@@ -921,16 +918,16 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 	gint id;
 
 	/* Login */
-	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_name")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_name")));
 	xml_set_child_content (node, "login", buf);
 
 	/* Comment */
-	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_comment")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_comment")));
 	xml_set_child_content (node, "comment", buf);
 
 	/* Group */
 	buf = gtk_entry_get_text (
-			GTK_ENTRY (GTK_COMBO (tool_widget_get ("user_settings_group"))->entry));
+			GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "user_settings_group"))->entry));
 
 	buf = get_group_by_data (node->parent, "name", buf, "gid");
 	xml_set_child_content (node, "gid", buf);
@@ -938,15 +935,15 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 	/* TODO hardcoded default shell and home dir prefix are BAD */
 	/* Home */
 	buf = adv ?
-		gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home"))) :
+		gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_home"))) :
 		g_strdup_printf ("/home/%s", gtk_entry_get_text
-					  (GTK_ENTRY (tool_widget_get ("user_settings_name"))));
+					  (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_name"))));
 	
 	xml_set_child_content (node, "home", buf);
 
 	/* Shell */
 	buf = adv ?
-		gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_shell"))) :
+		gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_shell"))) :
 		g_strdup ("/bin/bash");
 
 	xml_set_child_content (node, "shell", buf);
@@ -954,8 +951,9 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 	/* UID */
 	if (adv)
 	{
-		id = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool_widget_get
-													 ("user_settings_uid")));
+		id = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
+									    (xst_dialog_get_widget (tool->main_dialog,
+													    "user_settings_uid")));
 		
 		xml_set_child_content (node, "uid", g_strdup_printf ("%d", id));
 	}
@@ -989,7 +987,7 @@ group_add_from_user (xmlNodePtr node)
 	group_node = group_add_blank_xml (node);
 
 	buf = gtk_entry_get_text (
-			GTK_ENTRY (GTK_COMBO (tool_widget_get ("user_settings_group"))->entry));
+			GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "user_settings_group"))->entry));
 
 	xml_set_child_content (group_node, "name", buf);
 
@@ -1004,12 +1002,12 @@ group_update_xml (xmlNodePtr node, gboolean adv)
 	gint row = 0;
 
 	/* Name */
-	buf = gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("group_settings_name")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "group_settings_name")));
 	xml_set_child_content (node, "name", buf);
 
 	/* Users */
 	del_group_users (node);
-	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
+	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
 
 	while (gtk_clist_get_text (clist, row++, 0, &buf))
 		add_group_users (node, buf);
@@ -1164,7 +1162,7 @@ group_fill_members_list (xmlNodePtr node)
 
 	entry[1] = NULL;
 
-	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
+	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_freeze (clist);
 
@@ -1195,11 +1193,11 @@ group_fill_all_users_list (xmlNodePtr node, GList *exclude)
 
 	entry[1] = NULL;
 
-	clist = GTK_CLIST (tool_widget_get ("group_settings_all"));
+	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_freeze (clist);
 
-	adv = (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED);
+	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 	tmp_list = get_user_list ("login", node, adv);
 	while (tmp_list)
 	{

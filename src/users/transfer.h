@@ -27,7 +27,7 @@
 #include <gnome-xml/parser.h>
 
 void transfer_config_saved(xmlNodePtr root);
-void transfer_xml_to_gui(xmlNodePtr root);
-void transfer_gui_to_xml(xmlNodePtr root);
+void transfer_xml_to_gui(XstTool *tool, gpointer data);
+void transfer_gui_to_xml(XstTool *tool, gpointer data);
 
 #endif /* TRANSFER_H */
