@@ -25,7 +25,6 @@
 #define _E_TABLE_H
 
 #include <gnome.h>
-#include <gal/e-table/e-table-simple.h>
 
 enum {
 	COL_SERVICE,
