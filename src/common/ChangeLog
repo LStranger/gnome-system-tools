@@ -1,5 +1,11 @@
 2001-05-29  Hans Petter Jansson  <hpj@ximian.com>
 
+	* xst-su.c (exec_su): If the child crashes, don't return. Previously, this
+	  would lead to an "invalid password" dialog being shown. Should fix bug
+	  #3106.
+
+2001-05-29  Hans Petter Jansson  <hpj@ximian.com>
+
 	* xst-su.c (exec_su): Don't close stdout and stderr. This means we can see
 	  debug output from programs.
 
