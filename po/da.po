@@ -11,12 +11,14 @@
 # swap -> swap (i mangel af bedre)
 # location -> sted (drejer sig om et fysisk sted, fx en by)
 # parent location -> ophavssted
+# system configuration -> systemopsætningen, systemets opsætning (konfiguration bliver lidt tungt)
+# ISP -> [internet]udbyder
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.1.0\n"
-"POT-Creation-Date: 2001-06-20 18:53+0200\n"
-"PO-Revision-Date: 2001-06-21 00:14+02:00\n"
+"POT-Creation-Date: 2001-06-21 20:32+0200\n"
+"PO-Revision-Date: 2001-06-21 12:37+02:00\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -723,10 +725,12 @@ msgid ""
 "Please enter a username for the new user in the space below. You may also "
 "enter a comment about the user, such as his or her real name. "
 msgstr ""
+"Indtast venligst et brugernavn til den nye bruger. Du kan også indtaste en "
+"kommentar om brugeren, som f.eks. vedkommendes rigtige navn."
 
 #: interfaces/boot.glade.in.h:18
 msgid "Starting your computer"
-msgstr "Start af maskinen"
+msgstr "Opstart af maskinen"
 
 #: interfaces/boot.glade.in.h:19
 msgid ""
@@ -735,15 +739,19 @@ msgid ""
 "\n"
 "To begin, click \"Next\". "
 msgstr ""
+"Denne hjælper er beregnet på at hjælpe dig\n"
+"med hurtigt og let at tilføje nye opstartsbilleder\n"
+"til systemet.\n"
+"\n"
+"For at begynde, klik på \"Næste\"."
 
 #: interfaces/boot.glade.in.h:23
-#, fuzzy
 msgid ""
 "Use this tool to set the installed operating\n"
 "systems to choose from at startup."
 msgstr ""
-"Brug denne dialog for at tilføje en ny kerne\n"
-"eller styresystem på din maskine."
+"Benyt dette værktøj til at angive de installerede\n"
+"styresystemer som skal vælges under opstart."
 
 #: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:87
 #: interfaces/shares.glade.in.h:57
@@ -751,9 +759,8 @@ msgid "_Add..."
 msgstr "_Tilføj..."
 
 #: interfaces/boot.glade.in.h:26
-#, fuzzy
 msgid "_Append:"
-msgstr "Tilføj:"
+msgstr "_Tilføjelse:"
 
 #: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:92
 #: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:89
@@ -761,39 +768,36 @@ msgid "_Delete"
 msgstr "_Slet"
 
 #: interfaces/boot.glade.in.h:28
-#, fuzzy
 msgid "_Device:"
-msgstr "Enhed:"
+msgstr "_Enhed:"
 
 #: interfaces/boot.glade.in.h:29 interfaces/shares.glade.in.h:65
 #: interfaces/users.glade.in.h:94
-#, fuzzy
 msgid "_Name:"
-msgstr "Navn:"
+msgstr "_Navn:"
 
 #: interfaces/boot.glade.in.h:30 interfaces/shares.glade.in.h:66
 msgid "_Path:"
-msgstr "Sti:"
+msgstr "_Sti:"
 
+# ikke superbrugeren, men roden af filsystemet
 #: interfaces/boot.glade.in.h:31
-#, fuzzy
 msgid "_Root:"
-msgstr "Root:"
+msgstr "_Rod:"
 
 #: interfaces/boot.glade.in.h:32 interfaces/location-manager.glade.in.h:39
 #: interfaces/shares.glade.in.h:69 interfaces/users.glade.in.h:98
 msgid "_Settings..."
-msgstr "Ind_stillinger..."
+msgstr "_Indstillinger..."
 
 #: interfaces/boot.glade.in.h:33
-#, fuzzy
 msgid "_Wait"
-msgstr "Vent"
+msgstr "_Vent"
 
+# skelnen mellem 'kernel' og 'OS' er sparet væk af pladshensyn (næppe væsentlig)
 #: interfaces/boot.glade.in.h:34
-#, fuzzy
 msgid "_seconds before loading default kernel or OS"
-msgstr "sekunder før indlæsning af standard kerne eller OS"
+msgstr "_sekunder før automatisk indlæsning af et styresystem"
 
 #: interfaces/common.glade.in.h:1
 msgid "Complexity"
@@ -805,13 +809,12 @@ msgid "Password:"
 msgstr "Adgangskode:"
 
 #: interfaces/common.glade.in.h:3
-#, fuzzy
 msgid "Run without password"
-msgstr "Indsæt adgangskode"
+msgstr "Kør uden adgangskode"
 
 #: interfaces/common.glade.in.h:4 src/common/xst-tool.c:698
 msgid "Scanning your system configuration."
-msgstr "Skanner din systemkonfiguration."
+msgstr "Skanner systemets opsætning."
 
 #: interfaces/common.glade.in.h:5
 msgid ""
@@ -822,6 +825,12 @@ msgid ""
 "Note, however, that this might damage the system configuration or downright "
 "cripple your computer."
 msgstr ""
+"Den platform du bruger, understøttes ikke af dette værktøj. Hvis du med "
+"sikkerhed ved at den virker ligesom en af platformene nedenfor, kan du vælge "
+"den og fortsætte.\n"
+"\n"
+"Bemærk dog at dette kan ødelægge systemopsætningen eller direkte forhindre "
+"maskinen i at virke."
 
 #: interfaces/common.glade.in.h:8
 msgid ""
@@ -830,10 +839,14 @@ msgid ""
 "To acquire such privileges, enter your root password below. If you don't\n"
 "specify a password, you will be unable to modify your system configuration."
 msgstr ""
+"For at køre dette værktøj skal du have administratorrettigheder.\n"
+"\n"
+"Indtast nedenfor din administratoradgangskode for at få disse rettigheder.\n"
+"Hvis du ikke angiver en adgangskode, kan du ikke ændre systemets opsætning."
 
 #: interfaces/common.glade.in.h:12
 msgid "Unsupported platform"
-msgstr "Platform som ikke er støttet"
+msgstr "Ikke-understøttet platform"
 
 #: interfaces/common.glade.in.h:13
 msgid "Ximian Setup Tools"
@@ -841,11 +854,11 @@ msgstr "Ximian opsætningsværktøjer"
 
 #: interfaces/common.glade.in.h:14
 msgid "Ximian Setup Tools - Password"
-msgstr "Ximian opsætningsværktøjer - Adgangskode"
+msgstr "Ximian opsætningsværktøjer - adgangskode"
 
 #: interfaces/disks.glade.in.h:1
 msgid "Add an unlisted import"
-msgstr "Tilføj en ikke-listet import"
+msgstr "Tilføj en ikke-listet importering"
 
 #: interfaces/disks.glade.in.h:2
 msgid "Add partition"
@@ -857,7 +870,7 @@ msgstr "Automatisk (opdag ved montering)"
 
 #: interfaces/disks.glade.in.h:4
 msgid "Bootable"
-msgstr "Opstartelig"
+msgstr "Kan opstarte"
 
 #: interfaces/disks.glade.in.h:5
 msgid "Check"
@@ -896,9 +909,9 @@ msgid ""
 "dedicated for a specific storage task, such as virtual memory or home "
 "directories for your users."
 msgstr ""
-"Diske er opdelt i flere stykker, kaldet partitioner. Hver partition er "
-"tildelt en specifik opgave med datalagring, såsom virtuelt lager eller "
-"hjemmekataloger for brugere."
+"Diske er opdelt i flere enheder som kaldes partitioner. Hver partition får "
+"tildelt en specifik datalagringsopgave som f.eks. at supplere den normale "
+"hukommelse eller indeholde hjemmemapper for brugerne."
 
 #: interfaces/disks.glade.in.h:13
 msgid "Ext2 (Linux)"
@@ -939,7 +952,7 @@ msgstr "NTFS (Windows NT & 2000)"
 
 #: interfaces/disks.glade.in.h:22
 msgid "Open settings dialog for selected import"
-msgstr "Åbn dialogen indstillinger for valgt import"
+msgstr "Åbn indstillingsvinduet for den valgte importering"
 
 #: interfaces/disks.glade.in.h:23
 msgid "Partition"
@@ -984,7 +997,7 @@ msgstr "Tilgængelige partitioner:"
 
 #: interfaces/memory.glade.in.h:2
 msgid "Available swap areas"
-msgstr "Tilgængelige swapområder:"
+msgstr "Tilgængelige swapområder"
 
 #: interfaces/memory.glade.in.h:3
 msgid "Browse..."
@@ -1004,7 +1017,7 @@ msgstr "Mb"
 
 #: interfaces/memory.glade.in.h:9
 msgid "New Swap Device"
-msgstr "Ny svop-enhed"
+msgstr "Ny swapenhed"
 
 #: interfaces/memory.glade.in.h:10
 msgid "OK"
@@ -1028,7 +1041,7 @@ msgstr "Prioritet:"
 
 #: interfaces/memory.glade.in.h:15
 msgid "Select  Swap File"
-msgstr "Vælg svop-fil"
+msgstr "Vælg swapfil"
 
 #: interfaces/memory.glade.in.h:18
 msgid "Size:"
@@ -1036,16 +1049,15 @@ msgstr "Størrelse:"
 
 #: interfaces/memory.glade.in.h:19
 msgid "Swap Settings"
-msgstr "Indstillinger for svop"
+msgstr "Indstillinger for swap"
 
 #: interfaces/memory.glade.in.h:20
-#, fuzzy
 msgid "Swap memory:"
-msgstr "Swap-hukommelse:"
+msgstr "Swaphukommelse:"
 
 #: interfaces/memory.glade.in.h:21
 msgid "Swap type:"
-msgstr "Svop-type:"
+msgstr "Swaptype:"
 
 #: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:86
 #: interfaces/time.glade.in.h:17
@@ -1059,7 +1071,7 @@ msgstr "Fje_rn"
 #: archiver/location-manager-capplet/location-manager-dialog.c:138
 #: interfaces/memory.glade.in.h:24
 msgid "_Settings"
-msgstr "Ind_stillinger"
+msgstr "_Indstillinger"
 
 #: interfaces/memory.glade.in.h:25
 msgid "file"
@@ -1094,18 +1106,19 @@ msgstr "Aliaser"
 msgid "Aliases Settings"
 msgstr "Aliasindstillinger"
 
+# hm, DNS-server = domain name server-server (ikke godt :-)
 #: interfaces/nameresolution.glade.in.h:7
 msgid ""
 "Assign aliases to IP addresses that may not be registered in the DNS or WINS "
 "servers, or to override or set new names for commonly used IP addresses. "
 msgstr ""
-"Tildel aliaser til IP-adresser som ikke kan registreres i DNS eller WINS "
-"servere, eller for at overskrive eller sætte nye navne for ofte brugte "
-"IP-adresser. "
+"Tildel aliaser til IP-adresser som ikke kan registreres i DNS- eller "
+"WINS-servere, eller for at overskrive eller angive nye navne til ofte "
+"benyttede IP-adresser."
 
 #: interfaces/nameresolution.glade.in.h:8
 msgid "Change the alias' IP address or its corresponding names."
-msgstr "Ændr aliasens IP-adresse eller dens tilsvarende navne."
+msgstr "Ændr aliasets IP-adresse eller dets tilsvarende navne."
 
 #: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:3
 #: interfaces/shares.glade.in.h:11 interfaces/users.glade.in.h:24
@@ -1199,7 +1212,7 @@ msgstr "Indstillinger for valgt alias"
 
 #: interfaces/nameresolution.glade.in.h:32
 msgid "Use WINS server:"
-msgstr "Brug WINS-tjener:"
+msgstr "Benyt WINS-server:"
 
 #: interfaces/nameresolution.glade.in.h:33
 msgid "Workgroup:"
@@ -1239,11 +1252,11 @@ msgstr "Kontonavn:"
 
 #: interfaces/network.glade.in.h:9
 msgid "Activate when the computer _starts"
-msgstr "Aktivér når datamaskinen _starter"
+msgstr "Aktivér når maskinen _starter"
 
 #: interfaces/network.glade.in.h:10
 msgid "Activate when the computer starts"
-msgstr "Aktivér når datamaskinen starter"
+msgstr "Aktivér når maskinen starter"
 
 #: interfaces/network.glade.in.h:11
 msgid "Activation"
@@ -1267,7 +1280,7 @@ msgstr "Avancerede indstillinger for PPP-forbindelse."
 
 #: interfaces/network.glade.in.h:17
 msgid "Aliases of other computers."
-msgstr "Alias for andre datamaskiner."
+msgstr "Alias for andre maskiner."
 
 #: interfaces/network.glade.in.h:18
 msgid "Allow activation control for all _users"
@@ -1287,19 +1300,19 @@ msgstr "Forbindelse"
 
 #: interfaces/network.glade.in.h:22
 msgid "Connection Settings"
-msgstr "Indstillinger for tilkobling"
+msgstr "Indstillinger for forbindelse"
 
 #: interfaces/network.glade.in.h:23
 msgid "Connection active"
-msgstr "Tilkobling aktiv"
+msgstr "Forbindelse aktiv"
 
 #: interfaces/network.glade.in.h:24
 msgid "Connections"
-msgstr "forbindelser"
+msgstr "Forbindelser"
 
 #: interfaces/network.glade.in.h:25
 msgid "Create a new Internet Connection "
-msgstr "Opret en ny Internet-forbindelse"
+msgstr "Opret en ny internetforbindelse"
 
 #: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:26
 #: src/network/connection.c:1094
@@ -1312,7 +1325,7 @@ msgstr "DNS"
 
 #: interfaces/network.glade.in.h:28
 msgid "DNS Servers"
-msgstr "DNS-tjenere"
+msgstr "DNS-servere"
 
 #: interfaces/network.glade.in.h:29
 msgid "DNS _Servers:"
@@ -1331,6 +1344,8 @@ msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
 msgstr ""
+"Indtast først det telefonnummer du bruger til at koble dig til internettet "
+"med. Dette nummer oplyser udbyderen dig om."
 
 #: interfaces/network.glade.in.h:36
 msgid "General"
@@ -1342,7 +1357,7 @@ msgstr "Værter"
 
 #: interfaces/network.glade.in.h:38
 msgid "How other computers are accessed."
-msgstr "Adgang til andre datamaskiner."
+msgstr "Adgang til andre maskiner."
 
 #: interfaces/network.glade.in.h:39
 msgid "How the IP address for this connection is determined"
@@ -1354,15 +1369,15 @@ msgstr "Hvordan IP-adresser for denne tilkobling bestemmes"
 
 #: interfaces/network.glade.in.h:41
 msgid "How the names of other computers are found."
-msgstr "Måden navne på andre datamaskiner bliver fundet."
+msgstr "Måden navne på andre maskiner bliver fundet ved."
 
 #: interfaces/network.glade.in.h:42
 msgid "How this computer is identified."
-msgstr "Hvordan identificeres denne pc."
+msgstr "Hvordan identificeres denne maskine."
 
 #: interfaces/network.glade.in.h:43
 msgid "How to dial up to the internet."
-msgstr "Måde hvorpå der forbindes til Internettet."
+msgstr "Måde hvorpå der forbindes til internettet."
 
 #: interfaces/network.glade.in.h:44
 msgid "IP Address"
@@ -1389,16 +1404,18 @@ msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr ""
+"Indtast nu som det næste brugernavnet og adgangskoden som udbyderen har "
+"tildelt dig."
 
 #: interfaces/network.glade.in.h:50
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
-msgstr ""
+msgstr "Giv nu kontoen et navn - det bruges til at identificere kontoen."
 
 #: interfaces/network.glade.in.h:51
 msgid "Options"
-msgstr "Alternativer"
+msgstr "Tilvalg"
 
 #: interfaces/network.glade.in.h:52
 msgid "Password (confirm):"
@@ -1414,7 +1431,7 @@ msgstr "Telefonnummer:"
 
 #: interfaces/network.glade.in.h:56
 msgid "Pppd _options:"
-msgstr "Alternativer for pppd:"
+msgstr "Tilvalg til pppd:"
 
 #: interfaces/network.glade.in.h:57
 msgid "Sea_rch Domains:"
@@ -1426,11 +1443,11 @@ msgstr "Vælg hvilken type forbindelse du vil tilføje."
 
 #: interfaces/network.glade.in.h:59
 msgid "Set _DNS servers manually"
-msgstr "Sæt _DNS-servere manuelt"
+msgstr "Angiv _DNS-servere manuelt"
 
 #: interfaces/network.glade.in.h:60
 msgid "Set as _default route"
-msgstr "Sæt som stan_dard rute"
+msgstr "Angiv som stan_dardrute"
 
 #: interfaces/network.glade.in.h:61
 msgid "Status"
@@ -1443,18 +1460,27 @@ msgid ""
 "how to proceed (go back, cancel\n"
 "or finish)."
 msgstr ""
+"Et resume af de nye kontodata\n"
+"kommer her, samt hjælp til hvordan\n"
+"man kommer videre (gå tilbage,\n"
+"annullér eller afslut)."
 
 #: interfaces/network.glade.in.h:66
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click "
 "\"Cancel\"."
 msgstr ""
+"Klik på \"Næste\" for at fortsætte med at konfigurere kontoen. Klik på "
+"\"Annullér\" for at afbryde."
 
 #: interfaces/network.glade.in.h:67
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
 msgstr ""
+"Benyt kommentaren til for fremtiden at identificere grænsefladen. "
+"Aktiveringskontrollering lader dig bestemme af hvem og hvornår forbindelser "
+"kan aktiveres."
 
 #: interfaces/network.glade.in.h:68
 msgid "User name:"
@@ -1470,7 +1496,7 @@ msgstr "Advarsel skrives ind her.."
 
 #: interfaces/network.glade.in.h:71
 msgid "WaveLAN"
-msgstr "'WaveLAN'"
+msgstr "WaveLAN"
 
 #: interfaces/network.glade.in.h:72
 msgid ""
@@ -1486,10 +1512,21 @@ msgid ""
 "\n"
 "Click the \"Next\" button to begin."
 msgstr ""
+"Velkommen til internettilkoblingshjælperen.\n"
+"\n"
+"Denne hjælper kan hjælpe dig med at opsætte\n"
+"en ny internetkonto.\n"
+"\n"
+"Før du begynder, skal du have et modem og\n"
+"en internetudbyder. Spørg venligst udbyderen\n"
+"om alle de oplysninger om tilkoblingen som\n"
+"du måtte mangle.\n"
+"\n"
+"Klik på \"Næste\" for at begynde."
 
 #: interfaces/network.glade.in.h:83
 msgid "Windows Networking"
-msgstr "Windows netværk"
+msgstr "Windows-netværk"
 
 #: interfaces/network.glade.in.h:84
 msgid "Wireless networking settings."
@@ -1531,7 +1568,7 @@ msgstr "_Domæne:"
 
 #: interfaces/network.glade.in.h:96
 msgid "_Enable windows networking (Samba)"
-msgstr "Anv_end Windows-netværk (Samba)"
+msgstr "Aktiv_er Windows-netværk (Samba)"
 
 #: interfaces/network.glade.in.h:97
 msgid "_Ethernet"
@@ -1563,15 +1600,15 @@ msgstr "_Modem (PPP)"
 
 #: interfaces/network.glade.in.h:104
 msgid "_Modem port:"
-msgstr "-Modem-port:"
+msgstr "Modem-p_ort:"
 
 #: interfaces/network.glade.in.h:105
 msgid "_Parallel Line"
-msgstr "_Parallel-linje"
+msgstr "_Parallel linje"
 
 #: interfaces/network.glade.in.h:106
 msgid "_Password:"
-msgstr "Adgangskode:"
+msgstr "_Adgangskode:"
 
 #: interfaces/network.glade.in.h:107
 msgid "_Primary:"
@@ -1579,11 +1616,11 @@ msgstr "_Primær:"
 
 #: interfaces/network.glade.in.h:108
 msgid "_Remote IP:"
-msgstr "Ekste-rn IP:"
+msgstr "Ekste_rn IP:"
 
 #: interfaces/network.glade.in.h:109
 msgid "_Restart if connection cuts or fails to start"
-msgstr "Gensta_rt hvis forbindelsen mistes eller mislykkes under opstart"
+msgstr "Gensta_rt hvis forbindelsen mistes eller ikke starter"
 
 #: interfaces/network.glade.in.h:110
 msgid "_Secondary:"
@@ -1591,7 +1628,7 @@ msgstr "_Sekundær:"
 
 #: interfaces/network.glade.in.h:111
 msgid "_Session ID:"
-msgstr "_Sessions-ID"
+msgstr "_Sessions-ID:"
 
 #: interfaces/network.glade.in.h:112
 msgid "_Start PPP as soon as modem connects"
@@ -1603,11 +1640,11 @@ msgstr "Undernetma_ske:"
 
 #: interfaces/network.glade.in.h:114
 msgid "_Update DNS when this connection becomes active"
-msgstr "Opdatér DNS når denne tilkobling bliver aktiveret"
+msgstr "_Opdatér DNS når denne tilkobling bliver aktiveret"
 
 #: interfaces/network.glade.in.h:115
 msgid "_Use remote IP as default gateway"
-msgstr "Br_ug ekstern IP som standard gateway"
+msgstr "Benyt _ekstern IP som standard-gateway"
 
 #: interfaces/network.glade.in.h:116
 msgid "_User name:"
@@ -1619,7 +1656,7 @@ msgstr "_WaveLAN"
 
 #: interfaces/network.glade.in.h:118
 msgid "_Workgroup:"
-msgstr "Arbejdsgruppe:"
+msgstr "Arbejds_gruppe:"
 
 #: interfaces/shares.glade.in.h:1
 msgid " Edit clients... "
@@ -1631,7 +1668,7 @@ msgstr " _Ændr klienter... "
 
 #: interfaces/shares.glade.in.h:3
 msgid "Access control"
-msgstr "Adgangskoontrol"
+msgstr "Adgangskontrol"
 
 #: interfaces/shares.glade.in.h:5 interfaces/users.glade.in.h:5
 msgid "Add..."
@@ -1639,7 +1676,7 @@ msgstr "Tilføj..."
 
 #: interfaces/shares.glade.in.h:6
 msgid "Allow writing"
-msgstr "Tillad skriving"
+msgstr "Tillad skrivning"
 
 #: interfaces/shares.glade.in.h:7
 msgid "Browseable"
@@ -1659,11 +1696,11 @@ msgstr "Kommentar:"
 
 #: interfaces/shares.glade.in.h:12
 msgid "Do not _remount this share after computer reboots"
-msgstr ""
+msgstr "Montér ikke denne deling i_gen efter maskinen har genstartet"
 
 #: interfaces/shares.glade.in.h:13
 msgid "Do not remount this share after computer reboots"
-msgstr ""
+msgstr "Montér ikke denne deling igen efter maskinen har genstartet"
 
 #: interfaces/shares.glade.in.h:15
 msgid "Export"
@@ -1694,8 +1731,8 @@ msgid ""
 "Exports are used to share directories on your computer with other computers "
 "over the network. "
 msgstr ""
-"Eksporteringer bruges til at dele kataloger på din maskine med andre "
-"maskiner over nettet."
+"Eksporteringer bruges til at dele mapper på din maskine med andre maskiner "
+"over nettet."
 
 #: interfaces/shares.glade.in.h:23
 msgid "Host:"
@@ -1718,13 +1755,12 @@ msgid "Import Settings--Samba Options (Obsolete)"
 msgstr "Samba-indstillinger for importering (forældet)"
 
 #: interfaces/shares.glade.in.h:28
-#, fuzzy
 msgid "Import _type:"
-msgstr "Opstartstype:"
+msgstr "Importerings_type:"
 
 #: interfaces/shares.glade.in.h:29
 msgid "Import type:"
-msgstr "Opstartstype:"
+msgstr "Importeringstype:"
 
 #: interfaces/shares.glade.in.h:30
 msgid "Imports"
@@ -1735,8 +1771,8 @@ msgid ""
 "Imports are directories which reside in other computers and are accessible "
 "to you through the network."
 msgstr ""
-"Importeringer er kataloger som ligger på andre maskiner og er tilgængelige "
-"for dig via nettet."
+"Importeringer er mapper som ligger på andre maskiner og er tilgængelige via "
+"nettet."
 
 #: interfaces/shares.glade.in.h:32 src/shares/imports.etspec.h:2
 msgid "Mount Point"
@@ -1752,7 +1788,7 @@ msgstr "Monteringsmuligheder"
 
 #: interfaces/shares.glade.in.h:37
 msgid "Mounting options"
-msgstr "Monteringsmuligheder"
+msgstr ""
 
 #: interfaces/shares.glade.in.h:38
 msgid "NFS"
@@ -2412,7 +2448,7 @@ msgstr "Overspringer faktisk gemning..."
 
 #: src/common/xst-tool.c:621
 msgid "Updating your system configuration."
-msgstr "Opdaterer din systemkonfiguration."
+msgstr "Opdaterer systemets opsætning."
 
 #: src/common/xst-tool.c:752
 msgid ""
