@@ -21,6 +21,10 @@
  * Authors: Tambet Ingo <tambet@ximian.com>.
  */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include <stdlib.h>
 #include <ctype.h>
 #include <gnome.h>

@@ -20,6 +20,10 @@
  *
  */
 
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
 #include "user-account-editor.h"
 
 static void user_account_editor_class_init (UserAccountEditorClass *class);
