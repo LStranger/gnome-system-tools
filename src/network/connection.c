@@ -956,6 +956,8 @@ connection_config_save (XstConnection *cxn)
 	tmp->modified = cxn->modified;
 	tmp->creating = cxn->creating;
 	tmp->frozen = cxn->frozen;
+	tmp->ip_config = cxn->ip_config;
+	tmp->tmp_ip_config = cxn->tmp_ip_config;
 	
 	connection_empty_gui (tmp);
 	if (!connection_validate (tmp)) {
