@@ -56,19 +56,25 @@ extern gboolean group_add (void);
 extern gboolean group_update (void);
 extern gchar *find_new_id (gchar from);
 extern gchar *find_new_key (gchar from);
-extern GList *group_fill_members_list (void);
+extern GList *group_fill_members_list (xmlNodePtr node);
 extern void group_fill_all_users_list (GList *member_rows);
 extern GList *get_group_list (gchar *field, gboolean adv);
 extern GList *get_user_list (gchar *field, gboolean adv);
-extern gchar *get_group_by_data (gchar *field, gchar *fdata, gchar *data);
 
+gchar *get_group_by_data (gchar *field, gchar *fdata, gchar *data);
 int basic_user_count (xmlNodePtr parent);
 xmlNodePtr basic_user_find_nth (xmlNodePtr parent, int n);
 int basic_group_count (xmlNodePtr parent);
 xmlNodePtr basic_group_find_nth (xmlNodePtr parent, int n);
 
-void adv_user_settings (gboolean show);
+void adv_user_settings (xmlNodePtr node, gboolean show);
 void adv_user_settings_new (void);
-void adv_user_settings_update (gchar *login);
+void adv_user_settings_update (xmlNodePtr node, gchar *login);
+
+gchar *my_xml_get_content (xmlNodePtr parent, gchar *name);
+GList *get_group_users (xmlNodePtr node);
+void del_group_users (xmlNodePtr node);
+void add_group_users (xmlNodePtr node, gchar *name);
+
 
 #endif /* USER_GROUP_H */

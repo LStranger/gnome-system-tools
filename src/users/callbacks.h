@@ -58,6 +58,9 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data);
 extern void
 on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data);
 
+void 
+user_passwd_dialog_show (xmlNodePtr node);
+
 extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
 

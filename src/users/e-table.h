@@ -25,33 +25,23 @@
 #define USER 1
 #define GROUP 2
 
+/* Functions for both tables */
+
 void e_table_create (void);
-void e_table_del (gchar del);
-void e_table_changed (gchar change, gboolean new);
-void *e_table_get (gchar get);
-
-gchar *e_table_get_user (gchar *node_name);
-void e_table_del_user (void);
-
-gchar *e_table_get_group (gchar *node_name);
-void e_table_del_group (void);
-
-xmlNodePtr e_table_get_table_data (gchar get);
-GList *e_table_get_group_users (void);
-
-void e_table_change_user (gchar *field, gchar *val);
-void e_table_change_group (gchar *field, gchar *val);
-
-gchar *e_table_get_group_by_data (gchar *field, gchar *fdata, gchar *data);
-
-void e_table_del_group_users (void);
-void e_table_add_group_users (gchar *name);
-
-void e_table_add_group (gchar *new_name);
-void e_table_add_user (gchar *login);
-
-void e_table_change_user_full (gchar *target_f, gchar *target_val, gchar *field, gchar *val);
-void e_table_add_group_users_full (gchar *name, gchar *val);
-
 void e_table_state (gboolean state);
+xmlNodePtr e_table_get_table_data (gchar get);
+
+/* User table functions. */
+
+xmlNodePtr e_table_get_current_user (void);
+void e_table_del_user (xmlNodePtr node);
+void e_table_change_user (xmlNodePtr parent, gchar *field, gchar *val);
+xmlNodePtr e_table_add_user (gchar *login);
+
+/* Group table functions. */
+
+xmlNodePtr e_table_get_current_group (void);
+void e_table_del_group (xmlNodePtr node);
+void e_table_change_group (xmlNodePtr parent, gchar *field, gchar *val);
+xmlNodePtr e_table_add_group (gchar *new_name);
 

@@ -96,21 +96,27 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gint gid, id = 0;
 	gboolean comp = FALSE;
 	GtkRequisition req;
+	xmlNodePtr node;
 
-	g_return_if_fail (login = e_table_get_user ("login"));
+	g_return_if_fail (node = e_table_get_current_user ());
+	g_return_if_fail (login = my_xml_get_content (node, "login"));
 
-	w0 = tool_widget_get ("user_settings_name");
-	gtk_widget_set_sensitive (w0, tool_get_access());
-	my_gtk_entry_set_text (w0, login);
+	/* Get tool state (advanced/basic */
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
 		comp = TRUE;
 
+	/* Fill login name entry */	
+	w0 = tool_widget_get ("user_settings_name");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	my_gtk_entry_set_text (w0, login);	
+
+	/* Fill groups combo */
 	w0 = tool_widget_get ("user_settings_group");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	user_fill_settings_group (GTK_COMBO (w0), comp);
 
-	gid = atoi (e_table_get_user ("gid"));
+	gid = atoi (my_xml_get_content (node, "gid"));
 
 	tmp_list = get_group_list ("gid", comp);
 	while (tmp_list)
@@ -135,19 +141,23 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 		g_free (txt);
 	}
 
-	comment = e_table_get_user ("comment");
+	/* Fill comment entry */
+	comment = my_xml_get_content (node, "comment");
 	w0 = tool_widget_get ("user_settings_comment");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	my_gtk_entry_set_text (w0, comment);
 
-	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-		adv_user_settings (TRUE);
-	
+	/* If state == advanced, fill advanced settings too. */
+	if (!comp)
+		adv_user_settings (node, TRUE);
+
+	/* Set dialog's title and show it */
 	w0 = tool_widget_get ("user_settings_dialog");
 	txt = g_strdup_printf (_("Settings for User %s"), name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 
+	/* Resize it to minimum */
 	gtk_widget_size_request (w0, &req);
 	gtk_window_set_default_size (GTK_WINDOW (w0), req.width, req.height);
 
@@ -156,27 +166,33 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_show (w0);
 }
 
-static void 
-user_passwd_dialog_show (void)
+void 
+user_passwd_dialog_show (xmlNodePtr node)
 {
 	GtkWidget *w0;
-	gchar *txt, *login;
+	gchar *txt, *name;
 
 	g_return_if_fail (tool_get_access());
-
-	login = e_table_get_user ("login");
+	g_return_if_fail (node != NULL);
+	g_return_if_fail (name = my_xml_get_content (node, "login"));
 
 	w0 = tool_widget_get ("user_passwd_dialog");
-	txt = g_strdup_printf (_("Password for User %s"), login);
+	txt = g_strdup_printf (_("Password for User %s"), name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
+
+	gtk_object_set_data (GTK_OBJECT (w0), "name", node);
 }
 
 extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 {
-	user_passwd_dialog_show ();
+	xmlNodePtr node;
+
+	g_return_if_fail (node = e_table_get_current_user ());
+
+	user_passwd_dialog_show (node);
 }
 
 extern void
@@ -209,9 +225,11 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	gchar *txt, *name;
 	GtkWindow *parent;
 	GnomeDialog *dialog;
+	xmlNodePtr node;
 
 	g_return_if_fail (tool_get_access());
-	g_return_if_fail (name = e_table_get_user ("login"));
+	g_return_if_fail (node = e_table_get_current_user ());
+	g_return_if_fail (name = my_xml_get_content (node, "login"));
 
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
 
@@ -233,7 +251,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
-		e_table_del_user ();
+		e_table_del_user (node);
 		tool_set_modified (TRUE);
 		user_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")),
@@ -250,15 +268,17 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget *w0;
 	GList *member_rows;
 	gchar *txt, *name;
-	
-	g_return_if_fail (name = e_table_get_group ("name"));
+	xmlNodePtr node;
+
+	g_return_if_fail (node = e_table_get_current_group ());
+	g_return_if_fail (name = my_xml_get_content (node, "name"));
 
 	w0 = tool_widget_get ("group_settings_name");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	my_gtk_entry_set_text (w0, name);
 
 	/* Fill group members */
-	member_rows = group_fill_members_list ();
+	member_rows = group_fill_members_list (node);
 
 	/* Fill all users list */
 	group_fill_all_users_list (member_rows);
@@ -296,9 +316,11 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	gchar *txt, *name;
 	GtkWindow *parent;
 	GnomeDialog *dialog;
+	xmlNodePtr node;
 
 	g_return_if_fail (tool_get_access());
-	g_return_if_fail (name = e_table_get_group ("name"));
+	g_return_if_fail (node = e_table_get_current_group ());
+	g_return_if_fail (name = my_xml_get_content (node, "name"));
 
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
 
@@ -320,7 +342,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
-		e_table_del_group ();
+		e_table_del_group (node);
 		tool_set_modified (TRUE);
 		group_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")),
@@ -349,7 +371,7 @@ user_settings_dialog_close (void)
 	g_list_free (list);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-		adv_user_settings (FALSE);
+		adv_user_settings (NULL, FALSE);
 
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_object_remove_data (GTK_OBJECT (w0), "new");
@@ -379,10 +401,7 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	new = GPOINTER_TO_UINT (gtk_object_get_data (GTK_OBJECT (w0), "new"));
 	
 	if (new)
-	{
-		if ((retval = user_add ()))
-			user_passwd_dialog_show ();
-	}
+		retval = user_add ();
 	else
 		retval = user_update ();
 
@@ -403,6 +422,7 @@ user_passwd_dialog_close (void)
 
 	w0 = tool_widget_get ("user_passwd_dialog");
 	gtk_widget_hide (w0);
+	gtk_object_remove_data (GTK_OBJECT (w0), "name");
 }
 
 extern void
@@ -450,18 +470,21 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget *win;
 	GnomeDialog *dialog;
 	gchar *msg, *err;
+	xmlNodePtr node;
 	
 	entry1 = GTK_ENTRY (tool_widget_get ("user_passwd_new"));
 	entry2 = GTK_ENTRY (tool_widget_get ("user_passwd_confirmation"));
 	quality = GTK_TOGGLE_BUTTON (tool_widget_get ("user_passwd_quality"));
 	win = tool_widget_get ("user_passwd_dialog");
 
+	node = gtk_object_get_data (GTK_OBJECT (win), "name");
+
 	new_passwd = gtk_entry_get_text (entry1);
 	confirm = gtk_entry_get_text (entry2);
 
 	/* Empty old contnents */
 	
-	err = passwd_set (new_passwd, confirm, gtk_toggle_button_get_active (quality));
+	err = passwd_set (node, new_passwd, confirm, gtk_toggle_button_get_active (quality));
 	switch ((int) err)
 	{
 	 case 0: /* The password is OK and has been set */

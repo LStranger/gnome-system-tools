@@ -32,8 +32,6 @@
 #include <crypt.h>
 #include "md5.h"
 
-#include "e-table.h"
-
 #define CRACK_DICT_PATH "/usr/lib/cracklib_dict"
 #define RANDOM_PASSWD_SIZE 6
 
@@ -55,11 +53,13 @@ passwd_get_random (void)
 }
 
 extern gchar *
-passwd_set (gchar *new_passwd, gchar *confirm, gboolean check_quality)
+passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_quality)
 {
 	gchar salt[9];
 	gchar *check_err;
 	gchar *password;
+
+	g_return_val_if_fail (node != NULL, (gchar *) -1);
 	
 	if (strcmp (new_passwd, confirm))
 		return (gchar *) -1;
@@ -73,7 +73,7 @@ passwd_set (gchar *new_passwd, gchar *confirm, gboolean check_quality)
 	else
 		password = g_strdup (crypt (new_passwd, passwd_rand_str (salt, 2)));
 
-	e_table_change_user ("password", password);
+	e_table_change_user (node, "password", password);
 	return (gchar *) 0;
 }
 

@@ -25,6 +25,7 @@
 
 #include "global.h"
 #include "user_group.h"
+#include "callbacks.h"
 #include "e-table.h"
 
 static gboolean is_valid_name (gchar *str);
@@ -42,6 +43,7 @@ user_add (void)
 	gchar *name, *gid;
 	GList *tmp_list;
 	gboolean found = FALSE;
+	xmlNodePtr node;
 
 	w0 = tool_widget_get ("user_settings_name");
 	new_user_name = gtk_entry_get_text (GTK_ENTRY (w0));
@@ -127,26 +129,29 @@ user_add (void)
 		
 		/* Cool: create group. */
 
-		e_table_add_group (new_group_name);
-		gid = e_table_get_group_by_data ("name", new_group_name, "gid");
+		node = e_table_add_group (new_group_name);
+		gid = my_xml_get_content (node, "gid");
 	}
  	else
 	{
-		gid = e_table_get_group_by_data ("name", new_group_name, "gid");
+		gid = get_group_by_data ("name", new_group_name, "gid");
 	}
 
 	/* Everything should be ok, let's create a new user */
 
-	e_table_add_user (new_user_name);
-	e_table_change_user_full ("login", new_user_name, "gid", gid);
+	node = e_table_add_user (new_user_name);
+	e_table_change_user (node, "gid", gid);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-		adv_user_settings_update (new_user_name);
+		adv_user_settings_update (node, new_user_name);
 
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
 	if (strlen (new_comment) > 0)
-		e_table_change_user_full ("login", new_user_name, "comment", new_comment);
+		e_table_change_user (node, "comment", new_comment);
+
+	/* Ask for password */
+	user_passwd_dialog_show (node);
 
 	return TRUE;
 }
@@ -163,10 +168,13 @@ user_update (void)
 	GList *tmp_list;
 	gboolean found = FALSE;
 	gboolean comp;
+	xmlNodePtr node, g_node;
+
+	g_return_val_if_fail (node = e_table_get_current_user (), FALSE);
+	g_return_val_if_fail (login = my_xml_get_content (node, "login"), FALSE);
 
 	w0 = tool_widget_get ("user_settings_name");
 	new_login = gtk_entry_get_text (GTK_ENTRY (w0));
-	login = e_table_get_user ("login");
 
 	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
 
@@ -191,23 +199,24 @@ user_update (void)
 			return FALSE;
 		}
 
-		e_table_change_user ("login", new_login);
+		e_table_change_user (node, "login", new_login);
 	}
 
+	/* Change comment if comment is changed. */
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
-	comment = e_table_get_user ("comment");
+	comment = my_xml_get_content (node, "comment");
 	
 	if (comment == NULL)
 	{
 		if (strlen (new_comment) > 0)
-			e_table_change_user ("comment", new_comment);
+			e_table_change_user (node, "comment", new_comment);
 	}
 	else if (strcmp (new_comment, comment))
-		e_table_change_user ("comment", new_comment);
+		e_table_change_user (node, "comment", new_comment);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-		adv_user_settings_update (new_login);
+		adv_user_settings_update (node, new_login);
 
 	/* Get selected group name */
 	
@@ -249,22 +258,15 @@ user_update (void)
 		}
 
 		/* Cool: create new group */
-/*
-		new_group = group_new ();
-		new_group->ug.name = g_strdup (new_group_name);
-		u->gid = new_group->ug.id;
-		
-		group_adv_list = g_list_append (group_adv_list, new_group);
-		if (!user_group_is_system (&new_group->ug))
-			group_basic_list = g_list_append (group_basic_list, new_group);
-*/
+
+		g_node = e_table_add_group (new_group_name);
+		gid = my_xml_get_content (g_node, "gid");
 	}
-	
+
 	else
-	{
-		gid = (e_table_get_group_by_data ("name", name, "gid"));
-		e_table_change_user ("gid", gid);
-	}
+		gid = get_group_by_data ("name", name, "gid");
+
+	e_table_change_user (node, "gid", gid);
 
 	return TRUE;
 }
@@ -301,6 +303,7 @@ group_add (void)
 	GList *tmp_list;
 	GtkCList *clist;
 	gint row;
+	xmlNodePtr node;
 
 	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
 
@@ -351,7 +354,7 @@ group_add (void)
 
 	/* Everything should be ok and we can add new group */
 
-	e_table_add_group (new_group_name);
+	node = e_table_add_group (new_group_name);
 	
 	/* Add group members */
 
@@ -359,7 +362,7 @@ group_add (void)
 
 	row = 0;
 	while (gtk_clist_get_text (clist, row++, 0, &tmp))
-		e_table_add_group_users_full (new_group_name, tmp);
+		add_group_users (node, tmp);
 
 	return TRUE;
 }
@@ -373,12 +376,15 @@ group_update (void)
 	gchar *txt, *name;
 	GtkCList *clist;
 	gint row;
+	xmlNodePtr node;
+
+	g_return_val_if_fail (node = e_table_get_current_group (), FALSE);
+	g_return_val_if_fail (name = my_xml_get_content (node, "name"), FALSE);
 	
 	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
 
 	w0 = tool_widget_get ("group_settings_name");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
-	name = e_table_get_group ("name");
 
 	if (strcmp (name, txt))
 	{
@@ -392,13 +398,13 @@ group_update (void)
 			return FALSE;
 		}
 		else
-			e_table_change_group ("name", txt);
+			e_table_change_group (node, "name", txt);
 	}
 
 	/* Update group members also */
 	/* First, free our old users list ... */
 
-	e_table_del_group_users ();
+	del_group_users (node);
 	
 	/* ... and then, build new one */
 
@@ -406,7 +412,7 @@ group_update (void)
 
 	row = 0;
 	while (gtk_clist_get_text (clist, row++, 0, &txt))
-		e_table_add_group_users (txt);
+		add_group_users (node, txt);
 
 	return TRUE;
 }
@@ -543,7 +549,7 @@ char_sort_func (gconstpointer a, gconstpointer b)
 }
 
 extern GList *
-group_fill_members_list (void)
+group_fill_members_list (xmlNodePtr node)
 {
 	GList *tmp_list;
 	GList *member_rows = NULL;
@@ -557,7 +563,7 @@ group_fill_members_list (void)
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_freeze (clist);
 
-	tmp_list = e_table_get_group_users ();
+	tmp_list = get_group_users (node);
 
 	while (tmp_list)
 	{
@@ -698,7 +704,7 @@ get_user_list (gchar *field, gboolean adv)
 }
 
 
-extern gchar *
+gchar *
 get_group_by_data (gchar *field, gchar *fdata, gchar *data)
 {
 	xmlNodePtr root, node, u;
@@ -833,7 +839,7 @@ basic_group_find_nth (xmlNodePtr parent, int n)
 }
 
 void
-adv_user_settings (gboolean show)
+adv_user_settings (xmlNodePtr node, gboolean show)
 {
 	GtkWidget *win, *w0;
 
@@ -841,25 +847,31 @@ adv_user_settings (gboolean show)
 	w0 = tool_widget_get ("user_settings_advanced");
 
 	if (show)
-	{	
+	{
+		g_return_if_fail (node != NULL);
+
+		/* Set shell, home and user id. */
 		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")),
-				e_table_get_user ("shell"));
+				my_xml_get_content (node, "shell"));
 
 		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_home")),
-				e_table_get_user ("home"));
+				my_xml_get_content (node, "home"));
 
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool_widget_get ("user_settings_uid")),
-				g_strtod (e_table_get_user ("uid"), NULL));
+				g_strtod (my_xml_get_content (node, "uid"), NULL));
 
+		/* Show advanced frame. */
 		gtk_widget_show (w0);
 	}
 	else
 	{
+		/* Clear home, shell and user id. */
 		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")), "");
 		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_home")), "");
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool_widget_get
 				("user_settings_uid")), 0);
 
+		/* Hide advanced frame. */
 		gtk_widget_hide (w0);
 	}
 }
@@ -874,28 +886,99 @@ adv_user_settings_new (void)
 }
 
 void
-adv_user_settings_update (gchar *login)
+adv_user_settings_update (xmlNodePtr node, gchar *login)
 {
 	gchar *new_shell;
 	gchar *new_home;
 	gint new_uid;
+
+	g_return_if_fail (node != NULL);
 
 	/* Shell */
 	new_shell = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_shell"))));
 
 	/* TODO Check if shell is valid */
 	if (strlen (new_shell) > 0)
-		e_table_change_user_full ("login", login, "shell", new_shell);
+		e_table_change_user (node, "shell", new_shell);
 
 	/* Home */	
 	new_home = (gtk_entry_get_text (GTK_ENTRY (tool_widget_get ("user_settings_home"))));
 	if (strlen (new_home) > 0)
-		e_table_change_user_full ("login", login, "home", new_home);
+		e_table_change_user (node, "home", new_home);
 
 	/* UID */
 	new_uid = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool_widget_get
 			("user_settings_uid")));
 
-	e_table_change_user_full ("login", login, "uid", g_strdup_printf ("%d", new_uid));
+	e_table_change_user (node, "uid", g_strdup_printf ("%d", new_uid));
+}
+
+gchar *
+my_xml_get_content (xmlNodePtr parent, gchar *name)
+{
+	xmlNodePtr node;
+
+	node = xml_element_find_first (parent, name);
+	if (!node)
+		return NULL;
+
+	return xml_element_get_content (node);
+}
+
+GList *
+get_group_users (xmlNodePtr node)
+{
+	GList *userlist = NULL;
+	xmlNodePtr users, u;
+
+	g_return_val_if_fail (node != NULL, NULL);
+
+	users = xml_element_find_first (node, "users");
+	if (!users)
+	{
+		g_warning ("get_group_users: can't get current group's users node.");
+		return NULL; 
+	}
+
+	for (u = xml_element_find_first (users, "user"); u; u = xml_element_find_next (u, "user"))
+		userlist = g_list_prepend (userlist, xml_element_get_content (u));
+
+	return userlist;
+}
+
+void
+del_group_users (xmlNodePtr node)
+{
+	xmlNodePtr users;
+
+	g_return_if_fail (node != NULL);
+
+	users = xml_element_find_first (node, "users");
+	if (!users)
+	{
+		g_warning ("e_table_del_group_users: can't get current group's users node.");
+		return; 
+	}
+
+	xml_element_destroy_children (users);
+}
+
+void
+add_group_users (xmlNodePtr node, gchar *name)
+{
+	xmlNodePtr users, u;
+
+	g_return_if_fail (node != NULL);
+
+	users = xml_element_find_first (node, "users");
+
+	if (!users)
+	{
+		g_warning ("add_group_users: can't get current group's users node.");
+		return; 
+	}
+
+	u = xml_element_add (users, "user");
+	xml_element_set_content (u, name);
 }
 
