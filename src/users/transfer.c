@@ -397,6 +397,7 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 	group *g;
 	GList *tmplist, *list;
 	gchar buf[15]; /*Max buf size for non-char tags */
+	gchar *tmp;
 
 	
 	/* Delete old users and make a new ones */
@@ -422,9 +423,9 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 		for (list = g_list_first (g->users); list; list = g_list_next (list))
 
 		{
-			buf = (gchar *)list->data;
+			tmp = list->data;
 			u_node = xml_element_add (users_node, "user");
-			xml_element_set_content (u_node, buf);
+			xml_element_set_content (u_node, tmp);
 		}
 	}
 }
