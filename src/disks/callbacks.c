@@ -35,6 +35,7 @@
 #include "disks-storage-cdrom.h"
 #include "disks-cdrom-disc.h"
 #include "disks-cdrom-disc-data.h"
+#include "disks-cdrom-disc-audio.h"
 #include "disks-partition.h"
 #include "disks-gui.h"
 #include "callbacks.h"
@@ -286,6 +287,31 @@ gst_on_browse_button_clicked (GtkWidget *button, gpointer gdata)
 				if (GST_IS_CDROM_DISC_DATA (disc))
 					gst_disks_cdrom_disc_data_browse (disc);
 			}
+		}
+	}
+}
+
+void
+gst_on_play_button_clicked (GtkWidget *button, gpointer gdata)
+{
+	GtkWidget             *treeview;
+	GtkTreeModel          *model;
+	GtkTreeIter            iter;
+	GtkTreeSelection      *selection;
+	GstDisksStorageCdrom  *cdrom;
+	GstCdromDiscAudio     *disc;
+	const gchar *device;
+
+	treeview = (GtkWidget *) gdata;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &cdrom, -1);
+		if (GST_IS_DISKS_STORAGE_CDROM (cdrom)) {
+			g_object_get (G_OBJECT (cdrom), "device", &device, 
+				      "disc", &disc, NULL);
+			if (GST_IS_CDROM_DISC_AUDIO (disc))
+				gst_disks_cdrom_disc_audio_play (disc, device);
 		}
 	}
 }

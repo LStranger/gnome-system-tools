@@ -35,6 +35,7 @@
 #include "disks-storage-cdrom.h"
 #include "disks-cdrom-disc.h"
 #include "disks-cdrom-disc-data.h"
+#include "disks-cdrom-disc-audio.h"
 #include "disks-gui.h"
 #include "callbacks.h"
 
@@ -339,6 +340,8 @@ gst_disks_gui_setup (GstDisksConfig *cfg)
 	GtkWidget *cd_change_mp_button;
 	GtkWidget *cd_mount_button, *cd_browse_button;
 	GtkWidget *cd_point_entry;
+	/* Cdrom Disc Audio Widgets */
+	GtkWidget *cd_play_button;
 
 	g_return_if_fail (cfg != NULL);
 
@@ -399,6 +402,13 @@ gst_disks_gui_setup (GstDisksConfig *cfg)
 			  G_CALLBACK (gst_on_browse_button_clicked),
 			  (gpointer) treeview);
 
+	/** Cdrom Disc Audio Widgets **/
+	/* Play button clicked */
+	cd_play_button = gst_dialog_get_widget (tool->main_dialog, "cd_play_button");
+	g_signal_connect (G_OBJECT (cd_play_button), "clicked",
+			  G_CALLBACK (gst_on_play_button_clicked),
+			  (gpointer) treeview);
+
 	/* Change Mount Point button callback */
 	cd_change_mp_button = gst_dialog_get_widget (tool->main_dialog, "cd_change_mp_button");
 	g_signal_connect (G_OBJECT (cd_change_mp_button), "clicked",
@@ -437,6 +447,8 @@ gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
 			speed);
 	}
 }
+
+/* Partition */
 void 
 gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 {
@@ -663,4 +675,40 @@ gst_disks_gui_setup_cdrom_disc_data (GstCdromDiscData *disc_data)
 	}
 
 	gtk_widget_show_all (data_cd_info);
+}
+
+/* CDROM Disc Audio */
+void
+gst_disks_gui_setup_cdrom_disc_audio (GstCdromDiscAudio *disc_audio)
+{
+	GtkWidget *num_tracks_label, *duration_label;
+	GtkWidget *tab_cdrom_label;
+	GtkWidget *data_cd_info, *audio_cd_info;
+	guint num_tracks;
+	gchar *duration;
+
+	num_tracks_label = gst_dialog_get_widget (tool->main_dialog, "cd_num_tracks_label");
+	duration_label = gst_dialog_get_widget (tool->main_dialog, "cd_duration_label");
+	tab_cdrom_label = gst_dialog_get_widget (tool->main_dialog, "tab_cdrom_label");
+	data_cd_info = gst_dialog_get_widget (tool->main_dialog, "data_cd_info");
+	audio_cd_info = gst_dialog_get_widget (tool->main_dialog, "audio_cd_info");
+
+	g_return_if_fail (GST_IS_CDROM_DISC_AUDIO (disc_audio));
+
+	gtk_label_set_text (GTK_LABEL (tab_cdrom_label), _("Audio CD-ROM"));
+
+	gtk_widget_hide (data_cd_info);
+
+	g_object_get (G_OBJECT (disc_audio), "num-tracks", &num_tracks,
+		      "duration", &duration, NULL);
+
+	gtk_label_set_text (GTK_LABEL (num_tracks_label),
+			    g_strdup_printf ("%d", num_tracks));
+
+	if (duration)
+		gtk_label_set_text (GTK_LABEL (duration_label), duration);
+	else
+		gtk_label_set_text (GTK_LABEL (duration_label), "");
+	
+	gtk_widget_show_all (audio_cd_info);
 }

@@ -31,6 +31,7 @@
 #include "disks-storage-cdrom.h"
 #include "disks-cdrom-disc.h"
 #include "disks-cdrom-disc-data.h"
+#include "disks-cdrom-disc-audio.h"
 #include "disks-gui.h"
 #include "transfer.h"
 
@@ -299,9 +300,9 @@ gst_disks_storage_cdrom_get_human_readable_status (GstDisksStorageCdrom *cdrom)
 		if (GST_IS_CDROM_DISC (disc)) {
 			if (GST_IS_CDROM_DISC_DATA (disc))
 				return g_strdup (_("Data Disc Inserted"));
-			/*else if (GST_IS_CDROM_DISC_AUDIO (disc))
+			else if (GST_IS_CDROM_DISC_AUDIO (disc))
 				return g_strdup (_("Audio Disc Inserted"));
-			else if (GST_IS_CDROM_DISC_MIXED (disc))
+			/*else if (GST_IS_CDROM_DISC_MIXED (disc))
 				return g_strdup (_("Audio and Data Disc Inserted"));
 			else if (GST_IS_CDROM_DISC_BLANK (disc))
 			return g_strdup (_("Blank Disc Inserted"));*/

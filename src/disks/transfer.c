@@ -475,8 +475,12 @@ gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom)
 				if (g_ascii_strcasecmp (buf, "data") == 0) {
 					g_free (buf);
 					
-					if (!disc || (disc && !GST_IS_CDROM_DISC_DATA (disc)))
+					if (!disc) {
 						disc = gst_cdrom_disc_data_new ();
+					} else if (!GST_IS_CDROM_DISC_DATA (disc)) {
+						g_object_unref (G_OBJECT (disc));
+						disc = gst_cdrom_disc_data_new ();
+					} else
 					
 					node = gst_xml_element_find_first (disc_info, "mounted");
 					if (node)
@@ -503,18 +507,44 @@ gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom)
 					}
 				} else if (g_ascii_strcasecmp (buf, "audio") == 0) {
 					g_free (buf);
-					disc = NULL;
-					/* TODO */
+
+					if (!disc) {
+						disc = gst_cdrom_disc_audio_new ();
+					} else if (!GST_IS_CDROM_DISC_AUDIO (disc)) {
+						g_object_unref (G_OBJECT (disc));
+						disc = gst_cdrom_disc_audio_new ();
+					}
+						
+					buf = gst_xml_get_child_content (disc_info, "audio-tracks");
+					if (buf) {
+						g_object_set (G_OBJECT (disc), "num-tracks",
+							      (guint) g_ascii_strtoull (buf, NULL, 10),
+							      NULL);
+						g_free (buf);
+					}
+
+					buf = gst_xml_get_child_content (disc_info, "duration");
+					if (buf) {
+						g_object_set (G_OBJECT (disc), "duration",
+							      buf, NULL);
+						g_free (buf);
+					}
 				} else if (g_ascii_strcasecmp (buf, "mixed") == 0) {
 					g_free (buf);
+					if (disc)
+						g_object_unref (G_OBJECT (disc));
 					disc = NULL;
 					/* TODO */
 				} else if (g_ascii_strcasecmp (buf, "blank") == 0) {
 					g_free (buf);
+					if (disc)
+						g_object_unref (G_OBJECT (disc));
 					disc = NULL;
 					/* TODO */
 				} else {
 					g_free (buf);
+					if (disc)
+						g_object_unref (G_OBJECT (disc));
 					disc = NULL;
 				}
 			}

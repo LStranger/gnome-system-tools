@@ -26,10 +26,10 @@
 
 #define GST_TYPE_CDROM_DISC_DATA         (gst_cdrom_disc_data_get_type ())
 #define GST_CDROM_DISC_DATA(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_CDROM_DISC_DATA, GstCdromDiscData))
-#define GST_CDROM_DISC_DATA_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GST_TYPE_CDROM_DIS_DATA, GstCdromDiscDataClass))
+#define GST_CDROM_DISC_DATA_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), GST_TYPE_CDROM_DISC_DATA, GstCdromDiscDataClass))
 #define GST_IS_CDROM_DISC_DATA(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), GST_TYPE_CDROM_DISC_DATA))
 #define GST_IS_CDROM_DISC_DATA_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), GST_TYPE_CDROM_DISC_DATA))
-#define GST_CDROM_DIS_DATA_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), GST_TYPE_CDROM_DISC_DATA, GstCdromDiscDataClass))
+#define GST_CDROM_DISC_DATA_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), GST_TYPE_CDROM_DISC_DATA, GstCdromDiscDataClass))
 
 typedef struct _GstCdromDiscData      GstCdromDiscData;
 typedef struct _GstCdromDiscDataClass GstCdromDiscDataClass;
