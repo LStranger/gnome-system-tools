@@ -3881,34 +3881,10 @@ are determined.</property>
 		<widget class="GtkTable" id="table19">
 		  <property name="visible">True</property>
 		  <property name="n_rows">5</property>
-		  <property name="n_columns">3</property>
+		  <property name="n_columns">4</property>
 		  <property name="homogeneous">False</property>
 		  <property name="row_spacing">6</property>
 		  <property name="column_spacing">12</property>
-
-		  <child>
-		    <widget class="GtkLabel" id="label175">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">&lt;span weight=&quot;bold&quot;&gt;Access Settings&lt;/span&gt;</property>
-		      <property name="use_underline">False</property>
-		      <property name="use_markup">True</property>
-		      <property name="justify">GTK_JUSTIFY_LEFT</property>
-		      <property name="wrap">False</property>
-		      <property name="selectable">False</property>
-		      <property name="xalign">0</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xpad">0</property>
-		      <property name="ypad">0</property>
-		    </widget>
-		    <packing>
-		      <property name="left_attach">0</property>
-		      <property name="right_attach">3</property>
-		      <property name="top_attach">0</property>
-		      <property name="bottom_attach">1</property>
-		      <property name="x_options">fill</property>
-		      <property name="y_options"></property>
-		    </packing>
-		  </child>
 
 		  <child>
 		    <widget class="GtkLabel" id="label176">
@@ -3960,36 +3936,6 @@ are determined.</property>
 		  </child>
 
 		  <child>
-		    <widget class="GnomeEntry" id="ppp_serial_port_g">
-		      <property name="visible">True</property>
-		      <property name="history_id"></property>
-		      <property name="max_saved">10</property>
-
-		      <child internal-child="entry">
-			<widget class="GtkEntry" id="ppp_serial_port">
-			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="editable">True</property>
-			  <property name="visibility">True</property>
-			  <property name="max_length">0</property>
-			  <property name="text" translatable="yes"></property>
-			  <property name="has_frame">True</property>
-			  <property name="invisible_char" translatable="yes">*</property>
-			  <property name="activates_default">False</property>
-			  <signal name="changed" handler="on_connection_modified"/>
-			</widget>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="left_attach">2</property>
-		      <property name="right_attach">3</property>
-		      <property name="top_attach">1</property>
-		      <property name="bottom_attach">2</property>
-		      <property name="y_options"></property>
-		    </packing>
-		  </child>
-
-		  <child>
 		    <widget class="GtkLabel" id="label177">
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Dial type:</property>
@@ -4009,6 +3955,54 @@ are determined.</property>
 		      <property name="right_attach">2</property>
 		      <property name="top_attach">2</property>
 		      <property name="bottom_attach">3</property>
+		      <property name="x_options">fill</property>
+		      <property name="y_options"></property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label178">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Modem volume:</property>
+		      <property name="use_underline">True</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0</property>
+		      <property name="yalign">0.2</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">ppp_volume</property>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">1</property>
+		      <property name="right_attach">2</property>
+		      <property name="top_attach">3</property>
+		      <property name="bottom_attach">4</property>
+		      <property name="x_options">fill</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label175">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">&lt;span weight=&quot;bold&quot;&gt;Access Settings&lt;/span&gt;</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">True</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">0</property>
+		      <property name="right_attach">4</property>
+		      <property name="top_attach">0</property>
+		      <property name="bottom_attach">1</property>
 		      <property name="x_options">fill</property>
 		      <property name="y_options"></property>
 		    </packing>
@@ -4044,34 +4038,10 @@ are determined.</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>
-		      <property name="right_attach">3</property>
+		      <property name="right_attach">4</property>
 		      <property name="top_attach">2</property>
 		      <property name="bottom_attach">3</property>
 		      <property name="y_options"></property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkLabel" id="label178">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Modem volume:</property>
-		      <property name="use_underline">True</property>
-		      <property name="use_markup">False</property>
-		      <property name="justify">GTK_JUSTIFY_LEFT</property>
-		      <property name="wrap">False</property>
-		      <property name="selectable">False</property>
-		      <property name="xalign">0</property>
-		      <property name="yalign">0.2</property>
-		      <property name="xpad">0</property>
-		      <property name="ypad">0</property>
-		      <property name="mnemonic_widget">ppp_volume</property>
-		    </widget>
-		    <packing>
-		      <property name="left_attach">1</property>
-		      <property name="right_attach">2</property>
-		      <property name="top_attach">3</property>
-		      <property name="bottom_attach">4</property>
-		      <property name="x_options">fill</property>
 		    </packing>
 		  </child>
 
@@ -4089,7 +4059,7 @@ are determined.</property>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>
-		      <property name="right_attach">3</property>
+		      <property name="right_attach">4</property>
 		      <property name="top_attach">3</property>
 		      <property name="bottom_attach">4</property>
 		      <property name="y_options"></property>
@@ -4097,58 +4067,176 @@ are determined.</property>
 		  </child>
 
 		  <child>
-		    <widget class="GtkHBox" id="hbox35">
+		    <widget class="GtkCheckButton" id="ppp_persist">
 		      <property name="visible">True</property>
-		      <property name="homogeneous">False</property>
-		      <property name="spacing">0</property>
-
-		      <child>
-			<widget class="GtkCheckButton" id="ppp_persist">
-			  <property name="visible">True</property>
-			  <property name="can_focus">True</property>
-			  <property name="label" translatable="yes">_Retry if the connection drops or fails to start</property>
-			  <property name="use_underline">True</property>
-			  <property name="relief">GTK_RELIEF_NORMAL</property>
-			  <property name="active">False</property>
-			  <property name="inconsistent">False</property>
-			  <property name="draw_indicator">True</property>
-			  <signal name="toggled" handler="on_connection_modified"/>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">False</property>
-			  <property name="fill">False</property>
-			</packing>
-		      </child>
-
-		      <child>
-			<widget class="GtkLabel" id="label198">
-			  <property name="visible">True</property>
-			  <property name="label" translatable="yes"></property>
-			  <property name="use_underline">False</property>
-			  <property name="use_markup">False</property>
-			  <property name="justify">GTK_JUSTIFY_LEFT</property>
-			  <property name="wrap">False</property>
-			  <property name="selectable">False</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">True</property>
-			  <property name="fill">False</property>
-			</packing>
-		      </child>
+		      <property name="can_focus">True</property>
+		      <property name="label" translatable="yes">_Retry if the connection drops or fails to start</property>
+		      <property name="use_underline">True</property>
+		      <property name="relief">GTK_RELIEF_NORMAL</property>
+		      <property name="active">False</property>
+		      <property name="inconsistent">False</property>
+		      <property name="draw_indicator">True</property>
+		      <signal name="toggled" handler="on_connection_modified"/>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">1</property>
-		      <property name="right_attach">3</property>
+		      <property name="right_attach">4</property>
 		      <property name="top_attach">4</property>
 		      <property name="bottom_attach">5</property>
 		      <property name="x_options">fill</property>
-		      <property name="y_options">fill</property>
+		      <property name="y_options"></property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkButton" id="ppp_autodetect_modem">
+		      <property name="visible">True</property>
+		      <property name="can_focus">True</property>
+		      <property name="relief">GTK_RELIEF_NORMAL</property>
+		      <signal name="clicked" handler="on_ppp_autodetect_modem_clicked" last_modification_time="Sun, 23 Mar 2003 19:22:08 GMT"/>
+
+		      <child>
+			<widget class="GtkAlignment" id="alignment24">
+			  <property name="visible">True</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xscale">0</property>
+			  <property name="yscale">0</property>
+
+			  <child>
+			    <widget class="GtkHBox" id="hbox39">
+			      <property name="visible">True</property>
+			      <property name="homogeneous">False</property>
+			      <property name="spacing">2</property>
+
+			      <child>
+				<widget class="GtkImage" id="image13">
+				  <property name="visible">True</property>
+				  <property name="stock">gtk-dialog-info</property>
+				  <property name="icon_size">4</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+				<packing>
+				  <property name="padding">0</property>
+				  <property name="expand">False</property>
+				  <property name="fill">False</property>
+				</packing>
+			      </child>
+
+			      <child>
+				<widget class="GtkLabel" id="label205">
+				  <property name="visible">True</property>
+				  <property name="label" translatable="yes">_Autodetect</property>
+				  <property name="use_underline">True</property>
+				  <property name="use_markup">False</property>
+				  <property name="justify">GTK_JUSTIFY_LEFT</property>
+				  <property name="wrap">False</property>
+				  <property name="selectable">False</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+				<packing>
+				  <property name="padding">0</property>
+				  <property name="expand">False</property>
+				  <property name="fill">False</property>
+				</packing>
+			      </child>
+			    </widget>
+			  </child>
+			</widget>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">3</property>
+		      <property name="right_attach">4</property>
+		      <property name="top_attach">1</property>
+		      <property name="bottom_attach">2</property>
+		      <property name="x_options">fill</property>
+		      <property name="y_options"></property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkCombo" id="ppp_serial_port_g">
+		      <property name="visible">True</property>
+		      <property name="value_in_list">False</property>
+		      <property name="allow_empty">True</property>
+		      <property name="case_sensitive">False</property>
+		      <property name="enable_arrow_keys">True</property>
+		      <property name="enable_arrows_always">False</property>
+
+		      <child internal-child="entry">
+			<widget class="GtkEntry" id="ppp_serial_port">
+			  <property name="visible">True</property>
+			  <property name="can_focus">True</property>
+			  <property name="editable">True</property>
+			  <property name="visibility">True</property>
+			  <property name="max_length">0</property>
+			  <property name="text" translatable="yes"></property>
+			  <property name="has_frame">True</property>
+			  <property name="invisible_char" translatable="yes">*</property>
+			  <property name="activates_default">False</property>
+			</widget>
+		      </child>
+
+		      <child internal-child="list">
+			<widget class="GtkList" id="combo-list1">
+			  <property name="visible">True</property>
+			  <property name="selection_mode">GTK_SELECTION_BROWSE</property>
+
+			  <child>
+			    <widget class="GtkListItem" id="listitem115">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="label" translatable="yes">/dev/modem</property>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkListItem" id="listitem116">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="label" translatable="yes">/dev/ttyS0</property>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkListItem" id="listitem117">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="label" translatable="yes">/dev/ttyS1</property>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkListItem" id="listitem118">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="label" translatable="yes">/dev/ttyS2</property>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkListItem" id="listitem119">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="label" translatable="yes">/dev/ttyS3</property>
+			    </widget>
+			  </child>
+			</widget>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">2</property>
+		      <property name="right_attach">3</property>
+		      <property name="top_attach">1</property>
+		      <property name="bottom_attach">2</property>
+		      <property name="y_options"></property>
 		    </packing>
 		  </child>
 		</widget>
@@ -4845,9 +4933,9 @@ Click the &quot;Next&quot; button to begin.</property>
 	<widget class="GnomeDruidPageStandard" id="ppp_druid_page1">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">1. ISP phone number</property>
-	  <property name="title_foreground">#d6e0081ee958</property>
-	  <property name="background">#c7801605e958</property>
-	  <property name="logo_background">#d6e0081ebb46</property>
+	  <property name="title_foreground">#ee10bfffebc8</property>
+	  <property name="background">#bed8083eebc8</property>
+	  <property name="logo_background">#46880820ff73</property>
 	  <property name="logo">connection-modem.png</property>
 
 	  <child internal-child="vbox">
@@ -5050,9 +5138,9 @@ Click the &quot;Next&quot; button to begin.</property>
 	<widget class="GnomeDruidPageStandard" id="ppp_druid_page2">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">2. Username and password</property>
-	  <property name="title_foreground">#d6e0081ee958</property>
-	  <property name="background">#c7801605e958</property>
-	  <property name="logo_background">#d6e0081ebb46</property>
+	  <property name="title_foreground">#ee10bfffebc8</property>
+	  <property name="background">#1890083febc8</property>
+	  <property name="logo_background">#46880820ff73</property>
 	  <property name="logo">users.png</property>
 
 	  <child internal-child="vbox">
@@ -5353,9 +5441,9 @@ Click the &quot;Next&quot; button to begin.</property>
 	<widget class="GnomeDruidPageStandard" id="ppp_druid_page3">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">3. Account name</property>
-	  <property name="title_foreground">#d6e0081ee958</property>
-	  <property name="background">#c7801605e958</property>
-	  <property name="logo_background">#d6e0081ebb46</property>
+	  <property name="title_foreground">#ee10bfffebc8</property>
+	  <property name="background">#6bf0083febc8</property>
+	  <property name="logo_background">#46880820ff73</property>
 	  <property name="logo">nameresolution_id.png</property>
 
 	  <child internal-child="vbox">

@@ -1,7 +1,7 @@
 /*
- * Datei für übersetzbare Zeichenketten, erzeugt durch Glade.
- * Fügen Sie diese Datei zur POTFILES.in Ihres Projektes hinzu.
- * Compilieren Sie sie NICHT als Teil Ihrer Anwendung.
+ * Archivo de cadenas traducibles generado por Glade.
+ * Añada este archivo a su POTFILES.in de su proyecto.
+ * NO lo compile como parte de su aplicación.
  */
 
 gchar *s = N_("Networking Settings");
@@ -95,14 +95,20 @@ gchar *s = N_("_Password:");
 gchar *s = N_("*");
 gchar *s = N_("*");
 gchar *s = N_("*");
-gchar *s = N_("<span weight=\"bold\">Access Settings</span>");
 gchar *s = N_("_Modem port:");
-gchar *s = N_("*");
 gchar *s = N_("_Dial type:");
+gchar *s = N_("_Modem volume:");
+gchar *s = N_("<span weight=\"bold\">Access Settings</span>");
 gchar *s = N_("Tones");
 gchar *s = N_("Pulses");
-gchar *s = N_("_Modem volume:");
 gchar *s = N_("_Retry if the connection drops or fails to start");
+gchar *s = N_("_Autodetect");
+gchar *s = N_("*");
+gchar *s = N_("/dev/modem");
+gchar *s = N_("/dev/ttyS0");
+gchar *s = N_("/dev/ttyS1");
+gchar *s = N_("/dev/ttyS2");
+gchar *s = N_("/dev/ttyS3");
 gchar *s = N_("Account");
 gchar *s = N_("Advanced PPP connection tuning.");
 gchar *s = N_("<span weight=\"bold\">PPP Settings</span>");

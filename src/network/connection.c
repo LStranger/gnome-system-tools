@@ -1775,6 +1775,31 @@ on_wvlan_adhoc_toggled (GtkWidget *w, GstConnection *cxn)
 }
 
 static void
+on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
+{
+	xmlNodePtr root;
+	gchar *dev;
+	xmlDoc *doc = gst_tool_run_get_directive (tool, _("Autodetecting modem device"), "detect_modem", NULL);
+	GtkWidget *w;
+
+	g_return_if_fail (doc != NULL);
+
+	root = gst_xml_doc_get_root (doc);
+	dev = gst_xml_get_child_content (root, "device");
+
+	if (strcmp (dev, "") == 0) {
+		w = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
+					    _("Could not autodetect modem device, check that this is not busy and that it's correctly attached"));
+		gtk_dialog_run (GTK_DIALOG (w));
+		gtk_widget_destroy (w);
+	} else {
+		gtk_entry_set_text (GTK_ENTRY (W ("ppp_serial_port")), dev);
+	}
+	
+	g_free (dev);
+}
+
+static void
 on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn)
 {
 	gboolean active;
@@ -1898,10 +1923,6 @@ fill_ppp (GstConnection *cxn)
 static void
 fill_ppp_adv (GstConnection *cxn)
 {
-#warning FIXME
-#if 0	
-	gnome_entry_load_history (GNOME_ENTRY (W ("ppp_serial_port_g")));
-#endif	
 	SET_STR ("ppp_", serial_port);
 	SET_BOOL ("ppp_", stupid);
 	SET_BOOL ("ppp_", set_default_gw);
@@ -1942,6 +1963,7 @@ hookup_callbacks (GstConnection *cxn)
 		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
 		{ "on_ppp_update_dns_toggled", on_ppp_update_dns_toggled },
+		{ "on_ppp_autodetect_modem_clicked", on_ppp_autodetect_modem_clicked },
 		{ "on_ip_address_focus_out", on_ip_address_focus_out },
 		{ "on_ip_netmask_focus_out", on_ip_address_focus_out },
 		{ NULL }
