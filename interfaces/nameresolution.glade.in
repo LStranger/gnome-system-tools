@@ -21,6 +21,11 @@
   <class>GnomeApp</class>
   <name>nameresolution_admin</name>
   <visible>False</visible>
+  <signal>
+    <name>delete_event</name>
+    <handler>on_nameresolution_admin_delete_event</handler>
+    <last_modification_time>Thu, 14 Dec 2000 01:20:34 GMT</last_modification_time>
+  </signal>
   <title>Name Resolution Administration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -53,8 +58,14 @@
 
       <widget>
 	<class>GtkNotebook</class>
-	<name>notebook1</name>
+	<name>nameresolution_notebook</name>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>switch_page</name>
+	  <handler>on_nameresolution_notebook_switch_page</handler>
+	  <after>True</after>
+	  <last_modification_time>Sat, 16 Dec 2000 07:40:49 GMT</last_modification_time>
+	</signal>
 	<show_tabs>True</show_tabs>
 	<show_border>True</show_border>
 	<tab_pos>GTK_POS_TOP</tab_pos>
@@ -114,7 +125,7 @@
 		<widget>
 		  <class>GnomePixmap</class>
 		  <name>pixmap2</name>
-		  <filename>computer.png</filename>
+		  <filename>nameresolution.png</filename>
 		</widget>
 	      </widget>
 
@@ -138,7 +149,8 @@
 
 	    <widget>
 	      <class>GtkFrame</class>
-	      <name>frame4</name>
+	      <name>hostname_frame</name>
+	      <sensitive>False</sensitive>
 	      <label>Host</label>
 	      <label_xalign>0</label_xalign>
 	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
@@ -160,7 +172,7 @@
 
 		<widget>
 		  <class>GtkLabel</class>
-		  <name>label19</name>
+		  <name>hostname_label</name>
 		  <label>Host name:</label>
 		  <justify>GTK_JUSTIFY_CENTER</justify>
 		  <wrap>False</wrap>
@@ -215,7 +227,8 @@
 
 		<widget>
 		  <class>GtkLabel</class>
-		  <name>label17</name>
+		  <name>hostname_reverse_label</name>
+		  <sensitive>False</sensitive>
 		  <label>Reverse:</label>
 		  <justify>GTK_JUSTIFY_CENTER</justify>
 		  <wrap>False</wrap>
@@ -268,7 +281,8 @@
 
 	    <widget>
 	      <class>GtkFrame</class>
-	      <name>frame5</name>
+	      <name>domain_frame</name>
+	      <sensitive>False</sensitive>
 	      <label>Domain</label>
 	      <label_xalign>0</label_xalign>
 	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
@@ -290,7 +304,7 @@
 
 		<widget>
 		  <class>GtkLabel</class>
-		  <name>labelxx0</name>
+		  <name>domain_label</name>
 		  <label>Domain:</label>
 		  <justify>GTK_JUSTIFY_CENTER</justify>
 		  <wrap>False</wrap>
@@ -345,7 +359,8 @@
 
 		<widget>
 		  <class>GtkLabel</class>
-		  <name>label18</name>
+		  <name>domain_reverse_label</name>
+		  <sensitive>False</sensitive>
 		  <label>Reverse:</label>
 		  <justify>GTK_JUSTIFY_RIGHT</justify>
 		  <wrap>False</wrap>
@@ -398,7 +413,7 @@
 
 	    <widget>
 	      <class>GtkTable</class>
-	      <name>table5</name>
+	      <name>description_table</name>
 	      <border_width>4</border_width>
 	      <rows>2</rows>
 	      <columns>2</columns>
@@ -413,7 +428,7 @@
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label21</name>
+		<name>workgroup_label</name>
 		<label>Workgroup:</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
@@ -439,7 +454,7 @@
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label22</name>
+		<name>description_label</name>
 		<label>Description:</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
@@ -557,7 +572,7 @@
 
 	    <widget>
 	      <class>GtkFrame</class>
-	      <name>frame6</name>
+	      <name>dns_frame</name>
 	      <label>Domain Name Service (DNS)</label>
 	      <label_xalign>0</label_xalign>
 	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
@@ -628,6 +643,11 @@
 		    <handler>tool_modified_cb</handler>
 		    <last_modification_time>Wed, 29 Nov 2000 03:24:41 GMT</last_modification_time>
 		  </signal>
+		  <signal>
+		    <name>changed</name>
+		    <handler>on_dns_ip_changed</handler>
+		    <last_modification_time>Thu, 14 Dec 2000 06:05:31 GMT</last_modification_time>
+		  </signal>
 		  <editable>True</editable>
 		  <text_visible>True</text_visible>
 		  <text_max_length>0</text_max_length>
@@ -650,7 +670,7 @@
 
 		<widget>
 		  <class>GtkLabel</class>
-		  <name>label53</name>
+		  <name>dns_ip_label</name>
 		  <label>New server:</label>
 		  <justify>GTK_JUSTIFY_RIGHT</justify>
 		  <wrap>False</wrap>
@@ -695,7 +715,7 @@
 
 		<widget>
 		  <class>GtkLabel</class>
-		  <name>label54</name>
+		  <name>dns_list_label</name>
 		  <label>Existing:</label>
 		  <justify>GTK_JUSTIFY_RIGHT</justify>
 		  <wrap>False</wrap>
@@ -721,13 +741,14 @@
 
 		<widget>
 		  <class>GtkButton</class>
-		  <name>dns_add</name>
+		  <name>dns_ip_add</name>
 		  <width>70</width>
+		  <sensitive>False</sensitive>
 		  <can_focus>True</can_focus>
 		  <signal>
 		    <name>clicked</name>
-		    <handler>on_dns_add_clicked</handler>
-		    <last_modification_time>Wed, 17 May 2000 23:03:40 GMT</last_modification_time>
+		    <handler>on_dns_ip_add_clicked</handler>
+		    <last_modification_time>Thu, 14 Dec 2000 06:30:39 GMT</last_modification_time>
 		  </signal>
 		  <signal>
 		    <name>clicked</name>
@@ -800,7 +821,7 @@
 
 	  <widget>
 	    <class>GtkHBox</class>
-	    <name>hbox4</name>
+	    <name>wins_box</name>
 	    <homogeneous>False</homogeneous>
 	    <spacing>0</spacing>
 	    <child>
@@ -836,7 +857,6 @@
 	    <widget>
 	      <class>GtkEntry</class>
 	      <name>wins_ip</name>
-	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -854,7 +874,7 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <child_name>Notebook:tab</child_name>
-	  <name>label13</name>
+	  <name>dns_tab_label</name>
 	  <label>Servers</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
@@ -866,7 +886,7 @@
 
 	<widget>
 	  <class>GtkVBox</class>
-	  <name>vbox4</name>
+	  <name>searchdomain_container</name>
 	  <border_width>4</border_width>
 	  <homogeneous>False</homogeneous>
 	  <spacing>4</spacing>
@@ -938,6 +958,7 @@
 		<class>GtkButton</class>
 		<name>searchdomain_add</name>
 		<width>70</width>
+		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
 		<signal>
 		  <name>clicked</name>
@@ -980,6 +1001,11 @@
 		  <name>activate</name>
 		  <handler>tool_modified_cb</handler>
 		  <last_modification_time>Tue, 22 Aug 2000 08:02:21 GMT</last_modification_time>
+		</signal>
+		<signal>
+		  <name>changed</name>
+		  <handler>on_searchdomain_changed</handler>
+		  <last_modification_time>Thu, 14 Dec 2000 06:05:40 GMT</last_modification_time>
 		</signal>
 		<editable>True</editable>
 		<text_visible>True</text_visible>
@@ -1096,7 +1122,7 @@
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label55</name>
+		<name>searchdomain_label</name>
 		<label>New domain:</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
@@ -1122,7 +1148,7 @@
 
 	      <widget>
 		<class>GtkLabel</class>
-		<name>label56</name>
+		<name>searchdomain_list_label</name>
 		<label>Existing:</label>
 		<justify>GTK_JUSTIFY_RIGHT</justify>
 		<wrap>False</wrap>
@@ -1171,7 +1197,7 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <child_name>Notebook:tab</child_name>
-	  <name>label15</name>
+	  <name>searchdomain_tab_label</name>
 	  <label>Search Domains</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
@@ -1187,6 +1213,56 @@
 	  <border_width>8</border_width>
 	  <homogeneous>False</homogeneous>
 	  <spacing>8</spacing>
+
+	  <widget>
+	    <class>GtkHBox</class>
+	    <name>hbox18</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>8</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkAlignment</class>
+	      <name>alignment12</name>
+	      <border_width>8</border_width>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xscale>1</xscale>
+	      <yscale>1</yscale>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+
+	      <widget>
+		<class>GnomePixmap</class>
+		<name>pixmap3</name>
+		<filename>nameresolution.png</filename>
+	      </widget>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label57</name>
+	      <label>Assign aliases to IP addresses that may not be registered in the DNS or WINS servers, or to override or set new names for commonly used IP addresses. </label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>True</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+	  </widget>
 
 	  <widget>
 	    <class>GtkHBox</class>
@@ -1227,7 +1303,7 @@
 		  <last_modification_time>Wed, 17 May 2000 23:06:30 GMT</last_modification_time>
 		</signal>
 		<columns>2</columns>
-		<column_widths>80,80</column_widths>
+		<column_widths>80,204</column_widths>
 		<selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 		<show_titles>True</show_titles>
 		<shadow_type>GTK_SHADOW_IN</shadow_type>
@@ -1249,10 +1325,10 @@
 		  <class>GtkLabel</class>
 		  <child_name>CList:title</child_name>
 		  <name>label42</name>
-		  <label>Names</label>
-		  <justify>GTK_JUSTIFY_CENTER</justify>
+		  <label> Names</label>
+		  <justify>GTK_JUSTIFY_LEFT</justify>
 		  <wrap>False</wrap>
-		  <xalign>0.5</xalign>
+		  <xalign>7.45058e-09</xalign>
 		  <yalign>0.5</yalign>
 		  <xpad>0</xpad>
 		  <ypad>0</ypad>
@@ -1275,16 +1351,12 @@
 		<class>GtkButton</class>
 		<name>statichost_new</name>
 		<width>100</width>
+		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
 		<signal>
 		  <name>clicked</name>
 		  <handler>on_statichost_new_clicked</handler>
 		  <last_modification_time>Tue, 28 Nov 2000 19:57:39 GMT</last_modification_time>
-		</signal>
-		<signal>
-		  <name>clicked</name>
-		  <handler>tool_modified_cb</handler>
-		  <last_modification_time>Tue, 22 Aug 2000 07:58:54 GMT</last_modification_time>
 		</signal>
 		<label>New Alias</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
@@ -1415,11 +1487,6 @@
 		    <handler>on_statichost_settings_clicked</handler>
 		    <last_modification_time>Tue, 28 Nov 2000 19:49:04 GMT</last_modification_time>
 		  </signal>
-		  <signal>
-		    <name>clicked</name>
-		    <handler>tool_modified_cb</handler>
-		    <last_modification_time>Tue, 22 Aug 2000 07:59:12 GMT</last_modification_time>
-		  </signal>
 		  <label>Settings</label>
 		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
@@ -1507,6 +1574,7 @@
 	  <widget>
 	    <class>GtkButton</class>
 	    <name>apply</name>
+	    <sensitive>False</sensitive>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
 	    <signal>
@@ -1523,6 +1591,11 @@
 	    <name>close</name>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_close_clicked</handler>
+	      <last_modification_time>Thu, 14 Dec 2000 05:50:41 GMT</last_modification_time>
+	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
 	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
@@ -1605,7 +1678,7 @@
 
     <widget>
       <class>GtkVBox</class>
-      <name>vbox10</name>
+      <name>aliases_settings_box</name>
       <homogeneous>False</homogeneous>
       <spacing>8</spacing>
       <child>
@@ -1627,7 +1700,7 @@
 
 	<widget>
 	  <class>GtkLabel</class>
-	  <name>label47</name>
+	  <name>aliases_settings_ip_label</name>
 	  <label>IP address:</label>
 	  <justify>GTK_JUSTIFY_CENTER</justify>
 	  <wrap>False</wrap>
@@ -1683,6 +1756,7 @@
 	  <widget>
 	    <class>GtkButton</class>
 	    <name>aliases_settings_add</name>
+	    <sensitive>False</sensitive>
 	    <can_focus>True</can_focus>
 	    <signal>
 	      <name>clicked</name>
@@ -1732,6 +1806,7 @@
 	    <widget>
 	      <class>GtkButton</class>
 	      <name>aliases_settings_delete</name>
+	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
 	      <signal>
 		<name>clicked</name>
@@ -1751,6 +1826,11 @@
 	      <name>activate</name>
 	      <handler>on_aliases_settings_new_activate</handler>
 	      <last_modification_time>Wed, 29 Nov 2000 07:37:24 GMT</last_modification_time>
+	    </signal>
+	    <signal>
+	      <name>changed</name>
+	      <handler>on_aliases_settings_new_changed</handler>
+	      <last_modification_time>Thu, 14 Dec 2000 06:06:22 GMT</last_modification_time>
 	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
@@ -1774,7 +1854,7 @@
 
 	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label52</name>
+	    <name>aliases_settings_list_label</name>
 	    <label>Existing:</label>
 	    <justify>GTK_JUSTIFY_RIGHT</justify>
 	    <wrap>False</wrap>
@@ -1800,7 +1880,7 @@
 
 	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label51</name>
+	    <name>aliases_settings_new_label</name>
 	    <label>New:</label>
 	    <justify>GTK_JUSTIFY_RIGHT</justify>
 	    <wrap>False</wrap>
