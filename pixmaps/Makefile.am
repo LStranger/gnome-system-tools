@@ -3,6 +3,7 @@ pixmaps_DATA = \
 	16_loopback.xpm           \
 	16_ppp.xpm                \
 	16_plip.xpm               \
+	black_panther.png         \
 	computer.png              \
 	conectiva.png		  \
 	connection-ethernet.png   \
