@@ -1,3 +1,20 @@
+2001-07-20  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (xst_tool_load_try): Trivial fix that evades the
+	su routines from thinking that the password was incorrectly set.
+	(common_report_hooks): look for "platform_success" when saving.
+	(platform_unsupported_clicked_cb): Removed all code related to
+	report_dispatch.
+	(platform_unsupported_cb): Moved dialog code below. Now using
+	run_again as a flag to run the platform dialog later.
+	(platform_set_current_cb): Set run_again to false.
+	(xst_tool_run_platform_dialog): configure platform dialog and run.
+	(xst_tool_process_startup): Read the initial report lines and
+	run the platform dialog if the platform wasn't set. Then run
+	platform_set directive with the chosen platform.
+	(xst_tool_init_backend): call xst_tool_process_startup.
+	(xst_tool_load_try): No more iteration over run_again.
+
 Tue Jul 17 21:30:34 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-tool.c (report_finished_cb): Being "end" the last report,

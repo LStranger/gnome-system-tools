@@ -75,11 +75,12 @@ static void report_dispatch (XstTool *tool);
 static gint xst_tool_compare_platforms (XstPlatform *a, XstPlatform *b);
 
 static XstReportHookEntry common_report_hooks[] = {
+/*        key                 function                    type                      allow_repeat */
 	{ "end",              report_finished_cb,         XST_REPORT_HOOK_LOADSAVE, TRUE  },
 	{ "platform_list",    platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE  }, 
 	{ "platform_unsup",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
 	{ "platform_undet",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
-	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_LOAD,     FALSE }, 
+	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_SAVE,     FALSE }, 
 	{ 0,                  NULL,                       -1,                       FALSE }
 };
 
@@ -121,8 +122,7 @@ platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
 	if (ret == -1 || ret == 1)
 		exit (0);
 
-	/* Locate the selected platform and set it up as the current one. Prepare to
-	 * invoke the backend again, this time with the current platform specified. */
+	/* Locate the selected platform and set it up as the current one. */
 
 	if (tool->current_platform)
 		xst_platform_free (tool->current_platform);
@@ -134,55 +134,15 @@ platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
 
 	g_assert (tool->current_platform);
 
-	tool->report_dispatch_pending = FALSE;
-	tool->report_finished = TRUE;
-	tool->run_again = TRUE;
-
-	report_dispatch (tool);
-
 	gtk_signal_disconnect_by_func (GTK_OBJECT (tool->platform_dialog),
 				       platform_dialog_close_cb,
 				       tool);
-	
 }
 
 static gboolean
 platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 {
-	GSList *list;
-	XstPlatform *platform;
-	char *platform_text[1];
-
-	tool->report_dispatch_pending = TRUE;
-
-	/* Fill in the platform GtkCList */
-
-	gtk_clist_clear (GTK_CLIST (tool->platform_list));
-
-	for (list = tool->supported_platforms_list; list;
-	     list = g_slist_next (list))
-	{
-		platform = (XstPlatform *) list->data;
-
-		platform_text [0] = (char *) xst_platform_get_name (platform);
-		gtk_clist_append (GTK_CLIST (tool->platform_list), platform_text);
-	}
-
-	/* Prepare dialog and show it */
-
-	tool->platform_selected_row = -1;
-
-	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "select-row",
-			    platform_list_select_row_cb, tool);
-	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "unselect-row",
-			    platform_list_unselect_row_cb, tool);
-	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "clicked",
-			    platform_unsupported_clicked_cb, tool);
-	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "close",
-			    platform_dialog_close_cb, tool);
-
-	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
-	gtk_widget_show (tool->platform_dialog);
+	tool->run_again = TRUE;
 
 	return TRUE;
 }
@@ -211,6 +171,7 @@ platform_set_current_cb (XstTool *tool, XstReportLine *rline)
 		xst_platform_free (tool->current_platform);
 
 	tool->current_platform = platform;
+	tool->run_again = FALSE;
 	return TRUE;
 }
 
@@ -455,9 +416,9 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 
 				g_string_assign (tool->line, "");
 
-				if (!tool->report_dispatch_pending){
+				if (!tool->report_dispatch_pending) {
 					report_dispatch (tool);
-					if (tool->report_finished){
+					if (tool->report_finished) {
 						i++;
 						goto full_break;
 					}
@@ -520,8 +481,6 @@ report_progress (XstTool *tool, const gchar *label)
 	set_arrow (tool, GTK_ARROW_DOWN);
 	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 0.0);
 #endif
-	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
-					     report_progress_tick, NULL, tool, NULL);
 
 	if (label) {
 		gtk_label_set_text (GTK_LABEL (tool->report_label), label);
@@ -532,6 +491,9 @@ report_progress (XstTool *tool, const gchar *label)
 			gtk_main_iteration ();
 	}
 	
+	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
+					     report_progress_tick, NULL, tool, NULL);
+
 	gtk_main ();
 
 	if (tool->input_id)
@@ -553,6 +515,58 @@ report_progress (XstTool *tool, const gchar *label)
 #if 0
 	gtk_clist_clear (GTK_CLIST (tool->report_list));
 #endif
+}
+
+static void
+xst_tool_run_platform_dialog (XstTool *tool)
+{
+	GSList *list;
+	XstPlatform *platform;
+	char *platform_text[1];
+
+	/* Fill in the platform GtkCList */
+
+	gtk_clist_clear (GTK_CLIST (tool->platform_list));
+
+	for (list = tool->supported_platforms_list; list;
+	     list = g_slist_next (list))
+	{
+		platform = (XstPlatform *) list->data;
+
+		platform_text [0] = (char *) xst_platform_get_name (platform);
+		gtk_clist_append (GTK_CLIST (tool->platform_list), platform_text);
+	}
+
+	/* Prepare dialog and show it */
+
+	tool->platform_selected_row = -1;
+
+	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "select-row",
+			    platform_list_select_row_cb, tool);
+	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "unselect-row",
+			    platform_list_unselect_row_cb, tool);
+	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "clicked",
+			    platform_unsupported_clicked_cb, tool);
+	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "close",
+			    platform_dialog_close_cb, tool);
+
+	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
+
+	gnome_dialog_run (GNOME_DIALOG (tool->platform_dialog));
+}
+
+static void
+xst_tool_process_startup (XstTool *tool)
+{
+	/* let's process those startup reports. */
+	tool->report_hook_type = XST_REPORT_HOOK_LOAD;
+	report_progress (tool, NULL);
+	if (tool->run_again) {
+		xst_tool_run_platform_dialog (tool);
+		g_assert (tool->current_platform);
+		xst_tool_run_set_directive (tool, NULL, NULL, "platform_set",
+					    tool->current_platform->name);
+	}
 }
 
 static void
@@ -603,6 +617,8 @@ xst_tool_init_backend (XstTool *tool)
 		tool->backend_write_fd = fd_write [1];
 
 		fcntl (tool->backend_read_fd, F_SETFL, 0);  /* Let's block */
+
+		xst_tool_process_startup (tool);
 	} else {
 		/* Child */
 
@@ -622,9 +638,8 @@ xst_tool_init_backend (XstTool *tool)
 			execl (tool->script_path, tool->script_path, "--progress",
 			       "--report", NULL);
 #else		
-/* Very useful for debugging purposes. */
-					execl ("/usr/bin/strace", "/usr/bin/strace", "-f", tool->script_path, "--progress",
-			"--report", NULL);
+		execl ("/usr/bin/strace", "/usr/bin/strace", "-f", tool->script_path, "--progress",
+		       "--report", NULL);
 #endif					
 		
 		g_error ("Unable to run backend: %s", tool->script_path);
@@ -883,18 +898,12 @@ xst_tool_load_try (XstTool *tool)
 {
 	GtkWidget *d;
 
-	do
-	{
-		tool->run_again = FALSE;
-
-		if (!xst_tool_load (tool)) {
-			d = gnome_ok_dialog (_("There was an error running the backend script,\n"
-					       "and the configuration could not be loaded."));
-			gnome_dialog_run_and_close (GNOME_DIALOG (d));
-			exit (1);
-		}
+	if (!xst_tool_load (tool)) {
+		d = gnome_ok_dialog (_("There was an error running the backend script,\n"
+				       "and the configuration could not be loaded."));
+		gnome_dialog_run_and_close (GNOME_DIALOG (d));
+		exit (0);
 	}
-	while (tool->run_again);
 }
 
 void
