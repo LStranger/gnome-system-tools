@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-22 12:23+0200\n"
-"PO-Revision-Date: 2003-07-23 16:51+0200\n"
+"POT-Creation-Date: 2003-08-11 20:25+0200\n"
+"PO-Revision-Date: 2003-08-12 00:11+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,40 +17,52 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: gnome-system-tools.schemas.in.h:1
+msgid ""
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr ""
+"Čárkami oddělěný seznam počítačů, ke kterým budou GST moci přistupovat, když "
+"je povolena volba vzdáleného nastavení"
+
+#: gnome-system-tools.schemas.in.h:2
 msgid "Default runlevel"
 msgstr "Implicitní úroveň běhu"
 
-#: gnome-system-tools.schemas.in.h:2
+#: gnome-system-tools.schemas.in.h:3
 msgid "Dialog complexity for the boot-admin tool"
 msgstr "Složitost dialogu nástroje správce zavádění"
 
-#: gnome-system-tools.schemas.in.h:3
+#: gnome-system-tools.schemas.in.h:4
 msgid "Dialog complexity for the network-admin tool"
 msgstr "Složitost dialogu nástroje správce sítě"
 
-#: gnome-system-tools.schemas.in.h:4
+#: gnome-system-tools.schemas.in.h:5
 msgid "Dialog complexity for the runlevel-admin tool"
 msgstr "Složitost dialogu nástroje správce úrovně běhu"
 
-#: gnome-system-tools.schemas.in.h:5
+#: gnome-system-tools.schemas.in.h:6
 msgid "Dialog complexity for the time-admin tool"
 msgstr "Složitost dialogu nástroje správce nastavení času"
 
-#: gnome-system-tools.schemas.in.h:6
+#: gnome-system-tools.schemas.in.h:7
 msgid "Dialog complexity for the users-admin tool"
 msgstr "Složitost dialogu nástroje správce uživatelů"
 
-#: gnome-system-tools.schemas.in.h:7
+#: gnome-system-tools.schemas.in.h:8
 msgid "Last GST version executed"
 msgstr "Poslední spuštěná verze GST"
 
-#: gnome-system-tools.schemas.in.h:8
+#: gnome-system-tools.schemas.in.h:9
+msgid "Remote hosts"
+msgstr "Vzdálené počítače"
+
+#: gnome-system-tools.schemas.in.h:10
 msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
 msgstr ""
 "Úroveň běhu, kterou ukazuje nástroj správce úrovně běhu jako implicitní v "
 "základním režimu"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:11
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -59,17 +71,29 @@ msgstr ""
 "pokročilý režim. Základní režim je navržen tak, aby zobrazoval méně voleb "
 "než pokročilý režim"
 
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:12
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
+msgstr ""
+"GST mohou provádět nastavení vzdáleně pomocí SSH, tuto vlastnost můžete "
+"použít povolením této volby"
+
+#: gnome-system-tools.schemas.in.h:13
 msgid "The last GST version that this computer has run"
 msgstr ""
 "Poslední verze systémových nástrojů GNOME, která běžela na tomto počítači"
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:14
+msgid "Whether the tools will use remote administration or not"
+msgstr "Jestli maji nástroje používat vzdálenou administraci"
+
+#: gnome-system-tools.schemas.in.h:15
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Jestli má nástroj správce uživatelů zobrazovat všechny uživatele a skupiny"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Jestli se má zobrazovat dialog s varováním"
 
@@ -193,7 +217,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Nastavení obrazu (krok 2 ze 2)"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1730
+#: src/network/connection.c:1744
 msgid "Manual"
 msgstr "Ruční"
 
@@ -340,23 +364,35 @@ msgstr "Složitost"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Zadejte heslo - Systémové nástroje GNOME"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1700
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1783
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
 #: interfaces/common.glade.in.h:14
+msgid "Remote administration"
+msgstr "Vzdálená administrace"
+
+#: interfaces/common.glade.in.h:15
 msgid "Run _Without Password"
 msgstr "Spustit bez _hesla"
 
-#: interfaces/common.glade.in.h:15
+#: interfaces/common.glade.in.h:16
 msgid "Scanning system configuration..."
 msgstr "Zkoumám nastavení systému..."
 
-#: interfaces/common.glade.in.h:16
+#: interfaces/common.glade.in.h:17
 msgid "Unsupported Platform"
 msgstr "Nepodporovaná platforma"
 
-#: interfaces/common.glade.in.h:17 interfaces/network.glade.in.h:164
+#: interfaces/common.glade.in.h:18
+msgid ""
+"Use this window to select the computer\n"
+"you wish to configure"
+msgstr ""
+"Použijte toto okno pro výběr počítače,\n"
+"který chcete nastavit"
+
+#: interfaces/common.glade.in.h:20 interfaces/network.glade.in.h:164
 #: interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Heslo:"
@@ -780,7 +816,7 @@ msgid "Create a new local network interface."
 msgstr "Vytvořit nové lokální síťové rozhraní."
 
 #: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:46
-#: src/network/connection.c:1731
+#: src/network/connection.c:1745
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1435,7 +1471,7 @@ msgstr "Povolit kontrolu nad aktivací všem uživatelům"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1732
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1746
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -3133,6 +3169,20 @@ msgstr "/_Vlastnosti"
 msgid "/_Delete"
 msgstr "/O_dstranit"
 
+#. the proccess was running ssh
+#: src/common/gst-auth.c:82
+msgid "Could not connect to the computer."
+msgstr "Nemohu se připojit k počítači."
+
+#. the proccess was running su
+#: src/common/gst-auth.c:85 src/common/gst-auth.c:234
+msgid "The password you entered is invalid."
+msgstr "Zadané heslo je neplatné."
+
+#: src/common/gst-auth.c:88
+msgid "An unexpected error has occurred."
+msgstr "Došlo k neočekávané chybě."
+
 #: src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
@@ -3146,7 +3196,7 @@ msgstr " Více _voleb"
 msgid " Less _Options"
 msgstr " Méně _voleb"
 
-#: src/common/gst-dialog.c:479
+#: src/common/gst-dialog.c:476
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3154,33 +3204,21 @@ msgstr ""
 "Jsou zde změny, které nebyly použity.\n"
 "Chcete je použít nyní?"
 
-#: src/common/gst-dialog.c:565
+#: src/common/gst-dialog.c:571
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Chyba při připojení signálu `%s' v prvku `%s'"
 
-#: src/common/gst-su.c:83
-msgid "The password you entered is invalid."
-msgstr "Zadané heslo je neplatné."
-
-#: src/common/gst-tool.c:962
+#: src/common/gst-tool.c:944
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Vynechává se direktiva %s..."
 
-#: src/common/gst-tool.c:1020
-msgid "Scanning your system configuration."
-msgstr "Zkoumá se nastavení vašeho systému."
-
-#: src/common/gst-tool.c:1100
+#: src/common/gst-tool.c:1091
 msgid "Skipping actual save..."
 msgstr "Vynechává se skutečné uložení..."
 
-#: src/common/gst-tool.c:1142
-msgid "Updating your system configuration."
-msgstr "Aktualizuje se nastavení vašeho systému."
-
-#: src/common/gst-tool.c:1163
+#: src/common/gst-tool.c:1153
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3188,12 +3226,12 @@ msgstr ""
 "Nastala chyba při spuštění podpůrného skriptu\n"
 "a nastavení nebylo možné načíst."
 
-#: src/common/gst-tool.c:1409
+#: src/common/gst-tool.c:1506
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Systémové nástroje GNOME"
 
-#: src/common/gst-tool.c:1600
+#: src/common/gst-tool.c:1684
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -3220,17 +3258,13 @@ msgstr ""
 "--\n"
 "Váš tým aplikace Systémové nástroje GNOME"
 
-#: src/common/gst-tool.c:1624
+#: src/common/gst-tool.c:1708
 msgid "Warning"
 msgstr "Varování"
 
-#: src/common/gst-tool.c:1633
+#: src/common/gst-tool.c:1717
 msgid "Don't show me this again"
 msgstr "Nezobrazovat příště"
-
-#: src/common/gst-tool.c:1707
-msgid "Pretending we are root..."
-msgstr "Předstíráme, že jsme správce systému..."
 
 #: src/common/gst-ui.c:396
 msgid ""
@@ -3475,7 +3509,7 @@ msgstr "Stav"
 msgid "Description"
 msgstr "Popis"
 
-#: src/network/connection.c:1611
+#: src/network/connection.c:1625
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3485,7 +3519,7 @@ msgstr ""
 "byla ponechána prázdná. Zadejte prosím\n"
 "do těchto polí platné IP adresy a pokračujte."
 
-#: src/network/connection.c:1618
+#: src/network/connection.c:1632
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3495,7 +3529,7 @@ msgstr ""
 "byla ponechána prázdná. Zadejte prosím\n"
 "do těchto polí platné IP adresy a pokračujte."
 
-#: src/network/connection.c:1624
+#: src/network/connection.c:1638
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3509,7 +3543,7 @@ msgstr ""
 "pro primární DNS server nebo odškrtněte\n"
 "volbu pro ruční nastavení DNS."
 
-#: src/network/connection.c:2180
+#: src/network/connection.c:2194
 msgid "Autodetecting modem device"
 msgstr "Autodetekuji zařízení modemu"
 
@@ -3758,23 +3792,23 @@ msgstr ""
 "Chybné heslo: %s.\n"
 "Zkuste prosím nové heslo."
 
-#: src/users/profile-settings.c:125
+#: src/users/profile-settings.c:129
 msgid "The profile must have a name"
 msgstr "Profil musí mít název"
 
-#: src/users/profile-settings.c:130
+#: src/users/profile-settings.c:134
 msgid "The profile must have a default home"
 msgstr "Profil musí mít implicitní domov"
 
-#: src/users/profile-settings.c:135 src/users/profile-settings.c:140
+#: src/users/profile-settings.c:139 src/users/profile-settings.c:144
 msgid "The profile must have a default shell"
 msgstr "Profil musí mít implicitní shell"
 
-#: src/users/profile-settings.c:210
+#: src/users/profile-settings.c:214
 msgid "The profile Default must not be deleted."
 msgstr "Profil Implicitní nesmí být odstraněn."
 
-#: src/users/profile-settings.c:217
+#: src/users/profile-settings.c:221
 #, c-format
 msgid "Are you sure you want to delete the profile called %s?"
 msgstr "Jste si jisti, že chcete odstranit profil nazvaný %s?"
@@ -3923,6 +3957,9 @@ msgstr "Komentář"
 msgid "Users and groups."
 msgstr "Uživatelé a skupiny."
 
+#~ msgid "Pretending we are root..."
+#~ msgstr "Předstíráme, že jsme správce systému..."
+
 #~ msgid "Profile name:"
 #~ msgstr "Název profilu:"
 
@@ -3931,9 +3968,6 @@ msgstr "Uživatelé a skupiny."
 
 #~ msgid "System"
 #~ msgstr "Systém"
-
-#~ msgid "System administration"
-#~ msgstr "Správa systému"
 
 #~ msgid "Remove"
 #~ msgstr "Odstranit"
