@@ -44,11 +44,11 @@ GArray *users_array;
 TableConfig users_table_config [] = {
 	/*Column name,          Adv_state_show,	Basic_state_show*/
 	{ N_("User"),		TRUE,		TRUE},
+	{ N_("Home"),		TRUE,		TRUE},
+	{ N_("User details"),	TRUE,		TRUE},
 	{ N_("UID"),		TRUE,		FALSE},
-	{ N_("Home"),		TRUE,		FALSE},
 	{ N_("Shell"),		TRUE,		FALSE},
-	{ N_("Comments"),	FALSE,		TRUE},
-	{ N_("Group"),		FALSE,		TRUE},
+	{ N_("Group"),		FALSE,		FALSE},
 	{NULL}
 };
 
@@ -85,13 +85,12 @@ create_users_model (void)
 	
 	model = gtk_tree_store_new (COL_USER_LAST,
 	                            G_TYPE_STRING,
+	                            G_TYPE_STRING,
+	                            G_TYPE_STRING,
+				    G_TYPE_INT,
+				    G_TYPE_STRING,
 	                            G_TYPE_INT,
-	                            G_TYPE_STRING,
-	                            G_TYPE_STRING,
-	                            G_TYPE_STRING,
-	                            G_TYPE_STRING,
-	                            G_TYPE_INT,
-	                            G_TYPE_POINTER);
+				    G_TYPE_POINTER);
 	return GTK_TREE_MODEL (model);
 }
 
@@ -174,10 +173,10 @@ populate_users_table (void)
 			gtk_tree_store_set (GTK_TREE_STORE (model),
 			                    &iter,
 					    COL_USER_LOGIN, item->login,
-					    COL_USER_UID, item->UID,
 					    COL_USER_HOME, item->home,
-					    COL_USER_SHELL, item->shell,
 					    COL_USER_COMMENT, item->comment,
+					    COL_USER_UID, item->UID,
+					    COL_USER_SHELL, item->shell,
 					    COL_USER_GROUP, item->group,
 			                    COL_USER_POINTER, user,
 					    -1);
