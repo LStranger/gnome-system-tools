@@ -43,6 +43,7 @@ user_add (void)
 	gchar *name, *gid;
 	GList *tmp_list;
 	gboolean found = FALSE;
+	gboolean user_exists = FALSE;
 	xmlNodePtr node;
 
 	w0 = tool_widget_get ("user_settings_name");
@@ -67,9 +68,8 @@ user_add (void)
 	while (tmp_list)
 	{
 		name = tmp_list->data;
-		tmp_list = tmp_list->next;
 
-		if (!strcmp (name, new_user_name))
+		if (!user_exists && !strcmp (name, new_user_name))
 		{
 			tmp = g_strdup_printf (_("User %s already exists."), new_user_name);
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented (tmp, win));
@@ -78,16 +78,21 @@ user_add (void)
 
 			gtk_widget_grab_focus (w0);
 			gtk_editable_select_region (GTK_EDITABLE (w0), 0, -1);
-			
-			return FALSE;
+			user_exists = TRUE;
 		}
+		g_free (tmp_list->data);
+		tmp_list = tmp_list->next;
 	}
-	
+	g_list_free (tmp_list);
+
+	if (user_exists)
+		return FALSE;
+
 	if (!is_valid_name (new_user_name))
 	{
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (
 			_("Please set a valid username, using only lower-case letters."), win));
-		
+
 		gnome_dialog_run (dialog);
 		return FALSE;
 	}
@@ -104,15 +109,16 @@ user_add (void)
 	while (tmp_list)
 	{
 		name = tmp_list->data;
+
+		if (!found && !strcmp (name, new_group_name))
+			found = TRUE;
+
+		g_free (tmp_list->data);
 		tmp_list = tmp_list->next;
 
-		if (!strcmp (name, new_group_name))
-		{
-			found = TRUE;
-			break;
-		}
 	}
-	
+	g_list_free (tmp_list);
+
 	if (!found)
 	{
 		/* New group: check that it is a valid group name */
@@ -122,7 +128,7 @@ user_add (void)
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented (_("Please set a valid "
 					"main group name, with only lower-case letters,\n"
 					"or select one from the pull-down menu."), win));
-			
+
 			gnome_dialog_run (dialog);
 			return FALSE;
 		}
@@ -141,6 +147,7 @@ user_add (void)
 
 	node = e_table_add_user (new_user_name);
 	e_table_change_user (node, "gid", gid);
+	g_free (gid);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
 		adv_user_settings_update (node, new_user_name);
@@ -188,6 +195,7 @@ user_update (void)
 			
 			gnome_dialog_run (dialog);
 			gtk_widget_grab_focus (w0);
+			g_free (login);
 			return FALSE;
 		}
 
@@ -196,11 +204,13 @@ user_update (void)
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented (
 			("Please set a valid username, using only lower-case letters."), win));
 			gnome_dialog_run (dialog);
+			g_free (login);
 			return FALSE;
 		}
 
 		e_table_change_user (node, "login", new_login);
 	}
+	g_free (login);
 
 	/* Change comment if comment is changed. */
 	w0 = tool_widget_get ("user_settings_comment");
@@ -214,6 +224,8 @@ user_update (void)
 	}
 	else if (strcmp (new_comment, comment))
 		e_table_change_user (node, "comment", new_comment);
+
+	g_free (comment);
 
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
 		adv_user_settings_update (node, new_login);
@@ -234,14 +246,14 @@ user_update (void)
 	while (tmp_list)
 	{
 		name = tmp_list->data;
-		tmp_list = tmp_list->next;
 
-		if (!strcmp (name, new_group_name))
-		{
+		if (!found && !strcmp (name, new_group_name))
 			found = TRUE;
-			break;
-		}
+
+		g_free (tmp_list->data);
+		tmp_list = tmp_list->next;
 	}
+	g_free (tmp_list);
 	
 	if (!found)
 	{
@@ -264,13 +276,14 @@ user_update (void)
 	}
 
 	else
-		gid = get_group_by_data ("name", name, "gid");
+		gid = get_group_by_data ("name", new_group_name, "gid");
 
 	e_table_change_user (node, "gid", gid);
+	g_free (gid);
 
 	return TRUE;
 }
-		
+
 extern void
 user_fill_settings_group (GtkCombo *combo, gboolean adv)
 {
@@ -286,6 +299,7 @@ user_fill_settings_group (GtkCombo *combo, gboolean adv)
 
 		items = g_list_append (items, name);
 	}
+	g_list_free (tmp_list);
 
 	items = g_list_sort (items, char_sort_func);
 
@@ -388,6 +402,7 @@ group_update (void)
 
 	if (strcmp (name, txt))
 	{
+		g_free (name);
 		if (strlen (txt) < 1)
 		{
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
@@ -400,6 +415,8 @@ group_update (void)
 		else
 			e_table_change_group (node, "name", txt);
 	}
+	else
+		g_free (name);
 
 	/* Update group members also */
 	/* First, free our old users list ... */
@@ -432,11 +449,13 @@ find_new_id (gchar from)
 		while (tmp_list)
 		{
 			id = atoi (tmp_list->data);
+			g_free (tmp_list->data);
 			tmp_list = tmp_list->next;
 
 			if (ret <= id)
 				ret = id + 1;
 		}
+		g_list_free (tmp_list);
 		
 		if (ret > logindefs.new_group_max_id)
 		{
@@ -455,6 +474,7 @@ find_new_id (gchar from)
 		while (tmp_list)
 		{
 			id = atoi (tmp_list->data);
+			g_free (tmp_list->data);
 			tmp_list = tmp_list->next;
 
 			if (ret <= id)
@@ -491,14 +511,16 @@ find_new_key (gchar from)
 		while (tmp_list)
 		{
 			key = atoi (tmp_list->data);
+			g_free (tmp_list->data);
 			tmp_list = tmp_list->next;
 
 			if (ret <= key)
 				ret = key + 1;
 		}
+		g_list_free (tmp_list);
 
 		buf = g_strdup_printf ("%06d", ret);
-		
+
 		return buf;
 	}
 
@@ -509,11 +531,13 @@ find_new_key (gchar from)
 		while (tmp_list)
 		{
 			key = atoi (tmp_list->data);
+			g_free (tmp_list->data);
 			tmp_list = tmp_list->next;
 
 			if (ret <= key)
 				ret = key + 1;
 		}
+		g_list_free (tmp_list);
 
 		buf = g_strdup_printf ("%06d", ret);
 
@@ -545,22 +569,29 @@ is_valid_name (gchar *str)
 gboolean
 is_free_uid (gint new_uid)
 {
-	GList *list, *tmp_list;
+	GList *tmp_list;
 	gint uid;
+	gboolean found = FALSE;
 
 	/* Check if uid does not exsist. */
 	
-	list = get_user_list ("uid", FALSE);
-	
-	tmp_list = list;
+	tmp_list = get_user_list ("uid", FALSE);
 	while (tmp_list)
 	{
 		uid = atoi (tmp_list->data);
+		g_free (tmp_list->data);
 		tmp_list = tmp_list->next;
 
+		if (found)
+			continue;
+
 		if (uid == new_uid)
-			return FALSE;
+			found = TRUE;
 	}
+	g_list_free (tmp_list);
+
+	if (found)
+		return FALSE;
 
 	return TRUE;
 }
@@ -592,7 +623,7 @@ group_fill_members_list (xmlNodePtr node)
 	{
 		entry[0] = tmp_list->data;
 		tmp_list = tmp_list->next;
-		
+
 		row = gtk_clist_append (clist, entry);
 		member_rows = g_list_append (member_rows, entry[0]);
 	}
@@ -647,6 +678,7 @@ group_fill_all_users_list (GList *member_rows)
 			gtk_clist_append (clist, entry);
 		}
 	}
+	g_list_free (tmp_list);
 
 	gtk_clist_thaw (clist);
 }
@@ -666,9 +698,9 @@ get_group_list (gchar *field, gboolean adv)
 	{
 		node = xml_element_find_first (u, "gid");
 		if (!node)
-			break;
+			continue;
 
-		txt = (xml_element_get_content (node));
+		txt = xml_element_get_content (node);
 		gid = atoi (txt);
 
 		if (!adv || (gid >= logindefs.new_group_min_id &&
@@ -679,7 +711,11 @@ get_group_list (gchar *field, gboolean adv)
 			{
 				node = xml_element_find_first (u, field);
 				if (!node)
-					break;
+				{
+					g_free (txt);
+					continue;
+				}
+				g_free (txt);
 				txt = xml_element_get_content (node);
 			}
 				
@@ -704,9 +740,9 @@ get_user_list (gchar *field, gboolean adv)
 	{
 		node = xml_element_find_first (u, "uid");
 		if (!node)
-			break;
+			continue;
 
-		txt = (xml_element_get_content (node));
+		txt = xml_element_get_content (node);
 		id = atoi (txt);
 
 		if (!adv || (id >= logindefs.new_user_min_id && id <= logindefs.new_user_max_id))
@@ -715,7 +751,11 @@ get_user_list (gchar *field, gboolean adv)
 			{
 				node = xml_element_find_first (u, field);
 				if (!node)
-					break;
+				{
+					g_free (txt);
+					continue;
+				}
+				g_free (txt);
 				txt = xml_element_get_content (node);
 			}
 
@@ -731,6 +771,7 @@ gchar *
 get_group_by_data (gchar *field, gchar *fdata, gchar *data)
 {
 	xmlNodePtr root, node, u;
+	gchar *content;
 
 	root = e_table_get_table_data (GROUP);
 
@@ -740,14 +781,18 @@ get_group_by_data (gchar *field, gchar *fdata, gchar *data)
 		if (!node)
 			break;
 
-		if (!strcmp (fdata, xml_element_get_content (node)))
+		content = xml_element_get_content (node);
+		if (!strcmp (fdata, content))
 		{
+			g_free (content);
 			node = xml_element_find_first (u, data);
 			if (!node)
 				break;
 
 			return xml_element_get_content (node);
 		}
+		else
+			g_free (content);
 	}
 
 	return NULL;
@@ -759,6 +804,7 @@ basic_user_count (xmlNodePtr parent)
 	xmlNodePtr node, u;
 	gint ret = 0;
 	gint uid;
+	gchar *content;
 
 	g_return_val_if_fail (parent != NULL, 0);
 
@@ -770,7 +816,9 @@ basic_user_count (xmlNodePtr parent)
 		if (!u)
 			continue;
 
-		uid = atoi (xml_element_get_content (u));
+		content = xml_element_get_content (u);
+		uid = atoi (content);
+		g_free (content);
 		if (uid >= logindefs.new_user_min_id && uid <= logindefs.new_user_max_id)
 			ret++;
 	}
@@ -784,6 +832,7 @@ basic_user_find_nth (xmlNodePtr parent, int n)
 	xmlNodePtr node, u;
 	gint i = -1;
 	gint uid;
+	gchar *content;
 
 	g_return_val_if_fail (parent != NULL, NULL);
 
@@ -796,7 +845,9 @@ basic_user_find_nth (xmlNodePtr parent, int n)
 		if (!u)
 			continue;
 
-		uid = atoi (xml_element_get_content (u));
+		content = xml_element_get_content (u);
+		uid = atoi (content);
+		g_free (content);
 		if (uid >= logindefs.new_user_min_id && uid <= logindefs.new_user_max_id)
 			i++;
 
@@ -813,6 +864,7 @@ basic_group_count (xmlNodePtr parent)
 	xmlNodePtr node, u;
 	gint ret = 0;
 	gint uid;
+	gchar *content;
 
 	g_return_val_if_fail (parent != NULL, 0);
 
@@ -824,7 +876,9 @@ basic_group_count (xmlNodePtr parent)
 		if (!u)
 			continue;
 
-		uid = atoi (xml_element_get_content (u));
+		content = xml_element_get_content (u);
+		uid = atoi (content);
+		g_free (content);
 		if (uid >= logindefs.new_group_min_id && uid <= logindefs.new_group_max_id)
 			ret++;
 	}
@@ -838,6 +892,7 @@ basic_group_find_nth (xmlNodePtr parent, int n)
 	xmlNodePtr node, u;
 	gint i = -1;
 	gint uid;
+	gchar *content;
 
 	g_return_val_if_fail (parent != NULL, NULL);
 
@@ -850,7 +905,9 @@ basic_group_find_nth (xmlNodePtr parent, int n)
 		if (!u)
 			continue;
 
-		uid = atoi (xml_element_get_content (u));
+		content = xml_element_get_content (u);
+		uid = atoi (content);
+		g_free (content);
 		if (uid >= logindefs.new_group_min_id && uid <= logindefs.new_group_max_id)
 			i++;
 
@@ -865,6 +922,7 @@ void
 adv_user_settings (xmlNodePtr node, gboolean show)
 {
 	GtkWidget *win, *adv, *w0;
+	gchar *content;
 
 	win = tool_widget_get ("user_settings_dialog");
 	adv = tool_widget_get ("user_settings_advanced");
@@ -875,18 +933,23 @@ adv_user_settings (xmlNodePtr node, gboolean show)
 
 		/* Shell. */
 		w0 = tool_widget_get ("user_settings_shell");
-		gtk_entry_set_text (GTK_ENTRY (w0), my_xml_get_content (node, "shell"));
+		content = my_xml_get_content (node, "shell");
+		gtk_entry_set_text (GTK_ENTRY (w0), content);
+		g_free (content);
 		gtk_widget_set_sensitive (w0, tool_get_access());
 
 		/* Home dir. */
 		w0 = tool_widget_get ("user_settings_home");
-		gtk_entry_set_text (GTK_ENTRY (w0), my_xml_get_content (node, "home"));
+		content = my_xml_get_content (node, "home");
+		gtk_entry_set_text (GTK_ENTRY (w0), content);
+		g_free (content);
 		gtk_widget_set_sensitive (w0, tool_get_access());
 
 		/* User ID. */
 		w0 = tool_widget_get ("user_settings_uid");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0),
-				g_strtod (my_xml_get_content (node, "uid"), NULL));
+		content = my_xml_get_content (node, "uid");
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (content, NULL));
+		g_free (content);
 
 		gtk_widget_set_sensitive (w0, tool_get_access());
 
@@ -946,8 +1009,9 @@ adv_user_settings_update (xmlNodePtr node, gchar *login)
 	new_uid = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool_widget_get
 			("user_settings_uid")));
 
-	if (is_free_uid (new_uid))
+	if (is_free_uid (new_uid)) 
 		e_table_change_user (node, "uid", g_strdup_printf ("%d", new_uid));
+
 }
 
 gchar *

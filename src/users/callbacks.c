@@ -94,6 +94,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gboolean found = FALSE;
 	gchar *login, *comment, *name = NULL;
 	gint gid, id = 0;
+	gint new_id = 0;
 	gboolean comp = FALSE;
 	GtkRequisition req;
 	xmlNodePtr node;
@@ -109,35 +110,41 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	/* Fill login name entry */	
 	w0 = tool_widget_get ("user_settings_name");
 	gtk_widget_set_sensitive (w0, tool_get_access());
-	my_gtk_entry_set_text (w0, login);	
+	my_gtk_entry_set_text (w0, login);
+	g_free (login);
 
 	/* Fill groups combo */
 	w0 = tool_widget_get ("user_settings_group");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	user_fill_settings_group (GTK_COMBO (w0), comp);
 
-	gid = atoi (my_xml_get_content (node, "gid"));
+	txt = my_xml_get_content (node, "gid");
+	gid = atoi (txt);
+	g_free (txt); 
 
 	tmp_list = get_group_list ("gid", comp);
 	while (tmp_list)
 	{
 		id = atoi (tmp_list->data);
+		g_free (tmp_list->data); 
 		tmp_list = tmp_list->next;
 
-		if (id == gid)
+		if (!found && id == gid)
 		{
+			new_id = id;
 			found = TRUE;
-			break;
 		}
 	}
+	g_list_free (tmp_list);
 
 	if (!found)
 		g_warning ("The GID for the main user's group was not found.");
 	else
 	{
-		txt = g_strdup_printf ("%d", id);
+		txt = g_strdup_printf ("%d", new_id);
 		name = get_group_by_data ("gid", txt, "name");
 		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
+		g_free (name);
 		g_free (txt);
 	}
 
@@ -146,6 +153,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	w0 = tool_widget_get ("user_settings_comment");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	my_gtk_entry_set_text (w0, comment);
+	g_free (comment);
 
 	/* If state == advanced, fill advanced settings too. */
 	if (!comp)
@@ -178,6 +186,7 @@ user_passwd_dialog_show (xmlNodePtr node)
 
 	w0 = tool_widget_get ("user_passwd_dialog");
 	txt = g_strdup_printf (_("Password for User %s"), name);
+	g_free (name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
@@ -235,6 +244,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 
 	if (!strcmp (name, "root"))
 	{
+		g_free (name);
 		txt = g_strdup (_("The root user must not be deleted."));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
 		gnome_dialog_run (dialog);
@@ -246,6 +256,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
 	g_free (txt);
+	g_free (name);
 
 	if (reply)
 		return;
@@ -283,11 +294,19 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	/* Fill all users list */
 	group_fill_all_users_list (member_rows);
 
+	while (member_rows)
+	{
+		g_free (member_rows->data);
+		member_rows = member_rows->next;
+	}
+	g_list_free (member_rows);
+
 	/* Show group settings dialog */
 	
 	w0 = tool_widget_get ("group_settings_dialog");
 	txt = g_strdup_printf (_("Settings for Group %s"), name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
+	g_free (name);
 	g_free (txt);
 	gtk_widget_show (w0);
 }
@@ -326,6 +345,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 
 	if (!strcmp (name, "root"))
 	{
+		g_free (name);
 		txt = g_strdup ("You shouldn't delete root group!");
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
 		gnome_dialog_run (dialog);
@@ -334,6 +354,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	}
 	
 	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), name);
+	g_free (name);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
 	g_free (txt);

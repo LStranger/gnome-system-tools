@@ -156,14 +156,13 @@ user_value_at (ETableModel *etm, int col, int row, void *data)
 	}
 	
 	name = xml_element_find_first (node, field);
+	g_free (field);
 
 	if (!name)
 	{
 		g_warning ("value_at: Can't get name for row %d\n", row);
 		return NULL;
 	}
-	
-	g_free (field);
 
 	return xml_element_get_content (name);
 }
