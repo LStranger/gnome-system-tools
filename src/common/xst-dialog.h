@@ -45,7 +45,7 @@ struct _XstDialog {
 	GtkWidget *complexity_button;
 
 	XstDialogComplexity complexity;
-	gboolean            frozen;
+	gint frozen;
 };
 
 struct _XstDialogClass {
@@ -57,23 +57,25 @@ struct _XstDialogClass {
 
 GtkType             xst_dialog_get_type       (void);
 
-XstDialog          *xst_dialog_new            (XstTool *tool, 
-					       const char *widget, 
-					       const char *title);
-void                xst_dialog_construct      (XstDialog *dialog,
-					       XstTool *tool, 
-					       const char *widget, 
-					       const char *title);
+XstDialog          *xst_dialog_new               (XstTool *tool, 
+						  const char *widget, 
+						  const char *title);
+void                xst_dialog_construct         (XstDialog *dialog,
+						  XstTool *tool, 
+						  const char *widget, 
+						  const char *title);
 
-XstDialogComplexity xst_dialog_get_complexity (XstDialog *xd);
-void                xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c);
+XstDialogComplexity xst_dialog_get_complexity    (XstDialog *xd);
+void                xst_dialog_set_complexity    (XstDialog *xd, XstDialogComplexity c);
+void                xst_dialog_enable_complexity (XstDialog *xd);
 
-void                xst_dialog_freeze         (XstDialog *xd);
-void                xst_dialog_thaw           (XstDialog *xd);
+void                xst_dialog_freeze            (XstDialog *xd);
+void                xst_dialog_thaw              (XstDialog *xd);
 
-gboolean            xst_dialog_get_modified   (XstDialog *xd);
-void                xst_dialog_modify         (XstDialog *xd);
+gboolean            xst_dialog_get_modified      (XstDialog *xd);
+void                xst_dialog_modify            (XstDialog *xd);
+void                xst_dialog_modify_cb         (GtkWidget *w, gpointer data);
 
-GtkWidget          *xst_dialog_get_widget     (XstDialog *xd, const char *widget);
+GtkWidget          *xst_dialog_get_widget        (XstDialog *xd, const char *widget);
 
 #endif /* XST_DIALOG_H */

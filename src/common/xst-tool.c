@@ -92,6 +92,13 @@ timeout_cb (gpointer data)
 		gtk_main_quit ();
 }
 
+static void
+set_arrow (XstTool *tool, GtkArrowType arrow)
+{
+	gtk_notebook_set_page (GTK_NOTEBOOK (tool->report_notebook),
+			       arrow == GTK_ARROW_UP ? 0 : 1);
+			       
+}
 
 static void
 report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
@@ -110,7 +117,7 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		GTK_SCROLLED_WINDOW (tool->report_scrolled));
 
 #warning FIXME: make this not suck
-	if (tool->line) {
+	if (!tool->line) {
 		tool->line = g_malloc(1024);
 		tool->line_len = 0;
 		tool->line [0] = '\0';
@@ -130,15 +137,15 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 					/* Progress update */
 					
 					gtk_progress_set_percentage (GTK_PROGRESS(tool->report_progress),
-								     (gfloat) (((tool->line [1] - '0') * 0.1) +
-									       (tool->line [2] - '0') * 0.01));
+								     (gfloat) ((tool->line [1] - '0') * 0.1) +
+								     (tool->line [2] - '0') * 0.01);
 				} else {
 					gboolean scroll;
 
 					/* Report line */
 					
-					gtk_entry_set_text (GTK_ENTRY(tool->report_entry), tool->line + 4);
-							    
+					gtk_entry_set_text (GTK_ENTRY (tool->report_entry), tool->line + 4);
+						           
 					
 					if (vadj->value >= vadj->upper - vadj->page_size)
 						scroll = TRUE;
@@ -158,7 +165,7 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 			tool->line_len = 0;
 		} else {
 			/* Add character to end of current line */
-			
+
 			tool->line = g_realloc (tool->line, MAX (tool->line_len + 2, 1024));
 			tool->line [tool->line_len] = c;
 			tool->line_len++;
@@ -178,8 +185,7 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 
 	gtk_label_set_text (GTK_LABEL (tool->report_label), label);
 
-	gtk_widget_hide (tool->report_up);
-	gtk_widget_show (tool->report_down);
+	set_arrow (tool, GTK_ARROW_DOWN);
 
 	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 0.0);
 	
@@ -196,7 +202,7 @@ report_progress (XstTool *tool, int fd, const gchar *label)
   
 	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 1.0);
 
-	cb_id = gtk_timeout_add (1500, (GtkFunction) timeout_cb, NULL);
+	cb_id = gtk_timeout_add (1500, (GtkFunction) timeout_cb, tool);
 	gtk_main ();
 	gtk_timeout_remove (cb_id);
 	
@@ -369,7 +375,7 @@ xst_tool_class_init (XstToolClass *klass)
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
 
-	xsttool_signals[FILL_GUI] = 
+	xsttool_signals[FILL_XML] = 
 		gtk_signal_new ("fill_xml",
 				GTK_RUN_LAST,
 				object_class->type,
@@ -395,20 +401,20 @@ visibility_toggled (GtkWidget *w, gpointer data)
 	vadj = gtk_scrolled_window_get_vadjustment (
 		GTK_SCROLLED_WINDOW (tool->report_scrolled));
 
+	set_arrow (tool, show ? GTK_ARROW_UP : GTK_ARROW_DOWN);
+
 	if (show) {
-		gtk_widget_hide (tool->report_down);
-		gtk_widget_show (tool->report_up);
 		gtk_widget_set_usize (tool->report_scrolled, -1, 140);
 		gtk_widget_show (tool->report_scrolled);
 		gtk_adjustment_set_value (vadj, vadj->upper - vadj->page_size);
 		gtk_adjustment_value_changed (vadj);
 	} else { 
-		gtk_widget_hide (tool->report_up);
-		gtk_widget_show (tool->report_down);
 		gtk_widget_hide (tool->report_scrolled);
 		if (tool->timeout_done)
 			gtk_main_quit();
 	}
+
+	tool->report_list_visible = show;
 }
 
 static void
@@ -417,23 +423,32 @@ xst_tool_type_init (XstTool *tool)
 	GladeXML *xml;
 	GtkWidget *w;
 
+	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
+
 	xml = xst_tool_load_glade_common (tool, "report_window");
 
 	tool->report_window     = glade_xml_get_widget (xml, "report_window");
-	tool->report_scrolled   = glade_xml_get_widget (xml, "report_scrolled");
+	tool->report_scrolled   = glade_xml_get_widget (xml, "report_list_scrolled_window");
 	tool->report_progress   = glade_xml_get_widget (xml, "report_progress");
 	tool->report_label      = glade_xml_get_widget (xml, "report_label");
 	tool->report_list       = glade_xml_get_widget (xml, "report_list");
-	tool->report_entry      = glade_xml_get_widget (xml, "report_entry");
-	tool->report_visibility = glade_xml_get_widget (xml, "report_visibility");	
+	tool->report_entry      = glade_xml_get_widget (xml, "report_text");
+	tool->report_visibility = glade_xml_get_widget (xml, "report_visibility");
+	tool->report_notebook   = glade_xml_get_widget (xml, "report_notebook");
 
-	w = glade_xml_get_widget (xml, "report_visibility_box");
+	gtk_notebook_remove_page (GTK_NOTEBOOK (tool->report_notebook), 0);
+	gtk_notebook_append_page (GTK_NOTEBOOK (tool->report_notebook),
+				  gnome_stock_pixmap_widget_new (tool->report_notebook, 
+								 GNOME_STOCK_PIXMAP_UP),
+				  NULL);
 
-	tool->report_down = gnome_stock_pixmap_widget_new (w, GNOME_STOCK_PIXMAP_DOWN);
-	gtk_container_add (GTK_CONTAINER (w), tool->report_down);
+	gtk_notebook_append_page (GTK_NOTEBOOK (tool->report_notebook),
+				  gnome_stock_pixmap_widget_new (tool->report_notebook, 
+								 GNOME_STOCK_PIXMAP_DOWN),
+				  NULL);
 
-	tool->report_up = gnome_stock_pixmap_widget_new (w, GNOME_STOCK_PIXMAP_UP);
-	gtk_container_add (GTK_CONTAINER (w), tool->report_up);
+	set_arrow (tool, GTK_ARROW_DOWN);
+	gtk_widget_show_all (tool->report_notebook);
 
 	glade_xml_signal_connect_data (xml, "visibility_toggled", visibility_toggled, tool);
 }
@@ -462,14 +477,17 @@ xst_tool_get_type (void)
 void
 xst_tool_construct (XstTool *tool, const char *name, const char *title)
 {
+	char *s;
+
 	g_return_if_fail (name != NULL);
 
-	tool->name               = g_strdup (name);
-	tool->glade_path         = g_strdup_printf ("%s/%s.glade",     INTERFACES_DIR, name);
-	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
-	tool->script_path        = g_strdup_printf ("%s/%s-conf",      SCRIPTS_DIR,    name);
+	tool->name        = g_strdup (name);
+	tool->glade_path  = g_strdup_printf ("%s/%s.glade",     INTERFACES_DIR, name);
+	tool->script_path = g_strdup_printf ("%s/%s-conf",      SCRIPTS_DIR,    name);
 	
-	tool->main_dialog = xst_dialog_new (tool, name, title);
+	s = g_strdup_printf ("%s_admin", name);
+	tool->main_dialog = xst_dialog_new (tool, s, title);
+	g_free (s);
 }
 
 XstTool *

@@ -460,8 +460,7 @@ tool_config_load (void)
 		for (len = 0; (t = read (fd [0], p + len, 102399 - len)); )
 		  len += t;
 
-		if (len < 1 || len == 102399)
-		{
+		if (len < 1 || len == 102399) {		
 			free (p);
 			g_error ("Backend malfunction.");
 		}

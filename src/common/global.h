@@ -1,4 +1,5 @@
 #include "helpers.h"
 #include "text.h"
 #include "xml.h"
-#include "tool.h"
+#include "xst-tool.h"
+#include "xst-dialog.h"

@@ -23,12 +23,18 @@
 #include <gnome.h>
 #include "xst-dialog.h"
 
+#ifdef XST_DEBUG
+/* define to x for debugging output */
+#define d(x) 
+#else
+#define d(x)
+#endif
+
 enum {
 	APPLY,
 	COMPLEXITY_CHANGE,
 	LAST_SIGNAL
 };
-
 
 static GnomeAppClass *parent_class;
 static gint xstdialog_signals[LAST_SIGNAL] = { 0 };
@@ -62,15 +68,24 @@ xst_dialog_get_complexity (XstDialog *xd)
 void
 xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 {
+	char *label[] = {
+		N_(" More Options >> "),
+		N_(" Full Options >> "),
+		N_(" << Fewer Options ")
+	};
+
 	g_return_if_fail (xd != NULL);
 	g_return_if_fail (XST_IS_DIALOG (xd));
-	g_return_if_fail (c < XST_TOOL_COMPLEXITY_BASIC);
-	g_return_if_fail (c > XST_TOOL_COMPLEXITY_ADVANCED);
+	g_return_if_fail (c >= XST_DIALOG_BASIC);
+	g_return_if_fail (c <= XST_DIALOG_ADVANCED);
 
 	if (xd->complexity == c)
 		return;
 
 	xd->complexity = c;
+
+	gtk_label_set_text (GTK_LABEL (GTK_BIN (xd->complexity_button)->child), _(label[c]));
+
 	gtk_signal_emit (GTK_OBJECT (xd), xstdialog_signals[COMPLEXITY_CHANGE]);
 }
 
@@ -79,8 +94,11 @@ xst_dialog_freeze (XstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
 	g_return_if_fail (XST_IS_DIALOG (xd));
+	g_return_if_fail (xd->frozen >= 0);
 
-	xd->frozen = TRUE;
+	d(g_message ("freezing %p", xd));
+	
+	xd->frozen++;
 }
 
 void 
@@ -88,8 +106,11 @@ xst_dialog_thaw (XstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
 	g_return_if_fail (XST_IS_DIALOG (xd));
+	g_return_if_fail (xd->frozen >= 0);
 
-	xd->frozen = FALSE;
+	d(g_message ("thawing %p", xd));
+
+	xd->frozen--;
 }
 
 gboolean
@@ -107,10 +128,18 @@ xst_dialog_modify (XstDialog *xd)
 	g_return_if_fail (xd != NULL);
 	g_return_if_fail (XST_IS_DIALOG (xd));
 
+	d(g_print ("froze: %d\taccess: %d\n", xd->frozen, xst_tool_get_access (xd->tool)));
+
 	if (xd->frozen || !xst_tool_get_access (xd->tool))
 		return;
 
 	gtk_widget_set_sensitive (xd->apply_button, TRUE);
+}
+
+void
+xst_dialog_modify_cb (GtkWidget *w, gpointer data)
+{
+	xst_dialog_modify (data);
 }
 
 static void
@@ -181,25 +210,92 @@ xst_dialog_get_type (void)
 static void
 tool_user_complexity (GtkWidget *w, gpointer data)
 {
+	XstDialog *dialog;
 
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (XST_IS_DIALOG (data));
+
+	dialog = XST_DIALOG (data);
+
+	switch (dialog->complexity) {
+	case XST_DIALOG_BASIC:
+		xst_dialog_set_complexity (dialog, XST_DIALOG_ADVANCED);
+		break;
+	case XST_DIALOG_ADVANCED:
+		xst_dialog_set_complexity (dialog, XST_DIALOG_BASIC);
+		break;
+	default:
+		break;
+	}
 }
 
 static void
 tool_user_apply (GtkWidget *w, gpointer data)
 {
+	XstDialog *dialog;
 
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (XST_IS_DIALOG (data));
+
+	dialog = XST_DIALOG (data);
+
+	gtk_signal_emit (GTK_OBJECT (dialog), xstdialog_signals[APPLY]);
+
+	gtk_widget_set_sensitive (dialog->apply_button, FALSE);
 }
 
 static void
 tool_user_close (GtkWidget *w, gpointer data)
 {
+	XstDialog *dialog;
 
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (XST_IS_DIALOG (data));
+
+	dialog = XST_DIALOG (data);
+
+	if (xst_dialog_get_modified (dialog)) {
+		/* Changes have been made. */
+		GtkWidget *w;
+		
+		w = gnome_question_dialog_parented (
+			_("There are changes which haven't been applyed.\n"
+			  "Apply them now?"),
+			NULL, NULL, GTK_WINDOW (dialog));
+
+		if (!gnome_dialog_run_and_close (GNOME_DIALOG (w)))
+			tool_user_apply (NULL, data);
+	}
+
+	/* this shouldn't be here eventually */
+	gtk_main_quit ();
 }
 
 static void
 tool_user_help (GtkWidget *w, gpointer data)
 {
+	GnomeHelpMenuEntry help_entry = { NULL, "index.html" };
+	XstDialog *dialog;
 
+	g_return_if_fail (data != NULL);
+	g_return_if_fail (XST_IS_DIALOG (data));
+
+	dialog = XST_DIALOG (data);
+
+	help_entry.name = g_strdup_printf ("%s-admin", dialog->tool->name);
+
+	gnome_help_display (NULL, &help_entry);
+
+	g_free (help_entry.name);
+}
+
+void
+xst_dialog_enable_complexity (XstDialog *dialog)
+{
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (XST_IS_DIALOG (dialog));
+
+	gtk_widget_set_sensitive (dialog->complexity_button, TRUE);
 }
 
 void
@@ -227,9 +323,11 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	w = glade_xml_get_widget (xml, "tool_vbox");
 	gnome_app_set_contents (GNOME_APP (dialog), w);
 
-	dialog->gui = xst_tool_load_glade (tool, widget);
+	dialog->gui   = xst_tool_load_glade (tool, NULL);
 	dialog->child = xst_dialog_get_widget (dialog, widget);
 
+	gtk_widget_ref (dialog->child);
+	gtk_widget_unparent (dialog->child);
 	gtk_box_pack_start (GTK_BOX (w), dialog->child, TRUE, TRUE, 0);
 
 	w = glade_xml_get_widget (xml, "help");
@@ -244,6 +342,12 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	
 	dialog->apply_button      = glade_xml_get_widget (xml, "apply");
 	dialog->complexity_button = glade_xml_get_widget (xml, "complexity");
+
+	gtk_widget_set_sensitive (dialog->apply_button,      FALSE);
+	gtk_widget_set_sensitive (dialog->complexity_button, FALSE);
+
+	dialog->complexity = XST_DIALOG_ADVANCED;
+	xst_dialog_set_complexity (dialog, XST_DIALOG_BASIC);
 }
 
 XstDialog *

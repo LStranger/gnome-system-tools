@@ -47,8 +47,7 @@ struct _XstTool {
 	XstDialog *main_dialog;
 
 	/* Progress report widgets */
-	GtkWidget *report_down;
-	GtkWidget *report_up;
+	GtkWidget *report_arrow;
 
 	GtkWidget *report_window;
 	GtkWidget *report_scrolled;
@@ -57,6 +56,7 @@ struct _XstTool {
 	GtkWidget *report_list;
 	GtkWidget *report_entry;
 	GtkWidget *report_visibility;
+	GtkWidget *report_notebook;
 
 	gboolean timeout_done;
 	gboolean report_list_visible;
