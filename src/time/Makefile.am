@@ -9,8 +9,7 @@ INCLUDES = \
 	$(GNOME_CFLAGS) 		\
 	$(GDK_PIXBUF_CFLAGS) 		\
 	$(LIBGLADE_CFLAGS)		\
-	$(GNOME_XML_CFLAGS)             \
-	$(GCONF_CFLAGS)
+	$(GNOME_XML_CFLAGS)
 
 sbin_PROGRAMS = time-admin
 
@@ -28,7 +27,6 @@ $(GNOME_XML_LIB) \
 $(GDK_PIXBUF_LIBS) \
 $(LIBGLADE_LIBS) \
 $(INTLLIBS) \
-$(GCONF_LIBS) \
 ../common/libsetuptool.a \
 ./e-map/e-map.o
 
