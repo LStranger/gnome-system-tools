@@ -55,6 +55,6 @@ pixmaps_DATA = \
 	world_map-960.png        \
 	xstdruidbg-3.png         \
 	ximian30.png			\
-	background.png
+	background.jpeg
 
 EXTRA_DIST = $(pixmaps_DATA)
