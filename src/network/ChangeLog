@@ -1,3 +1,11 @@
+2001-08-09  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.c (connection_configure): Call the check every
+	time a ppp connection is going to be configured.
+
+	* callbacks.c (callbacks_check_dialer): Pop dialog complaining
+	wvdial is not installed if such is the case.
+
 2001-07-25  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* connection.c (connection_dev_get_next): Deprecated.

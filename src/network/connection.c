@@ -1707,6 +1707,7 @@ connection_configure (XstConnection *cxn)
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
 					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
 								 W ("ip_vbox")));
+		callbacks_check_dialer (GTK_WINDOW (cxn->window), tool);
 	} else {
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
 					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),

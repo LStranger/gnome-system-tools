@@ -598,6 +598,25 @@ callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
 	return TRUE;
 }
 
+void
+callbacks_check_dialer (GtkWindow *window, XstTool *tool)
+{
+	gboolean has_dialer;
+	
+	has_dialer = (gboolean) gtk_object_get_data (GTK_OBJECT (tool),
+						     "dialinstalled");
+	if (!has_dialer)
+	{
+		gchar *text = _("wvdial could not be found on your system.\n"
+				"You need to install wvdial, or the PPP (modem)\n"
+				"connections will not activate.");
+		GtkWidget *message;
+		
+		message = gnome_warning_dialog_parented (text, window);
+		gnome_dialog_run_and_close (GNOME_DIALOG (message));
+	}
+}
+
 gboolean
 callbacks_check_dialer_hook (XstDialog *dialog, gpointer data)
 {
