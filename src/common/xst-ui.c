@@ -132,9 +132,9 @@ xst_ui_create_image_widget_canvas (gchar *filename)
 	width  = gdk_pixbuf_get_width  (pixbuf);
 	height = gdk_pixbuf_get_height (pixbuf);
 
-	canvas = gnome_canvas_new_aa();
+	canvas = gnome_canvas_new_aa ();
 	GTK_OBJECT_UNSET_FLAGS (GTK_WIDGET (canvas), GTK_CAN_FOCUS);
-	gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS(canvas)),
+	gnome_canvas_item_new (gnome_canvas_root (GNOME_CANVAS (canvas)),
 			       gnome_canvas_pixbuf_get_type (),
 			       "pixbuf", pixbuf,
 			       NULL);
@@ -142,6 +142,7 @@ xst_ui_create_image_widget_canvas (gchar *filename)
 
 	gdk_pixbuf_unref (pixbuf);
 	gtk_widget_show (canvas);
+	gnome_canvas_update_now (GNOME_CANVAS (canvas));
 	g_free (filename_dup);
 
 	return canvas;

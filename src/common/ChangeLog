@@ -1,3 +1,11 @@
+2001-09-13  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (report_finished_cb): Do the gtk_main_quit
+	and report window hiding here.
+
+	* xst-ui.c (xst_ui_create_image_widget_canvas): do an
+	update_now: see if that helps with the report window.
+
 2001-08-31  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-xml.c (xst_xml_element_reparent): New wrapping function.

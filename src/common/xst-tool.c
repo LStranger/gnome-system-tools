@@ -183,6 +183,10 @@ report_finished_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 {
 	tool->report_dispatch_pending = FALSE;
 	tool->report_finished = TRUE;
+
+	gtk_widget_hide (tool->report_window);
+	gtk_main_quit ();
+	
 	return TRUE;
 }
 
@@ -380,9 +384,6 @@ report_dispatch (XstTool *tool)
 		gdk_input_remove (tool->input_id);
 		tool->input_id = 0;
 	}
-
-	if (tool->report_finished && !tool->report_dispatch_pending)
-		gtk_main_quit ();
 }
 
 static void
