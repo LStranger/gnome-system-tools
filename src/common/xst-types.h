@@ -22,6 +22,8 @@
 #ifndef XST_TYPES_H
 #define XST_TYPES_H
 
+#include <glib.h>
+
 typedef enum {
 	XST_DIALOG_BASIC,
 	XST_DIALOG_INTERMEDIATE,
@@ -34,6 +36,23 @@ typedef enum {
 	XST_REPORT_HOOK_LOADSAVE
 } XstReportHookType;
 
+typedef enum {
+	XST_WIDGET_MODE_HIDDEN,
+	XST_WIDGET_MODE_INSENSITIVE,
+	XST_WIDGET_MODE_SENSITIVE
+} XstWidgetMode;
+
+/* NOTE: The following def should be in xst-widget.h, but alone it doesn't
+ * warrant setting up a complete XstWidget subsystem. */
+
+struct _XstWidgetPolicy {
+	const gchar   *widget;
+	gboolean       need_access;
+	XstWidgetMode  basic;
+	XstWidgetMode  intermediate;
+	XstWidgetMode  advanced;
+};
+
 typedef struct _XstTool             XstTool;
 typedef struct _XstToolClass        XstToolClass;
 
@@ -41,6 +60,8 @@ typedef struct _XstDialog           XstDialog;
 typedef struct _XstDialogClass      XstDialogClass;
 
 typedef struct _XstDialogSignal     XstDialogSignal;
+
+typedef struct _XstWidgetPolicy     XstWidgetPolicy;
 
 typedef struct _XstReportLine       XstReportLine;
 

@@ -1,3 +1,16 @@
+2001-03-15  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-dialog.c (apply_widget_policies): Implement.
+	  (xst_dialog_set_complexity): Call apply_widget_policies().
+	  (xst_dialog_set_widget_policies): Implement.
+
+	* xst-dialog.h: Add widget_policies to XstDialog struct.
+	  Add xst_dialog_set_widget_policies().
+
+	* xst-types.h: #include <glib.h>.
+	  Add XstWidgetMode enum.
+	  Add XstWidgetPolicy struct.
+
 2001-03-08  Tambet Ingo  <tambet@ximian.com>
 
 	* xst-xml.c (xst_xml_element_find_first): Added additional checks.

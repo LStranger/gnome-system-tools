@@ -58,6 +58,62 @@ xst_dialog_get_widget (XstDialog *xd, const char *widget)
 	return w;
 }
 
+static void
+apply_widget_policies (XstDialog *xd)
+{
+	gboolean have_access;
+	XstDialogComplexity complexity;
+	const XstWidgetPolicy **xwp;
+	GtkWidget *widget;
+	XstWidgetMode mode;
+	int i;
+
+	/* Hide, show + desensitize or show + sensitize widgets based on access level
+	 * and complexity */
+
+	if (!xd->widget_policies)
+		return;
+
+	have_access = xst_tool_get_access (xd->tool);
+	complexity  = xst_dialog_get_complexity (xd);
+	xwp         = xd->widget_policies;
+
+	for (i = 0; xwp [i]->widget; i++)
+	{
+		widget = xst_dialog_get_widget (xd, xwp [i]->widget);
+
+		/* Get desired mode for current complexity from widget's struct */
+
+		switch (complexity)
+		{
+		        case XST_DIALOG_BASIC:        mode = xwp [i]->basic;        break;
+		        case XST_DIALOG_INTERMEDIATE: mode = xwp [i]->intermediate; break;
+		        case XST_DIALOG_ADVANCED:     mode = xwp [i]->advanced;     break;
+		        default:
+				mode = xwp [i]->basic;  /* Whatever. Happy cc. */
+				g_error ("Unhandled complexity.");
+		}
+
+		/* Show or hide the widget */
+
+		if (mode == XST_WIDGET_MODE_HIDDEN)
+			gtk_widget_hide (widget);
+		else if (mode == XST_WIDGET_MODE_INSENSITIVE ||
+			 mode == XST_WIDGET_MODE_SENSITIVE)
+			gtk_widget_show (widget);
+		else
+			g_error ("Unhandled widget mode.");
+
+		/* Sensitize or desensitize the widget. Done separately for readability. */
+
+		if (mode == XST_WIDGET_MODE_INSENSITIVE ||
+		    (access == FALSE && xwp [i]->need_access == TRUE))
+			gtk_widget_set_sensitive (widget, FALSE);
+		else
+			gtk_widget_set_sensitive (widget, TRUE);
+	}
+}
+
 XstDialogComplexity 
 xst_dialog_get_complexity (XstDialog *xd)
 {
@@ -86,8 +142,8 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 
 	xd->complexity = c;
 
+	apply_widget_policies (xd);
 	gtk_label_set_text (GTK_LABEL (GTK_BIN (xd->complexity_button)->child), _(label[c]));
-
 	gtk_signal_emit (GTK_OBJECT (xd), xstdialog_signals[COMPLEXITY_CHANGE]);
 }
 
@@ -219,6 +275,12 @@ xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc *func, gpointer data
 	entry->func = func;
 
 	xd->apply_hook_list = g_list_append (xd->apply_hook_list, entry);
+}
+
+void
+xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy **xwp)
+{
+	xd->widget_policies = xwp;
 }
 
 static void
