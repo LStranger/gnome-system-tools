@@ -173,7 +173,7 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 {
 	char c;
 	GtkWidget *bar, *report;
-	gfloat p;
+/*	gfloat p;*/
 	static char *line = NULL;
 	static int line_len = 0;
 
@@ -490,12 +490,21 @@ ToolComplexity tool_get_complexity()
 
 void tool_set_complexity(ToolComplexity complexity)
 {
+	GtkWidget *button, *label;
+	
 	tool_context->complexity = complexity;
 
 	/* TODO: Invoke callbacks that update the interface to match
 	 * the new complexity level. */
+	
+	button = tool_widget_get ("complexity");
+	label = GTK_BIN (button)->child;
+	if (complexity == TOOL_COMPLEXITY_BASIC)
+		/* Translation: respect the spaces before and after, and the minus than signs. */
+		gtk_label_set_text (GTK_LABEL (label), _(" Advanced >> "));
+	else
+		gtk_label_set_text (GTK_LABEL (label), _(" << Basic "));
 }
-
 
 GtkWidget *tool_get_top_window()
 {
@@ -618,9 +627,11 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
 	 * 
 	 * NOTE: This is temporary, until we have more complexity levels
 	 * for at least one tool */
-	
-	w0 = tool_widget_get ("complexity");
-	if (w0) gtk_widget_set_sensitive (w0, FALSE);
+
+	/* users-admin is axperimenting with advanced complexity, so here we go. */
+/*	w0 = tool_widget_get ("complexity");
+	if (w0) gtk_widget_set_sensitive (w0, FALSE);*/
+	tool_context->complexity = TOOL_COMPLEXITY_BASIC;
 
 	g_free (s);
 	return (tc);
