@@ -236,16 +236,27 @@
 		</widget>
 
 		<widget>
-		  <class>GtkButton</class>
-		  <name>button11</name>
-		  <border_width>3</border_width>
-		  <can_focus>True</can_focus>
-		  <label>Set time zone...</label>
+		  <class>GtkHButtonBox</class>
+		  <name>hbuttonbox2</name>
+		  <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
+		  <spacing>30</spacing>
+		  <child_min_width>85</child_min_width>
+		  <child_min_height>27</child_min_height>
+		  <child_ipad_x>0</child_ipad_x>
+		  <child_ipad_y>0</child_ipad_y>
 		  <child>
 		    <padding>3</padding>
 		    <expand>False</expand>
 		    <fill>False</fill>
 		  </child>
+
+		  <widget>
+		    <class>GtkButton</class>
+		    <name>button17</name>
+		    <can_default>True</can_default>
+		    <can_focus>True</can_focus>
+		    <label>Set time zone...</label>
+		  </widget>
 		</widget>
 	      </widget>
 	    </widget>
@@ -255,52 +266,103 @@
 
       <widget>
 	<class>GtkFrame</class>
-	<name>frame2</name>
-	<border_width>3</border_width>
-	<label>Network time server</label>
+	<name>frame10</name>
+	<label>Time server</label>
 	<label_xalign>0</label_xalign>
 	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox12</name>
-	  <border_width>3</border_width>
+	  <class>GtkVBox</class>
+	  <name>vbox20</name>
 	  <homogeneous>False</homogeneous>
-	  <spacing>3</spacing>
+	  <spacing>0</spacing>
 
 	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label59</name>
-	    <label>Current: ntp0.cornell.edu (New York, USA) </label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
+	    <class>GtkHBox</class>
+	    <name>hbox22</name>
+	    <border_width>3</border_width>
+	    <homogeneous>False</homogeneous>
+	    <spacing>3</spacing>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
 	    </child>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label68</name>
+	      <label>Current: ntp0.cornell.edu (New York, USA) </label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox21</name>
+	      <border_width>3</border_width>
+	      <homogeneous>False</homogeneous>
+	      <spacing>3</spacing>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+		<pack>GTK_PACK_END</pack>
+	      </child>
+
+	      <widget>
+		<class>GtkCheckButton</class>
+		<name>checkbutton4</name>
+		<can_focus>True</can_focus>
+		<label>Enabled</label>
+		<active>False</active>
+		<draw_indicator>True</draw_indicator>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		  <pack>GTK_PACK_END</pack>
+		</child>
+	      </widget>
+	    </widget>
 	  </widget>
 
 	  <widget>
-	    <class>GtkButton</class>
-	    <name>button2</name>
-	    <can_focus>True</can_focus>
-	    <label>Server options...</label>
+	    <class>GtkHButtonBox</class>
+	    <name>hbuttonbox1</name>
+	    <layout_style>GTK_BUTTONBOX_END</layout_style>
+	    <spacing>30</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>27</child_min_height>
+	    <child_ipad_x>0</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
-	      <pack>GTK_PACK_END</pack>
 	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button16</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Server options...</label>
+	    </widget>
 	  </widget>
 	</widget>
       </widget>
@@ -713,6 +775,28 @@
 	</widget>
       </widget>
     </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window1</name>
+  <title>window1</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkTable</class>
+    <name>table7</name>
+    <rows>3</rows>
+    <columns>3</columns>
+    <homogeneous>False</homogeneous>
+    <row_spacing>0</row_spacing>
+    <column_spacing>0</column_spacing>
   </widget>
 </widget>
 
