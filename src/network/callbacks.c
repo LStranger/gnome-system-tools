@@ -400,7 +400,8 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 				GTK_DIALOG_MODAL,
 				GST_HIG_MESSAGE_QUESTION,
 				NULL,
-				_("This will disable any network connection with this interface as soon as you press \"apply\""),
+				_("This will disable any network connection with this "
+				  "interface as soon as you press \"OK\" in the main window"),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
 				NULL);
