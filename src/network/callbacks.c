@@ -833,16 +833,18 @@ on_connection_ok_clicked (GtkWidget *w, gpointer data)
 	if ((cxn->modified) && (connection_config_save (cxn, FALSE))) {
 		cxn->creating = FALSE;
 		gst_dialog_modify (tool->main_dialog);
-	}
 
-	if (standalone) {
-		gtk_widget_set_sensitive (window, FALSE);
-		connection_save_to_node (cxn, gst_xml_doc_get_root (tool->config));
-		gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog), "apply", tool);
-		gtk_main_quit ();
-	}
+		if (standalone) {
+			gtk_widget_set_sensitive (window, FALSE);
+			connection_save_to_node (cxn, gst_xml_doc_get_root (tool->config));
+			gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog), "apply", tool);
+			gtk_main_quit ();
+		}
 
-	gtk_widget_hide (window);
+		gtk_widget_hide (window);
+	} else if (!cxn->modified) {
+		gtk_widget_hide (window);
+	}
 }
 
 gboolean

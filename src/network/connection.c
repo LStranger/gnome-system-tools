@@ -1738,6 +1738,15 @@ connection_validate (GstConnection *cxn)
 				  "address for the primary DNS empty. Please "
 				  "enter the IP for the primary DNS or uncheck "
 				  "the manual DNS option.");
+		else if (strempty (cxn->serial_port))
+			error = _("The modem device that the connection "
+				  "will use was left empty. Please enter "
+				  "a device or press \"autodetect\" to "
+				  "continue.");
+		else if (strempty (cxn->phone_number))
+			error = _("The phone number that the connection "
+				  "will use was left empty. Please enter "
+				  "a valid phone number to continue.");
 		break;
 	default:
 		break;
