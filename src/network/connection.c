@@ -191,6 +191,15 @@ connection_new_from_node (xmlNode *node)
 		}
 	}
 
+	subnode = xml_element_find_first (node, "enabled");
+	if (subnode) {
+		s = xml_element_get_content (subnode);
+		if (s) {
+			cxn->active = atoi (s)? TRUE: FALSE;
+			g_free (s);
+		}
+	}
+
 	update_row (cxn);
 
 	return cxn;
