@@ -50,9 +50,9 @@
 #define USER_COLS 1
 #define GROUP_COLS 1
 
-#define USER_SPEC "<ETableSpecification cursor-mode=\"line\"> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"integer\"/> <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/><ETableColumn model_col=\"4\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/></ETableSpecification>"
+#define USER_SPEC "<ETableSpecification cursor-mode=\"line\"> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/><ETableColumn model_col=\"4\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/></ETableSpecification>"
 
-#define GROUP_SPEC "<ETableSpecification cursor-mode=\"line\"> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/><ETableColumn model_col=\"1\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"integer\"/> </ETableSpecification>"
+#define GROUP_SPEC "<ETableSpecification cursor-mode=\"line\"> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/><ETableColumn model_col=\"1\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> </ETableSpecification>"
 
 #define ADV_USER_STATE "<ETableState><column source=\"0\"/><column source=\"1\"/><column source=\"2\"/><column source=\"3\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
 
@@ -349,6 +349,30 @@ select_row (ETable *et, int row)
 	return;
 }
 
+static gint
+id_compare (gconstpointer id1, gconstpointer id2)
+{
+	g_return_val_if_fail (id1 != NULL, 1);
+	g_return_val_if_fail (id2 != NULL, -1);
+
+	if (atoi (id1) > atoi (id2))
+		return 1;
+	if (atoi (id1) < atoi (id2))
+		return -1;
+	return 0;
+}
+
+static ETableExtras *
+create_extras (void)
+{
+	ETableExtras *extras;
+
+	extras = e_table_extras_new ();
+	e_table_extras_add_compare (extras, "id_compare", id_compare);
+
+	return extras;
+}
+
 /* Public functions */
 
 /* Functions for both tables. */
@@ -359,6 +383,7 @@ e_table_create (void)
 	GtkWidget *w0;
 	ETableModel *e_table_model = NULL;
 	xmlNodePtr root, users_node, groups_node;
+	ETableExtras *extras;
 
 	root = xml_doc_get_root (tool_config_get_xml ());
 	if (!root)
@@ -367,6 +392,8 @@ e_table_create (void)
 		return;
 	}
 
+	extras = create_extras ();
+	
 	/* Users table */
 
 	users_node = xml_element_find_first (root, "userdb");
@@ -388,7 +415,8 @@ e_table_create (void)
                                            value_to_string,
                                            users_node);
 
-	user_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, USER_SPEC, BASIC_USER_STATE);
+	user_table = e_table_new (E_TABLE_MODEL(e_table_model), extras, USER_SPEC,
+			BASIC_USER_STATE);
 
 	if (!user_table)
 		g_warning ("e-table: Can't make user table");
@@ -421,7 +449,7 @@ e_table_create (void)
                                            value_to_string,
                                            groups_node);
 
-	group_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, GROUP_SPEC,
+	group_table = e_table_new (E_TABLE_MODEL(e_table_model), extras, GROUP_SPEC,
 			BASIC_GROUP_STATE);
 
 	if (!group_table)
