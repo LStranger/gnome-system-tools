@@ -8,7 +8,7 @@
 #include "global.h"
 
 #include "transfer.h"
-#include "timezone.h"
+#include "tz.h"
 
 
 static void transfer_string_spin_xml_to_gui(TransTree *trans_tree, xmlNodePtr root)
