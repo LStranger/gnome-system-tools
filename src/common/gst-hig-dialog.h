@@ -47,19 +47,14 @@ typedef enum
 
 typedef struct _GstHigDialog        GstHigDialog;
 typedef struct _GstHigDialogClass   GstHigDialogClass;
+typedef struct _GstHigDialogPrivate GstHigDialogPrivate;
 
 struct _GstHigDialog
 {
-  /*< private >*/
-  
   GtkDialog parent_instance;
-  
-  GtkWidget *image;
-  GtkWidget *primary_label;
-	GtkWidget *secondary_label;
 
-	GtkWidget *extra_align;
-	GtkWidget *extra_widget;
+  /*< private >*/
+	GstHigDialogPrivate *_priv;
 };
 
 struct _GstHigDialogClass

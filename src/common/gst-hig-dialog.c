@@ -30,6 +30,15 @@
 #include "gst-hig-dialog.h"
 #include <string.h>
 
+struct _GstHigDialogPrivate {
+  GtkWidget *image;
+  GtkWidget *primary_label;
+	GtkWidget *secondary_label;
+
+	GtkWidget *extra_align;
+	GtkWidget *extra_widget;
+};
+
 static void gst_hig_dialog_class_init   (GstHigDialogClass *klass);
 static void gst_hig_dialog_init         (GstHigDialog      *dialog);
 static void gst_hig_dialog_style_set    (GtkWidget         *widget,
@@ -149,37 +158,39 @@ gst_hig_dialog_init (GstHigDialog *dialog)
 {
   GtkWidget *hbox, *vbox;
 
+	dialog->_priv = g_new0 (GstHigDialogPrivate, 1);
+
   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
   
-  dialog->primary_label   = gtk_label_new (NULL);
-	dialog->secondary_label = gtk_label_new (NULL);
-	dialog->extra_align     = gtk_alignment_new (0.0, 0.0, 1.0, 1.0);
-  dialog->image = gtk_image_new_from_stock (NULL, GTK_ICON_SIZE_DIALOG);
-  gtk_misc_set_alignment (GTK_MISC (dialog->image), 0.5, 0.0);
+  dialog->_priv->primary_label   = gtk_label_new (NULL);
+	dialog->_priv->secondary_label = gtk_label_new (NULL);
+	dialog->_priv->extra_align     = gtk_alignment_new (0.0, 0.0, 1.0, 1.0);
+  dialog->_priv->image = gtk_image_new_from_stock (NULL, GTK_ICON_SIZE_DIALOG);
+  gtk_misc_set_alignment (GTK_MISC (dialog->_priv->image), 0.5, 0.0);
   
-  gtk_label_set_line_wrap  (GTK_LABEL (dialog->primary_label), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (dialog->primary_label), TRUE);
-	gtk_label_set_use_markup (GTK_LABEL (dialog->primary_label), TRUE);
-	gtk_misc_set_alignment   (GTK_MISC  (dialog->primary_label), 0.0, 0.0);
+  gtk_label_set_line_wrap  (GTK_LABEL (dialog->_priv->primary_label), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (dialog->_priv->primary_label), TRUE);
+	gtk_label_set_use_markup (GTK_LABEL (dialog->_priv->primary_label), TRUE);
+	gtk_misc_set_alignment   (GTK_MISC  (dialog->_priv->primary_label), 0.0, 0.0);
   
-  gtk_label_set_line_wrap  (GTK_LABEL (dialog->secondary_label), TRUE);
-  gtk_label_set_selectable (GTK_LABEL (dialog->secondary_label), TRUE);
-	gtk_label_set_use_markup (GTK_LABEL (dialog->secondary_label), TRUE);
-	gtk_misc_set_alignment   (GTK_MISC  (dialog->secondary_label), 0.0, 0.0);
+  gtk_label_set_line_wrap  (GTK_LABEL (dialog->_priv->secondary_label), TRUE);
+  gtk_label_set_selectable (GTK_LABEL (dialog->_priv->secondary_label), TRUE);
+	gtk_label_set_use_markup (GTK_LABEL (dialog->_priv->secondary_label), TRUE);
+	gtk_misc_set_alignment   (GTK_MISC  (dialog->_priv->secondary_label), 0.0, 0.0);
 
   hbox = gtk_hbox_new (FALSE, 12);
 	vbox = gtk_vbox_new (FALSE, 12);
 
-  gtk_box_pack_start (GTK_BOX (vbox), dialog->primary_label,
+  gtk_box_pack_start (GTK_BOX (vbox), dialog->_priv->primary_label,
                       FALSE, FALSE, 0);
 
-  gtk_box_pack_start (GTK_BOX (vbox), dialog->secondary_label,
+  gtk_box_pack_start (GTK_BOX (vbox), dialog->_priv->secondary_label,
 											TRUE, TRUE, 0);
 
-	gtk_box_pack_end   (GTK_BOX (vbox), dialog->extra_align,
+	gtk_box_pack_end   (GTK_BOX (vbox), dialog->_priv->extra_align,
 											FALSE, FALSE, 0);
 
-  gtk_box_pack_start (GTK_BOX (hbox), dialog->image,
+  gtk_box_pack_start (GTK_BOX (hbox), dialog->_priv->image,
                       FALSE, FALSE, 0);
 
 	gtk_box_pack_start (GTK_BOX (hbox), vbox,
@@ -190,7 +201,7 @@ gst_hig_dialog_init (GstHigDialog *dialog)
                       FALSE, FALSE, 0);
 
   gtk_widget_show_all (hbox);
-	gtk_widget_hide     (dialog->extra_align);
+	gtk_widget_hide     (dialog->_priv->extra_align);
 
 	gtk_window_set_title (GTK_WINDOW (dialog), "");
 }
@@ -201,9 +212,9 @@ gst_hig_dialog_get_message_type (GstHigDialog *dialog)
   const gchar* stock_id = NULL;
 
   g_return_val_if_fail (GST_IS_HIG_DIALOG (dialog), GST_HIG_MESSAGE_INFO);
-  g_return_val_if_fail (GTK_IS_IMAGE(dialog->image), GST_HIG_MESSAGE_INFO);
+  g_return_val_if_fail (GTK_IS_IMAGE(dialog->_priv->image), GST_HIG_MESSAGE_INFO);
 
-  stock_id = GTK_IMAGE(dialog->image)->data.stock.stock_id;
+  stock_id = GTK_IMAGE(dialog->_priv->image)->data.stock.stock_id;
 
   /* Look at the stock id of the image to guess the
    * GstHigMessageType value that was used to choose it
@@ -261,7 +272,7 @@ setup_type (GstHigDialog      *dialog,
   if (stock_id == NULL)
     stock_id = GTK_STOCK_DIALOG_INFO;
 
-	gtk_image_set_from_stock (GTK_IMAGE (dialog->image), stock_id,
+	gtk_image_set_from_stock (GTK_IMAGE (dialog->_priv->image), stock_id,
 														GTK_ICON_SIZE_DIALOG);
 }
 
@@ -271,10 +282,10 @@ setup_extra_widget (GstHigDialog *dialog,
 {
 	GtkWidget *align, *child;
 
-	align = dialog->extra_align;
+	align = dialog->_priv->extra_align;
 	child = GTK_BIN (align)->child;
 
-	dialog->extra_widget = extra_widget;
+	dialog->_priv->extra_widget = extra_widget;
 
 	if (child)
 		gtk_container_remove (GTK_CONTAINER (align), child);
@@ -282,12 +293,12 @@ setup_extra_widget (GstHigDialog *dialog,
 	if (extra_widget)
 	  {
 			gtk_container_add (GTK_CONTAINER (align), extra_widget);
-			gtk_widget_show (dialog->extra_align);
-			gtk_widget_show (dialog->extra_widget);
+			gtk_widget_show (dialog->_priv->extra_align);
+			gtk_widget_show (dialog->_priv->extra_widget);
 		}
 	else
 	  {
-			gtk_widget_hide (dialog->extra_align);
+			gtk_widget_hide (dialog->_priv->extra_align);
 		}
 }
 
@@ -331,7 +342,7 @@ gst_hig_dialog_get_property (GObject     *object,
       g_value_set_enum (value, gst_hig_dialog_get_message_type (dialog));
       break;
 		case PROP_EXTRA_WIDGET:
-			g_value_set_object (value, dialog->extra_widget);
+			g_value_set_object (value, dialog->_priv->extra_widget);
 			break;
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -371,25 +382,25 @@ gst_hig_dialog_new_va (GtkWindow         *parent,
 
 	if (primary_text)
 	  {
-			gtk_widget_show (GST_HIG_DIALOG (widget)->primary_label);
+			gtk_widget_show (GST_HIG_DIALOG (widget)->_priv->primary_label);
 
 			msg = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>", primary_text);
 
-			gtk_label_set_markup (GTK_LABEL (GST_HIG_DIALOG (widget)->primary_label),
+			gtk_label_set_markup (GTK_LABEL (GST_HIG_DIALOG (widget)->_priv->primary_label),
 														msg);
 			g_free (msg);
 		}
 	else
-		gtk_widget_hide (GST_HIG_DIALOG (widget)->primary_label);
+		gtk_widget_hide (GST_HIG_DIALOG (widget)->_priv->primary_label);
 
   if (secondary_text)
     {
-			gtk_widget_show (GST_HIG_DIALOG (widget)->secondary_label);
-      gtk_label_set_markup (GTK_LABEL (GST_HIG_DIALOG (widget)->secondary_label),
+			gtk_widget_show (GST_HIG_DIALOG (widget)->_priv->secondary_label);
+      gtk_label_set_markup (GTK_LABEL (GST_HIG_DIALOG (widget)->_priv->secondary_label),
 														secondary_text);
     }
 	else
-		gtk_widget_hide (GST_HIG_DIALOG (widget)->secondary_label);
+		gtk_widget_hide (GST_HIG_DIALOG (widget)->_priv->secondary_label);
 
   if (parent != NULL)
     gtk_window_set_transient_for (GTK_WINDOW (widget),
@@ -450,18 +461,18 @@ gst_hig_dialog_set_primary_text (GstHigDialog *dialog,
 
 	if (message_format)
 	  {
-			gtk_widget_show (dialog->primary_label);
+			gtk_widget_show (dialog->_priv->primary_label);
 			
 			msg = g_strdup_printf ("<span size=\"larger\" weight=\"bold\">%s</span>", message_format);
 
 			va_start (args, message_format);
-			gst_hig_dialog_set_text (GTK_LABEL (dialog->primary_label), msg, args);
+			gst_hig_dialog_set_text (GTK_LABEL (dialog->_priv->primary_label), msg, args);
 			va_end (args);
 
 			g_free (msg);
 		}
 	else
-		gtk_widget_hide (dialog->primary_label);
+		gtk_widget_hide (dialog->_priv->primary_label);
 }
 
 void
@@ -475,14 +486,14 @@ gst_hig_dialog_set_secondary_text (GstHigDialog *dialog,
 
 	if (message_format)
 	  {
-			gtk_widget_show (dialog->secondary_label);
+			gtk_widget_show (dialog->_priv->secondary_label);
 			
 			va_start (args, message_format);
-			gst_hig_dialog_set_text (GTK_LABEL (dialog->secondary_label), message_format, args);
+			gst_hig_dialog_set_text (GTK_LABEL (dialog->_priv->secondary_label), message_format, args);
 			va_end (args);
 		}
 	else
-		gtk_widget_hide (dialog->secondary_label);
+		gtk_widget_hide (dialog->_priv->secondary_label);
 }
 
 void
@@ -502,7 +513,7 @@ gst_hig_dialog_style_set (GtkWidget *widget,
   gint border_width = 0;
   gboolean use_separator;
 
-  parent = GTK_WIDGET (GST_HIG_DIALOG (widget)->image->parent);
+  parent = GTK_WIDGET (GST_HIG_DIALOG (widget)->_priv->image->parent);
 
   if (parent)
     {
