@@ -118,8 +118,6 @@ xst_report_line_new_from_string (gchar *string)
 
 	parts = g_strsplit (string, "::", 0);
 
-	g_print ("|%s|\n", string);
-
 	if (!parts[0] || !parts[1] || !parts[2]) {
 		g_warning ("xst_report_line_new_from_string: Error in report string [%s]", string);
 		g_strfreev (parts);
