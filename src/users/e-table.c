@@ -50,40 +50,13 @@
 #define USER_COLS 1
 #define GROUP_COLS 1
 
-#define USER_BASIC_SPEC "<ETableSpecification> \
-  <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-    <ETableState> \
-      <column source=\"0\"/> \
-      <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> \
-    </ETableState> \
-  </ETableSpecification>"
+#define USER_BASIC_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
 
-#define USER_ADV_SPEC "<ETableSpecification> \
-  <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-    <ETableState> \
-      <column source=\"0\"/> \
-      <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> \
-    </ETableState> \
-  </ETableSpecification>"
+#define USER_ADV_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
 
-#define GROUP_BASIC_SPEC "<ETableSpecification> \
-  <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-    <ETableState> \
-      <column source=\"0\"/> \
-      <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> \
-    </ETableState> \
-  </ETableSpecification>"
+#define GROUP_BASIC_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
 
-#define GROUP_ADV_SPEC "<ETableSpecification> \
-  <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-    <ETableState> \
-      <column source=\"0\"/> \
-      <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> \
-    </ETableState> \
-  </ETableSpecification>"
+#define GROUP_ADV_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
 
 
 /* Local globals */
@@ -664,7 +637,7 @@ e_table_add_group (gchar *new_name)
 
 	table = E_TABLE (group_table);
 	etm = E_TABLE_MODEL (table->model);
-	
+
 	root = E_TABLE_SIMPLE (etm)->data;
 
 	group = xml_element_add (root, "group");
@@ -675,14 +648,17 @@ e_table_add_group (gchar *new_name)
 	xml_element_add_with_content (group, "gid", find_new_id (GROUP));
 	xml_element_add (group, "users");
 
-	e_table_model_append_row (etm, NULL, 0);
-	e_table_model_row_inserted (etm, 0);
-
-	/*TODO: Select the RIGHT row, atm it doesn't work */
 	row = xml_parent_childs (root);
-	g_print ("%d\n", row);
-	while (gtk_events_pending ()) gtk_main_iteration ();
-	e_table_set_cursor_row (E_TABLE (user_table), row);
+	e_table_model_append_row (etm, NULL, row);
+	
+	e_table_model_changed (etm); 
+	e_table_model_row_inserted (etm, row);
+
+/*	while (gtk_events_pending ())
+		gtk_main_iteration ();
+
+	e_table_set_cursor_row (table, 32);
+*/
 }
 
 void
@@ -691,6 +667,7 @@ e_table_add_user (gchar *login)
 	ETableModel *etm;
 	ETable *table;
 	xmlNodePtr root, user;
+	gint row;
 
 	table = E_TABLE (user_table);
 	etm = E_TABLE_MODEL (table->model);
@@ -723,7 +700,85 @@ e_table_add_user (gchar *login)
 	xml_element_add (user, "reserved");
 	xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
 
-	e_table_model_append_row (etm, NULL, 0);
-	e_table_model_row_inserted (etm, 0);
+	row = xml_parent_childs (root);
+	e_table_model_append_row (etm, NULL, row);
+	
+	e_table_model_changed (etm); 
+	e_table_model_row_inserted (etm, row);
+}
+
+void
+e_table_change_user_full (gchar *target_f, gchar *target_val, gchar *field, gchar *val)
+{
+	ETableModel *etm;
+	ETable *table;
+	xmlNodePtr root, u, node;
+	gchar *txt;
+
+	table = E_TABLE (user_table);
+	etm = E_TABLE_MODEL (table->model);
+
+	root = E_TABLE_SIMPLE (etm)->data;
+
+	for (u = xml_element_find_first (root, "user"); u; u = xml_element_find_next (u, "user"))
+	{
+		node = xml_element_find_first (u, target_f);
+		if (!node)
+		{
+			g_warning ("e_table_change_user_full: Can't find target %s.", target_f);
+			return;
+		}
+
+		txt = xml_element_get_content (node);
+		if (strcmp (txt, target_val))
+			continue;
+
+		node = xml_element_find_first (u, field);
+		if (!node)
+		{
+			g_warning ("e_table_change_user_full: Can't find field %s.", field);
+			return;
+		}
+
+		xml_element_set_content (node, val);
+	}
+}
+
+void
+e_table_add_group_users_full (gchar *name, gchar *val)
+{
+	ETableModel *etm;
+	ETable *table;
+	xmlNodePtr root, u, node, users, n;
+	gchar *txt;
+
+	table = E_TABLE (group_table);
+	etm = E_TABLE_MODEL (table->model);
+
+	root = E_TABLE_SIMPLE (etm)->data;
+
+	for (u = xml_element_find_first (root, "group"); u; u = xml_element_find_next (u, "group"))
+	{
+		node = xml_element_find_first (u, "name");
+		if (!node)
+		{
+			g_warning ("e_table_add_group_users_full: Can't find name tag.");
+			return;
+		}
+
+		txt = xml_element_get_content (node);
+		if (strcmp (txt, name))
+			continue;
+
+		users = xml_element_find_first (u, "users");
+		if (!users)
+		{
+			g_warning ("e_table_add_group_users_full: can't get current group's users node.");
+			return; 
+		}
+
+		n = xml_element_add (users, "user");
+		xml_element_set_content (n, val);
+	}
 }
 

@@ -39,7 +39,7 @@ user_add (void)
 	GtkWindow *win;
 	GnomeDialog *dialog;
 	gchar *new_user_name, *new_group_name, *new_comment, *tmp;
-	gchar *name;
+	gchar *name, *gid;
 	GList *tmp_list;
 	gboolean found = FALSE;
 
@@ -128,22 +128,22 @@ user_add (void)
 		/* Cool: create group. */
 
 		e_table_add_group (new_group_name);
+		gid = e_table_get_group_by_data ("name", new_group_name, "gid");
 	}
-/* 	else
+ 	else
 	{
-		e_table_change_user_full ("name", name, "gid", gid);
-		gid = atoi (e_table_get_group_by_data ("name", name, "gid"));
+		gid = e_table_get_group_by_data ("name", new_group_name, "gid");
 	}
-*/	
 
 	/* Everything should be ok, let's create a new user */
 
 	e_table_add_user (new_user_name);
+	e_table_change_user_full ("login", new_user_name, "gid", gid);
 	
 	w0 = tool_widget_get ("user_settings_comment");
 	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
 	if (strlen (new_comment) > 0)
-		e_table_change_user ("comment", new_comment);
+		e_table_change_user_full ("login", new_user_name, "comment", new_comment);
 
 	return TRUE;
 }
@@ -353,7 +353,7 @@ group_add (void)
 
 	row = 0;
 	while (gtk_clist_get_text (clist, row++, 0, &tmp))
-		e_table_add_group_users (tmp);
+		e_table_add_group_users_full (new_group_name, tmp);
 
 	return TRUE;
 }
@@ -416,7 +416,7 @@ find_new_id (gchar from)
 	{
 		ret = logindefs.new_group_min_id;
 
-		tmp_list = get_group_list ("id", FALSE);
+		tmp_list = get_group_list ("gid", FALSE);
 		while (tmp_list)
 		{
 			id = atoi (tmp_list->data);
@@ -439,7 +439,7 @@ find_new_id (gchar from)
 	{
 		ret = logindefs.new_user_min_id;
 
-		tmp_list = get_user_list ("id", FALSE);
+		tmp_list = get_user_list ("uid", FALSE);
 		while (tmp_list)
 		{
 			id = atoi (tmp_list->data);
