@@ -743,8 +743,8 @@ xst_tool_read_xml_from_backend (XstTool *tool)
 static void
 xst_tool_default_set_directive_callback (XstDirectiveEntry *entry)
 {
-	xst_tool_run_set_directive_va (entry->tool, entry->in_xml, entry->report_sign,
-				       entry->directive, entry->ap);
+	xst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign,
+				    entry->directive, NULL);
 }
 
 /* All parameters except directive can be NULL. Last argument must be NULL.
@@ -753,25 +753,22 @@ xst_tool_default_set_directive_callback (XstDirectiveEntry *entry)
    data is for closure. in_xml is an input xml that may be required by the directive. */
 guint
 xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer data,
-			  xmlDoc *in_xml, const gchar *report_sign, const gchar *directive, ...)
+			  xmlDoc *in_xml, gchar *report_sign, gchar *directive)
 {
-	va_list            ap;
 	XstDirectiveEntry *entry;
 
 	g_return_val_if_fail (tool != NULL, -1);
 	g_return_val_if_fail (XST_IS_TOOL (tool), -1);
 
-	va_start (ap, directive);
 	entry = g_new0 (XstDirectiveEntry, 1);
 	g_return_val_if_fail (entry != NULL, -1);
 	
 	entry->tool        = tool;
-	entry->callback    = callback? xst_tool_default_set_directive_callback: callback;
+	entry->callback    = callback? callback: xst_tool_default_set_directive_callback;
 	entry->data        = data;
 	entry->in_xml      = in_xml;
 	entry->report_sign = report_sign;
 	entry->directive   = directive;
-	entry->ap          = ap;
 	
 	if (!tool->directive_queue)
 		gtk_idle_add (xst_tool_idle_run_directives, tool);

@@ -143,7 +143,7 @@ xmlDoc      *xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
 
 /* This is for async directive calls. See .c file for directions. */
 guint        xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer data,
-				       xmlDoc *in_xml, const gchar *report_sign, const gchar *directive, ...);
+				       xmlDoc *in_xml, gchar *report_sign, gchar *directive);
 gboolean     xst_tool_directive_running   (XstTool *tool);
 
 

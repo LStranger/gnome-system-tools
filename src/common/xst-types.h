@@ -84,8 +84,8 @@ struct _XstDirectiveEntry {
 	gpointer          data;
 
 	xmlDoc           *in_xml;
-	const gchar      *report_sign;
-	const gchar      *directive;
+	gchar            *report_sign;
+	gchar            *directive;
 	va_list           ap;
 };
 

@@ -1,3 +1,9 @@
+2001-10-06  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (xst_tool_default_set_directive_callback): Got rid
+	of _va functions: when the callback is executed the va_list
+	data is no longer in the stack.
+
 2001-10-05  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-tool.c (xst_tool_idle_run_directives): Run a queued
