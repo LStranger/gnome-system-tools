@@ -27,10 +27,12 @@
 #include <gtk/gtkwidget.h>
 #include "share-export.h"
 
-GtkWidget*    share_settings_prepare_dialog    (void);
-void          share_settings_close_dialog      (void);
-GstShare*     share_settings_get_share         (void);
-void          share_settings_set_share         (GstShare*);
+enum {
+	SHARE_DONT_SHARE,
+	SHARE_THROUGH_SMB,
+	SHARE_THROUGH_NFS
+};
 
-
+void          share_settings_dialog_run        (const gchar*, gboolean);
+void          share_settings_create_combo      (void);
 #endif /* _SHARE_SETTINGS_H */

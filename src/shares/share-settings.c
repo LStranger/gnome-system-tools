@@ -25,6 +25,8 @@
 #include "share-settings.h"
 #include "share-export-smb.h"
 #include "share-export-nfs.h"
+#include "nfs-acl-table.h"
+#include "table.h"
 #include "gst.h"
 
 extern GstTool *tool;
@@ -38,12 +40,6 @@ share_settings_clear_dialog (void)
 	/* common widgets */
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_path");
 	gtk_entry_set_text (GTK_ENTRY (widget), "");
-
-	widget = gst_dialog_get_widget (tool->main_dialog, "share_type");
-	gtk_widget_show (widget);
-	
-	widget = gst_dialog_get_widget (tool->main_dialog, "share_type_label");
-	gtk_widget_show (widget);
 
 	/* SMB widgets */
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
@@ -64,20 +60,82 @@ share_settings_clear_dialog (void)
 	gtk_list_store_clear (GTK_LIST_STORE (model));
 }
 
-GtkWidget*
-share_settings_prepare_dialog (void)
+GtkTreeModel*
+share_settings_get_combo_model (void)
+{
+	GtkListStore *store = gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT);
+
+	return GTK_TREE_MODEL (store);
+}
+
+void
+share_settings_create_combo (void)
 {
 	GtkWidget    *combo  = gst_dialog_get_widget (tool->main_dialog, "share_type");
-	GtkWidget    *dialog = gst_dialog_get_widget (tool->main_dialog, "share_properties");
 	GtkTreeModel *model;
 
-	share_settings_clear_dialog ();
+	model = share_settings_get_combo_model ();
+	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
+	g_object_unref (model);
+}
 
+static void
+share_settings_set_path (const gchar *path)
+{
+	GtkWidget *path_entry        = gst_dialog_get_widget (tool->main_dialog, "share_path");
+	GtkWidget *path_fentry       = gst_dialog_get_widget (tool->main_dialog, "share_path_fentry");
+	GtkWidget *path_fentry_label = gst_dialog_get_widget (tool->main_dialog, "share_path_fentry_label");
+	GtkWidget *path_label        = gst_dialog_get_widget (tool->main_dialog, "share_path_label");
+	GtkWidget *path_label_label  = gst_dialog_get_widget (tool->main_dialog, "share_path_label_label");
+
+	if (!path) {
+		gtk_widget_show (path_fentry);
+		gtk_widget_show (path_fentry_label);
+		gtk_widget_hide (path_label);
+		gtk_widget_hide (path_label_label);
+	} else {
+		gtk_widget_hide (path_fentry);
+		gtk_widget_hide (path_fentry_label);
+		gtk_widget_show (path_label);
+		gtk_widget_show (path_label_label);
+		gtk_label_set_text (GTK_LABEL (path_label), path);
+		gtk_entry_set_text (GTK_ENTRY (path_entry), path);
+	}
+}
+
+static GtkWidget*
+share_settings_prepare_dialog (const gchar *path, gboolean standalone)
+{
+	GtkWidget    *combo       = gst_dialog_get_widget (tool->main_dialog, "share_type");
+	GtkWidget    *dialog      = gst_dialog_get_widget (tool->main_dialog, "share_properties");
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+
+	share_settings_clear_dialog ();
+	share_settings_set_path (path);
+	
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	gtk_list_store_clear (GTK_LIST_STORE (model));
 
-	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("SMB"));
-	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("NFS"));
+	if (standalone) {
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    0, _("Do not share"),
+				    1, SHARE_DONT_SHARE,
+				    -1);
+	}
+
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    0, _("SMB"),
+			    1, SHARE_THROUGH_SMB,
+			    -1);
+
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    0, _("NFS"),
+			    1, SHARE_THROUGH_NFS,
+			    -1);
 
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
@@ -113,7 +171,7 @@ share_settings_set_share_smb (GstShareSMB *share)
 				      ! (flags & GST_SHARE_SMB_WRITABLE));
 }
 
-void
+static void
 share_settings_set_share_nfs (GstShareNFS *share)
 {
 	GtkWidget    *widget;
@@ -131,25 +189,42 @@ share_settings_set_share_nfs (GstShareNFS *share)
 	}
 }
 
-void
-share_settings_set_share (GstShare *share)
+static void
+share_settings_set_active (gint val)
 {
-	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "share_type");
-	GtkWidget *label = gst_dialog_get_widget (tool->main_dialog, "share_type_label");
+	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "share_type");
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gboolean      valid;
+	gint          value;
 
-	if (GST_IS_SHARE_SMB (share)) {
-		gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
-		share_settings_set_share_smb (GST_SHARE_SMB (share));
-	} else if (GST_IS_SHARE_NFS (share)) {
-		gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 1);
-		share_settings_set_share_nfs (GST_SHARE_NFS (share));
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, &iter, 1, &value, -1);
+
+		if (value == val) {
+			gtk_combo_box_set_active_iter (GTK_COMBO_BOX (combo), &iter);
+			valid = FALSE;
+		} else
+			valid = gtk_tree_model_iter_next (model, &iter);
 	}
-
-	gtk_widget_hide (combo);
-	gtk_widget_hide (label);
 }
 
-void
+static void
+share_settings_set_share (GstShare *share)
+{
+	if (GST_IS_SHARE_SMB (share)) {
+		share_settings_set_active (SHARE_THROUGH_SMB);
+		share_settings_set_share_smb (GST_SHARE_SMB (share));
+	} else if (GST_IS_SHARE_NFS (share)) {
+		share_settings_set_active (SHARE_THROUGH_NFS);
+		share_settings_set_share_nfs (GST_SHARE_NFS (share));
+	}
+}
+
+static void
 share_settings_close_dialog (void)
 {
 	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "share_properties");
@@ -187,12 +262,11 @@ share_settings_get_share_smb (void)
 	return GST_SHARE (gst_share_smb_new (name, comment, path, flags));
 }
 
-GstShare*
+static GstShare*
 share_settings_get_share_nfs ()
 {
 	GtkWidget   *widget;
 	const gchar *path;
-	GSList      *list;
 	GstShareNFS *share;
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
@@ -204,18 +278,70 @@ share_settings_get_share_nfs ()
 	return GST_SHARE (share);
 }
 
-GstShare*
+static GstShare*
 share_settings_get_share (void)
 {
-	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog, "share_type");
-	GstShare  *share;
-	gint       selected;
+	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "share_type");
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gint          selected;
 
-	selected = gtk_combo_box_get_active (GTK_COMBO_BOX (combo));
-	
-	if (selected == 0) {
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+
+	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
+		return NULL;
+
+	gtk_tree_model_get (model, &iter, 1, &selected, -1);
+
+	if (selected == SHARE_THROUGH_SMB)
 		return share_settings_get_share_smb ();
-	} else {
+	else if (selected == SHARE_THROUGH_NFS)
 		return share_settings_get_share_nfs ();
+	else
+		return NULL;
+}
+
+void
+share_settings_dialog_run (const gchar *path, gboolean standalone)
+{
+	GtkWidget   *dialog;
+	gint         response;
+	GstShare    *new_share, *share;
+	GtkTreeIter  iter;
+	gboolean     path_exists;
+
+	share  = NULL;
+	dialog = share_settings_prepare_dialog (path, standalone);
+
+	/* check whether the path already exists */
+	path_exists = table_get_iter_with_path (path, &iter);
+
+	if (path_exists) {
+		share = table_get_share_at_iter (&iter);
+		share_settings_set_share (share);
+		g_object_unref (share);
 	}
+
+	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
+	while ((response = gtk_dialog_run (GTK_DIALOG (dialog))) == GTK_RESPONSE_HELP);
+	gtk_widget_hide (dialog);
+
+	if (response == GTK_RESPONSE_OK) {
+		new_share = share_settings_get_share ();
+
+		if (path_exists && new_share)
+			table_modify_share_at_iter (&iter, new_share);
+		else if (!path_exists && new_share)
+			table_add_share (new_share);
+		else if (path_exists && !new_share)
+			table_delete_share_at_iter (&iter);
+
+		gst_dialog_modify (tool->main_dialog);
+
+		if (standalone)
+			gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog),
+						 "apply", tool);
+	}
+
+	share_settings_close_dialog ();
 }

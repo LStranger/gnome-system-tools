@@ -33,9 +33,16 @@ enum {
 	   COL_LAST
 };
 
-void    table_create               (void);
-void    table_add_share_from_node  (xmlNodePtr);
-void    table_add_share            (GstShare*);
-void    table_modify_share_at_iter (GtkTreeIter, GstShare*);
+enum {
+	SHARES_DND_URI_LIST
+};
+
+void      table_create               (void);
+void      table_add_share_from_node  (xmlNodePtr);
+void      table_add_share            (GstShare*);
+gboolean  table_get_iter_with_path   (const gchar*, GtkTreeIter*);
+GstShare* table_get_share_at_iter    (GtkTreeIter*);
+void      table_modify_share_at_iter (GtkTreeIter*, GstShare*);
+void      table_delete_share_at_iter (GtkTreeIter*);
 
 #endif /* __TABLE_H__ */

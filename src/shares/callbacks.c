@@ -112,36 +112,46 @@ on_shares_table_popup_menu (GtkWidget *widget, GtkWidget *popup)
 }
 
 void
+on_shares_dragged_folder (GtkWidget *widget, GdkDragContext *context,
+			  gint x, gint y, GtkSelectionData *selection_data,
+			  guint info, guint time, gpointer gdata)
+{
+	GList    *uris = NULL;
+	gchar    *path;
+
+	if (info == SHARES_DND_URI_LIST) {
+		uris = gnome_vfs_uri_list_parse ((gchar *) selection_data->data);
+
+		if (uris != NULL && uris->data != NULL) {
+			path = g_strdup (gnome_vfs_uri_get_path (uris->data));
+
+			if (g_file_test (path, G_FILE_TEST_IS_DIR)) {
+				share_settings_dialog_run (path, FALSE);
+				gtk_drag_finish (context, TRUE, FALSE, time);
+			} else {
+				gtk_drag_finish (context, FALSE, FALSE, time);
+			}
+
+			g_free (path);
+			gnome_vfs_uri_list_free (uris);
+		}
+	}
+}
+
+void
 on_add_share_clicked (GtkWidget *widget, gpointer data)
 {
-	GtkWidget *dialog;
-	gint       response;
-	GstShare  *share;
-
-	dialog = share_settings_prepare_dialog ();
-
-	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
-	while ((response = gtk_dialog_run (GTK_DIALOG (dialog))) == GTK_RESPONSE_HELP);
-	gtk_widget_hide (dialog);
-
-	if (response == GTK_RESPONSE_OK) {
-		share = share_settings_get_share ();
-		table_add_share (share);
-		gst_dialog_modify (tool->main_dialog);
-	}
-
-	share_settings_close_dialog ();
+	share_settings_dialog_run (NULL, FALSE);
 }
 
 void
 on_edit_share_clicked (GtkWidget *widget, gpointer data)
 {
-	GtkWidget        *dialog, *table;
+	GtkWidget        *table;
 	GtkTreeSelection *selection;
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
-	GstShare         *share;
-	gint              response;
+	gchar            *path;
 
 	table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (table));
@@ -149,23 +159,10 @@ on_edit_share_clicked (GtkWidget *widget, gpointer data)
 	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
 		return;
 
-	gtk_tree_model_get (model, &iter, COL_POINTER, &share, -1);
+	gtk_tree_model_get (model, &iter, COL_PATH, &path, -1);
 
-	dialog = share_settings_prepare_dialog ();
-	share_settings_set_share (share);
-	g_object_unref (share);
-		
-	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (tool->main_dialog));
-	while ((response = gtk_dialog_run (GTK_DIALOG (dialog))) == GTK_RESPONSE_HELP);
-	gtk_widget_hide (dialog);
-
-	if (response == GTK_RESPONSE_OK) {
-		share = share_settings_get_share ();
-		table_modify_share_at_iter (iter, share);
-		gst_dialog_modify (tool->main_dialog);
-	}
-
-	share_settings_close_dialog ();
+	share_settings_dialog_run (path, FALSE);
+	g_free (path);
 }
 
 void
@@ -202,19 +199,31 @@ on_delete_share_clicked (GtkWidget *widget, gpointer data)
 void
 on_share_type_changed (GtkWidget *widget, gpointer data)
 {
-	gint selected;
-	GtkWidget *smb_frame, *nfs_frame;
+	gint          selected;
+	GtkWidget    *smb_frame, *nfs_frame;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
 
 	selected  = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
 	smb_frame = gst_dialog_get_widget (tool->main_dialog, "smb_properties");
 	nfs_frame = gst_dialog_get_widget (tool->main_dialog, "nfs_properties");
 
-	if (selected == 0) {
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+
+	if (!gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter))
+		return;
+
+	gtk_tree_model_get (model, &iter, 1, &selected, -1);
+
+	if (selected == SHARE_THROUGH_SMB) {
 		gtk_widget_show (smb_frame);
 		gtk_widget_hide (nfs_frame);
-	} else {
+	} else if (selected == SHARE_THROUGH_NFS) {
 		gtk_widget_hide (smb_frame);
 		gtk_widget_show (nfs_frame);
+	} else {
+		gtk_widget_hide (smb_frame);
+		gtk_widget_hide (nfs_frame);
 	}
 }
 

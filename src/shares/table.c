@@ -31,6 +31,10 @@
 extern GstTool *tool;
 extern GtkIconTheme *icon_theme;
 
+static GtkTargetEntry drop_types[] = {
+	{ "text/uri-list", 0, SHARES_DND_URI_LIST },
+};
+
 GtkActionEntry popup_menu_items [] = {
 	{ "Add",       GTK_STOCK_ADD,         N_("_Add"),        NULL, NULL, G_CALLBACK (on_add_share_clicked) },
 	{ "Properties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL, NULL, G_CALLBACK (on_edit_share_clicked) },
@@ -129,6 +133,14 @@ table_create (void)
 	g_signal_connect (G_OBJECT (table), "popup_menu",
 			  G_CALLBACK (on_shares_table_popup_menu), (gpointer) popup);
 
+	/* Drag and Drop stuff */
+	gtk_drag_dest_unset (table);
+	gtk_drag_dest_set (table, GTK_DEST_DEFAULT_ALL, drop_types,
+			   sizeof (drop_types) / sizeof (drop_types[0]),
+			   GDK_ACTION_COPY);
+	g_signal_connect (G_OBJECT (table), "drag_data_received",
+			  G_CALLBACK (on_shares_dragged_folder), NULL);
+
 	icon_theme = gtk_icon_theme_get_default ();
 }
 
@@ -156,11 +168,26 @@ table_add_share (GstShare *share)
 	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
-	GdkPixbuf    *pixbuf = NULL;
 
 	g_return_if_fail (share != NULL);
 	g_return_if_fail (GST_IS_SHARE (share));
 	
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+
+	table_modify_share_at_iter (&iter, share);
+}
+
+void
+table_modify_share_at_iter (GtkTreeIter *iter, GstShare *share)
+{
+	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
+	GtkTreeModel *model;
+	GdkPixbuf    *pixbuf = NULL;
+
+	g_return_if_fail (share != NULL);
+	g_return_if_fail (GST_IS_SHARE (share));
+
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
 
 	if (GST_IS_SHARE_SMB (share)) {
@@ -173,9 +200,8 @@ table_add_share (GstShare *share)
 						   48, 0, NULL);
 	}
 
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model),
-			    &iter,
+			    iter,
 			    0, pixbuf,
 			    1, gst_share_get_path (share),
 			    2, share,
@@ -184,25 +210,63 @@ table_add_share (GstShare *share)
 	g_object_unref (share);
 
 	if (pixbuf)
-		g_object_unref (pixbuf);
+		gdk_pixbuf_unref (pixbuf);
+}
+
+GstShare*
+table_get_share_at_iter (GtkTreeIter *iter)
+{
+	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
+	GtkTreeModel *model;
+	GstShare     *share;
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+
+	gtk_tree_model_get (model, iter,
+			    COL_POINTER, &share,
+			    -1);
+
+	return share;
 }
 
 void
-table_modify_share_at_iter (GtkTreeIter iter, GstShare *share)
+table_delete_share_at_iter (GtkTreeIter *iter)
 {
 	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
 	GtkTreeModel *model;
 
-	g_return_if_fail (share != NULL);
-	g_return_if_fail (GST_IS_SHARE (share));
-
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	gtk_list_store_remove (GTK_LIST_STORE (model), iter);
+}
 
-	gtk_list_store_set (GTK_LIST_STORE (model),
-			    &iter,
-			    1, gst_share_get_path (share),
-			    2, share,
-			    -1);
+gboolean
+table_get_iter_with_path (const gchar *path, GtkTreeIter *iter)
+{
+	GtkWidget    *table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
+	GtkTreeModel *model;
+	gboolean      valid, found;
+	gchar        *iter_path;
 
-	g_object_unref (share);
+	if (!path)
+		return FALSE;
+
+	found = FALSE;
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+	valid = gtk_tree_model_get_iter_first (model, iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, iter,
+				    COL_PATH, &iter_path,
+				    -1);
+
+		if (strcmp (iter_path, path) == 0) {
+			found = TRUE;
+			valid = FALSE;
+		} else
+			valid = gtk_tree_model_iter_next (model, iter);
+
+		g_free (iter_path);
+	}
+
+	return found;
 }

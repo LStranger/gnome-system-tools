@@ -101,7 +101,7 @@ gst_share_init (GstShare *share)
 
 	share->_priv = g_new0 (GstSharePrivate, 1);
 
-	share->_priv->path    = NULL;
+	share->_priv->path = NULL;
 }
 
 static void
@@ -183,4 +183,3 @@ gst_share_get_xml (GstShare *share, xmlNodePtr parent)
 
 	return GST_SHARE_GET_CLASS (share)->get_xml (share, parent);
 }
-
