@@ -1,3 +1,17 @@
+2001-04-17  Tambet Ingo  <tambet@ximian.com>
+
+	* *.[ch]: Fixed tons of little bugs:
+	home and shell HAVE to start with "/"
+	don't allow root account modifications (login, uid, group, home, gid)
+	add shell list to user_settings_dialog
+	user_settings_dialog doesn't allow bigger uid's than 1000
+	don't allow negative numbers for uid and gid
+	add check for setting too long login (32 chars seems to be max)
+	add check for setting too long groupname (16 chars seems to be max)
+	add check for setting too big gid (2147483647 seems to be max)
+	add check for setting too big uid (2147483647 seems to be max)
+	don't allow text in uid and gid in ETable
+
 2001-04-10  Tambet Ingo  <tambet@ximian.com>
 
 	* user_group.c: Some fixes to make it build again.

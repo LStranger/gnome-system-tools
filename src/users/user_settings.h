@@ -37,7 +37,7 @@ struct _UserSettingsBasic
 	GtkEntry *name;
 	GtkEntry *comment;
 	GtkEntry *home;
-	GtkEntry *shell;
+	GtkCombo *shell;
 	GtkSpinButton *uid;
 	GtkWidget *advanced;
 };

@@ -329,7 +329,7 @@ user_settings_dialog_close (UserSettings *us)
 	
 	gtk_entry_set_text (us->basic->name, "");
 	gtk_entry_set_text (us->basic->comment, "");
-	gtk_entry_set_text (us->basic->shell, "");
+	gtk_entry_set_text (GTK_ENTRY (us->basic->shell->entry), "");
 	gtk_entry_set_text (us->basic->home, "");
 	gtk_spin_button_set_value (us->basic->uid, 0);
 	gtk_widget_hide    (us->basic->advanced);

@@ -41,12 +41,15 @@ gchar *user_value_group      (xmlNodePtr user_node);
 #define group_value_gid_string(node) (generic_value_string (node, "gid"))
 #define group_value_gid_integer(node) (generic_value_integer (node, "gid"))
 
-gboolean user_set_value_login (XstDialog *xd, xmlNodePtr node, gchar *value);
-gboolean user_set_value_home (XstDialog *xd, xmlNodePtr node, gchar *value);
-gboolean user_set_value_shell (XstDialog *xd, xmlNodePtr node, gchar *value);
-gboolean user_set_value_comment (XstDialog *xd, xmlNodePtr node, gchar *value);
-gboolean user_set_value_uid (XstDialog *xd, xmlNodePtr node, gchar *value);
-gboolean user_set_value_gid (XstDialog *xd, xmlNodePtr node, gchar *value);
+gboolean user_set_value_login (XstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean user_set_value_home (XstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean user_set_value_shell (XstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean user_set_value_comment (XstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean user_set_value_uid (XstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean user_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean user_set_value_group (XstDialog *xd, xmlNodePtr node, const gchar *value);
 
+gboolean group_set_value_name (XstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean group_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value);
 
 #endif /* __USER_GROP_XML_H */

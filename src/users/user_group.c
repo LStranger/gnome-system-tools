@@ -22,15 +22,16 @@
  */
 
 #include <stdlib.h>
+#include <ctype.h>
 #include <gnome.h>
 
-#include "global.h"
 #include "callbacks.h"
 #include "user_group.h"
 #include "transfer.h"
 #include "e-table.h"
 #include "user_settings.h"
 #include "profile.h"
+#include "user-group-xml.h"
 
 extern XstTool *tool;
 
@@ -50,7 +51,6 @@ static void group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_nam
 static xmlNodePtr group_add_blank_xml (xmlNodePtr db_node);
 static void group_add_from_user (UserSettings *us);
 static void group_update_xml (xmlNodePtr node, gboolean adv);
-static gboolean node_exsists (xmlNodePtr node, gchar *name, gchar *val);
 static GList *get_group_users (xmlNodePtr group_node);
 static GList *get_group_mainusers (xmlNodePtr group_node);
 static GList *group_fill_members_list (xmlNodePtr node);
@@ -59,10 +59,48 @@ static void del_group_users (xmlNodePtr group_node);
 static void add_group_users (xmlNodePtr group_node, gchar *name);
 static void del_user_groups (xmlNodePtr user_node);
 static void add_user_groups (xmlNodePtr user_node, gchar *group_name);
-static gboolean is_valid_name (gchar *str);
 static void reply_cb (gint val, gpointer data);
 static gchar *parse_home (UserSettings *us);
 static gchar *parse_group (UserSettings *us);
+
+
+
+static gboolean
+node_exsists (xmlNodePtr node, const gchar *name, const gchar *val)
+{
+	xmlNodePtr n0;
+	gchar *buf;
+	xmlNodePtr parent;
+	gboolean self;
+
+	parent = get_db_node (node);
+	if (parent == node)
+		self = FALSE;
+	else
+		self = TRUE;
+
+	for (n0 = parent->childs; n0; n0 = n0->next)
+	{
+		if (self && n0 == node)
+			continue;  /* Self */
+
+		buf = xst_xml_get_child_content (n0, (gchar *)name);
+
+		if (!buf)
+			continue;  /* No content */
+
+		if (!strcmp (val, buf))
+		{
+			g_free (buf);  /* Woohoo! found! */
+			return TRUE;
+		}
+
+		g_free (buf);
+	}
+
+	return FALSE;
+}
+
 
 /* Global functions */
 
@@ -216,8 +254,81 @@ check_node_complexity (xmlNodePtr node)
 		return FALSE;
 }
 
+static gboolean
+is_valid_name (const gchar *str)
+{
+	if (!str || !*str)
+		return FALSE;
+
+	for (;*str; str++)
+	{
+		if (((*str < 'a') || (*str > 'z')) &&
+				((*str < '0') || (*str > '9')))
+
+			return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+is_valid_id (const gchar *str)
+{
+	gdouble nr;
+	gchar *buf;
+	
+	if (!str || !*str)
+		return FALSE;
+
+	buf = (gchar *)str;
+	
+	for (;*buf; buf++) {
+		if (!isdigit (*buf))
+			return FALSE;
+	}
+
+	nr = g_strtod (str, NULL);
+	
+	if (nr < 0 || nr > IDMAX)
+		return FALSE;
+	
+	return TRUE;
+}
+
+
 gboolean
-check_user_login (xmlNodePtr node, gchar *login)
+check_user_root (XstDialog *xd, xmlNodePtr node, const gchar *field, const gchar *value)
+{
+	gint i;
+	gboolean retval = TRUE;
+	gchar *nvalue;
+	gchar *n[] = { "login", "uid", "home", "gid", NULL };
+	gchar *user;
+
+
+	if ((user = user_value_login (node)) == NULL)
+		return retval;
+
+	if (strcmp (user, "root"))
+		return retval;
+
+	nvalue = generic_value_string (node, field);
+	for (i = 0; n[i]; i++) {
+		if (!strcmp (n[i], field) && strcmp (value, nvalue)) {
+			retval = FALSE;
+			break;
+		}
+	}
+
+	g_free (user);
+	g_free (nvalue);
+
+	return retval;
+
+}
+
+gboolean
+check_user_login (XstDialog *xd, xmlNodePtr node, const gchar *login)
 {
 	gchar *buf = NULL;
 
@@ -228,6 +339,13 @@ check_user_login (xmlNodePtr node, gchar *login)
 	if (strlen (login) < 1)
 		buf = g_strdup (_("The username is empty."));
 
+	/* If too long. */
+	else if (strlen (login) > 32)
+		buf = g_strdup (_("The username is too long."));
+
+	else if (!check_user_root (xd, node, "login", login))
+		buf = g_strdup (_("root user shouldn't be modified."));
+	
 	/* if valid. */
 	else if (!is_valid_name (login))
 		buf = g_strdup (_("Please set a valid username, using only lower-case letters."));
@@ -239,14 +357,12 @@ check_user_login (xmlNodePtr node, gchar *login)
 	/* If anything is wrong. */
 	if (buf)
 	{
-		GtkWindow *win;
 		GnomeDialog *dialog;
 
-		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, win));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
 		gnome_dialog_run (dialog);
 		g_free (buf);
-		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "user_settings_name"));
+		gtk_widget_grab_focus (GTK_WIDGET (xd));
 
 		return FALSE;
 	}
@@ -256,22 +372,24 @@ check_user_login (xmlNodePtr node, gchar *login)
 }
 
 gboolean
-check_user_uid (xmlNodePtr node, gchar *val)
+check_user_uid (XstDialog *xd, xmlNodePtr node, const gchar *val)
 {
+	gchar *buf = NULL;
 	gboolean retval = TRUE;
-	GtkWindow *win;
 	GnomeDialog *dialog;
 
-	/* Check if uid is available */
+	if (!is_valid_id (val))
+		buf = g_strdup (_("User id must be a positive number."));
+	else if (!check_user_root (xd, node, "uid", val))
+		buf = g_strdup (_("root user shouldn't be modified."));
+	else if (node_exsists (node, "uid", val))
+		buf = g_strdup (_("Such user id already exsists."));
 
-	if (node_exsists (node, "uid", val))
-	{
-		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented
-				(_("Such user id already exsists."), win));
-
+	if (buf) {
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
 		gnome_dialog_run (dialog);
-		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "user_settings_uid"));
+		g_free (buf);
+		gtk_widget_grab_focus (GTK_WIDGET (xd));
 		retval = FALSE;
 	}
 
@@ -279,28 +397,29 @@ check_user_uid (xmlNodePtr node, gchar *val)
 }
 
 gboolean
-check_user_comment (xmlNodePtr node, gchar *val)
+check_user_comment (XstDialog *xd, xmlNodePtr node, const gchar *val)
 {
 	/* What could be wrong with comment? */
 	return TRUE;
 }
 
 gboolean
-check_user_home (xmlNodePtr node, gchar *val)
+check_user_home (XstDialog *xd, xmlNodePtr node, const gchar *val)
 {
-	GtkWindow *win;
-	GnomeDialog *dialog;
-
-	/* I think every user has to have home dir... FIXME, if I'm wrong. */
-
+	gchar *buf = NULL;
+	
 	if (strlen (val) < 1)
-	{
-		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented
-				(_("Home directory must not be empty."), win));
-
+		buf = g_strdup (_("Home directory must not be empty."));
+	else if (*val != '/')
+		buf = g_strdup (_("Please enter full path for home directory."));
+	else if (!check_user_root (xd, node, "home", val))
+		buf = g_strdup (_("root user shouldn't be modified."));
+	if (buf) {
+		GnomeDialog *dialog;
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
 		gnome_dialog_run (dialog);
-		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "user_settings_home"));
+		g_free (buf);
+		gtk_widget_grab_focus (GTK_WIDGET (xd));
 		return FALSE;
 	}
 
@@ -308,10 +427,21 @@ check_user_home (xmlNodePtr node, gchar *val)
 }
 
 gboolean
-check_user_shell (xmlNodePtr node, gchar *val)
+check_user_shell (XstDialog *xd, xmlNodePtr node, const gchar *val)
 {
-	/* TODO: check shell. */
+	GnomeDialog *dialog;
+	
+	/* Has to be full path */
 
+	if (strlen (val) > 0 && *val != '/') {
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented
+				       (_("Please give shell with full path."),
+					GTK_WINDOW (xd)));
+		gnome_dialog_run (dialog);
+		
+		return FALSE;
+	}
+	
 	return TRUE;
 }
 
@@ -348,7 +478,7 @@ check_user_group (UserSettings *us)
 }
 
 gboolean
-check_group_name (xmlNodePtr node, gchar *name)
+check_group_name (XstDialog *xd, xmlNodePtr node, const gchar *name)
 {
 	gchar *buf = NULL;
 
@@ -358,6 +488,10 @@ check_group_name (xmlNodePtr node, gchar *name)
 	/* If !empty. */
 	if (strlen (name) < 1)
 		buf = g_strdup (_("Group name is empty."));
+
+	/* If too long. */
+	if (strlen (name) > 16)
+		buf = g_strdup (_("The group name is too long."));
 
 	/* if valid. */
 	else if (!is_valid_name (name))
@@ -370,14 +504,12 @@ check_group_name (xmlNodePtr node, gchar *name)
 	/* If anything is wrong. */
 	if (buf)
 	{
-		GtkWindow *win;
 		GnomeDialog *dialog;
 
-		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, win));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
 		gnome_dialog_run (dialog);
 		g_free (buf);
-		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, "group_settings_name"));
+		gtk_widget_grab_focus (GTK_WIDGET (xd));
 
 		return FALSE;
 	}
@@ -387,21 +519,23 @@ check_group_name (xmlNodePtr node, gchar *name)
 }
 
 gboolean
-check_group_gid (xmlNodePtr node, gchar *val)
+check_group_gid (XstDialog *xd, xmlNodePtr group_node, const gchar *val)
 {
 	gboolean retval = TRUE;
-	GtkWindow *win;
 	GnomeDialog *dialog;
+	gchar *buf = NULL;
 
+	if (!is_valid_id (val))
+		buf = g_strdup (_("User id must be a positive number."));
+	
 	/* Check if gid is available */
-
-	if (node_exsists (node, "gid", val))
-	{
-		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog"));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented
-				(_("Such group id already exsists."), win));
-
+	else if (node_exsists (group_node, "gid", val))
+		buf = g_strdup (_("Such group id already exsists."));
+	
+	if (buf) {
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
 		gnome_dialog_run (dialog);
+		g_free (buf);
 		retval = FALSE;
 	}
 
@@ -645,11 +779,9 @@ find_new_key (xmlNodePtr parent)
 	return g_strdup_printf ("%d", ++ret);
 }
 
-/* Extern functions */
-
 /* User related */
 
-extern void
+void
 settings_prepare (ug_data *ud)
 {
 	gchar *buf;
@@ -684,7 +816,7 @@ settings_prepare (ug_data *ud)
 	g_warning ("settings_prepare: shouldn't be here");
 }
 
-extern gboolean
+gboolean
 user_update (UserSettings *us)
 {
 	gboolean ok = TRUE;
@@ -695,11 +827,11 @@ user_update (UserSettings *us)
 	new_name = gtk_entry_get_text (us->basic->name);
 	old_name = xst_xml_get_child_content (us->node, "login");
 	
-	if (!check_user_login (us->node, new_name))
+	if (!check_user_login (XST_DIALOG (us->dialog), us->node, new_name))
 		ok = FALSE;
 
 	buf = gtk_entry_get_text (us->basic->comment);
-	if (!check_user_comment (us->node, buf))
+	if (!check_user_comment (XST_DIALOG (us->dialog), us->node, buf))
 		ok = FALSE;
 
 	group = check_user_group (us);
@@ -723,17 +855,17 @@ user_update (UserSettings *us)
 	i = gtk_spin_button_get_value_as_int (us->basic->uid);
 	
 	buf = g_strdup_printf ("%d", i);
-	if (!check_user_uid (us->node, buf))
+	if (!check_user_uid (XST_DIALOG (us->dialog), us->node, buf))
 		ok = FALSE;
 
 	g_free (buf);
 
 	buf = gtk_entry_get_text (us->basic->home);
-	if (!check_user_home (us->node, buf))
+	if (!check_user_home (XST_DIALOG (us->dialog), us->node, buf))
 		ok = FALSE;
 
-	buf = gtk_entry_get_text (us->basic->shell);
-	if (!check_user_shell (us->node, buf))
+	buf = gtk_entry_get_text (GTK_ENTRY (us->basic->shell->entry));
+	if (!check_user_shell (XST_DIALOG (us->dialog), us->node, buf))
 		ok = FALSE;
 
 	
@@ -769,7 +901,7 @@ user_update (UserSettings *us)
 	return FALSE;
 }
 
-extern void
+void
 user_passwd_dialog_prepare (xmlNodePtr node)
 {
 	GtkWidget *w0;
@@ -790,7 +922,7 @@ user_passwd_dialog_prepare (xmlNodePtr node)
 #endif
 }
 
-extern gboolean
+gboolean
 check_login_delete (xmlNodePtr node)
 {
 	gchar *name, *txt;
@@ -824,9 +956,9 @@ check_login_delete (xmlNodePtr node)
 		return TRUE;
 }
 
-/* Group related externs. */
+/* Group related */
 
-extern void
+void
 group_new_prepare (ug_data *ud)
 {
 	GtkWidget *w0;
@@ -840,18 +972,20 @@ group_new_prepare (ug_data *ud)
 	gtk_widget_show (w0);
 }
 
-extern gboolean
+gboolean
 group_update (ug_data *ud)
 {
 	gboolean ok = TRUE;
 	gboolean adv;
 	gchar *buf;
+	GtkWidget *d;
 
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
+	d = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 								    "group_settings_name")));
-	if (!check_group_name (ud->node, buf))
+	if (!check_group_name (XST_DIALOG (d), ud->node, buf))
 		ok = FALSE;
 
 	if (ok)
@@ -878,7 +1012,7 @@ group_update (ug_data *ud)
 	return FALSE;
 }
 
-extern gboolean
+gboolean
 check_group_delete (xmlNodePtr node)
 {
 	gchar *name, *txt;
@@ -999,7 +1133,8 @@ user_update_xml (UserSettings *us)
 	g_free (buf);
 	
 	/* Shell */
-	xst_xml_set_child_content (us->node, "shell", gtk_entry_get_text (us->basic->shell));
+	xst_xml_set_child_content (us->node, "shell",
+				   gtk_entry_get_text (GTK_ENTRY (us->basic->shell->entry)));
 
 	/* UID */
 	if (adv)
@@ -1166,42 +1301,6 @@ group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_name)
 			g_free (buf);
 		}
 	}
-}
-
-static gboolean
-node_exsists (xmlNodePtr node, gchar *name, gchar *val)
-{
-	xmlNodePtr n0;
-	gchar *buf;
-	xmlNodePtr parent;
-	gboolean self;
-
-	parent = get_db_node (node);
-	if (parent == node)
-		self = FALSE;
-	else
-		self = TRUE;
-
-	for (n0 = parent->childs; n0; n0 = n0->next)
-	{
-		if (self && n0 == node)
-			continue;  /* Self */
-
-		buf = xst_xml_get_child_content (n0, name);
-
-		if (!buf)
-			continue;  /* No content */
-
-		if (!strcmp (val, buf))
-		{
-			g_free (buf);  /* Woohoo! found! */
-			return TRUE;
-		}
-
-		g_free (buf);
-	}
-
-	return FALSE;
 }
 
 static GList *
@@ -1390,23 +1489,6 @@ add_user_groups (xmlNodePtr user_node, gchar *group_name)
 	}
 
 	g_free (user_name);
-}
-
-static gboolean
-is_valid_name (gchar *str)
-{
-	if (!str || !*str)
-		return FALSE;
-
-	for (;*str; str++)
-	{
-		if (((*str < 'a') || (*str > 'z')) &&
-				((*str < '0') || (*str > '9')))
-
-			return FALSE;
-	}
-
-	return TRUE;
 }
 
 static void

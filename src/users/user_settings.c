@@ -140,7 +140,7 @@ user_settings_basic_prepare (void)
 	ub->name    = GTK_ENTRY (xst_dialog_get_widget (xd, "user_settings_name"));
 	ub->comment = GTK_ENTRY (xst_dialog_get_widget (xd, "user_settings_comment"));
 	ub->home    = GTK_ENTRY (xst_dialog_get_widget (xd, "user_settings_home"));
-	ub->shell   = GTK_ENTRY (xst_dialog_get_widget (xd, "user_settings_shell"));
+	ub->shell   = GTK_COMBO (xst_dialog_get_widget (xd, "user_settings_shell"));
 	ub->uid     = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "user_settings_uid"));
 	ub->advanced = xst_dialog_get_widget (xd, "user_settings_advanced");
 
@@ -186,17 +186,45 @@ user_settings_pwd_prepare (void)
 }
 
 static void
+user_settings_shells_fill (UserSettings *us)
+{
+	xmlNodePtr root, node;
+	GtkWidget *li;
+
+	root = xst_xml_doc_get_root (tool->config);
+	root = xst_xml_element_find_first (root, "shells");
+
+	if (!root)
+		return;
+
+	gtk_list_clear_items (GTK_LIST (us->basic->shell->list), 0, -1);
+	
+	node = xst_xml_element_find_first (root, "shell");
+	while (node) {
+		li = gtk_list_item_new_with_label (xst_xml_element_get_content (node));
+		gtk_widget_show (li);
+		gtk_container_add (GTK_CONTAINER (us->basic->shell->list), li);
+		
+		node = xst_xml_element_find_next (node, "shell");
+	}
+}
+
+
+static void
 user_settings_basic_fill (UserSettings *us)
 {
 	/* Fill "Basic" tab widgets. */
 	Profile *pf;
 
+	user_settings_shells_fill (us);
+	
 	if (!us->new)
 	{
 		gtk_entry_set_text (us->basic->name, user_value_login (us->node));
 		gtk_entry_set_text (us->basic->comment, user_value_comment (us->node));
 		gtk_entry_set_text (us->basic->home, user_value_home (us->node));
-		gtk_entry_set_text (us->basic->shell, user_value_shell (us->node));
+		gtk_entry_set_text (GTK_ENTRY (us->basic->shell->entry),
+				    user_value_shell (us->node));
 		gtk_spin_button_set_value (us->basic->uid, user_value_uid_integer (us->node));
 	}
 
@@ -208,7 +236,8 @@ user_settings_basic_fill (UserSettings *us)
 					   g_strtod (find_new_id (us->node), NULL));
 
 		gtk_entry_set_text (us->basic->home,  g_strdup (pf->home_prefix));
-		gtk_entry_set_text (us->basic->shell, g_strdup (pf->shell));
+		gtk_entry_set_text (GTK_ENTRY (us->basic->shell->entry),
+				    g_strdup (pf->shell));
 	}
 }
 

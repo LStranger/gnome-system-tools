@@ -186,53 +186,24 @@ static void
 user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
 	xmlNodePtr node;
-	gchar *field = NULL;
+	XstDialog *xd;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
+	xd = tool->main_dialog;
 	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
 		return;
 
 	switch (col) {
-	case COL_USER_LOGIN:
-		if (check_user_login (node, (gpointer)val))
-			field = g_strdup ("login");
-		break;
-	case COL_USER_UID:
-		if (check_user_uid (node, (gpointer)val))
-			field = g_strdup ("uid");
-		break;
-	case COL_USER_HOME:
-		if (check_user_home (node, (gpointer)val))
-			field = g_strdup ("home");
-		break;
-	case COL_USER_SHELL:
-		if (check_user_shell (node, (gpointer)val))
-			field = g_strdup ("shell");
-		break;
-	case COL_USER_COMMENT:
-		if (check_user_comment (node, (gpointer)val))
-			field = g_strdup ("comment");
-		break;
-/*	case COL_USER_GROUP:
-		user_value_set_group (node, (gpointer)val);
-		break;
-*/
-	case COL_USER_GID:
-		if (check_user_uid (node, (gpointer)val))
-			field = g_strdup ("gid");
-		break;
-	default:
-		g_warning ("user_set_value_at: wrong col nr");
-		break;
-	}
-
-	if (field) {
-		xst_xml_set_child_content (node, field, (gpointer)val);
-		g_free (field);
-
-		xst_dialog_modify (tool->main_dialog);
+	case COL_USER_LOGIN: user_set_value_login (xd, node, val); break;
+	case COL_USER_UID: user_set_value_uid (xd, node, val); break;
+	case COL_USER_HOME: user_set_value_home (xd, node, val); break;
+	case COL_USER_SHELL: user_set_value_shell (xd, node, val); break;
+	case COL_USER_COMMENT: user_set_value_comment (xd, node, val); break;
+	case COL_USER_GROUP: user_set_value_group (xd, node, val); break;
+	case COL_USER_GID: user_set_value_gid (xd, node, val); break;
+	default: g_warning ("user_set_value_at: wrong col nr");	break;
 	}
 }
 
@@ -240,33 +211,19 @@ static void
 group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
 	xmlNodePtr node;
-	gchar *field = NULL;
+	XstDialog *xd;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
+	xd = tool->main_dialog;
 	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
 		return;
 
 	switch (col) {
-	case COL_GROUP_NAME:
-		if (check_group_name (node, (gpointer)val))
-			field = g_strdup ("name");
-		break;
-	case COL_GROUP_GID:
-		if (check_group_gid (node, (gpointer)val))
-			field = g_strdup ("gid");
-		break;
-	default:
-		g_warning ("group_set_value_at: wrong col nr");
-		break;
-	}
-
-	if (field) {
-		xst_xml_set_child_content (node, field, (gpointer)val);
-		g_free (field);
-
-		xst_dialog_modify (tool->main_dialog);
+	case COL_GROUP_NAME: group_set_value_name (xd, node, val); break;
+	case COL_GROUP_GID: group_set_value_gid (xd, node, val); break;
+	default: g_warning ("group_set_value_at: wrong col nr"); break;
 	}
 }
 
