@@ -52,9 +52,6 @@ create_gtk_tree_list (GtkWidget *list)
 	
 	gtk_tree_view_set_model (GTK_TREE_VIEW (list), model);
 	
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list), TRUE);
-	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list), FALSE);
-	
 	renderer = gtk_cell_renderer_text_new ();
 	
 	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW (list),
@@ -109,11 +106,11 @@ populate_gtk_tree_list (GtkTreeView *list, GList *items)
 }
 
 void
-construct_tables (void)
+create_tables (void)
 {
-	construct_users_table ();
-	construct_groups_table ();
-	construct_profiles_table ();
+	create_users_table ();
+	create_groups_table ();
+	create_profiles_table ();
 }
 
 void 

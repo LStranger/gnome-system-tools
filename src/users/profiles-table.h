@@ -39,7 +39,8 @@ typedef struct
 	gboolean basic_state_showable;
 } ProfilesTableConfig;
 
-void   profiles_table_construct       (void);
+void   create_profiles_table          (void);
+void   populate_profiles_table        (void);
 void   profiles_table_update_content  (void);
 
 #endif /* _PROFILES_TABLE_H */

@@ -95,7 +95,7 @@ create_users_model (void)
 	return GTK_TREE_MODEL (model);
 }
 
-static GtkWidget*
+void
 create_users_table (void)
 {
 	GtkTreeSelection *selection;
@@ -103,12 +103,11 @@ create_users_table (void)
 	
 	model = create_users_model ();
 	
-	users_table = gtk_tree_view_new_with_model (model);
+	users_table = xst_dialog_get_widget (tool->main_dialog, "users_table");
+	gtk_tree_view_set_model (GTK_TREE_VIEW (users_table), model);
 	
 	g_object_unref (model);
 	
-        gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (users_table), TRUE);
-
 	add_user_columns (GTK_TREE_VIEW (users_table));
 	
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
@@ -117,22 +116,6 @@ create_users_table (void)
 	g_signal_connect (G_OBJECT (selection), "changed",
 			  G_CALLBACK (on_table_clicked),
 			  (gpointer) users_table);
-	
-	return users_table;
-}
-
-void 
-construct_users_table (void)
-{
-	GtkWidget *sw;
-	GtkWidget *list;
-
-	sw = xst_dialog_get_widget (tool->main_dialog, "users_table");
-
-	list = create_users_table ();
-
-	gtk_widget_show_all (list);
-	gtk_container_add (GTK_CONTAINER (sw), list);
 }
 
 static char*

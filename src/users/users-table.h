@@ -57,7 +57,7 @@ struct UserTreeItem_
 	UserTreeItem *children;
 };
 
-void	construct_users_table		(void);
+void	create_users_table		(void);
 void	populate_users_table		(void);
 void	update_users_table_complexity	(XstDialogComplexity);
 void	users_table_update_content	(void);

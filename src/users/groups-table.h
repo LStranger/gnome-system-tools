@@ -49,7 +49,7 @@ struct GroupTreeItem_
 	GroupTreeItem *children;
 };
 
-void	construct_groups_table		(void);
+void	create_groups_table		(void);
 void	populate_groups_table		(void);
 void	group_table_update_content	(void);
 

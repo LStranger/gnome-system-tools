@@ -281,9 +281,7 @@ main_window_prepare (void)
 	/* For random password generation. */
 	srand (time (NULL));
 
-	/* Create tables */
-	construct_tables ();
-	
+	create_tables ();
 	create_searchbar ();
 
 	/* General complexity update */

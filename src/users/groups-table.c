@@ -84,7 +84,7 @@ create_groups_model (void)
 	return GTK_TREE_MODEL (model);
 }
 
-static GtkWidget*
+void
 create_groups_table (void)
 {
 	GtkTreeModel *model;
@@ -92,12 +92,11 @@ create_groups_table (void)
 	
 	model = create_groups_model ();
 	
-	groups_table = gtk_tree_view_new_with_model (model);
+	groups_table = xst_dialog_get_widget (tool->main_dialog, "groups_table");
+	gtk_tree_view_set_model (GTK_TREE_VIEW (groups_table), model);
 	
 	g_object_unref (model);
 
-        gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (groups_table), TRUE);
-	
 	add_group_columns (GTK_TREE_VIEW (groups_table));
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (groups_table));
@@ -106,22 +105,6 @@ create_groups_table (void)
 	g_signal_connect (G_OBJECT (selection), "changed",
 			  G_CALLBACK (on_table_clicked),
 			  (gpointer) groups_table);
-
-	return groups_table;
-}
-
-void
-construct_groups_table (void)
-{
-	GtkWidget *sw;
-	GtkWidget *list;
-
-	sw = xst_dialog_get_widget (tool->main_dialog, "groups_table");
-
-	list = create_groups_table ();
-
-	gtk_widget_show_all (list);
-	gtk_container_add (GTK_CONTAINER (sw), list);
 }
 
 static char*

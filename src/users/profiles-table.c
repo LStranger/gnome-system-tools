@@ -57,10 +57,10 @@ add_profiles_columns (GtkTreeView *treeview)
 			 renderer = gtk_cell_renderer_text_new ();
 
 			 column = gtk_tree_view_column_new_with_attributes (i->name,
-													  renderer,
-													  "text",
-													  j,
-													  NULL);
+									    renderer,
+									    "text",
+									    j,
+									    NULL);
 			 gtk_tree_view_column_set_resizable (column, TRUE);
 			 gtk_tree_view_column_set_sort_column_id (column, j);
 
@@ -81,7 +81,7 @@ create_profiles_model (void)
 }
 
 void
-construct_profiles_table (void)
+create_profiles_table (void)
 {
 	   GtkWidget *profiles_table = xst_dialog_get_widget (tool->main_dialog, "profiles_table");
 	   GtkTreeModel *model = create_profiles_model ();
@@ -96,8 +96,8 @@ construct_profiles_table (void)
 	   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (profiles_table));
 	   gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 	   g_signal_connect (G_OBJECT (selection), "changed",
-			  G_CALLBACK (on_table_clicked),
-			  (gpointer) profiles_table);
+			     G_CALLBACK (on_table_clicked),
+			     (gpointer) profiles_table);
 }
 
 void
@@ -115,11 +115,11 @@ populate_profiles_table (void)
 	   {
 			 gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 			 gtk_tree_store_set (GTK_TREE_STORE (model),
-							 &iter,
-							 COL_PROFILE_NAME, xst_xml_get_child_content (profile, "name"),
-							 COL_PROFILE_COMMENT, xst_xml_get_child_content (profile, "comment"),
-							 COL_PROFILE_POINTER, profile,
-							 -1);
+					     &iter,
+					     COL_PROFILE_NAME, xst_xml_get_child_content (profile, "name"),
+					     COL_PROFILE_COMMENT, xst_xml_get_child_content (profile, "comment"),
+					     COL_PROFILE_POINTER, profile,
+					     -1);
 	   }
 }
 
