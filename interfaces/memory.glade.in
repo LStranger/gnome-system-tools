@@ -178,7 +178,6 @@
       <last_modification_time>Mon, 04 Sep 2000 08:26:23 GMT</last_modification_time>
     </signal>
     <label>OK</label>
-    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 
   <widget>
@@ -193,7 +192,6 @@
       <last_modification_time>Mon, 04 Sep 2000 08:26:32 GMT</last_modification_time>
     </signal>
     <label>Cancel</label>
-    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 </widget>
 
@@ -413,7 +411,7 @@
 	    <name>settings_size</name>
 	    <can_focus>True</can_focus>
 	    <climb_rate>1</climb_rate>
-	    <digits>0</digits>
+	    <digits>1</digits>
 	    <numeric>False</numeric>
 	    <update_policy>GTK_UPDATE_ALWAYS</update_policy>
 	    <snap>False</snap>
@@ -540,7 +538,7 @@
   <allow_shrink>False</allow_shrink>
   <allow_grow>False</allow_grow>
   <auto_shrink>False</auto_shrink>
-  <auto_close>True</auto_close>
+  <auto_close>False</auto_close>
   <hide_on_close>True</hide_on_close>
 
   <widget>
@@ -579,8 +577,8 @@
 	<can_focus>True</can_focus>
 	<signal>
 	  <name>clicked</name>
-	  <handler>tool_modified_cb</handler>
-	  <last_modification_time>Wed, 20 Dec 2000 15:52:17 GMT</last_modification_time>
+	  <handler>on_create_ok_clicked</handler>
+	  <last_modification_time>Wed, 17 Jan 2001 15:39:57 GMT</last_modification_time>
 	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
       </widget>
@@ -590,6 +588,11 @@
 	<name>create_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_create_cancel_clicked</handler>
+	  <last_modification_time>Wed, 17 Jan 2001 15:46:13 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
       </widget>
     </widget>
@@ -708,7 +711,7 @@ file
 	      <name>create_size</name>
 	      <can_focus>True</can_focus>
 	      <climb_rate>1</climb_rate>
-	      <digits>0</digits>
+	      <digits>1</digits>
 	      <numeric>True</numeric>
 	      <update_policy>GTK_UPDATE_ALWAYS</update_policy>
 	      <snap>False</snap>
@@ -875,7 +878,6 @@ file
 		<last_modification_time>Wed, 20 Dec 2000 15:51:23 GMT</last_modification_time>
 	      </signal>
 	      <label>Browse...</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	      <child>
 		<left_attach>2</left_attach>
 		<right_attach>3</right_attach>
@@ -1190,6 +1192,11 @@ file
 	    <handler>select_row_cb</handler>
 	    <last_modification_time>Wed, 30 Aug 2000 11:15:46 GMT</last_modification_time>
 	  </signal>
+	  <signal>
+	    <name>unselect_row</name>
+	    <handler>unselect_row_cb</handler>
+	    <last_modification_time>Wed, 17 Jan 2001 15:30:26 GMT</last_modification_time>
+	  </signal>
 	  <columns>4</columns>
 	  <column_widths>63,138,44,44</column_widths>
 	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
@@ -1272,7 +1279,6 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:11 GMT</last_modification_time>
 	  </signal>
 	  <label>Create...</label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
@@ -1291,7 +1297,6 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:19 GMT</last_modification_time>
 	  </signal>
 	  <label>Remove</label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
@@ -1310,7 +1315,6 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:27 GMT</last_modification_time>
 	  </signal>
 	  <label>Settings...</label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
