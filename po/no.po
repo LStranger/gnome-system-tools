@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.1\n"
 "POT-Creation-Date: 2001-05-21 15:10+0200\n"
-"PO-Revision-Date: 2001-05-21 15:38+02:00\n"
+"PO-Revision-Date: 2001-05-22 17:06+02:00\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmaal <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -106,9 +106,9 @@ msgid "No file to patch: [%s]."
 msgstr ""
 
 #: backends/report.pl.in:166
-#, fuzzy, c-format
+#, c-format
 msgid "Could not find [%s] for patching. Creating [%s]."
-msgstr "Kunne ikke finne widget: %s"
+msgstr "Kunne ikke finne [%s] for patching. Oppretter [%s]."
 
 #: backends/report.pl.in:167
 #, c-format
@@ -790,7 +790,7 @@ msgstr "Monteringspunkt:"
 
 #: interfaces/disks.glade.in.h:19
 msgid "Mount this partition"
-msgstr "Montér denne partisjonen"
+msgstr "Monter denne partisjonen"
 
 #: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:32
 msgid "Mounted"
@@ -1138,7 +1138,7 @@ msgstr "Konfigurasjon:"
 
 #: interfaces/network.glade.in.h:25
 msgid "Configure..."
-msgstr "Konfigurér..."
+msgstr "Konfigurer..."
 
 #: interfaces/network.glade.in.h:26
 msgid "Connection"
@@ -1494,7 +1494,9 @@ msgstr "Eksporter"
 msgid ""
 "Exports are used to share directories on your computer with other computers "
 "over the network. "
-msgstr "Eksporter brukes for å dele kataloger som befinner seg på din datamaskiner med andre datamaskiner via nettverket."
+msgstr ""
+"Eksporter brukes for å dele kataloger som befinner seg på din datamaskiner "
+"med andre datamaskiner via nettverket."
 
 #: interfaces/shares.glade.in.h:21
 msgid "Host:"
@@ -1502,7 +1504,7 @@ msgstr "Vert:"
 
 #: interfaces/shares.glade.in.h:22
 msgid "Import"
-msgstr "Importér"
+msgstr "Importer"
 
 #: interfaces/shares.glade.in.h:23
 msgid "Import Settings"
@@ -1528,7 +1530,9 @@ msgstr "Importer"
 msgid ""
 "Imports are directories which reside in other computers and are accessible "
 "to you through the network."
-msgstr "Importer er kataloger som befinner seg på andre datamaskiner og er tilgjengelige for deg via nettverket."
+msgstr ""
+"Importer er kataloger som befinner seg på andre datamaskiner og er "
+"tilgjengelige for deg via nettverket."
 
 #: interfaces/shares.glade.in.h:29
 msgid "Mount"
@@ -1729,7 +1733,6 @@ msgid "All users"
 msgstr "Alle brukere"
 
 #: interfaces/users.glade.in.h:9
-#, fuzzy
 msgid "Assign a random pasword by default"
 msgstr "Tildel et tilfeldig passord som standard"
 
@@ -1996,13 +1999,10 @@ msgid ""
 msgstr ""
 
 #: interfaces/users.glade.in.h:85
-#, fuzzy
 msgid ""
 "This is the list of the groups available in the system. Create new groups or "
 "edit existing groups with this dialog."
-msgstr ""
-"Dette er en liste med brukere som er tilgjengelige på systemet. Opprett bye "
-"brukere eller redigér eksisterende brukeres innstillinger med denne dialogen."
+msgstr "Dette er en liste med grupper som er tilgjengelige på systemet. Opprett nye grupper eller rediger eksisterende grupper med denne dialogen."
 
 #: interfaces/users.glade.in.h:86
 msgid ""
@@ -2010,7 +2010,7 @@ msgid ""
 "edit existing user's settings with this dialog."
 msgstr ""
 "Dette er en liste med brukere som er tilgjengelige på systemet. Opprett bye "
-"brukere eller redigér eksisterende brukeres innstillinger med denne dialogen."
+"brukere eller rediger eksisterende brukeres innstillinger med denne dialogen."
 
 #: interfaces/users.glade.in.h:87
 msgid "Use this dialog to creat a new profile."
@@ -2335,9 +2335,8 @@ msgid ""
 msgstr ""
 
 #: src/shares/main.c:131
-#, fuzzy
 msgid "New Shares Admin"
-msgstr "Delte kataloger"
+msgstr "Ny administrator for delte mapper"
 
 #: src/shares/validate.c:164
 msgid ""
@@ -2602,21 +2601,19 @@ msgstr ""
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:101
 msgid "_Rename..."
-msgstr ""
+msgstr "End_re navn..."
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:102
-#, fuzzy
 msgid "Rename the selected location"
-msgstr "Innstillinger for valgt alias"
+msgstr "Endre navn på valgt lokasjon"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:104
 msgid "_Delete..."
 msgstr "_Slett..."
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:105
-#, fuzzy
 msgid "Delete the selected location"
-msgstr "Innstillinger for valgt alias"
+msgstr "Slett valgt lokasjon"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:108
 msgid "_Apply..."
@@ -2631,9 +2628,8 @@ msgid "_Edit..."
 msgstr "_Rediger..."
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:116
-#, fuzzy
 msgid "Edit settings for the selected backend"
-msgstr "Innstillinger for valgt alias"
+msgstr "Rediger innstillinger for valgt \"backend\""
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:118
 msgid "_Select"
@@ -2674,23 +2670,21 @@ msgid "You cannot delete the default location"
 msgstr ""
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:395
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you wish to destroy the location %s?"
-msgstr "Er du sikker på at du vil slette aliaset for %s?"
+msgstr "Er du sikker på at du vil ødelegge lokasjonen %s?"
 
 #: archiver/location-manager-capplet/location-manager-dialog.c:460
-#, fuzzy
 msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximian administrasjonsverktøy"
+msgstr "Ximian administrasjonsverktøy lokasjonshåndterer"
 
 #: archiver/location-manager-capplet/main.c:37
 msgid "Operate on global backends"
 msgstr ""
 
 #: archiver/location-manager-capplet/main.c:53
-#, fuzzy
 msgid "Options for the location manager"
-msgstr "Alternativer for lagring av data"
+msgstr "Alternativer for lokasjonshåndterer"
 
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
@@ -2717,13 +2711,10 @@ msgid "Internet Sharing --Advanced Mode"
 msgstr ""
 
 #: interfaces/internetsharing.glade.in.h:9
-#, fuzzy
 msgid ""
 "The internet sharing tool allows you to share your internet conection with "
 "other computers on the network."
-msgstr ""
-"Importer er kataloger som befinner seg på andre datamaskiner og er "
-"tilgjengelige via nettverket."
+msgstr "Verktøy for Internett-deling lar deg dele din Internett-forbindelse med andre datamaskiner på nettverket."
 
 #: interfaces/internetsharing.glade.in.h:10
 msgid "Web Cache (squid)"
@@ -2868,13 +2859,10 @@ msgid "Select"
 msgstr "Velg"
 
 #: interfaces/print.glade.in.h:12
-#, fuzzy
 msgid ""
 "This is the list of the configured printers available on the system. Create "
 "new printers or edit existing printer settings with this dialog."
-msgstr ""
-"Dette er en liste med brukere som er tilgjengelige på systemet. Opprett bye "
-"brukere eller redigér eksisterende brukeres innstillinger med denne dialogen."
+msgstr "Dette er en liste med konfigurerte skrivere som er tilgjengelige på systemet. Opprett bye skrivere eller rediger eksisterende skrivere med denne dialogen."
 
 #: interfaces/print.glade.in.h:13
 msgid "User Settings"
@@ -2912,9 +2900,8 @@ msgid ""
 msgstr ""
 
 #: src/internetsharing/callbacks.c:57
-#, fuzzy
 msgid "IP Forward support missing."
-msgstr "Innstillinger for SMB-eksport"
+msgstr "Støtte for \"IP-forward\" mangler."
 
 #: src/print/main.c:109
 msgid "Lpr based Printing"
@@ -2933,14 +2920,12 @@ msgid "Profile Editor"
 msgstr "Profilredigerer"
 
 #: src/users/profile.c:720
-#, fuzzy
 msgid "Profile with given name already exists."
-msgstr "Brukernavn eksisterer allerede."
+msgstr "Profil med gitt navn eksisterer allerede."
 
 #: src/users/profile.c:723
-#, fuzzy
 msgid "Profile name must not be empty."
-msgstr "Hjemmekatalogen må ikke være tom."
+msgstr "Profilnavn må ikke være tomt."
 
 #: src/users/profile.c:829
 msgid "Default"
@@ -3041,10 +3026,6 @@ msgstr "Delte mapper"
 #~ msgid "Minimum  password length:"
 #~ msgstr "Minimumslengde for passord:"
 
-#, fuzzy
-#~ msgid "user's password"
-#~ msgstr "Sett inn passord"
-
 #~ msgid "Copy Profile"
 #~ msgstr "Kopier profil"
 
@@ -3077,18 +3058,10 @@ msgstr "Delte mapper"
 #~ msgstr "Bruk DHCP-tjener"
 
 #~ msgid "Enable automatically at boot"
-#~ msgstr "Aktivér automatisk ved oppstart"
+#~ msgstr "Aktiver automatisk ved oppstart"
 
 #~ msgid "Primary networking"
 #~ msgstr "Primær nettverk"
-
-#, fuzzy
-#~ msgid "anna's password"
-#~ msgstr "Sett inn passord"
-
-#, fuzzy
-#~ msgid "Password has been set to \"xnu35irh\"."
-#~ msgstr "Passord satt til \"%s\"."
 
 #~ msgid "Unknown"
 #~ msgstr "Ukjent"
@@ -3136,7 +3109,7 @@ msgstr "Delte mapper"
 #~ msgstr "Ny import"
 
 #~ msgid "Mount this import"
-#~ msgstr "Montér denne importen"
+#~ msgstr "Monter denne importen"
 
 #~ msgid "Remember this import between boots"
 #~ msgstr "Husk denne importen mellom oppstarter"
