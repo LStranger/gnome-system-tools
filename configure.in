@@ -56,15 +56,29 @@ AC_CHECK_LIB(crypt, crypt, ,[
 AC_CHECK_HEADER(crypt.h, ,[
   AC_MSG_ERROR(crypt.h header file not found.)])
 
+dnl ==================
 dnl GdkPixbuf checking
+dnl ==================
 AC_MSG_CHECKING(for Gdkpixbuf libraries)
 if gnome-config --libs gdk_pixbuf gnomecanvaspixbuf > /dev/null 2>&1; then 
     AC_MSG_RESULT(found)
 else
     AC_MSG_ERROR(Did not find gdkpixbuf installed)
 fi
-  
+
+dnl ==============
+dnl Libglade check
+dnl ==============
+AC_MSG_CHECKING(for libglade libraries)
+if gnome-config --libs libglade > /dev/null 2>&1; then
+    AC_MSG_RESULT(found)
+else
+    AC_MSG_ERROR(Did not find libglade installed)
+fi
+
+dnl ======================
 dnl Gnome App Lib checking
+dnl ======================
 AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.5.99.12)
 if gnome-config --libs gal > /dev/null 2>&1; then
 	vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
