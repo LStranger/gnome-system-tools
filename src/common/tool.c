@@ -30,6 +30,7 @@
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
 #include <glade/glade.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 #include "tool.h"
 #include "xml.h"
 
@@ -73,6 +74,19 @@ make_glade_path (char *task)
 	path1 = g_strjoin (".", path0, "glade", NULL);
 	g_free (path0);
 	return (path1);
+}
+
+
+GdkPixbuf *
+tool_load_image (char *image_name)
+{
+	GdkPixbuf *pixbuf;
+	gchar *path;
+
+	path = g_strjoin ("/", PIXMAPS_DIR, image_name, NULL);
+	pixbuf = gdk_pixbuf_new_from_file (path);
+	g_free (path);
+	return pixbuf;
 }
 
 

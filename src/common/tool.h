@@ -2,6 +2,7 @@
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
 #include <glade/glade.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
 
 
 typedef struct _ToolContext ToolContext;
@@ -40,6 +41,8 @@ struct _ToolContext
 	guint progress_max, progress_done;
 };
 
+
+GdkPixbuf *tool_load_image(char *image_name);
 
 void tool_context_destroy(ToolContext *tc);
 
