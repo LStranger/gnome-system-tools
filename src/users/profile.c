@@ -70,8 +70,6 @@ GtkWidget *table;
 
 static ProfileTab *pft;
 
-void on_home_activate (GtkEditable *editable, gpointer user_data);
-
 const gchar *table_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
   <ETableColumn model_col=\"0\" _title=\"Profile\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
@@ -549,6 +547,25 @@ file_list_del (GtkButton *button, gpointer data)
 }
 
 static void
+on_home_activate (GtkEditable *editable, gpointer user_data)
+{
+	GnomeFileEntry *fentry;
+	gchar *buf, *path;
+
+	fentry = GNOME_FILE_ENTRY (user_data);
+
+	if (!fentry->fsw)
+		return; /* User pressed <enter> */
+
+	path = gnome_file_entry_get_full_path (fentry, TRUE);
+	buf = g_strconcat (path, "$user", NULL);
+	g_free (path);
+
+	gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)), buf);
+	g_free (buf);
+}
+
+static void
 profile_tab_prefill (void)
 {
 	xmlNodePtr root, node;
@@ -570,6 +587,13 @@ profile_tab_prefill (void)
 	}
 }
 
+static void
+profile_tab_grab_focus (GtkWidget *w, gpointer data)
+{
+	if (data)
+		gtk_widget_grab_focus (GTK_WIDGET (data));
+}
+
 static XstDialogSignal signals[] = {
 	{ "pro_del",                     "clicked",       pro_del_clicked },
 	{ "pro_new",                     "clicked",       pro_new_clicked },
@@ -578,42 +602,46 @@ static XstDialogSignal signals[] = {
 };
 
 static void
-connect_modify_cb (XstDialog *xd, GtkWidget *widget)
-{
-	gtk_signal_connect (GTK_OBJECT (widget), "changed",
-			    GTK_SIGNAL_FUNC (xst_dialog_modify_cb), xd);
-}
-
-static void
-profile_tab_connect_signals (XstDialog *xd)
+profile_tab_connect_signals (ProfileTab *p)
 {
 	gint i;
+	GtkWidget *w;
 	GtkWidget *widgets[] = {
-		GTK_WIDGET (pft->shell->entry),
-		GTK_WIDGET (pft->group),
-		GTK_WIDGET (pft->umin),
-		GTK_WIDGET (pft->umax),
-		GTK_WIDGET (pft->gmin),
-		GTK_WIDGET (pft->gmax),
-		GTK_WIDGET (pft->pwd_mindays),
-		GTK_WIDGET (pft->pwd_maxdays),
-		GTK_WIDGET (pft->pwd_warndays),
+		GTK_WIDGET (p->shell->entry),
+		GTK_WIDGET (p->group),
+		GTK_WIDGET (p->umin),
+		GTK_WIDGET (p->umax),
+		GTK_WIDGET (p->gmin),
+		GTK_WIDGET (p->gmax),
+		GTK_WIDGET (p->pwd_maxdays),
+		GTK_WIDGET (p->pwd_mindays),		
+		GTK_WIDGET (p->pwd_warndays),
 		NULL
 	};		
 	
-	xst_dialog_connect_signals (xd, signals);
+	xst_dialog_connect_signals (p->dialog, signals);
 	
-	gtk_signal_connect (GTK_OBJECT (gnome_file_entry_gtk_entry (pft->home_prefix)),
-			    "activate",
+	gtk_signal_connect (GTK_OBJECT (p->dialog), "apply",
+			    GTK_SIGNAL_FUNC (pro_apply_clicked), p->dialog);
+
+	for (i = 0; widgets[i]; i++) {
+		gtk_signal_connect (GTK_OBJECT (widgets[i]), "changed",
+				    GTK_SIGNAL_FUNC (xst_dialog_modify_cb), p->dialog);
+		gtk_signal_connect (GTK_OBJECT (widgets[i]), "activate",
+				    GTK_SIGNAL_FUNC (profile_tab_grab_focus),
+				    (gpointer) widgets[i + 1]);
+	}
+	/* Can't add those into *widgets table :( */
+	w = gnome_file_entry_gtk_entry (p->home_prefix);
+	gtk_signal_connect (GTK_OBJECT (w), "changed",
+			    GTK_SIGNAL_FUNC (xst_dialog_modify_cb),
+			    (gpointer) p->dialog);
+	gtk_signal_connect (GTK_OBJECT (w), "activate",
 			    GTK_SIGNAL_FUNC (on_home_activate),
-			    (gpointer) pft->home_prefix);
-
-	gtk_signal_connect (GTK_OBJECT (xd), "apply", GTK_SIGNAL_FUNC (pro_apply_clicked), xd);
-
-	for (i = 0; widgets[i]; i++)
-		connect_modify_cb (xd, widgets[i]);
-
-	connect_modify_cb (xd, gnome_file_entry_gtk_entry (pft->home_prefix));
+			    (gpointer) p->home_prefix);
+	gtk_signal_connect (GTK_OBJECT (w), "activate",
+			    GTK_SIGNAL_FUNC (profile_tab_grab_focus),
+			    (gpointer) p->shell->entry);
 }
 
 static void
@@ -666,7 +694,7 @@ profile_tab_init ()
 	
 	profile_tab_prefill ();
 
-	profile_tab_connect_signals (xd);
+	profile_tab_connect_signals (pft);
 }
 
 static void
@@ -1432,25 +1460,4 @@ validate_var (gchar *var)
 	
 	g_strfreev (buf);
 	return ret;
-}
-
-/* Callbacks. */
-
-void
-on_home_activate (GtkEditable *editable, gpointer user_data)
-{
-	GnomeFileEntry *fentry;
-	gchar *buf, *path;
-
-	fentry = user_data;
-
-	if (!fentry->fsw)
-		return; /* User pressed <enter> */
-
-	path = gnome_file_entry_get_full_path (fentry, TRUE);
-	buf = g_strconcat (path, "$user", NULL);
-	g_free (path);
-
-	gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)), buf);
-	g_free (buf);
 }
