@@ -1,3 +1,9 @@
+2001-12-06  Bradford Hovinen  <hovinen@ximian.com>
+
+	* xst-tool.c (xst_tool_save): Don't just abort if the location
+	could not be found; instead gracefully unref the archive object
+	and continue without archiving the data
+
 2001-12-05  Tambet Ingo  <tambet@ximian.com>
 
 	* xst-xml.c (xst_xml_doc_create): Implement.

@@ -1053,19 +1053,19 @@ xst_tool_save (XstTool *tool)
 
 		if (BONOBO_EX (&ev) || location == CORBA_OBJECT_NIL) {
 			g_critical ("Could not get location %s", location_id);
-			return FALSE;
+		} else {
+			backend_id = strrchr (tool->script_path, '/');
+
+			if (backend_id != NULL)
+				backend_id++;
+			else
+				backend_id = tool->script_path;
+
+			location_client_store_xml (location, backend_id, tool->config, ConfigArchiver_STORE_MASK_PREVIOUS, &ev);
+
+			bonobo_object_release_unref (location, &ev);
 		}
 
-		backend_id = strrchr (tool->script_path, '/');
-
-		if (backend_id != NULL)
-			backend_id++;
-		else
-			backend_id = tool->script_path;
-
-		location_client_store_xml (location, backend_id, tool->config, ConfigArchiver_STORE_MASK_PREVIOUS, &ev);
-
-		bonobo_object_release_unref (location, &ev);
 		bonobo_object_release_unref (archive, &ev);
 	}
 
