@@ -255,7 +255,9 @@ gchar *
 passwd_check (gchar *pwd1, gchar *pwd2, gboolean check_quality)
 {
 	gchar *dictionary = passwd_get_cracklib_dictionary_path ();
+#ifdef	HAVE_LIBCRACK
 	gchar *check_err;
+#endif	
 
 	g_return_val_if_fail (pwd1 != NULL, FALSE);
 	g_return_val_if_fail (pwd2 != NULL, FALSE);
