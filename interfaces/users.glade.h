@@ -39,3 +39,5 @@ gchar *s = N_("All Users");
 gchar *s = N_("Member Users");
 gchar *s = N_("Add ->");
 gchar *s = N_("Remove <-");
+gchar *s = N_("label27");
+gchar *s = N_("label26");

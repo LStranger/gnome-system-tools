@@ -232,7 +232,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:14:16 GMT</last_modification_time>
 		    </signal>
 		    <label>New User...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -247,7 +246,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:47:54 GMT</last_modification_time>
 		    </signal>
 		    <label>Delete</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 
@@ -384,7 +382,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:45:05 GMT</last_modification_time>
 		    </signal>
 		    <label>Change Password...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -399,7 +396,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:15:10 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -568,7 +564,6 @@
 		    <last_modification_time>Wed, 25 Oct 2000 20:45:21 GMT</last_modification_time>
 		  </signal>
 		  <label>New Group...</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 
 		<widget>
@@ -583,7 +578,6 @@
 		    <last_modification_time>Wed, 25 Oct 2000 20:47:17 GMT</last_modification_time>
 		  </signal>
 		  <label>Delete</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 	      </widget>
 
@@ -718,7 +712,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 15:59:22 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -778,7 +771,6 @@
 	  <can_default>True</can_default>
 	  <can_focus>True</can_focus>
 	  <label> Advanced &gt;&gt; </label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -813,7 +805,6 @@
 	      <last_modification_time>Mon, 23 Oct 2000 20:36:59 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
-	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 
 	  <widget>
@@ -827,7 +818,6 @@
 	      <last_modification_time>Tue, 07 Nov 2000 05:56:50 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
-	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 	</widget>
       </widget>
@@ -1366,7 +1356,6 @@
 	      <last_modification_time>Tue, 07 Nov 2000 06:15:53 GMT</last_modification_time>
 	    </signal>
 	    <label>  Random Password  </label>
-	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 	</widget>
       </widget>
@@ -1618,7 +1607,6 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
 		</signal>
 		<label>Add -&gt;</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1637,7 +1625,6 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
 		</signal>
 		<label>Remove &lt;-</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1675,7 +1662,61 @@
 
 	  <widget>
 	    <class>GtkScrolledWindow</class>
-	    <name>scrolledwindow3</name>
+	    <name>scrolledwindow8</name>
+	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	    <child>
+	      <left_attach>2</left_attach>
+	      <right_attach>3</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>True</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkCList</class>
+	      <name>group_settings_members</name>
+	      <width>100</width>
+	      <height>150</height>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>select_row</name>
+		<handler>on_group_settings_members_select_row</handler>
+		<last_modification_time>Wed, 08 Nov 2000 15:04:45 GMT</last_modification_time>
+	      </signal>
+	      <columns>1</columns>
+	      <column_widths>80</column_widths>
+	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	      <show_titles>False</show_titles>
+	      <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<child_name>CList:title</child_name>
+		<name>label27</name>
+		<label>label27</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkScrolledWindow</class>
+	    <name>scrolledwindow7</name>
 	    <width>100</width>
 	    <height>150</height>
 	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
@@ -1698,61 +1739,31 @@
 	    </child>
 
 	    <widget>
-	      <class>GtkViewport</class>
-	      <name>viewport3</name>
+	      <class>GtkCList</class>
+	      <name>group_settings_all</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>select_row</name>
+		<handler>on_group_settings_all_select_row</handler>
+		<last_modification_time>Wed, 08 Nov 2000 15:04:36 GMT</last_modification_time>
+	      </signal>
+	      <columns>1</columns>
+	      <column_widths>80</column_widths>
+	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	      <show_titles>False</show_titles>
 	      <shadow_type>GTK_SHADOW_IN</shadow_type>
 
 	      <widget>
-		<class>GtkList</class>
-		<name>group_settings_all</name>
-		<signal>
-		  <name>selection_changed</name>
-		  <handler>on_group_settings_all_selection_changed</handler>
-		  <last_modification_time>Thu, 26 Oct 2000 13:38:16 GMT</last_modification_time>
-		</signal>
-		<selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	      </widget>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkScrolledWindow</class>
-	    <name>scrolledwindow4</name>
-	    <width>100</width>
-	    <height>150</height>
-	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	    <child>
-	      <left_attach>2</left_attach>
-	      <right_attach>3</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>True</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>True</yfill>
-	    </child>
-
-	    <widget>
-	      <class>GtkViewport</class>
-	      <name>viewport4</name>
-	      <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-	      <widget>
-		<class>GtkList</class>
-		<name>group_settings_members</name>
-		<signal>
-		  <name>selection_changed</name>
-		  <handler>on_group_settings_members_selection_changed</handler>
-		  <last_modification_time>Thu, 26 Oct 2000 13:38:26 GMT</last_modification_time>
-		</signal>
-		<selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		<class>GtkLabel</class>
+		<child_name>CList:title</child_name>
+		<name>label26</name>
+		<label>label26</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
 	      </widget>
 	    </widget>
 	  </widget>
