@@ -126,6 +126,11 @@ cdrom_disc_data_finalize (GObject *object)
 	g_return_if_fail (GST_IS_CDROM_DISC_DATA (disc));
 	
 	if (disc->priv) {
+		if (disc->priv->mount_point) {
+			g_free (disc->priv->mount_point);
+			disc->priv->mount_point = NULL;
+		}
+		
 		g_free (disc->priv);
 		disc->priv = NULL;
 	}

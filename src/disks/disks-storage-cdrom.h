@@ -52,7 +52,7 @@ struct _GstDisksStorageCdromClass {
 GType            gst_disks_storage_cdrom_get_type (void);
 GstDisksStorage *gst_disks_storage_cdrom_new      (void);
 
-gboolean         gst_disks_cdrom_mount                             (GstDisksStorageCdrom *cdrom);
+void             gst_disks_cdrom_mount                             (GstDisksStorageCdrom *cdrom);
 gchar           *gst_disks_storage_cdrom_get_human_readable_status (GstDisksStorageCdrom *cdrom);
 GstCdromDisc    *gst_disks_cdrom_set_disc                          (GstDisksStorageCdrom *cdrom);
 

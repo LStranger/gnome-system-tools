@@ -190,6 +190,21 @@ partition_finalize (GObject *object)
 	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
 
 	if (part->priv) {
+		if (part->priv->name) {
+			g_free (part->priv->name);
+			part->priv->name = NULL;
+		}
+
+		if (part->priv->device) {
+			g_free (part->priv->device);
+			part->priv->device = NULL;
+		}
+
+		if (part->priv->point) {
+			g_free (part->priv->point);
+			part->priv->point = NULL;
+		}
+		
 		g_free (part->priv);
 		part->priv = NULL;
 	}
@@ -336,12 +351,12 @@ gst_disks_partition_setup_properties_widget (GstDisksPartition *part)
 	gst_disks_gui_setup_partition_properties (part);
 }
 
-gboolean
+void
 gst_disks_partition_mount (GstDisksPartition *part)
 {
-	g_return_val_if_fail (GST_IS_DISKS_PARTITION (part), FALSE);
+	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
 	
-	return gst_disks_mount_partition (part);
+	gst_disks_mount_partition (part);
 }
 
 void

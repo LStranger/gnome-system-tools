@@ -119,6 +119,11 @@ cdrom_disc_audio_finalize (GObject *object)
 	   g_return_if_fail (GST_IS_CDROM_DISC_AUDIO (disc));
 
 	   if (disc->priv) {
+			 if (disc->priv->duration) {
+				    g_free (disc->priv->duration);
+				    disc->priv->duration = NULL;
+			 }
+			 
 			 g_free (disc->priv);
 			 disc->priv = NULL;
 	   }

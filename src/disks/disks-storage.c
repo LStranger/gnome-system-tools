@@ -148,6 +148,31 @@ storage_finalize (GObject *object)
 	g_return_if_fail (GST_IS_DISKS_STORAGE (storage));
 
 	if (storage->priv) {
+		if (storage->priv->name) {
+			g_free (storage->priv->name);
+			storage->priv->name = NULL;
+		}
+
+		if (storage->priv->model) {
+			g_free (storage->priv->model);
+			storage->priv->model = NULL;
+		}
+
+		if (storage->priv->icon_name) {
+			g_free (storage->priv->icon_name);
+			storage->priv->icon_name = NULL;
+		}
+
+		if (storage->priv->device) {
+			g_free (storage->priv->device);
+			storage->priv->device = NULL;
+		}
+
+		if (storage->priv->speed) {
+			g_free (storage->priv->speed);
+			storage->priv->speed = NULL;
+		}
+		
 		g_free (storage->priv);
 		storage->priv = NULL;
 	}

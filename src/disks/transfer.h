@@ -33,8 +33,8 @@
 void transfer_xml_to_gui (GstTool *tool, gpointer data);
 void transfer_gui_to_xml (GstTool *tool, gpointer data);
 
-gboolean      gst_disks_mount_partition         (GstDisksPartition *part);
-gboolean      gst_disks_mount_cdrom             (GstDisksStorageCdrom *cdrom);
+void          gst_disks_mount_partition         (GstDisksPartition *part);
+void          gst_disks_mount_cdrom             (GstDisksStorageCdrom *cdrom);
 GstCdromDisc *gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom);
 
 #endif /* TRANSFER_H */

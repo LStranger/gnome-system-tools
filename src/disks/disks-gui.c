@@ -170,22 +170,19 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
-	GtkTreePath *path = NULL;
 	GtkTreeSelection *selection;
 	GList *list = NULL;
 	GstDisksStorage *dsk;
+	gboolean valid;
 	gchar *icon, *name;
 	gulong size;
 
 	g_return_if_fail (treeview != NULL);
 	g_return_if_fail (storages != NULL);
 
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-	if (gtk_tree_selection_get_selected (selection, &model, &iter))
-		path = gtk_tree_model_get_path (model, &iter);
-	
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
-	gtk_tree_store_clear (GTK_TREE_STORE (model));
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
 	list = g_list_first (storages);
 	while (list) {
 		dsk = list->data;
@@ -194,7 +191,9 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 				      "size", &size, "name", &name,
 				      NULL);
 
-			gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+			if (!valid)
+				gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+			
 			gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
 					    STORAGE_LIST_ICON,
 					    gst_storage_get_icon (icon),
@@ -205,12 +204,11 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 					    -1);
 		}
 		list = g_list_next (list);
+		valid = gtk_tree_model_iter_next (model, &iter);
 	}
 
-	if (path) {
-		gtk_tree_selection_select_path (selection, path);
-		gtk_tree_path_free (path);
-	} else {
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get_iter_first (model, &iter);
 		gtk_tree_selection_select_iter (selection, &iter);
 	}
@@ -219,7 +217,7 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 void
 gst_disks_gui_storage_list_reload (GtkWidget *widget, gpointer gdata)
 {
-	GtkWidget        *treeview;
+	GtkWidget       *treeview;
 
 	treeview = gst_dialog_get_widget (tool->main_dialog, "storage_list");
 
@@ -654,9 +652,9 @@ gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 	if (GST_IS_CDROM_DISC_AUDIO (disc)) {
 		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom-audio", NULL);
 	} else if (GST_IS_CDROM_DISC_DATA (disc)) {
-		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom", NULL);
+		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom-data", NULL);
 	} else if (GST_IS_CDROM_DISC_MIXED (disc)) {
-		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom", NULL);
+		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom-mixed", NULL);
 	} else {
 		g_object_set (G_OBJECT (cdrom), "icon_name", "gnome-dev-cdrom", NULL);
 	}

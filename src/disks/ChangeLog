@@ -1,3 +1,15 @@
+2004-05-02  Carlos García Campos <elkalmail@yahoo.es>
+
+	* disks-gui.c, transfer.c: searches icons in gst pixmapsdir when it was 
+	not found in current icon theme. Sets gnome-dev-cdrom-data and 
+	gnome-dev-cdrom-mixed icons when detects a data cdroms disc and mixed 
+	cdrom disc respectively.
+
+	* transfer.[ch], disks-storage-cdrom.c, disks-storage-disk.c: mount
+	function is now void instead of bool
+
+	* *.[ch]: some code cleanups
+	
 2004-04-22  Carlos García Campos <elkalmail@yahoo.es>
 
 	* Makefile.am: added disks-cdrom-disc-mixed.[ch] files

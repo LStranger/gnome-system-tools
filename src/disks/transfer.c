@@ -30,6 +30,8 @@
 #endif
 
 #include <glib.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "gst-disks-tool.h"
 #include "disks-storage.h"
@@ -278,7 +280,7 @@ transfer_gui_to_xml (GstTool *tool, gpointer data)
 	  transfer_check_data (root);*/
 }
 
-gboolean
+void 
 gst_disks_mount_partition (GstDisksPartition *part)
 {
 	xmlDoc *xml;
@@ -286,10 +288,9 @@ gst_disks_mount_partition (GstDisksPartition *part)
 	gchar *device, *typefs, *point;
 	gboolean mounted, listed;
 	gchar *buf;
-	gboolean error;
 	GstPartitionTypeFs type;
 
-	g_return_val_if_fail (GST_IS_DISKS_PARTITION (part), FALSE);
+	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
 	
 	g_object_get (G_OBJECT (part), "type", &type, "point", &point,
 		      "device", &device, "mounted", &mounted,
@@ -302,17 +303,17 @@ gst_disks_mount_partition (GstDisksPartition *part)
 					  typefs, point,
 					  mounted ? "1" : "0",
 					  listed  ? "1" : "0",
+					  g_strdup_printf ("%d", (guint) getuid ()),
 					  NULL);
+
 	if (!xml) {
-		return FALSE;
+		return;
 	}
 
-	error = FALSE;
 	root = gst_xml_doc_get_root (xml);
 	if (root) {
 		buf = gst_xml_get_child_content (root, "error");
 		if (buf) {
-			error = TRUE;
 			g_warning ("%s", buf);
 			g_free (buf);
 		}
@@ -351,15 +352,15 @@ gst_disks_mount_partition (GstDisksPartition *part)
 
 			gst_xml_doc_destroy (xml);
 
-			return !error;
+			return;
 		}
 	}
 	gst_xml_doc_destroy (xml);
 
-	return FALSE;
+	return;
 }
 
-gboolean
+void
 gst_disks_mount_cdrom (GstDisksStorageCdrom *cdrom)
 {
 	xmlDoc *xml;
@@ -368,11 +369,10 @@ gst_disks_mount_cdrom (GstDisksStorageCdrom *cdrom)
 	gboolean mounted;
 	gulong size;
 	gchar *buf;
-	gboolean error;
 	GstCdromDisc *disc;
 	GstCdromDiscData *disc_data;
 
-	g_return_val_if_fail (GST_IS_DISKS_STORAGE_CDROM (cdrom), FALSE);
+	g_return_if_fail (GST_IS_DISKS_STORAGE_CDROM (cdrom));
 
 	g_object_get (G_OBJECT (cdrom), "device", &device,
 		      "disc", &disc, NULL);
@@ -382,7 +382,7 @@ gst_disks_mount_cdrom (GstDisksStorageCdrom *cdrom)
 	} else if (GST_IS_CDROM_DISC_DATA (disc)) {
 		disc_data = GST_CDROM_DISC_DATA (disc);
 	} else {
-		return FALSE;
+		return;
 	}
 		
 	if (GST_IS_CDROM_DISC_DATA (disc_data)) {
@@ -395,18 +395,17 @@ gst_disks_mount_cdrom (GstDisksStorageCdrom *cdrom)
 						  device, "cdrom", 
 						  typefs, point,
 						  mounted ? "1" : "0",
-						  "0",
+						  "0", /* fixme: use listed when manage alias */
+						  g_strdup_printf ("%d", (guint) getuid ()),
 						  NULL);
 		if (!xml) {
-			return FALSE;
+			return;
 		}
 
-		error = FALSE;
 		root = gst_xml_doc_get_root (xml);
 		if (root) {
 			buf = gst_xml_get_child_content (root, "error");
 			if (buf) {
-				error = TRUE;
 				g_warning ("%s", buf);
 				g_free (buf);
 			}
@@ -439,13 +438,13 @@ gst_disks_mount_cdrom (GstDisksStorageCdrom *cdrom)
 				}
 				gst_xml_doc_destroy (xml);
 
-				return !error;
+				return;
 			}
 		}
 		gst_xml_doc_destroy (xml);
 	}
 
-	return FALSE;
+	return;
 }
 				
 static void
