@@ -24,7 +24,6 @@ gchar *s = N_("Activate");
 gchar *s = N_("Deactivate");
 gchar *s = N_("Connections");
 gchar *s = N_("How the names of other computers are found.");
-gchar *s = N_("Obtain DNS information from DHCP / BOOTP server");
 gchar *s = N_("Domain:");
 gchar *s = N_("DNS Servers:");
 gchar *s = N_("Search Domains:");
