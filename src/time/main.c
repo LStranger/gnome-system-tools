@@ -20,7 +20,6 @@ static GdkPixbuf *load_image(char *name);
 void click_canvas(GtkWidget *widget, GdkEventButton *event, gpointer data);
 void init_map_canvas(void);
 gint clock_tick(gpointer data);
-void on_ok_clicked(GtkButton *button, gpointer data);
 void on_apply_clicked(GtkButton *button, gpointer data);
 void on_cancel_clicked(GtkButton *button, gpointer data);
 void on_help_clicked(GtkButton *button, gpointer data);
@@ -257,14 +256,6 @@ gint clock_tick(gpointer data)
 }
 
 
-void on_ok_clicked(GtkButton *button, gpointer data)
-{
-  transfer_gui_to_xml(&trans_tree, xml_doc_get_root(tool_config_get_xml()));
-  tool_config_save();
-  gtk_main_quit();
-}
-
-
 void on_apply_clicked(GtkButton *button, gpointer data)
 {
   transfer_gui_to_xml(&trans_tree, xml_doc_get_root(tool_config_get_xml()));
@@ -273,15 +264,18 @@ void on_apply_clicked(GtkButton *button, gpointer data)
 }
 
 
-void on_cancel_clicked(GtkButton *button, gpointer data)
+void on_close_clicked(GtkButton *button, gpointer data)
 {
-  gtk_main_quit();
+	/* TODO: Check for changes and optionally ask for confirmation */
+	gtk_main_quit();
 }
 
 
 void on_help_clicked(GtkButton *button, gpointer data)
 {
+	/* TODO: Have some help handy */
 }
+
 
 void delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
 {

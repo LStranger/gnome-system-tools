@@ -350,15 +350,11 @@ void tool_set_modified(gboolean state)
 
   if (state)
   {
-    w0 = tool_widget_get("ok");
-    if (w0) gtk_widget_set_sensitive(w0, TRUE);
     w0 = tool_widget_get("apply");
     if (w0) gtk_widget_set_sensitive(w0, TRUE);
   }
   else
   {
-    w0 = tool_widget_get("ok");
-    if (w0) gtk_widget_set_sensitive(w0, FALSE);
     w0 = tool_widget_get("apply");
     if (w0) gtk_widget_set_sensitive(w0, FALSE);
   }
@@ -379,8 +375,6 @@ void tool_set_access(gboolean state)
 
   if (!state)
   {
-    w0 = tool_widget_get("ok");
-    if (w0) gtk_widget_set_sensitive(w0, FALSE);
     w0 = tool_widget_get("apply");
     if (w0) gtk_widget_set_sensitive(w0, FALSE);
   }
@@ -481,10 +475,8 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
   tool_config_load();
   tool_splash_hide();
 
-  /* Make sure ok/apply start out as insensitive */
+  /* Make sure apply starts out as insensitive */
 
-  w0 = tool_widget_get("ok");
-  if (w0) gtk_widget_set_sensitive(w0, FALSE);
   w0 = tool_widget_get("apply");
   if (w0) gtk_widget_set_sensitive(w0, FALSE);
 
