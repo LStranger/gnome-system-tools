@@ -452,6 +452,7 @@ connection_init_clist (GtkWidget *clist)
 	style = gtk_widget_get_style (clist);
 	gtk_clist_set_row_height (GTK_CLIST (clist), (guint) ((style->font->ascent +
 	style->font->descent) * 2));
+	gtk_clist_column_titles_passive (GTK_CLIST (clist));
 }
 
 extern void
