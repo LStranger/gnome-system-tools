@@ -336,19 +336,22 @@ transfer_gatewaydev_to_xml (GstTool *tool, xmlNodePtr root)
 static void
 transfer_xml_to_gatewaydev (GstTool *tool, xmlNodePtr root)
 {
-	gchar *dev;
-	gboolean unsup;
-	
-	unsup = gst_xml_element_get_boolean (root, "gwdevunsup");
+	gchar     *dev;
+	gboolean   unsup;
+	GtkWidget *widget;
+
+	widget = gst_dialog_get_widget (tool->main_dialog,
+					"connection_def_gw_hbox");
+	unsup  = gst_xml_element_get_boolean (root, "gwdevunsup");
 	
 	if (unsup) {
 		g_object_set_data (G_OBJECT (tool), "gwdevunsup", (gpointer) TRUE);
-		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog,
-							"connection_def_gw_hbox"));
+		gtk_widget_hide (widget);
 
 		return;
 	}
 
+	gtk_widget_show (widget);
 	dev = gst_xml_get_child_content (root, "gatewaydev");
 
 	if (dev) {
