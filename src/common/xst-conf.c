@@ -26,21 +26,6 @@
 #include "xst-tool.h"
 
 
-static gboolean
-xst_conf_error_handler (GError **error)
-{
-	gboolean value = FALSE;
-	
-	if (*error) {
-		g_warning ("GConf error: %s", (*error)->message);
-		value = TRUE;
-		g_error_free (*error);
-		*error = NULL;
-	}
-
-	return value;
-}
-
 static gchar *
 xst_conf_make_key (XstTool *tool, const gchar *local_key)
 {
@@ -51,10 +36,15 @@ xst_conf_make_key (XstTool *tool, const gchar *local_key)
 	return key;
 }
 
+static void
+xst_conf_save (void)
+{
+	gnome_config_sync ();
+}
+
 void
 xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value)
 {
-	GError *error = NULL;
 	gchar *main_key;
 	
 	g_return_if_fail (tool != NULL);
@@ -62,11 +52,11 @@ xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value)
 	g_return_if_fail (key != NULL);
 
 	main_key = xst_conf_make_key (tool, key);
-	
-	gconf_client_set_bool (tool->client, main_key, value, &error);
-	xst_conf_error_handler (&error);
+
+	gnome_config_set_bool (main_key, value);
 
 	g_free (main_key);
+	xst_conf_save ();
 }
 
 gboolean
@@ -74,7 +64,6 @@ xst_conf_get_boolean (XstTool *tool, const gchar *key)
 {
 	gboolean value;
 	gchar *main_key;
-	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);
@@ -82,9 +71,7 @@ xst_conf_get_boolean (XstTool *tool, const gchar *key)
 
 	main_key = xst_conf_make_key (tool, key);
 	
-	value = gconf_client_get_bool (tool->client, main_key, &error);
-	if (xst_conf_error_handler (&error))
-		value = FALSE;
+	value = gnome_config_get_bool (main_key);
 
 	g_free (main_key);
 	
@@ -95,7 +82,6 @@ void
 xst_conf_set_integer (XstTool *tool, const gchar *key, gint value)
 {
 	gchar *main_key;
-	GError *error = NULL;
 	
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (XST_IS_TOOL (tool));
@@ -103,10 +89,10 @@ xst_conf_set_integer (XstTool *tool, const gchar *key, gint value)
 
 	main_key = xst_conf_make_key (tool, key);
 	
-	gconf_client_set_int (tool->client, main_key, value, &error);
-	xst_conf_error_handler (&error);
+	gnome_config_set_int (main_key, value);
 
 	g_free (main_key);
+	xst_conf_save ();
 }
 
 gint
@@ -114,7 +100,6 @@ xst_conf_get_integer (XstTool *tool, const gchar *key)
 {
 	gint value;
 	gchar *main_key;
-	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, -1);
 	g_return_val_if_fail (XST_IS_TOOL (tool), -1);
@@ -122,9 +107,7 @@ xst_conf_get_integer (XstTool *tool, const gchar *key)
 
 	main_key = xst_conf_make_key (tool, key);
 	
-	value = gconf_client_get_int (tool->client, main_key, &error);
-	if (xst_conf_error_handler (&error))
-		value = -1;
+	value = gnome_config_get_int (main_key);
 
 	g_free (main_key);
 	
@@ -135,7 +118,6 @@ void
 xst_conf_set_string (XstTool *tool, const gchar *key, const gchar *value)
 {
 	gchar *main_key;
-	GError *error = NULL;
 	
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (XST_IS_TOOL (tool));
@@ -143,10 +125,10 @@ xst_conf_set_string (XstTool *tool, const gchar *key, const gchar *value)
 
 	main_key = xst_conf_make_key (tool, key);
 	
-	gconf_client_set_string (tool->client, main_key, value, &error);
-	xst_conf_error_handler (&error);
+	gnome_config_set_string (main_key, value);
 
 	g_free (main_key);
+	xst_conf_save ();
 }
 
 gchar *
@@ -154,7 +136,6 @@ xst_conf_get_string (XstTool *tool, const gchar *key)
 {
 	gchar *value;
 	gchar *main_key;
-	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
@@ -162,9 +143,7 @@ xst_conf_get_string (XstTool *tool, const gchar *key)
 
 	main_key = xst_conf_make_key (tool, key);
 	
-	value = gconf_client_get_string (tool->client, main_key, &error);
-	if (xst_conf_error_handler (&error))
-		value = g_strdup ("");
+	value = gnome_config_get_string (main_key);
 
 	g_free (main_key);
 	

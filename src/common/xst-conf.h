@@ -22,9 +22,7 @@
 #ifndef XST_CONF_H
 #define XST_CONF_H
 
-#include <gconf/gconf.h>
-#include <gconf/gconf-client.h>
-#include <libgnome/gnome-defs.h>
+#include <gnome.h>
 #include "xst-types.h"
 #include "xst-tool.h"
 

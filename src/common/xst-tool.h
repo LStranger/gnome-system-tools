@@ -25,7 +25,6 @@
 #include <tree.h>
 #include <gtk/gtkobject.h>
 #include <glade/glade.h>
-#include <gconf/gconf-client.h>
 #include <popt.h>
 
 #include "xst-types.h"
@@ -87,8 +86,6 @@ struct _XstTool {
 
 	XstPlatform *current_platform;     /* Always set from backend report */
 	GSList *supported_platforms_list;  /* Gets set only if backend breaks */
-
-	GConfClient *client;
 };
 
 struct _XstToolClass {

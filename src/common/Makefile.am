@@ -5,7 +5,6 @@ INCLUDES =		\
 	$(GDK_PIXBUF_CFLAGS) 	\
 	$(LIBGLADE_CFLAGS) 	\
 	$(GNOME_XML_CFLAGS)	\
-	$(GCONF_CFLAGS)         \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 libsetuptool_a_SOURCES = \

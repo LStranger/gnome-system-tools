@@ -796,11 +796,6 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 
 	g_return_if_fail (name != NULL);
 
-	tool->client = gconf_client_get_default ();
-	s = g_strjoin ("/", XST_CONF_ROOT, tool->name, NULL);
-	gconf_client_add_dir (tool->client, s, GCONF_CLIENT_PRELOAD_NONE, NULL);
-	g_free (s);
-
 	tool->name        = g_strdup (name);
 	tool->glade_path  = g_strdup_printf ("%s/%s.glade",     INTERFACES_DIR, name);
 	tool->script_path = g_strdup_printf ("%s/%s-conf",      SCRIPTS_DIR,    name);
@@ -913,7 +908,6 @@ XstTool *
 xst_tool_init (const char *name, const char *title, int argc, char *argv [], const poptOption options)
 {
 	GtkWidget *d;
-	GError *error;
 
 	g_return_val_if_fail (name != NULL, NULL);
 	g_return_val_if_fail (title != NULL, NULL);
@@ -927,15 +921,6 @@ xst_tool_init (const char *name, const char *title, int argc, char *argv [], con
 	   make sense. Arturo Espinosa <arturo@ximian.com> */
 	xst_ui_create_image_widget (NULL, NULL, NULL, 0, 0);
 
-	/* FIXME: Should show dialog */
-	if (!gconf_init (argc, argv, &error)) {
-		g_assert (error != NULL);
-		g_warning ("GConf init failed: %s\n", error->message);
-		g_error_free (error);
-		error = NULL;
-		exit (1);
-	}
-	
 	if (options == NULL) {
 		gnome_init (name, VERSION, argc, argv);
 	} else {
