@@ -25,6 +25,7 @@
 #include <tree.h>
 #include <gtk/gtkobject.h>
 #include <glade/glade.h>
+#include <popt.h>
 
 #include "xst-types.h"
 
@@ -95,8 +96,6 @@ struct _XstToolClass {
 };
 
 GtkType      xst_tool_get_type            (void);
-
-#include <popt.h>
 
 XstTool     *xst_tool_init                (const char *name, const char *title,
 								   int argc, char *argv [],

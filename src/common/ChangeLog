@@ -1,3 +1,17 @@
+2001-03-30  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-report-line.c (xst_report_hash_eq): equivalence function.
+	(xst_report_hash_func): hashing function.
+	(xst_report_hash_init): init hash with report.pl.in keys and
+	translatable strings. Gotta love query-replace-regexp.
+	(xst_report_format_from_key): return translatable string from
+	parsed key.
+	(xst_report_sprintf): helper function, for a lack of a more
+	expressive language.
+	(xst_report_line_new): use new scheme to allow translatable strings.
+	(xst_report_line_new_from_string): parsing changed. Separator is
+	now "::".
+
 2001-03-28  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-tool.c: common_report_hooks: gchar *keys in hook entry

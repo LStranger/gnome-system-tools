@@ -31,7 +31,7 @@ struct _XstReportLine {
 	guint handled : 1;
 };
 
-XstReportLine     *xst_report_line_new              (gchar *key, gchar *message);
+XstReportLine     *xst_report_line_new              (gchar *key, gchar **argv);
 XstReportLine     *xst_report_line_new_from_string  (gchar *string);
 void               xst_report_line_free             (XstReportLine *line);
 
