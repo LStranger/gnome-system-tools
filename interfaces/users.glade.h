@@ -62,8 +62,9 @@ gchar *s = N_("Delete");
 gchar *s = N_("Groups");
 gchar *s = N_("These are global values that will affect the creation of new users. They are only available when you click \"More Options\".");
 gchar *s = N_("System settings");
-gchar *s = N_("Mailbox directory:");
+gchar *s = N_("Home directory prefix:");
 gchar *s = N_("Create home for new users:");
+gchar *s = N_("Default shell:");
 gchar *s = N_("Min/max values for automatic UID/GID");
 gchar *s = N_("Maximum UID:");
 gchar *s = N_("Minimum UID:");
@@ -75,7 +76,7 @@ gchar *s = N_("Minimum days allowed between password changes:");
 gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
-gchar *s = N_("Defaults");
+gchar *s = N_("Profiles");
 gchar *s = N_("Show system users and groups");
 gchar *s = N_("window2");
 gchar *s = N_("EXPERIMENTAL NIS support.\n"
@@ -89,3 +90,20 @@ gchar *s = N_("Change the settings and options for the\n"
               "selected user or group, like a users password\n"
               "or a groups name or members.");
 gchar *s = N_("Settings");
+gchar *s = N_("label79");
+gchar *s = N_("These are global values that will affect the creation of new users. They are only available when you click \"More Options\".");
+gchar *s = N_("System settings");
+gchar *s = N_("Mailbox directory:");
+gchar *s = N_("Create home for new users:");
+gchar *s = N_("Min/max values for automatic UID/GID");
+gchar *s = N_("Maximum UID:");
+gchar *s = N_("Minimum UID:");
+gchar *s = N_("Minimum GID:");
+gchar *s = N_("Maximum GID:");
+gchar *s = N_("Password expiration");
+gchar *s = N_("Days a password may be used:");
+gchar *s = N_("Minimum days allowed between password changes:");
+gchar *s = N_("Days between warning and\n"
+              " password expiration:  ");
+gchar *s = N_("Minimum  password length:");
+gchar *s = N_("label80");
