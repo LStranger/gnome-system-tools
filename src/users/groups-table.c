@@ -96,10 +96,10 @@ create_groups_table (void)
 	
 	add_group_columns (GTK_TREE_VIEW (groups_table));
 	
-	gtk_signal_connect  (GTK_OBJECT (groups_table),
-	                     "cursor-changed",
-	                     G_CALLBACK (on_group_table_clicked),
-	                     NULL);
+	g_signal_connect  (G_OBJECT (groups_table),
+	                   "cursor-changed",
+	                   G_CALLBACK (on_group_table_clicked),
+	                   NULL);
 	
 	return groups_table;
 }

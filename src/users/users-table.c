@@ -107,10 +107,10 @@ create_users_table (void)
 
 	add_user_columns (GTK_TREE_VIEW (users_table));
 	
-	gtk_signal_connect (GTK_OBJECT (users_table),
-	                    "cursor_changed",
-	                    G_CALLBACK (on_user_table_clicked),
-	                    NULL);
+	g_signal_connect (G_OBJECT (users_table),
+	                  "cursor_changed",
+	                  G_CALLBACK (on_user_table_clicked),
+	                  NULL);
 	
 	return users_table;
 }

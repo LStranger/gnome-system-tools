@@ -78,10 +78,11 @@ void
 show_error_message (gchar *parent_window, gchar *message)
 {
 	GtkWindow *xd = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, parent_window));
-	GnomeDialog *dialog;
-
-	dialog = GNOME_DIALOG (gnome_error_dialog_parented (message, xd));
-	gnome_dialog_run (dialog);
+	GtkWidget *dialog;
+	
+	dialog = gtk_message_dialog_new (xd, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, message);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
 }
 
 xmlNodePtr
@@ -534,7 +535,7 @@ user_passwd_dialog_prepare (xmlNodePtr node)
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
-	gtk_object_set_data (GTK_OBJECT (w0), "name", node);
+	g_object_set_data (G_OBJECT (w0), "name", node);
 
 #ifndef HAVE_LIBCRACK
 	gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "user_passwd_quality"));

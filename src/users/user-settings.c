@@ -45,8 +45,6 @@
 
 extern XstTool *tool;
 
-static int reply;
-
 GtkWidget *user_settings_all = NULL;
 GtkWidget *user_settings_members = NULL;
 
@@ -75,34 +73,28 @@ create_groups_lists (void)
 	/* We create the widgets, connect signals and attach data if they haven't been created already */
 	if (user_settings_all == NULL) {
 		user_settings_all = create_gtktree_list (xst_dialog_get_widget (tool->main_dialog, "user_settings_all"));
-		gtk_object_set_data (GTK_OBJECT (user_settings_all), "button", "user_settings_add");
-		gtk_signal_connect (GTK_OBJECT (user_settings_all),
-		                    "cursor_changed",
-		                    G_CALLBACK (on_list_select_row),
-		                    NULL);
+		g_object_set_data (G_OBJECT (user_settings_all), "button", "user_settings_add");
+		g_signal_connect (G_OBJECT (user_settings_all),
+		                  "cursor_changed",
+		                  G_CALLBACK (on_list_select_row),
+		                  NULL);
 
 		user_settings_members = create_gtktree_list (xst_dialog_get_widget (tool->main_dialog, "user_settings_members"));
-		gtk_object_set_data (GTK_OBJECT (user_settings_members), "button", "user_settings_remove");
-		gtk_signal_connect (GTK_OBJECT (user_settings_members),
-		                    "cursor_changed",
-		                    G_CALLBACK (on_list_select_row),
-		                    NULL);
+		g_object_set_data (G_OBJECT (user_settings_members), "button", "user_settings_remove");
+		g_signal_connect (G_OBJECT (user_settings_members),
+		                  "cursor_changed",
+		                  G_CALLBACK (on_list_select_row),
+		                  NULL);
 		
 		/* We also need to attach some data to the 'add' and 'remove' buttons */
 		add_button = xst_dialog_get_widget (tool->main_dialog, "user_settings_add");
-		gtk_object_set_data (GTK_OBJECT (add_button), "in", user_settings_all);
-		gtk_object_set_data (GTK_OBJECT (add_button), "out", user_settings_members);
+		g_object_set_data (G_OBJECT (add_button), "in", user_settings_all);
+		g_object_set_data (G_OBJECT (add_button), "out", user_settings_members);
 		
 		remove_button = xst_dialog_get_widget (tool->main_dialog, "user_settings_remove");
-		gtk_object_set_data (GTK_OBJECT (remove_button), "in", user_settings_members);
-		gtk_object_set_data (GTK_OBJECT (remove_button), "out", user_settings_all);
+		g_object_set_data (G_OBJECT (remove_button), "in", user_settings_members);
+		g_object_set_data (G_OBJECT (remove_button), "out", user_settings_all);
 	}
-}
-
-static void
-reply_cb (gint val, gpointer data)
-{
-        reply = val;
 }
 
 static gboolean
@@ -110,7 +102,8 @@ check_user_delete (xmlNodePtr node)
 {
 	gchar *login, *buf;
 	GtkWindow *parent;
-	GnomeDialog *dialog;
+	GtkWidget *dialog;
+	gint reply;
 
 	g_return_val_if_fail (node != NULL, FALSE);
 
@@ -126,20 +119,20 @@ check_user_delete (xmlNodePtr node)
 	if (strcmp (login, "root") == 0)
 	{
 		buf = g_strdup (_("The root user must not be deleted."));
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, parent));
-		gnome_dialog_run (dialog);
+		show_error_message ("user_settings_dialog", buf);
 		g_free (login);
 		g_free (buf);
 		return FALSE;
 	}
 
 	buf = g_strdup_printf (_("Are you sure you want to delete user %s?"), login);
-	dialog = GNOME_DIALOG (gnome_question_dialog_parented (buf, reply_cb, NULL, parent));
-	gnome_dialog_run (dialog);
+	dialog = gtk_message_dialog_new (parent, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_YES_NO, buf);
+	reply = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
 	g_free (buf);
 	g_free (login);
 	
-	if (reply)
+	if (reply == GTK_RESPONSE_NO)
 		return FALSE;
         else
 		return TRUE;
@@ -192,7 +185,7 @@ groups_combo_setup (gchar *entry)
 	gboolean found = FALSE;
 	ug_data *ud;
 
-	ud = gtk_object_get_data (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog")), "data");
+	ud = g_object_get_data (G_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog")), "data");
 
 	groups = get_list_from_node ("name", ud->node);
 	
@@ -261,7 +254,7 @@ profiles_option_menu_setup (void)
 		if (strcmp (list->data, "Default") == 0)
 			index = i;
 		menu_item = xst_ui_option_menu_add_string (GTK_OPTION_MENU (menu), list->data);
-		gtk_signal_connect (GTK_OBJECT (menu_item), "activate", GTK_SIGNAL_FUNC (on_user_settings_profile_changed), list->data);
+		g_signal_connect (G_OBJECT (menu_item), "activate", G_CALLBACK (on_user_settings_profile_changed), list->data);
 		list = list->next;
 		i++;
 	}
@@ -283,7 +276,7 @@ user_new_prepare (ug_data *ud)
 	gtk_window_set_title (GTK_WINDOW (widget), _("User Account Editor"));
 
 	/* Attach the data to the dialog */
-	gtk_object_set_data (GTK_OBJECT (widget), "data", ud);
+	g_object_set_data (G_OBJECT (widget), "data", ud);
 	
 	/* Profiles are disabled at the moment, showing advanced settings instead */
 	gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "user_settings_advanced"));
@@ -358,13 +351,13 @@ user_settings_dialog_close (void)
 	
 	/* Set the first notebook page as default for the next time the dialog is opened */
 	widget = xst_dialog_get_widget (tool->main_dialog, "user_settings_notebook");
-	gtk_notebook_set_page (GTK_NOTEBOOK (widget), 0);
+	gtk_notebook_set_current_page (GTK_NOTEBOOK (widget), 0);
 	
 	/* Clear user data attached to the widget */
 	widget = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	ud = gtk_object_get_data (GTK_OBJECT (widget), "data");
+	ud = g_object_get_data (G_OBJECT (widget), "data");
 	g_free (ud);
-	gtk_object_remove_data (GTK_OBJECT (widget), "data");
+	g_object_steal_data (G_OBJECT (widget), "data");
 	gtk_widget_hide (widget);
 }
 
@@ -645,8 +638,8 @@ user_update (ug_data *ud)
 		if (!ud->is_new) {
 			/* If it is a modified user, we have to check that the entries are unchanged */
 			gboolean d1, d2;
-			d1 = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_passwd_entry1")), "changed"));
-			d2 = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_passwd_entry2")), "changed"));
+			d1 = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_passwd_entry1")), "changed"));
+			d2 = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_passwd_entry2")), "changed"));
 			if (d1 || d2) {
 				data->password1 = (gchar *) gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_passwd_entry1")));
 				data->password2 = (gchar *) gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_passwd_entry2")));
@@ -710,8 +703,8 @@ user_settings_dialog_prepare_password (void){
 	gtk_entry_set_text (GTK_ENTRY (pwd1), "********");
 	gtk_entry_set_text (GTK_ENTRY (pwd2), "********");
 	
-	gtk_object_set_data (GTK_OBJECT (pwd1), "changed", GINT_TO_POINTER (FALSE));
-	gtk_object_set_data (GTK_OBJECT (pwd2), "changed", GINT_TO_POINTER (FALSE));
+	g_object_set_data (G_OBJECT (pwd1), "changed", GINT_TO_POINTER (FALSE));
+	g_object_set_data (G_OBJECT (pwd2), "changed", GINT_TO_POINTER (FALSE));
 }
 
 static void
@@ -752,7 +745,7 @@ user_settings_dialog_prepare (ug_data *ud)
 	
 	/* Attach the data to the dialog */
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	gtk_object_set_data (GTK_OBJECT (w0), "data", ud);
+	g_object_set_data (G_OBJECT (w0), "data", ud);
 
 	/* Set user login */
 	name = xst_xml_get_child_content (ud->node, "login");

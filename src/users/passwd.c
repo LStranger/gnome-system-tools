@@ -183,11 +183,11 @@ passwd_check_cracklib_dict_path (const gchar *directory)
  	gchar *file3 = g_strdup_printf ("%s/cracklib_dict.pwd", directory);
 	gboolean ret = TRUE;
 
- 	if (!g_file_exists (file1))
+ 	if (!g_file_test (file1, G_FILE_TEST_EXISTS))
 		ret = FALSE;
-	if (!g_file_exists (file2)) 
+	if (!g_file_test (file2, G_FILE_TEST_EXISTS)) 
 		ret = FALSE;
-	if (!g_file_exists (file3))
+	if (!g_file_test (file3, G_FILE_TEST_EXISTS))
 		ret = FALSE; 
 
 	g_free (file1);
@@ -267,7 +267,7 @@ passwd_check (gchar *pwd1, gchar *pwd2, gboolean check_quality)
 	
 	if (dictionary)
 #ifdef	HAVE_LIBCRACK
-		if (check_quality && (check_err = FascistCheck (pwd1, dictionary)))
+		if (check_quality && (check_err = (gchar *) FascistCheck (pwd1, dictionary)))
 			return g_strdup_printf (_("Bad password: %s.\nPlease try with a new password."), check_err);
 #endif	
 

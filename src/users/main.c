@@ -147,10 +147,10 @@ user_query_changed (SearchBar *esb, gpointer user_data)
 	gchar *search_word, *search_query;
 	int search_type;
 
-	gtk_object_get (GTK_OBJECT (esb),
-			"text", &search_word,
-			"option_choice", &search_type,
-			NULL);
+	g_object_get (G_OBJECT (esb),
+	              "text", &search_word,
+	              "option_choice", &search_type,
+	              NULL);
 
 	if (search_word && strlen (search_word)) {
 		switch (search_type) {
@@ -189,8 +189,7 @@ user_query_changed (SearchBar *esb, gpointer user_data)
 static void
 update_searchbar_complexity (XstDialogComplexity complexity)
 {	
-	SearchBar *sb = SEARCH_BAR (gtk_object_get_data (GTK_OBJECT (tool->main_dialog), 
-	                               "SearchBar"));
+	SearchBar *sb = SEARCH_BAR (g_object_get_data (G_OBJECT (tool->main_dialog), "SearchBar"));
 
 	switch (complexity) {
 	case XST_DIALOG_BASIC:
@@ -273,12 +272,12 @@ create_searchbar (void)
 	gtk_table_attach (GTK_TABLE (table), GTK_WIDGET (search), 0, 1, 0, 1,
 			  GTK_FILL, GTK_FILL, 0, 0);
 
-	gtk_signal_connect (GTK_OBJECT (search), "query_changed",
-			    GTK_SIGNAL_FUNC (user_query_changed), 0);
-	gtk_signal_connect (GTK_OBJECT (search), "menu_activated",
-			    GTK_SIGNAL_FUNC (user_menu_activated), 0);
-	gtk_object_set_data (GTK_OBJECT (tool->main_dialog), "SearchBar",
-			     (gpointer) search);
+	g_signal_connect (G_OBJECT (search), "query_changed",
+			  G_CALLBACK (user_query_changed), 0);
+	g_signal_connect (G_OBJECT (search), "menu_activated",
+			  G_CALLBACK (user_menu_activated), 0);
+	g_object_set_data (G_OBJECT (tool->main_dialog), "SearchBar",
+			   (gpointer) search);
 
 	/* Show/hide */
 	update_searchbar_complexity (tool->main_dialog->complexity);
