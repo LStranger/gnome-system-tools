@@ -280,11 +280,14 @@ on_boot_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpoint
 
 	factory = (GtkItemFactory *) gdata;
 
-	if (event->button == 3)
-	{
+	if (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS) {
+		on_boot_settings_clicked (NULL, NULL);
+		return TRUE;
+	}
+	
+	if (event->button == 3)	{
 		gtk_widget_grab_focus (GTK_WIDGET (treeview));
-		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
-		{
+		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL)) {
 			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
 			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
 
