@@ -501,7 +501,7 @@ on_wins_use_toggled (GtkWidget *w, gpointer null)
 gboolean
 callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
 {
-	gchar *hostname_old;
+	gchar *hostname_old = NULL;
 	const gchar *hostname_new;
 	xmlNode *root, *node;
 	GtkWidget *entry;
@@ -515,7 +515,7 @@ callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
 	entry = gst_dialog_get_widget (dialog, "hostname");
 	hostname_new = gtk_entry_get_text (GTK_ENTRY (entry));
 
-	if (strcmp (hostname_new, hostname_old))
+	if (hostname_old && hostname_new && strcmp (hostname_new, hostname_old))
 	{
 		GtkWidget *message;
 
