@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.1\n"
-"POT-Creation-Date: 2001-06-20 21:19+0200\n"
-"PO-Revision-Date: 2001-06-20 21:34+0200\n"
+"POT-Creation-Date: 2001-07-07 12:01+0200\n"
+"PO-Revision-Date: 2001-07-07 12:05+0200\n"
 "Last-Translator: Kjartan Maraas <kmaraas@gnome.org>\n"
 "Language-Team: Norwegian/Bokmaal <no@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -479,162 +479,6 @@ msgstr "Setter lokal tid til [%s]."
 msgid "Getting user database."
 msgstr "Henter brukerdatabase."
 
-#: archiver/location.c:224
-msgid "Default Location"
-msgstr "Standard plassering"
-
-#: archiver/main.c:77
-msgid "Store XML data in the archive"
-msgstr "Lagre XML-data i arkivet"
-
-#: archiver/main.c:79
-msgid "Roll back the configuration to a given point"
-msgstr ""
-
-#: archiver/main.c:81
-msgid "Change the location profile to the given one"
-msgstr ""
-
-#: archiver/main.c:83
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr ""
-
-#: archiver/main.c:85
-msgid "Rename a location to a new name"
-msgstr ""
-
-#: archiver/main.c:87
-msgid "Add a new location to the archive"
-msgstr ""
-
-#: archiver/main.c:89
-msgid "Remove a location from the archive"
-msgstr ""
-
-#: archiver/main.c:91
-msgid "Add a given backend to the given location"
-msgstr ""
-
-#: archiver/main.c:93
-msgid "Remove the given backend from the given location"
-msgstr ""
-
-#: archiver/main.c:99
-msgid "Use the global repository"
-msgstr ""
-
-#: archiver/main.c:101
-msgid "Identifier of location profile on which to operate"
-msgstr ""
-
-#: archiver/main.c:102 src/common/xst-tool.c:1125
-msgid "LOCATION"
-msgstr "LOKASJON"
-
-#: archiver/main.c:104
-msgid "Backend being used for this operation"
-msgstr ""
-
-#: archiver/main.c:104
-msgid "BACKEND_ID"
-msgstr ""
-
-#: archiver/main.c:110
-msgid "Store only the differences with the parent location's config"
-msgstr ""
-
-#: archiver/main.c:112
-msgid "Store only those settings set in the previous config"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "Date to which to roll back"
-msgstr ""
-
-#: archiver/main.c:118
-msgid "DATE"
-msgstr "DATO"
-
-#: archiver/main.c:120
-msgid "Roll back all configuration items"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "Roll back to the revision REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:122
-msgid "REVISION_ID"
-msgstr ""
-
-#: archiver/main.c:124
-msgid "Roll back to the last known revision"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "Roll back by STEPS revisions"
-msgstr ""
-
-#: archiver/main.c:126
-msgid "STEPS"
-msgstr "STEG"
-
-#: archiver/main.c:128
-msgid "Don't run the backend, just dump the output"
-msgstr ""
-
-#: archiver/main.c:134
-msgid "Parent location for the new location"
-msgstr ""
-
-#: archiver/main.c:134
-msgid "PARENT"
-msgstr "OPPHAV"
-
-#: archiver/main.c:136
-msgid "New name to assign to the location"
-msgstr ""
-
-#: archiver/main.c:136
-msgid "NEW_NAME"
-msgstr "NYTT_NAVN"
-
-#: archiver/main.c:142
-msgid "Add/remove this backend to/from the master backend list"
-msgstr ""
-
-#: archiver/main.c:144
-msgid "Full containment"
-msgstr ""
-
-#: archiver/main.c:146
-msgid "Partial containment"
-msgstr ""
-
-#: archiver/main.c:313
-msgid "Global archiver options"
-msgstr ""
-
-#: archiver/main.c:315
-msgid "Archiver commands"
-msgstr ""
-
-#: archiver/main.c:317
-msgid "Options for storing data"
-msgstr "Alternativer for lagring av data"
-
-#: archiver/main.c:319
-msgid "Options for rolling back"
-msgstr ""
-
-#: archiver/main.c:321
-msgid "Options for adding or renaming locations"
-msgstr ""
-
-#: archiver/main.c:324
-msgid "Options for adding and removing backends"
-msgstr ""
-
 #: interfaces/boot.glade.in.h:1
 msgid "Basic"
 msgstr "Grunnleggende"
@@ -644,64 +488,62 @@ msgid "Boot Image Druid"
 msgstr ""
 
 #: interfaces/boot.glade.in.h:3
-msgid "Boot Image Wizard"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:4
 msgid "Boot _type:"
 msgstr "Oppstarts_type:"
 
-#: interfaces/boot.glade.in.h:5 interfaces/users.glade.in.h:16
+#: interfaces/boot.glade.in.h:4
+msgid ""
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition.\n"
+"Optionally, you may also enter append parameters which are passed to the\n"
+"kernel at boot time."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:7 interfaces/users.glade.in.h:16
 msgid "Click \"Next\" to continue"
 msgstr "Klikk \"Neste\" for å fortsette"
-
-#: interfaces/boot.glade.in.h:6 interfaces/users.glade.in.h:17
-msgid ""
-"Congratulations, the new user has been created.\n"
-"Please click \"Finish\" to save your changes. "
-msgstr ""
 
 #: interfaces/boot.glade.in.h:8
 msgid "D_efault"
 msgstr "_Standard"
 
-#: interfaces/boot.glade.in.h:9 interfaces/network.glade.in.h:34
+#: interfaces/boot.glade.in.h:9
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:10 interfaces/network.glade.in.h:34
 #: interfaces/users.glade.in.h:30
 msgid "Finished"
 msgstr "Fullført"
 
-#: interfaces/boot.glade.in.h:10
+#: interfaces/boot.glade.in.h:11
 msgid "Image"
 msgstr "Bilde"
 
-#: interfaces/boot.glade.in.h:11
+#: interfaces/boot.glade.in.h:12
 msgid "Image (step 2 of 2)"
 msgstr "Bilde (steg 2 av 2)"
 
-#: interfaces/boot.glade.in.h:12
+#: interfaces/boot.glade.in.h:13
 msgid "Image Identity (step 1 of 2)"
 msgstr "Bildeidentitet (steg 1 av 2)"
 
-#: interfaces/boot.glade.in.h:13
+#: interfaces/boot.glade.in.h:14
 msgid "Modify the settings for an operating system or kernel."
 msgstr ""
 
-#: interfaces/boot.glade.in.h:14
+#: interfaces/boot.glade.in.h:15
 msgid "Other"
 msgstr "Annen"
 
-#: interfaces/boot.glade.in.h:15
+#: interfaces/boot.glade.in.h:16
 msgid "Other  (step 2 of 2)"
 msgstr "Annet (steg 2 av 2)"
 
-#: interfaces/boot.glade.in.h:16 interfaces/users.glade.in.h:60
-msgid "Please enter a password for the new user. "
-msgstr "Vennligst skriv inn et passord for den nye brukeren."
-
 #: interfaces/boot.glade.in.h:17
-msgid ""
-"Please enter a username for the new user in the space below. You may also "
-"enter a comment about the user, such as his or her real name. "
+msgid "Specify the partition the the operating system is installed on."
 msgstr ""
 
 #: interfaces/boot.glade.in.h:18
@@ -710,13 +552,19 @@ msgstr "Start av datamaskinen"
 
 #: interfaces/boot.glade.in.h:19
 msgid ""
+"The new boot image has been added.\n"
+"Please click \"Finish\" to save your changes. "
+msgstr ""
+
+#: interfaces/boot.glade.in.h:21
+msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new boot images to your system.\n"
 "\n"
 "To begin, click \"Next\". "
 msgstr ""
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:25
 msgid ""
 "Use this tool to set the installed operating\n"
 "systems to choose from at startup."
@@ -724,47 +572,47 @@ msgstr ""
 "Bruk denne dialogen til å bestemme hvilket av de\n"
 "installerte operativsystemene som skal startes."
 
-#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:87
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:87
 #: interfaces/shares.glade.in.h:57
 msgid "_Add..."
 msgstr "_Legg til..."
 
-#: interfaces/boot.glade.in.h:26
+#: interfaces/boot.glade.in.h:28
 msgid "_Append:"
 msgstr "_Legg til:"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:92
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:92
 #: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:89
 msgid "_Delete"
 msgstr "_Slett"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "_Device:"
 msgstr "_Enhet:"
 
-#: interfaces/boot.glade.in.h:29 interfaces/shares.glade.in.h:65
-#: interfaces/users.glade.in.h:94
+#: interfaces/boot.glade.in.h:31 interfaces/print.glade.in.h:73
+#: interfaces/shares.glade.in.h:65 interfaces/users.glade.in.h:94
 msgid "_Name:"
 msgstr "_Navn:"
 
-#: interfaces/boot.glade.in.h:30 interfaces/shares.glade.in.h:66
+#: interfaces/boot.glade.in.h:32 interfaces/shares.glade.in.h:66
 msgid "_Path:"
 msgstr "_Sti:"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "_Root:"
 msgstr "_Rot:"
 
-#: interfaces/boot.glade.in.h:32 interfaces/location-manager.glade.in.h:39
+#: interfaces/boot.glade.in.h:34 interfaces/location-manager.glade.in.h:39
 #: interfaces/shares.glade.in.h:69 interfaces/users.glade.in.h:98
 msgid "_Settings..."
 msgstr "Inn_stillinger..."
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "_Wait"
 msgstr "_Vent"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:36
 msgid "_seconds before loading default kernel or OS"
 msgstr "_sekunder før lasting av standard kjerne eller OS"
 
@@ -781,7 +629,7 @@ msgstr "Passord:"
 msgid "Run without password"
 msgstr "Kjør uten passord"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:698
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:715
 msgid "Scanning your system configuration."
 msgstr "Skanner din systemkonfigurasjon."
 
@@ -1024,7 +872,6 @@ msgstr "_Legg til"
 msgid "_Remove"
 msgstr "_Fjern"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:138
 #: interfaces/memory.glade.in.h:24
 msgid "_Settings"
 msgstr "Inn_stillinger"
@@ -1075,7 +922,7 @@ msgstr ""
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "Endre aliasets IP-adresse eller dets tilhørende navn."
 
-#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:3
+#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:21
 #: interfaces/shares.glade.in.h:11 interfaces/users.glade.in.h:24
 msgid "Delete"
 msgstr "Slett"
@@ -1250,7 +1097,7 @@ msgstr "Tillat aktiveringskontroll for alle brukere"
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:21
+#: interfaces/network.glade.in.h:21 interfaces/print.glade.in.h:18
 msgid "Connection"
 msgstr "Tilkobling"
 
@@ -1365,7 +1212,7 @@ msgid ""
 "account."
 msgstr ""
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:51 interfaces/print.glade.in.h:33
 msgid "Options"
 msgstr "Alternativer"
 
@@ -1485,7 +1332,6 @@ msgstr "_Konfigurasjon:"
 msgid "_Configure..."
 msgstr "_Konfigurer..."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:108
 #: interfaces/network.glade.in.h:93
 msgid "_Delete..."
 msgstr "_Slett..."
@@ -1538,7 +1384,7 @@ msgstr "_Modemport:"
 msgid "_Parallel Line"
 msgstr "_Parallell-linje"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:106 interfaces/print.glade.in.h:74
 msgid "_Password:"
 msgstr "_Passord:"
 
@@ -1586,7 +1432,7 @@ msgstr "Br_ukernavn:"
 msgid "_Wavelan"
 msgstr "_Wavelan"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:118 interfaces/print.glade.in.h:77
 msgid "_Workgroup:"
 msgstr "_Arbeidsgruppe:"
 
@@ -1764,7 +1610,7 @@ msgstr ""
 msgid "Samba"
 msgstr "Samba"
 
-#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:50
+#: interfaces/print.glade.in.h:56 interfaces/shares.glade.in.h:50
 msgid "Settings..."
 msgstr "Innstillinger..."
 
@@ -1827,7 +1673,8 @@ msgstr ""
 msgid "_Scan"
 msgstr "_Søk"
 
-#: interfaces/shares.glade.in.h:70 interfaces/users.glade.in.h:101
+#: interfaces/print.glade.in.h:76 interfaces/shares.glade.in.h:70
+#: interfaces/users.glade.in.h:101
 msgid "_Username:"
 msgstr "Br_ukernavn:"
 
@@ -1947,7 +1794,7 @@ msgid "All _users"
 msgstr "Alle br_ukere"
 
 #: interfaces/users.glade.in.h:8
-msgid "Assign a random pasword by default"
+msgid "Assign a random password by default"
 msgstr "Tildel et tilfeldig passord som standard"
 
 #: interfaces/users.glade.in.h:9
@@ -1972,6 +1819,12 @@ msgstr ""
 #: interfaces/users.glade.in.h:15
 msgid "Check password _quality"
 msgstr "Sjekk _kvalitet på passord"
+
+#: interfaces/users.glade.in.h:17
+msgid ""
+"Congratulations, the new user has been created.\n"
+"Please click \"Finish\" to save your changes. "
+msgstr ""
 
 #: interfaces/users.glade.in.h:19
 msgid "Contact information"
@@ -2021,7 +1874,7 @@ msgid "Group _members"
 msgstr "Gruppe_medlemmer"
 
 #: interfaces/users.glade.in.h:34 src/users/group.etspec.h:2
-#: src/users/user_settings.c:405 src/users/user_settings.c:478
+#: src/users/user_settings.c:459 src/users/user_settings.c:532
 msgid "Groups"
 msgstr "Grupper"
 
@@ -2115,8 +1968,8 @@ msgstr ""
 msgid "Optional settings"
 msgstr "Alternative innstillinger"
 
-#: interfaces/users.glade.in.h:56 src/users/user_settings.c:412
-#: src/users/user_settings.c:485
+#: interfaces/users.glade.in.h:56 src/users/user_settings.c:466
+#: src/users/user_settings.c:539
 msgid "Password"
 msgstr "Passord"
 
@@ -2131,6 +1984,10 @@ msgstr ""
 #: interfaces/users.glade.in.h:59
 msgid "Password set to:"
 msgstr "Passord satt til:"
+
+#: interfaces/users.glade.in.h:60
+msgid "Please enter a password for the new user. "
+msgstr "Vennligst skriv inn et passord for den nye brukeren."
 
 #: interfaces/users.glade.in.h:61
 msgid ""
@@ -2176,19 +2033,17 @@ msgstr ""
 
 #: interfaces/users.glade.in.h:74
 msgid ""
+"This is a list of the users available in the system. Create new users or "
+"edit existing user settings with this dialog."
+msgstr "Dette er listen over brukere som er tilgjengelige på systemet. Opprett nye brukere eller rediger eksisterende brukerinstillinger med denne dialogen."
+
+#: interfaces/users.glade.in.h:75
+msgid ""
 "This is the list of the groups available in the system. Create new groups or "
 "edit existing groups with this dialog."
 msgstr ""
 "Dette er en liste med grupper som er tilgjengelige på systemet. Opprett nye "
 "grupper eller rediger eksisterende grupper med denne dialogen."
-
-#: interfaces/users.glade.in.h:75
-msgid ""
-"This is the list of the users available in the system. Create new users or "
-"edit existing user settings with this dialog."
-msgstr ""
-"Dette er listen over brukere som er tilgjengelige på systemet. Opprett bye "
-"brukere eller rediger eksisterende brukerinstillinger med denne dialogen."
 
 #: interfaces/users.glade.in.h:76
 msgid "Us_er's groups"
@@ -2287,12 +2142,12 @@ msgstr "_Arbeidstelefon:"
 msgid "Are you sure you want to delete %s?"
 msgstr "Er du sikker på at du vil slette %s?"
 
-#: src/boot/e-table.c:356
+#: src/boot/e-table.c:370
 #, c-format
 msgid "%s (default)"
 msgstr "%s (forvalg)"
 
-#: src/boot/boot.etspec.h:1 src/users/profile.c:999
+#: src/boot/boot.etspec.h:1 src/users/profile.c:1032
 msgid "Default"
 msgstr "Standard"
 
@@ -2304,7 +2159,7 @@ msgstr ""
 msgid "Type"
 msgstr "Type"
 
-#: src/boot/main.c:89
+#: src/boot/main.c:90
 msgid "Boot Manager Settings - Ximian Setup Tools"
 msgstr "Innstillinger for oppstartshåndterer - Ximian administrasjonsverktøy"
 
@@ -2342,30 +2197,34 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr ""
 
-#: src/common/xst-tool.c:574
-msgid "Skipping actual save..."
-msgstr "Hopper over lagring..."
+#: src/common/xst-tool.c:565
+msgid "Skipping backend init..."
+msgstr "Hopper over initiering av backend..."
 
-#: src/common/xst-tool.c:621
+#: src/common/xst-tool.c:764
 msgid "Updating your system configuration."
 msgstr "Oppdaterer din systemkonfigurasjon."
 
-#: src/common/xst-tool.c:752
+#: src/common/xst-tool.c:809
+msgid "Skipping actual save..."
+msgstr "Hopper over lagring..."
+
+#: src/common/xst-tool.c:860
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
 
-#: src/common/xst-tool.c:928
+#: src/common/xst-tool.c:1036
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian administrasjonsverktøy"
 
-#: src/common/xst-tool.c:1065
+#: src/common/xst-tool.c:1176
 msgid "The password you entered is invalid."
 msgstr ""
 
-#: src/common/xst-tool.c:1075
+#: src/common/xst-tool.c:1186
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2381,15 +2240,19 @@ msgid ""
 "The Ximian Setup Tools team"
 msgstr ""
 
-#: src/common/xst-tool.c:1095
+#: src/common/xst-tool.c:1206
 msgid "Don't show me this again"
 msgstr ""
 
-#: src/common/xst-tool.c:1125
+#: src/common/xst-tool.c:1236
 msgid "\tEdit configuration in the location LOCATION."
 msgstr ""
 
-#: src/common/xst-tool.c:1162
+#: src/common/xst-tool.c:1236
+msgid "LOCATION"
+msgstr "LOKASJON"
+
+#: src/common/xst-tool.c:1273
 msgid "Pretending we are root..."
 msgstr "Later som om vi er root..."
 
@@ -2799,230 +2662,161 @@ msgstr ""
 "Ugyldig passord: %s.\n"
 "Vennligst prøv et nytt passord."
 
-#: src/users/user_group.c:321
+#: src/users/user_group.c:326
 msgid "The username is empty."
 msgstr "Brukernavnet er tomt."
 
-#: src/users/user_group.c:325
+#: src/users/user_group.c:330
 msgid "The username is too long."
 msgstr "Brukernavnet er for langt."
 
-#: src/users/user_group.c:328 src/users/user_group.c:349
-#: src/users/user_group.c:429
+#: src/users/user_group.c:333 src/users/user_group.c:354
+#: src/users/user_group.c:438
 msgid "root user shouldn't be modified."
 msgstr "root-brukeren bør ikke endres."
 
-#: src/users/user_group.c:332
+#: src/users/user_group.c:337
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "Vennligst oppgi et gyldig brukernavn, bruk kun små bokstaver."
 
-#: src/users/user_group.c:336
+#: src/users/user_group.c:341
 msgid "Username already exists."
 msgstr "Brukernavn eksisterer allerede."
 
-#: src/users/user_group.c:347 src/users/user_group.c:523
+#: src/users/user_group.c:352 src/users/user_group.c:542
 msgid "User id must be a positive number."
 msgstr ""
 
-#: src/users/user_group.c:351
+#: src/users/user_group.c:356
 msgid "Such user id already exists."
 msgstr "Denne bruker-id eksisterer allerede."
 
-#: src/users/user_group.c:372
-msgid "Invalid comment"
+#: src/users/user_group.c:379
+#, c-format
+msgid "Invalid character '%c' in comment."
 msgstr ""
 
-#: src/users/user_group.c:387
+#: src/users/user_group.c:395
 msgid "Please give shell with full path."
 msgstr ""
 
-#: src/users/user_group.c:423
+#: src/users/user_group.c:432
 msgid "Home directory must not be empty."
 msgstr "Hjemmekatalogen må ikke være tom."
 
-#: src/users/user_group.c:426
+#: src/users/user_group.c:435
 msgid "Please enter full path for home directory."
 msgstr ""
 
-#: src/users/user_group.c:459
+#: src/users/user_group.c:443
+msgid "Part of the path to the home directory is a file."
+msgstr ""
+
+#: src/users/user_group.c:444
+msgid "There is a loop in the path to the home directory."
+msgstr ""
+
+#: src/users/user_group.c:445
+msgid "Not enough memory to check the home directory."
+msgstr ""
+
+#: src/users/user_group.c:446
+msgid "The path to the home directory is too long."
+msgstr "Stien til hjemmekatalogen er for lang."
+
+#: src/users/user_group.c:478
 msgid "Group name is not valid."
 msgstr "Gruppenavnet er ugyldig."
 
-#: src/users/user_group.c:462 src/users/user_group.c:527
+#: src/users/user_group.c:481 src/users/user_group.c:546
 msgid "Such group id already exists."
 msgstr "Denne gruppe-ID eksisterer allerede."
 
-#: src/users/user_group.c:465
+#: src/users/user_group.c:484
 msgid "Group does not exist. Create new?"
 msgstr ""
 
-#: src/users/user_group.c:484
+#: src/users/user_group.c:503
 msgid "Group name is empty."
 msgstr "Gruppenavnet er tomt."
 
-#: src/users/user_group.c:488
+#: src/users/user_group.c:507
 msgid "The group name is too long."
 msgstr "Gruppenavnet er for langt."
 
-#: src/users/user_group.c:492
+#: src/users/user_group.c:511
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Vennligst oppgi et gyldig gruppenavn. Bruk kun små bokstaver."
 
-#: src/users/user_group.c:496
+#: src/users/user_group.c:515
 msgid "Group already exists."
 msgstr "Gruppen eksisterer allerede."
 
-#: src/users/user_group.c:797
+#: src/users/user_group.c:816
 #, c-format
 msgid "Password for User %s"
 msgstr "Passord for bruker %s"
 
-#: src/users/user_group.c:831
+#: src/users/user_group.c:850
 msgid "The root user must not be deleted."
 msgstr "Root-brukeren må ikke slettes."
 
-#: src/users/user_group.c:838
+#: src/users/user_group.c:857
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Er du sikker på at du vil slette bruker %s?"
 
-#: src/users/user_group.c:861
+#: src/users/user_group.c:880
 msgid "Create New Group"
 msgstr "Opprett ny gruppe"
 
-#: src/users/user_group.c:921
+#: src/users/user_group.c:940
 msgid "The root group must not be deleted."
 msgstr "Root-gruppen må ikke slettes."
 
-#: src/users/user_group.c:928
+#: src/users/user_group.c:947
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Er du sikker på at du vil slette gruppe %s?"
 
-#: src/users/user_group.c:973
+#: src/users/user_group.c:992
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Innstillinger for gruppe %s"
 
-#: archiver/config-manager-dialog.c:161 archiver/create-location-dialog.c:114
-msgid "Rollback and Location Management"
+#: src/users/user_group.c:1383
+msgid "The home directory does not exist, or its path is invalid."
 msgstr ""
 
-#: archiver/location-list.c:344
-msgid "Global locations"
-msgstr "Globale plasseringer"
-
-#: archiver/location-list.c:347
-msgid "User locations"
-msgstr "Brukerlokasjoner"
-
-#: archiver/location-manager-capplet/gui-backend-list.c:386
-#: archiver/location-manager-capplet/gui-backend-list.c:403
-msgid "Could not launch configuration tool"
+#: src/users/user_group.c:1385
+msgid "Couldn't get access to the home directory."
 msgstr ""
 
-#: archiver/location-manager-capplet/location-dialog.c:300
-msgid "You must supply a name"
+#. We shouldn't fall here: the other cases are in the error checks.
+#: src/users/user_group.c:1389
+msgid "There was an error trying to access the home directory."
 msgstr ""
 
-#: archiver/location-manager-capplet/location-dialog.c:305
-msgid "You already have a location by that name"
+#: src/users/user_group.c:1397
+msgid "The home directory path exists, but it is not a directory."
 msgstr ""
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:99
-msgid "_New..."
-msgstr "_Ny..."
+#: src/users/user_group.c:1401
+msgid "The home directory is not owned by the user."
+msgstr "Hjemmekatalogen er ikke eiet av brukeren."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:100
-msgid "Create a new location"
-msgstr "Opprett en ny plassering"
+#: src/users/user_group.c:1405
+msgid "The user doesn't have permission to read from the home directory."
+msgstr "Brukeren har ikke rettigheter til å lese fra hjemmekatalogen."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:102
-msgid "_Copy..."
-msgstr "_Kopier..."
+#: src/users/user_group.c:1408
+msgid "The user doesn't have permission to write in the home directory."
+msgstr "Brukeren har ikke rettigheter til å skrive i hjemmekatalogen."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:103
-msgid "Create a new location identical to the selected one"
+#: src/users/user_group.c:1411
+msgid ""
+"The user doesn't have permission to use (``execute'') the home directory."
 msgstr ""
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:105
-msgid "_Rename..."
-msgstr "End_re navn..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:106
-msgid "Rename the selected location"
-msgstr "Endre navn på valgt lokasjon"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:109
-msgid "Delete the selected location"
-msgstr "Slett valgt lokasjon"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:112
-msgid "_Apply..."
-msgstr "_Bruk..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:113
-msgid "Apply the changes"
-msgstr ""
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:119
-msgid "_Edit..."
-msgstr "_Rediger..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:120
-msgid "Edit settings for the selected backend"
-msgstr "Rediger innstillinger for valgt \"backend\""
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:122
-msgid "_Select"
-msgstr "_Velg"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:123
-msgid "Select the selected backend for this location"
-msgstr ""
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:125
-msgid "_Deselect"
-msgstr "_Velg bort"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:126
-msgid "Deselect the selected backend for this location"
-msgstr ""
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:137
-msgid "_Location"
-msgstr "P_lassering"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:139
-#: interfaces/location-manager.glade.in.h:38
-msgid "_Help"
-msgstr "_Hjelp"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:193
-#: archiver/location-manager-capplet/location-manager-dialog.c:461
-msgid "Location Manager"
-msgstr "Plasseringshåndterer"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:394
-msgid "You cannot delete the default location"
-msgstr ""
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:399
-#, c-format
-msgid "Are you sure you wish to destroy the location %s?"
-msgstr "Er du sikker på at du vil ødelegge lokasjonen %s?"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:464
-msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximian administrasjonsverktøy lokasjonshåndterer"
-
-#: archiver/location-manager-capplet/main.c:37
-msgid "Operate on global backends"
-msgstr ""
-
-#: archiver/location-manager-capplet/main.c:53
-msgid "Options for the location manager"
-msgstr "Alternativer for lokasjonshåndterer"
 
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
@@ -3178,43 +2972,228 @@ msgid ""
 "want to use your stinking laptop."
 msgstr ""
 
+#: interfaces/location-manager.glade.in.h:38
+msgid "_Help"
+msgstr "_Hjelp"
+
 #: interfaces/print.glade.in.h:1
-msgid "Add Printer..."
-msgstr "Legg til skriver..."
+msgid "/dev/lp0 (LPT1)"
+msgstr ""
 
 #: interfaces/print.glade.in.h:2
-msgid "D_evice"
-msgstr "_Enhet"
+msgid "/dev/lp1 (LPT2)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:3
+msgid "/dev/ttyS0 (COM1)"
+msgstr ""
 
 #: interfaces/print.glade.in.h:4
-msgid "Dummy Printer"
+msgid "/dev/ttyS1 (COM2)"
 msgstr ""
 
 #: interfaces/print.glade.in.h:5
-msgid "Novel _Netware (NCP) Printer"
+msgid "/dev/ttyS2 (COM3)"
 msgstr ""
 
 #: interfaces/print.glade.in.h:6
-msgid "Remote UNIX (_lpd) printer"
+msgid "/dev/ttyS3 (COM4)"
 msgstr ""
 
 #: interfaces/print.glade.in.h:7
-msgid "Remote _Windows (SMB) printer"
+msgid "1200x1200"
 msgstr ""
 
 #: interfaces/print.glade.in.h:8
-msgid "S_erver"
-msgstr "Tj_enere"
+msgid "1200x600"
+msgstr ""
 
 #: interfaces/print.glade.in.h:9
-msgid "S_pool"
+msgid "16 colors"
 msgstr ""
 
 #: interfaces/print.glade.in.h:10
-msgid "Select"
-msgstr "Velg"
+msgid "256 colors"
+msgstr ""
+
+#: interfaces/print.glade.in.h:11
+msgid "300x300"
+msgstr ""
 
 #: interfaces/print.glade.in.h:12
+msgid "400x400"
+msgstr ""
+
+#: interfaces/print.glade.in.h:13
+msgid "600x600"
+msgstr ""
+
+#: interfaces/print.glade.in.h:14
+msgid "A3"
+msgstr ""
+
+#: interfaces/print.glade.in.h:15
+msgid "A4"
+msgstr ""
+
+#: interfaces/print.glade.in.h:16
+msgid "Add Printer..."
+msgstr "Legg til skriver..."
+
+#: interfaces/print.glade.in.h:17
+msgid "Add a New Printer"
+msgstr "Legg til en ny skriver"
+
+#: interfaces/print.glade.in.h:19
+msgid ""
+"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+msgstr ""
+
+#: interfaces/print.glade.in.h:20
+msgid "Convert _Linefeeds"
+msgstr ""
+
+#: interfaces/print.glade.in.h:22
+msgid "Document Pages per Sheet"
+msgstr ""
+
+#: interfaces/print.glade.in.h:23
+msgid "Driver"
+msgstr "Driver"
+
+#: interfaces/print.glade.in.h:24
+msgid "E_xplicitly Eject Last Page"
+msgstr ""
+
+#: interfaces/print.glade.in.h:25
+msgid "High Color"
+msgstr ""
+
+#: interfaces/print.glade.in.h:26
+msgid "Legal"
+msgstr ""
+
+#: interfaces/print.glade.in.h:27
+msgid "Letter"
+msgstr "Letter"
+
+#: interfaces/print.glade.in.h:28
+msgid "Name of the printer."
+msgstr "Navn på skriveren."
+
+#: interfaces/print.glade.in.h:29
+msgid "Name of the server the printer is connected to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:30
+msgid "Name the server uses for the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:31
+msgid "Novell _Netware (NCP) Printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:32
+msgid "Number of colors to print in."
+msgstr ""
+
+#: interfaces/print.glade.in.h:34
+msgid "P_aper Size:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:35
+msgid "P_ort Number:"
+msgstr "P_ortnummer:"
+
+#: interfaces/print.glade.in.h:36
+msgid "Port number the server is listening to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:37
+msgid "Port the printer is connected to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:38
+msgid "Print one page per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:39
+msgid "Print resolution."
+msgstr "Utskriftsoppløsning."
+
+#: interfaces/print.glade.in.h:40
+msgid "Printer Settings"
+msgstr "Innstillinger for skriver"
+
+#: interfaces/print.glade.in.h:41
+msgid "Printer connected to a port on your machine."
+msgstr ""
+
+#: interfaces/print.glade.in.h:42
+msgid "Printer listening directly for network connections."
+msgstr ""
+
+#: interfaces/print.glade.in.h:43
+msgid "Printer shared on a Windows (SMB) network."
+msgstr ""
+
+#: interfaces/print.glade.in.h:44
+msgid "Printer shared using the Novell Netware (NCP) protocol."
+msgstr ""
+
+#: interfaces/print.glade.in.h:45
+msgid "Printer shared using the Unix (lpd) print protocol."
+msgstr ""
+
+#: interfaces/print.glade.in.h:46
+msgid "R_esolution:"
+msgstr "O_ppløsning"
+
+#: interfaces/print.glade.in.h:47
+msgid "Remote UNIX (_lpd) Printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:48
+msgid "Remote _Windows (SMB) printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:49
+msgid "SMB workgroup the server is in."
+msgstr ""
+
+#: interfaces/print.glade.in.h:50
+msgid "Scale pages down and print eight per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:51
+msgid "Scale pages down and print four per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:52
+msgid "Scale pages down and print two per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:53
+msgid "Select the type of printer to add:"
+msgstr "Velg type skriver du vil legge til:"
+
+#: interfaces/print.glade.in.h:54
+msgid "Send an EOF after the print job to help eject the last page."
+msgstr ""
+
+#: interfaces/print.glade.in.h:55
+msgid "Send text documents raw to the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:57
+msgid "Size of the paper in the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:58
+msgid "The password used to connect to the server."
+msgstr "Passordet som brukes ved tilkobling til tjeneren."
+
+#: interfaces/print.glade.in.h:59
 msgid ""
 "This is the list of the configured printers available on the system. Create "
 "new printers or edit existing printer settings with this dialog."
@@ -3223,33 +3202,61 @@ msgstr ""
 "systemet. Opprett bye skrivere eller rediger eksisterende skrivere med denne "
 "dialogen."
 
-#: interfaces/print.glade.in.h:13
-msgid "User Settings"
-msgstr "Brukerinnstillinger"
-
-#: interfaces/print.glade.in.h:14
-msgid "_Direct to port printer"
+#: interfaces/print.glade.in.h:60
+msgid "True Color"
 msgstr ""
 
-#: interfaces/print.glade.in.h:15
-msgid "_Filter"
-msgstr "_Filter"
+#: interfaces/print.glade.in.h:61
+msgid "Username used to connect to the server."
+msgstr ""
 
-#: interfaces/print.glade.in.h:16
+#: interfaces/print.glade.in.h:62
+msgid "What driver to use."
+msgstr ""
+
+#: interfaces/print.glade.in.h:63
+msgid "_1"
+msgstr ""
+
+#: interfaces/print.glade.in.h:64
+msgid "_2"
+msgstr ""
+
+#: interfaces/print.glade.in.h:65
+msgid "_4"
+msgstr ""
+
+#: interfaces/print.glade.in.h:66
+msgid "_8"
+msgstr ""
+
+#: interfaces/print.glade.in.h:67
+msgid "_Color Depth:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:68
+msgid "_Device Name:"
+msgstr "_Enhetsnavn:"
+
+#: interfaces/print.glade.in.h:69
+msgid "_Direct Network Printer"
+msgstr ""
+
+#: interfaces/print.glade.in.h:70
+msgid "_Fast Text Printing"
+msgstr ""
+
+#: interfaces/print.glade.in.h:71
+msgid "_Hostname:"
+msgstr "_Vertsnavn:"
+
+#: interfaces/print.glade.in.h:72
 msgid "_Local Printer"
 msgstr "Lokal skriver:"
 
-#: interfaces/print.glade.in.h:17
-msgid "_Password"
-msgstr "_Passord"
-
-#: interfaces/print.glade.in.h:18
-msgid "_User"
-msgstr "Br_uker"
-
-#: interfaces/print.glade.in.h:19
-msgid "_Workgroup"
-msgstr "_Arbeidsgruppe"
+#: interfaces/print.glade.in.h:75
+msgid "_Remote Name:"
+msgstr "Ekste_rnt navn:"
 
 #: src/internetsharing/callbacks.c:54
 msgid ""
@@ -3294,33 +3301,33 @@ msgstr ""
 msgid "Sear_ch"
 msgstr "Sø_k"
 
-#: src/users/profile.c:509
+#: src/users/profile.c:542
 msgid "Choose the file"
 msgstr "Velg filen"
 
-#: src/users/profile.c:651
+#: src/users/profile.c:684
 msgid "Profile Editor"
 msgstr "Profilredigerer"
 
-#: src/users/profile.c:852
+#: src/users/profile.c:885
 msgid "Profile with given name already exists."
 msgstr "Profil med gitt navn eksisterer allerede."
 
-#: src/users/profile.c:855
+#: src/users/profile.c:888
 msgid "Profile name must not be empty."
 msgstr "Profilnavn må ikke være tomt."
 
 #. name
-#: src/users/profile.c:1000
+#: src/users/profile.c:1033
 msgid "Default profile"
 msgstr "Standard profil"
 
-#: src/users/profile.c:1316
+#: src/users/profile.c:1349
 msgid "Can't delete Default"
 msgstr "Kan ikke slette standard"
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1442
+#: src/users/profile.c:1475
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -3332,12 +3339,19 @@ msgstr ""
 msgid "User Account Editor"
 msgstr ""
 
-#: src/users/user_settings.c:398 src/users/user_settings.c:456
-#: src/users/user_settings.c:471
+#: src/users/user_settings.c:176
+#, c-format
+msgid ""
+"Invalid character '%c'.\n"
+"This field doesn't accept control characters ',' ':' and '='."
+msgstr ""
+
+#: src/users/user_settings.c:452 src/users/user_settings.c:510
+#: src/users/user_settings.c:525
 msgid "Identity"
 msgstr "Identitet"
 
-#: src/users/user_settings.c:449
+#: src/users/user_settings.c:503
 msgid "Real name:"
 msgstr "Fullt navn:"
 
@@ -3392,6 +3406,105 @@ msgstr "Mønster"
 #: src/shares/export_clients.etspec.h:2
 msgid "Write"
 msgstr "Skriv"
+
+#~ msgid "Default Location"
+#~ msgstr "Standard plassering"
+
+#~ msgid "Store XML data in the archive"
+#~ msgstr "Lagre XML-data i arkivet"
+
+#~ msgid "DATE"
+#~ msgstr "DATO"
+
+#~ msgid "STEPS"
+#~ msgstr "STEG"
+
+#~ msgid "PARENT"
+#~ msgstr "OPPHAV"
+
+#~ msgid "NEW_NAME"
+#~ msgstr "NYTT_NAVN"
+
+#~ msgid "Options for storing data"
+#~ msgstr "Alternativer for lagring av data"
+
+#~ msgid "Global locations"
+#~ msgstr "Globale plasseringer"
+
+#~ msgid "User locations"
+#~ msgstr "Brukerlokasjoner"
+
+#~ msgid "_New..."
+#~ msgstr "_Ny..."
+
+#~ msgid "Create a new location"
+#~ msgstr "Opprett en ny plassering"
+
+#~ msgid "_Copy..."
+#~ msgstr "_Kopier..."
+
+#~ msgid "_Rename..."
+#~ msgstr "End_re navn..."
+
+#~ msgid "Rename the selected location"
+#~ msgstr "Endre navn på valgt lokasjon"
+
+#~ msgid "Delete the selected location"
+#~ msgstr "Slett valgt lokasjon"
+
+#~ msgid "_Apply..."
+#~ msgstr "_Bruk..."
+
+#~ msgid "_Edit..."
+#~ msgstr "_Rediger..."
+
+#~ msgid "Edit settings for the selected backend"
+#~ msgstr "Rediger innstillinger for valgt \"backend\""
+
+#~ msgid "_Select"
+#~ msgstr "_Velg"
+
+#~ msgid "_Deselect"
+#~ msgstr "_Velg bort"
+
+#~ msgid "_Location"
+#~ msgstr "P_lassering"
+
+#~ msgid "Location Manager"
+#~ msgstr "Plasseringshåndterer"
+
+#~ msgid "Are you sure you wish to destroy the location %s?"
+#~ msgstr "Er du sikker på at du vil ødelegge lokasjonen %s?"
+
+#~ msgid "Ximian Setup Tools Location Manager"
+#~ msgstr "Ximian administrasjonsverktøy lokasjonshåndterer"
+
+#~ msgid "Options for the location manager"
+#~ msgstr "Alternativer for lokasjonshåndterer"
+
+#~ msgid "D_evice"
+#~ msgstr "_Enhet"
+
+#~ msgid "S_erver"
+#~ msgstr "Tj_enere"
+
+#~ msgid "Select"
+#~ msgstr "Velg"
+
+#~ msgid "User Settings"
+#~ msgstr "Brukerinnstillinger"
+
+#~ msgid "_Filter"
+#~ msgstr "_Filter"
+
+#~ msgid "_Password"
+#~ msgstr "_Passord"
+
+#~ msgid "_User"
+#~ msgstr "Br_uker"
+
+#~ msgid "_Workgroup"
+#~ msgstr "_Arbeidsgruppe"
 
 #~ msgid "N_ame:"
 #~ msgstr "N_avn:"
@@ -3544,9 +3657,6 @@ msgstr "Skriv"
 
 #~ msgid "Save Profile"
 #~ msgstr "Lagre profil"
-
-#~ msgid "Name of new profile"
-#~ msgstr "Navn på ny profil"
 
 #~ msgid "Make this my default"
 #~ msgstr "Bruk dette som standardverdi"
