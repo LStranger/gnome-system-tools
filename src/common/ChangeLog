@@ -1,3 +1,10 @@
+2004-04-08  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* gst-auch.c, gst-tool.[ch]: yet another BE/FE communication 
+	  improvement, now all the xml reading stuff is done 
+	  synchronously to avoid problems when reading from a pty with 
+	  O_NONBLOCK
+
 2004-02-20  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* gst-auth.c: added some checks to see if the user has permissions to

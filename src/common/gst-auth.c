@@ -138,13 +138,13 @@ void
 gst_auth_write_password (GstTool *tool, gchar *pwd)
 {
 	gchar *answer = "yes\n";
-	int t;
 	gboolean cont = FALSE;
 	gchar *str;
+	int t;
 
 	/* read all the su or ssh output and flush the descriptors */
 	while (!cont) {
-		str = gst_tool_read_from_backend (tool);
+		str = gst_tool_read_from_backend (tool, "assword:", "/no)?", NULL);
 
 		/* FIXME: hope that someday we can get rid of this ssh output string parsing */
 		if (g_strrstr (g_ascii_strup (str, -1), "AUTHENTICITY") != NULL) {
@@ -234,13 +234,10 @@ gst_auth_get_password (gchar **password)
 static void
 gst_auth_read_output (GstTool *tool)
 {
-	gint t;
-	gchar buffer[500];
-	gchar *error_message;
 	gchar *b;
 
 	/* read the synchrony CR after sending the password */
-	b = gst_tool_read_from_backend (tool);
+	b = gst_tool_read_from_backend (tool, "\n", NULL);
 	g_free (b);
 }
 
@@ -267,7 +264,7 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 
 		if (result == GST_AUTH_RUN_AS_ROOT) {
 			gst_auth_write_password (tool, password);
-			gst_auth_read_output (tool);
+			/* gst_auth_read_output (tool); */
 
 			if (strlen (password) > 0)
 				memset (password, 0, strlen (password));

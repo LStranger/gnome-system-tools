@@ -54,6 +54,7 @@
 #define BUFFER_SIZE 2048
 #define GST_DEBUG 1
 #define GST_TOOL_EOR "<!-- GST: end of request -->"
+#define REDRAW_NCHARS 500
 
 /* Define this if you want the frontend to run the backend under strace */
 /*#define GST_DEBUG_STRACE_BACKEND*/
@@ -170,7 +171,6 @@ report_finished_cb (GstTool *tool, GstReportLine *rline, gpointer data)
 	tool->report_finished = TRUE;
 
 	gtk_widget_hide (tool->report_window);
-	gtk_main_quit ();
 	
 	return TRUE;
 }
@@ -310,21 +310,19 @@ report_dispatch (GstTool *tool)
 }
 
 static void
-report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
+report_progress_do (GstTool *tool)
 {
-	GstTool *tool;
 	GstReportLine *rline;
 	gchar *buffer;
 	gint i = 0;
 
-	tool = GST_TOOL (data);
 	if (tool->input_block)
 		return;
 
 	if (!tool->line)
 		tool->line = g_string_new ("");
 
-	while ((buffer = gst_tool_read_from_backend (tool))) {
+	while ((buffer = gst_tool_read_from_backend (tool, "\n", NULL))) {
 		for (i = 0; (i < strlen (buffer)); i++) {
 			gchar c = buffer [i];
 
@@ -382,38 +380,18 @@ report_window_close_cb (GtkWidget *window, GdkEventAny *ev, gpointer data)
 }
 
 static void
-report_progress (GstTool *tool, const gchar *label)
+report_progress (GstTool *tool)
 {
-	tool->timeout_done = FALSE;
-	tool->report_list_visible = FALSE;
 	tool->report_finished = FALSE;
 	tool->report_dispatch_pending = FALSE;
 
 	gst_tool_clear_supported_platforms (tool);
 	report_clear_lines (tool);
 
-	if (label) {
-		gtk_label_set_text (GTK_LABEL (tool->report_label), label);
-		gtk_widget_show_all (tool->report_window);
-		gtk_widget_show_now (tool->report_window);
+	report_progress_do (tool);
 
-		/* This ensures the report_window will be hidden on time.
-		 * I'ts OK for long-lived directives, and short lived shouldn't
-		 * be using the report window anyways. */
-		while (gtk_events_pending ()) {
-			usleep (1);
-			gtk_main_iteration ();
-		}
-	}
-
-	tool->input_id = gtk_input_add_full (tool->backend_master_fd, GDK_INPUT_READ,
-					     report_progress_tick, NULL, tool, NULL);
-	tool->input_block = FALSE;
-
-	gtk_main ();
-
-	if (tool->input_id)
-		gtk_input_remove (tool->input_id);
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
 }
 
 static GSList *
@@ -523,7 +501,7 @@ gst_tool_process_startup (GstTool *tool)
 	/* let's process those startup reports. */
 	tool->report_hook_type = GST_REPORT_HOOK_LOAD;
 
-	report_progress (tool, NULL);
+	report_progress (tool);
 
 	/* stable version users should pass here only once,
 	   but if there's an inconsistency the dialog will repeat */
@@ -653,23 +631,18 @@ gst_tool_end_of_request (GString *string)
 static xmlDoc *
 gst_tool_read_xml_from_backend (GstTool *tool)
 {
-	gchar *buffer;
-	int t;
-	xmlDoc *xml;
+	xmlDoc *xml = NULL;
+	gchar *buffer = NULL;
 
 	if (!tool->xml_document)
 		return NULL;
 
-	while (! gst_tool_end_of_request (tool->xml_document)) {
-		buffer = gst_tool_read_from_backend (tool);
-		g_string_append (tool->xml_document, buffer);
-	}
+	buffer = gst_tool_read_from_backend (tool, GST_TOOL_EOR "\r\n", NULL);
+	g_string_append (tool->xml_document, buffer);
+	g_free (buffer);
 
-	if (tool->xml_document->str[0] == '<') {
+	if (tool->xml_document->str[0] == '<')
 		xml = xmlParseDoc (tool->xml_document->str);
-	} else {
-		xml = NULL;
-	}
 
 	g_string_free (tool->xml_document, TRUE);
 	tool->xml_document = NULL;
@@ -783,7 +756,7 @@ gst_tool_run_get_directive_va (GstTool *tool, const gchar *report_sign, const gc
 		tool->xml_document = g_string_new ("");
 
 	if (location_id == NULL)
-		report_progress (tool, report_sign? _(report_sign): NULL);
+		report_progress (tool);
 
 	xml = gst_tool_read_xml_from_backend(tool);
 
@@ -826,25 +799,21 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 
 	gst_tool_send_directive (tool, directive, ap);
 
-	if (xml) {
+	if (xml)
 		gst_tool_write_xml_to_backend (tool, xml);
-		gst_tool_write_to_backend (tool, "\n");
-		gst_tool_write_to_backend (tool, GST_TOOL_EOR);
-		gst_tool_write_to_backend (tool, "\n");
-	}
 
+	/* This is tipicaly to just read the end of request string,
+	   but a set directive may return some XML too. */
+	xml_out = gst_tool_read_xml_from_backend (tool);
 
 	/* FIXME: Instead of doing the following, we should pass around a value describing
 	 * tool I/O mode (as opposed to a string to report_progress ()). */
 	tool->report_hook_type = GST_REPORT_HOOK_SAVE;
 
 	if (location_id == NULL)
-		report_progress (tool, report_sign? _(report_sign): NULL);
+		report_progress (tool);
 
-
-	/* This is tipicaly to just read the end of request string,
-	   but a set directive may return some XML too. */
-	xml_out = gst_tool_read_xml_from_backend (tool);
+	gst_tool_read_junk_from_backend (tool, GST_TOOL_EOR "\r\n");
 
 	tool->directive_running = FALSE;
 	gst_tool_idle_run_directives_add (tool);
@@ -1628,32 +1597,62 @@ gst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 	try_show_usage_warning ();
 }
 
-gchar*
-gst_tool_read_from_backend (GstTool *tool)
+static gchar*
+gst_tool_read_from_backend_va (GstTool *tool, gchar *needle, va_list ap)
 {
-	gchar *buffer;
 	GString *str = g_string_new ("");
-	gchar *ptr;
 	gboolean may_exit = FALSE;
-	
-	buffer = (gchar*) g_malloc0 (sizeof (gchar) * BUFFER_SIZE);
+	gint i = 0;
+	gchar c, *ptr, *arg;
+	GSList *elem, *list = NULL;
 
-	do {
-		usleep (32000);
-		
-		while (fgets (buffer, BUFFER_SIZE, tool->backend_stream) != NULL) {
-			g_string_append (str, buffer);
-			may_exit = TRUE;
-		}
-		
-		while (gtk_events_pending ())
-			gtk_main_iteration ();
-	} while (!may_exit);
+	list = g_slist_prepend (list, needle);
 
+	while ((arg = va_arg (ap, char*)) != NULL)
+		list = g_slist_prepend (list, arg);
+	va_end (ap);
+
+	fcntl (tool->backend_master_fd, F_SETFL, 0);
+
+	while (!may_exit) {
+		c = fgetc (tool->backend_stream);
+		g_string_append_c (str, c);
+
+		i++;
+
+		/* ugly hack for redrawing UI without too much overload */
+		if (i % REDRAW_NCHARS == 0)
+			while (gtk_events_pending ())
+				gtk_main_iteration ();
+
+		for (elem = list; elem; elem = g_slist_next (elem))
+			if (g_strrstr (str->str, elem->data) != NULL)
+				may_exit = TRUE;
+	}
+
+	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 	ptr = str->str;
 	g_string_free (str, FALSE);
 
 	return ptr;
+}
+
+gchar*
+gst_tool_read_from_backend (GstTool *tool, gchar *needle, ...)
+{
+	va_list ap;
+
+	va_start (ap, needle);
+	return gst_tool_read_from_backend_va (tool, needle, ap);
+}
+
+void
+gst_tool_read_junk_from_backend (GstTool *tool, gchar *needle)
+{
+	gchar *buffer;
+
+	buffer = gst_tool_read_from_backend (tool, needle, NULL);
+	g_free (buffer);
 }
 
 void
@@ -1667,16 +1666,12 @@ gst_tool_write_xml_to_backend (GstTool *tool, xmlDoc *doc)
 	string = (gchar *) xml;
 	
 	gst_tool_write_to_backend (tool, string);
-
 	xmlFree (xml);
-
-	usleep (32000);
 }
 
 void
 gst_tool_write_to_backend (GstTool *tool, gchar *string)
 {
-	gint ntotal = 0;
 	gint nread = 0;
 	int ret;
 	gchar *p;
@@ -1684,14 +1679,24 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 	/* turn the descriptor blocking for writing the configuration */
 	fcntl (tool->backend_master_fd, F_SETFL, 0);
 
+	static gint i = 0;
+
 	do {
 		ret = fputc (string [nread], tool->backend_stream);
 
 		if (ret != EOF)
 			nread++;
+
+		/* ugly hack for redrawing UI */
+		if (nread % REDRAW_NCHARS == 0)
+			while (gtk_events_pending ())
+				gtk_main_iteration ();
+
 	} while (nread < strlen (string));
 
-	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
-	
 	while (fflush (tool->backend_stream) != 0);
+
+	i++;
+
+	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 }
