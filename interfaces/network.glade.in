@@ -567,7 +567,7 @@
 	<class>GtkHButtonBox</class>
 	<name>connections_bbox</name>
 	<layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
-	<spacing>30</spacing>
+	<spacing>0</spacing>
 	<child_min_width>85</child_min_width>
 	<child_min_height>27</child_min_height>
 	<child_ipad_x>7</child_ipad_x>
@@ -623,6 +623,51 @@
 	  </signal>
 	  <label>Configure...</label>
 	  <relief>GTK_RELIEF_NORMAL</relief>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkAlignment</class>
+	<name>alignment10</name>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xscale>0</xscale>
+	<yscale>1</yscale>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GtkHButtonBox</class>
+	  <name>hbuttonbox1</name>
+	  <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
+	  <spacing>30</spacing>
+	  <child_min_width>85</child_min_width>
+	  <child_min_height>27</child_min_height>
+	  <child_ipad_x>7</child_ipad_x>
+	  <child_ipad_y>0</child_ipad_y>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>connection_activate</name>
+	    <sensitive>False</sensitive>
+	    <can_default>True</can_default>
+	    <can_focus>True</can_focus>
+	    <label>Activate</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>connection_deactivate</name>
+	    <sensitive>False</sensitive>
+	    <can_default>True</can_default>
+	    <can_focus>True</can_focus>
+	    <label>Deactivate</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
+	  </widget>
 	</widget>
       </widget>
 
