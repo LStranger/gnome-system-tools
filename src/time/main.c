@@ -27,33 +27,6 @@ void delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata);
 void connect_signals(void);
 
 
-TransStringSpin transfer_string_spin_table[] =
-{
-	{ "hour", "hour" },
-	{ "minute", "minute" },
-	{ "second", "second" },
-	{ 0, 0 }
-};
-
-
-TransStringCalendar transfer_string_calendar_table[] =
-{
-	{ "year", "month", "monthday", /* <-> */ "calendar" },
-	{ 0, 0, 0, 0 }
-};
-
-
-TransTree trans_tree =
-{
-	0,
-	0,
-	0,
-	0,
-	transfer_string_calendar_table,
-	transfer_string_spin_table
-};
-
-
 char *ntp_servers[] =
 {
 	"time.nrc.ca (Canada)",
@@ -185,30 +158,30 @@ connect_signals()
 {
 	GtkWidget *w;
 
-	w = GTK_COMBO(tool_widget_get("location_combo"))->list;
-	gtk_signal_connect(GTK_OBJECT(w), "select-child", tz_select_combo, NULL);
-	gtk_signal_connect(GTK_OBJECT(w), "select-child", tool_modified_cb, NULL);
+	w = GTK_COMBO (tool_widget_get ("location_combo"))->list;
+	gtk_signal_connect(GTK_OBJECT (w), "select-child", tz_select_combo, NULL);
+	gtk_signal_connect(GTK_OBJECT (w), "select-child", tool_modified_cb, NULL);
 
-	gtk_timeout_add(1000, clock_tick, NULL);
+	gtk_timeout_add (1000, clock_tick, NULL);
 }
 
 
 int
-main(int argc, char *argv[])
+main (int argc, char *argv[])
 {
-	tool_init("time", argc, argv);
+	tool_init ("time", argc, argv);
 	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
 
-	populate_ntp_list();
-	init_timezone_selection();
-	connect_signals();
+	populate_ntp_list ();
+	init_timezone_selection ();
+	connect_signals ();
 
-	tool_set_frozen(TRUE);
-	transfer_xml_to_gui(&trans_tree, xml_doc_get_root(tool_config_get_xml()));
-	tool_set_frozen(FALSE);
+	tool_set_frozen (TRUE);
+	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));
+	tool_set_frozen (FALSE);
 
 	gtk_widget_show_all (tool_get_top_window ());
-	gtk_main();
+	gtk_main ();
 
 	return 0;
 }

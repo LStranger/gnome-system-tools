@@ -101,5 +101,5 @@ void xml_from_clist_row(TransStringCList *trans_clist, int row, xmlNodePtr node)
   The routines that do all the work.
  */
 
-void transfer_xml_to_gui(TransTree *, xmlNodePtr root);
-void transfer_gui_to_xml(TransTree *, xmlNodePtr root);
+void transfer_xml_to_gui(xmlNodePtr root);
+void transfer_gui_to_xml(xmlNodePtr root);

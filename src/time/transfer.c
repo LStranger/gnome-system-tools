@@ -13,6 +13,33 @@
 #include "tz-map.h"
 
 
+TransStringSpin transfer_string_spin_table[] =
+{
+	{ "hour", "hour" },
+	{ "minute", "minute" },
+	{ "second", "second" },
+	{ 0, 0 }
+};
+
+
+TransStringCalendar transfer_string_calendar_table[] =
+{
+	{ "year", "month", "monthday", /* <-> */ "calendar" },
+	{ 0, 0, 0, 0 }
+};
+
+
+TransTree trans_tree =
+{
+	0,
+	0,
+	0,
+	0,
+	transfer_string_calendar_table,
+	transfer_string_spin_table
+};
+
+
 static void
 transfer_string_spin_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
 {
@@ -289,10 +316,10 @@ transfer_sync_toggle_gui_to_xml (xmlNodePtr root)
 
 
 void
-transfer_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
+transfer_xml_to_gui (xmlNodePtr root)
 {
-	transfer_string_calendar_xml_to_gui (trans_tree, root);
-	transfer_string_spin_xml_to_gui (trans_tree, root);
+	transfer_string_calendar_xml_to_gui (&trans_tree, root);
+	transfer_string_spin_xml_to_gui (&trans_tree, root);
 	transfer_timezone_xml_to_gui (root);
 	transfer_servers_xml_to_gui (root);
 	transfer_sync_toggle_xml_to_gui (root);
@@ -300,10 +327,10 @@ transfer_xml_to_gui (TransTree *trans_tree, xmlNodePtr root)
 
 
 void
-transfer_gui_to_xml (TransTree *trans_tree, xmlNodePtr root)
+transfer_gui_to_xml (xmlNodePtr root)
 {
-	transfer_string_calendar_gui_to_xml (trans_tree, root);
-	transfer_string_spin_gui_to_xml (trans_tree, root);
+	transfer_string_calendar_gui_to_xml (&trans_tree, root);
+	transfer_string_spin_gui_to_xml (&trans_tree, root);
 	transfer_timezone_gui_to_xml (root);
 	transfer_servers_gui_to_xml (root);
 	transfer_sync_toggle_gui_to_xml (root);
