@@ -37,7 +37,7 @@
 
 #define d(x) x
 
-/*#define POLL_HACK*/
+#define POLL_HACK
 
 extern XstTool *tool;
 
@@ -96,7 +96,6 @@ poll_connections_cb (XstDirectiveEntry *entry)
 
 		active = xst_xml_element_get_boolean (iface, "active");
 		dev = xst_xml_get_child_content (iface, "dev");
-		g_print ("%s: %s\n", dev, active? "yes": "no");
 
 		for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 			cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
@@ -149,12 +148,10 @@ poll_connections_cb (XstDirectiveEntry *entry)
 }
 
 static gint
-poll_connections (gpointer data)
+poll_connections_timeout (gpointer data)
 {
 	XstTool *tool = data;
 	
-	g_print ("-\n");
-
 	xst_tool_queue_directive (tool, poll_connections_cb, tool, NULL, NULL, "list_ifaces");
 	
 	return TRUE;
@@ -180,7 +177,7 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 		/* The connections tab */
 		if (page_num == 1 && first) {
 			first = FALSE;
-			gtk_timeout_add (500, poll_connections, tool);
+			gtk_timeout_add (500, poll_connections_timeout, tool);
 		}
 	}
 #endif	
@@ -582,9 +579,7 @@ on_connection_activate_clicked (GtkWidget *w, gpointer null)
 		
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
-		xst_tool_run_set_directive (tool, NULL, sign, "enable_iface", file, "1", NULL);
-		g_free (sign);
-/*		xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, sign, "enable_iface");*/
+		xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
 	}
 
 	cxn->activation = ACTIVATION_UP;
@@ -618,9 +613,7 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 		
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
-		xst_tool_run_set_directive (tool, NULL, sign, "enable_iface", file, "0", NULL);
-		g_free (sign);
-/*		xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, sign, "enable_iface");*/
+		xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
 	}
 
 	cxn->activation = ACTIVATION_DOWN;
