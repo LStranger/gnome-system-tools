@@ -453,10 +453,10 @@ is_home_valid (xmlNodePtr node, gchar *home)
 /*	else if (stat (home, &s))
 	{
 		switch (errno) {
-		case ENOTDIR: buf = g_strdup (_("Part of the path to the home directory is a file."));
-		case ELOOP:   buf = g_strdup (_("There is a loop in the path to the home directory."));
-		case ENOMEM:  buf = g_strdup (_("Not enough memory to check the home directory."));
-		case ENAMETOOLONG: buf = g_strdup (_("The path to the home directory is too long."));
+		case ENOTDIR: buf = g_strdup (_("Part of the path to the home directory is a file"));
+		case ELOOP:   buf = g_strdup (_("There is a loop in the path to the home directory"));
+		case ENOMEM:  buf = g_strdup (_("Not enough memory to check the home directory"));
+		case ENAMETOOLONG: buf = g_strdup (_("The path to the home directory is too long"));
 		}
 	}
 */

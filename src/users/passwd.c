@@ -263,12 +263,12 @@ passwd_check (gchar *pwd1, gchar *pwd2, gboolean check_quality)
 	g_return_val_if_fail (pwd2 != NULL, FALSE);
 
 	if (strcmp (pwd1, pwd2))
-		return g_strdup (_("Passwords doesn't match."));
+		return g_strdup (_("Passwords do not match"));
 	
 	if (dictionary)
 #ifdef	HAVE_LIBCRACK
 		if (check_quality && (check_err = (gchar *) FascistCheck (pwd1, dictionary)))
-			return g_strdup_printf (_("Bad password: %s.\nPlease try with a new password."), check_err);
+			return g_strdup_printf (_("Bad password: %s.\nPlease try with a new password"), check_err);
 #endif	
 
 	g_free (dictionary);
