@@ -275,7 +275,7 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	GtkTreeIter iter;
 	xmlNodePtr service;
 	
-	gchar *description, *script;
+	gchar *description, *script, *title;
 	gint priority;
 
 	gtk_tree_view_get_cursor (runlevel_table, &path, NULL);
@@ -298,6 +298,9 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	/* sets the option menu with the valid service parameters */
 	service_get_parameters (script);
 
+	title = g_strdup_printf (_("Settings for service %s"), script);
+	gtk_window_set_title (GTK_WINDOW (dialog), title);
+
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_hide (dialog);
 
@@ -305,6 +308,7 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	gtk_option_menu_remove_menu (GTK_OPTION_MENU (option_menu));
 	g_free (description);
 	g_free (script);
+	g_free (title);
 
 	/* we need to free the list and put it again to NULL, it may be used again */
 	g_list_free (parameters_list);
