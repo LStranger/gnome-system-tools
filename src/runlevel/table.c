@@ -207,22 +207,26 @@ table_value_runlevel (xmlNodePtr node,gint runlevel)
 	for (rl = gst_xml_element_find_first (runlevels, "runlevel"); rl != NULL; rl = gst_xml_element_find_next (rl, "runlevel"))
 	{
 		number = gst_xml_get_child_content (rl, "number");
-		if (atoi (number) == runlevel)
-		{
-			action = gst_xml_get_child_content (rl, "action");
-			if (strcmp (action, "start") == 0)
+
+		if (g_ascii_isdigit (number[0])) {
+			if (atoi (number) == runlevel)
 			{
-				g_free (number);
-				g_free (action);
-				return start_icon;
-			}
-			else
-			{
-				g_free (number);
-				g_free (action);
-				return stop_icon;
+				action = gst_xml_get_child_content (rl, "action");
+				if (strcmp (action, "start") == 0)
+				{
+					g_free (number);
+					g_free (action);
+					return start_icon;
+				}
+				else
+				{
+					g_free (number);
+					g_free (action);
+					return stop_icon;
+				}
 			}
 		}
+		
 		g_free (number);
 	}
 	return do_nothing_icon;
