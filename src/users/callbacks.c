@@ -132,6 +132,29 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	}
 }
 
+/* Network tab. */
+
+extern void
+on_network_delete_clicked (GtkWidget *button, gpointer user_data)
+{
+}
+
+extern void
+on_network_settings_clicked (GtkButton *button, gpointer user_data)
+{
+}
+
+extern void
+on_network_user_new_clicked (GtkButton *button, gpointer user_data)
+{
+}
+
+extern void
+on_network_group_new_clicked (GtkButton *button, gpointer user_data)
+{
+}
+
+
 /* User settings callbacks */
 
 extern void

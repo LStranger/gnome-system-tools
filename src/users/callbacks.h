@@ -31,11 +31,14 @@ extern void on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
 extern void on_user_new_clicked (GtkButton *button, gpointer user_data);
 extern void on_user_delete_clicked (GtkButton *button, gpointer user_data);
 
-/* Groups tab */
-
 extern void on_group_settings_clicked (GtkButton *button, gpointer user_data);
 extern void on_group_new_clicked (GtkButton *button, gpointer user_data);
 extern void on_group_delete_clicked (GtkButton *button, gpointer user_data);
+
+extern void on_network_delete_clicked (GtkWidget *button, gpointer user_data);
+extern void on_network_settings_clicked (GtkButton *button, gpointer user_data);
+extern void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
+extern void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 
 extern void on_user_settings_dialog_show (GtkWidget *button, gpointer user_data);
 extern void on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data);
