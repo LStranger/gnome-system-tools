@@ -53,11 +53,17 @@ void
 network_druid_new (GnomeDruid *druid, GtkWidget *window, GstTool *tool, GstConnectionType type)
 {
 	NetworkDruidData *druid_data = g_new0 (NetworkDruidData, 1);
+	GtkWidget *widget;
 
 	druid_data->window = window;
 	druid_data->tool = tool;
 	druid_data->current_page = NETWORK_DRUID_START;
 	druid_data->cxn = connection_new_from_type (type, gst_xml_doc_get_root (tool->config));
+
+	/* fill the IP options menu */
+	widget = gst_dialog_get_widget (tool->main_dialog, "network_connection_other_config_type");
+	connection_fill_ip_menu (widget);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), IP_MANUAL);
 
 	/* set window titles */
 	druid_data->first_page_title = N_("Creating a new network connection");
@@ -100,7 +106,7 @@ network_druid_clear (GnomeDruid *druid, gboolean destroy_data)
 	}
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "network_connection_other_config_type");
-	gtk_option_menu_set_history (GTK_OPTION_MENU (widget), IP_MANUAL);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), IP_MANUAL);
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "network_connection_plip_gateway");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), FALSE);
@@ -183,7 +189,7 @@ network_druid_get_connection_data (GnomeDruid *druid)
 			cxn->dev = connection_find_new_device (root, cxn->type);
 		}
 			
-		cxn->ip_config = gtk_option_menu_get_history (GTK_OPTION_MENU (type));
+		cxn->ip_config = gtk_combo_box_get_active (GTK_COMBO_BOX (type));
 		cxn->address = g_strdup (gtk_entry_get_text (GTK_ENTRY (ip_address)));
 		cxn->netmask = g_strdup (gtk_entry_get_text (GTK_ENTRY (ip_mask)));
 		cxn->gateway = g_strdup (gtk_entry_get_text (GTK_ENTRY (gateway)));
@@ -274,15 +280,15 @@ network_druid_check_ip (GnomeDruid *druid)
 {
 	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
 	GstTool *tool = druid_data->tool;
-	GtkWidget *option_menu = gst_dialog_get_widget (tool->main_dialog,
-							"network_connection_other_config_type");
+	GtkWidget *menu = gst_dialog_get_widget (tool->main_dialog,
+						 "network_connection_other_config_type");
 	GtkWidget *ip_address = gst_dialog_get_widget (tool->main_dialog,
 						       "network_connection_other_ip_address");
 	GtkWidget *ip_mask = gst_dialog_get_widget (tool->main_dialog,
 						    "network_connection_other_ip_mask");
 	const gchar *address, *mask;
 
-	if (gtk_option_menu_get_history (GTK_OPTION_MENU (option_menu)) == IP_MANUAL) {
+	if (gtk_combo_box_get_active (GTK_COMBO_BOX (menu)) == IP_MANUAL) {
 		address = gtk_entry_get_text (GTK_ENTRY (ip_address));
 		mask = gtk_entry_get_text (GTK_ENTRY (ip_mask));
 		return ((strlen (address) != 0) && (strlen (mask) != 0));

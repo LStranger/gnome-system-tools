@@ -1627,6 +1627,26 @@ connection_set_bcast_and_network (GstConnection *cxn)
 	g_free (network);
 }
 
+void
+connection_fill_ip_menu (GtkWidget *menu)
+{
+       GtkTreeModel *model;
+       IPConfigType  i;
+       char *bootproto_labels[] = {
+               N_("Manual"),
+               N_("Automatic (DHCP)"),
+               N_("Automatic (BOOTP)")
+       };
+
+       g_return_if_fail (menu != NULL);
+
+       model = gtk_combo_box_get_model (GTK_COMBO_BOX (menu));
+       gtk_list_store_clear (GTK_LIST_STORE (model));
+
+       for (i = 0; i < 3; i++)
+               gtk_combo_box_append_text (GTK_COMBO_BOX (menu), _(bootproto_labels[i]));
+}
+
 static void
 empty_general (GstConnection *cxn)
 {
@@ -1811,8 +1831,8 @@ fill_general (GstConnection *cxn)
 	SET_BOOL ("status_", user);
 }
 
-static void
-update_ip_config (GstConnection *cxn)
+void
+connection_update_ip_config (GstConnection *cxn)
 {
 	IPConfigType ip;
 	gboolean sensitive;
@@ -1832,65 +1852,29 @@ update_ip_config (GstConnection *cxn)
 }
 
 static void
-ip_config_menu_cb (GtkWidget *w, gpointer data)
-{
-	GstConnection *cxn;
-	IPConfigType ip;
-
-	cxn = g_object_get_data (G_OBJECT (w), "user_data");
-
-	if (cxn->frozen)
-		return;
-
-	ip = GPOINTER_TO_INT (data);
-
-	if (cxn->tmp_ip_config == ip)
-		return;
-
-	cxn->tmp_ip_config = ip;
-
-	connection_set_modified (cxn, TRUE);
-
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "ip_update_dns")),
-				      ip != IP_MANUAL);
-
-	update_ip_config (cxn);
-}
-
-static void
 fill_ip (GstConnection *cxn)
 {
-	GtkWidget *menu, *menuitem, *omenu;
-	IPConfigType i;
+	GtkWidget    *menu;
+	IPConfigType  i;
 
-	char *bootproto_labels[] = {
-		N_("Manual"),
-		N_("Automatic (DHCP)"),
-		N_("Automatic (BOOTP)")
-	};
+	menu = gst_dialog_get_widget (tool->main_dialog, "connection_config");
 
-	omenu = gst_dialog_get_widget (tool->main_dialog, "connection_config");
+	g_signal_handlers_block_matched (G_OBJECT (menu), G_SIGNAL_MATCH_FUNC,
+					 0, 0, NULL, G_CALLBACK (on_connection_ip_config_changed), NULL);
 
-	menu = gtk_menu_new ();
-	for (i = 0; i < 3; i++) {
-		menuitem = gtk_menu_item_new_with_label (_(bootproto_labels[i]));
-		g_object_set_data (G_OBJECT (menuitem), "user_data", cxn);
-		g_signal_connect (G_OBJECT (menuitem), "activate",
-				  G_CALLBACK (ip_config_menu_cb),
-				  GINT_TO_POINTER (i));
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menuitem);
-	}
-	gtk_widget_show_all (menu);
+	connection_fill_ip_menu (menu);
+	g_object_set_data (G_OBJECT (menu), "cxn", cxn);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (menu), cxn->ip_config);
 
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (omenu), menu);
-	gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), cxn->ip_config);	
+	g_signal_handlers_unblock_matched (G_OBJECT (menu), G_SIGNAL_MATCH_FUNC,
+					   0, 0, NULL, G_CALLBACK (on_connection_ip_config_changed), NULL);
 
-	update_ip_config (cxn);
+	connection_update_ip_config (cxn);
 
 	SET_BOOL ("ip_", update_dns);
-	SET_STR ("ip_", address);
-	SET_STR ("ip_", netmask);
-	SET_STR ("ip_", gateway);
+	SET_STR  ("ip_", address);
+	SET_STR  ("ip_", netmask);
+	SET_STR  ("ip_", gateway);
 }
 
 static void

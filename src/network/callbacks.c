@@ -874,6 +874,29 @@ on_connection_modified (GtkWidget *w, gpointer data)
 }
 
 void
+on_connection_ip_config_changed (GtkWidget *w, gpointer data)
+{
+       GstConnection *cxn;
+       IPConfigType ip;
+
+       cxn = g_object_get_data (G_OBJECT (w), "cxn");
+
+       if (cxn->frozen)
+               return;
+
+       ip = gtk_combo_box_get_active (GTK_COMBO_BOX (w));
+
+       if (cxn->tmp_ip_config == ip)
+               return;
+
+       cxn->tmp_ip_config = ip;
+
+       connection_set_modified (cxn, TRUE);
+
+       connection_update_ip_config (cxn);
+}
+
+void
 on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *autodetect_button = gst_dialog_get_widget (tool->main_dialog, "ppp_autodetect_modem");
@@ -1346,7 +1369,7 @@ on_network_druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer
 }
 
 void
-on_network_druid_config_type_changed (GtkWidget *option_menu, gpointer data)
+on_network_druid_config_type_changed (GtkWidget *menu, gpointer data)
 {
 	GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog,
 								"network_connection_druid"));
@@ -1364,7 +1387,7 @@ on_network_druid_config_type_changed (GtkWidget *option_menu, gpointer data)
 		NULL
 	};
 
-	if (gtk_option_menu_get_history (GTK_OPTION_MENU (option_menu)) == IP_MANUAL)
+	if (gtk_combo_box_get_active (GTK_COMBO_BOX (menu)) == IP_MANUAL)
 		enable = TRUE;
 	else
 		enable = FALSE;
