@@ -77,7 +77,7 @@ transfer_time_xml_to_gui (GstTool *gst_tool, xmlNodePtr root)
 	g_return_if_fail (local_time_node != NULL);
 
 	tm.tm_year = get_int_from_named_child (local_time_node, "year") - 1900;
-	tm.tm_mon  = get_int_from_named_child (local_time_node, "month");
+	tm.tm_mon  = get_int_from_named_child (local_time_node, "month") - 1;
 	tm.tm_mday = get_int_from_named_child (local_time_node, "monthday");
 	tm.tm_hour = get_int_from_named_child (local_time_node, "hour");
 	tm.tm_min  = get_int_from_named_child (local_time_node, "minute");
