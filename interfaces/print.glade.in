@@ -82,9 +82,10 @@
 
     <widget>
       <class>GtkVBox</class>
-      <name>vbox455</name>
+      <name>settings_editor</name>
+      <border_width>3</border_width>
       <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
+      <spacing>3</spacing>
       <child>
 	<padding>0</padding>
 	<expand>True</expand>
@@ -95,7 +96,7 @@
 	<class>GtkHBox</class>
 	<name>hbox24</name>
 	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
+	<spacing>3</spacing>
 	<child>
 	  <padding>0</padding>
 	  <expand>True</expand>
@@ -117,7 +118,7 @@
 	  <widget>
 	    <class>GtkTable</class>
 	    <name>table20</name>
-	    <border_width>2</border_width>
+	    <border_width>3</border_width>
 	    <rows>8</rows>
 	    <columns>2</columns>
 	    <homogeneous>False</homogeneous>
@@ -154,6 +155,7 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>settings_conn_hostlabel</name>
+	      <visible>False</visible>
 	      <label>_Hostname:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -181,6 +183,7 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>settings_conn_queuelabel</name>
+	      <visible>False</visible>
 	      <label>_Remote Name:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -235,6 +238,7 @@
 	      <class>GtkEntry</class>
 	      <name>settings_conn_host</name>
 	      <width>90</width>
+	      <visible>False</visible>
 	      <tooltip>Name of the server the printer is connected to.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
@@ -261,6 +265,7 @@
 	      <class>GtkEntry</class>
 	      <name>settings_conn_queue</name>
 	      <width>90</width>
+	      <visible>False</visible>
 	      <tooltip>Name the server uses for the printer.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
@@ -285,7 +290,8 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>settings_conn_workglabel</name>
+	      <name>settings_conn_workgrouplabel</name>
+	      <visible>False</visible>
 	      <label>_Workgroup:</label>
 	      <justify>GTK_JUSTIFY_RIGHT</justify>
 	      <wrap>False</wrap>
@@ -314,6 +320,7 @@
 	      <class>GtkEntry</class>
 	      <name>settings_conn_workgroup</name>
 	      <width>90</width>
+	      <visible>False</visible>
 	      <tooltip>SMB workgroup the server is in.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
@@ -340,7 +347,6 @@
 	      <class>GtkLabel</class>
 	      <name>settings_conn_userlabel</name>
 	      <visible>False</visible>
-	      <sensitive>False</sensitive>
 	      <label>_Username:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -370,7 +376,6 @@
 	      <name>settings_conn_user</name>
 	      <width>90</width>
 	      <visible>False</visible>
-	      <sensitive>False</sensitive>
 	      <tooltip>Username used to connect to the server.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
@@ -395,9 +400,8 @@
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>settings_conn_passlabel</name>
+	      <name>settings_conn_passwordlabel</name>
 	      <visible>False</visible>
-	      <sensitive>False</sensitive>
 	      <label>_Password:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -426,7 +430,6 @@
 	      <class>GtkLabel</class>
 	      <name>settings_conn_portlabel</name>
 	      <visible>False</visible>
-	      <sensitive>False</sensitive>
 	      <label>P_ort Number:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -456,7 +459,6 @@
 	      <name>settings_conn_password</name>
 	      <width>90</width>
 	      <visible>False</visible>
-	      <sensitive>False</sensitive>
 	      <tooltip>The password used to connect to the server.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
@@ -484,7 +486,6 @@
 	      <name>settings_conn_port</name>
 	      <width>90</width>
 	      <visible>False</visible>
-	      <sensitive>False</sensitive>
 	      <tooltip>Port number the server is listening to.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
@@ -511,7 +512,6 @@
 	      <class>GtkLabel</class>
 	      <name>settings_conn_devicelabel</name>
 	      <visible>False</visible>
-	      <sensitive>False</sensitive>
 	      <label>_Device Name:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -540,6 +540,7 @@
 	      <class>GtkOptionMenu</class>
 	      <name>settings_conn_device</name>
 	      <width>90</width>
+	      <visible>False</visible>
 	      <tooltip>Port the printer is connected to.</tooltip>
 	      <can_focus>True</can_focus>
 	      <items>/dev/lp0 (LPT1)
@@ -1251,7 +1252,17 @@ True Color
 	  </child>
 
 	  <widget>
-	    <class>Placeholder</class>
+	    <class>Custom</class>
+	    <name>printer_table</name>
+	    <creation_function>table_create</creation_function>
+	    <int1>0</int1>
+	    <int2>0</int2>
+	    <last_modification_time>Mon, 16 Jul 2001 23:08:15 GMT</last_modification_time>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
 	  </widget>
 	</widget>
       </widget>
@@ -1262,6 +1273,7 @@ True Color
 <widget>
   <class>GnomeDialog</class>
   <name>new_printer_type_dialog</name>
+  <visible>False</visible>
   <title>Add a New Printer</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1270,7 +1282,7 @@ True Color
   <allow_grow>False</allow_grow>
   <auto_shrink>False</auto_shrink>
   <auto_close>False</auto_close>
-  <hide_on_close>False</hide_on_close>
+  <hide_on_close>True</hide_on_close>
 
   <widget>
     <class>GtkVBox</class>
