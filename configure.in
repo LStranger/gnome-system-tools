@@ -1,4 +1,4 @@
-AC_INIT(ximian-setup-tools, 0.20.0, http://bugzilla.gnome.org/enter_bug.cgi?product=Ximian%20Setup%20Tools)
+AC_INIT(gnome-system-tools, 0.21.0, http://bugzilla.gnome.org/enter_bug.cgi?product=Ximian%20Setup%20Tools)
 AC_CONFIG_SRCDIR(src/common/xst-tool.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
@@ -80,7 +80,7 @@ dnl Transtlations
 dnl ========================================================
 
 ALL_LINGUAS="az ca da de el es fr gl hu it ja ko nn no pl pt pt_BR ru sk sv tr uk vi wa zh_TW"
-GETTEXT_PACKAGE=ximian-setup-tools
+GETTEXT_PACKAGE=gnome-system-tools
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE")
 AM_GLIB_GNU_GETTEXT
@@ -179,7 +179,7 @@ AC_CONFIG_SUBDIRS(backend)
 
 AC_OUTPUT([
 Makefile
-ximian-setup-tools.spec
+gnome-system-tools.spec
 interfaces/Makefile
 pixmaps/Makefile
 src/Makefile
@@ -197,8 +197,6 @@ po/Makefile.in
 ])
 
 dnl src/memory/Makefile 
-dnl src/users/Makefile
-dnl src/users/e-search-bar/Makefile
 dnl src/dhcpd/Makefile
 dnl src/location-manager/Makefile
 dnl src/internetsharing/Makefile
@@ -214,11 +212,10 @@ dnl -----------------
 
 echo "
 
-Configuration (XST):
+Configuration (GST):
 "
 	if test x${have_archiver} = xtrue; then echo "	Archiver support: yes"; else echo "	Archiver support: no"; fi
 echo "	The scripts are expected at : ${scriptsdir}
 	Compiler:		${CC} 
 "
 
-cat $srcdir/message-of-doom

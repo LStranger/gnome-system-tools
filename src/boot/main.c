@@ -72,7 +72,7 @@ main (int argc, char *argv[])
 
 	xst_init ("boot-admin", argc, argv, NULL);
 	tool = xst_tool_new ();
-	xst_tool_construct (tool, "boot", _("Boot Manager Settings - Ximian Setup Tools"));
+	xst_tool_construct (tool, "boot", _("Boot Manager Settings"));
 	table_construct (tool);
 
 	xst_tool_set_xml_funcs    (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);

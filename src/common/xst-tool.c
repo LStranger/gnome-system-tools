@@ -1377,7 +1377,7 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 	tool->script_path = g_strdup_printf ("%s/%s-conf",      SCRIPTS_DIR,    name);
 	
 	s = g_strdup_printf ("%s_admin", name);
-	t = g_strdup_printf (_("%s - Ximian Setup Tools"), title);
+	t = g_strdup_printf (_("%s - GNOME System Tools"), title);
 	u = g_strdup_printf (PIXMAPS_DIR "/%s.png", name);
 
 	tool->main_dialog = xst_dialog_new (tool, s, t);
@@ -1589,14 +1589,14 @@ try_show_usage_warning (void)
 {
 	gchar *key;
 	gboolean value;
-	gchar *warning = g_strdup_printf(_("Welcome to the %s prerelease of the "
-		  "Ximian Setup Tools.\n\n"
+	gchar *warning = g_strdup_printf(_("Welcome to the %s release of the "
+		  "GNOME System Tools.\n\n"
 		  "This is still a work in progress, and so it may have serious bugs.\n"
 		  "Due to the nature of these tools, bugs may render your computer\n"
 		  "PRACTICALLY USELESS, costing time, effort and sanity points.\n\n"
-		  "You have been warned. Thank you for trying out this prerelease of\n"
-		  "the Ximian Setup Tools!\n\n"
-		  "--\nThe Ximian Setup Tools team"), VERSION);
+		  "You have been warned. Thank you for trying out this release of\n"
+		  "the GNOME System Tools!\n\n"
+		  "--\nThe GNOME System Tools team"), VERSION);
 	key = g_strjoin ("/", XST_CONF_ROOT, "global", "previously-run-" VERSION, NULL);
 
 	value = gnome_config_get_bool (key);
@@ -1683,7 +1683,7 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 				      LIBGNOMEUI_MODULE, argc, argv,
 				      GNOME_PARAM_POPT_TABLE, options,
 				      GNOME_PARAM_HUMAN_READABLE_NAME,
-				      _("Ximian Setup Tool"),
+				      _("GNOME System Tools"),
 				      NULL);
 	
 

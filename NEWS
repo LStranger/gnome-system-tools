@@ -1,4 +1,142 @@
-Ximian Setup Tools 0.11
+The GNOME System Tools version 0.21.0 have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The GNOME System Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
+
+Screenshots
+===========
+You can view screenshots of the most recent tools at http://www.gnome.org/projects/gst/screenshots.html
+
+Changes since last release
+==========================
+
+    * The project was ported to the GNOME 2.0 platform (Tambet, Garnacho, Chema)
+    * Added Runlevel tool (Carlos Garnacho)
+    * Bugfixing in the existing tools
+    * New name
+    * Ximian is not sponsoring XST(GST) anymore
+    * Only the stable tools are enabled
+
+Downloading
+===========
+You can get it from : ftp://ftp.gnome.org/pub/gnome/unstable/sources/gnome-system-tools/
+
+Help Wanted
+===========
+We still need lots of help from anybody interested in contributing to GST, even if it's only an email letting us know whether the tools worked for your system. You can also submit bug reports at http://bugzilla.gnome.org
+
+Testing
+-------
+Testing that the tools work correctly on your system and either filing detailed bug reports or confirming that they work correctly is greatly appreciated. If you test a tool on an unsupported distro/system and find out that it works correctly, please let us know so that we can update the supported tools matrix (see below).
+
+Porting
+-------
+The backends are designed as to minimize the effort needed to support more distros/systems. A great way to contribute is to port the tools to another distribution/system.
+
+Prerequisites
+=============
+
+* GNOME 2 libraries
+
+* gal-2.0
+
+* gnome-print 
+
+Stability
+=========
+The tools have been stable on our systems recently. However, since this tools modify your system configuration we suggest that only people which are going to be able to solve a problem if something goes wrong use them at the time. We have created a backup system so that the changes made to the configuration files are tracked and stored.
+
+Mailing list / IRC
+==================
+For discussion and feedback, sign up for our mailing list:http://lists.ximian.com/mailman/listinfo/setup-tool-hackers
+
+You can also find us in the #gst channel on IRC server irc.gnome.org
+
+Whitepaper
+==========
+You can find the latest version of the GST whitepaper at: http://primates.ximian.com/~miguel/helix-setup-tools.html
+
+Backup system
+=============
+Every time a tool modifies your system configuration files, it makes backups of those files. The backups are rotated (for 9 levels in total), and the backup made the first time the tool was run is kept forever. This means that you can revert your system configuration to the point before you ever ran a Ximian Setup Tool.
+
+The backup path is /var/cache/ximian-setup-tools/backup/<tool>/<id>/. In this directory, you'll find a complete snapshot of the files that were modified. The original directory structure leading up to these files is also kept. <id> runs from 1-9, and when the first backup is rotated out, it is kept in a special catalog called "First", which is never touched again.
+
+Current Tool Set
+================
+- Runlevel admin
+Allows you to configure:
+     * the services your computer will run at startup
+     * in which runleves do they run
+
+- Network admin
+Allows you to configure your:
+
+    * hostname
+    * samba hostname and workgroup
+    * DNS servers
+    * search domains
+    * hosts (/etc/hosts)
+    * Network interfaces
+    * ppp
+    * ethernet
+    * slip
+    * wavelan (limited support)
+
+- Time admin
+Allows you to configure your:
+
+    * Date & Time
+    * Timezone
+    * NTPD servers
+
+- Users admin
+Allows you to manage:
+
+    * Users
+    * username / full name
+    * password
+    * home dir
+    * shell
+    * groups
+    * Groups
+
+- Boot admin
+Allows you to set:
+
+    * Default boot partition
+    * Partition type and label
+    * Timeout
+    * Kernel image
+    * Kernel extra parameters (append)
+    * adding or deleting partitions from the boot manager
+    
+Credits
+=======
+
+Maintainer
+
+Carlos Garnacho Parro <garparr@teleline.es>
+
+Developers
+
+Arturo Espinosa <arturo@ximian.com>
+Hans Petter Jansson <hpj@ximian.com>
+Tambet Ingo <tambet@ximian.com>
+Chema Celorio <chema@ximian.com>
+Bradford Hovinen <bradford@ximian.com>
+Israel Escalante <israel@ximian.com>
+Jacob Berkman <jacob@ximian.com>
+Carlos Garnacho Parro <garparr@teleline.es>
+
+Artists
+
+Jakub Steiner <jimmac@ximian.com>
+Anna Dirks <anna@ximian.com>
+Tuomas Kuosmanen <tigert@ximian.com>
+Joakim Ziegler <joakim@ximian.com>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Ximian Setup Tools - 0.11.0
 
 The Ximian Setup Tools version 0.11.0 have been released.
 
@@ -17,7 +155,7 @@ Changes since last release
     * Improved error reporting. (Arturo)
     * Time now changes the clock when a timezone change is made and ntp state is loaded correctly. (Hans)
     * Lots of bugfixing in the existing tools. (Everyone)
-    * Conditionaly compile with/without archiver support (Chema) 
+    * Conditionaly compile with/without archiver support (Chema)
 
 Downloading
 ===========
@@ -45,12 +183,11 @@ Prerequisites
 * gal >= 0.12, available at
 ftp://ftp.gnome.org/pub/GNOME/unstable/sources/gal/gal-0.12.tar.gz
 
-* gnome-print >= 0.34 available at 
+* gnome-print >= 0.34 available at
 ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnome-print/gnome-print-0.34.tar.gz
-
 - With archiver support [--with-archiver] without archiver requirements plus "
 
-* control-center >= 1.5.11 available at 
+* control-center >= 1.5.11 available at
 ftp://ftp.gnome.org/pub/GNOME/unstable/sources/control-center/control-center-1.5.11.tar.gz
 
 * bonobo

@@ -377,7 +377,7 @@ timezone_construct_dialog (XstDialog *dialog)
 	g_return_if_fail (dialog!=NULL);
 	g_return_if_fail (XST_IS_DIALOG(dialog));
 	
-	d = gtk_dialog_new_with_buttons (_("Ximian Setup Tools - Timezone"),
+	d = gtk_dialog_new_with_buttons (_("GNOME System Tools - Timezone"),
 					      NULL,
 					      GTK_DIALOG_MODAL,
 					      GTK_STOCK_APPLY,
@@ -449,7 +449,7 @@ server_construct_dialog (XstDialog *dialog)
 	g_return_if_fail (dialog!=NULL);
 	g_return_if_fail (XST_IS_DIALOG(dialog));
 
-	d = gtk_dialog_new_with_buttons (_("Ximian Setup Tools - Time Servers"),
+	d = gtk_dialog_new_with_buttons (_("GNOME System Tools - Time Servers"),
 					      NULL,
 					      GTK_DIALOG_MODAL,
 					      GTK_STOCK_CLOSE,

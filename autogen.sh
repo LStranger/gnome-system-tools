@@ -4,14 +4,14 @@
 srcdir=`dirname $0`
 test -z "$srcdir" && srcdir=.
 
-PKG_NAME="Ximian Setup Tools."
+PKG_NAME="GNOME System Tools."
 
 (test -f $srcdir/configure.in \
- && test -f $srcdir/src/dhcpd/dhcpd.h) || {
+ && test -f $srcdir/src/users/main.c) || {
     echo -n "**Error**: Directory "\`$srcdir\'" does not look like the"
     echo " top-level directory"
     echo ""
-    echo "Perhaps you need to \"cvs -z3 co ximian-setup-tools\" in \"..\" ?"
+    echo "Perhaps you need to \"cvs -z3 co gnome-system-tools\" in \"..\" ?"
     echo
     exit 1
 }

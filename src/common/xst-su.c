@@ -238,7 +238,7 @@ xst_su_construct_dialog (GladeXML *xml)
 	GtkWidget *dialog;
 	GtkWidget *content;
 
-	dialog = gtk_dialog_new_with_buttons (_("Ximian Setup Tools - Password"),
+	dialog = gtk_dialog_new_with_buttons (_("GNOME System Tools - Password"),
 					      NULL,
 					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 					      GTK_STOCK_OK, GTK_RESPONSE_OK,

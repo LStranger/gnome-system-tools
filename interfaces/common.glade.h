@@ -4,16 +4,16 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Ximian Setup Tools");
+gchar *s = N_("GNOME System Tools");
 gchar *s = N_("Scanning your system configuration.");
-gchar *s = N_("Ximian Setup Tools");
+gchar *s = N_("GNOME System Tools");
 gchar *s = N_("Complexity");
 gchar *s = N_("Unsupported platform");
 gchar *s = N_("The platform you are running is not supported by this tool. If you know for sure that it works like one of the platforms listed below, you can select that and continue.\n"
               "\n"
               "Note, however, that this might damage the system configuration or downright cripple your computer.");
 gchar *s = N_("label57");
-gchar *s = N_("Ximian Setup Tools - Password");
+gchar *s = N_("GNOME System Tools - Password");
 gchar *s = N_("Run without password");
 gchar *s = N_("To run this tool, you need administrator privileges.\n"
               "\n"
