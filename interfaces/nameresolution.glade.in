@@ -86,7 +86,7 @@
 	      <class>GtkHBox</class>
 	      <name>hbox17</name>
 	      <homogeneous>False</homogeneous>
-	      <spacing>0</spacing>
+	      <spacing>8</spacing>
 	      <child>
 		<padding>0</padding>
 		<expand>True</expand>
@@ -140,7 +140,7 @@
 	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	      <child>
 		<padding>0</padding>
-		<expand>False</expand>
+		<expand>True</expand>
 		<fill>False</fill>
 	      </child>
 
@@ -270,7 +270,7 @@
 	      <child>
 		<padding>0</padding>
 		<expand>True</expand>
-		<fill>True</fill>
+		<fill>False</fill>
 	      </child>
 
 	      <widget>
@@ -534,9 +534,9 @@
 	<widget>
 	  <class>GtkVBox</class>
 	  <name>vbox7</name>
-	  <border_width>4</border_width>
+	  <border_width>8</border_width>
 	  <homogeneous>False</homogeneous>
-	  <spacing>4</spacing>
+	  <spacing>8</spacing>
 
 	  <widget>
 	    <class>GtkHBox</class>
@@ -552,22 +552,21 @@
 	    <widget>
 	      <class>GtkFrame</class>
 	      <name>frame6</name>
-	      <border_width>4</border_width>
 	      <label>Domain Name Service (DNS)</label>
 	      <label_xalign>0</label_xalign>
 	      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	      <child>
 		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
+		<expand>True</expand>
+		<fill>True</fill>
 	      </child>
 
 	      <widget>
 		<class>GtkTable</class>
 		<name>table6</name>
 		<border_width>8</border_width>
-		<rows>2</rows>
-		<columns>2</columns>
+		<rows>3</rows>
+		<columns>3</columns>
 		<homogeneous>False</homogeneous>
 		<row_spacing>8</row_spacing>
 		<column_spacing>8</column_spacing>
@@ -578,10 +577,10 @@
 		  <label_xalign>0</label_xalign>
 		  <shadow_type>GTK_SHADOW_IN</shadow_type>
 		  <child>
-		    <left_attach>0</left_attach>
-		    <right_attach>1</right_attach>
-		    <top_attach>1</top_attach>
-		    <bottom_attach>2</bottom_attach>
+		    <left_attach>1</left_attach>
+		    <right_attach>2</right_attach>
+		    <top_attach>2</top_attach>
+		    <bottom_attach>3</bottom_attach>
 		    <xpad>0</xpad>
 		    <ypad>0</ypad>
 		    <xexpand>False</xexpand>
@@ -627,8 +626,8 @@
 		  <label>Add</label>
 		  <relief>GTK_RELIEF_NORMAL</relief>
 		  <child>
-		    <left_attach>1</left_attach>
-		    <right_attach>2</right_attach>
+		    <left_attach>2</left_attach>
+		    <right_attach>3</right_attach>
 		    <top_attach>0</top_attach>
 		    <bottom_attach>1</bottom_attach>
 		    <xpad>0</xpad>
@@ -650,10 +649,10 @@
 		  <xscale>1</xscale>
 		  <yscale>0</yscale>
 		  <child>
-		    <left_attach>1</left_attach>
-		    <right_attach>2</right_attach>
-		    <top_attach>1</top_attach>
-		    <bottom_attach>2</bottom_attach>
+		    <left_attach>2</left_attach>
+		    <right_attach>3</right_attach>
+		    <top_attach>2</top_attach>
+		    <bottom_attach>3</bottom_attach>
 		    <xpad>0</xpad>
 		    <ypad>0</ypad>
 		    <xexpand>False</xexpand>
@@ -666,7 +665,7 @@
 
 		  <widget>
 		    <class>GtkButton</class>
-		    <name>dns_remove</name>
+		    <name>dns_delete</name>
 		    <width>70</width>
 		    <sensitive>False</sensitive>
 		    <can_focus>True</can_focus>
@@ -680,7 +679,7 @@
 		      <handler>tool_modified_cb</handler>
 		      <last_modification_time>Tue, 22 Aug 2000 07:57:02 GMT</last_modification_time>
 		    </signal>
-		    <label>Remove</label>
+		    <label>Delete</label>
 		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
@@ -694,8 +693,8 @@
 		  <text_max_length>0</text_max_length>
 		  <text></text>
 		  <child>
-		    <left_attach>0</left_attach>
-		    <right_attach>1</right_attach>
+		    <left_attach>1</left_attach>
+		    <right_attach>2</right_attach>
 		    <top_attach>0</top_attach>
 		    <bottom_attach>1</bottom_attach>
 		    <xpad>0</xpad>
@@ -706,6 +705,77 @@
 		    <yshrink>False</yshrink>
 		    <xfill>True</xfill>
 		    <yfill>False</yfill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkLabel</class>
+		  <name>label53</name>
+		  <label>New:</label>
+		  <justify>GTK_JUSTIFY_RIGHT</justify>
+		  <wrap>False</wrap>
+		  <xalign>1</xalign>
+		  <yalign>0.5</yalign>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <child>
+		    <left_attach>0</left_attach>
+		    <right_attach>1</right_attach>
+		    <top_attach>0</top_attach>
+		    <bottom_attach>1</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>False</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>False</yfill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkHSeparator</class>
+		  <name>hseparator3</name>
+		  <child>
+		    <left_attach>0</left_attach>
+		    <right_attach>3</right_attach>
+		    <top_attach>1</top_attach>
+		    <bottom_attach>2</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>True</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>False</yfill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkLabel</class>
+		  <name>label54</name>
+		  <label>Existing:</label>
+		  <justify>GTK_JUSTIFY_RIGHT</justify>
+		  <wrap>False</wrap>
+		  <xalign>0</xalign>
+		  <yalign>0</yalign>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <child>
+		    <left_attach>0</left_attach>
+		    <right_attach>1</right_attach>
+		    <top_attach>2</top_attach>
+		    <bottom_attach>3</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>False</xexpand>
+		    <yexpand>True</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>True</yfill>
 		  </child>
 		</widget>
 	      </widget>
@@ -757,8 +827,8 @@
 	      <text></text>
 	      <child>
 		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
+		<expand>True</expand>
+		<fill>True</fill>
 	      </child>
 	    </widget>
 	  </widget>
@@ -799,15 +869,15 @@
 	      <class>GtkTable</class>
 	      <name>table7</name>
 	      <border_width>4</border_width>
-	      <rows>2</rows>
-	      <columns>2</columns>
+	      <rows>3</rows>
+	      <columns>3</columns>
 	      <homogeneous>False</homogeneous>
 	      <row_spacing>8</row_spacing>
 	      <column_spacing>8</column_spacing>
 	      <child>
 		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
+		<expand>True</expand>
+		<fill>True</fill>
 	      </child>
 
 	      <widget>
@@ -816,10 +886,10 @@
 		<label_xalign>0</label_xalign>
 		<shadow_type>GTK_SHADOW_IN</shadow_type>
 		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>2</top_attach>
+		  <bottom_attach>3</bottom_attach>
 		  <xpad>0</xpad>
 		  <ypad>0</ypad>
 		  <xexpand>True</xexpand>
@@ -865,8 +935,8 @@
 		<label>Add</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
+		  <left_attach>2</left_attach>
+		  <right_attach>3</right_attach>
 		  <top_attach>0</top_attach>
 		  <bottom_attach>1</bottom_attach>
 		  <xpad>0</xpad>
@@ -899,8 +969,8 @@
 		<text_max_length>0</text_max_length>
 		<text></text>
 		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
 		  <top_attach>0</top_attach>
 		  <bottom_attach>1</bottom_attach>
 		  <xpad>0</xpad>
@@ -922,10 +992,10 @@
 		<xscale>1</xscale>
 		<yscale>0</yscale>
 		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
+		  <left_attach>2</left_attach>
+		  <right_attach>3</right_attach>
+		  <top_attach>2</top_attach>
+		  <bottom_attach>3</bottom_attach>
 		  <xpad>0</xpad>
 		  <ypad>0</ypad>
 		  <xexpand>False</xexpand>
@@ -941,6 +1011,31 @@
 		  <name>vbox8</name>
 		  <homogeneous>False</homogeneous>
 		  <spacing>8</spacing>
+
+		  <widget>
+		    <class>GtkButton</class>
+		    <name>searchdomain_delete</name>
+		    <width>70</width>
+		    <sensitive>False</sensitive>
+		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_searchdomain_remove_clicked</handler>
+		      <last_modification_time>Wed, 17 May 2000 23:02:53 GMT</last_modification_time>
+		    </signal>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>tool_modified_cb</handler>
+		      <last_modification_time>Tue, 22 Aug 2000 07:58:39 GMT</last_modification_time>
+		    </signal>
+		    <label>Delete</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
+		    <child>
+		      <padding>0</padding>
+		      <expand>False</expand>
+		      <fill>False</fill>
+		    </child>
+		  </widget>
 
 		  <widget>
 		    <class>GtkButton</class>
@@ -977,32 +1072,78 @@
 		      <fill>False</fill>
 		    </child>
 		  </widget>
-
-		  <widget>
-		    <class>GtkButton</class>
-		    <name>searchdomain_remove</name>
-		    <width>70</width>
-		    <sensitive>False</sensitive>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>clicked</name>
-		      <handler>on_searchdomain_remove_clicked</handler>
-		      <last_modification_time>Wed, 17 May 2000 23:02:53 GMT</last_modification_time>
-		    </signal>
-		    <signal>
-		      <name>clicked</name>
-		      <handler>tool_modified_cb</handler>
-		      <last_modification_time>Tue, 22 Aug 2000 07:58:39 GMT</last_modification_time>
-		    </signal>
-		    <label>Remove</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
-		    <child>
-		      <padding>0</padding>
-		      <expand>False</expand>
-		      <fill>False</fill>
-		    </child>
-		  </widget>
 		</widget>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label55</name>
+		<label>New:</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>1</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label56</name>
+		<label>Existing:</label>
+		<justify>GTK_JUSTIFY_RIGHT</justify>
+		<wrap>False</wrap>
+		<xalign>0</xalign>
+		<yalign>7.45058e-09</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>2</top_attach>
+		  <bottom_attach>3</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>True</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkHSeparator</class>
+		<name>hseparator4</name>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>3</right_attach>
+		  <top_attach>1</top_attach>
+		  <bottom_attach>2</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -1024,9 +1165,9 @@
 	<widget>
 	  <class>GtkVBox</class>
 	  <name>vbox5</name>
-	  <border_width>4</border_width>
+	  <border_width>8</border_width>
 	  <homogeneous>False</homogeneous>
-	  <spacing>4</spacing>
+	  <spacing>8</spacing>
 
 	  <widget>
 	    <class>GtkHBox</class>
@@ -1089,7 +1230,7 @@
 		  <class>GtkLabel</class>
 		  <child_name>CList:title</child_name>
 		  <name>label42</name>
-		  <label>Aliases</label>
+		  <label>Names</label>
 		  <justify>GTK_JUSTIFY_CENTER</justify>
 		  <wrap>False</wrap>
 		  <xalign>0.5</xalign>
@@ -1113,7 +1254,7 @@
 
 	      <widget>
 		<class>GtkButton</class>
-		<name>statichost_add_ip</name>
+		<name>statichost_new</name>
 		<width>100</width>
 		<can_focus>True</can_focus>
 		<signal>
@@ -1126,7 +1267,7 @@
 		  <handler>tool_modified_cb</handler>
 		  <last_modification_time>Tue, 22 Aug 2000 07:58:54 GMT</last_modification_time>
 		</signal>
-		<label>Add</label>
+		<label>New Alias</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
@@ -1137,7 +1278,7 @@
 
 	      <widget>
 		<class>GtkButton</class>
-		<name>statichost_remove_ip</name>
+		<name>statichost_delte</name>
 		<width>100</width>
 		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
@@ -1151,7 +1292,7 @@
 		  <handler>tool_modified_cb</handler>
 		  <last_modification_time>Tue, 22 Aug 2000 07:59:02 GMT</last_modification_time>
 		</signal>
-		<label>Remove</label>
+		<label>Delete</label>
 		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
@@ -1165,7 +1306,6 @@
 	  <widget>
 	    <class>GtkFrame</class>
 	    <name>frame8</name>
-	    <border_width>8</border_width>
 	    <label>Settings for the selected IP address</label>
 	    <label_xalign>0</label_xalign>
 	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
@@ -1217,7 +1357,7 @@
 		<widget>
 		  <class>GtkLabel</class>
 		  <name>label49</name>
-		  <label>Change the IP addresse's alias or the address itself.</label>
+		  <label>Change the alias' IP address or its corresponding names.</label>
 		  <justify>GTK_JUSTIFY_CENTER</justify>
 		  <wrap>True</wrap>
 		  <xalign>0.5</xalign>
@@ -1416,7 +1556,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>aliases_ok</name>
+	<name>aliases_settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
@@ -1424,7 +1564,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>aliases_cancel</name>
+	<name>aliases_settings_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
@@ -1472,7 +1612,7 @@
 
 	<widget>
 	  <class>GtkEntry</class>
-	  <name>aliases_ip</name>
+	  <name>aliases_settings_ip</name>
 	  <can_focus>True</can_focus>
 	  <editable>True</editable>
 	  <text_visible>True</text_visible>
@@ -1502,45 +1642,21 @@
 	  <class>GtkTable</class>
 	  <name>table9</name>
 	  <border_width>8</border_width>
-	  <rows>2</rows>
-	  <columns>2</columns>
+	  <rows>3</rows>
+	  <columns>3</columns>
 	  <homogeneous>False</homogeneous>
 	  <row_spacing>8</row_spacing>
 	  <column_spacing>8</column_spacing>
 
 	  <widget>
-	    <class>GtkEntry</class>
-	    <name>aliases_new_alias</name>
-	    <can_focus>True</can_focus>
-	    <editable>True</editable>
-	    <text_visible>True</text_visible>
-	    <text_max_length>0</text_max_length>
-	    <text></text>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>0</top_attach>
-	      <bottom_attach>1</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>False</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
 	    <class>GtkButton</class>
-	    <name>aliases_add</name>
+	    <name>aliases_settings_add</name>
 	    <can_focus>True</can_focus>
 	    <label>Add</label>
 	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
-	      <left_attach>1</left_attach>
-	      <right_attach>2</right_attach>
+	      <left_attach>2</left_attach>
+	      <right_attach>3</right_attach>
 	      <top_attach>0</top_attach>
 	      <bottom_attach>1</bottom_attach>
 	      <xpad>0</xpad>
@@ -1555,6 +1671,37 @@
 	  </widget>
 
 	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>alignment8</name>
+	    <xalign>0.5</xalign>
+	    <yalign>0</yalign>
+	    <xscale>1</xscale>
+	    <yscale>0</yscale>
+	    <child>
+	      <left_attach>2</left_attach>
+	      <right_attach>3</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>True</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>False</xfill>
+	      <yfill>True</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>aliases_settings_delete</name>
+	      <can_focus>True</can_focus>
+	      <label>Delete</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+	  </widget>
+
+	  <widget>
 	    <class>GtkScrolledWindow</class>
 	    <name>scrolledwindow2</name>
 	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
@@ -1562,10 +1709,10 @@
 	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
 	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
 	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>False</xexpand>
@@ -1578,7 +1725,7 @@
 
 	    <widget>
 	      <class>GtkCList</class>
-	      <name>aliases_list</name>
+	      <name>aliases_settings_list</name>
 	      <can_focus>True</can_focus>
 	      <columns>1</columns>
 	      <column_widths>80</column_widths>
@@ -1602,15 +1749,61 @@
 	  </widget>
 
 	  <widget>
-	    <class>GtkAlignment</class>
-	    <name>alignment8</name>
-	    <xalign>0.5</xalign>
-	    <yalign>0</yalign>
-	    <xscale>1</xscale>
-	    <yscale>0</yscale>
+	    <class>GtkEntry</class>
+	    <name>aliases_settings_new</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
 	    <child>
 	      <left_attach>1</left_attach>
 	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label52</name>
+	    <label>Existing:</label>
+	    <justify>GTK_JUSTIFY_RIGHT</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>True</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkHSeparator</class>
+	    <name>hseparator2</name>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>3</right_attach>
 	      <top_attach>1</top_attach>
 	      <bottom_attach>2</bottom_attach>
 	      <xpad>0</xpad>
@@ -1619,17 +1812,35 @@
 	      <yexpand>True</yexpand>
 	      <xshrink>False</xshrink>
 	      <yshrink>False</yshrink>
-	      <xfill>False</xfill>
+	      <xfill>True</xfill>
 	      <yfill>True</yfill>
 	    </child>
+	  </widget>
 
-	    <widget>
-	      <class>GtkButton</class>
-	      <name>aliases_remove</name>
-	      <can_focus>True</can_focus>
-	      <label>Remove</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
-	    </widget>
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label51</name>
+	    <label>New:</label>
+	    <justify>GTK_JUSTIFY_RIGHT</justify>
+	    <wrap>False</wrap>
+	    <xalign>1</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
 	  </widget>
 	</widget>
       </widget>
