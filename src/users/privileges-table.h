@@ -28,7 +28,7 @@ void     create_user_privileges_table      (void);
 void     create_profile_privileges_table   (void);
 
 void     populate_privileges_table         (GtkWidget*, gchar*);
-void     populate_privileges_table_from_profile (xmlNodePtr);
+void     populate_privileges_table_from_profile (GtkWidget*, xmlNodePtr);
 
 GList*   user_privileges_get_list          (GList*);
 

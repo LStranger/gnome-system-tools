@@ -602,10 +602,11 @@ on_profile_new_clicked (GtkButton *button, gpointer data)
 	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
 	GtkWidget *groups_option_menu = gst_dialog_get_widget (tool->main_dialog, "profile_settings_group");
 	GtkWidget *shells_combo = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell");
+	GtkWidget *privileges = gst_dialog_get_widget (tool->main_dialog, "profile_privileges");
 
 	combo_add_shells (shells_combo);
 	combo_add_groups (groups_option_menu, TRUE);
-	profile_populate_groups (NULL);
+	populate_privileges_table (privileges, NULL);
 
 	gtk_window_set_title (GTK_WINDOW (dialog), _("Create New profile"));
 
@@ -621,8 +622,9 @@ on_profile_settings_clicked (GtkButton *button, gpointer data)
 {
 	GtkWidget *groups_option_menu = gst_dialog_get_widget (tool->main_dialog, "profile_settings_group");
 	GtkWidget *shells_combo = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell");
-	GtkWidget *dialog =gst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
+	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
 	GtkWidget *profiles_table = gst_dialog_get_widget (tool->main_dialog, "profiles_table");
+	GtkWidget *privileges = gst_dialog_get_widget (tool->main_dialog, "profile_privileges");
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (profiles_table));
 	GtkTreeSelection *selection;
 	GtkTreeIter iter;
@@ -637,7 +639,7 @@ on_profile_settings_clicked (GtkButton *button, gpointer data)
 	combo_add_shells (shells_combo);
 	combo_add_groups (groups_option_menu, TRUE);
 	profile_settings_set_data (node);
-	profile_populate_groups (node);
+	populate_privileges_table_from_profile (privileges, node);
 
 	g_object_set_data (G_OBJECT (dialog), "data", node);
 

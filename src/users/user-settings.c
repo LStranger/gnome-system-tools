@@ -152,7 +152,8 @@ user_set_profile (xmlNodePtr profile)
 	g_free (buf);
 */
 
-	populate_privileges_table_from_profile (profile);
+	populate_privileges_table_from_profile (gst_dialog_get_widget (tool->main_dialog, "user_privileges"),
+						profile);
 
 	value = gst_xml_get_child_content (profile, "group");
 	element = g_list_first (groups_list);
@@ -179,7 +180,7 @@ user_set_profile (xmlNodePtr profile)
 void
 user_new_prepare (ug_data *ud)
 {
-	GtkWidget *button, *list;
+	GtkWidget *button;
 	gchar *buf;
 	GtkWidget *widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 
@@ -187,8 +188,6 @@ user_new_prepare (ug_data *ud)
 	g_object_set_data (G_OBJECT (widget), "data", ud);
 
 	gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "user_settings_profiles"));
-
-	list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
 
 	/* Fill menus */
 	combo_add_groups   (gst_dialog_get_widget (tool->main_dialog, "user_settings_group"), TRUE);
