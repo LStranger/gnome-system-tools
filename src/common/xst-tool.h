@@ -117,8 +117,6 @@ void         xst_tool_load_try            (XstTool *tool);
 void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 void         xst_tool_set_close_func      (XstTool *tool, XstCloseFunc close_cb, gpointer data);
 
-gchar       *xst_load_etspec              (XstTool *tool, const gchar *name);
-
 GladeXML    *xst_tool_load_glade_common   (XstTool *tool, const gchar *widget);
 GladeXML    *xst_tool_load_glade          (XstTool *tool, const gchar *widget);
 

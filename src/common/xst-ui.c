@@ -31,6 +31,7 @@
 #include <gtk/gtksignal.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gnome-canvas-pixbuf.h>
+#include <gal/e-table/e-table-specification.h>
 
 #include "checked.xpm"
 #include "unchecked.xpm"
@@ -412,4 +413,41 @@ xst_ui_ctree_get_checkmark (GtkCTree *ctree, GtkCTreeNode *node, gint column)
 
 	if (pixmap == checked_pixmap) return (TRUE);
 	return (FALSE);
+}
+
+/**
+ * xst_ui_load_etspec:
+ * @common_path: Usually tool->etspecs_common_path
+ * @name: name of spec file.
+ * 
+ * Load ETableSpecification from given filename, return it as a string.
+ * Checks if given spec file is valid.
+ * 
+ * Return Value: String containing ETableSpecification or NULL one error.
+ **/
+gchar *
+xst_ui_load_etspec (const gchar *common_path, const gchar *name)
+{
+	ETableSpecification *specification;
+	gchar *table_spec = NULL;
+	gchar *path;
+
+	g_return_val_if_fail (common_path != NULL, NULL);
+	g_return_val_if_fail (name != NULL, NULL);
+
+	if (common_path[strlen (common_path) - 1] != '/')
+		path = g_strconcat (common_path, "/", name, NULL);
+	else
+		path = g_strconcat (common_path, name, NULL);
+	
+	specification = e_table_specification_new();
+	if (e_table_specification_load_from_file(specification, path))
+		table_spec = e_table_specification_save_to_string (specification);
+	else
+		g_warning ("xst_ui_load_etspec: Cant' load ETable specification from %s.", path);
+	
+	gtk_object_unref(GTK_OBJECT(specification));
+	g_free (path);
+	
+	return table_spec;
 }

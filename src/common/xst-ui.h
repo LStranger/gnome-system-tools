@@ -21,5 +21,5 @@ gboolean   xst_ui_clist_get_checkmark             (GtkCList *clist, gint row, gi
 void       xst_ui_ctree_set_checkmark             (GtkCTree *ctree, GtkCTreeNode *node,
 						   gint column, gboolean state);
 gboolean   xst_ui_ctree_get_checkmark             (GtkCTree *ctree, GtkCTreeNode *node, gint column);
-
+gchar     *xst_ui_load_etspec                     (const gchar *common_path, const gchar *name);
 #endif /* XST_UI_H */

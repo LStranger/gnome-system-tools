@@ -259,47 +259,6 @@ xst_tool_clear_supported_platforms (XstTool *tool)
 	}
 }
 
-gchar *
-xst_load_etspec (XstTool *tool, const gchar *name)
-{
-	gchar *table_spec;
-	FILE *etspec_file;
-	gchar *path;
-	gulong size;
-
-	g_assert (tool != NULL);
-	g_assert (XST_IS_TOOL (tool));
-	g_assert (tool->etspecs_common_path != NULL);
-
-	if (tool->etspecs_common_path[strlen(tool->etspecs_common_path)-1] != '/')
-		path = g_strconcat (tool->etspecs_common_path, "/", name, ".etspec", NULL);
-	else
-		path = g_strconcat (tool->etspecs_common_path, name, ".etspec", NULL);
-
-	etspec_file = fopen (path,"rt");
-
-	if (etspec_file == NULL)
-		g_error (_("etspec file: %s not found\n"), path);
-	
-	fseek (etspec_file, 0L, SEEK_END);
-	size = ftell (etspec_file);
-	rewind (etspec_file);
-
-	table_spec = g_malloc0 (size+1);
-
-	if (!table_spec)
-		g_error (_("Sorry, we can't get memory to load %s\n"), path);
-	
-	if (fread (table_spec, size, 1, etspec_file) != 1)
-		g_error (_("Sorry, we can't read %s\n"), path);
-					
-	fclose (etspec_file);
-
-	g_free (path);
-
-	return table_spec;
-}
-
 GladeXML *
 xst_tool_load_glade_common (XstTool *tool, const gchar *widget)
 {
@@ -1063,8 +1022,6 @@ authenticate (gchar *exec_path)
 void
 xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
-	GtkWidget *d;
-
 #ifdef ENABLE_NLS
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
