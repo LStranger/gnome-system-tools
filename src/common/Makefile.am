@@ -33,7 +33,9 @@ libsetuptool_a_SOURCES = \
 	xst-platform.c \
 	xst-platform.h \
 	xst-ui.c       \
-	xst-ui.h
+	xst-ui.h       \
+	xst-conf.c     \
+	xst-conf.h
 
 ccenterdir = $(datadir)/control-center
 Systemdir = $(ccenterdir)/System

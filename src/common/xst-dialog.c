@@ -25,6 +25,7 @@
 #include <gmodule.h>
 #include "xst-widget.h"
 #include "xst-dialog.h"
+#include "xst-conf.h"
 
 #ifdef XST_DEBUG
 /* define to x for debugging output */
@@ -85,7 +86,6 @@ xst_dialog_get_complexity (XstDialog *xd)
 void
 xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 {
-	gchar *path;
 	char *label[] = {
 		N_(" More Options >> "),
 		N_(" << Fewer Options "),
@@ -102,12 +102,7 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 
 	xd->complexity = c;
 
-	path = g_strjoin ("/", XST_CONF_ROOT, xd->tool->name, "complexity", NULL);
-	gconf_client_set_int (xd->tool->client,
-			      path,
-			      xd->complexity,
-			      NULL);
-	g_free (path);
+	xst_conf_set_integer (xd->tool, "complexity", xd->complexity);
 
 	apply_widget_policies (xd);
 	gtk_label_set_text (GTK_LABEL (GTK_BIN (xd->complexity_button)->child), _(label[c]));
@@ -434,7 +429,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 {
 	GladeXML *xml;
 	GtkWidget *w, *i;
-	GConfValue *val;
+	gint val;
 	char *s;
 
 	g_return_if_fail (dialog != NULL);
@@ -489,17 +484,11 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gtk_widget_set_sensitive (dialog->complexity_button, FALSE);
 
 	dialog->complexity = XST_DIALOG_NONE;
-	s = g_strjoin ("/", XST_CONF_ROOT, dialog->tool->name, "complexity", NULL);
-	val = gconf_client_get (tool->client, s, NULL);
-	g_free (s);
-	if (val && val->type == GCONF_VALUE_INT) {
-		gint complexity = gconf_value_get_int (val);
-		xst_dialog_set_complexity (dialog, complexity);
-	} else
-		xst_dialog_set_complexity (dialog, XST_DIALOG_BASIC);
-	
-	if (val)
-		gconf_value_free (val);
+	val = xst_conf_get_integer (dialog->tool, "complexity");
+	if (val < 0)
+		val = XST_DIALOG_BASIC;
+
+	xst_dialog_set_complexity (dialog, val);
 
 	gtk_signal_connect (GTK_OBJECT (dialog), "delete_event", dialog_delete_event_cb, dialog);
 }
