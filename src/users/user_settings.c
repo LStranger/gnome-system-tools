@@ -372,6 +372,9 @@ setup_basic (UserAccountGui *gui, GtkWidget *notebook)
 
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 
+	label = glade_xml_get_widget (gui->xml, "user_settings_comment_label");
+	gtk_label_set_text (GTK_LABEL (label), N_("Real name:"));
+	
 	/* Reparent widgets */
 	box = gtk_vbox_new (FALSE, 3);
 	gtk_widget_reparent (GTK_WIDGET (gui->basic_frame), box);
