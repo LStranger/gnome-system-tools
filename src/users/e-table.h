@@ -26,6 +26,31 @@
 #include <gnome.h>
 #include <gal/e-table/e-tree-simple.h>
 
+#define COLOR_NORMAL "green"
+
+enum {
+	COL_USER_LOGIN,
+	COL_USER_UID,
+	COL_USER_HOME,
+	COL_USER_SHELL,
+	COL_USER_COMMENT,
+
+	COL_USER_LAST,
+
+	/* Invisible columns */
+	COL_USER_COLOR,
+};
+
+enum {
+	COL_GROUP_NAME,
+	COL_GROUP_GID,
+
+	COL_GROUP_LAST,
+
+	/* Invisible columns */
+	COL_GROUP_COLOR,
+};
+
 void clear_table (ETreeModel *model, ETreePath *root_path);
 void clear_all_tables (void);
 void populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node);

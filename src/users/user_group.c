@@ -42,13 +42,11 @@ static void user_update_xml (xmlNodePtr node, gboolean adv);
 static xmlNodePtr group_add_blank_xml (xmlNodePtr db_node);
 static void group_add_from_user (xmlNodePtr node);
 static void group_update_xml (xmlNodePtr node, gboolean adv);
-static xmlNodePtr get_corresp_field (xmlNodePtr parent, gint *min, gint *max);
 static gboolean node_exsists (xmlNodePtr node, gchar *name, gchar *val);
-static xmlNodePtr get_db_node (xmlNodePtr node);
-static GList *get_group_list (gchar *field, xmlNodePtr parent, gboolean adv);
-static GList *get_user_list (gchar *field, xmlNodePtr db_node, gboolean adv);
+static GList *get_group_list (gchar *field, xmlNodePtr node, gboolean adv);
+static GList *get_user_list (gchar *field, xmlNodePtr node, gboolean adv);
 static GList *get_group_users (xmlNodePtr node);
-static void user_fill_settings_group (GtkCombo *combo, xmlNodePtr parent, gboolean adv);
+static void user_fill_settings_group (GtkCombo *combo, xmlNodePtr node, gboolean adv);
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 static void del_group_users (xmlNodePtr node);
@@ -106,6 +104,20 @@ xmlNodePtr
 get_nis_group_root_node (void)
 {
 	return xml_element_find_first (xml_doc_get_root (tool_config_get_xml()), "nis_groupdb");
+}
+
+xmlNodePtr
+get_db_node (xmlNodePtr node)
+{
+	while (node)
+	{
+		if (strstr (node->name, "db"))
+			return node;
+
+		node = node->parent;
+	}
+
+	return NULL;
 }
 
 gchar *
@@ -318,18 +330,14 @@ check_user_group (xmlNodePtr node)
 	gchar *buf;
 	GtkWindow *win;
 	GnomeDialog *dialog;
-	xmlNodePtr group_node, db_node;
+	xmlNodePtr group_node;
 
 	g_return_val_if_fail (node != NULL, -1);
 
-	db_node = get_db_node (node);
-	if (!db_node)
-		return -1;
-
 	combo = GTK_COMBO (tool_widget_get ("user_settings_group"));
 	buf = gtk_editable_get_chars (GTK_EDITABLE (combo->entry), 0, -1);
-	
-	group_node = get_corresp_field (db_node, NULL, NULL);
+
+	group_node = get_corresp_field (node);
 
 	/* We have to give childs to node_exsists, cause it gets parent inside */
 	if (node_exsists (group_node->childs, "name", buf))
@@ -413,6 +421,44 @@ check_group_gid (xmlNodePtr node, gchar *val)
 	return retval;
 }
 
+gboolean
+get_min_max (xmlNodePtr db_node, gint *min, gint *max)
+{
+	if (!strcmp (db_node->name, "userdb"))
+	{
+		*min = logindefs.new_user_min_id;
+		*max = logindefs.new_user_max_id;
+
+		return TRUE;
+	}
+
+	if (!strcmp (db_node->name, "groupdb"))
+	{
+		*min = logindefs.new_group_min_id;
+		*max = logindefs.new_group_max_id;
+
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+xmlNodePtr
+get_corresp_field (xmlNodePtr node)
+{
+	xmlNodePtr root = xml_doc_get_root (tool_config_get_xml());
+	
+	node = get_db_node (node);
+
+	if (!strcmp (node->name, "userdb"))
+		return xml_element_find_first (root, "groupdb");
+
+	if (!strcmp (node->name, "groupdb"))
+		return xml_element_find_first (root, "userdb");
+
+	return NULL;
+}
+
 /* Extern functions */
 
 /* User related */
@@ -466,13 +512,13 @@ user_settings_prepare (xmlNodePtr node)
 	/* Fill groups combo, use node->parent to pass <userdb> */
 	w0 = tool_widget_get ("user_settings_group");
 	gtk_widget_set_sensitive (w0, tool_get_access());
-	user_fill_settings_group (GTK_COMBO (w0), node->parent, adv);
+	user_fill_settings_group (GTK_COMBO (w0), node, adv);
 
 	txt = xml_get_child_content (node, "gid");
 	gid = atoi (txt);
 	g_free (txt);
 
-	tmp_list = get_group_list ("gid", node->parent, adv);
+	tmp_list = get_group_list ("gid", node, adv);
 	while (tmp_list)
 	{
 		id = atoi (tmp_list->data);
@@ -934,8 +980,7 @@ group_add_from_user (xmlNodePtr node)
 	xmlNodePtr group_node;
 	gchar *buf;
 
-	node = get_db_node (node);
-	node = get_corresp_field (node, NULL, NULL);
+	node = get_corresp_field (node);
 	group_node = group_add_blank_xml (node);
 
 	buf = gtk_entry_get_text (
@@ -963,44 +1008,6 @@ group_update_xml (xmlNodePtr node, gboolean adv)
 
 	while (gtk_clist_get_text (clist, row++, 0, &buf))
 		add_group_users (node, buf);
-}
-
-static xmlNodePtr
-get_corresp_field (xmlNodePtr parent, gint *min, gint *max)
-{
-	xmlNodePtr root, ret;
-	gchar *field = NULL;
-	gint lmin = 0, lmax = 0;
-
-	root = xml_doc_get_root (tool_config_get_xml());
-
-	if (!strcmp (parent->name, "userdb"))
-	{
-		field = g_strdup ("groupdb");
-		lmin = logindefs.new_group_min_id;
-		lmax = logindefs.new_group_max_id;
-	}
-
-	else if (!strcmp (parent->name, "groupdb"))
-	{
-		field = g_strdup ("userdb");
-		lmin = logindefs.new_user_min_id;
-		lmax = logindefs.new_user_max_id;
-	}
-
-	if (!field)
-		return NULL;
-
-	if (min != NULL && max != NULL)
-	{
-		*min = lmin;
-		*max = lmax;
-	}
-
-	ret = xml_element_find_first (root, field);
-	g_free (field);
-
-	return ret;
 }
 
 static gboolean
@@ -1032,29 +1039,17 @@ node_exsists (xmlNodePtr node, gchar *name, gchar *val)
 	return FALSE;
 }
 
-static xmlNodePtr
-get_db_node (xmlNodePtr node)
-{
-	while (node)
-	{
-		if (strstr (node->name, "db"))
-			return node;
-
-		node = node->parent;
-	}
-
-	return NULL;
-}
-
 static GList *
-get_group_list (gchar *field, xmlNodePtr parent, gboolean adv)
+get_group_list (gchar *field, xmlNodePtr node, gboolean adv)
 {
 	GList *list = NULL;
-	xmlNodePtr u, node;
+	xmlNodePtr u;
 	gint gid, min, max;
 	gchar *txt;
 
-	node = get_corresp_field (parent, &min, &max);
+	node = get_corresp_field (node);
+	get_min_max (node, &min, &max);
+	
 	if (!node)
 		return NULL;
 
@@ -1079,16 +1074,15 @@ get_group_list (gchar *field, xmlNodePtr parent, gboolean adv)
 }
 
 static GList *
-get_user_list (gchar *field, xmlNodePtr db_node, gboolean adv)
+get_user_list (gchar *field, xmlNodePtr node, gboolean adv)
 {
 	GList *list = NULL;
-	xmlNodePtr u, node;
+	xmlNodePtr u;
 	gint uid, min, max;
 	gchar *txt;
 
-	node = get_corresp_field (db_node, &min, &max);
-	if (!node)
-		return NULL;
+	node = get_corresp_field (node);
+	get_min_max (node, &min, &max);
 
 	for (u = xml_element_find_first (node, "user"); u; u = xml_element_find_next (u, "user"))
 	{
@@ -1132,13 +1126,13 @@ get_group_users (xmlNodePtr node)
 }
 
 static void
-user_fill_settings_group (GtkCombo *combo, xmlNodePtr parent, gboolean adv)
+user_fill_settings_group (GtkCombo *combo, xmlNodePtr node, gboolean adv)
 {
 	GList *tmp_list, *items;
 	gchar *name;
 
 	items = NULL;
-	tmp_list = get_group_list ("name", parent, adv);
+	tmp_list = get_group_list ("name", node, adv);
 	while (tmp_list)
 	{
 		name = tmp_list->data;
@@ -1201,7 +1195,7 @@ group_fill_all_users_list (xmlNodePtr node, GList *exclude)
 	gtk_clist_freeze (clist);
 
 	adv = (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED);
-	tmp_list = get_user_list ("login", get_db_node (node), adv);
+	tmp_list = get_user_list ("login", node, adv);
 	while (tmp_list)
 	{
 		gname = tmp_list->data;
@@ -1266,7 +1260,7 @@ get_group_by_data (xmlNodePtr parent, gchar *field, gchar *fdata, gchar *data)
 	xmlNodePtr node, u;
 	gchar *txt;
 
-	node = get_corresp_field (parent, NULL, NULL);
+	node = get_corresp_field (parent);
 	if (!node)
 		return NULL;
 

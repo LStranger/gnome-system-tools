@@ -117,10 +117,25 @@ const gchar *basic_group_state = "\
 </ETableState>";
 
 
+/* Static functions */
+static gchar *get_row_color (ETreeModel *etm, ETreePath *path);
+
 static int
 col_count (ETableModel *etm, void *data)
 {
-        return 1;
+        return 0;
+}
+
+static int
+user_col_count (ETableModel *etm, void *data)
+{
+        return COL_USER_LAST;
+}
+
+static int
+group_col_count (ETableModel *etm, void *data)
+{
+	return COL_GROUP_LAST;
 }
 
 static void *
@@ -184,31 +199,31 @@ user_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, v
 
 	switch (col)
 	{
-		case 0:
+		case COL_USER_LOGIN:
 			if (!check_user_login (node, (gpointer)val))
 				return;
 
 			field = g_strdup ("login");
 			break;
-		case 1:
+		case COL_USER_UID:
 			if (!check_user_uid (node, (gpointer)val))
 				return;
 
 			field = g_strdup ("uid");
 			break;
-		case 2:
+		case COL_USER_HOME:
 			if (!check_user_home (node, (gpointer)val))
 				return;
 
 			field = g_strdup ("home");
 			break;
-		case 3:
+		case COL_USER_SHELL:
 			if (!check_user_shell (node, (gpointer)val))
 				return;
 
 			field = g_strdup ("shell");
 			break;
-		case 4:
+		case COL_USER_COMMENT:
 			if (!check_user_comment (node, (gpointer)val))
 				return;
 
@@ -239,13 +254,13 @@ group_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, 
 
 	switch (col)
 	{
-		case 0:
+		case COL_GROUP_NAME:
 			if (!check_group_name (node, (gpointer)val))
 				return;
 
 			field = g_strdup ("name");
 			break;
-		case 1:
+		case COL_GROUP_GID:
 			if (!check_group_gid (node, (gpointer)val))
 				return;
 
@@ -280,24 +295,27 @@ user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 
 	switch (col)
 	{
-		case 0:
-			field = g_strdup ("login");
-			break;
-		case 1:
-			field = g_strdup ("uid");
-			break;
-		case 2:
-			field = g_strdup ("home");
-			break;
-		case 3:
-			field = g_strdup ("shell");
-			break;
-		case 4:
-			field = g_strdup ("comment");
-			break;
-		default:
-			g_warning ("user_value_at: wrong col nr: %d", col);
-			return NULL;
+	case COL_USER_LOGIN:
+		field = g_strdup ("login");
+		break;
+	case COL_USER_UID:
+		field = g_strdup ("uid");
+		break;
+	case COL_USER_HOME:
+		field = g_strdup ("home");
+		break;
+	case COL_USER_SHELL:
+		field = g_strdup ("shell");
+		break;
+	case COL_USER_COMMENT:
+		field = g_strdup ("comment");
+		break;
+	case COL_USER_COLOR:
+		return get_row_color (etm, path);
+		break;
+	default:
+		g_warning ("user_value_at: wrong col nr: %d", col);
+		return NULL;
 	}
 
 	node = xml_element_find_first (node, field);
@@ -321,15 +339,18 @@ group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 
 	switch (col)
 	{
-		case 0:
-			field = g_strdup ("name");
-			break;
-		case 1:
-			field = g_strdup ("gid");
-			break;
-		default:
-			g_warning ("group_value_at: wrong col nr: %d", col);
-			return NULL;
+	case COL_GROUP_NAME:
+		field = g_strdup ("name");
+		break;
+	case COL_GROUP_GID:
+		field = g_strdup ("gid");
+		break;
+	case COL_USER_COLOR:
+		return get_row_color (etm, path);
+		break;
+	default:
+		g_warning ("group_value_at: wrong col nr: %d", col);
+		return NULL;
 	}
 
 	node = xml_element_find_first (node, field);
@@ -380,6 +401,7 @@ create_extras (void)
 	e_table_extras_add_compare (extras, "id_compare", id_compare);
 
 	ec = e_cell_text_new (NULL, GTK_JUSTIFY_CENTER);
+	gtk_object_set (GTK_OBJECT (ec), "color_column", COL_USER_COLOR, NULL);
 	e_table_extras_add_cell (extras, "my_cell", ec);
 	
 	return extras;
@@ -440,6 +462,35 @@ net_user_cursor_change (ETable *table, gint row, gpointer user_data)
 {
 }
 
+static gchar *
+get_row_color (ETreeModel *etm, ETreePath *path)
+{
+	xmlNodePtr node, db_node;
+	gchar *buf = NULL;
+	gint id, min, max;
+
+	node = e_tree_model_node_get_data (etm, path);
+	db_node = get_db_node (node);
+	get_min_max (db_node, &min, &max);
+
+	if (!strcmp (db_node->name, "userdb"))
+		buf = xml_get_child_content (node, "uid");
+
+	else if (!strcmp (db_node->name, "groupdb"))
+		buf = xml_get_child_content (node, "gid");
+
+	if (!buf)
+		return NULL;
+
+	id = atoi (buf);
+	g_free (buf);
+
+	if (id >= min && id <= max)
+		return COLOR_NORMAL;
+
+	return NULL;
+}
+
 static void
 create_user_table (void)
 {
@@ -451,7 +502,7 @@ create_user_table (void)
 
 	extras = create_extras ();
 
-	model = e_tree_simple_new (col_count,
+	model = e_tree_simple_new (user_col_count,
 				   duplicate_value,
 				   freeze_value,
 				   initialize_value,
@@ -489,7 +540,7 @@ create_group_table (void)
 
 	extras = create_extras ();
 
-	model = e_tree_simple_new (col_count,
+	model = e_tree_simple_new (group_col_count,
 				   duplicate_value,
 				   freeze_value,
 				   initialize_value,

@@ -50,6 +50,7 @@ xmlNodePtr get_current_root_node (void);
 xmlNodePtr get_user_root_node (void);
 xmlNodePtr get_group_root_node (void);
 xmlNodePtr get_nis_group_root_node (void);
+xmlNodePtr get_db_node (xmlNodePtr node);
 gchar *my_xml_element_get_content (xmlNodePtr node);
 void adv_user_settings (xmlNodePtr node, gboolean show);
 gboolean check_node_complexity (xmlNodePtr node);
@@ -61,6 +62,8 @@ gboolean check_user_home (xmlNodePtr node, gchar *val);
 gboolean check_user_shell (xmlNodePtr node, gchar *val);
 gboolean check_group_name (xmlNodePtr node, gchar *name);
 gboolean check_group_gid (xmlNodePtr node, gchar *val);
+gboolean get_min_max (xmlNodePtr db_node, gint *min, gint *max);
+xmlNodePtr get_corresp_field (xmlNodePtr node);
 
 /* Extern functions */
 /* User related */
