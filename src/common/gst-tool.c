@@ -1502,14 +1502,14 @@ try_show_usage_warning (void)
 	gchar *version;
 	GConfClient *client;
 	GError *error = NULL;
-	gchar *warning = g_strdup_printf(_("Welcome to the %s prerelease of the "
-		  "GNOME System Tools.\n\n"
-		  "This is still a work in progress, and so it may have serious bugs.\n"
-		  "Due to the nature of these tools, bugs may render your computer\n"
-		  "PRACTICALLY USELESS, costing time, effort and sanity points.\n\n"
-		  "You have been warned. Thank you for trying out this prerelease of\n"
-		  "the GNOME System Tools!\n\n"
-		  "--\nThe GNOME System Tools team"), VERSION);
+	gchar *warning_title = g_strdup_printf (_("<span weight=\"bold\" size=\"larger\">"
+						  "Welcome to the %s prerelease of the GNOME System Tools"
+						  "</span>"), VERSION);
+	gchar *warning = _("This is still a work in progress, and so it may have serious bugs. "
+			   "Due to the nature of these tools, bugs may render your computer "
+			   "<span weight=\"bold\">practically useless</span>, costing time, effort and sanity points. "
+			   "You have been warned. Thank you for trying out this prerelease of "
+			   "the GNOME System Tools!");
 
 	client = gconf_client_get_default ();
 
@@ -1522,38 +1522,57 @@ try_show_usage_warning (void)
 
 	if ((value == TRUE) || version && (strcmp (version, VERSION) != 0))
 	{
-		GtkWidget *dialog, *label, *image, *hbox;
+		GtkWidget *dialog, *label, *title_label, *image, *hbox, *vbox;
 		GtkWidget *checkbox;
 		gboolean dont_ask_again;
 		
 		dialog = gtk_dialog_new_with_buttons (_("Warning"),
 						      NULL,
-						      GTK_DIALOG_DESTROY_WITH_PARENT,
+						      GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_NO_SEPARATOR,
 						      GTK_STOCK_OK, GTK_RESPONSE_OK,
 						      NULL);
-		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);		
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+
+		title_label = gtk_label_new (warning_title);
+		gtk_label_set_line_wrap (GTK_LABEL (title_label), TRUE);
+		gtk_label_set_use_markup (GTK_LABEL (title_label), TRUE);
+		gtk_misc_set_alignment (GTK_MISC (title_label), 0, 0);
 		
 		label = gtk_label_new (warning);
+		gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+		gtk_misc_set_alignment (GTK_MISC (title_label), 0, 0);
+		
 		image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
+		gtk_misc_set_alignment (GTK_MISC (image), 0, 0);
+		
 		checkbox = gtk_check_button_new_with_label (_("Don't show me this again"));
 
-		hbox = gtk_hbox_new (FALSE, 5);
+		hbox = gtk_hbox_new (FALSE, 12);
+		vbox = gtk_vbox_new (FALSE, 12);
 
-		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 5);
-		gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
+		gtk_container_set_border_width (GTK_CONTAINER (hbox), 12);
 
-		gtk_window_set_default_size (GTK_WINDOW (dialog), 300, 150);
-		
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, FALSE, FALSE, 5);
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), checkbox, FALSE, FALSE, 5);
+		gtk_box_pack_start (GTK_BOX (vbox), title_label, FALSE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (vbox), checkbox, FALSE, FALSE, 0);
+
+		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 0);
+		gtk_box_pack_start (GTK_BOX (hbox), vbox, FALSE, FALSE, 0);
+
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), hbox, TRUE, TRUE, 0);
+
+		gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
 		
 		gtk_widget_show_all (dialog);
+		
 		if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
 			if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox)) == TRUE) {
 				gconf_client_set_bool (client, key, FALSE, &error);
 				gconf_client_set_string (client, version_key, VERSION, &error);
 			}
 		}
+		
 		gtk_widget_hide (dialog);
 		gtk_widget_destroy (dialog);
 	}
