@@ -8,7 +8,8 @@ interfaces = \
 	shares.glade 					\
 	time.glade 					\
 	users.glade 					\
-	boot.glade
+	boot.glade					\
+	location-manager.glade
 
 interfaces_DATA = $(interfaces)
 
@@ -33,7 +34,9 @@ EXTRA_DIST = \
 	users.glade.in					\
 	users.glade.h					\
 	boot.glade.in					\
-	boot.glade.h
+	boot.glade.h					\
+	location-manager.glade.in			\
+	location-manager.glade.h
 
 CLEANFILES = $(interfaces)
 
