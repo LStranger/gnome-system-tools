@@ -491,9 +491,6 @@ setup_advanced_add (UserAccountGui *gui, GtkWidget *notebook)
 	}
 	g_slist_free (list);
 	xst_ui_option_menu_set_selected_string (gui->profile_menu, pf->name);
-
-	/* FIXME: Temporarily hiding all profile-related stuff. */
-	gtk_widget_hide (GTK_WIDGET (gui->profile_box));
 }
 
 static void
