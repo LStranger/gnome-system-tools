@@ -24,7 +24,7 @@
  *          Chema Celorio <chema@ximian.com>
  *          Carlos Garnacho Parro <garparr@teleline.es>
  */
-
+ 
 #include <config.h>
 
 #include <stdio.h>
@@ -596,6 +596,12 @@ gst_time_filter (GtkEntry *entry, const gchar *new_text,
 }
 
 static void
+gst_time_focus_in (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
+{
+	gst_time_clock_stop (tool);
+}
+
+static void
 gst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
 {
 	gint num = atoi (gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1));
@@ -611,6 +617,7 @@ gst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
 	}
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), (gfloat) num);
+	gst_time_update (tool);
 	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "focus_out_event");
 }
 
@@ -627,17 +634,21 @@ gst_time_change (GtkSpinButton *widget, gpointer data)
 		if (value > 59) {
 			gtk_spin_button_set_value (widget, value - 60);
 			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->minutes), GTK_SPIN_STEP_FORWARD, 1);
+			tool->min++;
 		} else if (value < 0) {
 			gtk_spin_button_set_value (widget, value + 60);
 			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->minutes), GTK_SPIN_STEP_BACKWARD, 1);
+			tool->min--;
 		}
 	} else if (widget == GTK_SPIN_BUTTON (tool->minutes)) {
 		if (value > 59) {
 			gtk_spin_button_set_value (widget, value - 60);
 			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->hours), GTK_SPIN_STEP_FORWARD, 1);
+			tool->hrs++;
 		} else if (value < 0) {
 			gtk_spin_button_set_value (widget, value + 60);
 			gtk_spin_button_spin (GTK_SPIN_BUTTON (tool->hours), GTK_SPIN_STEP_BACKWARD, 1);
+			tool->hrs--;
 		}
 	} else if (widget == GTK_SPIN_BUTTON (tool->hours)) {
 		if (value > 23) {
@@ -665,9 +676,12 @@ gst_time_spin_button_create (GstTimeTool *tool, gchar *label)
 	g_signal_connect (G_OBJECT (spin), "insert_text",
 			  G_CALLBACK (gst_time_filter),
 			  tool);
-	g_signal_connect (G_OBJECT (spin), "key_press_event",
+	/* g_signal_connect (G_OBJECT (spin), "key_press_event",
 			  G_CALLBACK (gst_time_key_press_event_cb),
-			  tool);
+			  tool);*/
+	g_signal_connect_after (G_OBJECT (spin), "focus_in_event",
+			        G_CALLBACK (gst_time_focus_in),
+			        tool);
 	g_signal_connect_after (G_OBJECT (spin), "focus_out_event",
 			        G_CALLBACK (gst_time_focus_out),
 			        tool);

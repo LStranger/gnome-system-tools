@@ -525,8 +525,10 @@ cancel_cb (GtkWidget *w, gpointer data)
 
 	dialog = GST_DIALOG (data);
 
-	if (gst_dialog_get_modified (dialog))
+	if (gst_dialog_get_modified (dialog)) {
 		restore_config (dialog);
+		g_message ("Cancelando el dialogo");
+	}
 
 	dialog_close (dialog);
 }
