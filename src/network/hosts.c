@@ -375,7 +375,7 @@ on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 
 	parent = GTK_WIDGET (tool->main_dialog);
 	gtk_clist_get_text (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")),
-			    hosts_row_selected, 1, &name);
+			    hosts_row_selected, 0, &name);
 
 	txt = g_strdup_printf (_("Are you sure you want to delete the aliases for %s?"), name);
 	dialog = gnome_question_dialog_parented (txt, NULL, NULL, GTK_WINDOW (parent));
