@@ -6,7 +6,6 @@
 
 gchar *s = N_("User Settings");
 gchar *s = N_("Basic settings");
-gchar *s = N_("Main group:");
 gchar *s = N_("User name:");
 gchar *s = N_("Full Name:");
 gchar *s = N_("Advanced settings");
@@ -14,7 +13,7 @@ gchar *s = N_("User ID:");
 gchar *s = N_("Home directory:");
 gchar *s = N_("Shell:");
 gchar *s = N_("Basic");
-gchar *s = N_("User name:");
+gchar *s = N_("Main group:");
 gchar *s = N_("Groups");
 gchar *s = N_("Available Groups");
 gchar *s = N_("User's Groups");
