@@ -1,5 +1,6 @@
 pixmaps_DATA = \
 computer.png  \
+boot_wrench.png \
 connection-active.xpm \
 connection-ethernet.png \
 connection-inactive.xpm \
