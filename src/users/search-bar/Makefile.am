@@ -19,7 +19,8 @@ search-bar-marshal.c: search-bar-marshal.h
 
 noinst_LIBRARIES =              \
         libsearchbar.a
-	
+
+BUILT_SOURCES= search-bar-marshal.c search-bar-marshal.h
 
 libsearchbar_a_SOURCES =   \
 	search-bar.c       \
