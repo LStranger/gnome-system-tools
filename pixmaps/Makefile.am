@@ -24,7 +24,8 @@ time.png  \
 timezone.png  \
 users-groups.png  \
 users.png  \
-world_map-960.png
+world_map-960.png \
+xstdruidbg-3.png
 
 
 EXTRA_DIST = $(pixmaps_DATA)
