@@ -1,3 +1,10 @@
+2003-03-24  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* gst-su.c: (on_terminal_child_exited) made it clear and destroy 
+	the vte term when the program exits, it leaves the program more 
+	elegantly when the son dies (at least, it doesn't die for a 
+	second time)
+
 2003-03-13  Christian Neumair  <chris@gnome-de.org>
 
 	* gst-tool.c: Use gtk_window_set_default_icon_from_file rather than

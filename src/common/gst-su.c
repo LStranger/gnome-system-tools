@@ -73,6 +73,8 @@ static void
 on_terminal_child_exited (GtkWidget *reaper, gint pid, gint status, gpointer data)
 {
 	GtkWidget *error_dialog;
+
+	gst_su_clear_term ();
 	
 	if (WIFEXITED (status) && WEXITSTATUS (status) && (WEXITSTATUS(status) < 255)) {
 		error_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
