@@ -1,7 +1,7 @@
 desktop = $(toolname).desktop
 
 $(desktop).in: %.desktop.in: %.desktop.in.in
-	sed s#Icon=#Icon=$(pixmapsdir)/$(toolname).png# < $< > $(toolname).desktop.in
+	sed s#Icon=.*#Icon=$(pixmapsdir)/$(toolname).png# < $< > $(toolname).desktop.in
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
