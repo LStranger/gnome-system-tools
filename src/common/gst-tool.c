@@ -1163,11 +1163,13 @@ gst_tool_load_try (GstTool *tool)
 	}
 }
 
-void
-gst_tool_main (GstTool *tool, gboolean no_main_loop)
+static void
+tool_main_do (GstTool *tool, gboolean no_main_loop, gboolean show_main_dialog)
 {
 	gst_dialog_freeze_visible (tool->main_dialog);
-	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
+
+	if (show_main_dialog)
+		gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	
 	if (tool->remote_config == TRUE) {
 		/* run the ssh client */
@@ -1176,7 +1178,6 @@ gst_tool_main (GstTool *tool, gboolean no_main_loop)
 	} else {
 		/* run the su command */
 		gst_dialog_freeze_visible (tool->main_dialog);
-		gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 
 		gst_auth_do_su_authentication (tool);
 
@@ -1189,6 +1190,18 @@ gst_tool_main (GstTool *tool, gboolean no_main_loop)
 
 	if (!no_main_loop)
 		gtk_main ();
+}
+
+void
+gst_tool_main (GstTool *tool, gboolean no_main_loop)
+{
+	tool_main_do (tool, no_main_loop, TRUE);
+}
+
+void
+gst_tool_main_with_hidden_dialog (GstTool *tool, gboolean no_main_loop)
+{
+	tool_main_do (tool, no_main_loop, FALSE);
 }
 
 static void

@@ -136,6 +136,7 @@ void         gst_init                     (const gchar *app_name,
 					   const poptOption options);
 
 void         gst_tool_main                (GstTool *tool, gboolean no_main_loop);
+void         gst_tool_main_with_hidden_dialog (GstTool *tool, gboolean no_main_loop);
 gboolean     gst_tool_get_access          (GstTool *tool);
 
 GstTool     *gst_tool_new                 (void);
