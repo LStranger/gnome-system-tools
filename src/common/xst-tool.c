@@ -259,6 +259,47 @@ xst_tool_clear_supported_platforms (XstTool *tool)
 	}
 }
 
+gchar *
+xst_load_especs (XstTool *tool, const gchar *name)
+{
+	gchar *table_spec;
+	FILE *especs_file;
+	gchar *path;
+	gulong size;
+
+	g_assert (tool != NULL);
+	g_assert (XST_IS_TOOL (tool));
+	g_assert (tool->especs_common_path != NULL);
+
+	if (tool->especs_common_path[strlen(tool->especs_common_path)-1] != '/')
+		path = g_strconcat (tool->especs_common_path, "/", name, ".especs", NULL);
+	else
+		path = g_strconcat (tool->especs_common_path, name, ".especs", NULL);
+
+	especs_file = fopen (path,"rt");
+
+	if (especs_file == NULL)
+		g_error (_("Especs file %s not found\n"), path);
+	
+	fseek (especs_file, 0L, SEEK_END);
+	size = ftell (especs_file);
+	rewind (especs_file);
+
+	table_spec = g_malloc0 (size+1);
+
+	if (!table_spec)
+		g_error (_("Sorry, we can't get memory to load %s\n"), path);
+	
+	if (fread (table_spec, size, 1, especs_file) != 1)
+		g_error (_("Sorry, we can't read %s\n"), path);
+					
+	fclose (especs_file);
+
+	g_free (path);
+
+	return table_spec;
+}
+
 GladeXML *
 xst_tool_load_glade_common (XstTool *tool, const gchar *widget)
 {
@@ -804,6 +845,8 @@ xst_tool_type_init (XstTool *tool)
 	GladeXML *xml;
 
 	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
+
+	tool->especs_common_path = g_strdup (ESPECS_DIR);
 
 	xml = xst_tool_load_glade_common (tool, "report_window");
 

@@ -34,29 +34,10 @@
 #include "e-table.h"
 #include "callbacks.h"
 
-#ifdef JUST_FOR_TRANSLATORS
-static char *list [] = {
-	N_("Default"),
-	N_("Name"),
-	N_("Type"),
-	N_("Kernel Image"),
-	N_("Device"),
-};
-#endif
-
 extern XstTool *tool;
 
 GtkWidget *boot_table;
 GArray *boot_array;
-
-const gchar *table_spec = "\
-<ETableSpecification cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Default\" expansion=\"1.0\" minimum_width=\"16\" resizable=\"true\" cell=\"checkbox\" compare=\"integer\"/> \
-  <ETableColumn model_col=\"1\" _title=\"Name\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
-  <ETableColumn model_col=\"2\" _title=\"Type\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"centered_cell\" compare=\"string\"/> \
-  <ETableColumn model_col=\"3\" _title=\"Kernel Image\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"4\" _title=\"Device\" expansion=\"1.0\" minimum_width=\"10\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-</ETableSpecification>";
 
 const gchar *basic_boot_state = "\
 <ETableState> \
@@ -259,7 +240,7 @@ create_table (xmlNodePtr root)
 
 	spec = xst_conf_get_string (tool, "spec");
 	if (!spec) {
-		spec = g_strdup (table_spec);
+		spec = xst_load_especs (tool, "boot");
 		xst_conf_set_string (tool, "spec", spec);
 	}
 

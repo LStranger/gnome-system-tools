@@ -57,31 +57,11 @@ typedef struct
 	GtkWidget       *file_add;
 } ProfileTab;
 
-#ifdef JUST_FOR_TRANSLATORS
-static char *list [] = {
-	N_("Profile"),
-	N_("Comment"),
-};
-#endif
-
 extern XstTool *tool;
 ProfileTable *profile_table;
 GtkWidget *table;
 
 static ProfileTab *pft;
-
-const gchar *table_spec = "\
-<ETableSpecification cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Profile\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"1\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableState> \
-    <column source=\"0\"/> \
-    <column source=\"1\"/> \
-    <grouping> \
-      <leaf column=\"0\" ascending=\"true\"/> \
-    </grouping> \
-  </ETableState> \
-</ETableSpecification>";
 
 static int
 col_count (ETableModel *etm, void *data)
@@ -213,6 +193,7 @@ create_profile_table (XstDialog *xd)
 {
 	ETableModel *model;
 	GtkWidget *container;
+	gchar *spec;
 	
 	model = e_table_memory_callbacks_new (col_count,
 					      value_at,
@@ -224,8 +205,17 @@ create_profile_table (XstDialog *xd)
 					      value_is_empty,
 					      value_to_string,
 					      NULL);
+
+	spec = xst_conf_get_string (tool, "profiles");
+	if (!spec) {
+		spec = xst_load_especs (tool, "profiles");
+		xst_conf_set_string (tool, "profiles", spec);
+	}
 	
-	table = e_table_scrolled_new (model, NULL, table_spec, NULL);
+	table = e_table_scrolled_new (model, NULL, spec, NULL);
+
+	g_free (spec);
+
 	gtk_signal_connect (GTK_OBJECT (e_table_scrolled_get_table (E_TABLE_SCROLLED (table))),
 			    "cursor_change",
 			    et_cursor_change,

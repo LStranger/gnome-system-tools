@@ -38,19 +38,6 @@
 #include "callbacks.h"
 #include "user-group-xml.h"
 
-#ifdef JUST_FOR_TRANSLATORS
-static char *list [] = {
-	N_("Users"),
-	N_("UID"),
-	N_("Home"),
-	N_("Shell"),
-	N_("Comment"),
-	N_("Group"),
-	N_("GID"),
-	N_("Groups"),
-};
-#endif
-
 extern XstTool *tool;
 
 GtkWidget *user_table;
@@ -59,43 +46,6 @@ GtkWidget *net_group_table;
 GtkWidget *net_user_table;
 
 gint active_table;
-
-/* e-table specifications */
-
-const gchar *user_spec = "\
-<ETableSpecification cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
-  <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"4\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"5\" _title=\"Group\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"6\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
-</ETableSpecification>";
-
-const gchar *group_spec = "\
-<ETableSpecification cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"1\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
-</ETableSpecification>";
-
-const gchar *net_group_spec = "\
-<ETableSpecification no-headers=\"true\" cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Group\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableState> \
-    <column source=\"0\"/> \
-    <grouping></grouping> \
-  </ETableState> \
-</ETableSpecification>";
-
-const gchar *net_user_spec = "\
-<ETableSpecification no-headers=\"true\" cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"User\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableState> \
-    <column source=\"0\"/> \
-    <grouping></grouping> \
-  </ETableState> \
-</ETableSpecification>";
 
 /* e-table states. */
 
@@ -554,7 +504,7 @@ create_user_table (void)
 
 	spec = xst_conf_get_string (tool, "user_spec");
 	if (!spec) {
-		spec = g_strdup (user_spec);
+		spec = xst_load_especs (tool, "users");
 		xst_conf_set_string (tool, "user_spec", spec);
 	}
 
@@ -608,7 +558,7 @@ create_group_table (void)
 
 	spec = xst_conf_get_string (tool, "group_spec");
 	if (!spec) {
-		spec = g_strdup (group_spec);
+		spec = xst_load_especs (tool, "group");
 		xst_conf_set_string (tool, "group_spec", spec);
 	}
 
@@ -643,7 +593,8 @@ create_network_group_table (GtkWidget *paned)
 {
 	ETable *table;
 	ETableModel *model;
-
+	gchar *spec;
+	
 	model = e_table_memory_callbacks_new (col_count,
 					      net_group_value_at,
 					      set_value_at,
@@ -655,7 +606,15 @@ create_network_group_table (GtkWidget *paned)
 					      value_to_string,
 					      GINT_TO_POINTER (TABLE_NET_GROUP));
 
-	net_group_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, net_group_spec, NULL);
+	spec = xst_conf_get_string (tool, "net_group_spec");
+	if (!spec) {
+		spec = xst_load_especs (tool, "net_group");
+		xst_conf_set_string (tool, "net_group_spec", spec);
+	}
+	net_group_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, spec, NULL);
+
+	g_free (spec);
+
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_group_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", net_group_cursor_change, NULL);
@@ -669,7 +628,8 @@ create_network_user_table (GtkWidget *paned)
 {
 	ETable *table;
 	ETableModel *model;
-
+	gchar *spec;
+	
 	model = e_table_memory_callbacks_new (col_count,
 					      net_user_value_at,
 					      set_value_at,
@@ -681,7 +641,15 @@ create_network_user_table (GtkWidget *paned)
 					      value_to_string,
 					      GINT_TO_POINTER (TABLE_NET_USER));
 
-	net_user_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, net_user_spec, NULL);
+	spec = xst_conf_get_string (tool, "net_user_spec");
+	if (!spec) {
+		spec = xst_load_especs (tool, "net_user");
+		xst_conf_set_string (tool, "net_user_spec", spec);
+	}
+	net_user_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, spec, NULL);
+
+	g_free(spec);
+	
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_activated", cursor_change, NULL);
 
