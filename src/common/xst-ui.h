@@ -29,4 +29,8 @@ gchar     *xst_ui_load_etspec                     (const gchar *common_path, con
 void       xst_ui_entry_set_text                  (void *entry, const gchar *str);
 gboolean   xst_ui_logout_dialog                   (const gchar *message);
 
+void       xst_ui_text_view_add_text              (GtkTextView *view, const gchar *text);
+gchar     *xst_ui_text_view_get_text              (GtkTextView *view);
+void       xst_ui_text_view_clear                 (GtkTextView *view);
+
 #endif /* XST_UI_H */

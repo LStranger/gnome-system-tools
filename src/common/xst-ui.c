@@ -583,3 +583,49 @@ xst_ui_logout_dialog (const gchar *message)
 #endif		
 }
 
+void
+xst_ui_text_view_clear (GtkTextView *view)
+{
+	GtkTextBuffer *buffer;
+
+	g_return_if_fail (view != NULL);
+	g_return_if_fail (GTK_IS_TEXT_VIEW (view));
+
+	buffer = gtk_text_view_get_buffer (view);
+	gtk_text_buffer_set_text (buffer, "", 0);
+}
+
+gchar *
+xst_ui_text_view_get_text (GtkTextView *view)
+{
+	GtkTextBuffer *buffer;
+	GtkTextIter   start_iter;
+	GtkTextIter   end_iter;
+
+	g_return_val_if_fail (view != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TEXT_VIEW (view), NULL);
+
+	buffer = gtk_text_view_get_buffer (view);
+	gtk_text_buffer_get_start_iter (buffer, &start_iter);
+	gtk_text_buffer_get_end_iter (buffer, &end_iter);
+
+	return gtk_text_buffer_get_text (buffer, &start_iter, &end_iter, FALSE);
+}
+
+void
+xst_ui_text_view_add_text (GtkTextView *view, const gchar *text)
+{
+	GtkTextBuffer *buffer;
+	GtkTextIter   end_iter;
+
+	g_return_if_fail (view != NULL);
+	g_return_if_fail (GTK_IS_TEXT_VIEW (view));
+
+	if (text == NULL && strlen (text) == 0)
+		return;
+
+	buffer = gtk_text_view_get_buffer (view);
+	gtk_text_buffer_get_end_iter (buffer, &end_iter);
+
+	gtk_text_buffer_insert (buffer, &end_iter, text, strlen (text));
+}
