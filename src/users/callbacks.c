@@ -190,8 +190,12 @@ user_passwd_dialog_show (xmlNodePtr node)
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
-
 	gtk_object_set_data (GTK_OBJECT (w0), "name", node);
+
+#ifndef HAVE_LIBCRACK
+	gtk_widget_hide (tool_widget_get ("user_passwd_quality"));
+#endif
+
 }
 
 extern void

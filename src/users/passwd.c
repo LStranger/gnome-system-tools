@@ -20,6 +20,7 @@
  * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@helixcode.com>.
  */
 
+#include "config.h"
 #include "passwd.h"
 
 /* All this for password generation and crypting. */
@@ -28,11 +29,17 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <unistd.h>
+
+#ifdef HAVE_LIBCRACK
 #include <crack.h>
+#define CRACK_DICT_PATH "/usr/lib/cracklib_dict"
+#endif
+
 #include <crypt.h>
 #include "md5.h"
 
-#define CRACK_DICT_PATH "/usr/lib/cracklib_dict"
+#include "e-table.h"
+
 #define RANDOM_PASSWD_SIZE 6
 
 static gchar *pam_passwd_files[] = { "/etc/pam.d/passwd", NULL };
@@ -46,9 +53,11 @@ passwd_get_random (void)
 	gchar *random_passwd;
 	
 	random_passwd = g_new0 (gchar, RANDOM_PASSWD_SIZE + 1);
+#ifdef HAVE_LIBCRACK
 	while (FascistCheck (random_passwd, CRACK_DICT_PATH))
+#endif
 		passwd_rand_str (random_passwd, RANDOM_PASSWD_SIZE);
-	
+
 	return random_passwd;
 }
 
@@ -56,7 +65,9 @@ extern gchar *
 passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_quality)
 {
 	gchar salt[9];
+#ifdef HAVE_LIBCRACK
 	gchar *check_err;
+#endif
 	gchar *password;
 
 	g_return_val_if_fail (node != NULL, (gchar *) -1);
@@ -64,9 +75,11 @@ passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_q
 	if (strcmp (new_passwd, confirm))
 		return (gchar *) -1;
 
+#ifdef HAVE_LIBCRACK
 	if (check_quality &&
 			(check_err = FascistCheck (new_passwd, CRACK_DICT_PATH)))
 		return check_err;
+#endif
 
 	if (passwd_uses_md5 ()) 
 		password = g_strdup (crypt_md5 (new_passwd, passwd_rand_str (salt, 8)));

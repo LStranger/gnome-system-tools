@@ -35,10 +35,16 @@ GNOME_X_CHECKS
 GNOME_XML_CHECK
 AM_PATH_GDK_PIXBUF
 AM_PATH_LIBGLADE(,,"gnome")
+
 AC_CHECK_LIB(crack, FascistCheck, ,[
-  AC_MSG_ERROR(cracklib is required.)])
-AC_CHECK_HEADER(crack.h, ,[
+  AC_MSG_WARN(),
+  AC_MSG_WARN(---------- Building without cracklib is not recommended. ----------),
+	AC_MSG_WARN()])
+if test x"$HAVE_LIBCRACK" = xyes ; then
+  AC_CHECK_HEADER(crack.h, ,[
   AC_MSG_ERROR(cracklib crack.h header file not found.)])
+fi
+
 AC_CHECK_LIB(crypt, crypt, ,[
   AC_MSG_ERROR(crypt library is required.)])
 AC_CHECK_HEADER(crypt.h, ,[
