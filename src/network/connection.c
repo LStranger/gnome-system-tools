@@ -52,7 +52,7 @@ static const XstNetworkInterfaceDescription xst_iface_desc [] = {
 
 
 /* sigh more libglade callbacks */
-static void on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn);
+/*static void on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn);*/
 static void on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn);
 static void on_connection_cancel_clicked (GtkWidget *w, XstConnection *cxn);
 static void on_connection_config_dialog_destroy (GtkWidget *w, XstConnection *cxn);
@@ -742,7 +742,6 @@ update_status (XstConnection *cxn)
 				? PIXMAPS_DIR "/gnome-light-on.png"
 				: PIXMAPS_DIR "/gnome-light-off.png");
 }
-#endif
 
 static void
 on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn)
@@ -750,6 +749,7 @@ on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn)
 	connection_set_modified (cxn, TRUE);
 /*	update_status (cxn);*/
 }
+#endif
 
 static void
 empty_general (XstConnection *cxn)
@@ -757,7 +757,7 @@ empty_general (XstConnection *cxn)
 	GET_STR ("connection_", name);
 	GET_BOOL ("status_", autoboot);
 	GET_BOOL ("status_", user);
-	GET_BOOL ("status_", enabled);
+/*	GET_BOOL ("status_", enabled);*/
 }
 
 static void
@@ -906,8 +906,8 @@ fill_general (XstConnection *cxn)
 {
 	gtk_label_set_text (GTK_LABEL (W ("connection_dev")), cxn->dev);
 	SET_STR ("connection_", name);
-	SET_BOOL ("status_", enabled);
-/*	update_status (cxn);*/
+/*	SET_BOOL ("status_", enabled);
+	update_status (cxn);*/
 	SET_BOOL ("status_", autoboot);
 	SET_BOOL ("status_", user);
 }
@@ -1038,7 +1038,7 @@ hookup_callbacks (XstConnection *cxn)
 		{ "on_connection_ok_clicked", on_connection_ok_clicked },
 		{ "on_connection_cancel_clicked", on_connection_cancel_clicked },
 		{ "on_connection_config_dialog_delete_event", on_connection_config_dialog_delete_event },
-		{ "on_status_enabled_toggled", on_status_enabled_toggled },
+/*		{ "on_status_enabled_toggled", on_status_enabled_toggled },*/
 		{ "on_connection_modified", on_connection_modified },
 		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },

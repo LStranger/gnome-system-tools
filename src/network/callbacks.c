@@ -89,10 +89,14 @@ void
 on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 				 gint page_num, gpointer user_data)
 {
+	GtkWidget *w;
 	gchar *entry[] = { "hostname", "connection_list", "dns_dhcp", "statichost_list" };
 	
-	if (xst_tool_get_access (tool) && entry[page_num])
-		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, entry[page_num]));
+	if (xst_tool_get_access (tool) && entry[page_num]) {
+		w = xst_dialog_get_widget (tool->main_dialog, entry[page_num]);
+		if (w)
+			gtk_widget_grab_focus (w);
+	}
 }
 
 static gboolean
