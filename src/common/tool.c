@@ -34,7 +34,7 @@
 #include "tool.h"
 #include "xml.h"
 
-#include "reading.xpm"
+/*#include "reading.xpm"*/
 
 
 /* --- Internals --- */
@@ -534,10 +534,10 @@ void tool_splash_show()
 	/* FIXME: Keep track of created GnomePixmap, to avoid duplicates if
 	 * splash is shown multiple times. */
 
-	w0 = gnome_pixmap_new_from_xpm_d (reading_xpm);
+/*	w0 = gnome_pixmap_new_from_xpm_d (reading_xpm);
 
 	gtk_box_pack_end (GTK_BOX (tool_widget_get_common("reading_box")),
-			  w0, TRUE, TRUE, 0);
+			  w0, TRUE, TRUE, 0);*/
 
 	w0 = tool_widget_get_common ("reading");
 	gtk_widget_show_all (w0);
