@@ -27,6 +27,8 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
+#define PROFILE_DIALOG "profile_dialog"
+
 typedef struct
 {
 	gchar *name;
@@ -55,7 +57,6 @@ typedef struct
 extern ProfileTable *profile_table;
 
 void create_profile_table (void);
-void populate_profile_table (void);
 
 
 void     profile_save    (gchar *name);

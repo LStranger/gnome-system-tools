@@ -90,7 +90,7 @@ generic_set_value (xmlNodePtr node, const gchar *name, const gchar *value)
 gboolean
 user_set_value_login (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
-	if (check_user_login (xd, node, value)) {
+	if (check_user_login (GTK_WINDOW (xd), node, value)) {
 		generic_set_value (node, "login", value);
 		xst_dialog_modify (xd);
 		return TRUE;
@@ -102,7 +102,7 @@ user_set_value_login (XstDialog *xd, xmlNodePtr node, const gchar *value)
 gboolean
 user_set_value_home (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
-	if (check_user_home (xd, node, value)) {
+	if (check_user_home (GTK_WINDOW (xd), node, value)) {
 		generic_set_value (node, "home", value);
 		xst_dialog_modify (xd);
 		return TRUE;
@@ -114,7 +114,7 @@ user_set_value_home (XstDialog *xd, xmlNodePtr node, const gchar *value)
 gboolean
 user_set_value_shell (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
-	if (check_user_shell (xd, node, value)) {
+	if (check_user_shell (GTK_WINDOW (xd), node, value)) {
 		generic_set_value (node, "shell", value);
 		xst_dialog_modify (xd);
 		return TRUE;
@@ -126,7 +126,7 @@ user_set_value_shell (XstDialog *xd, xmlNodePtr node, const gchar *value)
 gboolean
 user_set_value_comment (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
-	if (check_user_comment (xd, node, value)) {
+	if (check_user_comment (GTK_WINDOW (xd), node, value)) {
 		generic_set_value (node, "comment", value);
 		xst_dialog_modify (xd);
 		return TRUE;
@@ -138,7 +138,7 @@ user_set_value_comment (XstDialog *xd, xmlNodePtr node, const gchar *value)
 gboolean
 user_set_value_uid (XstDialog *xd, xmlNodePtr node, gchar const *value)
 {
-	if (check_user_uid (xd, node, value)) {
+	if (check_user_uid (GTK_WINDOW (xd), node, value)) {
 		generic_set_value (node, "uid", value);
 		xst_dialog_modify (xd);
 		return TRUE;
@@ -154,7 +154,7 @@ user_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value)
 
 	group_node = get_corresp_field (node);
 	
-	if (check_group_gid (xd, group_node, value)) {
+	if (check_group_gid (GTK_WINDOW (xd), group_node, value)) {
 		generic_set_value (node, "gid", value);
 		xst_dialog_modify (xd);
 		return TRUE;
@@ -172,7 +172,7 @@ user_set_value_group (XstDialog *xd, xmlNodePtr node, const gchar *value)
 gboolean
 group_set_value_name (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
-	if (check_group_name (xd, node, value)) {
+	if (check_group_name (GTK_WINDOW (xd), node, value)) {
 		generic_set_value (node, "gid", value);
 		xst_dialog_modify (xd);
 		return TRUE;
@@ -184,7 +184,7 @@ group_set_value_name (XstDialog *xd, xmlNodePtr node, const gchar *value)
 gboolean
 group_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value)
 {
-	if (check_group_gid (xd, node, value)) {
+	if (check_group_gid (GTK_WINDOW (xd), node, value)) {
 		generic_set_value (node, "gid", value);
 		xst_dialog_modify (xd);
 		return TRUE;

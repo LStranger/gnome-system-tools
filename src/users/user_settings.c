@@ -280,7 +280,7 @@ user_settings_pwd_fill (UserSettings *us)
 	Profile *pf;
 	
 	if (!us->new)
-	{
+	{		
 		buf = xst_xml_get_child_content (us->node, "passwd_min_life");
 		gtk_spin_button_set_value (us->pwd->min, g_strtod (buf, NULL));
 		g_free (buf);
@@ -297,7 +297,8 @@ user_settings_pwd_fill (UserSettings *us)
 	else
 	{
 		pf = profile_table_get_profile (NULL);
-		
+
+		gtk_toggle_button_set_active (us->pwd->quality, pf->pwd_random);
 		gtk_spin_button_set_value (us->pwd->min,  pf->pwd_mindays);
 		gtk_spin_button_set_value (us->pwd->max,  pf->pwd_maxdays);
 		gtk_spin_button_set_value (us->pwd->days, pf->pwd_warndays);

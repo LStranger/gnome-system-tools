@@ -28,7 +28,6 @@
 #include <ctype.h>
 #include <gnome.h>
 
-#include "global.h"
 #include "callbacks.h"
 #include "user_group.h"
 #include "transfer.h"
@@ -74,17 +73,6 @@ on_settings_clicked (GtkButton *button, gpointer user_data)
 /* Users tab */
 
 void
-on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
-{
-	xmlNodePtr node;
-
-	g_return_if_fail (xst_tool_get_access (tool));
-	g_return_if_fail (node = get_selected_node ());
-
-	user_passwd_dialog_prepare (node);
-}
-
-void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
 	g_return_if_fail (xst_tool_get_access (tool));
@@ -103,14 +91,22 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (xst_tool_get_access (tool));
 	g_return_if_fail (node = get_selected_node ());
 
-	if (check_login_delete (node))
-	{
+	if (check_login_delete (node)) {
 		xst_dialog_modify (tool->main_dialog);
 		if (delete_selected_node (TABLE_USER))
 			xst_xml_element_destroy (node);
 
 		actions_set_sensitive (TABLE_USER, FALSE);
 	}
+}
+
+void
+on_user_profiles_clicked (GtkButton *button, gpointer user_data)
+{
+	XstDialog *xd;
+
+	xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
+	gtk_widget_show (GTK_WIDGET (xd));
 }
 
 /* Groups tab */
@@ -222,10 +218,12 @@ on_pro_name_changed (GtkMenuItem *menu_item, gpointer user_data)
 void
 on_pro_del_clicked (GtkButton *button, gpointer user_data)
 {
+	XstDialog *xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
+	
 	g_return_if_fail (xst_tool_get_access (tool));
 	
 	if (profile_table_del_profile (NULL))
-		xst_dialog_modify (tool->main_dialog);
+		xst_dialog_modify (xd);
 }
 
 enum
@@ -241,6 +239,7 @@ pro_ask_name (gint action)
 	gchar *buf;
 	GtkWidget *w0;
 	Profile *new, *pf = NULL;
+	XstDialog *xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
 	
 	switch (action)
 	{
@@ -248,7 +247,7 @@ pro_ask_name (gint action)
 		break;
 		
 	case PROFILE_COPY:
-		w0 = xst_dialog_get_widget (tool->main_dialog, "profile_new_menu");
+		w0 = xst_dialog_get_widget (xd, "profile_new_menu");
 		buf = xst_ui_option_menu_get_selected_string (GTK_OPTION_MENU (w0));
 		pf = profile_table_get_profile (buf);
 		g_free (buf);
@@ -260,36 +259,52 @@ pro_ask_name (gint action)
 		return;
 	}
 
-	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								    "profile_new_name")));
+	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (xd, "profile_new_name")));
 	new = profile_add (pf, buf, TRUE);
 	if (new) {
-		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-									    "profile_new_comment")));
+		buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (xd, "profile_new_comment")));
 		new->comment = g_strdup (buf);
-		xst_dialog_modify (tool->main_dialog);
+		xst_dialog_modify (xd);
 	}
-		
+	
 }
 
 static void
 pro_prepare (gint action)
 {
 	GtkWidget *w;
+	XstDialog *xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
 
-	w = xst_dialog_get_widget (tool->main_dialog, "profile_new_name");
+	w = xst_dialog_get_widget (xd, "profile_new_name");
 	gtk_entry_set_text (GTK_ENTRY (w), "");
 	gtk_widget_grab_focus (w);
 
-	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
-								    "profile_new_comment")), "");
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (xd, "profile_new_comment")), "");
 
-	w = xst_dialog_get_widget (tool->main_dialog, "profile_new_copy");
+	w = xst_dialog_get_widget (xd, "profile_new_copy");
 	
 	if (action == PROFILE_NEW)
 		gtk_widget_hide (w);
-	else
+	else {
+		GtkWidget *menu;
+		GList *list;
+		Profile *pf;
+
+		pf = profile_table_get_profile (NULL);
+		menu = xst_dialog_get_widget (xd, "pro_system_menu");
+		list = xst_ui_option_menu_get_string_list (GTK_OPTION_MENU (menu));
+
+		menu = xst_dialog_get_widget (xd, "profile_new_menu");
+		xst_ui_option_menu_clear (GTK_OPTION_MENU (menu));
+		
+		while (list) {
+			xst_ui_option_menu_add_string (GTK_OPTION_MENU (menu), list->data);
+			list = list->next;
+		}
+		xst_ui_option_menu_set_selected_string (GTK_OPTION_MENU (menu), pf->name);
+		
 		gtk_widget_show (w);
+	}
 }
 
 void
@@ -297,10 +312,11 @@ on_pro_new_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *d;
 	gint res;
+	XstDialog *xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	d = xst_dialog_get_widget (tool->main_dialog, "profile_new_dialog");
+	d = xst_dialog_get_widget (xd, "profile_new_dialog");
 	pro_prepare (PROFILE_NEW);
 	res = gnome_dialog_run (GNOME_DIALOG (d));
 
@@ -315,10 +331,11 @@ on_pro_copy_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *d;
 	gint res;
-
+	XstDialog *xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
+	
 	g_return_if_fail (xst_tool_get_access (tool));
 	
-	d = xst_dialog_get_widget (tool->main_dialog, "profile_new_dialog");
+	d = xst_dialog_get_widget (xd, "profile_new_dialog");
 	pro_prepare (PROFILE_COPY);
 	res = gnome_dialog_run (GNOME_DIALOG (d));
 
@@ -329,28 +346,14 @@ on_pro_copy_clicked (GtkButton *button, gpointer user_data)
 }
 
 void
-on_pro_settings_clicked (GtkButton *button, gpointer user_data)
-{
-	gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "profile_editor_dialog"));
-}
-
-void
-pro_settings_button_clicked (GnomeDialog *dialog, gint button_number, gpointer user_data)
+on_pro_apply_clicked (XstDialog *xd, gpointer user_data)
 {
 	g_return_if_fail (xst_tool_get_access (tool));
 
-	switch (button_number)
-	{
-	case 0:
-		profile_save (NULL);
-		xst_dialog_modify (tool->main_dialog);
-		tables_update_content ();
-		break;
-	default:
-		break;
-	}
+	profile_save (NULL);
+	tables_update_content ();
 
-	gtk_widget_hide (GTK_WIDGET (dialog));
+	xst_dialog_modify (tool->main_dialog);
 }
 
 /* User settings callbacks */
@@ -498,6 +501,7 @@ on_user_settings_gall_select_row (GtkCList *clist, gint row, gint column, GdkEve
 static void
 passwd_change (gchar *string, gpointer user_data)
 {
+#ifdef OLD
 	GtkToggleButton *quality;
 	gchar *err;
 	xmlNodePtr node;
@@ -508,6 +512,8 @@ passwd_change (gchar *string, gpointer user_data)
 	node = user_data;
 
 	quality = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_quality"));
+
+	if (passwd_check (NULL, 
 	
 	err = passwd_set (node, string, gtk_toggle_button_get_active (quality));
 	switch ((int) err)
@@ -532,6 +538,7 @@ passwd_change (gchar *string, gpointer user_data)
 		break;
 	}
 	}
+#endif	
 }
 
 void
@@ -543,6 +550,17 @@ on_user_passwd_change_clicked (GtkButton *button, gpointer user_data)
 void
 user_password_change (xmlNodePtr user_node)
 {
+	gchar *pwd1, *pwd2;
+	gboolean quality;
+	
+	pwd1 = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "")));
+	pwd2 = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "")));
+	quality = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
+						(xst_dialog_get_widget (tool->main_dialog, "")));
+	
+	if (passwd_check (NULL, pwd1, pwd2, quality))
+		passwd_set (user_node, pwd1);
+/*	
 	GtkWidget *d;
 	GtkWidget *parent;
 	Profile *pf;
@@ -562,12 +580,14 @@ user_password_change (xmlNodePtr user_node)
 				     GTK_WINDOW (parent));
 
 	gnome_dialog_run (GNOME_DIALOG (d));
+*/
 }
 
 void
 on_user_passwd_random_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *win;
+	
+/*	GtkWidget *win;
 	GnomeDialog *dialog;
 	gchar *txt, *random_passwd;
 
@@ -582,6 +602,7 @@ on_user_passwd_random_clicked (GtkButton *button, gpointer user_data)
 	g_free (random_passwd);
 
 	xst_dialog_modify (tool->main_dialog);
+*/
 }
 
 /* Group settings callbacks */

@@ -26,6 +26,7 @@
 
 #include <gnome.h>
 #include <gnome-xml/tree.h>
+#include "global.h"
 
 void on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
 			      guint page_num, gpointer user_data);
@@ -33,9 +34,9 @@ void on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
 void on_showall_toggled (GtkToggleButton *toggle, gpointer user_data);
 void on_settings_clicked (GtkButton *button, gpointer user_data);
 
-void on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
 void on_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_user_delete_clicked (GtkButton *button, gpointer user_data);
+void on_user_profiles_clicked (GtkButton *button, gpointer user_data);
 
 void on_group_new_clicked (GtkButton *button, gpointer user_data);
 void on_group_delete_clicked (GtkButton *button, gpointer user_data);
@@ -48,8 +49,7 @@ void on_pro_name_changed (GtkMenuItem *menu_item, gpointer user_data);
 void on_pro_del_clicked (GtkButton *button, gpointer user_data);
 void on_pro_new_clicked (GtkButton *button, gpointer user_data);
 void on_pro_copy_clicked (GtkButton *button, gpointer user_data);
-void on_pro_settings_clicked (GtkButton *button, gpointer user_data);
-void pro_settings_button_clicked (GnomeDialog *dialog, gint button_number, gpointer user_data);
+void on_pro_apply_clicked (XstDialog *xd, gpointer user_data);
 
 
 void on_user_settings_dialog_show (GtkWidget *button, gpointer user_data);

@@ -170,12 +170,54 @@ et_cursor_change (ETable *table, gint row, gpointer user_data)
 	}
 }
 
+static void
+et_cursor_set (Profile *pf)
+{
+	ETable *et;
+	ETableMemory *model;
+	Profile *table_pf;
+	gint row;
+
+	et = e_table_scrolled_get_table (E_TABLE_SCROLLED (table));
+	model = E_TABLE_MEMORY (et->model);
+
+	row = 0;
+	while ((table_pf = e_table_memory_get_data (model, row))) {
+		if (table_pf == pf) {
+			gtk_signal_handler_block_by_func (GTK_OBJECT (et),
+							  GTK_SIGNAL_FUNC (et_cursor_change),
+							  NULL);
+			e_table_set_cursor_row (et, row);
+			gtk_signal_handler_unblock_by_func (GTK_OBJECT (et),
+							    GTK_SIGNAL_FUNC (et_cursor_change),
+							    NULL);
+			break;
+		}
+		row++;
+	}
+}
+
+static XstDialogSignal signals[] = {
+	{ "pro_del",                     "clicked",       on_pro_del_clicked },
+	{ "pro_new",                     "clicked",       on_pro_new_clicked },
+	{ "pro_copy",                    "clicked",       on_pro_copy_clicked },	
+/*	{ "profile_editor_dialog",       "clicked",       pro_settings_button_clicked }, */
+	{ NULL }
+};
+
 void
 create_profile_table (void)
 {
 	ETableModel *model;
 	GtkWidget *container;
+	XstDialog *d;
 
+	d = xst_dialog_new (tool, "pro_dialog", _("Profile Editor"));
+	gtk_signal_connect (GTK_OBJECT (d), "apply", GTK_SIGNAL_FUNC (on_pro_apply_clicked), NULL);
+	xst_dialog_connect_signals (d, signals);
+	
+	gtk_object_set_data (GTK_OBJECT (tool), PROFILE_DIALOG, d);
+	
 	model = e_table_memory_callbacks_new (col_count,
 					      value_at,
 					      set_value_at,
@@ -192,26 +234,10 @@ create_profile_table (void)
 			    "cursor_change",
 			    et_cursor_change,
 			    NULL);
-
-	container = xst_dialog_get_widget (tool->main_dialog, "profiles_holder");
+	
+	container = xst_dialog_get_widget (d, "profiles_holder");
 	gtk_container_add (GTK_CONTAINER (container), table);
 	gtk_widget_show (table);
-}
-
-void
-populate_profile_table (void)
-{
-	ETable *et;
-	ETableModel *model;
-
-	et = e_table_scrolled_get_table (E_TABLE_SCROLLED (table));
-	model = et->model;
-	
-	e_table_memory_freeze (E_TABLE_MEMORY (model));
-
-	g_hash_table_foreach (profile_table->hash, et_insert, NULL);
-
-	e_table_memory_thaw (E_TABLE_MEMORY (model));
 }
 
 /* End of ETable */
@@ -248,11 +274,8 @@ profile_tab_prefill (void)
 }
 
 static void
-profile_tab_init (void)
+profile_tab_init (XstDialog *xd)
 {
-	XstDialog *xd;
-
-	xd = tool->main_dialog;
 	pft = g_new (ProfileTab, 1);
 	
 	pft->system_menu = GTK_OPTION_MENU (xst_dialog_get_widget (xd, "pro_system_menu"));
@@ -275,7 +298,6 @@ profile_tab_init (void)
 
 	profile_tab_prefill ();
 
-	
 	gtk_signal_connect (GTK_OBJECT (gnome_file_entry_gtk_entry (pft->home_prefix)),
 			    "activate",
 			    GTK_SIGNAL_FUNC (on_home_activate),
@@ -283,11 +305,16 @@ profile_tab_init (void)
 }
 
 static void
-profile_fill (Profile *pf)
+profile_update_ui (Profile *pf)
 {
-	if (!pft)
-		profile_tab_init ();
+	GtkOptionMenu *om[] = { pft->system_menu, pft->files_menu, pft->security_menu, NULL };
+	gint i;
 
+	et_cursor_set (pf);
+	
+	for (i = 0; om[i]; i++)
+		xst_ui_option_menu_set_selected_string (om[i], pf->name);
+	
 	my_gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
 					pf->home_prefix);
 	my_gtk_entry_set_text (GTK_ENTRY (pft->shell->entry), pf->shell);
@@ -418,12 +445,19 @@ profile_destroy (Profile *pf)
 void
 profile_table_init (void)
 {
+	XstDialog *xd;
+	
 	if (!profile_table)
 	{
 		profile_table = g_new (ProfileTable, 1);
 
 		profile_table->selected = NULL;
 		profile_table->hash = g_hash_table_new (g_str_hash, g_str_equal);
+	}
+
+	if (!pft) {
+		xd = XST_DIALOG (gtk_object_get_data (GTK_OBJECT (tool), PROFILE_DIALOG));
+		profile_tab_init (xd);
 	}
 }
 
@@ -466,7 +500,6 @@ profile_get_default (void)
 	pf->pwd_random = FALSE;
 	pf->logindefs = TRUE;
 
-	profile_fill (pf);
 	profile_table_add_profile (pf, TRUE);
 }
 
@@ -633,29 +666,39 @@ void
 profile_table_add_profile (Profile *pf, gboolean select)
 {
 	GtkWidget *menu_item;
-	GtkOptionMenu *om[] = { pft->system_menu, pft->files_menu, pft->security_menu, NULL };
 	gint i;
-	
+	struct tmp {
+		GtkOptionMenu *om;
+		gboolean signal;
+	} option_menus[] = {
+		{ pft->system_menu,   TRUE },
+		{ pft->files_menu,    TRUE },
+		{ pft->security_menu, TRUE },
+		{ NULL }
+	};
+
+	/* Add profile to: */
+
+	/* ... Hash table */
 	g_hash_table_insert (profile_table->hash, pf->name, pf);
 
-	if (!pft)
-		profile_tab_init ();
-
+	/* ... ETable */
 	et_insert (NULL, pf, NULL);
 
+	/* ... GtkOptionMenus */
 	i = 0;
-	while (om[i]) {
-		menu_item = xst_ui_option_menu_add_string (om[i], pf->name);
-		gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
-				    GTK_SIGNAL_FUNC (on_pro_name_changed), pf->name);
+	while (option_menus[i].om) {
+		menu_item = xst_ui_option_menu_add_string (option_menus[i].om, pf->name);
+
+		if (option_menus[i].signal) {
+			gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+					    GTK_SIGNAL_FUNC (on_pro_name_changed), pf->name);
+		}
 		i++;
 	}
-	
+
 	if (select || g_hash_table_size (profile_table->hash) == 1)
-	{
-		profile_table->selected = pf->name;
-		profile_fill (pf);
-	}
+		profile_table_set_selected (pf->name);
 }
 
 gboolean
@@ -687,17 +730,16 @@ profile_table_del_profile (gchar *name)
 
 		else
 		{
-			g_hash_table_remove (profile_table->hash, buf);
-			profile_destroy (pf);
-
-			if (g_hash_table_size (profile_table->hash) == 0)
-				profile_table->selected = NULL;
-
 			xst_ui_option_menu_remove_string (pft->system_menu, buf);
 			xst_ui_option_menu_remove_string (pft->files_menu, buf);
 			xst_ui_option_menu_remove_string (pft->security_menu, buf);
-			
 			et_remove (pf);
+			
+			g_hash_table_remove (profile_table->hash, buf);
+			profile_table->selected = NULL;
+			profile_destroy (pf);
+			profile_table_set_selected (NULL);
+			
 			retval = TRUE;
 		}
 	}
@@ -707,17 +749,32 @@ profile_table_del_profile (gchar *name)
 	return retval;
 }
 
+static void
+get_profile (gpointer key, gpointer data, gpointer user_data)
+{
+	profile_table->selected = key;
+}
+
 Profile *
 profile_table_get_profile (const gchar *name)
 {
 	gchar *buf;
 	Profile *pf;
-	
+
 	if (name)
 		buf = g_strdup (name);
-	else
-		buf = g_strdup (profile_table->selected);
+	else {
+		if (!profile_table->selected)
+			g_hash_table_foreach (profile_table->hash, get_profile, NULL);
 
+		buf = g_strdup (profile_table->selected);
+	}
+
+	if (!buf) {
+		g_warning ("profile_table_get_profile: Can't get any profile.");
+		return NULL;
+	}
+	
 	pf = (Profile *)g_hash_table_lookup (profile_table->hash, buf);
 	g_free (buf);
 
@@ -727,18 +784,16 @@ profile_table_get_profile (const gchar *name)
 void
 profile_table_set_selected (const gchar *name)
 {
-	Profile *pf;
-	
-	if (!name)
-		return;
+	Profile *pf = profile_table_get_profile (name);
 
-	pf = (Profile *)g_hash_table_lookup (profile_table->hash, name);
-
-	if (!pf)
+	if (!pf) {
+		if (g_hash_table_size (profile_table->hash) == 0)
+			profile_table->selected = NULL;
 		return;
+	}
 	
 	profile_table->selected = pf->name;
-	profile_fill (pf);
+	profile_update_ui (pf);
 }
 
 /* Not much at the time :) */

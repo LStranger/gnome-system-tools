@@ -246,7 +246,7 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	/* Profiles */
 	profile_table_init ();
 	profile_table_from_xml (root);
-	
+
 	/* Popuplate tables */
 	populate_all_tables ();
 }

@@ -48,51 +48,8 @@
 
 static gchar *pam_passwd_files[] = { "/etc/pam.d/passwd", NULL };
 
-static gboolean passwd_uses_md5 (void);
-static gchar *passwd_rand_str (gchar *str, gint len);
-
-extern gchar *
-passwd_get_random (void)
-{
-	gchar *random_passwd;
-	
-	random_passwd = g_new0 (gchar, RANDOM_PASSWD_SIZE + 1);
-#ifdef HAVE_LIBCRACK
-	while (FascistCheck (random_passwd, CRACK_DICT_PATH))
-#endif
-		passwd_rand_str (random_passwd, RANDOM_PASSWD_SIZE);
-
-	return random_passwd;
-}
-
-extern gchar *
-passwd_set (xmlNodePtr node, gchar *new_passwd, gboolean check_quality)
-{
-	gchar salt[9];
-#ifdef HAVE_LIBCRACK
-	gchar *check_err;
-#endif
-	gchar *password;
-
-	g_return_val_if_fail (node != NULL, (gchar *) -1);
-	
-#ifdef HAVE_LIBCRACK
-	if (check_quality &&
-			(check_err = FascistCheck (new_passwd, CRACK_DICT_PATH)))
-		return check_err;
-#endif
-
-	if (passwd_uses_md5 ()) 
-		password = g_strdup (crypt_md5 (new_passwd, passwd_rand_str (salt, 8)));
-	else
-		password = g_strdup (crypt (new_passwd, passwd_rand_str (salt, 2)));
-
-	xst_xml_set_child_content (node, "password", password);
-	return (gchar *) 0;
-}
-
 static gboolean
-passwd_uses_md5 (void)
+uses_md5 (void)
 {
 	gint i;
 	gint fd = -1;
@@ -202,7 +159,7 @@ passwd_uses_md5 (void)
 
 /* str must be a string of len + 1 allocated gchars */
 static gchar *
-passwd_rand_str (gchar *str, gint len)
+rand_str (gchar *str, gint len)
 {
  	gchar alphanum[] = "0ab1cd2ef3gh4ij5kl6mn7op8qr9st0uvwxyz0AB1CD2EF3GH4IJ5KL6MN7OP8QR9ST0UVWXYZ";
 	gint i, alnum_len;
@@ -214,4 +171,68 @@ passwd_rand_str (gchar *str, gint len)
 		str[i] = alphanum [(gint) ((((float) alnum_len) * rand () / (RAND_MAX + 1.0)))];
 	
 	return str;
+}
+
+static gchar *
+get_random (void)
+{
+	gchar *random_passwd;
+	
+	random_passwd = g_new0 (gchar, RANDOM_PASSWD_SIZE + 1);
+#ifdef HAVE_LIBCRACK
+	while (FascistCheck (random_passwd, CRACK_DICT_PATH))
+#endif
+		rand_str (random_passwd, RANDOM_PASSWD_SIZE);
+
+	return random_passwd;
+}
+
+gboolean
+passwd_check (GtkWindow *xd, gchar *pwd1, gchar *pwd2, gboolean check_quality)
+{
+#ifdef HAVE_LIBCRACK
+	gchar *check_err;
+#endif
+	g_return_val_if_fail (pwd1 != NULL, FALSE);
+	g_return_val_if_fail (pwd2 != NULL, FALSE);
+
+	if (strcmp (pwd1, pwd2))
+		return FALSE;
+	
+#ifdef HAVE_LIBCRACK
+	if (check_quality && (check_err = FascistCheck (pwd1, CRACK_DICT_PATH))) {
+		GtkWidget *d;
+		gchar *msg;
+		
+		msg = g_strdup_printf (_("Bad password: %s.\nPlease try with a new password."), check_err);
+		d = gnome_error_dialog_parented (msg, xd);
+		gnome_dialog_run (GNOME_DIALOG (d));
+		g_free (msg);
+		return FALSE;
+	}
+#endif
+	return TRUE;
+}	
+
+gchar *
+passwd_set (xmlNodePtr node, const gchar *pwd)
+{
+	gchar salt[9];
+	gchar *password, *buf;
+
+	g_return_val_if_fail (node != NULL, NULL);
+
+	if (!pwd)
+		password = get_random ();
+	else
+		password = (gchar *)pwd;
+
+	if (uses_md5 ()) 
+		buf = g_strdup (crypt_md5 (password, rand_str (salt, 8)));
+	else
+		buf = g_strdup (crypt (password, rand_str (salt, 2)));
+
+	xst_xml_set_child_content (node, "password", buf);
+
+	return buf;
 }

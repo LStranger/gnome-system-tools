@@ -64,6 +64,7 @@ static XstDialogSignal signals[] = {
 	{ "group_settings_all",          "unselect_row",  on_group_settings_all_select_row },
 	{ "user_new",                    "clicked",       on_user_new_clicked },
 	{ "user_delete",                 "clicked",       on_user_delete_clicked },
+	{ "user_profiles",               "clicked",       on_user_profiles_clicked },
 	{ "group_new",                   "clicked",       on_group_new_clicked },
 	{ "group_delete",                "clicked",       on_group_delete_clicked },
 	{ "network_user_new",            "clicked",       on_network_user_new_clicked },
@@ -76,11 +77,6 @@ static XstDialogSignal signals[] = {
 	{ "user_settings_gall",          "unselect_row",  on_user_settings_gall_select_row },
 	{ "user_settings_add",           "clicked",       on_user_settings_add_clicked },
 	{ "user_settings_remove",        "clicked",       on_user_settings_remove_clicked },
-	{ "pro_del",                     "clicked",       on_pro_del_clicked },
-	{ "pro_new",                     "clicked",       on_pro_new_clicked },
-	{ "pro_copy",                    "clicked",       on_pro_copy_clicked },
-	{ "user_profiles",               "clicked",       on_pro_settings_clicked },
-	{ "profile_editor_dialog",       "clicked",       pro_settings_button_clicked },
 	{ "user_passwd_change",          "clicked",       on_user_passwd_change_clicked },
 	{ "user_passwd_random",          "clicked",       on_user_passwd_random_clicked },
 	{ NULL }};
@@ -140,14 +136,6 @@ connect_signals (void)
 					GINT_TO_POINTER (TABLE_NET_GROUP));
 
 	xst_dialog_connect_signals (tool->main_dialog, signals);
-
-#ifdef OLD
-	gtk_signal_connect (GTK_OBJECT (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog,
-									  "pro_name"))->entry),
-			    "changed",
-			    GTK_SIGNAL_FUNC (on_pro_name_changed),
-			    NULL);
-#endif	
 }
 
 static void

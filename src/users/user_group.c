@@ -295,9 +295,8 @@ is_valid_id (const gchar *str)
 	return TRUE;
 }
 
-
 gboolean
-check_user_root (XstDialog *xd, xmlNodePtr node, const gchar *field, const gchar *value)
+check_user_root (GtkWindow *xd, xmlNodePtr node, const gchar *field, const gchar *value)
 {
 	gint i;
 	gboolean retval = TRUE;
@@ -328,7 +327,7 @@ check_user_root (XstDialog *xd, xmlNodePtr node, const gchar *field, const gchar
 }
 
 gboolean
-check_user_login (XstDialog *xd, xmlNodePtr node, const gchar *login)
+check_user_login (GtkWindow *xd, xmlNodePtr node, const gchar *login)
 {
 	gchar *buf = NULL;
 
@@ -359,7 +358,7 @@ check_user_login (XstDialog *xd, xmlNodePtr node, const gchar *login)
 	{
 		GnomeDialog *dialog;
 
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
 		gnome_dialog_run (dialog);
 		g_free (buf);
 		gtk_widget_grab_focus (GTK_WIDGET (xd));
@@ -372,7 +371,7 @@ check_user_login (XstDialog *xd, xmlNodePtr node, const gchar *login)
 }
 
 gboolean
-check_user_uid (XstDialog *xd, xmlNodePtr node, const gchar *val)
+check_user_uid (GtkWindow *xd, xmlNodePtr node, const gchar *val)
 {
 	gchar *buf = NULL;
 	gboolean retval = TRUE;
@@ -386,7 +385,7 @@ check_user_uid (XstDialog *xd, xmlNodePtr node, const gchar *val)
 		buf = g_strdup (_("Such user id already exsists."));
 
 	if (buf) {
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
 		gnome_dialog_run (dialog);
 		g_free (buf);
 		gtk_widget_grab_focus (GTK_WIDGET (xd));
@@ -397,14 +396,14 @@ check_user_uid (XstDialog *xd, xmlNodePtr node, const gchar *val)
 }
 
 gboolean
-check_user_comment (XstDialog *xd, xmlNodePtr node, const gchar *val)
+check_user_comment (GtkWindow *xd, xmlNodePtr node, const gchar *val)
 {
 	/* What could be wrong with comment? */
 	return TRUE;
 }
 
 gboolean
-check_user_home (XstDialog *xd, xmlNodePtr node, const gchar *val)
+check_user_home (GtkWindow *xd, xmlNodePtr node, const gchar *val)
 {
 	gchar *buf = NULL;
 	
@@ -416,7 +415,7 @@ check_user_home (XstDialog *xd, xmlNodePtr node, const gchar *val)
 		buf = g_strdup (_("root user shouldn't be modified."));
 	if (buf) {
 		GnomeDialog *dialog;
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
 		gnome_dialog_run (dialog);
 		g_free (buf);
 		gtk_widget_grab_focus (GTK_WIDGET (xd));
@@ -427,7 +426,7 @@ check_user_home (XstDialog *xd, xmlNodePtr node, const gchar *val)
 }
 
 gboolean
-check_user_shell (XstDialog *xd, xmlNodePtr node, const gchar *val)
+check_user_shell (GtkWindow *xd, xmlNodePtr node, const gchar *val)
 {
 	GnomeDialog *dialog;
 	
@@ -435,8 +434,7 @@ check_user_shell (XstDialog *xd, xmlNodePtr node, const gchar *val)
 
 	if (strlen (val) > 0 && *val != '/') {
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented
-				       (_("Please give shell with full path."),
-					GTK_WINDOW (xd)));
+				       (_("Please give shell with full path."), xd));
 		gnome_dialog_run (dialog);
 		
 		return FALSE;
@@ -478,7 +476,7 @@ check_user_group (UserSettings *us)
 }
 
 gboolean
-check_group_name (XstDialog *xd, xmlNodePtr node, const gchar *name)
+check_group_name (GtkWindow *xd, xmlNodePtr node, const gchar *name)
 {
 	gchar *buf = NULL;
 
@@ -506,7 +504,7 @@ check_group_name (XstDialog *xd, xmlNodePtr node, const gchar *name)
 	{
 		GnomeDialog *dialog;
 
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
 		gnome_dialog_run (dialog);
 		g_free (buf);
 		gtk_widget_grab_focus (GTK_WIDGET (xd));
@@ -519,7 +517,7 @@ check_group_name (XstDialog *xd, xmlNodePtr node, const gchar *name)
 }
 
 gboolean
-check_group_gid (XstDialog *xd, xmlNodePtr group_node, const gchar *val)
+check_group_gid (GtkWindow *xd, xmlNodePtr group_node, const gchar *val)
 {
 	gboolean retval = TRUE;
 	GnomeDialog *dialog;
@@ -533,7 +531,7 @@ check_group_gid (XstDialog *xd, xmlNodePtr group_node, const gchar *val)
 		buf = g_strdup (_("Such group id already exsists."));
 	
 	if (buf) {
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, GTK_WINDOW (xd)));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (buf, xd));
 		gnome_dialog_run (dialog);
 		g_free (buf);
 		retval = FALSE;
@@ -825,11 +823,11 @@ user_update (UserSettings *us)
 
 	new_name = gtk_entry_get_text (us->basic->name);
 	
-	if (!check_user_login (XST_DIALOG (us->dialog), us->node, new_name))
+	if (!check_user_login (GTK_WINDOW (us->dialog), us->node, new_name))
 		return FALSE;
 
 	buf = gtk_entry_get_text (us->basic->comment);
-	if (!check_user_comment (XST_DIALOG (us->dialog), us->node, buf))
+	if (!check_user_comment (GTK_WINDOW (us->dialog), us->node, buf))
 		return FALSE;
 
 	group = check_user_group (us);
@@ -849,18 +847,18 @@ user_update (UserSettings *us)
 
 	i = gtk_spin_button_get_value_as_int (us->basic->uid);
 	buf = g_strdup_printf ("%d", i);
-	if (!check_user_uid (XST_DIALOG (us->dialog), us->node, buf)) {
+	if (!check_user_uid (GTK_WINDOW (us->dialog), us->node, buf)) {
 		g_free (buf);
 		return FALSE;
 	}
 	g_free (buf);
 
 	buf = gtk_entry_get_text (us->basic->home);
-	if (!check_user_home (XST_DIALOG (us->dialog), us->node, buf))
+	if (!check_user_home (GTK_WINDOW (us->dialog), us->node, buf))
 		return FALSE;
 
 	buf = gtk_entry_get_text (GTK_ENTRY (us->basic->shell->entry));
-	if (!check_user_shell (XST_DIALOG (us->dialog), us->node, buf))
+	if (!check_user_shell (GTK_WINDOW (us->dialog), us->node, buf))
 		return FALSE;
 	
 	if (us->new) {
@@ -964,7 +962,7 @@ group_update (ug_data *ud)
 
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 								    "group_settings_name")));
-	if (!check_group_name (XST_DIALOG (d), ud->node, buf))
+	if (!check_group_name (GTK_WINDOW (d), ud->node, buf))
 		ok = FALSE;
 
 	if (ok)

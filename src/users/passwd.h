@@ -28,7 +28,7 @@
 #include "user_group.h"
 #include "e-table.h"
 
-extern gchar *passwd_set (xmlNodePtr node, gchar *new_passwd, gboolean check_quality);
-extern gchar *passwd_get_random (void);
+gboolean  passwd_check      (GtkWindow *xd, gchar *pwd1, gchar *pwd2, gboolean check_quality);
+gchar    *passwd_set        (xmlNodePtr node, const gchar *pwd);
 
 #endif /* PASSWD_H */
