@@ -46,10 +46,14 @@ files sometimes have the keyword "export" in front of them. We need to handle th
 
 This file holds the following options (with example values set):
 
-DESIRED_TO=ps
-PAPERSIZE=letter
-PRINTER_TYPE=LOCAL
-ASCII_TO_PS=YES
+DESIRED_TO=ps       Dunno. I think this is always set to ps.
+
+PAPERSIZE=letter    The paper size identifier.
+
+PRINTER_TYPE=LOCAL  Dunno if this is used by anything other than the frontend.
+
+ASCII_TO_PS=YES     If we should convert ASCII files to PS before printing. Setting the PrintTool
+                    option "Fast text printing (non-PS printers only)" to YES sets this to NO.
 
 2.1.2  /var/spool/lpd/<printer>/postscript.cfg
 ----------------------------------------------
@@ -60,27 +64,40 @@ GSDEVICE=uniprint   Ghostscript device to use when converting from Postscript to
                     Examples are uniprint and cdj890 (HP DeskJet 890). Passed to Ghostscript as
                     -sDEVICE=<device>.
 
-RESOLUTION=NAxNA    Resolution to print at. This is usually Xdpi * Ydpi, but can also be NAxNA for
+RESOLUTION=NAxNA    Resolution to print at. This is usually <Xdpi>x<Ydpi>, but can also be NAxNA for
                     printers that don't allow this setting.
-COLOR=stcany
-PAPERSIZE=letter
-EXTRA_GS_OPTIONS=""
-REVERSE_ORDER=
-PS_SEND_EOF=NO
 
-# following is related to printing multiple pages per output page
-NUP=1
-RTLFTMAR=18
-TOPBOTMAR=18
+COLOR=stcany        Colour depth/print mode. Can be empty.
+
+PAPERSIZE=letter    Papersize when printing PS? Why is this duplicated here?
+
+EXTRA_GS_OPTIONS="" Extra options to pass to Ghostscript.
+
+REVERSE_ORDER=      This doesn't seem to have a corresponding option in PrintTool. I wonder if it
+                    does anything.
+
+PS_SEND_EOF=NO      Some printers need an EOF to eject the page when the job is finished. Setting
+                    this to YES accomplished this.
+
+NUP=1               Number of pages to print per output page. Uses 'mpage' to format the output.
+                    Use 8, 4, 2 or 1.
+
+RTLFTMAR=18         Left/right margins, in 1/72 of an inch units.
+
+TOPBOTMAR=18        Top/bottom margins, in 1/72 of an inch units.
 
 2.1.3  /var/spool/lpd/<printer>/textonly.cfg
 --------------------------------------------
 
 This file holds the following options (with example values set):
 
-TEXTONLYOPTIONS=
-CRLFTRANS=
-TEXT_SEND_EOF=NO
+TEXTONLYOPTIONS=    Dunno.
+
+CRLFTRANS=          Set to 1 if you want to "fix stair-stepping text", as the PrintTool puts it.
+
+TEXT_SEND_EOF=NO    Some printers need an EOF to eject the page when the job is finished. Setting
+                    this to YES accomplishes this. I think this option is linked directly to the
+                    PS_SEND_EOF option in PrintTool, i.e. they're always the same.
 
 2.2  Potato
 -----------
