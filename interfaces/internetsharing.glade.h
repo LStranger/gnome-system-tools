@@ -11,52 +11,53 @@ gchar *s = N_("   Configure...   ");
 gchar *s = N_("Disable");
 gchar *s = N_("Internet Sharing Druid");
 gchar *s = N_("Internet Sharing Tool");
-gchar *s = N_("Welcome to the Internet Sharing Tool \n"
+gchar *s = N_("Welcome to the Internet Sharing Configuration Druid\n"
               "\n"
               "This druid will help you to configure \n"
               "and share your internet connection.\n"
               "\n"
-              "At least, you must have installed a local\n"
-              "Interface network.");
+              "At least, you must have an installed and configured local\n"
+              "network interface, such as an ethernet or waveLAN card\n"
+              "and an internet connection, such as a modem.");
 gchar *s = N_("Create a new Local Interface Network");
-gchar *s = N_("You don't have installed a local Interface network.\n"
-              "Would you like to install it?\n"
+gchar *s = N_("A local network connection was not detected.\n"
+              "Would you like to configure one?\n"
               "");
-gchar *s = N_(" Yes, Launch network tool. (Recommended)");
-gchar *s = N_(" No, Installed  manually");
+gchar *s = N_(" Yes, launch network tool (recommended).");
+gchar *s = N_(" No, exit this druid and continue later.");
 gchar *s = N_("Activate Local Interface Network");
-gchar *s = N_("Local interface network has been detected, but it's not active.\n"
-              "Would you like to activate it?\n"
+gchar *s = N_("A local network interface has been detected, but it's not active.\n"
+              "Would you like to activate it now?\n"
               "");
-gchar *s = N_(" Yes. (Recommended)");
-gchar *s = N_(" No.");
+gchar *s = N_(" Yes (recommended).");
+gchar *s = N_(" No, I'll set it up later by myself.");
 gchar *s = N_("Firewall configuration");
-gchar *s = N_("You have a previous configuration of firewall.\n"
-              "Do you want to keep this configuration?\n"
+gchar *s = N_("You already have an internet sharing configuration.\n"
+              "Do you want to keep it, or use the druid's defaults?\n"
               "");
-gchar *s = N_(" Yes.");
-gchar *s = N_(" No, (Overwrite)");
+gchar *s = N_(" Keep the current configuration.");
+gchar *s = N_(" Overwrite with the default internet sharing configuration (recommended).");
 gchar *s = N_("Install DHCP Service");
-gchar *s = N_("Would you like to install DHCP service ?\n"
-              "\n"
+gchar *s = N_("Would you like to give the automatic network\n"
+              "address assignment service (DHCP)?\n"
               "");
-gchar *s = N_(" Yes.");
-gchar *s = N_(" No.");
+gchar *s = N_(" Yes, I'll set the local network computers to use automatic IP assignment  (recommended).");
+gchar *s = N_(" No, I'll manually configure the computers on the local network.");
 gchar *s = N_("DHCP Service Requirements");
-gchar *s = N_("You don't have installed the requirements to use \n"
-              " DHCP service?\n"
-              "");
-gchar *s = N_(" Don't use it.");
-gchar *s = N_(" Exit.");
+gchar *s = N_("You don't have a DHCP server installed, or\n"
+              "some other related component is missing.");
+gchar *s = N_(" Don't use it then.");
+gchar *s = N_(" Exit and come back later after installing.");
 gchar *s = N_("Configure DHCP Service");
 gchar *s = N_("A previous DHCP configuration has been detected. \n"
               "Do you want to keep this configuration?\n"
               "\r\r");
 gchar *s = N_(" Yes.");
-gchar *s = N_(" No, (Overwrite)");
+gchar *s = N_(" No, overwrite with new defaults (recommended)");
 gchar *s = N_("Finished");
-gchar *s = N_("Congratulation! you have installed \n"
-              "Internet Sharing Tool.");
+gchar *s = N_("Congratulations! Your computer will now be\n"
+              "configured to share its internet connection.\n"
+              "");
 gchar *s = N_("Start rage");
 gchar *s = N_("End range");
 gchar *s = N_("window1");

@@ -151,13 +151,14 @@
       <class>GnomeDruidPageStart</class>
       <name>ishare_admin_druid_page0</name>
       <title>Internet Sharing Tool</title>
-      <text>Welcome to the Internet Sharing Tool 
+      <text>Welcome to the Internet Sharing Configuration Druid
 
 This druid will help you to configure 
 and share your internet connection.
 
-At least, you must have installed a local
-Interface network.</text>
+At least, you must have an installed and configured local
+network interface, such as an ethernet or waveLAN card
+and an internet connection, such as a modem.</text>
       <title_color>255,255,255</title_color>
       <text_color>0,0,0</text_color>
       <background_color>0,0,1</background_color>
@@ -201,8 +202,8 @@ Interface network.</text>
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label1</name>
-	    <label>You don't have installed a local Interface network.
-Would you like to install it?
+	    <label>A local network connection was not detected.
+Would you like to configure one?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -221,7 +222,7 @@ Would you like to install it?
 	    <class>GtkRadioButton</class>
 	    <name>ishare_admin_druid_button1</name>
 	    <can_focus>True</can_focus>
-	    <label> Yes, Launch network tool. (Recommended)</label>
+	    <label> Yes, launch network tool (recommended).</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button</group>
@@ -236,7 +237,7 @@ Would you like to install it?
 	    <class>GtkRadioButton</class>
 	    <name>radiobutton2</name>
 	    <can_focus>True</can_focus>
-	    <label> No, Installed  manually</label>
+	    <label> No, exit this druid and continue later.</label>
 	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button</group>
@@ -285,8 +286,8 @@ Would you like to install it?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label2</name>
-	    <label>Local interface network has been detected, but it's not active.
-Would you like to activate it?
+	    <label>A local network interface has been detected, but it's not active.
+Would you like to activate it now?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -305,7 +306,7 @@ Would you like to activate it?
 	    <class>GtkRadioButton</class>
 	    <name>ishare_admin_druid_activatelocalnetwork</name>
 	    <can_focus>True</can_focus>
-	    <label> Yes. (Recommended)</label>
+	    <label> Yes (recommended).</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button1</group>
@@ -320,7 +321,7 @@ Would you like to activate it?
 	    <class>GtkRadioButton</class>
 	    <name>radiobutton4</name>
 	    <can_focus>True</can_focus>
-	    <label> No.</label>
+	    <label> No, I'll set it up later by myself.</label>
 	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button1</group>
@@ -369,8 +370,8 @@ Would you like to activate it?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label3</name>
-	    <label>You have a previous configuration of firewall.
-Do you want to keep this configuration?
+	    <label>You already have an internet sharing configuration.
+Do you want to keep it, or use the druid's defaults?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -389,7 +390,7 @@ Do you want to keep this configuration?
 	    <class>GtkRadioButton</class>
 	    <name>ishare_admin_druid_firewall_configure_button</name>
 	    <can_focus>True</can_focus>
-	    <label> Yes.</label>
+	    <label> Keep the current configuration.</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button2</group>
@@ -404,7 +405,7 @@ Do you want to keep this configuration?
 	    <class>GtkRadioButton</class>
 	    <name>radiobutton6</name>
 	    <can_focus>True</can_focus>
-	    <label> No, (Overwrite)</label>
+	    <label> Overwrite with the default internet sharing configuration (recommended).</label>
 	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button2</group>
@@ -453,8 +454,8 @@ Do you want to keep this configuration?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label4</name>
-	    <label>Would you like to install DHCP service ?
-
+	    <label>Would you like to give the automatic network
+address assignment service (DHCP)?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -473,7 +474,7 @@ Do you want to keep this configuration?
 	    <class>GtkRadioButton</class>
 	    <name>ishare_admin_druid_install_dhcp_button</name>
 	    <can_focus>True</can_focus>
-	    <label> Yes.</label>
+	    <label> Yes, I'll set the local network computers to use automatic IP assignment  (recommended).</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button3</group>
@@ -488,7 +489,7 @@ Do you want to keep this configuration?
 	    <class>GtkRadioButton</class>
 	    <name>radiobutton8</name>
 	    <can_focus>True</can_focus>
-	    <label> No.</label>
+	    <label> No, I'll manually configure the computers on the local network.</label>
 	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button3</group>
@@ -537,9 +538,8 @@ Do you want to keep this configuration?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label6</name>
-	    <label>You don't have installed the requirements to use 
- DHCP service?
-</label>
+	    <label>You don't have a DHCP server installed, or
+some other related component is missing.</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0.5</xalign>
@@ -557,7 +557,7 @@ Do you want to keep this configuration?
 	    <class>GtkRadioButton</class>
 	    <name>ishare_admin_druid_dhcprequirement</name>
 	    <can_focus>True</can_focus>
-	    <label> Don't use it.</label>
+	    <label> Don't use it then.</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button4</group>
@@ -572,7 +572,7 @@ Do you want to keep this configuration?
 	    <class>GtkRadioButton</class>
 	    <name>ishare_admin_druid_exit_button</name>
 	    <can_focus>True</can_focus>
-	    <label> Exit.</label>
+	    <label> Exit and come back later after installing.</label>
 	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button4</group>
@@ -656,7 +656,7 @@ Do you want to keep this configuration?
 	    <class>GtkRadioButton</class>
 	    <name>radiobutton10</name>
 	    <can_focus>True</can_focus>
-	    <label> No, (Overwrite)</label>
+	    <label> No, overwrite with new defaults (recommended)</label>
 	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button5</group>
@@ -674,8 +674,9 @@ Do you want to keep this configuration?
       <class>GnomeDruidPageFinish</class>
       <name>ishare_admin_druid_lastpage</name>
       <title>Finished</title>
-      <text>Congratulation! you have installed 
-Internet Sharing Tool.</text>
+      <text>Congratulations! Your computer will now be
+configured to share its internet connection.
+</text>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
       <textbox_color>255,255,255</textbox_color>
