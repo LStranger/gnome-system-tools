@@ -398,6 +398,16 @@
       </widget>
 
       <widget>
+	<class>GtkHSeparator</class>
+	<name>hseparator12</name>
+	<child>
+	  <padding>8</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
 	<class>GtkLabel</class>
 	<name>general_help</name>
 	<height>140</height>
@@ -479,7 +489,7 @@
 
       <widget>
 	<class>GtkScrolledWindow</class>
-	<name>scrolledwindow10</name>
+	<name>connection_list_sw</name>
 	<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
 	<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 	<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
@@ -1422,6 +1432,7 @@
   <class>GnomeDialog</class>
   <name>connection_type_dialog</name>
   <visible>False</visible>
+  <title>New Connection Type</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>True</modal>
@@ -1538,18 +1549,20 @@
       </widget>
 
       <widget>
-	<class>GtkVBox</class>
-	<name>vbox17</name>
-	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
+	<class>GtkAlignment</class>
+	<name>alignment3</name>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xscale>0</xscale>
+	<yscale>1</yscale>
 	<child>
-	  <left_attach>1</left_attach>
+	  <left_attach>0</left_attach>
 	  <right_attach>2</right_attach>
 	  <top_attach>1</top_attach>
 	  <bottom_attach>2</bottom_attach>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
-	  <xexpand>False</xexpand>
+	  <xexpand>True</xexpand>
 	  <yexpand>True</yexpand>
 	  <xshrink>False</xshrink>
 	  <yshrink>False</yshrink>
@@ -1558,48 +1571,70 @@
 	</child>
 
 	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>connection_eth</name>
-	  <can_focus>True</can_focus>
-	  <label>Ethernet</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>connection_group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
+	  <class>GtkVBox</class>
+	  <name>vbox17</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
 
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>connection_wvlan</name>
-	  <can_focus>True</can_focus>
-	  <label>Wavelan</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>connection_group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
+	  <widget>
+	    <class>GtkRadioButton</class>
+	    <name>connection_type_ppp</name>
+	    <can_focus>True</can_focus>
+	    <label>Modem (PPP)</label>
+	    <active>True</active>
+	    <draw_indicator>True</draw_indicator>
+	    <group>connection_group</group>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
 
-	<widget>
-	  <class>GtkRadioButton</class>
-	  <name>connection_ppp</name>
-	  <can_focus>True</can_focus>
-	  <label>Modem (PPP)</label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
-	  <group>connection_group</group>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
+	  <widget>
+	    <class>GtkRadioButton</class>
+	    <name>connection_type_eth</name>
+	    <can_focus>True</can_focus>
+	    <label>Ethernet</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <group>connection_group</group>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkRadioButton</class>
+	    <name>connection_type_wvlan</name>
+	    <can_focus>True</can_focus>
+	    <label>Wavelan</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <group>connection_group</group>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkRadioButton</class>
+	    <name>connection_type_plip</name>
+	    <can_focus>True</can_focus>
+	    <label>Paralel Line</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <group>connection_group</group>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
 	</widget>
       </widget>
     </widget>
@@ -1620,11 +1655,12 @@
     <handler>on_connection_config_dialog_destroy</handler>
     <last_modification_time>Wed, 21 Feb 2001 07:16:37 GMT</last_modification_time>
   </signal>
+  <title>Connection Settings</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
   <allow_shrink>False</allow_shrink>
-  <allow_grow>False</allow_grow>
+  <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
   <auto_close>False</auto_close>
   <hide_on_close>False</hide_on_close>
@@ -1735,7 +1771,7 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label102</name>
-	    <label>Unspecific data, such as activation management. The comment will help you identify the interface in the future.</label>
+	    <label>Use the comment to identify the interface in the future. Activation management lets you set who and when will activate connections.</label>
 	    <justify>GTK_JUSTIFY_FILL</justify>
 	    <wrap>True</wrap>
 	    <xalign>0</xalign>
@@ -1744,8 +1780,8 @@
 	    <ypad>0</ypad>
 	    <child>
 	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
+	      <expand>False</expand>
+	      <fill>False</fill>
 	    </child>
 	  </widget>
 	</widget>
@@ -1884,7 +1920,7 @@
 	<widget>
 	  <class>GtkFrame</class>
 	  <name>status_frame</name>
-	  <label>Status</label>
+	  <label>Activation</label>
 	  <label_xalign>0</label_xalign>
 	  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	  <child>
@@ -1904,34 +1940,15 @@
 	    <column_spacing>4</column_spacing>
 
 	    <widget>
-	      <class>GnomePixmap</class>
-	      <name>status_icon</name>
-	      <child>
-		<left_attach>0</left_attach>
-		<right_attach>1</right_attach>
-		<top_attach>0</top_attach>
-		<bottom_attach>1</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>True</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>True</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
 	      <class>GtkCheckButton</class>
-	      <name>status_button</name>
+	      <name>status_enabled</name>
 	      <can_focus>True</can_focus>
 	      <signal>
 		<name>toggled</name>
-		<handler>on_status_button_toggled</handler>
-		<last_modification_time>Fri, 19 Jan 2001 01:17:10 GMT</last_modification_time>
+		<handler>on_status_enabled_toggled</handler>
+		<last_modification_time>Thu, 22 Feb 2001 06:30:14 GMT</last_modification_time>
 	      </signal>
-	      <label>This device is active</label>
+	      <label>Connection active</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -1959,7 +1976,7 @@
 		<handler>on_connection_modified</handler>
 		<last_modification_time>Thu, 11 Jan 2001 20:14:23 GMT</last_modification_time>
 	      </signal>
-	      <label>Activate this connection when the computer starts</label>
+	      <label>Activate when the computer starts</label>
 	      <active>True</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
@@ -2000,7 +2017,63 @@
 		<yfill>False</yfill>
 	      </child>
 	    </widget>
+
+	    <widget>
+	      <class>GtkAlignment</class>
+	      <name>alignment4</name>
+	      <xalign>0.5</xalign>
+	      <yalign>7.45058e-09</yalign>
+	      <xscale>1</xscale>
+	      <yscale>0</yscale>
+	      <child>
+		<left_attach>0</left_attach>
+		<right_attach>1</right_attach>
+		<top_attach>0</top_attach>
+		<bottom_attach>3</bottom_attach>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<xexpand>False</xexpand>
+		<yexpand>False</yexpand>
+		<xshrink>False</xshrink>
+		<yshrink>False</yshrink>
+		<xfill>False</xfill>
+		<yfill>True</yfill>
+	      </child>
+
+	      <widget>
+		<class>GnomePixmap</class>
+		<name>status_icon</name>
+		<filename>gnome-light-on.png</filename>
+	      </widget>
+	    </widget>
 	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkHSeparator</class>
+	  <name>hseparator11</name>
+	  <child>
+	    <padding>8</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>general_help</name>
+	  <label></label>
+	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
 	</widget>
       </widget>
 
@@ -2019,7 +2092,7 @@
 
       <widget>
 	<class>GtkVBox</class>
-	<name>vbox11</name>
+	<name>ip_vbox</name>
 	<border_width>8</border_width>
 	<homogeneous>False</homogeneous>
 	<spacing>4</spacing>
@@ -2104,7 +2177,7 @@ BOOTP
 	    <initial_choice>1</initial_choice>
 	    <child>
 	      <padding>0</padding>
-	      <expand>True</expand>
+	      <expand>False</expand>
 	      <fill>True</fill>
 	    </child>
 	  </widget>
@@ -2119,7 +2192,7 @@ BOOTP
 	    <handler>on_connection_modified</handler>
 	    <last_modification_time>Thu, 11 Jan 2001 21:29:54 GMT</last_modification_time>
 	  </signal>
-	  <label>Update DNS settings when this connection becomes active</label>
+	  <label>Update DNS when this connection becomes active</label>
 	  <active>True</active>
 	  <draw_indicator>True</draw_indicator>
 	  <child>
@@ -2313,7 +2386,7 @@ BOOTP
 	  <class>GtkHSeparator</class>
 	  <name>hseparator6</name>
 	  <child>
-	    <padding>0</padding>
+	    <padding>8</padding>
 	    <expand>False</expand>
 	    <fill>False</fill>
 	  </child>
@@ -2622,6 +2695,16 @@ BOOTP
 	</widget>
 
 	<widget>
+	  <class>GtkHSeparator</class>
+	  <name>hseparator10</name>
+	  <child>
+	    <padding>8</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
 	  <class>GtkLabel</class>
 	  <name>wvlan_help</name>
 	  <height>110</height>
@@ -2707,7 +2790,7 @@ BOOTP
 	  <rows>4</rows>
 	  <columns>2</columns>
 	  <homogeneous>False</homogeneous>
-	  <row_spacing>4</row_spacing>
+	  <row_spacing>8</row_spacing>
 	  <column_spacing>4</column_spacing>
 	  <child>
 	    <padding>0</padding>
@@ -2742,60 +2825,8 @@ BOOTP
 	  </widget>
 
 	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label112</name>
-	    <label>User name:</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>2</top_attach>
-	      <bottom_attach>3</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>False</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>False</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label113</name>
-	    <label>Password:</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <left_attach>0</left_attach>
-	      <right_attach>1</right_attach>
-	      <top_attach>3</top_attach>
-	      <bottom_attach>4</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>False</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>False</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
 	    <class>GtkEntry</class>
-	    <name>ppp_phone</name>
+	    <name>ppp_phone_number</name>
 	    <can_focus>True</can_focus>
 	    <signal>
 	      <name>changed</name>
@@ -2823,8 +2854,34 @@ BOOTP
 	  </widget>
 
 	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label112</name>
+	    <label>User name:</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
 	    <class>GtkEntry</class>
-	    <name>ppp_username</name>
+	    <name>ppp_login</name>
 	    <can_focus>True</can_focus>
 	    <signal>
 	      <name>changed</name>
@@ -2838,8 +2895,8 @@ BOOTP
 	    <child>
 	      <left_attach>1</left_attach>
 	      <right_attach>2</right_attach>
-	      <top_attach>2</top_attach>
-	      <bottom_attach>3</bottom_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>True</xexpand>
@@ -2867,8 +2924,8 @@ BOOTP
 	    <child>
 	      <left_attach>1</left_attach>
 	      <right_attach>2</right_attach>
-	      <top_attach>3</top_attach>
-	      <bottom_attach>4</bottom_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>True</xexpand>
@@ -2882,8 +2939,8 @@ BOOTP
 
 	  <widget>
 	    <class>GtkLabel</class>
-	    <name>label114</name>
-	    <label>Modem port:</label>
+	    <name>label113</name>
+	    <label>Password:</label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
 	    <xalign>0</xalign>
@@ -2893,8 +2950,8 @@ BOOTP
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>False</xexpand>
@@ -2907,38 +2964,58 @@ BOOTP
 	  </widget>
 
 	  <widget>
-	    <class>GnomeEntry</class>
-	    <name>ppp_port</name>
-	    <max_saved>10</max_saved>
+	    <class>GtkFrame</class>
+	    <name>frame4</name>
+	    <label>Options</label>
+	    <label_xalign>0</label_xalign>
+	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
 	    <child>
-	      <left_attach>1</left_attach>
+	      <left_attach>0</left_attach>
 	      <right_attach>2</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
+	      <top_attach>3</top_attach>
+	      <bottom_attach>4</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>False</yexpand>
+	      <xexpand>False</xexpand>
+	      <yexpand>True</yexpand>
 	      <xshrink>False</xshrink>
 	      <yshrink>False</yshrink>
 	      <xfill>True</xfill>
-	      <yfill>False</yfill>
+	      <yfill>True</yfill>
 	    </child>
 
 	    <widget>
-	      <class>GtkEntry</class>
-	      <child_name>GnomeEntry:entry</child_name>
-	      <name>ppp_port_entry</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>changed</name>
-		<handler>on_connection_modified</handler>
-		<last_modification_time>Thu, 11 Jan 2001 20:56:53 GMT</last_modification_time>
-	      </signal>
-	      <editable>True</editable>
-	      <text_visible>True</text_visible>
-	      <text_max_length>0</text_max_length>
-	      <text></text>
+	      <class>GtkTable</class>
+	      <name>table12</name>
+	      <border_width>4</border_width>
+	      <rows>1</rows>
+	      <columns>2</columns>
+	      <homogeneous>False</homogeneous>
+	      <row_spacing>0</row_spacing>
+	      <column_spacing>0</column_spacing>
+
+	      <widget>
+		<class>GtkCheckButton</class>
+		<name>ppp_persist</name>
+		<can_focus>True</can_focus>
+		<label>Restart if connection cuts or fails to start</label>
+		<active>False</active>
+		<draw_indicator>True</draw_indicator>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
 	    </widget>
 	  </widget>
 	</widget>
@@ -2947,7 +3024,7 @@ BOOTP
 	  <class>GtkHSeparator</class>
 	  <name>hseparator8</name>
 	  <child>
-	    <padding>0</padding>
+	    <padding>8</padding>
 	    <expand>False</expand>
 	    <fill>False</fill>
 	  </child>
@@ -2975,7 +3052,402 @@ BOOTP
 	<class>GtkLabel</class>
 	<child_name>Notebook:tab</child_name>
 	<name>label57</name>
-	<label>PPP</label>
+	<label>Account</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>False</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+      </widget>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>ppp_adv_vbox</name>
+	<border_width>8</border_width>
+	<homogeneous>False</homogeneous>
+	<spacing>4</spacing>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox20</name>
+	  <border_width>8</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>8</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GnomePixmap</class>
+	    <name>pixmap12</name>
+	    <filename>settings.png</filename>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label120</name>
+	    <label>Advanced PPP connection tunning.</label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.25</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkTable</class>
+	  <name>table10</name>
+	  <rows>5</rows>
+	  <columns>2</columns>
+	  <homogeneous>False</homogeneous>
+	  <row_spacing>4</row_spacing>
+	  <column_spacing>4</column_spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label129</name>
+	    <label>Modem port:</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GnomeEntry</class>
+	    <name>ppp_serial_port</name>
+	    <max_saved>10</max_saved>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GnomeEntry:entry</child_name>
+	      <name>entry9</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>changed</name>
+		<handler>on_connection_modified</handler>
+		<last_modification_time>Thu, 11 Jan 2001 20:56:53 GMT</last_modification_time>
+	      </signal>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkFrame</class>
+	    <name>frame3</name>
+	    <label>DNS Servers</label>
+	    <label_xalign>0</label_xalign>
+	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>3</top_attach>
+	      <bottom_attach>4</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>True</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>True</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkTable</class>
+	      <name>table11</name>
+	      <border_width>4</border_width>
+	      <rows>2</rows>
+	      <columns>2</columns>
+	      <homogeneous>False</homogeneous>
+	      <row_spacing>4</row_spacing>
+	      <column_spacing>4</column_spacing>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label130</name>
+		<label>Primary:</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label131</name>
+		<label>Secondary:</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>1</top_attach>
+		  <bottom_attach>2</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkEntry</class>
+		<name>ppp_dns1</name>
+		<can_focus>True</can_focus>
+		<editable>True</editable>
+		<text_visible>True</text_visible>
+		<text_max_length>0</text_max_length>
+		<text></text>
+		<child>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkEntry</class>
+		<name>ppp_dns2</name>
+		<can_focus>True</can_focus>
+		<editable>True</editable>
+		<text_visible>True</text_visible>
+		<text_max_length>0</text_max_length>
+		<text></text>
+		<child>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>1</top_attach>
+		  <bottom_attach>2</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>ppp_stupid</name>
+	    <can_focus>True</can_focus>
+	    <label>Start PPP as soon as modem connects</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>ppp_set_default_gw</name>
+	    <can_focus>True</can_focus>
+	    <label>Set as default route</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>ppp_ppp_options</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>4</top_attach>
+	      <bottom_attach>5</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>4</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label132</name>
+	    <label>Pppd options:</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>4</top_attach>
+	      <bottom_attach>5</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>4</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkHSeparator</class>
+	  <name>hseparator9</name>
+	  <child>
+	    <padding>4</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>ppp_adv_help</name>
+	  <label></label>
+	  <justify>GTK_JUSTIFY_LEFT</justify>
+	  <wrap>False</wrap>
+	  <xalign>0</xalign>
+	  <yalign>0</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<child_name>Notebook:tab</child_name>
+	<name>label119</name>
+	<label>Advanced</label>
 	<justify>GTK_JUSTIFY_CENTER</justify>
 	<wrap>False</wrap>
 	<xalign>0.5</xalign>
