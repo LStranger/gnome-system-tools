@@ -827,7 +827,7 @@ user_settings_groups (ug_data *ud)
 	GtkCList *list;
 	GtkWidget *w0;
 	gchar *buf;
-	xmlNodePtr gnode;
+	xmlNodePtr gnode, dbnode;
 	GList *users, *items, *members;
 
 	/* members */
@@ -841,13 +841,18 @@ user_settings_groups (ug_data *ud)
 	user_fill_settings_group (GTK_COMBO (w0), ud->node);
 
 	buf = xst_xml_get_child_content (ud->node, "gid");
-	gnode = get_corresp_field (get_db_node (ud->node));
-	gnode = get_node_by_data (gnode, "gid", buf);
+	dbnode = get_corresp_field (get_db_node (ud->node));
+	gnode = get_node_by_data (dbnode, "gid", buf);
 	g_free (buf);
-	buf = xst_xml_get_child_content (gnode, "name");
+	buf = NULL;
+
+	if (gnode)
+		buf = xst_xml_get_child_content (gnode, "name");
 
 	if (buf)
 		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), buf);
+	else
+		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
 		
 	/* Members Secondary groups */
 	members = get_user_groups (ud->node);
@@ -857,7 +862,7 @@ user_settings_groups (ug_data *ud)
 	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gall"));
 	gtk_clist_set_auto_sort (list, TRUE);
 
-	users = get_user_list ("login", gnode);
+	users = get_user_list ("login", dbnode);
 	items = my_g_list_remove_duplicates (users, members);
 	
 	my_gtk_clist_append_items (list, items);
