@@ -262,7 +262,8 @@ on_hosts_alias_changed (GtkEditable *w, gpointer not_used)
 	GtkWidget *clist;
 	char *s;
 
-	g_return_if_fail (xst_tool_get_access (tool));
+	if (!xst_tool_get_access (tool))
+		return;
 
 	if (updating)
 		return;
