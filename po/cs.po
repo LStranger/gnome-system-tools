@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-17 14:59+0200\n"
-"PO-Revision-Date: 2004-04-17 17:11+0200\n"
+"POT-Creation-Date: 2004-04-18 15:04+0200\n"
+"PO-Revision-Date: 2004-04-18 16:43+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -1437,7 +1437,9 @@ msgstr "Nemohu se připojit k počítači"
 msgid ""
 "Check that you have access to this network and that the computer is actually "
 "working and running SSHD"
-msgstr "Zkontrolujte, že máte přístup k této síti, že počítač funguje a běží na něm SSHD"
+msgstr ""
+"Zkontrolujte, že máte přístup k této síti, že počítač funguje a běží na něm "
+"SSHD"
 
 #. the proccess was running su
 #: src/common/gst-auth.c:93
@@ -1544,7 +1546,9 @@ msgstr "Systémové nástroje GNOME"
 msgid ""
 "This will disable any network connection with this interface as soon as you "
 "hit \"apply\"."
-msgstr "Toto zakáže všechna připojení k síti přes toto rozhraní, jakmile stisknete \"použít\"."
+msgstr ""
+"Toto zakáže všechna připojení k síti přes toto rozhraní, jakmile stisknete "
+"\"použít\"."
 
 #: src/network/callbacks.c:366
 #, c-format
@@ -1571,7 +1575,9 @@ msgstr "Jméno počítače bylo změněno"
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
-msgstr "To vám znemožní spouštět nové aplikace, budete se muset znovu přihlásit. Chcete přesto pokračovat?"
+msgstr ""
+"To vám znemožní spouštět nové aplikace, budete se muset znovu přihlásit. "
+"Chcete přesto pokračovat?"
 
 #: src/network/callbacks.c:526
 msgid "Change _Host name"
@@ -1621,7 +1627,9 @@ msgstr "Zařízení implicitní brány chybí informace o bráně"
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device."
-msgstr "Zadejte tyto informace, chcete-li pokračovat, nebo vyberte jiné zařízení implicitní brány."
+msgstr ""
+"Zadejte tyto informace, chcete-li pokračovat, nebo vyberte jiné zařízení "
+"implicitní brány."
 
 #: src/network/callbacks.c:719
 msgid "The program redhat-config-network-cmd could not be found"
@@ -1631,7 +1639,9 @@ msgstr "Program redhat-config-network-cmd nebyl nalezen"
 msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this."
-msgstr "Díky tomu nebudou dostupná připojení pod odrážkou připojení. Abyste tomu zamezili, nainstalujte prosím rpm balíček redhat-config-network."
+msgstr ""
+"Díky tomu nebudou dostupná připojení pod odrážkou připojení. Abyste tomu "
+"zamezili, nainstalujte prosím rpm balíček redhat-config-network."
 
 #: src/network/callbacks.c:751
 #, c-format
@@ -1932,7 +1942,9 @@ msgstr "Podpora NTP neběží"
 #: src/time/main.c:507
 msgid ""
 "Please run NTP support in the system to enable time server synchronization"
-msgstr "Pro povolení synchronizace se serverem času v systému prosím spusťte podporu NTP"
+msgstr ""
+"Pro povolení synchronizace se serverem času v systému prosím spusťte podporu "
+"NTP"
 
 #: src/time/main.c:817
 msgid "Time and Date Settings"
@@ -1964,77 +1976,88 @@ msgid "Create New Group"
 msgstr "Vytvořit novou skupinu"
 
 #. Check if gid is available
-#: src/users/group-settings.c:145 src/users/group-settings.c:149
+#: src/users/group-settings.c:163 src/users/group-settings.c:171
 msgid "Invalid group ID"
 msgstr "Neplatné ID skupiny"
 
-#: src/users/group-settings.c:146
+#: src/users/group-settings.c:164
 msgid "Group ID must be a positive number."
 msgstr "ID skupiny musí být kladné číslo."
 
-#: src/users/group-settings.c:150
-#, c-format
-msgid "Group ID %s already exists."
-msgstr "ID skupiny %s již existuje."
+#. if group is root
+#: src/users/group-settings.c:167
+msgid "root group ID should not be modified"
+msgstr "ID skupiny root by nemělo být měněno"
 
-#. If empty.
-#: src/users/group-settings.c:175
-msgid "Group name is empty."
-msgstr "Název skupiny je prázdný."
-
-#: src/users/group-settings.c:176
-msgid "A group name must be specified"
-msgstr "Musí být zadán název skupiny"
-
-#. If too long.
-#: src/users/group-settings.c:179
-msgid "The group name is too long."
-msgstr "Název skupiny je příliš dlouhý."
-
-#: src/users/group-settings.c:180
-#, c-format
-msgid "The group name should have less than %i characters for being valid"
-msgstr "Aby byl název skupiny platný, musí mít méně než %i znaků"
-
-#. if invalid.
-#: src/users/group-settings.c:183
-msgid "Group name has invalid characters"
-msgstr "Název skupiny má neplatné znaky"
-
-#: src/users/group-settings.c:184
-msgid "Please set a valid group name, using only lower case letters."
-msgstr "Zadejte prosím platný název skupiny obsahující jen malá písmena."
-
-#. if !exist.
-#: src/users/group-settings.c:187
-#, c-format
-msgid "Group \"%s\" already exists."
-msgstr "Skupina \"%s\" již existuje."
-
-#: src/users/group-settings.c:188
-msgid "Please select a different group name"
-msgstr "Zvolte prosím jiný název skupiny"
-
-#: src/users/group-settings.c:257
-msgid "Root group shouldn't be deleted."
-msgstr "Skupina root by neměla být odstraněna."
-
-#: src/users/group-settings.c:258 src/users/user-settings.c:105
+#: src/users/group-settings.c:168 src/users/group-settings.c:214
+#: src/users/group-settings.c:284 src/users/user-settings.c:105
 #: src/users/user-settings.c:334 src/users/user-settings.c:428
 #: src/users/user-settings.c:463
 msgid "This would leave the system unusable"
 msgstr "Systém by pak nebyl použitelný"
 
-#: src/users/group-settings.c:272
+#: src/users/group-settings.c:172
+#, c-format
+msgid "Group ID %s already exists."
+msgstr "ID skupiny %s již existuje."
+
+#. If empty.
+#: src/users/group-settings.c:197
+msgid "Group name is empty."
+msgstr "Název skupiny je prázdný."
+
+#: src/users/group-settings.c:198
+msgid "A group name must be specified"
+msgstr "Musí být zadán název skupiny"
+
+#. If too long.
+#: src/users/group-settings.c:201
+msgid "The group name is too long."
+msgstr "Název skupiny je příliš dlouhý."
+
+#: src/users/group-settings.c:202
+#, c-format
+msgid "The group name should have less than %i characters for being valid"
+msgstr "Aby byl název skupiny platný, musí mít méně než %i znaků"
+
+#. if invalid.
+#: src/users/group-settings.c:205
+msgid "Group name has invalid characters"
+msgstr "Název skupiny má neplatné znaky"
+
+#: src/users/group-settings.c:206
+msgid "Please set a valid group name, using only lower case letters."
+msgstr "Zadejte prosím platný název skupiny obsahující jen malá písmena."
+
+#. if !exist.
+#: src/users/group-settings.c:209
+#, c-format
+msgid "Group \"%s\" already exists."
+msgstr "Skupina \"%s\" již existuje."
+
+#: src/users/group-settings.c:210
+msgid "Please select a different group name"
+msgstr "Zvolte prosím jiný název skupiny"
+
+#. if it's the root group
+#: src/users/group-settings.c:213
+msgid "Root group name should not be modified"
+msgstr "Název skupiny root by neměl být měněn"
+
+#: src/users/group-settings.c:283
+msgid "Root group shouldn't be deleted."
+msgstr "Skupina root by neměla být odstraněna."
+
+#: src/users/group-settings.c:298
 msgid "This may leave files with invalid group ID in the filesystem"
 msgstr "To možná nechá v systému souborů soubory s neplatným ID skupiny"
 
-#: src/users/group-settings.c:277
+#: src/users/group-settings.c:303
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Jste si jisti, že chcete odstranit skupinu %s?"
 
-#: src/users/group-settings.c:332
+#: src/users/group-settings.c:358
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Nastavení skupiny %s"
@@ -2237,8 +2260,8 @@ msgid "User id must be a positive number."
 msgstr "Uživatelské ID musí být kladné číslo."
 
 #: src/users/user-settings.c:462
-msgid "root uid shouldn't be modified."
-msgstr "UID správce systému (root) by nemělo být měněno."
+msgid "root user ID should not be modified"
+msgstr "ID uživatele root by nemělo být měněno"
 
 #: src/users/user-settings.c:466
 #, c-format
