@@ -1,5 +1,22 @@
 2001-02-16  Hans Petter Jansson  <hpj@ximian.com>
 
+	* xst-platform.[ch]: Implement.
+
+	* xst-report-hook.[ch]: XstReportHookFunc now takes an
+	  XstReportLine, not id and message.
+
+	* xst-tool.[ch]: XstReportHookFunc funcs changed to take
+	  XstReportLine. Implemented xst_tool_add_supported_platform (),
+	  xst_tool_clear_supported_platforms (), platform_add_supported_cb (),
+	  platform_set_current_cb (). We now build lists of supported
+	  distros, and store the currently assumed distro.
+
+	* xst-types.h: Add XstPlatform.
+
+	* Makefile.am: Add xst-platform.[ch].
+
+2001-02-16  Hans Petter Jansson  <hpj@ximian.com>
+
 	* xst-tool.[ch]: Added callbacks for distro-related fatal
 	  conditions. Added report line queuing.
 

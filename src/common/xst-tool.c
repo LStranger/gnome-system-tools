@@ -25,6 +25,7 @@
 #include "xst-dialog.h"
 #include "xst-report-line.h"
 #include "xst-report-hook.h"
+#include "xst-platform.h"
 
 #include <gnome.h>
 #include <parser.h>
@@ -50,10 +51,10 @@ static enum {
 static GtkObjectClass *parent_class;
 static gint xsttool_signals[LAST_SIGNAL] = { 0 };
 
-static gboolean platform_unknown_cb (XstTool *tool, guint id, const gchar *message);
-static gboolean platform_unsupported_cb (XstTool *tool, guint id, const gchar *message);
-static gboolean platform_add_supported_cb (XstTool *tool, guint id, const gchar *message);
-static gboolean platform_set_current_cb (XstTool *tool, guint id, const gchar *message);
+static gboolean platform_unknown_cb (XstTool *tool, XstReportLine *rline);
+static gboolean platform_unsupported_cb (XstTool *tool, XstReportLine *rline);
+static gboolean platform_add_supported_cb (XstTool *tool, XstReportLine *rline);
+static gboolean platform_set_current_cb (XstTool *tool, XstReportLine *rline);
 
 static XstReportHookEntry common_report_hooks[] = {
 	{ 599, platform_unknown_cb,        XST_REPORT_HOOK_LOADSAVE, FALSE },  /* Unable to guess platform */
@@ -66,7 +67,7 @@ static XstReportHookEntry common_report_hooks[] = {
 /* --- Report hook callbacks --- */
 
 static gboolean
-platform_unknown_cb (XstTool *tool, guint id, const gchar *message)
+platform_unknown_cb (XstTool *tool, XstReportLine *rline)
 {
 	GtkWidget *d;
 
@@ -79,7 +80,7 @@ platform_unknown_cb (XstTool *tool, guint id, const gchar *message)
 }
 
 static gboolean
-platform_unsupported_cb (XstTool *tool, guint id, const gchar *message)
+platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 {
 	GtkWidget *d;
 
@@ -92,35 +93,64 @@ platform_unsupported_cb (XstTool *tool, guint id, const gchar *message)
 }
 
 static gboolean
-platform_add_supported_cb (XstTool *tool, guint id, const gchar *message)
+platform_add_supported_cb (XstTool *tool, XstReportLine *rline)
 {
-	/* TODO: Build list of supported platforms as these come in. They
-	 * will be needed for the choose-a-platform list if the tool
-	 * breaks (platform_unknown_cb () or platform_unsupported_cb ()). */
+	XstPlatform *platform;
 
+	platform = xst_platform_new_from_report_line (rline);
+	g_return_val_if_fail (platform != NULL, TRUE);
+
+	xst_tool_add_supported_platform (tool, platform);
 	return TRUE;
 }
 
 static gboolean
-platform_set_current_cb (XstTool *tool, guint id, const gchar *message)
+platform_set_current_cb (XstTool *tool, XstReportLine *rline)
 {
-	/* TODO: Store name of currently configured-for platform
-	 * in tool. This can be specified on --set, to ensure that
-	 * --platform is the same as it was on --get. */
+	XstPlatform *platform;
 
+	platform = xst_platform_new_from_report_line (rline);
+	g_return_val_if_fail (platform != NULL, TRUE);
+
+	if (tool->current_platform)
+		xst_platform_free (tool->current_platform);
+
+	tool->current_platform = platform;
 	return TRUE;
 }
 
 /* --- XstTool --- */
 
 void
-xst_tool_add_supported_platform (XstTool *tool, const gchar *platform)
+xst_tool_add_supported_platform (XstTool *tool, XstPlatform *platform)
 {
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (platform != NULL);
+
+	/* TODO: Avoid duplicates. Backend doesn't serve duplicates, but
+	 * we should be paranoid here. */
+
+	tool->supported_platforms_list =
+		g_slist_append (tool->supported_platforms_list, platform);
 }
 
 void
 xst_tool_clear_supported_platforms (XstTool *tool)
 {
+	GSList *list;
+	XstPlatform *platform;
+
+	g_return_if_fail (tool != NULL);
+
+	for (list = tool->supported_platforms_list; list;
+	     list = g_slist_next (list))
+	{
+		platform = (XstPlatform *) list->data;
+		xst_platform_free (platform);
+	}
+
+	if (tool->supported_platforms_list)
+		g_slist_free (tool->supported_platforms_list);
 }
 
 GladeXML *
@@ -476,6 +506,7 @@ xst_tool_main (XstTool *tool)
 		gnome_dialog_run_and_close (GNOME_DIALOG (d));
 		exit (1);
 	}
+
 	xst_dialog_thaw (tool->main_dialog);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 	gtk_main ();
@@ -693,7 +724,7 @@ xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, XstReportLi
 		if (hook->id == id && (hook->allow_repeat || !hook->invoked) &&
 		    (hook->type == XST_REPORT_HOOK_LOADSAVE || hook->type == type)) {
 			hook->invoked = TRUE;
-			hook->func (tool, id, xst_report_line_get_message (rline));
+			hook->func (tool, rline);
 		}
 	}
 }

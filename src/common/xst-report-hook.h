@@ -22,9 +22,10 @@
 #define XST_REPORT_HOOK_H
 
 #include "xst-types.h"
+#include "xst-report-line.h"
 #include "xst-tool.h"
 
-typedef gboolean (XstReportHookFunc) (XstTool *tool, guint id, const gchar *message);
+typedef gboolean (XstReportHookFunc) (XstTool *tool, XstReportLine *rline);
 
 /* Internal storage */
 

@@ -27,7 +27,9 @@ libsetuptool_a_SOURCES = \
 	xst-report-hook.c \
 	xst-report-hook.h \
 	xst-report-line.c \
-	xst-report-line.h
+	xst-report-line.h \
+	xst-platform.c \
+	xst-platform.h
 
 #	tool.c		\
 #	tool.h

@@ -72,8 +72,8 @@ struct _XstTool {
 	XstReportHookType report_hook_type;
 	GSList *report_hook_list;
 
-	gchar *current_platform;      /* Always set from backend report */
-	GSList *supported_platforms;  /* Gets set only if backend breaks */
+	XstPlatform *current_platform;     /* Always set from backend report */
+	GSList *supported_platforms_list;  /* Gets set only if backend breaks */
 };
 
 struct _XstToolClass {
@@ -109,7 +109,7 @@ void         xst_tool_add_report_hooks    (XstTool *tool, XstReportHookEntry *re
 void         xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, XstReportLine *rline);
 void         xst_tool_reset_report_hooks  (XstTool *tool);
 
-void         xst_tool_add_supported_platform    (XstTool *tool, const gchar *platform);
+void         xst_tool_add_supported_platform    (XstTool *tool, XstPlatform *platform);
 void         xst_tool_clear_supported_platforms (XstTool *tool);
 
 #endif /* XST_TOOL_H */

@@ -46,4 +46,6 @@ typedef struct _XstReportLine       XstReportLine;
 typedef struct _XstReportHook       XstReportHook;
 typedef struct _XstReportHookEntry  XstReportHookEntry;
 
+typedef struct _XstPlatform         XstPlatform;
+
 #endif /* XST_TYPES_H */
