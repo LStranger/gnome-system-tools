@@ -54,7 +54,6 @@ typedef struct {
 /* Yes, I don't like globals & externs we should really have
    an XstHostsPageInfo struct with all the stuff but it does
    not work with our signals connecting system */
-static gint hosts_row_selected;
 static gboolean updating = FALSE;
 static gboolean hack = FALSE;
 
@@ -325,7 +324,6 @@ on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 	XstStatichostUI *ui;
 
 	g_return_if_fail (xst_tool_get_access (tool));
-	g_return_if_fail (hosts_row_selected != -1);
 
 	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 

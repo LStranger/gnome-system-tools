@@ -2203,6 +2203,6 @@ connection_list_select_connection (XstConnection *cxn)
 
 	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
-	connection_iter (cxn, &iter);
-	gtk_tree_selection_select_iter (select, &iter);
+	if (connection_iter (cxn, &iter))
+		gtk_tree_selection_select_iter (select, &iter);
 }
