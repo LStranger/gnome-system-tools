@@ -123,7 +123,7 @@ void
 gst_auth_run_term (GstTool *tool, gchar *args[])
 {
 	struct termios t;
-	
+
 	tool->backend_pid = forkpty (&tool->backend_master_fd, NULL, NULL, NULL);
 
 	if (tool->backend_pid < 0) {
@@ -134,10 +134,12 @@ gst_auth_run_term (GstTool *tool, gchar *args[])
 		execv (args[0], args);
 		exit (255);
 	} else {
+#ifndef __FreeBSD__
+		/* Linux's su works ok with echo disabling */
 		tcgetattr (tool->backend_master_fd, &t);
 		t.c_lflag ^= ECHO;
 		tcsetattr (tool->backend_master_fd, TCSANOW, &t);
-
+#endif
 		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
 
 		tool->timeout_id = g_timeout_add (1000, (GSourceFunc) gst_auth_wait_child, tool);
@@ -152,8 +154,7 @@ gst_auth_write_password (GstTool *tool, gchar *pwd)
 	gchar *answer = "yes\n";
 	gboolean cont = FALSE;
 	gchar *str;
-	int t;
-
+	
 	/* read all the su or ssh output and flush the descriptors */
 	while (!cont) {
 		str = gst_tool_read_from_backend (tool, "assword:", "/no)?", NULL);
@@ -265,6 +266,7 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 
 	gchar buffer[40];
 	gint size;
+	struct termios t;
 
 	gst_auth_run_term (tool, args);
 
@@ -287,6 +289,14 @@ gst_auth_do_authentication (GstTool *tool, gchar *args[])
 			exit (0);
 		}
 	}
+
+#ifdef __FreeBSD__
+	/* FreeBSD seems to have weird issues with su and echo disabling */
+	tcgetattr (tool->backend_master_fd, &t);
+	t.c_lflag ^= ECHO;
+	tcsetattr (tool->backend_master_fd, TCSANOW, &t);
+#endif
+
 }
 
 void
