@@ -1,3 +1,14 @@
+2001-05-29  Miguel de Icaza  <miguel@ximian.com>
+
+	* xst-tool.c (report_progress_tick): Process as much data as
+	possible in a single pass.
+
+	Removed ad-hoc string implementation from here.
+
+	(xst_tool_load): Use any pending data from the report pass as the
+	input to the XML document;  Make this work with arbitrarly large
+	XML documents.
+
 2001-05-29  Hans Petter Jansson  <hpj@ximian.com>
 
 	* xst-su.c (exec_su): If the child crashes, don't return. Previously, this

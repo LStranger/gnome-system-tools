@@ -74,8 +74,9 @@ struct _XstTool {
 	gboolean timeout_done;
 	gboolean report_list_visible;
 
-	char *line;
-	int line_len;
+	GString *line;
+	GString *xml_document;
+	
 	guint input_id;
 	GSList *report_line_list;
 	gboolean report_dispatch_pending;

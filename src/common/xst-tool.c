@@ -414,48 +414,66 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 {
 	XstTool *tool;
 	XstReportLine *rline;
-	char c;
+	char buffer [512];
+	int n, i = 0;
 
 	tool = XST_TOOL (data);
 
-	if (!tool->line) {
-		tool->line = g_malloc(1024);
-		tool->line_len = 0;
-		tool->line [0] = '\0';
-	}
+	if (!tool->line)
+		tool->line = g_string_new ("");
 
 	/* NOTE: The read() being done here is inefficient, but we're not
 	 * going to handle any large amount of data */
 
-	if (read (fd, &c, 1) > 0) {
-		if (c == '\n') {
-			/* End of line */
+	while ((n = read (fd, buffer, sizeof (buffer)-1)) != 0){
 
-		        /* Report line; add to list */
-			rline = xst_report_line_new_from_string (tool->line);
+		buffer [n] = 0;
+		
+		for (i = 0; (i < n); i++){
+			char c = buffer [i];
 			
-			if (rline)
-				tool->report_line_list = g_slist_append (tool->report_line_list,
-									 rline);
+			if (c == '\n'){
+				/* End of line */
+				
+				/* Report line; add to list */
+				rline = xst_report_line_new_from_string (tool->line->str);
+				
+				if (rline)
+					tool->report_line_list = g_slist_append (
+						tool->report_line_list, rline);
 
-			tool->line [0] = '\0';
-			tool->line_len = 0;
-		} else {
-			/* Add character to end of current line */
+				g_string_assign (tool->line, "");
 
-			tool->line = g_realloc (tool->line, MAX (tool->line_len + 2, 1024));
-			tool->line [tool->line_len] = c;
-			tool->line_len++;
-			tool->line [tool->line_len] = '\0';
+				if (!tool->report_dispatch_pending){
+					report_dispatch (tool);
+					if (tool->report_finished){
+						i++;
+						goto full_break;
+					}
+				}
+			} else {
+				/* Add character to end of current line */
+				g_string_append_c (tool->line, buffer [i]);
+				
+			}
 		}
 	}
-	else
-	{
+
+ full_break:
+
+	if (n <= 0){
 		/* Zero-length read; pipe closed unexpectedly */
 
 		tool->report_finished = TRUE;
 	}
 
+	if (tool->report_finished){
+		if (n > 0)
+			tool->xml_document = g_string_new (&buffer [i]);
+		g_string_free (tool->line, TRUE);
+		tool->line = NULL;
+	}
+	
 	if (!tool->report_dispatch_pending)
 		report_dispatch (tool);
 	
@@ -607,7 +625,6 @@ xst_tool_load (XstTool *tool)
 {
 	int fd [2];
 	int t, len;
-	char *p;
 
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);	
@@ -631,6 +648,8 @@ xst_tool_load (XstTool *tool)
 	if (t < 0) {
 		g_error ("Unable to fork.");
 	} else if (t) {
+		char buffer [2048];
+		
 		/* Parent */
 
 		close (fd [1]);	/* Close writing end */
@@ -645,22 +664,20 @@ xst_tool_load (XstTool *tool)
 		if (tool->run_again)
 			return TRUE;
 
-		p = g_malloc (102400);
+		if (tool->xml_document == NULL)
+			tool->xml_document = g_string_new ("");
+		
 		fcntl(fd [0], F_SETFL, 0);  /* Let's block */
-		len = 0; 
-		for (len = 0; (t = read (fd [0], p + len, 102399 - len)); len += t)
-			;
 
-		if (len < 1 || len == 102399) {
-			g_free (p);
-		} else {
-			p = g_realloc (p, len + 1);
-			*(p + len) = 0;
-
-			tool->config = xmlParseDoc (p);
-			g_free (p);
-			close (fd [0]);
+		while ((t = read (fd [0], buffer, sizeof (buffer)-1)) != 0){
+			buffer [t] = 0;
+			g_string_append (tool->xml_document, buffer);
 		}
+		
+		tool->config = xmlParseDoc (tool->xml_document->str);
+		g_string_free (tool->xml_document, TRUE);
+		tool->xml_document = NULL;
+		close (fd [0]);
 	} else {
 		/* Child */
 
