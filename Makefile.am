@@ -2,6 +2,14 @@
 
 SUBDIRS = macros interfaces backends archiver pixmaps src doc po
 
+@XML_I18N_MERGE_DESKTOP_RULE@
+
+DESKTOP_IN_FILES=nautilus.desktop.in
+DESKTOP_FILES=$(DESKTOP_IN_FILES:.desktop.in=.desktop)
+
 EXTRA_DIST = \
-	HACKING \
-	ximian-setup-tools.spec
+	HACKING 		\
+	ximian-setup-tools.spec \
+	xml-i18n-extract.in	\
+	xml-i18n-merge.in 	\
+	xml-i18n-update.in 	\
