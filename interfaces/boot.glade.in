@@ -217,11 +217,10 @@ systems to choose from at startup.</property>
 		  <property name="border_width">4</property>
 		  <property name="visible">True</property>
 		  <property name="homogeneous">False</property>
-		  <property name="spacing">0</property>
+		  <property name="spacing">6</property>
 
 		  <child>
 		    <widget class="GtkCheckButton" id="boot_prompt">
-		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
 		      <property name="label" translatable="yes">_Wait</property>
 		      <property name="use_underline">True</property>
@@ -230,6 +229,27 @@ systems to choose from at startup.</property>
 		      <property name="inconsistent">False</property>
 		      <property name="draw_indicator">True</property>
 		      <signal name="toggled" handler="on_boot_prompt_toggled"/>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label71">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Wait</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -249,7 +269,7 @@ systems to choose from at startup.</property>
 		      <property name="update_policy">GTK_UPDATE_ALWAYS</property>
 		      <property name="snap_to_ticks">False</property>
 		      <property name="wrap">False</property>
-		      <property name="adjustment">1 0 999999 1 10 10</property>
+		      <property name="adjustment">0 0 999999 1 10 10</property>
 		    </widget>
 		    <packing>
 		      <property name="padding">0</property>
@@ -936,9 +956,9 @@ To begin, click &quot;Next&quot;. </property>
 	<widget class="GnomeDruidPageStandard" id="druidIdentityPage">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">Image Identity (step 1 of 2)</property>
-	  <property name="title_foreground">#48f8081b48f8</property>
-	  <property name="background">#8dd0082ee818</property>
-	  <property name="logo_background">#000000007eac</property>
+	  <property name="title_foreground">#f070081bf070</property>
+	  <property name="background">#a858082de7c8</property>
+	  <property name="logo_background">#000000003f0c</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">
@@ -1053,9 +1073,9 @@ To begin, click &quot;Next&quot;. </property>
 	<widget class="GnomeDruidPageStandard" id="druidOtherPage">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">Other  (step 2 of 2)</property>
-	  <property name="title_foreground">#48f8081b48f8</property>
-	  <property name="background">#da18082ce818</property>
-	  <property name="logo_background">#000000007eac</property>
+	  <property name="title_foreground">#f070081bf070</property>
+	  <property name="background">#eb40082de7c8</property>
+	  <property name="logo_background">#000000003f0c</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">
@@ -1170,9 +1190,9 @@ To begin, click &quot;Next&quot;. </property>
 	<widget class="GnomeDruidPageStandard" id="druidImagePage">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">Image (step 2 of 2)</property>
-	  <property name="title_foreground">#48f8081b48f8</property>
-	  <property name="background">#fd48082ee818</property>
-	  <property name="logo_background">#000000007eac</property>
+	  <property name="title_foreground">#f070081bf070</property>
+	  <property name="background">#a380082ee7c8</property>
+	  <property name="logo_background">#000000003f0c</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">

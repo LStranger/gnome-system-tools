@@ -12,6 +12,7 @@ gchar *s = N_("_Delete");
 gchar *s = N_("_Edit...");
 gchar *s = N_("Set as D_efault");
 gchar *s = N_("_Wait");
+gchar *s = N_("Wait");
 gchar *s = N_("_seconds before loading default kernel or OS");
 gchar *s = N_("Starting your computer");
 gchar *s = N_("window2");
