@@ -41,6 +41,8 @@ typedef struct _XstDialogClass      XstDialogClass;
 
 typedef struct _XstDialogSignal     XstDialogSignal;
 
+typedef struct _XstReportLine       XstReportLine;
+
 typedef struct _XstReportHook       XstReportHook;
 typedef struct _XstReportHookEntry  XstReportHookEntry;
 
