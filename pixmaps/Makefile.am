@@ -29,6 +29,9 @@ gmt_-08.png \
 gmt_-09.png \
 gmt_-10.png \
 gmt_-11.png \
-map.png
+map.png \
+settings.png \
+users-groups.png \
+users.png
 
 EXTRA_DIST = $(pixmaps_DATA)
