@@ -90,7 +90,7 @@ gst_dialog_set_complexity (GstDialog *xd, GstDialogComplexity c)
 {
 	gchar *label[] = {
 		N_(" More _Options"),
-		N_(" Less _Options"),
+		N_(" Fewer _Options"),
 		NULL
 	};
 
