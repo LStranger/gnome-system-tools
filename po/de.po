@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-03-24 03:53+0100\n"
+"POT-Creation-Date: 2001-04-01 04:58+0200\n"
 "PO-Revision-Date: 2001-03-20 19:04+100\n"
 "Last-Translator: Christian Meyer <chrisime@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -179,7 +179,7 @@ msgstr "Optionen für das Hinzufügen oder Entfernen der Backends"
 #: interfaces/boot.glade.h:7 interfaces/disks.glade.h:19
 #: interfaces/memory.glade.h:31 interfaces/nameresolution.glade.h:14
 #: interfaces/shares.glade.h:29 interfaces/time.glade.h:31
-#: interfaces/users.glade.h:52
+#: interfaces/users.glade.h:44
 msgid "window1"
 msgstr "Fenster1"
 
@@ -224,7 +224,7 @@ msgstr "bevor der vorgegebene Kernel oder das OS geladen wird (in s)"
 #: interfaces/memory.glade.h:25 interfaces/memory.glade.h:41
 #: interfaces/nameresolution.glade.h:49 interfaces/shares.glade.h:43
 #: interfaces/shares.glade.h:57 interfaces/shares.glade.h:63
-#: interfaces/shares.glade.h:69 interfaces/users.glade.h:96
+#: interfaces/shares.glade.h:69 interfaces/users.glade.h:88
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -288,7 +288,7 @@ msgstr "Ximian Setup Tools"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.h:8 src/common/xst-tool.c:594
+#: interfaces/common.glade.h:8 src/common/xst-tool.c:590
 msgid "Scanning your system configuration."
 msgstr "Systemkonfiguration wird analysiert."
 
@@ -578,8 +578,8 @@ msgstr "Aliase"
 
 #: interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
 #: interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
-#: interfaces/network.glade.h:39 interfaces/users.glade.h:56
-#: interfaces/users.glade.h:61 interfaces/users.glade.h:91
+#: interfaces/network.glade.h:39 interfaces/users.glade.h:48
+#: interfaces/users.glade.h:53 interfaces/users.glade.h:83
 msgid "Delete"
 msgstr "Löschen"
 
@@ -588,8 +588,7 @@ msgstr "Löschen"
 msgid "Existing:"
 msgstr "Existierend:"
 
-#: interfaces/nameresolution.glade.h:13 interfaces/users.glade.h:27
-#: interfaces/users.glade.h:39
+#: interfaces/nameresolution.glade.h:13
 msgid "New:"
 msgstr "Neu:"
 
@@ -1157,7 +1156,7 @@ msgstr "Automatisch beim Hochfahren aktivieren"
 msgid "Primary networking"
 msgstr "Primäres Netzwerk"
 
-#: interfaces/networking.glade.h:15 src/common/xst-dialog.c:89
+#: interfaces/networking.glade.h:15 src/common/xst-dialog.c:90
 msgid " More Options >> "
 msgstr " Mehr Optionen >> "
 
@@ -1439,7 +1438,7 @@ msgstr "Erweiterte Einstellungen"
 msgid "User ID:"
 msgstr "Benutzer-ID:"
 
-#: interfaces/users.glade.h:13
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:57
 msgid "Home directory:"
 msgstr "Heimatverzeichnis:"
 
@@ -1456,7 +1455,7 @@ msgid "Main group:"
 msgstr "Hauptgruppe:"
 
 #: interfaces/users.glade.h:17 interfaces/users.glade.h:25
-#: interfaces/users.glade.h:62
+#: interfaces/users.glade.h:54
 msgid "Groups"
 msgstr "Gruppen"
 
@@ -1468,11 +1467,11 @@ msgstr "Verfügbare Gruppen"
 msgid "User's Groups"
 msgstr "Gruppen des Benutzers"
 
-#: interfaces/users.glade.h:20 interfaces/users.glade.h:48
+#: interfaces/users.glade.h:20 interfaces/users.glade.h:40
 msgid "Add ->"
 msgstr "Hinzufügen ->"
 
-#: interfaces/users.glade.h:21 interfaces/users.glade.h:49
+#: interfaces/users.glade.h:21 interfaces/users.glade.h:41
 msgid "Remove <-"
 msgstr "Entfernen <-"
 
@@ -1480,81 +1479,67 @@ msgstr "Entfernen <-"
 msgid " Primary Group "
 msgstr "Primäre Gruppen "
 
-#: interfaces/users.glade.h:23 interfaces/users.glade.h:50
+#: interfaces/users.glade.h:23 interfaces/users.glade.h:42
 msgid "label27"
 msgstr "Label27"
 
-#: interfaces/users.glade.h:24 interfaces/users.glade.h:51
+#: interfaces/users.glade.h:24 interfaces/users.glade.h:43
 msgid "label26"
 msgstr "Label26"
 
-#: interfaces/users.glade.h:26 interfaces/users.glade.h:36
-#: interfaces/users.glade.h:38
+#: interfaces/users.glade.h:26 interfaces/users.glade.h:27
 msgid "Change Password"
 msgstr "Passwort ändern"
 
-#: interfaces/users.glade.h:28 interfaces/users.glade.h:40
-msgid "Confirm:"
-msgstr "Bestätigung:"
-
-#: interfaces/users.glade.h:29
+#: interfaces/users.glade.h:28
 msgid "  Generate a random password  "
 msgstr "  Zufälliges Passwort erzeugen "
 
-#: interfaces/users.glade.h:30 interfaces/users.glade.h:42
+#: interfaces/users.glade.h:29
 msgid "Check password quality"
 msgstr "Qualität des Passworts prüfen"
 
-#: interfaces/users.glade.h:31
+#: interfaces/users.glade.h:30
 msgid "Optional Settings"
 msgstr "Optionale Einstellungen"
 
-#: interfaces/users.glade.h:32
+#: interfaces/users.glade.h:31
 msgid "Maximum days a password may be used:"
 msgstr "Maximale Anzahl der Tage, die ein Passwort verwendet werden darf:"
 
-#: interfaces/users.glade.h:33
+#: interfaces/users.glade.h:32
 msgid "Minimum days between password changes:"
 msgstr "Minimale Anzahl der Tage zwischen Passwortänderung:"
 
-#: interfaces/users.glade.h:34
+#: interfaces/users.glade.h:33
 msgid "Days between warning and password expiration:"
 msgstr "Tage bis Warnungen angezeigt werden und Passwort verfällt:"
 
-#: interfaces/users.glade.h:35
+#: interfaces/users.glade.h:34
 msgid "Passwords"
 msgstr "Passwörter"
 
-#: interfaces/users.glade.h:37
-msgid "Enter a new password manually, or have one randomly assigned."
-msgstr ""
-"Geben Sie manuell ein Passwort ein oder lassen Sie eines zufällig generieren."
-
-#: interfaces/users.glade.h:41
-msgid "  Random Password  "
-msgstr "  Zufälliges Passwort  "
-
-#: interfaces/users.glade.h:43
+#: interfaces/users.glade.h:35
 msgid "Group Settings"
 msgstr "Gruppeneinstellungen"
 
-#: interfaces/users.glade.h:44
+#: interfaces/users.glade.h:36
 msgid "Group name:"
 msgstr "Gruppenname:"
 
-#: interfaces/users.glade.h:45
+#: interfaces/users.glade.h:37
 msgid "Members"
 msgstr "Mitglieder"
 
-#: interfaces/users.glade.h:46
+#: interfaces/users.glade.h:38
 msgid "All Users"
 msgstr "Alle Benutzer"
 
-#: interfaces/users.glade.h:47
+#: interfaces/users.glade.h:39
 msgid "Group Members"
 msgstr "Mitglieder der Gruppe"
 
-#: interfaces/users.glade.h:53
+#: interfaces/users.glade.h:45
 msgid ""
 "This is the list of the users available in the system. Create new users or "
 "edit existing user's settings with this dialog."
@@ -1562,27 +1547,27 @@ msgstr ""
 "Die Liste der auf diesem System verfügbaren Benutzer. Erstellen Sie neue "
 "Benutzer oder ändern Sie die Einstellungen der bestehenden in diesem Dialog."
 
-#: interfaces/users.glade.h:54
+#: interfaces/users.glade.h:46
 msgid "Add User..."
 msgstr "Benutzer hinzufügen..."
 
-#: interfaces/users.glade.h:55 interfaces/users.glade.h:60
+#: interfaces/users.glade.h:47 interfaces/users.glade.h:52
 msgid "Settings..."
 msgstr "Einstellungen..."
 
-#: interfaces/users.glade.h:57
+#: interfaces/users.glade.h:49
 msgid "Users"
 msgstr "Benutzer"
 
-#: interfaces/users.glade.h:58
+#: interfaces/users.glade.h:50
 msgid "Users may be grouped to share resources with others."
 msgstr "Benutzer können gruppiert werden, um Ressourcen mit anderen zu teilen."
 
-#: interfaces/users.glade.h:59
+#: interfaces/users.glade.h:51
 msgid "Add Group..."
 msgstr "Gruppe hinzufügen..."
 
-#: interfaces/users.glade.h:63 interfaces/users.glade.h:98
+#: interfaces/users.glade.h:55 interfaces/users.glade.h:90
 msgid ""
 "These are global values that will affect the creation of new users. They are "
 "only available when you click \"More Options\"."
@@ -1590,55 +1575,51 @@ msgstr ""
 "Dies sind globale Werte, die die Erstellung von neuen Benutzern betreffen. "
 "Sie sind nur verfügbar wenn Sie \"Mehr Optionen\" drücken."
 
-#: interfaces/users.glade.h:64 interfaces/users.glade.h:99
+#: interfaces/users.glade.h:56 interfaces/users.glade.h:91
 msgid "System settings"
 msgstr "Systemeinstellungen"
 
-#: interfaces/users.glade.h:65
-msgid "Home directory prefix:"
-msgstr "Präfix für Heimatverzeichnis:"
-
-#: interfaces/users.glade.h:66 interfaces/users.glade.h:101
-msgid "Create home for new users:"
-msgstr "Heimat für Benutzer erstellen:"
-
-#: interfaces/users.glade.h:67
+#: interfaces/users.glade.h:58
 msgid "Default shell:"
 msgstr "Voreingestellte Shell:"
 
-#: interfaces/users.glade.h:68 interfaces/users.glade.h:102
+#: interfaces/users.glade.h:59
+msgid "Default group:"
+msgstr "Voreingestellte Gruppe:"
+
+#: interfaces/users.glade.h:60 interfaces/users.glade.h:94
 msgid "Min/max values for automatic UID/GID"
 msgstr "Min/Max Werte für automatische Benutzer-und Gruppen-ID (UID/GID)"
 
-#: interfaces/users.glade.h:69 interfaces/users.glade.h:103
+#: interfaces/users.glade.h:61 interfaces/users.glade.h:95
 msgid "Maximum UID:"
 msgstr "Maximum UID:"
 
-#: interfaces/users.glade.h:70 interfaces/users.glade.h:104
+#: interfaces/users.glade.h:62 interfaces/users.glade.h:96
 msgid "Minimum UID:"
 msgstr "Minimum UID:"
 
-#: interfaces/users.glade.h:71 interfaces/users.glade.h:105
+#: interfaces/users.glade.h:63 interfaces/users.glade.h:97
 msgid "Minimum GID:"
 msgstr "Minimum GID:"
 
-#: interfaces/users.glade.h:72 interfaces/users.glade.h:106
+#: interfaces/users.glade.h:64 interfaces/users.glade.h:98
 msgid "Maximum GID:"
 msgstr "Maximum GID:"
 
-#: interfaces/users.glade.h:73 interfaces/users.glade.h:107
+#: interfaces/users.glade.h:65 interfaces/users.glade.h:99
 msgid "Password expiration"
 msgstr "Verfall des Passworts"
 
-#: interfaces/users.glade.h:74 interfaces/users.glade.h:108
+#: interfaces/users.glade.h:66 interfaces/users.glade.h:100
 msgid "Days a password may be used:"
 msgstr "Tage, die ein Passwort verwendet werden darf:"
 
-#: interfaces/users.glade.h:75 interfaces/users.glade.h:109
+#: interfaces/users.glade.h:67 interfaces/users.glade.h:101
 msgid "Minimum days allowed between password changes:"
 msgstr "Minimale Anzahl der Tage wann Passwortänderung erlaubt ist:"
 
-#: interfaces/users.glade.h:76 interfaces/users.glade.h:110
+#: interfaces/users.glade.h:68 interfaces/users.glade.h:102
 msgid ""
 "Days between warning and\n"
 " password expiration:  "
@@ -1646,39 +1627,39 @@ msgstr ""
 "Tage bis Warnungen angezeigt werden\n"
 " und Passwort verfällt:  "
 
-#: interfaces/users.glade.h:78 interfaces/users.glade.h:112
-msgid "Minimum  password length:"
-msgstr "Minimale Passwortlänge"
+#: interfaces/users.glade.h:70
+msgid "Random Password by default"
+msgstr "Standardmäßig zufälliges Passwort"
 
-#: interfaces/users.glade.h:79
+#: interfaces/users.glade.h:71
 msgid "New Profile"
 msgstr "Neues Profil"
 
-#: interfaces/users.glade.h:80
+#: interfaces/users.glade.h:72
 msgid "Delete Profile"
 msgstr "Profil löschen"
 
-#: interfaces/users.glade.h:81
+#: interfaces/users.glade.h:73
 msgid "Save Profile"
 msgstr "Profil speichern"
 
-#: interfaces/users.glade.h:82
+#: interfaces/users.glade.h:74
 msgid "Copy Profile"
 msgstr "Profil kopieren"
 
-#: interfaces/users.glade.h:83
+#: interfaces/users.glade.h:75
 msgid "Profiles"
 msgstr "Profile"
 
-#: interfaces/users.glade.h:84
+#: interfaces/users.glade.h:76
 msgid "Show system users and groups"
 msgstr "Systembenutzer und -gruppen zeigen"
 
-#: interfaces/users.glade.h:85
+#: interfaces/users.glade.h:77
 msgid "window2"
 msgstr "Fenster2"
 
-#: interfaces/users.glade.h:86
+#: interfaces/users.glade.h:78
 msgid ""
 "EXPERIMENTAL NIS support.\n"
 "It's only available if You have NIS\n"
@@ -1688,19 +1669,19 @@ msgstr ""
 "Es ist nur verfügbar, wenn Sie NIS haben\n"
 "und wenn Sie \"Mehr Optionen\" drücken."
 
-#: interfaces/users.glade.h:89
+#: interfaces/users.glade.h:81
 msgid "New User"
 msgstr "Neuer Benutzer"
 
-#: interfaces/users.glade.h:90
+#: interfaces/users.glade.h:82
 msgid "New Group"
 msgstr "Neue Gruppe"
 
-#: interfaces/users.glade.h:92
+#: interfaces/users.glade.h:84
 msgid "Settings for selected user and group"
 msgstr "Einstellungen für gewählte Benutzer und Gruppe"
 
-#: interfaces/users.glade.h:93
+#: interfaces/users.glade.h:85
 msgid ""
 "Change the settings and options for the\n"
 "selected user or group, like a users password\n"
@@ -1710,15 +1691,23 @@ msgstr ""
 "für den ausgewählten Benutzer oder Gruppe, wie das\n"
 "Benutzerpasswort oder ein Gruppenname oder -mitglied."
 
-#: interfaces/users.glade.h:97
+#: interfaces/users.glade.h:89
 msgid "label79"
 msgstr "Label79"
 
-#: interfaces/users.glade.h:100
+#: interfaces/users.glade.h:92
 msgid "Mailbox directory:"
 msgstr "Mailbox-Verzeichnis:"
 
-#: interfaces/users.glade.h:113
+#: interfaces/users.glade.h:93
+msgid "Create home for new users:"
+msgstr "Heimat für Benutzer erstellen:"
+
+#: interfaces/users.glade.h:104
+msgid "Minimum  password length:"
+msgstr "Minimale Passwortlänge"
+
+#: interfaces/users.glade.h:105
 msgid "label80"
 msgstr "Label80"
 
@@ -1743,16 +1732,16 @@ msgstr "Unbekannt"
 msgid "Boot Manager Settings - Ximian Setup Tools"
 msgstr "Boot Manager-Einstellungen - Ximian Setup Tools"
 
-#: src/common/xst-dialog.c:57
+#: src/common/xst-dialog.c:58
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "Widget konnte nicht gefunden werden: %s"
 
-#: src/common/xst-dialog.c:90
+#: src/common/xst-dialog.c:91
 msgid " << Fewer Options "
 msgstr " << Weniger Optionen "
 
-#: src/common/xst-dialog.c:349
+#: src/common/xst-dialog.c:353
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1760,20 +1749,20 @@ msgstr ""
 "Es gibt Änderungen die nicht angewandt wurden.\n"
 "Jetzt anwenden?"
 
-#: src/common/xst-dialog.c:417
+#: src/common/xst-dialog.c:421
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fehlerhaftes Verbindungssignal `%s' in Widget `%s'"
 
-#: src/common/xst-tool.c:499
+#: src/common/xst-tool.c:495
 msgid "Skipping actual save..."
 msgstr "Derzeitiges Sichern wird übersprungen..."
 
-#: src/common/xst-tool.c:525
+#: src/common/xst-tool.c:521
 msgid "Updating your system configuration."
 msgstr "Ihre Systemkonfiguration wird aktualisiert."
 
-#: src/common/xst-tool.c:647
+#: src/common/xst-tool.c:643
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1781,16 +1770,16 @@ msgstr ""
 "Während der Ausführung des Backend-Skripts\n"
 "ist ein Fehler aufgetreten. Die Konfiguration konnte nicht geladen werden."
 
-#: src/common/xst-tool.c:803
+#: src/common/xst-tool.c:809
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian Setup Tools"
 
-#: src/common/xst-tool.c:938
+#: src/common/xst-tool.c:964
 msgid "Pretending we are root..."
 msgstr "Vorgeben root zu sein..."
 
-#: src/common/xst-tool.c:942
+#: src/common/xst-tool.c:968
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -1989,28 +1978,11 @@ msgstr "Netzwerk (Verzeichnisse)"
 msgid "Time and Date Settings"
 msgstr "Zeit- und Datumseinstellungen"
 
-#: src/users/callbacks.c:183
-msgid "Settings for the selected user and group"
-msgstr "Einstellungen für gewählte Benutzer und Gruppe"
-
-#: src/users/callbacks.c:288 src/users/callbacks.c:306
+#: src/users/callbacks.c:287 src/users/callbacks.c:305
 msgid "Name of new profile"
 msgstr "Name des neuen Profils"
 
-#: src/users/callbacks.c:500
-#, c-format
-msgid "Password set to \"%s\"."
-msgstr "Passwort festgelegt: \"%s\"."
-
-#: src/users/callbacks.c:539
-msgid ""
-"The password and its confirmation\n"
-"must match."
-msgstr ""
-"Das Passwort und die Bestätigung\n"
-"müssen übereinstimmen."
-
-#: src/users/callbacks.c:546
+#: src/users/callbacks.c:484
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -2019,44 +1991,57 @@ msgstr ""
 "Falsches Passwort: %s.\n"
 "Bitte versuchen Sie es mit einem neuen."
 
+#: src/users/callbacks.c:519
+msgid "Insert password"
+msgstr "Passwort eingeben"
+
+#: src/users/callbacks.c:537
+#, c-format
+msgid "Password set to \"%s\"."
+msgstr "Passwort festgelegt: \"%s\"."
+
 #: src/users/main.c:163
 msgid "Show All"
 msgstr "Alles zeigen"
 
-#: src/users/main.c:188
+#: src/users/main.c:189
 msgid "User name contains"
 msgstr "Benutzer enthält"
 
-#: src/users/main.c:189
+#: src/users/main.c:190
 msgid "User GID contains"
 msgstr "Benutzer-GID enthält"
 
-#: src/users/main.c:258
+#: src/users/main.c:191
+msgid "Group name contains"
+msgstr "Gruppenname enthält"
+
+#: src/users/main.c:269
 msgid "Users and Groups"
 msgstr "Benutzer und Gruppen"
 
-#: src/users/user_group.c:220
+#: src/users/user_group.c:227
 msgid "The username is empty."
 msgstr "Der Benutzername ist leer."
 
-#: src/users/user_group.c:224
+#: src/users/user_group.c:231
 msgid "Please set a valid username, using only lower-case letters."
 msgstr ""
 "Bitte geben Sie einen gültigen Benutzernamen ein (nur Kleinbuchstaben)."
 
-#: src/users/user_group.c:228
+#: src/users/user_group.c:235
 msgid "Username already exsists."
 msgstr "Der Benutzer existiert bereits."
 
-#: src/users/user_group.c:262
+#: src/users/user_group.c:269
 msgid "Such user id already exsists."
 msgstr "Dies Benuter-ID existiert bereits."
 
-#: src/users/user_group.c:291
+#: src/users/user_group.c:298
 msgid "Home directory must not be empty."
 msgstr "Heimatverzeichnis darf nicht leer sein."
 
-#: src/users/user_group.c:333
+#: src/users/user_group.c:334
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from pull-down menu."
@@ -2064,56 +2049,50 @@ msgstr ""
 "Bitte geben sie einen gültigen Gruppennamen ein (nur Kleinbuchstaben),\n"
 "oder wählen Sei einen aus dem Menü."
 
-#: src/users/user_group.c:356
+#: src/users/user_group.c:358
 msgid "Group name is empty."
 msgstr "Gruppenname ist leer."
 
-#: src/users/user_group.c:360
+#: src/users/user_group.c:362
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Bitte geben Sie einen gültigen Gruppennamen ein (nur Kleinbuchstaben)."
 
-#: src/users/user_group.c:364
+#: src/users/user_group.c:366
 msgid "Group already exsists."
 msgstr "Die Gruppe existiert bereits."
 
-#: src/users/user_group.c:398
+#: src/users/user_group.c:400
 msgid "Such group id already exsists."
 msgstr "Diese Gruppen-ID existiert bereits."
 
-#: src/users/user_group.c:759
+#: src/users/user_group.c:779
 #, c-format
 msgid "Password for User %s"
 msgstr "Passwort für Benutzer %s"
 
-#: src/users/user_group.c:786
+#: src/users/user_group.c:806
 msgid "The root user must not be deleted."
 msgstr "Der root-Benutzer darf nicht gelöscht werden."
 
-#: src/users/user_group.c:793
+#: src/users/user_group.c:813
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Sind Sie sicher, dass Sie den Benutzer %s löschen wollen?"
 
-#: src/users/user_group.c:816
+#: src/users/user_group.c:836
 msgid "Create New Group"
 msgstr "Neue Gruppe erstellen"
 
-#: src/users/user_group.c:880
+#: src/users/user_group.c:900
 msgid "The root group must not be deleted."
 msgstr "Die root Gruppe darf nicht gelöscht werden."
 
-#: src/users/user_group.c:887
+#: src/users/user_group.c:907
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Sind Sie sicher, dass Sie die Gruppe %s löschen wollen?"
 
-#: src/users/user_group.c:932
+#: src/users/user_group.c:952
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Einstellungen für Gruppe %s"
-
-#~ msgid "Settings for group "
-#~ msgstr "Einstellungen für Gruppe "
-
-#~ msgid "Settings for user "
-#~ msgstr "Einstellungen für Benutzer "
