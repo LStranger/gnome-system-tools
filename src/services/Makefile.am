@@ -24,4 +24,3 @@ services_admin_SOURCES = \
 	table.c			table.h	\
 	transfer.c		transfer.h
 toolpixmaps =
-etspecs = 

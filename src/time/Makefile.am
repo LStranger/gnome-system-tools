@@ -26,5 +26,3 @@ time_admin_SOURCES = \
 	transfer.c        transfer.h 
 
 toolpixmaps =
-etspecs = 
-etspecs_DATA = $(etspecs)

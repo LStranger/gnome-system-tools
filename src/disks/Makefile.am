@@ -32,4 +32,3 @@ disks_admin_SOURCES = \
 	callbacks.c		  callbacks.h
 
 toolpixmaps =
-etspecs = 

@@ -1245,8 +1245,6 @@ gst_tool_type_init (GstTool *tool)
 
 	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
 
-	tool->etspecs_common_path = g_strdup (ETSPECS_DIR);
-
 	tool->report_gui = xml  = gst_tool_load_glade_common (tool, "report_window");
 
 	tool->report_window     = glade_xml_get_widget (xml, "report_window");

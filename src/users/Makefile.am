@@ -35,4 +35,3 @@ users_admin_SOURCES = \
 	profile-settings.c profile-settings.h
 
 toolpixmaps =
-etspecs = 

@@ -30,4 +30,3 @@ network_admin_SOURCES = \
 	network-druid.c		network-druid.h
 
 toolpixmaps =
-etspecs = 

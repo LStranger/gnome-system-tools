@@ -29,4 +29,3 @@ boot_admin_SOURCES = \
 	boot-append-gui.c       boot-append-gui.h
 
 toolpixmaps =
-etspecs = 

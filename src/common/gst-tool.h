@@ -53,7 +53,6 @@ struct _GstTool {
 	char *glade_path;
 	char *glade_common_path;
 	char *script_path;
-	char *etspecs_common_path;
 
 	char *script_name;
 
