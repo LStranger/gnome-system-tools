@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
 
-AM_INIT_AUTOMAKE(ximian-setup-tools, 0.7.0)
+AM_INIT_AUTOMAKE(ximian-setup-tools, 0.8.0)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -258,7 +258,8 @@ interfaces/Makefile
 pixmaps/Makefile
 src/Makefile
 src/common/Makefile
-src/disks/Makefile
+src/memory/Makefile 
+dnl src/disks/Makefile
 src/network/Makefile
 src/time/Makefile
 src/time/e-map/Makefile
@@ -267,9 +268,9 @@ src/users/e-search-bar/Makefile
 src/boot/Makefile
 
 src/shares/Makefile
-src/print/Makefile
+dnl src/print/Makefile
 src/display/Makefile
-src/location-manager/Makefile
+dnl src/location-manager/Makefile
 src/internetsharing/Makefile
 
 doc/Makefile
