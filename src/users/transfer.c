@@ -97,7 +97,7 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 
 	/* make login.defs struct */
 
-	for (i = 0, tag = logindefs_tags[i]; tag; i++, tag = logindefs_tags[i]) 
+	for (i = 0, tag = logindefs_tags[0]; tag; i++, tag = logindefs_tags[i]) 
 	{
 		n0 = xml_element_find_first (node, tag);
 
@@ -130,6 +130,14 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 {
 	xmlNodePtr users_node, node, n0;
 	user *u;
+	
+	gchar *user_tags[] = {
+		"key", "login", "password", "uid", "gid", "comment", "home", "shell", "last_mod", 
+		"passwd_max_life", "passwd_exp_warn", "passwd_exp_disable", "passwd_disable", "reserved",
+		"is_shadow", NULL
+	};
+	gchar *tag;
+	gint i;
 
 	/* Find userdb */
 	
@@ -140,6 +148,7 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 		return;
 	}
 	
+	/* For every user */
 	for (node = xml_element_find_first (users_node, "user");
 			 node;
 			 node = xml_element_find_next (node, "user"))
@@ -147,57 +156,34 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 
 		u = g_new0 (user, 1);
 
-		/* FIXME: This assumes a special order in the XML data. There is not such, and this should
-		 * be supported. See transfer_logindefs_from_xml for an easy method for this. */
-		n0 = xml_element_find_first (node, "key");
-		if (n0) u->key = atoi (xml_element_get_content (n0));
-
-		n0 = xml_element_find_first (node, "login");
-		if (n0) u->login = xml_element_get_content (n0);
-
-		n0 = xml_element_find_first (node, "password");
-		if (n0) u->password = xml_element_get_content (n0);
-
-		n0 = xml_element_find_first (node, "uid");
-		if (n0) u->uid = atoi (xml_element_get_content (n0));
-
-		n0 = xml_element_find_first (node, "gid");
-		if (n0) u->gid = atoi (xml_element_get_content (n0));
-
-				
-		n0 = xml_element_find_first (node, "comment");
-		if (n0) u->comment = xml_element_get_content (n0);
-
-		n0 = xml_element_find_first (node, "home");
-		if (n0) u->home = xml_element_get_content (n0);
-
-		n0 = xml_element_find_first (node, "shell");
-		if (n0) u->shell = xml_element_get_content (n0);
-
-		n0 = xml_element_find_first (node, "last_mod");
-		if (n0) u->last_mod = atoi (xml_element_get_content (n0));
-
-		n0 = xml_element_find_first (node, "passwd_max_life");
-		if (n0) u->passwd_max_life = atoi (xml_element_get_content (n0));
-
-		n0 = xml_element_find_first (node, "passwd_exp_warn");
-		if (n0) u->passwd_exp_warn = atoi (xml_element_get_content (n0));
+		/* For every property in the user */
+		for (i = 0, tag = user_tags[0]; tag; i++, tag = user_tags[i])
+		{
+			n0 = xml_element_find_first (node, tag);
+			
+			if (n0)
+			{
+				switch (i)
+				{
+				 case  0: u->key = xml_element_get_content (n0); break;
+				 case  1: u->login = xml_element_get_content (n0); break;
+				 case  2: u->password = xml_element_get_content (n0); break;
+				 case  3: u->uid = atoi (xml_element_get_content (n0)); break;
+				 case  4: u->gid = atoi (xml_element_get_content (n0)); break;
+				 case  5: u->comment = xml_element_get_content (n0); break;
+				 case  6: u->home = xml_element_get_content (n0); break;
+				 case  7: u->shell = xml_element_get_content (n0); break;
+				 case  8: u->last_mod = atoi (xml_element_get_content (n0)); break;
+				 case  9: u->passwd_max_life = atoi (xml_element_get_content (n0)); break;
+				 case 10: u->passwd_exp_warn = atoi (xml_element_get_content (n0)); break;
+				 case 11: u->passwd_exp_disable = atoi (xml_element_get_content (n0)); break; /* FIXME if -1 TRUE */
+				 case 12: u->passwd_disable = atoi (xml_element_get_content (n0)); break; /* FIXME if -1 TRUE */
+				 case 13: u->reserved = xml_element_get_content (n0); break; 
+				 case 14: u->is_shadow = atoi (xml_element_get_content (n0)); break;
+				}
+			}
+		}
 		
-		/* FIXME if -1 TRUE
-		n0 = xml_element_find_first (node, "passwd_exp_disable");
-		if (n0) u-> = xml_element_get_content (n0);
-
-		n0 = xml_element_find_first (node, "passwd_disable");
-		if (n0) u->passwd_disable = xml_element_get_content (n0);
-
-		*/
-
-		n0 = xml_element_find_first (node, "reserved");
-		if (n0) u->reserved = atoi (xml_element_get_content (n0));
-
-		n0 = xml_element_find_first (node, "is_shadow");
-		if (n0) u->is_shadow = atoi (xml_element_get_content (n0));
-
 		user_list = g_list_append (user_list, u);
 	}
 }

@@ -51,7 +51,7 @@ typedef struct _user user;
 
 struct _user
 {
-	guint key;			/* Unique, data-independent field */
+	gchar *key;			/* Unique, data-independent field */
 	gchar *login;			/* Login name */
 	gchar *password;		/* Password */
 	guint uid;			/* User id */
@@ -64,8 +64,8 @@ struct _user
 	gint passwd_exp_warn;		/* Number of days before users gets account exp. warning */
 	gboolean passwd_exp_disable;	/* true if password doesn't expire */
 	gboolean passwd_disable;	/* true if password is disabled */
-	gint reserved;			/* */
-	gboolean is_shadow;		/* true if using shadow password */
+	gchar *reserved;			/* Obscure field. Passed through */
+	gboolean is_shadow;		/* true if using shadow passwords */
 };
 
 typedef struct _group group;
