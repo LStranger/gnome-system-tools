@@ -698,7 +698,7 @@ populate_table (ETableModel *model, xmlNodePtr root_node)
 	e_table_memory_freeze (E_TABLE_MEMORY (model));
 	for (node = root_node->childs; node; node = node->next)
 	{
-		if (check_node_complexity (node))
+		if (check_node_visibility (node))
 			e_table_memory_insert (E_TABLE_MEMORY (model), -1, node);
 	}
 

@@ -74,7 +74,7 @@ xmlNodePtr get_nis_group_root_node (void);
 xmlNodePtr get_nis_user_root_node (void);
 xmlNodePtr get_db_node (xmlNodePtr node);
 gchar *my_xst_xml_element_get_content (xmlNodePtr node);
-gboolean check_node_complexity (xmlNodePtr node);
+gboolean check_node_visibility (xmlNodePtr node);
 
 gboolean  check_user_root (xmlNodePtr node, const gchar *field, const gchar *value);
 gchar    *check_user_login (xmlNodePtr node, const gchar *login);

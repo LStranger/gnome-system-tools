@@ -196,7 +196,7 @@ user_filter (xmlNodePtr node)
 }
 
 gboolean
-check_node_complexity (xmlNodePtr node)
+check_node_visibility (xmlNodePtr node)
 {
 	xmlNodePtr db_node;
 	gchar *field, *content;
@@ -658,7 +658,7 @@ get_user_list (gchar *field, xmlNodePtr group_node)
 	     u = xst_xml_element_find_next (u, "user"))
 	{
 
-		if (check_node_complexity (u))
+		if (check_node_visibility (u))
 			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
 	}
 

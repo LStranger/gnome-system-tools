@@ -222,7 +222,7 @@ get_group_list (gchar *field, xmlNodePtr user_node)
 	     u = xst_xml_element_find_next (u, "group"))
 	{
 
-		if (check_node_complexity (u))
+		if (check_node_visibility (u))
 			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
 	}
 
