@@ -140,6 +140,20 @@ connect_signals (void)
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 }
 
+static void
+config_clists (void)
+{
+	XstDialog *xd;
+	gint i;
+	gchar *lists[] = {"group_settings_all", "group_settings_members",
+			  "user_settings_gall", "user_settings_gmember", NULL};
+
+	xd = tool->main_dialog;
+
+	for (i = 0; lists[i]; i++)
+		gtk_clist_set_auto_sort (GTK_CLIST (xst_dialog_get_widget (xd, lists[i])), TRUE);
+}
+
 static ESearchBarItem user_search_menu_items[] = {
 	{ N_("Show All"), 0 },
 	{ NULL, -1}
@@ -239,6 +253,7 @@ main (int argc, char *argv[])
 	tool = xst_tool_init ("users", _("Users and Groups"), argc, argv, NULL);
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
+	config_clists ();
 	create_tables ();
 	create_searchbar ();
 	connect_signals ();
