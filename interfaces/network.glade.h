@@ -7,7 +7,7 @@
 gchar *s = N_("Networking Settings");
 gchar *s = N_("How this computer is identified.");
 gchar *s = N_("_Host name:");
-gchar *s = N_("_Enable windows networking (Samba)");
+gchar *s = N_("_Enable windows networking");
 gchar *s = N_("Windows Networking");
 gchar *s = N_("_Description:");
 gchar *s = N_("Domain / _Workgroup:");
