@@ -15,8 +15,7 @@ gchar *s = N_("Starting your computer");
 gchar *s = N_("_Wait");
 gchar *s = N_("_seconds before loading default kernel or OS");
 gchar *s = N_("Settings");
-gchar *s = N_("Use this dialog to add new kernel or\n"
-              "operating system to your computer.");
+gchar *s = N_("Modify the settings for an operating system or kernel.");
 gchar *s = N_("Boot _type:");
 gchar *s = N_("_Name:");
 gchar *s = N_("Settings");
