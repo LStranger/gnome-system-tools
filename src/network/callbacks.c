@@ -582,7 +582,9 @@ on_connection_activate_clicked (GtkWidget *w, gpointer null)
 		
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
-		xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, sign, "enable_iface");
+		xst_tool_run_set_directive (tool, NULL, sign, "enable_iface", file, "1", NULL);
+		g_free (sign);
+/*		xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, sign, "enable_iface");*/
 	}
 
 	cxn->activation = ACTIVATION_UP;
@@ -608,14 +610,17 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 	connection_update_row_enabled (cxn, FALSE);
 
-	if (xst_dialog_get_modified (tool->main_dialog))
+	if (xst_dialog_get_modified (tool->main_dialog)) {
 		xst_tool_save (tool);
-	else {
+		xst_dialog_set_modified (tool->main_dialog, FALSE);
+	} else {
 		gchar *sign, *file;
 		
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
-		xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, sign, "enable_iface");
+		xst_tool_run_set_directive (tool, NULL, sign, "enable_iface", file, "0", NULL);
+		g_free (sign);
+/*		xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, sign, "enable_iface");*/
 	}
 
 	cxn->activation = ACTIVATION_DOWN;

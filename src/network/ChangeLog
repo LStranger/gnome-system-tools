@@ -2,6 +2,9 @@
 
 	* callbacks.c (callbacks_tool_not_found_hook): removed
 	debug code.
+	(on_connection_deactivate_clicked): Don't use async
+	directive queuing.
+	(on_connection_activate_clicked): same.
 
 	* connection.c (connection_default_gw_set_manual): Check
 	remote_address first before g_strdup'ing.
