@@ -3757,7 +3757,7 @@ are determined.</property>
 	      <child>
 		<widget class="GtkTable" id="table18">
 		  <property name="visible">True</property>
-		  <property name="n_rows">4</property>
+		  <property name="n_rows">3</property>
 		  <property name="n_columns">3</property>
 		  <property name="homogeneous">False</property>
 		  <property name="row_spacing">6</property>
@@ -3766,7 +3766,7 @@ are determined.</property>
 		  <child>
 		    <widget class="GtkLabel" id="label170">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">&lt;span weight=&quot;bold&quot;&gt;Account Data&lt;/span&gt;</property>
+		      <property name="label" translatable="yes">&lt;span weight=&quot;bold&quot;&gt;Internet Service Provider Data&lt;/span&gt;</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">True</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -3815,7 +3815,7 @@ are determined.</property>
 		  <child>
 		    <widget class="GtkLabel" id="label173">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Username:</property>
+		      <property name="label" translatable="yes">Number to _access an external line:</property>
 		      <property name="use_underline">True</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -3855,32 +3855,7 @@ are determined.</property>
 		      <property name="left_attach">0</property>
 		      <property name="right_attach">1</property>
 		      <property name="top_attach">1</property>
-		      <property name="bottom_attach">4</property>
-		      <property name="x_options">fill</property>
-		      <property name="y_options"></property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkLabel" id="label174">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Password:</property>
-		      <property name="use_underline">True</property>
-		      <property name="use_markup">False</property>
-		      <property name="justify">GTK_JUSTIFY_LEFT</property>
-		      <property name="wrap">False</property>
-		      <property name="selectable">False</property>
-		      <property name="xalign">0</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xpad">0</property>
-		      <property name="ypad">0</property>
-		      <property name="mnemonic_widget">ppp_password</property>
-		    </widget>
-		    <packing>
-		      <property name="left_attach">1</property>
-		      <property name="right_attach">2</property>
-		      <property name="top_attach">3</property>
-		      <property name="bottom_attach">4</property>
+		      <property name="bottom_attach">3</property>
 		      <property name="x_options">fill</property>
 		      <property name="y_options"></property>
 		    </packing>
@@ -3909,6 +3884,142 @@ are determined.</property>
 		  </child>
 
 		  <child>
+		    <widget class="GtkEntry" id="ppp_external_line">
+		      <property name="visible">True</property>
+		      <property name="can_focus">True</property>
+		      <property name="editable">True</property>
+		      <property name="visibility">True</property>
+		      <property name="max_length">0</property>
+		      <property name="text" translatable="yes"></property>
+		      <property name="has_frame">True</property>
+		      <property name="invisible_char" translatable="yes">*</property>
+		      <property name="activates_default">False</property>
+		      <signal name="changed" handler="on_connection_modified" last_modification_time="Mon, 23 Jun 2003 16:24:36 GMT"/>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">2</property>
+		      <property name="right_attach">3</property>
+		      <property name="top_attach">2</property>
+		      <property name="bottom_attach">3</property>
+		      <property name="y_options"></property>
+		    </packing>
+		  </child>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">False</property>
+		  <property name="fill">True</property>
+		</packing>
+	      </child>
+
+	      <child>
+		<widget class="GtkTable" id="table31">
+		  <property name="visible">True</property>
+		  <property name="n_rows">3</property>
+		  <property name="n_columns">3</property>
+		  <property name="homogeneous">False</property>
+		  <property name="row_spacing">6</property>
+		  <property name="column_spacing">12</property>
+
+		  <child>
+		    <widget class="GtkLabel" id="label259">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">&lt;span weight=&quot;bold&quot;&gt;Account Data&lt;/span&gt;</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">True</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">0</property>
+		      <property name="right_attach">3</property>
+		      <property name="top_attach">0</property>
+		      <property name="bottom_attach">1</property>
+		      <property name="x_options">fill</property>
+		      <property name="y_options"></property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label260">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes"></property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">0</property>
+		      <property name="right_attach">1</property>
+		      <property name="top_attach">1</property>
+		      <property name="bottom_attach">3</property>
+		      <property name="x_options">fill</property>
+		      <property name="y_options"></property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label261">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Username:</property>
+		      <property name="use_underline">True</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">ppp_login</property>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">1</property>
+		      <property name="right_attach">2</property>
+		      <property name="top_attach">1</property>
+		      <property name="bottom_attach">2</property>
+		      <property name="x_options">fill</property>
+		      <property name="y_options"></property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label174">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">_Password:</property>
+		      <property name="use_underline">True</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_LEFT</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		      <property name="mnemonic_widget">ppp_password</property>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">1</property>
+		      <property name="right_attach">2</property>
+		      <property name="top_attach">2</property>
+		      <property name="bottom_attach">3</property>
+		      <property name="x_options">fill</property>
+		      <property name="y_options"></property>
+		    </packing>
+		  </child>
+
+		  <child>
 		    <widget class="GtkEntry" id="ppp_login">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
@@ -3924,8 +4035,8 @@ are determined.</property>
 		    <packing>
 		      <property name="left_attach">2</property>
 		      <property name="right_attach">3</property>
-		      <property name="top_attach">2</property>
-		      <property name="bottom_attach">3</property>
+		      <property name="top_attach">1</property>
+		      <property name="bottom_attach">2</property>
 		      <property name="y_options"></property>
 		    </packing>
 		  </child>
@@ -3946,15 +4057,15 @@ are determined.</property>
 		    <packing>
 		      <property name="left_attach">2</property>
 		      <property name="right_attach">3</property>
-		      <property name="top_attach">3</property>
-		      <property name="bottom_attach">4</property>
+		      <property name="top_attach">2</property>
+		      <property name="bottom_attach">3</property>
 		      <property name="y_options"></property>
 		    </packing>
 		  </child>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
-		  <property name="expand">False</property>
+		  <property name="expand">True</property>
 		  <property name="fill">True</property>
 		</packing>
 	      </child>
@@ -4138,6 +4249,7 @@ are determined.</property>
 		      <property name="inverted">False</property>
 		      <property name="adjustment">0 0 3 1 3 0</property>
 		      <signal name="value_changed" handler="on_connection_modified" last_modification_time="Tue, 04 Feb 2003 00:11:45 GMT"/>
+		      <signal name="format_value" handler="on_volume_format_value" last_modification_time="Mon, 23 Jun 2003 17:06:20 GMT"/>
 		    </widget>
 		    <packing>
 		      <property name="left_attach">2</property>
@@ -5011,9 +5123,9 @@ Click the &quot;Next&quot; button to begin.</property>
 	<widget class="GnomeDruidPageStandard" id="ppp_druid_page1">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">1. ISP phone number</property>
-	  <property name="title_foreground">#9d880848ec08</property>
-	  <property name="background">#a6600847ec08</property>
-	  <property name="logo_background">#f610081f0dac</property>
+	  <property name="title_foreground">#54580840ec08</property>
+	  <property name="background">#67380840ec08</property>
+	  <property name="logo_background">#f628081f0dac</property>
 	  <property name="logo">connection-modem.png</property>
 
 	  <child internal-child="vbox">
@@ -5216,9 +5328,9 @@ Click the &quot;Next&quot; button to begin.</property>
 	<widget class="GnomeDruidPageStandard" id="ppp_druid_page2">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">2. Username and password</property>
-	  <property name="title_foreground">#41d80851ec08</property>
-	  <property name="background">#22b00851ec08</property>
-	  <property name="logo_background">#f610081f0dac</property>
+	  <property name="title_foreground">#99c00840ec08</property>
+	  <property name="background">#a6580840ec08</property>
+	  <property name="logo_background">#f628081f0dac</property>
 	  <property name="logo">users.png</property>
 
 	  <child internal-child="vbox">
@@ -5519,9 +5631,9 @@ Click the &quot;Next&quot; button to begin.</property>
 	<widget class="GnomeDruidPageStandard" id="ppp_druid_page3">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">3. Account name</property>
-	  <property name="title_foreground">#b2400850ec08</property>
-	  <property name="background">#fd880844ec08</property>
-	  <property name="logo_background">#f610081f0dac</property>
+	  <property name="title_foreground">#d9580840ec08</property>
+	  <property name="background">#eb500840ec08</property>
+	  <property name="logo_background">#f628081f0dac</property>
 	  <property name="logo">nameresolution_id.png</property>
 
 	  <child internal-child="vbox">
@@ -6690,11 +6802,13 @@ and the remote address to which it will be connected.</property>
 		      <property name="yscale">0</property>
 
 		      <child>
-			<widget class="GtkHBox" id="hbox47">
-			  <property name="border_width">3</property>
+			<widget class="GtkTable" id="table30">
 			  <property name="visible">True</property>
+			  <property name="n_rows">2</property>
+			  <property name="n_columns">2</property>
 			  <property name="homogeneous">False</property>
-			  <property name="spacing">12</property>
+			  <property name="row_spacing">6</property>
+			  <property name="column_spacing">12</property>
 
 			  <child>
 			    <widget class="GtkLabel" id="label233">
@@ -6705,15 +6819,18 @@ and the remote address to which it will be connected.</property>
 			      <property name="justify">GTK_JUSTIFY_CENTER</property>
 			      <property name="wrap">False</property>
 			      <property name="selectable">False</property>
-			      <property name="xalign">0.5</property>
+			      <property name="xalign">0</property>
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
 			    </widget>
 			    <packing>
-			      <property name="padding">0</property>
-			      <property name="expand">False</property>
-			      <property name="fill">False</property>
+			      <property name="left_attach">0</property>
+			      <property name="right_attach">1</property>
+			      <property name="top_attach">0</property>
+			      <property name="bottom_attach">1</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
 			    </packing>
 			  </child>
 
@@ -6731,9 +6848,56 @@ and the remote address to which it will be connected.</property>
 			      <property name="activates_default">False</property>
 			    </widget>
 			    <packing>
-			      <property name="padding">0</property>
-			      <property name="expand">False</property>
-			      <property name="fill">False</property>
+			      <property name="left_attach">1</property>
+			      <property name="right_attach">2</property>
+			      <property name="top_attach">0</property>
+			      <property name="bottom_attach">1</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkLabel" id="label258">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Number to get to an external line:</property>
+			      <property name="use_underline">False</property>
+			      <property name="use_markup">False</property>
+			      <property name="justify">GTK_JUSTIFY_LEFT</property>
+			      <property name="wrap">False</property>
+			      <property name="selectable">False</property>
+			      <property name="xalign">0</property>
+			      <property name="yalign">0.5</property>
+			      <property name="xpad">0</property>
+			      <property name="ypad">0</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">0</property>
+			      <property name="right_attach">1</property>
+			      <property name="top_attach">1</property>
+			      <property name="bottom_attach">2</property>
+			      <property name="x_options">fill</property>
+			      <property name="y_options"></property>
+			    </packing>
+			  </child>
+
+			  <child>
+			    <widget class="GtkEntry" id="network_connection_external_line">
+			      <property name="visible">True</property>
+			      <property name="can_focus">True</property>
+			      <property name="editable">True</property>
+			      <property name="visibility">True</property>
+			      <property name="max_length">0</property>
+			      <property name="text" translatable="yes"></property>
+			      <property name="has_frame">True</property>
+			      <property name="invisible_char" translatable="yes">*</property>
+			      <property name="activates_default">False</property>
+			    </widget>
+			    <packing>
+			      <property name="left_attach">1</property>
+			      <property name="right_attach">2</property>
+			      <property name="top_attach">1</property>
+			      <property name="bottom_attach">2</property>
+			      <property name="y_options"></property>
 			    </packing>
 			  </child>
 			</widget>

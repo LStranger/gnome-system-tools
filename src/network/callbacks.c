@@ -331,8 +331,7 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length,
 		s = g_strconcat (gtk_editable_get_chars (editable, 0, -1), text, NULL);
 		success = is_ip_text_ok (s);
 		g_free (s);
-	}
-	else {
+	} else {
 		while ((i < length) && (string_ok)) {
 			if (is_char_ok (text[i], rules))
 				i++;
@@ -346,14 +345,8 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length,
 			success = FALSE;
 	}
 
-	if (!success) {
-		gdk_beep ();
-	
+	if (!success)
 		gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
-/*		if (s) {
-			gtk_editable_insert_text (editable, s, l, pos);
-			}*/
-	}
 }
 
 /* yeah, I don't like this formatting either */
@@ -1040,7 +1033,6 @@ on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection 
 
         return FALSE;
 }
-
 
 /* Hosts tab callbacks */
 

@@ -1210,6 +1210,7 @@ connection_get_ppp_from_node (xmlNode *node, GstConnection *cxn)
 	if (cxn->wvsection) {
 		cxn->serial_port = connection_get_serial_port_from_node (node->parent, cxn->wvsection);
 		cxn->phone_number = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "phone");
+		cxn->external_line = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "external_line");
 		cxn->login = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "login");
 		cxn->password = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "password");
 		cxn->stupid = connection_xml_wvsection_get_boolean (node->parent, cxn->wvsection, "stupid");
@@ -1220,6 +1221,7 @@ connection_get_ppp_from_node (xmlNode *node, GstConnection *cxn)
 		connection_xml_save_str_to_node (cxn->node, "wvsection", cxn->wvsection);
 
 		cxn->phone_number = gst_xml_get_child_content (node, "phone_number");
+		cxn->external_line = gst_xml_get_child_content (node, "external_line");
 		cxn->login = gst_xml_get_child_content (node, "login");
 		cxn->password = gst_xml_get_child_content (node, "password");
 		cxn->stupid = FALSE;
@@ -1419,6 +1421,7 @@ connection_free (GstConnection *cxn)
 	g_free (cxn->session_id);
 
 	g_free (cxn->phone_number);
+	g_free (cxn->external_line);
 	g_free (cxn->login);
 	g_free (cxn->password);
 	g_free (cxn->serial_port);
@@ -1552,6 +1555,7 @@ static void
 empty_ppp (GstConnection *cxn)
 {
 	GET_STR ("ppp_", phone_number);
+	GET_STR ("ppp_", external_line);
 	GET_STR ("ppp_", login);
 	GET_STR ("ppp_", password);
 	GET_BOOL ("ppp_", persist);
@@ -1762,6 +1766,7 @@ static void
 fill_ppp (GstConnection *cxn)
 {
 	SET_STR ("ppp_", phone_number);
+	SET_STR ("ppp_", external_line);
 	SET_STR ("ppp_", login);
 	SET_STR ("ppp_", password);
 	SET_BOOL ("ppp_", persist);
@@ -2038,6 +2043,7 @@ connection_save_to_node (GstConnection *cxn, xmlNode *root)
 		connection_xml_save_str_to_node (node, "wvsection", cxn->wvsection);
 		
 		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "phone", cxn->phone_number);
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "external_line", cxn->external_line);
 		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "login", cxn->login);
 		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "password", cxn->password);
 		connection_xml_wvsection_save_boolean_to_node (root, cxn->wvsection, "stupid", cxn->stupid);

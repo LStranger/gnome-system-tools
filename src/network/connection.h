@@ -121,6 +121,7 @@ typedef struct {
 
 	/* PPP */
 	gchar *phone_number;
+	gchar *external_line;
 	gchar *login;
 	gchar *password;
 	gboolean persist;

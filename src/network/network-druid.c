@@ -98,6 +98,7 @@ network_druid_get_connection_data (GnomeDruid *druid)
 
 	if (cxn->type == GST_CONNECTION_PPP) {
 		GtkWidget *phone = gst_dialog_get_widget (tool->main_dialog, "network_connection_ppp_phone");
+		GtkWidget *external_line = gst_dialog_get_widget (tool->main_dialog, "network_connection_external_line");
 		GtkWidget *login = gst_dialog_get_widget (tool->main_dialog, "network_connection_ppp_login");
 		GtkWidget *passwd = gst_dialog_get_widget (tool->main_dialog, "network_connection_ppp_passwd1");
 		GtkWidget *name = gst_dialog_get_widget (tool->main_dialog, "network_connection_name");
@@ -108,6 +109,7 @@ network_druid_get_connection_data (GnomeDruid *druid)
 
 		cxn->serial_port = modem;
 		cxn->phone_number = g_strdup (gtk_entry_get_text (GTK_ENTRY (phone)));
+		cxn->external_line = g_strdup (gtk_entry_get_text (GTK_ENTRY (external_line)));
 		cxn->login = g_strdup (gtk_entry_get_text (GTK_ENTRY (login)));
 		cxn->password = g_strdup (gtk_entry_get_text (GTK_ENTRY (passwd)));
 		cxn->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (name)));
