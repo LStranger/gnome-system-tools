@@ -25,6 +25,30 @@
 #include "share-export.h"
 #include "table.h"
 
+static void
+check_servers (GstTool *tool, xmlNodePtr root)
+{
+	GtkWidget *dialog;
+	gboolean   smb_installed, nfs_installed;
+
+	smb_installed = gst_xml_element_get_boolean (root, "smbinstalled");
+	nfs_installed = gst_xml_element_get_boolean (root, "nfsinstalled");
+
+	if (!smb_installed && !nfs_installed) {
+		dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_WARNING,
+						 GTK_BUTTONS_CLOSE,
+						 _("Sharing services are not installed"));
+		gtk_message_dialog_format_secondary_markup (GTK_MESSAGE_DIALOG (dialog),
+							    _("You need to install at least either Samba or NFS "
+							      "in order to share your folders. The tool "
+							      "will close now."));
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		g_signal_emit_by_name (G_OBJECT (tool), "close");
+	}
+}
+
 void
 transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
@@ -32,6 +56,8 @@ transfer_xml_to_gui (GstTool *tool, gpointer data)
 
 	root   = gst_xml_doc_get_root (tool->config);
 	export = gst_xml_element_find_first (root, "exports");
+
+	check_servers (tool, root);
 
 	if (!export)
 		return;

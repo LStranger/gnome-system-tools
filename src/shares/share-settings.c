@@ -105,9 +105,12 @@ share_settings_prepare_dialog (const gchar *path, gboolean standalone)
 	GtkWidget    *dialog      = gst_dialog_get_widget (tool->main_dialog, "share_properties");
 	GtkTreeModel *model;
 	GtkTreeIter   iter;
+	xmlNodePtr    root;
 
 	share_settings_clear_dialog ();
 	share_settings_set_path (path);
+
+	root = gst_xml_doc_get_root (tool->config);
 	
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 	gtk_list_store_clear (GTK_LIST_STORE (model));
@@ -120,17 +123,21 @@ share_settings_prepare_dialog (const gchar *path, gboolean standalone)
 				    -1);
 	}
 
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    0, _("SMB"),
-			    1, SHARE_THROUGH_SMB,
-			    -1);
+	if (gst_xml_element_get_boolean (root, "smbinstalled")) {
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    0, _("SMB"),
+				    1, SHARE_THROUGH_SMB,
+				    -1);
+	}
 
-	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    0, _("NFS"),
-			    1, SHARE_THROUGH_NFS,
-			    -1);
+	if (gst_xml_element_get_boolean (root, "nfsinstalled")) {
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    0, _("NFS"),
+				    1, SHARE_THROUGH_NFS,
+				    -1);
+	}
 
 	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), 0);
 
