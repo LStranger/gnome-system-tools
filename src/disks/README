@@ -1,0 +1,24 @@
+Disks Admin Tool
+----------------
+
+The disks admin tool is a new tool for GNOME System Tool
+that currently, 2003-12-22, isn't official.
+
+So don't try to get support from the GNOME System Tool
+developers. Please, ask directly to the tool developers.
+
+Alvaro Peña Gonzalez <apg@esware.com>
+Carlos García Campos <elkalmail@yahoo.es>
+Alvaro del Castillo San Félix <acs@barrapunto.com>
+
+The tool isn't compiled and installed in a default 
+configuration. You will need to:
+
+1. Modify configure.in in the main directory to generate
+the src/disks/Makefile
+
+2. Add the disks directory to src/Makefile.am
+
+3. Add disks.glade to interfaces/Makefile.am
+
+4. Execute ./autogen.sh and compile all the GNOME System Tools
