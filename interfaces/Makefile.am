@@ -9,6 +9,7 @@ interfaces = \
 	users.glade 					\
 	boot.glade					\
 	location-manager.glade			\
+	internetsharing.glade			\
 	print.glade
 
 interfaces_DATA = $(interfaces)

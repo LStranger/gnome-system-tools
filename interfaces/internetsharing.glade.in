@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<GTK-Interface>
+
+<project>
+  <name>Interfaces</name>
+  <program_name>interfaces</program_name>
+  <directory></directory>
+  <source_directory>src</source_directory>
+  <pixmaps_directory>../pixmaps</pixmaps_directory>
+  <language>C</language>
+  <gnome_support>True</gnome_support>
+  <gettext_support>True</gettext_support>
+  <output_translatable_strings>True</output_translatable_strings>
+  <translatable_strings_file>internetsharing.glade.h</translatable_strings_file>
+</project>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>internetsharing_admin_win</name>
+  <visible>False</visible>
+  <title>Internet Sharing --Advanced Mode</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <default_width>445</default_width>
+  <default_height>272</default_height>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>internetsharing_admin</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox11</name>
+      <border_width>3</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap11</name>
+	<filename>networking.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label50</name>
+	<label>The internet sharing tool allows you to share your internet conection with other computers on the network.</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>True</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap12</name>
+	<filename>32_wrench_logo.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkFrame</class>
+      <name>frame14</name>
+      <border_width>3</border_width>
+      <label>Internet Sharing</label>
+      <label_xalign>0</label_xalign>
+      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>enable_button</name>
+	<can_focus>True</can_focus>
+	<label>Enable</label>
+	<active>True</active>
+	<draw_indicator>True</draw_indicator>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkFrame</class>
+      <name>frame13</name>
+      <border_width>3</border_width>
+      <label>Enable :</label>
+      <label_xalign>0</label_xalign>
+      <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>vbox16</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>ipforwarding_button</name>
+	  <can_focus>True</can_focus>
+	  <label>IP Forwarding</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkHBox</class>
+	  <name>hbox16</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>checkbutton10</name>
+	    <can_focus>True</can_focus>
+	    <label>DHCP</label>
+	    <active>True</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label57</name>
+	    <label>IP range :</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>iprange_entry</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text>192.168.100.x</text>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>firewall_button</name>
+	  <can_focus>True</can_focus>
+	  <label>Firewall</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>webcache_button</name>
+	  <can_focus>True</can_focus>
+	  <label>Web Cache (squid)</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>junkbuster_button</name>
+	  <can_focus>True</can_focus>
+	  <label>Banner Removal (Junkbuster)</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+</GTK-Interface>
