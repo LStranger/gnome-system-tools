@@ -4,7 +4,7 @@
 <glade-interface>
 <requires lib="gnome"/>
 
-<widget class="GtkWindow" id="window1">
+<widget class="GtkWindow" id="main_window">
   <property name="width_request">510</property>
   <property name="height_request">355</property>
   <property name="title" translatable="yes"></property>
@@ -360,7 +360,7 @@ systems to choose from at startup.</property>
   </child>
 </widget>
 
-<widget class="GtkWindow" id="window2">
+<widget class="GtkWindow" id="settings_window">
   <property name="title" translatable="yes"></property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -525,7 +525,7 @@ systems to choose from at startup.</property>
 
 	  <child>
 	    <widget class="GtkLabel" id="label83">
-	      <property name="label" translatable="yes">Boot _type:</property>
+	      <property name="label" translatable="yes">_Operating system:</property>
 	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -721,7 +721,7 @@ systems to choose from at startup.</property>
 	  <child>
 	    <widget class="GtkLabel" id="label89">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">_Append:</property>
+	      <property name="label" translatable="yes">P_arameters:</property>
 	      <property name="use_underline">True</property>
 	      <property name="use_markup">False</property>
 	      <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -836,7 +836,7 @@ systems to choose from at startup.</property>
 		    <widget class="GtkHBox" id="hbox14">
 		      <property name="visible">True</property>
 		      <property name="homogeneous">False</property>
-		      <property name="spacing">2</property>
+		      <property name="spacing">6</property>
 
 		      <child>
 			<widget class="GtkImage" id="image5">
@@ -858,7 +858,7 @@ systems to choose from at startup.</property>
 		      <child>
 			<widget class="GtkLabel" id="label94">
 			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">_Edit parameters</property>
+			  <property name="label" translatable="yes">_Edit</property>
 			  <property name="use_underline">True</property>
 			  <property name="use_markup">False</property>
 			  <property name="justify">GTK_JUSTIFY_LEFT</property>
@@ -1089,7 +1089,7 @@ systems to choose from at startup.</property>
   </child>
 </widget>
 
-<widget class="GtkWindow" id="window3">
+<widget class="GtkWindow" id="boot_druid">
   <property name="title" translatable="yes">Boot Image Assistant</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
@@ -1109,9 +1109,9 @@ systems to choose from at startup.</property>
 	  <property name="position">GNOME_EDGE_START</property>
 	  <property name="title" translatable="yes">Boot Image Assistant</property>
 	  <property name="text" translatable="yes">This assistant is designed to help you quickly 
-and easily add new boot images to your system.
+and easily add a new boot image to your system.
 
-To begin, click &quot;Next&quot;. </property>
+To begin, click &quot;Forward&quot;. </property>
 	  <property name="title_color">#ffffffffffff</property>
 	  <property name="text_color">#000000000000</property>
 	  <property name="background_color">#000000000101</property>
@@ -1124,9 +1124,9 @@ To begin, click &quot;Next&quot;. </property>
 	<widget class="GnomeDruidPageStandard" id="druidIdentityPage">
 	  <property name="visible">True</property>
 	  <property name="title" translatable="yes">Image Settings (Step 1 of 2)</property>
-	  <property name="title_foreground">#ee00bfffebb8</property>
-	  <property name="background">#4e180839ebb8</property>
-	  <property name="logo_background">#5a400820ff73</property>
+	  <property name="title_foreground">#eb80bfffe938</property>
+	  <property name="background">#96f00836e938</property>
+	  <property name="logo_background">#bf60081dff73</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">
@@ -1208,7 +1208,7 @@ To begin, click &quot;Next&quot;. </property>
 		  <child>
 		    <widget class="GtkLabel" id="label67">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Click &quot;Next&quot; to continue</property>
+		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_CENTER</property>
@@ -1240,10 +1240,10 @@ To begin, click &quot;Next&quot;. </property>
       <child>
 	<widget class="GnomeDruidPageStandard" id="druidOtherPage">
 	  <property name="visible">True</property>
-	  <property name="title" translatable="yes">Other Settings (Step 2 of 2)</property>
-	  <property name="title_foreground">#ee00bfffebb8</property>
-	  <property name="background">#c8c00839ebb8</property>
-	  <property name="logo_background">#5a400820ff73</property>
+	  <property name="title" translatable="yes">Other Operating System (Step 2 of 2)</property>
+	  <property name="title_foreground">#eb80bfffe938</property>
+	  <property name="background">#d0400836e938</property>
+	  <property name="logo_background">#bf60081dff73</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">
@@ -1325,7 +1325,7 @@ To begin, click &quot;Next&quot;. </property>
 		  <child>
 		    <widget class="GtkLabel" id="label67">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Click &quot;Next&quot; to continue</property>
+		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_CENTER</property>
@@ -1357,10 +1357,10 @@ To begin, click &quot;Next&quot;. </property>
       <child>
 	<widget class="GnomeDruidPageStandard" id="druidImagePage">
 	  <property name="visible">True</property>
-	  <property name="title" translatable="yes">Image (Step 2 of 2)</property>
-	  <property name="title_foreground">#ee00bfffebb8</property>
-	  <property name="background">#a358083bebb8</property>
-	  <property name="logo_background">#5a400820ff73</property>
+	  <property name="title" translatable="yes">Image Settings (Step 2 of 2)</property>
+	  <property name="title_foreground">#eb80bfffe938</property>
+	  <property name="background">#d8b00836e938</property>
+	  <property name="logo_background">#bf60081dff73</property>
 	  <property name="logo">boot.png</property>
 
 	  <child internal-child="vbox">
@@ -1443,7 +1443,7 @@ kernel at boot time.</property>
 		  <child>
 		    <widget class="GtkLabel" id="label69">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Click &quot;Next&quot; to continue</property>
+		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
 		      <property name="use_underline">False</property>
 		      <property name="use_markup">False</property>
 		      <property name="justify">GTK_JUSTIFY_CENTER</property>
@@ -1478,7 +1478,7 @@ kernel at boot time.</property>
 	  <property name="position">GNOME_EDGE_FINISH</property>
 	  <property name="title" translatable="yes">Finished</property>
 	  <property name="text" translatable="yes">The new boot image has been added.
-Please click &quot;Finish&quot; to save your changes. </property>
+Please click &quot;Apply&quot; to save your changes. </property>
 	  <property name="title_color">#ffffffffffff</property>
 	  <property name="text_color">#000000000000</property>
 	  <property name="background_color">#000000000101</property>
@@ -1490,7 +1490,7 @@ Please click &quot;Finish&quot; to save your changes. </property>
   </child>
 </widget>
 
-<widget class="GtkWindow" id="window4">
+<widget class="GtkWindow" id="append_settings_window">
   <property name="title" translatable="yes"></property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_NONE</property>
