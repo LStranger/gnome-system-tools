@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-07-19 23:47+0200\n"
-"PO-Revision-Date: 2001-07-19 23:48+0200\n"
+"POT-Creation-Date: 2001-07-24 22:15+0200\n"
+"PO-Revision-Date: 2001-07-24 23:40+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -653,7 +653,7 @@ msgstr "Lösenord:"
 msgid "Run without password"
 msgstr "Kör utan lösenord"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:811
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:827
 msgid "Scanning your system configuration."
 msgstr "Läser av din systemkonfiguration."
 
@@ -832,6 +832,125 @@ msgstr "reiserfs (Linux)"
 msgid "ufs (FreeBSD)"
 msgstr "ufs (FreeBSD)"
 
+#: interfaces/display.glade.in.h:1 interfaces/nameresolution.glade.in.h:3
+msgid "<unknown>"
+msgstr "<okänd>"
+
+#: interfaces/display.glade.in.h:2 src/display/transfer.c:483
+msgid "1024x768"
+msgstr "1024×768"
+
+#: interfaces/display.glade.in.h:3 src/display/transfer.c:485
+msgid "1280x1024"
+msgstr "1280×1024"
+
+#: interfaces/display.glade.in.h:4 src/display/transfer.c:481
+msgid "640x480"
+msgstr "640×480"
+
+#: interfaces/display.glade.in.h:5 src/display/transfer.c:482
+msgid "800x600"
+msgstr "600×600"
+
+#: interfaces/display.glade.in.h:6
+msgid "Appearance"
+msgstr "Utseende"
+
+#: interfaces/display.glade.in.h:7
+msgid "Colors"
+msgstr "Färger"
+
+#: interfaces/display.glade.in.h:8
+msgid "Colors:"
+msgstr "Färger:"
+
+#: interfaces/display.glade.in.h:9
+msgid "Down"
+msgstr "Ner"
+
+#: interfaces/display.glade.in.h:10
+msgid "Left"
+msgstr "Vänster"
+
+#: interfaces/display.glade.in.h:11
+msgid "Model:"
+msgstr "Modell:"
+
+#: interfaces/display.glade.in.h:12
+msgid "Monitor information"
+msgstr "Bildskärmsinformation"
+
+#: interfaces/display.glade.in.h:13
+msgid "Narrower"
+msgstr "Smalare"
+
+#: interfaces/display.glade.in.h:14
+msgid "Position"
+msgstr "Position"
+
+#: interfaces/display.glade.in.h:15
+msgid "Refresh rate:"
+msgstr "Uppdateringsfrekvens:"
+
+#: interfaces/display.glade.in.h:16 src/print/print.etspec.h:3
+msgid "Resolution"
+msgstr "Upplösning"
+
+#: interfaces/display.glade.in.h:17
+msgid "Resolution:"
+msgstr "Upplösning:"
+
+#: interfaces/display.glade.in.h:18
+msgid "Restart X"
+msgstr "Starta om X"
+
+#: interfaces/display.glade.in.h:19
+msgid "Right"
+msgstr "Höger"
+
+#: interfaces/display.glade.in.h:20
+msgid "Shift my display:"
+msgstr "Skifta min bild:"
+
+#: interfaces/display.glade.in.h:21
+msgid "Shorter"
+msgstr "Kortare"
+
+#: interfaces/display.glade.in.h:22
+msgid "Stretch my display:"
+msgstr "Sträck ut min bild:"
+
+#: interfaces/display.glade.in.h:23
+msgid "Taller"
+msgstr "Längre"
+
+#: interfaces/display.glade.in.h:24
+msgid "Test current setting"
+msgstr "Testa nuvarande inställningar"
+
+#: interfaces/display.glade.in.h:25
+msgid "Up"
+msgstr "Upp"
+
+#: interfaces/display.glade.in.h:26
+msgid ""
+"Use this tool to configure your monitor. balh balhan837498 q29487 1 98374 "
+msgstr ""
+"Använd detta verktyg för att konfigurera din bildskärm. satan satan i "
+"kvadrat. ja jädrans"
+
+#: interfaces/display.glade.in.h:27
+msgid "Vendor:"
+msgstr "Tillverkare:"
+
+#: interfaces/display.glade.in.h:28
+msgid "Wider"
+msgstr "Bredare"
+
+#: interfaces/display.glade.in.h:29
+msgid "_Restore settings"
+msgstr "_Återställ inställningar"
+
 #: interfaces/memory.glade.in.h:1
 msgid "Available partitions:"
 msgstr "Tillgängliga partitioner:"
@@ -910,6 +1029,7 @@ msgid "_Remove"
 msgstr "_Ta bort"
 
 #: interfaces/memory.glade.in.h:24
+#: src/location-manager/location-manager-dialog.c:136
 msgid "_Settings"
 msgstr "_Inställningar"
 
@@ -928,10 +1048,6 @@ msgstr " Flytta upp"
 #: interfaces/nameresolution.glade.in.h:2
 msgid " Names"
 msgstr " Namn"
-
-#: interfaces/nameresolution.glade.in.h:3
-msgid "<unknown>"
-msgstr "<okänd>"
 
 #: interfaces/nameresolution.glade.in.h:4 interfaces/shares.glade.in.h:4
 #: interfaces/users.glade.in.h:4
@@ -1133,7 +1249,7 @@ msgstr "Tillåt aktiveringskontroll för alla användare"
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1467
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1478
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -1158,7 +1274,7 @@ msgid "Create a new Internet Connection "
 msgstr "Skapa en ny internetanslutning "
 
 #: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:27
-#: src/network/connection.c:1466
+#: src/network/connection.c:1477
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1234,7 +1350,7 @@ msgstr "IP-adress"
 msgid "IP Settings"
 msgstr "IP-inställningar"
 
-#: interfaces/network.glade.in.h:48 src/network/connection.c:1465
+#: interfaces/network.glade.in.h:48 src/network/connection.c:1476
 msgid "Manual"
 msgstr "Manuell"
 
@@ -1411,6 +1527,7 @@ msgid "_Configure..."
 msgstr "_Konfigurera..."
 
 #: interfaces/network.glade.in.h:97
+#: src/location-manager/location-manager-dialog.c:106
 msgid "_Delete..."
 msgstr "_Ta bort..."
 
@@ -1509,6 +1626,67 @@ msgstr "_Wavelan"
 #: interfaces/network.glade.in.h:121 interfaces/print.glade.in.h:76
 msgid "_Workgroup:"
 msgstr "A_rbetsgrupp:"
+
+#: interfaces/rollback-location-management.glade.in.h:1
+msgid "Advanced..."
+msgstr "Avancerat..."
+
+#: interfaces/rollback-location-management.glade.in.h:2
+msgid "Change to this Location"
+msgstr "Byt till denna plats"
+
+#: interfaces/rollback-location-management.glade.in.h:3
+msgid "Configuration Restoration"
+msgstr "Konfigurationsåterställning"
+
+#: interfaces/rollback-location-management.glade.in.h:4
+msgid "Create..."
+msgstr "Skapa..."
+
+#: interfaces/rollback-location-management.glade.in.h:5
+msgid "Destroy..."
+msgstr "Förstör..."
+
+#: interfaces/rollback-location-management.glade.in.h:6
+msgid "Edit this Location"
+msgstr "Redigera denna plats"
+
+#: interfaces/location-manager.glade.in.h:19
+#: interfaces/rollback-location-management.glade.in.h:7
+msgid "Location Management"
+msgstr "Platshantering"
+
+#: interfaces/rollback-location-management.glade.in.h:8
+msgid "Location name:"
+msgstr "Platsnamn:"
+
+#: interfaces/rollback-location-management.glade.in.h:9
+msgid "Parent Location:"
+msgstr "Förälderplats:"
+
+#: interfaces/rollback-location-management.glade.in.h:10
+msgid "Rename..."
+msgstr "Byt namn..."
+
+#: interfaces/rollback-location-management.glade.in.h:11
+msgid "Restore all tools"
+msgstr "Återställ alla verktyg"
+
+#: interfaces/rollback-location-management.glade.in.h:12
+msgid "Restore configuration from"
+msgstr "Återställ konfigurationen från"
+
+#: interfaces/rollback-location-management.glade.in.h:13
+msgid "Restore only"
+msgstr "Återställ endast"
+
+#: interfaces/rollback-location-management.glade.in.h:14
+msgid "View Logs..."
+msgstr "Visa loggar..."
+
+#: interfaces/rollback-location-management.glade.in.h:15
+msgid "days ago"
+msgstr "dagar sedan"
 
 #: interfaces/shares.glade.in.h:1
 msgid " Edit clients... "
@@ -1824,12 +2002,12 @@ msgid "Select the servers you wish to use for time synchronization."
 msgstr "Välj de servrar som du vill använda för tidssynkronisering."
 
 #: interfaces/time.glade.in.h:10
-msgid "Selection:"
-msgstr "Markering:"
+msgid "Select time _zone..."
+msgstr "Välj tids_zon..."
 
 #: interfaces/time.glade.in.h:11
-msgid "Set time _zone..."
-msgstr "Ställ in tids_zon..."
+msgid "Selection:"
+msgstr "Markering:"
 
 #: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:12
 #: src/time/time.desktop.in.in.h:1
@@ -1969,7 +2147,7 @@ msgid "Group _members"
 msgstr "Grupp_medlemmar"
 
 #: interfaces/users.glade.in.h:35 src/users/group.etspec.h:2
-#: src/users/user_settings.c:471 src/users/user_settings.c:547
+#: src/users/user_settings.c:475 src/users/user_settings.c:551
 msgid "Groups"
 msgstr "Grupper"
 
@@ -2069,8 +2247,8 @@ msgstr ""
 msgid "Optional settings"
 msgstr "Valfria inställningar"
 
-#: interfaces/users.glade.in.h:57 src/users/user_settings.c:478
-#: src/users/user_settings.c:554
+#: interfaces/users.glade.in.h:57 src/users/user_settings.c:482
+#: src/users/user_settings.c:558
 msgid "Password"
 msgstr "Lösenord"
 
@@ -2246,6 +2424,36 @@ msgstr "_Visa alla användare och grupper"
 msgid "_Work phone:"
 msgstr "_Jobbtelefon:"
 
+#. set window title
+#: src/boot/boot-druid.c:344
+msgid "Boot Image Wizard"
+msgstr "Guide för uppstartsavbild"
+
+#. give our dialog an OK button and title
+#: src/boot/boot-image-editor.c:106
+msgid "Boot Image Editor"
+msgstr "Redigerare för uppstartsavbild"
+
+#: src/boot/boot-image.c:35
+msgid "Unknown"
+msgstr "Okänd"
+
+#: src/boot/boot-image.c:36
+msgid "Windows NT"
+msgstr "Windows NT"
+
+#: src/boot/boot-image.c:37
+msgid "Windows 9x"
+msgstr "Windows 9x"
+
+#: src/boot/boot-image.c:38
+msgid "Dos"
+msgstr "DOS"
+
+#: src/boot/boot-image.c:39
+msgid "Linux"
+msgstr "Linux"
+
 #: src/boot/callbacks.c:61
 #, c-format
 msgid "Are you sure you want to delete %s?"
@@ -2306,23 +2514,23 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/xst-tool.c:570
+#: src/common/xst-tool.c:585
 msgid "Skipping backend init..."
 msgstr "Hoppar över backend-initiering..."
 
-#: src/common/xst-tool.c:644
+#: src/common/xst-tool.c:660
 msgid "Closing tool."
 msgstr "Stänger verktyget."
 
-#: src/common/xst-tool.c:838
+#: src/common/xst-tool.c:854
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/xst-tool.c:867
+#: src/common/xst-tool.c:883
 msgid "Updating your system configuration."
 msgstr "Uppdaterar din systemkonfiguration."
 
-#: src/common/xst-tool.c:890
+#: src/common/xst-tool.c:902
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2330,16 +2538,16 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/xst-tool.c:1066
+#: src/common/xst-tool.c:1076
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1206
+#: src/common/xst-tool.c:1216
 msgid "The password you entered is invalid."
 msgstr "Lösenordet du angav är ogiltigt."
 
-#: src/common/xst-tool.c:1216
+#: src/common/xst-tool.c:1226
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2366,21 +2574,29 @@ msgstr ""
 "--\n"
 "Teamet bakom Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1236
+#: src/common/xst-tool.c:1246
 msgid "Don't show me this again"
 msgstr "Visa inte detta igen"
 
-#: src/common/xst-tool.c:1266
+#: src/common/xst-tool.c:1276
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tRedigera konfigurationen på platsen PLATS."
 
-#: src/common/xst-tool.c:1266
+#: src/common/xst-tool.c:1276
 msgid "LOCATION"
 msgstr "PLATS"
 
-#: src/common/xst-tool.c:1303
+#: src/common/xst-tool.c:1313
 msgid "Pretending we are root..."
 msgstr "Låtsas att vi är root..."
+
+#: src/common/xst-ui.c:545
+msgid ""
+"Plese restart your GNOME session for\n"
+"these changes to take effect."
+msgstr ""
+"Starta om din GNOME-session för att\n"
+"dessa ändringar ska börja gälla."
 
 #: src/disks/main.c:39
 msgid "Disk Partitions"
@@ -2393,6 +2609,196 @@ msgstr "Diskar"
 #: src/disks/disks.desktop.in.in.h:2
 msgid "Local fixed media."
 msgstr "Lokal fast media."
+
+#. run test
+#: src/display/callbacks.c:153
+msgid "Testing current settings."
+msgstr "Testar nuvarande inställningar."
+
+#: src/display/callbacks.c:175
+msgid "Restoring settings..."
+msgstr "Återställer inställningar..."
+
+#: src/display/main.c:104
+msgid "X Display Configuration"
+msgstr "X-displaykonfiguration"
+
+#: src/display/transfer.c:430
+msgid "Greyscale"
+msgstr "Gråskala"
+
+#: interfaces/print.glade.in.h:9 src/display/transfer.c:431
+msgid "16 colors"
+msgstr "16 färger"
+
+#: interfaces/print.glade.in.h:10 src/display/transfer.c:432
+msgid "256 colors"
+msgstr "256 färger"
+
+#: src/display/transfer.c:433
+msgid "32 thousand colors"
+msgstr "32 000 färger"
+
+#: src/display/transfer.c:434
+msgid "65 thousand colors"
+msgstr "65 000 färger"
+
+#: src/display/transfer.c:435
+msgid "16 million colors"
+msgstr "16 miljoner färger"
+
+#: src/display/transfer.c:484
+msgid "1152x864"
+msgstr "1152×864"
+
+#: src/display/transfer.c:486
+msgid "1600x1200"
+msgstr "1600×1200"
+
+#: src/location-manager/gui-backend-list.c:385
+#: src/location-manager/gui-backend-list.c:408
+msgid "Could not launch configuration tool"
+msgstr "Kunde inte starta konfigurationsverktyget"
+
+#: src/location-manager/location-dialog.c:175
+msgid "Create new location"
+msgstr "Skapa ny plats"
+
+#: src/location-manager/location-dialog.c:180
+msgid "Copy a location"
+msgstr "Kopiera en plats"
+
+#: src/location-manager/location-dialog.c:185
+msgid "Rename a location"
+msgstr "Byt namn på en plats"
+
+#: src/location-manager/location-dialog.c:300
+msgid "You must supply a name"
+msgstr "Du måste ange ett namn"
+
+#: src/location-manager/location-dialog.c:305
+msgid "You already have a location by that name"
+msgstr "Du har redan en plats med det namnet"
+
+#: src/location-manager/location-manager-dialog.c:97
+msgid "_New..."
+msgstr "_Ny..."
+
+#: src/location-manager/location-manager-dialog.c:98
+msgid "Create a new location"
+msgstr "Skapa en ny plats"
+
+#: src/location-manager/location-manager-dialog.c:100
+msgid "_Copy..."
+msgstr "_Kopiera..."
+
+#: src/location-manager/location-manager-dialog.c:101
+msgid "Create a new location identical to the selected one"
+msgstr "Skapa en ny plats som är identisk med den markerade"
+
+#: src/location-manager/location-manager-dialog.c:103
+msgid "_Rename..."
+msgstr "_Byt namn..."
+
+#: src/location-manager/location-manager-dialog.c:104
+msgid "Rename the selected location"
+msgstr "Byt namn på den valda platsen"
+
+#: src/location-manager/location-manager-dialog.c:107
+msgid "Delete the selected location"
+msgstr "Ta bort den markerade platsen"
+
+#: src/location-manager/location-manager-dialog.c:110
+msgid "_Apply..."
+msgstr "_Verkställ..."
+
+#: src/location-manager/location-manager-dialog.c:111
+msgid "Apply the changes"
+msgstr "Verkställ ändringarna"
+
+#: src/location-manager/location-manager-dialog.c:117
+msgid "_Edit..."
+msgstr "_Redigera..."
+
+#: src/location-manager/location-manager-dialog.c:118
+msgid "Edit settings for the selected backend"
+msgstr "Redigera inställningarna för den markerade backenden"
+
+#: src/location-manager/location-manager-dialog.c:120
+msgid "_Select"
+msgstr "_Markera"
+
+#: src/location-manager/location-manager-dialog.c:121
+msgid "Select the selected backend for this location"
+msgstr "Markera den valda backenden för denna plats"
+
+#: src/location-manager/location-manager-dialog.c:123
+msgid "_Deselect"
+msgstr "Av_markera"
+
+#: src/location-manager/location-manager-dialog.c:124
+msgid "Deselect the selected backend for this location"
+msgstr "Avmarkera den valda backenden för denna plats"
+
+#: src/location-manager/location-manager-dialog.c:135
+msgid "_Location"
+msgstr "_Plats"
+
+#: interfaces/location-manager.glade.in.h:38
+#: src/location-manager/location-manager-dialog.c:137
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: src/location-manager/location-manager-dialog.c:191
+#: src/location-manager/location-manager-dialog.c:482
+msgid "Location Manager"
+msgstr "Platshanterare"
+
+#: src/location-manager/location-manager-dialog.c:254
+msgid ""
+"Could not retrieve a configuration\n"
+"snapshot. This probably means you do\n"
+"not have the Ximian Setup Tools\n"
+"installed properly."
+msgstr ""
+"Kunde inte hämta en konfigurationsversion.\n"
+"Detta betyder troligtvis att Ximian Setup\n"
+"Tools intehar installerats korrekt."
+
+#: src/location-manager/location-manager-dialog.c:259
+msgid ""
+"Could not retrieve a configuration\n"
+"snapshot. This probably means you are\n"
+"running an old version of the GNOME\n"
+"control center. Please upgrade to\n"
+"at least version 1.3.2 or CVS HEAD."
+msgstr ""
+"Kunde inte hämta en konfigurationsversion.\n"
+"Detta betyder troligtvis att du kör en\n"
+"gammal version av GNOME-kontrollpanelen.\n"
+"Uppgradera åtminstone till version 1.3.2\n"
+"eller CVS HEAD."
+
+#: src/location-manager/location-manager-dialog.c:415
+msgid "You cannot delete the default location"
+msgstr "Du kan inte redigera standardplatsen"
+
+#: src/location-manager/location-manager-dialog.c:420
+#, c-format
+msgid "Are you sure you wish to destroy the location %s?"
+msgstr "Är du säker på att du vill förstöra platsen %s?"
+
+#: src/location-manager/location-manager-dialog.c:485
+msgid "Ximian Setup Tools Location Manager"
+msgstr "Ximians inställningsverktygs platshanterare"
+
+#: src/location-manager/main.c:37
+msgid "Operate on global backends"
+msgstr "Arbeta med globala backender"
+
+#: src/location-manager/main.c:53
+msgid "Options for the location manager"
+msgstr "Alternativ för platshanteraren"
 
 #: src/memory/callbacks.c:189
 #, c-format
@@ -2570,22 +2976,26 @@ msgid "Parallel line"
 msgstr "Parallellinje"
 
 #: src/network/connection.c:49
+msgid "Infrared LAN"
+msgstr "Infrarött LAN"
+
+#: src/network/connection.c:50
 msgid "Loopback: virtual interface"
 msgstr "Loopback: virtuellt gränssnitt"
 
-#: src/network/connection.c:50
+#: src/network/connection.c:51
 msgid "Unknown type"
 msgstr "Okänd typ"
 
-#: src/network/connection.c:810 src/network/connection.c:841
+#: src/network/connection.c:821 src/network/connection.c:852
 msgid "Active"
 msgstr "Aktiv"
 
-#: src/network/connection.c:811 src/network/connection.c:842
+#: src/network/connection.c:822 src/network/connection.c:853
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/network/connection.c:1219
+#: src/network/connection.c:1234
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2595,7 +3005,7 @@ msgstr ""
 "lämnades tom. Ange giltiga IP-adresser i de\n"
 "fälten för att fortsätta."
 
-#: src/network/connection.c:1226
+#: src/network/connection.c:1241
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2605,7 +3015,7 @@ msgstr ""
 "gränssnittet lämnades tom. Ange giltiga\n"
 "IP-adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:1232
+#: src/network/connection.c:1247
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2872,26 +3282,26 @@ msgstr ""
 "Felaktigt lösenord: %s.\n"
 "Var vänlig och försök med ett nytt lösenord."
 
-#: src/users/user_group.c:326
+#: src/users/user_group.c:330
 msgid "The username is empty."
 msgstr "Användarnamnet är tomt."
 
-#: src/users/user_group.c:330
+#: src/users/user_group.c:334
 msgid "The username is too long."
 msgstr "Användarnamnet är för långt."
 
-#: src/users/user_group.c:333 src/users/user_group.c:354
-#: src/users/user_group.c:438
+#: src/users/user_group.c:337 src/users/user_group.c:358
+#: src/users/user_group.c:442
 msgid "root user shouldn't be modified."
 msgstr "root-användaren bör inte ändras."
 
-#: src/users/user_group.c:337
+#: src/users/user_group.c:341
 msgid "Please set a valid username, using only lower-case letters."
 msgstr ""
 "Var vänlig och ange ett giltigt användarnamn som bara består av små "
 "bokstäver."
 
-#: src/users/user_group.c:341
+#: src/users/user_group.c:345
 #, c-format
 msgid ""
 "Username \"%s\" already exists.\n"
@@ -2902,121 +3312,121 @@ msgstr ""
 "\n"
 "Välj ett annat användarnamn"
 
-#: src/users/user_group.c:352 src/users/user_group.c:542
+#: src/users/user_group.c:356 src/users/user_group.c:546
 msgid "User id must be a positive number."
 msgstr "Användar-id måste vara ett positivt tal."
 
-#: src/users/user_group.c:356
+#: src/users/user_group.c:360
 msgid "Such user id already exists."
 msgstr "Ett sådant användarid finns redan."
 
-#: src/users/user_group.c:379
+#: src/users/user_group.c:383
 #, c-format
 msgid "Invalid character '%c' in comment."
 msgstr "Ogiltigt tecken \"%c\" i kommentar."
 
-#: src/users/user_group.c:395
+#: src/users/user_group.c:399
 msgid "Please give shell with full path."
 msgstr "Ange skalet med en fullständig sökväg."
 
-#: src/users/user_group.c:432
+#: src/users/user_group.c:436
 msgid "Home directory must not be empty."
 msgstr "Hemkatalogen får inte vara tom."
 
-#: src/users/user_group.c:435
+#: src/users/user_group.c:439
 msgid "Please enter full path for home directory."
 msgstr "Ange den fullständiga sökvägen till hemkatalogen."
 
-#: src/users/user_group.c:443
+#: src/users/user_group.c:447
 msgid "Part of the path to the home directory is a file."
 msgstr "En del av sökvägen till hemkatalogen är en fil."
 
-#: src/users/user_group.c:444
+#: src/users/user_group.c:448
 msgid "There is a loop in the path to the home directory."
 msgstr "Det finns en slinga i sökvägen till hemkatalogen."
 
-#: src/users/user_group.c:445
+#: src/users/user_group.c:449
 msgid "Not enough memory to check the home directory."
 msgstr "Inte tillräckligt med minne för att kontrollera hemkatalogen."
 
-#: src/users/user_group.c:446
+#: src/users/user_group.c:450
 msgid "The path to the home directory is too long."
 msgstr "Sökvägen till hemkatalogen är för lång."
 
-#: src/users/user_group.c:478
+#: src/users/user_group.c:482
 msgid "Group name is not valid."
 msgstr "Gruppnamnet är ogiltigt."
 
-#: src/users/user_group.c:481 src/users/user_group.c:546
+#: src/users/user_group.c:485 src/users/user_group.c:550
 msgid "Such group id already exists."
 msgstr "Ett sådant gruppid finns redan."
 
-#: src/users/user_group.c:484
+#: src/users/user_group.c:488
 msgid "Group does not exist. Create new?"
 msgstr "Gruppen finns inte. Skapa ny?"
 
-#: src/users/user_group.c:503
+#: src/users/user_group.c:507
 msgid "Group name is empty."
 msgstr "Gruppnamnet är tomt."
 
-#: src/users/user_group.c:507
+#: src/users/user_group.c:511
 msgid "The group name is too long."
 msgstr "Gruppnamnet är för långt."
 
-#: src/users/user_group.c:511
+#: src/users/user_group.c:515
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Var vänlig och ange ett giltigt gruppnamn, med endast små bokstäver."
 
-#: src/users/user_group.c:515
+#: src/users/user_group.c:519
 msgid "Group already exists."
 msgstr "Gruppen finns redan."
 
-#: src/users/user_group.c:816
+#: src/users/user_group.c:820
 #, c-format
 msgid "Password for User %s"
 msgstr "Lösenord för användaren %s"
 
-#: src/users/user_group.c:850
+#: src/users/user_group.c:854
 msgid "The root user must not be deleted."
 msgstr "Användaren root får inte tas bort."
 
-#: src/users/user_group.c:857
+#: src/users/user_group.c:861
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/user_group.c:880
+#: src/users/user_group.c:884
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/user_group.c:940
+#: src/users/user_group.c:944
 msgid "The root group must not be deleted."
 msgstr "Gruppen root får inte tas bort."
 
-#: src/users/user_group.c:947
+#: src/users/user_group.c:951
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/user_group.c:992
+#: src/users/user_group.c:996
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
 
-#: src/users/user_group.c:1387
+#: src/users/user_group.c:1391
 msgid "The home directory does not exist, or its path is invalid."
 msgstr "Hemkatalogen finns inte, eller så är dess sökväg ogiltig."
 
-#: src/users/user_group.c:1391
+#: src/users/user_group.c:1395
 msgid "Couldn't get access to the home directory."
 msgstr "Kunde inte komma åt hemkatalogen."
 
 #. We shouldn't fall here: the other cases are in the error checks.
-#: src/users/user_group.c:1396
+#: src/users/user_group.c:1400
 msgid "There was an error trying to access the home directory."
 msgstr "Det uppstod ett fel vid försök att komma åt hemkatalogen."
 
-#: src/users/user_group.c:1404
+#: src/users/user_group.c:1408
 msgid ""
 "The home directory already exists. This will break the new user's "
 "permissions."
@@ -3024,23 +3434,23 @@ msgstr ""
 "Hemkatalogen finns redan. Detta kommer att ha sönder den nya användarens "
 "rättigheter."
 
-#: src/users/user_group.c:1409
+#: src/users/user_group.c:1413
 msgid "The home directory path exists, but it is not a directory."
 msgstr "Sökvägen till hemkatalogen finns, men den är inte en katalog."
 
-#: src/users/user_group.c:1413
+#: src/users/user_group.c:1417
 msgid "The home directory is not owned by the user."
 msgstr "Hemkatalogen ägs inte av användaren."
 
-#: src/users/user_group.c:1417
+#: src/users/user_group.c:1421
 msgid "The user doesn't have permission to read from the home directory."
 msgstr "Användaren har inte rätt att läsa från hemkatalogen."
 
-#: src/users/user_group.c:1421
+#: src/users/user_group.c:1425
 msgid "The user doesn't have permission to write in the home directory."
 msgstr "Användaren har inte rätt att skriva i hemkatalogen."
 
-#: src/users/user_group.c:1425
+#: src/users/user_group.c:1429
 msgid ""
 "The user doesn't have permission to use (``execute'') the home directory."
 msgstr "Användaren har inte rätt att använda (\"exekvera\") hemkatalogen."
@@ -3141,10 +3551,6 @@ msgstr "Håll klockan synkroniserad med markerade servrar"
 msgid "Location"
 msgstr "Plats"
 
-#: interfaces/location-manager.glade.in.h:19
-msgid "Location Management"
-msgstr "Platshantering"
-
 #: interfaces/location-manager.glade.in.h:20
 msgid "Location:"
 msgstr "Plats:"
@@ -3201,10 +3607,6 @@ msgstr ""
 "Använd detta verktyg för att hantera alla de platser där du kan tänkas vilja "
 "använda din skithög till bärbara dator."
 
-#: interfaces/location-manager.glade.in.h:38
-msgid "_Help"
-msgstr "_Hjälp"
-
 #: interfaces/print.glade.in.h:1
 msgid "/dev/lp0 (LPT1)"
 msgstr "/dev/lp0 (LPT1)"
@@ -3236,14 +3638,6 @@ msgstr "1200×1200"
 #: interfaces/print.glade.in.h:8
 msgid "1200x600"
 msgstr "1200×600"
-
-#: interfaces/print.glade.in.h:9
-msgid "16 colors"
-msgstr "16 färger"
-
-#: interfaces/print.glade.in.h:10
-msgid "256 colors"
-msgstr "256 färger"
 
 #: interfaces/print.glade.in.h:11
 msgid "300x300"
@@ -3509,10 +3903,6 @@ msgstr "Utskriftsverktyg"
 msgid "Paper"
 msgstr "Papper"
 
-#: src/print/print.etspec.h:3
-msgid "Resolution"
-msgstr "Upplösning"
-
 #: src/print/print.etspec.h:4
 msgid "Share"
 msgstr "Utdelning"
@@ -3528,6 +3918,11 @@ msgstr "Utskrift"
 #: src/print/print.desktop.in.in.h:2
 msgid "lpr based Printer Admin"
 msgstr "lpr-baserad utskriftshanterare"
+
+#. give our dialog an OK button and title
+#: src/print/settings-editor.c:121
+msgid "Printer Settings Editor"
+msgstr "Redigerare för skrivarinställningar"
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
@@ -3569,11 +3964,11 @@ msgstr ""
 "För tillfället stöder vi bara \"%s\"."
 
 #. give our dialog an OK button and title
-#: src/users/user-account-editor.c:105
+#: src/users/user-account-editor.c:109
 msgid "User Account Editor"
 msgstr "Redigerare för användarkonton"
 
-#: src/users/user_settings.c:176
+#: src/users/user_settings.c:180
 #, c-format
 msgid ""
 "Invalid character '%c'.\n"
@@ -3582,12 +3977,12 @@ msgstr ""
 "Ogiltigt tecken \"%c\".\n"
 "Detta fält accepterar inte kontrolltecknen \",\" \":\" och \"=\"."
 
-#: src/users/user_settings.c:464 src/users/user_settings.c:525
-#: src/users/user_settings.c:540
+#: src/users/user_settings.c:468 src/users/user_settings.c:529
+#: src/users/user_settings.c:544
 msgid "Identity"
 msgstr "Identitet"
 
-#: src/users/user_settings.c:518
+#: src/users/user_settings.c:522
 msgid "Real name:"
 msgstr "Fullständigt namn:"
 
@@ -3773,9 +4168,6 @@ msgstr "Skriv"
 #~ msgid "Options for adding and removing backends"
 #~ msgstr "Alternativ för tillägg och borttagning av backendar"
 
-#~ msgid "Boot Image Wizard"
-#~ msgstr "Guide för uppstartsavbild"
-
 #~ msgid ""
 #~ "Please enter a username for the new user in the space below. You may also "
 #~ "enter a comment about the user, such as his or her real name. "
@@ -3791,81 +4183,6 @@ msgstr "Skriv"
 
 #~ msgid "User locations"
 #~ msgstr "Användarplatser"
-
-#~ msgid "Could not launch configuration tool"
-#~ msgstr "Kunde inte starta konfigurationsverktyget"
-
-#~ msgid "You must supply a name"
-#~ msgstr "Du måste ange ett namn"
-
-#~ msgid "You already have a location by that name"
-#~ msgstr "Du har redan en plats med det namnet"
-
-#~ msgid "_New..."
-#~ msgstr "_Ny..."
-
-#~ msgid "Create a new location"
-#~ msgstr "Skapa en ny plats"
-
-#~ msgid "_Copy..."
-#~ msgstr "_Kopiera..."
-
-#~ msgid "Create a new location identical to the selected one"
-#~ msgstr "Skapa en ny plats som är identisk med den markerade"
-
-#~ msgid "_Rename..."
-#~ msgstr "_Byt namn..."
-
-#~ msgid "Rename the selected location"
-#~ msgstr "Byt namn på den valda platsen"
-
-#~ msgid "Delete the selected location"
-#~ msgstr "Ta bort den markerade platsen"
-
-#~ msgid "_Apply..."
-#~ msgstr "_Verkställ..."
-
-#~ msgid "Apply the changes"
-#~ msgstr "Verkställ ändringarna"
-
-#~ msgid "_Edit..."
-#~ msgstr "_Redigera..."
-
-#~ msgid "Edit settings for the selected backend"
-#~ msgstr "Redigera inställningarna för den markerade backenden"
-
-#~ msgid "_Select"
-#~ msgstr "_Markera"
-
-#~ msgid "Select the selected backend for this location"
-#~ msgstr "Markera den valda backenden för denna plats"
-
-#~ msgid "_Deselect"
-#~ msgstr "Av_markera"
-
-#~ msgid "Deselect the selected backend for this location"
-#~ msgstr "Avmarkera den valda backenden för denna plats"
-
-#~ msgid "_Location"
-#~ msgstr "_Plats"
-
-#~ msgid "Location Manager"
-#~ msgstr "Platshanterare"
-
-#~ msgid "You cannot delete the default location"
-#~ msgstr "Du kan inte redigera standardplatsen"
-
-#~ msgid "Are you sure you wish to destroy the location %s?"
-#~ msgstr "Är du säker på att du vill förstöra platsen %s?"
-
-#~ msgid "Ximian Setup Tools Location Manager"
-#~ msgstr "Ximians inställningsverktygs platshanterare"
-
-#~ msgid "Operate on global backends"
-#~ msgstr "Arbeta med globala backender"
-
-#~ msgid "Options for the location manager"
-#~ msgstr "Alternativ för platshanteraren"
 
 #~ msgid "D_evice"
 #~ msgstr "_Enhet"
@@ -3909,9 +4226,6 @@ msgstr "Skriv"
 #~ msgid "Not Implemented yet, sorry."
 #~ msgstr "Inte implementerat än, tyvärr."
 
-#~ msgid "Linux"
-#~ msgstr "Linux"
-
 #~ msgid ""
 #~ "Use this dialog to add new kernel or\n"
 #~ "operating system to your computer."
@@ -3919,9 +4233,6 @@ msgstr "Skriv"
 #~ "Använd detta fönster för att lägga\n"
 #~ "till en ny kärna eller ett nytt\n"
 #~ "operativsystem till din dator."
-
-#~ msgid "Delete..."
-#~ msgstr "Ta bort..."
 
 #~ msgid "Remove <-"
 #~ msgstr "Ta bort <-"
@@ -4015,9 +4326,6 @@ msgstr "Skriv"
 #~ msgstr ""
 #~ "Det här är globala värden som kommer att påverka skapandet av nya användare. "
 #~ "De är endast tillgängliga om du klickar på \"Fler alternativ\"."
-
-#~ msgid "System settings"
-#~ msgstr "Systeminställningar"
 
 #~ msgid "Mailbox directory:"
 #~ msgstr "Brevlådekatalog:"
@@ -4116,9 +4424,6 @@ msgstr "Skriv"
 #~ msgstr ""
 #~ "Använd detta verktyg för att hantera operativ-\n"
 #~ "systemen och Linuxkärnorna på din maskin."
-
-#~ msgid "Unknown"
-#~ msgstr "Okänd"
 
 #~ msgid "Clients for <export name>"
 #~ msgstr "Klienter för <exportnamn>"
