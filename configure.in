@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
 
-AM_INIT_AUTOMAKE(ximian-setup-tools, 0.6.1)
+AM_INIT_AUTOMAKE(ximian-setup-tools, 0.6.99)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -153,10 +153,15 @@ dnl ========================================================
 dnl ==============================================================
 dnl Set SCRIPTS_DIR & PIXMAPS_DIR 
 dnl ==============================================================
-
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/scripts")
-  scriptsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/scripts"
+  scriptsdir="${ac_default_prefix}/share/setup-tool-backends/scripts"
+else
+  AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/scripts")
+  scriptsdir="${datadir}/setup-tool-backends/scripts"
+fi
+
+if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
   pixmapsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
   AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces")
@@ -164,8 +169,6 @@ if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(ETSPECS_DIR,"${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/etspecs")
   etspecsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/etspecs"
 else
-  AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/scripts")
-  scriptsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/scripts"
   AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
   pixmapsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
   AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces")
@@ -236,13 +239,19 @@ AC_SUBST(pixmapsdir)
 AC_SUBST(interfacesdir)
 AC_SUBST(etspecsdir)
 
+
+dnl ===========================
+dnl Configure the backends
+dnl ==========================
+
+AC_CONFIG_SUBDIRS(backend)
+
 AC_OUTPUT([
 Makefile
 ximian-setup-tools.spec
 macros/Makefile
 intl/Makefile
 interfaces/Makefile
-backend/Makefile
 pixmaps/Makefile
 src/Makefile
 src/common/Makefile

@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.5\n"
-"POT-Creation-Date: 2001-06-26 19:59+0200\n"
+"POT-Creation-Date: 2001-07-11 18:51-0500\n"
 "PO-Revision-Date: 2001-06-21 01:14+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish\n"
@@ -15,163 +15,474 @@ msgstr ""
 "Content-Type: text/plain; charset=iso-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: archiver/location.c:228
-msgid "Default Location"
-msgstr "Ubicación predeterminada"
+#: backend/report.pl.in:144
+msgid "Start of work report."
+msgstr "Inicio del informe."
 
-#: archiver/main.c:77
-msgid "Store XML data in the archive"
-msgstr "Guardar información XML en el archivo"
+#: backend/report.pl.in:145
+msgid "End of work report."
+msgstr "Fin del informe."
 
-#: archiver/main.c:79
-msgid "Roll back the configuration to a given point"
-msgstr "Volver atrás en la configuración hasta un punto determinado"
+#: backend/report.pl.in:146
+#, c-format
+msgid "%d"
+msgstr "%d"
 
-#: archiver/main.c:81
-msgid "Change the location profile to the given one"
-msgstr "Cambiar la ubicación del perfil al actual"
+#: backend/report.pl.in:147
+#, c-format
+msgid "%s."
+msgstr "%s."
 
-#: archiver/main.c:83
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+#: backend/report.pl.in:149
+#, fuzzy, c-format
+msgid "Directive [%s] not supported."
+msgstr "Su plataforma [%s] no está soportada."
+
+#: backend/report.pl.in:150
+#, c-format
+msgid "Directive [%s] structure has wrong format."
 msgstr ""
-"Enviar la información de configuración a las máquinas clientes (SIN "
-"IMPLEMENTAR)"
 
-#: archiver/main.c:85
-msgid "Rename a location to a new name"
-msgstr "Renombrar una ubicación a un nuevo nombre"
+#: backend/report.pl.in:151
+#, c-format
+msgid "Directive [%s] requires exactly [%s] args in [%s]."
+msgstr ""
 
-#: archiver/main.c:87
-msgid "Add a new location to the archive"
-msgstr "Añadir una nueva ubicación al archivo"
+#: backend/report.pl.in:152
+#, c-format
+msgid "Directive [%s] requires at least [%s] args in [%s]."
+msgstr ""
 
-#: archiver/main.c:89
-msgid "Remove a location from the archive"
-msgstr "Eliminar una ubicación del archivo"
+#: backend/report.pl.in:154
+#, c-format
+msgid "Supported: [%s]"
+msgstr "Soportado: [%s]"
 
-#: archiver/main.c:91
-msgid "Add a given backend to the given location"
-msgstr "Añadir un backend determinado a la ubicación determinada"
+#: backend/report.pl.in:155
+#, c-format
+msgid "Your platform [%s] is not supported."
+msgstr "Su plataforma [%s] no está soportada."
 
-#: archiver/main.c:93
-msgid "Remove the given backend from the given location"
-msgstr "Eliminar un backend determinado de la ubicación determinada"
+#: backend/report.pl.in:156
+msgid "Unable to determine host platform."
+msgstr "No se pudo determinar la plataforma."
 
-#: archiver/main.c:99
-msgid "Use the global repository"
-msgstr "Usar el repositorio global"
+#: backend/report.pl.in:157
+#, c-format
+msgid "Configuring for platform [%s]."
+msgstr "Configurando para la plataforma [%s]."
 
-#: archiver/main.c:101
-msgid "Identifier of location profile on which to operate"
-msgstr "Identificador de la ubicación de un perfil con el cual operar"
+#: backend/report.pl.in:159
+#, c-format
+msgid "Unexpected tag [%s]."
+msgstr "Marca [%s] inesperada."
 
-#: archiver/main.c:102 src/common/xst-tool.c:1125
-msgid "LOCATION"
-msgstr "UBICACIÓN"
+#: backend/report.pl.in:160
+#, c-format
+msgid "Unexpected argument [%s] to tag [%s]."
+msgstr "Argumento [%s] inesperado en la marca [%s]."
 
-#: archiver/main.c:104
-msgid "Backend being used for this operation"
-msgstr "Backend usado en esta operación"
+#: backend/report.pl.in:162
+#, c-format
+msgid "Could not open [%s] for reading."
+msgstr "No se pudo abrir [%s] para lectura."
 
-#: archiver/main.c:104
-msgid "BACKEND_ID"
-msgstr "BACKEND_ID"
+#: backend/report.pl.in:163
+#, c-format
+msgid "Reading options from [%s]."
+msgstr "Leyendo opciones de [%s]."
 
-#: archiver/main.c:110
-msgid "Store only the differences with the parent location's config"
-msgstr "Guardar solo las diferencias con la configuración raíz"
+#: backend/report.pl.in:164
+#, c-format
+msgid "Failed to write to [%s]."
+msgstr "La escritura en [%s] falló."
 
-#: archiver/main.c:112
-msgid "Store only those settings set in the previous config"
-msgstr "Guardar solo esas preferencias en la configuración anterior"
+#: backend/report.pl.in:165
+#, c-format
+msgid "Could not find [%s] for writing. Creating [%s]."
+msgstr "No se pudo encontrar [%s] para escritura. Creando [%s]."
 
-#: archiver/main.c:118
-msgid "Date to which to roll back"
-msgstr "Fecha a la que volver"
+#: backend/report.pl.in:166
+#, c-format
+msgid "Writing to [%s]."
+msgstr "Escribiendo a [%s]."
 
-#: archiver/main.c:118
-msgid "DATE"
-msgstr "FECHA"
+#: backend/report.pl.in:167
+#, c-format
+msgid "Directory [%s] created."
+msgstr "Directorio [%s] creado."
 
-#: archiver/main.c:120
-msgid "Roll back all configuration items"
-msgstr "Restaurar todos los elementos de la configuración"
+#: backend/report.pl.in:168
+#, c-format
+msgid "Backup directory [%s] was rotated."
+msgstr "El directorio de respaldo [%s] fue rotado."
 
-#: archiver/main.c:122
-msgid "Roll back to the revision REVISION_ID"
-msgstr "Volver a la revisión REVISIÓN_ID"
+#: backend/report.pl.in:169
+#, c-format
+msgid "Saved backup for [%s]."
+msgstr "El respaldo para [%s] se ha guardado."
 
-#: archiver/main.c:122
-msgid "REVISION_ID"
-msgstr "REVISIÓN_ID"
+#: backend/report.pl.in:170
+#, c-format
+msgid "No file to patch: [%s]."
+msgstr "Ningún archivo para parchear: [%s]."
 
-#: archiver/main.c:124
-msgid "Roll back to the last known revision"
-msgstr "Volver a la última revisión conocida"
+#: backend/report.pl.in:171
+#, c-format
+msgid "Could not find [%s] for patching. Creating [%s]."
+msgstr "No se pudo encontrar [%s] para parchear. Creando [%s]."
 
-#: archiver/main.c:126
-msgid "Roll back by STEPS revisions"
-msgstr "Volver en PASOS revisiones"
+#: backend/report.pl.in:172
+#, c-format
+msgid "Found [%s]. Patching [%s]."
+msgstr "[%s] encontrado. Parcheando [%s]."
 
-#: archiver/main.c:126
-msgid "STEPS"
-msgstr "PASOS"
+#: backend/report.pl.in:173
+#, c-format
+msgid "Loading file [%s] to buffer."
+msgstr "Cargando el archivo [%s] a memoria."
 
-#: archiver/main.c:128
-msgid "Don't run the backend, just dump the output"
-msgstr "No ejecutar el backend, solo volcar la salida"
+#: backend/report.pl.in:174
+#, c-format
+msgid "Saving buffer to file [%s]."
+msgstr "Guardando buffer al archivo [%s]."
 
-#: archiver/main.c:134
-msgid "Parent location for the new location"
-msgstr "Ubicación del padre de la nueva ubicación"
+#: backend/report.pl.in:175
+#, c-format
+msgid "Running command [%s]."
+msgstr "Ejecutando el comando [%s]."
 
-#: archiver/main.c:134
-msgid "PARENT"
-msgstr "PADRE"
+#: backend/report.pl.in:176
+#, fuzzy, c-format
+msgid "Removing file [%s]."
+msgstr "Eliminando la entrada [%s] de [%s]."
 
-#: archiver/main.c:136
-msgid "New name to assign to the location"
-msgstr "Nuevo nombre a asignar a la ubicación"
+#: backend/report.pl.in:177
+#, c-format
+msgid "Found tool [%s]."
+msgstr "Utilidad [%s] encontrada."
 
-#: archiver/main.c:136
-msgid "NEW_NAME"
-msgstr "NUEVO_NOMBRE"
+#: backend/report.pl.in:178
+#, c-format
+msgid "Couldn't find tool [%s]."
+msgstr "No se pudo encontrar la utilidad [%s]."
 
-#: archiver/main.c:142
-msgid "Add/remove this backend to/from the master backend list"
-msgstr "Añadir/eliminar este backend a/de la lista maestra de backends"
+#: backend/report.pl.in:180
+#, c-format
+msgid "Parsing option [%s]."
+msgstr "Leyendo opciones de [%s]."
 
-#: archiver/main.c:144
-msgid "Full containment"
-msgstr "Contención completa"
+#: backend/report.pl.in:181
+#, c-format
+msgid "Trivialy passing [%s]."
+msgstr "Pasando [%s] trivialmente."
 
-#: archiver/main.c:146
-msgid "Partial containment"
-msgstr "Contención parcial"
+#: backend/report.pl.in:182 backend/report.pl.in:225
+#, c-format
+msgid "Getting option [%s] from [%s]."
+msgstr "Obteniendo opción [%s] de [%s]."
 
-#: archiver/main.c:313
-msgid "Global archiver options"
-msgstr "Opciones globales del archivo"
+#: backend/report.pl.in:183 backend/report.pl.in:184
+#, c-format
+msgid "Getting configuration from [%s]."
+msgstr "Obteniendo configuraciones de [%s]."
 
-#: archiver/main.c:315
-msgid "Archiver commands"
-msgstr "Comandos del archivo"
+#: backend/report.pl.in:185
+#, c-format
+msgid "Getting shell option [%s] from [%s]."
+msgstr "Obteniendo opción del intérprete de comandos [%s] de [%s]."
 
-#: archiver/main.c:317
-msgid "Options for storing data"
-msgstr "Opciones para almacenar datos"
+#: backend/report.pl.in:186
+#, c-format
+msgid "Getting keyword [%s] from [%s]."
+msgstr "Obteniendo palabra clave [%s] de [%s]."
 
-#: archiver/main.c:319
-msgid "Options for rolling back"
-msgstr "Opciones para volver atrás"
+#: backend/report.pl.in:187
+#, c-format
+msgid "Getting information from [%s]."
+msgstr "Obteniendo información de [%s]."
 
-#: archiver/main.c:321
-msgid "Options for adding or renaming locations"
-msgstr "Opciones para añadir o renombrar ubicaciones"
+#: backend/report.pl.in:188
+#, c-format
+msgid "Getting chat information from [%s]."
+msgstr "Obteniendo información chat de [%s]."
 
-#: archiver/main.c:324
-msgid "Options for adding and removing backends"
-msgstr "Opciones para añadir y eliminar backends"
+#: backend/report.pl.in:189
+#, c-format
+msgid "Getting option [%s] from [%s], section [%s]."
+msgstr "Obteniendo opción [%s] de [%s], sección [%s]."
+
+#: backend/report.pl.in:190
+#, c-format
+msgid "Getting option [%s] from interface [%s]."
+msgstr "Obteniendo la opción [%s] del interfaz [%s]."
+
+#: backend/report.pl.in:191
+#, c-format
+msgid "Getting keyword [%s] from interface [%s]."
+msgstr "Obteniendo la opción [%s] del interfaz [%s]."
+
+#: backend/report.pl.in:192
+#, c-format
+msgid "Keyword for interface [%s] in [%s] had unexpected value."
+msgstr ""
+"La palabra clave para la interfaz [%s] en [%s] tenía un valor no esperado."
+
+#: backend/report.pl.in:194
+#, c-format
+msgid "Replacing key [%s] in [%s]."
+msgstr "Reemplazando llave [%s] en [%s]."
+
+#: backend/report.pl.in:195
+#, c-format
+msgid "Replacing shell var [%s] in [%s]."
+msgstr "Reemplazando variable del intérprete de comandos [%s] en [%s]."
+
+#: backend/report.pl.in:196
+#, c-format
+msgid "Replacing keyword [%s] in [%s]."
+msgstr "Reemplazando palabra clave [%s] en [%s]."
+
+#: backend/report.pl.in:197
+#, c-format
+msgid "Replacing contents of file [%s]."
+msgstr "Reemplazando el contenido del archivo [%s]."
+
+#: backend/report.pl.in:198
+#, c-format
+msgid "Replacing values in [%s]."
+msgstr "Reemplazando valores en [%s]."
+
+#: backend/report.pl.in:199
+#, c-format
+msgid "Replacing variable [%s] in section [%s] of [%s]."
+msgstr "Reemplazando la variable [%s] en la sección [%s] de [%s]."
+
+#: backend/report.pl.in:200
+#, fuzzy, c-format
+msgid "Removing section [%s] from [%s]."
+msgstr "Eliminando la entrada [%s] de [%s]."
+
+#: backend/report.pl.in:201
+#, c-format
+msgid "Replacing option [%s] from interface [%s]."
+msgstr "Reemplazando la opción [%s] del interfaz [%s]."
+
+#: backend/report.pl.in:202
+#, c-format
+msgid "Replacing keyword [%s] from interface [%s]."
+msgstr "Reemplazando palabra clave [%s] de la interfaz [%s]."
+
+#: backend/report.pl.in:204
+#, c-format
+msgid "Service [%s] is running."
+msgstr "El servicio [%s] se está ejecutando."
+
+#: backend/report.pl.in:205
+#, c-format
+msgid "Service [%s] is stopped."
+msgstr "El servicio [%s] está parado."
+
+#: backend/report.pl.in:206
+#, c-format
+msgid "Could not find SystemV scripts for service [%s]."
+msgstr "No se pudieron encontrar scripts SystemV para el servicio [%s]."
+
+#: backend/report.pl.in:207
+#, c-format
+msgid "Could not find SystemV runlevel [%s] directory [%s]."
+msgstr ""
+"No se pudo encontrar directorio [%s] del nivel de ejecución SystemV [%s]."
+
+#: backend/report.pl.in:208
+#, c-format
+msgid "Removed SystemV link [%s]."
+msgstr "Enlace SystemV [%s] eliminado."
+
+#: backend/report.pl.in:209
+#, c-format
+msgid "Created SystemV link [%s]."
+msgstr "Enlace SystemV [%s] creado."
+
+#: backend/report.pl.in:210
+#, c-format
+msgid "Unknown initd operation [%s]."
+msgstr "Operación [%s] de init.d desconocida."
+
+#: backend/report.pl.in:211
+#, c-format
+msgid "Service [%s] %s."
+msgstr "Servicio [%s] %s."
+
+#: backend/report.pl.in:212
+#, c-format
+msgid "Service [%s] cound not be %s."
+msgstr "El servicio [%s] no pudo ser %s."
+
+#: backend/report.pl.in:214
+msgid "Loading ISP configurations."
+msgstr "Cargando configuraciones del ISP."
+
+#: backend/report.pl.in:215
+msgid "Finding active interfaces."
+msgstr "Buscando interfaces activas."
+
+#: backend/report.pl.in:216
+#, c-format
+msgid "Checking if interface [%s] is active."
+msgstr "Confirmando si la interfaz [%s] está activa."
+
+#: backend/report.pl.in:217
+#, fuzzy, c-format
+msgid "Setting hostname to [%s]."
+msgstr "Estableciendo el nombre de la máquina."
+
+#: backend/report.pl.in:218
+msgid "Saving ISP configurations."
+msgstr "Guardando configuraciones del ISP."
+
+#: backend/report.pl.in:219
+#, c-format
+msgid "Removing entry [%s] from [%s]."
+msgstr "Eliminando la entrada [%s] de [%s]."
+
+#: backend/report.pl.in:220
+#, c-format
+msgid "Configuring interface [%s]."
+msgstr "Configurando la interfaz [%s]."
+
+#: backend/report.pl.in:221
+#, c-format
+msgid "Activating interface [%s]."
+msgstr "Activando la interfaz [%s]."
+
+#: backend/report.pl.in:222
+#, c-format
+msgid "Deactivating interface [%s]."
+msgstr "Desactivando la interfaz [%s]."
+
+#: backend/report.pl.in:223
+msgid "Setting up interfaces."
+msgstr "Configurando las interfaces."
+
+#: backend/report.pl.in:224
+#, c-format
+msgid "Getting PAP/CHAP password for [%s] from [%s]."
+msgstr "Obteniendo clave PAP/CHAP para [%s] de [%s]."
+
+#: backend/report.pl.in:226
+#, c-format
+msgid "Setting option [%s] in [%s]."
+msgstr "Configurando la opción [%s] en [%s]."
+
+#: backend/report.pl.in:227
+#, c-format
+msgid "Setting connect option in [%s]."
+msgstr "Configurando la opción de conexión en [%s]."
+
+#: backend/report.pl.in:228
+#, c-format
+msgid "Getting additional options from [%s]."
+msgstr "Obteniendo las opciones adicionales de [%s]."
+
+#: backend/report.pl.in:229
+#, c-format
+msgid "Setting additional options in [%s]."
+msgstr "Configurando las opciones adicionales en [%s]."
+
+#: backend/report.pl.in:230
+#, c-format
+msgid "Boot method [%s] for interface [%s] not supported."
+msgstr "El método de arranque [%s] para la interfaz [%s] no está soportado."
+
+#: backend/report.pl.in:231
+#, c-format
+msgid "Getting remote address for interface [%s]."
+msgstr "Obteniendo la dirección remota para la interfaz [%s]."
+
+#: backend/report.pl.in:232
+#, c-format
+msgid "Setting remote address for interface [%s]."
+msgstr "Configurando la dirección remota para la interfaz [%s]."
+
+#: backend/report.pl.in:233
+msgid "Ensuring loopback interface configuration."
+msgstr "Asegurando la configuración de la interfaz loopback."
+
+#: backend/report.pl.in:235
+msgid "Failed to run lilo."
+msgstr "Error al ejecutar lilo."
+
+#: backend/report.pl.in:236
+msgid "Succesfully executed lilo."
+msgstr "Lilo ejecutado correctamente."
+
+#: backend/report.pl.in:238
+#, c-format
+msgid "Adding [%s] to fstab."
+msgstr "Añadiendo [%s] a fstab."
+
+#: backend/report.pl.in:239
+#, c-format
+msgid "Looking for partitions on [%s]."
+msgstr "Buscando particiones en [%s]."
+
+#: backend/report.pl.in:240
+#, c-format
+msgid "Querying size of [%s]."
+msgstr "Averiguando el tamaño de [%s]."
+
+#: backend/report.pl.in:241
+#, c-format
+msgid "Mounting [%s]."
+msgstr "Montando [%s]."
+
+#: backend/report.pl.in:242
+#, c-format
+msgid "Unmounting [%s]."
+msgstr "Desmontando [%s]."
+
+#: backend/report.pl.in:243
+msgid "Could not find mount tools. No mounting done."
+msgstr ""
+"No se ha podido encontrar las herramientas de montaje. No se ha montado."
+
+#: backend/report.pl.in:245
+#, c-format
+msgid "Found swap entry [%s]."
+msgstr "Encontrada la entrada de intercambio [%s]."
+
+#: backend/report.pl.in:246
+msgid "Looking for swap entries."
+msgstr "Buscando entradas de intercambio."
+
+#: backend/report.pl.in:248
+#, c-format
+msgid "No printtool setup in directory [%s]."
+msgstr "No hay ninguna configuración de impresión en el directorio [%s]"
+
+#: backend/report.pl.in:250
+msgid "Scanning timezones."
+msgstr "Escaneando franjas horarias."
+
+#: backend/report.pl.in:251
+#, c-format
+msgid "Scanning timezones: [%s]."
+msgstr "Escaneando franjas horarias: [%s]."
+
+#: backend/report.pl.in:252
+#, c-format
+msgid "Setting timezone as [%s]."
+msgstr "Configurando la franja horaria como [%s]."
+
+#: backend/report.pl.in:253
+#, c-format
+msgid "Setting local time as [%s]."
+msgstr "Configurando hora local como [%s]."
+
+#: backend/report.pl.in:255
+msgid "Getting user database."
+msgstr "Obteniendo la base de datos de usuarios."
 
 #: interfaces/boot.glade.in.h:1
 msgid "Basic"
@@ -182,76 +493,79 @@ msgid "Boot Image Druid"
 msgstr "Asistente avanzado para las imágenes de arranque"
 
 #: interfaces/boot.glade.in.h:3
-msgid "Boot Image Wizard"
-msgstr "Asistente para las imágenes de arranque"
-
-#: interfaces/boot.glade.in.h:4
 msgid "Boot _type:"
 msgstr "_Tipo de arranque:"
 
-#: interfaces/boot.glade.in.h:5 interfaces/users.glade.in.h:16
+#: interfaces/boot.glade.in.h:4
+msgid ""
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition.\n"
+"Optionally, you may also enter append parameters which are passed to the\n"
+"kernel at boot time."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:7 interfaces/users.glade.in.h:16
 msgid "Click \"Next\" to continue"
 msgstr "Pulse «Siguiente» para continuar"
-
-#: interfaces/boot.glade.in.h:6 interfaces/users.glade.in.h:17
-msgid ""
-"Congratulations, the new user has been created.\n"
-"Please click \"Finish\" to save your changes. "
-msgstr ""
-"Enhorabuena, el nuevo usuario ha sido creado.\n"
-"Pulse «Finalizar» para guardar sus cambios. "
 
 #: interfaces/boot.glade.in.h:8
 msgid "D_efault"
 msgstr "Pr_edeterminado"
 
-#: interfaces/boot.glade.in.h:9 interfaces/network.glade.in.h:34
+#: interfaces/boot.glade.in.h:9
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:10 interfaces/network.glade.in.h:36
 #: interfaces/users.glade.in.h:30
 msgid "Finished"
 msgstr "Terminado"
 
-#: interfaces/boot.glade.in.h:10
+#: interfaces/boot.glade.in.h:11
 msgid "Image"
 msgstr "Imagen"
 
-#: interfaces/boot.glade.in.h:11
+#: interfaces/boot.glade.in.h:12
 msgid "Image (step 2 of 2)"
 msgstr "Imagen (paso 2 de 2)"
 
-#: interfaces/boot.glade.in.h:12
+#: interfaces/boot.glade.in.h:13
 msgid "Image Identity (step 1 of 2)"
 msgstr "Identidad de la imagen (paso 1 de 2)"
 
-#: interfaces/boot.glade.in.h:13
+#: interfaces/boot.glade.in.h:14
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Modificar las opciones para un sistema operativo o núcleo."
 
-#: interfaces/boot.glade.in.h:14
+#: interfaces/boot.glade.in.h:15
 msgid "Other"
 msgstr "Otro"
 
-#: interfaces/boot.glade.in.h:15
+#: interfaces/boot.glade.in.h:16
 msgid "Other  (step 2 of 2)"
 msgstr "Otro (paso 2 de 2)"
 
-#: interfaces/boot.glade.in.h:16 interfaces/users.glade.in.h:60
-msgid "Please enter a password for the new user. "
-msgstr "Introduzca una contraseña para el nuevo usuario."
-
 #: interfaces/boot.glade.in.h:17
-msgid ""
-"Please enter a username for the new user in the space below. You may also "
-"enter a comment about the user, such as his or her real name. "
-msgstr ""
-"Introduzca un nombre de usuario para el nuevo usuario en el espacio de "
-"abajo. Puede también introducir un comentario sobre el usuario, como su "
-"nombre real. "
+#, fuzzy
+msgid "Specify the partition the the operating system is installed on."
+msgstr "Modificar las opciones para un sistema operativo o núcleo."
 
 #: interfaces/boot.glade.in.h:18
 msgid "Starting your computer"
 msgstr "Al iniciar su ordenador"
 
 #: interfaces/boot.glade.in.h:19
+#, fuzzy
+msgid ""
+"The new boot image has been added.\n"
+"Please click \"Finish\" to save your changes. "
+msgstr ""
+"Enhorabuena, el nuevo usuario ha sido creado.\n"
+"Pulse «Finalizar» para guardar sus cambios. "
+
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new boot images to your system.\n"
@@ -263,7 +577,7 @@ msgstr ""
 "\n"
 "Para empezar, pulse «Siguiente». "
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:25
 msgid ""
 "Use this tool to set the installed operating\n"
 "systems to choose from at startup."
@@ -272,47 +586,47 @@ msgstr ""
 "sistemas operativos instalados que se podrán\n"
 "elegir al arrancar."
 
-#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:87
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:90
 #: interfaces/shares.glade.in.h:57
 msgid "_Add..."
 msgstr "_Añadir..."
 
-#: interfaces/boot.glade.in.h:26
+#: interfaces/boot.glade.in.h:28
 msgid "_Append:"
 msgstr "_Añadir:"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:92
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:95
 #: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:89
 msgid "_Delete"
 msgstr "_Borrar"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "_Device:"
 msgstr "_Dispositivo:"
 
-#: interfaces/boot.glade.in.h:29 interfaces/shares.glade.in.h:65
-#: interfaces/users.glade.in.h:94
+#: interfaces/boot.glade.in.h:31 interfaces/print.glade.in.h:73
+#: interfaces/shares.glade.in.h:65 interfaces/users.glade.in.h:94
 msgid "_Name:"
 msgstr "_Nombre:"
 
-#: interfaces/boot.glade.in.h:30 interfaces/shares.glade.in.h:66
+#: interfaces/boot.glade.in.h:32 interfaces/shares.glade.in.h:66
 msgid "_Path:"
 msgstr "R_uta:"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "_Root:"
 msgstr "_Raíz:"
 
-#: interfaces/boot.glade.in.h:32 interfaces/location-manager.glade.in.h:39
+#: interfaces/boot.glade.in.h:34 interfaces/location-manager.glade.in.h:39
 #: interfaces/shares.glade.in.h:69 interfaces/users.glade.in.h:98
 msgid "_Settings..."
 msgstr "_Opciones..."
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "_Wait"
 msgstr "_Espere"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:36
 msgid "_seconds before loading default kernel or OS"
 msgstr "_segundos antes de cargar el núcleo o SO predeterminado"
 
@@ -320,7 +634,7 @@ msgstr "_segundos antes de cargar el núcleo o SO predeterminado"
 msgid "Complexity"
 msgstr "Complejidad"
 
-#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:53
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:55
 #: interfaces/shares.glade.in.h:43
 msgid "Password:"
 msgstr "Contraseña:"
@@ -329,7 +643,7 @@ msgstr "Contraseña:"
 msgid "Run without password"
 msgstr "Ejecutar sin contraseña"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:698
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:715
 msgid "Scanning your system configuration."
 msgstr "Buscando la configuración de su sistema."
 
@@ -406,13 +720,13 @@ msgid "Detected"
 msgstr "Detectado"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
-#: interfaces/network.glade.in.h:32 src/boot/boot.etspec.h:2
+#: interfaces/network.glade.in.h:34 src/boot/boot.etspec.h:2
 #: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "Dispositivo"
 
 #: interfaces/disks.glade.in.h:10 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:35
 msgid "Device:"
 msgstr "Dispositivo:"
 
@@ -576,7 +890,7 @@ msgstr "Memoria de intercambio:"
 msgid "Swap type:"
 msgstr "Tipo de memoria de intercambio:"
 
-#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:86
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:89
 #: interfaces/time.glade.in.h:17
 msgid "_Add"
 msgstr "_Añadir"
@@ -585,7 +899,6 @@ msgstr "_Añadir"
 msgid "_Remove"
 msgstr "_Eliminar"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:138
 #: interfaces/memory.glade.in.h:24
 msgid "_Settings"
 msgstr "_Opciones"
@@ -636,7 +949,7 @@ msgstr ""
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "Cambiar la dirección IP del alias o sus correspondientes nombres."
 
-#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:3
+#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:21
 #: interfaces/shares.glade.in.h:11 interfaces/users.glade.in.h:24
 msgid "Delete"
 msgstr "Borrar"
@@ -792,7 +1105,8 @@ msgid "Advanced"
 msgstr " Avanzado"
 
 #: interfaces/network.glade.in.h:15
-msgid "Advanced PPP connection tunning."
+#, fuzzy
+msgid "Advanced PPP connection tuning."
 msgstr "Ajustar conexión PPP avanzada."
 
 #: interfaces/network.glade.in.h:17
@@ -807,56 +1121,64 @@ msgstr "Permite el control de activación para todos los _usuarios"
 msgid "Allow activation control for all users"
 msgstr "Permite el control de activación para todos los usuarios"
 
-#: interfaces/network.glade.in.h:20 src/network/connection.c:1095
+#: interfaces/network.glade.in.h:20
+msgid "Auto"
+msgstr ""
+
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1411
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:21
+#: interfaces/network.glade.in.h:22 interfaces/print.glade.in.h:18
 msgid "Connection"
 msgstr "Conexión"
 
-#: interfaces/network.glade.in.h:22
+#: interfaces/network.glade.in.h:23
 msgid "Connection Settings"
 msgstr "Opciones de conexión"
 
-#: interfaces/network.glade.in.h:23
+#: interfaces/network.glade.in.h:24
 msgid "Connection active"
 msgstr "Conexión activa"
 
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:25
 msgid "Connections"
 msgstr "Conexiones"
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:26
 msgid "Create a new Internet Connection "
 msgstr "Crea una nueva conexión a internet "
 
-#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:26
-#: src/network/connection.c:1094
+#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:27
+#: src/network/connection.c:1410
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:28
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:28
+#: interfaces/network.glade.in.h:29
 msgid "DNS Servers"
 msgstr "Servidores DNS"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:30
 msgid "DNS _Servers:"
 msgstr "_Servidores DNS:"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:31
 msgid "D_eactivate"
 msgstr "D_esactivar"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:32
+msgid "Default Gateway Device:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:33
 msgid "Description"
 msgstr "Descripción"
 
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:37
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
@@ -864,59 +1186,59 @@ msgstr ""
 "Para empezar, introduzca el número de teléfono que emplea para conectarse a "
 "internet. Este número se lo facilitará su ISP. "
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
 msgid "General"
 msgstr "General"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:39 src/network/main.c:132
 msgid "Hosts"
 msgstr "Máquinas"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:40
 msgid "How other computers are accessed."
 msgstr "Como se accede a otros ordenadores."
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:41
 msgid "How the IP address for this connection is determined"
 msgstr "Como se determina la dirección IP para esta conexión"
 
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:42
 msgid "How the IP addresses for this connection are determined"
 msgstr "Como se determinan las direcciones IP para esta conexión"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:43
 msgid "How the names of other computers are found."
 msgstr "Como se encuentran los nombres de los otros ordenadores."
 
-#: interfaces/network.glade.in.h:42
+#: interfaces/network.glade.in.h:44
 msgid "How this computer is identified."
 msgstr "Como se identifica este ordenador."
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:45
 msgid "How to dial up to the internet."
 msgstr "Como llamar a internet."
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:46
 msgid "IP Address"
 msgstr "Dirección IP"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:47
 msgid "IP Settings"
 msgstr "Opciones IP"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1093
+#: interfaces/network.glade.in.h:48 src/network/connection.c:1409
 msgid "Manual"
 msgstr "Manual"
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:49
 msgid "Networking Settings"
 msgstr "Opciones de la red"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:50
 msgid "New Connection Type"
 msgstr "Nuevo tipo de conexión"
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:51
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -924,7 +1246,7 @@ msgstr ""
 "A continuación, introduzca el nombre de usuario y la contraseña que le "
 "asignó su ISP."
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:52
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
@@ -932,47 +1254,47 @@ msgstr ""
 "Ahora, asígnele un nombre a esta cuenta. Este nombre se empleará para "
 "identificar la cuenta."
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:53 interfaces/print.glade.in.h:33
 msgid "Options"
 msgstr "Opciones"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:54
 msgid "Password (confirm):"
 msgstr "Contraseña (confirmar):"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Phone _number:"
 msgstr "_Número de teléfono:"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "Phone number:"
 msgstr "Número de teléfono:"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid "Pppd _options:"
 msgstr "_Opciones del pppd:"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid "Sea_rch Domains:"
 msgstr "Busca_r dominios:"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid "Select which type of connection you would like to add."
 msgstr "Selecciones que tipo de conexión le gustaría añadir."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid "Set _DNS servers manually"
 msgstr "Configurar manualmente los servidores _DNS"
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Set as _default route"
 msgstr "Configurar como ruta pre_determinada"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Status"
 msgstr "Estado"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -984,15 +1306,19 @@ msgstr ""
 "indicaciones de como proceder (volver,\n"
 "cancelar o finalizar)."
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
-"\"."
+"To continue configuring your account, click \"Next\". To quit, click "
+"\"Cancel\"."
 msgstr ""
 "Para continuar configurando su cuenta, pulse «Siguiente». Para salir, pulse "
 "«Cancelar»."
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
+msgid "Use \"Auto\" if unsure."
+msgstr ""
+
+#: interfaces/network.glade.in.h:70
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
@@ -1000,23 +1326,23 @@ msgstr ""
 "Emplear el comentario para identificar la interfaz. El gestor de "
 "activaciones le permite establecer quien y cuando activará conexiones."
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:71
 msgid "User name:"
 msgstr "Nombre del usuario:"
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:72
 msgid "WI_NS server:"
 msgstr "Servidor WI_NS:"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:73
 msgid "Warning message goes here.."
 msgstr "Aquí va un mensaje de aviso.."
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:74
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:75
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1041,137 +1367,136 @@ msgstr ""
 "\n"
 "Pulse el botón «Siguiente» para empezar."
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:86
 msgid "Windows Networking"
 msgstr "Trabajo en red de windows"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:87
 msgid "Wireless networking settings."
 msgstr "Configuración de la red sin cables."
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:88
 msgid "_Ad-Hoc mode"
 msgstr "Modo _Ad-Hoc"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:91
 msgid "_Channel:"
 msgstr "_Canal:"
 
-#: interfaces/network.glade.in.h:89 interfaces/shares.glade.in.h:59
+#: interfaces/network.glade.in.h:92 interfaces/shares.glade.in.h:59
 #: interfaces/users.glade.in.h:87
 msgid "_Comment:"
 msgstr "_Comentario:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:93
 msgid "_Configuration:"
 msgstr "_Configuración:"
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:94
 msgid "_Configure..."
 msgstr "_Configurar..."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:108
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:96
 msgid "_Delete..."
 msgstr "_Borrar..."
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:97
 msgid "_Description:"
 msgstr "_Descripción:"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:98
 msgid "_Domain:"
 msgstr "_Dominio:"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:99
 msgid "_Enable windows networking (Samba)"
 msgstr "_Habilitar el trabajo en red de windows (Samba)"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:100
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:101
 msgid "_Frequency (GHz):"
 msgstr "_Frecuencia (GHz):"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:102
 msgid "_Gateway address:"
 msgstr "_Dirección de la puerta de enlace:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:103
 msgid "_Host name:"
 msgstr "_Nombre del servidor:"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:104
 msgid "_IP address:"
 msgstr "Dirección _IP:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:105
 msgid "_Local IP:"
 msgstr "IP _local:"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:106
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:107
 msgid "_Modem port:"
 msgstr "Puerto del _modem:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:108
 msgid "_Parallel Line"
 msgstr "_Puerto paralelo"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:109 interfaces/print.glade.in.h:74
 msgid "_Password:"
 msgstr "_Contraseña:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:110
 msgid "_Primary:"
 msgstr "_Primario:"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:111
 msgid "_Remote IP:"
 msgstr "IP _remota:"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:112
 msgid "_Restart if connection cuts or fails to start"
 msgstr "_Reiniciar si se corta la conexión o falla al comenzar"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:113
 msgid "_Secondary:"
 msgstr "_Secundario:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:114
 msgid "_Session ID:"
 msgstr "ID de la _sesión:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:115
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Comenzar PPP tan pronto como se conecte el modem"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:116
 msgid "_Subnet mask:"
 msgstr "Máscara de _sub-red:"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:117
 msgid "_Update DNS when this connection becomes active"
 msgstr "Act_ualizar DNS cuando se active esta conexión"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:118
 msgid "_Use remote IP as default gateway"
 msgstr "_Usar la IP remota como la ruta predeterminada"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:119
 msgid "_User name:"
 msgstr "Nombre del _usuario:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:120
 msgid "_Wavelan"
 msgstr "_Wavelan"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:121 interfaces/print.glade.in.h:77
 msgid "_Workgroup:"
 msgstr "_Grupo de trabajo:"
 
@@ -1352,7 +1677,7 @@ msgstr "Restringir el acceso a esta compartición a clientes específicos"
 msgid "Samba"
 msgstr "Samba"
 
-#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:50
+#: interfaces/print.glade.in.h:56 interfaces/shares.glade.in.h:50
 msgid "Settings..."
 msgstr "Opciones..."
 
@@ -1422,7 +1747,8 @@ msgstr "_Restringir el acceso a esta compartición a clientes específicos"
 msgid "_Scan"
 msgstr "E_scanear"
 
-#: interfaces/shares.glade.in.h:70 interfaces/users.glade.in.h:101
+#: interfaces/print.glade.in.h:76 interfaces/shares.glade.in.h:70
+#: interfaces/users.glade.in.h:101
 msgid "_Username:"
 msgstr "Nombre de _usuario:"
 
@@ -1572,6 +1898,14 @@ msgstr ""
 #: interfaces/users.glade.in.h:15
 msgid "Check password _quality"
 msgstr "Revisar la _calidad de la contraseña"
+
+#: interfaces/users.glade.in.h:17
+msgid ""
+"Congratulations, the new user has been created.\n"
+"Please click \"Finish\" to save your changes. "
+msgstr ""
+"Enhorabuena, el nuevo usuario ha sido creado.\n"
+"Pulse «Finalizar» para guardar sus cambios. "
 
 #: interfaces/users.glade.in.h:19
 msgid "Contact information"
@@ -1740,6 +2074,10 @@ msgstr "Opciones de la contraseña (paso 2 de 2)"
 #: interfaces/users.glade.in.h:59
 msgid "Password set to:"
 msgstr "Establecer contraseña a:"
+
+#: interfaces/users.glade.in.h:60
+msgid "Please enter a password for the new user. "
+msgstr "Introduzca una contraseña para el nuevo usuario."
 
 #: interfaces/users.glade.in.h:61
 msgid ""
@@ -1960,15 +2298,20 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Se ha producido un error al conectar la señal '%s' con el widget '%s'"
 
-#: src/common/xst-tool.c:574
-msgid "Skipping actual save..."
+#: src/common/xst-tool.c:565
+#, fuzzy
+msgid "Skipping backend init..."
 msgstr "Saltándose el guardado actual..."
 
-#: src/common/xst-tool.c:621
+#: src/common/xst-tool.c:764
 msgid "Updating your system configuration."
 msgstr "Actualizando la configuración de su sistema."
 
-#: src/common/xst-tool.c:752
+#: src/common/xst-tool.c:809
+msgid "Skipping actual save..."
+msgstr "Saltándose el guardado actual..."
+
+#: src/common/xst-tool.c:860
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1976,16 +2319,16 @@ msgstr ""
 "Se produjo un error al ejecutar el script del backend,\n"
 "y la configuración no ha podido ser cargada."
 
-#: src/common/xst-tool.c:928
+#: src/common/xst-tool.c:1036
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1065
+#: src/common/xst-tool.c:1176
 msgid "The password you entered is invalid."
 msgstr "La contraseña que ha introducido es incorrecta"
 
-#: src/common/xst-tool.c:1075
+#: src/common/xst-tool.c:1186
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2014,15 +2357,19 @@ msgstr ""
 "--\n"
 "El equipo de las Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1095
+#: src/common/xst-tool.c:1206
 msgid "Don't show me this again"
 msgstr "No vuelva a mostrarme esto"
 
-#: src/common/xst-tool.c:1125
+#: src/common/xst-tool.c:1236
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tEditar configuración en la ubicación LOCATION."
 
-#: src/common/xst-tool.c:1162
+#: src/common/xst-tool.c:1236
+msgid "LOCATION"
+msgstr "UBICACIÓN"
+
+#: src/common/xst-tool.c:1273
 msgid "Pretending we are root..."
 msgstr "Intentando ser root..."
 
@@ -2113,7 +2460,7 @@ msgstr "¿Eliminar la conexión %s: ``%s''?"
 msgid "Remove connection %s?"
 msgstr "¿Eliminar la conexión %s?"
 
-#: src/network/callbacks.c:493
+#: src/network/callbacks.c:494
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2121,15 +2468,16 @@ msgstr ""
 "No tiene instalado el soporte para SMB. Instálelo en su sistema\n"
 "para habilitar la red de Windows."
 
-#: src/network/callbacks.c:494
+#: src/network/callbacks.c:495
 msgid "SMB support missing."
 msgstr "Falta el soporte para SMB."
 
-#: src/network/callbacks.c:531
+#: src/network/callbacks.c:536
+#, fuzzy
 msgid ""
 "The host name has changed. This will prevent you\n"
-"from launching new applications,\n"
-"and so you will have to log in again.\n"
+"from launching new applications, and so you will\n"
+"have to log in again.\n"
 "\n"
 "Continue anyway?"
 msgstr ""
@@ -2139,19 +2487,19 @@ msgstr ""
 "\n"
 "¿Continuar de todas formas?"
 
-#: src/network/callbacks.c:538
+#: src/network/callbacks.c:542
 msgid "Don't change host name"
 msgstr "No cambiar el nombre de máquina"
 
-#: src/network/callbacks.c:571
+#: src/network/callbacks.c:575
 msgid "Active"
 msgstr "Activa"
 
-#: src/network/callbacks.c:572
+#: src/network/callbacks.c:576
 msgid "Inactive"
 msgstr "Inactiva"
 
-#: src/network/callbacks.c:589
+#: src/network/callbacks.c:593
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2164,6 +2512,32 @@ msgstr ""
 "no se activarán.\n"
 "\n"
 "¿Continuar de todas formas?"
+
+#: src/network/callbacks.c:620
+#, fuzzy
+msgid ""
+"The default gateway device is not activated. This\n"
+"will prevent you from connecting to the Internet.\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+"El nombre de la máquina se ha cambiado. Esto le impedirá\n"
+"lanzar nuevas aplicaciones,\n"
+"por tanto deberá iniciar la sesión de nuevo.\n"
+"\n"
+"¿Continuar de todas formas?"
+
+#: src/network/callbacks.c:627
+#, fuzzy
+msgid "Activate connection"
+msgstr "Activación"
+
+#: src/network/callbacks.c:673
+msgid ""
+"The default gateway device is missing gateway\n"
+"information. Please provide this information to\n"
+"proceed, or choose another default gateway device.\n"
+msgstr ""
 
 #: src/network/connection.c:44
 msgid "Other type"
@@ -2193,15 +2567,15 @@ msgstr "Loopback: interfaz virtual"
 msgid "Unknown type"
 msgstr "Tipo desconocido"
 
-#: src/network/connection.c:527
+#: src/network/connection.c:824
 msgid "To activate"
 msgstr "Para activar"
 
-#: src/network/connection.c:528
+#: src/network/connection.c:825
 msgid "To inactivate"
 msgstr "Para desactivar"
 
-#: src/network/connection.c:881
+#: src/network/connection.c:1197
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2211,7 +2585,7 @@ msgstr ""
 "red de la interfaz. Por favor introduzca una dirección\n"
 "IP valida en esos campos para continuar."
 
-#: src/network/connection.c:888
+#: src/network/connection.c:1204
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2221,7 +2595,7 @@ msgstr ""
 "remota de la interfaz. Por favor introduzca una\n"
 "dirección IP valida en esos campos para continuar."
 
-#: src/network/connection.c:894
+#: src/network/connection.c:1210
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2240,11 +2614,11 @@ msgstr ""
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "¿Está seguro que desea borrar el alias de %s?"
 
-#: src/network/main.c:114
+#: src/network/main.c:173
 msgid "\tRun the internet conection druid."
 msgstr "\tEjecutar el asistente de conexión a internet."
 
-#: src/network/main.c:121
+#: src/network/main.c:180
 msgid "Network Settings"
 msgstr "Opciones de la red"
 
@@ -2487,257 +2861,165 @@ msgstr ""
 "Contraseña errónea: %s.\n"
 "Por favor inténtelo con una nueva contraseña."
 
-#: src/users/user_group.c:321
+#: src/users/user_group.c:326
 msgid "The username is empty."
 msgstr "El nombre de usuario está vacío."
 
-#: src/users/user_group.c:325
+#: src/users/user_group.c:330
 msgid "The username is too long."
 msgstr "El nombre del usuario es demasiado largo."
 
-#: src/users/user_group.c:328 src/users/user_group.c:349
-#: src/users/user_group.c:432
+#: src/users/user_group.c:333 src/users/user_group.c:354
+#: src/users/user_group.c:438
 msgid "root user shouldn't be modified."
 msgstr "El usuario root no debería modificarse."
 
-#: src/users/user_group.c:332
+#: src/users/user_group.c:337
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "Defina un nombre de usuario válido, usando sólo letras minúsculas."
 
-#: src/users/user_group.c:336
+#: src/users/user_group.c:341
 msgid "Username already exists."
 msgstr "El usuario ya existe."
 
-#: src/users/user_group.c:347 src/users/user_group.c:526
+#: src/users/user_group.c:352 src/users/user_group.c:542
 msgid "User id must be a positive number."
 msgstr "El id del usuario debe ser un número positivo."
 
-#: src/users/user_group.c:351
+#: src/users/user_group.c:356
 msgid "Such user id already exists."
 msgstr "Ese id de usuario ya existe."
 
-#: src/users/user_group.c:374
+#: src/users/user_group.c:379
 #, c-format
 msgid "Invalid character '%c' in comment."
 msgstr "Caracter '%c' inválido en comentario."
 
-#: src/users/user_group.c:390
+#: src/users/user_group.c:395
 msgid "Please give shell with full path."
 msgstr "Especifique el intérprete de comandos con la ruta completa."
 
-#: src/users/user_group.c:426
+#: src/users/user_group.c:432
 msgid "Home directory must not be empty."
 msgstr "El directorio home no debe estar vacío."
 
-#: src/users/user_group.c:429
+#: src/users/user_group.c:435
 msgid "Please enter full path for home directory."
 msgstr "Escriba la ruta completa para el directorio home."
 
-#: src/users/user_group.c:462
+#: src/users/user_group.c:443
+#, fuzzy
+msgid "Part of the path to the home directory is a file."
+msgstr "Escriba la ruta completa para el directorio home."
+
+#: src/users/user_group.c:444
+#, fuzzy
+msgid "There is a loop in the path to the home directory."
+msgstr "Escriba la ruta completa para el directorio home."
+
+#: src/users/user_group.c:445
+msgid "Not enough memory to check the home directory."
+msgstr ""
+
+#: src/users/user_group.c:446
+#, fuzzy
+msgid "The path to the home directory is too long."
+msgstr "El nombre del grupo es demasiado largo."
+
+#: src/users/user_group.c:478
 msgid "Group name is not valid."
 msgstr "El nombre del grupo no es válido."
 
-#: src/users/user_group.c:465 src/users/user_group.c:530
+#: src/users/user_group.c:481 src/users/user_group.c:546
 msgid "Such group id already exists."
 msgstr "Ese id de grupo ya existe."
 
-#: src/users/user_group.c:468
+#: src/users/user_group.c:484
 msgid "Group does not exist. Create new?"
 msgstr "El grupo no existe. ¿Crearlo nuevo?"
 
-#: src/users/user_group.c:487
+#: src/users/user_group.c:503
 msgid "Group name is empty."
 msgstr "El nombre del grupo está vacío."
 
-#: src/users/user_group.c:491
+#: src/users/user_group.c:507
 msgid "The group name is too long."
 msgstr "El nombre del grupo es demasiado largo."
 
-#: src/users/user_group.c:495
+#: src/users/user_group.c:511
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Defina un nombre de grupo válido, usando sólo letras minúsculas."
 
-#: src/users/user_group.c:499
+#: src/users/user_group.c:515
 msgid "Group already exists."
 msgstr "El grupo ya existe."
 
-#: src/users/user_group.c:800
+#: src/users/user_group.c:816
 #, c-format
 msgid "Password for User %s"
 msgstr "Contraseña para el usuario %s"
 
-#: src/users/user_group.c:834
+#: src/users/user_group.c:850
 msgid "The root user must not be deleted."
 msgstr "El usuario root no debe ser borrado."
 
-#: src/users/user_group.c:841
+#: src/users/user_group.c:857
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "¿Está seguro que desea borrar el usuario %s?"
 
-#: src/users/user_group.c:864
+#: src/users/user_group.c:880
 msgid "Create New Group"
 msgstr "Crear nuevo grupo"
 
-#: src/users/user_group.c:924
+#: src/users/user_group.c:940
 msgid "The root group must not be deleted."
 msgstr "El grupo root no debe ser borrado."
 
-#: src/users/user_group.c:931
+#: src/users/user_group.c:947
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "¿Está seguro que desea borrar el grupo %s?"
 
-#: src/users/user_group.c:976
+#: src/users/user_group.c:992
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Opciones para el grupo %s"
 
-#: archiver/config-manager-dialog.c:161 archiver/create-location-dialog.c:114
-msgid "Rollback and Location Management"
-msgstr "Administrador de restauraciones y localización"
-
-#: archiver/location-list.c:344
-msgid "Global locations"
-msgstr "Localizaciones globales"
-
-#: archiver/location-list.c:347
-msgid "User locations"
-msgstr "Localización del usuario"
-
-#: archiver/location-manager-capplet/gui-backend-list.c:387
-#: archiver/location-manager-capplet/gui-backend-list.c:408
-msgid "Could not launch configuration tool"
-msgstr "No pude ejecutar la herramienta de configuración"
-
-#: archiver/location-manager-capplet/location-dialog.c:300
-msgid "You must supply a name"
-msgstr "Debe escribir un nombre"
-
-#: archiver/location-manager-capplet/location-dialog.c:305
-msgid "You already have a location by that name"
-msgstr "Ya tiene un ubicación con ese nombre"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:99
-msgid "_New..."
-msgstr "_Nuevo..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:100
-msgid "Create a new location"
-msgstr "Crea una nueva ubicación"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:102
-msgid "_Copy..."
-msgstr "_Copiar..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:103
-msgid "Create a new location identical to the selected one"
-msgstr "Crear una nueva ubicación idéntica a la seleccionada"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:105
-msgid "_Rename..."
-msgstr "_Renombrar..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:106
-msgid "Rename the selected location"
-msgstr "Renombrar la ubicación seleccionada"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:109
-msgid "Delete the selected location"
-msgstr "Borrar la ubicación seleccionada"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:112
-msgid "_Apply..."
-msgstr "_Aplicar..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:113
-msgid "Apply the changes"
-msgstr "Aplicar los cambios"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:119
-msgid "_Edit..."
-msgstr "_Editar..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:120
-msgid "Edit settings for the selected backend"
-msgstr "Editar configuración para el backend seleccionado"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:122
-msgid "_Select"
-msgstr "_Seleccionar"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:123
-msgid "Select the selected backend for this location"
-msgstr "Elegir el backend seleccionado para esta ubicación"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:125
-msgid "_Deselect"
-msgstr "_Desseleccionar"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:126
-msgid "Deselect the selected backend for this location"
-msgstr "Liberar el backend seleccionado para esta ubicación"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:137
-msgid "_Location"
-msgstr "_Ubicación"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:139
-#: interfaces/location-manager.glade.in.h:38
-msgid "_Help"
-msgstr "_Ayuda"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:193
-#: archiver/location-manager-capplet/location-manager-dialog.c:484
-msgid "Location Manager"
-msgstr "Administrador de Ubicaciones"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:256
-msgid ""
-"Could not retrieve a configuration\n"
-"snapshot. This probably means you do\n"
-"not have the Ximian Setup Tools\n"
-"installed properly."
+#: src/users/user_group.c:1383
+msgid "The home directory does not exist, or its path is invalid."
 msgstr ""
-"No pude obtener una instantanea de la\n"
-"configuración. Esto probablemente significa\n"
-"que no tiene las Ximian Setup Tools\n"
-"instaladas corractamente."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:261
-msgid ""
-"Could not retrieve a configuration\n"
-"snapshot. This probably means you are\n"
-"running an old version of the GNOME\n"
-"control center. Please upgrade to\n"
-"at least version 1.3.2 or CVS HEAD."
+#: src/users/user_group.c:1385
+msgid "Couldn't get access to the home directory."
 msgstr ""
-"No pude obtener una instantanea de la\n"
-"configuración. Esto probablemente significa\n"
-"que está ejecutando una versión antigua del\n"
-"Centro de Control GNOME. Por favor actualicese\n"
-"al menos a la versión 1.3.2 o CVS HEAD."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:417
-msgid "You cannot delete the default location"
-msgstr "No puede borrar la ubicación predeterminada"
+#. We shouldn't fall here: the other cases are in the error checks.
+#: src/users/user_group.c:1389
+msgid "There was an error trying to access the home directory."
+msgstr ""
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:422
-#, c-format
-msgid "Are you sure you wish to destroy the location %s?"
-msgstr "¿Está seguro que desea borrar la ubicación %s?"
+#: src/users/user_group.c:1397
+msgid "The home directory path exists, but it is not a directory."
+msgstr ""
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:487
-msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximian Setup Tools, Administrador de Ubicaciones"
+#: src/users/user_group.c:1401
+#, fuzzy
+msgid "The home directory is not owned by the user."
+msgstr "El directorio home no debe estar vacío."
 
-#: archiver/location-manager-capplet/main.c:37
-msgid "Operate on global backends"
-msgstr "Operar en backends globales"
+#: src/users/user_group.c:1405
+msgid "The user doesn't have permission to read from the home directory."
+msgstr ""
 
-#: archiver/location-manager-capplet/main.c:53
-msgid "Options for the location manager"
-msgstr "Opciones para el administrador de ubicaciones"
+#: src/users/user_group.c:1408
+msgid "The user doesn't have permission to write in the home directory."
+msgstr ""
+
+#: src/users/user_group.c:1411
+msgid ""
+"The user doesn't have permission to use (``execute'') the home directory."
+msgstr ""
 
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
@@ -2895,43 +3177,242 @@ msgstr ""
 "Use esta herramienta para administrar todas las ubicaciones donde pueda "
 "querer usar su portatil."
 
+#: interfaces/location-manager.glade.in.h:38
+msgid "_Help"
+msgstr "_Ayuda"
+
 #: interfaces/print.glade.in.h:1
+msgid "/dev/lp0 (LPT1)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:2
+msgid "/dev/lp1 (LPT2)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:3
+msgid "/dev/ttyS0 (COM1)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:4
+msgid "/dev/ttyS1 (COM2)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:5
+msgid "/dev/ttyS2 (COM3)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:6
+msgid "/dev/ttyS3 (COM4)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:7
+msgid "1200x1200"
+msgstr ""
+
+#: interfaces/print.glade.in.h:8
+msgid "1200x600"
+msgstr ""
+
+#: interfaces/print.glade.in.h:9
+msgid "16 colors"
+msgstr ""
+
+#: interfaces/print.glade.in.h:10
+msgid "256 colors"
+msgstr ""
+
+#: interfaces/print.glade.in.h:11
+msgid "300x300"
+msgstr ""
+
+#: interfaces/print.glade.in.h:12
+msgid "400x400"
+msgstr ""
+
+#: interfaces/print.glade.in.h:13
+msgid "600x600"
+msgstr ""
+
+#: interfaces/print.glade.in.h:14
+msgid "A3"
+msgstr ""
+
+#: interfaces/print.glade.in.h:15
+msgid "A4"
+msgstr ""
+
+#: interfaces/print.glade.in.h:16
 msgid "Add Printer..."
 msgstr "Añadir Impresora..."
 
-#: interfaces/print.glade.in.h:2
-msgid "D_evice"
-msgstr "D_ispositivo"
+#: interfaces/print.glade.in.h:17
+#, fuzzy
+msgid "Add a New Printer"
+msgstr "Añadir Impresora..."
 
-#: interfaces/print.glade.in.h:4
-msgid "Dummy Printer"
-msgstr "Impresora Ficticia"
+#: interfaces/print.glade.in.h:19
+msgid ""
+"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+msgstr ""
 
-#: interfaces/print.glade.in.h:5
-msgid "Novel _Netware (NCP) Printer"
+#: interfaces/print.glade.in.h:20
+msgid "Convert _Linefeeds"
+msgstr ""
+
+#: interfaces/print.glade.in.h:22
+msgid "Document Pages per Sheet"
+msgstr ""
+
+#: interfaces/print.glade.in.h:23
+#, fuzzy
+msgid "Driver"
+msgstr "Servidores"
+
+#: interfaces/print.glade.in.h:24
+msgid "E_xplicitly Eject Last Page"
+msgstr ""
+
+#: interfaces/print.glade.in.h:25
+msgid "High Color"
+msgstr ""
+
+#: interfaces/print.glade.in.h:26
+msgid "Legal"
+msgstr ""
+
+#: interfaces/print.glade.in.h:27
+#, fuzzy
+msgid "Letter"
+msgstr "Patrón"
+
+#: interfaces/print.glade.in.h:28
+#, fuzzy
+msgid "Name of the printer."
+msgstr "Alias de otros ordenadores."
+
+#: interfaces/print.glade.in.h:29
+msgid "Name of the server the printer is connected to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:30
+msgid "Name the server uses for the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:31
+#, fuzzy
+msgid "Novell _Netware (NCP) Printer"
 msgstr "Impresora Novel _Netware (NCP)"
 
-#: interfaces/print.glade.in.h:6
-msgid "Remote UNIX (_lpd) printer"
+#: interfaces/print.glade.in.h:32
+msgid "Number of colors to print in."
+msgstr ""
+
+#: interfaces/print.glade.in.h:34
+msgid "P_aper Size:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:35
+#, fuzzy
+msgid "P_ort Number:"
+msgstr "Número de teléfono:"
+
+#: interfaces/print.glade.in.h:36
+msgid "Port number the server is listening to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:37
+msgid "Port the printer is connected to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:38
+msgid "Print one page per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:39
+#, fuzzy
+msgid "Print resolution."
+msgstr "Resolución"
+
+#: interfaces/print.glade.in.h:40
+#, fuzzy
+msgid "Printer Settings"
+msgstr "Opciones de partición"
+
+#: interfaces/print.glade.in.h:41
+msgid "Printer connected to a port on your machine."
+msgstr ""
+
+#: interfaces/print.glade.in.h:42
+msgid "Printer listening directly for network connections."
+msgstr ""
+
+#: interfaces/print.glade.in.h:43
+msgid "Printer shared on a Windows (SMB) network."
+msgstr ""
+
+#: interfaces/print.glade.in.h:44
+msgid "Printer shared using the Novell Netware (NCP) protocol."
+msgstr ""
+
+#: interfaces/print.glade.in.h:45
+msgid "Printer shared using the Unix (lpd) print protocol."
+msgstr ""
+
+#: interfaces/print.glade.in.h:46
+#, fuzzy
+msgid "R_esolution:"
+msgstr "Resolución"
+
+#: interfaces/print.glade.in.h:47
+#, fuzzy
+msgid "Remote UNIX (_lpd) Printer"
 msgstr "Impresora Remota UNIX (_lpd)"
 
-#: interfaces/print.glade.in.h:7
+#: interfaces/print.glade.in.h:48
 msgid "Remote _Windows (SMB) printer"
 msgstr "Impresora Remota _Windows (SMB)"
 
-#: interfaces/print.glade.in.h:8
-msgid "S_erver"
-msgstr "S_ervidore"
+#: interfaces/print.glade.in.h:49
+msgid "SMB workgroup the server is in."
+msgstr ""
 
-#: interfaces/print.glade.in.h:9
-msgid "S_pool"
-msgstr "C_ola de impresión"
+#: interfaces/print.glade.in.h:50
+msgid "Scale pages down and print eight per sheet."
+msgstr ""
 
-#: interfaces/print.glade.in.h:10
-msgid "Select"
-msgstr "Seleccionar"
+#: interfaces/print.glade.in.h:51
+msgid "Scale pages down and print four per sheet."
+msgstr ""
 
-#: interfaces/print.glade.in.h:12
+#: interfaces/print.glade.in.h:52
+msgid "Scale pages down and print two per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:53
+#, fuzzy
+msgid "Select the type of printer to add:"
+msgstr "Selecciones que tipo de conexión le gustaría añadir."
+
+#: interfaces/print.glade.in.h:54
+msgid "Send an EOF after the print job to help eject the last page."
+msgstr ""
+
+#: interfaces/print.glade.in.h:55
+msgid "Send text documents raw to the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:57
+msgid "Size of the paper in the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:58
+#, fuzzy
+msgid "The password used to connect to the server."
+msgstr ""
+"La contraseña y su confirmación\n"
+"deben coincidir."
+
+#: interfaces/print.glade.in.h:59
 msgid ""
 "This is the list of the configured printers available on the system. Create "
 "new printers or edit existing printer settings with this dialog."
@@ -2939,33 +3420,66 @@ msgstr ""
 "Esta es la lista de las impresoras configuradas disponibles en el sistema. "
 "Cree nuevas impresoras o edite las opciones de las actuales con este diálogo."
 
-#: interfaces/print.glade.in.h:13
-msgid "User Settings"
-msgstr "Opciones de Usuario"
+#: interfaces/print.glade.in.h:60
+msgid "True Color"
+msgstr ""
 
-#: interfaces/print.glade.in.h:14
-msgid "_Direct to port printer"
+#: interfaces/print.glade.in.h:61
+msgid "Username used to connect to the server."
+msgstr ""
+
+#: interfaces/print.glade.in.h:62
+msgid "What driver to use."
+msgstr ""
+
+#: interfaces/print.glade.in.h:63
+msgid "_1"
+msgstr ""
+
+#: interfaces/print.glade.in.h:64
+msgid "_2"
+msgstr ""
+
+#: interfaces/print.glade.in.h:65
+msgid "_4"
+msgstr ""
+
+#: interfaces/print.glade.in.h:66
+msgid "_8"
+msgstr ""
+
+#: interfaces/print.glade.in.h:67
+msgid "_Color Depth:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:68
+#, fuzzy
+msgid "_Device Name:"
+msgstr "_Dispositivo:"
+
+#: interfaces/print.glade.in.h:69
+#, fuzzy
+msgid "_Direct Network Printer"
 msgstr "_Directamente al puerto de la impresora"
 
-#: interfaces/print.glade.in.h:15
-msgid "_Filter"
-msgstr "_Filtro"
+#: interfaces/print.glade.in.h:70
+#, fuzzy
+msgid "_Fast Text Printing"
+msgstr "Impresión basada en lpr"
 
-#: interfaces/print.glade.in.h:16
+#: interfaces/print.glade.in.h:71
+#, fuzzy
+msgid "_Hostname:"
+msgstr "_Nombre del servidor:"
+
+#: interfaces/print.glade.in.h:72
 msgid "_Local Printer"
 msgstr "Impresora _Local"
 
-#: interfaces/print.glade.in.h:17
-msgid "_Password"
-msgstr "_Contraseña"
-
-#: interfaces/print.glade.in.h:18
-msgid "_User"
-msgstr "_Usuario"
-
-#: interfaces/print.glade.in.h:19
-msgid "_Workgroup"
-msgstr "_Grupo de trabajo"
+#: interfaces/print.glade.in.h:75
+#, fuzzy
+msgid "_Remote Name:"
+msgstr "IP _remota:"
 
 #: src/internetsharing/callbacks.c:54
 msgid ""
@@ -3124,278 +3638,270 @@ msgstr "Patrón"
 msgid "Write"
 msgstr "Escribir"
 
-#~ msgid "Start of work report."
-#~ msgstr "Inicio del informe."
+#~ msgid "Default Location"
+#~ msgstr "Ubicación predeterminada"
 
-#~ msgid "End of work report."
-#~ msgstr "Fin del informe."
+#~ msgid "Store XML data in the archive"
+#~ msgstr "Guardar información XML en el archivo"
 
-#~ msgid "%d"
-#~ msgstr "%d"
+#~ msgid "Roll back the configuration to a given point"
+#~ msgstr "Volver atrás en la configuración hasta un punto determinado"
 
-#~ msgid "%s."
-#~ msgstr "%s."
+#~ msgid "Change the location profile to the given one"
+#~ msgstr "Cambiar la ubicación del perfil al actual"
 
-#~ msgid "Supported: [%s]"
-#~ msgstr "Soportado: [%s]"
-
-#~ msgid "Your platform [%s] is not supported."
-#~ msgstr "Su plataforma [%s] no está soportada."
-
-#~ msgid "Unable to determine host platform."
-#~ msgstr "No se pudo determinar la plataforma."
-
-#~ msgid "Configuring for platform [%s]."
-#~ msgstr "Configurando para la plataforma [%s]."
-
-#~ msgid "Unexpected tag [%s]."
-#~ msgstr "Marca [%s] inesperada."
-
-#~ msgid "Unexpected argument [%s] to tag [%s]."
-#~ msgstr "Argumento [%s] inesperado en la marca [%s]."
-
-#~ msgid "Could not open [%s] for reading."
-#~ msgstr "No se pudo abrir [%s] para lectura."
-
-#~ msgid "Reading options from [%s]."
-#~ msgstr "Leyendo opciones de [%s]."
-
-#~ msgid "Failed to write to [%s]."
-#~ msgstr "La escritura en [%s] falló."
-
-#~ msgid "Could not find [%s] for writing. Creating [%s]."
-#~ msgstr "No se pudo encontrar [%s] para escritura. Creando [%s]."
-
-#~ msgid "Writing to [%s]."
-#~ msgstr "Escribiendo a [%s]."
-
-#~ msgid "Directory [%s] created."
-#~ msgstr "Directorio [%s] creado."
-
-#~ msgid "Backup directory [%s] was rotated."
-#~ msgstr "El directorio de respaldo [%s] fue rotado."
-
-#~ msgid "Saved backup for [%s]."
-#~ msgstr "El respaldo para [%s] se ha guardado."
-
-#~ msgid "No file to patch: [%s]."
-#~ msgstr "Ningún archivo para parchear: [%s]."
-
-#~ msgid "Could not find [%s] for patching. Creating [%s]."
-#~ msgstr "No se pudo encontrar [%s] para parchear. Creando [%s]."
-
-#~ msgid "Found [%s]. Patching [%s]."
-#~ msgstr "[%s] encontrado. Parcheando [%s]."
-
-#~ msgid "Loading file [%s] to buffer."
-#~ msgstr "Cargando el archivo [%s] a memoria."
-
-#~ msgid "Saving buffer to file [%s]."
-#~ msgstr "Guardando buffer al archivo [%s]."
-
-#~ msgid "Running command [%s]."
-#~ msgstr "Ejecutando el comando [%s]."
-
-#~ msgid "Found tool [%s]."
-#~ msgstr "Utilidad [%s] encontrada."
-
-#~ msgid "Couldn't find tool [%s]."
-#~ msgstr "No se pudo encontrar la utilidad [%s]."
-
-#~ msgid "Parsing option [%s]."
-#~ msgstr "Leyendo opciones de [%s]."
-
-#~ msgid "Trivialy passing [%s]."
-#~ msgstr "Pasando [%s] trivialmente."
-
-#~ msgid "Getting option [%s] from [%s]."
-#~ msgstr "Obteniendo opción [%s] de [%s]."
-
-#~ msgid "Getting configuration from [%s]."
-#~ msgstr "Obteniendo configuraciones de [%s]."
-
-#~ msgid "Getting shell option [%s] from [%s]."
-#~ msgstr "Obteniendo opción del intérprete de comandos [%s] de [%s]."
-
-#~ msgid "Getting keyword [%s] from [%s]."
-#~ msgstr "Obteniendo palabra clave [%s] de [%s]."
-
-#~ msgid "Getting information from [%s]."
-#~ msgstr "Obteniendo información de [%s]."
-
-#~ msgid "Getting chat information from [%s]."
-#~ msgstr "Obteniendo información chat de [%s]."
-
-#~ msgid "Getting option [%s] from [%s], section [%s]."
-#~ msgstr "Obteniendo opción [%s] de [%s], sección [%s]."
-
-#~ msgid "Getting option [%s] from interface [%s]."
-#~ msgstr "Obteniendo la opción [%s] del interfaz [%s]."
-
-#~ msgid "Getting keyword [%s] from interface [%s]."
-#~ msgstr "Obteniendo la opción [%s] del interfaz [%s]."
-
-#~ msgid "Keyword for interface [%s] in [%s] had unexpected value."
+#~ msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
 #~ msgstr ""
-#~ "La palabra clave para la interfaz [%s] en [%s] tenía un valor no esperado."
+#~ "Enviar la información de configuración a las máquinas clientes (SIN "
+#~ "IMPLEMENTAR)"
 
-#~ msgid "Replacing key [%s] in [%s]."
-#~ msgstr "Reemplazando llave [%s] en [%s]."
+#~ msgid "Rename a location to a new name"
+#~ msgstr "Renombrar una ubicación a un nuevo nombre"
 
-#~ msgid "Replacing shell var [%s] in [%s]."
-#~ msgstr "Reemplazando variable del intérprete de comandos [%s] en [%s]."
+#~ msgid "Add a new location to the archive"
+#~ msgstr "Añadir una nueva ubicación al archivo"
 
-#~ msgid "Replacing keyword [%s] in [%s]."
-#~ msgstr "Reemplazando palabra clave [%s] en [%s]."
+#~ msgid "Remove a location from the archive"
+#~ msgstr "Eliminar una ubicación del archivo"
 
-#~ msgid "Replacing contents of file [%s]."
-#~ msgstr "Reemplazando el contenido del archivo [%s]."
+#~ msgid "Add a given backend to the given location"
+#~ msgstr "Añadir un backend determinado a la ubicación determinada"
 
-#~ msgid "Replacing values in [%s]."
-#~ msgstr "Reemplazando valores en [%s]."
+#~ msgid "Remove the given backend from the given location"
+#~ msgstr "Eliminar un backend determinado de la ubicación determinada"
 
-#~ msgid "Replacing variable [%s] in section [%s] of [%s]."
-#~ msgstr "Reemplazando la variable [%s] en la sección [%s] de [%s]."
+#~ msgid "Use the global repository"
+#~ msgstr "Usar el repositorio global"
 
-#~ msgid "Replacing option [%s] from interface [%s]."
-#~ msgstr "Reemplazando la opción [%s] del interfaz [%s]."
+#~ msgid "Identifier of location profile on which to operate"
+#~ msgstr "Identificador de la ubicación de un perfil con el cual operar"
 
-#~ msgid "Replacing keyword [%s] from interface [%s]."
-#~ msgstr "Reemplazando palabra clave [%s] de la interfaz [%s]."
+#~ msgid "Backend being used for this operation"
+#~ msgstr "Backend usado en esta operación"
 
-#~ msgid "Service [%s] is running."
-#~ msgstr "El servicio [%s] se está ejecutando."
+#~ msgid "BACKEND_ID"
+#~ msgstr "BACKEND_ID"
 
-#~ msgid "Service [%s] is stopped."
-#~ msgstr "El servicio [%s] está parado."
+#~ msgid "Store only the differences with the parent location's config"
+#~ msgstr "Guardar solo las diferencias con la configuración raíz"
 
-#~ msgid "Could not find SystemV scripts for service [%s]."
-#~ msgstr "No se pudieron encontrar scripts SystemV para el servicio [%s]."
+#~ msgid "Store only those settings set in the previous config"
+#~ msgstr "Guardar solo esas preferencias en la configuración anterior"
 
-#~ msgid "Could not find SystemV runlevel [%s] directory [%s]."
+#~ msgid "Date to which to roll back"
+#~ msgstr "Fecha a la que volver"
+
+#~ msgid "DATE"
+#~ msgstr "FECHA"
+
+#~ msgid "Roll back all configuration items"
+#~ msgstr "Restaurar todos los elementos de la configuración"
+
+#~ msgid "Roll back to the revision REVISION_ID"
+#~ msgstr "Volver a la revisión REVISIÓN_ID"
+
+#~ msgid "REVISION_ID"
+#~ msgstr "REVISIÓN_ID"
+
+#~ msgid "Roll back to the last known revision"
+#~ msgstr "Volver a la última revisión conocida"
+
+#~ msgid "Roll back by STEPS revisions"
+#~ msgstr "Volver en PASOS revisiones"
+
+#~ msgid "STEPS"
+#~ msgstr "PASOS"
+
+#~ msgid "Don't run the backend, just dump the output"
+#~ msgstr "No ejecutar el backend, solo volcar la salida"
+
+#~ msgid "Parent location for the new location"
+#~ msgstr "Ubicación del padre de la nueva ubicación"
+
+#~ msgid "PARENT"
+#~ msgstr "PADRE"
+
+#~ msgid "New name to assign to the location"
+#~ msgstr "Nuevo nombre a asignar a la ubicación"
+
+#~ msgid "NEW_NAME"
+#~ msgstr "NUEVO_NOMBRE"
+
+#~ msgid "Add/remove this backend to/from the master backend list"
+#~ msgstr "Añadir/eliminar este backend a/de la lista maestra de backends"
+
+#~ msgid "Full containment"
+#~ msgstr "Contención completa"
+
+#~ msgid "Partial containment"
+#~ msgstr "Contención parcial"
+
+#~ msgid "Global archiver options"
+#~ msgstr "Opciones globales del archivo"
+
+#~ msgid "Archiver commands"
+#~ msgstr "Comandos del archivo"
+
+#~ msgid "Options for storing data"
+#~ msgstr "Opciones para almacenar datos"
+
+#~ msgid "Options for rolling back"
+#~ msgstr "Opciones para volver atrás"
+
+#~ msgid "Options for adding or renaming locations"
+#~ msgstr "Opciones para añadir o renombrar ubicaciones"
+
+#~ msgid "Options for adding and removing backends"
+#~ msgstr "Opciones para añadir y eliminar backends"
+
+#~ msgid "Boot Image Wizard"
+#~ msgstr "Asistente para las imágenes de arranque"
+
+#~ msgid ""
+#~ "Please enter a username for the new user in the space below. You may also "
+#~ "enter a comment about the user, such as his or her real name. "
 #~ msgstr ""
-#~ "No se pudo encontrar directorio [%s] del nivel de ejecución SystemV [%s]."
+#~ "Introduzca un nombre de usuario para el nuevo usuario en el espacio de "
+#~ "abajo. Puede también introducir un comentario sobre el usuario, como su "
+#~ "nombre real. "
 
-#~ msgid "Removed SystemV link [%s]."
-#~ msgstr "Enlace SystemV [%s] eliminado."
+#~ msgid "Rollback and Location Management"
+#~ msgstr "Administrador de restauraciones y localización"
 
-#~ msgid "Created SystemV link [%s]."
-#~ msgstr "Enlace SystemV [%s] creado."
+#~ msgid "Global locations"
+#~ msgstr "Localizaciones globales"
 
-#~ msgid "Unknown initd operation [%s]."
-#~ msgstr "Operación [%s] de init.d desconocida."
+#~ msgid "User locations"
+#~ msgstr "Localización del usuario"
 
-#~ msgid "Service [%s] %s."
-#~ msgstr "Servicio [%s] %s."
+#~ msgid "Could not launch configuration tool"
+#~ msgstr "No pude ejecutar la herramienta de configuración"
 
-#~ msgid "Service [%s] cound not be %s."
-#~ msgstr "El servicio [%s] no pudo ser %s."
+#~ msgid "You must supply a name"
+#~ msgstr "Debe escribir un nombre"
 
-#~ msgid "Loading ISP configurations."
-#~ msgstr "Cargando configuraciones del ISP."
+#~ msgid "You already have a location by that name"
+#~ msgstr "Ya tiene un ubicación con ese nombre"
 
-#~ msgid "Finding active interfaces."
-#~ msgstr "Buscando interfaces activas."
+#~ msgid "_New..."
+#~ msgstr "_Nuevo..."
 
-#~ msgid "Checking if interface [%s] is active."
-#~ msgstr "Confirmando si la interfaz [%s] está activa."
+#~ msgid "Create a new location"
+#~ msgstr "Crea una nueva ubicación"
 
-#~ msgid "Setting hostname."
-#~ msgstr "Estableciendo el nombre de la máquina."
+#~ msgid "_Copy..."
+#~ msgstr "_Copiar..."
 
-#~ msgid "Saving ISP configurations."
-#~ msgstr "Guardando configuraciones del ISP."
+#~ msgid "Create a new location identical to the selected one"
+#~ msgstr "Crear una nueva ubicación idéntica a la seleccionada"
 
-#~ msgid "Removing entry [%s] from [%s]."
-#~ msgstr "Eliminando la entrada [%s] de [%s]."
+#~ msgid "_Rename..."
+#~ msgstr "_Renombrar..."
 
-#~ msgid "Configuring interface [%s]."
-#~ msgstr "Configurando la interfaz [%s]."
+#~ msgid "Rename the selected location"
+#~ msgstr "Renombrar la ubicación seleccionada"
 
-#~ msgid "Activating interface [%s]."
-#~ msgstr "Activando la interfaz [%s]."
+#~ msgid "Delete the selected location"
+#~ msgstr "Borrar la ubicación seleccionada"
 
-#~ msgid "Deactivating interface [%s]."
-#~ msgstr "Desactivando la interfaz [%s]."
+#~ msgid "_Apply..."
+#~ msgstr "_Aplicar..."
 
-#~ msgid "Setting up interfaces."
-#~ msgstr "Configurando las interfaces."
+#~ msgid "Apply the changes"
+#~ msgstr "Aplicar los cambios"
 
-#~ msgid "Getting PAP/CHAP password for [%s] from [%s]."
-#~ msgstr "Obteniendo clave PAP/CHAP para [%s] de [%s]."
+#~ msgid "_Edit..."
+#~ msgstr "_Editar..."
 
-#~ msgid "Setting option [%s] in [%s]."
-#~ msgstr "Configurando la opción [%s] en [%s]."
+#~ msgid "Edit settings for the selected backend"
+#~ msgstr "Editar configuración para el backend seleccionado"
 
-#~ msgid "Setting connect option in [%s]."
-#~ msgstr "Configurando la opción de conexión en [%s]."
+#~ msgid "_Select"
+#~ msgstr "_Seleccionar"
 
-#~ msgid "Getting additional options from [%s]."
-#~ msgstr "Obteniendo las opciones adicionales de [%s]."
+#~ msgid "Select the selected backend for this location"
+#~ msgstr "Elegir el backend seleccionado para esta ubicación"
 
-#~ msgid "Setting additional options in [%s]."
-#~ msgstr "Configurando las opciones adicionales en [%s]."
+#~ msgid "_Deselect"
+#~ msgstr "_Desseleccionar"
 
-#~ msgid "Boot method [%s] for interface [%s] not supported."
-#~ msgstr "El método de arranque [%s] para la interfaz [%s] no está soportado."
+#~ msgid "Deselect the selected backend for this location"
+#~ msgstr "Liberar el backend seleccionado para esta ubicación"
 
-#~ msgid "Getting remote address for interface [%s]."
-#~ msgstr "Obteniendo la dirección remota para la interfaz [%s]."
+#~ msgid "_Location"
+#~ msgstr "_Ubicación"
 
-#~ msgid "Setting remote address for interface [%s]."
-#~ msgstr "Configurando la dirección remota para la interfaz [%s]."
+#~ msgid "Location Manager"
+#~ msgstr "Administrador de Ubicaciones"
 
-#~ msgid "Ensuring loopback interface configuration."
-#~ msgstr "Asegurando la configuración de la interfaz loopback."
-
-#~ msgid "Failed to run lilo."
-#~ msgstr "Error al ejecutar lilo."
-
-#~ msgid "Succesfully executed lilo."
-#~ msgstr "Lilo ejecutado correctamente."
-
-#~ msgid "Adding [%s] to fstab."
-#~ msgstr "Añadiendo [%s] a fstab."
-
-#~ msgid "Looking for partitions on [%s]."
-#~ msgstr "Buscando particiones en [%s]."
-
-#~ msgid "Querying size of [%s]."
-#~ msgstr "Averiguando el tamaño de [%s]."
-
-#~ msgid "Mounting [%s]."
-#~ msgstr "Montando [%s]."
-
-#~ msgid "Unmounting [%s]."
-#~ msgstr "Desmontando [%s]."
-
-#~ msgid "Could not find mount tools. No mounting done."
+#~ msgid ""
+#~ "Could not retrieve a configuration\n"
+#~ "snapshot. This probably means you do\n"
+#~ "not have the Ximian Setup Tools\n"
+#~ "installed properly."
 #~ msgstr ""
-#~ "No se ha podido encontrar las herramientas de montaje. No se ha montado."
+#~ "No pude obtener una instantanea de la\n"
+#~ "configuración. Esto probablemente significa\n"
+#~ "que no tiene las Ximian Setup Tools\n"
+#~ "instaladas corractamente."
 
-#~ msgid "Found swap entry [%s]."
-#~ msgstr "Encontrada la entrada de intercambio [%s]."
+#~ msgid ""
+#~ "Could not retrieve a configuration\n"
+#~ "snapshot. This probably means you are\n"
+#~ "running an old version of the GNOME\n"
+#~ "control center. Please upgrade to\n"
+#~ "at least version 1.3.2 or CVS HEAD."
+#~ msgstr ""
+#~ "No pude obtener una instantanea de la\n"
+#~ "configuración. Esto probablemente significa\n"
+#~ "que está ejecutando una versión antigua del\n"
+#~ "Centro de Control GNOME. Por favor actualicese\n"
+#~ "al menos a la versión 1.3.2 o CVS HEAD."
 
-#~ msgid "Looking for swap entries."
-#~ msgstr "Buscando entradas de intercambio."
+#~ msgid "You cannot delete the default location"
+#~ msgstr "No puede borrar la ubicación predeterminada"
 
-#~ msgid "No printtool setup in directory [%s]."
-#~ msgstr "No hay ninguna configuración de impresión en el directorio [%s]"
+#~ msgid "Are you sure you wish to destroy the location %s?"
+#~ msgstr "¿Está seguro que desea borrar la ubicación %s?"
 
-#~ msgid "Scanning timezones."
-#~ msgstr "Escaneando franjas horarias."
+#~ msgid "Ximian Setup Tools Location Manager"
+#~ msgstr "Ximian Setup Tools, Administrador de Ubicaciones"
 
-#~ msgid "Scanning timezones: [%s]."
-#~ msgstr "Escaneando franjas horarias: [%s]."
+#~ msgid "Operate on global backends"
+#~ msgstr "Operar en backends globales"
 
-#~ msgid "Setting timezone as [%s]."
-#~ msgstr "Configurando la franja horaria como [%s]."
+#~ msgid "Options for the location manager"
+#~ msgstr "Opciones para el administrador de ubicaciones"
 
-#~ msgid "Setting local time as [%s]."
-#~ msgstr "Configurando hora local como [%s]."
+#~ msgid "D_evice"
+#~ msgstr "D_ispositivo"
 
-#~ msgid "Getting user database."
-#~ msgstr "Obteniendo la base de datos de usuarios."
+#~ msgid "Dummy Printer"
+#~ msgstr "Impresora Ficticia"
+
+#~ msgid "S_erver"
+#~ msgstr "S_ervidore"
+
+#~ msgid "S_pool"
+#~ msgstr "C_ola de impresión"
+
+#~ msgid "Select"
+#~ msgstr "Seleccionar"
+
+#~ msgid "User Settings"
+#~ msgstr "Opciones de Usuario"
+
+#~ msgid "_Filter"
+#~ msgstr "_Filtro"
+
+#~ msgid "_Password"
+#~ msgstr "_Contraseña"
+
+#~ msgid "_User"
+#~ msgstr "_Usuario"
+
+#~ msgid "_Workgroup"
+#~ msgstr "_Grupo de trabajo"
 
 #~ msgid "window1"
 #~ msgstr "window1"

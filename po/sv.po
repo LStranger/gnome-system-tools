@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-07-07 01:46+0200\n"
+"POT-Creation-Date: 2001-07-11 18:51-0500\n"
 "PO-Revision-Date: 2001-07-07 02:32+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -524,7 +524,7 @@ msgstr ""
 "Ange ett namn för uppstartsavbilden, och ange vilken typ av operativsystem "
 "det är."
 
-#: interfaces/boot.glade.in.h:10 interfaces/network.glade.in.h:34
+#: interfaces/boot.glade.in.h:10 interfaces/network.glade.in.h:36
 #: interfaces/users.glade.in.h:30
 msgid "Finished"
 msgstr "Klart"
@@ -591,7 +591,7 @@ msgstr ""
 "installerade operativsystem som ska vara\n"
 "möjliga att välja mellan vid uppstart."
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:87
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:90
 #: interfaces/shares.glade.in.h:57
 msgid "_Add..."
 msgstr "_Lägg till..."
@@ -600,7 +600,7 @@ msgstr "_Lägg till..."
 msgid "_Append:"
 msgstr "_Tillfoga:"
 
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:92
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:95
 #: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:89
 msgid "_Delete"
 msgstr "_Ta bort"
@@ -639,7 +639,7 @@ msgstr "_sekunder innan standardkärnan eller -operativsystemet startas"
 msgid "Complexity"
 msgstr "Komplexitet"
 
-#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:53
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:55
 #: interfaces/shares.glade.in.h:43
 msgid "Password:"
 msgstr "Lösenord:"
@@ -725,13 +725,13 @@ msgid "Detected"
 msgstr "Upptäckt"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
-#: interfaces/network.glade.in.h:32 src/boot/boot.etspec.h:2
+#: interfaces/network.glade.in.h:34 src/boot/boot.etspec.h:2
 #: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "Enhet"
 
 #: interfaces/disks.glade.in.h:10 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:35
 msgid "Device:"
 msgstr "Enhet:"
 
@@ -895,7 +895,7 @@ msgstr "Växlingsminne (swap):"
 msgid "Swap type:"
 msgstr "Växlingstyp:"
 
-#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:86
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:89
 #: interfaces/time.glade.in.h:17
 msgid "_Add"
 msgstr "_Lägg till"
@@ -1109,7 +1109,8 @@ msgid "Advanced"
 msgstr "Avancerat"
 
 #: interfaces/network.glade.in.h:15
-msgid "Advanced PPP connection tunning."
+#, fuzzy
+msgid "Advanced PPP connection tuning."
 msgstr "Avancerad finjustering av PPP-anslutning."
 
 #: interfaces/network.glade.in.h:17
@@ -1124,56 +1125,64 @@ msgstr "Tillåt aktiveringskontroll för alla _användare"
 msgid "Allow activation control for all users"
 msgstr "Tillåt aktiveringskontroll för alla användare"
 
-#: interfaces/network.glade.in.h:20 src/network/connection.c:1095
+#: interfaces/network.glade.in.h:20
+msgid "Auto"
+msgstr ""
+
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1411
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:21 interfaces/print.glade.in.h:18
+#: interfaces/network.glade.in.h:22 interfaces/print.glade.in.h:18
 msgid "Connection"
 msgstr "Anslutning"
 
-#: interfaces/network.glade.in.h:22
+#: interfaces/network.glade.in.h:23
 msgid "Connection Settings"
 msgstr "Anslutningsinställningar"
 
-#: interfaces/network.glade.in.h:23
+#: interfaces/network.glade.in.h:24
 msgid "Connection active"
 msgstr "Anslutningen aktiv"
 
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:25
 msgid "Connections"
 msgstr "Anslutningar"
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:26
 msgid "Create a new Internet Connection "
 msgstr "Skapa en ny internetanslutning "
 
-#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:26
-#: src/network/connection.c:1094
+#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:27
+#: src/network/connection.c:1410
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:28
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:28
+#: interfaces/network.glade.in.h:29
 msgid "DNS Servers"
 msgstr "DNS-servrar"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:30
 msgid "DNS _Servers:"
 msgstr "DNS-_servrar:"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:31
 msgid "D_eactivate"
 msgstr "_Inaktivera"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:32
+msgid "Default Gateway Device:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:33
 msgid "Description"
 msgstr "Beskrivning"
 
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:37
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
@@ -1181,59 +1190,59 @@ msgstr ""
 "Ange först det telefonnummer som du använder för att ansluta till Internet. "
 "Detta nummer tillhandahåller din internetleverantör. "
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
 msgid "General"
 msgstr "Allmänt"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:39 src/network/main.c:132
 msgid "Hosts"
 msgstr "Värdar"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:40
 msgid "How other computers are accessed."
 msgstr "Hur åtkomst av andra datorer sker."
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:41
 msgid "How the IP address for this connection is determined"
 msgstr "Hur IP-adresserna för denna anslutning bestäms"
 
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:42
 msgid "How the IP addresses for this connection are determined"
 msgstr "Hur IP-adresserna för denna anslutning bestäms"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:43
 msgid "How the names of other computers are found."
 msgstr "Hur namnen på andra datorer hittas."
 
-#: interfaces/network.glade.in.h:42
+#: interfaces/network.glade.in.h:44
 msgid "How this computer is identified."
 msgstr "Hur denna dator identifieras."
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:45
 msgid "How to dial up to the internet."
 msgstr "Hur uppringning till internet ska ske."
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:46
 msgid "IP Address"
 msgstr "IP-adress"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:47
 msgid "IP Settings"
 msgstr "IP-inställningar"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1093
+#: interfaces/network.glade.in.h:48 src/network/connection.c:1409
 msgid "Manual"
 msgstr "Manuell"
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:49
 msgid "Networking Settings"
 msgstr "Nätverksinställningar"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:50
 msgid "New Connection Type"
 msgstr "Ny anslutningstyp"
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:51
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -1241,7 +1250,7 @@ msgstr ""
 "Sedan anger du det användarnamn och lösenord som din internetleverantör "
 "tilldelade dig."
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:52
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
@@ -1249,47 +1258,47 @@ msgstr ""
 "Nu anger du ditt kontonamn. Detta namn kommer att användas för att "
 "identifiera kontot."
 
-#: interfaces/network.glade.in.h:51 interfaces/print.glade.in.h:33
+#: interfaces/network.glade.in.h:53 interfaces/print.glade.in.h:33
 msgid "Options"
 msgstr "Alternativ"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:54
 msgid "Password (confirm):"
 msgstr "Lösenord (bekräfta):"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Phone _number:"
 msgstr "Telefon_nummer:"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "Phone number:"
 msgstr "Telefonnummer:"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid "Pppd _options:"
 msgstr "pppd-alternati_v:"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid "Sea_rch Domains:"
 msgstr "S_ökdomäner:"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid "Select which type of connection you would like to add."
 msgstr "Välj den typ av anslutning som du vill lägga till."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid "Set _DNS servers manually"
 msgstr "Ange _DNS-servrar manuellt"
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Set as _default route"
 msgstr "Ställ in standard_rutt"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Status"
 msgstr "Status"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -1301,7 +1310,7 @@ msgstr ""
 "hur fortsättning ska ske (bakåt,\n"
 "avbryt eller slutför)."
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click "
 "\"Cancel\"."
@@ -1309,7 +1318,11 @@ msgstr ""
 "För att fortsätta konfigurera ditt konto klickar du på \"Nästa\". För att "
 "avsluta klickar du på \"Avbryt\"."
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
+msgid "Use \"Auto\" if unsure."
+msgstr ""
+
+#: interfaces/network.glade.in.h:70
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
@@ -1318,23 +1331,23 @@ msgstr ""
 "Aktiveringshantering låter dig ange av vem och när anslutningar kan "
 "aktiveras."
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:71
 msgid "User name:"
 msgstr "Användarnamn:"
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:72
 msgid "WI_NS server:"
 msgstr "WI_NS-server:"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:73
 msgid "Warning message goes here.."
 msgstr "Varningsmeddelande hamnar här..."
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:74
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:75
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1360,136 +1373,136 @@ msgstr ""
 "\n"
 "Klicka på knappen \"Nästa\" för att börja."
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:86
 msgid "Windows Networking"
 msgstr "Windows-nätverk"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:87
 msgid "Wireless networking settings."
 msgstr "Inställningar för trådlöst nätverk."
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:88
 msgid "_Ad-Hoc mode"
 msgstr "_Ad-Hoc-läge"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:91
 msgid "_Channel:"
 msgstr "_Kanal:"
 
-#: interfaces/network.glade.in.h:89 interfaces/shares.glade.in.h:59
+#: interfaces/network.glade.in.h:92 interfaces/shares.glade.in.h:59
 #: interfaces/users.glade.in.h:87
 msgid "_Comment:"
 msgstr "_Kommentar:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:93
 msgid "_Configuration:"
 msgstr "_Konfiguration:"
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:94
 msgid "_Configure..."
 msgstr "_Konfigurera..."
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:96
 msgid "_Delete..."
 msgstr "_Ta bort..."
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:97
 msgid "_Description:"
 msgstr "_Beskrivning:"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:98
 msgid "_Domain:"
 msgstr "_Domän:"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:99
 msgid "_Enable windows networking (Samba)"
 msgstr "_Använd Windows-nätverk (Samba)"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:100
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:101
 msgid "_Frequency (GHz):"
 msgstr "_Frekvens (GHz):"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:102
 msgid "_Gateway address:"
 msgstr "_Gateway-adress:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:103
 msgid "_Host name:"
 msgstr "_Värdnamn:"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:104
 msgid "_IP address:"
 msgstr "_IP-adress:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:105
 msgid "_Local IP:"
 msgstr "_Lokalt IP:"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:106
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:107
 msgid "_Modem port:"
 msgstr "_Modemport:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:108
 msgid "_Parallel Line"
 msgstr "_Parallellinje"
 
-#: interfaces/network.glade.in.h:106 interfaces/print.glade.in.h:74
+#: interfaces/network.glade.in.h:109 interfaces/print.glade.in.h:74
 msgid "_Password:"
 msgstr "_Lösenord:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:110
 msgid "_Primary:"
 msgstr "_Primär:"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:111
 msgid "_Remote IP:"
 msgstr "_Fjärr-IP:"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:112
 msgid "_Restart if connection cuts or fails to start"
 msgstr "_Starta om om anslutningen bryts eller inte startar"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:113
 msgid "_Secondary:"
 msgstr "_Sekundär:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:114
 msgid "_Session ID:"
 msgstr "_Sessions-ID:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:115
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Starta PPP så fort som modemet ansluter"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:116
 msgid "_Subnet mask:"
 msgstr "_Subnätmask:"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:117
 msgid "_Update DNS when this connection becomes active"
 msgstr "_Uppdatera DNS när denna anslutning blir aktiv"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:118
 msgid "_Use remote IP as default gateway"
 msgstr "_Använd fjärr-IP-numret som standardgateway"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:119
 msgid "_User name:"
 msgstr "_Användarnamn:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:120
 msgid "_Wavelan"
 msgstr "_Wavelan"
 
-#: interfaces/network.glade.in.h:118 interfaces/print.glade.in.h:77
+#: interfaces/network.glade.in.h:121 interfaces/print.glade.in.h:77
 msgid "_Workgroup:"
 msgstr "A_rbetsgrupp:"
 
@@ -2447,7 +2460,7 @@ msgstr "Ta bort anslutningen %s: \"%s\"?"
 msgid "Remove connection %s?"
 msgstr "Ta bort anslutningen %s?"
 
-#: src/network/callbacks.c:493
+#: src/network/callbacks.c:494
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2455,15 +2468,16 @@ msgstr ""
 "Du har inte SMB-stöd installerat. Installera SMB-stöd på systemet\n"
 "för att möjliggöra nätverksanslutning till windows."
 
-#: src/network/callbacks.c:494
+#: src/network/callbacks.c:495
 msgid "SMB support missing."
 msgstr "Stöd för SMB saknas."
 
-#: src/network/callbacks.c:531
+#: src/network/callbacks.c:536
+#, fuzzy
 msgid ""
 "The host name has changed. This will prevent you\n"
-"from launching new applications,\n"
-"and so you will have to log in again.\n"
+"from launching new applications, and so you will\n"
+"have to log in again.\n"
 "\n"
 "Continue anyway?"
 msgstr ""
@@ -2473,19 +2487,19 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:538
+#: src/network/callbacks.c:542
 msgid "Don't change host name"
 msgstr "Ändra inte värdnamnet"
 
-#: src/network/callbacks.c:571
+#: src/network/callbacks.c:575
 msgid "Active"
 msgstr "Aktiv"
 
-#: src/network/callbacks.c:572
+#: src/network/callbacks.c:576
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/network/callbacks.c:589
+#: src/network/callbacks.c:593
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2499,6 +2513,32 @@ msgstr ""
 "kunna aktiveras.\n"
 "\n"
 "Fortsätt ändå?"
+
+#: src/network/callbacks.c:620
+#, fuzzy
+msgid ""
+"The default gateway device is not activated. This\n"
+"will prevent you from connecting to the Internet.\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+"Värdnamnet har ändrats. Detta kommer att hindra dig\n"
+"från att starta nya program, och därför måste du\n"
+"logga in igen.\n"
+"\n"
+"Fortsätta ändå?"
+
+#: src/network/callbacks.c:627
+#, fuzzy
+msgid "Activate connection"
+msgstr "WaveLAN-anslutning"
+
+#: src/network/callbacks.c:673
+msgid ""
+"The default gateway device is missing gateway\n"
+"information. Please provide this information to\n"
+"proceed, or choose another default gateway device.\n"
+msgstr ""
 
 #: src/network/connection.c:44
 msgid "Other type"
@@ -2528,15 +2568,15 @@ msgstr "Loopback: virtuellt gränssnitt"
 msgid "Unknown type"
 msgstr "Okänd typ"
 
-#: src/network/connection.c:527
+#: src/network/connection.c:824
 msgid "To activate"
 msgstr "Att aktivera"
 
-#: src/network/connection.c:528
+#: src/network/connection.c:825
 msgid "To inactivate"
 msgstr "Att inaktivera"
 
-#: src/network/connection.c:881
+#: src/network/connection.c:1197
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2546,7 +2586,7 @@ msgstr ""
 "lämnades tom. Ange giltiga IP-adresser i de\n"
 "fälten för att fortsätta."
 
-#: src/network/connection.c:888
+#: src/network/connection.c:1204
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2556,7 +2596,7 @@ msgstr ""
 "gränssnittet lämnades tom. Ange giltiga\n"
 "IP-adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:894
+#: src/network/connection.c:1210
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2575,11 +2615,11 @@ msgstr ""
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Är du säker på att du vill ta bort aliasen för %s?"
 
-#: src/network/main.c:114
+#: src/network/main.c:173
 msgid "\tRun the internet conection druid."
 msgstr "\tKör guiden Internetanslutning."
 
-#: src/network/main.c:121
+#: src/network/main.c:180
 msgid "Network Settings"
 msgstr "Nätverksinställningar"
 
@@ -4211,9 +4251,6 @@ msgstr "Skriv"
 
 #~ msgid "Swap Management - Ximian Setup Tools"
 #~ msgstr "Hantering av växlingsutrymme - Ximians inställningsverktyg"
-
-#~ msgid "WaveLAN connection"
-#~ msgstr "WaveLAN-anslutning"
 
 #~ msgid "PPP connection"
 #~ msgstr "PPP-anslutning"

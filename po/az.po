@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.2.1\n"
-"POT-Creation-Date: 2001-06-22 17:38+0200\n"
+"POT-Creation-Date: 2001-07-11 18:51-0500\n"
 "PO-Revision-Date: 2000-06-20 17:19GMT +0200\n"
 "Last-Translator: Vasif İsmayıloğlu MD <azerb_linux@hotmail.com>\n"
 "Language-Team: Azerbaijani Turkish <linuxaz@azerimal.net>\n"
@@ -13,161 +13,475 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.8\n"
 
-#: archiver/location.c:229
-msgid "Default Location"
-msgstr "Əsas Yer"
+#: backend/report.pl.in:144
+msgid "Start of work report."
+msgstr ""
 
-#: archiver/main.c:77
-msgid "Store XML data in the archive"
-msgstr "XML veriləni arxivdə qeyd edilir"
+#: backend/report.pl.in:145
+msgid "End of work report."
+msgstr ""
 
-#: archiver/main.c:79
-msgid "Roll back the configuration to a given point"
-msgstr "Quğular verilən nöqtəyə qaytar"
+#: backend/report.pl.in:146
+#, c-format
+msgid "%d"
+msgstr ""
 
-#: archiver/main.c:81
-msgid "Change the location profile to the given one"
-msgstr "Verilənin yer profilini dəyişdir"
+#: backend/report.pl.in:147
+#, c-format
+msgid "%s."
+msgstr ""
 
-#: archiver/main.c:83
-msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
-msgstr "Quraşdırma verilənlərini alıcı kompüterlərdən at (DƏSTƏKLƏNMİR)"
+#: backend/report.pl.in:149
+#, c-format
+msgid "Directive [%s] not supported."
+msgstr ""
 
-#: archiver/main.c:85
-msgid "Rename a location to a new name"
-msgstr "Yeri yenı adla adlandır"
+#: backend/report.pl.in:150
+#, c-format
+msgid "Directive [%s] structure has wrong format."
+msgstr ""
 
-#: archiver/main.c:87
-msgid "Add a new location to the archive"
-msgstr "Arxivə yeni yer əlavə et"
+#: backend/report.pl.in:151
+#, c-format
+msgid "Directive [%s] requires exactly [%s] args in [%s]."
+msgstr ""
 
-#: archiver/main.c:89
-msgid "Remove a location from the archive"
-msgstr "Yeri arxivdən çıxart"
+#: backend/report.pl.in:152
+#, c-format
+msgid "Directive [%s] requires at least [%s] args in [%s]."
+msgstr ""
 
-#: archiver/main.c:91
-msgid "Add a given backend to the given location"
-msgstr "Verilən yerə verilən bəkendi əlavə et"
+#: backend/report.pl.in:154
+#, c-format
+msgid "Supported: [%s]"
+msgstr ""
 
-#: archiver/main.c:93
-msgid "Remove the given backend from the given location"
-msgstr "Verilən yerdən verilən bəkendi çıxart"
+#: backend/report.pl.in:155
+#, c-format
+msgid "Your platform [%s] is not supported."
+msgstr ""
 
-#: archiver/main.c:99
-msgid "Use the global repository"
-msgstr "Qlobal nüzxə işlət"
+#: backend/report.pl.in:156
+msgid "Unable to determine host platform."
+msgstr ""
 
-#: archiver/main.c:101
-msgid "Identifier of location profile on which to operate"
-msgstr "Üstündə işlənəcək yer profilinin vasfləndiricisi"
+#: backend/report.pl.in:157
+#, c-format
+msgid "Configuring for platform [%s]."
+msgstr ""
 
-#: archiver/main.c:102 src/common/xst-tool.c:1125
-msgid "LOCATION"
-msgstr "YER"
+#: backend/report.pl.in:159
+#, c-format
+msgid "Unexpected tag [%s]."
+msgstr ""
 
-#: archiver/main.c:104
-msgid "Backend being used for this operation"
-msgstr "Bu əməliyyat üçün işlədiləcək bəkend"
+#: backend/report.pl.in:160
+#, c-format
+msgid "Unexpected argument [%s] to tag [%s]."
+msgstr ""
 
-#: archiver/main.c:104
-msgid "BACKEND_ID"
-msgstr "BACKEND_ID"
+#: backend/report.pl.in:162
+#, c-format
+msgid "Could not open [%s] for reading."
+msgstr ""
 
-#: archiver/main.c:110
-msgid "Store only the differences with the parent location's config"
-msgstr "Təkcə qohum yerlər arasındakı fərqləri saxla"
+#: backend/report.pl.in:163
+#, c-format
+msgid "Reading options from [%s]."
+msgstr ""
 
-#: archiver/main.c:112
-msgid "Store only those settings set in the previous config"
-msgstr "Təkcə əvvəlki quraşdırmadaı seçənəkləri saxla"
+#: backend/report.pl.in:164
+#, c-format
+msgid "Failed to write to [%s]."
+msgstr ""
 
-#: archiver/main.c:118
-msgid "Date to which to roll back"
-msgstr "Qaytarılacaq tarix"
+#: backend/report.pl.in:165
+#, fuzzy, c-format
+msgid "Could not find [%s] for writing. Creating [%s]."
+msgstr "Pəncərə tapıla bilmədi: %s"
 
-#: archiver/main.c:118
-msgid "DATE"
-msgstr "TARIX"
+#: backend/report.pl.in:166
+#, c-format
+msgid "Writing to [%s]."
+msgstr ""
 
-#: archiver/main.c:120
-msgid "Roll back all configuration items"
-msgstr "Bütün quraşdırma üzvlərini qaytar"
+#: backend/report.pl.in:167
+#, c-format
+msgid "Directory [%s] created."
+msgstr ""
 
-#: archiver/main.c:122
-msgid "Roll back to the revision REVISION_ID"
-msgstr "Əvvəlki REVISION_İDyə qaytar"
+#: backend/report.pl.in:168
+#, c-format
+msgid "Backup directory [%s] was rotated."
+msgstr ""
 
-#: archiver/main.c:122
-msgid "REVISION_ID"
-msgstr "REVISION_ID"
+#: backend/report.pl.in:169
+#, c-format
+msgid "Saved backup for [%s]."
+msgstr ""
 
-#: archiver/main.c:124
-msgid "Roll back to the last known revision"
-msgstr "Ən axırıncı təftişə qaytar"
+#: backend/report.pl.in:170
+#, c-format
+msgid "No file to patch: [%s]."
+msgstr ""
 
-#: archiver/main.c:126
-msgid "Roll back by STEPS revisions"
-msgstr "PİLLƏ təftişlərinı qaytar"
+#: backend/report.pl.in:171
+#, fuzzy, c-format
+msgid "Could not find [%s] for patching. Creating [%s]."
+msgstr "Pəncərə tapıla bilmədi: %s"
 
-#: archiver/main.c:126
-msgid "STEPS"
-msgstr "PİLLƏLƏR"
+#: backend/report.pl.in:172
+#, c-format
+msgid "Found [%s]. Patching [%s]."
+msgstr ""
 
-#: archiver/main.c:128
-msgid "Don't run the backend, just dump the output"
-msgstr "Bəkendi icra etmə, təkcə yekunu ver"
+#: backend/report.pl.in:173
+#, c-format
+msgid "Loading file [%s] to buffer."
+msgstr ""
 
-#: archiver/main.c:134
-msgid "Parent location for the new location"
-msgstr "Yeni yerə qohum olan yerlər"
+#: backend/report.pl.in:174
+#, c-format
+msgid "Saving buffer to file [%s]."
+msgstr ""
 
-#: archiver/main.c:134
-msgid "PARENT"
-msgstr "QOHUM"
+#: backend/report.pl.in:175
+#, c-format
+msgid "Running command [%s]."
+msgstr ""
 
-#: archiver/main.c:136
-msgid "New name to assign to the location"
-msgstr "Yerə yeni ləqəb verilməyib"
+#: backend/report.pl.in:176
+#, c-format
+msgid "Removing file [%s]."
+msgstr ""
 
-#: archiver/main.c:136
-msgid "NEW_NAME"
-msgstr "YENİ_AD"
+#: backend/report.pl.in:177
+#, c-format
+msgid "Found tool [%s]."
+msgstr ""
 
-#: archiver/main.c:142
-msgid "Add/remove this backend to/from the master backend list"
-msgstr "Usta bəkend başlığına/dan bu bəkendi əlavə et/çıxart"
+#: backend/report.pl.in:178
+#, fuzzy, c-format
+msgid "Couldn't find tool [%s]."
+msgstr "Pəncərə tapıla bilmədi: %s"
 
-#: archiver/main.c:144
-msgid "Full containment"
-msgstr "Tam məzmun"
+#: backend/report.pl.in:180
+#, fuzzy, c-format
+msgid "Parsing option [%s]."
+msgstr "Bağlama seçənəkləri"
 
-#: archiver/main.c:146
-msgid "Partial containment"
-msgstr "Qismi məzmun"
+#: backend/report.pl.in:181
+#, c-format
+msgid "Trivialy passing [%s]."
+msgstr ""
 
-#: archiver/main.c:313
-msgid "Global archiver options"
-msgstr "Qlobal arxivşi seçənəkləri"
+#: backend/report.pl.in:182 backend/report.pl.in:225
+#, c-format
+msgid "Getting option [%s] from [%s]."
+msgstr ""
 
-#: archiver/main.c:315
-msgid "Archiver commands"
-msgstr "Arxivçi əmrləri"
+#: backend/report.pl.in:183 backend/report.pl.in:184
+#, c-format
+msgid "Getting configuration from [%s]."
+msgstr ""
 
-#: archiver/main.c:317
-msgid "Options for storing data"
-msgstr "Verilən saxlama seçənəkləri"
+#: backend/report.pl.in:185
+#, c-format
+msgid "Getting shell option [%s] from [%s]."
+msgstr ""
 
-#: archiver/main.c:319
-msgid "Options for rolling back"
-msgstr "Qaytarma seçənəkləri"
+#: backend/report.pl.in:186
+#, c-format
+msgid "Getting keyword [%s] from [%s]."
+msgstr ""
 
-#: archiver/main.c:321
-msgid "Options for adding or renaming locations"
-msgstr "Yer adı əlavə etmə, adını dəyişdirmə seçənəkləri"
+#: backend/report.pl.in:187
+#, fuzzy, c-format
+msgid "Getting information from [%s]."
+msgstr "%s Qrupu üçün Qurğular"
 
-#: archiver/main.c:324
-msgid "Options for adding and removing backends"
-msgstr "Bəkend əlavə etmə, adını dəyişdirmə seçənəkləri"
+#: backend/report.pl.in:188
+#, c-format
+msgid "Getting chat information from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:189
+#, c-format
+msgid "Getting option [%s] from [%s], section [%s]."
+msgstr ""
+
+#: backend/report.pl.in:190
+#, c-format
+msgid "Getting option [%s] from interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:191
+#, c-format
+msgid "Getting keyword [%s] from interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:192
+#, c-format
+msgid "Keyword for interface [%s] in [%s] had unexpected value."
+msgstr ""
+
+#: backend/report.pl.in:194
+#, c-format
+msgid "Replacing key [%s] in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:195
+#, c-format
+msgid "Replacing shell var [%s] in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:196
+#, c-format
+msgid "Replacing keyword [%s] in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:197
+#, c-format
+msgid "Replacing contents of file [%s]."
+msgstr ""
+
+#: backend/report.pl.in:198
+#, c-format
+msgid "Replacing values in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:199
+#, c-format
+msgid "Replacing variable [%s] in section [%s] of [%s]."
+msgstr ""
+
+#: backend/report.pl.in:200
+#, c-format
+msgid "Removing section [%s] from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:201
+#, c-format
+msgid "Replacing option [%s] from interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:202
+#, c-format
+msgid "Replacing keyword [%s] from interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:204
+#, c-format
+msgid "Service [%s] is running."
+msgstr ""
+
+#: backend/report.pl.in:205
+#, c-format
+msgid "Service [%s] is stopped."
+msgstr ""
+
+#: backend/report.pl.in:206
+#, c-format
+msgid "Could not find SystemV scripts for service [%s]."
+msgstr ""
+
+#: backend/report.pl.in:207
+#, c-format
+msgid "Could not find SystemV runlevel [%s] directory [%s]."
+msgstr ""
+
+#: backend/report.pl.in:208
+#, c-format
+msgid "Removed SystemV link [%s]."
+msgstr ""
+
+#: backend/report.pl.in:209
+#, c-format
+msgid "Created SystemV link [%s]."
+msgstr ""
+
+#: backend/report.pl.in:210
+#, c-format
+msgid "Unknown initd operation [%s]."
+msgstr ""
+
+#: backend/report.pl.in:211
+#, c-format
+msgid "Service [%s] %s."
+msgstr ""
+
+#: backend/report.pl.in:212
+#, c-format
+msgid "Service [%s] cound not be %s."
+msgstr ""
+
+#: backend/report.pl.in:214
+#, fuzzy
+msgid "Loading ISP configurations."
+msgstr "Sistem qurğularınız daranır."
+
+#: backend/report.pl.in:215
+msgid "Finding active interfaces."
+msgstr ""
+
+#: backend/report.pl.in:216
+#, c-format
+msgid "Checking if interface [%s] is active."
+msgstr ""
+
+#: backend/report.pl.in:217
+#, fuzzy, c-format
+msgid "Setting hostname to [%s]."
+msgstr "%s Qrupu üçün Qurğular"
+
+#: backend/report.pl.in:218
+#, fuzzy
+msgid "Saving ISP configurations."
+msgstr "Sistem qurğularınız daranır."
+
+#: backend/report.pl.in:219
+#, c-format
+msgid "Removing entry [%s] from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:220
+#, c-format
+msgid "Configuring interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:221
+#, c-format
+msgid "Activating interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:222
+#, c-format
+msgid "Deactivating interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:223
+msgid "Setting up interfaces."
+msgstr ""
+
+#: backend/report.pl.in:224
+#, c-format
+msgid "Getting PAP/CHAP password for [%s] from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:226
+#, c-format
+msgid "Setting option [%s] in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:227
+#, c-format
+msgid "Setting connect option in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:228
+#, c-format
+msgid "Getting additional options from [%s]."
+msgstr ""
+
+#: backend/report.pl.in:229
+#, c-format
+msgid "Setting additional options in [%s]."
+msgstr ""
+
+#: backend/report.pl.in:230
+#, c-format
+msgid "Boot method [%s] for interface [%s] not supported."
+msgstr ""
+
+#: backend/report.pl.in:231
+#, c-format
+msgid "Getting remote address for interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:232
+#, c-format
+msgid "Setting remote address for interface [%s]."
+msgstr ""
+
+#: backend/report.pl.in:233
+#, fuzzy
+msgid "Ensuring loopback interface configuration."
+msgstr "Sistem qurğularınız daranır."
+
+#: backend/report.pl.in:235
+msgid "Failed to run lilo."
+msgstr ""
+
+#: backend/report.pl.in:236
+msgid "Succesfully executed lilo."
+msgstr ""
+
+#: backend/report.pl.in:238
+#, c-format
+msgid "Adding [%s] to fstab."
+msgstr ""
+
+#: backend/report.pl.in:239
+#, c-format
+msgid "Looking for partitions on [%s]."
+msgstr ""
+
+#: backend/report.pl.in:240
+#, c-format
+msgid "Querying size of [%s]."
+msgstr ""
+
+#: backend/report.pl.in:241
+#, fuzzy, c-format
+msgid "Mounting [%s]."
+msgstr "Bağlama Seçənəkləri"
+
+#: backend/report.pl.in:242
+#, fuzzy, c-format
+msgid "Unmounting [%s]."
+msgstr "Ayır"
+
+#: backend/report.pl.in:243
+msgid "Could not find mount tools. No mounting done."
+msgstr ""
+
+#: backend/report.pl.in:245
+#, c-format
+msgid "Found swap entry [%s]."
+msgstr ""
+
+#: backend/report.pl.in:246
+msgid "Looking for swap entries."
+msgstr ""
+
+#: backend/report.pl.in:248
+#, c-format
+msgid "No printtool setup in directory [%s]."
+msgstr ""
+
+#: backend/report.pl.in:250
+#, fuzzy
+msgid "Scanning timezones."
+msgstr "Vaxt dilimini qur... "
+
+#: backend/report.pl.in:251
+#, c-format
+msgid "Scanning timezones: [%s]."
+msgstr ""
+
+#: backend/report.pl.in:252
+#, fuzzy, c-format
+msgid "Setting timezone as [%s]."
+msgstr "Vaxt dilimini qur... "
+
+#: backend/report.pl.in:253
+#, c-format
+msgid "Setting local time as [%s]."
+msgstr ""
+
+#: backend/report.pl.in:255
+msgid "Getting user database."
+msgstr ""
 
 #: interfaces/boot.glade.in.h:1
 msgid "Basic"
@@ -178,75 +492,79 @@ msgid "Boot Image Druid"
 msgstr "Açılış Əksi Vasitəsi"
 
 #: interfaces/boot.glade.in.h:3
-msgid "Boot Image Wizard"
-msgstr "Açılış Əksi Sehirbazı"
-
-#: interfaces/boot.glade.in.h:4
 msgid "Boot _type:"
 msgstr "Açılış _növü:"
 
-#: interfaces/boot.glade.in.h:5 interfaces/users.glade.in.h:16
+#: interfaces/boot.glade.in.h:4
+msgid ""
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition.\n"
+"Optionally, you may also enter append parameters which are passed to the\n"
+"kernel at boot time."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:7 interfaces/users.glade.in.h:16
 msgid "Click \"Next\" to continue"
 msgstr "Davam etmək üçün \"Sonrakı\"na basın"
-
-#: interfaces/boot.glade.in.h:6 interfaces/users.glade.in.h:17
-msgid ""
-"Congratulations, the new user has been created.\n"
-"Please click \"Finish\" to save your changes. "
-msgstr ""
-"Təbrik edirik, qurtardınız. Yeni istifadəçi yaradıldı.\n"
-"Qurtrmaq üçün \"Qurtar\"a basın "
 
 #: interfaces/boot.glade.in.h:8
 msgid "D_efault"
 msgstr "Ə_sas"
 
-#: interfaces/boot.glade.in.h:9 interfaces/network.glade.in.h:34
+#: interfaces/boot.glade.in.h:9
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:10 interfaces/network.glade.in.h:36
 #: interfaces/users.glade.in.h:30
 msgid "Finished"
 msgstr "Qurtarıb"
 
-#: interfaces/boot.glade.in.h:10
+#: interfaces/boot.glade.in.h:11
 msgid "Image"
 msgstr "Rəsm"
 
-#: interfaces/boot.glade.in.h:11
+#: interfaces/boot.glade.in.h:12
 msgid "Image (step 2 of 2)"
 msgstr "Rəsm (2 addımdan birincisi)"
 
-#: interfaces/boot.glade.in.h:12
+#: interfaces/boot.glade.in.h:13
 msgid "Image Identity (step 1 of 2)"
 msgstr "Rəsm Kimliyi  (2 addımdan birincisi)"
 
-#: interfaces/boot.glade.in.h:13
+#: interfaces/boot.glade.in.h:14
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Əməliyyat sistemi ya da çəkirdək qurğularını dəyişdir."
 
-#: interfaces/boot.glade.in.h:14
+#: interfaces/boot.glade.in.h:15
 msgid "Other"
 msgstr "Digər"
 
-#: interfaces/boot.glade.in.h:15
+#: interfaces/boot.glade.in.h:16
 msgid "Other  (step 2 of 2)"
 msgstr "Başqa  (2 addımdan birincisi)"
 
-#: interfaces/boot.glade.in.h:16 interfaces/users.glade.in.h:60
-msgid "Please enter a password for the new user. "
-msgstr "Yeni istifadəçi üçün parol girin."
-
 #: interfaces/boot.glade.in.h:17
-msgid ""
-"Please enter a username for the new user in the space below. You may also "
-"enter a comment about the user, such as his or her real name. "
-msgstr ""
-"Xahiş edirik, yeni istifadəçinin adını aşağıdakı sahəyə girin. Əlavə olaraq "
-"istifadəçi həqiqi adı kimi şərh də qirə bilərsiniz."
+#, fuzzy
+msgid "Specify the partition the the operating system is installed on."
+msgstr "Əməliyyat sistemi ya da çəkirdək qurğularını dəyişdir."
 
 #: interfaces/boot.glade.in.h:18
 msgid "Starting your computer"
 msgstr "Kompüteriniz başladılır"
 
 #: interfaces/boot.glade.in.h:19
+#, fuzzy
+msgid ""
+"The new boot image has been added.\n"
+"Please click \"Finish\" to save your changes. "
+msgstr ""
+"Təbrik edirik, qurtardınız. Yeni istifadəçi yaradıldı.\n"
+"Qurtrmaq üçün \"Qurtar\"a basın "
+
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new boot images to your system.\n"
@@ -258,7 +576,7 @@ msgstr ""
 "\n"
 "Başlamaq üçün \"Sonrakı\"nı tıqlayın."
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:25
 msgid ""
 "Use this tool to set the installed operating\n"
 "systems to choose from at startup."
@@ -266,55 +584,57 @@ msgstr ""
 "Bunu açılışda əməliyyat sistemlərini\n"
 "seçmək üçün istifadə edin."
 
-#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:87
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:90
 #: interfaces/shares.glade.in.h:57
 msgid "_Add..."
 msgstr "Ə_lavə Et..."
 
-#: interfaces/boot.glade.in.h:26
+#: interfaces/boot.glade.in.h:28
 msgid "_Append:"
 msgstr "Ə_lavə Et:"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:92
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:95
 #: interfaces/shares.glade.in.h:60 interfaces/users.glade.in.h:89
 msgid "_Delete"
 msgstr "_Sil"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "_Device:"
 msgstr "A_vadanlıq:"
 
-#: interfaces/boot.glade.in.h:29 interfaces/shares.glade.in.h:65
-#: interfaces/users.glade.in.h:94
+#: interfaces/boot.glade.in.h:31 interfaces/print.glade.in.h:73
+#: interfaces/shares.glade.in.h:65 interfaces/users.glade.in.h:94
 msgid "_Name:"
 msgstr "_Ad:"
 
-#: interfaces/boot.glade.in.h:30 interfaces/shares.glade.in.h:66
+#: interfaces/boot.glade.in.h:32 interfaces/shares.glade.in.h:66
 msgid "_Path:"
 msgstr "_Cığır:"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "_Root:"
 msgstr "_Kök:"
 
-#: interfaces/boot.glade.in.h:32 interfaces/location-manager.glade.in.h:39
+#: interfaces/boot.glade.in.h:34 interfaces/location-manager.glade.in.h:39
 #: interfaces/shares.glade.in.h:69 interfaces/users.glade.in.h:98
 msgid "_Settings..."
 msgstr "_Qurğular..."
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "_Wait"
 msgstr "_Gözlə"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:36
 msgid "_seconds before loading default kernel or OS"
-msgstr "_saniyələrlə ana çəkirdək və ya OS yüklənməsindən əvvəlki müddət"
+msgstr ""
+"_saniyələrlə ana çəkirdək və ya OS yüklənməsindən əvvəlki "
+"müddət"
 
 #: interfaces/common.glade.in.h:1
 msgid "Complexity"
 msgstr "Mürəkkəblik"
 
-#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:53
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:55
 #: interfaces/shares.glade.in.h:43
 msgid "Password:"
 msgstr "Parol:"
@@ -323,7 +643,7 @@ msgstr "Parol:"
 msgid "Run without password"
 msgstr "Parolsuz işə sal"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:698
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:715
 msgid "Scanning your system configuration."
 msgstr "Sistem qurğularınız daranır."
 
@@ -336,12 +656,12 @@ msgid ""
 "Note, however, that this might damage the system configuration or downright "
 "cripple your computer."
 msgstr ""
-"İşlədiyiniz platforma bu vasitə tərəfindən dəstəklənmir. Aşağıda sıralanan "
-"platformalardan birində olduğu kimi işlədiyidən əminsinizsə, seçə və davam "
-"edə bilərsiniz.\n"
+"İşlədiyiniz platforma bu vasitə tərəfindən dəstəklənmir. "
+"Aşağıda sıralanan platformalardan birində olduğu kimi işlədiyidən "
+"əminsinizsə, seçə və davam edə bilərsiniz.\n"
 "\n"
-"Yadda saxlayın ki, bununla sistem qurğularınızı və kompüterinizi xəsarətə "
-"yetirə bilərsiniz."
+"Yadda saxlayın ki, bununla sistem qurğularınızı və kompüterinizi "
+"xəsarətə yetirə bilərsiniz."
 
 #: interfaces/common.glade.in.h:8
 msgid ""
@@ -350,9 +670,11 @@ msgid ""
 "To acquire such privileges, enter your root password below. If you don't\n"
 "specify a password, you will be unable to modify your system configuration."
 msgstr ""
-"bu vasitəni işə salmaq üçün ali istifadəçi səlahiyyətləri lazımdr.\n"
+"bu vasitəni işə salmaq üçün ali istifadəçi səlahiyyətləri "
+"lazımdr.\n"
 "\n"
-"bu səlahiyyəti almaq üçün ali istifadəçi parolunu girin. Parol girməsəniz,\n"
+"bu səlahiyyəti almaq üçün ali istifadəçi parolunu girin. Parol "
+"girməsəniz,\n"
 "sistem qurğularını dəyişdirə bilməyəcəksiniz."
 
 #: interfaces/common.glade.in.h:12
@@ -400,12 +722,13 @@ msgid "Detected"
 msgstr "Tapıldı"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:34 src/boot/boot.etspec.h:2
+#: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "Avadanlıq"
 
 #: interfaces/disks.glade.in.h:10 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:35
 msgid "Device:"
 msgstr "Avadanlıq:"
 
@@ -419,9 +742,9 @@ msgid ""
 "dedicated for a specific storage task, such as virtual memory or home "
 "directories for your users."
 msgstr ""
-"Diskler bir çox qismə ayrıla bilərlər.Buna da bölmə(partition) deyilir. Hər "
-"bölməxüsusi olaraq verilmiş depolama vəzifəsi vardır. Eyni virtual yaddaşvə "
-"ya ev qovluğu kimi."
+"Diskler bir çox qismə ayrıla bilərlər.Buna da bölmə(partition) "
+"deyilir. Hər bölməxüsusi olaraq verilmiş depolama vəzifəsi vardır. "
+"Eyni virtual yaddaşvə ya ev qovluğu kimi."
 
 #: interfaces/disks.glade.in.h:13
 msgid "Ext2 (Linux)"
@@ -452,6 +775,7 @@ msgid "Mount this partition"
 msgstr "Bu disk bölməsini bağla"
 
 #: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:35
+#: src/shares/imports.etspec.h:3
 msgid "Mounted"
 msgstr "Bağlandı"
 
@@ -568,7 +892,7 @@ msgstr "Dəyiş toqquş sahə yaddaşı:"
 msgid "Swap type:"
 msgstr "Dəyiş Toqquş Sahə Növü:"
 
-#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:86
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:89
 #: interfaces/time.glade.in.h:17
 msgid "_Add"
 msgstr "Əla_və Et"
@@ -577,7 +901,6 @@ msgstr "Əla_və Et"
 msgid "_Remove"
 msgstr "_Çıxart"
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:138
 #: interfaces/memory.glade.in.h:24
 msgid "_Settings"
 msgstr "_Qurğular"
@@ -620,14 +943,14 @@ msgid ""
 "Assign aliases to IP addresses that may not be registered in the DNS or WINS "
 "servers, or to override or set new names for commonly used IP addresses. "
 msgstr ""
-"Ip ünvanlarına calanan ləqəblər DNS və ya WINS Xidmətlərində qeydi olmaya "
-"bilərlər.Ümumiyyətlə IP ünvanı təməlində işlədilirlər."
+"Ip ünvanlarına calanan ləqəblər DNS və ya WINS Xidmətlərində qeydi "
+"olmaya bilərlər.Ümumiyyətlə IP ünvanı təməlində işlədilirlər."
 
 #: interfaces/nameresolution.glade.in.h:8
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "Ləqəbları IP ünvanına və ya uyğun adlarına çeviriniz."
 
-#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:3
+#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:21
 #: interfaces/shares.glade.in.h:11 interfaces/users.glade.in.h:24
 msgid "Delete"
 msgstr "Sil"
@@ -657,6 +980,7 @@ msgid "Existing:"
 msgstr "Var olan:"
 
 #: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:22
+#: src/shares/imports.etspec.h:1
 msgid "Host"
 msgstr "Qovşaq"
 
@@ -679,7 +1003,8 @@ msgstr "Kimlik:"
 #: interfaces/nameresolution.glade.in.h:21
 msgid "Let the computer know its name, function and network surroundings."
 msgstr ""
-"Kompüterin adını, funksiyalarını və şəbəkə çevrələrini axtarmasına icazə ver."
+"Kompüterin adını, funksiyalarını və şəbəkə çevrələrini "
+"axtarmasına icazə ver."
 
 #: interfaces/nameresolution.glade.in.h:22
 msgid "Move Down"
@@ -782,7 +1107,8 @@ msgid "Advanced"
 msgstr "Ətraflı"
 
 #: interfaces/network.glade.in.h:15
-msgid "Advanced PPP connection tunning."
+#, fuzzy
+msgid "Advanced PPP connection tuning."
 msgstr "Ətraflı PPP bağlantı yaxşılaşdırılması."
 
 #: interfaces/network.glade.in.h:17
@@ -797,169 +1123,179 @@ msgstr "Bütün i_stifadəçilərə fəallaşdırma idarəsi imkanı ver"
 msgid "Allow activation control for all users"
 msgstr "Bütün istifadəçilərə fəallaşdırma idarəsi imkanı ver"
 
-#: interfaces/network.glade.in.h:20 src/network/connection.c:1095
+#: interfaces/network.glade.in.h:20
+msgid "Auto"
+msgstr ""
+
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1411
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:21
+#: interfaces/network.glade.in.h:22 interfaces/print.glade.in.h:18
 msgid "Connection"
 msgstr "Bağlantı"
 
-#: interfaces/network.glade.in.h:22
+#: interfaces/network.glade.in.h:23
 msgid "Connection Settings"
 msgstr "Baglama Quruluşu"
 
-#: interfaces/network.glade.in.h:23
+#: interfaces/network.glade.in.h:24
 msgid "Connection active"
 msgstr "Bağlantı fəaldır"
 
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:25
 msgid "Connections"
 msgstr "Bağlantılar"
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:26
 msgid "Create a new Internet Connection "
 msgstr "Yeni İnternet Bağlantısı yarat"
 
-#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:26
-#: src/network/connection.c:1094
+#: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:27
+#: src/network/connection.c:1410
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:28
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:28
+#: interfaces/network.glade.in.h:29
 msgid "DNS Servers"
 msgstr "DNS Vericilər"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:30
 msgid "DNS _Servers:"
 msgstr "DNS _Vericiləri:"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:31
 msgid "D_eactivate"
 msgstr "Fəalliyyətdən sa_l"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:32
+msgid "Default Gateway Device:"
+msgstr ""
+
+#: interfaces/network.glade.in.h:33
 msgid "Description"
 msgstr "İzah"
 
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:37
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
 msgstr ""
-"Əvvəlcə internetə bağlanacağınız telefon nömrənizi bildirin. Bu nömrəni sizə "
-"ISPniz verər. "
+"Əvvəlcə internetə bağlanacağınız telefon nömrənizi bildirin. Bu "
+"nömrəni sizə ISPniz verər. "
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
 msgid "General"
 msgstr "Ümumi"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:39 src/network/main.c:132
 msgid "Hosts"
 msgstr "Qovşaqlar"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:40
 msgid "How other computers are accessed."
 msgstr "Digər kompüterlərin yetişmə şəkli."
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:41
 msgid "How the IP address for this connection is determined"
 msgstr "Bağlantının IP ünvanı necə bildirildi"
 
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:42
 msgid "How the IP addresses for this connection are determined"
-msgstr "Bu bağlantı üçün İP ünvanının necə müəyyənləşdirildirdiyi"
+msgstr ""
+"Bu bağlantı üçün İP ünvanının necə müəyyənləşdirildirdiyi"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:43
 msgid "How the names of other computers are found."
 msgstr "Başqa kompüterlər necə tapılır."
 
-#: interfaces/network.glade.in.h:42
+#: interfaces/network.glade.in.h:44
 msgid "How this computer is identified."
 msgstr "Kompüter necə bildirilib."
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:45
 msgid "How to dial up to the internet."
 msgstr "Internetə çevirməli şəbəkə bağlantısı şəkli."
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:46
 msgid "IP Address"
 msgstr "IP Ünvanı"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:47
 msgid "IP Settings"
 msgstr "IP Qurğuları"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1093
+#: interfaces/network.glade.in.h:48 src/network/connection.c:1409
 msgid "Manual"
 msgstr "Əl Kitabçası"
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:49
 msgid "Networking Settings"
 msgstr "Şəbəkə Qurğuları"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:50
 msgid "New Connection Type"
 msgstr "Yeni Bağlantı Növü"
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:51
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr "Sonra ISPnizə bildirdiyiniz istifadəçi adı və parolu girin."
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:52
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
 msgstr ""
-"İndi isə hesabınıza bir ad verin. Bu ad ilə siz öz hesabınızı tanıyacaqsınız."
+"İndi isə hesabınıza bir ad verin. Bu ad ilə siz öz hesabınızı "
+"tanıyacaqsınız."
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:53 interfaces/print.glade.in.h:33
 msgid "Options"
 msgstr "Seçənəklər"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:54
 msgid "Password (confirm):"
 msgstr "Parol (təsdiqləmə):"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Phone _number:"
 msgstr "Telefon _nömrəsi:"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "Phone number:"
 msgstr "Telefon nömrəsi:"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid "Pppd _options:"
 msgstr "Pppd seçənə_kləri:"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid "Sea_rch Domains:"
 msgstr "Sahə adı A_xtar:"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid "Select which type of connection you would like to add."
 msgstr "Əlavə etmək istədiyiniz bağlantı növünü seçin."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid "Set _DNS servers manually"
 msgstr "_DNS vericiləri əllə qur"
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Set as _default route"
 msgstr "Ana _yol olaraq qur"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Status"
 msgstr "Vəziyyət"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -971,39 +1307,44 @@ msgstr ""
 "necə davam edəcəyiniz bildirilir\n"
 "(dala, ləğv et və ya qurtar)."
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
-"\"."
+"To continue configuring your account, click \"Next\". To quit, click "
+"\"Cancel\"."
 msgstr ""
-"Hesabınızı quraşdırmaq üçün \"Sonrakı\" düyməsinə tıqlayın. Çıxmaq üçün "
-"\"Ləğv Et\"ə basın."
+"Hesabınızı quraşdırmaq üçün \"Sonrakı\" düyməsinə tıqlayın. "
+"Çıxmaq üçün \"Ləğv Et\"ə basın."
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
+msgid "Use \"Auto\" if unsure."
+msgstr ""
+
+#: interfaces/network.glade.in.h:70
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
 msgstr ""
-"Bunu ara üzü gələcəkdə tanıtmaq üçün istifadə edin. Fəallaşdırma idarəsi "
-"sizə kimin və nə vaxt bağlantıları fəallaşdıracağını seçməyinizə imkan verir."
+"Bunu ara üzü gələcəkdə tanıtmaq üçün istifadə edin. "
+"Fəallaşdırma idarəsi sizə kimin və nə vaxt bağlantıları "
+"fəallaşdıracağını seçməyinizə imkan verir."
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:71
 msgid "User name:"
 msgstr "İstifadəçi adı:"
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:72
 msgid "WI_NS server:"
 msgstr "WI_NS verici:"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:73
 msgid "Warning message goes here.."
 msgstr "Xəbərdarlıq ismarıcları burada göstərilir..."
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:74
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:75
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1028,137 +1369,138 @@ msgstr ""
 "\n"
 "Başlamaq üçün \"Sonrakı\" düyməsinə basın."
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:86
 msgid "Windows Networking"
 msgstr "Windows Şəbəkəsi"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:87
 msgid "Wireless networking settings."
 msgstr "Naqilsiz şəbəkə qurğuları."
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:88
 msgid "_Ad-Hoc mode"
 msgstr "_Ad-Hoc modu"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:91
 msgid "_Channel:"
 msgstr "_Kanal:"
 
-#: interfaces/network.glade.in.h:89 interfaces/shares.glade.in.h:59
+#: interfaces/network.glade.in.h:92 interfaces/shares.glade.in.h:59
 #: interfaces/users.glade.in.h:87
 msgid "_Comment:"
 msgstr "_Şərh:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:93
 msgid "_Configuration:"
 msgstr "_Quraşdırma:"
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:94
 msgid "_Configure..."
 msgstr "_Quraşdır..."
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:108
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:96
 msgid "_Delete..."
 msgstr "_Sil..."
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:97
 msgid "_Description:"
 msgstr "_İzahat:"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:98
 msgid "_Domain:"
 msgstr "_Domeyn:"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:99
 msgid "_Enable windows networking (Samba)"
 msgstr "Windows şəbəkələrini _fəal vəziyyətə gətir. (Samba)"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:100
 msgid "_Ethernet"
 msgstr "_Eternet"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:101
 msgid "_Frequency (GHz):"
 msgstr "_Frekans (GHz):"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:102
 msgid "_Gateway address:"
 msgstr "_Keçit ünvanı:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:103
 msgid "_Host name:"
 msgstr "Komp_üter adı:"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:104
 msgid "_IP address:"
 msgstr "_IP Ünvanı:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:105
 msgid "_Local IP:"
 msgstr "_Yerli IP:"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:106
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:107
 msgid "_Modem port:"
 msgstr "_Modem qapısı:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:108
 msgid "_Parallel Line"
 msgstr "_Paralel Xətt"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:109 interfaces/print.glade.in.h:74
 msgid "_Password:"
 msgstr "_Parol:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:110
 msgid "_Primary:"
 msgstr "_Birincil:"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:111
 msgid "_Remote IP:"
 msgstr "_Uzaq İP:"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:112
 msgid "_Restart if connection cuts or fails to start"
-msgstr "Bağlantı kəsilməsi və ya başlaya bilmədiyi hallarda _yenidən başla"
+msgstr ""
+"Bağlantı kəsilməsi və ya başlaya bilmədiyi hallarda _yenidən başla"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:113
 msgid "_Secondary:"
 msgstr "_İkincil:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:114
 msgid "_Session ID:"
 msgstr "İ_clas ID:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:115
 msgid "_Start PPP as soon as modem connects"
-msgstr "Modem bağlandıqdan sonra PPPni mümkün olan ən qısa zamanda _başlat"
+msgstr ""
+"Modem bağlandıqdan sonra PPPni mümkün olan ən qısa zamanda _başlat"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:116
 msgid "_Subnet mask:"
 msgstr "Al_t şəbəkə Maskası:"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:117
 msgid "_Update DNS when this connection becomes active"
 msgstr "Bu bağlantı fəallaşdığında DNSi gün_cəllə"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:118
 msgid "_Use remote IP as default gateway"
 msgstr "Uzaq İPni ana keçət olaraq _işlət"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:119
 msgid "_User name:"
 msgstr "_İstifadəçi adı:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:120
 msgid "_Wavelan"
 msgstr "_Wavelan"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:121 interfaces/print.glade.in.h:77
 msgid "_Workgroup:"
 msgstr "_İş Qrupu:"
 
@@ -1234,7 +1576,9 @@ msgstr "İxraclar"
 msgid ""
 "Exports are used to share directories on your computer with other computers "
 "over the network. "
-msgstr "İxraclar şəbəkədəki başqa kompüterlərlə paylaşdığınız qovluqlardır "
+msgstr ""
+"İxraclar şəbəkədəki başqa kompüterlərlə paylaşdığınız "
+"qovluqlardır "
 
 #: interfaces/shares.glade.in.h:23
 msgid "Host:"
@@ -1273,10 +1617,10 @@ msgid ""
 "Imports are directories which reside in other computers and are accessible "
 "to you through the network."
 msgstr ""
-"İdxallar şəbəkədəki başqa kompüterlərdə olan, amma sizin istifadə edə "
-"biləcəyinizqovluqlardır."
+"İdxallar şəbəkədəki başqa kompüterlərdə olan, amma sizin istifadə "
+"edə biləcəyinizqovluqlardır."
 
-#: interfaces/shares.glade.in.h:32
+#: interfaces/shares.glade.in.h:32 src/shares/imports.etspec.h:2
 msgid "Mount Point"
 msgstr "Bağlama Nöqtəsi"
 
@@ -1296,7 +1640,8 @@ msgstr "Bağlama seçənəkləri"
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.in.h:39
+#: interfaces/shares.glade.in.h:39 src/boot/boot.etspec.h:4
+#: src/shares/exports.etspec.h:1
 msgid "Name"
 msgstr "Ad"
 
@@ -1312,7 +1657,8 @@ msgstr "Ü_mumi"
 msgid "Pass_word:"
 msgstr "Pa_rol:"
 
-#: interfaces/shares.glade.in.h:44
+#: interfaces/shares.glade.in.h:44 src/shares/exports.etspec.h:2
+#: src/shares/imports.etspec.h:4
 msgid "Path"
 msgstr "Cığır"
 
@@ -1332,7 +1678,7 @@ msgstr "Bu paya müəyyən alıcılara yetişməyə icazə vermə"
 msgid "Samba"
 msgstr "Samba"
 
-#: interfaces/print.glade.in.h:11 interfaces/shares.glade.in.h:50
+#: interfaces/print.glade.in.h:56 interfaces/shares.glade.in.h:50
 msgid "Settings..."
 msgstr "Qurğular..."
 
@@ -1345,16 +1691,16 @@ msgid ""
 "Use this dialog to create a new export, or to edit the settings of an "
 "existing export."
 msgstr ""
-"Bu dialoqu yeni ixrac yaratmaq və ya mövcud olanları düzəltmək üçün istifadə "
-"edin."
+"Bu dialoqu yeni ixrac yaratmaq və ya mövcud olanları düzəltmək üçün "
+"istifadə edin."
 
 #: interfaces/shares.glade.in.h:53
 msgid ""
 "Use this dialog to create a new import, or to edit the settings of an "
 "existing import."
 msgstr ""
-"Bu dialoqdan yeni idxal yaratmaq və ya mövcud olanını dəyişdirmək üçün "
-"istifadə edin."
+"Bu dialoqdan yeni idxal yaratmaq və ya mövcud olanını dəyişdirmək "
+"üçün istifadə edin."
 
 #: interfaces/shares.glade.in.h:54
 msgid ""
@@ -1362,14 +1708,15 @@ msgid ""
 "to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
 "or \" *.gnome.org\".  "
 msgstr ""
-"Bu dialoqu NFS payınıza yetişə biləcək alıcı paternlərini girin. Alıcı "
-"paternləri əsasən \"10.10.10.*\" və ya \" *.gnome.org\" kimi olur.  "
+"Bu dialoqu NFS payınıza yetişə biləcək alıcı paternlərini girin. "
+"Alıcı paternləri əsasən \"10.10.10.*\" və ya \" *.gnome.org\" kimi "
+"olur.  "
 
 #: interfaces/shares.glade.in.h:55
 msgid "Username:"
 msgstr "İstifadəçi Adı:"
 
-#: interfaces/shares.glade.in.h:56
+#: interfaces/shares.glade.in.h:56 src/shares/exports.etspec.h:3
 msgid "Writable"
 msgstr "Yazıla bilən"
 
@@ -1401,7 +1748,8 @@ msgstr "Bu paya müəyyən alıcılara yetişməyə icazə ve_rmə"
 msgid "_Scan"
 msgstr "_Dara"
 
-#: interfaces/shares.glade.in.h:70 interfaces/users.glade.in.h:101
+#: interfaces/print.glade.in.h:76 interfaces/shares.glade.in.h:70
+#: interfaces/users.glade.in.h:101
 msgid "_Username:"
 msgstr "_İstifadəçi Adı:"
 
@@ -1450,8 +1798,8 @@ msgid ""
 "Please select the current date and time. You can also specify a time zone "
 "and a time server."
 msgstr ""
-"Lütfən indiki tarixi və saatı seçin. Zaman dilimini və zaman vericisini seçə "
-"bilərsiniz."
+"Lütfən indiki tarixi və saatı seçin. Zaman dilimini və zaman "
+"vericisini seçə bilərsiniz."
 
 #: interfaces/time.glade.in.h:6
 msgid "Select _servers..."
@@ -1467,7 +1815,8 @@ msgstr ""
 
 #: interfaces/time.glade.in.h:9
 msgid "Select the servers you wish to use for time synchronization."
-msgstr "Sinxronizasiya üçün işlətmək istədiyiniz vericisiləri bildirin."
+msgstr ""
+"Sinxronizasiya üçün işlətmək istədiyiniz vericisiləri bildirin."
 
 #: interfaces/time.glade.in.h:10
 msgid "Selection:"
@@ -1523,7 +1872,8 @@ msgid "All _users"
 msgstr "Bütün i_stifadəçilər"
 
 #: interfaces/users.glade.in.h:8
-msgid "Assign a random pasword by default"
+#, fuzzy
+msgid "Assign a random password by default"
 msgstr "Əsasən təsadüfi parol ver"
 
 #: interfaces/users.glade.in.h:9
@@ -1551,6 +1901,14 @@ msgstr ""
 #: interfaces/users.glade.in.h:15
 msgid "Check password _quality"
 msgstr "Parol key_fiyyətini yoxla"
+
+#: interfaces/users.glade.in.h:17
+msgid ""
+"Congratulations, the new user has been created.\n"
+"Please click \"Finish\" to save your changes. "
+msgstr ""
+"Təbrik edirik, qurtardınız. Yeni istifadəçi yaradıldı.\n"
+"Qurtrmaq üçün \"Qurtar\"a basın "
 
 #: interfaces/users.glade.in.h:19
 msgid "Contact information"
@@ -1602,8 +1960,8 @@ msgstr "Qrup Qurğuları"
 msgid "Group _members"
 msgstr "Qrup _üzvləri"
 
-#: interfaces/users.glade.in.h:34 src/users/user_settings.c:405
-#: src/users/user_settings.c:478
+#: interfaces/users.glade.in.h:34 src/users/group.etspec.h:2
+#: src/users/user_settings.c:459 src/users/user_settings.c:532
 msgid "Groups"
 msgstr "Qruplar"
 
@@ -1689,22 +2047,23 @@ msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
 msgstr ""
-"Bu səhifədə yeni istifadəçilərə veriləcək ana qurğuları seçə bilərsiniz."
+"Bu səhifədə yeni istifadəçilərə veriləcək ana qurğuları seçə "
+"bilərsiniz."
 
 #: interfaces/users.glade.in.h:54
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
 msgstr ""
-"Bu səhifədə  sizin hesabınızdan yeni istifadəçi hesabına köçürüləcək skript "
-"və faylları semə bilərsiniz."
+"Bu səhifədə  sizin hesabınızdan yeni istifadəçi hesabına "
+"köçürüləcək skript və faylları semə bilərsiniz."
 
 #: interfaces/users.glade.in.h:55
 msgid "Optional settings"
 msgstr "Arzuya bağlı qurğular"
 
-#: interfaces/users.glade.in.h:56 src/users/user_settings.c:412
-#: src/users/user_settings.c:485
+#: interfaces/users.glade.in.h:56 src/users/user_settings.c:466
+#: src/users/user_settings.c:539
 msgid "Password"
 msgstr "Parol"
 
@@ -1720,13 +2079,17 @@ msgstr "Parol Seçənəkləri (2 addımdan ikincisi)"
 msgid "Password set to:"
 msgstr "Parolu qur:"
 
+#: interfaces/users.glade.in.h:60
+msgid "Please enter a password for the new user. "
+msgstr "Yeni istifadəçi üçün parol girin."
+
 #: interfaces/users.glade.in.h:61
 msgid ""
 "Please enter a username for the new user in the space below. Optionally, you "
 "can fill in more information to identify the user. "
 msgstr ""
-"Xahiş edirik, yeni istifadəçinin adını aşağıdakı sahəyə girin. Əlavə olaraq "
-"istifadəçi haqqında başqa mə'lumat da girə bilərsiniz."
+"Xahiş edirik, yeni istifadəçinin adını aşağıdakı sahəyə girin. "
+"Əlavə olaraq istifadəçi haqqında başqa mə'lumat da girə bilərsiniz."
 
 #: interfaces/users.glade.in.h:62
 msgid "Profiles"
@@ -1769,20 +2132,23 @@ msgstr ""
 "Başlamaq üçün \"Sonra\"kı düyməsinə basın."
 
 #: interfaces/users.glade.in.h:74
+#, fuzzy
+msgid ""
+"This is a list of the users available in the system. Create new users or "
+"edit existing user settings with this dialog."
+msgstr ""
+"Sistemdə mövcud olan istifadəçi siyahısı. Yeni istifadəçilər "
+"əlavə edə bilər və yavar olan istifadəçi qurğularını dəyişdirə "
+"bilərsiniz."
+
+#: interfaces/users.glade.in.h:75
 msgid ""
 "This is the list of the groups available in the system. Create new groups or "
 "edit existing groups with this dialog."
 msgstr ""
-"Sistemdə mövcud olan istifadəçi siyahısı. Yeni istifadəçilər əlavə edə bilər "
-"və yavar olan istifadəçi qurğularını dəyişdirə bilərsiniz."
-
-#: interfaces/users.glade.in.h:75
-msgid ""
-"This is the list of the users available in the system. Create new users or "
-"edit existing user settings with this dialog."
-msgstr ""
-"Sistemdə mövcud olan istifadəçi siyahısı. Yeni istifadəçilər əlavə edə bilər "
-"və yavar olan istifadəçi qurğularını dəyişdirə bilərsiniz."
+"Sistemdə mövcud olan istifadəçi siyahısı. Yeni istifadəçilər "
+"əlavə edə bilər və yavar olan istifadəçi qurğularını dəyişdirə "
+"bilərsiniz."
 
 #: interfaces/users.glade.in.h:76
 msgid "Us_er's groups"
@@ -1814,10 +2180,12 @@ msgid ""
 "User profiles can be used a templates to facilitate the creation of new "
 "users. To edit a profile, change the settings in the following tabs."
 msgstr ""
-"İstifadçi profilləri yeni istifadəçi üçün istifadə edilə bilər. Profili "
-"düzəltmək üçün növbəti səkmələrdəki seçənəkləri dəyişdirin."
+"İstifadçi profilləri yeni istifadəçi üçün istifadə edilə bilər. "
+"Profili düzəltmək üçün növbəti səkmələrdəki seçənəkləri "
+"dəyişdirin."
 
 #: interfaces/users.glade.in.h:83 src/users/users.desktop.in.in.h:1
+#: src/users/users.etspec.h:7
 msgid "Users"
 msgstr "İstifadəçilər"
 
@@ -1890,6 +2258,19 @@ msgstr "%s-i silmək istəyirsiniz?"
 msgid "%s (default)"
 msgstr "%s (əsas)"
 
+#: src/boot/boot.etspec.h:1 src/users/profile.c:1032
+msgid "Default"
+msgstr "Əsas"
+
+#: src/boot/boot.etspec.h:3
+msgid "Kernel Image"
+msgstr ""
+
+#: src/boot/boot.etspec.h:5 src/print/print.etspec.h:6
+#, fuzzy
+msgid "Type"
+msgstr "Növ:"
+
 #: src/boot/main.c:90
 msgid "Boot Manager Settings - Ximian Setup Tools"
 msgstr "Açılış İdarəçisi Qurğular - Ximian Quraşdırma Vasitələri"
@@ -1928,15 +2309,20 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "'%s' bağlantı xətası siqnalı.( Yer: Parçacıq(widget): '%s' )"
 
-#: src/common/xst-tool.c:574
-msgid "Skipping actual save..."
+#: src/common/xst-tool.c:565
+#, fuzzy
+msgid "Skipping backend init..."
 msgstr "Həqiqi Qoruma Atlanır..."
 
-#: src/common/xst-tool.c:621
+#: src/common/xst-tool.c:764
 msgid "Updating your system configuration."
 msgstr "Sistem qurğularınız güncəllənir."
 
-#: src/common/xst-tool.c:752
+#: src/common/xst-tool.c:809
+msgid "Skipping actual save..."
+msgstr "Həqiqi Qoruma Atlanır..."
+
+#: src/common/xst-tool.c:860
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1944,16 +2330,16 @@ msgstr ""
 "Arxa planda çalışan script'de xəta oldu,\n"
 "və qurğular yüklənə bilmədi."
 
-#: src/common/xst-tool.c:928
+#: src/common/xst-tool.c:1036
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian Qurğuları Vasitələri"
 
-#: src/common/xst-tool.c:1065
+#: src/common/xst-tool.c:1176
 msgid "The password you entered is invalid."
 msgstr "Girdiyiniz parol səhvdir."
 
-#: src/common/xst-tool.c:1075
+#: src/common/xst-tool.c:1186
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -1980,15 +2366,19 @@ msgstr ""
 "--\n"
 "The Ximian Setup Tools team"
 
-#: src/common/xst-tool.c:1095
+#: src/common/xst-tool.c:1206
 msgid "Don't show me this again"
 msgstr "Bunu mənə bir də göstərmə"
 
-#: src/common/xst-tool.c:1125
+#: src/common/xst-tool.c:1236
 msgid "\tEdit configuration in the location LOCATION."
 msgstr ""
 
-#: src/common/xst-tool.c:1162
+#: src/common/xst-tool.c:1236
+msgid "LOCATION"
+msgstr "YER"
+
+#: src/common/xst-tool.c:1273
 msgid "Pretending we are root..."
 msgstr "root kimi davranılır..."
 
@@ -2078,7 +2468,7 @@ msgstr "%s bağlantını silim: ``%s''?"
 msgid "Remove connection %s?"
 msgstr "%s bağlantını silim?"
 
-#: src/network/callbacks.c:493
+#: src/network/callbacks.c:494
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2086,15 +2476,16 @@ msgstr ""
 "Qurulu SMB dəstəyiniz yoxdur. Xahiş edilir ki,\n"
 "sistemə SMB qurasınız."
 
-#: src/network/callbacks.c:494
+#: src/network/callbacks.c:495
 msgid "SMB support missing."
 msgstr "SMB dəstəyi əksikdir."
 
-#: src/network/callbacks.c:531
+#: src/network/callbacks.c:536
+#, fuzzy
 msgid ""
 "The host name has changed. This will prevent you\n"
-"from launching new applications,\n"
-"and so you will have to log in again.\n"
+"from launching new applications, and so you will\n"
+"have to log in again.\n"
 "\n"
 "Continue anyway?"
 msgstr ""
@@ -2104,19 +2495,19 @@ msgstr ""
 "\n"
 "Davam edim?"
 
-#: src/network/callbacks.c:538
+#: src/network/callbacks.c:542
 msgid "Don't change host name"
 msgstr "Qovşaq adını dəyişdirmə"
 
-#: src/network/callbacks.c:571
+#: src/network/callbacks.c:575
 msgid "Active"
 msgstr "Fəal"
 
-#: src/network/callbacks.c:572
+#: src/network/callbacks.c:576
 msgid "Inactive"
 msgstr "Passiv"
 
-#: src/network/callbacks.c:589
+#: src/network/callbacks.c:593
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2129,6 +2520,32 @@ msgstr ""
 "bağlantısı qurula bilməyəcək.\n"
 "\n"
 "Davam edim?"
+
+#: src/network/callbacks.c:620
+#, fuzzy
+msgid ""
+"The default gateway device is not activated. This\n"
+"will prevent you from connecting to the Internet.\n"
+"\n"
+"Continue anyway?"
+msgstr ""
+"Qovşaq adı dəyişdirildi. Buna görə də\n"
+"yenidən qirənə qədər\n"
+"yeni proqram tə'minatları başlada bilməyəcəksiniz.\n"
+"\n"
+"Davam edim?"
+
+#: src/network/callbacks.c:627
+#, fuzzy
+msgid "Activate connection"
+msgstr "Fəallaşdırma"
+
+#: src/network/callbacks.c:673
+msgid ""
+"The default gateway device is missing gateway\n"
+"information. Please provide this information to\n"
+"proceed, or choose another default gateway device.\n"
+msgstr ""
 
 #: src/network/connection.c:44
 msgid "Other type"
@@ -2158,15 +2575,15 @@ msgstr "Loopback: virtual ara üz"
 msgid "Unknown type"
 msgstr "Namə'lum növ"
 
-#: src/network/connection.c:527
+#: src/network/connection.c:824
 msgid "To activate"
 msgstr "Fəallaşdırmaq üçün"
 
-#: src/network/connection.c:528
+#: src/network/connection.c:825
 msgid "To inactivate"
 msgstr "Passivləşdirmək üçün"
 
-#: src/network/connection.c:881
+#: src/network/connection.c:1197
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2176,7 +2593,7 @@ msgstr ""
 "boş buraxıldı.Xahiş edirik ki,davam etmək üçün\n"
 "bu üzvlərin hökmlü IP ünvanlarını girin."
 
-#: src/network/connection.c:888
+#: src/network/connection.c:1204
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2186,7 +2603,7 @@ msgstr ""
 "boş buraxıldı.Xahiş edirik ki,davam etmək üçün\n"
 "bu üzvün hökmlü IP ünvanını girin."
 
-#: src/network/connection.c:894
+#: src/network/connection.c:1210
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2205,11 +2622,11 @@ msgstr ""
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Həqiqətən də %s üçün bu Ləqəbları silmək istəyirsiniz?"
 
-#: src/network/main.c:114
+#: src/network/main.c:173
 msgid "\tRun the internet conection druid."
 msgstr "\tİnternet bağlantı vasitəsini icra et."
 
-#: src/network/main.c:121
+#: src/network/main.c:180
 msgid "Network Settings"
 msgstr "Şəbəkə Qurğuları"
 
@@ -2410,12 +2827,14 @@ msgstr "Vaxt, tarix və vaxt dilimi."
 
 #: src/users/callbacks.c:88
 msgid "Can't create new user. Check your profile settings."
-msgstr "Yeni istifadəçi yaradıla bilmir. Profil qurğularınızı yoxlayın."
+msgstr ""
+"Yeni istifadəçi yaradıla bilmir. Profil qurğularınızı yoxlayın."
 
 #: src/users/callbacks.c:97
 msgid "Can't create new user. Too many users probably."
 msgstr ""
-"Yeni istifadəçi yaradıla bilmir. Dəyəsən həddindən artıq istifadəçi var."
+"Yeni istifadəçi yaradıla bilmir. Dəyəsən həddindən artıq "
+"istifadəçi var."
 
 #: src/users/main.c:95
 msgid "Show All"
@@ -2454,230 +2873,166 @@ msgstr ""
 "Pis Parol: %s.\n"
 "Lütfən Yeni Bir parol ilə sınayın."
 
-#: src/users/user_group.c:321
+#: src/users/user_group.c:326
 msgid "The username is empty."
 msgstr "İstifadəçi adı boşdur."
 
-#: src/users/user_group.c:325
+#: src/users/user_group.c:330
 msgid "The username is too long."
 msgstr "İstifadəçi adı çox uzundur."
 
-#: src/users/user_group.c:328 src/users/user_group.c:349
-#: src/users/user_group.c:429
+#: src/users/user_group.c:333 src/users/user_group.c:354
+#: src/users/user_group.c:438
 msgid "root user shouldn't be modified."
 msgstr "root istifadəçisi təkmilləşdirilməməlidir."
 
-#: src/users/user_group.c:332
+#: src/users/user_group.c:337
 msgid "Please set a valid username, using only lower-case letters."
-msgstr "Lütfən kiçik hərflərlə yazılı, hökmlü bir istifadəçi bildirin."
+msgstr ""
+"Lütfən kiçik hərflərlə yazılı, hökmlü bir istifadəçi bildirin."
 
-#: src/users/user_group.c:336
+#: src/users/user_group.c:341
 msgid "Username already exists."
 msgstr "İstifadəçi adı onsuz da mövcuddur."
 
-#: src/users/user_group.c:347 src/users/user_group.c:523
+#: src/users/user_group.c:352 src/users/user_group.c:542
 msgid "User id must be a positive number."
 msgstr "İstifadəçi kimliyi müsbət rəqəm olmalıdır."
 
-#: src/users/user_group.c:351
+#: src/users/user_group.c:356
 msgid "Such user id already exists."
 msgstr "Bu istifadəçi id onsuz da mövcuddur."
 
-#: src/users/user_group.c:372
-msgid "Invalid comment"
+#: src/users/user_group.c:379
+#, fuzzy, c-format
+msgid "Invalid character '%c' in comment."
 msgstr "Xətalı şərh"
 
-#: src/users/user_group.c:387
+#: src/users/user_group.c:395
 msgid "Please give shell with full path."
 msgstr "Xahiş edirik, qabığı tam cığırı ilə bildirin."
 
-#: src/users/user_group.c:423
+#: src/users/user_group.c:432
 msgid "Home directory must not be empty."
 msgstr "Ev(home) qovluğu boş olmamalı.!"
 
-#: src/users/user_group.c:426
+#: src/users/user_group.c:435
 msgid "Please enter full path for home directory."
 msgstr "Ev cərgəsi üçün tam cığırı bildirin."
 
-#: src/users/user_group.c:459
+#: src/users/user_group.c:443
+#, fuzzy
+msgid "Part of the path to the home directory is a file."
+msgstr "Ev cərgəsi üçün tam cığırı bildirin."
+
+#: src/users/user_group.c:444
+#, fuzzy
+msgid "There is a loop in the path to the home directory."
+msgstr "Ev cərgəsi üçün tam cığırı bildirin."
+
+#: src/users/user_group.c:445
+msgid "Not enough memory to check the home directory."
+msgstr ""
+
+#: src/users/user_group.c:446
+#, fuzzy
+msgid "The path to the home directory is too long."
+msgstr "Qrup adı çox uzundur."
+
+#: src/users/user_group.c:478
 msgid "Group name is not valid."
 msgstr "Qrup adı hökmsüzdür."
 
-#: src/users/user_group.c:462 src/users/user_group.c:527
+#: src/users/user_group.c:481 src/users/user_group.c:546
 msgid "Such group id already exists."
 msgstr "Bu qrup id onsuz da mövcuddur."
 
-#: src/users/user_group.c:465
+#: src/users/user_group.c:484
 msgid "Group does not exist. Create new?"
 msgstr "Qrup mövcud deyildir. Yaradaq?"
 
-#: src/users/user_group.c:484
+#: src/users/user_group.c:503
 msgid "Group name is empty."
 msgstr "Qrup adı boşdur."
 
-#: src/users/user_group.c:488
+#: src/users/user_group.c:507
 msgid "The group name is too long."
 msgstr "Qrup adı çox uzundur."
 
-#: src/users/user_group.c:492
+#: src/users/user_group.c:511
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Lütfən kiçik hərflərlə yazılı hökmlü bir qrup adı bildirin."
 
-#: src/users/user_group.c:496
+#: src/users/user_group.c:515
 msgid "Group already exists."
 msgstr "Qrup onsuz da mövcuddur."
 
-#: src/users/user_group.c:797
+#: src/users/user_group.c:816
 #, c-format
 msgid "Password for User %s"
 msgstr "%s üçün parol"
 
-#: src/users/user_group.c:831
+#: src/users/user_group.c:850
 msgid "The root user must not be deleted."
 msgstr "root istifadəçisi silinməməlidir."
 
-#: src/users/user_group.c:838
+#: src/users/user_group.c:857
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "%s istifadəçisini silmək istəyirsiniz?"
 
-#: src/users/user_group.c:861
+#: src/users/user_group.c:880
 msgid "Create New Group"
 msgstr "Yeni Qrup Yarat."
 
-#: src/users/user_group.c:921
+#: src/users/user_group.c:940
 msgid "The root group must not be deleted."
 msgstr "root qrupu əsla silinməməlidir."
 
-#: src/users/user_group.c:928
+#: src/users/user_group.c:947
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Həqiqətən də %s qrupunu silmək istəyirsiniz?"
 
-#: src/users/user_group.c:973
+#: src/users/user_group.c:992
 #, c-format
 msgid "Settings for Group %s"
 msgstr "%s Qrupu üçün Qurğular"
 
-#: archiver/config-manager-dialog.c:161 archiver/create-location-dialog.c:114
-msgid "Rollback and Location Management"
-msgstr "Geri Qayıtma Və Yer İdarəsi"
+#: src/users/user_group.c:1383
+msgid "The home directory does not exist, or its path is invalid."
+msgstr ""
 
-#: archiver/location-list.c:344
-msgid "Global locations"
-msgstr "Qlobal yerlər"
+#: src/users/user_group.c:1385
+msgid "Couldn't get access to the home directory."
+msgstr ""
 
-#: archiver/location-list.c:347
-msgid "User locations"
-msgstr "İstifadəçi yerləri"
+#. We shouldn't fall here: the other cases are in the error checks.
+#: src/users/user_group.c:1389
+msgid "There was an error trying to access the home directory."
+msgstr ""
 
-#: archiver/location-manager-capplet/gui-backend-list.c:387
-#: archiver/location-manager-capplet/gui-backend-list.c:408
-msgid "Could not launch configuration tool"
-msgstr "Quraşdırma vasitəsi başladıla bilmir"
+#: src/users/user_group.c:1397
+msgid "The home directory path exists, but it is not a directory."
+msgstr ""
 
-#: archiver/location-manager-capplet/location-dialog.c:300
-msgid "You must supply a name"
-msgstr "Ad verməlisiniz"
+#: src/users/user_group.c:1401
+#, fuzzy
+msgid "The home directory is not owned by the user."
+msgstr "Ev(home) qovluğu boş olmamalı.!"
 
-#: archiver/location-manager-capplet/location-dialog.c:305
-msgid "You already have a location by that name"
-msgstr "Bu adda onsuz da yer vardır"
+#: src/users/user_group.c:1405
+msgid "The user doesn't have permission to read from the home directory."
+msgstr ""
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:99
-msgid "_New..."
-msgstr "_Yeni..."
+#: src/users/user_group.c:1408
+msgid "The user doesn't have permission to write in the home directory."
+msgstr ""
 
-#: archiver/location-manager-capplet/location-manager-dialog.c:100
-msgid "Create a new location"
-msgstr "Yeni yer yarat"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:102
-msgid "_Copy..."
-msgstr "_Köçürt..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:103
-msgid "Create a new location identical to the selected one"
-msgstr "Seçili olana uyğun gələn yeni yer yarat"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:105
-msgid "_Rename..."
-msgstr "_Adını Dəyişdir..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:106
-msgid "Rename the selected location"
-msgstr "Seçili yeri yenidən adlandır"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:109
-msgid "Delete the selected location"
-msgstr "Seçili yeri sil"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:112
-msgid "_Apply..."
-msgstr "Ə_lavə et..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:113
-msgid "Apply the changes"
-msgstr "Dəyişiklikləri əlavə et"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:119
-msgid "_Edit..."
-msgstr "Dü_zəlt..."
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:120
-msgid "Edit settings for the selected backend"
-msgstr "Seçili bəkend üçün qurğuları düzəlt"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:122
-msgid "_Select"
-msgstr "_Seç"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:123
-msgid "Select the selected backend for this location"
-msgstr "Bu yer üçün seçili bəkendləri seç"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:125
-msgid "_Deselect"
-msgstr "_Seçmə"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:126
-msgid "Deselect the selected backend for this location"
-msgstr "Bu yer üçün seçili bəkendləri seçmə"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:137
-msgid "_Location"
-msgstr "_Yer"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:139
-#: interfaces/location-manager.glade.in.h:38
-msgid "_Help"
-msgstr "_Yardım"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:193
-#: archiver/location-manager-capplet/location-manager-dialog.c:461
-msgid "Location Manager"
-msgstr "Yer İdarəsi"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:394
-msgid "You cannot delete the default location"
-msgstr "Əsas yeri silə bilməzsiniz"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:399
-#, c-format
-msgid "Are you sure you wish to destroy the location %s?"
-msgstr "Həqiqətən də %s yerini dağıtmaq istəyirsiniz?"
-
-#: archiver/location-manager-capplet/location-manager-dialog.c:464
-msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximian Qurğuları Vasitələri Yer İdarəsi"
-
-#: archiver/location-manager-capplet/main.c:37
-msgid "Operate on global backends"
-msgstr "Qlobal bəkendlərdə işlə"
-
-#: archiver/location-manager-capplet/main.c:53
-msgid "Options for the location manager"
-msgstr "Yer idarəsi seçənəkləri"
+#: src/users/user_group.c:1411
+msgid ""
+"The user doesn't have permission to use (``execute'') the home directory."
+msgstr ""
 
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
@@ -2712,8 +3067,8 @@ msgid ""
 "The internet sharing tool allows you to share your internet conection with "
 "other computers on the network."
 msgstr ""
-"İnternet paylaşdırma vasitəsi internet bağlantınızı şəbəkədəki başqa "
-"kompüterlərlə bölüşdürməyə imkan verir. "
+"İnternet paylaşdırma vasitəsi internet bağlantınızı şəbəkədəki "
+"başqa kompüterlərlə bölüşdürməyə imkan verir. "
 
 #: interfaces/internetsharing.glade.in.h:10
 msgid "Web Cache (squid)"
@@ -2832,80 +3187,311 @@ msgid ""
 "Use this tool to manage all the different locations where you could possibly "
 "want to use your stinking laptop."
 msgstr ""
-"Diz üstü kompüterinizi işlətmə ehtimalınız olduğu müxtəlif yerləri idarə "
-"etmək üçün bu vasitəni işlədin."
+"Diz üstü kompüterinizi işlətmə ehtimalınız olduğu müxtəlif "
+"yerləri idarə etmək üçün bu vasitəni işlədin."
+
+#: interfaces/location-manager.glade.in.h:38
+msgid "_Help"
+msgstr "_Yardım"
 
 #: interfaces/print.glade.in.h:1
+msgid "/dev/lp0 (LPT1)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:2
+msgid "/dev/lp1 (LPT2)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:3
+msgid "/dev/ttyS0 (COM1)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:4
+msgid "/dev/ttyS1 (COM2)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:5
+msgid "/dev/ttyS2 (COM3)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:6
+msgid "/dev/ttyS3 (COM4)"
+msgstr ""
+
+#: interfaces/print.glade.in.h:7
+msgid "1200x1200"
+msgstr ""
+
+#: interfaces/print.glade.in.h:8
+msgid "1200x600"
+msgstr ""
+
+#: interfaces/print.glade.in.h:9
+msgid "16 colors"
+msgstr ""
+
+#: interfaces/print.glade.in.h:10
+msgid "256 colors"
+msgstr ""
+
+#: interfaces/print.glade.in.h:11
+msgid "300x300"
+msgstr ""
+
+#: interfaces/print.glade.in.h:12
+msgid "400x400"
+msgstr ""
+
+#: interfaces/print.glade.in.h:13
+msgid "600x600"
+msgstr ""
+
+#: interfaces/print.glade.in.h:14
+msgid "A3"
+msgstr ""
+
+#: interfaces/print.glade.in.h:15
+msgid "A4"
+msgstr ""
+
+#: interfaces/print.glade.in.h:16
 msgid "Add Printer..."
 msgstr "Çap Edici Əlavə Et..."
 
-#: interfaces/print.glade.in.h:2
-msgid "D_evice"
-msgstr "A_vadanlıq"
+#: interfaces/print.glade.in.h:17
+#, fuzzy
+msgid "Add a New Printer"
+msgstr "Çap Edici Əlavə Et..."
 
-#: interfaces/print.glade.in.h:4
-msgid "Dummy Printer"
-msgstr "Boş Çap Edici"
+#: interfaces/print.glade.in.h:19
+msgid ""
+"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+msgstr ""
 
-#: interfaces/print.glade.in.h:5
-msgid "Novel _Netware (NCP) Printer"
+#: interfaces/print.glade.in.h:20
+msgid "Convert _Linefeeds"
+msgstr ""
+
+#: interfaces/print.glade.in.h:22
+msgid "Document Pages per Sheet"
+msgstr ""
+
+#: interfaces/print.glade.in.h:23
+#, fuzzy
+msgid "Driver"
+msgstr "Vericilər"
+
+#: interfaces/print.glade.in.h:24
+msgid "E_xplicitly Eject Last Page"
+msgstr ""
+
+#: interfaces/print.glade.in.h:25
+msgid "High Color"
+msgstr ""
+
+#: interfaces/print.glade.in.h:26
+msgid "Legal"
+msgstr ""
+
+#: interfaces/print.glade.in.h:27
+msgid "Letter"
+msgstr ""
+
+#: interfaces/print.glade.in.h:28
+#, fuzzy
+msgid "Name of the printer."
+msgstr "Digər kompüterlərin ləqəbləri"
+
+#: interfaces/print.glade.in.h:29
+msgid "Name of the server the printer is connected to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:30
+msgid "Name the server uses for the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:31
+#, fuzzy
+msgid "Novell _Netware (NCP) Printer"
 msgstr "Novel _Netware (NCP) Çap Edici"
 
-#: interfaces/print.glade.in.h:6
-msgid "Remote UNIX (_lpd) printer"
+#: interfaces/print.glade.in.h:32
+msgid "Number of colors to print in."
+msgstr ""
+
+#: interfaces/print.glade.in.h:34
+msgid "P_aper Size:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:35
+#, fuzzy
+msgid "P_ort Number:"
+msgstr "Telefon nömrəsi:"
+
+#: interfaces/print.glade.in.h:36
+msgid "Port number the server is listening to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:37
+msgid "Port the printer is connected to."
+msgstr ""
+
+#: interfaces/print.glade.in.h:38
+msgid "Print one page per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:39
+msgid "Print resolution."
+msgstr ""
+
+#: interfaces/print.glade.in.h:40
+#, fuzzy
+msgid "Printer Settings"
+msgstr "Disk Bölmə Qurğuları"
+
+#: interfaces/print.glade.in.h:41
+msgid "Printer connected to a port on your machine."
+msgstr ""
+
+#: interfaces/print.glade.in.h:42
+msgid "Printer listening directly for network connections."
+msgstr ""
+
+#: interfaces/print.glade.in.h:43
+msgid "Printer shared on a Windows (SMB) network."
+msgstr ""
+
+#: interfaces/print.glade.in.h:44
+msgid "Printer shared using the Novell Netware (NCP) protocol."
+msgstr ""
+
+#: interfaces/print.glade.in.h:45
+msgid "Printer shared using the Unix (lpd) print protocol."
+msgstr ""
+
+#: interfaces/print.glade.in.h:46
+#, fuzzy
+msgid "R_esolution:"
+msgstr "_İzahat:"
+
+#: interfaces/print.glade.in.h:47
+#, fuzzy
+msgid "Remote UNIX (_lpd) Printer"
 msgstr "Uzaq UNIX (_lpd) çap edici"
 
-#: interfaces/print.glade.in.h:7
+#: interfaces/print.glade.in.h:48
 msgid "Remote _Windows (SMB) printer"
 msgstr "Uzaq _Windows (SMB) Çap Edicisi"
 
-#: interfaces/print.glade.in.h:8
-msgid "S_erver"
-msgstr "Veri_cilər"
+#: interfaces/print.glade.in.h:49
+msgid "SMB workgroup the server is in."
+msgstr ""
 
-#: interfaces/print.glade.in.h:9
-msgid "S_pool"
-msgstr "Nö_vbə"
+#: interfaces/print.glade.in.h:50
+msgid "Scale pages down and print eight per sheet."
+msgstr ""
 
-#: interfaces/print.glade.in.h:10
-msgid "Select"
-msgstr "Seç"
+#: interfaces/print.glade.in.h:51
+msgid "Scale pages down and print four per sheet."
+msgstr ""
 
-#: interfaces/print.glade.in.h:12
+#: interfaces/print.glade.in.h:52
+msgid "Scale pages down and print two per sheet."
+msgstr ""
+
+#: interfaces/print.glade.in.h:53
+#, fuzzy
+msgid "Select the type of printer to add:"
+msgstr "Əlavə etmək istədiyiniz bağlantı növünü seçin."
+
+#: interfaces/print.glade.in.h:54
+msgid "Send an EOF after the print job to help eject the last page."
+msgstr ""
+
+#: interfaces/print.glade.in.h:55
+msgid "Send text documents raw to the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:57
+msgid "Size of the paper in the printer."
+msgstr ""
+
+#: interfaces/print.glade.in.h:58
+#, fuzzy
+msgid "The password used to connect to the server."
+msgstr ""
+"Parol və təsdiqləyici parol\n"
+"eyni olmalıdır."
+
+#: interfaces/print.glade.in.h:59
 msgid ""
 "This is the list of the configured printers available on the system. Create "
 "new printers or edit existing printer settings with this dialog."
 msgstr ""
-"Sistemdə mövcud olan quraşdırılmış çap edici siyahısı. Yeni çap edicilər  "
-"əlavə edə bilər və ya var olan çap edici qurğularını dəyişdirə bilərsiniz."
+"Sistemdə mövcud olan quraşdırılmış çap edici siyahısı. Yeni çap "
+"edicilər  əlavə edə bilər və ya var olan çap edici qurğularını "
+"dəyişdirə bilərsiniz."
 
-#: interfaces/print.glade.in.h:13
-msgid "User Settings"
-msgstr "İstifadəçi Qurğuları"
+#: interfaces/print.glade.in.h:60
+msgid "True Color"
+msgstr ""
 
-#: interfaces/print.glade.in.h:14
-msgid "_Direct to port printer"
+#: interfaces/print.glade.in.h:61
+msgid "Username used to connect to the server."
+msgstr ""
+
+#: interfaces/print.glade.in.h:62
+msgid "What driver to use."
+msgstr ""
+
+#: interfaces/print.glade.in.h:63
+msgid "_1"
+msgstr ""
+
+#: interfaces/print.glade.in.h:64
+msgid "_2"
+msgstr ""
+
+#: interfaces/print.glade.in.h:65
+msgid "_4"
+msgstr ""
+
+#: interfaces/print.glade.in.h:66
+msgid "_8"
+msgstr ""
+
+#: interfaces/print.glade.in.h:67
+msgid "_Color Depth:"
+msgstr ""
+
+#: interfaces/print.glade.in.h:68
+#, fuzzy
+msgid "_Device Name:"
+msgstr "A_vadanlıq:"
+
+#: interfaces/print.glade.in.h:69
+#, fuzzy
+msgid "_Direct Network Printer"
 msgstr "Qapı çap edicisinə _yönləndir"
 
-#: interfaces/print.glade.in.h:15
-msgid "_Filter"
-msgstr "_Süzgəc"
+#: interfaces/print.glade.in.h:70
+#, fuzzy
+msgid "_Fast Text Printing"
+msgstr "Lpr əsaslı Çap Etmə"
 
-#: interfaces/print.glade.in.h:16
+#: interfaces/print.glade.in.h:71
+#, fuzzy
+msgid "_Hostname:"
+msgstr "Komp_üter adı:"
+
+#: interfaces/print.glade.in.h:72
 msgid "_Local Printer"
 msgstr "_Yerli Çap Edici"
 
-#: interfaces/print.glade.in.h:17
-msgid "_Password"
-msgstr "_Parol"
-
-#: interfaces/print.glade.in.h:18
-msgid "_User"
-msgstr "_İstifadəçi"
-
-#: interfaces/print.glade.in.h:19
-msgid "_Workgroup"
-msgstr "_İş Qrupu"
+#: interfaces/print.glade.in.h:75
+#, fuzzy
+msgid "_Remote Name:"
+msgstr "_Uzaq İP:"
 
 #: src/internetsharing/callbacks.c:54
 msgid ""
@@ -2925,6 +3511,26 @@ msgstr "İP Davamiyyəti dəstəyi əksikdir."
 msgid "Lpr based Printing"
 msgstr "Lpr əsaslı Çap Etmə"
 
+#: src/print/print.etspec.h:2
+#, fuzzy
+msgid "Paper"
+msgstr "Naxış:"
+
+#: src/print/print.etspec.h:3
+#, fuzzy
+msgid "Resolution"
+msgstr "Seçki:"
+
+#: src/print/print.etspec.h:4
+#, fuzzy
+msgid "Share"
+msgstr "Paylaşmalar"
+
+#: src/print/print.etspec.h:5
+#, fuzzy
+msgid "Spool"
+msgstr "Nö_vbə"
+
 #: src/print/print.desktop.in.in.h:1
 msgid "Print"
 msgstr "Çap Et"
@@ -2937,37 +3543,33 @@ msgstr "lpr Çap Edici İdarəçisi"
 msgid "Sear_ch"
 msgstr "Ax_tar"
 
-#: src/users/profile.c:509
+#: src/users/profile.c:542
 msgid "Choose the file"
 msgstr "Fayl seç"
 
-#: src/users/profile.c:651
+#: src/users/profile.c:684
 msgid "Profile Editor"
 msgstr "Profil Editoru"
 
-#: src/users/profile.c:852
+#: src/users/profile.c:885
 msgid "Profile with given name already exists."
 msgstr "Bu adda profil onsuz da mövcuddur."
 
-#: src/users/profile.c:855
+#: src/users/profile.c:888
 msgid "Profile name must not be empty."
 msgstr "Profil adı boş olmamalıdır."
 
-#: src/users/profile.c:999
-msgid "Default"
-msgstr "Əsas"
-
 #. name
-#: src/users/profile.c:1000
+#: src/users/profile.c:1033
 msgid "Default profile"
 msgstr "Əsas profil"
 
-#: src/users/profile.c:1316
+#: src/users/profile.c:1349
 msgid "Can't delete Default"
 msgstr "Əsas silinə bilmir"
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1442
+#: src/users/profile.c:1475
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -2981,18 +3583,62 @@ msgstr ""
 msgid "User Account Editor"
 msgstr "İstifadəçi Hesabı Editoru"
 
-#: src/users/user_settings.c:398 src/users/user_settings.c:456
-#: src/users/user_settings.c:471
+#: src/users/user_settings.c:176
+#, c-format
+msgid ""
+"Invalid character '%c'.\n"
+"This field doesn't accept control characters ',' ':' and '='."
+msgstr ""
+
+#: src/users/user_settings.c:452 src/users/user_settings.c:510
+#: src/users/user_settings.c:525
 msgid "Identity"
 msgstr "Kimlik"
 
-#: src/users/user_settings.c:449
+#: src/users/user_settings.c:503
 msgid "Real name:"
 msgstr "Həqiqi adı:"
+
+#: src/users/net_group.etspec.h:1 src/users/users.etspec.h:3
+#, fuzzy
+msgid "Group"
+msgstr "Qruplar"
+
+#: src/users/profiles.etspec.h:1 src/users/users.etspec.h:1
+#, fuzzy
+msgid "Comment"
+msgstr "Şərh:"
+
+#: src/users/group.etspec.h:1 src/users/users.etspec.h:2
+msgid "GID"
+msgstr ""
+
+#: src/users/users.etspec.h:4
+msgid "Home"
+msgstr ""
+
+#: src/users/users.etspec.h:5
+#, fuzzy
+msgid "Shell"
+msgstr "_Qabıq:"
+
+#: src/users/users.etspec.h:6
+msgid "UID"
+msgstr ""
 
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
 msgstr "İstifadəçilər və qruplar."
+
+#: src/users/net_user.etspec.h:1
+#, fuzzy
+msgid "User"
+msgstr "İstifadəçilər"
+
+#: src/users/profiles.etspec.h:2
+#, fuzzy
+msgid "Profile"
+msgstr "Profiller"
 
 #: src/shares/shares.desktop.in.in.h:1
 msgid "Directory import & export"
@@ -3001,6 +3647,252 @@ msgstr "Cərgə idxal və ixracı"
 #: src/shares/shares.desktop.in.in.h:2
 msgid "Shares"
 msgstr "Paylaşmalar"
+
+#: src/shares/export_clients.etspec.h:1
+#, fuzzy
+msgid "Pattern"
+msgstr "Naxış:"
+
+#: src/shares/export_clients.etspec.h:2
+#, fuzzy
+msgid "Write"
+msgstr "Yazıla bilən"
+
+#~ msgid "Default Location"
+#~ msgstr "Əsas Yer"
+
+#~ msgid "Store XML data in the archive"
+#~ msgstr "XML veriləni arxivdə qeyd edilir"
+
+#~ msgid "Roll back the configuration to a given point"
+#~ msgstr "Quğular verilən nöqtəyə qaytar"
+
+#~ msgid "Change the location profile to the given one"
+#~ msgstr "Verilənin yer profilini dəyişdir"
+
+#~ msgid "Push configuration data out to client machines (UNIMPLEMENTED)"
+#~ msgstr ""
+#~ "Quraşdırma verilənlərini alıcı kompüterlərdən at (DƏSTƏKLƏNMİR)"
+
+#~ msgid "Rename a location to a new name"
+#~ msgstr "Yeri yenı adla adlandır"
+
+#~ msgid "Add a new location to the archive"
+#~ msgstr "Arxivə yeni yer əlavə et"
+
+#~ msgid "Remove a location from the archive"
+#~ msgstr "Yeri arxivdən çıxart"
+
+#~ msgid "Add a given backend to the given location"
+#~ msgstr "Verilən yerə verilən bəkendi əlavə et"
+
+#~ msgid "Remove the given backend from the given location"
+#~ msgstr "Verilən yerdən verilən bəkendi çıxart"
+
+#~ msgid "Use the global repository"
+#~ msgstr "Qlobal nüzxə işlət"
+
+#~ msgid "Identifier of location profile on which to operate"
+#~ msgstr "Üstündə işlənəcək yer profilinin vasfləndiricisi"
+
+#~ msgid "Backend being used for this operation"
+#~ msgstr "Bu əməliyyat üçün işlədiləcək bəkend"
+
+#~ msgid "BACKEND_ID"
+#~ msgstr "BACKEND_ID"
+
+#~ msgid "Store only the differences with the parent location's config"
+#~ msgstr "Təkcə qohum yerlər arasındakı fərqləri saxla"
+
+#~ msgid "Store only those settings set in the previous config"
+#~ msgstr "Təkcə əvvəlki quraşdırmadaı seçənəkləri saxla"
+
+#~ msgid "Date to which to roll back"
+#~ msgstr "Qaytarılacaq tarix"
+
+#~ msgid "DATE"
+#~ msgstr "TARIX"
+
+#~ msgid "Roll back all configuration items"
+#~ msgstr "Bütün quraşdırma üzvlərini qaytar"
+
+#~ msgid "Roll back to the revision REVISION_ID"
+#~ msgstr "Əvvəlki REVISION_İDyə qaytar"
+
+#~ msgid "REVISION_ID"
+#~ msgstr "REVISION_ID"
+
+#~ msgid "Roll back to the last known revision"
+#~ msgstr "Ən axırıncı təftişə qaytar"
+
+#~ msgid "Roll back by STEPS revisions"
+#~ msgstr "PİLLƏ təftişlərinı qaytar"
+
+#~ msgid "STEPS"
+#~ msgstr "PİLLƏLƏR"
+
+#~ msgid "Don't run the backend, just dump the output"
+#~ msgstr "Bəkendi icra etmə, təkcə yekunu ver"
+
+#~ msgid "Parent location for the new location"
+#~ msgstr "Yeni yerə qohum olan yerlər"
+
+#~ msgid "PARENT"
+#~ msgstr "QOHUM"
+
+#~ msgid "New name to assign to the location"
+#~ msgstr "Yerə yeni ləqəb verilməyib"
+
+#~ msgid "NEW_NAME"
+#~ msgstr "YENİ_AD"
+
+#~ msgid "Add/remove this backend to/from the master backend list"
+#~ msgstr "Usta bəkend başlığına/dan bu bəkendi əlavə et/çıxart"
+
+#~ msgid "Full containment"
+#~ msgstr "Tam məzmun"
+
+#~ msgid "Partial containment"
+#~ msgstr "Qismi məzmun"
+
+#~ msgid "Global archiver options"
+#~ msgstr "Qlobal arxivşi seçənəkləri"
+
+#~ msgid "Archiver commands"
+#~ msgstr "Arxivçi əmrləri"
+
+#~ msgid "Options for storing data"
+#~ msgstr "Verilən saxlama seçənəkləri"
+
+#~ msgid "Options for rolling back"
+#~ msgstr "Qaytarma seçənəkləri"
+
+#~ msgid "Options for adding or renaming locations"
+#~ msgstr "Yer adı əlavə etmə, adını dəyişdirmə seçənəkləri"
+
+#~ msgid "Options for adding and removing backends"
+#~ msgstr "Bəkend əlavə etmə, adını dəyişdirmə seçənəkləri"
+
+#~ msgid "Boot Image Wizard"
+#~ msgstr "Açılış Əksi Sehirbazı"
+
+#~ msgid ""
+#~ "Please enter a username for the new user in the space below. You may also "
+#~ "enter a comment about the user, such as his or her real name. "
+#~ msgstr ""
+#~ "Xahiş edirik, yeni istifadəçinin adını aşağıdakı sahəyə girin. "
+#~ "Əlavə olaraq istifadəçi həqiqi adı kimi şərh də qirə bilərsiniz."
+
+#~ msgid "Rollback and Location Management"
+#~ msgstr "Geri Qayıtma Və Yer İdarəsi"
+
+#~ msgid "Global locations"
+#~ msgstr "Qlobal yerlər"
+
+#~ msgid "User locations"
+#~ msgstr "İstifadəçi yerləri"
+
+#~ msgid "Could not launch configuration tool"
+#~ msgstr "Quraşdırma vasitəsi başladıla bilmir"
+
+#~ msgid "You must supply a name"
+#~ msgstr "Ad verməlisiniz"
+
+#~ msgid "You already have a location by that name"
+#~ msgstr "Bu adda onsuz da yer vardır"
+
+#~ msgid "_New..."
+#~ msgstr "_Yeni..."
+
+#~ msgid "Create a new location"
+#~ msgstr "Yeni yer yarat"
+
+#~ msgid "_Copy..."
+#~ msgstr "_Köçürt..."
+
+#~ msgid "Create a new location identical to the selected one"
+#~ msgstr "Seçili olana uyğun gələn yeni yer yarat"
+
+#~ msgid "_Rename..."
+#~ msgstr "_Adını Dəyişdir..."
+
+#~ msgid "Rename the selected location"
+#~ msgstr "Seçili yeri yenidən adlandır"
+
+#~ msgid "Delete the selected location"
+#~ msgstr "Seçili yeri sil"
+
+#~ msgid "_Apply..."
+#~ msgstr "Ə_lavə et..."
+
+#~ msgid "Apply the changes"
+#~ msgstr "Dəyişiklikləri əlavə et"
+
+#~ msgid "_Edit..."
+#~ msgstr "Dü_zəlt..."
+
+#~ msgid "Edit settings for the selected backend"
+#~ msgstr "Seçili bəkend üçün qurğuları düzəlt"
+
+#~ msgid "_Select"
+#~ msgstr "_Seç"
+
+#~ msgid "Select the selected backend for this location"
+#~ msgstr "Bu yer üçün seçili bəkendləri seç"
+
+#~ msgid "_Deselect"
+#~ msgstr "_Seçmə"
+
+#~ msgid "Deselect the selected backend for this location"
+#~ msgstr "Bu yer üçün seçili bəkendləri seçmə"
+
+#~ msgid "_Location"
+#~ msgstr "_Yer"
+
+#~ msgid "Location Manager"
+#~ msgstr "Yer İdarəsi"
+
+#~ msgid "You cannot delete the default location"
+#~ msgstr "Əsas yeri silə bilməzsiniz"
+
+#~ msgid "Are you sure you wish to destroy the location %s?"
+#~ msgstr "Həqiqətən də %s yerini dağıtmaq istəyirsiniz?"
+
+#~ msgid "Ximian Setup Tools Location Manager"
+#~ msgstr "Ximian Qurğuları Vasitələri Yer İdarəsi"
+
+#~ msgid "Operate on global backends"
+#~ msgstr "Qlobal bəkendlərdə işlə"
+
+#~ msgid "Options for the location manager"
+#~ msgstr "Yer idarəsi seçənəkləri"
+
+#~ msgid "D_evice"
+#~ msgstr "A_vadanlıq"
+
+#~ msgid "Dummy Printer"
+#~ msgstr "Boş Çap Edici"
+
+#~ msgid "S_erver"
+#~ msgstr "Veri_cilər"
+
+#~ msgid "Select"
+#~ msgstr "Seç"
+
+#~ msgid "User Settings"
+#~ msgstr "İstifadəçi Qurğuları"
+
+#~ msgid "_Filter"
+#~ msgstr "_Süzgəc"
+
+#~ msgid "_Password"
+#~ msgstr "_Parol"
+
+#~ msgid "_User"
+#~ msgstr "_İstifadəçi"
+
+#~ msgid "_Workgroup"
+#~ msgstr "_İş Qrupu"
 
 #~ msgid "_Home directory:"
 #~ msgstr "_Ev qovluğu:"
