@@ -869,6 +869,11 @@ adv_user_new (xmlNodePtr node)
 	uid = g_strtod (find_new_id (node), NULL);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), uid);
 
+	/* Set bash as the default shell. */
+	/* FIXME: Maybe search for the first desirable shell for other systems */
+	w0 = tool_widget_get ("user_settings_shell");
+	gtk_entry_set_text (GTK_ENTRY (w0), "/bin/bash");
+
 	w0 = tool_widget_get ("user_settings_advanced");
 	gtk_widget_show (w0);
 }
