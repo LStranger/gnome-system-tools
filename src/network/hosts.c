@@ -433,7 +433,7 @@ statichost_list_select_row (GtkTreeSelection *selection, gpointer data)
 }
 
 static GtkWidget *
-statichost_list_new (void)
+statichost_list_new (XstTool *tool)
 {
 	GtkWidget        *treeview;
 	GtkTreeSelection *select;
@@ -441,11 +441,10 @@ statichost_list_new (void)
 
 	model = statichost_list_model_new ();
 
-	treeview = gtk_tree_view_new_with_model (model);
+	treeview = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
+	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
 	g_object_unref (G_OBJECT (model));
 
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (treeview), TRUE);
-	
 	statichost_list_add_columns (GTK_TREE_VIEW (treeview));
 
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -461,16 +460,11 @@ statichost_list_new (void)
 void
 hosts_init_gui (XstTool *tool)
 {
-	GtkWidget       *container;
 	XstStatichostUI *ui;
 
 	ui = g_new0 (XstStatichostUI, 1);
 
-	container = xst_dialog_get_widget (tool->main_dialog, "statichost_list_sw");
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (container),
-					     GTK_SHADOW_ETCHED_IN);
-	ui->list = statichost_list_new ();
-	gtk_container_add (GTK_CONTAINER (container), ui->list);
+	ui->list = statichost_list_new (tool);
 
 	ui->ip = xst_dialog_get_widget (tool->main_dialog, "ip");
 	ui->alias = xst_dialog_get_widget (tool->main_dialog, "alias");

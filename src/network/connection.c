@@ -630,7 +630,7 @@ connection_iter (XstConnection *cxn, GtkTreeIter *iter)
 }
 
 GtkWidget *
-connection_list_new (void)
+connection_list_new (XstTool *tool)
 {
 	GtkWidget        *treeview;
 	GtkTreeSelection *select;
@@ -638,14 +638,13 @@ connection_list_new (void)
 
 	model = connection_list_model_new ();
 
-	treeview = gtk_tree_view_new_with_model (model);
+	treeview = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
 	g_object_unref (G_OBJECT (model));
 
 	g_signal_connect (G_OBJECT (treeview), "cursor-changed", 
 	      G_CALLBACK (on_connection_list_clicked), NULL);
 
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (treeview), TRUE);
-	
 	connection_list_add_columns (GTK_TREE_VIEW (treeview));
 
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -896,16 +895,11 @@ extern void
 connection_init_gui (XstTool *tool)
 {
 	XstConnectionUI *ui;
-	GtkWidget *container;
 	XstConnectionType i;
 
 	ui = g_new0 (XstConnectionUI, 1);
 
-	container = xst_dialog_get_widget (tool->main_dialog, "connection_list_sw");
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (container),
-					     GTK_SHADOW_ETCHED_IN);
-	ui->list = connection_list_new ();
-	gtk_container_add (GTK_CONTAINER (container), ui->list);
+	ui->list = connection_list_new (tool);
 
 	ui->def_gw_omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
 
