@@ -46,21 +46,23 @@ static GtkWidget *my_get_widget (GladeXML *glade, const gchar *name)
 	return w;
 }
 
-static void ppp_druid_connect_signals (XstDialogSignal *signals, PppDruid *ppp)
+static void ppp_druid_connect_signals (PppDruid *ppp, XstDialogSignal *signals)
 {
 	gint i;
 
 	g_return_if_fail (ppp != NULL);
 
-	for (i = 0; &signals[i]; i++)
-		gtk_signal_connect (GTK_OBJECT (my_get_widget (ppp->glade, signals[i].widget)),
-						signals[i].signal_name, signals[i].func, ppp);
+	for (i = 0; signals[i].widget; i++)
+		gtk_signal_connect_after (GTK_OBJECT (my_get_widget (ppp->glade, signals[i].widget)),
+							 signals[i].signal_name, signals[i].func, ppp);
 }
 
 static void ppp_druid_exit (PppDruid *ppp)
 {
 	g_return_if_fail (ppp != NULL);
 
+	/* Release allocated memory */
+	
 	/* What to do here is not defined yet. Probably just exit gtk_main. */
 }
 
@@ -81,28 +83,46 @@ static GtkWidget *ppp_druid_get_button_next (PppDruid *ppp)
 /* If error == NULL, there's no error, and we clear the error message. */
 static void ppp_druid_set_error (PppDruid *ppp, gchar *error)
 {
+	gchar *widget_name;
+	GtkWidget *w;
+	
 	g_return_if_fail (ppp != NULL);
 	g_return_if_fail (ppp->current_page > 0);
 
 	ppp->error_state = (error)? TRUE : FALSE;
 	gtk_widget_set_sensitive (ppp_druid_get_button_next (ppp), (error)? FALSE: TRUE);
+
+	widget_name = g_strdup_printf ("page%dwarning", ppp->current_page);
+	w = my_get_widget (ppp->glade, widget_name);
+	g_free (widget_name);
+
+	if (error) {
+		gtk_widget_show (w);
+		
+		widget_name = g_strdup_printf ("page%dlabel", ppp->current_page);
+		w = my_get_widget (ppp->glade, widget_name);
+		g_free (widget_name);
+		gtk_label_set_text (GTK_LABEL (w), error);
+	} else
+		gtk_widget_hide (w);
 }
 
 static gchar *ppp_druid_check_phone (PppDruid *ppp)
 {
 	gchar *phone;
 	gchar *valid = "0123456789,";
-	int i;
+	int i, len;
 
 	g_return_val_if_fail (ppp != NULL, NULL);
 
 	phone = gtk_entry_get_text (GTK_ENTRY (ppp->phone));
 
-	for (i = 0; i < strlen (phone); i++)
+	len = strlen (phone);
+	for (i = 0; i < len; i++)
 		if (!strchr (valid, phone[i]))
 			break;
 
-	if (i < strlen (phone))
+	if (len == 0 || i < len)
 		return _("The phone number must be composed of\nonly numbers or commas (,).");
 
 	return NULL;
@@ -134,7 +154,7 @@ static gchar *ppp_druid_check_profile (PppDruid *ppp)
 
 	len = strlen (profile);
 	for (i = 0; i < len; i++)
-		if (!isalnum (profile[i]) || !profile[i] == ' ')
+		if (!isalnum (profile[i]) && profile[i] != ' ')
 			break;
 
 	/* FIXME: we should also check that the profile name is unique. */
@@ -157,14 +177,12 @@ static void ppp_druid_check_page (PppDruid *ppp)
 	};
 	
 	g_return_if_fail (ppp != NULL);
-	g_return_if_fail (ppp->current_page > PPP_DRUID_MAX_PAGES);
+	g_return_if_fail (ppp->current_page < PPP_DRUID_MAX_PAGES);
 
 	func = checks[ppp->current_page];
 
 	if (func)
 		ppp_druid_set_error (ppp, (func) (ppp));
-	else
-		ppp_druid_set_error (ppp, NULL);
 }
 
 static void ppp_druid_on_window_delete_event (GtkWidget *w, gpointer data)
@@ -181,23 +199,32 @@ static void ppp_druid_on_druid_cancel (GtkWidget *w, gpointer data)
 	ppp_druid_exit (ppp);
 }
 
-static void ppp_druid_on_page_next (GtkWidget *w, gpointer data)
+static gboolean ppp_druid_on_page_next (GtkWidget *w, gpointer arg1, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
 	ppp->current_page++;
 
-	ppp_druid_check_page (ppp);
+	return FALSE;
 }
 
-static void ppp_druid_on_page_back (GtkWidget *w, gpointer data)
+static gboolean ppp_druid_on_page_back (GtkWidget *w, gpointer arg1, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
 	ppp->current_page--;
+
+	return FALSE;
 }
 
-static void ppp_druid_on_page_last_finish (GtkWidget *w, gpointer data)
+static void ppp_druid_on_page_prepare (GtkWidget *w, gpointer arg1, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	ppp_druid_check_page (ppp);
+}
+
+static void ppp_druid_on_page_last_finish (GtkWidget *w, gpointer arg1, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
@@ -230,14 +257,17 @@ extern PppDruid *ppp_druid_new (void)
 	XstDialogSignal signals[] = {
 		{ "window",	"delete_event",	ppp_druid_on_window_delete_event },
 		{ "druid",	"cancel",			ppp_druid_on_druid_cancel },
-		{ "page0",	"next",			ppp_druid_on_page_next },
-		{ "page1",	"next",			ppp_druid_on_page_next },
-		{ "page2",	"next",			ppp_druid_on_page_next },
-		{ "page3",	"next",			ppp_druid_on_page_next },
-		{ "page1",	"back",			ppp_druid_on_page_back },
-		{ "page2",	"back",			ppp_druid_on_page_back },
-		{ "page3",	"back",			ppp_druid_on_page_back },
-		{ "page_last",	"back",			ppp_druid_on_page_back },
+		{ "page0",	"next",			GTK_SIGNAL_FUNC (ppp_druid_on_page_next) },
+		{ "page1",	"next",			GTK_SIGNAL_FUNC (ppp_druid_on_page_next) },
+		{ "page2",	"next",			GTK_SIGNAL_FUNC (ppp_druid_on_page_next) },
+		{ "page3",	"next",			GTK_SIGNAL_FUNC (ppp_druid_on_page_next) },
+		{ "page1",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
+		{ "page2",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
+		{ "page3",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
+		{ "page_last",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
+		{ "page1",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
+		{ "page2",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
+		{ "page3",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
 		{ "page_last",	"finish",			ppp_druid_on_page_last_finish },
 		{ "phone",	"changed",		ppp_druid_on_entry_changed },
 		{ "phone",	"activate",		ppp_druid_on_entry_activate },
@@ -273,7 +303,7 @@ extern PppDruid *ppp_druid_new (void)
 	ppp->login = my_get_widget (ppp->glade, "login");
 	ppp->passwd = my_get_widget (ppp->glade, "passwd");
 	ppp->profile = my_get_widget (ppp->glade, "profile");
-	ppp_druid_connect_signals (signals, ppp);
+	ppp_druid_connect_signals (ppp, signals);
 
 	return ppp;
 }	
