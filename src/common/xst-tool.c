@@ -490,11 +490,11 @@ report_progress (XstTool *tool, const gchar *label)
 		gtk_signal_connect_after (GTK_OBJECT (tool->report_window), "delete-event",
 					  GTK_SIGNAL_FUNC (report_window_close_cb), NULL);
 		gtk_widget_show_all (tool->report_window);
+		gnome_canvas_update_now (GNOME_CANVAS
+					 (xst_ui_image_widget_get (tool->report_gui, "report_pixmap")));
+		gtk_widget_queue_draw (glade_xml_get_widget (tool->report_gui, "report_label"));
 		while (gtk_events_pending ())
-		{
 			gtk_main_iteration ();
-			usleep (5000);
-		}
 	}
 
 	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
@@ -759,6 +759,9 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
+	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
+	tool->directive_running = TRUE;
+
 	directive_ptr = directive;
 	va_start (ap, directive);
 	xst_tool_send_directive (tool, directive_ptr, ap);
@@ -778,10 +781,11 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar
 		tool->xml_document = g_string_new ("");
 	
 	if (location_id == NULL)
-		report_progress (tool, _(report_sign));
+		report_progress (tool, report_sign? _(report_sign): NULL);
 
 	xml = xst_tool_read_xml_from_backend (tool);
 	
+	tool->directive_running = FALSE;
 	return xml;
 }
 
@@ -794,14 +798,18 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 	xmlDoc *xml_out;
 	const gchar *directive_ptr;
 	
+	g_return_val_if_fail (tool != NULL, NULL);
+	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
+
+	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
+	tool->directive_running = TRUE;
+
 	/* don't actually run if we are just pretending */
 	if (root_access == ROOT_ACCESS_SIMULATED) {
 		g_warning (_("Skipping set directive..."));
+		tool->directive_running = FALSE;
 		return NULL;
 	}
-
-	g_return_val_if_fail (tool != NULL, NULL);
-	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
 	directive_ptr = directive;
 	va_start (ap, directive);
@@ -824,9 +832,19 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 	/* This is tipicaly to just read the end of request string,
 	   but a set directive may return some XML too. */
 	xml_out = xst_tool_read_xml_from_backend (tool);
+
+	tool->directive_running = FALSE;
 	return xml_out;
 }
 
+gboolean
+xst_tool_directive_running (XstTool *tool)
+{
+	g_return_val_if_fail (tool != NULL, TRUE);
+	g_return_val_if_fail (XST_IS_TOOL (tool), TRUE);
+	
+	return tool->directive_running;
+}
 
 gboolean
 xst_tool_load (XstTool *tool)
@@ -1071,7 +1089,7 @@ xst_tool_type_init (XstTool *tool)
 
 	tool->etspecs_common_path = g_strdup (ETSPECS_DIR);
 
-	xml = xst_tool_load_glade_common (tool, "report_window");
+	tool->report_gui = xml  = xst_tool_load_glade_common (tool, "report_window");
 
 	tool->report_window     = glade_xml_get_widget (xml, "report_window");
 #if 0
@@ -1159,6 +1177,8 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 
 	tool->backend_pid = tool->backend_read_fd = tool->backend_write_fd = -1;
 	xst_tool_set_close_func (tool, xst_tool_kill_backend, NULL);
+
+	tool->directive_running = FALSE;
 }
 
 XstTool *
@@ -1300,11 +1320,11 @@ void xst_fool_the_linker (void);
 void
 xst_fool_the_linker (void)
 {
-	xst_ui_create_image_widget (NULL, NULL, NULL, 0, 0);
+	xst_ui_image_widget_create (NULL, NULL, NULL, 0, 0);
 }
 
 static void
-authenticate (gchar *exec_path)
+authenticate (int argc, char *argv[])
 {
 	GtkWidget *error_dialog;
 	gchar *password;
@@ -1321,7 +1341,7 @@ authenticate (gchar *exec_path)
 
 		/* If successful, the following never returns */
 
-		xst_su_run_with_password (exec_path, password);
+		xst_su_run_with_password (argc, argv, password);
 
 		if (strlen (password))
 			memset (password, 0, strlen (password));
@@ -1434,7 +1454,7 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 		root_access = ROOT_ACCESS_SIMULATED;
 #endif
 	} else {
-		authenticate (argv [0]);
+		authenticate (argc, argv);
 		root_access = ROOT_ACCESS_NONE;
 	}
 

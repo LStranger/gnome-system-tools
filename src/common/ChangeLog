@@ -1,3 +1,21 @@
+2001-10-02  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-su.c (exec_su): Pass all arguments to child process.
+
+	* xst-tool.c (report_progress): Another aptempt at making
+	the report window show its contents before closing.
+
+	* xst-ui.c (xst_ui_create_image_widget_canvas): Removed
+	useless canvas_update_now.
+
+2001-10-01  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (xst_tool_run_get_directive): Added pseudo-lock
+	to avoid concurrent directives running. Corrected report_sign
+	translation call.
+	(xst_tool_run_set_directive): same.
+	(xst_tool_directive_running): encapsulate directive_running.
+
 Tue Sep 18 12:35:42 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-report-line.c (xst_report_sprintf): Handle excess arguments

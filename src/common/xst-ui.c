@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Tambet Ingo <tambet@ximian.com>
- *          Miguel de Icaza <miguel@ximian.com> (xst_ui_create_image_widget)
+ *          Miguel de Icaza <miguel@ximian.com> (xst_ui_image_widget_create)
  */
 
 #ifdef HAVE_CONFIG_H
@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include "xst-ui.h"
 
-/* For xst_ui_create_image_widget */
+/* For xst_ui_image_widget_create */
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -113,7 +113,7 @@ xst_ui_combo_remove_by_label (GtkCombo *combo, const gchar *label)
 }
 
 static GtkWidget *
-xst_ui_create_image_widget_canvas (gchar *filename)
+xst_ui_image_widget_create_canvas (gchar *filename)
 {
 	GtkWidget *canvas;
 	GdkPixbuf *pixbuf;
@@ -142,7 +142,6 @@ xst_ui_create_image_widget_canvas (gchar *filename)
 
 	gdk_pixbuf_unref (pixbuf);
 	gtk_widget_show (canvas);
-	gnome_canvas_update_now (GNOME_CANVAS (canvas));
 	g_free (filename_dup);
 
 	return canvas;
@@ -151,7 +150,7 @@ xst_ui_create_image_widget_canvas (gchar *filename)
 /* Stolen and adapted from evolution's e-util/e-gui-utils.c
  * Arturo Espinosa <arturo@ximian.com> */
 GtkWidget *
-xst_ui_create_image_widget (gchar *name,
+xst_ui_image_widget_create (gchar *name,
 			    gchar *string1, gchar *string2,
 			    gint int1, gint int2)
 {
@@ -161,7 +160,7 @@ xst_ui_create_image_widget (gchar *name,
 	if (!string1)
 		return NULL;
 
-	canvas = xst_ui_create_image_widget_canvas (string1);
+	canvas = xst_ui_image_widget_create_canvas (string1);
 	g_return_val_if_fail (canvas != NULL, NULL);
 	
 	alignment = gtk_widget_new (gtk_alignment_get_type(),
@@ -183,12 +182,23 @@ xst_ui_image_set_pix (GtkWidget *widget, gchar *filename)
 	GtkWidget *canvas;
 	GList *child;
 
-	canvas = xst_ui_create_image_widget_canvas (filename);
+	canvas = xst_ui_image_widget_create_canvas (filename);
 	g_return_if_fail (canvas != NULL);
 		
 	child = gtk_container_children (GTK_CONTAINER (widget));
 	gtk_container_remove (GTK_CONTAINER (widget), child->data);
 	gtk_container_add (GTK_CONTAINER (widget), canvas);
+}
+
+GtkWidget *
+xst_ui_image_widget_get (GladeXML *gui, gchar *name)
+{
+	GList *children;
+	GtkWidget *container;
+
+	container = glade_xml_get_widget   (gui, "report_pixmap");
+	children  = gtk_container_children (GTK_CONTAINER (container));
+	return children->data;
 }
 
 /**

@@ -65,6 +65,7 @@ struct _XstTool {
 	gint platform_selected_row;
 
 	/* Progress report widgets */
+	GladeXML  *report_gui;
 	GtkWidget *report_arrow;
 
 	GtkWidget *report_window;
@@ -88,6 +89,7 @@ struct _XstTool {
 	gboolean  report_dispatch_pending;
 	gboolean  report_finished;
 	gboolean  run_again;
+	gboolean  directive_running; /* locked when a directive is running */
 
 	XstReportHookType  report_hook_type;
 	GSList            *report_hook_list;
@@ -130,6 +132,7 @@ xmlDoc      *xst_tool_run_get_directive   (XstTool *tool, const gchar *report_si
 /* xml can be NULL, in which case no XML will be sent to the backend. */
 xmlDoc      *xst_tool_run_set_directive   (XstTool *tool, xmlDoc *xml,
 					   const gchar *report_sign, const gchar *directive, ...);
+gboolean     xst_tool_directive_running   (XstTool *tool);
 
 void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 void         xst_tool_set_close_func      (XstTool *tool, XstCloseFunc close_cb, gpointer data);

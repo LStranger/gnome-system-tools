@@ -85,13 +85,26 @@ static int root;			/* if we are root, no password is
                                            required */
 
 static gint
-exec_su (gchar *exec_path, gchar *user, gchar *pwd)
+exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 {
 	gchar *exec_p, *user_p;  /* command to execute, user name */
 	pid_t pid;
-	int t_fd;
+	int t_fd, i;
+	GString *str;
 
+#if 0
 	exec_p = g_strdup (exec_path);
+#endif
+
+	g_assert (argv && argv[0]);
+	str = g_string_new (argv[0]);
+	for (i = 1; i < argc; i++) {
+		g_string_append_c (str, ' ');
+		g_string_append (str, argv[i]);
+	}
+
+	exec_p = str->str;
+	g_string_free (str, 0);
 
 #if 0
 	if (asprintf (&exec_p, "%s&", exec_path) < 0) {
@@ -198,9 +211,9 @@ exec_su (gchar *exec_path, gchar *user, gchar *pwd)
 }
 
 void
-xst_su_run_with_password (gchar *exec_path, gchar *password)
+xst_su_run_with_password (int argc, char *argv[], gchar *password)
 {
-	exec_su (exec_path, "root", password);
+	exec_su (argc, argv, "root", password);
 }
 
 static GladeXML *
