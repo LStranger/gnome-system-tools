@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools, 0.27.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-01-15 14:58+0100\n"
-"PO-Revision-Date: 2004-01-07 14:43GMT\n"
+"POT-Creation-Date: 2004-02-24 20:46+0100\n"
+"PO-Revision-Date: 2004-02-24 20:47+0100\n"
 "Last-Translator: Aleix Badia i Bosch <abadia@ica.es>\n"
-"Language-Team: catalan <tradgnome@softcatala.org>\n"
+"Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,10 +50,14 @@ msgid "Last GST version executed"
 msgstr "S'ha executat l'última versió de les GST"
 
 #: gnome-system-tools.schemas.in.h:8
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr ""
+
+#: gnome-system-tools.schemas.in.h:9
 msgid "Remote hosts"
 msgstr "Ordinadors centrals remots"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:10
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -62,7 +66,7 @@ msgstr ""
 "el bàsic i l'avançat, el mode bàsic està preparat per mostrar menys opcions "
 "que el mode avançat"
 
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:11
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
@@ -70,21 +74,28 @@ msgstr ""
 "Les GST permeten realitzar configuracions remotes a través de SSH, habiliteu "
 "aquesta opció per utilitzar aquesta funció"
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:12
 msgid "The last GST version that this computer has run"
 msgstr "L'última versió de les GST que s'ha executat en aquest ordinador"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:13
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr ""
+
+#: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
 msgstr "Si les eines utilitzaran o no l'administració remota"
 
-#: gnome-system-tools.schemas.in.h:13
+#: gnome-system-tools.schemas.in.h:15
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Si l'eina d'administració d'usuaris hauria de mostrar o no tots els usuaris "
 "i grups"
 
-#: gnome-system-tools.schemas.in.h:14
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Si s'hauria de mostrar o no el diàleg d'avís"
 
@@ -166,7 +177,11 @@ msgstr "<span weight=\"bold\">S'està iniciant l'ordinador</span>"
 msgid "Ask at boot"
 msgstr "Preguntar-ho a l'arrencada"
 
-#: interfaces/boot.glade.in.h:20
+#: interfaces/boot.glade.in.h:20 src/boot/main.c:73
+msgid "Boot Manager Settings"
+msgstr "Paràmetres del gestor d'arrencada"
+
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -176,25 +191,29 @@ msgstr ""
 "partició arrel. Opcionalment, també podeu incorporar els paràmetres afegits "
 "que s'han de passar al nucli a l'arrencada."
 
-#: interfaces/boot.glade.in.h:21
+#: interfaces/boot.glade.in.h:22
 msgid "Click \"Forward\" to continue"
 msgstr "Feu clic sobre \"Següent\" per continuar"
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:23
 msgid "Confirmation"
 msgstr "Confirmació"
 
 #. set window title
-#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
 #: src/boot/boot-druid.c:441
 msgid "Creating a new boot image"
 msgstr "S'està creant una nova imatge d'arrencada"
 
-#: interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.in.h:25
+msgid "Don't ask me again"
+msgstr "No tornis a preguntar"
+
+#: interfaces/boot.glade.in.h:26
 msgid "Enable IDE SCSI emulation"
 msgstr "Habilita l'emulació SCSI IDE"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:27
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -202,49 +221,55 @@ msgstr ""
 "Introduïu un nom per a la imatge d'arrencada i especifiqueu el tipus de "
 "sistema operatiu."
 
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:42
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:43
 msgid "Finished"
 msgstr "Finalitzat"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:51
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
 #: src/network/connection.c:1843
 msgid "Manual"
 msgstr "Manual"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Modifica els paràmetres per a un sistema operatiu o nucli."
 
-#: interfaces/boot.glade.in.h:29
+#: interfaces/boot.glade.in.h:31
 msgid "Number of colors:"
 msgstr "Nombre de colors:"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:32
 msgid "Other parameters:"
 msgstr "Altres paràmetres:"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "Password"
 msgstr "Contrasenya"
 
-#: interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.in.h:34
 msgid "Protect with password"
 msgstr "Protegeix amb una contrasenya"
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "Resolution:"
 msgstr "Resolució:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:36
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr ""
 "Segons d'espera abans de carregar el nucli o sistema operatiu predeterminat"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:37
+msgid ""
+"Several bootloaders have been found in the system, please select which do "
+"you want to configure"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:38
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Especifiqueu la partició on està instal·lat el sistema operatiu."
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:39
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
@@ -252,7 +277,7 @@ msgstr ""
 "S'ha afegit la nova imatge d'arrencada. Feu clic sobre \"Apply\" per desar "
 "els canvis."
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:40
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -260,54 +285,54 @@ msgstr ""
 "Aquest assistent està dissenyat per a ajudar-vos a afegir imatges "
 "d'arrencada al vostre sistema de manera fàcil i ràpida.."
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:41
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Utilitzeu aquest diàleg per modificar els paràmetres de nucli."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:42
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Utilitzeu aquesta eina per especificar quins sistemes operatius poden "
 "seleccionar els usuaris durant la inicialització."
 
-#: interfaces/boot.glade.in.h:40
+#: interfaces/boot.glade.in.h:43
 msgid "Video modes (only frame buffer)"
 msgstr "Modes de vídeo (només memòria intermitja de marcs)"
 
-#: interfaces/boot.glade.in.h:41
+#: interfaces/boot.glade.in.h:44
 msgid "_Add..."
 msgstr "_Afegeix..."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:45
 msgid "_Device:"
 msgstr "_Dispositiu:"
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:46
 msgid "_Edit"
 msgstr "_Edita"
 
-#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Ca_mí de la imatge initrd:"
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:48
 msgid "_Kernel image path:"
 msgstr "Ca_mí de la imatge del nucli:"
 
-#: interfaces/boot.glade.in.h:46
+#: interfaces/boot.glade.in.h:49
 msgid "_Name:"
 msgstr "_Nom:"
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:50
 msgid "_Operating system:"
 msgstr "Sistema _operatiu:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:51
 msgid "_Parameters:"
 msgstr "_Paràmetres:"
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:52
 msgid "_Root file system device:"
 msgstr "Dispositiu del sistema de fitxers a_rrel:"
 
@@ -376,7 +401,7 @@ msgid "Use this window to select the computer you wish to configure"
 msgstr ""
 "Utilitzeu aquesta finestra per seleccionar l'ordinadorque voleu configurar"
 
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:108
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:110
 msgid "_Password:"
 msgstr "_Contrasenya:"
 
@@ -530,76 +555,86 @@ msgid "DNS"
 msgstr "DNS"
 
 #: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "Nom del d_omini:"
+
+#: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
 msgstr "Dispositiu de pasarel·la predeterminat:"
 
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:41
 msgid "Device:"
 msgstr "Dispositiu:"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:42
 msgid "Domain / _Workgroup:"
 msgstr "Domini / _Grup de treball:"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:44
 msgid "General"
 msgstr "General"
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:45
 msgid "Hosts"
 msgstr "Ordinadors centrals"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:46
 msgid "How the names of other computers are found."
 msgstr "Mètode per trobar el noms d'altres ordinadors."
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:47
 msgid "How this computer is identified."
 msgstr "Mètode per identificar aquest ordinador."
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:48
 msgid "How to access other computers."
 msgstr "Mètode per accedir a d'altres ordinadors."
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:49
 msgid "How to dial up to the Internet."
 msgstr "Mètode per connectar-se a internet."
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:50
 msgid "ISP phone number"
 msgstr "Número de telèfon del proveïdor d'internet"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:51
 msgid "Interface properties"
 msgstr "Propietats de la interfície"
 
 #: interfaces/network.glade.in.h:52
+msgid ""
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr ""
+
+#: interfaces/network.glade.in.h:54
 msgid "Modem _volume:"
 msgstr "_Volum del modem:"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:55
 msgid "Network name:"
 msgstr "Nom de la xarxa:"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Network profiles"
 msgstr "Perfils de la xarxa:"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "Network profiles can be used to store different network configurations."
 msgstr ""
 "Els perfils de xarxa es poden utilitzar per emmagatzemardiferents "
 "configuracions de xarxa."
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid "Networking Settings"
 msgstr "Paràmetres de xarxa"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid "New network profile"
 msgstr "Nou perfil de la xarxa"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -607,7 +642,7 @@ msgstr ""
 "Introduïu el nom d'usuari i la contrasenya que us va assignar el vostre "
 "proveïdor d'internet."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -615,35 +650,35 @@ msgstr ""
 "Introduïu l'adreça d'aquest dispositiu de xarxai l'adreça remota a on es "
 "connectarà."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Now, please enter the address that this network device will have."
 msgstr "Introduïu l'adreça d'aquest dispositiu de xarxa."
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Now, please give this connection a name."
 msgstr "Especifiqueu el nom d'aquesta connexió."
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid "Number to _access an external line:"
 msgstr "Número per _accedir a una línia externa:"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:65
 msgid "Number to get to an _external line:"
 msgstr "Número per obtenir un línia _externa:"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:66
 msgid "PPPD _options:"
 msgstr "_Opcions del PPPD:"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:67
 msgid "Pa_ssword (confirm):"
 msgstr "Contra_senya (confirmeu-la):"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid "Phone _number:"
 msgstr "_Número de telèfon:"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
@@ -651,7 +686,7 @@ msgstr ""
 "Introduïu el número de telèfon que utilitzeu per a connectar-vos a internet. "
 "Aquest número us el dóna el vostre proveïdor d'internet."
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:70
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
@@ -659,35 +694,35 @@ msgstr ""
 "Seleccioneu el dispositiu de la xarxa sense fils que voleu configurar i "
 "especifiqueu el nom de la xarxa per a aquesta interfície"
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:71
 msgid "Please, give this network profile a name and a description."
 msgstr "Especifiqueu el nom i descripció d'aquest perfil de xarxa."
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:72
 msgid "Please, select which type of connection you would like to add."
 msgstr "Seleccioneu el tipus de connexió que voleu afegir."
 
-#: interfaces/network.glade.in.h:71 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:73 interfaces/users.glade.in.h:38
 msgid "Profile _name:"
 msgstr "_Nom del perfil:"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:74
 msgid "Pulses"
 msgstr "Pulsos"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:75
 msgid "Se_condary:"
 msgstr "Se_cundari:"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:76
 msgid "Set _DNS servers manually"
 msgstr "Defineix manualment els servidors de _DNS"
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:77
 msgid "Set modem as default _route to internet"
 msgstr "Defineix el mòdem com la _ruta per defecte a internet"
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:78
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
@@ -695,7 +730,12 @@ msgstr ""
 "L'auxiliar us ajudarà a configurar una nova\n"
 "connexió a la xarxa."
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:80
+msgid ""
+"This is the list of IP addresses that the system will use as name servers"
+msgstr ""
+
+#: interfaces/network.glade.in.h:81
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -703,35 +743,35 @@ msgstr ""
 "Per continuar configurant la vostra connexió de xarxa, feu clic sobre "
 "\"Següent\". Per sortir, feu clic sobre \"Cancel·la\"."
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:82
 msgid "Tones"
 msgstr "Tons"
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:83
 msgid "Use \"Auto\" if unsure."
 msgstr "Si no n'esteu segurs utilitzeu l'opció \"Automàtic\"."
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:84
 msgid "Use this dialog for setting the configuration for this interface"
 msgstr "Utilitzeu aquest diàleg per definir els paràmetres d'aquest interfície"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:85
 msgid "Username and password"
 msgstr "Nom d'usuari i contrasenya"
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:86
 msgid "WI_NS server:"
 msgstr "Servidor de WI_NS:"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:87
 msgid "Wireless device:"
 msgstr "Dispositiu de la xarxa sense fils:"
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:88
 msgid "Wireless settings"
 msgstr "Paràmetres de la xarxa sense fils"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:89
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
@@ -739,135 +779,131 @@ msgstr ""
 "Esteu apunt de crear una nova connexió de xarxa.Feu clic sobre \"Aplica\" "
 "per desar els canvis."
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:90
 msgid "_Autodetect"
 msgstr "_Autodetecta"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:91
 msgid "_Comment:"
 msgstr "_Comentari:"
 
-#: interfaces/network.glade.in.h:89
+#: interfaces/network.glade.in.h:92
 msgid "_Configuration:"
 msgstr "_Configuració:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:93
 msgid "_Deactivate"
 msgstr "_Desactiva"
 
-#: interfaces/network.glade.in.h:91 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
 msgid "_Delete"
 msgstr "_Suprimeix"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:95
 msgid "_Description:"
 msgstr "_Descripció:"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:96
 msgid "_Dial type:"
 msgstr "Tipus _de marcatge:"
 
-#: interfaces/network.glade.in.h:94
-msgid "_Domain name:"
-msgstr "Nom del _domini:"
-
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:97
 msgid "_Enable Windows networking"
 msgstr "_Habilita la xarxa de Windows"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:98
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:99
 msgid "_Gateway address:"
 msgstr "Adr_eça de la passarel·la:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:100
 msgid "_Hostname:"
 msgstr "Nom de l'or_dinador central:"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:101
 msgid "_IP address:"
 msgstr "Adreça d'_IP:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:102
 msgid "_IR LAN"
 msgstr "LAN _IR"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:103
 msgid "_Local IP address:"
 msgstr "Adreça d'IP _local:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:104
 msgid "_Local IP:"
 msgstr "IP _local:"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:105
 msgid "_Modem (PPP)"
 msgstr "_Mòdem (PPP)"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:106
 msgid "_Modem port:"
 msgstr "Port del _mòdem:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:107
 msgid "_Network Profiles"
 msgstr "Per_fils de la xarxa"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:108
 msgid "_Network name:"
 msgstr "_Nom de la xarxa:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:109
 msgid "_Parallel Line"
 msgstr "Línia _paral·lela"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:111
 msgid "_Phone number:"
 msgstr "Número de _telèfon:"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:112
 msgid "_Primary:"
 msgstr "_Primari:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:113
 msgid "_Remote IP address:"
 msgstr "Areça d'IP _remota:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:114
 msgid "_Remote IP:"
 msgstr "IP _remota:"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:115
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Reintenta la connexió en cas que es talli o falli la inicialització"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:116
 msgid "_Save Current"
 msgstr "De_sa l'actual"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:117
 msgid "_Start PPP as soon as modem connects"
 msgstr "Ini_cia el PPP quan el mòdem es connecti"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:118
 msgid "_Subnet mask:"
 msgstr "Màscara de _subxarxa:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:119
 msgid "_Update DNS when this connection becomes active"
 msgstr "Act_ualitza el DNS quan s'activa aquesta connexió"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:120
 msgid "_Use remote IP as default gateway"
 msgstr "_Utilitza l'IP remota com a pasarel·la per defecte"
 
-#: interfaces/network.glade.in.h:119 interfaces/users.glade.in.h:65
+#: interfaces/network.glade.in.h:121 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "N_om d'usuari:"
 
-#: interfaces/network.glade.in.h:120
+#: interfaces/network.glade.in.h:122
 msgid "_Wireless"
 msgstr "_Sense fils"
 
@@ -892,28 +928,32 @@ msgid "Description:"
 msgstr "Descripció:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Priority:"
-msgstr "Prioritat:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "_Propietats del servei"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service:"
 msgstr "Servei:"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Status:"
 msgstr "Estat:"
 
-#: interfaces/services.glade.in.h:10
+#: interfaces/services.glade.in.h:9
 msgid "Use this tool to specify which services to run"
 msgstr "Utilitzeu aquesta eina per especificar els serveis a executar"
+
+#: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr ""
 
 #: interfaces/services.glade.in.h:11
 msgid "_Start"
 msgstr "_Inicia"
+
+#: interfaces/services.glade.in.h:12
+msgid "_Startup sequence:"
+msgstr ""
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1239,7 +1279,7 @@ msgstr "S'està creant una nova imatge d'arrencada (%d de %d)"
 msgid "Finished creating a new boot image"
 msgstr "Ha finalitzat la creació d'una nova imatge d'arrencada"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:467
+#: src/boot/boot-image.c:40 src/network/profile.c:468
 msgid "Unknown"
 msgstr "Desconegut"
 
@@ -1316,7 +1356,7 @@ msgstr "Editor de la imatge d'arrencada"
 msgid "Boot Append Editor"
 msgstr "Editor d'afegida d'opcions de l'arrencada"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1324,12 +1364,12 @@ msgstr ""
 "Perquè el sistema s'inicii,\n"
 "cal que especifiqueu, com a mínim, una imatge d'arrencada.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Esteu segur de voler suprimir '%s'?"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -1337,10 +1377,6 @@ msgid ""
 msgstr ""
 "Manca el fitxer '%s' o no s'ha pogut llegir:\n"
 "La configuració es mostrarà buida."
-
-#: src/boot/main.c:73
-msgid "Boot Manager Settings"
-msgstr "Paràmetres del gestor d'arrencada"
 
 #: src/boot/table.c:41
 msgid "Name"
@@ -1377,16 +1413,21 @@ msgid "/_Delete"
 msgstr "/_Suprimeix"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "No s'ha pogut connectar a l'ordinador."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "La contrasenya que heu introduït no és vàlida."
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr ""
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "S'ha produït un error inesperat."
 
@@ -1434,7 +1475,7 @@ msgstr ""
 "S'ha produït un error en l'execució en segon pla de la seqüència\n"
 "i no s'ha pogut carregar la configuració."
 
-#: src/common/gst-tool.c:1507
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1443,7 +1484,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Benvinguts a la versió de "
 "prellençament %sde les Eines de Sistema del GNOME</span>"
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1458,15 +1499,15 @@ msgstr ""
 "provar aquest prellançament de \n"
 "les Eines de Sistema de GNOME!"
 
-#: src/common/gst-tool.c:1531
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Avís"
 
-#: src/common/gst-tool.c:1551
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "No tornis a mostrar-ho"
 
-#: src/common/gst-tool.c:1625
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "Eines de Sistema del GNOME"
 
@@ -1671,10 +1712,14 @@ msgstr ""
 "Falta omplir el número de telèfon que utilitzarà la connexió.Per continuar "
 "introduïu un número de telèfon vàlid."
 
-#: src/network/connection.c:2082
+#: src/network/connection.c:2079
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "La interfície %s no existeix."
+
+#: src/network/connection.c:2081
+msgid " The loopback interface cannot be configured."
+msgstr ""
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1750,24 +1795,24 @@ msgstr "Nom del perfil"
 msgid "No description available."
 msgstr "No hi ha cap descripció disponible."
 
-#: src/services/callbacks.c:247
+#: src/services/callbacks.c:248
 msgid "Running"
 msgstr "S'està executant"
 
-#: src/services/callbacks.c:251
+#: src/services/callbacks.c:252
 msgid "Stopped"
 msgstr "Aturat"
 
-#: src/services/callbacks.c:256
+#: src/services/callbacks.c:257
 msgid "Could not get info"
 msgstr "No s'ha pogut obtenir la informació"
 
-#: src/services/callbacks.c:322
+#: src/services/callbacks.c:323
 #, c-format
 msgid "Settings for service %s"
 msgstr "Paràmetres del servei %s"
 
-#: src/services/main.c:58
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "Paràmetres dels serveis"
 
@@ -1779,7 +1824,7 @@ msgstr "Configura els serveis que s'executaran quan s'inicii el sistema"
 msgid "Services"
 msgstr "Serveis"
 
-#: src/services/table.c:78
+#: src/services/table.c:79
 msgid "Active"
 msgstr "Actiu"
 
@@ -1815,11 +1860,11 @@ msgstr "Canvia l'hora i data del sistema i el fus horari"
 msgid "Time and Date"
 msgstr "Hora i data"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "Crea un nou perfil"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Paràmetres del perfil %s"
@@ -2185,6 +2230,9 @@ msgstr "Afegeix o suprimeix usuaris i grups"
 
 #~ msgid "_Format"
 #~ msgstr "_Formata"
+
+#~ msgid "Priority:"
+#~ msgstr "Prioritat:"
 
 #~ msgid "(Getting ...)"
 #~ msgstr "(S'està obtenint ....)"
