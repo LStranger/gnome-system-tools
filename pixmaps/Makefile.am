@@ -10,6 +10,7 @@ pixmaps_DATA = \
 	connection-ethernet.png  \
 	connection-inactive.xpm  \
 	connection-modem.png     \
+	background.jpeg		\
 	big-monitor.png		\
 	boot.png                 \
 	desktop_icons.png        \
@@ -30,9 +31,12 @@ pixmaps_DATA = \
 	nameresolution_alias.png \
 	nameresolution_id.png    \
 	network.png              \
-	panel_left.png			\
-	panel_right.png		\
-	panel_mid.png			\
+	panel_bottom_left.png	\
+	panel_bottom_mid.png	\
+	panel_bottom_right.png	\
+	panel_top_left.png		\
+	panel_top_mid.png		\
+	panel_top_right.png		\
 	passwd.png               \
 	plip-48.png              \
 	ppp.png                  \
@@ -54,7 +58,6 @@ pixmaps_DATA = \
 	wavelan-48.png           \
 	world_map-960.png        \
 	xstdruidbg-3.png         \
-	ximian30.png			\
-	background.jpeg
+	ximian30.png
 
 EXTRA_DIST = $(pixmaps_DATA)
