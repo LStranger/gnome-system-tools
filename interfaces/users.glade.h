@@ -52,7 +52,7 @@ gchar *s = N_("This druid is designed to help you quickly \n"
               "\n"
               "To begin, click \"Next\". ");
 gchar *s = N_("User Identity  (step 1 of 2)");
-gchar *s = N_("Please enter a username for the new user in the space below. You may also enter a comment about the user, such as his or her real name. ");
+gchar *s = N_("Please enter a username for the new user in the space below. Optionally, you can fill in more information to identify the user. ");
 gchar *s = N_("Click \"Next\" to continue");
 gchar *s = N_("Password options (step 2 of 2)");
 gchar *s = N_("Please enter a password for the new user. ");
@@ -95,7 +95,8 @@ gchar *s = N_("window5");
 gchar *s = N_("Basic settings");
 gchar *s = N_("Real _name:");
 gchar *s = N_("_Username:");
-gchar *s = N_("_Office:");
+gchar *s = N_("Contact information");
+gchar *s = N_("_Office location:");
 gchar *s = N_("Work phone:");
 gchar *s = N_("Home phone:");
 gchar *s = N_("Advanced settings");
