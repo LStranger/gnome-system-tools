@@ -1,10 +1,10 @@
-Helix Setup Tools User Interface Guidelines.
+Ximian Setup Tools User Interface Guidelines.
 Arturo Espinosa
-Copyright (C) Helix Code, Inc.
+Copyright (C) Ximian Code, Inc.
 
 
 This document is a draft, to enable systematic and productive discussions
-regarding the general user interface design for the Helix Setup Tools
+regarding the general user interface design for the Ximian Setup Tools
 frontends. It is far from perfect, and maybe not written by the best man for
 the task, but I hope it will evolve into a refference for all the points of 
 agreement for the interface.
@@ -21,18 +21,18 @@ Terminology.
 This should probably be in some other place, as the terminology should be
 the same for all of our documents. 
 
-    HST - Helix Setup Tools.
+    XST - Ximian Setup Tools.
    Tool - a backend and all of its frontends.
-CVS/a/b - the directory a/b under the helix-setup-tools module in 
+CVS/a/b - the directory a/b under the ximian-setup-tools module in 
           cvs.gnome.org.
 
 
 
-The HST target user.
+The XST target user.
 
 One of the main problems of writing a new project is defining its
 operating constraints, to avoid bloat and keep the efforts focused. One of
-such constraints is the intended user. HST most important target user is
+such constraints is the intended user. XST most important target user is
 the personal computer user, who may have some low-profile, basic
 networking interactions with others. This user has no interest in reading
 manuals or spending time with the computer to learn how it works. This
@@ -72,7 +72,7 @@ point here is that usability is the center of all this.
 
 Uniform interface.
 
-All the HST frontends must look the same, regarding spacing, the layout of
+All the XST frontends must look the same, regarding spacing, the layout of
 the main action buttons and the way commonly used data mappings and control
 arrangements look and interact. This will let the user make his own
 explanation of how certain arrangements work. More on specific arrangements
@@ -151,23 +151,23 @@ that two modes will confuse users or not.
 
 Criteria for new frontend development.
 
-The HST architecture lets the developer design new UI interfaces with the
+The XST architecture lets the developer design new UI interfaces with the
 same backend and infrastructure, and there is a tradeoff on doing this. As
 we tend to centralize our efforts on a single frontend for a tool, it
 becomes more powerful for the user at a given time, but it potentialy raises
 the complexity of the interface. On the other hand, having several frontends
 for the same task will prove to be confusing for the user.
 
-If you have a special project and want to add functionality for a HST
-frontend, please take into account the target end-user for the HST frontends
+If you have a special project and want to add functionality for a XST
+frontend, please take into account the target end-user for the XST frontends
 and that UI friendlyness is our main concern. Adding features raises the
 complexity bar of the interface, and may compromise the frontend's
 usability. It there are too many additions or modifications planned for your
 project, you may consider writing a new frontend. Frontends are simple
 programs of less than 5,000 lines of code, so it may be less effort to
 create a new one, tailored for your specific situation, than coordinating
-with the HST project and discussing possible low-profile integrations.
+with the XST project and discussing possible low-profile integrations.
 
 This doesn't mean we may not want to know about the suggestions you may have
-for the HST. It's just that all modifications should go through this
+for the XST. It's just that all modifications should go through this
 criteria to see what is worth.
