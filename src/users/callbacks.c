@@ -85,18 +85,8 @@ on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
-/*	ug_data *ud;
-
 	g_return_if_fail (xst_tool_get_access (tool));
-	
-	ud = g_new (ug_data, 1);
 
-	ud->new = TRUE;
-	ud->table = TABLE_USER;
-	ud->node = get_root_node (ud->table);
-
-	user_new_prepare (ud);
-*/
 	user_settings_prepare (get_root_node (TABLE_USER));
 }
 
@@ -197,18 +187,9 @@ on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 void
 on_network_user_new_clicked (GtkButton *button, gpointer user_data)
 {
-/*	ug_data *ud;
-
 	g_return_if_fail (xst_tool_get_access (tool));
-	
-	ud = g_new (ug_data, 1);
 
-	ud->new = TRUE;
-	ud->table = TABLE_NET_USER;
-	ud->node = get_root_node (ud->table);
-
-	user_new_prepare (ud);
-*/
+	user_settings_prepare (get_root_node (TABLE_NET_USER));
 }
 
 void
@@ -250,26 +231,74 @@ on_pro_save_clicked (GtkButton *button, gpointer user_data)
 	profile_save (NULL);
 }
 
+enum
+{
+	PROFILE_ERROR,
+	PROFILE_NEW,
+	PROFILE_COPY,
+};
+
+static void
+pro_ask_name (gchar *string, gpointer user_data)
+{
+	Profile *pf;
+	gint action;
+
+	if (!string)
+		return;
+
+	pf = NULL;
+	action = GPOINTER_TO_INT (user_data);
+
+	switch (action)
+	{
+	case PROFILE_NEW:
+		break;
+		
+	case PROFILE_COPY:
+		pf = profile_table_get_profile (NULL);
+		break;
+		
+	case PROFILE_ERROR:
+	default:
+		g_warning ("pro_ask_name: Shouldn't be here");
+		return;
+	}
+
+	profile_add (pf, string, TRUE);
+	g_free (string);
+}
+
 void
 on_pro_new_clicked (GtkButton *button, gpointer user_data)
 {
-	gchar *buf;
+	GtkWidget *d;
 
-	buf = g_strdup ("New");
-	profile_add (NULL, buf, TRUE);
-	g_free (buf);
+	d = gnome_request_dialog (FALSE,
+				  N_("Name of new profile"),
+				  NULL,
+				  15,
+				  pro_ask_name,
+				  GINT_TO_POINTER (PROFILE_NEW),
+				  GTK_WINDOW (tool->main_dialog));
+
+	gnome_dialog_run (GNOME_DIALOG (d));
 }
 
 void
 on_pro_copy_clicked (GtkButton *button, gpointer user_data)
 {
-	Profile *pf;
-	gchar *buf;
+	GtkWidget *d;
 
-	pf = profile_table_get_profile (NULL);
-	buf = g_strdup ("New copy");
-	profile_add (pf, buf, TRUE);
-	g_free (buf);
+	d = gnome_request_dialog (FALSE,
+				  N_("Name of new profile"),
+				  NULL,
+				  15,
+				  pro_ask_name,
+				  GINT_TO_POINTER (PROFILE_COPY),
+				  GTK_WINDOW (tool->main_dialog));
+
+	gnome_dialog_run (GNOME_DIALOG (d));
 }
 
 /* User settings callbacks */

@@ -237,6 +237,16 @@ void
 profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 {	
 	Profile *pf;
+	GtkWidget *d;
+
+	pf = profile_table_get_profile (new_name);
+	if (pf)
+	{
+		d = gnome_error_dialog_parented (N_("Sorry, profile with given name already exists."),
+						 GTK_WINDOW (tool->main_dialog));
+		gnome_dialog_run (GNOME_DIALOG (d));
+		return;
+	}
 	
 	pf = g_new0 (Profile, 1);
 
@@ -244,7 +254,6 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 
 	if (old_pf)
 	{
-		/* FIXME: This sucks! we can simply copy structs, right? */
 		/* Let's make copy of old profile. */
 		
 		pf->home_prefix = g_strdup (old_pf->home_prefix);
@@ -423,7 +432,7 @@ profile_table_del_profile (gchar *name)
 }
 
 Profile *
-profile_table_get_profile (gchar *name)
+profile_table_get_profile (const gchar *name)
 {
 	gchar *buf;
 	Profile *pf;
@@ -440,7 +449,7 @@ profile_table_get_profile (gchar *name)
 }
 
 void
-profile_table_set_selected (gchar *name)
+profile_table_set_selected (const gchar *name)
 {
 	Profile *pf;
 	

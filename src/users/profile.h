@@ -79,7 +79,7 @@ void profile_table_init (void);
 void profile_table_destroy (void);
 void profile_table_add_profile (Profile *pf, gboolean select);
 void profile_table_del_profile (gchar *name);
-Profile *profile_table_get_profile (gchar *name);
-void profile_table_set_selected (gchar *name);
+Profile *profile_table_get_profile (const gchar *name);
+void profile_table_set_selected (const gchar *name);
 
 #endif /* PROFILE_H */
