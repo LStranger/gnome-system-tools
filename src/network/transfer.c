@@ -73,6 +73,7 @@ transfer_string_entry_xml_to_gui (xmlNodePtr root)
 
 		if (node && (s = xml_element_get_content (node)))
 		{
+			g_print ("Transfer string entry xml to gui *%s*\n", s);
 			gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].editable)), s);
 
 			if (transfer_string_entry_table [i].toggle)

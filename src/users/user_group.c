@@ -131,20 +131,6 @@ get_db_node (xmlNodePtr node)
 	return NULL;
 }
 
-gchar *
-my_xml_element_get_content (xmlNodePtr node)
-{
-	gchar *ret;
-
-	ret = xml_element_get_content (node);
-	if (!ret) 
-	{
-		ret = g_new0 (gchar, 1);
-	}
-
-	return ret;
-}
-
 void
 adv_user_settings (xmlNodePtr node, gboolean show)
 {

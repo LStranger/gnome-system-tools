@@ -32,6 +32,55 @@
 
 #include "xml.h"
 
+typedef struct {
+	char *font_name;
+	gint is_basic_14;
+} ps_internal_font;
+
+typedef struct {
+	const gchar *name;
+	const gchar *value;
+} xml_predefined_entities_pairs ;
+
+static const xml_predefined_entities_pairs xst_xml_entities [] = {
+    { "&lt;", "<" },
+    { "&gt;", ">" },
+    { "&apos;", "'" },
+    { "&quot;", "\"" },
+    { "&amp;", "&" }
+};
+
+static gchar *
+xst_xml_unquote (gchar *in)
+{
+	gint i = 0;
+	gint delta = 0;
+	int num = sizeof (xst_xml_entities) / sizeof (xml_predefined_entities_pairs);
+
+	for (; in[i] != 0; i++) {
+		if (in [i] != '&') {
+			in [i - delta] = in [i];
+		} else {
+			gint j = 0;
+			for (; j < num; j++) {
+				const gchar *t1;
+				const gchar *t2;
+				t1 = xst_xml_entities [j].name;
+				t2 = in + i;
+				if (strncmp (t1, t2, strlen (t1) - 1) == 0) {
+					in [i - delta] = *xst_xml_entities [j].value;
+					i += strlen (t1) - 1;
+					break;
+				}
+			}
+			delta += strlen (xst_xml_entities [j].name) - 1;
+		}
+	}
+	in [i-delta] = 0;
+
+	return in;
+}
+
 
 xmlNodePtr
 xml_doc_get_root (xmlDocPtr doc)
@@ -132,8 +181,8 @@ xml_element_get_content (xmlNodePtr node)
 	}
 	else
 		r = g_strdup ("");
-	
-	return (r);
+
+	return xst_xml_unquote (r);
 }
 
 

@@ -404,7 +404,7 @@ connection_new_from_node (xmlNode *node)
 		cxn->name = s;
 	else
 		cxn->name = g_strdup (connection_description_from_type (cxn->type));
-
+		
 	/* Activation */
 	cxn->user = connection_xml_get_boolean (node, "user");
 	cxn->autoboot = connection_xml_get_boolean (node, "auto");

@@ -116,20 +116,20 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 		{
 			switch (i)
 			{
-			 case  0: logindefs.qmail_dir = my_xml_element_get_content (n0); break;
-			 case  1: logindefs.mailbox_dir = my_xml_element_get_content (n0); break;
-			 case  2: logindefs.mailbox_file = my_xml_element_get_content (n0); break;
-			 case  3: logindefs.passwd_max_day_use = my_atoi (my_xml_element_get_content (n0)); break;
-			 case  4: logindefs.passwd_min_day_use = my_atoi (my_xml_element_get_content (n0)); break;
-			 case  5: logindefs.passwd_min_length = my_atoi (my_xml_element_get_content (n0)); break;
-			 case  6: logindefs.passwd_warning_advance_days = my_atoi (my_xml_element_get_content (n0)); break;
-			 case  7: logindefs.new_user_min_id = my_atoi (my_xml_element_get_content (n0)); break;
-			 case  8: logindefs.new_user_max_id = my_atoi (my_xml_element_get_content (n0)); break;
-			 case  9: logindefs.new_group_min_id = my_atoi (my_xml_element_get_content (n0)); break;
-			 case 10: logindefs.new_group_max_id = my_atoi (my_xml_element_get_content (n0)); break;
-			 case 11: logindefs.del_user_additional_command = my_xml_element_get_content (n0); break;
+			 case  0: logindefs.qmail_dir    = xml_element_get_content (n0); break;
+			 case  1: logindefs.mailbox_dir  = xml_element_get_content (n0); break;
+			 case  2: logindefs.mailbox_file = xml_element_get_content (n0); break;
+			 case  3: logindefs.passwd_max_day_use          = my_atoi (xml_element_get_content (n0)); break;
+			 case  4: logindefs.passwd_min_day_use          = my_atoi (xml_element_get_content (n0)); break;
+			 case  5: logindefs.passwd_min_length           = my_atoi (xml_element_get_content (n0)); break;
+			 case  6: logindefs.passwd_warning_advance_days = my_atoi (xml_element_get_content (n0)); break;
+			 case  7: logindefs.new_user_min_id             = my_atoi (xml_element_get_content (n0)); break;
+			 case  8: logindefs.new_user_max_id             = my_atoi (xml_element_get_content (n0)); break;
+			 case  9: logindefs.new_group_min_id            = my_atoi (xml_element_get_content (n0)); break;
+			 case 10: logindefs.new_group_max_id            = my_atoi (xml_element_get_content (n0)); break;
+			 case 11: logindefs.del_user_additional_command = xml_element_get_content (n0); break;
 			 case 12: 
-				tmp = my_xml_element_get_content (n0);
+				tmp = xml_element_get_content (n0);
 				if (! strcmp (tmp, "yes"))
 					logindefs.create_home = TRUE;
 				else
