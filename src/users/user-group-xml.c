@@ -464,7 +464,7 @@ user_update_xml (xmlNodePtr node, UserAccountData *data, gboolean change_passwor
 {
 	gst_xml_set_child_content (node, "login", data->login);
 	gst_xml_set_child_content (node, "uid", data->uid);
-	gst_xml_set_child_content (node, "comment", g_strjoin (",", data->name, data->location, data->work_phone, data->home_phone, NULL));
+	gst_xml_set_child_content (node, "comment", g_strjoin (",", data->name, data->location, data->work_phone, data->home_phone, data->other_info, NULL));
 	gst_xml_set_child_content (node, "gid", data->gid);
 	gst_xml_set_child_content (node, "home", data->home);
 	gst_xml_set_child_content (node, "shell", data->shell);

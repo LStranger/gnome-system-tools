@@ -37,6 +37,7 @@ typedef struct {
 	gchar *location;
 	gchar *work_phone;
 	gchar *home_phone;
+	gchar *other_info;
 		
 	gchar *group;
 	gchar *home;

@@ -218,7 +218,7 @@ user_settings_dialog_close (void)
 		"user_settings_office",
 		"user_settings_wphone",
 		"user_settings_hphone",
-		"user_settings_wphone",
+		"user_settings_other",
 		"user_settings_home",
 		"user_passwd_entry1",
 		"user_passwd_entry2",
@@ -546,6 +546,12 @@ user_update (ug_data *ud)
 	data->location = (gchar *) gtk_entry_get_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "user_settings_office")));
 	data->work_phone = (gchar *) gtk_entry_get_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "user_settings_wphone")));
 	data->home_phone = (gchar *) gtk_entry_get_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "user_settings_hphone")));
+	data->other_info = (gchar *) gtk_entry_get_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "user_settings_other")));
+
+	/* leave NULL if the string has zero length */
+	if (!*data->other_info)
+		data->other_info = NULL;
+	
 	if (!is_comment_valid (data->name, data->location, data->work_phone, data->home_phone)) {
 		return FALSE;
 	}
@@ -660,12 +666,13 @@ user_settings_dialog_prepare_comments (gchar *comments)
 		"user_settings_comment",
 		"user_settings_office",
 		"user_settings_wphone",
-		"user_settings_hphone"
+		"user_settings_hphone",
+		"user_settings_other"
 	};
 	
 	if (!comments)
 		return;
-	buf = g_strsplit (comments, ",", 4);
+	buf = g_strsplit (comments, ",", 5);
 	
 	for (i = 0; buf[i] != NULL; i++) {
 		w0 = gst_dialog_get_widget (tool->main_dialog, widgets[i]);
