@@ -175,6 +175,8 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 static gboolean
 report_finished_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 {
+	g_warning ("report_finish");
+	
 	tool->report_dispatch_pending = FALSE;
 	tool->report_finished = TRUE;
 
@@ -450,6 +452,10 @@ report_window_close_cb (GtkWidget *window, GdkEventAny *ev, gpointer data)
 {
 	XstTool *tool = data;
 
+	/* A hack to force the window to hide. Seems like the widget is
+	 * marked as hidden, while X window doesn't actually do it, so a
+	 * widget_show should set things normally. */
+	gtk_widget_show (tool->report_window);
 	gtk_widget_hide (tool->report_window);
 	return TRUE;
 }
@@ -481,8 +487,8 @@ report_progress (XstTool *tool, const gchar *label)
 		/* This ensures the report_window will be hidden on time.
 		 * I'ts OK for long-lived directives, and short lived shouldn't
 		 * be using the report window anyways. */
-		while (gdk_events_pending ()) {
-			usleep (100);
+		while (gtk_events_pending ()) {
+			usleep (1);
 			gtk_main_iteration ();
 		}
 		sleep (1);
@@ -499,20 +505,17 @@ report_progress (XstTool *tool, const gchar *label)
 	if (tool->input_id)
 		gtk_input_remove (tool->input_id);
 
+#if 0
 	if (!tool->run_again)
 	{
 		/* Set progress to 100% and wait a bit before closing display */
-#if 0
 		gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 1.0);
 
 		cb_id = gtk_timeout_add (1500, (GtkFunction) timeout_cb, tool);
 		gtk_main ();
 		gtk_timeout_remove (cb_id);
-#endif
-		gtk_widget_hide (tool->report_window);
 	}
 
-#if 0
 	gtk_clist_clear (GTK_CLIST (tool->report_list));
 #endif
 }
