@@ -1,7 +1,6 @@
 interfaces = \
 common.glade \
 disks.glade \
-hardware.glade \
 memory.glade \
 nameresolution.glade \
 networking.glade \
@@ -17,8 +16,6 @@ common.glade.in \
 common.glade.h \
 disks.glade.in \
 disks.glade.h \
-hardware.glade.in \
-hardware.glade.h \
 memory.glade.in \
 memory.glade.h \
 nameresolution.glade.in \
