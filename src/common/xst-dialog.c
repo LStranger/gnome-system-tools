@@ -319,8 +319,11 @@ xst_dialog_widget_set_user_mode (XstDialog *xd, const gchar *name, XstWidgetMode
 	g_return_if_fail (xd != NULL);
 
 	xw = xst_dialog_get_xst_widget (xd, name);
-	g_assert (xw);
-
+	
+	if (xw == NULL)
+		g_warning ("Widget %s not found in policy table.", xd);
+	g_return_if_fail (xw != NULL);
+	
 	xst_widget_set_user_mode (xw, mode);
 }
 
