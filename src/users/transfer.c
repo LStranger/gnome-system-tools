@@ -1,0 +1,326 @@
+/* Copyright (C) 2000 Helix Code, Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors: Tambet Ingo <tambeti@sa.ee>.
+ */
+
+/* Functions for transferring information between XML tree and UI */
+
+#include <gnome.h>
+#include <gnome-xml/tree.h>
+#include <gnome-xml/parser.h>
+#include <glade/glade.h>
+#include "global.h"
+
+#include "transfer.h"
+#include "callbacks.h"
+
+GList *user_list = NULL;
+user *current_user = NULL;
+
+GList *group_list = NULL;
+group *current_group = NULL;
+
+_logindefs logindefs;
+
+const gchar *user_list_data_key = "user_list_data";
+const gchar *group_list_data_key = "group_list_data";
+
+/* Prototypes */
+gint user_sort_by_uid (gconstpointer a, gconstpointer b);
+gint user_sort_by_login (gconstpointer a, gconstpointer b);
+gint group_sort_by_name (gconstpointer a, gconstpointer b);
+
+
+static void
+transfer_user_list_xml_to_glist (xmlNodePtr root)
+{
+	xmlNodePtr users_node, node, n0;
+	user *u;
+
+	/* Find userdb */
+	
+	users_node = xml_element_find_first (root, "userdb");
+	if (!users_node)
+		return;
+	
+	for (node = xml_element_find_first (users_node, "user");
+			node;
+		       	node = xml_element_find_next (node, "user"))
+	{
+
+		u = g_new0 (user, 1);
+
+		n0 = xml_element_find_first (node, "key");
+		if (n0) u->key = atoi (xml_element_get_content (n0));
+
+		n0 = xml_element_find_first (node, "login");
+		if (n0) u->login = xml_element_get_content (n0);
+
+		n0 = xml_element_find_first (node, "password");
+		if (n0) u->password = xml_element_get_content (n0);
+
+		n0 = xml_element_find_first (node, "uid");
+		if (n0) u->uid = atoi (xml_element_get_content (n0));
+
+		n0 = xml_element_find_first (node, "gid");
+		if (n0) u->gid = atoi (xml_element_get_content (n0));
+
+				
+		n0 = xml_element_find_first (node, "comment");
+		if (n0) u->comment = xml_element_get_content (n0);
+
+		n0 = xml_element_find_first (node, "home");
+		if (n0) u->home = xml_element_get_content (n0);
+
+		n0 = xml_element_find_first (node, "shell");
+		if (n0) u->shell = xml_element_get_content (n0);
+
+		n0 = xml_element_find_first (node, "last_mod");
+		if (n0) u->last_mod = atoi (xml_element_get_content (n0));
+
+		n0 = xml_element_find_first (node, "passwd_max_life");
+		if (n0) u->passwd_max_life = atoi (xml_element_get_content (n0));
+
+		n0 = xml_element_find_first (node, "passwd_exp_warn");
+		if (n0) u->passwd_exp_warn = atoi (xml_element_get_content (n0));
+		
+		/* FIXME if -1 TRUE
+		n0 = xml_element_find_first (node, "passwd_exp_disable");
+		if (n0) u-> = xml_element_get_content (n0);
+
+		n0 = xml_element_find_first (node, "passwd_disable");
+		if (n0) u->passwd_disable = xml_element_get_content (n0);
+
+		*/
+
+		n0 = xml_element_find_first (node, "reserved");
+		if (n0) u->reserved = atoi (xml_element_get_content (n0));
+
+		n0 = xml_element_find_first (node, "is_shadow");
+		if (n0) u->is_shadow = atoi (xml_element_get_content (n0));
+
+
+
+		user_list = g_list_append (user_list, u);
+	}
+}
+
+
+static void
+transfer_logindefs_from_xml (xmlNodePtr root)
+{
+	xmlNodePtr node, n0;
+
+	/* Find login.defs */
+	
+	node = xml_element_find_first (root, "logindefs");
+	if (!node)
+		return;
+
+	/* make login.defs struct */
+
+	n0 = xml_element_find_first (node, "passwd_max_day_use");
+	if (n0) logindefs.passwd_max_day_use = atoi (xml_element_get_content (n0));
+
+	n0 = xml_element_find_first (node, "new_group_min_id");
+	if (n0) logindefs.new_group_min_id = atoi (xml_element_get_content (n0));
+
+	n0 = xml_element_find_first (node, "passwd_min_length");
+	if (n0) logindefs.passwd_min_length = atoi (xml_element_get_content (n0));
+
+	n0 = xml_element_find_first (node, "new_group_max_id");
+	if (n0) logindefs.new_group_max_id = atoi (xml_element_get_content (n0));
+
+	n0 = xml_element_find_first (node, "new_user_min_id");
+	if (n0) logindefs.new_user_min_id = atoi (xml_element_get_content (n0));
+
+	n0 = xml_element_find_first (node, "passwd_warning_advance_days");
+	if (n0) logindefs.passwd_warning_advance_days = atoi (xml_element_get_content (n0));
+
+	n0 = xml_element_find_first (node, "new_user_max_id");
+	if (n0) logindefs.new_user_max_id = atoi (xml_element_get_content (n0));
+
+	n0 = xml_element_find_first (node, "mailbox_dir");
+	if (n0) logindefs.mailbox_dir = xml_element_get_content (n0);
+
+/*	FIXME yes/no
+ * 	n0 = xml_element_find_first (node, "create_home");
+	if (n0)	logindefs.create_home = xml_element_get_content (n0);
+*/
+
+	n0 = xml_element_find_first (node, "passwd_min_day_use");
+	if (n0) logindefs.passwd_min_day_use = atoi (xml_element_get_content (n0));
+}
+
+static void
+transfer_group_list_xml_to_glist (xmlNodePtr root)
+{
+	xmlNodePtr users_node, node, n0, n1, n2, n3;
+	group *g;
+
+	/* Find groupdb */
+	
+	users_node = xml_element_find_first (root, "groupdb");
+	if (!users_node)
+		return;
+	
+	for (node = xml_element_find_first (users_node, "group");
+			node;
+		       	node = xml_element_find_next (node, "group"))
+	{
+
+		n0 = xml_element_find_first (node, "key");
+		n1 = xml_element_find_first (node, "name");
+		n2 = xml_element_find_first (node, "password");
+		n3 = xml_element_find_first (node, "gid");
+		
+		g = g_new0 (group, 1);
+
+		if (n0)
+			g->key = atoi (xml_element_get_content (n0));
+		
+		if (n1)
+			g->name = g_strdup (xml_element_get_content (n1));
+		
+		if (n2)
+			g->password = g_strdup (xml_element_get_content (n2));
+
+		if (n3)
+			g->gid = atoi (xml_element_get_content (n3));
+
+		group_list = g_list_append (group_list, g);
+	}
+}
+
+
+static void
+transfer_user_list_to_gui (void)
+{
+	GList *u, *rows = NULL;
+	GtkList *list;
+	user *current_u;
+	gint num_rows;
+	GtkWidget *list_item;
+
+	/* Ok, first our users should be sorted by login */
+	user_list = g_list_sort (user_list, user_sort_by_login);
+
+	list = GTK_LIST (tool_widget_get ("user_list"));
+
+	for (u = g_list_first (user_list), num_rows = 0; u; u = g_list_next (u), num_rows++)
+	{
+		current_u = (user *)u->data;
+		list_item = gtk_list_item_new_with_label (current_u->login);
+		gtk_widget_show (list_item);
+		gtk_object_set_data (GTK_OBJECT (list_item), user_list_data_key, current_u);
+		rows = g_list_append (rows, list_item);
+	}
+
+	gtk_list_append_items (list, rows);
+
+	/* Select last item (and make it current) */
+	u = g_list_last (user_list);
+	current_user = (user *)u->data;
+	gtk_list_select_item (list, --num_rows);
+}
+
+static void
+transfer_group_list_to_gui (void)
+{
+	GList *g, *rows = NULL;
+	GtkList *list;
+	group *current_g;
+	gint num_rows;
+	GtkWidget *list_item;
+
+	/* Ok, first our groups should be sorted by name */
+	group_list = g_list_sort (group_list, group_sort_by_name);
+
+	list = GTK_LIST (tool_widget_get ("group_list"));
+
+	for (g = g_list_first (group_list), num_rows = 0; g; g = g_list_next (g), num_rows++)
+	{
+		current_g = (group *)g->data;
+		list_item = gtk_list_item_new_with_label (current_g->name);
+		gtk_widget_show (list_item);
+		gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, current_g);
+		rows = g_list_append (rows, list_item);
+	}
+
+	gtk_list_append_items (list, rows);
+
+	/* Select last item (and make it current) */
+	g = g_list_last (group_list);
+	current_group = (group *)g->data;
+	gtk_list_select_item (list, --num_rows);
+}
+
+
+gint
+user_sort_by_uid (gconstpointer a, gconstpointer b)
+{
+	user *u_a, *u_b;
+
+	u_a = (user *)a;
+	u_b = (user *)b;
+	
+	if (u_a->uid > u_b->uid) return 1;
+	if (u_a->uid == u_b->uid) return 0;
+	
+	return -1;
+}
+
+gint
+user_sort_by_login (gconstpointer a, gconstpointer b)
+{
+	user *u_a, *u_b;
+
+	u_a = (user *)a;
+	u_b = (user *)b;
+	
+	return (strcmp (u_a->login, u_b->login));
+}
+
+gint
+group_sort_by_name (gconstpointer a, gconstpointer b)
+{
+	group *g_a, *g_b;
+
+	g_a = (group *)a;
+	g_b = (group *)b;
+
+	return (strcmp (g_a->name, g_b->name));
+}
+
+
+
+void
+transfer_xml_to_gui (xmlNodePtr root)
+{
+	transfer_logindefs_from_xml (root);
+	transfer_user_list_xml_to_glist (root);
+	transfer_group_list_xml_to_glist (root);
+	
+	transfer_user_list_to_gui ();
+	transfer_group_list_to_gui ();
+	
+}
+
+void
+transfer_gui_to_xml (xmlNodePtr root)
+{
+}
