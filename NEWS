@@ -1,3 +1,61 @@
+The GNOME System Tools version 0.32.0 "99% fat free" have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The GNOME System Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
+
+Changes since last release
+==========================
+
+  General
+  =======
+  - Fixed #131493 (me)
+  - Renamed some GConf keys to use "_" instead of "-" (me)
+  - Added support for PLD Linux 1.1 and 1.99 (Grzegorz Golawski)
+
+  Network
+  =======
+  - Made it to save the gateway too in the profiles (me, Kasper Ronning)
+  - Made it to avoid calling wvdialconf unless you're configuring a PPP iface,
+    so it won't block with buggy wvdial (me)
+  - UI Improvements, added some comments to some fields (me)
+
+  Services
+  ========
+  - now it selects the first runlevel in the entry if there's no default runlevel (me)
+
+  Boot
+  ====
+  - Added a dialog for selecting bootloader if the tool finds more than one that's supported (me)
+
+  ... plus other lots of bugfixing
+
+  Thanks to Grzegorz Golawski for submitting patches
+  Thanks to Kasper Ronning for telling the gateway bug and the solution
+  Thanks to everybody I've forgot to thank
+
+  Translations
+  ============
+  - ca (Aleix Badia i Bosch)
+  - cs (Miloslav Trmac)
+  - da (Ole Laursen)
+  - el (Kostas Papadimas)
+  - es (Francisco Javier F. Serrador)
+  - eu (Eneko Lakuntza)
+  - ga (Alastair McKinstry)
+  - it (Roberto Rosselli Del Turco)
+  - ko (Young-Ho Cha)
+  - lt (≈Ωygimantas Beruƒçka)
+  - nl (Tino Meinen, Kees van den Broek)
+  - no (Kjartan Maraas)
+  - pl (Artur Flinta)
+  - pt (Duarte Loreto)
+  - sr, sr@Latn (Danilo ≈†egan)
+  - zh_CN (Funda Wang)
+
+Downloading
+===========
+You can get it from : ftp://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/0.32/
+
+--------------------------------------------------------------------------------------
 The GNOME System Tools version 0.31.1 "[Insert random thought here]" have been released.
 
 The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The GNOME System Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
@@ -31,7 +89,7 @@ Changes since last release
   - Danish (Ole Laursen)
   - Dutch (Elros Cyriatan)
   - Malay (Hasbullah Bin Pit)
-  - Serbian (Danilo ¶egan)
+  - Serbian (Danilo ≈†egan)
   - Spanish (Francisco Javier F. Serrador)
 
 Downloading
@@ -80,7 +138,7 @@ Changes since last release
   - Dutch (Vincent van Adrighem)
   - Japanese (Takeshi AIHANA)
   - Portuguese (Duarte Loreto)
-  - Serbian (Danilo ¶egan)
+  - Serbian (Danilo ≈†egan)
   - Spanish (Francisco Javier F. Serrador)
 
 Downloading
@@ -129,7 +187,7 @@ Changes since last release
   - Greek (Kostas Papadimas)
   - Malay (Hasbullah Bin Pit)
   - Portuguese (Duarte Loreto)
-  - Serbian (Danilo ¶egan)
+  - Serbian (Danilo ≈†egan)
   - Spanish (Francisco Javier F. Serrador)
   - Swedish (Christian Rose)
 
@@ -285,7 +343,7 @@ Bradford Hovinen <bradford@ximian.com>
 Israel Escalante <israel@ximian.com>
 Jacob Berkman <jacob@ximian.com>
 Carlos Garnacho Parro <garnacho@tuxerver.net>
-Carlos GarcÌa Campos <elkalmail@yahoo.es>
+Carlos Garc√≠a Campos <elkalmail@yahoo.es>
 Christian Neumair <chris@gnome-de.org>
 
 Artists
@@ -453,7 +511,7 @@ Bradford Hovinen <bradford@ximian.com>
 Israel Escalante <israel@ximian.com>
 Jacob Berkman <jacob@ximian.com>
 Carlos Garnacho Parro <garnacho@tuxerver.net>
-Carlos GarcÌa Campos <elkalmail@yahoo.es>
+Carlos Garc√≠a Campos <elkalmail@yahoo.es>
 Christian Neumair <chris@gnome-de.org>
 
 Artists
@@ -625,7 +683,7 @@ Bradford Hovinen <bradford@ximian.com>
 Israel Escalante <israel@ximian.com>
 Jacob Berkman <jacob@ximian.com>
 Carlos Garnacho Parro <garnacho@tuxerver.net>
-Carlos GarcÌa Campos <elkalmail@yahoo.es>
+Carlos Garc√≠a Campos <elkalmail@yahoo.es>
 Christian Neumair <chris@gnome-de.org>
 
 Artists
@@ -649,7 +707,7 @@ Changes since last release
 
   General
   =======
-  - UI Fixes (Carlos GarcÌa)
+  - UI Fixes (Carlos Garc√≠a)
   - Compile fixes under gcc2.95 (Garnacho)
   - Added support to RedHat 9.0 (Garnacho)
   - Added support to Mandrake 9.1 in boot, runlevel, users and time tools (Frej Rasmussen)
@@ -663,7 +721,7 @@ Changes since last release
   - Now the network profiles really work (Garnacho)
 
   
-  ... plus other lots of bugfixing (Garnacho, Carlos GarcÌa)
+  ... plus other lots of bugfixing (Garnacho, Carlos Garc√≠a)
 
 Downloading
 ===========
@@ -778,7 +836,7 @@ Bradford Hovinen <bradford@ximian.com>
 Israel Escalante <israel@ximian.com>
 Jacob Berkman <jacob@ximian.com>
 Carlos Garnacho Parro <garnacho@tuxerver.net>
-Carlos GarcÌa Campos <elkalmail@yahoo.es>
+Carlos Garc√≠a Campos <elkalmail@yahoo.es>
 Christian Neumair <chris@gnome-de.org>
 
 Artists
@@ -809,9 +867,9 @@ Changes since last release
   - Added network profiles support (Garnacho)
 
 
-  ... plus other lots of bugfixing (Garnacho, Carlos GarcÌa)
+  ... plus other lots of bugfixing (Garnacho, Carlos Garc√≠a)
 
-  thanks to Gˆtz Waschk, Ken Stanley, James Livinston and Joseph Wenninger for sending patches
+  thanks to G√∂tz Waschk, Ken Stanley, James Livinston and Joseph Wenninger for sending patches
 
 Downloading
 ===========
@@ -926,7 +984,7 @@ Bradford Hovinen <bradford@ximian.com>
 Israel Escalante <israel@ximian.com>
 Jacob Berkman <jacob@ximian.com>
 Carlos Garnacho Parro <garnacho@tuxerver.net>
-Carlos GarcÌa Campos <elkalmail@yahoo.es>
+Carlos Garc√≠a Campos <elkalmail@yahoo.es>
 Christian Neumair <chris@gnome-de.org>
 
 Artists
@@ -953,15 +1011,15 @@ Changes since last release
   - Added full support for PLD Linux (Grzegorz Golawski)
   - Added support for slackware 8.1 in time and users (Todd Kulesza)
   - s/xst/gst/ in all the code (Christian Neumair)
-  - general UI polishing (Christian Neumair, Carlos GarcÌa, Garnacho)
-  - Added more service descriptions (Eduardo GarcÌa Cebollero)
+  - general UI polishing (Christian Neumair, Carlos Garc√≠a, Garnacho)
+  - Added more service descriptions (Eduardo Garc√≠a Cebollero)
 
   Boot
   ====
-  - Added support for initrd images (Garnacho, Carlos GarcÌa)
-  - Now the root device entry is a combo with a closed set of options depending on the entry type (Carlos GarcÌa)
-  - Added popup menus (Carlos GarcÌa)
-  - UI polishing (Carlos GarcÌa)
+  - Added support for initrd images (Garnacho, Carlos Garc√≠a)
+  - Now the root device entry is a combo with a closed set of options depending on the entry type (Carlos Garc√≠a)
+  - Added popup menus (Carlos Garc√≠a)
+  - UI polishing (Carlos Garc√≠a)
 
   Network
   =======
@@ -978,7 +1036,7 @@ Changes since last release
 
   Users
   =====
-  - Added popup menus (Carlos GarcÌa)
+  - Added popup menus (Carlos Garc√≠a)
 
 
   ...plus other lots of bugfixing
@@ -1096,7 +1154,7 @@ Bradford Hovinen <bradford@ximian.com>
 Israel Escalante <israel@ximian.com>
 Jacob Berkman <jacob@ximian.com>
 Carlos Garnacho Parro <garnacho@tuxerver.net>
-Carlos GarcÌa Campos <elkalmail@yahoo.es>
+Carlos Garc√≠a Campos <elkalmail@yahoo.es>
 Christian Neumair <chris@gnome-de.org>
 
 Artists
@@ -1257,20 +1315,20 @@ Changes since last release
 
   general
   =======
-  - Configuration is now stored in GConf (Carlos GarcÌa, Garnacho)
+  - Configuration is now stored in GConf (Carlos Garc√≠a, Garnacho)
   - Icons now appear in system-settings:/// in nautilus (Garnacho)
   - Now uses VTE terminal widget for authentication (Garnacho)
   - Added RedHat 8 support (Martin Lundberg)
 
   boot
   ====
-  - Added a dialog to edit the kernel parameters that are passed at boot time (Carlos GarcÌa)
-  - HIG-ified gui (Carlos GarcÌa, Garnacho)
+  - Added a dialog to edit the kernel parameters that are passed at boot time (Carlos Garc√≠a)
+  - HIG-ified gui (Carlos Garc√≠a, Garnacho)
 
   network
   =======
   - Added more modem options, such as volume and tones or pulses dialing (Garnacho)
-  - HIG-ified gui (Garnacho, Carlos GarcÌa)
+  - HIG-ified gui (Garnacho, Carlos Garc√≠a)
 
   runlevel
   ========
@@ -1288,7 +1346,7 @@ Changes since last release
   - added search bar again (Garnacho)
   - added user profiles again (Garnacho)
 
-  ...plus other lots of bugfixing (Garnacho, Carlos GarcÌa)
+  ...plus other lots of bugfixing (Garnacho, Carlos Garc√≠a)
 
 
 Downloading
@@ -1434,7 +1492,7 @@ Changes since last release
 - improved UI (Garnacho, Tambet)
 - HIG patially applied (Garnacho)
 - boot-admin autodetects grub or lilo (Garnacho)
-- added Slackware support in time and users (¡lvaro PeÒa)
+- added Slackware support in time and users (√Ålvaro Pe√±a)
 - added Gentoo support in time (Markus Bertheau)
 
 Downloading
