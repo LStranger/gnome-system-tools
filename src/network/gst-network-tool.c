@@ -99,6 +99,7 @@ gst_network_tool_finalize (GObject *object)
   g_object_unref (tool->dns);
   g_object_unref (tool->search);
   g_object_unref (tool->interfaces_model);
+  g_object_unref (tool->gateways_model);
   g_free (tool->dialog);
 
   if (G_OBJECT_CLASS (parent_class)->finalize)
