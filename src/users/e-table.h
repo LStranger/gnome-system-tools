@@ -76,6 +76,7 @@ void current_table_update_row (gint tbl);
 void current_table_new_row (xmlNodePtr node, gint tbl);
 void set_active_table (guint tbl);
 
+gchar *user_value_group (xmlNodePtr user_node);
 
 #endif /* E_TABLE_H */
 

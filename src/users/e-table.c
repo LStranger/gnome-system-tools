@@ -277,26 +277,30 @@ is_editable (ETableModel *etm, int col, int row, void *model_data)
 		   (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED));
 }
 
-static xmlNodePtr
-get_group_by_id (xmlNodePtr user_node)
+gchar *
+user_value_group (xmlNodePtr user_node)
 {
-	/* Dumb funcion, just used in user_value_at, to convert GID to group name.
-	 It's here only because I wanted keep user_value_at short. */
-	gchar *gid;
+	gchar *gid, *buf;
 	xmlNodePtr group_node;
 
 	gid = xst_xml_get_child_content (user_node, "gid");
 	group_node = get_corresp_field (get_db_node (user_node));
 	group_node = get_node_by_data (group_node, "gid", gid);
-
+	if (!group_node)
+		return gid;
+	
+	buf = xst_xml_get_child_content (group_node, "name");
+	if (!buf)
+		return gid;
+	
 	g_free (gid);
-	return (group_node);
+	return buf;
 }
 
 static void *
 user_value_at (ETableModel *etm, int col, int row, void *model_data)
 {
-	xmlNodePtr node, gnode;
+	xmlNodePtr node;
 	gchar *field;
 
 	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
@@ -321,16 +325,7 @@ user_value_at (ETableModel *etm, int col, int row, void *model_data)
 		field = g_strdup ("comment");
 		break;
 	case COL_USER_GROUP:
-		gnode = get_group_by_id (node);
-		if (gnode)
-		{
-			field = g_strdup ("name");
-			node = gnode;
-		}
-
-		else
-			field = g_strdup ("gid");
-
+		return user_value_group (node);
 		break;
 	case COL_USER_COLOR:
 		return get_row_color (etm, row);

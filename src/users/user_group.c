@@ -149,7 +149,13 @@ user_filter (xmlNodePtr node)
 
 	else
 	{
-		buf = xst_xml_get_child_content (node, ar[1]);
+		if (!strcmp (ar[1], "login"))
+			buf = xst_xml_get_child_content (node, ar[1]);
+		else if (!strcmp (ar[1], "gid"))
+			buf = xst_xml_get_child_content (node, ar[1]);
+		else if (!strcmp (ar[1], "group"))
+			buf = user_value_group (node);
+
 		if (buf && strstr (buf, ar[2]))
 			ret = TRUE;
 
