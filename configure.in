@@ -44,6 +44,26 @@ AC_CHECK_LIB(crypt, crypt, ,[
 AC_CHECK_HEADER(crypt.h, ,[
   AC_MSG_ERROR(crypt.h header file not found.)])
 
+dnl Gnome App Lib checking
+AC_MSG_CHECKING(for Gnome App libraries (GAL) >= 0.2.99.2)
+if gnome-config --libs gal > /dev/null 2>&1; then
+	vers=`gnome-config --modversion gal | sed -e "s/gal-//" -e 's/cvs$//' -e 's/pre$//' | \
+		 awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
+	if test "$vers" -ge 29902; then
+		AC_MSG_RESULT(found)
+	 else
+		AC_MSG_ERROR(You need at least GNOME Application libs 0.2.99.2 for this version of helix-setup-tools)
+	fi
+else
+	AC_MSG_ERROR(Did not find GnomeAppLib (GAL) installed)
+fi
+
+GAL_LIBS="`gnome-config --libs gal`"
+GAL_CFLAGS="`gnome-config --cflags gal`"
+
+AC_SUBST(GAL_LIBS)
+AC_SUBST(GAL_CFLAGS)
+
 dnl Add the languages which your application supports here.
 ALL_LINGUAS="da de no es hu it ko pt_BR ru sv pl"
 AM_GNU_GETTEXT
