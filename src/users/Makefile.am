@@ -5,7 +5,6 @@
 ## Please keep the Makefile.am from all the tools in sync
 ##
 
-@XML_I18N_MERGE_DESKTOP_RULE@
 include ../common/CommonMakefile
 
 toolname = users

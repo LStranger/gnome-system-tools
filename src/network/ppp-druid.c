@@ -34,7 +34,8 @@
 
 typedef gchar *(*PppDruidCheckFunc) (PppDruid *);
 
-static GtkWidget *my_get_widget (GladeXML *glade, const gchar *name)
+static GtkWidget *
+my_get_widget (GladeXML *glade, const gchar *name)
 {
 	GtkWidget *w;
 	gchar *s;
@@ -51,7 +52,8 @@ static GtkWidget *my_get_widget (GladeXML *glade, const gchar *name)
 	return w;
 }
 
-static void ppp_druid_connect_signals (PppDruid *ppp, XstDialogSignal *signals)
+static void
+ppp_druid_connect_signals (PppDruid *ppp, XstDialogSignal *signals)
 {
 	gint i;
 
@@ -62,7 +64,8 @@ static void ppp_druid_connect_signals (PppDruid *ppp, XstDialogSignal *signals)
 							 signals[i].signal_name, signals[i].func, ppp);
 }
 
-static void ppp_druid_exit (PppDruid *ppp)
+static void
+ppp_druid_exit (PppDruid *ppp)
 {
 	g_return_if_fail (ppp != NULL);
 
@@ -71,7 +74,8 @@ static void ppp_druid_exit (PppDruid *ppp)
 	gtk_main_quit ();
 }
 
-static gchar *ppp_druid_get_serial_port (PppDruid *ppp)
+static gchar *
+ppp_druid_get_serial_port (PppDruid *ppp)
 {
 	gchar *port;
 	xmlNode *node;
@@ -85,7 +89,8 @@ static gchar *ppp_druid_get_serial_port (PppDruid *ppp)
 	return port;
 }
 
-static void ppp_druid_save (PppDruid *ppp)
+static void
+ppp_druid_save (PppDruid *ppp)
 {
 	xmlNode *root;
 	XstConnection *cxn;
@@ -112,7 +117,8 @@ static void ppp_druid_save (PppDruid *ppp)
 	ppp_druid_exit (ppp);
 }
 
-static GtkWidget *ppp_druid_get_button_next (PppDruid *ppp)
+static GtkWidget *
+ppp_druid_get_button_next (PppDruid *ppp)
 {
 	g_return_val_if_fail (ppp != NULL, NULL);
 	g_return_val_if_fail (ppp->druid != NULL, NULL);
@@ -127,7 +133,8 @@ static GtkWidget *ppp_druid_get_button_next (PppDruid *ppp)
 }
 
 /* If error == NULL, there's no error, and we clear the error message. */
-static void ppp_druid_set_error (PppDruid *ppp, gchar *error)
+static void
+ppp_druid_set_error (PppDruid *ppp, gchar *error)
 {
 	gchar *widget_name;
 	GtkWidget *w;
@@ -155,9 +162,10 @@ static void ppp_druid_set_error (PppDruid *ppp, gchar *error)
 	}
 }
 
-static gchar *ppp_druid_check_phone (PppDruid *ppp)
+static gchar *
+ppp_druid_check_phone (PppDruid *ppp)
 {
-	gchar *phone;
+	const gchar *phone;
 	gchar *valid = "0123456789,";
 	int i, len;
 
@@ -176,14 +184,15 @@ static gchar *ppp_druid_check_phone (PppDruid *ppp)
 	return NULL;
 }
 
-static gchar *ppp_druid_check_login_pass (PppDruid *ppp)
+static gchar *
+ppp_druid_check_login_pass (PppDruid *ppp)
 {
-	gchar *login, *passwd, *passwd2;
+	const gchar *login, *passwd, *passwd2;
 
 	g_return_val_if_fail (ppp != NULL, NULL);
 
-	login = gtk_entry_get_text (GTK_ENTRY (ppp->login));
-	passwd = gtk_entry_get_text (GTK_ENTRY (ppp->passwd));
+	login   = gtk_entry_get_text (GTK_ENTRY (ppp->login));
+	passwd  = gtk_entry_get_text (GTK_ENTRY (ppp->passwd));
 	passwd2 = gtk_entry_get_text (GTK_ENTRY (ppp->passwd2));
 
 	if (strcmp (passwd, passwd2))
@@ -195,9 +204,10 @@ static gchar *ppp_druid_check_login_pass (PppDruid *ppp)
 	return NULL;
 }
 
-static gchar *ppp_druid_check_profile (PppDruid *ppp)
+static gchar *
+ppp_druid_check_profile (PppDruid *ppp)
 {
-	gchar *profile;
+	const gchar *profile;
 	gint i, len;
 
 	g_return_val_if_fail (ppp != NULL, NULL);
@@ -217,12 +227,13 @@ static gchar *ppp_druid_check_profile (PppDruid *ppp)
 	return NULL;
 }
 
-static gchar *ppp_druid_check_last (PppDruid *ppp)
+static gchar *
+ppp_druid_check_last (PppDruid *ppp)
 {
 	GtkWidget *w;
 	gint i;
 	gchar *text;
-	gchar *phone, *login, *passwd, *profile;
+	const gchar *phone, *login, *passwd, *profile;
 	gchar *format =
 _("You are about to create an account named with the following information:\n\n"
   "Account Name: %s\n\n"
@@ -250,7 +261,8 @@ _("You are about to create an account named with the following information:\n\n"
 	return NULL;
 }
 
-static void ppp_druid_check_page (PppDruid *ppp)
+static void
+ppp_druid_check_page (PppDruid *ppp)
 {
 	PppDruidCheckFunc func;
 	PppDruidCheckFunc checks[] = {
@@ -270,21 +282,24 @@ static void ppp_druid_check_page (PppDruid *ppp)
 		ppp_druid_set_error (ppp, (func) (ppp));
 }
 
-static void ppp_druid_on_window_delete_event (GtkWidget *w, gpointer data)
+static void
+ppp_druid_on_window_delete_event (GtkWidget *w, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
 	ppp_druid_exit (ppp);
 }
 
-static void ppp_druid_on_druid_cancel (GtkWidget *w, gpointer data)
+static void
+ppp_druid_on_druid_cancel (GtkWidget *w, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
 	ppp_druid_exit (ppp);
 }
 
-static gboolean ppp_druid_on_page_next (GtkWidget *w, gpointer arg1, gpointer data)
+static gboolean
+ppp_druid_on_page_next (GtkWidget *w, gpointer arg1, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
@@ -293,7 +308,8 @@ static gboolean ppp_druid_on_page_next (GtkWidget *w, gpointer arg1, gpointer da
 	return FALSE;
 }
 
-static gboolean ppp_druid_on_page_back (GtkWidget *w, gpointer arg1, gpointer data)
+static gboolean
+ppp_druid_on_page_back (GtkWidget *w, gpointer arg1, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
@@ -302,7 +318,8 @@ static gboolean ppp_druid_on_page_back (GtkWidget *w, gpointer arg1, gpointer da
 	return FALSE;
 }
 
-static void ppp_druid_on_page_prepare (GtkWidget *w, gpointer arg1, gpointer data)
+static void
+ppp_druid_on_page_prepare (GtkWidget *w, gpointer arg1, gpointer data)
 {
 	gchar *next_focus[] = {
 		NULL, "phone", "login", "profile", NULL
@@ -318,21 +335,24 @@ static void ppp_druid_on_page_prepare (GtkWidget *w, gpointer arg1, gpointer dat
 		gtk_widget_grab_focus (ppp_druid_get_button_next (ppp));
 }
 
-static void ppp_druid_on_page_last_finish (GtkWidget *w, gpointer arg1, gpointer data)
+static void
+ppp_druid_on_page_last_finish (GtkWidget *w, gpointer arg1, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
 	ppp_druid_save (ppp);
 }
 
-static void ppp_druid_on_entry_changed (GtkWidget *w, gpointer data)
+static void
+ppp_druid_on_entry_changed (GtkWidget *w, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
 	ppp_druid_check_page (ppp);
 }
 
-static void ppp_druid_on_entry_activate (GtkWidget *w, gpointer data)
+static void
+ppp_druid_on_entry_activate (GtkWidget *w, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
@@ -340,21 +360,24 @@ static void ppp_druid_on_entry_activate (GtkWidget *w, gpointer data)
 		gtk_widget_grab_focus (ppp_druid_get_button_next (ppp));
 }
 
-static void ppp_druid_on_login_activate (GtkWidget *w, gpointer data)
+static void
+ppp_druid_on_login_activate (GtkWidget *w, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
 	gtk_widget_grab_focus (ppp->passwd);
 }
 
-static void ppp_druid_on_passwd_activate (GtkWidget *w, gpointer data)
+static void
+ppp_druid_on_passwd_activate (GtkWidget *w, gpointer data)
 {
 	PppDruid *ppp = (PppDruid *) data;
 
 	gtk_widget_grab_focus (ppp->passwd2);
 }
 
-extern PppDruid *ppp_druid_new (XstTool *tool)
+extern PppDruid *
+ppp_druid_new (XstTool *tool)
 {
 	PppDruid *ppp;
 	XstDialogSignal signals[] = {
@@ -410,14 +433,16 @@ extern PppDruid *ppp_druid_new (XstTool *tool)
 	return ppp;
 }	
 
-extern void ppp_druid_show (PppDruid *ppp)
+extern void
+ppp_druid_show (PppDruid *ppp)
 {
 	g_return_if_fail (ppp != NULL);
 	
 	gtk_widget_show_all (ppp->win);
 }
 
-void ppp_druid_gui_to_xml(XstTool *tool, gpointer data)
+void
+ppp_druid_gui_to_xml(XstTool *tool, gpointer data)
 {
 	PppDruid *ppp = data;
 	xmlNode *root = xst_xml_doc_get_root (tool->config);

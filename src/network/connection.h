@@ -23,7 +23,6 @@
 #ifndef CONNECTION_H
 #define CONNECTION_H
 
-#include <tree.h>
 #include <glade/glade.h>
 #include <gtk/gtkwidget.h>
 

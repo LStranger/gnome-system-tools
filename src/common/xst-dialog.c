@@ -26,6 +26,7 @@
 #include "xst-widget.h"
 #include "xst-dialog.h"
 #include "xst-conf.h"
+#include "xst-marshal.h"
 
 #ifdef XST_DEBUG
 /* define to x for debugging output */
@@ -211,6 +212,27 @@ xst_dialog_class_init (XstDialogClass *klass)
 	object_class = (GtkObjectClass *)klass;
 	parent_class = gtk_type_class (GNOME_TYPE_APP);
 
+#if 1	
+	xstdialog_signals[APPLY] = 
+		g_signal_new ("apply",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (XstDialogClass, apply),
+			      NULL, NULL,
+			      xst_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+	
+	xstdialog_signals[COMPLEXITY_CHANGE] =
+		g_signal_new ("complexity_chang",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (XstDialogClass, complexity_change),
+			      NULL, NULL,
+			      xst_marshal_VOID__VOID,
+			      G_TYPE_NONE,
+			      0);
+#else	
 	xstdialog_signals[APPLY] = 
 		gtk_signal_new ("apply",
 				GTK_RUN_LAST,
@@ -226,6 +248,7 @@ xst_dialog_class_init (XstDialogClass *klass)
 				GTK_SIGNAL_OFFSET (XstDialogClass, complexity_change),
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
+#endif	
 
 
 	gtk_object_class_add_signals (object_class, xstdialog_signals, LAST_SIGNAL);
@@ -553,22 +576,22 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	i = gnome_stock_pixmap_widget (w, GNOME_STOCK_PIXMAP_HELP);
 	gtk_widget_show (i);
 	gtk_container_add (GTK_CONTAINER (w), i);
-	gtk_signal_connect (GTK_OBJECT (w), "clicked", help_cb, dialog);
+	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (help_cb), dialog);
 	/* FIXME: help button hidden until the help files are ready. */
 	gtk_widget_hide (w);
 
 	w = glade_xml_get_widget (xml, "complexity");
-	gtk_signal_connect (GTK_OBJECT (w), "clicked", complexity_cb, dialog);
+	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (complexity_cb), dialog);
 
 	dialog->complexity_button = w;
 
 	w = glade_xml_get_widget (xml, "apply");
-	gtk_signal_connect (GTK_OBJECT (w), "clicked", apply_cb, dialog);
+	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (apply_cb), dialog);
 
 	dialog->apply_button = w;
 
 	w = glade_xml_get_widget (xml, "close");
-	gtk_signal_connect (GTK_OBJECT (w), "clicked", close_cb, dialog);
+	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (close_cb), dialog);
 	
 	xst_dialog_set_modified (dialog, FALSE);
 	gtk_widget_hide (dialog->complexity_button);
@@ -580,7 +603,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 
 	xst_dialog_set_complexity (dialog, val);
 
-	gtk_signal_connect (GTK_OBJECT (dialog), "delete_event", dialog_delete_event_cb, dialog);
+	g_signal_connect (GTK_OBJECT (dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
 
 }
 

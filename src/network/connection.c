@@ -387,6 +387,12 @@ connection_set_modified (XstConnection *cxn, gboolean state)
 	cxn->modified = state;
 }
 
+static gint
+determine_row_height (void)
+{
+	return 10;
+}
+
 static void
 load_icon (GtkWidget *clist, const gchar *file, GdkPixmap **pixmap, GdkBitmap **mask)
 {
@@ -397,10 +403,10 @@ load_icon (GtkWidget *clist, const gchar *file, GdkPixmap **pixmap, GdkBitmap **
 	guchar *data;
 
 	style = gtk_widget_get_style (clist);
-	height = (guint) ((style->font->ascent + style->font->descent) * 2);
+	height = determine_row_height ();
 
 	path = g_concat_dir_and_file (PIXMAPS_DIR, file);
-	pb = gdk_pixbuf_new_from_file (path);
+	pb = gdk_pixbuf_new_from_file (path, NULL);
 
 	if (!pb) {
 		g_warning ("Could not load pixmap %s\n", path);
@@ -450,8 +456,7 @@ connection_init_clist (GtkWidget *clist)
 	
 	gtk_clist_set_compare_func (GTK_CLIST (clist), connection_clist_cmp);
 	style = gtk_widget_get_style (clist);
-	gtk_clist_set_row_height (GTK_CLIST (clist), (guint) ((style->font->ascent +
-	style->font->descent) * 2));
+	gtk_clist_set_row_height (GTK_CLIST (clist), determine_row_height ());
 	gtk_clist_column_titles_passive (GTK_CLIST (clist));
 }
 
@@ -889,11 +894,14 @@ connection_add_to_list_do (XstConnection *cxn, GtkWidget *clist)
 
 	style = gtk_widget_get_style (clist);
 	gtk_clist_set_shift (GTK_CLIST (clist), row, 0,
-			     (guint) ((style->font->ascent + style->font->descent) / 2), 0);
+			     determine_row_height (),
+			     determine_row_height ());
 	gtk_clist_set_shift (GTK_CLIST (clist), row, 1,
-			     (guint) ((style->font->ascent + style->font->descent) / 2), 0);
+			     determine_row_height (),
+			     determine_row_height ());
 	gtk_clist_set_shift (GTK_CLIST (clist), row, 2,
-			     (guint) ((style->font->ascent + style->font->descent) / 2), 0);
+			     determine_row_height (),
+			     determine_row_height ());
 
 	connection_default_gw_add (cxn);
 	connection_update_row_enabled (cxn, cxn->enabled);
@@ -1864,7 +1872,7 @@ connection_configure (XstConnection *cxn)
 	cxn->frozen = TRUE;
 
 	s = g_concat_dir_and_file (INTERFACES_DIR, "network.glade");
-	cxn->xml = glade_xml_new (s, "connection_config_dialog");
+	cxn->xml = glade_xml_new (s, "connection_config_dialog", NULL);
 
 	g_assert (cxn->xml);
 	g_free (s);

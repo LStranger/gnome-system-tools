@@ -30,6 +30,7 @@
 #include "xst-ui.h"
 #include "xst-su.h"
 #include "xst-xml.h"
+#include "xst-marshal.h"
 
 #ifdef XST_HAVE_ARCHIVER
 #  include <bonobo.h>
@@ -137,9 +138,9 @@ platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
 
 	g_assert (tool->current_platform);
 
-	gtk_signal_disconnect_by_func (GTK_OBJECT (tool->platform_dialog),
-				       platform_dialog_close_cb,
-				       tool);
+	g_signal_handlers_disconnect_by_func (G_OBJECT (tool->platform_dialog),
+					      platform_dialog_close_cb,
+					      tool);
 }
 
 static gboolean
@@ -577,14 +578,14 @@ xst_tool_run_platform_dialog (XstTool *tool)
 
 	tool->platform_selected_row = -1;
 
-	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "select-row",
-			    platform_list_select_row_cb, tool);
-	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "unselect-row",
-			    platform_list_unselect_row_cb, tool);
-	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "clicked",
-			    platform_unsupported_clicked_cb, tool);
-	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "close",
-			    platform_dialog_close_cb, tool);
+	g_signal_connect (G_OBJECT (tool->platform_list), "select-row",
+			  G_CALLBACK (platform_list_select_row_cb), tool);
+	g_signal_connect (G_OBJECT (tool->platform_list), "unselect-row",
+			  G_CALLBACK (platform_list_unselect_row_cb), tool);
+	g_signal_connect (G_OBJECT (tool->platform_dialog), "clicked",
+			  G_CALLBACK (platform_unsupported_clicked_cb), tool);
+	g_signal_connect (G_OBJECT (tool->platform_dialog), "close",
+			  G_CALLBACK (platform_dialog_close_cb), tool);
 
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
 
@@ -1190,6 +1191,32 @@ xst_tool_class_init (XstToolClass *klass)
 
 	parent_class = gtk_type_class (GTK_TYPE_OBJECT);
 
+#if 1
+	xsttool_signals[FILL_GUI] = 
+		g_signal_new ("fill_gui",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (XstToolClass, fill_gui),
+			      NULL, NULL,
+			      xst_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+	xsttool_signals[FILL_XML] = 
+		g_signal_new ("fill_xml",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (XstToolClass, fill_xml),
+			      NULL, NULL,
+			      xst_marshal_VOID__VOID,
+			      G_TYPE_NONE, 0);
+	xsttool_signals[CLOSE] = 
+		g_signal_new ("close",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (XstToolClass, close),
+			      NULL, NULL,
+			      xst_marshal_VOID__VOID,
+			      GTK_TYPE_NONE, 0);
+#else	
 	xsttool_signals[FILL_GUI] = 
 		gtk_signal_new ("fill_gui",
 				GTK_RUN_LAST,
@@ -1213,6 +1240,7 @@ xst_tool_class_init (XstToolClass *klass)
 				GTK_SIGNAL_OFFSET (XstToolClass, close),
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
+#endif	
 
 	gtk_object_class_add_signals (object_class, xsttool_signals, LAST_SIGNAL);
 

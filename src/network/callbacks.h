@@ -22,7 +22,7 @@
 #define __CALLBACKS_H__
 
 #include <gnome.h>
-#include <tree.h>
+#include "xst-xml.h"
 
 typedef enum {
 	EF_ALLOW_NONE  = 0,

@@ -1,11 +1,12 @@
 AC_INIT(ximian-setup-tools, 0.99.0, http://bugzilla.gnome.org/enter_bug.cgi?product=Ximian%20Setup%20Tools)
-
-AM_CONFIG_HEADER(config.h)
+AC_CONFIG_SRCDIR(src/common/xst-tool.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
-AM_MAINTAINER_MODE
+AM_CONFIG_HEADER(config.h)
 
-GNOME_COMMON_INIT
+AM_MAINTAINER_MODE
+AC_PROG_INTLTOOL
+
 GNOME_PLATFORM_GNOME_2(yes, force)
 
 dnl Checking the above
@@ -176,7 +177,6 @@ AC_CONFIG_SUBDIRS(backend)
 AC_OUTPUT([
 Makefile
 ximian-setup-tools.spec
-intl/Makefile
 interfaces/Makefile
 pixmaps/Makefile
 src/Makefile

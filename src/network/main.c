@@ -25,8 +25,6 @@
 #endif
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
 #include <glade/glade.h>
 
 #include "xst.h"

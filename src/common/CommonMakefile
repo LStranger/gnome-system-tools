@@ -3,6 +3,9 @@ desktop = $(toolname).desktop
 $(desktop).in: %.desktop.in: %.desktop.in.in
 	sed s#Icon=.*#Icon=$(pixmapsdir)/$(toolname).png# < $< > $(toolname).desktop.in
 
+$(desktop): %.desktop: %.desktop.in
+		../../intltool-merge -d ../../po $(desktop).in $(desktop)
+
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
 	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/gnome/apps/Settings/System/$(desktop)
