@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools 0.1.0\n"
 "POT-Creation-Date: 2000-11-08 16:38-0600\n"
-"PO-Revision-Date: 2000-12-13 17:31+01:00\n"
+"PO-Revision-Date: 2000-12-18 17:31+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr "Montér denne partition"
 msgid "Open settings dialog for selected import"
 msgstr "Åbn dialogen indstillinger for valgt import"
 
-#: interfaces/disks.glade.h:21 interfaces/nameresolution.glade.h:40
+#: interfaces/disks.glade.h:21 interfaces/nameresolution.glade.h:41
 #: interfaces/shares.glade.h:20 interfaces/shares.glade.h:34
 #: interfaces/shares.glade.h:39 interfaces/shares.glade.h:45
 #: interfaces/users.glade.h:14 interfaces/users.glade.h:21
@@ -123,7 +123,7 @@ msgstr "Diske og partitioner"
 
 #. Translation: respect the spaces before and after, and the minus than signs.
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
-#: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:15
+#: interfaces/nameresolution.glade.h:43 interfaces/networking.glade.h:15
 #: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
 #: interfaces/users.glade.h:23 src/common/tool.c:618
 msgid " Advanced >> "
@@ -235,19 +235,19 @@ msgid "New server:"
 msgstr "Ny server:"
 
 #: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
-#: interfaces/nameresolution.glade.h:48
+#: interfaces/nameresolution.glade.h:49
 msgid "Existing:"
 msgstr "Eksisterende:"
 
 #: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:27
-#: interfaces/nameresolution.glade.h:46 interfaces/shares.glade.h:32
+#: interfaces/nameresolution.glade.h:47 interfaces/shares.glade.h:32
 #: interfaces/shares.glade.h:40 interfaces/shares.glade.h:43
 #: interfaces/time.glade.h:13
 msgid "Add"
 msgstr "Tilføj"
 
 #: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:28
-#: interfaces/nameresolution.glade.h:37 interfaces/nameresolution.glade.h:47
+#: interfaces/nameresolution.glade.h:38 interfaces/nameresolution.glade.h:48
 #: interfaces/users.glade.h:10 interfaces/users.glade.h:18
 msgid "Delete"
 msgstr "Slet"
@@ -277,42 +277,51 @@ msgid "Search Domains"
 msgstr "Søgedomæner"
 
 #: interfaces/nameresolution.glade.h:34
+msgid ""
+"Assign aliases to IP addresses that may not be registered in the DNS or WINS "
+"servers, or to override or set new names for commonly used IP addresses. "
+msgstr ""
+"Tildel aliaser til IP-adresser som ikke kan registreres i DNS eller WINS "
+"servere, eller for at overskrive eller sætte nye navne for ofte brugte IP-adresser. "
+
+#: interfaces/nameresolution.glade.h:35
 msgid "IP address"
 msgstr "IP-adresse"
 
-#: interfaces/nameresolution.glade.h:35
-msgid "Names"
-msgstr "Navne"
-
 #: interfaces/nameresolution.glade.h:36
+msgid " Names"
+msgstr " Navne"
+
+#: interfaces/nameresolution.glade.h:37
 msgid "New Alias"
 msgstr "Nyt alias"
 
-#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:255
+#: interfaces/nameresolution.glade.h:39 src/nameresolution/callbacks.c:339
+#: src/nameresolution/callbacks.c:382
 msgid "Settings for the selected alias"
 msgstr "Indstillinger for valgt alias"
 
-#: interfaces/nameresolution.glade.h:39
+#: interfaces/nameresolution.glade.h:40
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "Ændr aliasens IP-adresse eller dens tilsvarende navne."
 
-#: interfaces/nameresolution.glade.h:41 interfaces/nameresolution.glade.h:45
+#: interfaces/nameresolution.glade.h:42 interfaces/nameresolution.glade.h:46
 msgid "Aliases"
 msgstr "Aliaser"
 
-#: interfaces/nameresolution.glade.h:43
+#: interfaces/nameresolution.glade.h:44
 msgid "Aliases Settings"
 msgstr "Aliasindstillinger"
 
-#: interfaces/nameresolution.glade.h:44
+#: interfaces/nameresolution.glade.h:45
 msgid "IP address:"
 msgstr "IP-adresse:"
 
-#: interfaces/nameresolution.glade.h:49
+#: interfaces/nameresolution.glade.h:50
 msgid "New:"
 msgstr "Ny:"
 
-#: interfaces/nameresolution.glade.h:50
+#: interfaces/nameresolution.glade.h:51
 msgid "label48"
 msgstr "etiket48"
 
@@ -809,7 +818,7 @@ msgstr "Du er nødt til at angive sti til nyt swap-sted!"
 msgid "It's already used as swap space!"
 msgstr "Det er allerede brugt som swap-sted!"
 
-#: src/nameresolution/callbacks.c:62
+#: src/nameresolution/callbacks.c:114
 msgid ""
 "The IP address must have the form of four digits\n"
 "sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
@@ -819,17 +828,30 @@ msgstr ""
 "adskilt af et punktum (.), disse tal skal være mellem 0 og 255,\n"
 "undtagen det første og det sidste, som skal være mellem 1 og 254."
 
-#: src/nameresolution/callbacks.c:241
+#: src/nameresolution/callbacks.c:200
+msgid ""
+"The domain may only contain letters, numbers and dots (.),\n"
+"wich may work as sub-domain separators."
+msgstr ""
+"Domænet kan kun indeholde bogstaver, cifre og punktummer (.),\n"
+"som kan bruges som adskillelse mellem underdæmæner."
+
+#: src/nameresolution/callbacks.c:326
 msgid "Settings for alias of "
 msgstr "Indstillinger for alias for "
 
-#: src/nameresolution/callbacks.c:302
+#: src/nameresolution/callbacks.c:371
+#, c-format
+msgid "Are you sure you want to delete the aliases for %s?"
+msgstr "Er du sikker på at du vil slette aliaset for %s?"
+
+#: src/nameresolution/callbacks.c:405
 #, c-format
 msgid "Settings for Alias %s"
 msgstr "Indstillinger for alias %s "
 
 #. Changes have been made.
-#: src/nameresolution/callbacks.c:414 src/users/callbacks.c:691
+#: src/nameresolution/callbacks.c:556 src/users/callbacks.c:691
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
