@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools\n"
-"POT-Creation-Date: 2000-11-28 11:57+0100\n"
-"PO-Revision-Date: 2000-11-28 01:31+0100\n"
+"POT-Creation-Date: 2000-12-03 14:47+0100\n"
+"PO-Revision-Date: 2000-12-03 15:00+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -117,8 +117,8 @@ msgstr "Diskar och partitioner"
 
 #. Translation: respect the spaces before and after, and the minus than signs.
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
-#: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:24
-#: interfaces/shares.glade.h:47 interfaces/time.glade.h:48
+#: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:15
+#: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
 #: interfaces/users.glade.h:23 src/common/tool.c:504
 msgid " Advanced >> "
 msgstr " Avancerat >> "
@@ -140,26 +140,34 @@ msgid "Mount point:"
 msgstr "Monteringspunkt:"
 
 #: interfaces/disks.glade.h:29
-msgid ""
-"Automatic (detect when mounting)\n"
-"Ext2 (Linux)\n"
-"FAT (DOS)\n"
-"VFAT (Windows 95 and newer)\n"
-"FAT32 (Windows 98 and newer)\n"
-"NTFS (Windows NT & 2000)\n"
-msgstr ""
-"Automatisk (upptäck vid montering)\n"
-"Ext2 (Linux)\n"
-"FAT (DOS)\n"
-"VFAT (Windows 95 och nyare)\n"
-"FAT32 (Windows 98 och nyare)\n"
-"NTFS (Windows NT och 2000)\n"
+msgid "Automatic (detect when mounting)"
+msgstr "Automatisk (upptäck vid montering)"
 
-#: interfaces/disks.glade.h:36 interfaces/shares.glade.h:58
+#: interfaces/disks.glade.h:30
+msgid "Ext2 (Linux)"
+msgstr "Ext2 (Linux)"
+
+#: interfaces/disks.glade.h:31
+msgid "FAT (DOS)"
+msgstr "FAT (DOS)"
+
+#: interfaces/disks.glade.h:32
+msgid "VFAT (Windows 95 and newer)"
+msgstr "VFAT (Windows 95 och nyare)"
+
+#: interfaces/disks.glade.h:33
+msgid "FAT32 (Windows 98 and newer)"
+msgstr "FAT32 (Windows 98 och nyare)"
+
+#: interfaces/disks.glade.h:34
+msgid "NTFS (Windows NT & 2000)"
+msgstr "NTFS (Windows NT och 2000)"
+
+#: interfaces/disks.glade.h:35 interfaces/shares.glade.h:57
 msgid "Choose a mount point"
 msgstr "Välj en monteringspunkt"
 
-#: interfaces/disks.glade.h:37
+#: interfaces/disks.glade.h:36
 msgid "Check for errors on startup"
 msgstr "Kontrollera fel vid uppstart"
 
@@ -216,28 +224,28 @@ msgstr "Identifiering"
 msgid "Domain Name Service (DNS)"
 msgstr "Domännamnstjänst (DNS)"
 
-#: interfaces/nameresolution.glade.h:21 interfaces/nameresolution.glade.h:27
-#: interfaces/nameresolution.glade.h:46 interfaces/shares.glade.h:32
-#: interfaces/shares.glade.h:40 interfaces/shares.glade.h:43
-#: interfaces/time.glade.h:45
-msgid "Add"
-msgstr "Lägg till"
-
-#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:28
-#: interfaces/nameresolution.glade.h:37 interfaces/nameresolution.glade.h:47
-#: interfaces/users.glade.h:10 interfaces/users.glade.h:18
-msgid "Delete"
-msgstr "Ta bort"
-
-#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:31
+#: interfaces/nameresolution.glade.h:21 interfaces/nameresolution.glade.h:31
 #: interfaces/nameresolution.glade.h:50
 msgid "New:"
 msgstr "Ny:"
 
-#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:32
+#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
 #: interfaces/nameresolution.glade.h:49
 msgid "Existing:"
 msgstr "Existerande:"
+
+#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:27
+#: interfaces/nameresolution.glade.h:46 interfaces/shares.glade.h:32
+#: interfaces/shares.glade.h:40 interfaces/shares.glade.h:43
+#: interfaces/time.glade.h:13
+msgid "Add"
+msgstr "Lägg till"
+
+#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:28
+#: interfaces/nameresolution.glade.h:37 interfaces/nameresolution.glade.h:47
+#: interfaces/users.glade.h:10 interfaces/users.glade.h:18
+msgid "Delete"
+msgstr "Ta bort"
 
 #: interfaces/nameresolution.glade.h:25
 msgid "Use WINS server:"
@@ -271,9 +279,9 @@ msgstr "Namn"
 msgid "New Alias"
 msgstr "Nytt alias"
 
-#: interfaces/nameresolution.glade.h:38
-msgid "Settings for the selected IP address"
-msgstr "Inställningar för den markerade IP-adressen"
+#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:207
+msgid "Settings for the selected alias"
+msgstr "Inställningar för det markerade aliaset"
 
 #: interfaces/nameresolution.glade.h:39
 msgid "Change the alias' IP address or its corresponding names."
@@ -308,35 +316,27 @@ msgstr "Nätverksadministration"
 msgid "Interface:"
 msgstr "Gränssnitt:"
 
-#: interfaces/networking.glade.h:9 interfaces/networking.glade.h:10
-#: interfaces/networking.glade.h:11 interfaces/networking.glade.h:15
-#: interfaces/networking.glade.h:16 interfaces/networking.glade.h:17
-#: interfaces/networking.glade.h:18 interfaces/networking.glade.h:19
-#: interfaces/networking.glade.h:20
-msgid "."
-msgstr "."
-
-#: interfaces/networking.glade.h:12
+#: interfaces/networking.glade.h:9
 msgid "Gateway IP:"
 msgstr "Gateway-IP:"
 
-#: interfaces/networking.glade.h:13
+#: interfaces/networking.glade.h:10
 msgid "Netmask:"
 msgstr "Nätmask:"
 
-#: interfaces/networking.glade.h:14
+#: interfaces/networking.glade.h:11
 msgid "Host IP:"
 msgstr "Värd-IP:"
 
-#: interfaces/networking.glade.h:21
+#: interfaces/networking.glade.h:12
 msgid "Use DHCP server"
 msgstr "Använd DHCP-server"
 
-#: interfaces/networking.glade.h:22
+#: interfaces/networking.glade.h:13
 msgid "Enable automatically at boot"
 msgstr "Aktivera automatiskt vid uppstart"
 
-#: interfaces/networking.glade.h:23
+#: interfaces/networking.glade.h:14
 msgid "Primary networking"
 msgstr "Primärt nätverk"
 
@@ -398,15 +398,15 @@ msgstr "Sökväg"
 msgid "Enabled"
 msgstr "Aktiverad"
 
-#: interfaces/shares.glade.h:26 interfaces/shares.glade.h:63
+#: interfaces/shares.glade.h:26 interfaces/shares.glade.h:62
 msgid "Browseable"
 msgstr "Bläddringsbar"
 
-#: interfaces/shares.glade.h:27 interfaces/shares.glade.h:64
+#: interfaces/shares.glade.h:27 interfaces/shares.glade.h:63
 msgid "Public"
 msgstr "Publik"
 
-#: interfaces/shares.glade.h:28 interfaces/shares.glade.h:65
+#: interfaces/shares.glade.h:28 interfaces/shares.glade.h:64
 msgid "Writable"
 msgstr "Skrivbar"
 
@@ -464,42 +464,42 @@ msgid "Password:"
 msgstr "Lösenord:"
 
 #: interfaces/shares.glade.h:55
-msgid ""
-"SMB\n"
-"NFS\n"
-msgstr ""
-"SMB\n"
-"NFS\n"
+msgid "SMB"
+msgstr "SMB"
 
-#: interfaces/shares.glade.h:59
+#: interfaces/shares.glade.h:56
+msgid "NFS"
+msgstr "NFS"
+
+#: interfaces/shares.glade.h:58
 msgid "SMB Export Settings"
 msgstr "Inställningar för SMB-export"
 
-#: interfaces/shares.glade.h:60 interfaces/shares.glade.h:67
+#: interfaces/shares.glade.h:59 interfaces/shares.glade.h:66
 msgid "Local path:"
 msgstr "Lokal sökväg:"
 
-#: interfaces/shares.glade.h:61
+#: interfaces/shares.glade.h:60
 msgid "Export name:"
 msgstr "Exportnamn:"
 
-#: interfaces/shares.glade.h:62 interfaces/users.glade.h:27
+#: interfaces/shares.glade.h:61 interfaces/users.glade.h:27
 msgid "Comment:"
 msgstr "Kommentar:"
 
-#: interfaces/shares.glade.h:66
+#: interfaces/shares.glade.h:65
 msgid "NFS Export Settings"
 msgstr "Inställningar för NFS-export"
 
-#: interfaces/shares.glade.h:68
+#: interfaces/shares.glade.h:67
 msgid "NFS Client Settings"
 msgstr "NFS-klientinställningar"
 
-#: interfaces/shares.glade.h:69
+#: interfaces/shares.glade.h:68
 msgid "Client pattern:"
 msgstr "Klientmönster:"
 
-#: interfaces/shares.glade.h:70
+#: interfaces/shares.glade.h:69
 msgid "Allow writing from these clients"
 msgstr "Tillåt skrivning från dessa klienter"
 
@@ -525,84 +525,14 @@ msgid "Date/time"
 msgstr "Datum/tid"
 
 #: interfaces/time.glade.h:12
-msgid ""
-"(GMT -1100) Midway Island, Samoa\n"
-"(GMT -1000) Hawaii\n"
-"(GMT -0900) Alaska\n"
-"(GMT -0800) Pacific Time (US & Canada); Tijuana\n"
-"(GMT -0700) Arizona\n"
-"(GMT -0600) Central Time (US & Canada); Mexico City, Tegucigalpa, "
-"Saskatchewan\n"
-"(GMT -0500) Eastern Time (US & Canada); Bogota, Lima, Quito\n"
-"(GMT -0400) Atlantic Time (Canada); Caracas, La Paz, Santiago\n"
-"(GMT -0345) Guyana\n"
-"(GMT -0300) Brazil\n"
-"(GMT -0200) Mid-Atlantic\n"
-"(GMT -0100) Azores, Cape Verde Islands\n"
-"(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lisbon, London\n"
-"(GMT +0100) Amsterdam, Berlin, Bern, Rome, Oslo, Vienna\n"
-"(GMT +0200) Athens, Istanbul, Minsk, Bucharest, Cairo\n"
-"(GMT +0300) Baghdad, Kuwait, Moscow, Volgograd\n"
-"(GMT +0330) Tehran\n"
-"(GMT +0400) Abu Dhabi, Muscat, Baku, Tblisi\n"
-"(GMT +0430) Kabul\n"
-"(GMT +0500) Ekaterinburg, Islamabad, Karachi\n"
-"(GMT +0530) Bombay, Calcutta, Madras, New Delhi\n"
-"(GMT +0600) Astana, Almaty, Dhaka, Colombo\n"
-"(GMT +0630) Rangoon, Kuala Lumpur\n"
-"(GMT +0700) Bangkok, Hanoi, Jakarta\n"
-"(GMT +0800) Singapore, Taipei\n"
-"(GMT +0900) Seoul, Yakutsk\n"
-"(GMT +0930) Adelaide, Darwin\n"
-"(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok\n"
-"(GMT +1100) Magadan, Solomon Islands, New Caledonia\n"
-"(GMT +1200) Auckland, Wellington, Fiji, Kamchatka\n"
-msgstr ""
-"(GMT -1100) Midwayön, Samoa\n"
-"(GMT -1000) Hawaii\n"
-"(GMT -0900) Alaska\n"
-"(GMT -0800) Stillahavstid (USA och Kanada); Tijuana\n"
-"(GMT -0700) Arizona\n"
-"(GMT -0600) Central tid (USA och Kanada); Mexico City, Tegucigalpa, "
-"Saskatchewan\n"
-"(GMT -0500) Östlig tid (USA och Kanada); Bogotá, Lima, Quito\n"
-"(GMT -0400) Atlanttid (Kanada); Caracas, La Paz, Santiago\n"
-"(GMT -0345) Guyana\n"
-"(GMT -0300) Brasilien\n"
-"(GMT -0200) Mellanatlanten\n"
-"(GMT -0100) Azorerna, Kap Verde-öarna\n"
-"(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lissabon, London\n"
-"(GMT +0100) Amsterdam, Berlin, Bern, Rom, Oslo, Stockholm, Wien\n"
-"(GMT +0200) Aten, Helsingfors, Istanbul, Minsk, Bukarest, Kairo\n"
-"(GMT +0300) Bagdad, Kuwait, Moskva, Volgograd\n"
-"(GMT +0330) Teheran\n"
-"(GMT +0400) Abu Dhabi, Muscat, Baku, Tbilisi\n"
-"(GMT +0430) Kabul\n"
-"(GMT +0500) Jekaterinburg, Islamabad, Karachi\n"
-"(GMT +0530) Bombay, Calcutta, Madras, New Delhi\n"
-"(GMT +0600) Astana, Alma-Ata, Dhaka, Colombo\n"
-"(GMT +0630) Rangoon, Kuala Lumpur\n"
-"(GMT +0700) Bangkok, Hanoi, Jakarta\n"
-"(GMT +0800) Singapore, Taipei\n"
-"(GMT +0900) Söul, Jakutsk\n"
-"(GMT +0930) Adelaide, Darwin\n"
-"(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok\n"
-"(GMT +1100) Magadan, Solomonöarna, Nya Kaledonien\n"
-"(GMT +1200) Auckland, Wellington, Fiji, Kamtjatka\n"
-
-#: interfaces/time.glade.h:43
-msgid "(GMT -1000) Hawaii"
-msgstr "(GMT -1000) Hawaii"
-
-#: interfaces/time.glade.h:44
 msgid "Time zone"
 msgstr "Tidszon"
 
-#: interfaces/time.glade.h:46
+#: interfaces/time.glade.h:14
 msgid "Keep clock in sync with selected servers"
 msgstr "Håll klockan synkroniserad med markerade servrar"
 
-#: interfaces/time.glade.h:47
+#: interfaces/time.glade.h:15
 msgid "Time servers"
 msgstr "Tidsservrar"
 
@@ -628,7 +558,7 @@ msgstr ""
 msgid "New User"
 msgstr "Ny användare"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:206
+#: interfaces/users.glade.h:11 src/users/callbacks.c:227
 msgid "Settings for the selected user"
 msgstr "Inställningar för den markerade användaren"
 
@@ -765,55 +695,55 @@ msgstr "Inställningar..."
 msgid "Available partitions:"
 msgstr "Tillgängliga partitioner:"
 
-#: interfaces/memory.glade.h:23 interfaces/memory.glade.h:34
+#: interfaces/memory.glade.h:23 interfaces/memory.glade.h:33
 msgid "Size:"
 msgstr "Storlek:"
 
 #: interfaces/memory.glade.h:24
-msgid ""
-"Swap Partition\n"
-"Swap File\n"
-msgstr ""
-"Växlingspartition\n"
-"Växlingsfil\n"
+msgid "Swap Partition"
+msgstr "Växlingspartition"
 
-#: interfaces/memory.glade.h:27
+#: interfaces/memory.glade.h:25
+msgid "Swap File"
+msgstr "Växlingsfil"
+
+#: interfaces/memory.glade.h:26
 msgid "Megabytes"
 msgstr "megabyte"
 
-#: interfaces/memory.glade.h:28 interfaces/memory.glade.h:32
+#: interfaces/memory.glade.h:27 interfaces/memory.glade.h:31
 msgid "Enable this swap space"
 msgstr "Aktivera detta växlingsutrymme"
 
-#: interfaces/memory.glade.h:29
+#: interfaces/memory.glade.h:28
 msgid "Use non-default priority:"
 msgstr "Använd prioritet som är icke-standard:"
 
-#: interfaces/memory.glade.h:30
+#: interfaces/memory.glade.h:29
 msgid "Browse..."
 msgstr "Bläddra..."
 
-#: interfaces/memory.glade.h:31
+#: interfaces/memory.glade.h:30
 msgid "Swap device"
 msgstr "Växlingsenhet"
 
-#: interfaces/memory.glade.h:33
+#: interfaces/memory.glade.h:32
 msgid "Use non-default priority"
 msgstr "Använd prioritet som är icke-standard"
 
-#: interfaces/memory.glade.h:35
+#: interfaces/memory.glade.h:34
 msgid "Mb"
 msgstr "MB"
 
-#: interfaces/memory.glade.h:36
+#: interfaces/memory.glade.h:35
 msgid "Select  Swap File"
 msgstr "Välj växlingsfil"
 
-#: interfaces/memory.glade.h:37
+#: interfaces/memory.glade.h:36
 msgid "OK"
 msgstr "OK"
 
-#: interfaces/memory.glade.h:38
+#: interfaces/memory.glade.h:37
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -849,7 +779,7 @@ msgstr "Du måste ange sökvägen till det nya växlingsutrymmet!"
 msgid "It's already used as swap space!"
 msgstr "Det används redan som växlingsutrymme!"
 
-#: src/nameresolution/callbacks.c:109
+#: src/nameresolution/callbacks.c:57
 msgid ""
 "The IP address must have the form of four digits\n"
 "sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
@@ -859,46 +789,50 @@ msgstr ""
 "Dessa tal måste vara i intervallet 0 till 255\n"
 "förutom det första och sista, som måste vara i intervallet 1 till 254."
 
-#: src/users/callbacks.c:123
+#: src/nameresolution/callbacks.c:193
+msgid "Settings for alias of "
+msgstr "Inställningar för aliaset "
+
+#: src/users/callbacks.c:142
 #, c-format
 msgid "Settings for User %s"
 msgstr "Inställningar för användaren %s"
 
-#: src/users/callbacks.c:142
+#: src/users/callbacks.c:160
 #, c-format
 msgid "Password for User %s"
 msgstr "Lösenord för användaren %s"
 
-#: src/users/callbacks.c:186
+#: src/users/callbacks.c:207
 msgid "The root user must not be deleted."
-msgstr "Du får inte ta bort användaren root."
+msgstr "Användaren root får inte tas bort."
 
-#: src/users/callbacks.c:193
+#: src/users/callbacks.c:214
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/callbacks.c:236
+#: src/users/callbacks.c:256
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
 
-#: src/users/callbacks.c:255
+#: src/users/callbacks.c:275
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/callbacks.c:282
+#: src/users/callbacks.c:301
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/callbacks.c:405
+#: src/users/callbacks.c:421
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "Lösenordet sattes till \"%s\"."
 
 #. Bad confirmation
-#: src/users/callbacks.c:443
+#: src/users/callbacks.c:456
 msgid ""
 "The password and its confirmation\n"
 "must match."
@@ -907,7 +841,7 @@ msgstr ""
 "måste stämma överens."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:449
+#: src/users/callbacks.c:462
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -917,7 +851,7 @@ msgstr ""
 "Var vänlig och försök med ett nytt lösenord."
 
 #. Changes have been made.
-#: src/users/callbacks.c:615
+#: src/users/callbacks.c:627
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
@@ -925,22 +859,22 @@ msgstr ""
 "Det finns ändringar som inte har verkställts än.\n"
 "Verkställ nu?"
 
-#: src/users/user_group.c:135
+#: src/users/user_group.c:55
 msgid "Username is empty."
 msgstr "Användarnamnet är tomt."
 
-#: src/users/user_group.c:152
+#: src/users/user_group.c:72
 #, c-format
 msgid "User %s already exists."
 msgstr "Användaren %s finns redan."
 
-#: src/users/user_group.c:167
+#: src/users/user_group.c:87
 msgid "Please set a valid username, using only lower-case letters."
 msgstr ""
 "Var vänlig och ange ett giltigt användarnamn som bara består av små "
 "bokstäver."
 
-#: src/users/user_group.c:200
+#: src/users/user_group.c:120
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from the pull-down menu."
@@ -948,24 +882,127 @@ msgstr ""
 "Var vänlig och ange ett giltigt gruppnamn med endast små bokstäver,\n"
 "eller välj ett från rullgardinsmenyn."
 
-#: src/users/user_group.c:277
+#: src/users/user_group.c:176
 msgid "The username is empty."
 msgstr "Användarnamnet är tomt."
 
-#: src/users/user_group.c:452
+#: src/users/user_group.c:307
 msgid "The group name is empty."
 msgstr "Gruppnamnet är tomt."
 
-#: src/users/user_group.c:469
+#: src/users/user_group.c:324
 #, c-format
 msgid "Group %s already exists."
 msgstr "Gruppen %s finns redan."
 
-#: src/users/user_group.c:485
+#: src/users/user_group.c:340
 msgid "Please set a valid group name, with only lower-case letters."
 msgstr ""
 "Var vänlig och ställ in ett giltigt gruppnamn, med endast små bokstäver."
 
-#: src/users/user_group.c:539
+#: src/users/user_group.c:382
 msgid "Group name is empty."
 msgstr "Gruppnamnet är tomt."
+
+#~ msgid ""
+#~ "Automatic (detect when mounting)\n"
+#~ "Ext2 (Linux)\n"
+#~ "FAT (DOS)\n"
+#~ "VFAT (Windows 95 and newer)\n"
+#~ "FAT32 (Windows 98 and newer)\n"
+#~ "NTFS (Windows NT & 2000)\n"
+#~ msgstr ""
+#~ "Automatisk (upptäck vid montering)\n"
+#~ "Ext2 (Linux)\n"
+#~ "FAT (DOS)\n"
+#~ "VFAT (Windows 95 och nyare)\n"
+#~ "FAT32 (Windows 98 och nyare)\n"
+#~ "NTFS (Windows NT och 2000)\n"
+
+#~ msgid "Settings for the selected IP address"
+#~ msgstr "Inställningar för den markerade IP-adressen"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid ""
+#~ "SMB\n"
+#~ "NFS\n"
+#~ msgstr ""
+#~ "SMB\n"
+#~ "NFS\n"
+
+#~ msgid ""
+#~ "(GMT -1100) Midway Island, Samoa\n"
+#~ "(GMT -1000) Hawaii\n"
+#~ "(GMT -0900) Alaska\n"
+#~ "(GMT -0800) Pacific Time (US & Canada); Tijuana\n"
+#~ "(GMT -0700) Arizona\n"
+#~ "(GMT -0600) Central Time (US & Canada); Mexico City, Tegucigalpa, "
+#~ "Saskatchewan\n"
+#~ "(GMT -0500) Eastern Time (US & Canada); Bogota, Lima, Quito\n"
+#~ "(GMT -0400) Atlantic Time (Canada); Caracas, La Paz, Santiago\n"
+#~ "(GMT -0345) Guyana\n"
+#~ "(GMT -0300) Brazil\n"
+#~ "(GMT -0200) Mid-Atlantic\n"
+#~ "(GMT -0100) Azores, Cape Verde Islands\n"
+#~ "(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lisbon, London\n"
+#~ "(GMT +0100) Amsterdam, Berlin, Bern, Rome, Oslo, Vienna\n"
+#~ "(GMT +0200) Athens, Istanbul, Minsk, Bucharest, Cairo\n"
+#~ "(GMT +0300) Baghdad, Kuwait, Moscow, Volgograd\n"
+#~ "(GMT +0330) Tehran\n"
+#~ "(GMT +0400) Abu Dhabi, Muscat, Baku, Tblisi\n"
+#~ "(GMT +0430) Kabul\n"
+#~ "(GMT +0500) Ekaterinburg, Islamabad, Karachi\n"
+#~ "(GMT +0530) Bombay, Calcutta, Madras, New Delhi\n"
+#~ "(GMT +0600) Astana, Almaty, Dhaka, Colombo\n"
+#~ "(GMT +0630) Rangoon, Kuala Lumpur\n"
+#~ "(GMT +0700) Bangkok, Hanoi, Jakarta\n"
+#~ "(GMT +0800) Singapore, Taipei\n"
+#~ "(GMT +0900) Seoul, Yakutsk\n"
+#~ "(GMT +0930) Adelaide, Darwin\n"
+#~ "(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok\n"
+#~ "(GMT +1100) Magadan, Solomon Islands, New Caledonia\n"
+#~ "(GMT +1200) Auckland, Wellington, Fiji, Kamchatka\n"
+#~ msgstr ""
+#~ "(GMT -1100) Midwayön, Samoa\n"
+#~ "(GMT -1000) Hawaii\n"
+#~ "(GMT -0900) Alaska\n"
+#~ "(GMT -0800) Stillahavstid (USA och Kanada); Tijuana\n"
+#~ "(GMT -0700) Arizona\n"
+#~ "(GMT -0600) Central tid (USA och Kanada); Mexico City, Tegucigalpa, "
+#~ "Saskatchewan\n"
+#~ "(GMT -0500) Östlig tid (USA och Kanada); Bogotá, Lima, Quito\n"
+#~ "(GMT -0400) Atlanttid (Kanada); Caracas, La Paz, Santiago\n"
+#~ "(GMT -0345) Guyana\n"
+#~ "(GMT -0300) Brasilien\n"
+#~ "(GMT -0200) Mellanatlanten\n"
+#~ "(GMT -0100) Azorerna, Kap Verde-öarna\n"
+#~ "(GMT) Casablanca, Monrovia, Dublin, Edinburgh, Lissabon, London\n"
+#~ "(GMT +0100) Amsterdam, Berlin, Bern, Rom, Oslo, Stockholm, Wien\n"
+#~ "(GMT +0200) Aten, Helsingfors, Istanbul, Minsk, Bukarest, Kairo\n"
+#~ "(GMT +0300) Bagdad, Kuwait, Moskva, Volgograd\n"
+#~ "(GMT +0330) Teheran\n"
+#~ "(GMT +0400) Abu Dhabi, Muscat, Baku, Tbilisi\n"
+#~ "(GMT +0430) Kabul\n"
+#~ "(GMT +0500) Jekaterinburg, Islamabad, Karachi\n"
+#~ "(GMT +0530) Bombay, Calcutta, Madras, New Delhi\n"
+#~ "(GMT +0600) Astana, Alma-Ata, Dhaka, Colombo\n"
+#~ "(GMT +0630) Rangoon, Kuala Lumpur\n"
+#~ "(GMT +0700) Bangkok, Hanoi, Jakarta\n"
+#~ "(GMT +0800) Singapore, Taipei\n"
+#~ "(GMT +0900) Söul, Jakutsk\n"
+#~ "(GMT +0930) Adelaide, Darwin\n"
+#~ "(GMT +1000) Brisbane, Canberra, Melbourne, Sydney, Vladivostok\n"
+#~ "(GMT +1100) Magadan, Solomonöarna, Nya Kaledonien\n"
+#~ "(GMT +1200) Auckland, Wellington, Fiji, Kamtjatka\n"
+
+#~ msgid "(GMT -1000) Hawaii"
+#~ msgstr "(GMT -1000) Hawaii"
+
+#~ msgid ""
+#~ "Swap Partition\n"
+#~ "Swap File\n"
+#~ msgstr ""
+#~ "Växlingspartition\n"
+#~ "Växlingsfil\n"
