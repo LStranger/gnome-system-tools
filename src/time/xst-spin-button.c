@@ -30,6 +30,7 @@
 
 /* Modified by the XST team. If the adjustment is set to NULL
  * the spin button will crash in several places
+ * added a spin_up and a spin_down signal
  */
    
 #include <stdio.h>
@@ -50,6 +51,12 @@
 #define EPSILON                            1e-5
 
 enum {
+  SPIN_UP,
+  SPIN_DOWN,
+  LAST_SIGNAL
+};
+
+enum {
   ARG_0,
   ARG_ADJUSTMENT,
   ARG_CLIMB_RATE,
@@ -62,6 +69,8 @@ enum {
   ARG_VALUE
 };
 
+static gint xstspinbutton_signals [LAST_SIGNAL] = { 0 };
+static GtkEntryClass *parent_class = NULL;
 
 static void xst_spin_button_class_init     (XstSpinButtonClass *klass);
 static void xst_spin_button_init           (XstSpinButton      *spin_button);
@@ -118,8 +127,6 @@ static void xst_spin_button_real_spin      (XstSpinButton      *spin_button,
 					    gfloat              step);
 
 
-static GtkEntryClass *parent_class = NULL;
-
 
 GtkType
 xst_spin_button_get_type (void)
@@ -158,6 +165,24 @@ xst_spin_button_class_init (XstSpinButtonClass *class)
 
   parent_class = gtk_type_class (GTK_TYPE_ENTRY);
 
+  xstspinbutton_signals [SPIN_UP] = 
+		gtk_signal_new ("spin_up",
+				GTK_RUN_LAST,
+				object_class->type,
+				GTK_SIGNAL_OFFSET (XstSpinButtonClass, spin_up),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE, 0);
+  xstspinbutton_signals [SPIN_DOWN] = 
+		gtk_signal_new ("spin_down",
+				GTK_RUN_LAST,
+				object_class->type,
+				GTK_SIGNAL_OFFSET (XstSpinButtonClass, spin_down),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE, 0);
+  gtk_object_class_add_signals (object_class,
+						  xstspinbutton_signals,
+						  LAST_SIGNAL);
+  
   gtk_object_add_arg_type ("XstSpinButton::adjustment",
 			   GTK_TYPE_ADJUSTMENT,
 			   GTK_ARG_READWRITE,
@@ -781,10 +806,10 @@ xst_spin_button_button_press (GtkWidget      *widget,
   else
     return FALSE;
 
-#if 0	
-  xst_spin_button_real_spin (spin, 
-					    spin->adjustment->step_increment);
-#endif
+  if (up)
+    gtk_signal_emit (GTK_OBJECT (spin), xstspinbutton_signals[SPIN_UP]);
+  else
+    gtk_signal_emit (GTK_OBJECT (spin), xstspinbutton_signals[SPIN_DOWN]);
   
   if (!spin->timer)
   {
@@ -912,21 +937,12 @@ xst_spin_button_timer (XstSpinButton *spin_button)
   
   GDK_THREADS_ENTER ();
 
-#if 0	
-  g_print ("Button timer ..\n");
-#endif	
-  
   if (spin_button->timer)
   {
     if (spin_button->click_child == GTK_ARROW_UP)
-	 ;
-#if 0	
-	 g_print ("Up ..\n");
-#endif	
+	 gtk_signal_emit (GTK_OBJECT (spin_button), xstspinbutton_signals[SPIN_UP]);
     else
-#if 0
-	 g_print ("Down ..\n");
-#endif	
+	 gtk_signal_emit (GTK_OBJECT (spin_button), xstspinbutton_signals[SPIN_DOWN]);
     
     if (spin_button->need_timer)
     {
@@ -1001,9 +1017,6 @@ xst_spin_button_key_press (GtkWidget     *widget,
 
       if (GTK_WIDGET_HAS_FOCUS (widget))
 	{
-#if 0	
-	  g_print ("Here here\n");
-#endif	
 	  return FALSE;
 	  
 	  gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), 
@@ -1088,9 +1101,6 @@ xst_spin_button_key_press (GtkWidget     *widget,
       break;
     }
 
-#if 0	
-  g_print ("Call paretn->key_press_event\n");
-#endif	
   return GTK_WIDGET_CLASS (parent_class)->key_press_event (widget, event);
 }
 
@@ -1148,9 +1158,6 @@ xst_spin_button_update (XstSpinButton *spin_button)
   val = strtod (gtk_entry_get_text (GTK_ENTRY (spin_button)), &error);
 
   if (!spin_button->adjustment) {
-#if 0	
-    g_print ("dont update ..\n");
-#endif
     return;
   }
   
@@ -1298,9 +1305,6 @@ xst_spin_button_real_spin (XstSpinButton *spin_button,
   g_return_if_fail (spin_button != NULL);
   g_return_if_fail (XST_IS_SPIN_BUTTON (spin_button));
 
-#if 0	
-  g_print ("Real Spin !!!!!!!!! 1\n");
-#endif	
   return;
   
   adj = spin_button->adjustment;

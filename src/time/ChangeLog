@@ -1,3 +1,22 @@
+2001-05-22  Chema Celorio  <chema@celorio.com>
+
+	* main.c (xst_time_update_date): when the clock loops
+	we now update the day,month and year when necesary.
+
+2001-05-21  Chema Celorio  <chema@celorio.com>
+
+	* main.c (xst_time_spin_up): ok, the code is a lot better now.
+	Removed g_print's
+	(xst_time_spin_up):  Implement, use signals.
+	(xst_time_spin_down): ditto
+	(xst_time_spin): ditto
+	(xst_time_spin_button_create): implement.
+
+	* xst-spin-button.c : added spin_up and spin_down
+	signals. Cleaned the code a bit.
+	(xst_spin_button_timer): here
+	(xst_spin_button_button_press): and here
+
 2001-05-21  Chema Celorio  <chema@celorio.com>
 
 	* main.c (xst_time_init_timezone): avoid a coredump

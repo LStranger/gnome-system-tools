@@ -22,16 +22,6 @@ struct _XstTimeTool {
 	gint sec;
 	gint min;
 	gint hrs;
-
-#if 0	
-	gint delta_sec;
-	gint delta_min;
-	gint delta_hrs;
-#endif	
-
-	gboolean editing_sec;
-	gboolean editing_min;
-	gboolean editing_hrs;
 };
 
 struct _XstTimeToolClass {

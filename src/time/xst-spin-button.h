@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+/* -*- Mode: C; tab-width: 5; indent-tabs-mode: t; c-basic-offset: 2 -*- */
 /* GTK - The GIMP Toolkit
  * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
@@ -12,7 +12,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Library General Public License for more details.
  *
  * You should have received a copy of the GNU Library General Public
@@ -96,6 +96,9 @@ struct _XstSpinButton
 struct _XstSpinButtonClass
 {
   GtkEntryClass parent_class;
+
+  void (*spin_up)   (XstSpinButton *spin);
+  void (*spin_down) (XstSpinButton *spin);	
 };
 
 GtkType		xst_spin_button_get_type	   (void);
