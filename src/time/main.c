@@ -257,6 +257,11 @@ xst_time_update (XstTimeTool *tool)
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->seconds), (gfloat) tool->sec);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->minutes), (gfloat) tool->min);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->hours), (gfloat) tool->hrs);
+	
+	/* we add the 0 if the number is <= 9, it's more pretty */
+	gtk_entry_set_text (GTK_ENTRY (tool->seconds), g_strdup_printf ("%02d", tool->sec));
+	gtk_entry_set_text (GTK_ENTRY (tool->minutes), g_strdup_printf ("%02d", tool->min));
+	gtk_entry_set_text (GTK_ENTRY (tool->hours), g_strdup_printf ("%02d", tool->hrs));
 }
 
 static gboolean
@@ -274,17 +279,10 @@ xst_time_clock_tick (gpointer time_tool)
 	tt = time (NULL);
 	tm = localtime (&tt);
 
-	if (tm->tm_sec != tool->sec) {
-		gint delta;
-		delta = tm->tm_sec - tool->sec;
-		if (delta < 0)
-			delta += 60;
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->seconds), (gfloat) delta);
-	}
-
+	xst_time_set_full (time_tool, tm);
 	xst_dialog_thaw (xst_tool->main_dialog);
 	tool->ticking = FALSE;
-	
+
 	return TRUE;
 }
 
@@ -376,7 +374,7 @@ server_construct_dialog (XstDialog *dialog)
 					      GTK_STOCK_CLOSE,
 					      GTK_RESPONSE_CLOSE, NULL);
 
-	gtk_widget_set_usize (GTK_WIDGET (d), 350, 320);
+	gtk_widget_set_usize (GTK_WIDGET (d), 550, 400);
 
 	content = xst_dialog_get_widget (dialog, "server_dialog_content");
 
@@ -655,11 +653,17 @@ void
 xst_time_set_full (XstTimeTool *time_tool, struct tm *tm)
 {
 	GtkWidget *calendar_widget;
+	gint day, month, year;
 
 	calendar_widget = xst_dialog_get_widget (XST_TOOL (time_tool)->main_dialog, "calendar");
+	
+	gtk_calendar_get_date (GTK_CALENDAR (calendar_widget), &year, &month, &day);
+	year -= 1900;
 
-	gtk_calendar_select_month (GTK_CALENDAR (calendar_widget), tm->tm_mon, tm->tm_year + 1900);
-	gtk_calendar_select_day   (GTK_CALENDAR (calendar_widget), tm->tm_mday);
+	if ( (tm->tm_year != year) || (tm->tm_mon != month))
+		gtk_calendar_select_month (GTK_CALENDAR (calendar_widget), tm->tm_mon, tm->tm_year + 1900);
+	if (tm->tm_mday != day)
+		gtk_calendar_select_day   (GTK_CALENDAR (calendar_widget), tm->tm_mday);
 
 	time_tool->hrs = tm->tm_hour;
 	time_tool->min = tm->tm_min;
