@@ -63,7 +63,7 @@ on_boot_add_clicked (GtkButton *button, gpointer data)
 static void
 on_boot_help_button_clicked (GtkWidget *widget, gpointer data)
 {
-	gst_tool_show_help (tool, NULL);
+	gst_tool_show_help (tool, "tool-modifying-entries");
 }
 
 static gboolean

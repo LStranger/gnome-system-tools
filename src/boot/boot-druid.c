@@ -98,7 +98,7 @@ druid_cancel (GtkWidget *w, gpointer data)
 static void
 druid_help (GtkWidget *widget, gpointer data)
 {
-	gst_tool_show_help (tool, NULL);
+	gst_tool_show_help (tool, "tool-adding-entries");
 }
 
 static void
