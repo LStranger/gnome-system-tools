@@ -173,11 +173,11 @@ toggle_service (GstTool *tool, xmlNodePtr service, gint runlevel, gboolean statu
 
 /* callbacks */
 static void
-callbacks_set_buttons_sensitive ()
+callbacks_set_buttons_sensitive (gboolean enabled)
 {
 	GtkWidget *settings_button = gst_dialog_get_widget (tool->main_dialog, "settings_button");
 
-	gtk_widget_set_sensitive (settings_button, TRUE);
+	gtk_widget_set_sensitive (settings_button, enabled);
 }
 
 static void
@@ -191,31 +191,25 @@ callbacks_description_changed (xmlNodePtr service)
 }
 
 void
-on_runlevel_table_clicked (GtkTreeView *treeview, gpointer data)
+on_services_table_select_row (GtkTreeSelection *selection, gpointer data)
 {
 	GtkTreeModel *model;
 	GtkTreePath *path;
 	GtkTreeIter iter;
-	GtkTreeViewColumn *column;
 	xmlNodePtr service;
 
-	g_return_if_fail (GTK_IS_TREE_VIEW (treeview));
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		callbacks_set_buttons_sensitive (TRUE);
 
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (treeview), &path, &column);
-	model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
-	gtk_tree_model_get_iter (model, &iter, path);
-	
-	/* get the xmlNodePtr */
-	gtk_tree_model_get (model, &iter, COL_POINTER, &service, -1);
+		/* get the xmlNodePtr */
+		gtk_tree_model_get (model, &iter, COL_POINTER, &service, -1);
 
-	/* Change the description label */
-	callbacks_description_changed (service);
+		/* Change the description label */
+		callbacks_description_changed (service);
 
-	/* we also want to show the service description in the window */
-	callbacks_set_buttons_sensitive (); 
-
-	/* free the variables */
-	gtk_tree_path_free (path);
+	} else {
+		callbacks_set_buttons_sensitive (FALSE);
+	}
 }
 
 void
@@ -271,15 +265,17 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	/* we need these to get the xmlNodePtr */
 	GtkTreeView *runlevel_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
 	GtkTreeModel *model = gtk_tree_view_get_model (runlevel_table);
-	GtkTreePath *path;
 	GtkTreeIter iter;
+	GtkTreeSelection *selection;
 	xmlNodePtr service;
 	
 	gchar *description, *script, *title;
 	gint priority;
 
-	gtk_tree_view_get_cursor (runlevel_table, &path, NULL);
-	gtk_tree_model_get_iter (model, &iter, path);
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (runlevel_table));
+	
+	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
+		return;
 
 	/* get the xmlNodePtr */
 	gtk_tree_model_get (model, &iter, COL_POINTER, &service, -1);
@@ -357,4 +353,40 @@ on_service_toggled (GtkWidget *widget, gchar *path_str, gpointer data)
 	gst_dialog_modify (tool->main_dialog);
 
 	gtk_tree_path_free (path);
+}
+
+void
+on_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_settings_button_clicked (widget, callback_data);
+}
+
+gboolean
+on_table_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer data)
+{
+	GtkTreePath *path;
+	GtkItemFactory *item_factory;
+	GtkTreeView *treeview = GTK_TREE_VIEW (widget);
+
+	item_factory = (GtkItemFactory *) data;
+
+	if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_BASIC)
+		return;
+
+	if (event->button == 3) {
+		gtk_widget_grab_focus (widget);
+
+		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
+		{
+			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
+			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
+
+			gtk_item_factory_popup (item_factory, event->x_root, event->y_root,
+						event->button, event->time);
+		}
+
+		return TRUE;
+	}
+
+	return FALSE;
 }

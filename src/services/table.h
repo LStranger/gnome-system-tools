@@ -33,6 +33,10 @@ enum {
 	COL_LAST
 };
 
+enum {
+	POPUP_SETTINGS
+};
+
 void			table_create				(void);
 void			table_populate				(xmlNodePtr, gint);
 void                    table_empty                             (void);

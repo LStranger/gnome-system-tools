@@ -28,7 +28,7 @@
 #include <gnome.h>
 
 void		on_main_dialog_update_complexity	(GtkWidget*,   gpointer);
-void		on_runlevel_table_clicked		(GtkTreeView*, gpointer);
+void		on_services_table_select_row		(GtkTreeSelection*, gpointer);
 void		on_description_button_clicked		(GtkWidget*,   gpointer);
 void		on_settings_button_clicked		(GtkWidget*,   gpointer);
 void            on_menu_item_activate                   (GtkWidget*,   gpointer);
@@ -36,5 +36,7 @@ void            on_throw_service_button_clicked         (GtkWidget*,   gpointer)
 void            on_service_priority_changed             (GtkWidget*,   gpointer);
 void            on_runlevel_changed                     (GtkWidget*,   gpointer);
 void            on_service_toggled                      (GtkWidget*,   gchar*, gpointer);
+void            on_popup_settings_activate              (gpointer, guint, GtkWidget*);
+gboolean        on_table_button_press_event             (GtkWidget*, GdkEventButton*, gpointer);
 
 #endif /* CALLBACKS_H */

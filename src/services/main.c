@@ -40,7 +40,6 @@
 GstTool *tool;
 
 static GstDialogSignal signals [] = {
-	{ "runlevel_table", "cursor-changed", G_CALLBACK (on_runlevel_table_clicked) },
 	{ "settings_button", "clicked", G_CALLBACK (on_settings_button_clicked) },
 	{ "dialog_throw_button", "clicked", G_CALLBACK (on_throw_service_button_clicked) },
 	{ "dialog_service_priority", "value-changed", G_CALLBACK (on_service_priority_changed) },
