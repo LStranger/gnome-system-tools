@@ -8,11 +8,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.25.0\n"
+"Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-15 03:13+0100\n"
-"PO-Revision-Date: 2003-12-15 03:17+0100\n"
-"Last-Translator: Slobodan Sredojević <ssl@uns.ns.ac.yu>\n"
+"POT-Creation-Date: 2003-12-22 08:24+0100\n"
+"PO-Revision-Date: 2003-12-22 08:31+0100\n"
+"Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,8 +89,8 @@ msgid "Whether the warning dialog should be shown or not"
 msgstr "Da li prozorče sa upozorenjem treba da bude prikazano ili ne"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
+#: interfaces/disks.glade.in.h:2 interfaces/network.glade.in.h:1
+#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -171,10 +171,7 @@ msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
 "to the kernel at boot time."
-msgstr ""
-"Izaberite koja datoteka sa kernelom se koristi i koja particija se "
-"priključuje kao korena particija. Dodatno, takođe možete pridodati parametre "
-"koji se prosleđuju kernelu prilikom podizanja operativnog sistema."
+msgstr "Izaberite koja datoteka sa jezgrom se koristi i koja deonica se priključuje kao korena deonica. Dodatno, takođe možete pridodati parametre koji se prosleđuju jezgru prilikom podizanja operativnog sistema."
 
 #: interfaces/boot.glade.in.h:21
 msgid "Click \"Forward\" to continue"
@@ -207,7 +204,7 @@ msgid "Finished"
 msgstr "Završeno"
 
 #: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:51
-#: src/network/connection.c:1897
+#: src/network/connection.c:1843
 msgid "Manual"
 msgstr "Uputstvo"
 
@@ -243,7 +240,7 @@ msgstr ""
 
 #: interfaces/boot.glade.in.h:35
 msgid "Specify the partition on which the operating system is installed."
-msgstr "Navedite particiju na kojoj je instaliran operativni sistem."
+msgstr "Navedite deonicu na kojoj je instaliran operativni sistem."
 
 #: interfaces/boot.glade.in.h:36
 msgid ""
@@ -378,6 +375,141 @@ msgstr "Koristite ovaj prozor da izaberete koji računar želite da podešavate"
 msgid "_Password:"
 msgstr "_Lozinka:"
 
+#: interfaces/disks.glade.in.h:1
+msgid " "
+msgstr " "
+
+#: interfaces/disks.glade.in.h:3
+msgid "<b>CDROM Properties</b>"
+msgstr "<b>Osobine CD čitača</b>"
+
+#: interfaces/disks.glade.in.h:4
+msgid "<b>Disk Properties</b>"
+msgstr "<b>Osobine diska</b>"
+
+#: interfaces/disks.glade.in.h:5
+msgid "<b>Partition List</b>"
+msgstr "<b>Spisak deonica</b>"
+
+#: interfaces/disks.glade.in.h:6
+msgid "<b>Partition Properties</b>"
+msgstr "<b>Osobine deonice</b>"
+
+#: interfaces/disks.glade.in.h:7
+msgid "<b>Storage List</b>"
+msgstr "<b>Spisak diskova</b>"
+
+#: interfaces/disks.glade.in.h:8
+msgid "<b>Storage Properties</b>"
+msgstr "<b>Osobine diskova</b>"
+
+#: interfaces/disks.glade.in.h:9
+msgid ""
+"<big><b>Storage Settings</b></big>\n"
+"Configure your hard disks and storages devices."
+msgstr ""
+"<big><b>Podešavanja diskova</b></big>\n"
+"Podesite vaše tvrde diskove i uređaje za smeštanje podataka"
+
+#: interfaces/disks.glade.in.h:11
+msgid "Can Read DVD"
+msgstr "Čita DVD"
+
+#: interfaces/disks.glade.in.h:12
+msgid "Can Write CD-R"
+msgstr "Piše CD-R"
+
+#: interfaces/disks.glade.in.h:13
+msgid "Can Write CD-RW"
+msgstr "Piše CD-RV"
+
+#: interfaces/disks.glade.in.h:14
+msgid "Can Write DVD-R"
+msgstr "Piše DVD-R"
+
+#: interfaces/disks.glade.in.h:15
+msgid "Can Write DVD-RAM"
+msgstr "Piše DVD-RAM"
+
+#: interfaces/disks.glade.in.h:16
+msgid "Can play audio"
+msgstr "Pušta zvuk"
+
+#: interfaces/disks.glade.in.h:17
+msgid "DMA"
+msgstr "DMA"
+
+#: interfaces/disks.glade.in.h:18
+msgid "Device: "
+msgstr "Uređaj: "
+
+#: interfaces/disks.glade.in.h:19
+msgid "Extended 2"
+msgstr "Prošireni 2 (ext2)"
+
+#: interfaces/disks.glade.in.h:20
+msgid "Extended 3"
+msgstr "Prošireni 3 (ext3)"
+
+#: interfaces/disks.glade.in.h:21
+msgid "FAT"
+msgstr "FAT"
+
+#: interfaces/disks.glade.in.h:22
+msgid "Filesystem:"
+msgstr "Sistem datoteka:"
+
+#: interfaces/disks.glade.in.h:23
+msgid "JFS"
+msgstr "JFS"
+
+#: interfaces/disks.glade.in.h:24
+msgid "Memory Swap"
+msgstr "Razmena memorije"
+
+#: interfaces/disks.glade.in.h:25
+msgid "Mount Point:"
+msgstr "Tačka priključenja:"
+
+#: interfaces/disks.glade.in.h:26
+msgid "NTFS"
+msgstr "NTFS"
+
+#: interfaces/disks.glade.in.h:27 src/disks/callbacks.c:312
+#: src/disks/callbacks.c:313 src/disks/callbacks.c:328
+#: src/disks/callbacks.c:329
+msgid "Not Available"
+msgstr "Nije dostupan."
+
+#: interfaces/disks.glade.in.h:28
+msgid "Partitions"
+msgstr "Deonice"
+
+#: interfaces/disks.glade.in.h:29
+msgid "Properties"
+msgstr "Osobine"
+
+#: interfaces/disks.glade.in.h:30
+msgid "Reiser FS"
+msgstr "Reiser FS"
+
+#: interfaces/disks.glade.in.h:31
+msgid "Size:"
+msgstr "Veličina:"
+
+#: interfaces/disks.glade.in.h:32
+msgid "Speed"
+msgstr "Brzina"
+
+#: interfaces/disks.glade.in.h:33
+msgid "XFS"
+msgstr "XFS"
+
+# ovo je najverovatnije „formatiraj“
+#: interfaces/disks.glade.in.h:34
+msgid "_Format"
+msgstr "_Formatiraj"
+
 #: interfaces/network.glade.in.h:2
 msgid "/dev/modem"
 msgstr "/dev/modem"
@@ -486,7 +618,7 @@ msgstr "Dozvoli kontrolu pokretanja _svim korisnicima"
 msgid "Auto"
 msgstr "Automatski"
 
-#: interfaces/network.glade.in.h:29 src/network/connection.c:1899
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -519,7 +651,7 @@ msgstr "Pravim novu mrežnu vezu"
 msgid "Current network profile:"
 msgstr "Tekući skup mrežnih podešavanja:"
 
-#: interfaces/network.glade.in.h:37 src/network/connection.c:1898
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -543,7 +675,7 @@ msgstr "Domen / _radna grupa:"
 msgid "General"
 msgstr "Opšte"
 
-#: interfaces/network.glade.in.h:44 src/network/main.c:217
+#: interfaces/network.glade.in.h:44
 msgid "Hosts"
 msgstr "Računari"
 
@@ -891,26 +1023,30 @@ msgid "Description:"
 msgstr "Opis:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr "Parametri:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "Značaj:"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "Osobine _usluge"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Service:"
 msgstr "Usluga:"
+
+#: interfaces/services.glade.in.h:9
+msgid "Status:"
+msgstr "Stanje:"
 
 #: interfaces/services.glade.in.h:10
 msgid "Use this tool to specify which services to run"
 msgstr ""
 "Koristite ovaj program kako bi odlučili koji uslužni programi će biti "
 "pokrenuti"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Start"
+msgstr "_Počni"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1234,7 +1370,8 @@ msgstr "Stvaram novi otisak za podizanje (%d od %d)"
 msgid "Finished creating a new boot image"
 msgstr "Gotovo stvaranje novog otiska za podizanje"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:467
+#: src/boot/boot-image.c:40 src/disks/disks-storage-partition.c:128
+#: src/disks/disks-storage.c:101 src/network/profile.c:467
 msgid "Unknown"
 msgstr "Nepoznat"
 
@@ -1361,12 +1498,14 @@ msgstr "Uređaj"
 msgid "/_Add ..."
 msgstr "/_Dodaj ..."
 
-#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Osobine"
 
-#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/disks/disks-gui.c:44 src/network/connection.c:60
+#: src/network/dns.c:39 src/network/hosts.c:43 src/users/table.c:50
+#: src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Ukloni"
 
@@ -1466,6 +1605,46 @@ msgstr "Gnomovi sistemski alati (GNOME System Tools)"
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "Ponovo pokrenite okruženje Gnom kako bi promene uzele maha."
 
+#: src/disks/callbacks.c:304 src/disks/callbacks.c:305
+msgid "(Getting ...)"
+msgstr "(Pribavljam...)"
+
+#: src/disks/disks-gui.c:43
+msgid "/_Format"
+msgstr "/_Formatiraj"
+
+#: src/disks/disks-storage-cdrom.c:103
+msgid "CDROM"
+msgstr "CD čitač"
+
+#: src/disks/disks-storage-disk.c:83
+msgid "Hard Disk"
+msgstr "Tvrdi disk"
+
+#: src/disks/disks-storage-floppy.c:71
+msgid "Floppy"
+msgstr "Disketa"
+
+#: src/disks/disks-storage-partition.c:260
+msgid "Swap Partition"
+msgstr "Deonica razmene"
+
+#: src/disks/disks-storage.c:100
+msgid "Unknown Storage"
+msgstr "Nepoznati uređaj za podatke"
+
+#: src/disks/disks.desktop.in.in.h:1
+msgid "Configure the system disks"
+msgstr "Podesi sistemske diskove"
+
+#: src/disks/disks.desktop.in.in.h:2
+msgid "Disks"
+msgstr "Diskovi"
+
+#: src/disks/main.c:76
+msgid "Disks Manager"
+msgstr "Rukovodilac diskovima"
+
 #: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
@@ -1488,7 +1667,7 @@ msgstr ""
 msgid "SMB support missing."
 msgstr "SMB podrška nedostaje."
 
-#: src/network/callbacks.c:517
+#: src/network/callbacks.c:518
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1497,7 +1676,7 @@ msgstr ""
 "ćete morati da se\n"
 "prijavite na sistem ponovo. Nastavljate li, bez obzira na to?"
 
-#: src/network/callbacks.c:565
+#: src/network/callbacks.c:566
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1505,7 +1684,7 @@ msgstr ""
 "Ne mogu pronaći program wvdial na Vašem sistemu. Potrebno je da instalirate "
 "wvdial jer se Vaše PPP modemske veze neće aktivirati."
 
-#: src/network/callbacks.c:592
+#: src/network/callbacks.c:593
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1514,7 +1693,7 @@ msgstr ""
 "wvdial jer se Vaše PPP modemske veze neće aktivirati. Da li nastavljate, bez "
 "obzira na to?"
 
-#: src/network/callbacks.c:619
+#: src/network/callbacks.c:620
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1522,7 +1701,7 @@ msgstr ""
 "Podrazumevani uređaj za prolaz nije aktiviran. Ovo će Vas sprečiti u "
 "povezivanju na internet. Da li nastavljate, bez obzira na to?"
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:675
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1531,7 +1710,7 @@ msgstr ""
 "popunite tražene podatke kako bi nastavili ili izaberite drugi uređaj za "
 "mrežni prolaz."
 
-#: src/network/callbacks.c:720
+#: src/network/callbacks.c:721
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1541,17 +1720,17 @@ msgstr ""
 "neprikazivanja veza u listu za veze. Molim instalirajte redhat-config-network "
 "rpm paket kako se ovo ne bi dogodilo."
 
-#: src/network/callbacks.c:757
+#: src/network/callbacks.c:758
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Da li želite da omogućite pristup %s?"
 
-#: src/network/callbacks.c:767
+#: src/network/callbacks.c:768
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Da li želite da onemogućite pristup %s?"
 
-#: src/network/callbacks.c:854
+#: src/network/callbacks.c:855
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1559,19 +1738,19 @@ msgstr ""
 "Ne mogu automatski pronaći modemski urećaj. Proverite da nije modem u "
 "upotrebi i da je pravilno priključen"
 
-#: src/network/callbacks.c:906
+#: src/network/callbacks.c:907
 msgid "Silent"
 msgstr "Tiho"
 
-#: src/network/callbacks.c:908
+#: src/network/callbacks.c:909
 msgid "Low"
 msgstr "Slabo"
 
-#: src/network/callbacks.c:910
+#: src/network/callbacks.c:911
 msgid "Medium"
 msgstr "Srednje"
 
-#: src/network/callbacks.c:912
+#: src/network/callbacks.c:913
 msgid "Loud"
 msgstr "Glasno"
 
@@ -1619,7 +1798,7 @@ msgstr "Stanje"
 msgid "Description"
 msgstr "Opis"
 
-#: src/network/connection.c:1761
+#: src/network/connection.c:1707
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1627,7 +1806,7 @@ msgstr ""
 "IP adresa ili mrežna maska za pristup nisu popunjeni. Molim navedite ispravne "
 "IP adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1768
+#: src/network/connection.c:1714
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1635,7 +1814,7 @@ msgstr ""
 "IP adresa ili adresa udaljenog računara za pristup nisu popunjeni. Molim "
 "navedite ispravne IP adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1774
+#: src/network/connection.c:1720
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1645,7 +1824,7 @@ msgstr ""
 "popunili IP adrese za primarni DNS. Molim popunite IP adrese za primarni DNS "
 "ili isključite mogućnost ručnog postavljanja DNS opcija."
 
-#: src/network/connection.c:1780
+#: src/network/connection.c:1726
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1653,7 +1832,7 @@ msgstr ""
 "Modemski uređaj za pristup nije popunjen. Unesite uređaj ili pritisnite „sam "
 "pronađi“ da nastavite."
 
-#: src/network/connection.c:1785
+#: src/network/connection.c:1731
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1661,7 +1840,7 @@ msgstr ""
 "Broj telefona za pristup nije popunjen. Unesite ispravan broj telefona da "
 "nastavite."
 
-#: src/network/connection.c:2136
+#: src/network/connection.c:2082
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Uređaj %s ne postoji."
@@ -1674,39 +1853,39 @@ msgstr "IP adresa"
 msgid "Aliases"
 msgstr "Drugi nadimci"
 
-#: src/network/main.c:257
+#: src/network/main.c:190
 msgid "Run the connection assistant."
 msgstr "Pokreni pomoćnika za veze."
 
-#: src/network/main.c:258
+#: src/network/main.c:191
 msgid "Run the PPP connection assistant."
 msgstr "Pokreni pomoćnika za PPP veze."
 
-#: src/network/main.c:259
+#: src/network/main.c:192
 msgid "Run the ethernet connection assistant."
 msgstr "Pokreni pomoćnika za umrežavanje."
 
-#: src/network/main.c:260
+#: src/network/main.c:193
 msgid "Run the wlan connection assistant."
 msgstr "Pokreni pomoćnika za bežično umrežavanje."
 
-#: src/network/main.c:261
+#: src/network/main.c:194
 msgid "Run the parallel port connection assistant."
 msgstr "Pokreni pomoćnika za paralelno umrežavanje."
 
-#: src/network/main.c:262
+#: src/network/main.c:195
 msgid "Run the irlan connection assistant."
 msgstr "Pokreni pomoćnika za infracrveno umrežavanje."
 
-#: src/network/main.c:263
+#: src/network/main.c:196
 msgid "Configure a network interface"
 msgstr "Podesite mrežni uređaj"
 
-#: src/network/main.c:263
+#: src/network/main.c:196
 msgid "interface"
 msgstr "uređaj"
 
-#: src/network/main.c:270
+#: src/network/main.c:203
 msgid "Network Settings"
 msgstr "Podešavanja mreže"
 
@@ -1736,16 +1915,28 @@ msgstr "Da li ste sigurni da želite da uklonite skup podešavanja %s?"
 msgid "Profile name"
 msgstr "Ime skupa podešavanja"
 
-#: src/services/callbacks.c:45
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "Opis nije dostupan."
 
-#: src/services/callbacks.c:301
+#: src/services/callbacks.c:239
+msgid "Running"
+msgstr "Radi"
+
+#: src/services/callbacks.c:243
+msgid "Stopped"
+msgstr "Zaustavljeno"
+
+#: src/services/callbacks.c:248
+msgid "Could not get info"
+msgstr "Ne mogu da saznam podatke"
+
+#: src/services/callbacks.c:300
 #, c-format
 msgid "Settings for service %s"
 msgstr "Podešavanja za uslugu %s"
 
-#: src/services/main.c:62
+#: src/services/main.c:58
 msgid "Services Settings"
 msgstr "Podešavanje uslužnih programa"
 
@@ -1757,11 +1948,11 @@ msgstr "Podesite koji uslužni programi se pokreću pri pokretanju sistema"
 msgid "Services"
 msgstr "Uslužni programi"
 
-#: src/services/table.c:55
+#: src/services/table.c:78
 msgid "Active"
 msgstr "Aktivno"
 
-#: src/services/table.c:65
+#: src/services/table.c:88
 msgid "Service"
 msgstr "Uslužni program"
 
@@ -2045,6 +2236,9 @@ msgstr "Interpretator naredbi"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Dodajte ili uklonite korisnike i grupe"
+
+#~ msgid "Parameters:"
+#~ msgstr "Parametri:"
 
 #~ msgid "_Configure"
 #~ msgstr "_Podesi"
@@ -2489,9 +2683,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgid "Network adapter setup."
 #~ msgstr "Podešavanje mrežne kartice."
 
-#~ msgid "Services Manager"
-#~ msgstr "Upravljanje uslužnim programima"
-
 #~ msgid "Time"
 #~ msgstr "Vreme"
 
@@ -2582,7 +2773,7 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgstr "Dodajte uvoz koji nije u spisku"
 
 #~ msgid "Add partition"
-#~ msgstr "Dodaj particiju"
+#~ msgstr "Dodaj deonicu"
 
 #~ msgid "Automatic (detect when mounting)"
 #~ msgstr "Automatski (odredi pri priključivanju)"
@@ -2594,16 +2785,13 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgstr "Izaberite tačku priključenja"
 
 #~ msgid "Disks & partitions"
-#~ msgstr "Diskovi & particije"
+#~ msgstr "Diskovi & deonice"
 
 #~ msgid ""
 #~ "Disks are divided into several pieces, called partitions. Each partition "
 #~ "is dedicated for a specific storage task, such as virtual memory or home "
 #~ "directories for your users."
-#~ msgstr ""
-#~ "Diskovi su podeljeni u nekoliko delova koji se zovu particije. Svaka "
-#~ "particija služi za određenu namenu čuvanja podataka, kao što je virtualna "
-#~ "memorija ili particija (home) sa ličnim direktorijumima Vaših korisnika."
+#~ msgstr "Diskovi su podeljeni u nekoliko delova koji se zovu deonice. Svaka deonica služi za određenu namenu čuvanja podataka, kao što je virtualna memorija ili deonica (home) sa ličnim direktorijumima Vaših korisnika."
 
 #~ msgid "Ext2 (Linux)"
 #~ msgstr "Ext2 (Linux)"
@@ -2618,7 +2806,7 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgstr "Tačka priključenja:"
 
 #~ msgid "Mount this partition"
-#~ msgstr "Priključi ovu particiju"
+#~ msgstr "Priključi ovu deonicu"
 
 #~ msgid "NTFS (Windows NT & 2000)"
 #~ msgstr "NTFS (Windows NT & 2000)"
@@ -2626,14 +2814,8 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgid "Open settings dialog for selected import"
 #~ msgstr "Otvori prozorče za izabrani uvoz"
 
-#~ msgid "Partition"
-#~ msgstr "Particija"
-
-#~ msgid "Partition Settings"
-#~ msgstr "Postavke particija"
-
 #~ msgid "Remember details of this partition"
-#~ msgstr "Zapamti detalje ove particije"
+#~ msgstr "Zapamti detalje ove deonice"
 
 #~ msgid "Type:"
 #~ msgstr "Tip:"
@@ -2934,9 +3116,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgid "Choose Location"
 #~ msgstr "Izaberite mesto"
 
-#~ msgid "Copy"
-#~ msgstr "Umnoži"
-
 #~ msgid "Copy Location"
 #~ msgstr "Umnoži mesto"
 
@@ -3023,7 +3202,7 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgstr "_Podešavanja..."
 
 #~ msgid "Available partitions:"
-#~ msgstr "Dostupne particije:"
+#~ msgstr "Dostupne deonice:"
 
 #~ msgid "Available swap areas"
 #~ msgstr "Raspoloživi prostori za virtualnu memoriju"
@@ -3061,9 +3240,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgid "Size"
 #~ msgstr "Veličina"
 
-#~ msgid "Size:"
-#~ msgstr "Veličina:"
-
 #~ msgid "Swap Settings"
 #~ msgstr "Podešavanje virtualne memorije"
 
@@ -3083,7 +3259,7 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgstr "datoteka"
 
 #~ msgid "partition"
-#~ msgstr "particija"
+#~ msgstr "deonica"
 
 #~ msgid " Move Up"
 #~ msgstr " Premesti gore"
@@ -3338,9 +3514,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ msgid "Send text documents raw to the printer."
 #~ msgstr "Pošalji tekstualne dokumente na štampač bez obrade."
 
-#~ msgid "Settings..."
-#~ msgstr "Podešavanja..."
-
 #~ msgid "Size of the paper in the printer."
 #~ msgstr "Veličina papira u štampaču."
 
@@ -3527,9 +3700,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 #~ "Uvozi su direktorijumi koji se nalaze na drugim računarima i kojima se "
 #~ "može pristupiti preko mreže."
 
-#~ msgid "Mount Point"
-#~ msgstr "Tačka priključenja"
-
 #~ msgid "Mount p_oint:"
 #~ msgstr "_Tačka priključenja:"
 
@@ -3541,9 +3711,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 
 #~ msgid "Mounting options"
 #~ msgstr "Opcije priključivanja"
-
-#~ msgid "NFS"
-#~ msgstr "NFS"
 
 #~ msgid "P_ublic"
 #~ msgstr "_Javno"
