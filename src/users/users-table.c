@@ -28,7 +28,7 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-#include "xst.h"
+#include "gst.h"
 
 #include "table.h"
 #include "users-table.h"
@@ -47,7 +47,7 @@ TableConfig users_table_config [] = {
 	{NULL}
 };
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 GtkWidget *users_table;
 GArray *users_array;
@@ -103,7 +103,7 @@ create_users_table (void)
 	
 	model = create_users_model ();
 	
-	users_table = xst_dialog_get_widget (tool->main_dialog, "users_table");
+	users_table = gst_dialog_get_widget (tool->main_dialog, "users_table");
 	gtk_tree_view_set_model (GTK_TREE_VIEW (users_table), model);
 	
 	g_object_unref (model);
@@ -122,7 +122,7 @@ static char*
 users_table_value (xmlNodePtr node, gchar *key)
 {
         g_return_val_if_fail (node != NULL, NULL);
-        return xst_xml_get_child_content (node, key);
+        return gst_xml_get_child_content (node, key);
 }
 
 static UserTreeItem*
@@ -153,7 +153,7 @@ populate_users_table (void)
 	
 	users_array = g_array_new (FALSE, FALSE, sizeof (xmlNodePtr));
 	
-	for (user = xst_xml_element_find_first (root, "user"); user != NULL; user = xst_xml_element_find_next (user, "user"))
+	for (user = gst_xml_element_find_first (root, "user"); user != NULL; user = gst_xml_element_find_next (user, "user"))
 	{
 		if (check_node_visibility (user))
 		{
@@ -176,7 +176,7 @@ populate_users_table (void)
 }
 
 void
-update_users_table_complexity (XstDialogComplexity complexity)
+update_users_table_complexity (GstDialogComplexity complexity)
 {
 	GtkTreeView *u_table = GTK_TREE_VIEW (users_table);
 	GtkTreeViewColumn *column;
@@ -184,7 +184,7 @@ update_users_table_complexity (XstDialogComplexity complexity)
 	guint j;
 	
 	switch (complexity) {
-	case XST_DIALOG_BASIC:
+	case GST_DIALOG_BASIC:
 		for (i = users_table_config, j=0;
 		     i->name != NULL;
 		     i++, j++)
@@ -193,7 +193,7 @@ update_users_table_complexity (XstDialogComplexity complexity)
 			gtk_tree_view_column_set_visible (column, i->basic_state_showable);
 		}
 		break;
-	case XST_DIALOG_ADVANCED:
+	case GST_DIALOG_ADVANCED:
 		for (i = users_table_config, j=0;
 		     i->name != NULL;
 		     i++, j++)

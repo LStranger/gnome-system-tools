@@ -12,12 +12,12 @@ bin_PROGRAMS = time-admin
 
 SUBDIRS = e-map
 CPPFLAGS =
-INCLUDES = $(XST_TOOL_CFLAGS)
-CLEANFILES = $(XST_TOOL_CLEANFILES)
-EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
+INCLUDES = $(GST_TOOL_CFLAGS)
+CLEANFILES = $(GST_TOOL_CLEANFILES)
+EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 
-time_admin_LDADD = $(XST_TOOL_LIBS) ./e-map/libemap.a
-time_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES) ./e-map/libemap.a
+time_admin_LDADD = $(GST_TOOL_LIBS) ./e-map/libemap.a
+time_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES) ./e-map/libemap.a
 time_admin_SOURCES = \
 	main.c            time-tool.h \
 	tz.c              tz.h \

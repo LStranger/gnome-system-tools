@@ -24,9 +24,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "xst-platform.h"
-#include "xst-report-line.h"
-#include "xst-xml.h"
+#include "gst-platform.h"
+#include "gst-report-line.h"
+#include "gst-xml.h"
 
 /* pixmaps used for distros/OS's */
 extern GdkPixbuf *redhat;
@@ -38,30 +38,30 @@ extern GdkPixbuf *suse;
 extern GdkPixbuf *freebsd;
 extern GdkPixbuf *gentoo;
 
-XstPlatform *
-xst_platform_new (const gchar *key, const gchar *name)
+GstPlatform *
+gst_platform_new (const gchar *key, const gchar *name)
 {
-	XstPlatform *xp;
+	GstPlatform *xp;
 
 	g_return_val_if_fail (name != NULL, NULL);
 
-	xp = g_new0 (XstPlatform, 1);
+	xp = g_new0 (GstPlatform, 1);
 	xp->key  = g_strdup (key);
 	xp->name = g_strdup (name);
 
 	return xp;
 }
 
-XstPlatform *
-xst_platform_new_from_node (xmlNodePtr node)
+GstPlatform *
+gst_platform_new_from_node (xmlNodePtr node)
 {
 	gchar *key;
 	gchar *name;
 	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	name = xst_xml_get_child_content (node, "name");
-	key = xst_xml_get_child_content (node, "key");
+	name = gst_xml_get_child_content (node, "name");
+	key = gst_xml_get_child_content (node, "key");
 
 	if (key == NULL) {
 		g_free (name);
@@ -74,47 +74,47 @@ xst_platform_new_from_node (xmlNodePtr node)
 		name = strdup (key);
 	}
 
-	return xst_platform_new (key, name);
+	return gst_platform_new (key, name);
 }
 
-XstPlatform *
-xst_platform_new_from_report_line (XstReportLine *rline)
+GstPlatform *
+gst_platform_new_from_report_line (GstReportLine *rline)
 {
 	const gchar *key;
 	const gchar **argv;
 	
 	g_return_val_if_fail (rline != NULL, NULL);
 
-	key = xst_report_line_get_key (rline);
+	key = gst_report_line_get_key (rline);
 		
 	g_return_val_if_fail (!strcmp (key, "platform_list") ||
 			      !strcmp (key, "platform_success"),
 			      NULL);
 
-	argv = xst_report_line_get_argv (rline);
-	return xst_platform_new (argv[0], argv[1]);
+	argv = gst_report_line_get_argv (rline);
+	return gst_platform_new (argv[0], argv[1]);
 }
 
-XstPlatform *
-xst_platform_dup (XstPlatform *platform)
+GstPlatform *
+gst_platform_dup (GstPlatform *platform)
 {
-	XstPlatform *new_platform;
+	GstPlatform *new_platform;
 
 	g_return_val_if_fail (platform != NULL, NULL);
 
-	new_platform = xst_platform_new (platform->key, platform->name);
+	new_platform = gst_platform_new (platform->key, platform->name);
 
 	return new_platform;
 }
 
 gint
-xst_platform_cmp (XstPlatform *a, XstPlatform *b)
+gst_platform_cmp (GstPlatform *a, GstPlatform *b)
 {
 	return strcmp (a->key, b->key);
 }
 
 void
-xst_platform_free (XstPlatform *platform)
+gst_platform_free (GstPlatform *platform)
 {
 	g_free (platform->key);
 	g_free (platform->name);
@@ -122,7 +122,7 @@ xst_platform_free (XstPlatform *platform)
 }
 
 const gchar *
-xst_platform_get_key (XstPlatform *platform)
+gst_platform_get_key (GstPlatform *platform)
 {
 	g_return_val_if_fail (platform != NULL, NULL);
 	
@@ -130,7 +130,7 @@ xst_platform_get_key (XstPlatform *platform)
 }
 
 const GdkPixbuf*
-xst_platform_get_pixmap (XstPlatform *platform)
+gst_platform_get_pixmap (GstPlatform *platform)
 {
 	if (g_ascii_strncasecmp (platform->name, "Debian", 6) == 0)
 		return debian;
@@ -152,7 +152,7 @@ xst_platform_get_pixmap (XstPlatform *platform)
 }
 
 const gchar *
-xst_platform_get_name (XstPlatform *platform)
+gst_platform_get_name (GstPlatform *platform)
 {
 	g_return_val_if_fail (platform != NULL, NULL);
 	

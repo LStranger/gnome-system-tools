@@ -16,17 +16,25 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Hans Petter Jansson <hpj@ximian.com>
+ * Authors: Tambet Ingo <tambet@ximian.com>
  */
 
-#ifndef XST_SU_H
-#define XST_SU_H
+#ifndef GST_CONF_H
+#define GST_CONF_H
 
-#include "xst-types.h"
+#include <gnome.h>
+#include "gst-types.h"
+#include "gst-tool.h"
 
-void xst_su_run_term          (int, gchar**, gchar*);
-void xst_su_write_password    (gchar*);
-void xst_su_clear_term        (void);
-gint xst_su_get_password      (gchar **password);
+G_BEGIN_DECLS
 
-#endif /* XST_SU_H */
+void     gst_conf_set_boolean (GstTool *tool, const gchar *key, gboolean value);
+gboolean gst_conf_get_boolean (GstTool *tool, const gchar *key);
+void     gst_conf_set_integer (GstTool *tool, const gchar *key, gint value);
+gint     gst_conf_get_integer (GstTool *tool, const gchar *key);
+void     gst_conf_set_string  (GstTool *tool, const gchar *key, const gchar *value);
+gchar *  gst_conf_get_string  (GstTool *tool, const gchar *key);
+
+G_END_DECLS
+
+#endif /* GST_CONF_H */

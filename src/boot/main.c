@@ -32,56 +32,56 @@
 
 #include <stdlib.h>
 
-#include "xst.h"
-#include "xst-report-hook.h"
+#include "gst.h"
+#include "gst-report-hook.h"
 
 #include "transfer.h"
 #include "table.h"
 #include "callbacks.h"
 #include "boot-settings.h"
 
-XstTool *tool;
+GstTool *tool;
 
 static void
-connect_signals (XstTool *tool)
+connect_signals (GstTool *tool)
 {
-	XstDialogSignal signals[] = {
+	GstDialogSignal signals[] = {
 		{ "boot_delete",   "clicked", G_CALLBACK (on_boot_delete_clicked) },
 		{ "boot_settings", "clicked", G_CALLBACK (on_boot_settings_clicked) },
 		{ "boot_add",      "clicked", G_CALLBACK (on_boot_add_clicked) },
-		{ "boot_timeout",  "changed", G_CALLBACK (xst_dialog_modify_cb) },
+		{ "boot_timeout",  "changed", G_CALLBACK (gst_dialog_modify_cb) },
 		{ NULL }
 	};
 
 	g_signal_connect (G_OBJECT (tool->main_dialog), "complexity_change",
 			  G_CALLBACK (on_main_dialog_update_complexity), tool);
 
-	xst_dialog_connect_signals (tool->main_dialog, signals);
+	gst_dialog_connect_signals (tool->main_dialog, signals);
 }
 
 int
 main (int argc, char *argv[])
 {
-	XstReportHookEntry report_hooks[] = {
+	GstReportHookEntry report_hooks[] = {
 		{ "boot_conf_read_failed", callbacks_conf_read_failed_hook,
-		  XST_REPORT_HOOK_LOAD, FALSE, NULL },
+		  GST_REPORT_HOOK_LOAD, FALSE, NULL },
 		{ NULL, NULL, -1, FALSE, NULL }
 	};
 
-	xst_init ("boot-admin", argc, argv, NULL);
-	tool = xst_tool_new ();
-	xst_tool_construct (tool, "boot", _("Boot Manager Settings"));
+	gst_init ("boot-admin", argc, argv, NULL);
+	tool = gst_tool_new ();
+	gst_tool_construct (tool, "boot", _("Boot Manager Settings"));
 	table_create ();
 
-	xst_tool_set_xml_funcs    (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
-	xst_tool_add_report_hooks (tool, report_hooks);
+	gst_tool_set_xml_funcs    (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	gst_tool_add_report_hooks (tool, report_hooks);
 
 	connect_signals (tool);
 
-	xst_dialog_enable_complexity (tool->main_dialog);
+	gst_dialog_enable_complexity (tool->main_dialog);
 	on_main_dialog_update_complexity (tool->main_dialog, tool);
 
-	xst_tool_main (tool, FALSE);
+	gst_tool_main (tool, FALSE);
 
 	return 0;
 }

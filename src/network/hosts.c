@@ -27,7 +27,7 @@
 
 #include <gnome.h>
 
-#include "xst.h"
+#include "gst.h"
 
 #include "callbacks.h"
 #include "transfer.h"
@@ -47,17 +47,17 @@ typedef struct {
 	GtkWidget *alias;
 	GtkWidget *button_delete;
 	GtkWidget *button_add;
-} XstStatichostUI;
+} GstStatichostUI;
 
 #define STATICHOST_UI_STRING "statichost"
 
 /* Yes, I don't like globals & externs we should really have
-   an XstHostsPageInfo struct with all the stuff but it does
+   an GstHostsPageInfo struct with all the stuff but it does
    not work with our signals connecting system */
 static gboolean updating = FALSE;
 static gboolean hack = FALSE;
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 static char *
 fixup_text_list (GtkWidget *text)
@@ -67,7 +67,7 @@ fixup_text_list (GtkWidget *text)
 	g_return_val_if_fail (text != NULL, NULL);
 	g_return_val_if_fail (GTK_IS_TEXT_VIEW (text), NULL);
 
-	s = xst_ui_text_view_get_text (GTK_TEXT_VIEW (text));
+	s = gst_ui_text_view_get_text (GTK_TEXT_VIEW (text));
 
 	for (s2 = (gchar *) strchr (s, '\n'); s2; s2 = (gchar *) strchr (s2, '\n'))
 		*s2 = ' ';
@@ -89,7 +89,7 @@ fixdown_text_list (char *s)
 }
 
 /**
- * xst_hosts_ip_is_in_list:
+ * gst_hosts_ip_is_in_list:
  * @ip_str: 
  * 
  * Determines is @ip_str is already in the list. We should keep a GList if
@@ -98,18 +98,18 @@ fixdown_text_list (char *s)
  * Return Value: TRUE, if in the list, FALSE otherwise.
  **/
 static gboolean
-xst_hosts_ip_is_in_list (const gchar *ip_str)
+gst_hosts_ip_is_in_list (const gchar *ip_str)
 {
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
 	gboolean         valid;
 	gchar           *buf;
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 
 	if (!ip_str || strlen (ip_str) == 0)
 		return FALSE;
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -129,53 +129,53 @@ xst_hosts_ip_is_in_list (const gchar *ip_str)
 }
 
 /**
- * xst_hosts_unselect_all:
+ * gst_hosts_unselect_all:
  * @void: 
  * 
  * Clears the selection of the list 
  **/
 static void
-xst_hosts_unselect_all (void)
+gst_hosts_unselect_all (void)
 {
 	GtkTreeSelection *select;
 	GtkTreeModel     *model;
-	XstStatichostUI  *ui;
+	GstStatichostUI  *ui;
 	gboolean          valid;
 
 	updating = TRUE;
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
 
 	gtk_tree_selection_unselect_all (select);
-	xst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
+	gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
 
 	updating = FALSE;
 }
 
 /**
- * xst_hosts_select_row:
+ * gst_hosts_select_row:
  * @row: 
  * 
  * Select row
  **/
 static void
-xst_hosts_select_row (const gchar *ip_str)
+gst_hosts_select_row (const gchar *ip_str)
 {
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
 	gboolean          valid;
 	gchar            *buf;
 	GtkTreeSelection *select;
-	XstStatichostUI  *ui;
+	GstStatichostUI  *ui;
 
 	if (!ip_str || strlen (ip_str) == 0)
 		return;
 
 	updating = TRUE;
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
 
@@ -200,25 +200,25 @@ xst_hosts_select_row (const gchar *ip_str)
 }	
 
 void
-xst_hosts_update_sensitivity (void)
+gst_hosts_update_sensitivity (void)
 {
 	gboolean delete;
 	gboolean add;
 	gboolean ip_is_in_list;
 	gchar *ip_str;
 	gchar *alias_str;
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 
 	if (updating) {
 		return;
 	}
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 
 	/* Get the texts */
 	ip_str    = gtk_editable_get_chars (GTK_EDITABLE (ui->ip), 0, -1);
-	alias_str = xst_ui_text_view_get_text (GTK_TEXT_VIEW (ui->alias));
-	ip_is_in_list = xst_hosts_ip_is_in_list (ip_str);
+	alias_str = gst_ui_text_view_get_text (GTK_TEXT_VIEW (ui->alias));
+	ip_is_in_list = gst_hosts_ip_is_in_list (ip_str);
 
 	/* DELETE : You can delete if the row is selected and the ip is in the list of ip's
 	 * and also that the ip is not the loopback ip address. FIXME
@@ -236,15 +236,15 @@ xst_hosts_update_sensitivity (void)
 }
 
 static void
-xst_hosts_clear_entries (void)
+gst_hosts_clear_entries (void)
 {
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 
 	updating = TRUE;
 	gtk_editable_delete_text (GTK_EDITABLE (ui->ip), 0, -1);
-	xst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
+	gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
 	updating = FALSE;
 }
 
@@ -256,30 +256,30 @@ on_hosts_ip_changed (GtkEditable *ip, gpointer not_used)
 	if (updating)
 		return;
 
-	xst_hosts_update_sensitivity ();
+	gst_hosts_update_sensitivity ();
 
 	/* Get the texts */
 	ip_str = gtk_editable_get_chars (ip,  0, -1);
-	if (xst_hosts_ip_is_in_list (ip_str))
-		xst_hosts_select_row (ip_str);
+	if (gst_hosts_ip_is_in_list (ip_str))
+		gst_hosts_select_row (ip_str);
 }
 
 static void
 on_hosts_alias_changed (GtkTextBuffer *w, gpointer not_used)
 {
 	char *s;
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
 	GtkTreeSelection *select;
 
-	if (!xst_tool_get_access (tool))
+	if (!gst_tool_get_access (tool))
 		return;
 
 	if (updating)
 		return;
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
@@ -300,18 +300,18 @@ on_hosts_add_clicked (GtkWidget * button, gpointer user_data)
 {
 	gchar *entry[STATICHOST_LIST_COL_LAST];
 	int row;
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 
-	g_return_if_fail (xst_tool_get_access (tool));
+	g_return_if_fail (gst_tool_get_access (tool));
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 
 	entry[STATICHOST_LIST_COL_IP] = gtk_editable_get_chars (GTK_EDITABLE (ui->ip), 0, -1);
 	entry[STATICHOST_LIST_COL_ALIAS] = fixup_text_list (ui->alias);
 
 	hosts_list_append (tool, (const gchar**) entry);
 
-	xst_hosts_select_row (entry[STATICHOST_LIST_COL_IP]);
+	gst_hosts_select_row (entry[STATICHOST_LIST_COL_IP]);
 }
 
 void
@@ -320,11 +320,11 @@ on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 	gchar *txt, *ip, *alias;
 	GtkWidget *dialog;
 	gint res;
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 
-	g_return_if_fail (xst_tool_get_access (tool));
+	g_return_if_fail (gst_tool_get_access (tool));
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 
 	if (!hosts_list_get_selected (&ip, &alias))
 		return;
@@ -344,10 +344,10 @@ on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 		return;
 
 	hosts_list_remove (tool, ip);
-	xst_dialog_modify (tool->main_dialog);
+	gst_dialog_modify (tool->main_dialog);
 
-	xst_hosts_clear_entries ();
-	xst_hosts_unselect_all ();
+	gst_hosts_clear_entries ();
+	gst_hosts_unselect_all ();
 }
 
 static GtkTreeModel *
@@ -389,9 +389,9 @@ statichost_list_select_row (GtkTreeSelection *selection, gpointer data)
 	GtkTreeModel    *model;
 	gchar           *buf;
 	gint             pos;
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		/* Selection exists */
@@ -409,14 +409,14 @@ statichost_list_select_row (GtkTreeSelection *selection, gpointer data)
 		gtk_tree_model_get (model, &iter, STATICHOST_LIST_COL_ALIAS, &buf, -1);
 		buf = fixdown_text_list (buf);
 
-		xst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
-		xst_ui_text_view_add_text (GTK_TEXT_VIEW (ui->alias), buf);
+		gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
+		gst_ui_text_view_add_text (GTK_TEXT_VIEW (ui->alias), buf);
 		g_free (buf);
 
 		updating = FALSE;
 	} else {
 		/* Unselect row */
-		xst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
+		gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
 
 		if (updating)
 			return;
@@ -429,11 +429,11 @@ statichost_list_select_row (GtkTreeSelection *selection, gpointer data)
 		updating = FALSE;
 	}
 
-	xst_hosts_update_sensitivity ();
+	gst_hosts_update_sensitivity ();
 }
 
 static GtkWidget *
-statichost_list_new (XstTool *tool)
+statichost_list_new (GstTool *tool)
 {
 	GtkWidget        *treeview;
 	GtkTreeSelection *select;
@@ -441,7 +441,7 @@ statichost_list_new (XstTool *tool)
 
 	model = statichost_list_model_new ();
 
-	treeview = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
+	treeview = gst_dialog_get_widget (tool->main_dialog, "statichost_list");
 	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
 	g_object_unref (G_OBJECT (model));
 
@@ -458,18 +458,18 @@ statichost_list_new (XstTool *tool)
 }
 
 void
-hosts_init_gui (XstTool *tool)
+hosts_init_gui (GstTool *tool)
 {
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 
-	ui = g_new0 (XstStatichostUI, 1);
+	ui = g_new0 (GstStatichostUI, 1);
 
 	ui->list = statichost_list_new (tool);
 
-	ui->ip = xst_dialog_get_widget (tool->main_dialog, "ip");
-	ui->alias = xst_dialog_get_widget (tool->main_dialog, "alias");
-	ui->button_delete = xst_dialog_get_widget (tool->main_dialog, "statichost_delete");
-	ui->button_add = xst_dialog_get_widget (tool->main_dialog, "statichost_add");
+	ui->ip = gst_dialog_get_widget (tool->main_dialog, "ip");
+	ui->alias = gst_dialog_get_widget (tool->main_dialog, "alias");
+	ui->button_delete = gst_dialog_get_widget (tool->main_dialog, "statichost_delete");
+	ui->button_add = gst_dialog_get_widget (tool->main_dialog, "statichost_add");
 
 	g_signal_connect (G_OBJECT (gtk_text_view_get_buffer (GTK_TEXT_VIEW (ui->alias))),
 			  "changed", G_CALLBACK (on_hosts_alias_changed), NULL);
@@ -478,9 +478,9 @@ hosts_init_gui (XstTool *tool)
 }
 
 void
-hosts_list_append (XstTool *tool, const gchar *text[])
+hosts_list_append (GstTool *tool, const gchar *text[])
 {
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
 
@@ -488,10 +488,10 @@ hosts_list_append (XstTool *tool, const gchar *text[])
 	g_return_if_fail (text[0] != NULL);
 	g_return_if_fail (text[1] != NULL);
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
-	if (!xst_hosts_ip_is_in_list (text[STATICHOST_LIST_COL_IP]))
+	if (!gst_hosts_ip_is_in_list (text[STATICHOST_LIST_COL_IP]))
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
@@ -501,9 +501,9 @@ hosts_list_append (XstTool *tool, const gchar *text[])
 }
 
 void
-hosts_list_remove (XstTool *tool, const gchar *ip)
+hosts_list_remove (GstTool *tool, const gchar *ip)
 {
-	XstStatichostUI *ui;
+	GstStatichostUI *ui;
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
 	gchar           *buf;
@@ -511,7 +511,7 @@ hosts_list_remove (XstTool *tool, const gchar *ip)
 
 	g_return_if_fail (ip != NULL);
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -534,10 +534,10 @@ hosts_list_get (const gchar *ip, gchar *ret_buf[])
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
 	gboolean          valid;
-	XstStatichostUI  *ui;
+	GstStatichostUI  *ui;
 	gchar            *tmp_ip;
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	ret_buf[0] = ret_buf[1] = NULL;
@@ -589,21 +589,21 @@ hosts_list_get_selected (gchar **ip, gchar **alias)
 }
 
 void
-hosts_list_save (XstTool *tool, xmlNodePtr root)
+hosts_list_save (GstTool *tool, xmlNodePtr root)
 {
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
-	XstStatichostUI  *ui;
+	GstStatichostUI  *ui;
 	xmlNodePtr        node, node2;
 	gboolean          valid, col0_added;
 	gint              j;
 	gchar            *ip, *alias, **col1_elem;
 
-	ui = (XstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	/* First remove any old branches in the XML tree */
-	xst_xml_element_destroy_children_by_name (root, "statichost");
+	gst_xml_element_destroy_children_by_name (root, "statichost");
 
 	valid = gtk_tree_model_get_iter_first (model, &iter);
 	while (valid) {
@@ -611,7 +611,7 @@ hosts_list_save (XstTool *tool, xmlNodePtr root)
 		gtk_tree_model_get (model, &iter, STATICHOST_LIST_COL_ALIAS, &alias, -1);
 
 		/* Enclosing element */
-		node = xst_xml_element_add (root, "statichost");
+		node = gst_xml_element_add (root, "statichost");
 
 		col1_elem = g_strsplit (alias, " ", 0);
 
@@ -619,12 +619,12 @@ hosts_list_save (XstTool *tool, xmlNodePtr root)
 			if (!strlen (col1_elem[j]))
 				continue;
 			if (!col0_added) {
-				node2 = xst_xml_element_add (node, "ip");
-				xst_xml_element_set_content (node2, ip);
+				node2 = gst_xml_element_add (node, "ip");
+				gst_xml_element_set_content (node2, ip);
 				col0_added = TRUE;
 			}
-			node2 = xst_xml_element_add (node, "alias");
-			xst_xml_element_set_content (node2, col1_elem[j]);
+			node2 = gst_xml_element_add (node, "alias");
+			gst_xml_element_set_content (node2, col1_elem[j]);
 		}
 
 		g_free (ip);

@@ -27,12 +27,12 @@
 #include <ctype.h>
 #include <gnome.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "callbacks.h"
 #include "boot-append-gui.h"
 #include "boot-append-editor.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 char *vga_table[][4] =
 {
@@ -48,7 +48,7 @@ on_boot_append_browse_clicked (GtkButton *button, gpointer data)
 	   BootSettingsGui *settings;
 	   BootAppendEditor *editor;
 	   
-	   if (xst_tool_get_access (tool)) 
+	   if (gst_tool_get_access (tool)) 
 	   {
 			 settings = (BootSettingsGui *) data;
 			 editor = boot_append_editor_new (settings);

@@ -19,22 +19,22 @@
  * Authors: Hans Petter Jansson <hpj@ximian.com>
  */
 
-#ifndef XST_REPORT_HOOK_H
-#define XST_REPORT_HOOK_H
+#ifndef GST_REPORT_HOOK_H
+#define GST_REPORT_HOOK_H
 
-#include "xst-types.h"
-#include "xst-report-line.h"
-#include "xst-tool.h"
+#include "gst-types.h"
+#include "gst-report-line.h"
+#include "gst-tool.h"
 
 /* The return value defines if more hooks to the same entry type should be called. */
-typedef gboolean (XstReportHookFunc) (XstTool *tool, XstReportLine *rline, gpointer data);
+typedef gboolean (GstReportHookFunc) (GstTool *tool, GstReportLine *rline, gpointer data);
 
 /* Internal storage */
 
-struct _XstReportHook {
+struct _GstReportHook {
 	gchar             *key;
-	XstReportHookFunc *func;
-	XstReportHookType  type;
+	GstReportHookFunc *func;
+	GstReportHookType  type;
 	gboolean           allow_repeat;
 	gboolean           invoked;
 	gpointer           data;
@@ -42,20 +42,20 @@ struct _XstReportHook {
 
 /* Arranged in arrays, allows for easy loading of report-hook entries */
 
-struct _XstReportHookEntry {
+struct _GstReportHookEntry {
 	gchar             *key;
-	XstReportHookFunc *func;
-	XstReportHookType  type;
+	GstReportHookFunc *func;
+	GstReportHookType  type;
 	gboolean           allow_repeat;
 	gpointer           data;
 };
 
-XstReportHook     *xst_report_hook_new             (gchar             *key,
-						    XstReportHookFunc  func,
-                                                    XstReportHookType  type,
+GstReportHook     *gst_report_hook_new             (gchar             *key,
+						    GstReportHookFunc  func,
+                                                    GstReportHookType  type,
                                                     gboolean           allow_repeat,
 						    gpointer           data);
-XstReportHook     *xst_report_hook_new_from_entry  (XstReportHookEntry *entry);
-void               xst_report_hook_destroy         (XstReportHook *xrh);
+GstReportHook     *gst_report_hook_new_from_entry  (GstReportHookEntry *entry);
+void               gst_report_hook_destroy         (GstReportHook *xrh);
 
-#endif /* XST_REPORT_HOOK_H */
+#endif /* GST_REPORT_HOOK_H */

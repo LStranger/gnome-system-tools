@@ -30,7 +30,7 @@
 #include <math.h>
 #include <string.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "time-tool.h"
 
 #include "tz.h"
@@ -38,7 +38,7 @@
 #include "tz-map.h"
 
 
-extern XstTimeTool *tool;
+extern GstTimeTool *tool;
 
 
 /* --- Forward declarations of internal functions --- */
@@ -52,7 +52,7 @@ static gboolean update_map (GtkWidget *w, gpointer data);
 static gboolean out_map (GtkWidget *w,GdkEventCrossing *event, gpointer data);
 
 ETzMap *
-e_tz_map_new (XstTimeTool *tool)
+e_tz_map_new (GstTimeTool *tool)
 {
 	ETzMap *tzmap;
 	GPtrArray *locs;
@@ -62,7 +62,7 @@ e_tz_map_new (XstTimeTool *tool)
 	int i;
 
 	tzmap = g_new0 (ETzMap, 1);
-	tzmap->tool = XST_TOOL (tool);
+	tzmap->tool = GST_TOOL (tool);
 	tzmap->tzdb = tz_load_db ();
 	if (!tzmap->tzdb)
 		g_error ("Unable to load system timezone database.");
@@ -91,7 +91,7 @@ e_tz_map_new (XstTimeTool *tool)
         g_signal_connect(G_OBJECT (tzmap->map), "leave-notify-event",
 	                 G_CALLBACK (out_map), (gpointer) tzmap);
 	
-	location_combo = xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
+	location_combo = gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
 	location_entry = GTK_COMBO (location_combo)->entry;
 	g_signal_connect (G_OBJECT (location_entry), "changed",
 	                 G_CALLBACK (update_map), (gpointer) tzmap);
@@ -165,7 +165,7 @@ e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 	tzmap->point_selected =
 	  e_map_get_closest_point (tzmap->map, l_longitude, l_latitude, FALSE);
 
-	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo"))->entry),
+	gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo"))->entry),
 			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_selected)));
 }
 
@@ -189,7 +189,7 @@ e_tz_map_get_selected_tz_name (ETzMap *tzmap)
 	GtkWidget  *location_entry;
 	gchar      *entry_text;
 
-	location_combo = xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
+	location_combo = gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
 	location_entry = GTK_COMBO (location_combo)->entry;
 
 	entry_text     = (gchar *) gtk_entry_get_text (GTK_ENTRY (location_entry));
@@ -276,7 +276,7 @@ motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 	/* e_tz_map_location_from_point() can in theory return NULL, but in
 	 * practice there are no reasons why it should */
 
-	gtk_label_set_text (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label),
+	gtk_label_set_text (GTK_LABEL (((GstTimeTool *) tzmap->tool)->map_hover_label),
 			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_hover)));
 
 	return TRUE;
@@ -299,9 +299,9 @@ out_map (GtkWidget *w, GdkEventCrossing *event, gpointer data)
 
 	tzmap->point_hover = NULL;
    
-	gtk_label_get (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label), &old_zone);
+	gtk_label_get (GTK_LABEL (((GstTimeTool *) tzmap->tool)->map_hover_label), &old_zone);
 	if (strcmp (old_zone, ""))
-		gtk_label_set_text (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label), "");
+		gtk_label_set_text (GTK_LABEL (((GstTimeTool *) tzmap->tool)->map_hover_label), "");
    
 	return TRUE;
 }
@@ -335,7 +335,7 @@ button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 						    TZ_MAP_POINT_NORMAL_RGBA);
 		tzmap->point_selected = tzmap->point_hover;
 
-		location_combo = xst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
+		location_combo = gst_dialog_get_widget (tzmap->tool->main_dialog, "location_combo");
 		location_entry = GTK_COMBO (location_combo)->entry;
 		tz_location    = e_tz_map_location_from_point (tzmap, tzmap->point_selected);
 

@@ -27,7 +27,7 @@
 
 #include <gnome.h>
 
-gboolean	callbacks_conf_read_failed_hook		(XstTool* , XstReportLine* , gpointer);
+gboolean	callbacks_conf_read_failed_hook		(GstTool* , GstReportLine* , gpointer);
 void		on_main_dialog_update_complexity	(GtkWidget*, gpointer);
 void		on_runlevel_table_clicked		(GtkTreeView*, gpointer);
 void		on_description_button_clicked		(GtkWidget*, gpointer);

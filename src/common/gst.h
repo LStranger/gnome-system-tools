@@ -1,0 +1,12 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
+#include "text.h"
+#include "gst-types.h"
+#include "gst-report-hook.h"
+#include "gst-report-line.h"
+#include "gst-xml.h"
+#include "gst-widget.h"
+#include "gst-tool.h"
+#include "gst-dialog.h"
+#include "gst-ui.h"
+#include "gst-util.h"
+#include "gst-conf.h"

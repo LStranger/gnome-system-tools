@@ -24,11 +24,11 @@
 #include <string.h>
 #include <gnome.h>
 
-#include "xst-report-line.h"
+#include "gst-report-line.h"
 
 /* printf, perl style, with a 1024 char limit. Gets the job done. */
 static gchar *
-xst_report_sprintf (gchar *fmt, gchar **argv)
+gst_report_sprintf (gchar *fmt, gchar **argv)
 {
 	char *orig_fmt;
 	char str[1024], ret[1024];
@@ -67,18 +67,18 @@ xst_report_sprintf (gchar *fmt, gchar **argv)
 	return g_strdup (ret);
 }
 
-XstReportLine *
-xst_report_line_new (XstReportMajor major, gchar *key, gchar *fmt, gchar **argv)
+GstReportLine *
+gst_report_line_new (GstReportMajor major, gchar *key, gchar *fmt, gchar **argv)
 {
-	XstReportLine *xrl;
+	GstReportLine *xrl;
 	gchar *str;
 
-	xrl = g_new0 (XstReportLine, 1);
+	xrl = g_new0 (GstReportLine, 1);
 	xrl->major = major;
 	xrl->key = g_strdup (key);
 	xrl->fmt = g_strdup (fmt);
 
-	if (major == XST_MAJOR_DEBUG)
+	if (major == GST_MAJOR_DEBUG)
 		g_print ("debug\n");
 
 	/* This code duplicates the argv */
@@ -86,37 +86,37 @@ xst_report_line_new (XstReportMajor major, gchar *key, gchar *fmt, gchar **argv)
 	xrl->argv = g_strsplit (str, "::", 0);
 	g_free (str);
 	
-	xrl->message = xst_report_sprintf (fmt, argv);
+	xrl->message = gst_report_sprintf (fmt, argv);
 	xrl->handled = FALSE;
 
 	return xrl;
 }
 
-static XstReportMajor
-xst_report_line_str_to_major (gchar *string)
+static GstReportMajor
+gst_report_line_str_to_major (gchar *string)
 {
 	struct {
-		XstReportMajor  major;
+		GstReportMajor  major;
 		gchar          *str;
 	} table[] = {
-		{ XST_MAJOR_SYS,     "sys" },
-		{ XST_MAJOR_ERROR,   "error" },
-		{ XST_MAJOR_WARN,    "warn" },
-		{ XST_MAJOR_INFO,    "info" },
-		{ XST_MAJOR_DEBUG,   "debug" },
-		{ XST_MAJOR_INVALID, NULL }
+		{ GST_MAJOR_SYS,     "sys" },
+		{ GST_MAJOR_ERROR,   "error" },
+		{ GST_MAJOR_WARN,    "warn" },
+		{ GST_MAJOR_INFO,    "info" },
+		{ GST_MAJOR_DEBUG,   "debug" },
+		{ GST_MAJOR_INVALID, NULL }
 	};
 
 	gint i;
 
-	for (i = 0; table[i].major != XST_MAJOR_INVALID; i++)
+	for (i = 0; table[i].major != GST_MAJOR_INVALID; i++)
 		if (!strcmp (string, table[i].str))
 			return table[i].major;
-	return XST_MAJOR_INVALID;
+	return GST_MAJOR_INVALID;
 }
 
 static gchar **
-xst_report_line_parse_string (gchar *string)
+gst_report_line_parse_string (gchar *string)
 {
 	gchar *s;
 	GString *str;
@@ -174,35 +174,35 @@ xst_report_line_parse_string (gchar *string)
 	return parts;
 }
 
-XstReportLine *
-xst_report_line_new_from_string (gchar *string)
+GstReportLine *
+gst_report_line_new_from_string (gchar *string)
 {
-	XstReportLine *xrl;
-	XstReportMajor major;
+	GstReportLine *xrl;
+	GstReportMajor major;
 	gchar **parts;
 
 	g_return_val_if_fail (strlen (string) > 1, NULL);
-	parts = xst_report_line_parse_string (string);
+	parts = gst_report_line_parse_string (string);
 
 	/* must have at least major, minor and format */
 	if (!parts[2]) {
-		g_warning ("xst_report_line_new_from_string: Error in report string [%s]", string);
+		g_warning ("gst_report_line_new_from_string: Error in report string [%s]", string);
 		g_strfreev (parts);
 		return NULL;
 	}
 
-	major = xst_report_line_str_to_major (parts[0]);
+	major = gst_report_line_str_to_major (parts[0]);
 
-	g_return_val_if_fail (major != XST_MAJOR_INVALID, NULL);
+	g_return_val_if_fail (major != GST_MAJOR_INVALID, NULL);
 	
-	xrl = xst_report_line_new (major, parts[1], parts[2], &parts[3]);
+	xrl = gst_report_line_new (major, parts[1], parts[2], &parts[3]);
 	g_strfreev (parts);
 
 	return xrl;
 }
 
 void
-xst_report_line_free (XstReportLine *line)
+gst_report_line_free (GstReportLine *line)
 {
 	g_free (line->message);
 	g_free (line->key);
@@ -213,35 +213,35 @@ xst_report_line_free (XstReportLine *line)
 }
 
 const gchar *
-xst_report_line_get_key (XstReportLine *line)
+gst_report_line_get_key (GstReportLine *line)
 {
 	g_return_val_if_fail (line != NULL, 0);
 	return (line->key);
 }
 
 const gchar **
-xst_report_line_get_argv (XstReportLine *line)
+gst_report_line_get_argv (GstReportLine *line)
 {
 	g_return_val_if_fail (line != NULL, 0);
 	return (const gchar **) (line->argv);
 }
 
 const gchar *
-xst_report_line_get_message (XstReportLine *line)
+gst_report_line_get_message (GstReportLine *line)
 {
 	g_return_val_if_fail (line != NULL, NULL);
 	return (line->message);
 }
 
 gboolean
-xst_report_line_get_handled (XstReportLine *line)
+gst_report_line_get_handled (GstReportLine *line)
 {
 	g_return_val_if_fail (line != NULL, FALSE);
 	return (line->handled);
 }
 
 void
-xst_report_line_set_handled (XstReportLine *line, gboolean handled)
+gst_report_line_set_handled (GstReportLine *line, gboolean handled)
 {
 	g_return_if_fail (line != NULL);
 

@@ -10,25 +10,26 @@ pixmaps_DATA = \
 	connection-ethernet.png  \
 	connection-inactive.xpm  \
 	connection-modem.png     \
-	background.jpeg		\
-	big-monitor.png		\
+	background.jpeg		 \
+	big-monitor.png		 \
 	boot.png                 \
 	debian.png               \
 	desktop_icons.png        \
 	disks.png                \
 	display.png              \
-	font.png            	\
+	font.png            	 \
 	freebsd.png              \
 	gentoo.png               \
 	gnome-laptop.png         \
 	gnome-light-on.png       \
 	gnome-light-off.png      \
+	gstdruidbg.png           \
 	hst.png                  \
 	init-anim-1.png          \
 	init-anim-2.png          \
 	init-anim-3.png          \
 	internet-share.png       \
-	internetsharing.png	     \
+	internetsharing.png	 \
 	irda-16.png              \
 	irda-48.png              \
 	mandrake.png             \
@@ -37,12 +38,12 @@ pixmaps_DATA = \
 	nameresolution_alias.png \
 	nameresolution_id.png    \
 	network.png              \
-	panel_bottom_left.png	\
-	panel_bottom_mid.png	\
-	panel_bottom_right.png	\
-	panel_top_left.png		\
-	panel_top_mid.png		\
-	panel_top_right.png		\
+	panel_bottom_left.png	 \
+	panel_bottom_mid.png	 \
+	panel_bottom_right.png	 \
+	panel_top_left.png	 \
+	panel_top_mid.png	 \
+	panel_top_right.png	 \
 	passwd.png               \
 	plip-48.png              \
 	ppp.png                  \
@@ -56,7 +57,7 @@ pixmaps_DATA = \
 	slackware.png            \
 	suse.png                 \
 	talk-userlist.png        \
-	test-colors.png		\
+	test-colors.png		 \
 	time.png                 \
 	timezone.png             \
 	turbolinux.png           \
@@ -68,7 +69,6 @@ pixmaps_DATA = \
 	wavelan-16.png           \
 	wavelan-48.png           \
 	world_map-960.png        \
-	xstdruidbg-3.png         \
 	ximian30.png
 
 EXTRA_DIST = $(pixmaps_DATA)

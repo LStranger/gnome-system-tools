@@ -35,7 +35,7 @@ struct _TransStringCList
   gchar *clist;
 };
 
-void transfer_xml_to_gui(XstTool *tool, gpointer data);
-void transfer_gui_to_xml(XstTool *tool, gpointer data);
+void transfer_xml_to_gui(GstTool *tool, gpointer data);
+void transfer_gui_to_xml(GstTool *tool, gpointer data);
 
 #endif /* TRANSFER_H */

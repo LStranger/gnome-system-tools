@@ -27,7 +27,7 @@
 #include <gnome.h>
 
 
-#include "xst.h"
+#include "gst.h"
 
 
 #define MAX_IMAGES 16
@@ -38,17 +38,17 @@ typedef enum {
 	TYPE_WIN9X,
 	TYPE_DOS,
 	TYPE_LINUX
-} XstBootImageType;
+} GstBootImageType;
 
 typedef struct {
 	gchar *label;
-	XstBootImageType type;
-} XstBootImageTypeTable;
+	GstBootImageType type;
+} GstBootImageTypeTable;
 
 typedef struct {
 	xmlNodePtr node;
 	gboolean new;
-	XstBootImageType type;
+	GstBootImageType type;
 	gboolean is_default;
 	
 	gchar *label;
@@ -69,8 +69,8 @@ gchar            *boot_image_check        (BootImage *image);
 
 /* Helpers */
 gint              boot_image_count        (xmlNodePtr root);
-gchar            *type_to_label           (XstBootImageType type);
-XstBootImageType  label_to_type           (const gchar *label);
+gchar            *type_to_label           (GstBootImageType type);
+GstBootImageType  label_to_type           (const gchar *label);
 GList            *type_labels_list        (void);
 
 

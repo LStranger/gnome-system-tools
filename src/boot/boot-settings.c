@@ -28,7 +28,7 @@
 #include <ctype.h>
 #include <gnome.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "callbacks.h"
 #include "boot-settings.h"
 #include "table.h"
@@ -38,7 +38,7 @@
 #include "boot-append-editor.h"
 #include "boot-druid.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 extern GtkWidget *boot_table;
 
 void
@@ -58,7 +58,7 @@ on_boot_settings_clicked (GtkButton *button, gpointer data)
 	}
 
 
-	if (xst_tool_get_access (tool)) {
+	if (gst_tool_get_access (tool)) {
 		image = boot_image_get_by_node (node);
 		editor = boot_image_editor_new (image);
 
@@ -71,7 +71,7 @@ on_boot_add_clicked (GtkButton *button, gpointer data)
 {
 	BootDruid *druid;
 
-	if (xst_tool_get_access (tool)) {
+	if (gst_tool_get_access (tool)) {
 		druid = boot_druid_new ();
 
 		if (druid)
@@ -161,18 +161,18 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 
 	gtk_combo_set_popdown_strings (gui->type, type_labels_list ());
 	
-	xst_ui_entry_set_text (gui->name, image->label);
-	xst_ui_entry_set_text (gui->type->entry, _(type_to_label (image->type)));
-	xst_ui_entry_set_text (gui->root, image->root);
-	xst_ui_entry_set_text (gui->append, image->append);
+	gst_ui_entry_set_text (gui->name, image->label);
+	gst_ui_entry_set_text (gui->type->entry, _(type_to_label (image->type)));
+	gst_ui_entry_set_text (gui->root, image->root);
+	gst_ui_entry_set_text (gui->append, image->append);
 
-	xst_ui_entry_set_text (gui->image_entry, image->image);
-	xst_ui_entry_set_text (gui->device->entry, image->image);
+	gst_ui_entry_set_text (gui->image_entry, image->image);
+	gst_ui_entry_set_text (gui->device->entry, image->image);
 
 	if (!image->new) {
-		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
+		if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_ADVANCED)
 			setup_advanced (gui, top);
-		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_BASIC)
+		if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_BASIC)
 			setup_basic (gui, top);
 	}
 }
@@ -206,7 +206,7 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 	}
 	
 	boot_table_update ();
-	xst_dialog_modify (tool->main_dialog);
+	gst_dialog_modify (tool->main_dialog);
 
 	return TRUE;
 }

@@ -1,5 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* Copyright (C) 2000-2001 Ximian, Inc.
+/* 
+ * Copyright (C) 2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -15,16 +16,42 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Hans Petter Jansson <hpj@ximian.com>.
+ * Authors: Hans Petter Jansson <hpj@ximian.com>
  */
 
-#ifndef XST_UTIL_H
-#define XST_UTIL_H
+#include <config.h>
 
-void   xst_util_nice_hostname     (gchar *hostname);
-gchar *xst_util_nice_hostname_dup (gchar *hostname);
-gchar *xst_util_nice_path_dup     (gchar *path);
+#include "gst-report-hook.h"
 
-gchar *xst_util_strcasestr        (const gchar *haystack, const gchar *needle);
 
-#endif /* XST_UTIL_H */
+GstReportHook *
+gst_report_hook_new (gchar *key, GstReportHookFunc func, GstReportHookType type,
+                     gboolean allow_repeat, gpointer data)
+{
+	GstReportHook *xrh;
+
+	xrh = g_new0 (GstReportHook, 1);
+	xrh->key  = key;
+	xrh->func = func;
+	xrh->type = type;
+	xrh->allow_repeat = allow_repeat;
+	xrh->invoked = FALSE;
+	xrh->data = data;
+
+	return xrh;
+}
+
+
+GstReportHook *
+gst_report_hook_new_from_entry (GstReportHookEntry *entry)
+{
+	return gst_report_hook_new (entry->key, entry->func, entry->type,
+				    entry->allow_repeat, entry->data);
+}
+
+
+void
+gst_report_hook_destroy (GstReportHook *xrh)
+{
+	g_free (xrh);
+}

@@ -19,39 +19,27 @@
  * Authors: Hans Petter Jansson <hpj@ximian.com>
  */
 
-#include <config.h>
+#ifndef GST_PLATFORM_H
+#define GST_PLATFORM_H
 
-#include "xst-report-hook.h"
+#include "gst-types.h"
+#include "gst-tool.h"
 
+struct _GstPlatform {
+	gchar *name;
+	gchar *key;
+};
 
-XstReportHook *
-xst_report_hook_new (gchar *key, XstReportHookFunc func, XstReportHookType type,
-                     gboolean allow_repeat, gpointer data)
-{
-	XstReportHook *xrh;
+GstPlatform     *gst_platform_new                  (const gchar *key, const gchar *name);
+GstPlatform     *gst_platform_new_from_node        (xmlNodePtr node);
+GstPlatform     *gst_platform_new_from_report_line (GstReportLine *rline);
+GstPlatform     *gst_platform_dup                  (GstPlatform *platform);
+gint             gst_platform_cmp                  (GstPlatform *a, GstPlatform *b);
 
-	xrh = g_new0 (XstReportHook, 1);
-	xrh->key  = key;
-	xrh->func = func;
-	xrh->type = type;
-	xrh->allow_repeat = allow_repeat;
-	xrh->invoked = FALSE;
-	xrh->data = data;
+void             gst_platform_free                 (GstPlatform *platform);
 
-	return xrh;
-}
+const gchar     *gst_platform_get_key              (GstPlatform *platform);
+const GdkPixbuf	*gst_platform_get_pixmap	   (GstPlatform *platform);
+const gchar     *gst_platform_get_name             (GstPlatform *platform);
 
-
-XstReportHook *
-xst_report_hook_new_from_entry (XstReportHookEntry *entry)
-{
-	return xst_report_hook_new (entry->key, entry->func, entry->type,
-				    entry->allow_repeat, entry->data);
-}
-
-
-void
-xst_report_hook_destroy (XstReportHook *xrh)
-{
-	g_free (xrh);
-}
+#endif /* GST_PLATFORM_H */

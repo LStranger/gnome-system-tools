@@ -37,7 +37,7 @@
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "time-tool.h"
 
 #include "tz.h"
@@ -49,10 +49,10 @@
 ETzMap *tzmap;
 
 static void timezone_button_clicked (GtkWidget *w, gpointer data);
-static void update_tz (XstTimeTool *time_tool);
+static void update_tz (GstTimeTool *time_tool);
 static void server_button_clicked (GtkWidget *w, gpointer data);
-static void ntp_use_toggled (GtkWidget *w, XstDialog *dialog);
-static void xst_time_calendar_change_cb (GtkCalendar *, gpointer);
+static void ntp_use_toggled (GtkWidget *w, GstDialog *dialog);
+static void gst_time_calendar_change_cb (GtkCalendar *, gpointer);
 static void on_server_list_element_toggled (GtkCellRendererToggle*, gchar*, gpointer);
 
 static char *ntp_servers[] =
@@ -119,29 +119,29 @@ static char *ntp_servers[] =
 	NULL
 };
 
-static XstDialogSignal signals[] = {
-	/*	{ "calendar",          "day_selected",       G_CALLBACK (xst_time_calendar_change_cb) },
-		{ "calendar",          "month_changed",      G_CALLBACK (xst_time_calendar_change_cb) },*/
+static GstDialogSignal signals[] = {
+	/*	{ "calendar",          "day_selected",       G_CALLBACK (gst_time_calendar_change_cb) },
+		{ "calendar",          "month_changed",      G_CALLBACK (gst_time_calendar_change_cb) },*/
 	{ "timezone_button",   "clicked",            G_CALLBACK (timezone_button_clicked) },
 	{ "ntp_use",           "toggled",            G_CALLBACK (ntp_use_toggled) },
 	{ "timeserver_button", "clicked",            G_CALLBACK (server_button_clicked) },
-	{ "location_combo",    "set_focus_child",    G_CALLBACK (xst_dialog_modify_cb) },
+	{ "location_combo",    "set_focus_child",    G_CALLBACK (gst_dialog_modify_cb) },
 #warning FIXME
 #if 0
 	{ "tz_combo_entry",    "changed",            G_CALLBACK (update_tz) },
 #endif
         /* Changed the Signal for the GtkTreeView --AleX
-	   { "ntp_list",          "selection_changed",  xst_dialog_modify_cb },
-	   { "ntp_list2",         "cursor_changed",     G_CALLBACK (xst_dialog_modify_cb) },*/
+	   { "ntp_list",          "selection_changed",  gst_dialog_modify_cb },
+	   { "ntp_list2",         "cursor_changed",     G_CALLBACK (gst_dialog_modify_cb) },*/
 	{ "ntp_add_server",    "clicked",            G_CALLBACK (on_ntp_addserver) },
-	{ "ntp_add_server",    "clicked",            G_CALLBACK (xst_dialog_modify_cb) },
+	{ "ntp_add_server",    "clicked",            G_CALLBACK (gst_dialog_modify_cb) },
 	{ NULL }
 };
 
 static void
-xst_time_populate_ntp_list (XstTimeTool *time_tool)
+gst_time_populate_ntp_list (GstTimeTool *time_tool)
 {
-	XstTool *tool = XST_TOOL (time_tool);
+	GstTool *tool = GST_TOOL (time_tool);
 	GtkWidget *ntp_list, *item;
 	GList *list_add = 0;
 	GtkListStore *store;
@@ -152,7 +152,7 @@ xst_time_populate_ntp_list (XstTimeTool *time_tool)
 
 
 	/* ntp_list is a GtkTreeView */
-	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list2");
+	ntp_list = gst_dialog_get_widget (tool->main_dialog, "ntp_list2");
 
 	/* set the model */
 	store = gtk_list_store_new (2, G_TYPE_BOOLEAN, G_TYPE_STRING);
@@ -182,9 +182,9 @@ xst_time_populate_ntp_list (XstTimeTool *time_tool)
 
 
 static void
-xst_time_init_timezone (XstTimeTool *time_tool)
+gst_time_init_timezone (GstTimeTool *time_tool)
 {
-	XstTool *tool = XST_TOOL (time_tool);
+	GstTool *tool = GST_TOOL (time_tool);
 	GtkWidget *w;
 	GPtrArray *locs;
 	GList *combo_locs = NULL;
@@ -193,7 +193,7 @@ xst_time_init_timezone (XstTimeTool *time_tool)
 	tzmap = e_tz_map_new (time_tool);
 	g_return_if_fail (tzmap != NULL);
 	
-	w = xst_dialog_get_widget (tool->main_dialog, "map_window");
+	w = gst_dialog_get_widget (tool->main_dialog, "map_window");
 	gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (tzmap->map));
 	gtk_widget_show (GTK_WIDGET (tzmap->map));
 	
@@ -204,14 +204,14 @@ xst_time_init_timezone (XstTimeTool *time_tool)
 					    g_strdup (tz_location_get_zone (g_ptr_array_index (locs, i))));
 	}
 
-	w = xst_dialog_get_widget (tool->main_dialog, "location_combo");
+	w = gst_dialog_get_widget (tool->main_dialog, "location_combo");
 	gtk_combo_set_popdown_strings (GTK_COMBO (w), combo_locs);
 }
 
 #define is_leap_year(yyy) ((((yyy % 4) == 0) && ((yyy % 100) != 0)) || ((yyy % 400) == 0));
 
 static void
-xst_time_update_date (XstTimeTool *tool, gint add)
+gst_time_update_date (GstTimeTool *tool, gint add)
 {
 	static const gint month_length[2][13] =
 	{
@@ -223,7 +223,7 @@ xst_time_update_date (XstTimeTool *tool, gint add)
 	gint days_in_month;
 	gboolean leap_year;
 
-	calendar = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog,
+	calendar = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog,
 					  "calendar");
 	gtk_calendar_get_date (GTK_CALENDAR (calendar),
 			       &year, &month, &day);
@@ -263,7 +263,7 @@ xst_time_update_date (XstTimeTool *tool, gint add)
 #undef is_leap_year
 
 void
-xst_time_update (XstTimeTool *tool)
+gst_time_update (GstTimeTool *tool)
 {
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->seconds), (gfloat) tool->sec);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->minutes), (gfloat) tool->min);
@@ -276,36 +276,36 @@ xst_time_update (XstTimeTool *tool)
 }
 
 static gboolean
-xst_time_clock_tick (gpointer time_tool)
+gst_time_clock_tick (gpointer time_tool)
 {
-	XstTimeTool *tool = XST_TIME_TOOL (time_tool);
-	XstTool *xst_tool = XST_TOOL (time_tool);
+	GstTimeTool *tool = GST_TIME_TOOL (time_tool);
+	GstTool *gst_tool = GST_TOOL (time_tool);
 	struct tm *tm;
 	time_t tt;
 
 	tool->ticking = TRUE;
 	
-	xst_dialog_freeze (xst_tool->main_dialog);
+	gst_dialog_freeze (gst_tool->main_dialog);
 
 	tt = time (NULL);
 	tm = localtime (&tt);
 
-	xst_time_set_full (time_tool, tm);
-	xst_dialog_thaw (xst_tool->main_dialog);
+	gst_time_set_full (time_tool, tm);
+	gst_dialog_thaw (gst_tool->main_dialog);
 	tool->ticking = FALSE;
 
 	return TRUE;
 }
 
 static GtkWidget *
-timezone_construct_dialog (XstDialog *dialog)
+timezone_construct_dialog (GstDialog *dialog)
 {
 	GtkWidget *content;
 	GtkWidget *d;
 
         /* Added to test arguments  --AleX */
 	g_return_if_fail (dialog!=NULL);
-	g_return_if_fail (XST_IS_DIALOG(dialog));
+	g_return_if_fail (GST_IS_DIALOG(dialog));
 	
 	d = gtk_dialog_new_with_buttons (_("GNOME System Tools - Timezone"),
 					      NULL,
@@ -317,7 +317,7 @@ timezone_construct_dialog (XstDialog *dialog)
 
 	gtk_widget_set_usize (GTK_WIDGET (d), 320, 320);
 
-	content = xst_dialog_get_widget (dialog, "time_zone_dialog_content");
+	content = gst_dialog_get_widget (dialog, "time_zone_dialog_content");
 
 	/* FIXME: Yes, this is a hack. */
 	content->parent = NULL;
@@ -335,15 +335,15 @@ on_server_list_element_toggled (GtkCellRendererToggle *cell, gchar *path_str, gp
 	GtkTreeModel *model = GTK_TREE_MODEL (store);
 	GtkTreeIter iter;
 	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
-	XstTool *tool = g_object_get_data (G_OBJECT (cell), "tool");
+	GstTool *tool = g_object_get_data (G_OBJECT (cell), "tool");
 	gboolean toggle;
 	gchar *server, *p;
 	xmlNodePtr root, node;
 
-	root = xst_xml_doc_get_root (tool->config);
-	node = xst_xml_element_find_first (root, "sync");
+	root = gst_xml_doc_get_root (tool->config);
+	node = gst_xml_element_find_first (root, "sync");
 	if (!node) 
-		node = xst_xml_element_add (root, "sync");
+		node = gst_xml_element_add (root, "sync");
 
 	gtk_tree_model_get_iter (model, &iter, path);
 	gtk_tree_model_get (model, &iter, 0, &toggle, 1, &server, -1);
@@ -355,32 +355,32 @@ on_server_list_element_toggled (GtkCellRendererToggle *cell, gchar *path_str, gp
 	if (toggle == TRUE) {
 		/* Toggle is set to true, we have to delete entry in XML and set toggle to FALSE */
 		toggle = FALSE;
-		for (node = xst_xml_element_find_first (node, "server"); node != NULL; node = xst_xml_element_find_next (node, "server")) {
-			if (strcmp (server, xst_xml_element_get_content (node)) == 0) 
-				xst_xml_element_destroy (node);
+		for (node = gst_xml_element_find_first (node, "server"); node != NULL; node = gst_xml_element_find_next (node, "server")) {
+			if (strcmp (server, gst_xml_element_get_content (node)) == 0) 
+				gst_xml_element_destroy (node);
 		}
 	} else {
 		/* Toggle is set to false, we have to add a server entry in the XML and set toggle to TRUE */
 		toggle = TRUE;
-		node = xst_xml_element_add (node, "server");
-				xst_xml_element_set_content (node, server);
+		node = gst_xml_element_add (node, "server");
+				gst_xml_element_set_content (node, server);
 	}
 
 	gtk_list_store_set (store, &iter, 0, toggle, -1);
 	gtk_tree_path_free (path);
-	xst_dialog_modify (tool->main_dialog);
+	gst_dialog_modify (tool->main_dialog);
 }
 
 static void
 timezone_button_clicked (GtkWidget *w, gpointer data)
 {
 	static GtkWidget *d = NULL;
-	XstDialog *dialog;
-	XstTimeTool *time_tool;
+	GstDialog *dialog;
+	GstTimeTool *time_tool;
 	gint result;
 
-	dialog = XST_DIALOG (data);
-	time_tool = XST_TIME_TOOL (xst_dialog_get_tool (dialog));
+	dialog = GST_DIALOG (data);
+	time_tool = GST_TIME_TOOL (gst_dialog_get_tool (dialog));
 
 	if (!d) {
 		d = timezone_construct_dialog (dialog);
@@ -402,9 +402,9 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 		tz_location = e_tz_map_get_location_by_name (tzmap, tz_name);
 
 		correction = tz_location_set_locally (tz_location);
-		xst_time_tool_set_time_zone_name (time_tool, tz_name);
-		xst_time_set_from_localtime (time_tool, correction);
-		xst_dialog_modify (dialog);
+		gst_time_tool_set_time_zone_name (time_tool, tz_name);
+		gst_time_set_from_localtime (time_tool, correction);
+		gst_dialog_modify (dialog);
 	}
 
 	gtk_widget_hide (d);
@@ -413,14 +413,14 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 
 /* Function Added to construct Time Server Dialog using GtkDialog --AleX */
 static GtkWidget *
-server_construct_dialog (XstDialog *dialog)
+server_construct_dialog (GstDialog *dialog)
 {
 	GtkWidget *content;
 	GtkWidget *d;
 
 	/* Added to test arguments --AleX */
 	g_return_if_fail (dialog!=NULL);
-	g_return_if_fail (XST_IS_DIALOG(dialog));
+	g_return_if_fail (GST_IS_DIALOG(dialog));
 
 	d = gtk_dialog_new_with_buttons (_("GNOME System Tools - Time Servers"),
 					      NULL,
@@ -430,7 +430,7 @@ server_construct_dialog (XstDialog *dialog)
 
 	gtk_widget_set_usize (GTK_WIDGET (d), 550, 400);
 
-	content = xst_dialog_get_widget (dialog, "server_dialog_content");
+	content = gst_dialog_get_widget (dialog, "server_dialog_content");
 
 	/* FIXME: Yes, this is a hack. */
 	content->parent = NULL;
@@ -445,9 +445,9 @@ static void
 server_button_clicked (GtkWidget *w, gpointer data)
 {
 	static GtkWidget *d = NULL;
-	XstDialog *dialog;
+	GstDialog *dialog;
 
-	dialog = XST_DIALOG (data);
+	dialog = GST_DIALOG (data);
 	
 	if (!d) 
 	      d = server_construct_dialog (dialog);
@@ -457,11 +457,11 @@ server_button_clicked (GtkWidget *w, gpointer data)
 }
 
 static void
-update_tz (XstTimeTool *time_tool)
+update_tz (GstTimeTool *time_tool)
 {
 	GtkWidget *l;
 
-	l = xst_dialog_get_widget (XST_DIALOG (XST_TOOL (time_tool)->main_dialog), "tzlabel");
+	l = gst_dialog_get_widget (GST_DIALOG (GST_TOOL (time_tool)->main_dialog), "tzlabel");
 
 	if (time_tool->time_zone_name) {
 		gtk_label_set_text (GTK_LABEL (l), time_tool->time_zone_name);
@@ -469,7 +469,7 @@ update_tz (XstTimeTool *time_tool)
 }      
 
 void
-xst_time_tool_set_time_zone_name (XstTimeTool *time_tool, gchar *name)
+gst_time_tool_set_time_zone_name (GstTimeTool *time_tool, gchar *name)
 {
 	if (time_tool->time_zone_name) {
 		g_free (time_tool->time_zone_name);
@@ -479,7 +479,7 @@ xst_time_tool_set_time_zone_name (XstTimeTool *time_tool, gchar *name)
 }
 
 static void
-ntp_use_toggled (GtkWidget *w, XstDialog *dialog)
+ntp_use_toggled (GtkWidget *w, GstDialog *dialog)
 {
 	gboolean active, configured, ntp_installed;
 
@@ -498,37 +498,37 @@ ntp_use_toggled (GtkWidget *w, XstDialog *dialog)
 	}
 
 	if (ntp_installed)
-		xst_dialog_modify (dialog);
+		gst_dialog_modify (dialog);
 	
-	gtk_widget_set_sensitive (xst_dialog_get_widget (dialog, "timeserver_button"), active);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (dialog, "timeserver_button"), active);
 }
 
-XST_TOOL_MAKE_TYPE(time,Time)
+GST_TOOL_MAKE_TYPE(time,Time)
 
 static void
-xst_time_tool_type_init (XstTimeTool *tool)
+gst_time_tool_type_init (GstTimeTool *tool)
 {
 	tool->running = FALSE;
 	tool->ticking = FALSE;
 }
 
-static XstTool *
-xst_time_tool_new (void)
+static GstTool *
+gst_time_tool_new (void)
 {
-	return XST_TOOL (g_type_create_instance (XST_TYPE_TIME_TOOL));
+	return GST_TOOL (g_type_create_instance (GST_TYPE_TIME_TOOL));
 }
 
 static void
-xst_time_calendar_change_cb (GtkCalendar *calendar, gpointer data)
+gst_time_calendar_change_cb (GtkCalendar *calendar, gpointer data)
 {
-	XstTimeTool *tool = (XstTimeTool *)data;
+	GstTimeTool *tool = (GstTimeTool *)data;
 
-	xst_time_clock_stop (tool);
-	xst_dialog_modify (XST_TOOL (tool)->main_dialog);
+	gst_time_clock_stop (tool);
+	gst_dialog_modify (GST_TOOL (tool)->main_dialog);
 }
 
 static void 
-xst_time_key_press_event_cb (GtkWidget *widget, GdkEventKey *event, XstTimeTool *tool)
+gst_time_key_press_event_cb (GtkWidget *widget, GdkEventKey *event, GstTimeTool *tool)
 {
 	if (tool->ticking)
 		return;
@@ -542,13 +542,13 @@ xst_time_key_press_event_cb (GtkWidget *widget, GdkEventKey *event, XstTimeTool 
 					        "key_press_event");
 
 	
-	xst_time_clock_stop (tool);
-	xst_dialog_modify (XST_TOOL (tool)->main_dialog);
+	gst_time_clock_stop (tool);
+	gst_dialog_modify (GST_TOOL (tool)->main_dialog);
 }
 
 static void
-xst_time_filter (GtkEntry *entry, const gchar *new_text,
-		 gint length, gint *pos, XstTimeTool *tool)
+gst_time_filter (GtkEntry *entry, const gchar *new_text,
+		 gint length, gint *pos, GstTimeTool *tool)
 {
 	GtkWidget *widget = GTK_WIDGET (entry);
 	const gchar *text;
@@ -561,7 +561,7 @@ xst_time_filter (GtkEntry *entry, const gchar *new_text,
 	if (length > 1)
 		return;
 	
-	xst_time_clock_stop (tool);
+	gst_time_clock_stop (tool);
 	text = gtk_entry_get_text (entry);
 	
 	/*
@@ -591,11 +591,11 @@ xst_time_filter (GtkEntry *entry, const gchar *new_text,
 		tool->sec = new_val;
 	}
 
-	xst_dialog_modify (XST_TOOL (tool)->main_dialog);
+	gst_dialog_modify (GST_TOOL (tool)->main_dialog);
 }
 
 static void
-xst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, XstTimeTool *tool)
+gst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
 {
 	gint num = atoi (gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1));
 
@@ -614,13 +614,13 @@ xst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, XstTimeTool *tool)
 }
 
 static void
-xst_time_change (GtkSpinButton *widget, gpointer data)
+gst_time_change (GtkSpinButton *widget, gpointer data)
 {
-	XstTimeTool *tool = data;
+	GstTimeTool *tool = data;
 	gint value = gtk_spin_button_get_value (widget);
 
 	g_return_if_fail (GTK_IS_SPIN_BUTTON (widget));
-	g_return_if_fail (XST_IS_TIME_TOOL (tool));
+	g_return_if_fail (GST_IS_TIME_TOOL (tool));
 
 	if (widget == GTK_SPIN_BUTTON (tool->seconds)) {
 		if (value > 59) {
@@ -641,54 +641,54 @@ xst_time_change (GtkSpinButton *widget, gpointer data)
 	} else if (widget == GTK_SPIN_BUTTON (tool->hours)) {
 		if (value > 23) {
 			gtk_spin_button_set_value (widget, value - 24);
-			xst_time_update_date (tool, +1);
+			gst_time_update_date (tool, +1);
 		} else if (value < 0) {
-			xst_time_update_date (tool, -1);
+			gst_time_update_date (tool, -1);
 			gtk_spin_button_set_value (widget, value + 24);
 		}
 	}
 
-	xst_dialog_modify (XST_TOOL (tool)->main_dialog);
-	xst_time_clock_stop (tool);
+	gst_dialog_modify (GST_TOOL (tool)->main_dialog);
+	gst_time_clock_stop (tool);
 	
 	/* We have to set it to 01 instead of 1, it's more pretty */
 	gtk_entry_set_text (GTK_ENTRY (widget), g_strdup_printf ("%02d", value));
 }
 
 static GtkWidget *
-xst_time_spin_button_create (XstTimeTool *tool, gchar *label)
+gst_time_spin_button_create (GstTimeTool *tool, gchar *label)
 {
-	GtkWidget *spin = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog, label);
+	GtkWidget *spin = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, label);
 	
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), 0);
 	g_signal_connect (G_OBJECT (spin), "insert_text",
-			  G_CALLBACK (xst_time_filter),
+			  G_CALLBACK (gst_time_filter),
 			  tool);
 	g_signal_connect (G_OBJECT (spin), "key_press_event",
-			  G_CALLBACK (xst_time_key_press_event_cb),
+			  G_CALLBACK (gst_time_key_press_event_cb),
 			  tool);
 	g_signal_connect_after (G_OBJECT (spin), "focus_out_event",
-			        G_CALLBACK (xst_time_focus_out),
+			        G_CALLBACK (gst_time_focus_out),
 			        tool);
 	g_signal_connect (G_OBJECT (spin), "value-changed",
-			  G_CALLBACK (xst_time_change), 
+			  G_CALLBACK (gst_time_change), 
 			  tool);
 	return spin;
 }
 
 static void
-xst_time_load_widgets (XstTimeTool *tool)
+gst_time_load_widgets (GstTimeTool *tool)
 {
-	XstDialog *dialog = XST_TOOL (tool)->main_dialog;
+	GstDialog *dialog = GST_TOOL (tool)->main_dialog;
 	
-	tool->seconds = xst_time_spin_button_create (tool, "seconds");
-	tool->minutes = xst_time_spin_button_create (tool, "minutes");
-	tool->hours   = xst_time_spin_button_create (tool, "hours");
-	tool->map_hover_label = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog, "location_label");
+	tool->seconds = gst_time_spin_button_create (tool, "seconds");
+	tool->minutes = gst_time_spin_button_create (tool, "minutes");
+	tool->hours   = gst_time_spin_button_create (tool, "hours");
+	tool->map_hover_label = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "location_label");
 }
 
 void
-xst_time_clock_stop (XstTimeTool *tool)
+gst_time_clock_stop (GstTimeTool *tool)
 {
 	if (!tool->running || tool->ticking)
 		return;
@@ -702,23 +702,23 @@ xst_time_clock_stop (XstTimeTool *tool)
 
 
 void
-xst_time_clock_start (XstTimeTool *tool)
+gst_time_clock_start (GstTimeTool *tool)
 {
 	if (tool->running)
 		return;
 
-	tool->timeout = gtk_timeout_add (1000, xst_time_clock_tick,
-					 XST_TIME_TOOL (tool));
+	tool->timeout = gtk_timeout_add (1000, gst_time_clock_tick,
+					 GST_TIME_TOOL (tool));
 	tool->running = TRUE;
 }
 
 void
-xst_time_set_full (XstTimeTool *time_tool, struct tm *tm)
+gst_time_set_full (GstTimeTool *time_tool, struct tm *tm)
 {
 	GtkWidget *calendar_widget;
 	gint day, month, year;
 
-	calendar_widget = xst_dialog_get_widget (XST_TOOL (time_tool)->main_dialog, "calendar");
+	calendar_widget = gst_dialog_get_widget (GST_TOOL (time_tool)->main_dialog, "calendar");
 	
 	gtk_calendar_get_date (GTK_CALENDAR (calendar_widget), &year, &month, &day);
 	year -= 1900;
@@ -732,11 +732,11 @@ xst_time_set_full (XstTimeTool *time_tool, struct tm *tm)
 	time_tool->min = tm->tm_min;
 	time_tool->sec = tm->tm_sec;
 
-	xst_time_update (time_tool);
+	gst_time_update (time_tool);
 }
 
 void
-xst_time_set_from_localtime (XstTimeTool *time_tool, gint correction)
+gst_time_set_from_localtime (GstTimeTool *time_tool, gint correction)
 {
 	struct tm *tm;
 	time_t tt;
@@ -745,24 +745,24 @@ xst_time_set_from_localtime (XstTimeTool *time_tool, gint correction)
 	tt += correction; 
 	tm = localtime (&tt);
 
-	xst_time_set_full (time_tool, tm);
+	gst_time_set_full (time_tool, tm);
 }
 
 void
-xst_time_connect_calendar_signals (XstTimeTool *tool)
+gst_time_connect_calendar_signals (GstTimeTool *tool)
 {
-	GtkWidget *calendar = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog, "calendar");
+	GtkWidget *calendar = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "calendar");
 
-	g_signal_connect (G_OBJECT (calendar), "day_selected", G_CALLBACK (xst_time_calendar_change_cb), tool);
-	g_signal_connect (G_OBJECT (calendar), "month_changed", G_CALLBACK (xst_time_calendar_change_cb), tool);
+	g_signal_connect (G_OBJECT (calendar), "day_selected", G_CALLBACK (gst_time_calendar_change_cb), tool);
+	g_signal_connect (G_OBJECT (calendar), "month_changed", G_CALLBACK (gst_time_calendar_change_cb), tool);
 }
 
 /* changes the calendar first day depending on the locale configuration */
 static void
-xst_time_configure_calendar (XstTimeTool *tool)
+gst_time_configure_calendar (GstTimeTool *tool)
 {
 	gint firstday;
-	GtkWidget *calendar = xst_dialog_get_widget (XST_TOOL (tool)->main_dialog, "calendar");
+	GtkWidget *calendar = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "calendar");
 
 	setlocale (LC_ALL, "");
 	firstday = (int) *(nl_langinfo (_NL_TIME_FIRST_WEEKDAY));
@@ -776,24 +776,24 @@ xst_time_configure_calendar (XstTimeTool *tool)
 int
 main (int argc, char *argv[])
 {
-	XstTool *tool;
+	GstTool *tool;
 
-	xst_init ("time-admin", argc, argv, NULL);
-	tool = xst_time_tool_new ();
-	xst_tool_construct (tool, "time", _("Time and Date Settings"));
+	gst_init ("time-admin", argc, argv, NULL);
+	tool = gst_time_tool_new ();
+	gst_tool_construct (tool, "time", _("Time and Date Settings"));
 
-	xst_time_configure_calendar (XST_TIME_TOOL (tool));
+	gst_time_configure_calendar (GST_TIME_TOOL (tool));
 
-	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
-	xst_dialog_connect_signals (tool->main_dialog, signals);
-	xst_time_connect_calendar_signals (XST_TIME_TOOL (tool));
+	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	gst_dialog_connect_signals (tool->main_dialog, signals);
+	gst_time_connect_calendar_signals (GST_TIME_TOOL (tool));
 
-	xst_time_load_widgets (XST_TIME_TOOL (tool));
-	xst_time_populate_ntp_list (XST_TIME_TOOL (tool));
-	xst_time_init_timezone (XST_TIME_TOOL (tool));
-	xst_tool_main (tool, TRUE);
+	gst_time_load_widgets (GST_TIME_TOOL (tool));
+	gst_time_populate_ntp_list (GST_TIME_TOOL (tool));
+	gst_time_init_timezone (GST_TIME_TOOL (tool));
+	gst_tool_main (tool, TRUE);
 
-	xst_time_clock_start (XST_TIME_TOOL (tool));
+	gst_time_clock_start (GST_TIME_TOOL (tool));
 	gtk_main ();
 
 	return 0;

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-#ifndef __XST_HOSTS_H__
-#define __XST_HOSTS_H__
+#ifndef __GST_HOSTS_H__
+#define __GST_HOSTS_H__
 
 /* Copyright (C) 2000-2001 Ximian, Inc.
  *
@@ -22,7 +22,7 @@
  */
 
 
-void xst_hosts_update_sensitivity (void);
+void gst_hosts_update_sensitivity (void);
 
 void on_hosts_changed        (GtkWidget *w, gpointer null);
 void on_hosts_add_clicked    (GtkWidget * button, gpointer user_data);
@@ -31,10 +31,10 @@ void on_hosts_update_clicked (GtkWidget *b, gpointer null);
 
 void on_hosts_ip_changed     (GtkEditable *w, gpointer not_used);
 
-void hosts_init_gui          (XstTool *tool);
-void hosts_list_append       (XstTool *tool, const gchar *text[]);
-void hosts_list_remove       (XstTool *tool, const gchar *ip);
+void hosts_init_gui          (GstTool *tool);
+void hosts_list_append       (GstTool *tool, const gchar *text[]);
+void hosts_list_remove       (GstTool *tool, const gchar *ip);
 gboolean hosts_list_get_selected (gchar **ip, gchar **alias);
-void hosts_list_save         (XstTool *tool, xmlNodePtr root);
+void hosts_list_save         (GstTool *tool, xmlNodePtr root);
 
-#endif /* __XST_HOSTS_H__ */
+#endif /* __GST_HOSTS_H__ */

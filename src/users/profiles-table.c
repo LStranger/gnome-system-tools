@@ -28,7 +28,7 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "table.h"
 #include "profiles-table.h"
 #include "callbacks.h"
@@ -40,7 +40,7 @@ ProfilesTableConfig profiles_table_config [] = {
 	   {NULL}
 };
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 static void
 add_profiles_columns (GtkTreeView *treeview)
@@ -83,7 +83,7 @@ create_profiles_model (void)
 void
 create_profiles_table (void)
 {
-	   GtkWidget *profiles_table = xst_dialog_get_widget (tool->main_dialog, "profiles_table");
+	   GtkWidget *profiles_table = gst_dialog_get_widget (tool->main_dialog, "profiles_table");
 	   GtkTreeModel *model = create_profiles_model ();
 	   GtkTreeSelection *selection;
 
@@ -103,21 +103,21 @@ create_profiles_table (void)
 void
 populate_profiles_table (void)
 {
-	   GtkWidget *profile_table = xst_dialog_get_widget (tool->main_dialog, "profiles_table");
+	   GtkWidget *profile_table = gst_dialog_get_widget (tool->main_dialog, "profiles_table");
 	   GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (profile_table));
 	   xmlNodePtr root = get_root_node (NODE_PROFILE);
 	   xmlNodePtr profile;
 	   GtkTreeIter iter;
 
-	   for (profile = xst_xml_element_find_first (root, "profile");
+	   for (profile = gst_xml_element_find_first (root, "profile");
 		   profile != NULL;
-		   profile = xst_xml_element_find_next (profile, "profile"))
+		   profile = gst_xml_element_find_next (profile, "profile"))
 	   {
 			 gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 			 gtk_tree_store_set (GTK_TREE_STORE (model),
 					     &iter,
-					     COL_PROFILE_NAME, xst_xml_get_child_content (profile, "name"),
-					     COL_PROFILE_COMMENT, xst_xml_get_child_content (profile, "comment"),
+					     COL_PROFILE_NAME, gst_xml_get_child_content (profile, "name"),
+					     COL_PROFILE_COMMENT, gst_xml_get_child_content (profile, "comment"),
 					     COL_PROFILE_POINTER, profile,
 					     -1);
 	   }
@@ -126,7 +126,7 @@ populate_profiles_table (void)
 void
 profiles_table_update_content (void)
 {
-	GtkWidget *profile_table = xst_dialog_get_widget (tool->main_dialog, "profiles_table");
+	GtkWidget *profile_table = gst_dialog_get_widget (tool->main_dialog, "profiles_table");
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (profile_table));
 
 	gtk_tree_store_clear (GTK_TREE_STORE (model));

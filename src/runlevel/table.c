@@ -28,7 +28,7 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-#include "xst.h"
+#include "gst.h"
 
 #include "table.h"
 #include "callbacks.h"
@@ -50,7 +50,7 @@ struct TreeItem_
 	TreeItem *children;
 };
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 /* These are the images that are used in the table */
 GdkPixbuf *start_icon;
@@ -148,7 +148,7 @@ pixmaps_create (GtkWidget *widget)
 void
 table_create (void)
 {
-	GtkWidget *runlevel_table = xst_dialog_get_widget (tool->main_dialog, "runlevel_table");
+	GtkWidget *runlevel_table = gst_dialog_get_widget (tool->main_dialog, "runlevel_table");
 	GtkTreeModel *model;
 	
 	model = create_model ();
@@ -165,7 +165,7 @@ table_create (void)
 static gchar*
 table_value_priority (xmlNodePtr node)
 {
-	gchar *buf =  xst_xml_get_child_content (node, "priority");
+	gchar *buf =  gst_xml_get_child_content (node, "priority");
 	gint priority = atoi (buf);
 
 	g_free (buf);
@@ -178,8 +178,8 @@ table_value_service(xmlNodePtr node)
 	gchar *buf, *name, *script;
 	g_return_val_if_fail (node != NULL, NULL);
 
-	name = xst_xml_get_child_content (node, "name");
-	script = xst_xml_get_child_content (node, "script");
+	name = gst_xml_get_child_content (node, "name");
+	script = gst_xml_get_child_content (node, "script");
 	
 	if (name == NULL)
 		buf = script;
@@ -199,17 +199,17 @@ table_value_runlevel (xmlNodePtr node,gint runlevel)
 	gchar *action, *number;
 	g_return_val_if_fail (node != NULL, NULL);
 	
-	runlevels = xst_xml_element_find_first (node, "runlevels");
+	runlevels = gst_xml_element_find_first (node, "runlevels");
 	
 	if (runlevels == NULL)
 		return do_nothing_icon;
 
-	for (rl = xst_xml_element_find_first (runlevels, "runlevel"); rl != NULL; rl = xst_xml_element_find_next (rl, "runlevel"))
+	for (rl = gst_xml_element_find_first (runlevels, "runlevel"); rl != NULL; rl = gst_xml_element_find_next (rl, "runlevel"))
 	{
-		number = xst_xml_get_child_content (rl, "number");
+		number = gst_xml_get_child_content (rl, "number");
 		if (atoi (number) == runlevel)
 		{
-			action = xst_xml_get_child_content (rl, "action");
+			action = gst_xml_get_child_content (rl, "action");
 			if (strcmp (action, "start") == 0)
 			{
 				g_free (number);
@@ -253,13 +253,13 @@ table_populate (xmlNodePtr root)
 {
 	xmlNodePtr service,services;
 	GtkTreeIter iter;
-	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(xst_dialog_get_widget (tool->main_dialog, "runlevel_table")));
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW(gst_dialog_get_widget (tool->main_dialog, "runlevel_table")));
 	
 	g_return_if_fail (root != NULL);
 	
-	services = xst_xml_element_find_first (root, "services");
+	services = gst_xml_element_find_first (root, "services");
 	
-	for (service = xst_xml_element_find_first (services, "service"); service != NULL; service = xst_xml_element_find_next (service, "service"))
+	for (service = gst_xml_element_find_first (services, "service"); service != NULL; service = gst_xml_element_find_next (service, "service"))
 	{
 		TreeItem *item;
 		
@@ -284,15 +284,15 @@ table_populate (xmlNodePtr root)
 }
 
 void
-table_update_state (XstDialogComplexity complexity)
+table_update_state (GstDialogComplexity complexity)
 {
 	gchar *default_runlevel, *rl;
 	GtkTreeViewColumn *column;
-	GtkTreeView *treeview = GTK_TREE_VIEW (xst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
+	GtkTreeView *treeview = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
 	gint i;
 	
-	default_runlevel = xst_conf_get_string (tool, "default_runlevel");
-	if (complexity == XST_DIALOG_BASIC) {
+	default_runlevel = gst_conf_get_string (tool, "default_runlevel");
+	if (complexity == GST_DIALOG_BASIC) {
 		column = gtk_tree_view_get_column (treeview, COL_PRIORITY);
 		gtk_tree_view_column_set_visible (column, FALSE);
 		
@@ -326,16 +326,16 @@ table_update_state (XstDialogComplexity complexity)
 void 
 table_update_headers (xmlNodePtr root)
 {
-	XstDialogComplexity complexity;
+	GstDialogComplexity complexity;
 	gchar *buf, *default_runlevel;
 	
-	complexity = XST_DIALOG (tool->main_dialog)->complexity;
+	complexity = GST_DIALOG (tool->main_dialog)->complexity;
         
-	buf = xst_xml_get_child_content (root, "runlevel");
+	buf = gst_xml_get_child_content (root, "runlevel");
         
 	default_runlevel = g_strdup (buf);
-	xst_conf_set_string (tool, "default_runlevel", default_runlevel);
-	if (complexity == XST_DIALOG_BASIC) {
+	gst_conf_set_string (tool, "default_runlevel", default_runlevel);
+	if (complexity == GST_DIALOG_BASIC) {
 		table_update_state (complexity);
 	}
 		

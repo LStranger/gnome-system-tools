@@ -28,7 +28,7 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-#include "xst.h"
+#include "gst.h"
 
 #include "table.h"
 #include "groups-table.h"
@@ -42,7 +42,7 @@ GroupsTableConfig groups_table_config [] = {
 	{NULL}
 };
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 GtkWidget *groups_table;
 
@@ -92,7 +92,7 @@ create_groups_table (void)
 	
 	model = create_groups_model ();
 	
-	groups_table = xst_dialog_get_widget (tool->main_dialog, "groups_table");
+	groups_table = gst_dialog_get_widget (tool->main_dialog, "groups_table");
 	gtk_tree_view_set_model (GTK_TREE_VIEW (groups_table), model);
 	
 	g_object_unref (model);
@@ -111,7 +111,7 @@ static char*
 groups_table_value (xmlNodePtr node, gchar *key)
 {
         g_return_val_if_fail (node != NULL, NULL);
-        return xst_xml_get_child_content (node, key);
+        return gst_xml_get_child_content (node, key);
 }
 
 static GroupTreeItem*
@@ -136,7 +136,7 @@ populate_groups_table (void)
 	g_return_if_fail (model != NULL);
 	g_return_if_fail (root != NULL);
 	
-	for (group = xst_xml_element_find_first (root, "group"); group != NULL; group = xst_xml_element_find_next (group, "group"))
+	for (group = gst_xml_element_find_first (root, "group"); group != NULL; group = gst_xml_element_find_next (group, "group"))
 	{
 		if (check_node_visibility (group))
 		{

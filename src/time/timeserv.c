@@ -7,13 +7,13 @@
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#include "xst.h"
+#include "gst.h"
 
 #include "transfer.h"
 #include "timeserv.h"
 
 void
-on_ntp_addserver (GtkButton *button, XstDialog *dialog)
+on_ntp_addserver (GtkButton *button, GstDialog *dialog)
 {
 	GtkEditable *ntp_entry;
 	GtkTreeView *ntp_list;
@@ -22,8 +22,8 @@ on_ntp_addserver (GtkButton *button, XstDialog *dialog)
 	GtkTreeIter iter;
 	gchar *text;
 	
-	ntp_entry = GTK_EDITABLE (xst_dialog_get_widget (dialog, "ntp_entry"));
-	ntp_list = GTK_TREE_VIEW (xst_dialog_get_widget (dialog, "ntp_list2"));
+	ntp_entry = GTK_EDITABLE (gst_dialog_get_widget (dialog, "ntp_entry"));
+	ntp_list = GTK_TREE_VIEW (gst_dialog_get_widget (dialog, "ntp_list2"));
         store = GTK_LIST_STORE (gtk_tree_view_get_model (ntp_list));
 	
 	text = gtk_editable_get_chars (ntp_entry, 0, -1);

@@ -23,13 +23,13 @@
 
 #include <gnome.h>
 #include <glade/glade.h>
-#include "xst.h"
+#include "gst.h"
 
 #include "transfer.h"
 #include "callbacks.h"
 #include "table.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 static void
 transfer_check_data (xmlNodePtr root)
@@ -38,10 +38,10 @@ transfer_check_data (xmlNodePtr root)
 }
 
 void
-transfer_xml_to_gui (XstTool *tool, gpointer data)
+transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
-	root = xst_xml_doc_get_root(tool->config);
+	root = gst_xml_doc_get_root(tool->config);
 	transfer_check_data (root);
 	table_update_headers(root);
 	table_populate (root);

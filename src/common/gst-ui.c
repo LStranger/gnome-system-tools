@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Tambet Ingo <tambet@ximian.com>
- *          Miguel de Icaza <miguel@ximian.com> (xst_ui_image_widget_create)
+ *          Miguel de Icaza <miguel@ximian.com> (gst_ui_image_widget_create)
  */
 
 #ifdef HAVE_CONFIG_H
@@ -24,9 +24,9 @@
 #endif
 
 #include <gnome.h>
-#include "xst-ui.h"
+#include "gst-ui.h"
 
-/* For xst_ui_image_widget_create */
+/* For gst_ui_image_widget_create */
 #include <config.h>
 #include <gtk/gtksignal.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -79,7 +79,7 @@ get_list_item_by_name (GList *list, const gchar *label)
 }
 
 static GtkWidget *
-xst_ui_image_widget_create_canvas (gchar *filename)
+gst_ui_image_widget_create_canvas (gchar *filename)
 {
 	GtkWidget *canvas;
 	GdkPixbuf *pixbuf;
@@ -116,17 +116,17 @@ xst_ui_image_widget_create_canvas (gchar *filename)
 /* Stolen and adapted from evolution's e-util/e-gui-utils.c
  * Arturo Espinosa <arturo@ximian.com> */
 GtkWidget *
-xst_ui_image_widget_create (gchar *name,
+gst_ui_image_widget_create (gchar *name,
 			    gchar *string1, gchar *string2,
 			    gint int1, gint int2)
 {
 	GtkWidget *canvas, *alignment;
 
-	/* See the message in xst_tool_init on why we call this funciton with NULL */
+	/* See the message in gst_tool_init on why we call this funciton with NULL */
 	if (!string1)
 		return NULL;
 
-	canvas = xst_ui_image_widget_create_canvas (string1);
+	canvas = gst_ui_image_widget_create_canvas (string1);
 	g_return_val_if_fail (canvas != NULL, NULL);
 	
 	alignment = gtk_widget_new (gtk_alignment_get_type(),
@@ -143,12 +143,12 @@ xst_ui_image_widget_create (gchar *name,
 }
 
 void
-xst_ui_image_set_pix (GtkWidget *widget, gchar *filename)
+gst_ui_image_set_pix (GtkWidget *widget, gchar *filename)
 {
 	GtkWidget *canvas;
 	GList *child;
 
-	canvas = xst_ui_image_widget_create_canvas (filename);
+	canvas = gst_ui_image_widget_create_canvas (filename);
 	g_return_if_fail (canvas != NULL);
 		
 	child = gtk_container_get_children (GTK_CONTAINER (widget));
@@ -157,7 +157,7 @@ xst_ui_image_set_pix (GtkWidget *widget, gchar *filename)
 }
 
 GtkWidget *
-xst_ui_image_widget_get (GladeXML *gui, gchar *name)
+gst_ui_image_widget_get (GladeXML *gui, gchar *name)
 {
 	GList *children;
 	GtkWidget *container;
@@ -169,7 +169,7 @@ xst_ui_image_widget_get (GladeXML *gui, gchar *name)
 }
 
 /**
- * xst_ui_option_menu_get_selected_row: Returns index of selected label in GtkOptionMenu.
+ * gst_ui_option_menu_get_selected_row: Returns index of selected label in GtkOptionMenu.
  * @option_menu: GtkOptionMenu to examine.
  *
  * This is a hack that makes it easier (possible) to define GtkOptionMenu choices in Glade
@@ -186,7 +186,7 @@ xst_ui_image_widget_get (GladeXML *gui, gchar *name)
  * label.
  **/
 gint
-xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
+gst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
 {
 	GtkWidget *selected, *found;
 	GList *menu_items;
@@ -214,7 +214,7 @@ xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
 }
 
 /**
- * xst_ui_option_menu_get_selected_string: Returns string of selected label in GtkOptionMenu.
+ * gst_ui_option_menu_get_selected_string: Returns string of selected label in GtkOptionMenu.
  * @option_menu: GtkOptionMenu to examine.
  * 
  * It only works for GtkMenues conataining GtkLabels.
@@ -223,7 +223,7 @@ xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
  * GtkOptionMenu. NULL if active item isn't GtkLabel. Must be g_free()'d.
  **/
 gchar *
-xst_ui_option_menu_get_selected_string (GtkOptionMenu *option_menu)
+gst_ui_option_menu_get_selected_string (GtkOptionMenu *option_menu)
 {
 	gchar *buf;
 
@@ -243,7 +243,7 @@ xst_ui_option_menu_get_selected_string (GtkOptionMenu *option_menu)
 }
 
 void
-xst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar *string)
+gst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar *string)
 {
 	GtkWidget *menu, *found;
 	GList *menu_items;
@@ -268,7 +268,7 @@ xst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar 
 
 	found = get_list_item_by_name (menu_items, string);
 	if (!found) {
-		g_warning ("xst_ui_option_menu_set_selected_string: "
+		g_warning ("gst_ui_option_menu_set_selected_string: "
 			   "'%s' not in menu.", string);
 		return;
 	}
@@ -278,7 +278,7 @@ xst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar 
 }
 
 /**
- * xst_ui_option_menu_add_string: Add new GtkLabel child to GtkOptionMenu.
+ * gst_ui_option_menu_add_string: Add new GtkLabel child to GtkOptionMenu.
  * @option_menu:  GtkOptionMenu to examine. 
  * @string: Pointer to gchar containing the label.
  * 
@@ -287,7 +287,7 @@ xst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar 
  * Return Value: the newly created GtkMenuItem.
  **/
 GtkWidget *
-xst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
+gst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
 {
 	GtkWidget *menu, *item;
 	gboolean new_menu = FALSE;
@@ -314,17 +314,17 @@ xst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
 }
 
 /**
- * xst_ui_option_menu_remove_string: Remove GtkLabel child from GtkOptionMenu.
+ * gst_ui_option_menu_remove_string: Remove GtkLabel child from GtkOptionMenu.
  * @option_menu: GtkOptionMenu to examine.
  * @string: Pointer to gchar containing the label.
  * 
  * Simple wrapper to make life easier when dealing with GtkOptionMenus containing GtkLabels.
  **/
 void
-xst_ui_option_menu_remove_string (GtkOptionMenu *option_menu, const gchar *string)
+gst_ui_option_menu_remove_string (GtkOptionMenu *option_menu, const gchar *string)
 {
 	GtkWidget *found = NULL;
-	gchar *buf = xst_ui_option_menu_get_selected_string (option_menu);
+	gchar *buf = gst_ui_option_menu_get_selected_string (option_menu);
 	GtkWidget *menu = gtk_option_menu_get_menu (option_menu);
 
 	g_return_if_fail (option_menu != NULL);
@@ -350,7 +350,7 @@ menu_clear (GtkWidget *widget, gpointer data)
 }
 
 void
-xst_ui_option_menu_clear (GtkOptionMenu *option_menu)
+gst_ui_option_menu_clear (GtkOptionMenu *option_menu)
 {
 	GtkWidget *menu;
 
@@ -362,7 +362,7 @@ xst_ui_option_menu_clear (GtkOptionMenu *option_menu)
 }
 
 /**
- * xst_ui_entry_set_text:
+ * gst_ui_entry_set_text:
  * @entry: GtkEntry to set to
  * @str: string to set
  *
@@ -370,7 +370,7 @@ xst_ui_option_menu_clear (GtkOptionMenu *option_menu)
  * 
  **/
 void
-xst_ui_entry_set_text (void *entry, const gchar *str)
+gst_ui_entry_set_text (void *entry, const gchar *str)
 {
 	g_return_if_fail (entry != NULL);
 	g_return_if_fail (GTK_IS_ENTRY (entry));
@@ -379,7 +379,7 @@ xst_ui_entry_set_text (void *entry, const gchar *str)
 }
 
 /**
- * xst_ui_logout_dialog:
+ * gst_ui_logout_dialog:
  * @void: 
  * 
  * Asks user for confirmation and restarts X server.
@@ -387,7 +387,7 @@ xst_ui_entry_set_text (void *entry, const gchar *str)
  * Return Value: TRUE if logout, FALSE if not.
  **/
 gboolean
-xst_ui_logout_dialog (const gchar *message)
+gst_ui_logout_dialog (const gchar *message)
 {
 	GtkWidget *d;
 	gchar *tmp;
@@ -424,13 +424,13 @@ xst_ui_logout_dialog (const gchar *message)
 }
 
 /**
- * xst_ui_text_view_clear:
+ * gst_ui_text_view_clear:
  * @view: GtkTextView
  * 
  * Simple wrapper to clear buffer of GtkTextView.
  **/
 void
-xst_ui_text_view_clear (GtkTextView *view)
+gst_ui_text_view_clear (GtkTextView *view)
 {
 	GtkTextBuffer *buffer;
 
@@ -442,7 +442,7 @@ xst_ui_text_view_clear (GtkTextView *view)
 }
 
 /**
- * xst_ui_text_view_get_text:
+ * gst_ui_text_view_get_text:
  * @view: GtkTreeView
  * 
  * Get all text from GtkTextView. Note that using this function
@@ -451,7 +451,7 @@ xst_ui_text_view_clear (GtkTextView *view)
  * Return Value: Text, which should be freed when done using it.
  **/
 gchar *
-xst_ui_text_view_get_text (GtkTextView *view)
+gst_ui_text_view_get_text (GtkTextView *view)
 {
 	GtkTextBuffer *buffer;
 	GtkTextIter   start_iter;
@@ -468,7 +468,7 @@ xst_ui_text_view_get_text (GtkTextView *view)
 }
 
 /**
- * xst_ui_text_view_add_text:
+ * gst_ui_text_view_add_text:
  * @view: GtkTreeView
  * @text: 
  * 
@@ -477,7 +477,7 @@ xst_ui_text_view_get_text (GtkTextView *view)
  *
  **/
 void
-xst_ui_text_view_add_text (GtkTextView *view, const gchar *text)
+gst_ui_text_view_add_text (GtkTextView *view, const gchar *text)
 {
 	GtkTextBuffer *buffer;
 	GtkTextIter   end_iter;

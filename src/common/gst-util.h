@@ -1,8 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.h: this file is part of runlevel-admin, a ximian-setup-tool frontend 
- * for run level services administration.
- * 
- * Copyright (C) 2002 Ximian, Inc.
+/* Copyright (C) 2000-2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -18,14 +15,16 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho <garparr@teleline.es>.
+ * Authors: Hans Petter Jansson <hpj@ximian.com>.
  */
 
-#ifndef _TRANSFER_H
-#define _TRANSFER_H
+#ifndef GST_UTIL_H
+#define GST_UTIL_H
 
-#include "gst.h"
+void   gst_util_nice_hostname     (gchar *hostname);
+gchar *gst_util_nice_hostname_dup (gchar *hostname);
+gchar *gst_util_nice_path_dup     (gchar *path);
 
-void	transfer_xml_to_gui	(GstTool *tool, gpointer data);
+gchar *gst_util_strcasestr        (const gchar *haystack, const gchar *needle);
 
-#endif /* TRANSFER_H */
+#endif /* GST_UTIL_H */

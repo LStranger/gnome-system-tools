@@ -28,13 +28,13 @@
 #include <ctype.h>
 #include <gnome.h>
 
-#include "xst.h"
-#include "xst-report-hook.h"
+#include "gst.h"
+#include "gst-report-hook.h"
 #include "callbacks.h"
 #include "transfer.h"
 #include "table.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 extern GtkWidget *boot_table;
 extern GtkTreeIter default_entry_iter;
 
@@ -71,11 +71,11 @@ on_boot_table_clicked (GtkWidget *w, gpointer data)
 
 		/* we set the current iter as the default */
 		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
-		label = xst_xml_get_child_content (node, "label");
-		xst_xml_set_child_content (xst_xml_doc_get_root (tool->config), "default", label);
+		label = gst_xml_get_child_content (node, "label");
+		gst_xml_set_child_content (gst_xml_doc_get_root (tool->config), "default", label);
 		default_entry_iter = iter;
 
-		xst_dialog_modify (tool->main_dialog);
+		gst_dialog_modify (tool->main_dialog);
 	}
 	
 	g_list_free (column_list);
@@ -95,30 +95,30 @@ on_boot_table_cursor_changed (GtkTreeSelection *selection, gpointer data)
 void
 callbacks_actions_set_sensitive (gboolean state)
 {
-	XstDialogComplexity complexity;
+	GstDialogComplexity complexity;
 
 	complexity = tool->main_dialog->complexity;
 
-	if (xst_tool_get_access (tool) && complexity == XST_DIALOG_ADVANCED) {
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_add"), TRUE);
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_delete"),
+	if (gst_tool_get_access (tool) && complexity == GST_DIALOG_ADVANCED) {
+		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "boot_add"), TRUE);
+		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "boot_delete"),
 					  state);
 	}
 	
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
 }
 
 static void
-callbacks_buttons_set_visibility (XstDialog *main_dialog)
+callbacks_buttons_set_visibility (GstDialog *main_dialog)
 {
-	switch (xst_dialog_get_complexity (main_dialog)) {
-	case XST_DIALOG_ADVANCED:
-		gtk_widget_show (xst_dialog_get_widget (main_dialog, "boot_add"));
-		gtk_widget_show (xst_dialog_get_widget (main_dialog, "boot_delete"));
+	switch (gst_dialog_get_complexity (main_dialog)) {
+	case GST_DIALOG_ADVANCED:
+		gtk_widget_show (gst_dialog_get_widget (main_dialog, "boot_add"));
+		gtk_widget_show (gst_dialog_get_widget (main_dialog, "boot_delete"));
 		break;
-	case XST_DIALOG_BASIC:
-		gtk_widget_hide (xst_dialog_get_widget (main_dialog, "boot_add"));
-		gtk_widget_hide (xst_dialog_get_widget (main_dialog, "boot_delete"));
+	case GST_DIALOG_BASIC:
+		gtk_widget_hide (gst_dialog_get_widget (main_dialog, "boot_add"));
+		gtk_widget_hide (gst_dialog_get_widget (main_dialog, "boot_delete"));
 		break;
 	default:
 		g_warning ("Unknown complexity.");
@@ -139,9 +139,9 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 	gint         count, reply;
 	GtkWidget   *d;
 	
-	g_return_if_fail (xst_tool_get_access (tool));
+	g_return_if_fail (gst_tool_get_access (tool));
 
-	count = boot_image_count (xst_xml_doc_get_root (tool->config));
+	count = boot_image_count (gst_xml_doc_get_root (tool->config));
 	if (count <= 1) {
 		d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 					    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -161,7 +161,7 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
 	}
 	
-	label = xst_xml_get_child_content (node, "label");
+	label = gst_xml_get_child_content (node, "label");
 	buf = g_strdup_printf (_("Are you sure you want to delete '%s'?"), label);
 	g_free (label);
 
@@ -178,16 +178,16 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 	if (reply != GTK_RESPONSE_YES)
 		return;
 
-	xst_xml_element_destroy (node);
+	gst_xml_element_destroy (node);
 	boot_table_update ();
-	xst_dialog_modify (tool->main_dialog);
+	gst_dialog_modify (tool->main_dialog);
 	callbacks_actions_set_sensitive (FALSE);
 }
 
 void
-on_main_dialog_update_complexity (XstDialog *main_dialog, gpointer data)
+on_main_dialog_update_complexity (GstDialog *main_dialog, gpointer data)
 {
-	XstDialogComplexity complexity = xst_dialog_get_complexity (tool->main_dialog);
+	GstDialogComplexity complexity = gst_dialog_get_complexity (tool->main_dialog);
 	
 	boot_table_update_state (complexity);
 	
@@ -197,7 +197,7 @@ on_main_dialog_update_complexity (XstDialog *main_dialog, gpointer data)
 /* Hooks */
 
 gboolean
-callbacks_conf_read_failed_hook (XstTool *tool, XstReportLine *rline, gpointer data)
+callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, gpointer data)
 {
 	GtkWidget *dialog;
 	gchar *txt;

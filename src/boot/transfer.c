@@ -26,13 +26,13 @@
 
 #include <gnome.h>
 #include <glade/glade.h>
-#include "xst.h"
+#include "gst.h"
 
 #include "transfer.h"
 #include "callbacks.h"
 #include "table.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 
 static void
@@ -42,18 +42,18 @@ transfer_check_default (xmlNodePtr root)
 	gchar *buf1, *buf2;
 	gboolean found;
 
-	def_node = xst_xml_element_find_first (root, "default");
+	def_node = gst_xml_element_find_first (root, "default");
 	if (def_node)
 	{
 		found = FALSE;
-		buf1 = xst_xml_element_get_content (def_node);
+		buf1 = gst_xml_element_get_content (def_node);
 
-		for (node = xst_xml_element_find_first (root, "entry");
+		for (node = gst_xml_element_find_first (root, "entry");
 			node;
-			node = xst_xml_element_find_next (node, "entry"))
+			node = gst_xml_element_find_next (node, "entry"))
 
 		{
-			buf2 = xst_xml_get_child_content (node, "label");
+			buf2 = gst_xml_get_child_content (node, "label");
 
 			if (!buf2)
 				continue;
@@ -71,7 +71,7 @@ transfer_check_default (xmlNodePtr root)
 		g_free (buf1);
 		
 		if (!found)
-			xst_xml_element_destroy (def_node);
+			gst_xml_element_destroy (def_node);
 	}
 }
 
@@ -89,7 +89,7 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 	gchar *buf;
 	gint value;
 
-	buf = xst_xml_get_child_content (root, "timeout");
+	buf = gst_xml_get_child_content (root, "timeout");
 	if (buf) {
 		value = atoi (buf);
 		g_free (buf);
@@ -97,7 +97,7 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 		value = 50;
 	
 	/* Set value in seconds. */
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog,
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog,
 									   "boot_timeout")),
 				   (gfloat) value / 10);
 }
@@ -108,29 +108,29 @@ transfer_globals_gui_to_xml (xmlNodePtr root)
 	xmlNodePtr node;
 	gint val;
 
-	node = xst_xml_element_find_first (root, "prompt");
+	node = gst_xml_element_find_first (root, "prompt");
 
 	if (!node)
-		xst_xml_element_add (root, "prompt");
+		gst_xml_element_add (root, "prompt");
 
 	val = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
-						(xst_dialog_get_widget (tool->main_dialog,
+						(gst_dialog_get_widget (tool->main_dialog,
 									"boot_timeout")));
 
-	node = xst_xml_element_find_first (root, "timeout");
+	node = gst_xml_element_find_first (root, "timeout");
 	if (!node)
-		node = xst_xml_element_add (root, "timeout");
+		node = gst_xml_element_add (root, "timeout");
 
 	/* We need timeout in tenths of seconds, so multiply by 10 */
-	xst_xml_element_set_content (node, g_strdup_printf ("%d", val * 10));
+	gst_xml_element_set_content (node, g_strdup_printf ("%d", val * 10));
 }
 
 void
-transfer_xml_to_gui (XstTool *tool, gpointer data)
+transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 
 	transfer_globals_xml_to_gui (root);
 	transfer_check_data (root);
@@ -139,11 +139,11 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 }
 
 void
-transfer_gui_to_xml (XstTool *tool, gpointer data)
+transfer_gui_to_xml (GstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 
 	transfer_globals_gui_to_xml (root);
 	transfer_check_data (root);

@@ -43,6 +43,6 @@ enum {
 void			table_create				(void);
 void			table_populate				(xmlNodePtr);
 void			table_update_headers			(xmlNodePtr);
-void			table_update_state			(XstDialogComplexity);
+void			table_update_state			(GstDialogComplexity);
 
 #endif /* _E_TABLE_H */

@@ -33,29 +33,29 @@
 #include <stdlib.h>
 #include "transfer.h"
 #include "table.h"
-#include "xst.h"
-#include "xst-report-hook.h"
+#include "gst.h"
+#include "gst-report-hook.h"
 #include "callbacks.h"
 
-XstTool *tool;
+GstTool *tool;
 
-static XstDialogSignal signals [] = {
+static GstDialogSignal signals [] = {
 	{ "runlevel_table", "cursor-changed", G_CALLBACK (on_runlevel_table_clicked) },
 	{ "settings_button", "clicked", G_CALLBACK (on_settings_button_clicked) },
 	{ "dialog_throw_button", "clicked", G_CALLBACK (on_throw_service_button_clicked) },
 	{ "dialog_service_priority", "value-changed", G_CALLBACK (on_service_priority_changed) },
 	{ NULL }};
 
-static XstWidgetPolicy policies [] = {
+static GstWidgetPolicy policies [] = {
 	/* Name                     Basic                        Advanced                   Root   User */
-	{ "settings_button",        XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "settings_button",        GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{NULL}
 };
 
 static void 
-connect_signals (XstTool *tool) 
+connect_signals (GstTool *tool) 
 {
-	xst_dialog_connect_signals (tool->main_dialog, signals);
+	gst_dialog_connect_signals (tool->main_dialog, signals);
 	
 	g_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change", G_CALLBACK (on_main_dialog_update_complexity), NULL);
 }
@@ -64,28 +64,28 @@ connect_signals (XstTool *tool)
 int 
 main (int argc, char *argv[])
 {
-	XstReportHookEntry report_hooks[]={
-		{"boot_conf_read_failed",	callbacks_conf_read_failed_hook,	XST_REPORT_HOOK_LOAD,	FALSE,	NULL},
+	GstReportHookEntry report_hooks[]={
+		{"boot_conf_read_failed",	callbacks_conf_read_failed_hook,	GST_REPORT_HOOK_LOAD,	FALSE,	NULL},
 		{NULL,NULL,-1,FALSE,NULL}
 	};
 	
-	xst_init ("runlevel-admin", argc, argv, NULL);
+	gst_init ("runlevel-admin", argc, argv, NULL);
 	
-	tool = xst_tool_new();
-	xst_tool_construct (tool, "runlevel", _("Runlevel Settings"));
+	tool = gst_tool_new();
+	gst_tool_construct (tool, "runlevel", _("Runlevel Settings"));
 	table_create ();
 
-	xst_dialog_set_widget_policies (tool->main_dialog, policies);
+	gst_dialog_set_widget_policies (tool->main_dialog, policies);
 	
-	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
-	xst_tool_add_report_hooks (tool, report_hooks);
+	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
+	gst_tool_add_report_hooks (tool, report_hooks);
 	
 	connect_signals (tool);
 	
-	xst_dialog_enable_complexity (tool->main_dialog);
+	gst_dialog_enable_complexity (tool->main_dialog);
 	on_main_dialog_update_complexity (GTK_WIDGET (tool->main_dialog), NULL);
 	
-	xst_tool_main (tool,FALSE);
+	gst_tool_main (tool,FALSE);
 	
 	return 0;
 }

@@ -105,10 +105,10 @@ according to specifications.
 1.1  Initialization
      --------------
 
-The very first thing a backend should do, is call xst_init(). This is done as
+The very first thing a backend should do, is call gst_init(). This is done as
 follows:
 
-|  &xst_init($name, $version, $description, @ARGV);
+|  &gst_init($name, $version, $description, @ARGV);
 
 The three first arguments should be defined at the start of the source, under
 a section called "Tool information".
@@ -121,12 +121,12 @@ $version:     The version of this particular backend, major.minor.revision.
 $description: A description of the backend's function, ranging from one line
               to one or two short paragraphs. Indented with 7 spaces.
 
-xst_init() will parse arguments and exit with an informative error message if
+gst_init() will parse arguments and exit with an informative error message if
 the user invoked the backend incorrectly. It will also display a help page if
 the user requested that, and exit.
 
 If control is transferred back to your backend, you need to check the string
-contained in $xst_operation. It will have one of three values:
+contained in $gst_operation. It will have one of three values:
 
 get:    Get system configuration, printing it as XML to stdout.
 
@@ -138,11 +138,11 @@ filter: Read configuration from stdin, parse it, and print it back to stdout.
 Making a top-level function for each method is recommended. The invocation
 code might look like this:
 
-|  &xst_init($name, $version, $description, @ARGV);
+|  &gst_init($name, $version, $description, @ARGV);
 |
-|  if    ($xst_operation eq "get")    { &get(); }
-|  elsif ($xst_operation eq "set")    { &set(); }
-|  elsif ($xst_operation eq "filter") { &filter(); }
+|  if    ($gst_operation eq "get")    { &get(); }
+|  elsif ($gst_operation eq "set")    { &set(); }
+|  elsif ($gst_operation eq "filter") { &filter(); }
 
 
 1.2  Finalization
@@ -152,7 +152,7 @@ When the backend is finished with the system configuration, you have to shut
 it down properly. There's a function call that does this for you, and it
 takes no arguments:
 
-|  &xst_end();
+|  &gst_end();
 
 This must be done after all interaction with the system configuration and
 associated progress reporting has ceased (see chapter 2), but before any XML
@@ -165,7 +165,7 @@ the above rules:
 |  sub filter
 |  {
 |    &xml_parse();
-|    &xst_end();
+|    &gst_end();
 |    &xml_print();
 |  }
 
@@ -192,10 +192,10 @@ peak when waiting for a task to be carried out and they don't have
 information about what's going on), aid in debugging and make it possible for
 users to give programmers clues as to what's breaking, if something breaks.
 
-|  &xst_report_info($id, $text);
-|  &xst_report_warning($id, $text);
-|  &xst_report_error($id, $text);
-|  &xst_report_fatal($id, $text);
+|  &gst_report_info($id, $text);
+|  &gst_report_warning($id, $text);
+|  &gst_report_error($id, $text);
+|  &gst_report_fatal($id, $text);
 
 $id:   A number ranging from 0-99, uniquely specifying the message (for machine
        readability). Info, warning, error and fatal each has its own range of
@@ -217,14 +217,14 @@ the total processing is done, and how much remains. This is progress, ranging
 from 0-99% (the last % represents the actual unloading of the tool). This
 figure is usually displayed in a GtkProgress indicator.
 
-|  &xst_progress($percentage);
+|  &gst_progress($percentage);
 
 $percentage: An integer quantity ranging from 0-99 inclusive.
 
-The xst_progress() function will neutralize common mistakes, like progress
+The gst_progress() function will neutralize common mistakes, like progress
 dropping to a lower value (going backwards) or progress exceeding 99%.
 
-Older backends utilize a function called xst_print_progress(), coupled with a
+Older backends utilize a function called gst_print_progress(), coupled with a
 global variable called $progress_max. This is deprecated behaviour and will
 go away soon.
 

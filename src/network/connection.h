@@ -26,27 +26,27 @@
 #include <glade/glade.h>
 #include <gtk/gtkwidget.h>
 
-#include "xst.h"
+#include "gst.h"
 
 typedef enum {
-	XST_CONNECTION_OTHER = 0,
-	XST_CONNECTION_ETH,
-	XST_CONNECTION_WVLAN,
-	XST_CONNECTION_PPP,
-	XST_CONNECTION_PLIP,
-	XST_CONNECTION_IRLAN,
-	XST_CONNECTION_LO,
-	XST_CONNECTION_UNKNOWN,
-	XST_CONNECTION_LAST
-} XstConnectionType;
+	GST_CONNECTION_OTHER = 0,
+	GST_CONNECTION_ETH,
+	GST_CONNECTION_WVLAN,
+	GST_CONNECTION_PPP,
+	GST_CONNECTION_PLIP,
+	GST_CONNECTION_IRLAN,
+	GST_CONNECTION_LO,
+	GST_CONNECTION_UNKNOWN,
+	GST_CONNECTION_LAST
+} GstConnectionType;
 
 typedef enum {
-	XST_CONNECTION_ERROR_NONE = 0,
-	XST_CONNECTION_ERROR_ENABLED,
-	XST_CONNECTION_ERROR_PPP,
-	XST_CONNECTION_ERROR_STATIC,
-	XST_CONNECTION_ERROR_OTHER /* Always last */
-} XstConnectionErrorType;
+	GST_CONNECTION_ERROR_NONE = 0,
+	GST_CONNECTION_ERROR_ENABLED,
+	GST_CONNECTION_ERROR_PPP,
+	GST_CONNECTION_ERROR_STATIC,
+	GST_CONNECTION_ERROR_OTHER /* Always last */
+} GstConnectionErrorType;
 
 typedef enum {
         IP_MANUAL,
@@ -65,7 +65,7 @@ typedef struct {
 	GladeXML *xml;
 	xmlNode *node;
 	
-	XstConnectionType type;
+	GstConnectionType type;
 	ActivationType    activation;
 	gboolean          bulb_state;
 
@@ -119,36 +119,36 @@ typedef struct {
 
 	/* PtP (PLIP) */
 	gchar *remote_address;
-} XstConnection;
+} GstConnection;
 
-extern void connection_init_gui (XstTool *tool);
-extern XstConnection *connection_new_from_node (xmlNode *node);
-extern XstConnection *connection_new_from_dev_name (char *dev_name, xmlNode *root);
-extern XstConnection *connection_new_from_type (XstConnectionType type, xmlNode *root);
-extern XstConnection *connection_new_from_type_add (XstConnectionType type, xmlNode *root);
+extern void connection_init_gui (GstTool *tool);
+extern GstConnection *connection_new_from_node (xmlNode *node);
+extern GstConnection *connection_new_from_dev_name (char *dev_name, xmlNode *root);
+extern GstConnection *connection_new_from_type (GstConnectionType type, xmlNode *root);
+extern GstConnection *connection_new_from_type_add (GstConnectionType type, xmlNode *root);
 extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection);
 extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
-extern void connection_add_to_list (XstConnection *cxn);
-extern void connection_default_gw_add (XstConnection *cxn);
+extern void connection_add_to_list (GstConnection *cxn);
+extern void connection_default_gw_add (GstConnection *cxn);
 extern void connection_default_gw_remove (gchar *dev);
-extern void connection_default_gw_init (XstTool *tool, gchar *dev);
-extern XstConnection *connection_default_gw_get_connection (XstTool *tool);
-extern XstConnectionErrorType connection_default_gw_check_manual (XstConnection *cxn, gboolean ignore_enabled);
-extern void connection_default_gw_fix (XstConnection *cxn, XstConnectionErrorType error);
-extern void connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn);
-extern void connection_default_gw_set_auto (XstTool *tool);
-extern void connection_update_complexity (XstTool *tool, XstDialogComplexity complexity);
+extern void connection_default_gw_init (GstTool *tool, gchar *dev);
+extern GstConnection *connection_default_gw_get_connection (GstTool *tool);
+extern GstConnectionErrorType connection_default_gw_check_manual (GstConnection *cxn, gboolean ignore_enabled);
+extern void connection_default_gw_fix (GstConnection *cxn, GstConnectionErrorType error);
+extern void connection_default_gw_set_manual (GstTool *tool, GstConnection *cxn);
+extern void connection_default_gw_set_auto (GstTool *tool);
+extern void connection_update_complexity (GstTool *tool, GstDialogComplexity complexity);
 extern void connection_actions_set_sensitive (gboolean state);
-extern void connection_free (XstConnection *);
-extern void connection_configure (XstConnection *cxn);
-extern void connection_save_to_node (XstConnection *cxn, xmlNode *node);
+extern void connection_free (GstConnection *);
+extern void connection_configure (GstConnection *cxn);
+extern void connection_save_to_node (GstConnection *cxn, xmlNode *node);
 
-XstConnection *connection_list_get_active (void);
-void           connection_list_remove     (XstConnection *cxn);
-void           connection_activate        (XstConnection *cxn, gboolean activate);
+GstConnection *connection_list_get_active (void);
+void           connection_list_remove     (GstConnection *cxn);
+void           connection_activate        (GstConnection *cxn, gboolean activate);
 void           connection_list_update     (void);
-gboolean       connection_list_has_dialer (XstTool *tool);
-void           connection_list_save       (XstTool *tool);
-void           connection_list_select_connection (XstConnection *cxn);
+gboolean       connection_list_has_dialer (GstTool *tool);
+void           connection_list_save       (GstTool *tool);
+void           connection_list_select_connection (GstConnection *cxn);
 
 #endif /* CONNECTION_H */

@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Chris L. Bond       <cbond@stormix.com>  gtksu 1.7
- *          Hans Petter Jansson <hpj@ximian.com>     Minor XST adaptions
+ *          Hans Petter Jansson <hpj@ximian.com>     Minor GST adaptions
  */
 
 #define _GNU_SOURCE
@@ -45,7 +45,7 @@
 # include <libutil.h>
 #endif
 
-#include "xst-su.h"
+#include "gst-su.h"
 
 /* ABORT() kills GTK if we're not root, else it just exits.
  */
@@ -62,7 +62,7 @@
 			_exit(0);		\
 		    } while (0)
 
-#define XST_SU_RESPONSE_NP 1
+#define GST_SU_RESPONSE_NP 1
 
 GtkWidget *term;
 static int root;			/* if we are root, no password is
@@ -112,7 +112,7 @@ get_tool_path (gchar *argv0)
 
 /* runs a term with su in it */
 void
-xst_su_run_term (gint argc, gchar *argv[], gchar *user)
+gst_su_run_term (gint argc, gchar *argv[], gchar *user)
 {
 	GString *str;
 	VteReaper *reaper = vte_reaper_get ();
@@ -150,7 +150,7 @@ xst_su_run_term (gint argc, gchar *argv[], gchar *user)
 
 /* writes the password to the term with su in it */
 void
-xst_su_write_password (gchar *pwd)
+gst_su_write_password (gchar *pwd)
 {
 	vte_terminal_feed_child (VTE_TERMINAL (term), pwd, -1);
 
@@ -164,7 +164,7 @@ xst_su_write_password (gchar *pwd)
 
 /* tries to clear the term (if user runs tool unprivileged) */
 void
-xst_su_clear_term (void)
+gst_su_clear_term (void)
 {
 	vte_terminal_reset (VTE_TERMINAL (term), TRUE, TRUE);
 	gtk_widget_destroy (term);
@@ -184,7 +184,7 @@ load_glade_common (const gchar *widget)
 }
 
 gint
-xst_su_get_password (gchar **password)
+gst_su_get_password (gchar **password)
 {
 	GladeXML *xml;
 	gint result;
@@ -225,7 +225,7 @@ xst_su_get_password (gchar **password)
 			*password = g_strdup ("");
 		return 1;
 		break;
-	case XST_SU_RESPONSE_NP:
+	case GST_SU_RESPONSE_NP:
 		/* Run unprivileged */
 		return 0;
 		break;

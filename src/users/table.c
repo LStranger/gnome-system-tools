@@ -28,7 +28,7 @@
 #include <gnome.h>
 #include <gtk/gtk.h>
 
-#include "xst.h"
+#include "gst.h"
 
 #include "table.h"
 #include "users-table.h"
@@ -38,7 +38,7 @@
 #include "callbacks.h"
 #include "user-group-xml.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 extern GtkWidget *users_table;
 extern GtkWidget *groups_table;
@@ -114,7 +114,7 @@ create_tables (void)
 }
 
 void 
-update_tables_complexity (XstDialogComplexity complexity) 
+update_tables_complexity (GstDialogComplexity complexity) 
 {
 	update_users_table_complexity (complexity);
 }

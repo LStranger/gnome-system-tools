@@ -27,7 +27,7 @@
 
 #include <gnome.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "groups-table.h"
 #include "table.h"
 #include "callbacks.h"
@@ -35,7 +35,7 @@
 #include "user_group.h"
 #include "group-settings.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 static void
 create_users_lists (xmlNodePtr node, GList **group_settings_all_list, GList **group_settings_members_list)
@@ -48,8 +48,8 @@ create_users_lists (xmlNodePtr node, GList **group_settings_all_list, GList **gr
 static void
 create_users_gtk_trees (void)
 {
-	GtkWidget *group_settings_all = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
-	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
+	GtkWidget *group_settings_all = gst_dialog_get_widget (tool->main_dialog, "group_settings_all");
+	GtkWidget *group_settings_members = gst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	GtkWidget *add_button, *remove_button;
 	GtkTreeSelection *selection;
 	GtkSizeGroup *sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
@@ -73,17 +73,17 @@ create_users_gtk_trees (void)
 		                  NULL);
 		
 		/* We also need to attach some data to the 'add' and 'remove' buttons */
-		add_button = xst_dialog_get_widget (tool->main_dialog, "group_settings_add");
+		add_button = gst_dialog_get_widget (tool->main_dialog, "group_settings_add");
 		g_object_set_data (G_OBJECT (add_button), "in", group_settings_all);
 		g_object_set_data (G_OBJECT (add_button), "out", group_settings_members);
 		
-		remove_button = xst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
+		remove_button = gst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
 		g_object_set_data (G_OBJECT (remove_button), "in", group_settings_members);
 		g_object_set_data (G_OBJECT (remove_button), "out", group_settings_all);
 
 		/* Add the scrolled windows that contain the trees in the same GtkSizeGroup */
-		gtk_size_group_add_widget (sizegroup, xst_dialog_get_widget (tool->main_dialog, "group_settings_all_container"));
-		gtk_size_group_add_widget (sizegroup, xst_dialog_get_widget (tool->main_dialog, "group_settings_members_container"));
+		gtk_size_group_add_widget (sizegroup, gst_dialog_get_widget (tool->main_dialog, "group_settings_all_container"));
+		gtk_size_group_add_widget (sizegroup, gst_dialog_get_widget (tool->main_dialog, "group_settings_members_container"));
 		
 	}
 }
@@ -91,8 +91,8 @@ create_users_gtk_trees (void)
 void
 group_new_prepare (ug_data *gd)
 {
-	GtkWidget *group_settings_all = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
-	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
+	GtkWidget *group_settings_all = gst_dialog_get_widget (tool->main_dialog, "group_settings_all");
+	GtkWidget *group_settings_members = gst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	GtkWidget *widget;
 	gchar     *buf;
 	GList *group_settings_members_list = NULL;
@@ -107,13 +107,13 @@ group_new_prepare (ug_data *gd)
 	g_object_set_data (G_OBJECT (group_settings_all), "list", group_settings_all_list);
 	g_object_set_data (G_OBJECT (group_settings_members), "list", group_settings_members_list);
 
-	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
+	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (widget), _("Create New Group"));
 
 	/* Fill in first available gid */
 	buf = (gchar *) find_new_id (gd->node, NULL);
 	if (buf) {
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "group_settings_gid")), 
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "group_settings_gid")), 
 		                           g_strtod (buf, NULL));
 		g_free (buf);
 	}
@@ -125,14 +125,14 @@ group_new_prepare (ug_data *gd)
 void
 group_settings_dialog_close (void)
 {
-	GtkWidget *group_settings_all = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
-	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
+	GtkWidget *group_settings_all = gst_dialog_get_widget (tool->main_dialog, "group_settings_all");
+	GtkWidget *group_settings_members = gst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	ug_data *gd;
 
 	/* Clear group name */
-	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
+	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_name");
 	gtk_entry_set_text (GTK_ENTRY (widget), "");
 
 	/* Clear both lists. */
@@ -143,13 +143,13 @@ group_settings_dialog_close (void)
 	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	
 	/* Set unsensitive the add and remove buttons */
-	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_add");
+	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_add");
 	gtk_widget_set_sensitive (widget, FALSE);
-	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
+	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
 	gtk_widget_set_sensitive (widget, FALSE);
 	
 	/* Clear group data attached to the dialog */
-	widget = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
+	widget = gst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 	gd = g_object_get_data (G_OBJECT (widget), "data");
 	g_free (gd);
 	g_object_steal_data (G_OBJECT (widget), "data");
@@ -216,16 +216,16 @@ is_group_name_valid (xmlNodePtr node, const gchar *name)
 gboolean
 group_update (ug_data *gd)
 {
-	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
+	GtkWidget *group_settings_members = gst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	gchar *name, *gid;
 	GList *users;
 	
-	name = (gchar *) gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "group_settings_name")));
+	name = (gchar *) gtk_entry_get_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "group_settings_name")));
 	if (!is_group_name_valid (gd->node, name)) {
 		return FALSE;
 	}
 	
-	gid = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "group_settings_gid"))));
+	gid = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "group_settings_gid"))));
 	if (!is_group_gid_valid (gd->node, gid)) {
 		return FALSE;
 	}
@@ -259,7 +259,7 @@ check_group_delete (xmlNodePtr node)
 	g_return_val_if_fail (node != NULL, FALSE);
 
 	parent = GTK_WINDOW (tool->main_dialog);
-	name = xst_xml_get_child_content (node, "name");
+	name = gst_xml_get_child_content (node, "name");
 
 	if (!name)
 	{
@@ -293,7 +293,7 @@ gboolean
 delete_group (xmlNodePtr node)
 {
 	if (check_group_delete (node)) {
-		xst_xml_element_destroy (node);
+		gst_xml_element_destroy (node);
 		return TRUE;
 	}
 
@@ -303,8 +303,8 @@ delete_group (xmlNodePtr node)
 static void
 group_settings_dialog_prepare (ug_data *gd)
 {
-	GtkWidget *group_settings_all = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
-	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
+	GtkWidget *group_settings_all = gst_dialog_get_widget (tool->main_dialog, "group_settings_all");
+	GtkWidget *group_settings_members = gst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	GtkWidget *w0;
 	gchar *txt, *name;
 	GList *group_settings_all_list = NULL;
@@ -322,15 +322,15 @@ group_settings_dialog_prepare (ug_data *gd)
 	g_object_set_data (G_OBJECT (group_settings_members), "list", group_settings_members_list);
 
 	/* Set group name */
-	name = xst_xml_get_child_content (gd->node, "name");
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
-	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-	xst_ui_entry_set_text (w0, name);
+	name = gst_xml_get_child_content (gd->node, "name");
+	w0 = gst_dialog_get_widget (tool->main_dialog, "group_settings_name");
+	gtk_widget_set_sensitive (w0, gst_tool_get_access (tool));
+	gst_ui_entry_set_text (w0, name);
 
 	/* Set group id */
-	txt = xst_xml_get_child_content (gd->node, "gid");
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
-	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
+	txt = gst_xml_get_child_content (gd->node, "gid");
+	w0 = gst_dialog_get_widget (tool->main_dialog, "group_settings_gid");
+	gtk_widget_set_sensitive (w0, gst_tool_get_access (tool));
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
 
 	/* Fill all users list */
@@ -338,7 +338,7 @@ group_settings_dialog_prepare (ug_data *gd)
 
 	/* Show group settings dialog */
 
-	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
+	w0 = gst_dialog_get_widget (tool->main_dialog, "group_settings_dialog");
 	txt = g_strdup_printf (_("Settings for Group %s"), name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (name);
@@ -355,7 +355,7 @@ group_settings_prepare (ug_data *gd)
 	
 	g_return_if_fail (gd != NULL);
 
-	buf = xst_xml_get_child_content (gd->node, "login");
+	buf = gst_xml_get_child_content (gd->node, "login");
 
 	if (buf)
 	{
@@ -365,7 +365,7 @@ group_settings_prepare (ug_data *gd)
 		return;
 	}
 
-	buf = xst_xml_get_child_content (gd->node, "name");
+	buf = gst_xml_get_child_content (gd->node, "name");
 
 	if (buf)
 	{

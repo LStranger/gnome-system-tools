@@ -102,5 +102,5 @@ void xml_from_clist_row (TransStringCList *trans_clist, int row, xmlNodePtr node
   The routines that do all the work.
  */
 
-void transfer_xml_to_gui (XstTool *tool, gpointer data);
-void transfer_gui_to_xml (XstTool *tool, gpointer data);
+void transfer_xml_to_gui (GstTool *tool, gpointer data);
+void transfer_gui_to_xml (GstTool *tool, gpointer data);

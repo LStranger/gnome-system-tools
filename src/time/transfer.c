@@ -7,7 +7,7 @@
 
 #include <gnome.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "time-tool.h"
 
 #include "transfer.h"
@@ -21,7 +21,7 @@ get_int_from_node (xmlNodePtr node)
 	gint   val;
 	gchar *s;
 
-	s = xst_xml_element_get_content (node);
+	s = gst_xml_element_get_content (node);
 	if (!s || !strlen (s))
 	{
 		g_warning ("XML node did not contain any value!");
@@ -39,7 +39,7 @@ get_int_from_named_child (xmlNodePtr node, gchar *name)
 {
 	xmlNodePtr child;
 
-	child = xst_xml_element_find_first (node, name);
+	child = gst_xml_element_find_first (node, name);
 	g_return_val_if_fail (child != NULL, -1);
 
 	return get_int_from_node (child);
@@ -51,7 +51,7 @@ set_node_from_int (xmlNodePtr node, gint val)
 	gchar *s;
 
 	s = g_strdup_printf ("%d", val);
-	xst_xml_element_set_content (node, s);
+	gst_xml_element_set_content (node, s);
 	g_free (s);
 }
 
@@ -60,20 +60,20 @@ set_named_child_from_int (xmlNodePtr node, gchar *name, gint val)
 {
 	xmlNodePtr child;
 
-	child = xst_xml_element_find_first (node, name);
+	child = gst_xml_element_find_first (node, name);
 	g_return_if_fail (child != NULL);
 
 	set_node_from_int (child, val);
 }
 
 static void
-transfer_time_xml_to_gui (XstTool *xst_tool, xmlNodePtr root)
+transfer_time_xml_to_gui (GstTool *gst_tool, xmlNodePtr root)
 {
-	XstTimeTool *tool = XST_TIME_TOOL (xst_tool);
+	GstTimeTool *tool = GST_TIME_TOOL (gst_tool);
 	xmlNodePtr   local_time_node;
 	struct tm    tm;
 
-	local_time_node = xst_xml_element_find_first (root, "local_time");
+	local_time_node = gst_xml_element_find_first (root, "local_time");
 	g_return_if_fail (local_time_node != NULL);
 
 	tm.tm_year = get_int_from_named_child (local_time_node, "year") - 1900;
@@ -83,21 +83,21 @@ transfer_time_xml_to_gui (XstTool *xst_tool, xmlNodePtr root)
 	tm.tm_min  = get_int_from_named_child (local_time_node, "minute");
 	tm.tm_sec  = get_int_from_named_child (local_time_node, "second");
 
-	xst_time_set_full (tool, &tm);
+	gst_time_set_full (tool, &tm);
 }
 
 static void
-transfer_time_gui_to_xml (XstTool *xst_tool, xmlNodePtr root)
+transfer_time_gui_to_xml (GstTool *gst_tool, xmlNodePtr root)
 {
-	XstTimeTool *tool = XST_TIME_TOOL (xst_tool);
+	GstTimeTool *tool = GST_TIME_TOOL (gst_tool);
 	GtkWidget   *calendar_widget;
 	guint        year = 0, month = 0, day = 0;
 	xmlNodePtr   local_time_node;
 
-	local_time_node = xst_xml_element_find_first (root, "local_time");
+	local_time_node = gst_xml_element_find_first (root, "local_time");
 	g_return_if_fail (local_time_node != NULL);
 
-	calendar_widget = xst_dialog_get_widget (xst_tool->main_dialog, "calendar");
+	calendar_widget = gst_dialog_get_widget (gst_tool->main_dialog, "calendar");
 	gtk_calendar_get_date (GTK_CALENDAR (calendar_widget), &year, &month, &day);
 
 	set_named_child_from_int (local_time_node, "year",     year);
@@ -109,35 +109,35 @@ transfer_time_gui_to_xml (XstTool *xst_tool, xmlNodePtr root)
 }
 
 static void
-transfer_timezone_xml_to_gui (XstTool *tool, xmlNodePtr root)
+transfer_timezone_xml_to_gui (GstTool *tool, xmlNodePtr root)
 {
-	XstTimeTool *time_tool;
+	GstTimeTool *time_tool;
 	xmlNodePtr node;
 	char *s;
 
-	time_tool = XST_TIME_TOOL (tool);
+	time_tool = GST_TIME_TOOL (tool);
 	
-	node = xst_xml_element_find_first (root, "timezone");
+	node = gst_xml_element_find_first (root, "timezone");
 	if (!node) return;
 	
-	s = xst_xml_element_get_content (node);
-	xst_time_tool_set_time_zone_name (time_tool, s);
+	s = gst_xml_element_get_content (node);
+	gst_time_tool_set_time_zone_name (time_tool, s);
 	
 	g_free (s);
 }
 
 static void
-transfer_timezone_gui_to_xml (XstTool *tool, xmlNodePtr root)
+transfer_timezone_gui_to_xml (GstTool *tool, xmlNodePtr root)
 {
-	XstTimeTool *time_tool;
+	GstTimeTool *time_tool;
 	xmlNodePtr node;
 	
-	time_tool = XST_TIME_TOOL (tool);
+	time_tool = GST_TIME_TOOL (tool);
 
-	node = xst_xml_element_find_first (root, "timezone");
-	if (!node) node = xst_xml_element_add (root, "timezone");
+	node = gst_xml_element_find_first (root, "timezone");
+	if (!node) node = gst_xml_element_add (root, "timezone");
 	
-	xst_xml_element_set_content (node, time_tool->time_zone_name);
+	gst_xml_element_set_content (node, time_tool->time_zone_name);
 }
 
 static gboolean server_entry_found;
@@ -158,7 +158,7 @@ server_list_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter,
 }
 
 static void
-transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
+transfer_servers_xml_to_gui (GstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *ntp_list, *item;
 	GtkListStore *store;
@@ -167,18 +167,18 @@ transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 	xmlNodePtr node;
 	char *s;
 	
-	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list2");
+	ntp_list = gst_dialog_get_widget (tool->main_dialog, "ntp_list2");
 	store = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (ntp_list)));
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ntp_list));
 	
-	node = xst_xml_element_find_first (root, "sync");
+	node = gst_xml_element_find_first (root, "sync");
 	if (!node) return;
 	
-	for (node = xst_xml_element_find_first(node, "server");
+	for (node = gst_xml_element_find_first(node, "server");
 	     node;
-	     node = xst_xml_element_find_next(node, "server"))
+	     node = gst_xml_element_find_next(node, "server"))
 	{
-		s = xst_xml_element_get_content (node);
+		s = gst_xml_element_get_content (node);
 		
 		server_entry_found = FALSE;
 		gtk_tree_model_foreach (GTK_TREE_MODEL (store), (GtkTreeModelForeachFunc) server_list_cb, s);
@@ -193,48 +193,48 @@ transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 }
 
 static void
-transfer_sync_toggle_xml_to_gui (XstTool *tool, xmlNodePtr root)
+transfer_sync_toggle_xml_to_gui (GstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *toggle;
 	xmlNodePtr node;
 	
-	toggle = xst_dialog_get_widget (tool->main_dialog, "ntp_use");
+	toggle = gst_dialog_get_widget (tool->main_dialog, "ntp_use");
 	
-	node = xst_xml_element_find_first (root, "sync");
+	node = gst_xml_element_find_first (root, "sync");
 	if (!node) return;
 	
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle),
-				      xst_xml_element_get_bool_attr (node, "active"));
+				      gst_xml_element_get_bool_attr (node, "active"));
 }
 
 static void
-transfer_sync_toggle_gui_to_xml (XstTool *tool, xmlNodePtr root)
+transfer_sync_toggle_gui_to_xml (GstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *toggle;
 	xmlNodePtr node;
 	
-	toggle = xst_dialog_get_widget (tool->main_dialog, "ntp_use");
+	toggle = gst_dialog_get_widget (tool->main_dialog, "ntp_use");
 	
-	node = xst_xml_element_find_first (root, "sync");
+	node = gst_xml_element_find_first (root, "sync");
 	if (!node) return;
 	
-	xst_xml_element_set_bool_attr (node, "active",
+	gst_xml_element_set_bool_attr (node, "active",
 				   gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (toggle)));
 }
 
 static void
-transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
+transfer_misc_xml_to_tool (GstTool *tool, xmlNodePtr root)
 {
 	xmlNodePtr node;
 	gboolean res;
 	gchar *str;
 
 	res = FALSE;
-	node = xst_xml_element_find_first (root, "ntpinstalled");
+	node = gst_xml_element_find_first (root, "ntpinstalled");
 
 	if (node) {
 		g_object_set_data (G_OBJECT (tool), "tool_configured", (gpointer) TRUE);
-		str = xst_xml_element_get_content (node);
+		str = gst_xml_element_get_content (node);
 		res = (*str == '1')? TRUE: FALSE;
 		g_free (str);
 	}
@@ -243,11 +243,11 @@ transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
 }
 
 void
-transfer_xml_to_gui (XstTool *tool, gpointer data)
+transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
 	xmlNode *root;
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 
 	transfer_time_xml_to_gui (tool, root);
 	transfer_timezone_xml_to_gui (tool, root);
@@ -258,11 +258,11 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 
 
 void
-transfer_gui_to_xml (XstTool *tool, gpointer data)
+transfer_gui_to_xml (GstTool *tool, gpointer data)
 {
 	xmlNode *root;
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 
 	transfer_time_gui_to_xml (tool, root);
 	transfer_timezone_gui_to_xml (tool, root);

@@ -22,7 +22,7 @@
 #define __CALLBACKS_H__
 
 #include <gnome.h>
-#include "xst-xml.h"
+#include "gst-xml.h"
 
 typedef enum {
 	EF_ALLOW_NONE  = 0,
@@ -41,7 +41,7 @@ typedef enum {
 
 extern xmlDocPtr doc;
 
-void init_editable_filters (XstDialog *dialog);
+void init_editable_filters (GstDialog *dialog);
 void init_hint_entries (void);
 void on_network_admin_show (GtkWidget *w, gpointer null);
 
@@ -76,13 +76,13 @@ void on_wins_use_toggled (GtkWidget *w, gpointer null);
 
 void on_status_button_toggled (GtkWidget *w, gpointer null);
 
-void callbacks_check_dialer (GtkWindow *window, XstTool *tool);
+void callbacks_check_dialer (GtkWindow *window, GstTool *tool);
 
-gboolean callbacks_check_hostname_hook     (XstDialog *dialog, gpointer data);
-gboolean callbacks_update_connections_hook (XstDialog *dialog, gpointer data);
-gboolean callbacks_check_dialer_hook       (XstDialog *dialog, gpointer data);
-gboolean callbacks_check_gateway_hook      (XstDialog *dialog, gpointer data);
+gboolean callbacks_check_hostname_hook     (GstDialog *dialog, gpointer data);
+gboolean callbacks_update_connections_hook (GstDialog *dialog, gpointer data);
+gboolean callbacks_check_dialer_hook       (GstDialog *dialog, gpointer data);
+gboolean callbacks_check_gateway_hook      (GstDialog *dialog, gpointer data);
 
-gboolean callbacks_tool_not_found_hook     (XstTool *tool, XstReportLine *rline, gpointer data);
+gboolean callbacks_tool_not_found_hook     (GstTool *tool, GstReportLine *rline, gpointer data);
 
 #endif /*  __CALLBACKS_H__  */

@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "boot-settings.h"
 
 G_BEGIN_DECLS

@@ -32,11 +32,11 @@
 #include "table.h"
 
 void
-transfer_xml_to_gui (XstTool *tool, gpointer data)
+transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 
 	/* Profiles */
 //	profile_table_init ();
@@ -47,6 +47,6 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 }
 
 void
-transfer_gui_to_xml (XstTool *tool, gpointer data)
+transfer_gui_to_xml (GstTool *tool, gpointer data)
 {
 }

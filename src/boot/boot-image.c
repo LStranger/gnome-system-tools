@@ -30,13 +30,13 @@
 #ifdef HAVE_CONFIG_H
 #  include <config.h>
 #endif
-#include "xst.h"
+#include "gst.h"
 #include "boot-image.h"
 #include "table.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
-static XstBootImageTypeTable boot_image_type_table[] = {
+static GstBootImageTypeTable boot_image_type_table[] = {
 	{ N_("Unknown"),    TYPE_UNKNOWN },
 	{ N_("Windows NT"), TYPE_WINNT },
 	{ N_("Windows 9x"), TYPE_WIN9X },
@@ -53,9 +53,9 @@ boot_image_count (xmlNodePtr root)
 
 	g_return_val_if_fail (root != NULL, -1);
 	
-	for (count = 0, n = xst_xml_element_find_first (root, "entry");
+	for (count = 0, n = gst_xml_element_find_first (root, "entry");
 	     n != NULL;
-	     count++, n = xst_xml_element_find_next (n, "entry"));
+	     count++, n = gst_xml_element_find_next (n, "entry"));
 
 	return count;
 }
@@ -67,7 +67,7 @@ boot_image_new (void)
 	guint      count;
 	xmlNodePtr root;
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 	
 	count = boot_image_count (root);
 	if (count >= MAX_IMAGES || count < 0)
@@ -114,10 +114,10 @@ get_new_key (xmlNodePtr root)
 	gint maxkey, keynum;
 
 	maxkey = 0;
-	for (node = xst_xml_element_find_first (root, "entry");
-	     node; node = xst_xml_element_find_next (node, "entry"))
+	for (node = gst_xml_element_find_first (root, "entry");
+	     node; node = gst_xml_element_find_next (node, "entry"))
 	{
-		key = xst_xml_get_child_content (node, "key");
+		key = gst_xml_get_child_content (node, "key");
 		if (key) {
 			keynum = atoi (key);
 			if (maxkey <= keynum)
@@ -125,7 +125,7 @@ get_new_key (xmlNodePtr root)
 			g_free (key);
 		} else
 			/* This leaks, but it's not supposed to happen in production. */
-			g_warning ("Entry %s has no key.", xst_xml_get_child_content (node, "label"));
+			g_warning ("Entry %s has no key.", gst_xml_get_child_content (node, "label"));
 	}
 
 	return g_strdup_printf ("%d", maxkey);
@@ -184,14 +184,14 @@ boot_image_valid_name_chars (const gchar *string)
 	gchar *value;
 	gboolean res;
 	
-	doc = xst_tool_run_get_directive (tool, NULL, "verify", "entrylabel", string, NULL);
-	root = xst_xml_doc_get_root (doc);
+	doc = gst_tool_run_get_directive (tool, NULL, "verify", "entrylabel", string, NULL);
+	root = gst_xml_doc_get_root (doc);
 
-	value = xst_xml_get_child_content (root, "result");
+	value = gst_xml_get_child_content (root, "result");
 	res =  (strcmp (value, "success"))? FALSE: TRUE;
 
 	g_free (value);
-	xst_xml_doc_destroy (doc);
+	gst_xml_doc_destroy (doc);
 	
 	return res;
 }
@@ -228,14 +228,14 @@ boot_image_label_exists (BootImage *image)
 	else
 		root = image->node->parent;
 
-	for (node = xst_xml_element_find_first (root, "entry");
+	for (node = gst_xml_element_find_first (root, "entry");
 	     node != NULL;
-	     node = xst_xml_element_find_next (node, "entry")) {
+	     node = gst_xml_element_find_next (node, "entry")) {
 
 		if (node == image->node)
 			continue;
 
-		buf = xst_xml_get_child_content (node, "label");
+		buf = gst_xml_get_child_content (node, "label");
 		if (buf) {
 			if (strcmp (buf, image->label) == 0) {
 				found = TRUE;
@@ -346,7 +346,7 @@ boot_image_check (BootImage *image)
 /* Helpers */
 
 gchar *
-type_to_label (XstBootImageType type)
+type_to_label (GstBootImageType type)
 {
 	gint i;
 
@@ -358,7 +358,7 @@ type_to_label (XstBootImageType type)
 	return g_strdup ("");
 }
 
-XstBootImageType
+GstBootImageType
 label_to_type (const gchar *label)
 {
 	gint i;

@@ -28,22 +28,22 @@
 #include <string.h>
 #include <glib.h>
 
-#include "xst-xml.h"
+#include "gst-xml.h"
 
 xmlNodePtr
-xst_xml_doc_get_root (xmlDocPtr doc)
+gst_xml_doc_get_root (xmlDocPtr doc)
 {
 	return (xmlDocGetRootElement (doc));
 }
 
 void
-xst_xml_doc_dump (xmlDocPtr doc)
+gst_xml_doc_dump (xmlDocPtr doc)
 {
 	xmlDocDump (stdout, doc);
 }
 
 xmlDocPtr
-xst_xml_doc_create (const gchar *root_name)
+gst_xml_doc_create (const gchar *root_name)
 {
 	xmlDocPtr  doc;
 	xmlNodePtr root;
@@ -56,26 +56,26 @@ xst_xml_doc_create (const gchar *root_name)
 }
 	
 void
-xst_xml_doc_destroy (xmlDocPtr doc)
+gst_xml_doc_destroy (xmlDocPtr doc)
 {
 	xmlFreeDoc (doc);
 }
 
 xmlNodePtr
-xst_xml_element_get_parent (xmlNodePtr node)
+gst_xml_element_get_parent (xmlNodePtr node)
 {
 	return node->parent;
 }
 
 void
-xst_xml_element_reparent (xmlNodePtr node, xmlNodePtr new_parent)
+gst_xml_element_reparent (xmlNodePtr node, xmlNodePtr new_parent)
 {
 	xmlUnlinkNode (node);
-	xst_xml_element_add_child (new_parent, node);
+	gst_xml_element_add_child (new_parent, node);
 }
 
 xmlNodePtr
-xst_xml_element_find_first (xmlNodePtr parent, const gchar *name)
+gst_xml_element_find_first (xmlNodePtr parent, const gchar *name)
 {
 	xmlNodePtr node;
 	
@@ -93,7 +93,7 @@ xst_xml_element_find_first (xmlNodePtr parent, const gchar *name)
 
 
 xmlNodePtr
-xst_xml_element_find_next (xmlNodePtr sibling, const gchar *name)
+gst_xml_element_find_next (xmlNodePtr sibling, const gchar *name)
 {
 	xmlNodePtr node;
 	
@@ -109,7 +109,7 @@ xst_xml_element_find_next (xmlNodePtr sibling, const gchar *name)
 
 
 xmlNodePtr
-xst_xml_element_find_nth (xmlNodePtr parent, const gchar *name, int n)
+gst_xml_element_find_nth (xmlNodePtr parent, const gchar *name, int n)
 {
 	xmlNodePtr node;
 	gint i = 0;
@@ -132,7 +132,7 @@ xst_xml_element_find_nth (xmlNodePtr parent, const gchar *name, int n)
 
 
 xmlNodePtr
-xst_xml_element_add (xmlNodePtr parent, const gchar *name)
+gst_xml_element_add (xmlNodePtr parent, const gchar *name)
 {
 	g_return_val_if_fail (parent != NULL, NULL);
 
@@ -141,14 +141,14 @@ xst_xml_element_add (xmlNodePtr parent, const gchar *name)
 
 
 void
-xst_xml_element_add_child (xmlNodePtr parent, xmlNodePtr child)
+gst_xml_element_add_child (xmlNodePtr parent, xmlNodePtr child)
 {
 	xmlAddChild (parent, child);
 }
 
 
 gchar *
-xst_xml_element_get_content (xmlNodePtr node)
+gst_xml_element_get_content (xmlNodePtr node)
 {
 	gchar *text = NULL;
 	gchar *r;
@@ -178,7 +178,7 @@ xst_xml_element_get_content (xmlNodePtr node)
 
 
 const xmlChar *
-xst_xml_element_peek_content (xmlNodePtr node)
+gst_xml_element_peek_content (xmlNodePtr node)
 {
 	xmlChar *text = NULL;
 	xmlNodePtr n0;
@@ -201,7 +201,7 @@ xst_xml_element_peek_content (xmlNodePtr node)
 
 
 void
-xst_xml_element_set_content (xmlNodePtr node, const gchar *text)
+gst_xml_element_set_content (xmlNodePtr node, const gchar *text)
 {
 	g_return_if_fail (node != NULL);
 	
@@ -210,21 +210,21 @@ xst_xml_element_set_content (xmlNodePtr node, const gchar *text)
 
 
 void
-xst_xml_element_add_with_content (xmlNodePtr node, const gchar *name, const gchar *content)
+gst_xml_element_add_with_content (xmlNodePtr node, const gchar *name, const gchar *content)
 {
 	xmlNodePtr n0;
 
 	g_return_if_fail (node != NULL);
 	
-	n0 = xst_xml_element_find_first (node, name);
-	if (!n0) n0 = xst_xml_element_add (node, name);
+	n0 = gst_xml_element_find_first (node, name);
+	if (!n0) n0 = gst_xml_element_add (node, name);
 
-	xst_xml_element_set_content (n0, content);
+	gst_xml_element_set_content (n0, content);
 }
 
 
 gchar *
-xst_xml_element_get_attribute (xmlNodePtr node, const gchar *attr)
+gst_xml_element_get_attribute (xmlNodePtr node, const gchar *attr)
 {
 	xmlAttrPtr a0;
 	gchar *text = NULL, *r = NULL;
@@ -251,7 +251,7 @@ xst_xml_element_get_attribute (xmlNodePtr node, const gchar *attr)
 
 
 void
-xst_xml_element_set_attribute (xmlNodePtr node, const gchar *attr, const gchar *value)
+gst_xml_element_set_attribute (xmlNodePtr node, const gchar *attr, const gchar *value)
 {
 	g_return_if_fail (node != NULL);
 	
@@ -260,14 +260,14 @@ xst_xml_element_set_attribute (xmlNodePtr node, const gchar *attr, const gchar *
 
 
 gboolean
-xst_xml_element_get_bool_attr (xmlNodePtr node, const gchar *attr)
+gst_xml_element_get_bool_attr (xmlNodePtr node, const gchar *attr)
 {
 	char *s;
 	int r = FALSE;
 
 	g_return_val_if_fail (node != NULL, FALSE);
 	
-	s = xst_xml_element_get_attribute (node, attr);
+	s = gst_xml_element_get_attribute (node, attr);
 	if (s)
 	{
 		if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
@@ -279,16 +279,16 @@ xst_xml_element_get_bool_attr (xmlNodePtr node, const gchar *attr)
 
 
 void
-xst_xml_element_set_bool_attr (xmlNodePtr node, const gchar *attr, gboolean state)
+gst_xml_element_set_bool_attr (xmlNodePtr node, const gchar *attr, gboolean state)
 {
 	g_return_if_fail (node != NULL);
 	
-	xst_xml_element_set_attribute (node, attr, state ? "true" : "false");
+	gst_xml_element_set_attribute (node, attr, state ? "true" : "false");
 }
 
 
 gboolean
-xst_xml_element_get_state (xmlNodePtr node, const gchar *element)
+gst_xml_element_get_state (xmlNodePtr node, const gchar *element)
 {
 	xmlNodePtr elem;
 	char *s;
@@ -296,10 +296,10 @@ xst_xml_element_get_state (xmlNodePtr node, const gchar *element)
 
 	g_return_val_if_fail (node != NULL, FALSE);
 	
-	elem = xst_xml_element_find_first (node, element);
+	elem = gst_xml_element_find_first (node, element);
 	if (elem)
 	{
-		s = xst_xml_element_get_attribute (elem, "state");
+		s = gst_xml_element_get_attribute (elem, "state");
 		if (s)
 		{
 			if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
@@ -312,20 +312,20 @@ xst_xml_element_get_state (xmlNodePtr node, const gchar *element)
 
 
 void
-xst_xml_element_set_state (xmlNodePtr node, const gchar *element, gboolean state)
+gst_xml_element_set_state (xmlNodePtr node, const gchar *element, gboolean state)
 {
 	xmlNodePtr elem;
 
 	g_return_if_fail (node != NULL);
 	
-	elem = xst_xml_element_find_first (node, element);
-	if (!elem) elem = xst_xml_element_add (node, element);
-	xst_xml_element_set_attribute (elem, "state", state ? "true" : "false");
+	elem = gst_xml_element_find_first (node, element);
+	if (!elem) elem = gst_xml_element_add (node, element);
+	gst_xml_element_set_attribute (elem, "state", state ? "true" : "false");
 }
 
 
 void
-xst_xml_element_destroy (xmlNodePtr node)
+gst_xml_element_destroy (xmlNodePtr node)
 {
 	g_return_if_fail (node != NULL);
 	
@@ -335,7 +335,7 @@ xst_xml_element_destroy (xmlNodePtr node)
 
 
 void
-xst_xml_element_destroy_children (xmlNodePtr parent)
+gst_xml_element_destroy_children (xmlNodePtr parent)
 {
 	xmlNodePtr node, node_next;
 
@@ -352,15 +352,15 @@ xst_xml_element_destroy_children (xmlNodePtr parent)
 
 
 void
-xst_xml_element_destroy_children_by_name (xmlNodePtr parent, const gchar *name)
+gst_xml_element_destroy_children_by_name (xmlNodePtr parent, const gchar *name)
 {
 	xmlNodePtr node, node_next;
 
 	g_return_if_fail (parent != NULL);
 	
-	for (node = xst_xml_element_find_first (parent, name); node;)
+	for (node = gst_xml_element_find_first (parent, name); node;)
 	{
-		node_next = xst_xml_element_find_next (node, name);
+		node_next = gst_xml_element_find_next (node, name);
 		xmlUnlinkNode (node);
 		xmlFreeNode (node);
 		node = node_next;
@@ -368,7 +368,7 @@ xst_xml_element_destroy_children_by_name (xmlNodePtr parent, const gchar *name)
 }
 
 int
-xst_xml_parent_childs (xmlNodePtr parent)
+gst_xml_parent_childs (xmlNodePtr parent)
 {
 	xmlNodePtr node;
 	gint ret = 0;
@@ -382,19 +382,19 @@ xst_xml_parent_childs (xmlNodePtr parent)
 }
 
 gchar *
-xst_xml_get_child_content (xmlNodePtr parent, const gchar *child)
+gst_xml_get_child_content (xmlNodePtr parent, const gchar *child)
 {
 	xmlNodePtr node;
 
-	node = xst_xml_element_find_first (parent, child);
+	node = gst_xml_element_find_first (parent, child);
 	if (!node)
 		return NULL;
 
-	return xst_xml_element_get_content (node);
+	return gst_xml_element_get_content (node);
 }
 
 void
-xst_xml_set_child_content (xmlNodePtr parent, const gchar *child, const gchar *val)
+gst_xml_set_child_content (xmlNodePtr parent, const gchar *child, const gchar *val)
 {
 	xmlNodePtr node;
 
@@ -402,25 +402,25 @@ xst_xml_set_child_content (xmlNodePtr parent, const gchar *child, const gchar *v
 	g_return_if_fail (child != NULL);
 	g_return_if_fail (val != NULL);
 
-	node = xst_xml_element_find_first (parent, child);
+	node = gst_xml_element_find_first (parent, child);
 	if (!node)
-		node = xst_xml_element_add (parent, child);
+		node = gst_xml_element_add (parent, child);
 
-	xst_xml_element_set_content (node, val);
+	gst_xml_element_set_content (node, val);
 }
 
 gboolean
-xst_xml_element_get_boolean (xmlNodePtr parent, const gchar *name)
+gst_xml_element_get_boolean (xmlNodePtr parent, const gchar *name)
 {
 	xmlNodePtr node;
 	gboolean res;
 	gchar *str;
 
 	res = FALSE;
-	node = xst_xml_element_find_first (parent, name);
+	node = gst_xml_element_find_first (parent, name);
 
 	if (node) {
-		str = xst_xml_element_get_content (node);
+		str = gst_xml_element_get_content (node);
 		res = (*str == '1' || *str == 'T' ) ? TRUE: FALSE;
 		g_free (str);
 	}
@@ -429,9 +429,9 @@ xst_xml_element_get_boolean (xmlNodePtr parent, const gchar *name)
 }
 
 void
-xst_xml_element_set_boolean (xmlNodePtr parent, const gchar *child, const gboolean val)
+gst_xml_element_set_boolean (xmlNodePtr parent, const gchar *child, const gboolean val)
 {
-	xst_xml_set_child_content (parent, child, val? "1": "0");
+	gst_xml_set_child_content (parent, child, val? "1": "0");
 }
 
 

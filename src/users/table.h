@@ -36,7 +36,7 @@ void			populate_gtk_tree_list		(GtkTreeView*, GList*);
 
 /* User and group tables manipulation functions */
 void			create_tables			(void);
-void			update_tables_complexity	(XstDialogComplexity);
+void			update_tables_complexity	(GstDialogComplexity);
 void			populate_all_tables		(void);
 xmlNodePtr		get_selected_row_node		(gint);
 

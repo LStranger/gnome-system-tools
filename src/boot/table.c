@@ -27,12 +27,12 @@
 #endif
 
 #include <gnome.h>
-#include "xst.h"
+#include "gst.h"
 
 #include "table.h"
 #include "callbacks.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 GtkWidget *boot_table = NULL;
 GtkTreeIter default_entry_iter;
@@ -65,7 +65,7 @@ table_create (void)
 	model = GTK_TREE_MODEL (gtk_tree_store_new (BOOT_LIST_COL_LAST, G_TYPE_STRING, GDK_TYPE_PIXBUF,
 	                                            G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
 
-	boot_table = xst_dialog_get_widget (tool->main_dialog, "boot_table");
+	boot_table = gst_dialog_get_widget (tool->main_dialog, "boot_table");
 	gtk_tree_view_set_model (GTK_TREE_VIEW (boot_table), model);
 	g_object_unref (model);
 
@@ -97,7 +97,7 @@ table_create (void)
 }
 
 void
-boot_table_update_state (XstDialogComplexity complexity)
+boot_table_update_state (GstDialogComplexity complexity)
 {
 	GtkTreeViewColumn *column;
 	gint i;
@@ -105,13 +105,13 @@ boot_table_update_state (XstDialogComplexity complexity)
 	g_return_if_fail (boot_table != NULL);
 	
 	switch (complexity) {
-	case XST_DIALOG_BASIC:
+	case GST_DIALOG_BASIC:
 		for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
 			column = gtk_tree_view_get_column (GTK_TREE_VIEW (boot_table), i);
 			gtk_tree_view_column_set_visible (column, boot_table_config [i].basic_state_showable);
 		}
 		break;
-	case XST_DIALOG_ADVANCED:
+	case GST_DIALOG_ADVANCED:
 		for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
 			column = gtk_tree_view_get_column (GTK_TREE_VIEW (boot_table), i);
 			gtk_tree_view_column_set_visible (column, boot_table_config [i].advanced_state_showable);
@@ -130,7 +130,7 @@ boot_is_linux (xmlNodePtr node)
 	
 	g_return_val_if_fail (node != NULL, FALSE);
 
-	n = xst_xml_element_find_first (node, "image");
+	n = gst_xml_element_find_first (node, "image");
 	if (n)
 		return TRUE;
 	else
@@ -142,17 +142,17 @@ boot_value_label (xmlNodePtr node)
 {
 	g_return_val_if_fail (node != NULL, NULL);
 
-	return xst_xml_get_child_content (node, "label");
+	return gst_xml_get_child_content (node, "label");
 }
 
 gboolean
 boot_value_default_as_boolean (xmlNodePtr node)
 {
 	gchar *name, *def;
-	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
 	
-	def = xst_xml_get_child_content (root, "default");
-	name = xst_xml_get_child_content (node, "label");
+	def = gst_xml_get_child_content (root, "default");
+	name = gst_xml_get_child_content (node, "label");
 
 	if ((name) && (strcmp (name, def) == 0)) {
 		return TRUE;
@@ -171,25 +171,25 @@ boot_value_default (xmlNodePtr node)
 	}
 }
 
-XstBootImageType
+GstBootImageType
 boot_value_type (xmlNodePtr node)
 {
 	xmlNodePtr n;
-	XstBootImageType type = TYPE_UNKNOWN;
+	GstBootImageType type = TYPE_UNKNOWN;
 	
 	g_return_val_if_fail (node != NULL, type);
 
-	n = xst_xml_element_find_first (node, "type");
+	n = gst_xml_element_find_first (node, "type");
 	if (n) {
 		gchar *buf;
 		
-		buf = xst_xml_element_get_content (n);
+		buf = gst_xml_element_get_content (n);
 		type =  label_to_type (buf);
 		g_free (buf);
 		return type;
 	}
 
-	n = xst_xml_element_find_first (node, "image");
+	n = gst_xml_element_find_first (node, "image");
 	if (n)
 		type = TYPE_LINUX;
 	
@@ -199,7 +199,7 @@ boot_value_type (xmlNodePtr node)
 gchar *
 boot_value_type_char (xmlNodePtr node, gboolean bare)
 {
-	XstBootImageType type;
+	GstBootImageType type;
 	gchar *buf, *label;
 
 	type = boot_value_type (node);
@@ -216,9 +216,9 @@ boot_value_device (xmlNodePtr node, gboolean bare)
 	g_return_val_if_fail (node != NULL, NULL);
 	
 	if (boot_is_linux (node))
-		buf = xst_xml_get_child_content (node, "root");
+		buf = gst_xml_get_child_content (node, "root");
 	else
-		buf = xst_xml_get_child_content (node, "other");
+		buf = gst_xml_get_child_content (node, "other");
 
 	if (buf == NULL)
 		buf = g_strdup ("");
@@ -241,7 +241,7 @@ boot_value_image (xmlNodePtr node, gboolean bare)
 	g_return_val_if_fail (node != NULL, NULL);
 
 	if (boot_is_linux (node))
-		buf = xst_xml_get_child_content (node, "image");
+		buf = gst_xml_get_child_content (node, "image");
 	else
 		buf = g_strdup ("");
 
@@ -260,7 +260,7 @@ boot_value_root (xmlNodePtr node)
 {
 	g_return_val_if_fail (node != NULL, NULL);
 
-	return xst_xml_get_child_content (node, "root");
+	return gst_xml_get_child_content (node, "root");
 }
 
 gchar *
@@ -271,7 +271,7 @@ boot_value_append (xmlNodePtr node)
 	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	buf = xst_xml_get_child_content (node, "append");
+	buf = gst_xml_get_child_content (node, "append");
 	if (!buf)
 		return NULL;
 
@@ -290,7 +290,7 @@ table_populate (xmlNodePtr root)
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (boot_table));
 	
-	for (node = xst_xml_element_find_first (root, "entry"); node != NULL; node = xst_xml_element_find_next (node, "entry")) 
+	for (node = gst_xml_element_find_first (root, "entry"); node != NULL; node = gst_xml_element_find_next (node, "entry")) 
 	{
 		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 		gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
@@ -318,7 +318,7 @@ boot_table_clear (void)
 void
 boot_table_update (void)
 {
-	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
 
 	boot_table_clear ();
 	callbacks_actions_set_sensitive (FALSE);
@@ -334,13 +334,13 @@ boot_value_set_default (xmlNodePtr node)
 
 	g_return_if_fail (node != NULL);
 	
-	n = xst_xml_doc_get_root (tool->config);
+	n = gst_xml_doc_get_root (tool->config);
 
-	label = xst_xml_get_child_content (node, "label");
+	label = gst_xml_get_child_content (node, "label");
 	if (!label)
 		return;
 
-	xst_xml_set_child_content (n, "default", label);
+	gst_xml_set_child_content (n, "default", label);
 }
 
 void
@@ -351,7 +351,7 @@ boot_value_set_label (xmlNodePtr node, const gchar *val)
 
 	g_return_if_fail (node != NULL);
 
-	n0 = xst_xml_element_find_first (node, "label");
+	n0 = gst_xml_element_find_first (node, "label");
 	if (n0)
 		is_default = boot_value_default_as_boolean (node);
 	else
@@ -359,11 +359,11 @@ boot_value_set_label (xmlNodePtr node, const gchar *val)
 
 	if (val && strlen (val) > 0) {
 		if (!n0)
-			n0 = xst_xml_element_add (node, "label");
-		xst_xml_element_set_content (n0, val);
+			n0 = gst_xml_element_add (node, "label");
+		gst_xml_element_set_content (n0, val);
 	} else {
 		if (n0)
-			xst_xml_element_destroy (n0);
+			gst_xml_element_destroy (n0);
 
 		/* TODO: remove default label */
 		return;
@@ -374,7 +374,7 @@ boot_value_set_label (xmlNodePtr node, const gchar *val)
 }
 
 void
-boot_value_set_image (xmlNodePtr node, const gchar *val, XstBootImageType type)
+boot_value_set_image (xmlNodePtr node, const gchar *val, GstBootImageType type)
 {
 	xmlNodePtr n0;
 	gchar buf[6]; /* (strlen ('image') || strlen ('other')) + 1; */
@@ -386,14 +386,14 @@ boot_value_set_image (xmlNodePtr node, const gchar *val, XstBootImageType type)
 	else
 		strncpy (buf, "other", 6);
 
-	n0 = xst_xml_element_find_first (node, buf);
+	n0 = gst_xml_element_find_first (node, buf);
 	if (val && strlen (val) > 0) {
 		if (!n0)
-			n0 = xst_xml_element_add (node, buf);
-		xst_xml_element_set_content (n0, val);
+			n0 = gst_xml_element_add (node, buf);
+		gst_xml_element_set_content (n0, val);
 	} else {
 		if (n0)
-			xst_xml_element_destroy (n0);
+			gst_xml_element_destroy (n0);
 	}
 }
 
@@ -404,14 +404,14 @@ boot_value_set_root (xmlNodePtr node, const gchar *val)
 	
 	g_return_if_fail (node != NULL);
 
-	n0 = xst_xml_element_find_first (node, "root");
+	n0 = gst_xml_element_find_first (node, "root");
 	if (val && strlen (val) > 0) {
 		if (!n0)
-			n0 = xst_xml_element_add (node, "root");
-		xst_xml_element_set_content (n0, val);
+			n0 = gst_xml_element_add (node, "root");
+		gst_xml_element_set_content (n0, val);
 	} else {
 		if (n0)
-			xst_xml_element_destroy (n0);
+			gst_xml_element_destroy (n0);
 	}
 }
 
@@ -422,19 +422,19 @@ boot_value_set_append (xmlNodePtr node, const gchar *val)
 	
 	g_return_if_fail (node != NULL);
 
-	n0 = xst_xml_element_find_first (node, "append");
+	n0 = gst_xml_element_find_first (node, "append");
 	if (val && strlen (val) > 0) {
 		if (!n0)
-			n0 = xst_xml_element_add (node, "append");
-		xst_xml_element_set_content (n0, val);
+			n0 = gst_xml_element_add (node, "append");
+		gst_xml_element_set_content (n0, val);
 	} else {
 		if (n0)
-			xst_xml_element_destroy (n0);
+			gst_xml_element_destroy (n0);
 	}
 }
 
 void
-boot_value_set_type (xmlNodePtr node, XstBootImageType type)
+boot_value_set_type (xmlNodePtr node, GstBootImageType type)
 {
 	gchar *buf;
 	xmlNodePtr n0;
@@ -442,11 +442,11 @@ boot_value_set_type (xmlNodePtr node, XstBootImageType type)
 	g_return_if_fail (node != NULL);
 
 	buf = type_to_label (type);
-	n0 = xst_xml_element_find_first (node, "type");
+	n0 = gst_xml_element_find_first (node, "type");
 	if (!n0)
-		n0 = xst_xml_element_add (node, "type");
+		n0 = gst_xml_element_add (node, "type");
 
-	xst_xml_element_set_content (n0, buf);
+	gst_xml_element_set_content (n0, buf);
 	g_free (buf);
 }
 
@@ -458,10 +458,10 @@ boot_table_get_new_key (xmlNodePtr root)
 	gint maxkey, keynum;
 
 	maxkey = 0;
-	for (node = xst_xml_element_find_first (root, "entry");
-	     node; node = xst_xml_element_find_next (node, "entry"))
+	for (node = gst_xml_element_find_first (root, "entry");
+	     node; node = gst_xml_element_find_next (node, "entry"))
 	{
-		key = xst_xml_get_child_content (node, "key");
+		key = gst_xml_get_child_content (node, "key");
 		if (key) {
 			keynum = atoi (key);
 			if (maxkey <= keynum)
@@ -469,7 +469,7 @@ boot_table_get_new_key (xmlNodePtr root)
 			g_free (key);
 		} else
 			/* This leaks, but it's not supposed to happen in production. */
-			g_warning ("Entry %s has no key.", xst_xml_get_child_content (node, "label"));
+			g_warning ("Entry %s has no key.", gst_xml_get_child_content (node, "label"));
 	}
 
 	return g_strdup_printf ("%d", maxkey);
@@ -482,11 +482,11 @@ boot_table_add (void)
 	gchar *newkey;
 	xmlNodePtr root, node;
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 	
 	newkey = boot_table_get_new_key (root);
-	node = xst_xml_element_add (root, "entry");
-	xst_xml_element_add_with_content (node, "key", newkey);
+	node = gst_xml_element_add (root, "entry");
+	gst_xml_element_add_with_content (node, "key", newkey);
 	g_free (newkey);
 	
 	return node;

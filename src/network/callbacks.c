@@ -29,7 +29,7 @@
 
 #include <gnome.h>
 
-#include "xst.h"
+#include "gst.h"
 
 #include "callbacks.h"
 #include "transfer.h"
@@ -41,7 +41,7 @@
 /* Don't Poll */
 /* #define POLL_HACK */ 
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 static void
 scrolled_window_scroll_bottom (GtkWidget *sw)
@@ -58,7 +58,7 @@ scrolled_window_scroll_bottom (GtkWidget *sw)
 void 
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
-	XstTool *tool;
+	GstTool *tool;
 
 	tool = user_data;
 	connection_init_gui (tool);
@@ -67,7 +67,7 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 
 #ifdef POLL_HACK
 static void
-poll_connections_cb (XstDirectiveEntry *entry)
+poll_connections_cb (GstDirectiveEntry *entry)
 {
 	xmlDoc     *xml;
 	xmlNodePtr  root, iface;
@@ -76,17 +76,17 @@ poll_connections_cb (XstDirectiveEntry *entry)
 	gint        i;
 
 	GtkWidget *clist;
-	XstConnection *cxn;
+	GstConnection *cxn;
 
-	xml = xst_tool_run_get_directive (entry->tool, entry->report_sign, entry->directive, NULL);
-	clist = xst_dialog_get_widget (entry->tool->main_dialog, "connection_list");
+	xml = gst_tool_run_get_directive (entry->tool, entry->report_sign, entry->directive, NULL);
+	clist = gst_dialog_get_widget (entry->tool->main_dialog, "connection_list");
 
-	root = xst_xml_doc_get_root (xml);
-	for (iface = xst_xml_element_find_first (root, "interface"); iface;
-	     iface = xst_xml_element_find_next (iface, "interface")) {
+	root = gst_xml_doc_get_root (xml);
+	for (iface = gst_xml_element_find_first (root, "interface"); iface;
+	     iface = gst_xml_element_find_next (iface, "interface")) {
 
-		active = xst_xml_element_get_boolean (iface, "active");
-		dev = xst_xml_get_child_content (iface, "dev");
+		active = gst_xml_element_get_boolean (iface, "active");
+		dev = gst_xml_get_child_content (iface, "dev");
 
 		for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 			cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
@@ -135,15 +135,15 @@ poll_connections_cb (XstDirectiveEntry *entry)
 		g_free (dev);
 	}
 
-	xst_xml_doc_destroy (xml);
+	gst_xml_doc_destroy (xml);
 }
 
 static gint
 poll_connections_timeout (gpointer data)
 {
-	XstTool *tool = data;
+	GstTool *tool = data;
 	
-	xst_tool_queue_directive (tool, poll_connections_cb, tool, NULL, NULL, "list_ifaces");
+	gst_tool_queue_directive (tool, poll_connections_cb, tool, NULL, NULL, "list_ifaces");
 	
 	return TRUE;
 }
@@ -158,8 +158,8 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 
 	return;
 
-	if (xst_tool_get_access (tool) && entry[page_num]) {
-		w = xst_dialog_get_widget (tool->main_dialog, entry[page_num]);
+	if (gst_tool_get_access (tool) && entry[page_num]) {
+		w = gst_dialog_get_widget (tool->main_dialog, entry[page_num]);
 		if (w)
 			gtk_widget_grab_focus (w);
 	}
@@ -386,7 +386,7 @@ static const char *hint_entry[][3] = { {
 static GHashTable *help_hash;
 
 void
-init_editable_filters (XstDialog *dialog)
+init_editable_filters (GstDialog *dialog)
 {
 	gint i;
 	struct tmp { char *name; EditableFilterRules rule; };
@@ -405,14 +405,14 @@ init_editable_filters (XstDialog *dialog)
 	};
 
 	for (i = 0; s[i].name; i++)
-		connect_editable_filter (xst_dialog_get_widget (dialog, s[i].name), s[i].rule);
+		connect_editable_filter (gst_dialog_get_widget (dialog, s[i].name), s[i].rule);
 
 #warning FIXME
 	return;
 
 	for (i = 0; s1[i].name; i++) {
 		GtkTextBuffer *buffer;
-		GtkWidget *w = xst_dialog_get_widget (dialog, s1[i].name);
+		GtkWidget *w = gst_dialog_get_widget (dialog, s1[i].name);
 
 		buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
 		g_signal_connect (G_OBJECT (buffer), "insert_text",
@@ -447,7 +447,7 @@ update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 	if (!entry)
 		return FALSE;
 	
-	label = xst_dialog_get_widget (tool->main_dialog, entry[1]);
+	label = gst_dialog_get_widget (tool->main_dialog, entry[1]);
 	gtk_label_set_text (GTK_LABEL (label), _(entry[2]));
 
 	return FALSE;
@@ -456,18 +456,18 @@ update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 void
 on_connection_add_clicked (GtkWidget *w, gpointer null)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 	GtkWidget *d, *table, *ppp, *eth, *wvlan, *plip, *irlan, *clist;
 	gint res, row;
-	XstConnectionType cxn_type;
+	GstConnectionType cxn_type;
 
-	table = xst_dialog_get_widget (tool->main_dialog, "connection_type_table");
+	table = gst_dialog_get_widget (tool->main_dialog, "connection_type_table");
 
-	ppp   = xst_dialog_get_widget (tool->main_dialog, "connection_type_ppp");
-	eth   = xst_dialog_get_widget (tool->main_dialog, "connection_type_eth");
-	wvlan = xst_dialog_get_widget (tool->main_dialog, "connection_type_wvlan");
-	plip  = xst_dialog_get_widget (tool->main_dialog, "connection_type_plip");
-	irlan = xst_dialog_get_widget (tool->main_dialog, "connection_type_irlan");
+	ppp   = gst_dialog_get_widget (tool->main_dialog, "connection_type_ppp");
+	eth   = gst_dialog_get_widget (tool->main_dialog, "connection_type_eth");
+	wvlan = gst_dialog_get_widget (tool->main_dialog, "connection_type_wvlan");
+	plip  = gst_dialog_get_widget (tool->main_dialog, "connection_type_plip");
+	irlan = gst_dialog_get_widget (tool->main_dialog, "connection_type_irlan");
 
 	/* ppp is the default for now */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ppp), TRUE);
@@ -488,34 +488,34 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 		return;
 
 	if (GTK_TOGGLE_BUTTON (ppp)->active)
-		cxn_type = XST_CONNECTION_PPP;
+		cxn_type = GST_CONNECTION_PPP;
 	else if (GTK_TOGGLE_BUTTON (eth)->active)
-		cxn_type = XST_CONNECTION_ETH;
+		cxn_type = GST_CONNECTION_ETH;
 	else if (GTK_TOGGLE_BUTTON (wvlan)->active)
-		cxn_type = XST_CONNECTION_WVLAN;
+		cxn_type = GST_CONNECTION_WVLAN;
 	else if (GTK_TOGGLE_BUTTON (plip)->active)
-		cxn_type = XST_CONNECTION_PLIP;
+		cxn_type = GST_CONNECTION_PLIP;
 	else if (GTK_TOGGLE_BUTTON (irlan)->active)
-		cxn_type = XST_CONNECTION_IRLAN;
+		cxn_type = GST_CONNECTION_IRLAN;
 	else
-		cxn_type = XST_CONNECTION_UNKNOWN;
+		cxn_type = GST_CONNECTION_UNKNOWN;
 
-	cxn = connection_new_from_type (cxn_type, xst_xml_doc_get_root (tool->config));
+	cxn = connection_new_from_type (cxn_type, gst_xml_doc_get_root (tool->config));
 	cxn->creating = TRUE;
-	connection_save_to_node (cxn, xst_xml_doc_get_root (tool->config));
+	connection_save_to_node (cxn, gst_xml_doc_get_root (tool->config));
 	connection_configure (cxn);
 
 	connection_add_to_list (cxn);
 	connection_list_select_connection (cxn);
 
-	scrolled_window_scroll_bottom (xst_dialog_get_widget (tool->main_dialog, "connection_list_sw"));
+	scrolled_window_scroll_bottom (gst_dialog_get_widget (tool->main_dialog, "connection_list_sw"));
 }
 
 void
 on_connection_delete_clicked (GtkWidget *w, gpointer null)
 {
 	GtkWidget *d;
-	XstConnection *cxn;
+	GstConnection *cxn;
 	gint res;
 	gchar *txt;
 
@@ -540,7 +540,7 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 	connection_default_gw_remove (cxn->dev);
 	connection_list_remove (cxn);
 	connection_free (cxn);	
-	xst_dialog_modify (tool->main_dialog);
+	gst_dialog_modify (tool->main_dialog);
 }
 
 void
@@ -550,11 +550,11 @@ on_connection_configure_clicked (GtkWidget *w, gpointer null)
 }
 
 static void
-activate_directive_cb (XstDirectiveEntry *entry)
+activate_directive_cb (GstDirectiveEntry *entry)
 {
 	gchar *file = entry->data;
 
-	xst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
+	gst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
 				    file, "1", NULL);
 	g_free (entry->report_sign);
 }
@@ -562,37 +562,37 @@ activate_directive_cb (XstDirectiveEntry *entry)
 void
 on_connection_activate_clicked (GtkWidget *w, gpointer null)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 	gchar *sign, *file;
-	gboolean modified = xst_dialog_get_modified (tool->main_dialog);
+	gboolean modified = gst_dialog_get_modified (tool->main_dialog);
 
 	cxn = connection_list_get_active ();
 	connection_activate (cxn, TRUE);
 
 	file = (cxn->file)? cxn->file: cxn->dev;
 	sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
-	xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
+	gst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
 	
-	xst_dialog_set_modified (tool->main_dialog, modified);
+	gst_dialog_set_modified (tool->main_dialog, modified);
 	
-/*	if (xst_dialog_get_modified (tool->main_dialog)) {
-		xst_tool_save (tool);
-		xst_dialog_set_modified (tool->main_dialog, FALSE);
+/*	if (gst_dialog_get_modified (tool->main_dialog)) {
+		gst_tool_save (tool);
+		gst_dialog_set_modified (tool->main_dialog, FALSE);
 	} else {
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
-		xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
+		gst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
 	}*/
 
 	cxn->activation = ACTIVATION_UP;
 }
 
 static void
-deactivate_directive_cb (XstDirectiveEntry *entry)
+deactivate_directive_cb (GstDirectiveEntry *entry)
 {
 	gchar *file = entry->data;
 	
-	xst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
+	gst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
 				    file, "0", NULL);
 	g_free (entry->report_sign);
 }
@@ -600,29 +600,29 @@ deactivate_directive_cb (XstDirectiveEntry *entry)
 void
 on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 	gchar *sign, *file;
-	gboolean modified = xst_dialog_get_modified (tool->main_dialog);
+	gboolean modified = gst_dialog_get_modified (tool->main_dialog);
 
 	cxn = connection_list_get_active ();
 	connection_activate (cxn, FALSE);
 	
 	file = (cxn->file)? cxn->file: cxn->dev;
 	sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
-	xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
+	gst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
 	
-	xst_dialog_set_modified (tool->main_dialog, modified);
+	gst_dialog_set_modified (tool->main_dialog, modified);
 	
 /*	cxn = connection_list_get_active ();
 	connection_activate (cxn, FALSE);
 
-	if (xst_dialog_get_modified (tool->main_dialog)) {
-		xst_tool_save (tool);
-		xst_dialog_set_modified (tool->main_dialog, FALSE);
+	if (gst_dialog_get_modified (tool->main_dialog)) {
+		gst_tool_save (tool);
+		gst_dialog_set_modified (tool->main_dialog, FALSE);
 	} else {
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
-		xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
+		gst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
 	}*/
 
 	cxn->activation = ACTIVATION_DOWN;
@@ -654,25 +654,25 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 		return;
 	}
 
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "description_label", active);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "description", active);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup_label", active);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup", active);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_use", active);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_ip", active);
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "description_label", active);
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "description", active);
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup_label", active);
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "workgroup", active);
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_use", active);
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_ip", active);
 	if (smb_installed)
-		xst_dialog_modify_cb (w, null);
+		gst_dialog_modify_cb (w, null);
 }
 
 void
 on_wins_use_toggled (GtkWidget *w, gpointer null)
 {
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_ip",
+	gst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_ip",
 					      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 }
 
 gboolean
-callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
+callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
 {
 	gchar *hostname_old;
 	const gchar *hostname_new;
@@ -680,12 +680,12 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 	GtkWidget *entry;
 	gint res;
 
-	root = xst_xml_doc_get_root (dialog->tool->config);
-	node = xst_xml_element_find_first (root, "hostname");
+	root = gst_xml_doc_get_root (dialog->tool->config);
+	node = gst_xml_element_find_first (root, "hostname");
 
-	hostname_old = xst_xml_element_get_content (node);
+	hostname_old = gst_xml_element_get_content (node);
 
-	entry = xst_dialog_get_widget (dialog, "hostname");
+	entry = gst_dialog_get_widget (dialog, "hostname");
 	hostname_new = gtk_entry_get_text (GTK_ENTRY (entry));
 
 	if (strcmp (hostname_new, hostname_old))
@@ -721,7 +721,7 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 }
 
 gboolean
-callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
+callbacks_update_connections_hook (GstDialog *dialog, gpointer data)
 {
 	connection_list_update ();
 
@@ -729,7 +729,7 @@ callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
 }
 
 void
-callbacks_check_dialer (GtkWindow *window, XstTool *tool)
+callbacks_check_dialer (GtkWindow *window, GstTool *tool)
 {
 	gboolean has_dialer;
 	
@@ -753,12 +753,12 @@ callbacks_check_dialer (GtkWindow *window, XstTool *tool)
 }
 
 gboolean
-callbacks_check_dialer_hook (XstDialog *dialog, gpointer data)
+callbacks_check_dialer_hook (GstDialog *dialog, gpointer data)
 {
-	XstTool *tool;
+	GstTool *tool;
 	gboolean has_dialer;
 
-	tool = XST_TOOL (data);
+	tool = GST_TOOL (data);
 	has_dialer = connection_list_has_dialer (tool);
 	if (!has_dialer)
 	{
@@ -787,7 +787,7 @@ callbacks_check_dialer_hook (XstDialog *dialog, gpointer data)
 }
 
 static gboolean
-callbacks_disabled_gatewaydev_warn (XstTool *tool, XstConnection *cxn, gboolean *ignore_enabled)
+callbacks_disabled_gatewaydev_warn (GstTool *tool, GstConnection *cxn, gboolean *ignore_enabled)
 {
 	gchar *text = _("The default gateway device is not activated. This\n"
 			"will prevent you from connecting to the Internet.\n"
@@ -806,7 +806,7 @@ callbacks_disabled_gatewaydev_warn (XstTool *tool, XstConnection *cxn, gboolean 
 	
 	switch (res) {
 	case GTK_RESPONSE_OK:
-		connection_default_gw_fix (cxn, XST_CONNECTION_ERROR_ENABLED);
+		connection_default_gw_fix (cxn, GST_CONNECTION_ERROR_ENABLED);
 		return TRUE;
 	case GTK_RESPONSE_CANCEL:
 		*ignore_enabled = TRUE;
@@ -820,28 +820,28 @@ callbacks_disabled_gatewaydev_warn (XstTool *tool, XstConnection *cxn, gboolean 
 }
 
 static gboolean
-callbacks_check_manual_gatewaydev (XstTool *tool)
+callbacks_check_manual_gatewaydev (GstTool *tool)
 {
-	XstConnection *cxn;
-	XstConnectionErrorType error;
+	GstConnection *cxn;
+	GstConnectionErrorType error;
 	gboolean ignore_enabled;
 
 	ignore_enabled = FALSE;
 	cxn = connection_default_gw_get_connection (tool);
 
 	while ((error = connection_default_gw_check_manual (cxn, ignore_enabled))
-	       != XST_CONNECTION_ERROR_NONE)
+	       != GST_CONNECTION_ERROR_NONE)
 	{
 		switch (error) {
-		case XST_CONNECTION_ERROR_ENABLED:
+		case GST_CONNECTION_ERROR_ENABLED:
 			if (callbacks_disabled_gatewaydev_warn (tool, cxn, &ignore_enabled))
 				continue;
 			else
 				return FALSE;
-		case XST_CONNECTION_ERROR_PPP:
+		case GST_CONNECTION_ERROR_PPP:
 			connection_default_gw_fix (cxn, error);
 			continue;
-		case XST_CONNECTION_ERROR_STATIC:
+		case GST_CONNECTION_ERROR_STATIC:
 		{
 			GtkWidget *dialog;
 			gchar *txt = _("The default gateway device is missing gateway\n"
@@ -859,8 +859,8 @@ callbacks_check_manual_gatewaydev (XstTool *tool)
 			return FALSE;
 		}
 		break;
-		case XST_CONNECTION_ERROR_NONE:
-		case XST_CONNECTION_ERROR_OTHER:
+		case GST_CONNECTION_ERROR_NONE:
+		case GST_CONNECTION_ERROR_OTHER:
 		default:
 			g_warning ("callbacks_check_manual_gatewaydev: shouldn't be here.");
 			return TRUE;
@@ -873,11 +873,11 @@ callbacks_check_manual_gatewaydev (XstTool *tool)
 }
 
 gboolean
-callbacks_check_gateway_hook (XstDialog *dialog, gpointer data)
+callbacks_check_gateway_hook (GstDialog *dialog, gpointer data)
 {
-	XstTool *tool;
+	GstTool *tool;
 
-	tool = XST_TOOL (data);
+	tool = GST_TOOL (data);
 	if (!g_object_get_data (G_OBJECT (tool), "gwdevunsup") &&
 	    g_object_get_data (G_OBJECT (tool), "gatewaydev"))
 		return callbacks_check_manual_gatewaydev (tool);
@@ -887,7 +887,7 @@ callbacks_check_gateway_hook (XstDialog *dialog, gpointer data)
 }
 
 gboolean
-callbacks_tool_not_found_hook (XstTool *tool, XstReportLine *rline, gpointer data)
+callbacks_tool_not_found_hook (GstTool *tool, GstReportLine *rline, gpointer data)
 {
 	if (! strcmp (rline->argv[0], "redhat-config-network-cmd")) {
 		gchar *text = _("The program redhat-config-network-cmd could not\n"

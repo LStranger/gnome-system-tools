@@ -27,7 +27,7 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "ppp-druid.h"
 
 #define PPP_DRUID_MAX_PAGES 5
@@ -53,7 +53,7 @@ my_get_widget (GladeXML *glade, const gchar *name)
 }
 
 static void
-ppp_druid_connect_signals (PppDruid *ppp, XstDialogSignal *signals)
+ppp_druid_connect_signals (PppDruid *ppp, GstDialogSignal *signals)
 {
 	gint i;
 
@@ -80,7 +80,7 @@ ppp_druid_get_serial_port (PppDruid *ppp)
 	gchar *port;
 	xmlNode *node;
 
-	node = xst_xml_doc_get_root (ppp->tool->config);
+	node = gst_xml_doc_get_root (ppp->tool->config);
 	port = connection_get_serial_port_from_node (node, "Defaults");
 
 	if (!port)
@@ -93,12 +93,12 @@ static void
 ppp_druid_save (PppDruid *ppp)
 {
 	xmlNode *root;
-	XstConnection *cxn;
+	GstConnection *cxn;
 	
 	g_return_if_fail (ppp != NULL);
 
-	root = xst_xml_doc_get_root (ppp->tool->config);
-	cxn = connection_new_from_type (XST_CONNECTION_PPP, root);
+	root = gst_xml_doc_get_root (ppp->tool->config);
+	cxn = connection_new_from_type (GST_CONNECTION_PPP, root);
 	ppp->cxn = cxn;
 
 	cxn->serial_port = ppp_druid_get_serial_port (ppp);
@@ -378,10 +378,10 @@ ppp_druid_on_passwd_activate (GtkWidget *w, gpointer data)
 }
 
 extern PppDruid *
-ppp_druid_new (XstTool *tool)
+ppp_druid_new (GstTool *tool)
 {
 	PppDruid *ppp;
-	XstDialogSignal signals[] = {
+	GstDialogSignal signals[] = {
 		{ "window",	"delete_event",	G_CALLBACK (ppp_druid_on_window_delete_event) },
 		{ "druid",	"cancel",	G_CALLBACK (ppp_druid_on_druid_cancel) },
 		{ "page0",	"next",		G_CALLBACK (ppp_druid_on_page_next) },
@@ -443,10 +443,10 @@ ppp_druid_show (PppDruid *ppp)
 }
 
 void
-ppp_druid_gui_to_xml(XstTool *tool, gpointer data)
+ppp_druid_gui_to_xml(GstTool *tool, gpointer data)
 {
 	PppDruid *ppp = data;
-	xmlNode *root = xst_xml_doc_get_root (tool->config);
+	xmlNode *root = gst_xml_doc_get_root (tool->config);
 
 	connection_save_to_node (ppp->cxn, root);
 }

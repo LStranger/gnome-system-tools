@@ -23,12 +23,12 @@
 
 #include <gnome.h>
 #include <gmodule.h>
-#include "xst-widget.h"
-#include "xst-dialog.h"
-#include "xst-conf.h"
-#include "xst-marshal.h"
+#include "gst-widget.h"
+#include "gst-dialog.h"
+#include "gst-conf.h"
+#include "gst-marshal.h"
 
-#ifdef XST_DEBUG
+#ifdef GST_DEBUG
 /* define to x for debugging output */
 #define d(x) x
 #else
@@ -43,15 +43,15 @@ enum {
 };
 
 static GnomeAppClass *parent_class;
-static gint xstdialog_signals[LAST_SIGNAL] = { 0 };
+static gint gstdialog_signals[LAST_SIGNAL] = { 0 };
 
 GtkWidget *
-xst_dialog_get_widget (XstDialog *xd, const char *widget)
+gst_dialog_get_widget (GstDialog *xd, const char *widget)
 {
 	GtkWidget *w;
 
 	g_return_val_if_fail (xd != NULL, NULL);
-	g_return_val_if_fail (XST_IS_DIALOG (xd), NULL);
+	g_return_val_if_fail (GST_IS_DIALOG (xd), NULL);
 	g_return_val_if_fail (xd->gui != NULL, NULL);
 
 	w = glade_xml_get_widget (xd->gui, widget);
@@ -63,30 +63,30 @@ xst_dialog_get_widget (XstDialog *xd, const char *widget)
 }
 
 static void
-apply_widget_policies (XstDialog *xd)
+apply_widget_policies (GstDialog *xd)
 {
 	GSList *list;
 
 	/* Hide, show + desensitize or show + sensitize widgets based on access level
 	 * and complexity */
 
-	for (list = xd->xst_widget_list; list; list = g_slist_next (list))
+	for (list = xd->gst_widget_list; list; list = g_slist_next (list))
 	{
-		xst_widget_apply_policy (list->data);
+		gst_widget_apply_policy (list->data);
 	}
 }
 
-XstDialogComplexity 
-xst_dialog_get_complexity (XstDialog *xd)
+GstDialogComplexity 
+gst_dialog_get_complexity (GstDialog *xd)
 {
 	g_return_val_if_fail (xd != NULL, 0);
-	g_return_val_if_fail (XST_IS_DIALOG (xd), 0);
+	g_return_val_if_fail (GST_IS_DIALOG (xd), 0);
 
 	return xd->complexity;
 }
 
 void
-xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
+gst_dialog_set_complexity (GstDialog *xd, GstDialogComplexity c)
 {
 	gchar *label[] = {
 		N_(" More _Options"),
@@ -101,19 +101,19 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 	};
 
 	g_return_if_fail (xd != NULL);
-	g_return_if_fail (XST_IS_DIALOG (xd));
-	g_return_if_fail (c >= XST_DIALOG_BASIC);
-	g_return_if_fail (c <= XST_DIALOG_ADVANCED);
+	g_return_if_fail (GST_IS_DIALOG (xd));
+	g_return_if_fail (c >= GST_DIALOG_BASIC);
+	g_return_if_fail (c <= GST_DIALOG_ADVANCED);
 
 	if (xd->complexity == c)
 		return;
 
 	xd->complexity = c;
 
-	if (xd->complexity == XST_DIALOG_ADVANCED)
-		xst_conf_set_boolean (xd->tool, "advanced_mode", TRUE);
+	if (xd->complexity == GST_DIALOG_ADVANCED)
+		gst_conf_set_boolean (xd->tool, "advanced_mode", TRUE);
 	else
-		xst_conf_set_boolean (xd->tool, "advanced_mode", FALSE);
+		gst_conf_set_boolean (xd->tool, "advanced_mode", FALSE);
 
 	apply_widget_policies (xd);
 
@@ -122,14 +122,14 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 	gtk_label_set_use_underline (GTK_LABEL (xd->complexity_button_label), TRUE);
 	gtk_image_set_from_stock (GTK_IMAGE (xd->complexity_button_image), image[c], GTK_ICON_SIZE_MENU);
 
-	g_signal_emit (G_OBJECT (xd), xstdialog_signals[COMPLEXITY_CHANGE], 0);
+	g_signal_emit (G_OBJECT (xd), gstdialog_signals[COMPLEXITY_CHANGE], 0);
 }
 
 void
-xst_dialog_freeze (XstDialog *xd)
+gst_dialog_freeze (GstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
-	g_return_if_fail (XST_IS_DIALOG (xd));
+	g_return_if_fail (GST_IS_DIALOG (xd));
 	g_return_if_fail (xd->frozen >= 0);
 
 	d(g_message ("freezing %p", xd));
@@ -138,10 +138,10 @@ xst_dialog_freeze (XstDialog *xd)
 }
 
 void 
-xst_dialog_thaw (XstDialog *xd)
+gst_dialog_thaw (GstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
-	g_return_if_fail (XST_IS_DIALOG (xd));
+	g_return_if_fail (GST_IS_DIALOG (xd));
 	g_return_if_fail (xd->frozen >= 0);
 
 	d(g_message ("thawing %p", xd));
@@ -150,77 +150,77 @@ xst_dialog_thaw (XstDialog *xd)
 }
 
 void
-xst_dialog_freeze_visible (XstDialog *xd)
+gst_dialog_freeze_visible (GstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
-	g_return_if_fail (XST_IS_DIALOG (xd));
+	g_return_if_fail (GST_IS_DIALOG (xd));
 	g_return_if_fail (xd->frozen >= 0);
 
 	if (!xd->frozen)
 		gtk_widget_set_sensitive (GTK_WIDGET (xd), FALSE);
 	
-	xst_dialog_freeze (xd);
+	gst_dialog_freeze (xd);
 }
 
 void
-xst_dialog_thaw_visible (XstDialog *xd)
+gst_dialog_thaw_visible (GstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
-	g_return_if_fail (XST_IS_DIALOG (xd));
+	g_return_if_fail (GST_IS_DIALOG (xd));
 	g_return_if_fail (xd->frozen >= 0);
 
-	xst_dialog_thaw (xd);
+	gst_dialog_thaw (xd);
 
 	if (!xd->frozen)
 		gtk_widget_set_sensitive (GTK_WIDGET (xd), TRUE);
 }
 
 gboolean
-xst_dialog_get_modified (XstDialog *xd)
+gst_dialog_get_modified (GstDialog *xd)
 {
 	g_return_val_if_fail (xd != NULL, FALSE);
-	g_return_val_if_fail (XST_IS_DIALOG (xd), FALSE);
+	g_return_val_if_fail (GST_IS_DIALOG (xd), FALSE);
 
 	return GTK_WIDGET_SENSITIVE (xd->apply_button);
 }
 
 void
-xst_dialog_set_modified (XstDialog *xd, gboolean state)
+gst_dialog_set_modified (GstDialog *xd, gboolean state)
 {
 	g_return_if_fail (xd != NULL);
-	g_return_if_fail (XST_IS_DIALOG (xd));
+	g_return_if_fail (GST_IS_DIALOG (xd));
 
 	gtk_widget_set_sensitive (xd->apply_button, state);
 }
 
 void
-xst_dialog_modify (XstDialog *xd)
+gst_dialog_modify (GstDialog *xd)
 {
 	g_return_if_fail (xd != NULL);
-	g_return_if_fail (XST_IS_DIALOG (xd));
+	g_return_if_fail (GST_IS_DIALOG (xd));
 
-	d(g_print ("froze: %d\taccess: %d\n", xd->frozen, xst_tool_get_access (xd->tool)));
+	d(g_print ("froze: %d\taccess: %d\n", xd->frozen, gst_tool_get_access (xd->tool)));
 
-	if (xd->frozen || !xst_tool_get_access (xd->tool))
+	if (xd->frozen || !gst_tool_get_access (xd->tool))
 		return;
 
-	xst_dialog_set_modified (xd, TRUE);
+	gst_dialog_set_modified (xd, TRUE);
 }
 
 void
-xst_dialog_modify_cb (GtkWidget *w, gpointer data)
+gst_dialog_modify_cb (GtkWidget *w, gpointer data)
 {
-	xst_dialog_modify (data);
+	gst_dialog_modify (data);
 }
 
 static void
-xst_dialog_destroy (GtkObject *tool)
+gst_dialog_destroy (GtkObject *tool)
 {
 	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (tool));
 }
 
 static void
-xst_dialog_class_init (XstDialogClass *klass)
+gst_dialog_class_init (GstDialogClass *klass)
 {
 	GtkObjectClass *object_class;
 
@@ -228,52 +228,52 @@ xst_dialog_class_init (XstDialogClass *klass)
 	parent_class = gtk_type_class (GNOME_TYPE_APP);
 
 #if 1	
-	xstdialog_signals[APPLY] = 
+	gstdialog_signals[APPLY] = 
 		g_signal_new ("apply",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (XstDialogClass, apply),
+			      G_STRUCT_OFFSET (GstDialogClass, apply),
 			      NULL, NULL,
-			      xst_marshal_VOID__VOID,
+			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
 	
-	xstdialog_signals[COMPLEXITY_CHANGE] =
+	gstdialog_signals[COMPLEXITY_CHANGE] =
 		g_signal_new ("complexity_change",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (XstDialogClass, complexity_change),
+			      G_STRUCT_OFFSET (GstDialogClass, complexity_change),
 			      NULL, NULL,
-			      xst_marshal_VOID__VOID,
+			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
 #else	
-	xstdialog_signals[APPLY] = 
+	gstdialog_signals[APPLY] = 
 		gtk_signal_new ("apply",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET (XstDialogClass, apply),
+				GTK_SIGNAL_OFFSET (GstDialogClass, apply),
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
 
-	xstdialog_signals[COMPLEXITY_CHANGE] =
+	gstdialog_signals[COMPLEXITY_CHANGE] =
 		gtk_signal_new ("complexity_change",
 				GTK_RUN_LAST,
 				object_class->type,
-				GTK_SIGNAL_OFFSET (XstDialogClass, complexity_change),
+				GTK_SIGNAL_OFFSET (GstDialogClass, complexity_change),
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
 #endif	
 
 #if 0
-	gtk_object_class_add_signals (object_class, xstdialog_signals, LAST_SIGNAL);
+	gtk_object_class_add_signals (object_class, gstdialog_signals, LAST_SIGNAL);
 #endif	
 
-	object_class->destroy = xst_dialog_destroy;
+	object_class->destroy = gst_dialog_destroy;
 }
 
 static void
-xst_dialog_init (XstDialog *dialog)
+gst_dialog_init (GstDialog *dialog)
 {
 	/* nothing to do here
 	 * exciting stuff happens in _construct
@@ -281,35 +281,35 @@ xst_dialog_init (XstDialog *dialog)
 }
 	
 GtkType
-xst_dialog_get_type (void)
+gst_dialog_get_type (void)
 {
-	static GType xstdialog_type = 0;
+	static GType gstdialog_type = 0;
 
-	if (xstdialog_type == 0) {
-		GTypeInfo xstdialog_info = {
-			sizeof (XstDialogClass),
+	if (gstdialog_type == 0) {
+		GTypeInfo gstdialog_info = {
+			sizeof (GstDialogClass),
 			NULL, /* base_init */
 			NULL, /* base finalize */
-			(GClassInitFunc) xst_dialog_class_init,
+			(GClassInitFunc) gst_dialog_class_init,
 			NULL, /* class_finalize */
 			NULL, /* class_data */
-			sizeof (XstDialog),
+			sizeof (GstDialog),
 			0, /* n_preallocs */
-			(GInstanceInitFunc) xst_dialog_init
+			(GInstanceInitFunc) gst_dialog_init
 		};
 
-		xstdialog_type = g_type_register_static (GNOME_TYPE_APP, "XstDialog", &xstdialog_info, 0);
+		gstdialog_type = g_type_register_static (GNOME_TYPE_APP, "GstDialog", &gstdialog_info, 0);
 	}
 
-	return xstdialog_type;
+	return gstdialog_type;
 }
 
 void
-xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc func, gpointer data)
+gst_dialog_add_apply_hook (GstDialog *xd, GstDialogHookFunc func, gpointer data)
 {
-	XstDialogHookEntry *entry;
+	GstDialogHookEntry *entry;
 
-	entry = g_new0 (XstDialogHookEntry, 1);
+	entry = g_new0 (GstDialogHookEntry, 1);
 	entry->data = data;
 	entry->func = func;
 
@@ -317,9 +317,9 @@ xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc func, gpointer data)
 }
 
 gboolean
-xst_dialog_run_apply_hooks (XstDialog *xd)
+gst_dialog_run_apply_hooks (GstDialog *xd)
 {
-	XstDialogHookEntry *hookentry;
+	GstDialogHookEntry *hookentry;
 	GList *l;
 	
 	for (l = xd->apply_hook_list; l; l = l->next) {
@@ -332,52 +332,52 @@ xst_dialog_run_apply_hooks (XstDialog *xd)
 }
 
 void
-xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy *xwp)
+gst_dialog_set_widget_policies (GstDialog *xd, const GstWidgetPolicy *xwp)
 {
-	XstWidget *xw;
+	GstWidget *xw;
 	int i;
 
 	for (i = 0; xwp [i].widget; i++)
-		xw = xst_widget_new (xd, xwp [i]);
+		xw = gst_widget_new (xd, xwp [i]);
 
 	apply_widget_policies (xd);
 }
 
 void
-xst_dialog_set_widget_user_modes (XstDialog *xd, const XstWidgetUserPolicy *xwup)
+gst_dialog_set_widget_user_modes (GstDialog *xd, const GstWidgetUserPolicy *xwup)
 {
-	XstWidget *xw;
+	GstWidget *xw;
 	int i;
 
 	for (i = 0; xwup [i].widget; i++)
 	{
-		xw = xst_dialog_get_xst_widget (xd, xwup [i].widget);
+		xw = gst_dialog_get_gst_widget (xd, xwup [i].widget);
 
 		if (!xw)
-			xw = xst_widget_new_full (xst_dialog_get_widget (xd, xwup [i].widget), xd,
-						  XST_WIDGET_MODE_SENSITIVE, XST_WIDGET_MODE_SENSITIVE,
+			xw = gst_widget_new_full (gst_dialog_get_widget (xd, xwup [i].widget), xd,
+						  GST_WIDGET_MODE_SENSITIVE, GST_WIDGET_MODE_SENSITIVE,
 						  FALSE, TRUE);
 
-		xst_widget_set_user_mode (xw, xwup [i].mode);
+		gst_widget_set_user_mode (xw, xwup [i].mode);
 	}
 
 	apply_widget_policies (xd);
 }
 
-XstWidget *
-xst_dialog_get_xst_widget (XstDialog *xd, const gchar *name)
+GstWidget *
+gst_dialog_get_gst_widget (GstDialog *xd, const gchar *name)
 {
-	XstWidget *xw = NULL;
+	GstWidget *xw = NULL;
 	GtkWidget *widget;
 	GSList *list;
 
 	g_return_val_if_fail (xd != NULL, NULL);
 
-	widget = xst_dialog_get_widget (xd, name);
+	widget = gst_dialog_get_widget (xd, name);
 
-	for (list = xd->xst_widget_list; list; list = g_slist_next (list))
+	for (list = xd->gst_widget_list; list; list = g_slist_next (list))
 	{
-		if (((XstWidget *) list->data)->widget == widget)
+		if (((GstWidget *) list->data)->widget == widget)
 		{
 			xw = list->data;
 			break;
@@ -389,54 +389,54 @@ xst_dialog_get_xst_widget (XstDialog *xd, const gchar *name)
 	return (xw);
 }
 
-XstTool *
-xst_dialog_get_tool (XstDialog *xd)
+GstTool *
+gst_dialog_get_tool (GstDialog *xd)
 {
 	return xd->tool;
 }
 
 void
-xst_dialog_widget_set_user_mode (XstDialog *xd, const gchar *name, XstWidgetMode mode)
+gst_dialog_widget_set_user_mode (GstDialog *xd, const gchar *name, GstWidgetMode mode)
 {
-	XstWidget *xw;
+	GstWidget *xw;
 
 	g_return_if_fail (xd != NULL);
 
-	xw = xst_dialog_get_xst_widget (xd, name);
+	xw = gst_dialog_get_gst_widget (xd, name);
 	g_return_if_fail (xw != NULL);
 	
-	xst_widget_set_user_mode (xw, mode);
+	gst_widget_set_user_mode (xw, mode);
 }
 
 void
-xst_dialog_widget_set_user_sensitive (XstDialog *xd, const gchar *name, gboolean state)
+gst_dialog_widget_set_user_sensitive (GstDialog *xd, const gchar *name, gboolean state)
 {
-	XstWidget *xw;
+	GstWidget *xw;
 
 	g_return_if_fail (xd != NULL);
 	
-	xw = xst_dialog_get_xst_widget (xd, name);
+	xw = gst_dialog_get_gst_widget (xd, name);
 	g_return_if_fail (xw != NULL);
 
-	xst_widget_set_user_sensitive (xw, state);
+	gst_widget_set_user_sensitive (xw, state);
 }
 
 static void
 complexity_cb (GtkWidget *w, gpointer data)
 {
-	XstDialog *dialog;
+	GstDialog *dialog;
 
 	g_return_if_fail (data != NULL);
-	g_return_if_fail (XST_IS_DIALOG (data));
+	g_return_if_fail (GST_IS_DIALOG (data));
 
-	dialog = XST_DIALOG (data);
+	dialog = GST_DIALOG (data);
 
 	switch (dialog->complexity) {
-	case XST_DIALOG_BASIC:
-		xst_dialog_set_complexity (dialog, XST_DIALOG_ADVANCED);
+	case GST_DIALOG_BASIC:
+		gst_dialog_set_complexity (dialog, GST_DIALOG_ADVANCED);
 		break;
-	case XST_DIALOG_ADVANCED:
-		xst_dialog_set_complexity (dialog, XST_DIALOG_BASIC);
+	case GST_DIALOG_ADVANCED:
+		gst_dialog_set_complexity (dialog, GST_DIALOG_BASIC);
 		break;
 	default:
 		break;
@@ -446,28 +446,28 @@ complexity_cb (GtkWidget *w, gpointer data)
 static void
 apply_cb (GtkWidget *w, gpointer data)
 {
-	XstDialog *dialog;
+	GstDialog *dialog;
 
 	g_return_if_fail (data != NULL);
-	g_return_if_fail (XST_IS_DIALOG (data));
+	g_return_if_fail (GST_IS_DIALOG (data));
 
-	dialog = XST_DIALOG (data);
+	dialog = GST_DIALOG (data);
 
-	if (!xst_dialog_run_apply_hooks (dialog))
+	if (!gst_dialog_run_apply_hooks (dialog))
 		return;
 
-	g_signal_emit (G_OBJECT (dialog), xstdialog_signals[APPLY], 0);
+	g_signal_emit (G_OBJECT (dialog), gstdialog_signals[APPLY], 0);
 
-	xst_dialog_set_modified (dialog, FALSE);
+	gst_dialog_set_modified (dialog, FALSE);
 }
 
 static void
-dialog_close (XstDialog *dialog)
+dialog_close (GstDialog *dialog)
 {
 	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (XST_IS_DIALOG (dialog));
+	g_return_if_fail (GST_IS_DIALOG (dialog));
 
-	if (xst_dialog_get_modified (dialog)) {
+	if (gst_dialog_get_modified (dialog)) {
 		/* Changes have been made. */
 		GtkWidget *w;
 		gint       res;
@@ -510,12 +510,12 @@ help_cb (GtkWidget *w, gpointer data)
 #warning FIXME	
 #if 0
 	GnomeHelpMenuEntry help_entry = { NULL, "index.html" };
-	XstDialog *dialog;
+	GstDialog *dialog;
 
 	g_return_if_fail (data != NULL);
-	g_return_if_fail (XST_IS_DIALOG (data));
+	g_return_if_fail (GST_IS_DIALOG (data));
 
-	dialog = XST_DIALOG (data);
+	dialog = GST_DIALOG (data);
 
 	help_entry.name = g_strdup_printf ("%s-admin", dialog->tool->name);
 
@@ -528,26 +528,26 @@ help_cb (GtkWidget *w, gpointer data)
 }
 
 void
-xst_dialog_enable_complexity (XstDialog *dialog)
+gst_dialog_enable_complexity (GstDialog *dialog)
 {
 	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (XST_IS_DIALOG (dialog));
+	g_return_if_fail (GST_IS_DIALOG (dialog));
 
 	gtk_widget_show (dialog->complexity_button);
 }
 
 void
-xst_dialog_connect_signals (XstDialog *dialog, XstDialogSignal *signals)
+gst_dialog_connect_signals (GstDialog *dialog, GstDialogSignal *signals)
 {       
 	GtkWidget *w;
 	guint sig;
 	int i;
 
 	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (XST_IS_DIALOG (dialog));
+	g_return_if_fail (GST_IS_DIALOG (dialog));
 
 	for (i=0; signals[i].widget; i++) {
-		w = xst_dialog_get_widget (dialog, signals[i].widget);
+		w = gst_dialog_get_widget (dialog, signals[i].widget);
 		sig = g_signal_connect (G_OBJECT (w),
 					signals[i].signal_name,
 					G_CALLBACK (signals[i].func),
@@ -559,7 +559,7 @@ xst_dialog_connect_signals (XstDialog *dialog, XstDialogSignal *signals)
 }
 
 void
-xst_dialog_construct (XstDialog *dialog, XstTool *tool,
+gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 		      const char *widget, const char *title)
 {
 	GladeXML *xml;
@@ -569,9 +569,9 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	char *s;
 
 	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (XST_IS_DIALOG (dialog));
+	g_return_if_fail (GST_IS_DIALOG (dialog));
 	g_return_if_fail (tool != NULL);
-	g_return_if_fail (XST_IS_TOOL (tool));
+	g_return_if_fail (GST_IS_TOOL (tool));
 	g_return_if_fail (widget != NULL);
 	g_return_if_fail (title != NULL);
 
@@ -582,12 +582,12 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gnome_app_construct (GNOME_APP (dialog), s, title);
 	g_free (s);
 
-	xml = xst_tool_load_glade_common (tool, "tool_vbox");
+	xml = gst_tool_load_glade_common (tool, "tool_vbox");
 	w = glade_xml_get_widget (xml, "tool_vbox");
 	gnome_app_set_contents (GNOME_APP (dialog), w);
 
-	dialog->gui   = xst_tool_load_glade (tool, NULL);
-	dialog->child = xst_dialog_get_widget (dialog, widget);
+	dialog->gui   = gst_tool_load_glade (tool, NULL);
+	dialog->child = gst_dialog_get_widget (dialog, widget);
 
 	if (GTK_WIDGET_TOPLEVEL (dialog->child)) {
 		g_error ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
@@ -622,33 +622,33 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	w = glade_xml_get_widget (xml, "close");
 	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (close_cb), dialog);
 	
-	xst_dialog_set_modified (dialog, FALSE);
+	gst_dialog_set_modified (dialog, FALSE);
 	gtk_widget_hide (dialog->complexity_button);
 
-	dialog->complexity = XST_DIALOG_NONE;
-	val = xst_conf_get_boolean (dialog->tool, "advanced_mode");
+	dialog->complexity = GST_DIALOG_NONE;
+	val = gst_conf_get_boolean (dialog->tool, "advanced_mode");
 	if (val == FALSE)
-		val = XST_DIALOG_BASIC;
+		val = GST_DIALOG_BASIC;
 
-	xst_dialog_set_complexity (dialog, val);
+	gst_dialog_set_complexity (dialog, val);
 
 	g_signal_connect (GTK_OBJECT (dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
 
 }
 
-XstDialog *
-xst_dialog_new (XstTool *tool, const char *widget, const char *title)
+GstDialog *
+gst_dialog_new (GstTool *tool, const char *widget, const char *title)
 {
-	XstDialog *dialog;
+	GstDialog *dialog;
 
 	g_return_val_if_fail (tool != NULL, NULL);
-	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
+	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (widget != NULL, NULL);
 	g_return_val_if_fail (title != NULL, NULL);
 
-	dialog = XST_DIALOG (g_type_create_instance (XST_TYPE_DIALOG));
+	dialog = GST_DIALOG (g_type_create_instance (GST_TYPE_DIALOG));
 	
-	xst_dialog_construct (dialog, tool, widget, title);
+	gst_dialog_construct (dialog, tool, widget, title);
 
 	return dialog;
 }

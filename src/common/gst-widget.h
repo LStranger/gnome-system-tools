@@ -19,47 +19,47 @@
  * Authors: Hans Petter Jansson <hpj@ximian.com>
  */
 
-#ifndef XST_WIDGET_H
-#define XST_WIDGET_H
+#ifndef GST_WIDGET_H
+#define GST_WIDGET_H
 
 #include <gtk/gtk.h>
 
-#include "xst-types.h"
+#include "gst-types.h"
 
-struct _XstWidget {
+struct _GstWidget {
 	GtkWidget     *widget;
-	XstDialog     *dialog;
+	GstDialog     *dialog;
 
-	XstWidgetMode  basic;
-	XstWidgetMode  advanced;
-	XstWidgetMode  user;
+	GstWidgetMode  basic;
+	GstWidgetMode  advanced;
+	GstWidgetMode  user;
 	gboolean       need_access;
 };
 
-struct _XstWidgetPolicy {
+struct _GstWidgetPolicy {
 	const gchar   *widget;
 
-	XstWidgetMode  basic;
-	XstWidgetMode  advanced;
+	GstWidgetMode  basic;
+	GstWidgetMode  advanced;
 	gboolean       need_access;
 	gboolean       user_sensitive;
 };
 
-struct _XstWidgetUserPolicy {
+struct _GstWidgetUserPolicy {
 	const gchar *widget;
 
-	XstWidgetMode mode;
+	GstWidgetMode mode;
 };
 
-XstWidget * xst_widget_new      (XstDialog *dialog, XstWidgetPolicy policy);
-XstWidget * xst_widget_new_full (GtkWidget *gtk_widget, XstDialog *dialog,
-				 XstWidgetMode basic, XstWidgetMode advanced,
+GstWidget * gst_widget_new      (GstDialog *dialog, GstWidgetPolicy policy);
+GstWidget * gst_widget_new_full (GtkWidget *gtk_widget, GstDialog *dialog,
+				 GstWidgetMode basic, GstWidgetMode advanced,
 				 gboolean need_access, gboolean user_sensitive);
 
 
-void       xst_widget_apply_policy       (XstWidget *xw);
+void       gst_widget_apply_policy       (GstWidget *xw);
 
-void       xst_widget_set_user_mode      (XstWidget *xw, XstWidgetMode mode);
-void       xst_widget_set_user_sensitive (XstWidget *xw, gboolean user_sensitive);
+void       gst_widget_set_user_mode      (GstWidget *xw, GstWidgetMode mode);
+void       gst_widget_set_user_sensitive (GstWidget *xw, gboolean user_sensitive);
 
-#endif /* XST_WIDGET_H */
+#endif /* GST_WIDGET_H */

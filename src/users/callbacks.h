@@ -27,7 +27,7 @@
 #define __CALLBACKS_H
 
 #include <gnome.h>
-#include "xst.h"
+#include "gst.h"
 
 /* Main dialog general callbacks */
 void on_showall_toggled (GtkToggleButton*, gpointer);

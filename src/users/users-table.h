@@ -59,7 +59,7 @@ struct UserTreeItem_
 
 void	create_users_table		(void);
 void	populate_users_table		(void);
-void	update_users_table_complexity	(XstDialogComplexity);
+void	update_users_table_complexity	(GstDialogComplexity);
 void	users_table_update_content	(void);
 
 #endif /* _USERS_TABLE_H */

@@ -2,9 +2,9 @@ INCLUDES = \
 	$(GNOME_INCLUDEDIR)	\
 	$(GNOME_XML_CFLAGS)	\
 	-DMAP_DIR=\""$(pixmapsdir)"\" \
-	$(XST_TOOL_CFLAGS)
+	$(GST_TOOL_CFLAGS)
 
-LDADD = -lm $(XST_TOOL_LIBS)
+LDADD = -lm $(GST_TOOL_LIBS)
 LIBS+=$(LDADD)
 
 EXTRA_DIST= e-map-marshal.list

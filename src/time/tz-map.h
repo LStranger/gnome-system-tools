@@ -41,7 +41,7 @@ struct _ETzMap
 	EMapPoint *point_selected,
 	          *point_hover;
 
-	XstTool *tool; /* This is not the way to do it, will fix later */
+	GstTool *tool; /* This is not the way to do it, will fix later */
 };
 
 
@@ -51,7 +51,7 @@ extern ETzMap *tzmap;
 
 /* --- Fake widget --- */
 
-ETzMap     *e_tz_map_new                  (XstTimeTool *tool);
+ETzMap     *e_tz_map_new                  (GstTimeTool *tool);
 TzDB       *e_tz_map_get_tz_db            (ETzMap *tzmap);
 void        e_tz_map_set_tz_from_name     (ETzMap *tzmap, gchar *name);
 gchar      *e_tz_map_get_selected_tz_name (ETzMap *tzmap);

@@ -203,7 +203,7 @@
 		  <property name="invisible_char" translatable="yes">*</property>
 		  <property name="activates_default">False</property>
 		  <signal name="focus_in_event" handler="update_hint"/>
-		  <signal name="changed" handler="xst_dialog_modify_cb"/>
+		  <signal name="changed" handler="gst_dialog_modify_cb"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -289,7 +289,7 @@
 		  <property name="inconsistent">False</property>
 		  <property name="draw_indicator">True</property>
 		  <signal name="toggled" handler="on_samba_use_toggled"/>
-		  <signal name="toggled" handler="xst_dialog_modify_cb"/>
+		  <signal name="toggled" handler="gst_dialog_modify_cb"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">1</property>
@@ -385,7 +385,7 @@
 		  <property name="invisible_char" translatable="yes">*</property>
 		  <property name="activates_default">False</property>
 		  <signal name="focus_in_event" handler="update_hint"/>
-		  <signal name="changed" handler="xst_dialog_modify_cb"/>
+		  <signal name="changed" handler="gst_dialog_modify_cb"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -408,7 +408,7 @@
 		  <property name="invisible_char" translatable="yes">*</property>
 		  <property name="activates_default">False</property>
 		  <signal name="focus_in_event" handler="update_hint"/>
-		  <signal name="changed" handler="xst_dialog_modify_cb"/>
+		  <signal name="changed" handler="gst_dialog_modify_cb"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -431,7 +431,7 @@
 		  <property name="invisible_char" translatable="yes">*</property>
 		  <property name="activates_default">False</property>
 		  <signal name="focus_in_event" handler="update_hint"/>
-		  <signal name="delete_text" handler="xst_dialog_modify_cb"/>
+		  <signal name="delete_text" handler="gst_dialog_modify_cb"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">2</property>
@@ -642,7 +642,7 @@
 		  <property name="use_underline">True</property>
 		  <property name="relief">GTK_RELIEF_NORMAL</property>
 		  <signal name="clicked" handler="on_connection_delete_clicked"/>
-		  <signal name="clicked" handler="xst_dialog_modify_cb"/>
+		  <signal name="clicked" handler="gst_dialog_modify_cb"/>
 		</widget>
 	      </child>
 
@@ -926,7 +926,7 @@ computers are found.</property>
 		      <property name="indent">0</property>
 		      <property name="text" translatable="yes"></property>
 		      <signal name="focus_in_event" handler="update_hint"/>
-		      <signal name="changed" handler="xst_dialog_modify_cb"/>
+		      <signal name="changed" handler="gst_dialog_modify_cb"/>
 		    </widget>
 		  </child>
 		</widget>
@@ -950,7 +950,7 @@ computers are found.</property>
 		  <property name="invisible_char" translatable="yes">*</property>
 		  <property name="activates_default">False</property>
 		  <signal name="focus_in_event" handler="update_hint"/>
-		  <signal name="changed" handler="xst_dialog_modify_cb"/>
+		  <signal name="changed" handler="gst_dialog_modify_cb"/>
 		</widget>
 		<packing>
 		  <property name="left_attach">1</property>
@@ -1009,7 +1009,7 @@ computers are found.</property>
 		      <property name="indent">0</property>
 		      <property name="text" translatable="yes"></property>
 		      <signal name="focus_in_event" handler="update_hint"/>
-		      <signal name="changed" handler="xst_dialog_modify_cb"/>
+		      <signal name="changed" handler="gst_dialog_modify_cb"/>
 		    </widget>
 		  </child>
 		</widget>
@@ -1323,7 +1323,7 @@ computers are found.</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <signal name="clicked" handler="on_statichost_add_clicked"/>
-			  <signal name="clicked" handler="xst_dialog_modify_cb"/>
+			  <signal name="clicked" handler="gst_dialog_modify_cb"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -1341,7 +1341,7 @@ computers are found.</property>
 			  <property name="use_underline">True</property>
 			  <property name="relief">GTK_RELIEF_NORMAL</property>
 			  <signal name="clicked" handler="on_statichost_delete_clicked"/>
-			  <signal name="clicked" handler="xst_dialog_modify_cb"/>
+			  <signal name="clicked" handler="gst_dialog_modify_cb"/>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>

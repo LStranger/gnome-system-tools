@@ -39,13 +39,13 @@
 #include "table.h"
 #include "callbacks.h"
 #include "search-bar/search-bar.h"
-#include "xst.h"
+#include "gst.h"
 
-XstTool *tool;
+GstTool *tool;
 
-void quit_cb (XstTool *tool, gpointer data);
+void quit_cb (GstTool *tool, gpointer data);
 
-static XstDialogSignal signals[] = {
+static GstDialogSignal signals[] = {
 	{ "showall",                     	"toggled",       	G_CALLBACK (on_showall_toggled) },
 	
 	/* User settings dialog callbacks */
@@ -93,26 +93,26 @@ static XstDialogSignal signals[] = {
 	{ "group_delete",			"clicked",       	G_CALLBACK (on_group_delete_clicked) },
 	{ NULL }};
 
-static const XstWidgetPolicy policies[] = {
+static const GstWidgetPolicy policies[] = {
 	/* Name                     Basic                        Advanced                   Root   User */
-	{ "user_new",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-/*	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },*/
-	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "user_settings",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "user_new",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+/*	{ "user_settings_advanced", GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },*/
+	{ "user_delete",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "user_settings",          GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 /* Hiding user_profiles for now, until next release when profiles UI is given a face-lift */
-	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "groups_table",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
-	{ "group_new",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "group_delete",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "group_settings",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "profile_new",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "profile_delete",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "profile_settings",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "network_user_new",       XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "network_group_new",      XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "network_delete",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "network_settings",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "showall",                XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ "user_profiles",          GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "groups_table",           GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ "group_new",              GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "group_delete",           GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "group_settings",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "profile_new",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "profile_delete",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "profile_settings",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "network_user_new",       GST_WIDGET_MODE_INSENSITIVE, GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "network_group_new",      GST_WIDGET_MODE_INSENSITIVE, GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "network_delete",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "network_settings",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "showall",                GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ NULL }
 };
 
@@ -177,19 +177,19 @@ user_query_changed (SearchBar *esb, gpointer user_data)
 }
 
 static void
-update_searchbar_complexity (XstDialogComplexity complexity)
+update_searchbar_complexity (GstDialogComplexity complexity)
 {	
 	SearchBar *sb = SEARCH_BAR (g_object_get_data (G_OBJECT (tool->main_dialog), "SearchBar"));
 
 	switch (complexity) {
-	case XST_DIALOG_BASIC:
+	case GST_DIALOG_BASIC:
 		gtk_widget_hide (GTK_WIDGET (sb));
 
 		/* we should also clear any previous search */
 		search_bar_clear_search (sb);
 		
 		break;
-	case XST_DIALOG_ADVANCED:
+	case GST_DIALOG_ADVANCED:
 		gtk_widget_show (GTK_WIDGET (sb));
 		break;
 	default:
@@ -199,16 +199,16 @@ update_searchbar_complexity (XstDialogComplexity complexity)
 }
 
 static void
-update_notebook_complexity (XstDialogComplexity complexity)
+update_notebook_complexity (GstDialogComplexity complexity)
 {
-	GtkWidget *notebook = xst_dialog_get_widget (tool->main_dialog, "notebook");
+	GtkWidget *notebook = gst_dialog_get_widget (tool->main_dialog, "notebook");
 
 	switch (complexity) {
-	case XST_DIALOG_BASIC:
+	case GST_DIALOG_BASIC:
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 		break;
-	case XST_DIALOG_ADVANCED:
+	case GST_DIALOG_ADVANCED:
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
 		break;
 	default:
@@ -217,16 +217,16 @@ update_notebook_complexity (XstDialogComplexity complexity)
 }
 
 static void
-update_toggle_complexity (XstDialogComplexity complexity)
+update_toggle_complexity (GstDialogComplexity complexity)
 {
-	GtkWidget *toggle = xst_dialog_get_widget (tool->main_dialog, "showall");
+	GtkWidget *toggle = gst_dialog_get_widget (tool->main_dialog, "showall");
 	
 	switch (complexity) {
-	case XST_DIALOG_BASIC:
+	case GST_DIALOG_BASIC:
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), FALSE);
 		break;
-	case XST_DIALOG_ADVANCED:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), xst_conf_get_boolean (tool, "showall"));
+	case GST_DIALOG_ADVANCED:
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), gst_conf_get_boolean (tool, "showall"));
 		break;
 	default:
 		g_warning ("update_notebook_complexity: Unsupported complexity.");
@@ -236,7 +236,7 @@ update_toggle_complexity (XstDialogComplexity complexity)
 static void
 update_complexity (void)
 {
-	XstDialogComplexity complexity = tool->main_dialog->complexity;
+	GstDialogComplexity complexity = tool->main_dialog->complexity;
 
 	update_notebook_complexity (complexity);
 	update_toggle_complexity (complexity);
@@ -251,7 +251,7 @@ connect_signals (void)
 	                  G_CALLBACK (update_complexity),
 	                  NULL);
 
-	xst_dialog_connect_signals (tool->main_dialog, signals);
+	gst_dialog_connect_signals (tool->main_dialog, signals);
 }
 
 static void
@@ -260,7 +260,7 @@ create_searchbar (void)
 	GtkWidget *table;
 	SearchBar *search;
 
-	table = xst_dialog_get_widget (tool->main_dialog, "user_parent");
+	table = gst_dialog_get_widget (tool->main_dialog, "user_parent");
 
 	search = SEARCH_BAR (search_bar_new (user_search_option_items));
 	gtk_table_attach (GTK_TABLE (table), GTK_WIDGET (search), 0, 1, 0, 1,
@@ -296,19 +296,19 @@ main_window_prepare (void)
 int
 main (int argc, char *argv[])
 {
-	xst_init ("users-admin", argc, argv, NULL);
-	tool = xst_tool_new ();
-	xst_tool_construct (tool, "users", _("Users and Groups"));
+	gst_init ("users-admin", argc, argv, NULL);
+	tool = gst_tool_new ();
+	gst_tool_construct (tool, "users", _("Users and Groups"));
 
-	xst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	gst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
-	xst_dialog_enable_complexity (tool->main_dialog);
-	xst_dialog_set_widget_policies (tool->main_dialog, policies);
+	gst_dialog_enable_complexity (tool->main_dialog);
+	gst_dialog_set_widget_policies (tool->main_dialog, policies);
 
 	main_window_prepare ();
 	connect_signals ();
 
-	xst_tool_main (tool, FALSE);
+	gst_tool_main (tool, FALSE);
 	
 	return 0;
 }

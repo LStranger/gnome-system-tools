@@ -1,7 +1,7 @@
 INCLUDES = \
 	$(GNOME_INCLUDEDIR)	\
 	$(GNOME_XML_CFLAGS)	\
-	$(XST_TOOL_CFLAGS)
+	$(GST_TOOL_CFLAGS)
 
 EXTRA_DIST= search-bar-marshal.list
 

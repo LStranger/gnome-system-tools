@@ -29,13 +29,13 @@
 #include "connection.h"
 #include "callbacks.h"
 
-#include "xst.h"
+#include "gst.h"
 
-typedef struct _XstNetworkInterfaceDescription XstNetworkInterfaceDescription;
+typedef struct _GstNetworkInterfaceDescription GstNetworkInterfaceDescription;
 
-struct _XstNetworkInterfaceDescription {
+struct _GstNetworkInterfaceDescription {
 	const gchar       *description;
-	XstConnectionType  type;
+	GstConnectionType  type;
 	const gchar       *icon;
 	const gchar       *name;
 	GdkPixbuf         *pixbuf;
@@ -52,29 +52,29 @@ enum {
 	CONNECTION_LIST_COL_LAST
 };
 
-static XstNetworkInterfaceDescription xst_iface_desc [] = {
-	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
-	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
-	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "wavelan-16.png",  "wvlan",      NULL },
-	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
-	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
-	{ N_("Infrared LAN"),                 XST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
-	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo",         NULL },
-	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "network.png",     NULL,         NULL },
-	{ NULL,                               XST_CONNECTION_UNKNOWN, NULL,              NULL,         NULL  }
+static GstNetworkInterfaceDescription gst_iface_desc [] = {
+	{ N_("Other type"),                   GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
+	{ N_("Ethernet LAN card"),            GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
+	{ N_("WaveLAN wireless LAN"),         GST_CONNECTION_WVLAN,   "wavelan-16.png",  "wvlan",      NULL },
+	{ N_("PPP: modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
+	{ N_("Parallel line"),                GST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
+	{ N_("Infrared LAN"),                 GST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
+	{ N_("Loopback: virtual interface"),  GST_CONNECTION_LO,      "16_loopback.xpm", "lo",         NULL },
+	{ N_("Unknown type"),                 GST_CONNECTION_UNKNOWN, "network.png",     NULL,         NULL },
+	{ NULL,                               GST_CONNECTION_UNKNOWN, NULL,              NULL,         NULL  }
 };
 
 
 /* sigh more libglade callbacks */
-/*static void on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn);*/
-static void on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn);
-static void on_connection_cancel_clicked (GtkWidget *w, XstConnection *cxn);
-static void on_connection_config_dialog_destroy (GtkWidget *w, XstConnection *cxn);
-static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, XstConnection *cxn);
-static void on_connection_modified (GtkWidget *w, XstConnection *cxn);
-static void on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn);
-static void on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn);
-static gboolean on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection *cxn);
+/*static void on_status_enabled_toggled (GtkWidget *w, GstConnection *cxn);*/
+static void on_connection_ok_clicked (GtkWidget *w, GstConnection *cxn);
+static void on_connection_cancel_clicked (GtkWidget *w, GstConnection *cxn);
+static void on_connection_config_dialog_destroy (GtkWidget *w, GstConnection *cxn);
+static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, GstConnection *cxn);
+static void on_connection_modified (GtkWidget *w, GstConnection *cxn);
+static void on_wvlan_adhoc_toggled (GtkWidget *w, GstConnection *cxn);
+static void on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn);
+static gboolean on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection *cxn);
 static void on_connection_list_clicked (GtkWidget *w, gpointer data);
 
 #define W(s) my_get_widget (cxn->xml, (s))
@@ -82,7 +82,7 @@ static void on_connection_list_clicked (GtkWidget *w, gpointer data);
 #define GET_STR(yy_prefix,xx) g_free (cxn->xx); cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (W (yy_prefix#xx)), 0, -1)
 #define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (W (yy_prefix#xx))->active
 #define GET_BOOL_NOT(yy_prefix,xx) GET_BOOL(yy_prefix,xx); cxn->xx = !cxn->xx;
-#define SET_STR(yy_prefix,xx) xst_ui_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx)
+#define SET_STR(yy_prefix,xx) gst_ui_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx)
 #define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), cxn->xx)
 #define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), !cxn->xx)
 #define SET_INT(yy_prefix,xx) gtk_range_set_value (GTK_RANGE (GTK_SCALE (W (yy_prefix#xx))), cxn->xx)
@@ -93,13 +93,13 @@ static void on_connection_list_clicked (GtkWidget *w, gpointer data);
 typedef struct {
 	GtkWidget *list;
 	GtkWidget *def_gw_omenu;
-} XstConnectionUI;
+} GstConnectionUI;
 
 #define CONNECTION_UI_STRING "connection_ui"
 
 /*static GSList *connections;*/
 
-XstTool *tool;
+GstTool *tool;
 
 typedef struct {
 	const char *hname;
@@ -140,7 +140,7 @@ connection_xml_get_boolean (xmlNode *node, gchar *elem)
 
 	ret = FALSE;
 
-	s = xst_xml_get_child_content (node, elem);
+	s = gst_xml_get_child_content (node, elem);
 	if (s) {
 		ret = atoi (s)? TRUE: FALSE;
 		g_free (s);
@@ -157,15 +157,15 @@ connection_xml_save_str_to_node (xmlNode *node, gchar *node_name, gchar *str)
 	if (!str)
 		return;
 
-	subnode = xst_xml_element_find_first (node, node_name);
+	subnode = gst_xml_element_find_first (node, node_name);
 
 	if (*str == 0) {
 		if (subnode)
-			xst_xml_element_destroy_children_by_name (node, node_name);
+			gst_xml_element_destroy_children_by_name (node, node_name);
 	} else {
 		if (!subnode)
-			subnode = xst_xml_element_add (node, node_name);
-		xst_xml_element_set_content (subnode, str);
+			subnode = gst_xml_element_add (node, node_name);
+		gst_xml_element_set_content (subnode, str);
 	}
 }
 
@@ -181,7 +181,7 @@ connection_xml_wvsection_is_type (xmlNode *node, gchar *type)
 	gchar *str;
 	gint cmp;
 
-	str = xst_xml_get_child_content (node, "type");
+	str = gst_xml_get_child_content (node, "type");
 	cmp = strcmp (str, type);
 	g_free (str);
 
@@ -197,7 +197,7 @@ connection_xml_wvsection_has_name (xmlNode *node, gchar *name)
 	gchar *section_found;
 	gint cmp;
 
-	section_found = xst_xml_get_child_content (node, "name");
+	section_found = gst_xml_get_child_content (node, "name");
 	if (section_found) {
 		cmp = strcmp (section_found, name);
 		g_free (section_found);
@@ -225,8 +225,8 @@ connection_xml_wvsection_search (xmlNode *node, gchar *section_name, gchar *type
 	
 	g_return_val_if_fail (section_name != NULL, NULL);
 	
-	for (node = xst_xml_element_find_first (node, "dialing");
-	     node; node = xst_xml_element_find_next (node, "dialing")) {
+	for (node = gst_xml_element_find_first (node, "dialing");
+	     node; node = gst_xml_element_find_next (node, "dialing")) {
 		if (type && !connection_xml_wvsection_is_type (node, type))
 			continue;
 		
@@ -248,7 +248,7 @@ connection_xml_wvsection_get_inherits_node (xmlNode *root, xmlNode *node)
 	g_return_val_if_fail (root != NULL, NULL);
 	g_return_val_if_fail (node != NULL, NULL);
 
-	inherits = xst_xml_get_child_content (node, "inherits");
+	inherits = gst_xml_get_child_content (node, "inherits");
 	if (inherits) {
 		for (i = 0; prefix[i]; i++)
 			if (strstr (inherits, prefix[i]) == inherits)
@@ -280,7 +280,7 @@ connection_xml_wvsection_node_get_str (xmlNode *node, xmlNode *subnode, gchar *e
 
 	if (subnode) {
 		/* Found the section */
-		value = xst_xml_get_child_content (subnode, elem);
+		value = gst_xml_get_child_content (subnode, elem);
 		if (value) {
 			/* Got the required value */
 			return value;
@@ -339,7 +339,7 @@ connection_xml_wvsection_add (xmlNode *node, gchar *section_name, gchar *type)
 {
 	xmlNode *subnode;
 
-	subnode = xst_xml_element_add (node, "dialing");
+	subnode = gst_xml_element_add (node, "dialing");
 	connection_xml_save_str_to_node (subnode, "name", section_name);
 	connection_xml_save_str_to_node (subnode, "type", type);
 
@@ -417,9 +417,9 @@ connection_config_type_to_str (IPConfigType type)
 }
 
 static void
-connection_set_modified (XstConnection *cxn, gboolean state)
+connection_set_modified (GstConnection *cxn, gboolean state)
 {
-	if (cxn->frozen || !xst_tool_get_access (tool))
+	if (cxn->frozen || !gst_tool_get_access (tool))
 		return;
 
 	cxn->modified = state;
@@ -442,21 +442,21 @@ load_pixbuf (const gchar *file)
 }
 
 static GdkPixbuf *
-connection_get_dev_pixbuf (XstConnection *cxn)
+connection_get_dev_pixbuf (GstConnection *cxn)
 {
 	gint i;
 
 	g_return_val_if_fail (cxn != NULL, NULL);
 
-	for (i = 0; xst_iface_desc[i].description != NULL; i++)
-		if (xst_iface_desc[i].type == cxn->type)
-			return xst_iface_desc[i].pixbuf;
+	for (i = 0; gst_iface_desc[i].description != NULL; i++)
+		if (gst_iface_desc[i].type == cxn->type)
+			return gst_iface_desc[i].pixbuf;
 
 	return NULL;
 }
 
 static GdkPixbuf *
-connection_get_stat_pixbuf (XstConnection *cxn)
+connection_get_stat_pixbuf (GstConnection *cxn)
 {
 	static GdkPixbuf *active;
 	static GdkPixbuf *inactive;
@@ -532,12 +532,12 @@ connection_list_select_row (GtkTreeSelection *selection, gpointer data)
 {
 	GtkTreeIter    iter;
 	GtkTreeModel  *model;
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 
-		if (cxn->type == XST_CONNECTION_LO)
+		if (cxn->type == GST_CONNECTION_LO)
 			connection_actions_set_sensitive (FALSE);
 		else
 			connection_actions_set_sensitive (TRUE);
@@ -555,7 +555,7 @@ on_connection_list_clicked (GtkWidget *w, gpointer data)
 	GList *column_list;
 	gint ncol;
 	GdkPixbuf *stat_icon;
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	cxn = connection_list_get_active ();
 	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
@@ -570,12 +570,12 @@ on_connection_list_clicked (GtkWidget *w, gpointer data)
 		
 		if (!cxn->enabled)
 		{
-			if (cxn->type != XST_CONNECTION_LO)
+			if (cxn->type != GST_CONNECTION_LO)
 				on_connection_activate_clicked (w, NULL);
 		}
 		else
 		{
-			if (cxn->type != XST_CONNECTION_LO)
+			if (cxn->type != GST_CONNECTION_LO)
 				on_connection_deactivate_clicked (w, NULL);
 		}
 	}
@@ -589,14 +589,14 @@ list_get_active_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, g
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, data, -1);
 }
 
-XstConnection *
+GstConnection *
 connection_list_get_active (void)
 {	
-	XstConnectionUI  *ui;
+	GstConnectionUI  *ui;
 	GtkTreeSelection *select;
-	XstConnection    *cxn = NULL;
+	GstConnection    *cxn = NULL;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
 	gtk_tree_selection_selected_foreach (select, list_get_active_cb, &cxn);
 
@@ -604,16 +604,16 @@ connection_list_get_active (void)
 }
 
 static gboolean
-connection_iter (XstConnection *cxn, GtkTreeIter *iter)
+connection_iter (GstConnection *cxn, GtkTreeIter *iter)
 {
-	XstConnectionUI *ui;
-	XstConnection   *c;
+	GstConnectionUI *ui;
+	GstConnection   *c;
 	GtkTreeModel    *model;
 	gboolean         valid;
 
 	g_return_val_if_fail (cxn != NULL, FALSE);
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	valid = gtk_tree_model_get_iter_first (model, iter);
@@ -630,7 +630,7 @@ connection_iter (XstConnection *cxn, GtkTreeIter *iter)
 }
 
 GtkWidget *
-connection_list_new (XstTool *tool)
+connection_list_new (GstTool *tool)
 {
 	GtkWidget        *treeview;
 	GtkTreeSelection *select;
@@ -638,7 +638,7 @@ connection_list_new (XstTool *tool)
 
 	model = connection_list_model_new ();
 
-	treeview = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	treeview = gst_dialog_get_widget (tool->main_dialog, "connection_list");
 	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
 	g_object_unref (G_OBJECT (model));
 
@@ -658,9 +658,9 @@ connection_list_new (XstTool *tool)
 }
 
 void
-connection_list_append (XstConnection *cxn)
+connection_list_append (GstConnection *cxn)
 {
-	XstConnectionUI *ui;
+	GstConnectionUI *ui;
 	GtkTreeModel    *model;
 	GdkPixbuf       *pb;
 	GtkTreeIter      iter;
@@ -668,7 +668,7 @@ connection_list_append (XstConnection *cxn)
 
 	g_return_if_fail (cxn != NULL);
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	exists = connection_iter (cxn, &iter);
@@ -685,15 +685,15 @@ connection_list_append (XstConnection *cxn)
 }
 
 void
-connection_list_remove (XstConnection *cxn)
+connection_list_remove (GstConnection *cxn)
 {
-	XstConnectionUI *ui;
-	XstConnection   *c;
+	GstConnectionUI *ui;
+	GstConnection   *c;
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
 	gboolean         valid;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -711,13 +711,13 @@ connection_list_remove (XstConnection *cxn)
 void
 connection_list_update (void)
 {
-	XstConnectionUI *ui;
-	XstConnection   *cxn;
+	GstConnectionUI *ui;
+	GstConnection   *cxn;
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
 	gboolean         valid;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -730,10 +730,10 @@ connection_list_update (void)
 	}
 }
 
-XstConnection *
+GstConnection *
 connection_find_by_dev (GtkWidget *list, gchar *dev)
 {
-	XstConnection   *cxn;
+	GstConnection   *cxn;
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
 	gboolean         valid;
@@ -758,38 +758,38 @@ connection_find_by_dev (GtkWidget *list, gchar *dev)
 }
 
 static gboolean
-connection_type_is_lan (XstConnectionType type)
+connection_type_is_lan (GstConnectionType type)
 {
-	return ((type == XST_CONNECTION_ETH) ||
-		(type == XST_CONNECTION_WVLAN) ||
-		(type == XST_CONNECTION_IRLAN));
+	return ((type == GST_CONNECTION_ETH) ||
+		(type == GST_CONNECTION_WVLAN) ||
+		(type == GST_CONNECTION_IRLAN));
 }
 
 static gboolean
 default_gw_find_static_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 
 	if (cxn->enabled && connection_type_is_lan (cxn->type) &&
 	    (cxn->ip_config == IP_MANUAL) &&
 	    (cxn->gateway && *cxn->gateway)) {
-		* (XstConnection **)data = cxn;
+		* (GstConnection **)data = cxn;
 		return TRUE;
 	}
 
 	return FALSE;
 }
 
-static XstConnection *
-connection_default_gw_find_static (XstTool *tool)
+static GstConnection *
+connection_default_gw_find_static (GstTool *tool)
 {
-	XstConnection   *cxn;
-	XstConnectionUI *ui;
+	GstConnection   *cxn;
+	GstConnectionUI *ui;
 	GtkTreeModel    *model;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	cxn = NULL;
@@ -801,25 +801,25 @@ connection_default_gw_find_static (XstTool *tool)
 static gboolean
 default_gw_find_ppp_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
-	if (cxn->enabled && cxn->type == XST_CONNECTION_PPP && cxn->set_default_gw) {
-		* (XstConnection **)data = cxn;
+	if (cxn->enabled && cxn->type == GST_CONNECTION_PPP && cxn->set_default_gw) {
+		* (GstConnection **)data = cxn;
 		return TRUE;
 	}
 
 	return FALSE;
 }
 
-static XstConnection *
-connection_default_gw_find_ppp (XstTool *tool)
+static GstConnection *
+connection_default_gw_find_ppp (GstTool *tool)
 {
-	XstConnection   *cxn;
-	XstConnectionUI *ui;
+	GstConnection   *cxn;
+	GstConnectionUI *ui;
 	GtkTreeModel    *model;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	cxn = NULL;
@@ -831,27 +831,27 @@ connection_default_gw_find_ppp (XstTool *tool)
 static gboolean
 default_gw_find_dynamic_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 	if (cxn->enabled &&
-	    (cxn->type == XST_CONNECTION_ETH || cxn->type == XST_CONNECTION_WVLAN) &&
+	    (cxn->type == GST_CONNECTION_ETH || cxn->type == GST_CONNECTION_WVLAN) &&
 	    (cxn->ip_config != IP_MANUAL)) {
-		* (XstConnection **)data = cxn;
+		* (GstConnection **)data = cxn;
 		return TRUE;
 	}
 
 	return FALSE;
 }
 
-static XstConnection *
-connection_default_gw_find_dynamic (XstTool *tool)
+static GstConnection *
+connection_default_gw_find_dynamic (GstTool *tool)
 {
-	XstConnection   *cxn;
-	XstConnectionUI *ui;
+	GstConnection   *cxn;
+	GstConnectionUI *ui;
 	GtkTreeModel    *model;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	cxn = NULL;
@@ -863,26 +863,26 @@ connection_default_gw_find_dynamic (XstTool *tool)
 static gboolean
 default_gw_find_plip_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
-	if (cxn->enabled && (cxn->type == XST_CONNECTION_PLIP) &&
+	if (cxn->enabled && (cxn->type == GST_CONNECTION_PLIP) &&
 	    (cxn->remote_address && *cxn->remote_address)) {
-		* (XstConnection **)data = cxn;
+		* (GstConnection **)data = cxn;
 		return TRUE;
 	}
 
 	return FALSE;
 }
 
-static XstConnection *
-connection_default_gw_find_plip (XstTool *tool)
+static GstConnection *
+connection_default_gw_find_plip (GstTool *tool)
 {
-	XstConnection   *cxn;
-	XstConnectionUI *ui;
+	GstConnection   *cxn;
+	GstConnectionUI *ui;
 	GtkTreeModel    *model;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	cxn = NULL;
@@ -892,21 +892,21 @@ connection_default_gw_find_plip (XstTool *tool)
 }
 
 extern void
-connection_init_gui (XstTool *tool)
+connection_init_gui (GstTool *tool)
 {
-	XstConnectionUI *ui;
-	XstConnectionType i;
+	GstConnectionUI *ui;
+	GstConnectionType i;
 
-	ui = g_new0 (XstConnectionUI, 1);
+	ui = g_new0 (GstConnectionUI, 1);
 
 	ui->list = connection_list_new (tool);
 
-	ui->def_gw_omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	ui->def_gw_omenu = gst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
 
 	g_object_set_data (G_OBJECT (tool), CONNECTION_UI_STRING, (gpointer) ui);
 
-	for (i = XST_CONNECTION_OTHER; i < XST_CONNECTION_LAST; i++)
-		xst_iface_desc[i].pixbuf = load_pixbuf (xst_iface_desc[i].icon);
+	for (i = GST_CONNECTION_OTHER; i < GST_CONNECTION_LAST; i++)
+		gst_iface_desc[i].pixbuf = load_pixbuf (gst_iface_desc[i].icon);
 }
 
 /* NULL if false, else GtkWidget in data in found node */
@@ -933,19 +933,19 @@ connection_default_gw_activate (GtkMenuItem *item, gpointer data)
 }
 
 void
-connection_default_gw_add (XstConnection *cxn)
+connection_default_gw_add (GstConnection *cxn)
 {
 	GtkWidget *omenu, *menu, *item;
 	GList *l;
 	gchar *cpy, *dev;
-	XstConnectionUI *ui;
+	GstConnectionUI *ui;
 
 	dev = cxn->dev;
 	
-	if (cxn->type == XST_CONNECTION_LO)
+	if (cxn->type == GST_CONNECTION_LO)
 		return;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
@@ -972,9 +972,9 @@ connection_default_gw_remove (gchar *dev)
 	GtkWidget *omenu, *menu, *item;
 	GList *l;
 	gchar *cpy;
-	XstConnectionUI *ui;
+	GstConnectionUI *ui;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 
 	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
@@ -992,12 +992,12 @@ connection_default_gw_remove (gchar *dev)
 }
 
 void
-connection_default_gw_init (XstTool *tool, gchar *dev)
+connection_default_gw_init (GstTool *tool, gchar *dev)
 {
 	GtkWidget *omenu, *menu, *item;
-	XstConnectionUI *ui;
+	GstConnectionUI *ui;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 
 	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
@@ -1020,72 +1020,72 @@ connection_default_gw_init (XstTool *tool, gchar *dev)
 	}
 }
 
-XstConnection *
-connection_default_gw_get_connection (XstTool *tool)
+GstConnection *
+connection_default_gw_get_connection (GstTool *tool)
 {
 	gchar *dev;
-	XstConnectionUI *ui;
+	GstConnectionUI *ui;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	dev = g_object_get_data (G_OBJECT (tool), "gatewaydev");
 	g_return_val_if_fail (dev != NULL, NULL);
 
 	return connection_find_by_dev (ui->list, dev);
 }
 
-XstConnectionErrorType
-connection_default_gw_check_manual (XstConnection *cxn, gboolean ignore_enabled)
+GstConnectionErrorType
+connection_default_gw_check_manual (GstConnection *cxn, gboolean ignore_enabled)
 {
-	g_return_val_if_fail (cxn != NULL, XST_CONNECTION_ERROR_OTHER);
+	g_return_val_if_fail (cxn != NULL, GST_CONNECTION_ERROR_OTHER);
 
 	if (!ignore_enabled && !cxn->enabled)
-		return XST_CONNECTION_ERROR_ENABLED;
+		return GST_CONNECTION_ERROR_ENABLED;
 
 	switch (cxn->type) {
-	case XST_CONNECTION_ETH:
-	case XST_CONNECTION_WVLAN:
-	case XST_CONNECTION_IRLAN:
+	case GST_CONNECTION_ETH:
+	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_IRLAN:
 		if ((cxn->ip_config == IP_MANUAL) &&
 		    (!cxn->gateway || !*cxn->gateway))
-			return XST_CONNECTION_ERROR_STATIC;
+			return GST_CONNECTION_ERROR_STATIC;
 		break;
-	case XST_CONNECTION_PPP:
+	case GST_CONNECTION_PPP:
 		if (!cxn->set_default_gw)
-			return XST_CONNECTION_ERROR_PPP;
+			return GST_CONNECTION_ERROR_PPP;
 		break;
-	case XST_CONNECTION_PLIP:
+	case GST_CONNECTION_PLIP:
 		if (!cxn->remote_address || !*cxn->remote_address)
-			return XST_CONNECTION_ERROR_STATIC;
+			return GST_CONNECTION_ERROR_STATIC;
 		break;
-	case XST_CONNECTION_LO:
+	case GST_CONNECTION_LO:
 	default:
 		g_warning ("connection_default_gw_check_manual: shouldn't be here.");
-		return XST_CONNECTION_ERROR_OTHER;
+		return GST_CONNECTION_ERROR_OTHER;
 	}
 
-	return XST_CONNECTION_ERROR_NONE;
+	return GST_CONNECTION_ERROR_NONE;
 }
 
 void
-connection_default_gw_fix (XstConnection *cxn, XstConnectionErrorType error)
+connection_default_gw_fix (GstConnection *cxn, GstConnectionErrorType error)
 {
 	switch (error) {
-	case XST_CONNECTION_ERROR_ENABLED:
+	case GST_CONNECTION_ERROR_ENABLED:
 		cxn->enabled = TRUE;
 		break;
-	case XST_CONNECTION_ERROR_PPP:
+	case GST_CONNECTION_ERROR_PPP:
 		cxn->set_default_gw = TRUE;
 		break;
-	case XST_CONNECTION_ERROR_STATIC:
-	case XST_CONNECTION_ERROR_NONE:
-	case XST_CONNECTION_ERROR_OTHER:
+	case GST_CONNECTION_ERROR_STATIC:
+	case GST_CONNECTION_ERROR_NONE:
+	case GST_CONNECTION_ERROR_OTHER:
 	default:
 		g_warning ("connection_default_gw_fix: shouldn't be here.");
 	}
 }
 
 void
-connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
+connection_default_gw_set_manual (GstTool *tool, GstConnection *cxn)
 {
 	gchar *gateway;
 
@@ -1101,20 +1101,20 @@ connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
 	}
 
 	switch (cxn->type) {
-	case XST_CONNECTION_ETH:
-	case XST_CONNECTION_WVLAN:
-	case XST_CONNECTION_IRLAN:
+	case GST_CONNECTION_ETH:
+	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_IRLAN:
 		if (cxn->ip_config == IP_MANUAL)
 			gateway = g_strdup (cxn->gateway);
 		break;
-	case XST_CONNECTION_PLIP:
+	case GST_CONNECTION_PLIP:
 		if (cxn->remote_address && *cxn->remote_address)
 			gateway = g_strdup (cxn->remote_address);
 		break;
-	case XST_CONNECTION_PPP:
+	case GST_CONNECTION_PPP:
 		g_object_set_data (G_OBJECT (tool), "gatewaydev", NULL);
 		break;
-	case XST_CONNECTION_LO:
+	case GST_CONNECTION_LO:
 	default:
 		g_object_set_data (G_OBJECT (tool), "gatewaydev", NULL);
 		g_warning ("connection_default_gw_set_manual: shouldn't be here.");
@@ -1125,9 +1125,9 @@ connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
 }
 
 void
-connection_default_gw_set_auto (XstTool *tool)
+connection_default_gw_set_auto (GstTool *tool)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	if (!(cxn = connection_default_gw_find_static (tool))  &&
 	    !(cxn = connection_default_gw_find_ppp (tool))     &&
@@ -1139,7 +1139,7 @@ connection_default_gw_set_auto (XstTool *tool)
 }
 
 void
-connection_activate (XstConnection *cxn, gboolean activate)
+connection_activate (GstConnection *cxn, gboolean activate)
 {
 	g_return_if_fail (cxn != NULL);
 
@@ -1148,11 +1148,11 @@ connection_activate (XstConnection *cxn, gboolean activate)
 
 	cxn->enabled = activate;
 	connection_list_append (cxn);
-	xst_dialog_modify (tool->main_dialog);
+	gst_dialog_modify (tool->main_dialog);
 }
 
 void
-connection_add_to_list (XstConnection *cxn)
+connection_add_to_list (GstConnection *cxn)
 {
 	g_return_if_fail (cxn != NULL);
 
@@ -1161,13 +1161,13 @@ connection_add_to_list (XstConnection *cxn)
 }
 
 static void
-connection_update_complexity_advanced (XstTool *tool)
+connection_update_complexity_advanced (GstTool *tool)
 {
-	XstConnection   *cxn;
-	XstConnectionUI *ui;
+	GstConnection   *cxn;
+	GstConnectionUI *ui;
 	GtkTreeModel    *model;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	cxn = g_object_steal_data (G_OBJECT (model), "lo");
@@ -1178,10 +1178,10 @@ connection_update_complexity_advanced (XstTool *tool)
 static gboolean
 update_complexity_basic_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
-	if (cxn->type == XST_CONNECTION_LO) {
+	if (cxn->type == GST_CONNECTION_LO) {
 		g_object_set_data (G_OBJECT (model), "lo", cxn);
 		gtk_list_store_remove (GTK_LIST_STORE (model), iter);
 		return TRUE;
@@ -1191,39 +1191,39 @@ update_complexity_basic_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter 
 }
 
 static void
-connection_update_complexity_basic (XstTool *tool)
+connection_update_complexity_basic (GstTool *tool)
 {
-	XstConnectionUI *ui;
+	GstConnectionUI *ui;
 	GtkTreeModel    *model;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	gtk_tree_model_foreach (model, update_complexity_basic_cb, NULL);
 }
 
 void
-connection_update_complexity (XstTool *tool, XstDialogComplexity complexity)
+connection_update_complexity (GstTool *tool, GstDialogComplexity complexity)
 {
 	switch (complexity) {
-	case XST_DIALOG_BASIC:
+	case GST_DIALOG_BASIC:
 		connection_update_complexity_basic (tool);
 		break;
-	case XST_DIALOG_ADVANCED:
+	case GST_DIALOG_ADVANCED:
 		connection_update_complexity_advanced (tool);
 	}
 }
 
 static gchar *
-connection_description_from_type (XstConnectionType type)
+connection_description_from_type (GstConnectionType type)
 {
 	gint i;
 
-	for (i = 0; xst_iface_desc[i].type != XST_CONNECTION_UNKNOWN; i++)
-		if (type == xst_iface_desc[i].type)
+	for (i = 0; gst_iface_desc[i].type != GST_CONNECTION_UNKNOWN; i++)
+		if (type == gst_iface_desc[i].type)
 			break;
 
-	return g_strdup (_(xst_iface_desc[i].description));
+	return g_strdup (_(gst_iface_desc[i].description));
 }
 
 extern gchar *
@@ -1233,9 +1233,9 @@ connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection)
 }
 
 static void
-connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
+connection_get_ppp_from_node (xmlNode *node, GstConnection *cxn)
 {
-	cxn->wvsection = xst_xml_get_child_content (node, "wvsection");
+	cxn->wvsection = gst_xml_get_child_content (node, "wvsection");
 	if (cxn->wvsection) {
 		cxn->serial_port = connection_get_serial_port_from_node (node->parent, cxn->wvsection);
 		cxn->phone_number = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "phone");
@@ -1248,9 +1248,9 @@ connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 		cxn->wvsection = connection_wvsection_name_generate (cxn->dev, node->parent);
 		connection_xml_save_str_to_node (cxn->node, "wvsection", cxn->wvsection);
 
-		cxn->phone_number = xst_xml_get_child_content (node, "phone_number");
-		cxn->login = xst_xml_get_child_content (node, "login");
-		cxn->password = xst_xml_get_child_content (node, "password");
+		cxn->phone_number = gst_xml_get_child_content (node, "phone_number");
+		cxn->login = gst_xml_get_child_content (node, "login");
+		cxn->password = gst_xml_get_child_content (node, "password");
 		cxn->stupid = FALSE;
 		cxn->volume = 3;
 		cxn->dial_command = g_strdup ("ATDT");
@@ -1259,21 +1259,21 @@ connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 	/* PPP advanced */
 	cxn->persist = connection_xml_get_boolean (node, "persist");
 	cxn->noauth = connection_xml_get_boolean (node, "noauth");
-	cxn->serial_port = xst_xml_get_child_content (node, "serial_port");
+	cxn->serial_port = gst_xml_get_child_content (node, "serial_port");
 	cxn->set_default_gw = connection_xml_get_boolean (node, "set_default_gw");
-	cxn->dns1 = xst_xml_get_child_content (node, "dns1");
-	cxn->dns2 = xst_xml_get_child_content (node, "dns2");
-	cxn->ppp_options = xst_xml_get_child_content (node, "ppp_options");
+	cxn->dns1 = gst_xml_get_child_content (node, "dns1");
+	cxn->dns2 = gst_xml_get_child_content (node, "dns2");
+	cxn->ppp_options = gst_xml_get_child_content (node, "ppp_options");
 }
 
 static void
-connection_get_ptp_from_node (xmlNode *node, XstConnection *cxn)
+connection_get_ptp_from_node (xmlNode *node, GstConnection *cxn)
 {
-	cxn->remote_address = xst_xml_get_child_content (node, "remote_address");
+	cxn->remote_address = gst_xml_get_child_content (node, "remote_address");
 }
 
 static gchar *
-connection_find_new_device (xmlNode *root, XstConnectionType type)
+connection_find_new_device (xmlNode *root, GstConnectionType type)
 {
 	xmlNode *node;
 	gchar *prefix, *dev, *numstr;
@@ -1295,9 +1295,9 @@ connection_find_new_device (xmlNode *root, XstConnectionType type)
 
 	max = -1;
 
-	for (node = xst_xml_element_find_first (root, "interface");
-	     node; node = xst_xml_element_find_next (node, "interface")) {
-		dev = xst_xml_get_child_content (node, "dev");
+	for (node = gst_xml_element_find_first (root, "interface");
+	     node; node = gst_xml_element_find_next (node, "interface")) {
+		dev = gst_xml_get_child_content (node, "dev");
 		if (dev) {
 			if (strstr (dev, prefix) == dev) {
 				numstr = dev + strlen (prefix);
@@ -1314,12 +1314,12 @@ connection_find_new_device (xmlNode *root, XstConnectionType type)
 	return g_strdup_printf ("%s%u", prefix, max);
 }					
 
-XstConnection *
-connection_new_from_type (XstConnectionType type, xmlNode *root)
+GstConnection *
+connection_new_from_type (GstConnectionType type, xmlNode *root)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 
-	cxn = g_new0 (XstConnection, 1);
+	cxn = g_new0 (GstConnection, 1);
 	cxn->type = type;
 	cxn->file = NULL;
 
@@ -1335,17 +1335,17 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	cxn->dev = connection_find_new_device (root, cxn->type);
 
 	switch (cxn->type) {
-	case XST_CONNECTION_PPP:
+	case GST_CONNECTION_PPP:
 		cxn->user = TRUE;
 		cxn->autoboot = FALSE;
 		break;
-	case XST_CONNECTION_PLIP:
+	case GST_CONNECTION_PLIP:
 		cxn->autoboot = FALSE;
 		break;
-	case XST_CONNECTION_ETH:
-	case XST_CONNECTION_WVLAN:
-	case XST_CONNECTION_IRLAN:
-	case XST_CONNECTION_LO:
+	case GST_CONNECTION_ETH:
+	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_IRLAN:
+	case GST_CONNECTION_LO:
 	default:
 		break;
 	}	
@@ -1355,36 +1355,36 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	return cxn;
 }
 
-XstConnection *
+GstConnection *
 connection_new_from_node (xmlNode *node)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 	char *s = NULL;
 
-	s = xst_xml_get_child_content (node, "dev");
+	s = gst_xml_get_child_content (node, "dev");
 
 	if (s) {
 		cxn = connection_new_from_dev_name (s, node->parent);
 		g_free (cxn->dev);
 		cxn->dev = s;
 	} else {
-		cxn = connection_new_from_type (XST_CONNECTION_OTHER, node->parent);
+		cxn = connection_new_from_type (GST_CONNECTION_OTHER, node->parent);
 	}
 
 	cxn->node = node;
 
-	s = xst_xml_get_child_content (node, "file");
+	s = gst_xml_get_child_content (node, "file");
 	if (s)
 		cxn->file = s;
 	
-	s = xst_xml_get_child_content (node, "bootproto");
+	s = gst_xml_get_child_content (node, "bootproto");
 	if (s) {
 		cxn->ip_config = connection_config_type_from_str (s);
 		cxn->tmp_ip_config = cxn->ip_config;
 		g_free (s);
 	}
 
-	s = xst_xml_get_child_content (node, "name");
+	s = gst_xml_get_child_content (node, "name");
 	if (s)
 		cxn->name = s;
 	else
@@ -1397,15 +1397,15 @@ connection_new_from_node (xmlNode *node)
 	cxn->update_dns = connection_xml_get_boolean (node, "update_dns");
 
 	/* TCP/IP general paramaters */
-	cxn->address = xst_xml_get_child_content (node, "address");
-	cxn->netmask = xst_xml_get_child_content (node, "netmask");
-	cxn->gateway = xst_xml_get_child_content (node, "gateway");
+	cxn->address = gst_xml_get_child_content (node, "address");
+	cxn->netmask = gst_xml_get_child_content (node, "netmask");
+	cxn->gateway = gst_xml_get_child_content (node, "gateway");
 
 	switch (cxn->type) {
-	case XST_CONNECTION_PPP:
+	case GST_CONNECTION_PPP:
 		connection_get_ppp_from_node (cxn->node, cxn);
 		break;
-	case XST_CONNECTION_PLIP:
+	case GST_CONNECTION_PLIP:
 		connection_get_ptp_from_node (cxn->node, cxn);
 		break;
 	default:
@@ -1417,23 +1417,23 @@ connection_new_from_node (xmlNode *node)
 	return cxn;
 }
 
-XstConnection *
+GstConnection *
 connection_new_from_dev_name (char *dev_name, xmlNode *root)
 {
 	int i;
 
-	for (i = 0; xst_iface_desc[i].name; i++)
-		if (strstr (dev_name, xst_iface_desc[i].name) == dev_name)
+	for (i = 0; gst_iface_desc[i].name; i++)
+		if (strstr (dev_name, gst_iface_desc[i].name) == dev_name)
 			break;
 
-	return connection_new_from_type (xst_iface_desc[i].type, root);
+	return connection_new_from_type (gst_iface_desc[i].type, root);
 }
 
 void
-connection_free (XstConnection *cxn)
+connection_free (GstConnection *cxn)
 {
 	if (cxn->node)
-		xst_xml_element_destroy (cxn->node);
+		gst_xml_element_destroy (cxn->node);
 
 	g_free (cxn->dev);
 	g_free (cxn->name);
@@ -1459,7 +1459,7 @@ connection_free (XstConnection *cxn)
 }
 
 static void
-connection_check_netmask_gui (XstConnection *cxn)
+connection_check_netmask_gui (GstConnection *cxn)
 {
         GtkWidget *netmask_widget, *address_widget;
         gchar *address, *netmask;
@@ -1513,7 +1513,7 @@ connection_addr_to_str (gchar *addr)
 }
 
 static void
-connection_set_bcast_and_network (XstConnection *cxn)
+connection_set_bcast_and_network (GstConnection *cxn)
 {
 	gchar *address, *netmask;
 	gchar *broadcast;
@@ -1549,7 +1549,7 @@ connection_set_bcast_and_network (XstConnection *cxn)
 }
 
 static void
-empty_general (XstConnection *cxn)
+empty_general (GstConnection *cxn)
 {
 	GET_STR ("connection_", name);
 	GET_BOOL ("status_", autoboot);
@@ -1558,7 +1558,7 @@ empty_general (XstConnection *cxn)
 }
 
 static void
-empty_ip (XstConnection *cxn)
+empty_ip (GstConnection *cxn)
 {
 	connection_check_netmask_gui (cxn);
 
@@ -1570,12 +1570,12 @@ empty_ip (XstConnection *cxn)
 }
 
 static void
-empty_wvlan (XstConnection *cxn)
+empty_wvlan (GstConnection *cxn)
 {
 }
 
 static void
-empty_ppp (XstConnection *cxn)
+empty_ppp (GstConnection *cxn)
 {
 	GET_STR ("ppp_", phone_number);
 	GET_STR ("ppp_", login);
@@ -1586,7 +1586,7 @@ empty_ppp (XstConnection *cxn)
 }
 
 static void
-empty_ppp_adv (XstConnection *cxn)
+empty_ppp_adv (GstConnection *cxn)
 {
 	GET_STR ("ppp_", serial_port);
 	GET_BOOL ("ppp_", stupid);
@@ -1598,7 +1598,7 @@ empty_ppp_adv (XstConnection *cxn)
 }
 
 static void
-empty_ptp (XstConnection *cxn)
+empty_ptp (GstConnection *cxn)
 {
 	GET_STR ("ptp_", address);
 	GET_STR ("ptp_", remote_address);
@@ -1618,15 +1618,15 @@ strempty (gchar *str)
 }
 
 static gboolean
-connection_validate (XstConnection *cxn)
+connection_validate (GstConnection *cxn)
 {
 	gchar *error = NULL;
 	
 	switch (cxn->type) {
-	case XST_CONNECTION_ETH:
-	case XST_CONNECTION_WVLAN:
-	case XST_CONNECTION_IRLAN:
-	case XST_CONNECTION_UNKNOWN:
+	case GST_CONNECTION_ETH:
+	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_IRLAN:
+	case GST_CONNECTION_UNKNOWN:
 		if (cxn->ip_config == IP_MANUAL &&
 		    (strempty (cxn->address) ||
 		     strempty (cxn->netmask)))
@@ -1634,14 +1634,14 @@ connection_validate (XstConnection *cxn)
 				  "was left empty. Please enter valid IP\n"
 				  "addresses in those fields to continue.");
 		break;
-	case XST_CONNECTION_PLIP:
+	case GST_CONNECTION_PLIP:
 		if (strempty (cxn->address) ||
 		    strempty (cxn->remote_address))
 			error = _("The IP address or remote address for the\n"
 				  "interface was left empty. Please enter valid\n"
 				  "IP addresses in those fields to continue.");
 		break;
-	case XST_CONNECTION_PPP:
+	case GST_CONNECTION_PPP:
 		if (!cxn->update_dns && strempty (cxn->dns1))
 			error = _("You chose to set the DNS servers for this\n"
 				  "connection manually, but left the IP\n"
@@ -1671,24 +1671,24 @@ connection_validate (XstConnection *cxn)
 }
 
 static void
-connection_empty_gui (XstConnection *cxn)
+connection_empty_gui (GstConnection *cxn)
 {
 	empty_general (cxn);
 
 	switch (cxn->type) {
-	case XST_CONNECTION_WVLAN:
+	case GST_CONNECTION_WVLAN:
 		empty_wvlan (cxn);
 		empty_ip (cxn);
 		break;
-	case XST_CONNECTION_PPP:
+	case GST_CONNECTION_PPP:
 		empty_ppp (cxn);
 		empty_ppp_adv (cxn);
 		break;
-	case XST_CONNECTION_PLIP:
+	case GST_CONNECTION_PLIP:
 		empty_ptp (cxn);
 		break;
-	case XST_CONNECTION_ETH:
-	case XST_CONNECTION_IRLAN:
+	case GST_CONNECTION_ETH:
+	case GST_CONNECTION_IRLAN:
 	default:
 		empty_ip (cxn);
 		break;
@@ -1696,9 +1696,9 @@ connection_empty_gui (XstConnection *cxn)
 }	
 
 static gboolean
-connection_config_save (XstConnection *cxn)
+connection_config_save (GstConnection *cxn)
 {
-	XstConnection *tmp = g_new0 (XstConnection, 1);
+	GstConnection *tmp = g_new0 (GstConnection, 1);
 
 	tmp->window = cxn->window;
 	tmp->xml = cxn->xml;
@@ -1723,32 +1723,32 @@ connection_config_save (XstConnection *cxn)
 }
 
 static void
-on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
+on_connection_ok_clicked (GtkWidget *w, GstConnection *cxn)
 {
 
 	if (cxn->modified) {
 		if (connection_config_save (cxn))
 			gtk_widget_destroy (cxn->window);
 		cxn->creating = FALSE;
-		xst_dialog_modify (tool->main_dialog);
+		gst_dialog_modify (tool->main_dialog);
 	} else
 		gtk_widget_destroy (cxn->window);
 }
 
 static void
-on_connection_cancel_clicked (GtkWidget *w, XstConnection *cxn)
+on_connection_cancel_clicked (GtkWidget *w, GstConnection *cxn)
 {
 	gtk_widget_destroy (cxn->window);
 
 	if (cxn->creating) {
 		connection_list_remove (cxn);
 		connection_free (cxn);
-		xst_dialog_modify (tool->main_dialog);
+		gst_dialog_modify (tool->main_dialog);
 	}
 }
 
 static void
-on_connection_config_dialog_destroy (GtkWidget *w, XstConnection *cxn)
+on_connection_config_dialog_destroy (GtkWidget *w, GstConnection *cxn)
 {
 	g_object_unref (G_OBJECT (cxn->xml));
 	cxn->xml = NULL;
@@ -1757,25 +1757,25 @@ on_connection_config_dialog_destroy (GtkWidget *w, XstConnection *cxn)
 }
 
 static gint
-on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, XstConnection *cxn)
+on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, GstConnection *cxn)
 {
 	return FALSE;
 }
 
 static void
-on_connection_modified (GtkWidget *w, XstConnection *cxn)
+on_connection_modified (GtkWidget *w, GstConnection *cxn)
 {
 	connection_set_modified (cxn, TRUE);
 }
 
 static void
-on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn)
+on_wvlan_adhoc_toggled (GtkWidget *w, GstConnection *cxn)
 {
 /* FIXME: implement on_wvlan_adhoc_toggled*/
 }
 
 static void
-on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn)
+on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn)
 {
 	gboolean active;
 
@@ -1788,7 +1788,7 @@ on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn)
 }
 
 static gboolean
-on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection *cxn)
+on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection *cxn)
 {
 	connection_check_netmask_gui (cxn);
 
@@ -1796,7 +1796,7 @@ on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection 
 }
 
 static void
-fill_general (XstConnection *cxn)
+fill_general (GstConnection *cxn)
 {
 	gtk_label_set_text (GTK_LABEL (W ("connection_dev")), cxn->dev);
 	SET_STR ("connection_", name);
@@ -1805,7 +1805,7 @@ fill_general (XstConnection *cxn)
 }
 
 static void
-update_ip_config (XstConnection *cxn)
+update_ip_config (GstConnection *cxn)
 {
 	IPConfigType ip;
 	
@@ -1819,7 +1819,7 @@ update_ip_config (XstConnection *cxn)
 static void
 ip_config_menu_cb (GtkWidget *w, gpointer data)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 	IPConfigType ip;
 
 	cxn = g_object_get_data (G_OBJECT (w), "user_data");
@@ -1843,7 +1843,7 @@ ip_config_menu_cb (GtkWidget *w, gpointer data)
 }
 
 static void
-fill_ip (XstConnection *cxn)
+fill_ip (GstConnection *cxn)
 {
 	GtkWidget *menu, *menuitem, *omenu;
 	IPConfigType i;
@@ -1879,13 +1879,13 @@ fill_ip (XstConnection *cxn)
 }
 
 static void
-fill_wvlan (XstConnection *cxn)
+fill_wvlan (GstConnection *cxn)
 {
 
 }
 
 static void
-fill_ppp (XstConnection *cxn)
+fill_ppp (GstConnection *cxn)
 {
 	SET_STR ("ppp_", phone_number);
 	SET_STR ("ppp_", login);
@@ -1896,7 +1896,7 @@ fill_ppp (XstConnection *cxn)
 }
 
 static void
-fill_ppp_adv (XstConnection *cxn)
+fill_ppp_adv (GstConnection *cxn)
 {
 #warning FIXME
 #if 0	
@@ -1913,7 +1913,7 @@ fill_ppp_adv (XstConnection *cxn)
 }
 
 static void
-fill_ptp (XstConnection *cxn)
+fill_ptp (GstConnection *cxn)
 {
 	gboolean state;
 	
@@ -1929,7 +1929,7 @@ fill_ptp (XstConnection *cxn)
 }
 
 static void
-hookup_callbacks (XstConnection *cxn)
+hookup_callbacks (GstConnection *cxn)
 {
 	gint i;
 	WidgetSignal signals[] =
@@ -1981,13 +1981,13 @@ hookup_callbacks (XstConnection *cxn)
  * connection type.
  **/
 static void
-connection_dialog_set_visible_pages (XstConnection *cxn)
+connection_dialog_set_visible_pages (GstConnection *cxn)
 {
 	GtkNotebook *nb;
 	
 	nb = GTK_NOTEBOOK (W ("connection_nb"));
 
-	if (cxn->type == XST_CONNECTION_PPP) {
+	if (cxn->type == GST_CONNECTION_PPP) {
 		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/ppp.png");
 		fill_ppp (cxn);
 		fill_ppp_adv (cxn);
@@ -2004,7 +2004,7 @@ connection_dialog_set_visible_pages (XstConnection *cxn)
 								 W ("ppp_adv_vbox")));
 	}
        
-	if (cxn->type == XST_CONNECTION_WVLAN) {
+	if (cxn->type == GST_CONNECTION_WVLAN) {
 		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/wavelan-48.png");
 		fill_wvlan (cxn);
 		/* FIXME: temprorarily disabling this notebook, until we get support for this. */
@@ -2016,7 +2016,7 @@ connection_dialog_set_visible_pages (XstConnection *cxn)
 					  gtk_notebook_page_num (nb,
 								 W ("wvlan_vbox")));
 
-	if (cxn->type == XST_CONNECTION_PLIP) {
+	if (cxn->type == GST_CONNECTION_PLIP) {
 		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/plip-48.png");
 		fill_ptp (cxn);
 		gtk_notebook_remove_page (nb,
@@ -2027,16 +2027,16 @@ connection_dialog_set_visible_pages (XstConnection *cxn)
 					  gtk_notebook_page_num (nb,
 								 W ("ptp_vbox")));
 
-	if (cxn->type == XST_CONNECTION_ETH) {
+	if (cxn->type == GST_CONNECTION_ETH) {
 		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")),
 					 PIXMAPS_DIR "/connection-ethernet.png");
 	}
 
-	if (cxn->type == XST_CONNECTION_IRLAN) {
+	if (cxn->type == GST_CONNECTION_IRLAN) {
 		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/irda-48.png");
 	}
 
-	if (cxn->type == XST_CONNECTION_LO) {
+	if (cxn->type == GST_CONNECTION_LO) {
 		gtk_widget_hide (W("ip_update_dns"));
 		gtk_widget_hide (W("ip_bootproto_box"));
 	}
@@ -2053,16 +2053,16 @@ connection_actions_set_sensitive (gboolean state)
 	};
 
 	for (i = 0; names[i]; i++)
-		xst_dialog_widget_set_user_sensitive (tool->main_dialog, names[i], state);
+		gst_dialog_widget_set_user_sensitive (tool->main_dialog, names[i], state);
 	
 	if (state == FALSE)
 	{
-		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "connection_configure", TRUE);
+		gst_dialog_widget_set_user_sensitive (tool->main_dialog, "connection_configure", TRUE);
 	}
 }
 
 void
-connection_configure (XstConnection *cxn)
+connection_configure (GstConnection *cxn)
 {
 	gchar *s;
 
@@ -2090,9 +2090,9 @@ connection_configure (XstConnection *cxn)
 	fill_general (cxn);
 	fill_ip      (cxn);
 
-	if (!xst_xml_element_get_boolean (cxn->node->parent, "smartdhcpcd"))
+	if (!gst_xml_element_get_boolean (cxn->node->parent, "smartdhcpcd"))
 		gtk_widget_hide (W("ip_update_dns"));
-	if (!xst_xml_element_get_boolean (cxn->node->parent, "userifacfectl"))
+	if (!gst_xml_element_get_boolean (cxn->node->parent, "userifacfectl"))
 		gtk_widget_hide (W("status_user"));
 
 	connection_dialog_set_visible_pages (cxn);
@@ -2105,19 +2105,19 @@ connection_configure (XstConnection *cxn)
 }
 
 static gboolean
-connection_updatedns_supported (XstConnection *cxn)
+connection_updatedns_supported (GstConnection *cxn)
 {
 	switch (cxn->type) {
-	case XST_CONNECTION_ETH:
-	case XST_CONNECTION_WVLAN:
-	case XST_CONNECTION_PPP:
-	case XST_CONNECTION_IRLAN:
+	case GST_CONNECTION_ETH:
+	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_PPP:
+	case GST_CONNECTION_IRLAN:
 		return TRUE;
-	case XST_CONNECTION_PLIP:
-	case XST_CONNECTION_OTHER:
-	case XST_CONNECTION_LO:
-	case XST_CONNECTION_UNKNOWN:
-	case XST_CONNECTION_LAST:
+	case GST_CONNECTION_PLIP:
+	case GST_CONNECTION_OTHER:
+	case GST_CONNECTION_LO:
+	case GST_CONNECTION_UNKNOWN:
+	case GST_CONNECTION_LAST:
 	default:
 		return FALSE;
 	}
@@ -2126,13 +2126,13 @@ connection_updatedns_supported (XstConnection *cxn)
 }
 
 void
-connection_save_to_node (XstConnection *cxn, xmlNode *root)
+connection_save_to_node (GstConnection *cxn, xmlNode *root)
 {
 	gchar *s;
 	xmlNode *node;
 	
 	if (!cxn->node)
-		cxn->node = xst_xml_element_add (root, "interface");
+		cxn->node = gst_xml_element_add (root, "interface");
 	
 	node = cxn->node;
 		
@@ -2159,7 +2159,7 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 	g_free (s);
 
 	/* PPP stuff */
-	if (cxn->type == XST_CONNECTION_PPP) {
+	if (cxn->type == GST_CONNECTION_PPP) {
 		if (!cxn->wvsection)
 			cxn->wvsection = connection_wvsection_name_generate (cxn->dev, root);
 		connection_xml_save_str_to_node (node, "wvsection", cxn->wvsection);
@@ -2182,16 +2182,16 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 	}
 
 	/* PtP */
-	if (cxn->type == XST_CONNECTION_PLIP) {
+	if (cxn->type == GST_CONNECTION_PLIP) {
 		connection_xml_save_str_to_node (node, "remote_address", cxn->remote_address);
 	}
 }
 
 gboolean
-connection_list_has_dialer (XstTool *tool)
+connection_list_has_dialer (GstTool *tool)
 {
-	XstConnectionUI *ui;
-	XstConnection   *cxn;
+	GstConnectionUI *ui;
+	GstConnection   *cxn;
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
 	gboolean         valid;
@@ -2200,14 +2200,14 @@ connection_list_has_dialer (XstTool *tool)
 	gboolean         need_dialer = FALSE;
 
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
-	root = xst_xml_doc_get_root (tool->config);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	root = gst_xml_doc_get_root (tool->config);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	valid = gtk_tree_model_get_iter_first (model, &iter);
 	while (valid) {
 		gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
-		if (cxn && cxn->type == XST_CONNECTION_PPP) {
+		if (cxn && cxn->type == GST_CONNECTION_PPP) {
 			need_dialer = TRUE;
 			break;
 		}
@@ -2226,7 +2226,7 @@ connection_list_has_dialer (XstTool *tool)
 static gboolean
 list_save_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
 {
-	XstConnection *cxn;
+	GstConnection *cxn;
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 	connection_save_to_node (cxn, (xmlNode *)data);
@@ -2235,15 +2235,15 @@ list_save_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointe
 }
 
 void
-connection_list_save (XstTool *tool)
+connection_list_save (GstTool *tool)
 {
-	XstConnectionUI *ui;
-	XstConnection   *cxn;
+	GstConnectionUI *ui;
+	GstConnection   *cxn;
 	GtkTreeModel    *model;
 	xmlNodePtr       root;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
-	root = xst_xml_doc_get_root (tool->config);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	root = gst_xml_doc_get_root (tool->config);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 
 	gtk_tree_model_foreach (model, list_save_cb, root);
@@ -2254,13 +2254,13 @@ connection_list_save (XstTool *tool)
 }
 
 void
-connection_list_select_connection (XstConnection *cxn)
+connection_list_select_connection (GstConnection *cxn)
 {
-	XstConnectionUI  *ui;
+	GstConnectionUI  *ui;
 	GtkTreeSelection *select;
 	GtkTreeIter       iter;
 
-	ui = (XstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
 	if (connection_iter (cxn, &iter))
 		gtk_tree_selection_select_iter (select, &iter);

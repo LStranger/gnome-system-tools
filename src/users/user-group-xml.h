@@ -83,8 +83,8 @@ void      user_set_value_comment_array (xmlNodePtr node, gchar **comment);
 #define user_set_value_pwd_warndays(node,value) (generic_set_value_integer (node, "passwd_exp_warn", value))
 
 
-gboolean group_set_value_name (XstDialog *xd, xmlNodePtr node, const gchar *value);
-gboolean group_set_value_gid (XstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean group_set_value_name (GstDialog *xd, xmlNodePtr node, const gchar *value);
+gboolean group_set_value_gid (GstDialog *xd, xmlNodePtr node, const gchar *value);
 
 gboolean	node_exists		(xmlNodePtr, const gchar*, const gchar*);
 

@@ -25,13 +25,13 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "xst.h"
+#include "gst.h"
 #include "connection.h"
 
 typedef struct {
 	GladeXML *glade;
-	XstTool *tool;
-	XstConnection *cxn;
+	GstTool *tool;
+	GstConnection *cxn;
 
 	GtkWidget *win;
 	GnomeDruid *druid;
@@ -46,8 +46,8 @@ typedef struct {
 	gint current_page;
 } PppDruid;
 	
-extern PppDruid *ppp_druid_new (XstTool *tool);
+extern PppDruid *ppp_druid_new (GstTool *tool);
 extern void ppp_druid_show (PppDruid *ppp);
-extern void ppp_druid_gui_to_xml(XstTool *t, gpointer data);
+extern void ppp_druid_gui_to_xml(GstTool *t, gpointer data);
 
 #endif /* PPP_DRUID_H */

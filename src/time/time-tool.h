@@ -1,14 +1,14 @@
-#define XST_TYPE_TIME_TOOL            (xst_time_tool_get_type ())
-#define XST_TIME_TOOL(obj)            (GTK_CHECK_CAST ((obj), XST_TYPE_TIME_TOOL, XstTimeTool))
-#define XST_TIME_TOOL_CLASS(class)    (GTK_CHECK_CLASS_CAST ((class), XST_TYPE_TIME_TOOL, XstTimeToolClass))
-#define XST_IS_TIME_TOOL(obj)         (GTK_CHECK_TYPE ((obj), XST_TYPE_TIME_TOOL))
-#define XST_IS_TIME_TOOL_CLASS(class) (GTK_CHECK_CLASS_TYPE ((class), XST_TYPE_TIME_TOOL))
+#define GST_TYPE_TIME_TOOL            (gst_time_tool_get_type ())
+#define GST_TIME_TOOL(obj)            (GTK_CHECK_CAST ((obj), GST_TYPE_TIME_TOOL, GstTimeTool))
+#define GST_TIME_TOOL_CLASS(class)    (GTK_CHECK_CLASS_CAST ((class), GST_TYPE_TIME_TOOL, GstTimeToolClass))
+#define GST_IS_TIME_TOOL(obj)         (GTK_CHECK_TYPE ((obj), GST_TYPE_TIME_TOOL))
+#define GST_IS_TIME_TOOL_CLASS(class) (GTK_CHECK_CLASS_TYPE ((class), GST_TYPE_TIME_TOOL))
 
-typedef struct _XstTimeTool      XstTimeTool;
-typedef struct _XstTimeToolClass XstTimeToolClass;
+typedef struct _GstTimeTool      GstTimeTool;
+typedef struct _GstTimeToolClass GstTimeToolClass;
 
-struct _XstTimeTool {
-	XstTool tool;
+struct _GstTimeTool {
+	GstTool tool;
 
 	gboolean running;
 	gboolean ticking;
@@ -28,16 +28,16 @@ struct _XstTimeTool {
 	gchar *time_zone_name;
 };
 
-struct _XstTimeToolClass {
-	XstToolClass parent_class;
+struct _GstTimeToolClass {
+	GstToolClass parent_class;
 };
 
-GtkType xst_time_tool_get_type           (void);
-void    xst_time_update                  (XstTimeTool *tool);
+GtkType gst_time_tool_get_type           (void);
+void    gst_time_update                  (GstTimeTool *tool);
 
-void    xst_time_clock_stop              (XstTimeTool *tool);
-void    xst_time_clock_start             (XstTimeTool *tool);
+void    gst_time_clock_stop              (GstTimeTool *tool);
+void    gst_time_clock_start             (GstTimeTool *tool);
 
-void    xst_time_tool_set_time_zone_name (XstTimeTool *time_tool, gchar *name);
-void    xst_time_set_full                (XstTimeTool *time_tool, struct tm *tm);
-void    xst_time_set_from_localtime      (XstTimeTool *time_tool, gint correction);
+void    gst_time_tool_set_time_zone_name (GstTimeTool *time_tool, gchar *name);
+void    gst_time_set_full                (GstTimeTool *time_tool, struct tm *tm);
+void    gst_time_set_from_localtime      (GstTimeTool *time_tool, gint correction);

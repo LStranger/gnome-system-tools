@@ -28,7 +28,7 @@
 #include "boot-druid.h"
 #include "boot-settings.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 static void boot_druid_class_init (BootDruidClass *class);
 static void boot_druid_finalize   (GObject *obj);
@@ -138,7 +138,7 @@ static gboolean
 identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	GnomeDruidPage   *next_page;
-	XstBootImageType  type;
+	GstBootImageType  type;
 	const gchar      *buf;
 	gchar            *error;
 	BootDruid        *config = data;
@@ -316,7 +316,7 @@ static gboolean
 druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {	
 	GnomeDruidPage   *next_page;
-	XstBootImageType  type;
+	GstBootImageType  type;
 	const gchar      *buf;
 	BootDruid        *config = data;
 

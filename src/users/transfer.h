@@ -26,9 +26,9 @@
 #ifndef __TRANSFER_H
 #define __TRANSFER_H
 
-#include "xst.h"
+#include "gst.h"
 
-void transfer_xml_to_gui(XstTool *tool, gpointer data);
-void transfer_gui_to_xml(XstTool *tool, gpointer data);
+void transfer_xml_to_gui(GstTool *tool, gpointer data);
+void transfer_gui_to_xml(GstTool *tool, gpointer data);
 
 #endif /* TRANSFER_H */

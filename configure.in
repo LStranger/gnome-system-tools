@@ -1,6 +1,6 @@
 AC_PREREQ(2.52)
 AC_INIT(gnome-system-tools, 0.24.0, http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-system-tools)
-AC_CONFIG_SRCDIR(src/common/xst-tool.c)
+AC_CONFIG_SRCDIR(src/common/gst-tool.c)
 AM_INIT_AUTOMAKE(AC_PACKAGE_NAME, AC_PACKAGE_VERSION)
 
 AM_CONFIG_HEADER(config.h)
@@ -11,7 +11,7 @@ AC_PROG_INTLTOOL
 GNOME_PLATFORM_GNOME_2(yes, force)
 
 dnl Checking the above
-AC_CONFIG_SRCDIR(src/common/xst-tool.c)
+AC_CONFIG_SRCDIR(src/common/gst-tool.c)
 
 AM_PROG_LIBTOOL
 
@@ -60,20 +60,20 @@ if test x"$HAVE_LIBCRACK" = xyes ; then
   AC_MSG_ERROR(cracklib crack.h header file not found.)])
 fi
 
-XST_CRACK_LIB_LOCATION="/usr/lib/"
+GST_CRACK_LIB_LOCATION="/usr/lib/"
 AC_ARG_WITH(cracklib-dict,
 [  --with-cracklib-dict[=DIR]       specify a cracklib dir ],[
   if test "$withval" != "no"; then
-    XST_CRACK_LIB_LOCATION=$withval
+    GST_CRACK_LIB_LOCATION=$withval
   fi  
 ])
 
 AC_CHECK_LIB(crypt, crypt, ,[
   AC_MSG_ERROR(crypt library is required.)])
 AC_CHECK_HEADER(crypt.h,AC_DEFINE(HAVE_CRYPT_H))
-AC_SUBST(XST_CRACK_LIB_LOCATION)
-XST_CRACK_LIB_CFLAGS="-DXST_CRACK_LIB_DICT_PATH=\"\\\"\$(XST_CRACK_LIB_LOCATION)\\\"\""
-AC_SUBST(XST_CRACK_LIB_CFLAGS)
+AC_SUBST(GST_CRACK_LIB_LOCATION)
+GST_CRACK_LIB_CFLAGS="-DGST_CRACK_LIB_DICT_PATH=\"\\\"\$(GST_CRACK_LIB_LOCATION)\\\"\""
+AC_SUBST(GST_CRACK_LIB_CFLAGS)
 
 dnl =====================================================
 dnl END: Cracklib checking
@@ -83,7 +83,7 @@ dnl =====================================================
 dnl Check for Module versions
 dnl =====================================================
 
-PKG_CHECK_MODULES(XST_DEPENDS,[
+PKG_CHECK_MODULES(GST_DEPENDS,[
 			   libgnomeui-2.0 >= 1.109.0
 			   libglade-2.0 >= 1.99.5
 			   libxml-2.0 >= 2.4.12
@@ -172,31 +172,31 @@ dnl END: GCONF
 dnl =====================================================
     
 dnl =====================================================
-dnl XST_LIBS & XST_CFLAGS 
+dnl GST_LIBS & GST_CFLAGS 
 dnl =====================================================
 
-XST_DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
+GST_DEPRECATED_FLAGS="-DG_DISABLE_DEPRECATED -DGDK_DISABLE_DEPRECATED -DGTK_DISABLE_DEPRECATED -DGDK_PIXBUF_DISABLE_DEPRECATED -DGNOME_DISABLE_DEPRECATED"
 
-XST_LIBS="$XST_DEPENDS_LIBS"
-XST_CFLAGS="$XST_DEPENDS_CFLAGS $XST_CRACK_LIB_CFLAGS $XST_DEPRECATED_FLAGS"
+GST_LIBS="$GST_DEPENDS_LIBS"
+GST_CFLAGS="$GST_DEPENDS_CFLAGS $GST_CRACK_LIB_CFLAGS $GST_DEPRECATED_FLAGS"
 
-XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/src/common/libsetuptool.a"
-XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
+GST_TOOL_LIBS="$GST_LIBS \$(top_builddir)/src/common/libsetuptool.a"
+GST_TOOL_CFLAGS="$GST_CFLAGS -I\$(top_srcdir)/src/common"
 
-XST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
-XST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(etspecs)"
-XST_TOOL_DEPENDENCIES="\$(top_builddir)/src/common/libsetuptool.a"
+GST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
+GST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(etspecs)"
+GST_TOOL_DEPENDENCIES="\$(top_builddir)/src/common/libsetuptool.a"
 
-AC_SUBST(XST_LIBS)
-AC_SUBST(XST_CFLAGS)
-AC_SUBST(XST_TOOL_LIBS)
-AC_SUBST(XST_TOOL_CFLAGS)
-AC_SUBST(XST_TOOL_CLEANFILES)
-AC_SUBST(XST_TOOL_EXTRA_DIST)
-AC_SUBST(XST_TOOL_DEPENDENCIES)
+AC_SUBST(GST_LIBS)
+AC_SUBST(GST_CFLAGS)
+AC_SUBST(GST_TOOL_LIBS)
+AC_SUBST(GST_TOOL_CFLAGS)
+AC_SUBST(GST_TOOL_CLEANFILES)
+AC_SUBST(GST_TOOL_EXTRA_DIST)
+AC_SUBST(GST_TOOL_DEPENDENCIES)
 
 dnl ==================================
-dnl END: XST_LIBS & XST_FLAGS
+dnl END: GST_LIBS & GST_FLAGS
 dnl ==================================
 
 dnl ===========================

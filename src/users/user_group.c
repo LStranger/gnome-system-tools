@@ -44,7 +44,7 @@
 #include "user-group-xml.h"
 #include "passwd.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 GList *groups_list = NULL;
 
 /* Local globals */
@@ -68,11 +68,11 @@ option_menu_add_profiles (GtkWidget *menu)
 	gint i = 0;
 	gint index;
 
-	for (node = xst_xml_element_find_first (node, "profile");
+	for (node = gst_xml_element_find_first (node, "profile");
 	     node != NULL;
-	     node = xst_xml_element_find_next (node, "profile"))
+	     node = gst_xml_element_find_next (node, "profile"))
 	{
-		profile_name = xst_xml_get_child_content (node, "name");
+		profile_name = gst_xml_get_child_content (node, "name");
 
 		if (strcmp (profile_name, "Default") == 0) {
 			index = i;
@@ -96,17 +96,17 @@ option_menu_add_profiles (GtkWidget *menu)
 void
 combo_add_shells (GtkWidget *combo)
 {
-	xmlNodePtr shells = xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "shelldb");
+	xmlNodePtr shells = gst_xml_element_find_first (gst_xml_doc_get_root (tool->config), "shelldb");
 	xmlNodePtr node;
 	GList *shell_list = NULL;
 
 	g_return_if_fail (combo != NULL);
 	g_return_if_fail (shells != NULL);
 	
-	for (node = xst_xml_element_find_first (shells, "shell");
+	for (node = gst_xml_element_find_first (shells, "shell");
 	     node != NULL;
-	     node = xst_xml_element_find_next (node, "shell"))
-		shell_list = g_list_prepend (shell_list, xst_xml_element_get_content (node));
+	     node = gst_xml_element_find_next (node, "shell"))
+		shell_list = g_list_prepend (shell_list, gst_xml_element_get_content (node));
 
 	shell_list = g_list_sort (shell_list, my_strcmp);
 
@@ -149,7 +149,7 @@ option_menu_add_groups (GtkWidget *option_menu, gboolean add_user_group)
 void
 show_error_message (gchar *parent_window, gchar *message)
 {
-	GtkWindow *xd = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, parent_window));
+	GtkWindow *xd = GTK_WINDOW (gst_dialog_get_widget (tool->main_dialog, parent_window));
 	GtkWidget *dialog;
 	
 	dialog = gtk_message_dialog_new (xd, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, message);
@@ -162,24 +162,24 @@ get_root_node (gint tbl)
 {
 	xmlNodePtr node, root;
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 
 	switch (tbl)
 	{
 	case NODE_USER:
-		node = xst_xml_element_find_first (root, "userdb");
+		node = gst_xml_element_find_first (root, "userdb");
 		break;
 	case NODE_GROUP:
-		node = xst_xml_element_find_first (root, "groupdb");
+		node = gst_xml_element_find_first (root, "groupdb");
 		break;
 /*	case NODE_NET_USER:
-		node = xst_xml_element_find_first (root, "nis_userdb");
+		node = gst_xml_element_find_first (root, "nis_userdb");
 		break;
 	case NODE_NET_GROUP:
-		node = xst_xml_element_find_first (root, "nis_groupdb");
+		node = gst_xml_element_find_first (root, "nis_groupdb");
 		break;*/
 	case NODE_PROFILE:
-		node = xst_xml_element_find_first (root, "profiledb");
+		node = gst_xml_element_find_first (root, "profiledb");
 		break;
 	default:
 		node = NULL;
@@ -224,7 +224,7 @@ user_filter (xmlNodePtr node)
 	if (!strcmp (ar[1], "group"))
 		buf = user_value_group (node);
 	else
-		buf = xst_xml_get_child_content (node, ar[1]);
+		buf = gst_xml_get_child_content (node, ar[1]);
 
 	
 	if (buf && !strcmp (ar[0], "contains") && strstr (buf, ar[2]))
@@ -246,12 +246,12 @@ check_node_visibility (xmlNodePtr node)
 	gchar *field, *content;
 	gint min, max, val;
 	static GtkToggleButton *toggle;
-	XstDialogComplexity complexity;
+	GstDialogComplexity complexity;
 
 	complexity = tool->main_dialog->complexity;
 	
 	if (!toggle)
-		toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "showall"));
+		toggle = GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "showall"));
 
 	db_node = get_db_node (node);
 	get_min_max (db_node, &min, &max);
@@ -270,16 +270,16 @@ check_node_visibility (xmlNodePtr node)
 	else
 		return TRUE;
 
-	node = xst_xml_element_find_first (node, field);
+	node = gst_xml_element_find_first (node, field);
 	g_free (field);
-	content = xst_xml_element_get_content (node);
+	content = gst_xml_element_get_content (node);
 	val = atoi (content);
 	g_free (content);
 
 	if (val >= min && val <= max)
 		return TRUE;
 
-	else if (complexity == XST_DIALOG_ADVANCED && gtk_toggle_button_get_active (toggle))
+	else if (complexity == GST_DIALOG_ADVANCED && gtk_toggle_button_get_active (toggle))
 		return TRUE;
 
 	else
@@ -334,12 +334,12 @@ is_valid_id (const gchar *str)
 gboolean
 get_min_max (xmlNodePtr db_node, gint *min, gint *max)
 {
-	xmlNodePtr profiledb = xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "profiledb");
-	xmlNodePtr profile = xst_xml_element_find_first (profiledb, "profile");
-	gint umin = g_strtod ((gchar *) xst_xml_get_child_content (profile, "umin"), NULL);
-	gint umax = g_strtod ((gchar *) xst_xml_get_child_content (profile, "umax"), NULL);
-	gint gmin = g_strtod ((gchar *) xst_xml_get_child_content (profile, "gmin"), NULL);
-	gint gmax = g_strtod ((gchar *) xst_xml_get_child_content (profile, "gmax"), NULL);
+	xmlNodePtr profiledb = gst_xml_element_find_first (gst_xml_doc_get_root (tool->config), "profiledb");
+	xmlNodePtr profile = gst_xml_element_find_first (profiledb, "profile");
+	gint umin = g_strtod ((gchar *) gst_xml_get_child_content (profile, "umin"), NULL);
+	gint umax = g_strtod ((gchar *) gst_xml_get_child_content (profile, "umax"), NULL);
+	gint gmin = g_strtod ((gchar *) gst_xml_get_child_content (profile, "gmin"), NULL);
+	gint gmax = g_strtod ((gchar *) gst_xml_get_child_content (profile, "gmax"), NULL);
 	
 	g_return_val_if_fail (db_node != NULL, FALSE);
 
@@ -377,20 +377,20 @@ get_corresp_field (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, NULL);
 
-	root = xst_xml_doc_get_root (tool->config);
+	root = gst_xml_doc_get_root (tool->config);
 	node = get_db_node (node);
 
 	if (!strcmp (node->name, "userdb"))
-		return xst_xml_element_find_first (root, "groupdb");
+		return gst_xml_element_find_first (root, "groupdb");
 
 	if (!strcmp (node->name, "groupdb"))
-		return xst_xml_element_find_first (root, "userdb");
+		return gst_xml_element_find_first (root, "userdb");
 
 	if (!strcmp (node->name, "nis_groupdb"))
-		return xst_xml_element_find_first (root, "nis_userdb");
+		return gst_xml_element_find_first (root, "nis_userdb");
 
 	if (!strcmp (node->name, "nis_userdb"))
-		return xst_xml_element_find_first (root, "nis_groupdb");
+		return gst_xml_element_find_first (root, "nis_groupdb");
 
 	return NULL;
 }
@@ -412,9 +412,9 @@ get_node_by_data (xmlNodePtr dbnode, const gchar *field, const gchar *fdata)
 	else if (strcmp (dbnode->name, "groupdb") == 0)
 		key = g_strdup ("group");
 	
-	for (node = xst_xml_element_find_first (dbnode, key); node != NULL; node = xst_xml_element_find_next (node, key))
+	for (node = gst_xml_element_find_first (dbnode, key); node != NULL; node = gst_xml_element_find_next (node, key))
 	{
-		buf = xst_xml_get_child_content (node, field);
+		buf = gst_xml_get_child_content (node, field);
 		if (!buf)
 			continue;
 		
@@ -473,10 +473,10 @@ find_new_id (xmlNodePtr parent, xmlNodePtr profile)
 	g_return_val_if_fail (parent != NULL, NULL);
 	
 	if (profile != NULL) {
-		umin = g_strtod ((gchar *) xst_xml_get_child_content (profile, "umin"), NULL);
-		umax = g_strtod ((gchar *) xst_xml_get_child_content (profile, "umax"), NULL);
-		gmin = g_strtod ((gchar *) xst_xml_get_child_content (profile, "gmin"), NULL);
-		gmax = g_strtod ((gchar *) xst_xml_get_child_content (profile, "gmax"), NULL);
+		umin = g_strtod ((gchar *) gst_xml_get_child_content (profile, "umin"), NULL);
+		umax = g_strtod ((gchar *) gst_xml_get_child_content (profile, "umax"), NULL);
+		gmin = g_strtod ((gchar *) gst_xml_get_child_content (profile, "gmin"), NULL);
+		gmax = g_strtod ((gchar *) gst_xml_get_child_content (profile, "gmax"), NULL);
 	} else {
 		umin = 0;
 		umax = 60000;
@@ -500,8 +500,8 @@ find_new_id (xmlNodePtr parent, xmlNodePtr profile)
 	}
 
 	ret = min - 1;
-	for (n0 = xst_xml_element_find_first (parent, key); n0 != NULL; n0 = xst_xml_element_find_next (n0, key)) {
-		buf = xst_xml_get_child_content (n0, field);
+	for (n0 = gst_xml_element_find_first (parent, key); n0 != NULL; n0 = gst_xml_element_find_next (n0, key)) {
+		buf = gst_xml_get_child_content (n0, field);
 		if (!buf)
 			continue;
 
@@ -538,9 +538,9 @@ find_new_key (xmlNodePtr parent)
 	else if (strcmp (parent->name, "groupdb") == 0)
 		key = g_strdup ("group");
 	
-	for (n0 = xst_xml_element_find_first (parent, key); n0 != NULL; n0 = xst_xml_element_find_next (n0, key))
+	for (n0 = gst_xml_element_find_first (parent, key); n0 != NULL; n0 = gst_xml_element_find_next (n0, key))
 	{
-		buf = xst_xml_get_child_content (n0, "key");
+		buf = gst_xml_get_child_content (n0, "key");
 
 		if (!buf)
 			continue;
@@ -575,24 +575,24 @@ group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_name)
 	dbnode = get_db_node (node);
 	dbnode = get_corresp_field (dbnode);
 
-	for (dbnode = xst_xml_element_find_first (dbnode, "group");
+	for (dbnode = gst_xml_element_find_first (dbnode, "group");
 		dbnode;
 		dbnode = dbnode->next)
 	{
-		gnode = xst_xml_element_find_first (dbnode, "users");
+		gnode = gst_xml_element_find_first (dbnode, "users");
 
 		if (!gnode)
 			continue;
 
 		for (gnode = gnode->childs; gnode; gnode = gnode->next)
 		{
-			buf = xst_xml_element_get_content (gnode);
+			buf = gst_xml_element_get_content (gnode);
 
 			if (!buf)
 				continue;
 
 			if (!strcmp (buf, old_name))
-				xst_xml_element_set_content (gnode, new_name);
+				gst_xml_element_set_content (gnode, new_name);
 
 			g_free (buf);
 		}
@@ -612,20 +612,20 @@ get_group_mainusers (xmlNodePtr group_node)
 	g_return_val_if_fail (group_node != NULL, NULL);
 
 	user_node = get_corresp_field (group_node);
-	gid = xst_xml_get_child_content (group_node, "gid");
+	gid = gst_xml_get_child_content (group_node, "gid");
 	
-	for (node = xst_xml_element_find_first (user_node, "user");
+	for (node = gst_xml_element_find_first (user_node, "user");
 	     node;
-	     node = xst_xml_element_find_next (node, "user"))
+	     node = gst_xml_element_find_next (node, "user"))
 	{
 
-		buf = xst_xml_get_child_content (node, "gid");
+		buf = gst_xml_get_child_content (node, "gid");
 		if (!buf)
 			continue;
 
 		if (!strcmp (buf, gid))
 			userlist = g_list_prepend (userlist,
-						   xst_xml_get_child_content (node, "login"));
+						   gst_xml_get_child_content (node, "login"));
 
 		g_free (buf);
 	}

@@ -1,28 +1,28 @@
 noinst_LIBRARIES = libsetuptool.a
 
 INCLUDES = \
-	$(XST_CFLAGS)					\
+	$(GST_CFLAGS)					\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 libsetuptool_a_SOURCES =				\
-	xst-xml.c		xst-xml.h		\
+	gst-xml.c		gst-xml.h		\
 	text.c			text.h			\
-	xst-widget.c		xst-widget.h		\
-	xst-dialog.c		xst-dialog.h		\
-	xst-tool.c		xst-tool.h		\
-	xst-report-hook.c	xst-report-hook.h	\
-	xst-report-line.c	xst-report-line.h	\
-	xst-platform.c		xst-platform.h		\
-	xst-ui.c		xst-ui.h		\
-	xst-util.c		xst-util.h		\
-	xst-conf.c		xst-conf.h		\
-	xst-su.c		xst-su.h		\
-	xst.h						\
-	xst-marshal.h					\
+	gst-widget.c		gst-widget.h		\
+	gst-dialog.c		gst-dialog.h		\
+	gst-tool.c		gst-tool.h		\
+	gst-report-hook.c	gst-report-hook.h	\
+	gst-report-line.c	gst-report-line.h	\
+	gst-platform.c		gst-platform.h		\
+	gst-ui.c		gst-ui.h		\
+	gst-util.c		gst-util.h		\
+	gst-conf.c		gst-conf.h		\
+	gst-su.c		gst-su.h		\
+	gst.h						\
+	gst-marshal.h					\
 	checked.xpm					\
 	unchecked.xpm					\
 	reading.xpm					\
-	xst-types.h
+	gst-types.h
 
 ccenterdir = $(datadir)/control-center
 Systemdir = $(ccenterdir)/System

@@ -23,12 +23,12 @@
 #include <gnome.h>
 #include <gconf/gconf-client.h>
 
-#include "xst-conf.h"
-#include "xst-tool.h"
+#include "gst-conf.h"
+#include "gst-tool.h"
 
 
 static gchar *
-xst_conf_make_key (XstTool *tool, const gchar *local_key)
+gst_conf_make_key (GstTool *tool, const gchar *local_key)
 {
 	gchar *key;
 
@@ -38,28 +38,28 @@ xst_conf_make_key (XstTool *tool, const gchar *local_key)
 }
 
 /**
- * xst_conf_set_boolean:
- * @tool: An XstTool object
+ * gst_conf_set_boolean:
+ * @tool: An GstTool object
  * @key: A string key (path) for an item
  * @value: gboolean value to set
  * 
  * Store boolean @value to @key for @tool. @key is just the name of the variable
- * which will be stored in form of "/XST_CONF_ROOT/$tool_name/@key".
+ * which will be stored in form of "/GST_CONF_ROOT/$tool_name/@key".
  **/
 void
-xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value)
+gst_conf_set_boolean (GstTool *tool, const gchar *key, gboolean value)
 {
 	gchar *main_key;
 	GConfClient* client;
         GError *error = NULL;
 
 	g_return_if_fail (tool != NULL);
-	g_return_if_fail (XST_IS_TOOL (tool));
+	g_return_if_fail (GST_IS_TOOL (tool));
 	g_return_if_fail (key != NULL);
 
 	client = gconf_client_get_default ();
 
-	main_key = xst_conf_make_key (tool, key);
+	main_key = gst_conf_make_key (tool, key);
 
 	gconf_client_set_bool (client, main_key, value, &error);
 
@@ -69,8 +69,8 @@ xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value)
 }
 
 /**
- * xst_conf_get_boolean:
- * @tool: An XstTool object
+ * gst_conf_get_boolean:
+ * @tool: An GstTool object
  * @key: A string key (path) for an item
  * 
  * Retrieve boolean value from given @tool and @key. Use @key in form of
@@ -81,7 +81,7 @@ xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value)
  * by @key or FALSE otherwise.
  **/
 gboolean
-xst_conf_get_boolean (XstTool *tool, const gchar *key)
+gst_conf_get_boolean (GstTool *tool, const gchar *key)
 {
 	gboolean value;
 	gchar *main_key;
@@ -89,12 +89,12 @@ xst_conf_get_boolean (XstTool *tool, const gchar *key)
 	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, FALSE);
-	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);
+	g_return_val_if_fail (GST_IS_TOOL (tool), FALSE);
 	g_return_val_if_fail (key != NULL, FALSE);
 
 	client = gconf_client_get_default ();
 
-	main_key = xst_conf_make_key (tool, key);
+	main_key = gst_conf_make_key (tool, key);
 	
 	value = gconf_client_get_bool (client, main_key, &error);
 
@@ -104,28 +104,28 @@ xst_conf_get_boolean (XstTool *tool, const gchar *key)
 }
 
 /**
- * xst_conf_set_integer:
- * @tool: An XstTool object
+ * gst_conf_set_integer:
+ * @tool: An GstTool object
  * @key: A string key (path) for an item
  * @value: integer value to store
  * 
  * Store integer @value to @key for @tool. @key is just the name of the variable
- * which will be stored in form of "/XST_CONF_ROOT/$tool_name/@key".
+ * which will be stored in form of "/GST_CONF_ROOT/$tool_name/@key".
  **/
 void
-xst_conf_set_integer (XstTool *tool, const gchar *key, gint value)
+gst_conf_set_integer (GstTool *tool, const gchar *key, gint value)
 {
 	gchar *main_key;
 	GConfClient *client;
 	GError *error = NULL;
 	
 	g_return_if_fail (tool != NULL);
-	g_return_if_fail (XST_IS_TOOL (tool));
+	g_return_if_fail (GST_IS_TOOL (tool));
 	g_return_if_fail (key != NULL);
 
 	client = gconf_client_get_default ();
 
-	main_key = xst_conf_make_key (tool, key);
+	main_key = gst_conf_make_key (tool, key);
 	
 	gconf_client_set_int (client, main_key, value, &error);
 
@@ -133,8 +133,8 @@ xst_conf_set_integer (XstTool *tool, const gchar *key, gint value)
 }
 
 /**
- * xst_conf_get_integer:
- * @tool: An XstTool object
+ * gst_conf_get_integer:
+ * @tool: An GstTool object
  * @key: A string key (path) for an item
  * 
  * Retrieve integer value from given @tool and @key. Use @key in form of
@@ -145,7 +145,7 @@ xst_conf_set_integer (XstTool *tool, const gchar *key, gint value)
  * by @key or 0 otherwise.
  **/
 gint
-xst_conf_get_integer (XstTool *tool, const gchar *key)
+gst_conf_get_integer (GstTool *tool, const gchar *key)
 {
 	gint value;
 	gchar *main_key;
@@ -153,12 +153,12 @@ xst_conf_get_integer (XstTool *tool, const gchar *key)
 	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, -1);
-	g_return_val_if_fail (XST_IS_TOOL (tool), -1);
+	g_return_val_if_fail (GST_IS_TOOL (tool), -1);
 	g_return_val_if_fail (key != NULL, -1);
 
 	client = gconf_client_get_default ();
 
-	main_key = xst_conf_make_key (tool, key);
+	main_key = gst_conf_make_key (tool, key);
 	
 	value = gconf_client_get_int (client, main_key, &error);
 
@@ -168,28 +168,28 @@ xst_conf_get_integer (XstTool *tool, const gchar *key)
 }
 
 /**
- * xst_conf_set_string:
- * @tool: An XstTool object
+ * gst_conf_set_string:
+ * @tool: An GstTool object
  * @key: A string key (path) for an item
  * @value: String value to set
  * 
  * Store string @value to @key for @tool. @key is just the name of the variable
- * which will be stored in form of "/XST_CONF_ROOT/$tool_name/@key".
+ * which will be stored in form of "/GST_CONF_ROOT/$tool_name/@key".
  **/
 void
-xst_conf_set_string (XstTool *tool, const gchar *key, const gchar *value)
+gst_conf_set_string (GstTool *tool, const gchar *key, const gchar *value)
 {
 	gchar *main_key;
 	GConfClient *client;
 	GError *error = NULL;
 	
 	g_return_if_fail (tool != NULL);
-	g_return_if_fail (XST_IS_TOOL (tool));
+	g_return_if_fail (GST_IS_TOOL (tool));
 	g_return_if_fail (key != NULL);
 
 	client = gconf_client_get_default ();
 
-	main_key = xst_conf_make_key (tool, key);
+	main_key = gst_conf_make_key (tool, key);
 	
 	gconf_client_set_string (client, main_key, value, &error);
 
@@ -197,8 +197,8 @@ xst_conf_set_string (XstTool *tool, const gchar *key, const gchar *value)
 }
 
 /**
- * xst_conf_get_string:
- * @tool: An XstTool object
+ * gst_conf_get_string:
+ * @tool: An GstTool object
  * @key: A string key (path) for an item
  * 
  * Retrieve string value from given @tool and @key. Use @key in form of
@@ -209,7 +209,7 @@ xst_conf_set_string (XstTool *tool, const gchar *key, const gchar *value)
  * provided by @key or FALSE otherwise. Must be g_free()'d.
  **/
 gchar *
-xst_conf_get_string (XstTool *tool, const gchar *key)
+gst_conf_get_string (GstTool *tool, const gchar *key)
 {
 	gchar *value;
 	gchar *main_key;
@@ -217,12 +217,12 @@ xst_conf_get_string (XstTool *tool, const gchar *key)
 	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, NULL);
-	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
+	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (key != NULL, NULL);
 
 	client = gconf_client_get_default ();
 
-	main_key = xst_conf_make_key (tool, key);
+	main_key = gst_conf_make_key (tool, key);
 	
 	value = gconf_client_get_string (client, main_key, &error);
 

@@ -20,17 +20,17 @@
 
 #include <glib.h>
 #include <string.h>
-#include "xst-util.h"
+#include "gst-util.h"
 
 /**
- * xst_util_nice_hostname: Removes typical superfluous syntax from a network hostname in-place.
+ * gst_util_nice_hostname: Removes typical superfluous syntax from a network hostname in-place.
  * @hostname: Unpretty hostname.
  *
  * Typical formats are "\\hostname\", "//hostname/" and "hostname/". The resulting format
  * is "hostname". The transformation is done in-place.
  **/
 void
-xst_util_nice_hostname (gchar *hostname)
+gst_util_nice_hostname (gchar *hostname)
 {
 	gchar *p0;
 
@@ -60,7 +60,7 @@ xst_util_nice_hostname (gchar *hostname)
 }
 
 /**
- * xst_util_nice_hostname_dup: Removes typical superfluous syntax from a network hostname.
+ * gst_util_nice_hostname_dup: Removes typical superfluous syntax from a network hostname.
  * @hostname: Unpretty hostname.
  *
  * Typical formats are "\\hostname\", "//hostname/" and "hostname/". The resulting format
@@ -69,19 +69,19 @@ xst_util_nice_hostname (gchar *hostname)
  * Return value: The prettified hostname.
  **/
 gchar *
-xst_util_nice_hostname_dup (gchar *hostname)
+gst_util_nice_hostname_dup (gchar *hostname)
 {
 	gchar *new_hostname;
 
 	g_return_val_if_fail (hostname != NULL, NULL);
 
 	new_hostname = g_strdup (hostname);
-	xst_util_nice_hostname (new_hostname);
+	gst_util_nice_hostname (new_hostname);
 	return new_hostname;
 }
 
 /**
- * xst_util_nice_path_dup: Removes typical superfluous syntax from a network path.
+ * gst_util_nice_path_dup: Removes typical superfluous syntax from a network path.
  * @hostname: Unpretty path.
  *
  * Typical formats are "\path", "path/" and "\path\". The resulting format
@@ -90,7 +90,7 @@ xst_util_nice_hostname_dup (gchar *hostname)
  * Return value: The prettified path.
  **/
 gchar *
-xst_util_nice_path_dup (gchar *path)
+gst_util_nice_path_dup (gchar *path)
 {
 	gchar *path1, *path2, *p0;
 
@@ -136,7 +136,7 @@ xst_util_nice_path_dup (gchar *path)
 }
 
 gchar *
-xst_util_strcasestr (const gchar *haystack, const gchar *needle)
+gst_util_strcasestr (const gchar *haystack, const gchar *needle)
 {
 	gchar *haystack_low, *needle_low;
 

@@ -40,7 +40,7 @@
 #include <crypt.h>
 #endif
 
-#include "xst.h"
+#include "gst.h"
 #include "md5.h"
 #include "table.h"
 
@@ -208,13 +208,13 @@ passwd_get_cracklib_dictionary_path (void)
 #ifndef	HAVE_LIBCRACK
 	return NULL;
 #endif
-#ifdef XST_CRACK_LIB_DICT_PATH
-	if (passwd_check_cracklib_dict_path (XST_CRACK_LIB_DICT_PATH))
-		return g_strdup_printf ("%s/cracklib_dict", XST_CRACK_LIB_DICT_PATH);
+#ifdef GST_CRACK_LIB_DICT_PATH
+	if (passwd_check_cracklib_dict_path (GST_CRACK_LIB_DICT_PATH))
+		return g_strdup_printf ("%s/cracklib_dict", GST_CRACK_LIB_DICT_PATH);
 
 	if (!warned) {
 		warned = TRUE;
-		g_warning ("The cracklib dictionary was not found in the location specified [%s].\nsearching for a dictionary", XST_CRACK_LIB_DICT_PATH);
+		g_warning ("The cracklib dictionary was not found in the location specified [%s].\nsearching for a dictionary", GST_CRACK_LIB_DICT_PATH);
 	}
 #endif	
 
@@ -294,5 +294,5 @@ passwd_set (xmlNodePtr node, const gchar *pwd)
 	else
 		buf = g_strdup (crypt (password, rand_str (salt, 2)));
 
-	xst_xml_set_child_content (node, "password", buf);
+	gst_xml_set_child_content (node, "password", buf);
 }

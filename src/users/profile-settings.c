@@ -22,13 +22,13 @@
  */
 
 #include <gtk/gtk.h>
-#include "xst.h"
+#include "gst.h"
 #include "user_group.h"
 #include "table.h"
 #include "user-group-xml.h"
 #include "profile-settings.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 /*GList *groups_list = NULL;*/
 extern GList *groups_list;
 
@@ -59,7 +59,7 @@ profile_settings_clear_dialog ()
 		w->name != NULL;
 		w++)
 	   {
-		   widget = xst_dialog_get_widget (tool->main_dialog, w->name);
+		   widget = gst_dialog_get_widget (tool->main_dialog, w->name);
 		   switch (w->widget_type)
 		   {
 		   case PROFILE_WIDGET_ENTRY:
@@ -87,19 +87,19 @@ profile_settings_save_data (xmlNodePtr node)
 		w->name != NULL;
 		w++)
 	   {
-		   widget = xst_dialog_get_widget (tool->main_dialog, w->name);
+		   widget = gst_dialog_get_widget (tool->main_dialog, w->name);
 		   switch (w->widget_type)
 		   {
 		   case PROFILE_WIDGET_ENTRY:
-			   xst_xml_element_add_with_content (node, w->xml_tag, gtk_entry_get_text (GTK_ENTRY (widget)));
+			   gst_xml_element_add_with_content (node, w->xml_tag, gtk_entry_get_text (GTK_ENTRY (widget)));
 			   break;
 		   case PROFILE_WIDGET_SPIN_BUTTON:
-			   xst_xml_element_add_with_content (node,
+			   gst_xml_element_add_with_content (node,
 							     w->xml_tag,
 							     g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (widget))));
 			   break;
 		   case PROFILE_WIDGET_OPTION_MENU:
-			   xst_xml_element_add_with_content (node,
+			   gst_xml_element_add_with_content (node,
 							     w->xml_tag,
 							     g_list_nth_data (groups_list, gtk_option_menu_get_history (GTK_OPTION_MENU (widget))));
 			   break;
@@ -108,9 +108,9 @@ profile_settings_save_data (xmlNodePtr node)
 		   }
 	   }
 	   
-	   xst_xml_element_add_with_content (node, "mailbox_dir", "/var/mail");
-	   xst_xml_element_add_with_content (node, "skel_dir", "/etc/skel/");
-	   xst_xml_element_add_with_content (node, "login_defs", "1");
+	   gst_xml_element_add_with_content (node, "mailbox_dir", "/var/mail");
+	   gst_xml_element_add_with_content (node, "skel_dir", "/etc/skel/");
+	   gst_xml_element_add_with_content (node, "login_defs", "1");
 }
 
 gchar*
@@ -119,22 +119,22 @@ profile_settings_check (void)
 	   GtkWidget *widget;
 	   gchar *value;
 	   
-	   widget = xst_dialog_get_widget (tool->main_dialog, "profile_settings_name");
+	   widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_name");
 	   value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
 	   if (strlen (value) <= 0)
 			 return _("The profile must have a name");
 
-	   widget = xst_dialog_get_widget (tool->main_dialog, "profile_settings_home");
+	   widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_home");
 	   value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
 	   if (strlen (value) <= 0)
 			 return _("The profile must have a default home");
 
-	   widget = xst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
+	   widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
 	   value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
 	   if (strlen (value) <= 0)
 			 return _("The profile must have a default shell");
 
-	   widget = xst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
+	   widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
 	   value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
 	   if (strlen (value) <= 0)
 			 return _("The profile must have a default shell");
@@ -155,21 +155,21 @@ profile_settings_set_data (xmlNodePtr node)
 	     w->name != NULL;
 	     w++)
 	{
-		widget = xst_dialog_get_widget (tool->main_dialog, w->name);
+		widget = gst_dialog_get_widget (tool->main_dialog, w->name);
 		switch (w->widget_type)
 		{
 		case PROFILE_WIDGET_ENTRY:
-			value = xst_xml_get_child_content (node, w->xml_tag);
+			value = gst_xml_get_child_content (node, w->xml_tag);
 			gtk_entry_set_text (GTK_ENTRY (widget), value);
 			g_free (value);
 			break;
 		case PROFILE_WIDGET_SPIN_BUTTON:
-			value = xst_xml_get_child_content (node, w->xml_tag);
+			value = gst_xml_get_child_content (node, w->xml_tag);
 			gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), g_ascii_strtod (value, NULL));
 			g_free (value);
 			break;
 		case PROFILE_WIDGET_OPTION_MENU:
-			value = xst_xml_get_child_content (node, w->xml_tag);
+			value = gst_xml_get_child_content (node, w->xml_tag);
 			element = g_list_first (groups_list);
 
 			while ((element != NULL) && (strcmp (element->data, value) != 0))
@@ -197,7 +197,7 @@ check_profile_delete (xmlNodePtr node)
 	g_return_val_if_fail (node != NULL, FALSE);
 
 	parent = GTK_WINDOW (tool->main_dialog);
-	profile_name = xst_xml_get_child_content (node, "name");
+	profile_name = gst_xml_get_child_content (node, "name");
 
 	if (!profile_name)
 	{
@@ -231,7 +231,7 @@ gboolean
 profile_delete (xmlNodePtr node)
 {
 	if (check_profile_delete (node)) {
-		xst_xml_element_destroy (node);
+		gst_xml_element_destroy (node);
 		return TRUE;
 	}
 

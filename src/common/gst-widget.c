@@ -21,25 +21,25 @@
 
 #include <config.h>
 
-#include "xst-widget.h"
-#include "xst-dialog.h"
+#include "gst-widget.h"
+#include "gst-dialog.h"
 
 
 void
-xst_widget_apply_policy (XstWidget *xw)
+gst_widget_apply_policy (GstWidget *xw)
 {
-	XstDialogComplexity complexity;
+	GstDialogComplexity complexity;
 	gboolean have_access;
-	XstWidgetMode mode;
+	GstWidgetMode mode;
 
 	g_return_if_fail (xw != NULL);
 
-	complexity = xst_dialog_get_complexity (xw->dialog);
-	have_access = xst_tool_get_access (xw->dialog->tool);
+	complexity = gst_dialog_get_complexity (xw->dialog);
+	have_access = gst_tool_get_access (xw->dialog->tool);
 
-	if (complexity == XST_DIALOG_BASIC)
+	if (complexity == GST_DIALOG_BASIC)
 		mode = xw->basic;
-	else if (complexity == XST_DIALOG_ADVANCED)
+	else if (complexity == GST_DIALOG_ADVANCED)
 		mode = xw->advanced;
 	else
 	{
@@ -52,17 +52,17 @@ xst_widget_apply_policy (XstWidget *xw)
 
 	/* Show or hide the widget. */
 
-	if (mode == XST_WIDGET_MODE_HIDDEN)
+	if (mode == GST_WIDGET_MODE_HIDDEN)
 		gtk_widget_hide (xw->widget);
-	else if (mode == XST_WIDGET_MODE_INSENSITIVE ||
-		 mode == XST_WIDGET_MODE_SENSITIVE)
+	else if (mode == GST_WIDGET_MODE_INSENSITIVE ||
+		 mode == GST_WIDGET_MODE_SENSITIVE)
 		gtk_widget_show (xw->widget);
 	else
 		g_error ("Unhandled widget mode.");
 
 	/* Sensitize or desensitize the widget. Done separately for readability. */
 
-	if (mode == XST_WIDGET_MODE_INSENSITIVE ||
+	if (mode == GST_WIDGET_MODE_INSENSITIVE ||
 	    (have_access == FALSE && xw->need_access == TRUE))
 		gtk_widget_set_sensitive (xw->widget, FALSE);
 	else
@@ -70,16 +70,16 @@ xst_widget_apply_policy (XstWidget *xw)
 }
 
 
-XstWidget *
-xst_widget_new_full (GtkWidget *w, XstDialog *d, XstWidgetMode basic, XstWidgetMode advanced,
+GstWidget *
+gst_widget_new_full (GtkWidget *w, GstDialog *d, GstWidgetMode basic, GstWidgetMode advanced,
 		     gboolean need_access, gboolean user_sensitive)
 {
-	XstWidget *xw;
+	GstWidget *xw;
 
 	g_return_val_if_fail (w != NULL, NULL);
 	g_return_val_if_fail (d != NULL, NULL);
 
-	xw = g_new0 (XstWidget, 1);
+	xw = g_new0 (GstWidget, 1);
 
 	xw->widget         = w;
 	xw->dialog         = d;
@@ -88,29 +88,29 @@ xst_widget_new_full (GtkWidget *w, XstDialog *d, XstWidgetMode basic, XstWidgetM
 	xw->need_access    = need_access;
 
 	if (user_sensitive)
-		xw->user = XST_WIDGET_MODE_SENSITIVE;
+		xw->user = GST_WIDGET_MODE_SENSITIVE;
 	else
-		xw->user = XST_WIDGET_MODE_INSENSITIVE;
+		xw->user = GST_WIDGET_MODE_INSENSITIVE;
 
-	d->xst_widget_list = g_slist_prepend (d->xst_widget_list, xw);
+	d->gst_widget_list = g_slist_prepend (d->gst_widget_list, xw);
 	
 	return xw;
 }
 
-XstWidget *
-xst_widget_new (XstDialog *dialog, XstWidgetPolicy policy)
+GstWidget *
+gst_widget_new (GstDialog *dialog, GstWidgetPolicy policy)
 {
-	return xst_widget_new_full (xst_dialog_get_widget (dialog, policy.widget),
+	return gst_widget_new_full (gst_dialog_get_widget (dialog, policy.widget),
 				    dialog,
 				    policy.basic, policy.advanced,
 				    policy.need_access, policy.user_sensitive);
 }
 
 void
-xst_widget_set_user_mode (XstWidget *xw, XstWidgetMode mode)
+gst_widget_set_user_mode (GstWidget *xw, GstWidgetMode mode)
 {
 	xw->user = mode;
-	xst_widget_apply_policy (xw);
+	gst_widget_apply_policy (xw);
 }
 
 
@@ -118,10 +118,10 @@ xst_widget_set_user_mode (XstWidget *xw, XstWidgetMode mode)
  * it are cleaned out. */
 
 void
-xst_widget_set_user_sensitive (XstWidget *xw, gboolean user_sensitive)
+gst_widget_set_user_sensitive (GstWidget *xw, gboolean user_sensitive)
 {
 	if (user_sensitive)
-		xst_widget_set_user_mode (xw, XST_WIDGET_MODE_SENSITIVE);
+		gst_widget_set_user_mode (xw, GST_WIDGET_MODE_SENSITIVE);
 	else
-		xst_widget_set_user_mode (xw, XST_WIDGET_MODE_INSENSITIVE);
+		gst_widget_set_user_mode (xw, GST_WIDGET_MODE_INSENSITIVE);
 }

@@ -50,13 +50,13 @@ typedef struct
 void              table_create            (void);
 
 void              table_populate          (xmlNodePtr root);
-void              boot_table_update_state (XstDialogComplexity);
+void              boot_table_update_state (GstDialogComplexity);
 
 gchar            *boot_value_label        (xmlNodePtr node); 
 gchar            *boot_value_append       (xmlNodePtr node); 
 gboolean          boot_value_default_as_boolean (xmlNodePtr node);
 GdkPixbuf*        boot_value_default      (xmlNodePtr node);
-XstBootImageType  boot_value_type         (xmlNodePtr node);
+GstBootImageType  boot_value_type         (xmlNodePtr node);
 gchar            *boot_value_type_char    (xmlNodePtr node, gboolean bare);
 void             *boot_value_image        (xmlNodePtr node, gboolean bare);
 void             *boot_value_device       (xmlNodePtr node, gboolean bare);
@@ -67,11 +67,11 @@ void		  boot_table_clear	  (void);
 
 void              boot_value_set_default  (xmlNodePtr node);
 void              boot_value_set_label    (xmlNodePtr node, const gchar *val);
-void              boot_value_set_image    (xmlNodePtr node, const gchar *val, XstBootImageType type);
+void              boot_value_set_image    (xmlNodePtr node, const gchar *val, GstBootImageType type);
 void              boot_value_set_dev      (xmlNodePtr node, gchar *val);
 void              boot_value_set_root     (xmlNodePtr node, const gchar *val);
 void              boot_value_set_append   (xmlNodePtr node, const gchar *val);
-void              boot_value_set_type     (xmlNodePtr node, XstBootImageType type);
+void              boot_value_set_type     (xmlNodePtr node, GstBootImageType type);
 
 xmlNodePtr        boot_table_add          (void);
 

@@ -19,27 +19,33 @@
  * Authors: Hans Petter Jansson <hpj@ximian.com>
  */
 
-#ifndef XST_PLATFORM_H
-#define XST_PLATFORM_H
+#ifndef GST_REPORT_LINE_H
+#define GST_REPORT_LINE_H
 
-#include "xst-types.h"
-#include "xst-tool.h"
+#include "gst-types.h"
+#include "gst-tool.h"
 
-struct _XstPlatform {
-	gchar *name;
+struct _GstReportLine {
+	
+	GstReportMajor major;
+	
 	gchar *key;
+	gchar *fmt;
+	gchar **argv;
+	gchar *message;
+	guint handled : 1;
 };
 
-XstPlatform     *xst_platform_new                  (const gchar *key, const gchar *name);
-XstPlatform     *xst_platform_new_from_node        (xmlNodePtr node);
-XstPlatform     *xst_platform_new_from_report_line (XstReportLine *rline);
-XstPlatform     *xst_platform_dup                  (XstPlatform *platform);
-gint             xst_platform_cmp                  (XstPlatform *a, XstPlatform *b);
+GstReportLine     *gst_report_line_new              (GstReportMajor major, gchar *key,
+						     gchar *fmt, gchar **argv);
+GstReportLine     *gst_report_line_new_from_string  (gchar *string);
+void               gst_report_line_free             (GstReportLine *line);
 
-void             xst_platform_free                 (XstPlatform *platform);
+const gchar       *gst_report_line_get_key          (GstReportLine *line);
+const gchar      **gst_report_line_get_argv         (GstReportLine *line);
+const gchar       *gst_report_line_get_message      (GstReportLine *line);
+gboolean           gst_report_line_get_handled      (GstReportLine *line);
 
-const gchar     *xst_platform_get_key              (XstPlatform *platform);
-const GdkPixbuf	*xst_platform_get_pixmap	   (XstPlatform *platform);
-const gchar     *xst_platform_get_name             (XstPlatform *platform);
+void               gst_report_line_set_handled      (GstReportLine *line, gboolean handled);
 
-#endif /* XST_PLATFORM_H */
+#endif /* GST_REPORT_LINE_H */

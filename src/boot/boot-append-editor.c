@@ -22,7 +22,7 @@
 
 #include "boot-append-editor.h"
 
-extern XstTool *tool;
+extern GstTool *tool;
 
 static void boot_append_editor_class_init (BootAppendEditorClass *class);
 static void boot_append_editor_finalize   (GObject *obj);
@@ -89,7 +89,7 @@ editor_append_response (GtkDialog *dialog, gint response, gpointer data)
 			 {
 				    if (append)
 				    {   
-						  xst_ui_entry_set_text (GTK_ENTRY (editor->gui->settings->append), g_strdup (append));
+						  gst_ui_entry_set_text (GTK_ENTRY (editor->gui->settings->append), g_strdup (append));
 						  g_free (append);
 				    }
 			 }

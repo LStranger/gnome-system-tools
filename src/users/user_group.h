@@ -28,7 +28,7 @@
 
 #include <gnome.h>
 
-#include "xst.h"
+#include "gst.h"
 
 #define IDMAX 100000
 
@@ -50,7 +50,7 @@ typedef struct
 
 xmlNodePtr get_root_node (gint tbl);
 xmlNodePtr get_db_node (xmlNodePtr node);
-gchar *my_xst_xml_element_get_content (xmlNodePtr node);
+gchar *my_gst_xml_element_get_content (xmlNodePtr node);
 gboolean check_node_visibility (xmlNodePtr node);
 
 /*
