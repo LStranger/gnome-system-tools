@@ -32,7 +32,7 @@ CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
 EXTRA_DIST = $(desktop).in network.pam $(security).in
 
 $(desktop): %.desktop: %.desktop.in
-	sed 's#Icon=.*#Icon='$(pixmapsdir)'/network.png#' < $< > $@
+	sed 's#Icon=.*#Icon='$(pixmapsdir)'/networking.png#' < $< > $@
 
 $(desktop).menu: $(desktop)
 	sed 's#Exec=.*#Exec=network-admin#' < $< > $@

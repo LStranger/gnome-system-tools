@@ -5,6 +5,7 @@
  */
 
 gchar *s = N_("Networking Settings");
+gchar *s = N_("The name of this computer.");
 gchar *s = N_("Host name:");
 gchar *s = N_("Enable windows networking (Samba)");
 gchar *s = N_("Windows Networking");
@@ -12,6 +13,7 @@ gchar *s = N_("Description:");
 gchar *s = N_("Workgroup:");
 gchar *s = N_("WINS server:");
 gchar *s = N_("General");
+gchar *s = N_("How other computers are accessed.");
 gchar *s = N_("Enabled");
 gchar *s = N_("Icon");
 gchar *s = N_("Connection description");
@@ -19,11 +21,13 @@ gchar *s = N_("Add...");
 gchar *s = N_("Delete");
 gchar *s = N_("Configure...");
 gchar *s = N_("Connections");
+gchar *s = N_("How the names of other computers are found.");
 gchar *s = N_("Obtain DNS information from DHCP / BOOTP server");
 gchar *s = N_("Domain:");
 gchar *s = N_("DNS Servers:");
 gchar *s = N_("Search Domains:");
 gchar *s = N_("DNS");
+gchar *s = N_("Names of other computers.");
 gchar *s = N_("IP address");
 gchar *s = N_("Names");
 gchar *s = N_("IP address:");
