@@ -32,17 +32,16 @@
 /* Scroll step increment */
 
 #define SCROLL_STEP_SIZE 32
-
 #define E_MAP_GET_WIDTH(map) gdk_pixbuf_get_width(((EMapPrivate *) E_MAP(map)->priv)->map_render_pixbuf)
 #define E_MAP_GET_HEIGHT(map) gdk_pixbuf_get_height(((EMapPrivate *) E_MAP(map)->priv)->map_render_pixbuf)
 
 
 typedef enum
 {
-  E_MAP_ZOOMED_IN,
-  E_MAP_ZOOMED_OUT,
-  E_MAP_ZOOMING_IN,
-  E_MAP_ZOOMING_OUT
+	E_MAP_ZOOMED_IN,
+	E_MAP_ZOOMED_OUT,
+	E_MAP_ZOOMING_IN,
+	E_MAP_ZOOMING_OUT
 }
 EMapZoomState;
 
@@ -50,23 +49,22 @@ EMapZoomState;
 /* Private part of the EMap structure */
 typedef struct
 {
-  /* Pointer to map image */
-  GdkPixbuf *map_pixbuf,
-            *map_render_pixbuf;
+	/* Pointer to map image */
+	GdkPixbuf *map_pixbuf, *map_render_pixbuf;
 
-  /* Settings */
-  gboolean smooth_zoom;
-  
-  /* Adjustments for scrolling */
-  GtkAdjustment *hadj;
-  GtkAdjustment *vadj;
+	/* Settings */
+	gboolean smooth_zoom;
 
-  /* Current scrolling offsets */
-  int xofs, yofs;
+	/* Adjustments for scrolling */
+	GtkAdjustment *hadj;
+	GtkAdjustment *vadj;
 
-  /* Realtime zoom data */
-  EMapZoomState zoom_state;
-  double zoom_target_long, zoom_target_lat;
+	/* Current scrolling offsets */
+	int xofs, yofs;
+
+	/* Realtime zoom data */
+	EMapZoomState zoom_state;
+	double zoom_target_long, zoom_target_lat;
 }
 EMapPrivate;
 
@@ -74,42 +72,32 @@ EMapPrivate;
 /* Signal IDs */
 enum
 {
-  LAST_SIGNAL
+	LAST_SIGNAL
 };
 
-static void e_map_class_init(EMapClass * class);
-static void e_map_init(EMap * view);
-static void e_map_destroy(GtkObject * object);
-static void e_map_finalize(GtkObject * object);
+static void e_map_class_init (EMapClass *class);
+static void e_map_init (EMap *view);
+static void e_map_destroy (GtkObject *object);
+static void e_map_finalize (GtkObject *object);
+static void e_map_unmap (GtkWidget *widget);
+static void e_map_realize (GtkWidget *widget);
+static void e_map_unrealize (GtkWidget *widget);
+static void e_map_size_request (GtkWidget *widget, GtkRequisition *requisition);
+static void e_map_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
+static void e_map_draw (GtkWidget *widget, GdkRectangle *area);
+static gint e_map_button_press (GtkWidget *widget, GdkEventButton *event);
+static gint e_map_button_release (GtkWidget *widget, GdkEventButton *event);
+static gint e_map_motion (GtkWidget *widget, GdkEventMotion *event);
+static gint e_map_expose (GtkWidget *widget, GdkEventExpose *event);
+static gint e_map_key_press (GtkWidget *widget, GdkEventKey *event);
+static void e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustment *vadj);
 
-static void e_map_unmap(GtkWidget * widget);
-static void e_map_realize(GtkWidget * widget);
-static void e_map_unrealize(GtkWidget * widget);
-static void e_map_size_request(GtkWidget * widget,
-                                         GtkRequisition * requisition);
-static void e_map_size_allocate(GtkWidget * widget,
-                                          GtkAllocation * allocation);
-static void e_map_draw(GtkWidget * widget, GdkRectangle * area);
-static gint e_map_button_press(GtkWidget * widget,
-                                         GdkEventButton * event);
-static gint e_map_button_release(GtkWidget * widget,
-                                           GdkEventButton * event);
-static gint e_map_motion(GtkWidget * widget, GdkEventMotion * event);
-static gint e_map_expose(GtkWidget * widget, GdkEventExpose * event);
-static gint e_map_key_press(GtkWidget * widget, GdkEventKey * event);
-
-static void e_map_set_scroll_adjustments(GtkWidget * widget,
-                                                   GtkAdjustment * hadj,
-                                                   GtkAdjustment * vadj);
+static void update_render_pixbuf (EMap *map, ArtFilterLevel interp);
+static void set_scroll_area (EMap *view);
 
 static GtkWidgetClass *parent_class;
 
 static guint e_map_signals[LAST_SIGNAL];
-
-
-
-static void update_render_pixbuf(EMap *map, ArtFilterLevel interp);
-static void set_scroll_area(EMap *view);
 
 
 /**
@@ -121,970 +109,881 @@ static void set_scroll_area(EMap *view);
  * 
  * Return value: The type ID of the #EMap class.
  **/
-GtkType e_map_get_type(void)
+GtkType
+e_map_get_type (void)
 {
-  static GtkType e_map_type = 0;
+	static GtkType e_map_type = 0;
 
-  if (!e_map_type)
-  {
-    static const GtkTypeInfo e_map_info = {
-      "EMap",
-      sizeof(EMap),
-      sizeof(EMapClass),
-      (GtkClassInitFunc) e_map_class_init,
-      (GtkObjectInitFunc) e_map_init,
-      NULL,                     /* reserved_1 */
-      NULL,                     /* reserved_2 */
-      (GtkClassInitFunc) NULL
-    };
+	if (!e_map_type)
+	{
+		static const GtkTypeInfo e_map_info =
+		{
+			"EMap",
+			sizeof (EMap),
+			sizeof (EMapClass),
+			(GtkClassInitFunc) e_map_class_init,
+			(GtkObjectInitFunc) e_map_init,
+			NULL,	/* reserved_1 */
+			NULL,	/* reserved_2 */
+			(GtkClassInitFunc) NULL
+		};
 
-    e_map_type =
-      gtk_type_unique(GTK_TYPE_WIDGET, &e_map_info);
-  }
+		e_map_type = gtk_type_unique (GTK_TYPE_WIDGET, &e_map_info);
+	}
 
-  return e_map_type;
+	return e_map_type;
 }
 
 /* Class initialization function for the image view */
-static void e_map_class_init(EMapClass * class)
+static void
+e_map_class_init (EMapClass *class)
 {
-  GtkObjectClass *object_class;
-  GtkWidgetClass *widget_class;
+	GtkObjectClass *object_class;
+	GtkWidgetClass *widget_class;
 
-  object_class = (GtkObjectClass *) class;
-  widget_class = (GtkWidgetClass *) class;
+	object_class = (GtkObjectClass *) class;
+	widget_class = (GtkWidgetClass *) class;
 
-  parent_class = gtk_type_class(GTK_TYPE_WIDGET);
+	parent_class = gtk_type_class (GTK_TYPE_WIDGET);
 
-  object_class->destroy = e_map_destroy;
-  object_class->finalize = e_map_finalize;
+	object_class->destroy = e_map_destroy;
+	object_class->finalize = e_map_finalize;
 
-  class->set_scroll_adjustments = e_map_set_scroll_adjustments;
-  widget_class->set_scroll_adjustments_signal =
-    gtk_signal_new("set_scroll_adjustments",
-                   GTK_RUN_LAST,
-                   object_class->type,
-                   GTK_SIGNAL_OFFSET(EMapClass,
-                                     set_scroll_adjustments),
-                   gtk_marshal_NONE__POINTER_POINTER, GTK_TYPE_NONE, 2,
-                   GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
+	class->set_scroll_adjustments = e_map_set_scroll_adjustments;
+	widget_class->set_scroll_adjustments_signal = gtk_signal_new ("set_scroll_adjustments", GTK_RUN_LAST, object_class->type, GTK_SIGNAL_OFFSET (EMapClass, set_scroll_adjustments), gtk_marshal_NONE__POINTER_POINTER, GTK_TYPE_NONE, 2, GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
 
-  gtk_object_class_add_signals(object_class, e_map_signals,
-                               LAST_SIGNAL);
+	gtk_object_class_add_signals (object_class, e_map_signals, LAST_SIGNAL);
 
-  widget_class->unmap = e_map_unmap;
-  widget_class->realize = e_map_realize;
-  widget_class->unrealize = e_map_unrealize;
-  widget_class->size_request = e_map_size_request;
-  widget_class->size_allocate = e_map_size_allocate;
-  widget_class->draw = e_map_draw;
-  widget_class->button_press_event = e_map_button_press;
-  widget_class->button_release_event = e_map_button_release;
-  widget_class->motion_notify_event = e_map_motion;
-  widget_class->expose_event = e_map_expose;
-  widget_class->key_press_event = e_map_key_press;
+	widget_class->unmap = e_map_unmap;
+	widget_class->realize = e_map_realize;
+	widget_class->unrealize = e_map_unrealize;
+	widget_class->size_request = e_map_size_request;
+	widget_class->size_allocate = e_map_size_allocate;
+	widget_class->draw = e_map_draw;
+	widget_class->button_press_event = e_map_button_press;
+	widget_class->button_release_event = e_map_button_release;
+	widget_class->motion_notify_event = e_map_motion;
+	widget_class->expose_event = e_map_expose;
+	widget_class->key_press_event = e_map_key_press;
 }
 
 
-static gint load_map_background(EMap *view, gchar *name)
+static gint
+load_map_background (EMap *view, gchar *name)
 {
-  EMapPrivate *priv;
-  GdkPixbuf *pb0;
+	EMapPrivate *priv;
+	GdkPixbuf *pb0;
 
-  priv = view->priv;
+	priv = view->priv;
 
-  pb0 = gdk_pixbuf_new_from_file(name);
-  if (!pb0) return(FALSE);
-  
-  if (priv->map_pixbuf) gdk_pixbuf_unref(priv->map_pixbuf);
-  priv->map_pixbuf = pb0;
-  update_render_pixbuf(view, GDK_INTERP_BILINEAR);
+	pb0 = gdk_pixbuf_new_from_file (name);
+	if (!pb0)
+		return (FALSE);
 
-  return(TRUE);
+	if (priv->map_pixbuf) gdk_pixbuf_unref (priv->map_pixbuf);
+	priv->map_pixbuf = pb0;
+	update_render_pixbuf (view, GDK_INTERP_BILINEAR);
+
+	return (TRUE);
 }
 
 /* Object initialization function for the image view */
-static void e_map_init(EMap * view)
+static void
+e_map_init (EMap *view)
 {
-  EMapPrivate *priv;
+	EMapPrivate *priv;
 
-  priv = g_new0(EMapPrivate, 1);
-  view->priv = priv;
+	priv = g_new0 (EMapPrivate, 1);
+	view->priv = priv;
 
-  load_map_background(view, "map480.png");  /* TODO: Dynamize this */
-  priv->smooth_zoom = TRUE;
-  priv->zoom_state = E_MAP_ZOOMED_OUT;
+	load_map_background (view, "map480.png");	/* TODO: Dynamize this */
+	priv->smooth_zoom = TRUE;
+	priv->zoom_state = E_MAP_ZOOMED_OUT;
 
-  GTK_WIDGET_SET_FLAGS(view, GTK_CAN_FOCUS);
-  GTK_WIDGET_UNSET_FLAGS(view, GTK_NO_WINDOW);
+	GTK_WIDGET_SET_FLAGS (view, GTK_CAN_FOCUS);
+	GTK_WIDGET_UNSET_FLAGS (view, GTK_NO_WINDOW);
 }
 
 /* Destroy handler for the image view */
-static void e_map_destroy(GtkObject * object)
+static void
+e_map_destroy (GtkObject *object)
 {
-  EMap *view;
-  EMapPrivate *priv;
+	EMap *view;
+	EMapPrivate *priv;
 
-  g_return_if_fail(object != NULL);
-  g_return_if_fail(IS_E_MAP(object));
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_E_MAP (object));
 
-  view = E_MAP(object);
-  priv = view->priv;
+	view = E_MAP (object);
+	priv = view->priv;
 
-  gtk_signal_disconnect_by_data(GTK_OBJECT(priv->hadj), view);
-  gtk_signal_disconnect_by_data(GTK_OBJECT(priv->vadj), view);
+	gtk_signal_disconnect_by_data (GTK_OBJECT (priv->hadj), view);
+	gtk_signal_disconnect_by_data (GTK_OBJECT (priv->vadj), view);
 
-  if (GTK_OBJECT_CLASS(parent_class)->destroy)
-    (*GTK_OBJECT_CLASS(parent_class)->destroy) (object);
+	if (GTK_OBJECT_CLASS (parent_class)->destroy)
+		(*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
 /* Finalize handler for the image view */
-static void e_map_finalize(GtkObject * object)
+static void
+e_map_finalize (GtkObject *object)
 {
-  EMap *view;
-  EMapPrivate *priv;
+	EMap *view;
+	EMapPrivate *priv;
 
-  g_return_if_fail(object != NULL);
-  g_return_if_fail(IS_E_MAP(object));
+	g_return_if_fail (object != NULL);
+	g_return_if_fail (IS_E_MAP (object));
 
-  view = E_MAP(object);
-  priv = view->priv;
+	view = E_MAP (object);
+	priv = view->priv;
 
-  gtk_object_unref(GTK_OBJECT(priv->hadj));
-  priv->hadj = NULL;
+	gtk_object_unref (GTK_OBJECT (priv->hadj));
+	priv->hadj = NULL;
 
-  gtk_object_unref(GTK_OBJECT(priv->vadj));
-  priv->vadj = NULL;
+	gtk_object_unref (GTK_OBJECT (priv->vadj));
+	priv->vadj = NULL;
 
-  /* TODO: Unref pixbufs here */
-  
-  g_free(priv);
-  view->priv = NULL;
+	/* TODO: Unref pixbufs here */
 
-  if (GTK_OBJECT_CLASS(parent_class)->finalize)
-    (*GTK_OBJECT_CLASS(parent_class)->finalize) (object);
+	g_free (priv);
+	view->priv = NULL;
+
+	if (GTK_OBJECT_CLASS (parent_class)->finalize)
+		(*GTK_OBJECT_CLASS (parent_class)->finalize) (object);
 }
-
-
-
-/* Drawing core */
 
 
 static void
-update_render_pixbuf(EMap *map, ArtFilterLevel interp)
+update_render_pixbuf (EMap *map, ArtFilterLevel interp)
 {
-  EMapPrivate *priv;
-  int width, height,
-      orig_width, orig_height;
-  double zoom;
+	EMapPrivate *priv;
+	int width, height, orig_width, orig_height;
+	double zoom;
 
-  /* Set up value shortcuts */
+	/* Set up value shortcuts */
 
-  priv = map->priv;
-  width = GTK_WIDGET(map)->allocation.width;
-  height = GTK_WIDGET(map)->allocation.height;
-  orig_width = gdk_pixbuf_get_width(priv->map_pixbuf);
-  orig_height = gdk_pixbuf_get_height(priv->map_pixbuf);
+	priv = map->priv;
+	width = GTK_WIDGET (map)->allocation.width;
+	height = GTK_WIDGET (map)->allocation.height;
+	orig_width = gdk_pixbuf_get_width (priv->map_pixbuf);
+	orig_height = gdk_pixbuf_get_height (priv->map_pixbuf);
 
-  /* Compute scaled width and height based on the extreme dimension */
+	/* Compute scaled width and height based on the extreme dimension */
 
-  if ((double) width / orig_width > (double) height / orig_height)
-  {
-    zoom = (double) width / (double) orig_width;
-  }
-  else
-  {
-    zoom = (double) height / (double) orig_height;
-  }
+	if ((double) width / orig_width > (double) height / orig_height)
+	{
+		zoom = (double) width / (double) orig_width;
+	}
+	else
+	{
+		zoom = (double) height / (double) orig_height;
+	}
 
-  if (priv->zoom_state == E_MAP_ZOOMED_IN) zoom *= 2.0;
-  height = (orig_height * zoom) + 0.5;
-  width = (orig_width * zoom) + 0.5;
+	if (priv->zoom_state == E_MAP_ZOOMED_IN) zoom *= 2.0;
+	height = (orig_height * zoom) + 0.5;
+	width = (orig_width * zoom) + 0.5;
 
-  /* Reallocate the pixbuf */
+	/* Reallocate the pixbuf */
 
-  if (priv->map_render_pixbuf) gdk_pixbuf_unref(priv->map_render_pixbuf);
-  priv->map_render_pixbuf = gdk_pixbuf_new(GDK_COLORSPACE_RGB,
-                                           FALSE,  /* No alpha */
-                                           8,
-                                           width,
-                                           height);
+	if (priv->map_render_pixbuf)
+		gdk_pixbuf_unref (priv->map_render_pixbuf);
+	priv->map_render_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE,	/* No alpha */
+						  8, width, height);
 
-  /* Compute image offsets with respect to window */
-  
-  set_scroll_area(map);
-  
-  /* Scale the original map into the rendering pixbuf */
+	/* Compute image offsets with respect to window */
 
-  gdk_pixbuf_scale(priv->map_pixbuf,
-                   priv->map_render_pixbuf,
-                   0, 0,  /* Dest (x, y) */
-                   width, height,
-                   0, 0,  /* Offset (x, y) */
-                   zoom, zoom,  /* Scale (x, y) */
-                   interp);
+	set_scroll_area (map);
+
+	/* Scale the original map into the rendering pixbuf */
+
+	gdk_pixbuf_scale (priv->map_pixbuf, priv->map_render_pixbuf, 0, 0,	/* Dest (x, y) */
+			  width, height, 0, 0,	/* Offset (x, y) */
+			  zoom, zoom,	/* Scale (x, y) */
+			  interp);
 }
 
 
 /* Queues a repaint of the specified area in window coordinates */
 static void
-request_paint_area(EMap * view, GdkRectangle * area)
+request_paint_area (EMap *view, GdkRectangle *area)
 {
-  EMapPrivate *priv;
-  int width, height;
+	EMapPrivate *priv;
+	int width, height;
 
 
-  if (!GTK_WIDGET_DRAWABLE(view)) return;
+	if (!GTK_WIDGET_DRAWABLE (view)) return;
 
-  priv = view->priv;
-  if (!priv->map_render_pixbuf) return;
+	priv = view->priv;
+	if (!priv->map_render_pixbuf) return;
 
-  width = MIN(area->width, E_MAP_GET_WIDTH(view));
-  height = MIN(area->height, E_MAP_GET_HEIGHT(view));
+	width = MIN (area->width, E_MAP_GET_WIDTH (view));
+	height = MIN (area->height, E_MAP_GET_HEIGHT (view));
 
-  /* This satisfies paranoia. To be removed */
+	/* This satisfies paranoia. To be removed */
 
-  if (priv->xofs + width > gdk_pixbuf_get_width(priv->map_render_pixbuf))
-    width = gdk_pixbuf_get_width(priv->map_render_pixbuf) - priv->xofs;
+	if (priv->xofs + width > gdk_pixbuf_get_width (priv->map_render_pixbuf))
+		width = gdk_pixbuf_get_width (priv->map_render_pixbuf) - priv->xofs;
 
-  if (priv->yofs + height > gdk_pixbuf_get_height(priv->map_render_pixbuf))
-    height = gdk_pixbuf_get_height(priv->map_render_pixbuf) - priv->yofs;
+	if (priv->yofs + height > gdk_pixbuf_get_height (priv->map_render_pixbuf))
+		height = gdk_pixbuf_get_height (priv->map_render_pixbuf) - priv->yofs;
 
-  /* Short-circuit the fast case to avoid a memcpy() */
+	/* Short-circuit the fast case to avoid a memcpy() */
 
-  if (/* priv->zoom == 1.0 && */
-      gdk_pixbuf_get_colorspace (priv->map_render_pixbuf) == GDK_COLORSPACE_RGB &&
-      !gdk_pixbuf_get_has_alpha (priv->map_render_pixbuf) &&
-      gdk_pixbuf_get_bits_per_sample (priv->map_render_pixbuf) == 8) 
-  {
-    guchar *pixels;
-    int rowstride;
+	if (gdk_pixbuf_get_colorspace (priv->map_render_pixbuf) == GDK_COLORSPACE_RGB && !gdk_pixbuf_get_has_alpha (priv->map_render_pixbuf) &&
+	    gdk_pixbuf_get_bits_per_sample (priv->map_render_pixbuf) == 8)
+	{
+		guchar *pixels;
+		int rowstride;
 
-    rowstride = gdk_pixbuf_get_rowstride (priv->map_render_pixbuf);
-
-    pixels = gdk_pixbuf_get_pixels (priv->map_render_pixbuf) +
-	     (area->y + priv->yofs) * rowstride +
-             3 * (area->x + priv->xofs);
-
-    gdk_draw_rgb_image_dithalign (GTK_WIDGET (view)->window,
-                                  GTK_WIDGET (view)->style->black_gc,
-                                  area->x, area->y,
-                                  width, height,
-                                  GDK_RGB_DITHER_NORMAL,
-                                  pixels,
-                                  rowstride,
-                                  0, 0);
-    return;
-  }
+		rowstride = gdk_pixbuf_get_rowstride (priv->map_render_pixbuf);
+		pixels = gdk_pixbuf_get_pixels (priv->map_render_pixbuf) + (area->y + priv->yofs) * rowstride + 3 * (area->x + priv->xofs);
+		gdk_draw_rgb_image_dithalign (GTK_WIDGET (view)->window, GTK_WIDGET (view)->style->black_gc, area->x, area->y, width, height, GDK_RGB_DITHER_NORMAL, pixels, rowstride, 0, 0);
+		return;
+	}
 
 #ifdef DEBUG
-  printf("Doing hard redraw.\n");
+	printf ("Doing hard redraw.\n");
 #endif
 }
 
 
 /* Scrolls the view to the specified offsets.  Does not perform range checking!  */
-static void scroll_to(EMap * view, int x, int y)
+static void
+scroll_to (EMap *view, int x, int y)
 {
-  EMapPrivate *priv;
-  int xofs, yofs;
-  GdkWindow *window;
-  GdkGC *gc;
-  int width, height;
-  int src_x, src_y;
-  int dest_x, dest_y;
-  GdkEvent *event;
+	EMapPrivate *priv;
+	int xofs, yofs;
+	GdkWindow *window;
+	GdkGC *gc;
+	int width, height;
+	int src_x, src_y;
+	int dest_x, dest_y;
+	GdkEvent *event;
 
-  priv = view->priv;
+	priv = view->priv;
 
-  /* Compute offsets and check bounds */
+	/* Compute offsets and check bounds */
 
-  xofs = x - priv->xofs;
-  yofs = y - priv->yofs;
+	xofs = x - priv->xofs;
+	yofs = y - priv->yofs;
 
-  if (xofs == 0 && yofs == 0) return;
+	if (xofs == 0 && yofs == 0) return;
 
-  priv->xofs = x;
-  priv->yofs = y;
+	priv->xofs = x;
+	priv->yofs = y;
 
-  if (!GTK_WIDGET_DRAWABLE(view))
-    return;
+	if (!GTK_WIDGET_DRAWABLE (view)) return;
 
-  width = GTK_WIDGET(view)->allocation.width;
-  height = GTK_WIDGET(view)->allocation.height;
+	width = GTK_WIDGET (view)->allocation.width;
+	height = GTK_WIDGET (view)->allocation.height;
 
-  if (abs(xofs) >= width || abs(yofs) >= height)
-  {
-    GdkRectangle area;
+	if (abs (xofs) >= width || abs (yofs) >= height)
+	{
+		GdkRectangle area;
 
-    area.x = 0;
-    area.y = 0;
-    area.width = width;
-    area.height = height;
+		area.x = 0;
+		area.y = 0;
+		area.width = width;
+		area.height = height;
 
-    request_paint_area(view, &area);
-    return;
-  }
+		request_paint_area (view, &area);
+		return;
+	}
 
-  window = GTK_WIDGET(view)->window;
+	window = GTK_WIDGET (view)->window;
 
-  /* Copy the window area */
+	/* Copy the window area */
 
-  src_x = xofs < 0 ? 0 : xofs;
-  src_y = yofs < 0 ? 0 : yofs;
-  dest_x = xofs < 0 ? -xofs : 0;
-  dest_y = yofs < 0 ? -yofs : 0;
-  
-  gc = gdk_gc_new(window);
-  gdk_gc_set_exposures(gc, TRUE);
+	src_x = xofs < 0 ? 0 : xofs;
+	src_y = yofs < 0 ? 0 : yofs;
+	dest_x = xofs < 0 ? -xofs : 0;
+	dest_y = yofs < 0 ? -yofs : 0;
 
-  gdk_window_copy_area(window,
-                       gc,
-                       dest_x, dest_y,
-                       window,
-                       src_x, src_y, width - abs(xofs), height - abs(yofs));
+	gc = gdk_gc_new (window);
+	gdk_gc_set_exposures (gc, TRUE);
 
-  gdk_gc_destroy(gc);
+	gdk_window_copy_area (window, gc, dest_x, dest_y, window, src_x, src_y, width - abs (xofs), height - abs (yofs));
 
-  /* Add the scrolled-in region */
+	gdk_gc_destroy (gc);
 
-  if (xofs)
-  {
-    GdkRectangle r;
+	/* Add the scrolled-in region */
 
-    r.x = xofs < 0 ? 0 : width - xofs;
-    r.y = 0;
-    r.width = abs(xofs);
-    r.height = height;
+	if (xofs)
+	{
+		GdkRectangle r;
 
-    request_paint_area(view, &r);
-  }
+		r.x = xofs < 0 ? 0 : width - xofs;
+		r.y = 0;
+		r.width = abs (xofs);
+		r.height = height;
 
-  if (yofs)
-  {
-    GdkRectangle r;
+		request_paint_area (view, &r);
+	}
 
-    r.x = 0;
-    r.y = yofs < 0 ? 0 : height - yofs;
-    r.width = width;
-    r.height = abs(yofs);
+	if (yofs)
+	{
+		GdkRectangle r;
 
-    request_paint_area(view, &r);
-  }
+		r.x = 0;
+		r.y = yofs < 0 ? 0 : height - yofs;
+		r.width = width;
+		r.height = abs (yofs);
 
-  /* Process graphics exposures */
+		request_paint_area (view, &r);
+	}
 
-  while ((event = gdk_event_get_graphics_expose(window)) != NULL)
-  {
-    gtk_widget_event(GTK_WIDGET(view), event);
-    if (event->expose.count == 0)
-    {
-      gdk_event_free(event);
-      break;
-    }
-    gdk_event_free(event);
-  }
+	/* Process graphics exposures */
+
+	while ((event = gdk_event_get_graphics_expose (window)) != NULL)
+	{
+		gtk_widget_event (GTK_WIDGET (view), event);
+		if (event->expose.count == 0)
+		{
+			gdk_event_free (event);
+			break;
+		}
+		gdk_event_free (event);
+	}
 }
 
 
-static int divide_seq[] = 
+static int divide_seq[] =
 {
-  /* Dividends for divisor of 2 */
-  
-  -2,
+	/* Dividends for divisor of 2 */
 
-    1,
+	-2,
 
-  /* Dividends for divisor of 4 */
-  
-  -4,
+	1,
 
-    1,   3,
+	/* Dividends for divisor of 4 */
 
-  /* Dividends for divisor of 8 */
-  
-  -8,
+	-4,
 
-    1,   5,   3,   7,
+	1, 3,
 
-  /* Dividends for divisor of 16 */
+	/* Dividends for divisor of 8 */
 
-  -16,
+	-8,
 
-    1,   9,   5,  13,   3,  11,   7,  15,
+	1, 5, 3, 7,
 
-  /* Dividends for divisor of 32 */
+	/* Dividends for divisor of 16 */
 
-  -32,
+	-16,
 
-    1,  17,   9,  25,   5,  21,  13,  29,   3,  19,
-   11,  27,   7,  23,  15,  31,
+	1, 9, 5, 13, 3, 11, 7, 15,
 
-  /* Dividends for divisor of 64 */
+	/* Dividends for divisor of 32 */
 
-  -64,
+	-32,
 
-    1,  33,  17,  49,   9,  41,  25,  57,   5,  37,
-   21,  53,  13,  45,  29,  61,   3,  35,  19,  51,
-   11,  43,  27,  59,   7,  39,  23,  55,  15,  47,
-   31,  63,
+	1, 17, 9, 25, 5, 21, 13, 29, 3, 19,
+	11, 27, 7, 23, 15, 31,
 
-  /* Dividends for divisor of 128 */
-  
-  -128,
+	/* Dividends for divisor of 64 */
 
-    1,  65,  33,  97,  17,  81,  49, 113,   9,  73,
-   41, 105,  25,  89,  57, 121,   5,  69,  37, 101,
-   21,  85,  53, 117,  13,  77,  45, 109,  29,  93,
-   61, 125,   3,  67,  35,  99,  19,  83,  51, 115,
-   11,  75,  43, 107,  27,  91,  59, 123,   7,  71,
-   39, 103,  23,  87,  55, 119,  15,  79,  47, 111,
-   31,  95,  63, 127,
+	-64,
 
-  /* Dividends for divisor of 256 */
+	1, 33, 17, 49, 9, 41, 25, 57, 5, 37,
+	21, 53, 13, 45, 29, 61, 3, 35, 19, 51,
+	11, 43, 27, 59, 7, 39, 23, 55, 15, 47,
+	31, 63,
 
-  -256,
+	/* Dividends for divisor of 128 */
 
-    1, 129,  65, 193,  33, 161,  97, 225,  17, 145,
-   81, 209,  49, 177, 113, 241,   9, 137,  73, 201,
-   41, 169, 105, 233,  25, 153,  89, 217,  57, 185,
-  121, 249,   5, 133,  69, 197,  37, 165, 101, 229,
-   21, 149,  85, 213,  53, 181, 117, 245,  13, 141,
-   77, 205,  45, 173, 109, 237,  29, 157,  93, 221,
-   61, 189, 125, 253,   3, 131,  67, 195,  35, 163,
-   99, 227,  19, 147,  83, 211,  51, 179, 115, 243,
-   11, 139,  75, 203,  43, 171, 107, 235,  27, 155,
-   91, 219,  59, 187, 123, 251,   7, 135,  71, 199,
-   39, 167, 103, 231,  23, 151,  87, 215,  55, 183,
-  119, 247,  15, 143,  79, 207,  47, 175, 111, 239,
-   31, 159,  95, 223,  63, 191, 127, 255,
-  
-  0
+	-128,
+
+	1, 65, 33, 97, 17, 81, 49, 113, 9, 73,
+	41, 105, 25, 89, 57, 121, 5, 69, 37, 101,
+	21, 85, 53, 117, 13, 77, 45, 109, 29, 93,
+	61, 125, 3, 67, 35, 99, 19, 83, 51, 115,
+	11, 75, 43, 107, 27, 91, 59, 123, 7, 71,
+	39, 103, 23, 87, 55, 119, 15, 79, 47, 111,
+	31, 95, 63, 127,
+
+	/* Dividends for divisor of 256 */
+
+	-256,
+
+	1, 129, 65, 193, 33, 161, 97, 225, 17, 145,
+	81, 209, 49, 177, 113, 241, 9, 137, 73, 201,
+	41, 169, 105, 233, 25, 153, 89, 217, 57, 185,
+	121, 249, 5, 133, 69, 197, 37, 165, 101, 229,
+	21, 149, 85, 213, 53, 181, 117, 245, 13, 141,
+	77, 205, 45, 173, 109, 237, 29, 157, 93, 221,
+	61, 189, 125, 253, 3, 131, 67, 195, 35, 163,
+	99, 227, 19, 147, 83, 211, 51, 179, 115, 243,
+	11, 139, 75, 203, 43, 171, 107, 235, 27, 155,
+	91, 219, 59, 187, 123, 251, 7, 135, 71, 199,
+	39, 167, 103, 231, 23, 151, 87, 215, 55, 183,
+	119, 247, 15, 143, 79, 207, 47, 175, 111, 239,
+	31, 159, 95, 223, 63, 191, 127, 255,
+
+	0
 };
 
 
 typedef enum
 {
-  AXIS_X,
-  AXIS_Y
+	AXIS_X,
+	AXIS_Y
 }
 AxisType;
 
 
-static void blowup_window_area(GdkWindow *window,
-			       gint area_x, gint area_y,
-                               gint target_x, gint target_y,
-			       gint total_width, gint total_height,
-                               gfloat zoom_factor)
+static void
+blowup_window_area (GdkWindow *window, gint area_x, gint area_y, gint target_x, gint target_y, gint total_width, gint total_height, gfloat zoom_factor)
 {
-  GdkGC *gc;
-  AxisType strong_axis;
-  gfloat axis_factor, axis_counter;
-  gint zoom_chunk;
-  gint divisor_width, divisor_height;
-  gint divide_width_index, divide_height_index;
-  gint area_width, area_height;
-  gint i, j;
+	GdkGC *gc;
+	AxisType strong_axis;
+	gfloat axis_factor, axis_counter;
+	gint zoom_chunk;
+	gint divisor_width, divisor_height;
+	gint divide_width_index, divide_height_index;
+	gint area_width, area_height;
+	gint i, j;
+	int line;
 
 
-  int line;
+	/* Set up the GC we'll be using */
 
+	gc = gdk_gc_new (window);
+	gdk_gc_set_exposures (gc, TRUE);
 
-  /* Set up the GC we'll be using */
+	/* Get area constraints */
 
-  gc = gdk_gc_new(window);
-  gdk_gc_set_exposures(gc, TRUE);
-  
-  /* Get area constraints */
+	gdk_window_get_size (window, &area_width, &area_height);
 
-  gdk_window_get_size(window, &area_width, &area_height);
+	/* Initialize area division array indexes */
 
-  /* Initialize area division array indexes */
+	divide_width_index = divide_height_index = 0;
 
-  divide_width_index = divide_height_index = 0;
-	
-  /* Initialize axis counter */
+	/* Initialize axis counter */
 
-  axis_counter = 0.0;
+	axis_counter = 0.0;
 
-  /* Find the strong axis (which is the basis for iteration) and the ratio
-   * at which the other axis will be scaled.
-   *
-   * Also determine how many lines to expand in one fell swoop, and store
-   * this figure in zoom_chunk. */
+	/* Find the strong axis (which is the basis for iteration) and the ratio
+	 * at which the other axis will be scaled.
+	 *
+	 * Also determine how many lines to expand in one fell swoop, and store
+	 * this figure in zoom_chunk. */
 
-  if (area_width > area_height)
-  {
-    strong_axis = AXIS_X;
-    axis_factor = (double) area_height / (double) area_width;
-    zoom_chunk = area_width / 250;
-    i = (area_width * (zoom_factor - 1.0)) / zoom_chunk;
-  }
-  else
-  {
-    strong_axis = AXIS_Y;
-    axis_factor = (double) area_width / (double) area_height;
-    zoom_chunk = area_height / 250;
-    i = (area_height * (zoom_factor - 1.0)) / zoom_chunk;
-  }
+	if (area_width > area_height)
+	{
+		strong_axis = AXIS_X;
+		axis_factor = (double) area_height / (double) area_width;
+		zoom_chunk = area_width / 250;
+		i = (area_width * (zoom_factor - 1.0)) / zoom_chunk;
+	}
+	else
+	{
+		strong_axis = AXIS_Y;
+		axis_factor = (double) area_width / (double) area_height;
+		zoom_chunk = area_height / 250;
+		i = (area_height * (zoom_factor - 1.0)) / zoom_chunk;
+	}
 
-  if (!zoom_chunk) zoom_chunk = 1;
+	if (!zoom_chunk) zoom_chunk = 1;
 
-  /* Zoom loop */
+	/* Zoom loop */
 
-  for ( ; i > 0; i--)
-  {
-    /* Reset division sequence table indexes as necessary */
+	for (; i > 0; i--)
+	{
+		/* Reset division sequence table indexes as necessary */
 
-    if (!divide_seq[divide_width_index]) divide_width_index = 0;
-    if (!divide_seq[divide_height_index]) divide_height_index = 0;
+		if (!divide_seq[divide_width_index]) divide_width_index = 0;
+		if (!divide_seq[divide_height_index]) divide_height_index = 0;
 
-    /* Set new divisor if found in table */
+		/* Set new divisor if found in table */
 
-    if (divide_seq[divide_width_index] < 0) divisor_width = abs(divide_seq[divide_width_index++]);
-    if (divide_seq[divide_height_index] < 0) divisor_height = abs(divide_seq[divide_height_index++]);
+		if (divide_seq[divide_width_index] < 0)
+			divisor_width = abs (divide_seq[divide_width_index++]);
+		if (divide_seq[divide_height_index] < 0)
+			divisor_height = abs (divide_seq[divide_height_index++]);
 
-    /* Widen */
+		/* Widen */
 
-    if (strong_axis == AXIS_X || axis_counter >= 1.0)
-    {
-      line = ((divide_seq[divide_width_index] * area_width) / divisor_width) + 0.5;
+		if (strong_axis == AXIS_X || axis_counter >= 1.0)
+		{
+			line = ((divide_seq[divide_width_index] * area_width) / divisor_width) + 0.5;
 
-      if ((line < target_x && target_x > area_width / 2) ||
-	  (line > target_x && target_x > (area_width / 2) + zoom_chunk))
-      {
-        /* Push left */
+			if ((line < target_x && target_x > area_width / 2) || (line > target_x && target_x > (area_width / 2) + zoom_chunk))
+			{
+				/* Push left */
 
-        for (j = 0; j < zoom_chunk - 1; j++)
-          gdk_window_copy_area(window, gc, line + j + 1, 0,
-                               window, line, 0, 1, area_height);
+				for (j = 0; j < zoom_chunk - 1; j++)
+					gdk_window_copy_area (window, gc, line + j + 1, 0, window, line, 0, 1, area_height);
 
-        gdk_window_copy_area(window, gc, 0, 0,
-                             window, zoom_chunk, 0, line, area_height);
+				gdk_window_copy_area (window, gc, 0, 0, window, zoom_chunk, 0, line, area_height);
+				if (line > target_x) target_x -= zoom_chunk;
+			}
+			else
+			{
+				/* Push right */
 
-	if (line > target_x) target_x -= zoom_chunk;
-      }
-      else
-      {
-	/* Push right */
+				for (j = 0; j < zoom_chunk - 1; j++)
+					gdk_window_copy_area (window, gc, line + j - (zoom_chunk - 1), 0, window, line - zoom_chunk, 0, 1, area_height);
 
-        for (j = 0; j < zoom_chunk - 1; j++)
-        {
-          gdk_window_copy_area(window,
-                               gc,
-                               line + j - (zoom_chunk - 1), 0,
-                               window,
-                               line - zoom_chunk, 0,
-                               1, area_height);
-        }
-        gdk_window_copy_area(window,
-                             gc,
-                             line, 0,
-                             window,
-                             line - zoom_chunk, 0,
-                             area_width - line, area_height);
+				gdk_window_copy_area (window, gc, line, 0, window, line - zoom_chunk, 0, area_width - line, area_height);
+				if (line < target_x) target_x += zoom_chunk;
+			}
+		}
 
-        if (line < target_x) target_x += zoom_chunk;
-      }
-    }
+		if (strong_axis == AXIS_Y || axis_counter >= 1.0)
+		{
+			/* Heighten */
 
-    if (strong_axis == AXIS_Y || axis_counter >= 1.0)
-    {
-      /* Heighten */
+			line = ((divide_seq[divide_height_index] * area_height) / divisor_height) + 0.5;
 
-      line = ((divide_seq[divide_height_index] * area_height) / divisor_height) + 0.5;
+			if ((line < target_y && target_y > area_height / 2) || (line > target_y && target_y > (area_height / 2) + zoom_chunk))
+			{
+				/* Push up */
 
-      if ((line < target_y && target_y > area_height / 2) ||
-	  (line > target_y && target_y > (area_height / 2) + zoom_chunk))
-      {
-	/* Push up */
-	
-        for (j = 0; j < zoom_chunk - 1; j++)
-        {
-          gdk_window_copy_area(window,
-                               gc,
-                               0, line + j + 1,
-                               window,
-                               0, line,
-                               area_width, 1);
-        }
-        gdk_window_copy_area(window,
-                             gc,
-                             0, 0,
-                             window,
-                             0, zoom_chunk,
-                             area_width, line);
-        
-        if (line > target_y) target_y -= zoom_chunk;
-      }
-      else
-      {
-	/* Push down */
+				for (j = 0; j < zoom_chunk - 1; j++)
+					gdk_window_copy_area (window, gc, 0, line + j + 1, window, 0, line, area_width, 1);
 
-        for (j = 0; j < zoom_chunk - 1; j++)
-        {
-          gdk_window_copy_area(window,
-                               gc,
-                               0, line + j - (zoom_chunk - 1),
-                               window,
-                               0, line - zoom_chunk,
-                               area_width, 1);
-        }
-        gdk_window_copy_area(window,
-                             gc,
-                             0, line,
-                             window,
-                             0, line - zoom_chunk,
-                             area_width, area_height - line);
-        
-        if (line < target_y) target_y += zoom_chunk;
-      }
-    }
-    
-    divide_width_index++;
-    divide_height_index++;
-    if (axis_counter >= 1.0) axis_counter -= 1.0;
-    axis_counter += axis_factor;
-  }
+				gdk_window_copy_area (window, gc, 0, 0, window, 0, zoom_chunk, area_width, line);
+				if (line > target_y) target_y -= zoom_chunk;
+			}
+			else
+			{
+				/* Push down */
 
-  /* Free our GC */
+				for (j = 0; j < zoom_chunk - 1; j++)
+					gdk_window_copy_area (window, gc, 0, line + j - (zoom_chunk - 1), window, 0, line - zoom_chunk, area_width, 1);
 
-  gdk_gc_destroy(gc);
+				gdk_window_copy_area (window, gc, 0, line, window, 0, line - zoom_chunk, area_width, area_height - line);
+				if (line < target_y) target_y += zoom_chunk;
+			}
+		}
+
+		divide_width_index++;
+		divide_height_index++;
+		if (axis_counter >= 1.0) axis_counter -= 1.0;
+		axis_counter += axis_factor;
+	}
+
+	/* Free our GC */
+
+	gdk_gc_destroy (gc);
 }
-                               
 
-static void zoom_in_smooth(EMap *map)
+
+static void
+zoom_in_smooth (EMap *map)
 {
-  EMapPrivate *priv;
-  GdkWindow *window;
-  int width, height;
-  int win_width, win_height;
-  int win_center_x, win_center_y;
-  int target_width, target_height;
-  double x, y;
+	EMapPrivate *priv;
+	GdkWindow *window;
+	int width, height;
+	int win_width, win_height;
+	int win_center_x, win_center_y;
+	int target_width, target_height;
+	double x, y;
 
-  g_return_if_fail (map);
-  g_return_if_fail (GTK_WIDGET_REALIZED(GTK_WIDGET(map)));
+	g_return_if_fail (map);
+	g_return_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (map)));
 
-  priv = map->priv;
-  window = GTK_WIDGET(map)->window;
-  width = gdk_pixbuf_get_width(priv->map_render_pixbuf);
-  height = gdk_pixbuf_get_height(priv->map_render_pixbuf);
-  win_width = GTK_WIDGET(map)->allocation.width;
-  win_height = GTK_WIDGET(map)->allocation.height;
-  target_width = win_width / 4;
-  target_height = win_height / 4;
+	priv = map->priv;
+	window = GTK_WIDGET (map)->window;
+	width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
+	height = gdk_pixbuf_get_height (priv->map_render_pixbuf);
+	win_width = GTK_WIDGET (map)->allocation.width;
+	win_height = GTK_WIDGET (map)->allocation.height;
+	target_width = win_width / 4;
+	target_height = win_height / 4;
 
 #if 0
-  scroll_to(map, x, y);
+	scroll_to (map, x, y);
 #endif
 
-  e_map_world_to_window(map, priv->zoom_target_long,
-                        priv->zoom_target_lat,
-                        &x, &y);
+	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
 
-  win_center_x = x - priv->xofs;
-  win_center_y = y - priv->yofs;
+	win_center_x = x - priv->xofs;
+	win_center_y = y - priv->yofs;
 
-  blowup_window_area(window,
-		     priv->xofs, priv->yofs,
-                     win_center_x, win_center_y,
-		     width, height,
-		     1.68);
+	blowup_window_area (window, priv->xofs, priv->yofs, win_center_x, win_center_y, width, height, 1.68);
 }
 
 
-static void zoom_in(EMap *map)
+static void
+zoom_in (EMap *map)
 {
-  GdkRectangle area;
-  EMapPrivate *priv;
-  double x, y;
+	GdkRectangle area;
+	EMapPrivate *priv;
+	double x, y;
 
-  priv = map->priv;
+	priv = map->priv;
 
-  area.x = 0;
-  area.y = 0;
-  area.width = GTK_WIDGET(map)->allocation.width;
-  area.height = GTK_WIDGET(map)->allocation.height;
+	area.x = 0;
+	area.y = 0;
+	area.width = GTK_WIDGET (map)->allocation.width;
+	area.height = GTK_WIDGET (map)->allocation.height;
 
-  priv->zoom_state = E_MAP_ZOOMED_IN;
-  update_render_pixbuf(map, GDK_INTERP_NEAREST);
+	priv->zoom_state = E_MAP_ZOOMED_IN;
+	update_render_pixbuf (map, GDK_INTERP_NEAREST);
 
-  e_map_world_to_window(map, priv->zoom_target_long,
-                        priv->zoom_target_lat,
-                        &x, &y);
+	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
 
 #ifdef DEBUG
-  printf("Translated coordinates: (%.1f, %.1f)\n", x, y);
+	printf ("Translated coordinates: (%.1f, %.1f)\n", x, y);
 #endif
 
-  priv->xofs = x - area.width / 2.0;
-  priv->yofs = y - area.height / 2.0;
+	priv->xofs = x - area.width / 2.0;
+	priv->yofs = y - area.height / 2.0;
 
-  if (priv->xofs < 0) priv->xofs = 0;
-  if (priv->xofs > E_MAP_GET_WIDTH(map) - area.width)
-    priv->xofs = E_MAP_GET_WIDTH(map) - area.width;
-  if (priv->yofs < 0) priv->yofs = 0;
-  if (priv->yofs > E_MAP_GET_HEIGHT(map) - area.height)
-    priv->yofs = E_MAP_GET_HEIGHT(map) - area.height;
+	if (priv->xofs < 0) priv->xofs = 0;
+	if (priv->xofs > E_MAP_GET_WIDTH (map) - area.width) priv->xofs = E_MAP_GET_WIDTH (map) - area.width;
+	if (priv->yofs < 0) priv->yofs = 0;
+	if (priv->yofs > E_MAP_GET_HEIGHT (map) - area.height) priv->yofs = E_MAP_GET_HEIGHT (map) - area.height;
 
 #ifdef DEBUG
-  printf("Final offsets: (%d, %d)\n---\n", priv->xofs, priv->yofs);
+	printf ("Final offsets: (%d, %d)\n---\n", priv->xofs, priv->yofs);
 #endif
 
-  request_paint_area(map, &area);
-  update_render_pixbuf(map, GDK_INTERP_BILINEAR);
-  request_paint_area(map, &area);
+	request_paint_area (map, &area);
+	update_render_pixbuf (map, GDK_INTERP_BILINEAR);
+	request_paint_area (map, &area);
 }
 
 
-static void zoom_out(EMap *map)
+static void
+zoom_out (EMap *map)
 {
-  GdkRectangle area;
-  EMapPrivate *priv;
-  double x, y;
+	GdkRectangle area;
+	EMapPrivate *priv;
+	double x, y;
 
-  priv = map->priv;
+	priv = map->priv;
 
-  area.x = 0;
-  area.y = 0;
-  area.width = GTK_WIDGET(map)->allocation.width;
-  area.height = GTK_WIDGET(map)->allocation.height;
+	area.x = 0;
+	area.y = 0;
+	area.width = GTK_WIDGET (map)->allocation.width;
+	area.height = GTK_WIDGET (map)->allocation.height;
 
-  priv->zoom_state = E_MAP_ZOOMED_OUT;
-  update_render_pixbuf(map, GDK_INTERP_BILINEAR);
+	priv->zoom_state = E_MAP_ZOOMED_OUT;
+	update_render_pixbuf (map, GDK_INTERP_BILINEAR);
 
-  e_map_world_to_window(map, priv->zoom_target_long,
-                        priv->zoom_target_lat,
-                        &x, &y);
+	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
 
 #ifdef DEBUG
-  printf("Translated coordinates: (%.1f, %.1f)\n", x, y);
+	printf ("Translated coordinates: (%.1f, %.1f)\n", x, y);
 #endif
 
-  priv->xofs = x - area.width / 2.0;
-  priv->yofs = y - area.height / 2.0;
+	priv->xofs = x - area.width / 2.0;
+	priv->yofs = y - area.height / 2.0;
 
-  if (priv->xofs < 0) priv->xofs = 0;
-  if (priv->xofs > E_MAP_GET_WIDTH(map) - area.width)
-    priv->xofs = E_MAP_GET_WIDTH(map) - area.width;
-  if (priv->yofs < 0) priv->yofs = 0;
-  if (priv->yofs > E_MAP_GET_HEIGHT(map) - area.height)
-    priv->yofs = E_MAP_GET_HEIGHT(map) - area.height;
+	if (priv->xofs < 0) priv->xofs = 0;
+	if (priv->xofs > E_MAP_GET_WIDTH (map) - area.width) priv->xofs = E_MAP_GET_WIDTH (map) - area.width;
+	if (priv->yofs < 0) priv->yofs = 0;
+	if (priv->yofs > E_MAP_GET_HEIGHT (map) - area.height) priv->yofs = E_MAP_GET_HEIGHT (map) - area.height;
 
 #ifdef DEBUG
-  printf("Final offsets: (%d, %d)\n---\n", priv->xofs, priv->yofs);
+	printf ("Final offsets: (%d, %d)\n---\n", priv->xofs, priv->yofs);
 #endif
 
-  set_scroll_area(map);
-
-  request_paint_area(map, &area);
+	set_scroll_area (map);
+	request_paint_area (map, &area);
 }
 
 
-static void zoom_do(EMap *map)
+static void
+zoom_do (EMap *map)
 {
-  EMapPrivate *priv;
+	EMapPrivate *priv;
 
-  priv = map->priv;
+	priv = map->priv;
 
-  if (priv->zoom_state == E_MAP_ZOOMING_IN)
-  {
-    if (e_map_get_smooth_zoom(map)) zoom_in_smooth(map);
-    zoom_in(map);
-  }
-  else if (priv->zoom_state == E_MAP_ZOOMING_OUT)
-  {
+	if (priv->zoom_state == E_MAP_ZOOMING_IN)
+	{
+		if (e_map_get_smooth_zoom (map)) zoom_in_smooth (map);
+		zoom_in (map);
+	}
+	else if (priv->zoom_state == E_MAP_ZOOMING_OUT)
+	{
 /*    if (e_map_get_smooth_zoom(map)) zoom_out_smooth(map); */
-    zoom_out(map);
-  }
+		zoom_out (map);
+	}
 }
 
 
 /* Widget methods */
 
 /* Unmap handler for the map view */
-static void e_map_unmap(GtkWidget * widget)
+static void
+e_map_unmap (GtkWidget *widget)
 {
-  g_return_if_fail(widget != NULL);
-  g_return_if_fail(IS_E_MAP(widget));
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (IS_E_MAP (widget));
 
-  if (GTK_WIDGET_CLASS(parent_class)->unmap)
-    (*GTK_WIDGET_CLASS(parent_class)->unmap) (widget);
+	if (GTK_WIDGET_CLASS (parent_class)->unmap)
+		(*GTK_WIDGET_CLASS (parent_class)->unmap) (widget);
 }
 
 /* Realize handler for the map view */
-static void e_map_realize(GtkWidget * widget)
+static void
+e_map_realize (GtkWidget *widget)
 {
-  GdkWindowAttr attr;
-  int attr_mask;
+	GdkWindowAttr attr;
+	int attr_mask;
 
-  g_return_if_fail(widget != NULL);
-  g_return_if_fail(IS_E_MAP(widget));
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (IS_E_MAP (widget));
 
-  GTK_WIDGET_SET_FLAGS(widget, GTK_REALIZED);
+	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
 
-  attr.window_type = GDK_WINDOW_CHILD;
-  attr.x = widget->allocation.x;
-  attr.y = widget->allocation.y;
-  attr.width = widget->allocation.width;
-  attr.height = widget->allocation.height;
-  attr.wclass = GDK_INPUT_OUTPUT;
-  attr.visual = gdk_rgb_get_visual();
-  attr.colormap = gdk_rgb_get_cmap();
-  attr.event_mask = (gtk_widget_get_events(widget)
-                     | GDK_EXPOSURE_MASK
-                     | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK);
+	attr.window_type = GDK_WINDOW_CHILD;
+	attr.x = widget->allocation.x;
+	attr.y = widget->allocation.y;
+	attr.width = widget->allocation.width;
+	attr.height = widget->allocation.height;
+	attr.wclass = GDK_INPUT_OUTPUT;
+	attr.visual = gdk_rgb_get_visual ();
+	attr.colormap = gdk_rgb_get_cmap ();
+	attr.event_mask = (gtk_widget_get_events (widget) | GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK | GDK_KEY_PRESS_MASK);
 
-  attr_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
+	attr_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
-  widget->window =
-    gdk_window_new(gtk_widget_get_parent_window(widget), &attr, attr_mask);
-  gdk_window_set_user_data(widget->window, widget);
+	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget), &attr, attr_mask);
+	gdk_window_set_user_data (widget->window, widget);
 
-  widget->style = gtk_style_attach(widget->style, widget->window);
+	widget->style = gtk_style_attach (widget->style, widget->window);
 
-  gdk_window_set_back_pixmap(widget->window, NULL, FALSE);
-  update_render_pixbuf(E_MAP(widget), GDK_INTERP_BILINEAR);
+	gdk_window_set_back_pixmap (widget->window, NULL, FALSE);
+	update_render_pixbuf (E_MAP (widget), GDK_INTERP_BILINEAR);
 }
 
 /* Unrealize handler for the image view */
-static void e_map_unrealize(GtkWidget * widget)
+static void
+e_map_unrealize (GtkWidget *widget)
 {
-  g_return_if_fail(widget != NULL);
-  g_return_if_fail(IS_E_MAP(widget));
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (IS_E_MAP (widget));
 
-  if (GTK_WIDGET_CLASS(parent_class)->unrealize)
-    (*GTK_WIDGET_CLASS(parent_class)->unrealize) (widget);
+	if (GTK_WIDGET_CLASS (parent_class)->unrealize)
+		(*GTK_WIDGET_CLASS (parent_class)->unrealize) (widget);
 }
 
 /* Size_request handler for the image view */
 static void
-e_map_size_request(GtkWidget * widget, GtkRequisition * requisition)
+e_map_size_request (GtkWidget *widget, GtkRequisition *requisition)
 {
-  EMap *view;
-  EMapPrivate *priv;
+	EMap *view;
+	EMapPrivate *priv;
 
-  g_return_if_fail(widget != NULL);
-  g_return_if_fail(IS_E_MAP(widget));
-  g_return_if_fail(requisition != NULL);
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (IS_E_MAP (widget));
+	g_return_if_fail (requisition != NULL);
 
-  view = E_MAP(widget);
-  priv = view->priv;
+	view = E_MAP (widget);
+	priv = view->priv;
 
-  /* TODO: Put real sizes here. */
-  
-  requisition->width = gdk_pixbuf_get_width(priv->map_pixbuf);
-  requisition->height = gdk_pixbuf_get_height(priv->map_pixbuf);
+	/* TODO: Put real sizes here. */
+
+	requisition->width = gdk_pixbuf_get_width (priv->map_pixbuf);
+	requisition->height = gdk_pixbuf_get_height (priv->map_pixbuf);
 }
 
 
 /* Size_allocate handler for the image view */
 static void
-e_map_size_allocate(GtkWidget * widget, GtkAllocation * allocation)
+e_map_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
-  EMap *view;
-  EMapPrivate *priv;
-  int xofs, yofs;
-  int scaled_width, scaled_height;
-  GdkRectangle area;
+	EMap *view;
+	EMapPrivate *priv;
+	int xofs, yofs;
+	int scaled_width, scaled_height;
+	GdkRectangle area;
 
-  g_return_if_fail(widget != NULL);
-  g_return_if_fail(IS_E_MAP(widget));
-  g_return_if_fail(allocation != NULL);
-  
-  view = E_MAP(widget);
-  priv = view->priv;
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (IS_E_MAP (widget));
+	g_return_if_fail (allocation != NULL);
 
-  xofs = priv->xofs;
-  yofs = priv->yofs;
+	view = E_MAP (widget);
+	priv = view->priv;
 
-  scaled_width = gdk_pixbuf_get_width(priv->map_render_pixbuf);
-  scaled_height = gdk_pixbuf_get_height(priv->map_render_pixbuf);
+	xofs = priv->xofs;
+	yofs = priv->yofs;
 
-  /* Resize the window */
+	scaled_width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
+	scaled_height = gdk_pixbuf_get_height (priv->map_render_pixbuf);
 
-  widget->allocation = *allocation;
-  
-  if (GTK_WIDGET_REALIZED(widget))
-  {
-    gdk_window_move_resize(widget->window,
-                           allocation->x,
-                           allocation->y,
-                           allocation->width,
-                           allocation->height);
+	/* Resize the window */
 
-    area.x = 0;
-    area.y = 0;
-    area.width = allocation->width;
-    area.height = allocation->height;
-    request_paint_area(E_MAP(widget), &area);
-  }
+	widget->allocation = *allocation;
 
-  update_render_pixbuf(view, GDK_INTERP_BILINEAR);
+	if (GTK_WIDGET_REALIZED (widget))
+	{
+		gdk_window_move_resize (widget->window, allocation->x, allocation->y, allocation->width, allocation->height);
+
+		area.x = 0;
+		area.y = 0;
+		area.width = allocation->width;
+		area.height = allocation->height;
+		request_paint_area (E_MAP (widget), &area);
+	}
+
+	update_render_pixbuf (view, GDK_INTERP_BILINEAR);
 }
 
 /* Draw handler for the image view */
-static void e_map_draw(GtkWidget * widget, GdkRectangle * area)
+static void
+e_map_draw (GtkWidget *widget, GdkRectangle *area)
 {
-  EMap *view;
+	EMap *view;
 
-  g_return_if_fail(widget != NULL);
-  g_return_if_fail(IS_E_MAP(widget));
-  g_return_if_fail(area != NULL);
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (IS_E_MAP (widget));
+	g_return_if_fail (area != NULL);
 
-  view = E_MAP(widget);
+	view = E_MAP (widget);
 
-  request_paint_area(view, area);
+	request_paint_area (view, area);
 }
 
 /* Button press handler for the image view */
 static gint
-e_map_button_press(GtkWidget * widget, GdkEventButton * event)
+e_map_button_press (GtkWidget *widget, GdkEventButton *event)
 {
-  EMap *view;
-  EMapPrivate *priv;
+	EMap *view;
+	EMapPrivate *priv;
 
-  view = E_MAP(widget);
-  priv = view->priv;
+	view = E_MAP (widget);
+	priv = view->priv;
 
-  if (!GTK_WIDGET_HAS_FOCUS(widget))
-    gtk_widget_grab_focus(widget);
+	if (!GTK_WIDGET_HAS_FOCUS (widget)) gtk_widget_grab_focus (widget);
 
-  if (event->button != 1)
-    return FALSE;
-
-  return TRUE;
+	if (event->button != 1) return FALSE;
+	return TRUE;
 }
 
 
 /* Button release handler for the image view */
 static gint
-e_map_button_release(GtkWidget * widget, GdkEventButton * event)
+e_map_button_release (GtkWidget *widget, GdkEventButton *event)
 {
-  EMap *view;
-  EMapPrivate *priv;
+	EMap *view;
+	EMapPrivate *priv;
 
-  view = E_MAP(widget);
-  priv = view->priv;
+	view = E_MAP (widget);
+	priv = view->priv;
 
-  if (event->button != 1)
-    return FALSE;
+	if (event->button != 1) return FALSE;
 
-  gdk_pointer_ungrab(event->time);
-  return TRUE;
+	gdk_pointer_ungrab (event->time);
+	return TRUE;
 }
 
 /* Motion handler for the image view */
-static gint e_map_motion(GtkWidget * widget, GdkEventMotion * event)
+static gint
+e_map_motion (GtkWidget *widget, GdkEventMotion *event)
 {
-  EMap *view;
-  EMapPrivate *priv;
+	EMap *view;
+	EMapPrivate *priv;
 
-  view = E_MAP(widget);
-  priv = view->priv;
+	view = E_MAP (widget);
+	priv = view->priv;
 
-  return FALSE;
+	return FALSE;
 
 /*
  * if (event->is_hint)
@@ -1100,169 +999,162 @@ static gint e_map_motion(GtkWidget * widget, GdkEventMotion * event)
 }
 
 /* Expose handler for the image view */
-static gint e_map_expose(GtkWidget * widget, GdkEventExpose * event)
+static gint
+e_map_expose (GtkWidget *widget, GdkEventExpose *event)
 {
-  EMap *view;
+	EMap *view;
 
-  g_return_val_if_fail(widget != NULL, FALSE);
-  g_return_val_if_fail(IS_E_MAP(widget), FALSE);
-  g_return_val_if_fail(event != NULL, FALSE);
+	g_return_val_if_fail (widget != NULL, FALSE);
+	g_return_val_if_fail (IS_E_MAP (widget), FALSE);
+	g_return_val_if_fail (event != NULL, FALSE);
 
-  view = E_MAP(widget);
+	view = E_MAP (widget);
 
-  request_paint_area(view, &event->area);
-  return TRUE;
+	request_paint_area (view, &event->area);
+	return TRUE;
 }
 
 /* Key press handler for the image view */
-static gint e_map_key_press(GtkWidget * widget, GdkEventKey * event)
+static gint
+e_map_key_press (GtkWidget *widget, GdkEventKey *event)
 {
-  EMap *view;
-  EMapPrivate *priv;
-  gboolean do_scroll;
-  int xofs, yofs;
+	EMap *view;
+	EMapPrivate *priv;
+	gboolean do_scroll;
+	int xofs, yofs;
 
-  view = E_MAP(widget);
-  priv = view->priv;
+	view = E_MAP (widget);
+	priv = view->priv;
 
-  do_scroll = FALSE;
-  xofs = yofs = 0;
+	do_scroll = FALSE;
+	xofs = yofs = 0;
 
-  switch (event->keyval)
-  {
-    case GDK_Up:
-      do_scroll = TRUE;
-      xofs = 0;
-      yofs = -SCROLL_STEP_SIZE;
-      break;
+	switch (event->keyval)
+	{
+		case GDK_Up:
+			do_scroll = TRUE;
+			xofs = 0;
+			yofs = -SCROLL_STEP_SIZE;
+			break;
 
-    case GDK_Down:
-      do_scroll = TRUE;
-      xofs = 0;
-      yofs = SCROLL_STEP_SIZE;
-      break;
+		case GDK_Down:
+			do_scroll = TRUE;
+			xofs = 0;
+			yofs = SCROLL_STEP_SIZE;
+			break;
 
-    case GDK_Left:
-      do_scroll = TRUE;
-      xofs = -SCROLL_STEP_SIZE;
-      yofs = 0;
-      break;
+		case GDK_Left:
+			do_scroll = TRUE;
+			xofs = -SCROLL_STEP_SIZE;
+			yofs = 0;
+			break;
 
-    case GDK_Right:
-      do_scroll = TRUE;
-      xofs = SCROLL_STEP_SIZE;
-      yofs = 0;
-      break;
+		case GDK_Right:
+			do_scroll = TRUE;
+			xofs = SCROLL_STEP_SIZE;
+			yofs = 0;
+			break;
 
-    default:
-      return FALSE;
-  }
+		default:
+			return FALSE;
+	}
 
-  if (do_scroll)
-  {
-    int x, y;
+	if (do_scroll)
+	{
+		int x, y;
 
-    x = CLAMP(priv->xofs + xofs, 0, priv->hadj->upper - priv->hadj->page_size);
-    y = CLAMP(priv->yofs + yofs, 0, priv->vadj->upper - priv->vadj->page_size);
+		x = CLAMP (priv->xofs + xofs, 0, priv->hadj->upper - priv->hadj->page_size);
+		y = CLAMP (priv->yofs + yofs, 0, priv->vadj->upper - priv->vadj->page_size);
 
-    scroll_to(view, x, y);
+		scroll_to (view, x, y);
 
-    gtk_signal_handler_block_by_data(GTK_OBJECT(priv->hadj), view);
-    gtk_signal_handler_block_by_data(GTK_OBJECT(priv->vadj), view);
+		gtk_signal_handler_block_by_data (GTK_OBJECT (priv->hadj), view);
+		gtk_signal_handler_block_by_data (GTK_OBJECT (priv->vadj), view);
 
-    priv->hadj->value = x;
-    priv->vadj->value = y;
+		priv->hadj->value = x;
+		priv->vadj->value = y;
 
-    gtk_signal_emit_by_name(GTK_OBJECT(priv->hadj), "value_changed");
-    gtk_signal_emit_by_name(GTK_OBJECT(priv->vadj), "value_changed");
+		gtk_signal_emit_by_name (GTK_OBJECT (priv->hadj), "value_changed");
+		gtk_signal_emit_by_name (GTK_OBJECT (priv->vadj), "value_changed");
 
-    gtk_signal_handler_unblock_by_data(GTK_OBJECT(priv->hadj), view);
-    gtk_signal_handler_unblock_by_data(GTK_OBJECT(priv->vadj), view);
-  }
+		gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->hadj), view);
+		gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->vadj), view);
+	}
 
-  return TRUE;
+	return TRUE;
 }
 
 /* Callback used when an adjustment is changed */
-static void adjustment_changed_cb(GtkAdjustment * adj, gpointer data)
+static void
+adjustment_changed_cb (GtkAdjustment *adj, gpointer data)
 {
-  EMap *view;
-  EMapPrivate *priv;
+	EMap *view;
+	EMapPrivate *priv;
 
-  view = E_MAP(data);
-  priv = view->priv;
+	view = E_MAP (data);
+	priv = view->priv;
 
-  scroll_to(view, priv->hadj->value, priv->vadj->value);
+	scroll_to (view, priv->hadj->value, priv->vadj->value);
 }
 
 /* Set_scroll_adjustments handler for the image view */
 static void
-e_map_set_scroll_adjustments(GtkWidget * widget,
-                                       GtkAdjustment * hadj,
-                                       GtkAdjustment * vadj)
+e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustment *vadj)
 {
-  EMap *view;
-  EMapPrivate *priv;
-  gboolean need_adjust;
+	EMap *view;
+	EMapPrivate *priv;
+	gboolean need_adjust;
 
-  g_return_if_fail(widget != NULL);
-  g_return_if_fail(IS_E_MAP(widget));
+	g_return_if_fail (widget != NULL);
+	g_return_if_fail (IS_E_MAP (widget));
 
-  view = E_MAP(widget);
-  priv = view->priv;
+	view = E_MAP (widget);
+	priv = view->priv;
 
-  if (hadj)
-    g_return_if_fail(GTK_IS_ADJUSTMENT(hadj));
-  else
-    hadj = GTK_ADJUSTMENT(gtk_adjustment_new(0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+	if (hadj) g_return_if_fail (GTK_IS_ADJUSTMENT (hadj));
+	else hadj = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
 
-  if (vadj)
-    g_return_if_fail(GTK_IS_ADJUSTMENT(vadj));
-  else
-    vadj = GTK_ADJUSTMENT(gtk_adjustment_new(0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+	if (vadj) g_return_if_fail (GTK_IS_ADJUSTMENT (vadj));
+	else vadj = GTK_ADJUSTMENT (gtk_adjustment_new (0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
 
-  if (priv->hadj && priv->hadj != hadj)
-  {
-    gtk_signal_disconnect_by_data(GTK_OBJECT(priv->hadj), view);
-    gtk_object_unref(GTK_OBJECT(priv->hadj));
-  }
+	if (priv->hadj && priv->hadj != hadj)
+	{
+		gtk_signal_disconnect_by_data (GTK_OBJECT (priv->hadj), view);
+		gtk_object_unref (GTK_OBJECT (priv->hadj));
+	}
 
-  if (priv->vadj && priv->vadj != vadj)
-  {
-    gtk_signal_disconnect_by_data(GTK_OBJECT(priv->vadj), view);
-    gtk_object_unref(GTK_OBJECT(priv->vadj));
-  }
+	if (priv->vadj && priv->vadj != vadj)
+	{
+		gtk_signal_disconnect_by_data (GTK_OBJECT (priv->vadj), view);
+		gtk_object_unref (GTK_OBJECT (priv->vadj));
+	}
 
-  need_adjust = FALSE;
+	need_adjust = FALSE;
 
-  if (priv->hadj != hadj)
-  {
-    priv->hadj = hadj;
-    gtk_object_ref(GTK_OBJECT(priv->hadj));
-    gtk_object_sink(GTK_OBJECT(priv->hadj));
+	if (priv->hadj != hadj)
+	{
+		priv->hadj = hadj;
+		gtk_object_ref (GTK_OBJECT (priv->hadj));
+		gtk_object_sink (GTK_OBJECT (priv->hadj));
 
-    gtk_signal_connect(GTK_OBJECT(priv->hadj), "value_changed",
-                       GTK_SIGNAL_FUNC(adjustment_changed_cb), view);
+		gtk_signal_connect (GTK_OBJECT (priv->hadj), "value_changed", GTK_SIGNAL_FUNC (adjustment_changed_cb), view);
 
-    need_adjust = TRUE;
-  }
+		need_adjust = TRUE;
+	}
 
-  if (priv->vadj != vadj)
-  {
-    priv->vadj = vadj;
-    gtk_object_ref(GTK_OBJECT(priv->vadj));
-    gtk_object_sink(GTK_OBJECT(priv->vadj));
+	if (priv->vadj != vadj)
+	{
+		priv->vadj = vadj;
+		gtk_object_ref (GTK_OBJECT (priv->vadj));
+		gtk_object_sink (GTK_OBJECT (priv->vadj));
 
-    gtk_signal_connect(GTK_OBJECT(priv->vadj), "value_changed",
-                       GTK_SIGNAL_FUNC(adjustment_changed_cb), view);
+		gtk_signal_connect (GTK_OBJECT (priv->vadj), "value_changed", GTK_SIGNAL_FUNC (adjustment_changed_cb), view);
 
-    need_adjust = TRUE;
-  }
+		need_adjust = TRUE;
+	}
 
-  if (need_adjust)
-    adjustment_changed_cb(NULL, view);
+	if (need_adjust) adjustment_changed_cb (NULL, view);
 }
-
 
 
 /**
@@ -1273,66 +1165,68 @@ e_map_set_scroll_adjustments(GtkWidget * widget,
  * 
  * Return value: A newly-created map widget.
  **/
-EMap *e_map_new()
+EMap *
+e_map_new ()
 {
-  GtkWidget *widget;
-  
-  widget = GTK_WIDGET(gtk_type_new(TYPE_E_MAP));
-  return(E_MAP(widget));
+	GtkWidget *widget;
+
+	widget = GTK_WIDGET (gtk_type_new (TYPE_E_MAP));
+	return (E_MAP (widget));
 }
 
 
-static void set_scroll_area(EMap *view)
+static void
+set_scroll_area (EMap *view)
 {
-  EMapPrivate *priv;
+	EMapPrivate *priv;
 
-  priv = view->priv;
+	priv = view->priv;
 
-  if (!GTK_WIDGET_REALIZED(GTK_WIDGET(view))) return;
+	if (!GTK_WIDGET_REALIZED (GTK_WIDGET (view))) return;
 
-  /* Set scroll increments */
+	/* Set scroll increments */
 
-  priv->hadj->page_size = GTK_WIDGET(view)->allocation.width;
-  priv->hadj->page_increment = GTK_WIDGET(view)->allocation.width / 2;
-  priv->hadj->step_increment = SCROLL_STEP_SIZE;
+	priv->hadj->page_size = GTK_WIDGET (view)->allocation.width;
+	priv->hadj->page_increment = GTK_WIDGET (view)->allocation.width / 2;
+	priv->hadj->step_increment = SCROLL_STEP_SIZE;
 
-  priv->vadj->page_size = GTK_WIDGET(view)->allocation.height;
-  priv->vadj->page_increment = GTK_WIDGET(view)->allocation.height / 2;
-  priv->vadj->step_increment = SCROLL_STEP_SIZE;
+	priv->vadj->page_size = GTK_WIDGET (view)->allocation.height;
+	priv->vadj->page_increment = GTK_WIDGET (view)->allocation.height / 2;
+	priv->vadj->step_increment = SCROLL_STEP_SIZE;
 
-  /* Set scroll bounds and new offsets */
+	/* Set scroll bounds and new offsets */
 
-  priv->hadj->lower = 0;
-  if (priv->map_render_pixbuf)
-    priv->hadj->upper = gdk_pixbuf_get_width(priv->map_render_pixbuf);
+	priv->hadj->lower = 0;
+	if (priv->map_render_pixbuf)
+		priv->hadj->upper = gdk_pixbuf_get_width (priv->map_render_pixbuf);
 
-  priv->vadj->lower = 0;
-  if (priv->map_render_pixbuf)
-    priv->vadj->upper = gdk_pixbuf_get_height(priv->map_render_pixbuf);
+	priv->vadj->lower = 0;
+	if (priv->map_render_pixbuf)
+		priv->vadj->upper = gdk_pixbuf_get_height (priv->map_render_pixbuf);
 
-  gtk_signal_emit_by_name(GTK_OBJECT(priv->hadj), "changed");
-  gtk_signal_emit_by_name(GTK_OBJECT(priv->vadj), "changed");
+	gtk_signal_emit_by_name (GTK_OBJECT (priv->hadj), "changed");
+	gtk_signal_emit_by_name (GTK_OBJECT (priv->vadj), "changed");
 
-  priv->xofs = CLAMP(priv->xofs, 0, priv->hadj->upper - priv->hadj->page_size);
-  priv->yofs = CLAMP(priv->yofs, 0, priv->vadj->upper - priv->vadj->page_size);
+	priv->xofs = CLAMP (priv->xofs, 0, priv->hadj->upper - priv->hadj->page_size);
+	priv->yofs = CLAMP (priv->yofs, 0, priv->vadj->upper - priv->vadj->page_size);
 
-  if (priv->hadj->value != priv->xofs)
-  {
-    priv->hadj->value = priv->xofs;
+	if (priv->hadj->value != priv->xofs)
+	{
+		priv->hadj->value = priv->xofs;
 
-    gtk_signal_handler_block_by_data(GTK_OBJECT(priv->hadj), view);
-    gtk_signal_emit_by_name(GTK_OBJECT(priv->hadj), "value_changed");
-    gtk_signal_handler_unblock_by_data(GTK_OBJECT(priv->hadj), view);
-  }
+		gtk_signal_handler_block_by_data (GTK_OBJECT (priv->hadj), view);
+		gtk_signal_emit_by_name (GTK_OBJECT (priv->hadj), "value_changed");
+		gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->hadj), view);
+	}
 
-  if (priv->vadj->value != priv->yofs)
-  {
-    priv->vadj->value = priv->yofs;
+	if (priv->vadj->value != priv->yofs)
+	{
+		priv->vadj->value = priv->yofs;
 
-    gtk_signal_handler_block_by_data(GTK_OBJECT(priv->vadj), view);
-    gtk_signal_emit_by_name(GTK_OBJECT(priv->vadj), "value_changed");
-    gtk_signal_handler_unblock_by_data(GTK_OBJECT(priv->vadj), view);
-  }
+		gtk_signal_handler_block_by_data (GTK_OBJECT (priv->vadj), view);
+		gtk_signal_emit_by_name (GTK_OBJECT (priv->vadj), "value_changed");
+		gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->vadj), view);
+	}
 }
 
 
@@ -1344,111 +1238,106 @@ static void set_scroll_area(EMap *view)
  * Longitude E <-180, 180]
  * Latitude  E <-90, 90]   */
 
-void e_map_window_to_world(EMap *map,
-                           double win_x,
-                           double win_y,
-                           double *world_longitude,
-                           double *world_latitude)
+void
+e_map_window_to_world (EMap *map, double win_x, double win_y, double *world_longitude, double *world_latitude)
 {
-  EMapPrivate *priv;
-  int width, height;
-  
-  g_return_if_fail (map);
-  g_return_if_fail (GTK_WIDGET_REALIZED(GTK_WIDGET(map)));
+	EMapPrivate *priv;
+	int width, height;
 
-  priv = map->priv;
-  width = gdk_pixbuf_get_width(priv->map_render_pixbuf);
-  height = gdk_pixbuf_get_height(priv->map_render_pixbuf);
+	g_return_if_fail (map);
+	g_return_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (map)));
 
-  *world_longitude = (win_x /* + priv->xofs */ - (double) width / 2.0) /
-                     ((double) width / 2.0) * 180.0;
-  *world_latitude = ((double) height / 2.0 - win_y /* - priv->yofs */) /
-                    ((double) height / 2.0) * 90.0;
+	priv = map->priv;
+	width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
+	height = gdk_pixbuf_get_height (priv->map_render_pixbuf);
+
+	*world_longitude = (win_x /* + priv->xofs */  - (double) width / 2.0) /
+		((double) width / 2.0) * 180.0;
+	*world_latitude = ((double) height / 2.0 - win_y /* - priv->yofs */ ) /
+		((double) height / 2.0) * 90.0;
 }
 
 
-void e_map_world_to_window(EMap *map,
-                           double world_longitude,
-                           double world_latitude,
-                           double *win_x,
-                           double *win_y)
+void
+e_map_world_to_window (EMap *map, double world_longitude, double world_latitude, double *win_x, double *win_y)
 {
-  EMapPrivate *priv;
-  int width, height;
-  
-  g_return_if_fail (map);
-  g_return_if_fail (GTK_WIDGET_REALIZED(GTK_WIDGET(map)));
-  g_return_if_fail (world_longitude > -180.0 && world_longitude <= 180.0);
-  g_return_if_fail (world_latitude > -90.0 && world_latitude <= 90.0);
+	EMapPrivate *priv;
+	int width, height;
 
-  priv = map->priv;
-  width = gdk_pixbuf_get_width(priv->map_render_pixbuf);
-  height = gdk_pixbuf_get_height(priv->map_render_pixbuf);
+	g_return_if_fail (map);
+	g_return_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (map)));
+	g_return_if_fail (world_longitude > -180.0 && world_longitude <= 180.0);
+	g_return_if_fail (world_latitude > -90.0 && world_latitude <= 90.0);
 
-  *win_x = (width / 2.0 + (width / 2.0) * world_longitude / 180.0);
-  *win_y = (height / 2.0 - (height / 2.0) * world_latitude / 90.0);
+	priv = map->priv;
+	width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
+	height = gdk_pixbuf_get_height (priv->map_render_pixbuf);
+
+	*win_x = (width / 2.0 + (width / 2.0) * world_longitude / 180.0);
+	*win_y = (height / 2.0 - (height / 2.0) * world_latitude / 90.0);
 
 #ifdef DEBUG
-  printf("Map size: (%d, %d)\nCoords: (%.1f, %.1f) -> (%.1f, %.1f)\n---\n",
-         width, height, world_longitude, world_latitude, *win_x, *win_y);
+	printf ("Map size: (%d, %d)\nCoords: (%.1f, %.1f) -> (%.1f, %.1f)\n---\n", width, height, world_longitude, world_latitude, *win_x, *win_y);
 #endif
 }
 
 
-void e_map_zoom_to_site(EMap *map,
-                        double longitude,
-                        double latitude)
+void
+e_map_zoom_to_site (EMap *map, double longitude, double latitude)
 {
-  EMapPrivate *priv;
-  int width, height;
-  
-  g_return_if_fail (map);
-  g_return_if_fail (GTK_WIDGET_REALIZED(GTK_WIDGET(map)));
+	EMapPrivate *priv;
+	int width, height;
 
-  priv = map->priv;
+	g_return_if_fail (map);
+	g_return_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (map)));
 
-  if (priv->zoom_state == E_MAP_ZOOMED_IN) e_map_zoom_out(map);
-  else if (priv->zoom_state != E_MAP_ZOOMED_OUT) return;
+	priv = map->priv;
 
-  width = gdk_pixbuf_get_width(priv->map_render_pixbuf);
-  height = gdk_pixbuf_get_height(priv->map_render_pixbuf);
-  
-  priv->zoom_state = E_MAP_ZOOMING_IN;
-  priv->zoom_target_long = longitude;
-  priv->zoom_target_lat = latitude;
+	if (priv->zoom_state == E_MAP_ZOOMED_IN) e_map_zoom_out (map);
+	else if (priv->zoom_state != E_MAP_ZOOMED_OUT) return;
 
-  zoom_do(map);
+	width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
+	height = gdk_pixbuf_get_height (priv->map_render_pixbuf);
+
+	priv->zoom_state = E_MAP_ZOOMING_IN;
+	priv->zoom_target_long = longitude;
+	priv->zoom_target_lat = latitude;
+
+	zoom_do (map);
 }
 
 
-void e_map_zoom_out(EMap *map)
+void
+e_map_zoom_out (EMap *map)
 {
-  EMapPrivate *priv;
-  int width, height;
+	EMapPrivate *priv;
+	int width, height;
 
-  g_return_if_fail (map);
-  g_return_if_fail (GTK_WIDGET_REALIZED(GTK_WIDGET(map)));
+	g_return_if_fail (map);
+	g_return_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (map)));
 
-  priv = map->priv;
-  
-  if (priv->zoom_state != E_MAP_ZOOMED_IN) return;
-  
-  width = gdk_pixbuf_get_width(priv->map_render_pixbuf);
-  height = gdk_pixbuf_get_height(priv->map_render_pixbuf);
+	priv = map->priv;
 
-  priv->zoom_state = E_MAP_ZOOMING_OUT;
-  zoom_do(map);
-  priv->zoom_state = E_MAP_ZOOMED_OUT;
+	if (priv->zoom_state != E_MAP_ZOOMED_IN) return;
+
+	width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
+	height = gdk_pixbuf_get_height (priv->map_render_pixbuf);
+
+	priv->zoom_state = E_MAP_ZOOMING_OUT;
+	zoom_do (map);
+	priv->zoom_state = E_MAP_ZOOMED_OUT;
 }
 
 
-void e_map_set_smooth_zoom(EMap *map, gboolean state)
+void
+e_map_set_smooth_zoom (EMap *map, gboolean state)
 {
-  ((EMapPrivate *) map->priv)->smooth_zoom = state;
+	((EMapPrivate *) map->priv)->smooth_zoom = state;
 }
 
 
-gboolean e_map_get_smooth_zoom(EMap *map)
+gboolean
+e_map_get_smooth_zoom (EMap *map)
 {
-  return (((EMapPrivate *) map->priv)->smooth_zoom);
+	return (((EMapPrivate *) map->priv)->smooth_zoom);
 }
