@@ -2,6 +2,7 @@
 <!DOCTYPE glade-interface SYSTEM "http://glade.gnome.org/glade-2.0.dtd">
 
 <glade-interface>
+<requires lib="gnome"/>
 
 <widget class="GtkWindow" id="window1">
   <property name="title" translatable="yes"></property>
@@ -43,7 +44,7 @@
 	  <child>
 	    <widget class="GtkLabel" id="label48">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">Use this tool to decide the services to be run and the runlevels in which they are run.</property>
+	      <property name="label" translatable="yes">Use this tool to specify which services to run and the runlevel for the services.</property>
 	      <property name="use_underline">False</property>
 	      <property name="use_markup">True</property>
 	      <property name="justify">GTK_JUSTIFY_CENTER</property>
@@ -128,7 +129,6 @@
 
       <child>
 	<widget class="GtkVBox" id="vbox1">
-	  <property name="visible">True</property>
 	  <property name="homogeneous">False</property>
 	  <property name="spacing">6</property>
 
@@ -360,7 +360,7 @@
 	      <child>
 		<widget class="GtkLabel" id="label67">
 		  <property name="visible">True</property>
-		  <property name="label" translatable="yes">Script name:</property>
+		  <property name="label" translatable="yes">Service:</property>
 		  <property name="use_underline">False</property>
 		  <property name="use_markup">True</property>
 		  <property name="justify">GTK_JUSTIFY_LEFT</property>

@@ -12,16 +12,16 @@ gchar *s = N_("*");
 gchar *s = N_("_All users:");
 gchar *s = N_("<span weight=\"bold\">Group Members</span>");
 gchar *s = N_("Group _members:");
-gchar *s = N_("Show a_ll users and groups");
-gchar *s = N_("This is a list of the users available in the system. Create new users or edit existing user settings with this dialog.");
+gchar *s = N_("This is the list of the users available on the system. Create new users or edit existing user settings with this dialog.");
 gchar *s = N_("_Add User...");
 gchar *s = N_("_Delete");
 gchar *s = N_("_Profiles...");
 gchar *s = N_("Users");
-gchar *s = N_("This is the list of the groups available in the system. Create new groups or edit existing groups with this dialog.");
+gchar *s = N_("This is the list of the groups available on the system. Create new groups or edit existing groups with this dialog.");
 gchar *s = N_("_Add Group...");
 gchar *s = N_("_Delete");
 gchar *s = N_("Groups");
+gchar *s = N_("Show a_ll users and groups");
 gchar *s = N_("EXPERIMENTAL NIS support.\n"
               "It's only available if You have NIS\n"
               "and when You click on \"More Settings\".");
@@ -57,7 +57,7 @@ gchar *s = N_("_Username:");
 gchar *s = N_("_Real name:");
 gchar *s = N_("*");
 gchar *s = N_("*");
-gchar *s = N_("<span weight=\"bold\">Contact information</span>");
+gchar *s = N_("<span weight=\"bold\">Contact Information</span>");
 gchar *s = N_("O_ffice location:");
 gchar *s = N_("_Work phone:");
 gchar *s = N_("_Home phone:");
