@@ -5,6 +5,5 @@
  */
 
 gchar *s = N_("Name Resolution Administration");
-gchar *s = N_("Scanning your system configuration.\n"
-              "\n"
-              "This could take a few seconds; please hold on in the meantime.");
+gchar *s = N_("Scanning your system configuration.");
+gchar *s = N_("%P %%");

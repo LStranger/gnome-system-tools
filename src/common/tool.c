@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <glib.h>
 #include <gnome.h>
 #include <gnome-xml/tree.h>
@@ -69,6 +70,18 @@ make_glade_path (char *task)
 	path1 = g_strjoin (".", path0, "glade", NULL);
 	g_free (path0);
 	return (path1);
+}
+
+
+GtkWidget *tool_widget_get(gchar *name)
+{
+  return(glade_xml_get_widget(tool_context->interface, name));
+}
+
+
+GtkWidget *tool_widget_get_common(gchar *name)
+{
+  return(glade_xml_get_widget(tool_context->common_interface, name));
 }
 
 
@@ -122,6 +135,56 @@ void tool_context_destroy(ToolContext *tc)
 }
 
 
+void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
+{
+  char c;
+  GtkWidget *bar;
+  gfloat p;
+
+  bar = tool_widget_get_common("progress");
+  
+  if (read(fd, &c, 1) < 1) return;
+  
+  if (tool_context->read_state == TOOL_READ_PROGRESS_MAX)
+  {
+    if (c - '0' < 10 && c - '0' >= 0)
+    {
+      tool_context->progress_max *= 10;
+      tool_context->progress_max += (c - '0');
+    }
+    else
+      tool_context->read_state = TOOL_READ_PROGRESS_DONE;
+  }
+  else if (c != '.') gtk_main_quit();
+  else
+  {
+    /* Update progressbar */
+
+    tool_context->progress_done += 1;
+
+    if (!tool_context->progress_max) p = 0.0;
+    else p = (gfloat) tool_context->progress_done / tool_context->progress_max;
+    if (p > 1.0) p = 1.0;
+
+    gtk_progress_set_percentage(GTK_PROGRESS(bar), p);
+  }
+}
+
+
+void read_progress(int fd)
+{
+  guint input_id;
+  
+  tool_context->progress_max = 0;
+  tool_context->read_state = TOOL_READ_PROGRESS_MAX;
+  input_id = gtk_input_add_full(fd, GDK_INPUT_READ, read_progress_tick,
+                                NULL, NULL, NULL);
+  gtk_main();
+  
+  gtk_input_remove(input_id);
+}
+
+
 gboolean tool_config_load()
 {
   ToolContext *tc;
@@ -129,7 +192,7 @@ gboolean tool_config_load()
 	int t, len;
 	char *p;
 	/* char *argv[] = { 0, "--get", "-v", 0 }; */
-	char *argv[] = { 0, "--get", 0 };
+	char *argv[] = { 0, "--get", "--progress", 0 };
 	gchar *path;
 
   tc = tool_context;
@@ -155,9 +218,12 @@ gboolean tool_config_load()
 		 * mechanism. Let's just load it all into memory, then. Also, refusing
 		 * enormous documents can be considered a plus. </dystopic> */
 
-		p = malloc (102400);
-		len = read (fd[0], p, 102399);
+    read_progress(fd[0]);
 
+		p = malloc (102400);
+    fcntl(fd[0], F_SETFL, 0);  /* Let's block */
+		for (len = 0; (t = read (fd[0], p + len, 102399 - len)); ) len += t;
+    
 		if (len < 1 || len == 102399)
 		{
 			free (p);
@@ -247,18 +313,6 @@ xmlDocPtr tool_config_get_xml()
 void tool_config_set_xml(xmlDocPtr xml)
 {
   tool_context->config = xml;
-}
-
-
-GtkWidget *tool_widget_get(gchar *name)
-{
-  return(glade_xml_get_widget(tool_context->interface, name));
-}
-
-
-GtkWidget *tool_widget_get_common(gchar *name)
-{
-  return(glade_xml_get_widget(tool_context->common_interface, name));
 }
 
 

@@ -12,6 +12,13 @@ typedef enum
 }
 ToolState;
 
+typedef enum
+{
+  TOOL_READ_PROGRESS_MAX,
+  TOOL_READ_PROGRESS_DONE
+}
+ToolReadState;
+
 struct _ToolContext
 {
 	gchar *task;
@@ -19,6 +26,10 @@ struct _ToolContext
 	GladeXML *interface;
 	GladeXML *common_interface;
   gboolean frozen, modified;
+
+  ToolReadState read_state;
+  guint progress_max,
+        progress_done;
 };
 
 
