@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-05-23 17:39+0200\n"
-"PO-Revision-Date: 2001-05-23 17:44+0200\n"
+"POT-Creation-Date: 2001-05-24 22:38+0200\n"
+"PO-Revision-Date: 2001-05-24 23:00+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -702,7 +702,7 @@ msgstr "Komplexitet"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.in.h:2 src/common/xst-tool.c:640
+#: interfaces/common.glade.in.h:2 src/common/xst-tool.c:641
 msgid "Scanning your system configuration."
 msgstr "Läser av din systemkonfiguration."
 
@@ -811,7 +811,7 @@ msgid "Mount this partition"
 msgstr "Montera denna partition"
 
 #: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:32
-#: src/shares/tables.c:75
+#: src/shares/tables.c:79
 msgid "Mounted"
 msgstr "Monterad"
 
@@ -1005,7 +1005,7 @@ msgid "Existing:"
 msgstr "Existerande:"
 
 #: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:20
-#: src/shares/tables.c:72
+#: src/shares/tables.c:76
 msgid "Host"
 msgstr "Värd"
 
@@ -1069,7 +1069,7 @@ msgstr "Inställningar för det markerade aliaset"
 msgid "Use WINS server:"
 msgstr "Använd WINS-server:"
 
-#: interfaces/nameresolution.glade.in.h:33 interfaces/network.glade.in.h:114
+#: interfaces/nameresolution.glade.in.h:33 interfaces/network.glade.in.h:113
 msgid "Workgroup:"
 msgstr "Arbetsgrupp:"
 
@@ -1146,7 +1146,7 @@ msgstr "Alias:"
 msgid "Allow activation control for all users"
 msgstr "Tillåt aktiveringskontroll för alla användare"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:985
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1009
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -1188,7 +1188,7 @@ msgid "Create a new Internet Connection "
 msgstr "Skapa en ny internetanslutning "
 
 #: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:31
-#: src/network/connection.c:984
+#: src/network/connection.c:1008
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1288,7 +1288,7 @@ msgstr "IP-inställningar"
 msgid "Local IP:"
 msgstr "Lokalt IP:"
 
-#: interfaces/network.glade.in.h:62 src/network/connection.c:983
+#: interfaces/network.glade.in.h:62 src/network/connection.c:1007
 msgid "Manual"
 msgstr "Manuell"
 
@@ -1325,82 +1325,78 @@ msgstr ""
 "identifiera kontot."
 
 #: interfaces/network.glade.in.h:69
-msgid "Obtain DNS information from DHCP / BOOTP server"
-msgstr "Få DNS-information från DHCP-/BOOTP-server"
-
-#: interfaces/network.glade.in.h:70
 msgid "Options"
 msgstr "Alternativ"
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:70
 msgid "Parallel Line"
 msgstr "Parallellinje"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:71
 msgid "Password (confirm):"
 msgstr "Lösenord (bekräfta):"
 
-#: interfaces/network.glade.in.h:73 interfaces/shares.glade.in.h:38
+#: interfaces/network.glade.in.h:72 interfaces/shares.glade.in.h:38
 msgid "Password:"
 msgstr "Lösenord:"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:73
 msgid "Phone number:"
 msgstr "Telefonnummer:"
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:74
 msgid "Pppd options:"
 msgstr "pppd-alternativ:"
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:75
 msgid "Primary:"
 msgstr "Primär:"
 
-#: interfaces/network.glade.in.h:77
+#: interfaces/network.glade.in.h:76
 msgid "Remote IP:"
 msgstr "Fjärr-IP:"
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:77
 msgid "Restart if connection cuts or fails to start"
 msgstr "Starta om om anslutningen bryts eller inte startar"
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:78
 msgid "Search Domains:"
 msgstr "Sökdomäner:"
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:79
 msgid "Secondary:"
 msgstr "Sekundär:"
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:80
 msgid "Select which type of connection you would like to add."
 msgstr "Välj den typ av anslutning som du vill lägga till."
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:81
 msgid "Session ID:"
 msgstr "Sessions-ID:"
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:82
 msgid "Set DNS servers manually"
 msgstr "Ange DNS-servrar manuellt"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:83
 msgid "Set as default route"
 msgstr "Ställ in standardrutt"
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:84
 msgid "Start PPP as soon as modem connects"
 msgstr "Starta PPP så fort som modemet ansluter"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:85
 msgid "Status"
 msgstr "Status"
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:86
 msgid "Subnet mask:"
 msgstr "Subnätmask:"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:87
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -1412,7 +1408,7 @@ msgstr ""
 "hur fortsättning ska ske (bakåt,\n"
 "avbryt eller slutför)."
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:91
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click "
 "\"Cancel\"."
@@ -1420,15 +1416,15 @@ msgstr ""
 "För att fortsätta konfigurera ditt konto klickar du på \"Nästa\". För att "
 "avsluta klickar du på \"Avbryt\"."
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:92
 msgid "Update DNS when this connection becomes active"
 msgstr "Uppdatera DNS när denna anslutning blir aktiv"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:93
 msgid "Use remote IP as default gateway"
 msgstr "Använd fjärr-IP-numret som standardgateway"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:94
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who and when will activate connections."
@@ -1437,27 +1433,27 @@ msgstr ""
 "Aktiveringshantering låter dig ange av vem och när anslutningar kan "
 "aktiveras."
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:95
 msgid "User name:"
 msgstr "Användarnamn:"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:96
 msgid "WINS server:"
 msgstr "WINS-server:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:97
 msgid "Warning message goes here.."
 msgstr "Varningsmeddelande hamnar här..."
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:98
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:99
 msgid "Wavelan"
 msgstr "Wavelan"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:100
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1483,11 +1479,11 @@ msgstr ""
 "\n"
 "Klicka på knappen \"Nästa\" för att börja."
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:111
 msgid "Windows Networking"
 msgstr "Windows-nätverk"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:112
 msgid "Wireless networking settings."
 msgstr "Inställningar för trådlöst nätverk."
 
@@ -1511,7 +1507,7 @@ msgstr "Bläddringsbar"
 msgid "Client"
 msgstr "Klient"
 
-#: interfaces/shares.glade.in.h:8 src/shares/tables.c:78
+#: interfaces/shares.glade.in.h:8 src/shares/tables.c:82
 msgid "Clients"
 msgstr "Klienter"
 
@@ -1587,11 +1583,11 @@ msgstr ""
 "Importer är kataloger som finns på andra datorer och som du kan komma åt "
 "över nätverket."
 
-#: interfaces/shares.glade.in.h:29 src/shares/tables.c:769
+#: interfaces/shares.glade.in.h:29 src/shares/tables.c:777
 msgid "Mount"
 msgstr "Montera"
 
-#: interfaces/shares.glade.in.h:30 src/shares/tables.c:74
+#: interfaces/shares.glade.in.h:30 src/shares/tables.c:78
 msgid "Mount Point"
 msgstr "Monteringspunkt"
 
@@ -1608,12 +1604,12 @@ msgid "NFS"
 msgstr "NFS"
 
 #: interfaces/shares.glade.in.h:36 src/boot/e-table.c:40
-#: src/shares/tables.c:76
+#: src/shares/tables.c:80
 msgid "Name"
 msgstr "Namn"
 
-#: interfaces/shares.glade.in.h:39 src/shares/tables.c:73
-#: src/shares/tables.c:77
+#: interfaces/shares.glade.in.h:39 src/shares/tables.c:77
+#: src/shares/tables.c:81
 msgid "Path"
 msgstr "Sökväg"
 
@@ -1676,7 +1672,7 @@ msgstr ""
 msgid "Username:"
 msgstr "Användarnamn:"
 
-#: interfaces/shares.glade.in.h:52 src/shares/tables.c:79
+#: interfaces/shares.glade.in.h:52 src/shares/tables.c:83
 msgid "Writable"
 msgstr "Skrivbar"
 
@@ -2189,15 +2185,15 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/xst-tool.c:544
+#: src/common/xst-tool.c:545
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/xst-tool.c:570
+#: src/common/xst-tool.c:571
 msgid "Updating your system configuration."
 msgstr "Uppdaterar din systemkonfiguration."
 
-#: src/common/xst-tool.c:694
+#: src/common/xst-tool.c:695
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2205,32 +2201,25 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/xst-tool.c:868
+#: src/common/xst-tool.c:869
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1017
+#: src/common/xst-tool.c:1018
 msgid "Pretending we are root..."
 msgstr "Låtsas att vi är root..."
 
-#: src/common/xst-tool.c:1021
+#: src/common/xst-tool.c:1027
 msgid ""
 "You need full administration privileges (i.e. root)\n"
-"to run this configuration tool. You can acquire\n"
-"such privileges by running it from the GNOME Control\n"
-"Center or issuing an \"su\" command in a shell.\n"
-"\n"
-"You will be unable to make any changes. Continue anyway?"
+"to use this configuration tool. Please enter the root\n"
+"password to acquire such privileges.\n"
 msgstr ""
-"Du måste ha fullständiga administrationsrättigheter\n"
-"(dvs root) för att kunna köra detta konfigurations-\n"
-"verktyg. Du kan få sådana rättigheter genom att köra\n"
-"det från GNOME-kontrollpanelen eller genom att köra\n"
-"kommandot \"su\" i ett skal.\n"
-"\n"
-"Du kommer inte att kunna göra några ändringar.\n"
-"Fortsätta ändå?"
+"Du behöver fullständiga administrationsrättigheter\n"
+"(d.v.s. root) för att använda detta konfigurations-\n"
+"verktyg. Ange rootlösenordet för att få sådana\n"
+"rättigheter.\n"
 
 #: src/disks/main.c:39
 msgid "Disk Partitions"
@@ -2256,53 +2245,53 @@ msgstr "Växlingsutrymmet %s finns redan."
 msgid "Swap Management"
 msgstr "Växlingsfilshantering"
 
-#: src/network/callbacks.c:169
+#: src/network/callbacks.c:165
 msgid "The name of this computer"
 msgstr "Namnet på denna dator"
 
-#: src/network/callbacks.c:172
+#: src/network/callbacks.c:168
 msgid "A short description of your computer"
 msgstr "En kort beskrivning av din dator"
 
-#: src/network/callbacks.c:175
+#: src/network/callbacks.c:171
 msgid "The Windows Networking workgroup for your network"
 msgstr "Arbetsgruppen för ditt nätverk i Windows-nätverk"
 
-#: src/network/callbacks.c:178
+#: src/network/callbacks.c:174
 msgid "The IP address of your WINS server"
 msgstr "IP-adressen till din WINS-server"
 
-#: src/network/callbacks.c:181
+#: src/network/callbacks.c:177
 msgid "The DNS domain for your computer"
 msgstr "DNS-domänen till din dator"
 
-#: src/network/callbacks.c:184
+#: src/network/callbacks.c:180
 msgid "A list of your DNS servers' IP addresses"
 msgstr "En lista på dina DNS-servrars IP-adresser"
 
-#: src/network/callbacks.c:187
+#: src/network/callbacks.c:183
 msgid "A list of domains where hosts will be searched"
 msgstr "En lista på domäner där värdar kommer att sökas"
 
-#: src/network/callbacks.c:190
+#: src/network/callbacks.c:186
 msgid "The IP address of this host"
 msgstr "IP-adress för denna dator"
 
-#: src/network/callbacks.c:193
+#: src/network/callbacks.c:189
 msgid "Aliases for this host, one per line"
 msgstr "Alias för denna dator, en per rad"
 
-#: src/network/callbacks.c:331
+#: src/network/callbacks.c:329
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Ta bort anslutningen %s: \"%s\"?"
 
-#: src/network/callbacks.c:333
+#: src/network/callbacks.c:331
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Ta bort anslutningen %s?"
 
-#: src/network/callbacks.c:404
+#: src/network/callbacks.c:393
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2310,11 +2299,11 @@ msgstr ""
 "Du har inte SMB-stöd installerat. Installera SMB-stöd på systemet\n"
 "för att möjliggöra nätverksanslutning till windows."
 
-#: src/network/callbacks.c:405
+#: src/network/callbacks.c:394
 msgid "SMB support missing."
 msgstr "Stöd för SMB saknas."
 
-#: src/network/callbacks.c:442
+#: src/network/callbacks.c:431
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications,\n"
@@ -2328,19 +2317,19 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:449
+#: src/network/callbacks.c:438
 msgid "Don't change host name"
 msgstr "Ändra inte värdnamnet"
 
-#: src/network/callbacks.c:480
+#: src/network/callbacks.c:471
 msgid "Active"
 msgstr "Aktiv"
 
-#: src/network/callbacks.c:481
+#: src/network/callbacks.c:472
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/network/callbacks.c:498
+#: src/network/callbacks.c:489
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2383,24 +2372,24 @@ msgstr "Loopback: virtuellt gränssnitt"
 msgid "Unknown type"
 msgstr "Okänd typ"
 
-#: src/network/connection.c:510
+#: src/network/connection.c:521
 msgid "To activate"
 msgstr "Att aktivera"
 
-#: src/network/connection.c:511
+#: src/network/connection.c:522
 msgid "To inactivate"
 msgstr "Att inaktivera"
 
-#: src/network/hosts.c:379
+#: src/network/hosts.c:380
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Är du säker på att du vill ta bort aliasen för %s?"
 
-#: src/network/main.c:117
+#: src/network/main.c:114
 msgid "\tRun the internet conection druid."
 msgstr "\tKör guiden Internetanslutning."
 
-#: src/network/main.c:124
+#: src/network/main.c:121
 msgid "Network Settings"
 msgstr "Nätverksinställningar"
 
@@ -2463,15 +2452,15 @@ msgstr ""
 msgid "New Shares Admin"
 msgstr "Administrera nya utdelningar"
 
-#: src/shares/tables.c:80
+#: src/shares/tables.c:84
 msgid "Pattern"
 msgstr "Mönster"
 
-#: src/shares/tables.c:81
+#: src/shares/tables.c:85
 msgid "Write"
 msgstr "Skriv"
 
-#: src/shares/tables.c:769
+#: src/shares/tables.c:777
 msgid "Unmount"
 msgstr "Avmontera"
 
@@ -3190,6 +3179,26 @@ msgstr "Import och export av kataloger"
 #: src/shares/shares.desktop.in.in.h:2
 msgid "Shares"
 msgstr "Utdelningar"
+
+#~ msgid "Obtain DNS information from DHCP / BOOTP server"
+#~ msgstr "Få DNS-information från DHCP-/BOOTP-server"
+
+#~ msgid ""
+#~ "You need full administration privileges (i.e. root)\n"
+#~ "to run this configuration tool. You can acquire\n"
+#~ "such privileges by running it from the GNOME Control\n"
+#~ "Center or issuing an \"su\" command in a shell.\n"
+#~ "\n"
+#~ "You will be unable to make any changes. Continue anyway?"
+#~ msgstr ""
+#~ "Du måste ha fullständiga administrationsrättigheter\n"
+#~ "(dvs root) för att kunna köra detta konfigurations-\n"
+#~ "verktyg. Du kan få sådana rättigheter genom att köra\n"
+#~ "det från GNOME-kontrollpanelen eller genom att köra\n"
+#~ "kommandot \"su\" i ett skal.\n"
+#~ "\n"
+#~ "Du kommer inte att kunna göra några ändringar.\n"
+#~ "Fortsätta ändå?"
 
 #~ msgid "window1"
 #~ msgstr "window1"
