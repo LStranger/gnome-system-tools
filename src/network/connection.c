@@ -41,17 +41,6 @@ struct _GstNetworkInterfaceDescription {
 	GdkPixbuf         *pixbuf;
 };
 
-
-enum {
-	CONNECTION_LIST_COL_DEV_PIX,
-	CONNECTION_LIST_COL_DEVICE,
-	CONNECTION_LIST_COL_STAT_PIX,
-	CONNECTION_LIST_COL_DESCR,
-
-	CONNECTION_LIST_COL_DATA,
-	CONNECTION_LIST_COL_LAST
-};
-
 static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ N_("Other type"),                   GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
 	{ N_("Ethernet LAN card"),            GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
@@ -63,19 +52,6 @@ static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ N_("Unknown type"),                 GST_CONNECTION_UNKNOWN, "network.png",     NULL,         NULL },
 	{ NULL,                               GST_CONNECTION_UNKNOWN, NULL,              NULL,         NULL  }
 };
-
-
-/* sigh more libglade callbacks */
-/*static void on_status_enabled_toggled (GtkWidget *w, GstConnection *cxn);*/
-static void on_connection_ok_clicked (GtkWidget *w, GstConnection *cxn);
-static void on_connection_cancel_clicked (GtkWidget *w, GstConnection *cxn);
-static void on_connection_config_dialog_destroy (GtkWidget *w, GstConnection *cxn);
-static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, GstConnection *cxn);
-static void on_connection_modified (GtkWidget *w, GstConnection *cxn);
-static void on_wvlan_adhoc_toggled (GtkWidget *w, GstConnection *cxn);
-static void on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn);
-static gboolean on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection *cxn);
-static void on_connection_list_clicked (GtkWidget *w, gpointer data);
 
 #define W(s) my_get_widget (cxn->xml, (s))
 
@@ -416,7 +392,7 @@ connection_config_type_to_str (IPConfigType type)
 	return g_strdup (protos[i]);
 }
 
-static void
+void
 connection_set_modified (GstConnection *cxn, gboolean state)
 {
 	if (cxn->frozen || !gst_tool_get_access (tool))
@@ -543,60 +519,6 @@ connection_list_select_row (GtkTreeSelection *selection, gpointer data)
 			connection_actions_set_sensitive (TRUE);
 	} else
 		connection_actions_set_sensitive (FALSE);
-}
-
-static void
-on_connection_list_clicked (GtkWidget *w, gpointer data)
-{
-	GtkTreePath *path;
-	GtkTreeViewColumn *column;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	GList *column_list;
-	gint ncol;
-	GdkPixbuf *stat_icon;
-	GstConnection *cxn;
-	GtkWidget *dialog;
-	gchar *txt;
-
-	cxn = connection_list_get_active ();
-	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (w), &path, &column);
-							  
-	ncol = g_list_index (column_list, column) + 1;
-
-	if (ncol == CONNECTION_LIST_COL_STAT_PIX)
-	{
-		model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
-		gtk_tree_model_get_iter (model, &iter, path);
-		
-		if (!cxn->enabled)
-		{
-			if (cxn->type != GST_CONNECTION_LO) {
-				txt = g_strdup_printf (_("Do you want to enable interface %s?"), cxn->dev);
-				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
-				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
-					on_connection_activate_clicked (w, NULL);
-
-				gtk_widget_destroy (dialog);
-				g_free (txt);
-			}
-		}
-		else
-		{
-			if (cxn->type != GST_CONNECTION_LO) {
-				txt = g_strdup_printf (_("Do you want to disable interface %s?"), cxn->dev);
-				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
-				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
-					on_connection_deactivate_clicked (w, NULL);
-
-				gtk_widget_destroy (dialog);
-				g_free (txt);
-			}
-		}
-	}
-	g_list_free (column_list);
-	gtk_tree_path_free (path);
 }
 
 static void
@@ -1475,7 +1397,7 @@ connection_free (GstConnection *cxn)
 	g_free (cxn->remote_address);
 }
 
-static void
+void
 connection_check_netmask_gui (GstConnection *cxn)
 {
         GtkWidget *netmask_widget, *address_widget;
@@ -1711,131 +1633,6 @@ connection_empty_gui (GstConnection *cxn)
 		break;
 	}
 }	
-
-static gboolean
-connection_config_save (GstConnection *cxn)
-{
-	GstConnection *tmp = g_new0 (GstConnection, 1);
-
-	tmp->window = cxn->window;
-	tmp->xml = cxn->xml;
-	tmp->type = cxn->type;
-	tmp->modified = cxn->modified;
-	tmp->creating = cxn->creating;
-	tmp->frozen = cxn->frozen;
-	tmp->ip_config = cxn->ip_config;
-	tmp->tmp_ip_config = cxn->tmp_ip_config;
-	
-	connection_empty_gui (tmp);
-	if (!connection_validate (tmp)) {
-		connection_free (tmp);
-		return FALSE;
-	}
-
-	connection_empty_gui (cxn);
-	connection_set_modified (cxn, FALSE);
-	connection_list_append (cxn);
-
-	return TRUE;
-}
-
-static void
-on_connection_ok_clicked (GtkWidget *w, GstConnection *cxn)
-{
-
-	if (cxn->modified) {
-		if (connection_config_save (cxn))
-			gtk_widget_destroy (cxn->window);
-		cxn->creating = FALSE;
-		gst_dialog_modify (tool->main_dialog);
-	} else
-		gtk_widget_destroy (cxn->window);
-}
-
-static void
-on_connection_cancel_clicked (GtkWidget *w, GstConnection *cxn)
-{
-	gtk_widget_destroy (cxn->window);
-
-	if (cxn->creating) {
-		connection_list_remove (cxn);
-		connection_free (cxn);
-		gst_dialog_modify (tool->main_dialog);
-	}
-}
-
-static void
-on_connection_config_dialog_destroy (GtkWidget *w, GstConnection *cxn)
-{
-	g_object_unref (G_OBJECT (cxn->xml));
-	cxn->xml = NULL;
-
-	cxn->window = NULL;
-}
-
-static gint
-on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, GstConnection *cxn)
-{
-	return FALSE;
-}
-
-static void
-on_connection_modified (GtkWidget *w, GstConnection *cxn)
-{
-	connection_set_modified (cxn, TRUE);
-}
-
-static void
-on_wvlan_adhoc_toggled (GtkWidget *w, GstConnection *cxn)
-{
-/* FIXME: implement on_wvlan_adhoc_toggled*/
-}
-
-static void
-on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
-{
-	xmlNodePtr root;
-	gchar *dev;
-	xmlDoc *doc = gst_tool_run_get_directive (tool, _("Autodetecting modem device"), "detect_modem", NULL);
-	GtkWidget *w;
-
-	g_return_if_fail (doc != NULL);
-
-	root = gst_xml_doc_get_root (doc);
-	dev = gst_xml_get_child_content (root, "device");
-
-	if (strcmp (dev, "") == 0) {
-		w = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
-					    _("Could not autodetect modem device, check that this is not busy and that it's correctly attached"));
-		gtk_dialog_run (GTK_DIALOG (w));
-		gtk_widget_destroy (w);
-	} else {
-		gtk_entry_set_text (GTK_ENTRY (W ("ppp_serial_port")), dev);
-	}
-	
-	g_free (dev);
-}
-
-static void
-on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn)
-{
-	gboolean active;
-
-	active = GTK_TOGGLE_BUTTON (W ("ppp_update_dns"))->active;
-
-	gtk_widget_set_sensitive (W ("ppp_dns1_label"), active);
-	gtk_widget_set_sensitive (W ("ppp_dns2_label"), active);	
-	gtk_widget_set_sensitive (W ("ppp_dns1"), active);
-	gtk_widget_set_sensitive (W ("ppp_dns2"), active);
-}
-
-static gboolean
-on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection *cxn)
-{
-	connection_check_netmask_gui (cxn);
-
-        return FALSE;
-}
 
 static void
 fill_general (GstConnection *cxn)
@@ -2303,4 +2100,31 @@ connection_list_select_connection (GstConnection *cxn)
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
 	if (connection_iter (cxn, &iter))
 		gtk_tree_selection_select_iter (select, &iter);
+}
+
+gboolean
+connection_config_save (GstConnection *cxn)
+{
+	GstConnection *tmp = g_new0 (GstConnection, 1);
+
+	tmp->window = cxn->window;
+	tmp->xml = cxn->xml;
+	tmp->type = cxn->type;
+	tmp->modified = cxn->modified;
+	tmp->creating = cxn->creating;
+	tmp->frozen = cxn->frozen;
+	tmp->ip_config = cxn->ip_config;
+	tmp->tmp_ip_config = cxn->tmp_ip_config;
+	
+	connection_empty_gui (tmp);
+	if (!connection_validate (tmp)) {
+		connection_free (tmp);
+		return FALSE;
+	}
+
+	connection_empty_gui (cxn);
+	connection_set_modified (cxn, FALSE);
+	connection_list_append (cxn);
+
+	return TRUE;
 }

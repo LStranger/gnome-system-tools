@@ -23,6 +23,7 @@
 
 #include <gnome.h>
 #include "gst-xml.h"
+#include "connection.h"
 
 typedef enum {
 	EF_ALLOW_NONE  = 0,
@@ -84,5 +85,35 @@ gboolean callbacks_check_dialer_hook       (GstDialog *dialog, gpointer data);
 gboolean callbacks_check_gateway_hook      (GstDialog *dialog, gpointer data);
 
 gboolean callbacks_tool_not_found_hook     (GstTool *tool, GstReportLine *rline, gpointer data);
+
+/* connection callbacks */
+void on_connection_list_clicked (GtkWidget*, gpointer);
+void on_connection_ok_clicked (GtkWidget*, GstConnection*);
+void on_connection_cancel_clicked (GtkWidget*, GstConnection*);
+void on_connection_config_dialog_destroy (GtkWidget*, GstConnection*);
+gint on_connection_config_dialog_delete_event (GtkWidget*, GdkEvent*, GstConnection*);
+void on_connection_modified (GtkWidget*, GstConnection*);
+void on_wvlan_adhoc_toggled (GtkWidget*, GstConnection*);
+void on_ppp_update_dns_toggled (GtkWidget*, GstConnection*);
+gboolean on_ip_address_focus_out (GtkWidget*, GdkEventFocus*, GstConnection*);
+void on_ppp_autodetect_modem_clicked (GtkWidget*, GstConnection*);
+
+/* Hosts tab callbacks */
+void on_hosts_ip_changed (GtkEditable*, gpointer);
+void on_hosts_alias_changed (GtkTextBuffer*, gpointer);
+void on_hosts_add_clicked (GtkWidget*, gpointer);
+void on_hosts_delete_clicked (GtkWidget*, gpointer);
+
+/* PPP dialog callbacks */
+void ppp_druid_on_window_delete_event (GtkWidget*, gpointer);
+void ppp_druid_on_druid_cancel (GtkWidget*, gpointer);
+gboolean ppp_druid_on_page_next (GtkWidget*, gpointer, gpointer);
+gboolean ppp_druid_on_page_back (GtkWidget*, gpointer, gpointer);
+void ppp_druid_on_page_prepare (GtkWidget*, gpointer, gpointer);
+void ppp_druid_on_page_last_finish (GtkWidget*, gpointer, gpointer);
+void ppp_druid_on_entry_changed (GtkWidget*, gpointer);
+void ppp_druid_on_entry_activate (GtkWidget*, gpointer);
+void ppp_druid_on_login_activate (GtkWidget*, gpointer);
+void ppp_druid_on_passwd_activate (GtkWidget*, gpointer);
 
 #endif /*  __CALLBACKS_H__  */

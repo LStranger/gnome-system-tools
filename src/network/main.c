@@ -30,8 +30,8 @@
 #include "gst.h"
 
 #include "transfer.h"
-#include "callbacks.h"
 #include "connection.h"
+#include "callbacks.h"
 #include "hosts.h"
 #include "ppp-druid.h"
 

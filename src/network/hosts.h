@@ -21,6 +21,22 @@
  * Authors: Hans Petter Jansson <hpj@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
  */
 
+#define STATICHOST_UI_STRING "statichost"
+
+enum {
+	STATICHOST_LIST_COL_IP,
+	STATICHOST_LIST_COL_ALIAS,
+
+	STATICHOST_LIST_COL_LAST
+};
+
+typedef struct {
+	GtkWidget *list;
+	GtkWidget *ip;
+	GtkWidget *alias;
+	GtkWidget *button_delete;
+	GtkWidget *button_add;
+} GstStatichostUI;
 
 void gst_hosts_update_sensitivity (void);
 
@@ -36,5 +52,7 @@ void hosts_list_append       (GstTool *tool, const gchar *text[]);
 void hosts_list_remove       (GstTool *tool, const gchar *ip);
 gboolean hosts_list_get_selected (gchar **ip, gchar **alias);
 void hosts_list_save         (GstTool *tool, xmlNodePtr root);
+
+gboolean gst_hosts_ip_is_in_list (const gchar*);
 
 #endif /* __GST_HOSTS_H__ */

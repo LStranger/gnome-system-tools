@@ -40,6 +40,16 @@ typedef enum {
 	GST_CONNECTION_LAST
 } GstConnectionType;
 
+enum {
+	CONNECTION_LIST_COL_DEV_PIX,
+	CONNECTION_LIST_COL_DEVICE,
+	CONNECTION_LIST_COL_STAT_PIX,
+	CONNECTION_LIST_COL_DESCR,
+
+	CONNECTION_LIST_COL_DATA,
+	CONNECTION_LIST_COL_LAST
+};
+
 typedef enum {
 	GST_CONNECTION_ERROR_NONE = 0,
 	GST_CONNECTION_ERROR_ENABLED,
@@ -150,5 +160,9 @@ void           connection_list_update     (void);
 gboolean       connection_list_has_dialer (GstTool *tool);
 void           connection_list_save       (GstTool *tool);
 void           connection_list_select_connection (GstConnection *cxn);
+
+gboolean connection_config_save (GstConnection*);
+void     connection_check_netmask_gui (GstConnection*);
+void     connection_set_modified (GstConnection*, gboolean);
 
 #endif /* CONNECTION_H */

@@ -35,13 +35,16 @@
 #include "transfer.h"
 #include "connection.h"
 #include "hosts.h"
+#include "ppp-druid.h"
 
 #define d(x) x
 
 /* Don't Poll */
-/* #define POLL_HACK */ 
+/* #define POLL_HACK */
 
 extern GstTool *tool;
+
+extern gboolean updating;
 
 static void
 scrolled_window_scroll_bottom (GtkWidget *sw)
@@ -907,4 +910,455 @@ callbacks_tool_not_found_hook (GstTool *tool, GstReportLine *rline, gpointer dat
 	}
 
 	return TRUE;
+}
+
+
+/* Connection dialog callbacks */
+
+void
+on_connection_list_clicked (GtkWidget *w, gpointer data)
+{
+	GtkTreePath *path;
+	GtkTreeViewColumn *column;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GList *column_list;
+	gint ncol;
+	GdkPixbuf *stat_icon;
+	GstConnection *cxn;
+	GtkWidget *dialog;
+	gchar *txt;
+
+	cxn = connection_list_get_active ();
+	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
+	gtk_tree_view_get_cursor (GTK_TREE_VIEW (w), &path, &column);
+							  
+	ncol = g_list_index (column_list, column) + 1;
+
+	if (ncol == CONNECTION_LIST_COL_STAT_PIX)
+	{
+		model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
+		gtk_tree_model_get_iter (model, &iter, path);
+		
+		if (!cxn->enabled)
+		{
+			if (cxn->type != GST_CONNECTION_LO) {
+				txt = g_strdup_printf (_("Do you want to enable interface %s?"), cxn->dev);
+				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
+				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+					on_connection_activate_clicked (w, NULL);
+
+				gtk_widget_destroy (dialog);
+				g_free (txt);
+			}
+		}
+		else
+		{
+			if (cxn->type != GST_CONNECTION_LO) {
+				txt = g_strdup_printf (_("Do you want to disable interface %s?"), cxn->dev);
+				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
+				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+					on_connection_deactivate_clicked (w, NULL);
+
+				gtk_widget_destroy (dialog);
+				g_free (txt);
+			}
+		}
+	}
+	g_list_free (column_list);
+	gtk_tree_path_free (path);
+}
+
+void
+on_connection_ok_clicked (GtkWidget *w, GstConnection *cxn)
+{
+
+	if (cxn->modified) {
+		if (connection_config_save (cxn))
+			gtk_widget_destroy (cxn->window);
+		cxn->creating = FALSE;
+		gst_dialog_modify (tool->main_dialog);
+	} else
+		gtk_widget_destroy (cxn->window);
+}
+
+void
+on_connection_cancel_clicked (GtkWidget *w, GstConnection *cxn)
+{
+	gtk_widget_destroy (cxn->window);
+
+	if (cxn->creating) {
+		connection_list_remove (cxn);
+		connection_free (cxn);
+		gst_dialog_modify (tool->main_dialog);
+	}
+}
+
+void
+on_connection_config_dialog_destroy (GtkWidget *w, GstConnection *cxn)
+{
+	g_object_unref (G_OBJECT (cxn->xml));
+	cxn->xml = NULL;
+
+	cxn->window = NULL;
+}
+
+gint
+on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, GstConnection *cxn)
+{
+	return FALSE;
+}
+
+void
+on_connection_modified (GtkWidget *w, GstConnection *cxn)
+{
+	connection_set_modified (cxn, TRUE);
+}
+
+void
+on_wvlan_adhoc_toggled (GtkWidget *w, GstConnection *cxn)
+{
+/* FIXME: implement on_wvlan_adhoc_toggled*/
+}
+
+void
+on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
+{
+	xmlNodePtr root;
+	gchar *dev;
+	xmlDoc *doc = gst_tool_run_get_directive (tool, _("Autodetecting modem device"), "detect_modem", NULL);
+	GtkWidget *w;
+
+	g_return_if_fail (doc != NULL);
+
+	root = gst_xml_doc_get_root (doc);
+	dev = gst_xml_get_child_content (root, "device");
+
+	if (strcmp (dev, "") == 0) {
+		w = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
+					    _("Could not autodetect modem device, check that this is not busy and that it's correctly attached"));
+		gtk_dialog_run (GTK_DIALOG (w));
+		gtk_widget_destroy (w);
+	} else {
+		w = glade_xml_get_widget (cxn->xml, "ppp_serial_port");
+		gtk_entry_set_text (GTK_ENTRY (w), dev);
+	}
+	
+	g_free (dev);
+}
+
+void
+on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn)
+{
+	gboolean active;
+	GtkWidget *ppp_update_dns = glade_xml_get_widget (cxn->xml, "ppp_update_dns");
+	GtkWidget *ppp_dns1_label = glade_xml_get_widget (cxn->xml, "ppp_dns1_label");
+	GtkWidget *ppp_dns2_label = glade_xml_get_widget (cxn->xml, "ppp_dns2_label");
+	GtkWidget *ppp_dns1 = glade_xml_get_widget (cxn->xml, "ppp_dns1");
+	GtkWidget *ppp_dns2 = glade_xml_get_widget (cxn->xml, "ppp_dns2");
+	
+	active = GTK_TOGGLE_BUTTON (ppp_update_dns)->active;
+
+	gtk_widget_set_sensitive (ppp_dns1_label, active);
+	gtk_widget_set_sensitive (ppp_dns2_label, active);	
+	gtk_widget_set_sensitive (ppp_dns1, active);
+	gtk_widget_set_sensitive (ppp_dns2, active);
+}
+
+gboolean
+on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection *cxn)
+{
+	connection_check_netmask_gui (cxn);
+
+        return FALSE;
+}
+
+
+/* Hosts tab callbacks */
+
+static void
+gst_hosts_unselect_all (void)
+{
+	GtkTreeSelection *select;
+	GtkTreeModel     *model;
+	GstStatichostUI  *ui;
+	gboolean          valid;
+
+	updating = TRUE;
+
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
+
+	gtk_tree_selection_unselect_all (select);
+	gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
+
+	updating = FALSE;
+}
+
+static void
+gst_hosts_select_row (const gchar *ip_str)
+{
+	GtkTreeModel     *model;
+	GtkTreeIter       iter;
+	gboolean          valid;
+	gchar            *buf;
+	GtkTreeSelection *select;
+	GstStatichostUI  *ui;
+
+	if (!ip_str || strlen (ip_str) == 0)
+		return;
+
+	updating = TRUE;
+
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
+
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+	while (valid) {
+		gtk_tree_model_get (model, &iter, STATICHOST_LIST_COL_IP, &buf, -1);
+
+		if (!strcmp (buf, ip_str)) {
+			gtk_tree_selection_select_iter (select, &iter);
+
+			updating = FALSE;
+			g_free (buf);
+
+			return;
+		}
+
+		g_free (buf);
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
+
+	updating = FALSE;
+}	
+
+static void
+gst_hosts_clear_entries (void)
+{
+	GstStatichostUI *ui;
+
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+
+	updating = TRUE;
+	gtk_editable_delete_text (GTK_EDITABLE (ui->ip), 0, -1);
+	gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
+	updating = FALSE;
+}
+
+static char *
+fixup_text_list (GtkWidget *text)
+{
+	gchar *s2, *s;
+
+	g_return_val_if_fail (text != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_TEXT_VIEW (text), NULL);
+
+	s = gst_ui_text_view_get_text (GTK_TEXT_VIEW (text));
+
+	for (s2 = (gchar *) strchr (s, '\n'); s2; s2 = (gchar *) strchr (s2, '\n'))
+		*s2 = ' ';
+
+	return s;
+}
+
+void
+on_hosts_ip_changed (GtkEditable *ip, gpointer not_used)
+{
+	const gchar *ip_str;
+
+	if (updating)
+		return;
+
+	gst_hosts_update_sensitivity ();
+
+	/* Get the texts */
+	ip_str = gtk_editable_get_chars (ip,  0, -1);
+	if (gst_hosts_ip_is_in_list (ip_str))
+		gst_hosts_select_row (ip_str);
+}
+
+void
+on_hosts_alias_changed (GtkTextBuffer *w, gpointer not_used)
+{
+	char *s;
+	GstStatichostUI *ui;
+	GtkTreeModel    *model;
+	GtkTreeIter      iter;
+	GtkTreeSelection *select;
+
+	if (!gst_tool_get_access (tool))
+		return;
+
+	if (updating)
+		return;
+
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+
+	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
+	if (gtk_tree_selection_get_selected (select, &model, &iter)) {
+		s = fixup_text_list (ui->alias);
+
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    STATICHOST_LIST_COL_IP, gtk_editable_get_chars (GTK_EDITABLE (ui->ip), 0, -1),
+				    STATICHOST_LIST_COL_ALIAS, s,
+				    -1);
+
+		g_free (s);
+	}
+}
+
+void
+on_hosts_add_clicked (GtkWidget * button, gpointer user_data)
+{
+	gchar *entry[STATICHOST_LIST_COL_LAST];
+	int row;
+	GstStatichostUI *ui;
+
+	g_return_if_fail (gst_tool_get_access (tool));
+
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+
+	entry[STATICHOST_LIST_COL_IP] = gtk_editable_get_chars (GTK_EDITABLE (ui->ip), 0, -1);
+	entry[STATICHOST_LIST_COL_ALIAS] = fixup_text_list (ui->alias);
+
+	hosts_list_append (tool, (const gchar**) entry);
+
+	gst_hosts_select_row (entry[STATICHOST_LIST_COL_IP]);
+}
+
+void
+on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
+{
+	gchar *txt, *ip, *alias;
+	GtkWidget *dialog;
+	gint res;
+	GstStatichostUI *ui;
+
+	g_return_if_fail (gst_tool_get_access (tool));
+
+	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
+
+	if (!hosts_list_get_selected (&ip, &alias))
+		return;
+
+	txt = g_strdup_printf (_("Are you sure you want to delete the aliases for %s?"), ip);
+	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_QUESTION,
+					 GTK_BUTTONS_YES_NO,
+					 txt);
+
+	res = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
+	g_free (txt);
+
+	if (res != GTK_RESPONSE_YES)
+		return;
+
+	hosts_list_remove (tool, ip);
+	gst_dialog_modify (tool->main_dialog);
+
+	gst_hosts_clear_entries ();
+	gst_hosts_unselect_all ();
+}
+
+
+/* PPP dialog callbacks */
+
+void
+ppp_druid_on_window_delete_event (GtkWidget *w, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	ppp_druid_exit (ppp);
+}
+
+void
+ppp_druid_on_druid_cancel (GtkWidget *w, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	ppp_druid_exit (ppp);
+}
+
+gboolean
+ppp_druid_on_page_next (GtkWidget *w, gpointer arg1, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	ppp->current_page++;
+
+	return FALSE;
+}
+
+gboolean
+ppp_druid_on_page_back (GtkWidget *w, gpointer arg1, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	ppp->current_page--;
+
+	return FALSE;
+}
+
+void
+ppp_druid_on_page_prepare (GtkWidget *w, gpointer arg1, gpointer data)
+{
+	gchar *next_focus[] = {
+		NULL, "phone", "login", "profile", NULL
+	};
+	PppDruid *ppp = (PppDruid *) data;
+	gchar *s = g_strdup_printf ("ppp_druid_%s", next_focus [ppp->current_page]);
+
+	ppp_druid_check_page (ppp);
+
+	if (next_focus[ppp->current_page])
+		gtk_widget_grab_focus (glade_xml_get_widget (ppp->glade, s));
+	else
+		gtk_widget_grab_focus (ppp_druid_get_button_next (ppp));
+}
+
+void
+ppp_druid_on_page_last_finish (GtkWidget *w, gpointer arg1, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	ppp_druid_save (ppp);
+}
+
+void
+ppp_druid_on_entry_changed (GtkWidget *w, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	ppp_druid_check_page (ppp);
+}
+
+void
+ppp_druid_on_entry_activate (GtkWidget *w, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	if (!ppp->error_state)
+		gtk_widget_grab_focus (ppp_druid_get_button_next (ppp));
+}
+
+void
+ppp_druid_on_login_activate (GtkWidget *w, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	gtk_widget_grab_focus (ppp->passwd);
+}
+
+void
+ppp_druid_on_passwd_activate (GtkWidget *w, gpointer data)
+{
+	PppDruid *ppp = (PppDruid *) data;
+
+	gtk_widget_grab_focus (ppp->passwd2);
 }

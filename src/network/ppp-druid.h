@@ -28,6 +28,8 @@
 #include "gst.h"
 #include "connection.h"
 
+#define PPP_DRUID_MAX_PAGES 5
+
 typedef struct {
 	GladeXML *glade;
 	GstTool *tool;
@@ -45,9 +47,16 @@ typedef struct {
 	gboolean error_state;
 	gint current_page;
 } PppDruid;
+
+typedef gchar *(*PppDruidCheckFunc) (PppDruid *);
 	
-extern PppDruid *ppp_druid_new (GstTool *tool);
-extern void ppp_druid_show (PppDruid *ppp);
-extern void ppp_druid_gui_to_xml(GstTool *t, gpointer data);
+PppDruid *ppp_druid_new (GstTool *tool);
+void ppp_druid_show (PppDruid *ppp);
+void ppp_druid_gui_to_xml(GstTool *t, gpointer data);
+GtkWidget *ppp_druid_get_button_next (PppDruid*);
+void ppp_druid_exit (PppDruid*);
+void ppp_druid_check_page (PppDruid*);
+void ppp_druid_save (PppDruid*);
+
 
 #endif /* PPP_DRUID_H */

@@ -1,3 +1,10 @@
+2003-04-06  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* connection.[ch], hosts.[ch], ppp-druid.[ch]: removed all callbacks,
+	  moved to callbacks.[ch], this is for consistency with the other
+	  tools and for making the code less messy (IMHO)
+	* callbacks.[ch]: added all callbacks
+
 2003-03-24  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* connection.c: mark "set modem as default route to internet" 
