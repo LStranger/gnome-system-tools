@@ -1200,11 +1200,11 @@ connection_addr_to_str (gchar *addr)
 {
 	gchar *str;
 
-	str = g_strdup_printf ("%d.%d.%d.%d",
-			       (gint) addr[0],
-			       (gint) addr[1],
-			       (gint) addr[2],
-			       (gint) addr[3]);
+	str = g_strdup_printf ("%u.%u.%u.%u",
+			       (guchar) addr[0],
+			       (guchar) addr[1],
+			       (guchar) addr[2],
+			       (guchar) addr[3]);
 	return str;
 }
 
@@ -1212,8 +1212,8 @@ static void
 connection_set_bcast_and_network (XstConnection *cxn)
 {
 	gchar *address, *netmask;
-	gchar *broadcast   = "    ";
-	gchar *network     = "    ";
+	gchar *broadcast;
+	gchar *network;
 	gint i;
 
 	if (!cxn->address || !*cxn->address ||
@@ -1222,10 +1222,12 @@ connection_set_bcast_and_network (XstConnection *cxn)
 	
 	address = connection_str_to_addr (cxn->address);
 	netmask = connection_str_to_addr (cxn->netmask);
+	broadcast = g_new0 (gchar, 4);
+	network   = g_new0 (gchar, 4);
 
 	for (i = 0; i < 4; i++) {
-		broadcast[i] = address[i] | (~netmask[i]);
-		network[i]   = address[i] & netmask[i];
+		broadcast[i] = (gchar) (address[i] | (~netmask[i]));
+		network[i]   = (gchar) (address[i] & netmask[i]);
 	}
 
 	if (cxn->broadcast)
@@ -1238,6 +1240,8 @@ connection_set_bcast_and_network (XstConnection *cxn)
 
 	g_free (address);
 	g_free (netmask);
+	g_free (broadcast);
+	g_free (network);
 }
 
 static void
