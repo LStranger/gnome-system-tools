@@ -84,41 +84,6 @@ user_druid_passwd_activate (GtkWidget *w, gpointer data)
 }
 
 static void
-user_druid_pwd_new (GtkButton *b, gpointer data)
-{
-	GtkWidget *w;
-	gchar *buf, *label;
-
-	w = xst_dialog_get_widget (tool->main_dialog, "user_druid_pwd_label");
-	buf = passwd_get_random ();
-	label = g_strdup_printf (_("Password has been set to: \"%s\"."), buf);
-
-	gtk_label_set_text (GTK_LABEL (w), label);
-
-	g_free (buf);
-	g_free (label);
-}
-
-static void
-user_druid_pwd_toggled (GtkRadioButton *r, gpointer data)
-{
-	GtkWidget *w;
-	gchar *buf;
-	gboolean state;
-
-	buf = gtk_widget_get_name (GTK_WIDGET (r));
-	state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (r));
-	w = xst_dialog_get_widget (tool->main_dialog, "user_druid_pwd_notebook");
-
-	if (!strcmp (buf, "user_druid_pwd_manual") && state)
-		gtk_notebook_set_page (GTK_NOTEBOOK (w), 0);
-	else if (!strcmp (buf, "user_druid_pwd_random") && state) {
-		gtk_notebook_set_page (GTK_NOTEBOOK (w), 1);
-		user_druid_pwd_new (GTK_BUTTON (r), data);
-	}
-}
-
-static void
 user_druid_page_finish (GnomeDruidPage *druid_page, GtkWidget *druid, gpointer data)
 {
 	UserSettings *us = data;
@@ -139,9 +104,6 @@ connect_signals (UserSettings *us)
 		{ "user_druid_comment",   "activate",     user_druid_entry_activate },
 		{ "user_druid_pwd_entry1","activate",     user_druid_passwd_activate },
 		{ "user_druid_pwd_entry2","activate",     user_druid_entry_activate },
-		{ "user_druid_pwd_manual", "toggled",     user_druid_pwd_toggled },
-		{ "user_druid_pwd_random", "toggled",     user_druid_pwd_toggled },
-		{ "user_druid_pwd_new",    "clicked",     user_druid_pwd_new },
 		{ "user_druid_page_last", "finish",       user_druid_page_finish },
 		{ NULL }
 	};
@@ -236,8 +198,6 @@ user_druid_run (xmlNodePtr user_node)
 	us->pwd   = user_druid_pwd_prepare ();
 	us->new = TRUE;
 
-	user_druid_clear (us);
-	
 	user_settings_basic_fill (us);
 	user_settings_group_fill (us);
 	user_settings_pwd_fill   (us);
@@ -245,7 +205,8 @@ user_druid_run (xmlNodePtr user_node)
 	if (first_time) {
 		connect_signals (us);
 		first_time = FALSE;
-	}
+	} else
+		user_druid_clear (us);
 
 	gtk_widget_show (GTK_WIDGET (us->dialog));
 	

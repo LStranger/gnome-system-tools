@@ -868,10 +868,6 @@ user_update (UserSettings *us)
 		us->node = user_add_blank_xml (us->node);
 		user_update_xml (us);
 		current_table_new_row (us->node, us->table);
-
-		/* Ask for password too */
-		if (!check_passwd (us->node))
-			user_password_change (us->node);
 	} else {
 		gchar *old_name = xst_xml_get_child_content (us->node, "login");
 		/* Entered data ok, not new: just update. */
