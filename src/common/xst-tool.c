@@ -575,7 +575,7 @@ xst_tool_process_startup (XstTool *tool)
 			root_access = ROOT_ACCESS_SIMULATED_DISABLED;
 		
 		xst_tool_run_set_directive (tool, NULL, NULL, "platform_set",
-					    tool->current_platform->name);
+					    tool->current_platform->name, NULL);
 
 		if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
 			root_access = ROOT_ACCESS_SIMULATED;
