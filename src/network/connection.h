@@ -128,6 +128,7 @@ extern XstConnectionErrorType connection_default_gw_check_manual (XstConnection 
 extern void connection_default_gw_fix (XstConnection *cxn, XstConnectionErrorType error);
 extern void connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn);
 extern void connection_default_gw_set_auto (XstTool *tool);
+extern void connection_update_clist_enabled_apply (GtkWidget *clist);
 extern void connection_update_row_enabled (XstConnection *cxn, gboolean enabled);
 extern void connection_update_row (XstConnection *cxn);
 extern void connection_free (XstConnection *);

@@ -1,3 +1,16 @@
+Sun Jul 15 03:32:43 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* main.c (main): removed update_connections hook registration.
+
+	* connection.c (connection_update_row_enabled): We're departing
+	from the "To (Ina/A)ctivate" model: just use "(Ina/A)ctivate".
+
+	* callbacks.c (callbacks_update_connections_hook): Use
+	connection_update_clist_enabled_apply now.
+
+	* connection.c (connection_update_clist_enabled_apply): Change all
+	connections from "To (Ina/A)ctivate" to "(Ina/A)ctive).
+
 Sat Jul 14 15:18:43 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* connection.c (connection_new_from_node): Set new file struct member.

@@ -796,6 +796,22 @@ connection_default_gw_set_auto (XstTool *tool)
 }
 
 void
+connection_update_clist_enabled_apply (GtkWidget *clist)
+{
+	gint i;
+	XstConnection *cxn;
+
+	g_return_if_fail (GTK_IS_CLIST (clist));
+
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+		g_return_val_if_fail (cxn != NULL, TRUE);
+		connection_set_row_pixtext (clist, i, cxn->enabled ? _("Active") :
+					    _("Inactive"), cxn->enabled);
+	}
+}
+
+void
 connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 {
 	XstConnection *cxn2;
@@ -821,9 +837,9 @@ connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 	cxn->enabled = enabled;
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
 	g_return_if_fail (row > -1);
-	connection_set_row_pixtext (clist, row, enabled ? _("To activate") :
-				    _("To inactivate"), enabled);
-	/*	xst_dialog_modify (tool->main_dialog);*/
+	connection_set_row_pixtext (clist, row, enabled ? _("Active") :
+				    _("Inactive"), enabled);
+	/*xst_dialog_modify (tool->main_dialog);*/
 }
 
 void

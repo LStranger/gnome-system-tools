@@ -193,7 +193,7 @@ main (int argc, char *argv[])
 	} else {
 		connect_signals (tool->main_dialog, signals);
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook,     NULL);
-		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_update_connections_hook, NULL);
+		/*xst_dialog_add_apply_hook (tool->main_dialog, callbacks_update_connections_hook, NULL);*/
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_dialer_hook,       tool);
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_gateway_hook,      tool);
 		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
