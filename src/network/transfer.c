@@ -73,22 +73,22 @@ transfer_string_entry_xml_to_gui (XstTool *tool, xmlNodePtr root)
 		{
 			if (transfer_string_entry_table [i].editable)
 				gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget
-										 (tool->main_dialog,
-										  transfer_string_entry_table [i].editable)), s);
-
+							       (tool->main_dialog,
+								transfer_string_entry_table [i].editable)), s);
+			
 			if (transfer_string_entry_table [i].toggle) {
 				gboolean res;
-
+				
 				res = (*s == '1')? TRUE: FALSE;
 				
 				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-										(xst_dialog_get_widget
-										 (tool->main_dialog,
-										  transfer_string_entry_table [i].toggle)), res);
+							      (xst_dialog_get_widget
+							       (tool->main_dialog,
+								transfer_string_entry_table [i].toggle)), res);
 				gtk_signal_emit_by_name (GTK_OBJECT
-									(xst_dialog_get_widget
-										 (tool->main_dialog,
-										  transfer_string_entry_table [i].toggle)), "toggled");
+							 (xst_dialog_get_widget
+							  (tool->main_dialog,
+							   transfer_string_entry_table [i].toggle)), "toggled");
 			}
 			
 			g_free (s);
@@ -389,20 +389,23 @@ transfer_interfaces_to_gui (XstTool *tool, xmlNodePtr root)
 static void
 transfer_gatewaydev_to_xml (XstTool *tool, xmlNodePtr root)
 {
-	gchar *dev;
+	gchar *dev, *gateway;
 	xmlNodePtr node;
 
+	gateway = gtk_object_get_data (GTK_OBJECT (tool), "gateway");
+	node = xst_xml_element_find_first (root, "gateway");
+	if (!node)
+		node = xst_xml_element_add (root, "gateway");
+	xst_xml_element_set_content (node, (gateway)? gateway: "");
+		
+	if (gtk_object_get_data (GTK_OBJECT (tool), "gwdevunsup"))
+		return;
+	
 	dev = gtk_object_get_data (GTK_OBJECT (tool), "gatewaydev");
 	node = xst_xml_element_find_first (root, "gatewaydev");
-
-	if (dev) {
-		if (!node)
-			node = xst_xml_element_add (root, "gatewaydev");
-		xst_xml_element_set_content (node, dev);
-	} else {
-		if (node)
-			xst_xml_element_destroy (node);
-	}
+	if (!node)
+		node = xst_xml_element_add (root, "gatewaydev");
+	xst_xml_element_set_content (node, (dev)? dev: "");
 }
 
 static void
@@ -413,6 +416,7 @@ transfer_xml_to_gatewaydev (XstTool *tool, xmlNodePtr root)
 	
 	unsup = xst_xml_element_get_boolean (root, "gwdevunsup");
 	if (unsup) {
+		gtk_object_set_data (GTK_OBJECT (tool), "gwdevunsup", (gpointer) TRUE);
 		xst_dialog_widget_set_user_mode (tool->main_dialog,
 						 "connection_def_gw_hbox",
 						 XST_WIDGET_MODE_HIDDEN);
@@ -421,7 +425,7 @@ transfer_xml_to_gatewaydev (XstTool *tool, xmlNodePtr root)
 		
 	dev = xst_xml_get_child_content (root, "gatewaydev");
 	if (dev) {
-		connection_default_gw_select (tool, dev);
+		connection_default_gw_init (tool, dev);
 		g_free (dev);
 	}
 }
@@ -475,5 +479,6 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 	transfer_string_list_gui_to_xml (tool, root);
 	transfer_string_clist2_gui_to_xml (tool, root);
 	transfer_interfaces_to_xml (tool, root);
+	/* misc has to go last */
 	transfer_misc_tool_to_xml (tool, root);
 }

@@ -1,7 +1,53 @@
+2001-07-11  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* transfer.c (transfer_gatewaydev_to_xml): Set gatewaydev
+	AND gateway tags. gatewaydev only if supported by distro.
+
+	* connection.c (connection_default_gw_init): Renamed from
+	connection_default_gw_init. Setup "Auto" entry, which comes
+	from the glade file too.
+	(connection_default_gw_get_connection): Get the connection
+	struct that has been chosen for gatewaydev.
+	(connection_default_gw_check_manual): Check if this connection
+	is ready to point to a default gw. Return first found problem.
+	(connection_default_gw_fix): Fix the problem.
+	(connection_default_gw_set_manual): Assuming the connection
+	is ready, go ahead and set the user_data accordingly.
+	(connection_default_gw_find_static): Try fo find an active
+	ethernet or wavelan connection with a static gateway definded.
+	(connection_default_gw_find_ppp): Try fo find an active PPP
+	connection with the default_gw bit on.
+	(connection_default_gw_find_dynamic): Try fo find an active
+	ethernet or wavelan connection with dynamic configuration.
+	(connection_default_gw_find_plip): Try fo find an active plip
+	connection with a set remote address.
+	(connection_default_gw_set_auto): Try all the above, in that
+	order, and use that connection as the default gw device.
+	(connection_find_by_dev): Find in connection_list a connection
+	with given dev name.
+	Changed FIXME #warnings to comments.
+
+	* main.c: cosmetic stuff.
+
+	* callbacks.c (callbacks_check_hostname_hook): cosmetic.
+	(callbacks_disabled_gatewaydev_warn): Tell the user
+	that the default gw is not activated, with option to
+	immediately activate.
+	(callbacks_check_manual_gatewaydev): The default gw
+	has been manually set. Check that the device can have a
+	default gateway, and if so, set it.
+	(callbacks_check_gateway_hook): Hook for checking that
+	the stuff from the default gw widget is ready.
+
 2001-07-10  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* callbacks.c (callbacks_check_hostname_hook): memory
+	leak.
 
 	* main.c (connect_signals): Connect selection-done to
 	set selected device.
+	(update_notebook_complexity): Move from page only if
+	current page is the one to remove.
 
 	* transfer.c (transfer_gatewaydev_to_xml): Get selected
 	value and put into corresponding tag.

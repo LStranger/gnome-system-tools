@@ -574,11 +574,20 @@ connection_default_gw_remove (gchar *dev)
 }
 
 void
-connection_default_gw_select (XstTool *tool, gchar *dev)
+connection_default_gw_init (XstTool *tool, gchar *dev)
 {
 	GtkWidget *omenu, *menu, *item;
 
 	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+
+	item = gtk_menu_get_active (GTK_MENU (menu));
+	gtk_signal_connect (GTK_OBJECT (item), "activate",
+			    GTK_SIGNAL_FUNC (connection_default_gw_activate),
+			    (gpointer) NULL);
+	/* Strange bug caused the "Auto" item to be unsensitive the first time. */
+	gtk_menu_shell_select_item (GTK_MENU_SHELL (menu), item);
+	
 	item = connection_default_gw_find_item (omenu, dev);
 	if (item) {
 		GList *l;
@@ -586,18 +595,212 @@ connection_default_gw_select (XstTool *tool, gchar *dev)
 		l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
 		
 		gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), g_list_index (l, item) + 1);
-		menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
-		gtk_menu_shell_activate_item (GTK_MENU_SHELL (menu), item, TRUE);
 		gtk_menu_shell_select_item (GTK_MENU_SHELL (menu), item);
 	}
+}
+
+XstConnection *
+connection_default_gw_get_connection (XstTool *tool)
+{
+	gchar *dev;
+
+	dev = gtk_object_get_data (GTK_OBJECT (tool), "gatewaydev");
+	g_return_val_if_fail (dev != NULL, NULL);
+
+	return connection_find_by_dev (tool, dev);
+}
+
+XstConnectionErrorType
+connection_default_gw_check_manual (XstConnection *cxn, gboolean ignore_enabled)
+{
+	g_return_val_if_fail (cxn != NULL, XST_CONNECTION_ERROR_OTHER);
+
+	if (!ignore_enabled && !cxn->enabled)
+		return XST_CONNECTION_ERROR_ENABLED;
+
+	switch (cxn->type) {
+	case XST_CONNECTION_ETH:
+	case XST_CONNECTION_WVLAN:
+		if (cxn->ip_config == IP_MANUAL && (!cxn->gateway || !*cxn->gateway))
+			return XST_CONNECTION_ERROR_STATIC;
+		break;
+	case XST_CONNECTION_PPP:
+		if (!cxn->set_default_gw)
+			return XST_CONNECTION_ERROR_PPP;
+		break;
+	case XST_CONNECTION_PLIP:
+		if (!cxn->remote_address || !*cxn->remote_address)
+			return XST_CONNECTION_ERROR_STATIC;
+		break;
+	case XST_CONNECTION_LO:
+	default:
+		g_warning ("connection_default_gw_check_manual: shouldn't be here.");
+		return XST_CONNECTION_ERROR_OTHER;
+	}
+
+	return XST_CONNECTION_ERROR_NONE;
+}
+
+void
+connection_default_gw_fix (XstConnection *cxn, XstConnectionErrorType error)
+{
+	switch (error) {
+	case XST_CONNECTION_ERROR_ENABLED:
+		cxn->enabled = TRUE;
+		break;
+	case XST_CONNECTION_ERROR_PPP:
+		cxn->set_default_gw = TRUE;
+		break;
+	case XST_CONNECTION_ERROR_STATIC:
+	case XST_CONNECTION_ERROR_NONE:
+	case XST_CONNECTION_ERROR_OTHER:
+	default:
+		g_warning ("connection_default_gw_fix: shouldn't be here.");
+	}
+}
+
+void
+connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
+{
+	gchar *gateway;
+
+	gateway = gtk_object_get_data (GTK_OBJECT (tool), "gateway");
+	if (gateway)
+		g_free (gateway);
+	gateway = NULL;
+
+	if (!cxn) {
+		gtk_object_set_data (GTK_OBJECT (tool), "gateway", NULL);
+		gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", NULL);
+		return;
+	}
+
+	switch (cxn->type) {
+	case XST_CONNECTION_ETH:
+	case XST_CONNECTION_WVLAN:
+		if (cxn->ip_config == IP_MANUAL)
+			gateway = g_strdup (cxn->gateway);
+		break;
+	case XST_CONNECTION_PLIP:
+		gateway = strdup (cxn->remote_address);
+		break;
+	case XST_CONNECTION_PPP:
+		gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", NULL);
+		break;
+	case XST_CONNECTION_LO:
+	default:
+		gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", NULL);
+		g_warning ("connection_default_gw_set_manual: shouldn't be here.");
+		break;
+	}
+
+	gtk_object_set_data (GTK_OBJECT (tool), "gateway", gateway);
+}
+
+static XstConnection *
+connection_default_gw_find_static (XstTool *tool)
+{
+	XstConnection *cxn;
+	GtkWidget *clist;
+	int i;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+
+		/* Try fo find an active ethernet or wavelan connection with a static gateway definded */
+		if (cxn->enabled &&
+		    (cxn->type == XST_CONNECTION_ETH || cxn->type == XST_CONNECTION_WVLAN) &&
+		    (cxn->ip_config == IP_MANUAL) &&
+		    (cxn->gateway && *cxn->gateway))
+			return cxn;
+	}
+
+	return NULL;
+}
+
+static XstConnection *
+connection_default_gw_find_ppp (XstTool *tool)
+{
+	XstConnection *cxn;
+	GtkWidget *clist;
+	int i;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+
+		/* Try fo find an active PPP connection with the default_gw bit on. */
+		if (cxn->enabled &&
+		    cxn->type == XST_CONNECTION_PPP &&
+		    cxn->set_default_gw)
+			return cxn;
+	}
+	
+	return NULL;
+}
+
+static XstConnection *
+connection_default_gw_find_dynamic (XstTool *tool)
+{
+	XstConnection *cxn;
+	GtkWidget *clist;
+	int i;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+		/* Try fo find an active ethernet or wavelan connection with dynamic configuration */
+		if (cxn->enabled &&
+		    (cxn->type == XST_CONNECTION_ETH || cxn->type == XST_CONNECTION_WVLAN) &&
+		    (cxn->ip_config != IP_MANUAL))
+			return cxn;
+	}
+	
+	return NULL;
+}
+
+static XstConnection *
+connection_default_gw_find_plip (XstTool *tool)
+{
+	XstConnection *cxn;
+	GtkWidget *clist;
+	int i;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+
+		/* Try fo find an active plip connection with a set remote address. */
+		if (cxn->enabled &&
+		    (cxn->type == XST_CONNECTION_PLIP) &&
+		    (cxn->remote_address && *cxn->remote_address))
+			return cxn;
+	}
+
+	return NULL;
+}
+
+void
+connection_default_gw_set_auto (XstTool *tool)
+{
+	XstConnection *cxn;
+
+	if (!(cxn = connection_default_gw_find_static (tool))  &&
+	    !(cxn = connection_default_gw_find_ppp (tool))     &&
+	    !(cxn = connection_default_gw_find_dynamic (tool)) &&
+	    !(cxn = connection_default_gw_find_plip (tool)))
+		cxn = NULL;
+
+	connection_default_gw_set_manual (tool, cxn);
 }
 
 void
 connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 {
+	XstConnection *cxn2;
 	GtkWidget *clist;
 	gint row, i;
-	XstConnection *cxn2;
 
 	g_return_if_fail (cxn != NULL);
 	g_return_if_fail (cxn->dev != NULL);
@@ -611,7 +814,7 @@ connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 			g_return_if_fail (cxn2 != NULL);
 			g_return_if_fail (cxn2->dev != NULL);
 			
-			if (!strcmp (cxn->dev, cxn2->dev))
+			if (!strcmp (cxn2->dev, cxn->dev))
 				connection_update_row_enabled (cxn2, FALSE);
 		}
 
@@ -666,6 +869,24 @@ connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 
 	return;
 }
+
+XstConnection *
+connection_find_by_dev (XstTool *tool, gchar *dev)
+{
+	XstConnection *cxn;
+	GtkWidget *clist;
+	int i;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+		if (!strcmp (cxn->dev, dev))
+			return cxn;
+	}
+
+	return NULL;
+}
+
 
 /*static void
 add_connections_to_list (void)
@@ -740,7 +961,7 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	cxn->update_dns = TRUE;
 	cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
 	
-#warning FIXME: figure out a new device correctly
+        /* FIXME: figure out a new device correctly */
 	switch (cxn->type) {
 	case XST_CONNECTION_ETH:
 		cxn->dev = g_strdup ("eth0");
@@ -912,7 +1133,7 @@ empty_ip (XstConnection *cxn)
 	GET_STR ("ip_", netmask);
 	GET_STR ("ip_", gateway);
 
-#warning FIXME: calculate broadcast and stuff in empty_id
+        /* FIXME: calculate broadcast and stuff in empty_id */
 }
 
 static void
@@ -1113,7 +1334,7 @@ on_connection_modified (GtkWidget *w, XstConnection *cxn)
 static void
 on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn)
 {
-#warning FIXME: implement on_wvlan_adhoc_toggled
+/* FIXME: implement on_wvlan_adhoc_toggled*/
 }
 
 static void

@@ -518,6 +518,7 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 	gchar *hostname_new;
 	xmlNode *root, *node;
 	GtkWidget *entry;
+	gint res;
 
 	root = xst_xml_doc_get_root (dialog->tool->config);
 	node = xst_xml_element_find_first (root, "hostname");
@@ -527,12 +528,14 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 	entry = xst_dialog_get_widget (dialog, "hostname");
 	hostname_new = gtk_entry_get_text (GTK_ENTRY (entry));
 
-	if (strcmp (hostname_new, hostname_old))
+	res = strcmp (hostname_new, hostname_old);
+	g_free (hostname_old);
+	
+	if (res)
 	{
 		gchar *text = _("The host name has changed. This will prevent you\n"
-				"from launching new applications,\n"
-				"and so you will have to log in again.\n\nContinue anyway?");
-		gint res;
+				"from launching new applications, and so you will\n"
+				"have to log in again.\n\nContinue anyway?");
 		GtkWidget *message;
 		
 		message = gnome_message_box_new (text, GNOME_MESSAGE_BOX_WARNING,
@@ -608,5 +611,97 @@ callbacks_check_dialer_hook (XstDialog *dialog, gpointer data)
 		}
 	}
 
+	return TRUE;
+}
+
+static gboolean
+callbacks_disabled_gatewaydev_warn (XstTool *tool, XstConnection *cxn, gboolean *ignore_enabled)
+{
+	gchar *text = _("The default gateway device is not activated. This\n"
+			"will prevent you from connecting to the Internet.\n"
+			"\nContinue anyway?");
+	gint res;
+	GtkWidget *message;
+	
+	message = gnome_message_box_new (text, GNOME_MESSAGE_BOX_WARNING,
+					 _("Activate connection"),
+					 GNOME_STOCK_BUTTON_OK,
+					 GNOME_STOCK_BUTTON_CANCEL,
+					 NULL);
+	gnome_dialog_set_parent (GNOME_DIALOG (message), GTK_WINDOW (tool->main_dialog));
+	res = gnome_dialog_run_and_close (GNOME_DIALOG (message));
+	
+	switch (res) {
+	case 0:
+		connection_default_gw_fix (cxn, XST_CONNECTION_ERROR_ENABLED);
+		return TRUE;
+	case 1:
+		*ignore_enabled = TRUE;
+		return TRUE;
+	case 2:
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
+callbacks_check_manual_gatewaydev (XstTool *tool)
+{
+	XstConnection *cxn;
+	XstConnectionErrorType error;
+	gboolean ignore_enabled;
+
+	ignore_enabled = FALSE;
+	cxn = connection_default_gw_get_connection (tool);
+
+	while ((error = connection_default_gw_check_manual (cxn, ignore_enabled))
+	       != XST_CONNECTION_ERROR_NONE)
+	{
+		switch (error) {
+		case XST_CONNECTION_ERROR_ENABLED:
+			if (callbacks_disabled_gatewaydev_warn (tool, cxn, &ignore_enabled))
+				continue;
+			else
+				return FALSE;
+		case XST_CONNECTION_ERROR_PPP:
+			connection_default_gw_fix (cxn, error);
+			continue;
+		case XST_CONNECTION_ERROR_STATIC:
+		{
+			GtkWidget *dialog;
+			gchar *txt = _("The default gateway device is missing gateway\n"
+				       "information. Please provide this information to\n"
+				       "proceed, or choose another default gateway device.\n");
+			
+			dialog = gnome_error_dialog_parented (txt, GTK_WINDOW (tool->main_dialog));
+			gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+			return FALSE;
+		}
+		break;
+		case XST_CONNECTION_ERROR_NONE:
+		case XST_CONNECTION_ERROR_OTHER:
+		default:
+			g_warning ("callbacks_check_manual_gatewaydev: shouldn't be here.");
+			return TRUE;
+		}
+	}
+
+	connection_default_gw_set_manual (tool, cxn);
+	
+	return TRUE;
+}
+
+gboolean
+callbacks_check_gateway_hook (XstDialog *dialog, gpointer data)
+{
+	XstTool *tool;
+
+	tool = XST_TOOL (data);
+	if (!gtk_object_get_data (GTK_OBJECT (tool), "gwdevunsup") &&
+	    gtk_object_get_data (GTK_OBJECT (tool), "gatewaydev"))
+		return callbacks_check_manual_gatewaydev (tool);
+
+	connection_default_gw_set_auto (tool);
 	return TRUE;
 }

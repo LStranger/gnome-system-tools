@@ -107,26 +107,28 @@ static const XstWidgetPolicy policies[] = {
 static void
 update_notebook_complexity (XstDialogComplexity complexity)
 {
-	GtkWidget *notebook, *hosts;
+	GtkWidget *hosts;
+	GtkNotebook *notebook;
 	gint pageno;
 
-	notebook = xst_dialog_get_widget (tool->main_dialog, "network_admin");
+	notebook = GTK_NOTEBOOK (xst_dialog_get_widget (tool->main_dialog, "network_admin"));
 	hosts    = xst_dialog_get_widget (tool->main_dialog, "hosts_container");
-	pageno   = gtk_notebook_page_num (GTK_NOTEBOOK (notebook), hosts);
+	pageno   = gtk_notebook_page_num (notebook, hosts);
 	
 	switch (complexity) {
 	case XST_DIALOG_BASIC:
 		g_return_if_fail (pageno != -1);
 
-		gtk_notebook_set_page (GTK_NOTEBOOK (notebook), pageno - 1);
+		if (gtk_notebook_get_current_page (notebook) == pageno)
+			gtk_notebook_set_page (notebook, pageno - 1);
 		gtk_widget_ref (hosts);
 		gtk_widget_unparent (hosts);
-		gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), pageno);
+		gtk_notebook_remove_page (notebook, pageno);
 		break;
 	case XST_DIALOG_ADVANCED:
 		g_return_if_fail (pageno == -1);
 
-		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), hosts,
+		gtk_notebook_append_page (notebook, hosts,
 					  gtk_label_new (_("Hosts")));
 		gtk_widget_unref (hosts);
 		break;
@@ -189,9 +191,10 @@ main (int argc, char *argv[])
 		gtk_main ();
 	} else {
 		connect_signals (tool->main_dialog, signals);
-		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook, NULL);
+		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook,     NULL);
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_update_connections_hook, NULL);
-		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_dialer_hook, tool);
+		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_dialer_hook,       tool);
+		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_gateway_hook,      tool);
 		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 		xst_dialog_enable_complexity (tool->main_dialog);
 		xst_dialog_set_widget_policies (tool->main_dialog, policies);

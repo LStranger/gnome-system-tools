@@ -41,6 +41,14 @@ typedef enum {
 } XstConnectionType;
 
 typedef enum {
+	XST_CONNECTION_ERROR_NONE = 0,
+	XST_CONNECTION_ERROR_ENABLED,
+	XST_CONNECTION_ERROR_PPP,
+	XST_CONNECTION_ERROR_STATIC,
+	XST_CONNECTION_ERROR_OTHER /* Always last */
+} XstConnectionErrorType;
+
+typedef enum {
         IP_MANUAL,
         IP_DHCP,
 	IP_BOOTP
@@ -110,9 +118,15 @@ extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsect
 extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
 extern void connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean enabled);
 extern void connection_add_to_list (XstConnection *cxn, GtkWidget *clist);
+extern XstConnection *connection_find_by_dev (XstTool *tool, gchar *dev);
 extern void connection_default_gw_add (gchar *dev);
 extern void connection_default_gw_remove (gchar *dev);
-extern void connection_default_gw_select (XstTool *tool, gchar *dev);
+extern void connection_default_gw_init (XstTool *tool, gchar *dev);
+extern XstConnection *connection_default_gw_get_connection (XstTool *tool);
+extern XstConnectionErrorType connection_default_gw_check_manual (XstConnection *cxn, gboolean ignore_enabled);
+extern void connection_default_gw_fix (XstConnection *cxn, XstConnectionErrorType error);
+extern void connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn);
+extern void connection_default_gw_set_auto (XstTool *tool);
 extern void connection_update_row_enabled (XstConnection *cxn, gboolean enabled);
 extern void connection_update_row (XstConnection *cxn);
 extern void connection_free (XstConnection *);
