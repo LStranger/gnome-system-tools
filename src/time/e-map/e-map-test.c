@@ -36,9 +36,10 @@ int main(int argc, char *argv[])
   
   gtk_container_add(GTK_CONTAINER(window), GTK_WIDGET(scroll));
   gtk_container_add(GTK_CONTAINER(scroll), GTK_WIDGET(map));
-  
+
+  e_map_set_smooth_zoom(E_MAP(map), TRUE);
   gtk_widget_show_all(window);
-  id = gtk_timeout_add(3000, zoom_in, NULL);
+/*  id = gtk_timeout_add(3000, zoom_in, NULL); */
   gtk_main();
   return(0);
 }

@@ -133,7 +133,7 @@ e_map_get_type (void)
 	return e_map_type;
 }
 
-/* Class initialization function for the image view */
+/* Class initialization function for the map view */
 static void
 e_map_class_init (EMapClass *class)
 {
@@ -186,7 +186,7 @@ load_map_background (EMap *view, gchar *name)
 	return (TRUE);
 }
 
-/* Object initialization function for the image view */
+/* Object initialization function for the map view */
 static void
 e_map_init (EMap *view)
 {
@@ -203,7 +203,7 @@ e_map_init (EMap *view)
 	GTK_WIDGET_UNSET_FLAGS (view, GTK_NO_WINDOW);
 }
 
-/* Destroy handler for the image view */
+/* Destroy handler for the map view */
 static void
 e_map_destroy (GtkObject *object)
 {
@@ -223,7 +223,7 @@ e_map_destroy (GtkObject *object)
 		(*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
 }
 
-/* Finalize handler for the image view */
+/* Finalize handler for the map view */
 static void
 e_map_finalize (GtkObject *object)
 {
@@ -547,7 +547,7 @@ blowup_window_area (GdkWindow *window, gint area_x, gint area_y, gint target_x, 
 	/* Set up the GC we'll be using */
 
 	gc = gdk_gc_new (window);
-	gdk_gc_set_exposures (gc, TRUE);
+	gdk_gc_set_exposures (gc, FALSE);
 
 	/* Get area constraints */
 
@@ -571,18 +571,16 @@ blowup_window_area (GdkWindow *window, gint area_x, gint area_y, gint target_x, 
 	{
 		strong_axis = AXIS_X;
 		axis_factor = (double) area_height / (double) area_width;
-		zoom_chunk = area_width / 250;
+		zoom_chunk = MAX (1, area_width / 250);
 		i = (area_width * (zoom_factor - 1.0)) / zoom_chunk;
 	}
 	else
 	{
 		strong_axis = AXIS_Y;
 		axis_factor = (double) area_width / (double) area_height;
-		zoom_chunk = area_height / 250;
+		zoom_chunk = MAX (1, area_height / 250);
 		i = (area_height * (zoom_factor - 1.0)) / zoom_chunk;
 	}
-
-	if (!zoom_chunk) zoom_chunk = 1;
 
 	/* Zoom loop */
 
@@ -697,8 +695,8 @@ zoom_in_smooth (EMap *map)
 
 	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
 
-	win_center_x = x - priv->xofs;
-	win_center_y = y - priv->yofs;
+	win_center_x = x /* - priv->xofs */;
+	win_center_y = y /* - priv->yofs */;
 
 	blowup_window_area (window, priv->xofs, priv->yofs, win_center_x, win_center_y, width, height, 1.68);
 }
@@ -727,13 +725,8 @@ zoom_in (EMap *map)
 	printf ("Translated coordinates: (%.1f, %.1f)\n", x, y);
 #endif
 
-	priv->xofs = x - area.width / 2.0;
-	priv->yofs = y - area.height / 2.0;
-
-	if (priv->xofs < 0) priv->xofs = 0;
-	if (priv->xofs > E_MAP_GET_WIDTH (map) - area.width) priv->xofs = E_MAP_GET_WIDTH (map) - area.width;
-	if (priv->yofs < 0) priv->yofs = 0;
-	if (priv->yofs > E_MAP_GET_HEIGHT (map) - area.height) priv->yofs = E_MAP_GET_HEIGHT (map) - area.height;
+	priv->xofs = CLAMP (priv->xofs + x - area.width / 2.0, 0, E_MAP_GET_WIDTH (map) - area.width);
+	priv->yofs = CLAMP (priv->yofs + y - area.height / 2.0, 0, E_MAP_GET_HEIGHT (map) - area.height);
 
 #ifdef DEBUG
 	printf ("Final offsets: (%d, %d)\n---\n", priv->xofs, priv->yofs);
@@ -750,7 +743,6 @@ zoom_out (EMap *map)
 {
 	GdkRectangle area;
 	EMapPrivate *priv;
-	double x, y;
 
 	priv = map->priv;
 
@@ -759,28 +751,14 @@ zoom_out (EMap *map)
 	area.width = GTK_WIDGET (map)->allocation.width;
 	area.height = GTK_WIDGET (map)->allocation.height;
 
+  /* Must be done before update_render_pixbuf() */
+  
+  priv->xofs /= 2;
+  priv->yofs /= 2;
+
 	priv->zoom_state = E_MAP_ZOOMED_OUT;
 	update_render_pixbuf (map, GDK_INTERP_BILINEAR);
 
-	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
-
-#ifdef DEBUG
-	printf ("Translated coordinates: (%.1f, %.1f)\n", x, y);
-#endif
-
-	priv->xofs = x - area.width / 2.0;
-	priv->yofs = y - area.height / 2.0;
-
-	if (priv->xofs < 0) priv->xofs = 0;
-	if (priv->xofs > E_MAP_GET_WIDTH (map) - area.width) priv->xofs = E_MAP_GET_WIDTH (map) - area.width;
-	if (priv->yofs < 0) priv->yofs = 0;
-	if (priv->yofs > E_MAP_GET_HEIGHT (map) - area.height) priv->yofs = E_MAP_GET_HEIGHT (map) - area.height;
-
-#ifdef DEBUG
-	printf ("Final offsets: (%d, %d)\n---\n", priv->xofs, priv->yofs);
-#endif
-
-	set_scroll_area (map);
 	request_paint_area (map, &area);
 }
 
@@ -792,6 +770,9 @@ zoom_do (EMap *map)
 
 	priv = map->priv;
 
+		gtk_signal_handler_block_by_data (GTK_OBJECT (priv->hadj), map);
+		gtk_signal_handler_block_by_data (GTK_OBJECT (priv->vadj), map);
+
 	if (priv->zoom_state == E_MAP_ZOOMING_IN)
 	{
 		if (e_map_get_smooth_zoom (map)) zoom_in_smooth (map);
@@ -802,6 +783,11 @@ zoom_do (EMap *map)
 /*    if (e_map_get_smooth_zoom(map)) zoom_out_smooth(map); */
 		zoom_out (map);
 	}
+  
+		gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->hadj), map);
+		gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->vadj), map);
+
+  set_scroll_area(map);
 }
 
 
@@ -851,7 +837,7 @@ e_map_realize (GtkWidget *widget)
 	update_render_pixbuf (E_MAP (widget), GDK_INTERP_BILINEAR);
 }
 
-/* Unrealize handler for the image view */
+/* Unrealize handler for the map view */
 static void
 e_map_unrealize (GtkWidget *widget)
 {
@@ -862,7 +848,7 @@ e_map_unrealize (GtkWidget *widget)
 		(*GTK_WIDGET_CLASS (parent_class)->unrealize) (widget);
 }
 
-/* Size_request handler for the image view */
+/* Size_request handler for the map view */
 static void
 e_map_size_request (GtkWidget *widget, GtkRequisition *requisition)
 {
@@ -883,7 +869,7 @@ e_map_size_request (GtkWidget *widget, GtkRequisition *requisition)
 }
 
 
-/* Size_allocate handler for the image view */
+/* Size_allocate handler for the map view */
 static void
 e_map_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 {
@@ -924,7 +910,7 @@ e_map_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 	update_render_pixbuf (view, GDK_INTERP_BILINEAR);
 }
 
-/* Draw handler for the image view */
+/* Draw handler for the map view */
 static void
 e_map_draw (GtkWidget *widget, GdkRectangle *area)
 {
@@ -939,24 +925,35 @@ e_map_draw (GtkWidget *widget, GdkRectangle *area)
 	request_paint_area (view, area);
 }
 
-/* Button press handler for the image view */
+/* Button press handler for the map view */
 static gint
 e_map_button_press (GtkWidget *widget, GdkEventButton *event)
 {
 	EMap *view;
 	EMapPrivate *priv;
+  double lat, lng;
 
 	view = E_MAP (widget);
 	priv = view->priv;
 
 	if (!GTK_WIDGET_HAS_FOCUS (widget)) gtk_widget_grab_focus (widget);
 
-	if (event->button != 1) return FALSE;
+	if (event->button != 1)
+  {
+    e_map_zoom_out(view);
+    return TRUE;
+  }
+
+  /* Zoom to clicked location */
+  
+  e_map_window_to_world(view, event->x, event->y, &lat, &lng);
+  e_map_zoom_to_site(view, lat, lng);
+
 	return TRUE;
 }
 
 
-/* Button release handler for the image view */
+/* Button release handler for the map view */
 static gint
 e_map_button_release (GtkWidget *widget, GdkEventButton *event)
 {
@@ -972,7 +969,7 @@ e_map_button_release (GtkWidget *widget, GdkEventButton *event)
 	return TRUE;
 }
 
-/* Motion handler for the image view */
+/* Motion handler for the map view */
 static gint
 e_map_motion (GtkWidget *widget, GdkEventMotion *event)
 {
@@ -997,7 +994,7 @@ e_map_motion (GtkWidget *widget, GdkEventMotion *event)
  */
 }
 
-/* Expose handler for the image view */
+/* Expose handler for the map view */
 static gint
 e_map_expose (GtkWidget *widget, GdkEventExpose *event)
 {
@@ -1013,7 +1010,7 @@ e_map_expose (GtkWidget *widget, GdkEventExpose *event)
 	return TRUE;
 }
 
-/* Key press handler for the image view */
+/* Key press handler for the map view */
 static gint
 e_map_key_press (GtkWidget *widget, GdkEventKey *event)
 {
@@ -1096,7 +1093,7 @@ adjustment_changed_cb (GtkAdjustment *adj, gpointer data)
 	scroll_to (view, priv->hadj->value, priv->vadj->value);
 }
 
-/* Set_scroll_adjustments handler for the image view */
+/* Set_scroll_adjustments handler for the map view */
 static void
 e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustment *vadj)
 {
@@ -1250,9 +1247,9 @@ e_map_window_to_world (EMap *map, double win_x, double win_y, double *world_long
 	width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
 	height = gdk_pixbuf_get_height (priv->map_render_pixbuf);
 
-	*world_longitude = (win_x /* + priv->xofs */  - (double) width / 2.0) /
+	*world_longitude = (win_x + priv->xofs - (double) width / 2.0) /
 		((double) width / 2.0) * 180.0;
-	*world_latitude = ((double) height / 2.0 - win_y /* - priv->yofs */ ) /
+	*world_latitude = ((double) height / 2.0 - win_y - priv->yofs) /
 		((double) height / 2.0) * 90.0;
 }
 
@@ -1272,8 +1269,8 @@ e_map_world_to_window (EMap *map, double world_longitude, double world_latitude,
 	width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
 	height = gdk_pixbuf_get_height (priv->map_render_pixbuf);
 
-	*win_x = (width / 2.0 + (width / 2.0) * world_longitude / 180.0);
-	*win_y = (height / 2.0 - (height / 2.0) * world_latitude / 90.0);
+	*win_x = (width / 2.0 + (width / 2.0) * world_longitude / 180.0) - priv->xofs;
+	*win_y = (height / 2.0 - (height / 2.0) * world_latitude / 90.0) - priv->yofs;
 
 #ifdef DEBUG
 	printf ("Map size: (%d, %d)\nCoords: (%.1f, %.1f) -> (%.1f, %.1f)\n---\n", width, height, world_longitude, world_latitude, *win_x, *win_y);
