@@ -6,19 +6,19 @@
 
 gchar *s = N_("User Account Administration");
 gchar *s = N_("This is the list of the users available in the system. Create new users or edit existing user's settings with this dialog.");
-gchar *s = N_("New User...");
+gchar *s = N_("New User");
 gchar *s = N_("Delete");
 gchar *s = N_("Settings for the selected user");
 gchar *s = N_("Change the user's password or options like its name.");
-gchar *s = N_("Change Password...");
-gchar *s = N_("Settings...");
+gchar *s = N_("Change Password");
+gchar *s = N_("Settings");
 gchar *s = N_("Users");
 gchar *s = N_("Users may be grouped to share resources with others.");
-gchar *s = N_("New Group...");
+gchar *s = N_("New Group");
 gchar *s = N_("Delete");
 gchar *s = N_("Settings for the selected group");
 gchar *s = N_("Change the group's options like its name and members.");
-gchar *s = N_("Settings...");
+gchar *s = N_("Settings");
 gchar *s = N_("Groups");
 gchar *s = N_(" Advanced >> ");
 gchar *s = N_("User Settings");
