@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.8.0\n"
-"POT-Creation-Date: 2002-02-08 13:34-0600\n"
+"POT-Creation-Date: 2002-02-10 22:47-0600\n"
 "PO-Revision-Date: 2001-10-15 08:44+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Traditional chinese <zh-l10n@linux.org.tw>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #.
 #: interfaces/boot.glade.h:7 interfaces/disks.glade.h:21
 #: interfaces/font.glade.h:7 interfaces/hardware.glade.h:7
-#: interfaces/internetsharing.glade.h:63 interfaces/memory.glade.h:31
+#: interfaces/internetsharing.glade.h:62 interfaces/memory.glade.h:31
 #: interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:14
 #: interfaces/network.glade.h:138 interfaces/print.glade.h:68
 #: interfaces/users.glade.h:17
@@ -183,7 +183,7 @@ msgid ""
 msgstr ""
 
 #: interfaces/boot.glade.h:45 interfaces/boot.glade.in.h:9
-#: interfaces/internetsharing.glade.h:57
+#: interfaces/internetsharing.glade.h:56
 #: interfaces/internetsharing.glade.in.h:30 interfaces/network.glade.h:133
 #: interfaces/network.glade.in.h:37 interfaces/users.glade.h:61
 #: interfaces/users.glade.in.h:31
@@ -234,7 +234,7 @@ msgid "Ximian Setup Tools"
 msgstr "Ximian 設定工具"
 
 #: interfaces/common.glade.h:8 interfaces/common.glade.in.h:4
-#: src/common/xst-tool.c:1013
+#: src/common/xst-tool.c:1012
 msgid "Scanning your system configuration."
 msgstr "正在掃描系統的設定。"
 
@@ -939,63 +939,65 @@ msgid "Configure DHCP Service"
 msgstr ""
 
 #: interfaces/internetsharing.glade.h:52
+#, fuzzy
 msgid ""
 "A previous DHCP configuration has been detected. \n"
 "Do you want to keep this configuration?\n"
-"\r\r"
 msgstr ""
+"本機的掛載點不存在。\n"
+"是否要建立它？"
 
-#: interfaces/internetsharing.glade.h:55
+#: interfaces/internetsharing.glade.h:54
 #: interfaces/internetsharing.glade.in.h:11
 msgid " Yes, keep the current DHCP configuration."
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:56
+#: interfaces/internetsharing.glade.h:55
 #: interfaces/internetsharing.glade.in.h:8
 msgid " No, overwrite with new defaults (recommended)"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:58
+#: interfaces/internetsharing.glade.h:57
 msgid ""
 "Congratulations! Your computer will now be\n"
 "configured to share its internet connection.\n"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:61
+#: interfaces/internetsharing.glade.h:60
 msgid "Start rage"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:62
+#: interfaces/internetsharing.glade.h:61
 msgid "End range"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:64
+#: interfaces/internetsharing.glade.h:63
 #: interfaces/internetsharing.glade.in.h:28
 msgid "Enable :"
 msgstr "啟用："
 
-#: interfaces/internetsharing.glade.h:65
+#: interfaces/internetsharing.glade.h:64
 #: interfaces/internetsharing.glade.in.h:32
 msgid "IP Forwarding"
 msgstr "IP Forwarding（導向）"
 
-#: interfaces/internetsharing.glade.h:66
+#: interfaces/internetsharing.glade.h:65
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.h:61
-#: interfaces/network.glade.in.h:27 src/network/connection.c:1645
+#: interfaces/network.glade.in.h:27 src/network/connection.c:1669
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/internetsharing.glade.h:67
+#: interfaces/internetsharing.glade.h:66
 #: interfaces/internetsharing.glade.in.h:31
 msgid "Firewall"
 msgstr "防火牆"
 
-#: interfaces/internetsharing.glade.h:68
+#: interfaces/internetsharing.glade.h:67
 #: interfaces/internetsharing.glade.in.h:41
 msgid "Web Cache (squid)"
 msgstr "網頁快取（squid）"
 
-#: interfaces/internetsharing.glade.h:69
+#: interfaces/internetsharing.glade.h:68
 #: interfaces/internetsharing.glade.in.h:19
 msgid "Banner Removal (Junkbuster)"
 msgstr "廣告移除（Junkbuster）"
@@ -1712,7 +1714,7 @@ msgid "A_liases:"
 msgstr "別名(_A)："
 
 #: interfaces/network.glade.h:41 interfaces/network.glade.in.h:40
-#: src/network/main.c:138
+#: src/network/main.c:148
 msgid "Hosts"
 msgstr "主機"
 
@@ -1788,12 +1790,12 @@ msgid "_Configuration:"
 msgstr "設定(_C)："
 
 #: interfaces/network.glade.h:60 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1644
+#: src/network/connection.c:1668
 msgid "Manual"
 msgstr "手動"
 
 #: interfaces/network.glade.h:62 interfaces/network.glade.in.h:21
-#: src/network/connection.c:1646
+#: src/network/connection.c:1670
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -3298,20 +3300,20 @@ msgstr "啟動管理程式設定 - Ximian 設定工具"
 msgid "System administration"
 msgstr "系統管理"
 
-#: src/common/xst-dialog.c:58
+#: src/common/xst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "找不到 widget：%s"
 
-#: src/common/xst-dialog.c:90
+#: src/common/xst-dialog.c:91
 msgid " More Options >> "
 msgstr " 更多選項 >> "
 
-#: src/common/xst-dialog.c:91
+#: src/common/xst-dialog.c:92
 msgid " << Fewer Options "
 msgstr " << 較少選項 "
 
-#: src/common/xst-dialog.c:433
+#: src/common/xst-dialog.c:464
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3319,25 +3321,25 @@ msgstr ""
 "有些設定改變並未套用。\n"
 "是否要套用？"
 
-#: src/common/xst-dialog.c:503
+#: src/common/xst-dialog.c:539
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "將錯誤訊號 `%s' 連繫到 widget `%s' 時發生錯誤"
 
-#: src/common/xst-tool.c:955
+#: src/common/xst-tool.c:954
 #, fuzzy, c-format
 msgid "Skipping %s directive..."
 msgstr "不會儲存..."
 
-#: src/common/xst-tool.c:1093
+#: src/common/xst-tool.c:1092
 msgid "Skipping actual save..."
 msgstr "不會儲存..."
 
-#: src/common/xst-tool.c:1135
+#: src/common/xst-tool.c:1134
 msgid "Updating your system configuration."
 msgstr "正在更新你的系統設定。"
 
-#: src/common/xst-tool.c:1154
+#: src/common/xst-tool.c:1153
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3345,16 +3347,16 @@ msgstr ""
 "執行背景命令稿時發生錯誤，\n"
 "以致無法載入設定。"
 
-#: src/common/xst-tool.c:1348
+#: src/common/xst-tool.c:1376
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian 設定工具"
 
-#: src/common/xst-tool.c:1540
+#: src/common/xst-tool.c:1568
 msgid "The password you entered is invalid."
 msgstr "你輸入的密碼不正確。"
 
-#: src/common/xst-tool.c:1550
+#: src/common/xst-tool.c:1578
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -3381,23 +3383,20 @@ msgstr ""
 "--\n"
 "Ximian 設定工具編寫團隊"
 
-#: src/common/xst-tool.c:1570
+#: src/common/xst-tool.c:1601
 msgid "Don't show me this again"
 msgstr "不要再顯示"
 
-#: src/common/xst-tool.c:1605
-msgid "\tEdit configuration in the location LOCATION."
-msgstr "\t編輯位置 LOCATION 的設定。"
+#: src/common/xst-tool.c:1669
+#, fuzzy
+msgid "Ximian Setup Tool"
+msgstr "Ximian 設定工具"
 
-#: src/common/xst-tool.c:1605
-msgid "LOCATION"
-msgstr "位置"
-
-#: src/common/xst-tool.c:1650
+#: src/common/xst-tool.c:1677
 msgid "Pretending we are root..."
 msgstr "我們假扮是 root..."
 
-#: src/common/xst-ui.c:557
+#: src/common/xst-ui.c:556
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
@@ -3665,93 +3664,93 @@ msgstr "交換記憶空間 %s 早已存在。"
 msgid "Swap Management"
 msgstr "交換記憶管理"
 
-#: src/network/callbacks.c:119 src/network/connection.c:812
-#: src/network/connection.c:843
+#: src/network/callbacks.c:123 src/network/connection.c:821
+#: src/network/connection.c:852
 msgid "Active"
 msgstr "使用中"
 
-#: src/network/callbacks.c:122
+#: src/network/callbacks.c:126
 #, fuzzy
 msgid "Activating"
 msgstr "生效"
 
-#: src/network/callbacks.c:133 src/network/connection.c:813
-#: src/network/connection.c:844
+#: src/network/callbacks.c:137 src/network/connection.c:822
+#: src/network/connection.c:853
 msgid "Inactive"
 msgstr "不使用"
 
-#: src/network/callbacks.c:136
+#: src/network/callbacks.c:140
 #, fuzzy
 msgid "Deactivating"
 msgstr "無效"
 
-#: src/network/callbacks.c:350
+#: src/network/callbacks.c:362
 msgid "The name of this computer"
 msgstr "此電腦的名稱"
 
-#: src/network/callbacks.c:353
+#: src/network/callbacks.c:365
 msgid "A short description of your computer"
 msgstr "關於你的電腦的簡短描述"
 
-#: src/network/callbacks.c:356
+#: src/network/callbacks.c:368
 msgid "The Windows Networking workgroup for your network"
 msgstr "你的網絡的 Windows 網絡群組"
 
-#: src/network/callbacks.c:359
+#: src/network/callbacks.c:371
 msgid "The IP address of your WINS server"
 msgstr "你的 WINS 伺服器 IP 地址"
 
-#: src/network/callbacks.c:362
+#: src/network/callbacks.c:374
 msgid "The DNS domain for your computer"
 msgstr "你的電腦的 DNS 網域"
 
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:377
 msgid "A list of your DNS servers' IP addresses"
 msgstr "你的 DNS 伺服器 IP 地址列表"
 
-#: src/network/callbacks.c:368
+#: src/network/callbacks.c:380
 msgid "A list of domains where hosts will be searched"
 msgstr "會在其中搜尋主機的網域列表"
 
-#: src/network/callbacks.c:371
+#: src/network/callbacks.c:383
 msgid "The IP address of this host"
 msgstr "本機的 IP 地址"
 
-#: src/network/callbacks.c:374
+#: src/network/callbacks.c:386
 msgid "Aliases for this host, one per line"
 msgstr "本機的別名，每行一個"
 
-#: src/network/callbacks.c:523
+#: src/network/callbacks.c:547
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "移除連線 %s：``%s''？"
 
-#: src/network/callbacks.c:525
+#: src/network/callbacks.c:549
 #, c-format
 msgid "Remove connection %s?"
 msgstr "移除連線 %s？"
 
-#: src/network/callbacks.c:581
+#: src/network/callbacks.c:605
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "啟用連線 ``%s''。"
 
-#: src/network/callbacks.c:615
+#: src/network/callbacks.c:639
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "停用連線 ``%s''。"
 
-#: src/network/callbacks.c:635
+#: src/network/callbacks.c:659
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
 msgstr "你並沒有安裝 SMB 支援。請在系統中安裝 SMB 支援以支援 windows 網絡。"
 
-#: src/network/callbacks.c:636
+#: src/network/callbacks.c:660
 msgid "SMB support missing."
 msgstr "沒有 SMB 支援。"
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:698
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -3764,11 +3763,11 @@ msgstr ""
 "\n"
 "是否要繼續？"
 
-#: src/network/callbacks.c:680
+#: src/network/callbacks.c:704
 msgid "Don't change host name"
 msgstr "不更改主機名稱"
 
-#: src/network/callbacks.c:752
+#: src/network/callbacks.c:779
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3778,7 +3777,7 @@ msgstr ""
 "你需要安裝 wvdial，否則 PPP\n"
 "（數據機）連線不能使用。"
 
-#: src/network/callbacks.c:772
+#: src/network/callbacks.c:799
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3792,7 +3791,7 @@ msgstr ""
 "\n"
 "是否要繼續？"
 
-#: src/network/callbacks.c:799
+#: src/network/callbacks.c:826
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -3800,18 +3799,18 @@ msgid ""
 "Continue anyway?"
 msgstr ""
 
-#: src/network/callbacks.c:806
+#: src/network/callbacks.c:833
 msgid "Activate connection"
 msgstr "令連線生效"
 
-#: src/network/callbacks.c:852
+#: src/network/callbacks.c:879
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
 "proceed, or choose another default gateway device.\n"
 msgstr ""
 
-#: src/network/callbacks.c:892
+#: src/network/callbacks.c:919
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -3851,7 +3850,7 @@ msgstr "迴路：虛擬介面"
 msgid "Unknown type"
 msgstr "未知的類型"
 
-#: src/network/connection.c:1421
+#: src/network/connection.c:1445
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3860,7 +3859,7 @@ msgstr ""
 "網絡介面的 IP 地址或 netmask 是空的。\n"
 "請在欄位填上正確的 IP 地址以繼續。"
 
-#: src/network/connection.c:1428
+#: src/network/connection.c:1452
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3869,7 +3868,7 @@ msgstr ""
 "網絡介面的 IP 地址或遠端地址是空的。\n"
 "請在欄位填上正確的 IP 地址以繼續。"
 
-#: src/network/connection.c:1434
+#: src/network/connection.c:1458
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3881,16 +3880,16 @@ msgstr ""
 "但主 DNS 的 IP 地址是空的。請輸入主\n"
 "DNS 的 IP 或不選擇手動設定 DNS 的選項。"
 
-#: src/network/hosts.c:380
+#: src/network/hosts.c:382
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "你是否確定刪除 %s 的別名？"
 
-#: src/network/main.c:178
+#: src/network/main.c:189
 msgid "\tRun the internet conection druid."
 msgstr ""
 
-#: src/network/main.c:185
+#: src/network/main.c:196
 msgid "Network Settings"
 msgstr "網絡設定"
 
@@ -3902,31 +3901,31 @@ msgstr "網絡配接卡設定。"
 msgid "Networking"
 msgstr "網絡"
 
-#: src/network/ppp-druid.c:174
+#: src/network/ppp-druid.c:182
 msgid ""
 "The phone number must be composed of\n"
 "only numbers or commas (,)."
 msgstr "電話號碼只能由數字和逗號(,)組成。"
 
-#: src/network/ppp-druid.c:190
+#: src/network/ppp-druid.c:199
 msgid ""
 "The password and its confirmation\n"
 "must be the same."
 msgstr "兩次填入的密碼必須相同。"
 
-#: src/network/ppp-druid.c:193
+#: src/network/ppp-druid.c:202
 msgid ""
 "If you are specifying a password,\n"
 "you should specify a user name."
 msgstr "如果你指定了密碼，你也需要指定使用者名稱。"
 
-#: src/network/ppp-druid.c:215
+#: src/network/ppp-druid.c:225
 msgid ""
 "Please set a name for this account,\n"
 "using only space, letters and numbers."
 msgstr "只使用空格、字母和數字來設定此戶口的名稱。"
 
-#: src/network/ppp-druid.c:227
+#: src/network/ppp-druid.c:239
 #, c-format
 msgid ""
 "You are about to create an account named with the following information:\n"
@@ -4537,6 +4536,12 @@ msgstr "命令殼"
 #: src/users/users.etspec.h:6
 msgid "UID"
 msgstr "UID"
+
+#~ msgid "\tEdit configuration in the location LOCATION."
+#~ msgstr "\t編輯位置 LOCATION 的設定。"
+
+#~ msgid "LOCATION"
+#~ msgstr "位置"
 
 #~ msgid "Closing tool."
 #~ msgstr "正在關閉工具。"

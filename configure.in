@@ -68,7 +68,6 @@ PKG_CHECK_MODULES(XST_DEPENDS,[
 			   libgnomeui-2.0 >= 1.109.0
 			   libglade-2.0 >= 1.99.5
 			   gal-2.0 >= 0.0.0
-			   
 			   libxml-2.0 >= 2.4.12
 			   ])
 
@@ -185,26 +184,26 @@ interfaces/Makefile
 pixmaps/Makefile
 src/Makefile
 src/common/Makefile
-src/memory/Makefile 
 src/network/Makefile
 src/time/Makefile
 src/time/e-map/Makefile
-src/users/Makefile
-src/users/e-search-bar/Makefile
-src/boot/Makefile
-src/shares/Makefile
-src/dhcpd/Makefile
-src/display/Makefile
-src/location-manager/Makefile
-src/internetsharing/Makefile
-src/font/Makefile
-doc/Makefile
-doc/nameresolution/Makefile
-doc/networking/Makefile
-doc/shares/Makefile
 po/Makefile.in
 ])
 
+dnl src/memory/Makefile 
+dnl src/users/Makefile
+dnl src/users/e-search-bar/Makefile
+dnl src/boot/Makefile
+dnl src/shares/Makefile
+dnl src/dhcpd/Makefile
+dnl src/display/Makefile
+dnl src/location-manager/Makefile
+dnl src/internetsharing/Makefile
+dnl src/font/Makefile
+dnl doc/Makefile
+dnl doc/nameresolution/Makefile
+dnl doc/networking/Makefile
+dnl doc/shares/Makefile
 dnl -----------------
 dnl src/disks/Makefile
 dnl src/print/Makefile
@@ -219,4 +218,4 @@ echo "	The scripts are expected at : ${scriptsdir}
 	Compiler:		${CC} 
 "
 
-cat message-of-doom
+cat $srcdir/message-of-doom

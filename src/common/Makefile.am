@@ -18,6 +18,7 @@ libsetuptool_a_SOURCES =				\
 	xst-conf.c		xst-conf.h		\
 	xst-su.c		xst-su.h		\
 	xst.h						\
+	xst-marshal.h					\
 	checked.xpm					\
 	unchecked.xpm					\
 	reading.xpm					\

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.8.0\n"
-"POT-Creation-Date: 2002-02-08 13:34-0600\n"
+"POT-Creation-Date: 2002-02-10 22:47-0600\n"
 "PO-Revision-Date: 2001-11-07 21:01+0100\n"
 "Last-Translator: Jean-Michel Ardantz <jmardantz@ifrance.com>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 #.
 #: interfaces/boot.glade.h:7 interfaces/disks.glade.h:21
 #: interfaces/font.glade.h:7 interfaces/hardware.glade.h:7
-#: interfaces/internetsharing.glade.h:63 interfaces/memory.glade.h:31
+#: interfaces/internetsharing.glade.h:62 interfaces/memory.glade.h:31
 #: interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:14
 #: interfaces/network.glade.h:138 interfaces/print.glade.h:68
 #: interfaces/users.glade.h:17
@@ -195,7 +195,7 @@ msgstr ""
 "la phase de démarrage."
 
 #: interfaces/boot.glade.h:45 interfaces/boot.glade.in.h:9
-#: interfaces/internetsharing.glade.h:57
+#: interfaces/internetsharing.glade.h:56
 #: interfaces/internetsharing.glade.in.h:30 interfaces/network.glade.h:133
 #: interfaces/network.glade.in.h:37 interfaces/users.glade.h:61
 #: interfaces/users.glade.in.h:31
@@ -250,7 +250,7 @@ msgid "Ximian Setup Tools"
 msgstr "Les outils de configuration Ximian"
 
 #: interfaces/common.glade.h:8 interfaces/common.glade.in.h:4
-#: src/common/xst-tool.c:1013
+#: src/common/xst-tool.c:1012
 msgid "Scanning your system configuration."
 msgstr "Analyse de la configuration système."
 
@@ -987,22 +987,21 @@ msgstr "Configurer le service DHCP"
 msgid ""
 "A previous DHCP configuration has been detected. \n"
 "Do you want to keep this configuration?\n"
-"\r\r"
 msgstr ""
 "Une configuration DHCP précédenet a été détectée. \n"
 "Voulez-vous la conserver ?"
 
-#: interfaces/internetsharing.glade.h:55
+#: interfaces/internetsharing.glade.h:54
 #: interfaces/internetsharing.glade.in.h:11
 msgid " Yes, keep the current DHCP configuration."
 msgstr " Oui, conserver la configuration DHCP actuelle."
 
-#: interfaces/internetsharing.glade.h:56
+#: interfaces/internetsharing.glade.h:55
 #: interfaces/internetsharing.glade.in.h:8
 msgid " No, overwrite with new defaults (recommended)"
 msgstr " Non, l'écraser avec les nouveaux paramètres par défaut (recommandé)."
 
-#: interfaces/internetsharing.glade.h:58
+#: interfaces/internetsharing.glade.h:57
 #, fuzzy
 msgid ""
 "Congratulations! Your computer will now be\n"
@@ -1011,43 +1010,43 @@ msgstr ""
 "Félicitation ! Votre ordinatateur est désormais\n"
 "configuré pour partager sa connexion Internet."
 
-#: interfaces/internetsharing.glade.h:61
+#: interfaces/internetsharing.glade.h:60
 #, fuzzy
 msgid "Start rage"
 msgstr "Début de la plage"
 
-#: interfaces/internetsharing.glade.h:62
+#: interfaces/internetsharing.glade.h:61
 #, fuzzy
 msgid "End range"
 msgstr "Fin de la plage"
 
-#: interfaces/internetsharing.glade.h:64
+#: interfaces/internetsharing.glade.h:63
 #: interfaces/internetsharing.glade.in.h:28
 msgid "Enable :"
 msgstr "Activer :"
 
-#: interfaces/internetsharing.glade.h:65
+#: interfaces/internetsharing.glade.h:64
 #: interfaces/internetsharing.glade.in.h:32
 msgid "IP Forwarding"
 msgstr "Routage IP"
 
-#: interfaces/internetsharing.glade.h:66
+#: interfaces/internetsharing.glade.h:65
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.h:61
-#: interfaces/network.glade.in.h:27 src/network/connection.c:1645
+#: interfaces/network.glade.in.h:27 src/network/connection.c:1669
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/internetsharing.glade.h:67
+#: interfaces/internetsharing.glade.h:66
 #: interfaces/internetsharing.glade.in.h:31
 msgid "Firewall"
 msgstr "Firewall"
 
-#: interfaces/internetsharing.glade.h:68
+#: interfaces/internetsharing.glade.h:67
 #: interfaces/internetsharing.glade.in.h:41
 msgid "Web Cache (squid)"
 msgstr "Cache Web"
 
-#: interfaces/internetsharing.glade.h:69
+#: interfaces/internetsharing.glade.h:68
 #: interfaces/internetsharing.glade.in.h:19
 msgid "Banner Removal (Junkbuster)"
 msgstr "Suppression des bannières"
@@ -1794,7 +1793,7 @@ msgid "A_liases:"
 msgstr "A_lias :"
 
 #: interfaces/network.glade.h:41 interfaces/network.glade.in.h:40
-#: src/network/main.c:138
+#: src/network/main.c:148
 msgid "Hosts"
 msgstr "Hôtes"
 
@@ -1871,12 +1870,12 @@ msgid "_Configuration:"
 msgstr "_Configuration :"
 
 #: interfaces/network.glade.h:60 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1644
+#: src/network/connection.c:1668
 msgid "Manual"
 msgstr "Manuel"
 
 #: interfaces/network.glade.h:62 interfaces/network.glade.in.h:21
-#: src/network/connection.c:1646
+#: src/network/connection.c:1670
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -3439,20 +3438,20 @@ msgstr "Configuration de démarrage - Outils de configuration Ximian"
 msgid "System administration"
 msgstr "Administration système"
 
-#: src/common/xst-dialog.c:58
+#: src/common/xst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "Impossible de trouver le composant : %s"
 
-#: src/common/xst-dialog.c:90
+#: src/common/xst-dialog.c:91
 msgid " More Options >> "
 msgstr " Plus d'options >> "
 
-#: src/common/xst-dialog.c:91
+#: src/common/xst-dialog.c:92
 msgid " << Fewer Options "
 msgstr " << Moins d'options "
 
-#: src/common/xst-dialog.c:433
+#: src/common/xst-dialog.c:464
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3460,25 +3459,25 @@ msgstr ""
 "Certains changements n'ont pas été enregistrés.\n"
 "Voulez vous les enregistrer maintenant ?"
 
-#: src/common/xst-dialog.c:503
+#: src/common/xst-dialog.c:539
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Erreur d'appel du signal '%s' dans le composant '%s'"
 
-#: src/common/xst-tool.c:955
+#: src/common/xst-tool.c:954
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Ignorer la directive %s..."
 
-#: src/common/xst-tool.c:1093
+#: src/common/xst-tool.c:1092
 msgid "Skipping actual save..."
 msgstr "Ignorer la sauvegarde..."
 
-#: src/common/xst-tool.c:1135
+#: src/common/xst-tool.c:1134
 msgid "Updating your system configuration."
 msgstr "Mise à jour de votre configuration système."
 
-#: src/common/xst-tool.c:1154
+#: src/common/xst-tool.c:1153
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3486,16 +3485,16 @@ msgstr ""
 "Une erreur s'est produite durant l'exécution du\n"
 "script de chargement de la configuration."
 
-#: src/common/xst-tool.c:1348
+#: src/common/xst-tool.c:1376
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Les outils de configuration Ximian"
 
-#: src/common/xst-tool.c:1540
+#: src/common/xst-tool.c:1568
 msgid "The password you entered is invalid."
 msgstr "Le mot de passe est incorrect."
 
-#: src/common/xst-tool.c:1550
+#: src/common/xst-tool.c:1578
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -3525,23 +3524,20 @@ msgstr ""
 "--\n"
 "L'équipe des Outils de configuration Ximian"
 
-#: src/common/xst-tool.c:1570
+#: src/common/xst-tool.c:1601
 msgid "Don't show me this again"
 msgstr "Ne plus afficher ce message"
 
-#: src/common/xst-tool.c:1605
-msgid "\tEdit configuration in the location LOCATION."
-msgstr "\tEdite la configuration dans EMPLACEMENT"
+#: src/common/xst-tool.c:1669
+#, fuzzy
+msgid "Ximian Setup Tool"
+msgstr "Les outils de configuration Ximian"
 
-#: src/common/xst-tool.c:1605
-msgid "LOCATION"
-msgstr "EMPLACEMENT"
-
-#: src/common/xst-tool.c:1650
+#: src/common/xst-tool.c:1677
 msgid "Pretending we are root..."
 msgstr "Simulation de l'utilisateur root..."
 
-#: src/common/xst-ui.c:557
+#: src/common/xst-ui.c:556
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
@@ -3843,81 +3839,81 @@ msgstr "Cet ID existe déjà."
 msgid "Swap Management"
 msgstr "Gestion de l'emplacement"
 
-#: src/network/callbacks.c:119 src/network/connection.c:812
-#: src/network/connection.c:843
+#: src/network/callbacks.c:123 src/network/connection.c:821
+#: src/network/connection.c:852
 msgid "Active"
 msgstr "Active"
 
-#: src/network/callbacks.c:122
+#: src/network/callbacks.c:126
 msgid "Activating"
 msgstr "Activation"
 
-#: src/network/callbacks.c:133 src/network/connection.c:813
-#: src/network/connection.c:844
+#: src/network/callbacks.c:137 src/network/connection.c:822
+#: src/network/connection.c:853
 msgid "Inactive"
 msgstr "Inactive"
 
-#: src/network/callbacks.c:136
+#: src/network/callbacks.c:140
 msgid "Deactivating"
 msgstr "Désactivation"
 
-#: src/network/callbacks.c:350
+#: src/network/callbacks.c:362
 msgid "The name of this computer"
 msgstr "Nom de l'ordinateur"
 
-#: src/network/callbacks.c:353
+#: src/network/callbacks.c:365
 msgid "A short description of your computer"
 msgstr "Une brève description de votre ordinateur"
 
-#: src/network/callbacks.c:356
+#: src/network/callbacks.c:368
 msgid "The Windows Networking workgroup for your network"
 msgstr "Le groupe de travail du réseau Windows"
 
-#: src/network/callbacks.c:359
+#: src/network/callbacks.c:371
 msgid "The IP address of your WINS server"
 msgstr "Permet de définir l'adresse IP de votre serveur WINS"
 
-#: src/network/callbacks.c:362
+#: src/network/callbacks.c:374
 msgid "The DNS domain for your computer"
 msgstr "Permet de définir le domaine DNS pour votre ordinateur"
 
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:377
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Permet de définir la liste des adresses IP des serveurs DNS"
 
-#: src/network/callbacks.c:368
+#: src/network/callbacks.c:380
 msgid "A list of domains where hosts will be searched"
 msgstr "Permet de définir la liste des domaines ou les hôtes seront cherchés"
 
-#: src/network/callbacks.c:371
+#: src/network/callbacks.c:383
 msgid "The IP address of this host"
 msgstr "Permet de définir l'adresse IP de cet hôte"
 
-#: src/network/callbacks.c:374
+#: src/network/callbacks.c:386
 msgid "Aliases for this host, one per line"
 msgstr "Permet de définir les synonymes pour cet hôte (un par ligne)"
 
-#: src/network/callbacks.c:523
+#: src/network/callbacks.c:547
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Supprimer la connexion %s: ``%s'' ?"
 
-#: src/network/callbacks.c:525
+#: src/network/callbacks.c:549
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Supprimer la connexion %s ?"
 
-#: src/network/callbacks.c:581
+#: src/network/callbacks.c:605
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Activation de la connexion ``%s.''"
 
-#: src/network/callbacks.c:615
+#: src/network/callbacks.c:639
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Désactivation de la connexion ``%s.''"
 
-#: src/network/callbacks.c:635
+#: src/network/callbacks.c:659
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -3925,11 +3921,11 @@ msgstr ""
 "Vous n'avez pas de support SMB installé. Installez le support SMB\n"
 "afin de permettre l'accès à des réseaux Windows."
 
-#: src/network/callbacks.c:636
+#: src/network/callbacks.c:660
 msgid "SMB support missing."
 msgstr "Support SMB manquant."
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:698
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -3943,11 +3939,11 @@ msgstr ""
 "\n"
 "Continuer quand même ?"
 
-#: src/network/callbacks.c:680
+#: src/network/callbacks.c:704
 msgid "Don't change host name"
 msgstr "Ne pas changer le nom de l'hôte"
 
-#: src/network/callbacks.c:752
+#: src/network/callbacks.c:779
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3957,7 +3953,7 @@ msgstr ""
 "Vous devez installer wvdial, sans quoi la connexion\n"
 "PPP (modem) ne pourra pas être activée."
 
-#: src/network/callbacks.c:772
+#: src/network/callbacks.c:799
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3971,7 +3967,7 @@ msgstr ""
 "\n"
 "Continuer quand même ?"
 
-#: src/network/callbacks.c:799
+#: src/network/callbacks.c:826
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -3983,11 +3979,11 @@ msgstr ""
 "\n"
 "Continuer quand même ?"
 
-#: src/network/callbacks.c:806
+#: src/network/callbacks.c:833
 msgid "Activate connection"
 msgstr "Activer une connexion"
 
-#: src/network/callbacks.c:852
+#: src/network/callbacks.c:879
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -3997,7 +3993,7 @@ msgstr ""
 "informations. Veuillez compléter les informations de \n"
 "la passerelle, ou choisir une autre passerelle par défaut.\n"
 
-#: src/network/callbacks.c:892
+#: src/network/callbacks.c:919
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -4037,7 +4033,7 @@ msgstr "Boucle locale : interface virtuelle"
 msgid "Unknown type"
 msgstr "Type inconnu"
 
-#: src/network/connection.c:1421
+#: src/network/connection.c:1445
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -4047,7 +4043,7 @@ msgstr ""
 "été renseignés pour cette interface. Veuillez entrer\n"
 "des adresses IP valides dans ces champs pour continuer."
 
-#: src/network/connection.c:1428
+#: src/network/connection.c:1452
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -4057,7 +4053,7 @@ msgstr ""
 "renseignés pour cette interface. Veuillez entrer\n"
 "des adresses IP valides dans ces champs pour continuer."
 
-#: src/network/connection.c:1434
+#: src/network/connection.c:1458
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -4071,16 +4067,16 @@ msgstr ""
 "Veuillez saisir une adresse IP ou décocher\n"
 "l'option de saisi manuelle du DNS."
 
-#: src/network/hosts.c:380
+#: src/network/hosts.c:382
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Voulez-vous réellement supprimer le synonyme de %s ?"
 
-#: src/network/main.c:178
+#: src/network/main.c:189
 msgid "\tRun the internet conection druid."
 msgstr "\tLancer l'assistant de connexion à Internet."
 
-#: src/network/main.c:185
+#: src/network/main.c:196
 msgid "Network Settings"
 msgstr "Configuration du réseau"
 
@@ -4092,7 +4088,7 @@ msgstr "Configuration du réseau."
 msgid "Networking"
 msgstr "Réseau"
 
-#: src/network/ppp-druid.c:174
+#: src/network/ppp-druid.c:182
 msgid ""
 "The phone number must be composed of\n"
 "only numbers or commas (,)."
@@ -4100,7 +4096,7 @@ msgstr ""
 "Le numéro de téléphone doit uniquement être\n"
 "composé de chiffre et de séparateurs."
 
-#: src/network/ppp-druid.c:190
+#: src/network/ppp-druid.c:199
 msgid ""
 "The password and its confirmation\n"
 "must be the same."
@@ -4108,7 +4104,7 @@ msgstr ""
 "Le mot de passe et sa confirmation\n"
 "doivent être identiques."
 
-#: src/network/ppp-druid.c:193
+#: src/network/ppp-druid.c:202
 msgid ""
 "If you are specifying a password,\n"
 "you should specify a user name."
@@ -4116,7 +4112,7 @@ msgstr ""
 "Si vous saisissez un mot de passe, vous\n"
 "devez également saisir un utilisateur."
 
-#: src/network/ppp-druid.c:215
+#: src/network/ppp-druid.c:225
 msgid ""
 "Please set a name for this account,\n"
 "using only space, letters and numbers."
@@ -4124,7 +4120,7 @@ msgstr ""
 "Donnez un nom à cette connexion, nom composé\n"
 "uniquement de lettres, de chiffres et d'espaces."
 
-#: src/network/ppp-druid.c:227
+#: src/network/ppp-druid.c:239
 #, c-format
 msgid ""
 "You are about to create an account named with the following information:\n"
@@ -4780,6 +4776,21 @@ msgstr "Shell"
 #: src/users/users.etspec.h:6
 msgid "UID"
 msgstr "UID"
+
+#, fuzzy
+#~ msgid ""
+#~ "A previous DHCP configuration has been detected. \n"
+#~ "Do you want to keep this configuration?\n"
+#~ "\r\r"
+#~ msgstr ""
+#~ "Une configuration DHCP précédenet a été détectée. \n"
+#~ "Voulez-vous la conserver ?"
+
+#~ msgid "\tEdit configuration in the location LOCATION."
+#~ msgstr "\tEdite la configuration dans EMPLACEMENT"
+
+#~ msgid "LOCATION"
+#~ msgstr "EMPLACEMENT"
 
 #~ msgid "Default profile"
 #~ msgstr "Modèle par défaut"

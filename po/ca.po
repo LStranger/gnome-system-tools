@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools, 0.8.0\n"
-"POT-Creation-Date: 2002-02-08 13:34-0600\n"
+"POT-Creation-Date: 2002-02-10 22:47-0600\n"
 "PO-Revision-Date: 2001-09-30 00:08+0200\n"
 "Last-Translator: Softcatalà <tradgnome@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 #.
 #: interfaces/boot.glade.h:7 interfaces/disks.glade.h:21
 #: interfaces/font.glade.h:7 interfaces/hardware.glade.h:7
-#: interfaces/internetsharing.glade.h:63 interfaces/memory.glade.h:31
+#: interfaces/internetsharing.glade.h:62 interfaces/memory.glade.h:31
 #: interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:14
 #: interfaces/network.glade.h:138 interfaces/print.glade.h:68
 #: interfaces/users.glade.h:17
@@ -194,7 +194,7 @@ msgstr ""
 "nucli en el moment de l'arrencada."
 
 #: interfaces/boot.glade.h:45 interfaces/boot.glade.in.h:9
-#: interfaces/internetsharing.glade.h:57
+#: interfaces/internetsharing.glade.h:56
 #: interfaces/internetsharing.glade.in.h:30 interfaces/network.glade.h:133
 #: interfaces/network.glade.in.h:37 interfaces/users.glade.h:61
 #: interfaces/users.glade.in.h:31
@@ -254,7 +254,7 @@ msgid "Ximian Setup Tools"
 msgstr "Instal·lació de les eines Ximian de configuració"
 
 #: interfaces/common.glade.h:8 interfaces/common.glade.in.h:4
-#: src/common/xst-tool.c:1013
+#: src/common/xst-tool.c:1012
 msgid "Scanning your system configuration."
 msgstr "S'està escannejant el sistema de configuració."
 
@@ -974,63 +974,65 @@ msgid "Configure DHCP Service"
 msgstr ""
 
 #: interfaces/internetsharing.glade.h:52
+#, fuzzy
 msgid ""
 "A previous DHCP configuration has been detected. \n"
 "Do you want to keep this configuration?\n"
-"\r\r"
 msgstr ""
+"El camí que voleu compartir no existeix.\n"
+"Voleu crear-lo?"
 
-#: interfaces/internetsharing.glade.h:55
+#: interfaces/internetsharing.glade.h:54
 #: interfaces/internetsharing.glade.in.h:11
 msgid " Yes, keep the current DHCP configuration."
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:56
+#: interfaces/internetsharing.glade.h:55
 #: interfaces/internetsharing.glade.in.h:8
 msgid " No, overwrite with new defaults (recommended)"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:58
+#: interfaces/internetsharing.glade.h:57
 msgid ""
 "Congratulations! Your computer will now be\n"
 "configured to share its internet connection.\n"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:61
+#: interfaces/internetsharing.glade.h:60
 msgid "Start rage"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:62
+#: interfaces/internetsharing.glade.h:61
 msgid "End range"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:64
+#: interfaces/internetsharing.glade.h:63
 #: interfaces/internetsharing.glade.in.h:28
 msgid "Enable :"
 msgstr "Habilita:"
 
-#: interfaces/internetsharing.glade.h:65
+#: interfaces/internetsharing.glade.h:64
 #: interfaces/internetsharing.glade.in.h:32
 msgid "IP Forwarding"
 msgstr "Reenviament a l'IP"
 
-#: interfaces/internetsharing.glade.h:66
+#: interfaces/internetsharing.glade.h:65
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.h:61
-#: interfaces/network.glade.in.h:27 src/network/connection.c:1645
+#: interfaces/network.glade.in.h:27 src/network/connection.c:1669
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/internetsharing.glade.h:67
+#: interfaces/internetsharing.glade.h:66
 #: interfaces/internetsharing.glade.in.h:31
 msgid "Firewall"
 msgstr "Tallafoc"
 
-#: interfaces/internetsharing.glade.h:68
+#: interfaces/internetsharing.glade.h:67
 #: interfaces/internetsharing.glade.in.h:41
 msgid "Web Cache (squid)"
 msgstr "Memòria cau de web (squid)"
 
-#: interfaces/internetsharing.glade.h:69
+#: interfaces/internetsharing.glade.h:68
 #: interfaces/internetsharing.glade.in.h:19
 msgid "Banner Removal (Junkbuster)"
 msgstr "Extracció de la cibertira (eliminador de la cibertira)"
@@ -1757,7 +1759,7 @@ msgid "A_liases:"
 msgstr "À_lies:"
 
 #: interfaces/network.glade.h:41 interfaces/network.glade.in.h:40
-#: src/network/main.c:138
+#: src/network/main.c:148
 msgid "Hosts"
 msgstr "Ordinadors centrals"
 
@@ -1837,12 +1839,12 @@ msgid "_Configuration:"
 msgstr "_Configuració:"
 
 #: interfaces/network.glade.h:60 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1644
+#: src/network/connection.c:1668
 msgid "Manual"
 msgstr "Manual"
 
 #: interfaces/network.glade.h:62 interfaces/network.glade.in.h:21
-#: src/network/connection.c:1646
+#: src/network/connection.c:1670
 msgid "BOOTP"
 msgstr "Protocol d'arrencada"
 
@@ -3421,20 +3423,20 @@ msgstr "Paràmetres de la gestió d'arrencada - Eines Ximian de configuració"
 msgid "System administration"
 msgstr ""
 
-#: src/common/xst-dialog.c:58
+#: src/common/xst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "No s'ha pogut trobar el mòdul fonamental d'interfície: %s"
 
-#: src/common/xst-dialog.c:90
+#: src/common/xst-dialog.c:91
 msgid " More Options >> "
 msgstr " Més opcions >>"
 
-#: src/common/xst-dialog.c:91
+#: src/common/xst-dialog.c:92
 msgid " << Fewer Options "
 msgstr "<< Menys opcions"
 
-#: src/common/xst-dialog.c:433
+#: src/common/xst-dialog.c:464
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3442,27 +3444,27 @@ msgstr ""
 "Hi ha canvis que no s'han aplicat.\n"
 "Els voleu aplicar ara?"
 
-#: src/common/xst-dialog.c:503
+#: src/common/xst-dialog.c:539
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr ""
 "S'ha produït un error en el senyal de la connexió `%s'en el mòdul fonamental "
 "d'interfície `%s'"
 
-#: src/common/xst-tool.c:955
+#: src/common/xst-tool.c:954
 #, fuzzy, c-format
 msgid "Skipping %s directive..."
 msgstr "S'està ometent la desada efectiva..."
 
-#: src/common/xst-tool.c:1093
+#: src/common/xst-tool.c:1092
 msgid "Skipping actual save..."
 msgstr "S'està ometent la desada efectiva..."
 
-#: src/common/xst-tool.c:1135
+#: src/common/xst-tool.c:1134
 msgid "Updating your system configuration."
 msgstr "S'està actualitzant el sistema de configuració."
 
-#: src/common/xst-tool.c:1154
+#: src/common/xst-tool.c:1153
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3470,16 +3472,16 @@ msgstr ""
 "S'ha produït un error en l'execució de la seqüència en segon terme,\n"
 "i no s'ha pogut carregar la configuració."
 
-#: src/common/xst-tool.c:1348
+#: src/common/xst-tool.c:1376
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Eines Ximian de configuració "
 
-#: src/common/xst-tool.c:1540
+#: src/common/xst-tool.c:1568
 msgid "The password you entered is invalid."
 msgstr "La contrasenya que heu introduït no és vàlida."
 
-#: src/common/xst-tool.c:1550
+#: src/common/xst-tool.c:1578
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -3507,23 +3509,20 @@ msgstr ""
 "--\n"
 "L'equip de les eines Ximian de configuració"
 
-#: src/common/xst-tool.c:1570
+#: src/common/xst-tool.c:1601
 msgid "Don't show me this again"
 msgstr "No m'ho tornis a mostrar"
 
-#: src/common/xst-tool.c:1605
-msgid "\tEdit configuration in the location LOCATION."
-msgstr "\tEdita la configuració en la ubicació UBICACIÓ."
+#: src/common/xst-tool.c:1669
+#, fuzzy
+msgid "Ximian Setup Tool"
+msgstr "Instal·lació de les eines Ximian de configuració"
 
-#: src/common/xst-tool.c:1605
-msgid "LOCATION"
-msgstr "UBICACIÓ"
-
-#: src/common/xst-tool.c:1650
+#: src/common/xst-tool.c:1677
 msgid "Pretending we are root..."
 msgstr "Esteu actuant com si fossiu l'arrel..."
 
-#: src/common/xst-ui.c:557
+#: src/common/xst-ui.c:556
 #, fuzzy
 msgid ""
 "Plese restart your GNOME session for\n"
@@ -3804,83 +3803,83 @@ msgstr "Ja existeix l'espai d'intercanvi %s ."
 msgid "Swap Management"
 msgstr "Gestió de l'intercanvi"
 
-#: src/network/callbacks.c:119 src/network/connection.c:812
-#: src/network/connection.c:843
+#: src/network/callbacks.c:123 src/network/connection.c:821
+#: src/network/connection.c:852
 msgid "Active"
 msgstr "Actiu"
 
-#: src/network/callbacks.c:122
+#: src/network/callbacks.c:126
 #, fuzzy
 msgid "Activating"
 msgstr "Activació"
 
-#: src/network/callbacks.c:133 src/network/connection.c:813
-#: src/network/connection.c:844
+#: src/network/callbacks.c:137 src/network/connection.c:822
+#: src/network/connection.c:853
 msgid "Inactive"
 msgstr "Inactiu"
 
-#: src/network/callbacks.c:136
+#: src/network/callbacks.c:140
 #, fuzzy
 msgid "Deactivating"
 msgstr "D_esactiva"
 
-#: src/network/callbacks.c:350
+#: src/network/callbacks.c:362
 msgid "The name of this computer"
 msgstr "El nom de l'ordinador"
 
-#: src/network/callbacks.c:353
+#: src/network/callbacks.c:365
 msgid "A short description of your computer"
 msgstr "Curta descripció de l'ordinador"
 
-#: src/network/callbacks.c:356
+#: src/network/callbacks.c:368
 msgid "The Windows Networking workgroup for your network"
 msgstr "El grup de treball de la xarxa de Windows per a la vostra xarxa"
 
-#: src/network/callbacks.c:359
+#: src/network/callbacks.c:371
 msgid "The IP address of your WINS server"
 msgstr "L'adreça d'IP del servidor WINS"
 
-#: src/network/callbacks.c:362
+#: src/network/callbacks.c:374
 msgid "The DNS domain for your computer"
 msgstr "El domini del DNS per a l'ordinador"
 
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:377
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Una llista de les adreces d'IP dels vostres servidors del DNS"
 
-#: src/network/callbacks.c:368
+#: src/network/callbacks.c:380
 msgid "A list of domains where hosts will be searched"
 msgstr "Una llista dels dominis on podeu cercar els ordinadors centrals"
 
-#: src/network/callbacks.c:371
+#: src/network/callbacks.c:383
 msgid "The IP address of this host"
 msgstr "L'adreça d'IP d'aquest ordinador central"
 
-#: src/network/callbacks.c:374
+#: src/network/callbacks.c:386
 msgid "Aliases for this host, one per line"
 msgstr "Àlies per a l'ordinador central, un per línia"
 
-#: src/network/callbacks.c:523
+#: src/network/callbacks.c:547
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Voleu suprimir la connexió %s: ``%s''?"
 
-#: src/network/callbacks.c:525
+#: src/network/callbacks.c:549
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Voleu suprimir la connexió %s?"
 
-#: src/network/callbacks.c:581
+#: src/network/callbacks.c:605
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "S'està activant la connexió ``%s.''"
 
-#: src/network/callbacks.c:615
+#: src/network/callbacks.c:639
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "S'està desactivant la connexió ``%s.''"
 
-#: src/network/callbacks.c:635
+#: src/network/callbacks.c:659
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -3888,11 +3887,11 @@ msgstr ""
 "No teniu instal·lat cap suport d'SMB. Instal·leu un suport d'SMB\n"
 "en el sistema per habilitar la xarxa de Windows."
 
-#: src/network/callbacks.c:636
+#: src/network/callbacks.c:660
 msgid "SMB support missing."
 msgstr "Falta un suport d'SMB."
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:698
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -3905,11 +3904,11 @@ msgstr ""
 "entrar.\n"
 "Voleu continuar de totes maneres?"
 
-#: src/network/callbacks.c:680
+#: src/network/callbacks.c:704
 msgid "Don't change host name"
 msgstr "No canviïs el nom de l'ordinador central"
 
-#: src/network/callbacks.c:752
+#: src/network/callbacks.c:779
 #, fuzzy
 msgid ""
 "wvdial could not be found on your system.\n"
@@ -3922,7 +3921,7 @@ msgstr ""
 "\n"
 "Voleu continuar de totes maneres?"
 
-#: src/network/callbacks.c:772
+#: src/network/callbacks.c:799
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3936,7 +3935,7 @@ msgstr ""
 "\n"
 "Voleu continuar de totes maneres?"
 
-#: src/network/callbacks.c:799
+#: src/network/callbacks.c:826
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -3948,11 +3947,11 @@ msgstr ""
 "\n"
 "Voleu continuar de totes maneres?"
 
-#: src/network/callbacks.c:806
+#: src/network/callbacks.c:833
 msgid "Activate connection"
 msgstr "Activa la connexió"
 
-#: src/network/callbacks.c:852
+#: src/network/callbacks.c:879
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -3962,7 +3961,7 @@ msgstr ""
 "de la passarel·la. Proveïu aquesta informació per\n"
 "continuar o escolliu un altre dispositiu de la passarel·la per defecte.\n"
 
-#: src/network/callbacks.c:892
+#: src/network/callbacks.c:919
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -4002,7 +4001,7 @@ msgstr "Bucle tancat: interfície virtual"
 msgid "Unknown type"
 msgstr "Tipus desconegut"
 
-#: src/network/connection.c:1421
+#: src/network/connection.c:1445
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -4012,7 +4011,7 @@ msgstr ""
 "s'ha deixat sense emplenar. Introduïu en aquests camps\n"
 "les adreces vàlides d'IP per continuar."
 
-#: src/network/connection.c:1428
+#: src/network/connection.c:1452
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -4022,7 +4021,7 @@ msgstr ""
 "interfície s'ha deixat sense emplenar. Introduïu en aquests camps\n"
 "les adreces vàlides d'IP continuar."
 
-#: src/network/connection.c:1434
+#: src/network/connection.c:1458
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -4036,16 +4035,16 @@ msgstr ""
 "per al DNS primari o desactiveu l'opció\n"
 "del DNS manual."
 
-#: src/network/hosts.c:380
+#: src/network/hosts.c:382
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Esteu segur que voleu suprimir els àlies per a %s?"
 
-#: src/network/main.c:178
+#: src/network/main.c:189
 msgid "\tRun the internet conection druid."
 msgstr "\tExecuta el Druid de connexió a internet"
 
-#: src/network/main.c:185
+#: src/network/main.c:196
 msgid "Network Settings"
 msgstr "Paràmetres de la xarxa"
 
@@ -4058,7 +4057,7 @@ msgstr ""
 msgid "Networking"
 msgstr "Paràmetres de la xarxa"
 
-#: src/network/ppp-druid.c:174
+#: src/network/ppp-druid.c:182
 msgid ""
 "The phone number must be composed of\n"
 "only numbers or commas (,)."
@@ -4066,7 +4065,7 @@ msgstr ""
 "El número de telèfon ha d'estar compost només\n"
 "de números o comes (,)."
 
-#: src/network/ppp-druid.c:190
+#: src/network/ppp-druid.c:199
 msgid ""
 "The password and its confirmation\n"
 "must be the same."
@@ -4074,7 +4073,7 @@ msgstr ""
 "La contrasenya i la seva confirmació\n"
 "han de ser iguals."
 
-#: src/network/ppp-druid.c:193
+#: src/network/ppp-druid.c:202
 msgid ""
 "If you are specifying a password,\n"
 "you should specify a user name."
@@ -4082,7 +4081,7 @@ msgstr ""
 "Per especificar una contrasenya,\n"
 "heu d'especificar un nom d'usuari."
 
-#: src/network/ppp-druid.c:215
+#: src/network/ppp-druid.c:225
 msgid ""
 "Please set a name for this account,\n"
 "using only space, letters and numbers."
@@ -4090,7 +4089,7 @@ msgstr ""
 "Establiu un nom per a aquest compte,\n"
 "utilitzant només l'espai, lletres i números."
 
-#: src/network/ppp-druid.c:227
+#: src/network/ppp-druid.c:239
 #, c-format
 msgid ""
 "You are about to create an account named with the following information:\n"
@@ -4729,6 +4728,12 @@ msgstr "_Intèrpret d'ordres:"
 #: src/users/users.etspec.h:6
 msgid "UID"
 msgstr ""
+
+#~ msgid "\tEdit configuration in the location LOCATION."
+#~ msgstr "\tEdita la configuració en la ubicació UBICACIÓ."
+
+#~ msgid "LOCATION"
+#~ msgstr "UBICACIÓ"
 
 #~ msgid "Closing tool."
 #~ msgstr "Eina de tancament."

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ximian-setup-tools\n"
-"POT-Creation-Date: 2002-02-08 13:34-0600\n"
+"POT-Creation-Date: 2002-02-10 22:47-0600\n"
 "PO-Revision-Date: 2001-05-22 13:58+04:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 #.
 #: interfaces/boot.glade.h:7 interfaces/disks.glade.h:21
 #: interfaces/font.glade.h:7 interfaces/hardware.glade.h:7
-#: interfaces/internetsharing.glade.h:63 interfaces/memory.glade.h:31
+#: interfaces/internetsharing.glade.h:62 interfaces/memory.glade.h:31
 #: interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:14
 #: interfaces/network.glade.h:138 interfaces/print.glade.h:68
 #: interfaces/users.glade.h:17
@@ -186,7 +186,7 @@ msgid ""
 msgstr ""
 
 #: interfaces/boot.glade.h:45 interfaces/boot.glade.in.h:9
-#: interfaces/internetsharing.glade.h:57
+#: interfaces/internetsharing.glade.h:56
 #: interfaces/internetsharing.glade.in.h:30 interfaces/network.glade.h:133
 #: interfaces/network.glade.in.h:37 interfaces/users.glade.h:61
 #: interfaces/users.glade.in.h:31
@@ -237,7 +237,7 @@ msgid "Ximian Setup Tools"
 msgstr "%s - Инструменты установки Ximian"
 
 #: interfaces/common.glade.h:8 interfaces/common.glade.in.h:4
-#: src/common/xst-tool.c:1013
+#: src/common/xst-tool.c:1012
 msgid "Scanning your system configuration."
 msgstr "Сканирование конфигурации вашей системы."
 
@@ -945,63 +945,65 @@ msgid "Configure DHCP Service"
 msgstr ""
 
 #: interfaces/internetsharing.glade.h:52
+#, fuzzy
 msgid ""
 "A previous DHCP configuration has been detected. \n"
 "Do you want to keep this configuration?\n"
-"\r\r"
 msgstr ""
+"Место, доступ к которому вы хотите разделить не существует.\n"
+"Хотите создать его?"
 
-#: interfaces/internetsharing.glade.h:55
+#: interfaces/internetsharing.glade.h:54
 #: interfaces/internetsharing.glade.in.h:11
 msgid " Yes, keep the current DHCP configuration."
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:56
+#: interfaces/internetsharing.glade.h:55
 #: interfaces/internetsharing.glade.in.h:8
 msgid " No, overwrite with new defaults (recommended)"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:58
+#: interfaces/internetsharing.glade.h:57
 msgid ""
 "Congratulations! Your computer will now be\n"
 "configured to share its internet connection.\n"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:61
+#: interfaces/internetsharing.glade.h:60
 msgid "Start rage"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:62
+#: interfaces/internetsharing.glade.h:61
 msgid "End range"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:64
+#: interfaces/internetsharing.glade.h:63
 #: interfaces/internetsharing.glade.in.h:28
 msgid "Enable :"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:65
+#: interfaces/internetsharing.glade.h:64
 #: interfaces/internetsharing.glade.in.h:32
 msgid "IP Forwarding"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:66
+#: interfaces/internetsharing.glade.h:65
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.h:61
-#: interfaces/network.glade.in.h:27 src/network/connection.c:1645
+#: interfaces/network.glade.in.h:27 src/network/connection.c:1669
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/internetsharing.glade.h:67
+#: interfaces/internetsharing.glade.h:66
 #: interfaces/internetsharing.glade.in.h:31
 msgid "Firewall"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:68
+#: interfaces/internetsharing.glade.h:67
 #: interfaces/internetsharing.glade.in.h:41
 msgid "Web Cache (squid)"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:69
+#: interfaces/internetsharing.glade.h:68
 #: interfaces/internetsharing.glade.in.h:19
 msgid "Banner Removal (Junkbuster)"
 msgstr ""
@@ -1764,7 +1766,7 @@ msgid "A_liases:"
 msgstr ""
 
 #: interfaces/network.glade.h:41 interfaces/network.glade.in.h:40
-#: src/network/main.c:138
+#: src/network/main.c:148
 msgid "Hosts"
 msgstr ""
 
@@ -1848,12 +1850,12 @@ msgid "_Configuration:"
 msgstr "Сохранение настроек подключения к Интернет."
 
 #: interfaces/network.glade.h:60 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1644
+#: src/network/connection.c:1668
 msgid "Manual"
 msgstr "Вручную"
 
 #: interfaces/network.glade.h:62 interfaces/network.glade.in.h:21
-#: src/network/connection.c:1646
+#: src/network/connection.c:1670
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -3456,20 +3458,20 @@ msgstr "Настройки диспетчера загрузки - Инструменты настройки от Ximian"
 msgid "System administration"
 msgstr ""
 
-#: src/common/xst-dialog.c:58
+#: src/common/xst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "Не удалось найти виджет: %s"
 
-#: src/common/xst-dialog.c:90
+#: src/common/xst-dialog.c:91
 msgid " More Options >> "
 msgstr "Дополнительные параметры >>"
 
-#: src/common/xst-dialog.c:91
+#: src/common/xst-dialog.c:92
 msgid " << Fewer Options "
 msgstr "<< Меньше параметров"
 
-#: src/common/xst-dialog.c:433
+#: src/common/xst-dialog.c:464
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3477,25 +3479,25 @@ msgstr ""
 "Существуют несохраненные изменения.\n"
 "Применить сейчас?"
 
-#: src/common/xst-dialog.c:503
+#: src/common/xst-dialog.c:539
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Ошибка подключения сигнала \"%s\" в виджете \"%s\""
 
-#: src/common/xst-tool.c:955
+#: src/common/xst-tool.c:954
 #, fuzzy, c-format
 msgid "Skipping %s directive..."
 msgstr "Пропуск действительного сохранения..."
 
-#: src/common/xst-tool.c:1093
+#: src/common/xst-tool.c:1092
 msgid "Skipping actual save..."
 msgstr "Пропуск действительного сохранения..."
 
-#: src/common/xst-tool.c:1135
+#: src/common/xst-tool.c:1134
 msgid "Updating your system configuration."
 msgstr "Обновление конфигурации вашей системы."
 
-#: src/common/xst-tool.c:1154
+#: src/common/xst-tool.c:1153
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3503,16 +3505,16 @@ msgstr ""
 "При запуске серверного сценария возникла ошибка,\n"
 "конфигурация не может быть загружена."
 
-#: src/common/xst-tool.c:1348
+#: src/common/xst-tool.c:1376
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Инструменты установки Ximian"
 
-#: src/common/xst-tool.c:1540
+#: src/common/xst-tool.c:1568
 msgid "The password you entered is invalid."
 msgstr ""
 
-#: src/common/xst-tool.c:1550
+#: src/common/xst-tool.c:1578
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -3528,23 +3530,20 @@ msgid ""
 "The Ximian Setup Tools team"
 msgstr ""
 
-#: src/common/xst-tool.c:1570
+#: src/common/xst-tool.c:1601
 msgid "Don't show me this again"
 msgstr ""
 
-#: src/common/xst-tool.c:1605
-msgid "\tEdit configuration in the location LOCATION."
-msgstr ""
+#: src/common/xst-tool.c:1669
+#, fuzzy
+msgid "Ximian Setup Tool"
+msgstr "%s - Инструменты установки Ximian"
 
-#: src/common/xst-tool.c:1605
-msgid "LOCATION"
-msgstr "ПОЛОЖЕНИЕ"
-
-#: src/common/xst-tool.c:1650
+#: src/common/xst-tool.c:1677
 msgid "Pretending we are root..."
 msgstr "Претендовать на полномочия root..."
 
-#: src/common/xst-ui.c:557
+#: src/common/xst-ui.c:556
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
@@ -3826,83 +3825,83 @@ msgstr "Пространство подкачки %s уже существует."
 msgid "Swap Management"
 msgstr "Управление подкачкой"
 
-#: src/network/callbacks.c:119 src/network/connection.c:812
-#: src/network/connection.c:843
+#: src/network/callbacks.c:123 src/network/connection.c:821
+#: src/network/connection.c:852
 msgid "Active"
 msgstr "Активно"
 
-#: src/network/callbacks.c:122
+#: src/network/callbacks.c:126
 #, fuzzy
 msgid "Activating"
 msgstr "Положение"
 
-#: src/network/callbacks.c:133 src/network/connection.c:813
-#: src/network/connection.c:844
+#: src/network/callbacks.c:137 src/network/connection.c:822
+#: src/network/connection.c:853
 msgid "Inactive"
 msgstr "Неактивно"
 
-#: src/network/callbacks.c:136
+#: src/network/callbacks.c:140
 #, fuzzy
 msgid "Deactivating"
 msgstr "Включить"
 
-#: src/network/callbacks.c:350
+#: src/network/callbacks.c:362
 msgid "The name of this computer"
 msgstr "Название этого компьютера"
 
-#: src/network/callbacks.c:353
+#: src/network/callbacks.c:365
 msgid "A short description of your computer"
 msgstr "Краткое описание вашего компьютера."
 
-#: src/network/callbacks.c:356
+#: src/network/callbacks.c:368
 msgid "The Windows Networking workgroup for your network"
 msgstr "Рабочая группа сети Windows для вашей сети"
 
-#: src/network/callbacks.c:359
+#: src/network/callbacks.c:371
 msgid "The IP address of your WINS server"
 msgstr "IP-адрес вашего сервера WINS"
 
-#: src/network/callbacks.c:362
+#: src/network/callbacks.c:374
 msgid "The DNS domain for your computer"
 msgstr "Домен DNS для вашего компьютера"
 
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:377
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Список IP-адресов DNS-серверов"
 
-#: src/network/callbacks.c:368
+#: src/network/callbacks.c:380
 msgid "A list of domains where hosts will be searched"
 msgstr "Список доменов, в которых будут искаться хосты"
 
-#: src/network/callbacks.c:371
+#: src/network/callbacks.c:383
 msgid "The IP address of this host"
 msgstr "IP-адрес этого хоста"
 
-#: src/network/callbacks.c:374
+#: src/network/callbacks.c:386
 msgid "Aliases for this host, one per line"
 msgstr "Псевдонимы для этого хоста, по одному в строке"
 
-#: src/network/callbacks.c:523
+#: src/network/callbacks.c:547
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Удалить соединение %s: \"%s\"?"
 
-#: src/network/callbacks.c:525
+#: src/network/callbacks.c:549
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Удалить соединение %s?"
 
-#: src/network/callbacks.c:581
+#: src/network/callbacks.c:605
 #, fuzzy, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Положение"
 
-#: src/network/callbacks.c:615
+#: src/network/callbacks.c:639
 #, fuzzy, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Положение"
 
-#: src/network/callbacks.c:635
+#: src/network/callbacks.c:659
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -3910,11 +3909,11 @@ msgstr ""
 "Поддержка SMB отсутствует. Пожалуйста, установите поддержку\n"
 "SMB для включения взаимодействия с системами на базе Windows."
 
-#: src/network/callbacks.c:636
+#: src/network/callbacks.c:660
 msgid "SMB support missing."
 msgstr "Поддержка SMB отсутствует."
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:698
 #, fuzzy
 msgid ""
 "The host name has changed. This will prevent you\n"
@@ -3930,11 +3929,11 @@ msgstr ""
 "\n"
 "Игнорировать и продолжать?"
 
-#: src/network/callbacks.c:680
+#: src/network/callbacks.c:704
 msgid "Don't change host name"
 msgstr "Не изменять имя хоста"
 
-#: src/network/callbacks.c:752
+#: src/network/callbacks.c:779
 #, fuzzy
 msgid ""
 "wvdial could not be found on your system.\n"
@@ -3947,7 +3946,7 @@ msgstr ""
 "\n"
 "Игнорировать и продолжать?"
 
-#: src/network/callbacks.c:772
+#: src/network/callbacks.c:799
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3961,7 +3960,7 @@ msgstr ""
 "\n"
 "Игнорировать и продолжать?"
 
-#: src/network/callbacks.c:799
+#: src/network/callbacks.c:826
 #, fuzzy
 msgid ""
 "The default gateway device is not activated. This\n"
@@ -3976,19 +3975,19 @@ msgstr ""
 "\n"
 "Игнорировать и продолжать?"
 
-#: src/network/callbacks.c:806
+#: src/network/callbacks.c:833
 #, fuzzy
 msgid "Activate connection"
 msgstr "Положение"
 
-#: src/network/callbacks.c:852
+#: src/network/callbacks.c:879
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
 "proceed, or choose another default gateway device.\n"
 msgstr ""
 
-#: src/network/callbacks.c:892
+#: src/network/callbacks.c:919
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -4028,21 +4027,21 @@ msgstr "Loopback: виртуальный интерфейс"
 msgid "Unknown type"
 msgstr "Неизвестный тип"
 
-#: src/network/connection.c:1421
+#: src/network/connection.c:1445
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
 "addresses in those fields to continue."
 msgstr ""
 
-#: src/network/connection.c:1428
+#: src/network/connection.c:1452
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
 "IP addresses in those fields to continue."
 msgstr ""
 
-#: src/network/connection.c:1434
+#: src/network/connection.c:1458
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -4051,16 +4050,16 @@ msgid ""
 "the manual DNS option."
 msgstr ""
 
-#: src/network/hosts.c:380
+#: src/network/hosts.c:382
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Вы уверены в том что вы хотите удалить псевдонимы для %s?"
 
-#: src/network/main.c:178
+#: src/network/main.c:189
 msgid "\tRun the internet conection druid."
 msgstr "\tЗапустить помощника настройки Internet-соединения."
 
-#: src/network/main.c:185
+#: src/network/main.c:196
 msgid "Network Settings"
 msgstr "Сетевые настройки"
 
@@ -4073,7 +4072,7 @@ msgstr ""
 msgid "Networking"
 msgstr "Сетевые настройки"
 
-#: src/network/ppp-druid.c:174
+#: src/network/ppp-druid.c:182
 msgid ""
 "The phone number must be composed of\n"
 "only numbers or commas (,)."
@@ -4081,7 +4080,7 @@ msgstr ""
 "Телефонный номер должен состоять только\n"
 "из чисел или запятых."
 
-#: src/network/ppp-druid.c:190
+#: src/network/ppp-druid.c:199
 msgid ""
 "The password and its confirmation\n"
 "must be the same."
@@ -4089,7 +4088,7 @@ msgstr ""
 "Пароль и его подтверждение\n"
 "должны совпадать."
 
-#: src/network/ppp-druid.c:193
+#: src/network/ppp-druid.c:202
 msgid ""
 "If you are specifying a password,\n"
 "you should specify a user name."
@@ -4097,7 +4096,7 @@ msgstr ""
 "Если вы указали пароль,\n"
 "то должны также указать имя пользователя."
 
-#: src/network/ppp-druid.c:215
+#: src/network/ppp-druid.c:225
 msgid ""
 "Please set a name for this account,\n"
 "using only space, letters and numbers."
@@ -4105,7 +4104,7 @@ msgstr ""
 "Пожалуйста установите название для этой учетной записи\n"
 "используя только пробелы, буквы и числа."
 
-#: src/network/ppp-druid.c:227
+#: src/network/ppp-druid.c:239
 #, c-format
 msgid ""
 "You are about to create an account named with the following information:\n"
@@ -4744,6 +4743,9 @@ msgstr "Показать все"
 #: src/users/users.etspec.h:6
 msgid "UID"
 msgstr ""
+
+#~ msgid "LOCATION"
+#~ msgstr "ПОЛОЖЕНИЕ"
 
 #~ msgid "Default profile"
 #~ msgstr "Профиль по умолчанию"

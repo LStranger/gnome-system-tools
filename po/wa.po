@@ -11,7 +11,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.3.0\n"
-"POT-Creation-Date: 2002-02-08 13:34-0600\n"
+"POT-Creation-Date: 2002-02-10 22:47-0600\n"
 "PO-Revision-Date: 1999-02-07 17:37+0100\n"
 "Last-Translator: Pablo Saratxaga <srtxg@chanae.alphanet.ch>\n"
 "Language-Team: walon <linux-wa@chanae.alphanet.ch>\n"
@@ -26,7 +26,7 @@ msgstr ""
 #.
 #: interfaces/boot.glade.h:7 interfaces/disks.glade.h:21
 #: interfaces/font.glade.h:7 interfaces/hardware.glade.h:7
-#: interfaces/internetsharing.glade.h:63 interfaces/memory.glade.h:31
+#: interfaces/internetsharing.glade.h:62 interfaces/memory.glade.h:31
 #: interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:14
 #: interfaces/network.glade.h:138 interfaces/print.glade.h:68
 #: interfaces/users.glade.h:17
@@ -184,7 +184,7 @@ msgid ""
 msgstr ""
 
 #: interfaces/boot.glade.h:45 interfaces/boot.glade.in.h:9
-#: interfaces/internetsharing.glade.h:57
+#: interfaces/internetsharing.glade.h:56
 #: interfaces/internetsharing.glade.in.h:30 interfaces/network.glade.h:133
 #: interfaces/network.glade.in.h:37 interfaces/users.glade.h:61
 #: interfaces/users.glade.in.h:31
@@ -235,7 +235,7 @@ msgid "Ximian Setup Tools"
 msgstr "Usteyes d' apontiaedje di Ximian"
 
 #: interfaces/common.glade.h:8 interfaces/common.glade.in.h:4
-#: src/common/xst-tool.c:1013
+#: src/common/xst-tool.c:1012
 msgid "Scanning your system configuration."
 msgstr "Lijhant l' apontiaedje do sistinme da vosse."
 
@@ -939,67 +939,67 @@ msgid "Configure DHCP Service"
 msgstr ""
 
 #: interfaces/internetsharing.glade.h:52
+#, fuzzy
 msgid ""
 "A previous DHCP configuration has been detected. \n"
 "Do you want to keep this configuration?\n"
-"\r\r"
-msgstr ""
+msgstr "Li fitchî «%s» n' egzisteye nén. Volez-ve l' askepyî?"
 
-#: interfaces/internetsharing.glade.h:55
+#: interfaces/internetsharing.glade.h:54
 #: interfaces/internetsharing.glade.in.h:11
 msgid " Yes, keep the current DHCP configuration."
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:56
+#: interfaces/internetsharing.glade.h:55
 #: interfaces/internetsharing.glade.in.h:8
 msgid " No, overwrite with new defaults (recommended)"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:58
+#: interfaces/internetsharing.glade.h:57
 msgid ""
 "Congratulations! Your computer will now be\n"
 "configured to share its internet connection.\n"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:61
+#: interfaces/internetsharing.glade.h:60
 msgid "Start rage"
 msgstr ""
 
-#: interfaces/internetsharing.glade.h:62
+#: interfaces/internetsharing.glade.h:61
 #, fuzzy
 msgid "End range"
 msgstr "Fortchete des djoûs"
 
-#: interfaces/internetsharing.glade.h:64
+#: interfaces/internetsharing.glade.h:63
 #: interfaces/internetsharing.glade.in.h:28
 msgid "Enable :"
 msgstr "Mete èn alaedje:"
 
-#: interfaces/internetsharing.glade.h:65
+#: interfaces/internetsharing.glade.h:64
 #: interfaces/internetsharing.glade.in.h:32
 #, fuzzy
 msgid "IP Forwarding"
 msgstr "Èn avant"
 
-#: interfaces/internetsharing.glade.h:66
+#: interfaces/internetsharing.glade.h:65
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.h:61
-#: interfaces/network.glade.in.h:27 src/network/connection.c:1645
+#: interfaces/network.glade.in.h:27 src/network/connection.c:1669
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/internetsharing.glade.h:67
+#: interfaces/internetsharing.glade.h:66
 #: interfaces/internetsharing.glade.in.h:31
 #, fuzzy
 msgid "Firewall"
 msgstr "FreeCell"
 
-#: interfaces/internetsharing.glade.h:68
+#: interfaces/internetsharing.glade.h:67
 #: interfaces/internetsharing.glade.in.h:41
 #, fuzzy
 msgid "Web Cache (squid)"
 msgstr "Muchete po les imådjes (èn octets)"
 
-#: interfaces/internetsharing.glade.h:69
+#: interfaces/internetsharing.glade.h:68
 #: interfaces/internetsharing.glade.in.h:19
 msgid "Banner Removal (Junkbuster)"
 msgstr ""
@@ -1746,7 +1746,7 @@ msgid "A_liases:"
 msgstr "_Alias:"
 
 #: interfaces/network.glade.h:41 interfaces/network.glade.in.h:40
-#: src/network/main.c:138
+#: src/network/main.c:148
 msgid "Hosts"
 msgstr "Lodjeus"
 
@@ -1825,12 +1825,12 @@ msgid "_Configuration:"
 msgstr "A_pontiaedje:"
 
 #: interfaces/network.glade.h:60 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1644
+#: src/network/connection.c:1668
 msgid "Manual"
 msgstr "Manuel"
 
 #: interfaces/network.glade.h:62 interfaces/network.glade.in.h:21
-#: src/network/connection.c:1646
+#: src/network/connection.c:1670
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -3482,60 +3482,60 @@ msgstr ""
 msgid "System administration"
 msgstr ""
 
-#: src/common/xst-dialog.c:58
+#: src/common/xst-dialog.c:59
 #, fuzzy, c-format
 msgid "Could not find widget: %s"
 msgstr "Dji n' trove nén li fitchî %s"
 
-#: src/common/xst-dialog.c:90
+#: src/common/xst-dialog.c:91
 msgid " More Options >> "
 msgstr " Pus di tchûzes >> "
 
-#: src/common/xst-dialog.c:91
+#: src/common/xst-dialog.c:92
 msgid " << Fewer Options "
 msgstr " << moens di tchûzes "
 
-#: src/common/xst-dialog.c:433
+#: src/common/xst-dialog.c:464
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
 msgstr ""
 
-#: src/common/xst-dialog.c:503
+#: src/common/xst-dialog.c:539
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr ""
 
-#: src/common/xst-tool.c:955
+#: src/common/xst-tool.c:954
 #, c-format
 msgid "Skipping %s directive..."
 msgstr ""
 
-#: src/common/xst-tool.c:1093
+#: src/common/xst-tool.c:1092
 msgid "Skipping actual save..."
 msgstr ""
 
-#: src/common/xst-tool.c:1135
+#: src/common/xst-tool.c:1134
 msgid "Updating your system configuration."
 msgstr "Metant a djoû l' apontiaedje do sistinme da vosse."
 
-#: src/common/xst-tool.c:1154
+#: src/common/xst-tool.c:1153
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
 
-#: src/common/xst-tool.c:1348
+#: src/common/xst-tool.c:1376
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Usteyes d' apontiaedje di Ximian"
 
-#: src/common/xst-tool.c:1540
+#: src/common/xst-tool.c:1568
 #, fuzzy
 msgid "The password you entered is invalid."
 msgstr "Les mots di passe sont nén les minmes"
 
-#: src/common/xst-tool.c:1550
+#: src/common/xst-tool.c:1578
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -3551,24 +3551,21 @@ msgid ""
 "The Ximian Setup Tools team"
 msgstr ""
 
-#: src/common/xst-tool.c:1570
+#: src/common/xst-tool.c:1601
 #, fuzzy
 msgid "Don't show me this again"
 msgstr "Nén mostrer ci messaedje chal li côp ki vent"
 
-#: src/common/xst-tool.c:1605
-msgid "\tEdit configuration in the location LOCATION."
-msgstr ""
+#: src/common/xst-tool.c:1669
+#, fuzzy
+msgid "Ximian Setup Tool"
+msgstr "Usteyes d' apontiaedje di Ximian"
 
-#: src/common/xst-tool.c:1605
-msgid "LOCATION"
-msgstr "EPLAEÇMINT"
-
-#: src/common/xst-tool.c:1650
+#: src/common/xst-tool.c:1677
 msgid "Pretending we are root..."
 msgstr ""
 
-#: src/common/xst-ui.c:557
+#: src/common/xst-ui.c:556
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
@@ -3861,93 +3858,93 @@ msgstr "Li fitchî %s egzisteye ddja!"
 msgid "Swap Management"
 msgstr "Manaedjmint so swap"
 
-#: src/network/callbacks.c:119 src/network/connection.c:812
-#: src/network/connection.c:843
+#: src/network/callbacks.c:123 src/network/connection.c:821
+#: src/network/connection.c:852
 msgid "Active"
 msgstr "Èn alaedje"
 
-#: src/network/callbacks.c:122
+#: src/network/callbacks.c:126
 #, fuzzy
 msgid "Activating"
 msgstr "Metaedje èn oûve"
 
-#: src/network/callbacks.c:133 src/network/connection.c:813
-#: src/network/connection.c:844
+#: src/network/callbacks.c:137 src/network/connection.c:822
+#: src/network/connection.c:853
 msgid "Inactive"
 msgstr "Essocté"
 
-#: src/network/callbacks.c:136
+#: src/network/callbacks.c:140
 #, fuzzy
 msgid "Deactivating"
 msgstr "Mete èn oûve"
 
-#: src/network/callbacks.c:350
+#: src/network/callbacks.c:362
 msgid "The name of this computer"
 msgstr "Li no di cisse copiutrece chal"
 
-#: src/network/callbacks.c:353
+#: src/network/callbacks.c:365
 msgid "A short description of your computer"
 msgstr "On coûrt discrijhaedje di vosse copiutrece"
 
-#: src/network/callbacks.c:356
+#: src/network/callbacks.c:368
 msgid "The Windows Networking workgroup for your network"
 msgstr "Li groupe d' ovraedje pol rantoele Windows"
 
-#: src/network/callbacks.c:359
+#: src/network/callbacks.c:371
 msgid "The IP address of your WINS server"
 msgstr "L' adresse IP di vosse sierveu WINS"
 
-#: src/network/callbacks.c:362
+#: src/network/callbacks.c:374
 msgid "The DNS domain for your computer"
 msgstr "Li domaine DNS po vosse copiutrece"
 
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:377
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Ene djîvéye des adresses IP di vos sierveus DNS"
 
-#: src/network/callbacks.c:368
+#: src/network/callbacks.c:380
 msgid "A list of domains where hosts will be searched"
 msgstr "Ene djîvéye di domaines ki les lodjeus sont cwerous dvins"
 
-#: src/network/callbacks.c:371
+#: src/network/callbacks.c:383
 msgid "The IP address of this host"
 msgstr "L' adresse IP di ci lodjeu chal"
 
-#: src/network/callbacks.c:374
+#: src/network/callbacks.c:386
 msgid "Aliases for this host, one per line"
 msgstr "Alias po ci lodjeu chal, ene roye po tchaeke"
 
-#: src/network/callbacks.c:523
+#: src/network/callbacks.c:547
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Bodjî l' raloyaedje %s: «%s»?"
 
-#: src/network/callbacks.c:525
+#: src/network/callbacks.c:549
 #, fuzzy, c-format
 msgid "Remove connection %s?"
 msgstr "Bodjî raloyaedje"
 
-#: src/network/callbacks.c:581
+#: src/network/callbacks.c:605
 #, fuzzy, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Ratindant li raloyaedje"
 
-#: src/network/callbacks.c:615
+#: src/network/callbacks.c:639
 #, fuzzy, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Ratindant li raloyaedje"
 
-#: src/network/callbacks.c:635
+#: src/network/callbacks.c:659
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
 msgstr ""
 
-#: src/network/callbacks.c:636
+#: src/network/callbacks.c:660
 msgid "SMB support missing."
 msgstr ""
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:698
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -3956,18 +3953,18 @@ msgid ""
 "Continue anyway?"
 msgstr ""
 
-#: src/network/callbacks.c:680
+#: src/network/callbacks.c:704
 msgid "Don't change host name"
 msgstr "Nén candjî l' no do lodjeu"
 
-#: src/network/callbacks.c:752
+#: src/network/callbacks.c:779
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
 "connections will not activate."
 msgstr ""
 
-#: src/network/callbacks.c:772
+#: src/network/callbacks.c:799
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3976,7 +3973,7 @@ msgid ""
 "Continue anyway?"
 msgstr ""
 
-#: src/network/callbacks.c:799
+#: src/network/callbacks.c:826
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -3984,19 +3981,19 @@ msgid ""
 "Continue anyway?"
 msgstr ""
 
-#: src/network/callbacks.c:806
+#: src/network/callbacks.c:833
 #, fuzzy
 msgid "Activate connection"
 msgstr "Raloyaedje viè cåbe TV"
 
-#: src/network/callbacks.c:852
+#: src/network/callbacks.c:879
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
 "proceed, or choose another default gateway device.\n"
 msgstr ""
 
-#: src/network/callbacks.c:892
+#: src/network/callbacks.c:919
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -4038,21 +4035,21 @@ msgstr "No do fitchî loopback: "
 msgid "Unknown type"
 msgstr "Sôre nén cnoxhowe"
 
-#: src/network/connection.c:1421
+#: src/network/connection.c:1445
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
 "addresses in those fields to continue."
 msgstr ""
 
-#: src/network/connection.c:1428
+#: src/network/connection.c:1452
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
 "IP addresses in those fields to continue."
 msgstr ""
 
-#: src/network/connection.c:1434
+#: src/network/connection.c:1458
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -4061,16 +4058,16 @@ msgid ""
 "the manual DNS option."
 msgstr ""
 
-#: src/network/hosts.c:380
+#: src/network/hosts.c:382
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Estoz sheur di voleur disfacer les alias po %s?"
 
-#: src/network/main.c:178
+#: src/network/main.c:189
 msgid "\tRun the internet conection druid."
 msgstr "\tEnonder li macrê di raloyaedje al rantoele daegnrece."
 
-#: src/network/main.c:185
+#: src/network/main.c:196
 msgid "Network Settings"
 msgstr "Apontiaedjes del rantoele"
 
@@ -4083,7 +4080,7 @@ msgstr ""
 msgid "Networking"
 msgstr "Apontiaedjes del rantoele"
 
-#: src/network/ppp-druid.c:174
+#: src/network/ppp-druid.c:182
 msgid ""
 "The phone number must be composed of\n"
 "only numbers or commas (,)."
@@ -4091,7 +4088,7 @@ msgstr ""
 "Li limerô di telefone ni pout aveur\n"
 "ki des chifes ou des comas (,)."
 
-#: src/network/ppp-druid.c:190
+#: src/network/ppp-druid.c:199
 msgid ""
 "The password and its confirmation\n"
 "must be the same."
@@ -4099,7 +4096,7 @@ msgstr ""
 "Li scret èt si confirmåcion\n"
 "dvèt esse les minmes."
 
-#: src/network/ppp-druid.c:193
+#: src/network/ppp-druid.c:202
 msgid ""
 "If you are specifying a password,\n"
 "you should specify a user name."
@@ -4107,7 +4104,7 @@ msgstr ""
 "Si vos dnez on sicret, vos dvoz\n"
 "dner on no d' ûzeu avou."
 
-#: src/network/ppp-druid.c:215
+#: src/network/ppp-druid.c:225
 msgid ""
 "Please set a name for this account,\n"
 "using only space, letters and numbers."
@@ -4115,7 +4112,7 @@ msgstr ""
 "Dinez on no po ci conte chal s' i vs plait,\n"
 "avou rén ki des spåces, des letes ou des chifes."
 
-#: src/network/ppp-druid.c:227
+#: src/network/ppp-druid.c:239
 #, c-format
 msgid ""
 "You are about to create an account named with the following information:\n"
@@ -4743,6 +4740,9 @@ msgstr "Shell:"
 #: src/users/users.etspec.h:6
 msgid "UID"
 msgstr ""
+
+#~ msgid "LOCATION"
+#~ msgstr "EPLAEÇMINT"
 
 #, fuzzy
 #~ msgid "Default profile"
