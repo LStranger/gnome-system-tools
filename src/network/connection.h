@@ -55,12 +55,20 @@ typedef enum {
 	IP_BOOTP
 } IPConfigType;
 
+typedef enum {
+	ACTIVATION_NONE,
+	ACTIVATION_UP,
+	ACTIVATION_DOWN
+} ActivationType;
+
 typedef struct {
 	GtkWidget *window;
 	GladeXML *xml;
 	xmlNode *node;
 	
 	XstConnectionType type;
+	ActivationType    activation;
+	gboolean          bulb_state;
 
 	gboolean modified;
 	gboolean creating;

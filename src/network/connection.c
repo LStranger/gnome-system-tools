@@ -1020,6 +1020,9 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	cxn = g_new0 (XstConnection, 1);
 	cxn->type = type;
 	cxn->file = NULL;
+
+	cxn->activation = ACTIVATION_NONE;
+	cxn->bulb_state = FALSE;
 	
 	/* set up some defaults */
 	cxn->user = FALSE;

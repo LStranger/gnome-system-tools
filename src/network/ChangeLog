@@ -1,3 +1,13 @@
+2001-10-06  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* callbacks.c (on_network_notebook_switch_page): If the connections
+	page is selected, start polling timeouts, but only the first time.
+	(poll_connections): The timeout function that queues the directive.
+	(poll_connections_cb): The directive callback that processes the
+	XML and animates the clist rows.
+	Some other minor changes to make all this work.
+	All this is disabled: uncomment the POLL_HACK #define.
+
 2001-09-25  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* main.c: In general, removed the tool global variable, but had to leave

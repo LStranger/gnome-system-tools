@@ -37,6 +37,8 @@
 
 #define d(x) x
 
+/*#define POLL_HACK*/
+
 extern XstTool *tool;
 
 static int connection_row_selected = -1;
@@ -85,18 +87,107 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	gtk_clist_set_column_auto_resize (list, 2, TRUE);
 }
 
+static void
+poll_connections_cb (XstDirectiveEntry *entry)
+{
+	xmlDoc     *xml;
+	xmlNodePtr  root, iface;
+	gboolean    active;
+	gchar      *dev;
+	gint        i;
+
+	GtkWidget *clist;
+	XstConnection *cxn;
+
+	xml = xst_tool_run_get_directive (entry->tool, entry->report_sign, entry->directive, NULL);
+	clist = xst_dialog_get_widget (entry->tool->main_dialog, "connection_list");
+	
+	root    = xst_xml_doc_get_root (xml);
+	for (iface = xst_xml_element_find_first (root, "interface"); iface;
+	     iface = xst_xml_element_find_next (iface, "interface")) {
+
+		active = xst_xml_element_get_boolean (iface, "active");
+		dev = xst_xml_get_child_content (iface, "dev");
+		g_print ("%s: %s\n", dev, active? "yes": "no");
+
+		for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
+			cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+
+			g_return_if_fail (cxn != NULL);
+			g_return_if_fail (cxn->dev != NULL);
+
+			if (cxn->activation == ACTIVATION_NONE)
+				continue;
+			
+			if (!strcmp (cxn->dev, dev)) {
+				if (cxn->activation == ACTIVATION_UP) {
+					if (active) {
+						cxn->activation = ACTIVATION_NONE;
+						cxn->bulb_state = TRUE;
+						connection_set_row_pixtext (clist, i, _("Active"), TRUE);
+					} else {
+						cxn->bulb_state = cxn->bulb_state? FALSE: TRUE;
+						connection_set_row_pixtext (clist, i, _("Activating"),
+									    cxn->bulb_state);
+					}
+					
+					continue;
+				}
+				
+				if (cxn->activation == ACTIVATION_DOWN) {
+					if (!active) {
+						cxn->activation = ACTIVATION_NONE;
+						cxn->bulb_state = FALSE;
+						connection_set_row_pixtext (clist, i, _("Inactive"), FALSE);
+					} else {
+						cxn->bulb_state = cxn->bulb_state? FALSE: TRUE;
+						connection_set_row_pixtext (clist, i, _("Deactivating"),
+									    cxn->bulb_state);
+					}
+					continue;
+				}
+			}
+		}
+
+		g_free (dev);
+	}
+
+	xst_xml_doc_destroy (xml);
+}
+
+static gint
+poll_connections (gpointer data)
+{
+	XstTool *tool = data;
+	
+	g_print ("si\n");
+
+	xst_tool_queue_directive (tool, poll_connections_cb, tool, NULL, NULL, "list_ifaces");
+	
+	return TRUE;
+}
+
 void
 on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 				 gint page_num, gpointer user_data)
 {
 	GtkWidget *w;
 	gchar *entry[] = { "hostname", "connection_list", "domain", "statichost_list" };
+	static gboolean first = TRUE;
 	
 	if (xst_tool_get_access (tool) && entry[page_num]) {
 		w = xst_dialog_get_widget (tool->main_dialog, entry[page_num]);
 		if (w)
 			gtk_widget_grab_focus (w);
 	}
+
+#ifdef POLL_HACK
+	/* The connections tab */
+	if (page_num == 1 && first) {
+		first = FALSE;
+		gtk_timeout_add (2000, poll_connections, tool);
+	}
+#endif	
 }
 
 static gboolean
@@ -459,6 +550,16 @@ on_connection_configure_clicked (GtkWidget *w, gpointer null)
 	connection_configure (cxn);
 }
 
+static void
+activate_directive_cb (XstDirectiveEntry *entry)
+{
+	gchar *file = entry->data;
+	
+	xst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
+				    file, "1", NULL);
+	g_free (entry->report_sign);
+}
+
 void
 on_connection_activate_clicked (GtkWidget *w, gpointer null)
 {
@@ -477,10 +578,20 @@ on_connection_activate_clicked (GtkWidget *w, gpointer null)
 		
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
-		xst_tool_run_set_directive (tool, NULL, sign, "enable_iface", file, "1", NULL);
-	
-		g_free (sign);
+		xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, sign, "enable_iface");
 	}
+
+	cxn->activation = ACTIVATION_UP;
+}
+
+static void
+deactivate_directive_cb (XstDirectiveEntry *entry)
+{
+	gchar *file = entry->data;
+	
+	xst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
+				    file, "0", NULL);
+	g_free (entry->report_sign);
 }
 
 void
@@ -500,10 +611,10 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 		
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
-		xst_tool_run_set_directive (tool, NULL, sign, "enable_iface", file, "0", NULL);
-	
-		g_free (sign);
+		xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, sign, "enable_iface");
 	}
+
+	cxn->activation = ACTIVATION_DOWN;
 }
 
 void
