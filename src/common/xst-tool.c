@@ -175,8 +175,6 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 static gboolean
 report_finished_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 {
-	g_warning ("report_finish");
-	
 	tool->report_dispatch_pending = FALSE;
 	tool->report_finished = TRUE;
 
