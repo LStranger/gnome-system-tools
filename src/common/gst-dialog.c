@@ -444,10 +444,11 @@ help_cb (GtkWidget *w, gpointer data)
 	gst_tool_show_help (gst_dialog->tool, NULL);
 }
 
-static void
+static gboolean
 dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
 {
 	cancel_cb (w, data);
+	return TRUE;
 }
 
 static gboolean
