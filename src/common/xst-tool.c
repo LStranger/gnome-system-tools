@@ -265,6 +265,12 @@ xst_tool_save (XstTool *tool)
 	return TRUE;  /* FIXME: Determine if it really worked. */
 }
 
+void
+xst_tool_save_cb (GtkWidget *w, XstTool *tool)
+{
+	xst_tool_save (tool);
+}
+
 gboolean
 xst_tool_load (XstTool *tool)
 {
@@ -339,8 +345,6 @@ xst_tool_main (XstTool *tool)
 {
 	GtkWidget *d;
 
-#warning FIXME: really should have a global lock, methinks
-	xst_dialog_freeze (tool->main_dialog);
 	if (!xst_tool_load (tool)) {
 		d = gnome_ok_dialog (_("There was an error running the backend script,\n"
 				       "and the configuration could not be loaded."));
@@ -421,7 +425,6 @@ static void
 xst_tool_type_init (XstTool *tool)
 {
 	GladeXML *xml;
-	GtkWidget *w;
 
 	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
 
@@ -477,7 +480,7 @@ xst_tool_get_type (void)
 void
 xst_tool_construct (XstTool *tool, const char *name, const char *title)
 {
-	char *s;
+	char *s, *t;
 
 	g_return_if_fail (name != NULL);
 
@@ -486,8 +489,18 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 	tool->script_path = g_strdup_printf ("%s/%s-conf",      SCRIPTS_DIR,    name);
 	
 	s = g_strdup_printf ("%s_admin", name);
-	tool->main_dialog = xst_dialog_new (tool, s, title);
+	t = g_strdup_printf (_("%s - Ximian Setup Tools"), title);
+
+	tool->main_dialog = xst_dialog_new (tool, s, t);
+
 	g_free (s);
+	g_free (t);
+
+	xst_dialog_freeze (tool->main_dialog);
+	gtk_signal_connect (GTK_OBJECT (tool->main_dialog),
+			    "apply",
+			    GTK_SIGNAL_FUNC (xst_tool_save_cb),
+			    tool);
 }
 
 XstTool *
@@ -502,12 +515,27 @@ xst_tool_new (const char *name, const char *title)
 	return tool;
 }
 
+void
+xst_tool_set_xml_funcs (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data)
+{
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (XST_IS_TOOL (tool));
+
+	if (load_cb)
+		gtk_signal_connect (GTK_OBJECT (tool), "fill_gui", GTK_SIGNAL_FUNC (load_cb), data);
+
+	if (save_cb)
+		gtk_signal_connect (GTK_OBJECT (tool), "fill_xml", GTK_SIGNAL_FUNC (save_cb), data);
+}
+
+
 XstTool *
 xst_tool_init (const char *name, const char *title, int argc, char *argv [])
 {
 	GtkWidget *d;
 
 	g_return_val_if_fail (name != NULL, NULL);
+	g_return_val_if_fail (title != NULL, NULL);
 
 #ifdef ENABLE_NLS
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);

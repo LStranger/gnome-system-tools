@@ -26,47 +26,59 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
-extern void on_settings_clicked (GtkButton *button, gpointer user_data);
+void on_settings_clicked (GtkButton *button, gpointer user_data);
 
-extern void on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
-extern void on_user_new_clicked (GtkButton *button, gpointer user_data);
-extern void on_user_delete_clicked (GtkButton *button, gpointer user_data);
+void on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
+void on_user_new_clicked (GtkButton *button, gpointer user_data);
+void on_user_delete_clicked (GtkButton *button, gpointer user_data);
 
-extern void on_group_new_clicked (GtkButton *button, gpointer user_data);
-extern void on_group_delete_clicked (GtkButton *button, gpointer user_data);
+void on_group_new_clicked (GtkButton *button, gpointer user_data);
+void on_group_delete_clicked (GtkButton *button, gpointer user_data);
 
-extern void on_network_delete_clicked (GtkWidget *button, gpointer user_data);
-extern void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
-extern void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
+void on_network_delete_clicked (GtkWidget *button, gpointer user_data);
+void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
+void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 
-extern void on_user_settings_dialog_show (GtkWidget *button, gpointer user_data);
-extern void on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data);
-extern void on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data);
-extern void on_user_settings_ok_clicked (GtkButton *button, gpointer user_data);
+void on_user_settings_dialog_show (GtkWidget *button, gpointer user_data);
+void on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data);
+void on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data);
+void on_user_settings_ok_clicked (GtkButton *button, gpointer user_data);
 
 
-extern void on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data);
-extern void on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data);
-extern void on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer user_data);
-extern void on_user_passwd_random_clicked (GtkButton *button, gpointer user_data);
+void on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data);
+void on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data);
+void on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer user_data);
+void on_user_passwd_random_clicked (GtkButton *button, gpointer user_data);
 
-extern void on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data);
-extern void on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data);
-extern void on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data);
-extern void on_group_settings_ok_clicked (GtkButton *button, gpointer user_data);
-extern void on_group_settings_add_clicked (GtkButton *button, gpointer user_data);
-extern void on_group_settings_remove_clicked (GtkButton *button, gpointer user_data);
-extern void on_group_settings_all_select_row (GtkCList *clist, gint row, gint column,
+void on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data);
+void on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data);
+void on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data);
+void on_group_settings_ok_clicked (GtkButton *button, gpointer user_data);
+void on_group_settings_add_clicked (GtkButton *button, gpointer user_data);
+void on_group_settings_remove_clicked (GtkButton *button, gpointer user_data);
+void on_group_settings_all_select_row (GtkCList *clist, gint row, gint column,
 		GdkEventButton *event, gpointer user_data);
 
-extern void on_group_settings_members_select_row (GtkCList *clist, gint row, gint column,
+/*
+void on_group_settings_all_unselect_row (GtkCList *clist, gint row, gint column,
 	       GdkEventButton *event, gpointer user_data);
+*/
 
-extern void actions_set_sensitive (gboolean state);
-extern void user_actions_set_sensitive (gboolean state);
-extern void group_actions_set_sensitive (gboolean state);
-extern void net_actions_set_sensitive (gboolean state);
+void on_group_settings_members_select_row (GtkCList *clist, gint row, gint column,
+		GdkEventButton *event, gpointer user_data);
+
+/* 
+void on_group_settings_members_unselect_row (GtkCList *clist, gint row, gint column,
+	       GdkEventButton *event, gpointer user_data);
+*/
+
+void actions_set_sensitive (gboolean state);
+void user_actions_set_sensitive (gboolean state);
+void group_actions_set_sensitive (gboolean state);
+void net_actions_set_sensitive (gboolean state);
 void my_gtk_entry_set_text (void *entry, gchar *str);
+
+void on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer data);
 
 #endif /* CALLBACKS_H */
 

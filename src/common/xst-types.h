@@ -33,4 +33,6 @@ typedef struct _XstToolClass     XstToolClass;
 typedef struct _XstDialog        XstDialog;
 typedef struct _XstDialogClass   XstDialogClass;
 
+typedef struct _XstDialogSignal  XstDialogSignal;
+
 #endif /* XST_TYPES_H */

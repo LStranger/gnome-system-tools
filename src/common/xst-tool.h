@@ -33,6 +33,8 @@
 #define XST_IS_TOOL(o)       (GTK_CHECK_TYPE ((o), XST_TYPE_TOOL))
 #define XST_IS_TOOL_CLASS(c) (GTK_CHECK_CLASS_TYPE ((c), XST_TYPE_TOOL))
 
+typedef void (*XstXmlFunc) (XstTool *tool, gpointer data);
+
 struct _XstTool {
 	GtkObject object;
 	char *name;
@@ -76,6 +78,7 @@ GtkType      xst_tool_get_type          (void);
 
 XstTool     *xst_tool_init              (const char *name, const char *title, 
 					 int argc, char *argv []);
+
 void         xst_tool_main              (XstTool *tool);
 gboolean     xst_tool_get_access        (XstTool *tool);
 
@@ -84,7 +87,9 @@ void         xst_tool_construct         (XstTool *tool,
 					 const char *name, const char *title);
 
 gboolean     xst_tool_save              (XstTool *tool);
+void         xst_tool_save_cb           (GtkWidget *w, XstTool *tool);
 gboolean     xst_tool_load              (XstTool *tool);
+void         xst_tool_set_xml_funcs     (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 
 GladeXML    *xst_tool_load_glade_common (XstTool *tool, const gchar *widget);
 GladeXML    *xst_tool_load_glade        (XstTool *tool, const gchar *widget);

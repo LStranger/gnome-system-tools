@@ -34,51 +34,52 @@
 
 XstTool *tool = NULL;
 
+
 static void
 watch_it_now_watch_it (GtkEditable *e, gint start_pos, gint end_pos, gpointer data)
 {
 	xst_dialog_modify (tool->main_dialog);
 }
 
-static void
-connect_signals (void)
-{
-	GladeXML *xml = tool->main_dialog->gui;	
-
-	glade_xml_signal_connect_data (xml, "on_dns_dhcp_toggled", on_dns_dhcp_toggled, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_network_admin_show", on_network_admin_show, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_network_notebook_switch_page", on_network_notebook_switch_page, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_samba_use_toggled", on_samba_use_toggled, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_statichost_add_clicked", on_statichost_add_clicked, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_statichost_changed", on_statichost_changed, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_statichost_delete_clicked", on_statichost_delete_clicked, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_statichost_list_select_row", on_statichost_list_select_row, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_statichost_list_unselect_row", on_statichost_list_unselect_row, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_statichost_update_clicked", on_statichost_update_clicked, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_status_button_toggled", on_status_button_toggled, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled, tool->main_dialog);
-
-	glade_xml_signal_connect_data (xml, "tool_modified_cb", xst_dialog_modify_cb, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "delete_modified", watch_it_now_watch_it, tool->main_dialog);
-
-	glade_xml_signal_connect_data (xml, "update_hint", update_hint, tool->main_dialog);
-
-	glade_xml_signal_connect_data (xml, "on_connection_add_clicked", on_connection_add_clicked, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_connection_configure_clicked", on_connection_configure_clicked, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "on_connection_delete_clicked", on_connection_delete_clicked, tool->main_dialog);
-
-	gtk_signal_connect (GTK_OBJECT (tool), "fill_gui",
-			    GTK_SIGNAL_FUNC (transfer_xml_to_gui),
-			    NULL);
-
-	gtk_signal_connect (GTK_OBJECT (tool), "fill_xml",
-			    GTK_SIGNAL_FUNC (transfer_gui_to_xml),
-			    NULL);
-
-	gtk_signal_connect_object (GTK_OBJECT (tool->main_dialog), "apply",
-				   GTK_SIGNAL_FUNC (xst_tool_save),
-				   GTK_OBJECT (tool));		
-}
+XstDialogSignal signals[] = {
+	{ "network_admin",       "switch_page",     on_network_notebook_switch_page },
+	{ "hostname",            "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "hostname",            "changed",         xst_dialog_modify_cb },
+	{ "samba_use",           "toggled",         on_samba_use_toggled },
+	{ "samba_use",           "toggled",         xst_dialog_modify_cb },
+	{ "description",         "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "description",         "changed",         xst_dialog_modify_cb },
+	{ "workgroup",           "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "workgroup",           "changed",         xst_dialog_modify_cb },
+	{ "wins_ip",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "wins_ip",             "delete_text",     xst_dialog_modify_cb },
+	{ "connection_list",     "select_row",      on_connection_list_select_row },
+	{ "connection_list",     "unselect_row",    on_connection_list_unselect_row },
+	{ "connection_add",      "clicked",         on_connection_add_clicked },
+	{ "connection_delete",   "clicked",         on_connection_delete_clicked },
+	{ "connection_configure","clicked",         on_connection_configure_clicked },
+	{ "dns_dhcp",            "toggled",         on_dns_dhcp_toggled },
+	{ "dns_dhcp",            "toggled",         xst_dialog_modify_cb },
+	{ "dns_list",            "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "dns_list",            "delete_text",     watch_it_now_watch_it },
+	{ "domain",              "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "domain",              "changed",         xst_dialog_modify_cb },
+	{ "search_list",         "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "search_list",         "changed",         xst_dialog_modify_cb },
+	{ "statichost_list",     "unselect_row",    on_statichost_list_unselect_row },
+	{ "statichost_list",     "select_row",      on_statichost_list_select_row },
+	{ "ip",                  "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "ip",                  "changed",         xst_dialog_modify_cb },
+	{ "alias",               "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "alias",               "changed",         on_statichost_changed },
+	{ "statichost_add",      "clicked",         on_statichost_add_clicked },
+	{ "statichost_add",      "clicked",         xst_dialog_modify_cb },
+	{ "statichost_update",   "clicked",         on_statichost_update_clicked },
+	{ "statichost_update",   "clicked",         xst_dialog_modify_cb },
+	{ "statichost_delete",   "clicked",         on_statichost_delete_clicked },
+	{ "statichost_delete",   "clicked",         xst_dialog_modify_cb },
+	{ NULL }
+};
 
 int
 main (int argc, char *argv[])
@@ -102,18 +103,18 @@ main (int argc, char *argv[])
 	
 	init_hint_entries ();
 	
-	tool = xst_tool_init ("network", _("Network Settings - Ximian Setup Tools"), argc, argv);
-	xst_dialog_freeze (tool->main_dialog);
+	tool = xst_tool_init ("network", _("Network Settings"), argc, argv);
+
+	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	xst_dialog_connect_signals (tool->main_dialog, signals);
 
 	init_icons ();
-	connect_signals ();
 
 	for (i=0; s[i]; i++)
 		connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);
 
 	on_network_admin_show (NULL, NULL);
 
-	xst_dialog_thaw (tool->main_dialog);
 	xst_tool_main (tool);
 
 	return 0;

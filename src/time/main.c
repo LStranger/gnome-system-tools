@@ -41,6 +41,11 @@ ETzMap *tzmap;
 
 XstTool *tool;
 
+static void timezone_button_clicked (GtkWidget *w, gpointer data);
+static void update_tz (GtkWidget *w, gpointer data);
+static void server_button_clicked (GtkWidget *w, gpointer data);
+static void ntp_use_toggled (GtkWidget *w, gpointer data);
+
 static char *ntp_servers[] =
 {
 	"time.nrc.ca (Canada)",
@@ -79,6 +84,23 @@ static char *ntp_servers[] =
 	0
 };
 
+static XstDialogSignal signals[] = {
+	{ "calendar",          "day_selected",       xst_dialog_modify_cb },
+	{ "calendar",          "month_changed",      xst_dialog_modify_cb },
+	{ "hour",              "changed",            xst_dialog_modify_cb },
+	{ "minute",            "changed",            xst_dialog_modify_cb },
+	{ "second",            "changed",            xst_dialog_modify_cb },
+	{ "timezone_button",   "clicked",            timezone_button_clicked },
+	{ "ntp_use",           "toggled",            xst_dialog_modify_cb },
+	{ "ntp_use",           "toggled",            ntp_use_toggled },
+	{ "timeserver_button", "clicked",            server_button_clicked },
+	{ "location_combo",    "set_focus_child",    xst_dialog_modify_cb },
+	{ "tz_combo_entry",    "changed",            update_tz },
+	{ "ntp_list",          "selection_changed",  xst_dialog_modify_cb },
+	{ "ntp_add_server",    "clicked",            on_ntp_addserver },
+	{ "ntp_add_server",    "clicked",            xst_dialog_modify_cb },
+	{ NULL }
+};
 
 static void
 populate_ntp_list (void)
@@ -230,6 +252,7 @@ ntp_use_toggled (GtkWidget *w, gpointer data)
 static void
 connect_signals ()
 {	
+#if 0
 	GladeXML *xml;
 
 	xml = tool->main_dialog->gui;
@@ -251,8 +274,8 @@ connect_signals ()
 	glade_xml_signal_connect_data (xml, "xst_dialog_modify_cb",    xst_dialog_modify_cb,    tool->main_dialog);
 	glade_xml_signal_connect_data (xml, "update_tz",               update_tz,               tool->main_dialog);
 	glade_xml_signal_connect_data (xml, "ntp_use_toggled",         ntp_use_toggled,         tool->main_dialog);
+#endif
 
-	gtk_timeout_add (1000, clock_tick, NULL);
 }
 
 static void
@@ -275,9 +298,10 @@ adjust (const char *s, gint max)
 int
 main (int argc, char *argv[])
 {
-	tool = xst_tool_init ("time", _("Date/Time Settings - Ximian Setup Tools"), argc, argv);
-	
-	xst_dialog_freeze (tool->main_dialog);
+	tool = xst_tool_init ("time", _("Time and Date Settings"), argc, argv);
+
+	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	xst_dialog_connect_signals (tool->main_dialog, signals);
 
 	adjust ("hour", 24);
 	adjust ("minute", 60);
@@ -285,9 +309,8 @@ main (int argc, char *argv[])
 
 	populate_ntp_list ();
 	init_timezone_selection ();
-	connect_signals ();
 
-	xst_dialog_thaw (tool->main_dialog);
+	gtk_timeout_add (1000, clock_tick, NULL);
 
 	xst_tool_main (tool);
 

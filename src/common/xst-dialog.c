@@ -21,6 +21,7 @@
 #include <config.h>
 
 #include <gnome.h>
+#include <gmodule.h>
 #include "xst-dialog.h"
 
 #ifdef XST_DEBUG
@@ -51,7 +52,7 @@ xst_dialog_get_widget (XstDialog *xd, const char *widget)
 	w = glade_xml_get_widget (xd->gui, widget);
 
 	if (!w)
-		g_warning (_("Could not find widget: %s"), widget);
+		g_error (_("Could not find widget: %s"), widget);
 
 	return w;
 }
@@ -208,7 +209,7 @@ xst_dialog_get_type (void)
 }
 
 static void
-tool_user_complexity (GtkWidget *w, gpointer data)
+complexity_cb (GtkWidget *w, gpointer data)
 {
 	XstDialog *dialog;
 
@@ -230,7 +231,7 @@ tool_user_complexity (GtkWidget *w, gpointer data)
 }
 
 static void
-tool_user_apply (GtkWidget *w, gpointer data)
+apply_cb (GtkWidget *w, gpointer data)
 {
 	XstDialog *dialog;
 
@@ -245,7 +246,7 @@ tool_user_apply (GtkWidget *w, gpointer data)
 }
 
 static void
-tool_user_close (GtkWidget *w, gpointer data)
+close_cb (GtkWidget *w, gpointer data)
 {
 	XstDialog *dialog;
 
@@ -264,7 +265,7 @@ tool_user_close (GtkWidget *w, gpointer data)
 			NULL, NULL, GTK_WINDOW (dialog));
 
 		if (!gnome_dialog_run_and_close (GNOME_DIALOG (w)))
-			tool_user_apply (NULL, data);
+			apply_cb (NULL, data);
 	}
 
 	/* this shouldn't be here eventually */
@@ -272,7 +273,7 @@ tool_user_close (GtkWidget *w, gpointer data)
 }
 
 static void
-tool_user_help (GtkWidget *w, gpointer data)
+help_cb (GtkWidget *w, gpointer data)
 {
 	GnomeHelpMenuEntry help_entry = { NULL, "index.html" };
 	XstDialog *dialog;
@@ -299,6 +300,28 @@ xst_dialog_enable_complexity (XstDialog *dialog)
 }
 
 void
+xst_dialog_connect_signals (XstDialog *dialog, XstDialogSignal *signals)
+{       
+	GtkWidget *w;
+	guint sig;
+	int i;
+
+	g_return_if_fail (dialog != NULL);
+	g_return_if_fail (XST_IS_DIALOG (dialog));
+
+	for (i=0; signals[i].widget; i++) {
+		w = xst_dialog_get_widget (dialog, signals[i].widget);
+		sig = gtk_signal_connect (GTK_OBJECT (w),
+					  signals[i].signal_name,
+					  signals[i].func,
+					  (gpointer)dialog);
+		if (!sig)
+			g_error (_("Error connection signal `%s' in widget `%s'"),
+				 signals[i].signal_name, signals[i].widget);
+	}
+}
+
+void
 xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 		      const char *widget, const char *title)
 {
@@ -320,6 +343,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	g_free (s);
 
 	xml = xst_tool_load_glade_common (tool, "tool_vbox");
+
 	w = glade_xml_get_widget (xml, "tool_vbox");
 	gnome_app_set_contents (GNOME_APP (dialog), w);
 
@@ -335,14 +359,23 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gtk_widget_show (i);
 	gtk_container_add (GTK_CONTAINER (w), i);
 
-	glade_xml_signal_connect_data (xml, "tool_user_help",       tool_user_help,       dialog);
-	glade_xml_signal_connect_data (xml, "tool_user_complexity", tool_user_complexity, dialog);
-	glade_xml_signal_connect_data (xml, "tool_user_apply",      tool_user_apply,      dialog);
-	glade_xml_signal_connect_data (xml, "tool_user_close",      tool_user_close,      dialog);	
 	
-	dialog->apply_button      = glade_xml_get_widget (xml, "apply");
-	dialog->complexity_button = glade_xml_get_widget (xml, "complexity");
+	w = glade_xml_get_widget (xml, "help");
+	gtk_signal_connect (GTK_OBJECT (w), "clicked", help_cb, dialog);
 
+	w = glade_xml_get_widget (xml, "complexity");
+	gtk_signal_connect (GTK_OBJECT (w), "clicked", complexity_cb, dialog);
+
+	dialog->complexity_button = w;
+
+	w = glade_xml_get_widget (xml, "apply");
+	gtk_signal_connect (GTK_OBJECT (w), "clicked", apply_cb, dialog);
+
+	dialog->apply_button = w;
+
+	w = glade_xml_get_widget (xml, "close");
+	gtk_signal_connect (GTK_OBJECT (w), "clicked", close_cb, dialog);
+	
 	gtk_widget_set_sensitive (dialog->apply_button,      FALSE);
 	gtk_widget_set_sensitive (dialog->complexity_button, FALSE);
 

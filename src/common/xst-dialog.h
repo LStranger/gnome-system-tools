@@ -32,6 +32,12 @@
 #define XST_IS_DIALOG(o)       (GTK_CHECK_TYPE ((o), XST_TYPE_DIALOG))
 #define XST_IS_DIALOG_CLASS(c) (GTK_CHECK_CLASS_TYPE ((c), XST_TYPE_DIALOG))
 
+struct _XstDialogSignal {
+	const char    *widget;
+	const char    *signal_name;
+	GtkSignalFunc  func;
+};
+
 struct _XstDialog {
 	GnomeApp app;
 	XstTool *tool;
@@ -64,6 +70,8 @@ void                xst_dialog_construct         (XstDialog *dialog,
 						  XstTool *tool, 
 						  const char *widget, 
 						  const char *title);
+
+void                xst_dialog_connect_signals   (XstDialog *xd, XstDialogSignal *signals);
 
 XstDialogComplexity xst_dialog_get_complexity    (XstDialog *xd);
 void                xst_dialog_set_complexity    (XstDialog *xd, XstDialogComplexity c);

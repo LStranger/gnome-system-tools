@@ -42,7 +42,38 @@
 
 XstTool *tool;
 
-static void set_access_sensitivity (void)
+static XstDialogSignal signals[] = {
+	{ "user_settings_dialog",        "delete_event",         on_user_settings_dialog_delete_event },
+	{ "user_settings_dialog",        "show",                 on_user_settings_dialog_show },
+	{ "user_settings_ok",            "clicked",              on_user_settings_ok_clicked },
+	{ "user_settings_cancel",        "clicked",              on_user_settings_cancel_clicked },
+	{ "user_passwd_dialog",          "delete_event",         on_user_passwd_dialog_delete_event },
+	{ "user_passwd_ok",              "clicked",              on_user_passwd_ok_clicked },
+	{ "user_passwd_cancel",          "clicked",              on_user_passwd_cancel_clicked },
+	{ "user_passwd_random",          "clicked",              on_user_passwd_random_clicked },
+	{ "group_settings_dialog",       "delete_event",         on_group_settings_dialog_delete_event },
+	{ "group_settings_dialog",       "show",                 on_group_settings_dialog_show },
+	{ "group_settings_ok",           "clicked",              on_group_settings_ok_clicked },
+	{ "group_settings_cancel",       "clicked",              on_group_settings_cancel_clicked },
+	{ "group_settings_add",          "clicked",              on_group_settings_add_clicked },
+	{ "group_settings_remove",       "clicked",              on_group_settings_remove_clicked },
+	{ "group_settings_members",      "select_row",           on_group_settings_members_select_row },
+	/* { "group_settings_members",      "unselect_row",         on_group_settings_members_unselect_row }, */
+	{ "group_settings_all",          "select_row",           on_group_settings_all_select_row },
+	/* { "group_settings_all",          "unselect_row",         on_group_settings_all_unselect_row }, */
+	{ "user_new",                    "clicked",              on_user_new_clicked },
+	{ "user_delete",                 "clicked",              on_user_delete_clicked },
+	{ "user_chpasswd",               "clicked",              on_user_chpasswd_clicked },
+	{ "group_new",                   "clicked",              on_group_new_clicked },
+	{ "group_delete",                "clicked",              on_group_delete_clicked },
+	{ "network_user_new",            "clicked",              on_network_user_new_clicked },
+	{ "network_group_new",           "clicked",              on_network_group_new_clicked },
+	{ "network_delete",              "clicked",              on_network_delete_clicked },
+	{ NULL }
+};
+
+static void
+set_access_sensitivity (void)
 {
 	char *access_no[] = {"user_new", "user_chpasswd", "group_new",
 					 "user_settings_basic", "user_settings_advanced",
@@ -76,7 +107,7 @@ static void set_access_sensitivity (void)
 }
 
 static void
-update_complexity ()
+update_complexity (void)
 {
 	XstDialogComplexity complexity;
 
@@ -96,20 +127,8 @@ update_complexity ()
 }
 
 static void
-connect_signals ()
+connect_signals (void)
 {
-	gtk_signal_connect (GTK_OBJECT (tool), "fill_gui",
-					GTK_SIGNAL_FUNC (transfer_xml_to_gui),
-					NULL);
-
-	gtk_signal_connect (GTK_OBJECT (tool), "fill_xml",
-					GTK_SIGNAL_FUNC (transfer_gui_to_xml),
-					NULL);
-
-	gtk_signal_connect_object (GTK_OBJECT (tool->main_dialog), "apply",
-						  GTK_SIGNAL_FUNC (xst_tool_save),
-						  GTK_OBJECT (tool));
-
 	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change",
 					GTK_SIGNAL_FUNC (update_complexity),
 					NULL);
@@ -130,9 +149,9 @@ connect_signals ()
 					"clicked",
 					GTK_SIGNAL_FUNC (on_settings_clicked),
 					GINT_TO_POINTER (TABLE_NET_GROUP));
-	
-	/* Why not in xst_dialog ? */
-	glade_xml_signal_autoconnect (tool->main_dialog->gui);
+
+
+	xst_dialog_connect_signals (tool->main_dialog, signals);
 }
 
 int
@@ -142,10 +161,9 @@ main (int argc, char *argv[])
 
 	srand (time (NULL));
 
-	tool = xst_tool_init ("users", _("User/Group Settings - Ximian Setup Tools"), argc, argv);
+	tool = xst_tool_init ("users", _("Users and Groups"), argc, argv);
+	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
-	xst_dialog_freeze (tool->main_dialog);
-	
 	create_tables ();
 	connect_signals ();
 
@@ -153,8 +171,6 @@ main (int argc, char *argv[])
 
 	set_access_sensitivity ();
 
-	xst_dialog_thaw (tool->main_dialog);
-	
 	xst_tool_main (tool);
 	
 	return 0;

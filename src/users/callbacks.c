@@ -39,7 +39,7 @@ XstTool *tool;
 /* Main window callbacks */
 /* "global" callbacks :) */
 
-extern void
+void
 on_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	ug_data *ud;
@@ -55,7 +55,7 @@ on_settings_clicked (GtkButton *button, gpointer user_data)
 
 /* Users tab */
 
-extern void
+void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 {
 	xmlNodePtr node;
@@ -66,7 +66,7 @@ on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 	user_passwd_dialog_prepare (node);
 }
 
-extern void
+void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
 	ug_data *ud;
@@ -82,7 +82,7 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	user_new_prepare (ud);
 }
 
-extern void
+void
 on_user_delete_clicked (GtkButton *button, gpointer user_data)
 {
 	xmlNodePtr node;
@@ -105,7 +105,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 
 /* Groups tab */
 
-extern void
+void
 on_group_new_clicked (GtkButton *button, gpointer user_data)
 {
 	ug_data *ud;
@@ -121,7 +121,7 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	group_new_prepare (ud);
 }
 
-extern void
+void
 on_group_delete_clicked (GtkButton *button, gpointer user_data)
 {
 	xmlNodePtr node;
@@ -145,7 +145,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 
 /* Network tab. */
 
-extern void
+void
 on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 {
 	xmlNodePtr node;
@@ -182,7 +182,7 @@ on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 	}
 }
 
-extern void
+void
 on_network_user_new_clicked (GtkButton *button, gpointer user_data)
 {
 	ug_data *ud;
@@ -198,7 +198,7 @@ on_network_user_new_clicked (GtkButton *button, gpointer user_data)
 	user_new_prepare (ud);
 }
 
-extern void
+void
 on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 {
 	ug_data *ud;
@@ -217,7 +217,7 @@ on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 
 /* User settings callbacks */
 
-extern void
+void
 on_user_settings_dialog_show (GtkWidget *button, gpointer user_data)
 {
 	/* Set focus to user name entry. */
@@ -254,19 +254,19 @@ user_settings_dialog_close (void)
 	gtk_widget_hide (w0);
 }
 
-extern void     
+void     
 on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	user_settings_dialog_close ();
 }
 
-extern void
+void
 on_user_settings_dialog_delete_event (GtkWidget *button, gpointer user_data)
 {
 	user_settings_dialog_close ();
 }
 
-extern void
+void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
@@ -296,19 +296,19 @@ user_passwd_dialog_close (void)
 	gtk_object_remove_data (GTK_OBJECT (w0), "name");
 }
 
-extern void
+void
 on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	user_passwd_dialog_close ();
 }
 
-extern void
+void
 on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer user_data)
 {
 	user_passwd_dialog_close ();
 }
 
-extern void
+void
 on_user_passwd_random_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkEntry *entry1, *entry2;
@@ -332,7 +332,7 @@ on_user_passwd_random_clicked (GtkButton *button, gpointer user_data)
 	g_free (random_passwd);
 }
 
-extern void
+void
 on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkEntry *entry1, *entry2;
@@ -386,7 +386,7 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 
 /* Group settings callbacks */
 
-extern void
+void
 on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data)
 {
 	/* Set focus to user name entry. */
@@ -419,19 +419,19 @@ group_settings_dialog_close (void)
 	gtk_widget_hide (w0);
 }
 
-extern void
+void
 on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	group_settings_dialog_close ();
 }
 
-extern void
+void
 on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data)
 {
 	group_settings_dialog_close ();
 }
 
-extern void
+void
 on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
@@ -449,7 +449,7 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	}
 }
 
-extern void
+void
 on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkCList *all, *members;
@@ -472,7 +472,7 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 	gtk_clist_append (members, entry);
 }
 
-extern void
+void
 on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 {
 	/* TODO: Maybe mix with previous func? */
@@ -496,7 +496,7 @@ on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 	gtk_clist_append (all, entry);
 }
 
-extern void
+void
 on_group_settings_all_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
 		gpointer user_data)
 {
@@ -512,7 +512,7 @@ on_group_settings_all_select_row (GtkCList *clist, gint row, gint column, GdkEve
 		gtk_widget_set_sensitive (w0, TRUE);
 }
 
-extern void
+void
 on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, GdkEventButton *event,
 		gpointer user_data)
 {
@@ -532,7 +532,7 @@ on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, Gd
 
 /* Helpers .*/
 
-extern void
+void
 actions_set_sensitive (gboolean state)
 {
 	user_actions_set_sensitive (state);
@@ -540,7 +540,7 @@ actions_set_sensitive (gboolean state)
 	net_actions_set_sensitive (state);
 }
 
-extern void
+void
 user_actions_set_sensitive (gboolean state)
 {
 	if (xst_tool_get_access (tool))
@@ -553,7 +553,7 @@ user_actions_set_sensitive (gboolean state)
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "user_settings"), state);
 }
 
-extern void
+void
 group_actions_set_sensitive (gboolean state)
 {
 	if (xst_tool_get_access (tool))
@@ -565,7 +565,7 @@ group_actions_set_sensitive (gboolean state)
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "group_settings"), state);
 }
 
-extern void
+void
 net_actions_set_sensitive (gboolean state)
 {
 	if (xst_tool_get_access (tool))
