@@ -1,11 +1,11 @@
 # Translation of gnome-system-tools to Croatiann
 # Copyright (C) Croatiann team
-# Translators: Antun Krasic <butch@gawab.com>,Automatski Prijevod <>,Boris Tudan <boris.tudan@ka.htnet.hr>,Denis Lackovic <delacko@fly.srk.fer.hr>,pr pr <delacko@192.168.0.1>,Vedran Vyroubal <vedran.vyroubal@inet.hr>,
+# Translators: Antun Krasic <butch@gawab.com>,Automatski Prijevod <>,Boris Tudan <boris.tudan@ka.htnet.hr>,Denis Lackovic <delacko@fly.srk.fer.hr>,pr pr <delacko@192.168.0.1>,Robert Sedak <robert.sedak@sk.tel.hr>,Robert Vuković <robi@surfer.hr>,Vedran Vyroubal <vedran.vyroubal@inet.hr>,
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools 0\n"
-"POT-Creation-Date: 2004-02-01 17:05+0100\n"
-"PO-Revision-Date: 2004-02-05 23:49+CET\n"
+"POT-Creation-Date: 2004-03-18 00:03+0100\n"
+"PO-Revision-Date: 2004-03-18 00:03+CET\n"
 "Last-Translator: auto\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr "Posljednja inačica GNOME Sustavskih Alata je izvršena"
 
 #: gnome-system-tools.schemas.in.h:8
 msgid "Preferred bootloader that boot-admin will configure"
-msgstr ""
+msgstr "Željeni podizač sustava koji će podesiti administrator za podizanje"
 
 #: gnome-system-tools.schemas.in.h:9
 msgid "Remote hosts"
@@ -80,6 +80,9 @@ msgid ""
 "more than one installed, if it's not set or isn't valid, then boot-admin "
 "will ask the user"
 msgstr ""
+"Ovaj ključ sprema podizatelj sustava koji će administrator podesiti ako "
+"je instaliran više od jednog podizača. Ako nije postavljen ili nije valjan, "
+"tada će administrator upitati korisnika"
 
 #: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
@@ -187,7 +190,7 @@ msgstr ""
 
 #: interfaces/boot.glade.in.h:22
 msgid "Click \"Forward\" to continue"
-msgstr "Kliknite „Naprijed“ za nastavak rada"
+msgstr "Kliknite \"Naprijed\" za nastavak rada"
 
 #: interfaces/boot.glade.in.h:23
 msgid "Confirmation"
@@ -197,11 +200,11 @@ msgstr "Potvrda"
 #: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
 #: src/boot/boot-druid.c:441
 msgid "Creating a new boot image"
-msgstr ""
+msgstr "Kreiram novu datoteku za pokretanje"
 
 #: interfaces/boot.glade.in.h:25
 msgid "Don't ask me again"
-msgstr ""
+msgstr "Ne pitaj me više"
 
 #: interfaces/boot.glade.in.h:26
 msgid "Enable IDE SCSI emulation"
@@ -220,7 +223,7 @@ msgid "Finished"
 msgstr "Završeno"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
-#: src/network/connection.c:1843
+#: src/network/connection.c:1858
 msgid "Manual"
 msgstr "Ručno"
 
@@ -258,6 +261,8 @@ msgid ""
 "Several bootloaders have been found in the system, please select which do "
 "you want to configure"
 msgstr ""
+"Nekoliko podizača sustava je nađeno na vašem sustavu, molim odaberite "
+"koji želite podesiti"
 
 #: interfaces/boot.glade.in.h:38
 msgid "Specify the partition on which the operating system is installed."
@@ -267,13 +272,15 @@ msgstr "Navedite particiju na kojoj je instaliran operativni sustav."
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
-msgstr ""
+msgstr "Nova boot slika je dodana. Kliknite na \"Primjeni\" za spremanje promjena."
 
 #: interfaces/boot.glade.in.h:40
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
 msgstr ""
+"Ovaj pomoćnik je dizajniran kako bi vam pomogao u brzom i lakom dodavanju "
+"novih boot slika u vaš sustav."
 
 #: interfaces/boot.glade.in.h:41
 msgid "Use this dialog to modify kernel parameters."
@@ -329,12 +336,16 @@ msgid ""
 "<span weight=\"bold\" size=\"larger\">The platform you are running is not "
 "supported by this tool</span>"
 msgstr ""
+"<span weight=\"bold\" size=\"larger\">Platforma na kojoj radite nije "
+"podržana od ovog alata</span>"
 
 #: interfaces/common.glade.in.h:3
 msgid ""
 "<span weight=\"bold\" size=\"larger\">To run this tool, you need "
 "administrator privileges</span>"
 msgstr ""
+"<span weight=\"bold\" size=\"larger\">Za pokretanje ovog alata "
+"trebate administratorske privilegije</span>"
 
 #: interfaces/common.glade.in.h:4
 msgid "Complexity"
@@ -350,7 +361,7 @@ msgid ""
 "you can select that and continue. Note, however, that this might damage the "
 "system configuration or downright cripple your computer."
 msgstr ""
-"Ako sigurno znate da radi kao jedna od platforni navedenih niže,"
+"Ako sigurno znate da radi kao jedna od platformi navedenih niže,"
 "možete odabrati tu i nastaviti. Imajte na umu da to može oštetiti konfiguraciju"
 "sustava ili jednostavno osakatiti vaše računalo."
 
@@ -371,6 +382,8 @@ msgid ""
 "To acquire such privileges, enter your root password below. If you don't "
 "specify a password, you will be  unable to modify your system configuration."
 msgstr ""
+"Za dobivanje takvih privilegija, unesite root lozinku ispod. Ako ne "
+"date lozinku, nećete moći promijeniti postavke vašeg sustava."
 
 #: interfaces/common.glade.in.h:11
 msgid "Unsupported Platform"
@@ -492,7 +505,7 @@ msgstr "Dozvoli kontrolu pokretanja _svim korisnicima"
 msgid "Auto"
 msgstr "Automatski"
 
-#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1860
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -525,7 +538,7 @@ msgstr "Postavljanje novih mrežnih veza"
 msgid "Current network profile:"
 msgstr "Trenutni mrežni profil:"
 
-#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1859
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -535,7 +548,7 @@ msgstr "DNS"
 
 #: interfaces/network.glade.in.h:39
 msgid "D_omain name:"
-msgstr ""
+msgstr "_Ime domene:"
 
 #: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
@@ -567,7 +580,7 @@ msgstr "Kako se ovo računalo predstavlja."
 
 #: interfaces/network.glade.in.h:48
 msgid "How to access other computers."
-msgstr "Kako se pristupa ostalim računalama."
+msgstr "Kako se pristupa ostalim računalima."
 
 #: interfaces/network.glade.in.h:49
 msgid "How to dial up to the Internet."
@@ -586,6 +599,8 @@ msgid ""
 "List of domains that the system will try to append to a hostname if there "
 "isn't already one specified"
 msgstr ""
+"Popis domena koje će sustav pokušati dodati na osnovno ime ako u njemu "
+"domena već nije navedena"
 
 #: interfaces/network.glade.in.h:54
 msgid "Modem _volume:"
@@ -601,7 +616,7 @@ msgstr "Mrežni profili"
 
 #: interfaces/network.glade.in.h:57
 msgid "Network profiles can be used to store different network configurations."
-msgstr """Mrežni profili se mogu koristiti za spreanje različitih "
+msgstr """Mrežni profili se mogu koristiti za spremanje različitih "
 "mrežnih postavki."
 
 #: interfaces/network.glade.in.h:58
@@ -661,6 +676,8 @@ msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
 msgstr ""
+"Unesite broj telefona koji koristite za spajanje na Internet. Ovaj "
+"broj vam daje vaš davatelj internet usluga."
 
 #: interfaces/network.glade.in.h:70
 msgid ""
@@ -703,18 +720,20 @@ msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
 msgstr ""
+"Ovaj pomoćnik će vam pomoći u postavljanju \n"
+"novih mrežnih veza."
 
 #: interfaces/network.glade.in.h:80
 msgid "This is the list of IP addresses that the system will use as name servers"
-msgstr ""
+msgstr "Ovo je popis IP adresa koje će sustav koristiti kao imeničke poslužitelje"
 
 #: interfaces/network.glade.in.h:81
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
 msgstr ""
-"Za nastavak podešavanja Vaše mrežne veze, pritisnite „Naprijed“. Za završetak, "
-"pritisnite „Odustani“."
+"Za nastavak podešavanja Vaše mrežne veze, pritisnite \"Naprijed\". Za završetak, "
+"pritisnite \"Odustani\"."
 
 #: interfaces/network.glade.in.h:82
 msgid "Tones"
@@ -722,7 +741,7 @@ msgstr "Tonovi"
 
 #: interfaces/network.glade.in.h:83
 msgid "Use \"Auto\" if unsure."
-msgstr "Koristite „Automatski“ ako ste nesigurni."
+msgstr "Koristite \"Automatski\" ako ste nesigurni."
 
 #: interfaces/network.glade.in.h:84
 msgid "Use this dialog for setting the configuration for this interface"
@@ -730,7 +749,7 @@ msgstr "Koristite ovaj dijalog za podešavanje ovog uređaja"
 
 #: interfaces/network.glade.in.h:85
 msgid "Username and password"
-msgstr ""
+msgstr "Korisničko ime i lozinka"
 
 #: interfaces/network.glade.in.h:86
 msgid "WI_NS server:"
@@ -742,13 +761,15 @@ msgstr "Bežični uređaj:"
 
 #: interfaces/network.glade.in.h:88
 msgid "Wireless settings"
-msgstr ""
+msgstr "Bežične postavke"
 
 #: interfaces/network.glade.in.h:89
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
 msgstr ""
+"Pred stvaranjem ste nove mrežne veze. Molim kliknite na \"Primijeni\" za "
+"spremanje promjena."
 
 #: interfaces/network.glade.in.h:90
 msgid "_Autodetect"
@@ -764,7 +785,7 @@ msgstr "_Postava:"
 
 #: interfaces/network.glade.in.h:93
 msgid "_Deactivate"
-msgstr "Deaktiviranje"
+msgstr "_Deaktiviranje"
 
 #: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
 msgid "_Delete"
@@ -804,7 +825,7 @@ msgstr "_Infracrvena lokalna mreža"
 
 #: interfaces/network.glade.in.h:103
 msgid "_Local IP address:"
-msgstr "_Lokalna IP adrresa:"
+msgstr "_Lokalna IP adresa:"
 
 #: interfaces/network.glade.in.h:104
 msgid "_Local IP:"
@@ -892,7 +913,7 @@ msgstr "<span weight=\"bold\">Podešavanje servisa</span>"
 
 #: interfaces/services.glade.in.h:4
 msgid "Click on an item in the list to show it's description."
-msgstr "Kliknite na stavku u popisu kako bi videli njen opis."
+msgstr "Kliknite na stavku u popisu kako bi vidjeli njen opis."
 
 #: interfaces/services.glade.in.h:5
 msgid "Description:"
@@ -916,12 +937,16 @@ msgstr """Koristite ovaj program kako bi odlučili koji servisi će biti "
 "pokrenuti"
 
 #: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "_Poredaj popis po redoslijedu pokretanja"
+
+#: interfaces/services.glade.in.h:11
 msgid "_Start"
 msgstr "_Počni"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:12
 msgid "_Startup sequence:"
-msgstr ""
+msgstr "_Redoslijed podizanja:"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1073,7 +1098,7 @@ msgstr "Najveća vrijednost korisničkog broja:"
 
 #: interfaces/users.glade.in.h:29
 msgid "Mi_nimum days between password changes:"
-msgstr "_Minimalni broj dana za koje smijete mijenjati loziinku:"
+msgstr "_Minimalni broj dana za koje smijete mijenjati lozinku:"
 
 #: interfaces/users.glade.in.h:30
 msgid "Minimum GID:"
@@ -1089,7 +1114,7 @@ msgstr "Minimalni broj dana između mijenjanja lozinke:"
 
 #: interfaces/users.glade.in.h:33
 msgid "Number of days that a password may be used:"
-msgstr "Broj dana koje se lozinka može korisiti:"
+msgstr "Broj dana koje se lozinka može koristiti:"
 
 #: interfaces/users.glade.in.h:34
 msgid "O_ffice location:"
@@ -1152,6 +1177,8 @@ msgid ""
 "User profiles can be used as templates to facilitate the creation of new "
 "users."
 msgstr ""
+"Korisnički profili se mogu koristiti kao predlošci za stvaranje novih "
+"korisnika."
 
 #: interfaces/users.glade.in.h:47
 msgid "Users"
@@ -1236,15 +1263,15 @@ msgstr "vga=%s nije točna vga vrijednost"
 #: src/boot/boot-druid.c:430
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
-msgstr ""
+msgstr "Kreiram novu datoteku za pokretanje (%d of %d)"
 
 #: src/boot/boot-druid.c:431
 msgid "Finished creating a new boot image"
-msgstr ""
+msgstr "Kreiranje nove datoteke za pokretanje je završeno"
 
 #: src/boot/boot-image.c:40 src/network/profile.c:468
 msgid "Unknown"
-msgstr "Napoznato"
+msgstr "Nepoznato"
 
 #: src/boot/boot-image.c:41
 msgid "Windows NT"
@@ -1276,25 +1303,25 @@ msgstr "Neispravna putanja: %s"
 
 #: src/boot/boot-image.c:294
 msgid "Image '%s' already exists, please set another name."
-msgstr "Kernel datoteka „%s“ već postoji, molim postavite drugo ime."
+msgstr "Kernel datoteka \"%s\" već postoji, molim postavite drugo ime."
 
 #: src/boot/boot-image.c:300
 msgid "Invalid image name: '%s'"
-msgstr "Pogrešno ime kernel datoteke: „%s“"
+msgstr "Pogrešno ime kernel datoteke: \"%s\""
 
 #: src/boot/boot-image.c:313
 msgid "Invalid image: '%s'"
-msgstr "Pogrešna slika: „%s“"
+msgstr "Pogrešna slika: \"%s\""
 
 #: src/boot/boot-image.c:331
 msgid "Invalid root device: '%s'"
-msgstr "Neispravni root uređaj: „%s“"
+msgstr "Neispravni root uređaj: \"%s\""
 
 #: src/boot/boot-settings.c:43
 msgid "_Module path:"
 msgstr "_Putanja modula:"
 
-#: src/boot/boot-settings.c:360 src/users/user-settings.c:502
+#: src/boot/boot-settings.c:360 src/users/user-settings.c:472
 msgid "Password confirmation isn't correct."
 msgstr "Potvrda lozinke nije ispravna."
 
@@ -1314,7 +1341,7 @@ msgstr "Program za odabir slike kernela"
 msgid "Boot Append Editor"
 msgstr "Dodavanje parametara pri podizanju operativnog sustava"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1322,16 +1349,16 @@ msgstr ""
 "Bez barem jedne kernel datoteke, \n"
 "Vaš sustav se neće pokrenuti.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Jeste li sigurni da želite obrisati '%s'?"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
 "The configuration will show empty."
 msgstr ""
-"Datoteka „%s“ nije pristuna ili je se ne može pročitati.\n"
+"Datoteka \"%s\" nije prisutna ili je se ne može pročitati.\n"
 "Postavke će biti prazne."
 
 #: src/boot/table.c:41
@@ -1342,7 +1369,7 @@ msgstr "Ime"
 msgid "Default"
 msgstr "Uobičajeno"
 
-#: src/boot/table.c:43 src/network/connection.c:479
+#: src/boot/table.c:43 src/network/connection.c:485
 msgid "Type"
 msgstr "Tip"
 
@@ -1350,7 +1377,7 @@ msgstr "Tip"
 msgid "Kernel Image"
 msgstr "Kernel datoteka"
 
-#: src/boot/table.c:45 src/network/connection.c:495
+#: src/boot/table.c:45 src/network/connection.c:501
 msgid "Device"
 msgstr "Uređaj"
 
@@ -1369,16 +1396,21 @@ msgid "/_Delete"
 msgstr "Ukloni"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "Ne mogu se spojiti na računalu."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "Lozinka koju ste naveli je netočna."
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr "Ne mogu pokrenuti \"%s\". Provjerite da li imate dozvole za pokretanje."
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "Pojavila se neočekivana pogreška."
 
@@ -1400,7 +1432,7 @@ msgid ""
 "Apply them now?"
 msgstr ""
 "Postoje promjene koje nisu primjenjene.\n"
-"Želite li ih primjeniti sada?"
+"Želite li ih primijeniti sada?"
 
 #: src/common/gst-dialog.c:624
 msgid "Error connection signal `%s' in widget `%s'"
@@ -1422,13 +1454,15 @@ msgstr ""
 "Dogodila se greška pri radu pozadinske skripte,\n"
 "pa se postavke ne mogu učitati."
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1508
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
 "GNOME System Tools</span>"
 msgstr ""
+"<span weight=\"bold\" size=\"larger\">Dobro došli u %s neslužbenu inačicu "
+"GNOME sustavskih alata</span>"
 
-#: src/common/gst-tool.c:1513
+#: src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1436,16 +1470,21 @@ msgid ""
 "have been warned. Thank you for trying out this prerelease of the GNOME "
 "System Tools!"
 msgstr ""
+"Ovo je rad u tijeku, pa bi mogli postojati i ozbiljni bugovi. Zbog prirode "
+"ovih alata, bugovi mogu učiniti računalo <span weight=\"bold\">"
+"gotovo beskoristnim</span>, uzimajući vam vrijeme, trud i "
+"zdrav razum. Upozoreni ste. Hvala na iskušavanju ovog neslužbenog "
+"izdanja GNOME sustavskih alata!"
 
-#: src/common/gst-tool.c:1534
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Upozorenje"
 
-#: src/common/gst-tool.c:1554
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Ovu poruku više ne prikazuj"
 
-#: src/common/gst-tool.c:1628
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "GNOME sustavski alati (GNOME System Tools)"
 
@@ -1455,7 +1494,7 @@ msgstr "Ponovo pokrenite okruženje GNOME kako bi promjene došle do izražaja."
 
 #: src/network/callbacks.c:365
 msgid "Remove connection %s: \"%s\"?"
-msgstr "Uklanjanje veze %s: „%s“?"
+msgstr "Uklanjanje veze %s: \"%s\"?"
 
 #: src/network/callbacks.c:367
 msgid "Remove connection %s?"
@@ -1506,13 +1545,15 @@ msgstr ""
 "Uobičajeni uređaj za izlaz iz mreže nije aktiviran. Ovo će vas spriječiti u "
 "povezivanju na internet. Želite li ipak nastaviti?"
 
-#: src/network/callbacks.c:679
+#: src/network/callbacks.c:675
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
 msgstr ""
+"Nedostaju podaci kod uobičajenog izlaznog uređaja mreže gatweayu. Morate dati "
+"ove podatke prije nastavka, ili odaberite neki drugi izlazni uređaj."
 
-#: src/network/callbacks.c:725
+#: src/network/callbacks.c:721
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1522,35 +1563,35 @@ msgstr ""
 "neprikazivanja veza u popisu za veze. Molim instalirajte redhat-config-"
 "network rpm paket kako se ovo ne bi dogodilo."
 
-#: src/network/callbacks.c:762
+#: src/network/callbacks.c:758
 msgid "Do you want to enable interface %s?"
 msgstr "Želite li omogućiti uređaj %s?"
 
-#: src/network/callbacks.c:772
+#: src/network/callbacks.c:768
 msgid "Do you want to disable interface %s?"
 msgstr "Želite li onemogućite uređaj %s?"
 
-#: src/network/callbacks.c:859
+#: src/network/callbacks.c:855
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
 msgstr ""
-"Ne mogu automatski pronaći modemski urećaj. Provjerite da modem nije u "
+"Ne mogu automatski pronaći modemski uređaj. Provjerite da modem nije u "
 "upotrebi i da je pravilno priključen"
 
-#: src/network/callbacks.c:911
+#: src/network/callbacks.c:907
 msgid "Silent"
 msgstr "Tiho"
 
-#: src/network/callbacks.c:913
+#: src/network/callbacks.c:909
 msgid "Low"
 msgstr "Nisko"
 
-#: src/network/callbacks.c:915
+#: src/network/callbacks.c:911
 msgid "Medium"
 msgstr "Srednje"
 
-#: src/network/callbacks.c:917
+#: src/network/callbacks.c:913
 msgid "Loud"
 msgstr "Glasno"
 
@@ -1590,15 +1631,15 @@ msgstr "Nepoznata vrsta uređaja"
 msgid "/_Configure"
 msgstr "/_Podesi"
 
-#: src/network/connection.c:507
+#: src/network/connection.c:513
 msgid "Status"
 msgstr "Status"
 
-#: src/network/connection.c:516 src/network/profiles-table.c:62
+#: src/network/connection.c:522 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Opis"
 
-#: src/network/connection.c:1707
+#: src/network/connection.c:1722
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1606,7 +1647,7 @@ msgstr ""
 "IP adresa ili mrežna maska uređaja nisu popunjeni. Molim navedite "
 "ispravne IP adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1714
+#: src/network/connection.c:1729
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1614,7 +1655,7 @@ msgstr ""
 "IP adresa ili udaljena adresa za uređaj nisu popunjeni. Molim "
 "navedite ispravne IP adrese u ovim poljima za nastavak."
 
-#: src/network/connection.c:1720
+#: src/network/connection.c:1735
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1624,21 +1665,29 @@ msgstr ""
 "popunili IP adrese za primarni DNS. Molim popunite IP adrese za primarni DNS "
 "ili isključite mogućnost ručnog postavljanja DNS postavki."
 
-#: src/network/connection.c:1726
+#: src/network/connection.c:1741
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
 msgstr ""
+"Modemski uređaj koji će koristiti veza je ostavljen prazan. Molim unesite "
+"uređaj ili pritisnite na automatsko pronalaženje za nastavak."
 
-#: src/network/connection.c:1731
+#: src/network/connection.c:1746
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
 msgstr ""
+"Telefonski broj koji će ta veza koristiti je ostavljen prazan. Molim unesite "
+"valjani telefonski broj za nastavak."
 
-#: src/network/connection.c:2082
+#: src/network/connection.c:2108
 msgid "The interface %s doesn't exist."
 msgstr "Uređaj %s ne postoji."
+
+#: src/network/connection.c:2110
+msgid " The loopback interface cannot be configured."
+msgstr " Povratni (loopback) uređaj se ne može podesiti."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1650,27 +1699,27 @@ msgstr "Aliasi"
 
 #: src/network/main.c:190
 msgid "Run the connection assistant."
-msgstr ""
+msgstr "Pokretanje pomoćnika za stvaranje veze."
 
 #: src/network/main.c:191
 msgid "Run the PPP connection assistant."
-msgstr ""
+msgstr "Pokretanje pomoćnika za stvaranje PPP veze."
 
 #: src/network/main.c:192
 msgid "Run the ethernet connection assistant."
-msgstr ""
+msgstr "Pokretanje pomoćnika za stvaranje ethernet veze."
 
 #: src/network/main.c:193
 msgid "Run the wlan connection assistant."
-msgstr ""
+msgstr "Pokretanje pomoćnika za stvaranje wlan veze."
 
 #: src/network/main.c:194
 msgid "Run the parallel port connection assistant."
-msgstr ""
+msgstr "Pokretanje pomoćnika za stvaranje veze preko paralelnog porta."
 
 #: src/network/main.c:195
 msgid "Run the irlan connection assistant."
-msgstr ""
+msgstr "Pokretanje pomoćnika za stvaranje irlan veze."
 
 #: src/network/main.c:196
 msgid "Configure a network interface"
@@ -1713,23 +1762,23 @@ msgstr "Ime profila"
 msgid "No description available."
 msgstr "Opis ne postoji."
 
-#: src/services/callbacks.c:247
+#: src/services/callbacks.c:250
 msgid "Running"
 msgstr "Izvodi se"
 
-#: src/services/callbacks.c:251
+#: src/services/callbacks.c:254
 msgid "Stopped"
 msgstr "Zaustavljen"
 
-#: src/services/callbacks.c:256
+#: src/services/callbacks.c:259
 msgid "Could not get info"
 msgstr "Ne mogu dohvatiti informacije"
 
-#: src/services/callbacks.c:322
+#: src/services/callbacks.c:325
 msgid "Settings for service %s"
 msgstr "Podešavanja za servis %s"
 
-#: src/services/main.c:58
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "Podešavanje servisa"
 
@@ -1741,7 +1790,7 @@ msgstr "Podesite koji uslužni programi se pokreću pri pokretanju sustava"
 msgid "Services"
 msgstr "Servisi"
 
-#: src/services/table.c:78
+#: src/services/table.c:79
 msgid "Active"
 msgstr "Aktivan"
 
@@ -1777,51 +1826,51 @@ msgstr "Promijenite vrijeme, datum i vremensku zonu sustava."
 msgid "Time and Date"
 msgstr "Vrijeme i Datum"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "Napravi novi profil"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 msgid "Settings for profile %s"
 msgstr "Podešavanja za profil %s"
 
-#: src/users/group-settings.c:111
+#: src/users/group-settings.c:89
 msgid "Create New Group"
 msgstr "Stvara novu grupu"
 
-#: src/users/group-settings.c:165 src/users/user-settings.c:457
+#: src/users/group-settings.c:143 src/users/user-settings.c:427
 msgid "User id must be a positive number."
 msgstr "Broj korisnika mora biti pozitivan cijeli broj."
 
-#: src/users/group-settings.c:169
+#: src/users/group-settings.c:147
 msgid "Such group id already exists."
 msgstr "Takav broj grupe već postoji."
 
-#: src/users/group-settings.c:191
+#: src/users/group-settings.c:169
 msgid "Group name is empty."
 msgstr "Niste naveli ime grupe."
 
-#: src/users/group-settings.c:195
+#: src/users/group-settings.c:173
 msgid "The group name is too long."
 msgstr "Ime grupe je predugačko."
 
-#: src/users/group-settings.c:199
+#: src/users/group-settings.c:177
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Molim postavite ispravno ime grupe, koristeći samo mala slova."
 
-#: src/users/group-settings.c:203
+#: src/users/group-settings.c:181
 msgid "Group already exists."
 msgstr "Grupa već postoji."
 
-#: src/users/group-settings.c:272
+#: src/users/group-settings.c:250
 msgid "The root group must not be deleted."
-msgstr "Grupa root se ne smije uloniti."
+msgstr "Grupa root se ne smije ukloniti."
 
-#: src/users/group-settings.c:279
+#: src/users/group-settings.c:257
 msgid "Are you sure you want to delete group %s?"
 msgstr "Jeste li sigurni da želite ukloniti grupu %s?"
 
-#: src/users/group-settings.c:342
+#: src/users/group-settings.c:314
 msgid "Settings for Group %s"
 msgstr "Podešavanja za grupu %s"
 
@@ -1918,31 +1967,31 @@ msgstr "/_Dodaj korisnika"
 msgid "/_Add group ..."
 msgstr "/_Dodaj grupu"
 
-#: src/users/user-settings.c:120
+#: src/users/user-settings.c:104
 msgid "The root user must not be deleted."
 msgstr "Korisnički račun za administratora se ne smije ukloniti."
 
-#: src/users/user-settings.c:127
+#: src/users/user-settings.c:111
 msgid "Are you sure you want to delete user %s?"
 msgstr "Jeste li sigurni da želite da uklonite korisnika %s"
 
-#: src/users/user-settings.c:208
+#: src/users/user-settings.c:191
 msgid "User Account Editor"
 msgstr "Uređivanje korisničkih računa"
 
-#: src/users/user-settings.c:335
+#: src/users/user-settings.c:305
 msgid "The username is empty."
 msgstr "Morate navesti ime korisnika."
 
-#: src/users/user-settings.c:343
+#: src/users/user-settings.c:313
 msgid "The username is too long."
 msgstr "Ime korisnika je predugačko."
 
-#: src/users/user-settings.c:347
+#: src/users/user-settings.c:317
 msgid "root username shouldn't be modified."
 msgstr "Ime administratora (root) se ne bi trebao mijenjati."
 
-#: src/users/user-settings.c:351
+#: src/users/user-settings.c:321
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -1950,49 +1999,49 @@ msgstr ""
 "Molim postavite ispravno korisničko ime koje je sastavljeno od malih slova i "
 "brojeva gdje prvi znak imena mora biti malo slovo."
 
-#: src/users/user-settings.c:355
+#: src/users/user-settings.c:325
 msgid ""
 "Username \"%s\" already exists.\n"
 "\n"
 "Please select a different Username"
 msgstr ""
-"Korisničko ime „%s“ već postoji.\n"
+"Korisničko ime \"%s\" već postoji.\n"
 "\n"
 "Molim odaberite drugo ime."
 
-#: src/users/user-settings.c:377
+#: src/users/user-settings.c:347
 msgid "Invalid character '%c' in comment."
 msgstr "Neispravan znak '%c' u komentaru."
 
-#: src/users/user-settings.c:423
+#: src/users/user-settings.c:393
 msgid "Home directory must not be empty."
 msgstr "Morate popuniti ime osobnog direktorija."
 
-#: src/users/user-settings.c:426
+#: src/users/user-settings.c:396
 msgid "Please enter full path for home directory."
 msgstr "Molim navedite punu putanju za osobni direktorij."
 
-#: src/users/user-settings.c:429
+#: src/users/user-settings.c:399
 msgid "root home shouldn't be modified."
 msgstr "osobni direktorij administratora se ne bi trebao mijenjati."
 
-#: src/users/user-settings.c:459
+#: src/users/user-settings.c:429
 msgid "root uid shouldn't be modified."
 msgstr "Korisnički broj administratora se ne bi trebao mijenjati."
 
-#: src/users/user-settings.c:461
+#: src/users/user-settings.c:431
 msgid "Such user id already exists."
 msgstr "Takav korisnički broj već postoji."
 
-#: src/users/user-settings.c:481
+#: src/users/user-settings.c:451
 msgid "Please give shell with full path."
 msgstr "Molim unesite punu putanju do ljuske.."
 
-#: src/users/user-settings.c:499
+#: src/users/user-settings.c:469
 msgid "Password must not be empty."
 msgstr "Morate popuniti polje lozinke."
 
-#: src/users/user-settings.c:778
+#: src/users/user-settings.c:746
 msgid "Settings for User %s"
 msgstr "Podešavanja za korisnika %s"
 
