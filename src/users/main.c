@@ -48,11 +48,6 @@ main (int argc, char *argv[])
 	
 	srand (time (NULL));
 	
-#ifdef ENABLE_NLS
-	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
-	textdomain (PACKAGE);
-#endif
-
 	tool_init("users", argc, argv);
 
 	tool_set_frozen(TRUE);
