@@ -117,7 +117,7 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 		"new_user_max_id", "new_group_min_id", "new_group_max_id", "del_user_additional_command",
 		"create_home", NULL
 	};
-	gchar *tag;
+	gchar *tag, *tmp;
 	gint i;
 
 	/* Assign defaults */
@@ -155,7 +155,13 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 			 case  9: logindefs.new_group_min_id = my_atoi (my_xml_element_get_content (n0)); break;
 			 case 10: logindefs.new_group_max_id = my_atoi (my_xml_element_get_content (n0)); break;
 			 case 11: logindefs.del_user_additional_command = my_xml_element_get_content (n0); break;
-			 case 12: logindefs.create_home = my_atoi (my_xml_element_get_content (n0)); break;
+			 case 12: 
+				tmp = my_xml_element_get_content (n0);
+				if (! strcmp (tmp, "yes"))
+					logindefs.create_home = TRUE;
+				else
+					logindefs.create_home = FALSE;
+				break;
 			 case 13: g_warning ("transfer_logindefs_from_xml: we shouldn't be here."); break;
 			}
 		}
