@@ -67,10 +67,9 @@ transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
 
 		n_item++;
 	}
-
+	
 	gtk_widget_show_all (menu_shell);
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu_shell);
-
 	gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu), n_option);
 }
 

@@ -260,6 +260,7 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	GtkWidget *script_name = gst_dialog_get_widget (tool->main_dialog, "dialog_script_name");
 	GtkWidget *service_description = gst_dialog_get_widget (tool->main_dialog, "dialog_service_description");
 	GtkWidget *service_priority = gst_dialog_get_widget (tool->main_dialog, "dialog_service_priority");
+	GtkWidget *service_priority_label = gst_dialog_get_widget (tool->main_dialog, "dialog_service_priority_label");
 
 	/* we need these to get the xmlNodePtr */
 	GtkTreeView *runlevel_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
@@ -268,7 +269,7 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	GtkTreeSelection *selection;
 	xmlNodePtr service;
 	
-	gchar *description, *script, *title;
+	gchar *description, *script, *title, *p;
 	gint priority, response;
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (runlevel_table));
@@ -283,19 +284,32 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	script = gst_xml_get_child_content (service, "script");
 	description = service_get_description (service);
 
-	/* get the priority */
-	priority = atoi (gst_xml_get_child_content (service, "priority"));
+	/* get the priority, if it doesn't exist, we simply hide the spinbutton */
+	p = gst_xml_get_child_content (service, "priority");
 
-	/* we're modifying the spin button, so we need to block its signal handlers */
-	g_signal_handlers_block_by_func (G_OBJECT (service_priority),
-					 G_CALLBACK (on_service_priority_changed), tool->main_dialog);
+	if (p == NULL) {
+		gtk_widget_hide (service_priority);
+		gtk_widget_hide (service_priority_label);
+	} else {
+		gtk_widget_show (service_priority);
+		gtk_widget_show (service_priority_label);
+		
+		priority = atoi (p);
+
+		/* we're modifying the spin button, so we need to block its signal handlers */
+		g_signal_handlers_block_by_func (G_OBJECT (service_priority),
+						 G_CALLBACK (on_service_priority_changed), tool->main_dialog);
+
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (service_priority), priority);
+
+		g_signal_handlers_unblock_by_func (G_OBJECT (service_priority),
+						   G_CALLBACK (on_service_priority_changed), tool->main_dialog);
+
+		g_free (p);
+	}
 
 	gtk_label_set_text (GTK_LABEL (script_name), script);
 	gtk_label_set_text (GTK_LABEL (service_description), description);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (service_priority), priority);
-
-	g_signal_handlers_unblock_by_func (G_OBJECT (service_priority),
-					   G_CALLBACK (on_service_priority_changed), tool->main_dialog);
 
 	title = g_strdup_printf (_("Settings for service %s"), script);
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
