@@ -35,6 +35,10 @@
 extern XstTool *tool;
 extern GArray *runlevel_array;
 
+extern GdkPixbuf *start_icon;
+extern GdkPixbuf *stop_icon;
+extern GdkPixbuf *do_nothing_icon;
+
 void
 on_main_dialog_update_complexity (GtkWidget *main_dialog, gpointer data)
 {
@@ -60,54 +64,87 @@ callbacks_conf_read_failed_hook (XstTool *tool, XstReportLine *rline, gpointer d
 }
 
 void
-callbacks_runlevel_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
+callbacks_runlevel_toggled (GtkTreeView *treeview, gpointer data)
 {
+	GtkTreePath *path;
+	GtkTreeViewColumn *column;
 	GtkTreeModel *model = (GtkTreeModel *)data;
-	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
 	GtkTreeIter iter;
-	gboolean runlevel_toggle_item;
-	gint *column;
-	
-	gint row = atoi(path_str);
+	GdkPixbuf *image;
+	gint *col, row;
+	gchar *path_str, *level;
+	GList *cell_list;
+	GtkCellRendererPixbuf *cell;
 	xmlNodePtr node, runlevels,rl;
-	gchar *level, *buf;
+		
+	gtk_tree_view_get_cursor (treeview, &path, &column);
+	path_str = gtk_tree_path_to_string (path);
+	cell_list = gtk_tree_view_column_get_cell_renderers (column);
+	cell = g_list_nth_data (cell_list, 0);
+	g_list_free (cell_list);
+	col = g_object_get_data (G_OBJECT (cell), "column");
+	if (col == NULL)
+		return;
+	row = atoi (path_str);
+	
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter, *col, &image, -1);
 	
 	node = g_array_index (runlevel_array, xmlNodePtr, row);
 	runlevels = xst_xml_element_find_first (node, "runlevels");
 	
-	column = g_object_get_data (G_OBJECT (cell), "column");
-	
-	gtk_tree_model_get_iter (model, &iter, path);
-	gtk_tree_model_get (model, &iter, *column, &runlevel_toggle_item, -1);
-	
-	if (runlevel_toggle_item == TRUE)  // if we are deleting a service
+	if (image == start_icon)
 	{
+		// The state turns to stopped
+		image = stop_icon;
+		
 		for (rl = xst_xml_element_find_first (runlevels, "runlevel"); rl != NULL; rl = xst_xml_element_find_next (rl, "runlevel"))
 		{
-			level = xst_xml_element_get_content (rl);
-			if (*column - 1 == (level[0] - '0'))
+			level = xst_xml_get_child_content (rl, "number");
+			if (*col - 1 == atoi (level))
+			{
+				xst_xml_set_child_content (rl, "action", "stop");
+				break;
+			}
+		}
+	}
+	else if (image == stop_icon)
+	{
+		// The state turns to "do nothing"
+		image = do_nothing_icon;
+
+		for (rl = xst_xml_element_find_first (runlevels, "runlevel"); rl != NULL; rl = xst_xml_element_find_next (rl, "runlevel"))
+		{
+			level = xst_xml_get_child_content (rl, "number");
+			if (*col - 1 == atoi (level))
 			{
 				xst_xml_element_destroy (rl);
 				break;
 			}
 		}
-		
-		runlevel_toggle_item = FALSE;
 	}
-	else // if we are adding a service
+	else
 	{
+		// The state turns to started
+		gchar *buf;
+		
+		image = start_icon;
+
 		if (runlevels == NULL){
 			runlevels= xst_xml_element_add (node, "runlevels");
 		}
 		rl = xst_xml_element_add (runlevels, "runlevel");
-		buf = g_strdup_printf ("%i",*column-1);
-		xst_xml_element_set_content (rl, buf);
-
-		runlevel_toggle_item = TRUE;
+		xst_xml_element_add (rl, "number");
+		xst_xml_element_add (rl, "action");
+		buf = g_strdup_printf ("%i", *col - 1);
+		xst_xml_set_child_content (rl, "number", buf);
+		xst_xml_set_child_content (rl, "action", "start");
+		g_free (buf);
 	}
-	
+
 	xst_dialog_modify (tool->main_dialog);	
 	
-	gtk_tree_store_set (GTK_TREE_STORE (model), &iter, *column, runlevel_toggle_item, -1);
+	gtk_tree_store_set (GTK_TREE_STORE (model), &iter, *col, image, -1);
 	gtk_tree_path_free (path);
+	g_free (path_str);
 }

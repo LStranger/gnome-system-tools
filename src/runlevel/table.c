@@ -38,13 +38,13 @@ typedef struct TreeItem_ TreeItem;
 struct TreeItem_
 {
 	const char *service;
-	gboolean level_0;
-	gboolean level_1;
-	gboolean level_2;
-	gboolean level_3;
-	gboolean level_4;
-	gboolean level_5;
-	gboolean level_6;
+	GdkPixbuf *level_0;
+	GdkPixbuf *level_1;
+	GdkPixbuf *level_2;
+	GdkPixbuf *level_3;
+	GdkPixbuf *level_4;
+	GdkPixbuf *level_5;
+	GdkPixbuf *level_6;
 	
 	TreeItem *children;
 };
@@ -53,6 +53,11 @@ extern XstTool *tool;
 
 GtkWidget *runlevel_table;
 GArray *runlevel_array;
+
+// Images used in table
+GdkPixbuf *start_icon;
+GdkPixbuf *stop_icon;
+GdkPixbuf *do_nothing_icon;
 
 static void
 add_columns (GtkTreeView *treeview)
@@ -80,26 +85,23 @@ add_columns (GtkTreeView *treeview)
 	// Runlevel columns
 	for (i=1; i<=7; i++)
 	{
-		renderer = gtk_cell_renderer_toggle_new ();
+		renderer = gtk_cell_renderer_pixbuf_new ();
 		g_object_set (G_OBJECT (renderer), "xalign", 0.0, NULL);
 		
 		col = (gint *) g_malloc (sizeof (gint));
 		*col = i;
 		g_object_set_data (G_OBJECT (renderer), "column", col);
 
-		g_signal_connect (G_OBJECT (renderer), "toggled", G_CALLBACK (callbacks_runlevel_toggled), model);		
-
 		level = i-1;
 		label = g_strdup_printf ("Level %i",level);
 		
 		gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW(treeview),
-		                                             -1,
-		                                             label,
-		                                             renderer,
-		                                             "active",
-		                                             i,
-		                                             NULL);
-		column = gtk_tree_view_get_column (GTK_TREE_VIEW (treeview), i);
+		                                            -1,
+		                                            label,
+		                                            renderer,
+		                                            "pixbuf",
+		                                            i,
+		                                            NULL);
 	}
 }
 
@@ -110,14 +112,22 @@ create_model (void)
 
 	model = gtk_tree_store_new (COL_LEVEL6 + 1,
 	                            G_TYPE_STRING,
-	                            G_TYPE_BOOLEAN,
-	                            G_TYPE_BOOLEAN,
-	                            G_TYPE_BOOLEAN,
-	                            G_TYPE_BOOLEAN,
-	                            G_TYPE_BOOLEAN,
-	                            G_TYPE_BOOLEAN,
-	                            G_TYPE_BOOLEAN);
+	                            GDK_TYPE_PIXBUF,
+	                            GDK_TYPE_PIXBUF,
+	                            GDK_TYPE_PIXBUF,
+	                            GDK_TYPE_PIXBUF,
+	                            GDK_TYPE_PIXBUF,
+	                            GDK_TYPE_PIXBUF,
+	                            GDK_TYPE_PIXBUF);
 	return GTK_TREE_MODEL(model);
+}
+
+static void
+pixmaps_create (void)
+{
+	start_icon = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gnome-light-on.png", NULL);
+	stop_icon = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gnome-light-off.png", NULL);
+	do_nothing_icon = gtk_widget_render_icon (runlevel_table, GTK_STOCK_REMOVE, GTK_ICON_SIZE_MENU, NULL);
 }
 
 GtkWidget*
@@ -125,19 +135,25 @@ table_create (void)
 {
 	GtkTreeModel *model;
 	
+	
 	model = create_model ();
 	
 	runlevel_table = gtk_tree_view_new_with_model (model);
 	g_object_unref (G_OBJECT (model));
 	
+	g_signal_connect (G_OBJECT (runlevel_table), "cursor-changed", G_CALLBACK (callbacks_runlevel_toggled), model);
+	
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (runlevel_table), TRUE);
 	
 	add_columns (GTK_TREE_VIEW (runlevel_table));
-	
+
+	// Creates the pixmaps that are going to be used in the table
+	pixmaps_create();
+
 	return runlevel_table;
 }
 
-static gchar* 
+static gchar*
 table_value_service(xmlNodePtr node)
 {
 	gchar *buf;
@@ -148,24 +164,40 @@ table_value_service(xmlNodePtr node)
 	return buf;
 }
 
-static gboolean
+static GdkPixbuf*
 table_value_runlevel (xmlNodePtr node,gint runlevel)
 {
 	xmlNodePtr runlevels, rl;
-	gchar *level;
-	g_return_val_if_fail (node != NULL, FALSE);
+	gchar *action, *number;
+	g_return_val_if_fail (node != NULL, NULL);
+	
 	runlevels = xst_xml_element_find_first (node, "runlevels");
-	if (runlevels != NULL){
-		for (rl = xst_xml_element_find_first (runlevels, "runlevel"); rl != NULL; rl = xst_xml_element_find_next (rl, "runlevel"))
+	
+	if (runlevels == NULL)
+		return do_nothing_icon;
+
+	for (rl = xst_xml_element_find_first (runlevels, "runlevel"); rl != NULL; rl = xst_xml_element_find_next (rl, "runlevel"))
+	{
+		number = xst_xml_get_child_content (rl, "number");
+		if (atoi (number) == runlevel)
 		{
-			level = xst_xml_element_get_content (rl);
-			if (runlevel == (level[0] - '0'))
+			action = xst_xml_get_child_content (rl, "action");
+			if (strcmp (action, "start") == 0)
 			{
-				return TRUE;
+				g_free (number);
+				g_free (action);
+				return start_icon;
+			}
+			else
+			{
+				g_free (number);
+				g_free (action);
+				return stop_icon;
 			}
 		}
+		g_free (number);
 	}
-	return FALSE;
+	return do_nothing_icon;
 }
 
 

@@ -29,6 +29,6 @@
 
 gboolean	callbacks_conf_read_failed_hook		(XstTool* , XstReportLine* , gpointer);
 void		on_main_dialog_update_complexity	(GtkWidget*, gpointer);
-void		callbacks_runlevel_toggled			(GtkCellRendererToggle*, gchar*, gpointer);
+void		callbacks_runlevel_toggled			(GtkTreeView*, gpointer);
 
 #endif /* CALLBACKS_H */

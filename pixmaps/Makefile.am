@@ -44,10 +44,10 @@ pixmaps_DATA = \
 	ppp.png                  \
 	print.png                \
 	reading.png              \
+	runlevel.png		 \
 	server.png               \
 	settings.png             \
 	shares.png               \
-	sysV.png                 \
 	talk-userlist.png		\
 	test-colors.png		\
 	time.png                 \
