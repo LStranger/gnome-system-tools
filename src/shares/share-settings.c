@@ -401,5 +401,23 @@ smb_settings_save (void)
 	text = gtk_entry_get_text (GTK_ENTRY (widget));
 	gst_xml_set_child_content (root, "workgroup", text);
 
-	/* FIXME: manage wins stuff */
+	widget = gst_dialog_get_widget (tool->main_dialog, "smb_no_wins");
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+		gst_xml_element_destroy_children_by_name (root, "smb_wins_server");
+		gst_xml_element_set_boolean (root, "winsuse", FALSE);
+	} else {
+		widget = gst_dialog_get_widget (tool->main_dialog, "smb_is_wins");
+
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))) {
+			gst_xml_element_destroy_children_by_name (root, "smb_wins_server");
+			gst_xml_element_set_boolean (root, "winsuse", TRUE);
+		} else {
+			widget = gst_dialog_get_widget (tool->main_dialog, "smb_wins_server");
+			text   = gtk_entry_get_text (GTK_ENTRY (widget));
+
+			gst_xml_set_child_content (root, "smb_wins_server", text);
+			gst_xml_element_set_boolean (root, "winsuse", FALSE);
+		}
+	}
 }
