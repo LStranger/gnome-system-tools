@@ -50,14 +50,13 @@
 #define USER_COLS 1
 #define GROUP_COLS 1
 
-#define USER_BASIC_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
+#define USER_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/></ETableSpecification>"
 
-#define USER_ADV_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
+#define GROUP_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
 
-#define GROUP_BASIC_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
+#define ADV_USER_STATE "<ETableState><column source=\"1\"/><column source=\"0\"/><column source=\"2\"/><column source=\"3\"/><grouping><leaf column=\"1\" ascending=\"true\"/></grouping></ETableState>"
 
-#define GROUP_ADV_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
-
+#define BASIC__USER_STATE "<ETableState><column source=\"0\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
 
 /* Local globals */
 
@@ -92,50 +91,72 @@ row_count (ETableModel *etm, void *data)
 
 /* This function returns the value at a particular point in our ETableModel. */
 static void *
-value_at (ETableModel *etm, int col, int row, void *data)
+user_value_at (ETableModel *etm, int col, int row, void *data)
+{
+	xmlNodePtr parent = data;
+	xmlNodePtr node, name;
+	gchar *field;
+
+	node = xml_element_find_nth (parent, "user", row);
+	if (!node)
+	{
+		g_warning ("value_at: Can't find %dth node\n", row);
+		return NULL;
+	}
+
+	switch (col)
+	{
+		case 0:
+			field = g_strdup ("login");
+			break;
+		case 1:
+			field = g_strdup ("uid");
+			break;
+		case 2:
+			field = g_strdup ("home");
+			break;
+		case 3:
+			field = g_strdup ("shell");
+			break;
+		default:
+			g_warning ("Wrong col nr: %d", col);
+			return NULL;
+	}
+	
+	name = xml_element_find_first (node, field);
+
+	if (!name)
+	{
+		g_warning ("value_at: Can't get name for row %d\n", row);
+		return NULL;
+	}
+	
+	g_free (field);
+
+	return xml_element_get_content (name);
+}
+
+static void *
+group_value_at (ETableModel *etm, int col, int row, void *data)
 {
 	xmlNodePtr parent = data;
 	xmlNodePtr node, name;
 
-	if (E_TABLE (user_table)->model == etm)
+	node = xml_element_find_nth (parent, "group", row);
+	if (!node)
 	{
-		node = xml_element_find_nth (parent, "user", row);
-		if (!node)
-		{
-			g_warning ("value_at: Can't find %dth node\n", row);
-			return NULL;
-		}
-
-		name = xml_element_find_first (node, "login");
-		if (!name)
-		{
-			g_warning ("value_at: Can't get name for row %d\n", row);
-			return NULL;
-		}
-
-		return xml_element_get_content (name);
+		g_warning ("value_at: Can't find %dth node\n", row);
+		return NULL;
 	}
 
-	if (E_TABLE (group_table)->model == etm)
+	name = xml_element_find_first (node, "name");
+	if (!name)
 	{
-		node = xml_element_find_nth (parent, "group", row);
-		if (!node)
-		{
-			g_warning ("value_at: Can't find %dth node\n", row);
-			return NULL;
-		}
-
-		name = xml_element_find_first (node, "name");
-		if (!name)
-		{
-			g_warning ("value_at: Can't get name for row %d\n", row);
-			return NULL;
-		}
-
-		return xml_element_get_content (name);
+		g_warning ("value_at: Can't get name for row %d\n", row);
+		return NULL;
 	}
 
-	return NULL;
+	return xml_element_get_content (name);
 }
 
 /* This function sets value at a particular point in our ETableModel. */
@@ -248,7 +269,7 @@ e_table_create (void)
 
 	e_table_model = e_table_simple_new (col_count,
                                            row_count,
-                                           value_at,
+                                           user_value_at,
                                            set_value_at,
                                            is_cell_editable,
                                            duplicate_value,
@@ -258,7 +279,7 @@ e_table_create (void)
                                            value_to_string,
                                            users_node);
 
-	user_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, USER_BASIC_SPEC, NULL);
+	user_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, USER_SPEC, BASIC_USER_STATE);
 
 	if (!user_table)
 		g_warning ("e-table: Can't make user table");
@@ -281,7 +302,7 @@ e_table_create (void)
 
 	e_table_model = e_table_simple_new (col_count,
                                            row_count,
-                                           value_at,
+                                           group_value_at,
                                            set_value_at,
                                            is_cell_editable,
                                            duplicate_value,
@@ -291,7 +312,7 @@ e_table_create (void)
                                            value_to_string,
                                            groups_node);
 
-	group_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, GROUP_BASIC_SPEC, NULL);
+	group_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, GROUP_SPEC, NULL);
 
 	if (!group_table)
 		g_warning ("e-table: Can't make group table");
@@ -780,5 +801,17 @@ e_table_add_group_users_full (gchar *name, gchar *val)
 		n = xml_element_add (users, "user");
 		xml_element_set_content (n, val);
 	}
+}
+
+void
+e_table_state (gboolean state)
+{
+	if (state)
+	{
+		e_table_set_state (E_TABLE (user_table), ADV_USER_STATE);
+	}
+			
+	else
+		e_table_set_state (E_TABLE (user_table), BASIC_USER_STATE);
 }
 

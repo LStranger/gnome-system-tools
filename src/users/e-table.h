@@ -53,3 +53,5 @@ void e_table_add_user (gchar *login);
 void e_table_change_user_full (gchar *target_f, gchar *target_val, gchar *field, gchar *val);
 void e_table_add_group_users_full (gchar *name, gchar *val);
 
+void e_table_state (gboolean state);
+

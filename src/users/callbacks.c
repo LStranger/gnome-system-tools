@@ -63,9 +63,16 @@ extern void
 on_complexity_clicked (GtkButton *button, gpointer user_data)
 {
 	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+	{
 		tool_set_complexity (TOOL_COMPLEXITY_ADVANCED);
+		e_table_state (TRUE);
+	}
+
 	else if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+	{
 		tool_set_complexity (TOOL_COMPLEXITY_BASIC);
+		e_table_state (FALSE);
+	}
 }
 
 /* Main window callbacks */
