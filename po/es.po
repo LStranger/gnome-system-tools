@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.5\n"
-"POT-Creation-Date: 2001-05-25 09:23-0500\n"
+"POT-Creation-Date: 2001-05-26 15:54+0200\n"
 "PO-Revision-Date: 2001-04-19 16:59-0600\n"
 "Last-Translator: Carlos Perelló Marín <carlos@gnome-db.org>\n"
 "Language-Team: Spanish\n"
@@ -712,7 +712,7 @@ msgstr "Ejecutar sin contraseña"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:641
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:691
 msgid "Scanning your system configuration."
 msgstr "Buscando la configuración de su sistema."
 
@@ -791,8 +791,8 @@ msgid "Detected"
 msgstr "Detectado"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:40 src/boot/e-table.c:43
-#: src/print/e-table.c:43
+#: interfaces/network.glade.in.h:40 src/boot/boot.etspec.h:2
+#: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "Dispositivo"
 
@@ -839,7 +839,7 @@ msgid "Mount this partition"
 msgstr "Montar esta partición"
 
 #: interfaces/disks.glade.in.h:20 interfaces/shares.glade.in.h:32
-#: src/shares/tables.c:79
+#: src/shares/imports.etspec.h:3
 msgid "Mounted"
 msgstr "Montado"
 
@@ -1033,7 +1033,7 @@ msgid "Existing:"
 msgstr "Existen:"
 
 #: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:20
-#: src/shares/tables.c:76
+#: src/shares/imports.etspec.h:1
 msgid "Host"
 msgstr "Servidor"
 
@@ -1435,8 +1435,8 @@ msgstr ""
 
 #: interfaces/network.glade.in.h:91
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click "
-"\"Cancel\"."
+"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
+"\"."
 msgstr ""
 "Para continuar configurando su cuenta, pulse «Siguiente». Para salir, pulse "
 "«Cancelar»."
@@ -1530,7 +1530,7 @@ msgstr "Examinable"
 msgid "Client"
 msgstr "Cliente"
 
-#: interfaces/shares.glade.in.h:8 src/shares/tables.c:82
+#: interfaces/shares.glade.in.h:8
 msgid "Clients"
 msgstr "Clientes"
 
@@ -1606,11 +1606,11 @@ msgstr ""
 "«Importado» son directorios que residen en otros ordenadores y están "
 "accesibles mediante la red."
 
-#: interfaces/shares.glade.in.h:29 src/shares/tables.c:777
+#: interfaces/shares.glade.in.h:29 src/shares/tables.c:731
 msgid "Mount"
 msgstr "Montar"
 
-#: interfaces/shares.glade.in.h:30 src/shares/tables.c:78
+#: interfaces/shares.glade.in.h:30 src/shares/imports.etspec.h:2
 msgid "Mount Point"
 msgstr "Punto de montaje"
 
@@ -1626,13 +1626,13 @@ msgstr "Opciones de montaje"
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.in.h:36 src/boot/e-table.c:40
-#: src/shares/tables.c:80
+#: interfaces/shares.glade.in.h:36 src/boot/boot.etspec.h:4
+#: src/shares/exports.etspec.h:1
 msgid "Name"
 msgstr "Nombre"
 
-#: interfaces/shares.glade.in.h:39 src/shares/tables.c:77
-#: src/shares/tables.c:81
+#: interfaces/shares.glade.in.h:39 src/shares/exports.etspec.h:2
+#: src/shares/imports.etspec.h:4
 msgid "Path"
 msgstr "Ruta"
 
@@ -1695,7 +1695,7 @@ msgstr ""
 msgid "Username:"
 msgstr "Nombre de usuario:"
 
-#: interfaces/shares.glade.in.h:52 src/shares/tables.c:83
+#: interfaces/shares.glade.in.h:52 src/shares/exports.etspec.h:3
 msgid "Writable"
 msgstr "Escribible"
 
@@ -1907,7 +1907,7 @@ msgstr "Miembros del grupo"
 msgid "Group name:"
 msgstr "Nombre del grupo:"
 
-#: interfaces/users.glade.in.h:36 src/users/e-table.c:50
+#: interfaces/users.glade.in.h:36 src/users/group.etspec.h:2
 #: src/users/user_settings.c:333 src/users/user_settings.c:403
 msgid "Groups"
 msgstr "Grupos"
@@ -2140,7 +2140,7 @@ msgstr ""
 msgid "User's groups"
 msgstr "Grupos del usuario"
 
-#: interfaces/users.glade.in.h:92 src/users/e-table.c:43
+#: interfaces/users.glade.in.h:92 src/users/users.etspec.h:7
 msgid "Users"
 msgstr "Usuarios"
 
@@ -2153,30 +2153,30 @@ msgstr "No está implementado todavía, lo siento."
 msgid "Are you sure you want to delete %s?"
 msgstr "¿Está seguro que desea borrar %s?"
 
-#: src/boot/e-table.c:39 src/users/profile.c:1004
-msgid "Default"
-msgstr "Predeterminado"
-
-#: src/boot/e-table.c:41 src/print/e-table.c:42
-msgid "Type"
-msgstr "Tipo"
-
-#: src/boot/e-table.c:42
-msgid "Kernel Image"
-msgstr "Imagen del núcleo"
-
-#: src/boot/e-table.c:350
+#: src/boot/e-table.c:331
 msgid "Linux"
 msgstr "Linux"
 
-#: src/boot/e-table.c:354
+#: src/boot/e-table.c:335
 msgid "Other"
 msgstr "Otro"
 
-#: src/boot/e-table.c:362
+#: src/boot/e-table.c:343
 #, c-format
 msgid "%s (default)"
 msgstr "%s (predeterminado)"
+
+#: src/boot/boot.etspec.h:1 src/users/profile.c:994
+msgid "Default"
+msgstr "Predeterminado"
+
+#: src/boot/boot.etspec.h:3
+msgid "Kernel Image"
+msgstr "Imagen del núcleo"
+
+#: src/boot/boot.etspec.h:5 src/print/print.etspec.h:6
+msgid "Type"
+msgstr "Tipo"
 
 #: src/boot/main.c:93
 msgid "Boot Manager Settings - Ximian Setup Tools"
@@ -2208,15 +2208,30 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Se ha producido un error al conectar la señal '%s' con el widget '%s'"
 
-#: src/common/xst-tool.c:545
+#: src/common/xst-tool.c:282
+#, c-format
+msgid "etspec file: %s not found\n"
+msgstr "El archivo etspec: %s no se ha encontrado\n"
+
+#: src/common/xst-tool.c:291
+#, c-format
+msgid "Sorry, we can't get memory to load %s\n"
+msgstr "Disculpe, no puedo obtener memoria para cargar %s\n"
+
+#: src/common/xst-tool.c:294
+#, c-format
+msgid "Sorry, we can't read %s\n"
+msgstr "Disculpe, no puedo leer %s\n"
+
+#: src/common/xst-tool.c:595
 msgid "Skipping actual save..."
 msgstr "Saltándose el guardado actual..."
 
-#: src/common/xst-tool.c:571
+#: src/common/xst-tool.c:621
 msgid "Updating your system configuration."
 msgstr "Actualizando la configuración de su sistema."
 
-#: src/common/xst-tool.c:695
+#: src/common/xst-tool.c:745
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2224,16 +2239,16 @@ msgstr ""
 "Se produjo un error al ejecutar el script del backend,\n"
 "y la configuración no ha podido ser cargada."
 
-#: src/common/xst-tool.c:869
+#: src/common/xst-tool.c:921
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1006
+#: src/common/xst-tool.c:1058
 msgid "The password you entered is invalid."
 msgstr "La contraseña que ha introducido no es válida."
 
-#: src/common/xst-tool.c:1046
+#: src/common/xst-tool.c:1098
 msgid "Pretending we are root..."
 msgstr "Intentando ser root..."
 
@@ -2468,15 +2483,7 @@ msgstr ""
 msgid "New Shares Admin"
 msgstr "Nuevo administrador de comparticiones"
 
-#: src/shares/tables.c:84
-msgid "Pattern"
-msgstr "Patrón"
-
-#: src/shares/tables.c:85
-msgid "Write"
-msgstr "Escribible"
-
-#: src/shares/tables.c:777
+#: src/shares/tables.c:731
 msgid "Unmount"
 msgstr "Desmontar"
 
@@ -2596,30 +2603,6 @@ msgstr ""
 msgid "Can't create new user. Too many users probably."
 msgstr ""
 "No se puede crear un nuevo usuario. Seguramente hay demasiados usuarios."
-
-#: src/users/e-table.c:44
-msgid "UID"
-msgstr "UID"
-
-#: src/users/e-table.c:45
-msgid "Home"
-msgstr "Directorio personal"
-
-#: src/users/e-table.c:46
-msgid "Shell"
-msgstr "Interprete de comandos"
-
-#: src/users/e-table.c:47 src/users/profile.c:63
-msgid "Comment"
-msgstr "Comentario"
-
-#: src/users/e-table.c:48
-msgid "Group"
-msgstr "Grupo"
-
-#: src/users/e-table.c:49
-msgid "GID"
-msgstr "GID"
 
 #: src/users/main.c:95
 msgid "Show All"
@@ -3116,57 +3099,53 @@ msgstr "Falta el soporte para reenvío IP."
 msgid "Lpr based Printing"
 msgstr "Impresión basada en lpr"
 
-#: src/print/e-table.c:41
-msgid "Spool"
-msgstr "Cola"
-
-#: src/print/e-table.c:44
+#: src/print/print.etspec.h:2
 msgid "Paper"
 msgstr "Papel"
 
-#: src/print/e-table.c:45
+#: src/print/print.etspec.h:3
 msgid "Resolution"
 msgstr "Resolución"
 
-#: src/print/e-table.c:46
+#: src/print/print.etspec.h:4
 msgid "Share"
 msgstr "Compartir"
+
+#: src/print/print.etspec.h:5
+msgid "Spool"
+msgstr "Cola"
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
 msgstr "Bus_car"
 
-#: src/users/profile.c:62
-msgid "Profile"
-msgstr "Perfil"
-
-#: src/users/profile.c:515
+#: src/users/profile.c:505
 msgid "Choose the file"
 msgstr "Seleccione el archivo"
 
-#: src/users/profile.c:657
+#: src/users/profile.c:647
 msgid "Profile Editor"
 msgstr "Editor de perfiles"
 
-#: src/users/profile.c:857
+#: src/users/profile.c:847
 msgid "Profile with given name already exists."
 msgstr "Ya existe un perfil con ese nombre."
 
-#: src/users/profile.c:860
+#: src/users/profile.c:850
 msgid "Profile name must not be empty."
 msgstr "El nombre del perfil no debe estar vacío."
 
 #. name
-#: src/users/profile.c:1005
+#: src/users/profile.c:995
 msgid "Default profile"
 msgstr "Perfil predeterminado"
 
-#: src/users/profile.c:1321
+#: src/users/profile.c:1311
 msgid "Can't delete Default"
 msgstr "No se puede borrar el predeterminado"
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1447
+#: src/users/profile.c:1437
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -3186,9 +3165,40 @@ msgid "Identity"
 msgstr "Identidad"
 
 #: src/users/user_settings.c:376
-#, fuzzy
 msgid "Real name:"
-msgstr "Renombrar"
+msgstr "Nombre real:"
+
+#: src/users/net_group.etspec.h:1 src/users/users.etspec.h:3
+msgid "Group"
+msgstr "Grupo"
+
+#: src/users/profiles.etspec.h:1 src/users/users.etspec.h:1
+msgid "Comment"
+msgstr "Comentario"
+
+#: src/users/group.etspec.h:1 src/users/users.etspec.h:2
+msgid "GID"
+msgstr "GID"
+
+#: src/users/users.etspec.h:4
+msgid "Home"
+msgstr "Directorio personal"
+
+#: src/users/users.etspec.h:5
+msgid "Shell"
+msgstr "Interprete de comandos"
+
+#: src/users/users.etspec.h:6
+msgid "UID"
+msgstr "UID"
+
+#: src/users/net_user.etspec.h:1
+msgid "User"
+msgstr "Usuario"
+
+#: src/users/profiles.etspec.h:2
+msgid "Profile"
+msgstr "Perfil"
 
 #: src/shares/shares.desktop.in.in.h:1
 msgid "Directory import & export"
@@ -3197,6 +3207,14 @@ msgstr "Directorio de importación y exportación"
 #: src/shares/shares.desktop.in.in.h:2
 msgid "Shares"
 msgstr "Comparticiones"
+
+#: src/shares/export_clients.etspec.h:1
+msgid "Pattern"
+msgstr "Patrón"
+
+#: src/shares/export_clients.etspec.h:2
+msgid "Write"
+msgstr "Escribible"
 
 #~ msgid "Obtain DNS information from DHCP / BOOTP server"
 #~ msgstr "Obtener la información del DNS de un servidor DHCP / BOOTP"

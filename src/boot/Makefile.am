@@ -40,6 +40,9 @@ toolname = boot
 desktop  = $(toolname).desktop
 security = $(toolname).security
 
+etspecs = boot.etspec
+etspecs_DATA = $(etspecs)
+
 CLEANFILES = \
 	$(desktop) \
 	$(desktop).menu \
@@ -52,7 +55,8 @@ EXTRA_DIST = \
 	$(security).in		\
 	$(desktop).in 		\
 	$(desktop).cc		\
-	$(desktop).menu
+	$(desktop).menu		\
+	$(etspecs)
 
 $(desktop): %.desktop: %.desktop.in
 	sed 's#Icon=.*#Icon='$(pixmapsdir)'/boot.png#' < $< > $@

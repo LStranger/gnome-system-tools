@@ -208,7 +208,7 @@ create_profile_table (XstDialog *xd)
 
 	spec = xst_conf_get_string (tool, "profiles");
 	if (!spec) {
-		spec = xst_load_especs (tool, "profiles");
+		spec = xst_load_etspec (tool, "profiles");
 		xst_conf_set_string (tool, "profiles", spec);
 	}
 	

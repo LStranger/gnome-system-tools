@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = macros interfaces backend archiver pixmaps especs src doc po
+SUBDIRS = macros interfaces backend archiver pixmaps src doc po
 
 @XML_I18N_MERGE_DESKTOP_RULE@
 

@@ -127,8 +127,8 @@ if test "x${prefix}" = "xNONE"; then
   pixmapsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
   AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces")
   interfacesdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
-  AC_DEFINE_UNQUOTED(ESPECS_DIR,"${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/especs")
-  especsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/especs"
+  AC_DEFINE_UNQUOTED(ETSPECS_DIR,"${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/etspecs")
+  etspecsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/etspecs"
 else
   AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/scripts")
   scriptsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/scripts"
@@ -136,8 +136,8 @@ else
   pixmapsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
   AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces")
   interfacesdir="${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
-  AC_DEFINE_UNQUOTED(ESPECS_DIR,"${prefix}/${DATADIRNAME}/${PACKAGE}/especs")
-  especsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/especs"
+  AC_DEFINE_UNQUOTED(ETSPECS_DIR,"${prefix}/${DATADIRNAME}/${PACKAGE}/etspecs")
+  etspecsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/etspecs"
 fi
 
 
@@ -169,7 +169,7 @@ dnl =============================================
 AC_SUBST(scriptsdir)
 AC_SUBST(pixmapsdir)
 AC_SUBST(interfacesdir)
-AC_SUBST(especsdir)
+AC_SUBST(etspecsdir)
 
 AC_OUTPUT([
 Makefile
@@ -180,7 +180,6 @@ interfaces/Makefile
 archiver/Makefile
 archiver/location-manager-capplet/Makefile
 backend/Makefile
-especs/Makefile
 pixmaps/Makefile
 src/Makefile
 src/common/Makefile

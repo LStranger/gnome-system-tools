@@ -240,7 +240,7 @@ create_table (xmlNodePtr root)
 
 	spec = xst_conf_get_string (tool, "spec");
 	if (!spec) {
-		spec = xst_load_especs (tool, "boot");
+		spec = xst_load_etspec (tool, "boot");
 		xst_conf_set_string (tool, "spec", spec);
 	}
 

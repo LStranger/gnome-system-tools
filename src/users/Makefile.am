@@ -50,6 +50,15 @@ toolname = users
 desktop  = $(toolname).desktop
 security = $(toolname).security
 
+etspecs = \
+	group.etspec		\
+	net_group.etspec	\
+	users.etspec		\
+	net_user.etspec		\
+	profiles.etspec
+
+etspecs_DATA = $(etspecs)
+
 CLEANFILES = \
 	$(desktop) \
 	$(desktop).menu \
@@ -62,7 +71,8 @@ EXTRA_DIST = \
 	$(security).in		\
 	$(desktop).in 		\
 	$(desktop).cc		\
-	$(desktop).menu
+	$(desktop).menu		\
+	$(etspecs)
 
 
 $(desktop): %.desktop: %.desktop.in
