@@ -54,7 +54,7 @@ extern GList *user_current_list (void);
 
 extern gboolean group_add (void);
 extern gboolean group_update (void);
-extern gchar *find_new_id (gchar from);
+gchar *find_new_id (gchar from);
 extern gchar *find_new_key (gchar from);
 extern GList *group_fill_members_list (xmlNodePtr node);
 extern void group_fill_all_users_list (GList *member_rows);

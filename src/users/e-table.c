@@ -562,7 +562,6 @@ e_table_del_user (xmlNodePtr node)
 	etm = E_TABLE_MODEL (E_TABLE (user_table)->model);
 
 	e_table_model_row_deleted (etm, row);
-	e_table_model_changed (etm);
 }
 
 void
@@ -588,7 +587,6 @@ e_table_change_user (xmlNodePtr parent, gchar *field, gchar *val)
 	xml_element_set_content (node, val);
 
 	e_table_model_row_changed (etm, row);
-	e_table_model_changed (etm);
 	e_table_set_cursor_row (E_TABLE (user_table), row);
 }
 
@@ -633,7 +631,7 @@ e_table_add_user (gchar *login)
 
 	row = xml_parent_childs (root);
 	e_table_model_append_row (etm, NULL, row);
-	
+
 	e_table_model_changed (etm); 
 	e_table_model_row_inserted (etm, row);
 
@@ -685,7 +683,6 @@ e_table_del_group (xmlNodePtr node)
 	row = group_row;
 
 	e_table_model_row_deleted (etm, row);
-	e_table_model_changed (etm);
 }
 
 
@@ -712,7 +709,6 @@ e_table_change_group (xmlNodePtr parent, gchar *field, gchar *val)
 	xml_element_set_content (node, val);
 
 	e_table_model_row_changed (etm, row);
-	e_table_model_changed (etm);
 	e_table_set_cursor_row (E_TABLE (user_table), row);
 }
 

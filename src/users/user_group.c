@@ -417,7 +417,7 @@ group_update (void)
 	return TRUE;
 }
 
-extern gchar *
+gchar *
 find_new_id (gchar from)
 {
 	GList *tmp_list;
@@ -887,7 +887,13 @@ void
 adv_user_settings_new (void)
 {
 	GtkWidget *w0;
+	gfloat uid;
 
+	/* Set new first available UID */
+	w0 = tool_widget_get ("user_settings_uid");
+	uid = g_strtod (find_new_id (USER), NULL);
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), uid);
+	
 	w0 = tool_widget_get ("user_settings_advanced");
 	gtk_widget_show (w0);
 }
