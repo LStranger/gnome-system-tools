@@ -41,6 +41,7 @@ pixmaps_DATA = \
 	server.png               \
 	settings.png             \
 	shares.png               \
+   sysV.png                 \
 	talk-userlist.png		\
 	test-colors.png		\
 	time.png                 \
