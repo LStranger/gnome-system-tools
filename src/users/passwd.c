@@ -66,7 +66,7 @@ passwd_get_random (void)
 }
 
 extern gchar *
-passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_quality)
+passwd_set (xmlNodePtr node, gchar *new_passwd, gboolean check_quality)
 {
 	gchar salt[9];
 #ifdef HAVE_LIBCRACK
@@ -76,9 +76,6 @@ passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_q
 
 	g_return_val_if_fail (node != NULL, (gchar *) -1);
 	
-	if (strcmp (new_passwd, confirm))
-		return (gchar *) -1;
-
 #ifdef HAVE_LIBCRACK
 	if (check_quality &&
 			(check_err = FascistCheck (new_passwd, CRACK_DICT_PATH)))

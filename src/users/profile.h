@@ -34,7 +34,6 @@ typedef struct
 	guint pwd_maxdays;
 	guint pwd_mindays;
 	guint pwd_warndays;
-	guint pwd_len;
 	guint umin;
 	guint umax;
 	guint gmin;
@@ -43,22 +42,6 @@ typedef struct
 	gchar *shell;
 	gboolean logindefs;
 } Profile;
-
-typedef struct
-{
-	GtkCombo *name;
-	GtkToggleButton *create_home;
-	GnomeFileEntry *home_prefix;
-	GtkCombo *shell;
-	GtkSpinButton *umin;
-	GtkSpinButton *umax;
-	GtkSpinButton *gmin;
-	GtkSpinButton *gmax;
-	GtkSpinButton *pwd_maxdays;
-	GtkSpinButton *pwd_mindays;
-	GtkSpinButton *pwd_warndays;
-	GtkSpinButton *pwd_len;
-} ProfileTab;
 
 typedef struct
 {

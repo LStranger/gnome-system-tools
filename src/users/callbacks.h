@@ -61,11 +61,9 @@ void on_user_settings_gall_select_row (GtkCList *clist, gint row, gint column,
 void on_user_settings_gmember_select_row (GtkCList *clist, gint row, gint column,
 					  GdkEventButton *event, gpointer user_data);
 
-
-void on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data);
-void on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data);
-void on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer user_data);
+void on_user_passwd_change_clicked (GtkButton *button, gpointer user_data);
 void on_user_passwd_random_clicked (GtkButton *button, gpointer user_data);
+void user_password_change (xmlNodePtr user_node);
 
 void on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data);
 void on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data);

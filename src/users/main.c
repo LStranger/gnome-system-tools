@@ -49,10 +49,6 @@ static XstDialogSignal signals[] = {
 	{ "user_settings_dialog",        "delete_event",  on_user_settings_dialog_delete_event },
 	{ "user_settings_dialog",        "show",          on_user_settings_dialog_show },
 	{ "user_settings_dialog",        "clicked",       on_user_settings_clicked },
-	{ "user_passwd_dialog",          "delete_event",  on_user_passwd_dialog_delete_event },
-	{ "user_passwd_ok",              "clicked",       on_user_passwd_ok_clicked },
-	{ "user_passwd_cancel",          "clicked",       on_user_passwd_cancel_clicked },
-	{ "user_passwd_random",          "clicked",       on_user_passwd_random_clicked },
 	{ "group_settings_dialog",       "delete_event",  on_group_settings_dialog_delete_event },
 	{ "group_settings_dialog",       "show",          on_group_settings_dialog_show },
 	{ "group_settings_ok",           "clicked",       on_group_settings_ok_clicked },
@@ -81,6 +77,8 @@ static XstDialogSignal signals[] = {
 	{ "pro_save",                    "clicked",       on_pro_save_clicked },
 	{ "pro_new",                     "clicked",       on_pro_new_clicked },
 	{ "pro_copy",                    "clicked",       on_pro_copy_clicked },
+	{ "user_passwd_change",          "clicked",       on_user_passwd_change_clicked },
+	{ "user_passwd_random",          "clicked",       on_user_passwd_random_clicked },
 	{ NULL }};
 
 static const XstWidgetPolicy policies[] = {

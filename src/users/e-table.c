@@ -460,7 +460,6 @@ cursor_change (ETable *et, gint row, gpointer user_data)
 
 	table = GPOINTER_TO_INT (E_TABLE_MEMORY_CALLBACKS (et->model)->data);
 
-	g_print ("%d\n", table);
 	set_active_table (table);
 	actions_set_sensitive (table, TRUE);
 }

@@ -404,6 +404,23 @@ check_group_gid (xmlNodePtr node, gchar *val)
 	return retval;
 }
 
+static gboolean
+check_passwd (xmlNodePtr user_node)
+{
+	/* Only checks if empty */
+	gchar *buf;
+	gboolean ret;
+
+	ret = FALSE;
+	buf = xst_xml_get_child_content (user_node, "password");
+	if (strlen (buf) > 0)
+		ret = TRUE;
+
+	g_free (buf);
+
+	return ret;
+}
+
 gboolean
 get_min_max (xmlNodePtr db_node, gint *min, gint *max)
 {
@@ -726,7 +743,8 @@ user_update (UserSettings *us)
 			current_table_new_row (us->node, us->table);
 
 			/* Ask for password too */
-			user_passwd_dialog_prepare (us->node);
+			if (!check_passwd (us->node))
+				user_password_change (us->node);
 
 			return ok;
 		}

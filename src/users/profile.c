@@ -29,6 +29,20 @@
 #include "user_group.h"
 #include "callbacks.h"
 
+typedef struct
+{
+	GtkCombo *name;
+	GnomeFileEntry *home_prefix;
+	GtkCombo *shell;
+	GtkSpinButton *umin;
+	GtkSpinButton *umax;
+	GtkSpinButton *gmin;
+	GtkSpinButton *gmax;
+	GtkSpinButton *pwd_maxdays;
+	GtkSpinButton *pwd_mindays;
+	GtkSpinButton *pwd_warndays;
+} ProfileTab;
+
 extern XstTool *tool;
 ProfileTable *profile_table;
 static ProfileTab *pft;
@@ -52,7 +66,6 @@ profile_tab_init (void)
 	
 	pft->name = GTK_COMBO (xst_dialog_get_widget (xd, "pro_name"));
 
-	pft->create_home = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (xd, "pro_create_home"));
 	pft->home_prefix = GNOME_FILE_ENTRY (xst_dialog_get_widget (xd, "pro_home"));
 	pft->shell       = GTK_COMBO (xst_dialog_get_widget (xd, "pro_shell"));
 	
@@ -64,7 +77,6 @@ profile_tab_init (void)
 	pft->pwd_maxdays  = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_maxdays"));
 	pft->pwd_mindays  = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_mindays"));
 	pft->pwd_warndays = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_between"));
-	pft->pwd_len      = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_pwd_len"));
 }
 
 static void
@@ -95,7 +107,6 @@ profile_fill (Profile *pf)
 	gtk_spin_button_set_value (pft->pwd_maxdays,  (gfloat) pf->pwd_maxdays);
 	gtk_spin_button_set_value (pft->pwd_mindays,  (gfloat) pf->pwd_mindays);
 	gtk_spin_button_set_value (pft->pwd_warndays, (gfloat) pf->pwd_warndays);
-	gtk_spin_button_set_value (pft->pwd_len,      (gfloat) pf->pwd_len);
 }
 
 void
@@ -151,7 +162,6 @@ profile_save (gchar *name)
 		pf->pwd_maxdays  = gtk_spin_button_get_value_as_int (pft->pwd_maxdays);
 		pf->pwd_mindays  = gtk_spin_button_get_value_as_int (pft->pwd_mindays);
 		pf->pwd_warndays = gtk_spin_button_get_value_as_int (pft->pwd_warndays);
-		pf->pwd_len      = gtk_spin_button_get_value_as_int (pft->pwd_len);
 	}
 }	
 
@@ -188,7 +198,6 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 		pf->pwd_maxdays = old_pf->pwd_maxdays;
 		pf->pwd_mindays = old_pf->pwd_mindays;
 		pf->pwd_warndays = old_pf->pwd_warndays;
-		pf->pwd_len = old_pf->pwd_len;
 	}
 
 	profile_table_add_profile (pf, select);
@@ -257,7 +266,6 @@ profile_get_default (void)
 	pf->pwd_maxdays = logindefs.passwd_max_day_use;
 	pf->pwd_mindays = logindefs.passwd_min_day_use;
 	pf->pwd_warndays = logindefs.passwd_warning_advance_days;
-	pf->pwd_len = logindefs.passwd_min_length;
 	pf->logindefs = TRUE;
 
 	profile_table_add_profile (pf, TRUE);
@@ -270,7 +278,7 @@ profile_table_from_xml (xmlNodePtr root)
 	Profile *pf;
 	gchar *profile_tags[] = {
 		"home_prefix", "shell", "pwd_maxdays",
-		"pwd_mindays", "pwd_len", "pwd_warndays", "umin",
+		"pwd_mindays", "pwd_warndays", "umin",
 		"umax", "gmin", "gmax", "name", NULL
 	};
 	gchar *tag;
@@ -299,7 +307,6 @@ profile_table_from_xml (xmlNodePtr root)
 				case  1: pf->shell        = xst_xml_element_get_content (n0); break;
 				case  2: pf->pwd_maxdays  = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  3: pf->pwd_mindays  = my_atoi (xst_xml_element_get_content (n0)); break;
-				case  4: pf->pwd_len      = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  5: pf->pwd_warndays = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  6: pf->umin         = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  7: pf->umax         = my_atoi (xst_xml_element_get_content (n0)); break;
@@ -317,6 +324,47 @@ profile_table_from_xml (xmlNodePtr root)
 }
 
 static void
+save_logindefs_xml (Profile *pf, xmlNodePtr root)
+{
+	gint i, val;
+	xmlNodePtr node;
+	gchar *buf;
+	gchar *nodes[] = { "new_user_min_id", "new_user_max_id", "new_group_min_id",
+			   "new_group_max_id", "passwd_max_day_use", "passwd_min_day_use",
+			   "passwd_warning_advance_days", NULL };
+
+	/* FIXME: */
+	root = xst_xml_doc_get_root (tool->config);
+	root = xst_xml_element_find_first (root, "logindefs");
+
+	for (i = 0; nodes[i]; i++)
+	{
+		switch (i)
+		{
+		case 0: val = pf->umin; break;
+		case 1: val = pf->umax; break;
+		case 2: val = pf->gmin; break;
+		case 3: val = pf->gmax; break;
+		case 4: val = pf->pwd_maxdays; break;
+		case 5: val = pf->pwd_mindays; break;
+		case 6: val = pf->pwd_warndays; break;
+		default:
+			g_warning ("save_logindefs_xml: Shouldn't be here");
+			continue;
+		}
+
+		buf = g_strdup_printf ("%d", val);
+
+		node = xst_xml_element_find_first (root, nodes[i]);
+		if (!node)
+			node = xst_xml_element_add (root, nodes[i]);
+
+		xst_xml_element_set_content (node, buf);
+		g_free (buf);
+	}
+}
+
+static void
 save_xml (gpointer key, gpointer value, gpointer user_data)
 {
 	xmlNodePtr root, node;
@@ -324,14 +372,17 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 	gint i, val;
 	gchar *buf;
 	gchar *nodes[] = {
-		"pwd_maxdays", "pwd_mindays", "pwd_warndays", "pwd_len",
+		"pwd_maxdays", "pwd_mindays", "pwd_warndays",
 		"umin", "umax", "gmin", "gmax", NULL};
 
 	root = user_data;
 	pf = value;
 
 	if (pf->logindefs) /* Logindefs is "fake" profile. */
+	{
+		save_logindefs_xml (pf, root);
 		return;
+	}
 
 	node = xst_xml_element_add (root, "profile");
 
@@ -346,7 +397,6 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 		case 0: val = pf->pwd_maxdays;  break;
 		case 1: val = pf->pwd_mindays;  break;
 		case 2: val = pf->pwd_warndays; break;
-		case 3: val = pf->pwd_len;      break;
 		case 4: val = pf->umin;         break;
 		case 5: val = pf->umax;         break;
 		case 6: val = pf->gmin;         break;

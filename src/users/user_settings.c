@@ -357,3 +357,102 @@ user_settings_helper (UserSettings *us)
 	buf = g_strdup_printf ("%s%s", pf->home_prefix, gtk_entry_get_text (us->basic->name));
 	gtk_entry_set_text (us->basic->home, buf);
 }
+
+/* Start of Password request dialog. */
+
+typedef struct {
+	gpointer function;
+	gpointer data;
+	GtkEntry *new;
+	GtkEntry *confirm;
+} callback_info;
+
+static void
+dialog_string_callback (GnomeMessageBox *mbox, gint button, callback_info *data)
+{
+	gchar *new, *confirm;
+	gchar *s = NULL;
+	GnomeStringCallback func = (GnomeStringCallback)data->function;
+
+	if (button == 0)
+	{
+		new = gtk_entry_get_text (data->new);
+		confirm = gtk_entry_get_text (data->confirm);
+
+		if (strlen (new) > 0 && !strcmp (new, confirm))
+			s = g_strdup (new);
+		else
+		{
+			GtkWidget *d;
+			d = gnome_error_dialog (N_("Passwords doesn't match"));
+			gnome_dialog_run_and_close (GNOME_DIALOG (d));
+		}
+	}
+	
+	(* func)(s, data->data);
+}
+
+GtkWidget *
+password_request_dialog (const gchar *prompt, const guint8 min_length,
+			 GnomeStringCallback callback, gpointer data,
+			 GtkWindow *parent)
+{
+	GtkWidget *mbox;
+	callback_info *info;
+	GtkWidget *new, *confirm, *table, *label;
+
+	mbox = gnome_message_box_new (prompt, GNOME_MESSAGE_BOX_QUESTION,
+				      GNOME_STOCK_BUTTON_OK,
+				      GNOME_STOCK_BUTTON_CANCEL,
+				      NULL);
+	gnome_dialog_set_default (GNOME_DIALOG (mbox), 0);
+
+	table = gtk_table_new (2, 2, FALSE);
+	gtk_table_set_row_spacings (GTK_TABLE (table), GNOME_PAD_BIG);
+	gtk_table_set_col_spacings (GTK_TABLE (table), GNOME_PAD_BIG);
+
+	gtk_box_pack_end (GTK_BOX (GNOME_DIALOG (mbox)->vbox),
+			  table, FALSE, FALSE, GNOME_PAD_SMALL);
+
+	label = gtk_label_new (N_("New:"));
+	gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 0, 1);
+	gtk_widget_show (label);
+
+	new = gtk_entry_new ();
+	gtk_entry_set_visibility (GTK_ENTRY (new), FALSE);
+	gtk_table_attach_defaults (GTK_TABLE(table), new, 1, 2, 0, 1);
+
+	label = gtk_label_new (N_("Confirm:"));
+	gtk_table_attach_defaults (GTK_TABLE(table), label, 0, 1, 1, 2);
+	gtk_widget_show (label);
+	
+	confirm = gtk_entry_new ();
+	gtk_entry_set_visibility (GTK_ENTRY (confirm), FALSE);
+	gtk_table_attach_defaults (GTK_TABLE(table), confirm, 1, 2, 1, 2);
+
+	info = g_new (callback_info, 1);
+
+	info->function = callback;
+	info->data = data;
+	info->new = GTK_ENTRY (new);
+	info->confirm = GTK_ENTRY (confirm);
+
+	gtk_signal_connect_full (GTK_OBJECT (mbox), "clicked",
+				 GTK_SIGNAL_FUNC (dialog_string_callback),
+				 NULL,
+				 info,
+				 (GtkDestroyNotify)g_free,
+				 FALSE, FALSE);
+	if (parent != NULL)
+		gnome_dialog_set_parent (GNOME_DIALOG (mbox), parent);
+
+	gtk_widget_grab_focus (new);
+	gtk_widget_show (new);
+	gtk_widget_show (confirm);
+	gtk_widget_show (table);
+	gtk_widget_show (mbox);
+
+	return mbox;
+}
+
+/* End of Password request dialog. */

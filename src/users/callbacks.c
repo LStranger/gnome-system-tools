@@ -178,9 +178,6 @@ on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 			xst_xml_element_destroy (node);
 
 		actions_set_sensitive (TABLE_GROUP, FALSE);
-		gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-													"network_settings_frame")),
-						 _("Settings for the selected user and group"));
 	}
 }
 
@@ -456,104 +453,84 @@ on_user_settings_gall_select_row (GtkCList *clist, gint row, gint column, GdkEve
 		gtk_widget_set_sensitive (w0, TRUE);
 }
 
-/* Password settings callbacks */
-
 static void
-user_passwd_dialog_close (void)
+passwd_change (gchar *string, gpointer user_data)
 {
-	GtkWidget *w0;
+	GtkToggleButton *quality;
+	gchar *err;
+	xmlNodePtr node;
+	
+	if (!string)
+		return; /* Cancel clicked */
 
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
-	gtk_widget_hide (w0);
-	gtk_object_remove_data (GTK_OBJECT (w0), "name");
+	node = user_data;
+
+	quality = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_quality"));
+	
+	err = passwd_set (node, string, gtk_toggle_button_get_active (quality));
+	switch ((int) err)
+	{
+	case 0: /*	 The password is OK and has been set */
+		xst_dialog_modify (tool->main_dialog);
+		break;
+
+	default: /* Quality check problems, with err pointing to a string to the error */
+	{
+		GtkWidget *parent, *d;
+		gchar *msg;
+		
+		msg = g_strdup_printf (
+			_("Bad password: %s.\nPlease try with a new password."),
+			err);
+		
+		parent = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
+		d = gnome_error_dialog_parented (msg, GTK_WINDOW (parent));
+		gnome_dialog_run (GNOME_DIALOG (d));
+		g_free (msg);
+		break;
+	}
+	}
 }
 
 void
-on_user_passwd_cancel_clicked (GtkButton *button, gpointer user_data)
+on_user_passwd_change_clicked (GtkButton *button, gpointer user_data)
 {
-	user_passwd_dialog_close ();
+	user_password_change (get_selected_node ());
 }
 
 void
-on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer user_data)
+user_password_change (xmlNodePtr user_node)
 {
-	user_passwd_dialog_close ();
+	GtkWidget *d;
+	GtkWidget *parent;
+
+	parent = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
+
+	d = password_request_dialog (N_("Insert password"), 5,
+				     passwd_change, user_node,
+				     GTK_WINDOW (parent));
+
+	gnome_dialog_run (GNOME_DIALOG (d));
 }
 
 void
 on_user_passwd_random_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkEntry *entry1, *entry2;
 	GtkWidget *win;
 	GnomeDialog *dialog;
 	gchar *txt, *random_passwd;
 
-	win = xst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
-	entry1 = GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_passwd_new"));
-	entry2 = GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_passwd_confirmation"));
+	win = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 
 	random_passwd = passwd_get_random ();
-
-	my_gtk_entry_set_text (entry1, random_passwd);
-	my_gtk_entry_set_text (entry2, random_passwd);
 
 	txt = g_strdup_printf (_("Password set to \"%s\"."), random_passwd);
 	dialog = GNOME_DIALOG (gnome_ok_dialog_parented (txt, GTK_WINDOW (win)));
 	gnome_dialog_run (dialog);
 	g_free (txt);
 	g_free (random_passwd);
-}
 
-void
-on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
-{
-	GtkEntry *entry1, *entry2;
-	GtkToggleButton *quality;
-	gchar *new_passwd, *confirm;
-	GtkWidget *win;
-	GnomeDialog *dialog;
-	gchar *msg, *err;
-	xmlNodePtr node;
-
-	entry1 = GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_passwd_new"));
-	entry2 = GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_passwd_confirmation"));
-	quality = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_quality"));
-	win = xst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
-
-	node = gtk_object_get_data (GTK_OBJECT (win), "name");
-
-	new_passwd = gtk_entry_get_text (entry1);
-	confirm = gtk_entry_get_text (entry2);
-
-        /* Empty old contnents */
-
-	err = passwd_set (node, new_passwd, confirm, gtk_toggle_button_get_active (quality));
-	switch ((int) err)
-	{
-		case 0: /* The password is OK and has been set */
-			gtk_widget_hide (win);
-			xst_dialog_modify (tool->main_dialog);
-			break;
-		case -1: /* Bad confirmation */
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					(_("The password and its confirmation\nmust match."),
-					 GTK_WINDOW (win)));
-
-			gnome_dialog_run (dialog);
-			break;
-		default: /* Quality check problems, with err pointing to a string to the error */
-			msg = g_strdup_printf (
-					_("Bad password: %s.\nPlease try with a new password."),
-					err);
-
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented (msg, GTK_WINDOW (win)));
-			g_free (msg);
-			gnome_dialog_run (dialog);
-			break;
-	}
-
-	my_gtk_entry_set_text (entry1, "");
-	my_gtk_entry_set_text (entry2, "");
+	xst_dialog_modify (tool->main_dialog);
 }
 
 /* Group settings callbacks */

@@ -258,8 +258,6 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 
 	root = xst_xml_doc_get_root (tool->config);
 
-	transfer_logindefs_to_xml (root);
-
 	profile_table_to_xml (root);
 }
 

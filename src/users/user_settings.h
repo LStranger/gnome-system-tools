@@ -77,4 +77,9 @@ void user_settings_prepare (xmlNodePtr user_node);
 void user_settings_destroy (UserSettings *us);
 void user_settings_helper (UserSettings *us);
 
+GtkWidget *
+password_request_dialog (const gchar *prompt, const guint8 min_length,
+			 GnomeStringCallback callback, gpointer data,
+			 GtkWindow *parent);
+
 #endif /* USER_SETTINGS_H */
