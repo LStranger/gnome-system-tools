@@ -392,7 +392,7 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 					GST_HIG_MESSAGE_ERROR,
 					_("Error deleting boot image"),
 					_("Without at least one boot image "
-					  "your system will not start."),
+					  "your computer will not start"),
 					GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					NULL);
 		gtk_dialog_run (GTK_DIALOG (d));
