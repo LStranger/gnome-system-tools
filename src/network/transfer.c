@@ -255,7 +255,7 @@ static void
 transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 {
 	int i, j, row;
-	int col0_added;
+	gboolean col0_added;
 	gchar *col0, *col1;
 	gchar **col1_elem;
 	xmlNodePtr node, node2;
@@ -281,14 +281,14 @@ transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 			/* Enclosing element */
 			node = xml_element_add (root, transfer_string_clist2_table [i].xml_path);
 
-			xml_element_set_bool_attr (node, "enabled",
-						   get_clist_checkmark (GTK_CLIST (w), row, 0));
+/*			xml_element_set_bool_attr (node, "enabled",
+			get_clist_checkmark (GTK_CLIST (w), row, 0));
 
-			d(g_print ("name: (%d) %s\n", xml_element_get_bool_attr (node, "enabled"), node->name));
+			d(g_print ("name: (%d) %s\n", xml_element_get_bool_attr (node, "enabled"), node->name));*/
 
 			col1_elem = g_strsplit (col1, " ", 0);
 
-			for (j = 0, col0_added = 0; col1_elem[j]; j++)
+			for (j = 0, col0_added = FALSE; col1_elem[j]; j++)
 			{
 				if (!strlen (col1_elem[j]))
 					continue;
@@ -296,6 +296,7 @@ transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 				{
 					node2 = xml_element_add (node, transfer_string_clist2_table [i].xml_path_field_1);
 					xml_element_set_content (node2, col0);
+					col0_added = TRUE;
 				}
 				node2 = xml_element_add (node, transfer_string_clist2_table [i].xml_path_field_2);
 				xml_element_set_content (node2, col1_elem[j]);
