@@ -45,6 +45,7 @@
 #include "passwd.h"
 
 extern XstTool *tool;
+GList *groups_list = NULL;
 
 /* Local globals */
 /* Static prototypes */
@@ -55,6 +56,95 @@ static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 
 /* Global functions */
+
+void
+option_menu_add_profiles (GtkWidget *menu)
+{
+	GtkWidget *menu_item;
+	GtkWidget *menu_shell = gtk_menu_new ();
+	xmlNodePtr node = get_root_node (NODE_PROFILE);
+	xmlNodePtr default_node;
+	gchar *profile_name;
+	gint i = 0;
+	gint index;
+
+	for (node = xst_xml_element_find_first (node, "profile");
+	     node != NULL;
+	     node = xst_xml_element_find_next (node, "profile"))
+	{
+		profile_name = xst_xml_get_child_content (node, "name");
+
+		if (strcmp (profile_name, "Default") == 0) {
+			index = i;
+			default_node = node;
+		}
+		menu_item = gtk_menu_item_new_with_label (profile_name);
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu_shell), menu_item);
+		g_signal_connect (G_OBJECT (menu_item), "activate", G_CALLBACK (on_user_settings_profile_changed), node);
+
+		i++;
+	}
+
+	gtk_widget_show_all (menu_shell);
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (menu), menu_shell);
+		     
+	/* we set the option menu to the 'Default' option */
+	gtk_option_menu_set_history (GTK_OPTION_MENU (menu), index);
+	user_set_profile (default_node);
+}
+
+void
+combo_add_shells (GtkWidget *combo)
+{
+	xmlNodePtr shells = xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "shelldb");
+	xmlNodePtr node;
+	GList *shell_list = NULL;
+
+	g_return_if_fail (combo != NULL);
+	g_return_if_fail (shells != NULL);
+	
+	for (node = xst_xml_element_find_first (shells, "shell");
+	     node != NULL;
+	     node = xst_xml_element_find_next (node, "shell"))
+		shell_list = g_list_prepend (shell_list, xst_xml_element_get_content (node));
+
+	shell_list = g_list_sort (shell_list, my_strcmp);
+
+	gtk_combo_set_popdown_strings (GTK_COMBO (combo), shell_list);
+
+	g_list_free (shell_list);
+}
+
+void
+option_menu_add_groups (GtkWidget *option_menu, gboolean add_user_group)
+{
+	GtkWidget *menu_shell = gtk_menu_new ();
+	xmlNodePtr groups = get_root_node (NODE_GROUP);
+	GList *element;
+
+	g_return_if_fail (option_menu != NULL);
+	g_return_if_fail (groups != NULL);
+
+        groups_list = get_list_from_node ("name", NODE_GROUP);
+
+	/* we add the '$user' variable, so the user
+	 * can choose to create the user's group */
+	if (add_user_group)
+		groups_list = g_list_prepend (groups_list, "$user");
+
+	groups_list = g_list_sort (groups_list, my_strcmp);
+
+	element = g_list_first (groups_list);
+	do {
+		GtkWidget *menu_item = gtk_menu_item_new_with_label (element->data);
+		gtk_widget_show (menu_item);
+
+		gtk_menu_shell_append (GTK_MENU_SHELL (menu_shell), menu_item);
+		element = g_list_next (element);
+	} while (element != NULL);
+
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu_shell);
+}
 
 void
 show_error_message (gchar *parent_window, gchar *message)
@@ -371,15 +461,9 @@ my_g_list_remove_duplicates (GList *list1, GList *list2)
 }
 
 gchar *
-find_new_id (xmlNodePtr parent)
+find_new_id (xmlNodePtr parent, xmlNodePtr profile)
 {
-	xmlNodePtr profiledb = xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "profiledb");
-	xmlNodePtr profile = xst_xml_element_find_first (profiledb, "profile");
-	gint umin = g_strtod ((gchar *) xst_xml_get_child_content (profile, "umin"), NULL);
-	gint umax = g_strtod ((gchar *) xst_xml_get_child_content (profile, "umax"), NULL);
-	gint gmin = g_strtod ((gchar *) xst_xml_get_child_content (profile, "gmin"), NULL);
-	gint gmax = g_strtod ((gchar *) xst_xml_get_child_content (profile, "gmax"), NULL);
-
+	gint umin, umax, gmin, gmax;
 	gchar *field, *buf, *key;
 	guint id;
 	guint min, max;
@@ -388,6 +472,18 @@ find_new_id (xmlNodePtr parent)
 
 	g_return_val_if_fail (parent != NULL, NULL);
 	
+	if (profile != NULL) {
+		umin = g_strtod ((gchar *) xst_xml_get_child_content (profile, "umin"), NULL);
+		umax = g_strtod ((gchar *) xst_xml_get_child_content (profile, "umax"), NULL);
+		gmin = g_strtod ((gchar *) xst_xml_get_child_content (profile, "gmin"), NULL);
+		gmax = g_strtod ((gchar *) xst_xml_get_child_content (profile, "gmax"), NULL);
+	} else {
+		umin = 0;
+		umax = 60000;
+		gmin = 0;
+		gmax = 60000;
+	}
+
 	if (!strcmp (parent->name, "userdb")) {
 		key = g_strdup ("user");
 		field = g_strdup ("uid");

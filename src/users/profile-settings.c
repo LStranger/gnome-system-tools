@@ -29,7 +29,8 @@
 #include "profile-settings.h"
 
 extern XstTool *tool;
-GList *groups_list = NULL;
+/*GList *groups_list = NULL;*/
+extern GList *groups_list;
 
 ProfileWidget profile_widgets [] = {
 	/* widget name                    xml label         widget type */
@@ -139,60 +140,6 @@ profile_settings_check (void)
 			 return _("The profile must have a default shell");
 	   
 	   return NULL;
-}
-
-void
-profile_settings_add_shells (void)
-{
-	GtkWidget *combo = xst_dialog_get_widget (tool->main_dialog, "profile_settings_shell");
-	xmlNodePtr shells = xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "shelldb");
-	xmlNodePtr node;
-	GList *shell_list = NULL;
-
-	g_return_if_fail (combo != NULL);
-	g_return_if_fail (shells != NULL);
-	
-	for (node = xst_xml_element_find_first (shells, "shell");
-	     node != NULL;
-	     node = xst_xml_element_find_next (node, "shell"))
-		shell_list = g_list_prepend (shell_list, xst_xml_element_get_content (node));
-
-	shell_list = g_list_sort (shell_list, my_strcmp);
-
-	gtk_combo_set_popdown_strings (GTK_COMBO (combo), shell_list);
-
-	g_list_free (shell_list);
-}
-
-void
-profile_settings_add_groups (void)
-{
-	GtkWidget *option_menu = xst_dialog_get_widget (tool->main_dialog, "profile_settings_group");
-	GtkWidget *menu_shell = gtk_menu_new ();
-	xmlNodePtr groups = get_root_node (NODE_GROUP);
-	GList *element;
-
-	g_return_if_fail (option_menu != NULL);
-	g_return_if_fail (groups != NULL);
-
-        groups_list = get_list_from_node ("name", NODE_GROUP);
-
-	/* we add the '$user' variable, so the user
-	 * can choose to create the user's group */
-	groups_list = g_list_prepend (groups_list, "$user");
-
-	groups_list = g_list_sort (groups_list, my_strcmp);
-
-	element = g_list_first (groups_list);
-	do {
-		GtkWidget *menu_item = gtk_menu_item_new_with_label (element->data);
-		gtk_widget_show (menu_item);
-
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu_shell), menu_item);
-		element = g_list_next (element);
-	} while (element != NULL);
-
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu_shell);
 }
 
 void

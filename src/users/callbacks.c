@@ -190,9 +190,23 @@ void
 on_profile_settings_dialog_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *profile_window = xst_dialog_get_widget (tool->main_dialog, "profiles_dialog");
+	GtkWidget *option_menu = xst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
 	
 	gtk_dialog_run (GTK_DIALOG (profile_window));
 	gtk_widget_hide (profile_window);
+}
+
+void
+on_profile_settings_users_dialog_clicked (GtkButton *button, gpointer user_data)
+{
+	GtkWidget *profile_window = xst_dialog_get_widget (tool->main_dialog, "profiles_dialog");
+	GtkWidget *option_menu = xst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
+	
+	gtk_dialog_run (GTK_DIALOG (profile_window));
+	gtk_widget_hide (profile_window);
+
+	gtk_option_menu_remove_menu (GTK_OPTION_MENU (option_menu));
+	option_menu_add_profiles (option_menu);
 }
 
 /* Groups tab */
@@ -372,21 +386,33 @@ on_user_settings_passwd_random_new (GtkButton *button, gpointer data)
 	gchar *passwd;
 
 	passwd = passwd_get_random ();
-	gtk_label_set_text (GTK_LABEL (xst_dialog_get_widget (tool->main_dialog, "user_passwd_random_label")), passwd);
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_passwd_random_entry")), passwd);
 	g_free (passwd);
 }
 
 void
 on_user_settings_passwd_toggled (GtkToggleButton *toggle, gpointer data)
 {
-	GtkNotebook *notebook = GTK_NOTEBOOK (xst_dialog_get_widget (tool->main_dialog, "user_passwd_notebook"));
+	GtkWidget *user_passwd_random_new = xst_dialog_get_widget (tool->main_dialog, "user_passwd_random_new");
+	GtkWidget *user_passwd_random_entry = xst_dialog_get_widget (tool->main_dialog, "user_passwd_random_entry");
+	GtkWidget *user_passwd_entry1 = xst_dialog_get_widget (tool->main_dialog, "user_passwd_entry1");
+	GtkWidget *user_passwd_entry2 = xst_dialog_get_widget (tool->main_dialog, "user_passwd_entry2");
 	GtkToggleButton *pwd_manual = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_manual"));
 	
 
 	if (gtk_toggle_button_get_active (pwd_manual)) {
-		gtk_notebook_set_current_page (notebook, 0);
+		gtk_widget_set_sensitive (user_passwd_random_new, FALSE);
+		gtk_widget_set_sensitive (user_passwd_random_entry, FALSE);
+		gtk_widget_set_sensitive (user_passwd_entry1, TRUE);
+		gtk_widget_set_sensitive (user_passwd_entry2, TRUE);
+		gtk_entry_set_text (GTK_ENTRY (user_passwd_random_entry), "");
 	} else {
-		gtk_notebook_set_current_page (notebook, 1);
+		gtk_widget_set_sensitive (user_passwd_random_new, TRUE);
+		gtk_widget_set_sensitive (user_passwd_random_entry, TRUE);
+		gtk_widget_set_sensitive (user_passwd_entry1, FALSE);
+		gtk_widget_set_sensitive (user_passwd_entry2, FALSE);
+		gtk_entry_set_text (GTK_ENTRY (user_passwd_entry1), "");
+		gtk_entry_set_text (GTK_ENTRY (user_passwd_entry2), "");
 		on_user_settings_passwd_random_new (NULL, NULL);
 	}
 }
@@ -394,7 +420,9 @@ on_user_settings_passwd_toggled (GtkToggleButton *toggle, gpointer data)
 void
 on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
 {
-	gchar *profile = data;
+	xmlNodePtr profile = data;
+
+	user_set_profile (profile);
 }
 
 /* Group settings callbacks */
@@ -480,9 +508,13 @@ void
 on_profile_new_clicked (GtkButton *button, gpointer data)
 {
 	GtkWidget *dialog = xst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
+	GtkWidget *groups_option_menu = xst_dialog_get_widget (tool->main_dialog, "profile_settings_group");
+	GtkWidget *shells_combo = xst_dialog_get_widget (tool->main_dialog, "profile_settings_shell");
 
-	profile_settings_add_shells ();
-	profile_settings_add_groups ();
+	combo_add_shells (shells_combo);
+	option_menu_add_groups (groups_option_menu, TRUE);
+
+	gtk_window_set_title (GTK_WINDOW (dialog), _("Create New profile"));
 
 	gtk_widget_show (dialog);
 }
@@ -491,6 +523,8 @@ on_profile_new_clicked (GtkButton *button, gpointer data)
 void
 on_profile_settings_clicked (GtkButton *button, gpointer data)
 {
+	GtkWidget *groups_option_menu = xst_dialog_get_widget (tool->main_dialog, "profile_settings_group");
+	GtkWidget *shells_combo = xst_dialog_get_widget (tool->main_dialog, "profile_settings_shell");
 	GtkWidget *dialog =xst_dialog_get_widget (tool->main_dialog, "profile_settings_dialog");
 	GtkWidget *profiles_table = xst_dialog_get_widget (tool->main_dialog, "profiles_table");
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (profiles_table));
@@ -498,16 +532,23 @@ on_profile_settings_clicked (GtkButton *button, gpointer data)
 	GtkTreeIter iter;
 	GtkTreePath *path;
 	xmlNodePtr node;
+	gchar *profile_name, *window_title;
 
 	gtk_tree_view_get_cursor (GTK_TREE_VIEW (profiles_table), &path, NULL);
 	gtk_tree_model_get_iter (model, &iter, path);
 	gtk_tree_model_get (model, &iter, COL_PROFILE_POINTER, &node, -1);
 
-	profile_settings_add_shells ();
-	profile_settings_add_groups ();
+	combo_add_shells (shells_combo);
+	option_menu_add_groups (groups_option_menu, TRUE);
 	profile_settings_set_data (node);
 
 	g_object_set_data (G_OBJECT (dialog), "data", node);
+
+	profile_name = xst_xml_get_child_content (node, "name");
+	window_title = g_strdup_printf (_("Settings for profile %s"), profile_name);
+	gtk_window_set_title (GTK_WINDOW (dialog), window_title);
+	g_free (profile_name);
+	g_free (window_title);
 
 	gtk_widget_show (dialog);
 }

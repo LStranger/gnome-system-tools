@@ -37,5 +37,4 @@ typedef struct {
 void       profile_settings_clear_dialog  (void);
 void       profile_settings_save_data     (xmlNodePtr);
 gchar*     profile_settings_check         (void);
-void       profile_settings_add_shells    (void);
 gboolean   profile_delete                 (xmlNodePtr);

@@ -64,7 +64,7 @@ gboolean get_min_max (xmlNodePtr db_node, gint *min, gint *max);
 xmlNodePtr get_corresp_field (xmlNodePtr node);
 xmlNodePtr get_node_by_data (xmlNodePtr dbnode, const gchar *field, const gchar *fdata);
 GList *my_g_list_remove_duplicates (GList *list1, GList *list2);
-gchar *find_new_id (xmlNodePtr parent);
+gchar *find_new_id (xmlNodePtr parent, xmlNodePtr profile);
 gchar *find_new_key (xmlNodePtr parent);
 
 /* Helpers */
@@ -77,6 +77,9 @@ gchar *user_query_string_get (void);
 gint my_strcmp (gconstpointer, gconstpointer);
 
 void		show_error_message	(gchar *,gchar *);
+void            combo_add_shells        (GtkWidget*);
+void            option_menu_add_groups  (GtkWidget*, gboolean);
+void            option_menu_add_profiles (GtkWidget*);
 
 #endif /* USER_GROUP_H */
 

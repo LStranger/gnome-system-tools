@@ -60,7 +60,7 @@ static XstDialogSignal signals[] = {
 	{ "user_passwd_random_new",		"clicked",		G_CALLBACK (on_user_settings_passwd_random_new) },
 	{ "user_passwd_entry1",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
 	{ "user_passwd_entry2",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
-/*	{ "user_settings_profile_button",	"clicked",		G_CALLBACK (on_profile_settings_dialog_clicked) },*/
+	{ "user_settings_profile_button",	"clicked",		G_CALLBACK (on_profile_settings_users_dialog_clicked) },
 	
 	/* Group settings dialog callbacks */
 	{ "group_settings_dialog",		"delete_event",  	G_CALLBACK (on_group_settings_dialog_delete_event) },
@@ -96,16 +96,15 @@ static XstDialogSignal signals[] = {
 static const XstWidgetPolicy policies[] = {
 	/* Name                     Basic                        Advanced                   Root   User */
 	{ "user_new",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+/*	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },*/
 	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "user_settings",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 /* Hiding user_profiles for now, until next release when profiles UI is given a face-lift */
-	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_HIDDEN,    TRUE,  TRUE  },
+	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "groups_table",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "group_new",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "group_delete",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "group_settings",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "group_settings_name_label", XST_WIDGET_MODE_SENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE, TRUE  },
 	{ "profile_new",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "profile_delete",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "profile_settings",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },

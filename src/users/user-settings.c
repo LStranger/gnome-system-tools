@@ -44,9 +44,8 @@
 #define MAX_TOKENS 8
 
 extern XstTool *tool;
-
-GtkWidget *user_settings_all = NULL;
-GtkWidget *user_settings_members = NULL;
+extern GList *groups_list;
+xmlNodePtr user_profile;
 
 static void
 create_groups_lists (xmlNodePtr node, GList **user_settings_all_list, GList **user_settings_members_list)
@@ -58,12 +57,15 @@ create_groups_lists (xmlNodePtr node, GList **user_settings_all_list, GList **us
 static void
 create_groups_gtk_trees (void)
 {
+	GtkWidget *user_settings_all = xst_dialog_get_widget (tool->main_dialog, "user_settings_all");
+	GtkWidget *user_settings_members = xst_dialog_get_widget (tool->main_dialog, "user_settings_members");
 	GtkWidget *add_button, *remove_button;
 	GtkTreeSelection *selection;
+	GtkSizeGroup *sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 	
-	/* We create the widgets, connect signals and attach data if they haven't been created already */
-	if (user_settings_all == NULL) {
-		user_settings_all = create_gtk_tree_list (xst_dialog_get_widget (tool->main_dialog, "user_settings_all"));
+	/* connect signals and attach data if they haven't been created already */
+	if (g_object_get_data (G_OBJECT (user_settings_all), "button") == NULL) {
+		create_gtk_tree_list (user_settings_all);
 		g_object_set_data (G_OBJECT (user_settings_all), "button", "user_settings_add");
 		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (user_settings_all));
 		g_signal_connect (G_OBJECT (selection),
@@ -71,7 +73,7 @@ create_groups_gtk_trees (void)
 		                  G_CALLBACK (on_list_select_row),
 		                  NULL);
 
-		user_settings_members = create_gtk_tree_list (xst_dialog_get_widget (tool->main_dialog, "user_settings_members"));
+		create_gtk_tree_list (user_settings_members);
 		g_object_set_data (G_OBJECT (user_settings_members), "button", "user_settings_remove");
 		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (user_settings_members));
 		g_signal_connect (G_OBJECT (selection),
@@ -87,6 +89,10 @@ create_groups_gtk_trees (void)
 		remove_button = xst_dialog_get_widget (tool->main_dialog, "user_settings_remove");
 		g_object_set_data (G_OBJECT (remove_button), "in", user_settings_members);
 		g_object_set_data (G_OBJECT (remove_button), "out", user_settings_all);
+
+		/* Add the scrolled windows that contain the trees in the same GtkSizeGroup */
+		gtk_size_group_add_widget (sizegroup, xst_dialog_get_widget (tool->main_dialog, "group_settings_all_container"));
+		gtk_size_group_add_widget (sizegroup, xst_dialog_get_widget (tool->main_dialog, "group_settings_members_container"));
 	}
 }
 
@@ -144,138 +150,66 @@ delete_user (xmlNodePtr node)
 	return FALSE;
 }
 
-static void
-shells_combo_setup ()
-{
-	xmlNodePtr root, node;
-	GtkWidget *combo;
-	GList *shells = NULL;
-	gchar *shell;
-
-	root = xst_xml_doc_get_root (tool->config);
-	root = xst_xml_element_find_first (root, "shelldb");
-	combo = xst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-
-	if (!root)
-		return;
-	
-	for (node = xst_xml_element_find_first (root, "shell"); node != NULL; node = xst_xml_element_find_next (node, "shell"))
-	{
-		shell = xst_xml_element_get_content (node);
-		shells = g_list_append (shells, shell);
-	}
-
-	gtk_combo_set_popdown_strings (GTK_COMBO (combo), shells);
-	g_list_free (shells);
-}
-
-static void
-groups_combo_setup (gchar *entry)
-{
-	GList *groups;
-	GtkWidget *combo = xst_dialog_get_widget (tool->main_dialog, "user_settings_group_combo");
-	gboolean found = FALSE;
-	ug_data *ud;
-
-	ud = g_object_get_data (G_OBJECT (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog")), "data");
-
-	groups = get_list_from_node ("name", NODE_GROUP);
-	
-	g_return_if_fail (groups != NULL);
-	
-	if (entry) {
-		GList *list = groups;
-		while (list && !found) {
-			if (strcmp (list->data, entry) == 0) {
-				found = TRUE;
-				break;
-			}
-			list = list->next;
-		}
-		
-		if (!found) {
-			groups = g_list_prepend (groups, entry);
-		}
-	}
-	
-	gtk_combo_set_popdown_strings (GTK_COMBO (combo), groups);
-	gtk_combo_set_value_in_list (GTK_COMBO (combo), TRUE, FALSE);
-	
-	g_list_free (groups);
-}
-
 void
-user_set_profile (const gchar *profile)
+user_set_profile (xmlNodePtr profile)
 {
-	GtkWidget *widget;
-	xmlNodePtr node, root;
+	gint counter = 0;
+	GList *element;
+	gchar *value;
 	gchar *buf;
+	ug_data *ud;
+	GtkWidget *widget = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	
-	g_return_if_fail (profile != NULL);
+	ud = g_object_get_data (G_OBJECT (widget), "data");
 	
-	root = xst_xml_doc_get_root (tool->config);
-	root = xst_xml_element_find_first (root, "profiledb");
-	
-	for (node = xst_xml_element_find_first (root, "profile"); node != NULL; xst_xml_element_find_next (node, "profile")) {
-		if (strcmp (profile, xst_xml_get_child_content (node, "name")) == 0)
-			break;
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_home")),
+			    xst_xml_get_child_content (profile, "home_prefix"));
+	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_shell_entry")),
+			    xst_xml_get_child_content (profile, "shell"));
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_max")),
+				   g_strtod (xst_xml_get_child_content (profile, "pwd_maxdays"), NULL));
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_min")),
+				   g_strtod (xst_xml_get_child_content (profile, "pwd_mindays"), NULL));
+	gtk_spin_button_set_value ( GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_days")),
+				   g_strtod (xst_xml_get_child_content (profile, "pwd_warndays"), NULL));
+
+	value = xst_xml_get_child_content (profile, "group");
+	element = g_list_first (groups_list);
+
+	while ((element != NULL) && (strcmp (element->data, value) != 0))
+	{
+		element = element->next;
+		counter++;
 	}
-	
-	xst_ui_entry_set_text (xst_dialog_get_widget (tool->main_dialog, "user_settings_home"), xst_xml_get_child_content (node, "home_prefix"));
-	xst_ui_entry_set_text (xst_dialog_get_widget (tool->main_dialog, "user_settings_shell_entry"), xst_xml_get_child_content (node, "shell"));
-	
-	buf = xst_xml_get_child_content (node, "group");
-	groups_combo_setup (buf);
-	xst_ui_entry_set_text (xst_dialog_get_widget (tool->main_dialog, "user_settings_group_combo_entry"), buf);
+	gtk_option_menu_set_history (GTK_OPTION_MENU (xst_dialog_get_widget (tool->main_dialog, "user_settings_group")), counter);
 
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_max")), g_strtod (xst_xml_get_child_content (node, "pwd_maxdays"), NULL));
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_min")), g_strtod (xst_xml_get_child_content (node, "pwd_mindays"), NULL));
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_passwd_days")), g_strtod (xst_xml_get_child_content (node, "pwd_warndays"), NULL));
-}
-
-static void
-profiles_option_menu_setup (void)
-{
-	GtkWidget *menu_item;
-	GtkWidget *menu = xst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
-	GList *profiles = get_profile_list ();
-	GList *list = profiles;
-	gint index, i=0;
-	
-	while (list) {
-		if (strcmp (list->data, "Default") == 0)
-			index = i;
-		menu_item = xst_ui_option_menu_add_string (GTK_OPTION_MENU (menu), list->data);
-		g_signal_connect (G_OBJECT (menu_item), "activate", G_CALLBACK (on_user_settings_profile_changed), list->data);
-		list = list->next;
-		i++;
+	/* Gets a new uid */
+	buf = (gchar *) find_new_id (ud->node, profile);
+	if (buf) {
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_settings_uid")), 
+		                           g_strtod (buf, NULL));
+		g_free (buf);
 	}
-	
-	/* we set the option menu to the 'Default' option */
-	gtk_option_menu_set_history (GTK_OPTION_MENU (menu), index);
-	user_set_profile ("Default");
 
-	g_list_free (profiles);
+	user_profile = profile;
 }
 
 void
 user_new_prepare (ug_data *ud)
 {
-	GtkWidget *widget, *button;
+	GtkWidget *button;
 	gchar *buf;
 	GList *user_settings_all_list = NULL;
 	GList *user_settings_members_list = NULL;
+	GtkWidget *widget = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
+	GtkWidget *user_settings_all = xst_dialog_get_widget (tool->main_dialog, "user_settings_all");
+	GtkWidget *user_settings_members = xst_dialog_get_widget (tool->main_dialog, "user_settings_members");
 
-	widget = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (widget), _("User Account Editor"));
-
-	/* Attach the data to the dialog */
 	g_object_set_data (G_OBJECT (widget), "data", ud);
-	
-	/* Profiles are disabled at the moment, showing advanced settings instead */
-	gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "user_settings_advanced"));
-	gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "user_settings_profile_box"));
 
+	gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "user_settings_profiles"));
+	
 	/* Creates and fills GtkTrees */
 	create_groups_gtk_trees ();
 	create_groups_lists (ud->node, &user_settings_all_list, &user_settings_members_list);
@@ -285,20 +219,14 @@ user_new_prepare (ug_data *ud)
 	g_object_set_data (G_OBJECT (user_settings_all), "list", user_settings_all_list);
 	g_object_set_data (G_OBJECT (user_settings_members), "list", user_settings_members_list);
 	
-	/* Fills profiles option menu */
-	profiles_option_menu_setup ();
+	/* Fill menus */
+	option_menu_add_profiles (xst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu"));
+	option_menu_add_groups (xst_dialog_get_widget (tool->main_dialog, "user_settings_group"), TRUE);
+	combo_add_shells (xst_dialog_get_widget (tool->main_dialog, "user_settings_shell"));
 	
-	/* Gets a new uid */
-	buf = (gchar *) find_new_id (ud->node);
-	if (buf) {
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "user_settings_uid")), 
-		                           g_strtod (buf, NULL));
-		g_free (buf);
-	}
-	
+#ifdef HAVE_LIBCRACK
 	/* If we have libcrack, password quality check is enabled */
 	button = xst_dialog_get_widget (tool->main_dialog, "user_passwd_quality");
-#ifdef HAVE_LIBCRACK
 	gtk_widget_show (button);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
 #endif
@@ -309,6 +237,8 @@ user_new_prepare (ug_data *ud)
 void
 user_settings_dialog_close (void)
 {
+	GtkWidget *user_settings_all = xst_dialog_get_widget (tool->main_dialog, "user_settings_all");
+	GtkWidget *user_settings_members = xst_dialog_get_widget (tool->main_dialog, "user_settings_members");
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	ug_data *ud;
@@ -368,6 +298,9 @@ user_settings_dialog_close (void)
 	g_free (ud);
 	g_object_steal_data (G_OBJECT (widget), "data");
 	gtk_widget_hide (widget);
+
+	/* Clear groups option menu */
+	gtk_option_menu_remove_menu (GTK_OPTION_MENU (xst_dialog_get_widget (tool->main_dialog, "user_settings_group")));
 }
 
 static gboolean
@@ -587,7 +520,7 @@ group_check (xmlNodePtr node, const gchar *groupname)
 	
 	gid = group_xml_get_gid (groupdb, (gchar *) groupname);
 	if (!gid) {
-		gid = find_new_id (groupdb);
+		gid = find_new_id (groupdb, user_profile);
 		group = group_add_blank_xml (groupdb);
 		group_update_xml (group, (gchar *) groupname, gid, NULL);
 	}
@@ -598,6 +531,7 @@ group_check (xmlNodePtr node, const gchar *groupname)
 gboolean
 user_update (ug_data *ud)
 {
+	GtkWidget *user_settings_members = xst_dialog_get_widget (tool->main_dialog, "user_settings_members");
 	UserAccountData *data;
 	gboolean change_password = FALSE;
 	GList *list;
@@ -668,11 +602,11 @@ user_update (ug_data *ud)
 		}
 	} else {
 		/* Automatic password generation enabled */
-		data->password1 = (gchar *) gtk_label_get_text (GTK_LABEL (xst_dialog_get_widget (tool->main_dialog, "user_passwd_random_label")));
+		data->password1 = (gchar *) gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_passwd_random_entry")));
 	}
 
 	/* get user main group GID*/
-	data->group = (gchar *) gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "user_settings_group_combo_entry")));
+	data->group = g_list_nth_data (groups_list, gtk_option_menu_get_history (GTK_OPTION_MENU (xst_dialog_get_widget (tool->main_dialog, "user_settings_group"))));
 	if (strcmp (data->group, "$user") == 0)
 		data->group = data->login;
 	
@@ -746,16 +680,20 @@ user_settings_dialog_prepare_comments (gchar *comments)
 static void
 user_settings_dialog_prepare (ug_data *ud)
 {
+	GtkWidget *user_settings_all = xst_dialog_get_widget (tool->main_dialog, "user_settings_all");
+	GtkWidget *user_settings_members = xst_dialog_get_widget (tool->main_dialog, "user_settings_members");
+	GtkWidget *option_menu = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
+	GtkWidget *combo = xst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
 	GtkWidget *w0;
 	gchar *txt, *name;
 	GList *user_settings_all_list = NULL;
 	GList *user_settings_members_list = NULL;
+	gint counter = 0;
+	GList *element;
 	
 	g_return_if_fail (ud != NULL);
 
-	/* Hides profiles combo, shows advanced settings */
-	gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "user_settings_advanced"));
-	gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "user_settings_profile_box"));
+	gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "user_settings_profiles"));
 	
 	/* Attach the data to the dialog */
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
@@ -782,18 +720,27 @@ user_settings_dialog_prepare (ug_data *ud)
 	g_free (txt);
 	
 	/* Set shells combo */
-	shells_combo_setup ();
+	combo_add_shells (combo);
 	txt = xst_xml_get_child_content (ud->node, "shell");
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_shell_entry");
 	xst_ui_entry_set_text (w0, txt);
 	g_free (txt);
 	
-	/* set main group combo */
-	groups_combo_setup (NULL);
+	/* set main group option menu */
+	option_menu_add_groups (option_menu, FALSE);
 	txt = get_group_name (xst_xml_get_child_content (ud->node, "gid"));
-	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group_combo_entry");
-	xst_ui_entry_set_text (w0, txt);
-	g_free (txt);
+
+	if (txt != NULL) {
+		element = g_list_first (groups_list);
+
+		while ((element != NULL) && (strcmp (element->data, txt) != 0))
+		{
+			element = element->next;
+			counter++;
+		}
+		gtk_option_menu_set_history (GTK_OPTION_MENU (xst_dialog_get_widget (tool->main_dialog, "user_settings_group")), counter);
+		g_free (txt);
+	}
 	
 	/* Fill groups lists */
 	create_groups_gtk_trees ();
@@ -831,8 +778,6 @@ user_settings_dialog_prepare (ug_data *ud)
 	gtk_window_set_title (GTK_WINDOW (w0), g_strdup_printf (_("Settings for user %s"), name));
 	g_free (name);
 	
-	
-
 	gtk_widget_show (w0);
 }
 

@@ -477,10 +477,33 @@ user_update_xml (xmlNodePtr node, UserAccountData *data, gboolean change_passwor
 	user_add_extra_groups (data->extra_groups, data->login);
 }
 
+static void
+update_gid_in_users (xmlNodePtr node, gchar *new_gid)
+{
+	xmlNodePtr users = get_root_node (NODE_USER);
+	gchar *old_gid = xst_xml_get_child_content (node, "gid");
+	gchar *gid;
+
+	for (users = xst_xml_element_find_first (users, "user");
+	     users != NULL;
+	     users = xst_xml_element_find_next (users, "user"))
+	{
+		gid = xst_xml_get_child_content (users, "gid");
+		if (strcmp (gid, old_gid) == 0) 
+			xst_xml_set_child_content (users, "gid", new_gid);
+
+		g_free (gid);
+	}
+
+	g_free (old_gid);
+}
+
 void
 group_update_xml (xmlNodePtr node, gchar *name, gchar *gid, GList *users)
 {
 	xmlNodePtr u, n;
+
+	update_gid_in_users (node, gid);
 	
 	xst_xml_set_child_content (node, "name", name);
 	xst_xml_set_child_content (node, "gid", gid);
@@ -609,22 +632,3 @@ get_group_name (gchar *gid)
 	
 	return NULL;
 }
-
-GList*
-get_profile_list (void)
-{
-	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
-	xmlNodePtr node;
-	GList *list = NULL;
-	
-	root = xst_xml_element_find_first (root, "profiledb");
-	
-	for (node = xst_xml_element_find_first (root, "profile"); node != NULL; node = xst_xml_element_find_next (node, "profile"))
-	{
-		list = g_list_append (list, xst_xml_get_child_content (node, "name"));
-	}
-	
-	return list;
-}
-
-

@@ -37,9 +37,6 @@
 
 extern XstTool *tool;
 
-GtkWidget *group_settings_all = NULL;
-GtkWidget *group_settings_members = NULL;
-
 static void
 create_users_lists (xmlNodePtr node, GList **group_settings_all_list, GList **group_settings_members_list)
 {
@@ -51,12 +48,15 @@ create_users_lists (xmlNodePtr node, GList **group_settings_all_list, GList **gr
 static void
 create_users_gtk_trees (void)
 {
+	GtkWidget *group_settings_all = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
+	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	GtkWidget *add_button, *remove_button;
 	GtkTreeSelection *selection;
+	GtkSizeGroup *sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
 	
 	/* We create the widgets, connect signals and attach data if they haven't been created already */
-	if (group_settings_all == NULL) {
-		group_settings_all = create_gtk_tree_list (xst_dialog_get_widget (tool->main_dialog, "group_settings_all"));
+	if (g_object_get_data (G_OBJECT (group_settings_all), "button") == NULL) {
+		create_gtk_tree_list (group_settings_all);
 		g_object_set_data (G_OBJECT (group_settings_all), "button", "group_settings_add");
 		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (group_settings_all));
 		g_signal_connect (G_OBJECT (selection),
@@ -64,7 +64,7 @@ create_users_gtk_trees (void)
 		                  G_CALLBACK (on_list_select_row),
 		                  NULL);
 
-		group_settings_members = create_gtk_tree_list (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
+		create_gtk_tree_list (group_settings_members);
 		g_object_set_data (G_OBJECT (group_settings_members), "button", "group_settings_remove");
 		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (group_settings_members));
 		g_signal_connect (G_OBJECT (selection),
@@ -80,12 +80,19 @@ create_users_gtk_trees (void)
 		remove_button = xst_dialog_get_widget (tool->main_dialog, "group_settings_remove");
 		g_object_set_data (G_OBJECT (remove_button), "in", group_settings_members);
 		g_object_set_data (G_OBJECT (remove_button), "out", group_settings_all);
+
+		/* Add the scrolled windows that contain the trees in the same GtkSizeGroup */
+		gtk_size_group_add_widget (sizegroup, xst_dialog_get_widget (tool->main_dialog, "group_settings_all_container"));
+		gtk_size_group_add_widget (sizegroup, xst_dialog_get_widget (tool->main_dialog, "group_settings_members_container"));
+		
 	}
 }
 
 void
 group_new_prepare (ug_data *gd)
 {
+	GtkWidget *group_settings_all = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
+	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	GtkWidget *widget;
 	gchar     *buf;
 	GList *group_settings_members_list = NULL;
@@ -104,7 +111,7 @@ group_new_prepare (ug_data *gd)
 	gtk_window_set_title (GTK_WINDOW (widget), _("Create New Group"));
 
 	/* Fill in first available gid */
-	buf = (gchar *) find_new_id (gd->node);
+	buf = (gchar *) find_new_id (gd->node, NULL);
 	if (buf) {
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, "group_settings_gid")), 
 		                           g_strtod (buf, NULL));
@@ -118,6 +125,8 @@ group_new_prepare (ug_data *gd)
 void
 group_settings_dialog_close (void)
 {
+	GtkWidget *group_settings_all = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
+	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	GtkWidget *widget;
 	GtkTreeModel *model;
 	ug_data *gd;
@@ -207,6 +216,7 @@ is_group_name_valid (xmlNodePtr node, const gchar *name)
 gboolean
 group_update (ug_data *gd)
 {
+	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	gchar *name, *gid;
 	GList *users;
 	
@@ -293,6 +303,8 @@ delete_group (xmlNodePtr node)
 static void
 group_settings_dialog_prepare (ug_data *gd)
 {
+	GtkWidget *group_settings_all = xst_dialog_get_widget (tool->main_dialog, "group_settings_all");
+	GtkWidget *group_settings_members = xst_dialog_get_widget (tool->main_dialog, "group_settings_members");
 	GtkWidget *w0;
 	gchar *txt, *name;
 	GList *group_settings_all_list = NULL;

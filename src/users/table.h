@@ -31,7 +31,7 @@
 #define COLOR_NORMAL "black"
 
 /* User and group lists creation function */
-GtkWidget*		create_gtk_tree_list		(GtkWidget*);
+void                    create_gtk_tree_list		(GtkWidget*);
 void			populate_gtk_tree_list		(GtkTreeView*, GList*);
 
 /* User and group tables manipulation functions */

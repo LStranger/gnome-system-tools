@@ -43,15 +43,14 @@ extern XstTool *tool;
 extern GtkWidget *users_table;
 extern GtkWidget *groups_table;
 
-GtkWidget*
-create_gtk_tree_list (GtkWidget *sw)
+void
+create_gtk_tree_list (GtkWidget *list)
 {
 	GtkTreeModel *model = GTK_TREE_MODEL(gtk_tree_store_new (2, G_TYPE_STRING, G_TYPE_POINTER));
 	GtkTreeSelection *selection;
-	GtkWidget *list;
 	GtkCellRenderer *renderer;
 	
-	list = gtk_tree_view_new_with_model (model);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (list), model);
 	
 	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list), TRUE);
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list), FALSE);
@@ -69,11 +68,6 @@ create_gtk_tree_list (GtkWidget *sw)
 	
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (list));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
-	
-	gtk_widget_show_all (list);
-	gtk_container_add (GTK_CONTAINER (sw), list);
-	
-	return list;
 }
 
 void

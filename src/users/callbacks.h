@@ -59,6 +59,7 @@ void on_user_settings_passwd_random_new (GtkButton*, gpointer);
 void on_user_settings_passwd_toggled (GtkToggleButton*, gpointer);
 void on_user_settings_profile_changed (GtkWidget*, gpointer);
 void on_user_settings_passwd_changed (GtkEntry*, gpointer);
+void on_profile_settings_users_dialog_clicked (GtkButton *, gpointer);
 
 /* group settings dialog callbacks */
 void on_group_settings_dialog_show (GtkWidget*, gpointer);
