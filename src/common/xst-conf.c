@@ -42,6 +42,16 @@ xst_conf_save (void)
 	gnome_config_sync ();
 }
 
+
+/**
+ * xst_conf_set_boolean:
+ * @tool: An XstTool object
+ * @key: A string key (path) for an item
+ * @value: gboolean value to set
+ * 
+ * Store boolean @value to @key for @tool. @key is just the name of the variable
+ * which will be stored in form of "/XST_CONF_ROOT/$tool_name/@key".
+ **/
 void
 xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value)
 {
@@ -59,6 +69,18 @@ xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value)
 	xst_conf_save ();
 }
 
+/**
+ * xst_conf_get_boolean:
+ * @tool: An XstTool object
+ * @key: A string key (path) for an item
+ * 
+ * Retrieve boolean value from given @tool and @key. Use @key in form of
+ * "mystuff=1" to give default return value if @key isn't stored.
+ * @key is name of variable WITHOUT any preffix.
+ * 
+ * Return Value: gboolean value if key is stored or default value if provided
+ * by @key or FALSE otherwise.
+ **/
 gboolean
 xst_conf_get_boolean (XstTool *tool, const gchar *key)
 {
@@ -78,6 +100,15 @@ xst_conf_get_boolean (XstTool *tool, const gchar *key)
 	return value;
 }
 
+/**
+ * xst_conf_set_integer:
+ * @tool: An XstTool object
+ * @key: A string key (path) for an item
+ * @value: integer value to store
+ * 
+ * Store integer @value to @key for @tool. @key is just the name of the variable
+ * which will be stored in form of "/XST_CONF_ROOT/$tool_name/@key".
+ **/
 void
 xst_conf_set_integer (XstTool *tool, const gchar *key, gint value)
 {
@@ -95,6 +126,18 @@ xst_conf_set_integer (XstTool *tool, const gchar *key, gint value)
 	xst_conf_save ();
 }
 
+/**
+ * xst_conf_get_integer:
+ * @tool: An XstTool object
+ * @key: A string key (path) for an item
+ * 
+ * Retrieve integer value from given @tool and @key. Use @key in form of
+ * "mystuff=1" to give default return value if @key isn't stored.
+ * @key is name of variable WITHOUT any preffix.
+ * 
+ * Return Value: Integer value if key is stored or default value if provided
+ * by @key or 0 otherwise.
+ **/
 gint
 xst_conf_get_integer (XstTool *tool, const gchar *key)
 {
@@ -114,6 +157,15 @@ xst_conf_get_integer (XstTool *tool, const gchar *key)
 	return value;
 }
 
+/**
+ * xst_conf_set_string:
+ * @tool: An XstTool object
+ * @key: A string key (path) for an item
+ * @value: String value to set
+ * 
+ * Store string @value to @key for @tool. @key is just the name of the variable
+ * which will be stored in form of "/XST_CONF_ROOT/$tool_name/@key".
+ **/
 void
 xst_conf_set_string (XstTool *tool, const gchar *key, const gchar *value)
 {
@@ -131,6 +183,18 @@ xst_conf_set_string (XstTool *tool, const gchar *key, const gchar *value)
 	xst_conf_save ();
 }
 
+/**
+ * xst_conf_get_string:
+ * @tool: An XstTool object
+ * @key: A string key (path) for an item
+ * 
+ * Retrieve string value from given @tool and @key. Use @key in form of
+ * "mystuff=foo" to give default return value if @key isn't stored.
+ * @key is name of variable WITHOUT any preffix.
+ * 
+ * Return Value: Pointer to gchar value if key is stored or default value if
+ * provided by @key or FALSE otherwise. Must be g_free()'d.
+ **/
 gchar *
 xst_conf_get_string (XstTool *tool, const gchar *key)
 {
