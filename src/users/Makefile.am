@@ -1,5 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
+SUBDIRS = e-search-bar
+
 INCLUDES = \
 	-I$(top_srcdir)/src/common 	\
 	-I$(top_srcdir)/intl 		\
@@ -19,7 +21,8 @@ users_admin_SOURCES = \
 	transfer.c transfer.h \
 	user_group.c user_group.h \
 	md5.c md5.h md5_crypt.c \
-	e-table.c e-table.h 
+	e-table.c e-table.h  \
+	user_settings.c user_settings.h
 
 users_admin_CFLAGS = 
 
@@ -31,7 +34,8 @@ $(GDK_PIXBUF_LIBS) \
 $(LIBGLADE_LIBS) \
 $(INTLLIBS) \
 $(GAL_LIBS) \
-../common/libsetuptool.a
+../common/libsetuptool.a \
+./e-search-bar/libesearchbar.a
 
 #desktop = users.desktop
 #security = users.security
