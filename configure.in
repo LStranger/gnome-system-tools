@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
 
-AM_INIT_AUTOMAKE(ximian-setup-tools, 0.11.0)
+AM_INIT_AUTOMAKE(ximian-setup-tools, 0.12.0)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -254,8 +254,8 @@ dnl =====================================================
 dnl XST_LIBS & XST_CFLAGS 
 dnl =====================================================
 
-XST_LIBS="`gnome-config --libs print gal gdk_pixbuf gnomecanvaspixbuf libglade xml`"
-XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
+XST_LIBS="`gnome-config --libs gnome print gal gdk_pixbuf gnomecanvaspixbuf libglade xml`"
+XST_CFLAGS="`gnome-config --cflags gnome print gal gdk_pixbuf gnomecanvaspixbuf libglade xml`"
 
 XST_LIBS="$XST_LIBS $ARCHIVER_LIBS"
 XST_CFLAGS="$XST_CFLAGS $ARCHIVER_CFLAGS"
