@@ -30,8 +30,10 @@
 #include "xst-ui.h"
 #include "xst-su.h"
 
+#if 0 /* Disabled */
 #include <config-archiver/archive.h>
 #include <config-archiver/location.h>
+#endif
 
 #include <gnome.h>
 #include <parser.h>
@@ -852,8 +854,10 @@ xst_tool_load (XstTool *tool)
 gboolean
 xst_tool_save (XstTool *tool)
 {
+#if 0 /* Disabled */
 	Archive *archive;
 	Location *location;
+#endif
 	gchar *backend_id;
 
 	g_return_val_if_fail (tool != NULL, FALSE);
@@ -872,6 +876,7 @@ xst_tool_save (XstTool *tool)
 	}
 #endif
 
+#if 0 /* Disabled */
 	/* Archive data with the archiver */
 	archive = ARCHIVE (archive_load (TRUE));
 
@@ -890,6 +895,7 @@ xst_tool_save (XstTool *tool)
 	location_store_xml (location, backend_id, tool->config, STORE_MASK_PREVIOUS);
 
 	archive_close (archive);
+#endif
 
 	if (location_id != NULL) {
 		xst_dialog_thaw_visible (tool->main_dialog);
