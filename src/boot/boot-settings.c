@@ -29,6 +29,7 @@
 #include <gnome.h>
 
 #include "gst.h"
+#include "gst-hig-dialog.h"
 #include "callbacks.h"
 #include "boot-settings.h"
 #include "table.h"
@@ -344,21 +345,17 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 		image->initrd = g_strdup ("");
 	}
 
-	if (check)
-	{
+	if (check) {
 		msg_error = boot_image_check (image);
 
-		if (msg_error)
-		{
-			boot_settings_gui_error (GTK_WINDOW (gui->top), msg_error);
-			return FALSE;
-		}
+		if ((!msg_error) && (strcmp (gtk_entry_get_text (gui->password),
+					     gtk_entry_get_text (gui->password_confirm)) != 0))
+			msg_error = g_strdup (_("Password confirmation is not correct"));
 
-		if (strcmp (gtk_entry_get_text (gui->password),
-			    gtk_entry_get_text (gui->password_confirm)) != 0)
-		{
-			msg_error = g_strdup (_("Password confirmation isn't correct."));
+		if (msg_error) {
 			boot_settings_gui_error (GTK_WINDOW (gui->top), msg_error);
+			g_free (msg_error);
+
 			return FALSE;
 		}
 	}
@@ -374,10 +371,13 @@ boot_settings_gui_error (GtkWindow *parent, gchar *error)
 {
 	GtkWidget *d;
 
-	d = gtk_message_dialog_new (parent, GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				    GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, error);
-
-	g_free (error);
+	d = gst_hig_dialog_new (parent,
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GST_HIG_MESSAGE_ERROR,
+				_("Error modifying boot image"),
+				error,
+				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+				NULL);
 	gtk_dialog_run (GTK_DIALOG (d));
 	gtk_widget_destroy (d);
 }

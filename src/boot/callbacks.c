@@ -29,6 +29,7 @@
 #include <gnome.h>
 
 #include "gst.h"
+#include "gst-hig-dialog.h"
 #include "gst-report-hook.h"
 #include "boot-druid.h"
 #include "boot-settings.h"
@@ -378,7 +379,7 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	xmlNodePtr   node;
-	gchar       *label, *buf;
+	gchar       *label;
 	gint         count, reply;
 	GtkWidget   *d;
 	
@@ -386,13 +387,14 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 
 	count = boot_image_count (gst_xml_doc_get_root (tool->config));
 	if (count <= 1) {
-		d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-					    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					    GTK_MESSAGE_ERROR,
-					    GTK_BUTTONS_OK,
-					    _("Without at least one boot image,\n"
-					      "your system will not start.\n"));
-
+		d = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					GST_HIG_MESSAGE_ERROR,
+					_("Error deleting boot image"),
+					_("Without at least one boot image "
+					  "your system will not start."),
+					GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					NULL);
 		gtk_dialog_run (GTK_DIALOG (d));
 		gtk_widget_destroy (d);
 		return;
@@ -405,20 +407,24 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 	}
 	
 	label = gst_xml_get_child_content (node, "label");
-	buf = g_strdup_printf (_("Are you sure you want to delete '%s'?"), label);
+
+	d = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GST_HIG_MESSAGE_QUESTION,
+				NULL,
+				_("This may leave this operating system unbootable"),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				NULL);
+	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (d),
+					 _("Are you sure you want to delete \"%s\"?"), label);
+
+	reply = gtk_dialog_run (GTK_DIALOG (d));
+
+	gtk_widget_destroy (d);
 	g_free (label);
 
-	d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-				    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				    GTK_MESSAGE_QUESTION,
-				    GTK_BUTTONS_YES_NO,
-				    buf);
-
-	g_free (buf);
-	reply = gtk_dialog_run (GTK_DIALOG (d));
-	gtk_widget_destroy (d);
-
-	if (reply != GTK_RESPONSE_YES)
+	if (reply != GTK_RESPONSE_ACCEPT)
 		return;
 
 	gst_xml_element_destroy (node);
@@ -448,18 +454,16 @@ gboolean
 callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, gpointer data)
 {
 	GtkWidget *dialog;
-	gchar *txt;
 
-	txt = g_strdup_printf (_("The file ``%s'' is missing or could not be read:\n"
-				 "The configuration will show empty."), rline->argv[0]);
-
-	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_MESSAGE_ERROR,
-					 GTK_BUTTONS_OK,
-					 txt);
-
-	g_free (txt);
+	dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+				     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				     GST_HIG_MESSAGE_ERROR,
+				     _("The configuration will show empty"),
+				     NULL,
+				     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+				     NULL);
+	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
+					 _("The file \"%s\" is missing or could not be read"), rline->argv[0]);
 	gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 

@@ -178,8 +178,7 @@ boot_image_save (BootImage *image)
 void
 boot_image_destroy (BootImage *image)
 {
-	if (image)
-	{
+	if (image) {
 		if (image->label)    g_free (image->label);
 		if (image->image)    g_free (image->image);
 		if (image->root)     g_free (image->root);
@@ -192,7 +191,6 @@ boot_image_destroy (BootImage *image)
 }
 
 /* Checking functions */
-
 static gboolean
 boot_image_valid_name_chars (const gchar *string)
 {

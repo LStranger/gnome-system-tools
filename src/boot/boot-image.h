@@ -25,10 +25,7 @@
 #define BOOT_IMAGE_H
 
 #include <gnome.h>
-
-
 #include "gst.h"
-
 
 #define MAX_IMAGES 16
 

@@ -25,6 +25,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#include "gst.h"
+#include "gst-hig-dialog.h"
 #include "boot-druid.h"
 #include "boot-settings.h"
 
@@ -93,15 +95,17 @@ druid_cancel (GtkWidget *w, gpointer data)
 }
 
 static void
-druid_show_error (BootDruid *druid, gchar *error)
+druid_show_error (BootDruid *druid, gchar *text)
 {
 	GtkWidget *d;
 
-	d = gtk_message_dialog_new (GTK_WINDOW (druid),
-				    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-				    GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, error);
-
-	g_free (error);
+	d = gst_hig_dialog_new (GTK_WINDOW (druid),
+				GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				GST_HIG_MESSAGE_ERROR,
+				_("Error creating boot image"),
+				text,
+				GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+				NULL);
 	gtk_dialog_run (GTK_DIALOG (d));
 	gtk_widget_destroy (d);
 }

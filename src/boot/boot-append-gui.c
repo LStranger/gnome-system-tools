@@ -28,6 +28,7 @@
 #include <gnome.h>
 
 #include "gst.h"
+#include "gst-hig-dialog.h"
 #include "callbacks.h"
 #include "boot-append-gui.h"
 
@@ -215,21 +216,25 @@ hextodec (gchar *hex)
 }
 
 void
-boot_append_vga_error (gchar vga[6])
+boot_append_vga_error (GtkWidget *parent, gchar *vga)
 {
 	   GtkWidget *dialog;
 
-	   dialog = gtk_message_dialog_new (NULL,
-								 GTK_DIALOG_DESTROY_WITH_PARENT,
-								 GTK_MESSAGE_ERROR,
-								 GTK_BUTTONS_CLOSE,
-								 _("vga=%s is not a valid vga value"), vga);
+	   dialog = gst_hig_dialog_new (GTK_WINDOW (parent),
+							  GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_MODAL,
+							  GST_HIG_MESSAGE_ERROR,
+							  _("Invalid VGA value"),
+							  NULL,
+							  GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+							  NULL);
+	   gst_hig_dialog_set_secondary_text (GST_HIG_DIALOG (dialog),
+								   _("\"%s\" is not a valid VGA value"), vga);
 	   gtk_dialog_run (GTK_DIALOG (dialog));
 	   gtk_widget_destroy (dialog);
 }
 
 void
-append_gui_vga_setup (BootAppendGui *gui, gchar vga[6])
+append_gui_vga_setup (BootAppendGui *gui, gchar *vga)
 {
 	   gint vga_num;
 
@@ -283,13 +288,13 @@ append_gui_vga_setup (BootAppendGui *gui, gchar vga[6])
 			 gtk_option_menu_set_history (gui->append_menu_colors, 3);
 			 break;
 	   default:
-			 boot_append_vga_error (vga);
+			 boot_append_vga_error (gui->top, vga);
 			 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->append_vga), FALSE);
 	   }
 }
 
 static void
-append_gui_scsi_setup (BootAppendGui *gui, gchar scsi[4])
+append_gui_scsi_setup (BootAppendGui *gui, gchar *scsi)
 {
 	   if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gui->append_scsi)))
 			 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->append_scsi), TRUE);
@@ -459,19 +464,6 @@ boot_append_gui_save (BootAppendGui *gui, gchar **append_string)
 			 return FALSE;
 	   
 	   return TRUE;
-}
-
-void
-boot_append_gui_error (GtkWindow *parent, gchar *error)
-{
-	   GtkWidget *d;
-	   
-	   d = gtk_message_dialog_new (parent, GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-							 GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, error);
-	   
-	   g_free (error);
-	   gtk_dialog_run (GTK_DIALOG (d));
-	   gtk_widget_destroy (d);
 }
 
 void
