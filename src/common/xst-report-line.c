@@ -172,11 +172,17 @@ static gchar *
 xst_report_format_from_key (gchar *key)
 {
 	static GHashTable *hash = NULL;
+	gchar *ret;
 
 	if (!hash)
 		hash = xst_report_hash_init ();
 	
-	return g_hash_table_lookup (hash, key);
+	ret = g_hash_table_lookup (hash, key);
+
+	if (!ret)
+		g_warning ("Key not found: %s", key);
+			
+	return ret;
 }
 
 /* printf, perl style, with a 1024 char limit. Gets the job done. */
