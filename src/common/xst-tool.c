@@ -46,6 +46,8 @@
 #include <signal.h>
 
 #define XST_DEBUG 1
+/* Define this if you want the frontend to run the backend under strace */
+/*#define XST_DEBUG_STRACE_BACKEND*/
 
 enum {
 	FILL_GUI,
@@ -611,11 +613,14 @@ xst_tool_init_backend (XstTool *tool)
 			       "--progress", "--report", "--platform",
 			       xst_platform_get_name (tool->current_platform), NULL);
 		else
+#ifndef XST_DEBUG_STRACE_BACKEND
 			execl (tool->script_path, tool->script_path, "--progress",
 			       "--report", NULL);
+#else		
 /* Very useful for debugging purposes. */
-/*			execl ("/usr/bin/strace", "/usr/bin/strace", tool->script_path, "--progress",
-			"--report", NULL);*/
+					execl ("/usr/bin/strace", "/usr/bin/strace", tool->script_path, "--progress",
+			"--report", NULL);
+#endif					
 		
 		g_error ("Unable to run backend: %s", tool->script_path);
 	}
@@ -657,6 +662,39 @@ xst_tool_end_of_request (GString *string)
 	return TRUE;
 }
 
+static xmlDoc *
+xst_tool_read_xml_from_backend (XstTool *tool)
+{
+	char buffer [4096];
+	int t;
+	xmlDoc *xml;
+
+	if (!tool->xml_document)
+		return NULL;
+	
+	while (! xst_tool_end_of_request (tool->xml_document)) {
+		t = read (tool->backend_read_fd, buffer, sizeof (buffer) - 1);
+		if (t == 0)
+			break;
+		buffer [t] = 0;
+		g_string_append (tool->xml_document, buffer);
+		
+		while (gtk_events_pending ())
+			gtk_main_iteration ();
+	}
+	
+	if (tool->xml_document->str[0] == '<') {
+		xml = xmlParseDoc (tool->xml_document->str);
+	} else {
+		xml = NULL;
+	}
+
+	g_string_free (tool->xml_document, TRUE);
+	tool->xml_document = NULL;
+
+	return xml;
+}
+
 static void
 xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 {
@@ -687,8 +725,6 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *directive, ...)
 {
 	va_list ap;
 	xmlDoc *xml;
-	char buffer [2048];
-	int t;
 	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
@@ -713,37 +749,20 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *directive, ...)
 	if (location_id == NULL)
 		report_progress (tool, _("Scanning your system configuration."));
 
-	while (! xst_tool_end_of_request (tool->xml_document)) {
-		t = read (tool->backend_read_fd, buffer, sizeof (buffer) - 1);
-		if (t == 0)
-			break;
-		buffer [t] = 0;
-		g_string_append (tool->xml_document, buffer);
-		
-		while (gtk_events_pending ())
-			gtk_main_iteration ();
-	}
-	
-	if (tool->xml_document->str[0] == '<') {
-		xml = xmlParseDoc (tool->xml_document->str);
-	} else {
-		xml = NULL;
-	}
-
-	g_string_free (tool->xml_document, TRUE);
-	tool->xml_document = NULL;
+	xml = xst_tool_read_xml_from_backend (tool);
 	
 	return xml;
 }
 
-void
+xmlDoc *
 xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml, const gchar *directive, ...)
 {
 	va_list ap;
 	FILE *f;
+	xmlDoc *xml_out;
 	
-	g_return_if_fail (tool != NULL);
-	g_return_if_fail (XST_IS_TOOL (tool));
+	g_return_val_if_fail (tool != NULL, NULL);
+	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
 	va_start (ap, directive);
 	xst_tool_send_directive (tool, directive, ap);
@@ -761,6 +780,11 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml, const gchar *directive, 
 
 	if (location_id == NULL)
 		report_progress (tool, _("Updating your system configuration."));
+
+	/* This is tipicaly to just read the end of request string,
+	   but a set directive may return some XML too. */
+	xml_out = xst_tool_read_xml_from_backend (tool);
+	return xml_out;
 }
 
 

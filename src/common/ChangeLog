@@ -1,3 +1,21 @@
+Thu Jul 12 12:22:56 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-ui.c (container_get_label_string): Convenience function.
+	(get_list_item_by_name): Shrinked, improved style.
+	(xst_ui_option_menu_set_selected_string): Avoids warning:
+	Check if the active menu item is the one we want to set.
+
+	* xst-report-line.c (xst_report_line_new_from_string): Better
+	warning.
+
+	* xst-tool.c (xst_tool_read_xml_from_backend): After reading
+	the reports, proceed to read the returning XML from the backend,
+	until the end of request string appears.
+	(xst_tool_run_get_directive): Use the above function now.
+	(xst_tool_run_set_directive): Use it too, to consume the end
+	of request string, and now return pointer to parsed XML, if
+	one was delivered by the backend.
+
 2001-07-12  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-tool.c (xst_tool_init_backend): Being a mortal user here

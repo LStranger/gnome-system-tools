@@ -92,6 +92,8 @@ xst_report_line_new_from_string (gchar *string)
 
 	parts = g_strsplit (string, "::", 0);
 
+	if (!parts[0] || !parts[1])
+		g_warning ("xst_report_line_new_from_string: Error in report string [%s]", string);
 	g_return_val_if_fail (parts[0], NULL);
 	g_return_val_if_fail (parts[1], NULL);
 	

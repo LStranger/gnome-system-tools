@@ -40,41 +40,41 @@
 GdkPixmap *checked_pixmap = NULL, *unchecked_pixmap = NULL;
 GdkBitmap *checked_mask = NULL, *unchecked_mask = NULL;
 
+static gchar *
+container_get_label_string (GtkWidget *container)
+{
+	GList *children;
+	gchar *buf = NULL;
+	GtkWidget *child;
+	
+	children = gtk_container_children (GTK_CONTAINER (container));
+	if (!children)
+		return NULL;
+
+	child = children->data;
+
+	if (GTK_IS_LABEL (child))
+		gtk_label_get (GTK_LABEL (child), &buf);
+	
+	return buf;
+}
+
 
 static GtkWidget *
 get_list_item_by_name (GList *list, const gchar *label)
 {
-	GList *items, *children;
+	GList *items;
 	GtkWidget *listitem;
 	gchar *buf;
-	GtkWidget *child;
 	
 	g_return_val_if_fail (list != NULL, NULL);
 
-	items = list;
-
-	while (items)
+	for (items = list; items; items = items->next)
 	{
 		listitem = items->data;
-		items = items->next;
-
-		children = gtk_container_children (GTK_CONTAINER (listitem));
-
-		while (children)
-		{
-			child    = children->data;
-			children = children->next;
-
-			if (GTK_IS_LABEL (child))
-			{
-				gtk_label_get (GTK_LABEL (child), &buf);
-				if (strcmp (buf, label))
-					continue;
-
-				/* Found */
-				return listitem;
-			}
-		}
+		buf = container_get_label_string (listitem);
+		if (buf && !strcmp (buf, label))
+		    return listitem;
 	}
 
 	return NULL;
@@ -245,12 +245,20 @@ xst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar 
 	GtkWidget *menu, *found;
 	GList *menu_items;
 	gint row;
+	gchar *active_label;
 
 	g_return_if_fail (option_menu != NULL);
 	g_return_if_fail (GTK_IS_OPTION_MENU (option_menu));
 	g_return_if_fail (string != NULL);
 	
 	menu = gtk_option_menu_get_menu (option_menu);
+
+	/* Check if the active menu item is the one we want to set.
+	   If so, do nothing. */
+	active_label = container_get_label_string (GTK_WIDGET (option_menu));
+	if (active_label && !strcmp (active_label, string))
+		return;
+	
 	menu_items = GTK_MENU_SHELL (menu)->children;
 	if (!menu_items)
 		return;
@@ -283,7 +291,7 @@ xst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
 
 	g_return_val_if_fail (option_menu != NULL, NULL);
 	g_return_val_if_fail (GTK_IS_OPTION_MENU (option_menu), NULL);
-	
+
 	menu = gtk_option_menu_get_menu (option_menu);
 
 	if (!GTK_MENU_SHELL (menu)->children) {
