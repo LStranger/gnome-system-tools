@@ -99,14 +99,14 @@ platform_list_unselect_row_cb (GtkCList *clist, gint row, gint column, GdkEvent 
 static void
 platform_dialog_close_cb (GtkWidget *dialog, XstTool *tool)
 {
-	exit (1);
+	exit (0);
 }
 
 static void
 platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
 {
 	if (ret == -1 || ret == 1)
-		exit (1);
+		exit (0);
 
 	/* Locate the selected platform and set it up as the current one. Prepare to
 	 * invoke the backend again, this time with the current platform specified. */
