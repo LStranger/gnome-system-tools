@@ -1,27 +1,30 @@
+# gnome-system-tools.po fordítása Hungarianra
 # gnome-system-tools Hungarian translation
-# Copyright (C) 2000, 2001 Free Software Foundation, Inc.
+# Copyright (C) 2000, 2001, 2004 Free Software Foundation, Inc.
 # Róbert Ványi <robi@mora.u-szeged.hu>, 2000, 2001.
 # Emese Kovács <emese@gnome.hu>, 2001.
 # András Tímár <timar@gnome.hu>, 2001.
+# Gabor Kelemen <kg0021@stud.unideb.hu>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools CVS\n"
-"POT-Creation-Date: 2003-07-08 17:33+0200\n"
-"PO-Revision-Date: 2003-07-13 23:58+0200\n"
-"Last-Translator: András Tímár <timar@gnome.hu>\n"
-"Language-Team: Hungarian <hu@gnome.hu>\n"
+"Project-Id-Version: gnome-system-tools\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-03-11 20:19+0100\n"
+"PO-Revision-Date: 2004-04-13 19:13+0200\n"
+"Last-Translator: Gabor Kelemen <kg0021@stud.unideb.hu>\n"
+"Language-Team: Hungarian <gnome@gnome.hu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
+"Plural-Forms:  nplurals=1; plural=0;\n"
 
-# interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
-# interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
-# interfaces/users.glade.h:35 interfaces/users.glade.h:43
-# interfaces/users.glade.h:67
 #: gnome-system-tools.schemas.in.h:1
-msgid "Default runlevel"
-msgstr "Alapértelmezett futási szint"
+msgid ""
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr ""
 
 #: gnome-system-tools.schemas.in.h:2
 msgid "Dialog complexity for the boot-admin tool"
@@ -32,7 +35,7 @@ msgid "Dialog complexity for the network-admin tool"
 msgstr ""
 
 #: gnome-system-tools.schemas.in.h:4
-msgid "Dialog complexity for the runlevel-admin tool"
+msgid "Dialog complexity for the services-admin tool"
 msgstr ""
 
 #: gnome-system-tools.schemas.in.h:5
@@ -48,30 +51,52 @@ msgid "Last GST version executed"
 msgstr ""
 
 #: gnome-system-tools.schemas.in.h:8
-msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
+msgid "Preferred bootloader that boot-admin will configure"
 msgstr ""
 
 #: gnome-system-tools.schemas.in.h:9
+#, fuzzy
+msgid "Remote hosts"
+msgstr "_Távoli IP:"
+
+#: gnome-system-tools.schemas.in.h:10
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
 msgstr ""
 
-#: gnome-system-tools.schemas.in.h:10
-msgid "The last GST version that this computer has run"
-msgstr ""
-
 #: gnome-system-tools.schemas.in.h:11
-msgid "Whether the users-admin tool should show all users and groups or not"
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
 msgstr ""
 
 #: gnome-system-tools.schemas.in.h:12
+msgid "The last GST version that this computer has run"
+msgstr ""
+
+#: gnome-system-tools.schemas.in.h:13
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr ""
+
+#: gnome-system-tools.schemas.in.h:14
+msgid "Whether the tools will use remote administration or not"
+msgstr ""
+
+#: gnome-system-tools.schemas.in.h:15
+msgid "Whether the users-admin tool should show all users and groups or not"
+msgstr ""
+
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr ""
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/disks.glade.in.h:1 interfaces/network.glade.in.h:1
-#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
+#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
+#: interfaces/users.glade.in.h:1
 msgid "*"
 msgstr ""
 
@@ -91,11 +116,11 @@ msgstr "/dev/hdc"
 msgid "/dev/hdd"
 msgstr "/dev/hdd"
 
-#: interfaces/boot.glade.in.h:6 interfaces/display.glade.in.h:1
+#: interfaces/boot.glade.in.h:6
 msgid "1024x768"
 msgstr "1024x768"
 
-#: interfaces/boot.glade.in.h:7 interfaces/display.glade.in.h:2
+#: interfaces/boot.glade.in.h:7
 msgid "1280x1024"
 msgstr "1280x1024"
 
@@ -111,7 +136,7 @@ msgstr "256"
 msgid "32,768"
 msgstr "32 768"
 
-#: interfaces/boot.glade.in.h:11 interfaces/display.glade.in.h:3
+#: interfaces/boot.glade.in.h:11
 msgid "640x480"
 msgstr "640x480"
 
@@ -119,120 +144,129 @@ msgstr "640x480"
 msgid "65,536"
 msgstr "65 536"
 
-#: interfaces/boot.glade.in.h:13 interfaces/display.glade.in.h:4
+#: interfaces/boot.glade.in.h:13
 msgid "800x600"
 msgstr "800x600"
 
-#: interfaces/boot.glade.in.h:14 interfaces/users.glade.in.h:4
+#: interfaces/boot.glade.in.h:14
+msgid "<b>Security</b>"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:15 interfaces/users.glade.in.h:4
 #, fuzzy
 msgid "<span weight=\"bold\">Basic Settings</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/boot.glade.in.h:15
+#: interfaces/boot.glade.in.h:16
 #, fuzzy
 msgid "<span weight=\"bold\">Image Settings</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/boot.glade.in.h:16
+#: interfaces/boot.glade.in.h:17
 #, fuzzy
 msgid "<span weight=\"bold\">Other Settings</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.in.h:18
 #, fuzzy
 msgid "<span weight=\"bold\">Starting the Computer</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/boot.glade.in.h:18
+#: interfaces/boot.glade.in.h:19
 msgid "Ask at boot"
 msgstr ""
 
-#: interfaces/boot.glade.in.h:19
-msgid "Boot Image Assistant"
-msgstr ""
+# interfaces/shares.glade.h:31
+#: interfaces/boot.glade.in.h:20 src/boot/main.c:73
+#, fuzzy
+msgid "Boot Manager Settings"
+msgstr "Hely"
 
-#: interfaces/boot.glade.in.h:20
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
-"partition.\n"
-"Optionally, you may also enter append parameters which are passed to the\n"
-"kernel at boot time."
+"partition. Optionally, you may also enter append parameters which are passed "
+"to the kernel at boot time."
 msgstr ""
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:22
 msgid "Click \"Forward\" to continue"
 msgstr ""
 
-#: interfaces/boot.glade.in.h:24
-msgid "Enable IDE SCSI emulation"
+# interfaces/users.glade.h:20
+#: interfaces/boot.glade.in.h:23
+#, fuzzy
+msgid "Confirmation"
+msgstr "_Beállítások:"
+
+#. set window title
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
+#: src/boot/boot-druid.c:441
+msgid "Creating a new boot image"
 msgstr ""
 
 #: interfaces/boot.glade.in.h:25
+msgid "Don't ask me again"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:26
+msgid "Enable IDE SCSI emulation"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:27
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
 msgstr ""
 
-#: interfaces/boot.glade.in.h:26 interfaces/internetsharing.glade.in.h:33
-#: interfaces/network.glade.in.h:52 interfaces/users.glade.in.h:34
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:43
 msgid "Finished"
 msgstr ""
 
-# interfaces/users.glade.h:57
-#: interfaces/boot.glade.in.h:27
-#, fuzzy
-msgid "Image Settings (Step 1 of 2)"
-msgstr "Jelszó beállításai (2 / 2 lépés)"
-
-# interfaces/users.glade.h:57
-#: interfaces/boot.glade.in.h:28
-#, fuzzy
-msgid "Image Settings (Step 2 of 2)"
-msgstr "Jelszó beállításai (2 / 2 lépés)"
-
-#: interfaces/boot.glade.in.h:29
-msgid "Initrd image path:"
-msgstr ""
-
-#: interfaces/boot.glade.in.h:30 interfaces/network.glade.in.h:66
-#: src/network/connection.c:1730
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
+#: src/network/connection.c:1849
 msgid "Manual"
 msgstr "Kézi"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:30
 msgid "Modify the settings for an operating system or kernel."
 msgstr ""
 
-#: interfaces/boot.glade.in.h:32
-msgid "Number of colors"
+#: interfaces/boot.glade.in.h:31
+msgid "Number of colors:"
 msgstr ""
 
-# interfaces/users.glade.h:57
-#: interfaces/boot.glade.in.h:33
-#, fuzzy
-msgid "Other Operating System (Step 2 of 2)"
-msgstr "Jelszó beállításai (2 / 2 lépés)"
-
 # interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:32
 #, fuzzy
 msgid "Other parameters:"
 msgstr "_Profilok szerkesztése..."
 
-# interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/boot.glade.in.h:35
+# interfaces/shares.glade.h:12
+#: interfaces/boot.glade.in.h:33
 #, fuzzy
-msgid "P_arameters:"
-msgstr "_Profilok szerkesztése..."
+msgid "Password"
+msgstr "Jelszó:"
 
-#: interfaces/boot.glade.in.h:36 interfaces/display.glade.in.h:16
-msgid "Resolution"
-msgstr "Felbontás"
+#: interfaces/boot.glade.in.h:34
+#, fuzzy
+msgid "Protect with password"
+msgstr "Futtatás jelszó nélkül"
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:35
+msgid "Resolution:"
+msgstr "Felbontás:"
+
+#: interfaces/boot.glade.in.h:36
 #, fuzzy
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "_másodpercig az alapértelmezett rendszermag vagy OS betöltése előtt"
+
+#: interfaces/boot.glade.in.h:37
+msgid ""
+"Several bootloaders have been found in the system, please select which do "
+"you want to configure"
+msgstr ""
 
 #: interfaces/boot.glade.in.h:38
 msgid "Specify the partition on which the operating system is installed."
@@ -240,1246 +274,132 @@ msgstr ""
 
 #: interfaces/boot.glade.in.h:39
 msgid ""
-"The new boot image has been added.\n"
-"Please click \"Apply\" to save your changes. "
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
+msgstr ""
+
+#: interfaces/boot.glade.in.h:40
+msgid ""
+"This assistant is designed to help you quickly and easily add a new boot "
+"image to your system."
 msgstr ""
 
 #: interfaces/boot.glade.in.h:41
-msgid ""
-"This assistant is designed to help you quickly \n"
-"and easily add a new boot image to your system.\n"
-"\n"
-"To begin, click \"Forward\". "
-msgstr ""
-
-#: interfaces/boot.glade.in.h:45
 msgid "Use this dialog to modify kernel parameters."
 msgstr ""
 
-#: interfaces/boot.glade.in.h:46
-msgid ""
-"Use this tool to specify which operating systems users can choose at startup."
+#: interfaces/boot.glade.in.h:42
+msgid "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:43
 msgid "Video modes (only frame buffer)"
 msgstr ""
 
-#: interfaces/boot.glade.in.h:48 interfaces/network.glade.in.h:138
-#: interfaces/shares.glade.in.h:60
+#: interfaces/boot.glade.in.h:44
 msgid "_Add..."
 msgstr "_Hozzáadás..."
 
 # interfaces/disks.glade.h:9 interfaces/memory.glade.h:14
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:45
 msgid "_Device:"
 msgstr "_Eszköz:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:46
 msgid "_Edit"
 msgstr "S_zerkesztés"
 
-#: interfaces/boot.glade.in.h:51
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
+msgid "_Initrd image path:"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:48
 msgid "_Kernel image path:"
 msgstr ""
 
 # interfaces/shares.glade.h:46
-#: interfaces/boot.glade.in.h:52 interfaces/print.glade.in.h:72
-#: interfaces/shares.glade.in.h:68
+#: interfaces/boot.glade.in.h:49
 msgid "_Name:"
 msgstr "_Név:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:50
 msgid "_Operating system:"
 msgstr ""
 
-#: interfaces/boot.glade.in.h:54
+# interfaces/users.glade.h:42 interfaces/users.glade.h:66
+#: interfaces/boot.glade.in.h:51
+#, fuzzy
+msgid "_Parameters:"
+msgstr "_Profilok szerkesztése..."
+
+#: interfaces/boot.glade.in.h:52
 msgid "_Root file system device:"
 msgstr ""
 
 #: interfaces/common.glade.in.h:2
 msgid ""
-"<span weight=\"bold\">The platform you are running is not supported by this "
-"tool.</span>\n"
-"\n"
-"If you know for sure that it works like one of the platforms listed below, "
-"you can select that and continue.\n"
-"\n"
-"Note, however, that this might damage the system configuration or downright "
-"cripple your computer."
+"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
+"supported by this tool</span>"
 msgstr ""
 
-#: interfaces/common.glade.in.h:7
+#: interfaces/common.glade.in.h:3
 msgid ""
-"<span weight=\"bold\">To run this tool, you need administrator privileges.</"
-"span>\n"
-"\n"
-"To acquire such privileges, enter your root password below. If you don't\n"
-"specify a password, you will be unable to modify your system configuration."
+"<span weight=\"bold\" size=\"larger\">To run this tool, you need "
+"administrator privileges</span>"
 msgstr ""
 
 # interfaces/common.glade.h:14
-#: interfaces/common.glade.in.h:11
+#: interfaces/common.glade.in.h:4
 msgid "Complexity"
 msgstr "Bonyolultság"
 
-# interfaces/common.glade.h:7 interfaces/common.glade.h:13
-#: interfaces/common.glade.in.h:12
+# interfaces/users.glade.h:21
+#: interfaces/common.glade.in.h:5
 #, fuzzy
-msgid "Enter Password - GNOME System Tools"
-msgstr "Ximian Setup Tools"
+msgid "Enter Password"
+msgstr "_Véletlen jelszó generálása"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1700
-msgid "GNOME System Tools"
+#: interfaces/common.glade.in.h:6
+msgid ""
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
 msgstr ""
 
-# interfaces/shares.glade.h:12
-#: interfaces/common.glade.in.h:14 interfaces/network.glade.in.h:85
-#: interfaces/shares.glade.in.h:46
-msgid "Password:"
-msgstr "Jelszó:"
+#: interfaces/common.glade.in.h:7
+#, fuzzy
+msgid "Remote administration"
+msgstr "Memória adminsztráció"
+
+#: interfaces/common.glade.in.h:8
+#, fuzzy
+msgid "Run _Without Password"
+msgstr "Futtatás jelszó nélkül"
 
 # interfaces/common.glade.h:8 src/common/tool.c:456
-#: interfaces/common.glade.in.h:15
+#: interfaces/common.glade.in.h:9
 #, fuzzy
-msgid "Scanning system configuration."
+msgid "Scanning system configuration..."
 msgstr "Rendszerkonfiguráció vizsgálata."
 
-#: interfaces/common.glade.in.h:16
+#: interfaces/common.glade.in.h:10
+msgid ""
+"To acquire such privileges, enter your root password below. If you don't "
+"specify a password, you will be  unable to modify your system configuration."
+msgstr ""
+
+#: interfaces/common.glade.in.h:11
 msgid "Unsupported Platform"
 msgstr ""
 
-#: interfaces/common.glade.in.h:17
-#, fuzzy
-msgid "_Run without password"
-msgstr "Futtatás jelszó nélkül"
-
-#: interfaces/dhcpd.glade.in.h:1
-msgid "Advanced mode not yet implemented. Sorry."
+#: interfaces/common.glade.in.h:12
+msgid "Use this window to select the computer you wish to configure"
 msgstr ""
 
-# interfaces/networking.glade.h:12
-#: interfaces/dhcpd.glade.in.h:2
-#, fuzzy
-msgid "DHCP Server"
-msgstr "DHCP szerver használata"
-
-# interfaces/common.glade.h:8 src/common/tool.c:456
-#: interfaces/dhcpd.glade.in.h:3
-#, fuzzy
-msgid "DHCP server configuration"
-msgstr "Rendszerkonfiguráció vizsgálata."
-
-# interfaces/common.glade.h:8 src/common/tool.c:456
-#: interfaces/dhcpd.glade.in.h:4
-#, fuzzy
-msgid "DHCP server configuration "
-msgstr "Rendszerkonfiguráció vizsgálata."
-
-# interfaces/shares.glade.h:15
-#: interfaces/dhcpd.glade.in.h:5
-msgid "DNS_1 :"
-msgstr "DNS_1 :"
-
-# interfaces/shares.glade.h:15
-#: interfaces/dhcpd.glade.in.h:6
-msgid "DNS_2 :"
-msgstr "DNS_2 :"
-
-# interfaces/memory.glade.h:15 interfaces/memory.glade.h:24
-# interfaces/memory.glade.h:35 interfaces/shares.glade.h:48
-# interfaces/shares.glade.h:54
-#: interfaces/dhcpd.glade.in.h:7
-msgid "E_nabled"
-msgstr "E_ngedélyezve"
-
-# interfaces/networking.glade.h:11
-#: interfaces/dhcpd.glade.in.h:8
-#, fuzzy
-msgid "Host Info : "
-msgstr "Kiszolgáló IP:"
-
-# interfaces/nameresolution.glade.h:16
-#: interfaces/dhcpd.glade.in.h:9
-#, fuzzy
-msgid "Hosts :"
-msgstr "Gépek"
-
-# interfaces/shares.glade.h:31
-#: interfaces/dhcpd.glade.in.h:10
-#, fuzzy
-msgid "Hosts Editor"
-msgstr "Rendszerindító szerkesztése"
-
-# interfaces/nameresolution.glade.h:43
-#: interfaces/dhcpd.glade.in.h:11
-#, fuzzy
-msgid "Ip Address"
-msgstr "IP cím"
-
-#: interfaces/dhcpd.glade.in.h:12
-msgid "Range _End :"
-msgstr ""
-
-#: interfaces/dhcpd.glade.in.h:13
-#, fuzzy
-msgid "Range _Start :"
-msgstr "X újraindítása"
-
-#: interfaces/dhcpd.glade.in.h:14
-#, fuzzy
-msgid "Router :"
-msgstr "_Távoli IP:"
-
-# interfaces/networking.glade.h:10
-#: interfaces/dhcpd.glade.in.h:15
-#, fuzzy
-msgid "Subnet _Mask :"
-msgstr "_Hálózati maszk:"
-
-# interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:10
-# interfaces/nameresolution.glade.h:30 interfaces/nameresolution.glade.h:35
-# interfaces/shares.glade.h:55 interfaces/shares.glade.h:64
-# interfaces/shares.glade.h:67 interfaces/time.glade.h:29
-#: interfaces/dhcpd.glade.in.h:16 interfaces/memory.glade.in.h:22
-msgid "_Add"
-msgstr "_Hozzáadás"
-
-# interfaces/shares.glade.h:20 interfaces/users.glade.h:11
-#: interfaces/dhcpd.glade.in.h:17
-#, fuzzy
-msgid "_Comment :"
-msgstr "_Megjegyzés:"
-
-# interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
-# interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
-# interfaces/users.glade.h:35 interfaces/users.glade.h:43
-# interfaces/users.glade.h:67
-#: interfaces/dhcpd.glade.in.h:18 interfaces/network.glade.in.h:144
-#: interfaces/shares.glade.in.h:63 interfaces/users.glade.in.h:83
-msgid "_Delete"
-msgstr "_Törlés"
-
-# interfaces/nameresolution.glade.h:21
-#: interfaces/dhcpd.glade.in.h:19
-#, fuzzy
-msgid "_Domain :"
-msgstr "_Tartomány:"
-
-#: interfaces/dhcpd.glade.in.h:20
-#, fuzzy
-msgid "_Edit Hosts..."
-msgstr "_Szerkesztés..."
-
-# interfaces/nameresolution.glade.h:17
-#: interfaces/dhcpd.glade.in.h:21
-#, fuzzy
-msgid "_Hostname :"
-msgstr "_Gépnév:"
-
-# interfaces/nameresolution.glade.h:8
-#: interfaces/dhcpd.glade.in.h:22
-#, fuzzy
-msgid "_IP address :"
-msgstr "_IP cím:"
-
-# interfaces/nameresolution.glade.h:8
-#: interfaces/dhcpd.glade.in.h:23
-#, fuzzy
-msgid "_MAC address :"
-msgstr "_IP cím:"
-
-# interfaces/nameresolution.glade.h:16
-#: interfaces/dhcpd.glade.in.h:24
-#, fuzzy
-msgid "host"
-msgstr "Gép"
-
-# interfaces/disks.glade.h:29 interfaces/shares.glade.h:39
-#: interfaces/disks.glade.in.h:2
-msgid "Add an unlisted import"
-msgstr "Listában nem szereplő import hozzáadása"
-
-# interfaces/disks.glade.h:30
-#: interfaces/disks.glade.in.h:3
-msgid "Add partition"
-msgstr "Partíció hozzáadása"
-
-# interfaces/disks.glade.h:11
-#: interfaces/disks.glade.in.h:4
-msgid "Automatic (detect when mounting)"
-msgstr "Automatikus (felcsatolásnál felismeri)"
-
-# interfaces/disks.glade.h:18
-#: interfaces/disks.glade.in.h:5
-msgid "Check for errors on startup"
-msgstr "Hibaellenőrzés induláskor"
-
-# interfaces/disks.glade.h:17 interfaces/shares.glade.h:16
-#: interfaces/disks.glade.in.h:6
-msgid "Choose a mount point"
-msgstr "Válassz csatolási pontot"
-
-# interfaces/disks.glade.h:9 interfaces/memory.glade.h:14
-#: interfaces/disks.glade.in.h:7 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.in.h:50
-msgid "Device:"
-msgstr "Eszköz:"
-
-# interfaces/disks.glade.h:36
-#: interfaces/disks.glade.in.h:8
-msgid "Disks & partitions"
-msgstr "Lemezek & partíciók"
-
-# interfaces/disks.glade.h:35
-#: interfaces/disks.glade.in.h:9
-msgid ""
-"Disks are divided into several pieces, called partitions. Each partition is "
-"dedicated for a specific storage task, such as virtual memory or home "
-"directories for your users."
-msgstr ""
-"A lemezek kisebb részekre oszthatók, ezeket hívjuk partícióknak. Minden "
-"partíciónak külön szerepe van, használhatod virtuális memóriának vagy a "
-"felhasználók saját könyvtárai tárolására."
-
-# interfaces/disks.glade.h:12
-#: interfaces/disks.glade.in.h:10
-msgid "Ext2 (Linux)"
-msgstr "Ext2 (Linux)"
-
-# interfaces/disks.glade.h:13
-#: interfaces/disks.glade.in.h:11
-msgid "FAT (DOS)"
-msgstr "FAT (DOS)"
-
-# interfaces/disks.glade.h:15
-#: interfaces/disks.glade.in.h:12
-msgid "FAT32 (Windows 98 and newer)"
-msgstr "FAT32 (Windows 98 és újabb)"
-
-# interfaces/disks.glade.h:10 interfaces/shares.glade.h:13
-#: interfaces/disks.glade.in.h:13 interfaces/shares.glade.in.h:37
-msgid "Mount point:"
-msgstr "Csatolási pont:"
-
-# interfaces/disks.glade.h:31
-#: interfaces/disks.glade.in.h:14
-msgid "Mount this partition"
-msgstr "Ezen partícó felcsatolása"
-
-# interfaces/disks.glade.h:16
-#: interfaces/disks.glade.in.h:15
-msgid "NTFS (Windows NT & 2000)"
-msgstr "NTFS (Windows NT & 2000)"
-
-# interfaces/disks.glade.h:32 interfaces/shares.glade.h:42
-#: interfaces/disks.glade.in.h:16
-msgid "Open settings dialog for selected import"
-msgstr "Beállítások dialógus a kiválasztott importhoz"
-
-# interfaces/disks.glade.h:28
-#: interfaces/disks.glade.in.h:17
-msgid "Partition"
-msgstr "Partíció"
-
-# interfaces/disks.glade.h:7
-#: interfaces/disks.glade.in.h:18
-msgid "Partition Settings"
-msgstr "Partíció beállítások"
-
-# interfaces/disks.glade.h:34
-#: interfaces/disks.glade.in.h:19
-msgid "Remember details of this partition"
-msgstr "Ezen parcíció részleteinek megjegyzése"
-
-# interfaces/disks.glade.h:33 interfaces/memory.glade.h:16
-# interfaces/memory.glade.h:25 interfaces/memory.glade.h:41
-# interfaces/nameresolution.glade.h:49 interfaces/shares.glade.h:43
-# interfaces/shares.glade.h:57 interfaces/shares.glade.h:63
-# interfaces/shares.glade.h:69 interfaces/users.glade.h:39
-# interfaces/users.glade.h:46 interfaces/users.glade.h:72
-#: interfaces/disks.glade.in.h:20 interfaces/memory.glade.in.h:16
-#: interfaces/nameresolution.glade.in.h:30 interfaces/users.glade.in.h:59
-msgid "Settings"
-msgstr "Beállítások"
-
-# interfaces/disks.glade.h:8 interfaces/shares.glade.h:8
-#: interfaces/disks.glade.in.h:21
-msgid "Type:"
-msgstr "Típus:"
-
-# interfaces/disks.glade.h:14
-#: interfaces/disks.glade.in.h:22
-msgid "VFAT (Windows 95 and newer)"
-msgstr "VFAT (Windows 95 és újabb)"
-
-#: interfaces/disks.glade.in.h:23
-msgid "reiserfs (Linux)"
-msgstr ""
-
-#: interfaces/disks.glade.in.h:24
-msgid "ufs (FreeBSD)"
-msgstr ""
-
-# interfaces/nameresolution.glade.h:19 interfaces/nameresolution.glade.h:23
-#: interfaces/display.glade.in.h:5 interfaces/nameresolution.glade.in.h:3
-msgid "<unknown>"
-msgstr "<ismeretlen>"
-
-#: interfaces/display.glade.in.h:6
-msgid "Appearance"
-msgstr ""
-
-#: interfaces/display.glade.in.h:7
-msgid "Colors"
-msgstr ""
-
-#: interfaces/display.glade.in.h:8
-msgid "Colors:"
-msgstr ""
-
-# interfaces/nameresolution.glade.h:38
-#: interfaces/display.glade.in.h:9
-msgid "Down"
-msgstr "Le"
-
-# interfaces/memory.glade.h:28 interfaces/shares.glade.h:10
-#: interfaces/display.glade.in.h:10
-msgid "Left"
-msgstr "Balra"
-
-#: interfaces/display.glade.in.h:11
-msgid "Model:"
-msgstr ""
-
-# interfaces/disks.glade.h:27
-#: interfaces/display.glade.in.h:12
-#, fuzzy
-msgid "Monitor information"
-msgstr "Csatolási pont"
-
-#: interfaces/display.glade.in.h:13
-msgid "Narrower"
-msgstr "Keskenyebb"
-
-#: interfaces/display.glade.in.h:14
-msgid "Probe again"
-msgstr ""
-
-#: interfaces/display.glade.in.h:15
-msgid "Refresh rate:"
-msgstr "Frissítési frekvencia:"
-
-#: interfaces/display.glade.in.h:17
-msgid "Resolution:"
-msgstr "Felbontás:"
-
-#: interfaces/display.glade.in.h:18
-msgid "Restart X"
-msgstr "X újraindítása"
-
-#: interfaces/display.glade.in.h:19
-msgid "Right"
-msgstr "Jobbra"
-
-#: interfaces/display.glade.in.h:20
-msgid "Shift my display:"
-msgstr "Képernyő eltolása:"
-
-# interfaces/nameresolution.glade.h:33
-#: interfaces/display.glade.in.h:21
-msgid "Shorter"
-msgstr "Alacsonyabb"
-
-#: interfaces/display.glade.in.h:22
-msgid "Stretch my display:"
-msgstr "Képernyő nyújtása:"
-
-#: interfaces/display.glade.in.h:23
-msgid "Taller"
-msgstr "Magasabb"
-
-# interfaces/users.glade.h:49
-#: interfaces/display.glade.in.h:24
-msgid "Test current setting"
-msgstr "Beállítások tesztelése"
-
-#: interfaces/display.glade.in.h:25
-msgid "Up"
-msgstr "Fel"
-
-#: interfaces/display.glade.in.h:26
-msgid "Use this tool to configure your monitor."
-msgstr "Monitorbeállító eszköz."
-
-#: interfaces/display.glade.in.h:27
-msgid "Vendor:"
-msgstr "Gyártó:"
-
-# interfaces/shares.glade.h:23 interfaces/shares.glade.h:51
-#: interfaces/display.glade.in.h:28
-msgid "Wider"
-msgstr "Szélesebb"
-
-# interfaces/users.glade.h:49
-#: interfaces/display.glade.in.h:29
-msgid "_Restore settings"
-msgstr "_Eredeti beállítások"
-
-#: interfaces/font.glade.in.h:1
-#, fuzzy
-msgid "Add font..."
-msgstr "Nyomtató hozzáadása..."
-
-# interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
-# interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
-# interfaces/users.glade.h:35 interfaces/users.glade.h:43
-# interfaces/users.glade.h:67
-#: interfaces/font.glade.in.h:2
-#, fuzzy
-msgid "Delete font"
-msgstr "Törlés"
-
-#: interfaces/font.glade.in.h:3
-msgid "Font family"
-msgstr ""
-
-#: interfaces/font.glade.in.h:4
-msgid "Font size:"
-msgstr ""
-
-# interfaces/disks.glade.h:20 interfaces/memory.glade.h:8
-# interfaces/memory.glade.h:36
-#: interfaces/font.glade.in.h:5
-#, fuzzy
-msgid "Preview"
-msgstr "Eszköz"
-
-#: interfaces/font.glade.in.h:6
-msgid "Select the fonts you want to install."
-msgstr ""
-
-#: interfaces/font.glade.in.h:7
-msgid "Style"
-msgstr ""
-
-# interfaces/time.glade.h:16
-#: interfaces/internetsharing.glade.in.h:1
-msgid "   Configure...   "
-msgstr "   Beállítás...   "
-
-#: interfaces/internetsharing.glade.in.h:2
-msgid " Exit and come back later after installing."
-msgstr ""
-
-# src/common/tool.c:536
-#: interfaces/internetsharing.glade.in.h:3
-msgid " Keep the current configuration."
-msgstr "A jelenlegi beállítások megtartása."
-
-#: interfaces/internetsharing.glade.in.h:4
-msgid " Never mind, don't use it then."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:5
-msgid " No, I'll manually configure the local network computers."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:6
-msgid " No, I'll set it up later by myself."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:7
-msgid " No, exit this druid and continue later."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:8
-msgid " No, overwrite with new defaults (recommended)"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:9
-msgid ""
-" Overwrite with the default internet sharing configuration (recommended)."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:10
-msgid ""
-" Yes, I'll set the local network computers to use automatic IP assignment  "
-"(recommended)."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:11
-msgid " Yes, keep the current DHCP configuration."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:12
-msgid " Yes, launch network tool (recommended)."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:13
-msgid ""
-"A local network connection was not detected.\n"
-"Would you like to configure one?\n"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:16
-msgid ""
-"A local network interface has been detected, but it's not active.\n"
-"Would you like to activate it now?\n"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:19
-msgid ""
-"A previous DHCP configuration has been detected. \n"
-"Do you want to keep this configuration?"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:21
-msgid "Banner Removal (Junkbuster)"
-msgstr "Reklámcsíkok eltávolítása (Junkbuster)"
-
-#: interfaces/internetsharing.glade.in.h:22
-msgid "Configure DHCP Service"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:23
-msgid ""
-"Congratulations! This computer is now\n"
-"configured to share its Internet connection.\n"
-msgstr ""
-
-# src/nameresolution/callbacks.c:366
-#: interfaces/internetsharing.glade.in.h:26
-#, fuzzy
-msgid "Create a new local network interface."
-msgstr "Új aliaszok létrehozása"
-
-#: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:45
-#: src/network/connection.c:1731
-msgid "DHCP"
-msgstr "DHCP"
-
-# interfaces/common.glade.h:8 src/common/tool.c:456
-#: interfaces/internetsharing.glade.in.h:28
-#, fuzzy
-msgid "DHCP service configuration."
-msgstr "Rendszerkonfiguráció vizsgálata."
-
-#: interfaces/internetsharing.glade.in.h:29
-msgid "DHCP service requirements."
-msgstr ""
-
-# interfaces/shares.glade.h:23 interfaces/shares.glade.h:51
-#: interfaces/internetsharing.glade.in.h:30
-msgid "Disable"
-msgstr "Tiltás"
-
-# interfaces/memory.glade.h:15 interfaces/memory.glade.h:24
-# interfaces/memory.glade.h:35 interfaces/shares.glade.h:48
-# interfaces/shares.glade.h:54
-#: interfaces/internetsharing.glade.in.h:31
-msgid "Enable :"
-msgstr "Engedélyezés :"
-
-#: interfaces/internetsharing.glade.in.h:32
-msgid "End of Range"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:34
-msgid "Firewall"
-msgstr "Tűzfal"
-
-# interfaces/shares.glade.h:17
-#: interfaces/internetsharing.glade.in.h:35
-msgid "IP Forwarding"
-msgstr "IP továbbítás"
-
-#: interfaces/internetsharing.glade.in.h:36
-msgid "Internet Sharing"
-msgstr "Internet-megosztás"
-
-#: interfaces/internetsharing.glade.in.h:37
-msgid "Internet Sharing --Advanced Mode"
-msgstr "Internet-megosztás --Haladó mód"
-
-#: interfaces/internetsharing.glade.in.h:38
-#, fuzzy
-msgid "Internet Sharing Configuration Druid"
-msgstr "Internet-megosztás --Haladó mód"
-
-#: interfaces/internetsharing.glade.in.h:39
-msgid "Internet Sharing Druid"
-msgstr "Internet-megosztás Varázsló"
-
-# interfaces/common.glade.h:8 src/common/tool.c:456
-#: interfaces/internetsharing.glade.in.h:40
-#, fuzzy
-msgid "Internet sharing configuration."
-msgstr "Rendszerkonfiguráció vizsgálata."
-
-#: interfaces/internetsharing.glade.in.h:41
-msgid "Local network interface activation."
-msgstr "Helyi hálózati csatoló aktiválása."
-
-#: interfaces/internetsharing.glade.in.h:42
-#, fuzzy
-msgid "Start of Range"
-msgstr "Statikus nevek"
-
-# interfaces/shares.glade.h:70
-#: interfaces/internetsharing.glade.in.h:43
-#, fuzzy
-msgid ""
-"The Internet sharing tool allows you to share your Internet conection with "
-"other computers on the network."
-msgstr ""
-"Az NFS megosztások segítségével megoszthatod a könyvtáraidat más UNIX-os "
-"vagy Linuxos gépekkel, a hálózaton keresztül."
-
-#: interfaces/internetsharing.glade.in.h:44
-msgid "Web Cache (squid)"
-msgstr "Webgyorstár (squid)"
-
-#: interfaces/internetsharing.glade.in.h:45
-msgid ""
-"Welcome to the Internet Sharing Configuration Druid.\n"
-"\n"
-"This druid will help you to configure and share\n"
-"your Internet connection.\n"
-"\n"
-"You should have already installed and configured a local\n"
-"network connection, such as an Ethernet or waveLAN\n"
-"card, and an internet connection, such as a modem.\n"
-"\n"
-"If you haven't, you will be given the option to launch the\n"
-"Network Tool to configure them before continuing."
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:56
-msgid ""
-"Would you like to give the automatic network\n"
-"address assignment service (DHCP)?\n"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:59
-msgid "Yes (recommended)."
-msgstr "Igen (javasolt)."
-
-#: interfaces/internetsharing.glade.in.h:60
-msgid ""
-"You already have an internet sharing configuration.\n"
-"Do you want to keep it, or use the druid's defaults?\n"
-msgstr ""
-
-#: interfaces/internetsharing.glade.in.h:63
-msgid ""
-"You don't have a DHCP server installed, or\n"
-"some other related component is missing."
-msgstr ""
-
-#: interfaces/location-manager.glade.in.h:1 interfaces/shares.glade.in.h:1
-msgid "\n"
-msgstr ""
-
-#: interfaces/location-manager.glade.in.h:3
-msgid "                           "
-msgstr "                           "
-
-# interfaces/time.glade.h:16
-#: interfaces/location-manager.glade.in.h:4 interfaces/time.glade.in.h:1
-msgid "(unconfigured)"
-msgstr "(nincs beállítva)"
-
-# interfaces/time.glade.h:11 interfaces/time.glade.h:12
-#: interfaces/location-manager.glade.in.h:5 interfaces/time.glade.in.h:3
-msgid ":"
-msgstr ":"
-
-# interfaces/time.glade.h:13
-#: interfaces/location-manager.glade.in.h:6
-msgid "AM"
-msgstr "de"
-
-#: interfaces/location-manager.glade.in.h:7
-msgid "Boston Office"
-msgstr ""
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:8
-#, fuzzy
-msgid "Choose Location"
-msgstr "Hely"
-
-#: interfaces/location-manager.glade.in.h:9
-msgid "Copy"
-msgstr "Másolás"
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:10
-msgid "Copy Location"
-msgstr "Hely másolása"
-
-# interfaces/shares.glade.h:20 interfaces/users.glade.h:11
-#: interfaces/location-manager.glade.in.h:11
-msgid "Current:"
-msgstr "Jelenlegi:"
-
-# interfaces/time.glade.h:9
-#: interfaces/location-manager.glade.in.h:12
-msgid "Date"
-msgstr "Dátum"
-
-# interfaces/time.glade.h:7
-#: interfaces/location-manager.glade.in.h:13
-msgid "Date/Time "
-msgstr "Dátum/idő "
-
-# interfaces/time.glade.h:21
-#: interfaces/location-manager.glade.in.h:14
-msgid "Date/time"
-msgstr "Dátum/idő"
-
-# interfaces/time.glade.h:7
-#: interfaces/location-manager.glade.in.h:15
-msgid "Edit Date/Time"
-msgstr "Dátum/idő szerkesztése"
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:16
-msgid "Edit Location"
-msgstr "Hely szerkesztése"
-
-#: interfaces/location-manager.glade.in.h:17
-msgid "Edit:"
-msgstr "Szerkesztés:"
-
-#: interfaces/location-manager.glade.in.h:18
-msgid "Helsinki Office"
-msgstr ""
-
-# interfaces/time.glade.h:19
-#: interfaces/location-manager.glade.in.h:19
-msgid "Keep clock synchronized with selected servers"
-msgstr "Az óra szinkronban tartása a kiválasztott kiszolgálókkal"
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:20
-msgid "Location"
-msgstr "Hely"
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:21
-#: interfaces/rollback-location-management.glade.in.h:7
-#, fuzzy
-msgid "Location Management"
-msgstr "Hely"
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:22
-msgid "Location:"
-msgstr "Hely:"
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:23
-msgid "Locations"
-msgstr "Helyek"
-
-#: interfaces/location-manager.glade.in.h:24
-msgid "Mexico CIty "
-msgstr ""
-
-# interfaces/shares.glade.h:46
-#: interfaces/location-manager.glade.in.h:25 interfaces/shares.glade.in.h:43
-msgid "Name:"
-msgstr "Név:"
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:26
-msgid "New Location"
-msgstr "Új hely"
-
-# interfaces/shares.glade.h:46
-#: interfaces/location-manager.glade.in.h:27
-msgid "New Name:"
-msgstr "Új név:"
-
-# interfaces/users.glade.h:10
-#: interfaces/location-manager.glade.in.h:28
-msgid "New name:"
-msgstr "Új név:"
-
-# interfaces/time.glade.h:14
-#: interfaces/location-manager.glade.in.h:29
-msgid "PM"
-msgstr "du"
-
-# interfaces/time.glade.h:8
-#: interfaces/location-manager.glade.in.h:30 interfaces/time.glade.in.h:5
-msgid ""
-"Please select the current date and time. You can also specify a time zone "
-"and a time server."
-msgstr ""
-"Válaszd ki az aktuális dátumot és időt. Lehetőséged van időzónát és "
-"időkiszolgálót is megadni."
-
-# interfaces/memory.glade.h:40 interfaces/shares.glade.h:56
-# interfaces/shares.glade.h:65 interfaces/shares.glade.h:68
-#: interfaces/location-manager.glade.in.h:31
-msgid "Rename"
-msgstr "Átnevezés"
-
-# interfaces/shares.glade.h:31
-#: interfaces/location-manager.glade.in.h:32
-msgid "Rename Location"
-msgstr "Hely átnevezése"
-
-#: interfaces/location-manager.glade.in.h:33
-msgid "Rollback-location-management-mockup"
-msgstr ""
-
-# interfaces/time.glade.h:20
-#: interfaces/location-manager.glade.in.h:34
-msgid "Select servers..."
-msgstr "Kiszolgálók kiválasztása..."
-
-# interfaces/time.glade.h:17
-#: interfaces/location-manager.glade.in.h:35
-msgid "Set time zone..."
-msgstr "Időzóna beállítása..."
-
-# interfaces/time.glade.h:10
-#: interfaces/location-manager.glade.in.h:36 src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Idő"
-
-# interfaces/time.glade.h:18
-#: interfaces/location-manager.glade.in.h:37
-msgid "Time server"
-msgstr "Időkiszolgáló"
-
-# interfaces/time.glade.h:15 interfaces/time.glade.h:22
-#: interfaces/location-manager.glade.in.h:38
-msgid "Time zone"
-msgstr "Időzóna"
-
-#: interfaces/location-manager.glade.in.h:39
-msgid ""
-"Use this tool to manage all the different locations where you could possibly "
-"want to use your stinking laptop."
-msgstr ""
-
-#: interfaces/location-manager.glade.in.h:40
-msgid "_Help"
-msgstr "_Súgó"
-
-# interfaces/disks.glade.h:33 interfaces/memory.glade.h:16
-# interfaces/memory.glade.h:25 interfaces/memory.glade.h:41
-# interfaces/nameresolution.glade.h:49 interfaces/shares.glade.h:43
-# interfaces/shares.glade.h:57 interfaces/shares.glade.h:63
-# interfaces/shares.glade.h:69 interfaces/users.glade.h:39
-# interfaces/users.glade.h:46 interfaces/users.glade.h:72
-#: interfaces/location-manager.glade.in.h:41 interfaces/shares.glade.in.h:72
-msgid "_Settings..."
-msgstr "_Beállítások..."
-
-# interfaces/memory.glade.h:7
-#: interfaces/memory.glade.in.h:1
-msgid "Available partitions:"
-msgstr "Elérhető partíciók:"
-
-# interfaces/memory.glade.h:34
-#: interfaces/memory.glade.in.h:2
-msgid "Available swap areas"
-msgstr "Swap területek engedélyezése"
-
-# interfaces/memory.glade.h:27
-#: interfaces/memory.glade.in.h:3
-msgid "Browse..."
-msgstr "Tallózás..."
-
-# interfaces/memory.glade.h:12
-#: interfaces/memory.glade.in.h:4
-msgid "Cancel"
-msgstr "Mégsem"
-
-# interfaces/disks.glade.h:20 interfaces/memory.glade.h:8
-# interfaces/memory.glade.h:36
-#: interfaces/memory.glade.in.h:5 src/boot/table.c:48
-#: src/network/connection.c:508
-msgid "Device"
-msgstr "Eszköz"
-
-# interfaces/memory.glade.h:15 interfaces/memory.glade.h:24
-# interfaces/memory.glade.h:35 interfaces/shares.glade.h:48
-# interfaces/shares.glade.h:54
-#: interfaces/memory.glade.in.h:7 interfaces/shares.glade.in.h:16
-msgid "Enabled"
-msgstr "Engedélyezve"
-
-# interfaces/memory.glade.h:17 interfaces/memory.glade.h:26
-#: interfaces/memory.glade.in.h:8
-msgid "MB"
-msgstr "MB"
-
-# interfaces/memory.glade.h:20
-#: interfaces/memory.glade.in.h:9
-msgid "New Swap Device"
-msgstr "Új swap eszköz"
-
-# interfaces/memory.glade.h:11
-#: interfaces/memory.glade.in.h:10
-msgid "OK"
-msgstr "OK"
-
-# interfaces/memory.glade.h:28 interfaces/shares.glade.h:10
-#: interfaces/memory.glade.in.h:11 interfaces/shares.glade.in.h:48
-msgid "Path:"
-msgstr "Útvonal:"
-
-# interfaces/memory.glade.h:33
-#: interfaces/memory.glade.in.h:12
-msgid "Physical memory:"
-msgstr "Fizikai memória:"
-
-# interfaces/memory.glade.h:37
-#: interfaces/memory.glade.in.h:13 src/runlevel/table.c:73
-msgid "Priority"
-msgstr "Prioritás"
-
-# interfaces/memory.glade.h:19 interfaces/memory.glade.h:30
-#: interfaces/memory.glade.in.h:14 interfaces/runlevel.glade.in.h:7
-msgid "Priority:"
-msgstr "Prioritás:"
-
-# interfaces/memory.glade.h:10
-#: interfaces/memory.glade.in.h:15
-msgid "Select  Swap File"
-msgstr "Swapfájl kiválasztása"
-
-# interfaces/disks.glade.h:24 interfaces/memory.glade.h:9
-# interfaces/memory.glade.h:38
-#: interfaces/memory.glade.in.h:17
-msgid "Size"
-msgstr "Méret"
-
-# interfaces/memory.glade.h:18 interfaces/memory.glade.h:29
-#: interfaces/memory.glade.in.h:18
-msgid "Size:"
-msgstr "Méret:"
-
-# interfaces/memory.glade.h:13
-#: interfaces/memory.glade.in.h:19
-msgid "Swap Settings"
-msgstr "Lapozás (swap) beállításai"
-
-# interfaces/memory.glade.h:32
-#: interfaces/memory.glade.in.h:20
-msgid "Swap memory:"
-msgstr "Swap memória:"
-
-# interfaces/memory.glade.h:21
-#: interfaces/memory.glade.in.h:21
-msgid "Swap type:"
-msgstr "Lapozás típusa:"
-
-# interfaces/memory.glade.h:40 interfaces/shares.glade.h:56
-# interfaces/shares.glade.h:65 interfaces/shares.glade.h:68
-#: interfaces/memory.glade.in.h:23
-msgid "_Remove"
-msgstr "_Eltávolítás"
-
-# interfaces/disks.glade.h:33 interfaces/memory.glade.h:16
-# interfaces/memory.glade.h:25 interfaces/memory.glade.h:41
-# interfaces/nameresolution.glade.h:49 interfaces/shares.glade.h:43
-# interfaces/shares.glade.h:57 interfaces/shares.glade.h:63
-# interfaces/shares.glade.h:69 interfaces/users.glade.h:39
-# interfaces/users.glade.h:46 interfaces/users.glade.h:72
-#: interfaces/memory.glade.in.h:24
-msgid "_Settings"
-msgstr "_Beállítások"
-
-# interfaces/memory.glade.h:23
-#: interfaces/memory.glade.in.h:25
-msgid "file"
-msgstr "fájl"
-
-# interfaces/memory.glade.h:22
-#: interfaces/memory.glade.in.h:26
-msgid "partition"
-msgstr "partíció"
-
-# interfaces/nameresolution.glade.h:37
-#: interfaces/nameresolution.glade.in.h:1
-msgid " Move Up"
-msgstr " Fel"
-
-# interfaces/nameresolution.glade.h:44
-#: interfaces/nameresolution.glade.in.h:2
-msgid " Names"
-msgstr " Nevek"
-
-# interfaces/memory.glade.h:39 interfaces/nameresolution.glade.h:10
-# interfaces/nameresolution.glade.h:30 interfaces/nameresolution.glade.h:35
-# interfaces/shares.glade.h:55 interfaces/shares.glade.h:64
-# interfaces/shares.glade.h:67 interfaces/time.glade.h:29
-#: interfaces/nameresolution.glade.in.h:4 interfaces/shares.glade.in.h:6
-#: interfaces/users.glade.in.h:14
-msgid "Add"
-msgstr "Hozzáadás"
-
-# interfaces/nameresolution.glade.h:9 interfaces/nameresolution.glade.h:50
-#: interfaces/nameresolution.glade.in.h:5 src/network/hosts.c:155
-msgid "Aliases"
-msgstr "Álnevek"
-
-# interfaces/nameresolution.glade.h:7
-#: interfaces/nameresolution.glade.in.h:6
-msgid "Aliases Settings"
-msgstr "Álnevek beállításai"
-
-# interfaces/nameresolution.glade.h:42
-#: interfaces/nameresolution.glade.in.h:7
-msgid ""
-"Assign aliases to IP addresses that may not be registered in the DNS or WINS "
-"servers, or to override or set new names for commonly used IP addresses. "
-msgstr ""
-"Álneveket azokhoz az IP címekhez rendelhetsz, amelyek nincsenek DNS vagy "
-"WINS kiszolgálóba bejegyezve. Akkor is érdemes álneveket használni, ha meg "
-"akarod változtatni az IP címedhez rendelt nevet, vagy új névvel (is) akarsz "
-"a címedre hivatkozni."
-
-# interfaces/nameresolution.glade.h:48
-#: interfaces/nameresolution.glade.in.h:8
-msgid "Change the alias' IP address or its corresponding names."
-msgstr "Az álnév IP címének vagy nevének megváltoztatása."
-
-# interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
-# interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
-# interfaces/users.glade.h:35 interfaces/users.glade.h:43
-# interfaces/users.glade.h:67
-#: interfaces/nameresolution.glade.in.h:9 interfaces/print.glade.in.h:21
-#: interfaces/shares.glade.in.h:13 interfaces/users.glade.in.h:28
-msgid "Delete"
-msgstr "Törlés"
-
-# interfaces/nameresolution.glade.h:25
-#: interfaces/nameresolution.glade.in.h:10 interfaces/network.glade.in.h:49
-#: interfaces/runlevel.glade.in.h:5
-msgid "Description:"
-msgstr "Leírás:"
-
-# interfaces/nameresolution.glade.h:20
-#: interfaces/nameresolution.glade.in.h:11
-msgid "Domain"
-msgstr "Tartomány"
-
-# interfaces/nameresolution.glade.h:34
-#: interfaces/nameresolution.glade.in.h:12
-msgid "Domain Lookup Order"
-msgstr "Tartománykeresési sorrend"
-
-# interfaces/nameresolution.glade.h:27
-#: interfaces/nameresolution.glade.in.h:13
-msgid "Domain Name Service (DNS)"
-msgstr "Névfeloldás (DNS)"
-
-# interfaces/nameresolution.glade.h:21
-#: interfaces/nameresolution.glade.in.h:14
-msgid "Domain:"
-msgstr "Tartomány:"
-
-# interfaces/nameresolution.glade.h:12 interfaces/nameresolution.glade.h:29
-# interfaces/nameresolution.glade.h:40
-#: interfaces/nameresolution.glade.in.h:15
-msgid "Existing:"
-msgstr "Létező:"
-
-# interfaces/nameresolution.glade.h:16
-#: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:24
-msgid "Host"
-msgstr "Gép"
-
-# interfaces/nameresolution.glade.h:17
-#: interfaces/nameresolution.glade.in.h:17
-msgid "Host name:"
-msgstr "Gép neve:"
-
-# interfaces/nameresolution.glade.h:43
-#: interfaces/nameresolution.glade.in.h:18
-msgid "IP address"
-msgstr "IP-cím"
-
-# interfaces/nameresolution.glade.h:8
-#: interfaces/nameresolution.glade.in.h:19
-msgid "IP address:"
-msgstr "IP-cím:"
-
-# interfaces/nameresolution.glade.h:26
-#: interfaces/nameresolution.glade.in.h:20
-msgid "Identification"
-msgstr "Azonosítás"
-
-# interfaces/nameresolution.glade.h:15
-#: interfaces/nameresolution.glade.in.h:21
-msgid "Let the computer know its name, function and network surroundings."
-msgstr ""
-"Mondd meg a számítógépnek a nevét, rendeltetését és a hálózati beállításait."
-
-# interfaces/nameresolution.glade.h:38
-#: interfaces/nameresolution.glade.in.h:22
-msgid "Move Down"
-msgstr "Le"
-
-# interfaces/nameresolution.glade.h:45
-#: interfaces/nameresolution.glade.in.h:23
-msgid "New Alias"
-msgstr "Új álnév"
-
-# interfaces/nameresolution.glade.h:39
-#: interfaces/nameresolution.glade.in.h:24
-msgid "New domain:"
-msgstr "Új tartomány:"
-
-# interfaces/nameresolution.glade.h:28
-#: interfaces/nameresolution.glade.in.h:25
-msgid "New server:"
-msgstr "Új kiszolgáló:"
-
-# interfaces/nameresolution.glade.h:13 interfaces/users.glade.h:19
-#: interfaces/nameresolution.glade.in.h:26
-msgid "New:"
-msgstr "Új:"
-
-# interfaces/nameresolution.glade.h:18 interfaces/nameresolution.glade.h:22
-#: interfaces/nameresolution.glade.in.h:27
-msgid "Reverse:"
-msgstr "Visszafele:"
-
-# interfaces/nameresolution.glade.h:41
-#: interfaces/nameresolution.glade.in.h:28
-msgid "Search Domains"
-msgstr "Alapértelmezett tartományok"
-
-# interfaces/nameresolution.glade.h:33
-#: interfaces/nameresolution.glade.in.h:29
-msgid "Servers"
-msgstr "Kiszolgálók"
-
-# interfaces/nameresolution.glade.h:47 src/nameresolution/callbacks.c:354
-# src/nameresolution/callbacks.c:398
-#: interfaces/nameresolution.glade.in.h:31
-msgid "Settings for the selected alias"
-msgstr "A kiválasztott aliasz beállításai"
-
-# interfaces/nameresolution.glade.h:32
-#: interfaces/nameresolution.glade.in.h:32
-msgid "Use WINS server:"
-msgstr "WINS szerver haszálata:"
-
-# interfaces/nameresolution.glade.h:24
-#: interfaces/nameresolution.glade.in.h:33
-msgid "Workgroup:"
-msgstr "Munkacsoport:"
+# interfaces/shares.glade.h:12
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:110
+msgid "_Password:"
+msgstr "_Jelszó:"
 
 #: interfaces/network.glade.in.h:2
 msgid "/dev/modem"
@@ -1502,1438 +422,651 @@ msgid "/dev/ttyS3"
 msgstr "/dev/ttyS3"
 
 #: interfaces/network.glade.in.h:7
-msgid "1. ISP phone number"
-msgstr "1. ISP telefonszáma"
-
-# interfaces/users.glade.h:21
-#: interfaces/network.glade.in.h:8
-msgid "2. Username and password"
-msgstr "2. Felhasználói név és jelszó"
-
-#: interfaces/network.glade.in.h:9
-msgid "2.422"
-msgstr "2.422"
-
-# interfaces/nameresolution.glade.h:17
-#: interfaces/network.glade.in.h:10
-msgid "3. Account name"
-msgstr "3. Fióknév"
-
-#: interfaces/network.glade.in.h:11
 #, fuzzy
 msgid "<b>Profile Settings</b>"
 msgstr "A számítógép indítása"
 
-#: interfaces/network.glade.in.h:12
+#: interfaces/network.glade.in.h:8
 #, fuzzy
 msgid "<span weight=\"bold\">Access Settings</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/network.glade.in.h:13
+#: interfaces/network.glade.in.h:9
 #, fuzzy
 msgid "<span weight=\"bold\">Account Data</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/network.glade.in.h:14
-msgid "<span weight=\"bold\">Activation</span>"
-msgstr ""
+#: interfaces/network.glade.in.h:10
+msgid "<span weight=\"bold\">Connection settings</span>"
+msgstr "<span weight=\"bold\">Kapcsolat beállításai</span>"
 
-#: interfaces/network.glade.in.h:15
-#, fuzzy
-msgid "<span weight=\"bold\">Ad-Hoc Settings</span>"
-msgstr "A számítógép indítása"
-
-#: interfaces/network.glade.in.h:16
+#: interfaces/network.glade.in.h:11
 msgid "<span weight=\"bold\">Connection</span>"
-msgstr ""
+msgstr "<span weight=\"bold\">Kapcsolat</span>"
 
-#: interfaces/network.glade.in.h:17
+#: interfaces/network.glade.in.h:12
 msgid "<span weight=\"bold\">DNS Servers</span>"
 msgstr ""
 
-#: interfaces/network.glade.in.h:18
+#: interfaces/network.glade.in.h:13
 #, fuzzy
 msgid "<span weight=\"bold\">Host Settings</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/network.glade.in.h:19
+#: interfaces/network.glade.in.h:14
 #, fuzzy
 msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/network.glade.in.h:20
+#: interfaces/network.glade.in.h:15
 #, fuzzy
 msgid "<span weight=\"bold\">PPP Settings</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/network.glade.in.h:21
+#: interfaces/network.glade.in.h:16
+#, fuzzy
+msgid "<span weight=\"bold\">Search Domains</span>"
+msgstr "A számítógép indítása"
+
+#: interfaces/network.glade.in.h:17
 #, fuzzy
 msgid "<span weight=\"bold\">Windows Networking</span>"
 msgstr "A számítógép indítása"
 
+#: interfaces/network.glade.in.h:18
+#, fuzzy
+msgid "<span weight=\"bold\">Wireless settings:</span>"
+msgstr "A számítógép indítása"
+
 # interfaces/nameresolution.glade.h:9 interfaces/nameresolution.glade.h:50
-#: interfaces/network.glade.in.h:22
+#: interfaces/network.glade.in.h:19
 msgid "A_liases:"
 msgstr "Á_lnevek:"
 
 # interfaces/nameresolution.glade.h:17
-#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:13
+#: interfaces/network.glade.in.h:20 interfaces/users.glade.in.h:13
 msgid "Account"
 msgstr "Fiók"
 
-# interfaces/nameresolution.glade.h:17
-#: interfaces/network.glade.in.h:24
-msgid "Account name:"
-msgstr "Fióknév:"
+#: interfaces/network.glade.in.h:21
+#, fuzzy
+msgid "Activate"
+msgstr "Aktív"
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:22
 msgid "Activate when the computer _starts"
 msgstr "Aktiválás a számítógép _indításakor"
 
-#: interfaces/network.glade.in.h:26
-msgid "Activate when the computer starts"
-msgstr "Aktiválás a számítógép indításakor"
-
-# interfaces/shares.glade.h:31
-#: interfaces/network.glade.in.h:27
-msgid "Activation"
-msgstr "Aktiválás"
-
-#: interfaces/network.glade.in.h:28
-msgid "Add New Internet Connection"
-msgstr "Új Internet-kapcsolat hozzáadása"
-
 # interfaces/users.glade.h:57
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:23
 #, fuzzy
-msgid "Address configuration (Step 1 of 2)"
+msgid "Address configuration"
 msgstr "Jelszó beállításai (2 / 2 lépés)"
 
-#: interfaces/network.glade.in.h:30 interfaces/users.glade.in.h:15
+#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
 msgid "Advanced"
 msgstr "Haladó"
 
 # interfaces/users.glade.h:12
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:25
 msgid "Advanced PPP connection tuning."
 msgstr "A PPP kapcsolat haladó finomhangolása."
 
 # src/users/user_group.c:237
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:26
 msgid "Aliases of other computers."
 msgstr "Más gépek álnevei."
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:27
 msgid "Allow activation control for all _users"
 msgstr ""
 
-#: interfaces/network.glade.in.h:34
-msgid "Allow activation control for all users"
-msgstr ""
-
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:28
 msgid "Auto"
 msgstr ""
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1732
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1851
 msgid "BOOTP"
 msgstr "BOOTP"
 
-# interfaces/disks.glade.h:7
-#: interfaces/network.glade.in.h:37
-msgid "Connection Settings"
-msgstr "Kapcsolat beállításai"
-
-# interfaces/shares.glade.h:31
-#: interfaces/network.glade.in.h:38
-msgid "Connection active"
-msgstr "A kapcsolat aktív"
-
-# interfaces/shares.glade.h:31
-#: interfaces/network.glade.in.h:39 src/network/network-druid.c:395
+# interfaces/users.glade.h:20
+#: interfaces/network.glade.in.h:30
 #, fuzzy
-msgid "Connection name (Step 3 of 3)"
-msgstr "A kapcsolat aktív"
+msgid "Co_nfiguration:"
+msgstr "_Beállítások:"
 
 # interfaces/shares.glade.h:31
-#: interfaces/network.glade.in.h:40
-#, fuzzy
-msgid "Connection name:"
-msgstr "Hely neve:"
+#: interfaces/network.glade.in.h:31
+msgid "Connection _name:"
+msgstr "Kap_csolat neve:"
 
 # interfaces/shares.glade.h:31
-#: interfaces/network.glade.in.h:41
-#, fuzzy
+#: interfaces/network.glade.in.h:32
+msgid "Connection name"
+msgstr "Kapcsolat neve"
+
+# interfaces/shares.glade.h:31
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
-msgstr "Új kapcsolattípus"
+msgstr "Kapcsolat típusa"
 
 # interfaces/shares.glade.h:31
-#: interfaces/network.glade.in.h:42
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Kapcsolatok"
 
 # src/nameresolution/callbacks.c:366
-#: interfaces/network.glade.in.h:43
-msgid "Create a new Internet Connection "
+#. set window titles
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
+msgid "Creating a new network connection"
 msgstr "Új Internet-kapcsolat létrehozása"
 
-# src/nameresolution/callbacks.c:366
-#: interfaces/network.glade.in.h:44
+# src/users/user_group.c:734
+#: interfaces/network.glade.in.h:36
 #, fuzzy
-msgid "Create a new network connection"
-msgstr "Új Internet-kapcsolat létrehozása"
+msgid "Current network profile:"
+msgstr "Új csoport létrehozása"
+
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1850
+msgid "DHCP"
+msgstr "DHCP"
 
 # interfaces/shares.glade.h:15
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:38
 msgid "DNS"
 msgstr "DNS"
 
-# interfaces/nameresolution.glade.h:33
-#: interfaces/network.glade.in.h:47
-msgid "DNS _Servers:"
-msgstr "Név_kiszolgálók:"
+# interfaces/nameresolution.glade.h:21
+#: interfaces/network.glade.in.h:39
+#, fuzzy
+msgid "D_omain name:"
+msgstr "_Tartomány:"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
 msgstr ""
 
+# interfaces/disks.glade.h:9 interfaces/memory.glade.h:14
+#: interfaces/network.glade.in.h:41
+msgid "Device:"
+msgstr "Eszköz:"
+
 # interfaces/nameresolution.glade.h:24
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:42
 #, fuzzy
 msgid "Domain / _Workgroup:"
 msgstr "_Munkacsoport:"
 
-#: interfaces/network.glade.in.h:53
-msgid ""
-"First, please enter the phone number you use to connect to the internet. "
-"This number is provided by your ISP. "
-msgstr ""
-
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:44
 msgid "General"
 msgstr "Általános"
 
 # interfaces/nameresolution.glade.h:16
-#: interfaces/network.glade.in.h:55 src/network/main.c:173
+#: interfaces/network.glade.in.h:45
 msgid "Hosts"
 msgstr "Gépek"
 
-#: interfaces/network.glade.in.h:56
-#, fuzzy
-msgid "How the IP address for this connection is determined."
-msgstr "Az IP cím meghatározása ehhez a kapcsolathoz"
-
-#: interfaces/network.glade.in.h:57
-#, fuzzy
-msgid ""
-"How the IP addresses for this connection \n"
-"are determined."
-msgstr "Az IP címek meghatározása ehhez a kapcsolathoz"
-
 # src/users/user_group.c:237
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:46
 #, fuzzy
-msgid ""
-"How the names of other\n"
-"computers are found."
+msgid "How the names of other computers are found."
 msgstr "Nincs felhasználói név megadva."
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:47
 msgid "How this computer is identified."
 msgstr ""
 
 # src/users/user_group.c:237
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:48
 #, fuzzy
 msgid "How to access other computers."
 msgstr "Más gépek álnevei."
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:49
 msgid "How to dial up to the Internet."
 msgstr ""
 
-# interfaces/disks.glade.h:33 interfaces/memory.glade.h:16
-# interfaces/memory.glade.h:25 interfaces/memory.glade.h:41
-# interfaces/nameresolution.glade.h:49 interfaces/shares.glade.h:43
-# interfaces/shares.glade.h:57 interfaces/shares.glade.h:63
-# interfaces/shares.glade.h:69 interfaces/users.glade.h:39
-# interfaces/users.glade.h:46 interfaces/users.glade.h:72
-#: interfaces/network.glade.in.h:64
-msgid "IP Settings"
-msgstr "IP-beállítások"
-
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:50
 #, fuzzy
-msgid "ISP phone number (Step 1 of 3)"
+msgid "ISP phone number"
 msgstr "1. ISP telefonszáma"
 
-# interfaces/common.glade.h:7 interfaces/common.glade.h:13
-#: interfaces/network.glade.in.h:67
+# interfaces/users.glade.h:8
+#: interfaces/network.glade.in.h:51
 #, fuzzy
-msgid "Network profiles - GNOME System Tools"
-msgstr "Ximian Setup Tools"
+msgid "Interface properties"
+msgstr "Alapvető beállítások"
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:52
 msgid ""
-"Network profiles can be used to store different\n"
-" network configurations"
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr ""
+
+# interfaces/disks.glade.h:10 interfaces/shares.glade.h:13
+#: interfaces/network.glade.in.h:54
+#, fuzzy
+msgid "Modem _volume:"
+msgstr "_Modem hangereje:"
+
+# interfaces/users.glade.h:10
+#: interfaces/network.glade.in.h:55
+#, fuzzy
+msgid "Network name:"
+msgstr "Új név:"
+
+# interfaces/users.glade.h:42 interfaces/users.glade.h:66
+#: interfaces/network.glade.in.h:56
+#, fuzzy
+msgid "Network profiles"
+msgstr "_Hálózati profilok"
+
+#: interfaces/network.glade.in.h:57
+msgid "Network profiles can be used to store different network configurations."
 msgstr ""
 
 # interfaces/users.glade.h:7
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:58
 msgid "Networking Settings"
 msgstr "Hálózati beállítások"
 
-# interfaces/shares.glade.h:31
-#: interfaces/network.glade.in.h:71
-msgid "New Connection Type"
-msgstr "Új kapcsolattípus"
-
-#: interfaces/network.glade.in.h:72
+# interfaces/users.glade.h:42 interfaces/users.glade.h:66
+#: interfaces/network.glade.in.h:59
 #, fuzzy
-msgid "New network connection"
-msgstr "Új Internet-kapcsolat hozzáadása"
+msgid "New network profile"
+msgstr "_Hálózati profilok"
 
-# interfaces/common.glade.h:7 interfaces/common.glade.h:13
-#: interfaces/network.glade.in.h:73
-#, fuzzy
-msgid "New network profile - GNOME System Tools"
-msgstr "Ximian Setup Tools"
-
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:60
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr ""
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:61
 msgid ""
-"Now, please enter the address that \n"
-"this network device will have."
+"Now, please enter the address that this network device will have, and the "
+"remote address to which it will be connected."
 msgstr ""
 
-#: interfaces/network.glade.in.h:77
-msgid ""
-"Now, please enter the address that this network device will have,\n"
-"and the remote address to which it will be connected."
+#: interfaces/network.glade.in.h:62
+msgid "Now, please enter the address that this network device will have."
 msgstr ""
 
-#: interfaces/network.glade.in.h:79
-msgid ""
-"Now, please give this account a name. This name will be used to identify the "
-"account."
-msgstr ""
-
-#: interfaces/network.glade.in.h:80
-#, fuzzy
+#: interfaces/network.glade.in.h:63
 msgid "Now, please give this connection a name."
-msgstr "Az IP címek meghatározása ehhez a kapcsolathoz"
+msgstr "Kérem, adjon nevet ennek a kapcsolatnak!"
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:64
 msgid "Number to _access an external line:"
 msgstr ""
 
-#: interfaces/network.glade.in.h:82
-msgid "Number to get to an external line:"
+#: interfaces/network.glade.in.h:65
+msgid "Number to get to an _external line:"
 msgstr ""
 
 # interfaces/users.glade.h:57
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:66
 #, fuzzy
 msgid "PPPD _options:"
 msgstr "Pppd _kapcsolók:"
 
 # interfaces/shares.glade.h:12
-#: interfaces/network.glade.in.h:84
-msgid "Password (confirm):"
+#: interfaces/network.glade.in.h:67
+#, fuzzy
+msgid "Pa_ssword (confirm):"
 msgstr "Jelszó (megerősítés):"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:68
 msgid "Phone _number:"
 msgstr "Telefon_szám:"
 
-#: interfaces/network.glade.in.h:87
-msgid "Phone number:"
-msgstr "Telefonszám:"
-
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:69
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
-"number is provided by your ISP. "
+"number is provided by your ISP."
 msgstr ""
 
-#: interfaces/network.glade.in.h:89
-msgid "Please, give this network profile a name and a description"
+#: interfaces/network.glade.in.h:70
+msgid ""
+"Please select the wireless device that you want to configure and set the "
+"network name for this interface"
 msgstr ""
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:71
+msgid "Please, give this network profile a name and a description."
+msgstr ""
+
+#: interfaces/network.glade.in.h:72
 msgid "Please, select which type of connection you would like to add."
 msgstr ""
 
 # interfaces/memory.glade.h:23
-#: interfaces/network.glade.in.h:91
-msgid "Profile name:"
-msgstr "Profil neve:"
+#: interfaces/network.glade.in.h:73 interfaces/users.glade.in.h:38
+#, fuzzy
+msgid "Profile _name:"
+msgstr "_Profil:"
 
 # interfaces/nameresolution.glade.h:9 interfaces/nameresolution.glade.h:50
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:74
 #, fuzzy
 msgid "Pulses"
 msgstr "Álnevek"
 
 # interfaces/time.glade.h:26
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:75
 msgid "Se_condary:"
 msgstr "_Másodlagos:"
 
-# interfaces/nameresolution.glade.h:41
-#: interfaces/network.glade.in.h:94
-#, fuzzy
-msgid "Sea_rch domains:"
-msgstr "Ke_resési tartományok:"
-
-#: interfaces/network.glade.in.h:95
-msgid ""
-"Select which type of connection\n"
-"you would like to add."
-msgstr ""
-
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:76
 msgid "Set _DNS servers manually"
 msgstr ""
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:77
 msgid "Set modem as default _route to internet"
 msgstr ""
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:78
 msgid ""
-"Summary of new account data\n"
-"goes here, plus indications on\n"
-"how to proceed (go back, cancel\n"
-"or finish)."
+"This assistant will help you configure a new \n"
+"network connection."
 msgstr ""
 
-#: interfaces/network.glade.in.h:103
-msgid ""
-"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
-"\".\n"
+#: interfaces/network.glade.in.h:80
+msgid "This is the list of IP addresses that the system will use as name servers"
 msgstr ""
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:81
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
 msgstr ""
 
 # interfaces/time.glade.h:25
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:82
 #, fuzzy
 msgid "Tones"
 msgstr "Időzónák"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:83
 msgid "Use \"Auto\" if unsure."
 msgstr ""
 
-#: interfaces/network.glade.in.h:108
-msgid ""
-"Use the comment to identify the interface in the future. Activation "
-"management lets you set who will activate connections, and when."
+#: interfaces/network.glade.in.h:84
+msgid "Use this dialog for setting the configuration for this interface"
 msgstr ""
 
 # interfaces/users.glade.h:21
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:85
 #, fuzzy
-msgid "Username and password (Step 2 of 3)"
-msgstr "2. Felhasználónév és jelszó"
-
-# interfaces/users.glade.h:10
-#: interfaces/network.glade.in.h:110 interfaces/shares.glade.in.h:58
-msgid "Username:"
-msgstr "Felhasználói név:"
+msgid "Username and password"
+msgstr "2. Felhasználói név és jelszó"
 
 # interfaces/nameresolution.glade.h:32
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:86
 msgid "WI_NS server:"
 msgstr "_WINS kiszolgáló:"
 
-#: interfaces/network.glade.in.h:112
-msgid "Warning message goes here.\n"
-msgstr ""
-
-#: interfaces/network.glade.in.h:114
-msgid "Warning message goes here..\n"
-msgstr ""
-
-#: interfaces/network.glade.in.h:116
-msgid "WaveLAN"
-msgstr "WaveLAN"
-
-#: interfaces/network.glade.in.h:117
-msgid ""
-"Welcome to the Internet Connection druid. \n"
-"\n"
-"This druid will help you configure a new \n"
-"Internet account. \n"
-"\n"
-"Before you begin, you must have a modem and\n"
-"an Internet Service Provider (ISP). Please ask your \n"
-"ISP for any pertinent information about your connection.\n"
-"\n"
-"Click the \"Next\" button to begin."
-msgstr ""
-
-#: interfaces/network.glade.in.h:127
-msgid ""
-"Welcome to the Network Connection druid. \n"
-"\n"
-"This druid will help you configure a new \n"
-"network connection. \n"
-"\n"
-"Click the \"Next\" button to begin."
+#: interfaces/network.glade.in.h:87
+msgid "Wireless device:"
 msgstr ""
 
 # interfaces/users.glade.h:7
-#: interfaces/network.glade.in.h:133
-msgid "Wireless networking settings."
+#: interfaces/network.glade.in.h:88
+#, fuzzy
+msgid "Wireless settings"
 msgstr "Drótnélküli hálózat beállításai"
 
-#: interfaces/network.glade.in.h:134
+#: interfaces/network.glade.in.h:89
 msgid ""
-"You are about to create a new network connection.\n"
-"\n"
-"Please click \"Apply\" to save your changes."
+"You are about to create a new network connection. Please click \"Apply\" to "
+"save your changes."
 msgstr ""
 
-#: interfaces/network.glade.in.h:137
-msgid "_Ad-Hoc mode"
-msgstr "_Ad hoc mód"
-
-#: interfaces/network.glade.in.h:139
+#: interfaces/network.glade.in.h:90
 msgid "_Autodetect"
 msgstr ""
 
-# interfaces/memory.glade.h:12
-#: interfaces/network.glade.in.h:140
-msgid "_Channel:"
-msgstr "_Csatorna:"
-
 # interfaces/shares.glade.h:20 interfaces/users.glade.h:11
-#: interfaces/network.glade.in.h:141 interfaces/shares.glade.in.h:62
+#: interfaces/network.glade.in.h:91
 msgid "_Comment:"
 msgstr "_Megjegyzés:"
 
 # interfaces/users.glade.h:20
-#: interfaces/network.glade.in.h:142
+#: interfaces/network.glade.in.h:92
 msgid "_Configuration:"
 msgstr "_Beállítások:"
 
-# interfaces/time.glade.h:16
-#: interfaces/network.glade.in.h:143
+# interfaces/shares.glade.h:31
+#: interfaces/network.glade.in.h:93
 #, fuzzy
-msgid "_Configure"
-msgstr "_Beállítás..."
+msgid "_Deactivate"
+msgstr "D_eaktiválás"
+
+# interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
+# interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
+# interfaces/users.glade.h:35 interfaces/users.glade.h:43
+# interfaces/users.glade.h:67
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
+msgid "_Delete"
+msgstr "_Törlés"
 
 # interfaces/nameresolution.glade.h:25
-#: interfaces/network.glade.in.h:145
+#: interfaces/network.glade.in.h:95
 msgid "_Description:"
 msgstr "_Leírás:"
 
 # interfaces/memory.glade.h:21
-#: interfaces/network.glade.in.h:146
+#: interfaces/network.glade.in.h:96
 #, fuzzy
 msgid "_Dial type:"
 msgstr "Lapozás típusa:"
 
-# interfaces/nameresolution.glade.h:21
-#: interfaces/network.glade.in.h:147
-#, fuzzy
-msgid "_Domain name:"
-msgstr "_Tartomány:"
-
 # interfaces/networking.glade.h:14
-#: interfaces/network.glade.in.h:148
+#: interfaces/network.glade.in.h:97
 #, fuzzy
 msgid "_Enable Windows networking"
 msgstr "_Windowsos hálózat engedélyezése (Samba)"
 
-#: interfaces/network.glade.in.h:149
+#: interfaces/network.glade.in.h:98
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:150
-msgid "_Frequency (GHz):"
-msgstr "_Frekvencia (GHz):"
-
 # interfaces/nameresolution.glade.h:8
-#: interfaces/network.glade.in.h:151
+#: interfaces/network.glade.in.h:99
 msgid "_Gateway address:"
 msgstr "Á_tjáró címe:"
 
 # interfaces/nameresolution.glade.h:17
-#: interfaces/network.glade.in.h:152 interfaces/print.glade.in.h:70
+#: interfaces/network.glade.in.h:100
 msgid "_Hostname:"
 msgstr "_Gépnév:"
 
 # interfaces/nameresolution.glade.h:8
-#: interfaces/network.glade.in.h:153
+#: interfaces/network.glade.in.h:101
 msgid "_IP address:"
 msgstr "_IP-cím:"
 
-#: interfaces/network.glade.in.h:154
+#: interfaces/network.glade.in.h:102
 msgid "_IR LAN"
 msgstr "_IR LAN"
 
 # interfaces/nameresolution.glade.h:8
-#: interfaces/network.glade.in.h:155
+#: interfaces/network.glade.in.h:103
 msgid "_Local IP address:"
 msgstr "_Helyi IP-cím:"
 
 # interfaces/shares.glade.h:18 interfaces/shares.glade.h:25
-#: interfaces/network.glade.in.h:156
+#: interfaces/network.glade.in.h:104
 msgid "_Local IP:"
 msgstr "_Helyi IP:"
 
-#: interfaces/network.glade.in.h:157
+#: interfaces/network.glade.in.h:105
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
 # interfaces/disks.glade.h:10 interfaces/shares.glade.h:13
-#: interfaces/network.glade.in.h:158
+#: interfaces/network.glade.in.h:106
 msgid "_Modem port:"
 msgstr "_Modem port:"
 
-# interfaces/disks.glade.h:10 interfaces/shares.glade.h:13
-#: interfaces/network.glade.in.h:159
-msgid "_Modem volume:"
-msgstr "_Modem hangereje:"
-
 # interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/network.glade.in.h:160
+#: interfaces/network.glade.in.h:107
 msgid "_Network Profiles"
 msgstr "_Hálózati profilok"
 
-#: interfaces/network.glade.in.h:161
+# interfaces/users.glade.h:10
+#: interfaces/network.glade.in.h:108
+#, fuzzy
+msgid "_Network name:"
+msgstr "Új név:"
+
+#: interfaces/network.glade.in.h:109
 msgid "_Parallel Line"
 msgstr "_Párhuzamos vonal"
 
-# interfaces/shares.glade.h:12
-#: interfaces/network.glade.in.h:162 interfaces/print.glade.in.h:73
-msgid "_Password:"
-msgstr "_Jelszó:"
+#: interfaces/network.glade.in.h:111
+#, fuzzy
+msgid "_Phone number:"
+msgstr "Telefonszám:"
 
 # interfaces/memory.glade.h:19 interfaces/memory.glade.h:30
-#: interfaces/network.glade.in.h:163
+#: interfaces/network.glade.in.h:112
 msgid "_Primary:"
 msgstr "_Elsődleges:"
 
 # interfaces/nameresolution.glade.h:8
-#: interfaces/network.glade.in.h:164
+#: interfaces/network.glade.in.h:113
 msgid "_Remote IP address:"
 msgstr "_Távoli IP-cím:"
 
-#: interfaces/network.glade.in.h:165
+#: interfaces/network.glade.in.h:114
 msgid "_Remote IP:"
 msgstr "_Távoli IP:"
 
-#: interfaces/network.glade.in.h:166
+#: interfaces/network.glade.in.h:115
 msgid "_Retry if the connection breaks or fails to start"
 msgstr ""
 
 # interfaces/shares.glade.h:20 interfaces/users.glade.h:11
-#: interfaces/network.glade.in.h:167
+#: interfaces/network.glade.in.h:116
 #, fuzzy
 msgid "_Save Current"
 msgstr "Jelenlegi:"
 
-#: interfaces/network.glade.in.h:168
-msgid "_Session ID:"
-msgstr ""
-
-#: interfaces/network.glade.in.h:169
+#: interfaces/network.glade.in.h:117
 msgid "_Start PPP as soon as modem connects"
 msgstr ""
 
 # interfaces/networking.glade.h:10
-#: interfaces/network.glade.in.h:170
+#: interfaces/network.glade.in.h:118
 msgid "_Subnet mask:"
 msgstr "_Hálózati maszk:"
 
-#: interfaces/network.glade.in.h:171
+#: interfaces/network.glade.in.h:119
 msgid "_Update DNS when this connection becomes active"
 msgstr ""
 
-#: interfaces/network.glade.in.h:172
+#: interfaces/network.glade.in.h:120
 msgid "_Use remote IP as default gateway"
 msgstr ""
 
 # interfaces/users.glade.h:10
-#: interfaces/network.glade.in.h:173 interfaces/print.glade.in.h:75
-#: interfaces/shares.glade.in.h:73 interfaces/users.glade.in.h:94
+#: interfaces/network.glade.in.h:121 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "_Felhasználói név:"
 
-#: interfaces/network.glade.in.h:174
-msgid "_Wavelan"
-msgstr "_Wavelan"
-
-#: interfaces/print.glade.in.h:1
-msgid "/dev/lp0 (LPT1)"
-msgstr "/dev/lp0 (LPT1)"
-
-#: interfaces/print.glade.in.h:2
-msgid "/dev/lp1 (LPT2)"
-msgstr "/dev/lp1 (LPT2)"
-
-#: interfaces/print.glade.in.h:3
-msgid "/dev/ttyS0 (COM1)"
-msgstr "/dev/ttyS0 (COM1)"
-
-#: interfaces/print.glade.in.h:4
-msgid "/dev/ttyS1 (COM2)"
-msgstr "/dev/ttyS1 (COM2)"
-
-#: interfaces/print.glade.in.h:5
-msgid "/dev/ttyS2 (COM3)"
-msgstr "/dev/ttyS2 (COM3)"
-
-#: interfaces/print.glade.in.h:6
-msgid "/dev/ttyS3 (COM4)"
-msgstr "/dev/ttyS3 (COM4)"
-
-#: interfaces/print.glade.in.h:7
-msgid "1200x1200"
-msgstr "1200x1200"
-
-#: interfaces/print.glade.in.h:8
-msgid "1200x600"
-msgstr "1200x600"
-
-#: interfaces/print.glade.in.h:9
-msgid "16 colors"
-msgstr "16 szín"
-
-#: interfaces/print.glade.in.h:10
-msgid "256 colors"
-msgstr "256 szín"
-
-#: interfaces/print.glade.in.h:11
-msgid "300x300"
-msgstr "300x300"
-
-#: interfaces/print.glade.in.h:12
-msgid "400x400"
-msgstr "400x400"
-
-#: interfaces/print.glade.in.h:13
-msgid "600x600"
-msgstr "600x600"
-
-#: interfaces/print.glade.in.h:14
-msgid "A3"
-msgstr "A3"
-
-#: interfaces/print.glade.in.h:15
-msgid "A4"
-msgstr "A4"
-
-#: interfaces/print.glade.in.h:16
-msgid "Add Printer..."
-msgstr "Nyomtató hozzáadása..."
-
-#: interfaces/print.glade.in.h:17
-msgid "Add a New Printer"
-msgstr "Új nyomtató hozzáadása..."
-
-# interfaces/shares.glade.h:31
-#: interfaces/print.glade.in.h:18
-msgid "Connection"
-msgstr "Kapcsolat"
-
-#: interfaces/print.glade.in.h:19
-msgid ""
-"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+#: interfaces/network.glade.in.h:122
+msgid "_Wireless"
 msgstr ""
 
-#: interfaces/print.glade.in.h:20
-msgid "Convert _Linefeeds"
-msgstr ""
-
-#: interfaces/print.glade.in.h:22
-msgid "Document Pages per Sheet"
-msgstr ""
-
-# interfaces/nameresolution.glade.h:33
-#: interfaces/print.glade.in.h:23
-msgid "Driver"
-msgstr "Meghajtó"
-
-#: interfaces/print.glade.in.h:24
-msgid "E_xplicitly Eject Last Page"
-msgstr ""
-
-#: interfaces/print.glade.in.h:25
-msgid "High Color"
-msgstr ""
-
-#: interfaces/print.glade.in.h:26
-msgid "Legal"
-msgstr "Legal"
-
-# interfaces/memory.glade.h:28 interfaces/shares.glade.h:10
-#: interfaces/print.glade.in.h:27
-msgid "Letter"
-msgstr "Letter"
-
-# src/users/user_group.c:237
-#: interfaces/print.glade.in.h:28
-msgid "Name of the printer."
-msgstr "A nyomtató neve."
-
-#: interfaces/print.glade.in.h:29
-msgid "Name of the server the printer is connected to."
-msgstr ""
-
-#: interfaces/print.glade.in.h:30
-msgid "Name the server uses for the printer."
-msgstr ""
-
-#: interfaces/print.glade.in.h:31
-msgid "Novell _Netware (NCP) Printer"
-msgstr "Novell _Netware (NCP) nyomtató"
-
-#: interfaces/print.glade.in.h:32
-msgid "Number of colors to print in."
-msgstr ""
-
-# interfaces/memory.glade.h:22
-#: interfaces/print.glade.in.h:33
-msgid "Options"
-msgstr ""
-
-#: interfaces/print.glade.in.h:34
-msgid "P_aper Size:"
-msgstr "P_apírméret:"
-
-#: interfaces/print.glade.in.h:35
-msgid "P_ort Number:"
-msgstr "P_ortszám:"
-
-#: interfaces/print.glade.in.h:36
-msgid "Port number the server is listening to."
-msgstr ""
-
-#: interfaces/print.glade.in.h:37
-msgid "Port the printer is connected to."
-msgstr ""
-
-#: interfaces/print.glade.in.h:38
-msgid "Print one page per sheet."
-msgstr ""
-
-#: interfaces/print.glade.in.h:39
-msgid "Print resolution."
-msgstr "Nyomtató felbontása"
-
-# interfaces/disks.glade.h:7
-#: interfaces/print.glade.in.h:40
-msgid "Printer Settings"
-msgstr "Nyomtató beállításai"
-
-#: interfaces/print.glade.in.h:41
-msgid "Printer connected to a port on your machine."
-msgstr ""
-
-#: interfaces/print.glade.in.h:42
-msgid "Printer listening directly for network connections."
-msgstr ""
-
-#: interfaces/print.glade.in.h:43
-msgid "Printer shared on a Windows (SMB) network."
-msgstr ""
-
-#: interfaces/print.glade.in.h:44
-msgid "Printer shared using the Novell Netware (NCP) protocol."
-msgstr ""
-
-#: interfaces/print.glade.in.h:45
-msgid "Printer shared using the Unix (lpd) print protocol."
-msgstr ""
-
-#: interfaces/print.glade.in.h:46
-msgid "R_esolution:"
-msgstr "_Felbontás:"
-
-#: interfaces/print.glade.in.h:47
-msgid "Remote UNIX (_lpd) Printer"
-msgstr "Távoli UNIX (_lpd) nyomtató"
-
-#: interfaces/print.glade.in.h:48
-msgid "Remote _Windows (SMB) printer"
-msgstr "Távoli _Windows (SMB) nyomtató"
-
-#: interfaces/print.glade.in.h:49
-msgid "SMB workgroup the server is in."
-msgstr ""
-
-#: interfaces/print.glade.in.h:50
-msgid "Scale pages down and print eight per sheet."
-msgstr ""
-
-#: interfaces/print.glade.in.h:51
-msgid "Scale pages down and print four per sheet."
-msgstr ""
-
-#: interfaces/print.glade.in.h:52
-msgid "Scale pages down and print two per sheet."
-msgstr ""
-
-#: interfaces/print.glade.in.h:53
-msgid "Select the type of printer to add:"
-msgstr ""
-
-#: interfaces/print.glade.in.h:54
-msgid "Send an EOF after the print job to help eject the last page."
-msgstr ""
-
-#: interfaces/print.glade.in.h:55
-msgid "Send text documents raw to the printer."
-msgstr ""
-
-# interfaces/disks.glade.h:33 interfaces/memory.glade.h:16
-# interfaces/memory.glade.h:25 interfaces/memory.glade.h:41
-# interfaces/nameresolution.glade.h:49 interfaces/shares.glade.h:43
-# interfaces/shares.glade.h:57 interfaces/shares.glade.h:63
-# interfaces/shares.glade.h:69 interfaces/users.glade.h:39
-# interfaces/users.glade.h:46 interfaces/users.glade.h:72
-#: interfaces/print.glade.in.h:56 interfaces/shares.glade.in.h:53
-msgid "Settings..."
-msgstr "Beállítások..."
-
-#: interfaces/print.glade.in.h:57
-msgid "Size of the paper in the printer."
-msgstr ""
-
-# src/users/callbacks.c:303
-#: interfaces/print.glade.in.h:58
-#, fuzzy
-msgid "The password used to connect to the server."
-msgstr "A jelszó mind a két alkalommal meg kell egyezzen."
-
-# interfaces/users.glade.h:33
-#: interfaces/print.glade.in.h:59
-#, fuzzy
-msgid ""
-"This is the list of the configured printers available on the system. Create "
-"new printers or edit existing printer settings with this dialog."
-msgstr ""
-"Ez a rendszeren elérhető felhasználók listája. Új felhasználók létrehozása, "
-"vagylétező felhasználók beállításainak módosítása lehetséges ebben az "
-"ablakban."
-
-#: interfaces/print.glade.in.h:60
-msgid "True Color"
-msgstr ""
-
-#: interfaces/print.glade.in.h:61
-msgid "Username used to connect to the server."
-msgstr ""
-
-#: interfaces/print.glade.in.h:62
-msgid "_1"
-msgstr "_1"
-
-#: interfaces/print.glade.in.h:63
-msgid "_2"
-msgstr "_2"
-
-#: interfaces/print.glade.in.h:64
-msgid "_4"
-msgstr "_4"
-
-#: interfaces/print.glade.in.h:65
-msgid "_8"
-msgstr "_8"
-
-#: interfaces/print.glade.in.h:66
-msgid "_Color Depth:"
-msgstr "_Színmélység:"
-
-# interfaces/disks.glade.h:9 interfaces/memory.glade.h:14
-#: interfaces/print.glade.in.h:67
-msgid "_Device Name:"
-msgstr "_Eszköz neve:"
-
-#: interfaces/print.glade.in.h:68
-msgid "_Direct Network Printer"
-msgstr ""
-
-#: interfaces/print.glade.in.h:69
-msgid "_Fast Text Printing"
-msgstr "_Gyors szövegnyomtatás"
-
-# interfaces/shares.glade.h:18 interfaces/shares.glade.h:25
-#: interfaces/print.glade.in.h:71
-msgid "_Local Printer"
-msgstr "_Helyi nyomtató"
-
-#: interfaces/print.glade.in.h:74
-msgid "_Remote Name:"
-msgstr "_Távoli név:"
-
-# interfaces/nameresolution.glade.h:24
-#: interfaces/print.glade.in.h:76
-msgid "_Workgroup:"
-msgstr "_Munkacsoport:"
-
-#: interfaces/rollback-location-management.glade.in.h:1
-msgid "Advanced..."
-msgstr "Haladó..."
-
-# interfaces/shares.glade.h:31
-#: interfaces/rollback-location-management.glade.in.h:2
-#, fuzzy
-msgid "Change to this Location"
-msgstr "Hely"
-
-# interfaces/users.glade.h:20
-#: interfaces/rollback-location-management.glade.in.h:3
-#, fuzzy
-msgid "Configuration Restoration"
-msgstr "_Beállítások:"
-
-# interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
-# interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
-# interfaces/users.glade.h:35 interfaces/users.glade.h:43
-# interfaces/users.glade.h:67
-#: interfaces/rollback-location-management.glade.in.h:4
-msgid "Create..."
-msgstr "Létrehozás..."
-
-# interfaces/nameresolution.glade.h:11 interfaces/nameresolution.glade.h:31
-# interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
-# interfaces/users.glade.h:35 interfaces/users.glade.h:43
-# interfaces/users.glade.h:67
-#: interfaces/rollback-location-management.glade.in.h:5
-msgid "Destroy..."
-msgstr "Törlés..."
-
-# interfaces/shares.glade.h:31
-#: interfaces/rollback-location-management.glade.in.h:6
-msgid "Edit this Location"
-msgstr "Hely szerkesztése"
-
-# interfaces/shares.glade.h:31
-#: interfaces/rollback-location-management.glade.in.h:8
-msgid "Location name:"
-msgstr "Hely neve:"
-
-# interfaces/shares.glade.h:31
-#: interfaces/rollback-location-management.glade.in.h:9
-msgid "Parent Location:"
-msgstr "Szülő helye:"
-
-#: interfaces/rollback-location-management.glade.in.h:10
-msgid "Rename..."
-msgstr "Átnevezés..."
-
-#: interfaces/rollback-location-management.glade.in.h:11
-msgid "Restore all tools"
-msgstr ""
-
-# src/users/user_group.c:769
-#: interfaces/rollback-location-management.glade.in.h:12
-#, fuzzy
-msgid "Restore configuration from"
-msgstr "A következő csoport beállításai: %s"
-
-#: interfaces/rollback-location-management.glade.in.h:13
-msgid "Restore only"
-msgstr ""
-
-#: interfaces/rollback-location-management.glade.in.h:14
-msgid "View Logs..."
-msgstr ""
-
-#: interfaces/rollback-location-management.glade.in.h:15
-msgid "days ago"
-msgstr ""
-
-#: interfaces/runlevel.glade.in.h:1
+#: interfaces/services.glade.in.h:1
 #, fuzzy
 msgid "<span weight=\"bold\">Description</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/runlevel.glade.in.h:2
+#: interfaces/services.glade.in.h:2
 #, fuzzy
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/runlevel.glade.in.h:3
+#: interfaces/services.glade.in.h:3
 #, fuzzy
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "A számítógép indítása"
 
-#: interfaces/runlevel.glade.in.h:4
+#: interfaces/services.glade.in.h:4
 msgid "Click on an item in the list to show it's description."
 msgstr ""
 
-# interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/runlevel.glade.in.h:6
-#, fuzzy
-msgid "Parameters:"
-msgstr "_Profilok szerkesztése..."
+# interfaces/nameresolution.glade.h:25
+#: interfaces/services.glade.in.h:5
+msgid "Description:"
+msgstr "Leírás:"
 
 # interfaces/users.glade.h:8
-#: interfaces/runlevel.glade.in.h:8
+#: interfaces/services.glade.in.h:6
 #, fuzzy
 msgid "Service _Properties"
 msgstr "Alapvető beállítások"
 
 # interfaces/disks.glade.h:20 interfaces/memory.glade.h:8
 # interfaces/memory.glade.h:36
-#: interfaces/runlevel.glade.in.h:9
+#: interfaces/services.glade.in.h:7
 #, fuzzy
 msgid "Service:"
 msgstr "Eszköz"
 
-#: interfaces/runlevel.glade.in.h:10
-msgid ""
-"Use this tool to specify which services to run and the runlevel for the "
-"services."
+#: interfaces/services.glade.in.h:8
+#, fuzzy
+msgid "Status:"
+msgstr "Állapot"
+
+#: interfaces/services.glade.in.h:9
+#, fuzzy
+msgid "Use this tool to specify which services to run"
+msgstr "Monitorbeállító eszköz."
+
+#: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:3
-msgid " Edit clients... "
-msgstr " Ügyfelek szerkesztése... "
+#: interfaces/services.glade.in.h:11
+#, fuzzy
+msgid "_Start"
+msgstr "Állapot"
 
-#: interfaces/shares.glade.in.h:4
-msgid " _Edit clients... "
-msgstr " Ügyfelek s_zerkesztése... "
-
-#: interfaces/shares.glade.in.h:5
-msgid "Access control"
-msgstr "Hozzáférés szabályozása"
-
-#: interfaces/shares.glade.in.h:7
-msgid "Add..."
-msgstr "Hozzáadás..."
-
-# interfaces/shares.glade.h:61
-#: interfaces/shares.glade.in.h:8
-msgid "Allow writing"
-msgstr "Írás engedélyezése"
-
-# interfaces/shares.glade.h:21 interfaces/shares.glade.h:49
-#: interfaces/shares.glade.in.h:9
-msgid "Browseable"
-msgstr "Böngészhető"
-
-# interfaces/shares.glade.h:62
-#: interfaces/shares.glade.in.h:10
-msgid "Client"
-msgstr "Kliens"
-
-# interfaces/shares.glade.h:62
-#: interfaces/shares.glade.in.h:11
-msgid "Clients"
-msgstr "Ügyfelek"
-
-# interfaces/shares.glade.h:20 interfaces/users.glade.h:11
-#: interfaces/shares.glade.in.h:12
-msgid "Comment:"
-msgstr "Megjegyzés:"
-
-#: interfaces/shares.glade.in.h:14
-msgid "Do not _remount this share after computer reboots"
+#: interfaces/services.glade.in.h:12
+msgid "_Startup sequence:"
 msgstr ""
 
-#: interfaces/shares.glade.in.h:15
-msgid "Do not remount this share after computer reboots"
-msgstr ""
+# interfaces/time.glade.h:16
+#: interfaces/time.glade.in.h:1
+msgid "(unconfigured)"
+msgstr "(nincs beállítva)"
 
-# interfaces/shares.glade.h:53 interfaces/shares.glade.h:66
-#: interfaces/shares.glade.in.h:17
-msgid "Export"
-msgstr "Exportálás"
-
-# interfaces/shares.glade.h:60
-#: interfaces/shares.glade.in.h:18
-msgid "Export Clients"
-msgstr ""
-
-# interfaces/shares.glade.h:17
-#: interfaces/shares.glade.in.h:19
-#, fuzzy
-msgid "Export Settings"
-msgstr "SMB megosztás beállítások"
-
-# interfaces/shares.glade.h:19
-#: interfaces/shares.glade.in.h:20
-#, fuzzy
-msgid "Export _type:"
-msgstr "Megosztás neve:"
-
-# interfaces/shares.glade.h:19
-#: interfaces/shares.glade.in.h:21
-#, fuzzy
-msgid "Export type:"
-msgstr "Megosztás neve:"
-
-# interfaces/shares.glade.h:53 interfaces/shares.glade.h:66
-#: interfaces/shares.glade.in.h:22
-msgid "Exports"
-msgstr "Exportok"
-
-# interfaces/shares.glade.h:70
-#: interfaces/shares.glade.in.h:23
-#, fuzzy
-msgid ""
-"Exports are used to share directories on your computer with other computers "
-"over the network. "
-msgstr ""
-"Az NFS megosztások segítségével megoszthatod a könyvtáraidat más UNIX-os "
-"vagy Linuxos gépekkel, a hálózaton keresztül."
-
-# interfaces/shares.glade.h:9
-#: interfaces/shares.glade.in.h:25
-msgid "Host:"
-msgstr "Kiszolgáló:"
-
-#: interfaces/shares.glade.in.h:26
-msgid "If the mount point does not exist, it will be created."
-msgstr ""
-
-# interfaces/shares.glade.h:38
-#: interfaces/shares.glade.in.h:27
-msgid "Import"
-msgstr "Importálás"
-
-# interfaces/shares.glade.h:7
-#: interfaces/shares.glade.in.h:28
-msgid "Import Settings"
-msgstr "Importálás beállításai"
-
-# interfaces/shares.glade.h:7
-#: interfaces/shares.glade.in.h:29
-#, fuzzy
-msgid "Import Settings--NFS Options"
-msgstr "Import beáálítások"
-
-# interfaces/shares.glade.h:7
-#: interfaces/shares.glade.in.h:30
-#, fuzzy
-msgid "Import Settings--Samba Options (Obsolete)"
-msgstr "Import beáálítások"
-
-# interfaces/memory.glade.h:21
-#: interfaces/shares.glade.in.h:31
-#, fuzzy
-msgid "Import _type:"
-msgstr "Lapozás típusa:"
-
-# interfaces/memory.glade.h:21
-#: interfaces/shares.glade.in.h:32
-#, fuzzy
-msgid "Import type:"
-msgstr "Lapozás típusa:"
-
-# interfaces/shares.glade.h:45
-#: interfaces/shares.glade.in.h:33
-msgid "Imports"
-msgstr "Importok"
-
-# interfaces/shares.glade.h:30
-#: interfaces/shares.glade.in.h:34
-#, fuzzy
-msgid ""
-"Imports are directories which reside in other computers and are accessible "
-"to you through the network."
-msgstr ""
-"Az importok olyan könyvtárak, amik más számítógépeken találhatók és "
-"hálózaton keresztül érhetők el."
-
-# interfaces/shares.glade.h:37
-#: interfaces/shares.glade.in.h:35
-msgid "Mount Point"
-msgstr "Csatolási pont"
-
-# interfaces/disks.glade.h:10 interfaces/shares.glade.h:13
-#: interfaces/shares.glade.in.h:36
-#, fuzzy
-msgid "Mount p_oint:"
-msgstr "Csatolási pont:"
-
-# interfaces/disks.glade.h:23 interfaces/shares.glade.h:34
-#: interfaces/shares.glade.in.h:38
-msgid "Mounted"
-msgstr "Felcsatolt"
-
-# interfaces/disks.glade.h:27
-#: interfaces/shares.glade.in.h:39
-#, fuzzy
-msgid "Mounting Options"
-msgstr "Csatolási pont"
-
-# interfaces/disks.glade.h:27
-#: interfaces/shares.glade.in.h:40
-#, fuzzy
-msgid "Mounting options"
-msgstr "Csatolási pont"
-
-# interfaces/shares.glade.h:15
-#: interfaces/shares.glade.in.h:41
-msgid "NFS"
-msgstr "NFS"
-
-# interfaces/shares.glade.h:46
-#: interfaces/shares.glade.in.h:42 src/boot/table.c:44
-msgid "Name"
-msgstr "Név"
-
-# interfaces/shares.glade.h:22 interfaces/shares.glade.h:50
-#: interfaces/shares.glade.in.h:44
-msgid "P_ublic"
-msgstr "_Nyilvános"
-
-# interfaces/shares.glade.h:12
-#: interfaces/shares.glade.in.h:45
-msgid "Pass_word:"
-msgstr "_Jelszó:"
-
-# interfaces/shares.glade.h:47
-#: interfaces/shares.glade.in.h:47
-msgid "Path"
-msgstr "Útvonal"
-
-# interfaces/memory.glade.h:28 interfaces/shares.glade.h:10
-#: interfaces/shares.glade.in.h:49
-msgid "Pattern:"
-msgstr "Minta:"
-
-# interfaces/shares.glade.h:22 interfaces/shares.glade.h:50
-#: interfaces/shares.glade.in.h:50
-msgid "Public"
-msgstr "Nyilvános"
-
-#: interfaces/shares.glade.in.h:51
-msgid "Restrict access to this share to specific clients"
-msgstr ""
-
-#: interfaces/shares.glade.in.h:52
-msgid "Samba"
-msgstr "Samba"
-
-# interfaces/time.glade.h:9
-#: interfaces/shares.glade.in.h:54
-msgid "Update"
-msgstr "Frissítés"
-
-#: interfaces/shares.glade.in.h:55
-msgid ""
-"Use this dialog to create a new export, or to edit the settings of an "
-"existing export."
-msgstr ""
-
-#: interfaces/shares.glade.in.h:56
-msgid ""
-"Use this dialog to create a new import, or to edit the settings of an "
-"existing import."
-msgstr ""
-
-#: interfaces/shares.glade.in.h:57
-msgid ""
-"Use this dialog to define the client patterns which determine who has access "
-"to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
-"or \" *.gnome.org\".  "
-msgstr ""
-
-# interfaces/shares.glade.h:23 interfaces/shares.glade.h:51
-#: interfaces/shares.glade.in.h:59
-msgid "Writable"
-msgstr "Írható"
-
-# interfaces/shares.glade.h:21 interfaces/shares.glade.h:49
-#: interfaces/shares.glade.in.h:61
-msgid "_Browseable"
-msgstr "_Böngészhető"
-
-# interfaces/memory.glade.h:15 interfaces/memory.glade.h:24
-# interfaces/memory.glade.h:35 interfaces/shares.glade.h:48
-# interfaces/shares.glade.h:54
-#: interfaces/shares.glade.in.h:64
-msgid "_Enable"
-msgstr "_Engedélyezés"
-
-# interfaces/shares.glade.h:9
-#: interfaces/shares.glade.in.h:65
-msgid "_Host:"
-msgstr "_Gép:"
-
-# interfaces/disks.glade.h:23 interfaces/shares.glade.h:34
-#: interfaces/shares.glade.in.h:66
-#, fuzzy
-msgid "_Mount"
-msgstr "Felcsatolt"
-
-# interfaces/disks.glade.h:23 interfaces/shares.glade.h:34
-#: interfaces/shares.glade.in.h:67
-#, fuzzy
-msgid "_Mounted"
-msgstr "Felcsatolt"
-
-# interfaces/memory.glade.h:28 interfaces/shares.glade.h:10
-#: interfaces/shares.glade.in.h:69
-msgid "_Path:"
-msgstr "Ú_tvonal:"
-
-#: interfaces/shares.glade.in.h:70
-msgid "_Restrict access to this share to specific clients"
-msgstr ""
-
-#: interfaces/shares.glade.in.h:71
-msgid "_Scan"
-msgstr ""
-
-# interfaces/shares.glade.h:23 interfaces/shares.glade.h:51
-#: interfaces/shares.glade.in.h:74
-msgid "_Writable"
-msgstr "Í_rható"
-
-#: interfaces/shares.glade.in.h:75
-msgid "add/edit clients"
-msgstr "ügyfelek hozzáadása/szerkesztése"
-
-#: interfaces/shares.glade.in.h:76
-msgid "advanced mode--main window"
-msgstr "haladó mód -- főablak"
-
-# interfaces/shares.glade.h:7
-#: interfaces/shares.glade.in.h:77
-#, fuzzy
-msgid "export settings--NFS options"
-msgstr "Import beáálítások"
-
-# interfaces/shares.glade.h:7
-#: interfaces/shares.glade.in.h:78
-#, fuzzy
-msgid "export settings--Samba options"
-msgstr "Import beáálítások"
-
-#: interfaces/shares.glade.in.h:79
-msgid "simple mode--main window"
-msgstr "egyszerű mód -- főablak"
+# interfaces/time.glade.h:11 interfaces/time.glade.h:12
+#: interfaces/time.glade.in.h:3
+msgid ":"
+msgstr ":"
 
 #: interfaces/time.glade.in.h:4
 #, fuzzy
 msgid "<span weight=\"bold\">Time Configuration</span>"
 msgstr "A számítógép indítása"
 
+# interfaces/time.glade.h:8
+#: interfaces/time.glade.in.h:5
+msgid ""
+"Please select the current date and time. You can also specify a time zone "
+"and a time server."
+msgstr ""
+"Válaszd ki a jelenlegi dátumot és időt. Lehetőséged van időzónát és "
+"időkiszolgálót is megadni."
+
 # interfaces/time.glade.h:19
 #: interfaces/time.glade.in.h:6
 #, fuzzy
-msgid "S_ynchronize clock with Internet servers"
+msgid "S_ynchronize clock with Internet servers:"
 msgstr "Az óra szinkronban tartása a kiválasztott kiszolgálókkal"
 
 # interfaces/time.glade.h:20
@@ -2952,17 +1085,11 @@ msgstr ""
 # interfaces/time.glade.h:15 interfaces/time.glade.h:22
 #: interfaces/time.glade.in.h:9
 #, fuzzy
-msgid "Time Zone:"
-msgstr "Időzóna"
-
-# interfaces/time.glade.h:15 interfaces/time.glade.h:22
-#: interfaces/time.glade.in.h:10
-#, fuzzy
 msgid "Time zone:"
 msgstr "Időzóna"
 
 # interfaces/time.glade.h:23
-#: interfaces/time.glade.in.h:11
+#: interfaces/time.glade.in.h:10
 #, fuzzy
 msgid "To select a time zone, click on one of the dots on the map"
 msgstr ""
@@ -2970,19 +1097,19 @@ msgstr ""
 "az egyik pontra a térképen."
 
 # interfaces/time.glade.h:9
-#: interfaces/time.glade.in.h:12
+#: interfaces/time.glade.in.h:11
 #, fuzzy
 msgid "_Date:"
 msgstr "Dátum"
 
 # interfaces/time.glade.h:17
-#: interfaces/time.glade.in.h:13
+#: interfaces/time.glade.in.h:12
 #, fuzzy
 msgid "_Select Time Zone..."
 msgstr "Válassz idő_zónát..."
 
 # interfaces/time.glade.h:10
-#: interfaces/time.glade.in.h:14
+#: interfaces/time.glade.in.h:13
 #, fuzzy
 msgid "_Time:"
 msgstr "Idő"
@@ -3036,45 +1163,24 @@ msgid "<span weight=\"bold\">User Profile</span>"
 msgstr "A számítógép indítása"
 
 # interfaces/users.glade.h:21
-#: interfaces/users.glade.in.h:16
+#: interfaces/users.glade.in.h:15
 #, fuzzy
 msgid "Assign a random password by default"
 msgstr "  Generált jelszó  "
 
-# interfaces/users.glade.h:69
-#: interfaces/users.glade.in.h:17
-msgid ""
-"Change the settings and options for the\n"
-"selected user or group, like a users password\n"
-"or a groups name or members."
-msgstr ""
-"Itt változtathatod meg a kiválasztott\n"
-"felhasználó vagy csoport beállításait. Átírhatod\n"
-"pl. a felhasználó jelszavát, a csoport nevét vagy a tagjait."
-
 # interfaces/users.glade.h:22
-#: interfaces/users.glade.in.h:20
+#: interfaces/users.glade.in.h:16
 msgid "Check password _quality"
 msgstr "_Jelszó minőségének ellenőrzése"
 
-#: interfaces/users.glade.in.h:21
-msgid "Click \"Next\" to continue"
-msgstr ""
-
 # interfaces/users.glade.h:20
-#: interfaces/users.glade.in.h:22
+#: interfaces/users.glade.in.h:17
 #, fuzzy
 msgid "Con_firmation:"
 msgstr "_Beállítások:"
 
-#: interfaces/users.glade.in.h:23
-msgid ""
-"Congratulations, the new user has been created.\n"
-"Please click \"Finish\" to save your changes. "
-msgstr ""
-
 # interfaces/users.glade.h:60
-#: interfaces/users.glade.in.h:25
+#: interfaces/users.glade.in.h:18
 #, fuzzy
 msgid "Days between warning and password expiration:"
 msgstr ""
@@ -3082,187 +1188,122 @@ msgstr ""
 " és a jelszó elévülése között:  "
 
 # interfaces/users.glade.h:9
-#: interfaces/users.glade.in.h:26
+#: interfaces/users.glade.in.h:19
 #, fuzzy
 msgid "Default _group:"
 msgstr "Alapértelmezett csoport:"
 
 # interfaces/users.glade.h:63
-#: interfaces/users.glade.in.h:27
+#: interfaces/users.glade.in.h:20
 #, fuzzy
 msgid "Default _shell:"
 msgstr "Alapértelmezett héj:"
 
-#: interfaces/users.glade.in.h:29
-msgid ""
-"EXPERIMENTAL NIS support.\n"
-"It's only available if You have NIS\n"
-"and when You click on \"More Settings\"."
-msgstr ""
-
-# interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/users.glade.in.h:32
-msgid "Edit profile:"
-msgstr "Profil szerkesztése"
-
-# interfaces/users.glade.h:57
-#: interfaces/users.glade.in.h:33
-#, fuzzy
-msgid "Enter Password (Step 2 of 2)"
-msgstr "Jelszó beállításai (2 / 2 lépés)"
-
 # interfaces/users.glade.h:21
-#: interfaces/users.glade.in.h:35
+#: interfaces/users.glade.in.h:21
 msgid "Generate _random password"
 msgstr "_Véletlen jelszó generálása"
 
 # interfaces/users.glade.h:23
-#: interfaces/users.glade.in.h:36
+#: interfaces/users.glade.in.h:22
 #, fuzzy
 msgid "Group Properties"
 msgstr "Csoportbeállítások"
 
 # interfaces/users.glade.h:47
-#: interfaces/users.glade.in.h:37
+#: interfaces/users.glade.in.h:23
 #, fuzzy
 msgid "Group _ID:"
 msgstr "Csoport"
 
 # interfaces/users.glade.h:27
-#: interfaces/users.glade.in.h:38
+#: interfaces/users.glade.in.h:24
 #, fuzzy
 msgid "Group _members:"
 msgstr "C_soporttagok"
 
 # interfaces/users.glade.h:24
-#: interfaces/users.glade.in.h:39
+#: interfaces/users.glade.in.h:25
 #, fuzzy
 msgid "Group _name:"
 msgstr "_Csoport neve:"
 
 # interfaces/users.glade.h:47
-#: interfaces/users.glade.in.h:40
+#: interfaces/users.glade.in.h:26
 msgid "Groups"
 msgstr "Csoportok"
 
 # interfaces/users.glade.h:58
-#: interfaces/users.glade.in.h:41
+#: interfaces/users.glade.in.h:27
 msgid "Ma_ximum days a password may be used:"
 msgstr "_Ennyi napig használható egy jelszó:"
 
 # interfaces/users.glade.h:53
-#: interfaces/users.glade.in.h:42
+#: interfaces/users.glade.in.h:28
 msgid "Maximum UID:"
 msgstr "Legnagyobb UID:"
 
 # interfaces/users.glade.h:59
-#: interfaces/users.glade.in.h:43
+#: interfaces/users.glade.in.h:29
 msgid "Mi_nimum days between password changes:"
 msgstr "A _jelszóváltoztatások között megengedett legkevesebb nap:"
 
 # interfaces/users.glade.h:55
-#: interfaces/users.glade.in.h:44
+#: interfaces/users.glade.in.h:30
 msgid "Minimum GID:"
 msgstr "Legkisebb GID:"
 
 # interfaces/users.glade.h:54
-#: interfaces/users.glade.in.h:45
+#: interfaces/users.glade.in.h:31
 msgid "Minimum UID:"
 msgstr "Legkisebb UID:"
 
 # interfaces/users.glade.h:59
-#: interfaces/users.glade.in.h:46
+#: interfaces/users.glade.in.h:32
 msgid "Minimum days allowed between password changes:"
 msgstr "A jelszóváltoztatások között megengedett legkevesebb nap:"
 
-# interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/users.glade.in.h:47
-msgid "New Group"
-msgstr "Új csoport"
-
-# interfaces/users.glade.h:34 interfaces/users.glade.h:65
-#: interfaces/users.glade.in.h:48
-msgid "New User"
-msgstr "Új felhasználó"
-
 # interfaces/users.glade.h:58
-#: interfaces/users.glade.in.h:49
+#: interfaces/users.glade.in.h:33
 msgid "Number of days that a password may be used:"
 msgstr "Ennyi napig használható egy jelszó:"
 
 # interfaces/users.glade.h:7
-#: interfaces/users.glade.in.h:50
+#: interfaces/users.glade.in.h:34
 #, fuzzy
 msgid "O_ffice location:"
 msgstr "_Iroda helye:"
 
-#: interfaces/users.glade.in.h:51
+#: interfaces/users.glade.in.h:35
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
 msgstr ""
 
-#: interfaces/users.glade.in.h:52
-msgid ""
-"On this page, you can select scripts and files to be copied from your "
-"account into new users' accounts."
-msgstr ""
-
 # interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/users.glade.in.h:53
+#: interfaces/users.glade.in.h:36
 #, fuzzy
 msgid "Other Groups"
 msgstr "Új csoport"
 
 # src/users/callbacks.c:264
-#: interfaces/users.glade.in.h:54
+#: interfaces/users.glade.in.h:37
 #, fuzzy
 msgid "Password set to: "
 msgstr "A beállított jelszó:"
 
-# src/users/callbacks.c:303
-#: interfaces/users.glade.in.h:55
-#, fuzzy
-msgid "Please enter a password for the new user. "
-msgstr "A jelszó mind a két alkalommal meg kell egyezzen."
-
-#: interfaces/users.glade.in.h:56
-msgid ""
-"Please enter a username for the new user in the space below. Optionally, you "
-"can fill in more information to identify the user. "
-msgstr ""
-
-# interfaces/memory.glade.h:23
-#: interfaces/users.glade.in.h:57
-#, fuzzy
-msgid "Profile _name:"
-msgstr "_Profil:"
-
-#: interfaces/users.glade.in.h:58
+#: interfaces/users.glade.in.h:39
 msgid "Set password b_y hand"
 msgstr "Jelszó beállítása _kézzel"
 
 # interfaces/users.glade.h:68
-#: interfaces/users.glade.in.h:60
-msgid "Settings for selected user and group"
-msgstr "A kiválasztott csoport és felhasználó beállításai"
-
-# interfaces/users.glade.h:68
-#: interfaces/users.glade.in.h:61
+#: interfaces/users.glade.in.h:40
 #, fuzzy
 msgid "Show a_ll users and groups"
 msgstr "Az összes felhasználó és csoport _megjelenítése"
 
-#: interfaces/users.glade.in.h:62
-msgid ""
-"This druid is designed to help you quickly \n"
-"and easily add new users to your system.\n"
-"\n"
-"To begin, click \"Next\". "
-msgstr ""
-
 # interfaces/users.glade.h:33
-#: interfaces/users.glade.in.h:66
+#: interfaces/users.glade.in.h:41
 #, fuzzy
 msgid ""
 "This is the list of the groups available on the system. Create new groups or "
@@ -3273,7 +1314,7 @@ msgstr ""
 "ablakban."
 
 # interfaces/users.glade.h:33
-#: interfaces/users.glade.in.h:67
+#: interfaces/users.glade.in.h:42
 #, fuzzy
 msgid ""
 "This is the list of the users available on the system. Create new users or "
@@ -3283,184 +1324,154 @@ msgstr ""
 "vagy létező felhasználók beállításainak módosítása lehetséges ebben az "
 "ablakban."
 
-#: interfaces/users.glade.in.h:68
+# interfaces/users.glade.h:42 interfaces/users.glade.h:66
+#: interfaces/users.glade.in.h:43
 #, fuzzy
-msgid "User Account Wizard"
-msgstr "Felhasználó adminisztráció"
-
-# interfaces/users.glade.h:7
-#: interfaces/users.glade.in.h:69
-#, fuzzy
-msgid "User Creation Druid"
-msgstr "Felhasználói beállítások"
-
-#: interfaces/users.glade.in.h:70
-msgid "User Identity (Step 1 of 2)"
-msgstr ""
-
-# interfaces/common.glade.h:7 interfaces/common.glade.h:13
-#: interfaces/users.glade.in.h:71
-#, fuzzy
-msgid "User Profiles - GNOME System Tools"
-msgstr "Ximian Setup Tools"
+msgid "User Profiles"
+msgstr "_Profilok szerkesztése..."
 
 # interfaces/users.glade.h:13
-#: interfaces/users.glade.in.h:72
+#: interfaces/users.glade.in.h:44
 #, fuzzy
 msgid "User _ID:"
 msgstr "Felhasználói azonosító:"
 
-#: interfaces/users.glade.in.h:73
+#: interfaces/users.glade.in.h:45
 #, fuzzy
 msgid "User _password:"
 msgstr "Új jelszó:"
 
-#: interfaces/users.glade.in.h:74
+#: interfaces/users.glade.in.h:46
 msgid ""
 "User profiles can be used as templates to facilitate the creation of new "
-"users. "
+"users."
 msgstr ""
 
 # interfaces/users.glade.h:40
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:47
 msgid "Users"
 msgstr "Felhasználók"
 
-#: interfaces/users.glade.in.h:76
+#: interfaces/users.glade.in.h:48
 #, fuzzy
 msgid "_Add Group..."
 msgstr "_Csoport hozzáadása..."
 
 # interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/users.glade.in.h:77
+#: interfaces/users.glade.in.h:49
 #, fuzzy
 msgid "_Add Profile..."
 msgstr "Profil szerkesztése"
 
-#: interfaces/users.glade.in.h:78
+#: interfaces/users.glade.in.h:50
 #, fuzzy
 msgid "_Add User..."
 msgstr "_Felhasználó hozzáadása..."
 
 # interfaces/users.glade.h:26
-#: interfaces/users.glade.in.h:79
+#: interfaces/users.glade.in.h:51
 #, fuzzy
 msgid "_All users:"
 msgstr "Minden _felhasználó"
 
 # interfaces/memory.glade.h:7
-#: interfaces/users.glade.in.h:80
+#: interfaces/users.glade.in.h:52
 #, fuzzy
 msgid "_Available groups:"
 msgstr "Elérhető partíciók:"
 
 # interfaces/shares.glade.h:20 interfaces/users.glade.h:11
-#: interfaces/users.glade.in.h:81
+#: interfaces/users.glade.in.h:53
 #, fuzzy
 msgid "_Comments"
 msgstr "_Megjegyzés:"
 
 # interfaces/users.glade.h:60
-#: interfaces/users.glade.in.h:82
+#: interfaces/users.glade.in.h:54
 msgid "_Days between warning and password expiration:"
 msgstr ""
 "_Napok száma a figyelmeztetés és \n"
 "a jelszó elévülése között: "
 
 # interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/users.glade.in.h:84
+#: interfaces/users.glade.in.h:56
 #, fuzzy
 msgid "_Edit User Profiles..."
 msgstr "_Profilok szerkesztése..."
 
 # interfaces/users.glade.h:21
-#: interfaces/users.glade.in.h:85
+#: interfaces/users.glade.in.h:57
 #, fuzzy
 msgid "_Generate Password"
 msgstr "_Véletlen jelszó generálása"
 
 # interfaces/users.glade.h:14
-#: interfaces/users.glade.in.h:86
+#: interfaces/users.glade.in.h:58
 #, fuzzy
 msgid "_Home directory:"
 msgstr "Saját könyvtár:"
 
 # interfaces/nameresolution.glade.h:17
-#: interfaces/users.glade.in.h:87
+#: interfaces/users.glade.in.h:59
 msgid "_Home phone:"
 msgstr "_Otthoni telefon:"
 
 # interfaces/users.glade.h:9
-#: interfaces/users.glade.in.h:88
+#: interfaces/users.glade.in.h:60
 #, fuzzy
 msgid "_Main group:"
 msgstr "Fő _csoport:"
 
 # interfaces/memory.glade.h:23
-#: interfaces/users.glade.in.h:89
+#: interfaces/users.glade.in.h:61
 msgid "_Profile:"
 msgstr "_Profil:"
 
-# interfaces/memory.glade.h:23
-#: interfaces/users.glade.in.h:90
-msgid "_Profiles..."
-msgstr "_Profilok..."
-
 # interfaces/memory.glade.h:40 interfaces/shares.glade.h:56
 # interfaces/shares.glade.h:65 interfaces/shares.glade.h:68
-#: interfaces/users.glade.in.h:91
+#: interfaces/users.glade.in.h:62
 #, fuzzy
 msgid "_Real name:"
 msgstr "Valódi név:"
 
 # interfaces/users.glade.h:15
-#: interfaces/users.glade.in.h:92
+#: interfaces/users.glade.in.h:63
 msgid "_Shell:"
 msgstr "_Héj:"
 
 # interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: interfaces/users.glade.in.h:93
+#: interfaces/users.glade.in.h:64
 #, fuzzy
 msgid "_User's groups:"
 msgstr "Új csoport"
 
 # interfaces/nameresolution.glade.h:24
-#: interfaces/users.glade.in.h:95
+#: interfaces/users.glade.in.h:66
 msgid "_Work phone:"
 msgstr "_Munkahelyi telefon:"
 
 # interfaces/memory.glade.h:23
-#: interfaces/users.glade.in.h:96
+#: interfaces/users.glade.in.h:67
 #, fuzzy
 msgid "profiles_table"
 msgstr "Profilok"
-
-# interfaces/shares.glade.h:31
-#: src/boot/boot-append-editor.c:119 src/boot/callbacks.c:168
-#, fuzzy
-msgid "Boot Append Editor"
-msgstr "Rendszerindító szerkesztése"
 
 #: src/boot/boot-append-gui.c:226
 #, c-format
 msgid "vga=%s is not a valid vga value"
 msgstr ""
 
-# interfaces/shares.glade.h:31
-#. set window title
-#: src/boot/boot-druid.c:407
-#, fuzzy
-msgid "Boot Image Wizard"
-msgstr "Hely"
+#: src/boot/boot-druid.c:430
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr ""
 
-# interfaces/shares.glade.h:31
-#. give our dialog an OK button and title
-#: src/boot/boot-image-editor.c:108 src/boot/callbacks.c:79
-msgid "Boot Image Editor"
-msgstr "Rendszerindító szerkesztése"
+#: src/boot/boot-druid.c:431
+msgid "Finished creating a new boot image"
+msgstr ""
 
 # interfaces/nameresolution.glade.h:19 interfaces/nameresolution.glade.h:23
-#: src/boot/boot-image.c:40
+#: src/boot/boot-image.c:40 src/network/profile.c:468
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -3486,29 +1497,43 @@ msgstr "Linux"
 msgid "Linux swap"
 msgstr "Linux"
 
-#: src/boot/boot-image.c:266
+#: src/boot/boot-image.c:46
+msgid "GNU/Hurd"
+msgstr ""
+
+#: src/boot/boot-image.c:278
 #, c-format
 msgid "Invalid path: %s"
 msgstr "Érvénytelen útvonal: %s"
 
-#: src/boot/boot-image.c:282
+#: src/boot/boot-image.c:294
 #, c-format
 msgid "Image '%s' already exists, please set another name."
 msgstr ""
 
-#: src/boot/boot-image.c:288
+#: src/boot/boot-image.c:300
 #, c-format
 msgid "Invalid image name: '%s'"
 msgstr ""
 
-#: src/boot/boot-image.c:303
+#: src/boot/boot-image.c:313
 #, c-format
 msgid "Invalid image: '%s'"
 msgstr ""
 
-#: src/boot/boot-image.c:321
+#: src/boot/boot-image.c:331
 #, c-format
 msgid "Invalid root device: '%s'"
+msgstr ""
+
+# interfaces/disks.glade.h:10 interfaces/shares.glade.h:13
+#: src/boot/boot-settings.c:43
+#, fuzzy
+msgid "_Module path:"
+msgstr "_Modem port:"
+
+#: src/boot/boot-settings.c:360 src/users/user-settings.c:472
+msgid "Password confirmation isn't correct."
 msgstr ""
 
 # interfaces/disks.glade.h:25
@@ -3517,56 +1542,71 @@ msgstr ""
 msgid "Boot"
 msgstr "Bootolható"
 
-# interfaces/shares.glade.h:31
 #: src/boot/boot.desktop.in.in.h:2
-#, fuzzy
-msgid "Boot Manager"
-msgstr "Hely"
+msgid "Configure the system boot process"
+msgstr ""
 
-#: src/boot/callbacks.c:385
+# interfaces/shares.glade.h:31
+#: src/boot/callbacks.c:75
+msgid "Boot Image Editor"
+msgstr "Rendszerindító szerkesztése"
+
+# interfaces/shares.glade.h:31
+#: src/boot/callbacks.c:169
+#, fuzzy
+msgid "Boot Append Editor"
+msgstr "Rendszerindító szerkesztése"
+
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
 msgstr ""
 
 # src/users/user_group.c:711
-#: src/boot/callbacks.c:400
+#: src/boot/callbacks.c:408
 #, fuzzy, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Biztos, hogy törölni szeretnéd a következő felhasználót: %s?"
 
-#: src/boot/callbacks.c:445 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
 "The configuration will show empty."
 msgstr ""
 
-# interfaces/shares.glade.h:31
-#: src/boot/main.c:73
-#, fuzzy
-msgid "Boot Manager Settings"
-msgstr "Hely"
+# interfaces/shares.glade.h:46
+#: src/boot/table.c:41
+msgid "Name"
+msgstr "Név"
 
 # interfaces/users.glade.h:63
-#: src/boot/table.c:45
+#: src/boot/table.c:42
 msgid "Default"
 msgstr "Alapértelmezett"
 
 # interfaces/disks.glade.h:8 interfaces/shares.glade.h:8
-#: src/boot/table.c:46 src/network/connection.c:492
+#: src/boot/table.c:43 src/network/connection.c:485
 msgid "Type"
 msgstr "Típus"
 
-#: src/boot/table.c:47
+#: src/boot/table.c:44
 msgid "Kernel Image"
 msgstr ""
 
-#: src/boot/table.c:53
+# interfaces/disks.glade.h:20 interfaces/memory.glade.h:8
+# interfaces/memory.glade.h:36
+#: src/boot/table.c:45 src/network/connection.c:501
+msgid "Device"
+msgstr "Eszköz"
+
+#: src/boot/table.c:50 src/network/connection.c:57
 msgid "/_Add ..."
 msgstr "/_Hozzáadás ..."
 
-#: src/boot/table.c:55 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Tulajdonságok"
 
@@ -3574,38 +1614,50 @@ msgstr "/_Tulajdonságok"
 # interfaces/nameresolution.glade.h:36 interfaces/nameresolution.glade.h:46
 # interfaces/users.glade.h:35 interfaces/users.glade.h:43
 # interfaces/users.glade.h:67
-#: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
+#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Törlés"
 
-#: src/common/System.directory.in.in.h:1
-msgid "System"
-msgstr "Rendszer"
+# src/users/user_group.c:237
+#. the proccess was running ssh
+#: src/common/gst-auth.c:84
+msgid "Could not connect to the computer."
+msgstr "Nem lehet kapcsolódni a számítógéphez."
 
-#: src/common/System.directory.in.in.h:2
-#, fuzzy
-msgid "System administration"
-msgstr "Memória adminsztráció"
+#. the proccess was running su
+#: src/common/gst-auth.c:87
+msgid "The password you entered is invalid."
+msgstr ""
 
-#: src/common/gst-dialog.c:60
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr ""
+
+#: src/common/gst-auth.c:99
+msgid "An unexpected error has occurred."
+msgstr ""
+
+#: src/common/gst-dialog.c:61
 #, c-format
 msgid "Could not find widget: %s"
 msgstr ""
 
 # interfaces/networking.glade.h:15 src/common/tool.c:650
-#: src/common/gst-dialog.c:92
+#: src/common/gst-dialog.c:93
 #, fuzzy
 msgid " More _Options"
 msgstr " Egyéb beállítások >> "
 
 # interfaces/networking.glade.h:15 src/common/tool.c:650
-#: src/common/gst-dialog.c:93
+#: src/common/gst-dialog.c:94
 #, fuzzy
-msgid " Less _Options"
+msgid " Fewer _Options"
 msgstr " Egyéb beállítások >> "
 
 # src/common/tool.c:803 src/nameresolution/callbacks.c:651
-#: src/common/gst-dialog.c:479
+#: src/common/gst-dialog.c:507
 #, fuzzy
 msgid ""
 "There are changes which haven't been applied.\n"
@@ -3614,184 +1666,91 @@ msgstr ""
 "Nincs minden változás alkalmazva.\n"
 "Alkalmazás most?"
 
-#: src/common/gst-dialog.c:565
+#: src/common/gst-dialog.c:624
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr ""
 
-#: src/common/gst-su.c:83
-msgid "The password you entered is invalid."
-msgstr ""
-
 # src/common/tool.c:514
-#: src/common/gst-tool.c:962
+#: src/common/gst-tool.c:822
 #, fuzzy, c-format
 msgid "Skipping %s directive..."
 msgstr "Mentés átugrása..."
 
-# interfaces/common.glade.h:8 src/common/tool.c:456
-#: src/common/gst-tool.c:1020
-msgid "Scanning your system configuration."
-msgstr "Rendszerkonfiguráció vizsgálata."
-
 # src/common/tool.c:514
-#: src/common/gst-tool.c:1100
+#: src/common/gst-tool.c:953
 msgid "Skipping actual save..."
 msgstr "Mentés átugrása..."
 
-# src/common/tool.c:536
-#: src/common/gst-tool.c:1142
-msgid "Updating your system configuration."
-msgstr "Rendszerkonfiguráció frissítése."
-
-#: src/common/gst-tool.c:1163
+#: src/common/gst-tool.c:1026
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
 
-# interfaces/common.glade.h:7 interfaces/common.glade.h:13
-#: src/common/gst-tool.c:1409
-#, fuzzy, c-format
-msgid "%s - GNOME System Tools"
-msgstr "Ximian Setup Tools"
-
-#: src/common/gst-tool.c:1600
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
-"Welcome to the %s prerelease of the GNOME System Tools.\n"
-"\n"
-"This is still a work in progress, and so it may have serious bugs.\n"
-"Due to the nature of these tools, bugs may render your computer\n"
-"PRACTICALLY USELESS, costing time, effort and sanity points.\n"
-"\n"
-"You have been warned. Thank you for trying out this prerelease of\n"
-"the GNOME System Tools!\n"
-"\n"
-"--\n"
-"The GNOME System Tools team"
+"<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
+"GNOME System Tools</span>"
 msgstr ""
 
-#: src/common/gst-tool.c:1624
+#: src/common/gst-tool.c:1511
+msgid ""
+"This is still a work in progress, and so it may have serious bugs. Due to "
+"the nature of these tools, bugs may render your computer <span weight=\"bold"
+"\">practically useless</span>, costing time, effort and sanity points. You "
+"have been warned. Thank you for trying out this prerelease of the GNOME "
+"System Tools!"
+msgstr ""
+
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr ""
 
-#: src/common/gst-tool.c:1633
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr ""
 
-# src/common/tool.c:843
-#: src/common/gst-tool.c:1707
-msgid "Pretending we are root..."
-msgstr "Tételezzük fel, hogy rendszergazdák vagyunk..."
-
-#: src/common/gst-ui.c:396
-msgid ""
-"Plese restart your GNOME session for\n"
-"these changes to take effect."
+#: src/common/gst-tool.c:1626
+msgid "GNOME System Tools"
 msgstr ""
 
-#: src/network/callbacks.c:115
-msgid "Active"
-msgstr "Aktív"
-
-# interfaces/shares.glade.h:31
-#: src/network/callbacks.c:118
-#, fuzzy
-msgid "Activating"
-msgstr "Aktiválás"
-
-#: src/network/callbacks.c:129
-msgid "Inactive"
-msgstr "Inaktív"
-
-# interfaces/shares.glade.h:31
-#: src/network/callbacks.c:132
-#, fuzzy
-msgid "Deactivating"
-msgstr "D_eaktiválás"
-
-# src/users/user_group.c:237
-#: src/network/callbacks.c:355
-msgid "The name of this computer"
-msgstr "A számítógép neve"
-
-#: src/network/callbacks.c:358
-msgid "A short description of your computer"
-msgstr "A számítógéped rövid leírása"
-
-#: src/network/callbacks.c:361
-msgid "The Windows Networking workgroup for your network"
-msgstr ""
-
-#: src/network/callbacks.c:364
-msgid "The IP address of your WINS server"
-msgstr ""
-
-#: src/network/callbacks.c:367
-msgid "The DNS domain for your computer"
-msgstr ""
-
-#: src/network/callbacks.c:370
-msgid "A list of your DNS servers' IP addresses"
-msgstr ""
-
-#: src/network/callbacks.c:373
-msgid "A list of domains where hosts will be searched"
-msgstr ""
-
-#: src/network/callbacks.c:376
-msgid "The IP address of this host"
-msgstr ""
-
-#: src/network/callbacks.c:379
-msgid "Aliases for this host, one per line"
+#: src/common/gst-ui.c:389
+msgid "Please restart your GNOME session for these changes to take effect."
 msgstr ""
 
 # interfaces/shares.glade.h:31
-#: src/network/callbacks.c:483
-#, fuzzy, c-format
+#: src/network/callbacks.c:365
+#, c-format
 msgid "Remove connection %s: \"%s\"?"
-msgstr "Hely"
+msgstr "Törli ezt a kapcsolatot %s: \"%s\"?"
 
 # interfaces/shares.glade.h:31
-#: src/network/callbacks.c:485
-#, fuzzy, c-format
+#: src/network/callbacks.c:367
+#, c-format
 msgid "Remove connection %s?"
-msgstr "Hely"
+msgstr "Törli %s kapcsolatot?"
 
-# interfaces/shares.glade.h:31
-#: src/network/callbacks.c:531
-#, c-format
-msgid "Activating connection ``%s.''"
-msgstr "``%s'' kapcsolat aktiválása."
-
-# interfaces/shares.glade.h:31
-#: src/network/callbacks.c:569
-#, c-format
-msgid "Deactivating connection ``%s.''"
-msgstr "``%s'' kapcsolat deaktiválása."
-
-#: src/network/callbacks.c:608
+#: src/network/callbacks.c:463
+#, fuzzy
 msgid ""
-"You don't have SMB support installed. Please install SMB support\n"
-"in the system to enable windows networking."
+"You don't have SMB support installed. Please install SMB support in the "
+"system to enable windows networking."
 msgstr ""
 "Nincs telepítve az SMB támogatása. Telepítsd az SMB támogatását\n"
 "a rendszeredre, ha windowsos hálózatot szeretnél."
 
 # interfaces/shares.glade.h:17
-#: src/network/callbacks.c:611
+#: src/network/callbacks.c:466
 msgid "SMB support missing."
 msgstr "Nincs SMB-támogatás. "
 
-#: src/network/callbacks.c:662
+#: src/network/callbacks.c:522
+#, fuzzy
 msgid ""
-"The host name has changed. This will prevent you\n"
-"from launching new applications, and so you will\n"
-"have to log in again.\n"
-"\n"
-"Continue anyway?"
+"The host name has changed. This will prevent you from launching new "
+"applications, and so you will have to log in again. Continue anyway?"
 msgstr ""
 "A gép neve megváltozott. Emiatt nem fogsz tudni\n"
 "új alkalmazásokat elindítani, amíg újra be nem\n"
@@ -3799,86 +1758,72 @@ msgstr ""
 "\n"
 "Folytatod?"
 
-#: src/network/callbacks.c:708
+#: src/network/callbacks.c:570
 msgid ""
-"wvdial could not be found on your system.\n"
-"You need to install wvdial, or the PPP (modem)\n"
-"connections will not activate."
+"wvdial could not be found on your system. You need to install wvdial, or the "
+"PPP (modem) connections will not activate."
 msgstr ""
 
-#: src/network/callbacks.c:734
+#: src/network/callbacks.c:597
 msgid ""
-"wvdial could not be found on your system.\n"
-"You need to install wvdial, or the PPP (modem)\n"
-"connections will not activate.\n"
-"\n"
-"Continue anyway?"
+"wvdial could not be found on your system. You need to install wvdial, or the "
+"PPP (modem) connections will not activate. Continue anyway?"
 msgstr ""
 
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:624
 msgid ""
-"The default gateway device is not activated. This\n"
-"will prevent you from connecting to the Internet.\n"
-"\n"
-"Continue anyway?"
+"The default gateway device is not activated. This will prevent you from "
+"connecting to the Internet. Continue anyway?"
 msgstr ""
 
-#: src/network/callbacks.c:816
+#: src/network/callbacks.c:679
 msgid ""
-"The default gateway device is missing gateway\n"
-"information. Please provide this information to\n"
-"proceed, or choose another default gateway device.\n"
+"The default gateway device is missing gateway information. Please provide "
+"this information to proceed, or choose another default gateway device."
 msgstr ""
 
-#: src/network/callbacks.c:862
+#: src/network/callbacks.c:725
 msgid ""
-"The program redhat-config-network-cmd could not\n"
-"be found. This could render missing connections\n"
-"under the connections tab. Please install the\n"
-"redhat-config-network rpm package to avoid this."
+"The program redhat-config-network-cmd could not be found. This could render "
+"missing connections under the connections tab. Please install the redhat-"
+"config-network rpm package to avoid this."
 msgstr ""
 
 # src/users/user_group.c:711
-#: src/network/callbacks.c:912
+#: src/network/callbacks.c:762
 #, fuzzy, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következő felhasználót: %s?"
 
 # src/users/user_group.c:711
-#: src/network/callbacks.c:924
+#: src/network/callbacks.c:772
 #, fuzzy, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következő felhasználót: %s?"
 
-#: src/network/callbacks.c:998
+#: src/network/callbacks.c:859
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
 msgstr ""
 
 # interfaces/shares.glade.h:62
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:911
 #, fuzzy
 msgid "Silent"
 msgstr "Kliens"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:913
 msgid "Low"
 msgstr ""
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:915
 msgid "Medium"
 msgstr ""
 
-#: src/network/callbacks.c:1049
+#: src/network/callbacks.c:917
 msgid "Loud"
 msgstr ""
-
-# src/nameresolution/callbacks.c:387
-#: src/network/callbacks.c:1215
-#, c-format
-msgid "Are you sure you want to delete the aliases for %s?"
-msgstr "Biztos, hogy törölni szeretnéd a következőre mutató aliaszokat: %s?"
 
 #: src/network/connection.c:45
 msgid "Other type"
@@ -3889,7 +1834,8 @@ msgid "Ethernet LAN card"
 msgstr "Ethernet hálókártya"
 
 #: src/network/connection.c:47
-msgid "WaveLAN wireless LAN"
+#, fuzzy
+msgid "Wireless LAN card"
 msgstr "WaveLAN drótnélküli LAN"
 
 #: src/network/connection.c:48
@@ -3916,146 +1862,136 @@ msgstr "Loopback: virtuális csatoló"
 msgid "Unknown interface type"
 msgstr "Ismeretlen típus"
 
-#: src/network/connection.c:520
+# interfaces/time.glade.h:16
+#: src/network/connection.c:59
+#, fuzzy
+msgid "/_Configure"
+msgstr "_Beállítás..."
+
+#: src/network/connection.c:513
 msgid "Status"
 msgstr "Állapot"
 
 # interfaces/nameresolution.glade.h:25
-#: src/network/connection.c:529 src/network/profiles-table.c:62
+#: src/network/connection.c:522 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Leírás"
 
-#: src/network/connection.c:1611
+#: src/network/connection.c:1713
 msgid ""
-"The IP address or netmask for the interface\n"
-"was left empty. Please enter valid IP\n"
-"addresses in those fields to continue."
+"The IP address or netmask for the interface was left empty. Please enter "
+"valid IP addresses in those fields to continue."
 msgstr ""
 
-#: src/network/connection.c:1618
+#: src/network/connection.c:1720
 msgid ""
-"The IP address or remote address for the\n"
-"interface was left empty. Please enter valid\n"
-"IP addresses in those fields to continue."
+"The IP address or remote address for the interface was left empty. Please "
+"enter valid IP addresses in those fields to continue."
 msgstr ""
 
-#: src/network/connection.c:1624
+#: src/network/connection.c:1726
 msgid ""
-"You chose to set the DNS servers for this\n"
-"connection manually, but left the IP\n"
-"address for the primary DNS empty. Please\n"
-"enter the IP for the primary DNS or uncheck\n"
-"the manual DNS option."
+"You chose to set the DNS servers for this connection manually, but left the "
+"IP address for the primary DNS empty. Please enter the IP for the primary "
+"DNS or uncheck the manual DNS option."
 msgstr ""
 
-#: src/network/connection.c:2180
-msgid "Autodetecting modem device"
+#: src/network/connection.c:1732
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr ""
+
+#: src/network/connection.c:1737
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr ""
+
+#: src/network/connection.c:2099
+#, c-format
+msgid "The interface %s doesn't exist."
+msgstr ""
+
+#: src/network/connection.c:2101
+msgid " The loopback interface cannot be configured."
 msgstr ""
 
 # interfaces/nameresolution.glade.h:43
-#: src/network/hosts.c:147
+#: src/network/dns.c:163 src/network/hosts.c:174
 #, fuzzy
 msgid "IP Address"
 msgstr "IP cím"
 
+# interfaces/nameresolution.glade.h:9 interfaces/nameresolution.glade.h:50
+#: src/network/hosts.c:182
+msgid "Aliases"
+msgstr "Álnevek"
+
 # interfaces/shares.glade.h:31
-#: src/network/main.c:220
-#, fuzzy
-msgid "Run the connection druid."
-msgstr "Hely"
+#: src/network/main.c:190
+msgid "Run the connection assistant."
+msgstr "Kapcsolódásvarázsló futtatása"
 
 # interfaces/users.glade.h:12
-#: src/network/main.c:221
-#, fuzzy
-msgid "Run the PPP connection druid."
-msgstr "A PPP kapcsolat haladó finomhangolása."
+#: src/network/main.c:191
+msgid "Run the PPP connection assistant."
+msgstr "A PPP kapcsolódásvarázsló futtatása"
 
 # src/nameresolution/callbacks.c:366
-#: src/network/main.c:222
-#, fuzzy
-msgid "Run the ethernet connection druid."
-msgstr "Új Internet-kapcsolat létrehozása"
-
-#: src/network/main.c:223
-msgid "Run the wlan connection druid."
+#: src/network/main.c:192
+msgid "Run the ethernet connection assistant."
 msgstr ""
 
-#: src/network/main.c:224
-#, fuzzy
-msgid "Run the parallel port connection druid."
-msgstr "Az IP cím meghatározása ehhez a kapcsolathoz"
-
-#: src/network/main.c:225
-msgid "Run the irlan connection druid."
+# interfaces/shares.glade.h:31
+#: src/network/main.c:193
+msgid "Run the wlan connection assistant."
 msgstr ""
+
+#: src/network/main.c:194
+msgid "Run the parallel port connection assistant."
+msgstr ""
+
+# interfaces/shares.glade.h:31
+#: src/network/main.c:195
+msgid "Run the irlan connection assistant."
+msgstr ""
+
+# src/nameresolution/callbacks.c:366
+#: src/network/main.c:196
+#, fuzzy
+msgid "Configure a network interface"
+msgstr "Új aliaszok létrehozása"
+
+#: src/network/main.c:196
+#, fuzzy
+msgid "interface"
+msgstr "Loopback: virtuális csatoló"
 
 # interfaces/users.glade.h:7
-#: src/network/main.c:232
+#: src/network/main.c:203
 msgid "Network Settings"
 msgstr "Hálózati beállítások"
 
-# interfaces/users.glade.h:57
-#: src/network/network-druid.c:384
-#, fuzzy
-msgid "Connection name (Step 2 of 2)"
-msgstr "Jelszó beállításai (2 / 2 lépés)"
+# src/nameresolution/callbacks.c:366
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Új Internet-kapcsolat létrehozása (%d / %d)"
+
+# src/nameresolution/callbacks.c:366
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "Új Internet-kapcsolat létrehozása befejezve"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Hálózati csatoló beállítása."
+msgid "Configure network devices and connections"
+msgstr "Hálózati eszközök és kapcsolatok beállítása"
 
 # interfaces/users.glade.h:7
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
 msgstr "Hálózat"
-
-#: src/network/ppp-druid.c:179
-msgid ""
-"The phone number must be composed of\n"
-"only numbers or commas (,)."
-msgstr ""
-
-# src/users/callbacks.c:303
-#: src/network/ppp-druid.c:196
-#, fuzzy
-msgid ""
-"The password and its confirmation\n"
-"must be the same."
-msgstr "A jelszó mind a két alkalommal meg kell egyezzen."
-
-#: src/network/ppp-druid.c:199
-msgid ""
-"If you are specifying a password,\n"
-"you should specify a user name."
-msgstr ""
-
-# src/users/user_group.c:377
-#: src/network/ppp-druid.c:222
-#, fuzzy
-msgid ""
-"Please set a name for this account,\n"
-"using only space, letters and numbers."
-msgstr "Kérlek adj meg érvényes csoportnevet, csak kisbetűket használj."
-
-#: src/network/ppp-druid.c:236
-#, c-format
-msgid ""
-"You are about to create an account named with the following information:\n"
-"\n"
-"Account Name: %s\n"
-"\n"
-"Phone number: %s\n"
-"\n"
-"User name: %s\n"
-"\n"
-"Password: %s"
-msgstr ""
-
-# interfaces/memory.glade.h:23
-#: src/network/profiles-table.c:53
-#, fuzzy
-msgid "Profile name"
-msgstr "_Profil:"
 
 # src/users/user_group.c:845
 #: src/network/profile.c:43
@@ -4063,120 +1999,158 @@ msgstr "_Profil:"
 msgid "Are you sure you want to delete profile %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következő csoportot: %s?"
 
-#: src/runlevel/callbacks.c:49
+# interfaces/memory.glade.h:23
+#: src/network/profiles-table.c:53
+#, fuzzy
+msgid "Profile name"
+msgstr "_Profil:"
+
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr ""
 
-# interfaces/users.glade.h:7
-#: src/runlevel/main.c:75
-#, fuzzy
-msgid "Runlevel Settings"
-msgstr "Felhasználói beállítások"
-
-#: src/runlevel/runlevel.desktop.in.in.h:1
-msgid "Runlevel"
+#: src/services/callbacks.c:250
+msgid "Running"
 msgstr ""
 
-#: src/runlevel/runlevel.desktop.in.in.h:2
-msgid "Runlevel Services Manager"
+#: src/services/callbacks.c:254
+msgid "Stopped"
+msgstr ""
+
+#: src/services/callbacks.c:259
+msgid "Could not get info"
+msgstr ""
+
+# src/users/user_group.c:562
+#: src/services/callbacks.c:325
+#, fuzzy, c-format
+msgid "Settings for service %s"
+msgstr "%s felhasználó beállításai"
+
+# interfaces/nameresolution.glade.h:7
+#: src/services/main.c:61
+#, fuzzy
+msgid "Services Settings"
+msgstr "Álnevek beállításai"
+
+#: src/services/services.desktop.in.in.h:1
+msgid "Configure which services will be run when the system starts"
 msgstr ""
 
 # interfaces/disks.glade.h:20 interfaces/memory.glade.h:8
 # interfaces/memory.glade.h:36
-#: src/runlevel/table.c:86
+#: src/services/services.desktop.in.in.h:2
+#, fuzzy
+msgid "Services"
+msgstr "Eszköz"
+
+#: src/services/table.c:79
+msgid "Active"
+msgstr "Aktív"
+
+# interfaces/disks.glade.h:20 interfaces/memory.glade.h:8
+# interfaces/memory.glade.h:36
+#: src/services/table.c:88
 #, fuzzy
 msgid "Service"
 msgstr "Eszköz"
 
-# interfaces/common.glade.h:7 interfaces/common.glade.h:13
-#: src/time/main.c:310
+# interfaces/time.glade.h:15 interfaces/time.glade.h:22
+#: src/time/main.c:313
 #, fuzzy
-msgid "Time Zone - GNOME System Tools"
-msgstr "Ximian Setup Tools"
+msgid "Time Zone"
+msgstr "Időzóna"
 
-# interfaces/common.glade.h:7 interfaces/common.glade.h:13
-#: src/time/main.c:425
+# interfaces/time.glade.h:18
+#: src/time/main.c:423
 #, fuzzy
-msgid "Time Servers - GNOME System Tools"
-msgstr "Ximian Setup Tools"
+msgid "Time Servers"
+msgstr "Időkiszolgáló"
 
-#: src/time/main.c:498
+#: src/time/main.c:501
 #, fuzzy
 msgid ""
-"You don't have NTP support running. Please run NTP support\n"
-"in the system to enable server synchronization."
+"You don't have NTP support running. Please run NTP support in the system to "
+"enable server synchronization."
 msgstr ""
 "Nincs telepítve az SMB támogatása. Telepítsd az SMB támogatását\n"
 "a rendszeredre, ha windowsos hálózatot szeretnél."
 
 # interfaces/shares.glade.h:26
-#: src/time/main.c:787
+#: src/time/main.c:808
 msgid "Time and Date Settings"
 msgstr "Idő és dátum beállításai"
 
 # interfaces/time.glade.h:17
-#: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
+#: src/time/time.desktop.in.in.h:1
+#, fuzzy
+msgid "Change system time, date, and timezone"
 msgstr "Idő, dátum és időzóna."
 
+# interfaces/shares.glade.h:26
+#: src/time/time.desktop.in.in.h:2
+#, fuzzy
+msgid "Time and Date"
+msgstr "Idő és dátum beállításai"
+
 # src/users/user_group.c:734
-#: src/users/callbacks.c:592
+#: src/users/callbacks.c:602
 #, fuzzy
 msgid "Create New profile"
 msgstr "Új csoport létrehozása"
 
 # src/users/user_group.c:769
-#: src/users/callbacks.c:623
+#: src/users/callbacks.c:633
 #, fuzzy, c-format
 msgid "Settings for profile %s"
 msgstr "A következő csoport beállításai: %s"
 
 # src/users/user_group.c:734
-#: src/users/group-settings.c:111
+#: src/users/group-settings.c:89
 msgid "Create New Group"
 msgstr "Új csoport létrehozása"
 
-#: src/users/group-settings.c:165 src/users/user-settings.c:457
+#: src/users/group-settings.c:143 src/users/user-settings.c:427
 msgid "User id must be a positive number."
 msgstr "A felhasználói azonosító csak pozitív szám lehet."
 
 # src/users/user_group.c:415
-#: src/users/group-settings.c:169
+#: src/users/group-settings.c:147
 msgid "Such group id already exists."
 msgstr "Ilyen csoportaznosítító már létezik."
 
 # src/users/user_group.c:373
-#: src/users/group-settings.c:191
+#: src/users/group-settings.c:169
 msgid "Group name is empty."
 msgstr "A csoportnév nincs megadva."
 
-#: src/users/group-settings.c:195
+#: src/users/group-settings.c:173
 msgid "The group name is too long."
 msgstr "Csoportnév túl hosszú."
 
 # src/users/user_group.c:377
-#: src/users/group-settings.c:199
+#: src/users/group-settings.c:177
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Kérlek adj meg érvényes csoportnevet, csak kisbetűket használj."
 
 # src/users/user_group.c:381
-#: src/users/group-settings.c:203
+#: src/users/group-settings.c:181
 msgid "Group already exists."
 msgstr "A csoport már létezik."
 
 # src/users/user_group.c:838
-#: src/users/group-settings.c:272
+#: src/users/group-settings.c:250
 msgid "The root group must not be deleted."
 msgstr "A root csoportot nem szabad törölni!"
 
 # src/users/user_group.c:845
-#: src/users/group-settings.c:279
+#: src/users/group-settings.c:257
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következő csoportot: %s?"
 
 # src/users/user_group.c:769
-#: src/users/group-settings.c:342
+#: src/users/group-settings.c:314
 #, c-format
 msgid "Settings for Group %s"
 msgstr "A következő csoport beállításai: %s"
@@ -4191,26 +2165,26 @@ msgid "GID"
 msgstr "GID"
 
 # interfaces/users.glade.h:7
-#: src/users/main.c:127
+#: src/users/main.c:120
 msgid "User name contains"
 msgstr "A felhasználónév tartalmazza"
 
 # interfaces/users.glade.h:13
-#: src/users/main.c:128
+#: src/users/main.c:121
 msgid "User ID is"
 msgstr "A felhasználói azonosító"
 
 # interfaces/users.glade.h:23
-#: src/users/main.c:129
+#: src/users/main.c:122
 msgid "Group name contains"
 msgstr "A csoportnév tartalmazza"
 
 # interfaces/users.glade.h:13
-#: src/users/main.c:130
+#: src/users/main.c:123
 msgid "User GID is"
 msgstr "A csoportazonosító"
 
-#: src/users/main.c:321
+#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Felhasználók és csoportok"
 
@@ -4229,26 +2203,26 @@ msgstr ""
 "Rossz jelszó: %s.\n"
 "Próbáld meg másik jelszóval."
 
-#: src/users/profile-settings.c:125
+#: src/users/profile-settings.c:129
 msgid "The profile must have a name"
 msgstr ""
 
-#: src/users/profile-settings.c:130
+#: src/users/profile-settings.c:134
 msgid "The profile must have a default home"
 msgstr ""
 
-#: src/users/profile-settings.c:135 src/users/profile-settings.c:140
+#: src/users/profile-settings.c:139 src/users/profile-settings.c:144
 msgid "The profile must have a default shell"
 msgstr ""
 
 # src/users/user_group.c:704
-#: src/users/profile-settings.c:210
+#: src/users/profile-settings.c:214
 #, fuzzy
 msgid "The profile Default must not be deleted."
 msgstr "A root felhasználót nem szabad törölni!"
 
 # src/nameresolution/callbacks.c:387
-#: src/users/profile-settings.c:217
+#: src/users/profile-settings.c:221
 #, fuzzy, c-format
 msgid "Are you sure you want to delete the profile called %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következőre mutató aliaszokat: %s?"
@@ -4294,46 +2268,46 @@ msgid "/_Add group ..."
 msgstr "_Csoport hozzáadása..."
 
 # src/users/user_group.c:704
-#: src/users/user-settings.c:120
+#: src/users/user-settings.c:104
 msgid "The root user must not be deleted."
 msgstr "A root felhasználót nem szabad törölni!"
 
 # src/users/user_group.c:711
-#: src/users/user-settings.c:127
+#: src/users/user-settings.c:111
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Biztos, hogy törölni szeretnéd a következő felhasználót: %s?"
 
-#: src/users/user-settings.c:208
+#: src/users/user-settings.c:191
 #, fuzzy
 msgid "User Account Editor"
 msgstr "Felhasználó adminisztráció"
 
 # src/users/user_group.c:237
-#: src/users/user-settings.c:335
+#: src/users/user-settings.c:305
 msgid "The username is empty."
 msgstr "Nincs felhasználói név megadva."
 
 # src/users/user_group.c:237
-#: src/users/user-settings.c:343
+#: src/users/user-settings.c:313
 msgid "The username is too long."
 msgstr "A felhasználói név túl hosszú."
 
 # src/users/user_group.c:704
-#: src/users/user-settings.c:347
+#: src/users/user-settings.c:317
 #, fuzzy
 msgid "root username shouldn't be modified."
 msgstr "A root felhasználót nem célszerű megváltoztatni."
 
 # src/users/user_group.c:241
-#: src/users/user-settings.c:351
+#: src/users/user-settings.c:321
 #, fuzzy
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "Kérlek adj meg érvényes felhasználói nevet, csak kisbetűket használj."
 
-#: src/users/user-settings.c:355
+#: src/users/user-settings.c:325
 #, c-format
 msgid ""
 "Username \"%s\" already exists.\n"
@@ -4341,53 +2315,49 @@ msgid ""
 "Please select a different Username"
 msgstr ""
 
-#: src/users/user-settings.c:377
+#: src/users/user-settings.c:347
 #, c-format
 msgid "Invalid character '%c' in comment."
 msgstr ""
 
 # src/users/user_group.c:308
-#: src/users/user-settings.c:423
+#: src/users/user-settings.c:393
 msgid "Home directory must not be empty."
 msgstr "A home könyvtár nem lehet üres."
 
-#: src/users/user-settings.c:426
+#: src/users/user-settings.c:396
 msgid "Please enter full path for home directory."
 msgstr ""
 
 # src/users/user_group.c:704
-#: src/users/user-settings.c:429
+#: src/users/user-settings.c:399
 #, fuzzy
 msgid "root home shouldn't be modified."
 msgstr "A root felhasználót nem célszerű megváltoztatni."
 
 # src/users/user_group.c:704
-#: src/users/user-settings.c:459
+#: src/users/user-settings.c:429
 #, fuzzy
 msgid "root uid shouldn't be modified."
 msgstr "A root felhasználót nem célszerű megváltoztatni."
 
 # src/users/user_group.c:279
-#: src/users/user-settings.c:461
+#: src/users/user-settings.c:431
 msgid "Such user id already exists."
 msgstr "Ilyen felhasználóazonosító már létezik."
 
-#: src/users/user-settings.c:481
+#: src/users/user-settings.c:451
 msgid "Please give shell with full path."
 msgstr ""
 
 # src/users/user_group.c:308
-#: src/users/user-settings.c:499
+#: src/users/user-settings.c:469
 #, fuzzy
 msgid "Password must not be empty."
 msgstr "A home könyvtár nem lehet üres."
 
-#: src/users/user-settings.c:502
-msgid "Password confirmation isn't correct."
-msgstr ""
-
 # src/users/user_group.c:562
-#: src/users/user-settings.c:778
+#: src/users/user-settings.c:746
 #, fuzzy, c-format
 msgid "Settings for User %s"
 msgstr "%s felhasználó beállításai"
@@ -4399,24 +2369,27 @@ msgid "User"
 msgstr "Felhasználó"
 
 #: src/users/users-table.c:47
-msgid "UID"
-msgstr "UID"
-
-#: src/users/users-table.c:48
 msgid "Home"
 msgstr ""
 
-# interfaces/users.glade.h:15
+# interfaces/users.glade.h:7
+#: src/users/users-table.c:48
+#, fuzzy
+msgid "User details"
+msgstr "A felhasználónév tartalmazza"
+
 #: src/users/users-table.c:49
+msgid "UID"
+msgstr "UID"
+
+# interfaces/users.glade.h:15
+#: src/users/users-table.c:50
 msgid "Shell"
 msgstr "Héj"
 
-# interfaces/shares.glade.h:52
-#: src/users/users-table.c:50
-msgid "Comments"
-msgstr "Megjegyzés"
+# interfaces/users.glade.h:68
+#: src/users/users.desktop.in.in.h:1
+#, fuzzy
+msgid "Add or remove users and groups"
+msgstr "Az összes felhasználó és csoport _megjelenítése"
 
-# interfaces/users.glade.h:42 interfaces/users.glade.h:66
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Felhasználók és csoportok."
