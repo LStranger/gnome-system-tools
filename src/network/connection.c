@@ -1387,18 +1387,12 @@ on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection 
         g_print ("ip: %s\n", ip_address);
         g_print ("netmask: %s\n", netmask);
 
-        if ((sscanf(ip_address, "%d.", &ip1) == 1) && (!strlen(netmask)))
-	{
-		if (ip1 < 127)
-		{
+        if ((sscanf(ip_address, "%d.", &ip1) == 1) && (!strlen(netmask))) {
+		if (ip1 < 127) {
 			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.0.0.0");
-		}
-		else if (ip1 < 192)
-		{
+		} else if (ip1 < 192) {
 			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.255.0.0");
-		}
-		else
-		{
+		} else {
 			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.255.255.0");
 		}
 	}
