@@ -28,6 +28,7 @@
 #include "xst-report-hook.h"
 #include "xst-platform.h"
 #include "xst-ui.h"
+#include "xst-su.h"
 
 #include <gnome.h>
 #include <parser.h>
@@ -1018,16 +1019,15 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 		root_access = ROOT_ACCESS_SIMULATED;
 #endif
 	} else {
-		d = gnome_ok_cancel_dialog (_("You need full administration privileges (i.e. root)\n"
-					      "to run this configuration tool. You can acquire\n"
-					      "such privileges by running it from the GNOME Control\n"
-					      "Center or issuing an \"su\" command in a shell.\n\n"
-					      "You will be unable to make any changes. Continue anyway?"), 
-					    NULL, NULL);
+		/* The following call returns if user proceeds without root privileges.
+		 * If su succeeds, a new instance of ourselves is spawned, and our process
+		 * exits. */
 
-		if (gnome_dialog_run_and_close (GNOME_DIALOG (d)))
-			exit (1);
-		
+		xst_su_run (argv [0], NULL,
+			    _("You need full administration privileges (i.e. root)\n"
+			      "to use this configuration tool. Please enter the root\n"
+			      "password to acquire such privileges.\n"));
+
 		root_access = ROOT_ACCESS_NONE;
 	}
 }
