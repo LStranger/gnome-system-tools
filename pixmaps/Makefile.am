@@ -40,8 +40,12 @@ pixmaps_DATA = \
 	world_map-960.png        \
 	xstdruidbg-3.png         \
 	ximian30.png             \
-	talk-userlist.png	 \
-	big-monitor.png		 \
-	test-colors.png
+	talk-userlist.png		\
+	big-monitor.png		\
+	test-colors.png		\
+	panel_left.png			\
+	panel_right.png		\
+	panel_mid.png			\
+	desktop_icons.png
 
 EXTRA_DIST = $(pixmaps_DATA)
