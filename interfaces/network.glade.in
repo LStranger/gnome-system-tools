@@ -1203,8 +1203,8 @@
 	    </signal>
 	    <signal>
 	      <name>changed</name>
-	      <handler>on_statichost_changed</handler>
-	      <last_modification_time>Fri, 05 Jan 2001 04:41:06 GMT</last_modification_time>
+	      <handler>on_hosts_ip_changed</handler>
+	      <last_modification_time>Thu, 19 Apr 2001 23:04:37 GMT</last_modification_time>
 	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
@@ -1297,30 +1297,6 @@
 
 	    <widget>
 	      <class>GtkButton</class>
-	      <name>statichost_update</name>
-	      <sensitive>False</sensitive>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>on_statichost_update_clicked</handler>
-		<last_modification_time>Thu, 28 Dec 2000 22:31:38 GMT</last_modification_time>
-	      </signal>
-	      <signal>
-		<name>clicked</name>
-		<handler>xst_dialog_modify_cb</handler>
-		<last_modification_time>Fri, 29 Dec 2000 03:45:35 GMT</last_modification_time>
-	      </signal>
-	      <label>Change</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
-	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
 	      <name>statichost_delete</name>
 	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
@@ -1377,8 +1353,8 @@
 	      </signal>
 	      <signal>
 		<name>changed</name>
-		<handler>on_statichost_changed</handler>
-		<last_modification_time>Fri, 05 Jan 2001 04:40:55 GMT</last_modification_time>
+		<handler>on_hosts_alias_changed</handler>
+		<last_modification_time>Thu, 19 Apr 2001 23:09:51 GMT</last_modification_time>
 	      </signal>
 	      <editable>True</editable>
 	      <text></text>

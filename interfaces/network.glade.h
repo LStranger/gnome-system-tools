@@ -35,7 +35,6 @@ gchar *s = N_("Aliases");
 gchar *s = N_("IP address:");
 gchar *s = N_("Aliases:");
 gchar *s = N_("Add");
-gchar *s = N_("Change");
 gchar *s = N_("Delete");
 gchar *s = N_("Hosts");
 gchar *s = N_("New Connection Type");
