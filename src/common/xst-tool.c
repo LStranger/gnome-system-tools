@@ -30,8 +30,8 @@
 #include "xst-ui.h"
 #include "xst-su.h"
 
-#include "archive.h"
-#include "location.h"
+#include <ximian-archiver/archive.h>
+#include <ximian-archiver/location.h>
 
 #include <gnome.h>
 #include <parser.h>

@@ -116,14 +116,14 @@ dnl =====================================================
 dnl Ximian archiver checking
 dnl =====================================================
 
-AC_MSG_CHECKING(for ximian_archiver >= 0.6.1)
+AC_MSG_CHECKING(for ximian_archiver >= 1.3.2)
 if gnome-config --libs ximian_archiver > /dev/null 2>&1; then
 	vers=`gnome-config --modversion ximian_archiver | sed -e "s/ximian-archiver-//" -e 's/cvs$//' -e 's/pre$//' | \
 		 awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-	if test "$vers" -ge 60100; then
+	if test "$vers" -ge 1030200; then
 		AC_MSG_RESULT(found)
 	 else
-		AC_MSG_ERROR(You need at least Ximian Archiver 0.6.1 for this version of ximian-setup-tools)
+		AC_MSG_ERROR(You need at least Ximian Archiver 1.3.2 for this version of ximian-setup-tools)
 	fi
 else
 	AC_MSG_ERROR(Did not find Ximian Archiver installed	    )
@@ -191,8 +191,8 @@ case $host in
 	;;
 esac;
 
-dnl XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/archiver/libximian_archiver.la \$(top_builddir)/src/common/libsetuptool.a"
-dnl XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
+XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/archiver/libximian_archiver.la \$(top_builddir)/src/common/libsetuptool.a"
+XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
 
 XST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
 XST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(desktop).in \$(desktop) \$(etspecs)"
@@ -258,6 +258,7 @@ src/boot/Makefile
 src/print/Makefile
 src/internetsharing/Makefile
 src/display/Makefile
+src/location-manager/Makefile
 doc/Makefile
 doc/nameresolution/Makefile
 doc/networking/Makefile
