@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 23:20+0900\n"
-"PO-Revision-Date: 2005-01-26 23:19+0900\n"
+"POT-Creation-Date: 2005-03-02 23:20+0900\n"
+"PO-Revision-Date: 2005-03-02 23:19+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translations@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -1193,6 +1193,16 @@ msgstr "このコマンドを実行できる権限があるか確認して下さ
 msgid "An unexpected error has ocurred"
 msgstr "予期しないエラーが発生しました"
 
+#: ../src/common/gst-auth.c:132
+msgid "Could not execute the backend"
+msgstr "バックエンドを実行できませんでした"
+
+#: ../src/common/gst-auth.c:133
+msgid "There was an error creating the child process, the tool will close now."
+msgstr ""
+"子プロセスを生成している際にエラーが発生しました。今すぐ、ツールを終了しま"
+"す。"
+
 #: ../src/common/gst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
@@ -1283,11 +1293,11 @@ msgstr ""
 "モデムがビジー状態でないか、またはお使いのシステムへ正しく接続されているかを"
 "確認して下さい。"
 
-#: ../src/network/callbacks.c:433
+#: ../src/network/callbacks.c:443
 msgid "The host name has changed"
 msgstr "ホスト名が変更されています"
 
-#: ../src/network/callbacks.c:436
+#: ../src/network/callbacks.c:446
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1295,7 +1305,7 @@ msgstr ""
 "これにより新しいアプリを起動できなくなるので、再ログインして下さい。どうして"
 "も続行しますか？"
 
-#: ../src/network/callbacks.c:442
+#: ../src/network/callbacks.c:452
 msgid "Change _Host name"
 msgstr "ホスト名を変更する(_H)"
 
@@ -1331,11 +1341,11 @@ msgstr "この場所を削除してもよろしいですか？"
 msgid "Changing profile"
 msgstr "プロファイルの変更"
 
-#: ../src/network/main.c:105
+#: ../src/network/main.c:108
 msgid "The interface does not exist"
 msgstr "インタフェースは存在しません"
 
-#: ../src/network/main.c:107
+#: ../src/network/main.c:110
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
@@ -1343,23 +1353,23 @@ msgstr ""
 "インタフェース名を正しく入力したか、そしてお使いのシステムでサポートされてい"
 "るか確認して下さい。"
 
-#: ../src/network/main.c:139
+#: ../src/network/main.c:155
 msgid "Configure a network interface"
 msgstr "ネットワーク・インタフェースを設定する"
 
-#: ../src/network/main.c:139
+#: ../src/network/main.c:155
 msgid "INTERFACE"
 msgstr "INTERFACE"
 
-#: ../src/network/main.c:140
+#: ../src/network/main.c:156
 msgid "Configure the first network interface with a specific type"
 msgstr "一番最初のネットワーク・インタフェースを指定した種類で設定する"
 
-#: ../src/network/main.c:140
+#: ../src/network/main.c:156
 msgid "TYPE"
 msgstr "TYPE"
 
-#: ../src/network/main.c:147
+#: ../src/network/main.c:163
 msgid "Network settings"
 msgstr "ネットワークの設定"
 
@@ -1379,7 +1389,7 @@ msgstr "Ethernet 接続"
 msgid "Infrared connection"
 msgstr "赤外線接続"
 
-#: ../src/network/network-iface-isdn.c:296
+#: ../src/network/network-iface-isdn.c:311
 msgid "ISDN connection"
 msgstr "ISDN 接続"
 
@@ -1695,11 +1705,11 @@ msgstr "次のグループ ID (GID) を持つ"
 msgid "Users and Groups"
 msgstr "ユーザとグループ"
 
-#: ../src/users/passwd.c:266
+#: ../src/users/passwd.c:165
 msgid "Passwords do not match"
 msgstr "パスワードが一致しません。"
 
-#: ../src/users/passwd.c:271
+#: ../src/users/passwd.c:170
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1909,7 +1919,7 @@ msgid "Check that you have provided the same password in both text fields"
 msgstr ""
 "両方のテキスト・フィールドに同じパスワードを指定していないか確認して下さい。"
 
-#: ../src/users/user-settings.c:765
+#: ../src/users/user-settings.c:772
 #, c-format
 msgid "Settings for User %s"
 msgstr "ユーザ %s の設定"
