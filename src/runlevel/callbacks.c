@@ -78,6 +78,8 @@ callbacks_runlevel_toggled (GtkTreeView *treeview, gpointer data)
 	xmlNodePtr node, runlevels,rl;
 		
 	gtk_tree_view_get_cursor (treeview, &path, &column);
+	if (column == NULL)
+		return;
 	path_str = gtk_tree_path_to_string (path);
 	cell_list = gtk_tree_view_column_get_cell_renderers (column);
 	cell = g_list_nth_data (cell_list, 0);
