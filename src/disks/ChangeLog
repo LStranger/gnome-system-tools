@@ -1,3 +1,19 @@
+2004-07-28  Carlos García Campos <elkalmail@yahoo.es>
+
+	* callbacks.c: use of GDK_WATCH cursor during the widget properties
+	update of each device
+
+	* disks-gui.c, transfer.[ch]: get disk information from backend in the widget
+	properties update function
+
+	* disks-partition.c: added a pointer to the disk that contains the
+	partition
+
+	* disks-storage-disk.[ch]: added disk_get_partition function to get a
+	certain partition of the disk
+
+	* transfer.c: Modularization of transfer_xml_to_config function
+
 2004-07-25  Carlos García Campos <elkalmail@yahoo.es>
 
 	* gst-disks-tool.c, disks-gui.c: use GtkIconTheme instead of

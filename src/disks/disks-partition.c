@@ -45,7 +45,8 @@ enum {
 	PROP_INTEGRITYCHECK,
 	PROP_MOUNTED,
 	PROP_LISTED,
-	PROP_DETECTED
+	PROP_DETECTED,
+	PROP_DISK
 };
 
 struct _GstDisksPartitionPriv
@@ -54,13 +55,14 @@ struct _GstDisksPartitionPriv
 	gchar    *device;
 	GstPartitionTypeFs type;
 	gchar    *point;
-	gulong   size;
-	gulong   free;
-	gboolean bootable;
-	gboolean integritycheck;
-	gboolean mounted;
-	gboolean listed;
-	gboolean detected;
+	gulong    size;
+	gulong    free;
+	gboolean  bootable;
+	gboolean  integritycheck;
+	gboolean  mounted;
+	gboolean  listed;
+	gboolean  detected;
+	gpointer  disk;
 };
 
 static void partition_init       (GstDisksPartition      *storage);
@@ -147,6 +149,7 @@ partition_init (GstDisksPartition *part)
 	part->priv = g_new0 (GstDisksPartitionPriv, 1);
 	part->priv->name = g_strdup (_("Unknown"));
 	part->priv->size = 0;
+	part->priv->disk = NULL;
 }
 
 static void
@@ -196,6 +199,9 @@ partition_class_init (GstDisksPartitionClass *klass)
 	g_object_class_install_property (object_class, PROP_DETECTED,
 					 g_param_spec_boolean ("detected", NULL, NULL, 
 							      FALSE, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_DISK,
+					 g_param_spec_pointer ("disk", NULL, NULL,
+							       G_PARAM_READWRITE));
 	
 	object_class->finalize = partition_finalize;
 }
@@ -220,6 +226,11 @@ partition_finalize (GObject *object)
 		if (part->priv->point) {
 			g_free (part->priv->point);
 			part->priv->point = NULL;
+		}
+
+		if (part->priv->disk) {
+			g_object_unref (G_OBJECT (part->priv->disk));
+			part->priv->disk = NULL;
 		}
 		
 		g_free (part->priv);
@@ -308,6 +319,15 @@ partition_set_property (GObject  *object, guint prop_id, const GValue *value,
 	case PROP_DETECTED:
 		part->priv->detected = g_value_get_boolean (value);
 		break;
+	case PROP_DISK:
+		if (part->priv->disk) {
+			g_object_unref (G_OBJECT (part->priv->disk));
+			part->priv->disk = NULL;
+		}
+
+		part->priv->disk = g_value_get_pointer (value);
+		g_object_ref (G_OBJECT (part->priv->disk));
+		break;
 	default:
 		break;
 	}
@@ -356,6 +376,9 @@ partition_get_property (GObject  *object, guint prop_id, GValue *value,
 		break;
 	case PROP_DETECTED:
 		g_value_set_boolean (value, part->priv->detected);
+		break;
+	case PROP_DISK:
+		g_value_set_pointer (value, part->priv->disk);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);

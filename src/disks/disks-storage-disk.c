@@ -153,8 +153,8 @@ storage_set_property (GObject  *object, guint prop_id, const GValue *value,
 
 	switch (prop_id) {
 	case PROP_PARTITIONS:
-		/* FIXME: check if storage->priv->partitions != NULL */
 		storage->priv->partitions = g_value_get_pointer (value);
+		
 		break;
 	default:
 		break;
@@ -202,11 +202,32 @@ storage_disk_setup_properties_widget (GstDisksStorage *storage)
 	GST_DISKS_STORAGE_GET_CLASS (storage)->setup_common_properties (storage);
 }
 
-void
-gst_disks_storage_disk_add_partition (GstDisksStorageDisk *storage, GstDisksPartition *part)
+GstDisksPartition *
+gst_disks_storage_disk_get_partition (GstDisksStorageDisk *disk, const gchar *device)
 {
-	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (storage));
-	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
+	GList *list = NULL;
+	GList *partitions = NULL;
+	GstDisksPartition *part;
+	gchar *part_device;
 
-	storage->priv->partitions = g_list_append (storage->priv->partitions, part);
+	g_return_val_if_fail (GST_IS_DISKS_STORAGE_DISK (disk), NULL);
+
+	g_object_get (G_OBJECT (disk), "partitions", &partitions, NULL);
+
+	if (partitions)
+		list = g_list_first (partitions);
+	
+	while (list) {
+		part = GST_DISKS_PARTITION (list->data);
+		g_object_get (G_OBJECT (part), "device", &part_device, NULL);
+
+		if (g_ascii_strcasecmp (part_device, device) == 0)
+			return part;
+
+		list = g_list_next (list);
+	}
+
+	return NULL;
 }
+
+

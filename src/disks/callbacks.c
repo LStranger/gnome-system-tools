@@ -61,10 +61,13 @@ gst_on_storage_list_selection_change (GtkTreeSelection *selection, gpointer gdat
 	GtkTreeSelection *selec;
 	GstDisksStorage  *storage;
 	GtkWidget        *treeview;
+	GtkWidget        *storage_list;
+	GtkWidget        *main_window;
 	GList            *partitions;
 	gboolean          cd_empty;
 	GstCdromDisc     *disc;
 	GtkWidget        *properties_notebook;
+	GdkCursor *cursor;
 
 	/* Avoid cycle */
 	g_signal_handlers_block_by_func (G_OBJECT (selection),
@@ -72,6 +75,8 @@ gst_on_storage_list_selection_change (GtkTreeSelection *selection, gpointer gdat
 					 NULL);
 	
 	notebook = gst_dialog_get_widget (tool->main_dialog, "main_notebook");
+	storage_list = gst_dialog_get_widget (tool->main_dialog, "storage_list");
+	main_window = gst_dialog_get_widget (tool->main_dialog, "disks_admin");
 	
 	if (gtk_tree_selection_get_selected (GTK_TREE_SELECTION (selection), &model, &iter)) {
 		gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &storage, -1);
@@ -84,8 +89,19 @@ gst_on_storage_list_selection_change (GtkTreeSelection *selection, gpointer gdat
 				gtk_widget_show (properties_notebook);
 				gtk_notebook_set_current_page (GTK_NOTEBOOK (properties_notebook),
 										 TAB_PROP_DISK);
+
+				cursor = gdk_cursor_new (GDK_WATCH);
+				if (!GTK_WIDGET_REALIZED (main_window))
+					   gtk_widget_realize (GTK_WIDGET (main_window));
+				gdk_window_set_cursor (main_window->window, cursor);
+				gtk_widget_set_sensitive (storage_list, FALSE);
 				
 				gst_disks_storage_setup_properties_widget (storage);
+
+				gtk_widget_set_sensitive (storage_list, TRUE);
+				gdk_cursor_destroy (cursor);
+				gdk_window_set_cursor (main_window->window, NULL);
+				
 
 				g_object_get (G_OBJECT (storage), "partitions", &partitions, NULL);
 
@@ -115,8 +131,18 @@ gst_on_storage_list_selection_change (GtkTreeSelection *selection, gpointer gdat
 				gtk_widget_show (properties_notebook);
 				gtk_notebook_set_current_page (GTK_NOTEBOOK (properties_notebook),
 							       TAB_PROP_CDROM);
-				
+
+				cursor = gdk_cursor_new (GDK_WATCH);
+				if (!GTK_WIDGET_REALIZED (main_window))
+					   gtk_widget_realize (GTK_WIDGET (main_window));
+				gdk_window_set_cursor (main_window->window, cursor);
+				gtk_widget_set_sensitive (storage_list, FALSE);
+
 				gst_disks_storage_setup_properties_widget (storage);
+
+				gtk_widget_set_sensitive (storage_list, TRUE);
+				gdk_cursor_destroy (cursor);
+				gdk_window_set_cursor (main_window->window, NULL);
 
 				g_object_get (G_OBJECT (storage), "empty", &cd_empty,
 						    "disc", &disc, NULL);

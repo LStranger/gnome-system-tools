@@ -50,7 +50,7 @@ struct _GstDisksStorageDiskClass {
 
 GType            gst_disks_storage_disk_get_type (void);
 GstDisksStorage* gst_disks_storage_disk_new      (void);
-void             gst_disks_storage_disk_add_partition (GstDisksStorageDisk *storage,
-						       GstDisksPartition *part);
+GstDisksPartition *gst_disks_storage_disk_get_partition (GstDisksStorageDisk *disk,
+							 const gchar *device);
 
 #endif /* __GST_DISKS_STORAGE_DISK_H__  */

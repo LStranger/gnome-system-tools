@@ -39,6 +39,7 @@
 #include "disks-cdrom-disc-audio.h"
 #include "disks-gui.h"
 #include "callbacks.h"
+#include "transfer.h"
 
 extern GstTool *tool;
 
@@ -280,7 +281,7 @@ gst_disks_gui_setup_partition_list (GtkWidget *treeview, GList *partitions)
 	
 	list = g_list_first (partitions);
 	while (list) {
-		part = list->data;
+		part = GST_DISKS_PARTITION (list->data);
 		if (GST_IS_DISKS_PARTITION (part)) {
 			g_object_get (G_OBJECT (part),
 				      "device", &device,
@@ -318,12 +319,11 @@ gst_disks_gui_setup_mounted (GtkWidget *status_label, GtkWidget *mount_button, g
 		gtk_image_set_from_stock (GTK_IMAGE (icon), GTK_STOCK_UNDO,
 					  GTK_ICON_SIZE_BUTTON);
 	} else {
-		gtk_label_set_text (GTK_LABEL (status_label), _("Inccessible"));
+		gtk_label_set_text (GTK_LABEL (status_label), _("Inaccessible"));
 		gtk_label_set_label (GTK_LABEL (label), _("_Enable"));
 		gtk_image_set_from_stock (GTK_IMAGE (icon), GTK_STOCK_REDO,
 					  GTK_ICON_SIZE_BUTTON);
 	}
-
 }
 
 void
@@ -481,6 +481,8 @@ gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
 	gboolean present;
 
 	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (disk));
+
+	gst_disks_get_disk_info_from_xml (disk);
 	
 	g_object_get (G_OBJECT (disk), "speed", &speed,
 		      "device", &device, "present", &present,
@@ -520,8 +522,9 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 	gchar *point, *device;
 	gchar *text_pbar, *text_type_label, *hr_size, *hr_free;
 	GstPartitionTypeFs type;
+	GstDisksStorageDisk *disk;
 	gulong size, free;
-	gboolean mounted, listed;
+	gboolean mounted, listed, disk_present;
 
 	point_entry = gst_dialog_get_widget (tool->main_dialog, "part_point_entry");
 	size_progress = gst_dialog_get_widget (tool->main_dialog, "part_size_progress");
@@ -536,8 +539,10 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 		g_object_get (G_OBJECT (part), "type", &type, "point", &point,
 			      "size", &size, "device", &device,
 			      "free", &free, "mounted", &mounted,
-			      "listed", &listed, NULL);
+			      "listed", &listed, "disk", &disk, NULL);
 
+		g_object_get (G_OBJECT (disk), "present", &disk_present, NULL);
+		
 		gtk_widget_set_sensitive (size_progress, TRUE);
 		gtk_widget_set_sensitive (device_label, TRUE);
 
@@ -553,7 +558,7 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 			gtk_editable_set_editable (GTK_EDITABLE (point_entry), FALSE);
 		} else {
 			gtk_widget_set_sensitive (change_mp_button, TRUE);
-			gtk_widget_set_sensitive (mount_button, TRUE);
+			gtk_widget_set_sensitive (mount_button, disk_present);
 			gtk_editable_set_editable (GTK_EDITABLE (point_entry), TRUE);
 		}
 

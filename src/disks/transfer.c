@@ -49,13 +49,239 @@
 extern GstTool *tool;
 
 static void
-transfer_xml_to_config (xmlNodePtr root)
+transfer_xml_common_to_config (GstDisksStorage *storage, xmlNodePtr disk_node)
 {
-	xmlNodePtr disk_node, part_node, node;
-	GstDisksStorage *storage;
-	GstDisksPartition *part;
+	xmlNodePtr node;
 	gchar *buf;
 	gboolean present = FALSE;
+
+	buf = gst_xml_get_child_content (disk_node, "device");
+	if (buf) {
+		g_object_set (G_OBJECT (storage), "device",
+			      buf, NULL);
+		g_free (buf);
+	}
+
+	buf = gst_xml_get_child_content (disk_node, "alias");
+	if (buf) {
+		g_object_set (G_OBJECT (storage), "alias",
+			      buf, NULL);
+		g_free (buf);
+	}
+
+	buf = gst_xml_get_child_content (disk_node, "model");
+	if (buf) {
+		g_object_set (G_OBJECT (storage), "model",
+			      buf, NULL);
+		g_free (buf);
+	}
+
+	node = gst_xml_element_find_first (disk_node, "present");
+	if (node) {
+		present = gst_xml_element_get_bool_attr (node, "state");
+		g_object_set (G_OBJECT (storage), "present",
+			      present, NULL);
+	}
+
+	buf = gst_xml_get_child_content (disk_node, "size");
+	if (buf) {
+		g_object_set (G_OBJECT (storage), "size",
+			      (gulong) g_ascii_strtoull (buf, NULL, 10),
+			      NULL);
+		g_free (buf);
+	}
+
+	if (GST_IS_DISKS_STORAGE_DISK (storage)) {
+		if (present) {
+			g_object_set (G_OBJECT (storage), "icon_name",
+				      "gnome-dev-harddisk", NULL);
+		} else {
+			g_object_set (G_OBJECT (storage), "icon_name",
+				      "gnome-dev-removable", NULL);
+		}
+	}
+}
+
+static void
+transfer_xml_cdrom_to_config (GstDisksStorage *storage, xmlNodePtr disk_node)
+{
+	xmlNodePtr node;
+
+	node = gst_xml_element_find_first (disk_node, "empty");
+	if (node) {
+		g_object_set (G_OBJECT (storage), "empty",
+			      gst_xml_element_get_bool_attr (
+				      node, "state"),
+			      NULL);
+	}
+
+	node = gst_xml_element_find_first (disk_node, "play-audio");
+	if (node)
+		g_object_set (G_OBJECT (storage), "play_audio",
+			      gst_xml_element_get_bool_attr (
+				      node, "state"),
+			      NULL);
+
+	node = gst_xml_element_find_first (disk_node, "write-cdr");
+	if (node)
+		g_object_set (G_OBJECT (storage), "write_cdr",
+			      gst_xml_element_get_bool_attr (
+				      node, "state"),
+			      NULL);
+
+	node = gst_xml_element_find_first (disk_node, "write-cdrw");
+	if (node)
+		g_object_set (G_OBJECT (storage), "write_cdrw",
+			      gst_xml_element_get_bool_attr (
+				      node, "state"),
+			      NULL);
+
+	node = gst_xml_element_find_first (disk_node, "read-dvd");
+	if (node)
+		g_object_set (G_OBJECT (storage), "read_dvd",
+			      gst_xml_element_get_bool_attr (
+				      node, "state"),
+			      NULL);
+
+	node = gst_xml_element_find_first (disk_node, "write-dvdr");
+	if (node)
+		g_object_set (G_OBJECT (storage), "write_dvdr",
+			      gst_xml_element_get_bool_attr (
+				      node, "state"),
+			      NULL);
+
+	node = gst_xml_element_find_first (disk_node, "write-dvdram");
+	if (node)
+		g_object_set (G_OBJECT (storage), "write_dvdram",
+			      gst_xml_element_get_bool_attr (
+				      node, "state"),
+			      NULL);
+}
+
+static void
+transfer_xml_disk_to_config (GstDisksStorage *storage, xmlNodePtr disk_node)
+{
+	xmlNodePtr node, part_node;
+	GstDisksPartition *part = NULL;
+	GList *partitions = NULL;
+	gchar *buf;
+	gboolean exists;
+
+	g_object_get (G_OBJECT (storage), "partitions", &partitions, NULL);
+	
+	for (part_node = gst_xml_element_find_first (disk_node, "partition");
+	     part_node;
+	     part_node = gst_xml_element_find_next (part_node, "partition"))
+	{
+		exists = FALSE;
+		
+		buf = gst_xml_get_child_content (part_node, "device");
+		if (buf) {
+			part = gst_disks_storage_disk_get_partition (
+				GST_DISKS_STORAGE_DISK (storage), buf);
+			
+			if (part == NULL) {
+				part = GST_DISKS_PARTITION (gst_disks_partition_new ());
+				exists = FALSE;
+			} else {
+				exists = TRUE;
+			}
+			
+			g_object_set (G_OBJECT (part), "device",
+				      buf, NULL);
+			
+			g_free (buf);
+		}
+		
+		if (part == NULL) {
+			part = GST_DISKS_PARTITION (gst_disks_partition_new ());
+			exists = FALSE;
+		}
+		
+		buf = gst_xml_get_child_content (part_node, "type");
+		if (buf) {
+			g_object_set (G_OBJECT (part), "type",
+				      gst_disks_partition_get_typefs_from_name (buf),
+				      NULL);
+			g_free (buf);
+		}
+		
+		buf = gst_xml_get_child_content (part_node, "point");
+		if (buf) {
+			g_object_set (G_OBJECT (part), "point",
+				      buf, NULL);
+			g_free (buf);
+		}
+		
+		buf = gst_xml_get_child_content (part_node, "size");
+		if (buf) {
+			g_object_set (G_OBJECT (part), "size",
+				      (gulong) g_ascii_strtoull (buf, NULL, 10),
+				      NULL);
+			g_free (buf);
+		}
+		
+		buf = gst_xml_get_child_content (part_node, "free");
+		if (buf) {
+			g_object_set (G_OBJECT (part), "free",
+				      (gulong) g_ascii_strtoull (buf, NULL, 10),
+				      NULL);
+			g_free (buf);
+		}
+		
+		node = gst_xml_element_find_first (part_node, "bootable");
+		if (node)
+			g_object_set (G_OBJECT (part), "bootable",
+				      gst_xml_element_get_bool_attr (
+					      node, "state"),
+				      NULL);
+		
+		node = gst_xml_element_find_first (part_node, "integritycheck");
+		if (node)
+			g_object_set (G_OBJECT (part), "integritycheck",
+				      gst_xml_element_get_bool_attr (
+					      node, "state"),
+				      NULL);
+		
+		node = gst_xml_element_find_first (part_node, "mounted");
+		if (node)
+			g_object_set (G_OBJECT (part), "mounted",
+				      gst_xml_element_get_bool_attr (
+					      node, "state"),
+				      NULL);
+		
+		node = gst_xml_element_find_first (part_node, "listed");
+		if (node)
+			g_object_set (G_OBJECT (part), "listed",
+				      gst_xml_element_get_bool_attr (
+					      node, "state"),
+				      NULL);
+		
+		node = gst_xml_element_find_first (part_node, "detected");
+		if (node)
+			g_object_set (G_OBJECT (part), "detected",
+				      gst_xml_element_get_bool_attr (
+					      node, "state"),
+				      NULL);
+
+		g_object_set (G_OBJECT (part), "disk", storage, NULL);
+		
+		if (exists)
+			partitions = g_list_remove (partitions, part);
+		
+		partitions = g_list_append (partitions, part);
+	}
+
+	g_object_set (G_OBJECT (storage), "partitions", partitions, NULL);
+}
+		
+
+static void
+transfer_xml_to_config (xmlNodePtr root)
+{
+	xmlNodePtr disk_node;
+	GstDisksStorage *storage;
+	gchar *buf;
 
 	g_return_if_fail (root != NULL);
 	
@@ -68,204 +294,13 @@ transfer_xml_to_config (xmlNodePtr root)
 		g_free (buf);
 		
 		if (GST_IS_DISKS_STORAGE (storage)) {
-			buf = gst_xml_get_child_content (disk_node, "device");
-			if (buf) {
-				g_object_set (G_OBJECT (storage), "device",
-					      buf, NULL);
-				g_free (buf);
-			}
-
-			buf = gst_xml_get_child_content (disk_node, "alias");
-			if (buf) {
-				g_object_set (G_OBJECT (storage), "alias",
-					      buf, NULL);
-				g_free (buf);
-			}
-			
-			buf = gst_xml_get_child_content (disk_node, "model");
-			if (buf) {
-				g_object_set (G_OBJECT (storage), "model",
-					      buf, NULL);
-				g_free (buf);
-			}
-
-			node = gst_xml_element_find_first (disk_node, "present");
-			if (node) {
-				present = gst_xml_element_get_bool_attr (node, "state");
-				g_object_set (G_OBJECT (storage), "present",
-					      present, NULL);
-			}
-			
-			buf = gst_xml_get_child_content (disk_node, "size");
-			if (buf) {
-				g_object_set (G_OBJECT (storage), "size",
-					      (gulong) g_ascii_strtoull (buf, NULL, 10),
-					      NULL);
-				/*storage_size = (gulong) g_ascii_strtoull (buf, NULL, 10);*/
-				g_free (buf);
-			}
+			transfer_xml_common_to_config (storage, disk_node);
 		}
 
 		if (GST_IS_DISKS_STORAGE_CDROM (storage)) {
-			node = gst_xml_element_find_first (disk_node, "empty");
-			if (node) {
-				g_object_set (G_OBJECT (storage), "empty",
-					      gst_xml_element_get_bool_attr (
-						      node, "state"),
-					      NULL);
-			}
-
-			/*buf = gst_xml_get_child_content (disk_node, "type");
-			if (buf) {
-				g_object_set (G_OBJECT (storage), "type",
-					      gst_disks_partition_get_typefs_from_name (buf),
-					      NULL);
-				g_free (buf);
-				}
-
-			buf = gst_xml_get_child_content (disk_node, "point");
-			if (buf) {
-				g_object_set (G_OBJECT (storage), "point",
-					      buf, NULL);
-				g_free (buf);
-				}*/
-
-			node = gst_xml_element_find_first (disk_node, "play-audio");
-			if (node)
-				g_object_set (G_OBJECT (storage), "play_audio",
-					      gst_xml_element_get_bool_attr (
-						      node, "state"),
-					      NULL);
-			
-			node = gst_xml_element_find_first (disk_node, "write-cdr");
-			if (node)
-				g_object_set (G_OBJECT (storage), "write_cdr",
-					      gst_xml_element_get_bool_attr (
-						      node, "state"),
-					      NULL);
-
-			node = gst_xml_element_find_first (disk_node, "write-cdrw");
-			if (node)
-				g_object_set (G_OBJECT (storage), "write_cdrw",
-					      gst_xml_element_get_bool_attr (
-						      node, "state"),
-					      NULL);
-
-			node = gst_xml_element_find_first (disk_node, "read-dvd");
-			if (node)
-				g_object_set (G_OBJECT (storage), "read_dvd",
-					      gst_xml_element_get_bool_attr (
-						      node, "state"),
-					      NULL);
-
-			node = gst_xml_element_find_first (disk_node, "write-dvdr");
-			if (node)
-				g_object_set (G_OBJECT (storage), "write_dvdr",
-					      gst_xml_element_get_bool_attr (
-						      node, "state"),
-					      NULL);
-
-			node = gst_xml_element_find_first (disk_node, "write-dvdram");
-			if (node)
-				g_object_set (G_OBJECT (storage), "write_dvdram",
-					      gst_xml_element_get_bool_attr (
-						      node, "state"),
-					      NULL);
+			transfer_xml_cdrom_to_config (storage, disk_node);
 		} else if (GST_IS_DISKS_STORAGE_DISK (storage)) {
-			if (present) {
-				g_object_set (G_OBJECT (storage), "icon_name",
-					      "gnome-dev-harddisk", NULL);
-			} else {
-				g_object_set (G_OBJECT (storage), "icon_name",
-					      "gnome-dev-removable", NULL);
-			}
-			
-			for (part_node = gst_xml_element_find_first (disk_node, "partition");
-			     part_node;
-			     part_node = gst_xml_element_find_next (part_node, "partition"))
-			{
-				part = GST_DISKS_PARTITION (gst_disks_partition_new ());
-				if (GST_IS_DISKS_PARTITION (part))
-				{
-					buf = gst_xml_get_child_content (part_node, "device");
-					if (buf) {
-						g_object_set (G_OBJECT (part), "device",
-							      buf, NULL);
-						g_free (buf);
-					}
-					
-					buf = gst_xml_get_child_content (part_node, "type");
-					if (buf) {
-						g_object_set (G_OBJECT (part), "type",
-							      gst_disks_partition_get_typefs_from_name (buf),
-							      NULL);
-						g_free (buf);
-					}
-					
-					buf = gst_xml_get_child_content (part_node, "point");
-					if (buf) {
-						g_object_set (G_OBJECT (part), "point",
-							      buf, NULL);
-						g_free (buf);
-					}
-					
-					buf = gst_xml_get_child_content (part_node, "size");
-					if (buf) {
-						g_object_set (G_OBJECT (part), "size",
-							      (gulong) g_ascii_strtoull (buf, NULL, 10),
-							      NULL);
-						/*p_size += (gulong) g_ascii_strtoull (buf, NULL, 10);*/
-						g_free (buf);
-					}
-					
-					buf = gst_xml_get_child_content (part_node, "free");
-					if (buf) {
-						g_object_set (G_OBJECT (part), "free",
-							      (gulong) g_ascii_strtoull (buf, NULL, 10),
-							      NULL);
-						g_free (buf);
-					}
-					
-					node = gst_xml_element_find_first (part_node, "bootable");
-					if (node)
-						g_object_set (G_OBJECT (part), "bootable", 
-							      gst_xml_element_get_bool_attr (
-								      node, "state"),
-							      NULL);
-					
-					node = gst_xml_element_find_first (part_node, "integritycheck");
-					if (node)
-						g_object_set (G_OBJECT (part), "integritycheck", 
-							      gst_xml_element_get_bool_attr (
-								      node, "state"),
-							      NULL);
-					
-					node = gst_xml_element_find_first (part_node, "mounted");
-					if (node)
-						g_object_set (G_OBJECT (part), "mounted", 
-							      gst_xml_element_get_bool_attr (
-								      node, "state"),
-							      NULL);
-					
-					node = gst_xml_element_find_first (part_node, "listed");
-					if (node)
-						g_object_set (G_OBJECT (part), "listed", 
-							      gst_xml_element_get_bool_attr (
-								      node, "state"),
-							      NULL);
-					
-					node = gst_xml_element_find_first (part_node, "detected");
-					if (node)
-						g_object_set (G_OBJECT (part), "detected", 
-							      gst_xml_element_get_bool_attr (
-								      node, "state"),
-							      NULL);
-					
-					gst_disks_storage_disk_add_partition (
-						GST_DISKS_STORAGE_DISK (storage),
-						part);
-				}
-			}
+			transfer_xml_disk_to_config (storage, disk_node);
 		}
 		
 		if (storage)
@@ -614,5 +649,36 @@ gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom)
 		}
 		gst_xml_doc_destroy (xml);
 	}
+	
 	return GST_CDROM_DISC (disc);
+}
+
+void
+gst_disks_get_disk_info_from_xml (GstDisksStorageDisk *disk)
+{
+	xmlDoc *xml;
+	xmlNodePtr root;
+	gchar *device;
+	gboolean present;
+	
+	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (disk));
+
+	g_object_get (G_OBJECT (disk), "device", &device,
+		      "present", &present, NULL);
+	
+	xml = gst_tool_run_get_directive (tool, NULL, "disk_info",
+					  device,
+					  present ? "1" : "0",
+					  NULL);
+	if (!xml) {
+		return;
+	}
+
+	root = gst_xml_doc_get_root (xml);
+	if (root) {
+		transfer_xml_common_to_config (GST_DISKS_STORAGE (disk), root);
+		transfer_xml_disk_to_config (GST_DISKS_STORAGE (disk), root);
+	}
+
+	gst_xml_doc_destroy (xml);
 }
