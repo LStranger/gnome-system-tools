@@ -139,16 +139,18 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	}
 	g_list_free (tmp_list);
 
-	if (!found)
+	if (!found) 
+	{
 		g_warning ("The GID for the main user's group was not found.");
+		name = g_strdup (_("Unkown User"));
+	}
 	else
 	{
 		txt = g_strdup_printf ("%d", new_id);
 		name = get_group_by_data ("gid", txt, "name");
 		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
-		g_free (name);
 		g_free (txt);
-	}
+	}       
 
 	/* Fill comment entry */
 	comment = my_xml_get_content (node, "comment");
@@ -164,6 +166,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	/* Set dialog's title and show it */
 	w0 = tool_widget_get ("user_settings_dialog");
 	txt = g_strdup_printf (_("Settings for User %s"), name);
+	g_free (name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 
