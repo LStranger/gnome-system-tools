@@ -107,9 +107,12 @@ void
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
 	char *access_no[] = { 
-		"general_vbox",
+		"general_hbox",
+		"samba_use",
+		"samba_frame",
 		"connections_bbox",
-		"dns_vbox",
+		"dns_dhcp",
+		"dns_table",
 		"statichost_table",
 		NULL };
 
