@@ -594,7 +594,7 @@ connection_iter (GstConnection *cxn, GtkTreeIter *iter)
 	while (valid) {
 		gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &c, -1);
 
-		if (!strcmp (cxn->dev, c->dev))
+		if (!strcmp (cxn->file, c->file))
 			return TRUE;
 
 		valid = gtk_tree_model_iter_next (model, iter);
