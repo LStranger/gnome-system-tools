@@ -249,8 +249,9 @@ table_create (void)
 	}
 
 	boot_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, spec, basic_boot_state);
-	
 	g_free (spec);
+
+	g_return_val_if_fail (boot_table != NULL, NULL);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	table_connect_signals (table);
@@ -591,10 +592,19 @@ boot_table_update_state (void)
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	complexity = tool->main_dialog->complexity;
 
-	if (complexity == XST_DIALOG_BASIC)
+	if (complexity == XST_DIALOG_BASIC) {
 		state = xst_conf_get_string (tool, "state_basic");
-	else
+		if (state == NULL) {
+			state = g_strdup (basic_boot_state);
+			xst_conf_set_string (tool, "state_basic", state);
+		}
+	} else {
 		state = xst_conf_get_string (tool, "state_adv");
+		if (state == NULL) {
+			state = g_strdup (adv_boot_state);
+			xst_conf_set_string (tool, "state_adv", state);
+		}
+	}
 
 	e_table_set_state (table, state);
 	table_connect_signals (table);
