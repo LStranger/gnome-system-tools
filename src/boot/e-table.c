@@ -208,11 +208,11 @@ init_array (void)
 	gint row;
 
 	boot_array = g_array_new (FALSE, FALSE, sizeof (xmlNodePtr));
-	node = xml_doc_get_root (tool->config);
+	node = xst_xml_doc_get_root (tool->config);
 	
-	for (node = xml_element_find_first (node, "entry"), row = 0;
+	for (node = xst_xml_element_find_first (node, "entry"), row = 0;
 		node;
-		node = xml_element_find_next (node, "entry"), row++)
+		node = xst_xml_element_find_next (node, "entry"), row++)
 		
 		g_array_prepend_val (boot_array, node);
 
@@ -223,7 +223,7 @@ boot_value_label (xmlNodePtr node)
 {
 	g_return_val_if_fail (node != NULL, NULL);
 
-	return xml_get_child_content (node, "label");
+	return xst_xml_get_child_content (node, "label");
 }
 
 void *
@@ -235,13 +235,13 @@ boot_value_type (xmlNodePtr node, gboolean bare)
 	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	n = xml_element_find_first (node, "type");
+	n = xst_xml_element_find_first (node, "type");
 	if (n)
-		buf = xml_element_get_content (n);
+		buf = xst_xml_element_get_content (n);
 
 	else
 	{
-		n = xml_element_find_first (node, "image");
+		n = xst_xml_element_find_first (node, "image");
 		if (n)
 			buf = g_strdup (_("Linux"));
 	}
@@ -252,8 +252,8 @@ boot_value_type (xmlNodePtr node, gboolean bare)
 	if (bare)
 		return buf;
 
-	label = xml_get_child_content (node, "label");
-	def = xml_get_child_content (xml_doc_get_root (tool->config), "default");
+	label = xst_xml_get_child_content (node, "label");
+	def = xst_xml_get_child_content (xst_xml_doc_get_root (tool->config), "default");
 
 	if (def && !strcmp (def, label))
 	{
@@ -272,7 +272,7 @@ boot_value_image (xmlNodePtr node, gboolean bare)
 	
 	g_return_val_if_fail (node != NULL, NULL);
 	
-	buf = xml_get_child_content (node, "image");
+	buf = xst_xml_get_child_content (node, "image");
 	if (!buf)
 		return NULL;
 
@@ -289,7 +289,7 @@ boot_value_dev (xmlNodePtr node, gboolean bare)
 	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	buf = xml_get_child_content (node, "other");
+	buf = xst_xml_get_child_content (node, "other");
 	if (!buf)
 		return NULL;
 
@@ -304,7 +304,7 @@ boot_value_root (xmlNodePtr node)
 {
 	g_return_val_if_fail (node != NULL, NULL);
 
-	return xml_get_child_content (node, "root");
+	return xst_xml_get_child_content (node, "root");
 }
 
 /* Set value functions */
@@ -317,13 +317,13 @@ boot_value_set_default (xmlNodePtr node)
 
 	g_return_if_fail (node != NULL);
 	
-	n = xml_doc_get_root (tool->config);
+	n = xst_xml_doc_get_root (tool->config);
 
-	label = xml_get_child_content (node, "label");
+	label = xst_xml_get_child_content (node, "label");
 	if (!label)
 		return;
 
-	xml_set_child_content (n, "default", label);
+	xst_xml_set_child_content (n, "default", label);
 }
 
 void
@@ -331,7 +331,7 @@ boot_value_set_label (xmlNodePtr node, gchar *val)
 {
 	g_return_if_fail (node != NULL);
 
-	xml_set_child_content (node, "label", val);
+	xst_xml_set_child_content (node, "label", val);
 }
 
 /*
@@ -342,12 +342,12 @@ boot_value_set_type (xmlNodePtr node, gchar *type)
 	
 	g_return_if_fail (node != NULL);
 
-	n = xml_element_find_first (node, "image");
+	n = xst_xml_element_find_first (node, "image");
 
 	if (n)
 		return (_("Linux"));
 
-	n = xml_element_find_first (node, "other");
+	n = xst_xml_element_find_first (node, "other");
 
 	if (n)
 		return (_("Other"));
@@ -361,7 +361,7 @@ boot_value_set_image (xmlNodePtr node, gchar *val)
 {
 	g_return_if_fail (node != NULL);
 
-	xml_set_child_content (node, "image", val);
+	xst_xml_set_child_content (node, "image", val);
 }
 
 void
@@ -369,14 +369,14 @@ boot_value_set_dev (xmlNodePtr node, gchar *val)
 {
 	g_return_if_fail (node != NULL);
 
-	xml_set_child_content (node, "other", val);
+	xst_xml_set_child_content (node, "other", val);
 }
 
 void boot_value_set_root (xmlNodePtr node, gchar *val)
 {
 	g_return_if_fail (node != NULL);
 
-	xml_set_child_content (node, "root", val);
+	xst_xml_set_child_content (node, "root", val);
 }
 
 
@@ -421,7 +421,7 @@ boot_table_delete (void)
 	row = e_table_get_cursor_row (table);
 	node = g_array_index (boot_array, xmlNodePtr, row);
 
-	xml_element_destroy (node);
+	xst_xml_element_destroy (node);
 	g_array_remove_index (boot_array, row);
 
 	e_table_model_row_deleted (table->model, row);
@@ -448,8 +448,8 @@ boot_table_add (void)
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 
-	node = xml_doc_get_root (tool->config);
-	node = xml_element_add (node, "entry");
+	node = xst_xml_doc_get_root (tool->config);
+	node = xst_xml_element_add (node, "entry");
 	
 	g_array_append_val (boot_array, node);
 	

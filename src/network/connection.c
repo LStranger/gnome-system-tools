@@ -84,9 +84,9 @@ connection_xml_get_str (xmlNode *node, gchar *elem)
 
 	ret = NULL;
 	
-	subnode = xml_element_find_first (node, elem);
+	subnode = xst_xml_element_find_first (node, elem);
 	if (subnode)
-		ret = xml_element_get_content (subnode);
+		ret = xst_xml_element_get_content (subnode);
 
 	return ret;
 }
@@ -116,15 +116,15 @@ connection_xml_save_str_to_node (xmlNode *node, gchar *node_name, gchar *str)
 	if (!str)
 		return;
 
-	subnode = xml_element_find_first (node, node_name);
+	subnode = xst_xml_element_find_first (node, node_name);
 
 	if (*str == 0) {
 		if (subnode)
-			xml_element_destroy_children_by_name (node, node_name);
+			xst_xml_element_destroy_children_by_name (node, node_name);
 	} else {
 		if (!subnode)
-			subnode = xml_element_add (node, node_name);
-		xml_element_set_content (subnode, str);
+			subnode = xst_xml_element_add (node, node_name);
+		xst_xml_element_set_content (subnode, str);
 	}
 }
 
@@ -172,8 +172,8 @@ connection_xml_wvsection_get_str (xmlNode *node, gchar *section_name, gchar *ele
 
 	ret = NULL;
 
-	for (subnode = xml_element_find_first (node, "dialing");
-		subnode; subnode = xml_element_find_next (subnode, "dialing"))
+	for (subnode = xst_xml_element_find_first (node, "dialing");
+		subnode; subnode = xst_xml_element_find_next (subnode, "dialing"))
 	{
 		if (!connection_xml_wvsection_is_type (subnode, "dialer"))
 			continue;
@@ -841,7 +841,7 @@ connection_save_to_node (Connection *cxn, xmlNode *root)
 	gchar *s;
 	
 	if (!cxn->node)
-		cxn->node = xml_element_add (root, "interface");
+		cxn->node = xst_xml_element_add (root, "interface");
 		
 	connection_xml_save_str_to_node (cxn->node, "dev", cxn->dev);
 	connection_xml_save_str_to_node (cxn->node, "name", cxn->name);

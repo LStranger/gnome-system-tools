@@ -52,7 +52,7 @@ on_boot_delete_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (xst_tool_get_access (tool));
 	g_return_if_fail (node = get_selected_node ());
 
-	label = xml_get_child_content (node, "label");
+	label = xst_xml_get_child_content (node, "label");
 	buf = g_strdup_printf (_("Are you sure you want to delete %s?"), label);
 
 	parent = GTK_WINDOW (tool->main_dialog);
@@ -76,9 +76,9 @@ on_boot_default_clicked (GtkButton *button, gpointer user_data)
 	gchar *label;
 
 	node = get_selected_node ();
-	label = xml_get_child_content (node, "label");
+	label = xst_xml_get_child_content (node, "label");
 
-	xml_set_child_content (xml_doc_get_root (tool->config), "default", label);
+	xst_xml_set_child_content (xst_xml_doc_get_root (tool->config), "default", label);
 	boot_table_update ();
 	xst_dialog_modify (tool->main_dialog);
 }

@@ -89,7 +89,7 @@ passwd_set (xmlNodePtr node, gchar *new_passwd, gchar *confirm, gboolean check_q
 	else
 		password = g_strdup (crypt (new_passwd, passwd_rand_str (salt, 2)));
 
-	xml_set_child_content (node, "password", password);
+	xst_xml_set_child_content (node, "password", password);
 	return (gchar *) 0;
 }
 

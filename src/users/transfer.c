@@ -99,7 +99,7 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 	
 	/* Find login.defs */
 	
-	node = xml_element_find_first (root, "logindefs");
+	node = xst_xml_element_find_first (root, "logindefs");
 	if (!node)
 	{
 		g_warning ("transfer_logindefs_from_xml: couldn't find logindefs node.");
@@ -110,26 +110,26 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 
 	for (i = 0, tag = logindefs_tags[0]; tag; i++, tag = logindefs_tags[i]) 
 	{
-		n0 = xml_element_find_first (node, tag);
+		n0 = xst_xml_element_find_first (node, tag);
 
 		if (n0) 
 		{
 			switch (i)
 			{
-			 case  0: logindefs.qmail_dir    = xml_element_get_content (n0); break;
-			 case  1: logindefs.mailbox_dir  = xml_element_get_content (n0); break;
-			 case  2: logindefs.mailbox_file = xml_element_get_content (n0); break;
-			 case  3: logindefs.passwd_max_day_use          = my_atoi (xml_element_get_content (n0)); break;
-			 case  4: logindefs.passwd_min_day_use          = my_atoi (xml_element_get_content (n0)); break;
-			 case  5: logindefs.passwd_min_length           = my_atoi (xml_element_get_content (n0)); break;
-			 case  6: logindefs.passwd_warning_advance_days = my_atoi (xml_element_get_content (n0)); break;
-			 case  7: logindefs.new_user_min_id             = my_atoi (xml_element_get_content (n0)); break;
-			 case  8: logindefs.new_user_max_id             = my_atoi (xml_element_get_content (n0)); break;
-			 case  9: logindefs.new_group_min_id            = my_atoi (xml_element_get_content (n0)); break;
-			 case 10: logindefs.new_group_max_id            = my_atoi (xml_element_get_content (n0)); break;
-			 case 11: logindefs.del_user_additional_command = xml_element_get_content (n0); break;
+			 case  0: logindefs.qmail_dir    = xst_xml_element_get_content (n0); break;
+			 case  1: logindefs.mailbox_dir  = xst_xml_element_get_content (n0); break;
+			 case  2: logindefs.mailbox_file = xst_xml_element_get_content (n0); break;
+			 case  3: logindefs.passwd_max_day_use          = my_atoi (xst_xml_element_get_content (n0)); break;
+			 case  4: logindefs.passwd_min_day_use          = my_atoi (xst_xml_element_get_content (n0)); break;
+			 case  5: logindefs.passwd_min_length           = my_atoi (xst_xml_element_get_content (n0)); break;
+			 case  6: logindefs.passwd_warning_advance_days = my_atoi (xst_xml_element_get_content (n0)); break;
+			 case  7: logindefs.new_user_min_id             = my_atoi (xst_xml_element_get_content (n0)); break;
+			 case  8: logindefs.new_user_max_id             = my_atoi (xst_xml_element_get_content (n0)); break;
+			 case  9: logindefs.new_group_min_id            = my_atoi (xst_xml_element_get_content (n0)); break;
+			 case 10: logindefs.new_group_max_id            = my_atoi (xst_xml_element_get_content (n0)); break;
+			 case 11: logindefs.del_user_additional_command = xst_xml_element_get_content (n0); break;
 			 case 12: 
-				tmp = xml_element_get_content (n0);
+				tmp = xst_xml_element_get_content (n0);
 				if (! strcmp (tmp, "yes"))
 					logindefs.create_home = TRUE;
 				else
@@ -193,27 +193,27 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 
 	g_message ("saving to XML");
 
-	root = xml_element_find_first (root, "logindefs");
+	root = xst_xml_element_find_first (root, "logindefs");
 
 	/* System settings. */
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "defs_create_home");
-	node = xml_element_find_first (root, "create_home");
+	node = xst_xml_element_find_first (root, "create_home");
 	if (!node)
-		node = xml_element_add (root, "create_home");
+		node = xst_xml_element_add (root, "create_home");
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w0)))
-		xml_element_set_content (node, "yes");
+		xst_xml_element_set_content (node, "yes");
 	else
-		xml_element_set_content (node, "no");
+		xst_xml_element_set_content (node, "no");
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "defs_mail_dir");
 	val = gtk_editable_get_chars (GTK_EDITABLE (w0), 0, -1);
-	node = xml_element_find_first (root, "mailbox_dir");
+	node = xst_xml_element_find_first (root, "mailbox_dir");
 	if (!node)
-		node = xml_element_add (root, "mailbox_dir");
+		node = xst_xml_element_add (root, "mailbox_dir");
 
-	xml_element_set_content (node, val);
+	xst_xml_element_set_content (node, val);
 	g_free (val);
 
 	/* User and group id's and passwords. */
@@ -223,11 +223,11 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 		spin = GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog, widgets[i]));
 		val = g_strdup_printf ("%d", gtk_spin_button_get_value_as_int (spin));
 
-		node = xml_element_find_first (root, nodes[i]);
+		node = xst_xml_element_find_first (root, nodes[i]);
 		if (!node)
-			node = xml_element_add (root, nodes[i]);
+			node = xst_xml_element_add (root, nodes[i]);
 
-		xml_element_set_content (node, val);
+		xst_xml_element_set_content (node, val);
 		g_free (val);
 	}
 }
@@ -237,7 +237,7 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
 
-	root = xml_doc_get_root (tool->config);
+	root = xst_xml_doc_get_root (tool->config);
 
 	transfer_logindefs_from_xml (root);
 	transfer_logindefs_to_gui ();
@@ -251,7 +251,7 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
 
-	root = xml_doc_get_root (tool->config);
+	root = xst_xml_doc_get_root (tool->config);
 	
 	transfer_logindefs_to_xml (root);
 }

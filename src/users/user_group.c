@@ -69,21 +69,21 @@ get_root_node (gint tbl)
 {
 	xmlNodePtr node, root;
 
-	root = xml_doc_get_root (tool->config);
+	root = xst_xml_doc_get_root (tool->config);
 
 	switch (tbl)
 	{
 	case TABLE_USER:
-		node = xml_element_find_first (root, "userdb");
+		node = xst_xml_element_find_first (root, "userdb");
 		break;
 	case TABLE_GROUP:
-		node = xml_element_find_first (root, "groupdb");
+		node = xst_xml_element_find_first (root, "groupdb");
 		break;
 	case TABLE_NET_USER:
-		node = xml_element_find_first (root, "nis_userdb");
+		node = xst_xml_element_find_first (root, "nis_userdb");
 		break;
 	case TABLE_NET_GROUP:
-		node = xml_element_find_first (root, "nis_groupdb");
+		node = xst_xml_element_find_first (root, "nis_groupdb");
 		break;
 	default:
 		node = NULL;
@@ -96,25 +96,25 @@ get_root_node (gint tbl)
 xmlNodePtr
 get_user_root_node (void)
 {
-	return xml_element_find_first (xml_doc_get_root (tool->config), "userdb");
+	return xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "userdb");
 }
 
 xmlNodePtr
 get_group_root_node (void)
 {
-	return xml_element_find_first (xml_doc_get_root (tool->config), "groupdb");
+	return xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "groupdb");
 }
 
 xmlNodePtr
 get_nis_group_root_node (void)
 {
-	return xml_element_find_first (xml_doc_get_root (tool->config), "nis_groupdb");
+	return xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "nis_groupdb");
 }
 
 xmlNodePtr
 get_nis_user_root_node (void)
 {
-	return xml_element_find_first (xml_doc_get_root (tool->config), "nis_userdb");
+	return xst_xml_element_find_first (xst_xml_doc_get_root (tool->config), "nis_userdb");
 }
 
 xmlNodePtr
@@ -146,21 +146,21 @@ adv_user_settings (xmlNodePtr node, gboolean show)
 
 		/* Shell. */
 		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
-		content = xml_get_child_content (node, "shell");
+		content = xst_xml_get_child_content (node, "shell");
 		gtk_entry_set_text (GTK_ENTRY (w0), content);
 		g_free (content);
 		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 
 		/* Home dir. */
 		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_home");
-		content = xml_get_child_content (node, "home");
+		content = xst_xml_get_child_content (node, "home");
 		gtk_entry_set_text (GTK_ENTRY (w0), content);
 		g_free (content);
 		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 
 		/* User ID. */
 		w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_uid");
-		content = xml_get_child_content (node, "uid");
+		content = xst_xml_get_child_content (node, "uid");
 		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (content, NULL));
 		g_free (content);
 		gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
@@ -204,9 +204,9 @@ check_node_complexity (xmlNodePtr node)
 	else
 		return TRUE;
 
-	node = xml_element_find_first (node, field);
+	node = xst_xml_element_find_first (node, field);
 	g_free (field);
-	content = xml_element_get_content (node);
+	content = xst_xml_element_get_content (node);
 	val = atoi (content);
 	g_free (content);
 
@@ -449,21 +449,21 @@ get_min_max (xmlNodePtr db_node, gint *min, gint *max)
 xmlNodePtr
 get_corresp_field (xmlNodePtr node)
 {
-	xmlNodePtr root = xml_doc_get_root (tool->config);
+	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
 	
 	node = get_db_node (node);
 
 	if (!strcmp (node->name, "userdb"))
-		return xml_element_find_first (root, "groupdb");
+		return xst_xml_element_find_first (root, "groupdb");
 
 	if (!strcmp (node->name, "groupdb"))
-		return xml_element_find_first (root, "userdb");
+		return xst_xml_element_find_first (root, "userdb");
 
 	if (!strcmp (node->name, "nis_groupdb"))
-		return xml_element_find_first (root, "nis_userdb");
+		return xst_xml_element_find_first (root, "nis_userdb");
 
 	if (!strcmp (node->name, "nis_userdb"))
-		return xml_element_find_first (root, "nis_groupdb");
+		return xst_xml_element_find_first (root, "nis_groupdb");
 
 	return NULL;
 }
@@ -480,7 +480,7 @@ get_node_by_data (xmlNodePtr dbnode, gchar *field, gchar *fdata)
 
 	for (node = dbnode->childs; node; node = node->next)
 	{
-		buf = xml_get_child_content (node, field);
+		buf = xst_xml_get_child_content (node, field);
 		if (!buf)
 			continue;
 		
@@ -508,7 +508,7 @@ settings_prepare (ug_data *ud)
 	
 	g_return_if_fail (ud != NULL);
 
-	buf = xml_get_child_content (ud->node, "login");
+	buf = xst_xml_get_child_content (ud->node, "login");
 
 	if (buf)
 	{
@@ -519,7 +519,7 @@ settings_prepare (ug_data *ud)
 		return;
 	}
 
-	buf = xml_get_child_content (ud->node, "name");
+	buf = xst_xml_get_child_content (ud->node, "name");
 
 	if (buf)
 	{
@@ -566,7 +566,7 @@ user_update (ug_data *ud)
 
 	new_name = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 													"user_settings_name")));
-	old_name = xml_get_child_content (ud->node, "login");
+	old_name = xst_xml_get_child_content (ud->node, "login");
 	
 	if (!check_user_login (ud->node, new_name))
 		ok = FALSE;
@@ -651,7 +651,7 @@ user_passwd_dialog_prepare (xmlNodePtr node)
 	GtkWidget *w0;
 	gchar *txt, *name;
 
-	name = xml_get_child_content (node, "login");
+	name = xst_xml_get_child_content (node, "login");
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_passwd_dialog");
 	txt = g_strdup_printf (_("Password for User %s"), name);
@@ -676,7 +676,7 @@ check_login_delete (xmlNodePtr node)
 	g_return_val_if_fail (node != NULL, FALSE);
 
 	parent = GTK_WINDOW (tool->main_dialog);
-	name = xml_get_child_content (node, "login");
+	name = xst_xml_get_child_content (node, "login");
 
 	if (!strcmp (name, "root"))
 	{
@@ -764,7 +764,7 @@ check_group_delete (xmlNodePtr node)
 	g_return_val_if_fail (node != NULL, FALSE);
 
 	parent = GTK_WINDOW (tool->main_dialog);
-	name = xml_get_child_content (node, "name");
+	name = xst_xml_get_child_content (node, "name");
 
 	if (!name)
 	{
@@ -811,7 +811,7 @@ user_settings_prepare (ug_data *ud)
 	GtkRequisition req;
 
 	g_return_if_fail (ud != NULL);
-	g_return_if_fail (login = xml_get_child_content (ud->node, "login"));
+	g_return_if_fail (login = xst_xml_get_child_content (ud->node, "login"));
 
 	/* Get tool state (advanced/basic) */
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
@@ -827,7 +827,7 @@ user_settings_prepare (ug_data *ud)
 	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	user_fill_settings_group (GTK_COMBO (w0), ud->node, adv);
 
-	txt = xml_get_child_content (ud->node, "gid");
+	txt = xst_xml_get_child_content (ud->node, "gid");
 	gid = atoi (txt);
 	g_free (txt);
 
@@ -858,12 +858,12 @@ user_settings_prepare (ug_data *ud)
 		txt = g_strdup_printf ("%d", new_id);
 		group_node = get_corresp_field (get_db_node (ud->node));
 		group_node = get_node_by_data (group_node, "gid", txt);
-		name = xml_get_child_content (group_node, "name");
+		name = xst_xml_get_child_content (group_node, "name");
 		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
 	}
 
 	/* Fill comment entry */
-	comment = xml_get_child_content (ud->node, "comment");
+	comment = xst_xml_get_child_content (ud->node, "comment");
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_comment");
 	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	my_gtk_entry_set_text (w0, comment);
@@ -897,7 +897,7 @@ group_settings_prepare (ug_data *ud)
 	gchar *txt, *name;
 
 	g_return_if_fail (ud != NULL);
-	g_return_if_fail (name = xml_get_child_content (ud->node, "name"));
+	g_return_if_fail (name = xst_xml_get_child_content (ud->node, "name"));
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "group_settings_name");
 	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
@@ -955,31 +955,31 @@ user_add_blank_xml (xmlNodePtr parent)
 
 	g_return_val_if_fail (parent != NULL, NULL);
 
-	user = xml_element_add (parent, "user");
+	user = xst_xml_element_add (parent, "user");
 
-	xml_element_add_with_content (user, "key", find_new_key (parent));
-	xml_element_add (user, "login");
-	xml_element_add (user, "password");
-	xml_element_add_with_content (user, "uid", find_new_id (parent));
-	xml_element_add (user, "gid");
-	xml_element_add (user, "comment");
-	xml_element_add (user, "home");
-	xml_element_add (user, "shell");
-	xml_element_add (user, "last_mod");
+	xst_xml_element_add_with_content (user, "key", find_new_key (parent));
+	xst_xml_element_add (user, "login");
+	xst_xml_element_add (user, "password");
+	xst_xml_element_add_with_content (user, "uid", find_new_id (parent));
+	xst_xml_element_add (user, "gid");
+	xst_xml_element_add (user, "comment");
+	xst_xml_element_add (user, "home");
+	xst_xml_element_add (user, "shell");
+	xst_xml_element_add (user, "last_mod");
 
-	xml_element_add_with_content (user, "passwd_min_life",
+	xst_xml_element_add_with_content (user, "passwd_min_life",
 			g_strdup_printf ("%d", logindefs.passwd_min_day_use));
 
-	xml_element_add_with_content (user, "passwd_max_life",
+	xst_xml_element_add_with_content (user, "passwd_max_life",
 			g_strdup_printf ("%d", logindefs.passwd_max_day_use));
 
-	xml_element_add_with_content (user, "passwd_exp_warn",
+	xst_xml_element_add_with_content (user, "passwd_exp_warn",
 			g_strdup_printf ("%d", logindefs.passwd_warning_advance_days));
 
-	xml_element_add (user, "passwd_exp_disable");
-	xml_element_add (user, "passwd_disable");
-	xml_element_add (user, "reserved");
-	xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
+	xst_xml_element_add (user, "passwd_exp_disable");
+	xst_xml_element_add (user, "passwd_disable");
+	xst_xml_element_add (user, "reserved");
+	xst_xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
 
 	return user;
 }
@@ -995,13 +995,13 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 													"user_settings_name")));
 	
-	xml_set_child_content (node, "login", buf);
+	xst_xml_set_child_content (node, "login", buf);
 
 	/* Comment */
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 													"user_settings_comment")));
 	
-	xml_set_child_content (node, "comment", buf);
+	xst_xml_set_child_content (node, "comment", buf);
 
 	/* Group */
 	buf = gtk_entry_get_text (
@@ -1010,9 +1010,9 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 
 	group_node = get_corresp_field (get_db_node (node));
 	group_node = get_node_by_data (group_node, "name", buf);
-	buf = xml_get_child_content (group_node, "gid");
+	buf = xst_xml_get_child_content (group_node, "gid");
 	
-	xml_set_child_content (node, "gid", buf);
+	xst_xml_set_child_content (node, "gid", buf);
 
 	/* TODO hardcoded default shell and home dir prefix are BAD */
 	/* Home */
@@ -1024,7 +1024,7 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 					  (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog,
 												  "user_settings_name"))));
 	
-	xml_set_child_content (node, "home", buf);
+	xst_xml_set_child_content (node, "home", buf);
 
 	/* Shell */
 	buf = adv ?
@@ -1033,7 +1033,7 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 		
 		g_strdup ("/bin/bash");
 
-	xml_set_child_content (node, "shell", buf);
+	xst_xml_set_child_content (node, "shell", buf);
 
 	/* UID */
 	if (adv)
@@ -1042,7 +1042,7 @@ user_update_xml (xmlNodePtr node, gboolean adv)
 									    (xst_dialog_get_widget (tool->main_dialog,
 													    "user_settings_uid")));
 		
-		xml_set_child_content (node, "uid", g_strdup_printf ("%d", id));
+		xst_xml_set_child_content (node, "uid", g_strdup_printf ("%d", id));
 	}
 }
 
@@ -1053,13 +1053,13 @@ group_add_blank_xml (xmlNodePtr db_node)
 
 	g_return_val_if_fail (db_node != NULL, NULL);
 
-	group = xml_element_add (db_node, "group");
+	group = xst_xml_element_add (db_node, "group");
 
-	xml_element_add_with_content (group, "key", find_new_key (db_node));
-	xml_element_add (group, "name");
-	xml_element_add (group, "password");
-	xml_element_add_with_content (group, "gid", find_new_id (db_node));
-	xml_element_add (group, "users");
+	xst_xml_element_add_with_content (group, "key", find_new_key (db_node));
+	xst_xml_element_add (group, "name");
+	xst_xml_element_add (group, "password");
+	xst_xml_element_add_with_content (group, "gid", find_new_id (db_node));
+	xst_xml_element_add (group, "users");
 
 	return group;
 }
@@ -1080,7 +1080,7 @@ group_add_from_user (ug_data *ud)
 	buf = gtk_entry_get_text (
 			GTK_ENTRY (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "user_settings_group"))->entry));
 
-	xml_set_child_content (group_data->node, "name", buf);
+	xst_xml_set_child_content (group_data->node, "name", buf);
 
 	/* Add it to e-table. */
 	if (ud->table == TABLE_USER)
@@ -1107,7 +1107,7 @@ group_update_xml (xmlNodePtr node, gboolean adv)
 
 	/* Name */
 	buf = gtk_entry_get_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "group_settings_name")));
-	xml_set_child_content (node, "name", buf);
+	xst_xml_set_child_content (node, "name", buf);
 
 	/* Users */
 	del_group_users (node);
@@ -1133,24 +1133,24 @@ group_update_users (xmlNodePtr node, gchar *old_name, gchar *new_name)
 	dbnode = get_db_node (node);
 	dbnode = get_corresp_field (dbnode);
 
-	for (dbnode = xml_element_find_first (dbnode, "group");
+	for (dbnode = xst_xml_element_find_first (dbnode, "group");
 		dbnode;
 		dbnode = dbnode->next)
 	{
-		gnode = xml_element_find_first (dbnode, "users");
+		gnode = xst_xml_element_find_first (dbnode, "users");
 
 		if (!gnode)
 			continue;
 
 		for (gnode = gnode->childs; gnode; gnode = gnode->next)
 		{
-			buf = xml_element_get_content (gnode);
+			buf = xst_xml_element_get_content (gnode);
 
 			if (!buf)
 				continue;
 
 			if (!strcmp (buf, old_name))
-				xml_element_set_content (gnode, new_name);
+				xst_xml_element_set_content (gnode, new_name);
 
 			g_free (buf);
 		}
@@ -1169,7 +1169,7 @@ node_exsists (xmlNodePtr node, gchar *name, gchar *val)
 		if (n0 == node)
 			continue;  /* Self */
 
-		buf = xml_get_child_content (n0, name);
+		buf = xst_xml_get_child_content (n0, name);
 
 		if (!buf)
 			continue;  /* No content */
@@ -1200,9 +1200,9 @@ get_group_list (gchar *field, xmlNodePtr node, gboolean adv)
 	if (!node)
 		return NULL;
 
-	for (u = xml_element_find_first (node, "group"); u; u = xml_element_find_next (u, "group"))
+	for (u = xst_xml_element_find_first (node, "group"); u; u = xst_xml_element_find_next (u, "group"))
 	{
-		txt = xml_get_child_content (u, "gid");
+		txt = xst_xml_get_child_content (u, "gid");
 		gid = atoi (txt);
 
 		if (adv || (gid >= min && gid <= max))
@@ -1210,7 +1210,7 @@ get_group_list (gchar *field, xmlNodePtr node, gboolean adv)
 			if (strcmp (field, "gid"))
 			{
 				g_free (txt);
-				txt = xml_get_child_content (u, field);
+				txt = xst_xml_get_child_content (u, field);
 			}
 
 			list = g_list_prepend (list, txt);
@@ -1231,9 +1231,9 @@ get_user_list (gchar *field, xmlNodePtr node, gboolean adv)
 	node = get_corresp_field (node);
 	get_min_max (node, &min, &max);
 
-	for (u = xml_element_find_first (node, "user"); u; u = xml_element_find_next (u, "user"))
+	for (u = xst_xml_element_find_first (node, "user"); u; u = xst_xml_element_find_next (u, "user"))
 	{
-		txt = xml_get_child_content (u, "uid");
+		txt = xst_xml_get_child_content (u, "uid");
 		uid = atoi (txt);
 
 		if (adv || (uid >= min && uid <= max))
@@ -1241,7 +1241,7 @@ get_user_list (gchar *field, xmlNodePtr node, gboolean adv)
 			if (strcmp (field, "uid"))
 			{
 				g_free (txt);
-				txt = xml_get_child_content (u, field);
+				txt = xst_xml_get_child_content (u, field);
 			}
 
 			list = g_list_prepend (list, txt);
@@ -1259,15 +1259,15 @@ get_group_users (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, NULL);
 
-	node = xml_element_find_first (node, "users");
+	node = xst_xml_element_find_first (node, "users");
 	if (!node)
 	{
 		g_warning ("get_group_users: can't get current group's users node.");
 		return NULL;
 	}
 
-	for (u = xml_element_find_first (node, "user"); u; u = xml_element_find_next (u, "user"))
-		userlist = g_list_prepend (userlist, xml_element_get_content (u));
+	for (u = xst_xml_element_find_first (node, "user"); u; u = xst_xml_element_find_next (u, "user"))
+		userlist = g_list_prepend (userlist, xst_xml_element_get_content (u));
 
 	return userlist;
 }
@@ -1379,11 +1379,11 @@ del_group_users (xmlNodePtr node)
 {
 	g_return_if_fail (node != NULL);
 
-	node = xml_element_find_first (node, "users");
+	node = xst_xml_element_find_first (node, "users");
 	if (!node)
 		return;
 
-	xml_element_destroy_children (node);
+	xst_xml_element_destroy_children (node);
 }
 
 static void
@@ -1393,12 +1393,12 @@ add_group_users (xmlNodePtr node, gchar *name)
 
 	g_return_if_fail (node != NULL);
 
-	user = xml_element_find_first (node, "users");
+	user = xst_xml_element_find_first (node, "users");
 	if (!user)
-		user = xml_element_add (node, "users");
+		user = xst_xml_element_add (node, "users");
 
-	user = xml_element_add (user, "user");
-	xml_element_set_content (user, name);
+	user = xst_xml_element_add (user, "user");
+	xst_xml_element_set_content (user, name);
 }
 
 static gboolean
@@ -1448,7 +1448,7 @@ find_new_id (xmlNodePtr parent)
 
 	for (n0 = parent->childs; n0; n0 = n0->next)
 	{
-		buf = xml_get_child_content (n0, field);
+		buf = xst_xml_get_child_content (n0, field);
 
 		if (!buf)
 			continue;
@@ -1481,7 +1481,7 @@ find_new_key (xmlNodePtr parent)
 
 	for (n0 = parent->childs; n0; n0 = n0->next)
 	{
-		buf = xml_get_child_content (n0, "key");
+		buf = xst_xml_get_child_content (n0, "key");
 
 		if (!buf)
 			continue;

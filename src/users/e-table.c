@@ -233,7 +233,7 @@ user_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, v
 			return;
 	}
 
-	xml_set_child_content (node, field, (gpointer)val);
+	xst_xml_set_child_content (node, field, (gpointer)val);
 	g_free (field);
 
 	xst_dialog_modify (tool->main_dialog);
@@ -270,7 +270,7 @@ group_set_value_at (ETreeModel *etm, ETreePath *path, int col, const void *val, 
 			return;
 	}
 
-	xml_set_child_content (node, field, (gpointer)val);
+	xst_xml_set_child_content (node, field, (gpointer)val);
 	g_free (field);
 
 	xst_dialog_modify (tool->main_dialog);
@@ -291,7 +291,7 @@ get_group_by_id (xmlNodePtr user_node)
 	gchar *gid;
 	xmlNodePtr group_node;
 
-	gid = xml_get_child_content (user_node, "gid");
+	gid = xst_xml_get_child_content (user_node, "gid");
 	group_node = get_corresp_field (get_db_node (user_node));
 	group_node = get_node_by_data (group_node, "gid", gid);
 
@@ -346,13 +346,13 @@ user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 		return NULL;
 	}
 
-	node = xml_element_find_first (node, field);
+	node = xst_xml_element_find_first (node, field);
 	g_free (field);
 
 	if (!node)
 		return NULL;
 
-	return xml_element_get_content (node);
+	return xst_xml_element_get_content (node);
 }
 
 static void *
@@ -381,13 +381,13 @@ group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 		return NULL;
 	}
 
-	node = xml_element_find_first (node, field);
+	node = xst_xml_element_find_first (node, field);
 	g_free (field);
 
 	if (!node)
 		return NULL;
 
-	return xml_element_get_content (node);
+	return xst_xml_element_get_content (node);
 }
 
 static void *
@@ -399,7 +399,7 @@ net_group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 	if (!node)
 		return NULL;
 
-	return xml_get_child_content (node, "name");
+	return xst_xml_get_child_content (node, "name");
 }
 
 static void *
@@ -411,7 +411,7 @@ net_user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 	if (!node)
 		return NULL;
 
-	return xml_get_child_content (node, "login");
+	return xst_xml_get_child_content (node, "login");
 }
 
 static GtkWidget *
@@ -471,8 +471,8 @@ user_cursor_change (ETable *table, gint row, gpointer user_data)
 	path = e_tree_model_node_at_row (model, row);
 	node = e_tree_model_node_get_data (model, path);
 
-	node = xml_element_find_first (node, "login");
-	buf = xml_element_get_content (node);
+	node = xst_xml_element_find_first (node, "login");
+	buf = xst_xml_element_get_content (node);
 
 	label = g_strconcat (_("Settings for user "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
@@ -497,8 +497,8 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 	path = e_tree_model_node_at_row (model, row);
 	node = e_tree_model_node_get_data (model, path);
 
-	node = xml_element_find_first (node, "name");
-	buf = xml_element_get_content (node);
+	node = xst_xml_element_find_first (node, "name");
+	buf = xst_xml_element_get_content (node);
 
 	label = g_strconcat (_("Settings for group "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
@@ -524,7 +524,7 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
 	node = e_tree_model_node_get_data (model, path);
-	name = xml_get_child_content (node, "name");
+	name = xst_xml_get_child_content (node, "name");
 
 	/* Set desc */
 	buf = g_strconcat (_("Settings for group "), name, NULL);
@@ -541,10 +541,10 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 	clear_table (u_model, u_root);
 	
 	/* Get group users */
-	node = xml_element_find_first (node, "users");
+	node = xst_xml_element_find_first (node, "users");
 	for (node = node->childs; node; node = node->next)
 	{
-		user = xml_element_get_content (node);
+		user = xst_xml_element_get_content (node);
 
 		if (!user)
 			continue;
@@ -552,7 +552,7 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 		u_node = get_nis_user_root_node ();
 		for (u_node = u_node->childs; u_node; u_node = u_node->next)
 		{
-			buf = xml_get_child_content (u_node, "login");
+			buf = xst_xml_get_child_content (u_node, "login");
 
 			if (!buf)
 				continue;
@@ -587,8 +587,8 @@ net_user_cursor_change (ETable *table, gint row, gpointer user_data)
 	path = e_tree_model_node_at_row (model, row);
 	node = e_tree_model_node_get_data (model, path);
 
-	node = xml_element_find_first (node, "login");
-	buf = xml_element_get_content (node);
+	node = xst_xml_element_find_first (node, "login");
+	buf = xst_xml_element_get_content (node);
 
 	label = g_strconcat (_("Settings for user "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
@@ -611,10 +611,10 @@ get_row_color (ETreeModel *etm, ETreePath *path)
 	get_min_max (db_node, &min, &max);
 
 	if (!strcmp (db_node->name, "userdb"))
-		buf = xml_get_child_content (node, "uid");
+		buf = xst_xml_get_child_content (node, "uid");
 
 	else if (!strcmp (db_node->name, "groupdb"))
-		buf = xml_get_child_content (node, "gid");
+		buf = xst_xml_get_child_content (node, "gid");
 
 	if (!buf)
 		return NULL;

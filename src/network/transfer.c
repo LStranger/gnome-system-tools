@@ -69,9 +69,9 @@ transfer_string_entry_xml_to_gui (xmlNodePtr root)
 
 	for (i = 0; transfer_string_entry_table [i].xml_path; i++)
 	{
-		node = xml_element_find_first (root, transfer_string_entry_table [i].xml_path);
+		node = xst_xml_element_find_first (root, transfer_string_entry_table [i].xml_path);
 
-		if (node && (s = xml_element_get_content (node)))
+		if (node && (s = xst_xml_element_get_content (node)))
 		{
 			g_print ("Transfer string entry xml to gui *%s*\n", s);
 			gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].editable)), s);
@@ -94,12 +94,12 @@ transfer_string_entry_gui_to_xml (xmlNodePtr root)
 
 	for (i = 0; transfer_string_entry_table [i].xml_path; i++)
 	{
-		node = xml_element_find_first (root, transfer_string_entry_table [i].xml_path);
+		node = xst_xml_element_find_first (root, transfer_string_entry_table [i].xml_path);
 		if (!node)
-			node = xml_element_add (root, transfer_string_entry_table [i].xml_path);
+			node = xst_xml_element_add (root, transfer_string_entry_table [i].xml_path);
 
 		content = gtk_editable_get_chars (GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].editable)), 0, -1);
-		xml_element_set_content (node, content);
+		xst_xml_element_set_content (node, content);
 		g_free (content);
 	}
 }
@@ -121,11 +121,11 @@ transfer_string_list_xml_to_gui (xmlNodePtr root)
 		gtk_text_freeze (GTK_TEXT (w));
 		gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 		
-		for (node = xml_element_find_first (root, transfer_string_list_table [i].xml_path); 
+		for (node = xst_xml_element_find_first (root, transfer_string_list_table [i].xml_path); 
 		     node; 
-		     node = xml_element_find_next (node, transfer_string_list_table [i].xml_path))
+		     node = xst_xml_element_find_next (node, transfer_string_list_table [i].xml_path))
 		{
-			if ((s = xml_element_get_content (node)))
+			if ((s = xst_xml_element_get_content (node)))
 			{
 				gtk_editable_insert_text (GTK_EDITABLE (w), s, strlen (s), &position);
 				gtk_editable_insert_text (GTK_EDITABLE (w), "\n", 1, &position);
@@ -151,7 +151,7 @@ transfer_string_list_gui_to_xml (xmlNodePtr root)
 	{
 		/* First remove any old branches in the XML tree */
 
-		xml_element_destroy_children_by_name (root, transfer_string_list_table [i].xml_path);
+		xst_xml_element_destroy_children_by_name (root, transfer_string_list_table [i].xml_path);
 
 		/* Add branches corresponding to listed data */
 		widget = xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table[i].list);
@@ -166,8 +166,8 @@ transfer_string_list_gui_to_xml (xmlNodePtr root)
 
 			pos = strchr (text, '\n');
 			*pos = 0;
-			node = xml_element_add (root, transfer_string_list_table [i].xml_path);
-			xml_element_set_content (node, text);
+			node = xst_xml_element_add (root, transfer_string_list_table [i].xml_path);
+			xst_xml_element_set_content (node, text);
 			text = pos+1;
 		}
 	}
@@ -187,21 +187,21 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 
 	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
 	{
-		for (node = xml_element_find_first (
+		for (node = xst_xml_element_find_first (
 			     root, transfer_string_clist2_table [i].xml_path); 
 		     node; 
-		     node = xml_element_find_next (
+		     node = xst_xml_element_find_next (
 			     node, transfer_string_clist2_table [i].xml_path))
 		{
 			for (entry[1] = NULL, 
-				     nodesub = xml_element_find_first (
+				     nodesub = xst_xml_element_find_first (
 					     node, transfer_string_clist2_table [i].xml_path_field_1); 
 					     
 			     nodesub; 
-			     nodesub = xml_element_find_next (
+			     nodesub = xst_xml_element_find_next (
 				     nodesub, transfer_string_clist2_table [i].xml_path_field_1))
 			{
-				if ((s = xml_element_get_content (nodesub)))
+				if ((s = xst_xml_element_get_content (nodesub)))
 				{
 					if (!entry[1])
 						entry[1] = s;
@@ -212,19 +212,19 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 				}
 			}
 
-			d(g_print ("name: (%d) %s\n", xml_element_get_bool_attr (node, "enabled"), node->name));
+			d(g_print ("name: (%d) %s\n", xst_xml_element_get_bool_attr (node, "enabled"), node->name));
 
 			if (!entry[1])
 				continue;
 
 			for (entry[2] = NULL, 
-				     nodesub = xml_element_find_first (
+				     nodesub = xst_xml_element_find_first (
 					     node, transfer_string_clist2_table [i].xml_path_field_2); 
 			     nodesub; 
-			     nodesub = xml_element_find_next (
+			     nodesub = xst_xml_element_find_next (
 				     nodesub, transfer_string_clist2_table [i].xml_path_field_2))
 			{
-				if ((s = xml_element_get_content (nodesub)))
+				if ((s = xst_xml_element_get_content (nodesub)))
 				{
 					if (!entry[2])
 						entry[2] = s;
@@ -243,7 +243,7 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 			row = gtk_clist_append (GTK_CLIST (clist), entry);
 
 			set_clist_checkmark (GTK_CLIST (clist), row, 0, 
-					     xml_element_get_bool_attr (node,"enabled"));
+					     xst_xml_element_get_bool_attr (node,"enabled"));
 
 			g_free (entry[1]);
 			g_free (entry[2]);
@@ -283,7 +283,7 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 	g_return_if_fail (GTK_IS_CLIST (widget));
 
 	/* First remove any old branches in the XML tree */
-	xml_element_destroy_children_by_name (root, node_name);
+	xst_xml_element_destroy_children_by_name (root, node_name);
 
 	rows = GTK_CLIST (widget)->rows;
 	
@@ -302,12 +302,12 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 			continue;
 		
 		/* Enclosing element */
-		node = xml_element_add (root, node_name);
+		node = xst_xml_element_add (root, node_name);
 		
-/*	     xml_element_set_bool_attr (node, "enabled",
+/*	     xst_xml_element_set_bool_attr (node, "enabled",
 	     get_clist_checkmark (GTK_CLIST (w), row, 0));
 
-	     d(g_print ("name: (%d) %s\n", xml_element_get_bool_attr (node, "enabled"), node->name));*/
+	     d(g_print ("name: (%d) %s\n", xst_xml_element_get_bool_attr (node, "enabled"), node->name));*/
 
 		col1_elem = g_strsplit (text_2, " ", 0);
 
@@ -318,13 +318,13 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 			if (!col0_added)
 			{
 				g_print ("Add element %s:%s\n", field_one, text_1);
-				node2 = xml_element_add (node, field_one);
-				xml_element_set_content (node2, text_1);
+				node2 = xst_xml_element_add (node, field_one);
+				xst_xml_element_set_content (node2, text_1);
 				col0_added = TRUE;
 			}
 			g_print ("Add element 2 %s:%s\n", field_rest, col1_elem[j]);
-			node2 = xml_element_add (node, field_rest);
-			xml_element_set_content (node2, col1_elem[j]);
+			node2 = xst_xml_element_add (node, field_rest);
+			xst_xml_element_set_content (node2, col1_elem[j]);
 		}
 		
 		g_strfreev (col1_elem);
@@ -361,16 +361,16 @@ transfer_interfaces_to_gui (xmlNodePtr root)
 {
 	xmlNodePtr node;
 
-	for (node = xml_element_find_first (root, "interface"); 
+	for (node = xst_xml_element_find_first (root, "interface"); 
 	     node; 
-	     node = xml_element_find_next (node, "interface"))
+	     node = xst_xml_element_find_next (node, "interface"))
 		connection_new_from_node (node);
 }
 
 void
 transfer_xml_to_gui (XstTool *t, gpointer data)
 {
-	xmlNode *root = xml_doc_get_root (t->config);
+	xmlNode *root = xst_xml_doc_get_root (t->config);
 	transfer_string_entry_xml_to_gui (root);
 	transfer_string_list_xml_to_gui (root);
 	transfer_string_clist2_xml_to_gui (root);
@@ -381,7 +381,7 @@ transfer_xml_to_gui (XstTool *t, gpointer data)
 void
 transfer_gui_to_xml (XstTool *t, gpointer data)
 {
-	xmlNode *root = xml_doc_get_root (t->config);
+	xmlNode *root = xst_xml_doc_get_root (t->config);
 	transfer_string_entry_gui_to_xml (root);
 	transfer_string_list_gui_to_xml (root);
 	transfer_string_clist2_gui_to_xml (root);

@@ -94,7 +94,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	{
 		xst_dialog_modify (tool->main_dialog);
 		if (delete_selected_node (TABLE_USER))
-			xml_element_destroy (node);
+			xst_xml_element_destroy (node);
 
 		user_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
@@ -134,7 +134,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	{
 		xst_dialog_modify (tool->main_dialog);
 		if (delete_selected_node (TABLE_GROUP))
-			xml_element_destroy (node);
+			xst_xml_element_destroy (node);
 
 		group_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
@@ -173,7 +173,7 @@ on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 	{
 		xst_dialog_modify (tool->main_dialog);
 		if (delete_selected_node (tbl))
-			xml_element_destroy (node);
+			xst_xml_element_destroy (node);
 
 		group_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,

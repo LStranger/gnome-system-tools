@@ -37,66 +37,21 @@ typedef struct {
 	gint is_basic_14;
 } ps_internal_font;
 
-typedef struct {
-	const gchar *name;
-	const gchar *value;
-} xml_predefined_entities_pairs ;
-
-static const xml_predefined_entities_pairs xst_xml_entities [] = {
-    { "&lt;", "<" },
-    { "&gt;", ">" },
-    { "&apos;", "'" },
-    { "&quot;", "\"" },
-    { "&amp;", "&" }
-};
-
-static gchar *
-xst_xml_unquote (gchar *in)
-{
-	gint i = 0;
-	gint delta = 0;
-	int num = sizeof (xst_xml_entities) / sizeof (xml_predefined_entities_pairs);
-
-	for (; in[i] != 0; i++) {
-		if (in [i] != '&') {
-			in [i - delta] = in [i];
-		} else {
-			gint j = 0;
-			for (; j < num; j++) {
-				const gchar *t1;
-				const gchar *t2;
-				t1 = xst_xml_entities [j].name;
-				t2 = in + i;
-				if (strncmp (t1, t2, strlen (t1) - 1) == 0) {
-					in [i - delta] = *xst_xml_entities [j].value;
-					i += strlen (t1) - 1;
-					break;
-				}
-			}
-			delta += strlen (xst_xml_entities [j].name) - 1;
-		}
-	}
-	in [i-delta] = 0;
-
-	return in;
-}
-
-
 xmlNodePtr
-xml_doc_get_root (xmlDocPtr doc)
+xst_xml_doc_get_root (xmlDocPtr doc)
 {
 	return (xmlDocGetRootElement (doc));
 }
 
 void
-xml_doc_dump (xmlDocPtr doc)
+xst_xml_doc_dump (xmlDocPtr doc)
 {
 	xmlDocDump (stdout, doc);
 }
 
 
 xmlNodePtr
-xml_element_find_first (xmlNodePtr parent, char *name)
+xst_xml_element_find_first (xmlNodePtr parent, char *name)
 {
 	xmlNodePtr node;
 	
@@ -113,7 +68,7 @@ xml_element_find_first (xmlNodePtr parent, char *name)
 
 
 xmlNodePtr
-xml_element_find_next (xmlNodePtr sibling, char *name)
+xst_xml_element_find_next (xmlNodePtr sibling, char *name)
 {
 	xmlNodePtr node;
 	
@@ -128,7 +83,7 @@ xml_element_find_next (xmlNodePtr sibling, char *name)
 
 
 xmlNodePtr
-xml_element_find_nth (xmlNodePtr parent, char *name, int n)
+xst_xml_element_find_nth (xmlNodePtr parent, char *name, int n)
 {
 	xmlNodePtr node;
 	gint i = 0;
@@ -151,14 +106,14 @@ xml_element_find_nth (xmlNodePtr parent, char *name, int n)
 
 
 xmlNodePtr
-xml_element_add (xmlNodePtr parent, char *name)
+xst_xml_element_add (xmlNodePtr parent, char *name)
 {
 	return (xmlNewChild (parent, NULL, name, NULL));
 }
 
 
 gchar *
-xml_element_get_content (xmlNodePtr node)
+xst_xml_element_get_content (xmlNodePtr node)
 {
 	gchar *text = NULL, *r;
 	xmlNodePtr n0;
@@ -182,12 +137,12 @@ xml_element_get_content (xmlNodePtr node)
 	else
 		r = g_strdup ("");
 
-	return xst_xml_unquote (r);
+	return r;
 }
 
 
 void
-xml_element_set_content (xmlNodePtr node, char *text)
+xst_xml_element_set_content (xmlNodePtr node, char *text)
 {
 	g_return_if_fail (node != NULL);
 	
@@ -196,21 +151,21 @@ xml_element_set_content (xmlNodePtr node, char *text)
 
 
 void
-xml_element_add_with_content (xmlNodePtr node, char *name, char *content)
+xst_xml_element_add_with_content (xmlNodePtr node, char *name, char *content)
 {
 	xmlNodePtr n0;
 
 	g_return_if_fail (node != NULL);
 	
-	n0 = xml_element_find_first (node, name);
-	if (!n0) n0 = xml_element_add (node, name);
+	n0 = xst_xml_element_find_first (node, name);
+	if (!n0) n0 = xst_xml_element_add (node, name);
 
-	xml_element_set_content (n0, content);
+	xst_xml_element_set_content (n0, content);
 }
 
 
 gchar *
-xml_element_get_attribute (xmlNodePtr node, char *attr)
+xst_xml_element_get_attribute (xmlNodePtr node, char *attr)
 {
 	xmlAttrPtr a0;
 	gchar *text = NULL, *r = NULL;
@@ -237,7 +192,7 @@ xml_element_get_attribute (xmlNodePtr node, char *attr)
 
 
 void
-xml_element_set_attribute (xmlNodePtr node, char *attr, char *value)
+xst_xml_element_set_attribute (xmlNodePtr node, char *attr, char *value)
 {
 	g_return_if_fail (node != NULL);
 	
@@ -246,14 +201,14 @@ xml_element_set_attribute (xmlNodePtr node, char *attr, char *value)
 
 
 gboolean
-xml_element_get_bool_attr (xmlNodePtr node, char *attr)
+xst_xml_element_get_bool_attr (xmlNodePtr node, char *attr)
 {
 	char *s;
 	int r = FALSE;
 
 	g_return_val_if_fail (node != NULL, FALSE);
 	
-	s = xml_element_get_attribute (node, attr);
+	s = xst_xml_element_get_attribute (node, attr);
 	if (s)
 	{
 		if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
@@ -265,16 +220,16 @@ xml_element_get_bool_attr (xmlNodePtr node, char *attr)
 
 
 void
-xml_element_set_bool_attr (xmlNodePtr node, char *attr, gboolean state)
+xst_xml_element_set_bool_attr (xmlNodePtr node, char *attr, gboolean state)
 {
 	g_return_if_fail (node != NULL);
 	
-	xml_element_set_attribute (node, attr, state ? "true" : "false");
+	xst_xml_element_set_attribute (node, attr, state ? "true" : "false");
 }
 
 
 gboolean
-xml_element_get_state (xmlNodePtr node, char *element)
+xst_xml_element_get_state (xmlNodePtr node, char *element)
 {
 	xmlNodePtr elem;
 	char *s;
@@ -282,10 +237,10 @@ xml_element_get_state (xmlNodePtr node, char *element)
 
 	g_return_val_if_fail (node != NULL, FALSE);
 	
-	elem = xml_element_find_first (node, element);
+	elem = xst_xml_element_find_first (node, element);
 	if (elem)
 	{
-		s = xml_element_get_attribute (elem, "state");
+		s = xst_xml_element_get_attribute (elem, "state");
 		if (s)
 		{
 			if (strchr ("yYtT", s[0])) r = TRUE;  /* Yes, true */
@@ -298,20 +253,20 @@ xml_element_get_state (xmlNodePtr node, char *element)
 
 
 void
-xml_element_set_state (xmlNodePtr node, char *element, gboolean state)
+xst_xml_element_set_state (xmlNodePtr node, char *element, gboolean state)
 {
 	xmlNodePtr elem;
 
 	g_return_if_fail (node != NULL);
 	
-	elem = xml_element_find_first (node, element);
-	if (!elem) elem = xml_element_add (node, element);
-	xml_element_set_attribute (elem, "state", state ? "true" : "false");
+	elem = xst_xml_element_find_first (node, element);
+	if (!elem) elem = xst_xml_element_add (node, element);
+	xst_xml_element_set_attribute (elem, "state", state ? "true" : "false");
 }
 
 
 void
-xml_element_destroy (xmlNodePtr node)
+xst_xml_element_destroy (xmlNodePtr node)
 {
 	g_return_if_fail (node != NULL);
 	
@@ -321,7 +276,7 @@ xml_element_destroy (xmlNodePtr node)
 
 
 void
-xml_element_destroy_children (xmlNodePtr parent)
+xst_xml_element_destroy_children (xmlNodePtr parent)
 {
 	xmlNodePtr node, node_next;
 
@@ -338,15 +293,15 @@ xml_element_destroy_children (xmlNodePtr parent)
 
 
 void
-xml_element_destroy_children_by_name (xmlNodePtr parent, char *name)
+xst_xml_element_destroy_children_by_name (xmlNodePtr parent, char *name)
 {
 	xmlNodePtr node, node_next;
 
 	g_return_if_fail (parent != NULL);
 	
-	for (node = xml_element_find_first (parent, name); node;)
+	for (node = xst_xml_element_find_first (parent, name); node;)
 	{
-		node_next = xml_element_find_next (node, name);
+		node_next = xst_xml_element_find_next (node, name);
 		xmlUnlinkNode (node);
 		xmlFreeNode (node);
 		node = node_next;
@@ -354,7 +309,7 @@ xml_element_destroy_children_by_name (xmlNodePtr parent, char *name)
 }
 
 int
-xml_parent_childs (xmlNodePtr parent)
+xst_xml_parent_childs (xmlNodePtr parent)
 {
 	xmlNodePtr node;
 	gint ret = 0;
@@ -368,19 +323,19 @@ xml_parent_childs (xmlNodePtr parent)
 }
 
 gchar *
-xml_get_child_content (xmlNodePtr parent, gchar *child)
+xst_xml_get_child_content (xmlNodePtr parent, gchar *child)
 {
 	xmlNodePtr node;
 
-	node = xml_element_find_first (parent, child);
+	node = xst_xml_element_find_first (parent, child);
 	if (!node)
 		return NULL;
 
-	return xml_element_get_content (node);
+	return xst_xml_element_get_content (node);
 }
 
 void
-xml_set_child_content (xmlNodePtr parent, gchar *child, gchar *val)
+xst_xml_set_child_content (xmlNodePtr parent, gchar *child, gchar *val)
 {
 	xmlNodePtr node;
 
@@ -388,10 +343,10 @@ xml_set_child_content (xmlNodePtr parent, gchar *child, gchar *val)
 	g_return_if_fail (child != NULL);
 	g_return_if_fail (val != NULL);
 
-	node = xml_element_find_first (parent, child);
+	node = xst_xml_element_find_first (parent, child);
 	if (!node)
-		node = xml_element_add (parent, child);
+		node = xst_xml_element_add (parent, child);
 
-	xml_element_set_content (node, val);
+	xst_xml_element_set_content (node, val);
 }
 

@@ -64,7 +64,7 @@ boot_settings_populate (BootSettingsDialog *state, xmlNodePtr node)
 	my_gtk_entry_set_text (state->adv_name, boot_value_label (node));
 	my_gtk_entry_set_text (state->type->entry, boot_value_type (node, TRUE));
 
-	if (xml_element_find_first (node, "image"))
+	if (xst_xml_element_find_first (node, "image"))
 	{
 		/* We have Linux, so hide device, show image and 'other' frame */
 		my_gtk_entry_set_text (state->image_entry, boot_value_image (node, TRUE));
@@ -165,13 +165,13 @@ boot_settings_affect (BootSettingsDialog *state)
 	node = get_selected_node ();
 
 	/* Type */
-	xml_set_child_content (node, "type", gtk_entry_get_text (GTK_ENTRY (state->type->entry)));
+	xst_xml_set_child_content (node, "type", gtk_entry_get_text (GTK_ENTRY (state->type->entry)));
 	
 	if (state->complexity == XST_DIALOG_ADVANCED)
 	{
 		boot_value_set_label (node, gtk_entry_get_text (state->adv_name));
 		
-		if (xml_element_find_first (node, "image"))
+		if (xst_xml_element_find_first (node, "image"))
 			boot_value_set_image (node, gtk_entry_get_text (state->image_entry));
 		else
 			boot_value_set_dev (node, gtk_entry_get_text (GTK_ENTRY (state->device->entry)));

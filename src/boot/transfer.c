@@ -44,7 +44,7 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 	gchar *buf;
 	gint value;
 
-	node = xml_element_find_first (root, "prompt");
+	node = xst_xml_element_find_first (root, "prompt");
 
 	if (node)
 	{
@@ -55,7 +55,7 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 		spin = xst_dialog_get_widget (tool->main_dialog, "boot_timeout");
 		gtk_widget_set_sensitive (spin, TRUE);
 
-		buf = xml_get_child_content (root, "timeout");
+		buf = xst_xml_get_child_content (root, "timeout");
 		if (buf)
 		{
 			value = atoi (buf);
@@ -78,29 +78,29 @@ transfer_globals_gui_to_xml (xmlNodePtr root)
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
 											   (tool->main_dialog, "boot_prompt"))))
 	{
-		node = xml_element_find_first (root, "prompt");
+		node = xst_xml_element_find_first (root, "prompt");
 
 		if (!node)
-			xml_element_add (root, "prompt");
+			xst_xml_element_add (root, "prompt");
 
 		val = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
 										(xst_dialog_get_widget (tool->main_dialog,
 														    "boot_timeout")));
 
-		node = xml_element_find_first (root, "timeout");
+		node = xst_xml_element_find_first (root, "timeout");
 		if (!node)
-			xml_element_add (root, "timeout");
+			xst_xml_element_add (root, "timeout");
 
 		/* We need timeout in tenths of seconds, so multiply by 10 */
-		xml_element_set_content (node, g_strdup_printf ("%d", val * 10));
+		xst_xml_element_set_content (node, g_strdup_printf ("%d", val * 10));
 	}
 
 	else
 	{
-		node = xml_element_find_first (root, "prompt");
+		node = xst_xml_element_find_first (root, "prompt");
 
 		if (node)
-			xml_element_destroy (node);
+			xst_xml_element_destroy (node);
 	}
 }
 
@@ -109,7 +109,7 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
 
-	root = xml_doc_get_root (tool->config);
+	root = xst_xml_doc_get_root (tool->config);
 	create_table (root);
 
 	transfer_globals_xml_to_gui (root);
@@ -120,7 +120,7 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
 
-	root = xml_doc_get_root (tool->config);
+	root = xst_xml_doc_get_root (tool->config);
 
 	transfer_globals_gui_to_xml (root);
 }
