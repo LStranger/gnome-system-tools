@@ -861,24 +861,32 @@ basic_group_find_nth (xmlNodePtr parent, int n)
 void
 adv_user_settings (gboolean show)
 {
-	GtkWidget *w0, *w1;
+	GtkWidget *win, *w0;
 
-	w0 = tool_widget_get ("user_settings_shell_label");
-	w1 = tool_widget_get ("user_settings_shell");
+	win = tool_widget_get ("user_settings_dialog");
+	w0 = tool_widget_get ("user_settings_advanced");
 
 	if (show)
-	{
-		gtk_widget_show (w0);
+	{	
+		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")),
+				e_table_get_user ("shell"));
 
-		gtk_entry_set_text (GTK_ENTRY (w1), e_table_get_user ("shell"));
-		gtk_widget_show (w1);
+		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_home")),
+				e_table_get_user ("home"));
+
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool_widget_get ("user_settings_uid")),
+				g_strtod (e_table_get_user ("uid"), NULL));
+
+		gtk_widget_show (w0);
 	}
 	else
 	{
-		gtk_widget_hide (w0);
+		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")), "");
+		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_home")), "");
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool_widget_get
+				("user_settings_uid")), 0);
 
-		gtk_entry_set_text (GTK_ENTRY (w1), "");
-		gtk_widget_hide (w1);
+		gtk_widget_hide (w0);
 	}
 }
 
@@ -887,10 +895,7 @@ adv_user_settings_new (void)
 {
 	GtkWidget *w0;
 
-	w0 = tool_widget_get ("user_settings_shell_label");
-	gtk_widget_show (w0);
-
-	w0 = tool_widget_get ("user_settings_shell");
+	w0 = tool_widget_get ("user_settings_advanced");
 	gtk_widget_show (w0);
 }
 

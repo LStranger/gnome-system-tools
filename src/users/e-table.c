@@ -183,20 +183,41 @@ group_value_at (ETableModel *etm, int col, int row, void *data)
 
 /* This function sets value at a particular point in our ETableModel. */
 static void
-set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
+user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
+	gchar *field;
+
+	switch (col)
+	{
+		case 0:
+			field = g_strdup ("login");
+			break;
+		case 1:
+			field = g_strdup ("uid");
+			break;
+		case 2:
+			field = g_strdup ("home");
+			break;
+		case 3:
+			field = g_strdup ("shell");
+			break;
+		default:
+			g_warning ("Wrong col nr: %d", col);
+			return;
+	}
+
+	e_table_change_user (field, val);
+	g_free (field);
 }
 
 /* This function checks if cell is editable. */
 static gboolean
 is_cell_editable (ETableModel *etm, int col, int row, void *data)
 {
-/*	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
 		return TRUE;
 	else
 		return FALSE;
-*/
-	return FALSE;
 }
 
 /* This function duplicates the value passed to it. */
@@ -297,7 +318,7 @@ e_table_create (void)
 	e_table_model = e_table_simple_new (col_count,
                                            user_row_count,
                                            user_value_at,
-                                           set_value_at,
+                                           user_set_value_at,
                                            is_cell_editable,
                                            duplicate_value,
                                            free_value,
@@ -330,7 +351,7 @@ e_table_create (void)
 	e_table_model = e_table_simple_new (col_count,
                                            group_row_count,
                                            group_value_at,
-                                           set_value_at,
+                                           NULL,
                                            is_cell_editable,
                                            duplicate_value,
                                            free_value,

@@ -95,6 +95,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gchar *login, *comment, *name = NULL;
 	gint gid, id = 0;
 	gboolean comp = FALSE;
+	GtkRequisition req;
 
 	g_return_if_fail (login = e_table_get_user ("login"));
 
@@ -147,6 +148,9 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 
+	gtk_widget_size_request (w0, &req);
+	gtk_window_set_default_size (GTK_WINDOW (w0), req.width, req.height);
+
 	/* Add 0 to windows data refering that we are not making new user */
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (0));
 	gtk_widget_show (w0);
@@ -157,7 +161,7 @@ user_passwd_dialog_show (void)
 {
 	GtkWidget *w0;
 	gchar *txt, *login;
-	
+
 	g_return_if_fail (tool_get_access());
 
 	login = e_table_get_user ("login");
