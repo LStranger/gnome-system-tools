@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-14 03:58+0200\n"
-"PO-Revision-Date: 2003-09-14 16:04+0200\n"
+"POT-Creation-Date: 2003-09-26 12:10+0200\n"
+"PO-Revision-Date: 2003-09-26 22:06+0200\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -370,7 +370,7 @@ msgstr "Complexiteit"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Wachtwoord invoeren - GNOME System Tools"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1636
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
@@ -1460,7 +1460,7 @@ msgstr ""
 "Gebruikersprofielen kunnen worden gebruikt als sjabloon voor het aanmaken "
 "van nieuwe gebruikers. "
 
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:75
 msgid "Users"
 msgstr "Gebruikers"
 
@@ -1617,8 +1617,8 @@ msgid "Boot"
 msgstr "Opstarten"
 
 #: src/boot/boot.desktop.in.in.h:2
-msgid "Boot Manager"
-msgstr "Opstartbeheer"
+msgid "Configure the system boot process"
+msgstr "Opstartproces van het systeem configureren"
 
 #: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
@@ -1713,7 +1713,7 @@ msgstr " Meer _opties"
 msgid " Fewer _Options"
 msgstr " Minder _opties"
 
-#: src/common/gst-dialog.c:476
+#: src/common/gst-dialog.c:454
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1721,21 +1721,21 @@ msgstr ""
 "Sommige veranderingen zijn nog niet toegepast.\n"
 "Wilt u deze nu toepassen?"
 
-#: src/common/gst-dialog.c:592
+#: src/common/gst-dialog.c:552
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fout bij het verbinden van signaal '%s' aan widget '%s'"
 
-#: src/common/gst-tool.c:944
+#: src/common/gst-tool.c:853
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Directive %s wordt overgeslagen..."
 
-#: src/common/gst-tool.c:1094
+#: src/common/gst-tool.c:993
 msgid "Skipping actual save..."
 msgstr "Opslaan wordt overgeslagen..."
 
-#: src/common/gst-tool.c:1156
+#: src/common/gst-tool.c:1055
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1743,12 +1743,12 @@ msgstr ""
 "Er was een foutmelding tijdens het uitvoeren van het werkscript,\n"
 "en de configuratie kon niet worden geladen."
 
-#: src/common/gst-tool.c:1522
+#: src/common/gst-tool.c:1359
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - GNOME System Tools"
 
-#: src/common/gst-tool.c:1700
+#: src/common/gst-tool.c:1537
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1775,11 +1775,11 @@ msgstr ""
 "--\n"
 "Het GNOME System Tools team"
 
-#: src/common/gst-tool.c:1724
+#: src/common/gst-tool.c:1561
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: src/common/gst-tool.c:1733
+#: src/common/gst-tool.c:1570
 msgid "Don't show me this again"
 msgstr "Laat dit niet meer zien"
 
@@ -2120,8 +2120,8 @@ msgid "Connection name (Step 2 of 2)"
 msgstr "Verbindingsnaam (stap 2 van 2)"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Netwertkkaartinstellingen."
+msgid "Configure network devices and connections"
+msgstr "Netwerkapparaten en -verbindingen instellen"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
@@ -2200,26 +2200,26 @@ msgid "Services Settings"
 msgstr "Voorzieningen instellingen"
 
 #: src/services/services.desktop.in.in.h:1
-msgid "Services"
-msgstr "Voorzieningen"
+msgid "Configure which services will be run when the system starts"
+msgstr "Configureren welke voorzieningen gestart zullen worden bij opstarten"
 
 #: src/services/services.desktop.in.in.h:2
-msgid "Services Manager"
-msgstr "Voorzieningenbeheer"
+msgid "Services"
+msgstr "Voorzieningen"
 
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Voorziening"
 
-#: src/time/main.c:310
+#: src/time/main.c:303
 msgid "Time Zone - GNOME System Tools"
 msgstr "Tijdzone - GNOME System Tools"
 
-#: src/time/main.c:428
+#: src/time/main.c:417
 msgid "Time Servers - GNOME System Tools"
 msgstr "Tijdservers - GNOME System Tools"
 
-#: src/time/main.c:500
+#: src/time/main.c:495
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2227,17 +2227,17 @@ msgstr ""
 "Er is geen NTP-ondersteuning actief. Activeer a.u.b. NTP-ondersteuning op uw "
 "systeem om tijdserver-synchronisatie te kunnen gebruiken."
 
-#: src/time/main.c:789
+#: src/time/main.c:784
 msgid "Time and Date Settings"
 msgstr "Tijd en Datum Instellingen"
 
 #: src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Tijd"
+msgid "Change system time, date, and timezone"
+msgstr "Datum, tijd en tijdzone aanpassen"
 
 #: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
-msgstr "Tijd, datum en tijdzone."
+msgid "Time and Date"
+msgstr "Datum en tijd"
 
 #: src/users/callbacks.c:598
 msgid "Create New profile"
@@ -2314,7 +2314,7 @@ msgstr "Groepsnaam bevat"
 msgid "User GID is"
 msgstr "GID van gebruiker is"
 
-#: src/users/main.c:321
+#: src/users/main.c:321 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Gebruikers en groepen"
 
@@ -2488,9 +2488,24 @@ msgstr "Shell"
 msgid "Comments"
 msgstr "Commentaar"
 
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Gebruikers en groepen."
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Gebruikers en groepen toevoegen of verwijderen"
+
+#~ msgid "Boot Manager"
+#~ msgstr "Opstartbeheer"
+
+#~ msgid "Network adapter setup."
+#~ msgstr "Netwertkkaartinstellingen."
+
+#~ msgid "Services Manager"
+#~ msgstr "Voorzieningenbeheer"
+
+#~ msgid "Time"
+#~ msgstr "Tijd"
+
+#~ msgid "Users and groups."
+#~ msgstr "Gebruikers en groepen."
 
 #~ msgid "Default runlevel"
 #~ msgstr "Standaard runlevel"
