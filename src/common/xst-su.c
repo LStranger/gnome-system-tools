@@ -19,6 +19,8 @@
  *          Hans Petter Jansson <hpj@ximian.com>     Minor XST adaptions
  */
 
+#define _GNU_SOURCE
+
 #include <config.h>
 
 #include <stdio.h>
@@ -36,8 +38,8 @@
 #include <glade/glade.h>
 
 #ifdef __FreeBSD__
-#include <errno.h>
-#include <libutil.h>
+# include <errno.h>
+# include <libutil.h>
 #endif
 
 #include "xst-su.h"
