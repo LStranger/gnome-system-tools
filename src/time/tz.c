@@ -38,22 +38,31 @@
 static float convert_pos (gchar *pos, int digits);
 static int compare_country_names (const void *a, const void *b);
 static void sort_locations_by_country (GPtrArray *locations);
+static gchar * tz_data_file_get (void);
 
 
 /* ---------------- *
  * Public interface *
  * ---------------- */
-
-
 TzDB *
 tz_load_db (void)
 {
+	gchar *tz_data_file;
 	TzDB *tz_db;
 	FILE *tzfile;
 	char buf[4096];
-	
-	tzfile = fopen (TZ_DATA_FILE, "r");
-	if (!tzfile) return NULL;
+
+	tz_data_file = tz_data_file_get ();
+	if (!tz_data_file) {
+		g_warning ("Could not get the TimeZone data file name");
+		return NULL;
+	}
+	tzfile = fopen (tz_data_file, "r");
+	if (!tzfile) {
+		g_warning ("Could not open *%s*\n", tzfile);
+		g_free (tz_data_file);
+		return NULL;
+	}
 
 	tz_db = g_new0 (TzDB, 1);
 	tz_db->locations = g_ptr_array_new ();
@@ -93,10 +102,11 @@ tz_load_db (void)
 	
 	/* now sort by country */
 	sort_locations_by_country (tz_db->locations);
+
+	g_free (tz_data_file);
 	
 	return tz_db;
 }    
-
 
 GPtrArray *
 tz_get_locations (TzDB *db)
@@ -177,7 +187,18 @@ tz_info_free (TzInfo *tzinfo)
 /* ----------------- *
  * Private functions *
  * ----------------- */
+static gchar *
+tz_data_file_get (void)
+{
+	gchar *file;
 
+	file = g_strdup (TZ_DATA_FILE);
+
+	g_print ("The timezone data file is %s\n",
+		 file);
+	
+	return file;
+}
 
 static float
 convert_pos (gchar *pos, int digits)

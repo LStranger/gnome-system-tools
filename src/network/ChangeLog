@@ -1,3 +1,8 @@
+2001-04-14  Chema Celorio  <chema@celorio.com>
+
+	* connection.c (connection_dev_get_next): add a g_return_if_fail to
+	avoid a crash. Add a #warning so that arturo fixes the real problem.
+
 2001-04-03  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* main.c (main): add update_connections hook.

@@ -354,6 +354,11 @@ connection_dev_get_next (xmlNode *root, gchar *dev_type)
 		node; node = xst_xml_element_find_next (node, "interface"))
 	{
 		dev = xst_xml_get_child_content (node, "dev");
+
+#warning Arturo, i added this returns but that is not the correct solution. Chema
+		g_return_val_if_fail (dev != NULL, NULL);
+		g_return_val_if_fail (dev_type != NULL, NULL);
+		
 		if (strstr (dev, dev_type)) {
 			num = atoi (dev + len) + 1;
 			max = (num > max)? num: max;
