@@ -29,7 +29,7 @@ gchar *s = N_("Local network interface activation.");
 gchar *s = N_("A local network interface has been detected, but it's not active.\n"
               "Would you like to activate it now?\n"
               "");
-gchar *s = N_(" Yes (recommended).");
+gchar *s = N_("Yes (recommended).");
 gchar *s = N_(" No, I'll set it up later by myself.");
 gchar *s = N_("Internet sharing configuration.");
 gchar *s = N_("You already have an internet sharing configuration.\n"
@@ -46,13 +46,13 @@ gchar *s = N_(" No, I'll manually configure the local network computers.");
 gchar *s = N_("DHCP service requirements.");
 gchar *s = N_("You don't have a DHCP server installed, or\n"
               "some other related component is missing.");
-gchar *s = N_(" Don't use it then.");
+gchar *s = N_(" Never mind, don't use it then.");
 gchar *s = N_(" Exit and come back later after installing.");
 gchar *s = N_("Configure DHCP Service");
 gchar *s = N_("A previous DHCP configuration has been detected. \n"
               "Do you want to keep this configuration?\n"
               "\r\r");
-gchar *s = N_(" Yes.");
+gchar *s = N_(" Yes, keep the current DHCP configuration.");
 gchar *s = N_(" No, overwrite with new defaults (recommended)");
 gchar *s = N_("Finished");
 gchar *s = N_("Congratulations! Your computer will now be\n"
