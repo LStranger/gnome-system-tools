@@ -329,38 +329,6 @@ Use this tool for making available folders to your local network neighborhood</p
 		      </child>
 
 		      <child>
-			<widget class="GnomeFileEntry" id="share_path_fentry">
-			  <property name="visible">True</property>
-			  <property name="max_saved">10</property>
-			  <property name="directory_entry">True</property>
-			  <property name="modal">True</property>
-			  <property name="use_filechooser">True</property>
-			  <property name="filechooser_action">GTK_FILE_CHOOSER_ACTION_OPEN</property>
-
-			  <child internal-child="entry">
-			    <widget class="GtkEntry" id="share_path">
-			      <property name="visible">True</property>
-			      <property name="can_focus">True</property>
-			      <property name="editable">True</property>
-			      <property name="visibility">True</property>
-			      <property name="max_length">0</property>
-			      <property name="text" translatable="yes"></property>
-			      <property name="has_frame">True</property>
-			      <property name="invisible_char">*</property>
-			      <property name="activates_default">False</property>
-			    </widget>
-			  </child>
-			</widget>
-			<packing>
-			  <property name="left_attach">1</property>
-			  <property name="right_attach">2</property>
-			  <property name="top_attach">0</property>
-			  <property name="bottom_attach">1</property>
-			  <property name="y_options"></property>
-			</packing>
-		      </child>
-
-		      <child>
 			<widget class="GtkLabel" id="share_type_label">
 			  <property name="visible">True</property>
 			  <property name="label" translatable="yes">Share with:</property>
@@ -457,6 +425,25 @@ Use this tool for making available folders to your local network neighborhood</p
 			  <property name="bottom_attach">2</property>
 			  <property name="x_options">fill</property>
 			  <property name="y_options"></property>
+			</packing>
+		      </child>
+
+		      <child>
+			<widget class="GtkFileChooserButton" id="share_path">
+			  <property name="visible">True</property>
+			  <property name="title" translatable="yes"></property>
+			  <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
+			  <property name="local_only">True</property>
+			  <property name="show_hidden">False</property>
+			  <property name="width_chars">-1</property>
+			</widget>
+			<packing>
+			  <property name="left_attach">1</property>
+			  <property name="right_attach">2</property>
+			  <property name="top_attach">0</property>
+			  <property name="bottom_attach">1</property>
+			  <property name="x_options">fill</property>
+			  <property name="y_options">fill</property>
 			</packing>
 		      </child>
 		    </widget>
@@ -1586,6 +1573,7 @@ Use this tool for making available folders to your local network neighborhood</p
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="mnemonic_widget">smb_description</property>
 			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
 			  <property name="width_chars">-1</property>
 			  <property name="single_line_mode">False</property>
@@ -1614,6 +1602,7 @@ Use this tool for making available folders to your local network neighborhood</p
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="mnemonic_widget">smb_workgroup</property>
 			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
 			  <property name="width_chars">-1</property>
 			  <property name="single_line_mode">False</property>

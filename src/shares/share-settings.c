@@ -37,10 +37,6 @@ share_settings_clear_dialog (void)
 	GtkWidget *widget;
 	GtkTreeModel *model;
 
-	/* common widgets */
-	widget = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	gtk_entry_set_text (GTK_ENTRY (widget), "");
-
 	/* SMB widgets */
 	widget = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 	gtk_entry_set_text (GTK_ENTRY (widget), "");
@@ -83,23 +79,22 @@ static void
 share_settings_set_path (const gchar *path)
 {
 	GtkWidget *path_entry        = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	GtkWidget *path_fentry       = gst_dialog_get_widget (tool->main_dialog, "share_path_fentry");
-	GtkWidget *path_fentry_label = gst_dialog_get_widget (tool->main_dialog, "share_path_fentry_label");
+	GtkWidget *path_entry_label  = gst_dialog_get_widget (tool->main_dialog, "share_path_fentry_label");
 	GtkWidget *path_label        = gst_dialog_get_widget (tool->main_dialog, "share_path_label");
 	GtkWidget *path_label_label  = gst_dialog_get_widget (tool->main_dialog, "share_path_label_label");
 
 	if (!path) {
-		gtk_widget_show (path_fentry);
-		gtk_widget_show (path_fentry_label);
+		gtk_widget_show (path_entry);
+		gtk_widget_show (path_entry_label);
 		gtk_widget_hide (path_label);
 		gtk_widget_hide (path_label_label);
 	} else {
-		gtk_widget_hide (path_fentry);
-		gtk_widget_hide (path_fentry_label);
+		gtk_widget_hide (path_entry);
+		gtk_widget_hide (path_entry_label);
 		gtk_widget_show (path_label);
 		gtk_widget_show (path_label_label);
 		gtk_label_set_text (GTK_LABEL (path_label), path);
-		gtk_entry_set_text (GTK_ENTRY (path_entry), path);
+		gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (path_entry), path);
 	}
 }
 
@@ -149,8 +144,8 @@ share_settings_set_share_smb (GstShareSMB *share)
 	gint       flags;
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	gtk_entry_set_text (GTK_ENTRY (widget),
-			    gst_share_get_path (GST_SHARE (share)));
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget),
+					     gst_share_get_path (GST_SHARE (share)));
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 	gtk_entry_set_text (GTK_ENTRY (widget),
@@ -178,8 +173,8 @@ share_settings_set_share_nfs (GstShareNFS *share)
 	const GSList *list;
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	gtk_entry_set_text (GTK_ENTRY (widget),
-			    gst_share_get_path (GST_SHARE (share)));
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (widget),
+					     gst_share_get_path (GST_SHARE (share)));
 
 	list = gst_share_nfs_get_acl (share);
 
@@ -240,7 +235,7 @@ share_settings_get_share_smb (void)
 	gint         flags = 0;
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	path    = gtk_entry_get_text (GTK_ENTRY (widget));
+	path    = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (widget));
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_smb_name");
 	name    = gtk_entry_get_text (GTK_ENTRY (widget));
@@ -270,7 +265,7 @@ share_settings_get_share_nfs ()
 	GstShareNFS *share;
 
 	widget  = gst_dialog_get_widget (tool->main_dialog, "share_path");
-	path    = gtk_entry_get_text (GTK_ENTRY (widget));
+	path    = gtk_file_chooser_get_current_folder (GTK_FILE_CHOOSER (widget));
 
 	share = gst_share_nfs_new (path);
 	nfs_acl_table_insert_elements (share);
