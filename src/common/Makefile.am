@@ -4,8 +4,7 @@ INCLUDES =		\
 	$(GNOME_CFLAGS) 	\
 	$(GDK_PIXBUF_CFLAGS) 	\
 	$(LIBGLADE_CFLAGS) 	\
-	$(GNOME_XML_CFLAGS)		\
-	"`gnome-config --cflags gnomecanvaspixbuf`"
+	$(GNOME_XML_CFLAGS)
 
 
 libsetuptool_a_SOURCES = \
