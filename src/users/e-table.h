@@ -26,7 +26,7 @@
 #include <gnome.h>
 #include <gal/e-table/e-tree-simple.h>
 
-#define COLOR_NORMAL "green"
+#define COLOR_NORMAL "blue"
 
 enum {
 	COL_USER_LOGIN,
