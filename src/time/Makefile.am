@@ -14,11 +14,12 @@ INCLUDES = \
 sbin_PROGRAMS = time-admin
 
 time_admin_SOURCES = \
-	main.c    time-tool.h \
-	tz.c tz.h \
-	tz-map.c tz-map.h \
-	timeserv.c timeserv.h \
-	transfer.c transfer.h
+	main.c            time-tool.h \
+	tz.c              tz.h \
+	tz-map.c          tz-map.h \
+	timeserv.c        timeserv.h \
+	transfer.c        transfer.h \
+	xst-spin-button.c xst-spin-button.h
 
 time_admin_LDADD = \
 $(GNOME_LIBDIR) \

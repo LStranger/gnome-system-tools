@@ -39,7 +39,7 @@
 #include "transfer.h"
 #include "e-map/e-map.h"
 #include "tz-map.h"
-
+#include "xst-spin-button.h"
 
 ETzMap *tzmap;
 
@@ -89,9 +89,11 @@ static char *ntp_servers[] =
 static XstDialogSignal signals[] = {
 	{ "calendar",          "day_selected",       xst_dialog_modify_cb },
 	{ "calendar",          "month_changed",      xst_dialog_modify_cb },
+#if 0	
 	{ "hour",              "changed",            xst_dialog_modify_cb },
 	{ "minute",            "changed",            xst_dialog_modify_cb },
 	{ "second",            "changed",            xst_dialog_modify_cb },
+#endif	
 	{ "timezone_button",   "clicked",            timezone_button_clicked },
 	{ "ntp_use",           "toggled",            ntp_use_toggled },
 	{ "timeserver_button", "clicked",            server_button_clicked },
@@ -161,27 +163,36 @@ xst_time_init_timezone (XstTimeTool *time_tool)
 static gint
 xst_time_clock_tick (gpointer time_tool)
 {
-	XstTool *tool = XST_TOOL (time_tool);
-	GtkWidget *w;
+	XstTool *xst_tool = XST_TOOL (time_tool);
+	XstTimeTool *tool = XST_TIME_TOOL (time_tool);
+	GtkAdjustment *adjustment;
 
-	xst_dialog_freeze (tool->main_dialog);
+	xst_dialog_freeze (xst_tool->main_dialog);
 
-	w = xst_dialog_get_widget (tool->main_dialog, "second");
-	gtk_spin_button_spin(GTK_SPIN_BUTTON(w), GTK_SPIN_STEP_FORWARD, 1.0);
-  
-	if (!gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w))) {
-		w = xst_dialog_get_widget (tool->main_dialog, "minute");
-		gtk_spin_button_spin(GTK_SPIN_BUTTON(w), GTK_SPIN_STEP_FORWARD, 1.0);
-		
-		if (!gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(w))) {
-			w = xst_dialog_get_widget (tool->main_dialog, "hour");
-			gtk_spin_button_spin(GTK_SPIN_BUTTON(w), GTK_SPIN_STEP_FORWARD, 1.0);
-			
-			/* FIXME: Update calendar if we pass midnight */
-		}
+	/* Seconds */
+	adjustment = XST_SPIN_BUTTON (tool->seconds)->adjustment;
+	if (adjustment->value != adjustment->upper) {
+		gtk_adjustment_set_value (adjustment, adjustment->value + 1);
+		return TRUE;
+	}
+	gtk_adjustment_set_value (adjustment, 0);
+
+	/* Minutes */
+	adjustment = XST_SPIN_BUTTON (tool->minutes)->adjustment;
+	if (adjustment->value != adjustment->upper) {
+		gtk_adjustment_set_value (adjustment, adjustment->value + 1);
+		return TRUE;
+	}
+	gtk_adjustment_set_value (adjustment, 0);
+
+	/* Hours */
+	adjustment = XST_SPIN_BUTTON (tool->hours)->adjustment;
+	if (adjustment->value != adjustment->upper) {
+		gtk_adjustment_set_value (adjustment, adjustment->value + 1);
+		return TRUE;
 	}
 
-	xst_dialog_thaw (tool->main_dialog);
+	xst_dialog_thaw (xst_tool->main_dialog);
 	
 	return TRUE;
 }
@@ -267,51 +278,24 @@ ntp_use_toggled (GtkWidget *w, XstDialog *dialog)
 	gtk_widget_set_sensitive (xst_dialog_get_widget (dialog, "timeserver_button"), active);
 }
 
-/*static void
-connect_signals ()
-{	
 #if 0
-	GladeXML *xml;
-
-	xml = tool->main_dialog->gui;
-
-	gtk_signal_connect (GTK_OBJECT (tool), "fill_gui",
-			    GTK_SIGNAL_FUNC (transfer_xml_to_gui),
-			    NULL);
-
-	gtk_signal_connect (GTK_OBJECT (tool), "fill_xml",
-			    GTK_SIGNAL_FUNC (transfer_gui_to_xml),
-			    NULL);
-
-	gtk_signal_connect_object (GTK_OBJECT (tool->main_dialog), "apply",
-				   GTK_SIGNAL_FUNC (xst_tool_save),
-				   GTK_OBJECT (tool));
-
-	glade_xml_signal_connect_data (xml, "timezone_button_clicked", timezone_button_clicked, tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "server_button_clicked",   server_button_clicked,   tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "xst_dialog_modify_cb",    xst_dialog_modify_cb,    tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "update_tz",               update_tz,               tool->main_dialog);
-	glade_xml_signal_connect_data (xml, "ntp_use_toggled",         ntp_use_toggled,         tool->main_dialog);
-#endif
-
-}*/
-
 static void
-adjust (XstDialog *dialog, const char *s, gint max)
+xst_time_set_spin (XstDialog *dialog, GtkWidget *widget, gint max, gboolean pad)
 {
+	GtkSpinButton *spin;
 	GtkObject *adj;
-	GtkWidget *w;
 
-	w = xst_dialog_get_widget (dialog, s);
-	if (!w)
-		return;
+	spin = GTK_SPIN_BUTTON (widget);
+	g_return_if_fail (GTK_IS_SPIN_BUTTON (spin));
 
 	adj = gtk_adjustment_new (0.0, 0.0, max - 1.0,
 				  1.0, 5.0, 5.0);
 
-	gtk_spin_button_set_adjustment (GTK_SPIN_BUTTON (w), GTK_ADJUSTMENT (adj));
-	gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (w), TRUE);	
+	gtk_spin_button_set_adjustment (spin, GTK_ADJUSTMENT (adj));
+	gtk_spin_button_set_wrap       (spin, TRUE);
+	gtk_object_set_user_data       (GTK_OBJECT(spin), GINT_TO_POINTER (pad ? 2 : 0));
 }
+#endif
 
 XST_TOOL_MAKE_TYPE(time,Time)
 
@@ -330,11 +314,27 @@ xst_time_tool_new (void)
 static void
 xst_time_load_widgets (XstTimeTool *tool)
 {
+	GtkWidget *hbox;
+	GtkObject *adjustment;
 	XstDialog *dialog = XST_TOOL (tool)->main_dialog;
+
+	hbox = xst_dialog_get_widget (dialog, "clock_hbox");
+
+	adjustment = gtk_adjustment_new (1, 1, 60, 1, 1, 1);
+	tool->seconds = xst_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
+	gtk_widget_show (tool->seconds);
 	
-	tool->seconds = xst_dialog_get_widget (dialog, "second");
-	tool->minutes = xst_dialog_get_widget (dialog, "minute");
-	tool->hours   = xst_dialog_get_widget (dialog, "hour");
+	adjustment = gtk_adjustment_new (1, 1, 60, 1, 1, 1);
+	tool->minutes = xst_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
+	gtk_widget_show (tool->minutes);
+
+	adjustment = gtk_adjustment_new (1, 1, 60, 1, 1, 1);	
+	tool->hours   = xst_spin_button_new (GTK_ADJUSTMENT (adjustment), 1, 0);
+	gtk_widget_show (tool->hours);
+
+	gtk_box_pack_start (GTK_BOX (hbox), tool->hours,   FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), tool->minutes, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox), tool->seconds, FALSE, FALSE, 0);
 }
 
 int
@@ -350,10 +350,12 @@ main (int argc, char *argv[])
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 
 	xst_time_load_widgets (XST_TIME_TOOL (tool));
-	
-	adjust (tool->main_dialog, "hour", 24);
-	adjust (tool->main_dialog, "minute", 60);
-	adjust (tool->main_dialog, "second", 60);
+
+#if 0	
+	xst_time_set_spin (tool->main_dialog, XST_TIME_TOOL (tool)->hours,   24, FALSE);
+	xst_time_set_spin (tool->main_dialog, XST_TIME_TOOL (tool)->minutes, 60, TRUE);
+	xst_time_set_spin (tool->main_dialog, XST_TIME_TOOL (tool)->seconds, 60, TRUE);
+#endif	
 
 	xst_time_populate_ntp_list (XST_TIME_TOOL (tool));
 	xst_time_init_timezone (XST_TIME_TOOL (tool));

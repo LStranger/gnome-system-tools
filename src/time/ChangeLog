@@ -1,3 +1,19 @@
+2001-05-15  Chema Celorio  <chema@celorio.com>
+
+	* transfer.c (transfer_string_spin_gui_to_xml): ditto
+
+	* main.c (xst_time_set_spin): replace gtkspin with xstspin,
+	(xst_time_load_widgets): create xst_spin_buttons
+	use the pointers to the minutes,seconds and hour widgets
+
+	* Makefile.am: add xst-spin-button.[ch]
+
+	* xst-spin-button.h: add
+
+	* xst-spin-button.c: Copy from gtk 1.2, we need to many changes
+	to the behaivor and the implementation was starting to become
+	very hack, it is best if we have our own widget.
+
 2001-05-14  Chema Celorio  <chema@celorio.com>
 
 	* timeserv.c: remove the extern time variable, pass the pointer of
