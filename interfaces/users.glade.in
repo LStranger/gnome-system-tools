@@ -220,7 +220,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:14:16 GMT</last_modification_time>
 		    </signal>
 		    <label>New User...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -234,7 +233,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:47:54 GMT</last_modification_time>
 		    </signal>
 		    <label>Delete</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 
@@ -370,7 +368,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:45:05 GMT</last_modification_time>
 		    </signal>
 		    <label>Change Password...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -384,7 +381,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:15:10 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -536,7 +532,6 @@
 		  <can_default>True</can_default>
 		  <can_focus>True</can_focus>
 		  <label>New Group...</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 
 		<widget>
@@ -545,7 +540,6 @@
 		  <can_default>True</can_default>
 		  <can_focus>True</can_focus>
 		  <label>Delete</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 	      </widget>
 
@@ -680,7 +674,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 15:59:22 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -739,7 +732,6 @@
 	  <can_default>True</can_default>
 	  <can_focus>True</can_focus>
 	  <label> Advanced &gt;&gt; </label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -774,7 +766,6 @@
 	      <last_modification_time>Mon, 23 Oct 2000 20:36:59 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
-	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 
 	  <widget>
@@ -788,7 +779,6 @@
 	      <last_modification_time>Mon, 23 Oct 2000 22:54:58 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
-	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 	</widget>
       </widget>
@@ -1135,6 +1125,7 @@
 	<padding>0</padding>
 	<expand>True</expand>
 	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
       </child>
 
       <widget>
@@ -1188,6 +1179,30 @@
       </widget>
 
       <widget>
+	<class>GtkEntry</class>
+	<name>user_passwd_confirmation</name>
+	<can_focus>True</can_focus>
+	<editable>True</editable>
+	<text_visible>False</text_visible>
+	<text_max_length>0</text_max_length>
+	<text></text>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
 	<class>GtkLabel</class>
 	<name>label17</name>
 	<label>Confirmation:</label>
@@ -1212,30 +1227,23 @@
 	  <yfill>False</yfill>
 	</child>
       </widget>
+    </widget>
 
-      <widget>
-	<class>GtkEntry</class>
-	<name>user_passwd_confirmation</name>
-	<can_focus>True</can_focus>
-	<editable>True</editable>
-	<text_visible>False</text_visible>
-	<text_max_length>0</text_max_length>
-	<text></text>
-	<child>
-	  <left_attach>1</left_attach>
-	  <right_attach>2</right_attach>
-	  <top_attach>1</top_attach>
-	  <bottom_attach>2</bottom_attach>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <xexpand>True</xexpand>
-	  <yexpand>False</yexpand>
-	  <xshrink>False</xshrink>
-	  <yshrink>False</yshrink>
-	  <xfill>True</xfill>
-	  <yfill>False</yfill>
-	</child>
-      </widget>
+    <widget>
+      <class>GtkLabel</class>
+      <name>user_passwd_label</name>
+      <label></label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
     </widget>
   </widget>
 </widget>
@@ -1460,11 +1468,24 @@
 	    </child>
 
 	    <widget>
-	      <class>GtkList</class>
-	      <name>group_settings_all</name>
-	      <width>100</width>
-	      <height>150</height>
-	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	      <class>GtkScrolledWindow</class>
+	      <name>scrolledwindow3</name>
+	      <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	      <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+	      <widget>
+		<class>GtkViewport</class>
+		<name>viewport3</name>
+		<shadow_type>GTK_SHADOW_IN</shadow_type>
+
+		<widget>
+		  <class>GtkList</class>
+		  <name>group_settings_all</name>
+		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		</widget>
+	      </widget>
 	    </widget>
 	  </widget>
 
@@ -1489,11 +1510,24 @@
 	    </child>
 
 	    <widget>
-	      <class>GtkList</class>
-	      <name>group_settings_members</name>
-	      <width>100</width>
-	      <height>150</height>
-	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	      <class>GtkScrolledWindow</class>
+	      <name>scrolledwindow4</name>
+	      <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	      <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	      <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	      <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+
+	      <widget>
+		<class>GtkViewport</class>
+		<name>viewport4</name>
+		<shadow_type>GTK_SHADOW_IN</shadow_type>
+
+		<widget>
+		  <class>GtkList</class>
+		  <name>group_settings_members</name>
+		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		</widget>
+	      </widget>
 	    </widget>
 	  </widget>
 
@@ -1531,7 +1565,6 @@
 		<name>group_settings_add</name>
 		<can_focus>True</can_focus>
 		<label>Add -&gt;</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1544,7 +1577,6 @@
 		<name>group_settings_remove</name>
 		<can_focus>True</can_focus>
 		<label>Remove &lt;-</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>

@@ -22,7 +22,8 @@ gchar *s = N_("Settings...");
 gchar *s = N_("Groups");
 gchar *s = N_(" Advanced >> ");
 gchar *s = N_("User Settings");
-gchar *s = N_("Select a group");
+gchar *s = N_("Select a group\n"
+              "");
 gchar *s = N_("Main group:");
 gchar *s = N_("User name:");
 gchar *s = N_("Comment:");
