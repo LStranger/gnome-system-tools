@@ -187,7 +187,6 @@ statichost_list_select_row (GtkTreeSelection *selection, gpointer data)
 						 G_CALLBACK (on_hosts_alias_changed), NULL);
 
 		gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
-/*		gst_ui_text_view_add_text (GTK_TEXT_VIEW (ui->alias), buf);*/
 		gtk_text_buffer_set_text (GTK_TEXT_BUFFER (gtk_text_view_get_buffer (GTK_TEXT_VIEW (ui->alias))),
 					  buf, -1);
 		g_free (buf);
