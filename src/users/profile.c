@@ -22,6 +22,7 @@
  */
 
 #include <stdlib.h>
+#include <dirent.h>
 #include <gnome.h>
 #include <gal/e-table/e-table-scrolled.h>
 #include <gal/e-table/e-table-memory.h>
@@ -390,11 +391,105 @@ static void
 file_list_select (GtkCList *clist, gint row, gint col, GdkEventButton *event, gpointer data)
 {
 	ProfileTab *gui = data;
+	gchar *buf;
 
 	if (clist->selection)
 		gtk_widget_set_sensitive (GTK_WIDGET (gui->file_del), TRUE);
 	else
 		gtk_widget_set_sensitive (GTK_WIDGET (gui->file_del), FALSE);
+
+	buf = gtk_clist_get_row_data (clist, row);
+	g_print ("%s\n", buf);
+}
+
+static gboolean
+is_directory (const gchar *full_path)
+{
+	/* We just check if it ends with dir separator */
+	if (full_path[(strlen (full_path) - 1)] == G_DIR_SEPARATOR)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+static GSList *
+get_dirlist (const gchar *full_path)
+{
+	DIR *dir;
+	struct dirent *ep;
+	GSList *list = NULL;
+	
+	if (!is_directory (full_path))
+		return list;
+
+	dir = opendir (full_path);
+	if (dir) {
+		while ((ep = readdir (dir))) {
+			if (!strcmp (ep->d_name, "."))
+				continue;
+			if (!strcmp (ep->d_name, ".."))
+				continue;
+
+			list = g_slist_prepend (list, g_strdup_printf ("%s%s", full_path, ep->d_name));
+		}
+		closedir (dir);
+	} else {
+		/* TODO: give the reason why not */
+		g_warning ("get_dirlist: failed to open directory %s", full_path);
+	}
+
+	return list;
+}
+
+static gchar *
+get_filename (const gchar *full_path, gint depth)
+{
+	gchar *path, *retval;
+	gint len, i;
+	
+	if (!full_path || (strlen (full_path) == 0))
+		return g_strdup ("");
+
+	path = (gchar *)full_path;
+	len = strlen (path);
+	retval = g_new (gchar, len);
+	i = 0;
+	while (--len) {
+		if (path[len] == G_DIR_SEPARATOR) {
+			if (--depth < 1)
+				break;
+		}
+		retval[i++] = path[len];
+	}
+	retval[i] = '\0';
+	g_strreverse (retval);
+	return retval;
+}
+
+static void
+add_file_row (GtkCList *clist, const gchar *full_path)
+{
+	gchar *text[2];
+	gint row;
+	
+	text[1] = NULL;
+	if (is_directory (full_path)) {
+		GSList *list = get_dirlist (full_path);
+
+		while (list) {
+			gchar *name = list->data;
+			list = list->next;
+		
+			text[0] = get_filename (name, 2);
+			row = gtk_clist_append (clist, text);
+			gtk_clist_set_row_data (clist, row, (gpointer) name);
+		}
+		g_slist_free (list);
+	} else {
+		text[0] = get_filename (full_path, 1);
+		row = gtk_clist_append (clist, text);
+		gtk_clist_set_row_data (clist, row, (gpointer) g_strdup (full_path));
+	}
 }
 
 static void
@@ -403,7 +498,7 @@ file_list_add_cb (GtkButton *button,  gpointer data)
 	GtkFileSelection *filesel = data;
 	gchar *name = gtk_file_selection_get_filename (filesel);
 
-	my_gtk_clist_append (pft->file_list, name);
+	add_file_row (pft->file_list, name);
 	xst_dialog_modify (pft->dialog);
 }
 
@@ -615,6 +710,7 @@ profile_tab_signals_block (gboolean block)
 static void
 profile_update_ui (Profile *pf)
 {
+	GSList *tmp;
 	GtkOptionMenu *om[] = { pft->system_menu, pft->files_menu, pft->security_menu, NULL };
 	gint i;
 
@@ -641,7 +737,13 @@ profile_update_ui (Profile *pf)
 	gtk_toggle_button_set_active (pft->pwd_random, pf->pwd_random);
 
 	gtk_clist_clear (pft->file_list);
-	my_gtk_clist_append_items (pft->file_list, (GList *)pf->files);
+	gtk_clist_freeze (pft->file_list);
+	tmp = pf->files;
+	while (tmp) {
+		add_file_row (pft->file_list, tmp->data);
+		tmp = tmp->next;
+	}
+	gtk_clist_thaw (pft->file_list);
 	
 	profile_tab_signals_block (FALSE);
 }
@@ -821,6 +923,44 @@ get_files (xmlNodePtr files)
 	return list;
 }
 
+#define XST_USER_DATA_DIR "/var/cache/xst/"
+
+static GSList *
+profile_files (GSList **list, xmlNodePtr root, const gchar *prefix)
+{
+	gchar *buf, *path, *tmp;
+
+	root = root->childs;
+	while (root) {
+		gchar *name = xst_xml_element_get_attribute (root, "name");
+
+		if (!name) {
+			buf = xst_xml_element_get_content (root);
+			if (buf) {
+				tmp = g_strdup_printf ("%s%s", prefix, buf);
+				g_free (buf);
+				buf = strstr (tmp, XST_USER_DATA_DIR);
+				if (buf)
+					buf = tmp + strlen (XST_USER_DATA_DIR);
+				else
+					buf = tmp;
+				
+				*list = g_slist_append (*list, buf);
+				g_print ("%s\n", buf);
+			}
+			root = root->next;
+			continue;
+		}
+
+		path = g_strdup_printf ("%s%s", prefix, name);
+		*list = profile_files (list, root, path);
+		g_free (path);
+		g_free (name);
+		root = root->next;
+	}
+	return *list;
+}
+
 /* Structure with some hard-coded defaults, just in case any of the tags is not present. */
 /* These were taken form RH 6.2's default values. Any better suggestions? */
 /* NULL means not present for string members. */
@@ -945,7 +1085,8 @@ profile_table_from_xml (xmlNodePtr root)
 				case 10: pf->pwd_random   = xst_xml_element_get_bool_attr (n0, "set"); break;
 				case 11: pf->comment      = xst_xml_element_get_content (n0); break;
 				case 12: pf->name         = xst_xml_element_get_content (n0); break;
-				case 13: pf->files        = get_files (n0); break;
+				case 13: pf->files        = profile_files (NULL, n0, ""); break;
+//				case 13: pf->files        = get_files (n0); break;
 					
 				default: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
 				}

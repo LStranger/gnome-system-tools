@@ -1,3 +1,26 @@
+2001-05-21  Tambet Ingo  <tambet@ximian.com>
+
+	* user_settings.c (user_account_gui_setup): Removed set_primary (group) button cause it was unused.
+	(user_account_gui_new): Connect focusing callbacks here so all dialogs can have sane defaults.
+
+	* user_group.c (check_user_group): Now it detects more states (not valid/exists/valid new).
+
+	* user-group-xml.c (user_set_value_group): Add new group if group not found.
+	(user_add_blank_xml): Add ETable row from here (makes it more common).
+	(group_add_blank_xml): Ditto.
+
+	* user-druid.c: Removed focus handling from here to more common place.
+
+	* profile.c: Initial work with profile skel files, isn't visibile in current version.
+
+	* main.c (update_searchbar_complexity): Implement.
+	(create_searchbar): Check initial complexity first and make searchbar accordingly.
+
+2001-05-18  Tambet Ingo  <tambet@ximian.com>
+
+	* callbacks.c (on_user_settings_clicked): Don't show settings unless access is
+	granted.
+
 2001-05-18  Hans Petter Jansson  <hpj@ximian.com>
 
 	* *.pam: Modified PAM configuration so that invoking as root works.

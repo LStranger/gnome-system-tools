@@ -136,14 +136,6 @@ identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 		return FALSE;
 }
 
-static void
-identity_login_activate (GtkWidget *w, gpointer data)
-{
-	UserDruid *druid = data;
-
-	gtk_widget_grab_focus (GTK_WIDGET (druid->gui->comment));
-}
-
 /* Password Page */
 static void
 password_check (UserDruid *druid)
@@ -194,14 +186,6 @@ password_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 		return TRUE;
 	} else
 		return FALSE;
-}
-
-static void
-password_activate (GtkWidget *w, gpointer data)
-{
-	UserDruid *config = data;
-
-	gtk_widget_grab_focus (GTK_WIDGET (config->gui->pwd2));
 }
 
 /* Common stuff */
@@ -310,10 +294,8 @@ construct (UserDruid *druid)
 	user_account_gui_setup (druid->gui, NULL);
 	
 	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "changed", identity_changed, druid);
-	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "activate", identity_login_activate, druid);
 	gtk_signal_connect (GTK_OBJECT (druid->gui->comment), "activate", druid_entry_activate, druid);
 	
-	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd1), "activate", password_activate, druid);
 	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd2), "changed", password_changed, druid);
 	gtk_signal_connect (GTK_OBJECT (druid->gui->pwd2), "activate", druid_entry_activate, druid);
 }

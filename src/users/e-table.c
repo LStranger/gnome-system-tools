@@ -228,8 +228,11 @@ group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *d
 static gboolean
 is_editable (ETableModel *etm, int col, int row, void *model_data)
 {
-	return (xst_tool_get_access (tool) &&
+/* Temporarily disabled.
+  return (xst_tool_get_access (tool) &&
 		   (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED));
+*/
+	return FALSE;
 }
 
 static void *

@@ -85,10 +85,8 @@ user_account_gui_member_select (GtkCList *clist, gint row, gint column, GdkEvent
 
 	if (clist->selection) {
 		gtk_widget_set_sensitive (GTK_WIDGET (gui->remove), TRUE);
-		gtk_widget_set_sensitive (GTK_WIDGET (gui->set_primary), TRUE);
 	} else {
 		gtk_widget_set_sensitive (GTK_WIDGET (gui->remove), FALSE);
-		gtk_widget_set_sensitive (GTK_WIDGET (gui->set_primary), FALSE);
 	}
 }
 
@@ -140,6 +138,14 @@ static void
 user_account_passwd_changed (GtkEditable *entry, gpointer data)
 {
 	gtk_object_set_data (GTK_OBJECT (entry), USER_ACCOUNT_PASSWD_CHANGED, GINT_TO_POINTER (TRUE));
+}
+
+static void
+user_account_grab_focus (GtkWidget *w, gpointer data)
+{
+	GtkWidget *widget = GTK_WIDGET (data);
+
+	gtk_widget_grab_focus (widget);
 }
 
 static gint
@@ -198,7 +204,6 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->member  = GTK_CLIST (glade_xml_get_widget (gui->xml, "user_settings_gmember"));
 	gui->add     = glade_xml_get_widget (gui->xml, "user_settings_add");
 	gui->remove  = glade_xml_get_widget (gui->xml, "user_settings_remove");
-	gui->set_primary = glade_xml_get_widget (gui->xml, "user_settings_primary");
 
 	gui->pwd_box = glade_xml_get_widget (gui->xml, "user_passwd_box");
 	gui->pwd_notebook = GTK_NOTEBOOK (glade_xml_get_widget (gui->xml, "user_passwd_notebook"));
@@ -241,7 +246,14 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
 	gtk_signal_connect (GTK_OBJECT (gui->pwd2), "changed",
 			    GTK_SIGNAL_FUNC (user_account_passwd_changed), gui);
-	
+
+	gtk_signal_connect (GTK_OBJECT (gui->name), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->comment);
+	gtk_signal_connect (GTK_OBJECT (gui->pwd1), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->pwd2);
+	gtk_signal_connect (GTK_OBJECT (gui->uid), "activate",
+			    GTK_SIGNAL_FUNC (user_account_grab_focus), (gpointer) gui->home);
+
 	return gui;
 }
 
@@ -511,9 +523,21 @@ user_account_gui_save (UserAccountGui *gui)
 	account->uid = (buf);
 
 	buf = gtk_entry_get_text (GTK_ENTRY (gui->group->entry));
-	if ((error = check_user_group (account, buf)))
+	switch (check_user_group (account, buf, &error)) {
+	case -1: /* Name is not valid */
 		goto err;
-	account->group = g_strdup (buf);
+		break;
+	case 0: /* Valid, exists */		
+		account->group = g_strdup (buf);
+		break;
+	case 1: /* Valid, new */
+		account->group = g_strdup (buf);
+		break;
+	default:
+		g_warning ("user_account_gui_save: Shouldn't be here.");
+		break;
+	}
+	g_free (error);
 
 	/* Password */
 	if (gtk_toggle_button_get_active (gui->pwd_random)) {

@@ -79,7 +79,7 @@ gchar    *check_user_uid (xmlNodePtr node, const gchar *val);
 gchar    *check_user_comment (xmlNodePtr, const gchar *val);
 gchar    *check_user_home (xmlNodePtr node, const gchar *val);
 gchar    *check_user_shell (xmlNodePtr node, const gchar *val);
-gchar    *check_user_group (UserAccount *account, const gchar *val);
+gint      check_user_group (UserAccount *account, const gchar *val, gchar **error);
 
 gboolean check_group_name (GtkWindow *xd, xmlNodePtr node, const gchar *name);
 gboolean check_group_gid (GtkWindow *xd, xmlNodePtr node, const gchar *val);

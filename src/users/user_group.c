@@ -425,20 +425,30 @@ parse_group (UserAccount *account, const gchar *val)
 	return buf;
 }
 
-gchar *
-check_user_group (UserAccount *account, const gchar *val)
+gint
+check_user_group (UserAccount *account, const gchar *val, gchar **error)
 {
+	xmlNodePtr group_node;
 	gchar *group;
-	gchar *buf = NULL;
+	gint retval;
 
 	group = parse_group (account, val);
+	group_node = get_corresp_field (account->node);
 
-	if (!is_valid_name (group))
-		buf = g_strdup (_("Group name is not valid."));
+	if (!is_valid_name (group)) {
+		*error = g_strdup (_("Group name is not valid."));
+		retval = -1;
+	} else if (node_exists (group_node, "group", val)) {
+		*error = g_strdup (_("Such group id already exists."));
+		retval = 0;
+	} else {
+		*error = g_strdup (_("Group does not exist. Create new?"));
+		retval = 1;
+	}
 
 	g_free (group);
 	
-	return buf;
+	return retval;
 }
 
 gboolean
@@ -837,19 +847,6 @@ group_new_prepare (ug_data *ud)
 	gtk_widget_show (w0);
 }
 
-void
-group_add (UserAccount *account, const gchar *group_name)
-{
-	gchar *name;
-	xmlNodePtr node = group_add_blank_xml (get_group_root_node ());
-
-	name = parse_group (account, group_name);
-	xst_xml_set_child_content (node, "name", name);
-	g_free (name);
-	
-	current_table_new_row (node, TABLE_GROUP);
-}
-
 gboolean
 group_update (ug_data *ud)
 {
@@ -871,7 +868,6 @@ group_update (ug_data *ud)
 			/* Add new group, update table. */
 			ud->node = group_add_blank_xml (ud->node);
 			group_update_xml (ud->node, adv);
-			current_table_new_row (ud->node, ud->table);
 
 			return ok;
 		} else {
@@ -1254,11 +1250,8 @@ user_account_save (UserAccount *account)
 	gchar *buf;
 	xmlNodePtr node = account->node;
 
-	if (account->new) {
+	if (account->new)
 		node = account->node = user_add_blank_xml (account->node);
-		current_table_new_row (node, TABLE_USER);
-		group_add (account, account->group);
-	}
 	
 	user_set_value_login (node, account->name);
 	user_set_value_comment (node, account->comment);

@@ -51,7 +51,6 @@ typedef struct {
 	GtkCList  *member;
 	GtkWidget *add;
 	GtkWidget *remove;
-	GtkWidget *set_primary;
 
 	GtkWidget *pwd_box;
 	GtkNotebook *pwd_notebook;

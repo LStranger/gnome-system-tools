@@ -96,10 +96,12 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	UserAccountEditor *editor;
 	xmlNodePtr node = get_selected_node ();
 
-	account = user_account_get_by_node (node);
-	editor = user_account_editor_new (account);
+	if (xst_tool_get_access (tool)) {
+		account = user_account_get_by_node (node);
+		editor = user_account_editor_new (account);
 
-	gtk_widget_show (GTK_WIDGET (editor));
+		gtk_widget_show (GTK_WIDGET (editor));
+	}
 }
 
 void

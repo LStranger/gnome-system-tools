@@ -91,63 +91,6 @@ static const XstWidgetPolicy policies[] = {
 	{ NULL }
 };
 
-static void
-update_notebook_complexity (XstDialogComplexity complexity)
-{
-	GtkWidget *notebook = xst_dialog_get_widget (tool->main_dialog, "notebook");
-
-	switch (complexity) {
-	case XST_DIALOG_BASIC:
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
-		gtk_notebook_set_page (GTK_NOTEBOOK (notebook), 0);
-		break;
-	case XST_DIALOG_ADVANCED:
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
-		break;
-	default:
-		g_warning ("update_notebook_complexity: Unsupported complexity.");
-	}
-}
-
-static void
-update_complexity (void)
-{
-	XstDialogComplexity complexity = tool->main_dialog->complexity;
-
-	update_notebook_complexity (complexity);
-	tables_update_complexity (complexity);
-}
-
-static void
-connect_signals (void)
-{
-	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change",
-					GTK_SIGNAL_FUNC (update_complexity),
-					NULL);
-
-	/* Stupid libglade converts user_data to strings */
-
-	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "group_settings")),
-					"clicked",
-					GTK_SIGNAL_FUNC (on_settings_clicked),
-					GINT_TO_POINTER (TABLE_GROUP));
-	
-	xst_dialog_connect_signals (tool->main_dialog, signals);
-}
-
-static void
-config_clists (void)
-{
-	XstDialog *xd;
-	gint i;
-	gchar *lists[] = {"group_settings_all", "group_settings_members", NULL};
-
-	xd = tool->main_dialog;
-
-	for (i = 0; lists[i]; i++)
-		gtk_clist_set_auto_sort (GTK_CLIST (xst_dialog_get_widget (xd, lists[i])), TRUE);
-}
-
 static ESearchBarItem user_search_menu_items[] = {
 	{ N_("Show All"), 0 },
 	{ NULL, -1}
@@ -175,7 +118,12 @@ enum {
 	ESB_USER_GID,
 };
 
-static ESearchBarItem user_search_option_items[] = {
+static ESearchBarItem user_search_items_basic[] = {
+	{ N_("User name contains"), ESB_USER_NAME },
+	{ NULL, -1 }
+};
+
+static ESearchBarItem user_search_items_adv[] = {
 	{ N_("User name contains"), ESB_USER_NAME },
 	{ N_("User ID is"), ESB_USER_UID },
 	{ N_("Group name contains"), ESB_GROUP_NAME },
@@ -229,15 +177,108 @@ user_query_changed (ESearchBar *esb, gpointer user_data)
 }
 
 static void
+update_searchbar_complexity (XstDialogComplexity complexity)
+{
+	ESearchBarItem *items;
+	ESearchBar *esb = E_SEARCH_BAR (gtk_object_get_data (GTK_OBJECT (tool->main_dialog),
+					"SearchBar"));
+
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
+		items = user_search_items_basic;
+		break;
+	case XST_DIALOG_ADVANCED:
+		items = user_search_items_adv;
+		break;
+	default:
+		g_warning ("update_searchbar_complexity: Unsupported complexity.");
+		return;
+	}
+	
+	
+	e_search_bar_set_option (esb, items);
+}
+
+static void
+update_notebook_complexity (XstDialogComplexity complexity)
+{
+	GtkWidget *notebook = xst_dialog_get_widget (tool->main_dialog, "notebook");
+
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_page (GTK_NOTEBOOK (notebook), 0);
+		break;
+	case XST_DIALOG_ADVANCED:
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+		break;
+	default:
+		g_warning ("update_notebook_complexity: Unsupported complexity.");
+	}
+}
+
+static void
+update_complexity (void)
+{
+	XstDialogComplexity complexity = tool->main_dialog->complexity;
+
+	update_notebook_complexity (complexity);
+	update_searchbar_complexity (complexity);
+	tables_update_complexity (complexity);
+}
+
+static void
+connect_signals (void)
+{
+	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change",
+					GTK_SIGNAL_FUNC (update_complexity),
+					NULL);
+
+	/* Stupid libglade converts user_data to strings */
+
+	gtk_signal_connect (GTK_OBJECT (xst_dialog_get_widget (tool->main_dialog, "group_settings")),
+					"clicked",
+					GTK_SIGNAL_FUNC (on_settings_clicked),
+					GINT_TO_POINTER (TABLE_GROUP));
+	
+	xst_dialog_connect_signals (tool->main_dialog, signals);
+}
+
+static void
+config_clists (void)
+{
+	XstDialog *xd;
+	gint i;
+	gchar *lists[] = {"group_settings_all", "group_settings_members", NULL};
+
+	xd = tool->main_dialog;
+
+	for (i = 0; lists[i]; i++)
+		gtk_clist_set_auto_sort (GTK_CLIST (xst_dialog_get_widget (xd, lists[i])), TRUE);
+}
+
+static void
 create_searchbar (void)
 {
 	GtkWidget *table;
 	ESearchBar *search;
+	ESearchBarItem *item;
 
 	table = xst_dialog_get_widget (tool->main_dialog, "user_parent");
+
+	switch (tool->main_dialog->complexity) {
+	case XST_DIALOG_BASIC:
+		item = user_search_items_basic;
+		break;
+	case XST_DIALOG_ADVANCED:
+		item = user_search_items_adv;
+		break;
+	default:
+		g_warning ("create_searchbar: Wrong complexity");
+		return;
+	}
 	
-	search = E_SEARCH_BAR (e_search_bar_new (user_search_menu_items,
-						 user_search_option_items));
+	search = E_SEARCH_BAR (e_search_bar_new (user_search_menu_items, item));
 	gtk_table_attach (GTK_TABLE (table), GTK_WIDGET (search), 0, 1, 0, 1,
 			  GTK_FILL, GTK_FILL, 0, 0);
 	gtk_widget_show (GTK_WIDGET (search));
@@ -245,6 +286,8 @@ create_searchbar (void)
 			    GTK_SIGNAL_FUNC (user_query_changed), 0);
 	gtk_signal_connect (GTK_OBJECT (search), "menu_activated",
 			    GTK_SIGNAL_FUNC (user_menu_activated), 0);
+
+	gtk_object_set_data (GTK_OBJECT (tool->main_dialog), "SearchBar", (gpointer) search);
 }
 
 static void

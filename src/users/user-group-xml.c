@@ -27,6 +27,7 @@
 
 #include "user_group.h"
 #include "profile.h"
+#include "e-table.h"
 
 void generic_set_value (xmlNodePtr node, const gchar *name, const gchar *value);
 
@@ -217,16 +218,18 @@ void
 user_set_value_group (xmlNodePtr user_node, const gchar *value)
 {
 	xmlNodePtr group, group_db;
+	gchar *gid;
 
 	group_db = get_corresp_field (user_node);
 	group = get_node_by_data (group_db, "name", value);
-	if (group) {
-		gchar *gid = xst_xml_get_child_content (group, "gid");
-		generic_set_value_string (user_node, "gid", gid);
-		g_free (gid);
-	} else {
-		/* add new group */
+	if (!group) {
+		group = group_add_blank_xml (group_db);
+		generic_set_value_string (group, "name", value);
 	}
+	
+	gid = xst_xml_get_child_content (group, "gid");
+	generic_set_value_string (user_node, "gid", gid);
+	g_free (gid);
 }
 
 gboolean
@@ -288,6 +291,8 @@ user_add_blank_xml (xmlNodePtr user_db)
 	xst_xml_element_add (user, "reserved");
 	xst_xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
 
+	current_table_new_row (user, TABLE_USER);
+	
 	return user;
 }
 
@@ -306,5 +311,7 @@ group_add_blank_xml (xmlNodePtr group_db)
 	xst_xml_element_add_with_content (group, "gid", find_new_id (group_db));
 	xst_xml_element_add (group, "users");
 
+	current_table_new_row (group, TABLE_GROUP);
+	
 	return group;
 }
