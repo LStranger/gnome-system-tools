@@ -39,9 +39,9 @@ gboolean  callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, 
 
 void on_use_password_clicked (GtkWidget *use_password, gpointer gdata);
 
-void on_popup_add_activate (gpointer, guint, GtkWidget*);
-void on_popup_settings_activate (gpointer, guint, GtkWidget*);
-void on_popup_delete_activate (gpointer, guint, GtkWidget*);
+void on_popup_add_activate (GtkAction*, gpointer);
+void on_popup_settings_activate (GtkAction*, gpointer);
+void on_popup_delete_activate (GtkAction*, gpointer);
 gboolean on_boot_table_button_press (GtkTreeView*, GdkEventButton*, gpointer);
 
 void on_boot_add_clicked (GtkButton*, gpointer);

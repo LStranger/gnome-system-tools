@@ -273,13 +273,33 @@ on_boot_table_cursor_changed (GtkTreeSelection *selection, gpointer data)
 	callbacks_actions_set_sensitive (TRUE);	
 }
 
+static void
+do_popup_menu (GtkWidget *popup, GdkEventButton *event)
+{
+	gint button, event_time;
+
+	if (!popup)
+		return;
+
+	if (event) {
+		button     = event->button;
+		event_time = event->time;
+	} else {
+		button     = 0;
+		event_time = gtk_get_current_event_time ();
+	}
+
+	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, NULL, NULL,
+			button, event_time);
+}
+
 gboolean
 on_boot_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
 {
 	GtkTreePath *path;
-	GtkItemFactory *factory;
+	GtkWidget   *popup_menu;
 
-	factory = (GtkItemFactory *) gdata;
+	popup_menu = (GtkWidget*) gdata;
 
 	if (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS) {
 		on_boot_settings_clicked (NULL, NULL);
@@ -292,8 +312,7 @@ on_boot_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpoint
 			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
 			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
 
-			gtk_item_factory_popup (factory, event->x_root, event->y_root,
-						event->button, event->time);
+			do_popup_menu (popup_menu, event);
 		}
 		return TRUE;
 	}
@@ -317,19 +336,19 @@ on_use_password_clicked (GtkWidget *use_password, gpointer gdata)
 }
 
 void
-on_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_popup_add_activate (GtkAction *action, gpointer callback_data)
 {
 	on_boot_add_clicked (callback_data, NULL);
 }
 
 void
-on_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_popup_settings_activate (GtkAction *action, gpointer callback_data)
 {
 	on_boot_settings_clicked (callback_data, NULL);
 }
 
 void
-on_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_popup_delete_activate (GtkAction *action, gpointer callback_data)
 {
 	on_boot_delete_clicked (callback_data, NULL);
 }

@@ -46,41 +46,55 @@ BootTableConfig boot_table_config [] = {
 	{NULL}
 };
 
-GtkItemFactoryEntry popup_menu_items[] = {
-	{ N_("/_Add ..."), NULL, G_CALLBACK (on_popup_add_activate), POPUP_ADD, "<StockItem>", GTK_STOCK_ADD },
-	{ "/" , NULL, NULL, POPUP_SEPARATOR, "<Separator>", NULL},
-	{ N_("/_Properties"), NULL, G_CALLBACK (on_popup_settings_activate), POPUP_SETTINGS, "<StockItem>", GTK_STOCK_PROPERTIES },
-	{ N_("/_Delete"), NULL, G_CALLBACK (on_popup_delete_activate), POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+GtkActionEntry popup_menu_items [] = {
+	{ "Add",        GTK_STOCK_ADD,        N_("_Add"),        NULL, NULL, G_CALLBACK (on_popup_add_activate)      },
+	{ "Properties", GTK_STOCK_PROPERTIES, N_("_Properties"), NULL, NULL, G_CALLBACK (on_popup_settings_activate) },
+	{ "Delete",     GTK_STOCK_DELETE,     N_("_Delete"),     NULL, NULL, G_CALLBACK (on_popup_delete_activate)   },
 };
 
-static char *
-boot_item_factory_trans (const char *path, gpointer data)
+const gchar *ui_description =
+	"<ui>"
+	"  <popup name='MainMenu'>"
+	"    <menuitem action='Add'/>"
+	"    <separator/>"
+	"    <menuitem action='Properties'/>"
+	"    <menuitem action='Delete'/>"
+	"  </popup>"
+	"</ui>";
+
+static GtkWidget*
+boot_popup_menu_create (GtkTreeView *treeview)
 {
-	return _((gchar*)path);
-}
+	GtkUIManager   *ui_manager;
+        GtkActionGroup *action_group;
+        GtkWidget      *popup;
 
-static GtkItemFactory *
-boot_popup_item_factory_create ()
-{
-	GtkItemFactory *item_factory;
+        g_return_val_if_fail (treeview != NULL, NULL);
 
-	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
-	gtk_item_factory_set_translate_func (item_factory, boot_item_factory_trans,
-					     NULL, NULL);
-	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (popup_menu_items),
-				       popup_menu_items, (gpointer) boot_table);
+        action_group = gtk_action_group_new ("MenuActions");
+        gtk_action_group_add_actions (action_group,
+                                      popup_menu_items,
+                                      G_N_ELEMENTS (popup_menu_items), treeview);
 
-	return item_factory;
+        ui_manager = gtk_ui_manager_new ();
+        gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
+
+        if (!gtk_ui_manager_add_ui_from_string (ui_manager, ui_description, -1, NULL))
+                return NULL;
+
+        popup = gtk_ui_manager_get_widget (ui_manager, "/MainMenu");
+
+        return popup;
 }
 
 void
 table_create (void)
 {
-	GtkTreeModel *model;
-	GtkCellRenderer *renderer;
-	GtkTreeSelection *selection;
+	GtkTreeModel      *model;
+	GtkCellRenderer   *renderer;
+	GtkTreeSelection  *selection;
 	GtkTreeViewColumn *column;
-	GtkItemFactory *item_factory;
+	GtkWidget         *popup_menu;
 	gint i;
 
 	model = GTK_TREE_MODEL (gtk_tree_store_new (BOOT_LIST_COL_LAST, G_TYPE_STRING, G_TYPE_BOOLEAN,
@@ -123,11 +137,11 @@ table_create (void)
 			  G_CALLBACK (on_boot_table_cursor_changed),
 			  NULL);
 
-	item_factory = boot_popup_item_factory_create ();
+	popup_menu = boot_popup_menu_create (GTK_TREE_VIEW (boot_table));
 	
 	g_signal_connect (G_OBJECT (boot_table), "button_press_event",
 			  G_CALLBACK (on_boot_table_button_press),
-			  (gpointer) item_factory);
+			  (gpointer) popup_menu);
 }
 
 void
