@@ -85,7 +85,6 @@ static GstDialogSignal signals[] = {
 	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
 	{ "user_settings",             		"clicked",       	G_CALLBACK (on_user_settings_clicked) },
 	{ "user_delete",                	"clicked",       	G_CALLBACK (on_user_delete_clicked) },
-	{ "user_profiles",               	"clicked",       	G_CALLBACK (on_profile_settings_dialog_clicked) },
 	
 	/* Main dialog callbacks, groups tab */
 	{ "group_new",				"clicked",		G_CALLBACK (on_group_new_clicked) },
@@ -99,7 +98,6 @@ static const GstWidgetPolicy policies[] = {
 /*	{ "user_settings_advanced", GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },*/
 	{ "user_delete",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "user_settings",          GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "user_profiles",          GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "groups_table",           GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "group_new",              GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "group_delete",           GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
