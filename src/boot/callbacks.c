@@ -277,6 +277,11 @@ void
 on_main_dialog_update_complexity (GstDialog *main_dialog, gpointer data)
 {
 	GstDialogComplexity complexity = gst_dialog_get_complexity (tool->main_dialog);
+	GtkTreeView *boot_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "boot_table"));
+
+	gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (boot_table));
+
+	callbacks_actions_set_sensitive (FALSE);
 	
 	boot_table_update_state (complexity);
 	
