@@ -474,7 +474,11 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "workgroup_label"), active);
 	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "workgroup"), active);
 	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "wins_use"), active);
-	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "winsserver"), active);
+
+	if ((active) && (gtk_toggle_button_get_active (gst_dialog_get_widget (tool->main_dialog, "wins_use"))))
+		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "winsserver"), active);
+	else
+		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "winsserver"), FALSE);
 
 	if (smb_installed) {
 		gst_xml_element_set_boolean (root, "smbuse", active);
