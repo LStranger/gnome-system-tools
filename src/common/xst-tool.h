@@ -82,11 +82,12 @@ struct _XstTool {
 	GString *line;
 	GString *xml_document;
 	
-	guint input_id;
-	GSList *report_line_list;
-	gboolean report_dispatch_pending;
-	gboolean report_finished;
-	gboolean run_again;
+	guint     input_id;
+	gboolean  input_block;
+	GSList   *report_line_list;
+	gboolean  report_dispatch_pending;
+	gboolean  report_finished;
+	gboolean  run_again;
 
 	XstReportHookType  report_hook_type;
 	GSList            *report_hook_list;

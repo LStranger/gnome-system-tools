@@ -1,3 +1,15 @@
+2001-08-21  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (xst_tool_invoke_default_hook): set new XstTool
+	member input_block to FALSE when calling a hook, so the
+	gtk_input handler doesn't reenter when pushing gtk_mains in
+	the hook calls.
+	(report_progress_tick): Don't enter if input_block is set.
+	(report_progress): set input_block to FALSE after setting the
+	input handler.
+	(xst_tool_call_report_hook): This is the routine that sets
+	the input_block flag before and after calling the hook.
+
 2001-08-20  Bradford Hovinen  <hovinen@ximian.com>
 
 	* xst-tool.c (xst_tool_load): 

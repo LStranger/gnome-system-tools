@@ -390,10 +390,12 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 {
 	XstTool *tool;
 	XstReportLine *rline;
-	char buffer [512];
-	int n, i = 0;
+	gchar buffer [512];
+	gint n, i = 0;
 
 	tool = XST_TOOL (data);
+	if (tool->input_block)
+		return;
 
 	if (!tool->line)
 		tool->line = g_string_new ("");
@@ -403,7 +405,7 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		buffer [n] = 0;
 		
 		for (i = 0; (i < n); i++) {
-			char c = buffer [i];
+			gchar c = buffer [i];
 			
 			if (c == '\n') {
 				/* End of line */
@@ -427,7 +429,6 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 			} else {
 				/* Add character to end of current line */
 				g_string_append_c (tool->line, buffer [i]);
-				
 			}
 		}
 	}
@@ -494,9 +495,10 @@ report_progress (XstTool *tool, const gchar *label)
 			usleep (5000);
 		}
 	}
-	
+
 	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
 					     report_progress_tick, NULL, tool, NULL);
+	tool->input_block = FALSE;
 
 	gtk_main ();
 
@@ -1223,6 +1225,18 @@ xst_tool_set_default_hook (XstTool *tool, XstReportHookEntry *entry, XstReportMa
 	tool->report_hook_defaults[major] = xst_report_hook_new_from_entry (entry);
 }
 
+static gboolean
+xst_tool_call_report_hook (XstTool *tool, XstReportHook *hook, XstReportLine *rline)
+{
+	gboolean res;
+	
+	hook->invoked = TRUE;
+	tool->input_block = TRUE;
+	res = hook->func (tool, rline, hook->data);
+	tool->input_block = FALSE;
+	return res;
+}
+
 static void
 xst_tool_invoke_default_hook (XstTool *tool, XstReportLine *rline)
 {
@@ -1233,8 +1247,7 @@ xst_tool_invoke_default_hook (XstTool *tool, XstReportLine *rline)
 		if ((hook->allow_repeat || !hook->invoked) &&
 		    (hook->type == XST_REPORT_HOOK_LOADSAVE ||
 		     hook->type == tool->report_hook_type)) {
-			hook->invoked = TRUE;
-			hook->func (tool, rline, hook->data);
+			xst_tool_call_report_hook (tool, hook, rline);
 		}
 	}
 }
@@ -1256,8 +1269,8 @@ xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, XstReportLi
 
 		if (!strcmp (hook->key, key) && (hook->allow_repeat || !hook->invoked) &&
 		    (hook->type == XST_REPORT_HOOK_LOADSAVE || hook->type == type)) {
-			hook->invoked = invoked = TRUE;
-			if (hook->func (tool, rline, hook->data))
+			invoked = TRUE;
+			if (xst_tool_call_report_hook (tool, hook, rline))
 				return;
 		}
 	}
