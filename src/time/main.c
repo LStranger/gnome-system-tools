@@ -25,7 +25,6 @@ void on_apply_clicked(GtkButton *button, gpointer data);
 void on_cancel_clicked(GtkButton *button, gpointer data);
 void on_help_clicked(GtkButton *button, gpointer data);
 void connect_signals(void);
-void delete_event(GtkWidget *widget, gpointer gdata);
 
 
 TransStringSpin transfer_string_spin_table[] =
@@ -290,16 +289,8 @@ void connect_signals()
 }
 
 
-void delete_event(GtkWidget *widget, gpointer gdata)
-{
-  gtk_main_quit();
-}
-
-
 int main(int argc, char *argv[])
 {
-  GtkWidget *window;
-
 #ifdef ENABLE_NLS
 	bindtextdomain (PACKAGE, PACKAGE_LOCALE_DIR);
 	textdomain (PACKAGE);
@@ -310,14 +301,12 @@ int main(int argc, char *argv[])
   init_map_canvas();
   connect_signals();
 
-  window = tool_widget_get("time-admin");
-  gtk_signal_connect(GTK_OBJECT(window), "delete_event", delete_event, NULL);
-
   tool_set_frozen(TRUE);
   transfer_xml_to_gui(&trans_tree, xml_doc_get_root(tool_config_get_xml()));
   tool_set_frozen(FALSE);
 
-  gtk_widget_show(window);
+  gtk_widget_show(tool_get_top_window ());
   gtk_main();
+
   return 0;
 }
