@@ -127,10 +127,10 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>settings_conn_namelabel</name>
-	      <label>_Name</label>
+	      <label>_Name:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
-	      <xalign>1</xalign>
+	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
@@ -154,13 +154,14 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>settings_conn_hostlabel</name>
-	      <label>_Hostname</label>
+	      <label>_Hostname:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
-	      <xalign>1</xalign>
+	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <default_focus_target>settings_conn_host</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -180,13 +181,14 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>settings_conn_queuelabel</name>
-	      <label>_Remote Name</label>
+	      <label>_Remote Name:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
-	      <xalign>1</xalign>
+	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <default_focus_target>settings_conn_queue</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -207,6 +209,7 @@
 	      <class>GtkEntry</class>
 	      <name>settings_conn_name</name>
 	      <width>90</width>
+	      <tooltip>Name of the printer.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -232,6 +235,7 @@
 	      <class>GtkEntry</class>
 	      <name>settings_conn_host</name>
 	      <width>90</width>
+	      <tooltip>Name of the server the printer is connected to.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -257,6 +261,7 @@
 	      <class>GtkEntry</class>
 	      <name>settings_conn_queue</name>
 	      <width>90</width>
+	      <tooltip>Name the server uses for the printer.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>False</text_visible>
@@ -281,13 +286,14 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>settings_conn_workglabel</name>
-	      <label>_Workgroup</label>
+	      <label>_Workgroup:</label>
 	      <justify>GTK_JUSTIFY_RIGHT</justify>
 	      <wrap>False</wrap>
-	      <xalign>1</xalign>
+	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
+	      <default_focus_target>settings_conn_workgroup</default_focus_target>
 	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
@@ -308,6 +314,7 @@
 	      <class>GtkEntry</class>
 	      <name>settings_conn_workgroup</name>
 	      <width>90</width>
+	      <tooltip>SMB workgroup the server is in.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -334,10 +341,10 @@
 	      <name>settings_conn_userlabel</name>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
-	      <label>_Username</label>
+	      <label>_Username:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
-	      <xalign>1</xalign>
+	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
@@ -364,6 +371,7 @@
 	      <width>90</width>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
+	      <tooltip>Username used to connect to the server.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -390,10 +398,10 @@
 	      <name>settings_conn_passlabel</name>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
-	      <label>_Password</label>
+	      <label>_Password:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
-	      <xalign>1</xalign>
+	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
@@ -419,10 +427,10 @@
 	      <name>settings_conn_portlabel</name>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
-	      <label>P_ort Number</label>
+	      <label>P_ort Number:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
-	      <xalign>1</xalign>
+	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
@@ -449,6 +457,7 @@
 	      <width>90</width>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
+	      <tooltip>The password used to connect to the server.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -476,6 +485,7 @@
 	      <width>90</width>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
+	      <tooltip>Port number the server is listening to.</tooltip>
 	      <can_focus>True</can_focus>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
@@ -502,10 +512,10 @@
 	      <name>settings_conn_devicelabel</name>
 	      <visible>False</visible>
 	      <sensitive>False</sensitive>
-	      <label>_Device Name</label>
+	      <label>_Device Name:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
-	      <xalign>1</xalign>
+	      <xalign>0</xalign>
 	      <yalign>0.5</yalign>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
@@ -530,6 +540,7 @@
 	      <class>GtkOptionMenu</class>
 	      <name>settings_conn_device</name>
 	      <width>90</width>
+	      <tooltip>Port the printer is connected to.</tooltip>
 	      <can_focus>True</can_focus>
 	      <items>/dev/lp0 (LPT1)
 /dev/lp1 (LPT2)
@@ -593,13 +604,14 @@
 	      <widget>
 		<class>GtkLabel</class>
 		<name>settings_driver_resolutionlabel</name>
-		<label>R_esolution</label>
+		<label>R_esolution:</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
-		<xalign>1</xalign>
+		<xalign>0</xalign>
 		<yalign>0.5</yalign>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
+		<default_focus_target>settings_driver_resolution</default_focus_target>
 		<child>
 		  <left_attach>0</left_attach>
 		  <right_attach>1</right_attach>
@@ -619,13 +631,14 @@
 	      <widget>
 		<class>GtkLabel</class>
 		<name>settings_driver_paperlabel</name>
-		<label>P_aper Size</label>
+		<label>P_aper Size:</label>
 		<justify>GTK_JUSTIFY_CENTER</justify>
 		<wrap>False</wrap>
-		<xalign>1</xalign>
+		<xalign>0</xalign>
 		<yalign>0.5</yalign>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
+		<default_focus_target>settings_driver_papersize</default_focus_target>
 		<child>
 		  <left_attach>0</left_attach>
 		  <right_attach>1</right_attach>
@@ -645,13 +658,14 @@
 	      <widget>
 		<class>GtkLabel</class>
 		<name>settings_options_colorlabel</name>
-		<label>_Color Depth</label>
+		<label>_Color Depth:</label>
 		<justify>GTK_JUSTIFY_RIGHT</justify>
 		<wrap>False</wrap>
-		<xalign>1</xalign>
+		<xalign>0</xalign>
 		<yalign>0.5</yalign>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
+		<default_focus_target>settings_driver_color</default_focus_target>
 		<child>
 		  <left_attach>0</left_attach>
 		  <right_attach>1</right_attach>
@@ -699,6 +713,7 @@
 		    <class>GtkList</class>
 		    <name>settings_driver_driverlist</name>
 		    <height>100</height>
+		    <tooltip>What driver to use.</tooltip>
 		    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 		  </widget>
 		</widget>
@@ -707,6 +722,7 @@
 	      <widget>
 		<class>GtkOptionMenu</class>
 		<name>settings_driver_resolution</name>
+		<tooltip>Print resolution.</tooltip>
 		<can_focus>True</can_focus>
 		<items>300x300
 400x400
@@ -734,6 +750,7 @@
 	      <widget>
 		<class>GtkOptionMenu</class>
 		<name>settings_driver_papersize</name>
+		<tooltip>Size of the paper in the printer.</tooltip>
 		<can_focus>True</can_focus>
 		<items>Letter
 Legal
@@ -760,6 +777,7 @@ A3
 	      <widget>
 		<class>GtkOptionMenu</class>
 		<name>settings_driver_color</name>
+		<tooltip>Number of colors to print in.</tooltip>
 		<can_focus>True</can_focus>
 		<items>16 colors
 256 colors
@@ -805,14 +823,15 @@ True Color
 	  <rows>3</rows>
 	  <columns>2</columns>
 	  <homogeneous>True</homogeneous>
-	  <row_spacing>2</row_spacing>
-	  <column_spacing>16</column_spacing>
+	  <row_spacing>0</row_spacing>
+	  <column_spacing>26</column_spacing>
 
 	  <widget>
 	    <class>GtkCheckButton</class>
 	    <name>settings_option_eof</name>
+	    <tooltip>Send an EOF after the print job to help eject the last page.</tooltip>
 	    <can_focus>True</can_focus>
-	    <label>_Explicitly Eject Last Page</label>
+	    <label>E_xplicitly Eject Last Page</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <child>
@@ -834,6 +853,7 @@ True Color
 	  <widget>
 	    <class>GtkCheckButton</class>
 	    <name>settings_option_lf</name>
+	    <tooltip>Convert PC linefeeds to Un*x format. Helps avoid &quot;stairstepping&quot; text.</tooltip>
 	    <can_focus>True</can_focus>
 	    <label>Convert _Linefeeds</label>
 	    <active>False</active>
@@ -857,6 +877,7 @@ True Color
 	  <widget>
 	    <class>GtkCheckButton</class>
 	    <name>settings_option_fasttext</name>
+	    <tooltip>Send text documents raw to the printer.</tooltip>
 	    <can_focus>True</can_focus>
 	    <label>_Fast Text Printing</label>
 	    <active>False</active>
@@ -917,8 +938,9 @@ True Color
 	    <widget>
 	      <class>GtkRadioButton</class>
 	      <name>settings_option_mpage1</name>
+	      <tooltip>Print one page per sheet.</tooltip>
 	      <can_focus>True</can_focus>
-	      <label>1	</label>
+	      <label>_1</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <group>pages_per_sheet</group>
@@ -932,8 +954,9 @@ True Color
 	    <widget>
 	      <class>GtkRadioButton</class>
 	      <name>settings_option_mpage2</name>
+	      <tooltip>Scale pages down and print two per sheet.</tooltip>
 	      <can_focus>True</can_focus>
-	      <label>2</label>
+	      <label>_2</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <group>pages_per_sheet</group>
@@ -947,8 +970,9 @@ True Color
 	    <widget>
 	      <class>GtkRadioButton</class>
 	      <name>settings_option_mpage4</name>
+	      <tooltip>Scale pages down and print four per sheet.</tooltip>
 	      <can_focus>True</can_focus>
-	      <label>4</label>
+	      <label>_4</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <group>pages_per_sheet</group>
@@ -962,8 +986,9 @@ True Color
 	    <widget>
 	      <class>GtkRadioButton</class>
 	      <name>settings_option_mpage8</name>
+	      <tooltip>Scale pages down and print eight per sheet.</tooltip>
 	      <can_focus>True</can_focus>
-	      <label>8</label>
+	      <label>_8</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <group>pages_per_sheet</group>
@@ -1335,6 +1360,7 @@ True Color
 	<widget>
 	  <class>GtkRadioButton</class>
 	  <name>new_local</name>
+	  <tooltip>Printer connected to a port on your machine.</tooltip>
 	  <can_focus>True</can_focus>
 	  <label>_Local Printer</label>
 	  <active>False</active>
@@ -1350,6 +1376,7 @@ True Color
 	<widget>
 	  <class>GtkRadioButton</class>
 	  <name>new_smb</name>
+	  <tooltip>Printer shared on a Windows (SMB) network.</tooltip>
 	  <can_focus>True</can_focus>
 	  <label>Remote _Windows (SMB) printer</label>
 	  <active>True</active>
@@ -1366,8 +1393,9 @@ True Color
 	  <class>GtkRadioButton</class>
 	  <name>new_lpd</name>
 	  <sensitive>False</sensitive>
+	  <tooltip>Printer shared using the Unix (lpd) print protocol.</tooltip>
 	  <can_focus>True</can_focus>
-	  <label>Network UNIX (_lpd) Printer</label>
+	  <label>Remote UNIX (_lpd) Printer</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
 	  <group>Type</group>
@@ -1382,6 +1410,7 @@ True Color
 	  <class>GtkRadioButton</class>
 	  <name>new_ncp</name>
 	  <sensitive>False</sensitive>
+	  <tooltip>Printer shared using the Novell Netware (NCP) protocol.</tooltip>
 	  <can_focus>True</can_focus>
 	  <label>Novell _Netware (NCP) Printer</label>
 	  <active>False</active>
@@ -1398,6 +1427,7 @@ True Color
 	  <class>GtkRadioButton</class>
 	  <name>new_direct</name>
 	  <sensitive>False</sensitive>
+	  <tooltip>Printer listening directly for network connections.</tooltip>
 	  <can_focus>True</can_focus>
 	  <label>_Direct Network Printer</label>
 	  <active>False</active>
