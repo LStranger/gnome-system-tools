@@ -5,6 +5,7 @@ nameresolution.glade \
 networking.glade \
 shares.glade \
 time.glade \
-users.glade
+users.glade \
+memory.glade
 
 EXTRA_DIST = $(interfaces_DATA)
