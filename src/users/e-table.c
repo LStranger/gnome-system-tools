@@ -909,7 +909,11 @@ tables_set_state (gboolean state)
 	ETreeModel *model;
 	ETreePath *path;
 	gint row;
+	guint saved_table;
 
+	/* Save it, cause table_set_cursor_node changes it. */
+	saved_table = active_table;
+	
 	u_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	g_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
 
@@ -949,6 +953,9 @@ tables_set_state (gboolean state)
 
 	user_actions_set_sensitive (table_set_cursor_node (u_table, u_node));
 	group_actions_set_sensitive (table_set_cursor_node (g_table, g_node));
+
+	/* Restore active_table */
+	set_active_table (saved_table);
 }
 
 static ETable *
