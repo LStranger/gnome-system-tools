@@ -166,6 +166,7 @@
 	    <handler>visibility_toggled</handler>
 	    <last_modification_time>Thu, 25 Jan 2001 23:22:31 GMT</last_modification_time>
 	  </signal>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <active>False</active>
 	  <child>
 	    <padding>0</padding>
@@ -318,6 +319,7 @@
 	    <handler>tool_user_help</handler>
 	    <last_modification_time>Fri, 29 Dec 2000 05:58:47 GMT</last_modification_time>
 	  </signal>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -339,6 +341,7 @@
 	    <last_modification_time>Fri, 29 Dec 2000 05:58:57 GMT</last_modification_time>
 	  </signal>
 	  <label>Complexity</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -373,6 +376,7 @@
 	    <last_modification_time>Fri, 29 Dec 2000 04:14:16 GMT</last_modification_time>
 	  </signal>
 	  <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -390,6 +394,7 @@
 	    <last_modification_time>Fri, 29 Dec 2000 03:04:37 GMT</last_modification_time>
 	  </signal>
 	  <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -411,7 +416,7 @@
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
   <allow_shrink>False</allow_shrink>
-  <allow_grow>False</allow_grow>
+  <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
   <auto_close>True</auto_close>
   <hide_on_close>False</hide_on_close>
@@ -504,16 +509,11 @@
 	<widget>
 	  <class>GtkLabel</class>
 	  <name>label55</name>
-	  <label>The platform you are running is not
-supported by this tool. If you know for sure
-that it works like one of the platforms listed
-below, you can select that and continue.
+	  <label>The platform you are running is not supported by this tool. If you know for sure that it works like one of the platforms listed below, you can select that and continue.
 
-Note, however, that this might damage the
-system configuration or downright cripple
-your computer.</label>
-	  <justify>GTK_JUSTIFY_LEFT</justify>
-	  <wrap>False</wrap>
+Note, however, that this might damage the system configuration or downright cripple your computer.</label>
+	  <justify>GTK_JUSTIFY_FILL</justify>
+	  <wrap>True</wrap>
 	  <xalign>1</xalign>
 	  <yalign>0.5</yalign>
 	  <xpad>0</xpad>

@@ -82,6 +82,7 @@ gchar *s = N_("Modem port:");
 gchar *s = N_("DNS Servers");
 gchar *s = N_("Primary:");
 gchar *s = N_("Secondary:");
+gchar *s = N_("Set DNS servers manually");
 gchar *s = N_("Start PPP as soon as modem connects");
 gchar *s = N_("Set as default route");
 gchar *s = N_("Pppd options:");
