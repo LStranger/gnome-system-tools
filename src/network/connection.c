@@ -1207,6 +1207,7 @@ connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 
 	/* PPP advanced */
 	cxn->persist = connection_xml_get_boolean (node, "persist");
+	cxn->noauth = connection_xml_get_boolean (node, "noauth");
 	cxn->serial_port = xst_xml_get_child_content (node, "serial_port");
 	cxn->set_default_gw = connection_xml_get_boolean (node, "set_default_gw");
 	cxn->dns1 = xst_xml_get_child_content (node, "dns1");
@@ -1675,6 +1676,7 @@ on_connection_ok_clicked (GtkWidget *w, XstConnection *cxn)
 		if (connection_config_save (cxn))
 			gtk_widget_destroy (cxn->window);
 		cxn->creating = FALSE;
+		xst_dialog_modify (tool->main_dialog);
 	} else
 		gtk_widget_destroy (cxn->window);
 }
@@ -2027,6 +2029,7 @@ connection_configure (XstConnection *cxn)
 
 	hookup_callbacks (cxn);
 
+	cxn->noauth = TRUE;
 	cxn->window = W("connection_config_dialog");
 	cxn->tmp_ip_config = cxn->ip_config;
 
@@ -2114,6 +2117,7 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 		
 		/* PPP advanced */
 		connection_xml_save_boolean_to_node (node, "persist", cxn->persist);
+		connection_xml_save_boolean_to_node (node, "noauth", cxn->noauth);
 		connection_xml_save_str_to_node (node, "serial_port", cxn->serial_port);
 		connection_xml_save_boolean_to_node (node, "set_default_gw", cxn->set_default_gw);
 		connection_xml_save_str_to_node (node, "dns1", cxn->dns1);

@@ -106,6 +106,7 @@ typedef struct {
 	gchar *login;
 	gchar *password;
 	gboolean persist;
+	gboolean noauth;
 	gchar *serial_port;
 	gchar *wvsection;
 	gboolean stupid;
