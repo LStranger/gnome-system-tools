@@ -586,17 +586,6 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gtk_box_pack_start (GTK_BOX (w), dialog->child, TRUE, TRUE, 0);
 
 	w = glade_xml_get_widget (xml, "help");
-#warning FIXME
-#if 0
-	if (gtk_stock_lookup (GTK_STOCK_HELP, &item)) {
-		GtkWidget *img;		
-
-		img = gtk_image_new_from_stock (GTK_STOCK_HELP, GTK_ICON_SIZE_DIALOG);
-		gtk_container_add (GTK_CONTAINER (w), img);
-		gtk_widget_show (img);
-	}
-#endif
-
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (help_cb), dialog);
 	/* FIXME: help button hidden until the help files are ready. */
 	gtk_widget_hide (w);
