@@ -414,25 +414,9 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkOptionMenu" id="connection_def_gw_omenu">
+		    <widget class="GtkComboBox" id="connection_def_gw_menu">
 		      <property name="visible">True</property>
-		      <property name="tooltip" translatable="yes">Use &quot;Auto&quot; if unsure.</property>
-		      <property name="can_focus">True</property>
-		      <property name="history">0</property>
-
-		      <child internal-child="menu">
-			<widget class="GtkMenu" id="convertwidget3">
-			  <property name="visible">True</property>
-
-			  <child>
-			    <widget class="GtkMenuItem" id="convertwidget4">
-			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Auto</property>
-			      <property name="use_underline">True</property>
-			    </widget>
-			  </child>
-			</widget>
-		      </child>
+		      <property name="items" translatable="yes"></property>
 		    </widget>
 		    <packing>
 		      <property name="padding">4</property>

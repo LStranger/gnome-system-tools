@@ -471,6 +471,24 @@ on_connection_deactivate_button_clicked (GtkWidget *widget, gpointer data)
 }
 
 void
+on_connection_default_gw_activate (GtkWidget *widget, gpointer data)
+{
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gchar        *gw;
+
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter)) {
+		gtk_tree_model_get (model, &iter, 0, &gw, -1);
+		g_object_steal_data (G_OBJECT (tool), "gatewaydev");
+
+		g_object_set_data (G_OBJECT (tool), "gatewaydev", data);
+		g_free (gw);
+	}
+}
+
+void
 on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
 	gboolean active, wins_active, configured, smb_installed;

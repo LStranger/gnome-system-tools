@@ -91,7 +91,7 @@ const gchar *connection_ui_description =
 
 typedef struct {
 	GtkWidget *list;
-	GtkWidget *def_gw_omenu;
+	GtkWidget *def_gw_menu;
 } GstConnectionUI;
 
 #define CONNECTION_UI_STRING "connection_ui"
@@ -576,7 +576,7 @@ connection_iter (GstConnection *cxn, GtkTreeIter *iter)
 	while (valid) {
 		gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &c, -1);
 
-		/* we've got two possibilities here, cxn->may be NULL, in such case
+		/* we've got two possibilities here, cxn->file may be NULL, in such case
 		 * we need to compare with the interface */
 		if (((cxn->file != NULL) && (strcmp (cxn->file, c->file) == 0)) ||
 		    ((cxn->file == NULL) && (strcmp (cxn->dev, c->dev) == 0)))
@@ -998,7 +998,7 @@ connection_init_gui (GstTool *tool)
 
 	ui->list = connection_list_new (tool);
 
-	ui->def_gw_omenu = gst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	ui->def_gw_menu = gst_dialog_get_widget (tool->main_dialog, "connection_def_gw_menu");
 
 	g_object_set_data (G_OBJECT (tool), CONNECTION_UI_STRING, (gpointer) ui);
 
@@ -1006,37 +1006,42 @@ connection_init_gui (GstTool *tool)
 		gst_iface_desc[i].pixbuf = load_pixbuf (gst_iface_desc[i].icon);
 }
 
-/* NULL if false, else GtkWidget in data in found node */
-static GtkWidget *
-connection_default_gw_find_item (GtkWidget *omenu, gchar *dev)
+/* returns -1 if the device is not found */
+static gint
+connection_default_gw_find_item (GtkWidget *menu, gchar *dev)
 {
-	GList *l;
-	gchar *value;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gboolean      valid;
+	gint          nitem;
+	gchar        *value;
 
-	for (l = g_object_get_data (G_OBJECT (omenu), "list");
-	     l; l = l->next) {
-		value = g_object_get_data (G_OBJECT (l->data), "value");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (menu));
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+	nitem = 0;
 
-		if (!strcmp (dev, value))
-			return l->data;
+	while (valid) {
+		gtk_tree_model_get (model, &iter, 0, &value, -1);
+
+		if (strcmp (dev, value) == 0) {
+			g_free (value);
+			return nitem;
+		}
+
+		nitem++;
+		g_free (value);
+		valid = gtk_tree_model_iter_next (model, &iter);
 	}
 
-	return NULL;
-}
-
-static void
-connection_default_gw_activate (GtkMenuItem *item, gpointer data)
-{
-	g_object_set_data (G_OBJECT (tool), "gatewaydev", data);
+	return -1;
 }
 
 void
 connection_default_gw_add (GstConnection *cxn)
 {
-	GtkWidget *omenu, *menu, *item;
-	GList *l;
-	gchar *cpy, *dev;
 	GstConnectionUI *ui;
+	GtkWidget       *menu;
+	gchar           *dev;
 
 	dev = cxn->dev;
 	
@@ -1046,87 +1051,54 @@ connection_default_gw_add (GstConnection *cxn)
 	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 
 	g_return_if_fail (ui != NULL);
-	
-	omenu = ui->def_gw_omenu;
-	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+
+	menu = ui->def_gw_menu;
 
 	if (!cxn->gateway || !*cxn->gateway)
 		return;
 
-	if (connection_default_gw_find_item (omenu, dev))
+	if (connection_default_gw_find_item (menu, dev) != -1)
 		return;
-	
-	cpy = g_strdup (dev);
-	item = gtk_menu_item_new_with_label (dev);
-	g_signal_connect (G_OBJECT (item), "activate",
-			    G_CALLBACK (connection_default_gw_activate),
-			    (gpointer) cpy);
-	g_object_set_data (G_OBJECT (item), "value", cpy);
-	gtk_widget_show (item);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-	
-	l = g_object_get_data (G_OBJECT (omenu), "list");
-	l = g_list_append (l, item);
-	g_object_set_data (G_OBJECT (omenu), "list", l);
+
+	gtk_combo_box_append_text (GTK_COMBO_BOX (menu), dev);
 }
 
 void
 connection_default_gw_remove (gchar *dev)
 {
-	GtkWidget *omenu, *menu, *item;
-	GList *l;
-	gchar *cpy;
 	GstConnectionUI *ui;
+	GtkWidget       *menu;
+	gint             nitem;
 
 	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 
-	omenu = ui->def_gw_omenu;
-	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+	menu = ui->def_gw_menu;
 
-	item = connection_default_gw_find_item (omenu, dev);
+	nitem = connection_default_gw_find_item (menu, dev);
 
-	if (!item)
+	if (nitem == -1)
 		return;
-	
-	l = g_object_get_data (G_OBJECT (omenu), "list");
-	l = g_list_remove (l, item);
-	g_object_set_data (G_OBJECT (omenu), "list", l);
 
-	cpy = g_object_get_data (G_OBJECT (item), "value");
-	g_free (cpy);
-	
-	gtk_widget_destroy (item);
+	gtk_combo_box_remove_text (GTK_COMBO_BOX (menu), nitem);
 }
 
 void
 connection_default_gw_init (GstTool *tool, gchar *dev)
 {
-	GtkWidget *omenu, *menu, *item;
 	GstConnectionUI *ui;
+	GtkWidget       *menu;
+	gint             nitem;
 
 	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 
 	g_return_if_fail (ui != NULL);
 
-	omenu = ui->def_gw_omenu;
-	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+	menu = ui->def_gw_menu;
 
-	item = gtk_menu_get_active (GTK_MENU (menu));
-	g_signal_connect (G_OBJECT (item), "activate",
-			    G_CALLBACK (connection_default_gw_activate),
-			    (gpointer) NULL);
-	/* Strange bug caused the "Auto" item to be unsensitive the first time. */
-	gtk_menu_shell_select_item (GTK_MENU_SHELL (menu), item);
-	
-	item = connection_default_gw_find_item (omenu, dev);
-	if (item) {
-		GList *l;
+	nitem = connection_default_gw_find_item (menu, dev);
 
-		l = g_object_get_data (G_OBJECT (omenu), "list");
-		
-		gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), g_list_index (l, item) + 1);
-		gtk_menu_shell_select_item (GTK_MENU_SHELL (menu), item);
-	}
+	if (nitem != -1)
+		gtk_combo_box_set_active (GTK_COMBO_BOX (menu), nitem);
 }
 
 GstConnection *

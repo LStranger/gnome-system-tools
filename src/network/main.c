@@ -50,7 +50,8 @@ GstDialogSignal signals[] = {
 	{ "connection_configure",    "clicked",         G_CALLBACK (on_connection_configure_clicked) },
 	{ "connection_activate",     "clicked",         G_CALLBACK (on_connection_activate_button_clicked) },
 	{ "connection_deactivate",   "clicked",         G_CALLBACK (on_connection_deactivate_button_clicked) },
-	{ "connection_def_gw_omenu", "changed",         G_CALLBACK (gst_dialog_modify_cb) },
+	{ "connection_def_gw_menu",  "changed",         G_CALLBACK (on_connection_default_gw_activate) },
+	{ "connection_def_gw_menu",  "changed",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "domain",                  "changed",         G_CALLBACK (gst_dialog_modify_cb) },
 /*	{ "ip",                      "changed",         G_CALLBACK (gst_dialog_modify_cb) },*/
 	{ "ip",                      "changed",         G_CALLBACK (on_hosts_ip_changed) },
