@@ -1056,6 +1056,9 @@ connection_default_gw_add (GstConnection *cxn)
 		return;
 
 	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+
+	g_return_if_fail (ui != NULL);
+	
 	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 

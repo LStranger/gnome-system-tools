@@ -233,6 +233,7 @@ main (int argc, char *argv[])
 
 		connect_signals (tool->main_dialog, signals, signals_after);
 		init_editable_filters (tool->main_dialog);
+		on_network_admin_show (NULL, tool);
 
 		gst_tool_main_with_hidden_dialog (tool, TRUE);
 
