@@ -6,6 +6,7 @@
 
 gchar *s = N_("Group Settings");
 gchar *s = N_("_Group name:");
+gchar *s = N_("G_id:");
 gchar *s = N_("Members");
 gchar *s = N_("All _users");
 gchar *s = N_("Group _members");
