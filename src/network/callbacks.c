@@ -466,8 +466,8 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	d = gtk_dialog_new_with_buttons (_("New Connection Type"),
 					 GTK_WINDOW (tool->main_dialog),
 					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
 					 GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+					 GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
 					 NULL);
 
 	gtk_widget_reparent (table, GTK_DIALOG (d)->vbox);
