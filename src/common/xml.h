@@ -5,8 +5,6 @@
 
 xmlNodePtr xml_doc_get_root(xmlDocPtr doc);
 
-xmlDocPtr xml_doc_read_from_backend(char *backend_name);
-void xml_doc_write_to_backend(xmlDocPtr doc, char *backend_name);
 void xml_doc_dump(xmlDocPtr doc);
 
 xmlNodePtr xml_element_find_first(xmlNodePtr parent, char *name);
