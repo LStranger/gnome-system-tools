@@ -18,7 +18,6 @@ GtkWidget *xst_ui_option_menu_add_string          (GtkOptionMenu *option_menu, c
 void       xst_ui_option_menu_remove_string       (GtkOptionMenu *option_menu, const gchar *string);
 void       xst_ui_option_menu_clear               (GtkOptionMenu *option_menu);
 
-gchar     *xst_ui_load_etspec                     (const gchar *common_path, const gchar *name);
 void       xst_ui_entry_set_text                  (void *entry, const gchar *str);
 gboolean   xst_ui_logout_dialog                   (const gchar *message);
 
