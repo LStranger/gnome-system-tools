@@ -42,35 +42,22 @@
 #include "callbacks.h"
 #include "boot-settings.h"
 
-XstTool *tool;
-
-static XstDialogSignal signals[] = {
-	{ "boot_delete",   "clicked", on_boot_delete_clicked },
-	{ "boot_settings", "clicked", on_boot_settings_clicked },
-	{ "boot_add",      "clicked", on_boot_add_clicked },
-	{ "boot_default",  "clicked", on_boot_default_clicked },
-	{ "boot_prompt",   "toggled", on_boot_prompt_toggled },
-	{ "boot_timeout",  "changed", xst_dialog_modify_cb },
-	{ NULL }
-};
-
 static void
-update_complexity (void)
+connect_signals (XstTool *tool)
 {
-	XstDialogComplexity complexity;
+	XstDialogSignal signals[] = {
+		{ "boot_delete",   "clicked", on_boot_delete_clicked },
+		{ "boot_settings", "clicked", on_boot_settings_clicked },
+		{ "boot_add",      "clicked", on_boot_add_clicked },
+		{ "boot_default",  "clicked", on_boot_default_clicked },
+		{ "boot_prompt",   "toggled", on_boot_prompt_toggled },
+		{ "boot_timeout",  "changed", xst_dialog_modify_cb },
+		{ NULL }
+	};
 
-	complexity = tool->main_dialog->complexity;
-
-	boot_table_update_state ();
-	callbacks_buttons_set_visibility ();
-}
-
-static void
-connect_signals ()
-{
 	gtk_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change",
-					GTK_SIGNAL_FUNC (update_complexity),
-					NULL);
+			    GTK_SIGNAL_FUNC (on_main_dialog_update_complexity),
+			    tool);
 
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 }
@@ -78,6 +65,8 @@ connect_signals ()
 int
 main (int argc, char *argv[])
 {
+	XstTool *tool;
+	
 	XstReportHookEntry report_hooks[] = {
 		{ "boot_conf_read_failed", callbacks_conf_read_failed_hook,
 		  XST_REPORT_HOOK_LOAD, FALSE, NULL },
@@ -91,10 +80,10 @@ main (int argc, char *argv[])
 	xst_tool_set_xml_funcs    (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	xst_tool_add_report_hooks (tool, report_hooks);
 	
-	connect_signals ();
+	connect_signals (tool);
 
 	xst_dialog_enable_complexity (tool->main_dialog);
-	update_complexity ();
+	on_main_dialog_update_complexity (tool->main_dialog, tool);
 
 	xst_tool_main (tool, FALSE);
 	

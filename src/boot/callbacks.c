@@ -45,6 +45,44 @@ reply_cb (gint val, gpointer data)
 	gtk_main_quit ();
 }
 
+/* Helpers */
+
+void
+callbacks_actions_set_sensitive (gboolean state)
+{
+	XstDialogComplexity complexity;
+
+	complexity = tool->main_dialog->complexity;
+
+	if (xst_tool_get_access (tool) && complexity == XST_DIALOG_ADVANCED) {
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_add"), TRUE);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_delete"),
+					  state);
+	}
+	
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
+    	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_default"),
+						 state);
+}
+
+static void
+callbacks_buttons_set_visibility (XstDialog *main_dialog)
+{
+	switch (xst_dialog_get_complexity (main_dialog)) {
+	case XST_DIALOG_ADVANCED:
+		gtk_widget_show (xst_dialog_get_widget (main_dialog, "boot_add"));
+		gtk_widget_show (xst_dialog_get_widget (main_dialog, "boot_delete"));
+		break;
+	case XST_DIALOG_BASIC:
+		gtk_widget_hide (xst_dialog_get_widget (main_dialog, "boot_add"));
+		gtk_widget_hide (xst_dialog_get_widget (main_dialog, "boot_delete"));
+		break;
+	default:
+		g_warning ("Unknown complexity.");
+		break;
+	}
+}
+
 /* Main window callbacks */
 
 void
@@ -112,43 +150,21 @@ on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer data)
 	xst_dialog_modify (tool->main_dialog);
 }
 
-/* Helpers */
-
 void
-callbacks_actions_set_sensitive (gboolean state)
+on_main_dialog_update_complexity (GtkWidget *main_dialog, gpointer data)
 {
+	XstTool *tool;
 	XstDialogComplexity complexity;
 
-	complexity = tool->main_dialog->complexity;
+	tool = XST_TOOL (data);
 
-	if (xst_tool_get_access (tool) && complexity == XST_DIALOG_ADVANCED) {
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_add"), TRUE);
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_delete"),
-					  state);
-	}
-	
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
-    	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_default"),
-						 state);
+	complexity = XST_DIALOG (main_dialog)->complexity;
+
+	boot_table_update_state ();
+	callbacks_buttons_set_visibility (XST_DIALOG (main_dialog));
 }
 
-void
-callbacks_buttons_set_visibility (void)
-{
-	switch (xst_dialog_get_complexity (tool->main_dialog)) {
-	case XST_DIALOG_ADVANCED:
-		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
-		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
-		break;
-	case XST_DIALOG_BASIC:
-		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
-		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
-		break;
-	default:
-		g_warning ("Unknown complexity.");
-		break;
-	}
-}
+/* Hooks */
 
 gboolean
 callbacks_conf_read_failed_hook (XstTool *tool, XstReportLine *rline, gpointer data)
@@ -162,6 +178,9 @@ callbacks_conf_read_failed_hook (XstTool *tool, XstReportLine *rline, gpointer d
 	dialog = gnome_error_dialog_parented (txt, GTK_WINDOW (tool->main_dialog));
 	gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
 
+	g_free (txt);
+
 	/* Handled, don't go looking for more hooks to run */
 	return TRUE;
 }
+
