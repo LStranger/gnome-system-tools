@@ -20,6 +20,7 @@
  * Authors: Tambet Ingo <tambeti@sa.ee> and Arturo Espinosa <arturo@helixcode.com>.
  */
 
+#include <gnome-xml/tree.h>
 
 #define USER 1
 #define GROUP 2
@@ -29,3 +30,19 @@ void e_table_del (gchar del);
 void e_table_changed (gchar change, gboolean new);
 void *e_table_get (gchar get);
 
+gchar *e_table_get_user (gchar *node_name);
+void e_table_del_user (void);
+
+gchar *e_table_get_group (gchar *node_name);
+void e_table_del_group (void);
+
+xmlNodePtr e_table_get_table_data (gchar get);
+GList *e_table_get_group_users (void);
+
+void e_table_change_user (gchar *field, gchar *val);
+void e_table_change_group (gchar *field, gchar *val);
+
+gchar *e_table_get_group_by_data (gchar *field, gchar *fdata, gchar *data);
+
+void e_table_del_group_users (void);
+void e_table_add_group_users (gchar *name);

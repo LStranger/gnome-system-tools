@@ -26,7 +26,7 @@
 #include <glib.h>
 #include "user_group.h"
 
-extern gchar *passwd_set (user *u, gchar *new_passwd, gchar *confirm, gboolean check_quality);
+extern gchar *passwd_set (gchar *new_passwd, gchar *confirm, gboolean check_quality);
 extern gchar *passwd_get_random (void);
 
 #endif /* PASSWD_H */

@@ -99,17 +99,19 @@ extern gboolean user_group_is_system (user_group *ug);
 extern user *user_new (gchar *name);
 extern void user_free (user *u);
 extern gboolean user_add (void);
-extern gboolean user_update (user *u);
+extern gboolean user_update (void);
 extern void user_fill_settings_group (GtkCombo *combo);
 extern GList *user_current_list (void);
 
 extern group *group_new (void);
 extern void group_free (group *u);
 extern gboolean group_add (void);
-extern gboolean group_update (group *g);
+extern gboolean group_update (void);
 extern GList *group_fill_members_list (void);
 extern void group_fill_all_users_list (GList *member_rows);
 extern GList *group_current_list (void);
+extern GList *get_group_list (gchar *field, gboolean adv);
+extern gchar *get_group_by_data (gchar *field, gchar *fdata, gchar *data);
 
 
 #endif /* USER_GROUP_H */

@@ -241,37 +241,36 @@ user_add (void)
 	
 	/* Update visual table */
 
-	e_table_changed (USER, TRUE);
 
 	return TRUE;
 }
 
 extern gboolean
-user_update (user *u)
+user_update (void)
 {
 	GtkWidget *w0;
 	GtkWindow *win;
 	GnomeDialog *dialog;
-	gchar *txt, *new_group_name;
-	GtkCList *list;
+	gchar *new_login, *new_comment, *new_group_name;
+	gchar *login, *comment, *gid;
+	gchar *name = NULL;
 	GList *tmp_list;
-	group *g = NULL;
-	group *new_group;
-	gint row;
 	gboolean found = FALSE;
 	gchar *entry[2];
+	gboolean comp;
 
 	entry[1] = NULL;
 	
 	w0 = tool_widget_get ("user_settings_name");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+	new_login = gtk_entry_get_text (GTK_ENTRY (w0));
+	login = e_table_get_user ("login");
 
 	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
 
 	/* If login name is changed and isn't empty */
-	if (strcmp (txt, u->ug.name))
+	if (strcmp (new_login, login))
 	{
-		if (strlen (txt) < 1)
+		if (strlen (new_login) < 1)
 		{
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
 					(_("The username is empty."), win));
@@ -281,7 +280,7 @@ user_update (user *u)
 			return FALSE;
 		}
 
-		if (!is_valid_name (txt))
+		if (!is_valid_name (new_login))
 		{
 			dialog = GNOME_DIALOG (gnome_error_dialog_parented (
 			("Please set a valid username, using only lower-case letters."), win));
@@ -289,25 +288,20 @@ user_update (user *u)
 			return FALSE;
 		}
 
-		g_free (u->ug.name);
-		u->ug.name = g_strdup (txt);
-
-		e_table_changed (USER, FALSE);
+		e_table_change_user ("login", new_login);
 	}
 	
 	w0 = tool_widget_get ("user_settings_comment");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
+	comment = e_table_get_user ("comment");
 	
-	if (u->comment == NULL)
+	if (comment == NULL)
 	{
-		if (strlen (txt) > 0)
-			u->comment = g_strdup (txt);
+		if (strlen (new_comment) > 0)
+			e_table_change_user ("comment", new_comment);
 	}
-	else if (strcmp (txt, u->comment))
-	{
-		g_free (u->comment);
-		u->comment = g_strdup (txt);
-	}
+	else if (strcmp (new_comment, comment))
+		e_table_change_user ("comment", new_comment);
 	
 	/* Get selected group name */
 	
@@ -316,13 +310,18 @@ user_update (user *u)
 	
 	/* Now find group's gid */
 	
-	tmp_list = group_adv_list;
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		comp = TRUE;
+	else
+		comp = FALSE;
+
+	tmp_list = get_group_list ("name", comp);
 	while (tmp_list)
 	{
-		g = tmp_list->data;
+		name = tmp_list->data;
 		tmp_list = tmp_list->next;
 
-		if (!strcmp (g->ug.name, new_group_name))
+		if (!strcmp (name, new_group_name))
 		{
 			found = TRUE;
 			break;
@@ -344,7 +343,7 @@ user_update (user *u)
 		}
 
 		/* Cool: create new group */
-
+/*
 		new_group = group_new ();
 		new_group->ug.name = g_strdup (new_group_name);
 		u->gid = new_group->ug.id;
@@ -352,18 +351,14 @@ user_update (user *u)
 		group_adv_list = g_list_append (group_adv_list, new_group);
 		if (!user_group_is_system (&new_group->ug))
 			group_basic_list = g_list_append (group_basic_list, new_group);
-		
-		/* Add to CList */
-		
-		list = GTK_CLIST (tool_widget_get ("group_list"));
-		
-		entry[0] = new_group_name;
-		row = gtk_clist_append (list, entry);
-		gtk_clist_set_row_data (list, row, new_group);
+*/
 	}
 	
 	else
-		u->gid = g->ug.id;
+	{
+		gid = (e_table_get_group_by_data ("name", name, "gid"));
+		e_table_change_user ("gid", gid);
+	}
 
 	return TRUE;
 }
@@ -493,7 +488,6 @@ group_add (void)
 	tmpgroup = group_new ();
 	tmpgroup->ug.name = g_strdup (new_group_name);
 
-	e_table_changed (GROUP, TRUE);
 	
 	/* Add group members */
 
@@ -516,13 +510,12 @@ group_add (void)
 }
 
 extern gboolean
-group_update (group *g)
+group_update (void)
 {
 	GtkWidget *w0;
 	GtkWindow *win;
 	GnomeDialog *dialog;
-	gchar *txt;
-	GList *selection;
+	gchar *txt, *name;
 	GtkCList *clist;
 	gint row;
 	
@@ -530,8 +523,9 @@ group_update (group *g)
 
 	w0 = tool_widget_get ("group_settings_name");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+	name = e_table_get_group ("name");
 
-	if (strcmp (g->ug.name, txt))
+	if (strcmp (name, txt))
 	{
 		if (strlen (txt) < 1)
 		{
@@ -543,36 +537,21 @@ group_update (group *g)
 			return FALSE;
 		}
 		else
-		{
-			g_free (g->ug.name);
-			g->ug.name = g_strdup (txt);
-
-			e_table_changed (GROUP, FALSE);
-		}
+			e_table_change_group ("name", txt);
 	}
 
 	/* Update group members also */
 	/* First, free our old users list ... */
 
-	selection = g->users;
-	while (selection)
-	{
-		txt = selection->data;
-		selection = selection->next;
-
-		g_free (txt);
-	}
+	e_table_del_group_users ();
 	
-	g_list_free (g->users);
-	g->users = NULL;
-
 	/* ... and then, build new one */
 
 	clist = GTK_CLIST (tool_widget_get ("group_settings_members"));
 
 	row = 0;
 	while (gtk_clist_get_text (clist, row++, 0, &txt))
-		g->users = g_list_append (g->users, g_strdup (txt));
+		e_table_add_group_users (txt);
 
 	return TRUE;
 }
@@ -720,12 +699,6 @@ group_fill_members_list (void)
 	GtkCList *clist;
 	gint row;
 	gchar *entry[2];
-	group *g;
-
-	g = e_table_get (GROUP);
-
-	if (!g)
-		return NULL;
 
 	entry[1] = NULL;
 
@@ -733,7 +706,7 @@ group_fill_members_list (void)
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_freeze (clist);
 
-	tmp_list = g->users;
+	tmp_list = e_table_get_group_users ();
 
 	while (tmp_list)
 	{
@@ -753,10 +726,10 @@ group_fill_all_users_list (GList *member_rows)
 {
 	GList *tmp_list, *member;
 	GtkCList *clist;
-	user *current_u;
-	gchar *name;
+	gchar *name, *gname;
 	gboolean found;
 	gchar *entry[2];
+	gboolean comp = FALSE;
 
 	entry[1] = NULL;
 
@@ -764,10 +737,13 @@ group_fill_all_users_list (GList *member_rows)
 	gtk_clist_set_auto_sort (clist, TRUE);
 	gtk_clist_freeze (clist);
 
-	tmp_list = user_current_list ();
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		comp = TRUE;
+	
+	tmp_list = get_group_list ("name", comp);
 	while (tmp_list)
 	{
-		current_u = tmp_list->data;
+		gname = tmp_list->data;
 		tmp_list = tmp_list->next;
 
 		found = FALSE;
@@ -778,7 +754,7 @@ group_fill_all_users_list (GList *member_rows)
 			name = member->data;
 			member = member->next;
 
-			if (!strcmp (name, current_u->ug.name))
+			if (!strcmp (name, gname))
 			{
 				found = TRUE;
 				break;
@@ -787,7 +763,7 @@ group_fill_all_users_list (GList *member_rows)
 
 		if (!found)
 		{
-			entry[0] = current_u->ug.name;
+			entry[0] = gname;
 			gtk_clist_append (clist, entry);
 		}
 	}
@@ -802,3 +778,66 @@ group_current_list (void)
 		return group_adv_list;
 	return group_basic_list;
 }
+
+extern GList *
+get_group_list (gchar *field, gboolean adv)
+{
+	GList *list = NULL;
+	xmlNodePtr root, node, u;
+	gint gid;
+	gchar *txt;
+
+	root = e_table_get_table_data (GROUP);
+
+	for (u = xml_element_find_first (root, "group"); u; u = xml_element_find_next (u, "group"))
+	{
+		node = xml_element_find_first (u, "gid");
+		if (!node)
+			break;
+
+		txt = (xml_element_get_content (node));
+		gid = atoi (txt);
+
+		if (!adv || (gid >= logindefs.new_user_min_id && gid <= logindefs.new_user_max_id))
+		{
+			if (strcmp (field, "gid"))
+			{
+				node = xml_element_find_first (u, field);
+				if (!node)
+					break;
+				txt = xml_element_get_content (node);
+			}
+				
+			list = g_list_prepend (list, txt);
+		}
+	}
+
+	return list;
+}
+
+extern gchar *
+get_group_by_data (gchar *field, gchar *fdata, gchar *data)
+{
+	xmlNodePtr root, node, u;
+
+	root = e_table_get_table_data (GROUP);
+
+	for (u = xml_element_find_first (root, "group"); u; u = xml_element_find_next (u, "group"))
+	{
+		node = xml_element_find_first (u, field);
+		if (!node)
+			break;
+
+		if (!strcmp (fdata, xml_element_get_content (node)))
+		{
+			node = xml_element_find_first (u, data);
+			if (!node)
+				break;
+
+			return xml_element_get_content (node);
+		}
+	}
+
+	return NULL;
+}
+

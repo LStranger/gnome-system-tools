@@ -82,28 +82,36 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
 	GList *tmp_list;
-	group *g = NULL;
 	gchar *txt;
 	gboolean found = FALSE;
-	user *u;
+	gchar *login, *comment, *name = NULL;
+	gint gid, id = 0;
+	gboolean comp;
 
-	g_return_if_fail (u = e_table_get (USER));
+	g_return_if_fail (login = e_table_get_user ("login"));
 
 	w0 = tool_widget_get ("user_settings_name");
 	gtk_widget_set_sensitive (w0, tool_get_access());
-	my_gtk_entry_set_text (w0, u->ug.name);
+	my_gtk_entry_set_text (w0, login);
 
 	w0 = tool_widget_get ("user_settings_group");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	user_fill_settings_group (GTK_COMBO (w0));
 
-	tmp_list = group_adv_list;
+	gid = atoi (e_table_get_user ("gid"));
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		comp = TRUE;
+	else
+		comp = FALSE;
+
+	tmp_list = get_group_list ("gid", comp);
 	while (tmp_list)
 	{
-		g = tmp_list->data;
+		id = atoi (tmp_list->data);
 		tmp_list = tmp_list->next;
 		
-		if (g->ug.id == u->gid)
+		if (id == gid)
 		{
 			found = TRUE;
 			break;
@@ -111,16 +119,22 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	}
 	
 	if (!found)
-		g_warning ("The GID for the main user's group was not found in group_list.");
+		g_warning ("The GID for the main user's group was not found.");
 	else
-		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), g->ug.name);
+	{
+		txt = g_strdup_printf ("%d", id);
+		name = get_group_by_data ("gid", txt, "name");
+		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
+		g_free (txt);
+	}
 	
+	comment = e_table_get_user ("comment");
 	w0 = tool_widget_get ("user_settings_comment");
 	gtk_widget_set_sensitive (w0, tool_get_access());
-	my_gtk_entry_set_text (w0, u->comment);
+	my_gtk_entry_set_text (w0, comment);
 	
 	w0 = tool_widget_get ("user_settings_dialog");
-	txt = g_strdup_printf (_("Settings for User %s"), u->ug.name);
+	txt = g_strdup_printf (_("Settings for User %s"), name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (0));
 	g_free (txt);
@@ -131,15 +145,14 @@ static void
 user_passwd_dialog_show (void)
 {
 	GtkWidget *w0;
-	gchar *txt;
-	user *u;
+	gchar *txt, *login;
 	
 	g_return_if_fail (tool_get_access());
 
-	u = e_table_get (USER);
+	login = e_table_get_user ("login");
 
 	w0 = tool_widget_get ("user_passwd_dialog");
-	txt = g_strdup_printf (_("Password for User %s"), u->ug.name);
+	txt = g_strdup_printf (_("Password for User %s"), login);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
@@ -171,17 +184,16 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_user_delete_clicked (GtkButton *button, gpointer user_data)
 {
-	gchar *txt;
+	gchar *txt, *name;
 	GtkWindow *parent;
 	GnomeDialog *dialog;
-	user *u;
 
 	g_return_if_fail (tool_get_access());
-	g_return_if_fail (u = e_table_get (USER));
+	g_return_if_fail (name = e_table_get_user ("login"));
 
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
 
-	if (!strcmp (u->ug.name, "root"))
+	if (!strcmp (name, "root"))
 	{
 		txt = g_strdup (_("The root user must not be deleted."));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
@@ -190,7 +202,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	}
 
-	txt = g_strdup_printf (_("Are you sure you want to delete user %s?"), u->ug.name);
+	txt = g_strdup_printf (_("Are you sure you want to delete user %s?"), name);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
 	g_free (txt);
@@ -199,7 +211,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
-		e_table_del (USER);
+		e_table_del_user ();
 		tool_set_modified (TRUE);
 		user_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")),
@@ -215,14 +227,13 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
 	GList *member_rows;
-	gchar *txt;
-	group *g;
+	gchar *txt, *name;
 	
-	g_return_if_fail (g = e_table_get (GROUP));
+	g_return_if_fail (name = e_table_get_group ("name"));
 
 	w0 = tool_widget_get ("group_settings_name");
 	gtk_widget_set_sensitive (w0, tool_get_access());
-	my_gtk_entry_set_text (w0, g->ug.name);
+	my_gtk_entry_set_text (w0, name);
 
 	/* Fill group members */
 	member_rows = group_fill_members_list ();
@@ -233,7 +244,7 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	/* Show group settings dialog */
 	
 	w0 = tool_widget_get ("group_settings_dialog");
-	txt = g_strdup_printf (_("Settings for Group %s"), g->ug.name);
+	txt = g_strdup_printf (_("Settings for Group %s"), name);
 	gtk_window_set_title (GTK_WINDOW (w0), txt);
 	g_free (txt);
 	gtk_widget_show (w0);
@@ -245,12 +256,12 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget *w0;
 
 	g_return_if_fail (tool_get_access());
-	
+
 	/* Fill all users list */
 	group_fill_all_users_list (NULL);
 
 	/* Show group settings dialog */
-	
+
 	w0 = tool_widget_get ("group_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), _("Create New Group"));
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
@@ -260,17 +271,16 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_group_delete_clicked (GtkButton *button, gpointer user_data)
 {
-	gchar *txt;
+	gchar *txt, *name;
 	GtkWindow *parent;
 	GnomeDialog *dialog;
-	group *g;
 
 	g_return_if_fail (tool_get_access());
-	g_return_if_fail (g = e_table_get (GROUP));
+	g_return_if_fail (name = e_table_get_group ("name"));
 
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
 
-	if (!strcmp (g->ug.name, "root"))
+	if (!strcmp (name, "root"))
 	{
 		txt = g_strdup ("You shouldn't delete root group!");
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
@@ -279,7 +289,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	}
 	
-	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), g->ug.name);
+	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), name);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
 	g_free (txt);
@@ -288,7 +298,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		return;
 	else
 	{
-		e_table_del (GROUP);
+		e_table_del_group ();
 		tool_set_modified (TRUE);
 		group_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")),
@@ -349,10 +359,7 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 			user_passwd_dialog_show ();
 	}
 	else
-	{
-		user *u = e_table_get (USER);
-		retval = user_update (u);
-	}
+		retval = user_update ();
 
 	if (retval)
 	{
@@ -418,7 +425,6 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	GtkWidget *win;
 	GnomeDialog *dialog;
 	gchar *msg, *err;
-	user *u;
 	
 	entry1 = GTK_ENTRY (tool_widget_get ("user_passwd_new"));
 	entry2 = GTK_ENTRY (tool_widget_get ("user_passwd_confirmation"));
@@ -428,11 +434,9 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	new_passwd = gtk_entry_get_text (entry1);
 	confirm = gtk_entry_get_text (entry2);
 
-	u = e_table_get (USER);
-
 	/* Empty old contnents */
 	
-	err = passwd_set (u, new_passwd, confirm, gtk_toggle_button_get_active (quality));
+	err = passwd_set (new_passwd, confirm, gtk_toggle_button_get_active (quality));
 	switch ((int) err)
 	{
 	 case 0: /* The password is OK and has been set */
@@ -508,8 +512,7 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 		retval = group_add ();
 	else
 	{
-		group *g = e_table_get (GROUP);
-		retval = group_update (g);
+		retval = group_update ();
 	}
 
 	if (retval)

@@ -112,32 +112,63 @@ col_count (ETableModel *etm, void *data)
 static int
 row_count (ETableModel *etm, void *data)
 {
-	return g_list_length ((GList *) data);
+	xmlNodePtr parent = data;
+
+	return xml_parent_childs (parent);
 }
 
 /* This function returns the value at a particular point in our ETableModel. */
 static void *
 value_at (ETableModel *etm, int col, int row, void *data)
 {
-	GList *tmp_list = data;
+	xmlNodePtr parent = data;
+	xmlNodePtr node, name;
 
-	user_group *ug;
+	if (E_TABLE (user_table)->model == etm)
+	{
+		node = xml_element_find_nth (parent, "user", row);
+		if (!node)
+		{
+			g_warning ("value_at: Can't find %dth node\n", row);
+			return NULL;
+		}
 
-	ug = g_list_nth_data (tmp_list, row++);
-	return ug->name;
+		name = xml_element_find_first (node, "login");
+		if (!name)
+		{
+			g_warning ("value_at: Can't get name for row %d\n", row);
+			return NULL;
+		}
+
+		return xml_element_get_content (name);
+	}
+
+	if (E_TABLE (group_table)->model == etm)
+	{
+		node = xml_element_find_nth (parent, "group", row);
+		if (!node)
+		{
+			g_warning ("value_at: Can't find %dth node\n", row);
+			return NULL;
+		}
+
+		name = xml_element_find_first (node, "name");
+		if (!name)
+		{
+			g_warning ("value_at: Can't get name for row %d\n", row);
+			return NULL;
+		}
+
+		return xml_element_get_content (name);
+	}
+
+	return NULL;
 }
 
 /* This function sets value at a particular point in our ETableModel. */
 static void
 set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
-	GList *tmp_list = data;
-
-	user_group *ug;
-
-	ug = g_list_nth_data (tmp_list, row++);
-	g_free (ug->name);
-	ug->name = g_strdup (val);
 }
 
 /* This function checks if cell is editable. */
@@ -190,9 +221,7 @@ static void
 select_row (ETable *et, int row)
 {
 	ETableModel *etm;
-	GList *l;
-	gchar *txt, *label, *fmt, *frame_name;
-	user_group *ug;
+	gchar *txt, *label;
 
 	etm = E_TABLE_MODEL (et->model);
 	txt = e_table_model_value_at (etm, 0, row);
@@ -200,28 +229,23 @@ select_row (ETable *et, int row)
 	if (et == E_TABLE (user_table))
 	{
 		user_actions_set_sensitive (TRUE);
-		l = user_current_list ();
-		frame_name = "user_settings_frame";
-		fmt = _("Settings for user ");
+		label = g_strconcat (_("Settings for user "), txt, NULL);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
+		g_free (label);
+		return;
 	}
-	else if (et == E_TABLE (group_table))
+
+	if (et == E_TABLE (group_table))
 	{
 		group_actions_set_sensitive (TRUE);
-		l = group_current_list ();
-		frame_name = "group_settings_frame";
-		fmt = _("Settings for group ");
-	}
-	else
-	{
-		g_warning ("Shouldn't be here.");
+		label = g_strconcat ("Settings for group ", txt, NULL);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
+		g_free (label);
 		return;
 	}
 	
-	ug = g_list_nth_data (l, row++);
-	
-	label = g_strconcat (fmt, ug->name, NULL);
-	gtk_frame_set_label (GTK_FRAME (tool_widget_get (frame_name)), label);
-	g_free (label);
+	g_warning ("Shouldn't be here.");
+	return;
 }
 
 /* Public functions */
@@ -231,8 +255,23 @@ e_table_create (void)
 {
 	GtkWidget *w0;
 	ETableModel *e_table_model = NULL;
+	xmlNodePtr root, users_node, groups_node;
+
+	root = xml_doc_get_root (tool_config_get_xml ());
+	if (!root)
+	{
+		g_warning ("e_table_create: couldn't find root node.");
+		return;
+	}
 
 	/* Users table */
+
+	users_node = xml_element_find_first (root, "userdb");
+	if (!users_node)
+	{
+		g_warning ("e_table_create: couldn't find userdb node.");
+		return;
+	}
 
 	e_table_model = e_table_simple_new (col_count,
                                            row_count,
@@ -244,7 +283,7 @@ e_table_create (void)
                                            initialize_value,
                                            value_is_empty,
                                            value_to_string,
-                                           user_current_list());
+                                           users_node);
 
 	user_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, USER_BASIC_SPEC, NULL);
 
@@ -259,6 +298,14 @@ e_table_create (void)
 	gtk_widget_show (user_table);
 
 	/* Groups table */
+
+	groups_node = xml_element_find_first (root, "groupdb");
+	if (!groups_node)
+	{
+		g_warning ("e_table_create: couldn't find groupdb node.");
+		return;
+	}
+
 	e_table_model = e_table_simple_new (col_count,
                                            row_count,
                                            value_at,
@@ -269,7 +316,7 @@ e_table_create (void)
                                            initialize_value,
                                            value_is_empty,
                                            value_to_string,
-                                           group_current_list ());
+                                           groups_node);
 
 	group_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, GROUP_BASIC_SPEC, NULL);
 
@@ -287,107 +334,323 @@ e_table_create (void)
 	group_actions_set_sensitive (FALSE);
 }
 
+gchar *
+e_table_get_user (gchar *node_name)
+{
+	ETableModel *etm;
+	gint row;
+	xmlNodePtr root, node, name;
+
+	etm = E_TABLE (user_table)->model;
+	row = e_table_get_cursor_row (E_TABLE (user_table));
+
+	root = E_TABLE_SIMPLE (etm)->data;
+
+	node = xml_element_find_nth (root, "user", row);
+	if (!node)
+	{
+		g_warning ("e_table_get_char: can't get current user node %s.", node_name);
+		return NULL;
+	}
+
+	name = xml_element_find_first (node, node_name);
+	return xml_element_get_content (name);
+}
+
 void
-e_table_del (gchar del)
+e_table_del_user (void)
 {
 	gint row;
 	ETableModel *etm;
 	ETable *table;
-	GList *tmp_list;
+	xmlNodePtr root, node;
 
-	if (del == USER)
-	{
-		table = E_TABLE (user_table);
-		row = e_table_get_cursor_row (table);
-		tmp_list = g_list_nth (user_current_list (), row);
-		
-		user_free (tmp_list->data);
-		user_adv_list = g_list_remove (user_adv_list, tmp_list->data);
-		if (!user_group_is_system ((user_group *) tmp_list->data))
-			user_basic_list = g_list_remove (user_basic_list, tmp_list->data);
-	}
-
-	else if (del == GROUP)
-	{
-		table = E_TABLE (group_table);
-		row = e_table_get_cursor_row (table);
-		tmp_list = g_list_nth (group_current_list (), row);
-		
-		group_free (tmp_list->data);
-		group_adv_list = g_list_remove (group_adv_list, tmp_list->data);
-		if (!user_group_is_system ((user_group *) tmp_list->data))
-			group_basic_list = g_list_remove (group_basic_list, tmp_list->data);
-	}
-	
-	else
-	{
-		g_warning ("Shouldn't be here.");
-		return;
-	}
-	
+	table = E_TABLE (user_table);
+	row = e_table_get_cursor_row (table);
 	etm = E_TABLE_MODEL (table->model);
-	e_table_model_changed (etm);
+
+        root = E_TABLE_SIMPLE (etm)->data;
+
+	node = xml_element_find_nth (root, "user", row);
+	if (!node)
+	{
+	g_warning ("e_table_del: can't get current user node.");
+	return; 
+	}
+
+	xml_element_destroy (node);
+
 	e_table_model_row_deleted (etm, row);
+	e_table_model_changed (etm);
+}
+
+
+gchar *
+e_table_get_group (gchar *node_name)
+{
+	ETableModel *etm;
+	gint row;
+	xmlNodePtr root, node, name;
+
+	etm = E_TABLE (group_table)->model;
+	row = e_table_get_cursor_row (E_TABLE (group_table));
+
+	root = E_TABLE_SIMPLE (etm)->data;
+
+	node = xml_element_find_nth (root, "group", row);
+	if (!node)
+	{
+		g_warning ("e_table_get_char: can't get current group node %s.", node_name);
+		return NULL;
+	}
+
+	name = xml_element_find_first (node, node_name);
+	return xml_element_get_content (name);
 }
 
 void
-e_table_changed (gchar change, gboolean new)
+e_table_del_group (void)
 {
+	gint row;
 	ETableModel *etm;
 	ETable *table;
-	gint row = 0;
+	xmlNodePtr root, node;
 
-	if (change == USER)
-		table = E_TABLE (user_table);
-
-	else if (change == GROUP)
-		table = E_TABLE (group_table);
-	else
-		return;
-
+	table = E_TABLE (group_table);
+	row = e_table_get_cursor_row (table);
 	etm = E_TABLE_MODEL (table->model);
 
-	if (new)
+        root = E_TABLE_SIMPLE (etm)->data;
+
+	node = xml_element_find_nth (root, "group", row);
+	if (!node)
 	{
-		e_table_model_append_row (etm, NULL, row);
-		e_table_model_row_inserted (etm, row);
-	}
-	else
-	{
-		row = e_table_get_cursor_row (table);
-		e_table_model_row_changed (etm, row);
+	g_warning ("e_table_del: can't get current group node.");
+	return; 
 	}
 
+	xml_element_destroy (node);
+
+	e_table_model_row_deleted (etm, row);
 	e_table_model_changed (etm);
-	e_table_set_cursor_row (table, row);
-	
 }
 
-void *
-e_table_get (gchar get)
+xmlNodePtr
+e_table_get_table_data (gchar get)
 {
 	ETableModel *etm;
 	ETable *table;
+	xmlNodePtr node;
+
+	switch (get)
+	{
+		case USER:
+			table = E_TABLE (user_table);
+			break;
+		case GROUP:
+			table = E_TABLE (group_table);
+			break;
+		default:
+			return NULL;
+	}
+
+	etm = E_TABLE_MODEL (table->model);
+	node = E_TABLE_SIMPLE (etm)->data;
+
+	return node;
+}
+
+GList *
+e_table_get_group_users (void)
+{
+	GList *userlist = NULL;
 	gint row;
+	ETableModel *etm;
+	ETable *table;
+	xmlNodePtr root, node, users, u;
 
-	if (get == USER)
+	table = E_TABLE (group_table);
+	row = e_table_get_cursor_row (table);
+	etm = E_TABLE_MODEL (table->model);
+
+	root = E_TABLE_SIMPLE (etm)->data;
+
+	node = xml_element_find_nth (root, "group", row);
+	if (!node)
 	{
-		table = E_TABLE (user_table);
-		etm = E_TABLE_MODEL (table->model);
-		row = e_table_get_cursor_row (table);
-
-		return (user *)g_list_nth_data (user_current_list (), row);
+		g_warning ("e_table_get_group_users: can't get current group node.");
+		return NULL; 
 	}
 
-	if (get == GROUP)
+	users = xml_element_find_first (node, "users");
+	if (!users)
 	{
-		table = E_TABLE (group_table);
-		etm = E_TABLE_MODEL (table->model);
-		row = e_table_get_cursor_row (table);
-
-		return (group *)g_list_nth_data (group_current_list (), row);
+		g_warning ("e_table_get_group_users: can't get current group's users node.");
+		return NULL; 
 	}
 
-	return NULL;
+	for (u = xml_element_find_first (users, "user"); u; u = xml_element_find_next (u, "user"))
+		userlist = g_list_prepend (userlist, xml_element_get_content (u));
+
+	return userlist;
+}
+
+void
+e_table_change_user (gchar *field, gchar *val)
+{
+	ETableModel *etm;
+	gint row;
+	xmlNodePtr root, node, n0;
+
+	 etm = E_TABLE (user_table)->model;
+	 row = e_table_get_cursor_row (E_TABLE (user_table));
+
+	 root = E_TABLE_SIMPLE (etm)->data;
+
+	 node = xml_element_find_nth (root, "user", row);
+	 if (!node)
+	 {
+		  g_warning ("e_table_change_user: can't get current user node.");
+		  return;
+	 }
+
+	 n0 = xml_element_find_first (node, field);
+	 if (!n0)
+	 {
+		 g_warning ("e_table_change_user: can't get current users node %s.", field);
+		 return;
+	 }
+
+	 xml_element_set_content (n0, val);
+
+	 e_table_model_row_changed (etm, row);
+	 e_table_model_changed (etm);
+	 e_table_set_cursor_row (E_TABLE (user_table), row);
+}
+
+void
+e_table_change_group (gchar *field, gchar *val)
+{
+	ETableModel *etm;
+	gint row;
+	xmlNodePtr root, node, n0;
+
+	 etm = E_TABLE (group_table)->model;
+	 row = e_table_get_cursor_row (E_TABLE (group_table));
+
+	 root = E_TABLE_SIMPLE (etm)->data;
+
+	 node = xml_element_find_nth (root, "group", row);
+	 if (!node)
+	 {
+		  g_warning ("e_table_change_group: can't get current group node.");
+		  return;
+	 }
+
+	 n0 = xml_element_find_first (node, field);
+	 if (!n0)
+	 {
+		 g_warning ("e_table_change_user: can't get current group node %s.", field);
+		 return;
+	 }
+
+	 xml_element_set_content (n0, val);
+
+	 e_table_model_row_changed (etm, row);
+	 e_table_model_changed (etm);
+	 e_table_set_cursor_row (E_TABLE (user_table), row);
+}
+
+gchar *
+e_table_get_group_by_data (gchar *field, gchar *fdata, gchar *data)
+{
+	 ETableModel *etm;
+	 xmlNodePtr root, node, u;
+
+	 etm = E_TABLE (group_table)->model;
+	 root = E_TABLE_SIMPLE (etm)->data;
+
+	 for (u = xml_element_find_first (root, "group"); u; u = xml_element_find_next (u, "group"))
+	 {
+		 node = xml_element_find_first (u, field);
+		 if (!node)
+		 	break;
+
+		 if (!strcmp (fdata, xml_element_get_content (node)))
+		 {
+			 node = xml_element_find_first (u, data);
+			 if (!node)
+				 break;
+
+			 return xml_element_get_content (node);
+		 }
+	 }
+
+	 return NULL;
+}
+
+void
+e_table_del_group_users (void)
+{
+	gint row;
+	ETableModel *etm;
+	ETable *table;
+	xmlNodePtr root, node, users;
+
+	table = E_TABLE (group_table);
+	row = e_table_get_cursor_row (table);
+	etm = E_TABLE_MODEL (table->model);
+
+	root = E_TABLE_SIMPLE (etm)->data;
+
+	node = xml_element_find_nth (root, "group", row);
+	if (!node)
+	{
+		g_warning ("e_table_del_group_users: can't get current group node.");
+		return; 
+	}
+
+	users = xml_element_find_first (node, "users");
+	if (!users)
+	{
+		g_warning ("e_table_del_group_users: can't get current group's users node.");
+		return; 
+	}
+
+	xml_element_destroy_children (users);
+}
+
+void
+e_table_add_group_users (gchar *name)
+{
+	gint row;
+	ETableModel *etm;
+	ETable *table;
+	xmlNodePtr root, node, users, u;
+
+	table = E_TABLE (group_table);
+	row = e_table_get_cursor_row (table);
+	etm = E_TABLE_MODEL (table->model);
+
+	root = E_TABLE_SIMPLE (etm)->data;
+
+	node = xml_element_find_nth (root, "group", row);
+
+	if (!node)
+	{
+		g_warning ("e_table_add_group_users: can't get current group node.");
+		return;
+	}
+
+	users = xml_element_find_first (node, "users");
+
+	if (!users)
+	{
+		g_warning ("e_table_add_group_users: can't get current group's users node.");
+		return; 
+	}
+
+	u = xml_element_add (users, "user");
+	xml_element_set_content (u, name);
 }
 
