@@ -223,16 +223,10 @@ druid_entry_activate (GtkWidget *w, gpointer data)
 static void
 druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
-	gchar *buf;
 	UserDruid *config = data;
 
 	user_account_gui_save (config->gui);
-
 	user_account_save (config->gui->account);
-	
-	buf = gtk_entry_get_text (config->gui->pwd1);
-	passwd_set (config->gui->account->node, buf);
-	
 	druid_exit (config);
 }
 

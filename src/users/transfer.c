@@ -25,123 +25,10 @@
 
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
-#include <glade/glade.h>
-#include "xst.h"
 
 #include "transfer.h"
-#include "user_group.h"
-#include "callbacks.h"
 #include "e-table.h"
 #include "profile.h"
-
-extern XstTool *tool;
-
-/* Structure with some hard-coded defaults, just in case any of the tags is not present. */
-/* These were taken form RH 6.2's default values. Any better suggestions? */
-/* NULL means not present for string members. */
-
-const static login_defs default_logindefs = {
-	NULL, /* qmail_dir */
-	"/var/spool/mail", /* mailbox_dir */
-	NULL, /* mailbox_file */
-	99999, /* passwd_max_day_use */
-	0, /* passwd_min_day_use */
-	5, /* passwd_min_length */
-	7, /* passwd_warning_advance_days */
-	500, /* new_user_min_id */
-	60000, /* new_user_max_id */
-	500, /* new_group_min_id */
-	60000, /* new_group_max_id */
-	NULL, /* del_user_additional_command */
-	TRUE /* create_home */
-};
-
-
-gchar *user_tags[] = {
-	"key", "login", "password", "uid", "gid", "comment", "home", "shell", "last_mod",
-	"passwd_min_life", "passwd_max_life", "passwd_exp_warn", "passwd_exp_disable", "passwd_disable",
-	"reserved", "is_shadow", NULL
-};
-
-gchar *group_tags[] = {
-	"key", "name", "password", "gid", NULL
-};
-
-
-/* Helper functions */
-
-static guint
-my_atoi (gchar *str) 
-{
-	if (!str || !*str)
-		return 0;
-	return atoi (str);
-}
-
-/* ---- */
-
-static void
-transfer_logindefs_from_xml (xmlNodePtr root)
-{
-	xmlNodePtr node, n0;
-	gchar *logindefs_tags[] = {
-		"qmail_dir", "mailbox_dir", "mailbox_file", "passwd_max_day_use",
-		"passwd_min_day_use", "passwd_min_length", "passwd_warning_advance_days", "new_user_min_id",
-		"new_user_max_id", "new_group_min_id", "new_group_max_id", "del_user_additional_command",
-		"create_home", NULL
-	};
-	gchar *tag, *tmp;
-	gint i;
-
-	/* Assign defaults */
-	
-	logindefs = default_logindefs;
-	
-	/* Find login.defs */
-	
-	node = xst_xml_element_find_first (root, "logindefs");
-	if (!node)
-	{
-		g_warning ("transfer_logindefs_from_xml: couldn't find logindefs node.");
-		return;
-	}
-
-	/* make login.defs struct */
-
-	for (i = 0, tag = logindefs_tags[0]; tag; i++, tag = logindefs_tags[i]) 
-	{
-		n0 = xst_xml_element_find_first (node, tag);
-
-		if (n0) 
-		{
-			switch (i)
-			{
-			 case  0: logindefs.qmail_dir    = xst_xml_element_get_content (n0); break;
-			 case  1: logindefs.mailbox_dir  = xst_xml_element_get_content (n0); break;
-			 case  2: logindefs.mailbox_file = xst_xml_element_get_content (n0); break;
-			 case  3: logindefs.passwd_max_day_use          = my_atoi (xst_xml_element_get_content (n0)); break;
-			 case  4: logindefs.passwd_min_day_use          = my_atoi (xst_xml_element_get_content (n0)); break;
-			 case  5: logindefs.passwd_min_length           = my_atoi (xst_xml_element_get_content (n0)); break;
-			 case  6: logindefs.passwd_warning_advance_days = my_atoi (xst_xml_element_get_content (n0)); break;
-			 case  7: logindefs.new_user_min_id             = my_atoi (xst_xml_element_get_content (n0)); break;
-			 case  8: logindefs.new_user_max_id             = my_atoi (xst_xml_element_get_content (n0)); break;
-			 case  9: logindefs.new_group_min_id            = my_atoi (xst_xml_element_get_content (n0)); break;
-			 case 10: logindefs.new_group_max_id            = my_atoi (xst_xml_element_get_content (n0)); break;
-			 case 11: logindefs.del_user_additional_command = xst_xml_element_get_content (n0); break;
-			 case 12: 
-				tmp = xst_xml_element_get_content (n0);
-				if (! strcmp (tmp, "yes"))
-					logindefs.create_home = TRUE;
-				else
-					logindefs.create_home = FALSE;
-				break;
-			 case 13: g_warning ("transfer_logindefs_from_xml: we shouldn't be here."); break;
-			}
-		}
-	}
-}
 
 void
 transfer_xml_to_gui (XstTool *tool, gpointer data)
@@ -149,8 +36,6 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	xmlNodePtr root;
 
 	root = xst_xml_doc_get_root (tool->config);
-
-	transfer_logindefs_from_xml (root);
 
 	/* Profiles */
 	profile_table_init ();
@@ -163,11 +48,4 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 void
 transfer_gui_to_xml (XstTool *tool, gpointer data)
 {
-	xmlNodePtr root;
-
-	root = xst_xml_doc_get_root (tool->config);
-
-	profile_table_to_xml (root);
 }
-
-

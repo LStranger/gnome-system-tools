@@ -24,10 +24,8 @@
 #ifndef __TRANSFER_H
 #define __TRANSFER_H
 
-#include <gnome-xml/tree.h>
-#include <gnome-xml/parser.h>
+#include "xst.h"
 
-void transfer_config_saved(xmlNodePtr root);
 void transfer_xml_to_gui(XstTool *tool, gpointer data);
 void transfer_gui_to_xml(XstTool *tool, gpointer data);
 

@@ -1,5 +1,8 @@
 2001-05-16  Tambet Ingo  <tambet@ximian.com>
 
+	* user-druid.c (druid_finish): Removed password writing from here,
+	it's done on the lower level.
+
 	* passwd.c (passwd_set): Don't return anything.
 
 	* user_settings.c (user_account_passwd_toggled): Implement.

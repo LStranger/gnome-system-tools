@@ -27,7 +27,6 @@
 
 #include "callbacks.h"
 #include "user_group.h"
-#include "transfer.h"
 #include "e-table.h"
 #include "user_settings.h"
 #include "profile.h"
@@ -38,8 +37,6 @@ extern XstTool *tool;
 
 /* Local globals */
 static int reply;
-
-login_defs logindefs;
 
 /* Static prototypes */
 

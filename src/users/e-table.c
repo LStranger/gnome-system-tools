@@ -840,6 +840,7 @@ tables_update_complexity (XstDialogComplexity complexity)
 		break;
 	default:
 		g_warning ("update_notebook_complexity: Unsupported complexity.");
+		return;
 	}
 
 	e_table_set_state (u_table, user_state);

@@ -51,6 +51,9 @@ typedef struct
 	GtkSpinButton   *pwd_mindays;
 	GtkSpinButton   *pwd_warndays;
 	GtkToggleButton *pwd_random;
+	GtkCList        *file_list;
+	GtkWidget       *file_del;
+	GtkWidget       *file_add;
 } ProfileTab;
 
 extern XstTool *tool;
@@ -379,7 +382,68 @@ pro_apply_clicked (XstDialog *xd, gpointer user_data)
 	profile_save (NULL);
 	tables_update_content ();
 
+	profile_table_to_xml (xst_xml_doc_get_root (tool->config));
 	xst_dialog_modify (tool->main_dialog);
+}
+
+static void
+file_list_select (GtkCList *clist, gint row, gint col, GdkEventButton *event, gpointer data)
+{
+	ProfileTab *gui = data;
+
+	if (clist->selection)
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->file_del), TRUE);
+	else
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->file_del), FALSE);
+}
+
+static void
+file_list_add_cb (GtkButton *button,  gpointer data)
+{
+	GtkFileSelection *filesel = data;
+	gchar *name = gtk_file_selection_get_filename (filesel);
+
+	my_gtk_clist_append (pft->file_list, name);
+	xst_dialog_modify (pft->dialog);
+}
+
+static void
+file_list_add (GtkButton *button, gpointer data)
+{
+	GtkFileSelection *filesel;
+
+	filesel = GTK_FILE_SELECTION (gtk_file_selection_new (_("Choose the file")));
+	gtk_file_selection_set_filename (filesel, "/");
+
+	gtk_signal_connect (GTK_OBJECT (filesel->ok_button),
+			    "clicked", GTK_SIGNAL_FUNC (file_list_add_cb),
+			    (gpointer) filesel);
+   			   
+	gtk_signal_connect_object (GTK_OBJECT (filesel->ok_button),
+				   "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy),
+				   (gpointer) filesel);
+
+	gtk_signal_connect_object (GTK_OBJECT (filesel->cancel_button),
+				   "clicked", GTK_SIGNAL_FUNC (gtk_widget_destroy),
+				   (gpointer) filesel);
+   
+	gtk_widget_show (GTK_WIDGET (filesel));
+}
+
+static void
+file_list_del (GtkButton *button, gpointer data)
+{
+	gchar *buf;
+	gint row;
+	ProfileTab *gui = data;
+	GtkCList *list = gui->file_list;
+
+	while (list->selection) {
+		row = GPOINTER_TO_INT (list->selection->data);
+		gtk_clist_get_text (list, row, 0, &buf);
+		gtk_clist_remove (list, row);
+	}
+	xst_dialog_modify (gui->dialog);
 }
 
 static void
@@ -481,6 +545,21 @@ profile_tab_init ()
 	pft->pwd_warndays = GTK_SPIN_BUTTON   (xst_dialog_get_widget (xd, "pro_between"));
 	pft->pwd_random   = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (xd, "pro_random"));
 
+	pft->file_list = GTK_CLIST (xst_dialog_get_widget (xd, "pro_file_list"));
+	gtk_clist_set_auto_sort (pft->file_list, TRUE);
+	gtk_signal_connect (GTK_OBJECT (pft->file_list), "select_row",
+			    GTK_SIGNAL_FUNC (file_list_select), pft);
+	gtk_signal_connect (GTK_OBJECT (pft->file_list), "unselect_row",
+			    GTK_SIGNAL_FUNC (file_list_select), pft);
+	
+	pft->file_del = xst_dialog_get_widget (xd, "pro_file_del");
+	gtk_signal_connect (GTK_OBJECT (pft->file_del), "clicked",
+			    GTK_SIGNAL_FUNC (file_list_del), pft);
+
+	pft->file_add = xst_dialog_get_widget (xd, "pro_file_add");
+	gtk_signal_connect (GTK_OBJECT (pft->file_add), "clicked",
+			    GTK_SIGNAL_FUNC (file_list_add), pft);
+
 	create_profile_table (xd);
 	
 	profile_tab_prefill ();
@@ -561,6 +640,9 @@ profile_update_ui (Profile *pf)
 	gtk_spin_button_set_value (pft->pwd_warndays, (gfloat) pf->pwd_warndays);
 	gtk_toggle_button_set_active (pft->pwd_random, pf->pwd_random);
 
+	gtk_clist_clear (pft->file_list);
+	my_gtk_clist_append_items (pft->file_list, (GList *)pf->files);
+	
 	profile_tab_signals_block (FALSE);
 }
 
@@ -592,6 +674,7 @@ profile_save (gchar *name)
 {
 	gchar *buf;
 	Profile *pf;
+	gint row = 0;
 	
 	if (name)
 		buf = g_strdup (name);
@@ -602,6 +685,7 @@ profile_save (gchar *name)
 	g_free (buf);
 
 	if (pf)	{
+		/* TODO: free pf->files */
 		profile_save_entry (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
 				    &pf->home_prefix);
 		profile_save_entry (GTK_ENTRY (GTK_COMBO (pft->shell)->entry), &pf->shell);
@@ -616,6 +700,10 @@ profile_save (gchar *name)
 		pf->pwd_mindays  = gtk_spin_button_get_value_as_int (pft->pwd_mindays);
 		pf->pwd_warndays = gtk_spin_button_get_value_as_int (pft->pwd_warndays);
 		pf->pwd_random = gtk_toggle_button_get_active (pft->pwd_random);
+
+		pf->files = NULL;
+		while (gtk_clist_get_text (pft->file_list, row++, 0, &buf))
+			pf->files = g_slist_prepend (pf->files, g_strdup (buf));
 	}
 }	
 
@@ -624,6 +712,7 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 {	
 	Profile *pf;
 	GtkWidget *d;
+	GSList *tmp;
 	gchar *buf = NULL;
 
 	pf = profile_table_get_profile (new_name);
@@ -644,8 +733,7 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 
 	pf->name = g_strdup (new_name);
 
-	if (old_pf)
-	{
+	if (old_pf) {
 		/* Let's make copy of old profile. */
 		
 		pf->home_prefix = g_strdup (old_pf->home_prefix);
@@ -660,6 +748,12 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 		pf->pwd_mindays = old_pf->pwd_mindays;
 		pf->pwd_warndays = old_pf->pwd_warndays;
 		pf->pwd_random = old_pf->pwd_random;
+
+		tmp = old_pf->files;
+		while (tmp) {
+			pf->files = g_slist_prepend (pf->files, tmp->data);
+			tmp = tmp->next;
+		}
 	}
 
 	profile_table_add_profile (pf, select);
@@ -678,6 +772,9 @@ profile_destroy (Profile *pf)
 	g_free (pf->shell);
 	g_free (pf->group);
 
+	/* TODO: free strings in pf->files */
+	g_slist_free (pf->files);
+	
 	g_free (pf);
 }
 
@@ -709,34 +806,100 @@ profile_table_destroy (void)
 	g_free (profile_table);
 }
 
-
-static void
-profile_get_default (void)
+static GSList *
+get_files (xmlNodePtr files)
 {
-	/* It's currently only a wrapper around logindefs, will change in future. */
-	
+	xmlNodePtr node;
+	GSList *list = NULL;
+
+	node = xst_xml_element_find_first (files, "file");
+	while (node) {
+		list = g_slist_prepend (list, xst_xml_element_get_content (node));
+		node = xst_xml_element_find_next (node, "file");
+	}
+
+	return list;
+}
+
+/* Structure with some hard-coded defaults, just in case any of the tags is not present. */
+/* These were taken form RH 6.2's default values. Any better suggestions? */
+/* NULL means not present for string members. */
+
+const static Profile default_profile = {
+	(N_("Default")),         /* name */
+	(N_("Default profile")), /* comment */
+	99999,                   /* pwd_maxdays */
+	0,                       /* pwd_mindays */
+	7,                       /* pwd_warndays */
+	500,                     /* umin */
+	60000,                   /* umax */
+	500,                     /* gmin */
+	60000,                   /* gmax */
+	"/home/$user",           /* home_prefix */
+	"/bin/bash/",            /* shell */
+	"$user",                 /* group */
+	FALSE,                   /* pwd_random */
+	TRUE,                    /* logindefs */
+	NULL                     /* files */
+};
+
+static Profile *
+profile_get_default (xmlNodePtr root)
+{
 	Profile *pf;
+	xmlNodePtr node, n0;
+	gchar *tag;
+	gint i;
+	gchar *logindefs_tags[] = {
+		"passwd_max_day_use", "passwd_min_day_use", "passwd_warning_advance_days",
+		"new_user_min_id", "new_user_max_id", "new_group_min_id", "new_group_max_id",
+		"files", NULL
+	};
+
+	node = xst_xml_element_find_first (root, "logindefs");
+	if (!node) {
+		g_warning ("profile_get_default: Can't find logindefs tag.");
+		return NULL;
+	}
 	
-	pf = g_new (Profile, 1);
-	pf->name = g_strdup (N_("Default"));
-	pf->comment = g_strdup (N_("Default profile"));
+	pf = g_new0 (Profile, 1);
+	
+	/* Assign defaults */	
+	pf->name = g_strdup (default_profile.name);
+	pf->comment = g_strdup (default_profile.comment);
+	pf->home_prefix = g_strdup (default_profile.home_prefix);
+	pf->shell = g_strdup (default_profile.shell);
+	pf->group = g_strdup (default_profile.group);
+	pf->umin = default_profile.umin;
+	pf->umax = default_profile.umax;
+	pf->gmin = default_profile.gmin;
+	pf->gmax = default_profile.gmax;
+	pf->pwd_maxdays = default_profile.pwd_maxdays;
+	pf->pwd_mindays = default_profile.pwd_mindays;
+	pf->pwd_warndays = default_profile.pwd_warndays;
+	pf->pwd_random = default_profile.pwd_random;
+	pf->logindefs = default_profile.logindefs;
+	
+	for (i = 0, tag = logindefs_tags[0]; tag; i++, tag = logindefs_tags[i]) {
+		n0 = xst_xml_element_find_first (node, tag);
 
-	/* FIXME: Bad bad hardcoded values. */
-	pf->home_prefix = g_strdup ("/home/$user");
-	pf->shell = g_strdup ("/bin/bash");
-	pf->group = g_strdup ("$user");
+		if (n0) {
+			switch (i) {
+			case  0: pf->pwd_maxdays  = my_atoi (xst_xml_element_get_content (n0)); break;
+			case  1: pf->pwd_mindays  = my_atoi (xst_xml_element_get_content (n0)); break;
+			case  2: pf->pwd_warndays = my_atoi (xst_xml_element_get_content (n0)); break;
+			case  3: pf->umin         = my_atoi (xst_xml_element_get_content (n0)); break;
+			case  4: pf->umax         = my_atoi (xst_xml_element_get_content (n0)); break;
+			case  5: pf->gmin         = my_atoi (xst_xml_element_get_content (n0)); break;
+			case  6: pf->gmax         = my_atoi (xst_xml_element_get_content (n0)); break;
+			case  7: pf->files        = get_files (n0); break;
+				
+			default: g_warning ("profile_get_default: Shouldn't be here."); break;
+			}
+		}
+	}
 
-	pf->umin = logindefs.new_user_min_id;
-	pf->umax = logindefs.new_user_max_id;
-	pf->gmin = logindefs.new_group_min_id;
-	pf->gmax = logindefs.new_group_max_id;
-	pf->pwd_maxdays = logindefs.passwd_max_day_use;
-	pf->pwd_mindays = logindefs.passwd_min_day_use;
-	pf->pwd_warndays = logindefs.passwd_warning_advance_days;
-	pf->pwd_random = FALSE;
-	pf->logindefs = TRUE;
-
-	profile_table_add_profile (pf, TRUE);
+	return pf;
 }
 
 void
@@ -747,12 +910,14 @@ profile_table_from_xml (xmlNodePtr root)
 	gchar *profile_tags[] = {
 		"home_prefix", "shell", "group", "pwd_maxdays",
 		"pwd_mindays", "pwd_warndays", "umin","umax",
-		"gmin", "gmax", "pwd_random", "comment", "name", NULL
+		"gmin", "gmax", "pwd_random", "comment", "name",
+		"files", NULL
 	};
 	gchar *tag;
 	gint i;
 
-	profile_get_default ();
+	if ((pf = profile_get_default (root)))
+		profile_table_add_profile (pf, TRUE);
 	
 	node = xst_xml_element_find_first (root, "profiles");
 	if (!node)
@@ -780,6 +945,7 @@ profile_table_from_xml (xmlNodePtr root)
 				case 10: pf->pwd_random   = xst_xml_element_get_bool_attr (n0, "set"); break;
 				case 11: pf->comment      = xst_xml_element_get_content (n0); break;
 				case 12: pf->name         = xst_xml_element_get_content (n0); break;
+				case 13: pf->files        = get_files (n0); break;
 					
 				default: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
 				}
@@ -787,6 +953,25 @@ profile_table_from_xml (xmlNodePtr root)
 		}
 		profile_table_add_profile (pf, FALSE);
 		pf_node = xst_xml_element_find_next (pf_node, "profile");
+	}
+}
+
+static void
+set_files (xmlNodePtr root, GSList *list)
+{
+	xmlNodePtr node, n0;
+	GSList *tmp = list;
+
+	node = xst_xml_element_find_first (root, "files");
+	if (node)
+		xst_xml_element_destroy (node);
+
+	node = xst_xml_element_add (root, "files");	
+	while (tmp) {
+		n0 = xst_xml_element_add (node, "file");
+		xst_xml_element_set_content (n0, (gchar *)tmp->data);
+
+		tmp = tmp->next;
 	}
 }
 
@@ -845,8 +1030,7 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 	root = user_data;
 	pf = value;
 
-	if (pf->logindefs) /* Logindefs is "fake" profile. */
-	{
+	if (pf->logindefs) { /* Logindefs is "fake" profile. */
 		save_logindefs_xml (pf, root);
 		return;
 	}
@@ -860,6 +1044,7 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 	xst_xml_element_add_with_content (node, "group",       pf->group);
 	xst_xml_element_set_bool_attr (xst_xml_element_add (node, "pwd_random"),
 				       "set", pf->pwd_random);
+	set_files (node, pf->files);
 	
 	for (i = 0; nodes[i]; i++)
 	{
@@ -953,19 +1138,14 @@ profile_table_del_profile (gchar *name)
 	
 	pf = (Profile *)g_hash_table_lookup (profile_table->hash, buf);
 
-	if (pf)
-	{
-		if (pf->logindefs)
-		{
+	if (pf) {
+		if (pf->logindefs) {
 			GnomeDialog *d;
 
 			d = GNOME_DIALOG (gnome_error_dialog_parented (N_("Can't delete Default"),
 								       GTK_WINDOW (tool->main_dialog)));
 			gnome_dialog_run (d);
-		}
-
-		else
-		{
+		} else {
 			xst_ui_option_menu_remove_string (pft->system_menu, buf);
 			xst_ui_option_menu_remove_string (pft->files_menu, buf);
 			xst_ui_option_menu_remove_string (pft->security_menu, buf);

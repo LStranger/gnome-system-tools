@@ -521,10 +521,9 @@ user_account_gui_save (UserAccountGui *gui)
 		account->password = g_strdup (buf);
 	} else {
 		gboolean changed1 = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (gui->pwd1),
-							 USER_ACCOUNT_PASSWD_CHANGED));
+									  USER_ACCOUNT_PASSWD_CHANGED));
 		gboolean changed2 = GPOINTER_TO_INT (gtk_object_get_data (GTK_OBJECT (gui->pwd2),
-							 USER_ACCOUNT_PASSWD_CHANGED));
-
+									  USER_ACCOUNT_PASSWD_CHANGED));
 		if (changed1 || changed2) {
 			gchar *buf1 = gtk_entry_get_text (gui->pwd1);
 
@@ -535,7 +534,7 @@ user_account_gui_save (UserAccountGui *gui)
 				account->password = g_strdup (buf);
 		} else
 			account->password = NULL;
-	}	
+	}
 	
 	account->pwd_mindays = gtk_spin_button_get_value_as_int (gui->min);
 	account->pwd_maxdays = gtk_spin_button_get_value_as_int (gui->max);

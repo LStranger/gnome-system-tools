@@ -86,7 +86,6 @@ static const XstWidgetPolicy policies[] = {
 	{ "network_group_new",      XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "network_delete",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "network_settings",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "defs_container",         XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "showall",                XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "user_passwd_optional",   XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE },
 	{ NULL }

@@ -31,26 +31,6 @@
 
 #define IDMAX 100000
 
-/* Just as specified in the @login_defs_prop_array in the users-conf backend: */
-typedef struct
-{
-        gchar *qmail_dir;
-        gchar *mailbox_dir;
-        gchar *mailbox_file;
-        gint passwd_max_day_use;
-        gint passwd_min_day_use;
-        guint passwd_min_length;
-        guint passwd_warning_advance_days;
-        guint new_user_min_id;
-        guint new_user_max_id;
-        guint new_group_min_id;
-        guint new_group_max_id;
-        gchar *del_user_additional_command;
-        gboolean create_home;
-} login_defs;
-
-extern login_defs logindefs;
-
 typedef struct
 {
 	xmlNodePtr node;

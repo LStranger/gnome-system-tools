@@ -51,7 +51,7 @@ void user_set_groups     (xmlNodePtr user_node, GSList *list);
 #define group_value_gid_integer(node) (generic_value_integer (node, "gid"))
 
 
-#define user_set_value_login(node,value)           (generic_set_value_string (node, "login", value))
+#define user_set_value_login(node,value)       (generic_set_value_string (node, "login", value))
 #define user_set_value_home(node,value)        (generic_set_value_string (node, "home", value))
 #define user_set_value_shell(node,value)       (generic_set_value_string (node, "shell", value))
 #define user_set_value_comment(node,value)     (generic_set_value_string (node, "comment", value))
