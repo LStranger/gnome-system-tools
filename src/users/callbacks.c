@@ -46,7 +46,10 @@ static void do_quit (void);
 static void user_actions_set_sensitive (gboolean state);
 static void group_actions_set_sensitive (gboolean state);
 static void my_gtk_entry_set_text (void *entry, gchar *str);
-
+static gboolean update_user (void);
+static gboolean add_user (void);
+static gboolean update_group (void);
+static gboolean add_group (void);
 
 
 /* Main button callbacks */
@@ -87,7 +90,6 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	my_gtk_entry_set_text (w0, current_user->login);
 
-	/* TODO: fill the main group widget with available groups. */
 	w0 = tool_widget_get ("user_settings_group");
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	fill_user_settings_group (GTK_COMBO (w0));
@@ -131,7 +133,26 @@ on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
+	GtkWidget *w0;
+	
 	g_return_if_fail (tool_get_access());
+	
+	current_user = NULL;
+
+	w0 = tool_widget_get ("user_settings_name");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+
+	w0 = tool_widget_get ("user_settings_group");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	fill_user_settings_group (GTK_COMBO (w0));
+	my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
+
+	
+	w0 = tool_widget_get ("user_settings_comment");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	
+	w0 = tool_widget_get ("user_settings_dialog");
+	gtk_widget_show (w0);
 }
 
 extern void
@@ -225,7 +246,22 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_group_new_clicked (GtkButton *button, gpointer user_data)
 {
-	g_return_if_fail (tool_get_access());
+	GtkWidget *w0;
+
+	/* Clear current group */
+
+	current_group = NULL;
+
+	w0 = tool_widget_get ("group_settings_name");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	
+	/* Fill all users list */
+	fill_all_users_list (NULL);
+
+	/* Show group settings dialog */
+	
+	w0 = tool_widget_get ("group_settings_dialog");
+	gtk_widget_show (w0);
 }
 
 extern void
@@ -294,6 +330,29 @@ extern void
 on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
+	GtkObject *list_item;
+	GList *list;
+
+	/* set current current user if it's not set */
+	if (!current_user)
+	{
+		w0 = tool_widget_get ("user_list");
+		list = GTK_LIST (w0)->selection;
+		list_item = GTK_OBJECT (list->data);
+		current_user = gtk_object_get_data (list_item, user_list_data_key);
+	}
+
+	/* Clear up entries */
+
+	w0 = tool_widget_get ("user_settings_name");
+	gtk_entry_set_text (GTK_ENTRY (w0), "");
+
+	w0 = tool_widget_get ("user_settings_comment");
+	gtk_entry_set_text (GTK_ENTRY (w0), "");
+
+	w0 = tool_widget_get ("user_settings_group");
+	list = gtk_container_children (GTK_CONTAINER (w0));
+	g_list_free (list);
 
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_widget_hide (w0);
@@ -302,83 +361,22 @@ on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0;
-	GtkWindow *win;
-	GnomeDialog *dialog;
-	gchar *txt;
-	GtkWidget *label, *list_item;
-	GtkList *list;
-	GList *tmplist;
-	group *g;
-																			 
-	w0 = tool_widget_get ("user_settings_name");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
-
-	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
-
-	/* If login name is changed and is at least 3 letters long (is that correct?) */
-	if (strcmp (txt, current_user->login))
-	{
-		if (strlen (txt) < 1)
-		{
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					("Username is empty.", win));
-			
-			gnome_dialog_run (dialog);
-		}
-		else
-		{
-			g_free (current_user->login);
-			current_user->login = g_strdup (txt);
-
-			list = GTK_LIST (tool_widget_get ("user_list"));
-			tmplist = g_list_copy (list->selection);
-			list_item = (GtkWidget *)tmplist->data;
-			label = GTK_BIN (list_item)->child;
-			gtk_label_set_text (GTK_LABEL (label), txt);			
-		}
-	}
-
-	w0 = tool_widget_get ("user_settings_comment");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
-
-	if (current_user->comment == NULL)
-	{
-		if (strlen (txt) > 0)
-			current_user->comment = g_strdup (txt);
-	}
-
-	else if (strcmp (txt, current_user->comment))
-	{
-		g_free (current_user->comment);
-		current_user->comment = g_strdup (txt);
-	}
-
-
-	/* Get selected group name */
-
-	w0 = tool_widget_get ("user_settings_group");
-	txt = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
-
-	/* Now find group's gid */
-
-	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
-	{
-		g = (group *)tmplist->data;
-		if (!strcmp (g->name, txt))
-			break;
-	}
+	gboolean retval;
 	
-	if (!tmplist)
-		g_warning ("Couldn't find the GID for the selected group.");
+	/* if current_user == NULL we are adding new user,
+	 * else we are modifying user settigns */
+	
+	if (!current_user)
+		retval = add_user ();
 	else
-		current_user->gid = g->gid;
-	
-	g_free (txt);
-				
-	tool_set_modified(TRUE);
-	/* Clean up dialog, it's easiest to just call *_cancel_* function */
-	on_user_settings_cancel_clicked (NULL, NULL);
+		retval = update_user ();
+
+	if (retval)
+	{
+		tool_set_modified(TRUE);
+		/* Clean up dialog, it's easiest to just call *_cancel_* function */
+		on_user_settings_cancel_clicked (NULL, NULL);
+	}
 }
 
 /* Password settings callbacks */
@@ -458,7 +456,21 @@ extern void
 on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-	GList *members;
+	GtkObject *list_item;
+	GList *members, *current;
+
+	/* set current current group if it's not set */
+	if (!current_group)
+	{
+		w0 = tool_widget_get ("group_list");
+		current = GTK_LIST (w0)->selection;
+		list_item = GTK_OBJECT (current->data);
+		current_group = gtk_object_get_data (list_item, group_list_data_key);
+	}
+	/* Clear group name */
+
+	w0 = tool_widget_get ("group_settings_name");
+	gtk_entry_set_text (GTK_ENTRY (w0), "");
 
 	/* Clear both lists. Do we have to free some memory also? */
 
@@ -477,74 +489,22 @@ on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0, *label, *list_item;
-	GtkWindow *win;
-	GnomeDialog *dialog;
-	gchar *txt;
-	GList *selection;
-	GtkList *list;
+	gboolean retval;
 	
-	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
-
-	w0 = tool_widget_get ("group_settings_name");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
-
-	if (strcmp (current_group->name, txt))
-	{
-		if (strlen (txt) < 1)
-		{
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					("Group name is empty.", win));
-			
-			gnome_dialog_run (dialog);
-		}
-		else
-		{
-			g_free (current_group->name);
-			current_group->name = g_strdup (txt);
-
-			list = GTK_LIST (tool_widget_get ("group_list"));
-			selection = g_list_copy (list->selection);
-			list_item = (GtkWidget *)selection->data;
-			label = GTK_BIN (list_item)->child;
-			gtk_label_set_text (GTK_LABEL (label), txt);
-		}
-	}
-
-	/* Update group members also */
-
-	list = GTK_LIST (tool_widget_get ("group_settings_members"));
-
-
-	/* First, free our old users list ... */
-	for (selection = g_list_first (current_group->users); selection;
-			selection = g_list_next (selection))
-
-	{
-		txt = (gchar *)selection->data;
-		g_free (txt);
-	}
-
-	g_list_free (current_group->users);
-	current_group->users = NULL;
-
+	/* if current_group == NULL we are adding new group,
+	 * else we are modifying group settigns */
 	
-	/* ... and then, build new one */
-	for (selection = g_list_first (list->children); selection;
-			selection = g_list_next (selection))
+	if (!current_group)
+		retval = add_group ();
+	else
+		retval = update_group ();
 
+	if (retval)
 	{
-		list_item = (GtkWidget *)selection->data;
-		label = GTK_BIN (list_item)->child;
-		gtk_label_get (GTK_LABEL (label), &txt);
-		current_group->users = g_list_append (current_group->users, g_strdup (txt));
+		tool_set_modified(TRUE);
+		/* Clear list and hide dialog */
+		on_group_settings_cancel_clicked (NULL, NULL);
 	}
-
-	
-
-	tool_set_modified(TRUE);
-	/* Clear list and hide dialog */
-	on_group_settings_cancel_clicked (NULL, NULL);
 }
 
 extern void
@@ -775,3 +735,331 @@ my_gtk_entry_set_text (void *entry, gchar *str)
 {
 	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
 }
+
+static gboolean
+update_user (void)
+{
+	GtkWidget *w0;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+	gchar *txt;
+	GtkWidget *label, *list_item;
+	GtkList *list;
+	GList *tmplist;
+	group *g;																		 
+	w0 = tool_widget_get ("user_settings_name");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+
+	/* If login name is changed and isn't empty */
+	if (strcmp (txt, current_user->login))
+	{
+		if (strlen (txt) < 1)
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
+					("Username is empty.", win));
+			
+			gnome_dialog_run (dialog);
+			gtk_widget_grab_focus (w0);
+			return FALSE;
+		}
+		else
+		{
+			g_free (current_user->login);
+			current_user->login = g_strdup (txt);
+
+			list = GTK_LIST (tool_widget_get ("user_list"));
+			tmplist = g_list_copy (list->selection);
+			list_item = (GtkWidget *)tmplist->data;
+			label = GTK_BIN (list_item)->child;
+			gtk_label_set_text (GTK_LABEL (label), txt);			
+		}
+	}
+
+	w0 = tool_widget_get ("user_settings_comment");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	if (current_user->comment == NULL)
+	{
+		if (strlen (txt) > 0)
+			current_user->comment = g_strdup (txt);
+	}
+
+	else if (strcmp (txt, current_user->comment))
+	{
+		g_free (current_user->comment);
+		current_user->comment = g_strdup (txt);
+	}
+
+
+	/* Get selected group name */
+
+	w0 = tool_widget_get ("user_settings_group");
+	txt = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
+
+	/* Now find group's gid */
+
+	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+	{
+		g = (group *)tmplist->data;
+		if (!strcmp (g->name, txt))
+			break;
+	}
+	
+	if (!tmplist)
+	{
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Select main group", win));
+		gnome_dialog_run (dialog);
+		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
+		return FALSE;
+	}
+	else
+		current_user->gid = g->gid;
+
+	return TRUE;
+}
+
+static gboolean
+add_user (void)
+{
+	GtkWidget *w0;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+	gchar *txt, *txt1;
+	GtkWidget *list_item;
+	GtkList *list;
+	GList *tmplist;
+	group *g;
+	user *tmpuser, *current_u;
+
+	w0 = tool_widget_get ("user_settings_name");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+
+	/* If login name isn't empty */
+	if (strlen (txt) < 1)
+	{
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented 
+				("Username is empty.", win));
+		
+		gnome_dialog_run (dialog);
+		gtk_widget_grab_focus (w0);
+		return FALSE;
+	}
+
+	/* Check, if user doesn't exist */
+
+	for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
+	{
+		current_u = (user *)tmplist->data;
+		if (!strcmp (current_u->login, txt))
+		{
+			txt = g_strdup_printf ("User %s already exists.", txt);
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, win));
+			gnome_dialog_run (dialog);
+			gtk_widget_grab_focus (w0);
+			gtk_editable_select_region (GTK_EDITABLE (w0), 0, -1);
+			return FALSE;
+		}
+	}
+
+	/* Get selected group name */
+
+	w0 = tool_widget_get ("user_settings_group");
+	txt1 = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
+
+	/* Now find group's gid */
+
+	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
+	{
+		g = (group *)tmplist->data;
+		if (!strcmp (g->name, txt1))
+		break;
+	}
+	
+	if (!tmplist)
+	{
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Select main group.", win));
+		gnome_dialog_run (dialog);
+		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
+		return FALSE;
+	}
+
+	/* Everything should be ok, let's create new user */
+
+	/* TODO fill other fields too like key, uid, etc... */
+	tmpuser = g_new0 (user, 1);
+	tmpuser->login = g_strdup (txt);
+	tmpuser->gid = g->gid;
+
+	list = GTK_LIST (tool_widget_get ("user_list"));
+	list_item = gtk_list_item_new_with_label (txt);
+	gtk_widget_show (list_item);
+	gtk_object_set_data (GTK_OBJECT (list_item), user_list_data_key, tmpuser);
+	tmplist = NULL;
+	tmplist = g_list_append (tmplist, list_item);
+	gtk_list_append_items (list, tmplist);
+	
+
+	w0 = tool_widget_get ("user_settings_comment");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	if (strlen (txt) > 0)
+		tmpuser->comment = g_strdup (txt);
+
+	
+	current_user = tmpuser;
+	user_list = g_list_append (user_list, tmpuser);
+
+	return TRUE;
+}
+
+static gboolean
+update_group (void)
+{
+	GtkWidget *w0, *label, *list_item;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+	gchar *txt;
+	GList *selection;
+	GtkList *list;
+	
+	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+
+	w0 = tool_widget_get ("group_settings_name");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	if (strcmp (current_group->name, txt))
+	{
+		if (strlen (txt) < 1)
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
+					("Group name is empty.", win));
+			
+			gnome_dialog_run (dialog);
+			gtk_widget_grab_focus (w0);
+			return FALSE;
+		}
+		else
+		{
+			g_free (current_group->name);
+			current_group->name = g_strdup (txt);
+
+			list = GTK_LIST (tool_widget_get ("group_list"));
+			selection = g_list_copy (list->selection);
+			list_item = (GtkWidget *)selection->data;
+			label = GTK_BIN (list_item)->child;
+			gtk_label_set_text (GTK_LABEL (label), txt);
+		}
+	}
+
+	/* Update group members also */
+
+	list = GTK_LIST (tool_widget_get ("group_settings_members"));
+
+
+	/* First, free our old users list ... */
+	for (selection = g_list_first (current_group->users); selection;
+			selection = g_list_next (selection))
+
+	{
+		txt = (gchar *)selection->data;
+		g_free (txt);
+	}
+
+	g_list_free (current_group->users);
+	current_group->users = NULL;
+
+	
+	/* ... and then, build new one */
+	for (selection = g_list_first (list->children); selection;
+			selection = g_list_next (selection))
+
+	{
+		list_item = (GtkWidget *)selection->data;
+		label = GTK_BIN (list_item)->child;
+		gtk_label_get (GTK_LABEL (label), &txt);
+		current_group->users = g_list_append (current_group->users, g_strdup (txt));
+	}
+	
+	return TRUE;
+}
+
+static gboolean
+add_group (void)
+{
+	GtkWidget *w0, *label, *list_item;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+	gchar *txt;
+	GList *selection = NULL;
+	GtkList *list;
+	group *tmpgroup, *current_g;
+	
+	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
+
+	w0 = tool_widget_get ("group_settings_name");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	if (strlen (txt) < 1)
+	{
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented 
+				("Group name is empty.", win));
+		
+		gnome_dialog_run (dialog);
+		gtk_widget_grab_focus (w0);
+		return FALSE;
+	}
+	
+	/* Find, if group with given name doesn't already exist */
+	for (selection = g_list_first (group_list); selection; selection = g_list_next (selection))
+	{
+		current_g = (group *)selection->data;
+		if (!strcmp (current_g->name, txt))
+		{
+			txt = g_strdup_printf ("Group %s already exists.", txt);
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, win));
+			gnome_dialog_run (dialog);
+			gtk_widget_grab_focus (w0);
+			gtk_editable_select_region (GTK_EDITABLE (w0), 0, -1);
+			return FALSE;
+		}
+	}
+
+	/* Everything should be ok and we can add new group */
+
+	/* TODO fill other information too (like key, gid, password */
+	
+	tmpgroup = g_new0 (group, 1);
+	tmpgroup->users = NULL;
+	tmpgroup->name = g_strdup (txt);
+
+	list = GTK_LIST (tool_widget_get ("group_list"));
+	list_item = gtk_list_item_new_with_label (txt);
+	gtk_widget_show (list_item);
+	gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, tmpgroup);
+	selection = g_list_append (selection, list_item);
+	gtk_list_append_items (list, selection);
+
+	/* Add group members */
+
+	list = GTK_LIST (tool_widget_get ("group_settings_members"));
+
+	for (selection = g_list_first (list->children); selection;
+			selection = g_list_next (selection))
+
+	{
+		list_item = (GtkWidget *)selection->data;
+		label = GTK_BIN (list_item)->child;
+		gtk_label_get (GTK_LABEL (label), &txt);
+		tmpgroup->users = g_list_append (tmpgroup->users, g_strdup (txt));
+	}
+	
+	current_group = tmpgroup;
+	group_list = g_list_append (group_list, current_group);
+
+	return TRUE;
+}
+
