@@ -6,11 +6,12 @@
 ##
 
 @XML_I18N_MERGE_DESKTOP_RULE@
-@XST_TOOL_DESKTOP_IN_RULE@
+include ../common/CommonMakefile
 
 toolname = boot
 bin_PROGRAMS = boot-admin
 
+## SUBDIRS =
 CPPFLAGS =
 INCLUDES = $(XST_TOOL_CFLAGS)
 CLEANFILES = $(XST_TOOL_CLEANFILES)
@@ -28,12 +29,5 @@ boot_admin_SOURCES = \
 	boot-image-editor.c boot-image-editor.h \
 	boot-druid.c		boot-druid.h
 
-
-
 toolpixmaps =
 etspecs = boot.etspec
-etspecs_DATA = $(etspecs)
-desktop = $(toolname).desktop
-
-all-local: $(desktop)
-

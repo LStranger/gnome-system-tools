@@ -6,12 +6,12 @@
 ##
 
 @XML_I18N_MERGE_DESKTOP_RULE@
-###@__X_ST_TOOL_DESKTOP_IN_RULE@
 include ../common/CommonMakefile
 
 toolname = network
 bin_PROGRAMS = network-admin
 
+## SUBDIRS =
 CPPFLAGS =
 INCLUDES = $(XST_TOOL_CFLAGS)
 CLEANFILES = $(XST_TOOL_CLEANFILES)
@@ -29,7 +29,3 @@ network_admin_SOURCES = \
 
 toolpixmaps =
 etspecs = 
-etspecs_DATA = $(etspecs)
-desktop = $(toolname).desktop
-
-all-local: $(desktop)

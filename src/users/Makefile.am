@@ -6,7 +6,7 @@
 ##
 
 @XML_I18N_MERGE_DESKTOP_RULE@
-@XST_TOOL_DESKTOP_IN_RULE@
+include ../common/CommonMakefile
 
 toolname = users
 bin_PROGRAMS = users-admin
@@ -35,7 +35,3 @@ users_admin_SOURCES = \
 
 toolpixmaps =
 etspecs = group.etspec  net_group.etspec  net_user.etspec  profiles.etspec  users.etspec
-etspecs_DATA = $(etspecs)
-desktop = $(toolname).desktop
-
-all-local: $(desktop)

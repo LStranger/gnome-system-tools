@@ -6,14 +6,13 @@
 ##
 
 @XML_I18N_MERGE_DESKTOP_RULE@
-@XST_TOOL_DESKTOP_IN_RULE@
+include ../common/CommonMakefile
 
 toolname = time
 bin_PROGRAMS = time-admin
 
 SUBDIRS = e-map
 CPPFLAGS =
-
 INCLUDES = $(XST_TOOL_CFLAGS)
 CLEANFILES = $(XST_TOOL_CLEANFILES)
 EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
@@ -31,11 +30,3 @@ time_admin_SOURCES = \
 toolpixmaps =
 etspecs = 
 etspecs_DATA = $(etspecs)
-desktop = $(toolname).desktop
-
-all-local: $(desktop)
-
-
-
-
-
