@@ -1,149 +1,148 @@
-Verification matrix
--------------------
-
-This is a matrix describing the current status of tool platform/distribution
-support. To the best of our knowledge.
+This is a matrix describing the current status of tool platform/distribution support, to the best of our knowledge.
 
 Key:
 
-+  Supported and tested. The tool will not ask you to select a compatible
-   version or distribution. Of course, there may still be bugs. :-)
-+? Supported, not tested. Same as '+', but we haven't tested it. In other
-   words, it "should work", because we know it's compatible.
-?  Unsupported, may work. You'll be asked to select a compatible version or
-   distribution, which may or may not work.
--  Unsupported, doesn't work. We haven't worked on any version of that
-   flavour. It's most possible that it won't work.
+  +  Supported and tested. The tool will not ask you to select a compatible
+  version or distribution. Of course, there may still be bugs. :-)
+  +? Supported, not tested. Same as '+', but we haven't tested it. In other
+  words, it "should work", because we know it's compatible.
+  ?  Unsupported, may work. You'll be asked to select a compatible version or
+  distribution, which may or may not work.
+  -  Unsupported, doesn't work. We haven't worked on any version of that
+  flavour. It's most likely that it won't work.
 
 
-Red Hat Linux:
+  Red Hat Linux:
 
-Version        5.2     6.0     6.1     6.2     7.0     7.1
+  Version        5.2     6.0     6.1     6.2     7.0     7.1     7.2 
 
-Boot            +?      +?      +?      +       +       +
-Disks           +?      +?      +?      +       +       +
-Memory          +?      +?      +?      +       +       +
-Network         +?      +?      +?      +       +       +
-Shares          +?      +?      +?      +       +       +
-Time            +?      +?      +?      +       +       +
-Users           +?      +?      +?      +       +       +
+  Boot            +?      +?      +?      +       +       +	      +
+  Network         +?      +?      +?      +       +       +	      +
+  Shares          +?      +?      +?      +       +       +	      +
+  Time            +?      +?      +?      +       +       +	      +
+  Users           +?      +?      +?      +       +       +	      +
+  Display          ?       ?       ?      ?       +       +	      +
+  Internetsharing  ?       ?       ?      ?       +       +	      +
+  Font             ?       ?       ?      ?       ?       ?       +
 
+  Debian GNU/Linux:
 
-Debian GNU/Linux:
+  Version        2.2    Woody
 
-Version        2.2    Woody
+  Boot            +       +
+  Network         +       +?
+  Shares          +       +
+  Time            +       +
+  Users           +       +?
+  Display         +       +
+  Internetsharing +       +
+  Font            ?       ?
 
-Boot            +       +
-Disks           +       +
-Memory          +       +
-Network         +       +?
-Shares          +       +
-Time            +       +
-Users           +       +?
-
-Woody comments: You'll have to echo 'woody' > /etc/debian_version to
-make the ximian-setup-tools detect your distribution. 
-
-Linux Mandrake:
-
-Version        7.0     7.1     7.2     8.0
-
-Boot            ?       ?       +       ?
-Disks           ?       ?       +       ?
-Memory          ?       ?       +       ?
-Network         ?       ?       +       ?
-Shares          ?       ?       +       ?
-Time            ?       ?       +       ?
-Users           ?       ?       +       ?
+  Woody comments: You'll have to echo 'woody' > /etc/debian_version to
+  make the ximian-setup-tools detect your distribution. 
 
 
-SuSE Linux:
+  Linux Mandrake:
 
-Version        6.3     6.4     7.0     7.1
+  Version        7.0     7.1     7.2     8.0
 
-Boot            ?       ?       +       ?
-Disks           ?       ?       +       ?
-Memory          ?       ?       +       ?
-Network         ?       ?       +?      ?
-Shares          ?       ?       +       ?
-Time            ?       ?       +       ?
-Users           ?       ?       +       ?
+  Boot            ?       ?       +       ?
+  Network         ?       ?       +       ?
+  Shares          ?       ?       +       ?
+  Time            ?       ?       +       ?
+  Users           ?       ?       +       ?
+  Display         ?       ?       ?       ?
+  Internetsharing ?       ?       +       ?
+  Font            ?       ?       ?       ?
 
+  SuSE Linux:
 
-Turbolinux:
+  Version        6.3     6.4     7.0     7.1
 
-Version         6
+  Boot            ?       ?       +       ?
+  Network         ?       ?       +?      ?
+  Shares          ?       ?       +       ?
+  Time            ?       ?       +       ?
+  Users           ?       ?       +       ?
+  Display         ?       ?       ?       ?
+  Internetsharing ?       ?       ?       ?
+  Font            ?       ?       ?       ?
 
-Boot            ?
-Disks           ?
-Memory          ?
-Network         -
-Shares          ?
-Time            -
-Users           ?
+  Turbolinux:
 
+  Version         6
 
-LinuxPPC:
+  Boot            ?
+  Network         -
+  Shares          ?
+  Time            -
+  Users           ?
+  Display         +?
+  Internetsharing ?
+  Font            ?
 
-Version        2000
+  LinuxPPC:
 
-Boot            -
-Disks           ?
-Memory          ?
-Network         -
-Shares          ?
-Time            -
-Users           ?
+  Version        2000
 
+  Boot            -
+  Network         -
+  Shares          ?
+  Time            -
+  Users           ?
+  Display         ?
+  Internetsharing ?
+  Font            ?
 
-Yellow Dog Linux:
+  Yellow Dog Linux:
 
-Version        1.2     2.0
+  Version        1.2     2.0
 
-Boot            -       -
-Disks           ?       ?
-Memory          ?       ?
-Network         -       -
-Shares          ?       ?
-Time            -       -
-Users           ?       ?
+  Boot            -       -
+  Network         -       -
+  Shares          ?       ?
+  Time            -       -
+  Users           ?       ?
+  Display         ?       ?
+  Internetsharing ?       ?
+  Font            ?       ?
 
+  Solaris:
 
-Solaris:
+  Version        7.0     8.0
 
-Version        7.0     8.0
+  Boot            -       -
+  Network         -       -
+  Shares          -       -
+  Time            -       -
+  Users           -       -
+  Display         -       -
+  Internetsharing -       -
+  Font            -       -
 
-Boot            -       -
-Disks           -       -
-Memory          -       -
-Network         -       -
-Shares          -       -
-Time            -       -
-Users           -       -
+  HPUX:
 
+  Version       10.0     11.0
 
-HPUX:
+  Boot            -       -
+  Network         -       -
+  Shares          -       -
+  Time            -       -
+  Users           -       -
+  Display         -       -
+  Internetsharing -       -
+  Font            -       -
 
-Version       10.0     11.0
+  FreeBSD:
 
-Boot            -       -
-Disks           -       -
-Memory          -       -
-Network         -       -
-Shares          -       -
-Time            -       -
-Users           -       -
+  Version        4.x     5.x
 
-
-FreeBSD:
-
-Version        4.x     5.x
-
-Boot            -       -
-Disks           -       -
-Memory          -       -
-Network         -       -
-Shares          ?       ?
-Time            -       -
-Users           ?       ?
+  Boot            -       -
+  Network         -       -
+  Shares          ?       ?
+  Time            -       -
+  Users           ?       ?
+  Display         -       -
+  Internetsharing -       -
+  Font            -       -
 

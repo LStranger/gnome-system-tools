@@ -33,7 +33,7 @@ Systemdirp = $(paneldir)/System
 
 panel_DATA = $(groups_files)
 
-EXTRA_DIST = $(directory).in.in $(groups_files)
+EXTRA_DIST = $(directory).in.in $(groups_files) CommonMakefile
 CLEANFILES = $(directory) $(groups_files)
 
 

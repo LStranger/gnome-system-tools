@@ -1,3 +1,325 @@
+Ximian Setup Tools 0.11
+
+The Ximian Setup Tools version 0.11.0 have been released.
+
+The Ximian Setup Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The Ximian Setup Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
+
+Screenshots
+===========
+You can view screenshots of the most recent tools at http://primates.ximian.com/~chema/xst/
+
+Changes since last release
+==========================
+
+    * Added Font tool. (Tambet)
+    * Added support for Red Hat 7.2 (Arturo)
+    * Added support for Grub. (Arturo)
+    * Improved error reporting. (Arturo)
+    * Time now changes the clock when a timezone change is made and ntp state is loaded correctly. (Hans)
+    * Lots of bugfixing in the existing tools. (Everyone)
+    * Conditionaly compile with/without archiver support (Chema) 
+
+Downloading
+===========
+You can get it from : ftp://ftp.gnome.org/pub/GNOME/unstable/sources/ximian-setup-tools
+
+Help Wanted
+===========
+We still need lots of help from anybody interested in contributing to XST, even if it's only an email letting us know whether the tools worked for your system. You can also submit bug reports at http://bugzilla.ximian.com
+
+Testing
+-------
+Testing that the tools work correctly on your system and either filing detailed bug reports or confirming that they work correctly is greatly appreciated. If you test a tool on an unsupported distro/system and find out that it works correctly, please let us know so that we can update the supported tools matrix (see below).
+
+Porting
+-------
+The backends are designed as to minimize the effort needed to support more distros/systems. A great way to contribute is to port the tools to another distribution/system.
+
+Prerequisites
+=============
+
+- Without archiver support  [--without-archiver]:
+
+* GNOME 1.4 libaries
+
+* gal >= 0.12, available at
+ftp://ftp.gnome.org/pub/GNOME/unstable/sources/gal/gal-0.12.tar.gz
+
+* gnome-print >= 0.34 available at 
+ftp://ftp.gnome.org/pub/GNOME/stable/sources/gnome-print/gnome-print-0.34.tar.gz
+
+- With archiver support [--with-archiver] without archiver requirements plus "
+
+* control-center >= 1.5.11 available at 
+ftp://ftp.gnome.org/pub/GNOME/unstable/sources/control-center/control-center-1.5.11.tar.gz
+
+* bonobo
+
+Stability
+=========
+The tools have been stable on our systems recently. However, since this tools modify your system configuration we suggest that only people which are going to be able to solve a problem if something goes wrong use them at the time. We have created a backup system so that the changes made to the configuration files are tracked and stored (see below).
+
+In particular we've found the display tool to uncover some X problems which might make X crash. Save all your documents before trying out the display-tool.
+
+
+Mailing list / IRC
+==================
+For discussion and feedback, sign up for our mailing list:http://lists.ximian.com/mailman/listinfo/setup-tool-hackers
+
+You can also find us in the #xst channel on IRC server irc.gnome.org
+
+Whitepaper
+==========
+You can find the latest version of the XST whitepaper at: http://primates.ximian.com/~miguel/helix-setup-tools.html
+
+Backup system
+=============
+Every time a tool modifies your system configuration files, it makes backups of those files. The backups are rotated (for 9 levels in total), and the backup made the first time the tool was run is kept forever. This means that you can revert your system configuration to the point before you ever ran a Ximian Setup Tool.
+
+The backup path is /var/cache/ximian-setup-tools/backup/<tool>/<id>/. In this directory, you'll find a complete snapshot of the files that were modified. The original directory structure leading up to these files is also kept. <id> runs from 1-9, and when the first backup is rotated out, it is kept in a special catalog called "First", which is never touched again.
+
+Current Tool Set
+================
+- Network admin
+Allows you to configure your:
+
+    * hostname
+    * samba hostname and workgroup
+    * DNS servers
+    * search domains
+    * hosts (/etc/hosts)
+    * Network interfaces
+    * ppp
+    * ethernet
+    * slip
+    * wavelan (limited support)
+
+- Time admin
+Allows you to configure your:
+
+    * Date & Time
+    * Timezone
+    * NTPD servers
+
+- Users admin
+Allows you to manage:
+
+    * Users
+    * username / full name
+    * password
+    * home dir
+    * shell
+    * groups
+    * Groups
+
+- Boot admin
+Allows you to set:
+
+    * Default boot partition
+    * Partition type and label
+    * Timeout
+    * Kernel image
+    * Kernel extra parameters (append)
+    * adding or deleting partitions from the boot manager
+
+- Shares admin
+Allows you to import and export NFS and samba shares.
+
+    * import NFS & samba shares
+    * export NFS & samba shares
+
+- Display admin
+Allows you to configure your:
+
+    * Resolution
+    * Color depth
+
+- Internet Sharing admin
+Lets you share your internet connection with a LAN, configuring:
+
+    * Masquerading
+    * DHCP server and ranges
+
+- Font tool
+Allows you to install and configure:
+
+    * New truetype fonts
+    * Change your current fonts
+
+Verification matrix
+===================
+
+This is a matrix describing the current status of tool platform/distribution support, to the best of our knowledge.
+
+Key:
+
+  +  Supported and tested. The tool will not ask you to select a compatible
+  version or distribution. Of course, there may still be bugs. :-)
+  +? Supported, not tested. Same as '+', but we haven't tested it. In other
+  words, it "should work", because we know it's compatible.
+  ?  Unsupported, may work. You'll be asked to select a compatible version or
+  distribution, which may or may not work.
+  -  Unsupported, doesn't work. We haven't worked on any version of that
+  flavour. It's most likely that it won't work.
+
+
+  Red Hat Linux:
+
+  Version        5.2     6.0     6.1     6.2     7.0     7.1     7.2 
+
+  Boot            +?      +?      +?      +       +       +	      +
+  Network         +?      +?      +?      +       +       +	      +
+  Shares          +?      +?      +?      +       +       +	      +
+  Time            +?      +?      +?      +       +       +	      +
+  Users           +?      +?      +?      +       +       +	      +
+  Display          ?       ?       ?      ?       +       +	      +
+  Internetsharing  ?       ?       ?      ?       +       +	      +
+  Font             ?       ?       ?      ?       ?       ?       +
+
+  Debian GNU/Linux:
+
+  Version        2.2    Woody
+
+  Boot            +       +
+  Network         +       +?
+  Shares          +       +
+  Time            +       +
+  Users           +       +?
+  Display         +       +
+  Internetsharing +       +
+  Font            ?       ?
+
+  Woody comments: You'll have to echo 'woody' > /etc/debian_version to
+  make the ximian-setup-tools detect your distribution. 
+
+
+  Linux Mandrake:
+
+  Version        7.0     7.1     7.2     8.0
+
+  Boot            ?       ?       +       ?
+  Network         ?       ?       +       ?
+  Shares          ?       ?       +       ?
+  Time            ?       ?       +       ?
+  Users           ?       ?       +       ?
+  Display         ?       ?       ?       ?
+  Internetsharing ?       ?       +       ?
+  Font            ?       ?       ?       ?
+
+  SuSE Linux:
+
+  Version        6.3     6.4     7.0     7.1
+
+  Boot            ?       ?       +       ?
+  Network         ?       ?       +?      ?
+  Shares          ?       ?       +       ?
+  Time            ?       ?       +       ?
+  Users           ?       ?       +       ?
+  Display         ?       ?       ?       ?
+  Internetsharing ?       ?       ?       ?
+  Font            ?       ?       ?       ?
+
+  Turbolinux:
+
+  Version         6
+
+  Boot            ?
+  Network         -
+  Shares          ?
+  Time            -
+  Users           ?
+  Display         +?
+  Internetsharing ?
+  Font            ?
+
+  LinuxPPC:
+
+  Version        2000
+
+  Boot            -
+  Network         -
+  Shares          ?
+  Time            -
+  Users           ?
+  Display         ?
+  Internetsharing ?
+  Font            ?
+
+  Yellow Dog Linux:
+
+  Version        1.2     2.0
+
+  Boot            -       -
+  Network         -       -
+  Shares          ?       ?
+  Time            -       -
+  Users           ?       ?
+  Display         ?       ?
+  Internetsharing ?       ?
+  Font            ?       ?
+
+  Solaris:
+
+  Version        7.0     8.0
+
+  Boot            -       -
+  Network         -       -
+  Shares          -       -
+  Time            -       -
+  Users           -       -
+  Display         -       -
+  Internetsharing -       -
+  Font            -       -
+
+  HPUX:
+
+  Version       10.0     11.0
+
+  Boot            -       -
+  Network         -       -
+  Shares          -       -
+  Time            -       -
+  Users           -       -
+  Display         -       -
+  Internetsharing -       -
+  Font            -       -
+
+  FreeBSD:
+
+  Version        4.x     5.x
+
+  Boot            -       -
+  Network         -       -
+  Shares          ?       ?
+  Time            -       -
+  Users           ?       ?
+  Display         -       -
+  Internetsharing -       -
+  Font            -       -
+
+Credits
+=======
+
+Developers
+
+Arturo Espinosa <arturo@ximian.com>
+Hans Petter Jansson <hpj@ximian.com>
+Tambet Ingo <tambet@ximian.com>
+Chema Celorio <chema@ximian.com>
+Bradford Hovinen <bradford@ximian.com>
+Israel Escalante <israel@ximian.com>
+Jacob Berkman <jacob@ximian.com>
+
+Artists
+
+Jakub Steiner <jimmac@ximian.com>
+Anna Dirks <anna@ximian.com>
+Tuomas Kuosmanen <tigert@ximian.com>
+Joakim Ziegler <joakim@ximian.com>
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 XST - 0.10
 ==========
 The Ximian Setup Tools 0.10.0 have been released.
@@ -228,7 +550,7 @@ Time            ?       ?       +       ?
 Users           ?       ?       +       ?
 Display         ?       ?       ?       ?
 Internetsharing ?       ?       ?       ?
-Font 		?       ?       ?       ?
+Font            ?       ?       ?       ?
 
 Turbolinux:
 
@@ -241,7 +563,7 @@ Time            -
 Users           ?
 Display         +?
 Internetsharing ?
-Font		?
+Font            ?
 
 LinuxPPC:
 
@@ -254,7 +576,7 @@ Time            -
 Users           ?
 Display         ?
 Internetsharing ?
-Font		?
+Font            ?
 
 Yellow Dog Linux:
 

@@ -2,7 +2,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
 
-AM_INIT_AUTOMAKE(ximian-setup-tools, 0.10.0)
+AM_INIT_AUTOMAKE(ximian-setup-tools, 0.11.0)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -269,7 +269,7 @@ esac;
 XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/src/common/libsetuptool.a"
 XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
 XST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"
-XST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(desktop).in \$(desktop) \$(etspecs)"
+XST_TOOL_EXTRA_DIST="\$(toolpixmaps) \$(desktop).in.in \$(etspecs)"
 XST_TOOL_DEPENDENCIES="\$(top_builddir)/src/common/libsetuptool.a"
 
 AC_SUBST(XST_LIBS)
