@@ -4,6 +4,7 @@ disks.glade \
 memory.glade \
 nameresolution.glade \
 network.glade \
+internet_connection_druid.glade \
 networking.glade \
 shares.glade \
 time.glade \
@@ -24,6 +25,8 @@ nameresolution.glade.in \
 nameresolution.glade.h \
 network.glade.in \
 network.glade.h \
+internet_connection_druid.glade.in \
+internet_connection_druid.glade.h \
 networking.glade.in \
 networking.glade.h \
 shares.glade.in \
