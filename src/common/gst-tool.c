@@ -1589,7 +1589,7 @@ gst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 				      GNOME_PARAM_HUMAN_READABLE_NAME,
 				      _("GNOME System Tools"),
 				      NULL);
-	try_show_usage_warning ();
+	/* try_show_usage_warning (); */
 }
 
 static gboolean
