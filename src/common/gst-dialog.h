@@ -85,6 +85,7 @@ void                gst_dialog_construct           (GstDialog *dialog,
 						    const char *title);
 
 void                gst_dialog_connect_signals     (GstDialog *xd, GstDialogSignal *signals);
+void                gst_dialog_connect_signals_after (GstDialog *xd, GstDialogSignal *signals);
 
 GstDialogComplexity gst_dialog_get_complexity      (GstDialog *xd);
 void                gst_dialog_set_complexity      (GstDialog *xd, GstDialogComplexity c);

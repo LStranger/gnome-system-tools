@@ -44,7 +44,7 @@ struct _GstNetworkInterfaceDescription {
 static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ N_("Other type"),                   GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
 	{ N_("Ethernet LAN card"),            GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
-	{ N_("WaveLAN wireless LAN"),         GST_CONNECTION_WVLAN,   "wavelan-16.png",  "wvlan",      NULL },
+	{ N_("WaveLAN wireless LAN"),         GST_CONNECTION_WLAN,   "wavelan-16.png",  "wvlan",      NULL },
 	{ N_("PPP: modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
 	{ N_("Parallel line"),                GST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
 	{ N_("Infrared LAN"),                 GST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
@@ -699,7 +699,7 @@ static gboolean
 connection_type_is_lan (GstConnectionType type)
 {
 	return ((type == GST_CONNECTION_ETH) ||
-		(type == GST_CONNECTION_WVLAN) ||
+		(type == GST_CONNECTION_WLAN) ||
 		(type == GST_CONNECTION_IRLAN));
 }
 
@@ -773,7 +773,7 @@ default_gw_find_dynamic_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter 
 
 	gtk_tree_model_get (model, iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 	if (cxn->enabled &&
-	    (cxn->type == GST_CONNECTION_ETH || cxn->type == GST_CONNECTION_WVLAN) &&
+	    (cxn->type == GST_CONNECTION_ETH || cxn->type == GST_CONNECTION_WLAN) &&
 	    (cxn->ip_config != IP_MANUAL)) {
 		* (GstConnection **)data = cxn;
 		return TRUE;
@@ -981,7 +981,7 @@ connection_default_gw_check_manual (GstConnection *cxn, gboolean ignore_enabled)
 
 	switch (cxn->type) {
 	case GST_CONNECTION_ETH:
-	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_WLAN:
 	case GST_CONNECTION_IRLAN:
 		if ((cxn->ip_config == IP_MANUAL) &&
 		    (!cxn->gateway || !*cxn->gateway))
@@ -1040,7 +1040,7 @@ connection_default_gw_set_manual (GstTool *tool, GstConnection *cxn)
 
 	switch (cxn->type) {
 	case GST_CONNECTION_ETH:
-	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_WLAN:
 	case GST_CONNECTION_IRLAN:
 		if (cxn->ip_config == IP_MANUAL)
 			gateway = g_strdup (cxn->gateway);
@@ -1210,7 +1210,7 @@ connection_get_ptp_from_node (xmlNode *node, GstConnection *cxn)
 	cxn->remote_address = gst_xml_get_child_content (node, "remote_address");
 }
 
-static gchar *
+gchar *
 connection_find_new_device (xmlNode *root, GstConnectionType type)
 {
 	xmlNode *node;
@@ -1282,7 +1282,7 @@ connection_new_from_type (GstConnectionType type, xmlNode *root)
 		cxn->autoboot = FALSE;
 		break;
 	case GST_CONNECTION_ETH:
-	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_WLAN:
 	case GST_CONNECTION_IRLAN:
 	case GST_CONNECTION_LO:
 	default:
@@ -1398,14 +1398,11 @@ connection_free (GstConnection *cxn)
 }
 
 void
-connection_check_netmask_gui (GstConnection *cxn)
+connection_check_netmask_gui (GstConnection *cxn, GtkWidget *address_widget, GtkWidget *netmask_widget)
 {
-        GtkWidget *netmask_widget, *address_widget;
         gchar *address, *netmask;
         guint32 ip1;
 
-	netmask_widget = W ("ip_netmask");
-	address_widget = W ("ip_address");
         address = gtk_editable_get_chars (GTK_EDITABLE (address_widget), 0, -1);
         netmask = gtk_editable_get_chars (GTK_EDITABLE (netmask_widget), 0, -1);
 
@@ -1451,7 +1448,7 @@ connection_addr_to_str (gchar *addr)
 	return str;
 }
 
-static void
+void
 connection_set_bcast_and_network (GstConnection *cxn)
 {
 	gchar *address, *netmask;
@@ -1499,7 +1496,12 @@ empty_general (GstConnection *cxn)
 static void
 empty_ip (GstConnection *cxn)
 {
-	connection_check_netmask_gui (cxn);
+	GtkWidget *netmask_widget, *address_widget;
+	
+	netmask_widget = W ("ip_netmask");
+	address_widget = W ("ip_address");
+
+	connection_check_netmask_gui (cxn, address_widget, netmask_widget);
 
 	cxn->ip_config = cxn->tmp_ip_config;
 	GET_BOOL ("ip_", update_dns);
@@ -1563,7 +1565,7 @@ connection_validate (GstConnection *cxn)
 	
 	switch (cxn->type) {
 	case GST_CONNECTION_ETH:
-	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_WLAN:
 	case GST_CONNECTION_IRLAN:
 	case GST_CONNECTION_UNKNOWN:
 		if (cxn->ip_config == IP_MANUAL &&
@@ -1615,7 +1617,7 @@ connection_empty_gui (GstConnection *cxn)
 	empty_general (cxn);
 
 	switch (cxn->type) {
-	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_WLAN:
 		empty_wvlan (cxn);
 		empty_ip (cxn);
 		break;
@@ -1840,7 +1842,7 @@ connection_dialog_set_visible_pages (GstConnection *cxn)
 								 W ("ppp_adv_vbox")));
 	}
        
-	if (cxn->type == GST_CONNECTION_WVLAN) {
+	if (cxn->type == GST_CONNECTION_WLAN) {
 		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/wavelan-48.png");
 		fill_wvlan (cxn);
 		/* FIXME: temprorarily disabling this notebook, until we get support for this. */
@@ -1945,7 +1947,7 @@ connection_updatedns_supported (GstConnection *cxn)
 {
 	switch (cxn->type) {
 	case GST_CONNECTION_ETH:
-	case GST_CONNECTION_WVLAN:
+	case GST_CONNECTION_WLAN:
 	case GST_CONNECTION_PPP:
 	case GST_CONNECTION_IRLAN:
 		return TRUE;
@@ -1971,7 +1973,7 @@ connection_save_to_node (GstConnection *cxn, xmlNode *root)
 		cxn->node = gst_xml_element_add (root, "interface");
 	
 	node = cxn->node;
-		
+
 	connection_xml_save_str_to_node (node, "dev", cxn->dev);
 	connection_xml_save_str_to_node (node, "name", cxn->name);
 
@@ -2127,4 +2129,17 @@ connection_config_save (GstConnection *cxn)
 	connection_list_append (cxn);
 
 	return TRUE;
+}
+
+gchar*
+connection_autodetect_modem (void)
+{
+	xmlNodePtr root;
+	xmlDoc *doc = gst_tool_run_get_directive (tool, _("Autodetecting modem device"), "detect_modem", NULL);
+	GtkWidget *w;
+
+	g_return_if_fail (doc != NULL);
+
+	root = gst_xml_doc_get_root (doc);
+	return  gst_xml_get_child_content (root, "device");
 }

@@ -1,3 +1,13 @@
+2003-04-20  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* network-druid.[ch]: added, here is all the connection druids stuff
+	* ppp-druid.[ch]: removed, here was all the ppp druid stuff
+	* Makefile.am: reflect this
+	* callbacks.[ch], main.c: removed all ppp-druid stuff, added 
+	network-druid stuff
+	* connection.[ch]: s/GST_CONNECTION_WVLAN/GST_CONNECTION_WLAN/, 
+	changed some more things to reuse code
+
 2003-04-06  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* connection.[ch], hosts.[ch], ppp-druid.[ch]: removed all callbacks,

@@ -31,7 +31,7 @@
 typedef enum {
 	GST_CONNECTION_OTHER = 0,
 	GST_CONNECTION_ETH,
-	GST_CONNECTION_WVLAN,
+	GST_CONNECTION_WLAN,
 	GST_CONNECTION_PPP,
 	GST_CONNECTION_PLIP,
 	GST_CONNECTION_IRLAN,
@@ -57,6 +57,13 @@ typedef enum {
 	GST_CONNECTION_ERROR_STATIC,
 	GST_CONNECTION_ERROR_OTHER /* Always last */
 } GstConnectionErrorType;
+
+typedef enum {
+	GST_CONNECTION_VOLUME_NONE,
+	GST_CONNECTION_VOLUME_LOW,
+	GST_CONNECTION_VOLUME_MEDIUM,
+	GST_CONNECTION_VOLUME_LOUD
+} GstConnectionVolume;
 
 typedef enum {
         IP_MANUAL,
@@ -124,7 +131,7 @@ typedef struct {
 	gchar *dns1;
 	gchar *dns2;
 	gchar *ppp_options;
-	gint volume;
+	GstConnectionVolume volume;
 	gchar *dial_command;
 
 	/* PtP (PLIP) */
@@ -162,7 +169,11 @@ void           connection_list_save       (GstTool *tool);
 void           connection_list_select_connection (GstConnection *cxn);
 
 gboolean connection_config_save (GstConnection*);
-void     connection_check_netmask_gui (GstConnection*);
+void     connection_check_netmask_gui (GstConnection*, GtkWidget*, GtkWidget*);
 void     connection_set_modified (GstConnection*, gboolean);
+
+gchar *connection_find_new_device (xmlNodePtr, GstConnectionType);
+gchar*   connection_autodetect_modem (void);
+void connection_set_bcast_and_network (GstConnection *cxn);
 
 #endif /* CONNECTION_H */

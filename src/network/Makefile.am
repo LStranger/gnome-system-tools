@@ -24,7 +24,7 @@ network_admin_SOURCES = \
 	transfer.c	transfer.h	\
 	connection.c	connection.h	\
 	hosts.c		hosts.h		\
-	ppp-druid.c	ppp-druid.h
+	network-druid.c network-druid.h
 
 toolpixmaps =
 etspecs = 

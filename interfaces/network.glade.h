@@ -188,13 +188,34 @@ gchar *s = N_("_Wavelan");
 gchar *s = N_("_Parallel Line");
 gchar *s = N_("_IR LAN");
 gchar *s = N_("To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\".");
+gchar *s = N_("Address configuration (Step 1 of 2)");
+gchar *s = N_("Now, please enter the address that \n"
+              "this network device will have.");
+gchar *s = N_("_Gateway address:");
+gchar *s = N_("_Subnet mask:");
+gchar *s = N_("_IP address:");
+gchar *s = N_("_Configuration:");
+gchar *s = N_("*");
+gchar *s = N_("*");
+gchar *s = N_("*");
+gchar *s = N_("Manual");
+gchar *s = N_("DHCP");
+gchar *s = N_("BOOTP");
+gchar *s = N_("To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\".");
+gchar *s = N_("Address configuration (Step 1 of 2)");
+gchar *s = N_("Now, please enter the address that this network device will have,\n"
+              "and the remote address to which it will be connected.");
+gchar *s = N_("_Local IP address:");
+gchar *s = N_("_Remote IP address:");
+gchar *s = N_("*");
+gchar *s = N_("*");
+gchar *s = N_("_Use remote IP as default gateway");
+gchar *s = N_("To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\".");
 gchar *s = N_("ISP phone number (Step 1 of 3)");
 gchar *s = N_("Please enter the phone number you use to connect to the internet. This number is provided by your ISP. ");
 gchar *s = N_("Phone number:");
 gchar *s = N_("*");
 gchar *s = N_("To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\".");
-gchar *s = N_("Warning message goes here.\n"
-              "");
 gchar *s = N_("Username and password (Step 2 of 3)");
 gchar *s = N_("Next, please enter the user name and password which were assigned to you by your ISP.");
 gchar *s = N_("*");
@@ -203,35 +224,13 @@ gchar *s = N_("Password (confirm):");
 gchar *s = N_("*");
 gchar *s = N_("User name:");
 gchar *s = N_("Password:");
-gchar *s = N_("Warning message goes here..\n"
-              "");
 gchar *s = N_("To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\".");
-gchar *s = N_("Account name (Step 3 of 3)");
-gchar *s = N_("Now, please give this account a name. This name will be used to identify the account.");
-gchar *s = N_("Account name:");
+gchar *s = N_("Connection name (Step 3 of 3)");
+gchar *s = N_("Now, please give this connection a name.");
+gchar *s = N_("Connection name:");
 gchar *s = N_("*");
 gchar *s = N_("To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\".");
-gchar *s = N_("Warning message goes here..\n"
-              "");
-gchar *s = N_("Address configuration (Step 1 of 2)");
-gchar *s = N_("Now, please enter the address that \n"
-              "this network device will have");
-gchar *s = N_("_Gateway address:");
-gchar *s = N_("_Subnet mask:");
-gchar *s = N_("_IP address:");
-gchar *s = N_("_Configuration:");
-gchar *s = N_("Manual");
-gchar *s = N_("DHCP");
-gchar *s = N_("BOOTP");
-gchar *s = N_("*");
-gchar *s = N_("*");
-gchar *s = N_("*");
-gchar *s = N_("To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\".");
-gchar *s = N_("Connection name (Step 2 of 2)");
-gchar *s = N_("Now, please give this account a name. This name will be used to identify the account.");
-gchar *s = N_("Account name:");
-gchar *s = N_("*");
-gchar *s = N_("To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\".");
-gchar *s = N_("Warning message goes here..\n"
-              "");
 gchar *s = N_("Finished");
+gchar *s = N_("You are about to create a new network connection.\n"
+              "\n"
+              "Please click \"Apply\" to save your changes.");

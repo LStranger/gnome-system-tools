@@ -33,7 +33,7 @@
 #include "connection.h"
 #include "callbacks.h"
 #include "hosts.h"
-#include "ppp-druid.h"
+#include "network-druid.h"
 
 GstTool *tool;
 
@@ -68,6 +68,51 @@ GstDialogSignal signals[] = {
 	{ "statichost_add",          "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "statichost_delete",       "clicked",         G_CALLBACK (on_hosts_delete_clicked) },
 	{ "statichost_delete",       "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
+
+	/* Network druid callbacks */
+	{ "network_connection_window",       "delete_event",  G_CALLBACK (on_network_druid_hide) },
+	{ "network_connection_druid",        "cancel", G_CALLBACK (on_network_druid_hide) },
+	{ "network_connection_page1",        "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_page2",        "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_other_page1",  "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_plip_page1",   "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_ppp_page1",    "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_ppp_page2",    "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_page_name",         "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_page2",        "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_other_page1",  "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_plip_page1",  "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_ppp_page1",    "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_ppp_page2",    "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_page_name",    "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_page_finish",  "back",   G_CALLBACK (on_network_druid_page_back) },
+/*	{ "network_connection_other_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_plip_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_ppp_page1",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_ppp_page2",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_page_name",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },*/
+	{ "network_connection_other_config_type", "changed", G_CALLBACK (on_network_druid_config_type_changed) },
+	{ "network_connection_other_ip_address", "changed", G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_other_ip_mask", "changed", G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_other_gateway", "changed", G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_plip_local_ip", "changed", G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_plip_remote_ip", "changed", G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_ppp_phone",    "changed",   G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_ppp_login",    "changed",   G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_ppp_passwd1",  "changed",   G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_ppp_passwd2",  "changed",   G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_name",         "changed",   G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_page_finish",  "finish",    G_CALLBACK (on_network_druid_finish) },
+	{ "network_connection_other_ip_address", "focus_out_event", G_CALLBACK (on_network_druid_ip_address_focus_out) },
+	{ NULL }
+};
+
+GstDialogSignal signals_after[] = {
+	{ "network_connection_other_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_plip_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_ppp_page1",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_ppp_page2",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
+	{ "network_connection_page_name",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
 	{ NULL }
 };
 
@@ -147,7 +192,7 @@ update_complexity (GstDialog *dialog, gpointer data)
 }
 
 static void
-connect_signals (GstDialog *main_dialog, GstDialogSignal *sigs)
+connect_signals (GstDialog *main_dialog, GstDialogSignal *sigs, GstDialogSignal *sigs_after)
 {
 	GtkWidget *w;
 
@@ -163,17 +208,27 @@ connect_signals (GstDialog *main_dialog, GstDialogSignal *sigs)
 			  "changed", G_CALLBACK (gst_dialog_modify_cb), tool->main_dialog);
 
 	gst_dialog_connect_signals (main_dialog, sigs);
+	gst_dialog_connect_signals_after (main_dialog, sigs_after);
 }
 
 int
 main (int argc, char *argv[])
 {
-	gboolean internet_druid = FALSE;
+	gboolean connection = FALSE;
+	gboolean ppp_connection = FALSE;
+	gboolean eth_connection = FALSE;
+	gboolean wlan_connection = FALSE;
+	gboolean plip_connection = FALSE;
+	gboolean irlan_connection = FALSE;
 	
 	struct poptOption options[] =
 	{
-		{ "internet", '\0', 0, &internet_druid, 0,
-		  N_("	Run the internet conection druid."), NULL },
+		{ "new-connection", '\0', 0, &connection, 0, _("Run the connection druid."), NULL },
+		{ "ppp-connection", '\0', 0, &ppp_connection, 0, _("Run the PPP connection druid."), NULL },
+		{ "eth-connection", '\0', 0, &eth_connection, 0, _("Run the ethernet connection druid."), NULL },
+		{ "wlan-connection", '\0', 0, &wlan_connection, 0, _("Run the wlan connection druid."), NULL },
+		{ "plip-connection", '\0', 0, &plip_connection, 0, _("Run the parallel port connection druid."), NULL },
+		{ "irlan-connection", '\0', 0, &irlan_connection, 0, _("Run the irlan connection druid."), NULL },
 		
 		{NULL, '\0', 0, NULL, 0}
 	};
@@ -182,18 +237,37 @@ main (int argc, char *argv[])
 	tool = gst_tool_new ();
 	gst_tool_construct (tool , "network", _("Network Settings"));
 
-	if (internet_druid) {
-		PppDruid *ppp;
+	if (connection || ppp_connection || eth_connection || wlan_connection || plip_connection || irlan_connection) {
+		GtkWidget *add_button = gst_dialog_get_widget (tool->main_dialog, "connection_add");
+		GtkWidget *druid_window = gst_dialog_get_widget (tool->main_dialog, "network_connection_window");
+		GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog, "network_connection_druid"));
+		GstConnectionType type;
 
-		ppp = ppp_druid_new (tool);
-		gst_tool_set_xml_funcs (tool, NULL, ppp_druid_gui_to_xml, ppp);
+		if (connection)
+			type = GST_CONNECTION_UNKNOWN;
+		else if (ppp_connection)
+			type = GST_CONNECTION_PPP;
+		else if (eth_connection)
+			type = GST_CONNECTION_ETH;
+		else if (wlan_connection)
+			type = GST_CONNECTION_WLAN;
+		else if (plip_connection)
+			type = GST_CONNECTION_PLIP;
+		else if (irlan_connection)
+			type = GST_CONNECTION_IRLAN;
 
 		gst_tool_load_try (tool);
-		ppp_druid_show (ppp);
+
+		g_object_set_data (G_OBJECT (druid), "standalone", GINT_TO_POINTER (TRUE));
+
+		connect_signals (tool->main_dialog, signals, signals_after);
+		init_editable_filters (tool->main_dialog);
+		network_druid_new (druid, tool, type);
+		gtk_widget_show_all (druid_window);
 
 		gtk_main ();
 	} else {
-		connect_signals (tool->main_dialog, signals);
+		connect_signals (tool->main_dialog, signals, signals_after);
 		gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook,     NULL);
 		/*gst_dialog_add_apply_hook (tool->main_dialog, callbacks_update_connections_hook, NULL);*/
 		gst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_dialer_hook,       tool);

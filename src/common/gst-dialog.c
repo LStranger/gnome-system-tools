@@ -536,8 +536,8 @@ gst_dialog_enable_complexity (GstDialog *dialog)
 	gtk_widget_show (dialog->complexity_button);
 }
 
-void
-gst_dialog_connect_signals (GstDialog *dialog, GstDialogSignal *signals)
+static void
+dialog_connect_signals (GstDialog *dialog, GstDialogSignal *signals, gboolean connect_after)
 {       
 	GtkWidget *w;
 	guint sig;
@@ -548,14 +548,35 @@ gst_dialog_connect_signals (GstDialog *dialog, GstDialogSignal *signals)
 
 	for (i=0; signals[i].widget; i++) {
 		w = gst_dialog_get_widget (dialog, signals[i].widget);
-		sig = g_signal_connect (G_OBJECT (w),
-					signals[i].signal_name,
-					G_CALLBACK (signals[i].func),
-					(gpointer)dialog);
+
+		if (connect_after) {
+			sig = g_signal_connect_after (G_OBJECT (w),
+						      signals[i].signal_name,
+						      G_CALLBACK (signals[i].func),
+						      (gpointer)dialog);
+		} else {
+			sig = g_signal_connect (G_OBJECT (w),
+						signals[i].signal_name,
+						G_CALLBACK (signals[i].func),
+						(gpointer)dialog);
+		}
+		
 		if (!sig)
 			g_error (_("Error connection signal `%s' in widget `%s'"),
 				 signals[i].signal_name, signals[i].widget);
 	}
+}
+
+void
+gst_dialog_connect_signals (GstDialog *dialog, GstDialogSignal *signals)
+{
+	dialog_connect_signals (dialog, signals, FALSE);
+}
+
+void
+gst_dialog_connect_signals_after (GstDialog *dialog, GstDialogSignal *signals)
+{
+	dialog_connect_signals (dialog, signals, TRUE);
 }
 
 void

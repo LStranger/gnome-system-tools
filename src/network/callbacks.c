@@ -35,7 +35,7 @@
 #include "transfer.h"
 #include "connection.h"
 #include "hosts.h"
-#include "ppp-druid.h"
+#include "network-druid.h"
 
 #define d(x) x
 
@@ -397,6 +397,11 @@ init_editable_filters (GstDialog *dialog)
 		{ "wins_ip",     EF_ALLOW_NONE },
 		{ "ip",          EF_ALLOW_IP }, 
 		{ "domain",      EF_ALLOW_TEXT },
+		{ "network_connection_other_ip_address", EF_ALLOW_IP },
+		{ "network_connection_other_ip_mask", EF_ALLOW_IP },
+		{ "network_connection_other_gateway", EF_ALLOW_IP },
+		{ "network_connection_plip_local_ip", EF_ALLOW_IP },
+		{ "network_connection_plip_remote_ip", EF_ALLOW_IP },
 		{ NULL,          EF_ALLOW_NONE }
 	};
 
@@ -459,59 +464,11 @@ update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 void
 on_connection_add_clicked (GtkWidget *w, gpointer null)
 {
-	GstConnection *cxn;
-	GtkWidget *d, *table, *ppp, *eth, *wvlan, *plip, *irlan, *clist;
-	gint res, row;
-	GstConnectionType cxn_type;
+	GtkWidget *druid_window = gst_dialog_get_widget (tool->main_dialog, "network_connection_window");
+	GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog, "network_connection_druid"));
 
-	table = gst_dialog_get_widget (tool->main_dialog, "connection_type_table");
-
-	ppp   = gst_dialog_get_widget (tool->main_dialog, "connection_type_ppp");
-	eth   = gst_dialog_get_widget (tool->main_dialog, "connection_type_eth");
-	wvlan = gst_dialog_get_widget (tool->main_dialog, "connection_type_wvlan");
-	plip  = gst_dialog_get_widget (tool->main_dialog, "connection_type_plip");
-	irlan = gst_dialog_get_widget (tool->main_dialog, "connection_type_irlan");
-
-	/* ppp is the default for now */
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ppp), TRUE);
-
-	d = gtk_dialog_new_with_buttons (_("New Connection Type"),
-					 GTK_WINDOW (tool->main_dialog),
-					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-					 GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
-					 GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
-					 NULL);
-
-	gtk_widget_reparent (table, GTK_DIALOG (d)->vbox);
-
-	res = gtk_dialog_run (GTK_DIALOG (d));
-	gtk_widget_hide (d);
-
-	if (res != GTK_RESPONSE_ACCEPT)
-		return;
-
-	if (GTK_TOGGLE_BUTTON (ppp)->active)
-		cxn_type = GST_CONNECTION_PPP;
-	else if (GTK_TOGGLE_BUTTON (eth)->active)
-		cxn_type = GST_CONNECTION_ETH;
-	else if (GTK_TOGGLE_BUTTON (wvlan)->active)
-		cxn_type = GST_CONNECTION_WVLAN;
-	else if (GTK_TOGGLE_BUTTON (plip)->active)
-		cxn_type = GST_CONNECTION_PLIP;
-	else if (GTK_TOGGLE_BUTTON (irlan)->active)
-		cxn_type = GST_CONNECTION_IRLAN;
-	else
-		cxn_type = GST_CONNECTION_UNKNOWN;
-
-	cxn = connection_new_from_type (cxn_type, gst_xml_doc_get_root (tool->config));
-	cxn->creating = TRUE;
-	connection_save_to_node (cxn, gst_xml_doc_get_root (tool->config));
-	connection_configure (cxn);
-
-	connection_add_to_list (cxn);
-	connection_list_select_connection (cxn);
-
-	scrolled_window_scroll_bottom (gst_dialog_get_widget (tool->main_dialog, "connection_list_sw"));
+	network_druid_new (druid, tool, GST_CONNECTION_UNKNOWN);
+	gtk_widget_show_all (druid_window);
 }
 
 void
@@ -1024,15 +981,8 @@ on_wvlan_adhoc_toggled (GtkWidget *w, GstConnection *cxn)
 void
 on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
 {
-	xmlNodePtr root;
-	gchar *dev;
-	xmlDoc *doc = gst_tool_run_get_directive (tool, _("Autodetecting modem device"), "detect_modem", NULL);
+	gchar *dev = connection_autodetect_modem ();
 	GtkWidget *w;
-
-	g_return_if_fail (doc != NULL);
-
-	root = gst_xml_doc_get_root (doc);
-	dev = gst_xml_get_child_content (root, "device");
 
 	if (strcmp (dev, "") == 0) {
 		w = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
@@ -1068,7 +1018,9 @@ on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn)
 gboolean
 on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection *cxn)
 {
-	connection_check_netmask_gui (cxn);
+	GtkWidget *netmask_widget = glade_xml_get_widget (cxn->xml, "ip_netmask");
+
+	connection_check_netmask_gui (cxn, widget, netmask_widget);
 
         return FALSE;
 }
@@ -1266,99 +1218,143 @@ on_hosts_delete_clicked (GtkWidget * button, gpointer user_data)
 	gst_hosts_unselect_all ();
 }
 
-
-/* PPP dialog callbacks */
-
-void
-ppp_druid_on_window_delete_event (GtkWidget *w, gpointer data)
+/* Network druid callbacks */
+gboolean
+on_network_druid_hide (GtkWidget *w, gpointer data)
 {
-	PppDruid *ppp = (PppDruid *) data;
+	GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "network_connection_window");
+	GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog, "network_connection_druid"));
 
-	ppp_druid_exit (ppp);
-}
+	if (g_object_get_data (G_OBJECT (druid), "standalone") == NULL) {
+		gtk_widget_hide (window);
+		network_druid_clear (druid, TRUE);
+	} else {
+		gtk_main_quit ();
+	}
 
-void
-ppp_druid_on_druid_cancel (GtkWidget *w, gpointer data)
-{
-	PppDruid *ppp = (PppDruid *) data;
-
-	ppp_druid_exit (ppp);
+	return TRUE;
 }
 
 gboolean
-ppp_druid_on_page_next (GtkWidget *w, gpointer arg1, gpointer data)
+on_network_druid_page_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
-	PppDruid *ppp = (PppDruid *) data;
-
-	ppp->current_page++;
-
-	return FALSE;
+	return network_druid_set_page_back (druid);
 }
 
 gboolean
-ppp_druid_on_page_back (GtkWidget *w, gpointer arg1, gpointer data)
+on_network_druid_page_next (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
-	PppDruid *ppp = (PppDruid *) data;
-
-	ppp->current_page--;
-
-	return FALSE;
+	return network_druid_set_page_next (druid);
 }
 
 void
-ppp_druid_on_page_prepare (GtkWidget *w, gpointer arg1, gpointer data)
+on_network_druid_page_prepare (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
-	gchar *next_focus[] = {
-		NULL, "phone", "login", "profile", NULL
+	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
+	gchar *next_default_focus[] = {
+		NULL,
+		"connection_type_modem_option",
+		"network_connection_other_config_type",
+		"network_connection_plip_local_ip",
+		"network_connection_ppp_phone",
+		"network_connection_ppp_login",
+		"network_connection_name",
+		NULL
 	};
-	PppDruid *ppp = (PppDruid *) data;
-	gchar *s = g_strdup_printf ("ppp_druid_%s", next_focus [ppp->current_page]);
 
-	ppp_druid_check_page (ppp);
+	g_return_if_fail (druid_data != NULL);
+	
+	g_signal_stop_emission_by_name (druid_page, "prepare");
+	network_druid_check_page (druid, druid_data->current_page);
 
-	if (next_focus[ppp->current_page])
-		gtk_widget_grab_focus (glade_xml_get_widget (ppp->glade, s));
+	if (next_default_focus[druid_data->current_page]) {
+		gtk_widget_grab_focus (gst_dialog_get_widget (druid_data->tool->main_dialog,
+							      next_default_focus [druid_data->current_page]));
+	}
+}
+
+void
+on_network_druid_entry_changed (GtkWidget *widget, gpointer data)
+{
+	GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog,
+								"network_connection_druid"));
+	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
+
+	if (druid_data)
+		network_druid_check_page (druid, druid_data->current_page);
+}
+
+void
+on_network_druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
+{
+	GstConnection *cxn = network_druid_get_connection_data (druid);
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "network_connection_window");
+	
+	g_return_if_fail (cxn != NULL);
+
+	if (g_object_get_data (G_OBJECT (druid), "standalone") == NULL) {
+		connection_save_to_node (cxn, root);
+		connection_add_to_list (cxn);
+		connection_list_select_connection (cxn);
+
+		gst_dialog_modify (tool->main_dialog);
+
+                /*	scrolled_window_scroll_bottom (gst_dialog_get_widget (tool->main_dialog, "connection_list_sw"));*/
+		network_druid_clear (druid, FALSE);
+		gtk_widget_hide (window);
+	} else {
+		connection_save_to_node (cxn, root);
+		gst_dialog_modify (tool->main_dialog);
+
+		gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog), "apply", tool);
+		gtk_main_quit ();
+	}
+}
+
+void
+on_network_druid_config_type_changed (GtkWidget *option_menu, gpointer data)
+{
+	GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog,
+								"network_connection_druid"));
+	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
+	gboolean enable;
+	GtkWidget *widget;
+	gint i;
+	gchar *widgets [] = {
+		"network_connection_other_ip_address",
+		"network_connection_other_ip_mask",
+		"network_connection_other_gateway",
+		"network_connection_other_ip_address_label",
+		"network_connection_other_ip_mask_label",
+		"network_connection_other_gateway_label",
+		NULL
+	};
+
+	if (gtk_option_menu_get_history (GTK_OPTION_MENU (option_menu)) == IP_MANUAL)
+		enable = TRUE;
 	else
-		gtk_widget_grab_focus (ppp_druid_get_button_next (ppp));
+		enable = FALSE;
+
+	for (i = 0; widgets[i] != NULL; i++) {
+		widget = gst_dialog_get_widget (tool->main_dialog, widgets[i]);
+		gtk_widget_set_sensitive (widget, enable);
+	}
+
+	if (druid_data)
+		network_druid_check_page (druid, druid_data->current_page);
 }
 
-void
-ppp_druid_on_page_last_finish (GtkWidget *w, gpointer arg1, gpointer data)
+gboolean
+on_network_druid_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 {
-	PppDruid *ppp = (PppDruid *) data;
+	GnomeDruid *druid = GNOME_DRUID (gst_dialog_get_widget (tool->main_dialog,
+								"network_connection_druid"));
+	GtkWidget *mask_widget = gst_dialog_get_widget (tool->main_dialog,
+							"network_connection_other_ip_mask");
+	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
 
-	ppp_druid_save (ppp);
-}
+	connection_check_netmask_gui (druid_data->cxn, widget, mask_widget);
 
-void
-ppp_druid_on_entry_changed (GtkWidget *w, gpointer data)
-{
-	PppDruid *ppp = (PppDruid *) data;
-
-	ppp_druid_check_page (ppp);
-}
-
-void
-ppp_druid_on_entry_activate (GtkWidget *w, gpointer data)
-{
-	PppDruid *ppp = (PppDruid *) data;
-
-	if (!ppp->error_state)
-		gtk_widget_grab_focus (ppp_druid_get_button_next (ppp));
-}
-
-void
-ppp_druid_on_login_activate (GtkWidget *w, gpointer data)
-{
-	PppDruid *ppp = (PppDruid *) data;
-
-	gtk_widget_grab_focus (ppp->passwd);
-}
-
-void
-ppp_druid_on_passwd_activate (GtkWidget *w, gpointer data)
-{
-	PppDruid *ppp = (PppDruid *) data;
-
-	gtk_widget_grab_focus (ppp->passwd2);
+        return FALSE;
 }

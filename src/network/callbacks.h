@@ -104,16 +104,14 @@ void on_hosts_alias_changed (GtkTextBuffer*, gpointer);
 void on_hosts_add_clicked (GtkWidget*, gpointer);
 void on_hosts_delete_clicked (GtkWidget*, gpointer);
 
-/* PPP dialog callbacks */
-void ppp_druid_on_window_delete_event (GtkWidget*, gpointer);
-void ppp_druid_on_druid_cancel (GtkWidget*, gpointer);
-gboolean ppp_druid_on_page_next (GtkWidget*, gpointer, gpointer);
-gboolean ppp_druid_on_page_back (GtkWidget*, gpointer, gpointer);
-void ppp_druid_on_page_prepare (GtkWidget*, gpointer, gpointer);
-void ppp_druid_on_page_last_finish (GtkWidget*, gpointer, gpointer);
-void ppp_druid_on_entry_changed (GtkWidget*, gpointer);
-void ppp_druid_on_entry_activate (GtkWidget*, gpointer);
-void ppp_druid_on_login_activate (GtkWidget*, gpointer);
-void ppp_druid_on_passwd_activate (GtkWidget*, gpointer);
+/* Network connection druid callbacks */
+gboolean on_network_druid_hide (GtkWidget*, gpointer);
+gboolean on_network_druid_page_next (GnomeDruidPage*, GnomeDruid*, gpointer);
+gboolean on_network_druid_page_back (GnomeDruidPage*, GnomeDruid*, gpointer);
+void on_network_druid_page_prepare  (GnomeDruidPage*, GnomeDruid*, gpointer);
+void on_network_druid_finish        (GnomeDruidPage*, GnomeDruid*, gpointer);
+void on_network_druid_entry_changed (GtkWidget*, gpointer);
+void on_network_druid_config_type_changed (GtkWidget*, gpointer);
+gboolean on_network_druid_ip_address_focus_out (GtkWidget*, GdkEventFocus*, gpointer);
 
 #endif /*  __CALLBACKS_H__  */
