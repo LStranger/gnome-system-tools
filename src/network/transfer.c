@@ -140,8 +140,10 @@ transfer_string_list_xml_to_gui (xmlNodePtr root)
 static void
 transfer_string_list_gui_to_xml (xmlNodePtr root)
 {
+	GtkWidget *widget;
 	int i;
 	gchar *text;
+	gchar *end;
 	xmlNodePtr node;
 
 	for (i = 0; transfer_string_list_table [i].xml_path; i++)
@@ -151,17 +153,25 @@ transfer_string_list_gui_to_xml (xmlNodePtr root)
 		xml_element_destroy_children_by_name (root, transfer_string_list_table [i].xml_path);
 
 		/* Add branches corresponding to listed data */
-		for (text = gtk_editable_get_chars (
-			     GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table[i].list)), 0, -1);
-		     text; text = strchr (text, ' ')) {
+		widget = xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table[i].list);
+		text = gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1);
+
+		end = text + strlen (text);
+		for (; text < end;) {
+			gchar *pos;
+
 			if (!*text)
 				continue;
 
+			pos = strchr (text, '\n');
+			*pos = 0;
 			node = xml_element_add (root, transfer_string_list_table [i].xml_path);
 			xml_element_set_content (node, text);
+			text = pos+1;
 		}
 	}
 }
+
 
 
 static void
