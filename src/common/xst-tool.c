@@ -1584,37 +1584,46 @@ try_show_usage_warning (void)
 		  "the Ximian Setup Tools!\n\n"
 		  "--\nThe Ximian Setup Tools team"), VERSION);
 
-#warning FIXME
-	return;
-	
 	key = g_strjoin ("/", XST_CONF_ROOT, "global", "previously-run-" VERSION, NULL);
 
 	value = gnome_config_get_bool (key);
 
 	if (!value)
 	{
-		GnomeDialog *dialog;
-		GtkWidget *w0, *w1, *w2;
+		GtkWidget *dialog, *label, *image, *hbox;
+		GtkWidget *checkbox;
+		
+		
+		dialog = gtk_dialog_new_with_buttons (_("Warning"),
+						      NULL,
+						      GTK_DIALOG_DESTROY_WITH_PARENT,
+						      GTK_STOCK_OK, GTK_RESPONSE_OK,
+						      NULL);
+		label = gtk_label_new (warning);
+		image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
+		checkbox = gtk_check_button_new_with_label (_("Don't show me this again"));
 
-		dialog = GNOME_DIALOG (gnome_warning_dialog (warning));
-		w0 = gtk_container_children (GTK_CONTAINER (GTK_BIN (GTK_BIN (dialog)->child)->child))->data;
-		w1 = GTK_WIDGET (gtk_check_button_new_with_label (_("Don't show me this again")));
-		gtk_widget_ref (w1);
-		w2 = GTK_WIDGET (gtk_alignment_new (1.0, 0.0, 0.0, 0.0));
-		gtk_container_add (GTK_CONTAINER (w2), w1);
-		gtk_box_pack_end (GTK_BOX (w0), w2, TRUE, TRUE, 0);
-		gtk_widget_show (w1);
-		gtk_widget_show (w2);
+		hbox = gtk_hbox_new (FALSE, 5);
 
-		gnome_dialog_run_and_close (dialog);
+		gtk_box_pack_start (GTK_BOX (hbox), image, FALSE, FALSE, 5);
+		gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 5);
 
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w1)))
+		gtk_window_set_default_size (GTK_WINDOW (dialog), 300, 150);
+		
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG(dialog)->vbox), hbox, FALSE, FALSE, 5);
+		gtk_box_pack_start (GTK_BOX (GTK_DIALOG(dialog)->vbox), checkbox, FALSE, FALSE, 5);
+		
+		gtk_widget_show_all (dialog);
+
+		if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
+			gtk_widget_destroy (dialog);
+
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox)))
 		{
 			gnome_config_set_bool (key, TRUE);
 			gnome_config_sync ();
 		}
 
-		gtk_widget_unref (w1);
 	}
 
 	g_free (warning);
