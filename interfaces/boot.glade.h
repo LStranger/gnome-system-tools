@@ -16,23 +16,28 @@ gchar *s = N_("_Wait");
 gchar *s = N_("_seconds before loading default kernel or OS");
 gchar *s = N_("window2");
 gchar *s = N_("Modify the settings for an operating system or kernel.");
-gchar *s = N_("Boot _type:");
+gchar *s = N_("Basic");
 gchar *s = N_("_Name:");
-gchar *s = N_("_Image:");
-gchar *s = N_("_Device:");
-gchar *s = N_("Optional");
+gchar *s = N_("Boot _type:");
+gchar *s = N_("Image");
+gchar *s = N_("_Path:");
 gchar *s = N_("_Root:");
 gchar *s = N_("_Append:");
+gchar *s = N_("Other");
+gchar *s = N_("_Device:");
 gchar *s = N_("Boot Image Wizard");
 gchar *s = N_("Boot Image Druid");
 gchar *s = N_("This druid is designed to help you quickly \n"
               "and easily add new boot images to your system.\n"
               "\n"
               "To begin, click \"Next\". ");
-gchar *s = N_("User Identity  (step 1 of 2)");
+gchar *s = N_("Image Identity (step 1 of 2)");
 gchar *s = N_("Please enter a username for the new user in the space below. You may also enter a comment about the user, such as his or her real name. ");
 gchar *s = N_("Click \"Next\" to continue");
-gchar *s = N_("Password options (step 2 of 2)");
+gchar *s = N_("Other  (step 2 of 2)");
+gchar *s = N_("Please enter a username for the new user in the space below. You may also enter a comment about the user, such as his or her real name. ");
+gchar *s = N_("Click \"Next\" to continue");
+gchar *s = N_("Image (step 2 of 2)");
 gchar *s = N_("Please enter a password for the new user. ");
 gchar *s = N_("Click \"Next\" to continue");
 gchar *s = N_("Finished");
