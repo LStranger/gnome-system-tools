@@ -840,9 +840,28 @@ xst_tool_load (XstTool *tool)
 	if (tool->run_again)
 		return TRUE;
 
-	tool->config = xst_tool_run_get_directive (tool, _("Scanning your system configuration."),
-						   "get", NULL);
-	
+	if (location_id == NULL) {
+		tool->config = xst_tool_run_get_directive
+			(tool, _("Scanning your system configuration."), "get", NULL);
+	} else {
+		Archive *archive;
+		Location *location;
+		gchar *backend_id;
+
+		archive = ARCHIVE (archive_load (TRUE));
+		location = archive_get_location (archive, location_id);
+		backend_id = strrchr (tool->script_path, '/');
+
+		if (backend_id != NULL)
+			backend_id++;
+		else
+			backend_id = tool->script_path;
+
+		tool->config = location_load_rollback_data (location, NULL, 0, backend_id, TRUE);
+
+		archive_close (archive);
+	}
+
 	if (tool->config)
 		gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_GUI]);
 
@@ -891,13 +910,10 @@ xst_tool_save (XstTool *tool)
 
 	archive_close (archive);
 
-	if (location_id != NULL) {
-		xst_dialog_thaw_visible (tool->main_dialog);
-		return TRUE;
-	}
-
-	xst_tool_run_set_directive (tool, tool->config, _("Updating your system configuration."),
-				    "set", NULL);
+	if (location_id == NULL)
+		xst_tool_run_set_directive (tool, tool->config,
+					    _("Updating your system configuration."),
+					    "set", NULL);
 
 	xst_dialog_thaw_visible (tool->main_dialog);
 	return TRUE;  /* FIXME: Determine if it really worked. */
