@@ -219,7 +219,9 @@ on_service_priority_changed (GtkWidget *spin_button, gpointer data)
 		return;
 
 	gst_xml_set_child_content (service, "priority", value);
+
 	gtk_tree_store_set (GTK_TREE_STORE (model), &iter, COL_PRIORITY, val, -1);
+	gtk_tree_view_scroll_to_cell (runlevel_table, path, NULL, TRUE, 0.5, 0.5);
 
 	gst_dialog_modify (tool->main_dialog);
 
@@ -429,7 +431,7 @@ on_sequence_ordering_changed (GtkWidget *widget, gpointer data)
 	GtkTreeView *treeview = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
 	GtkTreeViewColumn *services_column = gtk_tree_view_get_column (treeview, COL_SERVICE);
 	GtkTreeViewColumn *priority_column = gtk_tree_view_get_column (treeview, COL_PRIORITY);
-	gboolean active = gtk_toggle_button_get_active (widget);
+	gboolean active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget));
 
 	if (active) {
 		/* FIXME: is there any other way? */
