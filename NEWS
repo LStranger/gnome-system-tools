@@ -129,22 +129,153 @@ The current set of tools include :
      - priorities of swap areas
 
 Verification matrix
-------------------
+-------------------
 
 This is a matrix describing the current status of tool platform/distribution
 support. To the best of our knowledge.
 
-        Red Hat    Debian  SuSE     MDK    PPC  Turbo  Cal  Yel  Sol    HPUX
-        6.0 6.2    2.1     6.3 7.0  6.1    any  6.0    2.4  1.2  7.0    10.0
-          6.1 7.0    2.2     6.4      7.0                          8.0    11.0
+Key:
 
-Boot     ? + + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
-Disks    ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
-Memory   ? ? + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
-Network  ? + + +    - -     - - -    ? ?    ?    ?      ?    ?    - -     - -
-Shares   ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
-Time     ? + + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
-Users    ? + + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
++  Supported and tested. The tool will not ask you to select a compatible
+   version or distribution. Of course, there may still be bugs. :-)
++? Supported, not tested. Same as '+', but we haven't tested it. In other
+   words, it "should work", because we know it's compatible.
+?  Unsupported, may work. You'll be asked to select a compatible version or
+   distribution, which may or may not work.
+-  Unsupported, doesn't work. We haven't worked on any version of that
+   flavour. It's most possible that it won't work.
+
+
+Red Hat Linux:
+
+Version		 5.2	    6.0	    6.1	  6.2	7.0
+
+Boot			 +?	    +?	    +?	  +		+
+Disks		 +?	    +?	    +?	  +		+
+Memory		 +?	    +?	    +?	  +		+
+Network		 +?	    +?	    +?	  +		+
+Shares		 +?	    +?	    +?	  +		+
+Time			 +?	    +?	    +?	  +		+
+Users		 +?	    +?	    +?	  +		+
+
+
+Debian GNU/Linux:
+
+Version		 2.2	    Woody
+
+Boot			 +	    ?
+Disks		 +	    ?
+Memory		 +	    ?
+Network		 +	    ?
+Shares		 +	    ?
+Time			 +	    ?
+Users		 +	    ?
+
+
+Linux Mandrake:
+
+Version		 7.0	    7.2	  8.0
+
+Boot			 ?	    +	  ?
+Disks		 ?	    +	  ?
+Memory		 ?	    +	  ?
+Network		 ?	    +	  ?
+Shares		 ?	    +	  ?
+Time			 ?	    +	  ?
+Users		 ?	    +	  ?
+
+
+SuSE Linux:
+
+Version		 6.3	    6.4	  7.0
+
+Boot			 ?	    ?	  ?
+Disks		 ?	    ?	  ?
+Memory		 ?	    ?	  ?
+Network		 -	    -	  -
+Shares		 ?	    ?	  ?
+Time			 ?	    ?	  ?
+Users		 ?	    ?	  ?
+
+
+Turbolinux:
+
+Version		 6
+
+Boot			 ?
+Disks		 ?
+Memory		 ?
+Network		 -
+Shares		 ?
+Time			 -
+Users		 ?
+
+
+Caldera OpenLinux:
+
+Version		 eDesktop 2.4
+
+Boot			 ?
+Disks		 ?
+Memory		 ?
+Network		 -
+Shares		 ?
+Time			 -
+Users		 ?
+
+
+LinuxPPC:
+
+Version		 2000
+
+Boot			 -
+Disks		 ?
+Memory		 ?
+Network		 -
+Shares		 ?
+Time			 -
+Users		 ?
+
+
+Yellow Dog Linux:
+
+Version		 1.2	    2.0
+
+Boot			 -	    -
+Disks		 ?	    ?
+Memory		 ?	    ?
+Network		 -	    -
+Shares		 ?	    ?
+Time			 -	    -
+Users		 ?	    ?
+
+
+Solaris:
+
+Version		 7.0	    8.0
+
+Boot			 -	    -
+Disks		 -	    -
+Memory		 -	    -
+Network		 -	    -
+Shares		 -	    -
+Time			 -	    -
+Users		 -	    -
+
+
+HPUX:
+
+Version		 10.0    11.0
+
+Boot			 -	    -
+Disks		 -	    -
+Memory		 -	    -
+Network		 -	    -
+Shares		 -	    -
+Time			 -	    -
+Users		 -	    -
+
+
 
 ===========================================================================================
 XST - 0.3
@@ -419,3 +550,4 @@ Release of 0.2.0 (Un-ix)
   easier and more conforming. [Arturo]
 
 - Red Hat 7.0 fixes. [Hans Petter]
+
