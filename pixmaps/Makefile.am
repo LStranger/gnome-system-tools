@@ -31,6 +31,7 @@ pixmaps_DATA = \
 	server.png                \
 	services.png		  \
 	settings.png              \
+	shares.png                \
 	slackware.png             \
 	specifix.png              \
 	suse.png                  \
