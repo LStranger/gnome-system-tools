@@ -511,29 +511,31 @@ gst_on_browse_button_clicked (GtkWidget *button, gpointer gdata)
 void
 gst_on_play_button_clicked (GtkWidget *button, gpointer gdata)
 {
-	GtkWidget             *treeview;
-	GtkTreeModel          *model;
-	GtkTreeIter            iter;
-	GtkTreeSelection      *selection;
-	GstDisksStorageCdrom  *cdrom;
-	GstCdromDisc          *disc;
-	const gchar *device;
+	   GtkWidget             *treeview;
+	   GtkTreeModel          *model;
+	   GtkTreeIter            iter;
+	   GtkTreeSelection      *selection;
+	   GstDisksStorageCdrom  *cdrom;
+	   GstCdromDisc          *disc;
+	   const gchar *device;
 
-	treeview = (GtkWidget *) gdata;
+	   treeview = (GtkWidget *) gdata;
 
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
-	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-		gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &cdrom, -1);
-		if (GST_IS_DISKS_STORAGE_CDROM (cdrom)) {
-			g_object_get (G_OBJECT (cdrom), "device", &device, 
-				      "disc", &disc, NULL);
-			if (GST_IS_CDROM_DISC_AUDIO (disc)) {
-				gst_disks_cdrom_disc_audio_play (GST_CDROM_DISC_AUDIO (disc), device);
-			} else if (GST_IS_CDROM_DISC_MIXED (disc)) {
-				gst_disks_cdrom_disc_mixed_play (GST_CDROM_DISC_MIXED (disc), device);
-			}
-		}
-	}
+	   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	   if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+			 gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &cdrom, -1);
+			 if (GST_IS_DISKS_STORAGE_CDROM (cdrom)) {
+				    g_object_get (G_OBJECT (cdrom), "device", &device, 
+							   "disc", &disc, NULL);
+				    if (GST_IS_CDROM_DISC_AUDIO (disc)) {
+						  gst_disks_cdrom_disc_audio_play (GST_CDROM_DISC_AUDIO (disc), device);
+				    } else if (GST_IS_CDROM_DISC_MIXED (disc)) {
+						  gst_disks_cdrom_disc_mixed_play (GST_CDROM_DISC_MIXED (disc), device);
+				    } else if (GST_IS_CDROM_DISC_DVD (disc)) {
+						  gst_disks_cdrom_disc_dvd_play (GST_CDROM_DISC_DVD (disc));
+				    }
+			 }
+	   }
 }
 
 gboolean

@@ -693,7 +693,15 @@ gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom)
 						cdrom_parse_data_info (disc_info, data, cdrom);
 					if (audio)
 						cdrom_parse_audio_info (disc_info, audio);
+				} else if (g_ascii_strcasecmp (buf, "dvd") == 0) {
+					if (!disc) {
+						disc = gst_cdrom_disc_dvd_new ();
+					} else if (!GST_IS_CDROM_DISC_DVD (disc)) {
+						g_object_unref (G_OBJECT (disc));
+						disc = gst_cdrom_disc_dvd_new ();
+					}
 
+					/* cdrom_parse_dvd_info (disc_info, GST_CDROM_DISC_DVD (disc)); */ /* TODO */
 				} else if (g_ascii_strcasecmp (buf, "blank") == 0) {
 					if (disc)
 						g_object_unref (G_OBJECT (disc));

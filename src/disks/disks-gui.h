@@ -33,6 +33,7 @@
 #include "disks-cdrom-disc-data.h"
 #include "disks-cdrom-disc-audio.h"
 #include "disks-cdrom-disc-mixed.h"
+#include "disks-cdrom-disc-dvd.h"
 
 enum {
 	POPUP_PARTITION_FORMAT,
@@ -70,5 +71,6 @@ void           gst_disks_gui_setup_cdrom_properties     (GstDisksStorageCdrom *c
 void           gst_disks_gui_setup_cdrom_disc_data      (GstCdromDiscData *disc_data);
 void           gst_disks_gui_setup_cdrom_disc_audio     (GstCdromDiscAudio *disc_audio);
 void           gst_disks_gui_setup_cdrom_disc_mixed     (GstCdromDiscMixed *disc_mixed);
+void           gst_disks_gui_setup_cdrom_disc_dvd       (GstCdromDiscDvd *disc_dvd);
 
 #endif /* __DISKS_GUI_H */

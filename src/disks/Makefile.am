@@ -31,6 +31,7 @@ disks_admin_SOURCES = \
 	disks-cdrom-disc-data.c	  disks-cdrom-disc-data.h \
 	disks-cdrom-disc-audio.c  disks-cdrom-disc-audio.h \
 	disks-cdrom-disc-mixed.c  disks-cdrom-disc-mixed.h \
+	disks-cdrom-disc-dvd.c  disks-cdrom-disc-dvd.h \
 	disks-storage-floppy.c    disks-storage-floppy.h \
 	disks-factory-storage.c   disks-factory-storage.h \
 	disks-gui.c		  disks-gui.h \
