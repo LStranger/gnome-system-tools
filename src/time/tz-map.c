@@ -207,7 +207,7 @@ motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 	        e_map_point_set_color_rgba (tzmap->map, tzmap->point_hover,
 					    TZ_MAP_POINT_HOVER_RGBA);
 
-	/* e_tz_map_location_fom_point() can in theory return NULL, but in
+	/* e_tz_map_location_from_point() can in theory return NULL, but in
 	 * practice there are no reasons why it should */
 
 	gtk_label_set_text (GTK_LABEL (gtk_object_get_data (GTK_OBJECT (tzmap->tool), "location_hover")),

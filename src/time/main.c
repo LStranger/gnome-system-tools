@@ -141,15 +141,15 @@ xst_time_init_timezone (XstTimeTool *time_tool)
 	
 	locs = tz_get_locations (e_tz_map_get_tz_db (tzmap));
 	
-	for (i = 0; i < locs->len; i++) {	
+	for (i = 0; i < locs->len; i++) {
 		combo_locs = g_list_append (combo_locs,
 					    g_strdup (tz_location_get_zone (g_ptr_array_index (locs, i))));
 	}
-	
+
 	w = xst_dialog_get_widget (tool->main_dialog, "location_combo");
 	gtk_combo_set_popdown_strings (GTK_COMBO (w), combo_locs);
 
-	w = xst_dialog_get_widget (tool->main_dialog, "map_vbox");
+	w = xst_dialog_get_widget (tool->main_dialog, "location_label_vbox");
 	w2 = gtk_label_new ("");
 	gtk_box_pack_end (GTK_BOX(w), w2, FALSE, FALSE, 0);
 	gtk_widget_show (w2);
@@ -252,7 +252,7 @@ update_tz (GtkWidget *w, gpointer data)
 	GtkWidget *l;
 
 	l = xst_dialog_get_widget (XST_DIALOG (data), "tzlabel");
-	gtk_label_set_text (GTK_LABEL (l), gtk_entry_get_text (GTK_ENTRY (w)));			    
+	gtk_label_set_text (GTK_LABEL (l), gtk_entry_get_text (GTK_ENTRY (w)));
 }      
 
 static void
