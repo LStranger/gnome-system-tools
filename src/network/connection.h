@@ -140,6 +140,8 @@ extern void connection_default_gw_set_auto (XstTool *tool);
 extern void connection_update_clist_enabled_apply (GtkWidget *clist);
 extern void connection_update_row_enabled (XstConnection *cxn, gboolean enabled);
 extern void connection_update_row (XstConnection *cxn);
+extern void connection_update_complexity (XstTool *tool, XstDialogComplexity complexity);
+extern void connection_actions_set_sensitive (gboolean state);
 extern void connection_free (XstConnection *);
 extern void connection_configure (XstConnection *cxn);
 extern void connection_save_to_node (XstConnection *cxn, xmlNode *node);

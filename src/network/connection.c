@@ -704,7 +704,7 @@ connection_default_gw_find_static (XstTool *tool)
 	int i;
 	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
 
 		/* Try fo find an active ethernet or wavelan connection with a static gateway definded */
@@ -725,7 +725,7 @@ connection_default_gw_find_ppp (XstTool *tool)
 	int i;
 	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
 
 		/* Try fo find an active PPP connection with the default_gw bit on. */
@@ -746,7 +746,7 @@ connection_default_gw_find_dynamic (XstTool *tool)
 	int i;
 	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
 		/* Try fo find an active ethernet or wavelan connection with dynamic configuration */
 		if (cxn->enabled &&
@@ -766,7 +766,7 @@ connection_default_gw_find_plip (XstTool *tool)
 	int i;
 	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
 
 		/* Try fo find an active plip connection with a set remote address. */
@@ -837,11 +837,10 @@ connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 	g_return_if_fail (row > -1);
 	connection_set_row_pixtext (clist, row, enabled ? _("Active") :
 				    _("Inactive"), enabled);
-	/*xst_dialog_modify (tool->main_dialog);*/
 }
 
-void
-connection_update_row (XstConnection *cxn)
+static void
+connection_update_row_do (XstConnection *cxn)
 {
 	GtkWidget *clist;
 	gint row;
@@ -861,12 +860,17 @@ connection_update_row (XstConnection *cxn)
 
 	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name ? cxn->name : "");
 	gtk_clist_sort (GTK_CLIST (clist));
-
-	xst_dialog_modify (tool->main_dialog);
 }
 
 void
-connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
+connection_update_row (XstConnection *cxn)
+{
+	connection_update_row_do (cxn);
+	xst_dialog_modify (tool->main_dialog);
+}
+
+static void
+connection_add_to_list_do (XstConnection *cxn, GtkWidget *clist)
 {
 	gint row;
 	char *text[3] = { "Error", NULL };
@@ -887,10 +891,74 @@ connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 			     (guint) ((style->font->ascent + style->font->descent) / 2), 0);
 
 	connection_default_gw_add (cxn->dev);
+	connection_update_row_enabled (cxn, cxn->enabled);
+}
+
+void
+connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
+{
+	connection_add_to_list_do (cxn, clist);
 	connection_update_row (cxn);
 	connection_update_row_enabled (cxn, cxn->enabled);
+}
 
-	return;
+static void
+connection_update_complexity_advanced (XstTool *tool)
+{
+	XstConnection *cxn;
+	GtkWidget     *clist;
+	
+	GList *l, *l2;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+
+	for (l2 = l = gtk_object_get_data (GTK_OBJECT (clist), "lo"); l; l = l->next)
+	{
+		cxn = l->data;
+		connection_add_to_list_do (cxn, clist);
+		connection_update_row_do (cxn);
+		connection_update_row_enabled (cxn, cxn->enabled);
+	}
+	
+	if (l2)
+		g_list_free (l2);
+	
+	gtk_object_remove_data (GTK_OBJECT (clist), "lo");
+}
+
+static void
+connection_update_complexity_basic (XstTool *tool)
+{
+	XstConnection *cxn;
+	GtkWidget     *clist;
+	
+	GList *l;
+	gint   i;
+	
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	l = NULL;
+	
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+		if (cxn->type == XST_CONNECTION_LO) {
+			
+			l = g_list_append (l, cxn);
+			gtk_object_set_data (GTK_OBJECT (clist), "lo", l);
+			gtk_clist_remove (GTK_CLIST (clist), i);
+		}
+	}
+}
+
+void
+connection_update_complexity (XstTool *tool, XstDialogComplexity complexity)
+{
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
+		connection_update_complexity_basic (tool);
+		break;
+	case XST_DIALOG_ADVANCED:
+		connection_update_complexity_advanced (tool);
+	}
 }
 
 XstConnection *
@@ -901,7 +969,7 @@ connection_find_by_dev (XstTool *tool, gchar *dev)
 	int i;
 	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
 		if (!strcmp (cxn->dev, dev))
 			return cxn;
@@ -1116,8 +1184,6 @@ connection_new_from_node (xmlNode *node)
 	}
 
 	connection_add_to_list (cxn, xst_dialog_get_widget (tool->main_dialog, "connection_list"));
-	connection_update_row (cxn);
-	connection_update_row_enabled (cxn, cxn->enabled);
 
 	return cxn;
 }
@@ -1754,6 +1820,32 @@ connection_dialog_set_visible_pages (XstConnection *cxn)
 
 	if (cxn->type == XST_CONNECTION_IRLAN) {
 		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/irda-48.png");
+	}
+
+	if (cxn->type == XST_CONNECTION_LO) {
+		gtk_widget_hide (W("ip_update_dns"));
+		gtk_widget_hide (W("ip_bootproto_box"));
+	}
+}
+
+void
+connection_actions_set_sensitive (gboolean state)
+{
+	gint i;
+	gchar *names[] = {
+		"connection_delete",
+		"connection_configure",
+		"connection_activate",
+		"connection_deactivate",
+		NULL
+	};
+
+	for (i = 0; names[i]; i++)
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, names[i], state);
+	
+	if (state == FALSE)
+	{
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "connection_configure", TRUE);
 	}
 }
 

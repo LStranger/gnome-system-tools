@@ -366,11 +366,15 @@ static void
 transfer_interfaces_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *clist;
+	GList *l;
 	int i;
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	for (i=0; i < GTK_CLIST (clist)->rows; i++)
 		connection_save_to_node (gtk_clist_get_row_data (GTK_CLIST (clist), i), root);
+
+	for (l = gtk_object_get_data (GTK_OBJECT (clist), "lo"); l; l = l->next)
+		connection_save_to_node (l->data, root);
 }
 
 static void
@@ -384,6 +388,7 @@ transfer_interfaces_to_gui (XstTool *tool, xmlNodePtr root)
 		connection_new_from_node (node);
 
 	callbacks_update_connections_hook (tool->main_dialog, NULL);
+	connection_update_complexity (tool, tool->main_dialog->complexity);
 }
 
 static void

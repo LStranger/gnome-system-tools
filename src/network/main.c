@@ -147,6 +147,7 @@ static void
 update_complexity (XstDialog *dialog, gpointer data)
 {
 	update_notebook_complexity (dialog->tool, dialog->complexity);
+	connection_update_complexity (dialog->tool, dialog->complexity);
 }
 
 static void
@@ -204,7 +205,6 @@ main (int argc, char *argv[])
 		xst_dialog_enable_complexity (tool->main_dialog);
 		xst_dialog_set_widget_policies (tool->main_dialog, policies);
 		
-		connection_init_gui (tool);
 		init_hint_entries ();
 		init_editable_filters (tool->main_dialog);
 

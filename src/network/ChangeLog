@@ -1,3 +1,25 @@
+2001-12-18  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* transfer.c (transfer_interfaces_to_xml): save those
+	interfaces in the hidden list too.
+	(transfer_interfaces_to_gui): update the connection
+	complexity, to hide the lo ifaces if necesary.
+
+	* connection.c (connection_update_row_do): some wrappers
+	for the lo connection hiding hack.
+	(connection_add_to_list_do): same.
+	(connection_update_complexity_advanced): complexity handlers.
+	(connection_update_complexity_basic): same.
+	(connection_update_complexity): same.
+	(connection_actions_set_sensitive): moved from callbacks.c
+
+	* callbacks.c (on_connection_list_select_row): unsensitize
+	buttons only if in basic mode.
+	(on_network_admin_show): call connection_init_gui from here.
+
+	* connection.c (connection_dialog_set_visible_pages): Hide DHCP
+	options if configuring a lo iface.
+
 2001-12-18  Tambet Ingo  <tambet@ximian.com>
 
 	* callbacks.c (callbacks_has_dialer): Implement. Before I got warning

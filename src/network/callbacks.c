@@ -55,26 +55,14 @@ scrolled_window_scroll_bottom (GtkWidget *sw)
         gtk_adjustment_set_value (adj, adj->upper - adj->page_size);
 }
 
-static void
-connection_actions_set_sensitive (gboolean state)
-{
-	gint i;
-	gchar *names[] = {
-		"connection_delete",
-		"connection_configure",
-		"connection_activate",
-		"connection_deactivate",
-		NULL
-	};
-
-	for (i = 0; names[i]; i++)
-		xst_dialog_widget_set_user_sensitive (tool->main_dialog, names[i], state);
-}
-
 void 
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
 	GtkCList *list;
+	XstTool *tool;
+
+	tool = user_data;
+	connection_init_gui (tool);
 
 	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list"));
 	gtk_clist_set_column_auto_resize (list, 0, TRUE);
@@ -449,13 +437,19 @@ void
 on_connection_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
 {
 	XstConnection *cxn;
+	
 	connection_row_selected = row;
-
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 
 	g_return_if_fail (cxn != NULL);
 
-	if (!strcmp (cxn->dev, "lo"))
+/*	if ((cxn->type == XST_CONNECTION_LO) &&
+	    (tool->main_dialog->complexity == XST_DIALOG_BASIC))
+		connection_actions_set_sensitive (FALSE);
+	else
+	connection_actions_set_sensitive (TRUE);*/
+
+	if (cxn->type == XST_CONNECTION_LO)
 		connection_actions_set_sensitive (FALSE);
 	else
 		connection_actions_set_sensitive (TRUE);
@@ -534,7 +528,7 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 		txt = g_strdup_printf (_("Remove connection %s?"), cxn->dev);
 		
 	d = gnome_question_dialog_parented (txt, NULL, NULL,
-								 GTK_WINDOW (tool->main_dialog));
+					    GTK_WINDOW (tool->main_dialog));
 	g_free (txt);
 	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
 	if (res)
@@ -547,6 +541,7 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 }
 
 /* in my younger years i would do this function in 1 line */
+/* Yeah, now we know the compiler takes care of it. */
 void
 on_connection_configure_clicked (GtkWidget *w, gpointer null)
 {
