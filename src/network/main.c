@@ -37,7 +37,7 @@
 #include "hosts.h"
 #include "ppp-druid.h"
 
-XstTool *tool = NULL;
+XstTool *tool;
 
 XstDialogSignal signals[] = {
 	{ "network_admin",           "switch_page",     on_network_notebook_switch_page },
@@ -105,7 +105,7 @@ static const XstWidgetPolicy policies[] = {
 };
 
 static void
-update_notebook_complexity (XstDialogComplexity complexity)
+update_notebook_complexity (XstTool *tool, XstDialogComplexity complexity)
 {
 	GtkWidget *hosts;
 	GtkNotebook *notebook;
@@ -139,11 +139,9 @@ update_notebook_complexity (XstDialogComplexity complexity)
 }
 
 static void
-update_complexity (void)
+update_complexity (XstDialog *dialog, gpointer data)
 {
-	XstDialogComplexity complexity = tool->main_dialog->complexity;
-
-	update_notebook_complexity (complexity);
+	update_notebook_complexity (dialog->tool, dialog->complexity);
 }
 
 static void
@@ -151,11 +149,11 @@ connect_signals (XstDialog *main_dialog, XstDialogSignal *sigs)
 {
 	GtkWidget *omenu, *menu;
 
-	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	omenu = xst_dialog_get_widget (main_dialog, "connection_def_gw_omenu");
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
 	gtk_signal_connect (GTK_OBJECT (menu), "selection-done",
-			    GTK_SIGNAL_FUNC (xst_dialog_modify_cb), tool->main_dialog);
+			    GTK_SIGNAL_FUNC (xst_dialog_modify_cb), main_dialog);
 	
 	gtk_signal_connect (GTK_OBJECT (main_dialog), "complexity_change",
 			    GTK_SIGNAL_FUNC (update_complexity), NULL);
@@ -204,8 +202,8 @@ main (int argc, char *argv[])
 		init_hint_entries ();
 		init_editable_filters (tool->main_dialog);
 
-		on_network_admin_show (NULL, NULL);
-		update_complexity ();
+		on_network_admin_show (NULL, tool);
+		update_complexity (tool->main_dialog, NULL);
 		xst_tool_main (tool, FALSE);
 	}
 		

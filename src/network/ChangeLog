@@ -1,5 +1,8 @@
 2001-09-25  Arturo Espinosa Aldama  <arturo@ximian.com>
 
+	* main.c: In general, removed the tool global variable, but had to leave
+	it there because the callbacks depend to heavily on this.
+
 	* connection.c (load_icon): Hack to make pixmap be centered on row too,
 	required because of a bug in GtkCList.
 	(connection_init_clist): Set the rowheight to double the size.
