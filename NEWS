@@ -8,11 +8,65 @@ for Linux and other Unices. Internaly they are divided in a front end and
 backend, the front ends knows nothing about the underlying system and provides
 the same user interface across the different types of systems. The backend
 knows how to read and write configuration information. The Ximian Setup Tools
-do not impose a new database to the system they work with the default
+do not impose a new database to the system, they work with the default
 configuration files so that configuration can still be done by hand or by
 other tools.
 
+Changes since last release
+--------------------------     
+
+- Network tool improvements / bugfixes (Arturo).
+
+- Support for translation of backend messages (Kenneth, Arturo).
+
+- Removal of iteractive report/progress due to speed impact (Arturo, Hans Petter).
+
+- Porting to Debian 2.2 (Arturo).
+
+- Searching in users-admin (Anna, Tambet).
+
+- Druid for users-admin simple mode (Anna, Tambet).
+
+- New shares-admin interface (Anna, Hans Petter).
+
+- Lots and lots of medium to small bugfixes (everyone).
+
+
+Contributions
+-------------
+We need lots of help from anybody intersted in contributing to XST. 
+
+- Testing
+   Testing that the tools work correclty on your system and either filing
+   detailed bug reports or confirming that they work correctly is greatelly
+   apreciated. If you test a tool in a unsuported distro/system and find out
+   that it works correctly let us know so that we can update the suported
+   tools Matrix (see below).
+  
+- Porting
+   The backends are designed in a way in which they minimize the effort needed to
+   support more distros/systems. A great way to contribute is to port the tools to
+   another distribution/system.
+
+
+Backup system
+-------------
+
+Every time a tool modifies your system configuration files, it makes backups
+of those files. The backups are rotated (for 9 levels in total), and the
+backup made the first time the tool was run is kept forever. This means that
+you can revert your system configuration to the point before you ever ran a
+Ximian Setup Tool.
+
+The backup path is /var/cache/ximian-setup-tools/backup/<tool>/<id>/. In this
+directory, you'll find a complete snapshot of the files that were modified.
+The original directory structure leading up to these files is also kept. <id>
+runs from 1-9, and when the first backup is rotated out, it is kept in a
+special catalog called "First", which is never touched again.
+     
+
 The current set of tools include :
+----------------------------------
 
 - Network admin
    
@@ -58,30 +112,21 @@ The current set of tools include :
      
 - Shares admin
 
+     Allows you to import and export NFS and samba
+     shares.
+     - import NFS & samba shares
+     - export NFS &
+
 - Disks admin
+
+     Allows you to :
 
 - Memory admin
 
-
-Changes since last release
---------------------------     
-
-- Network tool fully working (Arturo).
-
-- Support for translation of backend messages (Kenneth, Arturo).
-
-- Removal of iteractive report/progress due to speed impact (Arturo, Hans Petter).
-
-- Porting to Debian 2.2 (Arturo).
-
-- Searching in users-admin (Anna, Tambet).
-
-- Druid for users-admin simple mode (Anna, Tambet).
-
-- New shares-admin interface (Anna, Hans Petter).
-
-- Lots of medium to small bugfixes (everyone).
-
+     Allows you to configure :
+     - Swap partitions
+     - Swap files
+     - priorities of swap areas
 
 Verification matrix
 ------------------
@@ -101,9 +146,7 @@ Shares   ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
 Time     ? + + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
 Users    ? + + +    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
 
-
-
-
+===========================================================================================
 XST - 0.3
 ---------
 
