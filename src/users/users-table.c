@@ -187,9 +187,16 @@ void
 update_users_table_complexity (GstDialogComplexity complexity)
 {
 	GtkTreeView *u_table = GTK_TREE_VIEW (users_table);
+	GtkTreeView *g_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "groups_table"));
 	GtkTreeViewColumn *column;
 	TableConfig *i;
 	guint j;
+
+	gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (u_table));
+	gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (g_table));
+
+	actions_set_sensitive (NODE_USER, FALSE);
+	actions_set_sensitive (NODE_GROUP, FALSE);
 	
 	switch (complexity) {
 	case GST_DIALOG_BASIC:

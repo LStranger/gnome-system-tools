@@ -775,7 +775,7 @@ user_settings_dialog_prepare (ug_data *ud)
 	
 	/* Set window title */
 	w0 = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
-	gtk_window_set_title (GTK_WINDOW (w0), g_strdup_printf (_("Settings for user %s"), name));
+	gtk_window_set_title (GTK_WINDOW (w0), g_strdup_printf (_("Settings for User %s"), name));
 	g_free (name);
 	
 	gtk_widget_show (w0);
