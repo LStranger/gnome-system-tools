@@ -1,8 +1,7 @@
-CFLAGS = -g -Wall
 INCLUDES = $(GNOME_INCLUDEDIR)
 LDADD = -lm
 
-bin_PROGRAMS = \
+noinst_PROGRAMS = \
 e-map-test
 
 e_map_test_CFLAGS = \
