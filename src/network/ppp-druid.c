@@ -60,7 +60,8 @@ static void ppp_druid_connect_signals (PppDruid *ppp, XstDialogSignal *signals)
 static void ppp_druid_exit (PppDruid *ppp)
 {
 	g_return_if_fail (ppp != NULL);
-	
+
+	gtk_object_unref (GTK_OBJECT (ppp->glade));
 	gtk_widget_destroy (ppp->win);
 	gtk_main_quit ();
 }

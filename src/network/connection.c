@@ -30,12 +30,11 @@
 /* sigh more libglade callbacks */
 
 static void on_status_button_toggled (GtkWidget *w, Connection *cxn);
-static void on_connection_help_clicked (GtkWidget *w, Connection *cxn);
-static void on_connection_apply_clicked (GtkWidget *w, Connection *cxn);
-static void on_connection_close_clicked (GtkWidget *w, Connection *cxn);
+static void on_connection_ok_clicked (GtkWidget *w, Connection *cxn);
+static void on_connection_cancel_clicked (GtkWidget *w, Connection *cxn);
+static void on_connection_config_dialog_destroy (GtkWidget *w, Connection *cxn);
 static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Connection *cxn);
 static void on_connection_modified (GtkWidget *w, Connection *cxn);
-static void on_connection_destroy (GtkWidget *w, Connection *cxn);
 static void on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn);
 
 #define W(s) my_get_widget (cxn->xml, (s))
@@ -163,7 +162,6 @@ connection_set_modified (Connection *cxn, gboolean state)
 	if (cxn->frozen || !xst_tool_get_access (tool))
 		return;
 
-	gtk_widget_set_sensitive (W ("connection_apply"), state);
 	cxn->modified = state;
 }
 
@@ -422,12 +420,6 @@ on_status_button_toggled (GtkWidget *w, Connection *cxn)
 }
 
 static void
-on_connection_help_clicked (GtkWidget *w, Connection *cxn)
-{
-
-}
-
-static void
 empty_general (Connection *cxn)
 {
 	g_free (cxn->name);
@@ -491,32 +483,20 @@ connection_config_save (Connection *cxn)
 }
 
 static void
-on_connection_apply_clicked (GtkWidget *w, Connection *cxn)
+on_connection_ok_clicked (GtkWidget *w, Connection *cxn)
 {
 	connection_config_save (cxn);
+	gtk_widget_destroy (cxn->window);
 }
 
 static void
-connection_close (Connection *cxn)
+on_connection_cancel_clicked (GtkWidget *wi, Connection *cxn)
 {
-	GtkWidget *w;
-	int reply;
-
-	if (cxn->modified) {
-		
-		w = gnome_question_dialog_parented (
-			_("There are changes which haven't been applyed.\nApply now?"),
-			NULL, NULL, GTK_WINDOW (cxn->window));
-		
-		reply = gnome_dialog_run (GNOME_DIALOG (w));
-		
-		if (!reply)
-			connection_config_save(cxn);
-	}
+	gtk_widget_destroy (cxn->window);
 }
 
 static void
-on_connection_destroy (GtkWidget *w, Connection *cxn)
+on_connection_config_dialog_destroy (GtkWidget *w, Connection *cxn)
 {
 	gtk_object_unref (GTK_OBJECT (cxn->xml));
 	cxn->xml = NULL;
@@ -524,17 +504,9 @@ on_connection_destroy (GtkWidget *w, Connection *cxn)
 	cxn->window = NULL;
 }
 
-static void
-on_connection_close_clicked (GtkWidget *wi, Connection *cxn)
-{
-	connection_close (cxn);
-	gtk_widget_destroy (cxn->window);
-}
-
 static gint
 on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, Connection *cxn)
 {
-	connection_close (cxn);
 	return FALSE;
 }
 
@@ -547,7 +519,7 @@ on_connection_modified (GtkWidget *w, Connection *cxn)
 static void
 on_wvlan_adhoc_toggled (GtkWidget *w, Connection *cxn)
 {
-
+#warning FIXME: implement on_wvlan_adhoc_toggled
 }
 
 static void
@@ -659,14 +631,12 @@ hookup_callbacks (Connection *cxn)
 {
 	int i;
 	WidgetSignal signals[] = {
-		{ "on_connection_help_clicked", on_connection_help_clicked },
-	     /* { "on_connection_complexity_clicked", on_connection_complexity_clicked }, */
-		{ "on_connection_apply_clicked", on_connection_apply_clicked },
-		{ "on_connection_close_clicked", on_connection_close_clicked },
+		{ "on_connection_ok_clicked", on_connection_ok_clicked },
+		{ "on_connection_cancel_clicked", on_connection_cancel_clicked },
 		{ "on_connection_config_dialog_delete_event", on_connection_config_dialog_delete_event },
 		{ "on_status_button_toggled", on_status_button_toggled },
-		{ "connection_modified", on_connection_modified },
-		{ "connection_destroy", on_connection_destroy },
+		{ "on_connection_modified", on_connection_modified },
+		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
 		{ NULL } };
 
@@ -678,12 +648,14 @@ hookup_callbacks (Connection *cxn)
 void
 connection_configure (Connection *cxn)
 {
-	GtkWidget *nb, *hb, *qm;
+	GtkWidget *nb;
+/*	GtkWidget *hb, *qm;*/
 	char *s;
 
 	if (cxn->window) {
-		gdk_window_show (cxn->window->window);
-		gdk_window_raise (cxn->window->window);
+		gtk_widget_show (cxn->window);
+/*		gdk_window_show (cxn->window->window);
+		gdk_window_raise (cxn->window->window);*/
 		return;
 	}
 
@@ -700,11 +672,11 @@ connection_configure (Connection *cxn)
 
 	cxn->window = W("connection_config_dialog");
 
-	hb = W ("connection_help");
+/*	hb = W ("connection_help");
 	qm = gnome_stock_pixmap_widget_new (hb, GNOME_STOCK_PIXMAP_HELP);
 	gtk_widget_show (qm);
 	gtk_container_add (GTK_CONTAINER (hb), qm);
-	gtk_widget_set_sensitive (hb, FALSE);
+	gtk_widget_set_sensitive (hb, FALSE);*/
 			   
 	fill_general (cxn);
 	fill_ip      (cxn);
