@@ -83,10 +83,11 @@ static void
 platform_list_select_row_cb (GtkCList *clist, gint row, gint columt, GdkEvent *event,
 			     gpointer data)
 {
-	gint *selected_row;
+	XstTool *tool;
 
-	selected_row = (gint *) data;
-	*selected_row = row;
+	tool = (XstTool *) data;
+	tool->platform_selected_row = row;
+	gtk_widget_set_sensitive (tool->platform_ok_button, TRUE);
 }
 
 static gboolean
@@ -113,9 +114,11 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 
 	/* Run it */
 
-        selected_row = -1;
+        tool->platform_selected_row = -1;
 	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "select-row",
-			    platform_list_select_row_cb, &selected_row);
+			    platform_list_select_row_cb, tool);
+
+	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
 
 	ret = gnome_dialog_run_and_close (GNOME_DIALOG (tool->platform_dialog));
 
@@ -127,7 +130,7 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 
 	/* FIXME: Avoid this by making the Ok button insensitive until choice made. */
 
-	if (selected_row == -1)
+	if (tool->platform_selected_row == -1)
 		exit (1);
 
 	if (tool->current_platform)
@@ -136,7 +139,7 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 	tool->current_platform =
 		xst_platform_dup ((XstPlatform *)
 				 g_slist_nth_data (tool->supported_platforms_list,
-						   selected_row));
+						   tool->platform_selected_row));
 
 	g_assert (tool->current_platform);
 	tool->report_finished = TRUE;
@@ -391,6 +394,12 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 			tool->line [tool->line_len] = '\0';
 		}
 	}
+	else
+	{
+		/* Zero-length read; pipe closed unexpectedly */
+
+		tool->report_finished = TRUE;
+	}
 
 	if (!tool->report_dispatch_pending)
 		report_dispatch_lines (tool);
@@ -575,15 +584,14 @@ xst_tool_load (XstTool *tool)
 
 		if (len < 1 || len == 102399) {
 			g_free (p);
-			g_error ("Backend malfunction.");
+		} else {
+			p = g_realloc (p, len + 1);
+			*(p + len) = 0;
+
+			tool->config = xmlParseDoc (p);
+			g_free (p);
+			close (fd [0]);
 		}
-
-		p = g_realloc (p, len + 1);
-		*(p + len) = 0;
-
-		tool->config = xmlParseDoc (p);
-		g_free (p);
-		close (fd [0]);
 	} else {
 		/* Child */
 
@@ -732,6 +740,7 @@ xst_tool_type_init (XstTool *tool)
 	xml = xst_tool_load_glade_common (tool, "platform_dialog");
 	tool->platform_dialog = glade_xml_get_widget (xml, "platform_dialog");
 	tool->platform_list = glade_xml_get_widget (xml, "platform_list");
+	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
 }
 
 GtkType

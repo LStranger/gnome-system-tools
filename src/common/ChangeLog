@@ -1,3 +1,15 @@
+2001-02-23  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-tool.c (platform_list_select_row_cb): Make Ok button sensitive
+	  when selection made. Take tool context as argument.
+	  (platform_unsupported_cb): Set button insensitive. Fix arguments to
+	  platform_list_select_row_cb.
+	  (report_progress_tick): Handle zero-length read as broken pipe.
+	  (xst_tool_load): Don't abort when no document received. Instead,
+	  return an error value so informative dialog is shown.
+
+	* xst-tool.h: Add context for platform selection.
+
 2001-02-22  Hans Petter Jansson  <hpj@ximian.com>
 
 	* xst-tool.c (platform_unsupported_cb): Plug the other memleak.

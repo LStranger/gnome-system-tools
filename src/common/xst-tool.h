@@ -47,8 +47,13 @@ struct _XstTool {
 	xmlDoc  *config;
 
 	XstDialog *main_dialog;
+
+	/* Platform selection */
 	GtkWidget *platform_dialog;
 	GtkWidget *platform_list;
+	GtkWidget *platform_ok_button;
+
+	gint platform_selected_row;
 
 	/* Progress report widgets */
 	GtkWidget *report_arrow;
