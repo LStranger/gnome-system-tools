@@ -1,3 +1,20 @@
+2001-10-11  Hans Petter Jansson  <hpj@ximian.com>
+
+	* main.c (timezone_button_clicked): Update clock to match same UTC in
+	new timezone.
+	(xst_time_set_full): Implement.
+	(xst_time_set_from_localtime): Implement.
+
+	* transfer.c (transfer_time_gui_to_system): Set default TZ before
+	setting clock.
+	(transfier_time_system_to_gui): Trim down to one call to new
+	xst_time_set_from_localtime().
+
+	* tz-map.c (e_tz_map_get_location_by_name): Implement.
+
+	* tz.c (tz_location_get_utc_offset): Implement.
+	(tz_location_set_locally): Implement.
+
 2001-10-10  Hans Petter Jansson  <hpj@ximian.com>
 
 	* main.c (update_tz): No longer acts as a signal callback.

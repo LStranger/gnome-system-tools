@@ -143,6 +143,52 @@ tz_location_get_position (TzLocation *loc, double *longitude, double *latitude)
 	*latitude = loc->latitude;
 }
 
+glong
+tz_location_get_utc_offset (TzLocation *loc)
+{
+	TzInfo *tz_info;
+	glong offset;
+
+	tz_info = tz_info_from_location (loc);
+	offset = tz_info->utc_offset;
+	tz_info_free (tz_info);
+	return offset;
+}
+
+gint
+tz_location_set_locally (TzLocation *loc)
+{
+	gchar *str;
+	time_t curtime;
+	struct tm *curzone;
+	gboolean is_dst = FALSE;
+	gint correction = 0;
+
+	g_return_val_if_fail (loc != NULL, 0);
+	g_return_val_if_fail (loc->zone != NULL, 0);
+	
+	curtime = time (NULL);
+	curzone = localtime (&curtime);
+	is_dst = curzone->tm_isdst;
+
+	str = g_strdup_printf ("TZ=%s", loc->zone);
+	g_print ("%s %s\n", loc->zone, str);
+	putenv (str);
+
+#if 0
+	curtime = time (NULL);
+	curzone = localtime (&curtime);
+
+	if (!is_dst && curzone->tm_isdst) {
+		correction = (60 * 60);
+	}
+	else if (is_dst && !curzone->tm_isdst) {
+		correction = 0;
+	}
+#endif
+
+	return correction;
+}
 
 TzInfo *
 tz_info_from_location (TzLocation *loc)
@@ -158,8 +204,10 @@ tz_info_from_location (TzLocation *loc)
 	str = g_strdup_printf ("TZ=%s", loc->zone);
 	g_print ("%s %s\n", loc->zone, str);
 	putenv (str);
+#if 0
 	tzset ();
 	g_free (str);
+#endif
 	tzinfo = g_new0 (TzInfo, 1);
 
 	curtime = time (NULL);
@@ -195,10 +243,10 @@ tz_info_free (TzInfo *tzinfo)
 	g_free (tzinfo);
 }
 
-
 /* ----------------- *
  * Private functions *
  * ----------------- */
+
 static gchar *
 tz_data_file_get (void)
 {

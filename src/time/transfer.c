@@ -373,6 +373,8 @@ transfer_time_gui_to_system (XstTool *xst_tool)
 	tm.tm_isdst = -1;  /* FIXME: Is this right? */
 
 	tv.tv_sec = mktime (&tm);
+
+	putenv ("TZ=");
 	settimeofday (&tv, NULL);
 
 	xst_time_clock_start (tool);
@@ -383,23 +385,8 @@ static void
 transfer_time_system_to_gui (XstTool *xst_tool)
 {
 	XstTimeTool *tool = XST_TIME_TOOL (xst_tool);
-	struct tm *tm;
-	time_t tt;
-	GtkWidget *calendar_widget;
 
-	calendar_widget = xst_dialog_get_widget (xst_tool->main_dialog, "calendar");
-
-	tt = time (NULL);
-	tm = localtime (&tt);
-
-	gtk_calendar_select_month (GTK_CALENDAR (calendar_widget), tm->tm_mon, tm->tm_year + 1900);
-	gtk_calendar_select_day   (GTK_CALENDAR (calendar_widget), tm->tm_mday);
-
-	tool->hrs = tm->tm_hour;
-	tool->min = tm->tm_min;
-	tool->sec = tm->tm_sec;
-	
-	xst_time_update (tool);
+	xst_time_set_from_localtime (tool, 0);
 }
 
 static void

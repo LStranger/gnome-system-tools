@@ -39,3 +39,5 @@ void    xst_time_clock_stop              (XstTimeTool *tool);
 void    xst_time_clock_start             (XstTimeTool *tool);
 
 void    xst_time_tool_set_time_zone_name (XstTimeTool *time_tool, gchar *name);
+void    xst_time_set_full                (XstTimeTool *time_tool, struct tm *tm);
+void    xst_time_set_from_localtime      (XstTimeTool *time_tool, gint correction);

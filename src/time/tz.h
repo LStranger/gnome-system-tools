@@ -64,22 +64,16 @@ struct _TzInfo
 };
 
 
-TzDB *tz_load_db (void);
-
-GPtrArray *tz_get_locations (TzDB *db);
-
-void tz_location_get_position (TzLocation *loc,
-			       double *longitude, double *latitude);
-
-char *tz_location_get_country (TzLocation *loc);
-
-gchar *tz_location_get_zone (TzLocation *loc);
-
-gchar *tz_location_get_comment (TzLocation *loc);
-
-TzInfo *tz_info_from_location (TzLocation *loc);
-
-void tz_info_free (TzInfo *tz_info);
-
+TzDB      *tz_load_db                 (void);
+GPtrArray *tz_get_locations           (TzDB *db);
+void       tz_location_get_position   (TzLocation *loc,
+				       double *longitude, double *latitude);
+char      *tz_location_get_country    (TzLocation *loc);
+gchar     *tz_location_get_zone       (TzLocation *loc);
+gchar     *tz_location_get_comment    (TzLocation *loc);
+glong      tz_location_get_utc_offset (TzLocation *loc);
+gint       tz_location_set_locally    (TzLocation *loc);
+TzInfo    *tz_info_from_location      (TzLocation *loc);
+void       tz_info_free               (TzInfo *tz_info);
 
 #endif

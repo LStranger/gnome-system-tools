@@ -51,12 +51,10 @@ extern ETzMap *tzmap;
 
 /* --- Fake widget --- */
 
-ETzMap *e_tz_map_new (XstTimeTool *tool);
-
-TzDB *e_tz_map_get_tz_db (ETzMap *tzmap);
-
-void e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name);
-
-gchar *e_tz_map_get_selected_tz_name (ETzMap *tzmap);
+ETzMap     *e_tz_map_new                  (XstTimeTool *tool);
+TzDB       *e_tz_map_get_tz_db            (ETzMap *tzmap);
+void        e_tz_map_set_tz_from_name     (ETzMap *tzmap, gchar *name);
+gchar      *e_tz_map_get_selected_tz_name (ETzMap *tzmap);
+TzLocation *e_tz_map_get_location_by_name (ETzMap *tzmap, gchar *name);
 
 #endif

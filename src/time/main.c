@@ -364,7 +364,16 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 
 	result = gnome_dialog_run_and_close (GNOME_DIALOG (d));
 	if (result == 0) {
-		xst_time_tool_set_time_zone_name (time_tool, e_tz_map_get_selected_tz_name (tzmap));
+		gchar *tz_name;
+		TzLocation *tz_location;
+		gint correction;
+
+		tz_name     = e_tz_map_get_selected_tz_name (tzmap);
+		tz_location = e_tz_map_get_location_by_name (tzmap, tz_name);
+
+		correction = tz_location_set_locally (tz_location);
+		xst_time_tool_set_time_zone_name (time_tool, tz_name);
+		xst_time_set_from_localtime (time_tool, correction);
 		xst_dialog_modify (dialog);
 	}
 }
@@ -647,6 +656,36 @@ xst_time_clock_start (XstTimeTool *tool)
 	tool->timeout = gtk_timeout_add (1000, xst_time_clock_tick,
 					 XST_TIME_TOOL (tool));
 	tool->running = TRUE;
+}
+
+void
+xst_time_set_full (XstTimeTool *time_tool, struct tm *tm)
+{
+	GtkWidget *calendar_widget;
+
+	calendar_widget = xst_dialog_get_widget (XST_TOOL (time_tool)->main_dialog, "calendar");
+
+	gtk_calendar_select_month (GTK_CALENDAR (calendar_widget), tm->tm_mon, tm->tm_year + 1900);
+	gtk_calendar_select_day   (GTK_CALENDAR (calendar_widget), tm->tm_mday);
+
+	time_tool->hrs = tm->tm_hour;
+	time_tool->min = tm->tm_min;
+	time_tool->sec = tm->tm_sec;
+
+	xst_time_update (time_tool);
+}
+
+void
+xst_time_set_from_localtime (XstTimeTool *time_tool, gint correction)
+{
+	struct tm *tm;
+	time_t tt;
+
+	tt = time (NULL);
+	tt += correction; 
+	tm = localtime (&tt);
+
+	xst_time_set_full (time_tool, tm);
 }
 
 int
