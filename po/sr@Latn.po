@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.25.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-23 01:19+0100\n"
-"PO-Revision-Date: 2003-11-23 01:20+0100\n"
+"POT-Creation-Date: 2003-11-25 23:09+0100\n"
+"PO-Revision-Date: 2003-11-24 03:03+0100\n"
 "Last-Translator: Slobodan Sredojević <ssl@uns.ns.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -249,7 +249,9 @@ msgstr "Navedite particiju na kojoj je instaliran operativni sistem."
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
-msgstr "Dodali ste novu datoteku za podizanje. Pritisnite „Primeni“ kako bi sačuvali izmene."
+msgstr ""
+"Dodali ste novu datoteku za podizanje. Pritisnite „Primeni“ kako bi sačuvali "
+"izmene."
 
 #: interfaces/boot.glade.in.h:37
 msgid ""
@@ -456,9 +458,9 @@ msgstr "Nalog"
 msgid "Activate when the computer _starts"
 msgstr "Pokreni kada se pokreće računa_r"
 
-#: interfaces/network.glade.in.h:22 src/network/network-druid.c:412
-msgid "Address configuration (Step 1 of 2)"
-msgstr "Podešavanje adrese (korak 1 od 2)"
+#: interfaces/network.glade.in.h:22
+msgid "Address configuration"
+msgstr "Podešavanje adrese"
 
 #: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:14
 msgid "Advanced"
@@ -492,20 +494,20 @@ msgstr "_Podešavanje:"
 msgid "Connection _name:"
 msgstr "I_me veze:"
 
-#: interfaces/network.glade.in.h:31 src/network/network-druid.c:449
-#: src/network/network-druid.c:460
-msgid "Connection name (Step 3 of 3)"
-msgstr "Ime veze (korak 3 od 3)"
+#: interfaces/network.glade.in.h:31
+msgid "Connection name"
+msgstr "Ime veze"
 
 #: interfaces/network.glade.in.h:32
 msgid "Connection type"
-msgstr "Vrsta povezivanja"
+msgstr "Vrsta veze"
 
 #: interfaces/network.glade.in.h:33
 msgid "Connections"
 msgstr "Veze"
 
-#: interfaces/network.glade.in.h:34
+#. set window titles
+#: interfaces/network.glade.in.h:34 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "Pravim novu mrežnu vezu"
 
@@ -533,7 +535,7 @@ msgstr "Domen / _radna grupa:"
 msgid "General"
 msgstr "Opšte"
 
-#: interfaces/network.glade.in.h:42 src/network/main.c:214
+#: interfaces/network.glade.in.h:42 src/network/main.c:217
 msgid "Hosts"
 msgstr "Računari"
 
@@ -554,8 +556,8 @@ msgid "How to dial up to the Internet."
 msgstr "Kako se povezuje na Internet."
 
 #: interfaces/network.glade.in.h:47
-msgid "ISP phone number (Step 1 of 3)"
-msgstr "Telefon posrednika internet usluga (korak 1 od 3)"
+msgid "ISP phone number"
+msgstr "Telefonski broj posrednika"
 
 #: interfaces/network.glade.in.h:48
 msgid "Interface properties"
@@ -705,8 +707,8 @@ msgid "Use this dialog for setting the configuration for this interface"
 msgstr "Koristite ovo prozorče za podešavanje ovog uređaja"
 
 #: interfaces/network.glade.in.h:80
-msgid "Username and password (Step 2 of 3)"
-msgstr "Korisničko ime i lozinka (korak 2 od 3)"
+msgid "Username and password"
+msgstr "Korisničko ime i lozinka"
 
 #: interfaces/network.glade.in.h:81
 msgid "WI_NS server:"
@@ -717,8 +719,8 @@ msgid "Wireless device:"
 msgstr "Bežični uređaj:"
 
 #: interfaces/network.glade.in.h:83
-msgid "Wireless settings (Step 1 of 3)"
-msgstr "Bežična podešavanja (korak 1 od 3)"
+msgid "Wireless settings"
+msgstr "Bežična podešavanja"
 
 #: interfaces/network.glade.in.h:84
 msgid ""
@@ -852,7 +854,7 @@ msgstr "_Osveži DNS kada se pokrene ova veza"
 msgid "_Use remote IP as default gateway"
 msgstr "_Koristi IP adresu udaljenog računara kao podrazumevani mrežni prolaz"
 
-#: interfaces/network.glade.in.h:118 interfaces/users.glade.in.h:66
+#: interfaces/network.glade.in.h:118 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "_Korisničko ime:"
 
@@ -1191,26 +1193,22 @@ msgid "_Profile:"
 msgstr "_Postavka:"
 
 #: interfaces/users.glade.in.h:62
-msgid "_Profiles..."
-msgstr "_Postavke..."
-
-#: interfaces/users.glade.in.h:63
 msgid "_Real name:"
 msgstr "_Stvarno ime:"
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:63
 msgid "_Shell:"
 msgstr "_Interpretator naredbi:"
 
-#: interfaces/users.glade.in.h:65
+#: interfaces/users.glade.in.h:64
 msgid "_User's groups:"
 msgstr "_Korisničke grupe:"
 
-#: interfaces/users.glade.in.h:67
+#: interfaces/users.glade.in.h:66
 msgid "_Work phone:"
 msgstr "_Telefon na poslu:"
 
-#: interfaces/users.glade.in.h:68
+#: interfaces/users.glade.in.h:67
 msgid "profiles_table"
 msgstr "Tabela _postavki"
 
@@ -1391,7 +1389,7 @@ msgstr " Više _opcija"
 msgid " Fewer _Options"
 msgstr " Manje _opcija"
 
-#: src/common/gst-dialog.c:504
+#: src/common/gst-dialog.c:507
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1399,7 +1397,7 @@ msgstr ""
 "Postoje promene koje nisu primenjene.\n"
 "Da li želite da ih primenite sada?"
 
-#: src/common/gst-dialog.c:621
+#: src/common/gst-dialog.c:624
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Greška povezivanja signal `%s' u elementu `%s'"
@@ -1678,49 +1676,50 @@ msgstr "IP adresa"
 msgid "Aliases"
 msgstr "Drugi nadimci"
 
-#: src/network/main.c:254
+#: src/network/main.c:257
 msgid "Run the connection assistant."
 msgstr "Pokreni pomoćnika za veze."
 
-#: src/network/main.c:255
+#: src/network/main.c:258
 msgid "Run the PPP connection assistant."
 msgstr "Pokreni pomoćnika za PPP veze."
 
-#: src/network/main.c:256
+#: src/network/main.c:259
 msgid "Run the ethernet connection assistant."
 msgstr "Pokreni pomoćnika za umrežavanje."
 
-#: src/network/main.c:257
+#: src/network/main.c:260
 msgid "Run the wlan connection assistant."
 msgstr "Pokreni pomoćnika za bežično umrežavanje."
 
-#: src/network/main.c:258
+#: src/network/main.c:261
 msgid "Run the parallel port connection assistant."
 msgstr "Pokreni pomoćnika za paralelno umrežavanje."
 
-#: src/network/main.c:259
+#: src/network/main.c:262
 msgid "Run the irlan connection assistant."
 msgstr "Pokreni pomoćnika za infracrveno umrežavanje."
 
-#: src/network/main.c:260
+#: src/network/main.c:263
 msgid "Configure a network interface"
 msgstr "Podesite mrežni uređaj"
 
-#: src/network/main.c:260
+#: src/network/main.c:263
 msgid "interface"
 msgstr "uređaj"
 
-#: src/network/main.c:267
+#: src/network/main.c:270
 msgid "Network Settings"
 msgstr "Podešavanja mreže"
 
-#: src/network/network-druid.c:425
-msgid "Address configuration (Step 2 of 3)"
-msgstr "Podešavanje adrese (korak 1 od 3)"
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Pravim novu mrežnu vezu (%d od %d)"
 
-#: src/network/network-druid.c:446
-msgid "Connection name (Step 2 of 2)"
-msgstr "Ime veze (korak 2 od 2)"
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "Završio sam sa pravljenjem nove mrežne veze"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -1768,11 +1767,11 @@ msgstr "Uslužni program"
 msgid "Time Zone"
 msgstr "Vremenska zona"
 
-#: src/time/main.c:427
+#: src/time/main.c:428
 msgid "Time Servers"
 msgstr "Serveri za vreme"
 
-#: src/time/main.c:505
+#: src/time/main.c:506
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1780,7 +1779,7 @@ msgstr ""
 "Nemate instaliranu NTP podršku. Molim instalirajte NTP podršku na sistemu "
 "kako bi omogućili sinhronizaciju vremena."
 
-#: src/time/main.c:812
+#: src/time/main.c:813
 msgid "Time and Date Settings"
 msgstr "Podešavanja vremena i datuma"
 
@@ -1851,23 +1850,23 @@ msgstr "Grupa"
 msgid "GID"
 msgstr "Broj grupe"
 
-#: src/users/main.c:122
+#: src/users/main.c:120
 msgid "User name contains"
 msgstr "Korisničko ime sadrži"
 
-#: src/users/main.c:123
+#: src/users/main.c:121
 msgid "User ID is"
 msgstr "Korisnički broj je"
 
-#: src/users/main.c:124
+#: src/users/main.c:122
 msgid "Group name contains"
 msgstr "Ime grupe sadrži"
 
-#: src/users/main.c:125
+#: src/users/main.c:123
 msgid "User GID is"
 msgstr "Broj grupe je"
 
-#: src/users/main.c:316 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Korisnici i grupe"
 
@@ -2045,6 +2044,27 @@ msgstr "Interpretator naredbi"
 msgid "Add or remove users and groups"
 msgstr "Dodajte ili uklonite korisnike i grupe"
 
+#~ msgid "Connection name (Step 3 of 3)"
+#~ msgstr "Ime veze (korak 3 od 3)"
+
+#~ msgid "ISP phone number (Step 1 of 3)"
+#~ msgstr "Telefon posrednika internet usluga (korak 1 od 3)"
+
+#~ msgid "Username and password (Step 2 of 3)"
+#~ msgstr "Korisničko ime i lozinka (korak 2 od 3)"
+
+#~ msgid "Wireless settings (Step 1 of 3)"
+#~ msgstr "Bežična podešavanja (korak 1 od 3)"
+
+#~ msgid "_Profiles..."
+#~ msgstr "_Postavke..."
+
+#~ msgid "Address configuration (Step 2 of 3)"
+#~ msgstr "Podešavanje adrese (korak 1 od 3)"
+
+#~ msgid "Connection name (Step 2 of 2)"
+#~ msgstr "Ime veze (korak 2 od 2)"
+
 #~ msgid "Boot Image Assistant"
 #~ msgstr "Pomoćnik za datoteku sa kernelom"
 
@@ -2083,12 +2103,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 
 #~ msgid "Enter Password - GNOME System Tools"
 #~ msgstr "Unesite lozinku - GNOM Sistemski Alati"
-
-#~ msgid "1. ISP phone number"
-#~ msgstr "1. Telefonski broj posrednika (ISP)"
-
-#~ msgid "2. Username and password"
-#~ msgstr "2. Korisničko ime i lozinka"
 
 #~ msgid "3. Account name"
 #~ msgstr "3. Ime naloga"
@@ -2400,9 +2414,6 @@ msgstr "Dodajte ili uklonite korisnike i grupe"
 
 #~ msgid "WaveLAN"
 #~ msgstr "Bežična lokalna mreža"
-
-#~ msgid "Wireless networking settings."
-#~ msgstr "Podešavanja bežičnog umrežavanja."
 
 #~ msgid "_Ad-Hoc mode"
 #~ msgstr "_Nabacani režim"
