@@ -1,14 +1,14 @@
 # Përkthimi i mesazheve të gnome-system-tools në shqip
 # This file is distributed under the same license as the gnome-system-tools package.
-# Copyright (C) 2004 Free Software Foundation, Inc.
-# Laurent Dhima <laurenti@alblinux.net>, 2004.
+# Copyright (C) 2004, 2005 Free Software Foundation, Inc.
+# Laurent Dhima <laurenti@alblinux.net>, 2004, 2005.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-10-21 11:33+0200\n"
-"PO-Revision-Date: 2004-10-21 16:32+0200\n"
+"POT-Creation-Date: 2005-01-04 04:16+0100\n"
+"PO-Revision-Date: 2005-01-04 12:03+0100\n"
 "Last-Translator: Laurent Dhima <laurenti@alblinux.net>\n"
 "Language-Team: Albanian <gnome-albanian-perkthyesit@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgid ""
 "Comma separated list of hosts that the GST will be able to access when the "
 "remote configuration option is enabled"
 msgstr ""
-"Lista e hosts, të ndarë me presje, në të cilën GST do të jetë në gjendje të "
+"Lista e host-eve, të ndarë me presje, në të cilën GST do të jetë në gjendje të "
 "futet kur aktivohet opcioni i konfigurimit remot"
 
 #: gnome-system-tools.schemas.in.h:2
@@ -71,8 +71,7 @@ msgstr ""
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Nëse duhet shfaqur apo jo mesazhi i paralajmërimit"
 
-#: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/shares.glade.in.h:1
+#: interfaces/boot.glade.in.h:1 interfaces/shares.glade.in.h:1
 #: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
@@ -182,11 +181,11 @@ msgstr ""
 "Shkruaj një emër për imazhin e boot, dhe specifiko se çfarë lloj sistemi "
 "operativ është ai."
 
-#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:45
+#: interfaces/boot.glade.in.h:25
 msgid "Finished"
 msgstr "Përfundoi"
 
-#: interfaces/boot.glade.in.h:26 src/network/connection.c:1614
+#: interfaces/boot.glade.in.h:26
 msgid "Manual"
 msgstr "Manual"
 
@@ -272,7 +271,7 @@ msgstr "_Parametra:"
 msgid "_Root file system device:"
 msgstr "Dispozitivi i file sistemit _rrënjë:"
 
-#: interfaces/common.glade.in.h:2
+#: interfaces/common.glade.in.h:1
 msgid ""
 "<span weight=\"bold\" size=\"larger\">The platform you are running is not "
 "supported by this tool</span>"
@@ -280,7 +279,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Piataforma që jeni duke përdorur nuk "
 "suportohet nga ky instrument</span>"
 
-#: interfaces/common.glade.in.h:3
+#: interfaces/common.glade.in.h:2
 msgid ""
 "<span weight=\"bold\" size=\"larger\">To run this tool, you need "
 "administrator privileges</span>"
@@ -288,11 +287,11 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Për të përdorur këtë instrument, ju "
 "nevoiten të drejtat e administratorit</span>"
 
-#: interfaces/common.glade.in.h:4
+#: interfaces/common.glade.in.h:3
 msgid "Enter Password"
 msgstr "Shkruaj fjalëkalimin"
 
-#: interfaces/common.glade.in.h:5
+#: interfaces/common.glade.in.h:4
 msgid ""
 "If you know for sure that it works like one of the platforms listed below, "
 "you can select that and continue. Note, however, that this might damage the "
@@ -302,19 +301,15 @@ msgstr ""
 "vazhdim, zgjidhni atë dhe vazhdoni. Ki parasysh, megjithatë, që kjo mund të "
 "dëmtojë konfigurimin e sistemit."
 
-#: interfaces/common.glade.in.h:6
+#: interfaces/common.glade.in.h:5
 msgid "Remote administration"
 msgstr "Administrim në distancë"
 
-#: interfaces/common.glade.in.h:7
+#: interfaces/common.glade.in.h:6
 msgid "Run _Without Password"
 msgstr "Zbato _Pa fjalëkalim"
 
-#: interfaces/common.glade.in.h:8
-msgid "Scanning system configuration..."
-msgstr "Duke studiuar konfigurimin e sistemit..."
-
-#: interfaces/common.glade.in.h:9
+#: interfaces/common.glade.in.h:7
 msgid ""
 "To acquire such privileges, enter your root password below. If you don't "
 "specify a password, you will be  unable to modify your system configuration."
@@ -323,37 +318,69 @@ msgstr ""
 "nuk specifikoni një fjalëkalim, nuk do të jeni në gjendje të ndryshoni "
 "konfigurimin e sistemit tuaj."
 
-#: interfaces/common.glade.in.h:10
+#: interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
 msgstr "Piataformë e pasuportuar"
 
-#: interfaces/common.glade.in.h:11
+#: interfaces/common.glade.in.h:9
 msgid "Use this window to select the computer you wish to configure"
 msgstr "Përdor këtë dritare për të zgjedhur kompjuterin që dëshironi të konfiguroni"
 
-#: interfaces/common.glade.in.h:12 interfaces/network.glade.in.h:103
+#: interfaces/common.glade.in.h:10
 msgid "_Password:"
 msgstr "_Fjalëkalimi:"
 
-#: interfaces/network.glade.in.h:2
+#: interfaces/network.glade.in.h:1
 msgid ""
 "/dev/modem\n"
 "/dev/ttyS0\n"
 "/dev/ttyS1\n"
 "/dev/ttyS2\n"
-"/dev/ttyS3\n"
+"/dev/ttyS3"
 msgstr ""
 "/dev/modem\n"
 "/dev/ttyS0\n"
 "/dev/ttyS1\n"
 "/dev/ttyS2\n"
-"/dev/ttyS3\n"
+"/dev/ttyS3"
+
+#: interfaces/network.glade.in.h:6
+msgid "<b>Account data</b>"
+msgstr "<b>Të dhënat e llogarisë</b>"
+
+#: interfaces/network.glade.in.h:7
+msgid "<b>Connection settings</b>"
+msgstr "<b>Rregullimet e lidhjes</b>"
 
 #: interfaces/network.glade.in.h:8
-msgid "<b>Profile Settings</b>"
-msgstr "<b>Rregullimet e Profilit</b>"
+msgid "<b>Connection</b>"
+msgstr "<b>Lidhja</b>"
 
 #: interfaces/network.glade.in.h:9
+msgid "<b>DNS Servers</b>"
+msgstr "<b>Serverët DNS</b>"
+
+#: interfaces/network.glade.in.h:10
+msgid "<b>Host Settings</b>"
+msgstr "<b>Rregullimet e host</b>"
+
+#: interfaces/network.glade.in.h:11
+msgid "<b>Internet service provider data</b>"
+msgstr "<b>Të dhënat e siguruesit të shërbimit internet</b>"
+
+#: interfaces/network.glade.in.h:12
+msgid "<b>Modem settings</b>"
+msgstr "<b>Rregullimet e modemit</b>"
+
+#: interfaces/network.glade.in.h:13
+msgid "<b>Search Domains</b>"
+msgstr "<b>Kërko Domains</b>"
+
+#: interfaces/network.glade.in.h:14
+msgid "<b>Wireless settings</b>"
+msgstr "<b>Rregullimet wireless</b>"
+
+#: interfaces/network.glade.in.h:15
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
 "Use this tool for configuring the way your system access to other computers"
@@ -362,464 +389,177 @@ msgstr ""
 "Përdor këtë vegël për të konfiguruar menyrën me të cilën sistemi juaj futet "
 "në kompjuterët e tjerë"
 
-#: interfaces/network.glade.in.h:11
-msgid "<span weight=\"bold\">Access Settings</span>"
-msgstr "<span weight=\"bold\">Rregullimet e futjes</span>"
-
-#: interfaces/network.glade.in.h:12
-msgid "<span weight=\"bold\">Account Data</span>"
-msgstr "<span weight=\"bold\">Të dhënat e llogarisë</span>"
-
-#: interfaces/network.glade.in.h:13
-msgid "<span weight=\"bold\">Connection settings</span>"
-msgstr "<span weight=\"bold\">Rregullimet e lidhjes</span>"
-
-#: interfaces/network.glade.in.h:14
-msgid "<span weight=\"bold\">Connection</span>"
-msgstr "<span weight=\"bold\">Lidhja</span>"
-
-#: interfaces/network.glade.in.h:15
-msgid "<span weight=\"bold\">DNS Servers</span>"
-msgstr "<span weight=\"bold\">Serverët DNS</span>"
-
-#: interfaces/network.glade.in.h:16
-msgid "<span weight=\"bold\">Host Settings</span>"
-msgstr "<span weight=\"bold\">Rregullimet e Host</span>"
-
 #: interfaces/network.glade.in.h:17
-msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
-msgstr "<span weight=\"bold\">Të dhënat e ISP (Dhënësi i shërbimit Internet)</span>"
+msgid "Aliases:"
+msgstr "Aliases:"
 
 #: interfaces/network.glade.in.h:18
-msgid "<span weight=\"bold\">PPP Settings</span>"
-msgstr "<span weight=\"bold\">Rregullimet PPP</span>"
-
-#: interfaces/network.glade.in.h:19
-msgid "<span weight=\"bold\">Search Domains</span>"
-msgstr "<span weight=\"bold\">Kërko Domains</span>"
-
-#: interfaces/network.glade.in.h:20
-msgid "<span weight=\"bold\">Windows Networking</span>"
-msgstr "<span weight=\"bold\">Rrjeti Windows</span>"
-
-#: interfaces/network.glade.in.h:21
-msgid "<span weight=\"bold\">Wireless settings:</span>"
-msgstr "<span weight=\"bold\">Rregullimet Wireless (pa fije):</span>"
-
-#: interfaces/network.glade.in.h:22
-msgid "A_liases:"
-msgstr "A_liases:"
-
-#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:15
-msgid "Account"
-msgstr "Llogaria"
-
-#: interfaces/network.glade.in.h:24
-msgid "Activate"
-msgstr "Aktivo"
-
-#: interfaces/network.glade.in.h:25
-msgid "Activate connection"
-msgstr "Aktivo lidhjen"
-
-#: interfaces/network.glade.in.h:26
-msgid "Activate when the computer _starts"
-msgstr "Aktivo kur _niset kompjuteri"
-
-#: interfaces/network.glade.in.h:27
-msgid "Add DNS server"
-msgstr "Shto server DNS"
-
-#: interfaces/network.glade.in.h:28
-msgid "Add search domain"
-msgstr "Shto kërkim domain"
-
-#: interfaces/network.glade.in.h:29
-msgid "Address configuration"
-msgstr "Konfigurimi i adresës"
-
-#: interfaces/network.glade.in.h:30 interfaces/users.glade.in.h:16
-msgid "Advanced"
-msgstr "Të detajuara"
-
-#: interfaces/network.glade.in.h:31
-msgid "Allow activation control for all _users"
-msgstr "Lejo kontrollin e aktivimit për të _gjithë përdoruesit"
-
-#: interfaces/network.glade.in.h:32
-msgid "Co_nfiguration:"
-msgstr "Ko_nfigurimi:"
-
-#: interfaces/network.glade.in.h:33
-msgid "Connection type"
-msgstr "Lloji i lidhjes"
-
-#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Lidhjet"
 
-#. set window titles
-#: interfaces/network.glade.in.h:35 src/network/network-druid.c:72
-msgid "Creating a new network connection"
-msgstr "Krijimi i një lidhje të re në rrjet"
-
-#: interfaces/network.glade.in.h:36
-msgid "Current network profile:"
-msgstr "Profili aktual i rrjetit:"
-
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:19
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:38
-msgid "DNS Servers"
-msgstr "Serverët DNS"
-
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:20
 msgid "D_omain name:"
 msgstr "Emri i d_omain:"
 
-#: interfaces/network.glade.in.h:40
-msgid "Default gateway device:"
-msgstr "Dispozitivi i prezgjedhur gateway:"
+#: interfaces/network.glade.in.h:21
+msgid "Default _gateway device:"
+msgstr "Dispozitivi i prezgjedhur _gateway:"
 
-#: interfaces/network.glade.in.h:41
-msgid "Delete DNS server"
-msgstr "Hiq serverin DNS"
-
-#: interfaces/network.glade.in.h:42
-msgid "Delete search domain"
-msgstr "Hiq kërko domain"
-
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:22
 msgid "Device:"
 msgstr "Dispozitivi:"
 
-#: interfaces/network.glade.in.h:44
-msgid "Domain / _Workgroup:"
-msgstr "Domain / _Grupi i punës:"
-
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:23
 msgid "General"
 msgstr "Të përgjithshme"
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:24
+msgid "Host alias settings"
+msgstr "Rregullimet e alias të host"
+
+#: interfaces/network.glade.in.h:25
 msgid "Hosts"
 msgstr "Host-et"
 
-#: interfaces/network.glade.in.h:48
-msgid "ISP phone number"
-msgstr "Numri telefonik i ISP"
+#: interfaces/network.glade.in.h:26 interfaces/shares.glade.in.h:13
+msgid "IP address:"
+msgstr "Adresa IP:"
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:27
 msgid "Interface properties"
 msgstr "Pronësitë e interfaqes"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:28
+msgid "Location name:"
+msgstr "Emri i pozicionit:"
+
+#: interfaces/network.glade.in.h:29
+msgid "Location:"
+msgstr "Vendodhja:"
+
+#: interfaces/network.glade.in.h:30
+msgid "Modem"
+msgstr "Modemi"
+
+#: interfaces/network.glade.in.h:31
+msgid "Network name (_ESSID):"
+msgstr "Emri i rrjetit (_ESSID):"
+
+#: interfaces/network.glade.in.h:32
 msgid ""
-"List of domains that the system will try to append to a hostname if there "
-"isn't already one specified"
+"Off\n"
+"Low\n"
+"Medium\n"
+"Loud"
 msgstr ""
-"Lista e domains që sistemi do të përpiqet t'i shtojë një hostname nëse ky i "
-"fundit nuk është specifikuar"
+"Mbyllur\n"
+"Ulët\n"
+"Mesatar\n"
+"Shpejtë"
 
-#: interfaces/network.glade.in.h:51
-msgid "Modem _volume:"
-msgstr "_Volumi i modemit:"
+#: interfaces/network.glade.in.h:36
+msgid "Options"
+msgstr "Mundësitë"
 
-#: interfaces/network.glade.in.h:52
-msgid "Network name (ESSID):"
-msgstr "Emri i rrjetit (ESSID):"
+#: interfaces/network.glade.in.h:37
+msgid "P_assword"
+msgstr "Fj_alëkalimi"
 
-#: interfaces/network.glade.in.h:53
-msgid "Network profiles"
-msgstr "Profilet e rrjetit"
+#: interfaces/network.glade.in.h:38
+msgid "Select location name"
+msgstr "Zgjidh emrin e pozicionit"
 
-#: interfaces/network.glade.in.h:54
-msgid "Networking Settings"
-msgstr "Rregullimet e rrjetit"
+#: interfaces/network.glade.in.h:39
+msgid "This device is _configured"
+msgstr "Ky dispozitiv u _konfigurua"
 
-#: interfaces/network.glade.in.h:55
-msgid "New network profile"
-msgstr "Profil i ri rrjeti"
-
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:40
 msgid ""
-"Next, please enter the user name and password which were assigned to you by "
-"your ISP."
+"Tones\n"
+"Pulses"
 msgstr ""
-"Në vazhdim, shkruaj emrin e përdoruesit dhe fjalëkalimin që ju ka caktuar "
-"ISP juaj."
+"Tone\n"
+"Pulsime"
 
-#: interfaces/network.glade.in.h:57
-msgid ""
-"Now, please enter the address that this network device will have, and the "
-"remote address to which it will be connected."
-msgstr ""
-"Tani, shkruaj adresën që do të ketë ky dispozitiv rrjeti, dhe adresën remote "
-"me të cilën do të lidhet."
+#: interfaces/network.glade.in.h:42
+msgid "WEP _key:"
+msgstr "_Kyçi WEP:"
 
-#: interfaces/network.glade.in.h:58
-msgid "Now, please enter the address that this network device will have."
-msgstr "Tani, shkruaj adresën që do të ketë ky dispozitiv rrjeti."
+#: interfaces/network.glade.in.h:43 src/network/ifaces-list.c:33
+msgid "_Activate"
+msgstr "_Aktivo"
 
-#: interfaces/network.glade.in.h:59
-msgid ""
-"Now, please specify if this connection should be enabled, this means that "
-"the configuration will be applied when the assistant finishes."
-msgstr ""
-"Tani, specifiko nëse kjo lidhje duhet të aktivohet, kjo do të thotë që "
-"konfigurimi do të aplikohet mbasi të ketë përfunduar asistenti."
-
-#: interfaces/network.glade.in.h:60
-msgid "Number to _access an external line:"
-msgstr "Numri për të _hyrë tek linjat e jashtme:"
-
-#: interfaces/network.glade.in.h:61
-msgid "Number to get to an _external line:"
-msgstr "Numri që duhet marrë për linjat e _jashtme:"
-
-#: interfaces/network.glade.in.h:62
-msgid "PPPD _options:"
-msgstr "_Opcionet PPPD:"
-
-#: interfaces/network.glade.in.h:63
-msgid "Pa_ssword (confirm):"
-msgstr "Fja_lëkalimi (konfermo):"
-
-#: interfaces/network.glade.in.h:64
-msgid "Phone _number:"
-msgstr "_Numri telefonik:"
-
-#: interfaces/network.glade.in.h:65
-msgid ""
-"Please enter the phone number you use to connect to the internet. This "
-"number is provided by your ISP."
-msgstr ""
-"Shkruaj numrin telefonik që përdorni për t'u lidhur në Internet. Këtë numur "
-"jua jep ISP juaj."
-
-#: interfaces/network.glade.in.h:66
-msgid ""
-"Please select the wireless device that you want to configure and set the "
-"network name for this interface"
-msgstr ""
-"Zgjidh dispozitivin wireless që doni të konfiguroni dhe cakto emrin e "
-"rrjetit për këtë interfaqe"
-
-#: interfaces/network.glade.in.h:67
-msgid "Please, select which type of connection you would like to add."
-msgstr "Zgjidh çfarë lloj lidhje dëshiron të shtosh."
-
-#: interfaces/network.glade.in.h:68 interfaces/users.glade.in.h:38
-msgid "Profile _name:"
-msgstr "_Emri i profilit:"
-
-#: interfaces/network.glade.in.h:69
-msgid "Se_condary:"
-msgstr "Dy_tësori:"
-
-#: interfaces/network.glade.in.h:70
-msgid "Search Domains"
-msgstr "Kërko Domains"
-
-#: interfaces/network.glade.in.h:71
-msgid "Set _DNS servers manually"
-msgstr "Cakto vetë serverët _DNS"
-
-#: interfaces/network.glade.in.h:72
-msgid "Set modem as default _route to internet"
-msgstr "Cakto modemin si _route e prezgjedhur për në internet"
-
-#: interfaces/network.glade.in.h:73
-msgid ""
-"This assistant will help you configure a new \n"
-"network connection."
-msgstr ""
-"Ky asistent do t'ju ndihmojë në konfigurimin e\n"
-"një lidhje të re në rrjet."
-
-#: interfaces/network.glade.in.h:75
-msgid "This is the list of IP addresses that the system will use as name servers"
-msgstr "Kjo është lista me adresat IP që sistemi do të përdorë si servera emri"
-
-#: interfaces/network.glade.in.h:76
-msgid ""
-"To continue configuring your network connection, click \"Next\". To quit, "
-"click \"Cancel\"."
-msgstr ""
-"Për të vazhduar konfigurimin e lidhjes në rrjet, kliko \"Vazhdo\". Për të "
-"dalë, kliko \"Anullo\"."
-
-#: interfaces/network.glade.in.h:77
-msgid "Username and password"
-msgstr "Përdoruesi dhe fjalëkalimi"
-
-#: interfaces/network.glade.in.h:78
-msgid "WEP key:"
-msgstr "Kyçi WEP:"
-
-#: interfaces/network.glade.in.h:79
-msgid "WI_NS server:"
-msgstr "Serveri WI_NS:"
-
-#: interfaces/network.glade.in.h:80
-msgid "Wireless device:"
-msgstr "Dispozitivi Wireless:"
-
-#: interfaces/network.glade.in.h:81
-msgid "Wireless settings"
-msgstr "Rregullimet wireless"
-
-#: interfaces/network.glade.in.h:82
-msgid ""
-"You are about to create a new network connection. Please click \"Apply\" to "
-"save your changes."
-msgstr ""
-"Jeni duke krijuar një lidhje të re rrjeti. Kliko \"Apliko\" për të ruajtur "
-"ndryshimet."
-
-#: interfaces/network.glade.in.h:83
-msgid "_Apply and activate connection"
-msgstr "_Apliko dhe aktivo lidhjen"
-
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:44
 msgid "_Autodetect"
 msgstr "_Autozbulo"
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:45
 msgid "_Configuration:"
 msgstr "_Konfigurimi:"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:46 src/network/ifaces-list.c:34
 msgid "_Deactivate"
 msgstr "_Ç'aktivo"
 
-#: interfaces/network.glade.in.h:87 interfaces/users.glade.in.h:52
-#: src/boot/table.c:52 src/network/connection.c:64 src/network/dns.c:39
-#: src/network/hosts.c:42 src/shares/table.c:41 src/users/table.c:49
-msgid "_Delete"
-msgstr "_Elemino"
+#: interfaces/network.glade.in.h:47
+msgid "_Dial prefix:"
+msgstr "Prefiksi i _thirrjes:"
 
-#: interfaces/network.glade.in.h:88
-msgid "_Description:"
-msgstr "_Përshkrimi:"
-
-#: interfaces/network.glade.in.h:89
+#: interfaces/network.glade.in.h:48
 msgid "_Dial type:"
 msgstr "Lloji i _Dial:"
 
-#: interfaces/network.glade.in.h:90
-msgid "_Enable Windows networking"
-msgstr "_Aktivo lidhjet me rrjetin Windows"
-
-#: interfaces/network.glade.in.h:91
-msgid "_Ethernet"
-msgstr "_Ethernet"
-
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:49
 msgid "_Gateway address:"
 msgstr "Adresa e _gateway:"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:50
 msgid "_Hostname:"
 msgstr "Emri i _Host:"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:51
 msgid "_IP address:"
 msgstr "Adresa _IP:"
 
-#: interfaces/network.glade.in.h:95
-msgid "_IR LAN"
-msgstr "_IR LAN"
-
-#: interfaces/network.glade.in.h:96
-msgid "_Local IP address:"
-msgstr "Adresa IP _Lokale:"
-
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:52
 msgid "_Local IP:"
 msgstr "IP _Lokale:"
 
-#: interfaces/network.glade.in.h:98
-msgid "_Modem (PPP)"
-msgstr "_Modem (PPP)"
-
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:53
 msgid "_Modem port:"
 msgstr "Porta e _Modemit:"
 
-#: interfaces/network.glade.in.h:100
-msgid "_Network Profiles"
-msgstr "Profilet e _Rrjetit"
-
-#: interfaces/network.glade.in.h:101
-msgid "_Network name (ESSID):"
-msgstr "Emri i _rrjetit (ESSID):"
-
-#: interfaces/network.glade.in.h:102
-msgid "_Parallel Line"
-msgstr "Linja _Paralele"
-
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:54
 msgid "_Phone number:"
 msgstr "Numri _telefonik:"
 
-#: interfaces/network.glade.in.h:105
-msgid "_Primary:"
-msgstr "_Kryesori:"
-
-#: interfaces/network.glade.in.h:106
-msgid "_Remote IP address:"
-msgstr "Adresa IP _Remote:"
-
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:55
 msgid "_Remote IP:"
 msgstr "IP _Remote:"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:56
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Riprovo nëse lidhja shkëputet apo nuk realizohet"
 
-#: interfaces/network.glade.in.h:109
-msgid "_Save Current"
-msgstr "_Ruaj aktualen"
+#: interfaces/network.glade.in.h:57
+msgid "_Set modem as default route to internet"
+msgstr "_Cakto modemin si route e prezgjedhur për në internet"
 
-#: interfaces/network.glade.in.h:110
-msgid "_Start PPP as soon as modem connects"
-msgstr "_Fillo PPP sapo të lidhet modemi"
-
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:58
 msgid "_Subnet mask:"
 msgstr "Maska e _nënrrjetit:"
 
-#: interfaces/network.glade.in.h:112
-msgid "_Update DNS when this connection becomes active"
-msgstr "_Përditëso DNS kur kjo lidhje aktivohet"
-
-#: interfaces/network.glade.in.h:113
-msgid "_Use remote IP as default gateway"
-msgstr "_Përdor IP remote si gateway të prezgjedhur"
-
-#: interfaces/network.glade.in.h:114 interfaces/users.glade.in.h:61
+#: interfaces/network.glade.in.h:59 interfaces/users.glade.in.h:61
 msgid "_Username:"
 msgstr "_Përdoruesi:"
 
-#: interfaces/network.glade.in.h:115
-msgid "_WEP key:"
-msgstr "Kyçi _WEP:"
-
-#: interfaces/network.glade.in.h:116
-msgid "_Wireless"
-msgstr "_Wireless"
-
-#: interfaces/network.glade.in.h:117
-msgid "new DNS server"
-msgstr "server i ri DNS"
-
-#: interfaces/network.glade.in.h:118
-msgid "new search domain"
-msgstr "\"kërko domain\" e re"
+#: interfaces/network.glade.in.h:60
+msgid "_Volume:"
+msgstr "_Volumi:"
 
 #: interfaces/services.glade.in.h:1
 msgid ""
@@ -887,8 +627,10 @@ msgid ""
 "<span weight=\"bold\" size=\"larger\">Shared folders configuration</span>\n"
 "Use this tool for making available folders to your local network neighborhood"
 msgstr ""
-"<span weight=\"bold\" size=\"larger\">Rregullimet e kartelave të përbashkëta</span>\n"
-"Përdor këtë vegël për të vënë në dispozicion kartelat fqinjëve në rrjetin tuaj lokal"
+"<span weight=\"bold\" size=\"larger\">Rregullimet e kartelave të "
+"përbashkëta</span>\n"
+"Përdor këtë vegël për të vënë në dispozicion kartelat fqinjëve në rrjetin "
+"tuaj lokal"
 
 #: interfaces/shares.glade.in.h:8
 msgid "Add allowed hosts"
@@ -909,10 +651,6 @@ msgstr "Komenti:"
 #: interfaces/shares.glade.in.h:12
 msgid "Host name:"
 msgstr "Emri i Host:"
-
-#: interfaces/shares.glade.in.h:13
-msgid "IP address:"
-msgstr "Adresa IP:"
 
 #: interfaces/shares.glade.in.h:14
 msgid "Name:"
@@ -1084,6 +822,14 @@ msgstr "<span weight=\"bold\">Të prezgjedhur nga Sistemi</span>"
 msgid "<span weight=\"bold\">User Profile</span>"
 msgstr "<span weight=\"bold\">Profili i Përdoruesit</span>"
 
+#: interfaces/users.glade.in.h:15
+msgid "Account"
+msgstr "Llogaria"
+
+#: interfaces/users.glade.in.h:16
+msgid "Advanced"
+msgstr "Të detajuara"
+
 #: interfaces/users.glade.in.h:17
 msgid "Assign a random password by default"
 msgstr "Cakto në menyrë të prezgjedhur një fjalëkalim të rastësishëm"
@@ -1168,6 +914,10 @@ msgstr "Vendodhja e z_yrës:"
 msgid "Password set to: "
 msgstr "U përcaktua fjalëkalimi i: "
 
+#: interfaces/users.glade.in.h:38
+msgid "Profile _name:"
+msgstr "_Emri i profilit:"
+
 #: interfaces/users.glade.in.h:39
 msgid "Set password b_y hand"
 msgstr "Vendos v_etë fjalëkalimin"
@@ -1219,6 +969,12 @@ msgstr "_Komente"
 #: interfaces/users.glade.in.h:51
 msgid "_Days between warning and password expiration:"
 msgstr "_Ditë midis parajmërimit dhe skadimit të fjalëkalimit:"
+
+#: interfaces/users.glade.in.h:52 src/boot/table.c:52
+#: src/network/address-list.c:71 src/network/hosts.c:35 src/shares/table.c:41
+#: src/users/table.c:49
+msgid "_Delete"
+msgstr "_Elemino"
 
 #: interfaces/users.glade.in.h:53
 msgid "_Edit User Profiles..."
@@ -1290,7 +1046,7 @@ msgstr "Krijimi i një imazhi të ri nisje (%d në %d)"
 msgid "Finished creating a new boot image"
 msgstr "Krijimi i imazhit të ri të nisjes përfundoi"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:491
+#: src/boot/boot-image.c:40
 msgid "Unknown"
 msgstr "Nuk njihet"
 
@@ -1405,7 +1161,7 @@ msgstr "Emri"
 msgid "Default"
 msgstr "E prezgjedhur"
 
-#: src/boot/table.c:43 src/network/connection.c:490
+#: src/boot/table.c:43
 msgid "Type"
 msgstr "Lloji"
 
@@ -1413,17 +1169,17 @@ msgstr "Lloji"
 msgid "Kernel Image"
 msgstr "Imazhi i kernel"
 
-#: src/boot/table.c:45 src/network/connection.c:506
+#: src/boot/table.c:45
 msgid "Device"
 msgstr "Dispozitivi"
 
-#: src/boot/table.c:50 src/network/connection.c:62 src/shares/table.c:39
-#: src/users/table.c:47
+#: src/boot/table.c:50 src/network/address-list.c:70 src/network/hosts.c:33
+#: src/shares/table.c:39 src/users/table.c:47
 msgid "_Add"
 msgstr "_Shto"
 
-#: src/boot/table.c:51 src/network/connection.c:63 src/shares/table.c:40
-#: src/users/table.c:48
+#: src/boot/table.c:51 src/network/hosts.c:34 src/network/ifaces-list.c:32
+#: src/shares/table.c:40 src/users/table.c:48
 msgid "_Properties"
 msgstr "_Pronësitë"
 
@@ -1484,20 +1240,20 @@ msgstr "Aplikon tani?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Sinjal i gabuar lidhje `%s' tek instrumenti `%s'"
 
-#: src/common/gst-tool.c:1017
+#: src/common/gst-tool.c:1020
 msgid "The configuration could not be loaded"
 msgstr "I pamundur ngarkimi i konfigurimit"
 
-#: src/common/gst-tool.c:1018
+#: src/common/gst-tool.c:1021
 msgid "There was an error running the backend script"
 msgstr "Gabim gjatë zbatimit të backend script"
 
-#: src/common/gst-tool.c:1491
+#: src/common/gst-tool.c:1504
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Mirësevini tek prerelease %s e Instrumentëve të Sistemit të GNOME"
 
-#: src/common/gst-tool.c:1493
+#: src/common/gst-tool.c:1506
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1512,150 +1268,44 @@ msgstr ""
 "paralajmëruar. Ju faleminderit që po provoni këtë prerelease të "
 "Instrumentëve të sistemit të GNOME!"
 
-#: src/common/gst-tool.c:1514
+#: src/common/gst-tool.c:1527
 msgid "Warning"
 msgstr "Kujdes"
 
-#: src/common/gst-tool.c:1534
+#: src/common/gst-tool.c:1547
 msgid "Don't show me this again"
 msgstr "Mos e shfaq më"
 
-#: src/common/gst-tool.c:1610
+#: src/common/gst-tool.c:1604
 msgid "GNOME System Tools"
 msgstr "Instrumentet e Sistemit për GNOME"
 
-#: src/common/gst-tool.c:1771
+#: src/common/gst-tool.c:1748
 msgid "Could not display help"
 msgstr "E pamundur shfaqja e ndihmës"
 
-#: src/network/callbacks.c:403
-msgid ""
-"This will disable any network connection with this interface as soon as you "
-"press \"OK\" in the main window"
-msgstr ""
-"Kjo do të ç'aktivojë çdo lidhje rrjeti me këtë interfaqe sapo të shtypet "
-"\"OK\" tek dritarja kryesore"
+#: src/network/address-list.c:528
+msgid "Type address"
+msgstr "Shkruaj adresën"
 
-#: src/network/callbacks.c:409
+#: src/network/callbacks.c:43
 #, c-format
-msgid "Are you sure you want to delete connection \"%s\"?"
-msgstr "Je i sigurt që dëshiron të fshish lidhjen \"%s\"?"
+msgid "Could not enable the interface %s"
+msgstr "I pamundur aktivimi i interfaqes %s"
 
-#: src/network/callbacks.c:517
-msgid "SMB Support is not running"
-msgstr "Suporti SMB nuk është në ekzekutim"
-
-#: src/network/callbacks.c:518
+#: src/network/callbacks.c:47
 msgid ""
-"You don't have SMB support installed. Please install SMB support in the "
-"system to enable file sharing in Windows networks"
+"Check that the settings are apropriate for this network and that the "
+"computer is correctly connected to it."
 msgstr ""
-"Suporti i SMB nuk është instaluar. Për të aktivuar bashkandarjen e file me "
-"rrjetet Windows instalo suportin SMB"
+"Kontrollo rregullimet janë korrekte për këtë rrjet dhe që kompjuteri është "
+"lidhur si duhet me të."
 
-#: src/network/callbacks.c:582
-msgid "The host name has changed"
-msgstr "Emri i host është ndryshuar"
-
-#: src/network/callbacks.c:583
-msgid ""
-"This will prevent you from launching new applications, and so you will have "
-"to log in again. Continue anyway?"
-msgstr ""
-"Kjo do t'ju parandalojë në nisjen e programeve të rinj, në këtë menyrë do "
-"t'ju duhet të identifikoheni përsëri. Vazhdon sidoqoftë?"
-
-#: src/network/callbacks.c:587
-msgid "Change _Host name"
-msgstr "Ndrysho emrin e _Host"
-
-#: src/network/callbacks.c:630 src/network/callbacks.c:657
-msgid "Wvdial command not found"
-msgstr "Komanda Wvdial nuk u gjet"
-
-#: src/network/callbacks.c:631
-msgid ""
-"wvdial could not be found on your system. You need to install wvdial, or the "
-"PPP (modem) connections will not activate"
-msgstr ""
-"wvdial nuk u gjet në sistemin tuaj. Duhet të instaloni wvdial, përndryshe "
-"lidhjet PPP (modem) nuk do të aktivohen"
-
-#: src/network/callbacks.c:658
-msgid ""
-"wvdial could not be found on your system. You need to install wvdial, or the "
-"PPP (modem) connections will not activate. Continue anyway?"
-msgstr ""
-"wvdial nuk u gjet në sistemin tuaj. Duhet të instaloni wvdial, përndryshe "
-"lidhjet PPP (modem) nuk do të aktivohen. Vazhdon sidoqoftë?"
-
-#: src/network/callbacks.c:662 src/network/callbacks.c:689
-msgid "_Continue"
-msgstr "_Vazhdo"
-
-#: src/network/callbacks.c:685
-msgid "The default gateway device is not activated"
-msgstr "Dispozitivi i prezgjedhur gateway nuk është aktivuar"
-
-#: src/network/callbacks.c:686
-msgid "This will prevent you from connecting to the Internet. Continue anyway?"
-msgstr "Kjo ju pengon të lidheni në Internet. Vazhdon sidoqoftë?"
-
-#: src/network/callbacks.c:734
-msgid "The default gateway device is missing gateway information"
-msgstr "Dispozitivit të prezgjedhur gateway i mungojnë informacionet e gateway"
-
-#: src/network/callbacks.c:735
-msgid ""
-"Please provide this information to proceed, or choose another default "
-"gateway device"
-msgstr ""
-"Ju lutem jepni këto informacione për të vazhduar, ose zgjidhni një "
-"dispozitiv tjetër të prezgjedhur gateway"
-
-#: src/network/callbacks.c:780
-msgid "The program redhat-config-network-cmd could not be found"
-msgstr "E pamundur gjetja e programit redhat-config-network-cmd"
-
-#: src/network/callbacks.c:781
-msgid ""
-"This could render missing connections under the connections tab. Please "
-"install the redhat-config-network rpm package to avoid this"
-msgstr ""
-"Kjo mund të krijojë lidhje joekzistuese tek skedat e lidhjeve. Instalo "
-"paketën rpm redhat-config-network për të shmangur këtë"
-
-#: src/network/callbacks.c:812
-#, c-format
-msgid "Do you want to enable interface \"%s\"?"
-msgstr "Aktivon interfaqen \"%s\"?"
-
-#: src/network/callbacks.c:813
-msgid "This will enable network access through this interface"
-msgstr "Kjo do të aktivojë hyrjen në rrjet me anë të kësaj interfaqe"
-
-#: src/network/callbacks.c:814
-msgid "_Enable"
-msgstr "_Aktivo"
-
-#: src/network/callbacks.c:816
-#, c-format
-msgid "Do you want to disable interface \"%s\"?"
-msgstr "Ç'aktivon interfaqen \"%s\"?"
-
-#: src/network/callbacks.c:817
-msgid "This will disable network access through this interface"
-msgstr "Kjo do të ç'aktivojë hyrjen në rrjet me anë të kësaj interfaqe"
-
-#: src/network/callbacks.c:818
-msgid "_Disable"
-msgstr "_Ç'aktivo"
-
-#: src/network/callbacks.c:954
+#: src/network/callbacks.c:234
 msgid "Could not autodetect modem device"
 msgstr "I pamundur autozbulimi i dispozitivit të modem"
 
-#: src/network/callbacks.c:955
+#: src/network/callbacks.c:237
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer"
@@ -1663,199 +1313,85 @@ msgstr ""
 "Kontrollo që dispozitivi është i lirë dhe që është lidhur korrektësisht me "
 "kompjuterin"
 
-#: src/network/callbacks.c:1008
-msgid "Silent"
-msgstr "Pa zë"
+#: src/network/callbacks.c:433
+msgid "The host name has changed"
+msgstr "Emri i host është ndryshuar"
 
-#: src/network/callbacks.c:1010
-msgid "Low"
-msgstr "E ulët"
+#: src/network/callbacks.c:436
+msgid ""
+"This will prevent you from launching new applications, and so you will have "
+"to log in again. Continue anyway?"
+msgstr ""
+"Kjo do t'ju parandalojë në nisjen e programeve të rinj, në këtë menyrë do "
+"t'ju duhet të identifikoheni përsëri. Vazhdon sidoqoftë?"
 
-#: src/network/callbacks.c:1012
-msgid "Medium"
-msgstr "Mesatare"
-
-#: src/network/callbacks.c:1014
-msgid "Loud"
-msgstr "I lartë"
-
-#: src/network/connection.c:46
-msgid "Other type"
-msgstr "Lloj tjetër"
-
-#: src/network/connection.c:47 src/network/connection.c:48
-#: src/network/connection.c:49 src/network/connection.c:50
-msgid "Ethernet LAN card"
-msgstr "Skedë LAN Ethernet"
-
-#: src/network/connection.c:51
-msgid "Wireless LAN card"
-msgstr "Skedë LAN Wireless"
-
-#: src/network/connection.c:52 src/network/connection.c:53
-msgid "Modem or transfer cable"
-msgstr "Modem apo kabëll transferues"
-
-#: src/network/connection.c:54
-msgid "Parallel line"
-msgstr "Linjë paralele"
-
-#: src/network/connection.c:55
-msgid "Infrared LAN"
-msgstr "LAN Infrared"
+#: src/network/callbacks.c:442
+msgid "Change _Host name"
+msgstr "Ndrysho emrin e _Host"
 
 #: src/network/connection.c:56
-msgid "Loopback interface"
-msgstr "Intrfaqe Loopback"
+msgid "Static IP address"
+msgstr "Adresa statike IP"
 
 #: src/network/connection.c:57
-msgid "Unknown interface type"
-msgstr "Lloj i panjohur interfaqeje"
+msgid "DHCP"
+msgstr "DHCP"
 
-#: src/network/connection.c:477 src/services/table.c:86
-msgid "Active"
-msgstr "Aktiv"
-
-#: src/network/connection.c:1615
-msgid "Automatic (DHCP)"
-msgstr "Automatike (DHCP)"
-
-#: src/network/connection.c:1616
-msgid "Automatic (BOOTP)"
-msgstr "Automatike (BOOTP)"
-
-#: src/network/connection.c:1634
-msgid "Tones"
-msgstr "Tone"
-
-#: src/network/connection.c:1635
-msgid "Pulses"
-msgstr "Pulsime"
-
-#: src/network/connection.c:1737 src/network/connection.c:1747
-msgid "Error in IP address"
-msgstr "Gabim tek adresa IP"
-
-#: src/network/connection.c:1738
-msgid ""
-"The IP address or netmask for the interface was left empty. Please enter "
-"valid IP addresses in those fields to continue"
-msgstr ""
-"Adresa IP apo netmask për interfaqen janë lënë bosh. Jep adresat e sakta IP "
-"në këto fusha për të vazhduar"
-
-#: src/network/connection.c:1748
-msgid ""
-"The IP address or remote address for the interface was left empty. Please "
-"enter valid IP addresses in those fields to continue"
-msgstr ""
-"Adresa IP apo adresa remote për interfaqen janë lënë bosh. Jep adresat e "
-"sakta IP në këto fusha për të vazhduar"
-
-#: src/network/connection.c:1756
-msgid "Error in domain name servers"
-msgstr "Gabim tek serverët e emrave të domain"
-
-#: src/network/connection.c:1757
-msgid ""
-"You chose to set the domain name servers for this connection manually, but "
-"left the IP address for the primary name server empty. Please enter the IP "
-"for the primary domain name server or uncheck the manual DNS option"
-msgstr ""
-"Keni zgjedhur përcaktimin manual të sevrerëve të emrit të domain për këtë "
-"lidhje, por keni lënë bosh adresën IP të serverit primar. Shkruani IP për "
-"serverin primar të emrave të domain ose mos zgjidhni opcionin e përcaktimit "
-"manual të DNS"
-
-#: src/network/connection.c:1764
-msgid "Invalid modem device"
-msgstr "Dispozitiv modem i pavlefshëm"
-
-#: src/network/connection.c:1765
-msgid ""
-"The modem device that the connection will use was left empty. Please enter a "
-"device or press \"autodetect\" to continue"
-msgstr ""
-"Dispozitivi modem që duhet përdorur për lidhjen është lënë bosh. Jep një "
-"dispozitiv ose shtyp \"autozbulo\" për të vazhduar"
-
-#: src/network/connection.c:1770
-msgid "Invalid phone number"
-msgstr "Numër i pavlefshëm telefonik"
-
-#: src/network/connection.c:1771
-msgid ""
-"The phone number that the connection will use was left empty. Please enter a "
-"valid phone number to continue"
-msgstr ""
-"Numri telefonik që duhet përdorur për lidhjen është lënë bosh. Shkruaj një "
-"numër të vlefshëm për të vazhduar"
-
-#: src/network/connection.c:2098
-#, c-format
-msgid "The interface \"%s\" doesn't exist"
-msgstr "Interfaqja \"%s\" nuk ekziston"
-
-#: src/network/connection.c:2102
-msgid "Invalid interface"
-msgstr "Interfaqe e pavlefshme"
-
-#: src/network/connection.c:2103
-msgid "The loopback interface cannot be configured"
-msgstr "I pamundur konfigurimi i interfaqes loopback"
-
-#: src/network/dns.c:148 src/network/hosts.c:158
+#: src/network/hosts.c:88
 msgid "IP Address"
 msgstr "Adresa IP"
 
-#: src/network/hosts.c:166
+#: src/network/hosts.c:95
 msgid "Aliases"
 msgstr "Pseudonime"
 
-#: src/network/main.c:204
-msgid "Run the connection assistant."
-msgstr "Fillo asistentin e lidhjeve."
+#: src/network/location.c:141
+msgid "Create location"
+msgstr "Krijo pozicion"
 
-#: src/network/main.c:205
-msgid "Run the PPP connection assistant."
-msgstr "Fillo asistentin e lidhjeve PPP."
+#: src/network/location.c:149
+msgid "Delete current location"
+msgstr "Elemino pozicionin aktual"
 
-#: src/network/main.c:206
-msgid "Run the ethernet connection assistant."
-msgstr "Fillo asistentin e lidhjeve ethernet."
+#: src/network/location.c:362
+msgid "Do you want to remove this location?"
+msgstr "Je i sigurt që dëshiron të heqësh këtë pozicion?"
 
-#: src/network/main.c:207
-msgid "Run the wlan connection assistant."
-msgstr "Fillo asistentin e lidhjeve wlan."
+#: src/network/location.c:428
+msgid "Changing profile"
+msgstr "Ndryshimi i profilit"
 
-#: src/network/main.c:208
-msgid "Run the parallel port connection assistant."
-msgstr "Fillo asistentin e lidhjeve me anë të portës paralele."
+#: src/network/main.c:105
+msgid "The interface does not exist"
+msgstr "Interfaqja nuk ekziston"
 
-#: src/network/main.c:209
-msgid "Run the irlan connection assistant."
-msgstr "Fillo asistentin e lidhjeve irlan."
+#: src/network/main.c:107
+msgid ""
+"Check that it is correctly typed and that it is correctly supported by your "
+"system."
+msgstr ""
+"Kontrollo që është shkruar si duhet dhe që suportohet korrektësisht nga "
+"sistemi yt."
 
-#: src/network/main.c:210
+#: src/network/main.c:136
 msgid "Configure a network interface"
 msgstr "Konfigurimi i interfaqes së rrjetit"
 
-#: src/network/main.c:210
-msgid "interface"
-msgstr "interfaqja"
+#: src/network/main.c:136
+msgid "INTERFACE"
+msgstr "INTERFAQJA"
 
-#: src/network/main.c:217
-msgid "Network Settings"
+#: src/network/main.c:137
+msgid "Configure the first network interface with a specific type"
+msgstr "Konfiguro interfaqen e parë të rrjetit me një tip të caktuar"
+
+#: src/network/main.c:137
+msgid "TYPE"
+msgstr "TIPI"
+
+#: src/network/main.c:144
+msgid "Network settings"
 msgstr "Rregullimet e rrjetit"
-
-#: src/network/network-druid.c:73
-#, c-format
-msgid "Creating a new network connection (%d of %d)"
-msgstr "Krijimi i një lidhje të re në rrjet (%d në %d)"
-
-#: src/network/network-druid.c:74
-msgid "Finished creating a new network connection"
-msgstr "Krijimi i një lidhje të re rrjeti përfundoi"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -1865,22 +1401,45 @@ msgstr "Konfigurimi i dispozitivëve dhe lidhjeve të rrjetit"
 msgid "Networking"
 msgstr "Në rrjet"
 
-#: src/network/profile.c:51 src/users/profile-settings.c:215
-msgid "You will not be able to recover this profile after pressing \"apply\""
-msgstr "Ky profil nuk do të mund të rekuperohet më mbasi të keni shtypur \"apliko\""
+#: src/network/network-iface-ethernet.c:305
+msgid "Ethernet connection"
+msgstr "Lidhje ethernet"
 
-#: src/network/profile.c:55
+#: src/network/network-iface-irlan.c:125
+msgid "Infrared connection"
+msgstr "Lidhje infrarozë"
+
+#: src/network/network-iface-modem.c:251
+msgid "Modem connection"
+msgstr "Lidhje me modem"
+
+#: src/network/network-iface-plip.c:213
+msgid "Parallel port connection"
+msgstr "Lidhje me anë të portës paralele"
+
+#: src/network/network-iface-wireless.c:214
+msgid "Wireless connection"
+msgstr "Lidhje wireless"
+
+#: src/network/network-iface.c:410
 #, c-format
-msgid "Are you sure you want to delete profile \"%s\"?"
-msgstr "Je i sigurt që dëshiron të eleminosh profilin \"%s\"?"
+msgid "Activating interface \"%s\""
+msgstr "Aktivimi i interfaqes \"%s\""
 
-#: src/network/profiles-table.c:53
-msgid "Profile name"
-msgstr "Emri i profilit"
+#: src/network/network-iface.c:494
+#, c-format
+msgid "The interface %s is not configured"
+msgstr "Interfaqja %s nuk është e konfiguruar"
 
-#: src/network/profiles-table.c:62
-msgid "Description"
-msgstr "Përshkrimi"
+#: src/network/network-iface.c:496
+#, c-format
+msgid "The interface %s is not active"
+msgstr "Interfaqja %s nuk është aktive"
+
+#: src/network/network-iface.c:498
+#, c-format
+msgid "The interface %s is active"
+msgstr "Interfaqja %s është aktive"
 
 #: src/services/callbacks.c:46
 msgid "No description available."
@@ -1915,6 +1474,10 @@ msgstr "Konfigurimi i shërbimeve që duhen filluar kur niset sistemi"
 msgid "Services"
 msgstr "Shërbimet"
 
+#: src/services/table.c:86
+msgid "Active"
+msgstr "Aktiv"
+
 #: src/services/table.c:95
 msgid "Service"
 msgstr "Shërbimi"
@@ -1939,15 +1502,15 @@ msgstr "Veprimet e bashkëndarjes të bashkëndarësit GST"
 msgid "_Share Folder"
 msgstr "Kartelë e _përbashkët"
 
-#: src/shares/main.c:76
+#: src/shares/main.c:84
 msgid "Add a shared path, modifies it if it already exists"
 msgstr "Shto një pozicion të përbashkët, ndryshoje nëse ekziston"
 
-#: src/shares/main.c:76
-msgid "Path"
-msgstr "Pozicioni"
+#: src/shares/main.c:84
+msgid "PATH"
+msgstr "POZICIONI"
 
-#: src/shares/main.c:83
+#: src/shares/main.c:91
 msgid "Shared folders settings"
 msgstr "Rregullimet e kartelave të përbashkëta"
 
@@ -2048,9 +1611,9 @@ msgid "Group ID of the \"root\" user should not be modified"
 msgstr "ID e grupit të përdoruesit \"root\" nuk duhet ndryshuar"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
-#: src/users/group-settings.c:284 src/users/user-settings.c:72
-#: src/users/user-settings.c:301 src/users/user-settings.c:396
-#: src/users/user-settings.c:432
+#: src/users/group-settings.c:284 src/users/user-settings.c:73
+#: src/users/user-settings.c:302 src/users/user-settings.c:397
+#: src/users/user-settings.c:433
 msgid "This would leave the system unusable"
 msgstr "Sistemi do të bëhet i papërdorshëm"
 
@@ -2188,6 +1751,10 @@ msgstr ""
 msgid "Delete profile \"%s\"?"
 msgstr "Eleminoj profilin \"%s\"?"
 
+#: src/users/profile-settings.c:215
+msgid "You will not be able to recover this profile after pressing \"apply\""
+msgstr "Ky profil nuk do të mund të rekuperohet më mbasi të keni shtypur \"apliko\""
+
 #. Column name,          Adv_state_show,	Basic_state_show
 #: src/users/profiles-table.c:38
 msgid "Profile"
@@ -2209,46 +1776,46 @@ msgstr "Zgjedhja"
 msgid "Text"
 msgstr "Teksti"
 
-#: src/users/user-settings.c:71
+#: src/users/user-settings.c:72
 msgid "The \"root\" user should not be deleted"
 msgstr "Përdoruesi \"root\" nuk duhet eleminuar"
 
-#: src/users/user-settings.c:87
+#: src/users/user-settings.c:88
 #, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
 msgstr "Je i sigurt që dëshiron të fshish përdoruesin \"%s\"?"
 
-#: src/users/user-settings.c:183
+#: src/users/user-settings.c:184
 msgid "User Account Editor"
 msgstr "Editori i llogarisë së përdoruesit"
 
-#: src/users/user-settings.c:281
+#: src/users/user-settings.c:282
 msgid "The user name is empty"
 msgstr "Emri i përdoruesit është bosh"
 
-#: src/users/user-settings.c:282
+#: src/users/user-settings.c:283
 msgid "A user name must be specified"
 msgstr "Duhet përcaktuar emri i përdoruesit"
 
 #. = sizeof (ut.ut_name)
-#: src/users/user-settings.c:288 src/users/user-settings.c:293
+#: src/users/user-settings.c:289 src/users/user-settings.c:294
 msgid "The user name is too long"
 msgstr "Emri i përdoruesit është shumë i gjatë"
 
-#: src/users/user-settings.c:289 src/users/user-settings.c:294
+#: src/users/user-settings.c:290 src/users/user-settings.c:295
 #, c-format
 msgid "The user name should have less than %i characters for being valid"
 msgstr "Emri i përdoruesit duhet të ketë më pak se %i gërma për të qenë i vlefshëm"
 
-#: src/users/user-settings.c:300
+#: src/users/user-settings.c:301
 msgid "User name for the \"root\" user should not be modified"
 msgstr "Emri i përdoruesit për përdoruesin \"root\" nuk duhet ndryshuar"
 
-#: src/users/user-settings.c:306
+#: src/users/user-settings.c:307
 msgid "User name has invalid characters"
 msgstr "Emri i përdoruesit ka simbole të pavlefshëm"
 
-#: src/users/user-settings.c:307
+#: src/users/user-settings.c:308
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers"
@@ -2256,37 +1823,37 @@ msgstr ""
 "Përcakto një emër të vlefshëm përdoruesi të formuar nga një gërmë e vogël e "
 "ndjekur nga gërma të vogla e numra"
 
-#: src/users/user-settings.c:313
+#: src/users/user-settings.c:314
 #, c-format
 msgid "User name \"%s\" already exists"
 msgstr "Emri i përdoruesit \"%s\" ekziston"
 
-#: src/users/user-settings.c:314
+#: src/users/user-settings.c:315
 msgid "Please select a different user name"
 msgstr "Zgjidh një emër tjetër përdoruesi"
 
-#: src/users/user-settings.c:339
+#: src/users/user-settings.c:340
 #, c-format
 msgid "Invalid character \"%c\" in comment"
 msgstr "Simbol i pavlefshëm \"%c\" në koment"
 
-#: src/users/user-settings.c:340
+#: src/users/user-settings.c:341
 msgid "Check that this character is not used"
 msgstr "Kontrollo që ai simbol të mos jetë përdorur"
 
-#: src/users/user-settings.c:388
+#: src/users/user-settings.c:389
 msgid "Home directory should not be empty"
 msgstr "Directory \"home\" nuk duhet të jetë bosh"
 
-#: src/users/user-settings.c:389
+#: src/users/user-settings.c:390
 msgid "Make sure you provide a home directory"
 msgstr "Sigurohu që ke dhënë një directory home"
 
-#: src/users/user-settings.c:391
+#: src/users/user-settings.c:392
 msgid "Incomplete path in home directory"
 msgstr "Path i paplotë në directory home"
 
-#: src/users/user-settings.c:392
+#: src/users/user-settings.c:393
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
@@ -2294,23 +1861,23 @@ msgstr ""
 "Shkruaj shtegun e plotë për directory home\n"
 "<span size=\"smaller\">p.sh..: /home/john</span>"
 
-#: src/users/user-settings.c:395
+#: src/users/user-settings.c:396
 msgid "Home directory of the \"root\" user should not be modified"
 msgstr "Directory home e përdoruesit \"root\" nuk duhet ndryshuar"
 
-#: src/users/user-settings.c:428
+#: src/users/user-settings.c:429
 msgid "Invalid user ID"
 msgstr "ID përdoruesi e pavlefshme"
 
-#: src/users/user-settings.c:429
+#: src/users/user-settings.c:430
 msgid "User ID must be a positive number"
 msgstr "ID e përdoruesit duhet të jetë një numër pozitiv"
 
-#: src/users/user-settings.c:431
+#: src/users/user-settings.c:432
 msgid "User ID of the \"root\" user should not be modified"
 msgstr "ID e përdoruesit për përdoruesin \"root\" nuk duhet ndryshuar"
 
-#: src/users/user-settings.c:448
+#: src/users/user-settings.c:449
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
@@ -2318,16 +1885,16 @@ msgstr ""
 "Përdorues të ndryshëm mund të përdorin të njëjtin ID, por nuk është e "
 "zakonshme dhe mund të sjellë probleme sigurie"
 
-#: src/users/user-settings.c:453
+#: src/users/user-settings.c:454
 #, c-format
 msgid "User ID %s already exists"
 msgstr "ID %s e përdoruesit ekziston"
 
-#: src/users/user-settings.c:470
+#: src/users/user-settings.c:471
 msgid "Incomplete path in shell"
 msgstr "Shteg i paplotë në shell"
 
-#: src/users/user-settings.c:471
+#: src/users/user-settings.c:472
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
@@ -2335,23 +1902,23 @@ msgstr ""
 "Shkruaj shtegun e plotë për shell\n"
 "<span size=\"smaller\">p.sh..: /bin/sh</span>"
 
-#: src/users/user-settings.c:493
+#: src/users/user-settings.c:494
 msgid "Password should not be empty"
 msgstr "Fjalëkalimi nuk duhet të jetë bosh"
 
-#: src/users/user-settings.c:494
+#: src/users/user-settings.c:495
 msgid "A password must be provided"
 msgstr "Duhet dhënë një fjalëkalim"
 
-#: src/users/user-settings.c:496
+#: src/users/user-settings.c:497
 msgid "Password confirmation isn't correct"
 msgstr "Fjalëkalimi konfermues nuk është i saktë"
 
-#: src/users/user-settings.c:497
+#: src/users/user-settings.c:498
 msgid "Check that you have provided the same password in both text fields"
 msgstr "Kontrollo që ke shkruar të njëjtin fjalëkalim në të dy fushat e tekstit"
 
-#: src/users/user-settings.c:762
+#: src/users/user-settings.c:764
 #, c-format
 msgid "Settings for User %s"
 msgstr "Rregullimet për përdoruesin %s"
