@@ -6,10 +6,10 @@
 <article id="index" lang="en">
 
   <artheader>
-    <title>Swap Management</title>
+    <title>Boot Management</title>
     <copyright>
       <year>2001</year>
-      <holder>Kevin Breit</holder>
+      <holder>Ximian, Inc.</holder>
     </copyright>
 
     <legalnotice id="legalnotice">
@@ -35,8 +35,8 @@
     </legalnotice>
 
     <releaseinfo>
-      This manual describes version &VERSION; of the Swap Management utility in
-      Ximain Setup Tools.  It was last updated on 01/01/69.
+      This manual describes version &VERSION; of the Boot Management utility in
+      Ximain Setup Tools.  It was last updated on August 9, 2001.
     </releaseinfo>
     
   </artheader>
@@ -44,115 +44,202 @@
   <sect1 id="intro">
     <title>Introduction</title>
     <para>
-      Linux uses the <application>LILO</application> bootloader to start your
-      system.  This lets you choose whether you want to boot into Linux, any
-      Unix, Windows, or even OS/2 if you so desire.
+      When you turn your computer on, one of the first things it will
+      do is choose an operating system by using a bootloader.  In the
+      vast majority of Linux systems, this is
+      <application>LILO</application>.  If you have multiple operating
+      systems or kernels installed, your bootloader can ask you to
+      choose which one you'd like before it boots up.
     </para>
+    <para>
+      The Boot Management tool will help you set your bootloader to
+      offer the choices you want.  In this version, it requires that
+      you use the <application>LILO</application> bootloader, but
+      future versions will support other programs.
+    </para>
+
+    <warning>
+      <title>Be Careful</title>
+      <para>
+        Boot manager settings are complex and require at least a basic
+        understanding of your system internals.  The Boot Manager tool
+        makes adjusting these settings easier, but it is not
+        foolproof. Be careful, and make backups of your data before
+        experimenting!
+      </para>
+    </warning>
   </sect1>
 
   <sect1 id="editing-entry">
     <title>Editing an Entry</title>
     <para>
-      The Boot Manager has each operating system as an entry.  To edit an entry,
-      simply click the entry you wish to edit, and hit
-      <guibutton>Settings</guibutton>.  This window lets you set the name of the
-      partition, and the boot type.  The name is what you refer to the entry as
-      when you boot up the computer.  The boot type specifies to Ximian Setup
-      Tools what the operating system to start up is.
+      The Boot Manager lists each available operating system as an
+      entry.  To edit an entry, simply click the entry you wish to
+      edit, and click the <guibutton>Edit</guibutton>.  This will open
+      a dialog box displaying the properties of the entry you
+      selected.  You can set:
+
+       <variablelist>
+
+	<varlistentry>
+	  <term>Name</term>
+	  <listitem>
+	    <para>
+             The name you will use to refer to this operating system
+             or kernel. This should be a short, unique word, like
+             "redhat" or "debian."
+            </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term>Boot Type</term>
+	  <listitem>
+	    <para>
+              Select from the list of operating system types. Choose
+              <guilabel>Unknown</guilabel> for a system other than the
+              ones listed.
+             </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term>Path</term>
+	  <listitem>
+	    <para>
+              This is the location of your kernel image. You will not
+	      see this entry unless you have clicked the
+	      <guibutton>More Options</guibutton> button.
+             </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term>Root</term>
+	  <listitem>
+	    <para>
+              This is the root disk device from which your system will
+	      boot. You will not see this entry unless you have clicked
+	      the <guibutton>More Options</guibutton> button.
+            </para>
+	  </listitem>
+	</varlistentry>
+
+	<varlistentry>
+	  <term>Append</term>
+	  <listitem>
+	    <para>
+             If you wish to pass specific parameters to the kernel at
+	     boot time, do so here. For information about valid
+	     parameters, see the man page for your bootloader.  You
+	     will not see this entry unless you have clicked the
+	     <guibutton>More Options</guibutton> button.
+           </para>
+	  </listitem>
+	</varlistentry>
+      </variablelist>
     </para>
   </sect1>
 
   <sect1 id="default">
-    <title>What is Default?</title>
+    <title>The Default Boot Option</title>
     <para>
-      The default option specifies which entry will be the default to boot up if
-      you don't answer which to boot in time.  The time that you have to specify
-      which to boot is shown in the bottom part of the main window in the
-      <guilabel>Starting your computer</guilabel>.
+      If you turn your computer on and do not select any operating
+      system or kernel when prompted, the bootloader will boot the
+      default for you after a set amount of time.
+    </para>
+     <para>
+      To choose the default, select a boot table entry and click the
+      <guibutton>Default</guibutton> entry.  
+    </para>
+    <para>
+      The time that the bootloader will wait for you is displayed in
+      the bottom part bottom part of the main window, under the label
+      <guilabel>Starting your computer</guilabel>. If you leave the
+      box unchecked, the bootloader will not boot any operating system
+      until you select one.
     </para>
   </sect1>
 
   <sect1 id="advanced">
     <title>Advanced Options</title>
     <para>
-      The Boot Manager program gives advanced users more options to use while
-      configuring their boot manager.
+      The Boot Manager program gives advanced users more options to
+      use while configuring their boot manager.
     </para>
     <para>
       To enable the advanced section, click on the <guibutton>More
-      Options</guibutton> button on the bottom of the main Boot Manager window.
+      Options</guibutton> button on the bottom of the main Boot
+      Manager window.
     </para>
 
     <sect2 id="advanced-adding">
       <title>Adding Entries</title>
       <para>
-	To add a new entry to the listings, click the <guibutton>Add</guibutton>
-	button in the main window.  A druid will show up giving you help with
-	creating a new entry.
+	Click the <guibutton>Add</guibutton> button in the main window
+	to launch the boot entry assistant.  The boot entry assistant
+        will help you add a boot entry.
       </para>
       <para>
-	The first screen on the druid is a simple introduction message.  Click
-	<guibutton>Next</guibutton> to begin your configuration.  Enter the name
-	and the boot types into their respective fields.  Then you'll need to
-	select your device on the next screen.  The device is what partition
-	your image file exists on.  That is all there is to it!
+	The first screen on the assistant is a simple introduction
+	message.  Click <guibutton>Next</guibutton> to begin your
+	configuration. Then:
+ 
+       <orderedlist numeration="arabic">
+	  <listitem>
+	    <para>
+              Enter a name for the operating system you would like to
+              use. This should be a short, unique word, like "redhat"
+              or "debian."
+            </para>
+	  </listitem>
+	  <listitem>
+	    <para>
+              Select from the list of operating system types. Choose
+              <guilabel>Unknown</guilabel> for a system other than the
+              ones listed.             
+            </para>
+	  </listitem>
+
+	  <listitem>
+	    <para>
+              When you are satisfied with these entries, click the
+              <guibutton>Next</guibutton> button.
+            </para>
+	  </listitem>
+
+	  <listitem>
+	    <para>
+               Enter the device or partition from which this operating
+               system will boot.
+            </para>
+	  </listitem>
+
+	  <listitem>
+	    <para>
+               Click the <guibutton>Next</guibutton> button. You're
+               done. Click the <guibutton>OK</guibutton> button if you
+               are satisfied with this entry.
+            </para>
+	  </listitem>
+  	</orderedlist>
+
       </para>
     </sect2>
 
     <sect2 id="advanced-deleting">
       <title>Deleting Entries</title>
       <para>
-	Deleting entries is easy.  You simply select the entry and press the
+	Deleting entries is easy.  Just select the entry and press the
 	<guibutton>Delete</guibutton> button.
 	<warning>
 	  <para>
-	    Deleting entries can render your system unable to bootup.  Make sure
-	    you have a bootdisk handy when deleting entries.
+	    Deleting entries can render your system unable to boot.
+	    Make sure you have a boot disk handy if you delete an
+	    entry.
 	  </para>
 	</warning>
       </para>
-    </sect2>
-
-    <sect2 id="advaned-modifying">
-      <title>Configuring Entries</title>
-      <para>
-	The advanced mode gives you a few more important options which you may
-	use to configure your boot loader.
-      </para>
-      <para>
-	The <!-- link to basic eventually --> advanced has the same options as
-	the basic options, including ways to specify the root device, path to
-	the image, and any arguements to append.
-      </para>
-      <variablelist>
-	<varlistentry>
-	  <term>Path</term>
-	  <listitem>
-	    <para>
-	      The path is where the image for the system exists.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>Root</term>
-	  <listitem>
-	    <para>
-	      The root is the device which the path lives on.
-	    </para>
-	  </listitem>
-	</varlistentry>
-	<varlistentry>
-	  <term>Append</term>
-	  <listitem>
-	    <para>
-	      This is where you state any arguements you want to pass to the
-	      LILO prompt, including amount of memory and processor speed.  For
-	      more information on the available LILO arguements, refer to the
-	      lilo man page.
-	    </para>
-	  </listitem>
-	</varlistentry>
-      </variablelist>
     </sect2>
   </sect1>
 </article>
