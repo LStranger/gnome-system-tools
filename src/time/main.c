@@ -24,6 +24,7 @@ void on_ok_clicked(GtkButton *button, gpointer data);
 void on_apply_clicked(GtkButton *button, gpointer data);
 void on_cancel_clicked(GtkButton *button, gpointer data);
 void on_help_clicked(GtkButton *button, gpointer data);
+void delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata);
 void connect_signals(void);
 
 
@@ -274,6 +275,11 @@ void on_cancel_clicked(GtkButton *button, gpointer data)
 
 void on_help_clicked(GtkButton *button, gpointer data)
 {
+}
+
+void delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
+{
+	gtk_main_quit ();
 }
 
 
