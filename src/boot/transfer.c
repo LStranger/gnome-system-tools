@@ -26,6 +26,7 @@
 
 #include <gnome.h>
 #include <glade/glade.h>
+#include <gconf/gconf-client.h>
 #include "gst.h"
 
 #include "transfer.h"
@@ -128,11 +129,137 @@ transfer_globals_gui_to_xml (xmlNodePtr root)
 	gst_xml_element_set_content (node, g_strdup_printf ("%d", val * 10));
 }
 
+/* checks that there is a preferred bootloader set in gconf */
+static gchar*
+transfer_check_preferred_bootloader (xmlNodePtr bootloaders)
+{
+	GConfClient *client = gconf_client_get_default ();
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	xmlNodePtr node;
+	gchar *exec = NULL;
+	gchar *key, *preferred_bootloader, *name;
+
+	key = g_strjoin ("/", GST_GCONF_ROOT, "boot", "preferred_bootloader", NULL);
+	preferred_bootloader = gconf_client_get_string (client, key, NULL);
+
+	/* first of all, check if the gconf key contains an element in the list and use it */
+	if (preferred_bootloader) {
+		for (node = gst_xml_element_find_first (bootloaders, "bootloader");
+		     node;
+		     node = gst_xml_element_find_next (node, "bootloader"))
+		{
+			name = gst_xml_get_child_content (node, "name");
+
+			if (strcasecmp (preferred_bootloader, name) == 0)
+				exec = gst_xml_get_child_content (node, "exec");
+		}
+	}
+
+	g_free (preferred_bootloader);
+	g_free (key);
+
+	return exec;
+}
+
+/* shows the dialog and let the user choose the bootloader */
+static gchar*
+transfer_get_selected_bootloader (xmlNodePtr bootloaders)
+{
+	GConfClient *client = gconf_client_get_default ();
+	GtkWidget *alignment = gst_dialog_get_widget (tool->main_dialog, "bootloaders_list");
+	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "several_bootloaders_dialog");
+	GtkWidget *save_bootloader = gst_dialog_get_widget (tool->main_dialog, "save_bootloader");
+	GtkWidget *box = gtk_vbox_new (TRUE, 6);
+	GtkWidget *checkbox;
+	GSList *l, *list = NULL;
+	xmlNodePtr node;
+	gchar *name, *key = NULL, *exec = NULL;
+	
+	for (node = gst_xml_element_find_first (bootloaders, "bootloader");
+	     node;
+	     node = gst_xml_element_find_next (node, "bootloader"))
+	{
+		name = gst_xml_get_child_content (node, "name");
+		exec = gst_xml_get_child_content (node, "exec");
+
+		checkbox = gtk_radio_button_new_with_label (list, name);
+		g_object_set_data (G_OBJECT (checkbox), "name", name);
+		g_object_set_data (G_OBJECT (checkbox), "exec", exec);
+		list = gtk_radio_button_get_group (GTK_RADIO_BUTTON (checkbox));
+		
+		gtk_box_pack_start (GTK_BOX (box), checkbox, FALSE, FALSE, 0);
+	}
+
+	gtk_widget_show_all (box);
+	gtk_container_add (GTK_CONTAINER (alignment), box);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+
+	/* get the selected tool */
+	l = list;
+	exec = NULL;
+	name = NULL;
+
+	while (l && !exec) {
+		checkbox = l->data;
+		
+		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox))) {
+			name = g_object_get_data (G_OBJECT (checkbox), "name");
+			exec = g_object_get_data (G_OBJECT (checkbox), "exec");
+		}
+
+		l = l->next;
+	}
+
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (save_bootloader))) {
+		key = g_strjoin ("/", GST_GCONF_ROOT, "boot", "preferred_bootloader", NULL);
+		gconf_client_set_string (client, key, name, NULL);
+	}
+
+	gtk_widget_hide (dialog);
+	gtk_widget_destroy (box);
+
+	g_free (key);
+	
+	return exec;
+}
+
+/*
+ * checks the existence of several bootloaders,
+ * if so, then display the dialog to choose one
+ */
+static void
+transfer_check_several_bootloaders ()
+{
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	xmlNodePtr bootloaders = gst_xml_element_find_first (root, "bootloaders");
+	gchar *exec = NULL;
+	
+	if (!bootloaders)
+		return;
+
+	gst_dialog_freeze (tool->main_dialog);
+
+	exec = transfer_check_preferred_bootloader (bootloaders);
+
+	if (!exec)
+		exec = transfer_check_selected_bootloader (bootloaders);
+
+	/* replace the XML with the config from the chosen bootloader */
+	xmlFreeDoc (tool->config);
+	xmlFreeDoc (tool->original_config);
+	tool->config = gst_tool_run_get_directive (tool, NULL, "getfrom", exec, NULL);
+	tool->original_config = xmlCopyDoc (tool->config, 1);
+
+	gst_dialog_thaw (tool->main_dialog);
+}
+
 void
 transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
 
+	transfer_check_several_bootloaders ();
+	
 	root = gst_xml_doc_get_root (tool->config);
 
 	transfer_globals_xml_to_gui (root);

@@ -35,6 +35,17 @@
       </locale>
     </schema>
     <schema>
+      <key>/schemas/apps/gnome-system-tools/boot/preferred_bootloader</key>
+	 <applyto>/apps/gnome-system-tools/boot/preferred_bootloader</key>
+	 <owner>gnome</owner>
+	 <type>string</type>
+	 <default></default>
+	 <locale name="C">
+	   <short>Preferred bootloader that boot-admin will configure</short>
+	   <long>This key stores the bootloader that boot-admin will configure if there are more than one installed, if it's not set or isn't valid, then boot-admin will ask the user</long>
+	 </locale>
+    </schema>
+    <schema>
       <key>/schemas/apps/gnome-system-tools/time/advanced_mode</key>
       <applyto>/apps/gnome-system-tools/time/advanced_mode</applyto>
       <owner>gnome</owner>
@@ -79,8 +90,8 @@
       </locale>
     </schema>
     <schema>
-      <key>/schemas/apps/gnome-system-tools/global/last-version</key>
-      <applyto>/apps/gnome-system-tools/global/last-version</applyto>
+      <key>/schemas/apps/gnome-system-tools/global/last_version</key>
+      <applyto>/apps/gnome-system-tools/global/last_version</applyto>
       <owner>gnome</owner>
       <type>string</type>
       <default>0</default>
@@ -90,8 +101,8 @@
       </locale>
     </schema>
     <schema>
-      <key>/schemas/apps/gnome-system-tools/global/remote-configuration</key>
-      <applyto>/apps/gnome-system-tools/global/remote-configuration</applyto>
+      <key>/schemas/apps/gnome-system-tools/global/remote_configuration</key>
+      <applyto>/apps/gnome-system-tools/global/remote_configuration</applyto>
       <owner>gnome</owner>
       <type>bool</type>
       <default>false</default>
@@ -101,8 +112,8 @@
       </locale>
     </schema>
     <schema>
-      <key>/schemas/apps/gnome-system-tools/global/remote-hosts-list</key>
-      <applyto>/apps/gnome-system-tools/global/remote-hosts-list</applyto>
+      <key>/schemas/apps/gnome-system-tools/global/remote_hosts_list</key>
+      <applyto>/apps/gnome-system-tools/global/remote_hosts_list</applyto>
       <owner>gnome</owner>
       <type>string</type>
       <default>localhost</default>

@@ -1355,8 +1355,8 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	tool->directive_queue_idle_id = 0;
 
 	/* get the remote configuration gconf keys */
-	remote_config_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote-configuration", NULL);
-	remote_hosts_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote-hosts-list", NULL);
+	remote_config_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote_configuration", NULL);
+	remote_hosts_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote_hosts_list", NULL);
 
 	do_remote_conf = gconf_client_get_bool (client, remote_config_key, &error);
 	hosts = gconf_client_get_string (client, remote_hosts_key, &error);
@@ -1364,6 +1364,9 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	tool->remote_config = ((do_remote_conf) && (hosts != NULL) && (strcmp (SSH_PATH, "") != 0));
 	if (hosts != NULL) 
 		tool->remote_hosts = g_strsplit (hosts, ",", -1);
+
+	g_free (remote_config_key);
+	g_free (remote_hosts_key);
 }
 
 GstTool *
@@ -1515,7 +1518,7 @@ try_show_usage_warning (void)
 
 	client = gconf_client_get_default ();
 
-	version_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "last-version", NULL);
+	version_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "last_version", NULL);
 	key = g_strjoin ("/", GST_GCONF_ROOT, "global", "show_warning", NULL);
 
 
