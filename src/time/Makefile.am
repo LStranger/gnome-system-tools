@@ -1,5 +1,7 @@
 ## Process this file with automake to produce Makefile.in
 
+SUBDIRS = e-map
+
 INCLUDES = \
 	-I$(top_srcdir)/src/common \
 	-I$(top_srcdir)/intl \
@@ -11,7 +13,10 @@ time_admin_SOURCES = \
 	main.c \
 	timezone.c timezone.h \
 	timeserv.c timeserv.h \
-	transfer.c transfer.h
+	transfer.c transfer.h \
+	gnome-map.c gnome-map.h \
+	gnome-canvas-dot.c gnome-canvas-dot.h \
+timezones.c timezones.h
 
 time_admin_CFLAGS = $(GNOME_CFLAGS) $(GDK_PIXBUF_CFLAGS) $(LIBGLADE_CFLAGS) "`gnome-config --cflags gnomecanvaspixbuf`"
 
