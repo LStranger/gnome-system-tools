@@ -69,7 +69,6 @@ const gchar *adv_boot_state = "\
 /* Static prototypes */
 void init_array (void);
 
-
 static int
 boot_col_count (ETableModel *etc, void *data)
 {
@@ -92,7 +91,7 @@ boot_value_at (ETableModel *etc, int col, int row, void *data)
 	switch (col)
 	{
 	case COL_LABEL:
-		return boot_value_label_default (node);
+		return boot_value_label (node);
 		break;
 	case COL_TYPE:
 		return boot_value_type (node);
@@ -220,30 +219,6 @@ init_array (void)
 }
 
 void *
-boot_value_label_default (xmlNodePtr node)
-{
-	xmlNodePtr n;
-	gchar *def, *label;
-
-	g_return_val_if_fail (node != NULL, NULL);
-
-	label = xml_get_child_content (node, "label");
-	if (!label)
-		return NULL;
-
-	n = xml_doc_get_root (tool->config);
-
-	def = xml_get_child_content (n, "default");
-	if (def && !strcmp (def, label))
-	{
-		label = g_strdup_printf ("%s (default)", label);
-		g_free (def);
-	}
-
-	return label;
-}
-
-void *
 boot_value_label (xmlNodePtr node)
 {
 	g_return_val_if_fail (node != NULL, NULL);
@@ -255,18 +230,36 @@ void *
 boot_value_type (xmlNodePtr node)
 {
 	xmlNodePtr n;
+	gchar *label, *def;
+	gchar *buf = NULL;
 	
 	g_return_val_if_fail (node != NULL, NULL);
 
 	n = xml_element_find_first (node, "type");
 	if (n)
-		return xml_element_get_content (n);
+		buf = xml_element_get_content (n);
 
-	n = xml_element_find_first (node, "image");
-	if (n)
-		return (_("Linux"));
+	else
+	{
+		n = xml_element_find_first (node, "image");
+		if (n)
+			buf = g_strdup (_("Linux"));
+	}
 
-	return (_("Unknown"));
+	if (!buf)
+		buf = g_strdup (_("Unknown"));
+
+	label = xml_get_child_content (node, "label");
+	def = xml_get_child_content (xml_doc_get_root (tool->config), "default");
+
+	if (def && !strcmp (def, label))
+	{
+		buf = g_strdup_printf ("%s (default)", buf);
+		g_free (def);
+		g_free (label);
+	}
+
+	return buf;
 }
 
 void *

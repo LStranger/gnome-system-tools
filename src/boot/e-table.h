@@ -39,7 +39,6 @@ enum {
 extern void create_table (xmlNodePtr root);
 extern void boot_table_update_state (void);
 
-void *boot_value_label_default (xmlNodePtr node);
 void *boot_value_label (xmlNodePtr node);
 void *boot_value_type (xmlNodePtr node);
 void *boot_value_image (xmlNodePtr node);
