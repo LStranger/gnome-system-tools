@@ -904,8 +904,5 @@ callbacks_tool_not_found_hook (XstTool *tool, XstReportLine *rline, gpointer dat
 		gnome_dialog_run_and_close (GNOME_DIALOG (message));
 	}
 
-	g_print (rline->argv[0]);
-	g_print ("\n");
-
 	return TRUE;
 }
