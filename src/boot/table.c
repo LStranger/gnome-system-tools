@@ -35,10 +35,14 @@
 extern XstTool *tool;
 
 GtkWidget *boot_table = NULL;
+GtkTreeIter default_entry_iter;
+
+GdkPixbuf *selected_icon;
+GdkPixbuf *not_selected_icon;
 
 BootTableConfig boot_table_config [] = {
-	{ N_("Default"),	FALSE,	FALSE },
 	{ N_("Name"),		TRUE,	TRUE },
+	{ N_("Default"),        TRUE,   TRUE },
 	{ N_("Type"),		TRUE,	TRUE },
 	{ N_("Kernel Image"),	TRUE,	FALSE },
 	{ N_("Device"),		TRUE,	FALSE },
@@ -53,6 +57,10 @@ table_construct (void)
 
 	sw = xst_dialog_get_widget (tool->main_dialog, "boot_table_sw");
 	list = table_create ();
+
+	/* We add the signal that will change the default option */
+	g_signal_connect (G_OBJECT (list), "cursor-changed", G_CALLBACK (on_boot_table_clicked), NULL);
+
 	gtk_widget_show_all (list);
 	gtk_container_add (GTK_CONTAINER (sw), list);
 }
@@ -65,9 +73,12 @@ table_create (void)
 	GtkTreeSelection *selection;
 	GtkTreeViewColumn *column;
 	gint i;
+
+	/* We create the pixbufs we are going to use in the table */
+	selected_icon = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gnome-light-on.png", NULL);
+	not_selected_icon = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gnome-light-off.png", NULL);
 	
-	
-	model = GTK_TREE_MODEL (gtk_tree_store_new (BOOT_LIST_COL_LAST, G_TYPE_STRING, G_TYPE_STRING, 
+	model = GTK_TREE_MODEL (gtk_tree_store_new (BOOT_LIST_COL_LAST, G_TYPE_STRING, GDK_TYPE_PIXBUF,
 	                                            G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
 	boot_table = gtk_tree_view_new_with_model (model);
 	g_object_unref (model);
@@ -76,20 +87,20 @@ table_create (void)
 	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (boot_table), TRUE);
 
 	for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
-		renderer = gtk_cell_renderer_text_new ();
-		
-		column = gtk_tree_view_column_new_with_attributes (boot_table_config [i].name, renderer, "text", i, NULL);
-		
-		gtk_tree_view_column_set_resizable (column, TRUE);
-		gtk_tree_view_column_set_sort_column_id (column, i);
-		
+		if (i == BOOT_LIST_COL_DEFAULT) {
+			renderer = gtk_cell_renderer_pixbuf_new ();
+			column = gtk_tree_view_column_new_with_attributes (boot_table_config [i].name, renderer, "pixbuf", i, NULL);
+		} else {
+			renderer = gtk_cell_renderer_text_new ();
+
+			column = gtk_tree_view_column_new_with_attributes (boot_table_config [i].name, renderer, "text", i, NULL);
+			gtk_tree_view_column_set_resizable (column, TRUE);
+			gtk_tree_view_column_set_sort_column_id (column, i);
+		}
+
 		gtk_tree_view_insert_column (GTK_TREE_VIEW (boot_table), column, i);
 	}
-
-	/* sets the 'default' column as default sort column */
-	column = gtk_tree_view_get_column (GTK_TREE_VIEW (boot_table), 0);
-	gtk_tree_view_column_set_sort_indicator (column, TRUE);
-	
+		
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
 
@@ -149,20 +160,29 @@ boot_value_label (xmlNodePtr node)
 }
 
 gboolean
-boot_value_default (const gchar *label)
+boot_value_default_as_boolean (xmlNodePtr node)
 {
-	gchar *def;
-	gboolean retval = FALSE;
+	gchar *name, *def;
 	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
-
-	def = xst_xml_get_child_content (root, "default");
 	
-	if (def) {		
-		if (label && !strcmp (label, def))
-			retval = TRUE;
-		g_free (def);
+	def = xst_xml_get_child_content (root, "default");
+	name = xst_xml_get_child_content (node, "label");
+
+	if ((name) && (strcmp (name, def) == 0)) {
+		return TRUE;
+	} else {
+		return FALSE;
 	}
-	return retval;
+}
+
+GdkPixbuf*
+boot_value_default (xmlNodePtr node)
+{
+	if (boot_value_default_as_boolean (node) == TRUE) {
+		return selected_icon;
+	} else {
+		return not_selected_icon;
+	}
 }
 
 XstBootImageType
@@ -199,15 +219,6 @@ boot_value_type_char (xmlNodePtr node, gboolean bare)
 	type = boot_value_type (node);
 	buf = type_to_label (type);
 
-	if (!bare) {
-		label = xst_xml_get_child_content (node, "label");
-		if (label) {
-			if (boot_value_default (label))
-				buf = g_strdup_printf (_("%s (default)"), buf);
-			g_free (label);
-		}
-	}
-	
 	return buf;
 }
 
@@ -288,6 +299,7 @@ boot_value_append (xmlNodePtr node)
 void
 table_populate (xmlNodePtr root)
 {
+	GdkPixbuf *selected;
 	xmlNodePtr node;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (boot_table));
@@ -296,13 +308,17 @@ table_populate (xmlNodePtr root)
 	{
 		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 		gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
-		                    BOOT_LIST_COL_DEFAULT, NULL,
-		                    BOOT_LIST_COL_LABEL, boot_value_label (node),
-		                    BOOT_LIST_COL_TYPE, boot_value_type_char (node, FALSE),
-		                    BOOT_LIST_COL_IMAGE, boot_value_image (node, FALSE),
-		                    BOOT_LIST_COL_DEV, boot_value_device (node, FALSE),
-	                            BOOT_LIST_COL_POINTER, node,
-		                    -1);
+				    BOOT_LIST_COL_LABEL, boot_value_label (node),
+				    BOOT_LIST_COL_DEFAULT,   boot_value_default (node),
+				    BOOT_LIST_COL_TYPE, boot_value_type_char (node, FALSE),
+				    BOOT_LIST_COL_IMAGE, boot_value_image (node, FALSE),
+				    BOOT_LIST_COL_DEV, boot_value_device (node, FALSE),
+				    BOOT_LIST_COL_POINTER, node,
+				    -1);
+
+		/* we save the default entry, so it's easier to search */
+		if (boot_value_default_as_boolean (node))
+			default_entry_iter = iter;
 	}
 }
 
@@ -323,7 +339,6 @@ boot_table_update (void)
 }
 
 /* Set value functions */
-
 void
 boot_value_set_default (xmlNodePtr node)
 {
@@ -345,14 +360,16 @@ void
 boot_value_set_label (xmlNodePtr node, const gchar *val)
 {
 	xmlNodePtr n0;
-	gchar *old_name = NULL;
-	
+	gboolean is_default;
+
 	g_return_if_fail (node != NULL);
 
 	n0 = xst_xml_element_find_first (node, "label");
 	if (n0)
-		old_name = xst_xml_element_get_content (n0);
-	
+		is_default = boot_value_default_as_boolean (node);
+	else
+		is_default = FALSE;
+
 	if (val && strlen (val) > 0) {
 		if (!n0)
 			n0 = xst_xml_element_add (node, "label");
@@ -365,11 +382,8 @@ boot_value_set_label (xmlNodePtr node, const gchar *val)
 		return;
 	}
 
-	if (old_name) {
-		if (boot_value_default (old_name))
-			boot_value_set_default (node);
-		g_free (old_name);
-	}	
+	if (is_default)
+		boot_value_set_default (node);
 }
 
 void

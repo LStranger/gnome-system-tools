@@ -94,7 +94,7 @@ boot_image_get_by_node (xmlNodePtr node)
 
 	image->type = boot_value_type (node);
 	image->label = boot_value_label (node);		
-	image->is_default = boot_value_default (image->label);
+	image->is_default = boot_value_default_as_boolean (node);
 	
 	if (image->type == TYPE_LINUX) {
 		image->image = boot_value_image (node, TRUE);

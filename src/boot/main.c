@@ -49,7 +49,6 @@ connect_signals (XstTool *tool)
 		{ "boot_delete",   "clicked", G_CALLBACK (on_boot_delete_clicked) },
 		{ "boot_settings", "clicked", G_CALLBACK (on_boot_settings_clicked) },
 		{ "boot_add",      "clicked", G_CALLBACK (on_boot_add_clicked) },
-		{ "boot_default",  "clicked", G_CALLBACK (on_boot_default_clicked) },
 		{ "boot_prompt",   "toggled", G_CALLBACK (on_boot_prompt_toggled) },
 		{ "boot_timeout",  "changed", G_CALLBACK (xst_dialog_modify_cb) },
 		{ NULL }

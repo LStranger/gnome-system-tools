@@ -36,6 +36,53 @@
 
 extern XstTool *tool;
 extern GtkWidget *boot_table;
+extern GtkTreeIter default_entry_iter;
+
+extern GdkPixbuf *selected_icon;
+extern GdkPixbuf *not_selected_icon;
+
+gboolean
+on_boot_table_clicked (GtkWidget *w, gpointer data)
+{
+	GtkTreePath *path;
+	GtkTreeViewColumn *column;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	GList *column_list;
+	gint ncol;
+	xmlNodePtr node;
+	gchar *label;
+
+	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
+	gtk_tree_view_get_cursor (GTK_TREE_VIEW (w), &path, &column);
+
+	ncol = g_list_index (column_list, column);
+
+	if (ncol == BOOT_LIST_COL_DEFAULT) {
+		model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
+		gtk_tree_model_get_iter (model, &iter, path);		
+		
+		/* we get the selected entry iter and unselect it */
+		gtk_tree_store_set (GTK_TREE_STORE (model), &default_entry_iter, BOOT_LIST_COL_DEFAULT, not_selected_icon, -1);
+		
+		/* we set as selected the current iter */
+		gtk_tree_store_set (GTK_TREE_STORE (model), &iter, BOOT_LIST_COL_DEFAULT, selected_icon, -1);
+		g_object_set_data (G_OBJECT (w), "default", &iter);
+
+		/* we set the current iter as the default */
+		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
+		label = xst_xml_get_child_content (node, "label");
+		xst_xml_set_child_content (xst_xml_doc_get_root (tool->config), "default", label);
+		default_entry_iter = iter;
+
+		xst_dialog_modify (tool->main_dialog);
+	}
+	
+	g_list_free (column_list);
+	gtk_tree_path_free (path);
+	
+	return FALSE;
+}
 
 void
 on_boot_table_cursor_changed (GtkTreeSelection *selection, gpointer data)
@@ -59,8 +106,6 @@ callbacks_actions_set_sensitive (gboolean state)
 	}
 	
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
-    	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_default"),
-						 state);
 }
 
 static void
@@ -137,28 +182,6 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 	boot_table_update ();
 	xst_dialog_modify (tool->main_dialog);
 	callbacks_actions_set_sensitive (FALSE);
-}
-
-void
-on_boot_default_clicked (GtkButton *button, gpointer data)
-{
-	GtkTreeSelection *selection;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	xmlNodePtr node;
-	gchar *label;
-	
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
-	
-	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
-	}
-
-	label = xst_xml_get_child_content (node, "label");
-
-	xst_xml_set_child_content (xst_xml_doc_get_root (tool->config), "default", label);
-	boot_table_update ();
-	xst_dialog_modify (tool->main_dialog);
 }
 
 void

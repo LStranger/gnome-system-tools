@@ -29,8 +29,8 @@
 #include "boot-image.h"
 
 enum {
-	BOOT_LIST_COL_DEFAULT,
 	BOOT_LIST_COL_LABEL,
+	BOOT_LIST_COL_DEFAULT,
 	BOOT_LIST_COL_TYPE,
 	BOOT_LIST_COL_IMAGE,
 	BOOT_LIST_COL_DEV,
@@ -55,7 +55,8 @@ void              boot_table_update_state (XstDialogComplexity);
 
 gchar            *boot_value_label        (xmlNodePtr node); 
 gchar            *boot_value_append       (xmlNodePtr node); 
-gboolean          boot_value_default      (const gchar *label);
+gboolean          boot_value_default_as_boolean (xmlNodePtr node);
+GdkPixbuf*        boot_value_default      (xmlNodePtr node);
 XstBootImageType  boot_value_type         (xmlNodePtr node);
 gchar            *boot_value_type_char    (xmlNodePtr node, gboolean bare);
 void             *boot_value_image        (xmlNodePtr node, gboolean bare);
