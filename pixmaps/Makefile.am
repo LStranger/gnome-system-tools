@@ -11,6 +11,7 @@ world_map-960.png \
 computer.png \
 reading.png \
 settings.png \
-users-groups.png
+users-groups.png \
+passwd.png
 
 EXTRA_DIST = $(pixmaps_DATA)
