@@ -46,19 +46,14 @@ gchar *s = N_("This is the list of the users available in the system. Create new
 gchar *s = N_("Add User...");
 gchar *s = N_("Settings...");
 gchar *s = N_("Delete");
+gchar *s = N_("Profiles...");
 gchar *s = N_("Users");
 gchar *s = N_("Users may be grouped to share resources with others.");
 gchar *s = N_("Add Group...");
 gchar *s = N_("Settings...");
 gchar *s = N_("Delete");
 gchar *s = N_("Groups");
-gchar *s = N_("User profiles can be used as templates to facilitate the creation of new users. To edit a profile, change the settings in the following tab.");
-gchar *s = N_("New");
-gchar *s = N_("Copy Profile");
-gchar *s = N_("Settings...");
-gchar *s = N_("Delete");
-gchar *s = N_("Profiles");
-gchar *s = N_("Show system users and groups");
+gchar *s = N_("Show all users and groups");
 gchar *s = N_("window2");
 gchar *s = N_("EXPERIMENTAL NIS support.\n"
               "It's only available if You have NIS\n"
@@ -123,8 +118,14 @@ gchar *s = N_("So you want to make a new profile,\n"
 gchar *s = N_("Name:");
 gchar *s = N_("Comment:");
 gchar *s = N_("Inherit settings from:");
-gchar *s = N_("Default");
 gchar *s = N_("Profile Editor -- Users and Groups Tool");
+gchar *s = N_("Okay in the interest of actually committing\n"
+              "this sometime this week, i am going to forego\n"
+              "writing good sentences for now.");
+gchar *s = N_("New");
+gchar *s = N_("Copy Profile");
+gchar *s = N_("Delete");
+gchar *s = N_("Profiles");
 gchar *s = N_("Okay in the interest of actually committing\n"
               "this sometime this week, i am going to forego\n"
               "writing good sentences for now.");
@@ -143,7 +144,6 @@ gchar *s = N_("Okay in the interest of actually committing\n"
               "this sometime this week, i am going to forego\n"
               "writing good sentences for now.");
 gchar *s = N_("Edit Profile:");
-gchar *s = N_("Default");
 gchar *s = N_("Filename");
 gchar *s = N_("Location");
 gchar *s = N_("Add");
@@ -153,7 +153,6 @@ gchar *s = N_("Okay in the interest of actually committing\n"
               "this sometime this week, i am going to forego\n"
               "writing good sentences for now.");
 gchar *s = N_("Edit Profile:");
-gchar *s = N_("Default");
 gchar *s = N_("Password options");
 gchar *s = N_("Days betweem warning and password expiration:");
 gchar *s = N_("Assign a random pasword by default");
