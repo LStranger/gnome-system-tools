@@ -1,7 +1,7 @@
 /*
- * Datei für übersetzbare Zeichenketten, erzeugt durch Glade.
- * Fügen Sie diese Datei zur POTFILES.in Ihres Projektes hinzu.
- * Compilieren Sie sie NICHT als Teil Ihrer Anwendung.
+ * Archivo de cadenas traducibles generado por Glade.
+ * Añada este archivo a su POTFILES.in de su proyecto.
+ * NO lo compile como parte de su aplicación.
  */
 
 gchar *s = N_("Select a time zone by clicking on \n"
