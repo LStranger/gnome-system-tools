@@ -1,9 +1,10 @@
 INCLUDES = \
 	$(GNOME_INCLUDEDIR)	\
 	$(GNOME_XML_CFLAGS)	\
-	-DMAP_DIR=\""$(pixmapsdir)"\"
+	-DMAP_DIR=\""$(pixmapsdir)"\" \
+	$(XST_TOOL_CFLAGS)
 
-LDADD = -lm
+LDADD = -lm $(XST_TOOL_LIBS)
 
 noinst_PROGRAMS = \
 e-map-test
