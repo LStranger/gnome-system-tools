@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-21 19:56+0100\n"
-"PO-Revision-Date: 2003-11-16 15:32+0100\n"
+"POT-Creation-Date: 2003-11-23 15:07+0100\n"
+"PO-Revision-Date: 2003-11-24 03:18+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -460,7 +460,7 @@ msgstr "Account"
 msgid "Activate when the computer _starts"
 msgstr "Activeren bij het op_starten"
 
-#: interfaces/network.glade.in.h:22 src/network/network-druid.c:412
+#: interfaces/network.glade.in.h:22
 msgid "Address configuration (Step 1 of 2)"
 msgstr "Adresconfiguratie  (stap 1 van 2)"
 
@@ -496,8 +496,7 @@ msgstr "_Instellingen:"
 msgid "Connection _name:"
 msgstr "Verbindings_naam:"
 
-#: interfaces/network.glade.in.h:31 src/network/network-druid.c:449
-#: src/network/network-druid.c:460
+#: interfaces/network.glade.in.h:31
 msgid "Connection name (Step 3 of 3)"
 msgstr "Verbindingsnaam (stap 3 van 3)"
 
@@ -509,7 +508,8 @@ msgstr "Verbindingstype"
 msgid "Connections"
 msgstr "Verbindingen"
 
-#: interfaces/network.glade.in.h:34
+#. set window titles
+#: interfaces/network.glade.in.h:34 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "Maken van een nieuwe netwerkverbinding"
 
@@ -537,7 +537,7 @@ msgstr "Domein / _Werkgroep:"
 msgid "General"
 msgstr "Algemeen"
 
-#: interfaces/network.glade.in.h:42 src/network/main.c:214
+#: interfaces/network.glade.in.h:42 src/network/main.c:217
 msgid "Hosts"
 msgstr "Hosts"
 
@@ -1392,7 +1392,7 @@ msgstr " Meer _opties"
 msgid " Fewer _Options"
 msgstr " Minder _opties"
 
-#: src/common/gst-dialog.c:504
+#: src/common/gst-dialog.c:507
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1400,7 +1400,7 @@ msgstr ""
 "Sommige veranderingen zijn nog niet toegepast.\n"
 "Wilt u deze nu toepassen?"
 
-#: src/common/gst-dialog.c:621
+#: src/common/gst-dialog.c:624
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fout bij het verbinden van signaal '%s' aan widget '%s'"
@@ -1677,49 +1677,50 @@ msgstr "IP-adres"
 msgid "Aliases"
 msgstr "Aliassen"
 
-#: src/network/main.c:254
+#: src/network/main.c:257
 msgid "Run the connection assistant."
 msgstr "De assistent netwerkverbinding starten."
 
-#: src/network/main.c:255
+#: src/network/main.c:258
 msgid "Run the PPP connection assistant."
 msgstr "De assistent PPP-verbinding starten."
 
-#: src/network/main.c:256
+#: src/network/main.c:259
 msgid "Run the ethernet connection assistant."
 msgstr "De assistent ethernetverbinding starten."
 
-#: src/network/main.c:257
+#: src/network/main.c:260
 msgid "Run the wlan connection assistant."
 msgstr "De assistent WLAN-verbinding starten"
 
-#: src/network/main.c:258
+#: src/network/main.c:261
 msgid "Run the parallel port connection assistant."
 msgstr "De assistent paralelle poort-verbinding starten"
 
-#: src/network/main.c:259
+#: src/network/main.c:262
 msgid "Run the irlan connection assistant."
 msgstr "De assistent IRlan-verbinding starten."
 
-#: src/network/main.c:260
+#: src/network/main.c:263
 msgid "Configure a network interface"
 msgstr "Een netwerkinterface instellen"
 
-#: src/network/main.c:260
+#: src/network/main.c:263
 msgid "interface"
 msgstr "interface"
 
-#: src/network/main.c:267
+#: src/network/main.c:270
 msgid "Network Settings"
 msgstr "Netwerkinstellingen"
 
-#: src/network/network-druid.c:425
-msgid "Address configuration (Step 2 of 3)"
-msgstr "Adresconfiguratie (stap 2 van 3)"
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Maken van een nieuwe netwerkverbinding (%d van %d)"
 
-#: src/network/network-druid.c:446
-msgid "Connection name (Step 2 of 2)"
-msgstr "Verbindingsnaam (stap 2 van 2)"
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "Nieuwe netwerkverbinding aangemaakt"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -2043,6 +2044,12 @@ msgstr "Shell"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Gebruikers en groepen toevoegen of verwijderen"
+
+#~ msgid "Address configuration (Step 2 of 3)"
+#~ msgstr "Adresconfiguratie (stap 2 van 3)"
+
+#~ msgid "Connection name (Step 2 of 2)"
+#~ msgstr "Verbindingsnaam (stap 2 van 2)"
 
 #~ msgid "Boot Image Assistant"
 #~ msgstr "Opstart-Image-Assistent"
