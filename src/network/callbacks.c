@@ -36,50 +36,25 @@
 
 #define d(x) x
 
+extern XstTool *tool;
+
 static int statichost_row_selected = -1;
 static int connection_row_selected = -1;
 
-/* libglade callbacks */
-void on_network_notebook_switch_page (GtkWidget *notebook, 
-				      GtkNotebookPage *page,
-				      gint page_num, gpointer user_data);
-
-void on_statichost_changed (GtkWidget *w, gpointer null);
-
-void on_statichost_add_clicked (GtkWidget *w, gpointer null);
-void on_statichost_update_clicked (GtkWidget *w, gpointer null);
-void on_statichost_delete_clicked (GtkWidget *w, gpointer null);
-
-void on_statichost_list_select_row (GtkCList *clist, gint row, gint column, 
-				    GdkEvent * event, gpointer user_data);
-void on_statichost_list_unselect_row (GtkCList *clist, gint row, gint column, 
-				      GdkEvent * event, gpointer user_data);
-
-gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
-
-void on_connection_configure_clicked (GtkWidget *w, gpointer null);
-void on_connection_delete_clicked (GtkWidget *w, gpointer null);
-void on_connection_add_clicked (GtkWidget *w, gpointer null);
-void on_connection_list_select_row (GtkCList *clist, gint row, gint column,
-				    GdkEvent * event, gpointer user_data);
-void on_connection_list_unselect_row (GtkCList *clist, gint row, gint column,
-				      GdkEvent * event, gpointer user_data);
-void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
-void on_samba_use_toggled (GtkWidget *w, gpointer null);
 
 static void
 statichost_actions_set_sensitive (gboolean state)
 {
-	gtk_widget_set_sensitive (tool_widget_get ("statichost_delete"), state);
-	gtk_widget_set_sensitive (tool_widget_get ("statichost_update"), state); 
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_delete"), state);
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_update"), state); 
 
 }
 
 static void
 connection_actions_set_sensitive (gboolean state)
 {
-	gtk_widget_set_sensitive (tool_widget_get ("connection_delete"), state);
-	gtk_widget_set_sensitive (tool_widget_get ("connection_configure"), state); 
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "connection_delete"), state);
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "connection_configure"), state); 
 }
 
 static char *
@@ -140,21 +115,21 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 
 	/* Those widgets that won't be available if you don't have the access. */
 	for (i = 0; access_no[i]; i++)
-		gtk_widget_set_sensitive (tool_widget_get (access_no[i]), tool_get_access());
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, access_no[i]), xst_tool_get_access (tool));
 	
 	/* Those widgets that will be available, even if you don't have the access. */
 	for (i = 0; access_yes[i]; i++)
-		gtk_widget_set_sensitive (tool_widget_get (access_yes[i]), TRUE);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, access_yes[i]), TRUE);
 	
 	/* Those widgets you should never have access to, and will be activated later on. */
 	for (i = 0; unsensitive[i]; i++)
-		gtk_widget_set_sensitive (tool_widget_get (unsensitive[i]), FALSE);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, unsensitive[i]), FALSE);
 	
-	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("statichost_list")), 0, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("statichost_list")), 1, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("connection_list")), 0, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("connection_list")), 1, TRUE);
-	gtk_clist_set_column_auto_resize (GTK_CLIST (tool_widget_get ("connection_list")), 2, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), 0, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), 1, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list")), 0, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list")), 1, TRUE);
+	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list")), 2, TRUE);
 }
 
 void
@@ -163,8 +138,8 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 {
 	gchar *entry[] = { "hostname", "connection_list", "dns_dhcp", "statichost_list" };
 	
-	if (tool_get_access () && entry[page_num])
-		gtk_widget_grab_focus (tool_widget_get (entry[page_num]));
+	if (xst_tool_get_access (tool) && entry[page_num])
+		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, entry[page_num]));
 }
 
 void
@@ -179,13 +154,13 @@ on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent
 	
 	/* Load aliases into entry widget */
 
-	w = tool_widget_get ("statichost_enabled");
+	w = xst_dialog_get_widget (tool->main_dialog, "statichost_enabled");
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w),
 				      get_clist_checkmark (GTK_CLIST (clist), row, 0));
 
 	pos = 0;
 	gtk_clist_get_text (GTK_CLIST (clist), row, 1, &row_data);
-	w = tool_widget_get ("ip");
+	w = xst_dialog_get_widget (tool->main_dialog, "ip");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
 
@@ -193,7 +168,7 @@ on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent
 	gtk_clist_get_text (GTK_CLIST (clist), row, 2, &row_data);
 	row_data = fixdown_text_list (g_strdup (row_data));
 	
-	w = tool_widget_get ("alias");
+	w = xst_dialog_get_widget (tool->main_dialog, "alias");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
 	g_free (row_data);
@@ -208,10 +183,10 @@ on_statichost_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEve
 	statichost_row_selected = -1;
 	statichost_actions_set_sensitive (FALSE);
 	
-	w = tool_widget_get ("ip");
+	w = xst_dialog_get_widget (tool->main_dialog, "ip");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 
-	w = tool_widget_get ("alias");
+	w = xst_dialog_get_widget (tool->main_dialog, "alias");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 }
 
@@ -220,13 +195,13 @@ on_statichost_changed (GtkWidget *w, gpointer null)
 {
 	gboolean enabled;
 
-	enabled = tool_get_access () &&
-		gtk_text_get_length (GTK_TEXT (tool_widget_get ("alias"))) &&
-		check_ip_entry (GTK_ENTRY (tool_widget_get ("ip")), FALSE);
+	enabled = xst_tool_get_access (tool) &&
+		gtk_text_get_length (GTK_TEXT (xst_dialog_get_widget (tool->main_dialog, "alias"))) &&
+		check_ip_entry (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "ip")), FALSE);
 			
-	gtk_widget_set_sensitive (tool_widget_get ("statichost_add"), enabled);
-	gtk_widget_set_sensitive (tool_widget_get ("statichost_update"), enabled && 
-				  GTK_WIDGET_SENSITIVE (tool_widget_get ("statichost_delete")));
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_add"), enabled);
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_update"), enabled && 
+				  GTK_WIDGET_SENSITIVE (xst_dialog_get_widget (tool->main_dialog, "statichost_delete")));
 }
 
 static gboolean
@@ -297,24 +272,24 @@ on_statichost_add_clicked (GtkWidget * button, gpointer user_data)
 	char *entry[4];
 	int row;
 
-	g_return_if_fail (tool_get_access());
+	g_return_if_fail (xst_tool_get_access (tool));
 
 	entry[0] = entry[3] = NULL;
 	
 	entry[1] = gtk_editable_get_chars (
-		GTK_EDITABLE (tool_widget_get ("ip")), 0, -1);
+		GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1);
 
-	entry[2] = fixup_text_list (tool_widget_get ("alias"));
+	entry[2] = fixup_text_list (xst_dialog_get_widget (tool->main_dialog, "alias"));
 		
-	clist = tool_widget_get ("statichost_list");
+	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
 
 	row = gtk_clist_append (GTK_CLIST (clist), entry);
 
-	w = tool_widget_get ("statichost_enabled");
+	w = xst_dialog_get_widget (tool->main_dialog, "statichost_enabled");
 	set_clist_checkmark (GTK_CLIST (clist), row, 0,
 			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 
-	w = tool_widget_get ("alias");
+	w = xst_dialog_get_widget (tool->main_dialog, "alias");
 
 #if 0
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
@@ -331,11 +306,11 @@ on_statichost_delete_clicked (GtkWidget * button, gpointer user_data)
 	GtkWidget *parent, *dialog;
 	gint res;
 
-	g_return_if_fail (tool_get_access());
+	g_return_if_fail (xst_tool_get_access (tool));
 	g_return_if_fail (statichost_row_selected != -1);
 
-	parent = tool_get_top_window ();
-	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")),
+	parent = GTK_WIDGET (tool->main_dialog);
+	gtk_clist_get_text (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")),
 			    statichost_row_selected, 2, &name);
 
 	txt = g_strdup_printf (_("Are you sure you want to delete the aliases for %s?"), name);
@@ -345,8 +320,8 @@ on_statichost_delete_clicked (GtkWidget * button, gpointer user_data)
 
 	if (res) return;
 		
-	gtk_clist_remove (GTK_CLIST (tool_widget_get ("statichost_list")), statichost_row_selected);
-	tool_set_modified (TRUE);
+	gtk_clist_remove (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), statichost_row_selected);
+	xst_dialog_modify (tool->main_dialog);
 	statichost_actions_set_sensitive (FALSE);
 }
 
@@ -356,19 +331,19 @@ on_statichost_update_clicked (GtkWidget *b, gpointer null)
 	GtkWidget *clist, *w;
 	char *s;
 
-	g_return_if_fail (tool_get_access());
+	g_return_if_fail (xst_tool_get_access (tool));
 
-	clist = tool_widget_get ("statichost_list");
+	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
 
-	w = tool_widget_get ("statichost_enabled");
+	w = xst_dialog_get_widget (tool->main_dialog, "statichost_enabled");
 	set_clist_checkmark (GTK_CLIST (clist), statichost_row_selected, 0,
 			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 
 	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 1,
 			    gtk_editable_get_chars (
-				    GTK_EDITABLE (tool_widget_get ("ip")), 0, -1));
+				    GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1));
 	
-	w = tool_widget_get ("alias");
+	w = xst_dialog_get_widget (tool->main_dialog, "alias");
 	s = fixup_text_list (w);
 
 	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 2, s);
@@ -440,7 +415,7 @@ update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 	if (!entry)
 		return FALSE;
 	
-	label = tool_widget_get (entry[1]);
+	label = xst_dialog_get_widget (tool->main_dialog, entry[1]);
 	gtk_label_set_text (GTK_LABEL (label), _(entry[2]));
 
 	return FALSE;
@@ -468,7 +443,7 @@ on_connection_configure_clicked (GtkWidget *w, gpointer null)
 	GtkWidget *clist;
 	Connection *cxn;
 
-	clist = tool_widget_get ("connection_list");
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 
 	connection_configure (cxn);
@@ -482,13 +457,13 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 	int res;
 
 	d = gnome_question_dialog_parented (_("Remove this connection?"), NULL, NULL,
-					    GTK_WINDOW (tool_get_top_window ()));
+					    GTK_WINDOW (tool->main_dialog));
 
 	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
 	if (res)
 		return;
 
-	clist = tool_widget_get ("connection_list");
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 
 	connection_free (cxn);
@@ -503,11 +478,11 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	gint res, row;
 	ConnectionType cxn_type;
 	
-	d = tool_widget_get ("connection_type_dialog");
+	d = xst_dialog_get_widget (tool->main_dialog, "connection_type_dialog");
 
-	ppp   = tool_widget_get ("connection_ppp");
-	eth   = tool_widget_get ("connection_eth");
-	wvlan = tool_widget_get ("connection_wvlan");
+	ppp   = xst_dialog_get_widget (tool->main_dialog, "connection_ppp");
+	eth   = xst_dialog_get_widget (tool->main_dialog, "connection_eth");
+	wvlan = xst_dialog_get_widget (tool->main_dialog, "connection_wvlan");
 
 	/* ppp is the default for now */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ppp), TRUE);
@@ -528,7 +503,7 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 
 	cxn = connection_new_from_type (cxn_type);
 	/* connection_configure (cxn); */
-	clist = tool_widget_get ("connection_list");
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
 	gtk_clist_select_row (GTK_CLIST (clist), row, 0);
 }
@@ -541,13 +516,13 @@ on_dns_dhcp_toggled (GtkWidget *w, gpointer null)
 
 	b = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 	for (i=0; ws[i]; i++)
-		gtk_widget_set_sensitive (tool_widget_get (ws[i]), b);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, ws[i]), b);
 
 }
 
 void
 on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
-	gtk_widget_set_sensitive (tool_widget_get ("samba_frame"),
+	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "samba_frame"),
 				  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 }

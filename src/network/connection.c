@@ -22,8 +22,7 @@
 
 #include "connection.h"
 
-#include "tool.h"
-#include "xml.h"
+#include "global.h"
 
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -48,10 +47,12 @@ static GdkBitmap *active_mask[2];
 
 static GSList *connections;
 
+XstTool *tool;
+
 static void
 connection_set_modified (Connection *cxn, gboolean state)
 {
-	if (cxn->frozen || !tool_get_access ())
+	if (cxn->frozen || !xst_tool_get_access (tool))
 		return;
 
 	gtk_widget_set_sensitive (W ("connection_apply"), state);
@@ -107,7 +108,7 @@ update_row (Connection *cxn)
 	GtkWidget *clist;
 	int row;
 
-	clist = tool_widget_get ("connection_list");
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
 
@@ -122,7 +123,7 @@ update_row (Connection *cxn)
 
 	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->description);
 
-	tool_set_modified (TRUE);
+	xst_dialog_modify (tool->main_dialog);
 }
 
 void
@@ -132,7 +133,7 @@ add_connection_to_list (Connection *cxn, gpointer null)
 	int row;
 	char *text[3] = { NULL };
 
-	clist = tool_widget_get ("connection_list");
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 
 	row = gtk_clist_append (GTK_CLIST (clist), text);
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);

@@ -45,3 +45,33 @@ void filter_editable (GtkEditable *e, const gchar *text,
 			                                  GINT_TO_POINTER (r))
 
 
+/* libglade callbacks */
+void on_network_notebook_switch_page (GtkWidget *notebook, 
+				      GtkNotebookPage *page,
+				      gint page_num, gpointer user_data);
+
+void on_statichost_changed (GtkWidget *w, gpointer null);
+
+void on_statichost_add_clicked (GtkWidget *w, gpointer null);
+void on_statichost_update_clicked (GtkWidget *w, gpointer null);
+void on_statichost_delete_clicked (GtkWidget *w, gpointer null);
+
+void on_statichost_list_select_row (GtkCList *clist, gint row, gint column, 
+				    GdkEvent * event, gpointer user_data);
+void on_statichost_list_unselect_row (GtkCList *clist, gint row, gint column, 
+				      GdkEvent * event, gpointer user_data);
+
+gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
+
+void on_connection_configure_clicked (GtkWidget *w, gpointer null);
+void on_connection_delete_clicked (GtkWidget *w, gpointer null);
+void on_connection_add_clicked (GtkWidget *w, gpointer null);
+void on_connection_list_select_row (GtkCList *clist, gint row, gint column,
+				    GdkEvent * event, gpointer user_data);
+void on_connection_list_unselect_row (GtkCList *clist, gint row, gint column,
+				      GdkEvent * event, gpointer user_data);
+void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
+void on_samba_use_toggled (GtkWidget *w, gpointer null);
+
+void on_status_button_toggled (GtkWidget *w, gpointer null);
+void on_wvlan_adhoc_toggled (GtkWidget *w, gpointer null);

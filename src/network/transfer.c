@@ -30,6 +30,8 @@
 
 #include "connection.h"
 
+extern XstTool *tool;
+
 /* define to x for debugging output */
 #define d(x) x
 
@@ -71,10 +73,10 @@ transfer_string_entry_xml_to_gui (xmlNodePtr root)
 
 		if (node && (s = xml_element_get_content (node)))
 		{
-			gtk_entry_set_text (GTK_ENTRY (tool_widget_get (transfer_string_entry_table [i].editable)), s);
+			gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].editable)), s);
 
 			if (transfer_string_entry_table [i].toggle)
-				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (tool_widget_get (transfer_string_entry_table [i].toggle)), TRUE);
+				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].toggle)), TRUE);
 
 			g_free (s);
 		}
@@ -95,7 +97,7 @@ transfer_string_entry_gui_to_xml (xmlNodePtr root)
 		if (!node)
 			node = xml_element_add (root, transfer_string_entry_table [i].xml_path);
 
-		content = gtk_editable_get_chars (GTK_EDITABLE (tool_widget_get (transfer_string_entry_table [i].editable)), 0, -1);
+		content = gtk_editable_get_chars (GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].editable)), 0, -1);
 		xml_element_set_content (node, content);
 		g_free (content);
 	}
@@ -112,7 +114,7 @@ transfer_string_list_xml_to_gui (xmlNodePtr root)
 
 	for (i = 0; transfer_string_list_table[i].xml_path; i++)
 	{
-		w = tool_widget_get (transfer_string_list_table [i].list);
+		w = xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table [i].list);
 		position = 0;
 
 		gtk_text_freeze (GTK_TEXT (w));
@@ -150,7 +152,7 @@ transfer_string_list_gui_to_xml (xmlNodePtr root)
 
 		/* Add branches corresponding to listed data */
 		for (text = gtk_editable_get_chars (
-			     GTK_EDITABLE (tool_widget_get (transfer_string_list_table[i].list)), 0, -1);
+			     GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table[i].list)), 0, -1);
 		     text; text = strchr (text, ' ')) {
 			if (!*text)
 				continue;
@@ -225,7 +227,7 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 			if (!entry[2])
 				continue;
 
-			clist = tool_widget_get (transfer_string_clist2_table [i].clist);
+			clist = xst_dialog_get_widget (tool->main_dialog, transfer_string_clist2_table [i].clist);
 
 			row = gtk_clist_append (GTK_CLIST (clist), entry);
 
@@ -257,7 +259,7 @@ transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 
 		/* Add branches corresponding to listed data */
 
-		w = tool_widget_get (transfer_string_clist2_table[i].clist);
+		w = xst_dialog_get_widget (tool->main_dialog, transfer_string_clist2_table[i].clist);
 		for (row = 0; gtk_clist_get_text (GTK_CLIST (w), row, 1, &col0); row++)
 		{
 			if (!gtk_clist_get_text (GTK_CLIST (w), row, 2, &col1))
@@ -302,7 +304,7 @@ transfer_interfaces_to_xml (xmlNodePtr root)
 
 	xml_element_destroy_children_by_name (root, "interface");
 
-	clist = tool_widget_get ("connection_list");
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
 		connection_save_to_node (gtk_clist_get_row_data (GTK_CLIST (clist), i),
 					 xml_element_add (root, "interface"));
@@ -322,8 +324,9 @@ transfer_interfaces_to_gui (xmlNodePtr root)
 }
 
 void
-transfer_xml_to_gui (xmlNodePtr root)
+transfer_xml_to_gui (XstTool *t, gpointer data)
 {
+	xmlNode *root = xml_doc_get_root (t->config);
 	transfer_string_entry_xml_to_gui (root);
 	transfer_string_list_xml_to_gui (root);
 	transfer_string_clist2_xml_to_gui (root);
@@ -332,8 +335,9 @@ transfer_xml_to_gui (xmlNodePtr root)
 
 
 void
-transfer_gui_to_xml (xmlNodePtr root)
+transfer_gui_to_xml (XstTool *t, gpointer data)
 {
+	xmlNode *root = xml_doc_get_root (t->config);
 	transfer_string_entry_gui_to_xml (root);
 	transfer_string_list_gui_to_xml (root);
 	transfer_string_clist2_gui_to_xml (root);

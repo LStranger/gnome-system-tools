@@ -69,5 +69,5 @@ struct _TransStringIPEntry
 };
 
 
-void transfer_xml_to_gui(xmlNodePtr root);
-void transfer_gui_to_xml(xmlNodePtr root);
+void transfer_xml_to_gui(XstTool *t, gpointer data);
+void transfer_gui_to_xml(XstTool *t, gpointer data);
