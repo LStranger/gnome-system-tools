@@ -46,7 +46,9 @@ GtkWidget *net_user_table;
 
 gint active_table;
 
-/* e-table specifications. */
+/* e-table specifications.
+   WILL BE removed from here SOON!
+ */
 
 const gchar *user_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
@@ -542,6 +544,7 @@ create_user_table (void)
 	ETableModel *model;
 	ETableExtras *extras;
 	GtkWidget *container;
+	gchar *spec, *state;
 
 	extras = create_extras ();
 
@@ -556,8 +559,27 @@ create_user_table (void)
 					      value_to_string,
 					      GINT_TO_POINTER (TABLE_USER));
 
-	user_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, user_spec,
-					   basic_user_state);
+	spec = xst_conf_get_string (tool, "user_spec");
+	if (!spec) {
+		spec = g_strdup (user_spec);
+		xst_conf_set_string (tool, "user_spec", spec);
+	}
+
+	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
+		state = xst_conf_get_string (tool, "user_state_adv");
+	else
+		state = xst_conf_get_string (tool, "user_state_basic");
+	
+	if (!state) {
+		state = g_strdup (basic_user_state);
+		xst_conf_set_string (tool, "user_state_basic", basic_user_state);
+		xst_conf_set_string (tool, "user_state_adv", adv_user_state);
+	}
+
+	user_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, spec, state);
+	
+	g_free (spec);
+	g_free (state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
@@ -575,6 +597,7 @@ create_group_table (void)
 	ETableModel *model;
 	ETableExtras *extras;
 	GtkWidget *container;
+	gchar *spec, *state;
 
 	extras = create_extras ();
 
@@ -589,8 +612,27 @@ create_group_table (void)
 					      value_to_string,
 					      GINT_TO_POINTER (TABLE_GROUP));
 
-	group_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, group_spec,
-					    basic_group_state);
+	spec = xst_conf_get_string (tool, "group_spec");
+	if (!spec) {
+		spec = g_strdup (group_spec);
+		xst_conf_set_string (tool, "group_spec", spec);
+	}
+
+	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
+		state = xst_conf_get_string (tool, "group_state_adv");
+	else
+		state = xst_conf_get_string (tool, "group_state_basic");
+	
+	if (!state) {
+		state = g_strdup (basic_group_state);
+		xst_conf_set_string (tool, "group_state_basic", basic_group_state);
+		xst_conf_set_string (tool, "group_state_adv", adv_group_state);
+	}
+
+	group_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, spec, state);
+	
+	g_free (spec);
+	g_free (state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
@@ -803,20 +845,21 @@ void
 tables_set_state (gboolean state)
 {
 	ETable *u_table, *g_table;
+	gchar *user_state, *group_state;
 	
 	u_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	g_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
 
-	if (state)
-	{
-		e_table_set_state (u_table, adv_user_state);
-		e_table_set_state (g_table, adv_group_state);
+	if (state) {
+		user_state =  xst_conf_get_string (tool, "user_state_adv");
+		group_state = xst_conf_get_string (tool, "group_state_adv");
+	} else {
+		user_state =  xst_conf_get_string (tool, "user_state_basic");
+		group_state = xst_conf_get_string (tool, "group_state_basic");
 	}
-	else
-	{
-		e_table_set_state (u_table, basic_user_state);
-		e_table_set_state (g_table, basic_group_state);
-	}
+
+	e_table_set_state (u_table, user_state);
+	e_table_set_state (g_table, group_state);
 
 	tables_update_content ();
 }
