@@ -751,12 +751,14 @@ xst_tool_run_get_directive (XstTool *tool, const gchar *report_sign, const gchar
 {
 	va_list ap;
 	xmlDoc *xml;
+	const gchar *directive_ptr;
 	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
+	directive_ptr = directive;
 	va_start (ap, directive);
-	xst_tool_send_directive (tool, directive, ap);
+	xst_tool_send_directive (tool, directive_ptr, ap);
 
 	/* FIXME: Instead of doing the following, we should pass around a value describing
 	 * tool I/O mode (as opposed to a string to report_progress ()). */
@@ -787,6 +789,7 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 	va_list ap;
 	FILE *f;
 	xmlDoc *xml_out;
+	const gchar *directive_ptr;
 	
 	/* don't actually run if we are just pretending */
 	if (root_access == ROOT_ACCESS_SIMULATED) {
@@ -797,8 +800,9 @@ xst_tool_run_set_directive (XstTool *tool, xmlDoc *xml,
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
+	directive_ptr = directive;
 	va_start (ap, directive);
-	xst_tool_send_directive (tool, directive, ap);
+	xst_tool_send_directive (tool, directive_ptr, ap);
 
 	if (xml) {
 		f = fdopen (dup (tool->backend_write_fd), "w");
