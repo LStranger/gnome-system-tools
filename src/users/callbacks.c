@@ -230,7 +230,7 @@ on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 /* Profiles tab */
 
 void
-on_pro_name_activated (GtkEditable *editable, gpointer user_data)
+on_pro_name_changed (GtkEditable *editable, gpointer user_data)
 {
 	gchar *buf;
 

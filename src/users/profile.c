@@ -27,6 +27,7 @@
 #include "global.h"
 #include "profile.h"
 #include "user_group.h"
+#include "callbacks.h"
 
 extern XstTool *tool;
 ProfileTable *profile_table;
@@ -72,7 +73,16 @@ profile_fill (Profile *pf)
 	if (!pft)
 		profile_tab_init ();
 
+
+	gtk_signal_handler_block_by_func (GTK_OBJECT (pft->name->entry),
+					  GTK_SIGNAL_FUNC (on_pro_name_changed),
+					  NULL);
+	
 	gtk_entry_set_text (GTK_ENTRY (pft->name->entry), pf->name);
+
+	gtk_signal_handler_unblock_by_func (GTK_OBJECT (pft->name->entry),
+					    GTK_SIGNAL_FUNC (on_pro_name_changed),
+					    NULL);
 
 	gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
 					pf->home_prefix);	
@@ -105,10 +115,11 @@ profile_save (gchar *name)
 
 	if (pf)
 	{
-		if (pf->name)
+/* FIXME: We can't change name cause it messes up hash table
+                if (pf->name)
 			g_free (pf->name);
 		pf->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->name->entry)));
-
+*/
 		if (pf->home_prefix)
 			g_free (pf->home_prefix);
 		pf->home_prefix = g_strdup (gtk_entry_get_text
@@ -152,6 +163,7 @@ profile_get_default (void)
 	pf->pwd_mindays = logindefs.passwd_min_day_use;
 	pf->pwd_warndays = logindefs.passwd_warning_advance_days;
 	pf->pwd_len = logindefs.passwd_min_length;
+	pf->logindefs = TRUE;
 
 	return pf;
 }
@@ -162,9 +174,9 @@ profile_get_from_xml (xmlNodePtr root)
 	xmlNodePtr node, n0, pf_node;
 	Profile *pf;
 	gchar *profile_tags[] = {
-		"home_prefix", "shell", "passwd_max_day_use",
-		"passwd_min_day_use", "passwd_min_length", "passwd_warning_advance_days", "new_user_min_id",
-		"new_user_max_id", "new_group_min_id", "new_group_max_id", "name", NULL
+		"home_prefix", "shell", "pwd_maxdays",
+		"pwd_mindays", "pwd_len", "pwd_warndays", "umin",
+		"umax", "gmin", "gmax", "name", NULL
 	};
 	gchar *tag;
 	gint i;
@@ -177,6 +189,7 @@ profile_get_from_xml (xmlNodePtr root)
 	while (pf_node)
 	{
 		pf = g_new (Profile, 1);
+		pf->logindefs = FALSE;
 		for (i = 0, tag = profile_tags[0]; tag; i++, tag = profile_tags[i]) 
 		{
 			n0 = xst_xml_element_find_first (pf_node, tag);
@@ -204,6 +217,67 @@ profile_get_from_xml (xmlNodePtr root)
 		profile_table_add_profile (pf, FALSE);
 		pf_node = xst_xml_element_find_next (pf_node, "profile");
 	}
+}
+
+static void
+save_xml (gpointer key, gpointer value, gpointer user_data)
+{
+	xmlNodePtr root, node;
+	Profile *pf;
+	gint i, val;
+	gchar *buf;
+	gchar *nodes[] = {
+		"pwd_maxdays", "pwd_mindays", "pwd_warndays", "pwd_len",
+		"umin", "umax", "gmin", "gmax", NULL};
+
+	root = user_data;
+	pf = value;
+
+	if (pf->logindefs) /* Logindefs is "fake" profile. */
+		return;
+
+	node = xst_xml_element_add (root, "profile");
+
+	xst_xml_element_add_with_content (node, "name",        pf->name);
+	xst_xml_element_add_with_content (node, "home_prefix", pf->home_prefix);
+	xst_xml_element_add_with_content (node, "shell",       pf->shell);
+
+	for (i = 0; nodes[i]; i++)
+	{
+		switch (i)
+		{
+		case 0: val = pf->pwd_maxdays;  break;
+		case 1: val = pf->pwd_mindays;  break;
+		case 2: val = pf->pwd_warndays; break;
+		case 3: val = pf->pwd_len;      break;
+		case 4: val = pf->umin;         break;
+		case 5: val = pf->umax;         break;
+		case 6: val = pf->gmin;         break;
+		case 7: val = pf->gmax;         break;
+		default:
+			g_warning ("save_xml: Shouldn't be here");
+			continue;
+		}
+		
+		buf = g_strdup_printf ("%d", val);
+		xst_xml_element_add_with_content (node, nodes[i], buf);
+		g_free (buf);
+	}
+}
+
+void
+profile_to_xml (xmlNodePtr root)
+{
+	xmlNodePtr node;
+	
+	node = xst_xml_element_find_first (root, "profiles");
+
+	if (!node)
+		node = xst_xml_element_add (root, "profiles");
+	else
+		xst_xml_element_destroy_children (node);
+
+	g_hash_table_foreach (profile_table->hash, save_xml, node);
 }
 
 void
@@ -281,15 +355,25 @@ profile_table_del_profile (gchar *name)
 
 	if (pf)
 	{
-		g_hash_table_remove (profile_table->hash, buf);
-		profile_destroy (pf);
+		if (pf->logindefs)
+		{
+			GnomeDialog *d;
 
-		if (g_hash_table_size (profile_table->hash) == 0)
-			profile_table->selected = NULL;
+			d = GNOME_DIALOG (gnome_error_dialog_parented (N_("Can't delete Default"),
+								       tool->main_dialog));
+			gnome_dialog_run (d);
+		}
 
-		/* FIXME: else: point profile_tabl->selected to next key.
-		   Remove it from pft->name->list.
-		 */
+		else
+		{
+			g_hash_table_remove (profile_table->hash, buf);
+			profile_destroy (pf);
+
+			if (g_hash_table_size (profile_table->hash) == 0)
+				profile_table->selected = NULL;
+
+			xst_ui_combo_remove_by_label (pft->name, buf);
+		}
 	}
 
 	g_free (buf);
@@ -320,9 +404,6 @@ profile_table_set_selected (gchar *name)
 	if (!name)
 		return;
 
-	if (profile_table->selected && !strcmp (profile_table->selected, name))
-		return;
-	
 	pf = (Profile *)g_hash_table_lookup (profile_table->hash, name);
 
 	if (!pf)

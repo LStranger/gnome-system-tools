@@ -171,7 +171,7 @@ value_is_empty (ETableModel *etm, int col, const void *value, void *data)
 static char *
 value_to_string (ETableModel *etm, int col, const void *value, void *data)
 {
-        return g_strdup (value);
+	return (gchar *)value;
 }
 
 static GdkPixbuf *

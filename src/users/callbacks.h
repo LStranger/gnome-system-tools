@@ -44,7 +44,7 @@ void on_network_delete_clicked (GtkWidget *button, gpointer user_data);
 void on_network_user_new_clicked (GtkButton *button, gpointer user_data);
 void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 
-void on_pro_name_activated (GtkEditable *editable, gpointer user_data);
+void on_pro_name_changed (GtkEditable *editable, gpointer user_data);
 void on_pro_del_clicked (GtkButton *button, gpointer user_data);
 void on_pro_save_clicked (GtkButton *button, gpointer user_data);
 

@@ -139,7 +139,7 @@ connect_signals (void)
 	gtk_signal_connect (GTK_OBJECT (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog,
 									  "pro_name"))->entry),
 			    "changed",
-			    GTK_SIGNAL_FUNC (on_pro_name_activated),
+			    GTK_SIGNAL_FUNC (on_pro_name_changed),
 			    NULL);
 }
 
