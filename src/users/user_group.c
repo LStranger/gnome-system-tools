@@ -413,19 +413,22 @@ parse_home (UserAccount *account)
 	return home;
 }
 
-gchar *
-check_user_home (xmlNodePtr node, const gchar *val)
+static gchar *
+user_account_check_home (UserAccount *account)
 {
-	gchar *buf = NULL;
+	gchar *home = account->home;
+	xmlNodePtr node = account->node;
 
-	if (strlen (val) < 1)
-		buf = g_strdup (_("Home directory must not be empty."));
-	else if (*val != '/')
-		buf = g_strdup (_("Please enter full path for home directory."));
-	else if (!check_user_root (node, "home", val))
-		buf = g_strdup (_("root user shouldn't be modified."));
+	if (!home || (strlen (home) < 1))
+		return g_strdup (N_("Home directory must not be empty."));
 
-	return buf;
+	if (*home != '/')
+		return g_strdup (N_("Please enter full path for home directory."));
+
+	if (!check_user_root (node, "home", home))
+		return g_strdup (N_("root user shouldn't be modified."));
+
+	return NULL;
 }
 
 static gchar *
@@ -1324,7 +1327,7 @@ user_account_check (UserAccount *account)
 	if ((buf = user_account_check_comment (account)))
 		return buf;
 	
-	if ((buf = check_user_home (node, account->home)))
+	if ((buf = user_account_check_home (account)))
 		return buf;
 
 	if ((buf = check_user_shell (node, account->shell)))

@@ -77,7 +77,6 @@ gboolean check_node_complexity (xmlNodePtr node);
 gboolean  check_user_root (xmlNodePtr node, const gchar *field, const gchar *value);
 gchar    *check_user_login (xmlNodePtr node, const gchar *login);
 gchar    *check_user_uid (xmlNodePtr node, const gchar *val);
-gchar    *check_user_home (xmlNodePtr node, const gchar *val);
 gchar    *check_user_shell (xmlNodePtr node, const gchar *val);
 
 gboolean check_group_name (GtkWindow *xd, xmlNodePtr node, const gchar *name);
