@@ -27,6 +27,7 @@
 #include <gnome.h>
 
 enum {
+	COL_PRIORITY,
 	COL_SERVICE,
 	COL_LEVEL0,
 	COL_LEVEL1,
@@ -35,11 +36,13 @@ enum {
 	COL_LEVEL4,
 	COL_LEVEL5,
 	COL_LEVEL6,
+	COL_POINTER,
+	COL_LAST
 };
 
-GtkWidget*		table_create				(void);
+void			table_create				(void);
 void			table_populate				(xmlNodePtr);
-void			table_update_headers		(xmlNodePtr);
+void			table_update_headers			(xmlNodePtr);
 void			table_update_state			(XstDialogComplexity);
 
 #endif /* _E_TABLE_H */

@@ -29,6 +29,11 @@
 
 gboolean	callbacks_conf_read_failed_hook		(XstTool* , XstReportLine* , gpointer);
 void		on_main_dialog_update_complexity	(GtkWidget*, gpointer);
-void		callbacks_runlevel_toggled			(GtkTreeView*, gpointer);
+void		on_runlevel_table_clicked		(GtkTreeView*, gpointer);
+void		on_description_button_clicked		(GtkWidget*, gpointer);
+void		on_settings_button_clicked		(GtkWidget*, gpointer);
+void            on_menu_item_activate                   (GtkWidget*, gpointer);
+void            on_throw_service_button_clicked         (GtkWidget*, gpointer);
+void            on_service_priority_changed             (GtkWidget*, gpointer);
 
 #endif /* CALLBACKS_H */

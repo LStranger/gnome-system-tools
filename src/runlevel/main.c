@@ -18,7 +18,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho Parro <garparr@teleline.es>.
+ * Authors: Carlos Garnacho Parro <garnacho@tuxerver.net>.
  */
 
 
@@ -39,9 +39,18 @@
 
 XstTool *tool;
 
+static XstDialogSignal signals [] = {
+	{ "runlevel_table", "cursor-changed", G_CALLBACK (on_runlevel_table_clicked) },
+	{ "settings_button", "clicked", G_CALLBACK (on_settings_button_clicked) },
+	{ "dialog_throw_button", "clicked", G_CALLBACK (on_throw_service_button_clicked) },
+	{ "dialog_service_priority", "value-changed", G_CALLBACK (on_service_priority_changed) },
+	{ NULL }};
+
 static void 
 connect_signals (XstTool *tool) 
 {
+	xst_dialog_connect_signals (tool->main_dialog, signals);
+	
 	g_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change", G_CALLBACK (on_main_dialog_update_complexity), NULL);
 }
 
@@ -58,7 +67,7 @@ main (int argc, char *argv[])
 	
 	tool = xst_tool_new();
 	xst_tool_construct (tool, "runlevel", _("Runlevel Settings"));
-	table_construct (tool);
+	table_create ();
 	
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
 	xst_tool_add_report_hooks (tool, report_hooks);
