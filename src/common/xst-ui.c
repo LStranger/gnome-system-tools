@@ -190,6 +190,9 @@ xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
 	gchar *label;
 	gint row;
 
+	g_return_val_if_fail (option_menu != NULL, -1);
+	g_return_val_if_fail (GTK_IS_OPTION_MENU (option_menu), -1);
+	
 	selected = GTK_WIDGET (GTK_BIN (option_menu)->child);
 	if (!GTK_IS_LABEL (selected))
 		return -1;
@@ -220,6 +223,9 @@ gchar *
 xst_ui_option_menu_get_selected_string (GtkOptionMenu *option_menu)
 {
 	gchar *buf;
+
+	g_return_val_if_fail (option_menu != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_OPTION_MENU (option_menu), NULL);
 	
 	if (GTK_BIN (option_menu)->child) {
 		GtkWidget *child = GTK_BIN (option_menu)->child;
@@ -240,14 +246,21 @@ xst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar 
 	GList *menu_items;
 	gint row;
 
+	g_return_if_fail (option_menu != NULL);
+	g_return_if_fail (GTK_IS_OPTION_MENU (option_menu));
+	g_return_if_fail (string != NULL);
+	
 	menu = gtk_option_menu_get_menu (option_menu);
 	menu_items = GTK_MENU_SHELL (menu)->children;
 	if (!menu_items)
 		return;
 
 	found = get_list_item_by_name (menu_items, string);
-	if (!found)
+	if (!found) {
+		g_warning ("xst_ui_option_menu_set_selected_string: "
+			   "'%s' not in menu.", string);
 		return;
+	}
 
 	row = g_list_index (menu_items, found);
 	gtk_option_menu_set_history (option_menu, row);
@@ -268,6 +281,9 @@ xst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
 	GtkWidget *menu, *item;
 	gboolean new_menu = FALSE;
 
+	g_return_val_if_fail (option_menu != NULL, NULL);
+	g_return_val_if_fail (GTK_IS_OPTION_MENU (option_menu), NULL);
+	
 	menu = gtk_option_menu_get_menu (option_menu);
 
 	if (!GTK_MENU_SHELL (menu)->children) {
@@ -300,6 +316,10 @@ xst_ui_option_menu_remove_string (GtkOptionMenu *option_menu, const gchar *strin
 	gchar *buf = xst_ui_option_menu_get_selected_string (option_menu);
 	GtkWidget *menu = gtk_option_menu_get_menu (option_menu);
 
+	g_return_if_fail (option_menu != NULL);
+	g_return_if_fail (GTK_IS_OPTION_MENU (option_menu));
+	g_return_if_fail (string != NULL);
+	
 	if (!strcmp (buf, string))
 		found = gtk_menu_get_active (GTK_MENU (menu));
 	else {
@@ -323,6 +343,9 @@ xst_ui_option_menu_clear (GtkOptionMenu *option_menu)
 {
 	GtkWidget *menu;
 
+	g_return_if_fail (option_menu != NULL);
+	g_return_if_fail (GTK_IS_OPTION_MENU (option_menu));
+	
 	menu = gtk_option_menu_get_menu (option_menu);
 	gtk_container_foreach (GTK_CONTAINER (menu), menu_clear, NULL);
 }
