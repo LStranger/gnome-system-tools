@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-15 15:04+0200\n"
-"PO-Revision-Date: 2004-04-15 16:19+0200\n"
+"POT-Creation-Date: 2004-04-17 14:59+0200\n"
+"PO-Revision-Date: 2004-04-17 17:11+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -203,8 +203,8 @@ msgid "Confirmation"
 msgstr "Potvrzení"
 
 #. set window title
-#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
-#: src/boot/boot-druid.c:441
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:433
+#: src/boot/boot-druid.c:445
 msgid "Creating a new boot image"
 msgstr "Vytvářím nový zaváděcí obraz"
 
@@ -229,7 +229,7 @@ msgid "Finished"
 msgstr "Dokončeno"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:52
-#: src/network/connection.c:1851
+#: src/network/connection.c:1867
 msgid "Manual"
 msgstr "Ruční"
 
@@ -316,7 +316,7 @@ msgstr "_Zařízení:"
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:43
 msgid "_Initrd image path:"
 msgstr "Cesta k obrazu _initrd:"
 
@@ -519,7 +519,7 @@ msgstr "Povolit kontrolu nad připojením všem _uživatelům"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:30 src/network/connection.c:1853
+#: interfaces/network.glade.in.h:30 src/network/connection.c:1869
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -544,7 +544,7 @@ msgstr "Vytvářím nové připojení k síti"
 msgid "Current network profile:"
 msgstr "Aktuální síťový profil:"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1852
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1868
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -656,7 +656,9 @@ msgstr "Nyní prosím zadejte adresu, kterou bude mít toto síťové zařízen�
 msgid ""
 "Now, please specify if this connection should be enabled, this means that "
 "the configuration will be applied when the assistant finishes."
-msgstr "Nyní prosím určete, jestli má být tot připojení povoleno, to znamená, že nastavení bude použito po dokončení asistenta."
+msgstr ""
+"Nyní prosím určete, jestli má být tot připojení povoleno, to znamená, že "
+"nastavení bude použito po dokončení asistenta."
 
 #: interfaces/network.glade.in.h:63
 msgid "Number to _access an external line:"
@@ -1264,20 +1266,28 @@ msgid "profiles_table"
 msgstr "tabulka_profilů"
 
 #: src/boot/boot-append-gui.c:226
-#, c-format
-msgid "vga=%s is not a valid vga value"
-msgstr "vga=%s není platná hodnota vga"
+msgid "Invalid VGA value"
+msgstr "Neplatná hodnota VGA"
 
-#: src/boot/boot-druid.c:430
+#: src/boot/boot-append-gui.c:231
+#, c-format
+msgid "\"%s\" is not a valid VGA value"
+msgstr "\"%s\" není platná hodnota vga"
+
+#: src/boot/boot-druid.c:105
+msgid "Error creating boot image"
+msgstr "Chyba při tvorbě nového zaváděcího obrazu"
+
+#: src/boot/boot-druid.c:434
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "Vytvářím nový zaváděcí obraz (%d z %d)"
 
-#: src/boot/boot-druid.c:431
+#: src/boot/boot-druid.c:435
 msgid "Finished creating a new boot image"
 msgstr "Tvorba nového zaváděcího obrazu dokončena"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:468
+#: src/boot/boot-image.c:40 src/network/profile.c:481
 msgid "Unknown"
 msgstr "Neznámý"
 
@@ -1305,38 +1315,42 @@ msgstr "Linux swap"
 msgid "GNU/Hurd"
 msgstr "GNU/Hurd"
 
-#: src/boot/boot-image.c:278
+#: src/boot/boot-image.c:276
 #, c-format
 msgid "Invalid path: %s"
 msgstr "Neplatná cesta: %s"
 
-#: src/boot/boot-image.c:294
+#: src/boot/boot-image.c:292
 #, c-format
 msgid "Image '%s' already exists, please set another name."
 msgstr "Obraz '%s' již existuje, zadejte prosím jiný název."
 
-#: src/boot/boot-image.c:300
+#: src/boot/boot-image.c:298
 #, c-format
 msgid "Invalid image name: '%s'"
 msgstr "Neplatný název obrazu: '%s'"
 
-#: src/boot/boot-image.c:313
+#: src/boot/boot-image.c:311
 #, c-format
 msgid "Invalid image: '%s'"
 msgstr "Neplatný obraz: '%s'"
 
-#: src/boot/boot-image.c:331
+#: src/boot/boot-image.c:329
 #, c-format
 msgid "Invalid root device: '%s'"
 msgstr "Neplatné kořenové zařízení: '%s'"
 
-#: src/boot/boot-settings.c:43
+#: src/boot/boot-settings.c:44
 msgid "_Module path:"
 msgstr "Cesta _modulu:"
 
-#: src/boot/boot-settings.c:360 src/users/user-settings.c:472
-msgid "Password confirmation isn't correct."
-msgstr "Potvrzení hesla není správně."
+#: src/boot/boot-settings.c:353
+msgid "Password confirmation is not correct"
+msgstr "Potvrzení hesla není správně"
+
+#: src/boot/boot-settings.c:377
+msgid "Error modifying boot image"
+msgstr "Chyba při úpravě zaváděcího obrazu"
 
 #: src/boot/boot.desktop.in.in.h:1
 msgid "Boot"
@@ -1346,35 +1360,39 @@ msgstr "Zavedení"
 msgid "Configure the system boot process"
 msgstr "Nastavit proces zavádění systému"
 
-#: src/boot/callbacks.c:75
+#: src/boot/callbacks.c:76
 msgid "Boot Image Editor"
 msgstr "Editor zaváděcího obrazu"
 
-#: src/boot/callbacks.c:169
+#: src/boot/callbacks.c:170
 msgid "Boot Append Editor"
 msgstr "Editor zaváděcího příkazu"
 
 #: src/boot/callbacks.c:393
-msgid ""
-"Without at least one boot image,\n"
-"your system will not start.\n"
-msgstr ""
-"Váš systém nenastartuje bez\n"
-"alespoň jednoho zaváděcího obrazu.\n"
+msgid "Error deleting boot image"
+msgstr "Chyba při odstraňování zaváděcího obrazu"
 
-#: src/boot/callbacks.c:408
-#, c-format
-msgid "Are you sure you want to delete '%s'?"
-msgstr "Jste si jisti, že chcete odstranit '%s'?"
+#: src/boot/callbacks.c:394
+msgid "Without at least one boot image your system will not start."
+msgstr "Váš systém nenastartuje bez alespoň jednoho zaváděcího obrazu."
 
-#: src/boot/callbacks.c:453
+#: src/boot/callbacks.c:415
+msgid "This may leave this operating system unbootable"
+msgstr "To může způsobit, že operační systém nepůjde zavést"
+
+#: src/boot/callbacks.c:420
 #, c-format
-msgid ""
-"The file ``%s'' is missing or could not be read:\n"
-"The configuration will show empty."
-msgstr ""
-"Soubor \"%s\" chybí nebo jej nelze přečíst:\n"
-"Nastavení se bude jevit prázdné."
+msgid "Are you sure you want to delete \"%s\"?"
+msgstr "Jste si jisti, že chcete odstranit \"%s\"?"
+
+#: src/boot/callbacks.c:461
+msgid "The configuration will show empty"
+msgstr "Bude se zobrazovat prázdné nastavení"
+
+#: src/boot/callbacks.c:466
+#, c-format
+msgid "The file \"%s\" is missing or could not be read"
+msgstr "Soubor \"%s\" chybí nebo jej nelze přečíst"
 
 #: src/boot/table.c:41
 msgid "Name"
@@ -1384,7 +1402,7 @@ msgstr "Název"
 msgid "Default"
 msgstr "Implicitní"
 
-#: src/boot/table.c:43 src/network/connection.c:484
+#: src/boot/table.c:43 src/network/connection.c:485
 msgid "Type"
 msgstr "Typ"
 
@@ -1392,11 +1410,11 @@ msgstr "Typ"
 msgid "Kernel Image"
 msgstr "Obraz jádra"
 
-#: src/boot/table.c:45 src/network/connection.c:500
+#: src/boot/table.c:45 src/network/connection.c:501
 msgid "Device"
 msgstr "Zařízení"
 
-#: src/boot/table.c:50 src/network/connection.c:57
+#: src/boot/table.c:50 src/network/connection.c:58
 msgid "/_Add ..."
 msgstr "/Přid_at ..."
 
@@ -1405,74 +1423,89 @@ msgstr "/Přid_at ..."
 msgid "/_Properties"
 msgstr "/_Vlastnosti"
 
-#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
+#: src/boot/table.c:53 src/network/connection.c:61 src/network/dns.c:39
 #: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/O_dstranit"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:84
-msgid "Could not connect to the computer."
-msgstr "Nemohu se připojit k počítači."
+#: src/common/gst-auth.c:88
+msgid "Could not connect to the computer"
+msgstr "Nemohu se připojit k počítači"
+
+#: src/common/gst-auth.c:89
+msgid ""
+"Check that you have access to this network and that the computer is actually "
+"working and running SSHD"
+msgstr "Zkontrolujte, že máte přístup k této síti, že počítač funguje a běží na něm SSHD"
 
 #. the proccess was running su
-#: src/common/gst-auth.c:87
-msgid "The password you entered is invalid."
-msgstr "Zadané heslo je neplatné."
+#: src/common/gst-auth.c:93
+msgid "The password you entered is invalid"
+msgstr "Zadané heslo je neplatné"
 
-#: src/common/gst-auth.c:95
+#: src/common/gst-auth.c:94
+msgid ""
+"Check that you typed it correctly and that you haven't activated caps lock"
+msgstr "Zkontrolujte, že jste je zadali správně a že jste nezapnuli caps lock"
+
+#: src/common/gst-auth.c:103
 #, c-format
-msgid "Could not run \"%s\". Check that you have permissions to run it."
-msgstr "Nemohu spustit \"%s\". Ověřte, že k tomu máte oprávnění."
+msgid "Could not run \"%s\""
+msgstr "Nemohu spustit \"%s\""
 
-#: src/common/gst-auth.c:99
-msgid "An unexpected error has occurred."
+#: src/common/gst-auth.c:104
+msgid "Check that you have permissions to run it."
+msgstr "Ověřte, že máte oprávnění jej spustit."
+
+#: src/common/gst-auth.c:106
+msgid "An unexpected error has ocurred."
 msgstr "Došlo k neočekávané chybě."
 
-#: src/common/gst-dialog.c:61
+#: src/common/gst-dialog.c:62
 #, c-format
 msgid "Could not find widget: %s"
-msgstr "Nelze nalézt prvek %s"
+msgstr "Nemohu nalézt widget %s"
 
-#: src/common/gst-dialog.c:93
+#: src/common/gst-dialog.c:94
 msgid " More _Options"
 msgstr " Více _možností"
 
-#: src/common/gst-dialog.c:94
+#: src/common/gst-dialog.c:95
 msgid " Fewer _Options"
 msgstr " Méně _možností"
 
 #: src/common/gst-dialog.c:507
-msgid ""
-"There are changes which haven't been applied.\n"
-"Apply them now?"
-msgstr ""
-"Jsou zde změny, které nebyly použity.\n"
-"Chcete je použít nyní?"
+msgid "There are changes which haven't been applied"
+msgstr "Jsou zde změny, které nebyly použity."
 
-#: src/common/gst-dialog.c:624
+#: src/common/gst-dialog.c:508
+msgid "Apply them now?"
+msgstr "Použít je nyní?"
+
+#: src/common/gst-dialog.c:626
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
-msgstr "Chyba při připojení signálu `%s' v prvku `%s'"
+msgstr "Chyba při připojení signálu `%s' ve widgetu `%s'"
 
-#: src/common/gst-tool.c:795
+#: src/common/gst-tool.c:796
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Vynechává se direktiva %s..."
 
-#: src/common/gst-tool.c:922
+#: src/common/gst-tool.c:923
 msgid "Skipping actual save..."
 msgstr "Vynechává se skutečné uložení..."
 
-#: src/common/gst-tool.c:995
-msgid ""
-"There was an error running the backend script,\n"
-"and the configuration could not be loaded."
-msgstr ""
-"Nastala chyba při spuštění podpůrného skriptu\n"
-"a nastavení nebylo možné načíst."
+#: src/common/gst-tool.c:997
+msgid "The configuration could not be loaded"
+msgstr "Nastavení nemohlo být načteno"
 
-#: src/common/gst-tool.c:1477
+#: src/common/gst-tool.c:998
+msgid "There was an error running the backend script"
+msgstr "Při spuštění podpůrného skriptu došlo k chybě"
+
+#: src/common/gst-tool.c:1480
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1481,7 +1514,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Vítejte v předběžné verzi %s "
 "Systémových nástrojů GNOME</span>"
 
-#: src/common/gst-tool.c:1480
+#: src/common/gst-tool.c:1483
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1495,33 +1528,34 @@ msgstr ""
 "úsilí a zdravý rozum. Byli jste varováni. Děkujeme vám za vyzkoušení této "
 "předběžné verze Systémových nástrojů GNOME!"
 
-#: src/common/gst-tool.c:1501
+#: src/common/gst-tool.c:1504
 msgid "Warning"
 msgstr "Varování"
 
-#: src/common/gst-tool.c:1521
+#: src/common/gst-tool.c:1524
 msgid "Don't show me this again"
 msgstr "Nezobrazovat příště"
 
-#: src/common/gst-tool.c:1595
+#: src/common/gst-tool.c:1598
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
-#: src/common/gst-ui.c:389
-msgid "Please restart your GNOME session for these changes to take effect."
-msgstr "Restartujte prosím vaše sezení GNOME, aby se tyto změny projevily."
+#: src/network/callbacks.c:361
+msgid ""
+"This will disable any network connection with this interface as soon as you "
+"hit \"apply\"."
+msgstr "Toto zakáže všechna připojení k síti přes toto rozhraní, jakmile stisknete \"použít\"."
 
-#: src/network/callbacks.c:358
+#: src/network/callbacks.c:366
 #, c-format
-msgid "Remove connection %s: \"%s\"?"
-msgstr "Odstranit připojení %s: \"%s\"?"
-
-#: src/network/callbacks.c:360
-#, c-format
-msgid "Remove connection %s?"
-msgstr "Odstranit připojení %s?"
+msgid "Are you sure you want to delete connection \"%s\"?"
+msgstr "Jste si jisti, že chcete odstranit spojení \"%s\"?"
 
 #: src/network/callbacks.c:456
+msgid "SMB Support is not running"
+msgstr "Podpora SMB neběží"
+
+#: src/network/callbacks.c:457
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1529,19 +1563,25 @@ msgstr ""
 "nemáte nainstalovanou podporu SMB. Nainstalujte prosím podporu SMB na váš "
 "systém a pak můžete povolit síťování s Windows."
 
-#: src/network/callbacks.c:459
-msgid "SMB support missing."
-msgstr "Chybí podpora SMB."
+#: src/network/callbacks.c:521
+msgid "Host name has changed"
+msgstr "Jméno počítače bylo změněno"
 
-#: src/network/callbacks.c:515
+#: src/network/callbacks.c:522
 msgid ""
-"The host name has changed. This will prevent you from launching new "
-"applications, and so you will have to log in again. Continue anyway?"
-msgstr ""
-"Název počítače se změnil. To vám znemožní spouštět nové aplikace, budete se "
-"muset znovu přihlásit. Chcete přesto pokračovat?"
+"This will prevent you from launching new applications, and so you will have "
+"to log in again. Continue anyway?"
+msgstr "To vám znemožní spouštět nové aplikace, budete se muset znovu přihlásit. Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:563
+#: src/network/callbacks.c:526
+msgid "Change _Host name"
+msgstr "Změnit _název počítače"
+
+#: src/network/callbacks.c:569
+msgid "Wvdial missing"
+msgstr "Wvdial chybí"
+
+#: src/network/callbacks.c:570
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1549,7 +1589,11 @@ msgstr ""
 "Nebylo možné na vašem systému nalézt wvdial. Musíte nainstalovat wvdial, "
 "jinak se připojení PPP (modem) nebudou aktivovat. "
 
-#: src/network/callbacks.c:590
+#: src/network/callbacks.c:596
+msgid "Wvdial not found"
+msgstr "Wvdial nenalezen"
+
+#: src/network/callbacks.c:597
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1557,107 +1601,133 @@ msgstr ""
 "Nebylo možné na vašem systému nalézt wvdial. Musíte nainstalovat wvdial, "
 "jinak se připojení PPP (modem) nebudou aktivovat. Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:617
-msgid ""
-"The default gateway device is not activated. This will prevent you from "
-"connecting to the Internet. Continue anyway?"
-msgstr ""
-"Zařízení implicitní brány není aktivováno. To vám znemožní připojení k "
-"Internetu. Chcete přesto pokračovat?"
+#: src/network/callbacks.c:601 src/network/callbacks.c:628
+msgid "_Continue"
+msgstr "_Pokračovat"
 
-#: src/network/callbacks.c:668
-msgid ""
-"The default gateway device is missing gateway information. Please provide "
-"this information to proceed, or choose another default gateway device."
-msgstr ""
-"Zařízení implicitní brány neobsahuje informace o bráně. Zadejte tyto "
-"informace, chcete-li pokračovat, nebo vyberte jiné zařízení implicitní brány."
+#: src/network/callbacks.c:624
+msgid "The default gateway device is not activated"
+msgstr "Zařízení implicitní brány není aktivováno"
 
-#: src/network/callbacks.c:714
+#: src/network/callbacks.c:625
+msgid "This will prevent you from connecting to the Internet. Continue anyway?"
+msgstr "To vám znemožní připojit se k Internetu. Chcete přesto pokračovat?"
+
+#: src/network/callbacks.c:673
+msgid "The default gateway device is missing gateway information"
+msgstr "Zařízení implicitní brány chybí informace o bráně"
+
+#: src/network/callbacks.c:674
 msgid ""
-"The program redhat-config-network-cmd could not be found. This could render "
-"missing connections under the connections tab. Please install the redhat-"
-"config-network rpm package to avoid this."
-msgstr ""
-"Nelze nalézt program redhat-config-network-cmd. Díky tomu nebudou dostupná "
-"připojení pod odrážkou připojení. Abyste tomu zamezili, musíte nainstalovat "
-"balíček redhat-config-network."
+"Please provide this information to proceed, or choose another default "
+"gateway device."
+msgstr "Zadejte tyto informace, chcete-li pokračovat, nebo vyberte jiné zařízení implicitní brány."
+
+#: src/network/callbacks.c:719
+msgid "The program redhat-config-network-cmd could not be found"
+msgstr "Program redhat-config-network-cmd nebyl nalezen"
+
+#: src/network/callbacks.c:720
+msgid ""
+"This could render missing connections under the connections tab. Please "
+"install the redhat-config-network rpm package to avoid this."
+msgstr "Díky tomu nebudou dostupná připojení pod odrážkou připojení. Abyste tomu zamezili, nainstalujte prosím rpm balíček redhat-config-network."
 
 #: src/network/callbacks.c:751
 #, c-format
-msgid "Do you want to enable interface %s?"
-msgstr "Chcete povolit rozhraní %s?"
+msgid "Do you want to enable interface \"%s\"?"
+msgstr "Chcete povolit rozhraní \"%s\"?"
 
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:752
+msgid "This will enable network access through this interface"
+msgstr "Toto povolí přístup k síti přes toto rozhraní"
+
+#: src/network/callbacks.c:753
+msgid "_Enable"
+msgstr "Po_volit"
+
+#: src/network/callbacks.c:755
 #, c-format
-msgid "Do you want to disable interface %s?"
-msgstr "Chcete zakázat rozhraní %s?"
+msgid "Do you want to disable interface \"%s\"?"
+msgstr "Chcete zakázat rozhraní \"%s\"?"
 
-#: src/network/callbacks.c:853
-msgid ""
-"Could not autodetect modem device, check that this is not busy and that it's "
-"correctly attached"
-msgstr ""
-"Nemohu autodetekovat zařízení modemu, zkontrolujte, že se nepoužívá a že je "
-"správně připojen"
+#: src/network/callbacks.c:756
+msgid "This will disable network access through this interface"
+msgstr "Toto zakáže přístup k síti přes toto rozhraní"
 
-#: src/network/callbacks.c:905
+#: src/network/callbacks.c:757
+msgid "_Disable"
+msgstr "_Zakázat"
+
+#: src/network/callbacks.c:864
+msgid "Could not autodetect modem device"
+msgstr "Nemohu autodetekovat zařízení modemu"
+
+#: src/network/callbacks.c:865
+msgid "Check that it's not busy and that it's correctly attached"
+msgstr "Zkontrolujte, že se nepoužívá a že je správně připojen"
+
+#: src/network/callbacks.c:919
 msgid "Silent"
 msgstr "Tichá"
 
-#: src/network/callbacks.c:907
+#: src/network/callbacks.c:921
 msgid "Low"
 msgstr "Nízká"
 
-#: src/network/callbacks.c:909
+#: src/network/callbacks.c:923
 msgid "Medium"
 msgstr "Střední"
 
-#: src/network/callbacks.c:911
+#: src/network/callbacks.c:925
 msgid "Loud"
 msgstr "Hlasitá"
 
-#: src/network/connection.c:45
+#: src/network/connection.c:46
 msgid "Other type"
 msgstr "Jiný typ"
 
-#: src/network/connection.c:46
+#: src/network/connection.c:47
 msgid "Ethernet LAN card"
 msgstr "Karta Ethernet LAN"
 
-#: src/network/connection.c:47
+#: src/network/connection.c:48
 msgid "Wireless LAN card"
 msgstr "Karta bezdrátové LAN"
 
-#: src/network/connection.c:48
+#: src/network/connection.c:49
 msgid "Modem or transfer cable"
 msgstr "Modem nebo přenosový kabel"
 
-#: src/network/connection.c:49
+#: src/network/connection.c:50
 msgid "Parallel line"
 msgstr "Paralelní linka"
 
-#: src/network/connection.c:50
+#: src/network/connection.c:51
 msgid "Infrared LAN"
 msgstr "Infračervená LAN"
 
-#: src/network/connection.c:51
+#: src/network/connection.c:52
 msgid "Loopback interface"
 msgstr "Rozhraní loopback"
 
-#: src/network/connection.c:52
+#: src/network/connection.c:53
 msgid "Unknown interface type"
 msgstr "Neznámý typ rozhraní"
 
-#: src/network/connection.c:59
+#: src/network/connection.c:60
 msgid "/_Configure"
 msgstr "/Nasta_vit"
 
-#: src/network/connection.c:512
+#: src/network/connection.c:513
 msgid "Status"
 msgstr "Stav"
 
-#: src/network/connection.c:1716
+#: src/network/connection.c:1718 src/network/connection.c:1728
+msgid "Error in IP address"
+msgstr "Chyba v IP adrese"
+
+#: src/network/connection.c:1719
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1665,7 +1735,7 @@ msgstr ""
 "IP adresa nebo síťová maska pro rozhraní byla ponechána prázdná. Pokračujte "
 "prosím zadáním platných IP adres do těchto polí."
 
-#: src/network/connection.c:1723
+#: src/network/connection.c:1729
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1673,7 +1743,11 @@ msgstr ""
 "IP adresa nebo vzdálená adresa pro rozhraní byla ponechána prázdná. "
 "Pokračujte prosím zadáním platných IP adres do těchto polí."
 
-#: src/network/connection.c:1729
+#: src/network/connection.c:1737
+msgid "Error in DNS servers"
+msgstr "Chyba v serverech DNS"
+
+#: src/network/connection.c:1738
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1683,7 +1757,11 @@ msgstr ""
 "primární server DNS jste ponechali prázdnou. Zadejte prosím IP adresu pro "
 "primární DNS server nebo odškrtněte volbu pro ruční nastavení DNS."
 
-#: src/network/connection.c:1735
+#: src/network/connection.c:1745
+msgid "Invalid modem device"
+msgstr "Neplatné zařízení modemu"
+
+#: src/network/connection.c:1746
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1691,7 +1769,11 @@ msgstr ""
 "Zařízení modemu, které bude připojení používat, bylo ponecháno prázdné. "
 "Pokračujte prosím zadáním zařízení nebo stisknutím \"autodetekovat\"."
 
-#: src/network/connection.c:1740
+#: src/network/connection.c:1751
+msgid "Invalid phone number"
+msgstr "Neplatné telefonní číslo"
+
+#: src/network/connection.c:1752
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1699,14 +1781,22 @@ msgstr ""
 "Telefonní číslo, které bude připojení používat, bylo ponecháno prázdné. "
 "Pokračujte prosím zadáním platného telefonního čísla."
 
-#: src/network/connection.c:2103
-#, c-format
-msgid "The interface %s doesn't exist."
-msgstr "Rozhraní %s neexistuje."
+#: src/network/connection.c:2120
+msgid "Nonexisting interface"
+msgstr "Neexistující rozhraní"
 
-#: src/network/connection.c:2105
-msgid " The loopback interface cannot be configured."
-msgstr " Rozhraní loopback nemůže být nastavováno."
+#: src/network/connection.c:2121
+#, c-format
+msgid "The interface \"%s\" doesn't exist."
+msgstr "Rozhraní \"%s\" neexistuje."
+
+#: src/network/connection.c:2124
+msgid "Invalid interface"
+msgstr "Neplatné rozhraní"
+
+#: src/network/connection.c:2125
+msgid "The loopback interface cannot be configured."
+msgstr "Rozhraní loopback nemůže být nastavováno."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1769,10 +1859,14 @@ msgstr "Nastavit síťové zařízení a spojení"
 msgid "Networking"
 msgstr "Sítě"
 
-#: src/network/profile.c:43
+#: src/network/profile.c:51 src/users/profile-settings.c:226
+msgid "You won't be able to recover this profile after hitting \"apply\""
+msgstr "Po stisknutí \"použít\" nebudete moci tento profil obnovit"
+
+#: src/network/profile.c:55
 #, c-format
-msgid "Are you sure you want to delete profile %s?"
-msgstr "Jste si jisti, že chcete odstranit profil %s?"
+msgid "Delete profile \"%s\"?"
+msgstr "Odstranit profil \"%s\"?"
 
 #: src/network/profiles-table.c:53
 msgid "Profile name"
@@ -1823,23 +1917,24 @@ msgstr "Aktivní"
 msgid "Service"
 msgstr "Služba"
 
-#: src/time/main.c:313
+#: src/time/main.c:314
 msgid "Time Zone"
 msgstr "Časová zóna"
 
-#: src/time/main.c:423
+#: src/time/main.c:424
 msgid "Time Servers"
 msgstr "Servery času"
 
-#: src/time/main.c:501
-msgid ""
-"You don't have NTP support running. Please run NTP support in the system to "
-"enable server synchronization."
-msgstr ""
-"Nemáte spuštěnou podporu NTP. Pro povolení synchronizace se serverem v "
-"systému prosím spusťte podporu NTP."
+#: src/time/main.c:506
+msgid "NTP support is not running"
+msgstr "Podpora NTP neběží"
 
-#: src/time/main.c:808
+#: src/time/main.c:507
+msgid ""
+"Please run NTP support in the system to enable time server synchronization"
+msgstr "Pro povolení synchronizace se serverem času v systému prosím spusťte podporu NTP"
+
+#: src/time/main.c:817
 msgid "Time and Date Settings"
 msgstr "Nastavení data a času"
 
@@ -1851,53 +1946,95 @@ msgstr "Změnit systémový čas, datum a časovou zónu."
 msgid "Time and Date"
 msgstr "Datum a čas"
 
-#: src/users/callbacks.c:602
+#: src/users/callbacks.c:569
+msgid "Error saving profile"
+msgstr "Chyba při ukládání profilu"
+
+#: src/users/callbacks.c:604
 msgid "Create New profile"
 msgstr "Vytvořit nový profil"
 
-#: src/users/callbacks.c:633
+#: src/users/callbacks.c:635
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Nastavení profilu %s"
 
-#: src/users/group-settings.c:89
+#: src/users/group-settings.c:90
 msgid "Create New Group"
 msgstr "Vytvořit novou skupinu"
 
-#: src/users/group-settings.c:143 src/users/user-settings.c:427
-msgid "User id must be a positive number."
-msgstr "Uživatelské ID musí být kladné číslo."
+#. Check if gid is available
+#: src/users/group-settings.c:145 src/users/group-settings.c:149
+msgid "Invalid group ID"
+msgstr "Neplatné ID skupiny"
 
-#: src/users/group-settings.c:147
-msgid "Such group id already exists."
-msgstr "Toto ID skupiny již existuje."
+#: src/users/group-settings.c:146
+msgid "Group ID must be a positive number."
+msgstr "ID skupiny musí být kladné číslo."
 
-#: src/users/group-settings.c:169
+#: src/users/group-settings.c:150
+#, c-format
+msgid "Group ID %s already exists."
+msgstr "ID skupiny %s již existuje."
+
+#. If empty.
+#: src/users/group-settings.c:175
 msgid "Group name is empty."
 msgstr "Název skupiny je prázdný."
 
-#: src/users/group-settings.c:173
+#: src/users/group-settings.c:176
+msgid "A group name must be specified"
+msgstr "Musí být zadán název skupiny"
+
+#. If too long.
+#: src/users/group-settings.c:179
 msgid "The group name is too long."
 msgstr "Název skupiny je příliš dlouhý."
 
-#: src/users/group-settings.c:177
-msgid "Please set a valid group name, using only lower-case letters."
-msgstr "Zadejte prosím platný název skupiny, pomocí malých písmen."
+#: src/users/group-settings.c:180
+#, c-format
+msgid "The group name should have less than %i characters for being valid"
+msgstr "Aby byl název skupiny platný, musí mít méně než %i znaků"
 
-#: src/users/group-settings.c:181
-msgid "Group already exists."
-msgstr "Skupina již existuje."
+#. if invalid.
+#: src/users/group-settings.c:183
+msgid "Group name has invalid characters"
+msgstr "Název skupiny má neplatné znaky"
 
-#: src/users/group-settings.c:250
-msgid "The root group must not be deleted."
-msgstr "Skupina správce (root) nesmí být odstraněna."
+#: src/users/group-settings.c:184
+msgid "Please set a valid group name, using only lower case letters."
+msgstr "Zadejte prosím platný název skupiny obsahující jen malá písmena."
+
+#. if !exist.
+#: src/users/group-settings.c:187
+#, c-format
+msgid "Group \"%s\" already exists."
+msgstr "Skupina \"%s\" již existuje."
+
+#: src/users/group-settings.c:188
+msgid "Please select a different group name"
+msgstr "Zvolte prosím jiný název skupiny"
 
 #: src/users/group-settings.c:257
+msgid "Root group shouldn't be deleted."
+msgstr "Skupina root by neměla být odstraněna."
+
+#: src/users/group-settings.c:258 src/users/user-settings.c:105
+#: src/users/user-settings.c:334 src/users/user-settings.c:428
+#: src/users/user-settings.c:463
+msgid "This would leave the system unusable"
+msgstr "Systém by pak nebyl použitelný"
+
+#: src/users/group-settings.c:272
+msgid "This may leave files with invalid group ID in the filesystem"
+msgstr "To možná nechá v systému souborů soubory s neplatným ID skupiny"
+
+#: src/users/group-settings.c:277
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Jste si jisti, že chcete odstranit skupinu %s?"
 
-#: src/users/group-settings.c:314
+#: src/users/group-settings.c:332
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Nastavení skupiny %s"
@@ -1943,26 +2080,30 @@ msgstr ""
 "Chybné heslo: %s.\n"
 "Zkuste prosím nové heslo."
 
-#: src/users/profile-settings.c:129
+#: src/users/profile-settings.c:130
 msgid "The profile must have a name"
 msgstr "Profil musí mít název"
 
-#: src/users/profile-settings.c:134
+#: src/users/profile-settings.c:135
 msgid "The profile must have a default home"
 msgstr "Profil musí mít implicitní domov"
 
-#: src/users/profile-settings.c:139 src/users/profile-settings.c:144
+#: src/users/profile-settings.c:140 src/users/profile-settings.c:145
 msgid "The profile must have a default shell"
 msgstr "Profil musí mít implicitní shell"
 
-#: src/users/profile-settings.c:214
-msgid "The profile Default must not be deleted."
-msgstr "Profil Implicitní nesmí být odstraněn."
+#: src/users/profile-settings.c:215
+msgid "The profile \"Default\" must not be deleted."
+msgstr "Profil \"Implicitní\" nesmí být odstraněn."
 
-#: src/users/profile-settings.c:221
+#: src/users/profile-settings.c:216
+msgid "This is the default profile for setting new users' data"
+msgstr "Toto je implicitní profil pro nastavování dat nových uživatelů"
+
+#: src/users/profile-settings.c:225
 #, c-format
-msgid "Are you sure you want to delete the profile called %s?"
-msgstr "Jste si jisti, že chcete odstranit profil nazvaný %s?"
+msgid "Delete profile \"%s\""
+msgstr "Odstranit profil \"%s\""
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: src/users/profiles-table.c:38
@@ -1998,31 +2139,45 @@ msgid "/_Add group ..."
 msgstr "/Přid_at skupinu ..."
 
 #: src/users/user-settings.c:104
-msgid "The root user must not be deleted."
-msgstr "Správce systému (root) nesmí být odstraněn."
+msgid "The root user can not be deleted."
+msgstr "Uživatel root nemůže být odstraněn."
 
-#: src/users/user-settings.c:111
+#: src/users/user-settings.c:120
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Jste si jisti, že chcete odstranit uživatele %s?"
 
-#: src/users/user-settings.c:191
+#: src/users/user-settings.c:199
 msgid "User Account Editor"
 msgstr "Editor uživatelských účtů"
 
-#: src/users/user-settings.c:305
+#: src/users/user-settings.c:314
 msgid "The username is empty."
 msgstr "Uživatelské jméno je prázdné."
 
-#: src/users/user-settings.c:313
+#: src/users/user-settings.c:315
+msgid "A username must be specified"
+msgstr "Musí být zadáno jméno uživatele"
+
+#. = sizeof (ut.ut_name)
+#: src/users/user-settings.c:321 src/users/user-settings.c:326
 msgid "The username is too long."
 msgstr "Uživatelské jméno je příliš dlouhé."
 
-#: src/users/user-settings.c:317
-msgid "root username shouldn't be modified."
-msgstr "Jméno správce systému (root) by nemělo být měněno."
+#: src/users/user-settings.c:322 src/users/user-settings.c:327
+#, c-format
+msgid "The username should have less than %i characters for being valid"
+msgstr "Aby bylo jméno uživatele platné, musí mít méně než %i znaků"
 
-#: src/users/user-settings.c:321
+#: src/users/user-settings.c:333
+msgid "Root username shouldn't be modified."
+msgstr "Jméno uživatele root by nemělo být měněno."
+
+#: src/users/user-settings.c:339
+msgid "Username has invalid characters"
+msgstr "Jméno uživatele má neplatné znaky"
+
+#: src/users/user-settings.c:340
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -2030,51 +2185,96 @@ msgstr ""
 "Zadejte prosím platné uživatelské jméno skládající se z malého písmene na "
 "začátku a dále z malých písmen a číslic."
 
-#: src/users/user-settings.c:325
+#: src/users/user-settings.c:345
 #, c-format
-msgid ""
-"Username \"%s\" already exists.\n"
-"\n"
-"Please select a different Username"
-msgstr ""
-"Uživatelské jméno \"%s\" již existuje.\n"
-"\n"
-"Použijte prosím jiné uživatelské jméno."
+msgid "Username \"%s\" already exists"
+msgstr "Jméno uživatele \"%s\" již existuje"
 
-#: src/users/user-settings.c:347
+#: src/users/user-settings.c:346
+msgid "Please select a different username"
+msgstr "Zvolte prosím jiné jméno uživatele"
+
+#: src/users/user-settings.c:371
+msgid "Invalid character in comment."
+msgstr "Neplatný znak v komentáři."
+
+#: src/users/user-settings.c:372
 #, c-format
-msgid "Invalid character '%c' in comment."
-msgstr "Neplatný znak '%c' v komentáři."
+msgid "Check that invalid character '%c' is not used"
+msgstr "Zkontrolujte, že se nepoužívá neplatný znak '%c' "
 
-#: src/users/user-settings.c:393
+#: src/users/user-settings.c:420
 msgid "Home directory must not be empty."
 msgstr "Domovský adresář nesmí být prázdný."
 
-#: src/users/user-settings.c:396
-msgid "Please enter full path for home directory."
-msgstr "Zadejte prosím plnou cestu k domovskému adresáři."
+#: src/users/user-settings.c:421
+msgid "Make sure you provide a home directory"
+msgstr "Zkontrolujte, že jste zadali domovský adresář"
 
-#: src/users/user-settings.c:399
+#: src/users/user-settings.c:423
+msgid "Incomplete path in home directory"
+msgstr "Neúplná cesta k domovskému adresáři"
+
+# FIXME: s/i.e./e.g./
+#: src/users/user-settings.c:424
+msgid ""
+"Please enter full path for home directory.\n"
+"<span size=\"smaller\">i.e.: /home/john</span>"
+msgstr ""
+"Zadejte prosím plnou cestu k domovskému adresáři.\n"
+"<span size=\"smaller\">např.: /home/john</span>"
+
+#: src/users/user-settings.c:427
 msgid "root home shouldn't be modified."
 msgstr "Domovský adresář správce systému (root) by neměl být měněn."
 
-#: src/users/user-settings.c:429
+#: src/users/user-settings.c:459 src/users/user-settings.c:465
+msgid "Invalid user ID"
+msgstr "Neplatné ID uživatele"
+
+#: src/users/user-settings.c:460
+msgid "User id must be a positive number."
+msgstr "Uživatelské ID musí být kladné číslo."
+
+#: src/users/user-settings.c:462
 msgid "root uid shouldn't be modified."
 msgstr "UID správce systému (root) by nemělo být měněno."
 
-#: src/users/user-settings.c:431
-msgid "Such user id already exists."
-msgstr "Takové uživatelské ID již existuje."
+#: src/users/user-settings.c:466
+#, c-format
+msgid "User ID %s already exists."
+msgstr "ID uživatele %s již existuje."
 
-#: src/users/user-settings.c:451
-msgid "Please give shell with full path."
-msgstr "Zadejte prosím shell s plnou cestou."
+#: src/users/user-settings.c:488
+msgid "Incomplete path in shell"
+msgstr "Neúplná cesta v shellu"
 
-#: src/users/user-settings.c:469
-msgid "Password must not be empty."
+# FIXME: s/i.e./e.g./
+#: src/users/user-settings.c:489
+msgid ""
+"Please enter full path for shell.\n"
+"<span size=\"smaller\">i.e.: /bin/sh</span>"
+msgstr ""
+"Zadejte prosím plnou cestu k shellu.\n"
+"<span size=\"smaller\">např.: /bin/sh</span>"
+
+#: src/users/user-settings.c:511
+msgid "Password can not be empty."
 msgstr "Heslo nesmí být prázdné."
 
-#: src/users/user-settings.c:746
+#: src/users/user-settings.c:512
+msgid "A password must be provided"
+msgstr "Musí být zadáno heslo"
+
+#: src/users/user-settings.c:514
+msgid "Password confirmation isn't correct."
+msgstr "Potvrzení hesla není správně."
+
+#: src/users/user-settings.c:515
+msgid "Check that you have provided the same password in both text fields"
+msgstr "Zkontrolujte, že jste v obou textových polích zadali stejné heslo"
+
+#: src/users/user-settings.c:791
 #, c-format
 msgid "Settings for User %s"
 msgstr "Nastavení uživatele %s"
@@ -2104,20 +2304,8 @@ msgstr "Shell"
 msgid "Add or remove users and groups"
 msgstr "Přidat nebo odstranit uživatele a skupiny"
 
-#~ msgid "Connection _name:"
-#~ msgstr "_Název připojení:"
-
-#~ msgid "Connection name"
-#~ msgstr "Název připojení"
-
-#~ msgid "Now, please give this connection a name."
-#~ msgstr "Nyní toto připojení prosím pojmenujte."
-
-#~ msgid "_Comment:"
-#~ msgstr "_Komentář:"
-
-#~ msgid "Priority:"
-#~ msgstr "Priorita:"
+#~ msgid "Please restart your GNOME session for these changes to take effect."
+#~ msgstr "Restartujte prosím vaše sezení GNOME, aby se tyto změny projevily."
 
 #~ msgid "<b>Configuration</b>"
 #~ msgstr "<b>Nastavení</b>"
@@ -2239,9 +2427,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 
 #~ msgid "Parameters:"
 #~ msgstr "Parametry:"
-
-#~ msgid "_Configure"
-#~ msgstr "Nasta_vit"
 
 #~ msgid "_Profiles..."
 #~ msgstr "_Profily..."
@@ -2389,9 +2574,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ "Je dostupná, jen pokud máte NIS\n"
 #~ "a pokud kliknete na \"Více voleb\"."
 
-#~ msgid "Edit profile:"
-#~ msgstr "Upravit profil:"
-
 #~ msgid "Enter Password (Step 2 of 2)"
 #~ msgstr "Zadejte heslo (krok 2 ze 2)"
 
@@ -2449,9 +2631,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 
 #~ msgid "%s - GNOME System Tools"
 #~ msgstr "%s - Systémové nástroje GNOME"
-
-#~ msgid "Autodetecting modem device"
-#~ msgstr "Autodetekuji zařízení modemu"
 
 #~ msgid ""
 #~ "The phone number must be composed of\n"
@@ -2558,9 +2737,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 
 #~ msgid "Aliases for this host, one per line"
 #~ msgstr "Přezdívky tohoto počítače, jedna na řádek"
-
-#~ msgid "DNS _Servers:"
-#~ msgstr "_Servery DNS:"
 
 #~ msgid "Boot Manager"
 #~ msgstr "Správce zavádění"
@@ -2831,9 +3007,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgid "DHCP service requirements."
 #~ msgstr "Požadavky služby DHCP."
 
-#~ msgid "Disable"
-#~ msgstr "Vypnout"
-
 #~ msgid "End of Range"
 #~ msgstr "Konec rozsahu"
 
@@ -3086,12 +3259,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgid "Host"
 #~ msgstr "Počítač"
 
-#~ msgid "Host name:"
-#~ msgstr "Název počítače:"
-
-#~ msgid "IP address"
-#~ msgstr "IP adresa"
-
 #~ msgid "IP address:"
 #~ msgstr "IP adresa:"
 
@@ -3334,9 +3501,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgid "Restore all tools"
 #~ msgstr "Obnovit všechny nástroje"
 
-#~ msgid "Restore configuration from"
-#~ msgstr "Obnovit nastavení staré"
-
 #~ msgid "Restore only"
 #~ msgstr "Pouze obnovit"
 
@@ -3484,9 +3648,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ "Použijte tento dialog pro definici vzorů klientů, které rozhodují o "
 #~ "přístupu k vašemu sdílení NFS. Vzory klientů mají obvykle tvar \"10.10.10."
 #~ "*\" nebo \" *.gnome.org\". "
-
-#~ msgid "_Enable"
-#~ msgstr "Po_volit"
 
 #~ msgid "_Host:"
 #~ msgstr "Počí_tač:"
