@@ -87,23 +87,20 @@ transfer_check_data (xmlNodePtr root)
 static void
 transfer_globals_xml_to_gui (xmlNodePtr root)
 {
-	gchar *buf;
-	gint value;
+	GtkWidget *sb;
+	gchar     *buf;
+	gint       value;
 
 	buf = gst_xml_get_child_content (root, "timeout");
-	if (buf)
-	{
+	sb = gst_dialog_get_widget (tool->main_dialog, "boot_timeout");
+	
+	if (buf) {
 		value = atoi (buf);
 		g_free (buf);
-	}
-	else
-		value = 50;
-	
-	/* Set value in seconds. */
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog,
-									   "boot_timeout")),
-				   (gfloat) value / 10);
+	} else
+		value = 0;
 
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (sb), (gfloat) value / 10);
 }
 
 static void
