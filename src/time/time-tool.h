@@ -39,5 +39,6 @@ void    gst_time_clock_stop              (GstTimeTool *tool);
 void    gst_time_clock_start             (GstTimeTool *tool);
 
 void    gst_time_tool_set_time_zone_name (GstTimeTool *time_tool, gchar *name);
+gchar*  gst_time_tool_get_time_zone_name (GstTimeTool*);
 void    gst_time_set_full                (GstTimeTool *time_tool, struct tm *tm);
 void    gst_time_set_from_localtime      (GstTimeTool *time_tool, gint correction);

@@ -126,13 +126,6 @@ static GstDialogSignal signals[] = {
 	{ "ntp_use",           "toggled",            G_CALLBACK (ntp_use_toggled) },
 	{ "timeserver_button", "clicked",            G_CALLBACK (server_button_clicked) },
 	{ "location_combo",    "set_focus_child",    G_CALLBACK (gst_dialog_modify_cb) },
-#warning FIXME
-#if 0
-	{ "tz_combo_entry",    "changed",            G_CALLBACK (update_tz) },
-#endif
-        /* Changed the Signal for the GtkTreeView --AleX
-	   { "ntp_list",          "selection_changed",  gst_dialog_modify_cb },
-	   { "ntp_list2",         "cursor_changed",     G_CALLBACK (gst_dialog_modify_cb) },*/
 	{ "ntp_add_server",    "clicked",            G_CALLBACK (on_ntp_addserver) },
 	{ "ntp_add_server",    "clicked",            G_CALLBACK (gst_dialog_modify_cb) },
 	{ NULL }
@@ -311,8 +304,6 @@ timezone_construct_dialog (GstDialog *dialog)
 					      NULL,
 					      GTK_DIALOG_MODAL |
 					      GTK_DIALOG_NO_SEPARATOR,
-					      GTK_STOCK_APPLY,
-					      GTK_RESPONSE_APPLY,
 					      GTK_STOCK_CLOSE,
 					      GTK_RESPONSE_CLOSE, NULL);
 
@@ -381,29 +372,27 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 	GstDialog *dialog;
 	GstTimeTool *time_tool;
 	gint result;
+	gchar *tz_name, *old_tz_name;
+	TzLocation *tz_location;
+	gint correction;
 
 	dialog = GST_DIALOG (data);
 	time_tool = GST_TIME_TOOL (gst_dialog_get_tool (dialog));
 
-	if (!d) {
+	if (!d)
 		d = timezone_construct_dialog (dialog);
-	}
 
-	if (time_tool->time_zone_name) {
+	if (time_tool->time_zone_name)
 		e_tz_map_set_tz_from_name (tzmap, time_tool->time_zone_name);
-	}
-
-	gtk_widget_show (d);
 
 	result = gtk_dialog_run (GTK_DIALOG (d));
-	if (result == GTK_RESPONSE_APPLY) {
-		gchar *tz_name;
-		TzLocation *tz_location;
-		gint correction;
 
-		tz_name     = e_tz_map_get_selected_tz_name (tzmap);
-		tz_location = e_tz_map_get_location_by_name (tzmap, tz_name);
+	tz_name     = e_tz_map_get_selected_tz_name (tzmap);
+	tz_location = e_tz_map_get_location_by_name (tzmap, tz_name);
 
+	old_tz_name = gst_time_tool_get_time_zone_name (time_tool);
+
+	if (strcmp (tz_name, old_tz_name) != 0) {
 		correction = tz_location_set_locally (tz_location);
 		gst_time_tool_set_time_zone_name (time_tool, tz_name);
 		gst_time_set_from_localtime (time_tool, correction);
@@ -482,6 +471,12 @@ gst_time_tool_set_time_zone_name (GstTimeTool *time_tool, gchar *name)
 	}
 	time_tool->time_zone_name = g_strdup (name);
 	update_tz (time_tool);
+}
+
+gchar*
+gst_time_tool_get_time_zone_name (GstTimeTool *time_tool)
+{
+	return time_tool->time_zone_name;
 }
 
 static void
