@@ -287,20 +287,21 @@ create_searchbar (void)
 static void
 main_window_prepare (void)
 {
-	GtkToggleButton *toggle;
-	XstDialogComplexity complexity = tool->main_dialog->complexity;
-
 	/* For random password generation. */
 	srand (time (NULL));
 
-	toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "showall"));
-	gtk_toggle_button_set_active (toggle, xst_conf_get_boolean (tool, "showall"));
-
+	/* Create tables */
 	construct_tables ();
+	
 //	create_searchbar ();
 
-	update_notebook_complexity (complexity);
-	update_tables_complexity (complexity);
+	/* General complexity update */
+	update_complexity ();
+
+	/* This sucks, but calculating the needed size for simple mode based on the
+	 * hidden widgets plus the tabs size is going to be ugly. Chema
+	 */
+	gtk_window_set_default_size (GTK_WINDOW (tool->main_dialog), 550, 400);
 }
 
 int
@@ -317,11 +318,6 @@ main (int argc, char *argv[])
 
 	main_window_prepare ();
 	connect_signals ();
-
-	/* This sucks, but calculating the needed size for simple mode based on the
-	 * hidden widgets plus the tabs size is going to be ugly. Chema
-	 */
-	gtk_window_set_default_size (GTK_WINDOW (tool->main_dialog), 550, 400);
 
 	xst_tool_main (tool, FALSE);
 	
