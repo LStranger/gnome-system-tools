@@ -111,6 +111,8 @@ xst_xml_element_find_nth (xmlNodePtr parent, char *name, int n)
 xmlNodePtr
 xst_xml_element_add (xmlNodePtr parent, char *name)
 {
+	g_return_val_if_fail (parent != NULL, NULL);
+
 	return (xmlNewChild (parent, NULL, name, NULL));
 }
 
