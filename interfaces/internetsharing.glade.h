@@ -10,7 +10,7 @@ gchar *s = N_("Internet Sharing");
 gchar *s = N_("   Configure...   ");
 gchar *s = N_("Disable");
 gchar *s = N_("Internet Sharing Druid");
-gchar *s = N_("Internet Sharing Tool");
+gchar *s = N_("Internet Sharing Configuration Druid");
 gchar *s = N_("Welcome to the Internet Sharing Configuration Druid\n"
               "\n"
               "This druid will help you to configure \n"
@@ -19,31 +19,31 @@ gchar *s = N_("Welcome to the Internet Sharing Configuration Druid\n"
               "At least, you must have an installed and configured local\n"
               "network interface, such as an ethernet or waveLAN card\n"
               "and an internet connection, such as a modem.");
-gchar *s = N_("Create a new Local Interface Network");
+gchar *s = N_("Create a new local network interface.");
 gchar *s = N_("A local network connection was not detected.\n"
               "Would you like to configure one?\n"
               "");
 gchar *s = N_(" Yes, launch network tool (recommended).");
 gchar *s = N_(" No, exit this druid and continue later.");
-gchar *s = N_("Activate Local Interface Network");
+gchar *s = N_("Local network interface activation.");
 gchar *s = N_("A local network interface has been detected, but it's not active.\n"
               "Would you like to activate it now?\n"
               "");
 gchar *s = N_(" Yes (recommended).");
 gchar *s = N_(" No, I'll set it up later by myself.");
-gchar *s = N_("Firewall configuration");
+gchar *s = N_("Internet sharing configuration.");
 gchar *s = N_("You already have an internet sharing configuration.\n"
               "Do you want to keep it, or use the druid's defaults?\n"
               "");
 gchar *s = N_(" Keep the current configuration.");
 gchar *s = N_(" Overwrite with the default internet sharing configuration (recommended).");
-gchar *s = N_("Install DHCP Service");
+gchar *s = N_("DHCP service configuration.");
 gchar *s = N_("Would you like to give the automatic network\n"
               "address assignment service (DHCP)?\n"
               "");
 gchar *s = N_(" Yes, I'll set the local network computers to use automatic IP assignment  (recommended).");
 gchar *s = N_(" No, I'll manually configure the computers on the local network.");
-gchar *s = N_("DHCP Service Requirements");
+gchar *s = N_("DHCP service requirements.");
 gchar *s = N_("You don't have a DHCP server installed, or\n"
               "some other related component is missing.");
 gchar *s = N_(" Don't use it then.");
