@@ -33,9 +33,12 @@ $(INTLLIBS) \
 desktop = time.desktop
 security = time.security
 
-EXTRA_DIST = $(desktop) time.pam $(security).in
+EXTRA_DIST = $(desktop).in time.pam $(security).in
 
-CLEANFILES = $(desktop).menu $(desktop).cc $(security)
+CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)
+
+$(desktop): %.desktop: %.desktop.in
+	sed 's#Icon=.*#Icon='$(pixmapsdir)'/time.png#' < $< > $@
 
 $(desktop).menu: $(desktop)
 	sed 's#Exec=.*#Exec=time-admin#' < $< > $@

@@ -22,10 +22,16 @@ Systemdir = $(ccenterdir)/System
 paneldir = $(datadir)/gnome/apps/Settings
 Systemdirp = $(paneldir)/System
 
-Directory_files = System.directory
-EXTRA_DIST = System.directory
+directory = System.directory
+EXTRA_DIST = $(directory).in
+CLEANFILES = $(directory)
 
-install-data-local:
+$(directory): $(directory).in
+	sed 's#Icon=.*#Icon='$(pixmapsdir)'/hst.png#' < $< > $@
+
+all-local: $(directory)
+
+install-data-local: $(directory)
 	$(mkinstalldirs) $(DESTDIR)$(Systemdir)
 	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
 	$(mkinstalldirs) $(DESTDIR)$(Systemdirp)
