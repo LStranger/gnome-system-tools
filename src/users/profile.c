@@ -49,6 +49,7 @@ extern XstTool *tool;
 ProfileTable *profile_table;
 static ProfileTab *pft;
 
+void on_home_activate (GtkEditable *editable, gpointer user_data);
 
 static guint
 my_atoi (gchar *str) 
@@ -56,6 +57,28 @@ my_atoi (gchar *str)
 	if (!str || !*str)
 		return 0;
 	return atoi (str);
+}
+
+static void
+profile_tab_prefill (void)
+{
+	xmlNodePtr root, node;
+	GtkWidget *li;
+
+	root = xst_xml_doc_get_root (tool->config);
+	root = xst_xml_element_find_first (root, "shells");
+
+	if (!root)
+		return;
+
+	node = xst_xml_element_find_first (root, "shell");
+	while (node) {
+		li = gtk_list_item_new_with_label (xst_xml_element_get_content (node));
+		gtk_widget_show (li);
+		gtk_container_add (GTK_CONTAINER (pft->shell->list), li);
+		
+		node = xst_xml_element_find_next (node, "shell");
+	}
 }
 
 static void
@@ -81,6 +104,14 @@ profile_tab_init (void)
 	pft->pwd_mindays  = GTK_SPIN_BUTTON   (xst_dialog_get_widget (xd, "pro_mindays"));
 	pft->pwd_warndays = GTK_SPIN_BUTTON   (xst_dialog_get_widget (xd, "pro_between"));
 	pft->pwd_random   = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (xd, "pro_random"));
+
+	profile_tab_prefill ();
+
+	
+	gtk_signal_connect (GTK_OBJECT (gnome_file_entry_gtk_entry (pft->home_prefix)),
+			    "activate",
+			    GTK_SIGNAL_FUNC (on_home_activate),
+			    (gpointer) pft->home_prefix);
 }
 
 static void
@@ -100,7 +131,7 @@ profile_fill (Profile *pf)
 					    NULL);
 	
 	my_gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
-					pf->home_prefix);	
+					pf->home_prefix);
 	my_gtk_entry_set_text (GTK_ENTRY (pft->shell->entry), pf->shell);
 	my_gtk_entry_set_text (GTK_ENTRY (pft->group), pf->group);
 	
@@ -115,12 +146,26 @@ profile_fill (Profile *pf)
 	gtk_toggle_button_set_active (pft->pwd_random, pf->pwd_random);
 }
 
+static void
+profile_save_entry (GtkEntry *entry, gchar **data)
+{
+	gchar *buf;
+	
+	buf = gtk_entry_get_text (entry);
+	
+	if (validate_var (buf)) {
+		if (*data)
+			g_free (*data);
+		*data = g_strdup (buf);
+	} else
+		my_gtk_entry_set_text (entry, *data);
+}
+
 void
 profile_save (gchar *name)
 {
 	gchar *buf;
 	Profile *pf;
-	GtkWidget *li;
 	
 	if (name)
 		buf = g_strdup (name);
@@ -132,37 +177,9 @@ profile_save (gchar *name)
 
 	if (pf)
 	{
-		/* Name */
-/* FIXME: Can't modify name, messes up hash table.
-                if (pf->name)
-		{
-			buf = g_strdup (pf->name);
-			g_free (pf->name);
-		}
-
-		pf->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->name->entry)));
-		profile_table->selected = pf->name;
-		
-		xst_ui_combo_remove_by_label (pft->name, buf);
-		g_free (buf);
-		
-		li = gtk_list_item_new_with_label (pf->name);
-		gtk_widget_show (li);
-		gtk_container_add (GTK_CONTAINER (pft->name->list), li);
-*/		
-
-		if (pf->home_prefix)
-			g_free (pf->home_prefix);
-		pf->home_prefix = g_strdup (gtk_entry_get_text
-					    (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix))));
-
-		if (pf->shell)
-			g_free (pf->shell);
-		pf->shell = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->shell->entry)));
-
-		if (pf->group)
-			g_free (pf->group);
-		pf->group = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->group)));
+		profile_save_entry (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)), &pf->home_prefix);
+		profile_save_entry (GTK_ENTRY (GTK_COMBO (pft->shell)->entry), &pf->shell);
+		profile_save_entry (GTK_ENTRY (pft->group), &pf->group);
 		
 		pf->umin = gtk_spin_button_get_value_as_int (pft->umin);
 		pf->umax = gtk_spin_button_get_value_as_int (pft->umax);
@@ -467,7 +484,7 @@ profile_table_add_profile (Profile *pf, gboolean select)
 	gtk_container_add (GTK_CONTAINER (pft->name->list), li);
 	gtk_signal_handler_unblock_by_func (GTK_OBJECT (pft->name->entry),
 					  GTK_SIGNAL_FUNC (on_pro_name_changed),
-					  NULL);	
+					  NULL);
 	if (select || g_hash_table_size (profile_table->hash) == 1)
 	{
 		profile_table->selected = pf->name;
@@ -552,4 +569,78 @@ profile_table_set_selected (const gchar *name)
 	
 	profile_table->selected = pf->name;
 	profile_fill (pf);
+}
+
+/* Not much at the time :) */
+static gchar *known_vars[] = { "$user", NULL }; 
+
+gboolean
+validate_var (gchar *var)
+{
+	const guint max_tokens = 8;
+	gchar **buf;
+	gint i, j;
+	gboolean found, ret;
+
+	ret = TRUE;
+	
+	if (!var)
+		return FALSE;
+
+	buf = g_strsplit (var, "/", max_tokens);
+	i = 0;
+	while (buf[i]) {
+		if (*buf[i] == '$') {
+			j = 0;
+			found = FALSE;
+			while (known_vars[j]) {
+				if (!strcmp (known_vars[j], buf[i])) {
+					found = TRUE;
+					break;
+				}
+				j++;
+			}
+
+			if (!found) {
+				gchar *msg;
+				GtkWidget *d;
+				
+				/* FIXME: list ALL known vars. */
+				msg = g_strdup_printf (N_("Unknown variable '%s'.\n"
+							  "Currently we support only '%s'."),
+						       buf[i], *known_vars);
+
+				d = gnome_error_dialog (msg);
+				gnome_dialog_run (GNOME_DIALOG (d));
+				g_free (msg);
+				ret = found;
+				break;
+			}
+		}
+		i++;
+	}
+	
+	g_strfreev (buf);
+	return ret;
+}
+
+/* Callbacks. */
+
+void
+on_home_activate (GtkEditable *editable, gpointer user_data)
+{
+	GnomeFileEntry *fentry;
+	gchar *buf, *path;
+
+	fentry = user_data;
+
+	if (!fentry->fsw)
+		return; /* User pressed <enter> */
+
+	path = gnome_file_entry_get_full_path (fentry, TRUE);
+	buf = g_strconcat (path, "$user", NULL);
+	g_free (path);
+
+	gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (fentry)), buf);
+	g_free (buf);
 }
