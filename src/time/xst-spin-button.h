@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* GTK - The GIMP Toolkit
  * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
  *
@@ -27,25 +28,21 @@
  * GTK+ at ftp://ftp.gtk.org/pub/gtk/. 
  */
 
+/* Modified by the XST team. If the adjustment is set to NULL
+ * the spin button will crash in several places
+ */
 #ifndef __XST_SPIN_BUTTON_H__
 #define __XST_SPIN_BUTTON_H__
 
+#include <gnome.h>
 
-#include <gdk/gdk.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkadjustment.h>
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-
+BEGIN_GNOME_DECLS
 
 #define XST_TYPE_SPIN_BUTTON                  (xst_spin_button_get_type ())
 #define XST_SPIN_BUTTON(obj)                  (GTK_CHECK_CAST ((obj), XST_TYPE_SPIN_BUTTON, XstSpinButton))
 #define XST_SPIN_BUTTON_CLASS(klass)          (GTK_CHECK_CLASS_CAST ((klass), XST_TYPE_SPIN_BUTTON, XstSpinButtonClass))
 #define XST_IS_SPIN_BUTTON(obj)               (GTK_CHECK_TYPE ((obj), XST_TYPE_SPIN_BUTTON))
-#define XST_IS_SPIN_BUTTON_CLASS(klass)       (GTK_CHECK_CLASS_TYPE ((klass), XST_TYPE_SPIN_BUTTON))
+#define XST_IS_SPIN_BUTTON_CLASS(klass)       (XST_CHECK_CLASS_TYPE ((klass), XST_TYPE_SPIN_BUTTON))
 
 
 typedef enum
@@ -65,10 +62,8 @@ typedef enum
   XST_SPIN_USER_DEFINED
 } XstSpinType;
 
-
 typedef struct _XstSpinButton	    XstSpinButton;
 typedef struct _XstSpinButtonClass  XstSpinButtonClass;
-
 
 struct _XstSpinButton
 {
@@ -103,15 +98,14 @@ struct _XstSpinButtonClass
   GtkEntryClass parent_class;
 };
 
-
 GtkType		xst_spin_button_get_type	   (void);
-
 void		xst_spin_button_configure	   (XstSpinButton  *spin_button,
 						    GtkAdjustment  *adjustment,
 						    gfloat	    climb_rate,
 						    guint	    digits);
 
-GtkWidget*	xst_spin_button_new		   (GtkAdjustment  *adjustment,
+GtkWidget*	xst_spin_button_new                (void);
+GtkWidget*	xst_spin_button_new_full	   (GtkAdjustment  *adjustment,
 						    gfloat	    climb_rate,
 						    guint	    digits);
 
@@ -152,9 +146,6 @@ void            xst_spin_button_update             (XstSpinButton  *spin_button)
 
 
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
-
+END_GNOME_DECLS
 
 #endif /* __XST_SPIN_BUTTON_H__ */

@@ -10,9 +10,28 @@ typedef struct _XstTimeToolClass XstTimeToolClass;
 struct _XstTimeTool {
 	XstTool tool;
 
+	gboolean running;
+	gboolean ticking;
+	
+	guint timeout;
+
 	GtkWidget *seconds;
 	GtkWidget *minutes;
 	GtkWidget *hours;
+
+	gint sec;
+	gint min;
+	gint hrs;
+
+#if 0	
+	gint delta_sec;
+	gint delta_min;
+	gint delta_hrs;
+#endif	
+
+	gboolean editing_sec;
+	gboolean editing_min;
+	gboolean editing_hrs;
 };
 
 struct _XstTimeToolClass {
@@ -20,3 +39,8 @@ struct _XstTimeToolClass {
 };
 
 GtkType xst_time_tool_get_type (void);
+void    xst_time_update (XstTimeTool *tool);
+
+void xst_time_clock_stop  (XstTimeTool *tool);
+void xst_time_clock_start (XstTimeTool *tool);
+

@@ -358,16 +358,21 @@ transfer_time_gui_to_system (XstTool *xst_tool)
 
 	gtk_calendar_get_date (GTK_CALENDAR (calendar_widget), &year, &month, &day);
 
+	g_print ("Transfering gui to system %d\"%d'%d\n",
+		 tool->hrs, tool->min, tool->sec);
+	
 	tm.tm_year  = year - 1900;
 	tm.tm_mon   = month;
 	tm.tm_mday  = day;
-	tm.tm_hour  = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool->hours));
-	tm.tm_min   = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool->minutes));
-	tm.tm_sec   = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool->seconds));
+	tm.tm_hour  = tool->hrs;
+	tm.tm_min   = tool->min;
+	tm.tm_sec   = tool->sec;
 	tm.tm_isdst = -1;  /* FIXME: Is this right? */
 
 	tv.tv_sec = mktime (&tm);
 	settimeofday (&tv, NULL);
+
+	xst_time_clock_start (tool);
 }
 
 
@@ -386,9 +391,12 @@ transfer_time_system_to_gui (XstTool *xst_tool)
 
 	gtk_calendar_select_month (GTK_CALENDAR (calendar_widget), tm->tm_mon, tm->tm_year + 1900);
 	gtk_calendar_select_day   (GTK_CALENDAR (calendar_widget), tm->tm_mday);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->hours),   (gfloat) tm->tm_hour);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->minutes), (gfloat) tm->tm_min);
-	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->seconds), (gfloat) tm->tm_sec);
+
+	tool->hrs = tm->tm_hour;
+	tool->min = tm->tm_min;
+	tool->sec = tm->tm_sec;
+	
+	xst_time_update (tool);
 }
 
 static void

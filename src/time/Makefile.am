@@ -15,6 +15,7 @@ sbin_PROGRAMS = time-admin
 
 time_admin_SOURCES = \
 	main.c            time-tool.h \
+	xst-spin-button.c xst-spin-button.h \
 	tz.c              tz.h \
 	tz-map.c          tz-map.h \
 	timeserv.c        timeserv.h \
