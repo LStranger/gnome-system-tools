@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-07 17:31+0900\n"
-"PO-Revision-Date: 2004-02-07 17:31+0900\n"
+"POT-Creation-Date: 2004-03-30 01:02+0900\n"
+"PO-Revision-Date: 2004-03-30 01:00+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translations@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -227,7 +227,7 @@ msgid "Finished"
 msgstr "完了です"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
-#: src/network/connection.c:1843
+#: src/network/connection.c:1858
 msgid "Manual"
 msgstr "手動"
 
@@ -514,7 +514,7 @@ msgstr "全てのユーザに活性化の権限を与える(_U)"
 msgid "Auto"
 msgstr "自動"
 
-#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1860
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -547,7 +547,7 @@ msgstr "新しいネットワーク接続の作成"
 msgid "Current network profile:"
 msgstr "現在使用中のプロファイル:"
 
-#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1859
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -949,10 +949,14 @@ msgid "Use this tool to specify which services to run"
 msgstr "このツールを使って、起動するサービスを指定します。"
 
 #: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "起動する順番(_O):"
+
+#: interfaces/services.glade.in.h:11
 msgid "_Start"
 msgstr "起動(_S)"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:12
 msgid "_Startup sequence:"
 msgstr "起動する順番(_S):"
 
@@ -1340,7 +1344,7 @@ msgstr "無効なルートデバイスです: '%s'"
 msgid "_Module path:"
 msgstr "モデムのパス(_M):"
 
-#: src/boot/boot-settings.c:360 src/users/user-settings.c:502
+#: src/boot/boot-settings.c:360 src/users/user-settings.c:472
 msgid "Password confirmation isn't correct."
 msgstr "正しいパスワードを確認できませんでした。"
 
@@ -1360,7 +1364,7 @@ msgstr "Boot イメージ・エディタ"
 msgid "Boot Append Editor"
 msgstr "起動オプション エディタ"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1368,12 +1372,12 @@ msgstr ""
 "Boot イメージが最低でも一つないと\n"
 "システムを起動できません。\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "'%s' を本当に削除してもよろしいですか？"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -1390,7 +1394,7 @@ msgstr "名前"
 msgid "Default"
 msgstr "デフォルト"
 
-#: src/boot/table.c:43 src/network/connection.c:479
+#: src/boot/table.c:43 src/network/connection.c:485
 msgid "Type"
 msgstr "種類"
 
@@ -1398,7 +1402,7 @@ msgstr "種類"
 msgid "Kernel Image"
 msgstr "Kernel イメージ"
 
-#: src/boot/table.c:45 src/network/connection.c:495
+#: src/boot/table.c:45 src/network/connection.c:501
 msgid "Device"
 msgstr "デバイス"
 
@@ -1417,16 +1421,21 @@ msgid "/_Delete"
 msgstr "/削除(_D)"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "コンピュータへ接続できませんでした。"
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "入力したパスワードは無効です。"
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr "\"%s\" を実行できませんでした。実行権限があるか確認して下さい。"
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "予期しないエラーが発生しました。"
 
@@ -1473,7 +1482,7 @@ msgstr ""
 "バックエンド・スクリプトの実行中にエラー発生しました。\n"
 "設定は読み込まれませんでした。"
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1483,7 +1492,7 @@ msgstr ""
 "版\n"
 "バージョン %s へようこそ</span>"
 
-#: src/common/gst-tool.c:1513
+#: src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1497,15 +1506,15 @@ msgstr ""
 "するかもしれません。ちゃんと警告しましたよ。そして、GNOME システム・ツールの"
 "プレリリース版のご試用に感謝します！"
 
-#: src/common/gst-tool.c:1534
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "警告"
 
-#: src/common/gst-tool.c:1554
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "次回からこの警告を表示しない"
 
-#: src/common/gst-tool.c:1628
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "GNOME システム・ツール"
 
@@ -1567,7 +1576,7 @@ msgstr ""
 "デフォルトのゲートウェイ・デバイスが有効ではありません。よって、インターネッ"
 "トへの接続ができません。続行してもよろしいですか？"
 
-#: src/network/callbacks.c:679
+#: src/network/callbacks.c:675
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1575,7 +1584,7 @@ msgstr ""
 "デフォルトのゲートウェイ・デバイスにゲートウェイ情報がありません。機能させる"
 "場合はこの情報を提供するか、他のデバイスを選択して下さい。"
 
-#: src/network/callbacks.c:725
+#: src/network/callbacks.c:721
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1585,17 +1594,17 @@ msgstr ""
 "ことになります。この問題を回避するために、RPM パッケージ `redhat-config-"
 "network` をインストールして下さい。"
 
-#: src/network/callbacks.c:762
+#: src/network/callbacks.c:758
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "インターフェース %s を有効にしますか？"
 
-#: src/network/callbacks.c:772
+#: src/network/callbacks.c:768
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "インターフェース %s を無効にしますか？"
 
-#: src/network/callbacks.c:859
+#: src/network/callbacks.c:855
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1603,19 +1612,19 @@ msgstr ""
 "モデム・デバイスを自動検出できませんでした。モデムがビジー状態でないか、また"
 "は正しく接続されているかを確認して下さい。"
 
-#: src/network/callbacks.c:911
+#: src/network/callbacks.c:907
 msgid "Silent"
 msgstr "無音"
 
-#: src/network/callbacks.c:913
+#: src/network/callbacks.c:909
 msgid "Low"
 msgstr "低"
 
-#: src/network/callbacks.c:915
+#: src/network/callbacks.c:911
 msgid "Medium"
 msgstr "中"
 
-#: src/network/callbacks.c:917
+#: src/network/callbacks.c:913
 msgid "Loud"
 msgstr "大"
 
@@ -1655,15 +1664,15 @@ msgstr "不明なインターフェース"
 msgid "/_Configure"
 msgstr "/設定(_C)"
 
-#: src/network/connection.c:507
+#: src/network/connection.c:513
 msgid "Status"
 msgstr "状態"
 
-#: src/network/connection.c:516 src/network/profiles-table.c:62
+#: src/network/connection.c:522 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "詳細"
 
-#: src/network/connection.c:1707
+#: src/network/connection.c:1722
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1671,7 +1680,7 @@ msgstr ""
 "インタフェースに対する IP アドレスまたはネットマスクが空のままです。続行する"
 "場合は、このフィールドに正しい IP アドレスを入力して下さい。"
 
-#: src/network/connection.c:1714
+#: src/network/connection.c:1729
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1679,7 +1688,7 @@ msgstr ""
 "インタフェースに対する IP アドレスまたはリモート・アドレスが空のままです。続"
 "行する場合は、このフィールドに正しい IP アドレスを入力して下さい。"
 
-#: src/network/connection.c:1720
+#: src/network/connection.c:1735
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1689,7 +1698,7 @@ msgstr ""
 "アドレスが空のままです。プライマリ DNS の IP アドレスを入力するか、手動設定の"
 "オプションを無効にして下さい。"
 
-#: src/network/connection.c:1726
+#: src/network/connection.c:1741
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1697,7 +1706,7 @@ msgstr ""
 "モデム・デバイスに対する接続が空のままです。続行する場合は、デバイス名を入力"
 "するか [自動検出] をクリックして下さい。"
 
-#: src/network/connection.c:1731
+#: src/network/connection.c:1746
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1705,10 +1714,14 @@ msgstr ""
 "接続する電話番号が空のままです。続行する場合は、このフィールドに正しい電話番"
 "号を入力して下さい。"
 
-#: src/network/connection.c:2082
+#: src/network/connection.c:2108
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "インタフェース %s は存在しません。"
+
+#: src/network/connection.c:2110
+msgid " The loopback interface cannot be configured."
+msgstr "ループバック・インタフェースを設定できません。"
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1784,24 +1797,24 @@ msgstr "プロファイル名:"
 msgid "No description available."
 msgstr "説明がありません"
 
-#: src/services/callbacks.c:247
+#: src/services/callbacks.c:250
 msgid "Running"
 msgstr "起動中"
 
-#: src/services/callbacks.c:251
+#: src/services/callbacks.c:254
 msgid "Stopped"
 msgstr "停止中"
 
-#: src/services/callbacks.c:256
+#: src/services/callbacks.c:259
 msgid "Could not get info"
 msgstr "情報を取得できませんでした"
 
-#: src/services/callbacks.c:322
+#: src/services/callbacks.c:325
 #, c-format
 msgid "Settings for service %s"
 msgstr "サービス %s の設定"
 
-#: src/services/main.c:58
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "サービスの設定"
 
@@ -1813,7 +1826,7 @@ msgstr "システムの起動時に実行するサービスを設定します"
 msgid "Services"
 msgstr "サービスの管理"
 
-#: src/services/table.c:78
+#: src/services/table.c:79
 msgid "Active"
 msgstr "有効"
 
@@ -1849,53 +1862,53 @@ msgstr "システム時刻や日付、タイムゾーンを管理します"
 msgid "Time and Date"
 msgstr "時刻と日付の設定"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "新しいプロファイルの作成"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 #, c-format
 msgid "Settings for profile %s"
 msgstr "プロファイル %s の設定"
 
-#: src/users/group-settings.c:111
+#: src/users/group-settings.c:89
 msgid "Create New Group"
 msgstr "新しいグループの作成"
 
-#: src/users/group-settings.c:165 src/users/user-settings.c:457
+#: src/users/group-settings.c:143 src/users/user-settings.c:427
 msgid "User id must be a positive number."
 msgstr "ユーザ ID は正の整数にして下さい。"
 
-#: src/users/group-settings.c:169
+#: src/users/group-settings.c:147
 msgid "Such group id already exists."
 msgstr "そのグループは既に存在します。"
 
-#: src/users/group-settings.c:191
+#: src/users/group-settings.c:169
 msgid "Group name is empty."
 msgstr "グループ名が空です。"
 
-#: src/users/group-settings.c:195
+#: src/users/group-settings.c:173
 msgid "The group name is too long."
 msgstr "グループ名が長すぎます。"
 
-#: src/users/group-settings.c:199
+#: src/users/group-settings.c:177
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "小文字のみ使って、正しいグループ名を設定して下さい。"
 
-#: src/users/group-settings.c:203
+#: src/users/group-settings.c:181
 msgid "Group already exists."
 msgstr "グループは既に存在します。"
 
-#: src/users/group-settings.c:272
+#: src/users/group-settings.c:250
 msgid "The root group must not be deleted."
 msgstr "root ユーザは削除できません。"
 
-#: src/users/group-settings.c:279
+#: src/users/group-settings.c:257
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "グループ %s を本当に削除してもよろしいですか？"
 
-#: src/users/group-settings.c:342
+#: src/users/group-settings.c:314
 #, c-format
 msgid "Settings for Group %s"
 msgstr "グループ %s の設定"
@@ -1995,38 +2008,38 @@ msgstr "/ユーザの追加(_A)..."
 msgid "/_Add group ..."
 msgstr "/グループの追加(_A)..."
 
-#: src/users/user-settings.c:120
+#: src/users/user-settings.c:104
 msgid "The root user must not be deleted."
 msgstr "root ユーザは削除できません."
 
-#: src/users/user-settings.c:127
+#: src/users/user-settings.c:111
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "本当にユーザ %s を削除してもよろしいですか？"
 
-#: src/users/user-settings.c:208
+#: src/users/user-settings.c:191
 msgid "User Account Editor"
 msgstr "ユーザ・アカウント・エディタ"
 
-#: src/users/user-settings.c:335
+#: src/users/user-settings.c:305
 msgid "The username is empty."
 msgstr "ユーザ名が空です。"
 
-#: src/users/user-settings.c:343
+#: src/users/user-settings.c:313
 msgid "The username is too long."
 msgstr "ユーザ名が長すぎます。"
 
-#: src/users/user-settings.c:347
+#: src/users/user-settings.c:317
 msgid "root username shouldn't be modified."
 msgstr "root のユーザ名を変更しないで下さい。"
 
-#: src/users/user-settings.c:351
+#: src/users/user-settings.c:321
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "小文字と数値に続く小文字からなる正しいユーザ名をセットして下さい。"
 
-#: src/users/user-settings.c:355
+#: src/users/user-settings.c:325
 #, c-format
 msgid ""
 "Username \"%s\" already exists.\n"
@@ -2037,40 +2050,40 @@ msgstr ""
 "\n"
 "他のユーザ名を選択して下さい。"
 
-#: src/users/user-settings.c:377
+#: src/users/user-settings.c:347
 #, c-format
 msgid "Invalid character '%c' in comment."
 msgstr "コメントに無効な文字 '%c' があります。"
 
-#: src/users/user-settings.c:423
+#: src/users/user-settings.c:393
 msgid "Home directory must not be empty."
 msgstr "ホーム・フォルダは空欄にしないで下さい。"
 
-#: src/users/user-settings.c:426
+#: src/users/user-settings.c:396
 msgid "Please enter full path for home directory."
 msgstr "ホーム・フォルダの絶対パスを入力して下さい。"
 
-#: src/users/user-settings.c:429
+#: src/users/user-settings.c:399
 msgid "root home shouldn't be modified."
 msgstr "root のホーム・フォルダは変更しないで下さい。"
 
-#: src/users/user-settings.c:459
+#: src/users/user-settings.c:429
 msgid "root uid shouldn't be modified."
 msgstr "root の UID は変更しないで下さい。"
 
-#: src/users/user-settings.c:461
+#: src/users/user-settings.c:431
 msgid "Such user id already exists."
 msgstr "そのユーザは既に存在します。"
 
-#: src/users/user-settings.c:481
+#: src/users/user-settings.c:451
 msgid "Please give shell with full path."
 msgstr "Login シェルの絶対パスを入力して下さい。"
 
-#: src/users/user-settings.c:499
+#: src/users/user-settings.c:469
 msgid "Password must not be empty."
 msgstr "パスワードは空欄にしないで下さい。"
 
-#: src/users/user-settings.c:778
+#: src/users/user-settings.c:746
 #, c-format
 msgid "Settings for User %s"
 msgstr "ユーザ %s の設定"
