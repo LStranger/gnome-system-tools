@@ -25,4 +25,4 @@ users.glade.h
 CLEANFILES = $(interfaces)
 
 $(interfaces): %.glade: %.glade.in
-	sed 's#<pixmaps_directory>.*</pixmaps_directory>#<pixmaps_directory>'$(pixmapsdir)'</pixmaps_directory>#' < $< > $@
+	./fix.pl $(pixmapsdir) < $< > $@
