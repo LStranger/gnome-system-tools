@@ -109,6 +109,7 @@ profile_save_interfaces (xmlNodePtr source, xmlNodePtr dest)
 		"debug",
 		"dev",
 		"enabled",
+		"essid",
 		"file",
 		"gateway",
 		"name",
