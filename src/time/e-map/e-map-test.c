@@ -3,16 +3,18 @@
 
 GtkWidget *window, *scroll;
 EMap *map;
-EMapPoint *point, *highlight_point = NULL;
+EMapPoint *point = NULL, *highlight_point = NULL;
 int id;
 
 
 static gint flash(gpointer data)
 {
+	if (!point) return TRUE;
+
 	if (e_map_point_get_color_rgba (point) == 0xf010d0ff)
-	  e_map_point_set_color_rgba (map, point, 0x000000ff);
+		e_map_point_set_color_rgba (map, point, 0x000000ff);
 	else
-	  e_map_point_set_color_rgba (map, point, 0xf010d0ff);
+		e_map_point_set_color_rgba (map, point, 0xf010d0ff);
 	
 	return(TRUE);
 }
@@ -26,13 +28,13 @@ gboolean motion (GtkWidget *widget, GdkEventMotion *event, gpointer user_data)
 			       &longitude, &latitude);
 
 	if (highlight_point && highlight_point != point)
-	  e_map_point_set_color_rgba (map, highlight_point, 0xf010d0ff);
+		e_map_point_set_color_rgba (map, highlight_point, 0xf010d0ff);
 
 	highlight_point =
-	  e_map_get_closest_point (map, longitude, latitude, TRUE);
+		e_map_get_closest_point (map, longitude, latitude, TRUE);
 	
-	if (highlight_point != point)
-	  e_map_point_set_color_rgba (map, highlight_point, 0xffff60ff);
+	if (highlight_point && highlight_point != point)
+		e_map_point_set_color_rgba (map, highlight_point, 0xffff60ff);
 
 	return(TRUE);
 }
@@ -50,7 +52,8 @@ gboolean button_pressed (GtkWidget *w, GdkEventButton *event, gpointer data)
 	else if (e_map_get_magnification (map) <= 1.0)
 		e_map_zoom_to_location (map, longitude, latitude);
 
-	e_map_point_set_color_rgba (map, point, 0xf010d0ff);
+	if (point) e_map_point_set_color_rgba (map, point, 0xf010d0ff);
+
 	point = highlight_point;
 	
 	return TRUE;

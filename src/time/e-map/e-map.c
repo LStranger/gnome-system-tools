@@ -111,6 +111,8 @@ static void e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj
 static void update_render_pixbuf (EMap *map, ArtFilterLevel interp, gboolean render_overlays);
 static void set_scroll_area (EMap *view);
 static void request_paint_area (EMap *view, GdkRectangle *area);
+static void center_at (EMap *map, int x, int y, gboolean scroll);
+static void smooth_center_at (EMap *map, int x, int y);
 static void scroll_to (EMap *view, int x, int y);
 static void zoom_do (EMap *map);
 static gint load_map_background (EMap *view, gchar *name);
@@ -1044,10 +1046,6 @@ update_render_pixbuf (EMap *map, ArtFilterLevel interp, gboolean render_overlays
 	priv->map_render_pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE,	/* No alpha */
 						  8, width, height);
 
-	/* Compute image offsets with respect to window */
-
-	set_scroll_area (map);
-
 	/* Scale the original map into the rendering pixbuf */
 
 	gdk_pixbuf_scale (priv->map_pixbuf, priv->map_render_pixbuf, 0, 0,	/* Dest (x, y) */
@@ -1065,6 +1063,10 @@ update_render_pixbuf (EMap *map, ArtFilterLevel interp, gboolean render_overlays
 			update_render_point (map, point);
 		}
 	}
+
+	/* Compute image offsets with respect to window */
+
+	set_scroll_area (map);
 }
 
 
@@ -1092,8 +1094,9 @@ request_paint_area (EMap *view, GdkRectangle *area)
 
 	if (priv->yofs + height > gdk_pixbuf_get_height (priv->map_render_pixbuf))
 		height = gdk_pixbuf_get_height (priv->map_render_pixbuf) - priv->yofs;
-
-	/* Short-circuit the fast case to avoid a memcpy() */
+  
+	/* We rely on the fast case always being the case, since we load and
+   * preprocess the source pixbuf ourselves */
 
 	if (gdk_pixbuf_get_colorspace (priv->map_render_pixbuf) == GDK_COLORSPACE_RGB && !gdk_pixbuf_get_has_alpha (priv->map_render_pixbuf) &&
 	    gdk_pixbuf_get_bits_per_sample (priv->map_render_pixbuf) == 8)
@@ -1177,6 +1180,64 @@ repaint_point (EMap *map, EMapPoint *point)
 	area.width = 5;
 	area.height = 5;
 	request_paint_area (map, &area);
+}
+
+
+static void
+center_at (EMap *map, int x, int y, gboolean scroll)
+{
+	EMapPrivate *priv;
+	int pb_width, pb_height,
+	    view_width, view_height;
+
+	priv = map->priv;
+
+	pb_width = E_MAP_GET_WIDTH (map);
+	pb_height = E_MAP_GET_HEIGHT (map);
+
+	view_width = GTK_WIDGET (map)->allocation.width;
+	view_height = GTK_WIDGET (map)->allocation.height;
+
+	x = CLAMP (x - (view_width / 2), 0, pb_width - view_width);
+	y = CLAMP (y - (view_height / 2), 0, pb_height - view_height);
+
+	if (scroll) scroll_to (map, x, y);
+	else
+	{
+		priv->xofs = x;
+		priv->yofs = y;
+	}
+}
+
+
+static void
+smooth_center_at (EMap *map, int x, int y)
+{
+	EMapPrivate *priv;
+	int pb_width, pb_height,
+	    view_width, view_height;
+	int dx, dy;
+
+	priv = map->priv;
+
+	pb_width = E_MAP_GET_WIDTH (map);
+	pb_height = E_MAP_GET_HEIGHT (map);
+
+	view_width = GTK_WIDGET (map)->allocation.width;
+	view_height = GTK_WIDGET (map)->allocation.height;
+
+	x = CLAMP (x - (view_width / 2), 0, pb_width - view_width);
+	y = CLAMP (y - (view_height / 2), 0, pb_height - view_height);
+
+	for (;;)
+	{
+		if (priv->xofs == x && priv->yofs == y) break;
+
+		dx = (x < priv->xofs) ? -1 : (x > priv->xofs) ? 1 : 0;
+		dy = (y < priv->yofs) ? -1 : (y > priv->yofs) ? 1 : 0;
+    
+		scroll_to (map, priv->xofs + dx, priv->yofs + dy);
+	}
 }
 
 
@@ -1271,11 +1332,13 @@ scroll_to (EMap *view, int x, int y)
 	while ((event = gdk_event_get_graphics_expose (window)) != NULL)
 	{
 		gtk_widget_event (GTK_WIDGET (view), event);
+
 		if (event->expose.count == 0)
 		{
 			gdk_event_free (event);
 			break;
 		}
+
 		gdk_event_free (event);
 	}
 }
@@ -1504,6 +1567,7 @@ blowup_window_area (GdkWindow *window, gint area_x, gint area_y, gint target_x, 
 static void
 zoom_in_smooth (EMap *map)
 {
+	GdkRectangle area;
 	EMapPrivate *priv;
 	GdkWindow *window;
 	int width, height;
@@ -1514,6 +1578,11 @@ zoom_in_smooth (EMap *map)
 	g_return_if_fail (map);
 	g_return_if_fail (GTK_WIDGET_REALIZED (GTK_WIDGET (map)));
 
+	area.x = 0;
+	area.y = 0;
+	area.width = GTK_WIDGET (map)->allocation.width;
+	area.height = GTK_WIDGET (map)->allocation.height;
+
 	priv = map->priv;
 	window = GTK_WIDGET (map)->window;
 	width = gdk_pixbuf_get_width (priv->map_render_pixbuf);
@@ -1523,15 +1592,38 @@ zoom_in_smooth (EMap *map)
 	target_width = win_width / 4;
 	target_height = win_height / 4;
 
-#if 0
-	scroll_to (map, x, y);
-#endif
-
-	update_render_pixbuf (map, GDK_INTERP_BILINEAR, FALSE);
-	repaint_visible (map);
+	/* Center the target point as much as possible */
+  
 	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
+	smooth_center_at (map, x + priv->xofs, y + priv->yofs);
 
+	/* Render and paint a temporary map without overlays, so they don't get in
+	 * the way (look ugly) while zooming */
+  
+	update_render_pixbuf (map, GDK_INTERP_BILINEAR, FALSE);
+	request_paint_area (map, &area);
+  
+	/* Find out where in the area we're going to zoom to */
+
+	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
+  
+	/* Pre-render the zoomed-in map, so we can put it there quickly when the
+	 * blowup sequence ends */
+  
+	priv->zoom_state = E_MAP_ZOOMED_IN;
+	update_render_pixbuf (map, GDK_INTERP_BILINEAR, TRUE);
+  
+	/* Do the blowup */
+  
 	blowup_window_area (window, priv->xofs, priv->yofs, x, y, width, height, 1.68);
+
+	/* Set new scroll offsets and paint the zoomed map */
+  
+	e_map_world_to_window (map, priv->zoom_target_long, priv->zoom_target_lat, &x, &y);
+	priv->xofs = CLAMP (priv->xofs + x - area.width / 2.0, 0, E_MAP_GET_WIDTH (map) - area.width);
+	priv->yofs = CLAMP (priv->yofs + y - area.height / 2.0, 0, E_MAP_GET_HEIGHT (map) - area.height);
+
+	request_paint_area (map, &area);
 }
 
 
@@ -1566,6 +1658,8 @@ zoom_out (EMap *map)
 {
 	GdkRectangle area;
 	EMapPrivate *priv;
+	double longitude, latitude;
+	double x, y;
 
 	priv = map->priv;
 
@@ -1576,13 +1670,16 @@ zoom_out (EMap *map)
 
 	/* Must be done before update_render_pixbuf() */
 
-	priv->xofs /= 2;
-	priv->yofs /= 2;
+	e_map_window_to_world (map, area.width / 2, area.height / 2,
+			       &longitude, &latitude);
 
 	priv->zoom_state = E_MAP_ZOOMED_OUT;
 	update_render_pixbuf (map, GDK_INTERP_BILINEAR, TRUE);
 
-	request_paint_area (map, &area);
+	e_map_world_to_window (map, longitude, latitude, &x, &y);
+	center_at (map, x + priv->xofs, y + priv->yofs, FALSE);
+/*	request_paint_area (map, &area); */
+	repaint_visible (map);
 }
 
 
@@ -1599,7 +1696,7 @@ zoom_do (EMap *map)
 	if (priv->zoom_state == E_MAP_ZOOMING_IN)
 	{
 		if (e_map_get_smooth_zoom (map)) zoom_in_smooth (map);
-		zoom_in (map);
+		else zoom_in (map);
 	}
 	else if (priv->zoom_state == E_MAP_ZOOMING_OUT)
 	{
