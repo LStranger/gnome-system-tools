@@ -26,6 +26,12 @@
     <handler>on_nameresolution_admin_delete_event</handler>
     <last_modification_time>Thu, 14 Dec 2000 01:20:34 GMT</last_modification_time>
   </signal>
+  <signal>
+    <name>show</name>
+    <handler>on_nameresolution_admin_show</handler>
+    <after>True</after>
+    <last_modification_time>Mon, 18 Dec 2000 18:05:47 GMT</last_modification_time>
+  </signal>
   <title>Name Resolution Administration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -63,7 +69,6 @@
 	<signal>
 	  <name>switch_page</name>
 	  <handler>on_nameresolution_notebook_switch_page</handler>
-	  <after>True</after>
 	  <last_modification_time>Sat, 16 Dec 2000 07:40:49 GMT</last_modification_time>
 	</signal>
 	<show_tabs>True</show_tabs>
@@ -593,43 +598,6 @@
 		<column_spacing>8</column_spacing>
 
 		<widget>
-		  <class>GtkFrame</class>
-		  <name>frame1</name>
-		  <label_xalign>0</label_xalign>
-		  <shadow_type>GTK_SHADOW_IN</shadow_type>
-		  <child>
-		    <left_attach>1</left_attach>
-		    <right_attach>2</right_attach>
-		    <top_attach>2</top_attach>
-		    <bottom_attach>3</bottom_attach>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		    <xexpand>False</xexpand>
-		    <yexpand>True</yexpand>
-		    <xshrink>False</xshrink>
-		    <yshrink>False</yshrink>
-		    <xfill>True</xfill>
-		    <yfill>True</yfill>
-		  </child>
-
-		  <widget>
-		    <class>GtkList</class>
-		    <name>dns_list</name>
-		    <signal>
-		      <name>select_child</name>
-		      <handler>on_dns_list_select_child</handler>
-		      <last_modification_time>Wed, 17 May 2000 23:04:21 GMT</last_modification_time>
-		    </signal>
-		    <signal>
-		      <name>unselect_child</name>
-		      <handler>on_dns_list_unselect_child</handler>
-		      <last_modification_time>Wed, 17 May 2000 23:04:27 GMT</last_modification_time>
-		    </signal>
-		    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-		  </widget>
-		</widget>
-
-		<widget>
 		  <class>GtkEntry</class>
 		  <name>dns_ip</name>
 		  <can_focus>True</can_focus>
@@ -642,11 +610,6 @@
 		    <name>activate</name>
 		    <handler>tool_modified_cb</handler>
 		    <last_modification_time>Wed, 29 Nov 2000 03:24:41 GMT</last_modification_time>
-		  </signal>
-		  <signal>
-		    <name>changed</name>
-		    <handler>on_dns_ip_changed</handler>
-		    <last_modification_time>Thu, 14 Dec 2000 06:05:31 GMT</last_modification_time>
 		  </signal>
 		  <editable>True</editable>
 		  <text_visible>True</text_visible>
@@ -815,6 +778,51 @@
 		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
+
+		<widget>
+		  <class>GtkScrolledWindow</class>
+		  <name>dns_sw</name>
+		  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+		  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+		  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+		  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+		  <child>
+		    <left_attach>1</left_attach>
+		    <right_attach>2</right_attach>
+		    <top_attach>2</top_attach>
+		    <bottom_attach>3</bottom_attach>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		    <xexpand>False</xexpand>
+		    <yexpand>False</yexpand>
+		    <xshrink>False</xshrink>
+		    <yshrink>False</yshrink>
+		    <xfill>True</xfill>
+		    <yfill>True</yfill>
+		  </child>
+
+		  <widget>
+		    <class>GtkViewport</class>
+		    <name>viewport2</name>
+		    <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+		    <widget>
+		      <class>GtkList</class>
+		      <name>dns_list</name>
+		      <signal>
+			<name>select_child</name>
+			<handler>on_dns_list_select_child</handler>
+			<last_modification_time>Wed, 17 May 2000 23:04:21 GMT</last_modification_time>
+		      </signal>
+		      <signal>
+			<name>unselect_child</name>
+			<handler>on_dns_list_unselect_child</handler>
+			<last_modification_time>Wed, 17 May 2000 23:04:27 GMT</last_modification_time>
+		      </signal>
+		      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		    </widget>
+		  </widget>
+		</widget>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -918,43 +926,6 @@
 	      </child>
 
 	      <widget>
-		<class>GtkFrame</class>
-		<name>frame3</name>
-		<label_xalign>0</label_xalign>
-		<shadow_type>GTK_SHADOW_IN</shadow_type>
-		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
-		  <top_attach>2</top_attach>
-		  <bottom_attach>3</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>True</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>True</yfill>
-		</child>
-
-		<widget>
-		  <class>GtkList</class>
-		  <name>searchdomain_list</name>
-		  <signal>
-		    <name>select_child</name>
-		    <handler>on_searchdomain_list_select_child</handler>
-		    <last_modification_time>Wed, 17 May 2000 23:05:24 GMT</last_modification_time>
-		  </signal>
-		  <signal>
-		    <name>unselect_child</name>
-		    <handler>on_searchdomain_list_unselect_child</handler>
-		    <last_modification_time>Wed, 17 May 2000 23:05:30 GMT</last_modification_time>
-		  </signal>
-		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-		</widget>
-	      </widget>
-
-	      <widget>
 		<class>GtkButton</class>
 		<name>searchdomain_add</name>
 		<width>70</width>
@@ -1001,11 +972,6 @@
 		  <name>activate</name>
 		  <handler>tool_modified_cb</handler>
 		  <last_modification_time>Tue, 22 Aug 2000 08:02:21 GMT</last_modification_time>
-		</signal>
-		<signal>
-		  <name>changed</name>
-		  <handler>on_searchdomain_changed</handler>
-		  <last_modification_time>Thu, 14 Dec 2000 06:05:40 GMT</last_modification_time>
 		</signal>
 		<editable>True</editable>
 		<text_visible>True</text_visible>
@@ -1189,6 +1155,51 @@
 		  <xfill>True</xfill>
 		  <yfill>False</yfill>
 		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkScrolledWindow</class>
+		<name>searchdomain_sw</name>
+		<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+		<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+		<child>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>2</top_attach>
+		  <bottom_attach>3</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>True</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>True</yfill>
+		</child>
+
+		<widget>
+		  <class>GtkViewport</class>
+		  <name>viewport3</name>
+		  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+		  <widget>
+		    <class>GtkList</class>
+		    <name>searchdomain_list</name>
+		    <signal>
+		      <name>select_child</name>
+		      <handler>on_searchdomain_list_select_child</handler>
+		      <last_modification_time>Wed, 17 May 2000 23:05:24 GMT</last_modification_time>
+		    </signal>
+		    <signal>
+		      <name>unselect_child</name>
+		      <handler>on_searchdomain_list_unselect_child</handler>
+		      <last_modification_time>Wed, 17 May 2000 23:05:30 GMT</last_modification_time>
+		    </signal>
+		    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		  </widget>
+		</widget>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -1607,8 +1618,13 @@
 
 <widget>
   <class>GnomeDialog</class>
-  <name>aliases_dialog</name>
+  <name>aliases_settings_dialog</name>
   <visible>False</visible>
+  <signal>
+    <name>delete_event</name>
+    <handler>on_aliases_settings_dialog_delete_event</handler>
+    <last_modification_time>Mon, 18 Dec 2000 21:25:54 GMT</last_modification_time>
+  </signal>
   <title>Aliases Settings</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1827,11 +1843,6 @@
 	      <handler>on_aliases_settings_new_activate</handler>
 	      <last_modification_time>Wed, 29 Nov 2000 07:37:24 GMT</last_modification_time>
 	    </signal>
-	    <signal>
-	      <name>changed</name>
-	      <handler>on_aliases_settings_new_changed</handler>
-	      <last_modification_time>Thu, 14 Dec 2000 06:06:22 GMT</last_modification_time>
-	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -1925,7 +1936,7 @@
 
 	  <widget>
 	    <class>GtkScrolledWindow</class>
-	    <name>scrolledwindow2</name>
+	    <name>aliases_settings_sw</name>
 	    <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
 	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
 	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
@@ -1946,31 +1957,24 @@
 	    </child>
 
 	    <widget>
-	      <class>GtkCList</class>
-	      <name>aliases_settings_list</name>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>select_row</name>
-		<handler>on_aliases_settings_list_select_row</handler>
-		<last_modification_time>Wed, 29 Nov 2000 07:38:05 GMT</last_modification_time>
-	      </signal>
-	      <columns>1</columns>
-	      <column_widths>80</column_widths>
-	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	      <show_titles>False</show_titles>
+	      <class>GtkViewport</class>
+	      <name>viewport1</name>
 	      <shadow_type>GTK_SHADOW_IN</shadow_type>
 
 	      <widget>
-		<class>GtkLabel</class>
-		<child_name>CList:title</child_name>
-		<name>label48</name>
-		<label>label48</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
+		<class>GtkList</class>
+		<name>aliases_settings_list</name>
+		<signal>
+		  <name>select_child</name>
+		  <handler>on_aliases_settings_list_select_child</handler>
+		  <last_modification_time>Mon, 18 Dec 2000 21:11:38 GMT</last_modification_time>
+		</signal>
+		<signal>
+		  <name>unselect_child</name>
+		  <handler>on_aliases_settings_list_unselect_child</handler>
+		  <last_modification_time>Mon, 18 Dec 2000 21:12:22 GMT</last_modification_time>
+		</signal>
+		<selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 	      </widget>
 	    </widget>
 	  </widget>

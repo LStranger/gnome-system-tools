@@ -48,4 +48,3 @@ gchar *s = N_("Add");
 gchar *s = N_("Delete");
 gchar *s = N_("Existing:");
 gchar *s = N_("New:");
-gchar *s = N_("label48");
