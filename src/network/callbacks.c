@@ -328,11 +328,16 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length,
 	
 	gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
 	if (s) {
+#warning FIXME
+#if 0	
 		gtk_signal_handler_block_by_func (GTK_OBJECT (editable),
 						  filter_editable, data);
+#endif	
 		gtk_editable_insert_text (editable, s, l, pos);
+#if 0	
 		gtk_signal_handler_unblock_by_func (GTK_OBJECT (editable),
 						    filter_editable, data);
+#endif	
 	}
 	return;
 
@@ -392,6 +397,9 @@ init_editable_filters (XstDialog *dialog)
 		{ "domain",      EF_ALLOW_TEXT },
 		{ NULL,          EF_ALLOW_NONE }
 	};
+
+#warning FIMXE
+	return;
 
 	for (i = 0; s[i].name; i++)
 		connect_editable_filter (xst_dialog_get_widget (dialog, s[i].name), s[i].rule);

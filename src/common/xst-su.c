@@ -243,8 +243,11 @@ xst_su_get_password (gchar **password)
 	g_assert (password_dialog);
 	g_assert (password_entry);
 
+#warning FIXME
+#if 0	
 	gnome_dialog_editable_enters (GNOME_DIALOG (password_dialog), GTK_EDITABLE (password_entry));
-
+#endif	
+	
 	result = gnome_dialog_run_and_close (GNOME_DIALOG (password_dialog));
 	if (result == 2 || result < 0)
 		return -1;  /* Cancel */

@@ -524,10 +524,10 @@ xst_dialog_connect_signals (XstDialog *dialog, XstDialogSignal *signals)
 
 	for (i=0; signals[i].widget; i++) {
 		w = xst_dialog_get_widget (dialog, signals[i].widget);
-		sig = gtk_signal_connect (GTK_OBJECT (w),
-					  signals[i].signal_name,
-					  signals[i].func,
-					  (gpointer)dialog);
+		sig = g_signal_connect (G_OBJECT (w),
+					signals[i].signal_name,
+					G_CALLBACK (signals[i].func),
+					(gpointer)dialog);
 		if (!sig)
 			g_error (_("Error connection signal `%s' in widget `%s'"),
 				 signals[i].signal_name, signals[i].widget);

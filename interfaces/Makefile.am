@@ -1,4 +1,4 @@
-	interfaces = \
+interfaces = \
 	common.glade					\
 	disks.glade 					\
 	dhcpd.glade					\

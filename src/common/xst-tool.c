@@ -1584,6 +1584,9 @@ try_show_usage_warning (void)
 		  "the Ximian Setup Tools!\n\n"
 		  "--\nThe Ximian Setup Tools team"), VERSION);
 
+#warning FIXME
+	return;
+	
 	key = g_strjoin ("/", XST_CONF_ROOT, "global", "previously-run-" VERSION, NULL);
 
 	value = gnome_config_get_bool (key);
@@ -1659,7 +1662,7 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 
 	glade_gnome_init ();
 #endif
-	program = gnome_program_init (app_name, VERSION,
+ 	program = gnome_program_init (app_name, VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
 				      GNOME_PARAM_POPT_TABLE, options,
 				      GNOME_PARAM_HUMAN_READABLE_NAME,

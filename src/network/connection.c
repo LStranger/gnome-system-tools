@@ -453,11 +453,14 @@ static void
 connection_init_clist (GtkWidget *clist)
 {
 	GtkStyle *style;
-	
+
+#warning FIXME
+#if 0	
 	gtk_clist_set_compare_func (GTK_CLIST (clist), connection_clist_cmp);
 	style = gtk_widget_get_style (clist);
 	gtk_clist_set_row_height (GTK_CLIST (clist), determine_row_height ());
 	gtk_clist_column_titles_passive (GTK_CLIST (clist));
+#endif	
 }
 
 extern void
@@ -890,7 +893,10 @@ connection_add_to_list_do (XstConnection *cxn, GtkWidget *clist)
 	g_return_if_fail (cxn != NULL);
 
 	row = gtk_clist_append (GTK_CLIST (clist), text);
+#warning FIXME	
+#if 0
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
+#endif	
 
 	style = gtk_widget_get_style (clist);
 	gtk_clist_set_shift (GTK_CLIST (clist), row, 0,
@@ -947,6 +953,9 @@ connection_update_complexity_basic (XstTool *tool)
 	
 	GList *l;
 	gint   i;
+	
+#warning FIXME
+	return;
 	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	l = NULL;

@@ -50,26 +50,38 @@ XstDialogSignal signals[] = {
 	{ "wins_ip",                 "changed",         xst_dialog_modify_cb },
 	{ "wins_use",                "toggled",         on_wins_use_toggled },
 	{ "wins_use",                "toggled",         xst_dialog_modify_cb },
+#warning FIXME
+#if 0	
 	{ "connection_list",         "select_row",      on_connection_list_select_row },
 	{ "connection_list",         "unselect_row",    on_connection_list_unselect_row },
+#endif	
 	{ "connection_add",          "clicked",         on_connection_add_clicked },
 	{ "connection_delete",       "clicked",         on_connection_delete_clicked },
 	{ "connection_configure",    "clicked",         on_connection_configure_clicked },
 	{ "connection_activate",     "clicked",         on_connection_activate_clicked },
 	{ "connection_deactivate",   "clicked",         on_connection_deactivate_clicked },
 	{ "dns_list",                "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+#warning FIXME
+#if 0	
 	{ "dns_list",                "changed",         xst_dialog_modify_cb },
+#endif	
 	{ "domain",                  "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+#if 0	
 	{ "domain",                  "changed",         xst_dialog_modify_cb },
+#endif	
 	{ "search_list",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+#if 0	
 	{ "search_list",             "changed",         xst_dialog_modify_cb },
 	{ "statichost_list",         "unselect_row",    on_hosts_list_unselect_row },
 	{ "statichost_list",         "select_row",      on_hosts_list_select_row },
+#endif	
 	{ "ip",                      "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
 	{ "ip",                      "changed",         xst_dialog_modify_cb },
 	{ "ip",                      "changed",         on_hosts_ip_changed },
 	{ "alias",                   "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+#if 0	
 	{ "alias",                   "changed",         on_hosts_alias_changed },
+#endif	
 	{ "statichost_add",          "clicked",         on_hosts_add_clicked },
 	{ "statichost_add",          "clicked",         xst_dialog_modify_cb },
 	{ "statichost_delete",       "clicked",         on_hosts_delete_clicked },
@@ -155,12 +167,13 @@ connect_signals (XstDialog *main_dialog, XstDialogSignal *sigs)
 
 	omenu = xst_dialog_get_widget (main_dialog, "connection_def_gw_omenu");
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
-
-	gtk_signal_connect (GTK_OBJECT (menu), "selection-done",
-			    GTK_SIGNAL_FUNC (xst_dialog_modify_cb), main_dialog);
-	
-	gtk_signal_connect (GTK_OBJECT (main_dialog), "complexity_change",
-			    GTK_SIGNAL_FUNC (update_complexity), NULL);
+#warning FIXME
+#if 0	
+	g_signal_connect (G_OBJECT (menu), "selection-done",
+			  G_CALLBACK (xst_dialog_modify_cb), main_dialog);
+	g_signal_connect (G_OBJECT (main_dialog), "complexity_change",
+			  G_CALLBACK (update_complexity), NULL);
+#endif	
 
 	xst_dialog_connect_signals (main_dialog, sigs);
 }
