@@ -65,6 +65,7 @@ struct _UserSettingsPwd
 
 struct _UserSettings
 {
+	GladeXML          *xml;
 	GtkWidget         *dialog;
 	UserSettingsBasic *basic;
 	UserSettingsGroup *group;

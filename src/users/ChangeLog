@@ -1,3 +1,9 @@
+2001-05-06  Tambet Ingo  <tambet@ximian.com>
+
+	* user-druid.c (druid_exit): Destroy dialog instead of hiding.
+	(user_druid_run): Moved all the UI struc initialization here.
+	Replaced xst_dialog_get_widget -> glade_xml_get_widget.
+
 2001-05-05  Tambet Ingo  <tambet@ximian.com>
 
 	* profile.c: Profiles have now their own XstDialog.
