@@ -33,6 +33,13 @@
 #define XST_IS_DIALOG(o)       (GTK_CHECK_TYPE ((o), XST_TYPE_DIALOG))
 #define XST_IS_DIALOG_CLASS(c) (GTK_CHECK_CLASS_TYPE ((c), XST_TYPE_DIALOG))
 
+typedef gboolean (*XstDialogHookFunc) (XstDialog *dialog, gpointer data);
+
+typedef struct {
+	gpointer data;
+	XstDialogHookFunc func;
+} XstDialogHookEntry;
+
 struct _XstDialogSignal {
 	const char    *widget;
 	const char    *signal_name;
@@ -53,6 +60,8 @@ struct _XstDialog {
 
 	XstDialogComplexity complexity;
 	gint frozen;
+	
+	GList *apply_hook_list;
 };
 
 struct _XstDialogClass {
@@ -86,5 +95,7 @@ void                xst_dialog_modify            (XstDialog *xd);
 void                xst_dialog_modify_cb         (GtkWidget *w, gpointer data);
 
 GtkWidget          *xst_dialog_get_widget        (XstDialog *xd, const char *widget);
+void                xst_dialog_add_apply_hook    (XstDialog *xd, XstDialogHookFunc *func, gpointer data);
+
 
 #endif /* XST_DIALOG_H */

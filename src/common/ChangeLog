@@ -1,3 +1,12 @@
+2001-03-05  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-dialog.h: Structures and types for apply hooks.
+
+	* xst-dialog.c (xst_dialog_add_apply_hook): Add functions that for checking
+	  info before calling apply signals.
+	  (apply_cb):  If any of these hooks return false, don't emit signals.
+	  
+
 2001-03-01  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-dialog.c (dialog_close): general function.

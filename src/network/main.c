@@ -131,6 +131,7 @@ main (int argc, char *argv[])
 		gtk_main ();
 	} else {
 		xst_dialog_connect_signals (tool->main_dialog, signals);
+		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook, NULL);
 		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 		
 		connection_init_icons ();

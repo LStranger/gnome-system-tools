@@ -1,3 +1,12 @@
+2001-03-05  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* main.c (main): Add callbacks_check_hostname_hook to the list of
+	apply hooks.
+
+	* callbacks.c (callbacks_check_hostname_hook): Check if hostname
+	changed, and if so, warn the user with the option to revert the
+	host change.
+
 2001-03-01  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* main.c: added activation callbacks to table.

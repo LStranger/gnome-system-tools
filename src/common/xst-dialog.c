@@ -209,6 +209,18 @@ xst_dialog_get_type (void)
 	return xstdialog_type;
 }
 
+void
+xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc *func, gpointer data)
+{
+	XstDialogHookEntry *entry;
+
+	entry = g_new0 (XstDialogHookEntry, 1);
+	entry->data = data;
+	entry->func = func;
+
+	xd->apply_hook_list = g_list_append (xd->apply_hook_list, entry);
+}
+
 static void
 complexity_cb (GtkWidget *w, gpointer data)
 {
@@ -235,12 +247,20 @@ static void
 apply_cb (GtkWidget *w, gpointer data)
 {
 	XstDialog *dialog;
+	XstDialogHookEntry *hookentry;
+	GList *l;
 
 	g_return_if_fail (data != NULL);
 	g_return_if_fail (XST_IS_DIALOG (data));
 
 	dialog = XST_DIALOG (data);
 
+	for (l = dialog->apply_hook_list; l; l = l->next) {
+		hookentry = l->data;
+		if (! (hookentry->func) (dialog, hookentry->data))
+			return;
+	}
+	
 	gtk_signal_emit (GTK_OBJECT (dialog), xstdialog_signals[APPLY]);
 
 	gtk_widget_set_sensitive (dialog->apply_button, FALSE);
@@ -346,6 +366,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	g_return_if_fail (title != NULL);
 
 	dialog->tool = tool;
+	dialog->apply_hook_list = NULL;
 
 	s = g_strdup_printf ("%s-admin", tool->name);
 	gnome_app_construct (GNOME_APP (dialog), s, title);

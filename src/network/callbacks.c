@@ -405,3 +405,45 @@ on_wins_use_toggled (GtkWidget *w, gpointer null)
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "wins_ip"),
 						 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 }
+
+gboolean
+callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
+{
+	gchar *hostname_old;
+	gchar *hostname_new;
+	xmlNode *root, *node;
+	GtkWidget *entry, *message;
+
+	root = xst_xml_doc_get_root (dialog->tool->config);
+	node = xst_xml_element_find_first (root, "hostname");
+
+	hostname_old = xst_xml_element_get_content (node);
+
+	entry = xst_dialog_get_widget (dialog, "hostname");
+	hostname_new = gtk_entry_get_text (GTK_ENTRY (entry));
+
+	if (strcmp (hostname_new, hostname_old))
+	{
+		gchar *text = _("The host name has changed. This will prevent you\nfrom launching new applications,\nand so you will have to log in again.\n\nContinue anyways?");
+		gint res;
+		
+		message = gnome_message_box_new (text, GNOME_MESSAGE_BOX_WARNING,
+						 _("Don't change host name"),
+						 GNOME_STOCK_BUTTON_OK,
+						 GNOME_STOCK_BUTTON_CANCEL,
+						 NULL);
+		gnome_dialog_set_parent (GNOME_DIALOG (message), GTK_WINDOW (dialog));
+		res = gnome_dialog_run_and_close (GNOME_DIALOG (message));
+
+		switch (res) {
+		case 0:
+			gtk_entry_set_text (GTK_ENTRY (entry), hostname_old);
+		case 1:
+			return TRUE;
+		case 2:
+			return FALSE;
+		}
+	}
+
+	return TRUE;
+}
