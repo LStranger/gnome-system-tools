@@ -125,9 +125,6 @@ const gchar *basic_group_state = "\
 
 /* Static functions */
 static gchar *get_row_color (ETreeModel *etm, ETreePath *path);
-static gboolean show_all (xmlNodePtr node);
-
-
 
 static int
 col_count (ETableModel *etm, void *data)
@@ -816,17 +813,8 @@ populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node)
 	e_tree_model_freeze (model);
 	for (node = root_node->childs; node; node = node->next)
 	{
-		
-		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_BASIC)
-		{
-			if (!check_node_complexity (node))
-				continue;
-		}
-
-		else if (!show_all (node) && !check_node_complexity (node))
-			continue;
-
-		e_tree_model_node_insert (model, root_path, -1, node);
+		if (check_node_complexity (node))
+		    e_tree_model_node_insert (model, root_path, -1, node);
 	}
 
 	e_tree_model_thaw (model);
@@ -911,7 +899,7 @@ table_set_cursor_node (ETable *table, xmlNodePtr old_node)
 }
 
 void
-tables_set_state (gboolean state)
+tables_update_content (void)
 {
 	ETable *u_table;
 	ETable *g_table;
@@ -926,17 +914,6 @@ tables_set_state (gboolean state)
 	
 	u_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
 	g_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
-
-	if (state)
-	{
-		e_table_set_state (u_table, adv_user_state);
-		e_table_set_state (g_table, adv_group_state);
-	}
-	else
-	{
-		e_table_set_state (u_table, basic_user_state);
-		e_table_set_state (g_table, basic_group_state);
-	}
 
 	u_node = g_node = NULL;
 	
@@ -966,6 +943,28 @@ tables_set_state (gboolean state)
 
 	/* Restore active_table */
 	set_active_table (saved_table);
+}
+
+void
+tables_set_state (gboolean state)
+{
+	ETable *u_table, *g_table;
+	
+	u_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
+	g_table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
+
+	if (state)
+	{
+		e_table_set_state (u_table, adv_user_state);
+		e_table_set_state (g_table, adv_group_state);
+	}
+	else
+	{
+		e_table_set_state (u_table, basic_user_state);
+		e_table_set_state (g_table, basic_group_state);
+	}
+
+	tables_update_content ();
 }
 
 static ETable *
@@ -1100,23 +1099,4 @@ void
 set_active_table (guint tbl)
 {
 	active_table = tbl;
-}
-
-static gboolean
-show_all (xmlNodePtr node)
-{
-	static GtkToggleButton *user_toggle;
-	static xmlNodePtr userdb;
-
-	if (!userdb)
-		userdb = get_user_root_node ();
-
-	if (node->parent != userdb)
-		return TRUE;
-	
-	if (!user_toggle)
-		user_toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog,
-									"user_showall"));
-
-	return gtk_toggle_button_get_active (user_toggle);
 }

@@ -48,6 +48,12 @@ on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
 }
 
 void
+on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
+{
+	tables_update_content ();
+}
+
+void
 on_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	ug_data *ud;

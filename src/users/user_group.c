@@ -49,12 +49,12 @@ static xmlNodePtr group_add_blank_xml (xmlNodePtr db_node);
 static void group_add_from_user (ug_data *ud);
 static void group_update_xml (xmlNodePtr node, gboolean adv);
 static gboolean node_exsists (xmlNodePtr node, gchar *name, gchar *val);
-static GList *get_group_list (gchar *field, xmlNodePtr node, gboolean adv);
-static GList *get_user_list (gchar *field, xmlNodePtr node, gboolean adv);
+static GList *get_group_list (gchar *field, xmlNodePtr user_node);
+static GList *get_user_list (gchar *field, xmlNodePtr group_node);
 static GList *get_group_users (xmlNodePtr group_node);
 static GList *get_group_mainusers (xmlNodePtr group_node);
 static GList *get_user_groups (xmlNodePtr user_node);
-static void user_fill_settings_group (GtkCombo *combo, xmlNodePtr node, gboolean adv);
+static void user_fill_settings_group (GtkCombo *combo, xmlNodePtr node);
 static GList *group_fill_members_list (xmlNodePtr node);
 static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 static void del_group_users (xmlNodePtr node);
@@ -194,6 +194,13 @@ check_node_complexity (xmlNodePtr node)
 	xmlNodePtr db_node;
 	gchar *field, *content;
 	gint min, max, val;
+	static GtkToggleButton *toggle;
+	XstDialogComplexity complexity;
+
+	complexity = tool->main_dialog->complexity;
+
+	if (!toggle)
+		toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "showall"));
 
 	db_node = get_db_node (node);
 	get_min_max (db_node, &min, &max);
@@ -214,6 +221,9 @@ check_node_complexity (xmlNodePtr node)
 	g_free (content);
 
 	if (val >= min && val <= max)
+		return TRUE;
+
+	else if (complexity == XST_DIALOG_ADVANCED && gtk_toggle_button_get_active (toggle))
 		return TRUE;
 
 	else
@@ -545,7 +555,7 @@ user_new_prepare (ug_data *ud)
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
-	user_fill_settings_group (GTK_COMBO (w0), ud->node, adv);
+	user_fill_settings_group (GTK_COMBO (w0), ud->node);
 
 	if (adv)
 		adv_user_new (ud->node);
@@ -852,7 +862,7 @@ user_settings_prepare (ug_data *ud)
 	/* Fill groups combo, use node->parent to pass <userdb> */
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
-	user_fill_settings_group (GTK_COMBO (w0), ud->node, adv);
+	user_fill_settings_group (GTK_COMBO (w0), ud->node);
 	
 	txt = xst_xml_get_child_content (ud->node, "gid");
 	group_node = get_corresp_field (get_db_node (ud->node));
@@ -1195,65 +1205,43 @@ node_exsists (xmlNodePtr node, gchar *name, gchar *val)
 }
 
 static GList *
-get_group_list (gchar *field, xmlNodePtr node, gboolean adv)
+get_group_list (gchar *field, xmlNodePtr user_node)
 {
 	GList *list = NULL;
-	xmlNodePtr u;
-	gint gid, min, max;
-	gchar *txt;
+	xmlNodePtr node, u;
 
-	node = get_corresp_field (node);
-	get_min_max (node, &min, &max);
+	node = get_corresp_field (user_node);
 	
 	if (!node)
 		return NULL;
 
-	for (u = xst_xml_element_find_first (node, "group"); u; u = xst_xml_element_find_next (u, "group"))
+	for (u = xst_xml_element_find_first (node, "group");
+	     u;
+	     u = xst_xml_element_find_next (u, "group"))
 	{
-		txt = xst_xml_get_child_content (u, "gid");
-		gid = atoi (txt);
 
-		if (adv || (gid >= min && gid <= max))
-		{
-			if (strcmp (field, "gid"))
-			{
-				g_free (txt);
-				txt = xst_xml_get_child_content (u, field);
-			}
-
-			list = g_list_prepend (list, txt);
-		}
+		if (check_node_complexity (u))
+			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
 	}
 
 	return list;
 }
 
 static GList *
-get_user_list (gchar *field, xmlNodePtr node, gboolean adv)
+get_user_list (gchar *field, xmlNodePtr group_node)
 {
 	GList *list = NULL;
-	xmlNodePtr u;
-	gint uid, min, max;
-	gchar *txt;
+	xmlNodePtr node, u;
 
-	node = get_corresp_field (node);
-	get_min_max (node, &min, &max);
+	node = get_corresp_field (group_node);
 
-	for (u = xst_xml_element_find_first (node, "user"); u; u = xst_xml_element_find_next (u, "user"))
+	for (u = xst_xml_element_find_first (node, "user");
+	     u;
+	     u = xst_xml_element_find_next (u, "user"))
 	{
-		txt = xst_xml_get_child_content (u, "uid");
-		uid = atoi (txt);
 
-		if (adv || (uid >= min && uid <= max))
-		{
-			if (strcmp (field, "uid"))
-			{
-				g_free (txt);
-				txt = xst_xml_get_child_content (u, field);
-			}
-
-			list = g_list_prepend (list, txt);
-		}
+		if (check_node_complexity (u))
+			list = g_list_prepend (list, xst_xml_get_child_content (u, field));
 	}
 
 	return list;
@@ -1353,13 +1341,13 @@ get_user_groups (xmlNodePtr user_node)
 }
 
 static void
-user_fill_settings_group (GtkCombo *combo, xmlNodePtr node, gboolean adv)
+user_fill_settings_group (GtkCombo *combo, xmlNodePtr node)
 {
 	GList *tmp_list, *items;
 	gchar *name;
 
 	items = NULL;
-	tmp_list = get_group_list ("name", node, adv);
+	tmp_list = get_group_list ("name", node);
 	while (tmp_list)
 	{
 		name = tmp_list->data;
@@ -1408,7 +1396,7 @@ group_fill_all_users_list (xmlNodePtr node, GList *exclude)
 	gtk_clist_freeze (clist);
 
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
-	tmp_list = get_user_list ("login", node, adv);
+	tmp_list = get_user_list ("login", node);
 	while (tmp_list)
 	{
 		gname = tmp_list->data;

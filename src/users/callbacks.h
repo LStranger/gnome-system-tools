@@ -30,6 +30,7 @@
 void on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
 			      guint page_num, gpointer user_data);
 
+void on_showall_toggled (GtkToggleButton *toggle, gpointer user_data);
 void on_settings_clicked (GtkButton *button, gpointer user_data);
 
 void on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);

@@ -44,7 +44,7 @@
 XstTool *tool;
 
 static XstDialogSignal signals[] = {
-	{ "users_admin",                 "switch_page",          on_notebook_switch_page },
+	{ "notebook",                    "switch_page",          on_notebook_switch_page },
 	{ "user_settings_dialog",        "delete_event",         on_user_settings_dialog_delete_event },
 	{ "user_settings_dialog",        "show",                 on_user_settings_dialog_show },
 	{ "user_settings_ok",            "clicked",              on_user_settings_ok_clicked },
@@ -71,6 +71,7 @@ static XstDialogSignal signals[] = {
 	{ "network_user_new",            "clicked",              on_network_user_new_clicked },
 	{ "network_group_new",           "clicked",              on_network_group_new_clicked },
 	{ "network_delete",              "clicked",              on_network_delete_clicked },
+	{ "showall",                     "toggled",              on_showall_toggled },
 	{ NULL }
 };
 
@@ -120,6 +121,11 @@ update_complexity (void)
 
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_container"),
 						 complexity == XST_DIALOG_ADVANCED);
+
+	if (complexity == XST_DIALOG_ADVANCED)
+		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "showall"));
+	else
+		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "showall"));
 }
 
 static void
