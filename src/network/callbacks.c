@@ -555,7 +555,7 @@ on_connection_activate_clicked (GtkWidget *w, gpointer null)
 {
 	XstConnection *cxn;
 	gchar *sign, *file;
-	gboolean *modified = xst_dialog_get_modified (tool->main_dialog);
+	gboolean modified = xst_dialog_get_modified (tool->main_dialog);
 
 	cxn = connection_list_get_active ();
 	connection_activate (cxn, TRUE);
@@ -593,7 +593,7 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 {
 	XstConnection *cxn;
 	gchar *sign, *file;
-	gboolean *modified = xst_dialog_get_modified (tool->main_dialog);
+	gboolean modified = xst_dialog_get_modified (tool->main_dialog);
 
 	cxn = connection_list_get_active ();
 	connection_activate (cxn, FALSE);
