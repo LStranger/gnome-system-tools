@@ -431,20 +431,10 @@ connection_get_dev_pixbuf (GstConnection *cxn)
 	return NULL;
 }
 
-static GdkPixbuf *
-connection_get_stat_pixbuf (GstConnection *cxn)
+static gboolean
+connection_get_stat (GstConnection *cxn)
 {
-	static GdkPixbuf *active;
-	static GdkPixbuf *inactive;
-
-	g_return_val_if_fail (cxn != NULL, NULL);
-
-	if (active == NULL)
-		active = load_pixbuf ("gnome-light-on.png");
-	if (inactive == NULL)
-		inactive = load_pixbuf ("gnome-light-off.png");
-
-	return cxn->enabled ? active : inactive;
+	return cxn->enabled;
 }
 
 static const gchar*
@@ -470,7 +460,7 @@ connection_list_model_new (void)
 				    GDK_TYPE_PIXBUF,
 				    G_TYPE_STRING,
 				    G_TYPE_STRING,
-				    GDK_TYPE_PIXBUF,
+				    G_TYPE_BOOLEAN,
 				    G_TYPE_STRING,
 				    G_TYPE_POINTER);
 	return GTK_TREE_MODEL (store);
@@ -514,11 +504,11 @@ connection_list_add_columns (GtkTreeView *treeview)
 	gtk_tree_view_append_column (treeview, col);
 
 	/* Status */
-	pixbuf_renderer = gtk_cell_renderer_pixbuf_new ();
-
-	g_object_set (G_OBJECT (pixbuf_renderer), "xalign", 0.5, NULL);
+	pixbuf_renderer = gtk_cell_renderer_toggle_new ();
+	g_signal_connect (G_OBJECT (pixbuf_renderer), "toggled", 
+			  G_CALLBACK (on_connection_toggled), treeview);
 	col = gtk_tree_view_column_new_with_attributes (_("Status"), pixbuf_renderer,
-							"pixbuf", CONNECTION_LIST_COL_STAT_PIX,
+							"active", CONNECTION_LIST_COL_STAT,
 							NULL);
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_clickable (col, TRUE);
@@ -569,6 +559,20 @@ connection_list_get_active (void)
 	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
 	gtk_tree_selection_selected_foreach (select, list_get_active_cb, &cxn);
+
+	return cxn;
+}
+
+GstConnection*
+connection_list_get_by_path (GtkTreePath *path)
+{
+	GstConnectionUI  *ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+	GtkTreeIter iter;
+	GstConnection    *cxn = NULL;
+
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter, CONNECTION_LIST_COL_DATA, &cxn, -1);
 
 	return cxn;
 }
@@ -626,9 +630,6 @@ connection_list_new (GstTool *tool)
 	gtk_tree_view_set_model (GTK_TREE_VIEW (treeview), model);
 	g_object_unref (G_OBJECT (model));
 
-	g_signal_connect (G_OBJECT (treeview), "cursor-changed", 
-	      G_CALLBACK (on_connection_list_clicked), NULL);
-
 	connection_list_add_columns (GTK_TREE_VIEW (treeview));
 
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
@@ -663,7 +664,7 @@ connection_list_append (GstConnection *cxn)
 			    CONNECTION_LIST_COL_DEV_PIX,  connection_get_dev_pixbuf (cxn),
 			    CONNECTION_LIST_COL_DEV_TYPE, connection_get_dev_type (cxn),
 			    CONNECTION_LIST_COL_DEVICE,   cxn->dev,
-			    CONNECTION_LIST_COL_STAT_PIX, connection_get_stat_pixbuf (cxn),
+			    CONNECTION_LIST_COL_STAT,     connection_get_stat (cxn),
 			    CONNECTION_LIST_COL_DESCR,    cxn->name,
 			    CONNECTION_LIST_COL_DATA,     cxn,
 			    -1);

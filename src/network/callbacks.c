@@ -517,14 +517,14 @@ activate_directive_cb (GstDirectiveEntry *entry)
 	g_free (entry->report_sign);
 }
 
-void
-on_connection_activate_clicked (GtkWidget *w, gpointer null)
+static void
+on_connection_activate_clicked (GtkWidget *w, GtkTreePath *path, gpointer null)
 {
 	GstConnection *cxn;
 	gchar *sign, *file;
 	gboolean modified = gst_dialog_get_modified (tool->main_dialog);
 
-	cxn = connection_list_get_active ();
+	cxn = connection_list_get_by_path (path);
 	connection_activate (cxn, TRUE);
 
 	file = (cxn->file)? cxn->file: cxn->dev;
@@ -555,14 +555,14 @@ deactivate_directive_cb (GstDirectiveEntry *entry)
 	g_free (entry->report_sign);
 }
 
-void
-on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
+static void
+on_connection_deactivate_clicked (GtkWidget *w, GtkTreePath *path, gpointer null)
 {
 	GstConnection *cxn;
 	gchar *sign, *file;
 	gboolean modified = gst_dialog_get_modified (tool->main_dialog);
 
-	cxn = connection_list_get_active ();
+	cxn = connection_list_get_by_path (path);
 	connection_activate (cxn, FALSE);
 	
 	file = (cxn->file)? cxn->file: cxn->dev;
@@ -882,56 +882,41 @@ callbacks_tool_not_found_hook (GstTool *tool, GstReportLine *rline, gpointer dat
 /* Connection dialog callbacks */
 
 void
-on_connection_list_clicked (GtkWidget *w, gpointer data)
+on_connection_toggled (GtkWidget *w, gchar *path_str, gpointer data)
 {
-	GtkTreePath *path;
-	GtkTreeViewColumn *column;
-	GtkTreeModel *model;
+	GtkTreeView *treeview = GTK_TREE_VIEW (data);
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
 	GtkTreeIter iter;
-	GList *column_list;
-	gint ncol;
-	GdkPixbuf *stat_icon;
 	GstConnection *cxn;
-	GtkWidget *dialog;
 	gchar *txt;
+	GtkWidget *dialog;
 
-	cxn = connection_list_get_active ();
-	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
-	gtk_tree_view_get_cursor (GTK_TREE_VIEW (w), &path, &column);
-							  
-	ncol = g_list_index (column_list, column) + 1;
+	gtk_tree_model_get_iter (model, &iter, path);
+	cxn = connection_list_get_by_path (path);
 
-	if (ncol == CONNECTION_LIST_COL_STAT_PIX)
-	{
-		model = gtk_tree_view_get_model (GTK_TREE_VIEW (w));
-		gtk_tree_model_get_iter (model, &iter, path);
-		
-		if (!cxn->enabled)
-		{
-			if (cxn->type != GST_CONNECTION_LO) {
-				txt = g_strdup_printf (_("Do you want to enable interface %s?"), cxn->dev);
-				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
-				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
-					on_connection_activate_clicked (w, NULL);
+	if (!cxn->enabled) {
+		if (cxn->type != GST_CONNECTION_LO) {
+			txt = g_strdup_printf (_("Do you want to enable interface %s?"), cxn->dev);
+			dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
+			if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+				on_connection_activate_clicked (GTK_WIDGET (treeview), path, NULL);
 
-				gtk_widget_destroy (dialog);
-				g_free (txt);
-			}
+			gtk_widget_destroy (dialog);
+			g_free (txt);
 		}
-		else
-		{
-			if (cxn->type != GST_CONNECTION_LO) {
-				txt = g_strdup_printf (_("Do you want to disable interface %s?"), cxn->dev);
-				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
-				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
-					on_connection_deactivate_clicked (w, NULL);
+	} else {
+		if (cxn->type != GST_CONNECTION_LO) {
+			txt = g_strdup_printf (_("Do you want to disable interface %s?"), cxn->dev);
+			dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
+			if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+				on_connection_deactivate_clicked (GTK_WIDGET (treeview), path,  NULL);
 
-				gtk_widget_destroy (dialog);
-				g_free (txt);
-			}
+			gtk_widget_destroy (dialog);
+			g_free (txt);
 		}
 	}
-	g_list_free (column_list);
+	
 	gtk_tree_path_free (path);
 }
 

@@ -44,7 +44,7 @@ enum {
 	CONNECTION_LIST_COL_DEV_PIX,
 	CONNECTION_LIST_COL_DEV_TYPE,
 	CONNECTION_LIST_COL_DEVICE,
-	CONNECTION_LIST_COL_STAT_PIX,
+	CONNECTION_LIST_COL_STAT,
 	CONNECTION_LIST_COL_DESCR,
 
 	CONNECTION_LIST_COL_DATA,
@@ -163,6 +163,7 @@ extern void connection_configure (GstConnection *cxn);
 extern void connection_save_to_node (GstConnection *cxn, xmlNode *node);
 
 GstConnection *connection_list_get_active (void);
+GstConnection *connection_list_get_by_path (GtkTreePath*);
 void           connection_list_remove     (GstConnection *cxn);
 void           connection_activate        (GstConnection *cxn, gboolean activate);
 void           connection_list_update     (void);

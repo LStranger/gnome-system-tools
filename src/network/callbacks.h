@@ -65,8 +65,6 @@ gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
 void on_connection_add_clicked (GtkWidget *w, gpointer null);
 void on_connection_delete_clicked (GtkWidget *w, gpointer null);
 void on_connection_configure_clicked (GtkWidget *w, gpointer null);
-void on_connection_activate_clicked (GtkWidget *w, gpointer null);
-void on_connection_deactivate_clicked (GtkWidget *w, gpointer null);
 void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
 void on_samba_use_toggled (GtkWidget *w, gpointer null);
 void on_wins_use_toggled (GtkWidget *w, gpointer null);
@@ -83,7 +81,7 @@ gboolean callbacks_check_gateway_hook      (GstDialog *dialog, gpointer data);
 gboolean callbacks_tool_not_found_hook     (GstTool *tool, GstReportLine *rline, gpointer data);
 
 /* connection callbacks */
-void on_connection_list_clicked (GtkWidget*, gpointer);
+void on_connection_toggled (GtkWidget*, gchar*, gpointer);
 void on_connection_ok_clicked (GtkWidget*, GstConnection*);
 void on_connection_cancel_clicked (GtkWidget*, GstConnection*);
 void on_connection_config_dialog_destroy (GtkWidget*, GstConnection*);
