@@ -30,12 +30,13 @@
 
 #ifdef XST_DEBUG
 /* define to x for debugging output */
-#define d(x) 
+#define d(x) x
 #else
 #define d(x)
 #endif
 
 enum {
+	BOGUS,
 	APPLY,
 	COMPLEXITY_CHANGE,
 	LAST_SIGNAL

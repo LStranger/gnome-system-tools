@@ -61,9 +61,11 @@ e_tz_map_new (XstTimeTool *tool)
 	tzmap = g_new0 (ETzMap, 1);
 	tzmap->tool = XST_TOOL (tool);
 	tzmap->tzdb = tz_load_db ();
-	if (!tzmap->tzdb) g_error ("Unable to load system timezone database.");
+	if (!tzmap->tzdb)
+		g_error ("Unable to load system timezone database.");
 	tzmap->map = e_map_new ();
-	if (!tzmap->map) g_error ("Unable to create map widget.");
+	if (!tzmap->map)
+		g_error ("Unable to create map widget.");
 
 	locs = tz_get_locations (tzmap->tzdb);
 	
@@ -88,6 +90,7 @@ e_tz_map_new (XstTimeTool *tool)
 TzDB *
 e_tz_map_get_tz_db (ETzMap *tzmap)
 {
+	g_return_val_if_fail (tzmap != NULL, NULL);
 	return tzmap->tzdb;
 }
 

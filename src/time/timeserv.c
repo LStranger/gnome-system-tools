@@ -6,7 +6,6 @@
 #include <gnome.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
-#include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 
 #include "xst.h"
 
@@ -17,13 +16,15 @@ void
 on_ntp_addserver (GtkButton *button, XstDialog *dialog)
 {
 	GtkEditable *ntp_entry;
-	GtkList *ntp_list;
+	GtkTreeView *ntp_list;
 	GtkWidget *item;
-	GList *list_add = NULL;
+	GtkListStore *store;
+	GtkTreeIter iter;
 	gchar *text;
 	
 	ntp_entry = GTK_EDITABLE (xst_dialog_get_widget (dialog, "ntp_entry"));
-	ntp_list = GTK_LIST (xst_dialog_get_widget (dialog, "ntp_list"));
+	ntp_list = GTK_TREE_VIEW (xst_dialog_get_widget (dialog, "ntp_list"));
+	store = GTK_LIST_STORE (gtk_tree_view_get_model (ntp_list));
 	
 	text = gtk_editable_get_chars (ntp_entry, 0, -1);
 	g_strstrip (text);
@@ -39,9 +40,7 @@ on_ntp_addserver (GtkButton *button, XstDialog *dialog)
 	gtk_editable_delete_text (ntp_entry, 0, -1);
 	gtk_widget_grab_focus (GTK_WIDGET (ntp_entry));
 	
-	item = gtk_list_item_new_with_label (text);
-	gtk_widget_show (item);
-	gtk_list_item_select (GTK_LIST_ITEM (item));
-	list_add = g_list_append (list_add, item);
-	gtk_list_append_items (ntp_list, list_add);
+	gtk_list_store_append (store, &iter);
+	gtk_list_store_set (store, &iter, 0, g_strdup (text), -1);
+
 }

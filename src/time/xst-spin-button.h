@@ -36,7 +36,7 @@
 
 #include <gnome.h>
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define XST_TYPE_SPIN_BUTTON                  (xst_spin_button_get_type ())
 #define XST_SPIN_BUTTON(obj)                  (GTK_CHECK_CAST ((obj), XST_TYPE_SPIN_BUTTON, XstSpinButton))
@@ -149,6 +149,6 @@ void            xst_spin_button_update             (XstSpinButton  *spin_button)
 
 
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* __XST_SPIN_BUTTON_H__ */

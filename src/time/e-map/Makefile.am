@@ -5,6 +5,7 @@ INCLUDES = \
 	$(XST_TOOL_CFLAGS)
 
 LDADD = -lm $(XST_TOOL_LIBS)
+LIBS+=$(LDADD)
 
 noinst_PROGRAMS = \
 e-map-test

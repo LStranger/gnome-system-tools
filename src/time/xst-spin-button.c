@@ -51,6 +51,7 @@
 #define EPSILON                            1e-5
 
 enum {
+  BOGUS,
   SPIN_UP,
   SPIN_DOWN,
   LAST_SIGNAL
@@ -128,26 +129,29 @@ static void xst_spin_button_real_spin      (XstSpinButton      *spin_button,
 
 
 
-GtkType
+GType
 xst_spin_button_get_type (void)
 {
-  static guint spin_button_type = 0;
+  static GType spin_button_type = 0;
 
   if (!spin_button_type)
     {
-      static const GtkTypeInfo spin_button_info =
+      static const GTypeInfo spin_button_info =
       {
-	"XstSpinButton",
-	sizeof (XstSpinButton),
 	sizeof (XstSpinButtonClass),
-	(GtkClassInitFunc) xst_spin_button_class_init,
-	(GtkObjectInitFunc) xst_spin_button_init,
-	/* reserved_1 */ NULL,
-        /* reserved_2 */ NULL,
-        (GtkClassInitFunc) NULL,
+	NULL,
+	NULL,
+	(GClassInitFunc) xst_spin_button_class_init,
+	NULL,
+	NULL,
+	sizeof (XstSpinButton),
+	5,
+	(GInstanceInitFunc) xst_spin_button_init,
       };
 
-      spin_button_type = gtk_type_unique (GTK_TYPE_ENTRY, &spin_button_info);
+      spin_button_type = g_type_register_static (GTK_TYPE_EDITABLE,
+		      				 "XstSpinButton",
+						 &spin_button_info, 0);
     }
   return spin_button_type;
 }
@@ -155,34 +159,37 @@ xst_spin_button_get_type (void)
 static void
 xst_spin_button_class_init (XstSpinButtonClass *class)
 {
+  GObjectClass     *g_object_class;
   GtkObjectClass   *object_class;
   GtkWidgetClass   *widget_class;
   GtkEditableClass *editable_class;
 
+  g_object_class = G_OBJECT_CLASS (class);
   object_class   = (GtkObjectClass*)   class;
   widget_class   = (GtkWidgetClass*)   class;
   editable_class = (GtkEditableClass*) class; 
 
-  parent_class = gtk_type_class (GTK_TYPE_ENTRY);
+  parent_class = g_type_class_peek_parent (class);
 
   xstspinbutton_signals [SPIN_UP] = 
-		gtk_signal_new ("spin_up",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (XstSpinButtonClass, spin_up),
+		g_signal_new ("spin_up",
+				G_OBJECT_CLASS_TYPE (object_class),
+				G_SIGNAL_RUN_LAST,
+				G_STRUCT_OFFSET (XstSpinButtonClass, spin_up),
+				NULL, NULL,
 				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
+				G_TYPE_NONE, 0);
   xstspinbutton_signals [SPIN_DOWN] = 
-		gtk_signal_new ("spin_down",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (XstSpinButtonClass, spin_down),
+		g_signal_new ("spin_down",
+				G_OBJECT_CLASS_TYPE (object_class),
+				G_SIGNAL_RUN_LAST,
+				G_STRUCT_OFFSET (XstSpinButtonClass, spin_down),
+				NULL, NULL,
 				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
-  gtk_object_class_add_signals (object_class,
-						  xstspinbutton_signals,
-						  LAST_SIGNAL);
+				G_TYPE_NONE, 0);
   
+#warning FIXME
+#if 0
   gtk_object_add_arg_type ("XstSpinButton::adjustment",
 			   GTK_TYPE_ADJUSTMENT,
 			   GTK_ARG_READWRITE,
@@ -224,6 +231,7 @@ xst_spin_button_class_init (XstSpinButtonClass *class)
   object_class->set_arg = xst_spin_button_set_arg;
   object_class->get_arg = xst_spin_button_get_arg;
   object_class->finalize = xst_spin_button_finalize;
+#endif
 
   widget_class->map = xst_spin_button_map;
   widget_class->unmap = xst_spin_button_unmap;
@@ -231,7 +239,12 @@ xst_spin_button_class_init (XstSpinButtonClass *class)
   widget_class->unrealize = xst_spin_button_unrealize;
   widget_class->size_request = xst_spin_button_size_request;
   widget_class->size_allocate = xst_spin_button_size_allocate;
+
+#warning FIXME
+#if 0
   widget_class->draw = xst_spin_button_draw;
+#endif
+
   widget_class->expose_event = xst_spin_button_expose;
   widget_class->button_press_event = xst_spin_button_button_press;
   widget_class->button_release_event = xst_spin_button_button_release;
@@ -243,7 +256,11 @@ xst_spin_button_class_init (XstSpinButtonClass *class)
   widget_class->focus_out_event = xst_spin_button_focus_out;
 
   editable_class->insert_text = xst_spin_button_insert_text;
+
+#warning FIXME
+#if 0
   editable_class->activate = xst_spin_button_activate;
+#endif
 }
 
 static void
@@ -377,7 +394,7 @@ xst_spin_button_finalize (GtkObject *object)
 
   gtk_object_unref (GTK_OBJECT (XST_SPIN_BUTTON (object)->adjustment));
   
-  GTK_OBJECT_CLASS (parent_class)->finalize (object);
+  //GTK_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 static void
@@ -420,7 +437,7 @@ xst_spin_button_realize (GtkWidget *widget)
   spin = XST_SPIN_BUTTON (widget);
 
   real_width = widget->allocation.width;
-  widget->allocation.width -= ARROW_SIZE + 2 * widget->style->klass->xthickness;
+  //widget->allocation.width -= ARROW_SIZE + 2 * widget->style->klass->xthickness;
   gtk_widget_set_events (widget, gtk_widget_get_events (widget) |
 			 GDK_KEY_RELEASE_MASK);
   GTK_WIDGET_CLASS (parent_class)->realize (widget);
@@ -438,6 +455,8 @@ xst_spin_button_realize (GtkWidget *widget)
 
   attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_VISUAL | GDK_WA_COLORMAP;
 
+#warning FIXME
+#if 0
   attributes.x = (widget->allocation.x + widget->allocation.width - ARROW_SIZE -
 		  2 * widget->style->klass->xthickness);
   attributes.y = widget->allocation.y + (widget->allocation.height -
@@ -450,6 +469,7 @@ xst_spin_button_realize (GtkWidget *widget)
   gdk_window_set_user_data (spin->panel, widget);
 
   gtk_style_set_background (widget->style, spin->panel, GTK_STATE_NORMAL);
+#endif
 }
 
 static void
@@ -482,8 +502,11 @@ xst_spin_button_size_request (GtkWidget      *widget,
 
   GTK_WIDGET_CLASS (parent_class)->size_request (widget, requisition);
   
+#warning FIXME
+#if 0
   requisition->width = MIN_SPIN_BUTTON_WIDTH + ARROW_SIZE 
     + 2 * widget->style->klass->xthickness;
+#endif
 }
 
 static void
@@ -496,6 +519,8 @@ xst_spin_button_size_allocate (GtkWidget     *widget,
   g_return_if_fail (XST_IS_SPIN_BUTTON (widget));
   g_return_if_fail (allocation != NULL);
 
+#warning FIXME
+#if 0
   child_allocation = *allocation;
   if (child_allocation.width > ARROW_SIZE + 2 * widget->style->klass->xthickness)
     child_allocation.width -= ARROW_SIZE + 2 * widget->style->klass->xthickness;
@@ -518,6 +543,7 @@ xst_spin_button_size_allocate (GtkWidget     *widget,
 			      child_allocation.width,
 			      child_allocation.height); 
     }
+#endif
 }
 
 static GtkShadowType
@@ -549,6 +575,8 @@ xst_spin_button_paint (GtkWidget    *widget,
   spin = XST_SPIN_BUTTON (widget);
   shadow_type = xst_spin_button_get_shadow_type (spin);
 
+#warning FIXME
+#if 0
   if (GTK_WIDGET_DRAWABLE (widget))
     {
       if (shadow_type != GTK_SHADOW_NONE)
@@ -568,6 +596,7 @@ xst_spin_button_paint (GtkWidget    *widget,
       
       GTK_WIDGET_CLASS (parent_class)->draw (widget, area);
     }
+#endif
 }
 
 static void
@@ -614,6 +643,8 @@ xst_spin_button_draw_arrow (XstSpinButton *spin_button,
 
   spin_shadow_type = xst_spin_button_get_shadow_type (spin_button);
 
+#warning FIXME
+#if 0
   if (GTK_WIDGET_DRAWABLE (spin_button))
     {
       if (!spin_button->wrap &&
@@ -683,6 +714,7 @@ xst_spin_button_draw_arrow (XstSpinButton *spin_button,
 			   - widget->style->klass->ythickness);
 	}
     }
+#endif
 }
 
 static gint
@@ -838,6 +870,8 @@ xst_spin_button_button_release (GtkWidget      *widget,
 
   spin = XST_SPIN_BUTTON (widget);
 
+#warning FIXME
+#if 0
   if (event->button == spin->button)
     {
       guint click_child;
@@ -884,6 +918,7 @@ xst_spin_button_button_release (GtkWidget      *widget,
     }
   else
     GTK_WIDGET_CLASS (parent_class)->button_release_event (widget, event);
+#endif
 
   return FALSE;
 }
@@ -1007,10 +1042,13 @@ xst_spin_button_key_press (GtkWidget     *widget,
 
   key_repeat = (event->time == spin->ev_time);
 
+#warning FIXME
+#if 0
   if (GTK_EDITABLE (widget)->editable &&
       (key == GDK_Up || key == GDK_Down || 
        key == GDK_Page_Up || key == GDK_Page_Down))
     xst_spin_button_update (spin);
+#endif
 
   switch (key)
     {
@@ -1202,8 +1240,11 @@ xst_spin_button_activate (GtkEditable *editable)
   g_return_if_fail (editable != NULL);
   g_return_if_fail (XST_IS_SPIN_BUTTON (editable));
 
+#warning FIXME
+#if 0
   if (editable->editable)
     xst_spin_button_update (XST_SPIN_BUTTON (editable));
+#endif
 }
 
 static void

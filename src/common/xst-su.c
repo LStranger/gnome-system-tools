@@ -63,6 +63,9 @@
  */
 #define OPEN_TTY() getpt()
 
+
+#define XST_SU_RESPONSE_NP 1
+
 #ifdef __FreeBSD__
 /* FreeBSD doesn't have getpt(). This function emulates it's behaviour. */
 int getpt (void);
@@ -229,6 +232,32 @@ load_glade_common (const gchar *widget)
 	return xml;
 }
 
+static GtkWidget *
+xst_su_construct_dialog (GladeXML *xml)
+{
+	GtkWidget *dialog;
+	GtkWidget *content;
+
+	dialog = gtk_dialog_new_with_buttons (_("Ximian Setup Tools - Password"),
+					      NULL,
+					      GTK_DIALOG_MODAL,
+					      GTK_STOCK_OK,
+					      GTK_RESPONSE_OK,
+					      _("Run without password"),
+					      XST_SU_RESPONSE_NP,
+					      GTK_STOCK_CANCEL,
+					      GTK_RESPONSE_CANCEL,
+					      NULL);
+
+	content = glade_xml_get_widget (xml, "password_dialog_content");
+	gtk_widget_show (content);
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
+			    content, FALSE, FALSE, 8);
+
+	return dialog;
+}
+
 gint
 xst_su_get_password (gchar **password)
 {
@@ -237,29 +266,17 @@ xst_su_get_password (gchar **password)
 	gchar *blank;
 	GtkWidget *password_dialog, *password_entry;
 
-	xml = load_glade_common ("password_dialog");
-	password_dialog = glade_xml_get_widget (xml, "password_dialog");
+	xml = load_glade_common ("password_dialog_content");
+	password_dialog = xst_su_construct_dialog (xml);
 	password_entry  = glade_xml_get_widget (xml, "password_entry");
 	g_assert (password_dialog);
 	g_assert (password_entry);
 
-#warning FIXME
-#if 0	
-	gnome_dialog_editable_enters (GNOME_DIALOG (password_dialog), GTK_EDITABLE (password_entry));
-#endif	
-	
-	result = gnome_dialog_run_and_close (GNOME_DIALOG (password_dialog));
-	if (result == 2 || result < 0)
-		return -1;  /* Cancel */
-	else if (result == 1)
-		return 0;   /* Run unprivileged */
+	result = gtk_dialog_run (GTK_DIALOG (password_dialog));
 
 	*password = g_strdup (gtk_entry_get_text (GTK_ENTRY (password_entry)));
-	if (!*password)
-		*password = g_strdup ("");
 
 	/* Make a pathetic stab at clearing the GtkEntry field memory */
-
 	blank = g_strdup (*password);
 	if (strlen (blank))
 		memset (blank, ' ', strlen (blank));
@@ -267,6 +284,23 @@ xst_su_get_password (gchar **password)
 	gtk_entry_set_text (GTK_ENTRY (password_entry), blank);
 	gtk_entry_set_text (GTK_ENTRY (password_entry), "");
 	g_free (blank);
+
+	gtk_widget_destroy (password_dialog);
+
+	if (result == GTK_RESPONSE_CANCEL)
+		return -1;  /* Cancel */
+	else if (result == XST_SU_RESPONSE_NP)
+		return 0;   /* Run unprivileged */
+
+	if (!*password)
+		*password = g_strdup ("");
+
+	/* FIXME: I added this because if you click "OK", the dialog
+	 * never goes away.  Is it really needed?
+	 */
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
+
 
 	return 1;  /* Run privileged with password */
 }

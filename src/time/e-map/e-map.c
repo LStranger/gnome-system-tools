@@ -84,6 +84,7 @@ EMapPrivate;
 
 enum
 {
+	BOGUS,
 	LAST_SIGNAL
 };
 
@@ -95,7 +96,7 @@ static guint e_map_signals[LAST_SIGNAL];
 static void e_map_class_init (EMapClass *class);
 static void e_map_init (EMap *view);
 static void e_map_destroy (GtkObject *object);
-static void e_map_finalize (GtkObject *object);
+static void e_map_finalize (GObject *object);
 static void e_map_unmap (GtkWidget *widget);
 static void e_map_realize (GtkWidget *widget);
 static void e_map_unrealize (GtkWidget *widget);
@@ -147,19 +148,23 @@ e_map_get_type (void)
 
 	if (!e_map_type)
 	{
-		static const GtkTypeInfo e_map_info =
+		static const GTypeInfo e_map_info =
 		{
-			"EMap",
-			sizeof (EMap),
 			sizeof (EMapClass),
-			(GtkClassInitFunc) e_map_class_init,
-			(GtkObjectInitFunc) e_map_init,
-			NULL,	/* reserved_1 */
-			NULL,	/* reserved_2 */
-			(GtkClassInitFunc) NULL
+			NULL, /* base init */
+			NULL, /* base finalize */
+			(GClassInitFunc) e_map_class_init,
+			NULL, /* class finalize */
+			NULL, /* class data */
+			sizeof (EMap),
+			0,
+			(GInstanceInitFunc) e_map_init,
+			NULL, /* value table */
 		};
 
-		e_map_type = gtk_type_unique (GTK_TYPE_WIDGET, &e_map_info);
+		e_map_type = g_type_register_static (GTK_TYPE_WIDGET,
+						     "EMap",
+						     &e_map_info, 0);
 	}
 
 	return e_map_type;
@@ -170,6 +175,7 @@ e_map_get_type (void)
 static void
 e_map_class_init (EMapClass *class)
 {
+	GObjectClass *g_object_class;
 	GtkObjectClass *object_class;
 	GtkWidgetClass *widget_class;
 
@@ -179,19 +185,32 @@ e_map_class_init (EMapClass *class)
 	parent_class = gtk_type_class (GTK_TYPE_WIDGET);
 
 	object_class->destroy = e_map_destroy;
-	object_class->finalize = e_map_finalize;
+	
+#warning FIXME
+#if 0
+	g_object_class->finalize = e_map_finalize;
+#endif
 
 	class->set_scroll_adjustments = e_map_set_scroll_adjustments;
-	widget_class->set_scroll_adjustments_signal = gtk_signal_new ("set_scroll_adjustments", GTK_RUN_LAST, object_class->type, GTK_SIGNAL_OFFSET (EMapClass, set_scroll_adjustments), gtk_marshal_NONE__POINTER_POINTER, GTK_TYPE_NONE, 2, GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
-
-	gtk_object_class_add_signals (object_class, e_map_signals, LAST_SIGNAL);
+	widget_class->set_scroll_adjustments_signal =
+		g_signal_new ("set_scroll_adjustments",
+				G_OBJECT_CLASS_TYPE (object_class),
+				G_SIGNAL_RUN_LAST,
+				G_STRUCT_OFFSET (EMapClass, set_scroll_adjustments),
+				NULL, NULL,
+				g_cclosure_marshal_VOID__POINTER,
+				G_TYPE_NONE, 2,
+				GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
 
 	widget_class->unmap = e_map_unmap;
 	widget_class->realize = e_map_realize;
 	widget_class->unrealize = e_map_unrealize;
 	widget_class->size_request = e_map_size_request;
 	widget_class->size_allocate = e_map_size_allocate;
+#warning FIXME
+#if 0
 	widget_class->draw = e_map_draw;
+#endif
 	widget_class->button_press_event = e_map_button_press;
 	widget_class->button_release_event = e_map_button_release;
 	widget_class->motion_notify_event = e_map_motion;
@@ -246,7 +265,7 @@ e_map_destroy (GtkObject *object)
 /* Finalize handler for the map view */
 
 static void
-e_map_finalize (GtkObject *object)
+e_map_finalize (GObject *object)
 {
 	EMap *view;
 	EMapPrivate *priv;
@@ -278,8 +297,8 @@ e_map_finalize (GtkObject *object)
 	g_free (priv);
 	view->priv = NULL;
 
-	if (GTK_OBJECT_CLASS (parent_class)->finalize)
-		(*GTK_OBJECT_CLASS (parent_class)->finalize) (object);
+	if (G_OBJECT_CLASS (parent_class)->finalize)
+		G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
 
@@ -991,7 +1010,7 @@ load_map_background (EMap *view, gchar *name)
 
 	priv = view->priv;
 
-	pb0 = gdk_pixbuf_new_from_file (name);
+	pb0 = gdk_pixbuf_new_from_file (name, NULL);
 /*	pb0 = tool_load_image (name);*/
 	if (!pb0) return (FALSE);
 
@@ -1711,8 +1730,11 @@ zoom_do (EMap *map)
 
 	priv = map->priv;
 
+#warning FIXME
+#if 0
 	gtk_signal_handler_block_by_data (GTK_OBJECT (priv->hadj), map);
 	gtk_signal_handler_block_by_data (GTK_OBJECT (priv->vadj), map);
+#endif
 
 	if (priv->zoom_state == E_MAP_ZOOMING_IN)
 	{
@@ -1721,12 +1743,15 @@ zoom_do (EMap *map)
 	}
 	else if (priv->zoom_state == E_MAP_ZOOMING_OUT)
 	{
-/*    if (e_map_get_smooth_zoom(map)) zoom_out_smooth(map); */
+		/* if (e_map_get_smooth_zoom(map)) zoom_out_smooth(map); */
 		zoom_out (map);
 	}
   
+#warning FIXME
+#if 0
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->hadj), map);
 	gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->vadj), map);
+#endif
 
 	set_scroll_area(map);
 }

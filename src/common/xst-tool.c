@@ -53,6 +53,7 @@
 /*#define XST_DEBUG_STRACE_BACKEND*/
 
 enum {
+	BOGUS,
 	FILL_GUI,
 	FILL_XML,
 	CLOSE,
@@ -1189,7 +1190,7 @@ xst_tool_class_init (XstToolClass *klass)
 
 	object_class = (GtkObjectClass *)klass;
 
-	parent_class = gtk_type_class (GTK_TYPE_OBJECT);
+	parent_class = g_type_class_peek_parent (klass);
 
 #if 1
 	xsttool_signals[FILL_GUI] = 
@@ -1598,7 +1599,7 @@ try_show_usage_warning (void)
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_OK, GTK_RESPONSE_OK,
 						      NULL);
-		gtk_dialog_set_default_response (dialog, GTK_RESPONSE_OK);		
+		gtk_dialog_set_default_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);		
 		
 		label = gtk_label_new (warning);
 		image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);

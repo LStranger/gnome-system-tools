@@ -143,26 +143,34 @@ transfer_timezone_gui_to_xml (XstTool *tool, xmlNodePtr root)
 	xst_xml_element_set_content (node, time_tool->time_zone_name);
 }
 
-static GtkWidget *server_entry_found;
+static GtkTreeIter *server_entry_found;
 
 static void
-server_list_cb (GtkWidget *item, gpointer data)
+server_list_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter,
+		gpointer data)
 {
-	char *entry_text;
+	char *text;
+	GValue value;
+
+	gtk_tree_model_get_value (model, iter, 0, &value);
 	
-	gtk_label_get (GTK_LABEL (GTK_BIN (item)->child), &entry_text);
-	if (strstr (entry_text, data)) server_entry_found = item;
+	if (strstr (g_value_get_string (&value), data))
+		server_entry_found = gtk_tree_iter_copy (iter);
 }
 
 static void
 transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *ntp_list, *item;
-	GList *list_add = NULL;
+	GtkListStore *store;
+	GtkTreeIter iter;
+	GtkTreeSelection *selection;
 	xmlNodePtr node;
 	char *s;
 	
 	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list");
+	store = GTK_LIST_STORE (gtk_tree_view_get_model (GTK_TREE_VIEW (ntp_list)));
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (ntp_list));
 	
 	node = xst_xml_element_find_first (root, "sync");
 	if (!node) return;
@@ -174,21 +182,20 @@ transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 		s = xst_xml_element_get_content (node);
 		
 		server_entry_found = NULL;
-		gtk_container_foreach (GTK_CONTAINER (ntp_list), server_list_cb, s);
+		gtk_tree_model_foreach (GTK_TREE_MODEL (store), server_list_cb, s);
 		
-		if (server_entry_found) item = server_entry_found;
+		if (server_entry_found) {
+			gtk_tree_selection_select_iter (selection, server_entry_found);
+		}
 		else
 		{
-			item = gtk_list_item_new_with_label (s);
-			gtk_widget_show (item);
-			list_add = g_list_append (list_add, item);
+			gtk_list_store_append (store, &iter);
+			gtk_list_store_set (store, &iter, 0, g_strdup (s), -1);
 		}
 		
-		gtk_list_item_select (GTK_LIST_ITEM(item));
+		
 		g_free (s);
 	}
-	
-	gtk_list_append_items (GTK_LIST (ntp_list), list_add);
 }
 
 static void

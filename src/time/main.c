@@ -121,8 +121,11 @@ static XstDialogSignal signals[] = {
 	{ "ntp_use",           "toggled",            ntp_use_toggled },
 	{ "timeserver_button", "clicked",            server_button_clicked },
 	{ "location_combo",    "set_focus_child",    xst_dialog_modify_cb },
-	/*	{ "tz_combo_entry",    "changed",            update_tz }, */
-	{ "ntp_list",          "selection_changed",  xst_dialog_modify_cb },
+#warning FIXME
+#if 0
+	{ "tz_combo_entry",    "changed",            update_tz },
+	{ "ntp_list",          "selection_changed",  xst_dialog_modify_cb }, 
+#endif
 	{ "ntp_add_server",    "clicked",            on_ntp_addserver },
 	{ "ntp_add_server",    "clicked",            xst_dialog_modify_cb },
 	{ NULL }
@@ -134,17 +137,36 @@ xst_time_populate_ntp_list (XstTimeTool *time_tool)
 	XstTool *tool = XST_TOOL (time_tool);
 	GtkWidget *ntp_list, *item;
 	GList *list_add = 0;
+	GtkListStore *store;
+	GtkCellRenderer *cell;
+	GtkTreeViewColumn *column;
+	GtkTreeIter iter;
 	int i;
 
+
+	/* ntp_list is a GtkTreeView */
 	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list");
+
+
+	/* set the model */
+	store = gtk_list_store_new (1, G_TYPE_STRING);
+	gtk_tree_view_set_model (GTK_TREE_VIEW (ntp_list),
+				 GTK_TREE_MODEL (store));
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (ntp_list), TRUE);
+
+
+	/* create the first column */
+	cell = gtk_cell_renderer_text_new ();
+	column = gtk_tree_view_column_new_with_attributes ("Servers", cell,
+							   "text", 0, NULL);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (ntp_list), column);
 	
+	
+
 	for (i = 0; ntp_servers[i]; i++) {
-		item = gtk_list_item_new_with_label (ntp_servers[i]);
-		gtk_widget_show (item);
-		list_add = g_list_append (list_add, item);
+		gtk_list_store_append (store, &iter);
+		gtk_list_store_set (store, &iter, 0, ntp_servers[i], -1);
 	}
-	
-	gtk_list_append_items (GTK_LIST (ntp_list), list_add);
 }
 
 
@@ -158,6 +180,8 @@ xst_time_init_timezone (XstTimeTool *time_tool)
 	int i;	
 
 	tzmap = e_tz_map_new (time_tool);
+	g_return_if_fail (tzmap != NULL);
+	
 	w = xst_dialog_get_widget (tool->main_dialog, "map_window");
 	gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (tzmap->map));
 	gtk_widget_show (GTK_WIDGET (tzmap->map));
@@ -292,8 +316,12 @@ xst_time_update_seconds (XstTimeTool *tool, gint add)
 	/* We want to keep the selected text when we are 
 	 * ticking.
 	 */
+#warning FIXME
+#if 0
+	I dont think this is needed anymore --James
 	start_pos = GTK_EDITABLE(tool->seconds)->selection_start_pos;
         end_pos   = GTK_EDITABLE(tool->seconds)->selection_end_pos;
+#endif
 	snprintf (buf, 3, "%02d", tool->sec);
 	gtk_entry_set_text (GTK_ENTRY (tool->seconds), buf);
 	if (GTK_WIDGET_HAS_FOCUS (tool->seconds))
@@ -338,6 +366,33 @@ xst_time_clock_tick (gpointer time_tool)
 	return TRUE;
 }
 
+static GtkWidget *
+timezone_construct_dialog (XstDialog *dialog)
+{
+	GtkWidget *content;
+	GtkWidget *d;
+
+	d = gtk_dialog_new_with_buttons (_("Ximian Setup Tools - Timezone"),
+					      NULL,
+					      GTK_DIALOG_MODAL,
+					      GTK_STOCK_APPLY,
+					      GTK_RESPONSE_APPLY,
+					      GTK_STOCK_CLOSE,
+					      GTK_RESPONSE_CLOSE, NULL);
+
+	gtk_widget_set_usize (GTK_WIDGET (d), 320, 320);
+
+	content = xst_dialog_get_widget (dialog, "time_zone_dialog_content");
+
+	/* FIXME: Yes, this is a hack. */
+	content->parent = NULL;
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (d)->vbox), content, TRUE,
+			    TRUE, 8);
+
+	return GTK_WIDGET (d);
+}
+
 static void
 timezone_button_clicked (GtkWidget *w, gpointer data)
 {
@@ -350,8 +405,7 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 	time_tool = XST_TIME_TOOL (xst_dialog_get_tool (dialog));
 
 	if (!d) {
-		d = xst_dialog_get_widget (dialog, "Time zone");
-		gnome_dialog_close_hides (GNOME_DIALOG (d), TRUE);
+		d = timezone_construct_dialog (dialog);
 	}
 
 	if (time_tool->time_zone_name) {
@@ -359,11 +413,9 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 	}
 
 	gtk_widget_show (d);
-	gdk_window_show (d->window);
-	gdk_window_raise (d->window);
 
-	result = gnome_dialog_run_and_close (GNOME_DIALOG (d));
-	if (result == 0) {
+	result = gtk_dialog_run (GTK_DIALOG (d));
+	if (result == GTK_RESPONSE_APPLY) {
 		gchar *tz_name;
 		TzLocation *tz_location;
 		gint correction;
@@ -376,6 +428,8 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 		xst_time_set_from_localtime (time_tool, correction);
 		xst_dialog_modify (dialog);
 	}
+
+	gtk_widget_hide (d);
 }
 
 static void
@@ -584,10 +638,16 @@ xst_time_spin_button_create (XstTimeTool *tool)
 {
 	GtkWidget *spin;
 
+	/* what was the point of having a custom spin button?  --James
 	spin = xst_spin_button_new ();
+	*/
+	spin = gtk_spin_button_new_with_range (0, 60, 1);
 	
+#warning FIXME
+#if 0
 	xst_spin_button_set_numeric (XST_SPIN_BUTTON (spin), FALSE);
 	xst_spin_button_set_wrap    (XST_SPIN_BUTTON (spin), TRUE);
+#endif
 
 	gtk_signal_connect (GTK_OBJECT (spin), "insert_text",
 			    GTK_SIGNAL_FUNC (xst_time_filter),
