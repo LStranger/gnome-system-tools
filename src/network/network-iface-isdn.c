@@ -186,6 +186,9 @@ gst_iface_isdn_init (GstIfaceIsdn *iface)
   iface->_priv->phone_number = NULL;
   iface->_priv->dial_prefix = NULL;
   iface->_priv->section = NULL;
+
+  /* FIXME: Set here the default until we add gui for this */
+  iface->_priv->noauth = TRUE;
 }
 
 static void
