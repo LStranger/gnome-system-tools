@@ -44,7 +44,9 @@ $(desktop).menu: $(desktop)
 	sed 's#Exec=.*#Exec=time-admin#' < $< > $@
 
 $(desktop).cc: $(desktop)
-	sed 's#Exec=.*#Exec=root-manager time-admin#' < $< > $@
+	sed 's#Exec=.*#Exec=time-admin#' < $< > $@
+
+#	sed 's#Exec=.*#Exec=root-manager time-admin#' < $< > $@
 
 $(security): $(security).in
 	sed 's#PROGRAM=.*#PROGRAM='$(DESTDIR)$(sbindir)'/time-admin#' < $< > $@

@@ -40,7 +40,9 @@ $(desktop).menu: $(desktop)
 	sed 's#Exec=.*#Exec=network-admin#' < $< > $@
 
 $(desktop).cc: $(desktop)
-	sed 's#Exec=.*#Exec=root-manager network-admin#' < $< > $@
+	sed 's#Exec=.*#Exec=network-admin#' < $< > $@
+
+#	sed 's#Exec=.*#Exec=root-manager network-admin#' < $< > $@
 
 $(security): $(security).in
 	sed 's#PROGRAM=.*#PROGRAM='$(DESTDIR)$(sbindir)'/network-admin#' < $< > $@

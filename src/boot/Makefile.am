@@ -45,7 +45,9 @@ $(desktop).menu: $(desktop)
 	sed 's#Exec=.*#Exec=boot-admin#' < $< > $@
 
 $(desktop).cc: $(desktop)
-	sed 's#Exec=.*#Exec=root-manager boot-admin#' < $< > $@
+	sed 's#Exec=.*#Exec=boot-admin#' < $< > $@
+
+#	sed 's#Exec=.*#Exec=root-manager boot-admin#' < $< > $@
 
 $(security): $(security).in
 	sed 's#PROGRAM=.*#PROGRAM='$(DESTDIR)$(sbindir)'/boot-admin#' < $< > $@

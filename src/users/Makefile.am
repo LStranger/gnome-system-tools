@@ -47,7 +47,9 @@ $(desktop).menu: $(desktop)
 	sed 's#Exec=.*#Exec=users-admin#' < $< > $@
 
 $(desktop).cc: $(desktop)
-	sed 's#Exec=.*#Exec=root-manager users-admin#' < $< > $@
+	sed 's#Exec=.*#Exec=users-admin#' < $< > $@
+
+#	sed 's#Exec=.*#Exec=root-manager users-admin#' < $< > $@
 
 $(security): $(security).in
 	sed 's#PROGRAM=.*#PROGRAM='$(DESTDIR)$(sbindir)'/users-admin#' < $< > $@
