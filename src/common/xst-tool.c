@@ -487,9 +487,9 @@ report_progress (XstTool *tool, const gchar *label)
 					     report_progress_tick, NULL, tool, NULL);
 	tool->input_block = FALSE;
 
-	xst_tool_idle_run_directives_remove (tool);
+/*	xst_tool_idle_run_directives_remove (tool);*/
 	gtk_main ();
-	xst_tool_idle_run_directives_add (tool);
+/*	xst_tool_idle_run_directives_add (tool);*/
 
 	if (tool->input_id)
 		gtk_input_remove (tool->input_id);
