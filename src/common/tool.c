@@ -524,6 +524,14 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
 
 	w0 = tool_widget_get ("apply");
 	if (w0) gtk_widget_set_sensitive (w0, FALSE);
+	
+	/* Desensitize the complexity button.
+	 * 
+	 * NOTE: This is temporary, until we have more complexity levels
+	 * for at least one tool */
+	
+	w0 = tool_widget_get ("complexity");
+	if (w0) gtk_widget_set_sensitive (w0, FALSE);
 
 	g_free (s);
 	return (tc);
