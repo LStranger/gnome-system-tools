@@ -182,8 +182,8 @@ dnl =====================================================
 dnl XST_LIBS & XST_CFLAGS 
 dnl =====================================================
 
-XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
-XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml`"
+XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver`"
+XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver`"
 
 case $host in
 *-*-freebsd* )
@@ -260,6 +260,13 @@ src/time/e-map/Makefile
 src/users/Makefile
 src/users/e-search-bar/Makefile
 src/boot/Makefile
+
+src/shares/Makefile
+src/print/Makefile
+src/display/Makefile
+src/location-manager/Makefile
+src/internetsharing/Makefile
+
 doc/Makefile
 doc/nameresolution/Makefile
 doc/networking/Makefile
