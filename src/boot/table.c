@@ -72,11 +72,11 @@ table_create (void)
 	for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
 		if (i == BOOT_LIST_COL_DEFAULT) {
 			renderer = gtk_cell_renderer_pixbuf_new ();
-			column = gtk_tree_view_column_new_with_attributes (boot_table_config [i].name, renderer, "pixbuf", i, NULL);
+			column = gtk_tree_view_column_new_with_attributes (_(boot_table_config [i].name), renderer, "pixbuf", i, NULL);
 		} else {
 			renderer = gtk_cell_renderer_text_new ();
 
-			column = gtk_tree_view_column_new_with_attributes (boot_table_config [i].name, renderer, "text", i, NULL);
+			column = gtk_tree_view_column_new_with_attributes (_(boot_table_config [i].name), renderer, "text", i, NULL);
 			gtk_tree_view_column_set_resizable (column, TRUE);
 			gtk_tree_view_column_set_sort_column_id (column, i);
 		}

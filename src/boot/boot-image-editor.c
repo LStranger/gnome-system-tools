@@ -108,6 +108,9 @@ construct (BootImageEditor *editor, BootImage *image)
 	gtk_window_set_title (GTK_WINDOW (editor), _("Boot Image Editor"));
 	gtk_window_set_policy (GTK_WINDOW (editor), FALSE, TRUE, TRUE);
 	gtk_window_set_modal (GTK_WINDOW (editor), TRUE);
+	gtk_dialog_set_has_separator (GTK_DIALOG (editor), FALSE);
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (editor)), 6);
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (editor)->vbox), 12);
 	gtk_dialog_add_buttons (GTK_DIALOG (editor),
 				GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
 				GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,

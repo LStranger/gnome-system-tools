@@ -41,7 +41,7 @@ typedef enum {
 } GstBootImageType;
 
 typedef struct {
-	gchar *label;
+	const gchar *label;
 	GstBootImageType type;
 } GstBootImageTypeTable;
 
