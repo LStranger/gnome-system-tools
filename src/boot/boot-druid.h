@@ -42,6 +42,11 @@ typedef struct {
 	
 	GnomeDruid *druid;
 	BootSettingsGui *gui;
+
+	gint npages;
+	gchar *druid_first_page_title;
+	gchar *druid_title;
+	gchar *druid_finish_title;
 } BootDruid;
 
 typedef struct {

@@ -106,6 +106,15 @@ druid_show_error (BootDruid *druid, gchar *error)
 	gtk_widget_destroy (d);
 }
 
+/* Start page */
+static void
+start_page_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
+{
+	BootDruid *config = data;
+	
+	gtk_window_set_title (GTK_WINDOW (config), _(config->druid_first_page_title));	
+}
+
 /* Identity Page */
 static void
 identity_check (BootDruid *druid)
@@ -128,7 +137,11 @@ static void
 identity_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	BootDruid *config = data;
+	gchar *title = g_strdup_printf (_(config->druid_title), 1, config->npages);
 	
+	gtk_window_set_title (GTK_WINDOW (config), title);
+	g_free (title);
+
 	gtk_widget_grab_focus (GTK_WIDGET (config->gui->name));
 	g_signal_stop_emission_by_name (page, "prepare");
 	identity_check (config);
@@ -195,6 +208,10 @@ static void
 other_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	BootDruid *config = data;
+	gchar *title = g_strdup_printf (_(config->druid_title), 1, config->npages);
+
+	gtk_window_set_title (GTK_WINDOW (config), title);
+	g_free (title);
 
 	gtk_widget_grab_focus (config->gui->device->entry);
 	g_signal_stop_emission_by_name (page, "prepare");
@@ -247,6 +264,10 @@ static void
 image_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	BootDruid *config = data;
+	gchar *title = g_strdup_printf (_(config->druid_title), 2, config->npages);
+	
+	gtk_window_set_title (GTK_WINDOW (config), title);
+	g_free (title);
 
 	gtk_widget_grab_focus (GTK_WIDGET (config->gui->image_entry));
 	g_signal_stop_emission_by_name (page, "prepare");
@@ -296,7 +317,7 @@ image_back (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	GnomeDruidPage *next_page;
 	BootDruid      *config = data;
 
-	next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml, "druidIdentityPage"));	
+	next_page = GNOME_DRUID_PAGE (glade_xml_get_widget (config->gui->xml, "druidIdentityPage"));
 	gnome_druid_set_page (druid, next_page);
 
 	return TRUE;
@@ -326,6 +347,14 @@ druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 	boot_image_save (config->gui->image);
 	boot_settings_gui_save (config->gui, TRUE);
 	druid_exit (config);
+}
+
+static void
+druid_finish_prepare (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
+{
+	BootDruid *config = data;
+	
+	gtk_window_set_title (GTK_WINDOW (config), _(config->druid_finish_title));
 }
 
 static gboolean
@@ -359,7 +388,7 @@ static struct {
 } pages[] = {
 	{ "druidStartPage",
 	  G_CALLBACK (NULL),
-	  G_CALLBACK (NULL),
+	  G_CALLBACK (start_page_prepare),
 	  G_CALLBACK (NULL),
 	  G_CALLBACK (NULL) },
 	{ "druidIdentityPage",
@@ -379,7 +408,7 @@ static struct {
 	  G_CALLBACK (NULL) },
 	{ "druidFinishPage",
 	  G_CALLBACK (NULL),
-	  G_CALLBACK (NULL),
+	  G_CALLBACK (druid_finish_prepare),
 	  G_CALLBACK (druid_finish_back),
 	  G_CALLBACK (druid_finish) },
 	NULL
@@ -395,6 +424,11 @@ construct (BootDruid *druid)
 	image = boot_image_new ();
 	if (!image)
 		return FALSE;
+
+	druid->npages = 2;
+	druid->druid_first_page_title = N_("Creating a new boot image");
+	druid->druid_title = N_("Creating a new boot image (%d of %d)");
+	druid->druid_finish_title = N_("Finished creating a new boot image");
 
 	druid->gui = boot_settings_gui_new (image, GTK_WIDGET (druid));
 
