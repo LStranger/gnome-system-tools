@@ -374,11 +374,11 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 				       xml_element_add_with_content (node, "password", u->password);
 				       break;
 				case 3:
-				       sprintf (buf, "%d", u->uid);
+				       snprintf (buf, 15, "%d", u->uid);
 				       xml_element_add_with_content (node, "uid", buf);
 				       break;
 				case 4:
-				       sprintf (buf, "%d", u->gid);
+				       snprintf (buf, 15, "%d", u->gid);
 				       xml_element_add_with_content (node, "gid", buf);
 				       break;
 				case 5:
@@ -391,31 +391,31 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 				       xml_element_add_with_content (node, "shell", u->shell);
 				       break;
 				case 8:
-				       sprintf (buf, "%d", u->last_mod);
+				       snprintf (buf, 15, "%d", u->last_mod);
 				       xml_element_add_with_content (node, "last_mod", buf);
 				       break;
 				case 9:
-				       sprintf (buf, "%d", u->passwd_max_life);
+				       snprintf (buf, 15, "%d", u->passwd_max_life);
 				       xml_element_add_with_content (node, "passwd_max_life", buf);
 				       break;
 				case 10:
-				       sprintf (buf, "%d", u->passwd_exp_warn);
+				       snprintf (buf, 15, "%d", u->passwd_exp_warn);
 				       xml_element_add_with_content (node, "passwd_exp_warn", buf);
 				       break;
 				case 11:
-				       sprintf (buf, "%d", u->passwd_exp_disable);
+				       snprintf (buf, 15, "%d", u->passwd_exp_disable);
 				       xml_element_add_with_content (node, "passwd_exp_disable",
 						       buf);
 				       break;
 				case 12:
-				       sprintf (buf, "%d", u->passwd_disable);
+				       snprintf (buf, 15, "%d", u->passwd_disable);
 				       xml_element_add_with_content (node, "passwd_disable", buf);
 				       break;
 				case 13:
 				       xml_element_add_with_content (node, "reserved", u->reserved);
 				       break;
 				case 14:
-				       sprintf (buf, "%d", u->is_shadow);
+				       snprintf (buf, 15, "%d", u->is_shadow);
 				       xml_element_add_with_content (node, "is_shadow", buf);
 				       break;
 			}
