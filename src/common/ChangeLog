@@ -1,3 +1,14 @@
+2001-03-27  Tambet Ingo  <tambet@ximian.com>
+
+	* xst-tool.c (xst_tool_destroy): gtk_main_quit here.
+	(xst_tool_set_close_func): Now we can add cleanup/gui-save functions
+	on tool exit.
+
+	* xst-dialog.c (dialog_close): Don't quit here, just destroy the dialog
+	  and emit "destroy" for tool.
+
+	* xst-tool.c (xst_tool_destroy): The right arg for it is GtkObject.
+
 2001-03-21  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-ui.c (xst_ui_create_image_widget): stolen from evolution's

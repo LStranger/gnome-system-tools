@@ -354,8 +354,8 @@ dialog_close (XstDialog *dialog)
 			apply_cb (NULL, dialog);
 	}
 
-	/* this shouldn't be here eventually */
-	gtk_main_quit ();
+	gtk_widget_destroy (GTK_WIDGET (dialog));
+	gtk_signal_emit_by_name (GTK_OBJECT (dialog->tool), "destroy");
 }
 
 static void

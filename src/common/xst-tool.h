@@ -34,7 +34,8 @@
 #define XST_IS_TOOL(o)       (GTK_CHECK_TYPE ((o), XST_TYPE_TOOL))
 #define XST_IS_TOOL_CLASS(c) (GTK_CHECK_CLASS_TYPE ((c), XST_TYPE_TOOL))
 
-typedef void (*XstXmlFunc) (XstTool *tool, gpointer data);
+typedef void (*XstXmlFunc)   (XstTool *tool, gpointer data);
+typedef void (*XstCloseFunc) (XstTool *tool, gpointer data);
 
 struct _XstTool {
 	GtkObject object;
@@ -113,6 +114,7 @@ void         xst_tool_save_cb             (GtkWidget *w, XstTool *tool);
 gboolean     xst_tool_load                (XstTool *tool);
 void         xst_tool_load_try            (XstTool *tool);
 void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
+void         xst_tool_set_close_func      (XstTool *tool, XstCloseFunc close_cb, gpointer data);
 
 GladeXML    *xst_tool_load_glade_common   (XstTool *tool, const gchar *widget);
 GladeXML    *xst_tool_load_glade          (XstTool *tool, const gchar *widget);

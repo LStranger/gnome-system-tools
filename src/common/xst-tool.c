@@ -663,9 +663,14 @@ xst_tool_main (XstTool *tool)
 }
 
 static void
-xst_tool_destroy (XstTool *tool)
+xst_tool_destroy (GtkObject *object)
 {
-	parent_class->destroy (GTK_OBJECT (tool));
+	XstTool *tool;
+
+	tool = XST_TOOL (object);
+	
+	parent_class->destroy (object);
+	gtk_main_quit ();
 }
 
 static void
@@ -840,6 +845,16 @@ xst_tool_set_xml_funcs (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, g
 
 	if (save_cb)
 		gtk_signal_connect (GTK_OBJECT (tool), "fill_xml", GTK_SIGNAL_FUNC (save_cb), data);
+}
+
+void
+xst_tool_set_close_func (XstTool *tool, XstCloseFunc close_cb, gpointer data)
+{
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (XST_IS_TOOL (tool));
+
+	if (close_cb)
+		gtk_signal_connect (GTK_OBJECT (tool), "destroy", GTK_SIGNAL_FUNC (close_cb), data);
 }
 
 void
