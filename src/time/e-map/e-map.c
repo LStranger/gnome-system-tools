@@ -1058,34 +1058,6 @@ update_render_pixbuf (EMap *map, ArtFilterLevel interp)
 	{
 		point = g_ptr_array_index (priv->points, i);
 		update_render_point (map, point);
-#if 0
-		e_map_world_to_window (map, point->longitude, point->latitude,
-				       &px, &py);
-		px += priv->xofs;
-		py += priv->yofs;
-		
-		if (px >= width || px < 0 ||
-		    py >= height || py < 0) continue;
-
-		/* Area */
-		
-		SET_PIXEL_RGB (pb, px, py, point->rgba);
-		if (px > 0) SET_PIXEL_RGB (pb, px - 1, py, point->rgba);
-		if (px < width - 1) SET_PIXEL_RGB (pb, px + 1, py, point->rgba);
-		if (py > 0) SET_PIXEL_RGB (pb, px, py - 1, point->rgba);
-		if (py < height - 1) SET_PIXEL_RGB (pb, px, py + 1, point->rgba);
-
-		/* Outline */
-
-		if (px > 1) SET_PIXEL_RGB (pb, px - 2, py, 0x000000ff);
-		if (px < width - 2) SET_PIXEL_RGB (pb, px + 2, py, 0x000000ff);
-		if (py > 1) SET_PIXEL_RGB (pb, px, py - 2, 0x000000ff);
-		if (py < height - 2) SET_PIXEL_RGB (pb, px, py + 2, 0x000000ff);
-		if (px > 0 && py > 0) SET_PIXEL_RGB (pb, px - 1, py - 1, 0x000000ff);
-		if (px > 0 && py < height - 1) SET_PIXEL_RGB (pb, px - 1, py + 1, 0x000000ff);
-		if (px < width - 1 && py > 0) SET_PIXEL_RGB (pb, px + 1, py - 1, 0x000000ff);
-		if (px < width - 1 && py < height - 1) SET_PIXEL_RGB (pb, px + 1, py + 1, 0x000000ff);
-#endif
 	}
 }
 
