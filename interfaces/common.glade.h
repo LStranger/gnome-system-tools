@@ -6,7 +6,6 @@
 
 gchar *s = N_("GNOME System Tools");
 gchar *s = N_("Scanning your system configuration.");
-gchar *s = N_("GNOME System Tools");
 gchar *s = N_("Unsupported platform");
 gchar *s = N_("The platform you are running is not supported by this tool. If you know for sure that it works like one of the platforms listed below, you can select that and continue.\n"
               "\n"
@@ -19,3 +18,5 @@ gchar *s = N_("To run this tool, you need administrator privileges.\n"
               "specify a password, you will be unable to modify your system configuration.");
 gchar *s = N_("Password:");
 gchar *s = N_("*");
+gchar *s = N_("Gnome System Tools");
+gchar *s = N_("Complexity");

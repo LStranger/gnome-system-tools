@@ -26,4 +26,4 @@ EXTRA_DIST = \
 CLEANFILES = $(interfaces)
 
 $(interfaces): %.glade: %.glade.in
-	sed 's{../pixmaps/{$(pixmapsdir)/{g' < $< > $@
+	$(top_srcdir)/interfaces/fix.pl $(pixmapsdir) < $< > $@
