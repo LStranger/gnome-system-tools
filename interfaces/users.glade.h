@@ -33,7 +33,7 @@ gchar *s = N_("Password expiration");
 gchar *s = N_("Days a password may be used:");
 gchar *s = N_("Minimum days allowed between password changes:");
 gchar *s = N_("Days between warning and\n"
-              " assword expiration:  ");
+              " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
 gchar *s = N_("Defaults");
 gchar *s = N_(" More Options >> ");
