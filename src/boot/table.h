@@ -47,8 +47,7 @@ typedef struct
 } BootTableConfig;
 
 
-GtkWidget        *table_create            (void);
-void              table_construct         (void);
+void              table_create            (void);
 
 void              table_populate          (xmlNodePtr root);
 void              boot_table_update_state (XstDialogComplexity);

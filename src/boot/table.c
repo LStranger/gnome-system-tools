@@ -50,22 +50,6 @@ BootTableConfig boot_table_config [] = {
 };
 
 void
-table_construct (void)
-{
-	GtkWidget *sw;
-	GtkWidget *list;
-
-	sw = xst_dialog_get_widget (tool->main_dialog, "boot_table_sw");
-	list = table_create ();
-
-	/* We add the signal that will change the default option */
-	g_signal_connect (G_OBJECT (list), "cursor-changed", G_CALLBACK (on_boot_table_clicked), NULL);
-
-	gtk_widget_show_all (list);
-	gtk_container_add (GTK_CONTAINER (sw), list);
-}
-
-GtkWidget *
 table_create (void)
 {
 	GtkTreeModel *model;
@@ -80,11 +64,10 @@ table_create (void)
 	
 	model = GTK_TREE_MODEL (gtk_tree_store_new (BOOT_LIST_COL_LAST, G_TYPE_STRING, GDK_TYPE_PIXBUF,
 	                                            G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
-	boot_table = gtk_tree_view_new_with_model (model);
-	g_object_unref (model);
 
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (boot_table), TRUE);
-	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (boot_table), TRUE);
+	boot_table = xst_dialog_get_widget (tool->main_dialog, "boot_table");
+	gtk_tree_view_set_model (GTK_TREE_VIEW (boot_table), model);
+	g_object_unref (model);
 
 	for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
 		if (i == BOOT_LIST_COL_DEFAULT) {
@@ -107,7 +90,10 @@ table_create (void)
 	g_signal_connect (G_OBJECT (selection), "changed",
 			  G_CALLBACK (on_boot_table_cursor_changed),
 			  NULL);
-	return boot_table;
+
+	/* We add the signal that will change the default option */
+	g_signal_connect (G_OBJECT (boot_table), "cursor-changed",
+			  G_CALLBACK (on_boot_table_clicked), NULL);
 }
 
 void

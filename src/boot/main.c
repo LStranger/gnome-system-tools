@@ -49,7 +49,6 @@ connect_signals (XstTool *tool)
 		{ "boot_delete",   "clicked", G_CALLBACK (on_boot_delete_clicked) },
 		{ "boot_settings", "clicked", G_CALLBACK (on_boot_settings_clicked) },
 		{ "boot_add",      "clicked", G_CALLBACK (on_boot_add_clicked) },
-		{ "boot_prompt",   "toggled", G_CALLBACK (on_boot_prompt_toggled) },
 		{ "boot_timeout",  "changed", G_CALLBACK (xst_dialog_modify_cb) },
 		{ NULL }
 	};
@@ -72,7 +71,7 @@ main (int argc, char *argv[])
 	xst_init ("boot-admin", argc, argv, NULL);
 	tool = xst_tool_new ();
 	xst_tool_construct (tool, "boot", _("Boot Manager Settings"));
-	table_construct ();
+	table_create ();
 
 	xst_tool_set_xml_funcs    (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	xst_tool_add_report_hooks (tool, report_hooks);

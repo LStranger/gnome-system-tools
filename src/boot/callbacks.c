@@ -185,18 +185,6 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 }
 
 void
-on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer data)
-{
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout"),
-						 gtk_toggle_button_get_active (toggle));
-
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout_label"),
-						 gtk_toggle_button_get_active (toggle));
-
-	xst_dialog_modify (tool->main_dialog);
-}
-
-void
 on_main_dialog_update_complexity (XstDialog *main_dialog, gpointer data)
 {
 	XstDialogComplexity complexity = xst_dialog_get_complexity (tool->main_dialog);

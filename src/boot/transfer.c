@@ -89,28 +89,6 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 	gchar *buf;
 	gint value;
 
-	buf = xst_xml_get_child_content (root, "prompt");
-
-	if (buf) {
-		if (*buf == '1') {
-			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
-						      (xst_dialog_get_widget
-						       (tool->main_dialog, "boot_prompt")),
-						      TRUE);
-			
-			gtk_widget_set_sensitive (xst_dialog_get_widget
-						  (tool->main_dialog, "boot_timeout"),
-						  TRUE);
-			
-			gtk_widget_set_sensitive (xst_dialog_get_widget
-						  (tool->main_dialog,
-						   "boot_timeout_label"),
-						  TRUE);
-		}
-
-		g_free (buf);
-	}
-
 	buf = xst_xml_get_child_content (root, "timeout");
 	if (buf) {
 		value = atoi (buf);
