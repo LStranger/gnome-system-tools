@@ -36,16 +36,18 @@ transfer_populate_menu (GstTool *tool, xmlNodePtr root)
 	xmlNodePtr    runlevels, runlevel;
 	GstWidget    *menu;
 	GtkTreeModel *model;
+	GtkTreeIter   iter;
 	gchar        *name, *desc, *first_runlevel;
 	gboolean      is_default, has_default;
 	gint          n_items, n_option;
-	
+
 	runlevels = gst_xml_element_find_first (root, "runlevels");
 	menu      = gst_dialog_get_gst_widget (tool->main_dialog, "runlevels_menu");
-	model     = gtk_combo_box_get_model (GTK_COMBO_BOX (menu->widget));
 	n_items   = 0;
 
-	gtk_list_store_clear (GTK_LIST_STORE (model));
+	model = GTK_TREE_MODEL (gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_STRING));
+	gtk_combo_box_set_model (GTK_COMBO_BOX (menu->widget), model);
+	g_object_unref (G_OBJECT (model));
 
 	for (runlevel = gst_xml_element_find_first (runlevels, "runlevel");
 	     runlevel != NULL;
@@ -59,7 +61,12 @@ transfer_populate_menu (GstTool *tool, xmlNodePtr root)
 		if (n_items == 0)
 			first_runlevel = name;
 
-		gtk_combo_box_append_text (GTK_COMBO_BOX (menu->widget), desc);
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model),
+				    &iter,
+				    0, desc,
+				    1, name,
+				    -1);
 
 		if (is_default) {
 			has_default = TRUE;

@@ -60,37 +60,9 @@ get_current_runlevel (GstTool *tool)
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
 
 	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
-		gtk_tree_model_get (model, &iter, 0, &str, -1);
+		gtk_tree_model_get (model, &iter, 1, &str, -1);
 
 	return str;
-}
-
-static gboolean
-current_runlevel_is_default (GstTool *tool)
-{
-	GtkWidget *menu;
-	gchar     *runlevel, *default_runlevel;
-
-	menu = gst_dialog_get_widget (tool->main_dialog, "runlevels_menu");
-	runlevel = get_current_runlevel (tool);
-	default_runlevel = g_object_get_data (G_OBJECT (menu), "default_runlevel");
-
-	return (strcmp (runlevel, default_runlevel) == 0);
-}
-
-/* if we are changing the same runlevel than the default,
- * start or stop the service */
-static void
-run_service (GstTool *tool, xmlNodePtr service, gchar *runlevel, gchar *action)
-{
-	gchar *script;
-	
-	if (current_runlevel_is_default (tool)) {
-		script = gst_xml_get_child_content (service, "script");
-		gst_tool_run_get_directive (tool, NULL, "throw_service", script, action, NULL);
-
-		g_free (script);
-	}
 }
 
 static void
@@ -115,7 +87,7 @@ toggle_service (GstTool *tool, xmlNodePtr service, gchar* runlevel, gboolean sta
 		     node = gst_xml_element_find_next (node, "runlevel"))
 		{
 			r = gst_xml_get_child_content (node, "number");
-		
+
 			if (strcmp (r, runlevel) == 0) {
 				gst_xml_set_child_content (node, "action", action);
 				found = TRUE;
@@ -342,26 +314,10 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 void
 on_runlevel_changed (GtkWidget *widget, gpointer data)
 {
-	xmlNodePtr  root, runlevels, node;
-	gchar      *runlevel, *desc, *name;
+	gchar      *runlevel;
 
-	root      = gst_xml_doc_get_root(tool->config);
-	runlevels = gst_xml_element_find_first (root, "runlevels");
 	runlevel  = get_current_runlevel (tool);
-	
-	for (node = gst_xml_element_find_first (runlevels, "runlevel");
-	     node;
-	     node = gst_xml_element_find_next (node, "runlevel"))
-	{
-		name = gst_xml_get_child_content (node, "number");
-		desc = gst_xml_get_child_content (node, "description");
-
-		if (strcmp (runlevel, desc) == 0)
-			change_runlevel (name);
-
-		g_free (name);
-		g_free (desc);
-	}
+	change_runlevel (runlevel);
 }
 
 void
@@ -495,7 +451,7 @@ on_dialog_complexity_change (GtkWidget *widget, GstTool *tool)
 		n_option = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu->widget),
 							       "default_item"));
 
-		gtk_combo_box_set_active (GTK_COMBO_BOX (menu), n_option);
+		gtk_combo_box_set_active (GTK_COMBO_BOX (menu->widget), n_option);
 		change_runlevel (default_runlevel);
 	}
 }
