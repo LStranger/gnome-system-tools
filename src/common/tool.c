@@ -143,7 +143,7 @@ void tool_context_destroy(ToolContext *tc)
 }
 
 
-void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
+static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 {
   char c;
   GtkWidget *bar;
@@ -179,7 +179,7 @@ void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 }
 
 
-void read_progress(int fd)
+static void read_progress(int fd)
 {
   guint input_id;
   
