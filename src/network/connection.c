@@ -81,13 +81,13 @@ const gchar *connection_ui_description =
 #define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))->active
 #define GET_BOOL_NOT(yy_prefix,xx) GET_BOOL(yy_prefix,xx); cxn->xx = !cxn->xx;
 #define GET_INT(yy_prefix,xx) cxn->xx = gtk_range_get_value (GTK_RANGE (GTK_SCALE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))))
-#define GET_DIAL_OPTION_MENU(yy_prefix, xx) cxn->xx = (gtk_option_menu_get_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))) == 0)? g_strdup ("ATDT"): g_strdup ("ATDP")
+#define GET_DIAL_COMMAND(yy_prefix, xx) cxn->xx = (gtk_combo_box_get_active (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))) == 0)? g_strdup ("ATDT"): g_strdup ("ATDP")
 #define SET_STR(yy_prefix,xx) gst_ui_entry_set_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), cxn->xx)
 #define SET_COMBO_STR(yy_prefix,xx) gst_ui_entry_set_text (GTK_ENTRY (GTK_BIN (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)))->child), cxn->xx)
 #define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), cxn->xx)
 #define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), !cxn->xx)
 #define SET_INT(yy_prefix,xx) gtk_range_set_value (GTK_RANGE (GTK_SCALE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))), cxn->xx)
-#define SET_DIAL_OPTION_MENU(yy_prefix, xx) gtk_option_menu_set_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), ((cxn->xx != NULL) && (g_ascii_strcasecmp (cxn->xx, "ATDP") == 0))?1:0)
+#define SET_DIAL_COMMAND(yy_prefix, xx) gtk_combo_box_set_active (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), ((cxn->xx != NULL) && (g_ascii_strcasecmp (cxn->xx, "ATDP") == 0))?1:0)
 
 typedef struct {
 	GtkWidget *list;
@@ -1650,6 +1650,26 @@ connection_fill_ip_menu (GtkWidget *menu)
                gtk_combo_box_append_text (GTK_COMBO_BOX (menu), _(bootproto_labels[i]));
 }
 
+void
+connection_fill_dial_menu (GtkWidget *menu)
+{
+	GtkTreeModel *model;
+	gint i;
+	char *dial_types[] = {
+		N_("Tones"),
+		N_("Pulses"),
+		NULL
+	};
+
+	g_return_if_fail (menu != NULL);
+
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (menu));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
+	for (i = 0; dial_types[i]; i++)
+		gtk_combo_box_append_text (GTK_COMBO_BOX (menu), _(dial_types[i]));
+}
+
 static void
 empty_general (GstConnection *cxn)
 {
@@ -1689,7 +1709,7 @@ empty_ppp (GstConnection *cxn)
 	GET_STR ("ppp_", password);
 	GET_BOOL ("ppp_", persist);
 	GET_INT ("ppp_", volume);
-	GET_DIAL_OPTION_MENU ("ppp_", dial_command);
+	GET_DIAL_COMMAND ("ppp_", dial_command);
 }
 
 static void
@@ -1889,13 +1909,18 @@ fill_wlan (GstConnection *cxn)
 static void
 fill_ppp (GstConnection *cxn)
 {
+	GtkWidget *menu;
+
+	menu = gst_dialog_get_widget (tool->main_dialog, "ppp_dial_command");
+	connection_fill_dial_menu (menu);
+	
 	SET_STR ("ppp_", phone_number);
 	SET_STR ("ppp_", external_line);
 	SET_STR ("ppp_", login);
 	SET_STR ("ppp_", password);
 	SET_BOOL ("ppp_", persist);
 	SET_INT ("ppp_", volume);
-	SET_DIAL_OPTION_MENU ("ppp_", dial_command);
+	SET_DIAL_COMMAND ("ppp_", dial_command);
 }
 
 static void

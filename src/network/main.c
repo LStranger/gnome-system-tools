@@ -133,7 +133,7 @@ GstDialogSignal signals[] = {
 	{ "ptp_address", "changed", G_CALLBACK (on_connection_modified) },
 	{ "ptp_remote_address", "changed", G_CALLBACK (on_connection_modified) },
 	{ "ptp_remote_is_gateway", "toggled", G_CALLBACK (on_connection_modified) },
-	{ "ppp_dial_command", "clicked", G_CALLBACK (on_connection_modified) },
+	{ "ppp_dial_command", "changed", G_CALLBACK (on_connection_modified) },
 	{ "ppp_volume", "value_changed", G_CALLBACK (on_connection_modified) },
 	{ "ppp_persist", "toggled", G_CALLBACK (on_connection_modified) },
 	{ "ppp_phone_number", "changed", G_CALLBACK (on_connection_modified) },

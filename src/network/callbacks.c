@@ -928,7 +928,7 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 		gtk_dialog_run (GTK_DIALOG (w));
 		gtk_widget_destroy (w);
 	} else
-		gtk_entry_set_text (GTK_ENTRY (GTK_BIN (GTK_COMBO (devices_combo))->child), dev);
+		gtk_entry_set_text (GTK_ENTRY (GTK_BIN (GTK_COMBO_BOX (devices_combo))->child), dev);
 
 	if (dev)
 		g_free (dev);

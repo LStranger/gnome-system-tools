@@ -5089,43 +5089,6 @@ network connection.</property>
 		  </child>
 
 		  <child>
-		    <widget class="GtkOptionMenu" id="ppp_dial_command">
-		      <property name="visible">True</property>
-		      <property name="can_focus">True</property>
-		      <property name="history">0</property>
-		      <signal name="changed" handler="on_connection_modified" last_modification_time="Wed, 05 Feb 2003 21:15:03 GMT"/>
-
-		      <child>
-			<widget class="GtkMenu" id="menu3">
-
-			  <child>
-			    <widget class="GtkMenuItem" id="menuitem4">
-			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Tones</property>
-			      <property name="use_underline">True</property>
-			    </widget>
-			  </child>
-
-			  <child>
-			    <widget class="GtkMenuItem" id="menuitem5">
-			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Pulses</property>
-			      <property name="use_underline">True</property>
-			    </widget>
-			  </child>
-			</widget>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="left_attach">2</property>
-		      <property name="right_attach">4</property>
-		      <property name="top_attach">2</property>
-		      <property name="bottom_attach">3</property>
-		      <property name="y_options"></property>
-		    </packing>
-		  </child>
-
-		  <child>
 		    <widget class="GtkHScale" id="ppp_volume">
 		      <property name="visible">True</property>
 		      <property name="can_focus">True</property>
@@ -5263,6 +5226,21 @@ network connection.</property>
 		      <property name="right_attach">3</property>
 		      <property name="top_attach">1</property>
 		      <property name="bottom_attach">2</property>
+		      <property name="x_options">fill</property>
+		      <property name="y_options">fill</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkComboBox" id="ppp_dial_command">
+		      <property name="visible">True</property>
+		      <property name="items" translatable="yes"></property>
+		    </widget>
+		    <packing>
+		      <property name="left_attach">2</property>
+		      <property name="right_attach">4</property>
+		      <property name="top_attach">2</property>
+		      <property name="bottom_attach">3</property>
 		      <property name="x_options">fill</property>
 		      <property name="y_options">fill</property>
 		    </packing>
