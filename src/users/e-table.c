@@ -50,13 +50,13 @@
 #define USER_COLS 1
 #define GROUP_COLS 1
 
-#define USER_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/></ETableSpecification>"
+#define USER_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"integer\"/> <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/></ETableSpecification>"
 
 #define GROUP_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
 
 #define ADV_USER_STATE "<ETableState><column source=\"1\"/><column source=\"0\"/><column source=\"2\"/><column source=\"3\"/><grouping><leaf column=\"1\" ascending=\"true\"/></grouping></ETableState>"
 
-#define BASIC__USER_STATE "<ETableState><column source=\"0\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
+#define BASIC_USER_STATE "<ETableState><column source=\"0\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
 
 /* Local globals */
 
