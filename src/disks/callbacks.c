@@ -406,58 +406,41 @@ gst_disks_storage_get_device_speed_cb (GstDirectiveEntry *entry)
 	g_free (media);
 }
 
-static void
-gst_change_part_mount_point (GtkWidget *button, gpointer gdata)
-{
-	GtkWidget *filesel;
-	GtkWidget *point_entry;
-
-	filesel = (GtkWidget *) gdata;
-
-	point_entry = gst_dialog_get_widget (tool->main_dialog, "part_point_entry");
-
-	gtk_entry_set_text (GTK_ENTRY (point_entry),
-			    gtk_file_selection_get_filename (GTK_FILE_SELECTION (filesel)));
-}
-
-static void
-gst_change_cdrom_disc_mount_point (GtkWidget *button, gpointer gdata)
-{
-	GtkWidget *filesel;
-	GtkWidget *point_entry;
-
-	filesel = (GtkWidget *) gdata;
-
-	point_entry = gst_dialog_get_widget (tool->main_dialog, "cd_point_entry");
-
-	gtk_entry_set_text (GTK_ENTRY (point_entry),
-			    gtk_file_selection_get_filename (GTK_FILE_SELECTION (filesel)));
-}
-
 void
 gst_on_change_mp_button_clicked (GtkWidget *button, gpointer gdata)
 {
 	GtkWidget *filesel;
+	GtkWidget *point_entry;
+	gchar     *filename;
 
-	filesel = gtk_file_selection_new (_("Select New Mount Point Path"));
+	filesel = gtk_file_chooser_dialog_new (_("Select New Mount Point Path"),
+								    NULL, GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
+								    GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+								    GTK_STOCK_OPEN, GTK_RESPONSE_ACCEPT, NULL);
 
 	if (g_ascii_strcasecmp (gtk_widget_get_name (button), "cd_change_mp_button") == 0) {
-		g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
-				  "clicked", G_CALLBACK (gst_change_cdrom_disc_mount_point),
-				  (gpointer) filesel);
+		   point_entry = gst_dialog_get_widget (tool->main_dialog, "cd_point_entry");
 	} else {
-		g_signal_connect (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
-				  "clicked", G_CALLBACK (gst_change_part_mount_point),
-				  (gpointer) filesel);
+		   point_entry = gst_dialog_get_widget (tool->main_dialog, "part_point_entry");
 	}
-	
-	g_signal_connect_swapped (G_OBJECT (GTK_FILE_SELECTION (filesel)->ok_button),
-				  "clicked", G_CALLBACK (gtk_widget_destroy),
-				  (gpointer) filesel);
-	
-	g_signal_connect_swapped (G_OBJECT (GTK_FILE_SELECTION (filesel)->cancel_button),
-				 "clicked", G_CALLBACK (gtk_widget_destroy),
-				 (gpointer) filesel);
 
-	gtk_widget_show (filesel);
+	filename = g_strdup (gtk_entry_get_text (GTK_ENTRY (point_entry)));
+	
+	if (g_file_test (filename, G_FILE_TEST_IS_DIR)) {
+		   gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (filesel),
+										filename);
+	}
+
+	if (filename) {
+		   g_free (filename);
+		   filename = NULL;
+	}
+								  
+	if (gtk_dialog_run (GTK_DIALOG (filesel)) == GTK_RESPONSE_ACCEPT) {
+		   filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filesel));
+		   gtk_entry_set_text (GTK_ENTRY (point_entry), filename);
+		   g_free (filename);
+	}
+
+	gtk_widget_destroy (filesel);
 }

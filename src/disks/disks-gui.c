@@ -100,23 +100,17 @@ gst_storage_get_float_size (const gulong size)
 GdkPixbuf *
 gst_storage_get_icon (const gchar *icon_name)
 {
-	GdkPixbuf *pb;
+	GdkPixbuf *pb = NULL;
 	gchar *file;
 	
-	file = gnome_icon_theme_lookup_icon (GST_DISKS_TOOL (tool)->icon_theme,
-					     icon_name, 48,
-					     NULL, NULL);
-	/* GTK 2.4 */
-	/*pb = gtk_icon_theme_load_icon (GST_DISKS_TOOL (tool)->icon_theme,
-				       icon_name, 48, GTK_ICON_LOOKUP_FORCE_SVG,
-				       NULL);*/
-	if (!file) {
+	pb = gtk_icon_theme_load_icon (GST_DISKS_TOOL (tool)->icon_theme,
+				       icon_name, 48, 0,
+				       NULL);
+	if (!pb) {
 		file = g_strdup_printf (PIXMAPS_DIR"/%s.png", icon_name);
+		pb = gdk_pixbuf_new_from_file (file, NULL);
+		g_free (file);
 	}
-	
-	pb = gdk_pixbuf_new_from_file (file, NULL);
-	
-	g_free (file);
 	
 	return pb;
 }
@@ -361,8 +355,6 @@ gst_disks_gui_setup ()
 
 	list = GST_DISKS_TOOL (tool)->storages;
 
-	/*GST_DISKS_TOOL (tool)->icon_theme = gnome_icon_theme_new ();*/
-	gnome_icon_theme_set_allow_svg (GST_DISKS_TOOL (tool)->icon_theme, TRUE);
 	g_signal_connect (G_OBJECT (GST_DISKS_TOOL (tool)->icon_theme), "changed",
 			  G_CALLBACK (gst_disks_gui_storage_list_reload),
 			  (gpointer) list);

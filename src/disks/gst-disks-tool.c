@@ -65,8 +65,7 @@ disks_tool_init (GstDisksTool *tool)
 	   g_return_if_fail (GST_IS_DISKS_TOOL (tool));
 
 	   tool->storages = NULL;
-	   /*tool->icon_theme = gtk_icon_theme_get_default();*/ /* GTK 2.4 */
-	   tool->icon_theme = gnome_icon_theme_new ();
+	   tool->icon_theme = gtk_icon_theme_get_default ();
 }
 
 static void

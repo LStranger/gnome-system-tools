@@ -24,7 +24,7 @@
 #  include <config.h>
 #endif
 
-#include <libgnome/gnome-i18n.h>
+#include <glib/gi18n.h>
 
 #include "disks-mountable.h"
 #include "disks-partition.h"
