@@ -233,15 +233,15 @@ user_query_changed (ESearchBar *esb, gpointer user_data)
 static void
 create_searchbar (void)
 {
-	GtkWidget *box;
+	GtkWidget *table;
 	ESearchBar *search;
 
-	box = xst_dialog_get_widget (tool->main_dialog, "user_parent");
+	table = xst_dialog_get_widget (tool->main_dialog, "user_parent");
 	
 	search = E_SEARCH_BAR (e_search_bar_new (user_search_menu_items,
 						 user_search_option_items));
-	gtk_box_pack_start (GTK_BOX (box), GTK_WIDGET (search),
-			    FALSE, FALSE, 0);
+	gtk_table_attach (GTK_TABLE (table), GTK_WIDGET (search), 0, 1, 0, 1,
+			  GTK_FILL, GTK_FILL, 0, 0);
 	gtk_widget_show (GTK_WIDGET (search));
 	gtk_signal_connect (GTK_OBJECT (search), "query_changed",
 			    GTK_SIGNAL_FUNC (user_query_changed), 0);
