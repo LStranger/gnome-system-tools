@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-04 14:51+0200\n"
-"PO-Revision-Date: 2004-06-04 22:47+0800\n"
+"POT-Creation-Date: 2004-06-14 19:55+0200\n"
+"PO-Revision-Date: 2004-06-15 06:42+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgstr ""
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
-msgstr "GST能够通过SSH进行远程配置，启用这个选项以使用该特性"
+msgstr "GST 能够通过 SSH 进行远程配置，启用这个选项以使用该特性"
 
 #: gnome-system-tools.schemas.in.h:12
 msgid "The last GST version that this computer has run"
@@ -169,11 +169,11 @@ msgstr "<span weight=\"bold\">开机</span>"
 
 #: interfaces/boot.glade.in.h:19
 msgid "Ask at boot"
-msgstr "启动时提问"
+msgstr "启动时询问"
 
 #: interfaces/boot.glade.in.h:20 src/boot/main.c:73
 msgid "Boot Manager Settings"
-msgstr "引导管理器设定"
+msgstr "引导管理器设置"
 
 #: interfaces/boot.glade.in.h:21
 msgid ""
@@ -186,7 +186,7 @@ msgstr ""
 
 #: interfaces/boot.glade.in.h:22
 msgid "Click \"Forward\" to continue"
-msgstr "点击“下一步”继续"
+msgstr "单击“下一步”继续"
 
 #: interfaces/boot.glade.in.h:23
 msgid "Confirmation"
@@ -197,7 +197,7 @@ msgstr "确认"
 #: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:433
 #: src/boot/boot-druid.c:445
 msgid "Creating a new boot image"
-msgstr "创建一个新的启动映象"
+msgstr "创建一个新的启动映像"
 
 #: interfaces/boot.glade.in.h:25
 msgid "Don't ask me again"
@@ -218,7 +218,7 @@ msgid "Finished"
 msgstr "完成"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:52
-#: src/network/connection.c:1891
+#: src/network/connection.c:1867
 msgid "Manual"
 msgstr "手动"
 
@@ -264,13 +264,13 @@ msgstr "指定安装了操作系统的分区。"
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
-msgstr "已经加入了新的启动映像。请点击“应用”来保存您所做的改动。"
+msgstr "已经加入了新的启动映像。请单击“应用”来保存您所做的改动。"
 
 #: interfaces/boot.glade.in.h:40
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
-msgstr "该助手是设计来帮助您简单而快速地把一个新的启动映像文件添加到您的系统。"
+msgstr "此助手可帮助您简单快速地把一个新的启动映像文件添加到您的系统。"
 
 #: interfaces/boot.glade.in.h:41
 msgid "Use this dialog to modify kernel parameters."
@@ -496,11 +496,11 @@ msgstr "允许所有用户进行激活控制(_U)"
 msgid "Auto"
 msgstr "自动"
 
-#: interfaces/network.glade.in.h:30 src/network/connection.c:1893
+#: interfaces/network.glade.in.h:30 src/network/connection.c:1869
 msgid "Automatic (BOOTP)"
 msgstr "自动(BOOTP)"
 
-#: interfaces/network.glade.in.h:31 src/network/connection.c:1892
+#: interfaces/network.glade.in.h:31 src/network/connection.c:1868
 msgid "Automatic (DHCP)"
 msgstr "自动(DHCP)"
 
@@ -705,7 +705,7 @@ msgstr "这是将作为名字服务器的 IP 地址清单"
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
-msgstr "要继续配置您的网络连接，点击“下一步”。要退出，请点击“取消”。"
+msgstr "要继续配置您的网络连接，单击“下一步”。要退出，请单击“取消”。"
 
 #: interfaces/network.glade.in.h:81
 msgid "Tones"
@@ -739,7 +739,7 @@ msgstr "无线设置"
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
-msgstr "您将创建一个新的网络连接。请点击“应用”来保存所做的修改。"
+msgstr "您将创建一个新的网络连接。请单击“应用”来保存所做的修改。"
 
 #: interfaces/network.glade.in.h:89
 msgid "_Apply and activate connection"
@@ -758,6 +758,7 @@ msgid "_Deactivate"
 msgstr "禁用(_D)"
 
 #: interfaces/network.glade.in.h:93 interfaces/users.glade.in.h:55
+#: src/network/connection.c:64 src/network/dns.c:39 src/network/hosts.c:42
 #: src/users/table.c:48
 msgid "_Delete"
 msgstr "删除(_D)"
@@ -946,7 +947,7 @@ msgstr "时区："
 
 #: interfaces/time.glade.in.h:10
 msgid "To select a time zone, click on one of the dots on the map"
-msgstr "点击地图上的一点来选择时区"
+msgstr "单击地图上的一点来选择时区"
 
 #: interfaces/time.glade.in.h:11
 msgid "_Date:"
@@ -1084,11 +1085,11 @@ msgstr "办公室位置(_F)："
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
-msgstr "在这一页中您可以设定给新用户的系统默认值。"
+msgstr "在这一页中您可以定义指派给新用户的系统默认值。"
 
 #: interfaces/users.glade.in.h:36
 msgid "Other Groups"
-msgstr "其他组"
+msgstr "其它组"
 
 #: interfaces/users.glade.in.h:37
 msgid "Password set to: "
@@ -1232,7 +1233,7 @@ msgstr "创建新的引导映像(第%d步，共%d步)"
 msgid "Finished creating a new boot image"
 msgstr "创建新的引导映像完成"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:482
+#: src/boot/boot-image.c:40 src/network/profile.c:490
 msgid "Unknown"
 msgstr "未知"
 
@@ -1262,28 +1263,28 @@ msgstr "GNU/Hurd"
 
 #: src/boot/boot-image.c:276
 #, c-format
-msgid "Invalid path: %s"
-msgstr "非法路径：%s"
+msgid "\"%s\" is an invalid path"
+msgstr "“%s” 是无效路径"
 
 #: src/boot/boot-image.c:292
 #, c-format
-msgid "Image '%s' already exists, please set another name."
-msgstr "映像“%s”已存在，请设定其它的名称。"
+msgid "\"%s\" already exists, please set another name"
+msgstr "“%s”已存在，请设定其它的名称"
 
 #: src/boot/boot-image.c:298
 #, c-format
-msgid "Invalid image name: '%s'"
-msgstr "非法映像名：“%s”"
+msgid "Invalid image name: \"%s\""
+msgstr "无效的映像名：“%s”"
 
 #: src/boot/boot-image.c:311
 #, c-format
-msgid "Invalid image: '%s'"
-msgstr "非法映像：“%s”"
+msgid "Invalid image: \"%s\""
+msgstr "无效映像：“%s”"
 
 #: src/boot/boot-image.c:329
 #, c-format
-msgid "Invalid root device: '%s'"
-msgstr "非法根设备：“%s”"
+msgid "Invalid root device: \"%s\""
+msgstr "无效的根设备：“%s”"
 
 #: src/boot/boot-settings.c:44
 msgid "_Module path:"
@@ -1319,8 +1320,8 @@ msgid "Error deleting boot image"
 msgstr "删除启动映像出错"
 
 #: src/boot/callbacks.c:394
-msgid "Without at least one boot image your system will not start."
-msgstr "没有至少一个启动映像文件，您的系统将无法启动。"
+msgid "Without at least one boot image your computer will not start"
+msgstr "如果连一个启动映像文件都没有，您的系统将无法启动"
 
 #: src/boot/callbacks.c:415
 msgid "This may leave this operating system unbootable"
@@ -1348,7 +1349,7 @@ msgstr "名称"
 msgid "Default"
 msgstr "默认"
 
-#: src/boot/table.c:43 src/network/connection.c:500
+#: src/boot/table.c:43 src/network/connection.c:487
 msgid "Type"
 msgstr "类型"
 
@@ -1356,11 +1357,11 @@ msgstr "类型"
 msgid "Kernel Image"
 msgstr "内核映像"
 
-#: src/boot/table.c:45 src/network/connection.c:516
+#: src/boot/table.c:45 src/network/connection.c:503
 msgid "Device"
 msgstr "设备"
 
-#: src/boot/table.c:50 src/network/connection.c:62
+#: src/boot/table.c:50
 msgid "/_Add ..."
 msgstr "/添加(_A)..."
 
@@ -1368,15 +1369,14 @@ msgstr "/添加(_A)..."
 msgid "/_Properties"
 msgstr "/属性(_P)"
 
-#: src/boot/table.c:53 src/network/connection.c:65 src/network/dns.c:39
-#: src/network/hosts.c:43
+#: src/boot/table.c:53
 msgid "/_Delete"
 msgstr "/删除(_D)"
 
 #. the proccess was running ssh
 #: src/common/gst-auth.c:89
-msgid "Could not connect to the computer"
-msgstr "无法连接到计算机"
+msgid "The tool could not connect to the computer"
+msgstr "工具无法连接到计算机"
 
 #: src/common/gst-auth.c:90
 msgid ""
@@ -1386,13 +1386,14 @@ msgstr "请检查您是否可访问此网络，计算机是否工作正常并在
 
 #. the proccess was running su
 #: src/common/gst-auth.c:94
-msgid "The password you entered is invalid"
-msgstr "您输入的密码无效"
+msgid "The entered password is invalid"
+msgstr "输入的密码无效"
 
 #: src/common/gst-auth.c:95
 msgid ""
-"Check that you typed it correctly and that you haven't activated caps lock"
-msgstr "请检查您输入的是否正常，您是否正确使用了 Caps Lock 键"
+"Check that you typed it correctly and that you haven't activated the \"caps "
+"lock\" key"
+msgstr "请检查您输入的是否正常，您是否正确使用了“Caps Lock”键"
 
 #: src/common/gst-auth.c:104
 #, c-format
@@ -1400,12 +1401,12 @@ msgid "Could not run \"%s\""
 msgstr "不能运行“%s”"
 
 #: src/common/gst-auth.c:105
-msgid "Check that you have permissions to run it."
-msgstr "请检查您是否有运行它的权限。"
+msgid "Check that you have permissions to run this command"
+msgstr "请检查您是否有运行此命令的权限"
 
 #: src/common/gst-auth.c:107
-msgid "An unexpected error has ocurred."
-msgstr "发生了一个意外错误。"
+msgid "An unexpected error has ocurred"
+msgstr "发生了一个意外错误"
 
 #: src/common/gst-dialog.c:62
 #, c-format
@@ -1421,7 +1422,7 @@ msgid " Fewer _Options"
 msgstr "更少选项(_O)"
 
 #: src/common/gst-dialog.c:507
-msgid "There are changes which haven't been applied"
+msgid "There are changes which have not been applied"
 msgstr "现在还有更改尚未应用"
 
 #: src/common/gst-dialog.c:508
@@ -1432,15 +1433,6 @@ msgstr "立即应用吗？"
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "在部件“%2$s”中存在错误的连接信号“%1$s”"
-
-#: src/common/gst-tool.c:802
-#, c-format
-msgid "Skipping %s directive..."
-msgstr "正在跳过 %s 指令..."
-
-#: src/common/gst-tool.c:929
-msgid "Skipping actual save..."
-msgstr "正在跳过实际保存..."
 
 #: src/common/gst-tool.c:1003
 msgid "The configuration could not be loaded"
@@ -1479,59 +1471,55 @@ msgstr "不再显示此信息"
 msgid "GNOME System Tools"
 msgstr "GNOME 系统工具"
 
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:397
 msgid ""
 "This will disable any network connection with this interface as soon as you "
-"hit \"apply\"."
-msgstr "在您单击“应用”后，将禁用此接口的任何网络连接。"
+"press \"apply\""
+msgstr "在您单击“应用”后，将立即禁用此接口的任何网络连接"
 
-#: src/network/callbacks.c:370
+#: src/network/callbacks.c:402
 #, c-format
 msgid "Are you sure you want to delete connection \"%s\"?"
 msgstr "您确定想要删除连接“%s”吗？"
 
-#: src/network/callbacks.c:460
+#: src/network/callbacks.c:492
 msgid "SMB Support is not running"
 msgstr "SMB 未在运行"
 
-#: src/network/callbacks.c:461
+#: src/network/callbacks.c:493
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
-"system to enable windows networking."
+"system to enable file sharing in Windows networks"
 msgstr ""
-"您未安装 SMB 支持。要启用与 Windows 的联网，请在您的系统中安装 SMB 支持。"
+"您未安装 SMB 支持。要启用与 Windows 的联网，请在您的系统中安装 SMB 支持"
 
-#: src/network/callbacks.c:525
-msgid "Host name has changed"
+#: src/network/callbacks.c:557
+msgid "The host name has changed"
 msgstr "主机名已更改"
 
-#: src/network/callbacks.c:526
+#: src/network/callbacks.c:558
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
 msgstr "这将阻止您启动新的应用程序，因此您必须重新登录。仍要继续吗？"
 
-#: src/network/callbacks.c:530
+#: src/network/callbacks.c:562
 msgid "Change _Host name"
 msgstr "更改主机名(_H)："
 
-#: src/network/callbacks.c:573
-msgid "Wvdial missing"
-msgstr "缺少 Wvdial"
+#: src/network/callbacks.c:605 src/network/callbacks.c:632
+msgid "Wvdial command not found"
+msgstr "Wvdial 命令找不到"
 
-#: src/network/callbacks.c:574
+#: src/network/callbacks.c:606
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
-"PPP (modem) connections will not activate."
+"PPP (modem) connections will not activate"
 msgstr ""
 "未在您的系统中找到 wvdial。您需要安装 wvdial，否则 PPP(调制解调器)连接无法激"
-"活。"
+"活"
 
-#: src/network/callbacks.c:600
-msgid "Wvdial not found"
-msgstr "Wvdial 找不到"
-
-#: src/network/callbacks.c:601
+#: src/network/callbacks.c:633
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1539,87 +1527,89 @@ msgstr ""
 "未在您的系统中找到 wvdial。您需要安装 wvdial，否则 PPP(调制解调器)连接无法激"
 "活。仍要继续吗？"
 
-#: src/network/callbacks.c:605 src/network/callbacks.c:632
+#: src/network/callbacks.c:637 src/network/callbacks.c:664
 msgid "_Continue"
 msgstr "继续(_C)"
 
-#: src/network/callbacks.c:628
+#: src/network/callbacks.c:660
 msgid "The default gateway device is not activated"
 msgstr "默认网关设备未激活"
 
-#: src/network/callbacks.c:629
+#: src/network/callbacks.c:661
 msgid "This will prevent you from connecting to the Internet. Continue anyway?"
 msgstr "这将阻止您连接到 Internet。仍要继续吗？"
 
-#: src/network/callbacks.c:677
+#: src/network/callbacks.c:709
 msgid "The default gateway device is missing gateway information"
 msgstr "默认网关设备缺少网关信息"
 
-#: src/network/callbacks.c:678
+#: src/network/callbacks.c:710
 msgid ""
 "Please provide this information to proceed, or choose another default "
-"gateway device."
-msgstr "请提供此信息以便继续，或者选择其他的默认网关设备。"
+"gateway device"
+msgstr "请提供此信息以便继续，或者选择其他的默认网关设备"
 
-#: src/network/callbacks.c:723
+#: src/network/callbacks.c:755
 msgid "The program redhat-config-network-cmd could not be found"
 msgstr "找不到程序 redhat-config-network-cmd"
 
-#: src/network/callbacks.c:724
+#: src/network/callbacks.c:756
 msgid ""
 "This could render missing connections under the connections tab. Please "
-"install the redhat-config-network rpm package to avoid this."
+"install the redhat-config-network rpm package to avoid this"
 msgstr ""
 "这可能造成在连接标签页中下缺少连接。请安装 redhat-config-network rpm 软件包以"
-"避免该问题。"
+"避免该问题"
 
-#: src/network/callbacks.c:755
+#: src/network/callbacks.c:787
 #, c-format
 msgid "Do you want to enable interface \"%s\"?"
 msgstr "您想启用接口“%s”吗？"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:788
 msgid "This will enable network access through this interface"
 msgstr "这样启用通过此接口的网络访问"
 
-#: src/network/callbacks.c:757
+#: src/network/callbacks.c:789
 msgid "_Enable"
 msgstr "启用(_E)"
 
-#: src/network/callbacks.c:759
+#: src/network/callbacks.c:791
 #, c-format
 msgid "Do you want to disable interface \"%s\"?"
 msgstr "您想禁用网卡“%s”吗？"
 
-#: src/network/callbacks.c:760
+#: src/network/callbacks.c:792
 msgid "This will disable network access through this interface"
 msgstr "这将禁止通过此接口的网络访问"
 
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:793
 msgid "_Disable"
 msgstr "禁用(_D)"
 
-#: src/network/callbacks.c:868
+#: src/network/callbacks.c:900
 msgid "Could not autodetect modem device"
 msgstr "无法自动监测调制解调器设备"
 
-#: src/network/callbacks.c:869
-msgid "Check that it's not busy and that it's correctly attached"
-msgstr "请确认设备并不繁忙并已正确插入"
+#: src/network/callbacks.c:901
+msgid ""
+"Check that the device is not busy and that is correctly attached to the "
+"computer"
+msgstr "请确认设备并不繁忙并已正确联入计算机"
 
-#: src/network/callbacks.c:923
+#: src/network/callbacks.c:956
 msgid "Silent"
 msgstr "静音"
 
-#: src/network/callbacks.c:925
+#: src/network/callbacks.c:958
 msgid "Low"
 msgstr "低"
 
-#: src/network/callbacks.c:927
+#: src/network/callbacks.c:960
 msgid "Medium"
 msgstr "中"
 
-#: src/network/callbacks.c:929
+#: src/network/callbacks.c:962
 msgid "Loud"
 msgstr "高"
 
@@ -1656,126 +1646,126 @@ msgstr "回环网卡"
 msgid "Unknown interface type"
 msgstr "未知网卡类型"
 
-#: src/network/connection.c:64
-msgid "/_Configure"
-msgstr "/配置(_C)"
+#: src/network/connection.c:62 src/users/table.c:46
+msgid "_Add"
+msgstr "添加(_A)"
 
-#: src/network/connection.c:487 src/services/table.c:86
+#: src/network/connection.c:63 src/users/table.c:47
+msgid "_Properties"
+msgstr "属性(_P)"
+
+#: src/network/connection.c:474 src/services/table.c:86
 msgid "Active"
 msgstr "激活"
 
-#: src/network/connection.c:1742 src/network/connection.c:1752
+#: src/network/connection.c:1718 src/network/connection.c:1728
 msgid "Error in IP address"
 msgstr "本地 IP 地址出错"
 
-#: src/network/connection.c:1743
+#: src/network/connection.c:1719
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
-"valid IP addresses in those fields to continue."
+"valid IP addresses in those fields to continue"
 msgstr ""
-"该网卡的 IP 地址或网络掩码空缺。请在这些域中填入有效的 IP 地址以便继续。"
+"该网卡的 IP 地址或网络掩码空缺。请在这些域中填入有效的 IP 地址以便继续"
 
-#: src/network/connection.c:1753
+#: src/network/connection.c:1729
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
-"enter valid IP addresses in those fields to continue."
+"enter valid IP addresses in those fields to continue"
 msgstr ""
-"该网卡的 IP 地址或远程地址空缺。请在这些域中填入有效的 IP 地址以便继续。"
+"该网卡的 IP 地址或远程地址空缺。请在这些域中填入有效的 IP 地址以便继续"
 
-#: src/network/connection.c:1761
-msgid "Error in DNS servers"
+#: src/network/connection.c:1737
+msgid "Error in domain name servers"
 msgstr "DNS 服务器出错"
 
-#: src/network/connection.c:1762
+#: src/network/connection.c:1738
 msgid ""
-"You chose to set the DNS servers for this connection manually, but left the "
-"IP address for the primary DNS empty. Please enter the IP for the primary "
-"DNS or uncheck the manual DNS option."
+"You chose to set the domain name servers for this connection manually, but "
+"left the IP address for the primary name server empty. Please enter the IP "
+"for the primary domain name server or uncheck the manual DNS option"
 msgstr ""
 "您选择了手动设置该连接的 DNS 服务器，但是并未填入主 DNS 的 IP 地址。请输入主 "
-"DNS 的 IP 地址，或者取消手动设置 DBS 的选项。"
+"DNS 的 IP 地址，或者取消手动设置 DBS 的选项"
 
-#: src/network/connection.c:1769
+#: src/network/connection.c:1745
 msgid "Invalid modem device"
 msgstr "无效的调制解调器设备"
 
-#: src/network/connection.c:1770
+#: src/network/connection.c:1746
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
-"device or press \"autodetect\" to continue."
+"device or press \"autodetect\" to continue"
 msgstr ""
-"连接即将使用的调制解调器设备为空。请输入设备，或者选择“自动检测”以便继续。"
+"连接即将使用的调制解调器设备为空。请输入设备，或者选择“自动检测”以便继续"
 
-#: src/network/connection.c:1775
+#: src/network/connection.c:1751
 msgid "Invalid phone number"
 msgstr "无效的电话号码"
 
-#: src/network/connection.c:1776
+#: src/network/connection.c:1752
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
-"valid phone number to continue."
-msgstr "连接即将使用的电话号码为空。请输入有效的电话号码以便继续。"
+"valid phone number to continue"
+msgstr "连接即将使用的电话号码为空。请输入有效的电话号码以便继续"
 
-#: src/network/connection.c:2144
-msgid "Nonexisting interface"
-msgstr "不存在的接口"
-
-#: src/network/connection.c:2145
+#: src/network/connection.c:2120
 #, c-format
-msgid "The interface \"%s\" doesn't exist."
-msgstr "接口“%s”不存在。"
+msgid "The interface \"%s\" doesn't exist"
+msgstr "接口“%s”不存在"
 
-#: src/network/connection.c:2148
+#: src/network/connection.c:2124
 msgid "Invalid interface"
 msgstr "无效接口"
 
-#: src/network/connection.c:2149
-msgid "The loopback interface cannot be configured."
-msgstr "无法配置回环接口。"
+#: src/network/connection.c:2125
+msgid "The loopback interface cannot be configured"
+msgstr "无法配置回环接口"
 
-#: src/network/dns.c:163 src/network/hosts.c:174
+#: src/network/dns.c:148 src/network/hosts.c:158
 msgid "IP Address"
 msgstr "IP 地址"
 
-#: src/network/hosts.c:182
+#: src/network/hosts.c:166
 msgid "Aliases"
 msgstr "别名"
 
-#: src/network/main.c:187
+#: src/network/main.c:188
 msgid "Run the connection assistant."
 msgstr "运行连接助手。"
 
-#: src/network/main.c:188
+#: src/network/main.c:189
 msgid "Run the PPP connection assistant."
 msgstr "运行 PPP 连接助手。"
 
-#: src/network/main.c:189
+#: src/network/main.c:190
 msgid "Run the ethernet connection assistant."
 msgstr "运行以太网连接助手。"
 
-#: src/network/main.c:190
+#: src/network/main.c:191
 msgid "Run the wlan connection assistant."
 msgstr "运行无线局域网连接助手。"
 
-#: src/network/main.c:191
+#: src/network/main.c:192
 msgid "Run the parallel port connection assistant."
 msgstr "运行并口连接助手。"
 
-#: src/network/main.c:192
+#: src/network/main.c:193
 msgid "Run the irlan connection assistant."
 msgstr "运行红外连接助手。"
 
-#: src/network/main.c:193
+#: src/network/main.c:194
 msgid "Configure a network interface"
 msgstr "配置网卡"
 
-#: src/network/main.c:193
+#: src/network/main.c:194
 msgid "interface"
 msgstr "网卡"
 
-#: src/network/main.c:200
+#: src/network/main.c:201
 msgid "Network Settings"
-msgstr "网络设定"
+msgstr "网络设置"
 
 #: src/network/network-druid.c:64
 #, c-format
@@ -1795,13 +1785,13 @@ msgid "Networking"
 msgstr "联网"
 
 #: src/network/profile.c:51 src/users/profile-settings.c:215
-msgid "You won't be able to recover this profile after hitting \"apply\""
+msgid "You will not be able to recover this profile after pressing \"apply\""
 msgstr "在您单击“应用”后无法还原此配置文件"
 
 #: src/network/profile.c:55
 #, c-format
-msgid "Delete profile \"%s\"?"
-msgstr "删除配置文件“%s”吗？"
+msgid "Are you sure you want to delete profile \"%s\"?"
+msgstr "您确定想要删除配置文件“%s”吗？"
 
 #: src/network/profiles-table.c:53
 msgid "Profile name"
@@ -1862,12 +1852,13 @@ msgstr "NTP 支持未运行"
 
 #: src/time/main.c:502
 msgid ""
-"Please run NTP support in the system to enable time server synchronization"
-msgstr "请在系统中运行 NTP 支持以启用服务器同步功能"
+"Please run NTP support in the system to enable synchronization of your local "
+"time server with internet time servers"
+msgstr "请在系统中运行 NTP 支持以启用将您的本地时间服务器与 Internet 时间服务器同步的功能"
 
-#: src/time/main.c:814
+#: src/time/main.c:815
 msgid "Time and Date Settings"
-msgstr "时间和日期设定"
+msgstr "时间和日期设置"
 
 #: src/time/time.desktop.in.in.h:1
 msgid "Change system time, date, and timezone"
@@ -1901,30 +1892,30 @@ msgid "Invalid group ID"
 msgstr "无效组 ID"
 
 #: src/users/group-settings.c:164
-msgid "Group ID must be a positive number."
-msgstr "组 ID 必须为正数。"
+msgid "Group ID must be a positive number"
+msgstr "组 ID 必须为正数"
 
 #. if group is root
 #: src/users/group-settings.c:167
-msgid "root group ID should not be modified"
-msgstr "不应修改 root 的组 ID"
+msgid "Group ID of the \"root\" user should not be modified"
+msgstr "不应修改“root”用户的 UID"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
-#: src/users/user-settings.c:355 src/users/user-settings.c:449
-#: src/users/user-settings.c:485
+#: src/users/user-settings.c:355 src/users/user-settings.c:450
+#: src/users/user-settings.c:486
 msgid "This would leave the system unusable"
 msgstr "这将使得系统不可用"
 
 #: src/users/group-settings.c:172
 #, c-format
-msgid "Group ID %s already exists."
-msgstr "组 ID %s 已经存在。"
+msgid "Group ID %s already exists"
+msgstr "组 ID %s 已经存在"
 
 #. If empty.
 #: src/users/group-settings.c:197
-msgid "Group name is empty."
-msgstr "组名为空。"
+msgid "Group name is empty"
+msgstr "组名为空"
 
 #: src/users/group-settings.c:198
 msgid "A group name must be specified"
@@ -1932,8 +1923,8 @@ msgstr "必须指定组名"
 
 #. If too long.
 #: src/users/group-settings.c:201
-msgid "The group name is too long."
-msgstr "组名过长。"
+msgid "The group name is too long"
+msgstr "组名过长"
 
 #: src/users/group-settings.c:202
 #, c-format
@@ -1946,14 +1937,14 @@ msgid "Group name has invalid characters"
 msgstr "组名包含无效的字符"
 
 #: src/users/group-settings.c:206
-msgid "Please set a valid group name, using only lower case letters."
-msgstr "请设定一个有效的组名，只能使用小写字母。"
+msgid "Please set a valid group name, using only lower case letters"
+msgstr "请设定一个有效的组名，只能使用小写字母"
 
 #. if !exist.
 #: src/users/group-settings.c:209
 #, c-format
-msgid "Group \"%s\" already exists."
-msgstr "组“%s”已经存在。"
+msgid "Group \"%s\" already exists"
+msgstr "组“%s”已经存在"
 
 #: src/users/group-settings.c:210
 msgid "Please select a different group name"
@@ -1961,12 +1952,12 @@ msgstr "请选择不同的组名"
 
 #. if it's the root group
 #: src/users/group-settings.c:213
-msgid "Root group name should not be modified"
-msgstr "不应修改 root 的组名"
+msgid "Group name of the \"root\" user should not be modified"
+msgstr "不应修改“root”用户的组名"
 
 #: src/users/group-settings.c:283
-msgid "Root group shouldn't be deleted."
-msgstr "不应该删除 root 组。"
+msgid "The group \"root\" should not be deleted"
+msgstr "不应该删除“root”组"
 
 #: src/users/group-settings.c:298
 msgid "This may leave files with invalid group ID in the filesystem"
@@ -1974,8 +1965,8 @@ msgstr "这将使得文件系统中的某些文件组 ID 无效"
 
 #: src/users/group-settings.c:303
 #, c-format
-msgid "Are you sure you want to delete group %s?"
-msgstr "您确定要删除 %s 组吗?"
+msgid "Are you sure you want to delete group \"%s\"?"
+msgstr "您确定要删除“%s”组吗?"
 
 #: src/users/group-settings.c:358
 #, c-format
@@ -2011,17 +2002,17 @@ msgid "Users and Groups"
 msgstr "用户和组"
 
 #: src/users/passwd.c:266
-msgid "Passwords doesn't match."
-msgstr "密码不匹配。"
+msgid "Passwords do not match"
+msgstr "密码不匹配"
 
 #: src/users/passwd.c:271
 #, c-format
 msgid ""
 "Bad password: %s.\n"
-"Please try with a new password."
+"Please try with a new password"
 msgstr ""
 "错误的密码：%s。\n"
-"请另换一个新密码。"
+"请另换一个新密码"
 
 #: src/users/profile-settings.c:122
 msgid "The profile must have a name"
@@ -2036,17 +2027,17 @@ msgid "The profile must have a default shell"
 msgstr "配置文件必须有一个默认的 shell"
 
 #: src/users/profile-settings.c:204
-msgid "The default profile must not be deleted."
-msgstr "默认的配置文件绝对不能删除。"
+msgid "The default profile should not be deleted"
+msgstr "默认的配置文件不应该删除"
 
 #: src/users/profile-settings.c:205
-msgid "This is the default profile for setting new users' data"
-msgstr "这将设置新用户数据的默认配置文件"
+msgid "This profile is used for setting default data for new users"
+msgstr "此配置文件是用于设置新用户的默认设置的"
 
 #: src/users/profile-settings.c:214
 #, c-format
-msgid "Delete profile \"%s\""
-msgstr "删除配置文件“%s”"
+msgid "Delete profile \"%s\"?"
+msgstr "删除配置文件“%s”吗？"
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: src/users/profiles-table.c:38
@@ -2069,153 +2060,145 @@ msgstr "选择"
 msgid "Text"
 msgstr "文本"
 
-#: src/users/table.c:46
-msgid "_Add"
-msgstr "添加(_A)"
-
-#: src/users/table.c:47
-msgid "_Properties"
-msgstr "属性(_P)"
-
 #: src/users/user-settings.c:104
-msgid "The root user can not be deleted."
-msgstr "不能删除 root 用户。"
+msgid "The \"root\" user should not be deleted"
+msgstr "不应删除“root”用户"
 
 #: src/users/user-settings.c:120
 #, c-format
-msgid "Are you sure you want to delete user %s?"
-msgstr "您确定想要删除用户 %s 吗？"
+msgid "Are you sure you want to delete user \"%s\"?"
+msgstr "您确定想要删除用户“%s”吗？"
 
 #: src/users/user-settings.c:219
 msgid "User Account Editor"
 msgstr "用户账户编辑器"
 
 #: src/users/user-settings.c:335
-msgid "The username is empty."
-msgstr "用户名为空。"
+msgid "The user name is empty"
+msgstr "用户名为空"
 
 #: src/users/user-settings.c:336
-msgid "A username must be specified"
+msgid "A user name must be specified"
 msgstr "必须指定用户名"
 
 #. = sizeof (ut.ut_name)
 #: src/users/user-settings.c:342 src/users/user-settings.c:347
-msgid "The username is too long."
-msgstr "用户名太长。"
+msgid "The user name is too long"
+msgstr "用户名太长"
 
 #: src/users/user-settings.c:343 src/users/user-settings.c:348
 #, c-format
-msgid "The username should have less than %i characters for being valid"
+msgid "The user name should have less than %i characters for being valid"
 msgstr "有效的用户名应该至少有 %i 个字符"
 
 #: src/users/user-settings.c:354
-msgid "Root username shouldn't be modified."
-msgstr "不应该修改 root 的用户名。"
+msgid "User name for the \"root\" user should not be modified"
+msgstr "不应修改“root”用户的用户名"
 
 #: src/users/user-settings.c:360
-msgid "Username has invalid characters"
+msgid "User name has invalid characters"
 msgstr "用户名有无效的字符"
 
 #: src/users/user-settings.c:361
 msgid ""
-"Please set a valid username consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr "请设定一个有效的用户名，第一个字母要小写，后面可跟小写字母和数字。"
-
-#: src/users/user-settings.c:366
-#, c-format
-msgid "Username \"%s\" already exists"
-msgstr "用户名“%s”已经存在"
+"Please set a valid user name consisting of a lower case letter followed by "
+"lower case letters and numbers"
+msgstr "请设定一个有效的用户名，第一个字母要小写，后面可跟小写字母和数字"
 
 #: src/users/user-settings.c:367
-msgid "Please select a different username"
-msgstr "请选择不同的用户名"
+#, c-format
+msgid "User name \"%s\" already exists"
+msgstr "用户名“%s”已经存在"
 
-#: src/users/user-settings.c:392
-msgid "Invalid character in comment."
-msgstr "注释中存在无效字符。"
+#: src/users/user-settings.c:368
+msgid "Please select a different user name"
+msgstr "请选择不同的用户名"
 
 #: src/users/user-settings.c:393
 #, c-format
-msgid "Check that invalid character '%c' is not used"
-msgstr "请检查未使用无效字符“%c”"
+msgid "Invalid character \"%c\" in comment"
+msgstr "注释中存在无效字符“%c”"
 
-#: src/users/user-settings.c:441
-msgid "Home directory must not be empty."
-msgstr "主目录不能为空。"
+#: src/users/user-settings.c:394
+msgid "Check that this character is not used"
+msgstr "请检查未使用此字符"
 
 #: src/users/user-settings.c:442
+msgid "Home directory should not be empty"
+msgstr "主目录不能为空"
+
+#: src/users/user-settings.c:443
 msgid "Make sure you provide a home directory"
 msgstr "请确定您提供了主目录"
 
-#: src/users/user-settings.c:444
+#: src/users/user-settings.c:445
 msgid "Incomplete path in home directory"
 msgstr "主目录的路径不完整"
 
-#: src/users/user-settings.c:445
+#: src/users/user-settings.c:446
 msgid ""
-"Please enter full path for home directory.\n"
+"Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
 msgstr ""
-"请输入主目录的完整路径。\n"
-"<span size=\"smaller\">即：/home/john</span>"
+"请输入主目录的完整路径\n"
+"<span size=\"smaller\">如：/home/john</span>"
 
-#: src/users/user-settings.c:448
-msgid "root home shouldn't be modified."
-msgstr "不应修改 root 的主目录。"
+#: src/users/user-settings.c:449
+msgid "Home directory of the \"root\" user should not be modified"
+msgstr "不应修改“root”用户的主目录"
 
-#: src/users/user-settings.c:481
+#: src/users/user-settings.c:482
 msgid "Invalid user ID"
 msgstr "非法用户 ID"
 
-#: src/users/user-settings.c:482
-msgid "User id must be a positive number."
-msgstr "用户 id 必须为正数。"
+#: src/users/user-settings.c:483
+msgid "User ID must be a positive number"
+msgstr "用户 id 必须为正数"
 
-#: src/users/user-settings.c:484
-msgid "root user ID should not be modified"
-msgstr "不应修改 root 的 UID"
+#: src/users/user-settings.c:485
+msgid "User ID of the \"root\" user should not be modified"
+msgstr "不应修改“root”用户的 UID"
 
-#: src/users/user-settings.c:501
+#: src/users/user-settings.c:502
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
 msgstr "某些用户可以共享同一个用户 ID，但这样并不常见，并且可能导致安全问题"
 
-#: src/users/user-settings.c:506
+#: src/users/user-settings.c:507
 #, c-format
 msgid "User ID %s already exists"
 msgstr "用户 ID %s 已经存在"
 
-#: src/users/user-settings.c:523
+#: src/users/user-settings.c:524
 msgid "Incomplete path in shell"
 msgstr "shell 的路径不完整"
 
-#: src/users/user-settings.c:524
+#: src/users/user-settings.c:525
 msgid ""
-"Please enter full path for shell.\n"
+"Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
 msgstr ""
-"请输入 shell 的完整路径。\n"
-"<span size=\"smaller\">即：/bin/sh</span>"
-
-#: src/users/user-settings.c:546
-msgid "Password can not be empty."
-msgstr "密码不能为空。"
+"请输入 shell 的完整路径\n"
+"<span size=\"smaller\">如：/bin/sh</span>"
 
 #: src/users/user-settings.c:547
+msgid "Password should not be empty"
+msgstr "密码不能为空"
+
+#: src/users/user-settings.c:548
 msgid "A password must be provided"
 msgstr "必须提供密码"
 
-#: src/users/user-settings.c:549
-msgid "Password confirmation isn't correct."
-msgstr "密码确认不正确。"
-
 #: src/users/user-settings.c:550
+msgid "Password confirmation isn't correct"
+msgstr "密码确认不正确"
+
+#: src/users/user-settings.c:551
 msgid "Check that you have provided the same password in both text fields"
 msgstr "请检查您在两个文本框中输入的密码相同"
 
-#: src/users/user-settings.c:826
+#: src/users/user-settings.c:827
 #, c-format
 msgid "Settings for User %s"
 msgstr "用户 %s 的设置"
@@ -2246,17 +2229,3 @@ msgstr "Shell"
 msgid "Add or remove users and groups"
 msgstr "添加或删除用户和组"
 
-#~ msgid "<span weight=\"bold\">Description</span>"
-#~ msgstr "<span weight=\"bold\">描述</span>"
-
-#~ msgid "Click on an item in the list to show it's description."
-#~ msgstr "点击列表中的项目来察看描述。"
-
-#~ msgid "_Search"
-#~ msgstr "搜索(_S)"
-
-#~ msgid "/_Add User ..."
-#~ msgstr "/添加用户(_A)..."
-
-#~ msgid "/_Add group ..."
-#~ msgstr "/添加组(_A)..."
