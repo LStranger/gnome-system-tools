@@ -37,6 +37,7 @@ extern GdkPixbuf *slackware;
 extern GdkPixbuf *suse;
 extern GdkPixbuf *freebsd;
 extern GdkPixbuf *gentoo;
+extern GdkPixbuf *pld;
 
 GstPlatform *
 gst_platform_new (const gchar *key, const gchar *name)
@@ -148,6 +149,8 @@ gst_platform_get_pixmap (GstPlatform *platform)
 		return freebsd;
 	else if (g_ascii_strncasecmp (platform->name, "Gentoo", 6) == 0)
 		return gentoo;
+	else if (g_ascii_strncasecmp (platform->name, "PLD", 3) == 0)
+		return pld;
 	else return NULL;
 }
 

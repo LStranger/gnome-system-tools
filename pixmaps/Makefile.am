@@ -45,6 +45,7 @@ pixmaps_DATA = \
 	panel_top_mid.png	 \
 	panel_top_right.png	 \
 	passwd.png               \
+	pld.png                  \
 	plip-48.png              \
 	ppp.png                  \
 	print.png                \

@@ -64,6 +64,7 @@ GdkPixbuf *slackware;
 GdkPixbuf *suse;
 GdkPixbuf *freebsd;
 GdkPixbuf *gentoo;
+GdkPixbuf *pld;
 
 enum {
 	BOGUS,
@@ -553,6 +554,7 @@ gst_tool_create_distro_images (void)
 	suse = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/suse.png", NULL);
 	freebsd = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/freebsd.png", NULL);
 	gentoo = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gentoo.png", NULL);
+	pld = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/pld.png", NULL);
 }
 
 static void
