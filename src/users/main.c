@@ -181,14 +181,16 @@ user_menu_activated (ESearchBar *esb, int id, gpointer user_data)
 
 enum {
 	ESB_USER_NAME,
-	ESB_USER_GID,
+	ESB_USER_UID,
 	ESB_GROUP_NAME,
+	ESB_USER_GID,
 };
 
 static ESearchBarItem user_search_option_items[] = {
 	{ N_("User name contains"), ESB_USER_NAME },
-	{ N_("User GID contains"), ESB_USER_GID },
+	{ N_("User ID is"), ESB_USER_UID },
 	{ N_("Group name contains"), ESB_GROUP_NAME },
+	{ N_("User GID is"), ESB_USER_GID },
 	{ NULL, -1 }
 };
 
@@ -203,16 +205,18 @@ user_query_changed (ESearchBar *esb, gpointer user_data)
 			"option_choice", &search_type,
 			NULL);
 
-	if (search_word && strlen (search_word))
-	{
-		switch (search_type)
-		{
+	if (search_word && strlen (search_word)) {
+		switch (search_type) {
 		case ESB_USER_NAME:
 			search_query = g_strdup_printf ("contains login %s",
 							search_word);
 			break;
+		case ESB_USER_UID:
+			search_query = g_strdup_printf ("is uid %s",
+							search_word);
+			break;
 		case ESB_USER_GID:
-			search_query = g_strdup_printf ("contains gid %s",
+			search_query = g_strdup_printf ("is gid %s",
 							search_word);
 			break;
 		case ESB_GROUP_NAME:

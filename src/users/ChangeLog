@@ -1,3 +1,14 @@
+2001-04-03  Tambet Ingo  <tambet@ximian.com>
+
+	* e-table.c (user_set_value_at): Added col GID, cleaned.
+	(user_value_at): Added GID.
+	(group_set_value_at): Cleaned.
+
+	* main.c (user_query_changed): Added search by uid, modified "contains gid" to
+	"is gid".
+
+	* user_group.c (user_filter): Added exact searching capability, cleaned.
+
 2001-04-02  Tambet Ingo  <tambet@ximian.com>
 
 	* e-table.c (table_structure_change): (and couple of helpers):

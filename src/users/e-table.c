@@ -52,18 +52,19 @@ gint active_table;
 
 const gchar *user_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
-  <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
+  <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"1\" _title=\"UID\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
   <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
   <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
   <ETableColumn model_col=\"4\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
   <ETableColumn model_col=\"5\" _title=\"Group\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"6\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
 </ETableSpecification>";
 
 const gchar *group_spec = "\
 <ETableSpecification cursor-mode=\"line\"> \
   <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"60\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
-  <ETableColumn model_col=\"1\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
+  <ETableColumn model_col=\"1\" _title=\"GID\" expansion=\"1.0\" minimum_width=\"40\" resizable=\"true\" cell=\"string\" compare=\"id_compare\"/> \
 </ETableSpecification>";
 
 const gchar *net_group_spec = "\
@@ -192,47 +193,42 @@ user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *da
 	if (!node)
 		return;
 
-	switch (col)
-	{
-		case COL_USER_LOGIN:
-			if (!check_user_login (node, (gpointer)val))
-				return;
-
+	switch (col) {
+	case COL_USER_LOGIN:
+		if (check_user_login (node, (gpointer)val))
 			field = g_strdup ("login");
-			break;
-		case COL_USER_UID:
-			if (!check_user_uid (node, (gpointer)val))
-				return;
-
+		break;
+	case COL_USER_UID:
+		if (check_user_uid (node, (gpointer)val))
 			field = g_strdup ("uid");
-			break;
-		case COL_USER_HOME:
-			if (!check_user_home (node, (gpointer)val))
-				return;
-
+		break;
+	case COL_USER_HOME:
+		if (check_user_home (node, (gpointer)val))
 			field = g_strdup ("home");
-			break;
-		case COL_USER_SHELL:
-			if (!check_user_shell (node, (gpointer)val))
-				return;
-
+		break;
+	case COL_USER_SHELL:
+		if (check_user_shell (node, (gpointer)val))
 			field = g_strdup ("shell");
-			break;
-		case COL_USER_COMMENT:
-			if (!check_user_comment (node, (gpointer)val))
-				return;
-
+		break;
+	case COL_USER_COMMENT:
+		if (check_user_comment (node, (gpointer)val))
 			field = g_strdup ("comment");
-			break;
-		default:
-			g_warning ("user_set_value_at: wrong col nr");
-			return;
+		break;
+	case COL_USER_GID:
+		if (check_user_uid (node, (gpointer)val))
+			field = g_strdup ("gid");
+		break;
+	default:
+		g_warning ("user_set_value_at: wrong col nr");
+		break;
 	}
 
-	xst_xml_set_child_content (node, field, (gpointer)val);
-	g_free (field);
+	if (field) {
+		xst_xml_set_child_content (node, field, (gpointer)val);
+		g_free (field);
 
-	xst_dialog_modify (tool->main_dialog);
+		xst_dialog_modify (tool->main_dialog);
+	}
 }
 
 static void
@@ -247,29 +243,26 @@ group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *d
 	if (!node)
 		return;
 
-	switch (col)
-	{
-		case COL_GROUP_NAME:
-			if (!check_group_name (node, (gpointer)val))
-				return;
-
+	switch (col) {
+	case COL_GROUP_NAME:
+		if (check_group_name (node, (gpointer)val))
 			field = g_strdup ("name");
-			break;
-		case COL_GROUP_GID:
-			if (!check_group_gid (node, (gpointer)val))
-				return;
-
+		break;
+	case COL_GROUP_GID:
+		if (check_group_gid (node, (gpointer)val))
 			field = g_strdup ("gid");
-			break;
-		default:
-			g_warning ("group_set_value_at: wrong col nr");
-			return;
+		break;
+	default:
+		g_warning ("group_set_value_at: wrong col nr");
+		break;
 	}
 
-	xst_xml_set_child_content (node, field, (gpointer)val);
-	g_free (field);
+	if (field) {
+		xst_xml_set_child_content (node, field, (gpointer)val);
+		g_free (field);
 
-	xst_dialog_modify (tool->main_dialog);
+		xst_dialog_modify (tool->main_dialog);
+	}
 }
 
 static gboolean
@@ -328,6 +321,9 @@ user_value_at (ETableModel *etm, int col, int row, void *model_data)
 		break;
 	case COL_USER_GROUP:
 		return user_value_group (node);
+		break;
+	case COL_USER_GID:
+		field = g_strdup ("gid");
 		break;
 	case COL_USER_COLOR:
 		return get_row_color (etm, row);

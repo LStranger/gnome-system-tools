@@ -144,24 +144,24 @@ user_filter (xmlNodePtr node)
 	
 	g_free (buf);
 	
-	if (!strcmp (ar[0], "all"))
+	if (!strcmp (ar[0], "all")) {
+		g_strfreev (ar);
+		return TRUE;
+	}
+
+	if (!strcmp (ar[1], "group"))
+		buf = user_value_group (node);
+	else
+		buf = xst_xml_get_child_content (node, ar[1]);
+
+	
+	if (buf && !strcmp (ar[0], "contains") && strstr (buf, ar[2]))
 		ret = TRUE;
 
-	else
-	{
-		if (!strcmp (ar[1], "login"))
-			buf = xst_xml_get_child_content (node, ar[1]);
-		else if (!strcmp (ar[1], "gid"))
-			buf = xst_xml_get_child_content (node, ar[1]);
-		else if (!strcmp (ar[1], "group"))
-			buf = user_value_group (node);
+	else if (buf && !strcmp (ar[0], "is") && !strcmp (buf, ar[2]))
+		ret = TRUE;
 
-		if (buf && strstr (buf, ar[2]))
-			ret = TRUE;
-
-		g_free (buf);
-	}
-	
+	g_free (buf);
 	g_strfreev (ar);
 	
 	return ret;
