@@ -3,6 +3,7 @@ common.glade \
 disks.glade \
 memory.glade \
 nameresolution.glade \
+network.glade \
 networking.glade \
 shares.glade \
 time.glade \
@@ -20,6 +21,8 @@ memory.glade.in \
 memory.glade.h \
 nameresolution.glade.in \
 nameresolution.glade.h \
+network.glade.in \
+network.glade.h \
 networking.glade.in \
 networking.glade.h \
 shares.glade.in \
