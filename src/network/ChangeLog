@@ -2,6 +2,8 @@
 
 	* connection.c (connection_default_gw_set_manual): Check
 	remote_address first before g_strdup'ing.
+	(connection_default_gw_add): Receive the whole connection
+	structure and do a smarter detection of lo ifaces.
 
 2001-12-18  Arturo Espinosa Aldama  <arturo@ximian.com>
 

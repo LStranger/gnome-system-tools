@@ -510,13 +510,15 @@ connection_default_gw_activate (GtkMenuItem *item, gpointer data)
 }
 
 void
-connection_default_gw_add (gchar *dev)
+connection_default_gw_add (XstConnection *cxn)
 {
 	GtkWidget *omenu, *menu, *item;
 	GList *l;
-	gchar *cpy;
+	gchar *cpy, *dev;
 
-	if (!strcmp (dev, "lo"))
+	dev = cxn->dev;
+	
+	if (cxn->type == XST_CONNECTION_LO)
 		return;
 	
 	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
@@ -610,7 +612,8 @@ connection_default_gw_check_manual (XstConnection *cxn, gboolean ignore_enabled)
 	case XST_CONNECTION_ETH:
 	case XST_CONNECTION_WVLAN:
 	case XST_CONNECTION_IRLAN:
-		if (cxn->ip_config == IP_MANUAL && (!cxn->gateway || !*cxn->gateway))
+		if ((cxn->ip_config == IP_MANUAL) &&
+		    (!cxn->gateway || !*cxn->gateway))
 			return XST_CONNECTION_ERROR_STATIC;
 		break;
 	case XST_CONNECTION_PPP:
@@ -891,7 +894,7 @@ connection_add_to_list_do (XstConnection *cxn, GtkWidget *clist)
 	gtk_clist_set_shift (GTK_CLIST (clist), row, 2,
 			     (guint) ((style->font->ascent + style->font->descent) / 2), 0);
 
-	connection_default_gw_add (cxn->dev);
+	connection_default_gw_add (cxn);
 	connection_update_row_enabled (cxn, cxn->enabled);
 }
 

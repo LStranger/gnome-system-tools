@@ -129,7 +129,7 @@ extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
 extern void connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean enabled);
 extern void connection_add_to_list (XstConnection *cxn, GtkWidget *clist);
 extern XstConnection *connection_find_by_dev (XstTool *tool, gchar *dev);
-extern void connection_default_gw_add (gchar *dev);
+extern void connection_default_gw_add (XstConnection *cxn);
 extern void connection_default_gw_remove (gchar *dev);
 extern void connection_default_gw_init (XstTool *tool, gchar *dev);
 extern XstConnection *connection_default_gw_get_connection (XstTool *tool);
