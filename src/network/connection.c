@@ -2236,7 +2236,7 @@ gchar*
 connection_autodetect_modem (void)
 {
 	xmlNodePtr root;
-	xmlDoc *doc = gst_tool_run_get_directive (tool, _("Autodetecting modem device"), "detect_modem", NULL);
+	xmlDoc *doc = gst_tool_run_get_directive (tool, NULL, "detect_modem", NULL);
 	GtkWidget *w;
 
 	g_return_val_if_fail (doc != NULL, NULL);

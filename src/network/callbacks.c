@@ -967,8 +967,23 @@ on_connection_modified (GtkWidget *w, gpointer data)
 void
 on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 {
-	gchar *dev = connection_autodetect_modem ();
+	GtkWidget *autodetect_button = gst_dialog_get_widget (tool->main_dialog, "ppp_autodetect_modem");
+	GtkWidget *devices_combo = gst_dialog_get_widget (tool->main_dialog, "ppp_serial_port_g");
+	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
 	GtkWidget *w;
+	gchar *dev;
+	GdkCursor *cursor;
+
+	/* give some feedback to let know the user that the tool is busy */
+	gtk_widget_set_sensitive (autodetect_button, FALSE);
+	gtk_widget_set_sensitive (devices_combo, FALSE);
+
+	cursor = gdk_cursor_new (GDK_WATCH);
+	gdk_window_set_cursor (GTK_WIDGET (dialog)->window, cursor);
+	gdk_cursor_unref (cursor);
+	gdk_display_flush (gtk_widget_get_display (GTK_WIDGET (dialog)));
+
+	dev = connection_autodetect_modem ();
 
 	if ((!dev) || (strcmp (dev, "") == 0)) {
 		w = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING, GTK_BUTTONS_CLOSE,
@@ -982,6 +997,13 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 
 	if (dev)
 		g_free (dev);
+
+	/* remove the user feedback */
+	gtk_widget_set_sensitive (autodetect_button, TRUE);
+	gtk_widget_set_sensitive (devices_combo, TRUE);
+	
+	gdk_window_set_cursor (GTK_WIDGET (dialog)->window, NULL);
+	gdk_display_flush (gtk_widget_get_display (GTK_WIDGET (dialog)));
 }
 
 void
