@@ -48,19 +48,16 @@ service_get_description (xmlNodePtr service)
 	return description;
 }
 
-static gint
+static gchar*
 get_current_runlevel (GstTool *tool)
 {
 	GtkWidget *option_menu, *menu, *selected_option;
-	gint runlevel;
 	
 	option_menu = gst_dialog_get_widget (tool->main_dialog, "runlevels_menu");
 	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
 	selected_option = gtk_menu_get_active (GTK_MENU (menu));
 
-	runlevel = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (selected_option), "runlevel"));
-
-	return runlevel;
+	return g_object_get_data (G_OBJECT (selected_option), "runlevel");
 }
 
 static gboolean
@@ -94,25 +91,20 @@ run_service (GstTool *tool, xmlNodePtr service, gchar *runlevel, gchar *action)
 }
 
 static void
-toggle_service (GstTool *tool, xmlNodePtr service, gint runlevel, gboolean status)
+toggle_service (GstTool *tool, xmlNodePtr service, gchar* runlevel, gboolean status)
 {
 	xmlNodePtr runlevels = gst_xml_element_find_first (service, "runlevels");
 	xmlNodePtr node;
-	gchar *buf, *r, *action;
+	gchar *r, *action;
 	gboolean found = FALSE;
-
-
-
-	buf = g_strdup_printf ("%i", runlevel);
 
 	if (status == TRUE)
 		action = g_strdup_printf ("start");
 	else
 		action = g_strdup_printf ("stop");
 
-	if (runlevels == NULL) {
+	if (runlevels == NULL)
 		runlevels = gst_xml_element_add (node, "runlevels");
-	}
 	
 	/* if the node already exists, put its action to "start" or "stop" */
 	for (node = gst_xml_element_find_first (runlevels, "runlevel");
@@ -121,7 +113,7 @@ toggle_service (GstTool *tool, xmlNodePtr service, gint runlevel, gboolean statu
 	{
 		r = gst_xml_get_child_content (node, "number");
 		
-		if (strcmp (r, buf) == 0) {
+		if (strcmp (r, runlevel) == 0) {
 			gst_xml_set_child_content (node, "action", action);
 			found = TRUE;
 		}
@@ -134,14 +126,9 @@ toggle_service (GstTool *tool, xmlNodePtr service, gint runlevel, gboolean statu
 		node = gst_xml_element_add (runlevels, "runlevel");
 		gst_xml_element_add (node, "number");
 		gst_xml_element_add (node, "action");
-		gst_xml_set_child_content (node, "number", buf);
+		gst_xml_set_child_content (node, "number", runlevel);
 		gst_xml_set_child_content (node, "action", action);
 	}
-
-/*	run_service (tool, service, buf, action); */
-
-	g_free (buf);
-
 }
 
 void
@@ -376,7 +363,7 @@ on_service_toggled (GtkWidget *widget, gchar *path_str, gpointer data)
 	gboolean value = gtk_cell_renderer_toggle_get_active (GTK_CELL_RENDERER_TOGGLE (widget));
 	gboolean new_value = !value;
 	GstTool *tool = GST_TOOL (data);
-	gint runlevel = get_current_runlevel (tool);
+	gchar *runlevel = get_current_runlevel (tool);
 	GtkTreeView *runlevel_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
 	GtkTreeModel *model = gtk_tree_view_get_model (runlevel_table);
 	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
