@@ -14,6 +14,7 @@ while (<STDIN>) {
   if (/\s*<property\s+name\s*=\s*\"pixbuf\"\s*>(.+)<\/property>/ ||
       /\s*<property\s+name\s*=\s*\"watermark_image\"\s*>(.+)<\/property>/ ||
       /\s*<property\s+name\s*=\s*\"logo\"\s*>(.+)<\/property>/ ||
+      /\s*<property\s+name\s*=\s*\"icon\"\s*>(.+)<\/property>/ ||
       /\s*<property\s+name\s*=\s*\"logo_image\"\s*>(.+)<\/property>/) {
 
     $filename = $1;
