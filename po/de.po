@@ -7,13 +7,69 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
-"POT-Creation-Date: 2003-02-07 14:14+0100\n"
-"PO-Revision-Date: 2003-02-07 14:14+0100\n"
+"POT-Creation-Date: 2003-02-12 15:14+0100\n"
+"PO-Revision-Date: 2003-02-12 15:14+0100\n"
 "Last-Translator: Christian Neumair <chris@gnome-de.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: gnome-system-tools.schemas.in.h:1
+msgid "Default runlevel"
+msgstr "Vorgabe-Runlevel"
+
+#: gnome-system-tools.schemas.in.h:2
+msgid "Dialog complexity for the boot-admin tool"
+msgstr "Dialog-Komplexität des Systemstart-Administrationswerkzeugs"
+
+#: gnome-system-tools.schemas.in.h:3
+msgid "Dialog complexity for the network-admin tool"
+msgstr "Dialog-Komplexität des Netzwerk-Administrationswerkzeugs"
+
+#: gnome-system-tools.schemas.in.h:4
+msgid "Dialog complexity for the runlevel-admin tool"
+msgstr "Dialog-Komplexität des Runlevel-Administrationswerkzeugs"
+
+#: gnome-system-tools.schemas.in.h:5
+msgid "Dialog complexity for the time-admin tool"
+msgstr "Dialog-Komplexität des Zeit-Administrationswerkzeugs"
+
+#: gnome-system-tools.schemas.in.h:6
+msgid "Dialog complexity for the users-admin tool"
+msgstr "Dialog-Komplexität des Benutzer-Administrationswerkzeugs"
+
+#: gnome-system-tools.schemas.in.h:7
+msgid "Last GST version executed"
+msgstr "Zuletzt ausgeführte GST-Version"
+
+#: gnome-system-tools.schemas.in.h:8
+msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
+msgstr ""
+"Runlevel, das das Runlevel-Administrationswerkzeug im grundlegenden Modus "
+"als Vorgabe verwendet"
+
+#: gnome-system-tools.schemas.in.h:9
+msgid ""
+"The GNOME System Tools have two data display modes: basic mode and advanced "
+"mode, the basic mode is intended to show less options than the advanced mode"
+msgstr ""
+"Die GNOME-Systemwerkzeuge verfügen über zwei Anzeigemodi für Daten, nämlich "
+"den grundlegenden und den erweiterten Modus, wobei der Grundlegende weniger "
+"Einstellungsmöglichkeiten als der Erweiterte bietet."
+
+#: gnome-system-tools.schemas.in.h:10
+msgid "The last GST version that this computer has run"
+msgstr "Die zuletzt auf diesem Computer ausgeführte GST-Version"
+
+#: gnome-system-tools.schemas.in.h:11
+msgid "Wether the users-admin tool should show all users and groups or not"
+msgstr ""
+"Soll das Benutzer-Administrationswerkzeug alle Benutzer und Gruppen anzeigen?"
+
+#: gnome-system-tools.schemas.in.h:12
+msgid "wether the warning dialog should be shown or not"
+msgstr "Soll der Warndialog angezeigt werden?"
 
 #.
 #. * Archivo de cadenas traducibles generado por Glade.
@@ -332,12 +388,12 @@ msgstr "Weitere Einstellungen"
 #. * NO lo compile como parte de su aplicación.
 #.
 #: interfaces/common.glade.h:7 interfaces/common.glade.h:23
-#: interfaces/common.glade.in.h:12 src/common/xst-tool.c:1724
+#: interfaces/common.glade.in.h:12 src/common/xst-tool.c:1735
 msgid "GNOME System Tools"
 msgstr "GNOME-Systemwerkzeuge"
 
 #: interfaces/common.glade.h:8 interfaces/common.glade.in.h:16
-#: src/common/xst-tool.c:1016
+#: src/common/xst-tool.c:1018
 msgid "Scanning your system configuration."
 msgstr "Systemkonfiguration wird analysiert."
 
@@ -3148,7 +3204,7 @@ msgstr "Voreingestellte Befehlszeile:"
 #: interfaces/users.glade.h:75 interfaces/users.glade.h:155
 #: interfaces/users.glade.in.h:30
 msgid "Default group:"
-msgstr "Voreingestellte Gruppe:"
+msgstr "Vorgabegruppe:"
 
 #: interfaces/users.glade.h:78
 msgid "System defaults"
@@ -3612,7 +3668,7 @@ msgstr " Mehr _Optionen >>"
 msgid " Fewer _Options"
 msgstr " << Weniger _Optionen"
 
-#: src/common/xst-dialog.c:476
+#: src/common/xst-dialog.c:479
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3620,25 +3676,25 @@ msgstr ""
 "Es gibt Änderungen, die noch nicht angewandt wurden.\n"
 "Jetzt anwenden?"
 
-#: src/common/xst-dialog.c:553
+#: src/common/xst-dialog.c:556
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fehlerhaftes Verbindungssignal »%s« in Widget »%s«"
 
-#: src/common/xst-tool.c:958
+#: src/common/xst-tool.c:960
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Anweisung %s wird übersprungen..."
 
-#: src/common/xst-tool.c:1096
+#: src/common/xst-tool.c:1098
 msgid "Skipping actual save..."
 msgstr "Derzeitiges Sichern wird übersprungen..."
 
-#: src/common/xst-tool.c:1138
+#: src/common/xst-tool.c:1140
 msgid "Updating your system configuration."
 msgstr "Ihre Systemkonfiguration wird aktualisiert."
 
-#: src/common/xst-tool.c:1159
+#: src/common/xst-tool.c:1161
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3646,16 +3702,16 @@ msgstr ""
 "Während der Ausführung des Backend-Skripts\n"
 "ist ein Fehler aufgetreten. Die Konfiguration konnte nicht geladen werden."
 
-#: src/common/xst-tool.c:1416
+#: src/common/xst-tool.c:1418
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - GNOME-Systemwerkzeuge"
 
-#: src/common/xst-tool.c:1618
+#: src/common/xst-tool.c:1620
 msgid "The password you entered is invalid."
 msgstr "Das angegebene Passwort ist ungültig."
 
-#: src/common/xst-tool.c:1630
+#: src/common/xst-tool.c:1635
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -3683,15 +3739,15 @@ msgstr ""
 "--\n"
 "Das GNOME-Systemwerkzeuge-Team"
 
-#: src/common/xst-tool.c:1648
+#: src/common/xst-tool.c:1659
 msgid "Warning"
 msgstr "Warnung"
 
-#: src/common/xst-tool.c:1657
+#: src/common/xst-tool.c:1668
 msgid "Don't show me this again"
 msgstr "Diesen Dialog nicht mehr anzeigen"
 
-#: src/common/xst-tool.c:1732
+#: src/common/xst-tool.c:1742
 msgid "Pretending we are root..."
 msgstr "Vorgeben, »root« zu sein..."
 
@@ -4036,15 +4092,15 @@ msgstr "Runlevel-Diensteverwaltung"
 msgid "Service"
 msgstr "Dienst"
 
-#: src/time/main.c:309
+#: src/time/main.c:312
 msgid "GNOME System Tools - Timezone"
 msgstr "GNOME-Systemwerkzeuge - Zeitzone"
 
-#: src/time/main.c:424
+#: src/time/main.c:427
 msgid "GNOME System Tools - Time Servers"
 msgstr "GNOME-Systemwerkzeuge - Zeit-Server"
 
-#: src/time/main.c:493
+#: src/time/main.c:496
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -4052,7 +4108,7 @@ msgstr ""
 "Es ist keine NTP-Unterstützung installiert. Bitte installieren Sie die NTP-\n"
 "Unterstützung auf dem System, um die Server-Synchronisation to aktivieren."
 
-#: src/time/main.c:766
+#: src/time/main.c:785
 msgid "Time and Date Settings"
 msgstr "Zeit- und Datumseinstellungen"
 
@@ -4182,19 +4238,19 @@ msgstr "Profil"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: src/users/search-bar/search-bar.c:160
+#: src/users/search-bar/search-bar.c:178
 msgid "Search"
 msgstr "Suchen"
 
-#: src/users/search-bar/search-bar.c:170
+#: src/users/search-bar/search-bar.c:190
 msgid "Clear"
 msgstr "Leeren"
 
-#: src/users/search-bar/search-bar.c:273
+#: src/users/search-bar/search-bar.c:294
 msgid "Choice"
 msgstr "Auswahl"
 
-#: src/users/search-bar/search-bar.c:283
+#: src/users/search-bar/search-bar.c:304
 msgid "Text"
 msgstr "Text"
 
