@@ -161,6 +161,29 @@ xst_xml_element_get_content (xmlNodePtr node)
 }
 
 
+const xmlChar *
+xst_xml_element_peek_content (xmlNodePtr node)
+{
+	xmlChar *text = NULL;
+	xmlNodePtr n0;
+
+	g_return_val_if_fail (node != NULL, NULL);
+	
+	for (n0 = node->childs; n0; n0 = n0->next)
+	{
+		if (n0->type == XML_TEXT_NODE)
+		{
+			/* NOTE: This could be a problem if XML_USE_BUFFER_CONTENT */
+
+			text = n0->content;
+			break;
+		}
+	}
+
+	return text;
+}
+
+
 void
 xst_xml_element_set_content (xmlNodePtr node, const gchar *text)
 {
