@@ -144,6 +144,14 @@ toggle_service (GstTool *tool, xmlNodePtr service, gint runlevel, gboolean statu
 
 }
 
+void
+change_runlevel (gint runlevel)
+{
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+
+	table_clear ();
+	table_populate (root, runlevel);
+}
 
 /* callbacks */
 static void
@@ -335,10 +343,8 @@ void
 on_runlevel_changed (GtkWidget *widget, gpointer data)
 {
 	gint runlevel = GPOINTER_TO_INT (data);
-	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
 
-	table_clear ();
-	table_populate (root, runlevel);
+	change_runlevel (runlevel);
 }
 
 void
