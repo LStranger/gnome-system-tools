@@ -3,6 +3,7 @@
  * for user administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
+ * Copyright (C) 2005 Carlos Garnacho, Sivan Greenberg
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -19,6 +20,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Carlos Garnacho Parro <carlosg@gnome.org>
+ *          Sivan Greenberg       <sivan@workaround.org>
  */
 
 #ifdef HAVE_CONFIG_H
@@ -46,10 +48,9 @@ on_user_privilege_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointe
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, !value, -1);
 }
 
-void
-create_user_privileges_table ()
+static void
+create_privileges_table (GtkWidget *list)
 {
-	GtkWidget         *list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
 	GtkTreeModel      *model;
 	GtkCellRenderer   *renderer;
 	GtkTreeViewColumn *column;
@@ -83,9 +84,22 @@ create_user_privileges_table ()
 }
 
 void
-populate_user_privileges_table (gchar *username)
+create_user_privileges_table (void)
 {
-	GtkWidget    *list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+	GtkWidget *list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+	create_privileges_table (list);
+}
+
+void
+create_profile_privileges_table (void)
+{
+	GtkWidget *list = gst_dialog_get_widget (tool->main_dialog, "profile_privileges");
+	create_privileges_table (list);
+}
+
+void
+populate_privileges_table (GtkWidget *list, gchar *username)
+{
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
 	xmlNodePtr    root = get_root_node (NODE_GROUP);
 	xmlNodePtr    group, user;
@@ -133,6 +147,103 @@ populate_user_privileges_table (gchar *username)
 	}
 }
 
+static gboolean
+is_group_in_profile (xmlNodePtr profile,gchar *groupname)
+{
+	xmlNodePtr  root, group;
+	gchar      *buf;
+	gboolean    val = FALSE;
+
+	g_return_if_fail (groupname != NULL);
+	root = gst_xml_element_find_first (profile, "groups");
+
+	if (!root)
+		return FALSE;
+
+	for (group = gst_xml_element_find_first (root, "group");
+	     group != NULL;
+	     group = gst_xml_element_find_next (group, "group")) {
+		buf = gst_xml_element_get_content (group);
+
+		if (buf && strcmp (groupname, buf) == 0)
+			val = TRUE;
+
+		g_free (buf);
+	}
+
+	return val;
+}
+
+void
+populate_privileges_table_from_profile (xmlNodePtr profile)
+{
+	GtkWidget    *list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+	xmlNodePtr    root = get_root_node (NODE_GROUP);
+	xmlNodePtr    group;
+	GtkTreeIter   iter;
+	gchar        *groupname, *desc, *buf;
+	gboolean      val;
+
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
+	for (group = gst_xml_element_find_first (root, "group");
+	     group;
+	     group = gst_xml_element_find_next (group, "group"))
+	{
+		desc = gst_xml_get_child_content (group, "allows_to");
+
+		if (desc) {
+			groupname = gst_xml_get_child_content (group, "name");
+			val = is_group_in_profile (profile, groupname);
+		
+			gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+			gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+					    0, val,
+					    1, desc,
+					    2, groupname,
+					    -1);
+			g_free (desc);
+			g_free (groupname);
+		}
+	}
+}
+
+void
+profile_populate_groups (xmlNodePtr profile)
+{
+	GtkWidget    *list = gst_dialog_get_widget (tool->main_dialog, "profile_privileges");
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+	xmlNodePtr    root = get_root_node (NODE_GROUP);
+	xmlNodePtr    group;
+	GtkTreeIter   iter;
+	gchar        *groupname, *desc, *buf;
+	gboolean      val;
+
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+	
+	for (group = gst_xml_element_find_first (root, "group");
+	     group;
+	     group = gst_xml_element_find_next (group, "group"))
+	{
+		desc = gst_xml_get_child_content (group, "allows_to");
+
+		if (desc) {
+			groupname = gst_xml_get_child_content (group, "name");
+			val = is_group_in_profile (profile, groupname);
+		
+			gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+			gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+					    0, val,
+					    1, desc,
+					    2, groupname,
+					    -1);
+			g_free (desc);
+			g_free (groupname);
+		}
+	}
+}
+
 GList*
 user_privileges_get_list (GList *groups)
 {
@@ -158,4 +269,57 @@ user_privileges_get_list (GList *groups)
 	}
 
 	return groups;
+}
+
+void
+del_profile_groups (xmlNodePtr profile) 
+{
+	xmlNodePtr root, group;
+
+	if (!profile)
+		return;
+
+	g_return_if_fail (profile != NULL);
+
+	root = gst_xml_element_find_first (profile, "groups");
+
+	if (root) {
+		gst_xml_element_destroy_children (root);
+		gst_xml_element_destroy (root);
+	}
+}
+
+void
+profile_groups_save_data (xmlNodePtr profile)
+{
+	GtkWidget    *list  = gst_dialog_get_widget (tool->main_dialog, "profile_privileges");
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
+	GList        *elem  = NULL;
+	gboolean      valid, active;
+	GtkTreeIter   iter;
+	gchar        *groupname;
+	xmlNodePtr    groups_root,orig_profile, buf;
+
+	if (!profile)
+		return;
+
+	orig_profile = profile;
+
+	del_profile_groups (profile);
+	profile = orig_profile;
+	groups_root = gst_xml_element_add (profile, "groups");
+	buf = groups_root;
+
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, &iter, 0, &active, 2, &groupname, -1);
+
+		if (active) {
+			groups_root = gst_xml_element_add (buf, "group");
+			gst_xml_element_set_content (groups_root, (const gchar *) groupname);
+		}
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
 }

@@ -108,6 +108,7 @@ profile_settings_save_data (xmlNodePtr node)
 	gst_xml_element_add_with_content (node, "mailbox_dir", "/var/mail");
 	gst_xml_element_add_with_content (node, "skel_dir",    "/etc/skel/");
 	gst_xml_element_add_with_content (node, "login_defs",  "1");
+	profile_groups_save_data (node);
 }
 
 gchar*

@@ -197,6 +197,7 @@ create_tables (void)
 	create_groups_table ();
 	create_profiles_table ();
 	create_user_privileges_table ();
+	create_profile_privileges_table ();
 }
 
 void

@@ -605,6 +605,7 @@ on_profile_new_clicked (GtkButton *button, gpointer data)
 
 	combo_add_shells (shells_combo);
 	combo_add_groups (groups_option_menu, TRUE);
+	profile_populate_groups (NULL);
 
 	gtk_window_set_title (GTK_WINDOW (dialog), _("Create New profile"));
 
@@ -636,6 +637,7 @@ on_profile_settings_clicked (GtkButton *button, gpointer data)
 	combo_add_shells (shells_combo);
 	combo_add_groups (groups_option_menu, TRUE);
 	profile_settings_set_data (node);
+	profile_populate_groups (node);
 
 	g_object_set_data (G_OBJECT (dialog), "data", node);
 
