@@ -29,6 +29,7 @@
 
 typedef struct _UserSettingsBasic UserSettingsBasic;
 typedef struct _UserSettingsGroup UserSettingsGroup;
+typedef struct _UserSettingsPwd   UserSettingsPwd;
 typedef struct _UserSettings      UserSettings;
 
 struct _UserSettingsBasic
@@ -51,11 +52,21 @@ struct _UserSettingsGroup
 	GtkWidget *set_primary;
 };
 
+struct _UserSettingsPwd
+{
+	GtkToggleButton *quality;
+	GtkWidget *optional;
+	GtkSpinButton *min;
+	GtkSpinButton *max;
+	GtkSpinButton *days;
+};
+
 struct _UserSettings
 {
 	GnomeDialog       *dialog;
 	UserSettingsBasic *basic;
 	UserSettingsGroup *group;
+	UserSettingsPwd   *pwd;
 	xmlNodePtr         node;
 	gboolean           new;
 	gint               table;

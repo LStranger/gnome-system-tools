@@ -1,5 +1,13 @@
 2001-03-16  Tambet Ingo  <tambet@ximian.com>
 
+	* main.c: Remove user_chpasswd button (and cbs) from main window.
+
+	* user_group.c (user_update_xml): Save password properties.
+
+	* user_settings.c (user_settings_pwd_prepare): Implement.
+	(user_settings_pwd_fill): Implement.
+	(user_settings_prepare): Use new functions.
+
 	* callbacks.c (on_user_settings_clicked): Fill in defaults for basic mode.
 
 	* user_settings.c (user_settings_helper): Implement.

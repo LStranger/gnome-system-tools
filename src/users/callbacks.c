@@ -627,7 +627,6 @@ user_actions_set_sensitive (gboolean state)
 {
 	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_new",      TRUE);
 	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_delete",   state);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_chpasswd", state);
 	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", state);
 }
 

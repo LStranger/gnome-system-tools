@@ -936,7 +936,7 @@ static void
 user_update_xml (UserSettings *us)
 {
 	gchar *buf;
-	gint id, row;
+	gint i, row;
 	xmlNodePtr group_node;
 	gboolean adv;
 	
@@ -983,9 +983,19 @@ user_update_xml (UserSettings *us)
 	/* UID */
 	if (adv)
 	{
-		id = gtk_spin_button_get_value_as_int (us->basic->uid);
-		xst_xml_set_child_content (us->node, "uid", g_strdup_printf ("%d", id));
+		i = gtk_spin_button_get_value_as_int (us->basic->uid);
+		xst_xml_set_child_content (us->node, "uid", g_strdup_printf ("%d", i));
 	}
+
+	/* Passwd stuff */
+	i = gtk_spin_button_get_value_as_int (us->pwd->min);
+	xst_xml_set_child_content (us->node, "passwd_min_life", g_strdup_printf ("%d", i));
+
+	i = gtk_spin_button_get_value_as_int (us->pwd->max);
+	xst_xml_set_child_content (us->node, "passwd_max_life", g_strdup_printf ("%d", i));
+
+	i = gtk_spin_button_get_value_as_int (us->pwd->days);
+	xst_xml_set_child_content (us->node, "passwd_exp_warn", g_strdup_printf ("%d", i));
 }
 
 static xmlNodePtr

@@ -168,30 +168,47 @@ user_settings_group_prepare (void)
 	return ug;
 }
 
+static UserSettingsPwd *
+user_settings_pwd_prepare (void)
+{
+	UserSettingsPwd *pw;
+	XstDialog *xd;
+
+	xd = tool->main_dialog;
+	pw = g_new (UserSettingsPwd, 1);
+
+	pw->quality = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (xd, "user_passwd_quality"));
+	pw->optional = xst_dialog_get_widget (xd, "user_passwd_optional");
+	pw->min  = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "user_passwd_min"));
+	pw->max  = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "user_passwd_max"));
+	pw->days = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "user_passwd_days"));
+
+	return pw;
+}
+
 static void
 user_settings_basic_fill (UserSettings *us)
 {
 	/* Fill "Basic" tab widgets. */
+	gchar *buf;
 
-	if (us->node != get_db_node (us->node))
+	if (us->node != get_db_node (us->node)) /* user node (not userdb), not new. */
 	{
 		gtk_entry_set_text (us->basic->name,
 				    xst_xml_get_child_content (us->node, "login"));
-
 		gtk_entry_set_text (us->basic->comment,
 				    xst_xml_get_child_content (us->node, "comment"));
-
 		gtk_entry_set_text (us->basic->home,
 				    xst_xml_get_child_content (us->node, "home"));
-
 		gtk_entry_set_text (us->basic->shell,
 				    xst_xml_get_child_content (us->node, "shell"));
-	
-		gtk_spin_button_set_value (us->basic->uid,
-					   g_strtod (xst_xml_get_child_content (us->node, "uid"), NULL));
+
+		buf = xst_xml_get_child_content (us->node, "uid");
+		gtk_spin_button_set_value (us->basic->uid, g_strtod (buf, NULL));
+		g_free (buf);
 	}
 
-	else
+	else /* New user. */
 	{
 		gtk_spin_button_set_value (us->basic->uid,
 					   g_strtod (find_new_id (us->node), NULL));
@@ -239,6 +256,34 @@ user_settings_group_fill (UserSettings *us)
 }
 
 static void
+user_settings_pwd_fill (UserSettings *us)
+{
+	gchar *buf;
+	
+	if (us->node != get_db_node (us->node)) /* user node (not userdb), not new. */
+	{
+		buf = xst_xml_get_child_content (us->node, "passwd_min_life");
+		gtk_spin_button_set_value (us->pwd->min, g_strtod (buf, NULL));
+		g_free (buf);
+
+		buf = xst_xml_get_child_content (us->node, "passwd_max_life");
+		gtk_spin_button_set_value (us->pwd->max, g_strtod (buf, NULL));
+		g_free (buf);
+
+		buf = xst_xml_get_child_content (us->node, "passwd_exp_warn");
+		gtk_spin_button_set_value (us->pwd->days, g_strtod (buf, NULL));
+		g_free (buf);
+	}
+
+	else
+	{
+		gtk_spin_button_set_value (us->pwd->min,  logindefs.passwd_min_day_use);
+		gtk_spin_button_set_value (us->pwd->max,  logindefs.passwd_max_day_use);
+		gtk_spin_button_set_value (us->pwd->days, logindefs.passwd_warning_advance_days);
+	}
+}
+
+static void
 user_settings_complexity (UserSettings *us)
 {
 	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
@@ -262,10 +307,11 @@ user_settings_prepare (xmlNodePtr user_node)
 	us = g_new (UserSettings, 1);
 	
 	us->dialog = GNOME_DIALOG (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
-	us->node = user_node;
+	us->node  = user_node;
 	us->table = TABLE_USER;
 	us->basic = user_settings_basic_prepare ();
 	us->group = user_settings_group_prepare ();
+	us->pwd   = user_settings_pwd_prepare ();
 
 	if (user_node == get_db_node (user_node))
 		us->new = TRUE;
@@ -274,6 +320,7 @@ user_settings_prepare (xmlNodePtr user_node)
 	
 	user_settings_basic_fill (us);
 	user_settings_group_fill (us);
+	user_settings_pwd_fill   (us);
 
 	user_settings_complexity (us);
 
@@ -286,6 +333,7 @@ user_settings_destroy (UserSettings *us)
 {
 	g_free (us->basic);
 	g_free (us->group);
+	g_free (us->pwd);
 	gtk_object_remove_data (GTK_OBJECT (us->dialog), "UserSettings");
 	g_free (us);
 }
