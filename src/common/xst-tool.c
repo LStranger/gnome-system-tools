@@ -618,7 +618,7 @@ xst_tool_init_backend (XstTool *tool)
 			       "--report", NULL);
 #else		
 /* Very useful for debugging purposes. */
-					execl ("/usr/bin/strace", "/usr/bin/strace", tool->script_path, "--progress",
+					execl ("/usr/bin/strace", "/usr/bin/strace", "-f", tool->script_path, "--progress",
 			"--report", NULL);
 #endif					
 		
