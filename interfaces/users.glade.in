@@ -118,7 +118,7 @@
 		<widget>
 		  <class>GnomePixmap</class>
 		  <name>pixmap2</name>
-		  <filename>../pixmaps/users.png</filename>
+		  <filename>users.png</filename>
 		</widget>
 	      </widget>
 
@@ -221,7 +221,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:14:16 GMT</last_modification_time>
 		    </signal>
 		    <label>New User...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -236,7 +235,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:47:54 GMT</last_modification_time>
 		    </signal>
 		    <label>Delete</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 
@@ -315,7 +313,7 @@
 		    <widget>
 		      <class>GnomePixmap</class>
 		      <name>pixmap1</name>
-		      <filename>../pixmaps/settings.png</filename>
+		      <filename>settings.png</filename>
 		    </widget>
 		  </widget>
 
@@ -373,7 +371,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:45:05 GMT</last_modification_time>
 		    </signal>
 		    <label>Change Password...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 
 		  <widget>
@@ -388,7 +385,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 11:15:10 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -443,7 +439,7 @@
 	      <widget>
 		<class>GnomePixmap</class>
 		<name>pixmap3</name>
-		<filename>../pixmaps/users-groups.png</filename>
+		<filename>users-groups.png</filename>
 	      </widget>
 	    </widget>
 
@@ -546,7 +542,6 @@
 		    <last_modification_time>Wed, 25 Oct 2000 20:45:21 GMT</last_modification_time>
 		  </signal>
 		  <label>New Group...</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 
 		<widget>
@@ -561,7 +556,6 @@
 		    <last_modification_time>Wed, 25 Oct 2000 20:47:17 GMT</last_modification_time>
 		  </signal>
 		  <label>Delete</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
 		</widget>
 	      </widget>
 
@@ -639,7 +633,7 @@
 		    <widget>
 		      <class>GnomePixmap</class>
 		      <name>pixmap4</name>
-		      <filename>../pixmaps/settings.png</filename>
+		      <filename>settings.png</filename>
 		    </widget>
 		  </widget>
 
@@ -696,7 +690,6 @@
 		      <last_modification_time>Tue, 24 Oct 2000 15:59:22 GMT</last_modification_time>
 		    </signal>
 		    <label>Settings...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -756,7 +749,6 @@
 	  <can_default>True</can_default>
 	  <can_focus>True</can_focus>
 	  <label> Advanced &gt;&gt; </label>
-	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -791,7 +783,6 @@
 	      <last_modification_time>Mon, 23 Oct 2000 20:36:59 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
-	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 
 	  <widget>
@@ -805,7 +796,6 @@
 	      <last_modification_time>Mon, 23 Oct 2000 22:54:58 GMT</last_modification_time>
 	    </signal>
 	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
-	    <relief>GTK_RELIEF_NORMAL</relief>
 	  </widget>
 	</widget>
       </widget>
@@ -965,29 +955,6 @@
 	  </widget>
 
 	  <widget>
-	    <class>GtkOptionMenu</class>
-	    <name>user_settings_group</name>
-	    <can_focus>True</can_focus>
-	    <items>Select a group
-</items>
-	    <initial_choice>0</initial_choice>
-	    <child>
-	      <left_attach>1</left_attach>
-	      <right_attach>2</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>False</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>False</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label13</name>
 	    <label>Main group:</label>
@@ -1063,6 +1030,42 @@
 	      <xfill>True</xfill>
 	      <yfill>False</yfill>
 	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkCombo</class>
+	    <name>user_settings_group</name>
+	    <value_in_list>False</value_in_list>
+	    <ok_if_empty>True</ok_if_empty>
+	    <case_sensitive>False</case_sensitive>
+	    <use_arrows>True</use_arrows>
+	    <use_arrows_always>False</use_arrows_always>
+	    <items></items>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+
+	    <widget>
+	      <class>GtkEntry</class>
+	      <child_name>GtkCombo:entry</child_name>
+	      <name>combo-entry2</name>
+	      <can_focus>True</can_focus>
+	      <editable>True</editable>
+	      <text_visible>True</text_visible>
+	      <text_max_length>0</text_max_length>
+	      <text></text>
+	    </widget>
 	  </widget>
 	</widget>
       </widget>
@@ -1152,6 +1155,7 @@
 	<padding>0</padding>
 	<expand>True</expand>
 	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
       </child>
 
       <widget>
@@ -1253,6 +1257,23 @@
 	  <yfill>False</yfill>
 	</child>
       </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <name>user_passwd_label</name>
+      <label></label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
     </widget>
   </widget>
 </widget>
@@ -1496,7 +1517,6 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
 		</signal>
 		<label>Add -&gt;</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1515,7 +1535,6 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
 		</signal>
 		<label>Remove &lt;-</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
