@@ -1,0 +1,2521 @@
+# translation of gnome-system-tools.HEAD.po to basque
+# Basque translation of gnome-system-tools.
+# Copyright (C) 2003, 2004 Free Software Foundation, Inc.
+# This file is distributed under the same license as the gnome-system-tools package.
+# Eneko Lacunza <enlar@enlar.net>, 2003.
+# Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-system-tools.HEAD\n"
+"POT-Creation-Date: 2004-02-01 18:26+0100\n"
+"PO-Revision-Date: 2004-01-27 23:41+0100\n"
+"Last-Translator: Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>\n"
+"Language-Team: basque <itzulpena@euskalgnu.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Report-Msgid-Bugs-To: \n"
+"X-Generator: KBabel 1.0.2\n"
+
+#: gnome-system-tools.schemas.in.h:1
+msgid ""
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr ""
+"Urruneko konfigurazio aukera gaitua dagoenean, GST-k atzitu ahal izango "
+"dituen ostalarien zerrenda, komaz banatua."
+
+#: gnome-system-tools.schemas.in.h:2
+msgid "Dialog complexity for the boot-admin tool"
+msgstr "Abio-kudeaketa tresnaren elkarrizketa konplexutasuna"
+
+#: gnome-system-tools.schemas.in.h:3
+msgid "Dialog complexity for the network-admin tool"
+msgstr "Sare-kudeaketa tresnaren elkarrizketa konplexutasuna"
+
+#: gnome-system-tools.schemas.in.h:4
+msgid "Dialog complexity for the services-admin tool"
+msgstr "Zerbitzu-kudeaketa tresnaren elkarrizketa konplexutasuna"
+
+#: gnome-system-tools.schemas.in.h:5
+msgid "Dialog complexity for the time-admin tool"
+msgstr "Ordu-kudeaketa tresnaren elkarrizketa konplexutasuna"
+
+#: gnome-system-tools.schemas.in.h:6
+msgid "Dialog complexity for the users-admin tool"
+msgstr "Erabiltzaile-kudeaketa tresnaren elkarrizketa konplexutasuna"
+
+#: gnome-system-tools.schemas.in.h:7
+msgid "Last GST version executed"
+msgstr "Exekutatutako azken GST bertsioa"
+
+#: gnome-system-tools.schemas.in.h:8
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr "Lehentasunezko abioko kargatzailea, abio-kudeatzaileak konfigura dezakena"
+
+#: gnome-system-tools.schemas.in.h:9
+msgid "Remote hosts"
+msgstr "Urruneko ostalariak"
+
+#: gnome-system-tools.schemas.in.h:10
+msgid ""
+"The GNOME System Tools have two data display modes: basic mode and advanced "
+"mode, the basic mode is intended to show less options than the advanced mode"
+msgstr ""
+"GNOME System Tools-ek datuak erakusteko bi modu ditu: oinarrizkoa eta "
+"aurreratua.Oinarrizkoak modu aurreratuak baina aukera gutxiago erakusten "
+"ditu."
+
+#: gnome-system-tools.schemas.in.h:11
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
+msgstr ""
+"GST-ek, SSH bitartez, urrunetik konfiguratzeko gai da; gaitu aukera hau "
+"halakorikegin nahi baduzu"
+
+#: gnome-system-tools.schemas.in.h:12
+msgid "The last GST version that this computer has run"
+msgstr "Ordenagailu honek exekutatu duen azken GST bertsioa"
+
+#: gnome-system-tools.schemas.in.h:13
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr ""
+"Gako honek abio-kudeatzaileak konfigura dezaken abioko kargatzailea gordetzen du, "
+"bat baino gehiago instalatuta baleude. Ezarri gabe edo baliogabea bada, "
+"abio-kudeatzaileak erabiltzaileari galdetuko dio."
+
+#: gnome-system-tools.schemas.in.h:14
+msgid "Whether the tools will use remote administration or not"
+msgstr "Tresnek urruneko administrazioa erabiliko duten edo ez."
+
+#: gnome-system-tools.schemas.in.h:15
+msgid "Whether the users-admin tool should show all users and groups or not"
+msgstr ""
+"Erabiltzaile-kudeatzaileak erabiltzaile eta talde denak erakutsiko dituen "
+"edo ez"
+
+#: gnome-system-tools.schemas.in.h:16
+msgid "Whether the warning dialog should be shown or not"
+msgstr "Abisuen leihoa erakutsi beharko litzatekeen edo ez"
+
+#: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
+#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
+#: interfaces/users.glade.in.h:1
+msgid "*"
+msgstr "*"
+
+#: interfaces/boot.glade.in.h:2
+msgid "/dev/hda"
+msgstr "/dev/hda"
+
+#: interfaces/boot.glade.in.h:3
+msgid "/dev/hdb"
+msgstr "/dev/hdb"
+
+#: interfaces/boot.glade.in.h:4
+msgid "/dev/hdc"
+msgstr "/dev/hdc"
+
+#: interfaces/boot.glade.in.h:5
+msgid "/dev/hdd"
+msgstr "/dev/hdd"
+
+#: interfaces/boot.glade.in.h:6
+msgid "1024x768"
+msgstr "1024x768"
+
+#: interfaces/boot.glade.in.h:7
+msgid "1280x1024"
+msgstr "1280x1024"
+
+#: interfaces/boot.glade.in.h:8
+msgid "16,777,216"
+msgstr "16.777.216"
+
+#: interfaces/boot.glade.in.h:9
+msgid "256"
+msgstr "256"
+
+#: interfaces/boot.glade.in.h:10
+msgid "32,768"
+msgstr "32.768"
+
+#: interfaces/boot.glade.in.h:11
+msgid "640x480"
+msgstr "640x480"
+
+#: interfaces/boot.glade.in.h:12
+msgid "65,536"
+msgstr "65.536"
+
+#: interfaces/boot.glade.in.h:13
+msgid "800x600"
+msgstr "800x600"
+
+#: interfaces/boot.glade.in.h:14
+msgid "<b>Security</b>"
+msgstr "<b>Segurtasuna</b>"
+
+#: interfaces/boot.glade.in.h:15 interfaces/users.glade.in.h:4
+msgid "<span weight=\"bold\">Basic Settings</span>"
+msgstr "<span·weight=\"bold\">Oinarrizko ezarpenak</span>"
+
+#: interfaces/boot.glade.in.h:16
+msgid "<span weight=\"bold\">Image Settings</span>"
+msgstr "<span·weight=\"bold\">Irudi ezarpenak</span>"
+
+#: interfaces/boot.glade.in.h:17
+msgid "<span weight=\"bold\">Other Settings</span>"
+msgstr "<span·weight=\"bold\">Bestelako ezarpenak</span>"
+
+#: interfaces/boot.glade.in.h:18
+msgid "<span weight=\"bold\">Starting the Computer</span>"
+msgstr "<span·weight=\"bold\">Ordenagailua abiatzen</span>"
+
+#: interfaces/boot.glade.in.h:19
+msgid "Ask at boot"
+msgstr "Galdetu abioan"
+
+#: interfaces/boot.glade.in.h:20 src/boot/main.c:73
+msgid "Boot Manager Settings"
+msgstr "Abio-kudeatzailearen ezarpenak"
+
+#: interfaces/boot.glade.in.h:21
+msgid ""
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition. Optionally, you may also enter append parameters which are passed "
+"to the kernel at boot time."
+msgstr ""
+"Aukera ezazu kernelaren irudi bat abiatzeko, eta partizio bat erro partizio "
+"bezala muntatzeko. Aukeran, kernelari abio unean pasatzen zaizkion parametro "
+"osagarriak ere sar ditzakezu."
+
+#: interfaces/boot.glade.in.h:22
+msgid "Click \"Forward\" to continue"
+msgstr "Klikatu \"Aurrera\" jarraitzeko"
+
+#: interfaces/boot.glade.in.h:23
+msgid "Confirmation"
+msgstr "Baieztapena"
+
+#. set window title
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
+#: src/boot/boot-druid.c:441
+msgid "Creating a new boot image"
+msgstr "Sortu abio-irudi berri bat"
+
+#: interfaces/boot.glade.in.h:25
+msgid "Don't ask me again"
+msgstr "Ez galdetu berriro"
+
+#: interfaces/boot.glade.in.h:26
+msgid "Enable IDE SCSI emulation"
+msgstr "Gaitu IDE SCSI emulazioa"
+
+#: interfaces/boot.glade.in.h:27
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr "Abioko irudiaren izena sartu, eta zehaztu zer sistema eragile mota den."
+
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:43
+msgid "Finished"
+msgstr "Bukatuta"
+
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
+#: src/network/connection.c:1843
+msgid "Manual"
+msgstr "Eskuzkoa"
+
+#: interfaces/boot.glade.in.h:30
+msgid "Modify the settings for an operating system or kernel."
+msgstr "Aldatu sistema eragile edo kernel baten ezarpenak."
+
+#: interfaces/boot.glade.in.h:31
+msgid "Number of colors:"
+msgstr "Kolore kopurua:"
+
+#: interfaces/boot.glade.in.h:32
+msgid "Other parameters:"
+msgstr "Beste parametroak:"
+
+#: interfaces/boot.glade.in.h:33
+msgid "Password"
+msgstr "Pasahitza"
+
+#: interfaces/boot.glade.in.h:34
+msgid "Protect with password"
+msgstr "Babestu pasahitzarekin"
+
+#: interfaces/boot.glade.in.h:35
+msgid "Resolution:"
+msgstr "Bereizmena:"
+
+#: interfaces/boot.glade.in.h:36
+msgid "Seconds to wait before loading default kernel or OS"
+msgstr "Itxaron beharreko segunduak lehenetsitako kernel edo SE kargatu aurretik"
+
+#: interfaces/boot.glade.in.h:37
+msgid ""
+"Several bootloaders have been found in the system, please select which do "
+"you want to configure"
+msgstr "Sisteman haibat abioko kargatzaile aurkitu dira, hautatu konfiguratzea nahi duzuna"
+
+#: interfaces/boot.glade.in.h:38
+msgid "Specify the partition on which the operating system is installed."
+msgstr "Zehaztu sistema eragilea zein partiziotan dagoen instalatua."
+
+#: interfaces/boot.glade.in.h:39
+msgid ""
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
+msgstr "Abioko irudi berria gehitu da. Klikatu \"Aplikatu\" zure aldaketak gordetzeko. "
+
+#: interfaces/boot.glade.in.h:40
+msgid ""
+"This assistant is designed to help you quickly and easily add a new boot "
+"image to your system."
+msgstr ""
+"Morroi hau zure sisteman abioko irudi berri bat "
+"modu azkar eta errez batean gehitzeko diseinatua dago."
+
+#: interfaces/boot.glade.in.h:41
+msgid "Use this dialog to modify kernel parameters."
+msgstr "Erabili leiho hau kernelaren parametroak aldatzeko."
+
+#: interfaces/boot.glade.in.h:42
+msgid "Use this tool to specify which operating systems users can choose at startup."
+msgstr ""
+"Erabili tresna hau erabiltzaileek abioan zein sistema eragile aukera "
+"dezaketen zehazteko."
+
+#: interfaces/boot.glade.in.h:43
+msgid "Video modes (only frame buffer)"
+msgstr "Bideo moduak (frame-buferra soilik)"
+
+#: interfaces/boot.glade.in.h:44
+msgid "_Add..."
+msgstr "_Gehitu..."
+
+#: interfaces/boot.glade.in.h:45
+msgid "_Device:"
+msgstr "_Gailua:"
+
+#: interfaces/boot.glade.in.h:46
+msgid "_Edit"
+msgstr "_Editatu"
+
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
+msgid "_Initrd image path:"
+msgstr "_Initrd irudi bidea:"
+
+#: interfaces/boot.glade.in.h:48
+msgid "_Kernel image path:"
+msgstr "_Kernel irudi bidea:"
+
+#: interfaces/boot.glade.in.h:49
+msgid "_Name:"
+msgstr "Ize_na:"
+
+#: interfaces/boot.glade.in.h:50
+msgid "_Operating system:"
+msgstr "Sistema _eragilea:"
+
+#: interfaces/boot.glade.in.h:51
+msgid "_Parameters:"
+msgstr "_Parametroak:"
+
+#: interfaces/boot.glade.in.h:52
+msgid "_Root file system device:"
+msgstr "E_rro fitxategi-sistemaren gailua:"
+
+#: interfaces/common.glade.in.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
+"supported by this tool</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Tresna honek ez du exekutatzen ari zaren plataforma "
+"onartzen</span>"
+
+#: interfaces/common.glade.in.h:3
+msgid ""
+"<span weight=\"bold\" size=\"larger\">To run this tool, you need "
+"administrator privileges</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Tresna hau exekutatzeko supererabiltzailearen "
+"baimenak behar dituzu</span>"
+
+#: interfaces/common.glade.in.h:4
+msgid "Complexity"
+msgstr "Konplexutasuna"
+
+#: interfaces/common.glade.in.h:5
+msgid "Enter Password"
+msgstr "Sartu pasahitza"
+
+#: interfaces/common.glade.in.h:6
+msgid ""
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
+msgstr ""
+"Ondoren zerrendatzen diren plataformetariko batekin ongi dabilela ziur "
+"bazaude, hura hautatu eta jarraitu aurrera. Hala ere, jakin ezazu horrek "
+"sistemaren konfigurazioa hondatu edo zure ordenagailua serioski "
+"izurra dezakeela."
+
+#: interfaces/common.glade.in.h:7
+msgid "Remote administration"
+msgstr "Urruneko kudeaketa"
+
+#: interfaces/common.glade.in.h:8
+msgid "Run _Without Password"
+msgstr "Exekutatu pasahitzik _gabe"
+
+#: interfaces/common.glade.in.h:9
+msgid "Scanning system configuration..."
+msgstr "Sistemako konfigurazioa begiratzen..."
+
+#: interfaces/common.glade.in.h:10
+msgid ""
+"To acquire such privileges, enter your root password below. If you don't "
+"specify a password, you will be  unable to modify your system configuration."
+msgstr ""
+"Baimen horiek lortzeko, supererabiltzailearen (root) pasahitza sar ezazu "
+"azpian. Ez baduzu pasahitzik zehazten, ezin izango duzu zure sistemako "
+"konfigurazioa aldatu."
+
+#: interfaces/common.glade.in.h:11
+msgid "Unsupported Platform"
+msgstr "Plataforma ezezaguna"
+
+#: interfaces/common.glade.in.h:12
+msgid "Use this window to select the computer you wish to configure"
+msgstr "Erabili leiho hau konfiguratu nahi duzun ordenagailua hautatzeko"
+
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:110
+msgid "_Password:"
+msgstr "_Pasahitza:"
+
+#: interfaces/network.glade.in.h:2
+msgid "/dev/modem"
+msgstr "/dev/modem"
+
+#: interfaces/network.glade.in.h:3
+msgid "/dev/ttyS0"
+msgstr "/dev/ttyS0"
+
+#: interfaces/network.glade.in.h:4
+msgid "/dev/ttyS1"
+msgstr "/dev/ttyS1"
+
+#: interfaces/network.glade.in.h:5
+msgid "/dev/ttyS2"
+msgstr "/dev/ttyS2"
+
+#: interfaces/network.glade.in.h:6
+msgid "/dev/ttyS3"
+msgstr "/dev/ttyS3"
+
+#: interfaces/network.glade.in.h:7
+msgid "<b>Profile Settings</b>"
+msgstr "<b>Profilaren·ezarpenak</b>"
+
+#: interfaces/network.glade.in.h:8
+msgid "<span weight=\"bold\">Access Settings</span>"
+msgstr "<span·weight=\"bold\">Sarbidearen ezarpenak</span>"
+
+#: interfaces/network.glade.in.h:9
+msgid "<span weight=\"bold\">Account Data</span>"
+msgstr "<span·weight=\"bold\">Kontuaren datuak</span>"
+
+#: interfaces/network.glade.in.h:10
+msgid "<span weight=\"bold\">Connection settings</span>"
+msgstr "<span·weight=\"bold\">Konexio-ezarpenak</span>"
+
+#: interfaces/network.glade.in.h:11
+msgid "<span weight=\"bold\">Connection</span>"
+msgstr "<span·weight=\"bold\">Konexioa</span>"
+
+#: interfaces/network.glade.in.h:12
+msgid "<span weight=\"bold\">DNS Servers</span>"
+msgstr "<span·weight=\"bold\">DNS·zerbitzariak</span>"
+
+#: interfaces/network.glade.in.h:13
+msgid "<span weight=\"bold\">Host Settings</span>"
+msgstr "<span·weight=\"bold\">Ostalari-ezarpenak</span>"
+
+#: interfaces/network.glade.in.h:14
+msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
+msgstr "<span·weight=\"bold\">Internet zerbitzu-hornitzaile datuak</span>"
+
+#: interfaces/network.glade.in.h:15
+msgid "<span weight=\"bold\">PPP Settings</span>"
+msgstr "<span·weight=\"bold\">PPP·ezarpenak</span>"
+
+#: interfaces/network.glade.in.h:16
+msgid "<span weight=\"bold\">Search Domains</span>"
+msgstr "<span·weight=\"bold\">Domeinuen bilaketa</span>"
+
+#: interfaces/network.glade.in.h:17
+msgid "<span weight=\"bold\">Windows Networking</span>"
+msgstr "<span·weight=\"bold\">Windows·sareak</span>"
+
+#: interfaces/network.glade.in.h:18
+msgid "<span weight=\"bold\">Wireless settings:</span>"
+msgstr "<span·weight=\"bold\">Hari gabeko ezarpenak</span>"
+
+#: interfaces/network.glade.in.h:19
+msgid "A_liases:"
+msgstr "E_zizenak:"
+
+#: interfaces/network.glade.in.h:20 interfaces/users.glade.in.h:13
+msgid "Account"
+msgstr "Kontua"
+
+#: interfaces/network.glade.in.h:21
+msgid "Activate"
+msgstr "Aktibatua"
+
+#: interfaces/network.glade.in.h:22
+msgid "Activate when the computer _starts"
+msgstr "Gaitu ordenagailua a_biatzean"
+
+#: interfaces/network.glade.in.h:23
+msgid "Address configuration"
+msgstr "Helbide-konfigurazioa"
+
+#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
+msgid "Advanced"
+msgstr "Aurreratua"
+
+#: interfaces/network.glade.in.h:25
+msgid "Advanced PPP connection tuning."
+msgstr "PPP konexio doitze aurreratua."
+
+#: interfaces/network.glade.in.h:26
+msgid "Aliases of other computers."
+msgstr "Beste ordenagailuen ezizenak."
+
+#: interfaces/network.glade.in.h:27
+msgid "Allow activation control for all _users"
+msgstr "Baimendu aktibatze-kontrola _erabiltzaile guztientzat"
+
+#: interfaces/network.glade.in.h:28
+msgid "Auto"
+msgstr "Auto"
+
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
+msgid "BOOTP"
+msgstr "BOOTP"
+
+#: interfaces/network.glade.in.h:30
+msgid "Co_nfiguration:"
+msgstr "Ko_nfigurazioa:"
+
+#: interfaces/network.glade.in.h:31
+msgid "Connection _name:"
+msgstr "Konexioaren ize_na:"
+
+#: interfaces/network.glade.in.h:32
+msgid "Connection name"
+msgstr "Konexioaren ize_na"
+
+#: interfaces/network.glade.in.h:33
+msgid "Connection type"
+msgstr "Konexio mota"
+
+#: interfaces/network.glade.in.h:34
+msgid "Connections"
+msgstr "Konexioak"
+
+#. set window titles
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
+msgid "Creating a new network connection"
+msgstr "Sareko konexio berri bat sortzen"
+
+#: interfaces/network.glade.in.h:36
+msgid "Current network profile:"
+msgstr "Uneko sareko profila:"
+
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
+msgid "DHCP"
+msgstr "DHCP"
+
+#: interfaces/network.glade.in.h:38
+msgid "DNS"
+msgstr "DNS"
+
+#: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "_Domeinu-izena:"
+
+#: interfaces/network.glade.in.h:40
+msgid "Default gateway device:"
+msgstr "Atebide-gailu lehenetsia:"
+
+#: interfaces/network.glade.in.h:41
+msgid "Device:"
+msgstr "Gailua:"
+
+#: interfaces/network.glade.in.h:42
+msgid "Domain / _Workgroup:"
+msgstr "Domeinua / _lantaldea:"
+
+#: interfaces/network.glade.in.h:44
+msgid "General"
+msgstr "Orokorra"
+
+#: interfaces/network.glade.in.h:45
+msgid "Hosts"
+msgstr "Ostalariak"
+
+#: interfaces/network.glade.in.h:46
+msgid "How the names of other computers are found."
+msgstr "Nola aurkitzen diren beste ordenagailuen izenak."
+
+#: interfaces/network.glade.in.h:47
+msgid "How this computer is identified."
+msgstr "Nola izendatzen den ordenagailu hau."
+
+#: interfaces/network.glade.in.h:48
+msgid "How to access other computers."
+msgstr "Nola sarbidetu beste ordenagailuak."
+
+#: interfaces/network.glade.in.h:49
+msgid "How to dial up to the Internet."
+msgstr "Nola deitu telefonoz internetera."
+
+#: interfaces/network.glade.in.h:50
+msgid "ISP phone number"
+msgstr "ISP telefono zenbakia"
+
+#: interfaces/network.glade.in.h:51
+msgid "Interface properties"
+msgstr "Interfazearen propietateak"
+
+#: interfaces/network.glade.in.h:52
+msgid ""
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr ""
+"Sistemak ostalari bati erantsi dakioken domeinuen zerrenda, "
+"zehaztutakorik jadanik ez badago, bederen."
+
+#: interfaces/network.glade.in.h:54
+msgid "Modem _volume:"
+msgstr "Modemaren _bolumena:"
+
+#: interfaces/network.glade.in.h:55
+msgid "Network name:"
+msgstr "Sarearen izena:"
+
+#: interfaces/network.glade.in.h:56
+msgid "Network profiles"
+msgstr "Sareko profilak"
+
+#: interfaces/network.glade.in.h:57
+msgid "Network profiles can be used to store different network configurations."
+msgstr "Sareko profilak hainbat sareko konfigurazio gordetzeko erabil daitezke."
+
+#: interfaces/network.glade.in.h:58
+msgid "Networking Settings"
+msgstr "Sareko ezarpenak"
+
+#: interfaces/network.glade.in.h:59
+msgid "New network profile"
+msgstr "Sareko profil berria"
+
+#: interfaces/network.glade.in.h:60
+msgid ""
+"Next, please enter the user name and password which were assigned to you by "
+"your ISP."
+msgstr "Ondoren, sartu zure ISPak esleitutako erabiltzaile-izena eta pasahitza."
+
+#: interfaces/network.glade.in.h:61
+msgid ""
+"Now, please enter the address that this network device will have, and the "
+"remote address to which it will be connected."
+msgstr ""
+"Orain, sartu sareko gailu honek izango duen helbidea, eta zein "
+"urruneko helbidetara konektatuko den."
+
+#: interfaces/network.glade.in.h:62
+msgid "Now, please enter the address that this network device will have."
+msgstr "Orain, sartu sareko gailu honek izango duen helbidea."
+
+#: interfaces/network.glade.in.h:63
+msgid "Now, please give this connection a name."
+msgstr "Orain, konexio honi izen bat jarri."
+
+#: interfaces/network.glade.in.h:64
+msgid "Number to _access an external line:"
+msgstr "Kanpoko linea bat _sarbidetzeko zenbakia:"
+
+#: interfaces/network.glade.in.h:65
+msgid "Number to get to an _external line:"
+msgstr "_Kanpoko linea bat lortzeko zenbakia:"
+
+#: interfaces/network.glade.in.h:66
+msgid "PPPD _options:"
+msgstr "PPPD _aukerak:"
+
+#: interfaces/network.glade.in.h:67
+msgid "Pa_ssword (confirm):"
+msgstr "Pa_sahitza (berretsi):"
+
+#: interfaces/network.glade.in.h:68
+msgid "Phone _number:"
+msgstr "Telefono ze_nbakia:"
+
+#: interfaces/network.glade.in.h:69
+msgid ""
+"Please enter the phone number you use to connect to the internet. This "
+"number is provided by your ISP."
+msgstr ""
+"Sartu internetera konektatzeko erabiltzen duzun telefono zenbakia.Zenbaki "
+"hau zure ISPak eman behar dizu. "
+
+#: interfaces/network.glade.in.h:70
+msgid ""
+"Please select the wireless device that you want to configure and set the "
+"network name for this interface"
+msgstr ""
+"Hautatu kongifuratzea nahi duzun hari gabeko gailua eta "
+"ezarri interfaze honentzako sareko izena"
+
+#: interfaces/network.glade.in.h:71
+msgid "Please, give this network profile a name and a description."
+msgstr "Jarri sareko profil honi izen eta azalpen bat."
+
+#: interfaces/network.glade.in.h:72
+msgid "Please, select which type of connection you would like to add."
+msgstr "Hautatu zein motako konexioa gehitu nahi duzun."
+
+#: interfaces/network.glade.in.h:73 interfaces/users.glade.in.h:38
+msgid "Profile _name:"
+msgstr "Profil ize_na:"
+
+#: interfaces/network.glade.in.h:74
+msgid "Pulses"
+msgstr "Pultsuak"
+
+#: interfaces/network.glade.in.h:75
+msgid "Se_condary:"
+msgstr "Bigarren mailakoa:"
+
+#: interfaces/network.glade.in.h:76
+msgid "Set _DNS servers manually"
+msgstr "Ezarri _DNS zerbitzariak eskuz"
+
+#: interfaces/network.glade.in.h:77
+msgid "Set modem as default _route to internet"
+msgstr "Ezarri modema interneterako bide lehenetsi gisa"
+
+#: interfaces/network.glade.in.h:78
+msgid ""
+"This assistant will help you configure a new \n"
+"network connection."
+msgstr ""
+"Morroi honek sareko konexio berri bat \n"
+"konfiguratzen lagunduko dizu."
+
+#: interfaces/network.glade.in.h:80
+msgid "This is the list of IP addresses that the system will use as name servers"
+msgstr "Hau IP helbideen zerrenda bat da, sistemak izen-zerbitzari gisa erabiliko dituenak"
+
+#: interfaces/network.glade.in.h:81
+msgid ""
+"To continue configuring your network connection, click \"Next\". To quit, "
+"click \"Cancel\"."
+msgstr ""
+"Zure sare konexioa konfiguratzen jarraitzeko, klikatu \"Next\". Ateratzeko,"
+"klikatu \"Etsi\"."
+
+#: interfaces/network.glade.in.h:82
+msgid "Tones"
+msgstr "Tonuak"
+
+#: interfaces/network.glade.in.h:83
+msgid "Use \"Auto\" if unsure."
+msgstr "Erabili \"Auto\" ziur ez bazaude."
+
+#: interfaces/network.glade.in.h:84
+msgid "Use this dialog for setting the configuration for this interface"
+msgstr "Erabili leiho hua interfaze honen konfigurazioa ezartzeko"
+
+#: interfaces/network.glade.in.h:85
+msgid "Username and password"
+msgstr "Erabiltzaile-izena eta pasahitza"
+
+#: interfaces/network.glade.in.h:86
+msgid "WI_NS server:"
+msgstr "WI_NS zerbitzaria:"
+
+#: interfaces/network.glade.in.h:87
+msgid "Wireless device:"
+msgstr "Hari gabeko gailua:"
+
+#: interfaces/network.glade.in.h:88
+msgid "Wireless settings"
+msgstr "Hari gabeko sare-ezarpenak."
+
+#: interfaces/network.glade.in.h:89
+msgid ""
+"You are about to create a new network connection. Please click \"Apply\" to "
+"save your changes."
+msgstr "Sareko konexio berri bat sortzera zoaz. Klikatu \"Aplikatu\"  aldaketak gordetzeko."
+
+#: interfaces/network.glade.in.h:90
+msgid "_Autodetect"
+msgstr "_Autodetektatu"
+
+#: interfaces/network.glade.in.h:91
+msgid "_Comment:"
+msgstr "_Iruzkina:"
+
+#: interfaces/network.glade.in.h:92
+msgid "_Configuration:"
+msgstr "_Konfigurazioa:"
+
+#: interfaces/network.glade.in.h:93
+msgid "_Deactivate"
+msgstr "_Desaktibatu"
+
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
+msgid "_Delete"
+msgstr "_Ezabatu"
+
+#: interfaces/network.glade.in.h:95
+msgid "_Description:"
+msgstr "_Azalpena:"
+
+#: interfaces/network.glade.in.h:96
+msgid "_Dial type:"
+msgstr "_Dei mota:"
+
+#: interfaces/network.glade.in.h:97
+msgid "_Enable Windows networking"
+msgstr "_Gaitu Windows sarea"
+
+#: interfaces/network.glade.in.h:98
+msgid "_Ethernet"
+msgstr "_Ethernet"
+
+#: interfaces/network.glade.in.h:99
+msgid "_Gateway address:"
+msgstr "_Atebidearen helbidea:"
+
+#: interfaces/network.glade.in.h:100
+msgid "_Hostname:"
+msgstr "_Ostalari-izena:"
+
+#: interfaces/network.glade.in.h:101
+msgid "_IP address:"
+msgstr "_IP helbidea:"
+
+#: interfaces/network.glade.in.h:102
+msgid "_IR LAN"
+msgstr "_IG sarea"
+
+#: interfaces/network.glade.in.h:103
+msgid "_Local IP address:"
+msgstr "IP helbide _lokala:"
+
+#: interfaces/network.glade.in.h:104
+msgid "_Local IP:"
+msgstr "IP _lokala:"
+
+#: interfaces/network.glade.in.h:105
+msgid "_Modem (PPP)"
+msgstr "_Modema (PPP)"
+
+#: interfaces/network.glade.in.h:106
+msgid "_Modem port:"
+msgstr "_Modemaren ataka:"
+
+#: interfaces/network.glade.in.h:107
+msgid "_Network Profiles"
+msgstr "_Sareko profilak"
+
+#: interfaces/network.glade.in.h:108
+msgid "_Network name:"
+msgstr "_Sarearen izena:"
+
+#: interfaces/network.glade.in.h:109
+msgid "_Parallel Line"
+msgstr "_Linea paraleloa"
+
+#: interfaces/network.glade.in.h:111
+msgid "_Phone number:"
+msgstr "_Telefono zenbakia:"
+
+#: interfaces/network.glade.in.h:112
+msgid "_Primary:"
+msgstr "_Lehen mailakoa:"
+
+#: interfaces/network.glade.in.h:113
+msgid "_Remote IP address:"
+msgstr "U_rruneko IP helbidea:"
+
+#: interfaces/network.glade.in.h:114
+msgid "_Remote IP:"
+msgstr "U_rruneko IPa:"
+
+#: interfaces/network.glade.in.h:115
+msgid "_Retry if the connection breaks or fails to start"
+msgstr "_Saiatu berriro konexioa moztu edo hasten ez bada"
+
+#: interfaces/network.glade.in.h:116
+msgid "_Save Current"
+msgstr "_Gorde unekoa"
+
+#: interfaces/network.glade.in.h:117
+msgid "_Start PPP as soon as modem connects"
+msgstr "_Abiatu PPP modema konektatu bezain laster"
+
+#: interfaces/network.glade.in.h:118
+msgid "_Subnet mask:"
+msgstr "A_zpisare maskara:"
+
+#: interfaces/network.glade.in.h:119
+msgid "_Update DNS when this connection becomes active"
+msgstr "_Eguneratu DNSa konexio hau aktibatzean"
+
+#: interfaces/network.glade.in.h:120
+msgid "_Use remote IP as default gateway"
+msgstr "_Erabili urruneko IPa lehenetsitako atebide gisa"
+
+#: interfaces/network.glade.in.h:121 interfaces/users.glade.in.h:65
+msgid "_Username:"
+msgstr "_Erabiltzaile-izena:"
+
+#: interfaces/network.glade.in.h:122
+msgid "_Wireless"
+msgstr "_Hari gabekoa"
+
+#: interfaces/services.glade.in.h:1
+msgid "<span weight=\"bold\">Description</span>"
+msgstr "<span·weight=\"bold\">Azalpena</span>"
+
+#: interfaces/services.glade.in.h:2
+msgid "<span weight=\"bold\">General Information</span>"
+msgstr "<span·weight=\"bold\">Informazio orokorra</span>"
+
+#: interfaces/services.glade.in.h:3
+msgid "<span weight=\"bold\">Service Settings</span>"
+msgstr "<span·weight=\"bold\">Zerbitzu-ezarpenak</span>"
+
+#: interfaces/services.glade.in.h:4
+msgid "Click on an item in the list to show it's description."
+msgstr "Klikatu zerrendako elementu batean bere azalpena erakusteko."
+
+#: interfaces/services.glade.in.h:5
+msgid "Description:"
+msgstr "Azalpena:"
+
+#: interfaces/services.glade.in.h:6
+msgid "Service _Properties"
+msgstr "Zerbitzuaren _propietateak"
+
+#: interfaces/services.glade.in.h:7
+msgid "Service:"
+msgstr "Zerbitzua:"
+
+#: interfaces/services.glade.in.h:8
+msgid "Status:"
+msgstr "Egoera:"
+
+#: interfaces/services.glade.in.h:9
+msgid "Use this tool to specify which services to run"
+msgstr "Erabili tresna hau exekutatu beharreko zerbitzuak zehazteko"
+
+#: interfaces/services.glade.in.h:10
+msgid "_Start"
+msgstr "_Hasi"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Startup sequence:"
+msgstr "_Abiarazte sekuentzia"
+
+#: interfaces/time.glade.in.h:1
+msgid "(unconfigured)"
+msgstr "(konfiguratu gabea)"
+
+#: interfaces/time.glade.in.h:3
+msgid ":"
+msgstr ":"
+
+#: interfaces/time.glade.in.h:4
+msgid "<span weight=\"bold\">Time Configuration</span>"
+msgstr "<span·weight=\"bold\">Ordu-konfigurazioa</span>"
+
+#: interfaces/time.glade.in.h:5
+msgid ""
+"Please select the current date and time. You can also specify a time zone "
+"and a time server."
+msgstr ""
+"Hautatu uneko data eta ordua. Ordu-zona eta denbora zerbitzaria erezehaz "
+"ditzakezu."
+
+#: interfaces/time.glade.in.h:6
+msgid "S_ynchronize clock with Internet servers:"
+msgstr "Erlojua interneteko zerbitzariekin s_inkronizatu:"
+
+#: interfaces/time.glade.in.h:7
+msgid "Se_lect Servers..."
+msgstr "_Hautatu zerbitzariak..."
+
+#: interfaces/time.glade.in.h:8
+msgid "Select the servers you wish to use for time synchronization."
+msgstr "Hautatu ordua sinkronizatzeko erabili nahi dituzun zerbitzariak."
+
+#: interfaces/time.glade.in.h:9
+msgid "Time zone:"
+msgstr "Ordu-zona:"
+
+#: interfaces/time.glade.in.h:10
+msgid "To select a time zone, click on one of the dots on the map"
+msgstr "Ordu-zona bat hautatzeko, klikatu mapako puntu batean"
+
+#: interfaces/time.glade.in.h:11
+msgid "_Date:"
+msgstr "_Data:"
+
+#: interfaces/time.glade.in.h:12
+msgid "_Select Time Zone..."
+msgstr "_Hautatu ordu-zona..."
+
+#: interfaces/time.glade.in.h:13
+msgid "_Time:"
+msgstr "_Ordua:"
+
+#: interfaces/users.glade.in.h:2
+msgid "<span weight=\"bold\">Advanced Settings</span>"
+msgstr "<span·weight=\"bold\">Ezarpen aurreratuak</span>"
+
+#: interfaces/users.glade.in.h:3
+msgid "<span weight=\"bold\">Automatic UID/GID</span>"
+msgstr "<span·weight=\"bold\">UID/GID automatikoa</span>"
+
+#: interfaces/users.glade.in.h:5
+msgid "<span weight=\"bold\">Contact Information</span>"
+msgstr "<span·weight=\"bold\">Harremanetarako informazioa</span>"
+
+#: interfaces/users.glade.in.h:6
+msgid "<span weight=\"bold\">Group Members</span>"
+msgstr "<span·weight=\"bold\">Taldekideak</span>"
+
+#: interfaces/users.glade.in.h:7
+msgid "<span weight=\"bold\">Optional Settings</span>"
+msgstr "<span·weight=\"bold\">Hautazko ezarpenak</span>"
+
+#: interfaces/users.glade.in.h:8
+msgid "<span weight=\"bold\">Password Settings</span>"
+msgstr "<span·weight=\"bold\">Pasahitz-ezarpenak</span>"
+
+#: interfaces/users.glade.in.h:9
+msgid "<span weight=\"bold\">Password</span>"
+msgstr "<span·weight=\"bold\">Pasahitza</span>"
+
+#: interfaces/users.glade.in.h:10
+msgid "<span weight=\"bold\">Profile Settings</span>"
+msgstr "<span·weight=\"bold\">Profil-ezarpenak</span>"
+
+#: interfaces/users.glade.in.h:11
+msgid "<span weight=\"bold\">System Defaults</span>"
+msgstr "<span·weight=\"bold\">Sistemaren lehenespenak</span>"
+
+#: interfaces/users.glade.in.h:12
+msgid "<span weight=\"bold\">User Profile</span>"
+msgstr "<span·weight=\"bold\">Erabiltzaile-profila</span>"
+
+#: interfaces/users.glade.in.h:15
+msgid "Assign a random password by default"
+msgstr "Esleitu ausazko pasahitza lehenetsi gisa"
+
+#: interfaces/users.glade.in.h:16
+msgid "Check password _quality"
+msgstr "Egiaztatu pasahitzaren _kalitatea"
+
+#: interfaces/users.glade.in.h:17
+msgid "Con_firmation:"
+msgstr "_Baieztapena:"
+
+#: interfaces/users.glade.in.h:18
+msgid "Days between warning and password expiration:"
+msgstr "Jakinarazpen eta pasahitzaren iraungitzearen arteko egunak:"
+
+#: interfaces/users.glade.in.h:19
+msgid "Default _group:"
+msgstr "_Talde lehenetsia:"
+
+#: interfaces/users.glade.in.h:20
+msgid "Default _shell:"
+msgstr "Komando-lerro lehenetsia:"
+
+#: interfaces/users.glade.in.h:21
+msgid "Generate _random password"
+msgstr "Sortu _ausazko pasahitza"
+
+#: interfaces/users.glade.in.h:22
+msgid "Group Properties"
+msgstr "Talde-propietateak"
+
+#: interfaces/users.glade.in.h:23
+msgid "Group _ID:"
+msgstr "Talde _IDa:"
+
+#: interfaces/users.glade.in.h:24
+msgid "Group _members:"
+msgstr "Talde_kideak:"
+
+#: interfaces/users.glade.in.h:25
+msgid "Group _name:"
+msgstr "Taldearen ize_na:"
+
+#: interfaces/users.glade.in.h:26
+msgid "Groups"
+msgstr "Taldeak"
+
+#: interfaces/users.glade.in.h:27
+msgid "Ma_ximum days a password may be used:"
+msgstr "Pasahitz bat erabil daitekeen ge_hienezko egun kopurua:"
+
+#: interfaces/users.glade.in.h:28
+msgid "Maximum UID:"
+msgstr "Gehienezko UIDa:"
+
+#: interfaces/users.glade.in.h:29
+msgid "Mi_nimum days between password changes:"
+msgstr "Pasahitz aldaketen arteko gutxienezko egun kopurua:"
+
+#: interfaces/users.glade.in.h:30
+msgid "Minimum GID:"
+msgstr "Gutxienezko GIDa:"
+
+#: interfaces/users.glade.in.h:31
+msgid "Minimum UID:"
+msgstr "Gutxienezko UIDa:"
+
+#: interfaces/users.glade.in.h:32
+msgid "Minimum days allowed between password changes:"
+msgstr "Pasahitz aldaketen arteko gehienezko egun kopurua:"
+
+#: interfaces/users.glade.in.h:33
+msgid "Number of days that a password may be used:"
+msgstr "Pasahitz bat erabil daitekeen egun kopurua:"
+
+#: interfaces/users.glade.in.h:34
+msgid "O_ffice location:"
+msgstr "_Bulegoaren kokapena:"
+
+#: interfaces/users.glade.in.h:35
+msgid ""
+"On this page, you can define the system defaults which will be assigned to "
+"new users."
+msgstr ""
+"Orri honetan, erabiltzaile berriei esleituko zaizkien sistemako balio "
+"lehenetsiakdefini ditzakezu."
+
+#: interfaces/users.glade.in.h:36
+msgid "Other Groups"
+msgstr "Beste taldeak"
+
+#: interfaces/users.glade.in.h:37
+msgid "Password set to: "
+msgstr "Pasahitza ezarri da:"
+
+#: interfaces/users.glade.in.h:39
+msgid "Set password b_y hand"
+msgstr "Ezarri pasahitza _eskuz"
+
+#: interfaces/users.glade.in.h:40
+msgid "Show a_ll users and groups"
+msgstr "Erakutsi erabiltzaile eta talde guzti_ak"
+
+#: interfaces/users.glade.in.h:41
+msgid ""
+"This is the list of the groups available on the system. Create new groups or "
+"edit existing groups with this dialog."
+msgstr ""
+"Hau sistemako taldeen zerrenda da. Sortu talde berriak edo editatu daudenak "
+"leiho honen bidez."
+
+#: interfaces/users.glade.in.h:42
+msgid ""
+"This is the list of the users available on the system. Create new users or "
+"edit existing user settings with this dialog."
+msgstr ""
+"Hau sistemako erabiltzaileen zerrenda da. Sortu erabiltzaile berriak edo "
+"editatu daudenen ezarpenak leiho honekin."
+
+#: interfaces/users.glade.in.h:43
+msgid "User Profiles"
+msgstr "Erabiltzaile-profilak..."
+
+#: interfaces/users.glade.in.h:44
+msgid "User _ID:"
+msgstr "Erabiltzailearen IDa:"
+
+#: interfaces/users.glade.in.h:45
+msgid "User _password:"
+msgstr "Erabiltzailearen _pasahitza:"
+
+#: interfaces/users.glade.in.h:46
+msgid ""
+"User profiles can be used as templates to facilitate the creation of new "
+"users."
+msgstr ""
+"Erabiltzaile-profilak txantiloi gisa erabil daitezke erabiltzaile "
+"berrien sorrera laguntzeko."
+
+#: interfaces/users.glade.in.h:47
+msgid "Users"
+msgstr "Erabiltzaileak"
+
+#: interfaces/users.glade.in.h:48
+msgid "_Add Group..."
+msgstr "_Gehitu taldea..."
+
+#: interfaces/users.glade.in.h:49
+msgid "_Add Profile..."
+msgstr "_Gehitu profila..."
+
+#: interfaces/users.glade.in.h:50
+msgid "_Add User..."
+msgstr "_Gehitu erabiltzailea..."
+
+#: interfaces/users.glade.in.h:51
+msgid "_All users:"
+msgstr "Erabiltzaile guzti_ak:"
+
+#: interfaces/users.glade.in.h:52
+msgid "_Available groups:"
+msgstr "_Talde erabilgarriak:"
+
+#: interfaces/users.glade.in.h:53
+msgid "_Comments"
+msgstr "_Iruzkinak"
+
+#: interfaces/users.glade.in.h:54
+msgid "_Days between warning and password expiration:"
+msgstr "Jakinarazpen eta pasahitza iraungitzearen arteko _egunak:"
+
+#: interfaces/users.glade.in.h:56
+msgid "_Edit User Profiles..."
+msgstr "_Editatu erabiltzaile-profilak..."
+
+#: interfaces/users.glade.in.h:57
+msgid "_Generate Password"
+msgstr "_Sortu pasahitza"
+
+#: interfaces/users.glade.in.h:58
+msgid "_Home directory:"
+msgstr "_Etxea direktorioa:"
+
+#: interfaces/users.glade.in.h:59
+msgid "_Home phone:"
+msgstr "_Etxeko telefonoa:"
+
+#: interfaces/users.glade.in.h:60
+msgid "_Main group:"
+msgstr "_Talde nagusia:"
+
+#: interfaces/users.glade.in.h:61
+msgid "_Profile:"
+msgstr "_Profila:"
+
+#: interfaces/users.glade.in.h:62
+msgid "_Real name:"
+msgstr "_Benetako izena:"
+
+#: interfaces/users.glade.in.h:63
+msgid "_Shell:"
+msgstr "_Shell:"
+
+#: interfaces/users.glade.in.h:64
+msgid "_User's groups:"
+msgstr "_Erabiltzailearen taldeak:"
+
+#: interfaces/users.glade.in.h:66
+msgid "_Work phone:"
+msgstr "_Laneko telefonoa:"
+
+#: interfaces/users.glade.in.h:67
+msgid "profiles_table"
+msgstr "profil_taula"
+
+#: src/boot/boot-append-gui.c:226
+#, c-format
+msgid "vga=%s is not a valid vga value"
+msgstr "vga=%s ez da vga balio onargarri bat"
+
+#: src/boot/boot-druid.c:430
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "Abio-irudi berri bat sortzen (%d / %d)"
+
+#: src/boot/boot-druid.c:431
+msgid "Finished creating a new boot image"
+msgstr "Bukatuta abio-irudi berriaren sorrera"
+
+#: src/boot/boot-image.c:40 src/network/profile.c:468
+msgid "Unknown"
+msgstr "Ezezaguna"
+
+#: src/boot/boot-image.c:41
+msgid "Windows NT"
+msgstr "Windows·NT"
+
+#: src/boot/boot-image.c:42
+msgid "Windows 9x"
+msgstr "Windows·9x"
+
+#: src/boot/boot-image.c:43
+msgid "Dos"
+msgstr "Dos"
+
+#: src/boot/boot-image.c:44
+msgid "Linux"
+msgstr "Linux"
+
+#: src/boot/boot-image.c:45
+msgid "Linux swap"
+msgstr "Linux·swap"
+
+#: src/boot/boot-image.c:46
+msgid "GNU/Hurd"
+msgstr "GNU/Hurd"
+
+#: src/boot/boot-image.c:278
+#, c-format
+msgid "Invalid path: %s"
+msgstr "Bide-izen okerra: %s"
+
+#: src/boot/boot-image.c:294
+#, c-format
+msgid "Image '%s' already exists, please set another name."
+msgstr "'%s' irudia jada badago, jar ezazu beste izen bat."
+
+#: src/boot/boot-image.c:300
+#, c-format
+msgid "Invalid image name: '%s'"
+msgstr "Irudi-izen okerra: '%s'"
+
+#: src/boot/boot-image.c:313
+#, c-format
+msgid "Invalid image: '%s'"
+msgstr "Irudi okerra: '%s'"
+
+#: src/boot/boot-image.c:331
+#, c-format
+msgid "Invalid root device: '%s'"
+msgstr "Erroaren gailu okerra: '%s'"
+
+#: src/boot/boot-settings.c:43
+msgid "_Module path:"
+msgstr "_Moduluen bide-izena:"
+
+#: src/boot/boot-settings.c:360 src/users/user-settings.c:502
+msgid "Password confirmation isn't correct."
+msgstr "Pasahitzaren baieztapena ez da zuzena."
+
+#: src/boot/boot.desktop.in.in.h:1
+msgid "Boot"
+msgstr "Abioa"
+
+#: src/boot/boot.desktop.in.in.h:2
+msgid "Configure the system boot process"
+msgstr "Konfiguratu sistemaren abio-prozesua"
+
+#: src/boot/callbacks.c:75
+msgid "Boot Image Editor"
+msgstr "Abio-irudi editorea"
+
+#: src/boot/callbacks.c:169
+msgid "Boot Append Editor"
+msgstr "Abioko parametroen editorea"
+
+#: src/boot/callbacks.c:390
+msgid ""
+"Without at least one boot image,\n"
+"your system will not start.\n"
+msgstr ""
+"Gutxienez abio-irudi bat gabe,\n"
+"zure sistema ez da abiatuko.\n"
+
+#: src/boot/callbacks.c:405
+#, c-format
+msgid "Are you sure you want to delete '%s'?"
+msgstr "Ziur \"%s\" borratu nahi duzula?"
+
+#: src/boot/callbacks.c:450
+#, c-format
+msgid ""
+"The file ``%s'' is missing or could not be read:\n"
+"The configuration will show empty."
+msgstr ""
+"\"%s\" fitxategia ez dago edo ezin izan da irakurri:\n"
+"Konfigurazioa hutsik erakutsiko da."
+
+#: src/boot/table.c:41
+msgid "Name"
+msgstr "Izena"
+
+#: src/boot/table.c:42
+msgid "Default"
+msgstr "Lehenetsia"
+
+#: src/boot/table.c:43 src/network/connection.c:479
+msgid "Type"
+msgstr "Mota"
+
+#: src/boot/table.c:44
+msgid "Kernel Image"
+msgstr "Kernel-irudia"
+
+#: src/boot/table.c:45 src/network/connection.c:495
+msgid "Device"
+msgstr "Gailua"
+
+#: src/boot/table.c:50 src/network/connection.c:57
+msgid "/_Add ..."
+msgstr "/_Gehitu..."
+
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
+msgid "/_Properties"
+msgstr "/_Propietateak"
+
+#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
+#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+msgid "/_Delete"
+msgstr "/_Ezabatu"
+
+#. the proccess was running ssh
+#: src/common/gst-auth.c:83
+msgid "Could not connect to the computer."
+msgstr "Ezin izan da ordenagailura konektatu."
+
+#. the proccess was running su
+#: src/common/gst-auth.c:86
+msgid "The password you entered is invalid."
+msgstr "Sartutako pasahitza ez da zuzena."
+
+#: src/common/gst-auth.c:89
+msgid "An unexpected error has occurred."
+msgstr "Ustegabeko errorea gertatu da."
+
+#: src/common/gst-dialog.c:61
+#, c-format
+msgid "Could not find widget: %s"
+msgstr "Ezin izan da widget-a aurkitu: %s"
+
+#: src/common/gst-dialog.c:93
+msgid " More _Options"
+msgstr "_Aukera gehiago"
+
+#: src/common/gst-dialog.c:94
+msgid " Fewer _Options"
+msgstr "_Aukera gutxiago"
+
+#: src/common/gst-dialog.c:507
+msgid ""
+"There are changes which haven't been applied.\n"
+"Apply them now?"
+msgstr ""
+"Aplikatu ez diren aldaketak daude.\n"
+"Orain aplikatu?"
+
+#: src/common/gst-dialog.c:624
+#, c-format
+msgid "Error connection signal `%s' in widget `%s'"
+msgstr "Errorea \"%s\" seinalea \"%s\" widget-ari konektatzean."
+
+#: src/common/gst-tool.c:822
+#, c-format
+msgid "Skipping %s directive..."
+msgstr "%s direktiba ekiditen..."
+
+#: src/common/gst-tool.c:953
+msgid "Skipping actual save..."
+msgstr "Uneko gordeketa ekiditen..."
+
+#: src/common/gst-tool.c:1026
+msgid ""
+"There was an error running the backend script,\n"
+"and the configuration could not be loaded."
+msgstr ""
+"Errorea gertatu da atze-planoko script-a exekutatzean,\n"
+"eta ezin izan da konfigurazioa irakurri."
+
+#: src/common/gst-tool.c:1510
+#, c-format
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
+"GNOME System Tools</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Ongi etorri GNOME System Tools-en "
+"%s aurre-argitalpenera</span>"
+
+#: src/common/gst-tool.c:1513
+msgid ""
+"This is still a work in progress, and so it may have serious bugs. Due to "
+"the nature of these tools, bugs may render your computer <span weight=\"bold"
+"\">practically useless</span>, costing time, effort and sanity points. You "
+"have been warned. Thank you for trying out this prerelease of the GNOME "
+"System Tools!"
+msgstr ""
+"Oraindik lanean ari gara, beraz akats larriak egon daiteke. "
+"Tresna hauen helburua dela eta, akatsek zure ordenagailua "
+"<span weight=\"bold\">erabat erabilgaitza</span> utz dezakete, "
+" denbora, lana eta osasun puntuak kostatuz. Ohartarazia izan zara. "
+"Mila eske GNOME System Tools-en aurre-argitalpena hau probatzeagatik."
+
+#: src/common/gst-tool.c:1534
+msgid "Warning"
+msgstr "Oharra"
+
+#: src/common/gst-tool.c:1554
+msgid "Don't show me this again"
+msgstr "Ez erakutsi hau berriro"
+
+#: src/common/gst-tool.c:1628
+msgid "GNOME System Tools"
+msgstr "GNOME·System·Tools"
+
+#: src/common/gst-ui.c:389
+msgid "Please restart your GNOME session for these changes to take effect."
+msgstr "Aldaketak eragina izan dezaten zure GNOME saioa berrabiarazi."
+
+#: src/network/callbacks.c:365
+#, c-format
+msgid "Remove connection %s: \"%s\"?"
+msgstr "%s konexioa kendu: \"%s\"?"
+
+#: src/network/callbacks.c:367
+#, c-format
+msgid "Remove connection %s?"
+msgstr "%s konexioa kendu?"
+
+#: src/network/callbacks.c:463
+msgid ""
+"You don't have SMB support installed. Please install SMB support in the "
+"system to enable windows networking."
+msgstr ""
+"Ez duzu SMB euskarririk instalatuta. Windows sarea "
+"gaitzeko zure sisteman SMB euskarria instalatu behar duzu."
+
+#: src/network/callbacks.c:466
+msgid "SMB support missing."
+msgstr "SMB euskarria ez da aurkitu."
+
+#: src/network/callbacks.c:522
+msgid ""
+"The host name has changed. This will prevent you from launching new "
+"applications, and so you will have to log in again. Continue anyway?"
+msgstr ""
+"Ostalari izena aldatu egin da. Honek aplikazio berriak "
+"abiaraztea ezinezkoa egingo du sisteman berriro ere sartu arte. "
+"Ala ere jarraitu nahi duzu?"
+
+#: src/network/callbacks.c:570
+msgid ""
+"wvdial could not be found on your system. You need to install wvdial, or the "
+"PPP (modem) connections will not activate."
+msgstr ""
+"wvdial ezin izan da aurkitu zure sisteman. wvdial instalatu "
+"behar duzu, bestela PPP (modem) konexioak ez dira aktibatuko."
+
+#: src/network/callbacks.c:597
+msgid ""
+"wvdial could not be found on your system. You need to install wvdial, or the "
+"PPP (modem) connections will not activate. Continue anyway?"
+msgstr ""
+"wvdial ezin izan da zure sisteman aurkitu. wvdial instalatu behar duzu "
+"edo PPP (modem) konexioak ez dira aktibatuko. Ala ere jarraitu nahi duzu?"
+
+#: src/network/callbacks.c:624
+msgid ""
+"The default gateway device is not activated. This will prevent you from "
+"connecting to the Internet. Continue anyway?"
+msgstr ""
+"Lehenetsitako atebidearen gailua ez dago aktibatuta. Honek internetera "
+"konektatzea ezinezkoa egingo du. Ala ere jarraitu nahi duzu?"
+
+#: src/network/callbacks.c:679
+msgid ""
+"The default gateway device is missing gateway information. Please provide "
+"this information to proceed, or choose another default gateway device."
+msgstr ""
+"Lehenetsitako atebide-gailuak atebidearen informaziorik ez du. Informazio "
+"hori zehaztu aurrera jarraitzeko edo lehenetsitako beste atebide-gailu "
+" bat aukeratu."
+
+#: src/network/callbacks.c:725
+msgid ""
+"The program redhat-config-network-cmd could not be found. This could render "
+"missing connections under the connections tab. Please install the redhat-"
+"config-network rpm package to avoid this."
+msgstr ""
+"redhat-config-network-cmd programa ezin izan da aurkitu. Honek konexio okerrak "
+"erakus ditzake konexio fitxan. redhat-config-network rpm paketea instalatu hau "
+"ekiditeko."
+
+#: src/network/callbacks.c:762
+#, c-format
+msgid "Do you want to enable interface %s?"
+msgstr "%s interfazea gaitzea nahi duzu?"
+
+#: src/network/callbacks.c:772
+#, c-format
+msgid "Do you want to disable interface %s?"
+msgstr "%s interfazea desgaitzea nahi duzu?"
+
+#: src/network/callbacks.c:859
+msgid ""
+"Could not autodetect modem device, check that this is not busy and that it's "
+"correctly attached"
+msgstr ""
+"Ezin izan da modem gailurik detektatu, egiaztatu ez dagoela lanpetuta eta "
+"ondo atxikirik dagoela"
+
+#: src/network/callbacks.c:911
+msgid "Silent"
+msgstr "Isilik"
+
+#: src/network/callbacks.c:913
+msgid "Low"
+msgstr "Bajua"
+
+#: src/network/callbacks.c:915
+msgid "Medium"
+msgstr "Ertaina"
+
+#: src/network/callbacks.c:917
+msgid "Loud"
+msgstr "Altua"
+
+#: src/network/connection.c:45
+msgid "Other type"
+msgstr "Beste motakoa"
+
+#: src/network/connection.c:46
+msgid "Ethernet LAN card"
+msgstr "Ethernet sare txartela"
+
+#: src/network/connection.c:47
+msgid "Wireless LAN card"
+msgstr "Hari gabeko sarea"
+
+#: src/network/connection.c:48
+msgid "Modem or transfer cable"
+msgstr "Modema edo transferentzia kablea"
+
+#: src/network/connection.c:49
+msgid "Parallel line"
+msgstr "Linea paraleloa"
+
+#: src/network/connection.c:50
+msgid "Infrared LAN"
+msgstr "Infragorri sarea"
+
+#: src/network/connection.c:51
+msgid "Loopback interface"
+msgstr "Atzera-begizta interfazea"
+
+#: src/network/connection.c:52
+msgid "Unknown interface type"
+msgstr "Interfaze mota ezezaguna"
+
+#: src/network/connection.c:59
+msgid "/_Configure"
+msgstr "/_Konfiguratu"
+
+#: src/network/connection.c:507
+msgid "Status"
+msgstr "Egoera"
+
+#: src/network/connection.c:516 src/network/profiles-table.c:62
+msgid "Description"
+msgstr "Azalpena"
+
+#: src/network/connection.c:1707
+msgid ""
+"The IP address or netmask for the interface was left empty. Please enter "
+"valid IP addresses in those fields to continue."
+msgstr ""
+"Interfazearen IP helbidea edo maskara hutsik utzi da. Eremu horietan "
+"sar itzazu IP helbide zuzenak, aurrera jarraitzeko."
+
+#: src/network/connection.c:1714
+msgid ""
+"The IP address or remote address for the interface was left empty. Please "
+"enter valid IP addresses in those fields to continue."
+msgstr ""
+"Interfazearen IP helbidea edo urruneko helbidea hutsik utzi da. Eremu "
+"horietan sar itzazu IP helbide egokiak, aurrera jarraitzeko."
+
+#: src/network/connection.c:1720
+msgid ""
+"You chose to set the DNS servers for this connection manually, but left the "
+"IP address for the primary DNS empty. Please enter the IP for the primary "
+"DNS or uncheck the manual DNS option."
+msgstr ""
+"Konexio honetako DNS zerbitzariak eskuz jartzea aukeratu duzu, baina lehen mailako "
+"DNSaren IPa hutsik utzi duzu. Sar ezazu lehen mailako DNSaren IPa edo desmarkatu "
+"eskuzko DNS aukera."
+
+#: src/network/connection.c:1726
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr ""
+"Konexioak erabili beharko lukeen modemaren gailua hutsik utzi duzu. "
+"Sartu gailu bat edo klikatu \"autodetektatu\" aurerra jarraitzeko"
+
+#: src/network/connection.c:1731
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr ""
+"Konexioak erabili beharko lukeen telefono zenbaki hutsik utzi duzu. "
+"Sartu telefono zenbaki  bat aurerra jarraitzeko"
+
+#: src/network/connection.c:2082
+#, c-format
+msgid "The interface %s doesn't exist."
+msgstr "%s interfazea ez da existitzen."
+
+#: src/network/dns.c:163 src/network/hosts.c:174
+msgid "IP Address"
+msgstr "IP helbidea"
+
+#: src/network/hosts.c:182
+msgid "Aliases"
+msgstr "Ezizenak"
+
+#: src/network/main.c:190
+msgid "Run the connection assistant."
+msgstr "Exekutatu konexio-morroia."
+
+#: src/network/main.c:191
+msgid "Run the PPP connection assistant."
+msgstr "Exekutatu PPP konexio-morroia"
+
+#: src/network/main.c:192
+msgid "Run the ethernet connection assistant."
+msgstr "Exekutatu Ethernet konexio-morroia."
+
+#: src/network/main.c:193
+msgid "Run the wlan connection assistant."
+msgstr "Exekutatu wlan konexio-morroia."
+
+#: src/network/main.c:194
+msgid "Run the parallel port connection assistant."
+msgstr "Exekutatu ataka paralelorako konexio-morroia."
+
+#: src/network/main.c:195
+msgid "Run the irlan connection assistant."
+msgstr "Exekutatu IG-sare konexio-morroia."
+
+#: src/network/main.c:196
+msgid "Configure a network interface"
+msgstr "Konfiguratu sareko interfaze bat"
+
+#: src/network/main.c:196
+msgid "interface"
+msgstr "interfazea"
+
+#: src/network/main.c:203
+msgid "Network Settings"
+msgstr "Sareko ezarpenak"
+
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Sareko konexio berri bat sortzen (%d / %d)"
+
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "Bukatuta sareko konexio berri baten sorrera"
+
+#: src/network/network.desktop.in.in.h:1
+msgid "Configure network devices and connections"
+msgstr "Konfiguratu sareko gailu eta konexioak"
+
+#: src/network/network.desktop.in.in.h:2
+msgid "Networking"
+msgstr "Sarea"
+
+#: src/network/profile.c:43
+#, c-format
+msgid "Are you sure you want to delete profile %s?"
+msgstr "Ziur %s profila ezabatzea nahi duzula?"
+
+#: src/network/profiles-table.c:53
+msgid "Profile name"
+msgstr "Profilaren izena"
+
+#: src/services/callbacks.c:46
+msgid "No description available."
+msgstr "Ez dago azalpenik."
+
+#: src/services/callbacks.c:247
+msgid "Running"
+msgstr "Exekutatzen"
+
+#: src/services/callbacks.c:251
+msgid "Stopped"
+msgstr "Geldituta"
+
+#: src/services/callbacks.c:256
+msgid "Could not get info"
+msgstr "Ez idan da informaziorik lortu"
+
+#: src/services/callbacks.c:322
+#, c-format
+msgid "Settings for service %s"
+msgstr "%s zerbitzuaren ezarpenak"
+
+#: src/services/main.c:58
+msgid "Services Settings"
+msgstr "Zerbitzuen ezarpenak"
+
+#: src/services/services.desktop.in.in.h:1
+msgid "Configure which services will be run when the system starts"
+msgstr "Konfiguratu zein zerbitzu exekutatuko diren sistema abiatzen denean"
+
+#: src/services/services.desktop.in.in.h:2
+msgid "Services"
+msgstr "Zerbitzuak"
+
+#: src/services/table.c:78
+msgid "Active"
+msgstr "Aktibatua"
+
+#: src/services/table.c:88
+msgid "Service"
+msgstr "Zerbitzua"
+
+#: src/time/main.c:313
+msgid "Time Zone"
+msgstr "Ordu-zona"
+
+#: src/time/main.c:423
+msgid "Time Servers"
+msgstr "Ordu-zerbitzariak"
+
+#: src/time/main.c:501
+msgid ""
+"You don't have NTP support running. Please run NTP support in the system to "
+"enable server synchronization."
+msgstr ""
+"Ez da NTP euskarririk exekutzen ari. Sisteman NTP euskarria exekutatu "
+"behar duzu, zerbitzariarekin sinkronizazioa gaitzeko."
+
+#: src/time/main.c:808
+msgid "Time and Date Settings"
+msgstr "Ordu eta data ezarpenak"
+
+#: src/time/time.desktop.in.in.h:1
+msgid "Change system time, date, and timezone"
+msgstr "Aldatu sistemako ordua, data eta ordu-zona."
+
+#: src/time/time.desktop.in.in.h:2
+msgid "Time and Date"
+msgstr "Ordua eta data"
+
+#: src/users/callbacks.c:598
+msgid "Create New profile"
+msgstr "Sortu profil berria"
+
+#: src/users/callbacks.c:629
+#, c-format
+msgid "Settings for profile %s"
+msgstr "%s profilaren ezarpenak"
+
+#: src/users/group-settings.c:111
+msgid "Create New Group"
+msgstr "Sortu talde berria"
+
+#: src/users/group-settings.c:165 src/users/user-settings.c:457
+msgid "User id must be a positive number."
+msgstr "Erabiltzailearen IDa zenbaki positibo bat izan behar da."
+
+#: src/users/group-settings.c:169
+msgid "Such group id already exists."
+msgstr "Talde ID hori jada badago."
+
+#: src/users/group-settings.c:191
+msgid "Group name is empty."
+msgstr "Talde-izena hutsik dago."
+
+#: src/users/group-settings.c:195
+msgid "The group name is too long."
+msgstr "Taldearen izena luzegia da."
+
+#: src/users/group-settings.c:199
+msgid "Please set a valid group name, using only lower-case letters."
+msgstr "Talde-izen egoki bat ezarri behar duzu, letra xeheak soilik erabili."
+
+#: src/users/group-settings.c:203
+msgid "Group already exists."
+msgstr "Taldea jada badago."
+
+#: src/users/group-settings.c:272
+msgid "The root group must not be deleted."
+msgstr "root taldea ez da ezabatu behar."
+
+#: src/users/group-settings.c:279
+#, c-format
+msgid "Are you sure you want to delete group %s?"
+msgstr "Ziur %s taldea ezabatu nahi duzula?"
+
+#: src/users/group-settings.c:342
+#, c-format
+msgid "Settings for Group %s"
+msgstr "%s taldearen ezarpenak"
+
+#: src/users/groups-table.c:44 src/users/users-table.c:51
+msgid "Group"
+msgstr "Taldea"
+
+#: src/users/groups-table.c:45
+msgid "GID"
+msgstr "GID"
+
+#: src/users/main.c:120
+msgid "User name contains"
+msgstr "Erabiltzaile-izenak badu"
+
+#: src/users/main.c:121
+msgid "User ID is"
+msgstr "Erabiltzaile IDa da:"
+
+#: src/users/main.c:122
+msgid "Group name contains"
+msgstr "Talde-izenak badu"
+
+#: src/users/main.c:123
+msgid "User GID is"
+msgstr "Erabiltzailearen GID da"
+
+#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
+msgid "Users and Groups"
+msgstr "Erabiltzaile eta taldeak"
+
+#: src/users/passwd.c:266
+msgid "Passwords doesn't match."
+msgstr "Pasahitzak desberdinak dira."
+
+#: src/users/passwd.c:271
+#, c-format
+msgid ""
+"Bad password: %s.\n"
+"Please try with a new password."
+msgstr ""
+"Pasahitz okerra: %s.\n"
+"Saia zaitez pasahitz berri batekin."
+
+#: src/users/profile-settings.c:129
+msgid "The profile must have a name"
+msgstr "Profilak izen bat izan behar du"
+
+#: src/users/profile-settings.c:134
+msgid "The profile must have a default home"
+msgstr "Profilak lehenetsitako etxea eduki behar du"
+
+#: src/users/profile-settings.c:139 src/users/profile-settings.c:144
+msgid "The profile must have a default shell"
+msgstr "Profilak lehenetsitako shell bat eduki behar du"
+
+#: src/users/profile-settings.c:214
+msgid "The profile Default must not be deleted."
+msgstr "Lehenetsitako profila ez da ezabatu behar."
+
+#: src/users/profile-settings.c:221
+#, c-format
+msgid "Are you sure you want to delete the profile called %s?"
+msgstr "Ziur %s izeneko profila ezabatu nahi duzula?"
+
+#. Column name,          Adv_state_show,	Basic_state_show
+#: src/users/profiles-table.c:38
+msgid "Profile"
+msgstr "Profila"
+
+#: src/users/profiles-table.c:39
+msgid "Comment"
+msgstr "Iruzkina"
+
+#: src/users/search-bar/search-bar.c:200
+msgid "_Search"
+msgstr "_Bilatu"
+
+#: src/users/search-bar/search-bar.c:238
+msgid "C_lear"
+msgstr "_Garbitu"
+
+#: src/users/search-bar/search-bar.c:346
+msgid "Choice"
+msgstr "Aukeratu"
+
+#: src/users/search-bar/search-bar.c:356
+msgid "Text"
+msgstr "Testua"
+
+#: src/users/table.c:47
+msgid "/_Add User ..."
+msgstr "/_Gehitu erabiltzailea..."
+
+#: src/users/table.c:54
+msgid "/_Add group ..."
+msgstr "/_Gehitu taldea ..."
+
+#: src/users/user-settings.c:120
+msgid "The root user must not be deleted."
+msgstr "root erabiltzailea ez da ezbatu behar."
+
+#: src/users/user-settings.c:127
+#, c-format
+msgid "Are you sure you want to delete user %s?"
+msgstr "Ziur %s erabiltzailea ezabatzea nahi duzula?"
+
+#: src/users/user-settings.c:208
+msgid "User Account Editor"
+msgstr "Erabiltzaile-kontuaren editorea"
+
+#: src/users/user-settings.c:335
+msgid "The username is empty."
+msgstr "Erabiltzaile-izena hutsik dago."
+
+#: src/users/user-settings.c:343
+msgid "The username is too long."
+msgstr "Erabiltzaile-izena luzegia da."
+
+#: src/users/user-settings.c:347
+msgid "root username shouldn't be modified."
+msgstr "root erabiltzaile-izena ez litzateke aldatu behar."
+
+#: src/users/user-settings.c:351
+msgid ""
+"Please set a valid username consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr ""
+"Letra xehez hasi eta letra xehe eta zenbakiez jarraitutako erabiltzaile-"
+"izenonargarri bat ezarri behar duzu."
+
+#: src/users/user-settings.c:355
+#, c-format
+msgid ""
+"Username \"%s\" already exists.\n"
+"\n"
+"Please select a different Username"
+msgstr ""
+"\"%s\" erabiltzaile-izena jada badago.\n"
+"\n"
+"Hautatu erabiltzaile-izen desberdin bat"
+
+#: src/users/user-settings.c:377
+#, c-format
+msgid "Invalid character '%c' in comment."
+msgstr "Iruzkinean '%c' karaktere baliogabea."
+
+#: src/users/user-settings.c:423
+msgid "Home directory must not be empty."
+msgstr "Etxeko direktorioa ezin da hutsik egon."
+
+#: src/users/user-settings.c:426
+msgid "Please enter full path for home directory."
+msgstr "Sar ezazu bide-izen osoa etxe-direktoriorako."
+
+#: src/users/user-settings.c:429
+msgid "root home shouldn't be modified."
+msgstr "root-aren etxea ez litzateke aldatu behar."
+
+#: src/users/user-settings.c:459
+msgid "root uid shouldn't be modified."
+msgstr "root UID ez litzateke aldatu behar."
+
+#: src/users/user-settings.c:461
+msgid "Such user id already exists."
+msgstr "Erabiltzaile ID hori jada badago."
+
+#: src/users/user-settings.c:481
+msgid "Please give shell with full path."
+msgstr "Zehaztu shell-a bide-izen osoaz."
+
+#: src/users/user-settings.c:499
+msgid "Password must not be empty."
+msgstr "Pasahitza ezin da hutsik egon."
+
+#: src/users/user-settings.c:778
+#, c-format
+msgid "Settings for User %s"
+msgstr "%s erabiltzailearen ezarpenak"
+
+#. Column name,          Adv_state_show,	Basic_state_show
+#: src/users/users-table.c:46
+msgid "User"
+msgstr "Erabiltzailea"
+
+#: src/users/users-table.c:47
+msgid "Home"
+msgstr "Etxea"
+
+#: src/users/users-table.c:48
+msgid "User details"
+msgstr "Erabiltzailearen xehetasunak"
+
+#: src/users/users-table.c:49
+msgid "UID"
+msgstr "UID"
+
+#: src/users/users-table.c:50
+msgid "Shell"
+msgstr "Shell"
+
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Gehitu edo ezabatu erabiltzaile eta taldeak"
+
+#~ msgid "Boot Image Assistant"
+#~ msgstr "Abioko irudiaren laguntzailea"
+
+#~ msgid "Image Settings (Step 1 of 2)"
+#~ msgstr "Irudi ezarpenak (1. urratsa, 2tik)"
+
+#~ msgid "Image Settings (Step 2 of 2)"
+#~ msgstr "Irudi ezarpenak (2. urratsa, 2tik)"
+
+#~ msgid "Other Operating System (Step 2 of 2)"
+#~ msgstr "Beste sistema eragilea (2. urratsa, 2tik)"
+
+#~ msgid "Enter Password - GNOME System Tools"
+#~ msgstr "Sartu pasahitza - GNOME System Tools"
+
+#~ msgid "2.422"
+#~ msgstr "2.422"
+
+#~ msgid "3. Account name"
+#~ msgstr "3. Kontuaren izena"
+
+#~ msgid "<span weight=\"bold\">Activation</span>"
+#~ msgstr "<span·weight=\"bold\">Aktibaketa</span>"
+
+#~ msgid "<span weight=\"bold\">Ad-Hoc Settings</span>"
+#~ msgstr "<span·weight=\"bold\">Ad-Hoc·ezarpenak</span>"
+
+#~ msgid "Account name:"
+#~ msgstr "Kontuaren izena:"
+
+#~ msgid "Activate when the computer starts"
+#~ msgstr "Gaitu ordenagailua abiatzean"
+
+#~ msgid "Activation"
+#~ msgstr "Gaitzea"
+
+#~ msgid "Add New Internet Connection"
+#~ msgstr "Gehitu internet konexio berria"
+
+#~ msgid "Allow activation control for all users"
+#~ msgstr "Baimendu aktibatze-kontrola erabiltzaile guztientzat"
+
+#~ msgid "Connection Settings"
+#~ msgstr "Konexio ezarpenak"
+
+#~ msgid "Connection active"
+#~ msgstr "Konexioa aktibatuta"
+
+#~ msgid "Connection name (Step 3 of 3)"
+#~ msgstr "Konexioaren izena (3. urratsa, 3tik)"
+
+#~ msgid "Create a new internet connection "
+#~ msgstr "Sortu internet konexio berri bat "
+
+#~ msgid ""
+#~ "First, please enter the phone number you use to connect to the internet. "
+#~ "This number is provided by your ISP. "
+#~ msgstr ""
+#~ "Lehenbizi, internetera konektatzeko erabiltzen duzun telefono zenbakia "
+#~ "sartu.Zenbaki hau zure ISPak eman behar dizu."
+
+#~ msgid ""
+#~ "How the IP address for this connection\n"
+#~ "is determined."
+#~ msgstr "Nola lortzen den konexio honen IP helbidea."
+
+#~ msgid ""
+#~ "How the IP addresses for this connection \n"
+#~ "are determined."
+#~ msgstr "Nola lortzen diren konexio honetarako IP helbideak."
+
+#~ msgid "IP Settings"
+#~ msgstr "IP ezarpenak"
+
+#~ msgid "ISP phone number (Step 1 of 3)"
+#~ msgstr "ISP telefono zenbakia (1. urratsa, 3tik)"
+
+#~ msgid "Network profiles - GNOME System Tools"
+#~ msgstr "Sareko profilak - GNOME System Tools"
+
+#~ msgid "New Connection Type"
+#~ msgstr "Konexio mota berria"
+
+#~ msgid "New network profile - GNOME System Tools"
+#~ msgstr "Sareko profil berria - GNOME·System·Tools"
+
+#~ msgid ""
+#~ "Now, please give this account a name. This name will be used to identify "
+#~ "the account."
+#~ msgstr ""
+#~ "Orain, jarri izen bat kontu honi. Izen hau kontua identifikatzeko "
+#~ "erabiliko da."
+
+#~ msgid "Password (confirm):"
+#~ msgstr "Pasahitza (berretsi):"
+
+#~ msgid "Password:"
+#~ msgstr "Pasahitza:"
+
+#~ msgid "Phone number:"
+#~ msgstr "Telefono zenbakia:"
+
+#~ msgid "Sea_rch domains:"
+#~ msgstr "_Bilaketa domeinuak:"
+
+#~ msgid ""
+#~ "Select which type of connection\n"
+#~ "you would like to add."
+#~ msgstr ""
+#~ "Hautatu gehitu nahi duzun konexio\n"
+#~ "mota."
+
+#~ msgid ""
+#~ "Summary of new account data\n"
+#~ "goes here, plus indications on\n"
+#~ "how to proceed (go back, cancel\n"
+#~ "or finish)."
+#~ msgstr ""
+#~ "Kontu berriko datuen laburpena doa\n"
+#~ "hemen, eta nola jarraitu buruzko\n"
+#~ "azalpenak ere bai (itzuli, utzi\n"
+#~ "edo amaitu)."
+
+#~ msgid ""
+#~ "To continue configuring your account, click \"Next\". To quit, click "
+#~ "\"Cancel\".\n"
+#~ msgstr ""
+#~ "Zure kontua konfiguratzen jarraitzeko, klikatu \"Hurrengoa\". Ateratzeko, "
+#~ "klikatu \"Cancel\".\n"
+
+#~ msgid ""
+#~ "Use the comment to identify the interface in the future. Activation "
+#~ "management lets you set who will activate connections, and when."
+#~ msgstr ""
+#~ "Erabili iruzkina etorkizunean interfazea identifikatzeko. "
+#~ "Aktibaziokudeaketak nork eta noiz konexioak aktibatu ditzaken zehaztea "
+#~ "utziko dizu."
+
+#~ msgid "Username and password (Step 2 of 3)"
+#~ msgstr "Erabiltzaile-izena eta pasahitza (2. urratsa, 3tik)"
+
+#~ msgid "Username:"
+#~ msgstr "Erabiltzaile-izena:"
+
+#~ msgid "Warning message goes here."
+#~ msgstr "Abisu-mezua doa hemen."
+
+#~ msgid "Warning message goes here.\n"
+#~ msgstr "Abisu-mezua doa hemen.\n"
+
+#~ msgid "WaveLAN"
+#~ msgstr "WaveLAN"
+
+#~ msgid ""
+#~ "Welcome to the Internet Connection druid. \n"
+#~ "\n"
+#~ "This druid will help you configure a new \n"
+#~ "Internet account. \n"
+#~ "\n"
+#~ "Before you begin, you must have a modem and\n"
+#~ "an Internet Service Provider (ISP). Please ask your \n"
+#~ "ISP for any pertinent information about your connection.\n"
+#~ "\n"
+#~ "Click the \"Next\" button to begin."
+#~ msgstr ""
+#~ "Ongi etorri Internet konexiorako morroira.\n"
+#~ "\n"
+#~ "Morroi honek interneko kontu berri bat\n"
+#~ "konfiguratzen lagunduko dizu.\n"
+#~ "\n"
+#~ "Hasi aurretik, modem bat eta Interneteko hornitzaile (ISP)\n"
+#~ "bat izan behar dituzu. Galde iezaiozu zure Interneteko\n"
+#~ "hornitzaileari konexioaren edozein datu behar baduzu.\n"
+#~ "\n"
+#~ "Klikatu \"Hurrengoa\" hasteko."
+
+#~ msgid ""
+#~ "Welcome to the Network Connection druid. \n"
+#~ "\n"
+#~ "This druid will help you configure a new \n"
+#~ "network connection. \n"
+#~ "\n"
+#~ "Click the \"Next\" button to begin."
+#~ msgstr ""
+#~ "Ongi etorri Sareko Konexio morroira.\n"
+#~ "\n"
+#~ "Morroi honek sareko konexio berri bat\n"
+#~ "konfiguratzen lagunduko dizu.\n"
+#~ "\n"
+#~ "Klikatu \"Hurrengoa\" hasteko."
+
+#~ msgid "_Ad-Hoc mode"
+#~ msgstr "_Ad-Hoc modua"
+
+#~ msgid "_Channel:"
+#~ msgstr "_Kanala:"
+
+#~ msgid "_Frequency (GHz):"
+#~ msgstr "_Maiztasuna·(GHz):"
+
+#~ msgid "_Session ID:"
+#~ msgstr "_Saioaren IDa:"
+
+#~ msgid "_Wavelan"
+#~ msgstr "_Wavelan"
+
+#~ msgid "Parameters:"
+#~ msgstr "Parametroak:"
+
+#~ msgid "Priority:"
+#~ msgstr "Lehentasuna:"
+
+#~ msgid "Add"
+#~ msgstr "Gehitu"
+
+#~ msgid ""
+#~ "Change the settings and options for the\n"
+#~ "selected user or group, like a users password\n"
+#~ "or a groups name or members."
+#~ msgstr ""
+#~ "Aldatu hautatutako erabiltzaile edo taldearen\n"
+#~ "ezarpen eta aukerak: adibidez, erabiltzailearen pasahitza\n"
+#~ "edo talde baten izen edo kideak."
+
+#~ msgid "Click \"Next\" to continue"
+#~ msgstr "Klikatu \"Hurrengoa\" jarraitzeko"
+
+#~ msgid ""
+#~ "Congratulations, the new user has been created.\n"
+#~ "Please click \"Finish\" to save your changes. "
+#~ msgstr ""
+#~ "Zorionak, erabiltzaile berria sortu da.\n"
+#~ "Klikatu \"Amaitu\" zure aldaketak gordetzeko."
+
+#~ msgid "Delete"
+#~ msgstr "Ezabatu"
+
+#~ msgid ""
+#~ "EXPERIMENTAL NIS support.\n"
+#~ "It's only available if You have NIS\n"
+#~ "and when You click on \"More Settings\"."
+#~ msgstr ""
+#~ "NIS euskarri ESPERIMENTALA.\n"
+#~ "NIS baduzu eta \"Ezarpen gehiago\"\n"
+#~ "klikatu baduzu bakarrik erakusten da."
+
+#~ msgid "Edit profile:"
+#~ msgstr "Editatu profila:"
+
+#~ msgid "Enter Password (Step 2 of 2)"
+#~ msgstr "Sartu pasahitza (2. urratsa, 2tik)"
+
+#~ msgid "New Group"
+#~ msgstr "Talde berria"
+
+#~ msgid "New User"
+#~ msgstr "Erabiltzaile berria"
+
+#~ msgid ""
+#~ "On this page, you can select scripts and files to be copied from your "
+#~ "account into new users' accounts."
+#~ msgstr ""
+#~ "Orri honetan zure kontutik erabiltzaile berrien kontuetara kopiatuko "
+#~ "direnscript eta fitxategiak hauta ditzakezu."
+
+#~ msgid "Please enter a password for the new user. "
+#~ msgstr "Sartu pasahitz bat erabiltzaile berriarentzako."
+
+#~ msgid ""
+#~ "Please enter a username for the new user in the space below. Optionally, "
+#~ "you can fill in more information to identify the user. "
+#~ msgstr ""
+#~ "Sartu erabiltzaile berriarentzako erabiltzaile-izena beheko hutsunean. "
+#~ "Aukeran,informazio gehiago sar dezakezu erabiltzailea identifikatzeko."
+
+#~ msgid "Settings"
+#~ msgstr "Ezarpenak"
+
+#~ msgid "Settings for selected user and group"
+#~ msgstr "Hautatutako erabiltzaile eta taldearen ezarpenak"
+
+#~ msgid ""
+#~ "This druid is designed to help you quickly \n"
+#~ "and easily add new users to your system.\n"
+#~ "\n"
+#~ "To begin, click \"Next\". "
+#~ msgstr ""
+#~ "Morroi hau zure sisteman erabiltzaile berriak\n"
+#~ "bizkor eta erraz gehitzeko egina dago.\n"
+#~ "\n"
+#~ "Hasteko, klikatu \"Hurrengoa\"."
+
+#~ msgid "User Account Wizard"
+#~ msgstr "Erabiltzaile-kontu morroia"
+
+#~ msgid "User Creation Druid"
+#~ msgstr "Erabiltzailea sortzeko morroia"
+
+#~ msgid "User Identity (Step 1 of 2)"
+#~ msgstr "Erabiltzaile-nortasuna (1. urratsa, 2tik)"
+
+#~ msgid "User Profiles - GNOME System Tools"
+#~ msgstr "Erabiltzaile-profilak - GNOME System Tools"
+
+#~ msgid "_Profiles..."
+#~ msgstr "_Profilak:"
+
+#~ msgid "Boot Image Wizard"
+#~ msgstr "Abio-irudiaren morroia"
+
+#~ msgid "Boot Manager"
+#~ msgstr "Abio-kudeatzailea"
+
+#~ msgid "%s - GNOME System Tools"
+#~ msgstr "%s - GNOME System Tools"
+
+#~ msgid "Activating"
+#~ msgstr "Aktibatzen"
+
+#~ msgid "Inactive"
+#~ msgstr "Desaktibatua"
+
+#~ msgid "The name of this computer"
+#~ msgstr "Ordenagailu honen izena"
+
+#~ msgid "A short description of your computer"
+#~ msgstr "Zure ordenagailuaren azalpen labur bat."
+
+#~ msgid "The Windows Networking workgroup for your network"
+#~ msgstr "Zure sarerako Window Sarearen lantaldea"
+
+#~ msgid "The IP address of your WINS server"
+#~ msgstr "Zure WINS zerbitzariaren IP helbidea"
+
+#~ msgid "The DNS domain for your computer"
+#~ msgstr "Zure ordenagailuaren DNS domeinua"
+
+#~ msgid "A list of your DNS servers' IP addresses"
+#~ msgstr "Zure DNS zerbitzarien IP helbideen zerrenda"
+
+#~ msgid "A list of domains where hosts will be searched"
+#~ msgstr "Ostalariak bilatuko diren domeinuen zerrenda bat"
+
+#~ msgid "The IP address of this host"
+#~ msgstr "Ostalari honen IP helbidea"
+
+#~ msgid "Aliases for this host, one per line"
+#~ msgstr "Ostalari honentzako ezizenak, lerro bakoitzeko bat"
+
+#~ msgid "Activating connection ``%s.''"
+#~ msgstr "\"%s\" konexioa aktibatzen."
+
+#~ msgid "Deactivating connection ``%s.''"
+#~ msgstr "\"%s\" konexioa desaktibatzen."
+
+#~ msgid "Are you sure you want to delete the aliases for %s?"
+#~ msgstr "Ziur %s-ren ezizenak ezabatzea nahi dituzula?"
+
+#~ msgid "Autodetecting modem device"
+#~ msgstr "Modem gailua autodetektatzen"
+
+#~ msgid "Connection name (Step 2 of 2)"
+#~ msgstr "Konexioaren izena (2. urratsa, 2tik)"
+
+#~ msgid "Network adapter setup."
+#~ msgstr "Sare moldagailuaren konfigurazioa."
+
+#~ msgid ""
+#~ "The phone number must be composed of\n"
+#~ "only numbers or commas (,)."
+#~ msgstr ""
+#~ "Telefono zenbakia zenbaki eta komaz\n"
+#~ "soilik osatua behar du izan."
+
+#~ msgid ""
+#~ "The password and its confirmation\n"
+#~ "must be the same."
+#~ msgstr ""
+#~ "Pasahitza eta bere baieztapena\n"
+#~ "berdinak izan behar dute."
+
+#~ msgid ""
+#~ "If you are specifying a password,\n"
+#~ "you should specify a user name."
+#~ msgstr ""
+#~ "Pasahitz bat zehazten ari bazara,\n"
+#~ "erabiltzaile-izen bat zehaztu beharko zenuke."
+
+#~ msgid ""
+#~ "Please set a name for this account,\n"
+#~ "using only space, letters and numbers."
+#~ msgstr ""
+#~ "Esleitu izen bat kontu honentzako,\n"
+#~ "zuriune, letra eta zenbakiak soilik erabiliz."
+
+#~ msgid ""
+#~ "You are about to create an account named with the following information:\n"
+#~ "\n"
+#~ "Account Name: %s\n"
+#~ "\n"
+#~ "Phone number: %s\n"
+#~ "\n"
+#~ "User name: %s\n"
+#~ "\n"
+#~ "Password: %s"
+#~ msgstr ""
+#~ "Kontu bat sortzera zoaz ondorengo informazioarekin:\n"
+#~ "\n"
+#~ "Kontuaren izena: %s\n"
+#~ "\n"
+#~ "Telefono zenbakia: %s\n"
+#~ "\n"
+#~ "Erabiltzaile-izena: %s\n"
+#~ "\n"
+#~ "Pasahitza: %s"
+
+#~ msgid "Services Manager"
+#~ msgstr "Zerbitzu-kudeatzailea"
+
+#~ msgid "Time Zone - GNOME System Tools"
+#~ msgstr "Ordu-zona - GNOME System Tools"
+
+#~ msgid "Time Servers - GNOME System Tools"
+#~ msgstr "Ordu-zerbitzariak - GNOME System Tools"
+
+#~ msgid "Time"
+#~ msgstr "Ordua"
+
+#~ msgid "Comments"
+#~ msgstr "Iruzkinak"
+
+#~ msgid "Users and groups."
+#~ msgstr "Erabiltzaile eta taldeak."
+
