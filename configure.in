@@ -1,6 +1,23 @@
 dnl Process this file with autoconf to produce a configure script.
 
 AC_INIT(configure.in)
+
+if test "x${prefix}" != "x/usr" || test "x${sysconfdir}" != "x/etc"
+then
+  echo
+  echo "*** The Helix Setup Tools may not work with the default installation"
+  echo "*** paths. If you're running Linux, and you installed most of the other"
+  echo "*** GNOME components with a package manager, we suggest you configure"
+  echo "*** this package like this:"
+  echo "***"
+  echo "*** ./configure --prefix=/usr --sysconfdir=/etc"
+  echo "***"
+  echo "*** This will be more likely to work. Thank you for your patience."
+  echo
+  
+  sleep 5
+fi
+
 AM_INIT_AUTOMAKE(helix-setup-tools, 0.2.0)
 AM_CONFIG_HEADER(config.h)
 
@@ -83,3 +100,17 @@ doc/networking/Makefile
 doc/shares/Makefile
 po/Makefile.in
 ])
+
+if test "x${prefix}" != "x/usr" || test "x${sysconfdir}" != "x/etc"
+then
+  echo
+  echo "*** The Helix Setup Tools may not work with the default installation"
+  echo "*** paths. If you're running Linux, and you installed most of the other"
+  echo "*** GNOME components with a package manager, we suggest you configure"
+  echo "*** this package like this:"
+  echo "***"
+  echo "*** ./configure --prefix=/usr --sysconfdir=/etc"
+  echo "***"
+  echo "*** This will be more likely to work. Thank you for your patience."
+  echo
+fi
