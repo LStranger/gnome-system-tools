@@ -124,8 +124,11 @@ static XstDialogSignal signals[] = {
 #warning FIXME
 #if 0
 	{ "tz_combo_entry",    "changed",            update_tz },
-	{ "ntp_list",          "selection_changed",  xst_dialog_modify_cb }, 
 #endif
+        /* Changed the Signal for the GtkTreeView --AleX
+	  { "ntp_list",          "selection_changed",  xst_dialog_modify_cb },*/
+	{ "ntp_list2",          "cursor_changed",  xst_dialog_modify_cb },
+//#endif
 	{ "ntp_add_server",    "clicked",            on_ntp_addserver },
 	{ "ntp_add_server",    "clicked",            xst_dialog_modify_cb },
 	{ NULL }
@@ -145,7 +148,7 @@ xst_time_populate_ntp_list (XstTimeTool *time_tool)
 
 
 	/* ntp_list is a GtkTreeView */
-	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list");
+	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list2");
 
 
 	/* set the model */
@@ -161,8 +164,6 @@ xst_time_populate_ntp_list (XstTimeTool *time_tool)
 							   "text", 0, NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (ntp_list), column);
 	
-	
-
 	for (i = 0; ntp_servers[i]; i++) {
 		gtk_list_store_append (store, &iter);
 		gtk_list_store_set (store, &iter, 0, ntp_servers[i], -1);
@@ -372,6 +373,10 @@ timezone_construct_dialog (XstDialog *dialog)
 	GtkWidget *content;
 	GtkWidget *d;
 
+        /* Added to test arguments  --AleX */
+	g_return_if_fail (dialog!=NULL);
+	g_return_if_fail (XST_IS_DIALOG(dialog));
+	
 	d = gtk_dialog_new_with_buttons (_("Ximian Setup Tools - Timezone"),
 					      NULL,
 					      GTK_DIALOG_MODAL,
@@ -432,21 +437,62 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 	gtk_widget_hide (d);
 }
 
+
+/* Function Added to construct Time Server Dialog using GtkDialog --AleX */
+static GtkWidget *
+server_construct_dialog (XstDialog *dialog)
+{
+	GtkWidget *content;
+	GtkWidget *d;
+
+	/* Added to test arguments --AleX */
+	g_return_if_fail (dialog!=NULL);
+	g_return_if_fail (XST_IS_DIALOG(dialog));
+
+	d = gtk_dialog_new_with_buttons (_("Ximian Setup Tools - Time Servers"),
+					      NULL,
+					      GTK_DIALOG_MODAL,
+					      GTK_STOCK_CLOSE,
+					      GTK_RESPONSE_CLOSE, NULL);
+
+	gtk_widget_set_usize (GTK_WIDGET (d), 350, 320);
+
+	content = xst_dialog_get_widget (dialog, "server_dialog_content");
+
+	/* FIXME: Yes, this is a hack. */
+	content->parent = NULL;
+
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (d)->vbox), content, TRUE,
+			    TRUE, 8);
+
+	return GTK_WIDGET (d);
+}
+
 static void
 server_button_clicked (GtkWidget *w, gpointer data)
 {
 	static GtkWidget *d = NULL;
+	XstDialog *dialog;
 
+	dialog = XST_DIALOG (data);
+	
 	if (!d) {
+	     /* Taken Out to change from GnomeDialog to GtkDialog --AleX
 		d = xst_dialog_get_widget (XST_DIALOG (data), "Time servers");
 		gnome_dialog_close_hides (GNOME_DIALOG (d), TRUE);
+	      */
+	      d = server_construct_dialog (dialog);
 	}
 
 	gtk_widget_show (d);
+      /* Taken Out in the same manner --AleX
 	gdk_window_show (d->window);
 	gdk_window_raise (d->window);
 
 	gnome_dialog_run_and_close (GNOME_DIALOG (d));
+      */
+	gtk_dialog_run (GTK_DIALOG (d));
+	gtk_widget_hide (d);
 }
 
 static void
@@ -763,8 +809,8 @@ main (int argc, char *argv[])
 	xst_time_load_widgets (XST_TIME_TOOL (tool));
 	xst_time_populate_ntp_list (XST_TIME_TOOL (tool));
 	xst_time_init_timezone (XST_TIME_TOOL (tool));
-
 	xst_tool_main (tool, TRUE);
+
 	xst_time_clock_start (XST_TIME_TOOL (tool));
 	gtk_main ();
 

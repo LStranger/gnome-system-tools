@@ -23,8 +23,8 @@ on_ntp_addserver (GtkButton *button, XstDialog *dialog)
 	gchar *text;
 	
 	ntp_entry = GTK_EDITABLE (xst_dialog_get_widget (dialog, "ntp_entry"));
-	ntp_list = GTK_TREE_VIEW (xst_dialog_get_widget (dialog, "ntp_list"));
-	store = GTK_LIST_STORE (gtk_tree_view_get_model (ntp_list));
+	ntp_list = GTK_TREE_VIEW (xst_dialog_get_widget (dialog, "ntp_list2"));
+        store = GTK_LIST_STORE (gtk_tree_view_get_model (ntp_list));
 	
 	text = gtk_editable_get_chars (ntp_entry, 0, -1);
 	g_strstrip (text);

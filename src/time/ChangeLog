@@ -1,3 +1,23 @@
+2002-03-27  AleX Espinoza  <cured@yahoo.com>
+
+	* main.c: changed the signal in the signal list from
+	'selection_changed' to 'cursor_changed', in order to
+	work with the GtkTreeView Widget.
+
+2002-03-23  AleX Espinoza  <cured@yahoo.com>
+
+	* main.c (server_button_clicked): Modified the function to
+	make the change for Time Server Dialog from GnomeDialog
+	to GtkDialog.
+	(server_construct_dialog): Added the function _construct
+	function to construct the server dialog based on GtkDialog.
+
+2002-03-19  AleX Espinoza  <cured@yahoo.com>
+
+	* transfer.c (server_list_cb): Fixed the Inicialization problem
+	in GValue value = {0, } with the help of Kevin Vandersloot
+	<kfv101@psu.edu>
+
 2002-02-14  James Willcox  <jwillcox@cs.indiana.edu>
 
 	* More porting work.  The time tool should actually work now.

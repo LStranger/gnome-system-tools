@@ -150,7 +150,7 @@ server_list_cb (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter,
 		gpointer data)
 {
 	char *text;
-	GValue value;
+	GValue value = {0, };    /* Initialized the variable --AleX */
 
 	gtk_tree_model_get_value (model, iter, 0, &value);
 	
