@@ -54,9 +54,9 @@ install-data-local:
 ##	$(mkinstalldirs) $(DESTDIR)$(Systemdir)
 ##	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdir)/.directory
 	$(mkinstalldirs) $(DESTDIR)$(Systemdirp)
-	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Systemdirp)/.directory
+	$(INSTALL_DATA) System.directory $(DESTDIR)$(Systemdirp)/.directory
 	$(mkinstalldirs) $(DESTDIR)$(Gnomeccdirp)
-	$(INSTALL_DATA) $(srcdir)/System.directory $(DESTDIR)$(Gnomeccdirp)/.directory
+	$(INSTALL_DATA) System.directory $(DESTDIR)$(Gnomeccdirp)/.directory
 #	$(mkinstalldirs) $(datadir)/control-center/capplets/$(cappletgroup)
 #     $(INSTALL_DATA) $(srcdir)/$(groups).directory $(datadir)/control-center/capplets/$(groups).directory
 

@@ -209,9 +209,9 @@ $(desktop).in: \%.desktop.in: \%.desktop.in.in\
 \
 install-data-local:\
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System\
-	$(INSTALL_DATA) $(srcdir)/$(desktop) $(DESTDIR)$(datadir)/gnome/apps/Settings/System/$(desktop)\
+	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/gnome/apps/Settings/System/$(desktop)\
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center/capplets/System\
-	$(INSTALL_DATA) $(srcdir)/$(desktop) $(DESTDIR)$(datadir)/control-center/capplets/System/$(desktop)\
+	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center/capplets/System/$(desktop)\
 install-data-am: install-etspecsDATA install-data-local'
 	
 AC_DIVERT_PUSH(AC_DIVERSION_SED)dnl
@@ -258,6 +258,7 @@ interfaces/Makefile
 pixmaps/Makefile
 src/Makefile
 src/common/Makefile
+src/disks/Makefile
 src/network/Makefile
 src/time/Makefile
 src/time/e-map/Makefile
