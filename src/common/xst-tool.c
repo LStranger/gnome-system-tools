@@ -219,6 +219,7 @@ platform_set_current_cb (XstTool *tool, XstReportLine *rline)
 static gboolean
 report_finished_cb (XstTool *tool, XstReportLine *rline)
 {
+	tool->report_dispatch_pending = FALSE;
 	tool->report_finished = TRUE;
 	return TRUE;
 }
@@ -526,7 +527,7 @@ report_progress (XstTool *tool, const gchar *label)
 		gtk_label_set_text (GTK_LABEL (tool->report_label), label);
 		gtk_signal_connect_after (GTK_OBJECT (tool->report_window), "delete-event",
 					  GTK_SIGNAL_FUNC (report_window_close_cb), NULL);
-		gtk_widget_show (tool->report_window);
+		gtk_widget_show_all (tool->report_window);
 		while (gtk_events_pending ())
 			gtk_main_iteration ();
 	}

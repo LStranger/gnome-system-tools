@@ -1,3 +1,9 @@
+Tue Jul 17 21:30:34 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c (report_finished_cb): Being "end" the last report,
+	we're safe to set tool->report_dispatch_pending to FALSE, and
+	this allows report_dispatch to gtk_main_quit. #4682 fixed.
+
 2001-07-19  Chema Celorio  <chema@celorio.com>
 
 	* Makefile.am: install the directory for the control center
