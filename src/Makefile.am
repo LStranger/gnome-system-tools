@@ -1,3 +1,3 @@
-SUBDIRS = common network time boot display
-# users time shares internetsharing font 
+SUBDIRS = common network time boot display shares
+# users time internetsharing font 
 #memory print  disks dhcpd
