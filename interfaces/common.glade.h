@@ -12,3 +12,14 @@ gchar *s = N_("label51");
 gchar *s = N_("label52");
 gchar *s = N_("Ximian Setup Tools");
 gchar *s = N_("Complexity");
+gchar *s = N_("Unsupported platform");
+gchar *s = N_("[ICON]");
+gchar *s = N_("The platform you are running is not\n"
+              "supported by this tool. If you know for sure\n"
+              "that it works like one of the platforms listed\n"
+              "below, you can select that and continue.\n"
+              "\n"
+              "Note, however, that this might damage the\n"
+              "system configuration or downright cripple\n"
+              "your computer.");
+gchar *s = N_("label57");
