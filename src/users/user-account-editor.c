@@ -100,7 +100,7 @@ construct (UserAccountEditor *editor, UserAccount *account)
 	/* give our dialog an OK button and title */
 	gtk_window_set_title (GTK_WINDOW (editor), _("User Account Editor"));
 	gtk_window_set_policy (GTK_WINDOW (editor), FALSE, TRUE, TRUE);
-	gtk_window_set_modal (GTK_WINDOW (editor), TRUE);
+	gtk_window_set_modal (GTK_WINDOW (editor), FALSE);
 	gnome_dialog_append_buttons (GNOME_DIALOG (editor),
 				     GNOME_STOCK_BUTTON_OK,
 				     GNOME_STOCK_BUTTON_CANCEL,

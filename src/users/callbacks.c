@@ -79,7 +79,7 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (xst_tool_get_access (tool));
 
 	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED) {
-		UserAccount *account = user_account_get_default ();
+		UserAccount *account = user_account_new (NULL);
 		UserAccountEditor *editor = user_account_editor_new (account);		
 
 		if (editor)

@@ -1217,22 +1217,28 @@ user_query_string_get (void)
 
 
 UserAccount *
-user_account_get_default (void)
+user_account_new (const gchar *profile)
 {
 	UserAccount *account;
 	xmlNodePtr node;
 	gchar *uid;
-	Profile *pf = profile_table_get_profile (NULL);
+	Profile *pf = profile_table_get_profile (profile);
+
+	if (!pf) {
+		g_warning ("user_account_new: Couldn't get profile %s. Using default.",
+			   profile);
+		pf = profile_table_get_profile (NULL);
+	}
 
 	node = get_user_root_node ();
 	if (!node) {
-		g_warning ("user_account_get_default: Couldn't get node for user.");
+		g_warning ("user_account_new: Couldn't get node for user.");
 		return NULL;
 	}
 
 	uid = find_new_id (node);
 	if (!uid) {
-		g_warning ("user_account_get_default: Couldn't get uid for user.");
+		g_warning ("user_account_new: Couldn't get uid for user.");
 		return NULL;
 	}
 	

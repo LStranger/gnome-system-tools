@@ -33,6 +33,8 @@
 
 extern XstTool *tool;
 
+static void user_account_gui_setup_profile (UserAccountGui *gui);
+
 static void
 user_account_gui_add (GtkButton *button, gpointer data)
 {
@@ -102,6 +104,21 @@ user_account_gui_all_select (GtkCList *clist, gint row, gint column, GdkEventBut
 		gtk_widget_set_sensitive (GTK_WIDGET (gui->add), TRUE);
 	else
 		gtk_widget_set_sensitive (GTK_WIDGET (gui->add), FALSE);
+}
+
+static void
+user_account_gui_profile_changed (GtkMenuShell *menushell, gpointer data)
+{
+	UserAccountGui *gui = data;
+	UserAccount *account;
+	gchar *profile;	
+
+	user_account_destroy (gui->account);
+	profile = xst_ui_option_menu_get_selected_string (gui->profile_menu);
+	account = user_account_new (profile);
+	g_free (profile);
+	gui->account = account;
+	user_account_gui_setup_profile (gui);
 }
 
 enum {
@@ -203,6 +220,7 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->advanced = glade_xml_get_widget (gui->xml, "user_settings_advanced");
 	gui->profile_box = glade_xml_get_widget (gui->xml, "user_settings_profile_box");
 	gui->profile_menu = GTK_OPTION_MENU (glade_xml_get_widget (gui->xml, "user_settings_profile_menu"));
+	gui->profile_button = glade_xml_get_widget (gui->xml, "user_settings_profile_button");
 
 	gui->group_box = glade_xml_get_widget (gui->xml, "user_settings_group_box");
 	gui->group_extra = glade_xml_get_widget (gui->xml, "user_settings_group_extra");
@@ -227,6 +245,9 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->max  = GTK_SPIN_BUTTON (glade_xml_get_widget (gui->xml, "user_passwd_max"));
 	gui->days = GTK_SPIN_BUTTON (glade_xml_get_widget (gui->xml, "user_passwd_days"));
 
+	gtk_signal_connect (GTK_OBJECT (gui->profile_button), "clicked",
+			    GTK_SIGNAL_FUNC (profile_table_run), NULL);
+	
 	gtk_signal_connect (GTK_OBJECT (gui->add), "clicked",
 			    GTK_SIGNAL_FUNC (user_account_gui_add), gui);
 	gtk_signal_connect (GTK_OBJECT (gui->remove), "clicked",
@@ -317,9 +338,46 @@ user_account_groups_setup (GtkCombo *combo, xmlNodePtr node)
 }
 
 static void
+user_account_comment_setup (UserAccountGui *gui)
+{
+	gint i;
+	gchar **comment = gui->account->comment;
+	GtkEntry *entries[] = {
+		GTK_ENTRY (gui->comment),
+		GTK_ENTRY (gui->office),
+		GTK_ENTRY (gui->wphone),
+		GTK_ENTRY (gui->hphone)
+	};
+
+	if (!comment)
+		return;
+	
+	for (i = 0; i < 4; i++) {
+		if (comment[i] == NULL)
+			break;
+		else
+			xst_ui_entry_set_text (entries[i], comment[i]);
+	}
+}
+
+static void
+user_account_gui_setup_profile (UserAccountGui *gui)
+{
+	UserAccount *account = gui->account;
+	
+	xst_ui_entry_set_text (gui->home, account->home);
+	xst_ui_entry_set_text (GTK_ENTRY (gui->shell->entry), account->shell);
+	gtk_spin_button_set_value (gui->uid, atoi (account->uid));
+	xst_ui_entry_set_text (GTK_ENTRY (gui->group->entry), account->group);
+	gtk_spin_button_set_value (gui->min, account->pwd_mindays);
+	gtk_spin_button_set_value (gui->max, account->pwd_maxdays);
+	gtk_spin_button_set_value (gui->days, account->pwd_warndays);
+}
+
+static void
 setup_advanced_add (UserAccountGui *gui, GtkWidget *notebook)
 {
-	GtkWidget *box, *label;
+	GtkWidget *box, *label, *menu_item;
 	GSList *list = profile_table_get_list ();
 	Profile *pf = profile_table_get_profile (NULL);
 
@@ -356,7 +414,9 @@ setup_advanced_add (UserAccountGui *gui, GtkWidget *notebook)
 	gtk_widget_show_all (box);
 
 	while (list) {
-		xst_ui_option_menu_add_string (gui->profile_menu, list->data);
+		menu_item = xst_ui_option_menu_add_string (gui->profile_menu, list->data);
+		gtk_signal_connect (GTK_OBJECT (menu_item), "activate",
+				    GTK_SIGNAL_FUNC (user_account_gui_profile_changed), gui);
 		list = list->next;
 	}
 	g_slist_free (list);
@@ -427,29 +487,6 @@ setup_advanced (UserAccountGui *gui, GtkWidget *notebook)
 	gtk_widget_show_all (box);
 }
 
-static void
-user_account_comment_setup (UserAccountGui *gui)
-{
-	gint i;
-	gchar **comment = gui->account->comment;
-	GtkEntry *entries[] = {
-		GTK_ENTRY (gui->comment),
-		GTK_ENTRY (gui->office),
-		GTK_ENTRY (gui->wphone),
-		GTK_ENTRY (gui->hphone)
-	};
-
-	if (!comment)
-		return;
-	
-	for (i = 0; i < 4; i++) {
-		if (comment[i] == NULL)
-			break;
-		else
-			xst_ui_entry_set_text (entries[i], comment[i]);
-	}
-}
-
 void
 user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 {
@@ -462,24 +499,17 @@ user_account_gui_setup (UserAccountGui *gui, GtkWidget *top)
 	user_account_comment_setup (gui);
 	
 	xst_ui_entry_set_text (gui->name, account->name);
-	
-	xst_ui_entry_set_text (gui->home, account->home);
-	xst_ui_entry_set_text (GTK_ENTRY (gui->shell->entry), account->shell);
-	gtk_spin_button_set_value (gui->uid, atoi (account->uid));
+
+	user_account_gui_setup_profile (gui);
 
 	gtk_clist_set_auto_sort (gui->all, TRUE);
 	gtk_clist_set_auto_sort (gui->member, TRUE);
 	
-	xst_ui_entry_set_text (GTK_ENTRY (gui->group->entry), account->group);
 	my_gtk_clist_append_items (gui->member, (GList *)account->extra_groups);
 	/* Others */
 	users = get_group_list ("name", account->node);
 	items = my_g_list_remove_duplicates (users, (GList *)account->extra_groups);
 	my_gtk_clist_append_items (gui->all, items);
-
-	gtk_spin_button_set_value (gui->min, account->pwd_mindays);
-	gtk_spin_button_set_value (gui->max, account->pwd_maxdays);
-	gtk_spin_button_set_value (gui->days, account->pwd_warndays);
 
 	if (account->password && (strlen (account->password) > 2)) {
 		gtk_signal_handler_block_by_func (GTK_OBJECT (gui->pwd1),

@@ -740,7 +740,8 @@ static void
 profile_update_ui (Profile *pf)
 {
 	GSList *tmp;
-	GtkOptionMenu *om[] = { pft->system_menu, pft->files_menu, pft->security_menu, NULL };
+	GtkOptionMenu *om[] = { pft->system_menu, pft->files_menu,
+				pft->security_menu, NULL };
 	gint i;
 
 	profile_tab_signals_block (TRUE);
@@ -1262,9 +1263,9 @@ profile_table_add_profile (Profile *pf, gboolean select)
 		GtkOptionMenu *om;
 		gboolean signal;
 	} option_menus[] = {
-		{ pft->system_menu,   TRUE },
-		{ pft->files_menu,    TRUE },
-		{ pft->security_menu, TRUE },
+		{ pft->system_menu,        TRUE },
+		{ pft->files_menu,         TRUE },
+		{ pft->security_menu,      TRUE },
 		{ NULL }
 	};
 

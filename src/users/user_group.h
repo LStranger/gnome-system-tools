@@ -58,7 +58,7 @@ typedef struct {
 } UserAccount;
 
 
-UserAccount *user_account_get_default (void);
+UserAccount *user_account_new         (const gchar *profile);
 UserAccount *user_account_get_by_node (xmlNodePtr node);
 void         user_account_save        (UserAccount *account);
 gchar       *user_account_check       (UserAccount *account);

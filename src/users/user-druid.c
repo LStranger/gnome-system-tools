@@ -255,7 +255,7 @@ construct (UserDruid *druid)
 	UserAccount *account;
 	int i;
 
-	account = user_account_get_default ();
+	account = user_account_new (NULL);
 	if (!account)
 		return FALSE;
 

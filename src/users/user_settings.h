@@ -54,6 +54,7 @@ typedef struct {
 	/* Profile selection box */
 	GtkWidget       *profile_box;
 	GtkOptionMenu   *profile_menu;
+	GtkWidget       *profile_button;
 
 	/* Groups box */
 	GtkWidget       *group_box;
