@@ -73,7 +73,6 @@ transfer_string_entry_xml_to_gui (xmlNodePtr root)
 
 		if (node && (s = xst_xml_element_get_content (node)))
 		{
-			g_print ("Transfer string entry xml to gui *%s*\n", s);
 			gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, transfer_string_entry_table [i].editable)), s);
 
 			if (transfer_string_entry_table [i].toggle)
@@ -212,8 +211,6 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 				}
 			}
 
-			d(g_print ("name: (%d) %s\n", xst_xml_element_get_bool_attr (node, "enabled"), node->name));
-
 			if (!entry[1])
 				continue;
 
@@ -230,7 +227,10 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 						entry[2] = s;
 					else
 					{
+						gchar *free_me = entry [2];
 						entry[2] = g_strjoin (" ", entry[2], s, NULL);
+						g_free (free_me);
+						g_free (s);
 					}
 				}
 			}
@@ -289,14 +289,10 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 	
 	for (row = 0; row < rows; row++)
 	{
-		g_print ("Interacting, row *%i*\n", row);
-
 		if (!gtk_clist_get_text (GTK_CLIST (widget), row, 1, &text_1))
 			break;
 		if (!gtk_clist_get_text (GTK_CLIST (widget), row, 2, &text_2))
 			continue;
-		
-		g_print ("Text *%s* *%s*\n", text_1, text_2);
 		
 		if (!strlen (text_1))
 			continue;
@@ -317,12 +313,10 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 				continue;
 			if (!col0_added)
 			{
-				g_print ("Add element %s:%s\n", field_one, text_1);
 				node2 = xst_xml_element_add (node, field_one);
 				xst_xml_element_set_content (node2, text_1);
 				col0_added = TRUE;
 			}
-			g_print ("Add element 2 %s:%s\n", field_rest, col1_elem[j]);
 			node2 = xst_xml_element_add (node, field_rest);
 			xst_xml_element_set_content (node2, col1_elem[j]);
 		}
@@ -382,6 +376,9 @@ void
 transfer_gui_to_xml (XstTool *t, gpointer data)
 {
 	xmlNode *root = xst_xml_doc_get_root (t->config);
+
+	g_print ("Ok, apply was clicked\n");
+	
 	transfer_string_entry_gui_to_xml (root);
 	transfer_string_list_gui_to_xml (root);
 	transfer_string_clist2_gui_to_xml (root);

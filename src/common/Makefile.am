@@ -9,13 +9,13 @@ INCLUDES =		\
 
 # for now, leave tool.[ch] in
 libsetuptool_a_SOURCES = \
-	xml.c		\
-	xml.h		\
-	helpers.c	\
-	helpers.h	\
+	xst-xml.c		\
+	xst-xml.h		\
+	helpers.c		\
+	helpers.h		\
 	text.c		\
 	text.h		\
-	global.h	\
+	global.h		\
 	checked.xpm 	\
 	unchecked.xpm 	\
 	reading.xpm	\

@@ -327,10 +327,7 @@ report_dispatch_lines (XstTool *tool)
 			else
 				scroll = FALSE;
 
-			/* FIXME: Is g_strdup () right? gtk_clist_append () expects
-			 * non-const... */
-
-			report_text [1] = g_strdup (xst_report_line_get_message (rline));
+			report_text [1] = xst_report_line_get_message (rline);
 			gtk_clist_append (GTK_CLIST (tool->report_list), report_text);
 
 			if (scroll)

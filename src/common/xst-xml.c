@@ -30,7 +30,7 @@
 #include <parser.h>  /* libxml */
 #include <xmlmemory.h>  /* libxml */
 
-#include "xml.h"
+#include "xst-xml.h"
 
 typedef struct {
 	char *font_name;
@@ -115,7 +115,8 @@ xst_xml_element_add (xmlNodePtr parent, char *name)
 gchar *
 xst_xml_element_get_content (xmlNodePtr node)
 {
-	gchar *text = NULL, *r;
+	gchar *text = NULL;
+	gchar *r;
 	xmlNodePtr n0;
 
 	g_return_val_if_fail (node != NULL, NULL);
