@@ -236,16 +236,16 @@ xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc *func, gpointer data
 }
 
 void
-xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy **xwp)
+xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy *xwp)
 {
 	XstWidget *xw;
 	int i;
 
-	for (i = 0; xwp [i]->widget; i++)
+	for (i = 0; xwp [i].widget; i++)
 	{
-		xw = xst_widget_new (xst_dialog_get_widget (xd, xwp [i]->widget), xd,
-				     xwp [i]->basic, xwp [i]->advanced, xwp [i]->need_access,
-				     xwp [i]->user_sensitive);
+		xw = xst_widget_new (xst_dialog_get_widget (xd, xwp [i].widget), xd,
+				     xwp [i].basic, xwp [i].advanced, xwp [i].need_access,
+				     xwp [i].user_sensitive);
 
 		xd->xst_widget_list = g_slist_append (xd->xst_widget_list, xw);
 	}
