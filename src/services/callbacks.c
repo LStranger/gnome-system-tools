@@ -26,15 +26,16 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 #include "gst.h"
 #include "table.h"
 #include "callbacks.h"
 
-extern GstTool *tool;
+#define RESPONSE_START_SERVICE 1
+#define RESPONSE_STOP_SERVICE 2
 
-GList *parameters_list = NULL;
+extern GstTool *tool;
 
 /* Helpers */
 static gchar*
@@ -45,33 +46,6 @@ service_get_description (xmlNodePtr service)
 		description = g_strdup (_("No description available."));
 
 	return description;
-}
-
-static void
-service_get_parameters (gchar *script)
-{
-	xmlNodePtr root, node;
-	xmlDocPtr parameters = gst_tool_run_get_directive (tool, NULL, "service_parameters", script, NULL);
-	gchar *param;
-	GtkWidget *option_menu = gst_dialog_get_widget (tool->main_dialog, "dialog_service_parameters");
-	GtkWidget *menu = gtk_menu_new ();
-	GtkWidget *menu_item;
-
-	root = gst_xml_doc_get_root (parameters);
-
-	for (node = gst_xml_element_find_first (root, "parameter");
-	     node != NULL;
-	     node = gst_xml_element_find_next (node, "parameter"))
-	{
-		param = gst_xml_element_get_content (node);
-		menu_item = gtk_menu_item_new_with_label (param);
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
-		gtk_widget_show (menu_item);
-
-		parameters_list = g_list_append (parameters_list, param);
-	}
-
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
 }
 
 static gint
@@ -213,17 +187,6 @@ on_services_table_select_row (GtkTreeSelection *selection, gpointer data)
 }
 
 void
-on_throw_service_button_clicked (GtkWidget *button, gpointer data)
-{
-	GtkWidget *script_label = gst_dialog_get_widget (tool->main_dialog, "dialog_script_name");
-	GtkWidget *option_menu = gst_dialog_get_widget (tool->main_dialog, "dialog_service_parameters");
-	gchar *script = (gchar *) gtk_label_get_text (GTK_LABEL (script_label));
-	gchar *parameter = g_list_nth_data (parameters_list, gtk_option_menu_get_history (GTK_OPTION_MENU (option_menu)));
-
-	gst_tool_run_get_directive (tool, NULL, "throw_service", script, parameter, NULL);
-}
-
-void
 on_service_priority_changed (GtkWidget *spin_button, gpointer data)
 {
 	GtkTreeView *runlevel_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
@@ -243,6 +206,7 @@ on_service_priority_changed (GtkWidget *spin_button, gpointer data)
 
 	/* if the new value is equal to the old value, don't do nothing */
 	old_value = gst_xml_get_child_content (service, "priority");
+
 	if (strcmp (old_value, value) == 0)
 		return;
 
@@ -253,6 +217,42 @@ on_service_priority_changed (GtkWidget *spin_button, gpointer data)
 	g_free (value);
 }
 
+static void
+dialog_service_get_status (gchar *script)
+{
+	xmlNodePtr root, node;
+	xmlDocPtr doc;
+	GtkWidget *status_label = gst_dialog_get_widget (tool->main_dialog, "dialog_status_label");
+	GtkWidget *start_button = gst_dialog_get_widget (tool->main_dialog, "dialog_start_button");
+	GtkWidget *stop_button = gst_dialog_get_widget (tool->main_dialog, "dialog_stop_button");
+
+	doc = gst_tool_run_get_directive (tool, NULL, "get_status", script, NULL);
+
+	if (!doc)
+		return;
+
+	root = gst_xml_doc_get_root (doc);
+	node = gst_xml_element_find_first (root, "active");
+
+	if (node) {
+		if (gst_xml_element_get_bool_attr (node, "state")) {
+			gtk_label_set_text (GTK_LABEL (status_label), _("Running"));
+			gtk_widget_set_sensitive (start_button, FALSE);
+			gtk_widget_set_sensitive (stop_button, TRUE);
+		} else {
+			gtk_label_set_text (GTK_LABEL (status_label), _("Stopped"));
+			gtk_widget_set_sensitive (start_button, TRUE);
+			gtk_widget_set_sensitive (stop_button, FALSE);
+		}
+	} else {
+		gtk_label_set_text (GTK_LABEL (status_label), _("Could not get info"));
+		gtk_widget_set_sensitive (start_button, TRUE);
+		gtk_widget_set_sensitive (stop_button, TRUE);
+	}
+
+	gst_xml_doc_destroy (doc);
+}
+
 void
 on_settings_button_clicked (GtkWidget *button, gpointer data)
 {
@@ -260,7 +260,6 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	GtkWidget *script_name = gst_dialog_get_widget (tool->main_dialog, "dialog_script_name");
 	GtkWidget *service_description = gst_dialog_get_widget (tool->main_dialog, "dialog_service_description");
 	GtkWidget *service_priority = gst_dialog_get_widget (tool->main_dialog, "dialog_service_priority");
-	GtkWidget *option_menu = gst_dialog_get_widget (tool->main_dialog, "dialog_service_parameters");
 
 	/* we need these to get the xmlNodePtr */
 	GtkTreeView *runlevel_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
@@ -270,10 +269,10 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	xmlNodePtr service;
 	
 	gchar *description, *script, *title;
-	gint priority;
+	gint priority, response;
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (runlevel_table));
-	
+
 	if (!gtk_tree_selection_get_selected (selection, &model, &iter))
 		return;
 
@@ -286,29 +285,36 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 
 	/* get the priority */
 	priority = atoi (gst_xml_get_child_content (service, "priority"));
-	
+
+	/* we're modifying the spin button, so we need to block its signal handlers */
+	g_signal_handlers_block_by_func (G_OBJECT (service_priority),
+					 G_CALLBACK (on_service_priority_changed), tool->main_dialog);
+
 	gtk_label_set_text (GTK_LABEL (script_name), script);
 	gtk_label_set_text (GTK_LABEL (service_description), description);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (service_priority), priority);
 
-	/* sets the option menu with the valid service parameters */
-	service_get_parameters (script);
+	g_signal_handlers_unblock_by_func (G_OBJECT (service_priority),
+					   G_CALLBACK (on_service_priority_changed), tool->main_dialog);
 
 	title = g_strdup_printf (_("Settings for service %s"), script);
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
 
-	gtk_dialog_run (GTK_DIALOG (dialog));
+	dialog_service_get_status (script);
+
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+	if (response == RESPONSE_STOP_SERVICE)
+		gst_tool_run_get_directive (tool, NULL, "throw_service", script, "stop", NULL);
+	else if (response == RESPONSE_START_SERVICE)
+		gst_tool_run_get_directive (tool, NULL, "throw_service", script, "start", NULL);
+		
 	gtk_widget_hide (dialog);
 
 	/* we don't need this menu anymore */
-	gtk_option_menu_remove_menu (GTK_OPTION_MENU (option_menu));
 	g_free (description);
 	g_free (script);
 	g_free (title);
-
-	/* we need to free the list and put it again to NULL, it may be used again */
-	g_list_free (parameters_list);
-	parameters_list = NULL;
 }
 
 void
@@ -344,7 +350,6 @@ on_service_toggled (GtkWidget *widget, gchar *path_str, gpointer data)
 	/* change the XML */
 	toggle_service (tool, service, runlevel, new_value);
 	
-
 	gtk_tree_store_set (GTK_TREE_STORE (model),
 			    &iter,
 			    COL_ACTIVE, new_value,

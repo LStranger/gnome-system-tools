@@ -25,7 +25,6 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
 #include <gtk/gtk.h>
 
 #include "gst.h"

@@ -21,8 +21,7 @@
  * Authors: Carlos Garnacho <garparr@teleline.es>.
  */
 
-#include <gnome.h>
-#include <glade/glade.h>
+#include <gtk/gtk.h>
 #include "gst.h"
 
 #include "transfer.h"

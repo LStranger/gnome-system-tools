@@ -26,11 +26,9 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
-#include <glade/glade.h>
+#include <gtk/gtk.h>
 
-#include <stdlib.h>
+/* #include <stdlib.h> */
 #include "transfer.h"
 #include "table.h"
 #include "gst.h"
@@ -41,7 +39,6 @@ GstTool *tool;
 
 static GstDialogSignal signals [] = {
 	{ "settings_button", "clicked", G_CALLBACK (on_settings_button_clicked) },
-	{ "dialog_throw_button", "clicked", G_CALLBACK (on_throw_service_button_clicked) },
 	{ "dialog_service_priority", "value-changed", G_CALLBACK (on_service_priority_changed) },
 	{ NULL }};
 

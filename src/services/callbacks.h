@@ -25,7 +25,7 @@
 #ifndef __CALLBACKS_H
 #define __CALLBACKS_H
 
-#include <gnome.h>
+#include <gtk/gtk.h>
 
 void		on_main_dialog_update_complexity	(GtkWidget*,   gpointer);
 void		on_services_table_select_row		(GtkTreeSelection*, gpointer);
