@@ -307,7 +307,7 @@ timezone_construct_dialog (GstDialog *dialog)
 	g_return_if_fail (dialog!=NULL);
 	g_return_if_fail (GST_IS_DIALOG(dialog));
 	
-	d = gtk_dialog_new_with_buttons (_("GNOME System Tools - Timezone"),
+	d = gtk_dialog_new_with_buttons (_("Time Zone - GNOME System Tools"),
 					      NULL,
 					      GTK_DIALOG_MODAL,
 					      GTK_STOCK_APPLY,
@@ -422,19 +422,23 @@ server_construct_dialog (GstDialog *dialog)
 	g_return_if_fail (dialog!=NULL);
 	g_return_if_fail (GST_IS_DIALOG(dialog));
 
-	d = gtk_dialog_new_with_buttons (_("GNOME System Tools - Time Servers"),
+	d = gtk_dialog_new_with_buttons (_("Time Servers - GNOME System Tools"),
 					      NULL,
 					      GTK_DIALOG_MODAL,
 					      GTK_STOCK_CLOSE,
 					      GTK_RESPONSE_CLOSE, NULL);
 
 	gtk_widget_set_usize (GTK_WIDGET (d), 550, 400);
+	gtk_dialog_set_has_separator (GTK_DIALOG (d), FALSE);
+
+	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (d)), 6);
 
 	content = gst_dialog_get_widget (dialog, "server_dialog_content");
 
 	/* FIXME: Yes, this is a hack. */
 	content->parent = NULL;
 
+	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (d)->vbox), 12);
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (d)->vbox), content, TRUE,
 			    TRUE, 8);
 
