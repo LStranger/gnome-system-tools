@@ -1,13 +1,18 @@
-Release of 0.3.0 (They know what is what but they don't know what is what)
-==========================================================================
+XST - 0.3
+---------
 
-The Ximian Setup Tools 0.3.0, aka "Charm / 10", are out.
+The Ximian Setup Tools 0.3.0
+codenamed : "They know what is what but they don't know what is what"
+have been released.
 
+You can get it here :
 ftp://ftp.ximian.com/pub/setuptools/ximian-setup-tools-0.3.0.tar.gz
 
 This is a working snapshot of a continuous effort, and the project is still
-in its infancy. As such, there are no guarantees of usability, beauty or
-evil masterplan compliance.
+in its infancy. As such, there are no guarantees of usability, beauty or evil
+masterplan compliance. Although we've made an effort to iron out all the
+bugs, the tools may still damage your system configuration. For that reason,
+we've created a backup system for your config files (see below).
 
 This is a new features and beautification release. Most of the tools have new
 artwork, courtesy of Tuomas and Jakub, and some have new interfaces by Anna.
@@ -41,6 +46,23 @@ information can be found in the references section at the end of this text.
 
 Also, if you have any problems with these tools (identified in detail or
 not), we'd be absolutely delighted to hear from you.
+
+
+
+Backup system
+-------------
+
+Every time a tool modifies your system configuration files, it makes backups
+of those files. The backups are rotated (for 9 levels in total), and the
+backup made the first time the tool was run is kept forever. This means that
+you can revert your system configuration to the point before you ever ran a
+Ximian Setup Tool.
+
+The backup path is /var/cache/ximian-setup-tools/backup/<tool>/<id>/. In this
+directory, you'll find a complete snapshot of the files that were modified.
+The original directory structure leading up to these files is also kept. <id>
+runs from 1-9, and when the first backup is rotated out, it is kept in a
+special catalog called "First", which is never touched again.
 
 
 Changes since 0.2.1
@@ -84,12 +106,12 @@ About the Ximian Setup Tools
 - Unified system configuration:
 
   Configuring different Unix systems is different; every Unix system has
-  different ways of being administrated. The Helix Setup Tools aspire to
+  different ways of being administrated. The Ximian Setup Tools aspire to
   unify handling of these systems.
 
 - Adaptability:
 
-  Each one of the Helix Setup Tools is split in two parts: a backend (which
+  Each one of the Ximian Setup Tools is split in two parts: a backend (which
   is typically written in Perl) and a user interface frontend (which is
   typically written in C or Python).
 
@@ -98,9 +120,50 @@ About the Ximian Setup Tools
   parses the existing system files. When the user has finished editing the
   settings, the configuration is written back as patches to the system files.
 
-  This means that the Helix Setup Tools use whatever configuration files are
+  This means that the Ximian Setup Tools use whatever configuration files are
   available on your system, and you can still edit those files by hand or
-  with other configuration tools without conflicts or data loss.
+  with other configuration tools without conflicts.
+
+Supported platforms/linux distributions
+---------------------------------------
+This is the list of platforms that Ximian will focus to support. The XST are
+a community effort so in no way is this list limiting the supported systems.
+Contributions to the XST for support of other distributions or UNIX variants
+is very much appreciated.
+
+Please note that the following list is NOT a list of supported
+distributions, but rather a list of distributions we are planning to
+support.
+
+REDHAT   - Red Hat Linux 6.0, 6.1, 6.2, and 7.0 
+DEBIAN   - Debian GNU/Linux (Woody and Potato) 
+SUSE     - SuSE 6.3, 6.4, and 7.0 
+MANDRAKE - Linux Mandrake 6.1 and 7.0 
+PPC      - LinuxPPC 2000
+TURBO    - TurboLinux 6.0 
+CALDERA  - Caldera OpenLinux eDesktop 2.4 
+YELLOW   - Yellow Dog Linux Champion Server 1.2 el
+SOLARIS  - Solaris 7 and 8 on UltraSparc 
+HPUX     - HP-UX
+
+
+Verification matrix
+------------------
+
+This is a matrix describing the current status of tool platform/distribution
+support. To the best of our knowledge.
+
+        Red Hat    Debian  SuSE     MDK    PPC  Turbo  Cal  Yel  Sol    HPUX
+        6.0 6.2    2.1     6.3 7.0  6.1    any  6.0    2.4  1.2  7.0    10.0
+          6.1 7.0    2.2     6.4      7.0                          8.0    11.0
+
+Boot     ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Disks    ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Memory   ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Network  ? ? + ?    - -     - - -    ? ?    ?    ?      ?    ?    - -     - -
+Shares   ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Time     ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
+Users    ? ? + ?    ? ?     ? ? ?    ? ?    ?    ?      ?    ?    - -     - -
 
 
 References
@@ -116,39 +179,18 @@ FTP:          ftp://ftp.ximian.com/pub/setuptools/
 
 GNOME CVS:    Module "ximian-setup-tools".
 
+IRC:          irc.gnome.org, #xst
+
 Developers:   Chema Celorio <chema@ximian.com>
               Hans Petter Jansson <hpj@ximian.com>
               Arturo Espinosa <arturo@ximian.com>
               Tambet Ingo <tambet@ximian.com>
+              Jacob Berkman <jacob@ximian.com>
+              Bradford Hovinen <bradford@ximian.com>
 
-
-
-- Time beautified. [Anna, Jacob]
-
-- Time backend speedup. [Chema]
-
-- Added report display to frontend, which shows actions taken as
-  configuration is read/written. [Hans Petter]
-
-- Source cleanup. [Jacob]
-
-- Backend code refactored. [Hans Petter]
-
-- Networking and Name Resolution merged to form new, pretty and more
-  functional Network. [Jacob, Arturo, Anna, Chema].
-
-- Users fixed and polished. [Tambet]
-
-- Implemented Boot tool. [Tambet]
-
-- Platform detection and selection. [Arturo, Hans Petter]
-
-- New configuration backup/rescue scheme. [Hans Petter]
-
-- Generic code for parsing/modifying configuration files. [Arturo]
-
-- Countless bugfixes. [everyone]
-
+Artists:      Anna Dirks <anna@ximian.com>
+              Jakub Steiner <jakub@ximian.com>
+              Tuomas Kuosmanen <tigert@ximian.com>
 
 Release of 0.2.1 (Suspicion breeds Confidence)
 ==============================================
