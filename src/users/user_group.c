@@ -804,13 +804,10 @@ static void
 user_settings_prepare (ug_data *ud)
 {
 	GtkWidget *w0;
-	GList *tmp_list;
 	gchar *txt;
-	gboolean found = FALSE;
 	gchar *login, *comment, *name = NULL;
-	gint gid, id = 0;
-	gint new_id = 0;
 	gboolean adv;
+	xmlNodePtr group_node;
 	GtkRequisition req;
 
 	g_return_if_fail (ud != NULL);
@@ -829,42 +826,20 @@ user_settings_prepare (ug_data *ud)
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_group");
 	gtk_widget_set_sensitive (w0, xst_tool_get_access (tool));
 	user_fill_settings_group (GTK_COMBO (w0), ud->node, adv);
-
+	
 	txt = xst_xml_get_child_content (ud->node, "gid");
-	gid = atoi (txt);
-	g_free (txt);
+	group_node = get_corresp_field (get_db_node (ud->node));
+	group_node = get_node_by_data (group_node, "gid", txt);
+	name = xst_xml_get_child_content (group_node, "name");
+	my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
 
-	tmp_list = get_group_list ("gid", ud->node, adv);
-	while (tmp_list)
-	{
-		id = atoi (tmp_list->data);
-		g_free (tmp_list->data);
-		tmp_list = tmp_list->next;
-
-		if (!found && id == gid)
-		{
-			new_id = id;
-			found = TRUE;
-		}
-	}
-	g_list_free (tmp_list);
-
-	if (!found)
-	{
-		g_warning ("The GID for the main user's group was not found.");
-		name = g_strdup (_("Unkown User"));
-	}
+	/* Set label for settings_comment_entry */
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_comment_label");
+	if (!check_node_complexity (ud->node))
+		gtk_label_set_text (GTK_LABEL (w0), _("Comment:"));
 	else
-	{
-		xmlNodePtr group_node;
-
-		txt = g_strdup_printf ("%d", new_id);
-		group_node = get_corresp_field (get_db_node (ud->node));
-		group_node = get_node_by_data (group_node, "gid", txt);
-		name = xst_xml_get_child_content (group_node, "name");
-		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), name);
-	}
-
+		gtk_label_set_text (GTK_LABEL (w0), _("Full Name:"));
+	
 	/* Fill comment entry */
 	comment = xst_xml_get_child_content (ud->node, "comment");
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_comment");

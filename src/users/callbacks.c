@@ -105,9 +105,11 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 			xst_xml_element_destroy (node);
 
 		user_actions_set_sensitive (FALSE);
+/* new_interface
 		gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-													"user_settings_frame")),
-						 _("Settings for the selected user"));
+								       "user_settings_frame")),
+				     _("Settings for the selected user"));
+*/
 	}
 }
 
@@ -145,9 +147,11 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 			xst_xml_element_destroy (node);
 
 		group_actions_set_sensitive (FALSE);
+/* new_interface		
 		gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-													"group_settings_frame")),
-						 _("Settings for the selected group"));
+								       "group_settings_frame")),
+				     _("Settings for the selected group"));
+*/
 	}
 }
 

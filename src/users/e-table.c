@@ -125,6 +125,9 @@ const gchar *basic_group_state = "\
 
 /* Static functions */
 static gchar *get_row_color (ETreeModel *etm, ETreePath *path);
+static gboolean show_all (xmlNodePtr node);
+
+
 
 static int
 col_count (ETableModel *etm, void *data)
@@ -467,17 +470,18 @@ user_cursor_change (ETable *table, gint row, gpointer user_data)
 
 	set_active_table (TABLE_USER);
 
+/* new_interface	       
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
 
 	buf = xst_xml_get_child_content (e_tree_model_node_get_data (model, path), "login");
-
 	label = g_strconcat (_("Settings for user "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-												"user_settings_frame")), label);
+							       "user_settings_frame")), label);
+
 	g_free (label);
 	g_free (buf);
-
+*/
 	user_actions_set_sensitive (TRUE);
 }
 
@@ -489,7 +493,7 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 	gchar *buf, *label;
 
 	set_active_table (TABLE_GROUP);
-	
+/* new_interface		
 	model = E_TREE_MODEL (table->model);
 	path = e_tree_model_node_at_row (model, row);
 
@@ -497,10 +501,10 @@ group_cursor_change (ETable *table, gint row, gpointer user_data)
 
 	label = g_strconcat (_("Settings for group "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-												"group_settings_frame")), label);
+							       "group_settings_frame")), label);
 	g_free (label);
 	g_free (buf);
-
+*/
 	group_actions_set_sensitive (TRUE);
 }
 
@@ -524,7 +528,7 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 	/* Set desc */
 	buf = g_strconcat (_("Settings for group "), name, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-												"network_settings_frame")), buf);
+							       "network_settings_frame")), buf);
 	g_free (buf);
 	
 	/* Get users table */
@@ -587,7 +591,7 @@ net_user_cursor_change (ETable *table, gint row, gpointer user_data)
 
 	label = g_strconcat (_("Settings for user "), buf, NULL);
 	gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
-												"network_settings_frame")), label);
+							       "network_settings_frame")), label);
 	g_free (label);
 	g_free (buf);
 
@@ -812,9 +816,15 @@ populate_table (ETreeModel *model, ETreePath *root_path, xmlNodePtr root_node)
 	e_tree_model_freeze (model);
 	for (node = root_node->childs; node; node = node->next)
 	{
+		
 		if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_BASIC)
+		{
 			if (!check_node_complexity (node))
 				continue;
+		}
+
+		else if (!show_all (node) && !check_node_complexity (node))
+			continue;
 
 		e_tree_model_node_insert (model, root_path, -1, node);
 	}
@@ -1090,4 +1100,23 @@ void
 set_active_table (guint tbl)
 {
 	active_table = tbl;
+}
+
+static gboolean
+show_all (xmlNodePtr node)
+{
+	static GtkToggleButton *user_toggle;
+	static xmlNodePtr userdb;
+
+	if (!userdb)
+		userdb = get_user_root_node ();
+
+	if (node->parent != userdb)
+		return TRUE;
+	
+	if (!user_toggle)
+		user_toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog,
+									"user_showall"));
+
+	return gtk_toggle_button_get_active (user_toggle);
 }
