@@ -446,7 +446,7 @@ on_editing_started (GtkCellRenderer *renderer,
 			G_CALLBACK (on_editable_activate), list);
 
       if (list->_priv->type == GST_ADDRESS_TYPE_IP)
-	gst_filter_init  (GTK_ENTRY (editable), GST_FILTER_IPV4);
+	gst_filter_init  (GTK_ENTRY (editable), GST_FILTER_IP);
     }
 }
 
