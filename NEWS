@@ -1,3 +1,317 @@
+XST - 0.6
+---------
+The Ximian Setup Tools 0.6.0 have been released.
+
+The Ximian Setup Tools are a set of cross-platform configuration utilities
+for Linux and other Unices. Internally they are divided in frontends and
+backends. The frontend knows nothing about the underlying system and provides
+the same user interface across the different types of systems. The backend
+knows how to read and write configuration information. The Ximian Setup Tools
+do not impose a new database on the system, they work with the default
+configuration files so that configuration can still be done by hand or by
+other tools.
+
+Changes since last release
+--------------------------
+
+- This was a major bug fix release only. There are some internal changes but
+no new user-visible features where added. We have started working on a new set
+tools.
+
+Downloading
+----------
+You can get it from :
+
+ftp://ftp.ximian.com/pub/setuptools/
+or (once the mirrors sync)
+ftp://ftp.gnome.org/pub/GNOME/unstable/sources/ximian-setup-tools
+
+Contributions
+-------------
+
+We are happy to say that a lot of contributions have started flowing
+in. We still need lots of help from anybody interested in contributing
+to XST. 
+
+- Testing
+   Testing that the tools work correctly on your system and either filing
+   detailed bug reports or confirming that they work correctly is greatly
+   appreciated. If you test a tool on an unsupported distro/system and find out
+   that it works correctly let us know so that we can update the supported
+   tools matrix (see below).
+  
+- Porting
+   The backends are designed as to minimize the effort needed to support more
+   distros/systems. A great way to contribute is to port the tools to
+   another distribution/system.
+
+
+Mailing list / IRC
+------------------
+
+We have a mailing list set up at :
+http://lists.ximian.com/mailman/listinfo/setup-tool-hackers
+
+You can also find us in IRC server irc.gnome.org channel #xst
+
+
+Whitepaper
+----------
+
+You can find the latest version of the XST whitepaper at:
+
+http://primates.ximian.com/~miguel/helix-setup-tools.html
+
+
+Backup system
+-------------
+
+Every time a tool modifies your system configuration files, it makes backups
+of those files. The backups are rotated (for 9 levels in total), and the
+backup made the first time the tool was run is kept forever. This means that
+you can revert your system configuration to the point before you ever ran a
+Ximian Setup Tool.
+
+The backup path is /var/cache/ximian-setup-tools/backup/<tool>/<id>/. In this
+directory, you'll find a complete snapshot of the files that were modified.
+The original directory structure leading up to these files is also kept. <id>
+runs from 1-9, and when the first backup is rotated out, it is kept in a
+special catalog called "First", which is never touched again.
+     
+Location Management
+-------------------
+
+Location management is available under the program
+"location-manager-capplet", now built by default.
+
+This program runs in two modes: per-user and global. In per-user mode
+(the default), the capplets available from the control center are
+location-managed. In order to use this mode, you will need to fetch
+the GNOME Control Center from CVS (HEAD branch). A release of the
+Control Center with capplets that support location management will be
+made shortly.
+
+In global mode, the Ximian Setup Tools themselves are location
+managed. To invoke the location manager in this mode, pass the -g
+option. Of course, you will need to be running as root to run the
+location manager in this mode.
+
+
+The current set of tools include :
+----------------------------------
+
+- Network admin
+   
+   Allows you to configure your:
+   - hostname
+   - samba hostname and workgroup
+   - DNS servers
+   - search domains
+   - hosts (/etc/hosts)
+   - Network interfaces
+        - ppp 
+        - ethernet
+        - slip
+        - wavelan (limited support)
+  	
+- Time admin
+
+   Allows you to configure your :
+   - Date & Time
+   - Timezone
+   - NTPD servers
+   
+- Users admin
+
+    Allows you to manage :
+    - Users
+        - username / full name
+        - password
+        - home dir
+        - shell
+        - groups
+    - Groups
+    
+- Boot admin
+
+     Allows you to set :
+     - Default boot partition
+     - Partition type and label
+     - Timeout
+     - Kernel image
+     - Kernel extra parameters (append)
+     - adding or deleting partitions from the boot manager
+     
+- Shares admin
+
+     Allows you to import and export NFS and samba
+     shares.
+     - import NFS & samba shares
+     - export NFS & samba shares
+
+- Disks admin
+
+     Allows you to :
+     - Mount and unmount local file systems.
+
+- Memory admin
+
+     Allows you to configure :
+     - Swap partitions
+     - Swap files
+     - priorities of swap areas
+
+
+Verification matrix
+-------------------
+
+This is a matrix describing the current status of tool platform/distribution
+support. To the best of our knowledge.
+
+Key:
+
++  Supported and tested. The tool will not ask you to select a compatible
+   version or distribution. Of course, there may still be bugs. :-)
++? Supported, not tested. Same as '+', but we haven't tested it. In other
+   words, it "should work", because we know it's compatible.
+?  Unsupported, may work. You'll be asked to select a compatible version or
+   distribution, which may or may not work.
+-  Unsupported, doesn't work. We haven't worked on any version of that
+   flavour. It's most possible that it won't work.
+
+
+Red Hat Linux:
+
+Version        5.2     6.0     6.1     6.2     7.0     7.1
+
+Boot            +?      +?      +?      +       +       +
+Disks           +?      +?      +?      +       +       +
+Memory          +?      +?      +?      +       +       +
+Network         +?      +?      +?      +       +       +
+Shares          +?      +?      +?      +       +       +
+Time            +?      +?      +?      +       +       +
+Users           +?      +?      +?      +       +       +
+
+
+Debian GNU/Linux:
+
+Version        2.2    Woody
+
+Boot            +       +
+Disks           +       +
+Memory          +       +
+Network         +       +?
+Shares          +       +
+Time            +       +
+Users           +       +?
+
+Woody comments: You'll have to echo 'woody' > /etc/debian_version to
+make the ximian-setup-tools detect your distribution. 
+
+Linux Mandrake:
+
+Version        7.0     7.1     7.2     8.0
+
+Boot            ?       ?       +       ?
+Disks           ?       ?       +       ?
+Memory          ?       ?       +       ?
+Network         ?       ?       +       ?
+Shares          ?       ?       +       ?
+Time            ?       ?       +       ?
+Users           ?       ?       +       ?
+
+
+SuSE Linux:
+
+Version        6.3     6.4     7.0     7.1
+
+Boot            ?       ?       +       ?
+Disks           ?       ?       +       ?
+Memory          ?       ?       +       ?
+Network         ?       ?       +?      ?
+Shares          ?       ?       +       ?
+Time            ?       ?       +       ?
+Users           ?       ?       +       ?
+
+
+Turbolinux:
+
+Version         6
+
+Boot            ?
+Disks           ?
+Memory          ?
+Network         -
+Shares          ?
+Time            -
+Users           ?
+
+
+LinuxPPC:
+
+Version        2000
+
+Boot            -
+Disks           ?
+Memory          ?
+Network         -
+Shares          ?
+Time            -
+Users           ?
+
+
+Yellow Dog Linux:
+
+Version        1.2     2.0
+
+Boot            -       -
+Disks           ?       ?
+Memory          ?       ?
+Network         -       -
+Shares          ?       ?
+Time            -       -
+Users           ?       ?
+
+
+Solaris:
+
+Version        7.0     8.0
+
+Boot            -       -
+Disks           -       -
+Memory          -       -
+Network         -       -
+Shares          -       -
+Time            -       -
+Users           -       -
+
+
+HPUX:
+
+Version       10.0     11.0
+
+Boot            -       -
+Disks           -       -
+Memory          -       -
+Network         -       -
+Shares          -       -
+Time            -       -
+Users           -       -
+
+
+FreeBSD:
+
+Version        4.x     5.x
+
+Boot            -       -
+Disks           -       -
+Memory          -       -
+Network         -       -
+Shares          ?       ?
+Time            -       -
+Users           ?       ?
+
+
 XST - 0.5
 ---------
 
