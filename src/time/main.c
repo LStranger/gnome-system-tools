@@ -113,6 +113,9 @@ void populate_ntp_list()
 }
 
 
+#if 0
+
+
 void resize_canvas(GtkWidget *widget, GtkAllocation *alloc)
 {
   if (alloc->width / 200.0 > alloc->height / 100.0)
@@ -222,6 +225,9 @@ void init_map_canvas()
 }
 
 
+#endif
+
+
 gint clock_tick(gpointer data)
 {
   GtkWidget *w;
@@ -286,10 +292,12 @@ void delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdata)
 void connect_signals()
 {
   GtkWidget *w;
-  
+
+#if 0
   w = GTK_COMBO(tool_widget_get("timezone_combo"))->list;
   gtk_signal_connect(GTK_OBJECT(w), "select-child", tz_select_combo, NULL);
   gtk_signal_connect(GTK_OBJECT(w), "select-child", tool_modified_cb, NULL);
+#endif
 
   gtk_timeout_add(1000, clock_tick, NULL);
 }
@@ -304,7 +312,8 @@ int main(int argc, char *argv[])
   
   tool_init("time", argc, argv);
   populate_ntp_list();
-  init_map_canvas();
+/*  init_map_canvas(); */
+/*  timezone_init(); */
   connect_signals();
 
   tool_set_frozen(TRUE);

@@ -11,12 +11,12 @@ bin_PROGRAMS = time-admin
 
 time_admin_SOURCES = \
 	main.c \
-	timezone.c timezone.h \
+##	timezone.c timezone.h \
 	timeserv.c timeserv.h \
-	transfer.c transfer.h \
-	gnome-map.c gnome-map.h \
-	gnome-canvas-dot.c gnome-canvas-dot.h \
-timezones.c timezones.h
+	transfer.c transfer.h
+##	gnome-map.c gnome-map.h \
+##	gnome-canvas-dot.c gnome-canvas-dot.h \
+##	timezones.c timezones.h
 
 time_admin_CFLAGS = $(GNOME_CFLAGS) $(GDK_PIXBUF_CFLAGS) $(LIBGLADE_CFLAGS) "`gnome-config --cflags gnomecanvaspixbuf`"
 

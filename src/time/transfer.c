@@ -145,7 +145,7 @@ static void transfer_timezone_xml_to_gui(xmlNodePtr root)
   if (!node) return;
   
   s = xml_element_get_content(node);
-  activate_zone_by_name(s);
+/*  activate_zone_by_name(s); */  /* FIXME */
   free(s);
 }
 
@@ -157,10 +157,16 @@ static void transfer_timezone_gui_to_xml(xmlNodePtr root)
   node = xml_element_find_first(root, "timezone");
   if (!node) node = xml_element_add(root, "timezone");
 
+  /* FIXME */
+  
+#if 0
+  
   if (active_zone != -1)
     xml_element_set_content(node, canvas_zones[active_zone].name);
   else
     xml_element_destroy(node);
+
+#endif
 }
 
 
