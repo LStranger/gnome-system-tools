@@ -131,14 +131,17 @@ check_user_delete (xmlNodePtr node)
 		return TRUE;
 }
 
-void
+gboolean
 delete_user (xmlNodePtr node)
 {
 	if (check_user_delete (node))
 	{
 		del_user_groups (node);
 		xst_xml_element_destroy (node);
-	} 
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 static void

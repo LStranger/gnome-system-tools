@@ -30,7 +30,7 @@ void		group_new_prepare		(ug_data*);
 void		group_settings_prepare		(ug_data*);
 void		group_settings_dialog_close	(void);
 gboolean	group_update			(ug_data*);
-void		group_delete			(xmlNodePtr);
+gboolean	group_delete			(xmlNodePtr);
 
 #endif /* __GROUP_SETTINGS_H */
 

@@ -81,13 +81,13 @@ on_table_clicked (GtkTreeSelection *selection, gpointer data)
    cont = 0;
    gtk_tree_selection_selected_foreach (selection, counter , &cont);
    
-   if (users_table == treeview)
+   if (users_table == GTK_WIDGET (treeview))
       actions_set_sensitive (TABLE_USER, TRUE);
    else
       actions_set_sensitive (TABLE_GROUP, TRUE);
    if (cont > 1)
    {
-      if (users_table == treeview)
+      if (users_table == GTK_WIDGET (treeview))
 	 xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", FALSE);
       else
 	 xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", FALSE);
@@ -153,18 +153,27 @@ on_user_delete_clicked_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTreeI
 	g_return_if_fail (xst_tool_get_access (tool));
 	
 	gtk_tree_model_get (model, iter, COL_USER_POINTER, &node, -1);
-	delete_user (node);
+
+	if ((delete_user (node)) == TRUE)
+		* (gboolean *) data = TRUE;
 }
 
 void
 on_user_delete_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
+	gboolean deleted = FALSE;
 	
-	gtk_tree_selection_selected_foreach (selection, on_user_delete_clicked_foreach, NULL);
+	gtk_tree_selection_selected_foreach (selection, on_user_delete_clicked_foreach, &deleted);
 	
-	xst_dialog_modify (tool->main_dialog);
-	users_table_update_content ();
+	/* At this point changed will be TRUE if any of the selected users has been deleted,
+	 * the apply button must be set sensitive and the table must be updated */
+	if (deleted == TRUE) {
+		xst_dialog_modify (tool->main_dialog);
+		users_table_update_content ();
+	}
+
+	gtk_tree_selection_unselect_all (selection);
 	actions_set_sensitive (TABLE_USER, FALSE);
 }
 
@@ -214,18 +223,26 @@ on_group_delete_clicked_foreach (GtkTreeModel *model, GtkTreePath *path, GtkTree
 	g_return_if_fail (xst_tool_get_access (tool));
 	
 	gtk_tree_model_get (model, iter, COL_GROUP_POINTER, &node, -1);
-	delete_group (node);
+
+	if ((delete_group (node)) == TRUE)
+		* (gboolean *) data = TRUE;
 }
 
 void
 on_group_delete_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkTreeSelection *selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (groups_table));
+	gboolean deleted = FALSE;
 	
-	gtk_tree_selection_selected_foreach (selection, on_group_delete_clicked_foreach, NULL);
-	
-	xst_dialog_modify (tool->main_dialog);
-	groups_table_update_content ();
+	gtk_tree_selection_selected_foreach (selection, on_group_delete_clicked_foreach, &deleted);
+
+	/* At this point changed will be true only if one of the selected groups has been deleted */
+	if (deleted == TRUE) {	
+		xst_dialog_modify (tool->main_dialog);
+		groups_table_update_content ();
+	}
+
+	gtk_tree_selection_unselect_all (selection);
 	actions_set_sensitive (TABLE_GROUP, FALSE);
 }
 

@@ -279,11 +279,15 @@ check_group_delete (xmlNodePtr node)
 		return TRUE;
 }
 
-void 
+gboolean 
 delete_group (xmlNodePtr node)
 {
-	if (check_group_delete (node))
+	if (check_group_delete (node)) {
 		xst_xml_element_destroy (node);
+		return TRUE;
+	}
+
+	return FALSE;
 }
 
 static void

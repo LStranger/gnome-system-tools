@@ -55,7 +55,7 @@ void		user_new_prepare		(ug_data*);
 void		user_settings_dialog_close	(void);
 gboolean	user_update 			(ug_data*);
 void		user_set_profile		(const gchar*);
-void		delete_user			(xmlNodePtr);
+gboolean	delete_user			(xmlNodePtr);
 void		user_settings_prepare		(ug_data*);
 
 #endif /* USER_SETTINGS_H */
