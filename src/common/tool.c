@@ -383,6 +383,21 @@ void tool_set_access(gboolean state)
 }
 
 
+ToolComplexity tool_get_complexity()
+{
+	return(tool_context->complexity);
+}
+
+
+void tool_set_complexity(ToolComplexity complexity)
+{
+	tool_context->complexity = complexity;
+
+	/* TODO: Invoke callbacks that update the interface to match
+	 * the new complexity level. */
+}
+
+
 GtkWidget *tool_get_top_window()
 {
   return(tool_context->top_window);

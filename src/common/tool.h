@@ -14,6 +14,12 @@ ToolState;
 
 typedef enum
 {
+	TOOL_COMPLEXITY_BASIC, TOOL_COMPLEXITY_ADVANCED
+}
+ToolComplexity;
+
+typedef enum
+{
   TOOL_READ_PROGRESS_MAX,
   TOOL_READ_PROGRESS_DONE
 }
@@ -27,6 +33,7 @@ struct _ToolContext
 	GladeXML *common_interface;
   GtkWidget *top_window;
   gboolean frozen, modified, access;
+	ToolComplexity complexity;
 
   ToolReadState read_state;
   guint progress_max,
@@ -54,6 +61,9 @@ void tool_set_frozen(gboolean state);
 
 gboolean tool_get_access(void);
 void tool_set_access(gboolean state);
+
+ToolComplexity tool_get_complexity(void);
+void tool_set_complexity(ToolComplexity complexity);
 
 GtkWidget *tool_get_top_window(void);
 
