@@ -54,7 +54,7 @@ extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data);
 
 extern void
-on_new_user_clicked (GtkButton *button, gpointer user_data);
+on_user_new_clicked (GtkButton *button, gpointer user_data);
 
 extern void
 on_user_delete_clicked (GtkButton *button, gpointer user_data);
@@ -65,6 +65,9 @@ on_user_list_selection_changed (GtkWidget *list, gpointer user_data);
 
 extern void
 on_group_settings_clicked (GtkButton *button, gpointer user_data);
+
+extern void
+on_group_new_clicked (GtkButton *button, gpointer user_data);
 
 extern void
 on_group_delete_clicked (GtkButton *button, gpointer user_data);

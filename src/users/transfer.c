@@ -48,9 +48,9 @@ gint user_sort_by_login (gconstpointer a, gconstpointer b);
 gint group_sort_by_name (gconstpointer a, gconstpointer b);
 
 
-/* Global, with some hard-coded defaults, just in case any of the tags is not present. */
+/* Structure with some hard-coded defaults, just in case any of the tags is not present. */
 /* These were taken form RH 6.2's default values. Any better suggestions? */
-/* NULL is not present for string members. */
+/* NULL means not present for string members. */
 
 const static _logindefs default_logindefs = {
 	NULL, /* qmail_dir */
@@ -68,6 +68,17 @@ const static _logindefs default_logindefs = {
 	TRUE /* create_home */
 };
 
+/* Helper functions */
+
+static guint
+my_atoi (gchar *str) 
+{
+	if (!str || !*str)
+		return 0;
+	return atoi (str);
+}
+
+/* ---- */
 
 static void
 transfer_logindefs_from_xml (xmlNodePtr root)
@@ -108,16 +119,16 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 			 case  0: logindefs.qmail_dir = xml_element_get_content (n0); break;
 			 case  1: logindefs.mailbox_dir = xml_element_get_content (n0); break;
 			 case  2: logindefs.mailbox_file = xml_element_get_content (n0); break;
-			 case  3: logindefs.passwd_max_day_use = atoi (xml_element_get_content (n0)); break;
-			 case  4: logindefs.passwd_min_day_use = atoi (xml_element_get_content (n0)); break;
-			 case  5: logindefs.passwd_min_length = atoi (xml_element_get_content (n0)); break;
-			 case  6: logindefs.passwd_warning_advance_days = atoi (xml_element_get_content (n0)); break;
-			 case  7: logindefs.new_user_min_id = atoi (xml_element_get_content (n0)); break;
-			 case  8: logindefs.new_user_max_id = atoi (xml_element_get_content (n0)); break;
-			 case  9: logindefs.new_group_min_id = atoi (xml_element_get_content (n0)); break;
-			 case 10: logindefs.new_group_max_id = atoi (xml_element_get_content (n0)); break;
+			 case  3: logindefs.passwd_max_day_use = my_atoi (xml_element_get_content (n0)); break;
+			 case  4: logindefs.passwd_min_day_use = my_atoi (xml_element_get_content (n0)); break;
+			 case  5: logindefs.passwd_min_length = my_atoi (xml_element_get_content (n0)); break;
+			 case  6: logindefs.passwd_warning_advance_days = my_atoi (xml_element_get_content (n0)); break;
+			 case  7: logindefs.new_user_min_id = my_atoi (xml_element_get_content (n0)); break;
+			 case  8: logindefs.new_user_max_id = my_atoi (xml_element_get_content (n0)); break;
+			 case  9: logindefs.new_group_min_id = my_atoi (xml_element_get_content (n0)); break;
+			 case 10: logindefs.new_group_max_id = my_atoi (xml_element_get_content (n0)); break;
 			 case 11: logindefs.del_user_additional_command = xml_element_get_content (n0); break;
-			 case 12: logindefs.create_home = atoi (xml_element_get_content (n0)); break;
+			 case 12: logindefs.create_home = my_atoi (xml_element_get_content (n0)); break;
 			 case 13: g_warning ("transfer_logindefs_from_xml: we shouldn't be here."); break;
 			}
 		}
@@ -168,18 +179,18 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 				 case  0: u->key = xml_element_get_content (n0); break;
 				 case  1: u->login = xml_element_get_content (n0); break;
 				 case  2: u->password = xml_element_get_content (n0); break;
-				 case  3: u->uid = atoi (xml_element_get_content (n0)); break;
-				 case  4: u->gid = atoi (xml_element_get_content (n0)); break;
+				 case  3: u->uid = my_atoi (xml_element_get_content (n0)); break;
+				 case  4: u->gid = my_atoi (xml_element_get_content (n0)); break;
 				 case  5: u->comment = xml_element_get_content (n0); break;
 				 case  6: u->home = xml_element_get_content (n0); break;
 				 case  7: u->shell = xml_element_get_content (n0); break;
-				 case  8: u->last_mod = atoi (xml_element_get_content (n0)); break;
-				 case  9: u->passwd_max_life = atoi (xml_element_get_content (n0)); break;
-				 case 10: u->passwd_exp_warn = atoi (xml_element_get_content (n0)); break;
-				 case 11: u->passwd_exp_disable = atoi (xml_element_get_content (n0)); break; /* FIXME if -1 TRUE */
-				 case 12: u->passwd_disable = atoi (xml_element_get_content (n0)); break; /* FIXME if -1 TRUE */
+				 case  8: u->last_mod = my_atoi (xml_element_get_content (n0)); break;
+				 case  9: u->passwd_max_life = my_atoi (xml_element_get_content (n0)); break;
+				 case 10: u->passwd_exp_warn = my_atoi (xml_element_get_content (n0)); break;
+				 case 11: u->passwd_exp_disable = my_atoi (xml_element_get_content (n0)); break; /* FIXME if -1 TRUE */
+				 case 12: u->passwd_disable = my_atoi (xml_element_get_content (n0)); break; /* FIXME if -1 TRUE */
 				 case 13: u->reserved = xml_element_get_content (n0); break; 
-				 case 14: u->is_shadow = atoi (xml_element_get_content (n0)); break;
+				 case 14: u->is_shadow = my_atoi (xml_element_get_content (n0)); break;
 				}
 			}
 		}
@@ -218,7 +229,7 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 		g = g_new0 (group, 1);
 
 		if (n0)
-			g->key = atoi (xml_element_get_content (n0));
+			g->key = my_atoi (xml_element_get_content (n0));
 		
 		if (n1)
 			g->name = g_strdup (xml_element_get_content (n1));
@@ -227,7 +238,7 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 			g->password = g_strdup (xml_element_get_content (n2));
 
 		if (n3)
-			g->gid = atoi (xml_element_get_content (n3));
+			g->gid = my_atoi (xml_element_get_content (n3));
 
 		/* Get all users in group */
 

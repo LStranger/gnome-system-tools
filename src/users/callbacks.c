@@ -42,8 +42,10 @@ static void reply_cb (gint val, gpointer data);
 static GList *fill_group_members_list (void);
 static void fill_all_users_list (GList *member_rows);
 static void do_quit (void);
-static void user_actions_set_sensitive (gboolean b);
-static void group_actions_set_sensitive (gboolean b);
+static void user_actions_set_sensitive (gboolean state);
+static void group_actions_set_sensitive (gboolean state);
+static void my_gtk_entry_set_text (void *entry, gchar *str);
+
 
 
 /* Main button callbacks */
@@ -57,7 +59,7 @@ on_close_clicked(GtkButton *button, gpointer data)
 void
 on_apply_clicked (GtkButton *button, gpointer user_data)
 {
-	tool_config_save();
+ 	tool_config_save();
 	tool_set_modified(FALSE);
 }
 
@@ -73,46 +75,21 @@ on_users_admin_delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdat
 extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0, *menu;
-	GList *g;
-	group *current_g;
-	GtkWidget *menu_item;
-	guint num_row;
-	guint index = 0;
+	GtkWidget *w0;
 	
+	g_return_if_fail (current_user != NULL);
 
 	w0 = tool_widget_get ("user_settings_name");
-	gtk_entry_set_text (GTK_ENTRY (w0), current_user->login);
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	my_gtk_entry_set_text (w0, current_user->login);
 
-	w0 = tool_widget_get ("user_settings_comment");
-	gtk_entry_set_text (GTK_ENTRY (w0), current_user->comment);
-	
-	/* Build groups menu */
-
-	menu = gtk_menu_new ();
+	/* TODO: fill the main group widget with available groups. */
 	w0 = tool_widget_get ("user_settings_group");
-
-	for (g = g_list_first (group_list), num_row = 0; g; g = g_list_next (g), num_row++)
-	{
-		current_g = (group *)g->data;
-
-/*
-		if (current_g->gid >= logindefs.new_group_min_id &&
-				current_g->gid <= logindefs.new_group_max_id) */
-		{
-			menu_item = gtk_menu_item_new_with_label (current_g->name);
-			gtk_menu_append (GTK_MENU (menu), menu_item);
-			gtk_widget_show (menu_item);
-
-			if (current_user->gid == current_g->gid)
-				index = num_row;
-		}
-	}
-
-	gtk_menu_set_active (GTK_MENU (menu), index);
+	gtk_widget_set_sensitive (w0, tool_get_access());
 	
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (w0), menu);
-	
+	w0 = tool_widget_get ("user_settings_comment");
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	my_gtk_entry_set_text (w0, current_user->comment);
 	
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_widget_show (w0);
@@ -122,20 +99,17 @@ extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-	gchar *msg;
-
-	w0 = tool_widget_get ("user_passwd_label");
-	msg = g_strdup_printf ("Changing password for %s", current_user->login);
-	gtk_label_set_text (GTK_LABEL (w0), msg);
-	g_free (msg);
+	
+	g_return_if_fail (tool_get_access());
 	
 	w0 = tool_widget_get ("user_passwd_dialog");
 	gtk_widget_show (w0);
 }
 
 extern void
-on_new_user_clicked (GtkButton *button, gpointer user_data)
+on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
+	g_return_if_fail (tool_get_access());
 }
 
 extern void
@@ -147,12 +121,14 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	GtkList *list;
 	GList *selection;
 
+	g_return_if_fail (tool_get_access());
+	
 	txt = g_strdup_printf ("Are you sure you want to delete user %s?", current_user->login);
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
 	
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
-
+	g_free (txt);
 
 	if (reply)
 		return;
@@ -164,10 +140,9 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		selection = g_list_copy (list->selection);
 		gtk_list_remove_items (list, selection);
 		g_list_free (selection);
-/*		current_user = user_list; */
-		
+		current_user = NULL;
+		tool_set_modified (TRUE);
 	}
-
 }
 
 extern void
@@ -181,14 +156,23 @@ on_user_list_selection_changed (GtkWidget *list, gpointer user_data)
 	if (!current) 
 	{
 		user_actions_set_sensitive (FALSE);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), 
+												 "Settings for the selected user");
 	} 
 	else 
 	{
+		gchar *label;
+		
 		list_item = GTK_OBJECT (current->data);
 		current_user = gtk_object_get_data (list_item, user_list_data_key);
+		
 		user_actions_set_sensitive (TRUE);
+		label = g_strconcat ("Settings for user ", current_user->login, NULL);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")), label);
+		g_free (label);
 	}
 }
+
 
 /* Groups tab */
 
@@ -196,11 +180,13 @@ extern void
 on_group_settings_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-       	GList *member_rows;	
+	GList *member_rows;	
+	
+	g_return_if_fail (current_group != NULL);
 
 	w0 = tool_widget_get ("group_settings_name");
-	gtk_entry_set_text (GTK_ENTRY (w0), current_group->name);
-
+	gtk_widget_set_sensitive (w0, tool_get_access());
+	my_gtk_entry_set_text (w0, current_group->name);
 
 	/* Fill group members */
 	member_rows = fill_group_members_list ();
@@ -212,6 +198,12 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	
 	w0 = tool_widget_get ("group_settings_dialog");
 	gtk_widget_show (w0);
+}
+
+extern void
+on_group_new_clicked (GtkButton *button, gpointer user_data)
+{
+	g_return_if_fail (tool_get_access());
 }
 
 extern void
@@ -228,7 +220,6 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
-
 
 	if (reply)
 		return;
@@ -254,12 +245,22 @@ on_group_list_selection_changed (GtkWidget *list, gpointer user_data)
 	current = GTK_LIST (list)->selection;
 
 	if (!current)
+	{
 		group_actions_set_sensitive (FALSE);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), 
+												 "Settings for the selected group");
+	}
 	else
 	{
+		gchar *label;
+		
 		list_item = GTK_OBJECT (current->data);
 		current_group = gtk_object_get_data (list_item, group_list_data_key);
+		
 		group_actions_set_sensitive (TRUE);
+		label = g_strconcat ("Settings for group ", current_group->name, NULL);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")), label);
+		g_free (label);
 	}
 }
 
@@ -271,31 +272,6 @@ extern void
 on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-	GtkWidget *menu, *menu_item;
-	GList *glist, *tmplist;
-
-	/* Clear entries */
-
-	w0 = tool_widget_get ("user_settings_name");
-	gtk_entry_set_text (GTK_ENTRY (w0), "");
-
-	w0 = tool_widget_get ("user_settings_comment");
-	gtk_entry_set_text (GTK_ENTRY (w0), "");
-
-	/* Destroy menu & menuitems */
-	
-	w0 = tool_widget_get ("user_settings_group");
-	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (w0));
-	glist = gtk_container_children (GTK_CONTAINER (menu));
-
-	for (tmplist = g_list_first (glist); tmplist; tmplist = g_list_next (tmplist))
-	{
-		menu_item = (GtkWidget *)tmplist->data;
-		gtk_widget_destroy (menu_item);
-	}
-	
-	gtk_widget_destroy (menu);
-
 
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_widget_hide (w0);
@@ -370,7 +346,7 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 		}
 	}
 				
-
+	tool_set_modified(TRUE);
 	/* Clean up dialog, it's easiest to just call *_cancel_* function */
 	on_user_settings_cancel_clicked (NULL, NULL);
 }
@@ -404,23 +380,23 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 
 	/* Empty old contnents */
 	
-	gtk_entry_set_text (entry1, "");
-	gtk_entry_set_text (entry2, "");
+	my_gtk_entry_set_text (entry1, "");
+	my_gtk_entry_set_text (entry2, "");
 
 
 	/* Check passwords */
 	
 	if (strcmp (new, confirm))
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Passwords doesn't match!",
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("The password and its confirmation\nmust match.",
 			GTK_WINDOW (win)));
 		
 		gnome_dialog_run (dialog);
 	}
 	else if (strlen (new) < logindefs.passwd_min_length)
 	{
-		msg = g_strdup_printf ("Password is too short!\n It must be at least %d "
-			"characters long", logindefs.passwd_min_length);
+		msg = g_strdup_printf ("The password is too short:\nit must be at least %d "
+			"characters long.", logindefs.passwd_min_length);
 
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented (msg, GTK_WINDOW (win)));
 		gnome_dialog_run (dialog);
@@ -429,19 +405,15 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	else		
 	{
 		/* FIXME crypt password!!! how? crypt? */
+		/* it depends on the crypt method of the system. We'll have to
+		 * first identify the method, through magic, and then use crypt
+		 * and steal some code for MD5 crypt */
+		
 		g_free (current_user->password);
-
 		current_user->password = g_strdup (new);
-
-		msg = g_strdup_printf ("Password changed successfully for %s!",
-				current_user->login);
-		
-		dialog = GNOME_DIALOG (gnome_ok_dialog_parented (msg, GTK_WINDOW (win)));
-		
-		gnome_dialog_run (dialog);
 		gtk_widget_hide (win);
+		tool_set_modified (TRUE);
 	}
-
 }
 
 /* Group settings dialog */
@@ -450,14 +422,6 @@ extern void
 on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
-
-	/* Clear lists */
-
-	w0 = tool_widget_get ("group_settings_all");
-	gtk_list_clear_items (GTK_LIST (w0), 0, -1);
-
-	w0 = tool_widget_get ("group_settings_members");
-	gtk_list_clear_items (GTK_LIST (w0), 0, -1);
 
 	w0 = tool_widget_get ("group_settings_dialog");
 	gtk_widget_hide (w0);
@@ -502,6 +466,7 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 
 	/* TODO: update group members also */
 
+	tool_set_modified(TRUE);
 	/* Clear list and hide dialog */
 	on_group_settings_cancel_clicked (NULL, NULL);
 }
@@ -580,7 +545,7 @@ static GList *
 fill_group_members_list (void)
 {
 	GList *u;
-       	GList *member_rows = NULL;
+	GList *member_rows = NULL;
 	GtkList *list;
 	GtkWidget *list_item;
 
@@ -652,21 +617,52 @@ static void
 do_quit (void)
 {
 	/* TODO: Check for changes and optionally ask for confirmation */
-	 gtk_main_quit ();
+	
+	if (GTK_WIDGET_IS_SENSITIVE (tool_widget_get ("apply")))
+	{
+		/* Changes have been made. */
+		gchar *txt = "There are changes which haven't been applyed.\nApply now?";
+		GtkWindow *parent;
+		GnomeDialog *dialog;
+		
+		parent = GTK_WINDOW (tool_widget_get ("users_admin"));
+		dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
+		gnome_dialog_run (dialog);
+		
+		if (!reply)
+			tool_config_save();
+	}
+
+	gtk_main_quit ();
 }
 
 static void
-user_actions_set_sensitive (gboolean b)
+user_actions_set_sensitive (gboolean state)
 {
-	gtk_widget_set_sensitive (tool_widget_get ("user_delete"), b);
-	gtk_widget_set_sensitive (tool_widget_get ("user_chpasswd"), b);
-	gtk_widget_set_sensitive (tool_widget_get ("user_settings"), b);
+	if (tool_get_access())
+	{
+		gtk_widget_set_sensitive (tool_widget_get ("user_new"), TRUE);
+		gtk_widget_set_sensitive (tool_widget_get ("user_delete"), state);
+		gtk_widget_set_sensitive (tool_widget_get ("user_chpasswd"), state);
+	}
+	
+	gtk_widget_set_sensitive (tool_widget_get ("user_settings"), state);
 }
 
 static void
-group_actions_set_sensitive (gboolean b)
+group_actions_set_sensitive (gboolean state)
 {
-	gtk_widget_set_sensitive (tool_widget_get ("group_delete"), b);
-	gtk_widget_set_sensitive (tool_widget_get ("group_settings"), b);
+	if (tool_get_access())
+	{
+		gtk_widget_set_sensitive (tool_widget_get ("group_new"), TRUE);
+		gtk_widget_set_sensitive (tool_widget_get ("group_delete"), state);
+	}
+	
+	gtk_widget_set_sensitive (tool_widget_get ("group_settings"), state);
 }
 
+static void
+my_gtk_entry_set_text (void *entry, gchar *str)
+{
+	gtk_entry_set_text (GTK_ENTRY (entry), (str)? str: "");
+}
