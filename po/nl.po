@@ -9,13 +9,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-04 20:53+0200\n"
-"PO-Revision-Date: 2003-09-05 23:34+0200\n"
+"POT-Creation-Date: 2003-09-14 03:58+0200\n"
+"PO-Revision-Date: 2003-09-14 16:04+0200\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: 8bit"
 
 #: gnome-system-tools.schemas.in.h:1
 msgid ""
@@ -215,7 +215,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Image-instellingen (stap 2 van 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1752
+#: src/network/connection.c:1753
 msgid "Manual"
 msgstr "Handmatig"
 
@@ -538,7 +538,7 @@ msgstr "Alle gebruikers toestaan om verbinding te activeren"
 msgid "Auto"
 msgstr "Automatisch"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1754
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1755
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -578,7 +578,7 @@ msgstr "Een nieuwe internetverbinding maken "
 msgid "Create a new network connection"
 msgstr "Een nieuwe netwerkverbinding maken"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1753
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1754
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1550,7 +1550,7 @@ msgstr "vga=%s is geen geldige vga-waarde"
 msgid "Boot Image Wizard"
 msgstr "Opstart Image DruÃ¯de"
 
-#: src/boot/boot-image.c:40
+#: src/boot/boot-image.c:40 src/network/profile.c:466
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -1710,7 +1710,7 @@ msgid " More _Options"
 msgstr " Meer _opties"
 
 #: src/common/gst-dialog.c:93
-msgid " Less _Options"
+msgid " Fewer _Options"
 msgstr " Minder _opties"
 
 #: src/common/gst-dialog.c:476
@@ -1721,7 +1721,7 @@ msgstr ""
 "Sommige veranderingen zijn nog niet toegepast.\n"
 "Wilt u deze nu toepassen?"
 
-#: src/common/gst-dialog.c:583
+#: src/common/gst-dialog.c:592
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fout bij het verbinden van signaal '%s' aan widget '%s'"
@@ -1890,7 +1890,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:708
+#: src/network/callbacks.c:709
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1900,7 +1900,7 @@ msgstr ""
 "U moet wvdial installeren om de PPP (modem)\n"
 "verbindingen te activeren."
 
-#: src/network/callbacks.c:734
+#: src/network/callbacks.c:736
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1914,7 +1914,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:763
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -1926,7 +1926,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:816
+#: src/network/callbacks.c:818
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -1937,7 +1937,7 @@ msgstr ""
 "door te gaan of kies een ander standaard gateway-\n"
 "apparaat.\n"
 
-#: src/network/callbacks.c:862
+#: src/network/callbacks.c:864
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -1949,17 +1949,17 @@ msgstr ""
 "het tabblad verbindingen veroorzaken. Installeer a.u.b. het\n"
 "redhat-config-network RPM pakket om dit te voorkomen."
 
-#: src/network/callbacks.c:900
+#: src/network/callbacks.c:902
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Weet u zeker dat u het apparaat %s wilt inschakelen?"
 
-#: src/network/callbacks.c:910
+#: src/network/callbacks.c:912
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Weet u zeker dat u het apparaat %s wilt uitschakelen?"
 
-#: src/network/callbacks.c:983
+#: src/network/callbacks.c:999
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1967,23 +1967,23 @@ msgstr ""
 "Kan modemapparaat niet detecteren. Controleer dat deze correct aangesloten, "
 "ingeschakeld en niet bezet is"
 
-#: src/network/callbacks.c:1028
+#: src/network/callbacks.c:1044
 msgid "Silent"
 msgstr "Stil"
 
-#: src/network/callbacks.c:1030
+#: src/network/callbacks.c:1046
 msgid "Low"
 msgstr "Laag"
 
-#: src/network/callbacks.c:1032
+#: src/network/callbacks.c:1048
 msgid "Medium"
 msgstr "Middel"
 
-#: src/network/callbacks.c:1034
+#: src/network/callbacks.c:1050
 msgid "Loud"
 msgstr "Luid"
 
-#: src/network/callbacks.c:1200
+#: src/network/callbacks.c:1216
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Weet u zeker dat u de aliassen voor %s wilt verwijderen?"
@@ -2028,7 +2028,7 @@ msgstr "Status"
 msgid "Description"
 msgstr "Beschrijving"
 
-#: src/network/connection.c:1633
+#: src/network/connection.c:1634
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2038,7 +2038,7 @@ msgstr ""
 "leeggelaten. Vul a.u.b. een geldige waarde\n"
 "in voor beide velden."
 
-#: src/network/connection.c:1640
+#: src/network/connection.c:1641
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2048,7 +2048,7 @@ msgstr ""
 "de interface werd leeggelaten. Vul a.u.b.\n"
 "een geldige waarde in voor beide velden."
 
-#: src/network/connection.c:1646
+#: src/network/connection.c:1647
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2062,7 +2062,12 @@ msgstr ""
 "IP in als eerste DNS server of kies niet voor\n"
 "handmatige DNS instellingen."
 
-#: src/network/connection.c:2202
+#: src/network/connection.c:2037
+#, c-format
+msgid "The interface %s doesn't exist."
+msgstr "De interface %s bestaat niet."
+
+#: src/network/connection.c:2245
 msgid "Autodetecting modem device"
 msgstr "Modemapparaat automatisch detecteren"
 
@@ -2074,31 +2079,39 @@ msgstr "IP-adres"
 msgid "Aliases"
 msgstr "Aliassen"
 
-#: src/network/main.c:220
+#: src/network/main.c:221
 msgid "Run the connection druid."
 msgstr "Start de Assistent netwerkverbinding."
 
-#: src/network/main.c:221
+#: src/network/main.c:222
 msgid "Run the PPP connection druid."
 msgstr "Start de Assistent PPP-verbinding."
 
-#: src/network/main.c:222
+#: src/network/main.c:223
 msgid "Run the ethernet connection druid."
 msgstr "Start de Assistent ethernetverbinding."
 
-#: src/network/main.c:223
+#: src/network/main.c:224
 msgid "Run the wlan connection druid."
 msgstr "Start de Assistent WLAN-verbinding."
 
-#: src/network/main.c:224
+#: src/network/main.c:225
 msgid "Run the parallel port connection druid."
 msgstr "Start de Assistent paralelle poort-verbinding."
 
-#: src/network/main.c:225
+#: src/network/main.c:226
 msgid "Run the irlan connection druid."
 msgstr "Start de Assistent IRlan-verbinding."
 
-#: src/network/main.c:232
+#: src/network/main.c:227
+msgid "Configure a network interface"
+msgstr "Een netwerkinterface instellen"
+
+#: src/network/main.c:227
+msgid "interface"
+msgstr "interface"
+
+#: src/network/main.c:234
 msgid "Network Settings"
 msgstr "Netwerkinstellingen"
 
@@ -2226,11 +2239,11 @@ msgstr "Tijd"
 msgid "Time, date and timezone."
 msgstr "Tijd, datum en tijdzone."
 
-#: src/users/callbacks.c:592
+#: src/users/callbacks.c:598
 msgid "Create New profile"
 msgstr "Nieuw profiel aanmaken"
 
-#: src/users/callbacks.c:623
+#: src/users/callbacks.c:629
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Instellingen voor profiel %s"
@@ -2793,9 +2806,6 @@ msgstr "Gebruikers en groepen."
 #~ msgstr ""
 #~ "Gefeliciteerd! Deze computer is nu\n"
 #~ "ingesteld om de internetverbinding te delen.\n"
-
-#~ msgid "Create a new local network interface."
-#~ msgstr "Een nieuwe lokale netwerkverbinding maken."
 
 #~ msgid "DHCP service configuration."
 #~ msgstr "DHCP-voorziening instellingen."
