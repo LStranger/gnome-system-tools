@@ -9,24 +9,24 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools.HEAD\n"
+"Project-Id-Version: gnome-system-tools.HEAD.sk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-23 12:26+0200\n"
-"PO-Revision-Date: 2003-09-24 22:43+0200\n"
+"POT-Creation-Date: 2003-09-26 04:15+0200\n"
+"PO-Revision-Date: 2003-09-26 09:48+0200\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@kde.org>\n"
 "Language-Team: Slovak <sk-i18n@linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.2beta3\n"
+"X-Generator: KBabel 1.2\n"
 
 #: gnome-system-tools.schemas.in.h:1
 msgid ""
 "Comma separated list of hosts that the GST will be able to access when the "
 "remote configuration option is enabled"
 msgstr ""
-"Čiarkami oddelený zoznam hostiteľov, ku ktorým bude mať GST prístup "
-"pri zapnutí vzdialenej správy."
+"Čiarkami oddelený zoznam hostiteľov, ku ktorým bude mať GST prístup pri "
+"zapnutí vzdialenej správy."
 
 #: gnome-system-tools.schemas.in.h:2
 msgid "Dialog complexity for the boot-admin tool"
@@ -69,8 +69,8 @@ msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
 msgstr ""
-"GST môže vykonávať vzdialenú správu pomocou SSH. Túto funkciu "
-"zapnete touto voľbou"
+"GST môže vykonávať vzdialenú správu pomocou SSH. Túto funkciu zapnete touto "
+"voľbou"
 
 #: gnome-system-tools.schemas.in.h:11
 msgid "The last GST version that this computer has run"
@@ -281,9 +281,8 @@ msgstr "Tu môžete upraviť parametre jadra."
 #: interfaces/boot.glade.in.h:48
 msgid "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
-"Použite tento nástroj pre nastavenie operačných "
-"systémov, z ktorých bude možné pri spustení počítača "
-"vyberať."
+"Použite tento nástroj pre nastavenie operačných systémov, z ktorých bude "
+"možné pri spustení počítača vyberať."
 
 #: interfaces/boot.glade.in.h:49
 msgid "Video modes (only frame buffer)"
@@ -367,7 +366,7 @@ msgstr "Zložitosť"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Zadanie hesla - Systémové nástroje GNOME"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1636
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
@@ -825,8 +824,8 @@ msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
 msgstr ""
-"Pre pokračovanie v nastavení vášho sieťového pripojenia, stlačte \"Nasledujúci\". "
-"Nastavenie zrušíte pomocou \"Zrušiť\"."
+"Pre pokračovanie v nastavení vášho sieťového pripojenia, stlačte "
+"\"Nasledujúci\". Nastavenie zrušíte pomocou \"Zrušiť\"."
 
 #: interfaces/network.glade.in.h:109
 msgid "Tones"
@@ -1452,7 +1451,7 @@ msgstr ""
 "Používateľské profily je možné používať ako šablóny pre vytváranie nových "
 "používateľovi. "
 
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:75
 msgid "Users"
 msgstr "Používatelia"
 
@@ -1608,8 +1607,8 @@ msgid "Boot"
 msgstr "Bootovanie"
 
 #: src/boot/boot.desktop.in.in.h:2
-msgid "Boot Manager"
-msgstr "Správca bootovania"
+msgid "Configure the system boot process"
+msgstr "Nastavenie štartu systému"
 
 #: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
@@ -1704,7 +1703,7 @@ msgstr "Viac _možností"
 msgid " Fewer _Options"
 msgstr "Menej _možností"
 
-#: src/common/gst-dialog.c:476
+#: src/common/gst-dialog.c:454
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1712,21 +1711,21 @@ msgstr ""
 "Niektoré zmeny ste ešte nepotvrdili.\n"
 "Použiť ich teraz?"
 
-#: src/common/gst-dialog.c:592
+#: src/common/gst-dialog.c:552
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Signál chyby spojenia `%s' v prvku `%s'"
 
-#: src/common/gst-tool.c:944
+#: src/common/gst-tool.c:853
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Preskakujem direktívu %s..."
 
-#: src/common/gst-tool.c:1094
+#: src/common/gst-tool.c:993
 msgid "Skipping actual save..."
 msgstr "Preskakujem vlastné ukladanie..."
 
-#: src/common/gst-tool.c:1156
+#: src/common/gst-tool.c:1055
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1734,12 +1733,12 @@ msgstr ""
 "Nastala chyba pri spustení skriptu,\n"
 "a nastavenie nebolo možné načítať."
 
-#: src/common/gst-tool.c:1522
+#: src/common/gst-tool.c:1359
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Systémové nástroje GNOME"
 
-#: src/common/gst-tool.c:1700
+#: src/common/gst-tool.c:1537
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1766,11 +1765,11 @@ msgstr ""
 "--\n"
 "Tím Systémových nástrojov GNOME"
 
-#: src/common/gst-tool.c:1724
+#: src/common/gst-tool.c:1561
 msgid "Warning"
 msgstr "Varovanie"
 
-#: src/common/gst-tool.c:1733
+#: src/common/gst-tool.c:1570
 msgid "Don't show me this again"
 msgstr "Nabudúce už túto správu nezobrazovať"
 
@@ -1953,8 +1952,8 @@ msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
 msgstr ""
-"Nepodarilo sa automaticky nájsť zariadenie modemu. Overte, či nie "
-"je používané iným programom a že je správne pripojené"
+"Nepodarilo sa automaticky nájsť zariadenie modemu. Overte, či nie je "
+"používané iným programom a že je správne pripojené"
 
 #: src/network/callbacks.c:1044
 msgid "Silent"
@@ -2105,8 +2104,8 @@ msgid "Connection name (Step 2 of 2)"
 msgstr "Meno pripojenia (krok 2 z 2)"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Nastavenie sieťového rozhrania."
+msgid "Configure network devices and connections"
+msgstr "Nastavenie sieťových rozhraní a pripojení"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
@@ -2183,26 +2182,26 @@ msgid "Services Settings"
 msgstr "Nastavenie služieb"
 
 #: src/services/services.desktop.in.in.h:1
-msgid "Services"
-msgstr "Služby"
+msgid "Configure which services will be run when the system starts"
+msgstr "Nastavenie služieb, ktoré sa budú pri štarte systému spúšťať"
 
 #: src/services/services.desktop.in.in.h:2
-msgid "Services Manager"
-msgstr "Správca služieb"
+msgid "Services"
+msgstr "Služby"
 
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Služba"
 
-#: src/time/main.c:310
+#: src/time/main.c:303
 msgid "Time Zone - GNOME System Tools"
 msgstr "Časová zóna - Systémové nástroje GNOME"
 
-#: src/time/main.c:428
+#: src/time/main.c:417
 msgid "Time Servers - GNOME System Tools"
 msgstr "Časové servery - Systémové nástroje GNOME"
 
-#: src/time/main.c:500
+#: src/time/main.c:495
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2210,17 +2209,17 @@ msgstr ""
 "Nemáte nainštalovanú podporu NTP. Prosím, spustite ju,\n"
 "aby bola možná synchronizácia."
 
-#: src/time/main.c:789
+#: src/time/main.c:784
 msgid "Time and Date Settings"
 msgstr "Nastavenie času a dátumu"
 
 #: src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Čas"
+msgid "Change system time, date, and timezone"
+msgstr "Zmena dátumu, času a časová zóna"
 
 #: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
-msgstr "Dátum, čas a časová zóna."
+msgid "Time and Date"
+msgstr "Dátum a čas"
 
 #: src/users/callbacks.c:598
 msgid "Create New profile"
@@ -2297,7 +2296,7 @@ msgstr "Meno skupiny obsahuje"
 msgid "User GID is"
 msgstr "GID používateľa je"
 
-#: src/users/main.c:321
+#: src/users/main.c:321 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Používatelia a skupiny"
 
@@ -2471,7 +2470,7 @@ msgstr "Shell"
 msgid "Comments"
 msgstr "Komentáre"
 
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Používatelia a skupiny."
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Pridanie alebo odstránenie používateľov a skupiny"
 
