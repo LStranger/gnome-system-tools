@@ -81,18 +81,21 @@ on_table_clicked (GtkTreeSelection *selection, gpointer data)
 {
 	GtkTreeView *treeview;
 	int cont;
+	gboolean active;
 
 	treeview = (GtkTreeView *) data;
 	cont = 0;
 
 	gtk_tree_selection_selected_foreach (selection, counter , &cont);
+
+	active = (cont > 0);
    
 	if (users_table == GTK_WIDGET (treeview))
-		actions_set_sensitive (NODE_USER, TRUE);
+		actions_set_sensitive (NODE_USER, active);
 	else if (groups_table == GTK_WIDGET (treeview))
-		actions_set_sensitive (NODE_GROUP, TRUE);
+		actions_set_sensitive (NODE_GROUP, active);
 	else
-		actions_set_sensitive (NODE_PROFILE, TRUE);
+		actions_set_sensitive (NODE_PROFILE, active);
 	
 	if (cont > 1)
 	{
@@ -572,6 +575,9 @@ on_profile_settings_ok_clicked (GtkButton *button, gpointer data)
 		gtk_widget_hide (dialog);
 
 		profiles_table_update_content ();
+
+		/* mark dialog buttons as unsensitive */
+		actions_set_sensitive (NODE_PROFILE, FALSE);
 
 		gst_dialog_modify (tool->main_dialog);
 	}
