@@ -11,6 +11,8 @@ install-data-local:
 	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/gnome/apps/Settings/System/$(desktop)
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/control-center-2.0/capplets
 	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/control-center-2.0/capplets/$(desktop)
+	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/X11/sysconfig
+	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(sysconfdir)/X11/sysconfig/$(desktop)
 
 install-data-am: install-etspecsDATA install-data-local
 
