@@ -1868,8 +1868,8 @@ fill_ip (GstConnection *cxn)
 
 	char *bootproto_labels[] = {
 		N_("Manual"),
-		N_("DHCP"),
-		N_("BOOTP")
+		N_("Automatic (DHCP)"),
+		N_("Automatic (BOOTP)")
 	};
 
 	omenu = gst_dialog_get_widget (tool->main_dialog, "connection_config");
