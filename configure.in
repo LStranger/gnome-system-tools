@@ -186,8 +186,8 @@ dnl =====================================================
 dnl XST_LIBS & XST_CFLAGS 
 dnl =====================================================
 
-XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver`"
-XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver`"
+XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver bonobo`"
+XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver bonobo`"
 
 case $host in
 *-*-freebsd* )
