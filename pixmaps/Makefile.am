@@ -1,4 +1,5 @@
 pixmaps_DATA = \
+	48_wrench_logo.png       \
 	32_wrench_logo.png       \
 	computer.png             \
 	boot.png                 \
