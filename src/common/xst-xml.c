@@ -57,10 +57,11 @@ xst_xml_element_find_first (xmlNodePtr parent, char *name)
 	xmlNodePtr node;
 	
 	g_return_val_if_fail (parent != NULL, NULL);
+	g_return_val_if_fail (name != NULL, NULL);
 
 	for (node = parent->childs; node;)
 	{
-		if (!strcmp (name, node->name)) break;
+		if (node->name && !strcmp (name, node->name)) break;
 		node = node->next;
 	}
 
@@ -74,9 +75,10 @@ xst_xml_element_find_next (xmlNodePtr sibling, char *name)
 	xmlNodePtr node;
 	
 	g_return_val_if_fail (sibling != NULL, NULL);
+	g_return_val_if_fail (name != NULL, NULL);
 
 	for (node = sibling->next; node; node = node->next)
-		if (!strcmp (name, node->name))
+		if (node->name && !strcmp (name, node->name))
 			break;
 
 	return (node);
