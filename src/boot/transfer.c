@@ -88,15 +88,13 @@ transfer_check_data (xmlNodePtr root)
 static void
 transfer_globals_xml_to_gui (xmlNodePtr root)
 {
-	xmlNodePtr node;
 	gchar *buf;
 	gint value;
 
 	buf = xst_xml_get_child_content (root, "prompt");
 
 	if (buf) {
-		if (*buff == '1') {
-			buf = xst_xml_get_content (node);
+		if (*buf == '1') {
 			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON
 						      (xst_dialog_get_widget
 						       (tool->main_dialog, "boot_prompt")),

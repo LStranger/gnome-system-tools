@@ -113,6 +113,28 @@ dnl END: GAL checking
 dnl =====================================================
 
 dnl =====================================================
+dnl GnomePrint checking
+dnl =====================================================
+
+AC_MSG_CHECKING(for GnomePrint libraries >= 0.34)
+if gnome-config --libs print > /dev/null 2>&1; then
+     verstxt=`gnome-config --modversion print`
+	vers=`gnome-config --modversion print | sed -e "s/gnome-print-//" -e 's/cvs$//' -e 's/pre$//' | \
+		 awk 'BEGIN { FS = "."; } { print $1 * 1000+ $2;}'`
+     if test "$vers" -ge 34; then
+		AC_MSG_RESULT(found)
+	 else
+		AC_MSG_ERROR(You need at least gnome print 0.34 for this version of ximian-setup-tools)
+	fi
+else
+	AC_MSG_ERROR(Did not find gnome-print installed)
+fi
+
+dnl =====================================================
+dnl END: GnomePrint checking
+dnl =====================================================
+
+dnl =====================================================
 dnl Ximian archiver checking
 dnl =====================================================
 
@@ -190,7 +212,7 @@ dnl =====================================================
 dnl XST_LIBS & XST_CFLAGS 
 dnl =====================================================
 
-XST_LIBS="`gnome-config --libs gal print gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver bonobo`"
+XST_LIBS="`gnome-config --libs print gal gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver bonobo`"
 XST_CFLAGS="`gnome-config --cflags gal print gdk_pixbuf gnomecanvaspixbuf libglade xml config_archiver bonobo`"
 
 case $host in
