@@ -446,7 +446,7 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 }
 
 static gboolean
-report_window_close_cb (GtkWidget *window, gpointer data)
+report_window_close_cb (GtkWidget *window, GdkEventAny *ev, gpointer data)
 {
 	XstTool *tool = data;
 
@@ -475,11 +475,13 @@ report_progress (XstTool *tool, const gchar *label)
 
 	if (label) {
 		gtk_label_set_text (GTK_LABEL (tool->report_label), label);
-		gtk_signal_connect (GTK_OBJECT (tool->report_window), "delete-event",
-				    GTK_SIGNAL_FUNC (report_window_close_cb), tool);
 		gtk_widget_show_all (tool->report_window);
+		gtk_widget_show_now (tool->report_window);
 
-		while (gtk_events_pending ()) {
+		/* This ensures the report_window will be hidden on time.
+		 * I'ts OK for long-lived directives, and short lived shouldn't
+		 * be using the report window anyways. */
+		while (gdk_events_pending ()) {
 			usleep (100);
 			gtk_main_iteration ();
 		}
@@ -1280,6 +1282,8 @@ xst_tool_type_init (XstTool *tool)
 	tool->report_gui = xml  = xst_tool_load_glade_common (tool, "report_window");
 
 	tool->report_window     = glade_xml_get_widget (xml, "report_window");
+	gtk_signal_connect (GTK_OBJECT (tool->report_window), "delete_event",
+			    GTK_SIGNAL_FUNC (report_window_close_cb), tool);
 #if 0
 	tool->report_scrolled   = glade_xml_get_widget (xml, "report_list_scrolled_window");
 	tool->report_progress   = glade_xml_get_widget (xml, "report_progress");
