@@ -6,11 +6,13 @@
   <program_name>common</program_name>
   <directory></directory>
   <source_directory>src</source_directory>
-  <pixmaps_directory>pixmaps</pixmaps_directory>
+  <pixmaps_directory>../pixmaps</pixmaps_directory>
   <language>C</language>
   <gnome_support>True</gnome_support>
   <gettext_support>True</gettext_support>
   <output_main_file>False</output_main_file>
+  <output_support_files>False</output_support_files>
+  <output_build_files>False</output_build_files>
   <output_translatable_strings>True</output_translatable_strings>
   <translatable_strings_file>common.glade.h</translatable_strings_file>
 </project>
@@ -29,14 +31,13 @@
 
   <widget>
     <class>GtkFrame</class>
-    <name>frame4</name>
+    <name>frame5</name>
     <label_xalign>0</label_xalign>
     <shadow_type>GTK_SHADOW_OUT</shadow_type>
 
     <widget>
       <class>GtkVBox</class>
       <name>vbox4</name>
-      <border_width>4</border_width>
       <homogeneous>False</homogeneous>
       <spacing>0</spacing>
 
@@ -64,7 +65,14 @@
 	  </child>
 
 	  <widget>
-	    <class>Placeholder</class>
+	    <class>GnomePixmap</class>
+	    <name>pixmap3</name>
+	    <filename>reading.png</filename>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
 	  </widget>
 	</widget>
 
@@ -151,14 +159,13 @@
 
   <widget>
     <class>GtkFrame</class>
-    <name>frame5</name>
+    <name>frame6</name>
     <label_xalign>0</label_xalign>
     <shadow_type>GTK_SHADOW_OUT</shadow_type>
 
     <widget>
       <class>GtkVBox</class>
       <name>vbox5</name>
-      <border_width>4</border_width>
       <homogeneous>False</homogeneous>
       <spacing>0</spacing>
 
@@ -186,7 +193,14 @@
 	  </child>
 
 	  <widget>
-	    <class>Placeholder</class>
+	    <class>GnomePixmap</class>
+	    <name>pixmap4</name>
+	    <filename>reading.png</filename>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
 	  </widget>
 	</widget>
 
@@ -233,8 +247,8 @@
 	    <text_yalign>0.5</text_yalign>
 	    <child>
 	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
+	      <expand>False</expand>
+	      <fill>False</fill>
 	    </child>
 	  </widget>
 	</widget>
