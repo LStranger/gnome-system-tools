@@ -718,13 +718,42 @@ callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
 	return TRUE;
 }
 
+static gboolean
+callbacks_has_dialer (XstTool *tool)
+{
+	gboolean   has_dialer = FALSE;
+	gboolean   need_dialer = FALSE;
+	xmlNodePtr root;
+	GtkWidget *clist;
+	int i;
+
+	root = xst_xml_doc_get_root (tool->config);
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	for (i=0; i < GTK_CLIST (clist)->rows; i++) {
+		XstConnection *cxn;
+
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i), root;
+		if (cxn && cxn->type == XST_CONNECTION_PPP) {
+			need_dialer = TRUE;
+			break;
+		}
+	}
+
+	if (!need_dialer)
+		return TRUE;
+
+	has_dialer = (gboolean) gtk_object_get_data (GTK_OBJECT (tool),
+						     "dialinstalled");
+
+	return has_dialer;
+}
+
 void
 callbacks_check_dialer (GtkWindow *window, XstTool *tool)
 {
 	gboolean has_dialer;
 	
-	has_dialer = (gboolean) gtk_object_get_data (GTK_OBJECT (tool),
-						     "dialinstalled");
+	has_dialer = callbacks_has_dialer (tool);
 	if (!has_dialer)
 	{
 		gchar *text = _("wvdial could not be found on your system.\n"
@@ -744,8 +773,7 @@ callbacks_check_dialer_hook (XstDialog *dialog, gpointer data)
 	gboolean has_dialer;
 
 	tool = XST_TOOL (data);
-	has_dialer = (gboolean) gtk_object_get_data (GTK_OBJECT (tool),
-						     "dialinstalled");
+	has_dialer = callbacks_has_dialer (tool);
 	if (!has_dialer)
 	{
 		gchar *text = _("wvdial could not be found on your system.\n"
