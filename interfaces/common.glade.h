@@ -24,4 +24,4 @@ gchar *s = N_("GNOME System Tools");
 gchar *s = N_("Complexity");
 gchar *s = N_("Remote administration");
 gchar *s = N_("Use this window to select the computer\n"
-              "you wish to administrate");
+              "you wish to configure");
