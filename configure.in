@@ -18,7 +18,10 @@ GNOME_X_CHECKS
 GNOME_XML_CHECK
 AM_PATH_GDK_PIXBUF
 AM_PATH_LIBGLADE(,,"gnome")
-
+AC_CHECK_LIB(crack, FascistCheck, ,[
+  AC_MSG_ERROR(cracklib is required.)])
+AC_CHECK_HEADER(crack.h, ,[
+  AC_MSG_ERROR(cracklib crack.h header file not found.)])
 
 dnl Add the languages which your application supports here.
 ALL_LINGUAS="da de no es it pt_BR ru sv"
