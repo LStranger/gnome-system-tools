@@ -9,7 +9,6 @@ pixmaps_DATA = \
 	boot.png                 \
 	debian.png               \
 	fedora.png		 \
-	font.png            	 \
 	freebsd.png              \
 	gentoo.png               \
 	irda-16.png              \
