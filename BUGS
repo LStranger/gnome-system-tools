@@ -1,0 +1,56 @@
+This is a hopefully, but probably not, complete list of known bugs and
+annoyances in XST. Patches for them are, of course, welcome.
+
+Last updated: 20010509.
+
+
+Known bugs in all tools/shared code:
+
+* The prompt for distribution dialog doesn't properly sort the options. (All
+  platforms)
+
+
+Boot-admin:
+
+* Settings dialog has string [custom widget creation failed] in upper left
+  corner instead of icon. (Debian Woody)
+
+
+Network-admin:
+
+* Doesn't support the format of /etc/network/interfaces in Woody,
+  specifically doesn't recognize an auto line as the end of an iface section,
+  so name lines are placed wrong, making ifup fail. (Debian Woody)
+
+
+Disks-admin:
+
+No known issues.
+
+
+Memory-admin:
+
+* A Gtk-Warning on startup. (All platforms)
+
+
+
+Shares-admin:
+
+No known issues.
+
+
+
+Time-admin:
+
+* Doesn't support systems where the hardware clock is set to GMT. (All
+  platforms)
+	
+* Timezone offset problems. (Debian Woody)
+
+
+Users-admin:
+
+* Problem with finding cracklib's data files in the new user druid, makes
+  entire tool quit without warning. (Debian Woody)
+
+* New user druid fails with "Such user ID already exists". (Debian Woody)
