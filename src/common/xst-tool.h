@@ -91,7 +91,7 @@ struct _XstTool {
 	gboolean  run_again;
 	
 	gboolean  directive_running; /* locked when a directive is running */
-	GSList   *directive_queue; 
+	GSList   *directive_queue;
 
 	XstReportHookType  report_hook_type;
 	GSList            *report_hook_list;
@@ -106,6 +106,7 @@ struct _XstToolClass {
 
 	void (*fill_gui) (XstTool *xt);
 	void (*fill_xml) (XstTool *xt);
+	void (*close)    (XstTool *xt);
 };
 
 GtkType      xst_tool_get_type            (void);
@@ -142,10 +143,9 @@ xmlDoc      *xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
 					    const gchar *report_sign, const gchar *directive, va_list ap);
 
 /* This is for async directive calls. See .c file for directions. */
-guint        xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer data,
-				       xmlDoc *in_xml, gchar *report_sign, gchar *directive);
+void         xst_tool_queue_directive     (XstTool *tool, XstDirectiveFunc callback, gpointer data,
+				           xmlDoc *in_xml, gchar *report_sign, gchar *directive);
 gboolean     xst_tool_directive_running   (XstTool *tool);
-
 
 void         xst_tool_set_xml_funcs       (XstTool *tool, XstXmlFunc load_cb, XstXmlFunc save_cb, gpointer data);
 void         xst_tool_set_close_func      (XstTool *tool, XstCloseFunc close_cb, gpointer data);

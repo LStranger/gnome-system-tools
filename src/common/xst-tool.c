@@ -54,6 +54,7 @@
 enum {
 	FILL_GUI,
 	FILL_XML,
+	CLOSE,
 	LAST_SIGNAL
 };
 
@@ -64,9 +65,14 @@ static enum {
 	ROOT_ACCESS_REAL
 } root_access = ROOT_ACCESS_NONE;
 
+gchar *the;
+
 static GtkObjectClass *parent_class;
 static gint xsttool_signals [LAST_SIGNAL] = { 0 };
 static const gchar *XST_TOOL_EOR = "\n<!-- XST: end of request -->\n";
+
+static void     xst_tool_idle_run_directives_remove (XstTool *tool);
+static void     xst_tool_idle_run_directives_add    (XstTool *tool);
 
 static gboolean platform_set_current_cb   (XstTool *tool, XstReportLine *rline, gpointer data);
 static gboolean platform_unsupported_cb   (XstTool *tool, XstReportLine *rline, gpointer data);
@@ -479,7 +485,9 @@ report_progress (XstTool *tool, const gchar *label)
 					     report_progress_tick, NULL, tool, NULL);
 	tool->input_block = FALSE;
 
+	xst_tool_idle_run_directives_remove (tool);
 	gtk_main ();
+	xst_tool_idle_run_directives_add (tool);
 
 	if (tool->input_id)
 		gtk_input_remove (tool->input_id);
@@ -650,17 +658,73 @@ xst_tool_init_backend (XstTool *tool)
 static gint
 xst_tool_idle_run_directives (gpointer data)
 {
+	static gint a = 0;
 	XstTool           *tool = data;
 	XstDirectiveEntry *entry;
 
-	if (!tool->directive_queue)
+	if (!tool->directive_queue) {
+		g_print ("\nno queue\n");
 		return FALSE;
+	}
+
+	a++;
+	g_print ("idles: %d\n", a);
 
 	entry = tool->directive_queue->data;
 	tool->directive_queue = g_slist_remove (tool->directive_queue, entry);
 	entry->callback (entry);
 	g_free (entry);
+
+	g_print ("running %d\n", tool->directive_running);
+	a--;
+
 	return TRUE;
+}
+
+static void
+xst_tool_idle_run_directives_add (XstTool *tool)
+{
+	gtk_idle_add_priority (GTK_PRIORITY_LOW, xst_tool_idle_run_directives, tool);
+}
+
+static void
+xst_tool_idle_run_directives_remove (XstTool *tool)
+{
+	gtk_idle_remove_by_data (tool);
+}
+
+static gint
+xst_tool_idle_queue_directive (gpointer data)
+{
+	XstDirectiveEntry *entry = data;
+	XstTool *tool = entry->tool;
+
+	tool->directive_queue = g_slist_append (tool->directive_queue, entry);
+	xst_tool_idle_run_directives_add (tool);
+
+	return FALSE;
+}
+
+static void
+xst_tool_kill_backend_cb (XstDirectiveEntry *entry)
+{
+	XstTool *tool = entry->tool;
+	
+	/* The backend was never called. No problem! */
+	/* For further reference check http://www.xs4all.nl/~pjbrink/apekool/050/045-en.html */
+	if (tool->backend_pid > 0) {
+		if (root_access == ROOT_ACCESS_SIMULATED)
+			root_access = ROOT_ACCESS_SIMULATED_DISABLED;
+		
+		xst_tool_run_set_directive (tool, NULL, NULL, "end", NULL);
+		
+		if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
+			root_access = ROOT_ACCESS_SIMULATED;
+	
+		waitpid (tool->backend_pid, NULL, 0);
+	}
+	
+	gtk_signal_emit_by_name (GTK_OBJECT (tool), "destroy");
 }
 
 static void
@@ -668,21 +732,8 @@ xst_tool_kill_backend (XstTool *tool, gpointer data)
 {
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (XST_IS_TOOL (tool));
-	
-	/* The backend was never called. No problem! */
-	/* For further reference check http://www.xs4all.nl/~pjbrink/apekool/050/045-en.html */
-	if (tool->backend_pid < 0)
-		return;
 
-	if (root_access == ROOT_ACCESS_SIMULATED)
-		root_access = ROOT_ACCESS_SIMULATED_DISABLED;
-
-	xst_tool_run_set_directive (tool, NULL, NULL, "end", NULL);
-
-	if (root_access == ROOT_ACCESS_SIMULATED_DISABLED)
-		root_access = ROOT_ACCESS_SIMULATED;
-	
-	waitpid (tool->backend_pid, NULL, 0);
+	xst_tool_queue_directive (tool, xst_tool_kill_backend_cb, NULL, NULL, NULL, "end");
 }
 
 static gboolean
@@ -758,17 +809,17 @@ xst_tool_default_set_directive_callback (XstDirectiveEntry *entry)
    NULL report_sign makes no report window to be shown when directive is run.
    NULL callback runs the default directive callback, which runs a set directive.
    data is for closure. in_xml is an input xml that may be required by the directive. */
-guint
+void
 xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer data,
 			  xmlDoc *in_xml, gchar *report_sign, gchar *directive)
 {
 	XstDirectiveEntry *entry;
 
-	g_return_val_if_fail (tool != NULL, -1);
-	g_return_val_if_fail (XST_IS_TOOL (tool), -1);
+	g_return_if_fail (tool != NULL);
+	g_return_if_fail (XST_IS_TOOL (tool));
 
 	entry = g_new0 (XstDirectiveEntry, 1);
-	g_return_val_if_fail (entry != NULL, -1);
+	g_return_if_fail (entry != NULL);
 	
 	entry->tool        = tool;
 	entry->callback    = callback? callback: xst_tool_default_set_directive_callback;
@@ -776,12 +827,8 @@ xst_tool_queue_directive (XstTool *tool, XstDirectiveFunc callback, gpointer dat
 	entry->in_xml      = in_xml;
 	entry->report_sign = report_sign;
 	entry->directive   = directive;
-	
-	if (!tool->directive_queue)
-		gtk_idle_add (xst_tool_idle_run_directives, tool);
-	tool->directive_queue = g_slist_append (tool->directive_queue, entry);
 
-	return g_slist_length (tool->directive_queue);
+	gtk_idle_add_priority (GTK_PRIORITY_DEFAULT, xst_tool_idle_queue_directive, entry);
 }
 
 /* As specified, escapes :: to \:: and \ to \\ and joins the strings. */
@@ -819,7 +866,9 @@ xst_tool_send_directive (XstTool *tool, const gchar *directive, va_list ap)
 
 	g_return_if_fail (tool->backend_pid >= 0);
 
-	directive_line = xst_tool_join_directive (directive, ap);
+	the = g_strdup (directive);
+
+       	directive_line = xst_tool_join_directive (directive, ap);
 	g_string_append_c (directive_line, '\n');
 	
 	f = fdopen (dup (tool->backend_write_fd), "w");
@@ -837,6 +886,8 @@ xst_tool_run_get_directive_va (XstTool *tool, const gchar *report_sign, const gc
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
+	if (tool->directive_running)
+		g_print ("\n%s\n", the);
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
 
 	if (tool->backend_pid < 0)
@@ -887,6 +938,8 @@ xst_tool_run_set_directive_va (XstTool *tool, xmlDoc *xml,
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 
+	if (tool->directive_running)
+		g_print ("\n%s\n", the);
 	g_return_val_if_fail (tool->directive_running == FALSE, NULL);
 
 	if (tool->backend_pid < 0)
@@ -1148,6 +1201,14 @@ xst_tool_class_init (XstToolClass *klass)
 				gtk_marshal_NONE__NONE,
 				GTK_TYPE_NONE, 0);
 
+	xsttool_signals[CLOSE] = 
+		gtk_signal_new ("close",
+				GTK_RUN_LAST,
+				object_class->type,
+				GTK_SIGNAL_OFFSET (XstToolClass, close),
+				gtk_marshal_NONE__NONE,
+				GTK_TYPE_NONE, 0);
+
 	gtk_object_class_add_signals (object_class, xsttool_signals, LAST_SIGNAL);
 
 	object_class->destroy = xst_tool_destroy;
@@ -1321,7 +1382,7 @@ xst_tool_set_close_func (XstTool *tool, XstCloseFunc close_cb, gpointer data)
 	g_return_if_fail (XST_IS_TOOL (tool));
 
 	if (close_cb)
-		gtk_signal_connect (GTK_OBJECT (tool), "destroy", GTK_SIGNAL_FUNC (close_cb), data);
+		gtk_signal_connect (GTK_OBJECT (tool), "close", GTK_SIGNAL_FUNC (close_cb), data);
 }
 
 void

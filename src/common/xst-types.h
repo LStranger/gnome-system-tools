@@ -86,7 +86,6 @@ struct _XstDirectiveEntry {
 	xmlDoc           *in_xml;
 	gchar            *report_sign;
 	gchar            *directive;
-	va_list           ap;
 };
 
 #endif /* XST_TYPES_H */
