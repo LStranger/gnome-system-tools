@@ -1656,23 +1656,23 @@ connection_validate (GstConnection *cxn)
 		if (cxn->ip_config == IP_MANUAL &&
 		    (strempty (cxn->address) ||
 		     strempty (cxn->netmask)))
-			error = _("The IP address or netmask for the interface\n"
-				  "was left empty. Please enter valid IP\n"
+			error = _("The IP address or netmask for the interface "
+				  "was left empty. Please enter valid IP "
 				  "addresses in those fields to continue.");
 		break;
 	case GST_CONNECTION_PLIP:
 		if (strempty (cxn->address) ||
 		    strempty (cxn->remote_address))
-			error = _("The IP address or remote address for the\n"
-				  "interface was left empty. Please enter valid\n"
+			error = _("The IP address or remote address for the "
+				  "interface was left empty. Please enter valid "
 				  "IP addresses in those fields to continue.");
 		break;
 	case GST_CONNECTION_PPP:
 		if (!cxn->update_dns && strempty (cxn->dns1))
-			error = _("You chose to set the DNS servers for this\n"
-				  "connection manually, but left the IP\n"
-				  "address for the primary DNS empty. Please\n"
-				  "enter the IP for the primary DNS or uncheck\n"
+			error = _("You chose to set the DNS servers for this "
+				  "connection manually, but left the IP "
+				  "address for the primary DNS empty. Please "
+				  "enter the IP for the primary DNS or uncheck "
 				  "the manual DNS option.");
 		break;
 	default:

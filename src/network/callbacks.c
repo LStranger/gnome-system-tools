@@ -598,7 +598,7 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 						 GTK_MESSAGE_INFO,
 						 GTK_BUTTONS_OK,
 						 _("You don't have SMB support installed. Please install "
-						   "SMB support\nin the system to enable windows networking."));
+						   "SMB support in the system to enable windows networking."));
 
 		gtk_window_set_title (GTK_WINDOW (dialog), _("SMB support missing."));
 		gtk_dialog_run (GTK_DIALOG (dialog));
@@ -651,9 +651,9 @@ callbacks_check_hostname_hook (GstDialog *dialog, gpointer data)
 
 	if (strcmp (hostname_new, hostname_old))
 	{
-		gchar *text = _("The host name has changed. This will prevent you\n"
-				"from launching new applications, and so you will\n"
-				"have to log in again.\n\nContinue anyway?");
+		gchar *text = _("The host name has changed. This will prevent you "
+				"from launching new applications, and so you will "
+				"have to log in again. Continue anyway?");
 		GtkWidget *message;
 
 		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
@@ -699,8 +699,8 @@ callbacks_check_dialer (GtkWindow *window, GstTool *tool)
 	
 	if (!has_dialer)
 	{
-		gchar *text = _("wvdial could not be found on your system.\n"
-				"You need to install wvdial, or the PPP (modem)\n"
+		gchar *text = _("wvdial could not be found on your system. "
+				"You need to install wvdial, or the PPP (modem) "
 				"connections will not activate.");
 		GtkWidget *message;
 
@@ -726,9 +726,9 @@ callbacks_check_dialer_hook (GstDialog *dialog, gpointer data)
 	has_dialer = connection_list_has_dialer (tool);
 	if (!has_dialer)
 	{
-		gchar *text = _("wvdial could not be found on your system.\n"
-				"You need to install wvdial, or the PPP (modem)\n"
-				"connections will not activate.\n\nContinue anyway?");
+		gchar *text = _("wvdial could not be found on your system. "
+				"You need to install wvdial, or the PPP (modem) "
+				"connections will not activate. Continue anyway?");
 		gint res;
 		GtkWidget *message;
 
@@ -753,9 +753,9 @@ callbacks_check_dialer_hook (GstDialog *dialog, gpointer data)
 static gboolean
 callbacks_disabled_gatewaydev_warn (GstTool *tool, GstConnection *cxn, gboolean *ignore_enabled)
 {
-	gchar *text = _("The default gateway device is not activated. This\n"
-			"will prevent you from connecting to the Internet.\n"
-			"\nContinue anyway?");
+	gchar *text = _("The default gateway device is not activated. This "
+			"will prevent you from connecting to the Internet. "
+			"Continue anyway?");
 	gint res;
 	GtkWidget *message;
 
@@ -808,9 +808,9 @@ callbacks_check_manual_gatewaydev (GstTool *tool)
 		case GST_CONNECTION_ERROR_STATIC:
 		{
 			GtkWidget *dialog;
-			gchar *txt = _("The default gateway device is missing gateway\n"
-				       "information. Please provide this information to\n"
-				       "proceed, or choose another default gateway device.\n");
+			gchar *txt = _("The default gateway device is missing gateway "
+				       "information. Please provide this information to "
+				       "proceed, or choose another default gateway device. ");
 
 			dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 							 GTK_DIALOG_MODAL,
@@ -854,9 +854,9 @@ gboolean
 callbacks_tool_not_found_hook (GstTool *tool, GstReportLine *rline, gpointer data)
 {
 	if (! strcmp (rline->argv[0], "redhat-config-network-cmd")) {
-		gchar *text = _("The program redhat-config-network-cmd could not\n"
-				"be found. This could render missing connections\n"
-				"under the connections tab. Please install the\n"
+		gchar *text = _("The program redhat-config-network-cmd could not "
+				"be found. This could render missing connections "
+				"under the connections tab. Please install the "
 				"redhat-config-network rpm package to avoid this.");
 		GtkWidget *message;
 

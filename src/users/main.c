@@ -99,7 +99,6 @@ static const GstWidgetPolicy policies[] = {
 /*	{ "user_settings_advanced", GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },*/
 	{ "user_delete",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "user_settings",          GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-/* Hiding user_profiles for now, until next release when profiles UI is given a face-lift */
 	{ "user_profiles",          GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "groups_table",           GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "group_new",              GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
@@ -108,10 +107,6 @@ static const GstWidgetPolicy policies[] = {
 	{ "profile_new",            GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "profile_delete",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "profile_settings",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "network_user_new",       GST_WIDGET_MODE_INSENSITIVE, GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "network_group_new",      GST_WIDGET_MODE_INSENSITIVE, GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "network_delete",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "network_settings",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "showall",                GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ NULL }
 };
