@@ -8,6 +8,7 @@ pixmaps_DATA = \
 	16_ethernet.xpm				\
 	16_loopback.xpm				\
 	16_ppp.xpm				\
+	16_plip.xpm				\
 	connection-ethernet.png 		\
 	connection-modem.png 			\
 	disks.png  				\

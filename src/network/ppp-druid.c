@@ -425,7 +425,5 @@ void ppp_druid_gui_to_xml(XstTool *tool, gpointer data)
 	PppDruid *ppp = data;
 	xmlNode *root = xst_xml_doc_get_root (tool->config);
 
-	g_print ("Ok, apply was clicked\n");
-
 	connection_save_to_node (ppp->cxn, root);
 }

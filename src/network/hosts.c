@@ -116,15 +116,12 @@ xst_hosts_unselect_all (void)
 	GtkCList *clist;
 	GtkWidget *alias;
 
-	g_print ("Unselect all\n");
-	
 	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list"));
 	alias = xst_dialog_get_widget (tool->main_dialog, "alias");
 
 	updating = TRUE;
 
 	gtk_clist_unselect_all (clist);
-	g_print ("b1\n");
 	gtk_editable_delete_text (GTK_EDITABLE (alias), 0, -1);
 
 	updating = FALSE;
@@ -193,10 +190,7 @@ xst_hosts_update_sensitivity (void)
 	gchar *ip_str;
 	gchar *alias_str;
 
-	g_print ("In\n");
-	
 	if (updating) {
-		g_print ("Updating .. return\n");
 		return;
 	}
 	
@@ -229,8 +223,6 @@ xst_hosts_update_sensitivity (void)
 
 	g_free (ip_str);
 	g_free (alias_str);
-
-	g_print ("Out\n");
 }
 
 
@@ -244,13 +236,10 @@ xst_hosts_clear_entries (void)
 	ip    = xst_dialog_get_widget (tool->main_dialog, "ip");
 	alias = xst_dialog_get_widget (tool->main_dialog, "alias");
 
-	g_print ("Clear entries 1\n");
 	updating = TRUE;
-	g_print ("b2\n");
 	gtk_editable_delete_text (GTK_EDITABLE (ip), 0, -1);
 	gtk_editable_delete_text (GTK_EDITABLE (alias), 0, -1);
 	updating = FALSE;
-	g_print ("Clear entries 3\n");
 }
 
 
@@ -269,7 +258,6 @@ on_hosts_ip_changed (GtkEditable *ip, gpointer not_used)
 	ip_str = gtk_editable_get_chars (ip,  0, -1);
 	row = xst_hosts_ip_is_in_list (ip_str);
 
-	g_print ("row %i row selected %i\n", row, hosts_row_selected);
 	if (row != hosts_row_selected)
 		xst_hosts_select_row (row);
 
@@ -280,8 +268,6 @@ on_hosts_alias_changed (GtkEditable *w, gpointer not_used)
 {
 	if (updating)
 		return;
-	
-	g_print ("Alias changed\n");
 }
 
 
@@ -293,7 +279,6 @@ on_hosts_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEvent * 
 	hosts_row_selected = -1;
 
 	w = xst_dialog_get_widget (tool->main_dialog, "alias");
-	g_print ("b4\n");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 
 	if (updating)
@@ -303,13 +288,11 @@ on_hosts_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEvent * 
 	
 	/* Load aliases into entry widget */
 	w = xst_dialog_get_widget (tool->main_dialog, "ip");
-	g_print ("b5\n");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 
 	updating = FALSE;
 
 	xst_hosts_update_sensitivity ();
-
 }
 
 void

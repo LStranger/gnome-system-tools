@@ -315,8 +315,6 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 	/* First remove any old branches in the XML tree */
 	xst_xml_element_destroy_children_by_name (root, node_name);
 
-	g_print ("Foo\n");
-	
 	rows = GTK_CLIST (widget)->rows;
 	
 	for (row = 0; row < rows; row++)
@@ -350,8 +348,6 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 		
 		g_strfreev (col1_elem);
 	}
-
-	g_print ("END: Foo\n");
 }
 
 static void
@@ -360,7 +356,6 @@ transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 	TransStringCList2 *specs;
 	gint i;
 
-	g_print ("A\n");
 	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
 	{
 		specs = &transfer_string_clist2_table [i];
@@ -407,8 +402,6 @@ transfer_gui_to_xml (XstTool *t, gpointer data)
 {
 	xmlNode *root = xst_xml_doc_get_root (t->config);
 
-	g_print ("Ok, apply was clicked\n");
-	
 	transfer_string_entry_gui_to_xml (root);
 	transfer_string_list_gui_to_xml (root);
 	transfer_string_clist2_gui_to_xml (root);

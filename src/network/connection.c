@@ -44,7 +44,7 @@ static const XstNetworkInterfaceDescription xst_iface_desc [] = {
 	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth"   },
 	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "networking.png",  "wvlan" },
 	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp"   },
-	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "networking.png",  "plip"  },
+	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "16_plip.xpm",  "plip"  },
 	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"    },
 	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "networking.png",  NULL},
 	{ NULL, XST_CONNECTION_UNKNOWN, NULL, NULL}
@@ -572,6 +572,12 @@ connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 	cxn->ppp_options = connection_xml_get_str (node, "ppp_options");
 }
 
+static void
+connection_get_ptp_from_node (xmlNode *node, XstConnection *cxn)
+{
+	cxn->remote_address = connection_xml_get_str (node, "remote_address");
+}
+	
 XstConnection *
 connection_new_from_type_add (XstConnectionType type, xmlNode *root)
 {
@@ -672,9 +678,16 @@ connection_new_from_node (xmlNode *node)
 		cxn->gateway = connection_xml_get_str (node->parent, "gateway");
 	}
 
-	/* PPP stuff */
-	if (cxn->type == XST_CONNECTION_PPP)
+	switch (cxn->type) {
+	case XST_CONNECTION_PPP:
 		connection_get_ppp_from_node (cxn->node, cxn);
+		break;
+	case XST_CONNECTION_PLIP:
+		connection_get_ptp_from_node (cxn->node, cxn);
+		break;
+	default:
+		break;
+	}
 
 	connection_update_row (cxn);
 
@@ -718,6 +731,8 @@ connection_free (XstConnection *cxn)
 	g_free (cxn->dns1);
 	g_free (cxn->dns2);
 	g_free (cxn->ppp_options);
+
+	g_free (cxn->remote_address);
 }
 
 static void
@@ -784,6 +799,21 @@ empty_ppp_adv (XstConnection *cxn)
 }
 
 static void
+empty_ptp (XstConnection *cxn)
+{
+	GET_STR ("ptp_", address);
+	GET_STR ("ptp_", remote_address);
+	GET_STR ("ptp_", netmask);
+
+	g_free (cxn->gateway);
+	if (GTK_TOGGLE_BUTTON (W ("ptp_remote_is_gateway"))->active) {
+		cxn->gateway = g_strdup (cxn->remote_address);
+	} else {
+		cxn->gateway = NULL;
+	}
+}
+
+static void
 connection_config_save (XstConnection *cxn)
 {
 	empty_general (cxn);
@@ -796,6 +826,9 @@ connection_config_save (XstConnection *cxn)
 	case XST_CONNECTION_PPP:
 		empty_ppp (cxn);
 		empty_ppp_adv (cxn);
+		break;
+	case XST_CONNECTION_PLIP:
+		empty_ptp (cxn);
 		break;
 	default:
 		empty_ip (cxn);
@@ -973,6 +1006,23 @@ fill_ppp_adv (XstConnection *cxn)
 }
 
 static void
+fill_ptp (XstConnection *cxn)
+{
+	gboolean state;
+	
+	SET_STR ("ptp_", address);
+	SET_STR ("ptp_", remote_address);
+	SET_STR ("ptp_", netmask);
+
+	if (cxn->gateway && cxn->remote_address && !strcmp (cxn->gateway, cxn->remote_address))
+		state = TRUE;
+	else
+		state = FALSE;
+	
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("ptp_remote_is_gateway")), state);
+}
+
+static void
 hookup_callbacks (XstConnection *cxn)
 {
 	int i;
@@ -1035,15 +1085,15 @@ connection_configure (XstConnection *cxn)
 		fill_ppp (cxn);
 		fill_ppp_adv (cxn);
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-							 gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-											    W ("ip_vbox")));
+					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+								 W ("ip_vbox")));
 	} else {
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-							 gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-											    W ("ppp_vbox")));
+					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+								 W ("ppp_vbox")));
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-							 gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-											    W ("ppp_adv_vbox")));
+					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+								 W ("ppp_adv_vbox")));
 	}
        
 	if (cxn->type == XST_CONNECTION_WVLAN)
@@ -1052,6 +1102,16 @@ connection_configure (XstConnection *cxn)
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
 					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
 								 W ("wvlan_vbox")));
+
+	if (cxn->type == XST_CONNECTION_PLIP) {
+		fill_ptp (cxn);
+		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
+					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+								 W ("ip_vbox")));
+	} else 
+		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
+					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+								 W ("ptp_vbox")));
 
 	cxn->frozen = FALSE;
 
@@ -1109,5 +1169,10 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 		connection_xml_save_str_to_node (node, "dns1", cxn->dns1);
 		connection_xml_save_str_to_node (node, "dns2", cxn->dns2);
 		connection_xml_save_str_to_node (node, "ppp_options", cxn->ppp_options);
+	}
+
+	/* PtP */
+	if (cxn->type == XST_CONNECTION_PLIP) {
+		connection_xml_save_str_to_node (node, "remote_address", cxn->remote_address);
 	}
 }

@@ -94,6 +94,9 @@ typedef struct {
 	gchar *dns1;
 	gchar *dns2;
 	gchar *ppp_options;
+
+	/* PtP (PLIP) */
+	gchar *remote_address;
 } XstConnection;
 
 extern void connection_init_icons (void);
