@@ -24,6 +24,7 @@ pixmaps_DATA = \
 	init-anim-2.png          \
 	init-anim-3.png          \
 	internet-share.png       \
+	internetsharing.png	     \
 	irda-16.png              \
 	irda-48.png              \
 	memory.png               \
