@@ -1577,7 +1577,7 @@ try_show_usage_warning (void)
 		gtk_widget_destroy (dialog);
 	}
 
-	g_free (warning);
+	g_free (warning_title);
 	g_free (key);
 }
 
