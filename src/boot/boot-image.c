@@ -389,10 +389,10 @@ type_to_label (GstBootImageType type)
 
 	for (i = 0; boot_image_type_table[i].label; i++)
 		if (type == boot_image_type_table[i].type)
-			return g_strdup (boot_image_type_table[i].label);
+			return _(boot_image_type_table[i].label);
 
 	g_warning ("type_to_label: unknown type.");
-	return g_strdup (boot_image_type_table[0].label);
+	return _(boot_image_type_table[0].label);
 }
 
 GstBootImageType

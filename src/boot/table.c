@@ -520,7 +520,6 @@ boot_value_set_type (xmlNodePtr node, GstBootImageType type)
 		n0 = gst_xml_element_add (node, "type");
 
 	gst_xml_element_set_content (n0, buf);
-	g_free (buf);
 }
 
 void
