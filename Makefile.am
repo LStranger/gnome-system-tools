@@ -10,7 +10,8 @@ EXTRA_DIST = \
 	gnome-system-tools.spec \
 	intltool-extract.in	\
 	intltool-merge.in 	\
-	intltool-update.in 
+	intltool-update.in 	\
+	gnome-system-tools.pc.in
 
 
 schema_in_files = gnome-system-tools.schemas.in
@@ -20,3 +21,7 @@ schema_DATA = $(schema_in_files:.schemas.in=.schemas)
 
 install-data-local:
 	GCONF_CONFIG_SOURCE=$(GCONF_SCHEMA_CONFIG_SOURCE) $(GCONFTOOL) --makefile-install-rule $(top_builddir)/gnome-system-tools.schemas
+
+pkgconfigdir = $(libdir)/pkgconfig
+pkgconfig_DATA = gnome-system-tools.pc
+
