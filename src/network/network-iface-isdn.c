@@ -33,6 +33,7 @@ struct _GstIfaceIsdnPriv
   
   gboolean default_gw;
   gboolean persist;
+  gboolean noauth;
 };
 
 static void gst_iface_isdn_class_init (GstIfaceIsdnClass *class);
@@ -63,7 +64,8 @@ enum {
   PROP_DIAL_PREFIX,
   PROP_DEFAULT_GW,
   PROP_PERSIST,
-  PROP_SECTION
+  PROP_SECTION,
+  PROP_NOAUTH
 };
 
 static gpointer parent_class;
@@ -162,6 +164,13 @@ gst_iface_isdn_class_init (GstIfaceIsdnClass *class)
                                                          "Whether to persist if the connection fails",
                                                          FALSE,
                                                          G_PARAM_READWRITE));
+  g_object_class_install_property (object_class,
+                                   PROP_NOAUTH,
+                                   g_param_spec_boolean ("iface_noauth",
+                                                         "Iface no auth",
+                                                         "Whether the ISP has to authenticate itself or not",
+                                                         TRUE,
+                                                         G_PARAM_READWRITE));
 }
 
 static void
@@ -239,6 +248,9 @@ gst_iface_isdn_set_property (GObject      *object,
     case PROP_PERSIST:
       iface->_priv->persist = g_value_get_boolean (value);
       break;
+    case PROP_NOAUTH:
+      iface->_priv->noauth = g_value_get_boolean (value);
+      break;
     }
 }
 
@@ -274,6 +286,9 @@ gst_iface_isdn_get_property (GObject      *object,
       break;
     case PROP_PERSIST:
       g_value_set_boolean (value, iface->_priv->persist);
+      break;
+    case PROP_NOAUTH:
+      g_value_set_boolean (value, iface->_priv->noauth);
       break;
     }
 }
@@ -330,6 +345,7 @@ gst_iface_isdn_impl_get_xml (GstIface *iface, xmlNodePtr node)
 
       gst_xml_element_set_boolean (configuration, "set_default_gw", iface_isdn->_priv->default_gw);
       gst_xml_element_set_boolean (configuration, "persist", iface_isdn->_priv->persist);
+      gst_xml_element_set_boolean (configuration, "noauth",  iface_isdn->_priv->noauth);
     }
   
   GST_IFACE_CLASS (parent_class)->get_xml (iface, node);
@@ -367,6 +383,9 @@ gst_iface_isdn_set_config_from_xml (GstIfaceIsdn *iface,
                 "iface-default-gw", default_gw,
                 "iface-persist", persist,
                 "iface-section", section,
+		/* FIXME: until we add some gui for noauth, it will
+		   be the most sane default, I guess */
+		"iface-noauth", TRUE, 
                 NULL);
 
   g_free (login);
