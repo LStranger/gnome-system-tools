@@ -288,12 +288,15 @@ e_table_create (void)
 	w0 = tool_widget_get ("groups_holder");
 	gtk_container_add (GTK_CONTAINER (w0), group_table);
 	gtk_widget_show (group_table);
+
+	user_actions_set_sensitive (FALSE);
+	group_actions_set_sensitive (FALSE);
 }
 
 void
 e_table_del (gchar del)
 {
-	gint row, nrow;
+	gint row;
 	ETableModel *etm;
 	ETable *table;
 	GList *tmp_list;
@@ -312,20 +315,14 @@ e_table_del (gchar del)
 		row = e_table_get_cursor_row (table);
 		tmp_list = g_list_nth (group_list, row);
 		group_list = g_list_remove (group_list, tmp_list->data);
-		
 	}
 
 	else
 		return;
 	
-	nrow = e_table_get_prev_row (table, row);
-	if (nrow < 0)
-		nrow = e_table_get_next_row (table, row);
-
 	etm = E_TABLE_MODEL (table->model);
 	e_table_model_row_deleted (etm, row);
-
-	e_table_set_cursor_row (table, nrow);
+	e_table_model_changed (etm);
 }
 
 void
@@ -333,13 +330,13 @@ e_table_changed (gchar change, gboolean new)
 {
 	ETableModel *etm;
 	ETable *table;
-	
+	gint row = 0;
+
 	if (change == USER)
 		table = E_TABLE (user_table);
 
 	else if (change == GROUP)
 		table = E_TABLE (group_table);
-
 	else
 		return;
 
@@ -347,14 +344,18 @@ e_table_changed (gchar change, gboolean new)
 
 	if (new)
 	{
-		e_table_model_append_row (etm, NULL, 0);
-		e_table_model_row_inserted (etm, 0);
+		e_table_model_append_row (etm, NULL, row);
+		e_table_model_row_inserted (etm, row);
 	}
 	else
 	{
-		gint row = e_table_get_cursor_row (table);
+		row = e_table_get_cursor_row (table);
 		e_table_model_row_changed (etm, row);
 	}
+
+	e_table_model_changed (etm);
+	e_table_set_cursor_row (table, row);
+	
 }
 
 void *

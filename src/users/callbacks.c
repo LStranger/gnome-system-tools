@@ -168,11 +168,20 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	user *u;
 
 	g_return_if_fail (tool_get_access());
-	
-	u = e_table_get (USER);
-	txt = g_strdup_printf (_("Are you sure you want to delete user %s?"), u->login);
+	g_return_if_fail (u = e_table_get (USER));
+
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
-	
+
+	if (!strcmp (u->login, "root"))
+	{
+		txt = g_strdup ("You shouldn't delete root user!");
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
+		gnome_dialog_run (dialog);
+		g_free (txt);
+		return;
+	}
+
+	txt = g_strdup_printf (_("Are you sure you want to delete user %s?"), u->login);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
 	g_free (txt);
@@ -183,6 +192,9 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 	{
 		e_table_del (USER);
 		tool_set_modified (TRUE);
+		user_actions_set_sensitive (FALSE);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")),
+				"Settings for the selected user");
 	}
 
 }
@@ -248,9 +260,18 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	g_return_if_fail (tool_get_access());
 	g_return_if_fail (g = e_table_get (GROUP));
 
-	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), g->name);
 	parent = GTK_WINDOW (tool_widget_get ("users_admin"));
+
+	if (!strcmp (g->name, "root"))
+	{
+		txt = g_strdup ("You shouldn't delete root group!");
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, parent));
+		gnome_dialog_run (dialog);
+		g_free (txt);
+		return;
+	}
 	
+	txt = g_strdup_printf (_("Are you sure you want to delete group %s?"), g->name);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
 	gnome_dialog_run (dialog);
 	g_free (txt);
@@ -261,6 +282,9 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 	{
 		e_table_del (GROUP);
 		tool_set_modified (TRUE);
+		group_actions_set_sensitive (FALSE);
+		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("group_settings_frame")),
+				"Settings for the selected group");
 	}
 }
 
