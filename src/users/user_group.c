@@ -338,7 +338,7 @@ check_user_login (xmlNodePtr node, const gchar *login)
 
 	/* if !exist. */
 	else if (node_exists (node, "login", login))
-		buf = g_strdup (_("Username already exists."));
+		buf = g_strdup_printf (_("Username \"%s\" already exists.\n\nPlease select a different Username"), login);
 
 	return buf;
 }

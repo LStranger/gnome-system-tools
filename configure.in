@@ -150,14 +150,11 @@ dnl ========================================================
 dnl END : Translations
 dnl ========================================================
 
-dnl ==============================================================
-dnl Set SCRIPTS_DIR & PIXMAPS_DIR 
-dnl ==============================================================
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${ac_default_prefix}/${DATADIRNAME}/setup-tool-backends/scripts")
   scriptsdir="${ac_default_prefix}/${DATADIRNAME}/setup-tool-backends/scripts"
 else
-  AC_DEFINE_UNQUOTED(SCRIPTS_DIR, "${prefix}/${DATADIRNAME}/setup-tool-backends/scripts")
+  AC_DEFINE_UNQUOTED(SCRIPTS_DIR,"${prefix}/${DATADIRNAME}/setup-tool-backends/scripts")
   scriptsdir="${prefix}/${DATADIRNAME}/setup-tool-backends/scripts"
 fi
 
@@ -274,3 +271,11 @@ doc/networking/Makefile
 doc/shares/Makefile
 po/Makefile.in
 ])
+
+echo "
+
+Configuration (XST):
+
+	The scripts are expected at : ${scriptsdir}
+	Compiler:		${CC} 
+"
