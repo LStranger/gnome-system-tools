@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Jacob Berkman <jacob@ximian.com>
+ *          Arturo Espinosa <arturo@ximian.com>
  */
 
 #include <config.h>
@@ -452,8 +453,8 @@ connection_init_icons (void)
 		   &active_pm[1], &active_mask[1]);
 }
 
-static void
-update_row (XstConnection *cxn)
+void
+connection_update_row (XstConnection *cxn)
 {
 	GtkWidget *clist;
 	int row;
@@ -492,7 +493,7 @@ add_connection_to_list (XstConnection *cxn, gpointer null)
 	gtk_clist_set_row_height (GTK_CLIST (clist), 24);*/
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
 
-	update_row (cxn);
+	connection_update_row (cxn);
 }
 
 /*static void
@@ -653,7 +654,7 @@ connection_new_from_node (xmlNode *node)
 	if (cxn->type == XST_CONNECTION_PPP)
 		connection_get_ppp_from_node (cxn->node, cxn);
 
-	update_row (cxn);
+	connection_update_row (cxn);
 
 	return cxn;
 }
@@ -780,7 +781,7 @@ connection_config_save (XstConnection *cxn)
 	}
 
 	connection_set_modified (cxn, FALSE);
-	update_row (cxn);	
+	connection_update_row (cxn);	
 }
 
 static void
@@ -962,7 +963,8 @@ hookup_callbacks (XstConnection *cxn)
 		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
 		{ "on_ppp_peerdns_toggled", on_ppp_peerdns_toggled },
-		{ NULL } };
+		{ NULL }
+	};
 
 	for (i = 0; signals[i].hname; i++)
 		glade_xml_signal_connect_data (cxn->xml, signals[i].hname,

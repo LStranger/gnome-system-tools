@@ -17,6 +17,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
  * Authors: Jacob Berkman <jacob@ximian.com>
+ *          Arturo Espinosa <arturo@ximian.com>
  */
 
 #ifndef CONNECTION_H
@@ -102,11 +103,9 @@ extern XstConnection *connection_new_from_type (XstConnectionType type, xmlNode 
 extern XstConnection *connection_new_from_type_add (XstConnectionType type, xmlNode *root);
 extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection);
 extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
-
+extern void connection_update_row (XstConnection *cxn);
 extern void connection_free (XstConnection *);
-
 extern void connection_configure (XstConnection *cxn);
-
 extern void connection_save_to_node (XstConnection *cxn, xmlNode *node);
 
 #endif /* CONNECTION_H */

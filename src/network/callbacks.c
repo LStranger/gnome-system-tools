@@ -57,8 +57,17 @@ scrolled_window_scroll_bottom (GtkWidget *sw)
 static void
 connection_actions_set_sensitive (gboolean state)
 {
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "connection_delete"), state);
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "connection_configure"), state); 
+	gint i;
+	gchar *names[] = {
+		"connection_delete",
+		"connection_configure",
+		"connection_activate",
+		"connection_deactivate",
+		NULL
+	};
+
+	for (i = 0; names[i]; i++)
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, names[i]), state);
 }
 
 void 
@@ -81,9 +90,11 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 		NULL} ;
 
 	char *unsensitive[] = {
+		"statichost_add",
 		"connection_delete",
 		"connection_configure",
-		"statichost_add",
+		"connection_activate",
+		"connection_deactivate",
 		"statichost_update",
 		"statichost_delete",
 		NULL };
@@ -264,43 +275,6 @@ on_connection_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEve
 	connection_actions_set_sensitive (FALSE);
 }
 
-/* in my younger years i would do this function in 1 line */
-void
-on_connection_configure_clicked (GtkWidget *w, gpointer null)
-{
-	GtkWidget *clist;
-	XstConnection *cxn;
-
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
-
-	connection_configure (cxn);
-}
-
-void
-on_connection_delete_clicked (GtkWidget *w, gpointer null)
-{
-	GtkWidget *clist, *d;
-	XstConnection *cxn;
-	gint res;
-	gchar *txt;
-
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
-
-	txt = g_strdup_printf (_("Remove connection %s: ``%s''?"), cxn->dev, cxn->name);
-	d = gnome_question_dialog_parented (txt, NULL, NULL,
-								 GTK_WINDOW (tool->main_dialog));
-	g_free (txt);
-	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
-	if (res)
-		return;
-
-	connection_free (cxn);
-	gtk_clist_remove (GTK_CLIST (clist), connection_row_selected);
-	xst_dialog_modify (tool->main_dialog);
-}
-
 void
 on_connection_add_clicked (GtkWidget *w, gpointer null)
 {
@@ -343,6 +317,67 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	gtk_clist_select_row (GTK_CLIST (clist), row, 0);
 	scrolled_window_scroll_bottom (xst_dialog_get_widget (tool->main_dialog, "connection_list_sw"));
 	connection_configure (cxn);
+}
+
+void
+on_connection_delete_clicked (GtkWidget *w, gpointer null)
+{
+	GtkWidget *clist, *d;
+	XstConnection *cxn;
+	gint res;
+	gchar *txt;
+
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
+
+	txt = g_strdup_printf (_("Remove connection %s: ``%s''?"), cxn->dev, cxn->name);
+	d = gnome_question_dialog_parented (txt, NULL, NULL,
+								 GTK_WINDOW (tool->main_dialog));
+	g_free (txt);
+	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
+	if (res)
+		return;
+
+	connection_free (cxn);
+	gtk_clist_remove (GTK_CLIST (clist), connection_row_selected);
+	xst_dialog_modify (tool->main_dialog);
+}
+
+/* in my younger years i would do this function in 1 line */
+void
+on_connection_configure_clicked (GtkWidget *w, gpointer null)
+{
+	GtkWidget *clist;
+	XstConnection *cxn;
+
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
+
+	connection_configure (cxn);
+}
+
+void
+on_connection_activate_clicked (GtkWidget *w, gpointer null)
+{
+	GtkWidget *clist;
+	XstConnection *cxn;
+
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
+	cxn->enabled = TRUE;
+	connection_update_row (cxn);
+}
+
+void
+on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
+{
+	GtkWidget *clist;
+	XstConnection *cxn;
+
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
+	cxn->enabled = FALSE;
+	connection_update_row (cxn);
 }
 
 void

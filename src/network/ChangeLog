@@ -1,5 +1,12 @@
 2001-03-01  Arturo Espinosa Aldama  <arturo@ximian.com>
 
+	* main.c: added activation callbacks to table.
+
+	* connection.c (connection_update_row): Made this function public.
+
+	* callbacks.c (on_connection_deactivate_clicked): activation callback.
+	(on_connection_activate_clicked): activation callback.
+
 	* connection.c (load_icon): scale to 16x16, not 24x24. Now the list
 	looks much better.
 	* moved to new unified xst_iface_desc table, instead of a bunch of

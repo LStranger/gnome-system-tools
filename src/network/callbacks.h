@@ -54,9 +54,11 @@ void on_network_notebook_switch_page (GtkWidget *notebook,
 
 gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
 
-void on_connection_configure_clicked (GtkWidget *w, gpointer null);
-void on_connection_delete_clicked (GtkWidget *w, gpointer null);
 void on_connection_add_clicked (GtkWidget *w, gpointer null);
+void on_connection_delete_clicked (GtkWidget *w, gpointer null);
+void on_connection_configure_clicked (GtkWidget *w, gpointer null);
+void on_connection_activate_clicked (GtkWidget *w, gpointer null);
+void on_connection_deactivate_clicked (GtkWidget *w, gpointer null);
 void on_connection_list_select_row (GtkCList *clist, gint row, gint column,
 				    GdkEvent * event, gpointer user_data);
 void on_connection_list_unselect_row (GtkCList *clist, gint row, gint column,
