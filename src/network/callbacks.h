@@ -68,6 +68,8 @@ void on_connection_configure_clicked (GtkWidget *w, gpointer null);
 void on_connection_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget);
 void on_connection_popup_configure_activate (gpointer callback_data, guint action, GtkWidget *widget);
 void on_connection_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_connection_activate_button_clicked (GtkWidget*, gpointer);
+void on_connection_deactivate_button_clicked (GtkWidget*, gpointer);
 
 void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
 void on_samba_use_toggled (GtkWidget *w, gpointer null);

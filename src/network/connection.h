@@ -168,7 +168,7 @@ extern void connection_save_to_node (GstConnection *cxn, xmlNode *node);
 GstConnection *connection_list_get_active (void);
 GstConnection *connection_list_get_by_path (GtkTreePath*);
 void           connection_list_remove     (GstConnection *cxn);
-void           connection_activate        (GstConnection *cxn, gboolean activate);
+void           connection_show_activated  (GstConnection *cxn, gboolean activate);
 void           connection_list_update     (void);
 gboolean       connection_list_has_dialer (GstTool *tool);
 void           connection_list_save       (GstTool *tool);
@@ -184,6 +184,7 @@ void connection_set_bcast_and_network (GstConnection *cxn);
 
 gboolean connection_poll_stat (GstTool*);
 gchar*   connection_autodetect_modem (void);
+void     connection_enable (GstConnection*, gboolean);
 
 gint connection_get_count (GstTool*);
 

@@ -410,80 +410,35 @@ on_connection_popup_delete_activate (gpointer callback_data, guint action, GtkWi
 }
 
 static void
-activate_directive_cb (GstDirectiveEntry *entry)
-{
-	gchar *file = entry->data;
-
-	gst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
-				    file, "1", NULL);
-	g_free (entry->report_sign);
-}
-
-static void
 on_connection_activate_clicked (GtkWidget *w, GtkTreePath *path, gpointer null)
 {
 	GstConnection *cxn;
-	gchar *sign, *file;
-	gboolean modified = gst_dialog_get_modified (tool->main_dialog);
 
 	cxn = connection_list_get_by_path (path);
-
-	file = (cxn->file)? cxn->file: cxn->dev;
-	gst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
-	
-	gst_dialog_set_modified (tool->main_dialog, modified);
-	
-/*	if (gst_dialog_get_modified (tool->main_dialog)) {
-		gst_tool_save (tool);
-		gst_dialog_set_modified (tool->main_dialog, FALSE);
-	} else {
-		file = (cxn->file)? cxn->file: cxn->dev;
-		sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
-		gst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
-	}*/
-
-	connection_activate (cxn, TRUE);
-	cxn->activation = ACTIVATION_UP;
+	connection_enable (cxn, TRUE);
 }
 
-static void
-deactivate_directive_cb (GstDirectiveEntry *entry)
+void
+on_connection_activate_button_clicked (GtkWidget *widget, gpointer data)
 {
-	gchar *file = entry->data;
-	
-	gst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
-				    file, "0", NULL);
-	g_free (entry->report_sign);
+	GstConnection *cxn = connection_list_get_active ();
+	connection_enable (cxn, TRUE);
 }
 
 static void
 on_connection_deactivate_clicked (GtkWidget *w, GtkTreePath *path, gpointer null)
 {
 	GstConnection *cxn;
-	gchar *sign, *file;
-	gboolean modified = gst_dialog_get_modified (tool->main_dialog);
 
 	cxn = connection_list_get_by_path (path);
-	
-	file = (cxn->file)? cxn->file: cxn->dev;
-	gst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
-	
-	gst_dialog_set_modified (tool->main_dialog, modified);
-	
-/*	cxn = connection_list_get_active ();
-	connection_activate (cxn, FALSE);
+	connection_enable (cxn, FALSE);
+}
 
-	if (gst_dialog_get_modified (tool->main_dialog)) {
-		gst_tool_save (tool);
-		gst_dialog_set_modified (tool->main_dialog, FALSE);
-	} else {
-		file = (cxn->file)? cxn->file: cxn->dev;
-		sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
-		gst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
-	}*/
-
-	connection_activate (cxn, FALSE);
-	cxn->activation = ACTIVATION_DOWN;
+void
+on_connection_deactivate_button_clicked (GtkWidget *widget, gpointer data)
+{
+	GstConnection *cxn = connection_list_get_active ();
+	connection_enable (cxn, FALSE);
 }
 
 void

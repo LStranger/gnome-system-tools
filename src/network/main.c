@@ -48,6 +48,8 @@ GstDialogSignal signals[] = {
 	{ "connection_add",          "clicked",         G_CALLBACK (on_connection_add_clicked) },
 	{ "connection_delete",       "clicked",         G_CALLBACK (on_connection_delete_clicked) },
 	{ "connection_configure",    "clicked",         G_CALLBACK (on_connection_configure_clicked) },
+	{ "connection_activate",     "clicked",         G_CALLBACK (on_connection_activate_button_clicked) },
+	{ "connection_deactivate",   "clicked",         G_CALLBACK (on_connection_deactivate_button_clicked) },
 	{ "connection_def_gw_omenu", "changed",         G_CALLBACK (gst_dialog_modify_cb) },
 	{ "domain",                  "changed",         G_CALLBACK (gst_dialog_modify_cb) },
 /*	{ "ip",                      "changed",         G_CALLBACK (gst_dialog_modify_cb) },*/
@@ -162,11 +164,10 @@ GstDialogSignal signals_after[] = {
 
 static const GstWidgetPolicy policies[] = {
 	/* Name                      Basic                        Advanced           Require-Root   Default */
-	{ "connections_bbox",        GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "connection_delete",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "connection_configure",    GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-/*	{ "connection_activate",     GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_deactivate",   GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },*/
+	{ "connection_activate",     GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_deactivate",   GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "connection_def_gw_hbox",  GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "statichost_table",        GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "statichost_add",          GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
@@ -176,8 +177,7 @@ static const GstWidgetPolicy policies[] = {
 	{ "smbdesc",                 GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
 	{ "workgroup_label",         GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
 	{ "workgroup",               GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
-	{ "wins_use",       GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
-/*	{ "samba_frame",             GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },*/
+	{ "wins_use",                GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, FALSE },
 	{ "winsserver",              GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "network_profiles_button", GST_WIDGET_MODE_SENSITIVE,   GST_WIDGET_MODE_SENSITIVE, TRUE, TRUE  },
 	{ NULL }

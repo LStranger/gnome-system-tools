@@ -1,3 +1,15 @@
+2003-12-14  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* callbacks.[ch]: (activate_directive_cb), (deactivate_directive_cb):
+	  moved functions to connection.c.
+	  (on_connection_de/activate_button_clicked): added callbacks
+	* connection.[ch]: (de/activate_directive_cb): moved from callbacks.c
+	  (connection_enable): added, this is the function that queues the
+	  "enable_iface" directive to the backend.
+	  s/connection_activate/connection_show_activated/
+	  Code improvements
+	* main.c: added the widgets
+
 2003-12-12  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* network.desktop.in.in: define X-GNOME-Bugzilla-*, added patch by

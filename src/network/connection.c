@@ -803,6 +803,44 @@ connection_poll_stat (GstTool *tool)
 	return TRUE;
 }
 
+static void
+activate_directive_cb (GstDirectiveEntry *entry)
+{
+	gchar *file = entry->data;
+
+	gst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
+				    file, "1", NULL);
+	g_free (entry->report_sign);
+}
+
+static void
+deactivate_directive_cb (GstDirectiveEntry *entry)
+{
+	gchar *file = entry->data;
+	
+	gst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
+				    file, "0", NULL);
+	g_free (entry->report_sign);
+}
+
+void
+connection_enable (GstConnection *cxn, gboolean enable)
+{
+	gchar *file;
+	
+	file = (cxn->file)? cxn->file: cxn->dev;
+
+	if (enable) {
+		gst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
+		cxn->activation = ACTIVATION_UP;
+	} else {
+		gst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
+		cxn->activation = ACTIVATION_DOWN;
+	}
+	
+	connection_show_activated (cxn, enable);
+}
+
 GstConnection *
 connection_find_by_dev (GtkWidget *list, gchar *dev)
 {
@@ -1212,7 +1250,7 @@ connection_default_gw_set_auto (GstTool *tool)
 }
 
 void
-connection_activate (GstConnection *cxn, gboolean activate)
+connection_show_activated (GstConnection *cxn, gboolean activate)
 {
 	g_return_if_fail (cxn != NULL);
 
@@ -2033,16 +2071,13 @@ connection_actions_set_sensitive (gboolean state)
 	gchar *names[] = {
 		"connection_delete",
 		"connection_configure",
+		"connection_activate",
+		"connection_deactivate",
 		NULL
 	};
 
 	for (i = 0; names[i]; i++)
 		gst_dialog_widget_set_user_sensitive (tool->main_dialog, names[i], state);
-	
-	if (state == FALSE)
-	{
-		gst_dialog_widget_set_user_sensitive (tool->main_dialog, "connection_configure", TRUE);
-	}
 }
 
 void
