@@ -563,8 +563,9 @@ node_exists (xmlNodePtr node, const gchar *name, const gchar *val)
 GList *
 get_group_users (xmlNodePtr group_node)
 {
-	GList *userlist = NULL;
-	xmlNodePtr node, u;
+	GList      *userlist = NULL;
+	xmlNodePtr  node, u;
+	gchar      *user;
 
 	g_return_val_if_fail (group_node != NULL, NULL);
 
@@ -573,7 +574,8 @@ get_group_users (xmlNodePtr group_node)
 		return NULL;
 
 	for (u = gst_xml_element_find_first (node, "user"); u; u = gst_xml_element_find_next (u, "user")) {
-		userlist = g_list_insert_sorted (userlist, gst_xml_element_get_content (u), my_strcmp);
+		user = gst_xml_element_get_content (u);
+		userlist = g_list_insert_sorted (userlist, user, my_strcmp);
 	}
 
 	return userlist;

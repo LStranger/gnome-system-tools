@@ -140,6 +140,7 @@ combo_add_shells (GtkWidget *combo)
 	     node = gst_xml_element_find_next (node, "shell")) {
 		str = gst_xml_element_get_content (node);
 		gtk_combo_box_append_text (GTK_COMBO_BOX (combo), str);
+		g_free (str);
 	}
 }
 
