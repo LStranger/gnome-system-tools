@@ -110,7 +110,10 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 
 	xd->complexity = c;
 
-	xst_conf_set_integer (xd->tool, "complexity", xd->complexity);
+	if (xd->complexity == XST_DIALOG_ADVANCED)
+		xst_conf_set_boolean (xd->tool, "advanced_mode", TRUE);
+	else
+		xst_conf_set_boolean (xd->tool, "advanced_mode", FALSE);
 
 	apply_widget_policies (xd);
 
@@ -562,7 +565,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	GladeXML *xml;
 	GtkWidget *w;
 	GtkStockItem item;
-	gint val;
+	gboolean val;
 	char *s;
 
 	g_return_if_fail (dialog != NULL);
@@ -623,8 +626,8 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gtk_widget_hide (dialog->complexity_button);
 
 	dialog->complexity = XST_DIALOG_NONE;
-	val = xst_conf_get_integer (dialog->tool, "complexity");
-	if (val < 0)
+	val = xst_conf_get_boolean (dialog->tool, "advanced_mode");
+	if (val == FALSE)
 		val = XST_DIALOG_BASIC;
 
 	xst_dialog_set_complexity (dialog, val);

@@ -41,6 +41,8 @@
 #include <gnome.h>
 #include <libgnomeui/gnome-window-icon.h>
 
+#include <gconf/gconf-client.h>
+
 #include <stdio.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -1625,8 +1627,11 @@ authenticate (int argc, char *argv[])
 static void
 try_show_usage_warning (void)
 {
-	gchar *key;
+	gchar *key, *version_key;;
 	gboolean value;
+	gchar *version;
+	GConfClient *client;
+	GError *error = NULL;
 	gchar *warning = g_strdup_printf(_("Welcome to the %s prerelease of the "
 		  "GNOME System Tools.\n\n"
 		  "This is still a work in progress, and so it may have serious bugs.\n"
@@ -1635,11 +1640,17 @@ try_show_usage_warning (void)
 		  "You have been warned. Thank you for trying out this prerelease of\n"
 		  "the GNOME System Tools!\n\n"
 		  "--\nThe GNOME System Tools team"), VERSION);
-	key = g_strjoin ("/", XST_CONF_ROOT, "global", "previously-run-" VERSION, NULL);
 
-	value = gnome_config_get_bool (key);
+	client = gconf_client_get_default ();
 
-	if (!value)
+	version_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "last-version", NULL);
+	key = g_strjoin ("/", GST_GCONF_ROOT, "global", "show_warning", NULL);
+
+
+	value = gconf_client_get_bool (client, key, &error);
+	version = gconf_client_get_string (client, version_key, &error);
+
+	if ((value == TRUE) || (strcmp (version, VERSION) != 0))
 	{
 		GtkWidget *dialog, *label, *image, *hbox;
 		GtkWidget *checkbox;
@@ -1668,9 +1679,9 @@ try_show_usage_warning (void)
 		
 		gtk_widget_show_all (dialog);
 		if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
-			if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox))) {
-				gnome_config_set_bool (key, TRUE);
-				gnome_config_sync ();
+			if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox)) == TRUE) {
+				gconf_client_set_bool (client, key, FALSE, &error);
+				gconf_client_set_string (client, version_key, VERSION, &error);
 			}
 		}
 		gtk_widget_hide (dialog);
@@ -1724,7 +1735,6 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 				      _("GNOME System Tools"),
 				      NULL);
 	
-
 	if (geteuid () == 0) {
 		root_access = ROOT_ACCESS_REAL;
 #ifdef XST_DEBUG

@@ -82,6 +82,7 @@ PKG_CHECK_MODULES(XST_DEPENDS,[
 			   libgnomeui-2.0 >= 1.109.0
 			   libglade-2.0 >= 1.99.5
 			   libxml-2.0 >= 2.4.12
+			   gconf-2.0 >= 2.2.0
 			   ])
 
 dnl =====================================================
@@ -148,6 +149,22 @@ dnl ==============================================================
 dnl END: Set SCRIPTS_DIR & PIXMAPS_DIR 
 dnl ==============================================================
 
+ dnl =====================================================
+dnl GCONF
+dnl =====================================================
+
+AC_PATH_PROG(GCONFTOOL, gconftool-2, no)
+
+if test x"$GCONFTOOL" = xno; then
+AC_MSG_ERROR([gconftool-2 executable not found in your path - should be installed with GConf])
+fi
+     
+AM_GCONF_SOURCE_2
+
+dnl =====================================================
+dnl END: GCONF
+dnl =====================================================
+    
 dnl =====================================================
 dnl XST_LIBS & XST_CFLAGS 
 dnl =====================================================

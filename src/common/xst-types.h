@@ -25,7 +25,7 @@
 #include <glib.h>
 #include <libxml/tree.h>
 
-#define XST_CONF_ROOT "/xst"
+#define GST_GCONF_ROOT "/apps/gnome-system-tools"
 
 typedef enum {
 	XST_DIALOG_BASIC,

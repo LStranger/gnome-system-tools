@@ -21,6 +21,7 @@
 
 #include <config.h>
 #include <gnome.h>
+#include <gconf/gconf-client.h>
 
 #include "xst-conf.h"
 #include "xst-tool.h"
@@ -31,17 +32,10 @@ xst_conf_make_key (XstTool *tool, const gchar *local_key)
 {
 	gchar *key;
 
-	key = g_strjoin ("/", XST_CONF_ROOT, tool->name, local_key, NULL);
+	key = g_strjoin ("/", GST_GCONF_ROOT, tool->name, local_key, NULL);
 
 	return key;
 }
-
-static void
-xst_conf_save (void)
-{
-	gnome_config_sync ();
-}
-
 
 /**
  * xst_conf_set_boolean:
@@ -56,17 +50,22 @@ void
 xst_conf_set_boolean (XstTool *tool, const gchar *key, gboolean value)
 {
 	gchar *main_key;
-	
+	GConfClient* client;
+        GError *error = NULL;
+
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (XST_IS_TOOL (tool));
 	g_return_if_fail (key != NULL);
 
+	client = gconf_client_get_default ();
+
 	main_key = xst_conf_make_key (tool, key);
+
+	gconf_client_set_bool (client, main_key, value, &error);
 
 	gnome_config_set_bool (main_key, value);
 
 	g_free (main_key);
-	xst_conf_save ();
 }
 
 /**
@@ -86,14 +85,18 @@ xst_conf_get_boolean (XstTool *tool, const gchar *key)
 {
 	gboolean value;
 	gchar *main_key;
+	GConfClient *client;
+	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);
 	g_return_val_if_fail (key != NULL, FALSE);
 
+	client = gconf_client_get_default ();
+
 	main_key = xst_conf_make_key (tool, key);
 	
-	value = gnome_config_get_bool (main_key);
+	value = gconf_client_get_bool (client, main_key, &error);
 
 	g_free (main_key);
 	
@@ -113,17 +116,20 @@ void
 xst_conf_set_integer (XstTool *tool, const gchar *key, gint value)
 {
 	gchar *main_key;
+	GConfClient *client;
+	GError *error = NULL;
 	
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (XST_IS_TOOL (tool));
 	g_return_if_fail (key != NULL);
 
+	client = gconf_client_get_default ();
+
 	main_key = xst_conf_make_key (tool, key);
 	
-	gnome_config_set_int (main_key, value);
+	gconf_client_set_int (client, main_key, value, &error);
 
 	g_free (main_key);
-	xst_conf_save ();
 }
 
 /**
@@ -143,14 +149,18 @@ xst_conf_get_integer (XstTool *tool, const gchar *key)
 {
 	gint value;
 	gchar *main_key;
+	GConfClient *client;
+	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, -1);
 	g_return_val_if_fail (XST_IS_TOOL (tool), -1);
 	g_return_val_if_fail (key != NULL, -1);
 
+	client = gconf_client_get_default ();
+
 	main_key = xst_conf_make_key (tool, key);
 	
-	value = gnome_config_get_int (main_key);
+	value = gconf_client_get_int (client, main_key, &error);
 
 	g_free (main_key);
 	
@@ -170,17 +180,20 @@ void
 xst_conf_set_string (XstTool *tool, const gchar *key, const gchar *value)
 {
 	gchar *main_key;
+	GConfClient *client;
+	GError *error = NULL;
 	
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (XST_IS_TOOL (tool));
 	g_return_if_fail (key != NULL);
 
+	client = gconf_client_get_default ();
+
 	main_key = xst_conf_make_key (tool, key);
 	
-	gnome_config_set_string (main_key, value);
+	gconf_client_set_string (client, main_key, value, &error);
 
 	g_free (main_key);
-	xst_conf_save ();
 }
 
 /**
@@ -200,14 +213,18 @@ xst_conf_get_string (XstTool *tool, const gchar *key)
 {
 	gchar *value;
 	gchar *main_key;
+	GConfClient *client;
+	GError *error = NULL;
 	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (key != NULL, NULL);
 
+	client = gconf_client_get_default ();
+
 	main_key = xst_conf_make_key (tool, key);
 	
-	value = gnome_config_get_string (main_key);
+	value = gconf_client_get_string (client, main_key, &error);
 
 	g_free (main_key);
 	
