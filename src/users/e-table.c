@@ -452,18 +452,17 @@ create_extras (void)
 */	
 	return extras;
 }
-static void
-user_cursor_change (ETable *table, gint row, gpointer user_data)
-{
-	set_active_table (TABLE_USER);
-	user_actions_set_sensitive (TRUE);
-}
 
 static void
-group_cursor_change (ETable *table, gint row, gpointer user_data)
+cursor_change (ETable *et, gint row, gpointer user_data)
 {
-	set_active_table (TABLE_GROUP);
-	group_actions_set_sensitive (TRUE);
+	gint table;
+
+	table = GPOINTER_TO_INT (E_TABLE_MEMORY_CALLBACKS (et->model)->data);
+
+	g_print ("%d\n", table);
+	set_active_table (table);
+	actions_set_sensitive (table, TRUE);
 }
 
 static void
@@ -472,8 +471,6 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 	ETable *u_table;
 	xmlNodePtr node, u_node;
 	gchar *buf, *user;
-
-	set_active_table (TABLE_NET_GROUP);
 
 	/* Get group node */
 	node = e_table_memory_get_data (E_TABLE_MEMORY (table->model), row);
@@ -513,15 +510,6 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 
 		g_free (user);
 	}
-	
-	net_actions_set_sensitive (TRUE);
-}
-
-static void
-net_user_cursor_change (ETable *table, gint row, gpointer user_data)
-{
-	set_active_table (TABLE_NET_USER);
-	net_actions_set_sensitive (TRUE);
 }
 
 static gchar *
@@ -572,13 +560,13 @@ create_user_table (void)
 					      initialize_value,
 					      value_is_empty,
 					      value_to_string,
-					      NULL);
+					      GINT_TO_POINTER (TABLE_USER));
 
 	user_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, user_spec,
 					   basic_user_state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
-	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", user_cursor_change, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
 	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_settings_clicked, NULL);
 
 	container = xst_dialog_get_widget (tool->main_dialog, "users_holder");
@@ -605,13 +593,13 @@ create_group_table (void)
 					      initialize_value,
 					      value_is_empty,
 					      value_to_string,
-					      NULL);
+					      GINT_TO_POINTER (TABLE_GROUP));
 
 	group_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, group_spec,
 					    basic_group_state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
-	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", group_cursor_change, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
 	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_settings_clicked, NULL);
 
 	container = xst_dialog_get_widget (tool->main_dialog, "groups_holder");
@@ -634,11 +622,12 @@ create_network_group_table (GtkWidget *paned)
 					      initialize_value,
 					      value_is_empty,
 					      value_to_string,
-					      NULL);
+					      GINT_TO_POINTER (TABLE_NET_GROUP));
 
 	net_group_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, net_group_spec, NULL);
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_group_table));
-	gtk_signal_connect (GTK_OBJECT (table), "cursor_activated", net_group_cursor_change, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", net_group_cursor_change, NULL);
 
 	gtk_container_add (GTK_CONTAINER (paned), net_group_table);
 	gtk_widget_show (net_group_table);
@@ -659,11 +648,11 @@ create_network_user_table (GtkWidget *paned)
 					      initialize_value,
 					      value_is_empty,
 					      value_to_string,
-					      NULL);
+					      GINT_TO_POINTER (TABLE_NET_USER));
 
 	net_user_table = e_table_scrolled_new (E_TABLE_MODEL (model), NULL, net_user_spec, NULL);
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
-	gtk_signal_connect (GTK_OBJECT (table), "cursor_activated", net_user_cursor_change, NULL);
+	gtk_signal_connect (GTK_OBJECT (table), "cursor_activated", cursor_change, NULL);
 
 	gtk_container_add (GTK_CONTAINER (paned), net_user_table);
 	gtk_widget_show (net_user_table);
@@ -800,8 +789,8 @@ tables_update_content (void)
 	clear_all_tables ();
 	populate_all_tables ();
 
-	user_actions_set_sensitive (table_set_cursor_node (u_table, u_node));
-	group_actions_set_sensitive (table_set_cursor_node (g_table, g_node));
+	actions_set_sensitive (TABLE_USER,  table_set_cursor_node (u_table, u_node));
+	actions_set_sensitive (TABLE_GROUP, table_set_cursor_node (g_table, g_node));
 
 	/* Restore active_table */
 	set_active_table (saved_table);
@@ -830,33 +819,6 @@ tables_set_state (gboolean state)
 }
 
 static ETable *
-get_current_table (void)
-{
-	ETable *table = NULL;
-
-	switch (active_table)
-	{
-	case TABLE_USER:
-		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
-		break;
-	case TABLE_GROUP:
-		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
-		break;
-	case TABLE_NET_GROUP:
-		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_group_table));
-		break;
-	case TABLE_NET_USER:
-		table = e_table_scrolled_get_table (E_TABLE_SCROLLED (net_user_table));
-		break;
-		
-	default:
-		return NULL;
-	}
-	
-	return table;
-}
-
-static ETable *
 get_table (gint tbl)
 {
 	ETable *table = NULL;
@@ -881,6 +843,12 @@ get_table (gint tbl)
 	}
 	
 	return table;
+}
+
+static ETable *
+get_current_table (void)
+{
+	return get_table (active_table);
 }
 
 xmlNodePtr

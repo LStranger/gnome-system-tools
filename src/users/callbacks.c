@@ -104,7 +104,7 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		if (delete_selected_node (TABLE_USER))
 			xst_xml_element_destroy (node);
 
-		user_actions_set_sensitive (FALSE);
+		actions_set_sensitive (TABLE_USER, FALSE);
 	}
 }
 
@@ -141,7 +141,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		if (delete_selected_node (TABLE_GROUP))
 			xst_xml_element_destroy (node);
 
-		group_actions_set_sensitive (FALSE);
+		actions_set_sensitive (TABLE_GROUP, FALSE);
 	}
 }
 
@@ -177,7 +177,7 @@ on_network_delete_clicked (GtkWidget *button, gpointer user_data)
 		if (delete_selected_node (tbl))
 			xst_xml_element_destroy (node);
 
-		group_actions_set_sensitive (FALSE);
+		actions_set_sensitive (TABLE_GROUP, FALSE);
 		gtk_frame_set_label (GTK_FRAME (xst_dialog_get_widget (tool->main_dialog,
 													"network_settings_frame")),
 						 _("Settings for the selected user and group"));
@@ -701,36 +701,31 @@ on_group_settings_members_select_row (GtkCList *clist, gint row, gint column, Gd
 /* Helpers .*/
 
 void
-actions_set_sensitive (gboolean state)
+actions_set_sensitive (gint table, gboolean state)
 {
-	user_actions_set_sensitive (state);
-	group_actions_set_sensitive (state);
-	net_actions_set_sensitive (state);
-}
-
-void
-user_actions_set_sensitive (gboolean state)
-{
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_new",      TRUE);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_delete",   state);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", state);
-}
-
-void
-group_actions_set_sensitive (gboolean state)
-{
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_new",      TRUE);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_delete",   state);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", state);
-}
-
-void
-net_actions_set_sensitive (gboolean state)
-{
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_group_new", TRUE);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_user_new",  TRUE);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_delete",    state);
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_settings",  state);
+	switch (table)
+	{
+	case TABLE_USER:
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_new",      TRUE);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_delete",   state);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", state);
+		break;
+	case TABLE_GROUP:
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_new",      TRUE);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_delete",   state);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", state);
+		break;
+	case TABLE_NET_USER:
+	case TABLE_NET_GROUP:
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_group_new", TRUE);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_user_new",  TRUE);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_delete",    state);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_settings",  state);
+		break;
+	default:
+		g_warning ("actions_set_sensitive: Shouldn't be here.");
+		return;
+	}
 }
 
 void

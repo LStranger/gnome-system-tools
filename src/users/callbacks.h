@@ -79,10 +79,7 @@ void on_group_settings_all_select_row (GtkCList *clist, gint row, gint column,
 void on_group_settings_members_select_row (GtkCList *clist, gint row, gint column,
 					   GdkEventButton *event, gpointer user_data);
 
-void actions_set_sensitive (gboolean state);
-void user_actions_set_sensitive (gboolean state);
-void group_actions_set_sensitive (gboolean state);
-void net_actions_set_sensitive (gboolean state);
+void actions_set_sensitive (gint table, gboolean state);
 void my_gtk_entry_set_text (void *entry, gchar *str);
 
 void on_user_passwd_dialog_delete_event (GtkWidget *w, gpointer data);
