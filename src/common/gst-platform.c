@@ -38,6 +38,7 @@ extern GdkPixbuf *suse;
 extern GdkPixbuf *freebsd;
 extern GdkPixbuf *gentoo;
 extern GdkPixbuf *pld;
+extern GdkPixbuf *openna;
 
 GstPlatform *
 gst_platform_new (const gchar *key, const gchar *name)
@@ -151,6 +152,8 @@ gst_platform_get_pixmap (GstPlatform *platform)
 		return gentoo;
 	else if (g_ascii_strncasecmp (platform->name, "PLD", 3) == 0)
 		return pld;
+	else if (g_ascii_strncasecmp (platform->name, "OpenNA", 6) == 0)
+		return openna;
 	else return NULL;
 }
 

@@ -38,6 +38,7 @@ pixmaps_DATA = \
 	nameresolution_alias.png \
 	nameresolution_id.png    \
 	network.png              \
+	openna.png               \
 	panel_bottom_left.png	 \
 	panel_bottom_mid.png	 \
 	panel_bottom_right.png	 \

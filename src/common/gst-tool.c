@@ -68,6 +68,7 @@ GdkPixbuf *suse;
 GdkPixbuf *freebsd;
 GdkPixbuf *gentoo;
 GdkPixbuf *pld;
+GdkPixbuf *openna;
 
 enum {
 	BOGUS,
@@ -450,6 +451,7 @@ gst_tool_create_distro_images (void)
 	freebsd = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/freebsd.png", NULL);
 	gentoo = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gentoo.png", NULL);
 	pld = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/pld.png", NULL);
+	openna = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/openna.png", NULL);
 }
 
 static void
