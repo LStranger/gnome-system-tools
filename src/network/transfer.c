@@ -288,9 +288,9 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 	
 	for (row = 0; row < rows; row++)
 	{
-		if (!gtk_clist_get_text (GTK_CLIST (widget), row, 1, &text_1))
+		if (!gtk_clist_get_text (GTK_CLIST (widget), row, 0, &text_1))
 			break;
-		if (!gtk_clist_get_text (GTK_CLIST (widget), row, 2, &text_2))
+		if (!gtk_clist_get_text (GTK_CLIST (widget), row, 1, &text_2))
 			continue;
 		
 		if (!strlen (text_1))
