@@ -34,4 +34,5 @@ void xml_element_destroy_children_by_name(xmlNodePtr parent, char *name);
 
 int xml_parent_childs (xmlNodePtr parent);
 gchar *xml_get_child_content (xmlNodePtr parent, gchar *child);
+void xml_set_child_content (xmlNodePtr parent, gchar *child, gchar *val);
 

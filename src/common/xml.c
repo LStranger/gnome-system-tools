@@ -453,3 +453,22 @@ xml_get_child_content (xmlNodePtr parent, gchar *child)
 	return xml_element_get_content (node);
 }
 
+void
+xml_set_child_content (xmlNodePtr parent, gchar *child, gchar *val)
+{
+	xmlNodePtr node;
+
+	g_return_if_fail (parent != NULL);
+	g_return_if_fail (child != NULL);
+	g_return_if_fail (val != NULL);
+
+	node = xml_element_find_first (parent, child);
+	if (!node)
+	{
+		g_warning ("xml_set_child: can't get field %s.", child);
+		return;
+	}
+
+	xml_element_set_content (node, val);
+}
+
