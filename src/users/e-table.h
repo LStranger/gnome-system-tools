@@ -25,7 +25,7 @@
 #define __E_TABLE_H
 
 #include <gnome.h>
-#include <gal/e-table/e-tree-simple.h>
+#include <gal/e-table/e-table-memory.h>
 
 #include "user_group.h"
 
@@ -67,6 +67,7 @@ void clear_all_tables (void);
 void populate_table (ETableModel *model, xmlNodePtr root_node);
 void populate_all_tables (void);
 extern guint create_tables (void);
+extern void destroy_tables (void);
 void tables_update_content (void);
 void tables_set_state (gboolean state);
 xmlNodePtr get_selected_node (void);

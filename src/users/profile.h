@@ -40,6 +40,7 @@ typedef struct
 	guint gmax;
 	gchar *home_prefix;
 	gchar *shell;
+	gchar *group;
 	gboolean logindefs;
 } Profile;
 

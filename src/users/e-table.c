@@ -731,6 +731,15 @@ create_tables (void)
 	return FALSE;
 }
 
+extern void
+destroy_tables (void)
+{
+	gtk_widget_destroy (user_table);
+	gtk_widget_destroy (group_table);
+	gtk_widget_destroy (net_group_table);
+	gtk_widget_destroy (net_user_table);
+}
+
 static gboolean
 table_set_cursor_node (ETable *table, xmlNodePtr old_node)
 {

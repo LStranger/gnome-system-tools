@@ -59,7 +59,8 @@ static void del_user_groups (xmlNodePtr user_node);
 static void add_user_groups (xmlNodePtr user_node, gchar *group_name);
 static gboolean is_valid_name (gchar *str);
 static void reply_cb (gint val, gpointer data);
-
+static gchar *parse_home (UserSettings *us);
+static gchar *parse_group (UserSettings *us);
 
 /* Global functions */
 
@@ -307,34 +308,29 @@ check_user_shell (xmlNodePtr node, gchar *val)
 }
 
 gint
-check_user_group (xmlNodePtr node)
+check_user_group (UserSettings *us)
 {
-	GtkCombo *combo;
 	gchar *buf;
-	GtkWindow *win;
 	GnomeDialog *dialog;
 	xmlNodePtr group_node;
 
-	g_return_val_if_fail (node != NULL, -1);
+	g_return_val_if_fail (us != NULL, -1);
 
-	combo = GTK_COMBO (xst_dialog_get_widget (tool->main_dialog, "user_settings_group"));
-	buf = gtk_editable_get_chars (GTK_EDITABLE (combo->entry), 0, -1);
+	buf = parse_group (us);
+	group_node = get_corresp_field (us->node);
 
-	group_node = get_corresp_field (node);
-
-	/* We have to give childs to node_exsists, cause it gets parent inside */
 	if (node_exsists (group_node, "name", buf))
 		return 0;
 
 	if (!is_valid_name (buf))
 	{
-		win = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog"));
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented(_(
-				"Please set a valid main group name, with only lower-case letters,"
-				"\nor select one from pull-down menu."), win));
+			"Please set a valid main group name, with only lower-case letters,"
+			"\nor select one from pull-down menu."),
+								   GTK_WINDOW (us->dialog)));
 
 		gnome_dialog_run (dialog);
-		gtk_widget_grab_focus (GTK_WIDGET (combo));
+		gtk_widget_grab_focus (GTK_WIDGET (us->group->main));
 
 		return -1;
 	}
@@ -698,7 +694,7 @@ user_update (UserSettings *us)
 	if (!check_user_comment (us->node, buf))
 		ok = FALSE;
 
-	group = check_user_group (us->node);
+	group = check_user_group (us);
 	switch (group)
 	{
 		case 0:
@@ -973,7 +969,7 @@ user_update_xml (UserSettings *us)
 	xst_xml_set_child_content (us->node, "comment", buf);
 
 	/* Main group */
-	buf = gtk_entry_get_text (GTK_ENTRY (us->group->main->entry));
+	buf = parse_group (us);
 
 	group_node = get_corresp_field (get_db_node (us->node));
 	group_node = get_node_by_data (group_node, "name", buf);
@@ -990,7 +986,9 @@ user_update_xml (UserSettings *us)
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 	
 	/* Home */
-	xst_xml_set_child_content (us->node, "home", gtk_entry_get_text (us->basic->home));
+	buf = parse_home (us);
+	xst_xml_set_child_content (us->node, "home", buf);
+	g_free (buf);
 	
 	/* Shell */
 	xst_xml_set_child_content (us->node, "shell", gtk_entry_get_text (us->basic->shell));
@@ -1080,10 +1078,11 @@ group_add_from_user (UserSettings *us)
 	group_data = g_new (ug_data, 1);
 	group_data->node = group_add_blank_xml (node);
 
-	buf = gtk_entry_get_text (GTK_ENTRY (us->group->main->entry));
+	buf = parse_group (us);
 	xst_xml_set_child_content (group_data->node, "name", buf);
 
 	group_data->table = TABLE_GROUP;
+
 #ifdef NIS
 	/* Add it to e-table. */
 	if (us->table == TABLE_USER)
@@ -1463,4 +1462,48 @@ user_query_string_get (void)
 		user_search_string = g_strdup ("all");
 	
 	return g_strdup (user_search_string);
+}
+
+static gchar *
+parse_home (UserSettings *us)
+{
+	const guint max_tokens = 8;
+	gchar *home;
+	gchar **buf;
+	gint i;
+
+	buf = g_strsplit (gtk_entry_get_text (us->basic->home), "/", max_tokens);
+
+	i = 0;
+	while (buf[i])
+	{
+		if (!strcmp (buf[i], "$user"))
+		{
+			g_free (buf[i]);
+			buf[i] = g_strdup (gtk_entry_get_text (us->basic->name));
+		}
+		i++;
+	}
+	
+	home = g_strjoinv ("/", buf);
+	
+	g_strfreev (buf);
+	
+	return home;
+}
+
+static gchar *
+parse_group (UserSettings *us)
+{
+	gchar *buf;
+
+	buf = gtk_editable_get_chars (GTK_EDITABLE (us->group->main->entry), 0, -1);
+
+	if (!strcmp (buf, "$user"))
+	{
+		g_free (buf);
+		buf = g_strdup (gtk_editable_get_chars (GTK_EDITABLE (us->basic->name), 0, -1));
+	}
+
+	return buf;
 }

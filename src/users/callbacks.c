@@ -214,6 +214,7 @@ on_pro_name_changed (GtkEditable *editable, gpointer user_data)
 
 	buf = gtk_editable_get_chars (editable, 0, -1);
 	profile_table_set_selected (buf);
+	tables_update_content ();
 }
 
 void
@@ -232,6 +233,7 @@ on_pro_save_clicked (GtkButton *button, gpointer user_data)
 	
 	profile_save (NULL);
 	xst_dialog_modify (tool->main_dialog);
+	tables_update_content ();
 }
 
 enum
@@ -358,7 +360,6 @@ on_user_settings_clicked (GnomeDialog *dialog, gint button_number, gpointer user
 	switch (button_number)
 	{
 	case 0:
-		user_settings_helper (us);
 		if (user_update (us))
 		{
 			xst_dialog_modify (tool->main_dialog);

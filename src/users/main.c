@@ -44,6 +44,8 @@
 
 XstTool *tool;
 
+void quit_cb (XstTool *tool, gpointer data);
+
 static XstDialogSignal signals[] = {
 	{ "notebook",                    "switch_page",   on_notebook_switch_page },
 	{ "user_settings_dialog",        "delete_event",  on_user_settings_dialog_delete_event },
@@ -246,6 +248,15 @@ create_searchbar (void)
 			    GTK_SIGNAL_FUNC (user_menu_activated), 0);
 }
 
+void
+quit_cb (XstTool *tool, gpointer data)
+{
+	g_print("closing and cleaning\n");
+
+	clear_all_tables ();
+	destroy_tables ();
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -254,7 +265,8 @@ main (int argc, char *argv[])
 	srand (time (NULL));
 
 	tool = xst_tool_init ("users", _("Users and Groups"), argc, argv, NULL);
-	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	xst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	xst_tool_set_close_func (tool, quit_cb, NULL);
 
 	config_clists ();
 	create_tables ();

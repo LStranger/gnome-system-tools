@@ -229,6 +229,7 @@ user_settings_group_fill (UserSettings *us)
 	gchar *buf;
 	xmlNodePtr gnode, dbnode;
 	GList *users, *items, *members;
+	Profile *pf;
 
 	/* Main group. */
 	
@@ -258,6 +259,13 @@ user_settings_group_fill (UserSettings *us)
 	items = my_g_list_remove_duplicates (users, members);
 	
 	my_gtk_clist_append_items (us->group->all, items);
+
+	if (us->new)
+	{
+		pf = profile_table_get_profile (NULL);
+		my_gtk_entry_set_text (GTK_ENTRY (us->group->main->entry),
+				       g_strdup (pf->group));
+	}
 }
 
 static void
@@ -344,18 +352,6 @@ user_settings_destroy (UserSettings *us)
 	g_free (us->pwd);
 	gtk_object_remove_data (GTK_OBJECT (us->dialog), "UserSettings");
 	g_free (us);
-}
-
-void
-user_settings_helper (UserSettings *us)
-{
-	Profile *pf;
-	gchar *buf;
-	/* In basic complexity mode user doesn't see all fields, so we have to fill them. */
-
-	pf = profile_table_get_profile (NULL);
-	buf = g_strdup_printf ("%s%s", pf->home_prefix, gtk_entry_get_text (us->basic->name));
-	gtk_entry_set_text (us->basic->home, buf);
 }
 
 /* Start of Password request dialog. */

@@ -67,7 +67,7 @@ gboolean check_node_complexity (xmlNodePtr node);
 gboolean check_user_login (xmlNodePtr node, gchar *login);
 gboolean check_user_uid (xmlNodePtr node, gchar *val);
 gboolean check_user_comment (xmlNodePtr, gchar *val);
-gint check_user_group (xmlNodePtr node);
+gint check_user_group (UserSettings *us);
 gboolean check_user_home (xmlNodePtr node, gchar *val);
 gboolean check_user_shell (xmlNodePtr node, gchar *val);
 gboolean check_group_name (xmlNodePtr node, gchar *name);

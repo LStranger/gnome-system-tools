@@ -1,3 +1,21 @@
+2001-03-27  Tambet Ingo  <tambet@ximian.com>
+
+	* user_settings.c (user_settings_helper): Deleted, we don't need that anymore.
+
+	* user_group.c (parse_group): Implement.
+	(parse_home): Ditto.
+
+	* profile.c: Added new field (group) to profiles. Also added
+	  convinient aliases for home_prefix and group ($user).
+	  (profile_table_add_profile): Block signal while updating combo.
+
+	* main.c (quit_cb): Implement
+
+	* e-table.c (destroy_tables): Implement.
+
+	* callbacks.c (on_pro_name_changed): Update tables with new filters.
+	(on_pro_save_clicked): ditto.
+
 2001-03-26  Tambet Ingo  <tambet@ximian.com>
 
 	* *.c: Fixed bugs: Password changing didn't work right.

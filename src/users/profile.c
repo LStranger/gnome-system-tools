@@ -34,6 +34,7 @@ typedef struct
 	GtkCombo *name;
 	GnomeFileEntry *home_prefix;
 	GtkCombo *shell;
+	GtkEntry *group;
 	GtkSpinButton *umin;
 	GtkSpinButton *umax;
 	GtkSpinButton *gmin;
@@ -68,6 +69,7 @@ profile_tab_init (void)
 
 	pft->home_prefix = GNOME_FILE_ENTRY (xst_dialog_get_widget (xd, "pro_home"));
 	pft->shell       = GTK_COMBO (xst_dialog_get_widget (xd, "pro_shell"));
+	pft->group       = GTK_ENTRY (xst_dialog_get_widget (xd, "pro_group"));
 	
 	pft->umin = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_umin"));
 	pft->umax = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_umax"));
@@ -94,10 +96,11 @@ profile_fill (Profile *pf)
 	gtk_signal_handler_unblock_by_func (GTK_OBJECT (pft->name->entry),
 					    GTK_SIGNAL_FUNC (on_pro_name_changed),
 					    NULL);
-
+	
 	my_gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
 					pf->home_prefix);	
 	my_gtk_entry_set_text (GTK_ENTRY (pft->shell->entry), pf->shell);
+	my_gtk_entry_set_text (GTK_ENTRY (pft->group), pf->group);
 	
 	gtk_spin_button_set_value (pft->umin, (gfloat) pf->umin);
 	gtk_spin_button_set_value (pft->umax, (gfloat) pf->umax);
@@ -153,6 +156,10 @@ profile_save (gchar *name)
 		if (pf->shell)
 			g_free (pf->shell);
 		pf->shell = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->shell->entry)));
+
+		if (pf->group)
+			g_free (pf->group);
+		pf->group = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->group)));
 		
 		pf->umin = gtk_spin_button_get_value_as_int (pft->umin);
 		pf->umax = gtk_spin_button_get_value_as_int (pft->umax);
@@ -190,6 +197,7 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 		
 		pf->home_prefix = g_strdup (old_pf->home_prefix);
 		pf->shell = g_strdup (old_pf->shell);
+		pf->group = g_strdup (old_pf->group);
 		
 		pf->umin = old_pf->umin;
 		pf->umax = old_pf->umax;
@@ -214,6 +222,7 @@ profile_destroy (Profile *pf)
 	g_free (pf->name);
 	g_free (pf->home_prefix);
 	g_free (pf->shell);
+	g_free (pf->group);
 
 	g_free (pf);
 }
@@ -256,8 +265,9 @@ profile_get_default (void)
 	pf->name = g_strdup (N_("Default"));
 
 	/* FIXME: Bad bad hardcoded values. */
-	pf->home_prefix = g_strdup ("/home/");
+	pf->home_prefix = g_strdup ("/home/$user");
 	pf->shell = g_strdup ("/bin/bash");
+	pf->group = g_strdup ("$user");
 
 	pf->umin = logindefs.new_user_min_id;
 	pf->umax = logindefs.new_user_max_id;
@@ -277,7 +287,7 @@ profile_table_from_xml (xmlNodePtr root)
 	xmlNodePtr node, n0, pf_node;
 	Profile *pf;
 	gchar *profile_tags[] = {
-		"home_prefix", "shell", "pwd_maxdays",
+		"home_prefix", "shell", "group", "pwd_maxdays",
 		"pwd_mindays", "pwd_warndays", "umin",
 		"umax", "gmin", "gmax", "name", NULL
 	};
@@ -305,8 +315,9 @@ profile_table_from_xml (xmlNodePtr root)
 				{
 				case  0: pf->home_prefix  = xst_xml_element_get_content (n0); break;
 				case  1: pf->shell        = xst_xml_element_get_content (n0); break;
-				case  2: pf->pwd_maxdays  = my_atoi (xst_xml_element_get_content (n0)); break;
-				case  3: pf->pwd_mindays  = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  2: pf->group        = xst_xml_element_get_content (n0); break;
+				case  3: pf->pwd_maxdays  = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  4: pf->pwd_mindays  = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  5: pf->pwd_warndays = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  6: pf->umin         = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  7: pf->umax         = my_atoi (xst_xml_element_get_content (n0)); break;
@@ -314,7 +325,7 @@ profile_table_from_xml (xmlNodePtr root)
 				case  9: pf->gmax         = my_atoi (xst_xml_element_get_content (n0)); break;
 				case 10: pf->name         = xst_xml_element_get_content (n0); break;
 					
-				case 11: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
+				default: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
 				}
 			}
 		}
@@ -389,7 +400,8 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 	xst_xml_element_add_with_content (node, "name",        pf->name);
 	xst_xml_element_add_with_content (node, "home_prefix", pf->home_prefix);
 	xst_xml_element_add_with_content (node, "shell",       pf->shell);
-
+	xst_xml_element_add_with_content (node, "group",       pf->group);
+	
 	for (i = 0; nodes[i]; i++)
 	{
 		switch (i)
@@ -438,10 +450,15 @@ profile_table_add_profile (Profile *pf, gboolean select)
 		profile_tab_init ();
 	
 	/* add name to combo box */
+	gtk_signal_handler_block_by_func (GTK_OBJECT (pft->name->entry),
+					  GTK_SIGNAL_FUNC (on_pro_name_changed),
+					  NULL);
 	li = gtk_list_item_new_with_label (pf->name);
 	gtk_widget_show (li);
 	gtk_container_add (GTK_CONTAINER (pft->name->list), li);
-	
+	gtk_signal_handler_unblock_by_func (GTK_OBJECT (pft->name->entry),
+					  GTK_SIGNAL_FUNC (on_pro_name_changed),
+					  NULL);	
 	if (select || g_hash_table_size (profile_table->hash) == 1)
 	{
 		profile_table->selected = pf->name;
