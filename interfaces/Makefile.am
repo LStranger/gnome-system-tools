@@ -11,7 +11,7 @@ interfaces = \
 	location-manager.glade			\
 	internetsharing.glade			\
 	rollback-location-management.glade \
-	xconf.glade					\
+	display.glade					\
 	print.glade
 
 interfaces_DATA = $(interfaces)
