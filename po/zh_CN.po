@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-22 20:04+0200\n"
-"PO-Revision-Date: 2004-05-23 04:25+0800\n"
+"POT-Creation-Date: 2004-06-04 14:51+0200\n"
+"PO-Revision-Date: 2004-06-04 22:47+0800\n"
 "Last-Translator: Funda Wang <fundawang@linux.net.cn>\n"
 "Language-Team: zh_CN <i18n-translation@lists.linux.net.cn>\n"
 "MIME-Version: 1.0\n"
@@ -758,6 +758,7 @@ msgid "_Deactivate"
 msgstr "禁用(_D)"
 
 #: interfaces/network.glade.in.h:93 interfaces/users.glade.in.h:55
+#: src/users/table.c:48
 msgid "_Delete"
 msgstr "删除(_D)"
 
@@ -870,50 +871,42 @@ msgid "_Wireless"
 msgstr "无线(_W)"
 
 #: interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">Description</span>"
-msgstr "<span weight=\"bold\">描述</span>"
-
-#: interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">常规信息</span>"
 
-#: interfaces/services.glade.in.h:3
+#: interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">服务设置</span>"
 
-#: interfaces/services.glade.in.h:4
-msgid "Click on an item in the list to show it's description."
-msgstr "点击列表中的项目来察看描述。"
-
-#: interfaces/services.glade.in.h:5
+#: interfaces/services.glade.in.h:3
 msgid "Description:"
 msgstr "描述："
 
-#: interfaces/services.glade.in.h:6
+#: interfaces/services.glade.in.h:4
 msgid "Service _Properties"
 msgstr "服务属性(_P)"
 
-#: interfaces/services.glade.in.h:7
+#: interfaces/services.glade.in.h:5
 msgid "Service:"
 msgstr "服务："
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:6
 msgid "Status:"
 msgstr "状态："
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:7
 msgid "Use this tool to specify which services to run"
 msgstr "使用该工具来指定要运行的服务"
 
-#: interfaces/services.glade.in.h:10
+#: interfaces/services.glade.in.h:8
 msgid "_Order list by startup sequence"
 msgstr "按启动顺序排列清单(_O)"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:9
 msgid "_Start"
 msgstr "启动(_S)"
 
-#: interfaces/services.glade.in.h:12
+#: interfaces/services.glade.in.h:10
 msgid "_Startup sequence:"
 msgstr "启动顺序(_S)："
 
@@ -1345,8 +1338,7 @@ msgstr "配置将显示为空"
 #: src/boot/callbacks.c:466
 #, c-format
 msgid "The file \"%s\" is missing or could not be read"
-msgstr ""
-"文件“%s”缺少或无法读取。"
+msgstr "文件“%s”缺少或无法读取。"
 
 #: src/boot/table.c:41
 msgid "Name"
@@ -1372,13 +1364,12 @@ msgstr "设备"
 msgid "/_Add ..."
 msgstr "/添加(_A)..."
 
-#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
-#: src/users/table.c:56
+#: src/boot/table.c:52
 msgid "/_Properties"
 msgstr "/属性(_P)"
 
 #: src/boot/table.c:53 src/network/connection.c:65 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/network/hosts.c:43
 msgid "/_Delete"
 msgstr "/删除(_D)"
 
@@ -1457,14 +1448,12 @@ msgstr "配置文件无法装入"
 
 #: src/common/gst-tool.c:1004
 msgid "There was an error running the backend script"
-msgstr ""
-"运行后端脚本时出错"
+msgstr "运行后端脚本时出错"
 
 #: src/common/gst-tool.c:1486
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
-msgstr ""
-"欢迎使用 GNOME 系统工具 %s 预发行版"
+msgstr "欢迎使用 GNOME 系统工具 %s 预发行版"
 
 #: src/common/gst-tool.c:1488
 msgid ""
@@ -1520,8 +1509,7 @@ msgstr "主机名已更改"
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
-msgstr ""
-"这将阻止您启动新的应用程序，因此您必须重新登录。仍要继续吗？"
+msgstr "这将阻止您启动新的应用程序，因此您必须重新登录。仍要继续吗？"
 
 #: src/network/callbacks.c:530
 msgid "Change _Host name"
@@ -1571,8 +1559,7 @@ msgstr "默认网关设备缺少网关信息"
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device."
-msgstr ""
-"请提供此信息以便继续，或者选择其他的默认网关设备。"
+msgstr "请提供此信息以便继续，或者选择其他的默认网关设备。"
 
 #: src/network/callbacks.c:723
 msgid "The program redhat-config-network-cmd could not be found"
@@ -1583,8 +1570,8 @@ msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this."
 msgstr ""
-"这可能造成在连接标签页中下缺少连接。请"
-"安装 redhat-config-network rpm 软件包以避免该问题。"
+"这可能造成在连接标签页中下缺少连接。请安装 redhat-config-network rpm 软件包以"
+"避免该问题。"
 
 #: src/network/callbacks.c:755
 #, c-format
@@ -1673,7 +1660,7 @@ msgstr "未知网卡类型"
 msgid "/_Configure"
 msgstr "/配置(_C)"
 
-#: src/network/connection.c:487 src/services/table.c:79
+#: src/network/connection.c:487 src/services/table.c:86
 msgid "Active"
 msgstr "激活"
 
@@ -1807,7 +1794,7 @@ msgstr "配置网络设备和连接"
 msgid "Networking"
 msgstr "联网"
 
-#: src/network/profile.c:51 src/users/profile-settings.c:204
+#: src/network/profile.c:51 src/users/profile-settings.c:215
 msgid "You won't be able to recover this profile after hitting \"apply\""
 msgstr "在您单击“应用”后无法还原此配置文件"
 
@@ -1828,24 +1815,24 @@ msgstr "描述"
 msgid "No description available."
 msgstr "没有可用的描述。"
 
-#: src/services/callbacks.c:259
+#: src/services/callbacks.c:245
 msgid "Running"
 msgstr "运行中"
 
-#: src/services/callbacks.c:263
+#: src/services/callbacks.c:249
 msgid "Stopped"
 msgstr "已停止"
 
-#: src/services/callbacks.c:268
+#: src/services/callbacks.c:254
 msgid "Could not get info"
 msgstr "无法获取信息"
 
-#: src/services/callbacks.c:334
+#: src/services/callbacks.c:320
 #, c-format
 msgid "Settings for service %s"
 msgstr "服务 %s 的设置"
 
-#: src/services/main.c:61
+#: src/services/main.c:62
 msgid "Services Settings"
 msgstr "服务设置"
 
@@ -1857,28 +1844,28 @@ msgstr "配置要在系统启动时使用哪些服务"
 msgid "Services"
 msgstr "服务"
 
-#: src/services/table.c:88
+#: src/services/table.c:95
 msgid "Service"
 msgstr "服务"
 
-#: src/time/main.c:314
+#: src/time/main.c:310
 msgid "Time Zone"
 msgstr "时区"
 
-#: src/time/main.c:424
+#: src/time/main.c:420
 msgid "Time Servers"
 msgstr "时间服务器"
 
-#: src/time/main.c:506
+#: src/time/main.c:501
 msgid "NTP support is not running"
 msgstr "NTP 支持未运行"
 
-#: src/time/main.c:507
+#: src/time/main.c:502
 msgid ""
 "Please run NTP support in the system to enable time server synchronization"
 msgstr "请在系统中运行 NTP 支持以启用服务器同步功能"
 
-#: src/time/main.c:819
+#: src/time/main.c:814
 msgid "Time and Date Settings"
 msgstr "时间和日期设定"
 
@@ -1891,15 +1878,15 @@ msgid "Time and Date"
 msgstr "时间和日期"
 
 #  set window title
-#: src/users/callbacks.c:572
+#: src/users/callbacks.c:589
 msgid "Error saving profile"
 msgstr "保存配置文件出错"
 
-#: src/users/callbacks.c:607
+#: src/users/callbacks.c:624
 msgid "Create New profile"
 msgstr "创建新配置文件"
 
-#: src/users/callbacks.c:641
+#: src/users/callbacks.c:658
 #, c-format
 msgid "Settings for profile %s"
 msgstr "配置文件 %s 的设置"
@@ -1924,8 +1911,8 @@ msgstr "不应修改 root 的组 ID"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
-#: src/users/user-settings.c:352 src/users/user-settings.c:446
-#: src/users/user-settings.c:482
+#: src/users/user-settings.c:355 src/users/user-settings.c:449
+#: src/users/user-settings.c:485
 msgid "This would leave the system unusable"
 msgstr "这将使得系统不可用"
 
@@ -2003,23 +1990,23 @@ msgstr "组"
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:120
+#: src/users/main.c:121
 msgid "User name contains"
 msgstr "用户名含有"
 
-#: src/users/main.c:121
+#: src/users/main.c:122
 msgid "User ID is"
 msgstr "用户 ID 为"
 
-#: src/users/main.c:122
+#: src/users/main.c:123
 msgid "Group name contains"
 msgstr "组名含有"
 
-#: src/users/main.c:123
+#: src/users/main.c:124
 msgid "User GID is"
 msgstr "用户 GID 为"
 
-#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:315 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "用户和组"
 
@@ -2036,27 +2023,27 @@ msgstr ""
 "错误的密码：%s。\n"
 "请另换一个新密码。"
 
-#: src/users/profile-settings.c:114
+#: src/users/profile-settings.c:122
 msgid "The profile must have a name"
 msgstr "配置文件必须有一个名称"
 
-#: src/users/profile-settings.c:119
+#: src/users/profile-settings.c:127
 msgid "The profile must have a default home"
 msgstr "配置文件必须有一个默认的主目录"
 
-#: src/users/profile-settings.c:124 src/users/profile-settings.c:129
+#: src/users/profile-settings.c:132 src/users/profile-settings.c:137
 msgid "The profile must have a default shell"
 msgstr "配置文件必须有一个默认的 shell"
 
-#: src/users/profile-settings.c:193
+#: src/users/profile-settings.c:204
 msgid "The default profile must not be deleted."
 msgstr "默认的配置文件绝对不能删除。"
 
-#: src/users/profile-settings.c:194
+#: src/users/profile-settings.c:205
 msgid "This is the default profile for setting new users' data"
 msgstr "这将设置新用户数据的默认配置文件"
 
-#: src/users/profile-settings.c:203
+#: src/users/profile-settings.c:214
 #, c-format
 msgid "Delete profile \"%s\""
 msgstr "删除配置文件“%s”"
@@ -2070,29 +2057,25 @@ msgstr "配置文件"
 msgid "Comment"
 msgstr "注释"
 
-#: src/users/search-bar/search-bar.c:200
-msgid "_Search"
-msgstr "搜索(_S)"
-
-#: src/users/search-bar/search-bar.c:238
+#: src/users/search-bar/search-bar.c:225
 msgid "C_lear"
 msgstr "清除(_L)"
 
-#: src/users/search-bar/search-bar.c:346
+#: src/users/search-bar/search-bar.c:326
 msgid "Choice"
 msgstr "选择"
 
-#: src/users/search-bar/search-bar.c:356
+#: src/users/search-bar/search-bar.c:336
 msgid "Text"
 msgstr "文本"
 
-#: src/users/table.c:47
-msgid "/_Add User ..."
-msgstr "/添加用户(_A)..."
+#: src/users/table.c:46
+msgid "_Add"
+msgstr "添加(_A)"
 
-#: src/users/table.c:54
-msgid "/_Add group ..."
-msgstr "/添加组(_A)..."
+#: src/users/table.c:47
+msgid "_Properties"
+msgstr "属性(_P)"
 
 #: src/users/user-settings.c:104
 msgid "The root user can not be deleted."
@@ -2103,134 +2086,136 @@ msgstr "不能删除 root 用户。"
 msgid "Are you sure you want to delete user %s?"
 msgstr "您确定想要删除用户 %s 吗？"
 
-#: src/users/user-settings.c:217
+#: src/users/user-settings.c:219
 msgid "User Account Editor"
 msgstr "用户账户编辑器"
 
-#: src/users/user-settings.c:332
+#: src/users/user-settings.c:335
 msgid "The username is empty."
 msgstr "用户名为空。"
 
-#: src/users/user-settings.c:333
+#: src/users/user-settings.c:336
 msgid "A username must be specified"
 msgstr "必须指定用户名"
 
 #. = sizeof (ut.ut_name)
-#: src/users/user-settings.c:339 src/users/user-settings.c:344
+#: src/users/user-settings.c:342 src/users/user-settings.c:347
 msgid "The username is too long."
 msgstr "用户名太长。"
 
-#: src/users/user-settings.c:340 src/users/user-settings.c:345
+#: src/users/user-settings.c:343 src/users/user-settings.c:348
 #, c-format
 msgid "The username should have less than %i characters for being valid"
 msgstr "有效的用户名应该至少有 %i 个字符"
 
-#: src/users/user-settings.c:351
+#: src/users/user-settings.c:354
 msgid "Root username shouldn't be modified."
 msgstr "不应该修改 root 的用户名。"
 
-#: src/users/user-settings.c:357
+#: src/users/user-settings.c:360
 msgid "Username has invalid characters"
 msgstr "用户名有无效的字符"
 
-#: src/users/user-settings.c:358
+#: src/users/user-settings.c:361
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
 msgstr "请设定一个有效的用户名，第一个字母要小写，后面可跟小写字母和数字。"
 
-#: src/users/user-settings.c:363
+#: src/users/user-settings.c:366
 #, c-format
 msgid "Username \"%s\" already exists"
 msgstr "用户名“%s”已经存在"
 
-#: src/users/user-settings.c:364
+#: src/users/user-settings.c:367
 msgid "Please select a different username"
 msgstr "请选择不同的用户名"
 
-#: src/users/user-settings.c:389
+#: src/users/user-settings.c:392
 msgid "Invalid character in comment."
 msgstr "注释中存在无效字符。"
 
-#: src/users/user-settings.c:390
+#: src/users/user-settings.c:393
 #, c-format
 msgid "Check that invalid character '%c' is not used"
 msgstr "请检查未使用无效字符“%c”"
 
-#: src/users/user-settings.c:438
+#: src/users/user-settings.c:441
 msgid "Home directory must not be empty."
 msgstr "主目录不能为空。"
 
-#: src/users/user-settings.c:439
+#: src/users/user-settings.c:442
 msgid "Make sure you provide a home directory"
 msgstr "请确定您提供了主目录"
 
-#: src/users/user-settings.c:441
+#: src/users/user-settings.c:444
 msgid "Incomplete path in home directory"
 msgstr "主目录的路径不完整"
 
-#: src/users/user-settings.c:442
+#: src/users/user-settings.c:445
 msgid ""
 "Please enter full path for home directory.\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
-msgstr "请输入主目录的完整路径。\n"
+msgstr ""
+"请输入主目录的完整路径。\n"
 "<span size=\"smaller\">即：/home/john</span>"
 
-#: src/users/user-settings.c:445
+#: src/users/user-settings.c:448
 msgid "root home shouldn't be modified."
 msgstr "不应修改 root 的主目录。"
 
-#: src/users/user-settings.c:478
+#: src/users/user-settings.c:481
 msgid "Invalid user ID"
 msgstr "非法用户 ID"
 
-#: src/users/user-settings.c:479
+#: src/users/user-settings.c:482
 msgid "User id must be a positive number."
 msgstr "用户 id 必须为正数。"
 
-#: src/users/user-settings.c:481
+#: src/users/user-settings.c:484
 msgid "root user ID should not be modified"
 msgstr "不应修改 root 的 UID"
 
-#: src/users/user-settings.c:498
+#: src/users/user-settings.c:501
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
 msgstr "某些用户可以共享同一个用户 ID，但这样并不常见，并且可能导致安全问题"
 
-#: src/users/user-settings.c:503
+#: src/users/user-settings.c:506
 #, c-format
 msgid "User ID %s already exists"
 msgstr "用户 ID %s 已经存在"
 
-#: src/users/user-settings.c:520
+#: src/users/user-settings.c:523
 msgid "Incomplete path in shell"
 msgstr "shell 的路径不完整"
 
-#: src/users/user-settings.c:521
+#: src/users/user-settings.c:524
 msgid ""
 "Please enter full path for shell.\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
-msgstr "请输入 shell 的完整路径。\n"
+msgstr ""
+"请输入 shell 的完整路径。\n"
 "<span size=\"smaller\">即：/bin/sh</span>"
 
-#: src/users/user-settings.c:543
+#: src/users/user-settings.c:546
 msgid "Password can not be empty."
 msgstr "密码不能为空。"
 
-#: src/users/user-settings.c:544
+#: src/users/user-settings.c:547
 msgid "A password must be provided"
 msgstr "必须提供密码"
 
-#: src/users/user-settings.c:546
+#: src/users/user-settings.c:549
 msgid "Password confirmation isn't correct."
 msgstr "密码确认不正确。"
 
-#: src/users/user-settings.c:547
+#: src/users/user-settings.c:550
 msgid "Check that you have provided the same password in both text fields"
 msgstr "请检查您在两个文本框中输入的密码相同"
 
-#: src/users/user-settings.c:830
+#: src/users/user-settings.c:826
 #, c-format
 msgid "Settings for User %s"
 msgstr "用户 %s 的设置"
@@ -2261,3 +2246,17 @@ msgstr "Shell"
 msgid "Add or remove users and groups"
 msgstr "添加或删除用户和组"
 
+#~ msgid "<span weight=\"bold\">Description</span>"
+#~ msgstr "<span weight=\"bold\">描述</span>"
+
+#~ msgid "Click on an item in the list to show it's description."
+#~ msgstr "点击列表中的项目来察看描述。"
+
+#~ msgid "_Search"
+#~ msgstr "搜索(_S)"
+
+#~ msgid "/_Add User ..."
+#~ msgstr "/添加用户(_A)..."
+
+#~ msgid "/_Add group ..."
+#~ msgstr "/添加组(_A)..."
