@@ -455,7 +455,6 @@ xst_dialog_enable_complexity (XstDialog *dialog)
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (XST_IS_DIALOG (dialog));
 
-//	gtk_widget_set_sensitive (dialog->complexity_button, TRUE);
 	gtk_widget_show (dialog->complexity_button);
 }
 
