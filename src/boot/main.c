@@ -42,6 +42,8 @@
 #include "callbacks.h"
 #include "boot-settings.h"
 
+XstTool *tool;
+
 static void
 connect_signals (XstTool *tool)
 {
@@ -65,8 +67,6 @@ connect_signals (XstTool *tool)
 int
 main (int argc, char *argv[])
 {
-	XstTool *tool;
-	
 	XstReportHookEntry report_hooks[] = {
 		{ "boot_conf_read_failed", callbacks_conf_read_failed_hook,
 		  XST_REPORT_HOOK_LOAD, FALSE, NULL },
