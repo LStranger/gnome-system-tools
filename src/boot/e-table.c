@@ -145,7 +145,7 @@ boot_value_to_string (ETableModel *etc, int col, const void *value, void *data)
 static void
 boot_cursor_change (ETable *table, gint row, gpointer user_data)
 {
-	actions_set_sensitive (TRUE);
+	callbacks_actions_set_sensitive (TRUE);
 }
 
 static ETableExtras *

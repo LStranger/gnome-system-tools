@@ -29,6 +29,7 @@
 #include <gnome.h>
 
 #include "xst.h"
+#include "xst-report-hook.h"
 #include "callbacks.h"
 #include "transfer.h"
 #include "e-table.h"
@@ -82,7 +83,7 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 	
 	boot_table_delete ();
 	xst_dialog_modify (tool->main_dialog);
-	actions_set_sensitive (FALSE);
+	callbacks_actions_set_sensitive (FALSE);
 }
 
 void
@@ -114,7 +115,7 @@ on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer data)
 /* Helpers */
 
 void
-actions_set_sensitive (gboolean state)
+callbacks_actions_set_sensitive (gboolean state)
 {
 	XstDialogComplexity complexity;
 
@@ -132,7 +133,7 @@ actions_set_sensitive (gboolean state)
 }
 
 void
-buttons_set_visibility (void)
+callbacks_buttons_set_visibility (void)
 {
 	switch (xst_dialog_get_complexity (tool->main_dialog)) {
 	case XST_DIALOG_ADVANCED:
@@ -147,4 +148,20 @@ buttons_set_visibility (void)
 		g_warning ("Unknown complexity.");
 		break;
 	}
+}
+
+gboolean
+callbacks_conf_read_failed_hook (XstTool *tool, XstReportLine *rline, gpointer data)
+{
+	GtkWidget *dialog;
+	gchar *txt;
+
+	txt = g_strdup_printf (_("The file ``%s'' is missing or could not be read:\n"
+				 "The configuration will show empty."), rline->argv[0]);
+	
+	dialog = gnome_error_dialog_parented (txt, GTK_WINDOW (tool->main_dialog));
+	gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+
+	/* Handled, don't go looking for more hooks to run */
+	return TRUE;
 }

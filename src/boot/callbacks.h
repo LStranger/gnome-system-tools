@@ -32,8 +32,9 @@ void      on_boot_settings_clicked  (GtkButton *button, gpointer data);
 void      on_boot_default_clicked   (GtkButton *button, gpointer data);
 void      on_boot_prompt_toggled    (GtkToggleButton *toggle, gpointer data);
 
-void      actions_set_sensitive     (gboolean state);
-void      buttons_set_visibility    (void);
+void      callbacks_actions_set_sensitive      (gboolean state);
+void      callbacks_buttons_set_visibility     (void);
+gboolean  callbacks_conf_read_failed_hook (XstTool *tool, XstReportLine *rline, gpointer data);
 
 #endif /* CALLBACKS_H */
 

@@ -35,6 +35,7 @@
 #include <stdlib.h>
 
 #include "xst.h"
+#include "xst-report-hook.h"
 
 #include "transfer.h"
 #include "e-table.h"
@@ -61,7 +62,7 @@ update_complexity (void)
 	complexity = tool->main_dialog->complexity;
 
 	boot_table_update_state ();
-	buttons_set_visibility ();
+	callbacks_buttons_set_visibility ();
 }
 
 static void
@@ -77,11 +78,18 @@ connect_signals ()
 int
 main (int argc, char *argv[])
 {
+	XstReportHookEntry report_hooks[] = {
+		{ "boot_conf_read_failed", callbacks_conf_read_failed_hook,
+		  XST_REPORT_HOOK_LOAD, FALSE, NULL },
+		{ NULL, NULL, -1, FALSE, NULL }
+	};
+	
 	xst_init ("boot-admin", argc, argv, NULL);
 	tool = xst_tool_new ();
 	xst_tool_construct (tool, "boot", _("Boot Manager Settings - Ximian Setup Tools"));
 
-	xst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	xst_tool_set_xml_funcs    (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	xst_tool_add_report_hooks (tool, report_hooks);
 	
 	connect_signals ();
 
