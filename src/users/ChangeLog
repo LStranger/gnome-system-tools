@@ -1,5 +1,11 @@
 2001-06-01  Chema Celorio  <chema@celorio.com>
 
+	* passwd.c (passwd_check): add #ifdef HAVE_CRACKLIB so that it
+	can be built witout cracklib support
+	(passwd_get_random): ditto
+
+2001-06-01  Chema Celorio  <chema@celorio.com>
+
 	* passwd.c: implement.
 	(passwd_get_cracklib_dictionary_path): implement.
 	Fixes : http://bugzilla.ximian.com/show_bug.cgi?id=3009

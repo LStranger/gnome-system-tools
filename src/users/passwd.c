@@ -241,7 +241,9 @@ passwd_get_random (void)
 	rand_str (random_passwd, RANDOM_PASSWD_SIZE);
 
 	if (dictionary)
+#ifdef	HAVE_LIBCRACK
 		while (FascistCheck (random_passwd, dictionary))
+#endif	
 			rand_str (random_passwd, RANDOM_PASSWD_SIZE);
 
 	g_free (dictionary);
@@ -262,8 +264,10 @@ passwd_check (gchar *pwd1, gchar *pwd2, gboolean check_quality)
 		return g_strdup (_("Passwords doesn't match."));
 	
 	if (dictionary)
+#ifdef	HAVE_LIBCRACK
 		if (check_quality && (check_err = FascistCheck (pwd1, dictionary)))
 			return g_strdup_printf (_("Bad password: %s.\nPlease try with a new password."), check_err);
+#endif	
 
 	g_free (dictionary);
 	
