@@ -38,6 +38,9 @@
 #include "tz-map.h"
 
 
+extern XstTimeTool *tool;
+
+
 /* --- Forward declarations of internal functions --- */
 
 
@@ -210,7 +213,7 @@ motion (GtkWidget *widget, GdkEventMotion *event, gpointer data)
 	/* e_tz_map_location_from_point() can in theory return NULL, but in
 	 * practice there are no reasons why it should */
 
-	gtk_label_set_text (GTK_LABEL (gtk_object_get_data (GTK_OBJECT (tzmap->tool), "location_hover")),
+	gtk_label_set_text (GTK_LABEL (((XstTimeTool *) tzmap->tool)->map_hover_label),
 			    tz_location_get_zone (e_tz_map_location_from_point (tzmap, tzmap->point_hover)));
 
 	return TRUE;

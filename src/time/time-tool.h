@@ -19,6 +19,8 @@ struct _XstTimeTool {
 	GtkWidget *minutes;
 	GtkWidget *hours;
 
+	GtkWidget *map_hover_label;
+
 	gint sec;
 	gint min;
 	gint hrs;

@@ -572,6 +572,7 @@ xst_time_load_widgets (XstTimeTool *tool)
 	tool->seconds = xst_time_spin_button_create (tool);
 	tool->minutes = xst_time_spin_button_create (tool);
 	tool->hours   = xst_time_spin_button_create (tool);
+	tool->map_hover_label = xst_dialog_get_widget (dialog, "location_label");
 
 	gtk_box_pack_start_defaults (GTK_BOX (hbox), tool->hours);
 	label =	gtk_label_new (":");

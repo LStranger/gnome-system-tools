@@ -278,7 +278,6 @@
 		      <last_modification_time>Sat, 27 Jan 2001 19:18:19 GMT</last_modification_time>
 		    </signal>
 		    <label>Set time zone...</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
 		  </widget>
 		</widget>
 	      </widget>
@@ -340,7 +339,6 @@
 	      <last_modification_time>Mon, 29 Jan 2001 14:41:14 GMT</last_modification_time>
 	    </signal>
 	    <label>Select servers...</label>
-	    <relief>GTK_RELIEF_NORMAL</relief>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -511,7 +509,20 @@ one of the dots on the map.</label>
 	  </child>
 
 	  <widget>
-	    <class>Placeholder</class>
+	    <class>GtkLabel</class>
+	    <name>location_label</name>
+	    <label></label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
 	  </widget>
 	</widget>
       </widget>
@@ -753,7 +764,6 @@ one of the dots on the map.</label>
 	  <last_modification_time>Tue, 22 Aug 2000 09:59:06 GMT</last_modification_time>
 	</signal>
 	<label>Add</label>
-	<relief>GTK_RELIEF_NORMAL</relief>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
