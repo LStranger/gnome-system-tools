@@ -109,30 +109,30 @@ static gboolean tool_interface_load()
 	
 	/* Load interface from Glade file */
 
-	path = make_glade_path(tool_context->task);
-	tool_context->interface = glade_xml_new(path, NULL);
+	path = make_glade_path (tool_context->task);
+	tool_context->interface = glade_xml_new (path, NULL);
 
 	/* Connect signals */
 
 	if (tool_context->interface)
-	        glade_xml_signal_autoconnect(tool_context->interface);
+	        glade_xml_signal_autoconnect (tool_context->interface);
 	else
-	        g_error("Could not load tool interface from %s", path);
-	g_free(path);
+	        g_error ("Could not load tool interface from %s", path);
+	g_free (path);
 
 	/* Load common interface elements from Glade file */
 
-	path = make_glade_path("common");
-	tool_context->common_interface = glade_xml_new(path, NULL);
+	path = make_glade_path ("common");
+	tool_context->common_interface = glade_xml_new (path, NULL);
 	if (!tool_context->common_interface)
-	  g_error("Could not load common interface elements from %s", path);
-	g_free(path);
+	  g_error ("Could not load common interface elements from %s", path);
+	g_free (path);
 
 	/* Locate and save a pointer to the top level window */
 
-	path = g_strjoin("_", tool_context->task, "admin", NULL);
-	tool_context->top_window = tool_widget_get(path);
-	g_free(path);
+	path = g_strjoin ("_", tool_context->task, "admin", NULL);
+	tool_context->top_window = tool_widget_get (path);
+	g_free (path);
 
 	if (!tool_context->top_window)
 	        g_error ("Undefined toplevel window in Glade file.");
@@ -165,7 +165,7 @@ void tool_context_destroy(ToolContext *tc)
 	g_free(tc->task);
 	/* TODO: Free interface */
 	/* TODO: Free config */
-	g_free(tc);
+	g_free (tc);
 }
 
 
@@ -182,7 +182,7 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 	if (!line)
 	{
 		line = malloc(1);
-		line[0] = '\0';
+		line [0] = '\0';
 	}
 
 	/* NOTE: The read() being done here is inefficient, but we're not
@@ -202,13 +202,13 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 			}
 			else
 			{
-				if (line[0] == '0')
+				if (line [0] == '0')
 				{
 					/* Progress update */
 
 					gtk_progress_set_percentage (GTK_PROGRESS(bar),
-								     (gfloat) ((line[1] - '0') * 0.1) +
-								              (line[2] - '0') * 0.01);
+								     (gfloat) ((line [1] - '0') * 0.1) +
+								              (line [2] - '0') * 0.01);
 				}
 				else
 				{
@@ -219,7 +219,7 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 				}
 			}
 
-			line[0] = '\0';
+			line [0] = '\0';
 			line_len = 0;
 		}
 		else
@@ -227,9 +227,9 @@ static void read_progress_tick(gpointer data, gint fd, GdkInputCondition cond)
 			/* Add character to end of current line */
 			
 			line = realloc(line, line_len + 2);
-			line[line_len] = c;
+			line [line_len] = c;
 			line_len++;
-			line[line_len] = '\0';
+			line [line_len] = '\0';
 		}
 	}
 #if 0  
@@ -294,11 +294,11 @@ static void read_progress(int fd)
 gboolean tool_config_load()
 {
 	ToolContext *tc;
-	int fd[2];
+	int fd [2];
 	int t, len;
 	char *p;
-	/* char *argv[] = { 0, "--get", "-v", 0 }; */
-	char *argv[] = { 0, "--get", "--progress", "--report", 0 };
+	/* char *argv [] = { 0, "--get", "-v", 0 }; */
+	char *argv [] = { 0, "--get", "--progress", "--report", 0 };
 	gchar *path;
 
 	tc = tool_context;
@@ -317,18 +317,18 @@ gboolean tool_config_load()
 	{
 		/* Parent */
 
-		close (fd[1]);	/* Close writing end */
+		close (fd [1]);	/* Close writing end */
 
 		/* LibXML support for parsing from memory is good, but parsing from
 		 * opened filehandles is not supported unless you write your own feed
 		 * mechanism. Let's just load it all into memory, then. Also, refusing
 		 * enormous documents can be considered a plus. </dystopic> */
 
-		read_progress (fd[0]);
+		read_progress (fd [0]);
 
 		p = malloc (102400);
-		fcntl(fd[0], F_SETFL, 0);  /* Let's block */
-		for (len = 0; (t = read (fd[0], p + len, 102399 - len)); )
+		fcntl(fd [0], F_SETFL, 0);  /* Let's block */
+		for (len = 0; (t = read (fd [0], p + len, 102399 - len)); )
 		  len += t;
 
 		if (len < 1 || len == 102399)
@@ -342,16 +342,16 @@ gboolean tool_config_load()
 
 		tc->config = xmlParseDoc (p);
 		free (p);
-		close (fd[0]);
+		close (fd [0]);
 	}
 	else
 	{
 		/* Child */
 
-		close (fd[0]);	/* Close reading end */
-		dup2 (fd[1], STDOUT_FILENO);
+		close (fd [0]);	/* Close reading end */
+		dup2 (fd [1], STDOUT_FILENO);
 
-		argv[0] = make_script_name (tc->task);
+		argv [0] = make_script_name (tc->task);
 		path = make_script_path (tc->task);
 		execve (path, argv, __environ);
 		g_error ("Unable to run backend: %s", path);
@@ -367,10 +367,10 @@ gboolean tool_config_save()
 {
 	ToolContext *tc;
 	FILE *f;
-	int fd[2];
+	int fd [2];
 	int t;
-	/* char *argv[] = { 0, "--filter", "-v", 0 }; */
-	char *argv[] = { 0, "--set", 0 };
+	/* char *argv [] = { 0, "--filter", "-v", 0 }; */
+	char *argv [] = { 0, "--set", 0 };
 	gchar *path;
 
 	tc = tool_context;
@@ -388,8 +388,8 @@ gboolean tool_config_save()
 	{
 		/* Parent */
 
-		close (fd[0]);	/* Close reading end */
-		f = fdopen (fd[1], "w");
+		close (fd [0]);	/* Close reading end */
+		f = fdopen (fd [1], "w");
 
 		xmlDocDump (f, tc->config);
 		fclose (f);
@@ -398,10 +398,10 @@ gboolean tool_config_save()
 	{
 		/* Child */
 
-		close (fd[1]);	/* Close writing end */
-		dup2 (fd[0], STDIN_FILENO);
+		close (fd [1]);	/* Close writing end */
+		dup2 (fd [0], STDIN_FILENO);
 
-		argv[0] = make_script_name (tc->task);
+		argv [0] = make_script_name (tc->task);
 		path = make_script_path (tc->task);
 		execve (path, argv, __environ);
 		g_error ("Unable to run backend: %s", path);
@@ -572,7 +572,7 @@ void tool_user_close(GtkWidget *widget, gpointer data)
 }
 
 
-ToolContext *tool_init(gchar *task, int argc, char *argv[])
+ToolContext *tool_init(gchar *task, int argc, char *argv [])
 {
 	ToolContext *tc;
 	GtkWidget *w0;
