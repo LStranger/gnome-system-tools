@@ -41,7 +41,7 @@ gchar *s = N_("Select which type of connection you would like to add.");
 gchar *s = N_("Modem (PPP)");
 gchar *s = N_("Ethernet");
 gchar *s = N_("Wavelan");
-gchar *s = N_("Paralel Line");
+gchar *s = N_("Parallel Line");
 gchar *s = N_("Connection Settings");
 gchar *s = N_("Use the comment to identify the interface in the future. Activation management lets you set who and when will activate connections.");
 gchar *s = N_("Connection");
@@ -54,9 +54,10 @@ gchar *s = N_("Allow activation control for all users");
 gchar *s = N_("General");
 gchar *s = N_("How the IP address for this connection is determined");
 gchar *s = N_("Configuration:");
-gchar *s = N_("Manual");
-gchar *s = N_("DHCP");
-gchar *s = N_("BOOTP");
+gchar *s = N_("Manual\n"
+              "DHCP\n"
+              "BOOTP\n"
+              "");
 gchar *s = N_("Update DNS when this connection becomes active");
 gchar *s = N_("IP address:");
 gchar *s = N_("Subnet mask:");
