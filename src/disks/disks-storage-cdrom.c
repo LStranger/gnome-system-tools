@@ -25,7 +25,7 @@
 #endif
 
 #include <libgnome/gnome-i18n.h>
-#include "gst.h"
+/*#include "gst.h"*/
 
 #include "disks-storage.h"
 #include "disks-storage-cdrom.h"
@@ -182,6 +182,8 @@ storage_cdrom_setup_properties_widget (GstDisksStorage *storage)
 	cdrom = GST_DISKS_STORAGE_CDROM (storage);
 
 	gst_disks_gui_setup_cdrom_properties (cdrom);
+
+	GST_DISKS_STORAGE_GET_CLASS (storage)->setup_common_properties (storage);
 }
 
 gboolean

@@ -137,7 +137,6 @@ storage_disk_finalize (GObject *object)
 		storage->priv = NULL;
 	}
 	
-	
 	if (G_OBJECT_CLASS (parent_class)->finalize)
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
@@ -198,6 +197,8 @@ storage_disk_setup_properties_widget (GstDisksStorage *storage)
 	disk = GST_DISKS_STORAGE_DISK (storage);
 
 	gst_disks_gui_setup_disk_properties (disk);
+	
+	GST_DISKS_STORAGE_GET_CLASS (storage)->setup_common_properties (storage);
 }
 
 void

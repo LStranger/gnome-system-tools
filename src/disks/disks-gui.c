@@ -29,6 +29,7 @@
 #include <gnome.h>
 #include "gst.h"
 
+#include "gst-disks-tool.h"
 #include "disks-storage.h"
 #include "disks-partition.h"
 #include "disks-storage-disk.h"
@@ -40,7 +41,6 @@
 #include "callbacks.h"
 
 extern GstTool *tool;
-GnomeIconTheme *icon_theme;
 
 /* Uncomment for 0.2 */
 /*GtkItemFactoryEntry popup_partition_menu_items[] = {
@@ -103,7 +103,7 @@ gst_storage_get_icon (const gchar *icon_name)
 	GdkPixbuf *pb;
 	gchar *file;
 	
-	file = gnome_icon_theme_lookup_icon (icon_theme,
+	file = gnome_icon_theme_lookup_icon (GST_DISKS_TOOL (tool)->icon_theme,
 					     icon_name, 48,
 					     NULL, NULL);
 	
@@ -163,6 +163,8 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
+	GtkTreePath *path = NULL;
+	GtkTreeSelection *selection;
 	GList *list = NULL;
 	GstDisksStorage *dsk;
 	gchar *icon, *name;
@@ -171,6 +173,10 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 	g_return_if_fail (treeview != NULL);
 	g_return_if_fail (storages != NULL);
 
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
+	if (gtk_tree_selection_get_selected (selection, &model, &iter))
+		path = gtk_tree_model_get_path (model, &iter);
+	
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
 	gtk_tree_store_clear (GTK_TREE_STORE (model));
 	list = g_list_first (storages);
@@ -194,9 +200,13 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 		list = g_list_next (list);
 	}
 
-	gtk_tree_model_get_iter_first (model, &iter);
-	gtk_tree_selection_select_iter (gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview)),
-					&iter);
+	if (path) {
+		gtk_tree_selection_select_path (selection, path);
+		gtk_tree_path_free (path);
+	} else {
+		gtk_tree_model_get_iter_first (model, &iter);
+		gtk_tree_selection_select_iter (selection, &iter);
+	}
 }
 
 static void
@@ -325,7 +335,7 @@ gst_disks_gui_set_device_speed (GstDisksStorage *storage)
 
 
 void
-gst_disks_gui_setup (GstDisksConfig *cfg)
+gst_disks_gui_setup ()
 {
 	GtkWidget *treeview;
 	GtkTreeModel *model;
@@ -343,13 +353,11 @@ gst_disks_gui_setup (GstDisksConfig *cfg)
 	/* Cdrom Disc Audio Widgets */
 	GtkWidget *cd_play_button;
 
-	g_return_if_fail (cfg != NULL);
+	list = GST_DISKS_TOOL (tool)->storages;
 
-	list = cfg->storages;
-
-	icon_theme = gnome_icon_theme_new ();
-	gnome_icon_theme_set_allow_svg (icon_theme, TRUE);
-	g_signal_connect (G_OBJECT (icon_theme), "changed",
+	GST_DISKS_TOOL (tool)->icon_theme = gnome_icon_theme_new ();
+	gnome_icon_theme_set_allow_svg (GST_DISKS_TOOL (tool)->icon_theme, TRUE);
+	g_signal_connect (G_OBJECT (GST_DISKS_TOOL (tool)->icon_theme), "changed",
 			  G_CALLBACK (gst_disks_gui_storage_list_reload),
 			  (gpointer) list);
 	
@@ -423,6 +431,44 @@ gst_disks_gui_setup (GstDisksConfig *cfg)
 }
 
 /* Porperties Widgets */
+
+/* All Storages */
+void
+gst_disks_gui_setup_storage_properties (GstDisksStorage *storage)
+{
+	GtkWidget *storage_icon, *storage_label;
+	gchar     *icon, *model, *device;
+	gulong     size;
+
+	g_return_if_fail (GST_IS_DISKS_STORAGE (storage));
+
+	g_object_get (G_OBJECT (storage),
+		      "model", &model,
+		      "device", &device,
+		      "icon_name", &icon,
+		      "size", &size,
+		      NULL);
+
+	storage_icon = gst_dialog_get_widget (tool->main_dialog, "storage_icon");
+	storage_label = gst_dialog_get_widget (tool->main_dialog, "storage_label");
+
+	gtk_image_set_from_pixbuf (GTK_IMAGE (storage_icon),
+				   gst_storage_get_icon (icon));
+
+	if (size > 0) {
+		gtk_label_set_markup (
+			GTK_LABEL (storage_label),
+			g_strdup_printf ("<b>%s</b>\n%s\n<small><i>%s</i></small>",
+					 model,
+					 gst_storage_get_human_readable_size (size),
+					 device));
+	} else {
+		gtk_label_set_markup (
+			GTK_LABEL (storage_label),
+			g_strdup_printf ("<b>%s</b>\n<small><i>%s</i></small>",
+					 model, device));
+	}
+}
 
 /* Disk */
 void

@@ -1,3 +1,20 @@
+2004-04-21  Carlos García Campos <elkalmail@yahoo.es>
+
+	* Makefile.am: added gst-disks-tool.[ch] files
+
+	* gst-disks-tool.[ch]: added GstDisksTool class
+
+	* disks-config.[ch]: removed
+
+	* callbacks.c, disks-gui.[ch], main.c, transfer.[ch]: moved all of the
+	disks-config functionality to GstDisksTool class that inherits from
+	GstTool and adds a list to store all of the storages and the
+	icon_theme global variable
+
+	* disks-storage.[ch], disks-storage-cdrom.c, disks-storage-disk.c:
+	added setup_common_properties as a protected method to setup the gui
+	for the properties common for all storages
+	
 2004-04-20  Carlos García Campos <elkalmail@yahoo.es>
 
 	* Makefile.am: added disks-cdrom-disc-audio.[ch]

@@ -26,6 +26,7 @@
 
 #include <libgnome/gnome-i18n.h>
 #include "disks-storage.h"
+#include "disks-gui.h"
 
 #define PARENT_TYPE G_TYPE_OBJECT
 
@@ -57,6 +58,8 @@ static void storage_set_property (GObject  *object, guint prop_id,
 				  const GValue *value, GParamSpec *spec);
 static void storage_get_property (GObject  *object, guint prop_id,
 				  GValue *value, GParamSpec *spec);
+
+static void storage_setup_common_properties (GstDisksStorage *storage);
 
 static GObjectClass *parent_class = NULL;
 
@@ -100,12 +103,15 @@ static void
 storage_class_init (GstDisksStorageClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GstDisksStorageClass *storage_class = GST_DISKS_STORAGE_CLASS (klass);
 
 	parent_class = g_type_class_peek_parent (klass);
 
 	object_class->set_property = storage_set_property;
 	object_class->get_property = storage_get_property;
 
+	storage_class->setup_common_properties = storage_setup_common_properties;
+	
 	g_object_class_install_property (object_class, PROP_NAME,
 					 g_param_spec_string ("name", NULL, NULL,
 							      NULL, G_PARAM_READWRITE));
@@ -229,3 +235,10 @@ gst_disks_storage_setup_properties_widget (GstDisksStorage *storage)
 	}
 }
 
+static void
+storage_setup_common_properties (GstDisksStorage *storage)
+{
+	g_return_if_fail (GST_IS_DISKS_STORAGE (storage));
+
+	gst_disks_gui_setup_storage_properties (storage);
+}

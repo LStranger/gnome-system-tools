@@ -46,6 +46,7 @@ struct _GstDisksStorageClass {
         GObjectClass parent_class;
 
 	void       (* setup_properties_widget) (GstDisksStorage *storage);
+	void       (* setup_common_properties) (GstDisksStorage *storage);
 };
 
 GType      gst_disks_storage_get_type      (void);

@@ -29,12 +29,12 @@
 
 #include <gnome.h>
 
-#include "gst.h"
 #include "gst-report-hook.h"
 
-#include "disks-config.h"
+#include "gst-disks-tool.h"
 #include "callbacks.h"
 #include "transfer.h"
+#include "gst-disks-tool.h"
 
 GstTool *tool;
 
@@ -54,18 +54,16 @@ connect_signals (GstTool *tool)
 gint
 main (gint argc, gchar *argv[])
 {
-	GstDisksConfig *cfg;
 	GstReportHookEntry report_hooks[] = {
 		{ NULL, NULL, -1, FALSE, NULL }
 	};
 
 	gst_init ("disks-admin", argc, argv, NULL);
-	tool = gst_tool_new ();
+
+	tool = gst_disks_tool_new ();
 	gst_tool_construct (tool, "disks", _("Disks Manager"));
 
-	cfg = gst_disks_config_new ();
-	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml,
-				(gpointer) cfg);
+	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	gst_tool_add_report_hooks (tool, report_hooks);
 
 	connect_signals (tool);

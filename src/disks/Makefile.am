@@ -21,7 +21,7 @@ disks_admin_DEPENDENCIES = $(GST_TOOL_DEPENDENCIES)
 disks_admin_SOURCES = \
 	main.c                             \
 	transfer.c		  transfer.h	\
-	disks-config.c       	  disks-config.h \
+	gst-disks-tool.c	  gst-disks-tool.h \
 	disks-storage.c 	  disks-storage.h \
 	disks-storage-disk.c 	  disks-storage-disk.h \
 	disks-partition.c 	  disks-partition.h \

@@ -29,7 +29,6 @@
 #include <gnome.h>
 #include "gst.h"
 
-#include "disks-config.h"
 #include "disks-storage.h"
 #include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"
@@ -61,11 +60,8 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 	GtkTreeIter       iter;
 	GtkTreeSelection *selec;
 	GstDisksStorage  *storage;
-	GtkWidget        *storage_icon, *storage_label;
-	gchar            *icon, *st_model, *device;
 	GtkWidget        *treeview;
 	GList            *partitions;
-	gulong            size;
 	gboolean          cd_empty;
 	GstCdromDisc     *disc;
 	GtkWidget        *properties_notebook;
@@ -75,35 +71,7 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 	if (gtk_tree_selection_get_selected (GTK_TREE_SELECTION (selection), &model, &iter)) {
 		gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &storage, -1);
 
-		/* Common properties */
 		if (GST_IS_DISKS_STORAGE (storage)) {
-			g_object_get (G_OBJECT (storage),
-				      "model", &st_model,
-				      "device", &device,
-				      "icon_name", &icon,
-				      "size", &size,
-				      NULL);
-				      
-			storage_icon = gst_dialog_get_widget (tool->main_dialog, "storage_icon");
-			storage_label = gst_dialog_get_widget (tool->main_dialog, "storage_label");
-
-			gtk_image_set_from_pixbuf (GTK_IMAGE (storage_icon),
-						   gst_storage_get_icon (icon));
-
-			if (size > 0) {
-				gtk_label_set_markup (
-					GTK_LABEL (storage_label), 
-					g_strdup_printf ("<b>%s</b>\n%s\n<small><i>%s</i></small>",
-							 st_model,
-							 gst_storage_get_human_readable_size (size),
-							 device));
-			} else {
-				gtk_label_set_markup (
-					GTK_LABEL (storage_label), 
-					g_strdup_printf ("<b>%s</b>\n<small><i>%s</i></small>",
-							 st_model, device));
-			}
-			
 			/* Properties Notebook */
 			properties_notebook = gst_dialog_get_widget (tool->main_dialog,
 								     "properties_notebook");

@@ -30,9 +30,8 @@
 #endif
 
 #include <glib.h>
-#include "gst.h"
 
-#include "disks-config.h"
+#include "gst-disks-tool.h"
 #include "disks-storage.h"
 #include "disks-factory-storage.h"
 #include "disks-partition.h"
@@ -46,7 +45,7 @@
 extern GstTool *tool;
 
 static void
-transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
+transfer_xml_to_config (xmlNodePtr root)
 {
 	xmlNodePtr disk_node, part_node, node;
 	GstDisksStorage *storage;
@@ -55,7 +54,6 @@ transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
 	gulong p_size, storage_size;
 
 	g_return_if_fail (root != NULL);
-	g_return_if_fail (cfg != NULL);
 	
 	for (disk_node = gst_xml_element_find_first (root, "disk");
 	     disk_node;
@@ -230,13 +228,13 @@ transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
 								      part);
 			}
 		}
-		gst_disks_config_add_storage (cfg, storage);
+		gst_disks_tool_add_storage (GST_DISKS_TOOL (tool), storage);
 	}
 }
 
 /* Uncomment in the future */
 /*static void
-transfer_config_to_xml (GstDisksConfig *cfg, xmlNodePtr root)
+transfer_config_to_xml (xmlNodePtr root)
 {
 	return;
 }*/
@@ -245,26 +243,19 @@ void
 transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
-	GstDisksConfig *cfg;
-
-	cfg = (GstDisksConfig *) data;
 	
 	root = gst_xml_doc_get_root (tool->config);
 
-	transfer_xml_to_config (root, cfg);
+	transfer_xml_to_config (root);
 
-	gst_disks_gui_setup (cfg);
-
+	gst_disks_gui_setup ();
 }
 
 void
 transfer_gui_to_xml (GstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
-	GstDisksConfig *cfg;
 
-	cfg = (GstDisksConfig *) data;
-	
 	root = gst_xml_doc_get_root (tool->config);
 
 	/*transfer_config_to_xml (dsk, root);*/
@@ -480,14 +471,16 @@ gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom)
 					} else if (!GST_IS_CDROM_DISC_DATA (disc)) {
 						g_object_unref (G_OBJECT (disc));
 						disc = gst_cdrom_disc_data_new ();
-					} else
+					}
 					
 					node = gst_xml_element_find_first (disc_info, "mounted");
-					if (node)
+					if (node) {
 						g_object_set (G_OBJECT (disc), "mounted",
 							      gst_xml_element_get_bool_attr (
 								      node, "state"),
 							      NULL);
+					}
+					
 					buf = gst_xml_get_child_content (disc_info, "point");
 					if (buf) {
 						g_object_set (G_OBJECT (disc), "mount-point",

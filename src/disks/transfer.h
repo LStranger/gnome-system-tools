@@ -30,8 +30,8 @@
 #include "disks-cdrom-disc.h"
 #include "disks-partition.h"
 
-void transfer_xml_to_gui(GstTool *tool, gpointer data);
-void transfer_gui_to_xml(GstTool *tool, gpointer data);
+void transfer_xml_to_gui (GstTool *tool, gpointer data);
+void transfer_gui_to_xml (GstTool *tool, gpointer data);
 
 gboolean      gst_disks_mount_partition         (GstDisksPartition *part);
 gboolean      gst_disks_mount_cdrom             (GstDisksStorageCdrom *cdrom);
