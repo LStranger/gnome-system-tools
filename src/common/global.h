@@ -6,3 +6,4 @@
 #include "xst-widget.h"
 #include "xst-tool.h"
 #include "xst-dialog.h"
+#include "xst-ui.h"
