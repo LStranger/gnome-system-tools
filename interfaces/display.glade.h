@@ -5,6 +5,11 @@
  */
 
 gchar *s = N_("window2");
+gchar *s = N_("Monitor information (from X server)");
+gchar *s = N_("Vendor:");
+gchar *s = N_("Model:");
+gchar *s = N_("<unknown>");
+gchar *s = N_("<unknown>");
 gchar *s = N_("Up");
 gchar *s = N_("Left");
 gchar *s = N_("Right");
