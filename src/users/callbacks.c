@@ -298,8 +298,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 		selection = g_list_copy (list->selection);
 		gtk_list_remove_items (list, selection);
 		g_list_free (selection);
-/*		current_user = user_list; */
-		
+		tool_set_modified (TRUE);
 	}
 }
 
