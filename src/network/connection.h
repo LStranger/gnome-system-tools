@@ -103,6 +103,7 @@ extern XstConnection *connection_new_from_type (XstConnectionType type, xmlNode 
 extern XstConnection *connection_new_from_type_add (XstConnectionType type, xmlNode *root);
 extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection);
 extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
+extern void connection_update_row_enabled (XstConnection *cxn, gboolean enabled);
 extern void connection_update_row (XstConnection *cxn);
 extern void connection_free (XstConnection *);
 extern void connection_configure (XstConnection *cxn);

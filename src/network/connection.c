@@ -454,10 +454,36 @@ connection_init_icons (void)
 }
 
 void
+connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
+{
+	GtkWidget *clist;
+	gint row, i;
+	XstConnection *cxn2;
+
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
+
+	if (enabled)
+		for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
+			cxn2 = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+			if (!strcmp (cxn->dev, cxn2->dev))
+				connection_update_row_enabled (cxn2, FALSE);
+		}
+
+	cxn->enabled = enabled;
+	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
+	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1,
+			       enabled ? _("Active") : _("Inactive"),
+			       GNOME_PAD_SMALL,
+			       active_pm[enabled ? 1 : 0], 
+			       active_mask[enabled ? 1 : 0]);
+	xst_dialog_modify (tool->main_dialog);
+}
+
+void
 connection_update_row (XstConnection *cxn)
 {
 	GtkWidget *clist;
-	int row;
+	gint row;
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 
@@ -465,13 +491,9 @@ connection_update_row (XstConnection *cxn)
 
 	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
 			       mini_pm[cxn->type], mini_mask[cxn->type]);
-	
-	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1,
-			       cxn->enabled ? _("Active") : _("Inactive"),
-			       GNOME_PAD_SMALL,
-			       active_pm[cxn->enabled ? 1 : 0], 
-			       active_mask[cxn->enabled ? 1 : 0]);
 
+	connection_update_row_enabled (cxn, cxn->enabled);
+	
 	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name);
 
 	xst_dialog_modify (tool->main_dialog);

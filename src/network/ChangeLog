@@ -1,3 +1,13 @@
+2001-03-12  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.c (connection_update_row_enabled): Function that
+	  sets the "active" column, and if it is to enable, disables all
+	  other connection configurations that use the same device.
+	  (connection_update_row): Use the new function.
+
+	* callbacks.c (on_connection_activate_clicked): Use the new function.
+	(on_connection_deactivate_clicked): Use the new function.
+
 2001-03-05  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* main.c (main): Add callbacks_check_hostname_hook to the list of

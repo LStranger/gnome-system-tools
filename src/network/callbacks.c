@@ -364,8 +364,7 @@ on_connection_activate_clicked (GtkWidget *w, gpointer null)
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
-	cxn->enabled = TRUE;
-	connection_update_row (cxn);
+	connection_update_row_enabled (cxn, TRUE);
 }
 
 void
@@ -376,8 +375,7 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
-	cxn->enabled = FALSE;
-	connection_update_row (cxn);
+	connection_update_row_enabled (cxn, FALSE);
 }
 
 void
