@@ -68,10 +68,14 @@ exec_su (gchar *exec_path, gchar *user, gchar *pwd)
 	pid_t pid;
 	int t_fd;
 
+	exec_p = g_strdup (exec_path);
+
+#if 0
 	if (asprintf (&exec_p, "%s&", exec_path) < 0) {
 		perror ("Unable to allocate memory chunk");
 		return 0;
 	}
+#endif
 
 	user_p = (user ? user : "root");
 
