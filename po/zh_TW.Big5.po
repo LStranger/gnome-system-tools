@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.7.0\n"
-"POT-Creation-Date: 2001-07-30 10:28+0800\n"
+"POT-Creation-Date: 2001-07-30 12:14-0500\n"
 "PO-Revision-Date: 2001-07-30 21:08+0800\n"
 "Last-Translator: Abel Cheung <maddog@linux.org.hk>\n"
 "Language-Team: Traditional chinese <zh-l10n@linux.org.tw>\n"
@@ -1401,8 +1401,8 @@ msgstr ""
 
 #: interfaces/network.glade.in.h:69
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
-"\"."
+"To continue configuring your account, click \"Next\". To quit, click "
+"\"Cancel\"."
 msgstr "想繼續設定你的戶口，按「下一步」。想離開，請按「取消」。"
 
 #: interfaces/network.glade.in.h:70
@@ -2382,37 +2382,43 @@ msgstr "Dos"
 msgid "Linux"
 msgstr "Linux"
 
-#: src/boot/boot-image.c:212
+#: src/boot/boot-image.c:216
 #, c-format
 msgid "Invalid path: %s"
 msgstr "不正確的路徑：%s"
 
-#: src/boot/boot-image.c:228
+#: src/boot/boot-image.c:232
 #, c-format
 msgid "Image '%s' already exists, please set another name."
 msgstr ""
 
-#: src/boot/boot-image.c:234
+#: src/boot/boot-image.c:238
 #, c-format
 msgid "Invalid image name: '%s'"
 msgstr ""
 
-#: src/boot/boot-image.c:249
+#: src/boot/boot-image.c:253
 #, c-format
 msgid "Invalid image: '%s'"
 msgstr ""
 
-#: src/boot/boot-image.c:267
+#: src/boot/boot-image.c:271
 #, c-format
 msgid "Invalid root device: '%s'"
 msgstr ""
 
 #: src/boot/callbacks.c:61
+msgid ""
+"Without at least one boot image,\n"
+"your system will not start.\n"
+msgstr ""
+
+#: src/boot/callbacks.c:72
 #, c-format
 msgid "Are you sure you want to delete %s?"
 msgstr "你是否確定要刪除 %s？"
 
-#: src/boot/e-table.c:364
+#: src/boot/e-table.c:362
 #, c-format
 msgid "%s (default)"
 msgstr "%s（預設）"
@@ -2553,8 +2559,7 @@ msgstr "我們假扮是 root..."
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
-msgstr ""
-"請重新啟動 GNOME 作業階段來使設定生效。"
+msgstr "請重新啟動 GNOME 作業階段來使設定生效。"
 
 #: src/disks/main.c:39
 msgid "Disk Partitions"
@@ -3152,17 +3157,17 @@ msgstr ""
 "你需要指定用戶端名稱的式樣，例如\n"
 "\"*.myschool.edu\" 或 \"192.168.0.1/24\"。"
 
-#: src/time/main.c:371
+#: src/time/main.c:397
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
 msgstr "你的系統並未安裝 NTP 支援。請在系統安裝 NTP 支援使時間校對生效。"
 
-#: src/time/main.c:372
+#: src/time/main.c:398
 msgid "NTP support missing."
 msgstr "沒有 NTP 支援。"
 
-#: src/time/main.c:606
+#: src/time/main.c:632
 msgid "Time and Date Settings"
 msgstr "時間日期設定"
 
@@ -3361,8 +3366,7 @@ msgstr "存取使用者目錄時發生錯誤。"
 msgid ""
 "The home directory already exists. This will break the new user's "
 "permissions."
-msgstr ""
-"此使用者目錄已經存在。這樣會破壞新增使用者的權限。"
+msgstr "此使用者目錄已經存在。這樣會破壞新增使用者的權限。"
 
 #: src/users/user_group.c:1413
 msgid "The home directory path exists, but it is not a directory."
@@ -3383,8 +3387,7 @@ msgstr "使用者沒有足夠權限寫入使用者本身的目錄。"
 #: src/users/user_group.c:1429
 msgid ""
 "The user doesn't have permission to use (``execute'') the home directory."
-msgstr ""
-"使用者沒有足夠權限進入使用者本身的目錄。"
+msgstr "使用者沒有足夠權限進入使用者本身的目錄。"
 
 #: interfaces/internetsharing.glade.in.h:1
 msgid "Banner Removal (Junkbuster)"
@@ -4038,4 +4041,3 @@ msgstr "寫入"
 
 #~ msgid "Dummy Printer"
 #~ msgstr "虛擬印表機"
-

@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-07-26 00:55+0200\n"
+"POT-Creation-Date: 2001-07-30 12:14-0500\n"
 "PO-Revision-Date: 2001-07-26 00:59+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -653,7 +653,7 @@ msgstr "Lösenord:"
 msgid "Run without password"
 msgstr "Kör utan lösenord"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:828
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:845
 msgid "Scanning your system configuration."
 msgstr "Läser av din systemkonfiguration."
 
@@ -929,8 +929,8 @@ msgid "Up"
 msgstr "Upp"
 
 #: interfaces/display.glade.in.h:25
-msgid ""
-"Use this tool to configure your monitor. balh balhan837498 q29487 1 98374 "
+#, fuzzy
+msgid "Use this tool to configure your monitor."
 msgstr ""
 "Använd detta verktyg för att konfigurera din bildskärm. satan satan i "
 "kvadrat. ja jädrans"
@@ -2454,37 +2454,43 @@ msgstr "DOS"
 msgid "Linux"
 msgstr "Linux"
 
-#: src/boot/boot-image.c:212
+#: src/boot/boot-image.c:216
 #, c-format
 msgid "Invalid path: %s"
 msgstr "Ogiltig sökväg: %s"
 
-#: src/boot/boot-image.c:228
+#: src/boot/boot-image.c:232
 #, c-format
 msgid "Image '%s' already exists, please set another name."
 msgstr "Avbilden \"%s\" finns redan, använd ett annat namn."
 
-#: src/boot/boot-image.c:234
+#: src/boot/boot-image.c:238
 #, c-format
 msgid "Invalid image name: '%s'"
 msgstr "Ogiltigt namn på avbild: \"%s\""
 
-#: src/boot/boot-image.c:249
+#: src/boot/boot-image.c:253
 #, c-format
 msgid "Invalid image: '%s'"
 msgstr "Ogiltig avbild: \"%s\""
 
-#: src/boot/boot-image.c:267
+#: src/boot/boot-image.c:271
 #, c-format
 msgid "Invalid root device: '%s'"
 msgstr "Ogiltig rotenhet: \"%s\""
 
 #: src/boot/callbacks.c:61
+msgid ""
+"Without at least one boot image,\n"
+"your system will not start.\n"
+msgstr ""
+
+#: src/boot/callbacks.c:72
 #, c-format
 msgid "Are you sure you want to delete %s?"
 msgstr "Är du säker på att du vill ta bort %s?"
 
-#: src/boot/e-table.c:361
+#: src/boot/e-table.c:362
 #, c-format
 msgid "%s (default)"
 msgstr "%s (standard)"
@@ -2543,23 +2549,23 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/xst-tool.c:651
+#: src/common/xst-tool.c:656
 msgid "Closing tool."
 msgstr "Stänger verktyget."
 
-#: src/common/xst-tool.c:782
+#: src/common/xst-tool.c:798
 msgid "Skipping set directive..."
 msgstr "Hoppar över inställningsdirektiv..."
 
-#: src/common/xst-tool.c:855
+#: src/common/xst-tool.c:874
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/xst-tool.c:884
+#: src/common/xst-tool.c:905
 msgid "Updating your system configuration."
 msgstr "Uppdaterar din systemkonfiguration."
 
-#: src/common/xst-tool.c:903
+#: src/common/xst-tool.c:924
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2567,16 +2573,16 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/xst-tool.c:1077
+#: src/common/xst-tool.c:1098
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1217
+#: src/common/xst-tool.c:1238
 msgid "The password you entered is invalid."
 msgstr "Lösenordet du angav är ogiltigt."
 
-#: src/common/xst-tool.c:1227
+#: src/common/xst-tool.c:1248
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2603,19 +2609,19 @@ msgstr ""
 "--\n"
 "Teamet bakom Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1247
+#: src/common/xst-tool.c:1268
 msgid "Don't show me this again"
 msgstr "Visa inte detta igen"
 
-#: src/common/xst-tool.c:1277
+#: src/common/xst-tool.c:1298
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tRedigera konfigurationen på platsen PLATS."
 
-#: src/common/xst-tool.c:1277
+#: src/common/xst-tool.c:1298
 msgid "LOCATION"
 msgstr "PLATS"
 
-#: src/common/xst-tool.c:1314
+#: src/common/xst-tool.c:1335
 msgid "Pretending we are root..."
 msgstr "Låtsas att vi är root..."
 
@@ -2647,6 +2653,15 @@ msgstr "Testar nuvarande inställningar."
 #: src/display/callbacks.c:175
 msgid "Restoring settings..."
 msgstr "Återställer inställningar..."
+
+#: src/display/display.desktop.in.in.h:1
+msgid "Display"
+msgstr ""
+
+#: src/display/display.desktop.in.in.h:2
+#, fuzzy
+msgid "Display Configuration"
+msgstr "X-displaykonfiguration"
 
 #: src/display/main.c:104
 msgid "X Display Configuration"
@@ -3246,7 +3261,7 @@ msgstr ""
 "Du måste ange ett klientmönster, t.ex.\n"
 "\"*.minskola.se\" eller \"192.168.0.1/24\"."
 
-#: src/time/main.c:371
+#: src/time/main.c:397
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -3254,11 +3269,11 @@ msgstr ""
 "Du har inte NTP-stöd installerat. Installera NTP-stöd på systemet\n"
 "för att möjliggöra serversynkronisering."
 
-#: src/time/main.c:372
+#: src/time/main.c:398
 msgid "NTP support missing."
 msgstr "Stöd för NTP saknas."
 
-#: src/time/main.c:606
+#: src/time/main.c:632
 msgid "Time and Date Settings"
 msgstr "Inställningar för tid och datum"
 
