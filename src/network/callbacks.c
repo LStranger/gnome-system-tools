@@ -981,7 +981,6 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 	cursor = gdk_cursor_new (GDK_WATCH);
 	gdk_window_set_cursor (GTK_WIDGET (dialog)->window, cursor);
 	gdk_cursor_unref (cursor);
-	gdk_display_flush (gtk_widget_get_display (GTK_WIDGET (dialog)));
 
 	dev = connection_autodetect_modem ();
 
@@ -1003,7 +1002,6 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 	gtk_widget_set_sensitive (devices_combo, TRUE);
 	
 	gdk_window_set_cursor (GTK_WIDGET (dialog)->window, NULL);
-	gdk_display_flush (gtk_widget_get_display (GTK_WIDGET (dialog)));
 }
 
 void
