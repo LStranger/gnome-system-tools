@@ -1,8 +1,8 @@
 # Serbian translation of gnome-system-tools
-# Courtesy of Prevod.org team (http://www.prevod.org/) -- 2003.
-# 
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2003, 2004.
+#
 # This file is distributed under the same license as the gnome-system-tools package.
-# 
+#
 # Maintainer: Slobodan Sredojević <ssl@uns.ns.ac.yu>
 #
 #
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-26 23:08+0100\n"
-"PO-Revision-Date: 2003-12-26 23:12+0100\n"
+"POT-Creation-Date: 2004-02-12 05:17+0100\n"
+"PO-Revision-Date: 2004-02-12 05:28+0100\n"
 "Last-Translator: Danilo Šegan <danilo@prevod.org>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -48,13 +48,17 @@ msgstr "Složenost users-admin programa"
 
 #: gnome-system-tools.schemas.in.h:7
 msgid "Last GST version executed"
-msgstr "Poslednja verzija GNOM Sistemskih Alata je izvršena"
+msgstr "Poslednja verzija Gnomovih sistemskih alata je izvršena"
 
 #: gnome-system-tools.schemas.in.h:8
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr "Željeni podizač sistema koji će podesiti boot-admin"
+
+#: gnome-system-tools.schemas.in.h:9
 msgid "Remote hosts"
 msgstr "Udaljeni računari"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:10
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -63,7 +67,7 @@ msgstr ""
 "režim gde je namena naprednog režima da prikaže više opcija u odnosu na "
 "osnovni"
 
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:11
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
@@ -71,26 +75,33 @@ msgstr ""
 "GSA mogu da vrše udaljeno podešavanje kroz SSH; uključite ovu opciju da biste "
 "koristili ovu mogućnost"
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:12
 msgid "The last GST version that this computer has run"
 msgstr "Poslednja verzija GNOM Sistemskih Alata pokrenutih na ovom računaru"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:13
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr "Ovaj ključ sadrži podizač sistema koji će podesiti boot-admin ukoliko je instaliran više od jednog, a ako nije postavljen ili nije ispravan, onda će boot-admin pitati korisnika"
+
+#: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
 msgstr "Da li će alati koristiti udaljenu administraciju ili ne"
 
-#: gnome-system-tools.schemas.in.h:13
+#: gnome-system-tools.schemas.in.h:15
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Da li program users-admin treba da prikaže sve korisnike i grupe ili ne"
 
-#: gnome-system-tools.schemas.in.h:14
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Da li prozorče sa upozorenjem treba da bude prikazano ili ne"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/disks.glade.in.h:2 interfaces/network.glade.in.h:1
-#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
+#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
+#: interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -166,7 +177,11 @@ msgstr "<span weight=\"bold\">Uključivanje računara</span>"
 msgid "Ask at boot"
 msgstr "Pitaj pri podizanju sistema"
 
-#: interfaces/boot.glade.in.h:20
+#: interfaces/boot.glade.in.h:20 src/boot/main.c:73
+msgid "Boot Manager Settings"
+msgstr "Podešavanja podizanja operativnog sistema"
+
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -176,25 +191,29 @@ msgstr ""
 "kao korena deonica. Dodatno, takođe možete pridodati parametre koji se "
 "prosleđuju jezgru prilikom podizanja operativnog sistema."
 
-#: interfaces/boot.glade.in.h:21
+#: interfaces/boot.glade.in.h:22
 msgid "Click \"Forward\" to continue"
 msgstr "Pritisnite „Napred“ za nastavak rada"
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:23
 msgid "Confirmation"
 msgstr "Potvrđivanje"
 
 #. set window title
-#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
 #: src/boot/boot-druid.c:441
 msgid "Creating a new boot image"
 msgstr "Stvaram novi otisak za podizanje"
 
-#: interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.in.h:25
+msgid "Don't ask me again"
+msgstr "Ne pitaj me više"
+
+#: interfaces/boot.glade.in.h:26
 msgid "Enable IDE SCSI emulation"
 msgstr "Omogući IDE SCSI emulaciju"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:27
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -202,50 +221,56 @@ msgstr ""
 "Unesite ime datoteke sa kernelom i navedite koji operativni sistem je u "
 "pitanju."
 
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:42
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:43
 msgid "Finished"
 msgstr "Završeno"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:51
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
 #: src/network/connection.c:1843
 msgid "Manual"
 msgstr "Uputstvo"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Izmeni podešavanja za operativni sistem ili kernel."
 
-#: interfaces/boot.glade.in.h:29
+#: interfaces/boot.glade.in.h:31
 msgid "Number of colors:"
 msgstr "Broj boja:"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:32
 msgid "Other parameters:"
 msgstr "Ostali parametri:"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "Password"
 msgstr "Lozinka"
 
-#: interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.in.h:34
 msgid "Protect with password"
 msgstr "Zaštiti pomoću lozinke"
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "Resolution:"
 msgstr "Rezolucija:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:36
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr ""
 "Broj sekundi posle kojih se učitava podrazumevani kernel ili operativni "
 "sistem"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:37
+msgid ""
+"Several bootloaders have been found in the system, please select which do "
+"you want to configure"
+msgstr "Nađeno je više podizača sistema, izaberite koji želite da podesite"
+
+#: interfaces/boot.glade.in.h:38
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Navedite deonicu na kojoj je instaliran operativni sistem."
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:39
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
@@ -253,7 +278,7 @@ msgstr ""
 "Dodali ste novu datoteku za podizanje. Pritisnite „Primeni“ kako bi sačuvali "
 "izmene."
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:40
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -261,54 +286,54 @@ msgstr ""
 "Pomoćnik je tu kako bi Vam pomogao da brzo i lako izaberete novu datoteku za "
 "podizanje sistema."
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:41
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Koristite ovo prozorče za izmenu parametara jezgra."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:42
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Koristite ovaj program kako bi postavili izbor instaliranih operativnih "
 "sistema pri podizanju sistema."
 
-#: interfaces/boot.glade.in.h:40
+#: interfaces/boot.glade.in.h:43
 msgid "Video modes (only frame buffer)"
 msgstr "Video režimi (samo frejmbafer)"
 
-#: interfaces/boot.glade.in.h:41
+#: interfaces/boot.glade.in.h:44
 msgid "_Add..."
 msgstr "_Dodaj..."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:45
 msgid "_Device:"
 msgstr "_Uređaj:"
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:46
 msgid "_Edit"
 msgstr "_Uredi"
 
-#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Putanja do initrd datot_eke:"
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:48
 msgid "_Kernel image path:"
 msgstr "_Putanja do datoteke sa jezgrom:"
 
-#: interfaces/boot.glade.in.h:46
+#: interfaces/boot.glade.in.h:49
 msgid "_Name:"
 msgstr "_Ime:"
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:50
 msgid "_Operating system:"
 msgstr "_Operativni sistem:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:51
 msgid "_Parameters:"
 msgstr "_Parametri:"
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:52
 msgid "_Root file system device:"
 msgstr "U_ređaj sa osnovnim sistemom datoteka:"
 
@@ -374,168 +399,9 @@ msgstr "Nepodržana platforma"
 msgid "Use this window to select the computer you wish to configure"
 msgstr "Koristite ovaj prozor da izaberete koji računar želite da podešavate"
 
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:108
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:110
 msgid "_Password:"
 msgstr "_Lozinka:"
-
-#: interfaces/disks.glade.in.h:1
-msgid " "
-msgstr " "
-
-#: interfaces/disks.glade.in.h:3
-msgid "<b>Configuration</b>"
-msgstr "<b>Podešavanje</b>"
-
-#: interfaces/disks.glade.in.h:4
-msgid "<b>General Information</b>"
-msgstr "<b>Opšti podaci</b>"
-
-#: interfaces/disks.glade.in.h:5
-msgid "<b>Partition List</b>"
-msgstr "<b>Spisak deonica</b>"
-
-#: interfaces/disks.glade.in.h:6
-msgid "<b>Partition Properties</b>"
-msgstr "<b>Osobine deonice</b>"
-
-#: interfaces/disks.glade.in.h:7
-msgid "<b>Storage List</b>"
-msgstr "<b>Spisak diskova</b>"
-
-#: interfaces/disks.glade.in.h:8
-msgid "<b>Storage Properties</b>"
-msgstr "<b>Osobine diskova</b>"
-
-#: interfaces/disks.glade.in.h:9
-msgid "<b>Supported Features</b>"
-msgstr "<b>Podržane mogućnosti</b>"
-
-#: interfaces/disks.glade.in.h:10
-msgid ""
-"<big><b>Storage Settings</b></big>\n"
-"Configure your hard disks and storage devices."
-msgstr ""
-"<big><b>Podešavanja diskova</b></big>\n"
-"Podesite vaše tvrde diskove i uređaje za smeštanje podataka."
-
-#: interfaces/disks.glade.in.h:12
-msgid "CD-ROM"
-msgstr "CD čitač"
-
-#: interfaces/disks.glade.in.h:13
-msgid "Device: "
-msgstr "Uređaj: "
-
-#: interfaces/disks.glade.in.h:14
-msgid "Enable DMA"
-msgstr "Omogući DMA:"
-
-#: interfaces/disks.glade.in.h:15
-msgid "Extended 2"
-msgstr "Prošireni 2 (ext2)"
-
-#: interfaces/disks.glade.in.h:16
-msgid "Extended 3"
-msgstr "Prošireni 3 (ext3)"
-
-#: interfaces/disks.glade.in.h:17
-msgid "FAT"
-msgstr "FAT"
-
-#: interfaces/disks.glade.in.h:18
-msgid "Filesystem:"
-msgstr "Sistem datoteka:"
-
-#: interfaces/disks.glade.in.h:19 src/disks/disks-storage-disk.c:83
-msgid "Hard Disk"
-msgstr "Tvrdi disk"
-
-#: interfaces/disks.glade.in.h:20
-msgid "JFS"
-msgstr "JFS"
-
-#: interfaces/disks.glade.in.h:21
-msgid "Memory Swap"
-msgstr "Razmena memorije"
-
-#: interfaces/disks.glade.in.h:22
-msgid "Mount Point:"
-msgstr "Tačka priključenja:"
-
-#: interfaces/disks.glade.in.h:23
-msgid "NTFS"
-msgstr "NTFS"
-
-#: interfaces/disks.glade.in.h:24 src/disks/callbacks.c:312
-#: src/disks/callbacks.c:313 src/disks/callbacks.c:328
-#: src/disks/callbacks.c:329
-msgid "Not Available"
-msgstr "Nije dostupan."
-
-#: interfaces/disks.glade.in.h:25
-msgid "Partitions"
-msgstr "Deonice"
-
-#: interfaces/disks.glade.in.h:26
-msgid "Play Audio"
-msgstr "Pusti zvuk"
-
-#: interfaces/disks.glade.in.h:27
-msgid "Properties"
-msgstr "Osobine"
-
-#: interfaces/disks.glade.in.h:28
-msgid "Read DVD"
-msgstr "Čitaj DVD"
-
-#: interfaces/disks.glade.in.h:29
-msgid "Reiser FS"
-msgstr "Reiser FS"
-
-#: interfaces/disks.glade.in.h:30
-msgid "Size:"
-msgstr "Veličina:"
-
-#: interfaces/disks.glade.in.h:31
-msgid "Speed"
-msgstr "Brzina"
-
-#: interfaces/disks.glade.in.h:32
-msgid "Speed:"
-msgstr "Brzina:"
-
-#: interfaces/disks.glade.in.h:33
-msgid "Type:"
-msgstr "Tip:"
-
-#: interfaces/disks.glade.in.h:34
-msgid "Type: "
-msgstr "Tip: "
-
-#: interfaces/disks.glade.in.h:35
-msgid "Write CD-R"
-msgstr "Piši CD-R"
-
-#: interfaces/disks.glade.in.h:36
-msgid "Write CD-RW"
-msgstr "Piši CD-RV"
-
-#: interfaces/disks.glade.in.h:37
-msgid "Write DVD-R"
-msgstr "Piši DVD-R"
-
-#: interfaces/disks.glade.in.h:38
-msgid "Write DVD-RAM"
-msgstr "Piši DVD-RAM"
-
-#: interfaces/disks.glade.in.h:39
-msgid "XFS"
-msgstr "XFS"
-
-# ovo je najverovatnije „formatiraj“
-#: interfaces/disks.glade.in.h:40
-msgid "_Format"
-msgstr "_Formatiraj"
 
 #: interfaces/network.glade.in.h:2
 msgid "/dev/modem"
@@ -687,77 +553,87 @@ msgid "DNS"
 msgstr "DNS"
 
 #: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "Ime _domena:"
+
+#: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
 msgstr "Podrazumevani uređaj za mrežni prolaz:"
 
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:41
 msgid "Device:"
 msgstr "Uređaj:"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:42
 msgid "Domain / _Workgroup:"
 msgstr "Domen / _radna grupa:"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:44
 msgid "General"
 msgstr "Opšte"
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:45
 msgid "Hosts"
 msgstr "Računari"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:46
 msgid "How the names of other computers are found."
 msgstr "Kako se pronalaze imena ostalih računara."
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:47
 msgid "How this computer is identified."
 msgstr "Kako se ovaj računar predstavlja."
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:48
 msgid "How to access other computers."
 msgstr "Kako se pristupa ostalim računarima."
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:49
 msgid "How to dial up to the Internet."
 msgstr "Kako se povezuje na Internet."
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:50
 msgid "ISP phone number"
 msgstr "Telefonski broj posrednika"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:51
 msgid "Interface properties"
 msgstr "Osobine sprege"
 
 #: interfaces/network.glade.in.h:52
+msgid ""
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr "Spisak domena koje će sistem pokušati da prilepi imenu računara ukoliko domen već nije naveden"
+
+#: interfaces/network.glade.in.h:54
 msgid "Modem _volume:"
 msgstr "Jačina _zvuka modema:"
 
 # bug: "name of network", or "name in network"?
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:55
 msgid "Network name:"
 msgstr "Mrežno ime:"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Network profiles"
 msgstr "Skupovi mrežnih podešavanja"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "Network profiles can be used to store different network configurations."
 msgstr ""
 "Skupovi podešavanja za mrežu se mogu koristiti za smeštanje različitih mrežnih "
 "podešavanja."
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid "Networking Settings"
 msgstr "Podešavanje mreže"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid "New network profile"
 msgstr "Novi skup mrežnih podešavanja"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -765,7 +641,7 @@ msgstr ""
 "Dalje, molim unesite korisničko ime i lozinku koju Vam je dodelio Vaš "
 "posrednik Internet usluga."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -773,35 +649,35 @@ msgstr ""
 "Sada, molim zadajte adresu koju će ovaj mrežni uređaj imati i adresu "
 "udaljenog računara na koji će biti povezan."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Now, please enter the address that this network device will have."
 msgstr "Sada, molim zadajte adresu koju će ovaj mrežni uređaj imati."
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Now, please give this connection a name."
 msgstr "Sada navedite ime za vezu."
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid "Number to _access an external line:"
 msgstr "Broj za _pristup spoljašnjoj vezi:"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:65
 msgid "Number to get to an _external line:"
 msgstr "Broj za _izlaz na spoljašnju vezu:"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:66
 msgid "PPPD _options:"
 msgstr "PPPD _opcije:"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:67
 msgid "Pa_ssword (confirm):"
 msgstr "Lo_zinka (potvrda):"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid "Phone _number:"
 msgstr "Telefonski _broj:"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
@@ -809,7 +685,7 @@ msgstr ""
 "Molim navedite telefon na koji se povezujete na Internet. To je telefon "
 "vašeg posrednika internet usluga. "
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:70
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
@@ -817,35 +693,35 @@ msgstr ""
 "Molim izaberite bežični uređaj koji želite da podesite i postavite mrežno "
 "ime za ovaj uređaj"
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:71
 msgid "Please, give this network profile a name and a description."
 msgstr "Molim, dajte ovom skupu mrežnih podešavanja ime i opis."
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:72
 msgid "Please, select which type of connection you would like to add."
 msgstr "Molim, izaberite vrstu veze koju želite da dodate."
 
-#: interfaces/network.glade.in.h:71 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:73 interfaces/users.glade.in.h:38
 msgid "Profile _name:"
 msgstr "Ime _postavke:"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:74
 msgid "Pulses"
 msgstr "Pulsno"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:75
 msgid "Se_condary:"
 msgstr "_Sekundarni:"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:76
 msgid "Set _DNS servers manually"
 msgstr "Postavi DNS _servere ručno"
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:77
 msgid "Set modem as default _route to internet"
 msgstr "Postavi modem kao podrazumevanu putanju _prema Internetu"
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:78
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
@@ -853,7 +729,12 @@ msgstr ""
 "Ovaj pomoćnik će vam olakšati podešavanje \n"
 "vaše nove mrežne veze."
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:80
+msgid ""
+"This is the list of IP addresses that the system will use as name servers"
+msgstr "Ovo je spisak IP adresa koje će sistem koristiti kao servere naziva"
+
+#: interfaces/network.glade.in.h:81
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -861,35 +742,35 @@ msgstr ""
 "Za nastavak podešavanja Vaše mrežne veze, pritisnite „Napred“. Za završetak, "
 "pritisnite „Odustani“."
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:82
 msgid "Tones"
 msgstr "Tonsko"
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:83
 msgid "Use \"Auto\" if unsure."
 msgstr "Koristite „Automatski“ ako ste nesigurni."
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:84
 msgid "Use this dialog for setting the configuration for this interface"
 msgstr "Koristite ovo prozorče za podešavanje ovog uređaja"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:85
 msgid "Username and password"
 msgstr "Korisničko ime i lozinka"
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:86
 msgid "WI_NS server:"
 msgstr "WINS _server:"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:87
 msgid "Wireless device:"
 msgstr "Bežični uređaj:"
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:88
 msgid "Wireless settings"
 msgstr "Bežična podešavanja"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:89
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
@@ -897,135 +778,131 @@ msgstr ""
 "Upravo stvarate novu mrežnu vezu. Pritisnite „Primeni“ kako biste sačuvali "
 "promene."
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:90
 msgid "_Autodetect"
 msgstr "_Sam pronađi"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:91
 msgid "_Comment:"
 msgstr "_Napomena:"
 
-#: interfaces/network.glade.in.h:89
+#: interfaces/network.glade.in.h:92
 msgid "_Configuration:"
 msgstr "_Podešavanja:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:93
 msgid "_Deactivate"
 msgstr "_Deaktiviraj"
 
-#: interfaces/network.glade.in.h:91 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
 msgid "_Delete"
 msgstr "_Ukloni"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:95
 msgid "_Description:"
 msgstr "_Opis:"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:96
 msgid "_Dial type:"
 msgstr "_Vrsta poziva:"
 
-#: interfaces/network.glade.in.h:94
-msgid "_Domain name:"
-msgstr ":Ime domena:"
-
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:97
 msgid "_Enable Windows networking"
 msgstr "_Omogući Vindouz umrežavanje"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:98
 msgid "_Ethernet"
 msgstr "_Lokalna mreža"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:99
 msgid "_Gateway address:"
 msgstr "_Adresa urežaja za mrežni prolaz:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:100
 msgid "_Hostname:"
 msgstr "_Ime računara:"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:101
 msgid "_IP address:"
 msgstr "_IP adrese:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:102
 msgid "_IR LAN"
 msgstr "_Infracrvena lokalna mreža"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:103
 msgid "_Local IP address:"
 msgstr "_Lokalna IP adrresa:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:104
 msgid "_Local IP:"
 msgstr "_Lokalna IP adresa:"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:105
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:106
 msgid "_Modem port:"
 msgstr "_Port modema:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:107
 msgid "_Network Profiles"
 msgstr "_Skupovi mrežnih podešavanja"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:108
 msgid "_Network name:"
 msgstr "_Mrežno ime:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:109
 msgid "_Parallel Line"
 msgstr "_Paralelna veza"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:111
 msgid "_Phone number:"
 msgstr "Broj _telefona:"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:112
 msgid "_Primary:"
 msgstr "_Osnovni:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:113
 msgid "_Remote IP address:"
 msgstr "IP adresa udaljenog _računara:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:114
 msgid "_Remote IP:"
 msgstr "IP adresa _udaljenog računara:"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:115
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "Pokušaj ponovo ukoliko se _ova veza prekine ili se ne pokrene"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:116
 msgid "_Save Current"
 msgstr "_Sačuvaj tekuće"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:117
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Pokreni PPP čim se modem poveže"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:118
 msgid "_Subnet mask:"
 msgstr "Podmrežna _maska:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:119
 msgid "_Update DNS when this connection becomes active"
 msgstr "_Osveži DNS kada se pokrene ova veza"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:120
 msgid "_Use remote IP as default gateway"
 msgstr "_Koristi IP adresu udaljenog računara kao podrazumevani mrežni prolaz"
 
-#: interfaces/network.glade.in.h:119 interfaces/users.glade.in.h:65
+#: interfaces/network.glade.in.h:121 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "_Korisničko ime:"
 
-#: interfaces/network.glade.in.h:120
+#: interfaces/network.glade.in.h:122
 msgid "_Wireless"
 msgstr "_Bežično"
 
@@ -1050,30 +927,30 @@ msgid "Description:"
 msgstr "Opis:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Priority:"
-msgstr "Značaj:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "Osobine _usluge"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service:"
 msgstr "Usluga:"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Status:"
 msgstr "Stanje:"
 
-#: interfaces/services.glade.in.h:10
+#: interfaces/services.glade.in.h:9
 msgid "Use this tool to specify which services to run"
 msgstr ""
 "Koristite ovaj program kako bi odlučili koji uslužni programi će biti "
 "pokrenuti"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:10
 msgid "_Start"
 msgstr "_Počni"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Startup sequence:"
+msgstr "_Postupak podizanja:"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1397,8 +1274,7 @@ msgstr "Stvaram novi otisak za podizanje (%d od %d)"
 msgid "Finished creating a new boot image"
 msgstr "Gotovo stvaranje novog otiska za podizanje"
 
-#: src/boot/boot-image.c:40 src/disks/disks-storage-partition.c:128
-#: src/disks/disks-storage.c:101 src/network/profile.c:467
+#: src/boot/boot-image.c:40 src/network/profile.c:468
 msgid "Unknown"
 msgstr "Nepoznat"
 
@@ -1497,10 +1373,6 @@ msgstr ""
 "Nedostaje datoteka „%s“ ili se ne može pročitati.\n"
 "Neće biti podešavanja pod ovim uslovima."
 
-#: src/boot/main.c:73
-msgid "Boot Manager Settings"
-msgstr "Podešavanja podizanja operativnog sistema"
-
 #: src/boot/table.c:41
 msgid "Name"
 msgstr "Ime"
@@ -1530,9 +1402,8 @@ msgstr "/_Dodaj ..."
 msgid "/_Properties"
 msgstr "/_Osobine"
 
-#: src/boot/table.c:53 src/disks/disks-gui.c:44 src/network/connection.c:60
-#: src/network/dns.c:39 src/network/hosts.c:43 src/users/table.c:50
-#: src/users/table.c:57
+#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
+#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Ukloni"
 
@@ -1576,16 +1447,16 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Greška povezivanja signal `%s' u elementu `%s'"
 
-#: src/common/gst-tool.c:820
+#: src/common/gst-tool.c:822
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Preskačem %s direktivu..."
 
-#: src/common/gst-tool.c:951
+#: src/common/gst-tool.c:953
 msgid "Skipping actual save..."
 msgstr "Preskačem stvarno snimanje..."
 
-#: src/common/gst-tool.c:1024
+#: src/common/gst-tool.c:1026
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1593,7 +1464,7 @@ msgstr ""
 "Dogodila se greška pri radu pozadinske skripte,\n"
 "i podešavanja ne mogu biti učitana."
 
-#: src/common/gst-tool.c:1505
+#: src/common/gst-tool.c:1510
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1602,7 +1473,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Dobrodošli u %s predizdanje Gnomovih "
 "sistemskih alata</span>"
 
-#: src/common/gst-tool.c:1508
+#: src/common/gst-tool.c:1513
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1616,57 +1487,21 @@ msgstr ""
 "ste upozoreni. Hvala Vam na isprobavanju ovog predizdanja „Gnomovih sistemskih "
 "alata“!"
 
-#: src/common/gst-tool.c:1529
+#: src/common/gst-tool.c:1534
 msgid "Warning"
 msgstr "Upozorenje"
 
-#: src/common/gst-tool.c:1549
+#: src/common/gst-tool.c:1554
 msgid "Don't show me this again"
 msgstr "Ovu poruku više ne prikazuj"
 
-#: src/common/gst-tool.c:1623
+#: src/common/gst-tool.c:1628
 msgid "GNOME System Tools"
 msgstr "Gnomovi sistemski alati (GNOME System Tools)"
 
-#: src/common/gst-ui.c:396
+#: src/common/gst-ui.c:389
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "Ponovo pokrenite okruženje Gnom kako bi promene uzele maha."
-
-#: src/disks/callbacks.c:304 src/disks/callbacks.c:305
-msgid "(Getting ...)"
-msgstr "(Pribavljam...)"
-
-#: src/disks/disks-gui.c:43
-msgid "/_Format"
-msgstr "/_Formatiraj"
-
-#: src/disks/disks-storage-cdrom.c:103
-msgid "CDROM"
-msgstr "CD čitač"
-
-#: src/disks/disks-storage-floppy.c:71
-msgid "Floppy"
-msgstr "Disketa"
-
-#: src/disks/disks-storage-partition.c:260
-msgid "Swap Partition"
-msgstr "Deonica razmene"
-
-#: src/disks/disks-storage.c:100
-msgid "Unknown Storage"
-msgstr "Nepoznati uređaj za podatke"
-
-#: src/disks/disks.desktop.in.in.h:1
-msgid "Configure the system disks"
-msgstr "Podesi sistemske diskove"
-
-#: src/disks/disks.desktop.in.in.h:2
-msgid "Disks"
-msgstr "Diskovi"
-
-#: src/disks/main.c:76
-msgid "Disks Manager"
-msgstr "Rukovodilac diskovima"
 
 #: src/network/callbacks.c:365
 #, c-format
@@ -1690,7 +1525,7 @@ msgstr ""
 msgid "SMB support missing."
 msgstr "SMB podrška nedostaje."
 
-#: src/network/callbacks.c:518
+#: src/network/callbacks.c:522
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1699,7 +1534,7 @@ msgstr ""
 "ćete morati da se\n"
 "prijavite na sistem ponovo. Nastavljate li, bez obzira na to?"
 
-#: src/network/callbacks.c:566
+#: src/network/callbacks.c:570
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1707,7 +1542,7 @@ msgstr ""
 "Ne mogu pronaći program wvdial na Vašem sistemu. Potrebno je da instalirate "
 "wvdial jer se Vaše PPP modemske veze neće aktivirati."
 
-#: src/network/callbacks.c:593
+#: src/network/callbacks.c:597
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1716,7 +1551,7 @@ msgstr ""
 "wvdial jer se Vaše PPP modemske veze neće aktivirati. Da li nastavljate, bez "
 "obzira na to?"
 
-#: src/network/callbacks.c:620
+#: src/network/callbacks.c:624
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1724,7 +1559,7 @@ msgstr ""
 "Podrazumevani uređaj za prolaz nije aktiviran. Ovo će Vas sprečiti u "
 "povezivanju na internet. Da li nastavljate, bez obzira na to?"
 
-#: src/network/callbacks.c:675
+#: src/network/callbacks.c:679
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1733,7 +1568,7 @@ msgstr ""
 "popunite tražene podatke kako bi nastavili ili izaberite drugi uređaj za "
 "mrežni prolaz."
 
-#: src/network/callbacks.c:721
+#: src/network/callbacks.c:725
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1743,17 +1578,17 @@ msgstr ""
 "neprikazivanja veza u listu za veze. Molim instalirajte redhat-config-network "
 "rpm paket kako se ovo ne bi dogodilo."
 
-#: src/network/callbacks.c:758
+#: src/network/callbacks.c:762
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Da li želite da omogućite pristup %s?"
 
-#: src/network/callbacks.c:768
+#: src/network/callbacks.c:772
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Da li želite da onemogućite pristup %s?"
 
-#: src/network/callbacks.c:855
+#: src/network/callbacks.c:859
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1761,19 +1596,19 @@ msgstr ""
 "Ne mogu automatski pronaći modemski urećaj. Proverite da nije modem u "
 "upotrebi i da je pravilno priključen"
 
-#: src/network/callbacks.c:907
+#: src/network/callbacks.c:911
 msgid "Silent"
 msgstr "Tiho"
 
-#: src/network/callbacks.c:909
+#: src/network/callbacks.c:913
 msgid "Low"
 msgstr "Slabo"
 
-#: src/network/callbacks.c:911
+#: src/network/callbacks.c:915
 msgid "Medium"
 msgstr "Srednje"
 
-#: src/network/callbacks.c:913
+#: src/network/callbacks.c:917
 msgid "Loud"
 msgstr "Glasno"
 
@@ -1942,19 +1777,19 @@ msgstr "Ime skupa podešavanja"
 msgid "No description available."
 msgstr "Opis nije dostupan."
 
-#: src/services/callbacks.c:239
+#: src/services/callbacks.c:247
 msgid "Running"
 msgstr "Radi"
 
-#: src/services/callbacks.c:243
+#: src/services/callbacks.c:251
 msgid "Stopped"
 msgstr "Zaustavljeno"
 
-#: src/services/callbacks.c:248
+#: src/services/callbacks.c:256
 msgid "Could not get info"
 msgstr "Ne mogu da saznam podatke"
 
-#: src/services/callbacks.c:300
+#: src/services/callbacks.c:322
 #, c-format
 msgid "Settings for service %s"
 msgstr "Podešavanja za uslugu %s"
@@ -2259,6 +2094,155 @@ msgstr "Interpretator naredbi"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Dodajte ili uklonite korisnike i grupe"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "<b>Configuration</b>"
+#~ msgstr "<b>Podešavanje</b>"
+
+#~ msgid "<b>General Information</b>"
+#~ msgstr "<b>Opšti podaci</b>"
+
+#~ msgid "<b>Partition List</b>"
+#~ msgstr "<b>Spisak deonica</b>"
+
+#~ msgid "<b>Partition Properties</b>"
+#~ msgstr "<b>Osobine deonice</b>"
+
+#~ msgid "<b>Storage List</b>"
+#~ msgstr "<b>Spisak diskova</b>"
+
+#~ msgid "<b>Storage Properties</b>"
+#~ msgstr "<b>Osobine diskova</b>"
+
+#~ msgid "<b>Supported Features</b>"
+#~ msgstr "<b>Podržane mogućnosti</b>"
+
+#~ msgid ""
+#~ "<big><b>Storage Settings</b></big>\n"
+#~ "Configure your hard disks and storage devices."
+#~ msgstr ""
+#~ "<big><b>Podešavanja diskova</b></big>\n"
+#~ "Podesite vaše tvrde diskove i uređaje za smeštanje podataka."
+
+#~ msgid "CD-ROM"
+#~ msgstr "CD čitač"
+
+#~ msgid "Device: "
+#~ msgstr "Uređaj: "
+
+#~ msgid "Enable DMA"
+#~ msgstr "Omogući DMA:"
+
+#~ msgid "Extended 2"
+#~ msgstr "Prošireni 2 (ext2)"
+
+#~ msgid "Extended 3"
+#~ msgstr "Prošireni 3 (ext3)"
+
+#~ msgid "FAT"
+#~ msgstr "FAT"
+
+#~ msgid "Filesystem:"
+#~ msgstr "Sistem datoteka:"
+
+#~ msgid "Hard Disk"
+#~ msgstr "Tvrdi disk"
+
+#~ msgid "JFS"
+#~ msgstr "JFS"
+
+#~ msgid "Memory Swap"
+#~ msgstr "Razmena memorije"
+
+#~ msgid "Mount Point:"
+#~ msgstr "Tačka priključenja:"
+
+#~ msgid "NTFS"
+#~ msgstr "NTFS"
+
+#~ msgid "Not Available"
+#~ msgstr "Nije dostupan."
+
+#~ msgid "Partitions"
+#~ msgstr "Deonice"
+
+#~ msgid "Play Audio"
+#~ msgstr "Pusti zvuk"
+
+#~ msgid "Properties"
+#~ msgstr "Osobine"
+
+#~ msgid "Read DVD"
+#~ msgstr "Čitaj DVD"
+
+#~ msgid "Reiser FS"
+#~ msgstr "Reiser FS"
+
+#~ msgid "Size:"
+#~ msgstr "Veličina:"
+
+#~ msgid "Speed"
+#~ msgstr "Brzina"
+
+#~ msgid "Speed:"
+#~ msgstr "Brzina:"
+
+#~ msgid "Type:"
+#~ msgstr "Tip:"
+
+#~ msgid "Type: "
+#~ msgstr "Tip: "
+
+#~ msgid "Write CD-R"
+#~ msgstr "Piši CD-R"
+
+#~ msgid "Write CD-RW"
+#~ msgstr "Piši CD-RV"
+
+#~ msgid "Write DVD-R"
+#~ msgstr "Piši DVD-R"
+
+#~ msgid "Write DVD-RAM"
+#~ msgstr "Piši DVD-RAM"
+
+#~ msgid "XFS"
+#~ msgstr "XFS"
+
+# ovo je najverovatnije „formatiraj“
+#~ msgid "_Format"
+#~ msgstr "_Formatiraj"
+
+#~ msgid "Priority:"
+#~ msgstr "Značaj:"
+
+#~ msgid "(Getting ...)"
+#~ msgstr "(Pribavljam...)"
+
+#~ msgid "/_Format"
+#~ msgstr "/_Formatiraj"
+
+#~ msgid "CDROM"
+#~ msgstr "CD čitač"
+
+#~ msgid "Floppy"
+#~ msgstr "Disketa"
+
+#~ msgid "Swap Partition"
+#~ msgstr "Deonica razmene"
+
+#~ msgid "Unknown Storage"
+#~ msgstr "Nepoznati uređaj za podatke"
+
+#~ msgid "Configure the system disks"
+#~ msgstr "Podesi sistemske diskove"
+
+#~ msgid "Disks"
+#~ msgstr "Diskovi"
+
+#~ msgid "Disks Manager"
+#~ msgstr "Rukovodilac diskovima"
 
 #~ msgid "<b>CDROM Properties</b>"
 #~ msgstr "<b>Osobine CD čitača</b>"
