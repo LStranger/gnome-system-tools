@@ -222,13 +222,19 @@ on_pro_name_changed (GtkEditable *editable, gpointer user_data)
 void
 on_pro_del_clicked (GtkButton *button, gpointer user_data)
 {
-	profile_table_del_profile (NULL);
+	g_return_if_fail (xst_tool_get_access (tool));
+	
+	if (profile_table_del_profile (NULL))
+		xst_dialog_modify (tool->main_dialog);
 }
 
 void
 on_pro_save_clicked (GtkButton *button, gpointer user_data)
 {
+	g_return_if_fail (xst_tool_get_access (tool));
+	
 	profile_save (NULL);
+	xst_dialog_modify (tool->main_dialog);
 }
 
 enum
@@ -265,7 +271,9 @@ pro_ask_name (gchar *string, gpointer user_data)
 		return;
 	}
 
-	profile_add (pf, string, TRUE);
+	if (profile_add (pf, string, TRUE))
+		xst_dialog_modify (tool->main_dialog);
+	
 	g_free (string);
 }
 
@@ -273,6 +281,8 @@ void
 on_pro_new_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *d;
+
+	g_return_if_fail (xst_tool_get_access (tool));
 
 	d = gnome_request_dialog (FALSE,
 				  N_("Name of new profile"),
@@ -290,6 +300,8 @@ on_pro_copy_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *d;
 
+	g_return_if_fail (xst_tool_get_access (tool));
+	
 	d = gnome_request_dialog (FALSE,
 				  N_("Name of new profile"),
 				  NULL,

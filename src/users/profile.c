@@ -155,7 +155,88 @@ profile_save (gchar *name)
 	}
 }	
 
-Profile *
+gboolean
+profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
+{	
+	Profile *pf;
+	GtkWidget *d;
+
+	pf = profile_table_get_profile (new_name);
+	if (pf)
+	{
+		d = gnome_error_dialog_parented (N_("Sorry, profile with given name already exists."),
+						 GTK_WINDOW (tool->main_dialog));
+		gnome_dialog_run (GNOME_DIALOG (d));
+		return FALSE;
+	}
+	
+	pf = g_new0 (Profile, 1);
+
+	pf->name = g_strdup (new_name);
+
+	if (old_pf)
+	{
+		/* Let's make copy of old profile. */
+		
+		pf->home_prefix = g_strdup (old_pf->home_prefix);
+		pf->shell = g_strdup (old_pf->shell);
+		
+		pf->umin = old_pf->umin;
+		pf->umax = old_pf->umax;
+		pf->gmin = old_pf->gmin;
+		pf->gmax = old_pf->gmax;
+		pf->pwd_maxdays = old_pf->pwd_maxdays;
+		pf->pwd_mindays = old_pf->pwd_mindays;
+		pf->pwd_warndays = old_pf->pwd_warndays;
+		pf->pwd_len = old_pf->pwd_len;
+	}
+
+	profile_table_add_profile (pf, select);
+
+	return TRUE;
+}
+
+void
+profile_destroy (Profile *pf)
+{
+	if (!pf)
+		return;
+
+	g_free (pf->name);
+	g_free (pf->home_prefix);
+	g_free (pf->shell);
+
+	g_free (pf);
+}
+
+/* Profile table functions */
+
+void
+profile_table_init (void)
+{
+	if (!profile_table)
+	{
+		profile_table = g_new (ProfileTable, 1);
+
+		profile_table->selected = NULL;
+		profile_table->hash = g_hash_table_new (g_str_hash, g_str_equal);
+	}
+}
+
+void
+profile_table_destroy (void)
+{
+	if (!profile_table)
+		return;
+
+	g_free (profile_table->selected);
+	g_hash_table_destroy (profile_table->hash);
+
+	g_free (profile_table);
+}
+
+
+static void
 profile_get_default (void)
 {
 	/* It's currently only a wrapper around logindefs, will change in future. */
@@ -179,11 +260,11 @@ profile_get_default (void)
 	pf->pwd_len = logindefs.passwd_min_length;
 	pf->logindefs = TRUE;
 
-	return pf;
+	profile_table_add_profile (pf, TRUE);
 }
 
 void
-profile_get_from_xml (xmlNodePtr root)
+profile_table_from_xml (xmlNodePtr root)
 {
 	xmlNodePtr node, n0, pf_node;
 	Profile *pf;
@@ -195,6 +276,8 @@ profile_get_from_xml (xmlNodePtr root)
 	gchar *tag;
 	gint i;
 
+	profile_get_default ();
+	
 	node = xst_xml_element_find_first (root, "profiles");
 	if (!node)
 		return;
@@ -231,45 +314,6 @@ profile_get_from_xml (xmlNodePtr root)
 		profile_table_add_profile (pf, FALSE);
 		pf_node = xst_xml_element_find_next (pf_node, "profile");
 	}
-}
-
-void
-profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
-{	
-	Profile *pf;
-	GtkWidget *d;
-
-	pf = profile_table_get_profile (new_name);
-	if (pf)
-	{
-		d = gnome_error_dialog_parented (N_("Sorry, profile with given name already exists."),
-						 GTK_WINDOW (tool->main_dialog));
-		gnome_dialog_run (GNOME_DIALOG (d));
-		return;
-	}
-	
-	pf = g_new0 (Profile, 1);
-
-	pf->name = g_strdup (new_name);
-
-	if (old_pf)
-	{
-		/* Let's make copy of old profile. */
-		
-		pf->home_prefix = g_strdup (old_pf->home_prefix);
-		pf->shell = g_strdup (old_pf->shell);
-		
-		pf->umin = old_pf->umin;
-		pf->umax = old_pf->umax;
-		pf->gmin = old_pf->gmin;
-		pf->gmax = old_pf->gmax;
-		pf->pwd_maxdays = old_pf->pwd_maxdays;
-		pf->pwd_mindays = old_pf->pwd_mindays;
-		pf->pwd_warndays = old_pf->pwd_warndays;
-		pf->pwd_len = old_pf->pwd_len;
-	}
-
-	profile_table_add_profile (pf, select);
 }
 
 static void
@@ -319,7 +363,7 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 }
 
 void
-profile_to_xml (xmlNodePtr root)
+profile_table_to_xml (xmlNodePtr root)
 {
 	xmlNodePtr node;
 	
@@ -331,43 +375,6 @@ profile_to_xml (xmlNodePtr root)
 		xst_xml_element_destroy_children (node);
 
 	g_hash_table_foreach (profile_table->hash, save_xml, node);
-}
-
-void
-profile_destroy (Profile *pf)
-{
-	if (!pf)
-		return;
-
-	g_free (pf->name);
-	g_free (pf->home_prefix);
-	g_free (pf->shell);
-
-	g_free (pf);
-}
-
-void
-profile_table_init (void)
-{
-	if (!profile_table)
-	{
-		profile_table = g_new (ProfileTable, 1);
-
-		profile_table->selected = NULL;
-		profile_table->hash = g_hash_table_new (g_str_hash, g_str_equal);
-	}
-}
-
-void
-profile_table_destroy (void)
-{
-	if (!profile_table)
-		return;
-
-	g_free (profile_table->selected);
-	g_hash_table_destroy (profile_table->hash);
-
-	g_free (profile_table);
 }
 
 void
@@ -392,12 +399,15 @@ profile_table_add_profile (Profile *pf, gboolean select)
 	}
 }
 
-void
+gboolean
 profile_table_del_profile (gchar *name)
 {
 	gchar *buf;
 	Profile *pf;
+	gboolean retval;
 
+	retval = FALSE;
+	
 	if (name)
 		buf = g_strdup (name);
 	else
@@ -425,10 +435,13 @@ profile_table_del_profile (gchar *name)
 				profile_table->selected = NULL;
 
 			xst_ui_combo_remove_by_label (pft->name, buf);
+			retval = TRUE;
 		}
 	}
 
 	g_free (buf);
+
+	return retval;
 }
 
 Profile *

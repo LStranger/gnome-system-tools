@@ -69,16 +69,19 @@ typedef struct
 extern ProfileTable *profile_table;
 
 void profile_save (gchar *name);
-Profile *profile_get_default (void);
-void profile_get_from_xml (xmlNodePtr root);
-void profile_to_xml (xmlNodePtr root);
-void profile_add (Profile *old_pf, const gchar *new_name, gboolean select); 
+gboolean profile_add (Profile *old_pf, const gchar *new_name, gboolean select); 
 void profile_destroy (Profile *pf);
+
 
 void profile_table_init (void);
 void profile_table_destroy (void);
+
+void profile_table_from_xml (xmlNodePtr root);
+void profile_table_to_xml (xmlNodePtr root);
+
 void profile_table_add_profile (Profile *pf, gboolean select);
-void profile_table_del_profile (gchar *name);
+gboolean profile_table_del_profile (gchar *name);
+
 Profile *profile_table_get_profile (const gchar *name);
 void profile_table_set_selected (const gchar *name);
 

@@ -238,18 +238,14 @@ void
 transfer_xml_to_gui (XstTool *tool, gpointer data)
 {
 	xmlNodePtr root;
-	Profile *pf;
 
 	root = xst_xml_doc_get_root (tool->config);
 
 	transfer_logindefs_from_xml (root);
-	transfer_logindefs_to_gui ();
 
 	/* Profiles */
 	profile_table_init ();
-	pf = profile_get_default ();
-	profile_table_add_profile (pf, TRUE);
-	profile_get_from_xml (root);
+	profile_table_from_xml (root);
 	
 	/* Popuplate tables */
 	populate_all_tables ();
@@ -262,7 +258,10 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 
 	root = xst_xml_doc_get_root (tool->config);
 
-	profile_to_xml (root);
+	transfer_logindefs_to_xml (root);
+
+	profile_table_to_xml (root);
+	profile_table_destroy ();
 }
 
 
