@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* Functions for transferring information between XML tree and UI */
 
 #include <gnome.h>

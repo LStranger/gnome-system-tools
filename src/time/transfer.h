@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* Structures for tables detailing the information types in the XML
    tree, and what widgets they correspond to. */
 

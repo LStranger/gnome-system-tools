@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* Map widget.
  *
  * Copyright (C) 2000-2001 Ximian, Inc.

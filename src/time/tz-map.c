@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* Timezone map - fake widget implementation with hooks for time-admin.
  *
  * Copyright (C) 2000-2001 Ximian, Inc.

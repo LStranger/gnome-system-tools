@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* main.c: this file is part of users-admin, a ximian-setup-tool frontend 
  * for user administration.
  * 

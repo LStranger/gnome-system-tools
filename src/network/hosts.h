@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 #ifndef __XST_HOSTS_H__
 #define __XST_HOSTS_H__
 

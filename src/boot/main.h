@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* main.h: this file is part of boot-admin, a ximian-setup-tool frontend for user administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.

@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* $Id$
  *
  * This code implements the MD5 message-digest algorithm.
@@ -16,6 +17,9 @@
  * will fill a supplied 16-byte array with the digest.
  *
  * $Log$
+ * Revision 1.2  2001/03/02 01:31:24  unammx
+ * Added emacs style command line at the beginning of all [hc] files, except for the archiver files, which already have their own.
+ *
  * Revision 1.1  2000/11/08 03:44:39  unammx
  * md5 crypt code.
  *
