@@ -1,3 +1,10 @@
+2004-10-14  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* boot-image.c, boot-settings.c: only check for entry type with new
+	entries, this makes it somewhat more secure when for some reason it
+	can't get the partitions list. it's supposed to fix #155333, 
+	#153700 and #152539
+
 2004-09-13  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* Release 1.0
