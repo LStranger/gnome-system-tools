@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-07-24 19:13+0200\n"
-"PO-Revision-Date: 2001-07-24 19:19+0200\n"
+"POT-Creation-Date: 2001-07-25 11:42+0200\n"
+"PO-Revision-Date: 2001-07-25 12:27+0200\n"
 "Last-Translator: GNOME PL Team <translators@gnome.pl>\n"
 "Language-Team: Polish <pl@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr "Konfiguracja dla platformy sprzêtowej [%s]."
 #: backend/report.pl.in:1
 #, c-format
 msgid "No parse/replace table for platform [%s]."
-msgstr ""
+msgstr "Brak tabeli opisuj±cej konfiguracjê dla platformy [%s]."
 
 #: backend/report.pl.in:1
 #, c-format
@@ -124,17 +124,17 @@ msgstr "Zapisano kopiê zapasow± [%s]."
 #: backend/report.pl.in:1
 #, c-format
 msgid "No file to patch: [%s]."
-msgstr ""
+msgstr "Brak pliku do zmodyfikowania: [%s]."
 
 #: backend/report.pl.in:1
 #, c-format
 msgid "Could not find [%s] for patching. Creating [%s]."
-msgstr ""
+msgstr "Nie mo¿na odnale¼æ [%s] do modyfikacji. Tworzenie [%s]."
 
 #: backend/report.pl.in:1
 #, c-format
 msgid "Found [%s]. Patching [%s]."
-msgstr ""
+msgstr "Odnaleziono [%s]. Modyfikacja [%s]."
 
 #: backend/report.pl.in:1
 #, c-format
@@ -174,7 +174,7 @@ msgstr "Analizowanie opcji [%s]."
 #: backend/report.pl.in:1
 #, c-format
 msgid "Trivialy passing [%s]."
-msgstr ""
+msgstr "Pominiêcie o ma³ym znaczeniu [%s]."
 
 #: backend/report.pl.in:1 backend/report.pl.in:1
 #, c-format
@@ -204,7 +204,7 @@ msgstr "Pobieranie informacji z [%s]."
 #: backend/report.pl.in:1
 #, c-format
 msgid "Getting chat information from [%s]."
-msgstr ""
+msgstr "Pobieranie informacji dla programu chat z [%s]."
 
 #: backend/report.pl.in:1
 #, c-format
@@ -290,6 +290,8 @@ msgstr "Nie mo¿na odnale¼æ skryptów SystemuV us³ugi [%s]."
 #, c-format
 msgid "Could not find SystemV runlevel [%s] directory [%s]."
 msgstr ""
+"Nie mo¿na odnale¼æ katalogu odpowiadaj±cego poziomowi pracy [%s] SystemuV o "
+"nazwie [%s]."
 
 #: backend/report.pl.in:1
 #, c-format
@@ -390,7 +392,7 @@ msgstr "Ustawianie dodatkowych opcji w [%s]."
 #: backend/report.pl.in:1
 #, c-format
 msgid "Boot method [%s] for interface [%s] not supported."
-msgstr ""
+msgstr "Metoda rozruchu [%s] nie jest obs³ugiwana przy interfejsie [%s]."
 
 #: backend/report.pl.in:1
 #, c-format
@@ -403,9 +405,8 @@ msgid "Setting remote address for interface [%s]."
 msgstr "Ustawianie zdalnego adresu interfejsu [%s]."
 
 #: backend/report.pl.in:1
-#, fuzzy
 msgid "Ensuring loopback interface configuration."
-msgstr "Analizowanie konfiguracji systemu."
+msgstr "Zapewnianie konfiguracji interfejsu pêtli zwrotnej."
 
 #: backend/report.pl.in:1
 msgid "Failed to run lilo."
@@ -442,21 +443,21 @@ msgstr "Odmontowywanie [%s]."
 
 #: backend/report.pl.in:1
 msgid "Could not find mount tools. No mounting done."
-msgstr ""
+msgstr "Nie odnaleziono narzêdzi montuj±cych. Nie mo¿na zamontowaæ."
 
 #: backend/report.pl.in:1
 #, c-format
 msgid "Found swap entry [%s]."
-msgstr ""
+msgstr "Odnaleziono pozycjê obszaru wymiany [%s]."
 
 #: backend/report.pl.in:1
 msgid "Looking for swap entries."
-msgstr ""
+msgstr "Wyszukiwanie pozycji obszarów wymiany."
 
 #: backend/report.pl.in:1
 #, c-format
 msgid "No printtool setup in directory [%s]."
-msgstr ""
+msgstr "Brak ustawieñ printtool w katalogu [%s]."
 
 #: backend/report.pl.in:1
 msgid "Scanning timezones."
@@ -479,7 +480,7 @@ msgstr "Ustawianie czasu lokalnego na [%s]."
 
 #: backend/report.pl.in:1
 msgid "Getting user database."
-msgstr "Pobieranie bazy danych u¿ytkownika."
+msgstr "Pobieranie bazy danych u¿ytkowników."
 
 #: interfaces/boot.glade.in.h:1
 msgid "Basic"
@@ -500,10 +501,14 @@ msgid ""
 "Optionally, you may also enter append parameters which are passed to the\n"
 "kernel at boot time."
 msgstr ""
+"Wybierz obraz j±dra u¿ywany przy rozruchu oraz partycjê montowan± jako "
+"nadrzêdn±.\n"
+"Opcjonalnie mo¿esz te¿ podaæ parametry do³±czane do standardowych parametrów "
+"j±dra przy jego uruchamianiu."
 
 #: interfaces/boot.glade.in.h:1 interfaces/users.glade.in.h:1
 msgid "Click \"Next\" to continue"
-msgstr "Kliknij \"Naprzód\" aby kontynuowaæ"
+msgstr "Aby kontynuowaæ, kliknij \"Naprzód\""
 
 #: interfaces/boot.glade.in.h:1
 msgid "D_efault"
@@ -560,7 +565,7 @@ msgid ""
 "Please click \"Finish\" to save your changes. "
 msgstr ""
 "Zosta³ dodany nowy obraz startowy.\n"
-"Kliknij \"Zakoñcz\" aby zapisaæ zmiany."
+"Aby zapisaæ zmiany, kliknij \"Zakoñcz\"."
 
 #: interfaces/boot.glade.in.h:1
 msgid ""
@@ -652,9 +657,9 @@ msgid ""
 "Note, however, that this might damage the system configuration or downright "
 "cripple your computer."
 msgstr ""
-"Platforma sprzêtowa, której u¿ywasz nie jest obs³ugiwana przez to narzêdzie. "
-"Je¶li na pewno wiesz, ¿e jest ona jedn± z platworm wypisanych poni¿ej, "
-"mo¿esz j± zaznaczyæ i kontynuowaæ.\n"
+"Platforma sprzêtowa, której u¿ywasz, nie jest obs³ugiwana przez to "
+"narzêdzie. Je¶li na pewno wiesz, ¿e jest ona jedn± z platform wymienionych "
+"poni¿ej, mo¿esz j± zaznaczyæ i kontynuowaæ.\n"
 "\n"
 "Zauwa¿ jednak, ¿e wybranie z³ej pozycji mo¿e uszkodziæ lub nawet zniszczyæ "
 "twój komputer."
@@ -668,8 +673,8 @@ msgid ""
 msgstr ""
 "Aby uruchomiæ to narzêdzie, musisz mieæ uprawnienia administratora.\n"
 "\n"
-"¯eby je uzyskaæ, wprowad¼ poni¿ej has³o administratora. Je¶li nie zostanie\n"
-"ono wprowadzone, zmiana konfiguracji systemu nie bêdzie mo¿liwa."
+"Aby je uzyskaæ, wprowad¼ poni¿ej has³o administratora. Bez wprowadzonego\n"
+"has³a nie bêdzie mo¿liwa zmiana konfiguracji systemu."
 
 #: interfaces/common.glade.in.h:1
 msgid "Unsupported platform"
@@ -736,9 +741,9 @@ msgid ""
 "dedicated for a specific storage task, such as virtual memory or home "
 "directories for your users."
 msgstr ""
-"Dyski s± dzielone na mniejsze czê¶ci zwane partycjami. Ka¿da partycja jest "
-"przeznaczana do przechowywania okre¶lonych danych, takich jak np. pamiêæ "
-"wirtualna lub katalogi domowe dla u¿ytkowników."
+"Dyski s± podzielone na mniejsze czê¶ci, zwane partycjami. Ka¿da partycja "
+"jest przeznaczana do przechowywania okre¶lonych danych, takich jak np. "
+"pamiêæ wirtualna lub katalogi domowe dla u¿ytkowników."
 
 #: interfaces/disks.glade.in.h:1
 msgid "Ext2 (Linux)"
@@ -888,7 +893,7 @@ msgstr "Rozdzielczo¶æ:"
 
 #: interfaces/display.glade.in.h:1
 msgid "Restart X"
-msgstr ""
+msgstr "Zrestartuj X"
 
 #: interfaces/display.glade.in.h:1
 msgid "Right"
@@ -1027,7 +1032,7 @@ msgstr "partycja"
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid " Move Up"
-msgstr ""
+msgstr " Wy¿ej"
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid " Names"
@@ -1051,10 +1056,13 @@ msgid ""
 "Assign aliases to IP addresses that may not be registered in the DNS or WINS "
 "servers, or to override or set new names for commonly used IP addresses. "
 msgstr ""
+"Przypisanie aliasów adresom IP, które mog± nie byæ zarejestrowane na "
+"serwerach DNS lub WINS, przykrywanie istniej±cych nazw oraz ustawianie ich "
+"dla czêsto u¿ywanych adresów."
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid "Change the alias' IP address or its corresponding names."
-msgstr ""
+msgstr "Zmiana adresu IP aliasu lub odpowiadaj±cych mu nazw."
 
 #: interfaces/nameresolution.glade.in.h:1 interfaces/print.glade.in.h:1
 #: interfaces/shares.glade.in.h:1 interfaces/users.glade.in.h:1
@@ -1075,7 +1083,7 @@ msgstr "Kolejno¶æ przeszukiwania domen"
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid "Domain Name Service (DNS)"
-msgstr ""
+msgstr "Us³uga Nazw Domen (DNS)"
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid "Domain:"
@@ -1083,7 +1091,7 @@ msgstr "Domena:"
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid "Existing:"
-msgstr ""
+msgstr "Istniej±ce:"
 
 #: interfaces/nameresolution.glade.in.h:1 interfaces/shares.glade.in.h:1
 #: src/shares/imports.etspec.h:1
@@ -1108,11 +1116,11 @@ msgstr "Identyfikacja"
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid "Let the computer know its name, function and network surroundings."
-msgstr ""
+msgstr "Nazwa komputera, jego funkcja oraz otoczenie sieciowe."
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid "Move Down"
-msgstr ""
+msgstr "Ni¿ej"
 
 #: interfaces/nameresolution.glade.in.h:1
 msgid "New Alias"
@@ -1204,7 +1212,7 @@ msgstr "Ustawienia Ad-Hoc"
 
 #: interfaces/network.glade.in.h:1
 msgid "Add New Internet Connection"
-msgstr ""
+msgstr "Dodanie nowego pod³±czenia do Internetu"
 
 #: interfaces/network.glade.in.h:1
 msgid "Advanced"
@@ -1220,15 +1228,15 @@ msgstr "Aliasy innych komputerów."
 
 #: interfaces/network.glade.in.h:1
 msgid "Allow activation control for all _users"
-msgstr ""
+msgstr "Mo¿liwo¶æ uaktywniania przez ka¿dego _u¿ytkownika"
 
 #: interfaces/network.glade.in.h:1
 msgid "Allow activation control for all users"
-msgstr ""
+msgstr "Mo¿liwo¶æ uaktywniania przez ka¿dego _u¿ytkownika"
 
 #: interfaces/network.glade.in.h:1
 msgid "Auto"
-msgstr ""
+msgstr "Automatycznie"
 
 #: interfaces/network.glade.in.h:1 src/network/connection.c:1
 msgid "BOOTP"
@@ -1244,7 +1252,7 @@ msgstr "Ustawienia po³±czenia"
 
 #: interfaces/network.glade.in.h:1
 msgid "Connection active"
-msgstr ""
+msgstr "Aktywne po³±czenie"
 
 #: interfaces/network.glade.in.h:1
 msgid "Connections"
@@ -1252,7 +1260,7 @@ msgstr "Po³±czenia"
 
 #: interfaces/network.glade.in.h:1
 msgid "Create a new Internet Connection "
-msgstr ""
+msgstr "Nowe pod³±czenie do Internetu"
 
 #: interfaces/internetsharing.glade.in.h:1 interfaces/network.glade.in.h:1
 #: src/network/connection.c:1
@@ -1277,7 +1285,7 @@ msgstr "U_nieaktywnij"
 
 #: interfaces/network.glade.in.h:1
 msgid "Default Gateway Device:"
-msgstr ""
+msgstr "Urz±dzenie s³u¿±ce za domy¶ln± bramkê:"
 
 #: interfaces/network.glade.in.h:1
 msgid "Description"
@@ -1288,8 +1296,8 @@ msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
 msgstr ""
-"Na pocz±tku, wprowad¼ numer telefonu u¿ywany do ³±czenia z internetem. Ten "
-"numer jest udostêpniany przez twojego dostawcê internetu. "
+"Na pocz±tku, wprowad¼ numer telefonu u¿ywany do ³±czenia z internetem. Numer "
+"ten udostêpniany jest przez twojego dostawcê internetu. "
 
 #: interfaces/network.glade.in.h:1
 msgid "General"
@@ -1341,23 +1349,21 @@ msgstr "Ustawienia sieciowe"
 
 #: interfaces/network.glade.in.h:1
 msgid "New Connection Type"
-msgstr "Nowy Typ Po³±czenia"
+msgstr "Nowy typ po³±czenia"
 
 #: interfaces/network.glade.in.h:1
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr ""
-"Nastêpnie, proszê wprowadziæ nazê i has³o u¿ytkownika nadane ci przez "
-"twojego dostawcê Internetu."
+"Nastêpnie, wprowad¼ nazwê i has³o u¿ytkownika nadane przez twojego dostawcê "
+"Internetu."
 
 #: interfaces/network.glade.in.h:1
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
-msgstr ""
-"Teraz proszê o przypisanie nazwy do tego konta. Ta nazwa bêdzie u¿ywana do "
-"identyfikacji konta."
+msgstr "Nadaj teraz kontu nazwê. Bêdzie ona u¿ywana do jego identyfikacji."
 
 #: interfaces/network.glade.in.h:1 interfaces/print.glade.in.h:1
 msgid "Options"
@@ -1410,16 +1416,21 @@ msgid ""
 "how to proceed (go back, cancel\n"
 "or finish)."
 msgstr ""
+"Bêdzie tutaj umieszczone zestawienie\n"
+"informacji o nowym koncie oraz wskazówki\n"
+"odno¶nie do dalszego postêpowania."
 
 #: interfaces/network.glade.in.h:1
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click "
 "\"Cancel\"."
 msgstr ""
+"Aby kontynuowaæ konfigurowanie konta, kliknij \"Naprzód\". Aby zakoñczyæ, "
+"kliknij \"Anuluj\"."
 
 #: interfaces/network.glade.in.h:1
 msgid "Use \"Auto\" if unsure."
-msgstr ""
+msgstr "Je¶li nie masz pewno¶ci, wybierz \"Automatycznie\"."
 
 #: interfaces/network.glade.in.h:1
 msgid ""
@@ -1460,6 +1471,18 @@ msgid ""
 "\n"
 "Click the \"Next\" button to begin."
 msgstr ""
+"Witaj w druidzie po³±czenia z Internetem.\n"
+"\n"
+"Druid ten pomo¿e ci w skonfigurowaniu nowego\n"
+"konta internetowego.\n"
+"\n"
+"Przed rozpoczêciem upewnij siê, ¿e masz modem oraz\n"
+"kontakt ze swoim dostawc± us³ug internetowych (ISP).\n"
+"W razie jakichkolwiek pytañ odnosz±cych siê do\n"
+"informacji na temat po³±czenia, zwróæ siê z nimi do\n"
+"swojego ISP.\n"
+"\n"
+"Aby rozpocz±æ, kliknij \"Naprzód\"."
 
 #: interfaces/network.glade.in.h:1
 msgid "Windows Networking"
@@ -1467,7 +1490,7 @@ msgstr "Sieæ windows"
 
 #: interfaces/network.glade.in.h:1
 msgid "Wireless networking settings."
-msgstr ""
+msgstr "Ustawienia obs³ugi sieci bezprzewodowej."
 
 #: interfaces/network.glade.in.h:1
 msgid "_Ad-Hoc mode"
@@ -1596,69 +1619,61 @@ msgid "Advanced..."
 msgstr "Zaawansowane..."
 
 #: interfaces/rollback-location-management.glade.in.h:1
-#, fuzzy
 msgid "Change to this Location"
-msgstr "Wybór po³o¿enia"
+msgstr "Zmieñ na tê lokalizacjê"
 
 #: interfaces/rollback-location-management.glade.in.h:1
-#, fuzzy
 msgid "Configuration Restoration"
-msgstr "_Konfiguracja:"
+msgstr "Przywrócenie konfiguracji"
 
 #: interfaces/rollback-location-management.glade.in.h:1
-#, fuzzy
 msgid "Create..."
-msgstr "_Usuñ..."
+msgstr "Stwórz..."
 
 #: interfaces/rollback-location-management.glade.in.h:1
-#, fuzzy
 msgid "Destroy..."
-msgstr "_Usuñ..."
+msgstr "Usuñ..."
 
 #: interfaces/rollback-location-management.glade.in.h:1
-#, fuzzy
 msgid "Edit this Location"
-msgstr "Modyfikacja po³o¿enia"
+msgstr "Zmodyfikuj tê lokalizacjê"
 
 #: interfaces/location-manager.glade.in.h:1
 #: interfaces/rollback-location-management.glade.in.h:1
 msgid "Location Management"
-msgstr ""
+msgstr "Zarz±dzanie lokalizacj±"
 
 #: interfaces/rollback-location-management.glade.in.h:1
 msgid "Location name:"
-msgstr "Nazwa po³o¿enia:"
+msgstr "Nazwa lokalizacji:"
 
 #: interfaces/rollback-location-management.glade.in.h:1
 msgid "Parent Location:"
-msgstr "Po³o¿enie nadrzêdne:"
+msgstr "Lokalizacja nadrzêdna:"
 
 #: interfaces/rollback-location-management.glade.in.h:1
-#, fuzzy
 msgid "Rename..."
-msgstr "Rzeczywista nazwa:"
+msgstr "Zmieñ nazwê..."
 
 #: interfaces/rollback-location-management.glade.in.h:1
 msgid "Restore all tools"
-msgstr ""
+msgstr "Przywrócenie wszystkich narzêdzi"
 
 #: interfaces/rollback-location-management.glade.in.h:1
-#, fuzzy
 msgid "Restore configuration from"
-msgstr "Pobieranie konfiguracji z [%s]."
+msgstr "Przywrócenie konfiguracji sprzed"
 
 #: interfaces/rollback-location-management.glade.in.h:1
-#, fuzzy
 msgid "Restore only"
-msgstr "Ustawienia pamiêci."
+msgstr "Przywrócenie tylko"
 
 #: interfaces/rollback-location-management.glade.in.h:1
 msgid "View Logs..."
-msgstr ""
+msgstr "Wy¶wietl dziennik..."
 
 #: interfaces/rollback-location-management.glade.in.h:1
 msgid "days ago"
-msgstr "dni temu"
+msgstr "dni"
 
 #: interfaces/shares.glade.in.h:1
 msgid " Edit clients... "
@@ -1702,7 +1717,7 @@ msgstr "Bez ponownego _montowania po ponownym uruchomieniu komputera"
 
 #: interfaces/shares.glade.in.h:1
 msgid "Do not remount this share after computer reboots"
-msgstr ""
+msgstr "Bez ponownego montowania po ponownym uruchomieniu komputera"
 
 #: interfaces/shares.glade.in.h:1
 msgid "Export"
@@ -1864,6 +1879,9 @@ msgid ""
 "to your NFS share. Client patterns are typically of the form \"10.10.10.*\" "
 "or \" *.gnome.org\".  "
 msgstr ""
+"W oknie tym mo¿na zdefiniowaæ wzorce opisuj±ce klientów, maj±cych dostêp do "
+"eksportów NFS na tym komputerze. Wzorce klientów maj± zwykle postaæ "
+"\"10.10.10.*\" lub  \" *.gnome.org\"."
 
 #: interfaces/shares.glade.in.h:1
 msgid "Username:"
@@ -1879,7 +1897,7 @@ msgstr "_Przegl±dalny"
 
 #: interfaces/shares.glade.in.h:1
 msgid "_Enable"
-msgstr ""
+msgstr "Ua_ktywnij"
 
 #: interfaces/shares.glade.in.h:1
 msgid "_Host:"
@@ -1932,7 +1950,7 @@ msgstr "Tryb uproszczony -- g³ówne okno"
 
 #: interfaces/location-manager.glade.in.h:1 interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
-msgstr ""
+msgstr "(nieskonfigurowane)"
 
 #: interfaces/location-manager.glade.in.h:1 interfaces/time.glade.in.h:1
 msgid "Date"
@@ -2039,7 +2057,6 @@ msgid "C_onfirm:"
 msgstr "_Potwierdzenie:"
 
 #: interfaces/users.glade.in.h:1
-#, fuzzy
 msgid "C_opy settings from:"
 msgstr "D_ziedziczenie ustawieñ po:"
 
@@ -2049,6 +2066,9 @@ msgid ""
 "selected user or group, like a users password\n"
 "or a groups name or members."
 msgstr ""
+"Zmiana ustawieñ i opcji wybranego u¿ytkownika\n"
+"lub grupy, w tym has³a u¿ytkownika oraz nazwy\n"
+"i cz³onków grupy."
 
 #: interfaces/users.glade.in.h:1
 msgid "Check password _quality"
@@ -2059,6 +2079,8 @@ msgid ""
 "Congratulations, the new user has been created.\n"
 "Please click \"Finish\" to save your changes. "
 msgstr ""
+"Zosta³ stworzony nowy u¿ytkownik.\n"
+"Aby zapisaæ zmiany, kliknij \"Zakoñcz\"."
 
 #: interfaces/users.glade.in.h:1
 msgid "Contact information"
@@ -2086,6 +2108,9 @@ msgid ""
 "It's only available if You have NIS\n"
 "and when You click on \"More Options\"."
 msgstr ""
+"TESTOWA obs³uga NIS.\n"
+"Jest ona dostêpna tylko po klikniêciu\n"
+"\"Wiêcej opcji\" i przy obecno¶ci NIS-a."
 
 #: interfaces/users.glade.in.h:1
 msgid "Edit profile:"
@@ -2185,18 +2210,24 @@ msgid ""
 "On this page, you can define security options, such as how frequently users "
 "must change their passwords."
 msgstr ""
+"Na tej stonie mo¿na okre¶liæ opcje dotycz±ce bezpieczeñstwa, takie, jak "
+"wymagana czêsto¶æ zmian hase³ przez u¿ytkowników."
 
 #: interfaces/users.glade.in.h:1
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
 msgstr ""
+"Na tej stonie mo¿na okre¶liæ domy¶lne ustawienia, przypisywane nowym "
+"u¿ytkownikom."
 
 #: interfaces/users.glade.in.h:1
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
 msgstr ""
+"Na tej stronie mo¿na wybraæ skrypty i pliki, które maj± byæ skopiowane z "
+"twojego konta do kont nowych u¿ytkowników."
 
 #: interfaces/users.glade.in.h:1
 msgid "Optional settings"
@@ -2221,13 +2252,15 @@ msgstr "Has³o zosta³o ustawione na:"
 
 #: interfaces/users.glade.in.h:1
 msgid "Please enter a password for the new user. "
-msgstr ""
+msgstr "Podaj has³o nowego u¿ytkownika."
 
 #: interfaces/users.glade.in.h:1
 msgid ""
 "Please enter a username for the new user in the space below. Optionally, you "
 "can fill in more information to identify the user. "
 msgstr ""
+"Wprowad¼ poni¿ej nazwê nowego u¿ytkownika. Opcjonalnie mo¿esz równie¿ podaæ "
+"wiêcej informacji o u¿ytkowniku."
 
 #: interfaces/users.glade.in.h:1
 msgid "Profiles"
@@ -2249,13 +2282,13 @@ msgstr "_Rêczne ustawienie has³a"
 msgid "Settings for selected user and group"
 msgstr "Ustawienia wybranego u¿ytkownika i grupy"
 
-#: interfaces/users.glade.in.h:1
+#: interfaces/users.glade.in.h:1 src/common/System.directory.in.in.h:1
 msgid "System"
-msgstr ""
+msgstr "System"
 
 #: interfaces/users.glade.in.h:1
 msgid "System defaults"
-msgstr ""
+msgstr "Ustawienia domy¶lne dla systemu"
 
 #: interfaces/users.glade.in.h:1
 msgid ""
@@ -2264,6 +2297,10 @@ msgid ""
 "\n"
 "To begin, click \"Next\". "
 msgstr ""
+"Druid ten u³atwi szybkie i proste dodanie\n"
+"do systemu nowego u¿ytkownika.\n"
+"\n"
+"Aby rozpocz±æ, kliknij \"Naprzód\"."
 
 #: interfaces/users.glade.in.h:1
 msgid ""
@@ -2287,12 +2324,12 @@ msgstr "Grupy _u¿ytkownika"
 
 #: interfaces/users.glade.in.h:1
 msgid "Use this dialog to create a new profile."
-msgstr ""
+msgstr "Okno to pozwala na stworzenie nowego profilu."
 
 #. set window title
 #: interfaces/users.glade.in.h:1 src/users/user-druid.c:1
 msgid "User Account Wizard"
-msgstr ""
+msgstr "Druid tworzenia konta u¿ytkownika"
 
 #: interfaces/users.glade.in.h:1
 msgid "User Creation Druid"
@@ -2311,6 +2348,9 @@ msgid ""
 "User profiles can be used a templates to facilitate the creation of new "
 "users. To edit a profile, change the settings in the following tabs."
 msgstr ""
+"Profile u¿ytkowników mog± byæ u¿ywane jako szablony, u³atwiaj±ce tworzenie "
+"nowych u¿ytkowników. Aby zmodyfikowaæ profil, zmieñ ustawienia w poni¿szych "
+"zak³adkach."
 
 #: interfaces/users.glade.in.h:1 src/users/users.desktop.in.in.h:1
 #: src/users/users.etspec.h:1
@@ -2347,7 +2387,7 @@ msgstr "Telefon _domowy:"
 
 #: interfaces/users.glade.in.h:1
 msgid "_Office location:"
-msgstr "Po³o¿enie _biura:"
+msgstr "Lokalizacja _biura:"
 
 #: interfaces/users.glade.in.h:1
 msgid "_Profile:"
@@ -2426,14 +2466,16 @@ msgid "Boot Manager Settings - Ximian Setup Tools"
 msgstr "Ustawienia mened¿era startu - Ximian Setup Tools"
 
 #: src/boot/boot.desktop.in.in.h:1
-#, fuzzy
 msgid "Boot"
-msgstr "Bootowalna"
+msgstr "Rozruch systemu"
 
 #: src/boot/boot.desktop.in.in.h:1
-#, fuzzy
 msgid "Boot Manager"
-msgstr "Bootowalna"
+msgstr "Mened¿er rozruchu systemu"
+
+#: src/common/System.directory.in.in.h:1
+msgid "System administration"
+msgstr "Administracja systemem"
 
 #: src/common/xst-dialog.c:1
 #, c-format
@@ -2463,11 +2505,11 @@ msgstr "B³±d przy pod³±czaniu do sygna³u \"%s\" w widgecie \"%s\""
 
 #: src/common/xst-tool.c:1
 msgid "Skipping backend init..."
-msgstr ""
+msgstr "Pomijanie inicjacji programu przetwarzaj±cego..."
 
 #: src/common/xst-tool.c:1
 msgid "Closing tool."
-msgstr ""
+msgstr "Zamykanie narzêdzia."
 
 #: src/common/xst-tool.c:1
 msgid "Skipping actual save..."
@@ -2482,6 +2524,8 @@ msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
+"Podczas uruchamiania skryptu przetwarzaj±cego wyst±pi³ b³±d.\n"
+"Nie mo¿na wczytaæ konfiguracji."
 
 #: src/common/xst-tool.c:1
 #, c-format
@@ -2527,21 +2571,23 @@ msgstr "Bez wy¶wietlania tego komunikatu w przysz³o¶ci"
 
 #: src/common/xst-tool.c:1
 msgid "\tEdit configuration in the location LOCATION."
-msgstr ""
+msgstr "Modyfikuje konfiguracjê w lokalizacji LOKALIZACJA."
 
 #: src/common/xst-tool.c:1
 msgid "LOCATION"
-msgstr "PO£O¯ENIE"
+msgstr "LOKALIZACJA"
 
 #: src/common/xst-tool.c:1
 msgid "Pretending we are root..."
-msgstr ""
+msgstr "Pozorowanie posiadania praw u¿ytkownika root..."
 
 #: src/common/xst-ui.c:1
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
 msgstr ""
+"Aby ustawienia wesz³y w ¿ycie, nale¿y\n"
+"ponownie uruchomiæ sesjê GNOME."
 
 #: src/disks/main.c:1
 msgid "Disk Partitions"
@@ -2553,7 +2599,7 @@ msgstr "Dyski"
 
 #: src/disks/disks.desktop.in.in.h:1
 msgid "Local fixed media."
-msgstr ""
+msgstr "Lokalne niewymienne no¶niki danych."
 
 #. run test
 #: src/display/callbacks.c:1
@@ -2563,6 +2609,14 @@ msgstr "Przetowanie bie¿±cych ustawieñ."
 #: src/display/callbacks.c:1
 msgid "Restoring settings..."
 msgstr "Przywracanie ustawieñ..."
+
+#: src/display/display.desktop.in.in.h:1
+msgid "Display"
+msgstr "Ekran"
+
+#: src/display/display.desktop.in.in.h:1
+msgid "Display Configuration"
+msgstr "Konfiguracja ekranu"
 
 #: src/display/main.c:1
 msgid "X Display Configuration"
@@ -2607,15 +2661,15 @@ msgstr "Nie mo¿na uruchomiæ narzêdzia konfiguracyjnego"
 
 #: src/location-manager/location-dialog.c:1
 msgid "Create new location"
-msgstr "Nowe po³o¿enie"
+msgstr "Nowa lokalizacja"
 
 #: src/location-manager/location-dialog.c:1
 msgid "Copy a location"
-msgstr "Kopiowanie po³o¿enia"
+msgstr "Kopiowanie lokalizacji"
 
 #: src/location-manager/location-dialog.c:1
 msgid "Rename a location"
-msgstr "Zmiana nazwy po³o¿enia"
+msgstr "Zmiana nazwy lokalizacji"
 
 #: src/location-manager/location-dialog.c:1
 msgid "You must supply a name"
@@ -2623,7 +2677,7 @@ msgstr "Nale¿y podaæ nazwê"
 
 #: src/location-manager/location-dialog.c:1
 msgid "You already have a location by that name"
-msgstr "Po³o¿enie o tej nazwie ju¿ istnieje"
+msgstr "Lokalizacja o tej nazwie ju¿ istnieje"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "_New..."
@@ -2631,7 +2685,7 @@ msgstr "_Nowe..."
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "Create a new location"
-msgstr "Tworzy nowe po³o¿enie"
+msgstr "Tworzy now± lokalizacjê"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "_Copy..."
@@ -2639,7 +2693,7 @@ msgstr "S_kopiuj..."
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "Create a new location identical to the selected one"
-msgstr "Tworzy nowe po³o¿enie na podstawie wybranego"
+msgstr "Tworzy now± lokalizacjê na podstawie wybranej"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "_Rename..."
@@ -2647,11 +2701,11 @@ msgstr "_Zmieñ nazwê..."
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "Rename the selected location"
-msgstr "Zmienia nazwê wybranego po³o¿enia"
+msgstr "Zmienia nazwê wybranej lokalizacji"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "Delete the selected location"
-msgstr "Usuwa wybrane po³o¿enie"
+msgstr "Usuwa wybran± lokalizacjê"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "_Apply..."
@@ -2666,9 +2720,8 @@ msgid "_Edit..."
 msgstr "_Zmodyfikuj..."
 
 #: src/location-manager/location-manager-dialog.c:1
-#, fuzzy
 msgid "Edit settings for the selected backend"
-msgstr "Ustawienia zaznaczonego aliasu"
+msgstr "Modyfikuje ustawienia wybranego programu przetwarzaj±cego"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "_Select"
@@ -2676,7 +2729,7 @@ msgstr "_Zaznacz"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "Select the selected backend for this location"
-msgstr ""
+msgstr "Zaznacza wybrany program przetwarzaj±cy dla tej lokalizacji"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "_Deselect"
@@ -2684,11 +2737,11 @@ msgstr "_Odznacz"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "Deselect the selected backend for this location"
-msgstr ""
+msgstr "Odznacza wybrany program przetwarzaj±cy dla tej lokalizacji"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "_Location"
-msgstr "_Po³o¿enie"
+msgstr "_Lokalizacja"
 
 #: interfaces/location-manager.glade.in.h:1
 #: src/location-manager/location-manager-dialog.c:1
@@ -2698,7 +2751,7 @@ msgstr "Pomo_c"
 #: src/location-manager/location-manager-dialog.c:1
 #: src/location-manager/location-manager-dialog.c:1
 msgid "Location Manager"
-msgstr "Mened¿er po³o¿enia"
+msgstr "Mened¿er lokalizacji"
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid ""
@@ -2707,6 +2760,9 @@ msgid ""
 "not have the Ximian Setup Tools\n"
 "installed properly."
 msgstr ""
+"Nie mo¿na uzyskaæ zrzutu stanu konfiguracji.\n"
+"Prawdopodobnie oznacza to niepoprawn± instalacjê\n"
+"pakietu Ximian Setup Tools."
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid ""
@@ -2716,29 +2772,32 @@ msgid ""
 "control center. Please upgrade to\n"
 "at least version 1.3.2 or CVS HEAD."
 msgstr ""
+"Nie mo¿na uzyskaæ zrzutu stanu konfiguracji.\n"
+"Prawdopodobnie oznacza to, ¿e u¿ywana jest\n"
+"stara wersja Centrum Sterowania GNOME.\n"
+"Uaktualnij Centrum Sterowania co najmniej do\n"
+"wersji 1.3.2 lub do HEAD z CVS-a."
 
 #: src/location-manager/location-manager-dialog.c:1
 msgid "You cannot delete the default location"
-msgstr "Nie mo¿na usun±æ domy¶lnego po³o¿enia"
+msgstr "Nie mo¿na usun±æ domy¶lnej lokalizacji"
 
 #: src/location-manager/location-manager-dialog.c:1
 #, c-format
 msgid "Are you sure you wish to destroy the location %s?"
-msgstr "Czy na pewno chcesz usun±æ po³o¿enie %s?"
+msgstr "Czy na pewno chcesz usun±æ lokalizacjê %s?"
 
 #: src/location-manager/location-manager-dialog.c:1
-#, fuzzy
 msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximian Setup Tools - Has³o"
+msgstr "Ximian Setup Tools - Mened¿er lokalizacji"
 
 #: src/location-manager/main.c:1
 msgid "Operate on global backends"
-msgstr ""
+msgstr "Wykonuje operacje korzystaj±c z globalnego programu przetwarzaj±cego"
 
 #: src/location-manager/main.c:1
-#, fuzzy
 msgid "Options for the location manager"
-msgstr "Ustawienia zaznaczonego aliasu"
+msgstr "Opcje mened¿era op³o¿enia"
 
 #: src/memory/callbacks.c:1
 #, c-format
@@ -2748,7 +2807,7 @@ msgstr "Czy na pewno chcesz usun±æ %s?"
 #. No name, no swap
 #: src/memory/callbacks.c:1
 msgid "Path to new swap location is empty."
-msgstr ""
+msgstr "Nie podano ¶cie¿ki do nowego po³o¿enia obszaru wymiany."
 
 #. It's already in there, can't add
 #: src/memory/callbacks.c:1
@@ -2778,7 +2837,7 @@ msgstr "Krótki opis tego komputera"
 
 #: src/network/callbacks.c:1
 msgid "The Windows Networking workgroup for your network"
-msgstr ""
+msgstr "Grupa robocza twojej sieci w sieci windows"
 
 #: src/network/callbacks.c:1
 msgid "The IP address of your WINS server"
@@ -2844,10 +2903,15 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Nazwa komputera zosta³a zmieniona, co uniemo¿liwi\n"
+"uruchamianie nowych aplikacji i bêdzie wymaga³o\n"
+"ponownego zalogowania siê.\n"
+"\n"
+"Czy pomimo tego kontynuowaæ?"
 
 #: src/network/callbacks.c:1
 msgid "Don't change host name"
-msgstr ""
+msgstr "Ostrze¿enie przed zmian± nazwy komputera"
 
 #: src/network/callbacks.c:1
 msgid ""
@@ -2857,6 +2921,11 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Nie mo¿na odnale¼æ w systemie programu wvdial.\n"
+"Aby po³±czenia PPP (modemowe) mog³y byæ uaktywniane,\n"
+"nale¿y zainstalowaæ ten program.\n"
+"\n"
+"Czy pomimo tego kontynuowaæ?"
 
 #: src/network/callbacks.c:1
 msgid ""
@@ -2865,11 +2934,14 @@ msgid ""
 "\n"
 "Continue anyway?"
 msgstr ""
+"Urz±dzenie s³u¿±ce za domy¶ln± bramkê nie zosta³o\n"
+"uaktywnione, co uniemo¿liwi ³±czenie siê z Internetem.\n"
+"\n"
+"Czy pomimo tego kontynuowaæ?"
 
 #: src/network/callbacks.c:1
-#, fuzzy
 msgid "Activate connection"
-msgstr "Po³o¿enie"
+msgstr "Uaktywnienie po³±czenia"
 
 #: src/network/callbacks.c:1
 msgid ""
@@ -2877,6 +2949,9 @@ msgid ""
 "information. Please provide this information to\n"
 "proceed, or choose another default gateway device.\n"
 msgstr ""
+"Przy urz±dzeniu s³u¿±cym za domy¶ln± bramkê nie\n"
+"podano informacji o bramce. Aby kontynuowaæ, podaj tê\n"
+"informacjê lub wybierz do tej funkcji inne urz±dzenie.\n"
 
 #: src/network/connection.c:1
 msgid "Other type"
@@ -2884,15 +2959,15 @@ msgstr "Inny typ"
 
 #: src/network/connection.c:1
 msgid "Ethernet LAN card"
-msgstr ""
+msgstr "Karta LAN typu Ethernet"
 
 #: src/network/connection.c:1
 msgid "WaveLAN wireless LAN"
-msgstr ""
+msgstr "WaveLAN - bezprzewodowa sieæ LAN"
 
 #: src/network/connection.c:1
 msgid "PPP: modem or transfer cable"
-msgstr ""
+msgstr "PPP: modem lub kabel przesy³owy"
 
 #: src/network/connection.c:1
 msgid "Parallel line"
@@ -2900,7 +2975,7 @@ msgstr "Port równoleg³y"
 
 #: src/network/connection.c:1
 msgid "Infrared LAN"
-msgstr ""
+msgstr "Sieæ LAN na podczerwieñ"
 
 #: src/network/connection.c:1
 msgid "Loopback: virtual interface"
@@ -2924,6 +2999,9 @@ msgid ""
 "was left empty. Please enter valid IP\n"
 "addresses in those fields to continue."
 msgstr ""
+"Nie zosta³ podany adres IP interfejsu lub maska\n"
+"adresu. Aby kontynuowaæ, nale¿y podaæ poprawny\n"
+"adres oraz maskê."
 
 #: src/network/connection.c:1
 msgid ""
@@ -2931,6 +3009,9 @@ msgid ""
 "interface was left empty. Please enter valid\n"
 "IP addresses in those fields to continue."
 msgstr ""
+"Nie zosta³ podany adres IP interfejsu lub zdalny\n"
+"adres IP. Aby kontynuowaæ, nale¿y podaæ poprawne\n"
+"adresy IP."
 
 #: src/network/connection.c:1
 msgid ""
@@ -2940,6 +3021,10 @@ msgid ""
 "enter the IP for the primary DNS or uncheck\n"
 "the manual DNS option."
 msgstr ""
+"Zosta³o wybrane rêczne okre¶lenie serwerów DNS,\n"
+"lecz nie podano adresu IP g³ównego serwera.\n"
+"Wprowad¼ adres g³ównego serwera DNS lub zrezygnuj\n"
+"z opcji rêcznego okre¶lenia serwerów."
 
 #: src/network/hosts.c:1
 #, c-format
@@ -2997,10 +3082,19 @@ msgid ""
 "\n"
 "Password: %s"
 msgstr ""
+"Zostanie stworzone konto z nastêpuj±cymi informacjami:\n"
+"\n"
+"Nazwa konta: %s\n"
+"\n"
+"Numer telefonu: %s\n"
+"\n"
+"Nazwa u¿ytkownika: %s\n"
+"\n"
+"Has³o: %s"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Network adapter setup."
-msgstr ""
+msgstr "Ustawienia ³±cznika sieciowego."
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Networking"
@@ -3092,19 +3186,23 @@ msgstr ""
 
 #: src/shares/validate.c:1
 msgid "You need to name the host providing the import."
-msgstr ""
+msgstr "Nale¿y podaæ nazwê komputera udostêpniaj±cego import."
 
 #: src/shares/validate.c:1
 msgid ""
 "You need to specify a path, i.e. where on the host\n"
 "the share is imported from."
 msgstr ""
+"Nale¿y podaæ ¶cie¿kê do katalogu na zdalnym komputerze,\n"
+"który udostêpnia import."
 
 #: src/shares/validate.c:1
 msgid ""
 "You need to specify the local point, i.e. a directory,\n"
 "where the import will be mounted."
 msgstr ""
+"Nale¿y podaæ punkt montowania, tj. lokalny katalog, w\n"
+"którym bêdzie zamontowany import."
 
 #: src/shares/validate.c:1
 msgid ""
@@ -3411,29 +3509,27 @@ msgstr "Biuro we Wroc³awiu"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Choose Location"
-msgstr "Wybór po³o¿enia"
+msgstr "Wybór lokalizacji"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Copy"
 msgstr "Kopia"
 
 #: interfaces/location-manager.glade.in.h:1
-#, fuzzy
 msgid "Copy Location"
-msgstr "Po³o¿enie"
+msgstr "Kopiowanie lokalizacji"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Current:"
 msgstr "Bie¿±ce:"
 
 #: interfaces/location-manager.glade.in.h:1
-#, fuzzy
 msgid "Edit Date/Time"
-msgstr "Data/czas"
+msgstr "Modyfikacja daty/czasu"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Edit Location"
-msgstr "Modyfikacja po³o¿enia"
+msgstr "Modyfikacja lokalizacji"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Edit:"
@@ -3465,7 +3561,7 @@ msgstr "Warszawa "
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "New Location"
-msgstr "Nowe po³o¿enie"
+msgstr "Nowa lokalizacja"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "New Name:"
@@ -3485,16 +3581,15 @@ msgstr "Zmiana nazwy"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Rename Location"
-msgstr "Zmieñ nazwê po³o¿enia"
+msgstr "Zmieñ nazwê lokalizacji"
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Rollback-location-management-mockup"
-msgstr ""
+msgstr "Rollback-location-management-mockup"
 
 #: interfaces/location-manager.glade.in.h:1
-#, fuzzy
 msgid "Select servers..."
-msgstr "Serwery DNS"
+msgstr "Wybierz serwery..."
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "Set time zone..."
@@ -3505,6 +3600,8 @@ msgid ""
 "Use this tool to manage all the different locations where you could possibly "
 "want to use your stinking laptop."
 msgstr ""
+"Narzêdzie do zarz±dzania ró¿nymi lokalizacjami, w których mo¿esz chcieæ "
+"wykorzystywaæ swojego laptopa."
 
 #: interfaces/print.glade.in.h:1
 msgid "/dev/lp0 (LPT1)"
@@ -3591,11 +3688,11 @@ msgstr "_Jawne wysuwanie ostatniej strony"
 
 #: interfaces/print.glade.in.h:1
 msgid "High Color"
-msgstr ""
+msgstr "64K kolorów"
 
 #: interfaces/print.glade.in.h:1
 msgid "Legal"
-msgstr ""
+msgstr "Legal"
 
 #: interfaces/print.glade.in.h:1
 msgid "Letter"
@@ -3730,7 +3827,7 @@ msgstr ""
 
 #: interfaces/print.glade.in.h:1
 msgid "True Color"
-msgstr ""
+msgstr "16M kolorów"
 
 #: interfaces/print.glade.in.h:1
 msgid "Username used to connect to the server."
