@@ -60,6 +60,8 @@ static gboolean report_finished_cb        (XstTool *tool, XstReportLine *rline);
 
 static void report_dispatch (XstTool *tool);
 
+static gint xst_tool_compare_platforms (XstPlatform *a, XstPlatform *b);
+
 static XstReportHookEntry common_report_hooks[] = {
 	{ "end",              report_finished_cb,         XST_REPORT_HOOK_LOADSAVE, TRUE  },
 	{ "platform_list",    platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE  }, 
@@ -207,6 +209,14 @@ report_finished_cb (XstTool *tool, XstReportLine *rline)
 	return TRUE;
 }
 
+/* --- Utility function --- */
+
+static gint
+xst_tool_compare_platforms (XstPlatform *a, XstPlatform *b)
+{
+	return strcmp (a->name, b->name);
+}
+
 /* --- XstTool --- */
 
 void
@@ -215,11 +225,15 @@ xst_tool_add_supported_platform (XstTool *tool, XstPlatform *platform)
 	g_return_if_fail (tool != NULL);
 	g_return_if_fail (platform != NULL);
 
-	/* TODO: Avoid duplicates. Backend doesn't serve duplicates, but
-	 * we should be paranoid here. */
+	/* Avoid duplicates. Backend shouldn't serve duplicates, but
+	 * we're paranoid here. */
+	g_return_if_fail
+		(g_slist_find_custom (tool->supported_platforms_list, platform,
+		    (GCompareFunc) xst_tool_compare_platforms) == NULL);
 
 	tool->supported_platforms_list =
-		g_slist_append (tool->supported_platforms_list, platform);
+		g_slist_insert_sorted (tool->supported_platforms_list, platform,
+		    (GCompareFunc) xst_tool_compare_platforms);
 }
 
 void
