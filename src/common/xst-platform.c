@@ -67,6 +67,19 @@ xst_platform_new_from_report_line (XstReportLine *rline)
 	return xp;
 }
 
+XstPlatform *
+xst_platform_dup (XstPlatform *platform)
+{
+	XstPlatform *new_platform;
+
+	g_return_val_if_fail (platform != NULL, NULL);
+
+	new_platform = g_new0 (XstPlatform, 1);
+	new_platform->name = g_strdup (platform->name);
+
+	return new_platform;
+}
+
 void
 xst_platform_free (XstPlatform *platform)
 {

@@ -79,17 +79,71 @@ platform_unknown_cb (XstTool *tool, XstReportLine *rline)
 	exit (1);
 }
 
+static void
+platform_list_select_row_cb (GtkCList *clist, gint row, gint columt, GdkEvent *event,
+			     gpointer data)
+{
+	gint *selected_row;
+
+	selected_row = (gint *) data;
+	*selected_row = row;
+}
+
 static gboolean
 platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 {
-	GtkWidget *d;
+	GSList *list;
+	XstPlatform *platform;
+	char *platform_text[1];
+	int ret;
+	gint selected_row = -1;
 
-	d = gnome_ok_dialog (_("The platform you're running is currently not supported\n"
-			       "by this tool. In the future, you will be able to specify\n"
-			       "another platform at this point, but today we'll just quit."));
+	/* Fill in the platform GtkCList */
 
-	gnome_dialog_run_and_close (GNOME_DIALOG (d));
-	exit (1);
+	gtk_clist_clear (GTK_CLIST (tool->platform_list));
+
+	for (list = tool->supported_platforms_list; list;
+	     list = g_slist_next (list))
+	{
+		platform = (XstPlatform *) list->data;
+
+		/* FIXME: gtk_clist_append () doesn't take const. Is this right? */
+
+		platform_text [0] = g_strdup (xst_platform_get_name (platform));
+		gtk_clist_append (GTK_CLIST (tool->platform_list), platform_text);
+	}
+
+	/* Run it */
+
+        selected_row = -1;
+	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "select-row",
+			    platform_list_select_row_cb, &selected_row);
+
+	ret = gnome_dialog_run_and_close (GNOME_DIALOG (tool->platform_dialog));
+
+	if (ret == -1 || ret == 1)
+		exit (1);
+
+	/* Locate the selected platform and set it up as the current one. Prepare to
+	 * invoke the backend again, this time with the current platform specified. */
+
+	/* FIXME: Avoid this by making the Ok button insensitive until choice made. */
+
+	if (selected_row == -1)
+		exit (1);
+
+	if (tool->current_platform)
+		xst_platform_free (tool->current_platform);
+
+	tool->current_platform =
+		xst_platform_dup ((XstPlatform *)
+				 g_slist_nth_data (tool->supported_platforms_list,
+						   selected_row));
+
+	g_assert (tool->current_platform);
+	tool->report_finished = TRUE;
+	tool->run_again = TRUE;
+	return TRUE;
 }
 
 static gboolean
@@ -379,15 +433,19 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 
 	gtk_input_remove (input_id);
 
-	/* Set progress to 100% and wait a bit before closing display */
-  
-	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 1.0);
+	if (!tool->run_again)
+	{
+		/* Set progress to 100% and wait a bit before closing display */
 
-	cb_id = gtk_timeout_add (1500, (GtkFunction) timeout_cb, tool);
-	gtk_main ();
-	gtk_timeout_remove (cb_id);
+		gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 1.0);
+
+		cb_id = gtk_timeout_add (1500, (GtkFunction) timeout_cb, tool);
+		gtk_main ();
+		gtk_timeout_remove (cb_id);
 	
-	gtk_widget_hide (tool->report_window);
+		gtk_widget_hide (tool->report_window);
+	}
+
 	gtk_clist_clear (GTK_CLIST (tool->report_list));
 }
 
@@ -452,7 +510,14 @@ xst_tool_save (XstTool *tool)
 		dup2 (fd_xml [0], STDIN_FILENO);
 		dup2 (fd_report [1], STDOUT_FILENO);
 
-		execl (tool->script_path, tool->script_path, "--set", "--progress", "--report", NULL);
+		if (tool->current_platform)
+			execl (tool->script_path, tool->script_path,
+			       "--set", "--progress", "--report", "--platform",
+			       xst_platform_get_name (tool->current_platform), NULL);
+		else
+			execl (tool->script_path, tool->script_path, "--set", "--progress",
+			       "--report", NULL);
+
 		g_error ("Unable to run backend: %s", tool->script_path);
 	}
   
@@ -504,6 +569,8 @@ xst_tool_load (XstTool *tool)
 		 * enormous documents can be considered a plus. </dystopic> */
 
 		report_progress (tool, fd [0], _("Scanning your system configuration."));
+		if (tool->run_again)
+			return TRUE;
 
 		p = g_malloc (102400);
 		fcntl(fd [0], F_SETFL, 0);  /* Let's block */
@@ -528,7 +595,14 @@ xst_tool_load (XstTool *tool)
 		close (fd [0]);	/* Close reading end */
 		dup2 (fd [1], STDOUT_FILENO);
 
-		execl (tool->script_path, tool->script_path, "--get", "--progress", "--report", NULL);
+		if (tool->current_platform)
+			execl (tool->script_path, tool->script_path,
+			       "--get", "--progress", "--report", "--platform",
+			       xst_platform_get_name (tool->current_platform), NULL);
+		else
+			execl (tool->script_path, tool->script_path, "--get", "--progress",
+			       "--report", NULL);
+
 		g_error ("Unable to run backend: %s", tool->script_path);
 	}
 	
@@ -543,12 +617,18 @@ xst_tool_main (XstTool *tool)
 {
 	GtkWidget *d;
 
-	if (!xst_tool_load (tool)) {
-		d = gnome_ok_dialog (_("There was an error running the backend script,\n"
-				       "and the configuration could not be loaded."));
-		gnome_dialog_run_and_close (GNOME_DIALOG (d));
-		exit (1);
+	do
+	{
+		tool->run_again = FALSE;
+
+		if (!xst_tool_load (tool)) {
+			d = gnome_ok_dialog (_("There was an error running the backend script,\n"
+					       "and the configuration could not be loaded."));
+			gnome_dialog_run_and_close (GNOME_DIALOG (d));
+			exit (1);
+		}
 	}
+	while (tool->run_again);
 
 	xst_dialog_thaw (tool->main_dialog);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
@@ -653,6 +733,10 @@ xst_tool_type_init (XstTool *tool)
 	gtk_widget_show_all (tool->report_notebook);
 
 	glade_xml_signal_connect_data (xml, "visibility_toggled", visibility_toggled, tool);
+
+	xml = xst_tool_load_glade_common (tool, "platform_dialog");
+	tool->platform_dialog = glade_xml_get_widget (xml, "platform_dialog");
+	tool->platform_list = glade_xml_get_widget (xml, "platform_list");
 }
 
 GtkType

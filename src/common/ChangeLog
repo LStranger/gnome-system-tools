@@ -1,3 +1,12 @@
+2001-02-22  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-tool.c, xst-tool.h: Implement dialog for overriding the
+	  detected platform, in case it's not supported. Also, the chosen
+	  platform is stored for reference (used on --set). Note that this
+	  still sort of sucks, but it works for now.
+
+	* xst-platform.c, xst-platform.h (xst_platform_dup): Implement.
+
 2001-02-22  Chema Celorio  <chema@celorio.com>
 
 	* xml.c (xst_xml_unquote): remove this function. Duh !

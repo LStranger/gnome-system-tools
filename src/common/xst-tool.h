@@ -47,6 +47,8 @@ struct _XstTool {
 	xmlDoc  *config;
 
 	XstDialog *main_dialog;
+	GtkWidget *platform_dialog;
+	GtkWidget *platform_list;
 
 	/* Progress report widgets */
 	GtkWidget *report_arrow;
@@ -68,6 +70,7 @@ struct _XstTool {
 	GSList *report_line_list;
 	gboolean report_dispatch_pending;
 	gboolean report_finished;
+	gboolean run_again;
 
 	XstReportHookType report_hook_type;
 	GSList *report_hook_list;
