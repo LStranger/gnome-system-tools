@@ -22,7 +22,6 @@ gchar *s = N_("Name:");
 gchar *s = N_("Settings");
 gchar *s = N_("Name:");
 gchar *s = N_("Image:");
-gchar *s = N_("Make this my default");
 gchar *s = N_("Device:");
 gchar *s = N_("Optional");
 gchar *s = N_("Root:");
