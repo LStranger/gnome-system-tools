@@ -100,12 +100,38 @@
       </child>
 
       <widget>
-	<class>GtkCheckButton</class>
-	<name>enable_button</name>
-	<can_focus>True</can_focus>
-	<label>Enable</label>
-	<active>False</active>
-	<draw_indicator>True</draw_indicator>
+	<class>GtkHBox</class>
+	<name>hbox12</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>enable_button</name>
+	  <can_focus>True</can_focus>
+	  <label>enable</label>
+	  <active>False</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkCheckButton</class>
+	  <name>configure_dhcp</name>
+	  <can_focus>True</can_focus>
+	  <label>configure DHCP</label>
+	  <active>False</active>
+	  <draw_indicator>True</draw_indicator>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
       </widget>
     </widget>
 
@@ -226,10 +252,10 @@
   <class>GtkWindow</class>
   <name>ishare_admin_druid_window</name>
   <visible>False</visible>
-  <title>window1</title>
+  <title>Internet Sharing Druid</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
-  <modal>False</modal>
+  <modal>True</modal>
   <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
@@ -244,11 +270,11 @@
       <title>Internet Sharing Tool</title>
       <text>Welcome to the Internet Sharing Tool 
 
-This Druid will help you to configure 
-your DHCP service.
+This druid will help you to configure 
+and share your internet connection.
 
 At least, you must have installed a local
-Interface Network.</text>
+Interface network.</text>
       <title_color>255,255,255</title_color>
       <text_color>0,0,0</text_color>
       <background_color>0,0,1</background_color>
@@ -292,7 +318,7 @@ Interface Network.</text>
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label1</name>
-	    <label>You don't have install local Interface Network
+	    <label>You don't have installed a local Interface network.
 Would you like to install it?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
@@ -302,7 +328,7 @@ Would you like to install it?
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
-	      <padding>5</padding>
+	      <padding>30</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
 	    </child>
@@ -312,8 +338,8 @@ Would you like to install it?
 	    <class>GtkRadioButton</class>
 	    <name>ishare_admin_druid_button1</name>
 	    <can_focus>True</can_focus>
-	    <label> Yes, Launch Network Tool. (Recommended)</label>
-	    <active>True</active>
+	    <label> Yes, Launch network tool. (Recommended)</label>
+	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button</group>
 	    <child>
@@ -327,8 +353,8 @@ Would you like to install it?
 	    <class>GtkRadioButton</class>
 	    <name>radiobutton2</name>
 	    <can_focus>True</can_focus>
-	    <label> No, Install  Manually</label>
-	    <active>False</active>
+	    <label> No, Installed  manually</label>
+	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
 	    <group>radio_button</group>
 	    <child>
@@ -376,8 +402,8 @@ Would you like to install it?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label2</name>
-	    <label>Do you want to activate your local Interface 
-Network, right now?
+	    <label>Local interface network has been detected, but it's not active.
+Would you like to activate it?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -386,7 +412,7 @@ Network, right now?
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
-	      <padding>5</padding>
+	      <padding>30</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
 	    </child>
@@ -399,7 +425,7 @@ Network, right now?
 	    <label> Yes. (Recommended)</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button1</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -412,9 +438,9 @@ Network, right now?
 	    <name>radiobutton4</name>
 	    <can_focus>True</can_focus>
 	    <label> No.</label>
-	    <active>False</active>
+	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button1</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -460,7 +486,7 @@ Network, right now?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label3</name>
-	    <label>Local Interface Network has been detected
+	    <label>You have a previous configuration of firewall.
 Do you want to keep this configuration?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
@@ -470,7 +496,7 @@ Do you want to keep this configuration?
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
-	      <padding>5</padding>
+	      <padding>30</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
 	    </child>
@@ -483,7 +509,7 @@ Do you want to keep this configuration?
 	    <label> Yes.</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button2</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -496,9 +522,9 @@ Do you want to keep this configuration?
 	    <name>radiobutton6</name>
 	    <can_focus>True</can_focus>
 	    <label> No, (Overwrite)</label>
-	    <active>False</active>
+	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button2</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -544,7 +570,7 @@ Do you want to keep this configuration?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label4</name>
-	    <label>Do you want to use DHCP service?
+	    <label>Would you like to install DHCP service ?
 
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
@@ -554,7 +580,7 @@ Do you want to keep this configuration?
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
-	      <padding>5</padding>
+	      <padding>30</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
 	    </child>
@@ -567,7 +593,7 @@ Do you want to keep this configuration?
 	    <label> Yes.</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button3</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -580,9 +606,9 @@ Do you want to keep this configuration?
 	    <name>radiobutton8</name>
 	    <can_focus>True</can_focus>
 	    <label> No.</label>
-	    <active>False</active>
+	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button3</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -628,8 +654,8 @@ Do you want to keep this configuration?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label6</name>
-	    <label>You don't have the requirements to install DHCP service?
-
+	    <label>You don't have installed the requirements to use 
+ DHCP service?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
 	    <wrap>False</wrap>
@@ -638,7 +664,7 @@ Do you want to keep this configuration?
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
-	      <padding>5</padding>
+	      <padding>30</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
 	    </child>
@@ -651,7 +677,7 @@ Do you want to keep this configuration?
 	    <label> Don't use it.</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button4</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -661,12 +687,12 @@ Do you want to keep this configuration?
 
 	  <widget>
 	    <class>GtkRadioButton</class>
-	    <name>radiobutton13</name>
+	    <name>ishare_admin_druid_exit_button</name>
 	    <can_focus>True</can_focus>
 	    <label> Exit.</label>
-	    <active>False</active>
+	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button4</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -712,7 +738,7 @@ Do you want to keep this configuration?
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label5</name>
-	    <label>DHCP configuration has been detected 
+	    <label>A previous DHCP configuration has been detected. 
 Do you want to keep this configuration?
 </label>
 	    <justify>GTK_JUSTIFY_CENTER</justify>
@@ -722,7 +748,7 @@ Do you want to keep this configuration?
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
-	      <padding>5</padding>
+	      <padding>30</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
 	    </child>
@@ -735,7 +761,7 @@ Do you want to keep this configuration?
 	    <label> Yes.</label>
 	    <active>False</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button5</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -748,9 +774,9 @@ Do you want to keep this configuration?
 	    <name>radiobutton10</name>
 	    <can_focus>True</can_focus>
 	    <label> No, (Overwrite)</label>
-	    <active>False</active>
+	    <active>True</active>
 	    <draw_indicator>True</draw_indicator>
-	    <group>radio_button</group>
+	    <group>radio_button5</group>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -774,6 +800,187 @@ Internet Sharing Tool.</text>
       <title_color>255,255,255</title_color>
       <logo_image>internet-share.png</logo_image>
       <watermark_image>xstdruidbg-3.png</watermark_image>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>dhcp_dialog</name>
+  <visible>False</visible>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>True</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>False</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>False</auto_close>
+  <hide_on_close>False</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox1</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area1</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button1</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button2</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button3</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox13</name>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox14</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox17</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label51</name>
+	    <label>Start rage</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>entry2</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox18</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label52</name>
+	    <label>End range</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>entry3</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
     </widget>
   </widget>
 </widget>
