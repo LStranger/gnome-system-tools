@@ -160,8 +160,6 @@ clock_tick (gpointer data)
 {
 	GtkWidget *w;
 
-	xst_dialog_freeze (tool->main_dialog);
-  
 	w = xst_dialog_get_widget (tool->main_dialog, "second");
 	gtk_spin_button_spin(GTK_SPIN_BUTTON(w), GTK_SPIN_STEP_FORWARD, 1.0);
   
@@ -176,8 +174,6 @@ clock_tick (gpointer data)
 			/* FIXME: Update calendar if we pass midnight */
 		}
 	}
-
-	xst_dialog_thaw (tool->main_dialog);
 	
 	return TRUE;
 }
