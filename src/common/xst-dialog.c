@@ -455,7 +455,8 @@ xst_dialog_enable_complexity (XstDialog *dialog)
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (XST_IS_DIALOG (dialog));
 
-	gtk_widget_set_sensitive (dialog->complexity_button, TRUE);
+//	gtk_widget_set_sensitive (dialog->complexity_button, TRUE);
+	gtk_widget_show (dialog->complexity_button);
 }
 
 void
@@ -549,7 +550,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	gtk_signal_connect (GTK_OBJECT (w), "clicked", close_cb, dialog);
 	
 	gtk_widget_set_sensitive (dialog->apply_button,      FALSE);
-	gtk_widget_set_sensitive (dialog->complexity_button, FALSE);
+	gtk_widget_hide (dialog->complexity_button);
 
 	dialog->complexity = XST_DIALOG_NONE;
 	val = xst_conf_get_integer (dialog->tool, "complexity");
