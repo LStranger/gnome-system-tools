@@ -665,19 +665,25 @@ xst_tool_idle_run_directives (gpointer data)
 	XstDirectiveEntry *entry;
 
 	if (!tool->directive_queue) {
+#if 0	
 		g_print ("\nno queue\n");
+#endif	
 		return FALSE;
 	}
 
 	a++;
+#if 0	
 	g_print ("idles: %d\n", a);
+#endif	
 
 	entry = tool->directive_queue->data;
 	tool->directive_queue = g_slist_remove (tool->directive_queue, entry);
 	entry->callback (entry);
 	g_free (entry);
 
+#if 0	
 	g_print ("running %d\n", tool->directive_running);
+#endif	
 	a--;
 
 	return TRUE;
