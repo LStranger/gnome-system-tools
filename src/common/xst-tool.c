@@ -386,7 +386,6 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		tool->line = g_string_new ("");
 
 	while ((n = read (fd, buffer, sizeof (buffer) - 1)) != 0) {
-
 		buffer [n] = 0;
 		
 		for (i = 0; (i < n); i++) {
