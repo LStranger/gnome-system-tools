@@ -193,6 +193,7 @@ user_account_gui_new (UserAccount *account, GtkWidget *parent)
 	gui->basic_frame = glade_xml_get_widget (gui->xml, "user_settings_basic");
 	gui->name    = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_name"));
 	gui->comment = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_comment"));
+	gui->contact_frame = glade_xml_get_widget (gui->xml, "user_settings_contact_info");
 	gui->office  = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_office"));
 	gui->wphone  = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_wphone"));
 	gui->hphone  = GTK_ENTRY (glade_xml_get_widget (gui->xml, "user_settings_hphone"));
@@ -328,6 +329,10 @@ setup_advanced_add (UserAccountGui *gui, GtkWidget *notebook)
 	gtk_box_set_child_packing (GTK_BOX (box),
 				   GTK_WIDGET (gui->basic_frame),
 				   FALSE, FALSE, 0, GTK_PACK_START);
+	gtk_widget_reparent (GTK_WIDGET (gui->contact_frame), box);
+	gtk_box_set_child_packing (GTK_BOX (box),
+				   GTK_WIDGET (gui->contact_frame),
+				   FALSE, FALSE, 0, GTK_PACK_START);	
 	gtk_widget_reparent (GTK_WIDGET (gui->profile_box), box);
 	gtk_box_set_child_packing (GTK_BOX (box),
 				   GTK_WIDGET (gui->profile_box),
@@ -361,16 +366,15 @@ setup_advanced_add (UserAccountGui *gui, GtkWidget *notebook)
 static void
 setup_basic_add (UserAccountGui *gui, GtkWidget *notebook)
 {
-	GtkWidget *widget, *container;
+	GtkWidget *container;
 	
 	container = glade_xml_get_widget (gui->xml, "user_druid_identity");
-	widget = glade_xml_get_widget (gui->xml, "user_settings_basic");
-	gtk_widget_reparent (widget, container);
+	gtk_widget_reparent (gui->basic_frame, container);
+	gtk_widget_reparent (gui->contact_frame, container);
 	gtk_widget_show_all (container);
 
 	container = glade_xml_get_widget (gui->xml, "user_druid_password");
-	widget = glade_xml_get_widget (gui->xml, "user_passwd_frame");
-	gtk_widget_reparent (widget, container);
+	gtk_widget_reparent (gui->pwd_frame, container);
 	gtk_widget_show_all (container);
 }
 
@@ -387,6 +391,7 @@ setup_basic (UserAccountGui *gui, GtkWidget *notebook)
 	/* Reparent widgets */
 	box = gtk_vbox_new (FALSE, 3);
 	gtk_widget_reparent (GTK_WIDGET (gui->basic_frame), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->contact_frame), box);
 	gtk_widget_reparent (GTK_WIDGET (gui->pwd_frame), box);
 	label = gtk_label_new (_("Identity"));
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);
@@ -401,6 +406,7 @@ setup_advanced (UserAccountGui *gui, GtkWidget *notebook)
 	/* Reparent widgets */
 	box = gtk_vbox_new (FALSE, 3);
 	gtk_widget_reparent (GTK_WIDGET (gui->basic_frame), box);
+	gtk_widget_reparent (GTK_WIDGET (gui->contact_frame), box);
 	gtk_widget_reparent (GTK_WIDGET (gui->advanced), box);
 	label = gtk_label_new (_("Identity"));
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), box, label);

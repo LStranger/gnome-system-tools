@@ -30,45 +30,57 @@
 #include "user_group.h"
 
 typedef struct {
-	GtkWidget *top;
-	UserAccount *account;
-	GladeXML *xml;
+	GtkWidget       *top;
+	UserAccount     *account;
+	GladeXML        *xml;
 
-	GtkWidget *basic_frame;
-	GtkEntry *name;
-	GtkEntry *comment;
-	GtkEntry *office;
-	GtkEntry *wphone;
-	GtkEntry *hphone;
-	GtkEntry *home;
-	GtkCombo *shell;
-	GtkSpinButton *uid;
-	GtkWidget *advanced;
-	GtkWidget *profile_box;
-	GtkOptionMenu *profile_menu;
+	/* Basic settings frame */
+	GtkWidget       *basic_frame;
+	GtkEntry        *name;
+	GtkEntry        *comment;
 
-	GtkWidget *group_box;
-	GtkWidget *group_extra;
-	GtkCombo  *group;
-	GtkCList  *all;
-	GtkCList  *member;
-	GtkWidget *add;
-	GtkWidget *remove;
+	/* Contact inforamtion frame */
+	GtkWidget       *contact_frame;
+	GtkEntry        *office;
+	GtkEntry        *wphone;
+	GtkEntry        *hphone;
 
-	GtkWidget *pwd_box;
-	GtkNotebook *pwd_notebook;
+	/* Advanced settings frame */
+	GtkWidget       *advanced;
+	GtkEntry        *home;
+	GtkCombo        *shell;
+	GtkSpinButton   *uid;
+
+	/* Profile selection box */
+	GtkWidget       *profile_box;
+	GtkOptionMenu   *profile_menu;
+
+	/* Groups box */
+	GtkWidget       *group_box;
+	GtkWidget       *group_extra;
+	GtkCombo        *group;
+	GtkCList        *all;
+	GtkCList        *member;
+	GtkWidget       *add;
+	GtkWidget       *remove;
+
+	/* Password box */
+	GtkWidget       *pwd_box;
+	GtkNotebook     *pwd_notebook;
 	GtkToggleButton *pwd_manual;
 	GtkToggleButton *pwd_random;
-	GtkLabel *pwd_random_label;
-	GtkWidget *pwd_random_new;
-	GtkWidget *pwd_frame;
+	GtkLabel        *pwd_random_label;
+	GtkWidget       *pwd_random_new;
+	GtkWidget       *pwd_frame;
 	GtkToggleButton *quality;
-	GtkEntry *pwd1;
-	GtkEntry *pwd2;
-	GtkWidget *optional;
-	GtkSpinButton *min;
-	GtkSpinButton *max;
-	GtkSpinButton *days;
+	GtkEntry        *pwd1;
+	GtkEntry        *pwd2;
+
+	/* Optional settings frame */
+	GtkWidget       *optional;
+	GtkSpinButton   *min;
+	GtkSpinButton   *max;
+	GtkSpinButton   *days;
 } UserAccountGui;
 
 UserAccountGui *user_account_gui_new     (UserAccount *account, GtkWidget *parent);
