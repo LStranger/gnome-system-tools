@@ -372,32 +372,6 @@ gst_ui_entry_set_text (void *entry, const gchar *str)
 }
 
 /**
- * gst_ui_logout_dialog:
- * @void: 
- * 
- * Asks user for confirmation and restarts X server.
- * 
- * Return Value: TRUE if logout, FALSE if not.
- **/
-gboolean
-gst_ui_logout_dialog (const gchar *message)
-{
-	GtkWidget *d;
-	gchar *tmp;
-
-	tmp = message? _(message) :
-		_("Please restart your GNOME session for these changes to take effect.");
-
-	d = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING,
-				    GTK_BUTTONS_OK, tmp);
-
-	gtk_dialog_run (GTK_DIALOG (d));
-	gtk_widget_destroy (d);
-
-	return FALSE;
-}
-
-/**
  * gst_ui_text_view_clear:
  * @view: GtkTextView
  * 

@@ -19,7 +19,6 @@ void       gst_ui_option_menu_remove_string       (GtkOptionMenu *option_menu, c
 void       gst_ui_option_menu_clear               (GtkOptionMenu *option_menu);
 
 void       gst_ui_entry_set_text                  (void *entry, const gchar *str);
-gboolean   gst_ui_logout_dialog                   (const gchar *message);
 
 void       gst_ui_text_view_add_text              (GtkTextView *view, const gchar *text);
 gchar     *gst_ui_text_view_get_text              (GtkTextView *view);
