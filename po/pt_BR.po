@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-26 12:32+0100\n"
-"PO-Revision-Date: 2005-01-29 21:22-0200\n"
+"POT-Creation-Date: 2005-02-20 13:37+0100\n"
+"PO-Revision-Date: 2005-02-20 10:22-0300\n"
 "Last-Translator: Raphael Higino <raphaelh@uai.com.br>\n"
 "Language-Team: Brazilian Portuguese <gnome-l10n-br@listas.cipsga.org.br>\n"
 "MIME-Version: 1.0\n"
@@ -272,7 +272,9 @@ msgstr "Dispositivo do sistema de arquivos _raiz:"
 #: interfaces/common.glade.in.h:1
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Por favor, digite sua senha de root</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Por favor, digite sua senha de root</"
+"span>"
 
 #: interfaces/common.glade.in.h:2
 msgid ""
@@ -308,7 +310,10 @@ msgstr "E_xecutar sem senha"
 msgid ""
 "To use this tool, you need administrator privileges, if you don't provide a "
 "password, you will be unable to modify your system configuration."
-msgstr "Para usar essa ferramenta você precisa de privilégios de administrador. Se você não especificar uma senha, você não poderá modificar as configurações do seu sistema."
+msgstr ""
+"Para usar essa ferramenta você precisa de privilégios de administrador. Se "
+"você não especificar uma senha, você não poderá modificar as configurações "
+"do seu sistema."
 
 #: interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
@@ -1190,6 +1195,14 @@ msgstr "Verifique se você tem permissões para executar esse comando."
 msgid "An unexpected error has ocurred"
 msgstr "Um erro inesperado ocorreu"
 
+#: src/common/gst-auth.c:132
+msgid "Could not execute the backend"
+msgstr "Não foi possível executar o mecanismo subjacente"
+
+#: src/common/gst-auth.c:133
+msgid "There was an error creating the child process, the tool will close now."
+msgstr "Houve um erro ao criar o processo filho. A ferramenta vai fechar agora."
+
 #: src/common/gst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
@@ -1264,7 +1277,9 @@ msgstr "Não foi possível habilitar a interface %s"
 msgid ""
 "Check that the settings are apropriate for this network and that the "
 "computer is correctly connected to it."
-msgstr "Verifique se essas configurações são apropriadas para essa rede e que o computador está conectado a ela corretamente."
+msgstr ""
+"Verifique se essas configurações são apropriadas para essa rede e que o "
+"computador está conectado a ela corretamente."
 
 #: src/network/callbacks.c:234
 msgid "Could not autodetect modem device"
@@ -1278,11 +1293,11 @@ msgstr ""
 "Verifique se o dispositivo não está ocupado e que está devidamente conectado "
 "ao computador"
 
-#: src/network/callbacks.c:433
+#: src/network/callbacks.c:439
 msgid "The host name has changed"
 msgstr "O nome da máquina mudou"
 
-#: src/network/callbacks.c:436
+#: src/network/callbacks.c:442
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1290,7 +1305,7 @@ msgstr ""
 "Isso vai impedí-lo de executar novas aplicações e, por isso você terá que se "
 "autenticar novamente. Continuar mesmo assim?"
 
-#: src/network/callbacks.c:442
+#: src/network/callbacks.c:448
 msgid "Change _Host name"
 msgstr "Alterar nome da _máquina"
 
@@ -1326,33 +1341,35 @@ msgstr "Você quer remover essa localização?"
 msgid "Changing profile"
 msgstr "Alterando o perfil"
 
-#: src/network/main.c:105
+#: src/network/main.c:107
 msgid "The interface does not exist"
 msgstr "A interface não existe"
 
-#: src/network/main.c:107
+#: src/network/main.c:109
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
-msgstr "Verifique se ela está escrita corretamente e que é corretamente suportada pelo seu sistema."
+msgstr ""
+"Verifique se ela está escrita corretamente e que é corretamente suportada "
+"pelo seu sistema."
 
-#: src/network/main.c:139
+#: src/network/main.c:154
 msgid "Configure a network interface"
 msgstr "Configurar uma interface de rede"
 
-#: src/network/main.c:139
+#: src/network/main.c:154
 msgid "INTERFACE"
 msgstr "INTERFACE"
 
-#: src/network/main.c:140
+#: src/network/main.c:155
 msgid "Configure the first network interface with a specific type"
 msgstr "Configurar a primeira interface de rede com um tipo específico"
 
-#: src/network/main.c:140
+#: src/network/main.c:155
 msgid "TYPE"
 msgstr "TIPO"
 
-#: src/network/main.c:147
+#: src/network/main.c:162
 msgid "Network settings"
 msgstr "Configurações de rede"
 
@@ -1372,7 +1389,7 @@ msgstr "Conexão ethernet"
 msgid "Infrared connection"
 msgstr "Conexão infravermelho"
 
-#: src/network/network-iface-isdn.c:296
+#: src/network/network-iface-isdn.c:311
 msgid "ISDN connection"
 msgstr "Conexão ISDN"
 
@@ -1526,7 +1543,9 @@ msgstr "Nenhum serviço de compartilhamento está instalado"
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders. The tool will close now."
-msgstr "Você precisa instalar pelo menos o Samba ou NFS para compartilhar suas pastas. A ferramenta vai fechar agora."
+msgstr ""
+"Você precisa instalar pelo menos o Samba ou NFS para compartilhar suas "
+"pastas. A ferramenta vai fechar agora."
 
 #: src/time/main.c:461
 msgid "NTP support is not running"
@@ -1686,11 +1705,11 @@ msgstr "GID do usuário é"
 msgid "Users and Groups"
 msgstr "Usuários e Grupos"
 
-#: src/users/passwd.c:266
+#: src/users/passwd.c:165
 msgid "Passwords do not match"
 msgstr "A senha não combina"
 
-#: src/users/passwd.c:271
+#: src/users/passwd.c:170
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -1762,7 +1781,9 @@ msgstr "Você tem certeza de que deseja excluir o usuário \"%s\"?"
 msgid ""
 "This will disable the access of this user to the system, but his home "
 "directory will not be deleted"
-msgstr "Isso vai desabilitar o acesso deste usuário ao sistema, mas sua pasta pessoal não será excluída."
+msgstr ""
+"Isso vai desabilitar o acesso deste usuário ao sistema, mas sua pasta "
+"pessoal não será excluída."
 
 #: src/users/user-settings.c:187
 msgid "User Account Editor"
