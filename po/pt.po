@@ -1,5 +1,5 @@
 # gnome-system-tools's Portuguese Translation
-# Copyright © 2002 gnome-system-tools
+# Copyright © 2002, 2004 gnome-system-tools
 # This file is distributed under the same license as the gnome-system-tools package.
 # Paulo Silva <paulojjs@bragatel.pt>, 2002
 # Duarte Loreto <happyguy_pt@hotmail.com>, 2003, 2004.
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
 "Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
-"POT-Creation-Date: 2004-04-24 16:09+0100\n"
-"PO-Revision-Date: 2004-04-24 16:50+0000\n"
+"POT-Creation-Date: 2004-05-13 22:36+0100\n"
+"PO-Revision-Date: 2004-05-13 22:40+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -227,7 +227,7 @@ msgid "Finished"
 msgstr "Terminado"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:52
-#: src/network/connection.c:1870
+#: src/network/connection.c:1891
 msgid "Manual"
 msgstr "Manual"
 
@@ -518,34 +518,34 @@ msgstr "Permitir controlo de activação para todos os _utilizadores"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:30 src/network/connection.c:1872
-msgid "BOOTP"
-msgstr "BOOTP"
+#: interfaces/network.glade.in.h:30 src/network/connection.c:1893
+msgid "Automatic (BOOTP)"
+msgstr "Automático (BOOTP)"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:31 src/network/connection.c:1892
+msgid "Automatic (DHCP)"
+msgstr "Automático (DHCP)"
+
+#: interfaces/network.glade.in.h:32
 msgid "Co_nfiguration:"
 msgstr "Co_nfiguração:"
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "Tipo da ligação"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Ligações"
 
 #. set window titles
-#: interfaces/network.glade.in.h:34 src/network/network-druid.c:63
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "A criar uma nova ligação à rede"
 
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:36
 msgid "Current network profile:"
 msgstr "Perfil de rede actual:"
-
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1871
-msgid "DHCP"
-msgstr "DHCP"
 
 #: interfaces/network.glade.in.h:37
 msgid "DNS"
@@ -658,8 +658,8 @@ msgid ""
 "Now, please specify if this connection should be enabled, this means that "
 "the configuration will be applied when the assistant finishes."
 msgstr ""
-"Agora, especifique se esta ligação deverá ser activa, o que significa que "
-"a configuração será aplicada quando o assistente terminar."
+"Agora, especifique se esta ligação deverá ser activa, o que significa que a "
+"configuração será aplicada quando o assistente terminar."
 
 #: interfaces/network.glade.in.h:63
 msgid "Number to _access an external line:"
@@ -1290,7 +1290,7 @@ msgstr "A criar uma nova imagem de arranque (%d de %d)"
 msgid "Finished creating a new boot image"
 msgstr "Terminada a criação de uma nova imagem de arranque"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:481
+#: src/boot/boot-image.c:40 src/network/profile.c:482
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -1405,7 +1405,7 @@ msgstr "Nome"
 msgid "Default"
 msgstr "Por Omissão"
 
-#: src/boot/table.c:43 src/network/connection.c:488
+#: src/boot/table.c:43 src/network/connection.c:500
 msgid "Type"
 msgstr "Tipo"
 
@@ -1413,11 +1413,11 @@ msgstr "Tipo"
 msgid "Kernel Image"
 msgstr "Imagem de Kernel"
 
-#: src/boot/table.c:45 src/network/connection.c:504
+#: src/boot/table.c:45 src/network/connection.c:516
 msgid "Device"
 msgstr "Dispositivo"
 
-#: src/boot/table.c:50 src/network/connection.c:61
+#: src/boot/table.c:50 src/network/connection.c:62
 msgid "/_Add ..."
 msgstr "_Adicionar..."
 
@@ -1426,7 +1426,7 @@ msgstr "_Adicionar..."
 msgid "/_Properties"
 msgstr "/_Propriedades"
 
-#: src/boot/table.c:53 src/network/connection.c:64 src/network/dns.c:39
+#: src/boot/table.c:53 src/network/connection.c:65 src/network/dns.c:39
 #: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Apagar"
@@ -1453,8 +1453,8 @@ msgstr "A senha que introduziu é inválida"
 msgid ""
 "Check that you typed it correctly and that you haven't activated caps lock"
 msgstr ""
-"Certifique-se de que a introduziu correctamente e de que não tem o caps "
-"lock activo"
+"Certifique-se de que a introduziu correctamente e de que não tem o caps lock "
+"activo"
 
 #: src/common/gst-auth.c:104
 #, c-format
@@ -1495,33 +1495,29 @@ msgstr "Aplicá-las agora?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Sinal de erro de ligação `%s' no widget `%s'"
 
-#: src/common/gst-tool.c:796
+#: src/common/gst-tool.c:802
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "A ignorar a directiva %s..."
 
-#: src/common/gst-tool.c:923
+#: src/common/gst-tool.c:929
 msgid "Skipping actual save..."
 msgstr "A ignorar a gravação actual..."
 
-#: src/common/gst-tool.c:997
+#: src/common/gst-tool.c:1003
 msgid "The configuration could not be loaded"
 msgstr "Incapaz de ler a configuração"
 
-#: src/common/gst-tool.c:998
+#: src/common/gst-tool.c:1004
 msgid "There was an error running the backend script"
 msgstr "Ocorreu um erro ao executar o script de módulo de suporte"
 
-#: src/common/gst-tool.c:1480
+#: src/common/gst-tool.c:1486
 #, c-format
-msgid ""
-"<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
-"GNOME System Tools</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">Bem vindo à versão de pré-lançamento %"
-"s do GNOME System Tools.</span>"
+msgid "Welcome to the %s prerelease of the GNOME System Tools"
+msgstr "Bem vindo à versão de pré-lançamento %s do GNOME System Tools"
 
-#: src/common/gst-tool.c:1483
+#: src/common/gst-tool.c:1488
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1535,19 +1531,19 @@ msgstr ""
 "esforço e sanidade mental. Foi avisado. Obrigado por testar esta versão de "
 "pré-lançamento das GNOME System Tools!"
 
-#: src/common/gst-tool.c:1504
+#: src/common/gst-tool.c:1509
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/common/gst-tool.c:1524
+#: src/common/gst-tool.c:1529
 msgid "Don't show me this again"
 msgstr "Não apresentar novamente esta mensagem"
 
-#: src/common/gst-tool.c:1598
+#: src/common/gst-tool.c:1604
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
-#: src/network/callbacks.c:361
+#: src/network/callbacks.c:365
 msgid ""
 "This will disable any network connection with this interface as soon as you "
 "hit \"apply\"."
@@ -1555,16 +1551,16 @@ msgstr ""
 "Isto irá desactivar qualquer ligação de rede com este interface assim que "
 "primir \"aplicar\"."
 
-#: src/network/callbacks.c:366
+#: src/network/callbacks.c:370
 #, c-format
 msgid "Are you sure you want to delete connection \"%s\"?"
 msgstr "Tem a certeza que quer apagar a ligação \"%s\"?"
 
-#: src/network/callbacks.c:456
+#: src/network/callbacks.c:460
 msgid "SMB Support is not running"
 msgstr "Suporte SMB não se encontra em execução"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:461
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1572,11 +1568,11 @@ msgstr ""
 "Não possui suporte para SMB instalado. Instale o suporte para SMB no sistema "
 "para activar redes windows."
 
-#: src/network/callbacks.c:521
+#: src/network/callbacks.c:525
 msgid "Host name has changed"
 msgstr "Nome de máquina foi alterado"
 
-#: src/network/callbacks.c:522
+#: src/network/callbacks.c:526
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1584,15 +1580,15 @@ msgstr ""
 "Isto irá impedí-lo de iniciar novas aplicações, pelo que será necessário "
 "iniciar uma nova sessão. Ainda assim continuar?"
 
-#: src/network/callbacks.c:526
+#: src/network/callbacks.c:530
 msgid "Change _Host name"
 msgstr "Alterar o Nome da má_quina"
 
-#: src/network/callbacks.c:569
+#: src/network/callbacks.c:573
 msgid "Wvdial missing"
 msgstr "Wvdial não foi encontrado"
 
-#: src/network/callbacks.c:570
+#: src/network/callbacks.c:574
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1600,11 +1596,11 @@ msgstr ""
 "O wvdial não foi encontrado no seu sistema. Necessita de instalá-lo ou as "
 "ligações PPP (modem) não poderão ser activadas."
 
-#: src/network/callbacks.c:596
+#: src/network/callbacks.c:600
 msgid "Wvdial not found"
 msgstr "Wvdial não foi encontrado"
 
-#: src/network/callbacks.c:597
+#: src/network/callbacks.c:601
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1612,35 +1608,36 @@ msgstr ""
 "O wvdial não foi encontrado no seu sistema. Necessita de instalá-lo ou as "
 "ligações PPP (modem) não poderão ser activadas. Ainda assim continuar?"
 
-#: src/network/callbacks.c:601 src/network/callbacks.c:628
+#: src/network/callbacks.c:605 src/network/callbacks.c:632
 msgid "_Continue"
 msgstr "_Continuar"
 
-#: src/network/callbacks.c:624
+#: src/network/callbacks.c:628
 msgid "The default gateway device is not activated"
 msgstr "O dispositivo de gateway por omissão não se encontra activo"
 
-#: src/network/callbacks.c:625
+#: src/network/callbacks.c:629
 msgid "This will prevent you from connecting to the Internet. Continue anyway?"
 msgstr "Isto irá impedí-lo de se ligar à Internet. Ainda assim continuar?"
 
-#: src/network/callbacks.c:673
+#: src/network/callbacks.c:677
 msgid "The default gateway device is missing gateway information"
-msgstr "O dispositivo de gateway por omissão não possui toda a informação de gateway"
+msgstr ""
+"O dispositivo de gateway por omissão não possui toda a informação de gateway"
 
-#: src/network/callbacks.c:674
+#: src/network/callbacks.c:678
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device."
 msgstr ""
-"Forneça esta informação para continuar ou escolha outro dispositivo de gateway por "
-"omissão."
+"Forneça esta informação para continuar ou escolha outro dispositivo de "
+"gateway por omissão."
 
-#: src/network/callbacks.c:719
+#: src/network/callbacks.c:723
 msgid "The program redhat-config-network-cmd could not be found"
 msgstr "Incapaz de encontrar a aplicação redhat-config-network-cmd"
 
-#: src/network/callbacks.c:720
+#: src/network/callbacks.c:724
 msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this."
@@ -1648,53 +1645,54 @@ msgstr ""
 "Isto pode causar ligações em falta no separador de ligações. Instale o "
 "pacote rpm redhat-config-network para evitar este problema."
 
-#: src/network/callbacks.c:751
+#: src/network/callbacks.c:755
 #, c-format
 msgid "Do you want to enable interface \"%s\"?"
 msgstr "Deseja activar o interface \"%s\"?"
 
-#: src/network/callbacks.c:752
+#: src/network/callbacks.c:756
 msgid "This will enable network access through this interface"
 msgstr "Isto irá activar o acesso à rede através deste interface"
 
-#: src/network/callbacks.c:753
+#: src/network/callbacks.c:757
 msgid "_Enable"
 msgstr "_Activar"
 
-#: src/network/callbacks.c:755
+#: src/network/callbacks.c:759
 #, c-format
 msgid "Do you want to disable interface \"%s\"?"
 msgstr "Deseja desactivar o interface \"%s\"?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:760
 msgid "This will disable network access through this interface"
 msgstr "Isto irá desactivar o acesso à rede através deste interface"
 
-#: src/network/callbacks.c:757
+#: src/network/callbacks.c:761
 msgid "_Disable"
 msgstr "_Desactivar"
 
-#: src/network/callbacks.c:864
+#: src/network/callbacks.c:868
 msgid "Could not autodetect modem device"
 msgstr "Incapaz de auto-detectar o dispositivo de modem"
 
-#: src/network/callbacks.c:865
+#: src/network/callbacks.c:869
 msgid "Check that it's not busy and that it's correctly attached"
-msgstr "Certifique-se de que não está ocupado e de que está correctamente ligado"
+msgstr ""
+"Certifique-se de que não está ocupado e de que está correctamente ligado"
 
-#: src/network/callbacks.c:919
+#: src/network/callbacks.c:923
 msgid "Silent"
 msgstr "Silencioso"
 
-#: src/network/callbacks.c:921
+#: src/network/callbacks.c:925
 msgid "Low"
 msgstr "Baixo"
 
-#: src/network/callbacks.c:923
+#: src/network/callbacks.c:927
 msgid "Medium"
 msgstr "Médio"
 
-#: src/network/callbacks.c:925
+#: src/network/callbacks.c:929
 msgid "Loud"
 msgstr "Alto"
 
@@ -1703,46 +1701,47 @@ msgid "Other type"
 msgstr "Outro tipo"
 
 #: src/network/connection.c:47 src/network/connection.c:48
+#: src/network/connection.c:49 src/network/connection.c:50
 msgid "Ethernet LAN card"
 msgstr "Placa LAN Ethernet"
 
-#: src/network/connection.c:49
+#: src/network/connection.c:51
 msgid "Wireless LAN card"
 msgstr "Placa LAN de rede sem fios"
 
-#: src/network/connection.c:50 src/network/connection.c:51
+#: src/network/connection.c:52 src/network/connection.c:53
 msgid "Modem or transfer cable"
 msgstr "Modem ou cabo de transferência"
 
-#: src/network/connection.c:52 src/network/connection.c:53
+#: src/network/connection.c:54
 msgid "Parallel line"
 msgstr "Linha paralela"
 
-#: src/network/connection.c:54
+#: src/network/connection.c:55
 msgid "Infrared LAN"
 msgstr "LAN de Infra-vermelhos"
 
-#: src/network/connection.c:55
+#: src/network/connection.c:56
 msgid "Loopback interface"
 msgstr "Interface de loopback"
 
-#: src/network/connection.c:56
+#: src/network/connection.c:57
 msgid "Unknown interface type"
 msgstr "Tipo de interface desconhecido"
 
-#: src/network/connection.c:63
+#: src/network/connection.c:64
 msgid "/_Configure"
 msgstr "/_Configurar"
 
-#: src/network/connection.c:516
-msgid "Status"
-msgstr "Estado"
+#: src/network/connection.c:487 src/services/table.c:79
+msgid "Active"
+msgstr "Activo"
 
-#: src/network/connection.c:1721 src/network/connection.c:1731
+#: src/network/connection.c:1742 src/network/connection.c:1752
 msgid "Error in IP address"
 msgstr "Erro no endereço IP"
 
-#: src/network/connection.c:1722
+#: src/network/connection.c:1743
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1750,7 +1749,7 @@ msgstr ""
 "Não foi introduzido o endereço IP ou a máscara de rede para o interface. "
 "Insira endereços IP válidos nesses campos para continuar."
 
-#: src/network/connection.c:1732
+#: src/network/connection.c:1753
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1758,11 +1757,11 @@ msgstr ""
 "Não foi introduzido o endereço IP ou o endereço remoto para o interface. "
 "Insira endereços IP válidos nesses campos para continuar."
 
-#: src/network/connection.c:1740
+#: src/network/connection.c:1761
 msgid "Error in DNS servers"
 msgstr "Erro nos servidores DNS"
 
-#: src/network/connection.c:1741
+#: src/network/connection.c:1762
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1772,11 +1771,11 @@ msgstr ""
 "introduziu o endereço IP do DNS primário. Insira o IP para o servidor DNS "
 "primário ou remova a opção manual para o DNS."
 
-#: src/network/connection.c:1748
+#: src/network/connection.c:1769
 msgid "Invalid modem device"
 msgstr "Dispositivo de modem inválido"
 
-#: src/network/connection.c:1749
+#: src/network/connection.c:1770
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1784,11 +1783,11 @@ msgstr ""
 "Não foi introduzido o dispositivo de modem que a ligação irá utilizar. "
 "Insira um dispositivo ou prima \"auto-detectar\" para continuar."
 
-#: src/network/connection.c:1754
+#: src/network/connection.c:1775
 msgid "Invalid phone number"
 msgstr "Número de telefone inválido"
 
-#: src/network/connection.c:1755
+#: src/network/connection.c:1776
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1796,20 +1795,20 @@ msgstr ""
 "Não foi introduzido o número de telefone que a ligação irá utilizar. Insira "
 "um número de telefone válido para continuar."
 
-#: src/network/connection.c:2123
+#: src/network/connection.c:2144
 msgid "Nonexisting interface"
 msgstr "Interface inexistente"
 
-#: src/network/connection.c:2124
+#: src/network/connection.c:2145
 #, c-format
 msgid "The interface \"%s\" doesn't exist."
 msgstr "O interface \"%s\" não existe."
 
-#: src/network/connection.c:2127
+#: src/network/connection.c:2148
 msgid "Invalid interface"
 msgstr "Interface inválido"
 
-#: src/network/connection.c:2128
+#: src/network/connection.c:2149
 msgid "The loopback interface cannot be configured."
 msgstr "Incapaz de configurar o interface de loopback."
 
@@ -1874,7 +1873,7 @@ msgstr "Configurar dispositivos de rede e ligações"
 msgid "Networking"
 msgstr "Utilização de Rede"
 
-#: src/network/profile.c:51 src/users/profile-settings.c:226
+#: src/network/profile.c:51 src/users/profile-settings.c:204
 msgid "You won't be able to recover this profile after hitting \"apply\""
 msgstr "Não será capaz de recuperar este perfil depois de primir \"aplicar\""
 
@@ -1924,10 +1923,6 @@ msgstr "Configurar que serviços serão executados ao iniciar o sistema"
 msgid "Services"
 msgstr "Serviços"
 
-#: src/services/table.c:79
-msgid "Active"
-msgstr "Activo"
-
 #: src/services/table.c:88
 msgid "Service"
 msgstr "Serviço"
@@ -1948,7 +1943,8 @@ msgstr "Suporte NTP não se encontra em execução"
 msgid ""
 "Please run NTP support in the system to enable time server synchronization"
 msgstr ""
-"Execute o suporte NTP no sistema para activar a sincronização com o servidor de horas."
+"Execute o suporte NTP no sistema para activar a sincronização com o servidor "
+"de horas."
 
 #: src/time/main.c:819
 msgid "Time and Date Settings"
@@ -1962,15 +1958,15 @@ msgstr "Alterar a hora, data e zona horária do sistema"
 msgid "Time and Date"
 msgstr "Data e Hora"
 
-#: src/users/callbacks.c:569
+#: src/users/callbacks.c:572
 msgid "Error saving profile"
 msgstr "Erro ao gravar o perfil"
 
-#: src/users/callbacks.c:604
+#: src/users/callbacks.c:607
 msgid "Create New profile"
 msgstr "Criar um Novo perfil"
 
-#: src/users/callbacks.c:635
+#: src/users/callbacks.c:641
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Definições para o perfil %s"
@@ -1995,8 +1991,8 @@ msgstr "ID de grupo root não deve ser alterado"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
-#: src/users/user-settings.c:334 src/users/user-settings.c:428
-#: src/users/user-settings.c:463
+#: src/users/user-settings.c:352 src/users/user-settings.c:446
+#: src/users/user-settings.c:482
 msgid "This would leave the system unusable"
 msgstr "Isto iria deixar o sistema inutilizável"
 
@@ -2054,7 +2050,8 @@ msgstr "O grupo root não pode ser apagado."
 
 #: src/users/group-settings.c:298
 msgid "This may leave files with invalid group ID in the filesystem"
-msgstr "Isto poderá deixar ficheiros no sistema de ficheiros com ID de grupo inválido"
+msgstr ""
+"Isto poderá deixar ficheiros no sistema de ficheiros com ID de grupo inválido"
 
 #: src/users/group-settings.c:303
 #, c-format
@@ -2107,27 +2104,27 @@ msgstr ""
 "Senha inválida: %s.\n"
 "Tente novamente com outra senha."
 
-#: src/users/profile-settings.c:130
+#: src/users/profile-settings.c:114
 msgid "The profile must have a name"
 msgstr "O perfil tem de ter um nome"
 
-#: src/users/profile-settings.c:135
+#: src/users/profile-settings.c:119
 msgid "The profile must have a default home"
 msgstr "O perfil tem de ter um directório pessoal por omissão"
 
-#: src/users/profile-settings.c:140 src/users/profile-settings.c:145
+#: src/users/profile-settings.c:124 src/users/profile-settings.c:129
 msgid "The profile must have a default shell"
 msgstr "O perfil tem de ter uma consola por omissão"
 
-#: src/users/profile-settings.c:215
-msgid "The profile \"Default\" must not be deleted."
-msgstr "O perfil \"Por Omissão\" não pode ser apagado."
+#: src/users/profile-settings.c:193
+msgid "The default profile must not be deleted."
+msgstr "O perfil por omissão não pode ser apagado."
 
-#: src/users/profile-settings.c:216
+#: src/users/profile-settings.c:194
 msgid "This is the default profile for setting new users' data"
 msgstr "Este é o perfil por omissão para definir dados de novos utilizadores"
 
-#: src/users/profile-settings.c:225
+#: src/users/profile-settings.c:203
 #, c-format
 msgid "Delete profile \"%s\""
 msgstr "Apagar o perfil \"%s\""
@@ -2174,37 +2171,37 @@ msgstr "O utilizador root não pode ser apagado."
 msgid "Are you sure you want to delete user %s?"
 msgstr "Tem a certeza que quer apagar o utilizador %s?"
 
-#: src/users/user-settings.c:199
+#: src/users/user-settings.c:217
 msgid "User Account Editor"
 msgstr "Editor de Contas de Utilizador"
 
-#: src/users/user-settings.c:314
+#: src/users/user-settings.c:332
 msgid "The username is empty."
 msgstr "O nome de utilizador está vazio."
 
-#: src/users/user-settings.c:315
+#: src/users/user-settings.c:333
 msgid "A username must be specified"
 msgstr "Tem de especificar um nome de utilizador"
 
 #. = sizeof (ut.ut_name)
-#: src/users/user-settings.c:321 src/users/user-settings.c:326
+#: src/users/user-settings.c:339 src/users/user-settings.c:344
 msgid "The username is too long."
 msgstr "O nome de utilizador é demasiado comprido."
 
-#: src/users/user-settings.c:322 src/users/user-settings.c:327
+#: src/users/user-settings.c:340 src/users/user-settings.c:345
 #, c-format
 msgid "The username should have less than %i characters for being valid"
 msgstr "O nome de utilizador tem de ter menos de %i caracteres para ser válido"
 
-#: src/users/user-settings.c:333
+#: src/users/user-settings.c:351
 msgid "Root username shouldn't be modified."
 msgstr "Nome do utilizador root não deve ser alterado."
 
-#: src/users/user-settings.c:339
+#: src/users/user-settings.c:357
 msgid "Username has invalid characters"
 msgstr "Nome de utilizador tem caracteres inválidos"
 
-#: src/users/user-settings.c:340
+#: src/users/user-settings.c:358
 msgid ""
 "Please set a valid username consisting of a lower case letter followed by "
 "lower case letters and numbers."
@@ -2212,37 +2209,37 @@ msgstr ""
 "Insira um nome de utilizador válido, utilizando uma letra minúscula seguida "
 "de letras minúsculas e números."
 
-#: src/users/user-settings.c:345
+#: src/users/user-settings.c:363
 #, c-format
 msgid "Username \"%s\" already exists"
 msgstr "O nome de utilizador \"%s\" já existe"
 
-#: src/users/user-settings.c:346
+#: src/users/user-settings.c:364
 msgid "Please select a different username"
 msgstr "Seleccione um nome de utilizador diferente"
 
-#: src/users/user-settings.c:371
+#: src/users/user-settings.c:389
 msgid "Invalid character in comment."
 msgstr "Caracter inválido no comentário."
 
-#: src/users/user-settings.c:372
+#: src/users/user-settings.c:390
 #, c-format
 msgid "Check that invalid character '%c' is not used"
 msgstr "Certifique-se de que o caracter inválido '%c' não é utilizado"
 
-#: src/users/user-settings.c:420
+#: src/users/user-settings.c:438
 msgid "Home directory must not be empty."
 msgstr "Directório pessoal não pode estar vazio."
 
-#: src/users/user-settings.c:421
+#: src/users/user-settings.c:439
 msgid "Make sure you provide a home directory"
 msgstr "Certifique-se de que indica um directório pessoal"
 
-#: src/users/user-settings.c:423
+#: src/users/user-settings.c:441
 msgid "Incomplete path in home directory"
 msgstr "Caminho incompleto para o directório pessoal"
 
-#: src/users/user-settings.c:424
+#: src/users/user-settings.c:442
 msgid ""
 "Please enter full path for home directory.\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
@@ -2250,32 +2247,40 @@ msgstr ""
 "Insira o caminho completo para o directório pessoal.\n"
 "<span size=\"smaller\">por ex.: /home/jose</span>"
 
-#: src/users/user-settings.c:427
+#: src/users/user-settings.c:445
 msgid "root home shouldn't be modified."
 msgstr "Directório pessoal do root não deve ser alterado."
 
-#: src/users/user-settings.c:459 src/users/user-settings.c:465
+#: src/users/user-settings.c:478
 msgid "Invalid user ID"
 msgstr "ID de utilizador inválido"
 
-#: src/users/user-settings.c:460
+#: src/users/user-settings.c:479
 msgid "User id must be a positive number."
 msgstr "ID de utilizador tem de ser um número positivo."
 
-#: src/users/user-settings.c:462
+#: src/users/user-settings.c:481
 msgid "root user ID should not be modified"
 msgstr "ID de utilizador root não deve ser alterado"
 
-#: src/users/user-settings.c:466
-#, c-format
-msgid "User ID %s already exists."
-msgstr "O ID de utilizador %s já existe."
+#: src/users/user-settings.c:498
+msgid ""
+"Several users may share a single user ID, but it's not common and may lead "
+"to security problems"
+msgstr ""
+"O mesmo ID de utilizador pode ser utilizado por vários utilizadores mas tal "
+"não é normal e pode dar origem a problemas de segurança"
 
-#: src/users/user-settings.c:488
+#: src/users/user-settings.c:503
+#, c-format
+msgid "User ID %s already exists"
+msgstr "O ID de utilizador %s já existe"
+
+#: src/users/user-settings.c:520
 msgid "Incomplete path in shell"
 msgstr "Caminho incompleto na consola"
 
-#: src/users/user-settings.c:489
+#: src/users/user-settings.c:521
 msgid ""
 "Please enter full path for shell.\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
@@ -2283,23 +2288,24 @@ msgstr ""
 "Insira o caminho completo para a consola.\n"
 "<span size=\"smaller\">por ex.: /bin/sh</span>"
 
-#: src/users/user-settings.c:511
+#: src/users/user-settings.c:543
 msgid "Password can not be empty."
 msgstr "Senha não pode ser vazia."
 
-#: src/users/user-settings.c:512
+#: src/users/user-settings.c:544
 msgid "A password must be provided"
 msgstr "Tem de especificar uma senha"
 
-#: src/users/user-settings.c:514
+#: src/users/user-settings.c:546
 msgid "Password confirmation isn't correct."
 msgstr "Confirmação de senha não está correcta."
 
-#: src/users/user-settings.c:515
+#: src/users/user-settings.c:547
 msgid "Check that you have provided the same password in both text fields"
-msgstr "Certifique-se de que especificou a mesma senha em ambos os campos de texto"
+msgstr ""
+"Certifique-se de que especificou a mesma senha em ambos os campos de texto"
 
-#: src/users/user-settings.c:791
+#: src/users/user-settings.c:830
 #, c-format
 msgid "Settings for User %s"
 msgstr "Definições para o Utilizador %s"
@@ -2328,6 +2334,15 @@ msgstr "Consola"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Adicionar ou remover utilizadores e grupos"
+
+#~ msgid "BOOTP"
+#~ msgstr "BOOTP"
+
+#~ msgid "DHCP"
+#~ msgstr "DHCP"
+
+#~ msgid "Status"
+#~ msgstr "Estado"
 
 #~ msgid "Connection _name:"
 #~ msgstr "_Nome da ligação:"
