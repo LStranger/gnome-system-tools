@@ -31,10 +31,11 @@ $(INTLLIBS) \
 ./e-map/e-map.o
 
 desktop = time.desktop
+security = time.security
 
-EXTRA_DIST = $(desktop) time.pam
+EXTRA_DIST = $(desktop) time.pam $(security).in
 
-CLEANFILES = $(desktop).menu $(desktop).cc
+CLEANFILES = $(desktop).menu $(desktop).cc $(security)
 
 $(desktop).menu: $(desktop)
 	sed 's#Exec=.*#Exec=time-admin#' < $< > $@
@@ -42,7 +43,10 @@ $(desktop).menu: $(desktop)
 $(desktop).cc: $(desktop)
 	sed 's#Exec=.*#Exec=root-manager time-admin#' < $< > $@
 
-all-local: $(desktop).menu $(desktop).cc
+$(security): $(security).in
+	sed 's#PROGRAM=.*#PROGRAM='$(DESTDIR)$(sbindir)'/time-admin#' < $< > $@
+
+all-local: $(desktop).menu $(desktop).cc $(security)
 
 install-data-local:
 	$(mkinstalldirs) $(DESTDIR)$(datadir)/gnome/apps/Settings/System
@@ -54,3 +58,5 @@ install-data-local:
 	ln -s consolehelper $(DESTDIR)$(bindir)/time-admin
 	$(mkinstalldirs) $(sysconfdir)/pam.d
 	$(INSTALL_DATA) $(srcdir)/time.pam $(sysconfdir)/pam.d/time-admin
+	$(mkinstalldirs) $(sysconfdir)/security/console.apps
+	$(INSTALL_DATA) $(srcdir)/$(security) $(sysconfdir)/security/console.apps/time-admin
