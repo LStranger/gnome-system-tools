@@ -27,8 +27,6 @@
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
-  <default_width>433</default_width>
-  <default_height>302</default_height>
   <allow_shrink>False</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
@@ -84,7 +82,7 @@
 	    <widget>
 	      <class>GnomePixmap</class>
 	      <name>pixmap2</name>
-	      <filename>boot.png</filename>
+	      <filename>boot_wrench.png</filename>
 	    </widget>
 	  </widget>
 
@@ -123,7 +121,7 @@ or Linux kernels on your machine.</label>
 	    <widget>
 	      <class>GnomePixmap</class>
 	      <name>pixmap9</name>
-	      <filename>32_wrench_logo.png</filename>
+	      <filename>settings.png</filename>
 	    </widget>
 	  </widget>
 	</widget>
@@ -142,6 +140,7 @@ or Linux kernels on your machine.</label>
 	  <widget>
 	    <class>GtkHBox</class>
 	    <name>table_holder</name>
+	    <width>400</width>
 	    <homogeneous>False</homogeneous>
 	    <spacing>0</spacing>
 	    <child>
@@ -164,11 +163,12 @@ or Linux kernels on your machine.</label>
 	      <padding>0</padding>
 	      <expand>False</expand>
 	      <fill>False</fill>
+	      <pack>GTK_PACK_END</pack>
 	    </child>
 
 	    <widget>
 	      <class>GtkLabel</class>
-	      <name>label6</name>
+	      <name>label61</name>
 	      <label></label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
@@ -178,15 +178,15 @@ or Linux kernels on your machine.</label>
 	      <ypad>0</ypad>
 	      <child>
 		<padding>0</padding>
-		<expand>True</expand>
-		<fill>True</fill>
+		<expand>False</expand>
+		<fill>False</fill>
 	      </child>
 	    </widget>
 
 	    <widget>
 	      <class>GtkVButtonBox</class>
 	      <name>vbuttonbox1</name>
-	      <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
+	      <layout_style>GTK_BUTTONBOX_START</layout_style>
 	      <spacing>0</spacing>
 	      <child_min_width>85</child_min_width>
 	      <child_min_height>27</child_min_height>
@@ -205,6 +205,7 @@ or Linux kernels on your machine.</label>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>_Add...</label>
+		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -214,6 +215,7 @@ or Linux kernels on your machine.</label>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>_Delete</label>
+		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -223,14 +225,17 @@ or Linux kernels on your machine.</label>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>_Settings...</label>
+		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
 		<class>GtkButton</class>
 		<name>boot_default</name>
+		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>D_efault</label>
+		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -278,17 +283,18 @@ or Linux kernels on your machine.</label>
 	  <widget>
 	    <class>GtkSpinButton</class>
 	    <name>boot_timeout</name>
+	    <width>55</width>
 	    <sensitive>False</sensitive>
 	    <can_focus>True</can_focus>
 	    <climb_rate>1</climb_rate>
 	    <digits>0</digits>
-	    <numeric>False</numeric>
+	    <numeric>True</numeric>
 	    <update_policy>GTK_UPDATE_ALWAYS</update_policy>
 	    <snap>False</snap>
 	    <wrap>False</wrap>
 	    <value>1</value>
 	    <lower>0</lower>
-	    <upper>100</upper>
+	    <upper>999999</upper>
 	    <step>1</step>
 	    <page>10</page>
 	    <page_size>10</page_size>
@@ -579,7 +585,7 @@ operating system to your computer.</label>
 	<class>GtkTable</class>
 	<name>table13</name>
 	<border_width>3</border_width>
-	<rows>4</rows>
+	<rows>3</rows>
 	<columns>2</columns>
 	<homogeneous>False</homogeneous>
 	<row_spacing>3</row_spacing>
@@ -695,29 +701,6 @@ operating system to your computer.</label>
 	</widget>
 
 	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>settings_default</name>
-	  <can_focus>True</can_focus>
-	  <label>Make this my default</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <left_attach>0</left_attach>
-	    <right_attach>2</right_attach>
-	    <top_attach>3</top_attach>
-	    <bottom_attach>4</bottom_attach>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <xexpand>False</xexpand>
-	    <yexpand>False</yexpand>
-	    <xshrink>False</xshrink>
-	    <yshrink>False</yshrink>
-	    <xfill>True</xfill>
-	    <yfill>False</yfill>
-	  </child>
-	</widget>
-
-	<widget>
 	  <class>GtkLabel</class>
 	  <name>settings_device_label</name>
 	  <label>Device:</label>
@@ -801,16 +784,42 @@ operating system to your computer.</label>
 	<spacing>0</spacing>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox8</name>
-	  <border_width>3</border_width>
+	  <class>GtkTable</class>
+	  <name>table15</name>
+	  <rows>2</rows>
+	  <columns>2</columns>
 	  <homogeneous>False</homogeneous>
-	  <spacing>3</spacing>
+	  <row_spacing>3</row_spacing>
+	  <column_spacing>3</column_spacing>
 	  <child>
 	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
+	    <expand>False</expand>
+	    <fill>False</fill>
 	  </child>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>settings_root</name>
+	    <can_focus>True</can_focus>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
 
 	  <widget>
 	    <class>GtkLabel</class>
@@ -823,63 +832,68 @@ operating system to your computer.</label>
 	    <xpad>0</xpad>
 	    <ypad>0</ypad>
 	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label62</name>
+	    <label>Append:</label>
+	    <justify>GTK_JUSTIFY_LEFT</justify>
+	    <wrap>False</wrap>
+	    <xalign>7.45058e-09</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
 	    </child>
 	  </widget>
 
 	  <widget>
 	    <class>GtkEntry</class>
-	    <name>settings_root</name>
+	    <name>settings_append</name>
 	    <can_focus>True</can_focus>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
 	    <text></text>
 	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox9</name>
-	  <border_width>3</border_width>
-	  <homogeneous>False</homogeneous>
-	  <spacing>3</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkCheckButton</class>
-	    <name>checkbutton2</name>
-	    <can_focus>True</can_focus>
-	    <label>This kernel requires additional parameters</label>
-	    <active>False</active>
-	    <draw_indicator>True</draw_indicator>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkButton</class>
-	    <name>button7</name>
-	    <can_focus>True</can_focus>
-	    <label>Add...</label>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
 	    </child>
 	  </widget>
 	</widget>
