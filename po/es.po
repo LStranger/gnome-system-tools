@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-26 04:32+0200\n"
-"PO-Revision-Date: 2003-08-26 12:00+0200\n"
+"POT-Creation-Date: 2003-09-15 20:08+0200\n"
+"PO-Revision-Date: 2003-09-16 01:53+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@arrakis.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -82,7 +82,7 @@ msgstr "La última versión de GST que esta computadora ha ejecutado"
 
 #: gnome-system-tools.schemas.in.h:12
 msgid "Whether the tools will use remote administration or not"
-msgstr "Indica si las herramientas usarán la administradicón remota o no"
+msgstr "Indica si las herramientas usarán la administración remota o no"
 
 #: gnome-system-tools.schemas.in.h:13
 msgid "Whether the users-admin tool should show all users and groups or not"
@@ -221,7 +221,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Ajustes de la imagen (paso 2 de 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1745
+#: src/network/connection.c:1753
 msgid "Manual"
 msgstr "Manual"
 
@@ -372,7 +372,7 @@ msgstr "Complejidad"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Introduzca contraseña - Herramientas de sistema de GNOME"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1786
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
 msgid "GNOME System Tools"
 msgstr "Herramientas de sistema de GNOME"
 
@@ -540,7 +540,7 @@ msgstr "Permite el control de activación para todos los usuarios"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1755
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -580,7 +580,7 @@ msgstr "Crea una conexión a Internet nueva"
 msgid "Create a new network connection"
 msgstr "Crea una nueva conexión a de red"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1746
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1754
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -722,7 +722,7 @@ msgstr ""
 
 #: interfaces/network.glade.in.h:81
 msgid "Now, please give this connection a name."
-msgstr "Ahora, déle un nombre a la conexión"
+msgstr "Ahora, dele un nombre a la conexión"
 
 #: interfaces/network.glade.in.h:82
 msgid "Number to _access an external line:"
@@ -769,7 +769,7 @@ msgid ""
 "Please, give this network profile\n"
 "a name and a description."
 msgstr ""
-"Déle un nombre y una descripción\n"
+"Dele un nombre y una descripción\n"
 "a este perfil de red."
 
 #: interfaces/network.glade.in.h:93
@@ -806,7 +806,7 @@ msgstr "Configurar manualmente los servidores _DNS"
 
 #: interfaces/network.glade.in.h:101
 msgid "Set modem as default _route to internet"
-msgstr "Establecer el modem como _ruta predeterminada a Internet"
+msgstr "Establecer el módem como _ruta predeterminada a Internet"
 
 #: interfaces/network.glade.in.h:102
 msgid ""
@@ -1009,19 +1009,19 @@ msgstr "IP _local:"
 
 #: interfaces/network.glade.in.h:159
 msgid "_Modem (PPP)"
-msgstr "_Modem (PPP)"
+msgstr "_Módem (PPP)"
 
 #: interfaces/network.glade.in.h:160
 msgid "_Modem port:"
-msgstr "Puerto del _modem:"
+msgstr "Puerto del _módem:"
 
 #: interfaces/network.glade.in.h:161
 msgid "_Modem volume:"
-msgstr "Volumen del _modem:"
+msgstr "Volumen del _módem:"
 
 #: interfaces/network.glade.in.h:162
 msgid "_Network Profiles"
-msgstr "Perfilles de _red"
+msgstr "Perfiles de _red"
 
 #: interfaces/network.glade.in.h:163
 msgid "_Parallel Line"
@@ -1057,7 +1057,7 @@ msgstr "ID de la _sesión:"
 
 #: interfaces/network.glade.in.h:172
 msgid "_Start PPP as soon as modem connects"
-msgstr "_Iniciar PPP tan pronto como se conecte el modem"
+msgstr "_Iniciar PPP tan pronto como se conecte el módem"
 
 #: interfaces/network.glade.in.h:173
 msgid "_Subnet mask:"
@@ -1549,7 +1549,7 @@ msgstr "vga=%s no es un valor vga válido"
 msgid "Boot Image Wizard"
 msgstr "Asistente para las imágenes de arranque"
 
-#: src/boot/boot-image.c:40
+#: src/boot/boot-image.c:40 src/network/profile.c:466
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -1708,8 +1708,8 @@ msgid " More _Options"
 msgstr " Más _opciones"
 
 #: src/common/gst-dialog.c:93
-msgid " Less _Options"
-msgstr " Menos _opciones"
+msgid " Fewer _Options"
+msgstr " Menos _opciones "
 
 #: src/common/gst-dialog.c:476
 msgid ""
@@ -1719,7 +1719,7 @@ msgstr ""
 "Existen cambios que no se han aplicado.\n"
 "¿Quiere aplicarlos ahora?"
 
-#: src/common/gst-dialog.c:571
+#: src/common/gst-dialog.c:592
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Se ha producido un error al conectar la señal «%s» con el widget «%s»"
@@ -1738,15 +1738,15 @@ msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
-"Se produjo un error al ejecutar el script del backend,\n"
+"Se produjo un error al ejecutar el script del motor,\n"
 "y la configuración no ha podido ser cargada."
 
-#: src/common/gst-tool.c:1509
+#: src/common/gst-tool.c:1522
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Herramientas de sistema de GNOME"
 
-#: src/common/gst-tool.c:1687
+#: src/common/gst-tool.c:1700
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1774,11 +1774,11 @@ msgstr ""
 "--\n"
 "El equipo de las Herramientas de sistema de GNOME"
 
-#: src/common/gst-tool.c:1711
+#: src/common/gst-tool.c:1724
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/common/gst-tool.c:1720
+#: src/common/gst-tool.c:1733
 msgid "Don't show me this again"
 msgstr "No vuelva a mostrarme esto"
 
@@ -1888,7 +1888,7 @@ msgstr ""
 "\n"
 "¿Continuar de todas formas?"
 
-#: src/network/callbacks.c:708
+#: src/network/callbacks.c:709
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1898,7 +1898,7 @@ msgstr ""
 "Necesita instalarlo o las conexiones PPP (módem)\n"
 "no se activarán."
 
-#: src/network/callbacks.c:734
+#: src/network/callbacks.c:736
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1912,7 +1912,7 @@ msgstr ""
 "\n"
 "¿Continuar de todas formas?"
 
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:763
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -1924,7 +1924,7 @@ msgstr ""
 "\n"
 "¿Continuar de todas formas?"
 
-#: src/network/callbacks.c:816
+#: src/network/callbacks.c:818
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -1934,7 +1934,7 @@ msgstr ""
 "del pasarela. Por favor facilite esta información para\n"
 "continuar, o elija otro dispositivo pasarela por defecto.\n"
 
-#: src/network/callbacks.c:862
+#: src/network/callbacks.c:864
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -1947,17 +1947,17 @@ msgstr ""
 "Por favor instale el paquete rpm redhat-config-network\n"
 "para que esto no ocurra."
 
-#: src/network/callbacks.c:900
+#: src/network/callbacks.c:902
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "¿Quiere activar el interfaz %s?"
 
-#: src/network/callbacks.c:910
+#: src/network/callbacks.c:912
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "¿Quiere desactivar el interfaz %s?"
 
-#: src/network/callbacks.c:983
+#: src/network/callbacks.c:999
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1965,23 +1965,23 @@ msgstr ""
 "No se pudo detectar el dispositivo módem, compruebe que no esté usándose y "
 "que está conectado correctamente"
 
-#: src/network/callbacks.c:1028
+#: src/network/callbacks.c:1044
 msgid "Silent"
 msgstr "Silencioso"
 
-#: src/network/callbacks.c:1030
+#: src/network/callbacks.c:1046
 msgid "Low"
 msgstr "Bajo"
 
-#: src/network/callbacks.c:1032
+#: src/network/callbacks.c:1048
 msgid "Medium"
 msgstr "Medio"
 
-#: src/network/callbacks.c:1034
+#: src/network/callbacks.c:1050
 msgid "Loud"
 msgstr "Alto"
 
-#: src/network/callbacks.c:1200
+#: src/network/callbacks.c:1216
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "¿Está seguro que desea borrar el alias de %s?"
@@ -1996,7 +1996,7 @@ msgstr "Tarjeta de red Ethernet"
 
 #: src/network/connection.c:47
 msgid "WaveLAN wireless LAN"
-msgstr "WaveLAN red inalámbrica"
+msgstr "Red inalámbrica WaveLAN"
 
 #: src/network/connection.c:48
 msgid "Modem or transfer cable"
@@ -2026,7 +2026,7 @@ msgstr "Estado"
 msgid "Description"
 msgstr "Descripción"
 
-#: src/network/connection.c:1626
+#: src/network/connection.c:1634
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2036,7 +2036,7 @@ msgstr ""
 "red de la interfaz. Por favor introduzca una dirección\n"
 "IP válida en esos campos para continuar."
 
-#: src/network/connection.c:1633
+#: src/network/connection.c:1641
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2046,7 +2046,7 @@ msgstr ""
 "remota de la interfaz. Por favor introduzca una\n"
 "dirección IP válida en esos campos para continuar."
 
-#: src/network/connection.c:1639
+#: src/network/connection.c:1647
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2060,7 +2060,12 @@ msgstr ""
 "la dirección IP del servidor primario de DNS o quite la\n"
 "marca de la opción de DNS manual."
 
-#: src/network/connection.c:2195
+#: src/network/connection.c:2037
+#, c-format
+msgid "The interface %s doesn't exist."
+msgstr "El interfaz %s no existe."
+
+#: src/network/connection.c:2245
 msgid "Autodetecting modem device"
 msgstr "Autodetectando dispositivo módem"
 
@@ -2072,33 +2077,41 @@ msgstr "Dirección IP"
 msgid "Aliases"
 msgstr "Alias"
 
-#: src/network/main.c:220
+#: src/network/main.c:221
 msgid "Run the connection druid."
 msgstr "Ejecutar el asistente de conexión."
 
-#: src/network/main.c:221
+#: src/network/main.c:222
 msgid "Run the PPP connection druid."
 msgstr "Ejecutar el asistente de conexión PPP."
 
-#: src/network/main.c:222
+#: src/network/main.c:223
 msgid "Run the ethernet connection druid."
 msgstr "Ejecutar el asistente de conexión ethernet."
 
-#: src/network/main.c:223
+#: src/network/main.c:224
 msgid "Run the wlan connection druid."
 msgstr "Ejecutar el asistente de conexión wlan."
 
-#: src/network/main.c:224
+#: src/network/main.c:225
 msgid "Run the parallel port connection druid."
 msgstr "Ejecutar el asistente de conexión por puerto paralelo."
 
-#: src/network/main.c:225
+#: src/network/main.c:226
 msgid "Run the irlan connection druid."
 msgstr "Ejecutar el asistente de conexión irlan."
 
-#: src/network/main.c:232
+#: src/network/main.c:227
+msgid "Configure a network interface"
+msgstr "Configurar una interfaz de red local"
+
+#: src/network/main.c:227
+msgid "interface"
+msgstr "interfaz"
+
+#: src/network/main.c:234
 msgid "Network Settings"
-msgstr "Opciones de la red"
+msgstr "Configuración de la red"
 
 #: src/network/network-druid.c:384
 msgid "Connection name (Step 2 of 2)"
@@ -2225,11 +2238,11 @@ msgstr "Hora"
 msgid "Time, date and timezone."
 msgstr "Hora, fecha y zona horaria."
 
-#: src/users/callbacks.c:592
+#: src/users/callbacks.c:598
 msgid "Create New profile"
 msgstr "Crear perfil nuevo"
 
-#: src/users/callbacks.c:623
+#: src/users/callbacks.c:629
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Ajustes para el perfil %s"
@@ -2477,6 +2490,9 @@ msgstr "Comentarios"
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
 msgstr "Usuarios y grupos."
+
+#~ msgid " Less _Options"
+#~ msgstr " Menos _opciones"
 
 #~ msgid "Default runlevel"
 #~ msgstr "Nivel de ejecución predeterminado"
@@ -2798,9 +2814,6 @@ msgstr "Usuarios y grupos."
 #~ msgstr ""
 #~ "Esta computadora está configurada\n"
 #~ "para compartir su conexión a Internet.\n"
-
-#~ msgid "Create a new local network interface."
-#~ msgstr "Crear una nueva interfaz de red local."
 
 #~ msgid "DHCP service configuration."
 #~ msgstr "Servicio de configuración DHCP."
@@ -3783,9 +3796,6 @@ msgstr "Usuarios y grupos."
 #~ msgstr ""
 #~ "Esta es la lista de los grupos disponibles en el sistema. Cree nuevos "
 #~ "grupos o edite los ya existentes con este diálogo."
-
-#~ msgid " Fewer _Options"
-#~ msgstr " Menos _opciones "
 
 #~ msgid "Account name (Step 3 of 3)"
 #~ msgstr "Nombre de la cuenta (Paso 3 de 3)"
