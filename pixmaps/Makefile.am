@@ -1,20 +1,20 @@
 pixmaps_DATA = \
 	computer.png  				\
-	boot.png					\
+	boot.png				\
 	boot_wrench.png 			\
-	connection-active.xpm 		\
+	connection-active.xpm 			\
 	connection-ethernet.png 		\
 	connection-inactive.xpm 		\
-	connection-modem.png 		\
+	connection-modem.png 			\
 	disks.png  				\
 	gnome-laptop.png 			\
 	gnome-light-on.png 			\
-	gnome-light-off.png 		\
-	hst.png  					\
+	gnome-light-off.png			\
+	hst.png					\
 	memory.png  				\
-	nameresolution.png  		\
-	nameresolution_alias.png  	\
-	nameresolution_id.png  		\
+	nameresolution.png			\
+	nameresolution_alias.png		\
+	nameresolution_id.png			\
 	networking.png  			\
 	passwd.png  				\
 	reading.png  				\
@@ -24,10 +24,11 @@ pixmaps_DATA = \
 	time.png  				\
 	timezone.png				\
 	users-groups.png			\
-	users.png					\
+	users.png				\
 	warning.png				\
 	world_map-960.png			\
-	xstdruidbg-3.png
+	xstdruidbg-3.png			\
+	ximian30.png
 
 
 EXTRA_DIST = $(pixmaps_DATA)
