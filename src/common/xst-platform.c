@@ -36,6 +36,7 @@ extern GdkPixbuf *turbolinux;
 extern GdkPixbuf *slackware;
 extern GdkPixbuf *suse;
 extern GdkPixbuf *freebsd;
+extern GdkPixbuf *gentoo;
 
 XstPlatform *
 xst_platform_new (const gchar *key, const gchar *name)
@@ -145,6 +146,8 @@ xst_platform_get_pixmap (XstPlatform *platform)
 		return slackware;
 	else if (g_ascii_strncasecmp (platform->name, "FreeBSD", 7) == 0)
 		return freebsd;
+	else if (g_ascii_strncasecmp (platform->name, "Gentoo", 6) == 0)
+		return gentoo;
 	else return NULL;
 }
 

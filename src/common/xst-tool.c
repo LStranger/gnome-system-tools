@@ -61,6 +61,7 @@ GdkPixbuf *turbolinux;
 GdkPixbuf *slackware;
 GdkPixbuf *suse;
 GdkPixbuf *freebsd;
+GdkPixbuf *gentoo;
 
 enum {
 	BOGUS,
@@ -549,6 +550,7 @@ xst_tool_create_distro_images (void)
 	slackware = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/slackware.png", NULL);
 	suse = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/suse.png", NULL);
 	freebsd = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/freebsd.png", NULL);
+	gentoo = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/gentoo.png", NULL);
 }
 
 static void
