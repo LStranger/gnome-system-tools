@@ -7,16 +7,24 @@ INCLUDES = \
 LDADD = -lm $(XST_TOOL_LIBS)
 LIBS+=$(LDADD)
 
-noinst_PROGRAMS = \
-e-map-test
+e-map-marshal.h: e-map-marshal.list
+	( @GLIB_GENMARSHAL@ --prefix=e_map_marshal e-map-marshal.list --header > e-map-marshal.tmp \
+	&& mv e-map-marshal.tmp e-map-marshal.h ) \
+	|| ( rm -f e-map-marshal.tmp && exit 1 )
 
-e_map_test_CFLAGS = \
+e-map-marshal.c: e-map-marshal.h
+	( @GLIB_GENMARSHAL@ --prefix=e_map_marshal e-map-marshal.list --body > e-map-marshal.tmp \
+	&& mv e-map-marshal.tmp e-map-marshal.c ) \
+	|| ( rm -f e-map-marshal.tmp && exit 1 )
+
+$(e_map_la_OBJECTS): e-map-marshal.h
+
+noinst_LIBRARIES = libemap.a
+
+libemap_a_CFLAGS = \
 	$(GNOME_CFLAGS) \
 	$(GDK_PIXBUF_CFLAGS)
 
-e_map_test_LDADD = \
-  ../../common/libsetuptool.a
-
-e_map_test_SOURCES = \
-  e-map.c e-map.h \
-  e-map-test.c
+libemap_a_SOURCES = \
+	e-map.c e-map.h \
+	e-map-marshal.c e-map-marshal.h

@@ -29,6 +29,7 @@
 #include <libart_lgpl/art_filterlevel.h>
 
 #include "e-map.h"
+#include "e-map-marshal.h"
 
 /* Scroll step increment */
 
@@ -67,6 +68,10 @@ typedef struct
 	GtkAdjustment *hadj;
 	GtkAdjustment *vadj;
 
+	/* Signal ids for adjustments */
+	gulong hadj_signal_id;
+	gulong vadj_signal_id;
+
 	/* Current scrolling offsets */
 	int xofs, yofs;
 
@@ -102,7 +107,6 @@ static void e_map_realize (GtkWidget *widget);
 static void e_map_unrealize (GtkWidget *widget);
 static void e_map_size_request (GtkWidget *widget, GtkRequisition *requisition);
 static void e_map_size_allocate (GtkWidget *widget, GtkAllocation *allocation);
-static void e_map_draw (GtkWidget *widget, GdkRectangle *area);
 static gint e_map_button_press (GtkWidget *widget, GdkEventButton *event);
 static gint e_map_button_release (GtkWidget *widget, GdkEventButton *event);
 static gint e_map_motion (GtkWidget *widget, GdkEventMotion *event);
@@ -179,6 +183,7 @@ e_map_class_init (EMapClass *class)
 	GtkObjectClass *object_class;
 	GtkWidgetClass *widget_class;
 
+	g_object_class = (GObjectClass*) class;
 	object_class = (GtkObjectClass *) class;
 	widget_class = (GtkWidgetClass *) class;
 
@@ -186,31 +191,33 @@ e_map_class_init (EMapClass *class)
 
 	object_class->destroy = e_map_destroy;
 	
-#warning FIXME
-#if 0
 	g_object_class->finalize = e_map_finalize;
-#endif
 
 	class->set_scroll_adjustments = e_map_set_scroll_adjustments;
 	widget_class->set_scroll_adjustments_signal =
 		g_signal_new ("set_scroll_adjustments",
-				G_OBJECT_CLASS_TYPE (object_class),
-				G_SIGNAL_RUN_LAST,
-				G_STRUCT_OFFSET (EMapClass, set_scroll_adjustments),
-				NULL, NULL,
-				g_cclosure_marshal_VOID__POINTER,
-				G_TYPE_NONE, 2,
-				GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
-
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (EMapClass, set_scroll_adjustments),
+			      NULL, NULL,
+			      e_map_marshal_VOID__OBJECT_OBJECT,
+			      G_TYPE_NONE, 2,
+			      GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
+/*	
+		g_signal_new ("set_scroll_adjustments",
+			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_SIGNAL_RUN_LAST,
+			      G_STRUCT_OFFSET (EMapClass, set_scroll_adjustments),
+			      NULL, NULL,
+			      _gtk_marshal_VOID__OBJECT_OBJECT,
+			      G_TYPE_NONE, 2,
+			      GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
+*/
 	widget_class->unmap = e_map_unmap;
 	widget_class->realize = e_map_realize;
 	widget_class->unrealize = e_map_unrealize;
 	widget_class->size_request = e_map_size_request;
 	widget_class->size_allocate = e_map_size_allocate;
-#warning FIXME
-#if 0
-	widget_class->draw = e_map_draw;
-#endif
 	widget_class->button_press_event = e_map_button_press;
 	widget_class->button_release_event = e_map_button_release;
 	widget_class->motion_notify_event = e_map_motion;
@@ -254,8 +261,8 @@ e_map_destroy (GtkObject *object)
 	view = E_MAP (object);
 	priv = view->priv;
 
-	g_signal_handlers_disconnect_matched (G_OBJECT (priv->hadj), G_SIGNAL_MATCH_FUNC, 0, 0, NULL, NULL, view);
-	g_signal_handlers_disconnect_matched (G_OBJECT (priv->vadj), G_SIGNAL_MATCH_FUNC, 0, 0, NULL, NULL, view);
+	g_signal_handler_disconnect (G_OBJECT (priv->hadj), priv->hadj_signal_id);
+	g_signal_handler_disconnect (G_OBJECT (priv->vadj), priv->vadj_signal_id);
 
 	if (GTK_OBJECT_CLASS (parent_class)->destroy)
 		(*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -426,23 +433,6 @@ e_map_size_allocate (GtkWidget *widget, GtkAllocation *allocation)
 }
 
 
-/* Draw handler for the map view */
-
-static void
-e_map_draw (GtkWidget *widget, GdkRectangle *area)
-{
-	EMap *view;
-
-	g_return_if_fail (widget != NULL);
-	g_return_if_fail (IS_E_MAP (widget));
-	g_return_if_fail (area != NULL);
-
-	view = E_MAP (widget);
-
-	request_paint_area (view, area);
-}
-
-
 /* Button press handler for the map view */
 
 static gint
@@ -545,13 +535,13 @@ e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustm
 
 	if (priv->hadj && priv->hadj != hadj)
 	{
-		g_signal_handlers_disconnect_matched (G_OBJECT (priv->hadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+		g_signal_handler_disconnect (G_OBJECT (priv->hadj), priv->hadj_signal_id);
 		g_object_unref (G_OBJECT (priv->hadj));
 	}
 
 	if (priv->vadj && priv->vadj != vadj)
 	{
-		g_signal_handlers_disconnect_matched (G_OBJECT (priv->vadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+		g_signal_handler_disconnect (G_OBJECT (priv->vadj), priv->vadj_signal_id);
 		g_object_unref (G_OBJECT (priv->vadj));
 	}
 
@@ -563,7 +553,10 @@ e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustm
 		g_object_ref (G_OBJECT (priv->hadj));
 		gtk_object_sink (GTK_OBJECT (priv->hadj));
 
-		g_signal_connect (G_OBJECT (priv->hadj), "value_changed", G_CALLBACK (adjustment_changed_cb), view);
+		priv->hadj_signal_id = g_signal_connect (G_OBJECT (priv->hadj),
+							 "value_changed",
+							 G_CALLBACK (adjustment_changed_cb),
+							 view);
 
 		need_adjust = TRUE;
 	}
@@ -574,7 +567,10 @@ e_map_set_scroll_adjustments (GtkWidget *widget, GtkAdjustment *hadj, GtkAdjustm
 		g_object_ref (G_OBJECT (priv->vadj));
 		gtk_object_sink (GTK_OBJECT (priv->vadj));
 
-		g_signal_connect (G_OBJECT (priv->vadj), "value_changed", G_CALLBACK (adjustment_changed_cb), view);
+		priv->vadj_signal_id = g_signal_connect (G_OBJECT (priv->vadj),
+							 "value_changed",
+							 G_CALLBACK (adjustment_changed_cb),
+							 view);
 
 		need_adjust = TRUE;
 	}
@@ -638,8 +634,8 @@ e_map_key_press (GtkWidget *widget, GdkEventKey *event)
 
 		scroll_to (view, x, y);
 
-		g_signal_handlers_block_matched (G_OBJECT (priv->hadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
-		g_signal_handlers_block_matched (G_OBJECT (priv->vadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+		g_signal_handler_block (G_OBJECT (priv->hadj), priv->hadj_signal_id);
+		g_signal_handler_block (G_OBJECT (priv->vadj), priv->vadj_signal_id);
 
 		priv->hadj->value = x;
 		priv->vadj->value = y;
@@ -647,8 +643,8 @@ e_map_key_press (GtkWidget *widget, GdkEventKey *event)
 		g_signal_emit_by_name (GTK_OBJECT (priv->hadj), "value_changed");
 		g_signal_emit_by_name (GTK_OBJECT (priv->vadj), "value_changed");
 
-		g_signal_handlers_unblock_matched (G_OBJECT (priv->hadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
-		g_signal_handlers_unblock_matched (G_OBJECT (priv->vadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+		g_signal_handler_unblock (G_OBJECT (priv->hadj), priv->hadj_signal_id);
+		g_signal_handler_unblock (G_OBJECT (priv->vadj), priv->vadj_signal_id);
 	}
 
 	return TRUE;
@@ -1730,11 +1726,8 @@ zoom_do (EMap *map)
 
 	priv = map->priv;
 
-#warning FIXME
-#if 0
-	gtk_signal_handler_block_by_data (GTK_OBJECT (priv->hadj), map);
-	gtk_signal_handler_block_by_data (GTK_OBJECT (priv->vadj), map);
-#endif
+	g_signal_handler_block (G_OBJECT (priv->hadj), priv->hadj_signal_id);
+	g_signal_handler_block (G_OBJECT (priv->vadj), priv->vadj_signal_id);
 
 	if (priv->zoom_state == E_MAP_ZOOMING_IN)
 	{
@@ -1746,12 +1739,9 @@ zoom_do (EMap *map)
 		/* if (e_map_get_smooth_zoom(map)) zoom_out_smooth(map); */
 		zoom_out (map);
 	}
-  
-#warning FIXME
-#if 0
-	gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->hadj), map);
-	gtk_signal_handler_unblock_by_data (GTK_OBJECT (priv->vadj), map);
-#endif
+
+	g_signal_handler_unblock (G_OBJECT (priv->hadj), priv->hadj_signal_id);
+	g_signal_handler_unblock (G_OBJECT (priv->vadj), priv->vadj_signal_id);
 
 	set_scroll_area(map);
 }
@@ -1812,17 +1802,17 @@ set_scroll_area (EMap *view)
 	{
 		priv->hadj->value = priv->xofs;
 
-		g_signal_handlers_block_matched (G_OBJECT (priv->hadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+		g_signal_handler_block (G_OBJECT (priv->hadj), priv->hadj_signal_id);
 		g_signal_emit_by_name (GTK_OBJECT (priv->hadj), "value_changed");
-		g_signal_handlers_unblock_matched (G_OBJECT (priv->hadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+		g_signal_handler_unblock (G_OBJECT (priv->hadj), priv->hadj_signal_id);
 	}
 
 	if (priv->vadj->value != priv->yofs)
 	{
 		priv->vadj->value = priv->yofs;
 
-		g_signal_handlers_block_matched (G_OBJECT (priv->vadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+		g_signal_handler_block (G_OBJECT (priv->vadj), priv->vadj_signal_id);
 		g_signal_emit_by_name (GTK_OBJECT (priv->vadj), "value_changed");
-		g_signal_handlers_unblock_matched (G_OBJECT (priv->vadj), G_SIGNAL_MATCH_DATA, 0, 0, NULL, NULL, view);
+		g_signal_handler_unblock (G_OBJECT (priv->vadj), priv->vadj_signal_id);
 	}
 }
