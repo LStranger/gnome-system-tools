@@ -115,14 +115,30 @@ actions_set_sensitive (gboolean state)
 }
 
 void
+buttons_set_visibility (void)
+{
+	switch (xst_dialog_get_complexity (tool->main_dialog)) {
+	case XST_DIALOG_ADVANCED:
+		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
+		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
+		break;
+	case XST_DIALOG_BASIC:
+	default:
+		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
+		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
+		break;
+	}
+}
+
+void
 boot_settings_dialog_complexity (gboolean state)
 {
 	GtkRequisition req;
 	GtkWidget *win;
 	gint i;
 	gchar *widgets[] = { "boot_settings_append", "boot_settings_root",
-					 "boot_settings_append_label", "boot_settings_root_label",
-					 NULL };
+			     "boot_settings_append_label", "boot_settings_root_label",
+			     NULL };
 
 	if (!state)
 	{

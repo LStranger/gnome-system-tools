@@ -35,6 +35,7 @@ extern void on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer user_data)
 
 void boot_settings_dialog_complexity (gboolean state);
 void actions_set_sensitive (gboolean state);
+void buttons_set_visibility (void);
 
 #endif /* CALLBACKS_H */
 

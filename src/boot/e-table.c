@@ -169,6 +169,60 @@ create_extras (void)
 	return extras;
 }
 
+static void
+table_structure_change (ETableHeader *eth, gpointer user_data)
+{
+	ETable *et;
+	gchar *state;
+
+	et = E_TABLE (user_data);
+	state = e_table_get_state (et);
+
+	switch (xst_dialog_get_complexity (tool->main_dialog)) {
+	case XST_DIALOG_ADVANCED:
+		xst_conf_set_string (tool, "state_adv", state);
+		break;
+	case XST_DIALOG_BASIC:
+	default:
+		xst_conf_set_string (tool, "state_basic", state);
+		break;
+	}
+
+	g_free (state);
+}
+
+static void
+table_dimension_change (ETableHeader *eth, int col, gpointer user_data)
+{
+	table_structure_change (eth, user_data);
+}
+
+/**
+ * table_connect_signals:
+ * @: 
+ * 
+ *  We have to reconnect these signals after every set_state call, cause
+ *  it makes new ETableHeader and loses old signal. Same for sorting, grouping...
+ **/
+static void
+table_connect_signals (ETable *table)
+{
+	gtk_signal_connect (GTK_OBJECT (table->header),
+			    "structure_change",
+			    table_structure_change,
+			    (gpointer)table);
+
+	gtk_signal_connect (GTK_OBJECT (table->header),
+			    "dimension_change",
+			    table_dimension_change,
+			    (gpointer)table);
+
+	gtk_signal_connect (GTK_OBJECT (table->sort_info),
+			    "sort_info_changed",
+			    GTK_SIGNAL_FUNC (table_structure_change),
+			    (gpointer)table);
+}
+
 extern void
 create_table (xmlNodePtr root)
 {
@@ -216,6 +270,7 @@ create_table (xmlNodePtr root)
 	g_free (state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
+	table_connect_signals (table);
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", boot_cursor_change, NULL);
 	
 	container = xst_dialog_get_widget (tool->main_dialog, "table_holder");
@@ -444,6 +499,7 @@ boot_table_update_state (void)
 		state = xst_conf_get_string (tool, "state_adv");
 
 	e_table_set_state (table, state);
+	table_connect_signals (table);
 	g_free (state);
 }
 

@@ -57,25 +57,14 @@ static void set_access_sensitivity (void)
 }
 
 static void
-update_complexity ()
+update_complexity (void)
 {
 	XstDialogComplexity complexity;
 
 	complexity = tool->main_dialog->complexity;
 
 	boot_table_update_state ();
-
-	if (complexity == XST_DIALOG_BASIC)
-	{
-		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
-		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
-	}
-
-	else
-	{
-		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_add"));
-		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "boot_delete"));
-	}
+	buttons_set_visibility ();
 }
 
 static void
@@ -106,6 +95,7 @@ main (int argc, char *argv[])
 	connect_signals ();
 
 	xst_dialog_enable_complexity (tool->main_dialog);
+	buttons_set_visibility ();
 
 	xst_dialog_thaw (tool->main_dialog);
 	
