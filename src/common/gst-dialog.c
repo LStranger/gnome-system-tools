@@ -505,7 +505,14 @@ dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
 static void
 cancel_cb (GtkWidget *w, gpointer data)
 {
-	dialog_close (data);
+	GstDialog *dialog;
+
+	g_return_if_fail (data!= NULL);
+	g_return_if_fail (GST_IS_DIALOG (data));
+
+	dialog = GST_DIALOG (data);
+
+	dialog_close (dialog);
 }
 
 static void
@@ -518,7 +525,9 @@ accept_cb (GtkWidget *w, gpointer data)
 
 	dialog = GST_DIALOG (data);
 
-	apply_config (data);
+	if (gst_dialog_get_modified (dialog))
+		apply_config (data);
+	
 	dialog_close (data);
 }
 
