@@ -1719,6 +1719,10 @@ connection_configure (XstConnection *cxn)
 	if (cxn->type == XST_CONNECTION_WVLAN) {
 		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/wavelan-48.png");
 		fill_wvlan (cxn);
+		/* FIXME: temprorarily disabling this notebook, until we get support for this. */
+		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
+					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+								 W ("wvlan_vbox")));
 	} else
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
 					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
