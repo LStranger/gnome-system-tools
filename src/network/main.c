@@ -103,6 +103,56 @@ static const XstWidgetPolicy policies[] = {
 	{ NULL }
 };
 
+static void
+update_notebook_complexity (XstDialogComplexity complexity)
+{
+	GtkWidget *notebook, *hosts;
+	gint pageno;
+
+	notebook = xst_dialog_get_widget (tool->main_dialog, "network_admin");
+	hosts    = xst_dialog_get_widget (tool->main_dialog, "hosts_container");
+	pageno   = gtk_notebook_page_num (GTK_NOTEBOOK (notebook), hosts);
+	
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
+		g_return_if_fail (pageno != -1);
+
+		gtk_notebook_set_page (GTK_NOTEBOOK (notebook), pageno - 1);
+		gtk_widget_ref (hosts);
+		gtk_widget_unparent (hosts);
+		gtk_notebook_remove_page (GTK_NOTEBOOK (notebook), pageno);
+		break;
+	case XST_DIALOG_ADVANCED:
+		g_return_if_fail (pageno == -1);
+
+		gtk_notebook_append_page (GTK_NOTEBOOK (notebook), hosts,
+					  gtk_label_new (_("Hosts")));
+		gtk_widget_unref (hosts);
+		break;
+	default:
+		g_warning ("update_notebook_complexity: Unsupported complexity.");
+	}
+}
+
+static void
+update_complexity (void)
+{
+	XstDialogComplexity complexity = tool->main_dialog->complexity;
+
+	update_notebook_complexity (complexity);
+	connection_update_complexity (complexity);
+}
+
+static void
+connect_signals (XstDialog *main_dialog, XstDialogSignal *sigs)
+{
+	gtk_signal_connect (GTK_OBJECT (main_dialog), "complexity_change",
+					GTK_SIGNAL_FUNC (update_complexity),
+					NULL);
+
+	xst_dialog_connect_signals (main_dialog, sigs);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -131,11 +181,12 @@ main (int argc, char *argv[])
 
 		gtk_main ();
 	} else {
-		xst_dialog_connect_signals (tool->main_dialog, signals);
+		connect_signals (tool->main_dialog, signals);
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook, NULL);
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_update_connections_hook, NULL);
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_dialer_hook, tool);
 		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+		xst_dialog_enable_complexity (tool->main_dialog);
 		xst_dialog_set_widget_policies (tool->main_dialog, policies);
 		
 		connection_init_gui (tool);

@@ -555,6 +555,24 @@ connection_update_row (XstConnection *cxn)
 }
 
 void
+connection_update_complexity (XstDialogComplexity complexity)
+{
+	GtkWidget *w;
+
+	w = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_hbox");
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
+		gtk_widget_hide_all (w);
+		break;
+	case XST_DIALOG_ADVANCED:
+		gtk_widget_show_all (w);
+		break;
+	default:
+		g_warning ("connection_update_complexity: Unsupported complexity.");
+	}
+}
+
+void
 connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 {
 	int row;

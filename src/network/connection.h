@@ -112,6 +112,7 @@ extern void connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text,
 extern void connection_add_to_list (XstConnection *cxn, GtkWidget *clist);
 extern void connection_update_row_enabled (XstConnection *cxn, gboolean enabled);
 extern void connection_update_row (XstConnection *cxn);
+extern void connection_update_complexity (XstDialogComplexity complexity);
 extern void connection_free (XstConnection *);
 extern void connection_configure (XstConnection *cxn);
 extern void connection_save_to_node (XstConnection *cxn, xmlNode *node);
