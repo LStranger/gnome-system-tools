@@ -1934,29 +1934,24 @@
 	    <class>GtkTable</class>
 	    <name>table9</name>
 	    <border_width>4</border_width>
-	    <rows>3</rows>
-	    <columns>2</columns>
+	    <rows>2</rows>
+	    <columns>1</columns>
 	    <homogeneous>False</homogeneous>
 	    <row_spacing>4</row_spacing>
 	    <column_spacing>4</column_spacing>
 
 	    <widget>
 	      <class>GtkCheckButton</class>
-	      <name>status_enabled</name>
+	      <name>status_user</name>
 	      <can_focus>True</can_focus>
-	      <signal>
-		<name>toggled</name>
-		<handler>on_status_enabled_toggled</handler>
-		<last_modification_time>Thu, 22 Feb 2001 06:30:14 GMT</last_modification_time>
-	      </signal>
-	      <label>Connection active</label>
+	      <label>Allow activation control for all users</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>0</top_attach>
-		<bottom_attach>1</bottom_attach>
+		<left_attach>0</left_attach>
+		<right_attach>1</right_attach>
+		<top_attach>1</top_attach>
+		<bottom_attach>2</bottom_attach>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
 		<xexpand>True</xexpand>
@@ -1981,71 +1976,19 @@
 	      <active>True</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>1</top_attach>
-		<bottom_attach>2</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>True</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkCheckButton</class>
-	      <name>status_user</name>
-	      <can_focus>True</can_focus>
-	      <label>Allow activation control for all users</label>
-	      <active>False</active>
-	      <draw_indicator>True</draw_indicator>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>2</top_attach>
-		<bottom_attach>3</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>True</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkAlignment</class>
-	      <name>_1</name>
-	      <xalign>0.5</xalign>
-	      <yalign>7.45058e-09</yalign>
-	      <xscale>1</xscale>
-	      <yscale>0</yscale>
-	      <child>
 		<left_attach>0</left_attach>
 		<right_attach>1</right_attach>
 		<top_attach>0</top_attach>
-		<bottom_attach>3</bottom_attach>
+		<bottom_attach>1</bottom_attach>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
-		<xexpand>False</xexpand>
+		<xexpand>True</xexpand>
 		<yexpand>False</yexpand>
 		<xshrink>False</xshrink>
 		<yshrink>False</yshrink>
-		<xfill>False</xfill>
-		<yfill>True</yfill>
+		<xfill>True</xfill>
+		<yfill>False</yfill>
 	      </child>
-
-	      <widget>
-		<class>GnomePixmap</class>
-		<name>status_icon</name>
-		<filename>gnome-light-on.png</filename>
-	      </widget>
 	    </widget>
 	  </widget>
 	</widget>
@@ -4424,6 +4367,146 @@ or finish).</text>
       <title_color>255,255,255</title_color>
       <logo_image>memory_wrench.png</logo_image>
       <watermark_image>xstdruidbg-3.png</watermark_image>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window1</name>
+  <visible>False</visible>
+  <title>window1</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkFrame</class>
+    <name>frame5</name>
+    <label>Activation</label>
+    <label_xalign>0</label_xalign>
+    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+
+    <widget>
+      <class>GtkTable</class>
+      <name>table15</name>
+      <border_width>4</border_width>
+      <rows>3</rows>
+      <columns>2</columns>
+      <homogeneous>False</homogeneous>
+      <row_spacing>4</row_spacing>
+      <column_spacing>4</column_spacing>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>checkbutton1</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>toggled</name>
+	  <handler>on_status_enabled_toggled</handler>
+	  <last_modification_time>Thu, 22 Feb 2001 06:30:14 GMT</last_modification_time>
+	</signal>
+	<label>Connection active</label>
+	<active>False</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>checkbutton2</name>
+	<can_focus>True</can_focus>
+	<signal>
+	  <name>toggled</name>
+	  <handler>on_connection_modified</handler>
+	  <last_modification_time>Thu, 11 Jan 2001 20:14:23 GMT</last_modification_time>
+	</signal>
+	<label>Activate when the computer starts</label>
+	<active>True</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkCheckButton</class>
+	<name>checkbutton3</name>
+	<can_focus>True</can_focus>
+	<label>Allow activation control for all users</label>
+	<active>False</active>
+	<draw_indicator>True</draw_indicator>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkAlignment</class>
+	<name>alignment11</name>
+	<xalign>0.5</xalign>
+	<yalign>7.45058e-09</yalign>
+	<xscale>1</xscale>
+	<yscale>0</yscale>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>3</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>False</xfill>
+	  <yfill>True</yfill>
+	</child>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap17</name>
+	  <filename>gnome-light-on.png</filename>
+	</widget>
+      </widget>
     </widget>
   </widget>
 </widget>

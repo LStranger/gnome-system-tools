@@ -50,9 +50,8 @@ gchar *s = N_("Connection");
 gchar *s = N_("Device:");
 gchar *s = N_("Comment:");
 gchar *s = N_("Activation");
-gchar *s = N_("Connection active");
-gchar *s = N_("Activate when the computer starts");
 gchar *s = N_("Allow activation control for all users");
+gchar *s = N_("Activate when the computer starts");
 gchar *s = N_("General");
 gchar *s = N_("How the IP address for this connection is determined");
 gchar *s = N_("Configuration:");
@@ -135,3 +134,8 @@ gchar *s = N_("Summary of new account data\n"
               "goes here, plus indications on\n"
               "how to proceed (go back, cancel\n"
               "or finish).");
+gchar *s = N_("window1");
+gchar *s = N_("Activation");
+gchar *s = N_("Connection active");
+gchar *s = N_("Activate when the computer starts");
+gchar *s = N_("Allow activation control for all users");
