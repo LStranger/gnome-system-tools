@@ -1,3 +1,8 @@
+2003-08-06  Manuel Clos  <llanero@jazzfree.com>
+
+	* user-settings.c: (user_update) initialize correctly a structure,
+	  so g_free() doesn't possibly free trash. Fixes bug #111924
+
 2003-07-23  Christian Neumair  <chris@gnome-de.org>
 
 	* profile-settings.c: Include config.h to enable i18n.

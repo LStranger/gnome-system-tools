@@ -536,7 +536,7 @@ user_update (ug_data *ud)
 	gboolean change_password = FALSE;
 	GList *list;
 	
-	data = g_new (UserAccountData, 1);
+	data = g_new0 (UserAccountData, 1);
 	
 	/* check user login */
 	data->login = (gchar *) gtk_entry_get_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "user_settings_name")));
