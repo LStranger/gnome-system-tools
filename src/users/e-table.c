@@ -55,6 +55,7 @@ const gchar *user_spec = "\
   <ETableColumn model_col=\"2\" _title=\"Home\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
   <ETableColumn model_col=\"3\" _title=\"Shell\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
   <ETableColumn model_col=\"4\" _title=\"Comment\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
+  <ETableColumn model_col=\"5\" _title=\"Group\" expansion=\"1.0\" minimum_width=\"80\" resizable=\"true\" cell=\"my_cell\" compare=\"string\"/> \
 </ETableSpecification>";
 
 const gchar *group_spec = "\
@@ -98,6 +99,7 @@ const gchar *basic_user_state = "\
 <ETableState> \
   <column source=\"0\"/> \
   <column source=\"4\"/> \
+  <column source=\"5\"/> \
   <grouping> \
     <leaf column=\"0\" ascending=\"true\"/> \
   </grouping> \
@@ -281,10 +283,26 @@ is_editable (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 		   (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED));
 }
 
+static xmlNodePtr
+get_group_by_id (xmlNodePtr user_node)
+{
+	/* Dumb funcion, just used in user_value_at, to convert GID to group name.
+	 It's here only because I wanted keep user_value_at short. */
+	gchar *gid;
+	xmlNodePtr group_node;
+
+	gid = xml_get_child_content (user_node, "gid");
+	group_node = get_corresp_field (get_db_node (user_node));
+	group_node = get_node_by_data (group_node, "gid", gid);
+
+	g_free (gid);
+	return (group_node);
+}
+
 static void *
 user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 {
-	xmlNodePtr node;
+	xmlNodePtr node, gnode;
 	gchar *field;
 
 	node = e_tree_model_node_get_data (etm, path);
@@ -307,6 +325,18 @@ user_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 		break;
 	case COL_USER_COMMENT:
 		field = g_strdup ("comment");
+		break;
+	case COL_USER_GROUP:
+		gnode = get_group_by_id (node);
+		if (gnode)
+		{
+			field = g_strdup ("name");
+			node = gnode;
+		}
+
+		else
+			field = g_strdup ("gid");
+
 		break;
 	case COL_USER_COLOR:
 		return get_row_color (etm, path);

@@ -72,6 +72,7 @@ gboolean check_group_name (xmlNodePtr node, gchar *name);
 gboolean check_group_gid (xmlNodePtr node, gchar *val);
 gboolean get_min_max (xmlNodePtr db_node, gint *min, gint *max);
 xmlNodePtr get_corresp_field (xmlNodePtr node);
+xmlNodePtr get_node_by_data (xmlNodePtr dbnode, gchar *field, gchar *fdata);
 
 /* Extern functions */
 /* User related */
