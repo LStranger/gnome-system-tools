@@ -695,7 +695,28 @@ connection_new_from_dev_name (char *dev_name, xmlNode *root)
 void
 connection_free (Connection *cxn)
 {
-#warning FIXME: implement connection_free
+	if (cxn->node)
+		xst_xml_element_destroy (cxn->node);
+
+	g_free (cxn->dev);
+	g_free (cxn->name);
+
+	g_free (cxn->address);
+	g_free (cxn->netmask);
+	g_free (cxn->broadcast);
+	g_free (cxn->network);
+	g_free (cxn->gateway);
+
+	g_free (cxn->session_id);
+
+	g_free (cxn->phone_number);
+	g_free (cxn->login);
+	g_free (cxn->password);
+	g_free (cxn->serial_port);
+	g_free (cxn->wvsection);
+	g_free (cxn->dns1);
+	g_free (cxn->dns2);
+	g_free (cxn->ppp_options);
 }
 
 static void
