@@ -41,6 +41,7 @@ typedef struct
 	gchar *home_prefix;
 	gchar *shell;
 	gchar *group;
+	gboolean pwd_random;
 	gboolean logindefs;
 } Profile;
 

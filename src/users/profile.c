@@ -35,13 +35,14 @@ typedef struct
 	GnomeFileEntry *home_prefix;
 	GtkCombo *shell;
 	GtkEntry *group;
-	GtkSpinButton *umin;
-	GtkSpinButton *umax;
-	GtkSpinButton *gmin;
-	GtkSpinButton *gmax;
-	GtkSpinButton *pwd_maxdays;
-	GtkSpinButton *pwd_mindays;
-	GtkSpinButton *pwd_warndays;
+	GtkSpinButton   *umin;
+	GtkSpinButton   *umax;
+	GtkSpinButton   *gmin;
+	GtkSpinButton   *gmax;
+	GtkSpinButton   *pwd_maxdays;
+	GtkSpinButton   *pwd_mindays;
+	GtkSpinButton   *pwd_warndays;
+	GtkToggleButton *pwd_random;
 } ProfileTab;
 
 extern XstTool *tool;
@@ -76,9 +77,10 @@ profile_tab_init (void)
 	pft->gmin = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_gmin"));
 	pft->gmax = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_gmax"));
 
-	pft->pwd_maxdays  = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_maxdays"));
-	pft->pwd_mindays  = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_mindays"));
-	pft->pwd_warndays = GTK_SPIN_BUTTON (xst_dialog_get_widget (xd, "pro_between"));
+	pft->pwd_maxdays  = GTK_SPIN_BUTTON   (xst_dialog_get_widget (xd, "pro_maxdays"));
+	pft->pwd_mindays  = GTK_SPIN_BUTTON   (xst_dialog_get_widget (xd, "pro_mindays"));
+	pft->pwd_warndays = GTK_SPIN_BUTTON   (xst_dialog_get_widget (xd, "pro_between"));
+	pft->pwd_random   = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (xd, "pro_random"));
 }
 
 static void
@@ -110,6 +112,7 @@ profile_fill (Profile *pf)
 	gtk_spin_button_set_value (pft->pwd_maxdays,  (gfloat) pf->pwd_maxdays);
 	gtk_spin_button_set_value (pft->pwd_mindays,  (gfloat) pf->pwd_mindays);
 	gtk_spin_button_set_value (pft->pwd_warndays, (gfloat) pf->pwd_warndays);
+	gtk_toggle_button_set_active (pft->pwd_random, pf->pwd_random);
 }
 
 void
@@ -169,6 +172,7 @@ profile_save (gchar *name)
 		pf->pwd_maxdays  = gtk_spin_button_get_value_as_int (pft->pwd_maxdays);
 		pf->pwd_mindays  = gtk_spin_button_get_value_as_int (pft->pwd_mindays);
 		pf->pwd_warndays = gtk_spin_button_get_value_as_int (pft->pwd_warndays);
+		pf->pwd_random = gtk_toggle_button_get_active (pft->pwd_random);
 	}
 }	
 
@@ -206,6 +210,7 @@ profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 		pf->pwd_maxdays = old_pf->pwd_maxdays;
 		pf->pwd_mindays = old_pf->pwd_mindays;
 		pf->pwd_warndays = old_pf->pwd_warndays;
+		pf->pwd_random = old_pf->pwd_random;
 	}
 
 	profile_table_add_profile (pf, select);
@@ -276,6 +281,7 @@ profile_get_default (void)
 	pf->pwd_maxdays = logindefs.passwd_max_day_use;
 	pf->pwd_mindays = logindefs.passwd_min_day_use;
 	pf->pwd_warndays = logindefs.passwd_warning_advance_days;
+	pf->pwd_random = FALSE;
 	pf->logindefs = TRUE;
 
 	profile_table_add_profile (pf, TRUE);
@@ -289,7 +295,7 @@ profile_table_from_xml (xmlNodePtr root)
 	gchar *profile_tags[] = {
 		"home_prefix", "shell", "group", "pwd_maxdays",
 		"pwd_mindays", "pwd_warndays", "umin",
-		"umax", "gmin", "gmax", "name", NULL
+		"umax", "gmin", "gmax", "pwd_random", "name", NULL
 	};
 	gchar *tag;
 	gint i;
@@ -323,7 +329,8 @@ profile_table_from_xml (xmlNodePtr root)
 				case  7: pf->umax         = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  8: pf->gmin         = my_atoi (xst_xml_element_get_content (n0)); break;
 				case  9: pf->gmax         = my_atoi (xst_xml_element_get_content (n0)); break;
-				case 10: pf->name         = xst_xml_element_get_content (n0); break;
+				case 10: pf->pwd_random   = xst_xml_element_get_bool_attr (n0, "set"); break;
+				case 11: pf->name         = xst_xml_element_get_content (n0); break;
 					
 				default: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
 				}
@@ -401,6 +408,8 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 	xst_xml_element_add_with_content (node, "home_prefix", pf->home_prefix);
 	xst_xml_element_add_with_content (node, "shell",       pf->shell);
 	xst_xml_element_add_with_content (node, "group",       pf->group);
+	xst_xml_element_set_bool_attr (xst_xml_element_add (node, "pwd_random"),
+				       "set", pf->pwd_random);
 	
 	for (i = 0; nodes[i]; i++)
 	{

@@ -504,7 +504,16 @@ user_password_change (xmlNodePtr user_node)
 {
 	GtkWidget *d;
 	GtkWidget *parent;
+	Profile *pf;
 
+	pf = profile_table_get_profile (NULL);
+
+	if (pf->pwd_random)
+	{
+		on_user_passwd_random_clicked (NULL, NULL);
+		return;
+	}
+	
 	parent = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 
 	d = password_request_dialog (N_("Insert password"), 5,
