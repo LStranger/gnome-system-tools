@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-10-01 17:51-0600\n"
-"PO-Revision-Date: 2001-09-12 03:12+0200\n"
+"POT-Creation-Date: 2001-12-06 02:25+0100\n"
+"PO-Revision-Date: 2001-12-06 02:25+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -133,7 +133,7 @@ msgid "_Append:"
 msgstr "_Tillfoga:"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:97
-#: interfaces/shares.glade.in.h:61 interfaces/users.glade.in.h:90
+#: interfaces/shares.glade.in.h:61 interfaces/users.glade.in.h:91
 msgid "_Delete"
 msgstr "_Ta bort"
 
@@ -142,12 +142,11 @@ msgid "_Device:"
 msgstr "_Enhet:"
 
 #: interfaces/boot.glade.in.h:31
-#: src/location-manager/location-manager-dialog.c:118
 msgid "_Edit..."
 msgstr "_Redigera..."
 
 #: interfaces/boot.glade.in.h:32 interfaces/print.glade.in.h:72
-#: interfaces/shares.glade.in.h:66 interfaces/users.glade.in.h:94
+#: interfaces/shares.glade.in.h:66 interfaces/users.glade.in.h:95
 msgid "_Name:"
 msgstr "_Namn:"
 
@@ -180,7 +179,7 @@ msgstr "Lösenord:"
 msgid "Run without password"
 msgstr "Kör utan lösenord"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:848
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:963
 msgid "Scanning your system configuration."
 msgstr "Läser av din systemkonfiguration."
 
@@ -258,7 +257,6 @@ msgstr "Upptäckt"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
 #: interfaces/network.glade.in.h:34 src/boot/boot.etspec.h:2
-#: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "Enhet"
 
@@ -335,7 +333,7 @@ msgid "Remember details of this partition"
 msgstr "Kom ihåg detaljerna för denna partition"
 
 #: interfaces/disks.glade.in.h:26 interfaces/memory.glade.in.h:16
-#: interfaces/nameresolution.glade.in.h:30 interfaces/users.glade.in.h:67
+#: interfaces/nameresolution.glade.in.h:30 interfaces/users.glade.in.h:68
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -359,25 +357,25 @@ msgstr "reiserfs (Linux)"
 msgid "ufs (FreeBSD)"
 msgstr "ufs (FreeBSD)"
 
-#: interfaces/display.glade.in.h:1 interfaces/nameresolution.glade.in.h:3
-msgid "<unknown>"
-msgstr "<okänd>"
-
-#: interfaces/display.glade.in.h:2
+#: interfaces/display.glade.in.h:1
 msgid "1024x768"
 msgstr "1024×768"
 
-#: interfaces/display.glade.in.h:3
+#: interfaces/display.glade.in.h:2
 msgid "1280x1024"
 msgstr "1280×1024"
 
-#: interfaces/display.glade.in.h:4
+#: interfaces/display.glade.in.h:3
 msgid "640x480"
 msgstr "640×480"
 
-#: interfaces/display.glade.in.h:5
+#: interfaces/display.glade.in.h:4
 msgid "800x600"
 msgstr "600×600"
+
+#: interfaces/display.glade.in.h:5 interfaces/nameresolution.glade.in.h:3
+msgid "<unknown>"
+msgstr "<okänd>"
 
 #: interfaces/display.glade.in.h:6
 msgid "Appearance"
@@ -413,13 +411,13 @@ msgstr "Smalare"
 
 #: interfaces/display.glade.in.h:14
 msgid "Probe again"
-msgstr ""
+msgstr "Undersök igen"
 
 #: interfaces/display.glade.in.h:15
 msgid "Refresh rate:"
 msgstr "Uppdateringsfrekvens:"
 
-#: interfaces/display.glade.in.h:16 src/print/print.etspec.h:3
+#: interfaces/display.glade.in.h:16
 msgid "Resolution"
 msgstr "Upplösning"
 
@@ -553,7 +551,6 @@ msgid "_Remove"
 msgstr "_Ta bort"
 
 #: interfaces/memory.glade.in.h:24
-#: src/location-manager/location-manager-dialog.c:137
 msgid "_Settings"
 msgstr "_Inställningar"
 
@@ -773,7 +770,7 @@ msgstr "Tillåt aktiveringskontroll för alla användare"
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1577
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1580
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -798,7 +795,7 @@ msgid "Create a new Internet Connection "
 msgstr "Skapa en ny internetanslutning "
 
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.in.h:27
-#: src/network/connection.c:1576
+#: src/network/connection.c:1579
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -827,9 +824,8 @@ msgid "Description"
 msgstr "Beskrivning"
 
 #: interfaces/network.glade.in.h:36
-#, fuzzy
 msgid "Domain / _Workgroup:"
-msgstr "A_rbetsgrupp:"
+msgstr "Domän/A_rbetsgrupp:"
 
 #: interfaces/network.glade.in.h:38
 msgid ""
@@ -852,14 +848,12 @@ msgid "How other computers are accessed."
 msgstr "Hur åtkomst av andra datorer sker."
 
 #: interfaces/network.glade.in.h:42
-#, fuzzy
 msgid "How the IP address for this connection is determined."
-msgstr "Hur IP-adresserna för denna anslutning bestäms"
+msgstr "Hur IP-adressen för denna anslutning bestäms."
 
 #: interfaces/network.glade.in.h:43
-#, fuzzy
 msgid "How the IP addresses for this connection are determined."
-msgstr "Hur IP-adresserna för denna anslutning bestäms"
+msgstr "Hur IP-adresserna för denna anslutning bestäms."
 
 #: interfaces/network.glade.in.h:44
 msgid "How the names of other computers are found."
@@ -881,7 +875,7 @@ msgstr "IP-adress"
 msgid "IP Settings"
 msgstr "IP-inställningar"
 
-#: interfaces/network.glade.in.h:49 src/network/connection.c:1575
+#: interfaces/network.glade.in.h:49 src/network/connection.c:1578
 msgid "Manual"
 msgstr "Manuell"
 
@@ -967,8 +961,8 @@ msgstr ""
 
 #: interfaces/network.glade.in.h:70
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click "
-"\"Cancel\"."
+"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
+"\"."
 msgstr ""
 "För att fortsätta konfigurera ditt konto klickar du på \"Nästa\". För att "
 "avsluta klickar du på \"Avbryt\"."
@@ -978,14 +972,13 @@ msgid "Use \"Auto\" if unsure."
 msgstr "Använd \"Automatisk\" om du är osäker."
 
 #: interfaces/network.glade.in.h:72
-#, fuzzy
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who will activate connections, and when."
 msgstr ""
 "Använd kommentaren för att identifiera gränssnittet i framtiden. "
-"Aktiveringshantering låter dig ange av vem och när anslutningar kan "
-"aktiveras."
+"Aktiveringshantering låter dig ange vem som kan aktivera anslutningar, och "
+"när."
 
 #: interfaces/network.glade.in.h:73
 msgid "User name:"
@@ -996,9 +989,8 @@ msgid "WI_NS server:"
 msgstr "WI_NS-server:"
 
 #: interfaces/network.glade.in.h:75
-#, fuzzy
 msgid "Warning message goes here."
-msgstr "Varningsmeddelande hamnar här..."
+msgstr "Varningsmeddelande hamnar här."
 
 #: interfaces/network.glade.in.h:76
 msgid "Warning message goes here.."
@@ -1009,7 +1001,6 @@ msgid "WaveLAN"
 msgstr "WaveLAN"
 
 #: interfaces/network.glade.in.h:78
-#, fuzzy
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1024,8 +1015,8 @@ msgid ""
 msgstr ""
 "Välkommen till guiden Internetanslutning. \n"
 "\n"
-"Denna guide kommer att hjälpa dig konfigurera en \n"
-"ny internetanslutning. \n"
+"Denna guide kommer att hjälpa dig konfigurera ett\n"
+"nytt internetkonto.\n"
 "\n"
 "Innan du börjar måste du ha ett modem och en \n"
 "internetleverantör (ISP). Fråga din internet-\n"
@@ -1051,7 +1042,7 @@ msgid "_Channel:"
 msgstr "_Kanal:"
 
 #: interfaces/network.glade.in.h:94 interfaces/shares.glade.in.h:60
-#: interfaces/users.glade.in.h:88
+#: interfaces/users.glade.in.h:89
 msgid "_Comment:"
 msgstr "_Kommentar:"
 
@@ -1064,7 +1055,6 @@ msgid "_Configure..."
 msgstr "_Konfigurera..."
 
 #: interfaces/network.glade.in.h:98
-#: src/location-manager/location-manager-dialog.c:107
 msgid "_Delete..."
 msgstr "_Ta bort..."
 
@@ -1077,9 +1067,8 @@ msgid "_Domain:"
 msgstr "_Domän:"
 
 #: interfaces/network.glade.in.h:101
-#, fuzzy
 msgid "_Enable Windows networking"
-msgstr "_Använd Windows-nätverk (Samba)"
+msgstr "_Använd Windows-nätverk"
 
 #: interfaces/network.glade.in.h:102
 msgid "_Ethernet"
@@ -1475,12 +1464,12 @@ msgid "_Scan"
 msgstr "_Genomsök"
 
 #: interfaces/location-manager.glade.in.h:39 interfaces/shares.glade.in.h:70
-#: interfaces/users.glade.in.h:98
+#: interfaces/users.glade.in.h:99
 msgid "_Settings..."
 msgstr "_Inställningar..."
 
 #: interfaces/print.glade.in.h:75 interfaces/shares.glade.in.h:71
-#: interfaces/users.glade.in.h:101
+#: interfaces/users.glade.in.h:102
 msgid "_Username:"
 msgstr "_Användarnamn:"
 
@@ -1682,91 +1671,95 @@ msgid "Filename"
 msgstr "Filnamn"
 
 #: interfaces/users.glade.in.h:32
+msgid "G_id:"
+msgstr "G_id:"
+
+#: interfaces/users.glade.in.h:33
 msgid "Generate _random password"
 msgstr "Generera _slumpmässigt lösenord"
 
-#: interfaces/users.glade.in.h:33
+#: interfaces/users.glade.in.h:34
 msgid "Group Settings"
 msgstr "Gruppinställningar"
 
-#: interfaces/users.glade.in.h:34
+#: interfaces/users.glade.in.h:35
 msgid "Group _members"
 msgstr "Grupp_medlemmar"
 
-#: interfaces/users.glade.in.h:35 src/users/group.etspec.h:2
+#: interfaces/users.glade.in.h:36 src/users/group.etspec.h:2
 #: src/users/user_settings.c:475 src/users/user_settings.c:548
 msgid "Groups"
 msgstr "Grupper"
 
-#: interfaces/users.glade.in.h:36
+#: interfaces/users.glade.in.h:37
 msgid "Home _directory:"
 msgstr "Hem_katalog:"
 
-#: interfaces/users.glade.in.h:37
+#: interfaces/users.glade.in.h:38
 msgid "Home directory:"
 msgstr "Hemkatalog:"
 
-#: interfaces/users.glade.in.h:38
+#: interfaces/users.glade.in.h:39
 msgid "Ma_ximum days a password may be used:"
 msgstr "Ma_ximalt antal dagar som ett lösenord kan användas:"
 
-#: interfaces/users.glade.in.h:39
+#: interfaces/users.glade.in.h:40
 msgid "Main _group:"
 msgstr "Huvud_grupp:"
 
-#: interfaces/users.glade.in.h:40
+#: interfaces/users.glade.in.h:41
 msgid "Maximum GID:"
 msgstr "Högsta GID:"
 
-#: interfaces/users.glade.in.h:41
+#: interfaces/users.glade.in.h:42
 msgid "Maximum UID:"
 msgstr "Högsta UID:"
 
-#: interfaces/users.glade.in.h:42
+#: interfaces/users.glade.in.h:43
 msgid "Members"
 msgstr "Medlemmar"
 
-#: interfaces/users.glade.in.h:43
+#: interfaces/users.glade.in.h:44
 msgid "Mi_nimum days between password changes:"
 msgstr "Mi_nsta antalet dagar mellan lösenordsbyten:"
 
-#: interfaces/users.glade.in.h:44
+#: interfaces/users.glade.in.h:45
 msgid "Minimum GID:"
 msgstr "Lägsta GID:"
 
-#: interfaces/users.glade.in.h:45
+#: interfaces/users.glade.in.h:46
 msgid "Minimum UID:"
 msgstr "Lägsta UID:"
 
-#: interfaces/users.glade.in.h:46
+#: interfaces/users.glade.in.h:47
 msgid "Minimum days allowed between password changes:"
 msgstr "Minsta antalet dagar mellan lösenordsbyten:"
 
-#: interfaces/users.glade.in.h:47
+#: interfaces/users.glade.in.h:48
 msgid "Ne_w:"
 msgstr "N_y:"
 
-#: interfaces/users.glade.in.h:48
+#: interfaces/users.glade.in.h:49
 msgid "New Group"
 msgstr "Ny grupp"
 
-#: interfaces/users.glade.in.h:49
+#: interfaces/users.glade.in.h:50
 msgid "New Profile"
 msgstr "Ny profil"
 
-#: interfaces/users.glade.in.h:50
+#: interfaces/users.glade.in.h:51
 msgid "New User"
 msgstr "Ny användare"
 
-#: interfaces/users.glade.in.h:51
+#: interfaces/users.glade.in.h:52
 msgid "New password"
 msgstr "Nytt lösenord"
 
-#: interfaces/users.glade.in.h:52
+#: interfaces/users.glade.in.h:53
 msgid "Number of days that a password may be used:"
 msgstr "Antalet dagar som ett lösenord får användas:"
 
-#: interfaces/users.glade.in.h:53
+#: interfaces/users.glade.in.h:54
 msgid ""
 "On this page, you can define security options, such as how frequently users "
 "must change their passwords."
@@ -1774,7 +1767,7 @@ msgstr ""
 "På denna sida kan du ange säkerhetsalternativ, som till exempel hur ofta "
 "användare måste ändra sina lösenord."
 
-#: interfaces/users.glade.in.h:54
+#: interfaces/users.glade.in.h:55
 msgid ""
 "On this page, you can define the system defaults which will be assigned to "
 "new users."
@@ -1782,7 +1775,7 @@ msgstr ""
 "På denna sida kan du ange systemets standardalternativ som kommer att "
 "tilldelas nya användare."
 
-#: interfaces/users.glade.in.h:55
+#: interfaces/users.glade.in.h:56
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
@@ -1790,32 +1783,32 @@ msgstr ""
 "På denna sida kan du välja skript och filer som kommer att kopieras från "
 "ditt konto till nya användares konton."
 
-#: interfaces/users.glade.in.h:56
+#: interfaces/users.glade.in.h:57
 msgid "Optional settings"
 msgstr "Valfria inställningar"
 
-#: interfaces/users.glade.in.h:57 src/users/user_settings.c:482
+#: interfaces/users.glade.in.h:58 src/users/user_settings.c:482
 #: src/users/user_settings.c:555
 msgid "Password"
 msgstr "Lösenord"
 
-#: interfaces/users.glade.in.h:58
+#: interfaces/users.glade.in.h:59
 msgid "Password options"
 msgstr "Lösenordsalternativ"
 
-#: interfaces/users.glade.in.h:59
+#: interfaces/users.glade.in.h:60
 msgid "Password options (step 2 of 2)"
 msgstr "Lösenordsalternativ (steg 2 av 2)"
 
-#: interfaces/users.glade.in.h:60
+#: interfaces/users.glade.in.h:61
 msgid "Password set to:"
 msgstr "Lösenordet sattes till:"
 
-#: interfaces/users.glade.in.h:61
+#: interfaces/users.glade.in.h:62
 msgid "Please enter a password for the new user. "
 msgstr "Ange ett lösenord för den nya användaren. "
 
-#: interfaces/users.glade.in.h:62
+#: interfaces/users.glade.in.h:63
 msgid ""
 "Please enter a username for the new user in the space below. Optionally, you "
 "can fill in more information to identify the user. "
@@ -1823,35 +1816,35 @@ msgstr ""
 "Ange ett användarnamn för den nya användaren i fältet nedan. Du kan också om "
 "du vill fylla i mer information för att identifiera användaren. "
 
-#: interfaces/users.glade.in.h:63
+#: interfaces/users.glade.in.h:64
 msgid "Profiles"
 msgstr "Profiler"
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:65
 msgid "Real _name:"
 msgstr "Fullständigt _namn:"
 
-#: interfaces/users.glade.in.h:65
+#: interfaces/users.glade.in.h:66
 msgid "Security"
 msgstr "Säkerhet"
 
-#: interfaces/users.glade.in.h:66
+#: interfaces/users.glade.in.h:67
 msgid "Set password b_y hand"
 msgstr "Ange lösenord f_ör hand"
 
-#: interfaces/users.glade.in.h:68
+#: interfaces/users.glade.in.h:69
 msgid "Settings for selected user and group"
 msgstr "Inställningar för den markerade användaren och gruppen"
 
-#: interfaces/users.glade.in.h:69 src/common/System.directory.in.in.h:1
+#: interfaces/users.glade.in.h:70 src/common/System.directory.in.in.h:1
 msgid "System"
 msgstr "System"
 
-#: interfaces/users.glade.in.h:70
+#: interfaces/users.glade.in.h:71
 msgid "System defaults"
 msgstr "Systemets standardalternativ"
 
-#: interfaces/users.glade.in.h:71
+#: interfaces/users.glade.in.h:72
 msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new users to your system.\n"
@@ -1864,7 +1857,7 @@ msgstr ""
 "\n"
 "För att börja klickar du på \"Nästa\". "
 
-#: interfaces/users.glade.in.h:75
+#: interfaces/users.glade.in.h:76
 msgid ""
 "This is a list of the users available in the system. Create new users or "
 "edit existing user settings with this dialog."
@@ -1873,7 +1866,7 @@ msgstr ""
 "Skapa nya användare eller redigera existerande användares inställningar med "
 "detta dialogfönster."
 
-#: interfaces/users.glade.in.h:76
+#: interfaces/users.glade.in.h:77
 msgid ""
 "This is the list of the groups available in the system. Create new groups or "
 "edit existing groups with this dialog."
@@ -1881,32 +1874,32 @@ msgstr ""
 "Det här är en lista över de grupper som finns på ditt system. Du kan skapa "
 "nya grupper eller redigera existerande grupper med detta dialogfönster."
 
-#: interfaces/users.glade.in.h:77
+#: interfaces/users.glade.in.h:78
 msgid "Us_er's groups"
 msgstr "Anv_ändarens grupper"
 
-#: interfaces/users.glade.in.h:78
+#: interfaces/users.glade.in.h:79
 msgid "Use this dialog to create a new profile."
 msgstr "Använd detta dialogfönster för att skapa en ny profil."
 
 #. set window title
-#: interfaces/users.glade.in.h:79 src/users/user-druid.c:271
+#: interfaces/users.glade.in.h:80 src/users/user-druid.c:271
 msgid "User Account Wizard"
 msgstr "Guide för användarkonton"
 
-#: interfaces/users.glade.in.h:80
+#: interfaces/users.glade.in.h:81
 msgid "User Creation Druid"
 msgstr "Guide för skapande av användare"
 
-#: interfaces/users.glade.in.h:81
+#: interfaces/users.glade.in.h:82
 msgid "User Identity  (step 1 of 2)"
 msgstr "Användaridentitet (steg 1 av 2)"
 
-#: interfaces/users.glade.in.h:82
+#: interfaces/users.glade.in.h:83
 msgid "User _ID:"
 msgstr "Användar-_ID:"
 
-#: interfaces/users.glade.in.h:83
+#: interfaces/users.glade.in.h:84
 msgid ""
 "User profiles can be used a templates to facilitate the creation of new "
 "users. To edit a profile, change the settings in the following tabs."
@@ -1914,60 +1907,60 @@ msgstr ""
 "Användarprofiler kan användas för att underlätta skapandet av nya användare. "
 "För att redigera en profil ändrar du inställningarna i följande flikar."
 
-#: interfaces/users.glade.in.h:84 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:85 src/users/users.desktop.in.in.h:1
 #: src/users/users.etspec.h:7
 msgid "Users"
 msgstr "Användare"
 
-#: interfaces/users.glade.in.h:85
+#: interfaces/users.glade.in.h:86
 msgid "_Add >>"
 msgstr "_Lägg till >>"
 
-#: interfaces/users.glade.in.h:86
+#: interfaces/users.glade.in.h:87
 msgid "_Add group..."
 msgstr "_Lägg till grupp..."
 
-#: interfaces/users.glade.in.h:87
+#: interfaces/users.glade.in.h:88
 msgid "_Add user..."
 msgstr "_Lägg till användare..."
 
-#: interfaces/users.glade.in.h:89
+#: interfaces/users.glade.in.h:90
 msgid "_Days between warning and password expiration:"
 msgstr "Antalet _dagar mellan varning och utgång av lösenord:"
 
-#: interfaces/users.glade.in.h:91
+#: interfaces/users.glade.in.h:92
 msgid "_Edit profiles..."
 msgstr "_Redigera profiler..."
 
-#: interfaces/users.glade.in.h:92
+#: interfaces/users.glade.in.h:93
 msgid "_Group name:"
 msgstr "_Gruppnamn:"
 
-#: interfaces/users.glade.in.h:93
+#: interfaces/users.glade.in.h:94
 msgid "_Home phone:"
 msgstr "_Hemtelefon:"
 
-#: interfaces/users.glade.in.h:95
+#: interfaces/users.glade.in.h:96
 msgid "_Office location:"
 msgstr "_Kontorsadress:"
 
-#: interfaces/users.glade.in.h:96
+#: interfaces/users.glade.in.h:97
 msgid "_Profile:"
 msgstr "_Profil:"
 
-#: interfaces/users.glade.in.h:97
+#: interfaces/users.glade.in.h:98
 msgid "_Profiles..."
 msgstr "_Profiler..."
 
-#: interfaces/users.glade.in.h:99
+#: interfaces/users.glade.in.h:100
 msgid "_Shell:"
 msgstr "_Skal:"
 
-#: interfaces/users.glade.in.h:100
+#: interfaces/users.glade.in.h:101
 msgid "_Show all users and groups"
 msgstr "_Visa alla användare och grupper"
 
-#: interfaces/users.glade.in.h:102
+#: interfaces/users.glade.in.h:103
 msgid "_Work phone:"
 msgstr "_Jobbtelefon:"
 
@@ -1981,7 +1974,7 @@ msgstr "Guide för startavbild"
 msgid "Boot Image Editor"
 msgstr "Redigerare för startavbild"
 
-#: src/boot/boot-image.c:40 src/print/settings.c:49
+#: src/boot/boot-image.c:40
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -2053,7 +2046,7 @@ msgstr ""
 msgid "%s (default)"
 msgstr "%s (standard)"
 
-#: src/boot/boot.etspec.h:1 src/users/profile.c:1032
+#: src/boot/boot.etspec.h:1
 msgid "Default"
 msgstr "Standard"
 
@@ -2061,7 +2054,7 @@ msgstr "Standard"
 msgid "Kernel Image"
 msgstr "Kärnavbildsfil"
 
-#: src/boot/boot.etspec.h:5 src/print/print.etspec.h:6
+#: src/boot/boot.etspec.h:5
 msgid "Type"
 msgstr "Typ"
 
@@ -2094,7 +2087,7 @@ msgstr " Fler alternativ >> "
 msgid " << Fewer Options "
 msgstr " << Färre alternativ "
 
-#: src/common/xst-dialog.c:427
+#: src/common/xst-dialog.c:433
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -2102,28 +2095,25 @@ msgstr ""
 "Det finns ändringar som inte har verkställts.\n"
 "Verkställ dem nu?"
 
-#: src/common/xst-dialog.c:497
+#: src/common/xst-dialog.c:503
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/xst-tool.c:657
-msgid "Closing tool."
-msgstr "Stänger verktyget."
+#: src/common/xst-tool.c:898
+#, c-format
+msgid "Skipping %s directive..."
+msgstr "Hoppar över %s-direktiv..."
 
-#: src/common/xst-tool.c:799
-msgid "Skipping set directive..."
-msgstr "Hoppar över inställningsdirektiv..."
-
-#: src/common/xst-tool.c:911
+#: src/common/xst-tool.c:1036
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/xst-tool.c:951
+#: src/common/xst-tool.c:1075
 msgid "Updating your system configuration."
 msgstr "Uppdaterar din systemkonfiguration."
 
-#: src/common/xst-tool.c:970
+#: src/common/xst-tool.c:1094
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2131,16 +2121,16 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/xst-tool.c:1144
+#: src/common/xst-tool.c:1268
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1329
+#: src/common/xst-tool.c:1459
 msgid "The password you entered is invalid."
 msgstr "Lösenordet du angav är ogiltigt."
 
-#: src/common/xst-tool.c:1339
+#: src/common/xst-tool.c:1469
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2167,33 +2157,29 @@ msgstr ""
 "--\n"
 "Teamet bakom Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1359
+#: src/common/xst-tool.c:1489
 msgid "Don't show me this again"
 msgstr "Visa inte detta igen"
 
-#: src/common/xst-tool.c:1391
+#: src/common/xst-tool.c:1521
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tRedigera konfigurationen på platsen PLATS."
 
-#: src/common/xst-tool.c:1391
+#: src/common/xst-tool.c:1521
 msgid "LOCATION"
 msgstr "PLATS"
 
-#: src/common/xst-tool.c:1433
+#: src/common/xst-tool.c:1563
 msgid "Pretending we are root..."
 msgstr "Låtsas att vi är root..."
 
-#: src/common/xst-ui.c:546
+#: src/common/xst-ui.c:557
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
 msgstr ""
 "Starta om din GNOME-session för att\n"
 "dessa ändringar ska börja gälla."
-
-#: src/disks/main.c:39
-msgid "Disk Partitions"
-msgstr "Diskpartitioner"
 
 #. run test
 #: src/display/callbacks.c:137
@@ -2210,6 +2196,9 @@ msgid ""
 "several times.\n"
 "Please be patient."
 msgstr ""
+"Undersöker X-servern. Skärmen kommer att flimra\n"
+"åtskilliga gånger.\n"
+"Håll ut."
 
 #: src/display/callbacks.c:202
 msgid ""
@@ -2218,17 +2207,20 @@ msgid ""
 "http://bugzilla.ximian.com\n"
 "Thank you!"
 msgstr ""
+"Kan inte undersöka din X-server.\n"
+"Rapportera det genom\n"
+"http://bugzilla.ximian.com\n"
+"Tack!"
 
-#: src/display/main.c:111
+#: src/display/main.c:112
 msgid "X Display Configuration"
 msgstr "X-displaykonfiguration"
 
-#: src/display/transfer.c:499
+#: src/display/transfer.c:512
 msgid "Probing X server."
-msgstr ""
+msgstr "Undersöker X-servern."
 
 #: interfaces/print.glade.in.h:10 src/display/ui.c:64
-#: src/print/settings-gui.c:85
 msgid "256 colors"
 msgstr "256 färger"
 
@@ -2244,14 +2236,21 @@ msgstr "65 000 färger"
 msgid "16 million colors"
 msgstr "16 miljoner färger"
 
+#: src/internetsharing/ishare-druid.c:40
+msgid ""
+"Congratulations! Your computer will now be\n"
+"configured to share its internet connection."
+msgstr ""
+"Gratulerar! Din dator kommer nu att konfigureras\n"
+"för att dela dess Internetanslutning."
+
 #: src/internetsharing/ishare-druid.c:113
-#, fuzzy
 msgid "Retrieving network interface configuration"
-msgstr "Testar konfiguration för loopback-gränssnitt."
+msgstr "Hämtar konfiguration för nätverksgränssnitt"
 
 #: src/internetsharing/ishare-druid.c:204
 msgid "No firewall support was found, or it was incomplete."
-msgstr ""
+msgstr "Inget brandväggsstöd hittades, eller så var den ofullständig."
 
 #: src/internetsharing/ishare-druid.c:396
 msgid ""
@@ -2259,6 +2258,9 @@ msgid ""
 "manually and come back later to finish\n"
 "the internet sharing configuration."
 msgstr ""
+"Du kan konfigurera ett lokalt nätverksgränssnitt\n"
+"manuellt och komma tillbaka senare för att\n"
+"slutföra konfigurationen av Internetdelningen."
 
 #: src/internetsharing/ishare-druid.c:435
 msgid ""
@@ -2266,205 +2268,89 @@ msgid ""
 "system and come back later to finish\n"
 "the internet sharing configuration."
 msgstr ""
+"Du kan installera en DHCP-server på ditt\n"
+"system och komma tillbaka senare för att\n"
+"slutföra konfigurationen av Internetdelningen."
 
 #: interfaces/internetsharing.glade.in.h:33 src/internetsharing/main.c:59
 msgid "Internet Sharing"
 msgstr "Internetdelning"
 
-#: src/location-manager/gui-backend-list.c:403
-msgid "Could not launch configuration tool"
-msgstr "Kunde inte starta konfigurationsverktyget"
+#: src/network/callbacks.c:128 src/network/connection.c:807
+#: src/network/connection.c:838
+msgid "Active"
+msgstr "Aktiv"
 
-#: src/location-manager/gui-backend-list.c:436
-#, fuzzy, c-format
-msgid "Could not launch configuration tool: %s"
-msgstr "Kunde inte starta konfigurationsverktyget"
+#: src/network/callbacks.c:131
+msgid "Activating"
+msgstr "Aktiverar"
 
-#: src/location-manager/location-dialog.c:181
-msgid "Create new location"
-msgstr "Skapa ny plats"
+#: src/network/callbacks.c:142 src/network/connection.c:808
+#: src/network/connection.c:839
+msgid "Inactive"
+msgstr "Inaktiv"
 
-#: src/location-manager/location-dialog.c:186
-msgid "Copy a location"
-msgstr "Kopiera en plats"
+#: src/network/callbacks.c:145
+msgid "Deactivating"
+msgstr "Deaktiverar"
 
-#: src/location-manager/location-dialog.c:191
-msgid "Rename a location"
-msgstr "Byt namn på en plats"
-
-#: src/location-manager/location-dialog.c:330
-msgid "You must supply a name"
-msgstr "Du måste ange ett namn"
-
-#: src/location-manager/location-dialog.c:337
-msgid "You already have a location by that name"
-msgstr "Du har redan en plats med det namnet"
-
-#: src/location-manager/location-manager-dialog.c:98
-msgid "_New..."
-msgstr "_Ny..."
-
-#: src/location-manager/location-manager-dialog.c:99
-msgid "Create a new location"
-msgstr "Skapa en ny plats"
-
-#: src/location-manager/location-manager-dialog.c:101
-msgid "_Copy..."
-msgstr "_Kopiera..."
-
-#: src/location-manager/location-manager-dialog.c:102
-msgid "Create a new location identical to the selected one"
-msgstr "Skapa en ny plats som är identisk med den markerade"
-
-#: src/location-manager/location-manager-dialog.c:104
-msgid "_Rename..."
-msgstr "_Byt namn..."
-
-#: src/location-manager/location-manager-dialog.c:105
-msgid "Rename the selected location"
-msgstr "Byt namn på den valda platsen"
-
-#: src/location-manager/location-manager-dialog.c:108
-msgid "Delete the selected location"
-msgstr "Ta bort den markerade platsen"
-
-#: src/location-manager/location-manager-dialog.c:111
-msgid "_Apply..."
-msgstr "_Verkställ..."
-
-#: src/location-manager/location-manager-dialog.c:112
-msgid "Apply the changes"
-msgstr "Verkställ ändringarna"
-
-#: src/location-manager/location-manager-dialog.c:119
-msgid "Edit settings for the selected backend"
-msgstr "Redigera inställningarna för den markerade backenden"
-
-#: src/location-manager/location-manager-dialog.c:121
-msgid "_Select"
-msgstr "_Markera"
-
-#: src/location-manager/location-manager-dialog.c:122
-msgid "Select the selected backend for this location"
-msgstr "Markera den valda backenden för denna plats"
-
-#: src/location-manager/location-manager-dialog.c:124
-msgid "_Deselect"
-msgstr "Av_markera"
-
-#: src/location-manager/location-manager-dialog.c:125
-msgid "Deselect the selected backend for this location"
-msgstr "Avmarkera den valda backenden för denna plats"
-
-#: src/location-manager/location-manager-dialog.c:136
-msgid "_Location"
-msgstr "_Plats"
-
-#: interfaces/location-manager.glade.in.h:38
-#: src/location-manager/location-manager-dialog.c:138
-msgid "_Help"
-msgstr "_Hjälp"
-
-#: src/location-manager/location-manager-dialog.c:192
-#: src/location-manager/location-manager-dialog.c:512
-msgid "Location Manager"
-msgstr "Platshanterare"
-
-#: src/location-manager/location-manager-dialog.c:267
-msgid ""
-"Could not retrieve a configuration\n"
-"snapshot. This probably means you do\n"
-"not have the Ximian Setup Tools\n"
-"installed properly."
-msgstr ""
-"Kunde inte hämta en konfigurationsversion.\n"
-"Detta betyder troligtvis att Ximian Setup\n"
-"Tools inte har installerats korrekt."
-
-#: src/location-manager/location-manager-dialog.c:272
-msgid ""
-"Could not retrieve a configuration\n"
-"snapshot. This probably means you are\n"
-"running an old version of the GNOME\n"
-"control center. Please upgrade to\n"
-"at least version 1.3.2 or CVS HEAD."
-msgstr ""
-"Kunde inte hämta en konfigurationsversion.\n"
-"Detta betyder troligtvis att du kör en\n"
-"gammal version av GNOME-kontrollpanelen.\n"
-"Uppgradera åtminstone till version 1.3.2\n"
-"eller CVS HEAD."
-
-#: src/location-manager/location-manager-dialog.c:439
-msgid "You cannot delete the default location"
-msgstr "Du kan inte redigera standardplatsen"
-
-#: src/location-manager/location-manager-dialog.c:444
-#, c-format
-msgid "Are you sure you wish to destroy the location %s?"
-msgstr "Är du säker på att du vill förstöra platsen %s?"
-
-#: src/location-manager/location-manager-dialog.c:515
-msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximians inställningsverktygs platshanterare"
-
-#: src/network/callbacks.c:265
+#: src/network/callbacks.c:360
 msgid "The name of this computer"
 msgstr "Namnet på denna dator"
 
-#: src/network/callbacks.c:268
+#: src/network/callbacks.c:363
 msgid "A short description of your computer"
 msgstr "En kort beskrivning av din dator"
 
-#: src/network/callbacks.c:271
+#: src/network/callbacks.c:366
 msgid "The Windows Networking workgroup for your network"
 msgstr "Arbetsgruppen för ditt nätverk i Windows-nätverk"
 
-#: src/network/callbacks.c:274
+#: src/network/callbacks.c:369
 msgid "The IP address of your WINS server"
 msgstr "IP-adressen till din WINS-server"
 
-#: src/network/callbacks.c:277
+#: src/network/callbacks.c:372
 msgid "The DNS domain for your computer"
 msgstr "DNS-domänen till din dator"
 
-#: src/network/callbacks.c:280
+#: src/network/callbacks.c:375
 msgid "A list of your DNS servers' IP addresses"
 msgstr "En lista på dina DNS-servrars IP-adresser"
 
-#: src/network/callbacks.c:283
+#: src/network/callbacks.c:378
 msgid "A list of domains where hosts will be searched"
 msgstr "En lista på domäner där värdar kommer att sökas"
 
-#: src/network/callbacks.c:286
+#: src/network/callbacks.c:381
 msgid "The IP address of this host"
 msgstr "IP-adress för denna dator"
 
-#: src/network/callbacks.c:289
+#: src/network/callbacks.c:384
 msgid "Aliases for this host, one per line"
 msgstr "Alias för denna dator, en per rad"
 
-#: src/network/callbacks.c:432
+#: src/network/callbacks.c:527
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Ta bort anslutningen %s: \"%s\"?"
 
-#: src/network/callbacks.c:434
+#: src/network/callbacks.c:529
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Ta bort anslutningen %s?"
 
-#: src/network/callbacks.c:479
+#: src/network/callbacks.c:584
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Aktiverar anslutningen \"%s\"."
 
-#: src/network/callbacks.c:502
+#: src/network/callbacks.c:617
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Kopplar från anslutningen \"%s\"."
 
-#: src/network/callbacks.c:522
+#: src/network/callbacks.c:637
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2472,11 +2358,11 @@ msgstr ""
 "Du har inte SMB-stöd installerat. Installera SMB-stöd på systemet\n"
 "för att möjliggöra nätverksanslutning till windows."
 
-#: src/network/callbacks.c:523
+#: src/network/callbacks.c:638
 msgid "SMB support missing."
 msgstr "Stöd för SMB saknas."
 
-#: src/network/callbacks.c:564
+#: src/network/callbacks.c:679
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -2490,11 +2376,11 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:570
+#: src/network/callbacks.c:685
 msgid "Don't change host name"
 msgstr "Ändra inte värdnamnet"
 
-#: src/network/callbacks.c:610
+#: src/network/callbacks.c:725
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2505,7 +2391,7 @@ msgstr ""
 "PPP-anslutningarna (modemanslutningarna) att\n"
 "kunna aktiveras."
 
-#: src/network/callbacks.c:631
+#: src/network/callbacks.c:746
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2520,7 +2406,7 @@ msgstr ""
 "\n"
 "Fortsätt ändå?"
 
-#: src/network/callbacks.c:658
+#: src/network/callbacks.c:773
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -2532,11 +2418,11 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:665
+#: src/network/callbacks.c:780
 msgid "Activate connection"
 msgstr "Aktivera anslutning"
 
-#: src/network/callbacks.c:711
+#: src/network/callbacks.c:826
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -2578,15 +2464,7 @@ msgstr "Loopback: virtuellt gränssnitt"
 msgid "Unknown type"
 msgstr "Okänd typ"
 
-#: src/network/connection.c:807 src/network/connection.c:838
-msgid "Active"
-msgstr "Aktiv"
-
-#: src/network/connection.c:808 src/network/connection.c:839
-msgid "Inactive"
-msgstr "Inaktiv"
-
-#: src/network/connection.c:1352
+#: src/network/connection.c:1355
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2596,7 +2474,7 @@ msgstr ""
 "lämnades tom. Ange giltiga IP-adresser i de\n"
 "fälten för att fortsätta."
 
-#: src/network/connection.c:1359
+#: src/network/connection.c:1362
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2606,7 +2484,7 @@ msgstr ""
 "gränssnittet lämnades tom. Ange giltiga\n"
 "IP-adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:1365
+#: src/network/connection.c:1368
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2696,128 +2574,6 @@ msgstr "Konfiguration av nätverkskort."
 msgid "Networking"
 msgstr "Nätverk"
 
-#: src/print/callbacks.c:144
-#, fuzzy, c-format
-msgid "Delete %s?"
-msgstr "Ta bort"
-
-#: src/print/main.c:103
-msgid "Print tool"
-msgstr "Utskriftsverktyg"
-
-#: src/print/print.etspec.h:2
-msgid "Paper"
-msgstr "Papper"
-
-#: src/print/print.etspec.h:4
-msgid "Share"
-msgstr "Utdelning"
-
-#: src/print/print.etspec.h:5
-msgid "Spool"
-msgstr "Spoolkatalog"
-
-#. give our dialog an OK button and title
-#: src/print/settings-editor.c:122
-msgid "Printer Settings Editor"
-msgstr "Redigerare för skrivarinställningar"
-
-#: interfaces/print.glade.in.h:11 src/print/settings-gui.c:51
-msgid "300x300"
-msgstr "300×300"
-
-#: interfaces/print.glade.in.h:12 src/print/settings-gui.c:52
-msgid "400x400"
-msgstr "400×400"
-
-#: interfaces/print.glade.in.h:13 src/print/settings-gui.c:53
-msgid "600x600"
-msgstr "600×600"
-
-#: interfaces/print.glade.in.h:8 src/print/settings-gui.c:54
-msgid "1200x600"
-msgstr "1200×600"
-
-#: interfaces/print.glade.in.h:7 src/print/settings-gui.c:55
-msgid "1200x1200"
-msgstr "1200×1200"
-
-#: interfaces/print.glade.in.h:27 src/print/settings-gui.c:68
-msgid "Letter"
-msgstr "Letter"
-
-#: interfaces/print.glade.in.h:26 src/print/settings-gui.c:69
-msgid "Legal"
-msgstr "Legal"
-
-#: interfaces/print.glade.in.h:15 src/print/settings-gui.c:70
-msgid "A4"
-msgstr "A4"
-
-#: interfaces/print.glade.in.h:14 src/print/settings-gui.c:71
-msgid "A3"
-msgstr "A3"
-
-#: interfaces/print.glade.in.h:9 src/print/settings-gui.c:84
-msgid "16 colors"
-msgstr "16 färger"
-
-#: src/print/settings-gui.c:86
-#, fuzzy
-msgid "High color"
-msgstr "Tusentals färger"
-
-#: src/print/settings-gui.c:87
-#, fuzzy
-msgid "True color"
-msgstr "Miljontals färger"
-
-#: interfaces/print.glade.in.h:1 src/print/settings-gui.c:102
-msgid "/dev/lp0 (LPT1)"
-msgstr "/dev/lp0 (LPT1)"
-
-#: interfaces/print.glade.in.h:2 src/print/settings-gui.c:103
-msgid "/dev/lp1 (LPT2)"
-msgstr "/dev/lp1 (LPT2)"
-
-#: interfaces/print.glade.in.h:3 src/print/settings-gui.c:104
-msgid "/dev/ttyS0 (COM1)"
-msgstr "/dev/ttyS0 (COM1)"
-
-#: interfaces/print.glade.in.h:4 src/print/settings-gui.c:105
-msgid "/dev/ttyS1 (COM2)"
-msgstr "/dev/ttyS1 (COM2)"
-
-#: interfaces/print.glade.in.h:5 src/print/settings-gui.c:106
-msgid "/dev/ttyS2 (COM3)"
-msgstr "/dev/ttyS2 (COM3)"
-
-#: interfaces/print.glade.in.h:6 src/print/settings-gui.c:107
-msgid "/dev/ttyS3 (COM4)"
-msgstr "/dev/ttyS3 (COM4)"
-
-#: src/print/settings.c:43
-#, fuzzy
-msgid "Local"
-msgstr "_Lokalt IP:"
-
-#: src/print/settings.c:44
-msgid "UNIX"
-msgstr ""
-
-#: src/print/settings.c:45
-#, fuzzy
-msgid "Windows"
-msgstr "Windows NT"
-
-#: src/print/settings.c:46
-msgid "Novell"
-msgstr ""
-
-#: src/print/settings.c:47
-msgid "JetDirect"
-msgstr ""
-
 #: src/shares/export_clients.etspec.h:1
 msgid "Pattern"
 msgstr "Mönster"
@@ -2833,7 +2589,7 @@ msgstr "Administrera nya utdelningar"
 #: src/shares/tables.c:190
 #, c-format
 msgid "%s on %s\n"
-msgstr ""
+msgstr "%s på %s\n"
 
 #: src/shares/tables.c:246
 msgid ""
@@ -2842,6 +2598,10 @@ msgid ""
 "might have specified bad parameters:\n"
 "\n"
 msgstr ""
+"Kunde inte montera följande utdelningar -\n"
+"de kan vara oåtkomliga för tillfället, eller\n"
+"så kan du ha angett felaktiga parametrar:\n"
+"\n"
 
 #: src/shares/tables.c:249
 msgid ""
@@ -2850,6 +2610,10 @@ msgid ""
 "might have specified bad parameters:\n"
 "\n"
 msgstr ""
+"Kunde inte montera följande utdelning -\n"
+"den kan vara oåtkomlig för tillfället, eller\n"
+"så kan du ha angett felaktiga parametrar:\n"
+"\n"
 
 #: src/shares/tables.c:265
 msgid ""
@@ -2858,6 +2622,10 @@ msgid ""
 "they might be in use by programs:\n"
 "\n"
 msgstr ""
+"\n"
+"Kunde dessutom inte avmontera följande utdelningar -\n"
+"de kanske används av program:\n"
+"\n"
 
 #: src/shares/tables.c:267
 msgid ""
@@ -2866,6 +2634,10 @@ msgid ""
 "it might be in use by programs:\n"
 "\n"
 msgstr ""
+"\n"
+"Kunde dessutom inte avmontera följande utdelning -\n"
+"dem kanske används av program:\n"
+"\n"
 
 #: src/shares/tables.c:275
 msgid ""
@@ -2873,6 +2645,9 @@ msgid ""
 "they might be in use by programs:\n"
 "\n"
 msgstr ""
+"Kunde inte avmontera följande utdelningar -\n"
+"de kanske används av program:\n"
+"\n"
 
 #: src/shares/tables.c:277
 msgid ""
@@ -2880,6 +2655,9 @@ msgid ""
 "it might be in use by programs:\n"
 "\n"
 msgstr ""
+"Kunde inte avmontera följande utdelning -\n"
+"den kanske används av program:\n"
+"\n"
 
 #: src/shares/tables.c:883
 msgid "Mount"
@@ -2982,41 +2760,38 @@ msgstr ""
 "katalog där importen kommer att monteras."
 
 #: src/shares/validate.c:260
-#, fuzzy
 msgid ""
 "You do not have access to the local point, i.e. directory\n"
 "where the import would be mounted.\n"
 "Please select another one."
 msgstr ""
-"Du måste ange den lokala monteringspunkten, d.v.s. en\n"
-"katalog där importen kommer att monteras."
+"Du har inte åtkomsträttigheter till den lokala punkten, d.v.s.\n"
+"där importen skulle monteras.\n"
+"Välj en annan."
 
 #: src/shares/validate.c:268
-#, fuzzy
 msgid ""
 "The local mount point does not exist.\n"
 "Would you like to create it?"
 msgstr ""
-"Sökvägen du vill dela ut finns inte.\n"
+"Den lokala monteringspunkten finns inte.\n"
 "Vill du skapa den?"
 
 #: src/shares/validate.c:279
-#, fuzzy
 msgid ""
 "The mount point you specified is not a directory.\n"
 "You can only import to directories, not files."
 msgstr ""
-"Sökvägen du vill dela ut pekar till en specifik fil.\n"
-"Du kan bara dela ut kataloger, inte filer."
+"Monteringspunkten du angav är inte en katalog.\n"
+"Du kan bara importera till kataloger, inte filer."
 
 #: src/shares/validate.c:287
-#, fuzzy
 msgid ""
 "The mount point you specified is not a directory,\n"
 "and you can only import to directories."
 msgstr ""
-"Sökvägen du vill dela ut är inte en katalog,\n"
-"och du kan bara dela ut kataloger."
+"Monteringspunkten du angav är inte en katalog,\n"
+"och du kan bara importera till kataloger."
 
 #: src/shares/validate.c:299
 msgid ""
@@ -3026,7 +2801,7 @@ msgstr ""
 "Du måste ange ett klientmönster, t.ex.\n"
 "\"*.minskola.se\" eller \"192.168.0.1/24\"."
 
-#: src/time/main.c:397
+#: src/time/main.c:433
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -3034,11 +2809,11 @@ msgstr ""
 "Du har inte NTP-stöd installerat. Installera NTP-stöd på systemet\n"
 "för att möjliggöra serversynkronisering."
 
-#: src/time/main.c:398
+#: src/time/main.c:434
 msgid "NTP support missing."
 msgstr "Stöd för NTP saknas."
 
-#: src/time/main.c:632
+#: src/time/main.c:698
 msgid "Time and Date Settings"
 msgstr "Inställningar för tid och datum"
 
@@ -3204,38 +2979,38 @@ msgstr "Användaren root får inte tas bort."
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/user_group.c:893
+#: src/users/user_group.c:894
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/user_group.c:953
+#: src/users/user_group.c:971
 msgid "The root group must not be deleted."
 msgstr "Gruppen root får inte tas bort."
 
-#: src/users/user_group.c:960
+#: src/users/user_group.c:978
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/user_group.c:1005
+#: src/users/user_group.c:1030
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
 
-#: src/users/user_group.c:1400
+#: src/users/user_group.c:1432
 msgid "The home directory does not exist, or its path is invalid."
 msgstr "Hemkatalogen finns inte, eller så är dess sökväg ogiltig."
 
-#: src/users/user_group.c:1404
+#: src/users/user_group.c:1436
 msgid "Couldn't get access to the home directory."
 msgstr "Kunde inte komma åt hemkatalogen."
 
 #. We shouldn't fall here: the other cases are in the error checks.
-#: src/users/user_group.c:1409
+#: src/users/user_group.c:1441
 msgid "There was an error trying to access the home directory."
 msgstr "Det uppstod ett fel vid försök att komma åt hemkatalogen."
 
-#: src/users/user_group.c:1417
+#: src/users/user_group.c:1449
 msgid ""
 "The home directory already exists. This will break the new user's "
 "permissions."
@@ -3243,23 +3018,23 @@ msgstr ""
 "Hemkatalogen finns redan. Detta kommer att ha sönder den nya användarens "
 "rättigheter."
 
-#: src/users/user_group.c:1422
+#: src/users/user_group.c:1454
 msgid "The home directory path exists, but it is not a directory."
 msgstr "Sökvägen till hemkatalogen finns, men den är inte en katalog."
 
-#: src/users/user_group.c:1426
+#: src/users/user_group.c:1458
 msgid "The home directory is not owned by the user."
 msgstr "Hemkatalogen ägs inte av användaren."
 
-#: src/users/user_group.c:1430
+#: src/users/user_group.c:1462
 msgid "The user doesn't have permission to read from the home directory."
 msgstr "Användaren har inte rätt att läsa från hemkatalogen."
 
-#: src/users/user_group.c:1434
+#: src/users/user_group.c:1466
 msgid "The user doesn't have permission to write in the home directory."
 msgstr "Användaren har inte rätt att skriva i hemkatalogen."
 
-#: src/users/user_group.c:1438
+#: src/users/user_group.c:1470
 msgid ""
 "The user doesn't have permission to use (``execute'') the home directory."
 msgstr "Användaren har inte rätt att använda (\"exekvera\") hemkatalogen."
@@ -3335,14 +3110,12 @@ msgstr ""
 "Vill du aktivera det nu?"
 
 #: interfaces/internetsharing.glade.in.h:17
-#, fuzzy
 msgid ""
 "A previous DHCP configuration has been detected. \n"
 "Do you want to keep this configuration?"
 msgstr ""
 "En befintlig DHCP-konfiguration har upptäckts.\n"
-"Vill du behålla denna konfiguration?\n"
-"\r\r"
+"Vill du behålla denna konfiguration?"
 
 #: interfaces/internetsharing.glade.in.h:19
 msgid "Banner Removal (Junkbuster)"
@@ -3353,13 +3126,12 @@ msgid "Configure DHCP Service"
 msgstr "Konfigurera DHCP-tjänst"
 
 #: interfaces/internetsharing.glade.in.h:21
-#, fuzzy
 msgid ""
 "Congratulations! This computer is now\n"
 "configured to share its Internet connection."
 msgstr ""
-"Gratulerar! Din dator kommer nu att konfigureras\n"
-"för att dela ut dess Internetanslutning."
+"Gratulerar! Din dator är nu konfigurerad\n"
+"att dela ut dess Internetanslutning."
 
 #: interfaces/internetsharing.glade.in.h:23
 msgid "Create a new local network interface."
@@ -3382,7 +3154,6 @@ msgid "Enable :"
 msgstr "Aktivera:"
 
 #: interfaces/internetsharing.glade.in.h:29
-#, fuzzy
 msgid "End of Range"
 msgstr "Slut på intervall"
 
@@ -3415,12 +3186,10 @@ msgid "Local network interface activation."
 msgstr "Lokal nätverksgränssnittsaktivering."
 
 #: interfaces/internetsharing.glade.in.h:39
-#, fuzzy
 msgid "Start of Range"
 msgstr "Start på intervall"
 
 #: interfaces/internetsharing.glade.in.h:40
-#, fuzzy
 msgid ""
 "The Internet sharing tool allows you to share your Internet conection with "
 "other computers on the network."
@@ -3433,7 +3202,6 @@ msgid "Web Cache (squid)"
 msgstr "Webbcache (squid)"
 
 #: interfaces/internetsharing.glade.in.h:42
-#, fuzzy
 msgid ""
 "Welcome to the Internet Sharing Configuration Druid.\n"
 "\n"
@@ -3447,14 +3215,18 @@ msgid ""
 "If you haven't, you will be given the option to launch the\n"
 "Network Tool to configure them before continuing."
 msgstr ""
-"Välkommen till guiden för konfiguration av Internetdelning\n"
+"Välkommen till guiden för konfiguration av Internetdelning.\n"
 "\n"
 "Denna guide kommer att hjälpa dig att\n"
 "konfigurera och dela din Internetanslutning.\n"
 "\n"
 "Du måste åtminstone ha ett lokalt nätverksgränssnitt, som\n"
 "exempelvis ett Ethernet- eller WaveLAN-kort och en\n"
-"Internetanslutning, som exempelvis ett modem."
+"Internetanslutning, som exempelvis ett modem.\n"
+"\n"
+"Om du inte har detta kommer du att erbjudas alternativet\n"
+"att starta nätverksverktyget för att konfigurera dem innan\n"
+"du fortsätter."
 
 #: interfaces/internetsharing.glade.in.h:53
 msgid ""
@@ -3596,6 +3368,66 @@ msgstr ""
 "Använd detta verktyg för att hantera alla de platser där du kan tänkas vilja "
 "använda din skithög till bärbara dator."
 
+#: interfaces/location-manager.glade.in.h:38
+msgid "_Help"
+msgstr "_Hjälp"
+
+#: interfaces/print.glade.in.h:1
+msgid "/dev/lp0 (LPT1)"
+msgstr "/dev/lp0 (LPT1)"
+
+#: interfaces/print.glade.in.h:2
+msgid "/dev/lp1 (LPT2)"
+msgstr "/dev/lp1 (LPT2)"
+
+#: interfaces/print.glade.in.h:3
+msgid "/dev/ttyS0 (COM1)"
+msgstr "/dev/ttyS0 (COM1)"
+
+#: interfaces/print.glade.in.h:4
+msgid "/dev/ttyS1 (COM2)"
+msgstr "/dev/ttyS1 (COM2)"
+
+#: interfaces/print.glade.in.h:5
+msgid "/dev/ttyS2 (COM3)"
+msgstr "/dev/ttyS2 (COM3)"
+
+#: interfaces/print.glade.in.h:6
+msgid "/dev/ttyS3 (COM4)"
+msgstr "/dev/ttyS3 (COM4)"
+
+#: interfaces/print.glade.in.h:7
+msgid "1200x1200"
+msgstr "1200×1200"
+
+#: interfaces/print.glade.in.h:8
+msgid "1200x600"
+msgstr "1200×600"
+
+#: interfaces/print.glade.in.h:9
+msgid "16 colors"
+msgstr "16 färger"
+
+#: interfaces/print.glade.in.h:11
+msgid "300x300"
+msgstr "300×300"
+
+#: interfaces/print.glade.in.h:12
+msgid "400x400"
+msgstr "400×400"
+
+#: interfaces/print.glade.in.h:13
+msgid "600x600"
+msgstr "600×600"
+
+#: interfaces/print.glade.in.h:14
+msgid "A3"
+msgstr "A3"
+
+#: interfaces/print.glade.in.h:15
+msgid "A4"
+msgstr "A4"
+
 #: interfaces/print.glade.in.h:16
 msgid "Add Printer..."
 msgstr "Lägg till skrivare..."
@@ -3608,8 +3440,8 @@ msgstr "Lägg till en ny skrivare"
 msgid ""
 "Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
 msgstr ""
-"Konvertera PC-radmatningar till Un*x-format. Hjälper mot "
-"\"trappstegsformad\" text."
+"Konvertera PC-radmatningar till Un*x-format. Hjälper mot \"trappstegsformad"
+"\" text."
 
 #: interfaces/print.glade.in.h:20
 msgid "Convert _Linefeeds"
@@ -3630,6 +3462,14 @@ msgstr "Mata e_xplicit ut sista sidan"
 #: interfaces/print.glade.in.h:25
 msgid "High Color"
 msgstr "Tusentals färger"
+
+#: interfaces/print.glade.in.h:26
+msgid "Legal"
+msgstr "Legal"
+
+#: interfaces/print.glade.in.h:27
+msgid "Letter"
+msgstr "Letter"
 
 #: interfaces/print.glade.in.h:28
 msgid "Name of the printer."
@@ -3822,29 +3662,24 @@ msgstr "S_ök"
 msgid "Choose the file"
 msgstr "Välj fil"
 
-#: src/users/profile.c:684
+#: src/users/profile.c:689
 msgid "Profile Editor"
 msgstr "Profilredigerare"
 
-#: src/users/profile.c:885
+#: src/users/profile.c:876
 msgid "Profile with given name already exists."
 msgstr "En profil med det angivna namnet finns redan."
 
-#: src/users/profile.c:888
+#: src/users/profile.c:879
 msgid "Profile name must not be empty."
 msgstr "Profilnamn får inte vara tomt."
 
-#. name
-#: src/users/profile.c:1033
-msgid "Default profile"
-msgstr "Standardprofil"
-
-#: src/users/profile.c:1349
+#: src/users/profile.c:1214
 msgid "Can't delete Default"
 msgstr "Kan inte ta bort Standard"
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1475
+#: src/users/profile.c:1340
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -3912,6 +3747,140 @@ msgstr "Användare"
 msgid "Profile"
 msgstr "Profil"
 
+#~ msgid "Closing tool."
+#~ msgstr "Stänger verktyget."
+
+#~ msgid "Disk Partitions"
+#~ msgstr "Diskpartitioner"
+
+#~ msgid "Could not launch configuration tool"
+#~ msgstr "Kunde inte starta konfigurationsverktyget"
+
+#~ msgid "Could not launch configuration tool: %s"
+#~ msgstr "Kunde inte starta konfigurationsverktyget: %s"
+
+#~ msgid "Create new location"
+#~ msgstr "Skapa ny plats"
+
+#~ msgid "Copy a location"
+#~ msgstr "Kopiera en plats"
+
+#~ msgid "Rename a location"
+#~ msgstr "Byt namn på en plats"
+
+#~ msgid "You must supply a name"
+#~ msgstr "Du måste ange ett namn"
+
+#~ msgid "You already have a location by that name"
+#~ msgstr "Du har redan en plats med det namnet"
+
+#~ msgid "_New..."
+#~ msgstr "_Ny..."
+
+#~ msgid "Create a new location"
+#~ msgstr "Skapa en ny plats"
+
+#~ msgid "_Copy..."
+#~ msgstr "_Kopiera..."
+
+#~ msgid "Create a new location identical to the selected one"
+#~ msgstr "Skapa en ny plats som är identisk med den markerade"
+
+#~ msgid "_Rename..."
+#~ msgstr "_Byt namn..."
+
+#~ msgid "Rename the selected location"
+#~ msgstr "Byt namn på den valda platsen"
+
+#~ msgid "Delete the selected location"
+#~ msgstr "Ta bort den markerade platsen"
+
+#~ msgid "_Apply..."
+#~ msgstr "_Verkställ..."
+
+#~ msgid "Apply the changes"
+#~ msgstr "Verkställ ändringarna"
+
+#~ msgid "Edit settings for the selected backend"
+#~ msgstr "Redigera inställningarna för den markerade backenden"
+
+#~ msgid "_Select"
+#~ msgstr "_Markera"
+
+#~ msgid "Select the selected backend for this location"
+#~ msgstr "Markera den valda backenden för denna plats"
+
+#~ msgid "_Deselect"
+#~ msgstr "Av_markera"
+
+#~ msgid "Deselect the selected backend for this location"
+#~ msgstr "Avmarkera den valda backenden för denna plats"
+
+#~ msgid "_Location"
+#~ msgstr "_Plats"
+
+#~ msgid "Location Manager"
+#~ msgstr "Platshanterare"
+
+#~ msgid ""
+#~ "Could not retrieve a configuration\n"
+#~ "snapshot. This probably means you do\n"
+#~ "not have the Ximian Setup Tools\n"
+#~ "installed properly."
+#~ msgstr ""
+#~ "Kunde inte hämta en konfigurationsversion.\n"
+#~ "Detta betyder troligtvis att Ximian Setup\n"
+#~ "Tools inte har installerats korrekt."
+
+#~ msgid ""
+#~ "Could not retrieve a configuration\n"
+#~ "snapshot. This probably means you are\n"
+#~ "running an old version of the GNOME\n"
+#~ "control center. Please upgrade to\n"
+#~ "at least version 1.3.2 or CVS HEAD."
+#~ msgstr ""
+#~ "Kunde inte hämta en konfigurationsversion.\n"
+#~ "Detta betyder troligtvis att du kör en\n"
+#~ "gammal version av GNOME-kontrollpanelen.\n"
+#~ "Uppgradera åtminstone till version 1.3.2\n"
+#~ "eller CVS HEAD."
+
+#~ msgid "You cannot delete the default location"
+#~ msgstr "Du kan inte redigera standardplatsen"
+
+#~ msgid "Are you sure you wish to destroy the location %s?"
+#~ msgstr "Är du säker på att du vill förstöra platsen %s?"
+
+#~ msgid "Ximian Setup Tools Location Manager"
+#~ msgstr "Ximians inställningsverktygs platshanterare"
+
+#~ msgid "Delete %s?"
+#~ msgstr "Ta bort %s?"
+
+#~ msgid "Print tool"
+#~ msgstr "Utskriftsverktyg"
+
+#~ msgid "Paper"
+#~ msgstr "Papper"
+
+#~ msgid "Share"
+#~ msgstr "Utdelning"
+
+#~ msgid "Spool"
+#~ msgstr "Spoolkatalog"
+
+#~ msgid "Printer Settings Editor"
+#~ msgstr "Redigerare för skrivarinställningar"
+
+#~ msgid "Local"
+#~ msgstr "Lokal"
+
+#~ msgid "Windows"
+#~ msgstr "Windows"
+
+#~ msgid "Default profile"
+#~ msgstr "Standardprofil"
+
 #~ msgid "Start of work report."
 #~ msgstr "Början på arbetsrapporten."
 
@@ -3923,14 +3892,6 @@ msgstr "Profil"
 
 #~ msgid "%s."
 #~ msgstr "%s."
-
-#, fuzzy
-#~ msgid "Unknown major [%s] in report [%s]."
-#~ msgstr "Okänd initd-åtgärd [%s]."
-
-#, fuzzy
-#~ msgid "Unknown minor [%s]."
-#~ msgstr "Okänd initd-åtgärd [%s]."
 
 #~ msgid "Running directive [%s] with args [%s]."
 #~ msgstr "Kör direktivet [%s] med argumenten [%s]."
@@ -3967,10 +3928,6 @@ msgstr "Profil"
 
 #~ msgid "Unexpected argument [%s] to tag [%s]."
 #~ msgstr "Oväntat argument [%s] till taggen [%s]."
-
-#, fuzzy
-#~ msgid "Could not copy file [%s] to [%s]."
-#~ msgstr "Kunde inte öppna [%s] för läsning."
 
 #~ msgid "Could not open [%s] for reading."
 #~ msgstr "Kunde inte öppna [%s] för läsning."
@@ -4099,10 +4056,6 @@ msgstr "Profil"
 #~ msgid "Service [%s] is stopped."
 #~ msgstr "Tjänsten [%s] är stoppad."
 
-#, fuzzy
-#~ msgid "No SystemV support for platform [%s]."
-#~ msgstr "Ingen tolknings-/ersättningstabell för plattformen [%s]."
-
 #~ msgid "Could not find SystemV scripts for service [%s]."
 #~ msgstr "Kunde inte hitta SystemV-skript för tjänsten [%s]."
 
@@ -4183,14 +4136,6 @@ msgstr "Profil"
 #~ msgstr "Monterar [%s] på [%s]."
 
 #~ msgid "Failed to mount [%s] on [%s]."
-#~ msgstr "Misslyckades med att montera [%s] på [%s]."
-
-#, fuzzy
-#~ msgid "Unmounting [%s] from [%s]."
-#~ msgstr "Monterar [%s] på [%s]."
-
-#, fuzzy
-#~ msgid "Failed to unmount [%s] from [%s]."
 #~ msgstr "Misslyckades med att montera [%s] på [%s]."
 
 #~ msgid "Failed to run lilo."
@@ -4659,11 +4604,11 @@ msgstr "Profil"
 #~ msgstr "label79"
 
 #~ msgid ""
-#~ "These are global values that will affect the creation of new users. They are "
-#~ "only available when you click \"More Options\"."
+#~ "These are global values that will affect the creation of new users. They "
+#~ "are only available when you click \"More Options\"."
 #~ msgstr ""
-#~ "Det här är globala värden som kommer att påverka skapandet av nya användare. "
-#~ "De är endast tillgängliga om du klickar på \"Fler alternativ\"."
+#~ "Det här är globala värden som kommer att påverka skapandet av nya "
+#~ "användare. De är endast tillgängliga om du klickar på \"Fler alternativ\"."
 
 #~ msgid "Mailbox directory:"
 #~ msgstr "Brevlådekatalog:"
@@ -4821,13 +4766,14 @@ msgstr "Profil"
 #~ msgstr "Kom ihåg denna import mellan starter"
 
 #~ msgid ""
-#~ "The directories in your machine may be made available to others through the "
-#~ "network using exports. SMB exports are compatible with Microsoft Windows "
-#~ "(TM) and Unix or Linux machines with Samba installed."
+#~ "The directories in your machine may be made available to others through "
+#~ "the network using exports. SMB exports are compatible with Microsoft "
+#~ "Windows (TM) and Unix or Linux machines with Samba installed."
 #~ msgstr ""
 #~ "Katalogerna på din maskin kan göras tillgängliga för andra över nätverket "
-#~ "genom att använda utdelningar. SMB-utdelningar är kompatibla med Microsoft "
-#~ "Windows (tm) och Unix- eller Linuxmaskiner med Samba installerat."
+#~ "genom att använda utdelningar. SMB-utdelningar är kompatibla med "
+#~ "Microsoft Windows (tm) och Unix- eller Linuxmaskiner med Samba "
+#~ "installerat."
 
 #~ msgid "SMB exports"
 #~ msgstr "SMB-exporter"
@@ -4882,7 +4828,8 @@ msgstr "Profil"
 #~ msgid ""
 #~ "The IP address must have the form of four digits\n"
 #~ "sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
-#~ "except for the first and last ones, which must be in the range of 1 to 254."
+#~ "except for the first and last ones, which must be in the range of 1 to "
+#~ "254."
 #~ msgstr ""
 #~ "IP-adressen måste bestå av fyra tal åtskilda med en punkt (.).\n"
 #~ "Dessa tal måste vara i intervallet 0 till 255, förutom det första och\n"
@@ -4940,8 +4887,8 @@ msgstr "Profil"
 #~ msgstr "Tid på dagen:"
 
 #~ msgid ""
-#~ "It doesn't work yet. It's here only on testing purposes and currently uses "
-#~ "local data."
+#~ "It doesn't work yet. It's here only on testing purposes and currently "
+#~ "uses local data."
 #~ msgstr ""
 #~ "Det fungerar inte än. Det finns här bara för teständamål och använder för "
 #~ "tillfället lokal data."
