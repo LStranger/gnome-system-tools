@@ -173,7 +173,7 @@ transfer_string_calendar_gui_to_xml (TransTree *trans_tree, xmlNodePtr root)
 		xst_xml_element_set_content (node, s);
 		g_free (s);
 		
-		node = xst_xml_element_find_first (sugnode,
+		node = xst_xml_element_find_first (subnode,
 						   transfer_string_calendar_table [i].xml_month_path);
 		s = g_strdup_printf ("%d", month);
 		xst_xml_element_set_content (node, s);
