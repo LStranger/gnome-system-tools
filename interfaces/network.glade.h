@@ -5,7 +5,7 @@
  */
 
 gchar *s = N_("Networking Settings");
-gchar *s = N_("The name of this computer.");
+gchar *s = N_("How this computer is identified.");
 gchar *s = N_("Host name:");
 gchar *s = N_("Enable windows networking (Samba)");
 gchar *s = N_("Windows Networking");
@@ -27,12 +27,12 @@ gchar *s = N_("Domain:");
 gchar *s = N_("DNS Servers:");
 gchar *s = N_("Search Domains:");
 gchar *s = N_("DNS");
-gchar *s = N_("Names of other computers.");
+gchar *s = N_("Aliases of other computers.");
 gchar *s = N_("Active");
 gchar *s = N_("IP Addres");
-gchar *s = N_("Names");
+gchar *s = N_("Aliases");
 gchar *s = N_("IP address:");
-gchar *s = N_("Names:");
+gchar *s = N_("Aliases:");
 gchar *s = N_("Enable this alias");
 gchar *s = N_("Add");
 gchar *s = N_("Change");
