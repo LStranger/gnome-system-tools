@@ -309,3 +309,18 @@ on_share_nfs_host_type_changed (GtkWidget *widget, gpointer data)
 				       (selected_type == NFS_SHARE_NETWORK));
 	}
 }
+
+void
+on_share_smb_settings_clicked (GtkWidget *widget, gpointer data)
+{
+	GtkWidget *dialog;
+	gint       response;
+
+	smb_settings_prepare_dialog ();
+	dialog   = gst_dialog_get_widget (tool->main_dialog, "smb_properties_dialog");
+	response = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_hide (dialog);
+
+	if (response == GTK_RESPONSE_OK)
+		smb_settings_save ();
+}

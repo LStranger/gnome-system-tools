@@ -345,3 +345,61 @@ share_settings_dialog_run (const gchar *path, gboolean standalone)
 
 	share_settings_close_dialog ();
 }
+
+void
+smb_settings_prepare_dialog (void)
+{
+	GtkWidget *widget;
+	gchar     *desc, *workgroup, *wins_server;
+	gboolean   wins_use;
+	xmlNodePtr root;
+
+	root = gst_xml_doc_get_root (tool->config);
+	desc        = gst_xml_get_child_content (root, "smbdesc");
+	workgroup   = gst_xml_get_child_content (root, "workgroup");
+	wins_server = gst_xml_get_child_content (root, "smb_wins_server");
+	wins_use    = gst_xml_element_get_boolean (root, "winsuse");
+	
+	widget = gst_dialog_get_widget (tool->main_dialog, "smb_description");
+	gtk_entry_set_text (GTK_ENTRY (widget), desc);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "smb_workgroup");
+	gtk_entry_set_text (GTK_ENTRY (widget), workgroup);
+
+	if (wins_server) {
+		widget = gst_dialog_get_widget (tool->main_dialog, "smb_wins_server");
+		gtk_entry_set_text (GTK_ENTRY (widget), wins_server);
+
+		widget = gst_dialog_get_widget (tool->main_dialog, "smb_use_wins");
+	} else if (wins_use)
+		widget = gst_dialog_get_widget (tool->main_dialog, "smb_is_wins");
+	else
+		widget = gst_dialog_get_widget (tool->main_dialog, "smb_no_wins");
+
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+
+	g_free (desc);
+	g_free (workgroup);
+	g_free (wins_server);
+}
+
+void
+smb_settings_save (void)
+{
+	GtkWidget  *widget;
+	gchar      *text;
+	gboolean   *active;
+	xmlNodePtr  root;
+
+	root = gst_xml_doc_get_root (tool->config);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "smb_description");
+	text = gtk_entry_get_text (GTK_ENTRY (widget));
+	gst_xml_set_child_content (root, "smbdesc", text);
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "smb_workgroup");
+	text = gtk_entry_get_text (GTK_ENTRY (widget));
+	gst_xml_set_child_content (root, "workgroup", text);
+
+	/* FIXME: manage wins stuff */
+}
