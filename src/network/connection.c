@@ -106,21 +106,6 @@ my_entry_set_text (GtkEntry *w, gchar *txt)
 	gtk_entry_set_text (w, (txt)? txt: "");
 }
 
-static gchar *
-connection_xml_get_str (xmlNode *node, gchar *elem)
-{
-	xmlNode *subnode;
-	gchar *ret;
-
-	ret = NULL;
-	
-	subnode = xst_xml_element_find_first (node, elem);
-	if (subnode)
-		ret = xst_xml_element_get_content (subnode);
-
-	return ret;
-}
-
 static gboolean
 connection_xml_get_boolean (xmlNode *node, gchar *elem)
 {
@@ -129,7 +114,7 @@ connection_xml_get_boolean (xmlNode *node, gchar *elem)
 
 	ret = FALSE;
 
-	s = connection_xml_get_str (node, elem);
+	s = xst_xml_get_child_content (node, elem);
 	if (s) {
 		ret = atoi (s)? TRUE: FALSE;
 		g_free (s);
@@ -170,7 +155,7 @@ connection_xml_wvsection_is_type (xmlNode *node, gchar *type)
 	gchar *str;
 	gint cmp;
 
-	str = connection_xml_get_str (node, "type");
+	str = xst_xml_get_child_content (node, "type");
 	cmp = strcmp (str, type);
 	g_free (str);
 
@@ -186,7 +171,7 @@ connection_xml_wvsection_has_name (xmlNode *node, gchar *name)
 	gchar *section_found;
 	gint cmp;
 	
-	section_found = connection_xml_get_str (node, "name");
+	section_found = xst_xml_get_child_content (node, "name");
 	cmp = strcmp (section_found, name);
 	g_free (section_found);
 
@@ -235,7 +220,7 @@ connection_xml_wvsection_get_inherits_node (xmlNode *root, xmlNode *node)
 	g_return_val_if_fail (root != NULL, NULL);
 	g_return_val_if_fail (node != NULL, NULL);
 
-	inherits = connection_xml_get_str (node, "inherits");
+	inherits = xst_xml_get_child_content (node, "inherits");
 	if (inherits) {
 		for (i = 0; prefix[i]; i++)
 			if (strstr (inherits, prefix[i]) == inherits)
@@ -267,7 +252,7 @@ connection_xml_wvsection_node_get_str (xmlNode *node, xmlNode *subnode, gchar *e
 
 	if (subnode) {
 		/* Found the section */
-		value = connection_xml_get_str (subnode, elem);
+		value = xst_xml_get_child_content (subnode, elem);
 		if (value) {
 			/* Got the required value */
 			return value;
@@ -368,7 +353,7 @@ connection_dev_get_next (xmlNode *root, gchar *dev_type)
 	for (node = xst_xml_element_find_first (root, "interface");
 		node; node = xst_xml_element_find_next (node, "interface"))
 	{
-		dev = connection_xml_get_str (node, "dev");
+		dev = xst_xml_get_child_content (node, "dev");
 		if (strstr (dev, dev_type)) {
 			num = atoi (dev + len) + 1;
 			max = (num > max)? num: max;
@@ -545,7 +530,7 @@ connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection)
 static void
 connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 {
-	cxn->wvsection = connection_xml_get_str (node, "wvsection");
+	cxn->wvsection = xst_xml_get_child_content (node, "wvsection");
 	if (cxn->wvsection) {
 		cxn->serial_port = connection_get_serial_port_from_node (node->parent, cxn->wvsection);
 		cxn->phone_number = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "phone");
@@ -556,26 +541,26 @@ connection_get_ppp_from_node (xmlNode *node, XstConnection *cxn)
 		cxn->wvsection = connection_wvsection_name_generate (cxn->dev, node->parent);
 		connection_xml_save_str_to_node (cxn->node, "wvsection", cxn->wvsection);
 
-		cxn->phone_number = connection_xml_get_str (node, "phone_number");
-		cxn->login = connection_xml_get_str (node, "login");
-		cxn->password = connection_xml_get_str (node, "password");
+		cxn->phone_number = xst_xml_get_child_content (node, "phone_number");
+		cxn->login = xst_xml_get_child_content (node, "login");
+		cxn->password = xst_xml_get_child_content (node, "password");
 		cxn->stupid = FALSE;
 	}
 
 	/* PPP advanced */
 	cxn->persist = connection_xml_get_boolean (node, "persist");
-	cxn->serial_port = connection_xml_get_str (node, "serial_port");
+	cxn->serial_port = xst_xml_get_child_content (node, "serial_port");
 	cxn->set_default_gw = connection_xml_get_boolean (node, "set_default_gw");
 	cxn->peerdns = connection_xml_get_boolean (node, "peerdns");
-	cxn->dns1 = connection_xml_get_str (node, "dns1");
-	cxn->dns2 = connection_xml_get_str (node, "dns2");
-	cxn->ppp_options = connection_xml_get_str (node, "ppp_options");
+	cxn->dns1 = xst_xml_get_child_content (node, "dns1");
+	cxn->dns2 = xst_xml_get_child_content (node, "dns2");
+	cxn->ppp_options = xst_xml_get_child_content (node, "ppp_options");
 }
 
 static void
 connection_get_ptp_from_node (xmlNode *node, XstConnection *cxn)
 {
-	cxn->remote_address = connection_xml_get_str (node, "remote_address");
+	cxn->remote_address = xst_xml_get_child_content (node, "remote_address");
 }
 	
 XstConnection *
@@ -640,7 +625,7 @@ connection_new_from_node (xmlNode *node)
 	XstConnection *cxn;
 	char *s = NULL;
 
-	s = connection_xml_get_str (node, "dev");
+	s = xst_xml_get_child_content (node, "dev");
 
 	if (s) {
 		cxn = connection_new_from_dev_name (s, node->parent);
@@ -651,13 +636,13 @@ connection_new_from_node (xmlNode *node)
 
 	cxn->node = node;
 	
-	s = connection_xml_get_str (node, "bootproto");
+	s = xst_xml_get_child_content (node, "bootproto");
 	if (s) {
 		cxn->ip_config = cxn->tmp_ip_config = connection_config_type_from_str (s);
 		g_free (s);
 	}
 
-	s = connection_xml_get_str (node, "name");
+	s = xst_xml_get_child_content (node, "name");
 	if (s)
 		cxn->name = s;
 	else
@@ -669,13 +654,13 @@ connection_new_from_node (xmlNode *node)
 	cxn->enabled = connection_xml_get_boolean (node, "enabled");
 
 	/* TCP/IP general paramaters */
-	cxn->address = connection_xml_get_str (node, "address");
-	cxn->netmask = connection_xml_get_str (node, "netmask");
+	cxn->address = xst_xml_get_child_content (node, "address");
+	cxn->netmask = xst_xml_get_child_content (node, "netmask");
 	
-	cxn->gateway = connection_xml_get_str (node, "gateway");
+	cxn->gateway = xst_xml_get_child_content (node, "gateway");
 	if (!cxn->gateway || !*cxn->gateway) {
 		g_free (cxn->gateway);
-		cxn->gateway = connection_xml_get_str (node->parent, "gateway");
+		cxn->gateway = xst_xml_get_child_content (node->parent, "gateway");
 	}
 
 	switch (cxn->type) {
