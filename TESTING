@@ -1,0 +1,72 @@
+This text file describes procedures for testing the XSTs. They're the
+procedures we use ourselves to test the tools, and they're suggested as a
+starting point for people porting the tools to other platforms.
+
+
+Network
+=======
+
+1)  Start the tool as a normal user, and enter the root password at the
+    prompt. Wait for the scanning system configuration dialog to disappear.
+
+2)  Examine the General tab. Check that the hostname is correct.
+
+3)  Enable windows networking, if it's not already enabled, and apply.
+
+4)  Run smbclient -L hostname on the command line, confirm that the host shows
+    up under the "Server" header, with the comment listed in the Description:
+    field in network-admin as the comment.
+
+5)  Disable windows networking, and apply.
+
+6)  Run smbclient -L hostname on the command line again, verify that the
+    server does not show up anymore.
+
+7)  Go to the Connections tab. Run ifconfig on the command line, examine each
+    interface on the list, making sure it shows up in the list in
+    network-admin, and that the settings are correct. Note that PPP interfaces
+    may not show up if they're not currently active.
+
+8)  Deactivate an interface and apply. Verify that the interface does not show
+    up/shows up as disabled in the ifconfig output.
+
+9)  Reactivate the interface and apply. Verify that it shows up as correctly
+    configured and enabled in the ifconfig output, and that no other
+    interfaces are changed.
+
+10) Select an interface and click Configure... Change the comment of the
+    interface, close the dialog, and apply. Verify that the comment is
+    changed in the OS' interfaces file (/etc/network/interfaces on Debian,
+    for instance).
+
+11) Configure an interface to use DHCP. If you have a DHCP server, verify
+    that the interface is brought down and back up and gets an IP from the
+    DHCP server, by running ifconfig and checking the settings.
+
+12) Verify that the fact that the interface should use DHCP has been properly
+    written to the system's config files.
+
+13) Set the interface to use a static IP address, subnet mask, and gateway
+    address. Apply, and verify with ifconfig and by reading the system
+    configuration files.
+
+14) Go to the DNS tab. cat /etc/resolv.conf, and verify that the two match.
+
+15) Change the DNS server to a bogus IP number, and apply. Verify that it's
+    written to /etc/resolv.conf.
+
+16) Change the DNS server back to the correct settings, apply, and verify.
+    Then add "ximian.com" to Search Domains, apply, and confirm that
+    "host www.ximian.com" and "host www" give the same output.
+
+17) Go to the Hosts tab. Verify that the list matches what's in /etc/hosts.
+
+18) Add an alias, and verify it's written to /etc/hosts. Then use the host
+    command to look up the alias, verifying that it can be looked up
+    correctly.
+
+19) Quit the tool, and then manually ifdown/ifup each interface on the
+    machine in turn (for systems that have ifup/ifdown), verifying that there
+    are no errors, and then run ifconfig to verify that everything is up.
+
+	 
