@@ -1,1 +1,1 @@
-SUBDIRS = common network time boot services users disks
+SUBDIRS = common network time boot services users 
