@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-02-02 15:10+0100\n"
-"PO-Revision-Date: 2004-02-02 18:50+0100\n"
+"POT-Creation-Date: 2004-02-21 03:57+0100\n"
+"PO-Revision-Date: 2004-02-21 09:56+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -84,7 +84,10 @@ msgid ""
 "This key stores the bootloader that boot-admin will configure if there are "
 "more than one installed, if it's not set or isn't valid, then boot-admin "
 "will ask the user"
-msgstr "Tento klíč ukládá zavadeč, který bude nastavovat boot-admin, pokud je nainstalovaný více než jeden. Pokud klíč není nastaven nebo není platný, boot-admin se zeptá uživatele"
+msgstr ""
+"Tento klíč ukládá zavadeč, který bude nastavovat boot-admin, pokud je "
+"nainstalovaný více než jeden. Pokud klíč není nastaven nebo není platný, "
+"boot-admin se zeptá uživatele"
 
 #: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
@@ -262,7 +265,9 @@ msgstr "Počet sekund před zavedením výchozího jádra nebo OS"
 msgid ""
 "Several bootloaders have been found in the system, please select which do "
 "you want to configure"
-msgstr "V systému bylo nalezeno několik zavaděčů, zvolte prosím, který chcete nastavovat"
+msgstr ""
+"V systému bylo nalezeno několik zavaděčů, zvolte prosím, který chcete "
+"nastavovat"
 
 #: interfaces/boot.glade.in.h:38
 msgid "Specify the partition on which the operating system is installed."
@@ -603,7 +608,9 @@ msgstr "Vlastnosti rozhraní"
 msgid ""
 "List of domains that the system will try to append to a hostname if there "
 "isn't already one specified"
-msgstr "Seznam domén, které se systém pokusí připojit ke jménu počítače, pokud doména ještě není určena"
+msgstr ""
+"Seznam domén, které se systém pokusí připojit ke jménu počítače, pokud "
+"doména ještě není určena"
 
 #: interfaces/network.glade.in.h:54
 msgid "Modem _volume:"
@@ -939,10 +946,14 @@ msgid "Use this tool to specify which services to run"
 msgstr "Použijte tento nástroj pro určení, které služby spouštět"
 
 #: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "_Seřadit seznam podle sekvence spouštění"
+
+#: interfaces/services.glade.in.h:11
 msgid "_Start"
 msgstr "_Spustit"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:12
 msgid "_Startup sequence:"
 msgstr "_Sekvence spouštění:"
 
@@ -1345,7 +1356,7 @@ msgstr "Editor zaváděcího obrazu"
 msgid "Boot Append Editor"
 msgstr "Editor zaváděcího příkazu"
 
-#: src/boot/callbacks.c:390
+#: src/boot/callbacks.c:393
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -1353,12 +1364,12 @@ msgstr ""
 "Váš systém nenastartuje bez\n"
 "alespoň jednoho zaváděcího obrazu.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Jste si jisti, že chcete odstranit '%s'?"
 
-#: src/boot/callbacks.c:450
+#: src/boot/callbacks.c:453
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -1402,16 +1413,21 @@ msgid "/_Delete"
 msgstr "/O_dstranit"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
+#: src/common/gst-auth.c:84
 msgid "Could not connect to the computer."
 msgstr "Nemohu se připojit k počítači."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
+#: src/common/gst-auth.c:87
 msgid "The password you entered is invalid."
 msgstr "Zadané heslo je neplatné."
 
-#: src/common/gst-auth.c:89
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr "Nemohu spustit \"%s\". Ověřte, že k tomu máte oprávnění."
+
+#: src/common/gst-auth.c:99
 msgid "An unexpected error has occurred."
 msgstr "Došlo k neočekávané chybě."
 
@@ -1458,7 +1474,7 @@ msgstr ""
 "Nastala chyba při spuštění podpůrného skriptu\n"
 "a nastavení nebylo možné načíst."
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1508
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1467,7 +1483,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Vítejte v předběžné verzi %s "
 "Systémových nástrojů GNOME</span>"
 
-#: src/common/gst-tool.c:1513
+#: src/common/gst-tool.c:1511
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1481,15 +1497,15 @@ msgstr ""
 "úsilí a zdravý rozum. Byli jste varováni. Děkujeme vám za vyzkoušení této "
 "předběžné verze Systémových nástrojů GNOME!"
 
-#: src/common/gst-tool.c:1534
+#: src/common/gst-tool.c:1532
 msgid "Warning"
 msgstr "Varování"
 
-#: src/common/gst-tool.c:1554
+#: src/common/gst-tool.c:1552
 msgid "Don't show me this again"
 msgstr "Nezobrazovat příště"
 
-#: src/common/gst-tool.c:1628
+#: src/common/gst-tool.c:1626
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
@@ -1689,10 +1705,14 @@ msgstr ""
 "Telefonní číslo, které bude připojení používat, bylo ponecháno prázdné. "
 "Pokračujte prosím zadáním platného telefonního čísla."
 
-#: src/network/connection.c:2082
+#: src/network/connection.c:2079
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Rozhraní %s neexistuje."
+
+#: src/network/connection.c:2081
+msgid " The loopback interface cannot be configured."
+msgstr " Rozhraní loopback nemůže být nastavováno."
 
 #: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
@@ -1768,24 +1788,24 @@ msgstr "Název profilu"
 msgid "No description available."
 msgstr "Popis není k dispozici."
 
-#: src/services/callbacks.c:247
+#: src/services/callbacks.c:248
 msgid "Running"
 msgstr "Běží"
 
-#: src/services/callbacks.c:251
+#: src/services/callbacks.c:252
 msgid "Stopped"
 msgstr "Zastaveno"
 
-#: src/services/callbacks.c:256
+#: src/services/callbacks.c:257
 msgid "Could not get info"
 msgstr "Nelze získat informace"
 
-#: src/services/callbacks.c:322
+#: src/services/callbacks.c:323
 #, c-format
 msgid "Settings for service %s"
 msgstr "Nastavení služby %s"
 
-#: src/services/main.c:58
+#: src/services/main.c:61
 msgid "Services Settings"
 msgstr "Nastavení služeb"
 
@@ -1797,7 +1817,7 @@ msgstr "Nastavit, které služby budou spuštěny při startu systému"
 msgid "Services"
 msgstr "Služby"
 
-#: src/services/table.c:78
+#: src/services/table.c:79
 msgid "Active"
 msgstr "Aktivní"
 
@@ -1833,11 +1853,11 @@ msgstr "Změnit systémový čas, datum a časovou zónu."
 msgid "Time and Date"
 msgstr "Datum a čas"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:602
 msgid "Create New profile"
 msgstr "Vytvořit nový profil"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:633
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Nastavení profilu %s"
