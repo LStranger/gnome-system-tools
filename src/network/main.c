@@ -84,6 +84,30 @@ XstDialogSignal signals[] = {
 	{ NULL }
 };
 
+static const XstWidgetPolicy policies[] = {
+	/* Name                     Basic                        Advanced                   Root   User */
+	{ "general_hbox",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "connections_bbox",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "connection_delete",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_configure",   XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_activate",    XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_deactivate",  XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "statichost_table",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "statichost_add",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "statichost_delete",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "statichost_update",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "samba_use",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "samba_frame",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "dns_dhcp",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "dns_table",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "dns_list",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ "dns_list_label",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, FALSE },
+	{ "search_list",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ "wins_ip",                XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "domain",                 XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "domain_label",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, FALSE },
+	{ NULL }
+};
 
 int
 main (int argc, char *argv[])
@@ -124,7 +148,7 @@ main (int argc, char *argv[])
 
 		ppp = ppp_druid_new (tool);
 		xst_tool_set_xml_funcs (tool, NULL, ppp_druid_gui_to_xml, ppp);
-		
+
 		xst_tool_load_try (tool);
 		ppp_druid_show (ppp);
 
@@ -133,6 +157,7 @@ main (int argc, char *argv[])
 		xst_dialog_connect_signals (tool->main_dialog, signals);
 		xst_dialog_add_apply_hook (tool->main_dialog, callbacks_check_hostname_hook, NULL);
 		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+		xst_dialog_set_widget_policies (tool->main_dialog, policies);
 		
 		connection_init_icons ();
 

@@ -1,3 +1,18 @@
+2001-03-16  Hans Petter Jansson  <hpj@ximian.com>
+
+	* main.c: Added widget policy table.
+	  (main): Added call to xst_dialog_set_widget_policies ().
+
+	* callbacks.c (on_network_admin_show): Removed manual widget policing
+	  based on access.
+	  (connection_actions_set_sensitive): Use
+	  xst_dialog_widget_set_user_sensitive ().
+	  (on_dns_dhcp_toggled): Ditto.
+	  (on_samba_use_toggled): Ditto.
+	  (on_wins_use_toggled): Ditto.
+	  (callbacks_check_hostname_hook): Fixed spelling and broke up string
+	  for nicer source formatting.
+
 2001-03-12  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* connection.c: PLIP support. Don't care if nobody cares.

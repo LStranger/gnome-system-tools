@@ -67,51 +67,12 @@ connection_actions_set_sensitive (gboolean state)
 	};
 
 	for (i = 0; names[i]; i++)
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, names[i]), state);
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, names[i], state);
 }
 
 void 
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
-#warning	Remove static host stuff
-	char *access_no[] = { 
-		"general_hbox",
-		"samba_use",
-		"samba_frame",
-		"connections_bbox",
-		"dns_dhcp",
-		"dns_table",
-		"statichost_table",
-		NULL };
-
-	char *access_yes[] = {
-		"dns_list", 
-		"search_list", 
-		NULL} ;
-
-	char *unsensitive[] = {
-		"statichost_add",
-		"connection_delete",
-		"connection_configure",
-		"connection_activate",
-		"connection_deactivate",
-		"statichost_update",
-		"statichost_delete",
-		NULL };
-	int i;
-
-	/* Those widgets that won't be available if you don't have the access. */
-	for (i = 0; access_no[i]; i++)
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, access_no[i]), xst_tool_get_access (tool));
-	
-	/* Those widgets that will be available, even if you don't have the access. */
-	for (i = 0; access_yes[i]; i++)
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, access_yes[i]), TRUE);
-	
-	/* Those widgets you should never have access to, and will be activated later on. */
-	for (i = 0; unsensitive[i]; i++)
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, unsensitive[i]), FALSE);
-	
 	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), 0, TRUE);
 	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), 1, TRUE);
 	gtk_clist_set_column_auto_resize (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "connection_list")), 0, TRUE);
@@ -121,7 +82,7 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 
 void
 on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
-																				gint page_num, gpointer user_data)
+				 gint page_num, gpointer user_data)
 {
 	gchar *entry[] = { "hostname", "connection_list", "dns_dhcp", "statichost_list" };
 	
@@ -386,22 +347,21 @@ on_dns_dhcp_toggled (GtkWidget *w, gpointer null)
 
 	b = !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 	for (i=0; ws[i]; i++)
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, ws[i]), b);
-
+		xst_dialog_widget_set_user_sensitive (tool->main_dialog, ws [i], b);
 }
 
 void
 on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "samba_frame"),
-				  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "samba_frame",
+					      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 }
 
 void
 on_wins_use_toggled (GtkWidget *w, gpointer null)
 {
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "wins_ip"),
-						 gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "wins_ip",
+					      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
 }
 
 gboolean
@@ -422,7 +382,9 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 
 	if (strcmp (hostname_new, hostname_old))
 	{
-		gchar *text = _("The host name has changed. This will prevent you\nfrom launching new applications,\nand so you will have to log in again.\n\nContinue anyways?");
+		gchar *text = _("The host name has changed. This will prevent you\n"
+				"from launching new applications,\n"
+				"and so you will have to log in again.\n\nContinue anyway?");
 		gint res;
 		
 		message = gnome_message_box_new (text, GNOME_MESSAGE_BOX_WARNING,
