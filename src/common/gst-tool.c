@@ -799,7 +799,7 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 
 	/* don't actually run if we are just pretending */
 	if (tool->root_access == ROOT_ACCESS_SIMULATED) {
-		g_warning (_("Skipping %s directive..."), directive);
+		g_warning ("Skipping %s directive...", directive);
 		tool->directive_running = FALSE;
 		return NULL;
 	}
@@ -926,7 +926,7 @@ gst_tool_save (GstTool *tool, gboolean restore)
 #ifdef GST_DEBUG
 	/* don't actually save if we are just pretending */
 	if (tool->root_access == ROOT_ACCESS_SIMULATED) {
-		g_warning (_("Skipping actual save..."));
+		g_warning ("Skipping actual save...");
 		return TRUE;
 	}
 #endif
