@@ -1,0 +1,72 @@
+/* 
+ * Copyright (C) 2001 Ximian, Inc.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation; either version 2 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
+ *
+ * Authors: Jacob Berkman <jacob@ximian.com>
+ */
+
+#ifndef XST_DIALOG_H
+#define XST_DIALOG_H
+
+#include "xst-types.h"
+
+#define XST_TYPE_DIALOG        (xst_dialog_get_type ())
+#define XST_DIALOG(o)          (GTK_CHECK_CAST ((o),  XST_TYPE_DIALOG, XstDialog))
+#define XST_DIALOG_CLASS(c)    (GTK_CHECK_CLASS_CAST ((c), XST_TYPE_DIALOG, XstDialogClass))
+#define XST_IS_DIALOG(o)       (GTK_CHECK_TYPE ((o), XST_TYPE_DIALOG))
+#define XST_IS_DIALOG_CLASS(c) (GTK_CHECK_CLASS_TYPE ((c), XST_TYPE_DIALOG))
+
+struct _XstDialog {
+	GnomeApp app;
+	XstTool *tool;
+
+	/* Glade files */
+	GladeXML  *gui;
+	GtkWidget *child;
+
+	/* Common widgets */
+	GtkWidget *apply_button;
+	GtkWidget *close_button;
+	GtkWidget *complexity_button;
+	GtkWidget *help_button;
+
+	XstDialogComplexity complexity;
+	gboolean frozen;
+	gboolean modified;
+};
+
+struct _XstDialogClass {
+	GnomeAppClass parent_class;
+
+	void (*apply)             (XstDialog *);
+	void (*complexity_change) (XstDialog *);
+};
+
+GtkType             xst_dialog_get_type       (void);
+
+XstDialog          *xst_dialog_new            (XstTool *tool, const char *widget);
+void                xst_dialog_free           (XstDialog *xd);
+
+XstDialogComplexity xst_dialog_get_complexity (XstDialog *xd);
+void                xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c);
+
+void                xst_dialog_freeze         (XstDialog *xd);
+void                xst_dialog_thaw           (XstDialog *xd);
+
+gboolean            xst_dialog_get_modified   (XstDialog *xd);
+void                xst_dialog_modify         (XstDialog *xd);
+
+#endif /* XST_DIALOG_H */
