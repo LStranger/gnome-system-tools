@@ -1,5 +1,12 @@
 2001-04-03  Tambet Ingo  <tambet@ximian.com>
 
+	* e-table.c: Use user-group-xml.
+
+	* user_settings.c: ditto.
+
+	* user-group-xml.c: New. Plan is to put all xml functions here,
+	so that You don't call xst_xml functions but for example user_value_login()
+
 	* e-table.c (user_set_value_at): Added col GID, cleaned.
 	(user_value_at): Added GID.
 	(group_set_value_at): Cleaned.

@@ -36,6 +36,7 @@
 #include "e-table.h"
 #include "user_group.h"
 #include "callbacks.h"
+#include "user-group-xml.h"
 
 extern XstTool *tool;
 
@@ -185,7 +186,7 @@ static void
 user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
 	xmlNodePtr node;
-	gchar *field;
+	gchar *field = NULL;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
@@ -214,6 +215,10 @@ user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *da
 		if (check_user_comment (node, (gpointer)val))
 			field = g_strdup ("comment");
 		break;
+/*	case COL_USER_GROUP:
+		user_value_set_group (node, (gpointer)val);
+		break;
+*/
 	case COL_USER_GID:
 		if (check_user_uid (node, (gpointer)val))
 			field = g_strdup ("gid");
@@ -235,7 +240,7 @@ static void
 group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
 	xmlNodePtr node;
-	gchar *field;
+	gchar *field = NULL;
 
 	g_return_if_fail (xst_tool_get_access (tool));
 
@@ -272,31 +277,10 @@ is_editable (ETableModel *etm, int col, int row, void *model_data)
 		   (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED));
 }
 
-gchar *
-user_value_group (xmlNodePtr user_node)
-{
-	gchar *gid, *buf;
-	xmlNodePtr group_node;
-
-	gid = xst_xml_get_child_content (user_node, "gid");
-	group_node = get_corresp_field (get_db_node (user_node));
-	group_node = get_node_by_data (group_node, "gid", gid);
-	if (!group_node)
-		return gid;
-	
-	buf = xst_xml_get_child_content (group_node, "name");
-	if (!buf)
-		return gid;
-	
-	g_free (gid);
-	return buf;
-}
-
 static void *
 user_value_at (ETableModel *etm, int col, int row, void *model_data)
 {
 	xmlNodePtr node;
-	gchar *field;
 
 	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
@@ -304,49 +288,27 @@ user_value_at (ETableModel *etm, int col, int row, void *model_data)
 
 	switch (col)
 	{
-	case COL_USER_LOGIN:
-		field = g_strdup ("login");
-		break;
-	case COL_USER_UID:
-		field = g_strdup ("uid");
-		break;
-	case COL_USER_HOME:
-		field = g_strdup ("home");
-		break;
-	case COL_USER_SHELL:
-		field = g_strdup ("shell");
-		break;
-	case COL_USER_COMMENT:
-		field = g_strdup ("comment");
-		break;
-	case COL_USER_GROUP:
-		return user_value_group (node);
-		break;
-	case COL_USER_GID:
-		field = g_strdup ("gid");
-		break;
-	case COL_USER_COLOR:
-		return get_row_color (etm, row);
-		break;
+	case COL_USER_LOGIN:   return user_value_login (node); break;
+	case COL_USER_UID:     return user_value_uid_string (node); break;
+	case COL_USER_HOME:    return user_value_home (node); break;
+	case COL_USER_SHELL:   return user_value_shell (node); break;
+	case COL_USER_COMMENT: return user_value_comment (node); break;
+	case COL_USER_GROUP:   return user_value_group (node); break;
+	case COL_USER_GID:     return user_value_gid_string (node); break;
+
+	case COL_USER_COLOR:   return get_row_color (etm, row); break;
+
 	default:
 		g_warning ("user_value_at: wrong col nr");
-		return NULL;
+		break;
 	}
-
-	node = xst_xml_element_find_first (node, field);
-	g_free (field);
-
-	if (!node)
-		return NULL;
-
-	return xst_xml_element_get_content (node);
+	return NULL;
 }
 
 static void *
 group_value_at (ETableModel *etm, int col, int row, void *model_data)
 {
 	xmlNodePtr node;
-	gchar *field;
 
 	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	if (!node)
@@ -354,27 +316,16 @@ group_value_at (ETableModel *etm, int col, int row, void *model_data)
 
 	switch (col)
 	{
-	case COL_GROUP_NAME:
-		field = g_strdup ("name");
-		break;
-	case COL_GROUP_GID:
-		field = g_strdup ("gid");
-		break;
-	case COL_USER_COLOR:
-		return get_row_color (etm, row);
-		break;
+	case COL_GROUP_NAME: return group_value_name (node); break;
+	case COL_GROUP_GID:  return group_value_gid_string (node); break;
+		
+	case COL_USER_COLOR: return get_row_color (etm, row); break;
+		
 	default:
 		g_warning ("group_value_at: wrong col nr");
-		return NULL;
 	}
-
-	node = xst_xml_element_find_first (node, field);
-	g_free (field);
-
-	if (!node)
-		return NULL;
-
-	return xst_xml_element_get_content (node);
+	
+	return NULL;
 }
 
 static void *
@@ -386,7 +337,7 @@ net_group_value_at (ETableModel *etm, int col, int row, void *model_data)
 	if (!node)
 		return NULL;
 
-	return xst_xml_get_child_content (node, "name");
+	return group_value_name (node);
 }
 
 static void *
@@ -398,7 +349,7 @@ net_user_value_at (ETableModel *etm, int col, int row, void *model_data)
 	if (!node)
 		return NULL;
 
-	return xst_xml_get_child_content (node, "login");
+	return user_value_login (node);
 }
 
 static GtkWidget *
@@ -508,24 +459,20 @@ static gchar *
 get_row_color (ETableModel *etm, gint row)
 {
 	xmlNodePtr node, db_node;
-	gchar *buf = NULL;
-	gint id, min, max;
-
+	gint min, max;
+	gint id = -1;
+	
 	node = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 	db_node = get_db_node (node);
 	get_min_max (db_node, &min, &max);
 
 	if (!strcmp (db_node->name, "userdb"))
-		buf = xst_xml_get_child_content (node, "uid");
-
+		id = user_value_uid_integer (node);
 	else if (!strcmp (db_node->name, "groupdb"))
-		buf = xst_xml_get_child_content (node, "gid");
+		id = group_value_gid_integer (node);
 
-	if (!buf)
+	if (id < 0)
 		return NULL;
-
-	id = atoi (buf);
-	g_free (buf);
 
 	if (id >= min && id <= max)
 		return COLOR_NORMAL;

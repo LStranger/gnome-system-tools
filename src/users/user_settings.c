@@ -31,6 +31,7 @@
 #include "e-table.h"
 #include "user_settings.h"
 #include "profile.h"
+#include "user-group-xml.h"
 
 extern XstTool *tool;
 
@@ -50,7 +51,7 @@ get_user_groups (xmlNodePtr user_node)
 	g_return_val_if_fail (user_node != NULL, NULL);
 
 	group_node = get_corresp_field (user_node);
-	user_name = xst_xml_get_child_content (user_node, "login");
+	user_name = user_value_login (user_node);
 
 	if (!user_name)
 		return NULL;
@@ -70,11 +71,8 @@ get_user_groups (xmlNodePtr user_node)
 				continue;
 
 			if (!strcmp (user_name, buf))
-			{
-				grouplist = g_list_prepend (grouplist,
-							    xst_xml_get_child_content (g, "name"));
-			}
-
+				grouplist = g_list_prepend (grouplist, group_value_name (g));
+			
 			g_free (buf);
 		}
 	}
@@ -191,23 +189,15 @@ static void
 user_settings_basic_fill (UserSettings *us)
 {
 	/* Fill "Basic" tab widgets. */
-	gchar *buf;
 	Profile *pf;
 
 	if (!us->new)
 	{
-		gtk_entry_set_text (us->basic->name,
-				    xst_xml_get_child_content (us->node, "login"));
-		gtk_entry_set_text (us->basic->comment,
-				    xst_xml_get_child_content (us->node, "comment"));
-		gtk_entry_set_text (us->basic->home,
-				    xst_xml_get_child_content (us->node, "home"));
-		gtk_entry_set_text (us->basic->shell,
-				    xst_xml_get_child_content (us->node, "shell"));
-
-		buf = xst_xml_get_child_content (us->node, "uid");
-		gtk_spin_button_set_value (us->basic->uid, g_strtod (buf, NULL));
-		g_free (buf);
+		gtk_entry_set_text (us->basic->name, user_value_login (us->node));
+		gtk_entry_set_text (us->basic->comment, user_value_comment (us->node));
+		gtk_entry_set_text (us->basic->home, user_value_home (us->node));
+		gtk_entry_set_text (us->basic->shell, user_value_shell (us->node));
+		gtk_spin_button_set_value (us->basic->uid, user_value_uid_integer (us->node));
 	}
 
 	else /* New user. */
@@ -226,28 +216,14 @@ static void
 user_settings_group_fill (UserSettings *us)
 {
 	/* Fill "Groups" tab widgets. */
-	gchar *buf;
-	xmlNodePtr gnode, dbnode;
 	GList *users, *items, *members;
 	Profile *pf;
 
 	/* Main group. */
 	
 	user_fill_settings_group (us->group->main, us->node);
-
-	buf = xst_xml_get_child_content (us->node, "gid");
-	dbnode = get_corresp_field (get_db_node (us->node));
-	gnode = get_node_by_data (dbnode, "gid", buf);
-	g_free (buf);
-	buf = NULL;
-
-	if (gnode)
-		buf = xst_xml_get_child_content (gnode, "name");
-
-	if (buf)
-		my_gtk_entry_set_text (GTK_ENTRY (us->group->main->entry), buf);
-	else
-		my_gtk_entry_set_text (GTK_ENTRY (us->group->main->entry), "");
+	my_gtk_entry_set_text (GTK_ENTRY (us->group->main->entry),
+			       user_value_group (us->node));
 	
 	/* Members Secondary groups */
 	members = get_user_groups (us->node);

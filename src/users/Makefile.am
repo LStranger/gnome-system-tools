@@ -24,7 +24,8 @@ users_admin_SOURCES = \
 	md5.c md5.h md5_crypt.c \
 	e-table.c e-table.h  \
 	user_settings.c user_settings.h \
-	profile.c profile.h
+	profile.c profile.h \
+	user-group-xml.c user-group-xml.h
 
 users_admin_CFLAGS = 
 
