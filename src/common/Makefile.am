@@ -23,9 +23,10 @@ libsetuptool_a_SOURCES = \
 	xst-dialog.h	\
 	xst-tool.c	\
 	xst-tool.h	\
-	xst-types.h	\
-	tool.c		\
-	tool.h
+	xst-types.h
+
+#	tool.c		\
+#	tool.h
 
 ccenterdir = $(datadir)/control-center
 Systemdir = $(ccenterdir)/System

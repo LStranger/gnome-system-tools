@@ -3,4 +3,4 @@
 #include "xml.h"
 #include "xst-tool.h"
 #include "xst-dialog.h"
-#include "tool.h"
+
