@@ -489,7 +489,7 @@ on_connection_default_gw_activate (GtkWidget *widget, gpointer data)
 		gtk_tree_model_get (model, &iter, 0, &gw, -1);
 		g_object_steal_data (G_OBJECT (tool), "gatewaydev");
 
-		g_object_set_data (G_OBJECT (tool), "gatewaydev", data);
+		g_object_set_data (G_OBJECT (tool), "gatewaydev", gw);
 		g_free (gw);
 	}
 }
