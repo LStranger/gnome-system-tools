@@ -492,7 +492,7 @@ report_progress (GstTool *tool, const gchar *label)
 					     report_progress_tick, NULL, tool, NULL);
 	tool->input_block = FALSE;
 
-	gtk_main ();
+	gtk_main (); 
 
 	if (tool->input_id)
 		gtk_input_remove (tool->input_id);
@@ -929,8 +929,8 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 	xmlDoc *xml_out;
 	gchar *eor = g_strconcat ("\n", GST_TOOL_EOR, "\n", NULL);
 
-	gint n;
-	gchar buffer[512];
+	gchar buf;
+	GString *buffer;
 
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (GST_IS_TOOL (tool), NULL);
@@ -958,8 +958,15 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 
 		/* read all output from the fd, this is done because a single fd is user for
 		 * reading and writing */
+		buffer = g_string_new ("");
 		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
-		while (n = read (tool->backend_master_fd, buffer, sizeof (buffer) -1) > 0) {}
+
+		do {
+			read (tool->backend_master_fd, &buf, 1);
+			g_string_append_c (buffer, buf);
+		} while (g_strrstr (buffer->str, GST_TOOL_EOR) != NULL);
+
+		g_string_free (buffer, TRUE);
 		fcntl (tool->backend_master_fd, F_SETFL, 0);
 	}
 
