@@ -77,23 +77,23 @@ GType      gst_hig_dialog_get_type (void);
 GType      gtk_message_type_get_type (void);
 
 GtkWidget* gst_hig_dialog_new      (GtkWindow         *parent,
-																		GtkDialogFlags     flags,
-																		GstHigMessageType  type,
-																		const gchar       *primary_text,
-																		const gchar       *secondary_text,
-																		const gchar       *first_button_text,
-																		...) G_GNUC_PRINTF (6, 7);
+                                    GtkDialogFlags     flags,
+                                    GstHigMessageType  type,
+                                    const gchar       *primary_text,
+                                    const gchar       *secondary_text,
+                                    const gchar       *first_button_text,
+                                    ...) G_GNUC_PRINTF (6, 7);
 
 void       gst_hig_dialog_set_primary_text (GstHigDialog *dialog,
-																						const gchar  *message_format,
-																						...) G_GNUC_PRINTF (2, 3);
+                                            const gchar  *message_format,
+                                            ...) G_GNUC_PRINTF (2, 3);
 
 void       gst_hig_dialog_set_secondary_text (GstHigDialog *dialog,
-																							const gchar  *message_format,
-																							...) G_GNUC_PRINTF (2, 3);
+                                              const gchar  *message_format,
+                                              ...) G_GNUC_PRINTF (2, 3);
 
 void       gst_hig_dialog_set_extra_widget   (GstHigDialog *dialog,
-																							GtkWidget    *extra_widget);
+                                              GtkWidget    *extra_widget);
 
 #ifdef __cplusplus
 }
