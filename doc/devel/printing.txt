@@ -21,6 +21,8 @@ Index
 
 4      Printer Drivers
 
+5      Postscript Printing
+
 1  Printcap
 -----------
 
@@ -159,3 +161,18 @@ sections [2.1.1-2.1.3]). So, this file is irrelevant after the printer is config
 
 Apart from this, Red Hat doesn't seem to have a concept of printer drivers.
 
+
+5 Postscript Printing
+---------------------
+
+We are going to use PPD files for printing to ghostscript printers. In the non-gnome-print case
+we might use ppdfilt from our friends at VA.
+[http://sourceforge.net/project/showfiles.php?group_id=3800&release_id=22012]
+
+ppdfilt takes as input a Postcript File, a ppd file and a set of selected options, it then merges
+the input Postcript and generates a Printer Specific Postscript containing all the commands to
+set the selected options.
+
+For gnome-print, we will import the PPD files and convert them first to our own XML format and
+write the XML for gnome-print to use. The postscript driver will talk to libppd so that libppd
+can add the postcript commands to the page.
