@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools\n"
-"POT-Creation-Date: 2000-12-19 01:58+0100\n"
-"PO-Revision-Date: 2000-12-19 02:04+0100\n"
+"POT-Creation-Date: 2000-12-22 01:23+0100\n"
+"PO-Revision-Date: 2000-12-22 01:34+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,8 @@ msgstr "Montera denna partition"
 msgid "Open settings dialog for selected import"
 msgstr "Öppna inställningsfönstret för vald import"
 
-#: interfaces/disks.glade.h:21 interfaces/nameresolution.glade.h:41
+#: interfaces/disks.glade.h:21 interfaces/memory.glade.h:28
+#: interfaces/memory.glade.h:37 interfaces/nameresolution.glade.h:42
 #: interfaces/shares.glade.h:20 interfaces/shares.glade.h:34
 #: interfaces/shares.glade.h:39 interfaces/shares.glade.h:45
 #: interfaces/users.glade.h:14 interfaces/users.glade.h:21
@@ -125,11 +126,11 @@ msgstr "Diskar och partitioner"
 
 #. Translation: respect the spaces before and after, and the minus than signs.
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
-#: interfaces/nameresolution.glade.h:43 interfaces/networking.glade.h:15
+#: interfaces/nameresolution.glade.h:44 interfaces/networking.glade.h:15
 #: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
-#: interfaces/users.glade.h:23 src/common/tool.c:618
-msgid " Advanced >> "
-msgstr " Avancerat >> "
+#: interfaces/users.glade.h:39 src/common/tool.c:621
+msgid " More Options >> "
+msgstr " Fler alternativ >> "
 
 #: interfaces/disks.glade.h:25
 msgid "Partition Settings"
@@ -139,7 +140,7 @@ msgstr "Partitionsinställningar"
 msgid "Type:"
 msgstr "Typ:"
 
-#: interfaces/disks.glade.h:27
+#: interfaces/disks.glade.h:27 interfaces/memory.glade.h:26
 msgid "Device:"
 msgstr "Enhet:"
 
@@ -236,20 +237,20 @@ msgstr "Domännamnstjänst (DNS)"
 msgid "New server:"
 msgstr "Ny server:"
 
-#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
-#: interfaces/nameresolution.glade.h:49
+#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:33
+#: interfaces/nameresolution.glade.h:50
 msgid "Existing:"
 msgstr "Existerande:"
 
-#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:27
-#: interfaces/nameresolution.glade.h:47 interfaces/shares.glade.h:32
+#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:28
+#: interfaces/nameresolution.glade.h:48 interfaces/shares.glade.h:32
 #: interfaces/shares.glade.h:40 interfaces/shares.glade.h:43
 #: interfaces/time.glade.h:13
 msgid "Add"
 msgstr "Lägg till"
 
-#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:28
-#: interfaces/nameresolution.glade.h:38 interfaces/nameresolution.glade.h:48
+#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:29
+#: interfaces/nameresolution.glade.h:39 interfaces/nameresolution.glade.h:49
 #: interfaces/users.glade.h:10 interfaces/users.glade.h:18
 msgid "Delete"
 msgstr "Ta bort"
@@ -262,23 +263,27 @@ msgstr "Använd WINS-server:"
 msgid "Servers"
 msgstr "Servrar"
 
-#: interfaces/nameresolution.glade.h:29
+#: interfaces/nameresolution.glade.h:27
+msgid "Domain Lookup Order"
+msgstr "Ordning för domänuppslagning"
+
+#: interfaces/nameresolution.glade.h:30
 msgid " Move Up"
 msgstr " Flytta upp"
 
-#: interfaces/nameresolution.glade.h:30
+#: interfaces/nameresolution.glade.h:31
 msgid "Move Down"
 msgstr "Flytta ner"
 
-#: interfaces/nameresolution.glade.h:31
+#: interfaces/nameresolution.glade.h:32
 msgid "New domain:"
 msgstr "Ny domän:"
 
-#: interfaces/nameresolution.glade.h:33
+#: interfaces/nameresolution.glade.h:34
 msgid "Search Domains"
 msgstr "Sökdomäner"
 
-#: interfaces/nameresolution.glade.h:34
+#: interfaces/nameresolution.glade.h:35
 msgid ""
 "Assign aliases to IP addresses that may not be registered in the DNS or WINS "
 "servers, or to override or set new names for commonly used IP addresses. "
@@ -287,46 +292,42 @@ msgstr ""
 "WINS-servrar, eller för att skriva över eller ställa in nya namn för vanligt "
 "använda IP-adresser. "
 
-#: interfaces/nameresolution.glade.h:35
+#: interfaces/nameresolution.glade.h:36
 msgid "IP address"
 msgstr "IP-adress"
 
-#: interfaces/nameresolution.glade.h:36
+#: interfaces/nameresolution.glade.h:37
 msgid " Names"
 msgstr " Namn"
 
-#: interfaces/nameresolution.glade.h:37
+#: interfaces/nameresolution.glade.h:38
 msgid "New Alias"
 msgstr "Nytt alias"
 
-#: interfaces/nameresolution.glade.h:39 src/nameresolution/callbacks.c:339
-#: src/nameresolution/callbacks.c:382
+#: interfaces/nameresolution.glade.h:40 src/nameresolution/callbacks.c:354
+#: src/nameresolution/callbacks.c:398
 msgid "Settings for the selected alias"
 msgstr "Inställningar för det markerade aliaset"
 
-#: interfaces/nameresolution.glade.h:40
+#: interfaces/nameresolution.glade.h:41
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "Ändra aliasets IP-adress eller dess tillhörande namn."
 
-#: interfaces/nameresolution.glade.h:42 interfaces/nameresolution.glade.h:46
+#: interfaces/nameresolution.glade.h:43 interfaces/nameresolution.glade.h:47
 msgid "Aliases"
 msgstr "Alias"
 
-#: interfaces/nameresolution.glade.h:44
+#: interfaces/nameresolution.glade.h:45
 msgid "Aliases Settings"
 msgstr "Aliasinställningar"
 
-#: interfaces/nameresolution.glade.h:45
+#: interfaces/nameresolution.glade.h:46
 msgid "IP address:"
 msgstr "IP-adress:"
 
-#: interfaces/nameresolution.glade.h:50
+#: interfaces/nameresolution.glade.h:51 interfaces/users.glade.h:52
 msgid "New:"
 msgstr "Ny:"
-
-#: interfaces/nameresolution.glade.h:51
-msgid "label48"
-msgstr "label48"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -418,7 +419,8 @@ msgstr "Namn"
 msgid "Path"
 msgstr "Sökväg"
 
-#: interfaces/memory.glade.h:11 interfaces/shares.glade.h:25
+#: interfaces/memory.glade.h:11 interfaces/memory.glade.h:27
+#: interfaces/memory.glade.h:36 interfaces/shares.glade.h:25
 #: interfaces/shares.glade.h:31
 msgid "Enabled"
 msgstr "Aktiverad"
@@ -476,7 +478,7 @@ msgstr "Importinställningar"
 msgid "Host:"
 msgstr "Värd:"
 
-#: interfaces/memory.glade.h:22 interfaces/shares.glade.h:51
+#: interfaces/memory.glade.h:38 interfaces/shares.glade.h:51
 msgid "Path:"
 msgstr "Sökväg:"
 
@@ -508,7 +510,7 @@ msgstr "Lokal sökväg:"
 msgid "Export name:"
 msgstr "Exportnamn:"
 
-#: interfaces/shares.glade.h:61 interfaces/users.glade.h:28
+#: interfaces/shares.glade.h:61 interfaces/users.glade.h:44
 msgid "Comment:"
 msgstr "Kommentar:"
 
@@ -583,7 +585,7 @@ msgstr ""
 msgid "New User"
 msgstr "Ny användare"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:273
+#: interfaces/users.glade.h:11 src/users/callbacks.c:275
 msgid "Settings for the selected user"
 msgstr "Inställningar för den markerade användaren"
 
@@ -591,7 +593,8 @@ msgstr "Inställningar för den markerade användaren"
 msgid "Change the user's password or options like its name."
 msgstr "Byt användarens lösenord eller alternativ som användarens namn."
 
-#: interfaces/users.glade.h:13 interfaces/users.glade.h:33
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:49
+#: interfaces/users.glade.h:51
 msgid "Change Password"
 msgstr "Byt lösenord"
 
@@ -619,87 +622,157 @@ msgstr "Ändra alternativ för gruppen som dess namn och medlemmar."
 msgid "Groups"
 msgstr "Grupper"
 
+#: interfaces/users.glade.h:23
+msgid ""
+"These are global values that will affect the creation of new users. They are "
+"only available when you click \"More Options\"."
+msgstr ""
+"Det här är globala värden som kommer att påverka skapandet av nya användare. "
+"De är endast tillgängliga om du klickar på \"Fler alternativ\"."
+
 #: interfaces/users.glade.h:24
+msgid "System settings"
+msgstr "Systeminställningar"
+
+#: interfaces/users.glade.h:25
+msgid "Mailbox directory:"
+msgstr "Brevlådekatalog:"
+
+#: interfaces/users.glade.h:26
+msgid "Create home  for new users:"
+msgstr "Skapa hem  för nya användare:"
+
+#: interfaces/users.glade.h:27
+msgid "Min/max values for automatic UID/GID"
+msgstr "Minsta/största värde för automatiskt UID/GID"
+
+#: interfaces/users.glade.h:28
+msgid "Maximum UID:"
+msgstr "Största UID:"
+
+#: interfaces/users.glade.h:29
+msgid "Minimum UID:"
+msgstr "Minsta UID:"
+
+#: interfaces/users.glade.h:30
+msgid "Minimum GID:"
+msgstr "Minsta GID:"
+
+#: interfaces/users.glade.h:31
+msgid "Maximum GID:"
+msgstr "Största GID:"
+
+#: interfaces/users.glade.h:32
+msgid "Password expiration"
+msgstr "Lösenordsgiltighet"
+
+#: interfaces/users.glade.h:33
+msgid "Days a password may be used:"
+msgstr "Antal dagar som ett lösenord kan användas:"
+
+#: interfaces/users.glade.h:34
+msgid "Minimum days allowed between password changes:"
+msgstr "Minsta antalet dagar mellan lösenordsbyten:"
+
+#: interfaces/users.glade.h:35
+msgid ""
+"Days between warning and\n"
+" assword expiration:  "
+msgstr ""
+"Antalet dagar mellan varning\n"
+"och utgång av lösenord: "
+
+#: interfaces/users.glade.h:37
+msgid "Minimum  password length:"
+msgstr "Minsta lösenordslängd:"
+
+#: interfaces/users.glade.h:38
+msgid "Defaults"
+msgstr "Standardvärden"
+
+#: interfaces/users.glade.h:40
 msgid "User Settings"
 msgstr "Användarinställningar"
 
-#: interfaces/users.glade.h:25
+#: interfaces/users.glade.h:41
 msgid "Basic settings"
 msgstr "Grundläggande inställningar"
 
-#: interfaces/users.glade.h:26
+#: interfaces/users.glade.h:42
 msgid "Main group:"
 msgstr "Huvudgrupp:"
 
-#: interfaces/users.glade.h:27
+#: interfaces/users.glade.h:43
 msgid "User name:"
 msgstr "Användarnamn:"
 
-#: interfaces/users.glade.h:29
+#: interfaces/users.glade.h:45
 msgid "Advanced settings"
 msgstr "Avancerade inställningar"
 
-#: interfaces/users.glade.h:30
+#: interfaces/users.glade.h:46
 msgid "Shell:"
 msgstr "Skal:"
 
-#: interfaces/users.glade.h:31
+#: interfaces/users.glade.h:47
 msgid "User ID:"
 msgstr "Användar-ID:"
 
-#: interfaces/users.glade.h:32
+#: interfaces/users.glade.h:48
 msgid "Home directory:"
 msgstr "Hemkatalog:"
 
-#: interfaces/users.glade.h:34
-msgid "New password:"
-msgstr "Nytt lösenord:"
+#: interfaces/users.glade.h:50
+msgid "Enter a new password manually, or have one randomly assigned."
+msgstr ""
+"Ange ett nytt lösenord manuellt, eller få ett slumpmässigt lösenord "
+"tilldelat."
 
-#: interfaces/users.glade.h:35
-msgid "Confirmation:"
-msgstr "Bekräftelse:"
+#: interfaces/users.glade.h:53
+msgid "Confirm:"
+msgstr "Bekräfta:"
 
-#: interfaces/users.glade.h:36
-msgid "Check quality."
-msgstr "Kontrollera kvalitet."
-
-#: interfaces/users.glade.h:37
+#: interfaces/users.glade.h:54
 msgid "  Random Password  "
 msgstr "  Slumpmässigt lösenord  "
 
-#: interfaces/users.glade.h:38
+#: interfaces/users.glade.h:55
+msgid "Check password quality"
+msgstr "Kontrollera lösenordskvalitet"
+
+#: interfaces/users.glade.h:56
 msgid "Group Settings"
 msgstr "Gruppinställningar"
 
-#: interfaces/users.glade.h:39
+#: interfaces/users.glade.h:57
 msgid "Group name:"
 msgstr "Gruppnamn:"
 
-#: interfaces/users.glade.h:40
+#: interfaces/users.glade.h:58
 msgid "Members"
 msgstr "Medlemmar"
 
-#: interfaces/users.glade.h:41
+#: interfaces/users.glade.h:59
 msgid "All Users"
 msgstr "Alla användare"
 
-#: interfaces/users.glade.h:42
-msgid "Member Users"
-msgstr "Medlemsanvändare"
+#: interfaces/users.glade.h:60
+msgid "Group Members"
+msgstr "Gruppmedlemmar"
 
-#: interfaces/users.glade.h:43
+#: interfaces/users.glade.h:61
 msgid "Add ->"
 msgstr "Lägg till ->"
 
-#: interfaces/users.glade.h:44
+#: interfaces/users.glade.h:62
 msgid "Remove <-"
 msgstr "Ta bort <-"
 
-#: interfaces/users.glade.h:45
+#: interfaces/users.glade.h:63
 msgid "label27"
 msgstr "label27"
 
-#: interfaces/users.glade.h:46
+#: interfaces/users.glade.h:64
 msgid "label26"
 msgstr "label26"
 
@@ -709,7 +782,7 @@ msgstr "label26"
 #. * DO NOT compile it as part of your application.
 #.
 #: interfaces/memory.glade.h:7
-msgid "Memory administration"
+msgid "Memory Administration"
 msgstr "Minnesadministration"
 
 #: interfaces/memory.glade.h:8
@@ -740,63 +813,63 @@ msgstr "Inställningar..."
 msgid "Available partitions:"
 msgstr "Tillgängliga partitioner:"
 
-#: interfaces/memory.glade.h:23 interfaces/memory.glade.h:33
-msgid "Size:"
-msgstr "Storlek:"
-
-#: interfaces/memory.glade.h:24
-msgid "Swap Partition"
-msgstr "Växlingspartition"
-
-#: interfaces/memory.glade.h:25
-msgid "Swap File"
-msgstr "Växlingsfil"
-
-#: interfaces/memory.glade.h:26
-msgid "Megabytes"
-msgstr "megabyte"
-
-#: interfaces/memory.glade.h:27 interfaces/memory.glade.h:31
-msgid "Enable this swap space"
-msgstr "Aktivera detta växlingsutrymme"
-
-#: interfaces/memory.glade.h:28
-msgid "Use non-default priority:"
-msgstr "Använd prioritet som är icke-standard:"
-
-#: interfaces/memory.glade.h:29
-msgid "Browse..."
-msgstr "Bläddra..."
-
-#: interfaces/memory.glade.h:30
-msgid "Swap device"
-msgstr "Växlingsenhet"
-
-#: interfaces/memory.glade.h:32
-msgid "Use non-default priority"
-msgstr "Använd prioritet som är icke-standard"
-
-#: interfaces/memory.glade.h:34
-msgid "Mb"
-msgstr "MB"
-
-#: interfaces/memory.glade.h:35
+#: interfaces/memory.glade.h:22
 msgid "Select  Swap File"
 msgstr "Välj växlingsfil"
 
-#: interfaces/memory.glade.h:36
+#: interfaces/memory.glade.h:23
 msgid "OK"
 msgstr "OK"
 
-#: interfaces/memory.glade.h:37
+#: interfaces/memory.glade.h:24
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/common/tool.c:620
-msgid " << Basic "
-msgstr " << Grundläggande "
+#: interfaces/memory.glade.h:25
+msgid "Swap Settings"
+msgstr "Växlingsminnesinställningar"
 
-#: src/common/tool.c:715
+#: interfaces/memory.glade.h:29 interfaces/memory.glade.h:40
+msgid "Size:"
+msgstr "Storlek:"
+
+#: interfaces/memory.glade.h:30 interfaces/memory.glade.h:39
+msgid "Priority:"
+msgstr "Prioritet:"
+
+#: interfaces/memory.glade.h:31 interfaces/memory.glade.h:41
+msgid "MB"
+msgstr "MB"
+
+#: interfaces/memory.glade.h:32
+msgid "New Swap Device"
+msgstr "Ny växlingsenhet"
+
+#: interfaces/memory.glade.h:33
+msgid "Swap type:"
+msgstr "Växlingstyp:"
+
+#: interfaces/memory.glade.h:34
+msgid "partition"
+msgstr "partition"
+
+#: interfaces/memory.glade.h:35
+msgid "file"
+msgstr "fil"
+
+#: interfaces/memory.glade.h:42
+msgid "Browse..."
+msgstr "Bläddra..."
+
+#: src/common/tool.c:624
+msgid " Full Options >> "
+msgstr " Alla alternativ >> "
+
+#: src/common/tool.c:627
+msgid " << Few Options "
+msgstr " << Få alternativ "
+
+#: src/common/tool.c:734
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -815,16 +888,16 @@ msgstr ""
 "Fortsätta ändå?"
 
 #. No name, no swap
-#: src/memory/callbacks.c:569
+#: src/memory/callbacks.c:536
 msgid "You have to specify path to new swap location!"
 msgstr "Du måste ange sökvägen till det nya växlingsutrymmet!"
 
 #. It's already in there, can't add
-#: src/memory/callbacks.c:584
+#: src/memory/callbacks.c:551
 msgid "It's already used as swap space!"
 msgstr "Det används redan som växlingsutrymme!"
 
-#: src/nameresolution/callbacks.c:114
+#: src/nameresolution/callbacks.c:121
 msgid ""
 "The IP address must have the form of four digits\n"
 "sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
@@ -834,30 +907,34 @@ msgstr ""
 "Dessa tal måste vara i intervallet 0 till 255, förutom det första och\n"
 "sista, som måste vara i intervallet 1 till 254."
 
-#: src/nameresolution/callbacks.c:200
+#: src/nameresolution/callbacks.c:210
 msgid ""
 "The domain may only contain letters, numbers and dots (.),\n"
-"wich may work as sub-domain separators."
+"which may work as sub-domain separators."
 msgstr ""
 "Domänen kan endast innehålla bokstäver, siffror och punkter (.),\n"
 "som kan användas som avskiljare för subdomäner."
 
-#: src/nameresolution/callbacks.c:326
+#: src/nameresolution/callbacks.c:341
 msgid "Settings for alias of "
 msgstr "Inställningar för aliaset "
 
-#: src/nameresolution/callbacks.c:371
+#: src/nameresolution/callbacks.c:366
+msgid "Create New Alias"
+msgstr "Skapa nytt alias"
+
+#: src/nameresolution/callbacks.c:387
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Är du säker på att du vill ta bort aliasen för %s?"
 
-#: src/nameresolution/callbacks.c:405
+#: src/nameresolution/callbacks.c:421
 #, c-format
 msgid "Settings for Alias %s"
 msgstr "Inställningar för aliaset %s"
 
 #. Changes have been made.
-#: src/nameresolution/callbacks.c:556 src/users/callbacks.c:691
+#: src/nameresolution/callbacks.c:651 src/users/callbacks.c:708
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
@@ -865,46 +942,54 @@ msgstr ""
 "Det finns ändringar som inte har verkställts än.\n"
 "Verkställ nu?"
 
-#: src/users/callbacks.c:164
+#: src/nameresolution/callbacks.c:756
+msgid ""
+"The alias entry may only contain letters, numbers and dots (.),\n"
+"which may work as sub-domain separators."
+msgstr ""
+"Aliaset kan endast innehålla bokstäver, siffror och punkter (.),\n"
+"som kan användas som avskiljare för subdomäner."
+
+#: src/users/callbacks.c:166
 #, c-format
 msgid "Settings for User %s"
 msgstr "Inställningar för användaren %s"
 
-#: src/users/callbacks.c:188
+#: src/users/callbacks.c:190
 #, c-format
 msgid "Password for User %s"
 msgstr "Lösenord för användaren %s"
 
-#: src/users/callbacks.c:252
+#: src/users/callbacks.c:254
 msgid "The root user must not be deleted."
 msgstr "Användaren root får inte tas bort."
 
-#: src/users/callbacks.c:259
+#: src/users/callbacks.c:261
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/callbacks.c:311
+#: src/users/callbacks.c:313
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
 
-#: src/users/callbacks.c:331
+#: src/users/callbacks.c:333
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/callbacks.c:360
+#: src/users/callbacks.c:362
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/callbacks.c:482
+#: src/users/callbacks.c:492
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "Lösenordet sattes till \"%s\"."
 
 #. Bad confirmation
-#: src/users/callbacks.c:520
+#: src/users/callbacks.c:530
 msgid ""
 "The password and its confirmation\n"
 "must match."
@@ -913,7 +998,7 @@ msgstr ""
 "måste stämma överens."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:526
+#: src/users/callbacks.c:536
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -966,6 +1051,42 @@ msgstr ""
 #: src/users/user_group.c:409
 msgid "Group name is empty."
 msgstr "Gruppnamnet är tomt."
+
+#~ msgid " Advanced >> "
+#~ msgstr " Avancerat >> "
+
+#~ msgid "label48"
+#~ msgstr "label48"
+
+#~ msgid "New password:"
+#~ msgstr "Nytt lösenord:"
+
+#~ msgid "Member Users"
+#~ msgstr "Medlemsanvändare"
+
+#~ msgid "Swap Partition"
+#~ msgstr "Växlingspartition"
+
+#~ msgid "Swap File"
+#~ msgstr "Växlingsfil"
+
+#~ msgid "Megabytes"
+#~ msgstr "megabyte"
+
+#~ msgid "Enable this swap space"
+#~ msgstr "Aktivera detta växlingsutrymme"
+
+#~ msgid "Use non-default priority:"
+#~ msgstr "Använd prioritet som är icke-standard:"
+
+#~ msgid "Use non-default priority"
+#~ msgstr "Använd prioritet som är icke-standard"
+
+#~ msgid "Mb"
+#~ msgstr "MB"
+
+#~ msgid " << Basic "
+#~ msgstr " << Grundläggande "
 
 #~ msgid ""
 #~ "Automatic (detect when mounting)\n"
