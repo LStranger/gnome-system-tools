@@ -22,6 +22,7 @@ pixmaps_DATA = \
 	nameresolution_id.png			\
 	networking.png  			\
 	passwd.png  				\
+	print.png  				\
 	reading.png  				\
 	server.png  				\
 	settings.png  				\
