@@ -891,7 +891,7 @@ on_connection_cancel_clicked (GtkWidget *w, gpointer data)
 void
 on_connection_help_clicked (GtkWidget *w, gpointer data)
 {
-	gst_tool_show_help (tool, NULL);
+	gst_tool_show_help (tool, "tool-modify-connection");
 }
 
 void
@@ -1316,7 +1316,7 @@ on_network_druid_hide (GtkWidget *w, gpointer data)
 void
 on_network_druid_help (GtkWidget *w, gpointer data)
 {
-	gst_tool_show_help (tool, NULL);
+	gst_tool_show_help (tool, "tool-add-new-interface");
 }
 
 gboolean
@@ -1498,7 +1498,7 @@ on_network_profile_new_clicked (GtkWidget *widget, gpointer data)
 void
 on_network_profile_help_clicked (GtkWidget *widget, gpointer data)
 {
-	gst_tool_show_help (tool, NULL);
+	gst_tool_show_help (tool, "tool-add-new-profile");
 }
 
 void
