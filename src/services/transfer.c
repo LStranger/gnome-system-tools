@@ -37,9 +37,9 @@ transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
 	xmlNodePtr runlevel;
 	GtkWidget *menu_item, *menu_shell;
 	GstWidget *option_menu;
-	gint i, n_option, first_runlevel;
+	gchar *first_runlevel, *str;
 	gboolean has_default = FALSE;
-	gint n_items = 0;
+	gint n_option, n_items = 0;
 	
 	option_menu = gst_dialog_get_gst_widget (tool->main_dialog, "runlevels_menu");
 	gtk_option_menu_remove_menu (GTK_OPTION_MENU (option_menu->widget));
@@ -50,27 +50,27 @@ transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
 	     runlevel != NULL;
 	     runlevel = gst_xml_element_find_next (runlevel, "runlevel"))
 	{
-		i = atoi (gst_xml_get_child_content (runlevel, "number"));
-
+		str = gst_xml_get_child_content (runlevel, "number");
+		
 		/* we save the first runlevel, just if there is no default runlevel */
 		if (n_items == 0)
-			first_runlevel = i;
+			first_runlevel = str;
 		
 		menu_item = gtk_menu_item_new_with_label (gst_xml_get_child_content (runlevel,
 										     "description"));
 		gtk_menu_shell_append (GTK_MENU_SHELL (menu_shell), menu_item);
 
 		g_signal_connect (G_OBJECT (menu_item), "activate",
-				  G_CALLBACK (on_runlevel_changed), GINT_TO_POINTER (i));
+				  G_CALLBACK (on_runlevel_changed), str);
 
-		g_object_set_data (G_OBJECT (menu_item), "runlevel", GINT_TO_POINTER (i));
+		g_object_set_data (G_OBJECT (menu_item), "runlevel", str);
 
 		if (gst_xml_get_child_content (runlevel, "default") != NULL) {
 			/* It's the default runlevel */
 			has_default = TRUE;
 			n_option = n_items;
 			g_object_set_data (G_OBJECT (menu_item), "default", GINT_TO_POINTER (TRUE));
-			change_runlevel (i);
+			change_runlevel (str);
 		}
 
 		n_items++;
@@ -93,23 +93,6 @@ transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
 	}
 }
 
-/* check the first service, if it doesn't have priority,
- * hide the "order by startup sequence" button */
-void transfer_check_show_startup_sequence_button (xmlNodePtr root) {
-	xmlNodePtr services, service, priority;
-
-	services = gst_xml_element_find_first (root, "services");
-	g_return_if_fail (services != NULL);
-
-	service = gst_xml_element_find_first (services, "service");
-	g_return_if_fail (service != NULL);
-
-	priority = gst_xml_element_find_first (service, "priority");
-
-	if (!priority)
-		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "sequence_ordering"));
-}
-
 void
 transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
@@ -118,5 +101,5 @@ transfer_xml_to_gui (GstTool *tool, gpointer data)
 	g_return_if_fail (root != NULL);
 
 	transfer_populate_option_menu (tool, root);
-	transfer_check_show_startup_sequence_button (root);
+	hide_sequence_ordering_toggle_button (root);
 }

@@ -162,33 +162,31 @@ table_value_service(xmlNodePtr node)
 }
 
 static gboolean
-table_value_active (xmlNodePtr node, gint runlevel)
+table_value_active (xmlNodePtr node, gchar *runlevel)
 {
 	gboolean value = FALSE;
 	xmlNodePtr runlevels = gst_xml_element_find_first (node, "runlevels");
 	xmlNodePtr rl;
-	gchar *number, *action;
+	gchar *str, *action;
 
 	if (runlevels) {
 		for (rl = gst_xml_element_find_first (runlevels, "runlevel");
 		     rl != NULL;
 		     rl = gst_xml_element_find_next (rl, "runlevel"))
 		{
-			number = gst_xml_get_child_content (rl, "number");
+			str = gst_xml_get_child_content (rl, "number");
 
-			if (g_ascii_isdigit (number[0])) {
-				if (atoi (number) == runlevel) {
-					action = gst_xml_get_child_content (rl, "action");
+			if (str && runlevel && (strcmp (str, runlevel) == 0)) {
+				action = gst_xml_get_child_content (rl, "action");
 
-					if (strcmp (action, "start") == 0) {
-						g_free (action);
+				if (strcmp (action, "start") == 0) {
+					g_free (action);
 
-						value = TRUE;
-					}
+					value = TRUE;
 				}
 			}
 
-			g_free (number);
+			g_free (str);
 		}
 	}
 
@@ -198,11 +196,16 @@ table_value_active (xmlNodePtr node, gint runlevel)
 static gint
 table_value_priority (xmlNodePtr node)
 {
-	return (gint) g_strtod (gst_xml_get_child_content (node, "priority"), NULL);
+	gchar *str = gst_xml_get_child_content (node, "priority");
+
+	if (!str)
+		return 0;
+	
+	return (gint) g_strtod (str, NULL);
 }
 
 static TreeItem*
-get_node_data (xmlNodePtr service, gint runlevel)
+get_node_data (xmlNodePtr service, gchar *runlevel)
 {
 	TreeItem *item = g_malloc (sizeof(TreeItem));
 
@@ -214,7 +217,7 @@ get_node_data (xmlNodePtr service, gint runlevel)
 }
 
 void 
-table_populate (xmlNodePtr root, gint runlevel)
+table_populate (xmlNodePtr root, gchar *runlevel)
 {
 	xmlNodePtr service,services;
 	GtkTreeIter iter;

@@ -48,7 +48,7 @@ static GstWidgetPolicy policies [] = {
 	/* Name                     Basic                        Advanced                   Root   User */
 	{ "settings_button",        GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "runlevels_menu",         GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE },
-	{ "sequence_ordering",      GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE },
+	{ "sequence_ordering",      GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_HIDDEN,    TRUE,  TRUE },
 	{NULL}
 };
 
@@ -63,8 +63,13 @@ main (int argc, char *argv[])
 
 	gst_dialog_set_widget_policies (tool->main_dialog, policies);
 	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
+
 	gst_dialog_connect_signals (tool->main_dialog, signals);
-	
+	g_signal_connect (G_OBJECT (tool->main_dialog),
+			  "complexity_change",
+			  G_CALLBACK (on_dialog_complexity_change),
+			  tool);
+
 	gst_dialog_enable_complexity (tool->main_dialog);
 
 	gst_tool_main (tool,FALSE);

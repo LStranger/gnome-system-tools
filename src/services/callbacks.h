@@ -36,9 +36,11 @@ void            on_throw_service_button_clicked         (GtkWidget*,   gpointer)
 void            on_service_priority_changed             (GtkWidget*,   gpointer);
 void            on_runlevel_changed                     (GtkWidget*,   gpointer);
 void            on_service_toggled                      (GtkWidget*,   gchar*, gpointer);
-void            on_popup_settings_activate              (gpointer, guint, GtkWidget*);
+void            on_popup_settings_activate              (gpointer,     guint, GtkWidget*);
 void            on_sequence_ordering_changed            (GtkWidget*,   gpointer);
-gboolean        on_table_button_press_event             (GtkWidget*, GdkEventButton*, gpointer);
-void            change_runlevel                         (gint);
+gboolean        on_table_button_press_event             (GtkWidget*,   GdkEventButton*, gpointer);
+void            on_dialog_complexity_change             (GtkWidget*,   GstTool*);
+void            change_runlevel                         (gchar*);
+void            hide_sequence_ordering_toggle_button    (xmlNodePtr);
 
 #endif /* CALLBACKS_H */

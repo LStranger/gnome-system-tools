@@ -145,12 +145,34 @@ toggle_service (GstTool *tool, xmlNodePtr service, gint runlevel, gboolean statu
 }
 
 void
-change_runlevel (gint runlevel)
+change_runlevel (gchar *runlevel)
 {
 	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
 
 	table_clear ();
 	table_populate (root, runlevel);
+}
+
+/* check the first service, if it doesn't have priority,
+ * hide the "order by startup sequence" button */
+void
+hide_sequence_ordering_toggle_button (xmlNodePtr root)
+{
+	GtkWidget *widget = gst_dialog_get_widget (tool->main_dialog, "sequence_ordering");
+	xmlNodePtr services, service, priority;
+
+	services = gst_xml_element_find_first (root, "services");
+	g_return_if_fail (services != NULL);
+
+	service = gst_xml_element_find_first (services, "service");
+	g_return_if_fail (service != NULL);
+
+	priority = gst_xml_element_find_first (service, "priority");
+
+	if (!priority)
+		gtk_widget_hide (widget);
+	else
+		gtk_widget_show (widget);
 }
 
 /* callbacks */
@@ -345,9 +367,7 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 void
 on_runlevel_changed (GtkWidget *widget, gpointer data)
 {
-	gint runlevel = GPOINTER_TO_INT (data);
-
-	change_runlevel (runlevel);
+	change_runlevel (data);
 }
 
 void
@@ -420,12 +440,6 @@ on_table_button_press_event (GtkWidget *widget, GdkEventButton *event, gpointer 
 }
 
 void
-on_priority_changed (GtkWidget *widget, gpointer data)
-{
-	
-}
-
-void
 on_sequence_ordering_changed (GtkWidget *widget, gpointer data)
 {
 	GtkTreeView *treeview = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
@@ -441,4 +455,11 @@ on_sequence_ordering_changed (GtkWidget *widget, gpointer data)
 	} else {
 		gtk_tree_view_column_clicked (services_column);
 	}
+}
+
+void
+on_dialog_complexity_change (GtkWidget *widget, GstTool *tool)
+{
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	hide_sequence_ordering_toggle_button (root);
 }
