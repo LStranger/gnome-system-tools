@@ -590,7 +590,7 @@ xst_tool_run_platform_dialog (XstTool *tool)
 
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
 
-	gnome_dialog_run (GNOME_DIALOG (tool->platform_dialog));
+	gtk_dialog_run (GTK_DIALOG (tool->platform_dialog));
 }
 
 static void
@@ -1148,12 +1148,15 @@ xst_tool_save_cb (GtkWidget *w, XstTool *tool)
 void
 xst_tool_load_try (XstTool *tool)
 {
-	GtkWidget *d;
-
 	if (!xst_tool_load (tool)) {
-		d = gnome_ok_dialog (_("There was an error running the backend script,\n"
-				       "and the configuration could not be loaded."));
-		gnome_dialog_run_and_close (GNOME_DIALOG (d));
+		GtkWidget *d;
+
+		d = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR,
+					    GTK_BUTTONS_CLOSE,
+					    _("There was an error running the backend script,\n"
+					      "and the configuration could not be loaded."));
+
+		gtk_dialog_run (GTK_DIALOG (d));
 		exit (0);
 	}
 }
@@ -1165,7 +1168,6 @@ xst_tool_main (XstTool *tool, gboolean no_main_loop)
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 
 	xst_tool_load_try (tool);
-
 	xst_dialog_thaw_visible (tool->main_dialog);
 
 	if (!no_main_loop)
@@ -1566,8 +1568,13 @@ authenticate (int argc, char *argv[])
 		if (strlen (password))
 			memset (password, 0, strlen (password));
 
-		error_dialog = gnome_error_dialog (_("The password you entered is invalid."));
-		gnome_dialog_run_and_close (GNOME_DIALOG (error_dialog));
+		error_dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL,
+						       GTK_MESSAGE_ERROR,
+						       GTK_BUTTONS_OK,
+						       _("The password you entered is invalid."));
+
+		gtk_dialog_run (GTK_DIALOG (error_dialog));
+		gtk_widget_destroy (error_dialog);
 	}
 }
 

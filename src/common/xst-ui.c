@@ -549,14 +549,17 @@ xst_ui_entry_set_text (void *entry, const gchar *str)
 gboolean
 xst_ui_logout_dialog (const gchar *message)
 {
-	GtkWidget *dialog;
+	GtkWidget *d;
 	gchar *tmp;
 
-	tmp = message? _(message):
+	tmp = message? _(message) :
 		_("Plese restart your GNOME session for\nthese changes to take effect.");
-	
-	dialog = gnome_ok_dialog (tmp);
-	gnome_dialog_run_and_close (GNOME_DIALOG( dialog));
+
+	d = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_WARNING,
+				    GTK_BUTTONS_OK, tmp);
+
+	gtk_dialog_run (GTK_DIALOG (d));
+	gtk_widget_destroy (d);
 
 	return FALSE;
 	

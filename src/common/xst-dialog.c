@@ -460,13 +460,19 @@ dialog_close (XstDialog *dialog)
 	if (xst_dialog_get_modified (dialog)) {
 		/* Changes have been made. */
 		GtkWidget *w;
-		
-		w = gnome_question_dialog_parented (
-			_("There are changes which haven't been applied.\n"
-			  "Apply them now?"),
-			NULL, NULL, GTK_WINDOW (dialog));
+		gint       res;
 
-		if (!gnome_dialog_run_and_close (GNOME_DIALOG (w)))
+		w = gtk_message_dialog_new (GTK_WINDOW (dialog),
+					    GTK_DIALOG_MODAL,
+					    GTK_MESSAGE_QUESTION,
+					    GTK_BUTTONS_YES_NO,
+					    _("There are changes which haven't been applied.\n"
+					      "Apply them now?"));
+
+		res = gtk_dialog_run (GTK_DIALOG (w));
+		gtk_widget_destroy (w);
+
+		if (res == GTK_RESPONSE_YES)
 			apply_cb (NULL, dialog);
 	}
 
