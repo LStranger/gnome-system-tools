@@ -346,7 +346,7 @@ void tool_set_modified(gboolean state)
 {
   GtkWidget *w0;
 
-  if (tool_get_frozen()) return;
+  if (tool_get_frozen() || !tool_get_access()) return;
 
   if (state)
   {
@@ -364,6 +364,28 @@ void tool_set_modified(gboolean state)
   }
 
   tool_context->modified = state;
+}
+
+
+gboolean tool_get_access()
+{
+  return(tool_context->access);
+}
+
+
+void tool_set_access(gboolean state)
+{
+  GtkWidget *w0;
+
+  if (!state)
+  {
+    w0 = tool_widget_get("ok");
+    if (w0) gtk_widget_set_sensitive(w0, FALSE);
+    w0 = tool_widget_get("apply");
+    if (w0) gtk_widget_set_sensitive(w0, FALSE);
+  }
+
+  tool_context->access = state;
 }
 
 
@@ -430,12 +452,13 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
 {
   ToolContext *tc;
   gchar *s;
-  
+
   s = g_strjoin("-", task, "admin", NULL);
   gnome_init(s, VERSION, argc, argv);
   g_free(s);
 
   glade_gnome_init();
+  tc = tool_context_new(task);
 
 	if (geteuid () != 0)
 	{
@@ -447,9 +470,11 @@ ToolContext *tool_init(gchar *task, int argc, char *argv[])
 		gtk_main ();
 
 		if (reply) exit(1);
+    
+    tool_set_access(FALSE);
 	}
-
-  tc = tool_context_new(task);
+  else
+    tool_set_access(TRUE);
 
   tool_splash_show();
   tool_config_load();

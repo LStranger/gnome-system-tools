@@ -26,7 +26,7 @@ struct _ToolContext
 	GladeXML *interface;
 	GladeXML *common_interface;
   GtkWidget *top_window;
-  gboolean frozen, modified;
+  gboolean frozen, modified, access;
 
   ToolReadState read_state;
   guint progress_max,
@@ -52,7 +52,10 @@ void tool_modified_cb(void);
 gboolean tool_get_frozen(void);
 void tool_set_frozen(gboolean state);
 
-GtkWidget *tool_get_top_window();
+gboolean tool_get_access(void);
+void tool_set_access(gboolean state);
+
+GtkWidget *tool_get_top_window(void);
 
 void tool_splash_show(void);
 void tool_splash_hide(void);
