@@ -129,7 +129,7 @@ update_notebook_complexity (XstTool *tool, XstDialogComplexity complexity)
 	notebook = GTK_NOTEBOOK (xst_dialog_get_widget (tool->main_dialog, "network_admin"));
 	hosts    = xst_dialog_get_widget (tool->main_dialog, "hosts_container");
 	pageno   = gtk_notebook_page_num (notebook, hosts);
-	
+
 	switch (complexity) {
 	case XST_DIALOG_BASIC:
 		g_return_if_fail (pageno != -1);
@@ -171,9 +171,9 @@ connect_signals (XstDialog *main_dialog, XstDialogSignal *sigs)
 #if 0	
 	g_signal_connect (G_OBJECT (menu), "selection-done",
 			  G_CALLBACK (xst_dialog_modify_cb), main_dialog);
+#endif
 	g_signal_connect (G_OBJECT (main_dialog), "complexity_change",
 			  G_CALLBACK (update_complexity), NULL);
-#endif	
 
 	xst_dialog_connect_signals (main_dialog, sigs);
 }

@@ -107,6 +107,7 @@ xst_dialog_set_complexity (XstDialog *xd, XstDialogComplexity c)
 
 	apply_widget_policies (xd);
 	gtk_label_set_text (GTK_LABEL (GTK_BIN (xd->complexity_button)->child), _(label[c]));
+
 	gtk_signal_emit (GTK_OBJECT (xd), xstdialog_signals[COMPLEXITY_CHANGE]);
 }
 
@@ -224,7 +225,7 @@ xst_dialog_class_init (XstDialogClass *klass)
 			      0);
 	
 	xstdialog_signals[COMPLEXITY_CHANGE] =
-		g_signal_new ("complexity_chang",
+		g_signal_new ("complexity_change",
 			      G_OBJECT_CLASS_TYPE (object_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (XstDialogClass, complexity_change),
