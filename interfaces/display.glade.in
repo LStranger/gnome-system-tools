@@ -29,8 +29,9 @@
   <widget>
     <class>GtkVBox</class>
     <name>display_admin</name>
+    <border_width>3</border_width>
     <homogeneous>False</homogeneous>
-    <spacing>0</spacing>
+    <spacing>3</spacing>
 
     <widget>
       <class>GtkFrame</class>
@@ -430,6 +431,19 @@
 	  <text></text>
 	</widget>
       </widget>
+    </widget>
+
+    <widget>
+      <class>GtkButton</class>
+      <name>restore</name>
+      <can_focus>True</can_focus>
+      <label>_Restore settings</label>
+      <relief>GTK_RELIEF_NORMAL</relief>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
     </widget>
   </widget>
 </widget>
