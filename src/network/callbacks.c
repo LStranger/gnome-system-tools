@@ -1034,6 +1034,23 @@ on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection 
         return FALSE;
 }
 
+gchar*
+on_volume_format_value (GtkWidget *widget, gdouble value, gpointer data)
+{
+	gchar *string;
+	
+	if (value == 0)
+		string = g_strdup_printf ("Silent");
+	else if (value == 1)
+		string = g_strdup_printf ("Low");
+	else if (value == 2)
+		string = g_strdup_printf ("Medium");
+	else if (value == 3)
+		string = g_strdup_printf ("Loud");
+
+	return string;
+}
+
 /* Hosts tab callbacks */
 
 static void

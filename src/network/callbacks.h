@@ -93,6 +93,7 @@ void on_wvlan_adhoc_toggled (GtkWidget*, GstConnection*);
 void on_ppp_update_dns_toggled (GtkWidget*, GstConnection*);
 gboolean on_ip_address_focus_out (GtkWidget*, GdkEventFocus*, GstConnection*);
 void on_ppp_autodetect_modem_clicked (GtkWidget*, GstConnection*);
+gchar* on_volume_format_value (GtkWidget*, gdouble, gpointer);
 
 /* Hosts tab callbacks */
 void on_hosts_ip_changed (GtkEditable*, gpointer);

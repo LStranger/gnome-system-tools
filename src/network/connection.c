@@ -1820,6 +1820,7 @@ hookup_callbacks (GstConnection *cxn)
 		{ "on_ppp_autodetect_modem_clicked", on_ppp_autodetect_modem_clicked },
 		{ "on_ip_address_focus_out", on_ip_address_focus_out },
 		{ "on_ip_netmask_focus_out", on_ip_address_focus_out },
+		{ "on_volume_format_value", on_volume_format_value },
 		{ NULL }
 	};
 
