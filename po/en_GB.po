@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-04-19 13:03-0400\n"
-"PO-Revision-Date: 2004-04-19 11:40-0400\n"
+"POT-Creation-Date: 2004-05-02 15:49-0400\n"
+"PO-Revision-Date: 2004-05-02 15:49-0400\n"
 "Last-Translator: Gareth Owen <gowen72@yahoo.comg>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -224,7 +224,7 @@ msgid "Finished"
 msgstr "Finished"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:52
-#: src/network/connection.c:1867
+#: src/network/connection.c:1873
 msgid "Manual"
 msgstr "Manual"
 
@@ -512,34 +512,34 @@ msgstr "Allow activation control for all _users"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:30 src/network/connection.c:1869
-msgid "BOOTP"
-msgstr "BOOTP"
+#: interfaces/network.glade.in.h:30 src/network/connection.c:1875
+msgid "Automatic (BOOTP)"
+msgstr "Automatic (BOOTP)"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:31 src/network/connection.c:1874
+msgid "Automatic (DHCP)"
+msgstr "Automatic (DHCP)"
+
+#: interfaces/network.glade.in.h:32
 msgid "Co_nfiguration:"
 msgstr "Co_nfiguration:"
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "Connection type"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Connections"
 
 #. set window titles
-#: interfaces/network.glade.in.h:34 src/network/network-druid.c:63
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "Creating a new network connection"
 
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:36
 msgid "Current network profile:"
 msgstr "Current network profile:"
-
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1868
-msgid "DHCP"
-msgstr "DHCP"
 
 #: interfaces/network.glade.in.h:37
 msgid "DNS"
@@ -1397,7 +1397,7 @@ msgstr "Name"
 msgid "Default"
 msgstr "Default"
 
-#: src/boot/table.c:43 src/network/connection.c:485
+#: src/boot/table.c:43 src/network/connection.c:488
 msgid "Type"
 msgstr "Type"
 
@@ -1405,11 +1405,11 @@ msgstr "Type"
 msgid "Kernel Image"
 msgstr "Kernel Image"
 
-#: src/boot/table.c:45 src/network/connection.c:501
+#: src/boot/table.c:45 src/network/connection.c:504
 msgid "Device"
 msgstr "Device"
 
-#: src/boot/table.c:50 src/network/connection.c:58
+#: src/boot/table.c:50 src/network/connection.c:61
 msgid "/_Add ..."
 msgstr "/_Add ..."
 
@@ -1418,7 +1418,7 @@ msgstr "/_Add ..."
 msgid "/_Properties"
 msgstr "/_Properties"
 
-#: src/boot/table.c:53 src/network/connection.c:61 src/network/dns.c:39
+#: src/boot/table.c:53 src/network/connection.c:64 src/network/dns.c:39
 #: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Delete"
@@ -1486,24 +1486,24 @@ msgstr "Apply them now?"
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Error connection signal `%s' in widget `%s'"
 
-#: src/common/gst-tool.c:796
+#: src/common/gst-tool.c:800
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Skipping %s directive..."
 
-#: src/common/gst-tool.c:923
+#: src/common/gst-tool.c:927
 msgid "Skipping actual save..."
 msgstr "Skipping actual save..."
 
-#: src/common/gst-tool.c:997
+#: src/common/gst-tool.c:1001
 msgid "The configuration could not be loaded"
 msgstr "The configuration could not be loaded"
 
-#: src/common/gst-tool.c:998
+#: src/common/gst-tool.c:1002
 msgid "There was an error running the backend script"
 msgstr "There was an error running the backend script"
 
-#: src/common/gst-tool.c:1480
+#: src/common/gst-tool.c:1484
 #, c-format
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
@@ -1512,7 +1512,7 @@ msgstr ""
 "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
 "GNOME System Tools</span>"
 
-#: src/common/gst-tool.c:1483
+#: src/common/gst-tool.c:1487
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1526,15 +1526,15 @@ msgstr ""
 "have been warned. Thank you for trying out this prerelease of the GNOME "
 "System Tools!"
 
-#: src/common/gst-tool.c:1504
+#: src/common/gst-tool.c:1508
 msgid "Warning"
 msgstr "Warning"
 
-#: src/common/gst-tool.c:1524
+#: src/common/gst-tool.c:1528
 msgid "Don't show me this again"
 msgstr "Don't show me this again"
 
-#: src/common/gst-tool.c:1598
+#: src/common/gst-tool.c:1602
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
@@ -1694,47 +1694,47 @@ msgstr "Loud"
 msgid "Other type"
 msgstr "Other type"
 
-#: src/network/connection.c:47
+#: src/network/connection.c:47 src/network/connection.c:48
 msgid "Ethernet LAN card"
 msgstr "Ethernet LAN card"
 
-#: src/network/connection.c:48
+#: src/network/connection.c:49
 msgid "Wireless LAN card"
 msgstr "Wireless LAN card"
 
-#: src/network/connection.c:49
+#: src/network/connection.c:50 src/network/connection.c:51
 msgid "Modem or transfer cable"
 msgstr "Modem or transfer cable"
 
-#: src/network/connection.c:50
+#: src/network/connection.c:52 src/network/connection.c:53
 msgid "Parallel line"
 msgstr "Parallel line"
 
-#: src/network/connection.c:51
+#: src/network/connection.c:54
 msgid "Infrared LAN"
 msgstr "Infrared LAN"
 
-#: src/network/connection.c:52
+#: src/network/connection.c:55
 msgid "Loopback interface"
 msgstr "Loopback interface"
 
-#: src/network/connection.c:53
+#: src/network/connection.c:56
 msgid "Unknown interface type"
 msgstr "Unknown interface type"
 
-#: src/network/connection.c:60
+#: src/network/connection.c:63
 msgid "/_Configure"
 msgstr "/_Configure"
 
-#: src/network/connection.c:513
+#: src/network/connection.c:516
 msgid "Status"
 msgstr "Status"
 
-#: src/network/connection.c:1718 src/network/connection.c:1728
+#: src/network/connection.c:1724 src/network/connection.c:1734
 msgid "Error in IP address"
 msgstr "Error in IP address"
 
-#: src/network/connection.c:1719
+#: src/network/connection.c:1725
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1742,7 +1742,7 @@ msgstr ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
 
-#: src/network/connection.c:1729
+#: src/network/connection.c:1735
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1750,11 +1750,11 @@ msgstr ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
 
-#: src/network/connection.c:1737
+#: src/network/connection.c:1743
 msgid "Error in DNS servers"
 msgstr "Error in DNS servers"
 
-#: src/network/connection.c:1738
+#: src/network/connection.c:1744
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1764,11 +1764,11 @@ msgstr ""
 "IP address for the primary DNS empty. Please enter the IP for the primary "
 "DNS or uncheck the manual DNS option."
 
-#: src/network/connection.c:1745
+#: src/network/connection.c:1751
 msgid "Invalid modem device"
 msgstr "Invalid modem device"
 
-#: src/network/connection.c:1746
+#: src/network/connection.c:1752
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1776,11 +1776,11 @@ msgstr ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
 
-#: src/network/connection.c:1751
+#: src/network/connection.c:1757
 msgid "Invalid phone number"
 msgstr "Invalid phone number"
 
-#: src/network/connection.c:1752
+#: src/network/connection.c:1758
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1788,20 +1788,20 @@ msgstr ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
 
-#: src/network/connection.c:2120
+#: src/network/connection.c:2126
 msgid "Nonexisting interface"
 msgstr "Nonexisting interface"
 
-#: src/network/connection.c:2121
+#: src/network/connection.c:2127
 #, c-format
 msgid "The interface \"%s\" doesn't exist."
 msgstr "The interface \"%s\" doesn't exist."
 
-#: src/network/connection.c:2124
+#: src/network/connection.c:2130
 msgid "Invalid interface"
 msgstr "Invalid interface"
 
-#: src/network/connection.c:2125
+#: src/network/connection.c:2131
 msgid "The loopback interface cannot be configured."
 msgstr "The loopback interface cannot be configured."
 
@@ -1988,7 +1988,7 @@ msgstr "root group ID should not be modified"
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
 #: src/users/user-settings.c:334 src/users/user-settings.c:428
-#: src/users/user-settings.c:463
+#: src/users/user-settings.c:464
 msgid "This would leave the system unusable"
 msgstr "This would leave the system unusable"
 
@@ -2246,28 +2246,36 @@ msgstr ""
 msgid "root home shouldn't be modified."
 msgstr "root home shouldn't be modified."
 
-#: src/users/user-settings.c:459 src/users/user-settings.c:465
+#: src/users/user-settings.c:460
 msgid "Invalid user ID"
 msgstr "Invalid user ID"
 
-#: src/users/user-settings.c:460
+#: src/users/user-settings.c:461
 msgid "User id must be a positive number."
 msgstr "User id must be a positive number."
 
-#: src/users/user-settings.c:462
+#: src/users/user-settings.c:463
 msgid "root user ID should not be modified"
 msgstr "root user ID should not be modified"
 
-#: src/users/user-settings.c:466
-#, c-format
-msgid "User ID %s already exists."
-msgstr "User ID %s already exists."
+#: src/users/user-settings.c:480
+msgid ""
+"Several users may share a single user ID, but it's not common and may lead "
+"to security problems"
+msgstr ""
+"Several users may share a single user ID, but it's not common and may lead "
+"to security problems"
 
-#: src/users/user-settings.c:488
+#: src/users/user-settings.c:485
+#, c-format
+msgid "User ID %s already exists"
+msgstr "User ID %s already exists"
+
+#: src/users/user-settings.c:502
 msgid "Incomplete path in shell"
 msgstr "Incomplete path in shell"
 
-#: src/users/user-settings.c:489
+#: src/users/user-settings.c:503
 msgid ""
 "Please enter full path for shell.\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
@@ -2275,23 +2283,23 @@ msgstr ""
 "Please enter full path for shell.\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
 
-#: src/users/user-settings.c:511
+#: src/users/user-settings.c:525
 msgid "Password can not be empty."
 msgstr "Password can not be empty."
 
-#: src/users/user-settings.c:512
+#: src/users/user-settings.c:526
 msgid "A password must be provided"
 msgstr "A password must be provided"
 
-#: src/users/user-settings.c:514
+#: src/users/user-settings.c:528
 msgid "Password confirmation isn't correct."
 msgstr "Password confirmation isn't correct."
 
-#: src/users/user-settings.c:515
+#: src/users/user-settings.c:529
 msgid "Check that you have provided the same password in both text fields"
 msgstr "Check that you have provided the same password in both text fields"
 
-#: src/users/user-settings.c:791
+#: src/users/user-settings.c:805
 #, c-format
 msgid "Settings for User %s"
 msgstr "Settings for User %s"
@@ -2320,6 +2328,12 @@ msgstr "Shell"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Add or remove users and groups"
+
+#~ msgid "BOOTP"
+#~ msgstr "BOOTP"
+
+#~ msgid "DHCP"
+#~ msgstr "DHCP"
 
 #~ msgid "Connection _name:"
 #~ msgstr "Connection _name:"
