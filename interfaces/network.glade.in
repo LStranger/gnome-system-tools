@@ -1124,6 +1124,11 @@
 	      <handler>update_hint</handler>
 	      <last_modification_time>Wed, 27 Dec 2000 20:54:02 GMT</last_modification_time>
 	    </signal>
+	    <signal>
+	      <name>changed</name>
+	      <handler>on_statichost_changed</handler>
+	      <last_modification_time>Tue, 02 Jan 2001 17:38:39 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -1174,6 +1179,11 @@
 		<name>focus_in_event</name>
 		<handler>update_hint</handler>
 		<last_modification_time>Wed, 27 Dec 2000 20:54:11 GMT</last_modification_time>
+	      </signal>
+	      <signal>
+		<name>changed</name>
+		<handler>on_statichost_changed</handler>
+		<last_modification_time>Tue, 02 Jan 2001 17:38:31 GMT</last_modification_time>
 	      </signal>
 	      <editable>True</editable>
 	      <text></text>
@@ -1293,7 +1303,7 @@
 		<handler>tool_modified_cb</handler>
 		<last_modification_time>Fri, 29 Dec 2000 03:45:35 GMT</last_modification_time>
 	      </signal>
-	      <label>Update</label>
+	      <label>Change</label>
 	      <relief>GTK_RELIEF_NORMAL</relief>
 	      <child>
 		<padding>0</padding>
