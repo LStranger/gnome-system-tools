@@ -87,6 +87,7 @@ gboolean callbacks_check_gateway_hook      (GstDialog *dialog, gpointer data);
 gboolean callbacks_tool_not_found_hook     (GstTool *tool, GstReportLine *rline, gpointer data);
 
 gboolean callbacks_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
+gboolean on_table_popup_menu (GtkTreeView*, GtkWidget*);
 
 /* connection callbacks */
 void on_connection_toggled (GtkWidget*, gchar*, gpointer);

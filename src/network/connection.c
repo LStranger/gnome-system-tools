@@ -623,6 +623,8 @@ connection_list_new (GstTool *tool)
 	g_signal_connect (G_OBJECT (treeview), "button_press_event",
 			  G_CALLBACK (callbacks_button_press),
 			  (gpointer) popup);
+	g_signal_connect (G_OBJECT (treeview), "popup-menu",
+			  G_CALLBACK (on_table_popup_menu), popup);
 	
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	gtk_tree_selection_set_mode (select, GTK_SELECTION_SINGLE);

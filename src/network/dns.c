@@ -227,10 +227,12 @@ dns_search_gui_setup (GstTool *tool, const gchar *listname, const gchar *entryna
 	g_signal_connect (G_OBJECT (treeview), "button_press_event",
 			  G_CALLBACK (callbacks_button_press),
 			  (gpointer) popup);
+	g_signal_connect (G_OBJECT (treeview), "popup-menu",
+			  G_CALLBACK (on_table_popup_menu), popup);
+
 	g_signal_connect (G_OBJECT (treeview), "drag-data-get",
 			  G_CALLBACK (on_drag_data_get),
 			  NULL);
-
 	g_signal_connect (G_OBJECT (treeview), "drag_data_received",
 			  G_CALLBACK (on_drag_data_received),
 			  NULL);

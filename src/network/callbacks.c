@@ -72,9 +72,15 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 static void
 do_popup_menu (GtkTreeView *treeview, GtkWidget *popup, GdkEventButton *event)
 {
-	GtkTreePath  *path;
-	GtkUIManager *ui_manager;
-	gint          button, event_time;
+	GtkTreeSelection *selection;
+	GtkUIManager     *ui_manager;
+	gint              cont, button, event_time;
+
+	selection = gtk_tree_view_get_selection (treeview);
+	cont = gtk_tree_selection_count_selected_rows (selection);
+
+	if (!cont)
+		return;
 
 	if (event) {
 		button     = event->button;
@@ -110,6 +116,13 @@ callbacks_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer g
 		return TRUE;
 	}
 	return FALSE;
+}
+
+gboolean
+on_table_popup_menu (GtkTreeView *treeview, GtkWidget *popup)
+{
+	do_popup_menu (treeview, popup, NULL);
+	return TRUE;
 }
 
 void
