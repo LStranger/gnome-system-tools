@@ -1143,407 +1143,6 @@ systems to choose from at startup.</property>
   </child>
 </widget>
 
-<widget class="GtkWindow" id="boot_druid">
-  <property name="title" translatable="yes">Boot Image Assistant</property>
-  <property name="type">GTK_WINDOW_TOPLEVEL</property>
-  <property name="window_position">GTK_WIN_POS_NONE</property>
-  <property name="modal">False</property>
-  <property name="resizable">True</property>
-  <property name="destroy_with_parent">False</property>
-
-  <child>
-    <widget class="GnomeDruid" id="druid_druid">
-      <property name="border_width">4</property>
-      <property name="visible">True</property>
-      <property name="show_help">False</property>
-
-      <child>
-	<widget class="GnomeDruidPageEdge" id="druidStartPage">
-	  <property name="visible">True</property>
-	  <property name="position">GNOME_EDGE_START</property>
-	  <property name="title" translatable="yes">Boot Image Assistant</property>
-	  <property name="text" translatable="yes">This assistant is designed to help you quickly 
-and easily add a new boot image to your system.
-
-To begin, click &quot;Forward&quot;. </property>
-	  <property name="title_color">#ffffffffffff</property>
-	  <property name="text_color">#000000000000</property>
-	  <property name="background_color">#000000000101</property>
-	  <property name="logo_background_color">#010101010101</property>
-	  <property name="textbox_color">#ffffffffffff</property>
-	</widget>
-      </child>
-
-      <child>
-	<widget class="GnomeDruidPageStandard" id="druidIdentityPage">
-	  <property name="visible">True</property>
-	  <property name="title" translatable="yes">Image Settings (Step 1 of 2)</property>
-	  <property name="title_foreground">#6da80839ebb8</property>
-	  <property name="background">#84e00839ebb8</property>
-	  <property name="logo_background">#6e2008200dac</property>
-	  <property name="logo">boot.png</property>
-
-	  <child internal-child="vbox">
-	    <widget class="GtkVBox" id="vbox6">
-	      <property name="border_width">16</property>
-	      <property name="visible">True</property>
-	      <property name="homogeneous">False</property>
-	      <property name="spacing">0</property>
-
-	      <child>
-		<widget class="GtkVBox" id="vbox7">
-		  <property name="border_width">3</property>
-		  <property name="visible">True</property>
-		  <property name="homogeneous">False</property>
-		  <property name="spacing">3</property>
-
-		  <child>
-		    <widget class="GtkHBox" id="hbox8">
-		      <property name="border_width">3</property>
-		      <property name="visible">True</property>
-		      <property name="homogeneous">False</property>
-		      <property name="spacing">3</property>
-
-		      <child>
-			<widget class="GtkLabel" id="label66">
-			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Enter a name for the boot image, and specify what kind of operating system it is.</property>
-			  <property name="use_underline">False</property>
-			  <property name="use_markup">False</property>
-			  <property name="justify">GTK_JUSTIFY_CENTER</property>
-			  <property name="wrap">True</property>
-			  <property name="selectable">False</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">True</property>
-			  <property name="fill">True</property>
-			</packing>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">False</property>
-		      <property name="fill">False</property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkAlignment" id="alignment27">
-		      <property name="visible">True</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xscale">0.67</property>
-		      <property name="yscale">0.67</property>
-
-		      <child>
-			<widget class="GtkVBox" id="druid_identity_vbox">
-			  <property name="visible">True</property>
-			  <property name="homogeneous">False</property>
-			  <property name="spacing">0</property>
-
-			  <child>
-			    <placeholder/>
-			  </child>
-			</widget>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">True</property>
-		      <property name="fill">True</property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkLabel" id="label67">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
-		      <property name="use_underline">False</property>
-		      <property name="use_markup">False</property>
-		      <property name="justify">GTK_JUSTIFY_CENTER</property>
-		      <property name="wrap">False</property>
-		      <property name="selectable">False</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xpad">0</property>
-		      <property name="ypad">0</property>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">False</property>
-		      <property name="fill">False</property>
-		    </packing>
-		  </child>
-		</widget>
-		<packing>
-		  <property name="padding">0</property>
-		  <property name="expand">True</property>
-		  <property name="fill">True</property>
-		</packing>
-	      </child>
-	    </widget>
-	  </child>
-	</widget>
-      </child>
-
-      <child>
-	<widget class="GnomeDruidPageStandard" id="druidOtherPage">
-	  <property name="visible">True</property>
-	  <property name="title" translatable="yes">Other Operating System (Step 2 of 2)</property>
-	  <property name="title_foreground">#ac180839ebb8</property>
-	  <property name="background">#c2a00839ebb8</property>
-	  <property name="logo_background">#6e2008200dac</property>
-	  <property name="logo">boot.png</property>
-
-	  <child internal-child="vbox">
-	    <widget class="GtkVBox" id="vbox6">
-	      <property name="border_width">16</property>
-	      <property name="visible">True</property>
-	      <property name="homogeneous">False</property>
-	      <property name="spacing">0</property>
-
-	      <child>
-		<widget class="GtkVBox" id="vbox7">
-		  <property name="border_width">3</property>
-		  <property name="visible">True</property>
-		  <property name="homogeneous">False</property>
-		  <property name="spacing">3</property>
-
-		  <child>
-		    <widget class="GtkHBox" id="hbox8">
-		      <property name="border_width">3</property>
-		      <property name="visible">True</property>
-		      <property name="homogeneous">False</property>
-		      <property name="spacing">3</property>
-
-		      <child>
-			<widget class="GtkLabel" id="label66">
-			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Specify the partition on which the operating system is installed.</property>
-			  <property name="use_underline">False</property>
-			  <property name="use_markup">False</property>
-			  <property name="justify">GTK_JUSTIFY_CENTER</property>
-			  <property name="wrap">True</property>
-			  <property name="selectable">False</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">True</property>
-			  <property name="fill">True</property>
-			</packing>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">False</property>
-		      <property name="fill">False</property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkAlignment" id="alignment28">
-		      <property name="visible">True</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xscale">0.67</property>
-		      <property name="yscale">0.67</property>
-
-		      <child>
-			<widget class="GtkVBox" id="druid_other_vbox">
-			  <property name="visible">True</property>
-			  <property name="homogeneous">False</property>
-			  <property name="spacing">0</property>
-
-			  <child>
-			    <placeholder/>
-			  </child>
-			</widget>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">True</property>
-		      <property name="fill">True</property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkLabel" id="label67">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
-		      <property name="use_underline">False</property>
-		      <property name="use_markup">False</property>
-		      <property name="justify">GTK_JUSTIFY_CENTER</property>
-		      <property name="wrap">False</property>
-		      <property name="selectable">False</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xpad">0</property>
-		      <property name="ypad">0</property>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">False</property>
-		      <property name="fill">False</property>
-		    </packing>
-		  </child>
-		</widget>
-		<packing>
-		  <property name="padding">0</property>
-		  <property name="expand">True</property>
-		  <property name="fill">True</property>
-		</packing>
-	      </child>
-	    </widget>
-	  </child>
-	</widget>
-      </child>
-
-      <child>
-	<widget class="GnomeDruidPageStandard" id="druidImagePage">
-	  <property name="visible">True</property>
-	  <property name="title" translatable="yes">Image Settings (Step 2 of 2)</property>
-	  <property name="title_foreground">#58c8083aebb8</property>
-	  <property name="background">#cb800839ebb8</property>
-	  <property name="logo_background">#6e2008200dac</property>
-	  <property name="logo">boot.png</property>
-
-	  <child internal-child="vbox">
-	    <widget class="GtkVBox" id="vbox8">
-	      <property name="border_width">16</property>
-	      <property name="visible">True</property>
-	      <property name="homogeneous">False</property>
-	      <property name="spacing">0</property>
-
-	      <child>
-		<widget class="GtkVBox" id="vbox9">
-		  <property name="visible">True</property>
-		  <property name="homogeneous">False</property>
-		  <property name="spacing">0</property>
-
-		  <child>
-		    <widget class="GtkHBox" id="hbox9">
-		      <property name="border_width">3</property>
-		      <property name="visible">True</property>
-		      <property name="homogeneous">False</property>
-		      <property name="spacing">3</property>
-
-		      <child>
-			<widget class="GtkLabel" id="label68">
-			  <property name="visible">True</property>
-			  <property name="label" translatable="yes">Choose a kernel image to boot, and a partition to mount as the root partition.
-Optionally, you may also enter append parameters which are passed to the
-kernel at boot time.</property>
-			  <property name="use_underline">False</property>
-			  <property name="use_markup">False</property>
-			  <property name="justify">GTK_JUSTIFY_LEFT</property>
-			  <property name="wrap">False</property>
-			  <property name="selectable">False</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-			<packing>
-			  <property name="padding">0</property>
-			  <property name="expand">True</property>
-			  <property name="fill">True</property>
-			</packing>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">False</property>
-		      <property name="fill">False</property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkAlignment" id="alignment29">
-		      <property name="visible">True</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xscale">0.67</property>
-		      <property name="yscale">0.67</property>
-
-		      <child>
-			<widget class="GtkVBox" id="druid_image_vbox">
-			  <property name="visible">True</property>
-			  <property name="homogeneous">False</property>
-			  <property name="spacing">0</property>
-
-			  <child>
-			    <placeholder/>
-			  </child>
-			</widget>
-		      </child>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">True</property>
-		      <property name="fill">True</property>
-		    </packing>
-		  </child>
-
-		  <child>
-		    <widget class="GtkLabel" id="label69">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
-		      <property name="use_underline">False</property>
-		      <property name="use_markup">False</property>
-		      <property name="justify">GTK_JUSTIFY_CENTER</property>
-		      <property name="wrap">False</property>
-		      <property name="selectable">False</property>
-		      <property name="xalign">0.5</property>
-		      <property name="yalign">0.5</property>
-		      <property name="xpad">0</property>
-		      <property name="ypad">0</property>
-		    </widget>
-		    <packing>
-		      <property name="padding">0</property>
-		      <property name="expand">False</property>
-		      <property name="fill">False</property>
-		    </packing>
-		  </child>
-		</widget>
-		<packing>
-		  <property name="padding">0</property>
-		  <property name="expand">True</property>
-		  <property name="fill">True</property>
-		</packing>
-	      </child>
-	    </widget>
-	  </child>
-	</widget>
-      </child>
-
-      <child>
-	<widget class="GnomeDruidPageEdge" id="druidFinishPage">
-	  <property name="visible">True</property>
-	  <property name="position">GNOME_EDGE_FINISH</property>
-	  <property name="title" translatable="yes">Finished</property>
-	  <property name="text" translatable="yes">The new boot image has been added.
-Please click &quot;Apply&quot; to save your changes. </property>
-	  <property name="title_color">#ffffffffffff</property>
-	  <property name="text_color">#000000000000</property>
-	  <property name="background_color">#000000000101</property>
-	  <property name="logo_background_color">#010101010101</property>
-	  <property name="textbox_color">#ffffffffffff</property>
-	</widget>
-      </child>
-    </widget>
-  </child>
-</widget>
-
 <widget class="GtkWindow" id="append_settings_window">
   <property name="title" translatable="yes"></property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
@@ -2224,6 +1823,388 @@ Please click &quot;Apply&quot; to save your changes. </property>
 	  <property name="expand">True</property>
 	  <property name="fill">True</property>
 	</packing>
+      </child>
+    </widget>
+  </child>
+</widget>
+
+<widget class="GtkWindow" id="boot_druid">
+  <property name="title" translatable="yes">Boot Image Assistant</property>
+  <property name="type">GTK_WINDOW_TOPLEVEL</property>
+  <property name="window_position">GTK_WIN_POS_NONE</property>
+  <property name="modal">False</property>
+  <property name="resizable">True</property>
+  <property name="destroy_with_parent">False</property>
+
+  <child>
+    <widget class="GnomeDruid" id="druid_druid">
+      <property name="border_width">4</property>
+      <property name="visible">True</property>
+      <property name="show_help">False</property>
+
+      <child>
+	<widget class="GnomeDruidPageEdge" id="druidStartPage">
+	  <property name="visible">True</property>
+	  <property name="position">GNOME_EDGE_START</property>
+	  <property name="title" translatable="yes">Boot Image Assistant</property>
+	  <property name="text" translatable="yes">This assistant is designed to help you quickly 
+and easily add a new boot image to your system.
+
+To begin, click &quot;Forward&quot;. </property>
+	</widget>
+      </child>
+
+      <child>
+	<widget class="GnomeDruidPageStandard" id="druidIdentityPage">
+	  <property name="visible">True</property>
+	  <property name="title" translatable="yes">Image Settings (Step 1 of 2)</property>
+	  <property name="logo">boot.png</property>
+
+	  <child internal-child="vbox">
+	    <widget class="GtkVBox" id="vbox6">
+	      <property name="border_width">16</property>
+	      <property name="visible">True</property>
+	      <property name="homogeneous">False</property>
+	      <property name="spacing">0</property>
+
+	      <child>
+		<widget class="GtkVBox" id="vbox7">
+		  <property name="border_width">3</property>
+		  <property name="visible">True</property>
+		  <property name="homogeneous">False</property>
+		  <property name="spacing">3</property>
+
+		  <child>
+		    <widget class="GtkHBox" id="hbox8">
+		      <property name="border_width">3</property>
+		      <property name="visible">True</property>
+		      <property name="homogeneous">False</property>
+		      <property name="spacing">3</property>
+
+		      <child>
+			<widget class="GtkLabel" id="label66">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">Enter a name for the boot image, and specify what kind of operating system it is.</property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_CENTER</property>
+			  <property name="wrap">True</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">True</property>
+			  <property name="fill">True</property>
+			</packing>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkAlignment" id="alignment27">
+		      <property name="visible">True</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xscale">0.67</property>
+		      <property name="yscale">0.67</property>
+
+		      <child>
+			<widget class="GtkVBox" id="druid_identity_vbox">
+			  <property name="visible">True</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <placeholder/>
+			  </child>
+			</widget>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">True</property>
+		      <property name="fill">True</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label67">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_CENTER</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">True</property>
+		  <property name="fill">True</property>
+		</packing>
+	      </child>
+	    </widget>
+	  </child>
+	</widget>
+      </child>
+
+      <child>
+	<widget class="GnomeDruidPageStandard" id="druidOtherPage">
+	  <property name="visible">True</property>
+	  <property name="title" translatable="yes">Other Operating System (Step 2 of 2)</property>
+	  <property name="logo">boot.png</property>
+
+	  <child internal-child="vbox">
+	    <widget class="GtkVBox" id="vbox6">
+	      <property name="border_width">16</property>
+	      <property name="visible">True</property>
+	      <property name="homogeneous">False</property>
+	      <property name="spacing">0</property>
+
+	      <child>
+		<widget class="GtkVBox" id="vbox7">
+		  <property name="border_width">3</property>
+		  <property name="visible">True</property>
+		  <property name="homogeneous">False</property>
+		  <property name="spacing">3</property>
+
+		  <child>
+		    <widget class="GtkHBox" id="hbox8">
+		      <property name="border_width">3</property>
+		      <property name="visible">True</property>
+		      <property name="homogeneous">False</property>
+		      <property name="spacing">3</property>
+
+		      <child>
+			<widget class="GtkLabel" id="label66">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">Specify the partition on which the operating system is installed.</property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_CENTER</property>
+			  <property name="wrap">True</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">True</property>
+			  <property name="fill">True</property>
+			</packing>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkAlignment" id="alignment28">
+		      <property name="visible">True</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xscale">0.67</property>
+		      <property name="yscale">0.67</property>
+
+		      <child>
+			<widget class="GtkVBox" id="druid_other_vbox">
+			  <property name="visible">True</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <placeholder/>
+			  </child>
+			</widget>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">True</property>
+		      <property name="fill">True</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label67">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_CENTER</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">True</property>
+		  <property name="fill">True</property>
+		</packing>
+	      </child>
+	    </widget>
+	  </child>
+	</widget>
+      </child>
+
+      <child>
+	<widget class="GnomeDruidPageStandard" id="druidImagePage">
+	  <property name="visible">True</property>
+	  <property name="title" translatable="yes">Image Settings (Step 2 of 2)</property>
+	  <property name="logo">boot.png</property>
+
+	  <child internal-child="vbox">
+	    <widget class="GtkVBox" id="vbox8">
+	      <property name="border_width">16</property>
+	      <property name="visible">True</property>
+	      <property name="homogeneous">False</property>
+	      <property name="spacing">6</property>
+
+	      <child>
+		<widget class="GtkVBox" id="vbox9">
+		  <property name="visible">True</property>
+		  <property name="homogeneous">False</property>
+		  <property name="spacing">0</property>
+
+		  <child>
+		    <widget class="GtkHBox" id="hbox9">
+		      <property name="border_width">3</property>
+		      <property name="visible">True</property>
+		      <property name="homogeneous">False</property>
+		      <property name="spacing">3</property>
+
+		      <child>
+			<widget class="GtkLabel" id="label68">
+			  <property name="visible">True</property>
+			  <property name="label" translatable="yes">Choose a kernel image to boot, and a partition to mount as the root partition.
+Optionally, you may also enter append parameters which are passed to the
+kernel at boot time.</property>
+			  <property name="use_underline">False</property>
+			  <property name="use_markup">False</property>
+			  <property name="justify">GTK_JUSTIFY_LEFT</property>
+			  <property name="wrap">False</property>
+			  <property name="selectable">False</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+			<packing>
+			  <property name="padding">0</property>
+			  <property name="expand">True</property>
+			  <property name="fill">True</property>
+			</packing>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkAlignment" id="alignment29">
+		      <property name="visible">True</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xscale">0.67</property>
+		      <property name="yscale">0.67</property>
+
+		      <child>
+			<widget class="GtkVBox" id="druid_image_vbox">
+			  <property name="visible">True</property>
+			  <property name="homogeneous">False</property>
+			  <property name="spacing">0</property>
+
+			  <child>
+			    <placeholder/>
+			  </child>
+			</widget>
+		      </child>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">True</property>
+		      <property name="fill">True</property>
+		    </packing>
+		  </child>
+
+		  <child>
+		    <widget class="GtkLabel" id="label69">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Click &quot;Forward&quot; to continue</property>
+		      <property name="use_underline">False</property>
+		      <property name="use_markup">False</property>
+		      <property name="justify">GTK_JUSTIFY_CENTER</property>
+		      <property name="wrap">False</property>
+		      <property name="selectable">False</property>
+		      <property name="xalign">0.5</property>
+		      <property name="yalign">0.5</property>
+		      <property name="xpad">0</property>
+		      <property name="ypad">0</property>
+		    </widget>
+		    <packing>
+		      <property name="padding">0</property>
+		      <property name="expand">False</property>
+		      <property name="fill">False</property>
+		    </packing>
+		  </child>
+		</widget>
+		<packing>
+		  <property name="padding">0</property>
+		  <property name="expand">True</property>
+		  <property name="fill">True</property>
+		</packing>
+	      </child>
+	    </widget>
+	  </child>
+	</widget>
+      </child>
+
+      <child>
+	<widget class="GnomeDruidPageEdge" id="druidFinishPage">
+	  <property name="visible">True</property>
+	  <property name="position">GNOME_EDGE_FINISH</property>
+	  <property name="title" translatable="yes">Finished</property>
+	  <property name="text" translatable="yes">The new boot image has been added.
+Please click &quot;Apply&quot; to save your changes. </property>
+	</widget>
       </child>
     </widget>
   </child>
