@@ -37,7 +37,9 @@
 #define CRACK_DICT_PATH "/usr/lib/cracklib_dict"
 #endif
 
+#ifdef HAVE_CRYPT_H
 #include <crypt.h>
+#endif
 
 #include "xst.h"
 #include "md5.h"
