@@ -22,6 +22,7 @@ gchar *s = N_("_Delete...");
 gchar *s = N_("_Configure...");
 gchar *s = N_("Ac_tivate");
 gchar *s = N_("D_eactivate");
+gchar *s = N_("Default Gateway device : ");
 gchar *s = N_("Connections");
 gchar *s = N_("How the names of other computers are found.");
 gchar *s = N_("_Domain:");
