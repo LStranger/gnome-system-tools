@@ -387,6 +387,52 @@ transfer_interfaces_to_gui (XstTool *tool, xmlNodePtr root)
 }
 
 static void
+transfer_gatewaydev_to_xml (XstTool *tool, xmlNodePtr root)
+{
+	gchar *dev;
+	xmlNodePtr node;
+
+	dev = gtk_object_get_data (GTK_OBJECT (tool), "gatewaydev");
+	node = xst_xml_element_find_first (root, "gatewaydev");
+
+	if (dev) {
+		if (!node)
+			node = xst_xml_element_add (root, "gatewaydev");
+		xst_xml_element_set_content (node, dev);
+	} else {
+		if (node)
+			xst_xml_element_destroy (node);
+	}
+}
+
+static void
+transfer_xml_to_gatewaydev (XstTool *tool, xmlNodePtr root)
+{
+	gchar *dev;
+	gboolean unsup;
+	
+	unsup = xst_xml_element_get_boolean (root, "gwdevunsup");
+	if (unsup) {
+		xst_dialog_widget_set_user_mode (tool->main_dialog,
+						 "connection_def_gw_hbox",
+						 XST_WIDGET_MODE_HIDDEN);
+		return;
+	}
+		
+	dev = xst_xml_get_child_content (root, "gatewaydev");
+	if (dev) {
+		connection_default_gw_select (tool, dev);
+		g_free (dev);
+	}
+}
+
+static void
+transfer_misc_tool_to_xml (XstTool *tool, xmlNodePtr root)
+{
+	transfer_gatewaydev_to_xml (tool, root);
+}
+
+static void
 transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
 {
 	gboolean res;
@@ -402,6 +448,8 @@ transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
 
 	res = xst_xml_element_get_boolean (root, "smartdhcpcd");
 	gtk_object_set_data (GTK_OBJECT (tool), "smartdhcpcd", (gpointer) res);
+
+	transfer_xml_to_gatewaydev (tool, root);
 }
 	
 void
@@ -413,6 +461,7 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	transfer_string_list_xml_to_gui (tool, root);
 	transfer_string_clist2_xml_to_gui (tool, root);
 	transfer_interfaces_to_gui (tool, root);
+	/* misc has to go last */
 	transfer_misc_xml_to_tool (tool, root);
 }
 
@@ -426,4 +475,5 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 	transfer_string_list_gui_to_xml (tool, root);
 	transfer_string_clist2_gui_to_xml (tool, root);
 	transfer_interfaces_to_xml (tool, root);
+	transfer_misc_tool_to_xml (tool, root);
 }

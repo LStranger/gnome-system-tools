@@ -40,66 +40,67 @@
 XstTool *tool = NULL;
 
 XstDialogSignal signals[] = {
-	{ "network_admin",         "switch_page",     on_network_notebook_switch_page },
-	{ "hostname",              "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "hostname",              "changed",         xst_dialog_modify_cb },
-	{ "samba_use",             "toggled",         on_samba_use_toggled },
-	{ "description",           "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "description",           "changed",         xst_dialog_modify_cb },
-	{ "workgroup",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "workgroup",             "changed",         xst_dialog_modify_cb },
-	{ "wins_ip",               "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "wins_ip",               "changed",         xst_dialog_modify_cb },
-	{ "wins_use",              "toggled",         on_wins_use_toggled },
-	{ "wins_use",              "toggled",         xst_dialog_modify_cb },
-	{ "connection_list",       "select_row",      on_connection_list_select_row },
-	{ "connection_list",       "unselect_row",    on_connection_list_unselect_row },
-	{ "connection_add",        "clicked",         on_connection_add_clicked },
-	{ "connection_delete",     "clicked",         on_connection_delete_clicked },
-	{ "connection_configure",  "clicked",         on_connection_configure_clicked },
-	{ "connection_activate",   "clicked",         on_connection_activate_clicked },
-	{ "connection_deactivate", "clicked",         on_connection_deactivate_clicked },
-	{ "dns_list",              "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "dns_list",              "changed",         xst_dialog_modify_cb },
-	{ "domain",                "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "domain",                "changed",         xst_dialog_modify_cb },
-	{ "search_list",           "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "search_list",           "changed",         xst_dialog_modify_cb },
-	{ "statichost_list",       "unselect_row",    on_hosts_list_unselect_row },
-	{ "statichost_list",       "select_row",      on_hosts_list_select_row },
-	{ "ip",                    "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "ip",                    "changed",         xst_dialog_modify_cb },
-	{ "ip",                    "changed",         on_hosts_ip_changed },
-	{ "alias",                 "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "alias",                 "changed",         on_hosts_alias_changed },
-	{ "statichost_add",        "clicked",         on_hosts_add_clicked },
-	{ "statichost_add",        "clicked",         xst_dialog_modify_cb },
-	{ "statichost_delete",     "clicked",         on_hosts_delete_clicked },
-	{ "statichost_delete",     "clicked",         xst_dialog_modify_cb },
+	{ "network_admin",           "switch_page",     on_network_notebook_switch_page },
+	{ "hostname",                "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "hostname",                "changed",         xst_dialog_modify_cb },
+	{ "samba_use",               "toggled",         on_samba_use_toggled },
+	{ "description",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "description",             "changed",         xst_dialog_modify_cb },
+	{ "workgroup",               "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "workgroup",               "changed",         xst_dialog_modify_cb },
+	{ "wins_ip",                 "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "wins_ip",                 "changed",         xst_dialog_modify_cb },
+	{ "wins_use",                "toggled",         on_wins_use_toggled },
+	{ "wins_use",                "toggled",         xst_dialog_modify_cb },
+	{ "connection_list",         "select_row",      on_connection_list_select_row },
+	{ "connection_list",         "unselect_row",    on_connection_list_unselect_row },
+	{ "connection_add",          "clicked",         on_connection_add_clicked },
+	{ "connection_delete",       "clicked",         on_connection_delete_clicked },
+	{ "connection_configure",    "clicked",         on_connection_configure_clicked },
+	{ "connection_activate",     "clicked",         on_connection_activate_clicked },
+	{ "connection_deactivate",   "clicked",         on_connection_deactivate_clicked },
+	{ "dns_list",                "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "dns_list",                "changed",         xst_dialog_modify_cb },
+	{ "domain",                  "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "domain",                  "changed",         xst_dialog_modify_cb },
+	{ "search_list",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "search_list",             "changed",         xst_dialog_modify_cb },
+	{ "statichost_list",         "unselect_row",    on_hosts_list_unselect_row },
+	{ "statichost_list",         "select_row",      on_hosts_list_select_row },
+	{ "ip",                      "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "ip",                      "changed",         xst_dialog_modify_cb },
+	{ "ip",                      "changed",         on_hosts_ip_changed },
+	{ "alias",                   "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "alias",                   "changed",         on_hosts_alias_changed },
+	{ "statichost_add",          "clicked",         on_hosts_add_clicked },
+	{ "statichost_add",          "clicked",         xst_dialog_modify_cb },
+	{ "statichost_delete",       "clicked",         on_hosts_delete_clicked },
+	{ "statichost_delete",       "clicked",         xst_dialog_modify_cb },
 	{ NULL }
 };
 
 static const XstWidgetPolicy policies[] = {
-	/* Name                     Basic                        Advanced                   Root   User */
-	{ "general_hbox",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "connections_bbox",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "connection_delete",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_configure",   XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_activate",    XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "connection_deactivate",  XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "statichost_table",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "statichost_add",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "statichost_delete",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "samba_use",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "samba_frame",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "wins_ip",                XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "dns_table",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "domain",                 XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "domain_label",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "dns_list",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "dns_list_label",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "search_list",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
-	{ "search_list_label",      XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	/* Name                      Basic                        Advanced           Require-Root   Default */
+	{ "general_hbox",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "connections_bbox",        XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "connection_delete",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_configure",    XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_activate",     XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_deactivate",   XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "connection_def_gw_hbox",  XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "statichost_table",        XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "statichost_add",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "statichost_delete",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "samba_use",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "samba_frame",             XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "wins_ip",                 XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "dns_table",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "domain",                  XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "domain_label",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "dns_list",                XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "dns_list_label",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "search_list",             XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "search_list_label",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ NULL }
 };
 
@@ -140,15 +141,21 @@ update_complexity (void)
 	XstDialogComplexity complexity = tool->main_dialog->complexity;
 
 	update_notebook_complexity (complexity);
-	connection_update_complexity (complexity);
 }
 
 static void
 connect_signals (XstDialog *main_dialog, XstDialogSignal *sigs)
 {
+	GtkWidget *omenu, *menu;
+
+	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+
+	gtk_signal_connect (GTK_OBJECT (menu), "selection-done",
+			    GTK_SIGNAL_FUNC (xst_dialog_modify_cb), tool->main_dialog);
+	
 	gtk_signal_connect (GTK_OBJECT (main_dialog), "complexity_change",
-					GTK_SIGNAL_FUNC (update_complexity),
-					NULL);
+			    GTK_SIGNAL_FUNC (update_complexity), NULL);
 
 	xst_dialog_connect_signals (main_dialog, sigs);
 }

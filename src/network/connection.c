@@ -500,7 +500,7 @@ connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean en
 
 /* NULL if false, else GtkWidget in data in found node */
 static GtkWidget *
-connection_default_gw_exists (GtkWidget *omenu, gchar *dev)
+connection_default_gw_find_item (GtkWidget *omenu, gchar *dev)
 {
 	GList *l;
 	gchar *value;
@@ -515,21 +515,33 @@ connection_default_gw_exists (GtkWidget *omenu, gchar *dev)
 	return NULL;
 }
 
+static void
+connection_default_gw_activate (GtkMenuItem *item, gpointer data)
+{
+	gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", data);
+}
+
 void
 connection_default_gw_add (gchar *dev)
 {
 	GtkWidget *omenu, *menu, *item;
 	GList *l;
 	gchar *cpy;
+
+	if (!strcmp (dev, "lo"))
+		return;
 	
 	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
-	if (connection_default_gw_exists (omenu, dev))
+	if (connection_default_gw_find_item (omenu, dev))
 		return;
 	
 	cpy = g_strdup (dev);
 	item = gtk_menu_item_new_with_label (dev);
+	gtk_signal_connect (GTK_OBJECT (item), "activate",
+			    GTK_SIGNAL_FUNC (connection_default_gw_activate),
+			    (gpointer) cpy);
 	gtk_object_set_data (GTK_OBJECT (item), "value", cpy);
 	gtk_widget_show (item);
 	gtk_menu_append (GTK_MENU (menu), item);
@@ -549,7 +561,7 @@ connection_default_gw_remove (gchar *dev)
 	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
-	g_return_if_fail ((item = connection_default_gw_exists (omenu, dev)));
+	g_return_if_fail ((item = connection_default_gw_find_item (omenu, dev)));
 	
 	l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
 	l = g_list_remove (l, item);
@@ -559,6 +571,25 @@ connection_default_gw_remove (gchar *dev)
 	g_free (cpy);
 	
 	gtk_widget_destroy (item);
+}
+
+void
+connection_default_gw_select (XstTool *tool, gchar *dev)
+{
+	GtkWidget *omenu, *menu, *item;
+
+	omenu = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_omenu");
+	item = connection_default_gw_find_item (omenu, dev);
+	if (item) {
+		GList *l;
+
+		l = gtk_object_get_data (GTK_OBJECT (omenu), "list");
+		
+		gtk_option_menu_set_history (GTK_OPTION_MENU (omenu), g_list_index (l, item) + 1);
+		menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
+		gtk_menu_shell_activate_item (GTK_MENU_SHELL (menu), item, TRUE);
+		gtk_menu_shell_select_item (GTK_MENU_SHELL (menu), item);
+	}
 }
 
 void
@@ -615,24 +646,6 @@ connection_update_row (XstConnection *cxn)
 	gtk_clist_sort (GTK_CLIST (clist));
 
 	xst_dialog_modify (tool->main_dialog);
-}
-
-void
-connection_update_complexity (XstDialogComplexity complexity)
-{
-	GtkWidget *w;
-
-	w = xst_dialog_get_widget (tool->main_dialog, "connection_def_gw_hbox");
-	switch (complexity) {
-	case XST_DIALOG_BASIC:
-		gtk_widget_hide_all (w);
-		break;
-	case XST_DIALOG_ADVANCED:
-		gtk_widget_show_all (w);
-		break;
-	default:
-		g_warning ("connection_update_complexity: Unsupported complexity.");
-	}
 }
 
 void

@@ -1,3 +1,18 @@
+2001-07-10  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* main.c (connect_signals): Connect selection-done to
+	set selected device.
+
+	* transfer.c (transfer_gatewaydev_to_xml): Get selected
+	value and put into corresponding tag.
+	(transfer_xml_to_gatewaydev): converse.
+	(transfer_misc_tool_to_xml): Just to keep with the naming.
+	(transfer_misc_xml_to_tool): Do the gatewaydev stuff too.
+	(transfer_gui_to_xml): Do the misc stuff too.
+
+	* connection.c (connection_update_complexity): Removed:
+	using XstWidgetMode for this.
+
 2001-07-09  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* connection.c (connection_update_complexity):
