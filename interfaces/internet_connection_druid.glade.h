@@ -40,7 +40,7 @@ gchar *s = N_("To continue configuring your account, click \"Next\". To quit, cl
 gchar *s = N_("Warning message goes here..\n"
               "");
 gchar *s = N_("Finished");
-gchar *s = N_("You have successfully completed the Internet Connection druid. \n"
-              "Your computer is now configured to connect to the internet.\n"
-              "\n"
-              "To close this druid, click \"Finish\".  ");
+gchar *s = N_("Summary of new account data\n"
+              "goes here, plus indications on\n"
+              "how to proceed (go back, cancel\n"
+              "or finish).");
