@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* share-export.h: this file is part of shares-admin, a gnome-system-tool frontend 
- * for run level services administration.
+ * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
  *
@@ -25,6 +25,7 @@
 #define __SHARE_EXPORT_H__
 
 #include <glib-object.h>
+#include "gst.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -49,18 +50,16 @@ struct _GstShare {
 
 struct _GstShareClass {
 	GObjectClass parent_class;
+
+	void (* get_xml) (GstShare*, xmlNodePtr);
 };
 
-GType      gst_share_get_type    (void);
+GType         gst_share_get_type    (void);
 
-gchar*     gst_share_get_name    (GstShare*);
-void       gst_share_set_name    (GstShare*, gchar*);
+const gchar*  gst_share_get_path    (GstShare*);
+void          gst_share_set_path    (GstShare*, const gchar*);
 
-gchar*     gst_share_get_comment (GstShare*);
-void       gst_share_set_comment (GstShare*, gchar*);
-
-gchar*     gst_share_get_path    (GstShare*);
-void       gst_share_set_path    (GstShare*, gchar*);
+void          gst_share_get_xml     (GstShare*, xmlNodePtr);
 
 #ifdef __cplusplus
 }

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* share-export-nfs.h: this file is part of shares-admin, a gnome-system-tool frontend 
- * for run level services administration.
+ * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
  *
@@ -41,7 +41,8 @@ extern "C" {
 typedef struct _GstShareNFS        GstShareNFS;
 typedef struct _GstShareNFSClass   GstShareNFSClass;
 typedef struct _GstShareNFSPrivate GstShareNFSPrivate;
-
+typedef struct _GstShareACLElement GstShareACLElement;
+	
 struct _GstShareNFS {
 	GstShare parent;
 
@@ -52,11 +53,21 @@ struct _GstShareNFSClass {
 	GstShareClass parent_class;
 };
 
-GType      gst_share_nfs_get_type (void);
+struct _GstShareACLElement {
+	gchar    *element;
+	gboolean  read_only;
+};
 
-/*GstShareSMB*     gst_share_nfs_new (gchar*, gchar*, gchar*);
-GstShareSMB*     gst_share_smb_new_from_xml (xmlNodePtr);
-*/
+GType gst_share_nfs_get_type (void);
+
+GstShareNFS*     gst_share_nfs_new (const gchar*);
+GstShareNFS*     gst_share_nfs_new_from_xml (xmlNodePtr);
+
+void             gst_share_nfs_add_acl_element (GstShareNFS*, const gchar *, gboolean);
+void             gst_share_nfs_set_acl         (GstShareNFS*, GSList*);
+const GSList*    gst_share_nfs_get_acl         (GstShareNFS*);
+void             gst_share_nfs_clear_acl       (GstShareNFS*);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

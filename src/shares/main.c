@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* main.c: this file is part of services-admin, a gnome-system-tool frontend 
- * for run level services administration.
+/* main.c: this file is part of shares-admin, a gnome-system-tool frontend 
+ * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
  *
@@ -27,23 +27,41 @@
 
 #include "gst.h"
 #include "table.h"
+#include "nfs-acl-table.h"
 #include "transfer.h"
 #include "share-export-smb.h"
+#include "callbacks.h"
 
 GstTool *tool;
+GtkIconTheme *icon_theme;
+
+static GstDialogSignal signals [] = {
+	/* Main dialog */
+	{ "add_share",                "clicked",      G_CALLBACK (on_add_share_clicked) },
+	{ "edit_share",               "clicked",      G_CALLBACK (on_edit_share_clicked) },
+	{ "delete_share",             "clicked",      G_CALLBACK (on_delete_share_clicked) },
+	/* Shares dialog */
+	{ "share_type",               "changed",      G_CALLBACK (on_share_type_changed) },
+	{ "share_nfs_delete",         "clicked",      G_CALLBACK (on_share_nfs_delete_clicked) },
+	{ "share_nfs_add",            "clicked",      G_CALLBACK (on_share_nfs_add_clicked) },
+	/* NFS add hosts dialog */
+	{ "share_nfs_host_type",      "changed",      G_CALLBACK (on_share_nfs_host_type_changed) },
+	{ NULL }
+};
 
 int
 main (int argc, char *argv[])
 {
-	GstShareSMB *share;
-	
 	gst_init ("shares-admin", argc, argv, NULL);
 
 	tool = gst_tool_new ();
 	gst_tool_construct (tool, "shares", _("Shared folders settings"));
-	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
+	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+	gst_dialog_connect_signals (tool->main_dialog, signals);
 
 	table_create ();
-
+	nfs_acl_table_create ();
+	share_nfs_add_hosts_dialog_setup ();
+	
 	gst_tool_main (tool, FALSE);
 }

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* share-export-smb.h: this file is part of shares-admin, a gnome-system-tool frontend 
- * for run level services administration.
+ * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
  *
@@ -60,13 +60,19 @@ struct _GstShareSMBClass {
 	GstShareClass parent_class;
 };
 
-GType      gst_share_smb_get_type (void);
-GType      gst_share_smb_flags_get_type (void);
+GType            gst_share_smb_get_type (void);
+GType            gst_share_smb_flags_get_type (void);
+
+const gchar*     gst_share_smb_get_name    (GstShareSMB*);
+void             gst_share_smb_set_name    (GstShareSMB*, const gchar*);
+
+const gchar*     gst_share_smb_get_comment (GstShareSMB*);
+void             gst_share_smb_set_comment (GstShareSMB*, const gchar*);
 
 GstShareSMBFlags gst_share_smb_get_flags (GstShareSMB*);
 void             gst_share_smb_set_flags (GstShareSMB*, GstShareSMBFlags);
 
-GstShareSMB*     gst_share_smb_new (gchar*, gchar*, gchar*, GstShareSMBFlags);
+GstShareSMB*     gst_share_smb_new (const gchar*, const gchar*, const gchar*, GstShareSMBFlags);
 GstShareSMB*     gst_share_smb_new_from_xml (xmlNodePtr);
 
 #ifdef __cplusplus

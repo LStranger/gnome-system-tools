@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.h: this file is part of shares-admin, a gnome-system-tool frontend 
+/* share-settings.h: this file is part of shares-admin, a gnome-system-tool frontend 
  * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
@@ -18,15 +18,19 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho <carlosg@gnome.org>.
+ * Authors: Carlos Garnacho Parro <carlosg@gnome.org>.
  */
 
-#ifndef _TRANSFER_H
-#define _TRANSFER_H
+#ifndef _SHARE_SETTINGS_H
+#define _SHARE_SETTINGS_H
 
-#include "gst.h"
+#include <gtk/gtkwidget.h>
+#include "share-export.h"
 
-void	transfer_xml_to_gui	(GstTool*, gpointer);
-void	transfer_gui_to_xml	(GstTool*, gpointer);
+GtkWidget*    share_settings_prepare_dialog    (void);
+void          share_settings_close_dialog      (void);
+GstShare*     share_settings_get_share         (void);
+void          share_settings_set_share         (GstShare*);
 
-#endif /* TRANSFER_H */
+
+#endif /* _SHARE_SETTINGS_H */

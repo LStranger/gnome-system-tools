@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.h: this file is part of shares-admin, a gnome-system-tool frontend 
+/* nfs-acl-table.h: this file is part of shares-admin, a gnome-system-tool frontend 
  * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
@@ -18,15 +18,22 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Carlos Garnacho <carlosg@gnome.org>.
+ * Authors: Carlos Garnacho Parro <carlosg@gnome.org>.
  */
 
-#ifndef _TRANSFER_H
-#define _TRANSFER_H
+#ifndef _NFS_ACL_TABLE_H
+#define _NFS_ACL_TABLE_H
 
-#include "gst.h"
+#include "share-export-nfs.h"
 
-void	transfer_xml_to_gui	(GstTool*, gpointer);
-void	transfer_gui_to_xml	(GstTool*, gpointer);
+enum {
+	NFS_COL_PATTERN,
+	NFS_COL_READ_ONLY,
+	NFS_COL_LAST
+};
 
-#endif /* TRANSFER_H */
+void    nfs_acl_table_create          (void);
+void    nfs_acl_table_add_element     (GstShareACLElement*);
+void    nfs_acl_table_insert_elements (GstShareNFS*);
+
+#endif /* _NFS_ACL_TABLE_H */

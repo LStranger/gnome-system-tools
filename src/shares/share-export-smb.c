@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* share-export-smb.c: this file is part of shares-admin, a gnome-system-tool frontend 
- * for run level services administration.
+ * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
  *
@@ -28,6 +28,9 @@
 #include "gst.h"
 
 struct _GstShareSMBPrivate {
+	gchar *name;
+	gchar *comment;
+
 	GstShareSMBFlags flags;
 };
 
@@ -44,8 +47,13 @@ static void gst_share_smb_get_property (GObject      *object,
 					GValue       *value,
 					GParamSpec   *pspec);
 
+static void  gst_share_smb_get_xml     (GstShare     *share,
+					xmlNodePtr    parent);
+
 enum {
 	PROP_0,
+	PROP_NAME,
+	PROP_COMMENT,
 	PROP_FLAGS
 };
 
@@ -99,7 +107,8 @@ gst_share_smb_get_type (void)
 static void
 gst_share_smb_class_init (GstShareSMBClass *class)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (class);
+	GObjectClass  *object_class = G_OBJECT_CLASS (class);
+	GstShareClass *share_class  = GST_SHARE_CLASS (class);
 
 	parent_class = g_type_class_peek_parent (class);
 
@@ -107,6 +116,22 @@ gst_share_smb_class_init (GstShareSMBClass *class)
 	object_class->get_property = gst_share_smb_get_property;
 	object_class->finalize     = gst_share_smb_finalize;
 
+	share_class->get_xml = gst_share_smb_get_xml;
+
+	g_object_class_install_property (object_class,
+					 PROP_NAME,
+					 g_param_spec_string ("share_name",
+							      NULL,
+							      NULL,
+							      NULL,
+							      G_PARAM_CONSTRUCT | G_PARAM_READWRITE));
+	g_object_class_install_property (object_class,
+					 PROP_COMMENT,
+					 g_param_spec_string ("share_comment",
+							      "Share comment",
+							      "Comment for the share",
+							      NULL,
+							      G_PARAM_CONSTRUCT | G_PARAM_READWRITE));
 	g_object_class_install_property (object_class,
 					 PROP_FLAGS,
 					 g_param_spec_flags ("share_flags",
@@ -123,7 +148,9 @@ gst_share_smb_init (GstShareSMB *share)
 	g_return_if_fail (GST_IS_SHARE_SMB (share));
 
 	share->_priv = g_new0 (GstShareSMBPrivate, 1);
-	share->_priv->flags = 0;
+	share->_priv->name    = NULL;
+	share->_priv->comment = NULL;
+	share->_priv->flags   = 0;
 }
 
 static void
@@ -134,6 +161,12 @@ gst_share_smb_finalize (GObject *object)
 	g_return_if_fail (GST_IS_SHARE_SMB (share));
 
 	if (share->_priv) {
+		g_free (share->_priv->name);
+		share->_priv->name = NULL;
+		
+		g_free (share->_priv->comment);
+		share->_priv->comment = NULL;
+		
 		g_free (share->_priv);
 		share->_priv = NULL;
 	}
@@ -153,6 +186,12 @@ gst_share_smb_set_property (GObject      *object,
 	g_return_if_fail (GST_IS_SHARE_SMB (share));
 
 	switch (prop_id) {
+	case PROP_NAME:
+		share->_priv->name = (gchar*) g_value_dup_string (value);
+		break;
+	case PROP_COMMENT:
+		share->_priv->comment = (gchar*) g_value_dup_string (value);
+		break;
 	case PROP_FLAGS:
 		share->_priv->flags = g_value_get_flags (value);
 		break;
@@ -170,10 +209,73 @@ gst_share_smb_get_property (GObject      *object,
 	g_return_if_fail (GST_IS_SHARE_SMB (share));
 
 	switch (prop_id) {
+	case PROP_NAME:
+		g_value_set_string (value, share->_priv->name);
+		break;
+	case PROP_COMMENT:
+		g_value_set_string (value, share->_priv->comment);
+		break;
 	case PROP_FLAGS:
 		g_value_set_flags (value, share->_priv->flags);
 		break;
 	}
+}
+
+static void
+gst_share_smb_get_xml (GstShare *share, xmlNodePtr parent)
+{
+	xmlNodePtr node;
+	gint       flags;
+
+	node = gst_xml_element_add (parent, "export");
+	gst_xml_element_set_attribute (node, "type", "smb");
+
+	gst_xml_set_child_content (node, "path",    gst_share_get_path (share));
+	gst_xml_set_child_content (node, "name",    GST_SHARE_SMB (share)->_priv->name);
+	gst_xml_set_child_content (node, "comment", GST_SHARE_SMB (share)->_priv->comment);
+
+	flags = GST_SHARE_SMB (share)->_priv->flags;
+
+	if (flags & GST_SHARE_SMB_ENABLED)
+		gst_xml_element_set_state (node, "enabled", TRUE);
+	if (flags & GST_SHARE_SMB_BROWSABLE)
+		gst_xml_element_set_state (node, "browse", TRUE);
+	if (flags & GST_SHARE_SMB_PUBLIC)
+		gst_xml_element_set_state (node, "public", TRUE);
+	if (flags & GST_SHARE_SMB_WRITABLE)
+		gst_xml_element_set_state (node, "write", TRUE);
+}
+
+const gchar*
+gst_share_smb_get_name (GstShareSMB *share)
+{
+	g_return_val_if_fail (GST_IS_SHARE_SMB (share), NULL);
+
+	return share->_priv->name;
+}
+
+void
+gst_share_smb_set_name (GstShareSMB *share, const gchar *name)
+{
+	g_return_if_fail (GST_IS_SHARE_SMB (share));
+
+	share->_priv->name = g_strdup (name);
+}
+
+const gchar*
+gst_share_smb_get_comment (GstShareSMB *share)
+{
+	g_return_val_if_fail (GST_IS_SHARE_SMB (share), NULL);
+
+	return share->_priv->comment;
+}
+
+void
+gst_share_smb_set_comment (GstShareSMB *share, const gchar *comment)
+{
+	g_return_if_fail (GST_IS_SHARE_SMB (share));
+
+	share->_priv->comment = g_strdup (comment);
 }
 
 GstShareSMBFlags
@@ -193,19 +295,19 @@ gst_share_smb_set_flags (GstShareSMB *share, GstShareSMBFlags flags)
 }
 
 GstShareSMB*
-gst_share_smb_new (gchar            *name,
-		   gchar            *comment,
-		   gchar            *path,
+gst_share_smb_new (const gchar      *name,
+		   const gchar      *comment,
+		   const gchar      *path,
 		   GstShareSMBFlags  flags)
 {
 	GstShareSMB *share;
 
 	share = g_object_new (GST_TYPE_SHARE_SMB,
+			      "share-name",    name,
+			      "share-comment", comment,
 			      "share-flags",   flags,
 			      NULL);
 
-	gst_share_set_name    (GST_SHARE (share), name);
-	gst_share_set_comment (GST_SHARE (share), comment);
 	gst_share_set_path    (GST_SHARE (share), path);
 
 	return share;
@@ -214,23 +316,18 @@ gst_share_smb_new (gchar            *name,
 static gint
 gst_share_smb_get_flags_from_xml (xmlNodePtr node)
 {
-	xmlNodePtr boolnode;
 	gint flags = 0;
 
-	boolnode = gst_xml_element_find_first (node, "enabled");
-	if (gst_xml_element_get_bool_attr (boolnode, "state"))
+	if (gst_xml_element_get_state (node, "enabled"))
 	    flags |= GST_SHARE_SMB_ENABLED;
 
-	boolnode = gst_xml_element_find_first (node, "browse");
-	if (gst_xml_element_get_bool_attr (boolnode, "state"))
+	if (gst_xml_element_get_state (node, "browse"))
 	    flags |= GST_SHARE_SMB_BROWSABLE;
 
-	boolnode = gst_xml_element_find_first (node, "public");
-	if (gst_xml_element_get_bool_attr (boolnode, "state"))
+	if (gst_xml_element_get_state (node, "public"))
 	    flags |= GST_SHARE_SMB_PUBLIC;
 
-	boolnode = gst_xml_element_find_first (node, "write");
-	if (gst_xml_element_get_bool_attr (boolnode, "state"))
+	if (gst_xml_element_get_state (node, "write"))
 	    flags |= GST_SHARE_SMB_WRITABLE;
 
 	return flags;
@@ -239,8 +336,9 @@ gst_share_smb_get_flags_from_xml (xmlNodePtr node)
 GstShareSMB*
 gst_share_smb_new_from_xml (xmlNodePtr node)
 {
-	gchar *type, *name, *comment, *path;
-	gint   flags;
+	gchar       *type, *name, *comment, *path;
+	GstShareSMB *share;
+	gint         flags;
 
 	type = gst_xml_element_get_attribute (node, "type");
 
@@ -252,5 +350,11 @@ gst_share_smb_new_from_xml (xmlNodePtr node)
 	path    = gst_xml_get_child_content (node, "path");
 	flags   = gst_share_smb_get_flags_from_xml (node);
 
-	return gst_share_smb_new (name, comment, path, flags);
+	share = gst_share_smb_new (name, comment, path, flags);
+
+	g_free (name);
+	g_free (comment);
+	g_free (path);
+
+	return share;
 }

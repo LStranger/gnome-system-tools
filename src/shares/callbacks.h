@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* table.h: this file is part of shares-admin, a gnome-system-tool frontend 
+/* callbacks.h: this file is part of shares-admin, a gnome-system-tool frontend 
  * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
@@ -21,21 +21,18 @@
  * Authors: Carlos Garnacho Parro <carlosg@gnome.org>.
  */
 
-#ifndef __TABLE_H__
-#define __TABLE_H__
+#ifndef __CALLBACKS_H
+#define __CALLBACKS_H
 
-#include "share-export.h"
+gboolean  on_shares_table_button_press        (GtkWidget*, GdkEventButton*, gpointer);
+gboolean  on_shares_table_popup_menu          (GtkWidget*, GtkWidget*);
+void      on_shares_table_selection_changed   (GtkTreeSelection*, gpointer);
+void      on_add_share_clicked                (GtkWidget*, gpointer);
+void      on_edit_share_clicked               (GtkWidget*, gpointer);
+void      on_delete_share_clicked             (GtkWidget*, gpointer);
 
-enum {
-	   COL_PIXBUF,
-	   COL_PATH,
-	   COL_POINTER,
-	   COL_LAST
-};
-
-void    table_create               (void);
-void    table_add_share_from_node  (xmlNodePtr);
-void    table_add_share            (GstShare*);
-void    table_modify_share_at_iter (GtkTreeIter, GstShare*);
-
-#endif /* __TABLE_H__ */
+void      on_share_type_changed               (GtkWidget*, gpointer);
+void      on_share_nfs_delete_clicked         (GtkWidget*, gpointer);
+void      on_share_nfs_add_clicked            (GtkWidget*, gpointer);
+void      on_share_nfs_host_type_changed      (GtkWidget*, gpointer);
+#endif /* __CALLBACKS_H */

@@ -23,7 +23,11 @@ shares_admin_SOURCES = \
 	share-export-smb.c share-export-smb.h \
 	share-export-nfs.c share-export-nfs.h \
 	table.c table.h \
+	nfs-acl-table.c nfs-acl-table.h \
 	transfer.c transfer.h \
+	callbacks.c callbacks.h \
+	share-settings.c share-settings.h \
+	share-nfs-add-hosts.c share-nfs-add-hosts.h \
 	main.c 
 
 toolpixmaps =

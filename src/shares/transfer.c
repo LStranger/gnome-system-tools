@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* transfer.c: this file is part of shares-admin, a gnome-system-tool frontend 
- * for run level services administration.
+ * for shared folders administration.
  * 
  * Copyright (C) 2004 Carlos Garnacho
  *
@@ -22,18 +22,53 @@
  */
 
 #include "gst.h"
+#include "share-export.h"
+#include "table.h"
 
 void
 transfer_xml_to_gui (GstTool *tool, gpointer data)
 {
-	   xmlNodePtr root, export;
+	xmlNodePtr root, export;
 
-	   root   = gst_xml_doc_get_root (tool->config);
-	   export = gst_xml_element_find_first (root, "exports");
+	root   = gst_xml_doc_get_root (tool->config);
+	export = gst_xml_element_find_first (root, "exports");
 
-	   for (export = gst_xml_element_find_first (export, "export");
-		   export;
-		   export = gst_xml_element_find_next (export, "export")) {
-			 table_add_node (export);
-	   }
+	for (export = gst_xml_element_find_first (export, "export");
+	     export;
+	     export = gst_xml_element_find_next (export, "export")) {
+		table_add_share_from_node (export);
+	}
+}
+
+void
+transfer_gui_to_xml (GstTool *tool, gpointer data)
+{
+	xmlNodePtr    root, export;
+	GtkWidget    *table;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gboolean      valid;
+	GstShare     *share;
+
+	g_print ("eoeoireurowie\n");
+	
+	table = gst_dialog_get_widget (tool->main_dialog, "shares_table");
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (table));
+
+	root   = gst_xml_doc_get_root (tool->config);
+	export = gst_xml_element_find_first (root, "exports");
+
+	gst_xml_element_destroy_children (export);
+
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
+	while (valid) {
+		gtk_tree_model_get (model, &iter,
+				    COL_POINTER, &share,
+				    -1);
+		gst_share_get_xml (share, export);
+
+		g_object_unref (share);
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
 }

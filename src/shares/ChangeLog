@@ -1,3 +1,17 @@
+2004-09-14  Carlos Garnacho Parro  <carlosg@gnome.org>
+
+	* callbacks.[ch], nfs-acl-table.[ch], share-nfs-add-hosts.[ch],
+	share-settings.[ch]: added, they add heaps of functionality to
+	shares-admin
+	* main.c: added some callbacks
+	* share-export-nfs.[ch]: added hosts acl stuff
+	* share-export-smb.[ch]: added some properties from the parent class,
+	generally make it work fine
+	* share-export.[ch]: removed a couple of non-common properties, added
+	(get_xml) virtual function
+	* table.c: added right click button menu plus other improvements
+	* transfer.[ch]: reindented, added (transfer_xml_to_gui)
+
 2004-08-29  Carlos Garnacho Parro  <carlosg@gnome.org>
 
 	* Makefile.am: doh! added
