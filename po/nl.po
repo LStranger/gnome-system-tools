@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-17 04:13+0200\n"
-"PO-Revision-Date: 2004-05-18 02:18+0200\n"
+"POT-Creation-Date: 2004-06-13 19:57+0200\n"
+"PO-Revision-Date: 2004-06-18 06:26+0200\n"
 "Last-Translator: Tino Meinen <a.t.meinen@chello.nl>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -231,7 +231,7 @@ msgid "Finished"
 msgstr "Klaar"
 
 #: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:52
-#: src/network/connection.c:1891
+#: src/network/connection.c:1867
 msgid "Manual"
 msgstr "Handmatig"
 
@@ -524,11 +524,11 @@ msgstr "Maak activatie mogelijk voor alle gebr_uikers"
 msgid "Auto"
 msgstr "Automatisch"
 
-#: interfaces/network.glade.in.h:30 src/network/connection.c:1893
+#: interfaces/network.glade.in.h:30 src/network/connection.c:1869
 msgid "Automatic (BOOTP)"
 msgstr "Automatisch (BOOTP)"
 
-#: interfaces/network.glade.in.h:31 src/network/connection.c:1892
+#: interfaces/network.glade.in.h:31 src/network/connection.c:1868
 msgid "Automatic (DHCP)"
 msgstr "Automatisch (DHCP)"
 
@@ -651,7 +651,9 @@ msgstr ""
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
-msgstr "Geef nu het adres dat dit netwerkapparaat zal krijgen en het adres van het apparaat waarmee het verbonden zal worden."
+msgstr ""
+"Geef nu het adres dat dit netwerkapparaat zal krijgen en het adres van het "
+"apparaat waarmee het verbonden zal worden."
 
 #: interfaces/network.glade.in.h:61
 msgid "Now, please enter the address that this network device will have."
@@ -661,7 +663,9 @@ msgstr "Geef nu het adres dat dit netwerkapparaat zal krijgen."
 msgid ""
 "Now, please specify if this connection should be enabled, this means that "
 "the configuration will be applied when the assistant finishes."
-msgstr "Geef nu aan of deze verbinding moet worden ingeschakeld. Dit betekent dat de configuratie zal worden toegepast wanneer de assistent is voltooid."
+msgstr ""
+"Geef nu aan of deze verbinding moet worden ingeschakeld. Dit betekent dat de "
+"configuratie zal worden toegepast wanneer de assistent is voltooid."
 
 #: interfaces/network.glade.in.h:63
 msgid "Number to _access an external line:"
@@ -803,6 +807,8 @@ msgid "_Deactivate"
 msgstr "_Deactiveren"
 
 #: interfaces/network.glade.in.h:93 interfaces/users.glade.in.h:55
+#: src/network/connection.c:64 src/network/dns.c:39 src/network/hosts.c:42
+#: src/users/table.c:48
 msgid "_Delete"
 msgstr "_Verwijderen"
 
@@ -915,50 +921,42 @@ msgid "_Wireless"
 msgstr "_Draadloos"
 
 #: interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">Description</span>"
-msgstr "<span weight=\"bold\">Beschrijving</span>"
-
-#: interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">Algemene informatie</span>"
 
-#: interfaces/services.glade.in.h:3
+#: interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">Voorzieningen</span>"
 
-#: interfaces/services.glade.in.h:4
-msgid "Click on an item in the list to show it's description."
-msgstr "Klik op een item uit de lijst voor een beschrijving."
-
-#: interfaces/services.glade.in.h:5
+#: interfaces/services.glade.in.h:3
 msgid "Description:"
 msgstr "Beschrijving:"
 
-#: interfaces/services.glade.in.h:6
+#: interfaces/services.glade.in.h:4
 msgid "Service _Properties"
 msgstr "_Eigenschappen van voorziening"
 
-#: interfaces/services.glade.in.h:7
+#: interfaces/services.glade.in.h:5
 msgid "Service:"
 msgstr "Voorziening:"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:6
 msgid "Status:"
 msgstr "Status:"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:7
 msgid "Use this tool to specify which services to run"
 msgstr "Gebruik dit onderdeel om de voorzieningen per runlevel te beheren"
 
-#: interfaces/services.glade.in.h:10
+#: interfaces/services.glade.in.h:8
 msgid "_Order list by startup sequence"
 msgstr "_Sorteer lijst op startmethode:"
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:9
 msgid "_Start"
 msgstr "_Start"
 
-#: interfaces/services.glade.in.h:12
+#: interfaces/services.glade.in.h:10
 msgid "_Startup sequence:"
 msgstr "_Opstartvolgorde:"
 
@@ -1292,7 +1290,7 @@ msgstr "Maken van een nieuw opstart-image (%d van %d)"
 msgid "Finished creating a new boot image"
 msgstr "Nieuw opstart-image aangemaakt"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:482
+#: src/boot/boot-image.c:40 src/network/profile.c:490
 msgid "Unknown"
 msgstr "Onbekend"
 
@@ -1322,28 +1320,30 @@ msgstr "GNU/Hurd"
 
 #: src/boot/boot-image.c:276
 #, c-format
-msgid "Invalid path: %s"
-msgstr "Onjuist pad: %s"
+msgid "\"%s\" is an invalid path"
+msgstr "\"%s\" is een ongeldig pad"
 
 #: src/boot/boot-image.c:292
 #, c-format
-msgid "Image '%s' already exists, please set another name."
-msgstr "Image '%s' bestaat al, kies a.u.b. een andere naam."
+msgid "\"%s\" already exists, please set another name"
+msgstr "\"%s\" bestaat al, gebruik een andere naam"
 
+# opstartbestand
 #: src/boot/boot-image.c:298
 #, c-format
-msgid "Invalid image name: '%s'"
-msgstr "Onjuiste naam: '%s'"
+msgid "Invalid image name: \"%s\""
+msgstr "Ongeldige naam van image: \"%s\""
 
+# Ongeldig opstartbestand
 #: src/boot/boot-image.c:311
 #, c-format
-msgid "Invalid image: '%s'"
-msgstr "Onjuist image: '%s'"
+msgid "Invalid image: \"%s\""
+msgstr "Ongeldig image: \"%s\""
 
 #: src/boot/boot-image.c:329
 #, c-format
-msgid "Invalid root device: '%s'"
-msgstr "Onjuist opstartapparaat: '%s'"
+msgid "Invalid root device: \"%s\""
+msgstr "Ongeldig root-apparaat: \"%s\""
 
 # Map ipv pad gebruikt
 #: src/boot/boot-settings.c:44
@@ -1381,8 +1381,8 @@ msgid "Error deleting boot image"
 msgstr "Fout bij verwijderen opstart-image"
 
 #: src/boot/callbacks.c:394
-msgid "Without at least one boot image your system will not start."
-msgstr "Zonder tenminste één opstart-image zal uw systeem niet kunnen starten."
+msgid "Without at least one boot image your computer will not start"
+msgstr "Zonder tenminste één opstart-image zal uw computer niet kunnen starten"
 
 #: src/boot/callbacks.c:415
 msgid "This may leave this operating system unbootable"
@@ -1410,7 +1410,7 @@ msgstr "Naam"
 msgid "Default"
 msgstr "Standaard"
 
-#: src/boot/table.c:43 src/network/connection.c:500
+#: src/boot/table.c:43 src/network/connection.c:487
 msgid "Type"
 msgstr "Type"
 
@@ -1418,47 +1418,51 @@ msgstr "Type"
 msgid "Kernel Image"
 msgstr "Kernel Image"
 
-#: src/boot/table.c:45 src/network/connection.c:516
+#: src/boot/table.c:45 src/network/connection.c:503
 msgid "Device"
 msgstr "Apparaat"
 
-#: src/boot/table.c:50 src/network/connection.c:62
+#: src/boot/table.c:50
 msgid "/_Add ..."
 msgstr "/_Toevoegen..."
 
-#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
-#: src/users/table.c:56
+#: src/boot/table.c:52
 msgid "/_Properties"
 msgstr "/_eigenschappen"
 
-#: src/boot/table.c:53 src/network/connection.c:65 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53
 msgid "/_Delete"
 msgstr "/Verwij_deren"
 
-# verbinding krijgen
+# verbinding krijgen/leggen
 #. the proccess was running ssh
 #: src/common/gst-auth.c:89
-msgid "Could not connect to the computer"
-msgstr "Kon geen verbinding met de computer maken"
+msgid "The tool could not connect to the computer"
+msgstr "Het programma kon geen verbinding met de computer maken"
 
 # toestemming voor dit netwerk
 #: src/common/gst-auth.c:90
 msgid ""
 "Check that you have access to this network and that the computer is actually "
 "working and running SSHD"
-msgstr "Controleer of u toegang tot dit netwerk heeft en dat de computer daadwerkelijk werkt en SSHD gebruikt"
+msgstr ""
+"Controleer of u toegang tot dit netwerk heeft en dat de computer "
+"daadwerkelijk werkt en SSHD gebruikt"
 
-# onjuist
+# onjuist/verkeerd
+# ongeldig is de letterlijke vertaling,
+# maar met de uitleg hieronder betekent het gewoon dat je dit 
+# bericht krijgt als je het wachtwoord verkeerd hebt ingetypt.
 #. the proccess was running su
 #: src/common/gst-auth.c:94
-msgid "The password you entered is invalid"
-msgstr "Het opgegeven wachtwoord is ongeldig"
+msgid "The entered password is invalid"
+msgstr "Het opgegeven wachtwoord is onjuist"
 
 #: src/common/gst-auth.c:95
 msgid ""
-"Check that you typed it correctly and that you haven't activated caps lock"
-msgstr "Controleer of u het juist heeft getypt en of Caps Lock niet aanstaat"
+"Check that you typed it correctly and that you haven't activated the \"caps "
+"lock\" key"
+msgstr "Controleer of u het juist heeft getypt en of \"Caps Lock\" niet aanstaat"
 
 #: src/common/gst-auth.c:104
 #, c-format
@@ -1466,12 +1470,12 @@ msgid "Could not run \"%s\""
 msgstr "Kon \"%s\" niet uitvoeren"
 
 #: src/common/gst-auth.c:105
-msgid "Check that you have permissions to run it."
-msgstr "Controleer of u de rechten heeft om het uit te voeren."
+msgid "Check that you have permissions to run this command"
+msgstr "Controleer of u de rechten heeft om deze opdracht uit te voeren"
 
 #: src/common/gst-auth.c:107
-msgid "An unexpected error has ocurred."
-msgstr "Er is een onverwachte fout opgetreden."
+msgid "An unexpected error has ocurred"
+msgstr "Er is een onverwachte fout opgetreden"
 
 #: src/common/gst-dialog.c:62
 #, c-format
@@ -1487,7 +1491,7 @@ msgid " Fewer _Options"
 msgstr " Minder _opties"
 
 #: src/common/gst-dialog.c:507
-msgid "There are changes which haven't been applied"
+msgid "There are changes which have not been applied"
 msgstr "Sommige aanpassingen zijn nog niet toegepast"
 
 #: src/common/gst-dialog.c:508
@@ -1498,15 +1502,6 @@ msgstr "Wilt u deze nu toepassen?"
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fout bij het verbinden van signaal '%s' aan widget '%s'"
-
-#: src/common/gst-tool.c:802
-#, c-format
-msgid "Skipping %s directive..."
-msgstr "Directive %s wordt overgeslagen..."
-
-#: src/common/gst-tool.c:929
-msgid "Skipping actual save..."
-msgstr "Opslaan wordt overgeslagen..."
 
 #: src/common/gst-tool.c:1003
 msgid "The configuration could not be loaded"
@@ -1551,60 +1546,56 @@ msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
 # netwerkverbinding via dit apparaat
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:397
 msgid ""
 "This will disable any network connection with this interface as soon as you "
-"hit \"apply\"."
-msgstr "Dit zal elke netwerkverbinding met dit apparaat uitschakelen zodra u op \"toepassen\" klikt."
+"press \"apply\""
+msgstr "Dit zal elke netwerkverbinding met dit apparaat uitschakelen zodra u op \"toepassen\" klikt"
 
-#: src/network/callbacks.c:370
+#: src/network/callbacks.c:402
 #, c-format
 msgid "Are you sure you want to delete connection \"%s\"?"
 msgstr "Weet u zeker dat u verbinding \"%s\" wilt verwijderen?"
 
-#: src/network/callbacks.c:460
+#: src/network/callbacks.c:492
 msgid "SMB Support is not running"
 msgstr "Geen ondersteuning voor SMB aanwezig"
 
-#: src/network/callbacks.c:461
+#: src/network/callbacks.c:493
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
-"system to enable windows networking."
-msgstr "U heeft geen SMB ondersteuning geïnstalleerd. Installeer de SMB ondersteuning in het systeem om een windows netwerk mogelijk te maken."
+"system to enable file sharing in Windows networks"
+msgstr "U heeft geen SMB ondersteuning geïnstalleerd. Installeer ondersteuning voor SMB om het delen van bestanden in een Windows netwerk mogelijk te maken"
 
 # aangepast
-#: src/network/callbacks.c:525
-msgid "Host name has changed"
-msgstr "Hostnaam is veranderd"
+#: src/network/callbacks.c:557
+msgid "The host name has changed"
+msgstr "De hostnaam is veranderd"
 
 # Reden: de computernaam is gewijzigd
-#: src/network/callbacks.c:526
+#: src/network/callbacks.c:558
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
-msgstr "Hierdoor zult u geen nieuwe programma's kunnen starten en zult u zich dus opnieuw moeten aanmelden. Toch doorgaan?"
+msgstr ""
+"Hierdoor zult u geen nieuwe programma's kunnen starten en zult u zich dus "
+"opnieuw moeten aanmelden. Toch doorgaan?"
 
-#: src/network/callbacks.c:530
+#: src/network/callbacks.c:562
 msgid "Change _Host name"
 msgstr "_Hostnaam veranderen"
 
-#: src/network/callbacks.c:573
-msgid "Wvdial missing"
-msgstr "Wvdial ontbreekt"
+#: src/network/callbacks.c:605 src/network/callbacks.c:632
+msgid "Wvdial command not found"
+msgstr "Het programma wvdial werd niet gevonden"
 
-#: src/network/callbacks.c:574
+#: src/network/callbacks.c:606
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
-"PPP (modem) connections will not activate."
-msgstr ""
-"wvdial kon niet op uw systeem worden gevonden. U moet wvdial installeren om "
-"de PPP (modem) verbindingen te activeren."
+"PPP (modem) connections will not activate"
+msgstr "wvdial is niet op uw systeem aangetroffen. U moet wvdial installeren om de PPP (modem) verbindingen te kunnen activeren"
 
-#: src/network/callbacks.c:600
-msgid "Wvdial not found"
-msgstr "Wvdial niet gevonden"
-
-#: src/network/callbacks.c:601
+#: src/network/callbacks.c:633
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1613,92 +1604,96 @@ msgstr ""
 "de PPP (modem) verbindingen te activeren. Toch doorgaan?"
 
 # Volgende
-#: src/network/callbacks.c:605 src/network/callbacks.c:632
+#: src/network/callbacks.c:637 src/network/callbacks.c:664
 msgid "_Continue"
 msgstr "_Doorgaan"
 
-#: src/network/callbacks.c:628
+#: src/network/callbacks.c:660
 msgid "The default gateway device is not activated"
 msgstr "Het standaard gateway apparaat is niet geactiveerd"
 
 # Reden: De standaard-gateway is niet geactiveerd
-#: src/network/callbacks.c:629
+#: src/network/callbacks.c:661
 msgid "This will prevent you from connecting to the Internet. Continue anyway?"
-msgstr "Hierdoor zult u geen toegang kunnen krijgen tot het internet. Toch doorgaan?"
+msgstr ""
+"Hierdoor zult u geen toegang kunnen krijgen tot het internet. Toch doorgaan?"
 
-#: src/network/callbacks.c:677
+#: src/network/callbacks.c:709
 msgid "The default gateway device is missing gateway information"
 msgstr "Op het standaard gateway apparaat ontbreekt gateway informatie"
 
 # Reden: Het standaard gateway-apparaat mist gateway informatie
-#: src/network/callbacks.c:678
+#: src/network/callbacks.c:710
 msgid ""
 "Please provide this information to proceed, or choose another default "
-"gateway device."
-msgstr "Geef deze informatie om door te gaan of kies een ander standaard gateway-apparaat."
+"gateway device"
+msgstr "Geef deze informatie om door te gaan of kies een ander standaard gateway-apparaat"
 
-#: src/network/callbacks.c:723
+#: src/network/callbacks.c:755
 msgid "The program redhat-config-network-cmd could not be found"
 msgstr "Het programma redhat-config-network-cmd is niet aangetroffen"
 
-#: src/network/callbacks.c:724
+#: src/network/callbacks.c:756
 msgid ""
 "This could render missing connections under the connections tab. Please "
-"install the redhat-config-network rpm package to avoid this."
-msgstr "Dit kan ontbrekende verbindingen in het tabblad verbindingen veroorzaken. Installeer het software-pakket redhat-config-network om dit te voorkomen."
+"install the redhat-config-network rpm package to avoid this"
+msgstr "Dit kan ontbrekende verbindingen in het tabblad verbindingen veroorzaken. Installeer het software-pakket redhat-config-network om dit te voorkomen"
 
 # aanzetten?
-#: src/network/callbacks.c:755
+#: src/network/callbacks.c:787
 #, c-format
 msgid "Do you want to enable interface \"%s\"?"
 msgstr "Wilt u interface \"%s\" inschakelen?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:788
 msgid "This will enable network access through this interface"
 msgstr "Dit zal netwerktoegang door deze interface inschakelen"
 
 # aanzetten
 # (moet in overeenstemming zijn met de vorige berichten)
-#: src/network/callbacks.c:757
+#: src/network/callbacks.c:789
 msgid "_Enable"
 msgstr "_Inschakelen"
 
-#: src/network/callbacks.c:759
+#: src/network/callbacks.c:791
 #, c-format
 msgid "Do you want to disable interface \"%s\"?"
 msgstr "Wilt u interface \"%s\" uitschakelen?"
 
-#: src/network/callbacks.c:760
+#: src/network/callbacks.c:792
 msgid "This will disable network access through this interface"
 msgstr "Dit zal netwerktoegang door deze interface uitschakelen"
 
 # uitzetten
 # Dit moet in overeenstemming zijn met de vorige berichten
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:793
 msgid "_Disable"
 msgstr "_Uitschakelen"
 
-#: src/network/callbacks.c:868
+#: src/network/callbacks.c:900
 msgid "Could not autodetect modem device"
 msgstr "Kon modem niet automatisch detecteren"
 
-#: src/network/callbacks.c:869
-msgid "Check that it's not busy and that it's correctly attached"
-msgstr "Controleer of het correct is aangesloten en niet bezet is"
+# netwerkkaart ipv apparaat?
+#: src/network/callbacks.c:901
+msgid ""
+"Check that the device is not busy and that is correctly attached to the "
+"computer"
+msgstr "Controleer of het apparaat correct is aangesloten en dat het niet bezet is"
 
-#: src/network/callbacks.c:923
+#: src/network/callbacks.c:956
 msgid "Silent"
 msgstr "Stil"
 
-#: src/network/callbacks.c:925
+#: src/network/callbacks.c:958
 msgid "Low"
 msgstr "Laag"
 
-#: src/network/callbacks.c:927
+#: src/network/callbacks.c:960
 msgid "Medium"
 msgstr "Middel"
 
-#: src/network/callbacks.c:929
+#: src/network/callbacks.c:962
 msgid "Loud"
 msgstr "Luid"
 
@@ -1735,130 +1730,119 @@ msgstr "Loopback interface"
 msgid "Unknown interface type"
 msgstr "Onbekend interface-type"
 
-#: src/network/connection.c:64
-msgid "/_Configure"
-msgstr "/In_stellen"
+#: src/network/connection.c:62 src/users/table.c:46
+msgid "_Add"
+msgstr "_Toevoegen"
 
-#: src/network/connection.c:487 src/services/table.c:79
+#: src/network/connection.c:63 src/users/table.c:47
+msgid "_Properties"
+msgstr "_Eigenschappen"
+
+#: src/network/connection.c:474 src/services/table.c:86
 msgid "Active"
 msgstr "Actief"
 
-#: src/network/connection.c:1742 src/network/connection.c:1752
+#: src/network/connection.c:1718 src/network/connection.c:1728
 msgid "Error in IP address"
 msgstr "Fout in IP-adres"
 
-#: src/network/connection.c:1743
+#: src/network/connection.c:1719
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
-"valid IP addresses in those fields to continue."
-msgstr ""
-"IP-adres of netmasker voor de interface werd leeggelaten. Vul a.u.b. een "
-"geldige waarde in voor beide velden."
+"valid IP addresses in those fields to continue"
+msgstr "Het IP-adres of netmasker voor de interface is niet ingevuld. Voer hier geldige IP-adressen in om door te gaan"
 
-#: src/network/connection.c:1753
+#: src/network/connection.c:1729
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
-"enter valid IP addresses in those fields to continue."
-msgstr ""
-"IP-adres of bereik van de andere kant voor de interface werd leeggelaten. "
-"Vul a.u.b. een geldige waarde in voor beide velden."
+"enter valid IP addresses in those fields to continue"
+msgstr "Het IP-adres of het adres op afstand is niet ingevuld. Voer hier geldige IP-adressen in om door te gaan"
 
-#: src/network/connection.c:1761
-msgid "Error in DNS servers"
-msgstr "Fout in DNS-servers"
+#: src/network/connection.c:1737
+msgid "Error in domain name servers"
+msgstr "Fout in domeinnaam-servers"
 
-#: src/network/connection.c:1762
+#: src/network/connection.c:1738
 msgid ""
-"You chose to set the DNS servers for this connection manually, but left the "
-"IP address for the primary DNS empty. Please enter the IP for the primary "
-"DNS or uncheck the manual DNS option."
-msgstr ""
-"U heeft ervoor gekozen om handmatig de DNS servers in te stellen maar u "
-"heeft de eerste DNS server leeggelaten. Vul a.u.b. een geldig IP in als "
-"eerste DNS server of kies niet voor handmatige DNS instellingen."
+"You chose to set the domain name servers for this connection manually, but "
+"left the IP address for the primary name server empty. Please enter the IP "
+"for the primary domain name server or uncheck the manual DNS option"
+msgstr "U heeft ervoor gekozen om handmatig de DNS servers in te stellen maar u heeft het IP-adres voor de eerste DNS server leeggelaten. Geef een geldig IP-adres voor de eerste DNS server of deselecteer de optie handmatige DNS instellingen"
 
-#: src/network/connection.c:1769
+#: src/network/connection.c:1745
 msgid "Invalid modem device"
 msgstr "Ongeldig modem-apparaat"
 
-#: src/network/connection.c:1770
+#: src/network/connection.c:1746
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
-"device or press \"autodetect\" to continue."
-msgstr ""
-"Het modem-apparaat voor deze verbinding werd leeggelaten. Vul a.u.b. een "
-"geldige waarde in of klik op \"Automatisch detecteren\" om door te gaan."
+"device or press \"autodetect\" to continue"
+msgstr "Het modem-apparaat voor deze verbinding is niet ingevuld. Voer een apparaat in of klik op \"Automatisch detecteren\" om door te gaan"
 
-#: src/network/connection.c:1775
+#: src/network/connection.c:1751
 msgid "Invalid phone number"
 msgstr "Ongeldig telefoonnummer"
 
-#: src/network/connection.c:1776
+#: src/network/connection.c:1752
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
-"valid phone number to continue."
-msgstr ""
-"Het telefoonnummer voor de verbinding werd leeggelaten. Vul a.u.b. een "
-"geldig telefoonnummer in om door te gaan."
+"valid phone number to continue"
+msgstr "Het telefoonnummer voor de verbinding is niet ingevuld. Voer een geldig telefoonnummer in om door te gaan"
 
-#: src/network/connection.c:2144
-msgid "Nonexisting interface"
-msgstr "Niet bestaande interface"
-
-#: src/network/connection.c:2145
+#: src/network/connection.c:2120
 #, c-format
-msgid "The interface \"%s\" doesn't exist."
-msgstr "De interface \"%s\" bestaat niet."
+msgid "The interface \"%s\" doesn't exist"
+msgstr "De interface \"%s\" bestaat niet"
 
-#: src/network/connection.c:2148
+#: src/network/connection.c:2124
 msgid "Invalid interface"
 msgstr "Ongeldige interface"
 
-#: src/network/connection.c:2149
-msgid "The loopback interface cannot be configured."
-msgstr "De loopback-interface kan niet geconfigureerd worden."
+#: src/network/connection.c:2125
+msgid "The loopback interface cannot be configured"
+msgstr "De loopback-interface kan niet geconfigureerd worden"
 
-#: src/network/dns.c:163 src/network/hosts.c:174
+#: src/network/dns.c:148 src/network/hosts.c:158
 msgid "IP Address"
 msgstr "IP-adres"
 
-#: src/network/hosts.c:182
+#: src/network/hosts.c:166
 msgid "Aliases"
 msgstr "Aliassen"
 
-#: src/network/main.c:187
+#: src/network/main.c:188
 msgid "Run the connection assistant."
 msgstr "De assistent netwerkverbinding starten."
 
-#: src/network/main.c:188
+#: src/network/main.c:189
 msgid "Run the PPP connection assistant."
 msgstr "De assistent PPP-verbinding starten."
 
-#: src/network/main.c:189
+#: src/network/main.c:190
 msgid "Run the ethernet connection assistant."
 msgstr "De assistent ethernetverbinding starten."
 
-#: src/network/main.c:190
+#: src/network/main.c:191
 msgid "Run the wlan connection assistant."
 msgstr "De assistent WLAN-verbinding starten"
 
-#: src/network/main.c:191
+#: src/network/main.c:192
 msgid "Run the parallel port connection assistant."
 msgstr "De assistent paralelle poort-verbinding starten"
 
-#: src/network/main.c:192
+#: src/network/main.c:193
 msgid "Run the irlan connection assistant."
 msgstr "De assistent IRlan-verbinding starten."
 
-#: src/network/main.c:193
+#: src/network/main.c:194
 msgid "Configure a network interface"
 msgstr "Een netwerkinterface instellen"
 
-#: src/network/main.c:193
+#: src/network/main.c:194
 msgid "interface"
 msgstr "interface"
 
-#: src/network/main.c:200
+#: src/network/main.c:201
 msgid "Network Settings"
 msgstr "Netwerkinstellingen"
 
@@ -1880,14 +1864,14 @@ msgid "Networking"
 msgstr "Netwerk"
 
 # "as soon as" ipv "after" 
-#: src/network/profile.c:51 src/users/profile-settings.c:204
-msgid "You won't be able to recover this profile after hitting \"apply\""
+#: src/network/profile.c:51 src/users/profile-settings.c:215
+msgid "You will not be able to recover this profile after pressing \"apply\""
 msgstr "U kunt dit profiel niet meer herstellen zodra u op \"toepassen\" klikt"
 
 #: src/network/profile.c:55
 #, c-format
-msgid "Delete profile \"%s\"?"
-msgstr "Profiel \"%s\" verwijderen?"
+msgid "Are you sure you want to delete profile \"%s\"?"
+msgstr "Weet u zeker dat u het profiel \"%s\" wilt verwijderen?"
 
 #: src/network/profiles-table.c:53
 msgid "Profile name"
@@ -1901,25 +1885,25 @@ msgstr "Beschrijving"
 msgid "No description available."
 msgstr "Geen beschrijving beschikbaar."
 
-#: src/services/callbacks.c:259
+#: src/services/callbacks.c:245
 msgid "Running"
 msgstr "Actief"
 
-#: src/services/callbacks.c:263
+#: src/services/callbacks.c:249
 msgid "Stopped"
 msgstr "Gestopt"
 
 # informatie of info?
-#: src/services/callbacks.c:268
+#: src/services/callbacks.c:254
 msgid "Could not get info"
 msgstr "Kon geen info verkrijgen"
 
-#: src/services/callbacks.c:334
+#: src/services/callbacks.c:320
 #, c-format
 msgid "Settings for service %s"
 msgstr "Instellingen voor voorziening%s"
 
-#: src/services/main.c:61
+#: src/services/main.c:62
 msgid "Services Settings"
 msgstr "Voorzieningen instellingen"
 
@@ -1931,28 +1915,29 @@ msgstr "Configureren welke voorzieningen gestart zullen worden bij opstarten"
 msgid "Services"
 msgstr "Voorzieningen"
 
-#: src/services/table.c:88
+#: src/services/table.c:95
 msgid "Service"
 msgstr "Voorziening"
 
-#: src/time/main.c:314
+#: src/time/main.c:310
 msgid "Time Zone"
 msgstr "Tijdzone"
 
-#: src/time/main.c:424
+#: src/time/main.c:420
 msgid "Time Servers"
 msgstr "Tijd-servers"
 
-#: src/time/main.c:506
+#: src/time/main.c:501
 msgid "NTP support is not running"
 msgstr "Geen ondersteuning voor NTP"
 
-#: src/time/main.c:507
+#: src/time/main.c:502
 msgid ""
-"Please run NTP support in the system to enable time server synchronization"
-msgstr "Activeer NTP-ondersteuning op uw systeem om synchronisatie met een tijdserver te kunnen gebruiken."
+"Please run NTP support in the system to enable synchronization of your local "
+"time server with internet time servers"
+msgstr "Activeer NTP-ondersteuning op uw systeem om synchronisatie van uw tijdserver met een tijdserver via het internet te kunnen gebruiken"
 
-#: src/time/main.c:819
+#: src/time/main.c:815
 msgid "Time and Date Settings"
 msgstr "Tijd en datum instellingen"
 
@@ -1964,15 +1949,15 @@ msgstr "Datum, tijd en tijdzone aanpassen"
 msgid "Time and Date"
 msgstr "Datum en tijd"
 
-#: src/users/callbacks.c:572
+#: src/users/callbacks.c:589
 msgid "Error saving profile"
 msgstr "Fout bij opslaan van profiel"
 
-#: src/users/callbacks.c:607
+#: src/users/callbacks.c:624
 msgid "Create New profile"
 msgstr "Nieuw profiel aanmaken"
 
-#: src/users/callbacks.c:641
+#: src/users/callbacks.c:658
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Instellingen voor profiel %s"
@@ -1987,30 +1972,30 @@ msgid "Invalid group ID"
 msgstr "Ongeldige groeps-ID"
 
 #: src/users/group-settings.c:164
-msgid "Group ID must be a positive number."
-msgstr "Groeps-Id moet een positief getal zijn."
+msgid "Group ID must be a positive number"
+msgstr "Groeps-Id moet een positief getal zijn"
 
 #. if group is root
 #: src/users/group-settings.c:167
-msgid "root group ID should not be modified"
-msgstr "Groeps-ID van root mag niet gewijzigd worden"
+msgid "Group ID of the \"root\" user should not be modified"
+msgstr "Groeps-ID van de gebruiker \"root\" mag niet worden gewijzigd"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
-#: src/users/user-settings.c:352 src/users/user-settings.c:446
-#: src/users/user-settings.c:482
+#: src/users/user-settings.c:355 src/users/user-settings.c:450
+#: src/users/user-settings.c:486
 msgid "This would leave the system unusable"
 msgstr "Dit zou het systeem onbruikbaar maken"
 
 #: src/users/group-settings.c:172
 #, c-format
-msgid "Group ID %s already exists."
-msgstr "Groeps-ID %s bestaat al."
+msgid "Group ID %s already exists"
+msgstr "Groeps-ID %s bestaat al"
 
 #. If empty.
 #: src/users/group-settings.c:197
-msgid "Group name is empty."
-msgstr "Groepsnaam is leeg."
+msgid "Group name is empty"
+msgstr "Groepsnaam is leeg"
 
 #: src/users/group-settings.c:198
 msgid "A group name must be specified"
@@ -2018,8 +2003,8 @@ msgstr "Er moet een groepsnaam worden gegeven"
 
 #. If too long.
 #: src/users/group-settings.c:201
-msgid "The group name is too long."
-msgstr "De groepsnaam is te lang."
+msgid "The group name is too long"
+msgstr "De groepsnaam is te lang"
 
 #: src/users/group-settings.c:202
 #, c-format
@@ -2032,14 +2017,14 @@ msgid "Group name has invalid characters"
 msgstr "Groepsnaam heeft ongeldige tekens"
 
 #: src/users/group-settings.c:206
-msgid "Please set a valid group name, using only lower case letters."
-msgstr "Geef een geldige groepsnaam met alleen kleine letters."
+msgid "Please set a valid group name, using only lower case letters"
+msgstr "Geef een geldige groepsnaam met alleen kleine letters"
 
 #. if !exist.
 #: src/users/group-settings.c:209
 #, c-format
-msgid "Group \"%s\" already exists."
-msgstr "Groep \"%s\" bestaat al."
+msgid "Group \"%s\" already exists"
+msgstr "Groep \"%s\" bestaat al"
 
 #: src/users/group-settings.c:210
 msgid "Please select a different group name"
@@ -2047,21 +2032,23 @@ msgstr "Selecteer een andere groepsnaam"
 
 #. if it's the root group
 #: src/users/group-settings.c:213
-msgid "Root group name should not be modified"
-msgstr "Groepsnaam root  mag niet worden gewijzigd."
+msgid "Group name of the \"root\" user should not be modified"
+msgstr "Groepsnaam van de gebruiker \"root\" mag niet worden gewijzigd"
 
 #: src/users/group-settings.c:283
-msgid "Root group shouldn't be deleted."
-msgstr "De groep root mag niet verwijderd worden."
+msgid "The group \"root\" should not be deleted"
+msgstr "De groep \"root\" mag niet verwijderd worden"
 
 #: src/users/group-settings.c:298
 msgid "This may leave files with invalid group ID in the filesystem"
-msgstr "Dit laat mogelijk bestanden met een ongeldige groeps-ID achter in het bestandssysteem"
+msgstr ""
+"Dit laat mogelijk bestanden met een ongeldige groeps-ID achter in het "
+"bestandssysteem"
 
 #: src/users/group-settings.c:303
 #, c-format
-msgid "Are you sure you want to delete group %s?"
-msgstr "Weet u zeker dat u de groep %s wilt verwijderen?"
+msgid "Are you sure you want to delete group \"%s\"?"
+msgstr "Weet u zeker dat u de groep \"%s\" wilt verwijderen?"
 
 #: src/users/group-settings.c:358
 #, c-format
@@ -2076,63 +2063,63 @@ msgstr "Groep"
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:120
+#: src/users/main.c:121
 msgid "User name contains"
 msgstr "Gebruikersnaam bevat"
 
-#: src/users/main.c:121
+#: src/users/main.c:122
 msgid "User ID is"
 msgstr "GebruikersID is"
 
-#: src/users/main.c:122
+#: src/users/main.c:123
 msgid "Group name contains"
 msgstr "Groepsnaam bevat"
 
-#: src/users/main.c:123
+#: src/users/main.c:124
 msgid "User GID is"
 msgstr "GID van gebruiker is"
 
-#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:315 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Gebruikers en groepen"
 
 #: src/users/passwd.c:266
-msgid "Passwords doesn't match."
-msgstr "Wachtwoorden zijn niet hetzelfde."
+msgid "Passwords do not match"
+msgstr "Wachtwoorden zijn niet hetzelfde"
 
 #: src/users/passwd.c:271
 #, c-format
 msgid ""
 "Bad password: %s.\n"
-"Please try with a new password."
+"Please try with a new password"
 msgstr ""
 "Slecht wachtwoord: %s.\n"
-"Probeer a.u.b. nogmaals met een ander wachtwoord."
+"Probeer nogmaals met een ander wachtwoord"
 
-#: src/users/profile-settings.c:114
+#: src/users/profile-settings.c:122
 msgid "The profile must have a name"
 msgstr "Het profiel moet een naam hebben"
 
-#: src/users/profile-settings.c:119
+#: src/users/profile-settings.c:127
 msgid "The profile must have a default home"
 msgstr "Het profiel moet een standaard persoonlijke map hebben"
 
-#: src/users/profile-settings.c:124 src/users/profile-settings.c:129
+#: src/users/profile-settings.c:132 src/users/profile-settings.c:137
 msgid "The profile must have a default shell"
 msgstr "Het profiel moet een standaard shell hebben"
 
-#: src/users/profile-settings.c:193
-msgid "The default profile must not be deleted."
-msgstr "Het standaardprofiel mag niet verwijderd worden."
+#: src/users/profile-settings.c:204
+msgid "The default profile should not be deleted"
+msgstr "Het standaardprofiel mag niet verwijderd worden"
 
-#: src/users/profile-settings.c:194
-msgid "This is the default profile for setting new users' data"
-msgstr "Dit is het standaardprofiel voor het instellen van data voor nieuwe gebruikers"
+#: src/users/profile-settings.c:205
+msgid "This profile is used for setting default data for new users"
+msgstr "Dit profiel wordt gebruikt voor om nieuwe gebruikers standaard instellingen te geven"
 
-#: src/users/profile-settings.c:203
+#: src/users/profile-settings.c:214
 #, c-format
-msgid "Delete profile \"%s\""
-msgstr "Profiel \"%s\" verwijderen"
+msgid "Delete profile \"%s\"?"
+msgstr "Profiel \"%s\" verwijderen?"
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: src/users/profiles-table.c:38
@@ -2143,172 +2130,162 @@ msgstr "Profiel"
 msgid "Comment"
 msgstr "Opmerking"
 
-#: src/users/search-bar/search-bar.c:200
-msgid "_Search"
-msgstr "_Zoeken"
-
-#: src/users/search-bar/search-bar.c:238
+#: src/users/search-bar/search-bar.c:225
 msgid "C_lear"
 msgstr "_Wissen"
 
-#: src/users/search-bar/search-bar.c:346
+#: src/users/search-bar/search-bar.c:326
 msgid "Choice"
 msgstr "Keuze"
 
-#: src/users/search-bar/search-bar.c:356
+#: src/users/search-bar/search-bar.c:336
 msgid "Text"
 msgstr "Tekst"
 
-#: src/users/table.c:47
-msgid "/_Add User ..."
-msgstr "/Gebruiker _toevoegen ..."
-
-#: src/users/table.c:54
-msgid "/_Add group ..."
-msgstr "/Groep _toevoegen ..."
-
 #: src/users/user-settings.c:104
-msgid "The root user can not be deleted."
-msgstr "De gebruiker root mag niet verwijderd worden."
+msgid "The \"root\" user should not be deleted"
+msgstr "De gebruiker \"root\" mag niet verwijderd worden"
 
 #: src/users/user-settings.c:120
 #, c-format
-msgid "Are you sure you want to delete user %s?"
-msgstr "Weet u zeker dat u gebruiker %s wilt verwijderen?"
+msgid "Are you sure you want to delete user \"%s\"?"
+msgstr "Weet u zeker dat u gebruiker \"%s\" wilt verwijderen?"
 
-#: src/users/user-settings.c:217
+#: src/users/user-settings.c:219
 msgid "User Account Editor"
 msgstr "Gebruikersaccount bewerken"
 
-#: src/users/user-settings.c:332
-msgid "The username is empty."
-msgstr "Geen gebruikersnaam gegeven."
+# opgegeven?
+#: src/users/user-settings.c:335
+msgid "The user name is empty"
+msgstr "De gebruikersnaam is niet gegeven"
 
-#: src/users/user-settings.c:333
-msgid "A username must be specified"
+#: src/users/user-settings.c:336
+msgid "A user name must be specified"
 msgstr "Er moet een gebruikersnaam worden gegeven"
 
 #. = sizeof (ut.ut_name)
-#: src/users/user-settings.c:339 src/users/user-settings.c:344
-msgid "The username is too long."
-msgstr "De gebruikersnaam is te lang."
+#: src/users/user-settings.c:342 src/users/user-settings.c:347
+msgid "The user name is too long"
+msgstr "De gebruikersnaam is te lang"
 
-#: src/users/user-settings.c:340 src/users/user-settings.c:345
+#: src/users/user-settings.c:343 src/users/user-settings.c:348
 #, c-format
-msgid "The username should have less than %i characters for being valid"
+msgid "The user name should have less than %i characters for being valid"
 msgstr "De gebruikersnaam moet minder dan %i tekens hebben om geldig te zijn"
 
-#: src/users/user-settings.c:351
-msgid "Root username shouldn't be modified."
-msgstr "Gebruikersnaam root mag niet worden gewijzigd."
+#: src/users/user-settings.c:354
+msgid "User name for the \"root\" user should not be modified"
+msgstr "De naam van de gebruiker \"root\" mag niet worden gewijzigd"
 
-#: src/users/user-settings.c:357
-msgid "Username has invalid characters"
+#: src/users/user-settings.c:360
+msgid "User name has invalid characters"
 msgstr "Gebruikersnaam heeft ongeldige tekens"
 
-#: src/users/user-settings.c:358
+#: src/users/user-settings.c:361
 msgid ""
-"Please set a valid username consisting of a lower case letter followed by "
-"lower case letters and numbers."
-msgstr ""
-"Geef a.u.b. een geldige gebruikersnaam op met alleen kleine letters en "
-"nummers, waarvan het eerste teken een letter is."
+"Please set a valid user name consisting of a lower case letter followed by "
+"lower case letters and numbers"
+msgstr "Geef een geldige gebruikersnaam met alleen kleine letters en cijfers. Het eerste teken moet een letter zijn"
 
-#: src/users/user-settings.c:363
+#: src/users/user-settings.c:367
 #, c-format
-msgid "Username \"%s\" already exists"
+msgid "User name \"%s\" already exists"
 msgstr "Gebruikersnaam \"%s\" bestaat al"
 
 # "kies een andere gebruikersnaam" zou hier beter zijn
-#: src/users/user-settings.c:364
-msgid "Please select a different username"
+#: src/users/user-settings.c:368
+msgid "Please select a different user name"
 msgstr "Selecteer een andere gebruikersnaam"
 
-#: src/users/user-settings.c:389
-msgid "Invalid character in comment."
-msgstr "Ongeldig teken in commentaar."
-
-#: src/users/user-settings.c:390
+#: src/users/user-settings.c:393
 #, c-format
-msgid "Check that invalid character '%c' is not used"
-msgstr "Controleer dat ongeldig teken '%c' niet wordt gebruikt"
+msgid "Invalid character \"%c\" in comment"
+msgstr "Ongeldig teken \"%c\" in opmerking"
 
-#: src/users/user-settings.c:438
-msgid "Home directory must not be empty."
-msgstr "Persoonlijke map mag niet leeg zijn."
+#: src/users/user-settings.c:394
+msgid "Check that this character is not used"
+msgstr "Controleer dat dit teken niet wordt gebruikt"
 
-#: src/users/user-settings.c:439
+#: src/users/user-settings.c:442
+msgid "Home directory should not be empty"
+msgstr "Persoonlijke map mag niet leeg zijn"
+
+#: src/users/user-settings.c:443
 msgid "Make sure you provide a home directory"
 msgstr "Controleer dat u een persoonlijke map opgeeft"
 
-#: src/users/user-settings.c:441
+#: src/users/user-settings.c:445
 msgid "Incomplete path in home directory"
 msgstr "Onvolledig pad voor de persoonlijke map"
 
-#: src/users/user-settings.c:442
+#: src/users/user-settings.c:446
 msgid ""
-"Please enter full path for home directory.\n"
+"Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
 msgstr ""
 "Geef een volledig pad voor de persoonlijke map op\n"
 "<span size=\"smaller\">bijvoorbeeld: /home/jan</span>"
 
-#: src/users/user-settings.c:445
-msgid "root home shouldn't be modified."
-msgstr "Persoonlijke map van root mag niet gewijzigd worden."
+#: src/users/user-settings.c:449
+msgid "Home directory of the \"root\" user should not be modified"
+msgstr "Persoonlijke map van de gebruiker \"root\" mag niet worden gewijzigd"
 
-#: src/users/user-settings.c:478
+#: src/users/user-settings.c:482
 msgid "Invalid user ID"
 msgstr "Ongeldige gebruikers-ID"
 
-#: src/users/user-settings.c:479
-msgid "User id must be a positive number."
-msgstr "Gebruikers-ID moet een positief getal zijn."
+#: src/users/user-settings.c:483
+msgid "User ID must be a positive number"
+msgstr "Gebruikers-ID moet een positief getal zijn"
 
-#: src/users/user-settings.c:481
-msgid "root user ID should not be modified"
-msgstr "Gebruikers-ID van root mag niet worden gewijzigd"
+#: src/users/user-settings.c:485
+msgid "User ID of the \"root\" user should not be modified"
+msgstr "Gebruikers-ID van de gebruiker \"root\" mag niet worden gewijzigd"
 
-#: src/users/user-settings.c:498
+#: src/users/user-settings.c:502
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
-msgstr "Verschillende gebruikers mogen een enkele gerbuikers-ID delen, maar het is wel ongebruikelijk en kan leiden tot veiligheidsproblemen"
+msgstr ""
+"Verschillende gebruikers mogen een enkele gerbuikers-ID delen, maar het is "
+"wel ongebruikelijk en kan leiden tot veiligheidsproblemen"
 
-#: src/users/user-settings.c:503
+#: src/users/user-settings.c:507
 #, c-format
 msgid "User ID %s already exists"
 msgstr "Gebruikers-ID %s bestaat al"
 
-#: src/users/user-settings.c:520
+#: src/users/user-settings.c:524
 msgid "Incomplete path in shell"
 msgstr "Onvolledig pad in shell"
 
-#: src/users/user-settings.c:521
+#: src/users/user-settings.c:525
 msgid ""
-"Please enter full path for shell.\n"
+"Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
 msgstr ""
 "Geef een volledig pad voor de shell.\n"
 "<span size=\"smaller\">bijvoorbeeld: /bin/sh</span>"
 
-#: src/users/user-settings.c:543
-msgid "Password can not be empty."
-msgstr "Wachtwoord mag niet leeg zijn."
+#: src/users/user-settings.c:547
+msgid "Password should not be empty"
+msgstr "Wachtwoord mag niet leeg zijn"
 
-#: src/users/user-settings.c:544
+#: src/users/user-settings.c:548
 msgid "A password must be provided"
 msgstr "Er moet een wachtwoord worden gegeven."
 
-#: src/users/user-settings.c:546
-msgid "Password confirmation isn't correct."
-msgstr "Wachtwoordbevestiging is niet juist."
+#: src/users/user-settings.c:550
+msgid "Password confirmation isn't correct"
+msgstr "Wachtwoordbevestiging is niet juist"
 
-#: src/users/user-settings.c:547
+#: src/users/user-settings.c:551
 msgid "Check that you have provided the same password in both text fields"
-msgstr "Controleer of u in beide tekstvelden hetzelfde wachtwoord heeft gegeven"
+msgstr ""
+"Controleer of u in beide tekstvelden hetzelfde wachtwoord heeft gegeven"
 
-#: src/users/user-settings.c:830
+#: src/users/user-settings.c:827
 #, c-format
 msgid "Settings for User %s"
 msgstr "Instellingen voor gebruiker %s"
@@ -2337,6 +2314,59 @@ msgstr "Shell"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Gebruikers en groepen toevoegen of verwijderen"
+
+#~ msgid "<span weight=\"bold\">Description</span>"
+#~ msgstr "<span weight=\"bold\">Beschrijving</span>"
+
+#~ msgid "Click on an item in the list to show it's description."
+#~ msgstr "Klik op een item uit de lijst voor een beschrijving."
+
+#~ msgid "Invalid path: %s"
+#~ msgstr "Onjuist pad: %s"
+
+#~ msgid "Skipping %s directive..."
+#~ msgstr "Directive %s wordt overgeslagen..."
+
+#~ msgid "Skipping actual save..."
+#~ msgstr "Opslaan wordt overgeslagen..."
+
+#~ msgid "Wvdial missing"
+#~ msgstr "Wvdial ontbreekt"
+
+#~ msgid "/_Configure"
+#~ msgstr "/In_stellen"
+
+#~ msgid "Nonexisting interface"
+#~ msgstr "Niet bestaande interface"
+
+#~ msgid "root group ID should not be modified"
+#~ msgstr "Groeps-ID van root mag niet gewijzigd worden"
+
+#~ msgid "Root group name should not be modified"
+#~ msgstr "Groepsnaam root  mag niet worden gewijzigd."
+
+#~ msgid "This is the default profile for setting new users' data"
+#~ msgstr ""
+#~ "Dit is het standaardprofiel voor het instellen van data voor nieuwe "
+#~ "gebruikers"
+
+#~ msgid "Delete profile \"%s\""
+#~ msgstr "Profiel \"%s\" verwijderen"
+
+#~ msgid "_Search"
+#~ msgstr "_Zoeken"
+
+#~ msgid "/_Add User ..."
+#~ msgstr "/Gebruiker _toevoegen ..."
+
+#~ msgid "/_Add group ..."
+#~ msgstr "/Groep _toevoegen ..."
+
+#~ msgid "Root username shouldn't be modified."
+#~ msgstr "Gebruikersnaam root mag niet worden gewijzigd."
+
+#~ msgid "root home shouldn't be modified."
+#~ msgstr "Persoonlijke map van root mag niet gewijzigd worden."
 
 #~ msgid "BOOTP"
 #~ msgstr "BOOTP"
@@ -2367,9 +2397,6 @@ msgstr "Gebruikers en groepen toevoegen of verwijderen"
 
 #~ msgid "Status"
 #~ msgstr "Status"
-
-#~ msgid "Are you sure you want to delete profile %s?"
-#~ msgstr "Weet u zeker dat u het profiel %s wilt verwijderen?"
 
 #~ msgid "Such group id already exists."
 #~ msgstr "Dit groepsID bestaat al."
@@ -2875,9 +2902,6 @@ msgstr "Gebruikers en groepen toevoegen of verwijderen"
 
 #~ msgid "Subnet _Mask :"
 #~ msgstr "Subnet_masker :"
-
-#~ msgid "_Add"
-#~ msgstr "_Toevoegen"
 
 #~ msgid "_Comment :"
 #~ msgstr "_Commentaar :"
