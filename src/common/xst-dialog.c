@@ -228,7 +228,7 @@ xst_dialog_get_type (void)
 }
 
 void
-xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc *func, gpointer data)
+xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc func, gpointer data)
 {
 	XstDialogHookEntry *entry;
 
