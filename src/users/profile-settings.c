@@ -27,7 +27,6 @@
 
 #include <gtk/gtk.h>
 #include "gst.h"
-#include "gst-hig-dialog.h"
 #include "user_group.h"
 #include "table.h"
 #include "user-group-xml.h"
@@ -182,7 +181,7 @@ profile_settings_set_data (xmlNodePtr node)
 static gboolean
 check_profile_delete (xmlNodePtr node)
 {
-	gchar *profile_name, *primary_text, *secondary_text;
+	gchar *profile_name;
 	GtkWidget *dialog, *parent;
 	gboolean  is_default;
 	gint reply;
@@ -202,31 +201,28 @@ check_profile_delete (xmlNodePtr node)
 
 	if (is_default)
 	{
-		primary_text   = g_strdup (_("The default profile should not be deleted"));
-		secondary_text = g_strdup (_("This profile is used for setting default data for new users"));
-		show_error_message ("profile_settings_dialog", primary_text, secondary_text);
+		show_error_message ("profile_settings_dialog",
+				    _("The default profile should not be deleted"),
+				    _("This profile is used for setting default data for new users"));
 		g_free (profile_name);
-		g_free (primary_text);
-		g_free (secondary_text);
-
 		return FALSE;
 	}
 
-	primary_text   = g_strdup_printf (_("Delete profile \"%s\"?"), profile_name);
-	secondary_text = g_strdup_printf (_("You will not be able to recover this profile after pressing \"apply\""));
+	dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_WARNING,
+					 GTK_BUTTONS_NONE,
+					 _("Delete profile \"%s\"?"), profile_name);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  _("You will not be able to recover this "
+						    "profile after pressing \"apply\""));
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				NULL);
 
-	dialog = gst_hig_dialog_new (GTK_WINDOW (parent),
-				     GTK_DIALOG_MODAL,
-				     GST_HIG_MESSAGE_WARNING,
-				     primary_text,
-				     secondary_text,
-				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
-				     NULL);
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
-	g_free (primary_text);
-	g_free (secondary_text);
 	g_free (profile_name);
 
 	if (reply == GTK_RESPONSE_ACCEPT)

@@ -33,7 +33,6 @@
 #include <gnome.h>
 
 #include "gst.h"
-#include "gst-hig-dialog.h"
 #include "users-table.h"
 #include "table.h"
 #include "callbacks.h"
@@ -75,17 +74,18 @@ check_user_delete (xmlNodePtr node)
 		return FALSE;
 	}
 
-	dialog = gst_hig_dialog_new (parent,
-				     GTK_DIALOG_MODAL,
-				     GST_HIG_MESSAGE_WARNING,
-				     NULL,
-				     "This will disable the access of this user to the system, "
-				     "but his home directory will not be deleted",
-				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
-				     NULL);
-	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
+	dialog = gtk_message_dialog_new (parent,
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_WARNING,
+					 GTK_BUTTONS_NONE,
 					 _("Are you sure you want to delete user \"%s\"?"), login);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  _("This will disable the access of this user to the system, "
+						    "but his home directory will not be deleted"));
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				NULL);
 
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
@@ -424,7 +424,7 @@ is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 {
 	gchar *primary_text   = NULL;
 	gchar *secondary_text = NULL;
-	GtkWidget *dialog;
+	GtkWidget *dialog, *parent;
 
 	if (!is_valid_id (uid)) {
 		primary_text   = g_strdup (N_("Invalid user ID"));
@@ -442,17 +442,16 @@ is_user_uid_valid (xmlNodePtr node, const gchar *uid)
 		return FALSE;
 	} else {
 		if (node_exists (node, "uid", uid)) {
-			dialog = gst_hig_dialog_new (GTK_WINDOW (gst_dialog_get_widget (tool->main_dialog,
-											"user_settings_dialog")),
-						     GTK_DIALOG_MODAL,
-						     GST_HIG_MESSAGE_INFO,
-						     NULL,
-						     _("Several users may share a single user ID, "
-						       "but it's not common and may lead to security problems"),
-						     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-						     NULL);
-			gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
+			parent = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
+
+			dialog = gtk_message_dialog_new (GTK_WINDOW (parent),
+							 GTK_DIALOG_MODAL,
+							 GTK_MESSAGE_INFO,
+							 GTK_BUTTONS_CLOSE,
 							 _("User ID %s already exists"), uid);
+			gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+								  _("Several users may share a single user ID, "
+								    "but it's not common and may lead to security problems"));
 			gtk_dialog_run (GTK_DIALOG (dialog));
 			gtk_widget_destroy (dialog);
 		}

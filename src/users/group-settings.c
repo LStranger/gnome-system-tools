@@ -28,7 +28,6 @@
 #include <gnome.h>
 
 #include "gst.h"
-#include "gst-hig-dialog.h"
 #include "groups-table.h"
 #include "table.h"
 #include "callbacks.h"
@@ -291,16 +290,18 @@ check_group_delete (xmlNodePtr node)
 		return FALSE;
 	}
 
-	dialog = gst_hig_dialog_new (parent,
-				     GTK_DIALOG_MODAL,
-				     GST_HIG_MESSAGE_WARNING,
-				     NULL,
-				     _("This may leave files with invalid group ID in the filesystem"),
-				     GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
-				     GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
-				     NULL);
-	gst_hig_dialog_set_primary_text (GST_HIG_DIALOG (dialog),
+	dialog = gtk_message_dialog_new (parent,
+					 GTK_DIALOG_MODAL,
+					 GTK_MESSAGE_WARNING,
+					 GTK_BUTTONS_NONE,
 					 _("Are you sure you want to delete group \"%s\"?"), name);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
+						  _("This may leave files with invalid group ID in the filesystem"));
+	gtk_dialog_add_buttons (GTK_DIALOG (dialog),
+				GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+				GTK_STOCK_DELETE, GTK_RESPONSE_ACCEPT,
+				NULL);
+
 	reply = gtk_dialog_run (GTK_DIALOG (dialog));
 	gtk_widget_destroy (dialog);
 	g_free (name);
