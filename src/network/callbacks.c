@@ -344,6 +344,10 @@ enable_disable_iface (GstNetworkTool *network_tool, gboolean enable)
 
       /* we need this to update the buttons state */
       g_signal_emit_by_name (G_OBJECT (selection), "changed");
+
+      /* update gateway settings */
+      if (gtk_combo_box_get_active (network_tool->gateways_list) == -1)
+	gtk_combo_box_set_active (network_tool->gateways_list, 0);
     }
 }
 
@@ -474,4 +478,35 @@ on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 
   connection_check_netmask (dialog->address, dialog->netmask);
   return FALSE;
+}
+
+void
+on_gateway_combo_changed (GtkWidget *widget, gpointer data)
+{
+  GtkTreeModel *model;
+  GtkTreeIter   iter;
+  GstIface     *iface;
+  gchar        *dev, *gateway;
+
+  if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter))
+    {
+      model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+
+      gtk_tree_model_get (model, &iter,
+			  COL_OBJECT, &iface,
+			  -1);
+
+      /* FIXME: this won't work for DHCP nor PPP ifaces */
+      g_object_get (G_OBJECT (iface),
+		    "iface-dev", &dev,
+		    "iface-gateway", &gateway,
+		    NULL);
+
+      if (dev && gateway)
+	gst_tool_run_set_directive (tool, NULL, NULL,
+				    "set_gateway", dev, gateway, NULL);
+
+      g_free (dev);
+      g_free (gateway);
+    }
 }

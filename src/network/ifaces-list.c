@@ -65,11 +65,9 @@ gateways_filter_func (GtkTreeModel *model,
 		      GtkTreeIter  *iter,
 		      gpointer      data)
 {
-  gchar *dev;
   gboolean configured, enabled, has_gateway;
 
   gtk_tree_model_get (model, iter,
-		      COL_DEV,         &dev,
 		      COL_CONFIGURED,  &configured,
 		      COL_ENABLED,     &enabled,
 		      COL_HAS_GATEWAY, &has_gateway,
@@ -285,26 +283,16 @@ static void
 update_gateways_combo (void)
 {
   GtkTreeModel *model;
-  GtkTreeIter   iter;
-  gint          count = 0;
-  gboolean      valid;
+  gint          count;
 
   /* refilter the gateways model */
   gtk_tree_model_filter_refilter (GST_NETWORK_TOOL (tool)->gateways_model);
 
-  /* put sensitive/unsensitive the combo depending on the items number */
   model = GTK_TREE_MODEL (GST_NETWORK_TOOL (tool)->gateways_model);
-  valid = gtk_tree_model_get_iter_first (model, &iter);
+  count = gtk_tree_model_iter_n_children (model, NULL);
 
-  while (valid)
-    {
-      count++;
-      valid = gtk_tree_model_iter_next (model, &iter);
-    }
-
-  gtk_widget_set_sensitive (GTK_WIDGET (GST_NETWORK_TOOL (tool)->gateways_list), count > 0);
-  gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "gateways_combo_label"),
-			    count > 0);
+  gtk_widget_set_sensitive (GTK_WIDGET (GST_NETWORK_TOOL (tool)->gateways_list), (count > 0));
+  gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "gateways_combo_label"), (count > 0));
 }
 
 void
@@ -410,6 +398,10 @@ gateways_combo_select (gchar *dev)
 
   g_return_if_fail (dev != NULL);
 
+  /* block/unblock the combobox changed signal */
+  g_signal_handlers_block_by_func (G_OBJECT (combo),
+				   G_CALLBACK (on_gateway_combo_changed), tool->main_dialog);
+
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
   valid = gtk_tree_model_get_iter_first (model, &iter);
 
@@ -429,6 +421,9 @@ gateways_combo_select (gchar *dev)
 
       g_free (iter_dev);
     }
+
+  g_signal_handlers_unblock_by_func (G_OBJECT (combo),
+				     G_CALLBACK (on_gateway_combo_changed), tool->main_dialog);
 }
 
 gchar*

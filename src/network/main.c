@@ -38,6 +38,7 @@ static GstDialogSignal signals[] = {
   { "properties_button",            "clicked", G_CALLBACK (on_iface_properties_clicked) },
   { "activate_button",              "clicked", G_CALLBACK (on_activate_button_clicked) },
   { "deactivate_button",            "clicked", G_CALLBACK (on_deactivate_button_clicked) },
+  { "gateways_combo",               "changed", G_CALLBACK (on_gateway_combo_changed) },
   /* general tab */
   { "hostname",                     "changed", G_CALLBACK (gst_dialog_modify_cb) },
   { "domain",                       "changed", G_CALLBACK (gst_dialog_modify_cb) },
