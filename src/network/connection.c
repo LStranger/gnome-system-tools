@@ -1106,13 +1106,13 @@ hookup_callbacks (XstConnection *cxn)
 	};
 	struct { char *name; EditableFilterRules rule; }
 	s[] = {
-		{ "ip_address",          EF_ALLOW_NONE },
-		{ "ip_netmask",          EF_ALLOW_NONE },
-		{ "ip_gateway",          EF_ALLOW_NONE },
-		{ "ppp_dns1",            EF_ALLOW_NONE },
-		{ "ppp_dns2",            EF_ALLOW_NONE },
-		{ "ptp_address",         EF_ALLOW_NONE },
-		{ "ptp_remote_address",  EF_ALLOW_NONE },
+		{ "ip_address",          EF_ALLOW_IP },
+		{ "ip_netmask",          EF_ALLOW_IP },
+		{ "ip_gateway",          EF_ALLOW_IP },
+		{ "ppp_dns1",            EF_ALLOW_IP },
+		{ "ppp_dns2",            EF_ALLOW_IP },
+		{ "ptp_address",         EF_ALLOW_IP },
+		{ "ptp_remote_address",  EF_ALLOW_IP },
 		{ NULL,                  EF_ALLOW_NONE }
 	};
 
