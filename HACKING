@@ -39,13 +39,13 @@ Breakdown of the tools currently packaged:
 
 Backend                          Frontend              Frontend layout
 -------                          --------              ---------------
-backends/disks-conf.in           src/disks/*           interfaces/disks.glade
-backends/memory-conf.in          src/memory/*          interfaces/memory.glade
-backends/nameresolution-conf.in  src/nameresolution/*  interfaces/nameresolution.glade
-backends/networking-conf.in      src/networking/*      interfaces/networking.glade
-backends/shares-conf.in          src/shares/*          interfaces/shares.glade
-backends/time-conf.in            src/time/*            interfaces/time.glade
-backends/users-conf.in           src/users/*           interfaces/users.glade
+backend/disks-conf.in           src/disks/*           interfaces/disks.glade
+backend/memory-conf.in          src/memory/*          interfaces/memory.glade
+backend/nameresolution-conf.in  src/nameresolution/*  interfaces/nameresolution.glade
+backend/networking-conf.in      src/networking/*      interfaces/networking.glade
+backend/shares-conf.in          src/shares/*          interfaces/shares.glade
+backend/time-conf.in            src/time/*            interfaces/time.glade
+backend/users-conf.in           src/users/*           interfaces/users.glade
 
 Currently, all the backends are in Perl, all the frontends are in C, and all
 the frontend layouts are in Glade XML. We accept backends and frontends in
@@ -53,7 +53,7 @@ Python, though.
 
 There are also common libraries in these three categories:
 
-backends/be.pl          - shared Perl code.
+backend/be.pl          - shared Perl code.
 src/common/*            - shared C code.
 interfaces/common.glade - shared Glade specifications.
 
