@@ -295,8 +295,10 @@ create_container (void)
 static gint
 id_compare (gconstpointer id1, gconstpointer id2)
 {
-	g_return_val_if_fail (id1 != NULL, 1);
-	g_return_val_if_fail (id2 != NULL, -1);
+	if (id1 == NULL)
+		return 1;
+	if (id2 == NULL)
+		return 2;
 
 	if (atoi (id1) > atoi (id2))
 		return 1;
