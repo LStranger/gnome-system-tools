@@ -28,7 +28,7 @@
 #include "global.h"
 
 #include "transfer.h"
-
+#include "callbacks.h"
 #include "connection.h"
 
 extern XstTool *tool;
@@ -385,6 +385,8 @@ transfer_interfaces_to_gui (xmlNodePtr root)
 	     node; 
 	     node = xst_xml_element_find_next (node, "interface"))
 		connection_new_from_node (node);
+
+	callbacks_update_connections_hook (tool->main_dialog, NULL);
 }
 
 void

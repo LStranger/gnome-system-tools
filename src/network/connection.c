@@ -439,6 +439,16 @@ connection_init_icons (void)
 }
 
 void
+connection_set_row_pixtext (GtkWidget *clist, gint row, gchar *text, gboolean enabled)
+{
+	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1,
+			       text,
+			       GNOME_PAD_SMALL,
+			       active_pm[enabled ? 1 : 0], 
+			       active_mask[enabled ? 1 : 0]);
+}
+
+void
 connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 {
 	GtkWidget *clist;
@@ -456,11 +466,8 @@ connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 
 	cxn->enabled = enabled;
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
-	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 1,
-			       enabled ? _("Active") : _("Inactive"),
-			       GNOME_PAD_SMALL,
-			       active_pm[enabled ? 1 : 0], 
-			       active_mask[enabled ? 1 : 0]);
+	connection_set_row_pixtext (clist, row, enabled ? _("To activate") :
+				    _("To inactivate"), enabled);
 	xst_dialog_modify (tool->main_dialog);
 }
 
@@ -720,6 +727,8 @@ connection_free (XstConnection *cxn)
 	g_free (cxn->remote_address);
 }
 
+/* This function may come handy again later. */
+#if 0
 static void
 update_status (XstConnection *cxn)
 {
@@ -728,12 +737,13 @@ update_status (XstConnection *cxn)
 				? PIXMAPS_DIR "/gnome-light-on.png"
 				: PIXMAPS_DIR "/gnome-light-off.png");
 }
+#endif
 
 static void
 on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn)
 {
 	connection_set_modified (cxn, TRUE);
-	update_status (cxn);
+/*	update_status (cxn);*/
 }
 
 static void
@@ -892,7 +902,7 @@ fill_general (XstConnection *cxn)
 	gtk_label_set_text (GTK_LABEL (W ("connection_dev")), cxn->dev);
 	SET_STR ("connection_", name);
 	SET_BOOL ("status_", enabled);
-	update_status (cxn);
+/*	update_status (cxn);*/
 	SET_BOOL ("status_", autoboot);
 	SET_BOOL ("status_", user);
 }

@@ -417,3 +417,21 @@ callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 
 	return TRUE;
 }
+
+gboolean
+callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
+{
+	GtkWidget *clist;
+	gint i;
+	XstConnection *cxn;
+
+	clist = xst_dialog_get_widget (dialog, "connection_list");
+
+	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
+		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
+		connection_set_row_pixtext (clist, i, cxn->enabled ? _("Active") :
+					    _("Inactive"), cxn->enabled);
+	}
+
+	return TRUE;
+}

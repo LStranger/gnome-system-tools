@@ -1,3 +1,13 @@
+2001-04-03  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* main.c (main): add update_connections hook.
+
+	* connection.c (connection_set_row_pixtext): Sepparated this code
+	from connection_update_row_enabled to call from new hook.
+
+	* callbacks.c (callbacks_update_connections_hook): A hook to change
+	the connections labels when applying.
+
 2001-03-30  Tambet Ingo  <tambet@ximian.com>
 
 	* Makefile.am: Add gconf cflags.
