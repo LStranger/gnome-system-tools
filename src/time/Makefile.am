@@ -25,3 +25,11 @@ $(INTLLIBS) \
 ../common/libsetuptool.a
 
 time_admin_LDFLAGS = `gnome-config --libs gnomecanvaspixbuf`
+
+EXTRA_DIST = time.desktop
+
+sysdir = $(datadir)/control-center/System
+sys_DATA = time.desktop
+
+install-data-local:
+	$(INSTALL_DATA) $(srcdir)/time.desktop $(DESTDIR)$(datadir)/gnome/apps/Settings/System/time.desktop
