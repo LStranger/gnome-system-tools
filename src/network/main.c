@@ -124,6 +124,9 @@ init_filters (void)
 
   gst_filter_init (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "connection_local_address")), GST_FILTER_IPV4);
   gst_filter_init (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "connection_remote_address")), GST_FILTER_IPV4);
+
+  gst_filter_init (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "connection_phone_number")), GST_FILTER_PHONE);
+  gst_filter_init (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "connection_dial_prefix")), GST_FILTER_PHONE);
 }
 
 int
