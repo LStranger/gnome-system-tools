@@ -3089,7 +3089,7 @@ or a groups name or members.</label>
   <class>GtkWindow</class>
   <name>user_druid_window</name>
   <visible>False</visible>
-  <title>druid? </title>
+  <title>User Account Wizard</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
@@ -3570,7 +3570,7 @@ and easily add new users to your system.
       <class>GnomeDruidPageFinish</class>
       <name>user_druidFinishPage</name>
       <title>Finished</title>
-      <text>Congratulations, you are finished. User &quot;anna&quot; has been
+      <text>Congratulations, you are finished. New user has been
 created. Click &quot;Finish&quot; to complete </text>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
@@ -3849,8 +3849,8 @@ huh? This here is your dialog.</label>
 	<initial_choice>0</initial_choice>
 	<child>
 	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
+	  <expand>True</expand>
+	  <fill>True</fill>
 	</child>
       </widget>
     </widget>
@@ -3977,11 +3977,9 @@ huh? This here is your dialog.</label>
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label140</name>
-	    <label>Okay in the interest of actually committing
-this sometime this week, i am going to forego
-writing good sentences for now.</label>
+	    <label>User profiles can be used a templates to facilitate the creation of new users. To edit a profile, change the settings in the following tabs.</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>False</wrap>
+	    <wrap>True</wrap>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
@@ -4184,11 +4182,9 @@ writing good sentences for now.</label>
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label110</name>
-	    <label>Okay in the interest of actually committing
-this sometime this week, i am going to forego
-writing good sentences for now.</label>
+	    <label>On this page, you can define the system defaults which will be assigned to new users.</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>False</wrap>
+	    <wrap>True</wrap>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
@@ -4777,11 +4773,9 @@ writing good sentences for now.</label>
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label134</name>
-	    <label>Okay in the interest of actually committing
-this sometime this week, i am going to forego
-writing good sentences for now.</label>
+	    <label>On this page, you can select scripts and files to be copied from your account into new users' accounts.</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>False</wrap>
+	    <wrap>True</wrap>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>
@@ -4885,6 +4879,7 @@ writing good sentences for now.</label>
 	    <widget>
 	      <class>GtkCList</class>
 	      <name>clist2</name>
+	      <sensitive>False</sensitive>
 	      <can_focus>True</can_focus>
 	      <columns>2</columns>
 	      <column_widths>80,80</column_widths>
@@ -4966,6 +4961,7 @@ writing good sentences for now.</label>
 	      <widget>
 		<class>GtkButton</class>
 		<name>button14</name>
+		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Add</label>
@@ -4975,6 +4971,7 @@ writing good sentences for now.</label>
 	      <widget>
 		<class>GtkButton</class>
 		<name>button15</name>
+		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Delete</label>
@@ -5041,11 +5038,9 @@ writing good sentences for now.</label>
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label135</name>
-	    <label>Okay in the interest of actually committing
-this sometime this week, i am going to forego
-writing good sentences for now.</label>
+	    <label>On this page, you can define security options, such as how frequently users must change their passwords.</label>
 	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>False</wrap>
+	    <wrap>True</wrap>
 	    <xalign>0.5</xalign>
 	    <yalign>0.5</yalign>
 	    <xpad>0</xpad>

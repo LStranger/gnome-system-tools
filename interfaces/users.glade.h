@@ -83,7 +83,7 @@ gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
 gchar *s = N_("label80");
-gchar *s = N_("druid? ");
+gchar *s = N_("User Account Wizard");
 gchar *s = N_("User Creation Druid");
 gchar *s = N_("This druid is designed to help you quickly \n"
               "and easily add new users to your system.\n"
@@ -102,7 +102,7 @@ gchar *s = N_("Check password quality");
 gchar *s = N_("Confirm:");
 gchar *s = N_("Click \"Next\" to continue");
 gchar *s = N_("Finished");
-gchar *s = N_("Congratulations, you are finished. User \"anna\" has been\n"
+gchar *s = N_("Congratulations, you are finished. New user has been\n"
               "created. Click \"Finish\" to complete ");
 gchar *s = N_("New Profile");
 gchar *s = N_("So you want to make a new profile,\n"
@@ -111,16 +111,12 @@ gchar *s = N_("Name:");
 gchar *s = N_("Comment:");
 gchar *s = N_("Inherit settings from:");
 gchar *s = N_("Profile Editor -- Users and Groups Tool");
-gchar *s = N_("Okay in the interest of actually committing\n"
-              "this sometime this week, i am going to forego\n"
-              "writing good sentences for now.");
+gchar *s = N_("User profiles can be used a templates to facilitate the creation of new users. To edit a profile, change the settings in the following tabs.");
 gchar *s = N_("New");
 gchar *s = N_("Copy Profile");
 gchar *s = N_("Delete");
 gchar *s = N_("Profiles");
-gchar *s = N_("Okay in the interest of actually committing\n"
-              "this sometime this week, i am going to forego\n"
-              "writing good sentences for now.");
+gchar *s = N_("On this page, you can define the system defaults which will be assigned to new users.");
 gchar *s = N_("Edit Profile:");
 gchar *s = N_("System defaults");
 gchar *s = N_("Home directory:");
@@ -132,18 +128,14 @@ gchar *s = N_("Minimum GID:");
 gchar *s = N_("Maximum GID:");
 gchar *s = N_("Maximum UID:");
 gchar *s = N_("System");
-gchar *s = N_("Okay in the interest of actually committing\n"
-              "this sometime this week, i am going to forego\n"
-              "writing good sentences for now.");
+gchar *s = N_("On this page, you can select scripts and files to be copied from your account into new users' accounts.");
 gchar *s = N_("Edit Profile:");
 gchar *s = N_("Filename");
 gchar *s = N_("Location");
 gchar *s = N_("Add");
 gchar *s = N_("Delete");
 gchar *s = N_("Files");
-gchar *s = N_("Okay in the interest of actually committing\n"
-              "this sometime this week, i am going to forego\n"
-              "writing good sentences for now.");
+gchar *s = N_("On this page, you can define security options, such as how frequently users must change their passwords.");
 gchar *s = N_("Edit Profile:");
 gchar *s = N_("Password options");
 gchar *s = N_("Days betweem warning and password expiration:");
