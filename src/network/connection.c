@@ -672,7 +672,8 @@ connection_default_gw_set_manual (XstTool *tool, XstConnection *cxn)
 			gateway = g_strdup (cxn->gateway);
 		break;
 	case XST_CONNECTION_PLIP:
-		gateway = strdup (cxn->remote_address);
+		if (cxn->remote_address && *cxn->remote_address)
+			gateway = g_strdup (cxn->remote_address);
 		break;
 	case XST_CONNECTION_PPP:
 		gtk_object_set_data (GTK_OBJECT (tool), "gatewaydev", NULL);
@@ -1165,12 +1166,7 @@ connection_new_from_node (xmlNode *node)
 	/* TCP/IP general paramaters */
 	cxn->address = xst_xml_get_child_content (node, "address");
 	cxn->netmask = xst_xml_get_child_content (node, "netmask");
-	
 	cxn->gateway = xst_xml_get_child_content (node, "gateway");
-	if (!cxn->gateway || !*cxn->gateway) {
-		g_free (cxn->gateway);
-		cxn->gateway = xst_xml_get_child_content (node->parent, "gateway");
-	}
 
 	switch (cxn->type) {
 	case XST_CONNECTION_PPP:

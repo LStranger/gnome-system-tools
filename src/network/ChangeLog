@@ -1,4 +1,12 @@
+2001-12-19  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.c (connection_default_gw_set_manual): Check
+	remote_address first before g_strdup'ing.
+
 2001-12-18  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.c (connection_new_from_node): Don't derive
+	gateway from global gateway: they mean different things.
 
 	* transfer.c (transfer_interfaces_to_xml): save those
 	interfaces in the hidden list too.
