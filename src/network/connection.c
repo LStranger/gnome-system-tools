@@ -107,6 +107,18 @@ my_entry_set_text (GtkEntry *w, gchar *txt)
 	gtk_entry_set_text (w, (txt)? txt: "");
 }
 
+static gint
+my_strcmp (gchar *a, gchar *b)
+{
+	if (!a)
+		a = "";
+
+	if (!b)
+		b = "";
+
+	return strcmp (a, b);
+}
+
 static gboolean
 connection_xml_get_boolean (xmlNode *node, gchar *elem)
 {
@@ -444,14 +456,14 @@ connection_clist_cmp (GtkCList *clist, gconstpointer p1, gconstpointer p2)
 	gint res;
 
 	/* Compare dev cols */
-	res = strcmp (connection_get_cell_text (p1, 0),
-		      connection_get_cell_text (p2, 0));
+	res = my_strcmp (connection_get_cell_text (p1, 0),
+			 connection_get_cell_text (p2, 0));
 	if (res)
 		return res;
 
 	/* Compare comment cols */
-	return strcmp (connection_get_cell_text (p1, 2),
-		       connection_get_cell_text (p2, 2));
+	return my_strcmp (connection_get_cell_text (p1, 2),
+			  connection_get_cell_text (p2, 2));
 }
 
 static void

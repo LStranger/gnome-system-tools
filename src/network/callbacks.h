@@ -25,8 +25,16 @@ typedef enum {
 	EF_ALLOW_NONE  = 0,
 	EF_ALLOW_TEXT  = 1 << 0,
 	EF_ALLOW_ENTER = 1 << 1,
-	EF_ALLOW_SPACE = 1 << 2
+	EF_ALLOW_SPACE = 1 << 2,
+	EF_ALLOW_IP    = 1 << 3
 } EditableFilterRules;
+
+typedef enum {
+	IP_UNK,
+	IP_V4,
+	IP_V6,
+	IP_LAST
+} IpVersion;
 
 extern xmlDocPtr doc;
 

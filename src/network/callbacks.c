@@ -100,6 +100,70 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 }
 
 static gboolean
+is_ip_text_ok  (const gchar *text)
+{
+	gint i, dst, numdots;
+	IpVersion ver;
+
+	ver = IP_UNK;
+	dst = numdots = 0;
+
+	for (i = 0; text[i]; i++) {
+		/* IPv6 cases */
+		if (text[i] >= 'a' && text[i] <= 'f') {
+			if (ver == IP_V4)
+				return FALSE;
+			dst ++;
+			if (dst > 2)
+				return FALSE;
+			ver = IP_V6;
+			continue;
+		}
+
+		if (text[i] == ':') {
+			if (ver == IP_V4)
+				return FALSE;
+			dst = 0;
+			ver = IP_V6;
+			continue;
+		}
+
+		/* IPv4 cases */
+		if (text[i] == '.') {
+			if (ver == IP_V6)
+				return FALSE;
+			if (i == 0 || text[i - 1] == '.')
+				return FALSE;
+			numdots ++;
+			if (numdots > 3)
+				return FALSE;
+			dst = 0;
+			ver = IP_V4;
+			continue;
+		}
+
+		if ((text[i] >= '0') && (text[i] <= '9')) {
+			dst ++;
+			if (dst == 3) {
+				if (ver == IP_V6)
+					return FALSE;
+				ver = IP_V4;
+				continue;
+			}
+
+			if (dst > 3)
+				return FALSE;
+
+			continue;
+		}
+
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+static gboolean
 is_char_ok (char c, EditableFilterRules rules)
 {
 	return isdigit (c) || c == '.' ||
@@ -115,6 +179,11 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length,
 	int i, l = 0;
 	char *s = NULL;
 	EditableFilterRules rules = GPOINTER_TO_INT (data);
+
+	if ((rules & EF_ALLOW_IP) && !is_ip_text_ok (gtk_editable_get_chars (editable, 0, -1)))
+		goto text_changed_fail;
+	else
+		goto text_changed_success;
 
 	/* thou shalt optimize for the common case */
 	if (length == 1) {
@@ -201,7 +270,7 @@ init_editable_filters (XstDialog *dialog)
 		{ "wins_ip",     EF_ALLOW_NONE },
 		{ "dns_list",    EF_ALLOW_ENTER },
 		{ "search_list", EF_ALLOW_ENTER | EF_ALLOW_TEXT },
-		{ "ip",          EF_ALLOW_NONE }, 
+		{ "ip",          EF_ALLOW_IP }, 
 		{ "alias",       EF_ALLOW_ENTER | EF_ALLOW_TEXT },
 		{ "domain",      EF_ALLOW_TEXT },
 		{ NULL,          EF_ALLOW_NONE }
