@@ -1,11 +1,11 @@
 helpdir = $(datadir)/gnome/help/networking-admin/C
 
-help_DATA = index.html gpl.html intro.html primary.html \
+help_DATA = index.html intro.html primary.html	\
 	ln14.html
 
 # These are the sources:
 
-help_SGML = networking-admin.sgml gpl.sgml 
+help_SGML = networking-admin.sgml
 
 EXTRA_DIST = $(help_DATA) $(help_SGML)
 
