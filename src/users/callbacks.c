@@ -509,14 +509,18 @@ on_group_settings_all_selection_changed (GtkWidget *list, gpointer user_data)
 	GtkWidget *w0;
 
 	current = GTK_LIST (list)->selection;
-	w0 = tool_widget_get ("group_settings_add");
+	
+	if (tool_get_access())
+	{
+		w0 = tool_widget_get ("group_settings_add");
 
-	if (!current)
-		gtk_widget_set_sensitive (w0, FALSE);
-	else
-		gtk_widget_set_sensitive (w0, TRUE);
+		if (!current)
+			gtk_widget_set_sensitive (w0, FALSE);
+		else
+			gtk_widget_set_sensitive (w0, TRUE);
+	}
 }
-
+	
 extern void
 on_group_settings_members_selection_changed (GtkWidget *list, gpointer user_data)
 {
@@ -524,12 +528,16 @@ on_group_settings_members_selection_changed (GtkWidget *list, gpointer user_data
 	GtkWidget *w0;
 
 	current = GTK_LIST (list)->selection;
-	w0 = tool_widget_get ("group_settings_remove");
 
-	if (!current)
-		gtk_widget_set_sensitive (w0, FALSE);
-	else
-		gtk_widget_set_sensitive (w0, TRUE);
+	if (tool_get_access())
+	{
+		w0 = tool_widget_get ("group_settings_remove");
+
+		if (!current)
+			gtk_widget_set_sensitive (w0, FALSE);
+		else
+			gtk_widget_set_sensitive (w0, TRUE);
+	}
 }
 
 
