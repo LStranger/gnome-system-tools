@@ -204,6 +204,7 @@ main (int argc, char *argv[])
 		init_editable_filters (tool->main_dialog);
 
 		on_network_admin_show (NULL, NULL);
+		update_complexity ();
 		xst_tool_main (tool, FALSE);
 	}
 		
