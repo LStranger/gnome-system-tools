@@ -388,10 +388,16 @@ connection_set_modified (XstConnection *cxn, gboolean state)
 }
 
 static void
-load_icon (const gchar *file, GdkPixmap **pixmap, GdkBitmap **mask)
+load_icon (GtkWidget *clist, const gchar *file, GdkPixmap **pixmap, GdkBitmap **mask)
 {
-	GdkPixbuf *pb, *pb2;
+	GdkPixbuf *new, *pb, *pb2;
+	GtkStyle *style;
 	char *path;
+	guint height;
+	guchar *data;
+
+	style = gtk_widget_get_style (clist);
+	height = (guint) ((style->font->ascent + style->font->descent) * 2);
 
 	path = g_concat_dir_and_file (PIXMAPS_DIR, file);
 	pb = gdk_pixbuf_new_from_file (path);
@@ -402,12 +408,17 @@ load_icon (const gchar *file, GdkPixmap **pixmap, GdkBitmap **mask)
 		return;
 	}
 	g_free (path);
-	
+
 	pb2 = gdk_pixbuf_scale_simple (pb, 16, 16, GDK_INTERP_BILINEAR);
 	gdk_pixbuf_unref (pb);
 	
-	gdk_pixbuf_render_pixmap_and_mask (pb2, pixmap, mask, 127);
-	gdk_pixbuf_unref (pb2);
+	new = gdk_pixbuf_new (GDK_COLORSPACE_RGB, TRUE, 8, 16, height);
+	data = gdk_pixbuf_get_pixels (new);
+	memset (data, 0, height * gdk_pixbuf_get_rowstride (new));
+	gdk_pixbuf_copy_area (pb2, 0, 0, 16, 16, new, 0, 0);
+	
+	gdk_pixbuf_render_pixmap_and_mask (new, pixmap, mask, 127);
+	gdk_pixbuf_unref (new);
 }
 
 static gchar *
@@ -433,28 +444,33 @@ connection_clist_cmp (GtkCList *clist, gconstpointer p1, gconstpointer p2)
 }
 
 static void
-connection_init_clist (XstTool *tool)
+connection_init_clist (GtkWidget *clist)
 {
-	GtkWidget *clist;
+	GtkStyle *style;
 	
-	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	gtk_clist_set_compare_func (GTK_CLIST (clist), connection_clist_cmp);
+	style = gtk_widget_get_style (clist);
+	gtk_clist_set_row_height (GTK_CLIST (clist), (guint) ((style->font->ascent +
+	style->font->descent) * 2));
 }
 
 extern void
 connection_init_gui (XstTool *tool)
 {
+	GtkWidget *clist;
 	XstConnectionType i;
 
-	for (i = XST_CONNECTION_OTHER; i < XST_CONNECTION_LAST; i++)
-		load_icon (xst_iface_desc[i].icon, &mini_pm[i], &mini_mask[i]);
+	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 
-	load_icon ("gnome-light-off.png" /* "connection-inactive.xpm" */,
+	for (i = XST_CONNECTION_OTHER; i < XST_CONNECTION_LAST; i++)
+		load_icon (clist, xst_iface_desc[i].icon, &mini_pm[i], &mini_mask[i]);
+
+	load_icon (clist, "gnome-light-off.png" /* "connection-inactive.xpm" */,
 		   &active_pm[0], &active_mask[0]);
-	load_icon ("gnome-light-on.png" /*"connection-active.xpm" */,
+	load_icon (clist, "gnome-light-on.png" /*"connection-active.xpm" */,
 		   &active_pm[1], &active_mask[1]);
 
-	connection_init_clist (tool);
+	connection_init_clist (clist);
 }
 
 void
@@ -852,14 +868,23 @@ connection_update_row (XstConnection *cxn)
 void
 connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 {
-	int row;
+	gint row;
 	char *text[3] = { "Error", NULL };
+	GtkStyle *style;
 
 	g_return_if_fail (GTK_IS_CLIST (clist));
 	g_return_if_fail (cxn != NULL);
 
 	row = gtk_clist_append (GTK_CLIST (clist), text);
 	gtk_clist_set_row_data (GTK_CLIST (clist), row, cxn);
+
+	style = gtk_widget_get_style (clist);
+	gtk_clist_set_shift (GTK_CLIST (clist), row, 0,
+			     (guint) ((style->font->ascent + style->font->descent) / 2), 0);
+	gtk_clist_set_shift (GTK_CLIST (clist), row, 1,
+			     (guint) ((style->font->ascent + style->font->descent) / 2), 0);
+	gtk_clist_set_shift (GTK_CLIST (clist), row, 2,
+			     (guint) ((style->font->ascent + style->font->descent) / 2), 0);
 
 	connection_default_gw_add (cxn->dev);
 	connection_update_row (cxn);

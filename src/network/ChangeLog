@@ -1,3 +1,11 @@
+2001-09-25  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.c (load_icon): Hack to make pixmap be centered on row too,
+	required because of a bug in GtkCList.
+	(connection_init_clist): Set the rowheight to double the size.
+	(connection_add_to_list): Set the shift of every cell manually, to center
+	the text and pixmaps.
+
 2001-09-13  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* ppp-druid.c (ppp_druid_new): indentation.
