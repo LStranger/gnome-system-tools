@@ -18,5 +18,5 @@ gchar *s = N_("<span weight=\"bold\">To run this tool, you need administrator pr
 gchar *s = N_("Password:");
 gchar *s = N_("*");
 gchar *s = N_("Run without password");
-gchar *s = N_("Gnome System Tools");
+gchar *s = N_("GNOME System Tools");
 gchar *s = N_("Complexity");
