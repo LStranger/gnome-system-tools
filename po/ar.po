@@ -1,0 +1,2006 @@
+# translation of gnome-system-tools.po to Arabic
+# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER.
+# Abdulaziz Al-Arfaj <alarfaj0@yahoo.com>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gnome-system-tools\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-04-10 19:38+0200\n"
+"PO-Revision-Date: 2004-09-02 13:00+0300\n"
+"Last-Translator: Abdulaziz Al-Arfaj <alarfaj0@yahoo.com>\n"
+"Language-Team: Arabic <support@arabeyes.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3\n"
+"Plural-Forms: Plural-Forms: nplurals=4; plural=n==1 ? 0 : n==2 ? 1 : n>=3 && n<=10 ? 2 : 3\n\n"
+
+#: gnome-system-tools.schemas.in.h:1
+msgid ""
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr "قائمة مقسّمة بفواصل بالمضيفين الذين ستتمكّن GST من الوصول إليهم عندما يكون خيار الإعداد البعيد ممكّناً."
+
+#: gnome-system-tools.schemas.in.h:2
+msgid "Dialog complexity for the boot-admin tool"
+msgstr "تعقيد حوارات أداة إدارة الإقلاع"
+
+#: gnome-system-tools.schemas.in.h:3
+msgid "Dialog complexity for the network-admin tool"
+msgstr "تعقيد حوارات أداة إدارة الشّبكة"
+
+#: gnome-system-tools.schemas.in.h:4
+msgid "Dialog complexity for the services-admin tool"
+msgstr "تعقيد حوارات أداة إدارة الخدمات"
+
+#: gnome-system-tools.schemas.in.h:5
+msgid "Dialog complexity for the time-admin tool"
+msgstr "تعقيد حوارات أداة إدارة الوقت"
+
+#: gnome-system-tools.schemas.in.h:6
+msgid "Dialog complexity for the users-admin tool"
+msgstr "تعقيد حوارات أداة إدارة المستخدمين"
+
+#: gnome-system-tools.schemas.in.h:7
+msgid "Last GST version executed"
+msgstr "آخر إصدارة من GST تم تنفيذها"
+
+#: gnome-system-tools.schemas.in.h:8
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr "محمّل الإقلاع المفضّل الذي سيقوم مدير الإقلاع بإعداده"
+
+#: gnome-system-tools.schemas.in.h:9
+msgid "Remote hosts"
+msgstr "مضيفين بعيدين"
+
+#: gnome-system-tools.schemas.in.h:10
+msgid ""
+"The GNOME System Tools have two data display modes: basic mode and advanced "
+"mode, the basic mode is intended to show less options than the advanced mode"
+msgstr "أدوات نظام جنوم لها وضعان منفصلان لعرض البيانات: الوضع البسيط و الوضع المتقدّم. الوضع البسيط يظهر خياراتٍ أقل من الوضع المتقدّم"
+
+#: gnome-system-tools.schemas.in.h:11
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
+msgstr "أدوات نظام جنوم (GST) تستطيع أن تقوم بالإعداد عن بعد عبر SSH. مكّن هذا الخيار لاستعمال هذه الميّزة"
+
+#: gnome-system-tools.schemas.in.h:12
+msgid "The last GST version that this computer has run"
+msgstr "آخر إصدارة من GST شغّلها هذا الحاسوب"
+
+#: gnome-system-tools.schemas.in.h:13
+msgid ""
+"This key stores the bootloader that boot-admin will configure if there are "
+"more than one installed, if it's not set or isn't valid, then boot-admin "
+"will ask the user"
+msgstr "هذا المفتاح يخزّن محمّل الإقلاع الذي سيديره مدير الإقلاع في حال كان أكثر من محمّلٍ واحد مثبّتاً. إن لم يكن معيّناً أو لم يكن سليماً فسيسأل مدير الإقلاع المستخدم"
+
+#: gnome-system-tools.schemas.in.h:14
+msgid "Whether the tools will use remote administration or not"
+msgstr "فيما إذا ستستعمل الأدوات الإدارة البعيدة"
+
+#: gnome-system-tools.schemas.in.h:15
+msgid "Whether the users-admin tool should show all users and groups or not"
+msgstr "فيما إذا يفترض أن تظهر أداة إدارة المستخدمين كل المستخدمين و المجموعات"
+
+#: gnome-system-tools.schemas.in.h:16
+msgid "Whether the warning dialog should be shown or not"
+msgstr "فيما إذا يفترض أن يظهر حوار التّحذير"
+
+#: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
+#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
+#: interfaces/users.glade.in.h:1
+msgid "*"
+msgstr "*"
+
+#: interfaces/boot.glade.in.h:2
+msgid "/dev/hda"
+msgstr "/dev/hda"
+
+#: interfaces/boot.glade.in.h:3
+msgid "/dev/hdb"
+msgstr "/dev/hdb"
+
+#: interfaces/boot.glade.in.h:4
+msgid "/dev/hdc"
+msgstr "/dev/hdc"
+
+#: interfaces/boot.glade.in.h:5
+msgid "/dev/hdd"
+msgstr "/dev/hdd"
+
+#: interfaces/boot.glade.in.h:6
+msgid "1024x768"
+msgstr "1024x768"
+
+#: interfaces/boot.glade.in.h:7
+msgid "1280x1024"
+msgstr "1280x1024"
+
+#: interfaces/boot.glade.in.h:8
+msgid "16,777,216"
+msgstr "16,777,216"
+
+#: interfaces/boot.glade.in.h:9
+msgid "256"
+msgstr "256"
+
+#: interfaces/boot.glade.in.h:10
+msgid "32,768"
+msgstr "32,768"
+
+#: interfaces/boot.glade.in.h:11
+msgid "640x480"
+msgstr "640x480"
+
+#: interfaces/boot.glade.in.h:12
+msgid "65,536"
+msgstr "65,536"
+
+#: interfaces/boot.glade.in.h:13
+msgid "800x600"
+msgstr "800x600"
+
+#: interfaces/boot.glade.in.h:14
+msgid "<b>Security</b>"
+msgstr "<b>الأمن</b>"
+
+#: interfaces/boot.glade.in.h:15 interfaces/users.glade.in.h:4
+msgid "<span weight=\"bold\">Basic Settings</span>"
+msgstr "<span weight=\"bold\">التّعيينات الأساسيّة</span>"
+
+#: interfaces/boot.glade.in.h:16
+msgid "<span weight=\"bold\">Image Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات الصّور</span>"
+
+#: interfaces/boot.glade.in.h:17
+msgid "<span weight=\"bold\">Other Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات أخرى</span>"
+
+#: interfaces/boot.glade.in.h:18
+msgid "<span weight=\"bold\">Starting the Computer</span>"
+msgstr "<span weight=\"bold\">بدء الحاسوب</span>"
+
+#: interfaces/boot.glade.in.h:19
+msgid "Ask at boot"
+msgstr "السّؤال عند الإقلاع"
+
+#: interfaces/boot.glade.in.h:20 src/boot/main.c:73
+msgid "Boot Manager Settings"
+msgstr "تعيينات مدير الإقلاع"
+
+#: interfaces/boot.glade.in.h:21
+msgid ""
+"Choose a kernel image to boot, and a partition to mount as the root "
+"partition. Optionally, you may also enter append parameters which are passed "
+"to the kernel at boot time."
+msgstr "اختر صورة نواة للإقلاع و تجزيئاً ليركّب على أنّه التّجزيء الجذر. يمكنك أيضاً إن شئت أن تدخل معطياتٍ إضافيّة تمرّر إلى النّواة عند الإقلاع."
+
+#: interfaces/boot.glade.in.h:22
+msgid "Click \"Forward\" to continue"
+msgstr "إضغط \"الأمام\" للمتابعة"
+
+#: interfaces/boot.glade.in.h:23
+msgid "Confirmation"
+msgstr "تأكيد"
+
+#. set window title
+#: interfaces/boot.glade.in.h:24 src/boot/boot-druid.c:429
+#: src/boot/boot-druid.c:441
+msgid "Creating a new boot image"
+msgstr "جاري إنشاء صورة إقلاعٍ جديدة"
+
+#: interfaces/boot.glade.in.h:25
+msgid "Don't ask me again"
+msgstr "لا تسألني مجدّداً"
+
+#: interfaces/boot.glade.in.h:26
+msgid "Enable IDE SCSI emulation"
+msgstr "تمكين محاكاة IDE SCSI"
+
+#: interfaces/boot.glade.in.h:27
+msgid ""
+"Enter a name for the boot image, and specify what kind of operating system "
+"it is."
+msgstr "أدخل اسماً لصورة الإقلاع و حدّد أي نوعٍ من أنظمة التّشغيل تكون."
+
+#: interfaces/boot.glade.in.h:28 interfaces/network.glade.in.h:43
+msgid "Finished"
+msgstr "انتهى"
+
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:53
+#: src/network/connection.c:1865
+msgid "Manual"
+msgstr "يدوي"
+
+#: interfaces/boot.glade.in.h:30
+msgid "Modify the settings for an operating system or kernel."
+msgstr "تعديل التّعيينات لنظام تشغيل أو نواة."
+
+#: interfaces/boot.glade.in.h:31
+msgid "Number of colors:"
+msgstr "عدد الألوان:"
+
+#: interfaces/boot.glade.in.h:32
+msgid "Other parameters:"
+msgstr "معطيات أخرى:"
+
+#: interfaces/boot.glade.in.h:33
+msgid "Password"
+msgstr "كلمة السّر"
+
+#: interfaces/boot.glade.in.h:34
+msgid "Protect with password"
+msgstr "الحماية بكلمة سر"
+
+#: interfaces/boot.glade.in.h:35
+msgid "Resolution:"
+msgstr "الاستبانة:"
+
+#: interfaces/boot.glade.in.h:36
+msgid "Seconds to wait before loading default kernel or OS"
+msgstr "الثّواني المنتظرة قبل إقلاع النّواة الافتراضيّة أو نظام التّشغيل الافتراضي"
+
+#: interfaces/boot.glade.in.h:37
+msgid ""
+"Several bootloaders have been found in the system, please select which do "
+"you want to configure"
+msgstr "عثر على عدّة محمّلات إقلاع في النّظام. فضلاً اختر أيّاً منها تريد إعداده"
+
+#: interfaces/boot.glade.in.h:38
+msgid "Specify the partition on which the operating system is installed."
+msgstr "حدّد التّجزيء المثبّت نظام التّشغيل عليه."
+
+#: interfaces/boot.glade.in.h:39
+msgid ""
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
+msgstr "تمّت إضافة صورة الإقلاع الجديدة. فضلاً انقر \"تطبيق\" لحفظ تغييراتك."
+
+#: interfaces/boot.glade.in.h:40
+msgid ""
+"This assistant is designed to help you quickly and easily add a new boot "
+"image to your system."
+msgstr "هذا المعاون مصمّمٌ ليساعدك على إضافة صورة إقلاع لنظامك سريعاً بسهولة."
+
+#: interfaces/boot.glade.in.h:41
+msgid "Use this dialog to modify kernel parameters."
+msgstr "استخدم هذا الحوار لتعديل معطيات النّواة."
+
+#: interfaces/boot.glade.in.h:42
+msgid "Use this tool to specify which operating systems users can choose at startup."
+msgstr "استخدم هذه الأداة لتحديد أي أنظمة التّشغيل يستطيع المستخدمون اختيارها عند بدء التّشغيل."
+
+#: interfaces/boot.glade.in.h:43
+msgid "Video modes (only frame buffer)"
+msgstr "أوضاع الفيديو (فضاء الإطار فقط)"
+
+#: interfaces/boot.glade.in.h:44
+msgid "_Add..."
+msgstr "إ_ضافة..."
+
+#: interfaces/boot.glade.in.h:45
+msgid "_Device:"
+msgstr "ال_جهاز:"
+
+#: interfaces/boot.glade.in.h:46
+msgid "_Edit"
+msgstr "_تحرير"
+
+#: interfaces/boot.glade.in.h:47 src/boot/boot-settings.c:42
+msgid "_Initrd image path:"
+msgstr "مسار صورة _قرص الذّاكرة التّمهيدي (initrd):"
+
+#: interfaces/boot.glade.in.h:48
+msgid "_Kernel image path:"
+msgstr "مسار صورة ال_نّواة:"
+
+#: interfaces/boot.glade.in.h:49
+msgid "_Name:"
+msgstr "الا_سم:"
+
+#: interfaces/boot.glade.in.h:50
+msgid "_Operating system:"
+msgstr "نظام ال_تّشغيل:"
+
+#: interfaces/boot.glade.in.h:51
+msgid "_Parameters:"
+msgstr "ال_معطيات:"
+
+#: interfaces/boot.glade.in.h:52
+msgid "_Root file system device:"
+msgstr "جهاز نظام الملفّات ال_جذر:"
+
+#: interfaces/common.glade.in.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">The platform you are running is not "
+"supported by this tool</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">المنصّة التي تقوم بتشغيلها لا تدعمها هذه الأداة</span>"
+
+#: interfaces/common.glade.in.h:3
+msgid ""
+"<span weight=\"bold\" size=\"larger\">To run this tool, you need "
+"administrator privileges</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">لتشغيل هذه الأداة تحتاج امتيازات مدير النّظام</span>"
+
+#: interfaces/common.glade.in.h:4
+msgid "Complexity"
+msgstr "التّعقيد"
+
+#: interfaces/common.glade.in.h:5
+msgid "Enter Password"
+msgstr "أدخل كلمة السّر"
+
+#: interfaces/common.glade.in.h:6
+msgid ""
+"If you know for sure that it works like one of the platforms listed below, "
+"you can select that and continue. Note, however, that this might damage the "
+"system configuration or downright cripple your computer."
+msgstr "إذا كنت متأكّداً أنّها تعمل كأحد المنصّات المسردة أدناه فيمكنك اختيار ذلك و المتابعة. و لكن تنبّه أن هذا قد يلحق ضرراً بإعداد النّظام أو حتّى يشلّ حاسوبك"
+
+#: interfaces/common.glade.in.h:7
+msgid "Remote administration"
+msgstr "الإدارة عن بعد"
+
+#: interfaces/common.glade.in.h:8
+msgid "Run _Without Password"
+msgstr "التّشغيل _دون كلمة سر"
+
+#: interfaces/common.glade.in.h:9
+msgid "Scanning system configuration..."
+msgstr "جاري تفحّص إعداد النّظام..."
+
+#: interfaces/common.glade.in.h:10
+msgid ""
+"To acquire such privileges, enter your root password below. If you don't "
+"specify a password, you will be  unable to modify your system configuration."
+msgstr "للحصول على تلك الامتيازات أدخل كلمة سر الجذر أدناه. إذا لم تضع كلمة سر فلن تتمكّن من تعديل إعداد نظامك."
+
+#: interfaces/common.glade.in.h:11
+msgid "Unsupported Platform"
+msgstr "منصّة غير مدعومة"
+
+#: interfaces/common.glade.in.h:12
+msgid "Use this window to select the computer you wish to configure"
+msgstr "استخدم هذه النّافذة لانتقاء الحاسوب الذي تود إعداده"
+
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:110
+msgid "_Password:"
+msgstr "_كلمة السر:"
+
+#: interfaces/network.glade.in.h:2
+msgid "/dev/modem"
+msgstr "/dev/modem"
+
+#: interfaces/network.glade.in.h:3
+msgid "/dev/ttyS0"
+msgstr "/dev/ttyS0"
+
+#: interfaces/network.glade.in.h:4
+msgid "/dev/ttyS1"
+msgstr "/dev/ttyS1"
+
+#: interfaces/network.glade.in.h:5
+msgid "/dev/ttyS2"
+msgstr "/dev/ttyS2"
+
+#: interfaces/network.glade.in.h:6
+msgid "/dev/ttyS3"
+msgstr "/dev/ttyS3"
+
+#: interfaces/network.glade.in.h:7
+msgid "<b>Profile Settings</b>"
+msgstr "<b>تعيينات الهيئة</b>"
+
+#: interfaces/network.glade.in.h:8
+msgid "<span weight=\"bold\">Access Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات الوصول</span>"
+
+#: interfaces/network.glade.in.h:9
+msgid "<span weight=\"bold\">Account Data</span>"
+msgstr "<span weight=\"bold\">بيانات الحساب</span>"
+
+#: interfaces/network.glade.in.h:10
+msgid "<span weight=\"bold\">Connection settings</span>"
+msgstr "<span weight=\"bold\">تعينات الاتّصال</span>"
+
+#: interfaces/network.glade.in.h:11
+msgid "<span weight=\"bold\">Connection</span>"
+msgstr "<span weight=\"bold\"> الاتّصال</span>"
+
+#: interfaces/network.glade.in.h:12
+msgid "<span weight=\"bold\">DNS Servers</span>"
+msgstr "<span weight=\"bold\">نوادل DNS</span>"
+
+#: interfaces/network.glade.in.h:13
+msgid "<span weight=\"bold\">Host Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات المضيف</span>"
+
+#: interfaces/network.glade.in.h:14
+msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
+msgstr "<span weight=\"bold\">بيانات مزوّد خدمات الإنترنت</span>"
+
+#: interfaces/network.glade.in.h:15
+msgid "<span weight=\"bold\">PPP Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات PPP (بروتوكول نقطة لنقطة)</span>"
+
+#: interfaces/network.glade.in.h:16
+msgid "<span weight=\"bold\">Search Domains</span>"
+msgstr "<span weight=\"bold\">نطاقات البحث</span>"
+
+#: interfaces/network.glade.in.h:17
+msgid "<span weight=\"bold\">Windows Networking</span>"
+msgstr "<span weight=\"bold\">شبكيّة ويندوز</span>"
+
+#: interfaces/network.glade.in.h:18
+msgid "<span weight=\"bold\">Wireless settings:</span>"
+msgstr "<span weight=\"bold\">تعيينات اللّاسلكيّة:</span>"
+
+#: interfaces/network.glade.in.h:19
+msgid "A_liases:"
+msgstr "الأسماء ال_بديلة:"
+
+#: interfaces/network.glade.in.h:20 interfaces/users.glade.in.h:13
+msgid "Account"
+msgstr "الحساب"
+
+#: interfaces/network.glade.in.h:21
+msgid "Activate"
+msgstr "تنشيط"
+
+#: interfaces/network.glade.in.h:22
+msgid "Activate when the computer _starts"
+msgstr "التّنشيط عند بدء الحاسوب"
+
+#: interfaces/network.glade.in.h:23
+msgid "Address configuration"
+msgstr "إعداد العنوان"
+
+#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
+msgid "Advanced"
+msgstr "متقدّم"
+
+#: interfaces/network.glade.in.h:25
+msgid "Advanced PPP connection tuning."
+msgstr "ضبط متقدّم لاتّصال PPP."
+
+#: interfaces/network.glade.in.h:26
+msgid "Aliases of other computers."
+msgstr "الأسماء البديلة لحواسب أخرى."
+
+#: interfaces/network.glade.in.h:27
+msgid "Allow activation control for all _users"
+msgstr "السّماح لكل ال_مستخدمين بالتّحكّم بالنّشاط"
+
+#: interfaces/network.glade.in.h:28
+msgid "Auto"
+msgstr "تلقائي"
+
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1867
+msgid "BOOTP"
+msgstr "BOOTP"
+
+#: interfaces/network.glade.in.h:30
+msgid "Co_nfiguration:"
+msgstr "الإ_عداد:"
+
+#: interfaces/network.glade.in.h:31
+msgid "Connection _name:"
+msgstr "ا_سم الاتّصال:"
+
+#: interfaces/network.glade.in.h:32
+msgid "Connection name"
+msgstr "اسم الاتّصال"
+
+#: interfaces/network.glade.in.h:33
+msgid "Connection type"
+msgstr "نوع الاتّصال"
+
+#: interfaces/network.glade.in.h:34
+msgid "Connections"
+msgstr "الاتّصالات"
+
+#. set window titles
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
+msgid "Creating a new network connection"
+msgstr "جاري إنشاء اتّصال شبكةٍ جديد"
+
+#: interfaces/network.glade.in.h:36
+msgid "Current network profile:"
+msgstr "هيئة الشّبكة الحاليّة:"
+
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1866
+msgid "DHCP"
+msgstr "DHCP"
+
+#: interfaces/network.glade.in.h:38
+msgid "DNS"
+msgstr "DNS"
+
+#: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "اسم النّطا_ق:"
+
+#: interfaces/network.glade.in.h:40
+msgid "Default gateway device:"
+msgstr "جهاز البوّابة الافتراضي:"
+
+#: interfaces/network.glade.in.h:41
+msgid "Device:"
+msgstr "الجهاز:"
+
+#: interfaces/network.glade.in.h:42
+msgid "Domain / _Workgroup:"
+msgstr "النّطاق / _مجموعة العمل:"
+
+#: interfaces/network.glade.in.h:44
+msgid "General"
+msgstr "عام"
+
+#: interfaces/network.glade.in.h:45
+msgid "Hosts"
+msgstr "المضيفين"
+
+#: interfaces/network.glade.in.h:46
+msgid "How the names of other computers are found."
+msgstr "كيفيّة العثور على  على أسماء حواسب أخرى."
+
+#: interfaces/network.glade.in.h:47
+msgid "How this computer is identified."
+msgstr "كيف يعرّف بهذا الحاسوب."
+
+#: interfaces/network.glade.in.h:48
+msgid "How to access other computers."
+msgstr "كيفيّة الوصول إلى حواسب أخرى."
+
+#: interfaces/network.glade.in.h:49
+msgid "How to dial up to the Internet."
+msgstr "كيفيّة طلب الانترنت هاتفيّاً."
+
+#: interfaces/network.glade.in.h:50
+msgid "ISP phone number"
+msgstr "رقم هاتف مزوّد خدمات الانترنت"
+
+#: interfaces/network.glade.in.h:51
+msgid "Interface properties"
+msgstr "خصائص الواجهة"
+
+#: interfaces/network.glade.in.h:52
+msgid ""
+"List of domains that the system will try to append to a hostname if there "
+"isn't already one specified"
+msgstr "قائمة بالنّطاقات التي سيحاول النّظام تذييلها لاسم مضيف إن لم يكن ثمّة واحدٌ محدّداً مسبقاً"
+
+#: interfaces/network.glade.in.h:54
+msgid "Modem _volume:"
+msgstr "حجم صوت ال_مودم:"
+
+#: interfaces/network.glade.in.h:55
+msgid "Network name:"
+msgstr "اسم الشّبكة:"
+
+#: interfaces/network.glade.in.h:56
+msgid "Network profiles"
+msgstr "هيئات الشّبكة"
+
+#: interfaces/network.glade.in.h:57
+msgid "Network profiles can be used to store different network configurations."
+msgstr "هيئات الشّبكة الممكن استخدامها لتخزين إعداداتٍ شبكيّة متعدّدة."
+
+#: interfaces/network.glade.in.h:58
+msgid "Networking Settings"
+msgstr "التّعيينات الشّبكيّة"
+
+#: interfaces/network.glade.in.h:59
+msgid "New network profile"
+msgstr "هيئة شبكة جديدة"
+
+#: interfaces/network.glade.in.h:60
+msgid ""
+"Next, please enter the user name and password which were assigned to you by "
+"your ISP."
+msgstr "تالياً، فضلاً اختر اسم المستخدم و كلمة السّر اللتان حصلت عليهما من مزوّد خدمات الانترنت."
+
+#: interfaces/network.glade.in.h:61
+msgid ""
+"Now, please enter the address that this network device will have, and the "
+"remote address to which it will be connected."
+msgstr "فضلاً أدخل الآن العنوان لجهاز الشّبكة هذا و العنوان البعيد الذي سيكون متّصلاً به."
+
+#: interfaces/network.glade.in.h:62
+msgid "Now, please enter the address that this network device will have."
+msgstr "فضلاً أدخل الآن العنوان لجهاز الشّبكة هذا."
+
+#: interfaces/network.glade.in.h:63
+msgid "Now, please give this connection a name."
+msgstr "و الآن فضلاً أطلق اسماً على هذا الاتّصال."
+
+#: interfaces/network.glade.in.h:64
+msgid "Number to _access an external line:"
+msgstr "الرّقم لل_وصول إلى خطٍّ خارجي:"
+
+#: interfaces/network.glade.in.h:65
+msgid "Number to get to an _external line:"
+msgstr "الرّقم لل_حصول على خطٍّ خارجي:"
+
+#: interfaces/network.glade.in.h:66
+msgid "PPPD _options:"
+msgstr "_خيارات PPPD:"
+
+#: interfaces/network.glade.in.h:67
+msgid "Pa_ssword (confirm):"
+msgstr "كلمة السّر (_تأكيد):"
+
+#: interfaces/network.glade.in.h:68
+msgid "Phone _number:"
+msgstr "_رقم الهاتف:"
+
+#: interfaces/network.glade.in.h:69
+msgid ""
+"Please enter the phone number you use to connect to the internet. This "
+"number is provided by your ISP."
+msgstr "فضلاً أدخل رقم الهاتف الذي تستخدمه للاتّصال بالانترنت. هذا الرّقم يوفّره مزوّدك بخدمات الانترنت."
+
+#: interfaces/network.glade.in.h:70
+msgid ""
+"Please select the wireless device that you want to configure and set the "
+"network name for this interface"
+msgstr "فضلاً اختر الجهاز اللّاسلكي الذي تود إعداده و عيّن اسم الشّبكة لهذه الواجهة"
+
+#: interfaces/network.glade.in.h:71
+msgid "Please, give this network profile a name and a description."
+msgstr "فضلاً أطلق اسماً على هيئة الشّبكة هذه و أعطها وصفاً."
+
+#: interfaces/network.glade.in.h:72
+msgid "Please, select which type of connection you would like to add."
+msgstr "فضلاً اختر أي نوع اتّصالٍ تودّ إضافته."
+
+#: interfaces/network.glade.in.h:73 interfaces/users.glade.in.h:38
+msgid "Profile _name:"
+msgstr "ا_سم الهيئة:"
+
+#: interfaces/network.glade.in.h:74
+msgid "Pulses"
+msgstr "نبضات"
+
+#: interfaces/network.glade.in.h:75
+msgid "Se_condary:"
+msgstr "_ثانوي:"
+
+#: interfaces/network.glade.in.h:76
+msgid "Set _DNS servers manually"
+msgstr "تعيين خوادم DNS _يدويّاً"
+
+#: interfaces/network.glade.in.h:77
+msgid "Set modem as default _route to internet"
+msgstr "تعيين المودم على أنّه ال_مسلك الرّئيسي للانترنت"
+
+#: interfaces/network.glade.in.h:78
+msgid ""
+"This assistant will help you configure a new \n"
+"network connection."
+msgstr "هذا المعاون سيساعدك على إعداد اتّصال شبكةٍ جديد."
+
+#: interfaces/network.glade.in.h:80
+msgid "This is the list of IP addresses that the system will use as name servers"
+msgstr "هذه قائمة عناوين IP التي سيستخدمها النّظام كنوادل أسماء"
+
+#: interfaces/network.glade.in.h:81
+msgid ""
+"To continue configuring your network connection, click \"Next\". To quit, "
+"click \"Cancel\"."
+msgstr "لمتابعة إعداد اتّصال شبكتك انقر \"التّالي\". للخروج انقر \"إلغاء\"."
+
+#: interfaces/network.glade.in.h:82
+msgid "Tones"
+msgstr "نغمات"
+
+#: interfaces/network.glade.in.h:83
+msgid "Use \"Auto\" if unsure."
+msgstr "استخدم \"تلقائي\" إن لم تكن متأكّداً."
+
+#: interfaces/network.glade.in.h:84
+msgid "Use this dialog for setting the configuration for this interface"
+msgstr "استخدم هذا الحوار لتعيين الإعداد لهذه الواجهة"
+
+#: interfaces/network.glade.in.h:85
+msgid "Username and password"
+msgstr "اسم المستخدم و كلمة السّر"
+
+#: interfaces/network.glade.in.h:86
+msgid "WI_NS server:"
+msgstr "خا_دم WINS:"
+
+#: interfaces/network.glade.in.h:87
+msgid "Wireless device:"
+msgstr "الجهاز اللّاسلكي:"
+
+#: interfaces/network.glade.in.h:88
+msgid "Wireless settings"
+msgstr "التّعيينات اللّاسلكيّة"
+
+#: interfaces/network.glade.in.h:89
+msgid ""
+"You are about to create a new network connection. Please click \"Apply\" to "
+"save your changes."
+msgstr "أنت على وشك إنشاء اتّصال شبكة. فضلاً انقر \"تطبيق\" لحفظ تغييراتك."
+
+#: interfaces/network.glade.in.h:90
+msgid "_Autodetect"
+msgstr "_كشف آلي"
+
+#: interfaces/network.glade.in.h:91
+msgid "_Comment:"
+msgstr "_تعليق:"
+
+#: interfaces/network.glade.in.h:92
+msgid "_Configuration:"
+msgstr "الإ_عداد:"
+
+#: interfaces/network.glade.in.h:93
+msgid "_Deactivate"
+msgstr "_تعطيل"
+
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:55
+msgid "_Delete"
+msgstr "_حذف"
+
+#: interfaces/network.glade.in.h:95
+msgid "_Description:"
+msgstr "ال_وصف:"
+
+#: interfaces/network.glade.in.h:96
+msgid "_Dial type:"
+msgstr "نوع ال_طّلب:"
+
+#: interfaces/network.glade.in.h:97
+msgid "_Enable Windows networking"
+msgstr "_تمكين شبكيّة ويندوز"
+
+#: interfaces/network.glade.in.h:98
+msgid "_Ethernet"
+msgstr "إ_يثرنت"
+
+#: interfaces/network.glade.in.h:99
+msgid "_Gateway address:"
+msgstr "عنوان ال_بوّابة:"
+
+#: interfaces/network.glade.in.h:100
+msgid "_Hostname:"
+msgstr "ا_سم المضيف:"
+
+#: interfaces/network.glade.in.h:101
+msgid "_IP address:"
+msgstr "_عنوان IP:"
+
+#: interfaces/network.glade.in.h:102
+msgid "_IR LAN"
+msgstr "_IR LAN"
+
+#: interfaces/network.glade.in.h:103
+msgid "_Local IP address:"
+msgstr "عنوان IP ال_محلّي:"
+
+#: interfaces/network.glade.in.h:104
+msgid "_Local IP:"
+msgstr "IP الم_حلّي:"
+
+#: interfaces/network.glade.in.h:105
+msgid "_Modem (PPP)"
+msgstr "_مودم (PPP)"
+
+#: interfaces/network.glade.in.h:106
+msgid "_Modem port:"
+msgstr "_منفذ المودم:"
+
+#: interfaces/network.glade.in.h:107
+msgid "_Network Profiles"
+msgstr "هيئات ال_شّبكة"
+
+#: interfaces/network.glade.in.h:108
+msgid "_Network name:"
+msgstr "اسم ال_شّبكة:"
+
+#: interfaces/network.glade.in.h:109
+msgid "_Parallel Line"
+msgstr "خط _متوازي"
+
+#: interfaces/network.glade.in.h:111
+msgid "_Phone number:"
+msgstr "_رقم الهاتف:"
+
+#: interfaces/network.glade.in.h:112
+msgid "_Primary:"
+msgstr "أ_وّلي:"
+
+#: interfaces/network.glade.in.h:113
+msgid "_Remote IP address:"
+msgstr "عنوان IP ال_بعيد:"
+
+#: interfaces/network.glade.in.h:114
+msgid "_Remote IP:"
+msgstr "IP ال_بعيد:"
+
+#: interfaces/network.glade.in.h:115
+msgid "_Retry if the connection breaks or fails to start"
+msgstr "إ_عادة المحاولة في حال انقطع الاتّصال أو فشل في البدء"
+
+#: interfaces/network.glade.in.h:116
+msgid "_Save Current"
+msgstr "_حفظ الحالي"
+
+#: interfaces/network.glade.in.h:117
+msgid "_Start PPP as soon as modem connects"
+msgstr "_بدء PPP بمجرّد أن يتّصل المودم"
+
+#: interfaces/network.glade.in.h:118
+msgid "_Subnet mask:"
+msgstr "_قناع الشّبكة الفرعيّة:"
+
+#: interfaces/network.glade.in.h:119
+msgid "_Update DNS when this connection becomes active"
+msgstr "_تحديث DNS عندما ينشط هذا الاتّصال"
+
+#: interfaces/network.glade.in.h:120
+msgid "_Use remote IP as default gateway"
+msgstr "ا_ستخدام IP البعيد كبوّابةٍ افتراضيّة"
+
+#: interfaces/network.glade.in.h:121 interfaces/users.glade.in.h:65
+msgid "_Username:"
+msgstr "ا_سم المستخدم:"
+
+#: interfaces/network.glade.in.h:122
+msgid "_Wireless"
+msgstr "_لاسلكي"
+
+#: interfaces/services.glade.in.h:1
+msgid "<span weight=\"bold\">Description</span>"
+msgstr "<span weight=\"bold\"> الوصف</span>"
+
+#: interfaces/services.glade.in.h:2
+msgid "<span weight=\"bold\">General Information</span>"
+msgstr "<span weight=\"bold\">معلومات عامّة</span>"
+
+#: interfaces/services.glade.in.h:3
+msgid "<span weight=\"bold\">Service Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات الخدمة</span>"
+
+#: interfaces/services.glade.in.h:4
+msgid "Click on an item in the list to show it's description."
+msgstr "انقر على عنصرٍ من القائمة لإظهار وصفه."
+
+#: interfaces/services.glade.in.h:5
+msgid "Description:"
+msgstr "الوصف:"
+
+#: interfaces/services.glade.in.h:6
+msgid "Service _Properties"
+msgstr "_خصائص الخدمة"
+
+#: interfaces/services.glade.in.h:7
+msgid "Service:"
+msgstr "الخدمة:"
+
+#: interfaces/services.glade.in.h:8
+msgid "Status:"
+msgstr "الحالة:"
+
+#: interfaces/services.glade.in.h:9
+msgid "Use this tool to specify which services to run"
+msgstr "استخدم هذه الأداة لتحديد أي خدمةٍ تشغّل"
+
+#: interfaces/services.glade.in.h:10
+msgid "_Order list by startup sequence"
+msgstr "_ترتيب القائمة حسب ترتيب البدء"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Start"
+msgstr "_بدء"
+
+#: interfaces/services.glade.in.h:12
+msgid "_Startup sequence:"
+msgstr "ترتيب ال_بدء:"
+
+#: interfaces/time.glade.in.h:1
+msgid "(unconfigured)"
+msgstr "(غير معد)"
+
+#: interfaces/time.glade.in.h:3
+msgid ":"
+msgstr ":"
+
+#: interfaces/time.glade.in.h:4
+msgid "<span weight=\"bold\">Time Configuration</span>"
+msgstr "<span weight=\"bold\">إعداد الوقت</span>"
+
+#: interfaces/time.glade.in.h:5
+msgid ""
+"Please select the current date and time. You can also specify a time zone "
+"and a time server."
+msgstr "فضلاً اختر التّاريخ و الوقت الحاليّين. يمكنك أيضاً اختيار منطقةٍ زمنيّة و نادل توقيت."
+
+#: interfaces/time.glade.in.h:6
+msgid "S_ynchronize clock with Internet servers:"
+msgstr "_مزامنة السّاعة مع نوادل الإنترنت:"
+
+#: interfaces/time.glade.in.h:7
+msgid "Se_lect Servers..."
+msgstr "ا_ختر النّوادل..."
+
+#: interfaces/time.glade.in.h:8
+msgid "Select the servers you wish to use for time synchronization."
+msgstr "اختر النّوادل التي تود استخدامها للمزامنة."
+
+#: interfaces/time.glade.in.h:9
+msgid "Time zone:"
+msgstr "المنطقة الزمنيّة:"
+
+#: interfaces/time.glade.in.h:10
+msgid "To select a time zone, click on one of the dots on the map"
+msgstr "لاختيار منطقةٍ زمنيّة انقر على إحدى النّقط على الخارطة"
+
+#: interfaces/time.glade.in.h:11
+msgid "_Date:"
+msgstr "ال_تّاريخ:"
+
+#: interfaces/time.glade.in.h:12
+msgid "_Select Time Zone..."
+msgstr "ا_ختر المنطقة الزّمنيّة..."
+
+#: interfaces/time.glade.in.h:13
+msgid "_Time:"
+msgstr "ال_وقت:"
+
+#: interfaces/users.glade.in.h:2
+msgid "<span weight=\"bold\">Advanced Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات متقدّمة</span>"
+
+#: interfaces/users.glade.in.h:3
+msgid "<span weight=\"bold\">Automatic UID/GID</span>"
+msgstr "<span weight=\"bold\">هويّة مستخدم و هويّة مجموعة تلقائيتين</span>"
+
+#: interfaces/users.glade.in.h:5
+msgid "<span weight=\"bold\">Contact Information</span>"
+msgstr "<span weight=\"bold\">معلومات المراسَل</span>"
+
+#: interfaces/users.glade.in.h:6
+msgid "<span weight=\"bold\">Group Members</span>"
+msgstr "<span weight=\"bold\">أعضاء المجموعة</span>"
+
+#: interfaces/users.glade.in.h:7
+msgid "<span weight=\"bold\">Optional Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات اختياريّة</span>"
+
+#: interfaces/users.glade.in.h:8
+msgid "<span weight=\"bold\">Password Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات كلمة السّر</span>"
+
+#: interfaces/users.glade.in.h:9
+msgid "<span weight=\"bold\">Password</span>"
+msgstr "<span weight=\"bold\">كلمة السّر</span>"
+
+#: interfaces/users.glade.in.h:10
+msgid "<span weight=\"bold\">Profile Settings</span>"
+msgstr "<span weight=\"bold\">تعيينات الهيئة</span>"
+
+#: interfaces/users.glade.in.h:11
+msgid "<span weight=\"bold\">System Defaults</span>"
+msgstr "<span weight=\"bold\">افتراضات النّظام</span>"
+
+#: interfaces/users.glade.in.h:12
+msgid "<span weight=\"bold\">User Profile</span>"
+msgstr "<span weight=\"bold\">هيئة المستخدم</span>"
+
+#: interfaces/users.glade.in.h:15
+msgid "Assign a random password by default"
+msgstr "تعيين كلمة سرٍّ عشوائيّة افتراضيّاً"
+
+#: interfaces/users.glade.in.h:16
+msgid "Check password _quality"
+msgstr "فحص _جودة كلمة السّر"
+
+#: interfaces/users.glade.in.h:17
+msgid "Con_firmation:"
+msgstr "التّأ_كيد:"
+
+#: interfaces/users.glade.in.h:18
+msgid "Days between warning and password expiration:"
+msgstr "الأيّام بين التّنبيه و بطلان كلمة السّر:"
+
+#: interfaces/users.glade.in.h:19
+msgid "Default _group:"
+msgstr "ال_مجموعة الافتراضيّة:"
+
+#: interfaces/users.glade.in.h:20
+msgid "Default _shell:"
+msgstr "ال_هيكل الافتراضي:"
+
+#: interfaces/users.glade.in.h:21
+msgid "Generate _random password"
+msgstr "توليد كلمة سر _عشوائيّة"
+
+#: interfaces/users.glade.in.h:22
+msgid "Group Properties"
+msgstr "خصائص المجموعة"
+
+#: interfaces/users.glade.in.h:23
+msgid "Group _ID:"
+msgstr "_هويّة المجموعة:"
+
+#: interfaces/users.glade.in.h:24
+msgid "Group _members:"
+msgstr "أ_عضاء المجموعة:"
+
+#: interfaces/users.glade.in.h:25
+msgid "Group _name:"
+msgstr "ا_سم المجموعة:"
+
+#: interfaces/users.glade.in.h:26
+msgid "Groups"
+msgstr "المجموعات"
+
+#: interfaces/users.glade.in.h:27
+msgid "Ma_ximum days a password may be used:"
+msgstr "أ_قصى عدد من الأيّام التي يمكن استخدام كلمة السّر فيها:"
+
+#: interfaces/users.glade.in.h:28
+msgid "Maximum UID:"
+msgstr "أقصى عدد من هويّات المستخدمين:"
+
+#: interfaces/users.glade.in.h:29
+msgid "Mi_nimum days between password changes:"
+msgstr "أ_دنى عدد من الأيّام بين تغييرات كلمة السّر:"
+
+#: interfaces/users.glade.in.h:30
+msgid "Minimum GID:"
+msgstr "أدنى عدد من هويّات المجموعات:"
+
+#: interfaces/users.glade.in.h:31
+msgid "Minimum UID:"
+msgstr "أدنى عدد من هويّات المستخدمين:"
+
+#: interfaces/users.glade.in.h:32
+msgid "Minimum days allowed between password changes:"
+msgstr "أدنى عدد مسموح به من الأيّام بين تغييرات كلمة السّر:"
+
+#: interfaces/users.glade.in.h:33
+msgid "Number of days that a password may be used:"
+msgstr "عدد الأيّام التي يمكن فيها استخدام كلمة السّر:"
+
+#: interfaces/users.glade.in.h:34
+msgid "O_ffice location:"
+msgstr "موقع المكت_ب:"
+
+#: interfaces/users.glade.in.h:35
+msgid ""
+"On this page, you can define the system defaults which will be assigned to "
+"new users."
+msgstr "على هذه الصّفحة يمكنك تعريف افتراضات النّظام التي ستعطى للمستخدمين الجدد."
+
+#: interfaces/users.glade.in.h:36
+msgid "Other Groups"
+msgstr "مجموعات أخرى"
+
+#: interfaces/users.glade.in.h:37
+msgid "Password set to: "
+msgstr "كلمة السّر معيّنة على:"
+
+#: interfaces/users.glade.in.h:39
+msgid "Set password b_y hand"
+msgstr "تعيين كلمة السّر _يدويّاً"
+
+#: interfaces/users.glade.in.h:40
+msgid "Show a_ll users and groups"
+msgstr "إظهار _كل المستخدمين و المجموعات"
+
+#: interfaces/users.glade.in.h:41
+msgid ""
+"This is the list of the groups available on the system. Create new groups or "
+"edit existing groups with this dialog."
+msgstr "هذه قائمة المجموعات الموجودة على النّظام. أنشئ مستخدمين جدد أو عدّل المجموعات الموجودة بهذا الحوار."
+
+#: interfaces/users.glade.in.h:42
+msgid ""
+"This is the list of the users available on the system. Create new users or "
+"edit existing user settings with this dialog."
+msgstr "هذه قائمة بالمستخدمين الموجودين على النّظام. أنشئ مستخدمين جدد أو عدّل تعيينات المستخدمين الموجودين بهذا الحوار."
+
+#: interfaces/users.glade.in.h:43
+msgid "User Profiles"
+msgstr "هيئات المستخدم"
+
+#: interfaces/users.glade.in.h:44
+msgid "User _ID:"
+msgstr "_هويّة المستخدم:"
+
+#: interfaces/users.glade.in.h:45
+msgid "User _password:"
+msgstr "_كلمة سر المستخدم:"
+
+#: interfaces/users.glade.in.h:46
+msgid ""
+"User profiles can be used as templates to facilitate the creation of new "
+"users."
+msgstr "يمكن استعمال هيئات المستخدمين كقوالب لتسهيل إنشاء مستخدمين جدد."
+
+#: interfaces/users.glade.in.h:47
+msgid "Users"
+msgstr "المستخدمين"
+
+#: interfaces/users.glade.in.h:48
+msgid "_Add Group..."
+msgstr "إ_ضافة مجموعة..."
+
+#: interfaces/users.glade.in.h:49
+msgid "_Add Profile..."
+msgstr "إ_ضافة هيئة..."
+
+#: interfaces/users.glade.in.h:50
+msgid "_Add User..."
+msgstr "إ_ضافة مستخدم..."
+
+#: interfaces/users.glade.in.h:51
+msgid "_All users:"
+msgstr "_كل المستخدمين:"
+
+#: interfaces/users.glade.in.h:52
+msgid "_Available groups:"
+msgstr "المجموعات ال_متوفّرة:"
+
+#: interfaces/users.glade.in.h:53
+msgid "_Comments"
+msgstr "_تعليقات:"
+
+#: interfaces/users.glade.in.h:54
+msgid "_Days between warning and password expiration:"
+msgstr "الأ_يّام بين التّحذير و بطلان كلمة السّر:"
+
+#: interfaces/users.glade.in.h:56
+msgid "_Edit User Profiles..."
+msgstr "_تحرير هيئات المستخدمين..."
+
+#: interfaces/users.glade.in.h:57
+msgid "_Generate Password"
+msgstr "_توليد كلمة سر"
+
+#: interfaces/users.glade.in.h:58
+msgid "_Home directory:"
+msgstr "المجلّد المنز_لي:"
+
+#: interfaces/users.glade.in.h:59
+msgid "_Home phone:"
+msgstr "هاتف المنز_ل:"
+
+#: interfaces/users.glade.in.h:60
+msgid "_Main group:"
+msgstr "المجموعة ال_رّئيسيّة:"
+
+#: interfaces/users.glade.in.h:61
+msgid "_Profile:"
+msgstr "ال_هيئة:"
+
+#: interfaces/users.glade.in.h:62
+msgid "_Real name:"
+msgstr "الا_سم الحقيقي:"
+
+#: interfaces/users.glade.in.h:63
+msgid "_Shell:"
+msgstr "ال_هيكل:"
+
+#: interfaces/users.glade.in.h:64
+msgid "_User's groups:"
+msgstr "مجموعات ال_مستخدم:"
+
+#: interfaces/users.glade.in.h:66
+msgid "_Work phone:"
+msgstr "هاتف ال_عمل:"
+
+#: interfaces/users.glade.in.h:67
+msgid "profiles_table"
+msgstr "_جدول الهيئات"
+
+#: src/boot/boot-append-gui.c:226
+#, c-format
+msgid "vga=%s is not a valid vga value"
+msgstr "vga=%s ليست قيمة vga صحيحة"
+
+#: src/boot/boot-druid.c:430
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "جاري إنشاء صورة إقلاع جديدة (%d من %d)"
+
+#: src/boot/boot-druid.c:431
+msgid "Finished creating a new boot image"
+msgstr "انتهيت من إنشاء صورة إعدادٍ جديدة"
+
+#: src/boot/boot-image.c:40 src/network/profile.c:468
+msgid "Unknown"
+msgstr "مجهول"
+
+#: src/boot/boot-image.c:41
+msgid "Windows NT"
+msgstr "ويندوز NT"
+
+#: src/boot/boot-image.c:42
+msgid "Windows 9x"
+msgstr "ويندوز 9x"
+
+#: src/boot/boot-image.c:43
+msgid "Dos"
+msgstr "دوس"
+
+#: src/boot/boot-image.c:44
+msgid "Linux"
+msgstr "لينكس"
+
+#: src/boot/boot-image.c:45
+msgid "Linux swap"
+msgstr "تبادل لينكس"
+
+#: src/boot/boot-image.c:46
+msgid "GNU/Hurd"
+msgstr "جنو/هرد"
+
+#: src/boot/boot-image.c:278
+#, c-format
+msgid "Invalid path: %s"
+msgstr "مسار غير سليم: %s"
+
+#: src/boot/boot-image.c:294
+#, c-format
+msgid "Image '%s' already exists, please set another name."
+msgstr "الصّورة '%s' موجودة أصلاً. فضلاً عيّن اسماً آخر."
+
+#: src/boot/boot-image.c:300
+#, c-format
+msgid "Invalid image name: '%s'"
+msgstr "اسم صورة غير سليم: '%s'"
+
+#: src/boot/boot-image.c:313
+#, c-format
+msgid "Invalid image: '%s'"
+msgstr "صورة غير سليمة: '%s'"
+
+#: src/boot/boot-image.c:331
+#, c-format
+msgid "Invalid root device: '%s'"
+msgstr "جهاز جذر غير سليم: '%s'"
+
+#: src/boot/boot-settings.c:43
+msgid "_Module path:"
+msgstr "مسار ال_وحدة:"
+
+#: src/boot/boot-settings.c:360 src/users/user-settings.c:472
+msgid "Password confirmation isn't correct."
+msgstr "تأكيد كلمة السّر غير صحيح."
+
+#: src/boot/boot.desktop.in.in.h:1
+msgid "Boot"
+msgstr "إقلاع"
+
+#: src/boot/boot.desktop.in.in.h:2
+msgid "Configure the system boot process"
+msgstr "إعداد عمليّة إقلاع النّظام"
+
+#: src/boot/callbacks.c:75
+msgid "Boot Image Editor"
+msgstr "محرّر صورة الإقلاع"
+
+#: src/boot/callbacks.c:169
+msgid "Boot Append Editor"
+msgstr "محرّر تذييل الإقلاع"
+
+#: src/boot/callbacks.c:393
+msgid ""
+"Without at least one boot image,\n"
+"your system will not start.\n"
+msgstr ""
+"دون وجود صورة إقلاع واحدةٍ على الأقل\n"
+"فلن يقلع نظامك.\n"
+
+#: src/boot/callbacks.c:408
+#, c-format
+msgid "Are you sure you want to delete '%s'?"
+msgstr "هل أنت متأكّدٌ أنّك تريد حذف '%s'؟"
+
+#: src/boot/callbacks.c:453
+#, c-format
+msgid ""
+"The file ``%s'' is missing or could not be read:\n"
+"The configuration will show empty."
+msgstr ""
+"الملف ``%s'' مفقود أو تعذّرت قرائته:\n"
+"سيظهره الإعداد خالياً."
+
+#: src/boot/table.c:41
+msgid "Name"
+msgstr "الاسم"
+
+#: src/boot/table.c:42
+msgid "Default"
+msgstr "الافتراض"
+
+#: src/boot/table.c:43 src/network/connection.c:485
+msgid "Type"
+msgstr "النّوع"
+
+#: src/boot/table.c:44
+msgid "Kernel Image"
+msgstr "صورة النّواة"
+
+#: src/boot/table.c:45 src/network/connection.c:501
+msgid "Device"
+msgstr "الجهاز"
+
+#: src/boot/table.c:50 src/network/connection.c:57
+msgid "/_Add ..."
+msgstr "/إ_ضافة ..."
+
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
+msgid "/_Properties"
+msgstr "/_خصائص"
+
+#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
+#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+msgid "/_Delete"
+msgstr "/_حذف"
+
+#. the proccess was running ssh
+#: src/common/gst-auth.c:84
+msgid "Could not connect to the computer."
+msgstr "تعذّر الاتّصال بالحاسوب."
+
+#. the proccess was running su
+#: src/common/gst-auth.c:87
+msgid "The password you entered is invalid."
+msgstr "كلمة السّر المدخلة غير سليمة."
+
+#: src/common/gst-auth.c:95
+#, c-format
+msgid "Could not run \"%s\". Check that you have permissions to run it."
+msgstr "تعذّر تشغيل \"%s\". تأكّد أنّك تملك التّصاريح لتشغيله."
+
+#: src/common/gst-auth.c:99
+msgid "An unexpected error has occurred."
+msgstr "حدث خطأٌ غير متوقّع."
+
+#: src/common/gst-dialog.c:61
+#, c-format
+msgid "Could not find widget: %s"
+msgstr "تعذّر العثور على القطعة: %s"
+
+#: src/common/gst-dialog.c:93
+msgid " More _Options"
+msgstr " _خيارات أكثر"
+
+#: src/common/gst-dialog.c:94
+msgid " Fewer _Options"
+msgstr " _خيارات أقل"
+
+#: src/common/gst-dialog.c:507
+msgid ""
+"There are changes which haven't been applied.\n"
+"Apply them now?"
+msgstr ""
+"ثمّة تغييراتٌ لم تطبّق.\n"
+"هل تريد تطبيقها الآن؟"
+
+#: src/common/gst-dialog.c:624
+#, c-format
+msgid "Error connection signal `%s' in widget `%s'"
+msgstr "خطأ إشارة الاتّصال `%s' في القطعة `%s'"
+
+#: src/common/gst-tool.c:795
+#, c-format
+msgid "Skipping %s directive..."
+msgstr "يتم تخطّي إيعاز %s..."
+
+#: src/common/gst-tool.c:922
+msgid "Skipping actual save..."
+msgstr "يتم تخطّي الحفظ الفعلي..."
+
+#: src/common/gst-tool.c:995
+msgid ""
+"There was an error running the backend script,\n"
+"and the configuration could not be loaded."
+msgstr ""
+"حدث خطأ أثناء تشغيل نص الخلفيّة البرمجي\n"
+"فتعذّر تحميل الإعداد."
+
+#: src/common/gst-tool.c:1477
+#, c-format
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the "
+"GNOME System Tools</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">مرحباً بك في الإصدار المبكّر %s من أدوات نظام جنوم</span>"
+
+#: src/common/gst-tool.c:1480
+msgid ""
+"This is still a work in progress, and so it may have serious bugs. Due to "
+"the nature of these tools, bugs may render your computer <span weight=\"bold"
+"\">practically useless</span>, costing time, effort and sanity points. You "
+"have been warned. Thank you for trying out this prerelease of the GNOME "
+"System Tools!"
+msgstr "هذا لا يزال مشروعاً تحت العمل فلذا قد يتضمّن عيوباً كبيرة. نظراً لطبيعة هذه الأدوات فقد تتسبّب هذه العيوب في جعل نظامك <span weight=\"bold\">مشلولاً عمليّاً</span> ممّا سيضيع الكثير من الوقت و الجهد و الأعصاب. قد أعذر من أنذر. شكراً لك لتجربتك هذا الإصدار المبكّر من أدوات نظام جنوم!"
+
+#: src/common/gst-tool.c:1501
+msgid "Warning"
+msgstr "تحذير"
+
+#: src/common/gst-tool.c:1521
+msgid "Don't show me this again"
+msgstr "لا ترني هذا مجدّداً"
+
+#: src/common/gst-tool.c:1595
+msgid "GNOME System Tools"
+msgstr "أدوات نظام جنوم"
+
+#: src/common/gst-ui.c:389
+msgid "Please restart your GNOME session for these changes to take effect."
+msgstr "فضلاً أعد تشغيل جلسة جنوم كي تحدث هذه التّغييرات أثرها."
+
+#: src/network/callbacks.c:365
+#, c-format
+msgid "Remove connection %s: \"%s\"?"
+msgstr "إزالة الاتّصال %s: \"%s\"؟"
+
+#: src/network/callbacks.c:367
+#, c-format
+msgid "Remove connection %s?"
+msgstr "إزالة الاتّصال %s؟"
+
+#: src/network/callbacks.c:463
+msgid ""
+"You don't have SMB support installed. Please install SMB support in the "
+"system to enable windows networking."
+msgstr "دعم SMB ليس مثبّتاً لديك. فضلاً ثبّت دعم SMB على النّظام لتمكين الشّبكيّة مع ويندوز."
+
+#: src/network/callbacks.c:466
+msgid "SMB support missing."
+msgstr "دعم SMB مفقود."
+
+#: src/network/callbacks.c:522
+msgid ""
+"The host name has changed. This will prevent you from launching new "
+"applications, and so you will have to log in again. Continue anyway?"
+msgstr "لقد تغيّر اسم المضيف. هذا سيمنعك من إطلاق تطبيقاتٍ جديدة فلذا ستضطر لتسجيل الدّخول مجدّداً. هل تريد المتابعة على أي حال؟"
+
+#: src/network/callbacks.c:570
+msgid ""
+"wvdial could not be found on your system. You need to install wvdial, or the "
+"PPP (modem) connections will not activate."
+msgstr "لم يعثر على wvdial على نظامك. عليك أن تثبّت wvdial و إلّا فلن تنشط اتّصالات PPP (المودم)."
+
+#: src/network/callbacks.c:597
+msgid ""
+"wvdial could not be found on your system. You need to install wvdial, or the "
+"PPP (modem) connections will not activate. Continue anyway?"
+msgstr "لم يعثر على wvdial على نظامك. عليك أن تثبّت wvdial و إلّا فلن تنشط اتّصالات PPP (المودم). هل تريد المتابعة على أي حال؟"
+
+#: src/network/callbacks.c:624
+msgid ""
+"The default gateway device is not activated. This will prevent you from "
+"connecting to the Internet. Continue anyway?"
+msgstr "جهاز البوّابة الافتراضي غير منشّط. هذا سيمنعك من الاتّصال بالإنترنت. هل تريد المتابعة على أي حال؟"
+
+#: src/network/callbacks.c:675
+msgid ""
+"The default gateway device is missing gateway information. Please provide "
+"this information to proceed, or choose another default gateway device."
+msgstr "جهاز البوّابة الافتراضي يفتقد لمعلومات البوّابة. فضلاً زوّد بهذه المعلومات للمتابعة أو اختر جهاز بوّابةٍ افتراضيٍّ آخر."
+
+#: src/network/callbacks.c:721
+msgid ""
+"The program redhat-config-network-cmd could not be found. This could render "
+"missing connections under the connections tab. Please install the redhat-"
+"config-network rpm package to avoid this."
+msgstr "تعذّر إيجاد برنامج redhat-config-network-cmd. قد يترك هذا الاتّصالات المفقودة تحت لسان الاتّصالات. فضلاً قم بتثبيت حزمة redhat-config-network لتجنّب هذا."
+
+#: src/network/callbacks.c:758
+#, c-format
+msgid "Do you want to enable interface %s?"
+msgstr "هل تريد تمكين الواجهة %s؟"
+
+#: src/network/callbacks.c:768
+#, c-format
+msgid "Do you want to disable interface %s?"
+msgstr "هل تريد تعطيل الواجهة %s؟"
+
+#: src/network/callbacks.c:860
+msgid ""
+"Could not autodetect modem device, check that this is not busy and that it's "
+"correctly attached"
+msgstr "تعذّر الكشف عن جهاز المودم آليّاً. تأكّد أنّه غير مشغول و أنّه مركّب بشكلٍ صحيح."
+
+#: src/network/callbacks.c:912
+msgid "Silent"
+msgstr "صامت"
+
+#: src/network/callbacks.c:914
+msgid "Low"
+msgstr "منخفض"
+
+#: src/network/callbacks.c:916
+msgid "Medium"
+msgstr "متوسّط"
+
+#: src/network/callbacks.c:918
+msgid "Loud"
+msgstr "عالي"
+
+#: src/network/connection.c:45
+msgid "Other type"
+msgstr "فئة أخرى"
+
+#: src/network/connection.c:46
+msgid "Ethernet LAN card"
+msgstr "بطاقة LAN إيثرنت"
+
+#: src/network/connection.c:47
+msgid "Wireless LAN card"
+msgstr "بطاقة LAN لاسلكيّة"
+
+#: src/network/connection.c:48
+msgid "Modem or transfer cable"
+msgstr "سلك المودم أو النّقل"
+
+#: src/network/connection.c:49
+msgid "Parallel line"
+msgstr "خط متوازي"
+
+#: src/network/connection.c:50
+msgid "Infrared LAN"
+msgstr "LAN تحت حمراء"
+
+#: src/network/connection.c:51
+msgid "Loopback interface"
+msgstr "واجهة تحلّق خلفي"
+
+#: src/network/connection.c:52
+msgid "Unknown interface type"
+msgstr "فئة واجهة مجهولة"
+
+#: src/network/connection.c:59
+msgid "/_Configure"
+msgstr "/إ_عداد"
+
+#: src/network/connection.c:513
+msgid "Status"
+msgstr "الحالة"
+
+#: src/network/connection.c:522 src/network/profiles-table.c:62
+msgid "Description"
+msgstr "الوصف"
+
+#: src/network/connection.c:1729
+msgid ""
+"The IP address or netmask for the interface was left empty. Please enter "
+"valid IP addresses in those fields to continue."
+msgstr "ترك عنوان IP أو قناع الشّبكة للواجهة خالياً. فضلاً أدخل عناوين IP سليمة في تلك الحقول للمتابعة."
+
+#: src/network/connection.c:1736
+msgid ""
+"The IP address or remote address for the interface was left empty. Please "
+"enter valid IP addresses in those fields to continue."
+msgstr "ترك عنوان IP أو العنوان البعيد للواجهة خالياً. فضلاً أدخل عناوين IP سليمة في تلك الحقول للمتابعة."
+
+#: src/network/connection.c:1742
+msgid ""
+"You chose to set the DNS servers for this connection manually, but left the "
+"IP address for the primary DNS empty. Please enter the IP for the primary "
+"DNS or uncheck the manual DNS option."
+msgstr "لقد اخترت تعيين نوادل DNS لهذا الاتّصال يدويّاً لكنّك تركت عنوان IP للـDNS الأوّلي خالياً. فضلاً أدخل عنوان IP للـDNS الأوّلي أو أزل خيار تعيين نوادل DNS يدويّاً."
+
+#: src/network/connection.c:1748
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr "جهاز المودم الذي سيستخدمه الاتّصال ترك خالياً. فضلاً أدخل جهازاً أو اضغط \"كشف آلي\" للمتابعة."
+
+#: src/network/connection.c:1753
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr "رقم الهاتف الذي سيستخدمه الاتّصال ترك خالياً. فضلاً أدخل رقم هاتفٍ سليم للمتابعة."
+
+#: src/network/connection.c:2117
+#, c-format
+msgid "The interface %s doesn't exist."
+msgstr "لا توجد واجهة باسم %s."
+
+#: src/network/connection.c:2119
+msgid " The loopback interface cannot be configured."
+msgstr "لا يمكن إعداد واجهة التّحلّق الخلفي."
+
+#: src/network/dns.c:163 src/network/hosts.c:174
+msgid "IP Address"
+msgstr "عنوان IP"
+
+#: src/network/hosts.c:182
+msgid "Aliases"
+msgstr "أسماء بديلة"
+
+#: src/network/main.c:190
+msgid "Run the connection assistant."
+msgstr "تشغيل معاون الاتّصال."
+
+#: src/network/main.c:191
+msgid "Run the PPP connection assistant."
+msgstr "تشغيل معاون اتّصال PPP."
+
+#: src/network/main.c:192
+msgid "Run the ethernet connection assistant."
+msgstr "تشغيل معاون اتّصال إيثرنت."
+
+#: src/network/main.c:193
+msgid "Run the wlan connection assistant."
+msgstr "تشغيل معاون اتّصال wlan."
+
+#: src/network/main.c:194
+msgid "Run the parallel port connection assistant."
+msgstr "تشغيل معاون اتّصال المنفذ المتوازي."
+
+#: src/network/main.c:195
+msgid "Run the irlan connection assistant."
+msgstr "تشغيل معاون اتّصال irlan."
+
+#: src/network/main.c:196
+msgid "Configure a network interface"
+msgstr "إعداد واجهة شبكة"
+
+#: src/network/main.c:196
+msgid "interface"
+msgstr "واجهة"
+
+#: src/network/main.c:203
+msgid "Network Settings"
+msgstr "تعيينات الشّبكة"
+
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "جاري إنشاء اتّصال شبكةٍ جديد (%d من %d)"
+
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "انتهيت من إنشاء اتّصال شبكةٍ جديد"
+
+#: src/network/network.desktop.in.in.h:1
+msgid "Configure network devices and connections"
+msgstr "تهيئة أجهزة الشّبكة و اتّصالاتها"
+
+#: src/network/network.desktop.in.in.h:2
+msgid "Networking"
+msgstr "الشّبكيّة"
+
+#: src/network/profile.c:43
+#, c-format
+msgid "Are you sure you want to delete profile %s?"
+msgstr "هل أنت متأكّدٌ أنّك تريد حذف الهيئة %s؟"
+
+#: src/network/profiles-table.c:53
+msgid "Profile name"
+msgstr "اسم الهيئة"
+
+#: src/services/callbacks.c:46
+msgid "No description available."
+msgstr "لا يوجد وصف."
+
+#: src/services/callbacks.c:259
+msgid "Running"
+msgstr "تعمل"
+
+#: src/services/callbacks.c:263
+msgid "Stopped"
+msgstr "موقفة"
+
+#: src/services/callbacks.c:268
+msgid "Could not get info"
+msgstr "تعذّر جلب المعلومات"
+
+#: src/services/callbacks.c:334
+#, c-format
+msgid "Settings for service %s"
+msgstr "التّعيينات للخدمة %s"
+
+#: src/services/main.c:61
+msgid "Services Settings"
+msgstr "تعيينات الخدمة"
+
+#: src/services/services.desktop.in.in.h:1
+msgid "Configure which services will be run when the system starts"
+msgstr "إعداد أي الخدمات ستشغّل عند بدء النّظام"
+
+#: src/services/services.desktop.in.in.h:2
+msgid "Services"
+msgstr "الخدمات"
+
+#: src/services/table.c:79
+msgid "Active"
+msgstr "نشط"
+
+#: src/services/table.c:88
+msgid "Service"
+msgstr "الخدمة"
+
+#: src/time/main.c:313
+msgid "Time Zone"
+msgstr "المنطقة الزّمنيّة"
+
+#: src/time/main.c:423
+msgid "Time Servers"
+msgstr "نوادل التّوقيت"
+
+#: src/time/main.c:501
+msgid ""
+"You don't have NTP support running. Please run NTP support in the system to "
+"enable server synchronization."
+msgstr "دعم NTP لا يعمل لديك. فضلاً قم بتشغيل دعم NTP على النّظام لتمكين المزامنة مع النّادل."
+
+#: src/time/main.c:808
+msgid "Time and Date Settings"
+msgstr "تعيينات الوقت و التّاريخ"
+
+#: src/time/time.desktop.in.in.h:1
+msgid "Change system time, date, and timezone"
+msgstr "تغيير وقت النّظام و التّاريخ و المنطقة الزّمنيّة"
+
+#: src/time/time.desktop.in.in.h:2
+msgid "Time and Date"
+msgstr "الوقت و التّاريخ"
+
+#: src/users/callbacks.c:602
+msgid "Create New profile"
+msgstr "إنشاء هيئة جديدة"
+
+#: src/users/callbacks.c:633
+#, c-format
+msgid "Settings for profile %s"
+msgstr "التّعيينات للهيئة %s"
+
+#: src/users/group-settings.c:89
+msgid "Create New Group"
+msgstr "إنشاء مجموعة جديدة"
+
+#: src/users/group-settings.c:143 src/users/user-settings.c:427
+msgid "User id must be a positive number."
+msgstr "هويّة المستخدم يجب أن تكون رقماً موجباً."
+
+#: src/users/group-settings.c:147
+msgid "Such group id already exists."
+msgstr "هويّة المجموعة تلك موجودةٌ أساساً."
+
+#: src/users/group-settings.c:169
+msgid "Group name is empty."
+msgstr "اسم المجموعة خالٍ."
+
+#: src/users/group-settings.c:173
+msgid "The group name is too long."
+msgstr "اسم المجموعة زائد الطّول."
+
+#: src/users/group-settings.c:177
+msgid "Please set a valid group name, using only lower-case letters."
+msgstr "فضلاً ضع اسم مجموعةٍ سليم مستخدماً الحروف الصّغيرة فقط."
+
+#: src/users/group-settings.c:181
+msgid "Group already exists."
+msgstr "المجموعة موجودةٌ أساساً."
+
+#: src/users/group-settings.c:250
+msgid "The root group must not be deleted."
+msgstr "يجب ألّا تحذف مجموعة الجذر."
+
+#: src/users/group-settings.c:257
+#, c-format
+msgid "Are you sure you want to delete group %s?"
+msgstr "هل أنت متأكّدٌ أنّك تريد حذف المجموعة %s؟"
+
+#: src/users/group-settings.c:314
+#, c-format
+msgid "Settings for Group %s"
+msgstr "التّعيينات للمجموعة %s"
+
+#: src/users/groups-table.c:44 src/users/users-table.c:51
+msgid "Group"
+msgstr "المجموعة"
+
+#: src/users/groups-table.c:45
+msgid "GID"
+msgstr "هويّة المجموعة"
+
+#: src/users/main.c:120
+msgid "User name contains"
+msgstr "اسم المستخدم يحتوي"
+
+#: src/users/main.c:121
+msgid "User ID is"
+msgstr "هويّة المستخدم هي"
+
+#: src/users/main.c:122
+msgid "Group name contains"
+msgstr "اسم المجموعة يحتوي"
+
+#: src/users/main.c:123
+msgid "User GID is"
+msgstr "هويّة المجموعة هي"
+
+#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
+msgid "Users and Groups"
+msgstr "المستخدمون والمجموعات"
+
+#: src/users/passwd.c:266
+msgid "Passwords doesn't match."
+msgstr "كلمات السّر لا تتطابق."
+
+#: src/users/passwd.c:271
+#, c-format
+msgid ""
+"Bad password: %s.\n"
+"Please try with a new password."
+msgstr ""
+"كلمة سر رديئة: %s.\n"
+"فضلاً جرّب بكلمة سرٍّ جديدة."
+
+#: src/users/profile-settings.c:129
+msgid "The profile must have a name"
+msgstr "يجب أن يكون للهيئة اسم"
+
+#: src/users/profile-settings.c:134
+msgid "The profile must have a default home"
+msgstr "يجب أن يكون للهيئة منزلٌ افتراضي"
+
+#: src/users/profile-settings.c:139 src/users/profile-settings.c:144
+msgid "The profile must have a default shell"
+msgstr "يجب أن يكون للهيئة هيكلٌ افتراضي"
+
+#: src/users/profile-settings.c:214
+msgid "The profile Default must not be deleted."
+msgstr "يجب ألّا يحذف افتراض الهيئة."
+
+#: src/users/profile-settings.c:221
+#, c-format
+msgid "Are you sure you want to delete the profile called %s?"
+msgstr "هل أنت متأكّدٌ أنّك تريد حذف الهيئة المسمّاة %s؟"
+
+#. Column name,          Adv_state_show,	Basic_state_show
+#: src/users/profiles-table.c:38
+msgid "Profile"
+msgstr "الهيئة"
+
+#: src/users/profiles-table.c:39
+msgid "Comment"
+msgstr "التّعليق"
+
+#: src/users/search-bar/search-bar.c:200
+msgid "_Search"
+msgstr "_بحث"
+
+#: src/users/search-bar/search-bar.c:238
+msgid "C_lear"
+msgstr "_مسح"
+
+#: src/users/search-bar/search-bar.c:346
+msgid "Choice"
+msgstr "الاختيار"
+
+#: src/users/search-bar/search-bar.c:356
+msgid "Text"
+msgstr "نص"
+
+#: src/users/table.c:47
+msgid "/_Add User ..."
+msgstr "/إ_ضافة مستخدم ..."
+
+#: src/users/table.c:54
+msgid "/_Add group ..."
+msgstr "/إ_ضافة مجموعة ..."
+
+#: src/users/user-settings.c:104
+msgid "The root user must not be deleted."
+msgstr "يجب ألّا يحذف المستخدم الجذر."
+
+#: src/users/user-settings.c:111
+#, c-format
+msgid "Are you sure you want to delete user %s?"
+msgstr "هل أنت متأكّدٌ أنّك تريد حذف المستخدم %s؟"
+
+#: src/users/user-settings.c:191
+msgid "User Account Editor"
+msgstr "محرّر حسابات المستخدمين"
+
+#: src/users/user-settings.c:305
+msgid "The username is empty."
+msgstr "اسم المستخدم خالٍ."
+
+#: src/users/user-settings.c:313
+msgid "The username is too long."
+msgstr "اسم المستخدم زائد الطّول."
+
+#: src/users/user-settings.c:317
+msgid "root username shouldn't be modified."
+msgstr "يجب ألّا يعدّل اسم المستخدم الجذر."
+
+#: src/users/user-settings.c:321
+msgid ""
+"Please set a valid username consisting of a lower case letter followed by "
+"lower case letters and numbers."
+msgstr "فضلاً ضع اسم مستخدمٍ سليم متكوّنٍ من حرفٍ صغير متبوعاً بحروفٍ صغيرة و أرقام."
+
+#: src/users/user-settings.c:325
+#, c-format
+msgid ""
+"Username \"%s\" already exists.\n"
+"\n"
+"Please select a different Username"
+msgstr ""
+"اسم المستخدم \"%s\" موجودٌ أساساً.\n"
+"\n"
+"فضلاً اختر اسم مستخدمٍ مختلف"
+
+#: src/users/user-settings.c:347
+#, c-format
+msgid "Invalid character '%c' in comment."
+msgstr "حرفٌ غير سليم '%c' في التّعليق."
+
+#: src/users/user-settings.c:393
+msgid "Home directory must not be empty."
+msgstr "يجب ألّا يكون المجلّد المنزلي خالياً."
+
+#: src/users/user-settings.c:396
+msgid "Please enter full path for home directory."
+msgstr "فضلاً أدخل المسار الكامل لمجلّد المنزل."
+
+#: src/users/user-settings.c:399
+msgid "root home shouldn't be modified."
+msgstr "يجب ألّا يعدّل منزل الجذر."
+
+#: src/users/user-settings.c:429
+msgid "root uid shouldn't be modified."
+msgstr "يجب ألّا تعدّل هويّة الجذر."
+
+#: src/users/user-settings.c:431
+msgid "Such user id already exists."
+msgstr "هويّة المستخدم تلك موجودةٌ أساساً."
+
+#: src/users/user-settings.c:451
+msgid "Please give shell with full path."
+msgstr "فضلاً أعط هيكلاً مع المسار الكامل."
+
+#: src/users/user-settings.c:469
+msgid "Password must not be empty."
+msgstr "يجب ألّا تكون كلمة السّر خالية."
+
+#: src/users/user-settings.c:746
+#, c-format
+msgid "Settings for User %s"
+msgstr "التّعيينات للمستخدم %s"
+
+#. Column name,          Adv_state_show,	Basic_state_show
+#: src/users/users-table.c:46
+msgid "User"
+msgstr "المستخدم"
+
+#: src/users/users-table.c:47
+msgid "Home"
+msgstr "المنزل"
+
+#: src/users/users-table.c:48
+msgid "User details"
+msgstr "تفاصيل المستخدم"
+
+#: src/users/users-table.c:49
+msgid "UID"
+msgstr "هويّة المستخدم"
+
+#: src/users/users-table.c:50
+msgid "Shell"
+msgstr "الهيكل"
+
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "إضافة أو إزالة مستخدمين و مجموعات"
+
