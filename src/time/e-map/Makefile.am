@@ -7,6 +7,8 @@ INCLUDES = \
 LDADD = -lm $(XST_TOOL_LIBS)
 LIBS+=$(LDADD)
 
+EXTRA_DIST= e-map-marshal.list
+
 e-map-marshal.h: e-map-marshal.list
 	( @GLIB_GENMARSHAL@ e-map-marshal.list --header > e-map-marshal.tmp \
 	&& mv e-map-marshal.tmp e-map-marshal.h ) \

@@ -21,7 +21,8 @@ interfaces_DATA = $(interfaces)
 
 EXTRA_DIST = \
 	$(interfaces:.glade=.glade.in)	\
-	$(interfaces:.glade=.glade.h)
+	$(interfaces:.glade=.glade.h)   \
+	fix.pl
 
 CLEANFILES = $(interfaces)
 
