@@ -59,11 +59,15 @@ struct _user
 	gchar *comment;			/* Usually account owner's name */
 	gchar *home;			/* Home directory */
 	gchar *shell;			/* Account's shell */
-	gint last_mod;			/* */
-	gint passwd_max_life;		/* Password expiration time, 99999 if doesn't expire */
-	gint passwd_exp_warn;		/* Number of days before users gets account exp. warning */
-	gboolean passwd_exp_disable;	/* true if password doesn't expire */
-	gboolean passwd_disable;	/* true if password is disabled */
+	
+	guint last_mod;			/* Days since Jan 1, 1970 that password was last changed */
+	guint passwd_min_life;		/* Days before password may be changed */
+	guint passwd_max_life;		/* Days after which password must be changed */
+	guint passwd_exp_warn;		/* Days before password is to expire that user is warned */
+	guint passwd_exp_disable;	/* Days after password expires that account is disabled */
+	gboolean is_passwd_exp_disable; /* Is this field being used? */
+  guint passwd_disable;	/* Days since Jan 1, 1970 that account is disabled */
+	gboolean is_passwd_disable; /* Is this field being used? */
 	gchar *reserved;			/* Obscure field. Passed through */
 	gboolean is_shadow;		/* true if using shadow passwords */
 };

@@ -1113,6 +1113,7 @@ make_default_user (gchar *name)
 	u->key = find_new_key (USER);
 	u->uid = find_new_id (USER, UID);
 	u->login = g_strdup (name);
+	u->passwd_min_life = logindefs.passwd_min_day_use;
 	u->passwd_max_life = logindefs.passwd_max_day_use;
 	u->passwd_exp_warn = logindefs.passwd_warning_advance_days;
 	u->is_shadow = TRUE;	/* hardcoded, since we don't have it in ui yet */

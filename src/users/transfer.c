@@ -72,7 +72,7 @@ const static _logindefs default_logindefs = {
 
 gchar *user_tags[] = {
 	"key", "login", "password", "uid", "gid", "comment", "home", "shell", "last_mod",
-	"passwd_max_life", "passwd_exp_warn", "passwd_exp_disable", "passwd_disable",
+	"passwd_min_life", "passwd_max_life", "passwd_exp_warn", "passwd_exp_disable", "passwd_disable",
 	"reserved", "is_shadow", NULL
 };
 
@@ -89,6 +89,20 @@ my_atoi (gchar *str)
 	if (!str || !*str)
 		return 0;
 	return atoi (str);
+}
+
+static gchar *
+my_xml_element_get_content (xmlNodePtr node)
+{
+	gchar *ret;
+	
+	ret = xml_element_get_content (node);
+	if (!ret) 
+	{
+		ret = g_new0 (gchar, 1);
+	}
+	
+	return ret;
 }
 
 /* ---- */
@@ -129,19 +143,19 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 		{
 			switch (i)
 			{
-			 case  0: logindefs.qmail_dir = xml_element_get_content (n0); break;
-			 case  1: logindefs.mailbox_dir = xml_element_get_content (n0); break;
-			 case  2: logindefs.mailbox_file = xml_element_get_content (n0); break;
-			 case  3: logindefs.passwd_max_day_use = my_atoi (xml_element_get_content (n0)); break;
-			 case  4: logindefs.passwd_min_day_use = my_atoi (xml_element_get_content (n0)); break;
-			 case  5: logindefs.passwd_min_length = my_atoi (xml_element_get_content (n0)); break;
-			 case  6: logindefs.passwd_warning_advance_days = my_atoi (xml_element_get_content (n0)); break;
-			 case  7: logindefs.new_user_min_id = my_atoi (xml_element_get_content (n0)); break;
-			 case  8: logindefs.new_user_max_id = my_atoi (xml_element_get_content (n0)); break;
-			 case  9: logindefs.new_group_min_id = my_atoi (xml_element_get_content (n0)); break;
-			 case 10: logindefs.new_group_max_id = my_atoi (xml_element_get_content (n0)); break;
-			 case 11: logindefs.del_user_additional_command = xml_element_get_content (n0); break;
-			 case 12: logindefs.create_home = my_atoi (xml_element_get_content (n0)); break;
+			 case  0: logindefs.qmail_dir = my_xml_element_get_content (n0); break;
+			 case  1: logindefs.mailbox_dir = my_xml_element_get_content (n0); break;
+			 case  2: logindefs.mailbox_file = my_xml_element_get_content (n0); break;
+			 case  3: logindefs.passwd_max_day_use = my_atoi (my_xml_element_get_content (n0)); break;
+			 case  4: logindefs.passwd_min_day_use = my_atoi (my_xml_element_get_content (n0)); break;
+			 case  5: logindefs.passwd_min_length = my_atoi (my_xml_element_get_content (n0)); break;
+			 case  6: logindefs.passwd_warning_advance_days = my_atoi (my_xml_element_get_content (n0)); break;
+			 case  7: logindefs.new_user_min_id = my_atoi (my_xml_element_get_content (n0)); break;
+			 case  8: logindefs.new_user_max_id = my_atoi (my_xml_element_get_content (n0)); break;
+			 case  9: logindefs.new_group_min_id = my_atoi (my_xml_element_get_content (n0)); break;
+			 case 10: logindefs.new_group_max_id = my_atoi (my_xml_element_get_content (n0)); break;
+			 case 11: logindefs.del_user_additional_command = my_xml_element_get_content (n0); break;
+			 case 12: logindefs.create_home = my_atoi (my_xml_element_get_content (n0)); break;
 			 case 13: g_warning ("transfer_logindefs_from_xml: we shouldn't be here."); break;
 			}
 		}
@@ -155,7 +169,7 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 	xmlNodePtr users_node, node, n0;
 	user *u;
 	
-	gchar *tag;
+	gchar *tag, *tmp;
 	gint i;
 
 	/* Find userdb */
@@ -184,21 +198,38 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 			{
 				switch (i)
 				{
-				 case  0: u->key = xml_element_get_content (n0); break;
-				 case  1: u->login = xml_element_get_content (n0); break;
-				 case  2: u->password = xml_element_get_content (n0); break;
-				 case  3: u->uid = my_atoi (xml_element_get_content (n0)); break;
-				 case  4: u->gid = my_atoi (xml_element_get_content (n0)); break;
-				 case  5: u->comment = xml_element_get_content (n0); break;
-				 case  6: u->home = xml_element_get_content (n0); break;
-				 case  7: u->shell = xml_element_get_content (n0); break;
-				 case  8: u->last_mod = my_atoi (xml_element_get_content (n0)); break;
-				 case  9: u->passwd_max_life = my_atoi (xml_element_get_content (n0)); break;
-				 case 10: u->passwd_exp_warn = my_atoi (xml_element_get_content (n0)); break;
-				 case 11: u->passwd_exp_disable = my_atoi (xml_element_get_content (n0)); break; /* FIXME if -1 TRUE */
-				 case 12: u->passwd_disable = my_atoi (xml_element_get_content (n0)); break; /* FIXME if -1 TRUE */
-				 case 13: u->reserved = xml_element_get_content (n0); break; 
-				 case 14: u->is_shadow = my_atoi (xml_element_get_content (n0)); break;
+				 case  0: u->key = my_xml_element_get_content (n0); break;
+				 case  1: u->login = my_xml_element_get_content (n0); break;
+				 case  2: u->password = my_xml_element_get_content (n0); break;
+				 case  3: u->uid = my_atoi (my_xml_element_get_content (n0)); break;
+				 case  4: u->gid = my_atoi (my_xml_element_get_content (n0)); break;
+				 case  5: u->comment = my_xml_element_get_content (n0); break;
+				 case  6: u->home = my_xml_element_get_content (n0); break;
+				 case  7: u->shell = my_xml_element_get_content (n0); break;
+				 case  8: u->last_mod = my_atoi (my_xml_element_get_content (n0)); break;
+				 case  9: u->passwd_min_life = my_atoi (my_xml_element_get_content (n0)); break;
+				 case 10: u->passwd_max_life = my_atoi (my_xml_element_get_content (n0)); break;
+				 case 11: u->passwd_exp_warn = my_atoi (my_xml_element_get_content (n0)); break;
+				 case 12: 
+					tmp = my_xml_element_get_content (n0);
+					u->is_passwd_exp_disable = FALSE;
+					if (*tmp)
+					{
+						u->is_passwd_exp_disable = TRUE;
+						u->passwd_exp_disable = my_atoi (tmp);
+					}
+					break;
+				 case 13:
+					tmp = my_xml_element_get_content (n0);
+					u->is_passwd_disable = FALSE;
+					if (*tmp)
+					{
+						u->is_passwd_disable = TRUE;
+						u->passwd_disable = my_atoi (tmp);
+					}
+					break;
+				 case 14: u->reserved = my_xml_element_get_content (n0); break; 
+				 case 15: u->is_shadow = my_atoi (my_xml_element_get_content (n0)); break;
 				}
 			}
 		}
@@ -241,10 +272,10 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 			{
 				switch (i)
 				{
-				 case 0: g->key = xml_element_get_content (n0); break;
-				 case 1: g->name = g_strdup (xml_element_get_content (n0)); break;
-				 case 2: g->password = g_strdup (xml_element_get_content (n0)); break;
-				 case 3: g->gid = my_atoi (xml_element_get_content (n0)); break;
+				 case 0: g->key = my_xml_element_get_content (n0); break;
+				 case 1: g->name = g_strdup (my_xml_element_get_content (n0)); break;
+				 case 2: g->password = g_strdup (my_xml_element_get_content (n0)); break;
+				 case 3: g->gid = my_atoi (my_xml_element_get_content (n0)); break;
 				}
 			}
 		}
@@ -260,7 +291,7 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 
 		for (user_node = xml_element_find_first (sub_node, "user"); user_node;
 				user_node = xml_element_find_next (user_node, "user"))
-				g->users = g_list_append (g->users, xml_element_get_content (user_node));
+				g->users = g_list_append (g->users, my_xml_element_get_content (user_node));
 
 		group_list = g_list_append (group_list, g);
 	}
@@ -349,7 +380,7 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 	gint i;
 	gchar *tag;
 	gchar buf[15];	/*Max buf size for non-char tags */
-	gchar *str;
+	gchar *str = NULL;
 
 	/* Delete old users and make a new ones */
 	/* Should we sort it first by key? */
@@ -367,21 +398,38 @@ transfer_user_list_glist_to_xml (xmlNodePtr root)
 		{
 			switch (i)
 			{
-				case  0: str = u->key; break;
-				case  1: str = u->login; break;
-				case  2: str = u->password; break;
-				case  3: snprintf (buf, 15, "%d", u->uid); str = buf; break;
-				case  4: snprintf (buf, 15, "%d", u->gid); str = buf; break;
-				case  5: str = u->comment; break;
-				case  6: str = u->home; break;
-				case  7: str = u->shell; break;
-				case  8: snprintf (buf, 15, "%d", u->last_mod); str = buf; break;
-				case  9: snprintf (buf, 15, "%d", u->passwd_max_life); str = buf; break;
-				case 10: snprintf (buf, 15, "%d", u->passwd_exp_warn); str = buf; break;
-				case 11: snprintf (buf, 15, "%d", u->passwd_exp_disable); str = buf; break;
-				case 12: snprintf (buf, 15, "%d", u->passwd_disable); str = buf; break;
-				case 13: str = u->reserved; break;
-				case 14: snprintf (buf, 15, "%d", u->is_shadow); str = buf; break;
+			 case  0: str = u->key; break;
+			 case  1: str = u->login; break;
+			 case  2: str = u->password; break;
+			 case  3: snprintf (buf, 15, "%d", u->uid); str = buf; break;
+			 case  4: snprintf (buf, 15, "%d", u->gid); str = buf; break;
+			 case  5: str = u->comment; break;
+			 case  6: str = u->home; break;
+			 case  7: str = u->shell; break;
+			 case  8: snprintf (buf, 15, "%d", u->last_mod); str = buf; break;
+			 case  9: snprintf (buf, 15, "%d", u->passwd_min_life); str = buf; break;
+			 case 10: snprintf (buf, 15, "%d", u->passwd_max_life); str = buf; break;
+			 case 11: snprintf (buf, 15, "%d", u->passwd_exp_warn); str = buf; break;
+			 case 12:
+				if (u->is_passwd_exp_disable) 
+				{
+					snprintf (buf, 15, "%d", u->passwd_exp_disable); 
+					str = buf;
+				}
+				else
+					str = "";
+				break;
+			 case 13:
+				if (u->is_passwd_disable) 
+				{
+					snprintf (buf, 15, "%d", u->passwd_disable); 
+					str = buf;
+				}
+				else
+					str = "";
+				break;
+			 case 14: str = u->reserved; break;
+			 case 15: snprintf (buf, 15, "%d", u->is_shadow); str = buf; break;
 			}
 			
 			xml_element_add_with_content (node, tag, str);
