@@ -291,6 +291,8 @@ table_update_state (GstDialogComplexity complexity)
 	GtkTreeView *treeview = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
 	gint i;
 	
+	gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
+
 	default_runlevel = gst_conf_get_string (tool, "default_runlevel");
 	if (complexity == GST_DIALOG_BASIC) {
 		column = gtk_tree_view_get_column (treeview, COL_PRIORITY);
