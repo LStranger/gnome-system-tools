@@ -34,7 +34,7 @@
 #include "callbacks.h"
 #include "e-table.h"
 
-#define PROFILE_TABLE_SPEC "profile.etspec"
+#define PROFILE_TABLE_SPEC "profiles.etspec"
 
 typedef struct
 {
