@@ -32,4 +32,5 @@ gchar *s = N_("Mount this partition");
 gchar *s = N_("Open settings dialog for selected import");
 gchar *s = N_("Settings");
 gchar *s = N_("Remember details of this partition");
+gchar *s = N_("Disks are divided into several pieces, called partitions. Each partition is dedicated for a specific storage task, such as virtual memory or home directories for your users.");
 gchar *s = N_("Disks & partitions");

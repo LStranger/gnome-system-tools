@@ -1038,6 +1038,8 @@ NFS
   <widget>
     <class>GtkNotebook</class>
     <name>shares_admin</name>
+    <width>500</width>
+    <height>300</height>
     <can_focus>True</can_focus>
     <show_tabs>True</show_tabs>
     <show_border>True</show_border>
@@ -1050,7 +1052,7 @@ NFS
     <widget>
       <class>GtkVBox</class>
       <name>vbox2</name>
-      <border_width>8</border_width>
+      <border_width>4</border_width>
       <homogeneous>False</homogeneous>
       <spacing>8</spacing>
 
@@ -1090,7 +1092,7 @@ NFS
 	  <class>GtkLabel</class>
 	  <name>label99</name>
 	  <label>Imports are directories wich reside in other computers and are accessible through the network.</label>
-	  <justify>GTK_JUSTIFY_CENTER</justify>
+	  <justify>GTK_JUSTIFY_FILL</justify>
 	  <wrap>True</wrap>
 	  <xalign>0.5</xalign>
 	  <yalign>0.5</yalign>
@@ -1397,7 +1399,7 @@ NFS
       <class>GtkTable</class>
       <name>table4</name>
       <border_width>4</border_width>
-      <rows>2</rows>
+      <rows>3</rows>
       <columns>1</columns>
       <homogeneous>False</homogeneous>
       <row_spacing>4</row_spacing>
@@ -1413,8 +1415,8 @@ NFS
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
-	  <top_attach>0</top_attach>
-	  <bottom_attach>1</bottom_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <xexpand>True</xexpand>
@@ -1547,8 +1549,8 @@ NFS
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
-	  <top_attach>1</top_attach>
-	  <bottom_attach>2</bottom_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <xexpand>True</xexpand>
@@ -1653,6 +1655,65 @@ NFS
 	  </widget>
 	</widget>
       </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox10</name>
+	<homogeneous>False</homogeneous>
+	<spacing>8</spacing>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+
+	<widget>
+	  <class>GtkAlignment</class>
+	  <name>alignment3</name>
+	  <border_width>8</border_width>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xscale>1</xscale>
+	  <yscale>1</yscale>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GnomePixmap</class>
+	    <name>pixmap2</name>
+	    <filename>shares.png</filename>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label100</name>
+	  <label>The directories in your machine may be made available to others through the network using exports. SMB exports are compatible with Microsoft Windows (TM) and Unix or Linux machines with Samba installed.</label>
+	  <justify>GTK_JUSTIFY_FILL</justify>
+	  <wrap>True</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
     </widget>
 
     <widget>
@@ -1672,7 +1733,7 @@ NFS
       <class>GtkTable</class>
       <name>table5</name>
       <border_width>4</border_width>
-      <rows>2</rows>
+      <rows>3</rows>
       <columns>2</columns>
       <homogeneous>False</homogeneous>
       <row_spacing>4</row_spacing>
@@ -1688,8 +1749,8 @@ NFS
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>2</right_attach>
-	  <top_attach>0</top_attach>
-	  <bottom_attach>1</bottom_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <xexpand>True</xexpand>
@@ -1757,8 +1818,8 @@ NFS
 	<child>
 	  <left_attach>1</left_attach>
 	  <right_attach>2</right_attach>
-	  <top_attach>1</top_attach>
-	  <bottom_attach>2</bottom_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <xexpand>False</xexpand>
@@ -1879,8 +1940,8 @@ NFS
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
-	  <top_attach>1</top_attach>
-	  <bottom_attach>2</bottom_attach>
+	  <top_attach>2</top_attach>
+	  <bottom_attach>3</bottom_attach>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <xexpand>False</xexpand>
@@ -1988,6 +2049,65 @@ NFS
 	      <yfill>True</yfill>
 	    </child>
 	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox11</name>
+	<homogeneous>False</homogeneous>
+	<spacing>8</spacing>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+
+	<widget>
+	  <class>GtkAlignment</class>
+	  <name>alignment4</name>
+	  <border_width>8</border_width>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xscale>1</xscale>
+	  <yscale>1</yscale>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GnomePixmap</class>
+	    <name>pixmap3</name>
+	    <filename>shares.png</filename>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label101</name>
+	  <label>NFS exports are used to share directories with Unix or Linux machines over the network.</label>
+	  <justify>GTK_JUSTIFY_FILL</justify>
+	  <wrap>True</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
 	</widget>
       </widget>
     </widget>

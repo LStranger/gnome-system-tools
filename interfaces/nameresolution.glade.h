@@ -4,7 +4,14 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Name Resolution Administration");
+gchar *s = N_("Aliases Settings");
+gchar *s = N_("IP address:");
+gchar *s = N_("Aliases");
+gchar *s = N_("Add");
+gchar *s = N_("Delete");
+gchar *s = N_("Existing:");
+gchar *s = N_("New:");
+gchar *s = N_("window1");
 gchar *s = N_("Let the computer know its name, function and network surroundings.");
 gchar *s = N_("Host");
 gchar *s = N_("Host name:");
@@ -41,11 +48,3 @@ gchar *s = N_("Settings for the selected alias");
 gchar *s = N_("Change the alias' IP address or its corresponding names.");
 gchar *s = N_("Settings");
 gchar *s = N_("Aliases");
-gchar *s = N_(" More Options >> ");
-gchar *s = N_("Aliases Settings");
-gchar *s = N_("IP address:");
-gchar *s = N_("Aliases");
-gchar *s = N_("Add");
-gchar *s = N_("Delete");
-gchar *s = N_("Existing:");
-gchar *s = N_("New:");

@@ -312,9 +312,8 @@ NTFS (Windows NT &amp; 2000)
   <widget>
     <class>GtkNotebook</class>
     <name>disks_admin</name>
-    <border_width>4</border_width>
-    <width>560</width>
-    <height>275</height>
+    <width>570</width>
+    <height>304</height>
     <can_focus>True</can_focus>
     <show_tabs>True</show_tabs>
     <show_border>True</show_border>
@@ -328,7 +327,7 @@ NTFS (Windows NT &amp; 2000)
       <class>GtkTable</class>
       <name>table2</name>
       <border_width>4</border_width>
-      <rows>3</rows>
+      <rows>4</rows>
       <columns>1</columns>
       <homogeneous>False</homogeneous>
       <row_spacing>4</row_spacing>
@@ -344,8 +343,8 @@ NTFS (Windows NT &amp; 2000)
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
-	  <top_attach>0</top_attach>
-	  <bottom_attach>2</bottom_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>3</bottom_attach>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <xexpand>True</xexpand>
@@ -491,8 +490,8 @@ NTFS (Windows NT &amp; 2000)
 	<child>
 	  <left_attach>0</left_attach>
 	  <right_attach>1</right_attach>
-	  <top_attach>2</top_attach>
-	  <bottom_attach>3</bottom_attach>
+	  <top_attach>3</top_attach>
+	  <bottom_attach>4</bottom_attach>
 	  <xpad>0</xpad>
 	  <ypad>0</ypad>
 	  <xexpand>True</xexpand>
@@ -637,6 +636,65 @@ NTFS (Windows NT &amp; 2000)
 	      <yfill>False</yfill>
 	    </child>
 	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox1</name>
+	<homogeneous>False</homogeneous>
+	<spacing>8</spacing>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+
+	<widget>
+	  <class>GtkAlignment</class>
+	  <name>alignment1</name>
+	  <border_width>8</border_width>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xscale>1</xscale>
+	  <yscale>1</yscale>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GnomePixmap</class>
+	    <name>pixmap1</name>
+	    <filename>disks.png</filename>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label107</name>
+	  <label>Disks are divided into several pieces, called partitions. Each partition is dedicated for a specific storage task, such as virtual memory or home directories for your users.</label>
+	  <justify>GTK_JUSTIFY_FILL</justify>
+	  <wrap>True</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
 	</widget>
       </widget>
     </widget>

@@ -4,10 +4,10 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Helix Setup Tools");
+gchar *s = N_("Ximian Setup Tools");
 gchar *s = N_("Scanning your system configuration.");
 gchar *s = N_("%P %%");
 gchar *s = N_("label51");
 gchar *s = N_("label52");
-gchar *s = N_("Helix Setup Tools");
-gchar *s = N_("blah");
+gchar *s = N_("Ximian Setup Tools");
+gchar *s = N_("Complexity");
