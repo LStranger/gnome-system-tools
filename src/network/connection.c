@@ -70,7 +70,7 @@ GtkItemFactoryEntry connection_popup_menu_items[] = {
 #define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), cxn->xx)
 #define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), !cxn->xx)
 #define SET_INT(yy_prefix,xx) gtk_range_set_value (GTK_RANGE (GTK_SCALE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))), cxn->xx)
-#define SET_DIAL_OPTION_MENU(yy_prefix, xx) gtk_option_menu_set_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), ((cxn->xx != NULL) && (strcmp (cxn->xx, "ATDP") == 0))?1:0)
+#define SET_DIAL_OPTION_MENU(yy_prefix, xx) gtk_option_menu_set_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), ((cxn->xx != NULL) && (g_ascii_strcasecmp (cxn->xx, "ATDP") == 0))?1:0)
 
 typedef struct {
 	GtkWidget *list;
@@ -280,7 +280,7 @@ static gint
 connection_xml_wvsection_get_int (xmlNode *node, gchar *section_name, gchar *elem)
 {
 	gchar *str;
-	gint ret;
+	gint ret = -1;
 
 	str = connection_xml_wvsection_get_str (node, section_name, elem);
 	if (str) {
@@ -1317,8 +1317,17 @@ connection_get_ppp_from_node (xmlNode *node, GstConnection *cxn)
 		cxn->login = gst_xml_get_child_content (node, "login");
 		cxn->password = gst_xml_get_child_content (node, "password");
 		cxn->stupid = FALSE;
-		cxn->volume = 3;
-		cxn->dial_command = g_strdup ("ATDT");
+
+		/* FIXME: at this moment the xml may not have volume nor dial command */
+		if (gst_xml_element_find_first (node, "volume"))
+			cxn->volume = atoi (gst_xml_get_child_content (node, "volume"));
+		else
+			cxn->volume = 3;
+
+		cxn->dial_command = gst_xml_get_child_content (node, "dial_command");
+
+		if (!cxn->dial_command)
+			cxn->dial_command = g_strdup ("ATDT");
 	}
 
 	/* PPP advanced */

@@ -619,7 +619,7 @@ callbacks_check_dialer_hook (GstDialog *dialog, gpointer data)
 }
 
 static gboolean
-callbacks_disabled_gatewaydev_warn (GstTool *tool, GstConnection *cxn, gboolean *ignore_enabled)
+callbacks_disabled_gatewaydev_warn (GstTool *tool, GstConnection *cxn)
 {
 	gchar *text = _("The default gateway device is not activated. This "
 			"will prevent you from connecting to the Internet. "
@@ -641,14 +641,10 @@ callbacks_disabled_gatewaydev_warn (GstTool *tool, GstConnection *cxn, gboolean 
 		connection_default_gw_fix (cxn, GST_CONNECTION_ERROR_ENABLED);
 		return TRUE;
 	case GTK_RESPONSE_CANCEL:
-		*ignore_enabled = TRUE;
-		return TRUE;
 	default:
 		return FALSE;
 		break;
 	}
-
-	return TRUE;
 }
 
 static gboolean
@@ -666,7 +662,7 @@ callbacks_check_manual_gatewaydev (GstTool *tool)
 	{
 		switch (error) {
 		case GST_CONNECTION_ERROR_ENABLED:
-			if (callbacks_disabled_gatewaydev_warn (tool, cxn, &ignore_enabled))
+			if (callbacks_disabled_gatewaydev_warn (tool, cxn))
 				continue;
 			else
 				return FALSE;

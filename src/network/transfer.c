@@ -321,7 +321,7 @@ transfer_gatewaydev_to_xml (GstTool *tool, xmlNodePtr root)
 	if (!node)
 		node = gst_xml_element_add (root, "gateway");
 	gst_xml_element_set_content (node, (gateway)? gateway: "");
-		
+
 	if (g_object_get_data (G_OBJECT (tool), "gwdevunsup"))
 		return;
 	
