@@ -371,7 +371,7 @@ statichost_list_add_columns (GtkTreeView *treeview)
 
 	/* IP */
 	cell = gtk_cell_renderer_text_new ();
-	col = gtk_tree_view_column_new_with_attributes (_("IP Adress"), cell,
+	col = gtk_tree_view_column_new_with_attributes (_("IP Address"), cell,
 							"text", STATICHOST_LIST_COL_IP, NULL);
 	gtk_tree_view_append_column (treeview, col);
 
