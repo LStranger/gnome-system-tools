@@ -104,21 +104,22 @@ toggle_service (GstTool *tool, xmlNodePtr service, gchar* runlevel, gboolean sta
 		action = g_strdup_printf ("stop");
 
 	if (runlevels == NULL)
-		runlevels = gst_xml_element_add (node, "runlevels");
-	
-	/* if the node already exists, put its action to "start" or "stop" */
-	for (node = gst_xml_element_find_first (runlevels, "runlevel");
-	     node != NULL;
-	     node = gst_xml_element_find_next (node, "runlevel"))
-	{
-		r = gst_xml_get_child_content (node, "number");
+		runlevels = gst_xml_element_add (service, "runlevels");
+	else {
+		/* if the node already exists, put its action to "start" or "stop" */
+		for (node = gst_xml_element_find_first (runlevels, "runlevel");
+		     node != NULL;
+		     node = gst_xml_element_find_next (node, "runlevel"))
+		{
+			r = gst_xml_get_child_content (node, "number");
 		
-		if (strcmp (r, runlevel) == 0) {
-			gst_xml_set_child_content (node, "action", action);
-			found = TRUE;
-		}
+			if (strcmp (r, runlevel) == 0) {
+				gst_xml_set_child_content (node, "action", action);
+				found = TRUE;
+			}
 
-		g_free (r);
+			g_free (r);
+		}
 	}
 
 	/* if the node hasn't been found, create it */
