@@ -341,8 +341,13 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	w0 = tool_widget_get ("user_settings_comment");
 	txt = gtk_entry_get_text (GTK_ENTRY (w0));
 
-	/* Should it check for size? */
-	if (strcmp (txt, current_user->comment))
+	if (current_user->comment == NULL)
+	{
+		if (strlen (txt) > 0)
+			current_user->comment = g_strdup (txt);
+	}
+
+	else if (strcmp (txt, current_user->comment))
 	{
 		g_free (current_user->comment);
 		current_user->comment = g_strdup (txt);
@@ -452,6 +457,17 @@ extern void
 on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
+	GList *members;
+
+	/* Clear both lists. Do we have to free some memory also? */
+
+	w0 = tool_widget_get ("group_settings_all");
+	members = GTK_LIST (w0)->children;
+	gtk_list_remove_items (GTK_LIST (w0), members);
+
+	w0 = tool_widget_get ("group_settings_members");
+	members = GTK_LIST (w0)->children;
+	gtk_list_remove_items (GTK_LIST (w0), members);
 
 	w0 = tool_widget_get ("group_settings_dialog");
 	gtk_widget_hide (w0);
@@ -494,7 +510,36 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 		}
 	}
 
-	/* TODO: update group members also */
+	/* Update group members also */
+
+	list = GTK_LIST (tool_widget_get ("group_settings_members"));
+
+
+	/* First, free our old users list ... */
+	for (selection = g_list_first (current_group->users); selection;
+			selection = g_list_next (selection))
+
+	{
+		txt = (gchar *)selection->data;
+		g_free (txt);
+	}
+
+	g_list_free (current_group->users);
+	current_group->users = NULL;
+
+	
+	/* ... and then, build new one */
+	for (selection = g_list_first (list->children); selection;
+			selection = g_list_next (selection))
+
+	{
+		list_item = (GtkWidget *)selection->data;
+		label = GTK_BIN (list_item)->child;
+		gtk_label_get (GTK_LABEL (label), &txt);
+		current_group->users = g_list_append (current_group->users, g_strdup (txt));
+	}
+
+	
 
 	tool_set_modified(TRUE);
 	/* Clear list and hide dialog */
@@ -507,6 +552,8 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 	GtkList *all, *members;
 	GList *selection;
 	GtkWidget *list_item;
+	GtkLabel *label;
+	gchar *name;
 
 	all = GTK_LIST (tool_widget_get ("group_settings_all"));
 	members = GTK_LIST (tool_widget_get ("group_settings_members"));
@@ -514,6 +561,11 @@ on_group_settings_add_clicked (GtkButton *button, gpointer user_data)
 	selection = g_list_copy (all->selection);
 	list_item = (GtkWidget *)selection->data;
 	gtk_widget_reparent (list_item, GTK_WIDGET (members));
+
+	label = GTK_LABEL (GTK_BIN (list_item)->child);
+	gtk_label_get (label, &name);
+	gtk_object_set_data (GTK_OBJECT (list_item), GROUP_MEMBER_DATA_KEY, name);
+
 	g_list_free (selection);
 }
 
@@ -529,6 +581,9 @@ on_group_settings_remove_clicked (GtkButton *button, gpointer user_data)
 
 	selection = g_list_copy (members->selection);
 	list_item = (GtkWidget *)selection->data;
+
+	gtk_object_remove_data (GTK_OBJECT (list_item), GROUP_MEMBER_DATA_KEY);
+	
 	gtk_widget_reparent (list_item, GTK_WIDGET (all));
 	g_list_free (selection);
 }
