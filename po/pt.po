@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.4\n"
 "Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
-"POT-Creation-Date: 2003-09-14 09:41+0100\n"
-"PO-Revision-Date: 2003-09-14 09:45+0000\n"
+"POT-Creation-Date: 2003-09-25 23:18+0100\n"
+"PO-Revision-Date: 2003-09-25 23:20+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -367,7 +367,7 @@ msgstr "Complexidade"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Introduza Senha - Ferramentas Sistema GNOME"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1636
 msgid "GNOME System Tools"
 msgstr "Ferramentas Sistema GNOME"
 
@@ -1456,7 +1456,7 @@ msgstr ""
 "Perfis de utilizador podem ser usados como modelo para facilitar a criação "
 "de novos utilizadores. "
 
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:75
 msgid "Users"
 msgstr "Utilizadores"
 
@@ -1612,8 +1612,8 @@ msgid "Boot"
 msgstr "Arranque"
 
 #: src/boot/boot.desktop.in.in.h:2
-msgid "Boot Manager"
-msgstr "Gestor Arranque"
+msgid "Configure the system boot process"
+msgstr "Configurar o processo de arranque do sistema"
 
 #: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
@@ -1708,7 +1708,7 @@ msgstr " Mais _Opções"
 msgid " Fewer _Options"
 msgstr " Menos _Opções"
 
-#: src/common/gst-dialog.c:476
+#: src/common/gst-dialog.c:454
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1716,21 +1716,21 @@ msgstr ""
 "Existem alterações que não foram aplicadas.\n"
 "Aplicá-las agora?"
 
-#: src/common/gst-dialog.c:592
+#: src/common/gst-dialog.c:552
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Sinal de erro de ligação `%s' no widget `%s'"
 
-#: src/common/gst-tool.c:944
+#: src/common/gst-tool.c:853
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "A ignorar a directiva %s..."
 
-#: src/common/gst-tool.c:1094
+#: src/common/gst-tool.c:993
 msgid "Skipping actual save..."
 msgstr "A ignorar gravação actual..."
 
-#: src/common/gst-tool.c:1156
+#: src/common/gst-tool.c:1055
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1738,12 +1738,12 @@ msgstr ""
 "Ocorreu um erro ao executar o script de backen,\n"
 "e a configuração não pode ser carregada."
 
-#: src/common/gst-tool.c:1522
+#: src/common/gst-tool.c:1359
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Ferramentas Sistema GNOME"
 
-#: src/common/gst-tool.c:1700
+#: src/common/gst-tool.c:1537
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1771,11 +1771,11 @@ msgstr ""
 "--\n"
 "A equipa Ferramentas de Sistema GNOME"
 
-#: src/common/gst-tool.c:1724
+#: src/common/gst-tool.c:1561
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/common/gst-tool.c:1733
+#: src/common/gst-tool.c:1570
 msgid "Don't show me this again"
 msgstr "Não voltar a mostrar esta mensagem"
 
@@ -2113,8 +2113,8 @@ msgid "Connection name (Step 2 of 2)"
 msgstr "Nome de ligação (Passo 2 de 2)"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Configuração adaptador rede."
+msgid "Configure network devices and connections"
+msgstr "Configurar dispositivos de rede e ligações"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
@@ -2193,26 +2193,26 @@ msgid "Services Settings"
 msgstr "Definições de Serviços"
 
 #: src/services/services.desktop.in.in.h:1
-msgid "Services"
-msgstr "Serviços"
+msgid "Configure which services will be run when the system starts"
+msgstr "Configurar que serviços serão executados ao iniciar o sistema"
 
 #: src/services/services.desktop.in.in.h:2
-msgid "Services Manager"
-msgstr "Gestor Serviços"
+msgid "Services"
+msgstr "Serviços"
 
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Serviço"
 
-#: src/time/main.c:310
+#: src/time/main.c:303
 msgid "Time Zone - GNOME System Tools"
 msgstr "Zona Horária - Ferramentas Sistema GNOME"
 
-#: src/time/main.c:428
+#: src/time/main.c:417
 msgid "Time Servers - GNOME System Tools"
 msgstr "Servidores Hora - Ferramentas Sistema GNOME"
 
-#: src/time/main.c:500
+#: src/time/main.c:495
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2220,17 +2220,17 @@ msgstr ""
 "Não possui suporte NTP em execução. Execute suporte NTP no\n"
 "sistema para activar sincronização com o servidor."
 
-#: src/time/main.c:789
+#: src/time/main.c:784
 msgid "Time and Date Settings"
 msgstr "Definições de Data e Hora"
 
 #: src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Hora"
+msgid "Change system time, date, and timezone"
+msgstr "Alterar a hora, data e zona horária do sistema"
 
 #: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
-msgstr "Zona horária, hora e data."
+msgid "Time and Date"
+msgstr "Data e Hora"
 
 #: src/users/callbacks.c:598
 msgid "Create New profile"
@@ -2251,7 +2251,7 @@ msgstr "ID de utilizador tem de ser um número positivo."
 
 #: src/users/group-settings.c:169
 msgid "Such group id already exists."
-msgstr "id de grupo indicado já existe."
+msgstr "ID de grupo indicado já existe."
 
 #: src/users/group-settings.c:191
 msgid "Group name is empty."
@@ -2307,7 +2307,7 @@ msgstr "Nome do grupo contém"
 msgid "User GID is"
 msgstr "GID do utilizador é"
 
-#: src/users/main.c:321
+#: src/users/main.c:321 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Utilizadores e Grupos"
 
@@ -2481,9 +2481,24 @@ msgstr "Consola"
 msgid "Comments"
 msgstr "Comentários"
 
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Utilizadores e grupos."
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Adicionar ou remover utilizadores e grupos"
+
+#~ msgid "Boot Manager"
+#~ msgstr "Gestor Arranque"
+
+#~ msgid "Network adapter setup."
+#~ msgstr "Configuração adaptador rede."
+
+#~ msgid "Services Manager"
+#~ msgstr "Gestor Serviços"
+
+#~ msgid "Time"
+#~ msgstr "Hora"
+
+#~ msgid "Users and groups."
+#~ msgstr "Utilizadores e grupos."
 
 #~ msgid " Less _Options"
 #~ msgstr " Menos _Opções"
