@@ -37,7 +37,8 @@
 
 #define d(x) x
 
-#define POLL_HACK
+/* Don't Poll */
+/* #define POLL_HACK */ 
 
 extern XstTool *tool;
 
@@ -61,6 +62,9 @@ on_network_admin_show (GtkWidget *w, gpointer user_data)
 	GtkCList *list;
 	XstTool *tool;
 
+#warning FIXME
+	return;
+	
 	tool = user_data;
 	connection_init_gui (tool);
 
@@ -165,6 +169,9 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 	GtkWidget *w;
 	gchar *entry[] = { "hostname", "connection_list", "domain", "statichost_list" };
 
+#warning FIXME
+	return;
+	
 	if (xst_tool_get_access (tool) && entry[page_num]) {
 		w = xst_dialog_get_widget (tool->main_dialog, entry[page_num]);
 		if (w)
@@ -442,6 +449,9 @@ void
 on_connection_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
 {
 	XstConnection *cxn;
+
+#warning FIXME
+	return;
 	
 	connection_row_selected = row;
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
@@ -474,6 +484,9 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	GtkWidget *d, *ppp, *eth, *wvlan, *plip, *irlan, *clist;
 	gint res, row;
 	XstConnectionType cxn_type;
+
+#warning FIXME
+	return;
 	
 	d = xst_dialog_get_widget (tool->main_dialog, "connection_type_dialog");
 
@@ -524,6 +537,9 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 	gint res;
 	gchar *txt;
 
+#warning FIXME
+	return;
+	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 
@@ -664,7 +680,7 @@ gboolean
 callbacks_check_hostname_hook (XstDialog *dialog, gpointer data)
 {
 	gchar *hostname_old;
-	gchar *hostname_new;
+	const gchar *hostname_new;
 	xmlNode *root, *node;
 	GtkWidget *entry;
 	gint res;
@@ -713,6 +729,9 @@ callbacks_update_connections_hook (XstDialog *dialog, gpointer data)
 {
 	GtkWidget *clist;
 
+#warning FIXME
+	return;
+		
 	clist = xst_dialog_get_widget (dialog, "connection_list");
 	connection_update_clist_enabled_apply (clist);
 

@@ -43,7 +43,7 @@ typedef struct {
 struct _XstDialogSignal {
 	const char    *widget;
 	const char    *signal_name;
-	GtkSignalFunc  func;
+	GCallback  func;
 };
 
 struct _XstDialog {

@@ -233,7 +233,8 @@ ppp_druid_check_last (PppDruid *ppp)
 	GtkWidget *w;
 	gint i;
 	gchar *text;
-	const gchar *phone, *login, *passwd, *profile;
+	const gchar *phone, *login, *profile;
+	gchar *passwd;
 	gchar *format =
 _("You are about to create an account named with the following information:\n\n"
   "Account Name: %s\n\n"
@@ -384,32 +385,32 @@ ppp_druid_new (XstTool *tool)
 {
 	PppDruid *ppp;
 	XstDialogSignal signals[] = {
-		{ "window",	"delete_event",	ppp_druid_on_window_delete_event },
-		{ "druid",	"cancel",			ppp_druid_on_druid_cancel },
-		{ "page0",	"next",			GTK_SIGNAL_FUNC (ppp_druid_on_page_next) },
-		{ "page1",	"next",			GTK_SIGNAL_FUNC (ppp_druid_on_page_next) },
-		{ "page2",	"next",			GTK_SIGNAL_FUNC (ppp_druid_on_page_next) },
-		{ "page3",	"next",			GTK_SIGNAL_FUNC (ppp_druid_on_page_next) },
-		{ "page1",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
-		{ "page2",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
-		{ "page3",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
-		{ "page_last",	"back",			GTK_SIGNAL_FUNC (ppp_druid_on_page_back) },
-		{ "page0",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
-		{ "page1",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
-		{ "page2",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
-		{ "page3",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
-		{ "page_last",	"prepare",		GTK_SIGNAL_FUNC (ppp_druid_on_page_prepare) },
-		{ "page_last",	"finish",			ppp_druid_on_page_last_finish },
-		{ "phone",	"changed",		ppp_druid_on_entry_changed },
-		{ "phone",	"activate",		ppp_druid_on_entry_activate },
-		{ "login",	"changed",		ppp_druid_on_entry_changed },
-		{ "login",	"activate",		ppp_druid_on_login_activate },
-		{ "passwd",	"changed",		ppp_druid_on_entry_changed },
-		{ "passwd",	"activate",		ppp_druid_on_passwd_activate },
-		{ "passwd2",	"changed",		ppp_druid_on_entry_changed },
-		{ "passwd2",	"activate",		ppp_druid_on_entry_activate },
-		{ "profile",	"changed",		ppp_druid_on_entry_changed },
-		{ "profile",	"activate",		ppp_druid_on_entry_activate },
+		{ "window",	"delete_event",	G_CALLBACK (ppp_druid_on_window_delete_event) },
+		{ "druid",	"cancel",	G_CALLBACK (ppp_druid_on_druid_cancel) },
+		{ "page0",	"next",		G_CALLBACK (ppp_druid_on_page_next) },
+		{ "page1",	"next",		G_CALLBACK (ppp_druid_on_page_next) },
+		{ "page2",	"next",		G_CALLBACK (ppp_druid_on_page_next) },
+		{ "page3",	"next",		G_CALLBACK (ppp_druid_on_page_next) },
+		{ "page1",	"back",		G_CALLBACK (ppp_druid_on_page_back) },
+		{ "page2",	"back",		G_CALLBACK (ppp_druid_on_page_back) },
+		{ "page3",	"back",		G_CALLBACK (ppp_druid_on_page_back) },
+		{ "page_last",	"back",		G_CALLBACK (ppp_druid_on_page_back) },
+		{ "page0",	"prepare",	G_CALLBACK (ppp_druid_on_page_prepare) },
+		{ "page1",	"prepare",	G_CALLBACK (ppp_druid_on_page_prepare) },
+		{ "page2",	"prepare",	G_CALLBACK (ppp_druid_on_page_prepare) },
+		{ "page3",	"prepare",	G_CALLBACK (ppp_druid_on_page_prepare) },
+		{ "page_last",	"prepare",	G_CALLBACK (ppp_druid_on_page_prepare) },
+		{ "page_last",	"finish",	G_CALLBACK (ppp_druid_on_page_last_finish) },
+		{ "phone",	"changed",	G_CALLBACK (ppp_druid_on_entry_changed) },
+		{ "phone",	"activate",	G_CALLBACK (ppp_druid_on_entry_activate) },
+		{ "login",	"changed",	G_CALLBACK (ppp_druid_on_entry_changed) },
+		{ "login",	"activate",	G_CALLBACK (ppp_druid_on_login_activate) },
+		{ "passwd",	"changed",	G_CALLBACK (ppp_druid_on_entry_changed) },
+		{ "passwd",	"activate",	G_CALLBACK (ppp_druid_on_passwd_activate) },
+		{ "passwd2",	"changed",	G_CALLBACK (ppp_druid_on_entry_changed) },
+		{ "passwd2",	"activate",	G_CALLBACK (ppp_druid_on_entry_activate) },
+		{ "profile",	"changed",	G_CALLBACK (ppp_druid_on_entry_changed) },
+		{ "profile",	"activate",	G_CALLBACK (ppp_druid_on_entry_activate) },
 		{ NULL }
 	};
 

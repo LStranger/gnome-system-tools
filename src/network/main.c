@@ -38,54 +38,54 @@
 XstTool *tool;
 
 XstDialogSignal signals[] = {
-	{ "network_admin",           "switch_page",     on_network_notebook_switch_page },
-	{ "hostname",                "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "hostname",                "changed",         xst_dialog_modify_cb },
-	{ "samba_use",               "toggled",         on_samba_use_toggled },
-	{ "description",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "description",             "changed",         xst_dialog_modify_cb },
-	{ "workgroup",               "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "workgroup",               "changed",         xst_dialog_modify_cb },
-	{ "wins_ip",                 "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "wins_ip",                 "changed",         xst_dialog_modify_cb },
-	{ "wins_use",                "toggled",         on_wins_use_toggled },
-	{ "wins_use",                "toggled",         xst_dialog_modify_cb },
+	{ "network_admin",           "switch_page",     G_CALLBACK (on_network_notebook_switch_page) },
+	{ "hostname",                "focus_in_event",  G_CALLBACK (update_hint) },
+	{ "hostname",                "changed",         G_CALLBACK (xst_dialog_modify_cb) },
+	{ "samba_use",               "toggled",         G_CALLBACK (on_samba_use_toggled) },
+	{ "description",             "focus_in_event",  G_CALLBACK (update_hint) },
+	{ "description",             "changed",         G_CALLBACK (xst_dialog_modify_cb) },
+	{ "workgroup",               "focus_in_event",  G_CALLBACK (update_hint) },
+	{ "workgroup",               "changed",         G_CALLBACK (xst_dialog_modify_cb) },
+	{ "wins_ip",                 "focus_in_event",  G_CALLBACK (update_hint) },
+	{ "wins_ip",                 "changed",         G_CALLBACK (xst_dialog_modify_cb) },
+	{ "wins_use",                "toggled",         G_CALLBACK (on_wins_use_toggled) },
+	{ "wins_use",                "toggled",         G_CALLBACK (xst_dialog_modify_cb) },
 #warning FIXME
 #if 0	
 	{ "connection_list",         "select_row",      on_connection_list_select_row },
 	{ "connection_list",         "unselect_row",    on_connection_list_unselect_row },
 #endif	
-	{ "connection_add",          "clicked",         on_connection_add_clicked },
-	{ "connection_delete",       "clicked",         on_connection_delete_clicked },
-	{ "connection_configure",    "clicked",         on_connection_configure_clicked },
-	{ "connection_activate",     "clicked",         on_connection_activate_clicked },
-	{ "connection_deactivate",   "clicked",         on_connection_deactivate_clicked },
-	{ "dns_list",                "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "connection_add",          "clicked",         G_CALLBACK (on_connection_add_clicked) },
+	{ "connection_delete",       "clicked",         G_CALLBACK (on_connection_delete_clicked) },
+	{ "connection_configure",    "clicked",         G_CALLBACK (on_connection_configure_clicked) },
+	{ "connection_activate",     "clicked",         G_CALLBACK (on_connection_activate_clicked) },
+	{ "connection_deactivate",   "clicked",         G_CALLBACK (on_connection_deactivate_clicked) },
+	{ "dns_list",                "focus_in_event",  G_CALLBACK (update_hint) },
 #warning FIXME
 #if 0	
 	{ "dns_list",                "changed",         xst_dialog_modify_cb },
 #endif	
-	{ "domain",                  "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "domain",                  "focus_in_event",  G_CALLBACK (update_hint) },
 #if 0	
 	{ "domain",                  "changed",         xst_dialog_modify_cb },
 #endif	
-	{ "search_list",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "search_list",             "focus_in_event",  G_CALLBACK (update_hint) },
 #if 0	
 	{ "search_list",             "changed",         xst_dialog_modify_cb },
 	{ "statichost_list",         "unselect_row",    on_hosts_list_unselect_row },
 	{ "statichost_list",         "select_row",      on_hosts_list_select_row },
 #endif	
-	{ "ip",                      "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "ip",                      "changed",         xst_dialog_modify_cb },
-	{ "ip",                      "changed",         on_hosts_ip_changed },
-	{ "alias",                   "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
+	{ "ip",                      "focus_in_event",  G_CALLBACK (update_hint) },
+	{ "ip",                      "changed",         G_CALLBACK (xst_dialog_modify_cb) },
+	{ "ip",                      "changed",         G_CALLBACK (on_hosts_ip_changed) },
+	{ "alias",                   "focus_in_event",  G_CALLBACK (update_hint) },
 #if 0	
 	{ "alias",                   "changed",         on_hosts_alias_changed },
 #endif	
-	{ "statichost_add",          "clicked",         on_hosts_add_clicked },
-	{ "statichost_add",          "clicked",         xst_dialog_modify_cb },
-	{ "statichost_delete",       "clicked",         on_hosts_delete_clicked },
-	{ "statichost_delete",       "clicked",         xst_dialog_modify_cb },
+	{ "statichost_add",          "clicked",         G_CALLBACK (on_hosts_add_clicked) },
+	{ "statichost_add",          "clicked",         G_CALLBACK (xst_dialog_modify_cb) },
+	{ "statichost_delete",       "clicked",         G_CALLBACK (on_hosts_delete_clicked) },
+	{ "statichost_delete",       "clicked",         G_CALLBACK (xst_dialog_modify_cb) },
 	{ NULL }
 };
 
@@ -168,7 +168,7 @@ connect_signals (XstDialog *main_dialog, XstDialogSignal *sigs)
 	omenu = xst_dialog_get_widget (main_dialog, "connection_def_gw_omenu");
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 #warning FIXME
-#if 0	
+#if 0
 	g_signal_connect (G_OBJECT (menu), "selection-done",
 			  G_CALLBACK (xst_dialog_modify_cb), main_dialog);
 #endif

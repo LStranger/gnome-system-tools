@@ -320,8 +320,10 @@ on_hosts_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * ev
 		w = xst_dialog_get_widget (tool->main_dialog, "ip");
 
 		hack = TRUE;
+		g_print ("g\n");
 		gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 		gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
+		g_print ("g-\n");
 		hack = FALSE;
 	}
 

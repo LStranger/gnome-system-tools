@@ -265,23 +265,29 @@ xst_dialog_init (XstDialog *dialog)
 	 * exciting stuff happens in _construct
 	 */
 }
-
+	
 GtkType
 xst_dialog_get_type (void)
 {
 	static GtkType xstdialog_type = 0;
 
-	if (!xstdialog_type) {
-		GtkTypeInfo xstdialog_info = {
-			"XstDialog",
-			sizeof (XstDialog),
+	if (xstdialog_type == 0) {
+		GTypeInfo xstdialog_info = {
 			sizeof (XstDialogClass),
-			(GtkClassInitFunc) xst_dialog_class_init,
-			(GtkObjectInitFunc) xst_dialog_init,
-			NULL, NULL, NULL
+			NULL, /* base_init */
+			NULL, /* base finalize */
+			(GClassInitFunc) xst_dialog_class_init,
+			NULL, /* class_finalize */
+			NULL, /* class_data */
+			sizeof (XstDialog),
+			0, /* n_preallocs */
+			(GInstanceInitFunc) xst_dialog_init
 		};
 
-		xstdialog_type = gtk_type_unique (GNOME_TYPE_APP, &xstdialog_info);
+		xstdialog_type = g_type_register_static (GNOME_TYPE_APP,
+							 "XstDialog",
+							 &xstdialog_info,
+							 0);
 	}
 
 	return xstdialog_type;

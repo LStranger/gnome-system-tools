@@ -390,7 +390,8 @@ connection_set_modified (XstConnection *cxn, gboolean state)
 static gint
 determine_row_height (void)
 {
-	return 10;
+#warning FIXME
+	return 16;
 }
 
 static void
@@ -453,14 +454,12 @@ static void
 connection_init_clist (GtkWidget *clist)
 {
 	GtkStyle *style;
-
 #warning FIXME
-#if 0	
+	return;
 	gtk_clist_set_compare_func (GTK_CLIST (clist), connection_clist_cmp);
 	style = gtk_widget_get_style (clist);
 	gtk_clist_set_row_height (GTK_CLIST (clist), determine_row_height ());
 	gtk_clist_column_titles_passive (GTK_CLIST (clist));
-#endif	
 }
 
 extern void
@@ -469,8 +468,10 @@ connection_init_gui (XstTool *tool)
 	GtkWidget *clist;
 	XstConnectionType i;
 
+#warning FIXME
+	return;
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
-
+	
 	for (i = XST_CONNECTION_OTHER; i < XST_CONNECTION_LAST; i++)
 		load_icon (clist, xst_iface_desc[i].icon, &mini_pm[i], &mini_mask[i]);
 
@@ -916,6 +917,9 @@ connection_add_to_list_do (XstConnection *cxn, GtkWidget *clist)
 void
 connection_add_to_list (XstConnection *cxn, GtkWidget *clist)
 {
+#warning FIXME
+	return;
+	
 	connection_add_to_list_do (cxn, clist);
 	connection_update_row (cxn);
 	connection_update_row_enabled (cxn, cxn->enabled);
@@ -928,6 +932,9 @@ connection_update_complexity_advanced (XstTool *tool)
 	GtkWidget     *clist;
 	
 	GList *l, *l2;
+
+#warning FIXME	
+	return;
 	
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 

@@ -148,8 +148,20 @@ transfer_string_list_xml_to_gui (XstTool *tool, xmlNodePtr root)
 		w = xst_dialog_get_widget (tool->main_dialog, transfer_string_list_table [i].list);
 		position = 0;
 
+#warning FIXME
+#if 0	
 		gtk_text_freeze (w);
-		gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
+#endif	
+
+		if (TRUE)
+		{
+			GtkTextBuffer *buffer;
+
+			buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
+			gtk_text_buffer_set_text (buffer, "", 0);
+		} else {
+			gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
+		}
 		
 		for (node = xst_xml_element_find_first (root, transfer_string_list_table [i].xml_path); 
 		     node; 
@@ -157,13 +169,25 @@ transfer_string_list_xml_to_gui (XstTool *tool, xmlNodePtr root)
 		{
 			if ((s = xst_xml_element_get_content (node)))
 			{
-				gtk_editable_insert_text (GTK_EDITABLE (w), s, strlen (s), &position);
-				gtk_editable_insert_text (GTK_EDITABLE (w), "\n", 1, &position);
-				g_free (s);
+#warning FIXME	
+#if 0
+				GtkTextBuffer *buffer;
+				GtkTextIter *iter;
+
+				g_print ("f\n");
+				buffer = gtk_text_view_get_buffer (GTK_TEXT_VIEW (w));
+				gtk_text_buffer_get_end_iter (buffer, iter);
+				gtk_text_buffer_insert (buffer, iter, s, strlen (s));
+				gtk_text_buffer_get_end_iter (buffer, iter);
+				gtk_text_buffer_insert (buffer, iter, "\n", 1);
+				g_print ("f-\n");
+#endif	
 			}
 		}
-
+#warning FIXME
+#if 0	
 		gtk_text_thaw ((w));
+#endif	
 	}
 }
 
@@ -227,6 +251,9 @@ transfer_string_clist2_xml_to_gui (XstTool *tool, xmlNodePtr root)
 	char *s, *entry[3];
 	GtkWidget *clist;
 
+#warning FIXME
+	return;
+	
 	entry[0] = NULL;
 
 	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
