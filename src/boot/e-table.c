@@ -332,7 +332,7 @@ boot_value_type (xmlNodePtr node)
 	
 	g_return_val_if_fail (node != NULL, type);
 
-	n = xst_xml_element_find_first (node, "XstEntryType");
+	n = xst_xml_element_find_first (node, "type");
 	if (n) {
 		gchar *buf;
 		
@@ -563,9 +563,9 @@ boot_value_set_type (xmlNodePtr node, XstBootImageType type)
 	g_return_if_fail (node != NULL);
 
 	buf = type_to_label (type);
-	n0 = xst_xml_element_find_first (node, "XstEntryType");
+	n0 = xst_xml_element_find_first (node, "type");
 	if (!n0)
-		n0 = xst_xml_element_add (node, "XstEntryType");
+		n0 = xst_xml_element_add (node, "type");
 
 	xst_xml_element_set_content (n0, buf);
 	g_free (buf);
@@ -647,17 +647,47 @@ boot_table_update (void)
 	e_table_model_row_changed (table->model, row);
 }
 
+static gchar *
+boot_table_get_new_key (xmlNodePtr root)
+{
+	xmlNodePtr node;
+	gchar *key;
+	gint maxkey, keynum;
+
+	maxkey = 0;
+	for (node = xst_xml_element_find_first (root, "entry");
+	     node; node = xst_xml_element_find_next (node, "entry"))
+	{
+		key = xst_xml_get_child_content (node, "key");
+		if (key) {
+			keynum = atoi (key);
+			if (maxkey <= keynum)
+				maxkey = keynum + 1;
+			g_free (key);
+		} else
+			/* This leaks, but it's not supposed to happen in production. */
+			g_warning ("Entry %s has no key.", xst_xml_get_child_content (node, "label"));
+	}
+
+	return g_strdup_printf ("%d", maxkey);
+}
+
 xmlNodePtr
 boot_table_add (void)
 {
 	ETable *table;
 	gint row;
-	xmlNodePtr node;
+	gchar *newkey;
+	xmlNodePtr root, node;
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 
-	node = xst_xml_doc_get_root (tool->config);
-	node = xst_xml_element_add (node, "entry");
+	root = xst_xml_doc_get_root (tool->config);
+	node = xst_xml_element_add (root, "entry");
+
+	newkey = boot_table_get_new_key (root);
+	xst_xml_element_add_with_content (node, "key", newkey);
+	g_free (newkey);
 	
 	g_array_append_val (boot_array, node);
 	
