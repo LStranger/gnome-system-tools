@@ -1049,7 +1049,8 @@ connection_new_from_node (xmlNode *node)
 	
 	s = xst_xml_get_child_content (node, "bootproto");
 	if (s) {
-		cxn->ip_config = cxn->tmp_ip_config = connection_config_type_from_str (s);
+		cxn->ip_config = connection_config_type_from_str (s);
+		cxn->tmp_ip_config = cxn->ip_config;
 		g_free (s);
 	}
 
@@ -1165,9 +1166,6 @@ connection_check_netmask_gui (XstConnection *cxn)
         address = gtk_editable_get_chars (GTK_EDITABLE (address_widget), 0, -1);
         netmask = gtk_editable_get_chars (GTK_EDITABLE (netmask_widget), 0, -1);
 
-        g_print ("ip: %s\n", address);
-        g_print ("netmask: %s\n", netmask);
-
         if ((sscanf (address, "%d.", &ip1) == 1) && (!strlen (netmask))) {
 		if (ip1 < 127) {
 			gtk_entry_set_text (GTK_ENTRY (netmask_widget), "255.0.0.0");
@@ -1259,7 +1257,7 @@ static void
 empty_ip (XstConnection *cxn)
 {
 	connection_check_netmask_gui (cxn);
-	
+
 	cxn->ip_config = cxn->tmp_ip_config;
 	GET_BOOL ("ip_", update_dns);
 	GET_STR ("ip_", address);
@@ -1508,7 +1506,7 @@ static void
 update_ip_config (XstConnection *cxn)
 {
 	IPConfigType ip;
-
+	
 	ip = cxn->tmp_ip_config;
 
 	SET_BOOL ("ip_", update_dns);
@@ -1532,7 +1530,7 @@ ip_config_menu_cb (GtkWidget *w, gpointer data)
 	if (cxn->tmp_ip_config == ip)
 		return;
 
-	cxn->tmp_ip_config = GPOINTER_TO_INT (data);
+	cxn->tmp_ip_config = ip;
 
 	connection_set_modified (cxn, TRUE);
 
@@ -1666,10 +1664,74 @@ hookup_callbacks (XstConnection *cxn)
 		connect_editable_filter (W (s[i].name), s[i].rule);
 }
 
+
+/**
+ * connection_dialog_set_visible_pages:
+ * @cxn: 
+ * 
+ * Hides and shows the pages from the connection dialog notebook according to the
+ * connection type. It also sets the the icons for the pages depending on the
+ * connection type.
+ **/
+static void
+connection_dialog_set_visible_pages (XstConnection *cxn)
+{
+	GtkNotebook *nb;
+	
+	nb = GTK_NOTEBOOK (W ("connection_nb"));
+
+	if (cxn->type == XST_CONNECTION_PPP) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/ppp.png");
+		fill_ppp (cxn);
+		fill_ppp_adv (cxn);
+		gtk_notebook_remove_page (nb,
+					  gtk_notebook_page_num (nb,
+								 W ("ip_vbox")));
+		callbacks_check_dialer (GTK_WINDOW (cxn->window), tool);
+	} else {
+		gtk_notebook_remove_page (nb,
+					  gtk_notebook_page_num (nb,
+								 W ("ppp_vbox")));
+		gtk_notebook_remove_page (nb,
+					  gtk_notebook_page_num (nb,
+								 W ("ppp_adv_vbox")));
+	}
+       
+	if (cxn->type == XST_CONNECTION_WVLAN) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/wavelan-48.png");
+		fill_wvlan (cxn);
+		/* FIXME: temprorarily disabling this notebook, until we get support for this. */
+		gtk_notebook_remove_page (nb,
+					  gtk_notebook_page_num (nb,
+								 W ("wvlan_vbox")));
+	} else
+		gtk_notebook_remove_page (nb,
+					  gtk_notebook_page_num (nb,
+								 W ("wvlan_vbox")));
+
+	if (cxn->type == XST_CONNECTION_PLIP) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/plip-48.png");
+		fill_ptp (cxn);
+		gtk_notebook_remove_page (nb,
+					  gtk_notebook_page_num (nb,
+								 W ("ip_vbox")));
+	} else 
+		gtk_notebook_remove_page (nb,
+					  gtk_notebook_page_num (nb,
+								 W ("ptp_vbox")));
+
+	if (cxn->type == XST_CONNECTION_ETH) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/connection-ethernet.png");
+	}
+
+	if (cxn->type == XST_CONNECTION_IRLAN) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/irda-48.png");
+	}
+}
+
 void
 connection_configure (XstConnection *cxn)
 {
-	GtkWidget *nb;
 	gchar *s;
 
 	if (cxn->window) {
@@ -1689,6 +1751,7 @@ connection_configure (XstConnection *cxn)
 	hookup_callbacks (cxn);
 
 	cxn->window = W("connection_config_dialog");
+	cxn->tmp_ip_config = cxn->ip_config;
 
 	fill_general (cxn);
 	fill_ip      (cxn);
@@ -1698,55 +1761,7 @@ connection_configure (XstConnection *cxn)
 	if (!xst_xml_element_get_boolean (cxn->node->parent, "userifacfectl"))
 		gtk_widget_hide (W("status_user"));
 
-	/* would like to do this as a switch */
-	nb = W ("connection_nb");
-	if (cxn->type == XST_CONNECTION_PPP) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/ppp.png");
-		fill_ppp (cxn);
-		fill_ppp_adv (cxn);
-		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-								 W ("ip_vbox")));
-		callbacks_check_dialer (GTK_WINDOW (cxn->window), tool);
-	} else {
-		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-								 W ("ppp_vbox")));
-		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-								 W ("ppp_adv_vbox")));
-	}
-       
-	if (cxn->type == XST_CONNECTION_WVLAN) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/wavelan-48.png");
-		fill_wvlan (cxn);
-		/* FIXME: temprorarily disabling this notebook, until we get support for this. */
-		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-								 W ("wvlan_vbox")));
-	} else
-		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-								 W ("wvlan_vbox")));
-
-	if (cxn->type == XST_CONNECTION_PLIP) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/plip-48.png");
-		fill_ptp (cxn);
-		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-								 W ("ip_vbox")));
-	} else 
-		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-								 W ("ptp_vbox")));
-
-	if (cxn->type == XST_CONNECTION_ETH) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/connection-ethernet.png");
-	}
-
-	if (cxn->type == XST_CONNECTION_IRLAN) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/irda-48.png");
-	}
+	connection_dialog_set_visible_pages (cxn);
 
 	cxn->frozen = FALSE;
 

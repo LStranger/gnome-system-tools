@@ -1,3 +1,10 @@
+2001-09-05  Chema Celorio  <chema@celorio.com>
+
+	* connection.c (connection_configure): set cxn->tmp_ip_config everytime
+	the dialog is configured. Fixes a bug i found at LWE while demoing the tools
+	where the sensitivity of the IP entry fields will not be set correctly from
+	the connection type
+
 2001-08-15  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* callbacks.h: added #ifndef __CALLBACKS_H__ hack.
