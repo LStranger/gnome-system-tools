@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-12-16 14:26-0600\n"
-"PO-Revision-Date: 2001-12-12 01:51+0100\n"
+"POT-Creation-Date: 2001-12-21 03:45+0100\n"
+"PO-Revision-Date: 2001-12-21 03:45+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -179,7 +179,7 @@ msgstr "Lösenord:"
 msgid "Run without password"
 msgstr "Kör utan lösenord"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:1018
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:1030
 msgid "Scanning your system configuration."
 msgstr "Läser av din systemkonfiguration."
 
@@ -357,25 +357,25 @@ msgstr "reiserfs (Linux)"
 msgid "ufs (FreeBSD)"
 msgstr "ufs (FreeBSD)"
 
-#: interfaces/display.glade.in.h:1 interfaces/nameresolution.glade.in.h:3
-msgid "<unknown>"
-msgstr "<okänd>"
-
-#: interfaces/display.glade.in.h:2
+#: interfaces/display.glade.in.h:1
 msgid "1024x768"
 msgstr "1024×768"
 
-#: interfaces/display.glade.in.h:3
+#: interfaces/display.glade.in.h:2
 msgid "1280x1024"
 msgstr "1280×1024"
 
-#: interfaces/display.glade.in.h:4
+#: interfaces/display.glade.in.h:3
 msgid "640x480"
 msgstr "640×480"
 
-#: interfaces/display.glade.in.h:5
+#: interfaces/display.glade.in.h:4
 msgid "800x600"
 msgstr "600×600"
+
+#: interfaces/display.glade.in.h:5 interfaces/nameresolution.glade.in.h:3
+msgid "<unknown>"
+msgstr "<okänd>"
 
 #: interfaces/display.glade.in.h:6
 msgid "Appearance"
@@ -770,7 +770,7 @@ msgstr "Tillåt aktiveringskontroll för alla användare"
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1580
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1646
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -795,7 +795,7 @@ msgid "Create a new Internet Connection "
 msgstr "Skapa en ny internetanslutning "
 
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.in.h:27
-#: src/network/connection.c:1579
+#: src/network/connection.c:1645
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -875,7 +875,7 @@ msgstr "IP-adress"
 msgid "IP Settings"
 msgstr "IP-inställningar"
 
-#: interfaces/network.glade.in.h:49 src/network/connection.c:1578
+#: interfaces/network.glade.in.h:49 src/network/connection.c:1644
 msgid "Manual"
 msgstr "Manuell"
 
@@ -2100,20 +2100,20 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/xst-tool.c:953
+#: src/common/xst-tool.c:965
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Hoppar över %s-direktiv..."
 
-#: src/common/xst-tool.c:1098
+#: src/common/xst-tool.c:1110
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/xst-tool.c:1140
+#: src/common/xst-tool.c:1152
 msgid "Updating your system configuration."
 msgstr "Uppdaterar din systemkonfiguration."
 
-#: src/common/xst-tool.c:1159
+#: src/common/xst-tool.c:1171
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2121,16 +2121,16 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/xst-tool.c:1341
+#: src/common/xst-tool.c:1355
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1532
+#: src/common/xst-tool.c:1546
 msgid "The password you entered is invalid."
 msgstr "Lösenordet du angav är ogiltigt."
 
-#: src/common/xst-tool.c:1542
+#: src/common/xst-tool.c:1556
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2157,19 +2157,19 @@ msgstr ""
 "--\n"
 "Teamet bakom Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1562
+#: src/common/xst-tool.c:1576
 msgid "Don't show me this again"
 msgstr "Visa inte detta igen"
 
-#: src/common/xst-tool.c:1597
+#: src/common/xst-tool.c:1611
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tRedigera konfigurationen på platsen PLATS."
 
-#: src/common/xst-tool.c:1597
+#: src/common/xst-tool.c:1611
 msgid "LOCATION"
 msgstr "PLATS"
 
-#: src/common/xst-tool.c:1642
+#: src/common/xst-tool.c:1656
 msgid "Pretending we are root..."
 msgstr "Låtsas att vi är root..."
 
@@ -2276,76 +2276,76 @@ msgstr ""
 msgid "Internet Sharing"
 msgstr "Internetdelning"
 
-#: src/network/callbacks.c:132 src/network/connection.c:807
-#: src/network/connection.c:838
+#: src/network/callbacks.c:120 src/network/connection.c:812
+#: src/network/connection.c:843
 msgid "Active"
 msgstr "Aktiv"
 
-#: src/network/callbacks.c:135
+#: src/network/callbacks.c:123
 msgid "Activating"
 msgstr "Aktiverar"
 
-#: src/network/callbacks.c:146 src/network/connection.c:808
-#: src/network/connection.c:839
+#: src/network/callbacks.c:134 src/network/connection.c:813
+#: src/network/connection.c:844
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/network/callbacks.c:149
+#: src/network/callbacks.c:137
 msgid "Deactivating"
 msgstr "Deaktiverar"
 
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:353
 msgid "The name of this computer"
 msgstr "Namnet på denna dator"
 
-#: src/network/callbacks.c:368
+#: src/network/callbacks.c:356
 msgid "A short description of your computer"
 msgstr "En kort beskrivning av din dator"
 
-#: src/network/callbacks.c:371
+#: src/network/callbacks.c:359
 msgid "The Windows Networking workgroup for your network"
 msgstr "Arbetsgruppen för ditt nätverk i Windows-nätverk"
 
-#: src/network/callbacks.c:374
+#: src/network/callbacks.c:362
 msgid "The IP address of your WINS server"
 msgstr "IP-adressen till din WINS-server"
 
-#: src/network/callbacks.c:377
+#: src/network/callbacks.c:365
 msgid "The DNS domain for your computer"
 msgstr "DNS-domänen till din dator"
 
-#: src/network/callbacks.c:380
+#: src/network/callbacks.c:368
 msgid "A list of your DNS servers' IP addresses"
 msgstr "En lista på dina DNS-servrars IP-adresser"
 
-#: src/network/callbacks.c:383
+#: src/network/callbacks.c:371
 msgid "A list of domains where hosts will be searched"
 msgstr "En lista på domäner där värdar kommer att sökas"
 
-#: src/network/callbacks.c:386
+#: src/network/callbacks.c:374
 msgid "The IP address of this host"
 msgstr "IP-adress för denna dator"
 
-#: src/network/callbacks.c:389
+#: src/network/callbacks.c:377
 msgid "Aliases for this host, one per line"
 msgstr "Alias för denna dator, en per rad"
 
-#: src/network/callbacks.c:532
+#: src/network/callbacks.c:526
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Ta bort anslutningen %s: \"%s\"?"
 
-#: src/network/callbacks.c:534
+#: src/network/callbacks.c:528
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Ta bort anslutningen %s?"
 
-#: src/network/callbacks.c:589
+#: src/network/callbacks.c:584
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Aktiverar anslutningen \"%s\"."
 
-#: src/network/callbacks.c:622
+#: src/network/callbacks.c:620
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Kopplar från anslutningen \"%s\"."
@@ -2380,7 +2380,7 @@ msgstr ""
 msgid "Don't change host name"
 msgstr "Ändra inte värdnamnet"
 
-#: src/network/callbacks.c:730
+#: src/network/callbacks.c:759
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2391,7 +2391,7 @@ msgstr ""
 "PPP-anslutningarna (modemanslutningarna) att\n"
 "kunna aktiveras."
 
-#: src/network/callbacks.c:751
+#: src/network/callbacks.c:779
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2406,7 +2406,7 @@ msgstr ""
 "\n"
 "Fortsätt ändå?"
 
-#: src/network/callbacks.c:778
+#: src/network/callbacks.c:806
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -2418,11 +2418,11 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:785
+#: src/network/callbacks.c:813
 msgid "Activate connection"
 msgstr "Aktivera anslutning"
 
-#: src/network/callbacks.c:831
+#: src/network/callbacks.c:859
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -2432,7 +2432,7 @@ msgstr ""
 "gateway. Ange denna information för att fortsätta,\n"
 "eller välj en annan standardgatewayenhet.\n"
 
-#: src/network/callbacks.c:871
+#: src/network/callbacks.c:899
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -2476,7 +2476,7 @@ msgstr "Loopback: virtuellt gränssnitt"
 msgid "Unknown type"
 msgstr "Okänd typ"
 
-#: src/network/connection.c:1355
+#: src/network/connection.c:1421
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2486,7 +2486,7 @@ msgstr ""
 "lämnades tom. Ange giltiga IP-adresser i de\n"
 "fälten för att fortsätta."
 
-#: src/network/connection.c:1362
+#: src/network/connection.c:1428
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2496,7 +2496,7 @@ msgstr ""
 "gränssnittet lämnades tom. Ange giltiga\n"
 "IP-adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:1368
+#: src/network/connection.c:1434
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2515,11 +2515,11 @@ msgstr ""
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Är du säker på att du vill ta bort aliasen för %s?"
 
-#: src/network/main.c:177
+#: src/network/main.c:178
 msgid "\tRun the internet conection druid."
 msgstr "\tKör guiden Internetanslutning."
 
-#: src/network/main.c:184
+#: src/network/main.c:185
 msgid "Network Settings"
 msgstr "Nätverksinställningar"
 
@@ -2679,7 +2679,7 @@ msgstr "Montera"
 msgid "Unmount"
 msgstr "Avmontera"
 
-#: src/shares/validate.c:164
+#: src/shares/validate.c:165
 msgid ""
 "Failed to create the path you requested:\n"
 "A path element is a regular file, not a directory."
@@ -2687,7 +2687,7 @@ msgstr ""
 "Misslyckades med att skapa sökvägen du begärde:\n"
 "Ett av elementen i sökvägen är en vanlig fil, ingen katalog."
 
-#: src/shares/validate.c:167
+#: src/shares/validate.c:168
 msgid ""
 "Failed to create the path you requested:\n"
 "A path element is a special filesystem node, not a directory."
@@ -2695,7 +2695,7 @@ msgstr ""
 "Misslyckades med att skapa sökvägen du begärde:\n"
 "Ett av elementen i sökvägen är en speciell filsystemsnod, inte en katalog."
 
-#: src/shares/validate.c:170
+#: src/shares/validate.c:171
 msgid ""
 "Failed to create the path you requested:\n"
 "You don't have access to that local location."
@@ -2703,15 +2703,15 @@ msgstr ""
 "Misslyckades med att skapa sökvägen du begärde:\n"
 "Du har inte åtkomst till den lokala platsen."
 
-#: src/shares/validate.c:173
+#: src/shares/validate.c:174
 msgid "Failed to create the path you requested."
 msgstr "Misslyckades med att skapa sökvägen du begärde."
 
-#: src/shares/validate.c:181
+#: src/shares/validate.c:182
 msgid "You need to specify a name for the export."
 msgstr "Du måste ange ett namn på exporten."
 
-#: src/shares/validate.c:190
+#: src/shares/validate.c:191
 msgid ""
 "You need to specify a path, i.e. the directory\n"
 "on your computer you would like to share."
@@ -2719,7 +2719,7 @@ msgstr ""
 "Du måste ange en sökväg, d.v.s. katalogen på\n"
 "din dator som du vill dela ut."
 
-#: src/shares/validate.c:198
+#: src/shares/validate.c:199
 msgid ""
 "You do not have access to the path you want to share.\n"
 "Please select another one."
@@ -2727,7 +2727,7 @@ msgstr ""
 "Du har inte åtkomst till den sökväg du vill dela ut.\n"
 "Välj en annan."
 
-#: src/shares/validate.c:205
+#: src/shares/validate.c:206
 msgid ""
 "The path you want to share does not exist.\n"
 "Would you like to create it?"
@@ -2735,7 +2735,7 @@ msgstr ""
 "Sökvägen du vill dela ut finns inte.\n"
 "Vill du skapa den?"
 
-#: src/shares/validate.c:216
+#: src/shares/validate.c:217
 msgid ""
 "The path you want to share points to a specific file.\n"
 "You can only share directories, not files."
@@ -2743,7 +2743,7 @@ msgstr ""
 "Sökvägen du vill dela ut pekar till en specifik fil.\n"
 "Du kan bara dela ut kataloger, inte filer."
 
-#: src/shares/validate.c:224
+#: src/shares/validate.c:225
 msgid ""
 "The path you want to share is not a directory,\n"
 "and you can only share directories."
@@ -2751,11 +2751,27 @@ msgstr ""
 "Sökvägen du vill dela ut är inte en katalog,\n"
 "och du kan bara dela ut kataloger."
 
-#: src/shares/validate.c:236
+#: src/shares/validate.c:244
+msgid ""
+"You don't have smbclient package installed,\n"
+"Can't mount smb shares."
+msgstr ""
+"Du har inte paketet smbclient installerat,\n"
+"kan inte montera smb-utdelningar."
+
+#: src/shares/validate.c:276
+msgid ""
+"You don't have samba package installed,\n"
+"Can't export smb shares."
+msgstr ""
+"Du har inte paketet samba installerat,\n"
+"kan inte exportera smb-utdelningar."
+
+#: src/shares/validate.c:301
 msgid "You need to name the host providing the import."
 msgstr "Du måste ange namnet på den värd som tillhandahåller importen."
 
-#: src/shares/validate.c:242
+#: src/shares/validate.c:307
 msgid ""
 "You need to specify a path, i.e. where on the host\n"
 "the share is imported from."
@@ -2763,7 +2779,7 @@ msgstr ""
 "Du måste ange en sökväg, d.v.s. var på värden\n"
 "utdelningen importeras ifrån."
 
-#: src/shares/validate.c:252
+#: src/shares/validate.c:317
 msgid ""
 "You need to specify the local point, i.e. a directory,\n"
 "where the import will be mounted."
@@ -2771,7 +2787,7 @@ msgstr ""
 "Du måste ange den lokala monteringspunkten, d.v.s. en\n"
 "katalog där importen kommer att monteras."
 
-#: src/shares/validate.c:260
+#: src/shares/validate.c:325
 msgid ""
 "You do not have access to the local point, i.e. directory\n"
 "where the import would be mounted.\n"
@@ -2781,7 +2797,7 @@ msgstr ""
 "där importen skulle monteras.\n"
 "Välj en annan."
 
-#: src/shares/validate.c:268
+#: src/shares/validate.c:333
 msgid ""
 "The local mount point does not exist.\n"
 "Would you like to create it?"
@@ -2789,7 +2805,7 @@ msgstr ""
 "Den lokala monteringspunkten finns inte.\n"
 "Vill du skapa den?"
 
-#: src/shares/validate.c:279
+#: src/shares/validate.c:344
 msgid ""
 "The mount point you specified is not a directory.\n"
 "You can only import to directories, not files."
@@ -2797,7 +2813,7 @@ msgstr ""
 "Monteringspunkten du angav är inte en katalog.\n"
 "Du kan bara importera till kataloger, inte filer."
 
-#: src/shares/validate.c:287
+#: src/shares/validate.c:352
 msgid ""
 "The mount point you specified is not a directory,\n"
 "and you can only import to directories."
@@ -2805,7 +2821,7 @@ msgstr ""
 "Monteringspunkten du angav är inte en katalog,\n"
 "och du kan bara importera till kataloger."
 
-#: src/shares/validate.c:299
+#: src/shares/validate.c:364
 msgid ""
 "You need to specify a client pattern, e.g.\n"
 "\"*.myschool.edu\" or \"192.168.0.1/24\"."
