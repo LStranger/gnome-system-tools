@@ -176,23 +176,44 @@ create_table (xmlNodePtr root)
 	ETableExtras *extras;
 	ETable *table;
 	GtkWidget *container;
+	gchar *spec, *state;
 
 	init_array ();
 	extras = create_extras ();
 	
 	model = e_table_simple_new (boot_col_count,
-						   boot_row_count,
-						   boot_value_at,
-						   boot_set_value_at,
-						   boot_is_cell_editable,
-						   boot_duplicate_value,
-						   boot_free_value,
-						   boot_initialize_value,
-						   boot_value_is_empty,
-						   boot_value_to_string,
-						   NULL);
+				    boot_row_count,
+				    boot_value_at,
+				    boot_set_value_at,
+				    boot_is_cell_editable,
+				    boot_duplicate_value,
+				    boot_free_value,
+				    boot_initialize_value,
+				    boot_value_is_empty,
+				    boot_value_to_string,
+				    NULL);
 
-	boot_table = e_table_scrolled_new (model, extras, table_spec, basic_boot_state);
+	spec = xst_conf_get_string (tool, "spec");
+	if (!spec) {
+		spec = g_strdup (table_spec);
+		xst_conf_set_string (tool, "spec", spec);
+	}
+
+	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
+		state = xst_conf_get_string (tool, "state_adv");
+	else
+		state = xst_conf_get_string (tool, "state_basic");
+	
+	if (!state) {
+		state = g_strdup (basic_boot_state);
+		xst_conf_set_string (tool, "state_basic", basic_boot_state);
+		xst_conf_set_string (tool, "state_adv", adv_boot_state);
+	}
+
+	boot_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, spec, state);
+	
+	g_free (spec);
+	g_free (state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", boot_cursor_change, NULL);
@@ -412,15 +433,18 @@ boot_table_update_state (void)
 {
 	ETable *table;
 	XstDialogComplexity complexity;
+	gchar *state;
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	complexity = tool->main_dialog->complexity;
 
 	if (complexity == XST_DIALOG_BASIC)
-		e_table_set_state (table, basic_boot_state);
-
+		state = xst_conf_get_string (tool, "state_basic");
 	else
-		e_table_set_state (table, adv_boot_state);
+		state = xst_conf_get_string (tool, "state_adv");
+
+	e_table_set_state (table, state);
+	g_free (state);
 }
 
 void
