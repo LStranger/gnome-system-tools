@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Ximian-setup-tools\n"
-"POT-Creation-Date: 2001-02-12 14:13+0300\n"
-"PO-Revision-Date: 2001-02-12 14:15+03:00\n"
+"POT-Creation-Date: 2001-02-19 12:41+0300\n"
+"PO-Revision-Date: 2001-02-19 12:53+03:00\n"
 "Last-Translator: Valek Filippov <frob@df.ru>\n"
 "Language-Team: Russian <@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -671,7 +671,7 @@ msgstr "õÓÔÁÎÏ×ËÉ ÓÏÅÄÉÎÅÎÉÊ"
 
 #: interfaces/network.glade.h:42
 msgid "I can't think of anything for this page."
-msgstr ""
+msgstr "îÅ ÍÏÇÕ ÎÉŞÅÇÏ ĞÒÉÄÕÍÁÔØ ÄÌÑ ÜÔÏÊ ÓÔÒÁÎÉÃÙ."
 
 #: interfaces/network.glade.h:43
 msgid "Connection"
@@ -882,7 +882,7 @@ msgstr "ğÏÚ×ÏÌÉÔØ ÚÁĞÉÓØ ÜÔÉÍ ËÌÉÅÎÔÁÍ"
 msgid ""
 "Imports are directories wich reside in other computers and are accessible "
 "through the network."
-msgstr ""
+msgstr "éÍĞÏÒÔ -- ÜÔÏ ËÁÔÁÌÏÇÉ, ËÏÔÏÒÙÅ ÒÁÓĞÏÌÏÖÅÎÙ ÎÁ ÄÒÕÇÉÈ ËÏÍĞØÀÔÅÒÁÈ É ÄÏÓÔÕĞÎÙ ŞÅÒÅÚ ÓÅÔØ."
 
 #: interfaces/shares.glade.h:31
 msgid "Location"
@@ -964,7 +964,7 @@ msgid ""
 "The directories in your machine may be made available to others through the "
 "network using exports. SMB exports are compatible with Microsoft Windows "
 "(TM) and Unix or Linux machines with Samba installed."
-msgstr ""
+msgstr "ëÁÔÁÌÏÇÉ ÎÁ ×ÁÛÅÍ ËÏÍĞØÀÔÅÒÅ ÍÏÇÕÔ ÂÙÔØ ÄÏÓÔÕĞÎÙ ÄÒÕÇÍÉÍ ŞÅÒÅÚ ÓÅÔØ Ó ÉÓĞÏÌØÚÏ×ÁÎÉÅÍ ÜËÓĞÏÒÔÁ. üËÓĞÏÒÔ SMB ÓÏ×ÍÅÓÔÉÍ Ó MS Windows (TM) É ËÏÍĞØÀÔÅÒÁÍÉ Unix ÉÌÉ Linux, ÎÁ ËÏÔÏÒÙÈ ÕÓÔÁÎÏ×ÌÅÎÁ Samba."
 
 #: interfaces/shares.glade.h:59
 msgid "SMB exports"
@@ -986,7 +986,7 @@ msgstr "ëÌÉÅÎÔ"
 msgid ""
 "NFS exports are used to share directories with Unix or Linux machines over "
 "the network."
-msgstr ""
+msgstr "üËÓĞÏÒÔ NFS ÉÓĞÏÌØÚÕÅÔÓÑ ÄÌÑ ÓÏ×ÍÅÓÔÎÏÇÏ ÄÏÓÔÕĞÁ ŞÅÒÅÚ ÓÅÔØ Ë ËÁÔÁÌÏÇÁÍ Ó ËÏÍĞØÀÔÅÒÏ× Unix ÉÌÉ Linux."
 
 #: interfaces/shares.glade.h:71
 msgid "NFS exports"
@@ -1101,7 +1101,7 @@ msgstr "éÎÓÔÒÕÍÅÎÔÙ ÕÓÔÁÎÏ×ËÉ Ximian"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.h:8 src/common/xst-tool.c:327
+#: interfaces/common.glade.h:8 src/common/xst-tool.c:463
 msgid "Scanning your system configuration."
 msgstr ""
 "óËÁÎÉÒÏ×ÁÎÉÅ ËÏÎÆÉÇÕÒÁÃÉÉ ×ÁÛÅÊ ÓÉÓÔÅÍÙ."
@@ -1468,7 +1468,7 @@ msgstr ""
 
 #: src/shares/main.c:57
 msgid "Network Shares"
-msgstr ""
+msgstr "óÏ×ÍÅÓÔÎÙÊ ÓÅÔÅ×ÏÊ ÄÏÓÔÕĞ"
 
 #: src/time/main.c:301
 msgid "Time and Date Settings"
@@ -1502,33 +1502,57 @@ msgstr ""
 #: src/common/xst-dialog.c:319
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
-msgstr "ïÛÉÂËÁ ĞÏÄËÌÀŞÅÎÉÑ ÓÉÇÎÁÌÁ \"%s\" × ×ÉÄÖÅÔÅ \"%s\""
+msgstr ""
+"ïÛÉÂËÁ ĞÏÄËÌÀŞÅÎÉÑ ÓÉÇÎÁÌÁ \"%s\" × ×ÉÄÖÅÔÅ "
+"\"%s\""
 
-#: src/common/xst-tool.c:246
+#: src/common/xst-tool.c:74
+msgid ""
+"The backend was unable to guess your computer's\n"
+"platform. In the future, you will be able to specify\n"
+"one at this point, but today we'll just quit."
+msgstr ""
+"óÅÒ×ÅÒÎÁÑ ĞÏÄÓÉÓÔÅÍÁ ÎÅ ÓÍÏÇÌÁ ÏĞÒÅÄÅÌÉÔØ ÔÉĞ ×ÁÛÅÇÏ\n"
+"ËÏÍĞØÀÔÅÒÁ. ÷ ÂÕÄÕİÅÍ, ×Ù ÓÍÏÖÅÔÅ ÕËÁÚÁÔØ ÏÄÉÎ × ÜÔÏÍ\n"
+"ÍÅÓÔÅ, ÎÏ ÓÅÇÏÄÎÑ ÍÙ ĞÒÏÓÔÏ ĞÒÅÒÙ×ÁÅÍ ×ÙĞÏÌÎÅÎÉÅ."
+
+#: src/common/xst-tool.c:87
+msgid ""
+"The platform you're running is currently not supported\n"
+"by this tool. In the future, you will be able to specify\n"
+"another platform at this point, but today we'll just quit."
+msgstr ""
+"ğÌÁÔÆÏÒÍÁ, ËÏÔÏÒÕÀ ×Ù ÉÓĞÏÌØÚÕÅÔÅ, × ÎÁÓÔÏÑİÉÊ ÍÏÍÅÎÔ ÎÅ ĞÏÄÄÅÒÖÉ×ÁÅÔÓÑ\n"
+"ÜÔÏÊ ĞÒÏÇÒÁÍÍÏÊ. ÷ ÂÕÄÕİÅÍ ×Ù ÓÍÏÖÅÔÅ ÕËÁÚÁÔØ ÄÒÕÇÕÀ ĞÌÁÔÆÏÒÍÕ × ÜÔÏÍ\n"
+"ÍÅÓÔÅ, ÎÏ ÓÅÇÏÄÎÑ ÍÙ ĞÒÏÓÔÏ ĞÒÅÒÙ×ÁÅÍ ×ÙĞÏÌÎÅÎÉÅ."
+
+#: src/common/xst-tool.c:382
 msgid "Skipping actual save..."
 msgstr "ğÒÏĞÕÓË ÄÅÊÓÔ×ÉÔÅÌØÎÏÇÏ ÓÏÈÒÁÎÅÎÉÑ..."
 
-#: src/common/xst-tool.c:266
+#: src/common/xst-tool.c:402
 msgid "Updating your system configuration."
 msgstr ""
 "ïÂÎÏ×ÌÅÎÉÅ ËÏÎÆÉÇÕÒÁÃÉÉ ×ÁÛÅÊ ÓÉÓÔÅÍÙ."
 
-#: src/common/xst-tool.c:368
+#: src/common/xst-tool.c:504
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
+"ğÒÉ ÚÁĞÕÓËÅ ÓÅÒ×ÅÒÎÏÇÏ ÓÃÅÎÁÒÉÑ ×ÏÚÎÉËÌÁ ÏÛÉÂËÁ,\n"
+"ËÏÎÆÉÇÕÒÁÃÉÑ ÎÅ ÍÏÖÅÔ ÂÙÔØ ÚÁÇÒÕÖÅÎÁ."
 
-#: src/common/xst-tool.c:511
+#: src/common/xst-tool.c:648
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - éÎÓÔÒÕÍÅÎÔÙ ÕÓÔÁÎÏ×ËÉ Ximian"
 
-#: src/common/xst-tool.c:621
+#: src/common/xst-tool.c:779
 msgid "Pretending we are root..."
 msgstr "ğÒÅÔÅÎÄÏ×ÁÔØ ÎÁ ĞÏÌÎÏÍÏŞÉÑ root..."
 
-#: src/common/xst-tool.c:625
+#: src/common/xst-tool.c:783
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -1551,7 +1575,7 @@ msgstr ""
 #. No name, no swap
 #: src/memory/callbacks.c:546
 msgid "Path to new swap location is empty."
-msgstr ""
+msgstr "ğÕÔØ Ë ÎÏ×ÏÍÕ ÒÁÓĞÏÌÏÖÅÎÉÀ ĞÏÄËÁŞËÉ ĞÕÓÔ."
 
 #. It's already in there, can't add
 #: src/memory/callbacks.c:563
@@ -1629,6 +1653,10 @@ msgstr "PPP-ÓÏÅÄÉÎÅÎÉÅ"
 msgid "Unknown type connection"
 msgstr "îÅÉÚ×ÅÓÔÎÙÊ ÔÉĞ ÓÏÅÄÉÎÅÎÉÑ"
 
-#: src/network/main.c:106
+#: src/network/main.c:91
+msgid "Run the internet conection druid."
+msgstr "úÁĞÕÓÔÉÔØ ĞÏÍÏİÎÉËÁ ĞÏ ÓÏÅÄÉÎÅÎÉÀ Ó Internet"
+
+#: src/network/main.c:118
 msgid "Network Settings"
 msgstr "óÅÔÅ×ÙÅ ÕÓÔÁÎÏ×ËÉ"
