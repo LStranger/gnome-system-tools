@@ -61,6 +61,7 @@ gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
 gchar *s = N_("Defaults");
+gchar *s = N_("window2");
 gchar *s = N_("EXPERIMENTAL NIS support.\n"
               "It's only available if You have NIS\n"
               "and when You click on \"More Options\".");
@@ -72,4 +73,3 @@ gchar *s = N_("Change the settings and options for the\n"
               "selected user or group, like a users password\n"
               "or a groups name or members.");
 gchar *s = N_("Settings");
-gchar *s = N_("Network");

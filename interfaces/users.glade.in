@@ -796,7 +796,6 @@
 		  <last_modification_time>Tue, 07 Nov 2000 06:15:53 GMT</last_modification_time>
 		</signal>
 		<label>  Random Password  </label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -1071,7 +1070,6 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
 		</signal>
 		<label>Add -&gt;</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1090,7 +1088,6 @@
 		  <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
 		</signal>
 		<label>Remove &lt;-</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
 		  <expand>False</expand>
@@ -1426,7 +1423,6 @@
 		  <last_modification_time>Tue, 24 Oct 2000 11:14:16 GMT</last_modification_time>
 		</signal>
 		<label>New User</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -1441,7 +1437,6 @@
 		  <last_modification_time>Tue, 24 Oct 2000 11:47:54 GMT</last_modification_time>
 		</signal>
 		<label>Delete</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 
@@ -1578,7 +1573,6 @@
 		  <last_modification_time>Tue, 24 Oct 2000 11:45:05 GMT</last_modification_time>
 		</signal>
 		<label>Change Password</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 
 	      <widget>
@@ -1588,7 +1582,6 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Settings</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -1730,7 +1723,6 @@
 		<last_modification_time>Wed, 25 Oct 2000 20:45:21 GMT</last_modification_time>
 	      </signal>
 	      <label>New Group</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 
 	    <widget>
@@ -1746,7 +1738,6 @@
 		<last_modification_time>Thu, 01 Feb 2001 17:59:44 GMT</last_modification_time>
 	      </signal>
 	      <label>Delete</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
 	    </widget>
 	  </widget>
 
@@ -1877,7 +1868,6 @@
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Settings</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
 	      </widget>
 	    </widget>
 	  </widget>
@@ -2663,18 +2653,47 @@
       <xpad>0</xpad>
       <ypad>0</ypad>
     </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window2</name>
+  <visible>False</visible>
+  <sensitive>False</sensitive>
+  <title>window2</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox15</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
 
     <widget>
-      <class>GtkVBox</class>
-      <name>vbox15</name>
+      <class>GtkHBox</class>
+      <name>hbox15</name>
       <homogeneous>False</homogeneous>
       <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
 
       <widget>
-	<class>GtkHBox</class>
-	<name>hbox15</name>
-	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
+	<class>GtkAlignment</class>
+	<name>alignment21</name>
+	<border_width>8</border_width>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xscale>0.5</xscale>
+	<yscale>0.5</yscale>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
@@ -2682,50 +2701,47 @@
 	</child>
 
 	<widget>
-	  <class>GtkAlignment</class>
-	  <name>alignment21</name>
-	  <border_width>8</border_width>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xscale>0.5</xscale>
-	  <yscale>0.5</yscale>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GnomePixmap</class>
-	    <name>pixmap7</name>
-	    <filename>networking.png</filename>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <name>network_label</name>
-	  <label>EXPERIMENTAL NIS support.
-It's only available if You have NIS
-and when You click on &quot;More Options&quot;.</label>
-	  <justify>GTK_JUSTIFY_FILL</justify>
-	  <wrap>True</wrap>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>8</xpad>
-	  <ypad>0</ypad>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
+	  <class>GnomePixmap</class>
+	  <name>pixmap7</name>
+	  <filename>networking.png</filename>
 	</widget>
       </widget>
 
       <widget>
-	<class>GtkVBox</class>
-	<name>network_container</name>
-	<sensitive>False</sensitive>
+	<class>GtkLabel</class>
+	<name>network_label</name>
+	<label>EXPERIMENTAL NIS support.
+It's only available if You have NIS
+and when You click on &quot;More Options&quot;.</label>
+	<justify>GTK_JUSTIFY_FILL</justify>
+	<wrap>True</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>8</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>network_container</name>
+      <sensitive>False</sensitive>
+      <homogeneous>False</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox16</name>
 	<homogeneous>False</homogeneous>
 	<spacing>0</spacing>
 	<child>
@@ -2735,8 +2751,8 @@ and when You click on &quot;More Options&quot;.</label>
 	</child>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox16</name>
+	  <class>GtkVBox</class>
+	  <name>network_placeholder</name>
 	  <homogeneous>False</homogeneous>
 	  <spacing>0</spacing>
 	  <child>
@@ -2746,26 +2762,30 @@ and when You click on &quot;More Options&quot;.</label>
 	  </child>
 
 	  <widget>
-	    <class>GtkVBox</class>
-	    <name>network_placeholder</name>
-	    <homogeneous>False</homogeneous>
-	    <spacing>0</spacing>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>Placeholder</class>
-	    </widget>
+	    <class>Placeholder</class>
 	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox17</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
 
 	  <widget>
-	    <class>GtkVBox</class>
-	    <name>vbox17</name>
-	    <homogeneous>False</homogeneous>
+	    <class>GtkVButtonBox</class>
+	    <name>vbuttonbox3</name>
+	    <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
 	    <spacing>0</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>27</child_min_height>
+	    <child_ipad_x>8</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -2773,215 +2793,182 @@ and when You click on &quot;More Options&quot;.</label>
 	    </child>
 
 	    <widget>
-	      <class>GtkVButtonBox</class>
-	      <name>vbuttonbox3</name>
+	      <class>GtkButton</class>
+	      <name>network_user_new</name>
+	      <sensitive>False</sensitive>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_network_user_new_clicked</handler>
+		<last_modification_time>Wed, 03 Jan 2001 14:40:59 GMT</last_modification_time>
+	      </signal>
+	      <label>New User</label>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>network_group_new</name>
+	      <sensitive>False</sensitive>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_network_group_new_clicked</handler>
+		<last_modification_time>Wed, 03 Jan 2001 14:55:37 GMT</last_modification_time>
+	      </signal>
+	      <label>New Group</label>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>network_delete</name>
+	      <sensitive>False</sensitive>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>clicked</name>
+		<handler>on_network_delete_clicked</handler>
+		<last_modification_time>Wed, 03 Jan 2001 09:08:35 GMT</last_modification_time>
+	      </signal>
+	      <label>Delete</label>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label49</name>
+	    <label></label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>network_settings_frame</name>
+	<border_width>8</border_width>
+	<label>Settings for selected user and group</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox16</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+
+	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>alignment22</name>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xscale>1</xscale>
+	    <yscale>1</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkHBox</class>
+	      <name>hbox17</name>
+	      <homogeneous>False</homogeneous>
+	      <spacing>0</spacing>
+
+	      <widget>
+		<class>GtkAlignment</class>
+		<name>alignment23</name>
+		<border_width>8</border_width>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xscale>1</xscale>
+		<yscale>1</yscale>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+
+		<widget>
+		  <class>GnomePixmap</class>
+		  <name>pixmap8</name>
+		  <filename>settings.png</filename>
+		</widget>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label48</name>
+		<label>Change the settings and options for the
+selected user or group, like a users password
+or a groups name or members.</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>True</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>alignment24</name>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xscale>0</xscale>
+	    <yscale>1</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkHButtonBox</class>
+	      <name>hbuttonbox4</name>
 	      <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
 	      <spacing>0</spacing>
 	      <child_min_width>85</child_min_width>
 	      <child_min_height>27</child_min_height>
-	      <child_ipad_x>8</child_ipad_x>
+	      <child_ipad_x>4</child_ipad_x>
 	      <child_ipad_y>0</child_ipad_y>
-	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
-	      </child>
 
 	      <widget>
 		<class>GtkButton</class>
-		<name>network_user_new</name>
+		<name>network_settings</name>
 		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_network_user_new_clicked</handler>
-		  <last_modification_time>Wed, 03 Jan 2001 14:40:59 GMT</last_modification_time>
-		</signal>
-		<label>New User</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-	      </widget>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>network_group_new</name>
-		<sensitive>False</sensitive>
-		<can_default>True</can_default>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_network_group_new_clicked</handler>
-		  <last_modification_time>Wed, 03 Jan 2001 14:55:37 GMT</last_modification_time>
-		</signal>
-		<label>New Group</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-	      </widget>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>network_delete</name>
-		<sensitive>False</sensitive>
-		<can_default>True</can_default>
-		<can_focus>True</can_focus>
-		<signal>
-		  <name>clicked</name>
-		  <handler>on_network_delete_clicked</handler>
-		  <last_modification_time>Wed, 03 Jan 2001 09:08:35 GMT</last_modification_time>
-		</signal>
-		<label>Delete</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-	      </widget>
-	    </widget>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <name>label49</name>
-	      <label></label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <child>
-		<padding>0</padding>
-		<expand>True</expand>
-		<fill>True</fill>
-	      </child>
-	    </widget>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkFrame</class>
-	  <name>network_settings_frame</name>
-	  <border_width>8</border_width>
-	  <label>Settings for selected user and group</label>
-	  <label_xalign>0</label_xalign>
-	  <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkVBox</class>
-	    <name>vbox16</name>
-	    <homogeneous>False</homogeneous>
-	    <spacing>0</spacing>
-
-	    <widget>
-	      <class>GtkAlignment</class>
-	      <name>alignment22</name>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xscale>1</xscale>
-	      <yscale>1</yscale>
-	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
-	      </child>
-
-	      <widget>
-		<class>GtkHBox</class>
-		<name>hbox17</name>
-		<homogeneous>False</homogeneous>
-		<spacing>0</spacing>
-
-		<widget>
-		  <class>GtkAlignment</class>
-		  <name>alignment23</name>
-		  <border_width>8</border_width>
-		  <xalign>0.5</xalign>
-		  <yalign>0.5</yalign>
-		  <xscale>1</xscale>
-		  <yscale>1</yscale>
-		  <child>
-		    <padding>0</padding>
-		    <expand>False</expand>
-		    <fill>False</fill>
-		  </child>
-
-		  <widget>
-		    <class>GnomePixmap</class>
-		    <name>pixmap8</name>
-		    <filename>settings.png</filename>
-		  </widget>
-		</widget>
-
-		<widget>
-		  <class>GtkLabel</class>
-		  <name>label48</name>
-		  <label>Change the settings and options for the
-selected user or group, like a users password
-or a groups name or members.</label>
-		  <justify>GTK_JUSTIFY_LEFT</justify>
-		  <wrap>True</wrap>
-		  <xalign>0.5</xalign>
-		  <yalign>0.5</yalign>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <child>
-		    <padding>0</padding>
-		    <expand>False</expand>
-		    <fill>False</fill>
-		  </child>
-		</widget>
-	      </widget>
-	    </widget>
-
-	    <widget>
-	      <class>GtkAlignment</class>
-	      <name>alignment24</name>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xscale>0</xscale>
-	      <yscale>1</yscale>
-	      <child>
-		<padding>0</padding>
-		<expand>False</expand>
-		<fill>False</fill>
-	      </child>
-
-	      <widget>
-		<class>GtkHButtonBox</class>
-		<name>hbuttonbox4</name>
-		<layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
-		<spacing>0</spacing>
-		<child_min_width>85</child_min_width>
-		<child_min_height>27</child_min_height>
-		<child_ipad_x>4</child_ipad_x>
-		<child_ipad_y>0</child_ipad_y>
-
-		<widget>
-		  <class>GtkButton</class>
-		  <name>network_settings</name>
-		  <sensitive>False</sensitive>
-		  <can_default>True</can_default>
-		  <can_focus>True</can_focus>
-		  <label>Settings</label>
-		  <relief>GTK_RELIEF_NORMAL</relief>
-		</widget>
+		<label>Settings</label>
 	      </widget>
 	    </widget>
 	  </widget>
 	</widget>
       </widget>
-    </widget>
-
-    <widget>
-      <class>GtkLabel</class>
-      <child_name>Notebook:tab</child_name>
-      <name>label46</name>
-      <label>Network</label>
-      <justify>GTK_JUSTIFY_CENTER</justify>
-      <wrap>False</wrap>
-      <xalign>0.5</xalign>
-      <yalign>0.5</yalign>
-      <xpad>0</xpad>
-      <ypad>0</ypad>
     </widget>
   </widget>
 </widget>
