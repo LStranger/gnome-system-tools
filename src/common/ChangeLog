@@ -3,6 +3,9 @@
 	* xst-tool.c (report_progress): Commented out async directive
 	code that caused warnings. Async directives are not functional
 	now.
+	(report_progress): A sleep here lets the X server take care of
+	drawing, and avoids dangling windows. Sorry if this had to be
+	done. Any suggestions?
 
 2001-12-16  Chema Celorio  <chema@celorio.com>
 

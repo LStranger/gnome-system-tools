@@ -448,7 +448,9 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 static gboolean
 report_window_close_cb (GtkWidget *window, gpointer data)
 {
-	gtk_widget_hide (window);
+	XstTool *tool = data;
+
+	gtk_widget_hide (tool->report_window);
 	return TRUE;
 }
 
@@ -473,14 +475,15 @@ report_progress (XstTool *tool, const gchar *label)
 
 	if (label) {
 		gtk_label_set_text (GTK_LABEL (tool->report_label), label);
-		gtk_signal_connect_after (GTK_OBJECT (tool->report_window), "delete-event",
-					  GTK_SIGNAL_FUNC (report_window_close_cb), NULL);
+		gtk_signal_connect (GTK_OBJECT (tool->report_window), "delete-event",
+				    GTK_SIGNAL_FUNC (report_window_close_cb), tool);
 		gtk_widget_show_all (tool->report_window);
-		gnome_canvas_update_now (GNOME_CANVAS
-					 (xst_ui_image_widget_get (tool->report_gui, "report_pixmap")));
-		gtk_widget_queue_draw (glade_xml_get_widget (tool->report_gui, "report_label"));
-		while (gtk_events_pending ())
+
+		while (gtk_events_pending ()) {
+			usleep (100);
 			gtk_main_iteration ();
+		}
+		sleep (1);
 	}
 
 	tool->input_id = gtk_input_add_full (tool->backend_read_fd, GDK_INPUT_READ,
