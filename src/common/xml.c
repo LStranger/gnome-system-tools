@@ -70,11 +70,9 @@ xml_element_find_next (xmlNodePtr sibling, char *name)
 	
 	g_return_val_if_fail (sibling != NULL, NULL);
 
-	for (node = sibling->next; node;)
-	{
-		if (!strcmp (name, node->name)) break;
-		node = node->next;
-	}
+	for (node = sibling->next; node; node = node->next)
+		if (!strcmp (name, node->name))
+			break;
 
 	return (node);
 }

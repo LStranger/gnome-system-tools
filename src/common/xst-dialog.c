@@ -144,7 +144,7 @@ xst_dialog_modify_cb (GtkWidget *w, gpointer data)
 }
 
 static void
-xst_dialog_destroy (XstTool *tool)
+xst_dialog_destroy (GtkObject *tool)
 {
 	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (tool));
 }
@@ -338,12 +338,14 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 
 	dialog->tool = tool;
 
-       	s = g_strdup_printf ("%s-admin", tool->name);
+	s = g_strdup_printf ("%s-admin", tool->name);
 	gnome_app_construct (GNOME_APP (dialog), s, title);
 	g_free (s);
 
+	gtk_signal_connect (GTK_OBJECT (dialog), "delete_event", close_cb, dialog);
+	
 	xml = xst_tool_load_glade_common (tool, "tool_vbox");
-
+	
 	w = glade_xml_get_widget (xml, "tool_vbox");
 	gnome_app_set_contents (GNOME_APP (dialog), w);
 
