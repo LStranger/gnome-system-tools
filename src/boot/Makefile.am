@@ -16,7 +16,8 @@ boot_admin_SOURCES = \
 	main.c \
 	callbacks.c callbacks.h \
 	transfer.c transfer.h \
-	e-table.c e-table.h 
+	e-table.c e-table.h \
+	boot-settings.c boot-settings.h 
 
 boot_admin_CFLAGS = 
 
