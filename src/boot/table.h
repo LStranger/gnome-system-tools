@@ -39,6 +39,15 @@ enum {
 	BOOT_LIST_COL_LAST
 };
 
+enum {
+	POPUP_NONE,
+	POPUP_ADD,
+	POPUP_SEPARATOR, 
+	POPUP_SETTINGS,
+        POPUP_DELETE
+};
+
+
 typedef struct 
 {
 	gchar *name;

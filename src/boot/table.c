@@ -49,6 +49,33 @@ BootTableConfig boot_table_config [] = {
 	{NULL}
 };
 
+GtkItemFactoryEntry popup_menu_items[] = {
+	{ N_("/_Add ..."), NULL, G_CALLBACK (on_popup_add_activate), POPUP_ADD, "<StockItem>", GTK_STOCK_ADD },
+	{ "/" , NULL, NULL, POPUP_SEPARATOR, "<Separator>", NULL},
+	{ N_("/_Properties"), NULL, G_CALLBACK (on_popup_settings_activate), POPUP_SETTINGS, "<StockItem>", GTK_STOCK_PROPERTIES },
+	{ N_("/_Delete"), NULL, G_CALLBACK (on_popup_delete_activate), POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+};
+
+static char *
+boot_item_factory_trans (const char *path, gpointer data)
+{
+	return _((gchar*)path);
+}
+
+static GtkItemFactory *
+boot_popup_item_factory_create ()
+{
+	GtkItemFactory *item_factory;
+
+	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
+	gtk_item_factory_set_translate_func (item_factory, boot_item_factory_trans,
+					     NULL, NULL);
+	gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (popup_menu_items),
+				       popup_menu_items, (gpointer) boot_table);
+
+	return item_factory;
+}
+
 void
 table_create (void)
 {
@@ -56,6 +83,7 @@ table_create (void)
 	GtkCellRenderer *renderer;
 	GtkTreeSelection *selection;
 	GtkTreeViewColumn *column;
+	GtkItemFactory *item_factory;
 	gint i;
 
 	/* We create the pixbufs we are going to use in the table */
@@ -91,9 +119,14 @@ table_create (void)
 			  G_CALLBACK (on_boot_table_cursor_changed),
 			  NULL);
 
+	item_factory = boot_popup_item_factory_create ();
+	
 	/* We add the signal that will change the default option */
 	g_signal_connect (G_OBJECT (boot_table), "cursor-changed",
 			  G_CALLBACK (on_boot_table_clicked), NULL);
+	g_signal_connect (G_OBJECT (boot_table), "button_press_event",
+			  G_CALLBACK (on_boot_table_button_press),
+			  (gpointer) item_factory);
 }
 
 void

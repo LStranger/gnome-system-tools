@@ -38,9 +38,5 @@ gboolean         boot_settings_gui_save     (BootSettingsGui *gui, gboolean chec
 void             boot_settings_gui_error    (GtkWindow *parent, gchar *error);
 void             boot_settings_gui_destroy  (BootSettingsGui *gui);
 GList            *settings_type_list        (void);
-/* Callbacks */ 
-
-void             on_boot_add_clicked        (GtkButton *button, gpointer data);
-void             on_boot_settings_clicked   (GtkButton *button, gpointer data);
 
 #endif /* BOOT_SETTINGS_H */

@@ -41,49 +41,6 @@
 extern GstTool *tool;
 extern GtkWidget *boot_table;
 
-void
-on_boot_settings_clicked (GtkButton *button, gpointer data)
-{
-	GtkTreeSelection *selection;
-	GtkTreeModel *model;
-	GtkTreeIter iter;
-	BootImage *image;
-	BootImageEditor *editor;
-	xmlNodePtr node;
-	
-	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
-	
-	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
-		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
-	}
-
-
-	if (gst_tool_get_access (tool)) {
-		image = boot_image_get_by_node (node);
-		editor = boot_image_editor_new (image);
-
-		gtk_widget_show (GTK_WIDGET (editor));
-	}
-}
-
-void
-on_boot_add_clicked (GtkButton *button, gpointer data)
-{
-	BootDruid *druid;
-
-	if (gst_tool_get_access (tool)) {
-		druid = boot_druid_new ();
-
-		if (druid)
-			gtk_widget_show_all (GTK_WIDGET (druid));
-		else {
-			gchar *error = g_strdup ("Can't add more images, maximum count reached.");
-
-			boot_settings_gui_error (GTK_WINDOW (tool->main_dialog), error);
-		}		
-	}
-}
-
 static GList *
 settings_dev_list (GstBootImageType ctype)
 {

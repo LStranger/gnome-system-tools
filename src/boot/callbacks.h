@@ -36,5 +36,13 @@ void      on_main_dialog_update_complexity (GstDialog *main_dialog, gpointer dat
 void      callbacks_actions_set_sensitive      (gboolean state);
 gboolean  callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, gpointer data);
 
+void on_popup_add_activate (gpointer, guint, GtkWidget*);
+void on_popup_settings_activate (gpointer, guint, GtkWidget*);
+void on_popup_delete_activate (gpointer, guint, GtkWidget*);
+gboolean on_boot_table_button_press (GtkTreeView*, GdkEventButton*, gpointer);
+
+void on_boot_add_clicked (GtkButton*, gpointer);
+void on_boot_settings_clicked (GtkButton*, gpointer);
+
 #endif /* CALLBACKS_H */
 

@@ -30,6 +30,8 @@
 
 #include "gst.h"
 #include "gst-report-hook.h"
+#include "boot-image-editor.h"
+#include "boot-druid.h"
 #include "callbacks.h"
 #include "transfer.h"
 #include "table.h"
@@ -40,6 +42,51 @@ extern GtkTreeIter default_entry_iter;
 
 extern GdkPixbuf *selected_icon;
 extern GdkPixbuf *not_selected_icon;
+
+
+void
+on_boot_add_clicked (GtkButton *button, gpointer data)
+{
+	BootDruid *druid;
+
+	if (gst_tool_get_access (tool)) {
+		druid = boot_druid_new ();
+
+		if (druid)
+			gtk_widget_show_all (GTK_WIDGET (druid));
+		else {
+			gchar *error = g_strdup ("Can't add more images, maximum count reached.");
+
+			boot_settings_gui_error (GTK_WINDOW (tool->main_dialog), error);
+		}
+	}
+}
+
+void
+on_boot_settings_clicked (GtkButton *button, gpointer data)
+{
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
+	BootImage *image;
+	BootImageEditor *editor;
+	xmlNodePtr node;
+
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
+
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
+	}
+
+
+	if (gst_tool_get_access (tool)) {
+		image = boot_image_get_by_node (node);
+		editor = boot_image_editor_new (image);
+
+		gtk_widget_show (GTK_WIDGET (editor));
+	}
+}
+
 
 gboolean
 on_boot_table_clicked (GtkWidget *w, gpointer data)
@@ -88,6 +135,48 @@ void
 on_boot_table_cursor_changed (GtkTreeSelection *selection, gpointer data)
 {
 	callbacks_actions_set_sensitive (TRUE);
+}
+
+gboolean
+on_boot_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
+{
+	GtkTreePath *path;
+	GtkItemFactory *factory;
+
+	factory = (GtkItemFactory *) gdata;
+
+	if (event->button == 3)
+	{
+		gtk_widget_grab_focus (GTK_WIDGET (treeview));
+		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
+		{
+			gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (treeview));
+			gtk_tree_selection_select_path (gtk_tree_view_get_selection (treeview), path);
+
+			gtk_item_factory_popup (factory, event->x_root, event->y_root,
+						event->button, event->time);
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
+
+void
+on_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_boot_add_clicked (callback_data, NULL);
+}
+
+void
+on_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_boot_settings_clicked (callback_data, NULL);
+}
+
+void
+on_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget)
+{
+	on_boot_delete_clicked (callback_data, NULL);
 }
 
 /* Helpers */
