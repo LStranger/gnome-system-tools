@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools-0.2.1-cvs\n"
-"POT-Creation-Date: 2001-02-03 00:49+0100\n"
+"POT-Creation-Date: 2001-02-05 21:57+0100\n"
 "PO-Revision-Date: 2001-02-03 00:49+0100\n"
 "Last-Translator: Christian Meyer <cm@ggtt.de>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
@@ -606,7 +606,7 @@ msgstr "DNS"
 msgid "Aliases of other computers."
 msgstr "Aliase von anderen Computern."
 
-#: interfaces/network.glade.h:31 src/network/connection.c:118
+#: interfaces/network.glade.h:31 src/network/connection.c:119
 msgid "Active"
 msgstr "Aktiv"
 
@@ -658,15 +658,15 @@ msgstr "Wie die IP-Adresse für diese Verbindung bestimmt wird"
 msgid "Configuration:"
 msgstr "Konfiguration:"
 
-#: interfaces/network.glade.h:52 src/network/connection.c:473
+#: interfaces/network.glade.h:52 src/network/connection.c:474
 msgid "Manual"
 msgstr "Manuell"
 
-#: interfaces/network.glade.h:53 src/network/connection.c:474
+#: interfaces/network.glade.h:53 src/network/connection.c:475
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.h:54 src/network/connection.c:475
+#: interfaces/network.glade.h:54 src/network/connection.c:476
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -921,6 +921,9 @@ msgid ""
 "network using exports. SMB exports are compatible with Microsoft Windows "
 "(TM) and Unix or Linux machines with Samba installed."
 msgstr ""
+"Die Verzeichnisse auf Ihrem Computer können Sie über Exporte zugänglich "
+"machen. SMB-Exporte sind kompatibel mit Microsoft Windows (TM) und mit Unix "
+"oder Linux auf denen Samba installiert ist."
 
 #: interfaces/shares.glade.h:59
 msgid "SMB exports"
@@ -1355,7 +1358,7 @@ msgstr "Einstellungen für den Alias von "
 msgid "Create New Alias"
 msgstr "Neuen Alias erstellen"
 
-#: src/nameresolution/callbacks.c:387 src/network/callbacks.c:341
+#: src/nameresolution/callbacks.c:387 src/network/callbacks.c:316
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Sind Sie sicher, dass Sie die Aliase für %s löschen wollen?"
@@ -1366,7 +1369,7 @@ msgid "Settings for Alias %s"
 msgstr "Einstellungen für Alias %s"
 
 #. Changes have been made.
-#: src/nameresolution/callbacks.c:651 src/network/connection.c:367
+#: src/nameresolution/callbacks.c:651 src/network/connection.c:368
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
@@ -1428,6 +1431,8 @@ msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
 msgstr ""
+"Während der Ausführung des Backend-Scripts\n"
+"ist ein Fehler aufgetreten. Die Konfiguration konnte nicht geladen werden."
 
 #: src/common/xst-tool.c:524
 msgid "Pretending we are root..."
@@ -1464,62 +1469,66 @@ msgstr "Swapbereich %s existiert bereits."
 msgid "Swap Management - Ximian Setup Tools"
 msgstr "Swap-Verwaltung - Ximian Setup Tools"
 
-#: src/network/callbacks.c:386
+#: src/network/callbacks.c:361
 msgid "The name of this computer"
 msgstr "Der Name Ihres Computers ist leer"
 
-#: src/network/callbacks.c:389
+#: src/network/callbacks.c:364
 msgid "A short description of your computer"
 msgstr "Eine Kurze Beschreibung Ihres Computers"
 
-#: src/network/callbacks.c:392
+#: src/network/callbacks.c:367
 msgid "The Windows Networking workgroup for your network"
 msgstr "Die Windows Netzwerk \"Workgroup\" für Ihr Netzwerk"
 
-#: src/network/callbacks.c:395
+#: src/network/callbacks.c:370
 msgid "The IP address of your WINS server"
 msgstr "Die IP-Adresse Ihres WINS-Servers"
 
-#: src/network/callbacks.c:398
+#: src/network/callbacks.c:373
 msgid "The DNS domain for your computer"
 msgstr "Die DNS-Domäne für Ihren Computer"
 
-#: src/network/callbacks.c:401
+#: src/network/callbacks.c:376
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Eine Liste von IP-Adressen Ihres DNS-Servers"
 
-#: src/network/callbacks.c:404
+#: src/network/callbacks.c:379
 msgid "A list of domains where hosts will be searched"
 msgstr "Eine Liste von Domänen wo Hosts gesucht werden sollen"
 
-#: src/network/callbacks.c:407
+#: src/network/callbacks.c:382
 msgid "The IP address of this host"
 msgstr "Die IP-Adresse dieses Hosts"
 
-#: src/network/callbacks.c:410
+#: src/network/callbacks.c:385
 msgid "Aliases for this host, one per line"
 msgstr "Aliase für diesen Host, einen pro Zeile"
 
-#: src/network/callbacks.c:484
+#: src/network/callbacks.c:459
 msgid "Remove this connection?"
 msgstr "Diese Verbindung entfernen?"
 
-#: src/network/connection.c:118
+#: src/network/connection.c:119
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/network/connection.c:234
+#: src/network/connection.c:235
 msgid "Ethernet connection"
 msgstr "Ethernet-Verbindung"
 
-#: src/network/connection.c:238
+#: src/network/connection.c:239
 msgid "WaveLAN connection"
 msgstr "WaveLAN-Verbindung"
 
-#: src/network/connection.c:242
+#: src/network/connection.c:243
 msgid "PPP connection"
 msgstr "PPP-Verbindung"
 
-#: src/network/connection.c:246
+#: src/network/connection.c:247
 msgid "Unknown type connection"
 msgstr "Unbekannter Verbindungstyp"
+
+#: src/network/main.c:105
+msgid "Network Settings - Ximian Setup Tools"
+msgstr "Netzwerkeinstellungen - Ximian Setup Tools"
