@@ -98,7 +98,7 @@ typedef struct {
 
 /*static GSList *connections;*/
 
-GstTool *tool;
+extern GstTool *tool;
 
 static gboolean
 connection_xml_get_boolean (xmlNode *node, gchar *elem)
