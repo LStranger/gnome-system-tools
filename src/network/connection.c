@@ -1354,6 +1354,7 @@ connection_new_from_type (GstConnectionType type, xmlNode *root)
 	case GST_CONNECTION_PPP:
 		cxn->user = TRUE;
 		cxn->autoboot = FALSE;
+		cxn->set_default_gw = TRUE;
 		break;
 	case GST_CONNECTION_PLIP:
 		cxn->autoboot = FALSE;
