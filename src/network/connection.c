@@ -1636,6 +1636,7 @@ hookup_callbacks (XstConnection *cxn)
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
 		{ "on_ppp_update_dns_toggled", on_ppp_update_dns_toggled },
 		{ "on_ip_address_focus_out", on_ip_address_focus_out },
+		{ "on_ip_netmask_focus_out", on_ip_address_focus_out },
 		{ NULL }
 	};
 
