@@ -439,7 +439,7 @@ gst_iface_disable (GstIface *iface)
   iface->_priv->is_enabled = FALSE;
 }
 
-static const gchar*
+const gchar*
 gst_iface_get_iface_type (GstIface *iface)
 {
   if (GST_IFACE_GET_CLASS (iface)->get_iface_type == NULL)

@@ -36,13 +36,18 @@ enum {
   COL_LAST
 };
 
+typedef enum {
+  SEARCH_DEV,
+  SEARCH_TYPE
+} IfaceSearchTerm;
+
 GtkTreeModel* ifaces_model_create                   (void);
 void          ifaces_model_set_interface_at_iter    (GstIface*, GtkTreeIter*);
 void          ifaces_model_set_interface_from_node_at_iter (xmlNodePtr, GtkTreeIter*);
 void          ifaces_model_add_interface            (GstIface*);
 void          ifaces_model_add_interface_from_node  (xmlNodePtr);
 void          ifaces_model_modify_interface_at_iter (GtkTreeIter*);
-GstIface*     ifaces_model_get_iface_by_name        (const gchar*);
+GstIface*     ifaces_model_search_iface             (IfaceSearchTerm, const gchar*);
 void          ifaces_model_clear                    (void);
 
 GtkTreeModelFilter* gateways_filter_model_create    (GtkTreeModel *model);

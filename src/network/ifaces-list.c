@@ -239,30 +239,41 @@ ifaces_model_add_interface_from_node (xmlNodePtr node)
 }
 
 GstIface*
-ifaces_model_get_iface_by_name (const gchar *dev)
+ifaces_model_search_iface (IfaceSearchTerm search_term, const gchar *term)
 {
   GtkTreeModel *model;
   GtkTreeIter   iter;
   gboolean      valid;
-  gchar        *iter_dev;
+  gchar        *dev, *item;
   GstIface     *iface = NULL;
 
-  g_return_val_if_fail (dev != NULL, NULL);
+  g_return_val_if_fail (term != NULL, NULL);
 
   model = GST_NETWORK_TOOL (tool)->interfaces_model;
   valid = gtk_tree_model_get_iter_first (model, &iter);
 
   while (valid)
     {
-      gtk_tree_model_get (model, &iter, COL_DEV, &iter_dev, -1);
+      gtk_tree_model_get (model, &iter,
+			  COL_OBJECT, &iface,
+			  COL_DEV,    &dev,
+			  -1);
 
-      if (strcmp (iter_dev, dev) == 0)
-        {
-          gtk_tree_model_get (model, &iter, COL_OBJECT, &iface, -1);
-          valid = FALSE;
-        }
+      if (search_term == SEARCH_DEV)
+	item = dev;
       else
-        valid = gtk_tree_model_iter_next (model, &iter);
+	item = gst_iface_get_iface_type (iface);
+
+      if (strcmp (term, item) == 0)
+	valid = FALSE;
+      else
+        {
+          valid = gtk_tree_model_iter_next (model, &iter);
+	  g_object_unref (iface);
+	  iface = NULL;
+	}
+
+      g_free (dev);
     }
 
   return iface;

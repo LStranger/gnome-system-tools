@@ -80,6 +80,7 @@ void         gst_iface_disable (GstIface*);
 void         gst_iface_get_xml (GstIface*, xmlNodePtr);
 const GdkPixbuf *gst_iface_get_pixbuf (GstIface *iface);
 gchar       *gst_iface_get_desc (GstIface *iface);
+const gchar *gst_iface_get_iface_type (GstIface *iface);
 
 gboolean     gst_iface_is_configured (GstIface*);
 gboolean     gst_iface_has_gateway (GstIface*);

@@ -77,7 +77,7 @@ static GstDialogSignal signals[] = {
 };
 
 static void
-init_standalone_dialog (const gchar *interface)
+init_standalone_dialog (IfaceSearchTerm search_term, const gchar *term)
 {
   GstNetworkTool *network_tool;
   GstIface       *iface;
@@ -85,7 +85,7 @@ init_standalone_dialog (const gchar *interface)
 
   network_tool = GST_NETWORK_TOOL (tool);
   gst_tool_main_with_hidden_dialog (tool, TRUE);
-  iface  = ifaces_model_get_iface_by_name (interface);
+  iface = ifaces_model_search_iface (search_term, term);
 
   if (iface)
     {
@@ -102,8 +102,7 @@ init_standalone_dialog (const gchar *interface)
                                   GTK_DIALOG_MODAL,
                                   GTK_MESSAGE_WARNING,
                                   GTK_BUTTONS_CLOSE,
-                                  _("The interface \"%s\" does not exist"),
-                                  interface, NULL);
+                                  _("The interface does not exist"));
       gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (d),
                                                 _("Check that it is correctly typed "
                                                   "and that it is correctly supported "
@@ -131,9 +130,11 @@ int
 main (int argc, gchar *argv[])
 {
   gchar *interface = NULL;
+  gchar *type = NULL;
 
   GOptionEntry entries[] = {
-    { "configure", 'c', 0, G_OPTION_ARG_STRING, &interface, N_("Configure a network interface"), N_("INTERFACE") },
+    { "configure",      'c', 0, G_OPTION_ARG_STRING, &interface, N_("Configure a network interface"), N_("INTERFACE") },
+    { "configure-type", 't', 0, G_OPTION_ARG_STRING, &type,      N_("Configure the first network interface with a specific type"), N_("TYPE") },
     { NULL }
   };
 
@@ -148,7 +149,9 @@ main (int argc, gchar *argv[])
   init_filters ();
 
   if (interface)
-    init_standalone_dialog (interface);
+    init_standalone_dialog (SEARCH_DEV, interface);
+  else if (type)
+    init_standalone_dialog (SEARCH_TYPE, type);
   else
     gst_tool_main (tool, FALSE);
 
