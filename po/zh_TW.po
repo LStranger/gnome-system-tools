@@ -1,19 +1,21 @@
+# translation of gnome-system-tools.HEAD.po to 
 # traditional Chinese translation for gnome-system-tools.
 # Copyright (C) 2001, 2002, 2003, 2004 Free Software Foundation, Inc.
 # Abel Cheung <maddog@linux.org.hk>, 2001-2003.
-# Chao-Hsiung Liao <pesder.liao@msa.hinet.net>, 2004
+# Chao-Hsiung Liao <pesder.liao@msa.hinet.net>, 2004.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools 0.92\n"
+"Project-Id-Version: gnome-system-tools 0.92.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-09-09 06:45+0800\n"
-"PO-Revision-Date: 2004-09-09 06:46+0800\n"
+"POT-Creation-Date: 2004-09-12 19:52+0200\n"
+"PO-Revision-Date: 2004-09-13 10:40+0800\n"
 "Last-Translator: Chao-Hsiung Liao <pesder.liao@msa.hinet.net>\n"
 "Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.3.1\n"
 
 #: gnome-system-tools.schemas.in.h:1
 msgid ""
@@ -91,20 +93,24 @@ msgid "<b>Security</b>"
 msgstr "<b>安全性</b>"
 
 #: interfaces/boot.glade.in.h:7
-#, fuzzy
 msgid ""
 "<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
 "Use this tool to specify which operating systems users can choose at startup"
-msgstr "本工具可以設定啟動電腦時使用者可選擇的作業系統。"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">開機管理程式設定</span>\n"
+"本工具可以設定啟動電腦時使用者可選擇的作業系統。"
 
 #: interfaces/boot.glade.in.h:9
-#, fuzzy
 msgid ""
 "<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
 "span>\n"
 "\n"
 "please select which do you want to configure"
-msgstr "在這個系統上找到多個開機載入程式，請選擇您要設定哪一個。"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">在這個系統上找到多個開機載入程式</"
+"span>\n"
+"\n"
+"請選擇您要設定哪一個"
 
 #: interfaces/boot.glade.in.h:12 interfaces/users.glade.in.h:6
 msgid "<span weight=\"bold\">Basic Settings</span>"
@@ -259,8 +265,7 @@ msgstr "根目錄檔案系統所在裝置(_R):"
 msgid ""
 "<span weight=\"bold\" size=\"larger\">The platform you are running is not "
 "supported by this tool</span>"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">您所執行的平臺尚未被本工具支援</span>"
+msgstr "<span weight=\"bold\" size=\"larger\">您所執行的平臺尚未被本工具支援</span>"
 
 #: interfaces/common.glade.in.h:3
 msgid ""
@@ -323,6 +328,11 @@ msgid ""
 "/dev/ttyS2\n"
 "/dev/ttyS3\n"
 msgstr ""
+"/dev/modem\n"
+"/dev/ttyS0\n"
+"/dev/ttyS1\n"
+"/dev/ttyS2\n"
+"/dev/ttyS3\n"
 
 #: interfaces/network.glade.in.h:8
 msgid "<b>Profile Settings</b>"
@@ -333,6 +343,8 @@ msgid ""
 "<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
 "Use this tool for configuring the way your system access to other computers"
 msgstr ""
+"<span weight=\"bold\" size=\"larger\">網路設定</span>\n"
+"使用這個工具來設定您的系統存取其他電腦的方式"
 
 #: interfaces/network.glade.in.h:11
 msgid "<span weight=\"bold\">Access Settings</span>"
@@ -399,13 +411,12 @@ msgid "Activate when the computer _starts"
 msgstr "當電腦啟動時生效(_S)"
 
 #: interfaces/network.glade.in.h:27
-#, fuzzy
 msgid "Add DNS server"
-msgstr "WINS 伺服器(_N):"
+msgstr "加入 DNS 伺服器"
 
 #: interfaces/network.glade.in.h:28
 msgid "Add search domain"
-msgstr ""
+msgstr "加入搜尋網域"
 
 #: interfaces/network.glade.in.h:29
 msgid "Address configuration"
@@ -445,9 +456,8 @@ msgid "DNS"
 msgstr "DNS"
 
 #: interfaces/network.glade.in.h:38
-#, fuzzy
 msgid "DNS Servers"
-msgstr "時間校對伺服器"
+msgstr "DNS 伺服器"
 
 #: interfaces/network.glade.in.h:39
 msgid "D_omain name:"
@@ -458,13 +468,12 @@ msgid "Default gateway device:"
 msgstr "預設通訊閘裝置:"
 
 #: interfaces/network.glade.in.h:41
-#, fuzzy
 msgid "Delete DNS server"
-msgstr "選取伺服器(_L)..."
+msgstr "刪除 DNS 伺服器"
 
 #: interfaces/network.glade.in.h:42
 msgid "Delete search domain"
-msgstr ""
+msgstr "刪除搜尋網域"
 
 #: interfaces/network.glade.in.h:43
 msgid "Device:"
@@ -536,8 +545,7 @@ msgstr "現在請輸入這個網路裝置本身所使用的位址。"
 msgid ""
 "Now, please specify if this connection should be enabled, this means that "
 "the configuration will be applied when the assistant finishes."
-msgstr ""
-"現在請決定是否要啟用這個連線，這表示當此輔助程式結束時就會套用這個組態。"
+msgstr "現在請決定是否要啟用這個連線，這表示當此輔助程式結束時就會套用這個組態。"
 
 #: interfaces/network.glade.in.h:60
 msgid "Number to _access an external line:"
@@ -585,7 +593,7 @@ msgstr "次要(_C):"
 
 #: interfaces/network.glade.in.h:70
 msgid "Search Domains"
-msgstr ""
+msgstr "搜尋網域"
 
 #: interfaces/network.glade.in.h:71
 msgid "Set _DNS servers manually"
@@ -604,8 +612,7 @@ msgstr ""
 "網路連線。"
 
 #: interfaces/network.glade.in.h:75
-msgid ""
-"This is the list of IP addresses that the system will use as name servers"
+msgid "This is the list of IP addresses that the system will use as name servers"
 msgstr "這是系統用來當做名稱伺服器的 IP 位址清單"
 
 #: interfaces/network.glade.in.h:76
@@ -767,19 +774,20 @@ msgid "_Wireless"
 msgstr "無線網路(_W)"
 
 #: interfaces/network.glade.in.h:115
-#, fuzzy
 msgid "new DNS server"
-msgstr "DNS 伺服器錯誤"
+msgstr "新增 DNS 伺服器"
 
 #: interfaces/network.glade.in.h:116
 msgid "new search domain"
-msgstr ""
+msgstr "新增搜尋網域"
 
 #: interfaces/services.glade.in.h:1
 msgid ""
 "<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
 "use this tool to specify which services to run at boot time"
 msgstr ""
+"<span size=\"larger\" weight=\"bold\">服務設定</span>\n"
+"使用這個工具來指定開機時要執行哪些服務"
 
 #: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">General Information</span>"
@@ -826,35 +834,32 @@ msgid ":"
 msgstr ":"
 
 #: interfaces/time.glade.in.h:4
-#, fuzzy
 msgid "<b>Selection</b>"
-msgstr "<b>安全性</b>"
+msgstr "<b>選擇區</b>"
 
 #: interfaces/time.glade.in.h:5
-#, fuzzy
 msgid "<b>Time zone</b>"
-msgstr "時區:"
+msgstr "<b>時區</b>"
 
 #: interfaces/time.glade.in.h:6
 msgid ""
 "<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
 "Use this tool for setting your current date, time and time zone"
 msgstr ""
+"<span size=\"larger\" weight=\"bold\">時刻與日期設定</span>\n"
+"使用這個工具來設定您目前的日期、時刻與時區"
 
 #: interfaces/time.glade.in.h:8
-#, fuzzy
 msgid "<span weight=\"bold\">Time Configuration</span>"
-msgstr "<span weight=\"bold\">時間設定</span>"
+msgstr "<span weight=\"bold\">時間組態</span>"
 
 #: interfaces/time.glade.in.h:9
-#, fuzzy
 msgid "Add NTP Server"
-msgstr "時間校對伺服器"
+msgstr "加入 NTP 伺服器"
 
 #: interfaces/time.glade.in.h:10
-#, fuzzy
 msgid "NTP server"
-msgstr "WINS 伺服器(_N):"
+msgstr "NTP 伺服器"
 
 #: interfaces/time.glade.in.h:11
 msgid "S_ynchronize clock with Internet servers:"
@@ -865,14 +870,12 @@ msgid "Se_lect Servers..."
 msgstr "選取伺服器(_L)..."
 
 #: interfaces/time.glade.in.h:13
-#, fuzzy
 msgid "Time servers"
-msgstr "時間校對伺服器"
+msgstr "時刻校對伺服器"
 
 #: interfaces/time.glade.in.h:14
-#, fuzzy
 msgid "Time zone"
-msgstr "時區:"
+msgstr "時區"
 
 #: interfaces/time.glade.in.h:15
 msgid "Time zone:"
@@ -891,27 +894,28 @@ msgid "_Time:"
 msgstr "時間(_T):"
 
 #: interfaces/time.glade.in.h:19
-#, fuzzy
 msgid "date"
-msgstr "日期(_D):"
+msgstr "日期"
 
 #: interfaces/time.glade.in.h:20
 msgid "hours"
-msgstr ""
+msgstr "小時"
 
 #: interfaces/time.glade.in.h:21
 msgid "minutes"
-msgstr ""
+msgstr "分鐘"
 
 #: interfaces/time.glade.in.h:22
 msgid "seconds"
-msgstr ""
+msgstr "秒鐘"
 
 #: interfaces/users.glade.in.h:2
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
 "Use this tool for configuring users and groups settings in your system"
 msgstr ""
+"<span weight=\"bold\" size=\"larger\">使用者與群組設定</span>\n"
+"使用這個工具來設定您系統中的使用者與群組"
 
 #: interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Advanced Settings</span>"
@@ -994,7 +998,6 @@ msgid "Group _name:"
 msgstr "群組名稱(_N):"
 
 #: interfaces/users.glade.in.h:27
-#, fuzzy
 msgid "Group properties"
 msgstr "群組屬性"
 
@@ -1059,7 +1062,6 @@ msgid "User _password:"
 msgstr "使用者密碼(_P):"
 
 #: interfaces/users.glade.in.h:44
-#, fuzzy
 msgid "User profiles"
 msgstr "使用者設定檔"
 
@@ -1198,29 +1200,29 @@ msgid "GNU/Hurd"
 msgstr "GNU/Hurd"
 
 #: src/boot/boot-image.c:276
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" is an invalid path"
-msgstr "“%s” 不是有效的 vga 數值"
+msgstr "“%s” 不是有效的路徑"
 
 #: src/boot/boot-image.c:292
-#, fuzzy, c-format
+#, c-format
 msgid "\"%s\" already exists, please set another name"
-msgstr "影像檔‘%s’已經存在，請選用其它名稱。"
+msgstr "‘%s’已經存在，請設定其它名稱。"
 
 #: src/boot/boot-image.c:298
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid image name: \"%s\""
 msgstr "無效的影像檔名稱：‘%s’"
 
 #: src/boot/boot-image.c:311
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid image: \"%s\""
 msgstr "無效的影像檔：‘%s’"
 
 #: src/boot/boot-image.c:329
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid root device: \"%s\""
-msgstr "無效的檔案系統裝置：‘%s’"
+msgstr "無效的 root 裝置：‘%s’"
 
 #: src/boot/boot-settings.c:44
 msgid "_Module path:"
@@ -1255,7 +1257,6 @@ msgid "Error deleting boot image"
 msgstr "刪除開機影像檔時發生錯誤"
 
 #: src/boot/callbacks.c:413
-#, fuzzy
 msgid "Without at least one boot image your computer will not start"
 msgstr "沒有任何系統啟動影像檔，系統將會無法啟動。"
 
@@ -1299,20 +1300,17 @@ msgid "Device"
 msgstr "裝置"
 
 #: src/boot/table.c:50 src/network/connection.c:62 src/users/table.c:46
-#, fuzzy
 msgid "_Add"
-msgstr "新增(_A)..."
+msgstr "加入(_A)"
 
 #: src/boot/table.c:51 src/network/connection.c:63 src/users/table.c:47
-#, fuzzy
 msgid "_Properties"
-msgstr "/屬性(_P)"
+msgstr "屬性(_P)"
 
 #. the proccess was running ssh
 #: src/common/gst-auth.c:89
-#, fuzzy
 msgid "The tool could not connect to the computer"
-msgstr "無法連接到這臺電腦"
+msgstr "此工具無法連接到這臺電腦"
 
 #: src/common/gst-auth.c:90
 msgid ""
@@ -1322,16 +1320,14 @@ msgstr "請檢查您是否能存取網路，而該電腦也確實在運作並執
 
 #. the proccess was running su
 #: src/common/gst-auth.c:94
-#, fuzzy
 msgid "The entered password is invalid"
 msgstr "輸入的密碼無效"
 
 #: src/common/gst-auth.c:95
-#, fuzzy
 msgid ""
 "Check that you typed it correctly and that you haven't activated the \"caps "
 "lock\" key"
-msgstr "請檢查您是否正確輸入並且沒有按到 caps lock"
+msgstr "請檢查您是否正確輸入並且沒有按到 caps lock 鍵"
 
 #: src/common/gst-auth.c:104
 #, c-format
@@ -1339,14 +1335,12 @@ msgid "Could not run \"%s\""
 msgstr "無法執行“%s”"
 
 #: src/common/gst-auth.c:105
-#, fuzzy
 msgid "Check that you have permissions to run this command"
-msgstr "請檢查您是否有權限執行它。"
+msgstr "請檢查您是否有權限執行此指令。"
 
 #: src/common/gst-auth.c:107
-#, fuzzy
 msgid "An unexpected error has ocurred"
-msgstr "發生了未預期的錯誤。"
+msgstr "發生了未預期的錯誤"
 
 #: src/common/gst-dialog.c:60
 #, c-format
@@ -1354,7 +1348,6 @@ msgid "Could not find widget: %s"
 msgstr "找不到視窗元件：%s"
 
 #: src/common/gst-dialog.c:382
-#, fuzzy
 msgid "There are changes which have not been applied"
 msgstr "尚有已更改的設定未生效"
 
@@ -1376,11 +1369,9 @@ msgid "There was an error running the backend script"
 msgstr "執行背景模組命令稿時發生錯誤"
 
 #: src/common/gst-tool.c:1491
-#, fuzzy, c-format
+#, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
-msgstr ""
-"<span weight=\"bold\" size=\"larger\">歡迎使用GNOME 系統工具的%s 預覽版本</"
-"span>"
+msgstr "歡迎使用GNOME 系統工具的 %s 預覽版本"
 
 #: src/common/gst-tool.c:1493
 msgid ""
@@ -1408,14 +1399,13 @@ msgstr "GNOME 系統設定工具"
 
 #: src/common/gst-tool.c:1771
 msgid "Could not display help"
-msgstr ""
+msgstr "無法顯示說明"
 
 #: src/network/callbacks.c:403
-#, fuzzy
 msgid ""
 "This will disable any network connection with this interface as soon as you "
 "press \"apply\""
-msgstr "當您按下“套用”時就會停用此介面的任何網路連線。"
+msgstr "當您按下“套用”時就會停用此介面的任何網路連線"
 
 #: src/network/callbacks.c:408
 #, c-format
@@ -1427,14 +1417,12 @@ msgid "SMB Support is not running"
 msgstr "沒有執行 SMB 支援"
 
 #: src/network/callbacks.c:517
-#, fuzzy
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable file sharing in Windows networks"
-msgstr "系統沒有任何 SMB 的支援。請在系統中安裝 SMB 支援以支援 windows 網路。"
+msgstr "您沒有安裝 SMB 的支援。請在系統中安裝 SMB 支援以支援 Windows 網路"
 
 #: src/network/callbacks.c:581
-#, fuzzy
 msgid "The host name has changed"
 msgstr "主機名稱已變更"
 
@@ -1449,17 +1437,14 @@ msgid "Change _Host name"
 msgstr "更改主機名稱(_H)"
 
 #: src/network/callbacks.c:629 src/network/callbacks.c:656
-#, fuzzy
 msgid "Wvdial command not found"
-msgstr "找不到 Wvdial"
+msgstr "找不到 Wvdial 指令"
 
 #: src/network/callbacks.c:630
-#, fuzzy
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate"
-msgstr ""
-"在系統中找不到 wvdial。您需要安裝 wvdial，否則PPP (數據機) 連線無法啟用。"
+msgstr "在系統中找不到 wvdial。您需要安裝 wvdial，否則 PPP (數據機) 連線無法啟用"
 
 #: src/network/callbacks.c:657
 msgid ""
@@ -1486,24 +1471,22 @@ msgid "The default gateway device is missing gateway information"
 msgstr "預設的閘道器裝置遺失閘道器資訊"
 
 #: src/network/callbacks.c:734
-#, fuzzy
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device"
-msgstr "請提供這項資訊再繼續，或是另選預設閘道器裝置。"
+msgstr "請提供這項資訊再繼續，或是另選預設閘道器裝置"
 
 #: src/network/callbacks.c:779
 msgid "The program redhat-config-network-cmd could not be found"
 msgstr "找不到 redhat-config-network-cmd 程式"
 
 #: src/network/callbacks.c:780
-#, fuzzy
 msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this"
 msgstr ""
 "這樣會令連線設定失去有關連線的資訊。如要避免此情況發生，請安裝 redhat-config-"
-"network rpm 套件。"
+"network rpm 套件"
 
 #: src/network/callbacks.c:811
 #, c-format
@@ -1536,11 +1519,10 @@ msgid "Could not autodetect modem device"
 msgstr "無法自動偵測數據機裝置"
 
 #: src/network/callbacks.c:954
-#, fuzzy
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer"
-msgstr "請確定它不是正在使用中，而且是正確地連接至電腦。"
+msgstr "請確定它不是正在使用中，而且是正確地連接至電腦"
 
 #: src/network/callbacks.c:1007
 msgid "Silent"
@@ -1597,11 +1579,11 @@ msgstr "使用中"
 
 #: src/network/connection.c:1613
 msgid "Automatic (DHCP)"
-msgstr ""
+msgstr "自動 (DHCP)"
 
 #: src/network/connection.c:1614
 msgid "Automatic (BOOTP)"
-msgstr ""
+msgstr "自動 (BOOTP)"
 
 #: src/network/connection.c:1632
 msgid "Tones"
@@ -1616,73 +1598,66 @@ msgid "Error in IP address"
 msgstr "IP 位址錯誤"
 
 #: src/network/connection.c:1735
-#, fuzzy
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue"
 msgstr ""
-"網路界面的 IP 地址或 netmask 是空白的。請在這些欄位中填上有效的 IP 地址再繼"
-"續。"
+"網路界面的 IP 位址或 netmask 是空白的。請在這些欄位中填上有效的 IP 位址再繼"
+"續"
 
 #: src/network/connection.c:1745
-#, fuzzy
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue"
 msgstr ""
-"網路界面的 IP 地址或遠端地址是空白的。請在這些欄位中填上有效的 IP 地址再繼"
-"續。"
+"網路界面的 IP 位址或遠端位址是空白的。請在這些欄位中填上有效的 IP 位址再繼"
+"續"
 
 #: src/network/connection.c:1753
-#, fuzzy
 msgid "Error in domain name servers"
-msgstr "DNS 伺服器錯誤"
+msgstr "網域名稱伺服器錯誤"
 
 #: src/network/connection.c:1754
-#, fuzzy
 msgid ""
 "You chose to set the domain name servers for this connection manually, but "
 "left the IP address for the primary name server empty. Please enter the IP "
 "for the primary domain name server or uncheck the manual DNS option"
 msgstr ""
 "您已經選擇自行設定本連線的 DNS 伺服器，但主 DNS 的 IP 地址是空白的。請輸入主"
-"DNS 的 IP 或不選擇手動設定 DNS。"
+"DNS 的 IP 或不選擇手動設定 DNS"
 
 #: src/network/connection.c:1761
 msgid "Invalid modem device"
 msgstr "無效的數據機裝置"
 
 #: src/network/connection.c:1762
-#, fuzzy
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue"
-msgstr "此連線所使用的數據機是空白的。請填上一個裝置或按“自動偵測”再繼續。"
+msgstr "此連線所使用的數據機是空白的。請填上一個裝置或按“自動偵測”再繼續"
 
 #: src/network/connection.c:1767
 msgid "Invalid phone number"
 msgstr "無效的電話號碼"
 
 #: src/network/connection.c:1768
-#, fuzzy
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue"
-msgstr "此連線所使用的電話號碼是空白的。請填上有效的電話號碼再繼續。"
+msgstr "此連線所使用的電話號碼是空白的。請填上有效的電話號碼再繼續"
 
 #: src/network/connection.c:2094
-#, fuzzy, c-format
+#, c-format
 msgid "The interface \"%s\" doesn't exist"
-msgstr "介面“%s”不存在。"
+msgstr "介面“%s”不存在"
 
 #: src/network/connection.c:2098
 msgid "Invalid interface"
 msgstr "無效的介面"
 
 #: src/network/connection.c:2099
-#, fuzzy
 msgid "The loopback interface cannot be configured"
-msgstr "不能設定 loopback 介面。"
+msgstr "不能設定 loopback 介面"
 
 #: src/network/dns.c:148 src/network/hosts.c:158
 msgid "IP Address"
@@ -1746,14 +1721,13 @@ msgid "Networking"
 msgstr "網路"
 
 #: src/network/profile.c:51 src/users/profile-settings.c:215
-#, fuzzy
 msgid "You will not be able to recover this profile after pressing \"apply\""
 msgstr "在按下“套用”之後您將無法復原此設定檔"
 
 #: src/network/profile.c:55
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete profile \"%s\"?"
-msgstr "是否確定刪除“%s”？"
+msgstr "是否確定刪除設定檔“%s”？"
 
 #: src/network/profiles-table.c:53
 msgid "Profile name"
@@ -1805,11 +1779,10 @@ msgid "NTP support is not running"
 msgstr "沒有執行 NTP 支援"
 
 #: src/time/main.c:462
-#, fuzzy
 msgid ""
 "Please run NTP support in the system to enable synchronization of your local "
 "time server with internet time servers"
-msgstr "請在系統安裝 NTP 支援，令時間校對服務生效。"
+msgstr "請在系統安裝 NTP 支援，令時間校對服務生效"
 
 #: src/time/main.c:760
 msgid "Time and Date Settings"
@@ -1846,15 +1819,13 @@ msgid "Invalid group ID"
 msgstr "無效的群組 ID"
 
 #: src/users/group-settings.c:164
-#, fuzzy
 msgid "Group ID must be a positive number"
-msgstr "群組 ID 必須為正數。"
+msgstr "群組 ID 必須為正數"
 
 #. if group is root
 #: src/users/group-settings.c:167
-#, fuzzy
 msgid "Group ID of the \"root\" user should not be modified"
-msgstr "不應修改 root 使用者 ID。"
+msgstr "不應修改 \"root\" 使用者的群組 ID"
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
@@ -1864,15 +1835,14 @@ msgid "This would leave the system unusable"
 msgstr "這樣會讓系統停留在無法使用的狀態"
 
 #: src/users/group-settings.c:172
-#, fuzzy, c-format
+#, c-format
 msgid "Group ID %s already exists"
-msgstr "群組 ID %s 已經存在。"
+msgstr "群組 ID %s 已經存在"
 
 #. If empty.
 #: src/users/group-settings.c:197
-#, fuzzy
 msgid "Group name is empty"
-msgstr "群組名稱是空的。"
+msgstr "群組名稱是空的"
 
 #: src/users/group-settings.c:198
 msgid "A group name must be specified"
@@ -1880,9 +1850,8 @@ msgstr "必須指定群組名稱"
 
 #. If too long.
 #: src/users/group-settings.c:201
-#, fuzzy
 msgid "The group name is too long"
-msgstr "群組名稱過長。"
+msgstr "群組名稱過長"
 
 #: src/users/group-settings.c:202
 #, c-format
@@ -1895,15 +1864,14 @@ msgid "Group name has invalid characters"
 msgstr "群組名稱含有不正確的字元。"
 
 #: src/users/group-settings.c:206
-#, fuzzy
 msgid "Please set a valid group name, using only lower case letters"
-msgstr "請設定有效的群組名稱，當中只含有小寫字母。"
+msgstr "請設定有效的群組名稱，當中只含有小寫字母"
 
 #. if !exist.
 #: src/users/group-settings.c:209
-#, fuzzy, c-format
+#, c-format
 msgid "Group \"%s\" already exists"
-msgstr "群組“%s”已經存在。"
+msgstr "群組“%s”已經存在"
 
 #: src/users/group-settings.c:210
 msgid "Please select a different group name"
@@ -1911,23 +1879,21 @@ msgstr "請選擇不同的群組名稱"
 
 #. if it's the root group
 #: src/users/group-settings.c:213
-#, fuzzy
 msgid "Group name of the \"root\" user should not be modified"
-msgstr "不應修改 root 使用者 ID。"
+msgstr "不應修改 \"root\" 使用者的群組名稱"
 
 #: src/users/group-settings.c:283
-#, fuzzy
 msgid "The group \"root\" should not be deleted"
-msgstr "不應刪除 root 群組。"
+msgstr "不應刪除 \"root\" 群組"
 
 #: src/users/group-settings.c:298
 msgid "This may leave files with invalid group ID in the filesystem"
 msgstr "這樣可能會在檔案系統中留下具有無效的群組 ID 的檔案"
 
 #: src/users/group-settings.c:303
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete group \"%s\"?"
-msgstr "是否確定刪除群組 %s？"
+msgstr "是否確定刪除群組 \"%s\"？"
 
 #: src/users/group-settings.c:358
 #, c-format
@@ -1963,18 +1929,17 @@ msgid "Users and Groups"
 msgstr "使用者及群組"
 
 #: src/users/passwd.c:266
-#, fuzzy
 msgid "Passwords do not match"
-msgstr "密碼不符。"
+msgstr "密碼不符"
 
 #: src/users/passwd.c:271
-#, fuzzy, c-format
+#, c-format
 msgid ""
 "Bad password: %s.\n"
 "Please try with a new password"
 msgstr ""
 "密碼不能使用：%s。\n"
-"請嘗試輸入新的密碼。"
+"請嘗試輸入新的密碼"
 
 #: src/users/profile-settings.c:122
 msgid "The profile must have a name"
@@ -1989,13 +1954,12 @@ msgid "The profile must have a default shell"
 msgstr "設定檔中必須指定使用者預設的 shell"
 
 #: src/users/profile-settings.c:204
-#, fuzzy
 msgid "The default profile should not be deleted"
-msgstr "不可刪除“Default”設定檔。"
+msgstr "不可刪除“Default”設定檔"
 
 #: src/users/profile-settings.c:205
 msgid "This profile is used for setting default data for new users"
-msgstr ""
+msgstr "這個設定檔是用來設定新使用者的預設資料"
 
 #: src/users/profile-settings.c:214
 #, c-format
@@ -2024,83 +1988,73 @@ msgid "Text"
 msgstr "文字"
 
 #: src/users/user-settings.c:104
-#, fuzzy
 msgid "The \"root\" user should not be deleted"
-msgstr "不可刪除 root 使用者。"
+msgstr "不可刪除 \"root\" 使用者"
 
 #: src/users/user-settings.c:120
-#, fuzzy, c-format
+#, c-format
 msgid "Are you sure you want to delete user \"%s\"?"
-msgstr "是否確定刪除使用者 %s？"
+msgstr "是否確定刪除使用者 \"%s\"？"
 
 #: src/users/user-settings.c:219
 msgid "User Account Editor"
 msgstr "帳號編輯程式"
 
 #: src/users/user-settings.c:335
-#, fuzzy
 msgid "The user name is empty"
-msgstr "使用者名稱是空的。"
+msgstr "使用者名稱是空的"
 
 #: src/users/user-settings.c:336
-#, fuzzy
 msgid "A user name must be specified"
 msgstr "必須指定使用者名稱"
 
 #. = sizeof (ut.ut_name)
 #: src/users/user-settings.c:342 src/users/user-settings.c:347
-#, fuzzy
 msgid "The user name is too long"
-msgstr "使用者名稱過長。"
+msgstr "使用者名稱過長"
 
 #: src/users/user-settings.c:343 src/users/user-settings.c:348
-#, fuzzy, c-format
+#, c-format
 msgid "The user name should have less than %i characters for being valid"
 msgstr "使用者名稱應該小於 %i 個字元才可以"
 
 #: src/users/user-settings.c:354
-#, fuzzy
 msgid "User name for the \"root\" user should not be modified"
-msgstr "不應修改 root 使用者 ID。"
+msgstr "不應修改 \"root\" 使用者名稱"
 
 #: src/users/user-settings.c:360
-#, fuzzy
 msgid "User name has invalid characters"
-msgstr "使用者名稱含有無效的字元"
+msgstr "使用者名稱含有無效的字"
 
 #: src/users/user-settings.c:361
-#, fuzzy
 msgid ""
 "Please set a valid user name consisting of a lower case letter followed by "
 "lower case letters and numbers"
 msgstr ""
 "請設定有效的使用者名稱，第一個字元只可以是小寫字母，其它的必須是小寫字母或數"
-"字。"
+"字"
 
 #: src/users/user-settings.c:367
-#, fuzzy, c-format
+#, c-format
 msgid "User name \"%s\" already exists"
-msgstr "該使用者名稱“%s”已經存在"
+msgstr "該使用者名稱 \"%s\" 已經存在"
 
 #: src/users/user-settings.c:368
-#, fuzzy
 msgid "Please select a different user name"
 msgstr "請另選使用者名稱"
 
 #: src/users/user-settings.c:393
-#, fuzzy, c-format
+#, c-format
 msgid "Invalid character \"%c\" in comment"
-msgstr "備註中出現無效的字元。"
+msgstr "備註中出現無效的字元\"%c\""
 
 #: src/users/user-settings.c:394
-#, fuzzy
 msgid "Check that this character is not used"
-msgstr "請檢查有無使用不正確的字元‘%c’"
+msgstr "請檢查有無使用此不正確的字元"
 
 #: src/users/user-settings.c:442
-#, fuzzy
 msgid "Home directory should not be empty"
-msgstr "個人目錄不可留空。"
+msgstr "個人目錄不可留空"
 
 #: src/users/user-settings.c:443
 msgid "Make sure you provide a home directory"
@@ -2111,70 +2065,63 @@ msgid "Incomplete path in home directory"
 msgstr "個人目錄含有不完整的路徑"
 
 #: src/users/user-settings.c:446
-#, fuzzy
 msgid ""
 "Please enter full path for home directory\n"
 "<span size=\"smaller\">i.e.: /home/john</span>"
 msgstr ""
-"請輸入個人目錄的完整路徑。\n"
+"請輸入家目錄的完整路徑。\n"
 "<span size=\"smaller\">例: /home/john</span>"
 
 #: src/users/user-settings.c:449
-#, fuzzy
 msgid "Home directory of the \"root\" user should not be modified"
-msgstr "不應修改 root 使用者 ID。"
+msgstr "不應修改 \"root\" 使用者的家目錄"
 
 #: src/users/user-settings.c:482
 msgid "Invalid user ID"
 msgstr "無效的使用者 ID"
 
 #: src/users/user-settings.c:483
-#, fuzzy
 msgid "User ID must be a positive number"
-msgstr "使用者識別碼必須為正數。"
+msgstr "使用者識別碼必須為正數"
 
 #: src/users/user-settings.c:485
-#, fuzzy
 msgid "User ID of the \"root\" user should not be modified"
-msgstr "不應修改 root 使用者 ID。"
+msgstr "不應修改 \"root\" 使用者的使用者 ID"
 
 #: src/users/user-settings.c:502
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
-msgstr ""
+msgstr "有的使用者可能會共享單一的使用者 ID ，但這並不普遍而且可能導致安全性的問題"
 
 #: src/users/user-settings.c:507
-#, fuzzy, c-format
+#, c-format
 msgid "User ID %s already exists"
-msgstr "使用者 ID %s已經存在。"
+msgstr "使用者 ID %s 已經存在"
 
 #: src/users/user-settings.c:524
 msgid "Incomplete path in shell"
 msgstr "shell 含有不完整的路徑"
 
 #: src/users/user-settings.c:525
-#, fuzzy
 msgid ""
 "Please enter full path for shell\n"
 "<span size=\"smaller\">i.e.: /bin/sh</span>"
 msgstr ""
-"請輸入 shell 的完整路徑。\n"
+"請輸入 shell 的完整路徑\n"
 "<span size=\"smaller\">例: /bin/sh</span>"
 
 #: src/users/user-settings.c:547
-#, fuzzy
 msgid "Password should not be empty"
-msgstr "密碼不可留空。"
+msgstr "密碼不可留空"
 
 #: src/users/user-settings.c:548
 msgid "A password must be provided"
 msgstr "必須提供密碼"
 
 #: src/users/user-settings.c:550
-#, fuzzy
 msgid "Password confirmation isn't correct"
-msgstr "確認密碼程序失敗。"
+msgstr "確認密碼程序失敗"
 
 #: src/users/user-settings.c:551
 msgid "Check that you have provided the same password in both text fields"
@@ -2209,212 +2156,3 @@ msgstr "命令殼"
 msgid "Add or remove users and groups"
 msgstr "新增或移除使用者及群組"
 
-#~ msgid "Dialog complexity for the boot-admin tool"
-#~ msgstr "boot-admin 工具對話方塊的選項多寡"
-
-#~ msgid "Dialog complexity for the network-admin tool"
-#~ msgstr "network-admin 工具對話方塊的選項多寡"
-
-#~ msgid "Dialog complexity for the services-admin tool"
-#~ msgstr "services-admin 工具對話方塊的選項多寡"
-
-#~ msgid "Dialog complexity for the time-admin tool"
-#~ msgstr "time-admin 工具對話方塊的選項多寡"
-
-#~ msgid "Dialog complexity for the users-admin tool"
-#~ msgstr "user-admin 工具對話方塊的選項多寡"
-
-#~ msgid ""
-#~ "The GNOME System Tools have two data display modes: basic mode and "
-#~ "advanced mode, the basic mode is intended to show less options than the "
-#~ "advanced mode"
-#~ msgstr ""
-#~ "GNOME 系統設定工具有兩種顯示模式：「基本模式」及「進階模式」。基本模式中顯"
-#~ "示的選項會比進階模式的少。"
-
-#~ msgid "1024x768"
-#~ msgstr "1024×768"
-
-#~ msgid "1280x1024"
-#~ msgstr "1280×1024"
-
-#~ msgid "256"
-#~ msgstr "256"
-
-#~ msgid "640x480"
-#~ msgstr "640×480"
-
-#~ msgid "800x600"
-#~ msgstr "800×600"
-
-#~ msgid "Modify the settings for an operating system or kernel."
-#~ msgstr "修改作業系統或核心的設定。"
-
-#~ msgid "Use this dialog to modify kernel parameters."
-#~ msgstr "使用此對話方塊修改核心參數。"
-
-#~ msgid "Complexity"
-#~ msgstr "複雜度"
-
-#~ msgid "/dev/modem"
-#~ msgstr "/dev/modem"
-
-#~ msgid "/dev/ttyS0"
-#~ msgstr "/dev/ttyS0"
-
-#~ msgid "/dev/ttyS1"
-#~ msgstr "/dev/ttyS1"
-
-#~ msgid "/dev/ttyS2"
-#~ msgstr "/dev/ttyS2"
-
-#~ msgid "/dev/ttyS3"
-#~ msgstr "/dev/ttyS3"
-
-#~ msgid "Advanced PPP connection tuning."
-#~ msgstr "調校進階 PPP 連線設定。"
-
-#~ msgid "Aliases of other computers."
-#~ msgstr "其它電腦的別稱。"
-
-#~ msgid "Auto"
-#~ msgstr "自動"
-
-#~ msgid "BOOTP"
-#~ msgstr "BOOTP"
-
-#~ msgid "DHCP"
-#~ msgstr "DHCP"
-
-#~ msgid "How the names of other computers are found."
-#~ msgstr "如何找出其它電腦的名稱。"
-
-#~ msgid "How this computer is identified."
-#~ msgstr "如何辨認這台電腦。"
-
-#~ msgid "How to access other computers."
-#~ msgstr "如何存取其它電腦。"
-
-#~ msgid "How to dial up to the Internet."
-#~ msgstr "如何撥號上網。"
-
-#~ msgid ""
-#~ "Network profiles can be used to store different network configurations."
-#~ msgstr "網路設定檔可以儲存不同的網路組態。"
-
-#~ msgid "Please, give this network profile a name and a description."
-#~ msgstr "請為這個網路設定檔提供名稱及說明。"
-
-#~ msgid "Use \"Auto\" if unsure."
-#~ msgstr "若無法確定，請選取「自動」。"
-
-#~ msgid "Use this dialog for setting the configuration for this interface"
-#~ msgstr "使用這個對話方塊來設定此介面的組態"
-
-#~ msgid "<span weight=\"bold\">Description</span>"
-#~ msgstr "<span weight=\"bold\">說明</span>"
-
-#~ msgid "Click on an item in the list to show it's description."
-#~ msgstr "按下清單中的項目可以顯示有關該項目的說明。"
-
-#~ msgid "Use this tool to specify which services to run"
-#~ msgstr "使用本工具指定要執行何種服務"
-
-#~ msgid ""
-#~ "Please select the current date and time. You can also specify a time zone "
-#~ "and a time server."
-#~ msgstr "請選擇現在的日期和時間。也可以指定時區和時間校對伺服器。"
-
-#~ msgid "Select the servers you wish to use for time synchronization."
-#~ msgstr "選取準備用來校對時間的伺服器。"
-
-#~ msgid "To select a time zone, click on one of the dots on the map"
-#~ msgstr "按下地圖上其中一點來選取時區"
-
-#~ msgid ""
-#~ "On this page, you can define the system defaults which will be assigned "
-#~ "to new users."
-#~ msgstr "本頁可以修改安排給新使用者的系統預設組態。"
-
-#~ msgid ""
-#~ "This is the list of the groups available on the system. Create new groups "
-#~ "or edit existing groups with this dialog."
-#~ msgstr "這是系統現有的群組清單。本對話方塊可用來新增群組或修改現有的群組。"
-
-#~ msgid ""
-#~ "This is the list of the users available on the system. Create new users "
-#~ "or edit existing user settings with this dialog."
-#~ msgstr ""
-#~ "這是系統現有的使用者清單。本對話方塊可用來新增使用者或修改現有使用者的設"
-#~ "定。"
-
-#~ msgid ""
-#~ "User profiles can be used as templates to facilitate the creation of new "
-#~ "users."
-#~ msgstr "使用者設定組合可方便在新增使用者時作為藍本。"
-
-#~ msgid "profiles_table"
-#~ msgstr "profiles_table"
-
-#~ msgid "Invalid path: %s"
-#~ msgstr "無效的路徑：%s"
-
-#~ msgid "/_Add ..."
-#~ msgstr "/新增(_A)..."
-
-#~ msgid "/_Delete"
-#~ msgstr "/刪除(_D)"
-
-#~ msgid " More _Options"
-#~ msgstr "顯示詳細選項(_O)"
-
-#~ msgid " Fewer _Options"
-#~ msgstr "隱藏詳細選項(_O)"
-
-#~ msgid "Skipping %s directive..."
-#~ msgstr "略過 %s 設定鍵..."
-
-#~ msgid "Skipping actual save..."
-#~ msgstr "不會儲存..."
-
-#~ msgid "Wvdial missing"
-#~ msgstr "Wvdial 遺失"
-
-#~ msgid "/_Configure"
-#~ msgstr "/設定(_C)"
-
-#~ msgid "Status"
-#~ msgstr "狀態"
-
-#~ msgid "Nonexisting interface"
-#~ msgstr "不存在的介面"
-
-#~ msgid "Time Zone"
-#~ msgstr "時區"
-
-#~ msgid "root group ID should not be modified"
-#~ msgstr "不應修改 root 群組 ID。"
-
-#~ msgid "Root group name should not be modified"
-#~ msgstr "不應修改 root 群組名稱"
-
-#~ msgid "This is the default profile for setting new users' data"
-#~ msgstr "這是用來設定新使用者資料的預設設定檔"
-
-#~ msgid "Delete profile \"%s\""
-#~ msgstr "刪除設定檔“%s”"
-
-#~ msgid "_Search"
-#~ msgstr "搜尋(_S)"
-
-#~ msgid "/_Add User ..."
-#~ msgstr "/新增使用者(_A)..."
-
-#~ msgid "/_Add group ..."
-#~ msgstr "/新增群組(_A)..."
-
-#~ msgid "Root username shouldn't be modified."
-#~ msgstr "不應修改 root 使用者名稱。"
-
-#~ msgid "root home shouldn't be modified."
-#~ msgstr "不應修改 root 的個人目錄。"
