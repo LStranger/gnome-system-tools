@@ -5,7 +5,7 @@
  */
 
 gchar *s = N_("window1");
-gchar *s = N_("Fonting is hard.");
+gchar *s = N_("Select the fonts you want to install.");
 gchar *s = N_("Font family");
 gchar *s = N_("label329");
 gchar *s = N_("Style");
