@@ -245,8 +245,15 @@ update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 void
 on_connection_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
 {
+	Connection *cxn;
 	connection_row_selected = row;
-	connection_actions_set_sensitive (TRUE);
+
+	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
+
+	if (!strcmp (cxn->dev, "lo"))
+		connection_actions_set_sensitive (FALSE);
+	else
+		connection_actions_set_sensitive (TRUE);
 }
 
 void
@@ -324,7 +331,8 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	else
 		cxn_type = CONNECTION_UNKNOWN;
 
-	cxn = connection_new_from_type (cxn_type);
+	cxn = connection_new_from_type_add (cxn_type, xst_xml_doc_get_root (tool->config));
+	connection_save_to_node (cxn, xst_xml_doc_get_root (tool->config));
 	/* connection_configure (cxn); */
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);

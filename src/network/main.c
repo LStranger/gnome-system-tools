@@ -37,13 +37,6 @@
 
 XstTool *tool = NULL;
 
-
-static void
-watch_it_now_watch_it (GtkEditable *e, gint start_pos, gint end_pos, gpointer data)
-{
-	xst_dialog_modify (tool->main_dialog);
-}
-
 XstDialogSignal signals[] = {
 	{ "network_admin",       "switch_page",     on_network_notebook_switch_page },
 	{ "hostname",            "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
@@ -55,7 +48,7 @@ XstDialogSignal signals[] = {
 	{ "workgroup",           "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
 	{ "workgroup",           "changed",         xst_dialog_modify_cb },
 	{ "wins_ip",             "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "wins_ip",             "delete_text",     xst_dialog_modify_cb },
+	{ "wins_ip",             "changed",         xst_dialog_modify_cb },
 	{ "connection_list",     "select_row",      on_connection_list_select_row },
 	{ "connection_list",     "unselect_row",    on_connection_list_unselect_row },
 	{ "connection_add",      "clicked",         on_connection_add_clicked },
@@ -64,7 +57,7 @@ XstDialogSignal signals[] = {
 	{ "dns_dhcp",            "toggled",         on_dns_dhcp_toggled },
 	{ "dns_dhcp",            "toggled",         xst_dialog_modify_cb },
 	{ "dns_list",            "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "dns_list",            "delete_text",     watch_it_now_watch_it },
+	{ "dns_list",            "changed",         xst_dialog_modify_cb },
 	{ "domain",              "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
 	{ "domain",              "changed",         xst_dialog_modify_cb },
 	{ "search_list",         "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
@@ -85,15 +78,6 @@ XstDialogSignal signals[] = {
 	{ NULL }
 };
 
-gint internet_druid;
-
-struct poptOption options[] =
-{
-	{ "internet", '\0', 0, &internet_druid, 0,
-	  N_("Run the internet conection druid."), NULL },
-
-	{NULL, '\0', 0, NULL, 0}
-};
 
 int
 main (int argc, char *argv[])
@@ -115,31 +99,43 @@ main (int argc, char *argv[])
 		EF_STATIC_HOST | EF_ALLOW_ENTER | EF_ALLOW_TEXT | EF_ALLOW_SPACE
 	};
 
+	gboolean internet_druid = FALSE;
+	
+	struct poptOption options[] =
+	{
+		{ "internet", '\0', 0, &internet_druid, 0,
+		  N_("	Run the internet conection druid."), NULL },
+		
+		{NULL, '\0', 0, NULL, 0}
+	};
+
 	init_hint_entries ();
 	
 	tool = xst_tool_init ("network", _("Network Settings"), argc, argv, options);
 
-	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
-	xst_dialog_connect_signals (tool->main_dialog, signals);
-
-	connection_init_icons ();
-
-	for (i=0; s[i]; i++)
-		connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);
-
-	on_network_admin_show (NULL, NULL);
-
 	if (internet_druid) {
 		PppDruid *ppp;
 
-		ppp = ppp_druid_new ();
+		ppp = ppp_druid_new (tool);
+		xst_tool_set_xml_funcs (tool, NULL, ppp_druid_gui_to_xml, ppp);
+		
+		xst_tool_load_try (tool);
 		ppp_druid_show (ppp);
 
 		gtk_main ();
 	} else {
+		xst_dialog_connect_signals (tool->main_dialog, signals);
+		xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
+		
+		connection_init_icons ();
+
+		for (i=0; s[i]; i++)
+			connect_editable_filter (xst_dialog_get_widget (tool->main_dialog, s[i]), e[i]);
+		
+		on_network_admin_show (NULL, NULL);
 		xst_tool_main (tool);
 	}
-
+		
 	return 0;
 }
 

@@ -36,12 +36,16 @@ typedef gchar *(*PppDruidCheckFunc) (PppDruid *);
 static GtkWidget *my_get_widget (GladeXML *glade, const gchar *name)
 {
 	GtkWidget *w;
+	gchar *s;
 
 	g_return_val_if_fail (glade != NULL, NULL);
-	
-	w = glade_xml_get_widget (glade, name);
+
+	s = g_strdup_printf ("ppp_druid_%s", name);
+	w = glade_xml_get_widget (glade, s);
 	if (!w)
-		g_warning ("my_get_widget: Unexistent widget %s", name);
+		g_warning ("my_get_widget: Unexistent widget %s", s);
+
+	g_free (s);
 
 	return w;
 }
@@ -66,17 +70,44 @@ static void ppp_druid_exit (PppDruid *ppp)
 	gtk_main_quit ();
 }
 
+static gchar *ppp_druid_get_serial_port (PppDruid *ppp)
+{
+	gchar *port;
+	xmlNode *node;
+
+	node = xst_xml_doc_get_root (ppp->tool->config);
+	port = connection_get_serial_port_from_node (node, "Defaults");
+
+	if (!port)
+		port = g_strdup ("/dev/modem");
+
+	return port;
+}
+
 static void ppp_druid_save (PppDruid *ppp)
 {
-	gchar *phone, *login, *passwd, *profile;
+	xmlNode *root;
+	Connection *cxn;
 	
 	g_return_if_fail (ppp != NULL);
 
-	phone = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->phone)));
-	login = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->login)));
-	passwd = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->passwd)));
-	profile = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->profile)));
+	root = xst_xml_doc_get_root (ppp->tool->config);
+	cxn = connection_new_from_type (CONNECTION_PPP, root);
+	ppp->cxn = cxn;
 
+	cxn->serial_port = ppp_druid_get_serial_port (ppp);
+	cxn->phone_number = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->phone)));
+	cxn->login = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->login)));
+	cxn->password = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->passwd)));
+	cxn->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (ppp->profile)));
+	
+	cxn->wvsection = connection_wvsection_name_generate (cxn->dev, root);
+	cxn->persist = FALSE;
+	cxn->set_default_gw = TRUE;
+	cxn->peerdns = TRUE;
+	cxn->user = TRUE;
+
+	gtk_signal_emit_by_name (GTK_OBJECT (ppp->tool->main_dialog), "apply", ppp->tool);
 	ppp_druid_exit (ppp);
 }
 
@@ -294,10 +325,6 @@ static void ppp_druid_on_page_last_finish (GtkWidget *w, gpointer arg1, gpointer
 {
 	PppDruid *ppp = (PppDruid *) data;
 
-	/* Apply the data to the xml tree, call backend */
-
-
-	/* and quit */
 	ppp_druid_save (ppp);
 }
 
@@ -330,10 +357,9 @@ static void ppp_druid_on_passwd_activate (GtkWidget *w, gpointer data)
 	gtk_widget_grab_focus (ppp->passwd2);
 }
 
-extern PppDruid *ppp_druid_new (void)
+extern PppDruid *ppp_druid_new (XstTool *tool)
 {
 	PppDruid *ppp;
-	gchar *path;
 	XstDialogSignal signals[] = {
 		{ "window",	"delete_event",	ppp_druid_on_window_delete_event },
 		{ "druid",	"cancel",			ppp_druid_on_druid_cancel },
@@ -366,21 +392,14 @@ extern PppDruid *ppp_druid_new (void)
 
 
 	ppp = g_new0 (PppDruid, 1);
-
-	path = g_strdup_printf ("%s/internet_connection_druid.glade", INTERFACES_DIR);
-	
-	ppp->glade = glade_xml_new (path, NULL);
-	
-	g_free (path);
-	if (!ppp->glade) {
-		g_free (ppp);
-		return NULL;
-	}
+	ppp->glade = tool->main_dialog->gui;
+	ppp->tool = tool;
 
 	ppp->error_state = FALSE;
 	ppp->current_page = 0;
 
 	ppp->win = my_get_widget (ppp->glade, "window");
+	gtk_object_set_data (GTK_OBJECT (ppp->win), "ppp", ppp);
 	ppp->druid = GNOME_DRUID (my_get_widget (ppp->glade, "druid"));
 	
 	ppp->phone = my_get_widget (ppp->glade, "phone");
@@ -400,4 +419,12 @@ extern void ppp_druid_show (PppDruid *ppp)
 	gtk_widget_show_all (ppp->win);
 }
 
+void ppp_druid_gui_to_xml(XstTool *tool, gpointer data)
+{
+	PppDruid *ppp = data;
+	xmlNode *root = xst_xml_doc_get_root (tool->config);
 
+	g_print ("Ok, apply was clicked\n");
+
+	connection_save_to_node (ppp->cxn, root);
+}

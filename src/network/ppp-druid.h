@@ -21,8 +21,16 @@
 #ifndef PPP_DRUID_H
 #define PPP_DRUID_H
 
+#include <gnome.h>
+#include <glade/glade.h>
+
+#include "../common/global.h"
+#include "connection.h"
+
 typedef struct {
 	GladeXML *glade;
+	XstTool *tool;
+	Connection *cxn;
 
 	GtkWidget *win;
 	GnomeDruid *druid;
@@ -35,10 +43,10 @@ typedef struct {
 
 	gboolean error_state;
 	gint current_page;
-
 } PppDruid;
 	
-extern PppDruid *ppp_druid_new (void);
+extern PppDruid *ppp_druid_new (XstTool *tool);
 extern void ppp_druid_show (PppDruid *ppp);
+extern void ppp_druid_gui_to_xml(XstTool *t, gpointer data);
 
 #endif /* PPP_DRUID_H */

@@ -1,3 +1,33 @@
+2001-02-27  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* ppp-druid.c (my_get_widget): support new widget name prefix.
+	  (ppp_druid_get_serial_port): to get the default serial port:
+	  most people have only 1 modem.
+	  (ppp_druid_save): get all required info into the connection
+	  structure and signal the tool to apply.
+	  (ppp_druid_gui_to_xml): tool callback to apply the ppp druid
+	  info into the XML.
+
+	* main.c (watch_it_now_watch_it): not pertinent anymore.
+	  all widgets connected to delete_text are now connected to changed.
+	  (main): popt options moved here.
+	  Due to glade file merge, start-up code is now better shared.
+	  
+
+	* connection.c (connection_wvsection_name_generate): replacement for
+	  devkey_generate. This one creates a less arbitrary name.
+	  (connection_dev_get_next): Try to find the next device of the requested
+	  type. Useful for ppp, but will probably have to be more intelligent for
+	  other interface types.
+	  (connection_get_serial_port_from_node): Get the modem device for a
+	  wvsection. Very useful for section "Defaults".
+	  (connection_new_from_type): don't call add_connection_to_list here.
+	  (connection_new_from_type_add): do it here. For code reusability. Also,
+	  pass the root node in these two, to use the system discovery tags.
+
+	* callbacks.c (on_connection_list_select_row): don't set the actions sensitive
+	  if a loopback interface is selected.
+	
 2001-02-26  Chema Celorio  <chema@celorio.com>
 
 	* hosts.c: more fixes for the hosts lists

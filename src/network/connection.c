@@ -21,8 +21,6 @@
 #include <config.h>
 
 #include <string.h>
-#include <stdlib.h>
-#include <time.h>
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
@@ -322,21 +320,47 @@ connection_xml_wvsection_save_boolean_to_node (xmlNode *node, gchar *section_nam
 	connection_xml_wvsection_save_str_to_node (node, section_name, node_name, bool? "1": "0");
 }
 
-static gchar *
-connection_devkey_generate (gchar *dev)
+extern gchar *
+connection_wvsection_name_generate (gchar *dev, xmlNode *root)
 {
-	static gboolean flag = FALSE;
-	long int num;
+	gchar *str;
+	gint i;
 
-	if (!flag) {
-		srandom (time (NULL));
-		flag = TRUE;
+	i = 0;
+	str = g_strdup (dev);
+	while (connection_xml_wvsection_search (root, str, NULL))
+	{
+		g_free (str);
+		str = g_strdup_printf ("%s_%d", dev, i);
 	}
-	
-	num = random ();
 
-	return g_strdup_printf ("%s_%ld", dev, num);
-}	
+	return str;
+}
+
+/* dev_type is "eth", "wvlan", "ppp", "plip"... */
+static gchar *
+connection_dev_get_next (xmlNode *root, gchar *dev_type)
+{
+	xmlNode *node;
+	gchar *dev;
+	gint len, max, num;
+
+	len = strlen (dev_type);
+	max = 0;
+
+	for (node = xst_xml_element_find_first (root, "interface");
+		node; node = xst_xml_element_find_next (node, "interface"))
+	{
+		dev = connection_xml_get_str (node, "dev");
+		if (strstr (dev, dev_type)) {
+			num = atoi (dev + len) + 1;
+			max = (num > max)? num: max;
+		}
+		g_free (dev);
+	}
+
+	return g_strdup_printf ("%s%d", dev_type, max);
+}
 
 static IPConfigType
 connection_config_type_from_str (gchar *str)
@@ -497,17 +521,24 @@ connection_description_from_type (ConnectionType type)
 	return g_strdup (descriptions[i]);
 }
 
+extern gchar *
+connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection)
+{
+	return connection_xml_wvsection_get_str (node, wvsection, "device");
+}
+
 static void
 connection_get_ppp_from_node (xmlNode *node, Connection *cxn)
 {
 	cxn->wvsection = connection_xml_get_str (node, "wvsection");
 	if (cxn->wvsection) {
+		cxn->serial_port = connection_get_serial_port_from_node (node->parent, cxn->wvsection);
 		cxn->phone_number = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "phone");
 		cxn->login = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "login");
 		cxn->password = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "password");
 		cxn->stupid = connection_xml_wvsection_get_boolean (node->parent, cxn->wvsection, "stupid");
 	} else {
-		cxn->wvsection = connection_devkey_generate (cxn->dev);
+		cxn->wvsection = connection_wvsection_name_generate (cxn->dev, node->parent);
 		connection_xml_save_str_to_node (cxn->node, "wvsection", cxn->wvsection);
 
 		cxn->phone_number = connection_xml_get_str (node, "phone_number");
@@ -527,6 +558,62 @@ connection_get_ppp_from_node (xmlNode *node, Connection *cxn)
 }
 
 Connection *
+connection_new_from_type_add (ConnectionType type, xmlNode *root)
+{
+	Connection *cxn;
+	
+	cxn = connection_new_from_type (type, root);
+	add_connection_to_list (cxn, NULL);
+
+	return cxn;
+}
+
+Connection *
+connection_new_from_type (ConnectionType type, xmlNode *root)
+{
+	Connection *cxn;
+
+	cxn = g_new0 (Connection, 1);
+	cxn->type = type;
+	
+	/* set up some defaults */
+	cxn->user = FALSE;
+	cxn->autoboot = TRUE;
+	cxn->dhcp_dns = TRUE;
+	cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
+	
+#warning FIXME: figure out a new device correctly
+	switch (cxn->type) {
+	case CONNECTION_ETH:
+		cxn->dev = g_strdup ("eth0");
+		break;
+	case CONNECTION_WVLAN:
+		cxn->dev = g_strdup ("wvlan0");
+		break;
+	case CONNECTION_PPP:
+		cxn->user = TRUE;
+		cxn->peerdns = TRUE;
+		cxn->autoboot = FALSE;
+		cxn->dev = connection_dev_get_next (root, "ppp");
+		break;
+	case CONNECTION_LO:
+		cxn->dev = g_strdup ("lo");
+		break;
+	case CONNECTION_PLIP:
+		cxn->autoboot = FALSE;
+		cxn->dev = g_strdup ("plip0");
+		break;
+	default:
+		cxn->dev = g_strdup ("NIL");
+		break;
+	}	
+
+	cxn->node = NULL;
+
+	return cxn;
+}
+
+Connection *
 connection_new_from_node (xmlNode *node)
 {
 	Connection *cxn;
@@ -535,11 +622,11 @@ connection_new_from_node (xmlNode *node)
 	s = connection_xml_get_str (node, "dev");
 
 	if (s) {
-		cxn = connection_new_from_dev_name (s);
+		cxn = connection_new_from_dev_name (s, node->parent);
 		g_free (cxn->dev);
 		cxn->dev = s;
 	} else
-		cxn = connection_new_from_type (CONNECTION_OTHER);
+		cxn = connection_new_from_type_add (CONNECTION_OTHER, node->parent);
 
 	cxn->node = node;
 	
@@ -555,12 +642,6 @@ connection_new_from_node (xmlNode *node)
 	else
 		cxn->name = connection_description_from_type (cxn->type);
 	
-	s = connection_xml_get_str (node, "file");
-	if (s) {
-		g_free (cxn->file);
-		cxn->file = s;
-	}
-
 	/* Activation */
 	cxn->user = connection_xml_get_boolean (node, "user");
 	cxn->autoboot = connection_xml_get_boolean (node, "auto");
@@ -581,7 +662,7 @@ connection_new_from_node (xmlNode *node)
 }
 
 Connection *
-connection_new_from_dev_name (char *dev_name)
+connection_new_from_dev_name (char *dev_name, xmlNode *root)
 {
 	typedef struct {
 		gchar *name;
@@ -603,55 +684,7 @@ connection_new_from_dev_name (char *dev_name)
 		if (strstr (dev_name, table[i].name) == dev_name)
 			break;
 
-	return connection_new_from_type (table[i].type);
-}
-
-
-Connection *
-connection_new_from_type (ConnectionType type)
-{
-	Connection *cxn;
-
-	cxn = g_new0 (Connection, 1);
-	cxn->type = type;
-	
-#warning FIXME: figure out a new device correctly
-	switch (cxn->type) {
-	case CONNECTION_ETH:
-		cxn->autoboot = TRUE;
-		cxn->dev = g_strdup ("eth0");
-		break;
-	case CONNECTION_WVLAN:
-		cxn->autoboot = TRUE;
-		cxn->dev = g_strdup ("wvlan0");
-		break;
-	case CONNECTION_PPP:
-		cxn->peerdns = TRUE;
-		cxn->autoboot = FALSE;
-		cxn->dev = g_strdup ("ppp0");
-		break;
-	case CONNECTION_LO:
-		cxn->autoboot = TRUE;
-		cxn->dev = g_strdup ("lo");
-		break;
-	case CONNECTION_PLIP:
-		cxn->autoboot = FALSE;
-		cxn->dev = g_strdup ("plip0");
-		break;
-	default:
-		cxn->dev = g_strdup ("NIL");
-		break;
-	}	
-
-	/* set up some defaults */
-	cxn->file = connection_devkey_generate (cxn->dev);
-	cxn->user = FALSE;
-	cxn->dhcp_dns = TRUE;
-	cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
-
-	add_connection_to_list (cxn, NULL);
-	
-	return cxn;
+	return connection_new_from_type_add (table[i].type, root);
 }
 
 void
@@ -1030,6 +1063,10 @@ connection_save_to_node (Connection *cxn, xmlNode *root)
 
 	/* PPP stuff */
 	if (cxn->type == CONNECTION_PPP) {
+		if (!cxn->wvsection)
+			cxn->wvsection = connection_wvsection_name_generate (cxn->dev, root);
+		connection_xml_save_str_to_node (node, "wvsection", cxn->wvsection);
+		
 		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "phone", cxn->phone_number);
 		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "login", cxn->login);
 		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "password", cxn->password);

@@ -53,7 +53,6 @@ typedef struct {
 	gboolean frozen;
 
 	/* General */
-	gchar *file;
 	gchar *dev;
 	gchar *name;
 
@@ -97,8 +96,11 @@ typedef struct {
 
 extern void connection_init_icons (void);
 extern Connection *connection_new_from_node (xmlNode *node);
-extern Connection *connection_new_from_dev_name (char *dev_name);
-extern Connection *connection_new_from_type (ConnectionType type);
+extern Connection *connection_new_from_dev_name (char *dev_name, xmlNode *root);
+extern Connection *connection_new_from_type (ConnectionType type, xmlNode *root);
+extern Connection *connection_new_from_type_add (ConnectionType type, xmlNode *root);
+extern gchar *connection_get_serial_port_from_node (xmlNode *node, gchar *wvsection);
+extern gchar *connection_wvsection_name_generate (gchar *dev, xmlNode *root);
 
 extern void connection_free (Connection *);
 
