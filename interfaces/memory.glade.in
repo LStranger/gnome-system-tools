@@ -178,6 +178,7 @@
       <last_modification_time>Mon, 04 Sep 2000 08:26:23 GMT</last_modification_time>
     </signal>
     <label>OK</label>
+    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 
   <widget>
@@ -192,6 +193,7 @@
       <last_modification_time>Mon, 04 Sep 2000 08:26:32 GMT</last_modification_time>
     </signal>
     <label>Cancel</label>
+    <relief>GTK_RELIEF_NORMAL</relief>
   </widget>
 </widget>
 
@@ -800,6 +802,7 @@ file
 		<last_modification_time>Wed, 20 Dec 2000 15:51:23 GMT</last_modification_time>
 	      </signal>
 	      <label>Browse...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
 	      <child>
 		<left_attach>2</left_attach>
 		<right_attach>3</right_attach>
@@ -990,7 +993,9 @@ file
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
-  <allow_shrink>False</allow_shrink>
+  <default_width>378</default_width>
+  <default_height>321</default_height>
+  <allow_shrink>True</allow_shrink>
   <allow_grow>True</allow_grow>
   <auto_shrink>False</auto_shrink>
 
@@ -1004,14 +1009,16 @@ file
     <widget>
       <class>GtkVBox</class>
       <name>vbox9</name>
+      <border_width>3</border_width>
       <homogeneous>False</homogeneous>
-      <spacing>0</spacing>
+      <spacing>3</spacing>
 
       <widget>
 	<class>GtkHBox</class>
 	<name>hbox11</name>
+	<border_width>3</border_width>
 	<homogeneous>False</homogeneous>
-	<spacing>8</spacing>
+	<spacing>3</spacing>
 	<child>
 	  <padding>0</padding>
 	  <expand>False</expand>
@@ -1291,6 +1298,7 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:11 GMT</last_modification_time>
 	  </signal>
 	  <label>Add</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
@@ -1309,6 +1317,7 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:19 GMT</last_modification_time>
 	  </signal>
 	  <label>Remove</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
@@ -1327,6 +1336,7 @@ file
 	    <last_modification_time>Thu, 13 Jul 2000 18:12:27 GMT</last_modification_time>
 	  </signal>
 	  <label>Settings</label>
+	  <relief>GTK_RELIEF_NORMAL</relief>
 	  <child>
 	    <padding>0</padding>
 	    <expand>True</expand>
