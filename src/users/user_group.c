@@ -1372,8 +1372,10 @@ user_account_check (UserAccount *account)
 static GList *
 user_account_check_home_warnings (UserAccount *account, GList *warnings)
 {
-	gchar *home = account->home;
+	gchar *home;
 	struct stat s;
+
+	home = parse_home (account);
 
 	if (stat (home, &s))
 	{
@@ -1425,6 +1427,8 @@ user_account_check_home_warnings (UserAccount *account, GList *warnings)
 			}
 		}
 	}
+
+	g_free (home);
 		
 	return warnings;
 }
