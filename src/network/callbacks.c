@@ -466,9 +466,10 @@ on_connection_activate_clicked (GtkWidget *w, gpointer null)
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 	connection_update_row_enabled (cxn, TRUE);
 
-	if (xst_dialog_get_modified (tool->main_dialog))
+	if (xst_dialog_get_modified (tool->main_dialog)) {
 		xst_tool_save (tool);
-	else {
+		xst_dialog_set_modified (tool->main_dialog, FALSE);
+	} else {
 		gchar *sign, *file;
 		
 		file = (cxn->file)? cxn->file: cxn->dev;

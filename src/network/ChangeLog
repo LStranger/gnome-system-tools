@@ -1,5 +1,10 @@
 Sun Jul 15 03:32:43 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
 
+	* connection.c (connection_configure): If distro doesn't support
+	mortal user control of interface activation, hide corresponding
+	widget.
+	(on_connection_modified): Removed debug warning.
+
 	* callbacks.c (on_connection_deactivate_clicked): Save tool
 	if it has changed.
 	(on_connection_activate_clicked): same.

@@ -805,7 +805,7 @@ connection_update_clist_enabled_apply (GtkWidget *clist)
 
 	for (i = 0; i < GTK_CLIST (clist)->rows; i++) {
 		cxn = gtk_clist_get_row_data (GTK_CLIST (clist), i);
-		g_return_val_if_fail (cxn != NULL, TRUE);
+		g_return_if_fail (cxn != NULL);
 		connection_set_row_pixtext (clist, i, cxn->enabled ? _("Active") :
 					    _("Inactive"), cxn->enabled);
 	}
@@ -1350,7 +1350,6 @@ on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, XstConnec
 static void
 on_connection_modified (GtkWidget *w, XstConnection *cxn)
 {
-	g_warning ("si");
 	connection_set_modified (cxn, TRUE);
 }
 
@@ -1541,8 +1540,7 @@ void
 connection_configure (XstConnection *cxn)
 {
 	GtkWidget *nb;
-/*	GtkWidget *hb, *qm;*/
-	gchar *s, *smart_dhcpcd;
+	gchar *s;
 
 	if (cxn->window) {
 		gtk_widget_show (cxn->window);
@@ -1565,13 +1563,10 @@ connection_configure (XstConnection *cxn)
 	fill_general (cxn);
 	fill_ip      (cxn);
 
-	smart_dhcpcd = xst_xml_get_child_content (cxn->node->parent, "smartdhcpcd");
-	if (!smart_dhcpcd || !atoi (smart_dhcpcd)) {
-		GtkWidget *w = W("ip_update_dns");
-		gtk_widget_hide (w);
-	}
-
-	g_free (smart_dhcpcd);
+	if (!xst_xml_element_get_boolean (cxn->node->parent, "smartdhcpcd"))
+		gtk_widget_hide (W("ip_update_dns"));
+	if (!xst_xml_element_get_boolean (cxn->node->parent, "userifacfectl"))
+		gtk_widget_hide (W("status_user"));
 
 	/* would like to do this as a switch */
 	nb = W ("connection_nb");
