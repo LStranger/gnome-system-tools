@@ -402,25 +402,6 @@ gst_ui_logout_dialog (const gchar *message)
 	gtk_widget_destroy (d);
 
 	return FALSE;
-	
-	/* Cause it isn't working, let's just suggest user to restart X. */	
-#if 0	
-	GtkWidget *dialog;
-	gint retval;
-	GnomeClient *client = gnome_master_client ();
-	
-	dialog = gnome_question_dialog (message, NULL, NULL);
-
-	retval = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
-
-	if (retval)
-		return FALSE;
-
-	gnome_client_request_save (client, GNOME_SAVE_BOTH,
-				   TRUE, GNOME_INTERACT_ERRORS, FALSE, TRUE);
-
-	return TRUE;
-#endif		
 }
 
 /**

@@ -87,13 +87,7 @@ struct _GstTool {
 	GtkWidget *report_arrow;
 
 	GtkWidget *report_window;
-	GtkWidget *report_scrolled;
-	GtkWidget *report_progress;
 	GtkWidget *report_label;
-	GtkWidget *report_list;
-	GtkWidget *report_entry;
-	GtkWidget *report_visibility;
-	GtkWidget *report_notebook;
 
 	gboolean timeout_done;
 	gboolean report_list_visible;

@@ -260,29 +260,6 @@ gst_tool_get_access (GstTool *tool)
 	return tool->root_access != ROOT_ACCESS_NONE;
 }
 
-#if 0
-static void
-timeout_cb (gpointer data)
-{
-	GstTool *tool;
-
-	tool = GST_TOOL (data);
-
-	tool->timeout_done = TRUE;
-
-	if (tool->timeout_done && !tool->report_list_visible)
-		gtk_main_quit ();
-}
-
-static void
-set_arrow (GstTool *tool, GtkArrowType arrow)
-{
-	gtk_notebook_set_page (GTK_NOTEBOOK (tool->report_notebook),
-			       arrow == GTK_ARROW_UP ? 0 : 1);
-}
-
-#endif
-
 static void
 report_clear_lines (GstTool *tool)
 {
@@ -307,23 +284,6 @@ report_dispatch (GstTool *tool)
 {
 	GSList *list;
 	GstReportLine *rline;
-#if 0
-	GtkAdjustment *vadj;
-	char *report_text[] = {
-		NULL,
-		NULL
-	};
-
-	if (!GTK_IS_SCROLLED_WINDOW (tool->report_scrolled)) {
-		g_warning ("tool->report_scrolled is not a GtkScrolledWindow\n");
-		tool->report_dispatch_pending = FALSE;
-		tool->report_finished = TRUE;
-		return;
-	}
-	
-	vadj = gtk_scrolled_window_get_vadjustment (
-		GTK_SCROLLED_WINDOW (tool->report_scrolled));
-#endif
 
 	for (list = tool->report_line_list; list; list = g_slist_next (list))
 	{
@@ -332,35 +292,6 @@ report_dispatch (GstTool *tool)
 		if (gst_report_line_get_handled (rline))
 			continue;
 
-#if 0
-		if (!strcmp (gst_report_line_get_key (rline), "progress")) {
-			/* Progress update */
-
-			gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress),
-						     atoi (gst_report_line_get_message (rline)) / 100.0);
-		} else {
-			gboolean scroll;
-			
-			/* Report line */
-			
-			gtk_entry_set_text (GTK_ENTRY (tool->report_entry),
-					    gst_report_line_get_message (rline));
-			
-			if (vadj->value >= vadj->upper - vadj->page_size)
-				scroll = TRUE;
-			else
-				scroll = FALSE;
-
-			report_text [1] = (char *) gst_report_line_get_message (rline);
-
-			gtk_clist_append (GTK_CLIST (tool->report_list), report_text);
-
-			if (scroll)
-				gtk_adjustment_set_value (vadj, vadj->upper - vadj->page_size);
-
-			gst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
-		}
-#endif
 		if (strcmp (gst_report_line_get_key (rline), "progress"))
 			gst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
 		
@@ -458,9 +389,6 @@ report_window_close_cb (GtkWidget *window, GdkEventAny *ev, gpointer data)
 static void
 report_progress (GstTool *tool, const gchar *label)
 {
-#if 0
-	gint cb_id;
-#endif	
 	tool->timeout_done = FALSE;
 	tool->report_list_visible = FALSE;
 	tool->report_finished = FALSE;
@@ -468,11 +396,6 @@ report_progress (GstTool *tool, const gchar *label)
 
 	gst_tool_clear_supported_platforms (tool);
 	report_clear_lines (tool);
-
-#if 0
-	set_arrow (tool, GTK_ARROW_DOWN);
-	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 0.0);
-#endif
 
 	if (label) {
 		gtk_label_set_text (GTK_LABEL (tool->report_label), label);
@@ -496,20 +419,6 @@ report_progress (GstTool *tool, const gchar *label)
 
 	if (tool->input_id)
 		gtk_input_remove (tool->input_id);
-
-#if 0
-	if (!tool->run_again)
-	{
-		/* Set progress to 100% and wait a bit before closing display */
-		gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 1.0);
-
-		cb_id = gtk_timeout_add (1500, (GtkFunction) timeout_cb, tool);
-		gtk_main ();
-		gtk_timeout_remove (cb_id);
-	}
-
-	gtk_clist_clear (GTK_CLIST (tool->report_list));
-#endif
 }
 
 static GSList *
@@ -1060,16 +969,6 @@ gst_tool_load (GstTool *tool)
 	return tool->config != NULL;
 }
 
-#if 0
-static void
-gst_tool_save_directive_callback (GstDirectiveEntry *entry)
-{
-	gst_tool_run_set_directive_va (entry->tool, entry->in_xml, entry->report_sign,
-				       entry->directive, entry->ap);
-	gst_dialog_thaw_visible (entry->tool->main_dialog);
-}
-#endif
-
 gboolean
 gst_tool_save (GstTool *tool)
 {
@@ -1249,45 +1148,8 @@ gst_tool_class_init (GstToolClass *klass)
 			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
 
-#if 0	
-	gtk_object_class_add_signals (object_class, gsttool_signals, LAST_SIGNAL);
-#endif	
-
 	object_class->destroy = gst_tool_destroy;
 }
-
-#if 0
-
-static void
-visibility_toggled (GtkWidget *w, gpointer data)
-{
-	GstTool *tool;
-	gboolean show;
-	GtkAdjustment *vadj;
-
-	tool = GST_TOOL (data);
-
-	show = GTK_TOGGLE_BUTTON (w)->active;
-	vadj = gtk_scrolled_window_get_vadjustment (
-		GTK_SCROLLED_WINDOW (tool->report_scrolled));
-
-	set_arrow (tool, show ? GTK_ARROW_UP : GTK_ARROW_DOWN);
-
-	if (show) {
-		gtk_widget_set_usize (tool->report_scrolled, -1, 140);
-		gtk_widget_show (tool->report_scrolled);
-		gtk_adjustment_set_value (vadj, vadj->upper - vadj->page_size);
-		gtk_adjustment_value_changed (vadj);
-	} else { 
-		gtk_widget_hide (tool->report_scrolled);
-		if (tool->timeout_done)
-			gtk_main_quit();
-	}
-
-	tool->report_list_visible = show;
-}
-
-#endif
 
 static void
 gst_tool_create_platform_list (GtkTreeView *list, GstTool *tool)
@@ -1424,33 +1286,8 @@ gst_tool_type_init (GstTool *tool)
 	tool->report_window     = glade_xml_get_widget (xml, "report_window");
 	g_signal_connect (GTK_OBJECT (tool->report_window), "delete_event",
 			    G_CALLBACK (report_window_close_cb), tool);
-#if 0
-	tool->report_scrolled   = glade_xml_get_widget (xml, "report_list_scrolled_window");
-	tool->report_progress   = glade_xml_get_widget (xml, "report_progress");
-#endif
+
 	tool->report_label      = glade_xml_get_widget (xml, "report_label");
-#if 0
-	tool->report_list       = glade_xml_get_widget (xml, "report_list");
-	tool->report_entry      = glade_xml_get_widget (xml, "report_text");
-	tool->report_visibility = glade_xml_get_widget (xml, "report_visibility");
-	tool->report_notebook   = glade_xml_get_widget (xml, "report_notebook");
-
-	gtk_notebook_remove_page (GTK_NOTEBOOK (tool->report_notebook), 0);
-	gtk_notebook_append_page (GTK_NOTEBOOK (tool->report_notebook),
-				  gnome_stock_pixmap_widget_new (tool->report_notebook, 
-								 GNOME_STOCK_PIXMAP_UP),
-				  NULL);
-
-	gtk_notebook_append_page (GTK_NOTEBOOK (tool->report_notebook),
-				  gnome_stock_pixmap_widget_new (tool->report_notebook, 
-								 GNOME_STOCK_PIXMAP_DOWN),
-				  NULL);
-
-	set_arrow (tool, GTK_ARROW_DOWN);
-	gtk_widget_show_all (tool->report_notebook);
-
-	glade_xml_signal_connect_data (xml, "visibility_toggled", visibility_toggled, tool);
-#endif
 
 	xml = gst_tool_load_glade_common (tool, "platform_dialog");
 	tool->platform_list = glade_xml_get_widget (xml, "platform_list");

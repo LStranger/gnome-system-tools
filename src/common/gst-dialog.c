@@ -225,7 +225,6 @@ gst_dialog_class_init (GstDialogClass *klass)
 	object_class = (GtkObjectClass *)klass;
 	parent_class = gtk_type_class (GNOME_TYPE_APP);
 
-#if 1	
 	gstdialog_signals[APPLY] = 
 		g_signal_new ("apply",
 			      G_OBJECT_CLASS_TYPE (object_class),
@@ -245,27 +244,6 @@ gst_dialog_class_init (GstDialogClass *klass)
 			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
-#else	
-	gstdialog_signals[APPLY] = 
-		gtk_signal_new ("apply",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (GstDialogClass, apply),
-				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
-
-	gstdialog_signals[COMPLEXITY_CHANGE] =
-		gtk_signal_new ("complexity_change",
-				GTK_RUN_LAST,
-				object_class->type,
-				GTK_SIGNAL_OFFSET (GstDialogClass, complexity_change),
-				gtk_marshal_NONE__NONE,
-				GTK_TYPE_NONE, 0);
-#endif	
-
-#if 0
-	gtk_object_class_add_signals (object_class, gstdialog_signals, LAST_SIGNAL);
-#endif	
 
 	object_class->destroy = gst_dialog_destroy;
 }
@@ -534,24 +512,6 @@ accept_cb (GtkWidget *w, gpointer data)
 static void
 help_cb (GtkWidget *w, gpointer data)
 {
-#warning FIXME	
-#if 0
-	GnomeHelpMenuEntry help_entry = { NULL, "index.html" };
-	GstDialog *dialog;
-
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (GST_IS_DIALOG (data));
-
-	dialog = GST_DIALOG (data);
-
-	help_entry.name = g_strdup_printf ("%s-admin", dialog->tool->name);
-
-	gnome_help_display (NULL, &help_entry);
-
-	g_free (help_entry.name);
-#else
-	g_warning ("FIXME ! Port help_cb to 2.0\n");
-#endif
 }
 
 void
