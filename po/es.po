@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.5\n"
-"POT-Creation-Date: 2001-10-01 17:51-0600\n"
+"POT-Creation-Date: 2001-10-07 00:00+0200\n"
 "PO-Revision-Date: 2001-06-21 01:14+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish\n"
@@ -140,7 +140,6 @@ msgid "_Device:"
 msgstr "_Dispositivo:"
 
 #: interfaces/boot.glade.in.h:31
-#: src/location-manager/location-manager-dialog.c:118
 msgid "_Edit..."
 msgstr "_Editar..."
 
@@ -178,7 +177,7 @@ msgstr "Contraseña:"
 msgid "Run without password"
 msgstr "Ejecutar sin contraseña"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:848
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:930
 msgid "Scanning your system configuration."
 msgstr "Buscando la configuración de su sistema."
 
@@ -256,7 +255,6 @@ msgstr "Detectado"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:5
 #: interfaces/network.glade.in.h:34 src/boot/boot.etspec.h:2
-#: src/print/print.etspec.h:1
 msgid "Device"
 msgstr "Dispositivo"
 
@@ -417,7 +415,7 @@ msgstr "Probar otra vez"
 msgid "Refresh rate:"
 msgstr "Rango de refresco:"
 
-#: interfaces/display.glade.in.h:16 src/print/print.etspec.h:3
+#: interfaces/display.glade.in.h:16
 msgid "Resolution"
 msgstr "Resolución"
 
@@ -551,7 +549,6 @@ msgid "_Remove"
 msgstr "_Eliminar"
 
 #: interfaces/memory.glade.in.h:24
-#: src/location-manager/location-manager-dialog.c:137
 msgid "_Settings"
 msgstr "_Opciones"
 
@@ -772,7 +769,7 @@ msgstr "Permite el control de activación para todos los usuarios"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1577
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1580
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -797,7 +794,7 @@ msgid "Create a new Internet Connection "
 msgstr "Crea una nueva conexión a internet "
 
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.in.h:27
-#: src/network/connection.c:1576
+#: src/network/connection.c:1579
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -877,7 +874,7 @@ msgstr "Dirección IP"
 msgid "IP Settings"
 msgstr "Opciones IP"
 
-#: interfaces/network.glade.in.h:49 src/network/connection.c:1575
+#: interfaces/network.glade.in.h:49 src/network/connection.c:1578
 msgid "Manual"
 msgstr "Manual"
 
@@ -963,8 +960,8 @@ msgstr ""
 
 #: interfaces/network.glade.in.h:70
 msgid ""
-"To continue configuring your account, click \"Next\". To quit, click "
-"\"Cancel\"."
+"To continue configuring your account, click \"Next\". To quit, click \"Cancel"
+"\"."
 msgstr ""
 "Para continuar configurando su cuenta, pulse «Siguiente». Para salir, pulse "
 "«Cancelar»."
@@ -1055,7 +1052,6 @@ msgid "_Configure..."
 msgstr "_Configurar..."
 
 #: interfaces/network.glade.in.h:98
-#: src/location-manager/location-manager-dialog.c:107
 msgid "_Delete..."
 msgstr "_Borrar..."
 
@@ -1973,7 +1969,7 @@ msgstr "Asistente para las imágenes de arranque"
 msgid "Boot Image Editor"
 msgstr "Editor de las imágenes de arranque"
 
-#: src/boot/boot-image.c:40 src/print/settings.c:49
+#: src/boot/boot-image.c:40
 msgid "Unknown"
 msgstr "Desconocido"
 
@@ -2045,7 +2041,7 @@ msgstr ""
 msgid "%s (default)"
 msgstr "%s (predeterminado)"
 
-#: src/boot/boot.etspec.h:1 src/users/profile.c:1032
+#: src/boot/boot.etspec.h:1
 msgid "Default"
 msgstr "Pr_edeterminado"
 
@@ -2053,7 +2049,7 @@ msgstr "Pr_edeterminado"
 msgid "Kernel Image"
 msgstr "Imagen del"
 
-#: src/boot/boot.etspec.h:5 src/print/print.etspec.h:6
+#: src/boot/boot.etspec.h:5
 msgid "Type"
 msgstr "Tipo"
 
@@ -2099,23 +2095,23 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Se ha producido un error al conectar la señal '%s' con el widget '%s'"
 
-#: src/common/xst-tool.c:657
+#: src/common/xst-tool.c:673
 msgid "Closing tool."
 msgstr "Cerrando herramienta."
 
-#: src/common/xst-tool.c:799
-msgid "Skipping set directive..."
-msgstr "Saltándose la directiva..."
+#: src/common/xst-tool.c:865
+msgid "Skipping %s directive..."
+msgstr "Saltándose la directiva %s..."
 
-#: src/common/xst-tool.c:911
+#: src/common/xst-tool.c:1003
 msgid "Skipping actual save..."
 msgstr "Saltándose el guardado actual..."
 
-#: src/common/xst-tool.c:951
+#: src/common/xst-tool.c:1042
 msgid "Updating your system configuration."
 msgstr "Actualizando la configuración de su sistema."
 
-#: src/common/xst-tool.c:970
+#: src/common/xst-tool.c:1061
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2123,16 +2119,16 @@ msgstr ""
 "Se produjo un error al ejecutar el script del backend,\n"
 "y la configuración no ha podido ser cargada."
 
-#: src/common/xst-tool.c:1144
+#: src/common/xst-tool.c:1235
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1329
+#: src/common/xst-tool.c:1423
 msgid "The password you entered is invalid."
 msgstr "La contraseña que ha introducido es incorrecta"
 
-#: src/common/xst-tool.c:1339
+#: src/common/xst-tool.c:1433
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2161,23 +2157,23 @@ msgstr ""
 "--\n"
 "El equipo de las Ximian Setup Tools"
 
-#: src/common/xst-tool.c:1359
+#: src/common/xst-tool.c:1453
 msgid "Don't show me this again"
 msgstr "No vuelva a mostrarme esto"
 
-#: src/common/xst-tool.c:1391
+#: src/common/xst-tool.c:1485
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tEditar configuración en la ubicación LOCATION."
 
-#: src/common/xst-tool.c:1391
+#: src/common/xst-tool.c:1485
 msgid "LOCATION"
 msgstr "UBICACIÓN"
 
-#: src/common/xst-tool.c:1433
+#: src/common/xst-tool.c:1527
 msgid "Pretending we are root..."
 msgstr "Intentando ser root..."
 
-#: src/common/xst-ui.c:546
+#: src/common/xst-ui.c:557
 msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
@@ -2185,20 +2181,14 @@ msgstr ""
 "Por favor reinicie su sesión GNOME para\n"
 "que estos cambios tomen efecto."
 
-#: src/disks/main.c:39
-msgid "Disk Partitions"
-msgstr "Particiones de los discos"
-
 #. run test
 #: src/display/callbacks.c:137
-#, fuzzy
 msgid "Testing current settings."
-msgstr "Probar configuración actual"
+msgstr "Probando configuración actual."
 
 #: src/display/callbacks.c:159
-#, fuzzy
 msgid "Restoring settings..."
-msgstr "_Reestablecer configuración"
+msgstr "Reestablecer configuración..."
 
 #: src/display/callbacks.c:179
 msgid ""
@@ -2206,6 +2196,9 @@ msgid ""
 "several times.\n"
 "Please be patient."
 msgstr ""
+"Voy a probar el servidor X. La pantalla parpadeará\n"
+"varias veces.\n"
+"Por favor sea paciente."
 
 #: src/display/callbacks.c:202
 msgid ""
@@ -2214,42 +2207,50 @@ msgid ""
 "http://bugzilla.ximian.com\n"
 "Thank you!"
 msgstr ""
+"No pude probar tu servidor X.\n"
+"Por favor reportalo usando\n"
+"http://bugzilla.ximian.com\n"
+"¡Gracias!"
 
 #: src/display/main.c:111
-#, fuzzy
 msgid "X Display Configuration"
-msgstr "_Configuración:"
+msgstr "Configuración de las X"
 
 #: src/display/transfer.c:499
 msgid "Probing X server."
-msgstr ""
+msgstr "Probando el servidor X."
 
 #: interfaces/print.glade.in.h:10 src/display/ui.c:64
-#: src/print/settings-gui.c:85
 msgid "256 colors"
 msgstr "256 colores"
 
 #: src/display/ui.c:65
 msgid "32 thousand colors"
-msgstr ""
+msgstr "32 mil colores"
 
 #: src/display/ui.c:66
 msgid "65 thousand colors"
-msgstr ""
+msgstr "65 mil colores"
 
 #: src/display/ui.c:67
-#, fuzzy
 msgid "16 million colors"
-msgstr "16 colors"
+msgstr "16 millones de colores"
+
+#: src/internetsharing/ishare-druid.c:40
+msgid ""
+"Congratulations! Your computer will now be\n"
+"configured to share its internet connection."
+msgstr ""
+"¡Enhorabuena! Este ordenador va ha ser configurado\n"
+"para compartir su conexión a Internet."
 
 #: src/internetsharing/ishare-druid.c:113
-#, fuzzy
 msgid "Retrieving network interface configuration"
-msgstr "Activación de la intefaz de red local."
+msgstr "Obteniendo la configuración de la intefaz de red"
 
 #: src/internetsharing/ishare-druid.c:204
 msgid "No firewall support was found, or it was incomplete."
-msgstr ""
+msgstr "No se ha encontrado soporte de cortafuegos, o estaba incompleto."
 
 #: src/internetsharing/ishare-druid.c:396
 msgid ""
@@ -2257,6 +2258,9 @@ msgid ""
 "manually and come back later to finish\n"
 "the internet sharing configuration."
 msgstr ""
+"Puedes configurar una interfaz de red local\n"
+"manualmente y volver más tarde para terminar\n"
+"la configuración de la compartición de Internet."
 
 #: src/internetsharing/ishare-druid.c:435
 msgid ""
@@ -2264,212 +2268,89 @@ msgid ""
 "system and come back later to finish\n"
 "the internet sharing configuration."
 msgstr ""
+"Puedes instalar un servidor DHCP en tu\n"
+"sistema y volver más tarde a terminar la\n"
+"configuración de la compartición de Internet."
 
 #: interfaces/internetsharing.glade.in.h:33 src/internetsharing/main.c:59
 msgid "Internet Sharing"
 msgstr "Compartición de Internet"
 
-#: src/location-manager/gui-backend-list.c:403
-msgid "Could not launch configuration tool"
-msgstr ""
+#: src/network/callbacks.c:127 src/network/connection.c:807
+#: src/network/connection.c:838
+msgid "Active"
+msgstr "Activa"
 
-#: src/location-manager/gui-backend-list.c:436
-#, c-format
-msgid "Could not launch configuration tool: %s"
-msgstr ""
+#: src/network/callbacks.c:130
+msgid "Activating"
+msgstr "Activando"
 
-#: src/location-manager/location-dialog.c:181
-#, fuzzy
-msgid "Create new location"
-msgstr "Crea una nueva conexión a internet "
+#: src/network/callbacks.c:141 src/network/connection.c:808
+#: src/network/connection.c:839
+msgid "Inactive"
+msgstr "Inactiva"
 
-#: src/location-manager/location-dialog.c:186
-#, fuzzy
-msgid "Copy a location"
-msgstr "Copiar Ubicación"
+#: src/network/callbacks.c:144
+msgid "Deactivating"
+msgstr "Desactivando"
 
-#: src/location-manager/location-dialog.c:191
-#, fuzzy
-msgid "Rename a location"
-msgstr "Renombrar Ubicación"
-
-#: src/location-manager/location-dialog.c:330
-msgid "You must supply a name"
-msgstr ""
-
-#: src/location-manager/location-dialog.c:337
-msgid "You already have a location by that name"
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:98
-msgid "_New..."
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:99
-#, fuzzy
-msgid "Create a new location"
-msgstr "Crea una nueva conexión a internet "
-
-#: src/location-manager/location-manager-dialog.c:101
-#, fuzzy
-msgid "_Copy..."
-msgstr "Copiar..."
-
-#: src/location-manager/location-manager-dialog.c:102
-msgid "Create a new location identical to the selected one"
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:104
-#, fuzzy
-msgid "_Rename..."
-msgstr "Renombrar..."
-
-#: src/location-manager/location-manager-dialog.c:105
-#, fuzzy
-msgid "Rename the selected location"
-msgstr "Renombrar Ubicación"
-
-#: src/location-manager/location-manager-dialog.c:108
-#, fuzzy
-msgid "Delete the selected location"
-msgstr "Opciones para el alias seleccionado"
-
-#: src/location-manager/location-manager-dialog.c:111
-#, fuzzy
-msgid "_Apply..."
-msgstr "_Añadir..."
-
-#: src/location-manager/location-manager-dialog.c:112
-msgid "Apply the changes"
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:119
-#, fuzzy
-msgid "Edit settings for the selected backend"
-msgstr "Opciones para el alias seleccionado"
-
-#: src/location-manager/location-manager-dialog.c:121
-#, fuzzy
-msgid "_Select"
-msgstr "_Borrar"
-
-#: src/location-manager/location-manager-dialog.c:122
-msgid "Select the selected backend for this location"
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:124
-#, fuzzy
-msgid "_Deselect"
-msgstr "_Borrar"
-
-#: src/location-manager/location-manager-dialog.c:125
-msgid "Deselect the selected backend for this location"
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:136
-#, fuzzy
-msgid "_Location"
-msgstr "Ubicación"
-
-#: interfaces/location-manager.glade.in.h:38
-#: src/location-manager/location-manager-dialog.c:138
-msgid "_Help"
-msgstr "_Ayuda"
-
-#: src/location-manager/location-manager-dialog.c:192
-#: src/location-manager/location-manager-dialog.c:512
-#, fuzzy
-msgid "Location Manager"
-msgstr "Administración Ubicaciones"
-
-#: src/location-manager/location-manager-dialog.c:267
-msgid ""
-"Could not retrieve a configuration\n"
-"snapshot. This probably means you do\n"
-"not have the Ximian Setup Tools\n"
-"installed properly."
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:272
-msgid ""
-"Could not retrieve a configuration\n"
-"snapshot. This probably means you are\n"
-"running an old version of the GNOME\n"
-"control center. Please upgrade to\n"
-"at least version 1.3.2 or CVS HEAD."
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:439
-msgid "You cannot delete the default location"
-msgstr ""
-
-#: src/location-manager/location-manager-dialog.c:444
-#, fuzzy, c-format
-msgid "Are you sure you wish to destroy the location %s?"
-msgstr "¿Está seguro que desea borrar el alias de %s?"
-
-#: src/location-manager/location-manager-dialog.c:515
-#, fuzzy
-msgid "Ximian Setup Tools Location Manager"
-msgstr "Ximian Setup Tools - Clave"
-
-#: src/network/callbacks.c:265
+#: src/network/callbacks.c:356
 msgid "The name of this computer"
 msgstr "El nombre de este ordenador"
 
-#: src/network/callbacks.c:268
+#: src/network/callbacks.c:359
 msgid "A short description of your computer"
 msgstr "Una descripción corta de su ordenador"
 
-#: src/network/callbacks.c:271
+#: src/network/callbacks.c:362
 msgid "The Windows Networking workgroup for your network"
 msgstr "El grupo de trabajo en red de Windows para su red"
 
-#: src/network/callbacks.c:274
+#: src/network/callbacks.c:365
 msgid "The IP address of your WINS server"
 msgstr "La dirección IP de su servidor WINS"
 
-#: src/network/callbacks.c:277
+#: src/network/callbacks.c:368
 msgid "The DNS domain for your computer"
 msgstr "El dominio DNS de su ordenador"
 
-#: src/network/callbacks.c:280
+#: src/network/callbacks.c:371
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Una lista de las direcciones IP de sus servidores de DNS"
 
-#: src/network/callbacks.c:283
+#: src/network/callbacks.c:374
 msgid "A list of domains where hosts will be searched"
 msgstr "Una lista de dominios donde se buscarán los ordenadores"
 
-#: src/network/callbacks.c:286
+#: src/network/callbacks.c:377
 msgid "The IP address of this host"
 msgstr "La dirección IP de esta máquina"
 
-#: src/network/callbacks.c:289
+#: src/network/callbacks.c:380
 msgid "Aliases for this host, one per line"
 msgstr "Alias para esta máquina, uno por linea"
 
-#: src/network/callbacks.c:432
+#: src/network/callbacks.c:523
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "¿Eliminar la conexión %s: ``%s''?"
 
-#: src/network/callbacks.c:434
+#: src/network/callbacks.c:525
 #, c-format
 msgid "Remove connection %s?"
 msgstr "¿Eliminar la conexión %s?"
 
-#: src/network/callbacks.c:479
+#: src/network/callbacks.c:580
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Activando conexión ``%s.''"
 
-#: src/network/callbacks.c:502
+#: src/network/callbacks.c:613
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Cortando conexión ``%s''"
 
-#: src/network/callbacks.c:522
+#: src/network/callbacks.c:633
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2477,11 +2358,11 @@ msgstr ""
 "No tiene instalado el soporte para SMB. Instálelo en su sistema\n"
 "para habilitar la red de Windows."
 
-#: src/network/callbacks.c:523
+#: src/network/callbacks.c:634
 msgid "SMB support missing."
 msgstr "Falta el soporte para SMB."
 
-#: src/network/callbacks.c:564
+#: src/network/callbacks.c:675
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -2495,11 +2376,11 @@ msgstr ""
 "\n"
 "¿Continuar de todas formas?"
 
-#: src/network/callbacks.c:570
+#: src/network/callbacks.c:681
 msgid "Don't change host name"
 msgstr "No cambiar el nombre de máquina"
 
-#: src/network/callbacks.c:610
+#: src/network/callbacks.c:721
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2509,7 +2390,7 @@ msgstr ""
 "Necesita instalarlo o las conexiones PPP (módem)\n"
 "no se activarán."
 
-#: src/network/callbacks.c:631
+#: src/network/callbacks.c:742
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2523,7 +2404,7 @@ msgstr ""
 "\n"
 "¿Continuar de todas formas?"
 
-#: src/network/callbacks.c:658
+#: src/network/callbacks.c:769
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -2535,11 +2416,11 @@ msgstr ""
 "\n"
 "¿Continuar de todas formas?"
 
-#: src/network/callbacks.c:665
+#: src/network/callbacks.c:776
 msgid "Activate connection"
 msgstr "Activar conexión"
 
-#: src/network/callbacks.c:711
+#: src/network/callbacks.c:822
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -2581,15 +2462,7 @@ msgstr "Loopback: interfaz virtual"
 msgid "Unknown type"
 msgstr "Tipo desconocido"
 
-#: src/network/connection.c:807 src/network/connection.c:838
-msgid "Active"
-msgstr "Activa"
-
-#: src/network/connection.c:808 src/network/connection.c:839
-msgid "Inactive"
-msgstr "Inactiva"
-
-#: src/network/connection.c:1352
+#: src/network/connection.c:1355
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2599,7 +2472,7 @@ msgstr ""
 "red de la interfaz. Por favor introduzca una dirección\n"
 "IP valida en esos campos para continuar."
 
-#: src/network/connection.c:1359
+#: src/network/connection.c:1362
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2609,7 +2482,7 @@ msgstr ""
 "remota de la interfaz. Por favor introduzca una\n"
 "dirección IP valida en esos campos para continuar."
 
-#: src/network/connection.c:1365
+#: src/network/connection.c:1368
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2699,139 +2572,13 @@ msgstr "Configuración del adaptador de red."
 msgid "Networking"
 msgstr "Red"
 
-#: src/print/callbacks.c:144
-#, fuzzy, c-format
-msgid "Delete %s?"
-msgstr "Borrar"
-
-#: src/print/main.c:103
-#, fuzzy
-msgid "Print tool"
-msgstr "Imprimir"
-
-#: src/print/print.etspec.h:2
-msgid "Paper"
-msgstr "Papel"
-
-#: src/print/print.etspec.h:4
-#, fuzzy
-msgid "Share"
-msgstr "Compartidos"
-
-#: src/print/print.etspec.h:5
-msgid "Spool"
-msgstr "Cola"
-
-#. give our dialog an OK button and title
-#: src/print/settings-editor.c:122
-#, fuzzy
-msgid "Printer Settings Editor"
-msgstr "Opciones de la impresora"
-
-#: interfaces/print.glade.in.h:11 src/print/settings-gui.c:51
-msgid "300x300"
-msgstr "300x300"
-
-#: interfaces/print.glade.in.h:12 src/print/settings-gui.c:52
-msgid "400x400"
-msgstr "400x400"
-
-#: interfaces/print.glade.in.h:13 src/print/settings-gui.c:53
-msgid "600x600"
-msgstr "600x600"
-
-#: interfaces/print.glade.in.h:8 src/print/settings-gui.c:54
-msgid "1200x600"
-msgstr "1200x600"
-
-#: interfaces/print.glade.in.h:7 src/print/settings-gui.c:55
-msgid "1200x1200"
-msgstr "1200x1200"
-
-#: interfaces/print.glade.in.h:27 src/print/settings-gui.c:68
-msgid "Letter"
-msgstr "Letter"
-
-#: interfaces/print.glade.in.h:26 src/print/settings-gui.c:69
-msgid "Legal"
-msgstr "Legal"
-
-#: interfaces/print.glade.in.h:15 src/print/settings-gui.c:70
-msgid "A4"
-msgstr "A4"
-
-#: interfaces/print.glade.in.h:14 src/print/settings-gui.c:71
-msgid "A3"
-msgstr "A3"
-
-#: interfaces/print.glade.in.h:9 src/print/settings-gui.c:84
-msgid "16 colors"
-msgstr "16 colors"
-
-#: src/print/settings-gui.c:86
-#, fuzzy
-msgid "High color"
-msgstr "Color de alta densidad"
-
-#: src/print/settings-gui.c:87
-#, fuzzy
-msgid "True color"
-msgstr "Color verdadero"
-
-#: interfaces/print.glade.in.h:1 src/print/settings-gui.c:102
-msgid "/dev/lp0 (LPT1)"
-msgstr "/dev/lp0 (LPT1)"
-
-#: interfaces/print.glade.in.h:2 src/print/settings-gui.c:103
-msgid "/dev/lp1 (LPT2)"
-msgstr "/dev/lp1 (LPT2)"
-
-#: interfaces/print.glade.in.h:3 src/print/settings-gui.c:104
-msgid "/dev/ttyS0 (COM1)"
-msgstr "/dev/ttyS0 (COM1)"
-
-#: interfaces/print.glade.in.h:4 src/print/settings-gui.c:105
-msgid "/dev/ttyS1 (COM2)"
-msgstr "/dev/ttyS1 (COM2)"
-
-#: interfaces/print.glade.in.h:5 src/print/settings-gui.c:106
-msgid "/dev/ttyS2 (COM3)"
-msgstr "/dev/ttyS2 (COM3)"
-
-#: interfaces/print.glade.in.h:6 src/print/settings-gui.c:107
-msgid "/dev/ttyS3 (COM4)"
-msgstr "/dev/ttyS3 (COM4)"
-
-#: src/print/settings.c:43
-#, fuzzy
-msgid "Local"
-msgstr "IP _local:"
-
-#: src/print/settings.c:44
-msgid "UNIX"
-msgstr ""
-
-#: src/print/settings.c:45
-#, fuzzy
-msgid "Windows"
-msgstr "Windows NT"
-
-#: src/print/settings.c:46
-msgid "Novell"
-msgstr ""
-
-#: src/print/settings.c:47
-msgid "JetDirect"
-msgstr ""
-
 #: src/shares/export_clients.etspec.h:1
 msgid "Pattern"
 msgstr "Patrón"
 
 #: src/shares/export_clients.etspec.h:2
-#, fuzzy
 msgid "Write"
-msgstr "Escribible"
+msgstr "Escribir"
 
 #: src/shares/main.c:155
 msgid "New Shares Admin"
@@ -2840,7 +2587,7 @@ msgstr "Nuevo administrador de comparticiones"
 #: src/shares/tables.c:190
 #, c-format
 msgid "%s on %s\n"
-msgstr ""
+msgstr "%s en %s\n"
 
 #: src/shares/tables.c:246
 msgid ""
@@ -2849,6 +2596,10 @@ msgid ""
 "might have specified bad parameters:\n"
 "\n"
 msgstr ""
+"No pude montar las siguientes fuentes compartidas \n"
+"puede que no estén disponibles temporalmente, o\n"
+"puede que hayas especificado parámetros erroneos:\n"
+"\n"
 
 #: src/shares/tables.c:249
 msgid ""
@@ -2857,6 +2608,10 @@ msgid ""
 "might have specified bad parameters:\n"
 "\n"
 msgstr ""
+"No pude montar las siguientes fuentes compartidas \n"
+"puede que no estén disponibles temporalmente, o\n"
+"puede que hayas especificado parámetros erroneos:\n"
+"\n"
 
 #: src/shares/tables.c:265
 msgid ""
@@ -2865,6 +2620,10 @@ msgid ""
 "they might be in use by programs:\n"
 "\n"
 msgstr ""
+"\n"
+"Tampoco se desmontaron las siguienes fuentes compartidas\n"
+"puede que las este usando el programa:\n"
+"\n"
 
 #: src/shares/tables.c:267
 msgid ""
@@ -2873,6 +2632,10 @@ msgid ""
 "it might be in use by programs:\n"
 "\n"
 msgstr ""
+"\n"
+"Tampoco se desmontaron las siguienes fuentes compartidas -\n"
+"puede que las esten usando los programas:\n"
+"\n"
 
 #: src/shares/tables.c:275
 msgid ""
@@ -2880,6 +2643,9 @@ msgid ""
 "they might be in use by programs:\n"
 "\n"
 msgstr ""
+"No pude desmontar las siguienes fuentes compartidas -\n"
+"puede que las esten usando los programas:\n"
+"\n"
 
 #: src/shares/tables.c:277
 msgid ""
@@ -2887,6 +2653,9 @@ msgid ""
 "it might be in use by programs:\n"
 "\n"
 msgstr ""
+"No pude desmontar las siguienes fuentes compartidas -\n"
+"puede que las esten usando los programas:\n"
+"\n"
 
 #: src/shares/tables.c:883
 msgid "Mount"
@@ -2988,41 +2757,38 @@ msgstr ""
 "donde la importación será montada."
 
 #: src/shares/validate.c:260
-#, fuzzy
 msgid ""
 "You do not have access to the local point, i.e. directory\n"
 "where the import would be mounted.\n"
 "Please select another one."
 msgstr ""
-"Necesita especificar un punto local, es decir, un directorio,\n"
-"donde la importación será montada."
+"No tienes acceso al punto local, p.e. un directorio donde\n"
+"la importación será montada.\n"
+"Por favor seleccione otra."
 
 #: src/shares/validate.c:268
-#, fuzzy
 msgid ""
 "The local mount point does not exist.\n"
 "Would you like to create it?"
 msgstr ""
-"La ruta que quiere compartir no existe.\n"
-"¿Quiere crearla?"
+"No existe el punto de montaje local.\n"
+"¿Quiere crearlo?"
 
 #: src/shares/validate.c:279
-#, fuzzy
 msgid ""
 "The mount point you specified is not a directory.\n"
 "You can only import to directories, not files."
 msgstr ""
-"La ruta que quiere compartir apunta a un archivo concreto.\n"
-"Solo puede compartir directorios, no archivos."
+"El punto de montaje que has especificado no es un directorio.\n"
+"Solo puede importar a directorios, no a archivos."
 
 #: src/shares/validate.c:287
-#, fuzzy
 msgid ""
 "The mount point you specified is not a directory,\n"
 "and you can only import to directories."
 msgstr ""
-"La ruta que quiere compartir no es un directorio,\n"
-"y solo puede compartir directorios."
+"El punto de montaje que has especificado no es un directorio,\n"
+"y solo puede importar a directorios."
 
 #: src/shares/validate.c:299
 msgid ""
@@ -3595,6 +3361,66 @@ msgstr ""
 "Use esta herramienta para administrar todas las ubicaciones donde pueda "
 "querer usar su portatil."
 
+#: interfaces/location-manager.glade.in.h:38
+msgid "_Help"
+msgstr "_Ayuda"
+
+#: interfaces/print.glade.in.h:1
+msgid "/dev/lp0 (LPT1)"
+msgstr "/dev/lp0 (LPT1)"
+
+#: interfaces/print.glade.in.h:2
+msgid "/dev/lp1 (LPT2)"
+msgstr "/dev/lp1 (LPT2)"
+
+#: interfaces/print.glade.in.h:3
+msgid "/dev/ttyS0 (COM1)"
+msgstr "/dev/ttyS0 (COM1)"
+
+#: interfaces/print.glade.in.h:4
+msgid "/dev/ttyS1 (COM2)"
+msgstr "/dev/ttyS1 (COM2)"
+
+#: interfaces/print.glade.in.h:5
+msgid "/dev/ttyS2 (COM3)"
+msgstr "/dev/ttyS2 (COM3)"
+
+#: interfaces/print.glade.in.h:6
+msgid "/dev/ttyS3 (COM4)"
+msgstr "/dev/ttyS3 (COM4)"
+
+#: interfaces/print.glade.in.h:7
+msgid "1200x1200"
+msgstr "1200x1200"
+
+#: interfaces/print.glade.in.h:8
+msgid "1200x600"
+msgstr "1200x600"
+
+#: interfaces/print.glade.in.h:9
+msgid "16 colors"
+msgstr "16 colors"
+
+#: interfaces/print.glade.in.h:11
+msgid "300x300"
+msgstr "300x300"
+
+#: interfaces/print.glade.in.h:12
+msgid "400x400"
+msgstr "400x400"
+
+#: interfaces/print.glade.in.h:13
+msgid "600x600"
+msgstr "600x600"
+
+#: interfaces/print.glade.in.h:14
+msgid "A3"
+msgstr "A3"
+
+#: interfaces/print.glade.in.h:15
+msgid "A4"
+msgstr "A4"
+
 #: interfaces/print.glade.in.h:16
 msgid "Add Printer..."
 msgstr "Añadir Impresora..."
@@ -3629,6 +3455,14 @@ msgstr "Expulsar explícitamente la última página"
 #: interfaces/print.glade.in.h:25
 msgid "High Color"
 msgstr "Color de alta densidad"
+
+#: interfaces/print.glade.in.h:26
+msgid "Legal"
+msgstr "Legal"
+
+#: interfaces/print.glade.in.h:27
+msgid "Letter"
+msgstr "Letter"
 
 #: interfaces/print.glade.in.h:28
 msgid "Name of the printer."
@@ -3820,29 +3654,24 @@ msgstr "Bus_car"
 msgid "Choose the file"
 msgstr "Elegir el archivo"
 
-#: src/users/profile.c:684
+#: src/users/profile.c:689
 msgid "Profile Editor"
 msgstr "Editor de Perfiles"
 
-#: src/users/profile.c:885
+#: src/users/profile.c:876
 msgid "Profile with given name already exists."
 msgstr "Ya existe un perfil con el nombre dado."
 
-#: src/users/profile.c:888
+#: src/users/profile.c:879
 msgid "Profile name must not be empty."
 msgstr "El nombre del perfil no debe estar vacío."
 
-#. name
-#: src/users/profile.c:1033
-msgid "Default profile"
-msgstr "Perfil predeterminado"
-
-#: src/users/profile.c:1349
+#: src/users/profile.c:1214
 msgid "Can't delete Default"
 msgstr "No puede borrar el valor predeterminado"
 
 #. FIXME: list ALL known vars.
-#: src/users/profile.c:1475
+#: src/users/profile.c:1340
 #, c-format
 msgid ""
 "Unknown variable '%s'.\n"
@@ -3910,67 +3739,5 @@ msgstr "Usuario"
 msgid "Profile"
 msgstr "Perfil"
 
-#~ msgid "D_efault"
-#~ msgstr "Pr_edeterminado"
-
-#~ msgid "Skipping backend init..."
-#~ msgstr "Saltándose la inicialización del backend..."
-
-#~ msgid "Disks"
-#~ msgstr "Discos"
-
-#~ msgid "Local fixed media."
-#~ msgstr "Medio fijo local."
-
-#~ msgid "Are You sure you want to remove %s?"
-#~ msgstr "¿Está seguro que desea borrar %s?"
-
-#~ msgid "Path to new swap location is empty."
-#~ msgstr ""
-#~ "La ruta para la nueva ubicación de la memoria de intercambio está vacía."
-
-#~ msgid "Swap space %s already exist."
-#~ msgstr "El espacio de memoria de intercambio %s ya existe."
-
-#~ msgid "Swap Management"
-#~ msgstr "Administración de la memoria de intercambio"
-
-#~ msgid "Memory"
-#~ msgstr "Memoria"
-
-#~ msgid "To activate"
-#~ msgstr "Para activar"
-
-#~ msgid "To inactivate"
-#~ msgstr "Para desactivar"
-
-#~ msgid "Username already exists."
-#~ msgstr "El usuario ya existe."
-
-#~ msgid "Enable"
-#~ msgstr "Activo"
-
-#~ msgid "What driver to use."
-#~ msgstr "Qué controlador usar."
-
-#~ msgid ""
-#~ "You don't have IP forwarding support installed.\n"
-#~ "\n"
-#~ "IP Forwarding support is needed to enable internet sharing"
-#~ msgstr ""
-#~ "No tiene instalado el soporte para reenvío de IP.\n"
-#~ "\n"
-#~ "El soporte para reenvío de IP (IP Forwarding) es necesario para habilitar la "
-#~ "compartición de Internet."
-
-#~ msgid "IP Forward support missing."
-#~ msgstr "Falta el soporte para reenvío de IP."
-
-#~ msgid "Lpr based Printing"
-#~ msgstr "Impresión basada en lpr"
-
-#~ msgid "lpr based Printer Admin"
-#~ msgstr "Administrador de Impresoras basadas en lpr"
-
-#~ msgid "Directory import & export"
-#~ msgstr "Directorio para importar y exportar"
+#~ msgid "Default profile"
+#~ msgstr "Perfil predeterminado"
