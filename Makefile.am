@@ -1,7 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-SUBDIRS = interfaces backends pixmaps src po
-# doc
+SUBDIRS = doc interfaces backends pixmaps src po
 
 EXTRA_DIST = \
 	HACKING 		\
