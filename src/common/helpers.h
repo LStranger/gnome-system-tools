@@ -1,6 +1,6 @@
 #include <gnome.h>
 
-
+#if 0
 int ip_first_entry_is_valid(GtkEditable *ip_entry);
 
 int ip_entry_is_valid(GtkEditable *ip_entry);
@@ -15,6 +15,10 @@ void clist_add_ip(GtkCList *clist, GtkWidget *w_ip_1, GtkWidget *w_ip_2,
 		  GtkWidget *w_ip_3, GtkWidget *w_ip_4);
 
 void clist_add_word(GtkCList *clist, GtkWidget *editable);
+#endif
+
+gboolean check_ip_string (const char *ip, gboolean allow_mask);
+gboolean check_ip_entry (GtkEntry *entry, gboolean allow_mask);
 
 void set_ctree_checkmark(GtkCTree *ctree, GtkCTreeNode *node,
 			 gint column, gboolean state);

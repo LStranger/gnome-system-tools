@@ -21,6 +21,8 @@
 #  include <config.h>
 #endif
 
+#include <ctype.h>
+
 #include <gnome.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
@@ -30,7 +32,10 @@
 #include "checked.xpm"
 #include "unchecked.xpm"
 
+/* define to x for debugging */
+#define d(x)
 
+#if 0
 int
 ip_first_entry_is_valid (GtkEditable *ip_entry)
 {
@@ -259,7 +264,63 @@ clist_add_ip (GtkCList *clist, GtkWidget *w_ip_1, GtkWidget *w_ip_2, GtkWidget *
 
 	g_free (ip);
 }
+#endif
 
+gboolean
+check_ip_string (const char *ip, gboolean allow_mask)
+{
+	char **nums, *num;
+	int i, j, x, min = 0, max = 0;
+	gboolean retval = FALSE;
+
+	d(g_print ("checking: %s\n", ip));
+
+	if (!(ip && ip[0] && strlen (ip) > 6))
+		return retval;
+
+	nums = g_strsplit (ip, ".", 3);
+
+	for (i=0; (num = nums[i]); i++) {
+		d(g_print ("    checking: %s\n", num));
+		for (j=0; num[j]; j++)
+			if (!isdigit (num[j]))
+				goto real_check_ip_cleanup;
+		x = atoi (num);
+		switch (i) {
+		case 0:
+			min = 1;
+			max = allow_mask ? 255 : 254;
+			break;
+		case 1: case 2:
+			min = 0;
+			max = 255;
+			break;
+		case 3:
+			min = allow_mask ? 0 : 1;
+			max = allow_mask ? 255 : 254;
+			break;
+		default:
+			g_assert_not_reached ();
+		}
+
+		if (x < min || x > max)
+			goto real_check_ip_cleanup;
+	}
+	retval = (i == 4);
+ real_check_ip_cleanup:
+	g_strfreev (nums);
+	d(g_print ("returning: %d\n", retval));
+	return retval;
+}
+
+gboolean
+check_ip_entry (GtkEntry *entry, gboolean allow_mask)
+{
+	g_return_val_if_fail (entry != NULL, FALSE);
+	g_return_val_if_fail (GTK_IS_ENTRY (entry), FALSE);
+
+	return check_ip_string (gtk_entry_get_text (entry), allow_mask);
+}
 
 /* --- CTree checkmarks --- */
 
