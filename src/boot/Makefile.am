@@ -20,11 +20,16 @@ EXTRA_DIST = $(XST_TOOL_EXTRA_DIST)
 boot_admin_LDADD = $(XST_TOOL_LIBS)
 boot_admin_DEPENDENCIES = $(XST_TOOL_DEPENDENCIES)
 boot_admin_SOURCES = \
-	main.c \
-	callbacks.c 		callbacks.h \
-	transfer.c 		transfer.h \
-	e-table.c 		e-table.h \
-	boot-settings.c	boot-settings.h 
+	main.c                              \
+	callbacks.c 		callbacks.h     \
+	transfer.c 		transfer.h      \
+	e-table.c 		e-table.h       \
+	boot-settings.c	boot-settings.h \
+	boot-image.c		boot-image.h    \
+	boot-image-editor.c boot-image-editor.h \
+	boot-druid.c		boot-druid.h
+
+
 
 toolpixmaps =
 etspecs = boot.etspec
