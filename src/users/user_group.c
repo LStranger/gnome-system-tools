@@ -1388,7 +1388,7 @@ user_account_check_home_warnings (UserAccount *account, GList *warnings)
 			break;
 		case EACCES:
 			if (!account->new)
-				text = _("Couldn't	 get access to the home directory.");
+				text = _("Couldn't get access to the home directory.");
 			break;
 		default:
 			if (!account->new)
