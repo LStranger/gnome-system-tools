@@ -51,13 +51,14 @@ static enum {
 static GtkObjectClass *parent_class;
 static gint xsttool_signals[LAST_SIGNAL] = { 0 };
 
-static gboolean platform_unknown_cb (XstTool *tool, XstReportLine *rline);
 static gboolean platform_unsupported_cb (XstTool *tool, XstReportLine *rline);
 static gboolean platform_add_supported_cb (XstTool *tool, XstReportLine *rline);
 static gboolean platform_set_current_cb (XstTool *tool, XstReportLine *rline);
 
+static void report_dispatch (XstTool *tool);
+
 static XstReportHookEntry common_report_hooks[] = {
-	{ 599, platform_unknown_cb,        XST_REPORT_HOOK_LOADSAVE, FALSE },  /* Unable to guess platform */
+	{ 599, platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },  /* Unable to guess platform */
 	{ 598, platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },  /* Unsupported platform */
 	{ 296, platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE  },  /* Supported: [platform] */
 	{ 295, platform_set_current_cb,    XST_REPORT_HOOK_LOAD,     FALSE },  /* Configuring for [platform] */
@@ -66,21 +67,8 @@ static XstReportHookEntry common_report_hooks[] = {
 
 /* --- Report hook callbacks --- */
 
-static gboolean
-platform_unknown_cb (XstTool *tool, XstReportLine *rline)
-{
-	GtkWidget *d;
-
-	d = gnome_ok_dialog (_("The backend was unable to guess your computer's\n"
-			       "platform. In the future, you will be able to specify\n"
-			       "one at this point, but today we'll just quit."));
-
-	gnome_dialog_run_and_close (GNOME_DIALOG (d));
-	exit (1);
-}
-
 static void
-platform_list_select_row_cb (GtkCList *clist, gint row, gint columt, GdkEvent *event,
+platform_list_select_row_cb (GtkCList *clist, gint row, gint column, GdkEvent *event,
 			     gpointer data)
 {
 	XstTool *tool;
@@ -90,48 +78,25 @@ platform_list_select_row_cb (GtkCList *clist, gint row, gint columt, GdkEvent *e
 	gtk_widget_set_sensitive (tool->platform_ok_button, TRUE);
 }
 
-static gboolean
-platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
+static void
+platform_list_unselect_row_cb (GtkCList *clist, gint row, gint column, GdkEvent *event,
+			       gpointer data)
 {
-	GSList *list;
-	XstPlatform *platform;
-	char *platform_text[1];
-	int ret;
-	gint selected_row = -1;
+	XstTool *tool;
 
-	/* Fill in the platform GtkCList */
-
-	gtk_clist_clear (GTK_CLIST (tool->platform_list));
-
-	for (list = tool->supported_platforms_list; list;
-	     list = g_slist_next (list))
-	{
-		platform = (XstPlatform *) list->data;
-
-		platform_text [0] = xst_platform_get_name (platform);
-		gtk_clist_append (GTK_CLIST (tool->platform_list), platform_text);
-	}
-
-	/* Run it */
-
-        tool->platform_selected_row = -1;
-	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "select-row",
-			    platform_list_select_row_cb, tool);
-
+	tool = (XstTool *) data;
+	tool->platform_selected_row = -1;
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
+}
 
-	ret = gnome_dialog_run_and_close (GNOME_DIALOG (tool->platform_dialog));
-
+static void
+platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
+{
 	if (ret == -1 || ret == 1)
 		exit (1);
 
 	/* Locate the selected platform and set it up as the current one. Prepare to
 	 * invoke the backend again, this time with the current platform specified. */
-
-	/* FIXME: Avoid this by making the Ok button insensitive until choice made. */
-
-	if (tool->platform_selected_row == -1)
-		exit (1);
 
 	if (tool->current_platform)
 		xst_platform_free (tool->current_platform);
@@ -142,8 +107,50 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 						   tool->platform_selected_row));
 
 	g_assert (tool->current_platform);
+
+	tool->report_dispatch_pending = FALSE;
 	tool->report_finished = TRUE;
 	tool->run_again = TRUE;
+
+	report_dispatch (tool);
+}
+
+static gboolean
+platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
+{
+	GSList *list;
+	XstPlatform *platform;
+	char *platform_text[1];
+
+	tool->report_dispatch_pending = TRUE;
+
+	/* Fill in the platform GtkCList */
+
+	gtk_clist_clear (GTK_CLIST (tool->platform_list));
+
+	for (list = tool->supported_platforms_list; list;
+	     list = g_slist_next (list))
+	{
+		platform = (XstPlatform *) list->data;
+
+		platform_text [0] = (char *) xst_platform_get_name (platform);
+		gtk_clist_append (GTK_CLIST (tool->platform_list), platform_text);
+	}
+
+	/* Prepare dialog and show it */
+
+	tool->platform_selected_row = -1;
+
+	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "select-row",
+			    platform_list_select_row_cb, tool);
+	gtk_signal_connect (GTK_OBJECT (tool->platform_list), "unselect-row",
+			    platform_list_unselect_row_cb, tool);
+	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "clicked",
+			    platform_unsupported_clicked_cb, tool);
+
+	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
+	gtk_widget_show (tool->platform_dialog);
+
 	return TRUE;
 }
 
@@ -283,7 +290,7 @@ report_clear_lines (XstTool *tool)
 }
 
 static void
-report_dispatch_lines (XstTool *tool)
+report_dispatch (XstTool *tool)
 {
 	GSList *list;
 	XstReportLine *rline;
@@ -328,19 +335,26 @@ report_dispatch_lines (XstTool *tool)
 			else
 				scroll = FALSE;
 
-			report_text [1] = xst_report_line_get_message (rline);
+			report_text [1] = (char *) xst_report_line_get_message (rline);
 			gtk_clist_append (GTK_CLIST (tool->report_list), report_text);
 
 			if (scroll)
 				gtk_adjustment_set_value (vadj, vadj->upper - vadj->page_size);
 
-			tool->report_dispatch_pending = TRUE;
 			xst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
-			tool->report_dispatch_pending = FALSE;
 		}
 
 		xst_report_line_set_handled (rline, TRUE);
 	}
+
+	if (tool->report_finished && tool->input_id)
+	{
+		gdk_input_remove (tool->input_id);
+		tool->input_id = 0;
+	}
+
+	if (tool->report_finished && !tool->report_dispatch_pending)
+		gtk_main_quit ();
 }
 
 static void
@@ -401,17 +415,19 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		tool->report_finished = TRUE;
 	}
 
-	if (!tool->report_dispatch_pending)
-		report_dispatch_lines (tool);
+	if (tool->report_finished && tool->input_id)
+	{
+		gdk_input_remove (tool->input_id);
+		tool->input_id = 0;
+	}
 
-	if (tool->report_finished && !tool->report_dispatch_pending)
-		gtk_main_quit ();
+	if (!tool->report_dispatch_pending)
+		report_dispatch (tool);
 }
 
 static void
 report_progress (XstTool *tool, int fd, const gchar *label)
 {
-	guint input_id;
 	gint cb_id;
 
 	tool->timeout_done = FALSE;
@@ -428,14 +444,15 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 
 	gtk_progress_set_percentage (GTK_PROGRESS (tool->report_progress), 0.0);
 	
-	input_id = gtk_input_add_full (fd, GDK_INPUT_READ, report_progress_tick,
-				       NULL, tool, NULL);
+	tool->input_id = gtk_input_add_full (fd, GDK_INPUT_READ, report_progress_tick,
+					     NULL, tool, NULL);
 
 	gtk_widget_show (tool->report_window);
 	
 	gtk_main ();
 
-	gtk_input_remove (input_id);
+	if (tool->input_id)
+		gtk_input_remove (tool->input_id);
 
 	if (!tool->run_again)
 	{

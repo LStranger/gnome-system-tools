@@ -1,3 +1,17 @@
+2001-02-25  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-tool.c (platform_unknown_cb): Remove.
+	  (report_dispatch): Rename from report_dispatch_lines (). Modify
+	  to work without nested main loops.
+	  (platform_list_unselect_row_cb): Implment.
+	  (platform_unsupported_clicked_cb): Implement.
+	  (platform_unsupported_cb): Modify to work without nested main loops.
+	  Now handles unknown platforms too.
+	  (report_progress): Put input_id in tool context.
+	  (report_progress_tick): Modify to work without nested main loops.
+
+	* xst-tool.h: Add input_id to XstTool context.
+
 2001-02-23  Hans Petter Jansson  <hpj@ximian.com>
 
 	* xst-tool.c (platform_list_select_row_cb): Make Ok button sensitive

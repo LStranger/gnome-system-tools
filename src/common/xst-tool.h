@@ -72,6 +72,7 @@ struct _XstTool {
 
 	char *line;
 	int line_len;
+	guint input_id;
 	GSList *report_line_list;
 	gboolean report_dispatch_pending;
 	gboolean report_finished;
