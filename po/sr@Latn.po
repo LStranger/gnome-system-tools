@@ -9,14 +9,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.25.0\n"
-"POT-Creation-Date: 2003-08-31 02:03+0200\n"
-"PO-Revision-Date: 2003-08-30 23:32+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-09-13 05:39+0200\n"
+"PO-Revision-Date: 2003-09-13 05:38+0200\n"
 "Last-Translator: Slobodan Sredojević <ssl@uns.ns.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Report-Msgid-Bugs-To: \n"
 
 #: gnome-system-tools.schemas.in.h:1
 msgid ""
@@ -216,7 +216,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Podešavanje datoteke sa kernelom (korak 2 od 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1745
+#: src/network/connection.c:1753
 msgid "Manual"
 msgstr "Uputstvo"
 
@@ -372,7 +372,7 @@ msgstr "Složenost"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Unesite lozinku - GNOM Sistemski Alati"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1786
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
 msgid "GNOME System Tools"
 msgstr "Gnom sistemski alati (GNOME System Tools)"
 
@@ -540,7 +540,7 @@ msgstr "Dozvoli kontrolu pokretanja za sve korisnike"
 msgid "Auto"
 msgstr "Automatski"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1755
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -580,7 +580,7 @@ msgstr "Napravi novu internet vezu "
 msgid "Create a new network connection"
 msgstr "Napravite novu mrežnu vezu"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1746
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1754
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1554,7 +1554,7 @@ msgstr "vga=%s nije tačna vga vrednost"
 msgid "Boot Image Wizard"
 msgstr "Čarobnjak za datoteku sa jezgrom"
 
-#: src/boot/boot-image.c:40
+#: src/boot/boot-image.c:40 src/network/profile.c:466
 msgid "Unknown"
 msgstr "Nepoznat"
 
@@ -1724,7 +1724,7 @@ msgstr ""
 "Postoje promene koje nisu primenjene.\n"
 "Da li želite da ih primenite sada?"
 
-#: src/common/gst-dialog.c:571
+#: src/common/gst-dialog.c:592
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Greška povezivanja signal `%s' u elementu `%s'"
@@ -1746,12 +1746,12 @@ msgstr ""
 "Dogodila se greška pri radu pozadinske skripte,\n"
 "i podešavanja ne mogu biti učitana."
 
-#: src/common/gst-tool.c:1509
+#: src/common/gst-tool.c:1522
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Gnom sistemski alati"
 
-#: src/common/gst-tool.c:1687
+#: src/common/gst-tool.c:1700
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1778,11 +1778,11 @@ msgstr ""
 "--\n"
 "„GNOM Sistemski Alati“ tim"
 
-#: src/common/gst-tool.c:1711
+#: src/common/gst-tool.c:1724
 msgid "Warning"
 msgstr "Upozorenje"
 
-#: src/common/gst-tool.c:1720
+#: src/common/gst-tool.c:1733
 msgid "Don't show me this again"
 msgstr "Ovu poruku više ne prikazuj"
 
@@ -1892,7 +1892,7 @@ msgstr ""
 "\n"
 "Nastavljate li, bez obzira na to?"
 
-#: src/network/callbacks.c:708
+#: src/network/callbacks.c:709
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1902,7 +1902,7 @@ msgstr ""
 "Potrebno je da instalirate wvdial jer se Vaše PPP modemske\n"
 "veze neće aktivirati."
 
-#: src/network/callbacks.c:734
+#: src/network/callbacks.c:736
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1916,7 +1916,7 @@ msgstr ""
 "\n"
 "Da li nastavljate, bez obzira na to?"
 
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:763
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -1928,7 +1928,7 @@ msgstr ""
 "\n"
 "Da li nastavljate, bez obzira na to?"
 
-#: src/network/callbacks.c:816
+#: src/network/callbacks.c:818
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -1938,7 +1938,7 @@ msgstr ""
 "opisan. Molim popunite tražene podatke kako bi nastavili\n"
 "ili izaberite drugi uređaj za mrežni prolaz.\n"
 
-#: src/network/callbacks.c:862
+#: src/network/callbacks.c:864
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -1950,17 +1950,17 @@ msgstr ""
 "pod jezičkom za veze. Molim instalirajte\n"
 "redhat-config-network rpm paket kako se ovo ne bi dogodilo."
 
-#: src/network/callbacks.c:900
+#: src/network/callbacks.c:902
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Da li želite da omogućite pristup %s?"
 
-#: src/network/callbacks.c:910
+#: src/network/callbacks.c:912
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Da li želite da onemogućite pristup %s?"
 
-#: src/network/callbacks.c:983
+#: src/network/callbacks.c:999
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1968,23 +1968,23 @@ msgstr ""
 "Ne mogu automatski pronaći modemski urećaj. Proverite da nije modem u "
 "upotrebi i da je pravilno priključen"
 
-#: src/network/callbacks.c:1028
+#: src/network/callbacks.c:1044
 msgid "Silent"
 msgstr "Tiho"
 
-#: src/network/callbacks.c:1030
+#: src/network/callbacks.c:1046
 msgid "Low"
 msgstr "Slabo"
 
-#: src/network/callbacks.c:1032
+#: src/network/callbacks.c:1048
 msgid "Medium"
 msgstr "Srednje"
 
-#: src/network/callbacks.c:1034
+#: src/network/callbacks.c:1050
 msgid "Loud"
 msgstr "Glasno"
 
-#: src/network/callbacks.c:1200
+#: src/network/callbacks.c:1216
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Da li sigurno želite da uklonite drugi nadimak za %s?"
@@ -2029,7 +2029,7 @@ msgstr "Stanje"
 msgid "Description"
 msgstr "Opis"
 
-#: src/network/connection.c:1626
+#: src/network/connection.c:1634
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2039,7 +2039,7 @@ msgstr ""
 "nisu popunjeni. Molim navedite ispravne IP\n"
 "adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1633
+#: src/network/connection.c:1641
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2049,7 +2049,7 @@ msgstr ""
 "pristup nisu popunjeni. Molim navedite ispravne IP\n"
 "adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1639
+#: src/network/connection.c:1647
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2063,7 +2063,12 @@ msgstr ""
 "primarni DNS ili isključite mogućnost ručnog\n"
 "postavljanja DNS opcija."
 
-#: src/network/connection.c:2195
+#: src/network/connection.c:2037
+#, c-format
+msgid "The interface %s doesn't exist."
+msgstr "Uređaj %s ne postoji."
+
+#: src/network/connection.c:2245
 msgid "Autodetecting modem device"
 msgstr "Automatsko prepoznavanje modema"
 
@@ -2075,31 +2080,39 @@ msgstr "IP adresa"
 msgid "Aliases"
 msgstr "Drugi nadimci"
 
-#: src/network/main.c:220
+#: src/network/main.c:221
 msgid "Run the connection druid."
 msgstr "Pokreni programče za veze"
 
-#: src/network/main.c:221
+#: src/network/main.c:222
 msgid "Run the PPP connection druid."
 msgstr "Pokreni PPP programče za stvaranje veza."
 
-#: src/network/main.c:222
+#: src/network/main.c:223
 msgid "Run the ethernet connection druid."
 msgstr "Pokreni programče za umrežavanje"
 
-#: src/network/main.c:223
+#: src/network/main.c:224
 msgid "Run the wlan connection druid."
 msgstr "Pokreni programče za bežično umrežavanje."
 
-#: src/network/main.c:224
+#: src/network/main.c:225
 msgid "Run the parallel port connection druid."
 msgstr "Pokreni programče za paralelno umrežavanje."
 
-#: src/network/main.c:225
+#: src/network/main.c:226
 msgid "Run the irlan connection druid."
 msgstr "Pokreni programče za infra crveno umrežavanje."
 
-#: src/network/main.c:232
+#: src/network/main.c:227
+msgid "Configure a network interface"
+msgstr "Podesi mrežni uređaj"
+
+#: src/network/main.c:227
+msgid "interface"
+msgstr "uređaj"
+
+#: src/network/main.c:234
 msgid "Network Settings"
 msgstr "Podešavanja mreže"
 
@@ -2797,9 +2810,6 @@ msgstr "Korisnici i grupe."
 #~ msgstr ""
 #~ "Čestitamo! Vaš računar je sada podešen\n"
 #~ "da deli svoju Internet vezu.\n"
-
-#~ msgid "Create a new local network interface."
-#~ msgstr "Napravi novi lokalni mrežni pristup."
 
 #~ msgid "DHCP service configuration."
 #~ msgstr "Podešavanje DHCP servisa."
