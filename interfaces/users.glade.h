@@ -67,6 +67,7 @@ gchar *s = N_("Days a password may be used:");
 gchar *s = N_("Minimum days allowed between password changes:");
 gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
+gchar *s = N_("Random Password by default");
 gchar *s = N_("New Profile");
 gchar *s = N_("Delete Profile");
 gchar *s = N_("Save Profile");
