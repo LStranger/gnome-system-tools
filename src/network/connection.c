@@ -43,10 +43,10 @@ struct _XstNetworkInterfaceDescription {
 static const XstNetworkInterfaceDescription xst_iface_desc [] = {
 	{ N_("Other type"),                   XST_CONNECTION_OTHER,   "network.png",     "other_type" },
 	{ N_("Ethernet LAN card"),            XST_CONNECTION_ETH,     "16_ethernet.xpm", "eth"        },
-	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "network.png",     "wvlan"      },
+	{ N_("WaveLAN wireless LAN"),         XST_CONNECTION_WVLAN,   "wavelan-16.png",  "wvlan"      },
 	{ N_("PPP: modem or transfer cable"), XST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp"        },
 	{ N_("Parallel line"),                XST_CONNECTION_PLIP,    "16_plip.xpm",     "plip"       },
-	{ N_("Infrared LAN"),                 XST_CONNECTION_IRLAN,   "network.png",     "irlan"      },
+	{ N_("Infrared LAN"),                 XST_CONNECTION_IRLAN,   "irda-16.png",     "irlan"      },
 	{ N_("Loopback: virtual interface"),  XST_CONNECTION_LO,      "16_loopback.xpm", "lo"         },
 	{ N_("Unknown type"),                 XST_CONNECTION_UNKNOWN, "network.png",     NULL         },
 	{ NULL,                               XST_CONNECTION_UNKNOWN, NULL,              NULL         }
@@ -1640,7 +1640,7 @@ connection_configure (XstConnection *cxn)
 	}
        
 	if (cxn->type == XST_CONNECTION_WVLAN) {
-		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/gnome-laptop.png");
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/wavelan-48.png");
 		fill_wvlan (cxn);
 	} else
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
@@ -1648,6 +1648,7 @@ connection_configure (XstConnection *cxn)
 								 W ("wvlan_vbox")));
 
 	if (cxn->type == XST_CONNECTION_PLIP) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/plip-48.png");
 		fill_ptp (cxn);
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
 					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
@@ -1659,6 +1660,10 @@ connection_configure (XstConnection *cxn)
 
 	if (cxn->type == XST_CONNECTION_ETH) {
 		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/connection-ethernet.png");
+	}
+
+	if (cxn->type == XST_CONNECTION_IRLAN) {
+		xst_ui_image_set_pix (W ("connection_pixmap"), PIXMAPS_DIR "/irda-48.png");
 	}
 
 	cxn->frozen = FALSE;
