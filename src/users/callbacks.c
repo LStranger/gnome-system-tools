@@ -120,28 +120,32 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gd
 
 	cont = 0;
 
+	if (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS) {
+		on_user_settings_clicked (NULL, NULL);
+	}
+	
 	selection = gtk_tree_view_get_selection (treeview);
 	gtk_tree_selection_selected_foreach (selection, counter , &cont);
 	
-	if (event->button == 3)
-	{
+	if (event->button == 3)	{
 		gtk_widget_grab_focus (GTK_WIDGET (treeview));
-		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL))
-		{
-			if (cont < 1)
-			{
+		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL)) {
+			if (cont < 1) {
 				gtk_tree_selection_unselect_all (selection);
 				gtk_tree_selection_select_path (selection, path);
 			}
 
-			if (cont > 1)
-				gtk_widget_set_sensitive (gtk_item_factory_get_widget_by_action (factory,
-												 POPUP_SETTINGS),
-							  FALSE);
-			else
-				gtk_widget_set_sensitive (gtk_item_factory_get_widget_by_action (factory,
-												 POPUP_SETTINGS),
-							  TRUE);
+			if (cont > 1) {
+				gtk_widget_set_sensitive (
+					gtk_item_factory_get_widget_by_action (factory,
+									       POPUP_SETTINGS),
+					FALSE);
+			} else {
+				gtk_widget_set_sensitive (
+					gtk_item_factory_get_widget_by_action (factory,
+									       POPUP_SETTINGS),
+					TRUE);
+			}
 
 			gtk_tree_path_free (path);
 			
