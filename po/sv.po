@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-05-22 17:45+0200\n"
-"PO-Revision-Date: 2001-05-22 17:35+0200\n"
+"POT-Creation-Date: 2001-05-23 17:39+0200\n"
+"PO-Revision-Date: 2001-05-23 17:44+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -702,7 +702,7 @@ msgstr "Komplexitet"
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.in.h:2 src/common/xst-tool.c:626
+#: interfaces/common.glade.in.h:2 src/common/xst-tool.c:640
 msgid "Scanning your system configuration."
 msgstr "Läser av din systemkonfiguration."
 
@@ -764,6 +764,7 @@ msgstr "Upptäckt"
 
 #: interfaces/disks.glade.in.h:9 interfaces/memory.glade.in.h:6
 #: interfaces/network.glade.in.h:40 src/boot/e-table.c:43
+#: src/print/e-table.c:43
 msgid "Device"
 msgstr "Enhet"
 
@@ -845,6 +846,14 @@ msgstr "Typ:"
 #: interfaces/disks.glade.in.h:29
 msgid "VFAT (Windows 95 and newer)"
 msgstr "VFAT (Windows 95 och nyare)"
+
+#: interfaces/disks.glade.in.h:30
+msgid "reiserfs (Linux)"
+msgstr "reiserfs (Linux)"
+
+#: interfaces/disks.glade.in.h:31
+msgid "ufs (FreeBSD)"
+msgstr "ufs (FreeBSD)"
 
 #: interfaces/memory.glade.in.h:1 interfaces/nameresolution.glade.in.h:4
 #: interfaces/network.glade.in.h:12 interfaces/shares.glade.in.h:3
@@ -1578,7 +1587,7 @@ msgstr ""
 "Importer är kataloger som finns på andra datorer och som du kan komma åt "
 "över nätverket."
 
-#: interfaces/shares.glade.in.h:29
+#: interfaces/shares.glade.in.h:29 src/shares/tables.c:769
 msgid "Mount"
 msgstr "Montera"
 
@@ -2073,11 +2082,11 @@ msgstr ""
 #: interfaces/users.glade.in.h:83
 msgid ""
 "This is the list of the users available in the system. Create new users or "
-"edit existing user's settings with this dialog."
+"edit existing user settings with this dialog."
 msgstr ""
-"Det här är en lista över de användare som finns på ditt system. Du kan skapa "
-"nya användare eller redigera existerande användares inställningar med detta "
-"dialogfönster."
+"Det här är en lista över de användare som finns tillgängliga på systemet. Du "
+"kan skapa nya användare eller redigera existerande användares inställningar "
+"med detta dialogfönster."
 
 #: interfaces/users.glade.in.h:84
 msgid "Use this dialog to create a new profile."
@@ -2129,7 +2138,7 @@ msgstr "Är du säker på att du vill ta bort %s?"
 msgid "Default"
 msgstr "Standard"
 
-#: src/boot/e-table.c:41
+#: src/boot/e-table.c:41 src/print/e-table.c:42
 msgid "Type"
 msgstr "Typ"
 
@@ -2137,15 +2146,15 @@ msgstr "Typ"
 msgid "Kernel Image"
 msgstr "Kärnavbildsfil"
 
-#: src/boot/e-table.c:333
+#: src/boot/e-table.c:350
 msgid "Linux"
 msgstr "Linux"
 
-#: src/boot/e-table.c:337
+#: src/boot/e-table.c:354
 msgid "Other"
 msgstr "Annat"
 
-#: src/boot/e-table.c:347
+#: src/boot/e-table.c:362
 #, c-format
 msgid "%s (default)"
 msgstr "%s (standard)"
@@ -2180,15 +2189,15 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fel anslutningssignal \"%s\" i widgeten \"%s\""
 
-#: src/common/xst-tool.c:530
+#: src/common/xst-tool.c:544
 msgid "Skipping actual save..."
 msgstr "Hoppar över verklig sparning..."
 
-#: src/common/xst-tool.c:556
+#: src/common/xst-tool.c:570
 msgid "Updating your system configuration."
 msgstr "Uppdaterar din systemkonfiguration."
 
-#: src/common/xst-tool.c:680
+#: src/common/xst-tool.c:694
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2196,16 +2205,16 @@ msgstr ""
 "Det uppstod ett fel vid körning av backend-skriptet,\n"
 "och konfigurationen kunde inte läsas in."
 
-#: src/common/xst-tool.c:854
+#: src/common/xst-tool.c:868
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1003
+#: src/common/xst-tool.c:1017
 msgid "Pretending we are root..."
 msgstr "Låtsas att vi är root..."
 
-#: src/common/xst-tool.c:1007
+#: src/common/xst-tool.c:1021
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -2226,6 +2235,11 @@ msgstr ""
 #: src/disks/main.c:39
 msgid "Disk Partitions"
 msgstr "Diskpartitioner"
+
+#: src/memory/callbacks.c:189
+#, c-format
+msgid "Are You sure you want to remove %s?"
+msgstr "Är du säker på att du vill ta bort %s?"
 
 #. No name, no swap
 #: src/memory/callbacks.c:547
@@ -2457,6 +2471,10 @@ msgstr "Mönster"
 msgid "Write"
 msgstr "Skriv"
 
+#: src/shares/tables.c:769
+msgid "Unmount"
+msgstr "Avmontera"
+
 #: src/shares/validate.c:164
 msgid ""
 "Failed to create the path you requested:\n"
@@ -2561,7 +2579,7 @@ msgstr ""
 msgid "NTP support missing."
 msgstr "Stöd för NTP saknas."
 
-#: src/time/main.c:618
+#: src/time/main.c:619
 msgid "Time and Date Settings"
 msgstr "Inställningar för tid och datum"
 
@@ -2643,7 +2661,7 @@ msgid "The username is too long."
 msgstr "Användarnamnet är för långt."
 
 #: src/users/user_group.c:330 src/users/user_group.c:351
-#: src/users/user_group.c:410
+#: src/users/user_group.c:411
 msgid "root user shouldn't be modified."
 msgstr "root-användaren bör inte ändras."
 
@@ -2657,7 +2675,7 @@ msgstr ""
 msgid "Username already exists."
 msgstr "Användarnamnet finns redan."
 
-#: src/users/user_group.c:349 src/users/user_group.c:503
+#: src/users/user_group.c:349 src/users/user_group.c:504
 msgid "User id must be a positive number."
 msgstr "Användar-id måste vara ett positivt tal."
 
@@ -2665,74 +2683,74 @@ msgstr "Användar-id måste vara ett positivt tal."
 msgid "Such user id already exists."
 msgstr "Ett sådant användarid finns redan."
 
-#: src/users/user_group.c:371
+#: src/users/user_group.c:372
 msgid "Please give shell with full path."
 msgstr "Ange skalet med en fullständig sökväg."
 
-#: src/users/user_group.c:406
+#: src/users/user_group.c:407
 msgid "Home directory must not be empty."
 msgstr "Hemkatalogen får inte vara tom."
 
-#: src/users/user_group.c:408
+#: src/users/user_group.c:409
 msgid "Please enter full path for home directory."
 msgstr "Ange den fullständiga sökvägen till hemkatalogen."
 
-#: src/users/user_group.c:439
+#: src/users/user_group.c:440
 msgid "Group name is not valid."
 msgstr "Gruppnamnet är ogiltigt."
 
-#: src/users/user_group.c:442 src/users/user_group.c:507
+#: src/users/user_group.c:443 src/users/user_group.c:508
 msgid "Such group id already exists."
 msgstr "Ett sådant gruppid finns redan."
 
-#: src/users/user_group.c:445
+#: src/users/user_group.c:446
 msgid "Group does not exist. Create new?"
 msgstr "Gruppen finns inte. Skapa ny?"
 
-#: src/users/user_group.c:464
+#: src/users/user_group.c:465
 msgid "Group name is empty."
 msgstr "Gruppnamnet är tomt."
 
-#: src/users/user_group.c:468
+#: src/users/user_group.c:469
 msgid "The group name is too long."
 msgstr "Gruppnamnet är för långt."
 
-#: src/users/user_group.c:472
+#: src/users/user_group.c:473
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Var vänlig och ange ett giltigt gruppnamn, med endast små bokstäver."
 
-#: src/users/user_group.c:476
+#: src/users/user_group.c:477
 msgid "Group already exists."
 msgstr "Gruppen finns redan."
 
-#: src/users/user_group.c:776
+#: src/users/user_group.c:778
 #, c-format
 msgid "Password for User %s"
 msgstr "Lösenord för användaren %s"
 
-#: src/users/user_group.c:810
+#: src/users/user_group.c:812
 msgid "The root user must not be deleted."
 msgstr "Användaren root får inte tas bort."
 
-#: src/users/user_group.c:817
+#: src/users/user_group.c:819
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/user_group.c:840
+#: src/users/user_group.c:842
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/user_group.c:900
+#: src/users/user_group.c:902
 msgid "The root group must not be deleted."
 msgstr "Gruppen root får inte tas bort."
 
-#: src/users/user_group.c:907
+#: src/users/user_group.c:909
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/user_group.c:952
+#: src/users/user_group.c:954
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
@@ -3095,6 +3113,22 @@ msgstr "Stöd för IP-vidarebefordran saknas."
 #: src/print/main.c:109
 msgid "Lpr based Printing"
 msgstr "Lpr-baserad utskrift"
+
+#: src/print/e-table.c:41
+msgid "Spool"
+msgstr "Spoolkatalog"
+
+#: src/print/e-table.c:44
+msgid "Paper"
+msgstr "Papper"
+
+#: src/print/e-table.c:45
+msgid "Resolution"
+msgstr "Upplösning"
+
+#: src/print/e-table.c:46
+msgid "Share"
+msgstr "Utdelning"
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
