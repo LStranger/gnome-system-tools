@@ -6,10 +6,6 @@
 
 gchar *s = N_("Ximian Setup Tools");
 gchar *s = N_("Scanning your system configuration.");
-gchar *s = N_("%P %%");
-gchar *s = N_("label54");
-gchar *s = N_("label51");
-gchar *s = N_("label52");
 gchar *s = N_("Ximian Setup Tools");
 gchar *s = N_("Complexity");
 gchar *s = N_("Unsupported platform");
