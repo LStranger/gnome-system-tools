@@ -33,7 +33,7 @@ use File::Basename;
 #-------------------------
 my $VERSION = "1.5beta5";
 my $LANG    = $ARGV[0];
-my $PACKAGE = "gnumeric";
+my $PACKAGE = "helix-setup-tools";
 
 # Always print as the first thing
 #--------------------------------
