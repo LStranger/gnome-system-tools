@@ -281,6 +281,19 @@ xst_dialog_get_xst_widget (XstDialog *xd, const gchar *name)
 }
 
 void
+xst_dialog_widget_set_user_mode (XstDialog *xd, const gchar *name, XstWidgetMode mode)
+{
+	XstWidget *xw;
+
+	g_return_if_fail (xd != NULL);
+
+	xw = xst_dialog_get_xst_widget (xd, name);
+	g_assert (xw);
+
+	xst_widget_set_user_mode (xw, mode);
+}
+
+void
 xst_dialog_widget_set_user_sensitive (XstDialog *xd, const gchar *name, gboolean state)
 {
 	XstWidget *xw;
@@ -290,8 +303,7 @@ xst_dialog_widget_set_user_sensitive (XstDialog *xd, const gchar *name, gboolean
 	xw = xst_dialog_get_xst_widget (xd, name);
 	g_assert (xw);
 
-	xw->user_sensitive = state;
-	xst_widget_apply_policy (xw);
+	xst_widget_set_user_sensitive (xw, state);
 }
 
 static void

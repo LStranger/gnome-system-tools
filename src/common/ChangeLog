@@ -1,3 +1,12 @@
+2001-04-02  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-widget.[ch] (xst_widget_set_user_mode): Implement.
+	  (xst_widget_set_user_sensitive): Uses former, kept for compat.
+		(xst_widget_apply_policy): Changed to honour full-fledged user modes.
+
+	* xst-dialog.c (xst_dialog_widget_set_user_mode): New shortcut func.
+	  (xst_dialog_widget_set_user_sensitive): Obsoleted, kept for compat.
+
 2001-03-31  Tambet Ingo  <tambet@ximian.com>
 
 	* xst-dialog.c (xst_dialog_set_complexity): Use common functions.

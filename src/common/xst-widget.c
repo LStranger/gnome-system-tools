@@ -47,6 +47,9 @@ xst_widget_apply_policy (XstWidget *xw)
 		g_error ("Unhandled complexity.");
 	}
 
+	if (xw->user < mode)
+		mode = xw->user;
+
 	/* Show or hide the widget. */
 
 	if (mode == XST_WIDGET_MODE_HIDDEN)
@@ -59,7 +62,7 @@ xst_widget_apply_policy (XstWidget *xw)
 
 	/* Sensitize or desensitize the widget. Done separately for readability. */
 
-	if (!xw->user_sensitive || mode == XST_WIDGET_MODE_INSENSITIVE ||
+	if (mode == XST_WIDGET_MODE_INSENSITIVE ||
 	    (have_access == FALSE && xw->need_access == TRUE))
 		gtk_widget_set_sensitive (xw->widget, FALSE);
 	else
@@ -83,15 +86,32 @@ xst_widget_new (GtkWidget *w, XstDialog *d, XstWidgetMode basic, XstWidgetMode a
 	xw->basic          = basic;
 	xw->advanced       = advanced;
 	xw->need_access    = need_access;
-	xw->user_sensitive = user_sensitive;
+
+	if (user_sensitive)
+		xw->user = XST_WIDGET_MODE_SENSITIVE;
+	else
+		xw->user = XST_WIDGET_MODE_INSENSITIVE;
 
 	return (xw);
 }
 
 
 void
+xst_widget_set_user_mode (XstWidget *xw, XstWidgetMode mode)
+{
+	xw->user = mode;
+	xst_widget_apply_policy (xw);
+}
+
+
+/* Backwards compatibility function. Will be removed as soon as all references to
+ * it are cleaned out. */
+
+void
 xst_widget_set_user_sensitive (XstWidget *xw, gboolean user_sensitive)
 {
-	xw->user_sensitive = user_sensitive;
-	xst_widget_apply_policy (xw);
+	if (user_sensitive)
+		xst_widget_set_user_mode (xw, XST_WIDGET_MODE_SENSITIVE);
+	else
+		xst_widget_set_user_mode (xw, XST_WIDGET_MODE_INSENSITIVE);
 }
