@@ -331,7 +331,7 @@ connection_wvsection_name_generate (gchar *dev, xmlNode *root)
 	while (connection_xml_wvsection_search (root, str, NULL))
 	{
 		g_free (str);
-		str = g_strdup_printf ("%s_%d", dev, i);
+		str = g_strdup_printf ("%s_%d", dev, ++i);
 	}
 
 	return str;
