@@ -741,16 +741,7 @@
 
 	      <widget>
 		<class>GtkButton</class>
-		<name>button50</name>
-		<can_default>True</can_default>
-		<can_focus>True</can_focus>
-		<label>Profiles...</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-	      </widget>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>button79</name>
+		<name>button84</name>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
 		<label>Delete</label>
@@ -864,17 +855,33 @@ User GID contains
 	</widget>
 
 	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>checkbutton6</name>
-	  <can_focus>True</can_focus>
-	  <label>Show system users</label>
-	  <active>False</active>
-	  <draw_indicator>True</draw_indicator>
+	  <class>GtkHBox</class>
+	  <name>hbox99</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
 	    <fill>False</fill>
 	  </child>
+
+	  <widget>
+	    <class>GtkCheckButton</class>
+	    <name>checkbutton6</name>
+	    <can_focus>True</can_focus>
+	    <label>Show system users</label>
+	    <active>False</active>
+	    <draw_indicator>True</draw_indicator>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>Placeholder</class>
+	  </widget>
 	</widget>
       </widget>
     </widget>
@@ -992,7 +999,58 @@ User GID contains
 	  </child>
 
 	  <widget>
-	    <class>Placeholder</class>
+	    <class>GtkCList</class>
+	    <name>clist20</name>
+	    <can_focus>True</can_focus>
+	    <columns>3</columns>
+	    <column_widths>121,133,80</column_widths>
+	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	    <show_titles>True</show_titles>
+	    <shadow_type>GTK_SHADOW_IN</shadow_type>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label348</name>
+	      <label>Users</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label349</name>
+	      <label>Comment</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label350</name>
+	      <label>Group</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
 	  </widget>
 	</widget>
 
@@ -1105,6 +1163,217 @@ User GID contains
       <xpad>0</xpad>
       <ypad>0</ypad>
     </widget>
+
+    <widget>
+      <class>GtkVBox</class>
+      <name>vbox96</name>
+      <border_width>3</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox100</name>
+	<border_width>3</border_width>
+	<homogeneous>False</homogeneous>
+	<spacing>3</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap58</name>
+	  <filename>talk-userlist.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkLabel</class>
+	  <name>label352</name>
+	  <label>User profiles can be used as templates to facilitate
+the creation of new users. To edit a profile, 
+change the settings in the following tabs.  </label>
+	  <justify>GTK_JUSTIFY_LEFT</justify>
+	  <wrap>False</wrap>
+	  <xalign>0.5</xalign>
+	  <yalign>0.5</yalign>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GnomePixmap</class>
+	  <name>pixmap59</name>
+	  <filename>32_wrench_logo.png</filename>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkHBox</class>
+	<name>hbox101</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkScrolledWindow</class>
+	  <name>scrolledwindow26</name>
+	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkCList</class>
+	    <name>clist21</name>
+	    <can_focus>True</can_focus>
+	    <columns>2</columns>
+	    <column_widths>143,80</column_widths>
+	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+	    <show_titles>True</show_titles>
+	    <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label353</name>
+	      <label>Profile</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <child_name>CList:title</child_name>
+	      <name>label354</name>
+	      <label>Comment</label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	    </widget>
+	  </widget>
+	</widget>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox97</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label355</name>
+	    <label>
+</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkVButtonBox</class>
+	    <name>vbuttonbox21</name>
+	    <layout_style>GTK_BUTTONBOX_START</layout_style>
+	    <spacing>0</spacing>
+	    <child_min_width>85</child_min_width>
+	    <child_min_height>27</child_min_height>
+	    <child_ipad_x>7</child_ipad_x>
+	    <child_ipad_y>0</child_ipad_y>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button85</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>New</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button86</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Settings...</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+
+	    <widget>
+	      <class>GtkButton</class>
+	      <name>button87</name>
+	      <can_default>True</can_default>
+	      <can_focus>True</can_focus>
+	      <label>Delete</label>
+	      <relief>GTK_RELIEF_NORMAL</relief>
+	    </widget>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkLabel</class>
+      <child_name>Notebook:tab</child_name>
+      <name>label351</name>
+      <label>label351</label>
+      <justify>GTK_JUSTIFY_CENTER</justify>
+      <wrap>False</wrap>
+      <xalign>0.5</xalign>
+      <yalign>0.5</yalign>
+      <xpad>0</xpad>
+      <ypad>0</ypad>
+    </widget>
   </widget>
 </widget>
 
@@ -1143,7 +1412,7 @@ and easily add new users to your system.
     <widget>
       <class>GnomeDruidPageStandard</class>
       <name>druidpagestandard1</name>
-      <title>User Identity  (step 1 of 3)</title>
+      <title>User Identity  (step 1 of 2)</title>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
@@ -1351,382 +1620,8 @@ and easily add new users to your system.
 
     <widget>
       <class>GnomeDruidPageStandard</class>
-      <name>druidpagestandard3</name>
-      <title>User Groups (step 2 of 3)</title>
-      <title_color>255,255,255</title_color>
-      <background_color>0,0,1</background_color>
-      <logo_background_color>1,1,1</logo_background_color>
-      <logo_image>users_wrench.png</logo_image>
-
-      <widget>
-	<class>GtkVBox</class>
-	<child_name>GnomeDruidPageStandard:vbox</child_name>
-	<name>druid-vbox3</name>
-	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkVBox</class>
-	  <name>vbox51</name>
-	  <border_width>3</border_width>
-	  <homogeneous>False</homogeneous>
-	  <spacing>3</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkHBox</class>
-	    <name>hbox49</name>
-	    <border_width>3</border_width>
-	    <homogeneous>False</homogeneous>
-	    <spacing>3</spacing>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <name>label164</name>
-	      <label>On this page, you can select which groups the new user is
-a member of. Groups are useful for blah blah blah blah </label>
-	      <justify>GTK_JUSTIFY_LEFT</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <child>
-		<padding>0</padding>
-		<expand>True</expand>
-		<fill>True</fill>
-	      </child>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkAlignment</class>
-	    <name>alignment53</name>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xscale>0.67</xscale>
-	    <yscale>0.67</yscale>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkTable</class>
-	      <name>table34</name>
-	      <border_width>8</border_width>
-	      <rows>2</rows>
-	      <columns>3</columns>
-	      <homogeneous>False</homogeneous>
-	      <row_spacing>0</row_spacing>
-	      <column_spacing>0</column_spacing>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<name>label173</name>
-		<label>All Groups</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
-		  <top_attach>0</top_attach>
-		  <bottom_attach>1</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>False</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<name>label174</name>
-		<label> anna's Groups</label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<child>
-		  <left_attach>2</left_attach>
-		  <right_attach>3</right_attach>
-		  <top_attach>0</top_attach>
-		  <bottom_attach>1</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>False</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkAlignment</class>
-		<name>alignment50</name>
-		<border_width>8</border_width>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xscale>1</xscale>
-		<yscale>0</yscale>
-		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>False</xfill>
-		  <yfill>False</yfill>
-		</child>
-
-		<widget>
-		  <class>GtkVBox</class>
-		  <name>vbox56</name>
-		  <homogeneous>False</homogeneous>
-		  <spacing>8</spacing>
-
-		  <widget>
-		    <class>GtkButton</class>
-		    <name>button54</name>
-		    <sensitive>False</sensitive>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>clicked</name>
-		      <handler>on_group_settings_add_clicked</handler>
-		      <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
-		    </signal>
-		    <label>Add -&gt;</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
-		    <child>
-		      <padding>0</padding>
-		      <expand>False</expand>
-		      <fill>False</fill>
-		    </child>
-		  </widget>
-
-		  <widget>
-		    <class>GtkButton</class>
-		    <name>button55</name>
-		    <sensitive>False</sensitive>
-		    <can_focus>True</can_focus>
-		    <signal>
-		      <name>clicked</name>
-		      <handler>on_group_settings_remove_clicked</handler>
-		      <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
-		    </signal>
-		    <label>Remove &lt;-</label>
-		    <relief>GTK_RELIEF_NORMAL</relief>
-		    <child>
-		      <padding>0</padding>
-		      <expand>False</expand>
-		      <fill>False</fill>
-		    </child>
-		  </widget>
-		</widget>
-	      </widget>
-
-	      <widget>
-		<class>GtkLabel</class>
-		<name>label175</name>
-		<label></label>
-		<justify>GTK_JUSTIFY_CENTER</justify>
-		<wrap>False</wrap>
-		<xalign>0.5</xalign>
-		<yalign>0.5</yalign>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<child>
-		  <left_attach>1</left_attach>
-		  <right_attach>2</right_attach>
-		  <top_attach>0</top_attach>
-		  <bottom_attach>1</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>False</xexpand>
-		  <yexpand>False</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>False</xfill>
-		  <yfill>False</yfill>
-		</child>
-	      </widget>
-
-	      <widget>
-		<class>GtkScrolledWindow</class>
-		<name>scrolledwindow15</name>
-		<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-		<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-		<child>
-		  <left_attach>2</left_attach>
-		  <right_attach>3</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>True</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>True</yfill>
-		</child>
-
-		<widget>
-		  <class>GtkCList</class>
-		  <name>clist9</name>
-		  <width>100</width>
-		  <height>150</height>
-		  <can_focus>True</can_focus>
-		  <signal>
-		    <name>select_row</name>
-		    <handler>on_group_settings_members_select_row</handler>
-		    <last_modification_time>Wed, 08 Nov 2000 15:04:45 GMT</last_modification_time>
-		  </signal>
-		  <signal>
-		    <name>unselect_row</name>
-		    <handler>on_group_settings_members_select_row</handler>
-		    <last_modification_time>Thu, 09 Nov 2000 12:18:08 GMT</last_modification_time>
-		  </signal>
-		  <columns>1</columns>
-		  <column_widths>80</column_widths>
-		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-		  <show_titles>False</show_titles>
-		  <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>CList:title</child_name>
-		    <name>label176</name>
-		    <label>label27</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-		</widget>
-	      </widget>
-
-	      <widget>
-		<class>GtkScrolledWindow</class>
-		<name>scrolledwindow16</name>
-		<width>100</width>
-		<height>150</height>
-		<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-		<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-		<child>
-		  <left_attach>0</left_attach>
-		  <right_attach>1</right_attach>
-		  <top_attach>1</top_attach>
-		  <bottom_attach>2</bottom_attach>
-		  <xpad>0</xpad>
-		  <ypad>0</ypad>
-		  <xexpand>True</xexpand>
-		  <yexpand>True</yexpand>
-		  <xshrink>False</xshrink>
-		  <yshrink>False</yshrink>
-		  <xfill>True</xfill>
-		  <yfill>True</yfill>
-		</child>
-
-		<widget>
-		  <class>GtkCList</class>
-		  <name>clist10</name>
-		  <can_focus>True</can_focus>
-		  <signal>
-		    <name>select_row</name>
-		    <handler>on_group_settings_all_select_row</handler>
-		    <last_modification_time>Wed, 08 Nov 2000 15:04:36 GMT</last_modification_time>
-		  </signal>
-		  <signal>
-		    <name>unselect_row</name>
-		    <handler>on_group_settings_all_select_row</handler>
-		    <last_modification_time>Thu, 09 Nov 2000 12:16:02 GMT</last_modification_time>
-		  </signal>
-		  <columns>1</columns>
-		  <column_widths>80</column_widths>
-		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-		  <show_titles>False</show_titles>
-		  <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>CList:title</child_name>
-		    <name>label177</name>
-		    <label>label26</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-		</widget>
-	      </widget>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label194</name>
-	    <label>Click &quot;Next&quot; to continue</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GnomeDruidPageStandard</class>
       <name>druidpagestandard4</name>
-      <title>Password options (step 3 of 3)</title>
+      <title>Password options (step 2 of 2)</title>
       <title_color>255,255,255</title_color>
       <background_color>0,0,1</background_color>
       <logo_background_color>1,1,1</logo_background_color>
@@ -3189,217 +3084,6 @@ password&quot;, the second notebook page should be shown.</label>
 
     <widget>
       <class>GtkVBox</class>
-      <name>vbox71</name>
-      <border_width>3</border_width>
-      <homogeneous>False</homogeneous>
-      <spacing>3</spacing>
-
-      <widget>
-	<class>GtkHBox</class>
-	<name>hbox68</name>
-	<border_width>3</border_width>
-	<homogeneous>False</homogeneous>
-	<spacing>3</spacing>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-
-	<widget>
-	  <class>GnomePixmap</class>
-	  <name>pixmap38</name>
-	  <filename>talk-userlist.png</filename>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GtkLabel</class>
-	  <name>label234</name>
-	  <label>User profiles can be used as templates to facilitate
-the creation of new users. To edit a profile, 
-change the settings in the following tabs.  </label>
-	  <justify>GTK_JUSTIFY_LEFT</justify>
-	  <wrap>False</wrap>
-	  <xalign>0.5</xalign>
-	  <yalign>0.5</yalign>
-	  <xpad>0</xpad>
-	  <ypad>0</ypad>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-	</widget>
-
-	<widget>
-	  <class>GnomePixmap</class>
-	  <name>pixmap39</name>
-	  <filename>32_wrench_logo.png</filename>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-      </widget>
-
-      <widget>
-	<class>GtkHBox</class>
-	<name>hbox69</name>
-	<homogeneous>False</homogeneous>
-	<spacing>0</spacing>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-
-	<widget>
-	  <class>GtkScrolledWindow</class>
-	  <name>scrolledwindow19</name>
-	  <hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
-	  <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-	  <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-	  <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkCList</class>
-	    <name>clist13</name>
-	    <can_focus>True</can_focus>
-	    <columns>2</columns>
-	    <column_widths>103,80</column_widths>
-	    <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
-	    <show_titles>True</show_titles>
-	    <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <child_name>CList:title</child_name>
-	      <name>label245</name>
-	      <label>Profile</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	    </widget>
-
-	    <widget>
-	      <class>GtkLabel</class>
-	      <child_name>CList:title</child_name>
-	      <name>label246</name>
-	      <label>Comment</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	    </widget>
-	  </widget>
-	</widget>
-
-	<widget>
-	  <class>GtkVBox</class>
-	  <name>vbox72</name>
-	  <homogeneous>False</homogeneous>
-	  <spacing>0</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label244</name>
-	    <label>
-</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>False</expand>
-	      <fill>False</fill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkVButtonBox</class>
-	    <name>vbuttonbox16</name>
-	    <layout_style>GTK_BUTTONBOX_START</layout_style>
-	    <spacing>0</spacing>
-	    <child_min_width>85</child_min_width>
-	    <child_min_height>27</child_min_height>
-	    <child_ipad_x>7</child_ipad_x>
-	    <child_ipad_y>0</child_ipad_y>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <name>button62</name>
-	      <can_default>True</can_default>
-	      <can_focus>True</can_focus>
-	      <label>New</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <name>button63</name>
-	      <can_default>True</can_default>
-	      <can_focus>True</can_focus>
-	      <label>Duplicate</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <name>button64</name>
-	      <can_default>True</can_default>
-	      <can_focus>True</can_focus>
-	      <label>Delete</label>
-	      <relief>GTK_RELIEF_NORMAL</relief>
-	    </widget>
-	  </widget>
-	</widget>
-      </widget>
-    </widget>
-
-    <widget>
-      <class>GtkLabel</class>
-      <child_name>Notebook:tab</child_name>
-      <name>label239</name>
-      <label>Profiles</label>
-      <justify>GTK_JUSTIFY_CENTER</justify>
-      <wrap>False</wrap>
-      <xalign>0.5</xalign>
-      <yalign>0.5</yalign>
-      <xpad>0</xpad>
-      <ypad>0</ypad>
-    </widget>
-
-    <widget>
-      <class>GtkVBox</class>
       <name>vbox73</name>
       <border_width>3</border_width>
       <homogeneous>False</homogeneous>
@@ -3496,7 +3180,7 @@ writing good sentences for now.</label>
 Teachers
 Students
 </items>
-	  <initial_choice>0</initial_choice>
+	  <initial_choice>2</initial_choice>
 	  <child>
 	    <padding>0</padding>
 	    <expand>False</expand>
@@ -4782,6 +4466,1209 @@ Monks
 	  <fill>False</fill>
 	</child>
       </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>Duplicate Profile</name>
+  <title>Duplicate Profile</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>vbox86</name>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox94</name>
+      <border_width>3</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap56</name>
+	<filename>users.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label327</name>
+	<label>So you want to make a duplicate 
+profile, huh? This here is your dialog.</label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>False</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap57</name>
+	<filename>32_wrench_logo.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkTable</class>
+      <name>table50</name>
+      <border_width>3</border_width>
+      <rows>2</rows>
+      <columns>2</columns>
+      <homogeneous>False</homogeneous>
+      <row_spacing>3</row_spacing>
+      <column_spacing>3</column_spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>False</fill>
+      </child>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label328</name>
+	<label>Name:</label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>False</wrap>
+	<xalign>0</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label329</name>
+	<label>Comment:</label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>False</wrap>
+	<xalign>0</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkEntry</class>
+	<name>entry59</name>
+	<can_focus>True</can_focus>
+	<editable>True</editable>
+	<text_visible>True</text_visible>
+	<text_max_length>0</text_max_length>
+	<text></text>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkEntry</class>
+	<name>entry60</name>
+	<can_focus>True</can_focus>
+	<editable>True</editable>
+	<text_visible>True</text_visible>
+	<text_max_length>0</text_max_length>
+	<text></text>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>True</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>longer_druid</name>
+  <title>druid? </title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GnomeDruid</class>
+    <name>druid2</name>
+
+    <widget>
+      <class>GnomeDruidPageStart</class>
+      <name>druidpagestart2</name>
+      <title>User Creation Druid</title>
+      <text>This druid is designed to help you quickly 
+and easily add new users to your system.
+
+</text>
+      <title_color>255,255,255</title_color>
+      <text_color>0,0,0</text_color>
+      <background_color>0,0,1</background_color>
+      <logo_background_color>1,1,1</logo_background_color>
+      <textbox_color>255,255,255</textbox_color>
+      <logo_image>users_wrench.png</logo_image>
+      <watermark_image>xstdruidbg-3.png</watermark_image>
+    </widget>
+
+    <widget>
+      <class>GnomeDruidPageStandard</class>
+      <name>druidpagestandard5</name>
+      <title>User Identity  (step 1 of 3)</title>
+      <title_color>255,255,255</title_color>
+      <background_color>0,0,1</background_color>
+      <logo_background_color>1,1,1</logo_background_color>
+      <logo_image>users_wrench.png</logo_image>
+
+      <widget>
+	<class>GtkVBox</class>
+	<child_name>GnomeDruidPageStandard:vbox</child_name>
+	<name>vbox87</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox88</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>3</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkHBox</class>
+	    <name>hbox95</name>
+	    <border_width>3</border_width>
+	    <homogeneous>False</homogeneous>
+	    <spacing>3</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label330</name>
+	      <label>Please enter a username for the new user in the space below. You may also enter a comment about the user, such as his or her real name. </label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>True</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>alignment61</name>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xscale>0.67</xscale>
+	    <yscale>0.67</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkTable</class>
+	      <name>table51</name>
+	      <border_width>3</border_width>
+	      <rows>2</rows>
+	      <columns>2</columns>
+	      <homogeneous>False</homogeneous>
+	      <row_spacing>6</row_spacing>
+	      <column_spacing>3</column_spacing>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label331</name>
+		<label>Username:</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkEntry</class>
+		<name>entry61</name>
+		<can_focus>True</can_focus>
+		<has_focus>True</has_focus>
+		<editable>True</editable>
+		<text_visible>True</text_visible>
+		<text_max_length>0</text_max_length>
+		<text>anna</text>
+		<child>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkEntry</class>
+		<name>entry62</name>
+		<can_focus>True</can_focus>
+		<editable>True</editable>
+		<text_visible>True</text_visible>
+		<text_max_length>0</text_max_length>
+		<text>Anna Marie Dirks</text>
+		<child>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>1</top_attach>
+		  <bottom_attach>2</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label332</name>
+		<label>Comment:</label>
+		<justify>GTK_JUSTIFY_LEFT</justify>
+		<wrap>False</wrap>
+		<xalign>0</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>1</top_attach>
+		  <bottom_attach>2</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label333</name>
+	    <label>Click &quot;Next&quot; to continue</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GnomeDruidPageStandard</class>
+      <name>druidpagestandard6</name>
+      <title>User Groups (step 2 of 3)</title>
+      <title_color>255,255,255</title_color>
+      <background_color>0,0,1</background_color>
+      <logo_background_color>1,1,1</logo_background_color>
+      <logo_image>users_wrench.png</logo_image>
+
+      <widget>
+	<class>GtkVBox</class>
+	<child_name>GnomeDruidPageStandard:vbox</child_name>
+	<name>vbox89</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox90</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>3</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkHBox</class>
+	    <name>hbox96</name>
+	    <border_width>3</border_width>
+	    <homogeneous>False</homogeneous>
+	    <spacing>3</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label334</name>
+	      <label>On this page, you can select which groups the new user is
+a member of. Groups are useful for blah blah blah blah </label>
+	      <justify>GTK_JUSTIFY_LEFT</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>alignment62</name>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xscale>0.67</xscale>
+	    <yscale>0.67</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkTable</class>
+	      <name>table52</name>
+	      <border_width>8</border_width>
+	      <rows>2</rows>
+	      <columns>3</columns>
+	      <homogeneous>False</homogeneous>
+	      <row_spacing>0</row_spacing>
+	      <column_spacing>0</column_spacing>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label335</name>
+		<label>All Groups</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>False</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label336</name>
+		<label> anna's Groups</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>2</left_attach>
+		  <right_attach>3</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>False</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkAlignment</class>
+		<name>alignment63</name>
+		<border_width>8</border_width>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xscale>1</xscale>
+		<yscale>0</yscale>
+		<child>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>1</top_attach>
+		  <bottom_attach>2</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>False</xfill>
+		  <yfill>False</yfill>
+		</child>
+
+		<widget>
+		  <class>GtkVBox</class>
+		  <name>vbox91</name>
+		  <homogeneous>False</homogeneous>
+		  <spacing>8</spacing>
+
+		  <widget>
+		    <class>GtkButton</class>
+		    <name>button80</name>
+		    <sensitive>False</sensitive>
+		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_group_settings_add_clicked</handler>
+		      <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
+		    </signal>
+		    <label>Add -&gt;</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
+		    <child>
+		      <padding>0</padding>
+		      <expand>False</expand>
+		      <fill>False</fill>
+		    </child>
+		  </widget>
+
+		  <widget>
+		    <class>GtkButton</class>
+		    <name>button81</name>
+		    <sensitive>False</sensitive>
+		    <can_focus>True</can_focus>
+		    <signal>
+		      <name>clicked</name>
+		      <handler>on_group_settings_remove_clicked</handler>
+		      <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
+		    </signal>
+		    <label>Remove &lt;-</label>
+		    <relief>GTK_RELIEF_NORMAL</relief>
+		    <child>
+		      <padding>0</padding>
+		      <expand>False</expand>
+		      <fill>False</fill>
+		    </child>
+		  </widget>
+		</widget>
+	      </widget>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<name>label337</name>
+		<label></label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<child>
+		  <left_attach>1</left_attach>
+		  <right_attach>2</right_attach>
+		  <top_attach>0</top_attach>
+		  <bottom_attach>1</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>False</xexpand>
+		  <yexpand>False</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>False</xfill>
+		  <yfill>False</yfill>
+		</child>
+	      </widget>
+
+	      <widget>
+		<class>GtkScrolledWindow</class>
+		<name>scrolledwindow24</name>
+		<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+		<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+		<child>
+		  <left_attach>2</left_attach>
+		  <right_attach>3</right_attach>
+		  <top_attach>1</top_attach>
+		  <bottom_attach>2</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>True</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>True</yfill>
+		</child>
+
+		<widget>
+		  <class>GtkCList</class>
+		  <name>clist18</name>
+		  <width>100</width>
+		  <height>150</height>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>select_row</name>
+		    <handler>on_group_settings_members_select_row</handler>
+		    <last_modification_time>Wed, 08 Nov 2000 15:04:45 GMT</last_modification_time>
+		  </signal>
+		  <signal>
+		    <name>unselect_row</name>
+		    <handler>on_group_settings_members_select_row</handler>
+		    <last_modification_time>Thu, 09 Nov 2000 12:18:08 GMT</last_modification_time>
+		  </signal>
+		  <columns>1</columns>
+		  <column_widths>80</column_widths>
+		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		  <show_titles>False</show_titles>
+		  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+		  <widget>
+		    <class>GtkLabel</class>
+		    <child_name>CList:title</child_name>
+		    <name>label338</name>
+		    <label>label27</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		  </widget>
+		</widget>
+	      </widget>
+
+	      <widget>
+		<class>GtkScrolledWindow</class>
+		<name>scrolledwindow25</name>
+		<width>100</width>
+		<height>150</height>
+		<hscrollbar_policy>GTK_POLICY_AUTOMATIC</hscrollbar_policy>
+		<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+		<child>
+		  <left_attach>0</left_attach>
+		  <right_attach>1</right_attach>
+		  <top_attach>1</top_attach>
+		  <bottom_attach>2</bottom_attach>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		  <xexpand>True</xexpand>
+		  <yexpand>True</yexpand>
+		  <xshrink>False</xshrink>
+		  <yshrink>False</yshrink>
+		  <xfill>True</xfill>
+		  <yfill>True</yfill>
+		</child>
+
+		<widget>
+		  <class>GtkCList</class>
+		  <name>clist19</name>
+		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>select_row</name>
+		    <handler>on_group_settings_all_select_row</handler>
+		    <last_modification_time>Wed, 08 Nov 2000 15:04:36 GMT</last_modification_time>
+		  </signal>
+		  <signal>
+		    <name>unselect_row</name>
+		    <handler>on_group_settings_all_select_row</handler>
+		    <last_modification_time>Thu, 09 Nov 2000 12:16:02 GMT</last_modification_time>
+		  </signal>
+		  <columns>1</columns>
+		  <column_widths>80</column_widths>
+		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
+		  <show_titles>False</show_titles>
+		  <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+		  <widget>
+		    <class>GtkLabel</class>
+		    <child_name>CList:title</child_name>
+		    <name>label339</name>
+		    <label>label26</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		  </widget>
+		</widget>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label340</name>
+	    <label>Click &quot;Next&quot; to continue</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GnomeDruidPageStandard</class>
+      <name>druidpagestandard7</name>
+      <title>Password options (step 3 of 3)</title>
+      <title_color>255,255,255</title_color>
+      <background_color>0,0,1</background_color>
+      <logo_background_color>1,1,1</logo_background_color>
+      <logo_image>users_wrench.png</logo_image>
+
+      <widget>
+	<class>GtkVBox</class>
+	<child_name>GnomeDruidPageStandard:vbox</child_name>
+	<name>vbox92</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox93</name>
+	  <homogeneous>False</homogeneous>
+	  <spacing>0</spacing>
+	  <child>
+	    <padding>0</padding>
+	    <expand>True</expand>
+	    <fill>True</fill>
+	  </child>
+
+	  <widget>
+	    <class>GtkHBox</class>
+	    <name>hbox97</name>
+	    <border_width>3</border_width>
+	    <homogeneous>False</homogeneous>
+	    <spacing>3</spacing>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkLabel</class>
+	      <name>label341</name>
+	      <label>There is a notebook with hidden tabs inside the &quot;anna's 
+Password&quot; frame. When the user clicks &quot;Generate random
+password&quot;, the second notebook page should be shown.</label>
+	      <justify>GTK_JUSTIFY_LEFT</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkAlignment</class>
+	    <name>alignment64</name>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xscale>0.67</xscale>
+	    <yscale>0.67</yscale>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkVBox</class>
+	      <name>vbox94</name>
+	      <border_width>3</border_width>
+	      <homogeneous>False</homogeneous>
+	      <spacing>3</spacing>
+
+	      <widget>
+		<class>GtkHBox</class>
+		<name>hbox98</name>
+		<border_width>3</border_width>
+		<homogeneous>False</homogeneous>
+		<spacing>3</spacing>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+
+		<widget>
+		  <class>GtkRadioButton</class>
+		  <name>radiobutton6</name>
+		  <can_focus>True</can_focus>
+		  <label>Set password by hand</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+
+		<widget>
+		  <class>GtkRadioButton</class>
+		  <name>radiobutton7</name>
+		  <can_focus>True</can_focus>
+		  <label>Generate random password</label>
+		  <active>False</active>
+		  <draw_indicator>True</draw_indicator>
+		  <child>
+		    <padding>0</padding>
+		    <expand>False</expand>
+		    <fill>False</fill>
+		  </child>
+		</widget>
+	      </widget>
+
+	      <widget>
+		<class>GtkFrame</class>
+		<name>frame44</name>
+		<label>anna's password</label>
+		<label_xalign>0</label_xalign>
+		<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+		<child>
+		  <padding>0</padding>
+		  <expand>False</expand>
+		  <fill>False</fill>
+		</child>
+
+		<widget>
+		  <class>GtkNotebook</class>
+		  <name>notebook9</name>
+		  <show_tabs>False</show_tabs>
+		  <show_border>False</show_border>
+		  <tab_pos>GTK_POS_TOP</tab_pos>
+		  <scrollable>False</scrollable>
+		  <tab_hborder>2</tab_hborder>
+		  <tab_vborder>2</tab_vborder>
+		  <popup_enable>False</popup_enable>
+
+		  <widget>
+		    <class>GtkTable</class>
+		    <name>table53</name>
+		    <border_width>3</border_width>
+		    <rows>3</rows>
+		    <columns>2</columns>
+		    <homogeneous>False</homogeneous>
+		    <row_spacing>6</row_spacing>
+		    <column_spacing>3</column_spacing>
+
+		    <widget>
+		      <class>GtkLabel</class>
+		      <name>label342</name>
+		      <label>New:</label>
+		      <justify>GTK_JUSTIFY_LEFT</justify>
+		      <wrap>False</wrap>
+		      <xalign>0</xalign>
+		      <yalign>0.5</yalign>
+		      <xpad>0</xpad>
+		      <ypad>0</ypad>
+		      <child>
+			<left_attach>0</left_attach>
+			<right_attach>1</right_attach>
+			<top_attach>0</top_attach>
+			<bottom_attach>1</bottom_attach>
+			<xpad>0</xpad>
+			<ypad>0</ypad>
+			<xexpand>False</xexpand>
+			<yexpand>False</yexpand>
+			<xshrink>False</xshrink>
+			<yshrink>False</yshrink>
+			<xfill>True</xfill>
+			<yfill>False</yfill>
+		      </child>
+		    </widget>
+
+		    <widget>
+		      <class>GtkEntry</class>
+		      <name>entry63</name>
+		      <can_focus>True</can_focus>
+		      <has_focus>True</has_focus>
+		      <editable>True</editable>
+		      <text_visible>True</text_visible>
+		      <text_max_length>0</text_max_length>
+		      <text></text>
+		      <child>
+			<left_attach>1</left_attach>
+			<right_attach>2</right_attach>
+			<top_attach>0</top_attach>
+			<bottom_attach>1</bottom_attach>
+			<xpad>0</xpad>
+			<ypad>0</ypad>
+			<xexpand>True</xexpand>
+			<yexpand>False</yexpand>
+			<xshrink>False</xshrink>
+			<yshrink>False</yshrink>
+			<xfill>True</xfill>
+			<yfill>False</yfill>
+		      </child>
+		    </widget>
+
+		    <widget>
+		      <class>GtkEntry</class>
+		      <name>entry64</name>
+		      <can_focus>True</can_focus>
+		      <editable>True</editable>
+		      <text_visible>True</text_visible>
+		      <text_max_length>0</text_max_length>
+		      <text></text>
+		      <child>
+			<left_attach>1</left_attach>
+			<right_attach>2</right_attach>
+			<top_attach>1</top_attach>
+			<bottom_attach>2</bottom_attach>
+			<xpad>0</xpad>
+			<ypad>0</ypad>
+			<xexpand>True</xexpand>
+			<yexpand>False</yexpand>
+			<xshrink>False</xshrink>
+			<yshrink>False</yshrink>
+			<xfill>True</xfill>
+			<yfill>False</yfill>
+		      </child>
+		    </widget>
+
+		    <widget>
+		      <class>GtkCheckButton</class>
+		      <name>checkbutton13</name>
+		      <can_focus>True</can_focus>
+		      <label>Check password quality</label>
+		      <active>True</active>
+		      <draw_indicator>True</draw_indicator>
+		      <child>
+			<left_attach>0</left_attach>
+			<right_attach>2</right_attach>
+			<top_attach>2</top_attach>
+			<bottom_attach>3</bottom_attach>
+			<xpad>0</xpad>
+			<ypad>0</ypad>
+			<xexpand>False</xexpand>
+			<yexpand>False</yexpand>
+			<xshrink>False</xshrink>
+			<yshrink>False</yshrink>
+			<xfill>True</xfill>
+			<yfill>False</yfill>
+		      </child>
+		    </widget>
+
+		    <widget>
+		      <class>GtkLabel</class>
+		      <name>label343</name>
+		      <label>Confirm:</label>
+		      <justify>GTK_JUSTIFY_LEFT</justify>
+		      <wrap>False</wrap>
+		      <xalign>0</xalign>
+		      <yalign>0.5</yalign>
+		      <xpad>0</xpad>
+		      <ypad>0</ypad>
+		      <child>
+			<left_attach>0</left_attach>
+			<right_attach>1</right_attach>
+			<top_attach>1</top_attach>
+			<bottom_attach>2</bottom_attach>
+			<xpad>0</xpad>
+			<ypad>0</ypad>
+			<xexpand>False</xexpand>
+			<yexpand>False</yexpand>
+			<xshrink>False</xshrink>
+			<yshrink>False</yshrink>
+			<xfill>True</xfill>
+			<yfill>False</yfill>
+		      </child>
+		    </widget>
+		  </widget>
+
+		  <widget>
+		    <class>GtkLabel</class>
+		    <child_name>Notebook:tab</child_name>
+		    <name>label344</name>
+		    <label>label197</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		  </widget>
+
+		  <widget>
+		    <class>GtkVBox</class>
+		    <name>vbox95</name>
+		    <homogeneous>False</homogeneous>
+		    <spacing>0</spacing>
+
+		    <widget>
+		      <class>GtkLabel</class>
+		      <name>label345</name>
+		      <label>Password has been set to &quot;xnu35irh&quot;.</label>
+		      <justify>GTK_JUSTIFY_CENTER</justify>
+		      <wrap>False</wrap>
+		      <xalign>0.5</xalign>
+		      <yalign>0.5</yalign>
+		      <xpad>0</xpad>
+		      <ypad>0</ypad>
+		      <child>
+			<padding>0</padding>
+			<expand>True</expand>
+			<fill>True</fill>
+		      </child>
+		    </widget>
+
+		    <widget>
+		      <class>GtkHButtonBox</class>
+		      <name>hbuttonbox3</name>
+		      <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
+		      <spacing>30</spacing>
+		      <child_min_width>85</child_min_width>
+		      <child_min_height>27</child_min_height>
+		      <child_ipad_x>7</child_ipad_x>
+		      <child_ipad_y>0</child_ipad_y>
+		      <child>
+			<padding>0</padding>
+			<expand>False</expand>
+			<fill>False</fill>
+			<pack>GTK_PACK_END</pack>
+		      </child>
+
+		      <widget>
+			<class>GtkButton</class>
+			<name>button82</name>
+			<can_default>True</can_default>
+			<can_focus>True</can_focus>
+			<label>New password</label>
+			<relief>GTK_RELIEF_NORMAL</relief>
+		      </widget>
+		    </widget>
+		  </widget>
+
+		  <widget>
+		    <class>GtkLabel</class>
+		    <child_name>Notebook:tab</child_name>
+		    <name>label346</name>
+		    <label>label198</label>
+		    <justify>GTK_JUSTIFY_CENTER</justify>
+		    <wrap>False</wrap>
+		    <xalign>0.5</xalign>
+		    <yalign>0.5</yalign>
+		    <xpad>0</xpad>
+		    <ypad>0</ypad>
+		  </widget>
+		</widget>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label347</name>
+	    <label>Click &quot;Next&quot; to continue</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0.5</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GnomeDruidPageFinish</class>
+      <name>druidpagefinish2</name>
+      <title>Finished</title>
+      <text>Congratulations, you are finished. User &quot;anna&quot; has been
+created. Click &quot;Finish&quot; to complete </text>
+      <background_color>0,0,1</background_color>
+      <logo_background_color>1,1,1</logo_background_color>
+      <textbox_color>255,255,255</textbox_color>
+      <text_color>0,0,0</text_color>
+      <title_color>255,255,255</title_color>
+      <logo_image>users_wrench.png</logo_image>
+      <watermark_image>xstdruidbg-3.png</watermark_image>
     </widget>
   </widget>
 </widget>
