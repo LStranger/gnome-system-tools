@@ -24,7 +24,7 @@ install-data-local:
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = gnome-system-tools.pc
 
-CLEANFILES = \
+DISTCLEANFILES = \
 	intltool-extract \
 	intltool-merge \
 	intltool-update \
