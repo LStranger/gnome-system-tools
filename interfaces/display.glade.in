@@ -879,8 +879,9 @@
 
 <widget>
   <class>GtkWindow</class>
-  <name>window2</name>
+  <name>window2_old</name>
   <visible>False</visible>
+  <sensitive>False</sensitive>
   <title>window2</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -893,62 +894,14 @@
 
   <widget>
     <class>GtkVBox</class>
-    <name>display_admin</name>
+    <name>display_admin_old</name>
     <width>450</width>
     <height>350</height>
     <homogeneous>False</homogeneous>
     <spacing>0</spacing>
 
     <widget>
-      <class>GtkHBox</class>
-      <name>hbox1</name>
-      <border_width>3</border_width>
-      <homogeneous>False</homogeneous>
-      <spacing>3</spacing>
-      <child>
-	<padding>0</padding>
-	<expand>False</expand>
-	<fill>True</fill>
-      </child>
-
-      <widget>
-	<class>GnomePixmap</class>
-	<name>pixmap1</name>
-	<filename>computer.png</filename>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-      </widget>
-
-      <widget>
-	<class>GtkLabel</class>
-	<name>label6</name>
-	<label>Use this tool to configure your monitor.</label>
-	<justify>GTK_JUSTIFY_LEFT</justify>
-	<wrap>True</wrap>
-	<xalign>0.5</xalign>
-	<yalign>0.5</yalign>
-	<xpad>0</xpad>
-	<ypad>0</ypad>
-	<child>
-	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
-	</child>
-      </widget>
-
-      <widget>
-	<class>GnomePixmap</class>
-	<name>pixmap2</name>
-	<filename>32_wrench_logo.png</filename>
-	<child>
-	  <padding>0</padding>
-	  <expand>False</expand>
-	  <fill>False</fill>
-	</child>
-      </widget>
+      <class>Placeholder</class>
     </widget>
 
     <widget>
@@ -1104,152 +1057,7 @@
 	</widget>
 
 	<widget>
-	  <class>GtkHBox</class>
-	  <name>hbox2</name>
-	  <homogeneous>True</homogeneous>
-	  <spacing>0</spacing>
-	  <child>
-	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
-	  </child>
-
-	  <widget>
-	    <class>GtkFrame</class>
-	    <name>frame2</name>
-	    <border_width>3</border_width>
-	    <label>Resolution</label>
-	    <label_xalign>0</label_xalign>
-	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkVBox</class>
-	      <name>vbox3</name>
-	      <border_width>3</border_width>
-	      <homogeneous>False</homogeneous>
-	      <spacing>3</spacing>
-
-	      <widget>
-		<class>GtkScrolledWindow</class>
-		<name>scrolledwindow1</name>
-		<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-		<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-		<child>
-		  <padding>0</padding>
-		  <expand>True</expand>
-		  <fill>True</fill>
-		</child>
-
-		<widget>
-		  <class>GtkCList</class>
-		  <name>resolution_list</name>
-		  <can_focus>True</can_focus>
-		  <columns>1</columns>
-		  <column_widths>80</column_widths>
-		  <selection_mode>GTK_SELECTION_BROWSE</selection_mode>
-		  <show_titles>False</show_titles>
-		  <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>CList:title</child_name>
-		    <name>label11</name>
-		    <label>label49</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-		</widget>
-	      </widget>
-
-	      <widget>
-		<class>GtkButton</class>
-		<name>appereance_test</name>
-		<can_focus>True</can_focus>
-		<label>Test current setting</label>
-		<relief>GTK_RELIEF_NORMAL</relief>
-		<child>
-		  <padding>0</padding>
-		  <expand>False</expand>
-		  <fill>False</fill>
-		</child>
-	      </widget>
-	    </widget>
-	  </widget>
-
-	  <widget>
-	    <class>GtkFrame</class>
-	    <name>frame3</name>
-	    <border_width>3</border_width>
-	    <label>Colors</label>
-	    <label_xalign>0</label_xalign>
-	    <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
-
-	    <widget>
-	      <class>GtkVBox</class>
-	      <name>vbox4</name>
-	      <border_width>3</border_width>
-	      <homogeneous>False</homogeneous>
-	      <spacing>3</spacing>
-
-	      <widget>
-		<class>GtkScrolledWindow</class>
-		<name>scrolledwindow2</name>
-		<hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
-		<vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
-		<hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
-		<vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
-		<child>
-		  <padding>0</padding>
-		  <expand>True</expand>
-		  <fill>True</fill>
-		</child>
-
-		<widget>
-		  <class>GtkCList</class>
-		  <name>colordepth_list</name>
-		  <can_focus>True</can_focus>
-		  <columns>1</columns>
-		  <column_widths>80</column_widths>
-		  <selection_mode>GTK_SELECTION_BROWSE</selection_mode>
-		  <show_titles>False</show_titles>
-		  <shadow_type>GTK_SHADOW_IN</shadow_type>
-
-		  <widget>
-		    <class>GtkLabel</class>
-		    <child_name>CList:title</child_name>
-		    <name>label12</name>
-		    <label>label50</label>
-		    <justify>GTK_JUSTIFY_CENTER</justify>
-		    <wrap>False</wrap>
-		    <xalign>0.5</xalign>
-		    <yalign>0.5</yalign>
-		    <xpad>0</xpad>
-		    <ypad>0</ypad>
-		  </widget>
-		</widget>
-	      </widget>
-
-	      <widget>
-		<class>Placeholder</class>
-	      </widget>
-	    </widget>
-	  </widget>
+	  <class>Placeholder</class>
 	</widget>
       </widget>
 
@@ -1264,6 +1072,229 @@
 	<yalign>0.5</yalign>
 	<xpad>0</xpad>
 	<ypad>0</ypad>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GtkWindow</class>
+  <name>window2</name>
+  <visible>False</visible>
+  <title>window3</title>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>False</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>True</allow_grow>
+  <auto_shrink>False</auto_shrink>
+
+  <widget>
+    <class>GtkVBox</class>
+    <name>display_admin</name>
+    <width>396</width>
+    <height>282</height>
+    <homogeneous>False</homogeneous>
+    <spacing>0</spacing>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox1</name>
+      <border_width>10</border_width>
+      <homogeneous>False</homogeneous>
+      <spacing>3</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap1</name>
+	<filename>computer.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label6</name>
+	<label>Use this tool to configure your monitor.</label>
+	<justify>GTK_JUSTIFY_LEFT</justify>
+	<wrap>True</wrap>
+	<xalign>0.5</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap2</name>
+	<filename>32_wrench_logo.png</filename>
+	<child>
+	  <padding>0</padding>
+	  <expand>False</expand>
+	  <fill>False</fill>
+	</child>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkHBox</class>
+      <name>hbox2</name>
+      <homogeneous>True</homogeneous>
+      <spacing>0</spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame2</name>
+	<border_width>3</border_width>
+	<label>Resolution</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox3</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>3</spacing>
+
+	  <widget>
+	    <class>GtkScrolledWindow</class>
+	    <name>scrolledwindow1</name>
+	    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkCList</class>
+	      <name>resolution_list</name>
+	      <can_focus>True</can_focus>
+	      <columns>1</columns>
+	      <column_widths>80</column_widths>
+	      <selection_mode>GTK_SELECTION_BROWSE</selection_mode>
+	      <show_titles>False</show_titles>
+	      <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<child_name>CList:title</child_name>
+		<name>label11</name>
+		<label>label49</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>GtkButton</class>
+	    <name>appereance_test</name>
+	    <can_focus>True</can_focus>
+	    <label>Test current setting</label>
+	    <relief>GTK_RELIEF_NORMAL</relief>
+	    <child>
+	      <padding>0</padding>
+	      <expand>False</expand>
+	      <fill>False</fill>
+	    </child>
+	  </widget>
+	</widget>
+      </widget>
+
+      <widget>
+	<class>GtkFrame</class>
+	<name>frame3</name>
+	<border_width>3</border_width>
+	<label>Colors</label>
+	<label_xalign>0</label_xalign>
+	<shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
+	<child>
+	  <padding>0</padding>
+	  <expand>True</expand>
+	  <fill>True</fill>
+	</child>
+
+	<widget>
+	  <class>GtkVBox</class>
+	  <name>vbox4</name>
+	  <border_width>3</border_width>
+	  <homogeneous>False</homogeneous>
+	  <spacing>3</spacing>
+
+	  <widget>
+	    <class>GtkScrolledWindow</class>
+	    <name>scrolledwindow2</name>
+	    <hscrollbar_policy>GTK_POLICY_NEVER</hscrollbar_policy>
+	    <vscrollbar_policy>GTK_POLICY_AUTOMATIC</vscrollbar_policy>
+	    <hupdate_policy>GTK_UPDATE_CONTINUOUS</hupdate_policy>
+	    <vupdate_policy>GTK_UPDATE_CONTINUOUS</vupdate_policy>
+	    <child>
+	      <padding>0</padding>
+	      <expand>True</expand>
+	      <fill>True</fill>
+	    </child>
+
+	    <widget>
+	      <class>GtkCList</class>
+	      <name>colordepth_list</name>
+	      <can_focus>True</can_focus>
+	      <columns>1</columns>
+	      <column_widths>80</column_widths>
+	      <selection_mode>GTK_SELECTION_BROWSE</selection_mode>
+	      <show_titles>False</show_titles>
+	      <shadow_type>GTK_SHADOW_IN</shadow_type>
+
+	      <widget>
+		<class>GtkLabel</class>
+		<child_name>CList:title</child_name>
+		<name>label12</name>
+		<label>label50</label>
+		<justify>GTK_JUSTIFY_CENTER</justify>
+		<wrap>False</wrap>
+		<xalign>0.5</xalign>
+		<yalign>0.5</yalign>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+	      </widget>
+	    </widget>
+	  </widget>
+
+	  <widget>
+	    <class>Placeholder</class>
+	  </widget>
+	</widget>
       </widget>
     </widget>
   </widget>
