@@ -1,3 +1,15 @@
+2001-05-12  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-dialog.[ch] (xst_dialog_freeze): Go back to original behaviour,
+	  don't desensitize dialog.
+	  (xst_dialog_thaw): Ditto, don't sensitize.
+	  (xst_dialog_freeze_visible): Implement.
+	  (xst_dialog_thaw_visible): Implement.
+
+	* xst-tool.c (xst_tool_main): xst_dialog_freeze() ->
+	  xst_dialog_freeze_visible().
+	  (xst_tool_save): Ditto.
+
 2001-05-10  Chema Celorio  <chema@celorio.com>
 
 	* xst-tool.c (xst_ini): rename xst_tool_init to xst_init

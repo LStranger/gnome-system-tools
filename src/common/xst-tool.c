@@ -502,7 +502,7 @@ xst_tool_save (XstTool *tool)
 
 	g_return_val_if_fail (root_access != ROOT_ACCESS_NONE, FALSE);
 
-	xst_dialog_freeze (tool->main_dialog);
+	xst_dialog_freeze_visible (tool->main_dialog);
 
 	gtk_signal_emit (GTK_OBJECT (tool), xsttool_signals[FILL_XML]);
 
@@ -561,7 +561,7 @@ xst_tool_save (XstTool *tool)
 		g_error ("Unable to run backend: %s", tool->script_path);
 	}
 
-	xst_dialog_thaw (tool->main_dialog);
+	xst_dialog_thaw_visible (tool->main_dialog);
 	return TRUE;  /* FIXME: Determine if it really worked. */
 }
 
@@ -675,12 +675,12 @@ xst_tool_load_try (XstTool *tool)
 void
 xst_tool_main (XstTool *tool)
 {
-	xst_dialog_freeze (tool->main_dialog);
+	xst_dialog_freeze_visible (tool->main_dialog);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
 
 	xst_tool_load_try (tool);
 
-	xst_dialog_thaw (tool->main_dialog);
+	xst_dialog_thaw_visible (tool->main_dialog);
 	gtk_main ();
 }
 

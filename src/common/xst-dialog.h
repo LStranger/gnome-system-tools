@@ -91,6 +91,9 @@ void                xst_dialog_enable_complexity   (XstDialog *xd);
 void                xst_dialog_freeze              (XstDialog *xd);
 void                xst_dialog_thaw                (XstDialog *xd);
 
+void                xst_dialog_freeze_visible      (XstDialog *xd);
+void                xst_dialog_thaw_visible        (XstDialog *xd);
+
 gboolean            xst_dialog_get_modified        (XstDialog *xd);
 void                xst_dialog_modify              (XstDialog *xd);
 void                xst_dialog_modify_cb           (GtkWidget *w, gpointer data);
