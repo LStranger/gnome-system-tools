@@ -38,8 +38,8 @@
 
 extern XstTool *tool;
 
-GtkWidget *boot_table;
-GArray *boot_array;
+GtkWidget *boot_table = NULL;
+GArray *boot_array = NULL;
 
 const gchar *basic_boot_state = "\
 <ETableState> \
@@ -224,6 +224,8 @@ table_create (void)
 	ETable       *table;
 	gchar        *spec;
 
+	g_print ("Table create\n");
+	
 	if (boot_table)
 		return NULL;
 	
@@ -256,7 +258,7 @@ table_create (void)
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	table_connect_signals (table);
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", boot_cursor_change, NULL);
-	
+
 	return boot_table;
 }
 
@@ -588,6 +590,8 @@ boot_table_update_state (void)
 	ETable *table;
 	XstDialogComplexity complexity;
 	gchar *state;
+
+	g_return_if_fail (boot_table != NULL);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 	complexity = tool->main_dialog->complexity;
