@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools 0.1.0\n"
 "POT-Creation-Date: 2000-11-08 16:38-0600\n"
-"PO-Revision-Date: 2000-11-29 17:31+01:00\n"
+"PO-Revision-Date: 2000-12-08 17:31+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -481,7 +481,7 @@ msgstr "Lokal sti:"
 msgid "Export name:"
 msgstr "Eksportnavn:"
 
-#: interfaces/shares.glade.h:61 interfaces/users.glade.h:27
+#: interfaces/shares.glade.h:61 interfaces/users.glade.h:28
 msgid "Comment:"
 msgstr "Kommentar:"
 
@@ -555,7 +555,7 @@ msgstr ""
 msgid "New User"
 msgstr "Ny bruger"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:220
+#: interfaces/users.glade.h:11 src/users/callbacks.c:258
 msgid "Settings for the selected user"
 msgstr "Indstillinger for valgt bruger"
 
@@ -563,7 +563,7 @@ msgstr "Indstillinger for valgt bruger"
 msgid "Change the user's password or options like its name."
 msgstr "Ændr brugerens adgangskode eller andre alternativer som navn."
 
-#: interfaces/users.glade.h:13 interfaces/users.glade.h:28
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:33
 msgid "Change Password"
 msgstr "Ændr Adgangskode"
 
@@ -596,62 +596,82 @@ msgid "User Settings"
 msgstr "Brugerindstillinger"
 
 #: interfaces/users.glade.h:25
+msgid "Basic settings"
+msgstr "Grundlæggende indstillinger"
+
+#: interfaces/users.glade.h:26
 msgid "Main group:"
 msgstr "Hovedgruppe:"
 
-#: interfaces/users.glade.h:26
+#: interfaces/users.glade.h:27
 msgid "User name:"
 msgstr "Brugernavn:"
 
 #: interfaces/users.glade.h:29
+msgid "Advanced settings"
+msgstr "Avancerede indstillinger"
+
+#: interfaces/users.glade.h:30
+msgid "Shell:"
+msgstr "Skal:"
+
+#: interfaces/users.glade.h:31
+msgid "User ID:"
+msgstr "Bruger-ID:"
+
+#: interfaces/users.glade.h:32
+msgid "Home directory:"
+msgstr "Hjemmekatalog"
+
+#: interfaces/users.glade.h:34
 msgid "New password:"
 msgstr "Ny adgangskode:"
 
-#: interfaces/users.glade.h:30
+#: interfaces/users.glade.h:35
 msgid "Confirmation:"
 msgstr "Bekræftelse:"
 
-#: interfaces/users.glade.h:31
+#: interfaces/users.glade.h:36
 msgid "Check quality."
 msgstr "Tjek kvalitet."
 
-#: interfaces/users.glade.h:32
+#: interfaces/users.glade.h:37
 msgid "  Random Password  "
 msgstr "  Tilfældig adgangskode  "
 
-#: interfaces/users.glade.h:33
+#: interfaces/users.glade.h:38
 msgid "Group Settings"
 msgstr "Gruppeindstillinger"
 
-#: interfaces/users.glade.h:34
+#: interfaces/users.glade.h:39
 msgid "Group name:"
 msgstr "Gruppenavn:"
 
-#: interfaces/users.glade.h:35
+#: interfaces/users.glade.h:40
 msgid "Members"
 msgstr "Medlemmer"
 
-#: interfaces/users.glade.h:36
+#: interfaces/users.glade.h:41
 msgid "All Users"
 msgstr "Alle brugere"
 
-#: interfaces/users.glade.h:37
+#: interfaces/users.glade.h:42
 msgid "Member Users"
 msgstr "Medlemmer"
 
-#: interfaces/users.glade.h:38
+#: interfaces/users.glade.h:43
 msgid "Add ->"
 msgstr "Tilføj ->"
 
-#: interfaces/users.glade.h:39
+#: interfaces/users.glade.h:44
 msgid "Remove <-"
 msgstr "Fjern <-"
 
-#: interfaces/users.glade.h:40
+#: interfaces/users.glade.h:45
 msgid "label27"
 msgstr "etiket27"
 
-#: interfaces/users.glade.h:41
+#: interfaces/users.glade.h:46
 msgid "label26"
 msgstr "etiket26"
 
@@ -788,46 +808,46 @@ msgstr ""
 msgid "Settings for alias of "
 msgstr "Indstillinger for alias for "
 
-#: src/users/callbacks.c:135
+#: src/users/callbacks.c:156
 #, c-format
 msgid "Settings for User %s"
 msgstr "Indstillinger for bruger %s"
 
-#: src/users/callbacks.c:153
+#: src/users/callbacks.c:180
 #, c-format
 msgid "Password for User %s"
 msgstr "Adgangskode for bruger %s"
 
-#: src/users/callbacks.c:200
+#: src/users/callbacks.c:238
 msgid "The root user must not be deleted."
 msgstr "Root-brugeren må ikke slettes."
 
-#: src/users/callbacks.c:207
+#: src/users/callbacks.c:245
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Er du sikker på at du vil slette bruger %s?"
 
-#: src/users/callbacks.c:249
+#: src/users/callbacks.c:289
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Indstillinger for gruppe %s"
 
-#: src/users/callbacks.c:268
+#: src/users/callbacks.c:308
 msgid "Create New Group"
 msgstr "Opret en ny gruppe"
 
-#: src/users/callbacks.c:294
+#: src/users/callbacks.c:336
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Er du sikker på at du vil slette gruppe %s?"
 
-#: src/users/callbacks.c:414
+#: src/users/callbacks.c:457
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "Adgangskode sat ti'%s'."
 
 #. Bad confirmation
-#: src/users/callbacks.c:449
+#: src/users/callbacks.c:495
 msgid ""
 "The password and its confirmation\n"
 "must match."
@@ -836,7 +856,7 @@ msgstr ""
 "skal være ens."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:455
+#: src/users/callbacks.c:501
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -846,7 +866,7 @@ msgstr ""
 "Prøv venligst med en ny adgangskode."
 
 #. Changes have been made.
-#: src/users/callbacks.c:620
+#: src/users/callbacks.c:666
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
@@ -854,20 +874,20 @@ msgstr ""
 "Der er ændringer som ikke er anvendt.\n"
 "Anvend nu?"
 
-#: src/users/user_group.c:55
+#: src/users/user_group.c:57
 msgid "Username is empty."
 msgstr "Brugernavn er tomt"
 
-#: src/users/user_group.c:72
+#: src/users/user_group.c:74
 #, c-format
 msgid "User %s already exists."
 msgstr "Bruger %s eksistere allerede."
 
-#: src/users/user_group.c:87
+#: src/users/user_group.c:89
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "Sæt venligst et gyldigt brugernavn, og brug kun små bogstaver."
 
-#: src/users/user_group.c:120
+#: src/users/user_group.c:122
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from the pull-down menu."
@@ -875,24 +895,24 @@ msgstr ""
 "Sæt venligst et gyldigt hovedgruppenavn, kun med brug af små bogstaver,\n"
 "eller vælg ét fra rullegardinsmenuen."
 
-#: src/users/user_group.c:176
+#: src/users/user_group.c:187
 msgid "The username is empty."
 msgstr "Brugernavnet er tomt."
 
-#: src/users/user_group.c:307
+#: src/users/user_group.c:316
 msgid "The group name is empty."
 msgstr "Gruppenavnet er tomt."
 
-#: src/users/user_group.c:324
+#: src/users/user_group.c:333
 #, c-format
 msgid "Group %s already exists."
 msgstr "Gruppe %s eksisterer allerede."
 
-#: src/users/user_group.c:340
+#: src/users/user_group.c:349
 msgid "Please set a valid group name, with only lower-case letters."
 msgstr "Sæt venligst et gyldigt gruppenavn, og brug kun små bogstaver."
 
-#: src/users/user_group.c:382
+#: src/users/user_group.c:394
 msgid "Group name is empty."
 msgstr "Gruppenavn er tomt."
 
