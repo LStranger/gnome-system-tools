@@ -1583,7 +1583,6 @@ try_show_usage_warning (void)
 		  "You have been warned. Thank you for trying out this prerelease of\n"
 		  "the Ximian Setup Tools!\n\n"
 		  "--\nThe Ximian Setup Tools team"), VERSION);
-
 	key = g_strjoin ("/", XST_CONF_ROOT, "global", "previously-run-" VERSION, NULL);
 
 	value = gnome_config_get_bool (key);
@@ -1592,13 +1591,15 @@ try_show_usage_warning (void)
 	{
 		GtkWidget *dialog, *label, *image, *hbox;
 		GtkWidget *checkbox;
-		
+		gboolean dont_ask_again;
 		
 		dialog = gtk_dialog_new_with_buttons (_("Warning"),
 						      NULL,
 						      GTK_DIALOG_DESTROY_WITH_PARENT,
 						      GTK_STOCK_OK, GTK_RESPONSE_OK,
 						      NULL);
+		gtk_dialog_set_default_response (dialog, GTK_RESPONSE_OK);		
+		
 		label = gtk_label_new (warning);
 		image = gtk_image_new_from_stock (GTK_STOCK_DIALOG_WARNING, GTK_ICON_SIZE_DIALOG);
 		checkbox = gtk_check_button_new_with_label (_("Don't show me this again"));
@@ -1614,20 +1615,17 @@ try_show_usage_warning (void)
 		gtk_box_pack_start (GTK_BOX (GTK_DIALOG(dialog)->vbox), checkbox, FALSE, FALSE, 5);
 		
 		gtk_widget_show_all (dialog);
-
-		if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK)
-			gtk_widget_destroy (dialog);
-
-		if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox)))
-		{
-			gnome_config_set_bool (key, TRUE);
-			gnome_config_sync ();
+		if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_OK) {
+			if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (checkbox))) {
+				gnome_config_set_bool (key, TRUE);
+				gnome_config_sync ();
+			}
 		}
-
+		gtk_widget_hide (dialog);
+		gtk_widget_destroy (dialog);
 	}
 
 	g_free (warning);
-
 	g_free (key);
 }
 
