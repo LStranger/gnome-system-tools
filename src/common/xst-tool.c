@@ -56,13 +56,15 @@ static gint xsttool_signals [LAST_SIGNAL] = { 0 };
 static gboolean platform_unsupported_cb   (XstTool *tool, XstReportLine *rline);
 static gboolean platform_add_supported_cb (XstTool *tool, XstReportLine *rline);
 static gboolean platform_set_current_cb   (XstTool *tool, XstReportLine *rline);
+static gboolean report_finished_cb        (XstTool *tool, XstReportLine *rline);
 
 static void report_dispatch (XstTool *tool);
 
 static XstReportHookEntry common_report_hooks[] = {
-	{ "platform_undet",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
-	{ "platform_unsup",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
+	{ "end",              report_finished_cb,         XST_REPORT_HOOK_LOADSAVE, TRUE  },
 	{ "platform_list",    platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE  }, 
+	{ "platform_unsup",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
+	{ "platform_undet",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
 	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_LOAD,     FALSE }, 
 	{ 0,                  NULL,                       -1,                       FALSE }
 };
@@ -180,6 +182,15 @@ platform_set_current_cb (XstTool *tool, XstReportLine *rline)
 		xst_platform_free (tool->current_platform);
 
 	tool->current_platform = platform;
+	return TRUE;
+}
+
+/* --- Other Report Hooks --- */
+
+static gboolean
+report_finished_cb (XstTool *tool, XstReportLine *rline)
+{
+	tool->report_finished = TRUE;
 	return TRUE;
 }
 
@@ -355,6 +366,9 @@ report_dispatch (XstTool *tool)
 		}
 #endif
 
+		if (strcmp (xst_report_line_get_key (rline), "progress"))
+			xst_tool_invoke_report_hooks (tool, tool->report_hook_type, rline);
+		
 		xst_report_line_set_handled (rline, TRUE);
 	}
 
@@ -391,11 +405,6 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		if (c == '\n') {
 			/* End of line */
 
-			if (!strcmp (tool->line, "end")) {
-				/* End of report */
-				tool->report_finished = TRUE;
-			}
-			
 		        /* Report line; add to list */
 			rline = xst_report_line_new_from_string (tool->line);
 			
@@ -422,14 +431,14 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		tool->report_finished = TRUE;
 	}
 
+	if (!tool->report_dispatch_pending)
+		report_dispatch (tool);
+	
 	if (tool->report_finished && tool->input_id)
 	{
 		gdk_input_remove (tool->input_id);
 		tool->input_id = 0;
 	}
-
-	if (!tool->report_dispatch_pending)
-		report_dispatch (tool);
 }
 
 static void

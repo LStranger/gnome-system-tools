@@ -1,3 +1,22 @@
+2001-04-20  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* xst-tool.c: added hook entry for the "end" report line. This is cleaner.
+	(report_finished_cb): the hook.
+	(report_dispatch): Hmm... this got mistakingly #if0ed.
+	(report_progress_tick): Changed order in these calls, so that the report
+	finished hook works.
+
+	* xst-platform.c (xst_platform_new_from_report_line): So splitting
+	is kinda hacky? Well, we're now saving the argv in the rline, so this
+	step is now trivial.
+
+	* xst-report-line.c: All the report hash code gone.
+	(xst_report_line_new): keep the fmt and the argv now. argv copying is
+	kinda hacky.
+	(xst_report_line_new_from_string): Make sure parts 0 and 1 exist.
+	(xst_report_line_free): Free the new allocated stuff.
+	(xst_report_line_get_argv): YA encapsulation func.
+
 2001-04-19  Hans Petter Jansson <hpj@ximian.com>
 
 	* xst-xml.c (xst_xml_element_add): Add check for valid parent node.

@@ -27,15 +27,18 @@
 
 struct _XstReportLine {
 	gchar *key;
+	gchar *fmt;
+	gchar **argv;
 	gchar *message;
 	guint handled : 1;
 };
 
-XstReportLine     *xst_report_line_new              (gchar *key, gchar **argv);
+XstReportLine     *xst_report_line_new              (gchar *key, gchar *fmt, gchar **argv);
 XstReportLine     *xst_report_line_new_from_string  (gchar *string);
 void               xst_report_line_free             (XstReportLine *line);
 
 const gchar       *xst_report_line_get_key          (XstReportLine *line);
+const gchar      **xst_report_line_get_argv         (XstReportLine *line);
 const gchar       *xst_report_line_get_message      (XstReportLine *line);
 gboolean           xst_report_line_get_handled      (XstReportLine *line);
 

@@ -42,30 +42,17 @@ xst_platform_new (gchar *name)
 XstPlatform *
 xst_platform_new_from_report_line (XstReportLine *rline)
 {
-	XstPlatform *xp;
-	gchar **parts_first, **parts_last;
-
+	gchar *key;
+	
 	g_return_val_if_fail (rline != NULL, NULL);
 
-	/* FIXME: This splitting is kinda hacky. */
-	
-	parts_first = g_strsplit (xst_report_line_get_message (rline), "[", 1);
+	key = xst_report_line_get_key (rline);
+		
+	g_return_val_if_fail (!strcmp (key, "platform_list") ||
+			      !strcmp (key, "platform_success"),
+			      NULL);
 
-	if (!parts_first [0] || !parts_first [1])
-		xp = NULL;
-	else
-	{
-		parts_last = g_strsplit (parts_first [1], "]", 1);
-		if (!parts_last [0] || !parts_last [1])
-			xp = NULL;
-		else
-			xp = xst_platform_new (parts_last [0]);
-
-		g_strfreev (parts_last);
-	}
-
-	g_strfreev (parts_first);
-	return xp;
+	return xst_platform_new (xst_report_line_get_argv (rline)[0]);
 }
 
 XstPlatform *
