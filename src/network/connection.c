@@ -61,6 +61,7 @@ static gint on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *ev
 static void on_connection_modified (GtkWidget *w, XstConnection *cxn);
 static void on_wvlan_adhoc_toggled (GtkWidget *w, XstConnection *cxn);
 static void on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn);
+static gboolean on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection *cxn);
 
 #define W(s) my_get_widget (cxn->xml, (s))
 
@@ -861,7 +862,7 @@ connection_update_row (XstConnection *cxn)
 	gtk_clist_set_pixtext (GTK_CLIST (clist), row, 0, cxn->dev, GNOME_PAD_SMALL,
 			       mini_pm[cxn->type], mini_mask[cxn->type]);
 
-	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name);
+	gtk_clist_set_text (GTK_CLIST (clist), row, 2, cxn->name ? cxn->name : "");
 	gtk_clist_sort (GTK_CLIST (clist));
 
 	xst_dialog_modify (tool->main_dialog);
@@ -1367,9 +1368,42 @@ on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn)
 	active = GTK_TOGGLE_BUTTON (W ("ppp_update_dns"))->active;
 
 	gtk_widget_set_sensitive (W ("ppp_dns1_label"), active);
-	gtk_widget_set_sensitive (W ("ppp_dns2_label"), active);
+	gtk_widget_set_sensitive (W ("ppp_dns2_label"), active);	
 	gtk_widget_set_sensitive (W ("ppp_dns1"), active);
 	gtk_widget_set_sensitive (W ("ppp_dns2"), active);
+}
+
+static gboolean
+on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection *cxn)
+{
+        GtkWidget *netmask_widget;
+        gchar *ip_address, *netmask;
+        guint32 ip1;
+
+	netmask_widget = W("ip_netmask");
+        ip_address = gtk_editable_get_chars(GTK_EDITABLE(widget), 0, -1);
+        netmask = gtk_editable_get_chars(GTK_EDITABLE(netmask_widget), 0, -1);
+
+        g_print ("ip: %s\n", ip_address);
+        g_print ("netmask: %s\n", netmask);
+
+        if ((sscanf(ip_address, "%d.", &ip1) == 1) && (!strlen(netmask)))
+	{
+		if (ip1 < 127)
+		{
+			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.0.0.0");
+		}
+		else if (ip1 < 192)
+		{
+			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.255.0.0");
+		}
+		else
+		{
+			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.255.255.0");
+		}
+	}
+
+        return TRUE;
 }
 
 static void
@@ -1506,7 +1540,8 @@ static void
 hookup_callbacks (XstConnection *cxn)
 {
 	gint i;
-	WidgetSignal signals[] = {
+	WidgetSignal signals[] =
+	{
 		{ "on_connection_ok_clicked", on_connection_ok_clicked },
 		{ "on_connection_cancel_clicked", on_connection_cancel_clicked },
 		{ "on_connection_config_dialog_delete_event", on_connection_config_dialog_delete_event },
@@ -1515,12 +1550,19 @@ hookup_callbacks (XstConnection *cxn)
 		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
 		{ "on_ppp_update_dns_toggled", on_ppp_update_dns_toggled },
+		{ "on_ip_address_focus_out", on_ip_address_focus_out },
 		{ NULL }
 	};
-	struct { char *name; EditableFilterRules rule; }
-	s[] = {
+
+	struct
+	{
+		char *name;
+		EditableFilterRules rule;
+	}
+	s [] =
+	{
 		{ "ip_address",          EF_ALLOW_IP },
-		{ "ip_netmask",          EF_ALLOW_IP },
+      		{ "ip_netmask",          EF_ALLOW_IP },
 		{ "ip_gateway",          EF_ALLOW_IP },
 		{ "ppp_dns1",            EF_ALLOW_IP },
 		{ "ppp_dns2",            EF_ALLOW_IP },
