@@ -1,3 +1,59 @@
+==============
+Version 0.90.0
+==============
+
+The GNOME System Tools version 0.90.0 "Untitled" have been released.
+
+The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The GNOME System Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
+
+Right now the GNOME System Tools fully support various distros/OS such as: Redhat, Mandrake, SuSE, Fedora, Debian, Gentoo, Slackware, FreeBSD, OpenNA and PLD.
+
+Changes since last release
+==========================
+
+  General
+  =======
+  - Added help docs for all tools (me)
+  - Removed tools complexity thingy and "apply" button, somewhat improved UI (me)
+  - Check that the backends output is really UTF-8, this will require perl >= 5.8 and perl-locale-gettext package, it also improves a lot backends i18n (me)
+  - Added support for Fedora Core 2 (me)
+  - Added support for Slackware 10.0 (me)
+  - Removed warning dialog (me)
+
+  Network
+  =======
+  - Added support for Black Panther Linux 4.0 (Karoly Barcza?)
+  - Improved IP addresses parsing (me)
+  - compilation fixes when -fno-common is active (Heikki Tauriainen)
+
+  Boot
+  ====
+  - Avoid duplicates in the devices list (me)
+
+
+  ... plus other lots of bugfixing
+
+  Thanks to Evandro (aka hk) for testing Slackware 10.0 support
+
+  Thanks to everybody I've forgot to thank
+
+  Translations
+  ============
+  - bg (Vladimir Petkov)
+  - da (Ole Laursen)
+  - ja (Takeshi AIHANA)
+  - sq (Laurent Dhima)
+  
+Downloading
+===========
+You can get it from : ftp://ftp.gnome.org/pub/GNOME/sources/gnome-system-tools/0.90/
+
+
+
+==============
+Version 0.34.0
+==============
+
 The GNOME System Tools version 0.34.0 "The most expensive beer in the world" have been released.
 
 The GNOME System Tools are a set of cross-platform configuration utilities for Linux and other Unix systems. Internally they are divided in frontends and backends. The frontend knows nothing about the underlying system and provides the same user interface across the different types of systems. The backend knows how to read and write the configuration information. The GNOME System Tools do not impose a new database on the system: they work with the default configuration files so that configuration can still be done by hand or by other tools.
