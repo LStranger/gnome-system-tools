@@ -80,6 +80,7 @@ typedef struct {
 } Connection;
 
 Connection *connection_new_from_node (xmlNode *node);
+Connection *connection_new_from_dev_name (char *dev_name);
 Connection *connection_new_from_type (ConnectionType type);
 
 void connection_free (Connection *);

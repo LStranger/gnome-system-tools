@@ -151,19 +151,21 @@ connection_new_from_node (xmlNode *node)
 {
 	Connection *cxn;
 	xmlNode *subnode;
-	char *s;
-
-	cxn = connection_new_from_type (CONNECTION_OTHER);
+	char *s = NULL;
 
 	subnode = xml_element_find_first (node, "dev");
 	if (subnode) {
 		s = xml_element_get_content (subnode);
-		if (s) {
-			g_free (cxn->device);
-			cxn->device = s;
-		}
 	}
 
+	if (s) {
+		cxn = connection_new_from_dev_name (s);
+		g_free (cxn->device);
+		cxn->device = s;
+	} else
+		cxn = connection_new_from_type (CONNECTION_OTHER);
+	
+	
 	subnode = xml_element_find_first (node, "method");
 	if (subnode) {
 		s = xml_element_get_content (subnode);
@@ -194,6 +196,30 @@ connection_new_from_node (xmlNode *node)
 }
 
 Connection *
+connection_new_from_dev_name (char *dev_name)
+{
+	typedef struct {
+		gchar *name;
+		ConnectionType type;
+	} NameType;
+
+	NameType table[] = {
+		{ "eth", CONNECTION_ETH },
+		{ "wvlan", CONNECTION_WVLAN },
+		{ "ppp", CONNECTION_PPP },
+		{ NULL, CONNECTION_OTHER }
+	};
+
+	int i;
+
+	for (i = 0; table[i].name; i++)
+		if (strstr (dev_name, table[i].name) == dev_name)
+			break;
+
+	return connection_new_from_type (table[i].type);
+}
+
+Connection *
 connection_new_from_type (ConnectionType type)
 {
 	Connection *cxn;
@@ -205,19 +231,19 @@ connection_new_from_type (ConnectionType type)
 	switch (cxn->type) {
 	case CONNECTION_ETH:
 		cxn->device = g_strdup ("eth0");
-		cxn->description = g_strdup (_("New Ethernet connection"));
+		cxn->description = g_strdup (_("Ethernet connection"));
 		break;
 	case CONNECTION_WVLAN:
 		cxn->device = g_strdup ("wvlan0");
-		cxn->description = g_strdup (_("New WaveLAN connection"));
+		cxn->description = g_strdup (_("WaveLAN connection"));
 		break;
 	case CONNECTION_PPP:
 		cxn->device = g_strdup ("ppp0");
-		cxn->description = g_strdup (_("New PPP connection"));
+		cxn->description = g_strdup (_("PPP connection"));
 		break;
 	default:
 		cxn->device = g_strdup ("???");
-		cxn->description = g_strdup ( _("New unknown connection"));
+		cxn->description = g_strdup ( _("Unknown type connection"));
 		break;
 	}	
 
