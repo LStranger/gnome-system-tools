@@ -50,16 +50,6 @@ void on_network_notebook_switch_page (GtkWidget *notebook,
 				      GtkNotebookPage *page,
 				      gint page_num, gpointer user_data);
 
-void on_statichost_changed (GtkWidget *w, gpointer null);
-
-void on_statichost_add_clicked (GtkWidget *w, gpointer null);
-void on_statichost_update_clicked (GtkWidget *w, gpointer null);
-void on_statichost_delete_clicked (GtkWidget *w, gpointer null);
-
-void on_statichost_list_select_row (GtkCList *clist, gint row, gint column, 
-				    GdkEvent * event, gpointer user_data);
-void on_statichost_list_unselect_row (GtkCList *clist, gint row, gint column, 
-				      GdkEvent * event, gpointer user_data);
 
 gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
 

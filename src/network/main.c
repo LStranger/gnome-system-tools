@@ -32,7 +32,7 @@
 #include "transfer.h"
 #include "callbacks.h"
 #include "connection.h"
-
+#include "hosts.h"
 #include "ppp-druid.h"
 
 XstTool *tool = NULL;
@@ -69,17 +69,18 @@ XstDialogSignal signals[] = {
 	{ "domain",              "changed",         xst_dialog_modify_cb },
 	{ "search_list",         "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
 	{ "search_list",         "changed",         xst_dialog_modify_cb },
-	{ "statichost_list",     "unselect_row",    on_statichost_list_unselect_row },
-	{ "statichost_list",     "select_row",      on_statichost_list_select_row },
+	{ "statichost_list",     "unselect_row",    on_hosts_list_unselect_row },
+	{ "statichost_list",     "select_row",      on_hosts_list_select_row },
 	{ "ip",                  "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
 	{ "ip",                  "changed",         xst_dialog_modify_cb },
+	{ "ip",                  "changed",         on_hosts_ip_changed },
 	{ "alias",               "focus_in_event",  GTK_SIGNAL_FUNC (update_hint) },
-	{ "alias",               "changed",         on_statichost_changed },
-	{ "statichost_add",      "clicked",         on_statichost_add_clicked },
+	{ "alias",               "changed",         on_hosts_alias_changed },
+	{ "statichost_add",      "clicked",         on_hosts_add_clicked },
 	{ "statichost_add",      "clicked",         xst_dialog_modify_cb },
-	{ "statichost_update",   "clicked",         on_statichost_update_clicked },
+	{ "statichost_update",   "clicked",         on_hosts_update_clicked },
 	{ "statichost_update",   "clicked",         xst_dialog_modify_cb },
-	{ "statichost_delete",   "clicked",         on_statichost_delete_clicked },
+	{ "statichost_delete",   "clicked",         on_hosts_delete_clicked },
 	{ "statichost_delete",   "clicked",         xst_dialog_modify_cb },
 	{ NULL }
 };

@@ -15,6 +15,7 @@ network_admin_SOURCES = \
 	callbacks.c	callbacks.h	\
 	transfer.c	transfer.h	\
 	connection.c	connection.h	\
+	hosts.c		hosts.h		\
 	ppp-druid.c	ppp-druid.h
 
 network_admin_LDADD = \

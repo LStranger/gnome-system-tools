@@ -327,6 +327,7 @@ transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 	TransStringCList2 *specs;
 	gint i;
 
+	g_print ("A\n");
 	for (i = 0; transfer_string_clist2_table [i].xml_path; i++)
 	{
 		specs = &transfer_string_clist2_table [i];

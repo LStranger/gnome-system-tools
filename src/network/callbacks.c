@@ -38,7 +38,6 @@
 
 extern XstTool *tool;
 
-static int statichost_row_selected = -1;
 static int connection_row_selected = -1;
 
 
@@ -55,52 +54,16 @@ scrolled_window_scroll_bottom (GtkWidget *sw)
 }
 
 static void
-statichost_actions_set_sensitive (gboolean state)
-{
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_delete"), state);
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_update"), state); 
-
-}
-
-static void
 connection_actions_set_sensitive (gboolean state)
 {
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "connection_delete"), state);
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "connection_configure"), state); 
 }
 
-static char *
-fixup_text_list (GtkWidget *text)
-{
-	char *s2, *s;
-
-	g_return_val_if_fail (text != NULL, NULL);
-	g_return_val_if_fail (GTK_IS_EDITABLE (text), NULL);
-
-	s = gtk_editable_get_chars (GTK_EDITABLE (text), 0, -1);
-	
-	for (s2 = strchr (s, '\n'); s2; s2 = strchr (s2, '\n'))
-		*s2 = ' ';
-
-	return s;
-}
-
-static char *
-fixdown_text_list (char *s)
-{
-	char *s2;
-
-	g_return_val_if_fail (s != NULL, NULL);
-
-	for (s2 = strchr (s, ' '); s2; s2 = strchr (s2, ' '))
-		*s2 = '\n';
-
-	return s;
-}
-
 void 
 on_network_admin_show (GtkWidget *w, gpointer user_data)
 {
+#warning	Remove static host stuff
 	char *access_no[] = { 
 		"general_hbox",
 		"samba_use",
@@ -154,63 +117,6 @@ on_network_notebook_switch_page (GtkWidget *notebook, GtkNotebookPage *page,
 		gtk_widget_grab_focus (xst_dialog_get_widget (tool->main_dialog, entry[page_num]));
 }
 
-void
-on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
-{
-	gchar *row_data;
-	GtkWidget *w;
-	gint pos = 0;
-
-	statichost_row_selected = row;
-	statichost_actions_set_sensitive (TRUE);
-	
-	/* Load aliases into entry widget */
-	pos = 0;
-	gtk_clist_get_text (GTK_CLIST (clist), row, 0, &row_data);
-	w = xst_dialog_get_widget (tool->main_dialog, "ip");
-	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
-	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
-
-	pos = 0;
-	gtk_clist_get_text (GTK_CLIST (clist), row, 1, &row_data);
-	row_data = fixdown_text_list (g_strdup (row_data));
-	
-	w = xst_dialog_get_widget (tool->main_dialog, "alias");
-	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
-	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
-	g_free (row_data);
-}
-
-
-void
-on_statichost_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
-{
-	GtkWidget *w;
-
-	statichost_row_selected = -1;
-	statichost_actions_set_sensitive (FALSE);
-	
-	w = xst_dialog_get_widget (tool->main_dialog, "ip");
-	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
-
-	w = xst_dialog_get_widget (tool->main_dialog, "alias");
-	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
-}
-
-void
-on_statichost_changed (GtkWidget *w, gpointer null)
-{
-	gboolean enabled;
-
-	enabled = xst_tool_get_access (tool) &&
-		gtk_text_get_length (GTK_TEXT (xst_dialog_get_widget (tool->main_dialog, "alias"))) &&
-		check_ip_entry (GTK_ENTRY (xst_dialog_get_widget (tool->main_dialog, "ip")), FALSE);
-			
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_add"), enabled);
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_update"), enabled && 
-				  GTK_WIDGET_SENSITIVE (xst_dialog_get_widget (tool->main_dialog, "statichost_delete")));
-}
-
 static gboolean
 is_char_ok (char c, EditableFilterRules rules)
 {
@@ -227,8 +133,6 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length, gint *po
 	char *s = NULL;
 	EditableFilterRules rules = GPOINTER_TO_INT (data);
 
-	d(g_print ("got: (%d) `%.*s'\n", length, length, text));
-
 	/* thou shalt optimize for the common case */
 	if (length == 1) {
 		if (is_char_ok (*text, rules))
@@ -243,13 +147,13 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length, gint *po
 	for (i=0; i<length; i++)
 		if (is_char_ok (text[i], rules))
 			s[l++] = text[i];
+#if 0	
 		else
 			d(g_print ("rejecting: (%d) `%c'\n", text[i], text[i]));
+#endif	
 
 	if (l == length)
 		goto text_changed_success;
-
-	d(g_print ("setting: (%d) `%.*s'\n", l, l, s));
 
  text_changed_fail:
 	gdk_beep ();
@@ -265,93 +169,10 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length, gint *po
 	return;
 
  text_changed_success:
-	d(g_message ("success!"));
 #if 0
 	if (! (rules & EF_STATIC_HOST))
 		tool_modified_cb ();
 #endif
-}
-
-void
-on_statichost_add_clicked (GtkWidget * button, gpointer user_data)
-{
-	GtkWidget *clist, *w;
-	char *entry[3];
-	int row;
-
-	g_return_if_fail (xst_tool_get_access (tool));
-
-	entry[2] = NULL;
-	
-	entry[0] = gtk_editable_get_chars (
-		GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1);
-
-	entry[1] = fixup_text_list (xst_dialog_get_widget (tool->main_dialog, "alias"));
-
-	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
-
-	row = gtk_clist_append (GTK_CLIST (clist), entry);
-
-	w = xst_dialog_get_widget (tool->main_dialog, "alias");
-
-#if 0
-	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
-	gtk_editable_insert_text (GTK_EDITABLE (w), entry[1], strlen (entry[1]), &pos);
-#endif
-	
-}
-
-
-void
-on_statichost_delete_clicked (GtkWidget * button, gpointer user_data)
-{
-	gchar *txt, *name;
-	GtkWidget *parent, *dialog;
-	gint res;
-
-	g_return_if_fail (xst_tool_get_access (tool));
-	g_return_if_fail (statichost_row_selected != -1);
-
-	parent = GTK_WIDGET (tool->main_dialog);
-	gtk_clist_get_text (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")),
-			    statichost_row_selected, 1, &name);
-
-	txt = g_strdup_printf (_("Are you sure you want to delete the aliases for %s?"), name);
-	dialog = gnome_question_dialog_parented (txt, NULL, NULL, GTK_WINDOW (parent));
-	res = gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
-	g_free (txt);
-
-	if (res) return;
-		
-	gtk_clist_remove (GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "statichost_list")), statichost_row_selected);
-	xst_dialog_modify (tool->main_dialog);
-	statichost_actions_set_sensitive (FALSE);
-}
-
-void
-on_statichost_update_clicked (GtkWidget *b, gpointer null)
-{
-	GtkWidget *clist, *w;
-	char *s;
-
-	g_return_if_fail (xst_tool_get_access (tool));
-
-	clist = xst_dialog_get_widget (tool->main_dialog, "statichost_list");
-
-	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 0,
-			    gtk_editable_get_chars (
-				    GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ip")), 0, -1));
-	
-	w = xst_dialog_get_widget (tool->main_dialog, "alias");
-	s = fixup_text_list (w);
-
-	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 1, s);
-
-#if 0
-	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
-	gtk_editable_insert_text (GTK_EDITABLE (w), s, strlen (s), &pos);
-#endif
-	g_free (s);
 }
 
 /* yeah, I don't like this formatting either */
