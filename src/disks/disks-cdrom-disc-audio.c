@@ -147,15 +147,16 @@ void
 gst_disks_cdrom_disc_audio_play (GstCdromDiscAudio *disc, const gchar *device)
 {
 	   gchar *player;
+	   gchar *command;
 
 	   g_return_if_fail (GST_IS_CDROM_DISC_AUDIO (disc));
 
 	   if (device) {
 			 if ((player = g_find_program_in_path ("gnome-cd"))) {
-				    g_spawn_command_line_async (
-						  g_strdup_printf ("%s --device %s --play", player, device),
-						  NULL);
+				    command = g_strdup_printf ("%s --device %s --play", player, device);
+				    g_spawn_command_line_async (command, NULL);
 				    g_free (player);
+				    g_free (command);
 			 }
 	   }
 }

@@ -26,15 +26,16 @@
 #define __TRANSFER_H
 
 #include "gst.h"
-#include "disks-storage-cdrom.h"
-#include "disks-cdrom-disc.h"
+
 #include "disks-partition.h"
+#include "disks-storage-cdrom.h"
+#include "disks-cdrom-disc-data.h"
 
 void transfer_xml_to_gui (GstTool *tool, gpointer data);
 void transfer_gui_to_xml (GstTool *tool, gpointer data);
 
 void          gst_disks_mount_partition         (GstDisksPartition *part);
-void          gst_disks_mount_cdrom             (GstDisksStorageCdrom *cdrom);
+void          gst_disks_mount_cdrom_disc_data   (GstCdromDiscData *disc_data);
 GstCdromDisc *gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom);
 
 #endif /* TRANSFER_H */

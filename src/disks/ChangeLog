@@ -1,3 +1,17 @@
+2004-05-09  Carlos García Campos <elkalmail@yahoo.es>
+
+	* Makefile.am: added disks-mountable.[ch] files
+
+	* disks-mountable.[ch]: added GstMountable interface for devices that
+	are mountable
+
+	* callbacks.c, disks-cdrom-disc-data.[ch], disks-partition.[ch],
+	disks-storage-cdrom.[ch], transfer.[ch]: uses gst_mountable instead of 
+	object methods to mount / umount actions
+
+	* callbacks.c, disks-cdrom-disc-data.c, disks-cdrom-disc-audio.c,
+	disks-gui.c, transfer.c: fixed some memory leaks
+	
 2004-05-02  Carlos García Campos <elkalmail@yahoo.es>
 
 	* disks-gui.c, transfer.c: searches icons in gst pixmapsdir when it was 

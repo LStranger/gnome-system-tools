@@ -174,7 +174,7 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 	GList *list = NULL;
 	GstDisksStorage *dsk;
 	gboolean valid;
-	gchar *icon, *name;
+	gchar *icon, *name, *text_name;
 	gulong size;
 
 	g_return_if_fail (treeview != NULL);
@@ -193,15 +193,16 @@ gst_disks_gui_setup_storage_list (GtkWidget *treeview, GList *storages)
 
 			if (!valid)
 				gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
-			
+
+			text_name = g_strdup_printf ("<b>%s</b>\n%s", name,
+						     gst_storage_get_human_readable_size (size));
 			gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
 					    STORAGE_LIST_ICON,
 					    gst_storage_get_icon (icon),
-					    STORAGE_LIST_NAME,
-					    g_strdup_printf ("<b>%s</b>\n%s", name,
-							     gst_storage_get_human_readable_size (size)),
+					    STORAGE_LIST_NAME, text_name,
 					    STORAGE_LIST_POINTER, dsk,
 					    -1);
+			g_free (text_name);
 		}
 		list = g_list_next (list);
 		valid = gtk_tree_model_iter_next (model, &iter);
@@ -295,13 +296,13 @@ gst_disks_gui_setup_partition_list (GtkWidget *treeview, GList *partitions)
 			if (type != PARTITION_TYPE_FREE) {
 				gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 				gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
-						    PARTITION_LIST_NAME,
-						    g_strdup (name),
+						    PARTITION_LIST_NAME, name,
 						    PARTITION_LIST_POINTER, part,
 						    -1);
 			}
 			
-			if (device) g_free (device);
+			/*g_free (device);
+			  g_free (name);*/
 		}
 		list = g_list_next (list);
 	}
@@ -446,6 +447,7 @@ gst_disks_gui_setup_storage_properties (GstDisksStorage *storage)
 {
 	GtkWidget *storage_icon, *storage_label;
 	gchar     *icon, *model, *device;
+	gchar     *text_label;
 	gulong     size;
 
 	g_return_if_fail (GST_IS_DISKS_STORAGE (storage));
@@ -464,18 +466,18 @@ gst_disks_gui_setup_storage_properties (GstDisksStorage *storage)
 				   gst_storage_get_icon (icon));
 
 	if (size > 0) {
-		gtk_label_set_markup (
-			GTK_LABEL (storage_label),
-			g_strdup_printf ("<b>%s</b>\n%s\n<small><i>%s</i></small>",
-					 model,
-					 gst_storage_get_human_readable_size (size),
-					 device));
+		text_label = g_strdup_printf ("<b>%s</b>\n%s\n<small><i>%s</i></small>",
+					      model,
+					      gst_storage_get_human_readable_size (size),
+					      device);
 	} else {
-		gtk_label_set_markup (
-			GTK_LABEL (storage_label),
-			g_strdup_printf ("<b>%s</b>\n<small><i>%s</i></small>",
-					 model, device));
+		text_label = g_strdup_printf ("<b>%s</b>\n<small><i>%s</i></small>",
+					      model, device);
 	}
+	
+	gtk_label_set_markup (GTK_LABEL (storage_label), text_label);
+
+	g_free (text_label);
 }
 
 /* Disk */
@@ -523,6 +525,7 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 	GtkWidget *mount_button, *status_label;
 	GtkWidget *change_mp_button, *part_browse_button;
 	gchar *point, *device;
+	gchar *text_pbar, *text_type_label, *hr_size, *hr_free;
 	GstPartitionTypeFs type;
 	gulong size, free;
 	gboolean mounted, listed;
@@ -563,11 +566,13 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 
 		gtk_label_set_text (GTK_LABEL (device_label), device);
 
-		gtk_label_set_text (GTK_LABEL (fs_label),
-				    gst_disks_partition_get_human_readable_typefs (type));
+		text_type_label = gst_disks_partition_get_human_readable_typefs (type);
+		gtk_label_set_text (GTK_LABEL (fs_label), text_type_label);
+		g_free (text_type_label);
 
 		gst_disks_gui_setup_mounted (status_label, mount_button, mounted);
 
+		hr_size = gst_storage_get_human_readable_size (size);
 		if (mounted) {
 			if (type != PARTITION_TYPE_SWAP)
 				gtk_widget_set_sensitive (part_browse_button, TRUE);
@@ -577,28 +582,26 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 				(1 - ((gfloat)(free) / size)));
 
 			if (free) {
-				gtk_progress_bar_set_text (
-					GTK_PROGRESS_BAR (size_progress),
-					g_strdup_printf ("%s (%s Free)",
-							 gst_storage_get_human_readable_size (size),
-							 gst_storage_get_human_readable_size (free))
-					);
+				hr_size = gst_storage_get_human_readable_size (size);
+				hr_free = gst_storage_get_human_readable_size (free);
+				text_pbar = g_strdup_printf ("%s (%s Free)", hr_size, hr_free);
+				g_free (hr_free);
 			} else {
-				gtk_progress_bar_set_text (
-					GTK_PROGRESS_BAR (size_progress),
-					g_strdup_printf ("%s",
-							 gst_storage_get_human_readable_size (size))
-					);
+				text_pbar = g_strdup_printf ("%s", hr_size);
 			}
+			
+			gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), text_pbar);
+			g_free (text_pbar);
 		} else {
 			gtk_widget_set_sensitive (part_browse_button, FALSE);
 
 			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
-			gtk_progress_bar_set_text (
-				GTK_PROGRESS_BAR (size_progress),
-				g_strdup_printf ("%s (Free space not available)",
-						 gst_storage_get_human_readable_size (size)));
+			
+			text_pbar = g_strdup_printf ("%s (Free space not available)", hr_size);
+			gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), text_pbar);
+			g_free (text_pbar);
 		}
+		g_free (hr_size);
 	} else {
 		gtk_entry_set_text (GTK_ENTRY (point_entry), "");
 		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
@@ -703,6 +706,7 @@ gst_disks_gui_setup_cdrom_disc_data (GstCdromDiscData *disc_data)
 	GtkWidget *data_cd_info, *audio_cd_info;
 	gulong size;
 	gchar *mount_point;
+	gchar *text_pbar;
 	gboolean mounted;
 
 	g_return_if_fail (GST_IS_CDROM_DISC_DATA (disc_data));
@@ -738,17 +742,14 @@ gst_disks_gui_setup_cdrom_disc_data (GstCdromDiscData *disc_data)
 		gtk_progress_bar_set_fraction (
 			GTK_PROGRESS_BAR (size_progress), 1.0);
 
-		gtk_progress_bar_set_text (
-			GTK_PROGRESS_BAR (size_progress),
-			g_strdup_printf ("%s",
-					 gst_storage_get_human_readable_size (size))
-			);
+		text_pbar = g_strdup_printf ("%s", gst_storage_get_human_readable_size (size));
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), text_pbar);
+		g_free (text_pbar);
 	} else {
 		gtk_widget_set_sensitive (browse_button, FALSE);
 
 		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
-		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress),
-					   g_strdup (_("Not Available")));
+		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), _("Not Available"));;
 	}
 
 	gtk_widget_show_all (data_cd_info);
@@ -762,6 +763,7 @@ gst_disks_gui_setup_cdrom_disc_audio (GstCdromDiscAudio *disc_audio)
 	GtkWidget *tab_cdrom_label;
 	GtkWidget *data_cd_info, *audio_cd_info;
 	guint num_tracks;
+	gchar *text_num_tracks;
 	gchar *duration;
 
 	g_return_if_fail (GST_IS_CDROM_DISC_AUDIO (disc_audio));
@@ -779,8 +781,9 @@ gst_disks_gui_setup_cdrom_disc_audio (GstCdromDiscAudio *disc_audio)
 	g_object_get (G_OBJECT (disc_audio), "num-tracks", &num_tracks,
 		      "duration", &duration, NULL);
 
-	gtk_label_set_text (GTK_LABEL (num_tracks_label),
-			    g_strdup_printf ("%d", num_tracks));
+	text_num_tracks = g_strdup_printf ("%d", num_tracks);
+	gtk_label_set_text (GTK_LABEL (num_tracks_label), text_num_tracks);
+	g_free (text_num_tracks);
 
 	if (duration)
 		gtk_label_set_text (GTK_LABEL (duration_label), duration);

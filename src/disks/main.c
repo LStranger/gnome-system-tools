@@ -30,11 +30,10 @@
 #include <gnome.h>
 
 #include "gst-report-hook.h"
-
 #include "gst-disks-tool.h"
+
 #include "callbacks.h"
 #include "transfer.h"
-#include "gst-disks-tool.h"
 
 GstTool *tool;
 

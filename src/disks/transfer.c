@@ -108,6 +108,21 @@ transfer_xml_to_config (xmlNodePtr root)
 					      NULL);
 			}
 
+			/*buf = gst_xml_get_child_content (disk_node, "type");
+			if (buf) {
+				g_object_set (G_OBJECT (storage), "type",
+					      gst_disks_partition_get_typefs_from_name (buf),
+					      NULL);
+				g_free (buf);
+			}
+
+			buf = gst_xml_get_child_content (disk_node, "point");
+			if (buf) {
+				g_object_set (G_OBJECT (storage), "point",
+					      buf, NULL);
+				g_free (buf);
+				}*/
+
 			node = gst_xml_element_find_first (disk_node, "play-audio");
 			if (node)
 				g_object_set (G_OBJECT (storage), "play_audio",
@@ -287,7 +302,7 @@ gst_disks_mount_partition (GstDisksPartition *part)
 	xmlNodePtr root, part_node, node;
 	gchar *device, *typefs, *point;
 	gboolean mounted, listed;
-	gchar *buf;
+	gchar *buf, *text_uid;
 	GstPartitionTypeFs type;
 
 	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
@@ -298,13 +313,15 @@ gst_disks_mount_partition (GstDisksPartition *part)
 
 	typefs = gst_disks_partition_get_typefs (type);
 
+	text_uid = g_strdup_printf ("%d", (guint) getuid ());
 	xml = gst_tool_run_get_directive (tool, NULL, "mount",
 					  device, "disk",
 					  typefs, point,
 					  mounted ? "1" : "0",
 					  listed  ? "1" : "0",
-					  g_strdup_printf ("%d", (guint) getuid ()),
+					  text_uid,
 					  NULL);
+	g_free (text_uid);
 
 	if (!xml) {
 		return;
@@ -361,92 +378,86 @@ gst_disks_mount_partition (GstDisksPartition *part)
 }
 
 void
-gst_disks_mount_cdrom (GstDisksStorageCdrom *cdrom)
+gst_disks_mount_cdrom_disc_data (GstCdromDiscData *disc_data)
 {
 	xmlDoc *xml;
 	xmlNodePtr root, cdrom_node, node;
 	gchar *device, *typefs, *point;
 	gboolean mounted;
 	gulong size;
-	gchar *buf;
-	GstCdromDisc *disc;
-	GstCdromDiscData *disc_data;
+	gchar *buf, *text_uid;
+	GstDisksStorageCdrom *cdrom;
 
-	g_return_if_fail (GST_IS_DISKS_STORAGE_CDROM (cdrom));
+	g_return_if_fail (GST_IS_CDROM_DISC_DATA (disc_data));
 
-	g_object_get (G_OBJECT (cdrom), "device", &device,
-		      "disc", &disc, NULL);
+	cdrom = GST_DISKS_STORAGE_CDROM (gst_cdrom_disc_get_cdrom (GST_CDROM_DISC (disc_data)));
+	g_object_get (G_OBJECT (cdrom), "device", &device, NULL);
 
-	if (GST_IS_CDROM_DISC_MIXED (disc)) {
-		g_object_get (G_OBJECT (disc), "data", &disc_data, NULL);
-	} else if (GST_IS_CDROM_DISC_DATA (disc)) {
-		disc_data = GST_CDROM_DISC_DATA (disc);
-	} else {
+	g_object_get (G_OBJECT (disc_data), "mount-point", &point,
+		      "mounted", &mounted, "size", &size, NULL);
+		
+	typefs = g_strdup ("iso9660");
+	text_uid = g_strdup_printf ("%d", (guint) getuid ());
+
+	xml = gst_tool_run_get_directive (tool, NULL, "mount",
+					  device, "cdrom", 
+					  typefs, point,
+					  mounted ? "1" : "0",
+					  "0", /* fixme: use listed when manage alias */
+					  text_uid,
+					  NULL);
+	g_free (typefs);
+	g_free (text_uid);
+	
+	if (!xml) {
 		return;
 	}
-		
-	if (GST_IS_CDROM_DISC_DATA (disc_data)) {
-		g_object_get (G_OBJECT (disc_data), "mount-point", &point,
-			      "mounted", &mounted, "size", &size, NULL);
-		
-		typefs = g_strdup ("iso9660");
 
-		xml = gst_tool_run_get_directive (tool, NULL, "mount",
-						  device, "cdrom", 
-						  typefs, point,
-						  mounted ? "1" : "0",
-						  "0", /* fixme: use listed when manage alias */
-						  g_strdup_printf ("%d", (guint) getuid ()),
-						  NULL);
-		if (!xml) {
-			return;
+	root = gst_xml_doc_get_root (xml);
+	if (root) {
+		buf = gst_xml_get_child_content (root, "error");
+		if (buf) {
+			g_warning ("%s", buf);
+			g_free (buf);
 		}
-
-		root = gst_xml_doc_get_root (xml);
-		if (root) {
-			buf = gst_xml_get_child_content (root, "error");
+		
+		cdrom_node = gst_xml_element_find_first (root, "cdrom");
+		if (cdrom_node) {
+			node = gst_xml_element_find_first (cdrom_node, "mounted");
+			if (node)
+				g_object_set (G_OBJECT (disc_data), "mounted",
+					      gst_xml_element_get_bool_attr (
+						      node, "state"),
+					      NULL);
+			
+			buf = gst_xml_get_child_content (cdrom_node, "point");
 			if (buf) {
-				g_warning ("%s", buf);
+				g_object_set (G_OBJECT (disc_data), "mount-point",
+					      buf, NULL);
 				g_free (buf);
 			}
 			
-			cdrom_node = gst_xml_element_find_first (root, "cdrom");
-			if (cdrom_node) {
-				node = gst_xml_element_find_first (cdrom_node, "mounted");
-				if (node)
-					g_object_set (G_OBJECT (disc_data), "mounted",
-						      gst_xml_element_get_bool_attr (
-							      node, "state"),
-						      NULL);
-				
-				buf = gst_xml_get_child_content (cdrom_node, "point");
-				if (buf) {
-					g_object_set (G_OBJECT (disc_data), "mount-point",
-						      buf, NULL);
-					g_free (buf);
-				}
-
-				buf = gst_xml_get_child_content (cdrom_node, "size");
-				if (buf) {
-					g_object_set (G_OBJECT (disc_data), "size",
-						      (gulong) g_ascii_strtoull (buf, NULL, 10),
-						      NULL);
-					g_object_set (G_OBJECT (cdrom), "size",
-						      (gulong) g_ascii_strtoull (buf, NULL, 10),
-						      NULL);
-					g_free (buf);
-				}
-				gst_xml_doc_destroy (xml);
-
-				return;
+			buf = gst_xml_get_child_content (cdrom_node, "size");
+			if (buf) {
+				g_object_set (G_OBJECT (disc_data), "size",
+					      (gulong) g_ascii_strtoull (buf, NULL, 10),
+					      NULL);
+				g_object_set (G_OBJECT (cdrom), "size",
+					      (gulong) g_ascii_strtoull (buf, NULL, 10),
+					      NULL);
+				g_free (buf);
 			}
+			gst_xml_doc_destroy (xml);
+			
+			return;
 		}
+
 		gst_xml_doc_destroy (xml);
 	}
-
+	
 	return;
 }
-				
+
 static void
 cdrom_parse_data_info (xmlNodePtr disc_info, GstCdromDiscData *disc, GstDisksStorageCdrom *cdrom)
 {

@@ -26,12 +26,12 @@
 
 #include <libgnome/gnome-i18n.h>
 
+#include "disks-mountable.h"
 #include "disks-partition.h"
 #include "disks-gui.h"
 #include "transfer.h"
 
 #define PARENT_TYPE G_TYPE_OBJECT
-
 
 enum {
 	PROP_0,
@@ -71,6 +71,9 @@ static void partition_set_property (GObject  *object, guint prop_id,
 				    const GValue *value, GParamSpec *spec);
 static void partition_get_property (GObject  *object, guint prop_id,
 				    GValue *value, GParamSpec *spec);
+
+static void partition_mount          (GstDisksMountable *mountable);
+static void partition_mountable_init (GstDisksMountableIface *iface);
 
 static GObjectClass *parent_class = NULL;
 
@@ -116,10 +119,24 @@ gst_disks_partition_get_type (void)
 			0,
 			(GInstanceInitFunc) partition_init
 		};
+		static const GInterfaceInfo mountable_info = {
+			(GInterfaceInitFunc) partition_mountable_init, 
+			NULL,
+			NULL
+		};
 		type = g_type_register_static (PARENT_TYPE, "GstDisksPartition",
 					       &info, 0);
+		g_type_add_interface_static (type,
+					     GST_TYPE_DISKS_MOUNTABLE,
+					     &mountable_info);
 	   }
 	   return type;
+}
+
+static void
+partition_mountable_init (GstDisksMountableIface *iface)
+{
+	iface->mount = partition_mount;
 }
 
 static void
@@ -351,18 +368,27 @@ gst_disks_partition_setup_properties_widget (GstDisksPartition *part)
 	gst_disks_gui_setup_partition_properties (part);
 }
 
-void
+/*void
 gst_disks_partition_mount (GstDisksPartition *part)
 {
 	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
 	
 	gst_disks_mount_partition (part);
+}*/
+
+static void
+partition_mount (GstDisksMountable *mountable)
+{
+	g_return_if_fail (GST_IS_DISKS_PARTITION (mountable));
+
+	gst_disks_mount_partition (GST_DISKS_PARTITION (mountable));
 }
 
 void
 gst_disks_partition_browse (GstDisksPartition *part)
 {
 	gchar *point, *browser;
+	gchar *command;
 	
 	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
 
@@ -370,10 +396,10 @@ gst_disks_partition_browse (GstDisksPartition *part)
 	
 	if (point) {
 		if ((browser = g_find_program_in_path ("nautilus"))) {
-			g_spawn_command_line_async (
-				g_strdup_printf ("%s %s", browser, point),
-				NULL);
+			command = g_strdup_printf ("%s %s", browser, point);
+			g_spawn_command_line_async (command, NULL);
 			g_free (browser);
+			g_free (command);
 		}
 	}
 }

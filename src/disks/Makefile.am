@@ -24,6 +24,7 @@ disks_admin_SOURCES = \
 	gst-disks-tool.c	  gst-disks-tool.h \
 	disks-storage.c 	  disks-storage.h \
 	disks-storage-disk.c 	  disks-storage-disk.h \
+	disks-mountable.c	  disks-mountable.h	\
 	disks-partition.c 	  disks-partition.h \
 	disks-storage-cdrom.c     disks-storage-cdrom.h \
 	disks-cdrom-disc.c	  disks-cdrom-disc.h	\

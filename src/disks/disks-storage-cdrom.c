@@ -58,7 +58,7 @@ static void storage_cdrom_set_property (GObject *object, guint prop_id,
 static void storage_cdrom_get_property (GObject *object, guint prop_id,
 					GValue *value, GParamSpec *spec);
 
-static void        storage_cdrom_setup_properties_widget (GstDisksStorage *storage);
+static void storage_cdrom_setup_properties_widget (GstDisksStorage *storage);
 
 static GObjectClass *parent_class = NULL;
 
@@ -185,13 +185,13 @@ storage_cdrom_setup_properties_widget (GstDisksStorage *storage)
 	GST_DISKS_STORAGE_GET_CLASS (storage)->setup_common_properties (storage);
 }
 
-void 
+/*void 
 gst_disks_cdrom_mount (GstDisksStorageCdrom *cdrom)
 {
 	g_return_if_fail (GST_IS_DISKS_STORAGE_CDROM (cdrom));
 	
 	gst_disks_mount_cdrom (cdrom);
-}
+}*/
 
 GstDisksStorage*
 gst_disks_storage_cdrom_new (void)
@@ -219,6 +219,9 @@ storage_cdrom_set_property (GObject *object, guint prop_id, const GValue *value,
 		break;
 	case PROP_DISC:
 		storage->priv->disc = g_value_get_pointer (value);
+		if (storage->priv->disc)
+			gst_cdrom_disc_set_cdrom (storage->priv->disc,
+						  (gpointer) storage);
 		break;
 	case PROP_PLAY_AUDIO:
 		storage->priv->play_audio = g_value_get_boolean (value);

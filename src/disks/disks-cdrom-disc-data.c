@@ -25,9 +25,11 @@
 
 #include <libgnome/gnome-i18n.h>
 
+#include "disks-mountable.h"
 #include "disks-cdrom-disc.h"
 #include "disks-cdrom-disc-data.h"
 #include "disks-gui.h"
+#include "transfer.h"
 
 #define PARENT_TYPE GST_TYPE_CDROM_DISC
 
@@ -46,6 +48,9 @@ static void cdrom_disc_data_set_property (GObject *object, guint prop_id,
 					  const GValue *value, GParamSpec *spec);
 static void cdrom_disc_data_get_property (GObject *object, guint prop_id,
 					  GValue *value, GParamSpec *spec);
+
+static void cdrom_disc_data_mount          (GstDisksMountable *mountable);
+static void cdrom_disc_data_mountable_init (GstDisksMountableIface *iface);
 
 static void cdrom_disc_data_setup_gui (GstCdromDisc *disc);
 
@@ -75,10 +80,24 @@ gst_cdrom_disc_data_get_type (void)
 			0,
 			(GInstanceInitFunc) cdrom_disc_data_init
 		};
+		static const GInterfaceInfo mountable_info = {
+			(GInterfaceInitFunc) cdrom_disc_data_mountable_init,
+			NULL,
+			NULL
+		};
 		type = g_type_register_static (PARENT_TYPE, "GstCdromDiscData",
 					       &info, 0);
+		g_type_add_interface_static (type,
+					     GST_TYPE_DISKS_MOUNTABLE,
+					     &mountable_info);
 	}
 	return type;
+}
+
+static void
+cdrom_disc_data_mountable_init (GstDisksMountableIface *iface)
+{
+	iface->mount = cdrom_disc_data_mount;
 }
 
 static void
@@ -150,20 +169,29 @@ cdrom_disc_data_setup_gui (GstCdromDisc *disc)
 	gst_disks_gui_setup_cdrom_disc_data (disc_data);
 }
 
+static void
+cdrom_disc_data_mount (GstDisksMountable *mountable)
+{
+	g_return_if_fail (GST_IS_CDROM_DISC_DATA (mountable));
+
+	gst_disks_mount_cdrom_disc_data (GST_CDROM_DISC_DATA (mountable));
+}
+
 void
 gst_disks_cdrom_disc_data_browse (GstCdromDiscData *disc)
 {
 	gchar *point, *browser;
+	gchar *command;
 	
 	g_return_if_fail (GST_IS_CDROM_DISC_DATA (disc));
 	
 	g_object_get (G_OBJECT (disc), "mount-point", &point, NULL);
 	if (point) {
 		if ((browser = g_find_program_in_path ("nautilus"))) {
-			g_spawn_command_line_async (
-				g_strdup_printf ("%s %s", browser, point),
-				NULL);
+			command = g_strdup_printf ("%s %s", browser, point);
+			g_spawn_command_line_async (command, NULL);
 			g_free (browser);
+			g_free (command);
 		}
 	}
 }

@@ -36,6 +36,8 @@ typedef struct _GstCdromDiscClass      GstCdromDiscClass;
 
 struct _GstCdromDisc {
 	GObject        parent;
+
+	gpointer cdrom; /* Bidirectional Asociation */
 	
 };
 
@@ -48,5 +50,8 @@ struct _GstCdromDiscClass {
 GType      gst_cdrom_disc_get_type      (void);
 
 void       gst_cdrom_disc_setup_gui (GstCdromDisc *disc);
+
+void       gst_cdrom_disc_set_cdrom (GstCdromDisc *disc, gpointer cdrom);
+gpointer   gst_cdrom_disc_get_cdrom (GstCdromDisc *disc);
 
 #endif /* __GST_DISKS_CDROM_DISC_H__ */

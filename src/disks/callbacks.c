@@ -1,4 +1,3 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* callbacks.c: this file is part of disks-admin, a gnome-system-tool frontend 
  * for disks administration.
  * 
@@ -35,6 +34,7 @@
 #include "disks-cdrom-disc.h"
 #include "disks-cdrom-disc-data.h"
 #include "disks-cdrom-disc-audio.h"
+#include "disks-mountable.h"
 #include "disks-partition.h"
 #include "disks-gui.h"
 #include "callbacks.h"
@@ -222,6 +222,7 @@ gst_on_mount_button_clicked (GtkWidget *button, gpointer gdata)
 	GtkTreeSelection     *selection;
 	GstDisksPartition    *part;
 	GstDisksStorageCdrom *cdrom;
+	GstCdromDisc *disc;
 
 	treeview = (GtkWidget *) gdata;
 
@@ -231,15 +232,19 @@ gst_on_mount_button_clicked (GtkWidget *button, gpointer gdata)
 			gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
 
 			if (GST_IS_DISKS_PARTITION (part)) {
-				gst_disks_partition_mount (part);
+				/*gst_disks_partition_mount (part);*/
+				gst_disks_mountable_mount (GST_DISKS_MOUNTABLE (part));
 				
 				gst_disks_partition_setup_properties_widget (part);
 			}
 		} else if (gtk_tree_model_get_n_columns (model) == STORAGE_LIST_LAST) {
 			gtk_tree_model_get (model, &iter, STORAGE_LIST_POINTER, &cdrom, -1);
 			if (GST_IS_DISKS_STORAGE_CDROM (cdrom)) {
-				gst_disks_cdrom_mount (cdrom);
-
+				/*gst_disks_cdrom_mount (cdrom);*/
+				g_object_get (G_OBJECT (cdrom), "disc", &disc, NULL);
+				if (GST_IS_CDROM_DISC_DATA (disc))
+					gst_disks_mountable_mount (GST_DISKS_MOUNTABLE (disc));
+			
 				gst_disks_storage_setup_properties_widget (GST_DISKS_STORAGE (cdrom));
 			}
 			
@@ -341,6 +346,7 @@ gst_disks_storage_get_device_speed_cb (GstDirectiveEntry *entry)
 	xmlNodePtr root;
 	gchar *device, *media;
 	gchar *buf = NULL;
+	gchar *speed;
 	GstDisksStorage *storage;
 
 	storage = (GstDisksStorage *) entry->data;
@@ -352,8 +358,9 @@ gst_disks_storage_get_device_speed_cb (GstDirectiveEntry *entry)
 	} else
 		return;
 
-	speed_label = gst_dialog_get_widget (tool->main_dialog,
-					     g_strdup_printf ("%s_speed_label", media));
+	speed = g_strdup_printf ("%s_speed_label", media);
+	speed_label = gst_dialog_get_widget (tool->main_dialog, speed);
+	g_free (speed);
 
 	g_object_set (G_OBJECT (storage), "speed", _("Getting ..."), NULL);
 	gtk_label_set_text (GTK_LABEL (speed_label), _("Getting ..."));
@@ -376,7 +383,7 @@ gst_disks_storage_get_device_speed_cb (GstDirectiveEntry *entry)
 
 	if (buf) {
 		g_object_set (G_OBJECT (storage), "speed", buf, NULL);
-		gtk_label_set_text (GTK_LABEL (speed_label), g_strdup (buf));
+		gtk_label_set_text (GTK_LABEL (speed_label), buf);
 		g_free (buf);
 	} else {
 		g_object_set (G_OBJECT (storage), "speed", _("Not Available"), NULL);

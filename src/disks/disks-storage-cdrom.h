@@ -20,13 +20,13 @@
  *          Carlos Garcia Campos <elkalmail@yahoo.es>
  */
 
-#ifndef __DISKS_STORAGE_CDROM_H__
-#define __DISKS_STORAGE_CDROM_H__
+#ifndef __GST_DISKS_STORAGE_CDROM_H__
+#define __GST_DISKS_STORAGE_CDROM_H__
 
 #include <glib-object.h>
+
 #include "disks-storage.h"
 #include "disks-cdrom-disc.h"
-
 
 #define GST_TYPE_DISKS_STORAGE_CDROM         (gst_disks_storage_cdrom_get_type ())
 #define GST_DISKS_STORAGE_CDROM(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_DISKS_STORAGE_CDROM, GstDisksStorageCdrom))
@@ -52,7 +52,7 @@ struct _GstDisksStorageCdromClass {
 GType            gst_disks_storage_cdrom_get_type (void);
 GstDisksStorage *gst_disks_storage_cdrom_new      (void);
 
-void             gst_disks_cdrom_mount                             (GstDisksStorageCdrom *cdrom);
+/*void             gst_disks_cdrom_mount                             (GstDisksStorageCdrom *cdrom);*/
 gchar           *gst_disks_storage_cdrom_get_human_readable_status (GstDisksStorageCdrom *cdrom);
 GstCdromDisc    *gst_disks_cdrom_set_disc                          (GstDisksStorageCdrom *cdrom);
 

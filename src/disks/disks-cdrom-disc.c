@@ -24,13 +24,15 @@
 #endif
 
 #include <libgnome/gnome-i18n.h>
+
+#include "disks-storage-cdrom.h"
 #include "disks-cdrom-disc.h"
 
 #define PARENT_TYPE G_TYPE_OBJECT
 
 static void cdrom_disc_init       (GstCdromDisc      *disc);
 static void cdrom_disc_class_init (GstCdromDiscClass *klass);
-static void cdrom_disc_finalize   (GObject              *object);
+static void cdrom_disc_finalize   (GObject           *object);
 
 static GObjectClass *parent_class = NULL;
 
@@ -61,6 +63,8 @@ static void
 cdrom_disc_init (GstCdromDisc *disc)
 {
 	g_return_if_fail (GST_IS_CDROM_DISC (disc));
+
+	disc->cdrom = NULL;
 }
 
 static void
@@ -93,4 +97,20 @@ gst_cdrom_disc_setup_gui (GstCdromDisc *disc)
 	} else {
 		return;
 	}
+}
+
+void
+gst_cdrom_disc_set_cdrom (GstCdromDisc *disc, gpointer cdrom)
+{
+	g_return_if_fail (GST_IS_CDROM_DISC (disc));
+
+	disc->cdrom = cdrom;
+}
+
+gpointer
+gst_cdrom_disc_get_cdrom (GstCdromDisc *disc)
+{
+	g_return_val_if_fail (GST_IS_CDROM_DISC (disc), NULL);
+
+	return (gpointer) disc->cdrom;
 }
