@@ -1152,6 +1152,96 @@ on_status_enabled_toggled (GtkWidget *w, XstConnection *cxn)
 #endif
 
 static void
+connection_check_netmask_gui (XstConnection *cxn)
+{
+        GtkWidget *netmask_widget, *address_widget;
+        gchar *address, *netmask;
+        guint32 ip1;
+
+	netmask_widget = W ("ip_netmask");
+	address_widget = W ("ip_address");
+        address = gtk_editable_get_chars (GTK_EDITABLE (address_widget), 0, -1);
+        netmask = gtk_editable_get_chars (GTK_EDITABLE (netmask_widget), 0, -1);
+
+        g_print ("ip: %s\n", address);
+        g_print ("netmask: %s\n", netmask);
+
+        if ((sscanf (address, "%d.", &ip1) == 1) && (!strlen (netmask))) {
+		if (ip1 < 127) {
+			gtk_entry_set_text (GTK_ENTRY (netmask_widget), "255.0.0.0");
+		} else if (ip1 < 192) {
+			gtk_entry_set_text (GTK_ENTRY (netmask_widget), "255.255.0.0");
+		} else {
+			gtk_entry_set_text (GTK_ENTRY (netmask_widget), "255.255.255.0");
+		}
+	}
+}
+
+static gchar *
+connection_str_to_addr (gchar *str)
+{
+	gchar **strv;
+	gchar *addr;
+	gint i;
+
+	strv = g_strsplit (str, ".", 4);
+	addr = g_new0 (gchar, 4);
+	
+	for (i = 0; strv[i]; i++)
+		addr[i] = (gchar) atoi (strv[i]);
+
+	g_strfreev (strv);
+	
+	return addr;
+}
+
+static gchar *
+connection_addr_to_str (gchar *addr)
+{
+	gint i;
+	gchar *str;
+
+	str = g_strdup_printf ("%d.%d.%d.%d",
+			       (gint) addr[0],
+			       (gint) addr[1],
+			       (gint) addr[2],
+			       (gint) addr[3]);
+	return str;
+}
+
+static void
+connection_set_bcast_and_network (XstConnection *cxn)
+{
+	gchar *address, *netmask;
+	gchar *broadcast   = "    ";
+	gchar *network     = "    ";
+	gint i;
+
+	if (!cxn->address || !*cxn->address ||
+	    !cxn->netmask || !*cxn->netmask)
+		return;
+	
+	address = connection_str_to_addr (cxn->address);
+	netmask = connection_str_to_addr (cxn->netmask);
+
+	for (i = 0; i < 4; i++) {
+		broadcast[i] = address[i] | (~netmask[i]);
+		network[i]   = address[i] & netmask[i];
+	}
+
+	if (cxn->broadcast)
+		g_free (cxn->broadcast);
+	if (cxn->network)
+		g_free (cxn->network);
+
+	cxn->broadcast = connection_addr_to_str (broadcast);
+	cxn->network   = connection_addr_to_str (network);
+
+	g_free (address);
+	g_free (netmask);
+}
+
+static void
 empty_general (XstConnection *cxn)
 {
 	GET_STR ("connection_", name);
@@ -1163,13 +1253,13 @@ empty_general (XstConnection *cxn)
 static void
 empty_ip (XstConnection *cxn)
 {
+	connection_check_netmask_gui (cxn);
+	
 	cxn->ip_config = cxn->tmp_ip_config;
 	GET_BOOL ("ip_", update_dns);
 	GET_STR ("ip_", address);
 	GET_STR ("ip_", netmask);
 	GET_STR ("ip_", gateway);
-
-        /* FIXME: calculate broadcast and stuff in empty_id */
 }
 
 static void
@@ -1393,26 +1483,7 @@ on_ppp_update_dns_toggled (GtkWidget *w, XstConnection *cxn)
 static gboolean
 on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, XstConnection *cxn)
 {
-        GtkWidget *netmask_widget;
-        gchar *ip_address, *netmask;
-        guint32 ip1;
-
-	netmask_widget = W("ip_netmask");
-        ip_address = gtk_editable_get_chars(GTK_EDITABLE(widget), 0, -1);
-        netmask = gtk_editable_get_chars(GTK_EDITABLE(netmask_widget), 0, -1);
-
-        g_print ("ip: %s\n", ip_address);
-        g_print ("netmask: %s\n", netmask);
-
-        if ((sscanf(ip_address, "%d.", &ip1) == 1) && (!strlen(netmask))) {
-		if (ip1 < 127) {
-			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.0.0.0");
-		} else if (ip1 < 192) {
-			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.255.0.0");
-		} else {
-			gtk_entry_set_text(GTK_ENTRY(netmask_widget), "255.255.255.0");
-		}
-	}
+	connection_check_netmask_gui (cxn);
 
         return TRUE;
 }
@@ -1716,6 +1787,7 @@ connection_save_to_node (XstConnection *cxn, xmlNode *root)
 		connection_xml_save_boolean_to_node (node, "update_dns", cxn->update_dns);
 
 	/* TCP/IP general paramaters */
+	connection_set_bcast_and_network (cxn);
 	connection_xml_save_str_to_node (node, "address", cxn->address);
 	connection_xml_save_str_to_node (node, "netmask", cxn->netmask);
 	connection_xml_save_str_to_node (node, "broadcast", cxn->broadcast);

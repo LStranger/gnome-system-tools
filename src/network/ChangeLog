@@ -3,6 +3,13 @@
 	* connection.c (connection_configure): Change pixmap on
 	the General Tab for all connection types, now that we
 	have the pixmaps.
+	(connection_check_netmask_gui): Taken out from
+	on_ip_address_focus_out for empty_ip to use.
+	(connection_set_bcast_and_network): calculate this info
+	from cxn->address and cxn->netmask, if possible.
+	(connection_str_to_addr): helper.
+	(connection_addr_to_str): same.
+	(empty_ip): Do connection_check_netmask_gui befor getting info.
 
 2001-07-23  Arturo Espinosa Aldama  <arturo@ximian.com>
 
