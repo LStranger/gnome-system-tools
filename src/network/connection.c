@@ -20,16 +20,18 @@
 
 #include <config.h>
 
+#include <string.h>
+#include <gnome.h>
+#include <gdk-pixbuf/gdk-pixbuf.h>
+
 #include "connection.h"
 
 #include "global.h"
 
-#include <gnome.h>
-#include <gdk-pixbuf/gdk-pixbuf.h>
 
 /* sigh more libglade callbacks */
 
-static void on_status_button_toggled (GtkWidget *w, Connection *cxn);
+static void on_status_enabled_toggled (GtkWidget *w, Connection *cxn);
 static void on_connection_ok_clicked (GtkWidget *w, Connection *cxn);
 static void on_connection_cancel_clicked (GtkWidget *w, Connection *cxn);
 static void on_connection_config_dialog_destroy (GtkWidget *w, Connection *cxn);
@@ -48,6 +50,11 @@ static GdkBitmap *active_mask[2];
 /*static GSList *connections;*/
 
 XstTool *tool;
+
+typedef struct {
+	const char *hname;
+	gpointer signalfunc;
+} WidgetSignal;
 
 static GtkWidget *
 my_get_widget (GladeXML *glade, const gchar *name)
@@ -78,9 +85,8 @@ connection_xml_get_str (xmlNode *node, gchar *elem)
 	ret = NULL;
 	
 	subnode = xml_element_find_first (node, elem);
-	if (subnode) {
+	if (subnode)
 		ret = xml_element_get_content (subnode);
-	}
 
 	return ret;
 }
@@ -126,6 +132,89 @@ static void
 connection_xml_save_boolean_to_node (xmlNode *node, gchar *node_name, gboolean bool)
 {
 	connection_xml_save_str_to_node (node, node_name, bool? "1": "0");
+}
+
+static gboolean
+connection_xml_wvsection_is_type (xmlNode *node, gchar *type)
+{
+	gchar *str;
+	gint cmp;
+
+	str = connection_xml_get_str (node, "type");
+	cmp = strcmp (str, type);
+	g_free (str);
+
+	if (!cmp)
+		return TRUE;
+
+	return FALSE;
+}
+
+static gboolean
+connection_xml_wvsection_has_name (xmlNode *node, gchar *name)
+{
+	gchar *section_found;
+	gint cmp;
+	
+	section_found = connection_xml_get_str (node, "name");
+	cmp = strcmp (section_found, name);
+	g_free (section_found);
+
+	return !cmp;
+}
+
+static gchar *
+connection_xml_wvsection_get_str (xmlNode *node, gchar *section_name, gchar *elem)
+{
+	xmlNode *subnode;
+	gchar *ret, *value, *inherits;
+	gchar *c;
+
+	ret = NULL;
+
+	for (subnode = xml_element_find_first (node, "dialing");
+		subnode; subnode = xml_element_find_next (subnode, "dialing"))
+	{
+		if (!connection_xml_wvsection_is_type (subnode, "dialer"))
+			continue;
+		
+		if (connection_xml_wvsection_has_name (subnode, section_name)) {
+			/* Found the section */
+			value = connection_xml_get_str (subnode, elem);
+			if (value) {
+				/* Got the required value */
+				return value;
+			} else {
+				/* Value not found. Try inherited section. */
+				inherits = connection_xml_get_str (subnode, inherits);
+				if (!inherits)
+					/* Doesn't inherit. Finally, value not found. */
+					return NULL;
+				
+				c = strchr (inherits, ' ');
+				return connection_xml_wvsection_get_str (node, c, elem);
+			}
+		}
+	}
+
+	g_warning ("connection_xml_wvsection_get_str: section %s not found.", section_name);
+	return NULL;
+}
+
+static gboolean
+connection_xml_wvsection_get_boolean (xmlNode *node, gchar *section_name, gchar *elem)
+{
+	gchar *str;
+	gboolean ret;
+
+	ret = FALSE;
+	str = connection_xml_wvsection_get_str (node, section_name, elem);
+	if (str) {
+		ret = atoi (str)? TRUE: FALSE;
+		g_free (str);
+	}
+
+	return ret;
 }
 
 static IPConfigType
@@ -315,14 +404,37 @@ connection_new_from_node (xmlNode *node)
 		cxn->name = s;
 	else
 		cxn->name = g_strdup (connection_description_from_type (cxn->type));
-		
+
+	/* Activation */
 	cxn->user = connection_xml_get_boolean (node, "user");
 	cxn->autoboot = connection_xml_get_boolean (node, "auto");
 	cxn->enabled = connection_xml_get_boolean (node, "enabled");
 
+	/* TCP/IP general paramaters */
 	cxn->address = connection_xml_get_str (node, "address");
 	cxn->netmask = connection_xml_get_str (node, "netmask");
 	cxn->gateway = connection_xml_get_str (node, "gateway");
+
+	/* PPP stuff */
+	cxn->wvsection = connection_xml_get_str (node, "wvsection");
+	if (cxn->wvsection) {
+		cxn->phone_number = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "phone");
+		cxn->login = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "login");
+		cxn->password = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "passwd");
+		cxn->stupid = connection_xml_wvsection_get_boolean (node->parent, cxn->wvsection, "stupid");
+	} else {
+		cxn->phone_number = connection_xml_get_str (node, "phone_number");
+		cxn->login = connection_xml_get_str (node, "login");
+		cxn->password = connection_xml_get_str (node, "password");
+		cxn->stupid = FALSE;
+	}
+	
+	cxn->persist = connection_xml_get_boolean (node, "persist");
+	cxn->serial_port = connection_xml_get_str (node, "serial_port");
+	cxn->set_default_gw = connection_xml_get_boolean (node, "set_default_gw");
+	cxn->dns1 = connection_xml_get_str (node, "dns1");
+	cxn->dns2 = connection_xml_get_str (node, "dns2");
+	cxn->ppp_options = connection_xml_get_str (node, "ppp_options");
 
 	update_row (cxn);
 
@@ -407,13 +519,13 @@ static void
 update_status (Connection *cxn)
 {
 	gnome_pixmap_load_file (GNOME_PIXMAP (W ("status_icon")),
-				GTK_TOGGLE_BUTTON (W ("status_button"))->active
+				GTK_TOGGLE_BUTTON (W ("status_enabled"))->active
 				? PIXMAPS_DIR "/gnome-light-on.png"
 				: PIXMAPS_DIR "/gnome-light-off.png");
 }
 
 static void
-on_status_button_toggled (GtkWidget *w, Connection *cxn)
+on_status_enabled_toggled (GtkWidget *w, Connection *cxn)
 {
 	connection_set_modified (cxn, TRUE);
 	update_status (cxn);
@@ -428,7 +540,7 @@ empty_general (Connection *cxn)
 		
 	cxn->autoboot = GTK_TOGGLE_BUTTON (W ("status_boot"))->active;
 	cxn->user = GTK_TOGGLE_BUTTON (W ("status_user"))->active;
-	cxn->enabled = GTK_TOGGLE_BUTTON (W ("status_button"))->active;
+	cxn->enabled = GTK_TOGGLE_BUTTON (W ("status_enabled"))->active;
 }
 
 static void
@@ -529,10 +641,9 @@ fill_general (Connection *cxn)
 	gtk_label_set_text (GTK_LABEL (W ("connection_device")), cxn->dev);
 	my_entry_set_text (GTK_ENTRY (W ("connection_desc")), cxn->name);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_button")), cxn->dhcp_dns);
-
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_enabled")), cxn->autoboot);
 	update_status (cxn);
-
+	
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_boot")), cxn->autoboot);
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("status_user")), cxn->user);
 }
@@ -619,13 +730,24 @@ fill_wvlan (Connection *cxn)
 static void
 fill_ppp (Connection *cxn)
 {
-
+	my_entry_set_text (GTK_ENTRY (W ("ppp_phone_number")), cxn->phone_number);
+	my_entry_set_text (GTK_ENTRY (W ("ppp_login")), cxn->login);
+	my_entry_set_text (GTK_ENTRY (W ("ppp_password")), cxn->password);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("ppp_persist")), cxn->persist);
 }
 
-typedef struct {
-	const char *hname;
-	gpointer signalfunc;
-} WidgetSignal;
+static void
+fill_ppp_adv (Connection *cxn)
+{
+	gnome_entry_load_history (GNOME_ENTRY (W ("ppp_serial_port")));
+	my_entry_set_text (GTK_ENTRY (gnome_entry_gtk_entry (GNOME_ENTRY (W ("ppp_serial_port")))),
+				    cxn->serial_port);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("ppp_stupid")), cxn->stupid);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("ppp_set_default_gw")), cxn->set_default_gw);
+	my_entry_set_text (GTK_ENTRY (W ("ppp_dns1")), cxn->dns1);
+	my_entry_set_text (GTK_ENTRY (W ("ppp_dns2")), cxn->dns2);
+	my_entry_set_text (GTK_ENTRY (W ("ppp_ppp_options")), cxn->ppp_options);
+}
 
 static void
 hookup_callbacks (Connection *cxn)
@@ -635,7 +757,7 @@ hookup_callbacks (Connection *cxn)
 		{ "on_connection_ok_clicked", on_connection_ok_clicked },
 		{ "on_connection_cancel_clicked", on_connection_cancel_clicked },
 		{ "on_connection_config_dialog_delete_event", on_connection_config_dialog_delete_event },
-		{ "on_status_button_toggled", on_status_button_toggled },
+		{ "on_status_enabled_toggled", on_status_enabled_toggled },
 		{ "on_connection_modified", on_connection_modified },
 		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
 		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
@@ -684,12 +806,20 @@ connection_configure (Connection *cxn)
 
 	/* would like to do this as a switch */
 	nb = W ("connection_nb");
-	if (cxn->type == CONNECTION_PPP)
+	if (cxn->type == CONNECTION_PPP) {
 		fill_ppp (cxn);
-	else
+		fill_ppp_adv (cxn);
 		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
-					  gtk_notebook_page_num (GTK_NOTEBOOK (nb),
-								 W ("ppp_vbox")));
+							 gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+											    W ("ip_vbox")));
+	} else {
+		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
+							 gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+											    W ("ppp_vbox")));
+		gtk_notebook_remove_page (GTK_NOTEBOOK (nb),
+							 gtk_notebook_page_num (GTK_NOTEBOOK (nb),
+											    W ("ppp_adv_vbox")));
+	}
        
 	if (cxn->type == CONNECTION_WVLAN)
 		fill_wvlan (cxn);

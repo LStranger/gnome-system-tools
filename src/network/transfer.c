@@ -362,9 +362,8 @@ transfer_interfaces_to_gui (xmlNodePtr root)
 
 	for (node = xml_element_find_first (root, "interface"); 
 	     node; 
-	     node = xml_element_find_next (node, "interface")) {
+	     node = xml_element_find_next (node, "interface"))
 		connection_new_from_node (node);
-	}
 }
 
 void

@@ -43,6 +43,18 @@ static int connection_row_selected = -1;
 
 
 static void
+scrolled_window_scroll_bottom (GtkWidget *sw)
+{
+        GtkAdjustment *adj;
+        
+        while (gtk_events_pending ())
+                gtk_main_iteration ();
+        
+        adj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (sw));
+        gtk_adjustment_set_value (adj, adj->upper - adj->page_size);
+}
+
+static void
 statichost_actions_set_sensitive (gboolean state)
 {
 	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "statichost_delete"), state);
@@ -474,15 +486,16 @@ void
 on_connection_add_clicked (GtkWidget *w, gpointer null)
 {
 	Connection *cxn;
-	GtkWidget *d, *ppp, *eth, *wvlan, *clist;
+	GtkWidget *d, *ppp, *eth, *wvlan, *plip, *clist;
 	gint res, row;
 	ConnectionType cxn_type;
 	
 	d = xst_dialog_get_widget (tool->main_dialog, "connection_type_dialog");
 
-	ppp   = xst_dialog_get_widget (tool->main_dialog, "connection_ppp");
-	eth   = xst_dialog_get_widget (tool->main_dialog, "connection_eth");
-	wvlan = xst_dialog_get_widget (tool->main_dialog, "connection_wvlan");
+	ppp   = xst_dialog_get_widget (tool->main_dialog, "connection_type_ppp");
+	eth   = xst_dialog_get_widget (tool->main_dialog, "connection_type_eth");
+	wvlan = xst_dialog_get_widget (tool->main_dialog, "connection_type_wvlan");
+	plip  = xst_dialog_get_widget (tool->main_dialog, "connection_type_plip");
 
 	/* ppp is the default for now */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ppp), TRUE);
@@ -498,6 +511,8 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 		cxn_type = CONNECTION_ETH;
 	else if (GTK_TOGGLE_BUTTON (wvlan)->active)
 		cxn_type = CONNECTION_WVLAN;
+	else if (GTK_TOGGLE_BUTTON (plip)->active)
+		cxn_type = CONNECTION_PLIP;
 	else
 		cxn_type = CONNECTION_UNKNOWN;
 
@@ -506,6 +521,8 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
 	gtk_clist_select_row (GTK_CLIST (clist), row, 0);
+	scrolled_window_scroll_bottom (xst_dialog_get_widget (tool->main_dialog, "connection_list_sw"));
+	connection_configure (cxn);
 }
 
 void

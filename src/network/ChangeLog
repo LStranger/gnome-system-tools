@@ -1,3 +1,19 @@
+2001-02-22  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* callbacks.c (scrolled_window_scroll_bottom): helper.
+	  Changed the connection_type* widget names.
+	* callbacks.c (on_connection_add_clicked): When adding a connection, 
+	  pop up its config dialog immediatly, and scroll clist to the bottom, 
+	  to see the newly created element.
+	* connection.c: Changed all status_button stuff to status_enabled.
+	  wvsection XML reading functions for ppp parameters.
+	* connection.c (connection_new_from_node): Fill all the ppp params.
+	* connection.c (fill_ppp): implemented.
+	* connection.c (fill_ppp_adv): implemented.
+	* connection.c (connection_configure): kill ip page when configuring for
+	  a ppp iface.
+	* connection.h (Connection): new ppp members in structure.
+
 2001-02-21  Chema Celorio  <chema@celorio.com>
 
 	* transfer.c (transfer_gui_to_xml): remove #if 0 that I left

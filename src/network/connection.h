@@ -80,10 +80,17 @@ typedef struct {
 	float frequency;
 
 	/* PPP */
-	char *phone;
-	char *port;
-	char *username;
-	char *password;
+	gchar *phone_number;
+	gchar *login;
+	gchar *password;
+	gboolean persist;
+	gchar *serial_port;
+	gchar *wvsection;
+	gboolean stupid;
+	gboolean set_default_gw;
+	gchar *dns1;
+	gchar *dns2;
+	gchar *ppp_options;
 } Connection;
 
 extern void connection_init_icons (void);
