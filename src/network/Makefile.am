@@ -1,13 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES = \
-	-I$(top_srcdir)/src/common 	\
-	-I$(top_srcdir)/intl 		\
-	$(GNOME_INCLUDEDIR)		\
-	$(GNOME_CFLAGS) 		\
-	$(LIBGLADE_CFLAGS)		\
-	$(GNOME_XML_CFLAGS)             
-
+INCLUDES = $(XST_TOOL_CFLAGS)
 
 bin_PROGRAMS = network-admin
 
@@ -19,10 +12,7 @@ network_admin_SOURCES = \
 	hosts.c		hosts.h		\
 	ppp-druid.c	ppp-druid.h
 
-network_admin_LDADD = \
-$(XST_LIBS) \
-$(INTLLIBS) \
-../common/libsetuptool.a
+network_admin_LDADD = $(XST_TOOL_LIBS) 
 
 #EXTRA_DIST = $(desktop).in users.pam $(security).in
 #CLEANFILES = $(desktop) $(desktop).menu $(desktop).cc $(security)

@@ -2,10 +2,7 @@
 
 SUBDIRS = e-search-bar
 
-INCLUDES = \
-	-I$(top_srcdir)/src/common 	\
-	-I$(top_srcdir)/intl 		\
-	$(XST_CFLAGS)
+INCLUDES = $(XST_TOOL_CFLAGS)
 
 bin_PROGRAMS = users-admin
 
@@ -25,10 +22,7 @@ users_admin_SOURCES = \
 
 users_admin_CFLAGS = 
 
-users_admin_LDADD = \
-$(XST_LIBS) \
-../common/libsetuptool.a \
-./e-search-bar/libesearchbar.a
+users_admin_LDADD = $(XST_TOOL_LIBS) ./e-search-bar/libesearchbar.a
 
 #desktop = users.desktop
 #security = users.security

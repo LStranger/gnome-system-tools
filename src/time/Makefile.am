@@ -2,10 +2,7 @@
 
 SUBDIRS = e-map
 
-INCLUDES = \
-	-I$(top_srcdir)/src/common 	\
-	-I$(top_srcdir)/intl 		\
-	$(XST_CFLAGS)
+INCLUDES = $(XST_TOOL_CFLAGS)
 
 bin_PROGRAMS = time-admin
 
@@ -17,11 +14,7 @@ time_admin_SOURCES = \
 	timeserv.c        timeserv.h \
 	transfer.c        transfer.h 
 
-time_admin_LDADD = \
-$(XST_LIBS) \
-$(INTLLIBS) \
-../common/libsetuptool.a \
-./e-map/e-map.o
+time_admin_LDADD = 	$(XST_TOOL_LIBS) ./e-map/e-map.o
 
 #desktop = time.desktop
 #security = time.security

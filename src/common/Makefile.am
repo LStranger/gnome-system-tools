@@ -1,8 +1,6 @@
 noinst_LIBRARIES = libsetuptool.a
 
-INCLUDES =		\
-	$(XST_CFLAGS) 	\
-	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
+INCLUDES = $(XST_CFLAGS)	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 libsetuptool_a_SOURCES =                 \
 	xst-xml.c	        xst-xml.h         \

@@ -1,25 +1,19 @@
 ## Process this file with automake to produce Makefile.in
 
-INCLUDES = \
-	-I$(top_srcdir)/src/common 	\
-	-I$(top_srcdir)/intl 		\
-	$(XST_CFLAGS)
+INCLUDES = $(XST_TOOL_CFLAGS)
 
 bin_PROGRAMS = boot-admin
 
 boot_admin_SOURCES = \
 	main.c \
-	callbacks.c callbacks.h \
-	transfer.c transfer.h \
-	e-table.c e-table.h \
-	boot-settings.c boot-settings.h 
+	callbacks.c 		callbacks.h \
+	transfer.c 		transfer.h \
+	e-table.c 		e-table.h \
+	boot-settings.c	boot-settings.h 
 
 boot_admin_CFLAGS = 
 
-boot_admin_LDADD = \
-$(XST_LIBS) \
-$(INTLLIBS) \
-../common/libsetuptool.a
+boot_admin_LDADD = $(XST_TOOL_LIBS)
 
 #desktop = boot.desktop
 #security = boot.security
