@@ -46,11 +46,12 @@ static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ N_("Other type"),              GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
 	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
 	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "dc",         NULL },
+	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "ed",         NULL },
+	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "bfe",        NULL },
 	{ N_("Wireless LAN card"),       GST_CONNECTION_WLAN,    "wavelan-16.png",  "wlan",       NULL },
 	{ N_("Modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
 	{ N_("Modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "tun",        NULL },
 	{ N_("Parallel line"),           GST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
-	{ N_("Parallel line"),           GST_CONNECTION_PLIP,    "16_plip.xpm",     "lp",         NULL },
 	{ N_("Infrared LAN"),            GST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
 	{ N_("Loopback interface"),      GST_CONNECTION_LO,      "16_loopback.xpm", "lo",         NULL },
 	{ N_("Unknown interface type"),  GST_CONNECTION_UNKNOWN, "network.png",     NULL,         NULL },
@@ -464,10 +465,10 @@ connection_list_model_new (void)
 	GtkListStore *store;
 
 	store = gtk_list_store_new (CONNECTION_LIST_COL_LAST,
+				    G_TYPE_BOOLEAN,
 				    GDK_TYPE_PIXBUF,
 				    G_TYPE_STRING,
 				    G_TYPE_STRING,
-				    G_TYPE_BOOLEAN,
 				    G_TYPE_POINTER);
 	return GTK_TREE_MODEL (store);
 }
@@ -475,9 +476,20 @@ connection_list_model_new (void)
 static void
 connection_list_add_columns (GtkTreeView *treeview)
 {
-	GtkCellRenderer   *text_renderer, *pixbuf_renderer;
-	GtkTreeViewColumn *col;
+	GtkCellRenderer   *text_renderer, *pixbuf_renderer, *bool_renderer;
 	GtkTreeModel      *model = gtk_tree_view_get_model (treeview);
+	GtkTreeViewColumn *col;
+
+	/* Status */
+	bool_renderer = gtk_cell_renderer_toggle_new ();
+	g_signal_connect (G_OBJECT (bool_renderer), "toggled",
+			  G_CALLBACK (on_connection_toggled), treeview);
+	col = gtk_tree_view_column_new_with_attributes (_("Active"), bool_renderer,
+							"active", CONNECTION_LIST_COL_STAT,
+							NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_column_set_clickable (col, TRUE);
+	gtk_tree_view_append_column (treeview, col);
 
 	/* Device type */
 	col = gtk_tree_view_column_new ();
@@ -507,17 +519,6 @@ connection_list_add_columns (GtkTreeView *treeview)
 	gtk_tree_view_column_set_resizable (col, TRUE);
 	gtk_tree_view_column_set_sort_column_id (col, 2);
 
-	gtk_tree_view_append_column (treeview, col);
-
-	/* Status */
-	pixbuf_renderer = gtk_cell_renderer_toggle_new ();
-	g_signal_connect (G_OBJECT (pixbuf_renderer), "toggled", 
-			  G_CALLBACK (on_connection_toggled), treeview);
-	col = gtk_tree_view_column_new_with_attributes (_("Status"), pixbuf_renderer,
-							"active", CONNECTION_LIST_COL_STAT,
-							NULL);
-	gtk_tree_view_column_set_resizable (col, TRUE);
-	gtk_tree_view_column_set_clickable (col, TRUE);
 	gtk_tree_view_append_column (treeview, col);
 }
 
@@ -679,10 +680,10 @@ connection_list_append (GstConnection *cxn)
 		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    CONNECTION_LIST_COL_STAT,     connection_get_stat (cxn),
 			    CONNECTION_LIST_COL_DEV_PIX,  connection_get_dev_pixbuf (cxn),
 			    CONNECTION_LIST_COL_DEV_TYPE, connection_get_dev_type (cxn),
 			    CONNECTION_LIST_COL_DEVICE,   cxn->dev,
-			    CONNECTION_LIST_COL_STAT,     connection_get_stat (cxn),
 			    CONNECTION_LIST_COL_DATA,     cxn,
 			    -1);
 }
@@ -1118,6 +1119,8 @@ connection_default_gw_init (GstTool *tool, gchar *dev)
 
 	ui = (GstConnectionUI *)g_object_get_data (G_OBJECT (tool), CONNECTION_UI_STRING);
 
+	g_return_if_fail (ui != NULL);
+
 	omenu = ui->def_gw_omenu;
 	menu  = gtk_option_menu_get_menu (GTK_OPTION_MENU (omenu));
 
@@ -1351,23 +1354,30 @@ connection_get_ptp_from_node (xmlNode *node, GstConnection *cxn)
 gchar *
 connection_find_new_device (xmlNode *root, GstConnectionType type)
 {
-	xmlNode *node;
+	xmlDocPtr  doc;
+	xmlNodePtr node;
 	gchar *prefix, *dev, *numstr;
 	gint max;
 	gchar *devs[] = {
 		NULL,
-		"eth",
-		"wvlan",
-		"ppp",
-		"plip",
-		"irlan",
-		"lo",
+		"Ethernet",
+		NULL,
+		"Modem",
+		"Parallel",
+		"Infrared",
+		NULL,
 		NULL
 	};
 
-	prefix = devs[(gint) type];
-	if (!prefix)
+	if (!devs[(gint) type])
 		return g_strdup ("NIL");
+
+	doc = gst_tool_run_get_directive (tool, NULL, "get_interface_name", devs[(gint) type], NULL);
+
+	g_return_val_if_fail (doc != NULL, "NIL");
+
+	node = gst_xml_doc_get_root (doc);
+	prefix = gst_xml_get_child_content (node, "name");
 
 	max = -1;
 
