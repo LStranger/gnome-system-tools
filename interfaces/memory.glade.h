@@ -7,7 +7,7 @@
 gchar *s = N_("Memory administration");
 gchar *s = N_("Swap Memory:");
 gchar *s = N_("Physical Memory:");
-gchar *s = N_("These are the swap areas available:");
+gchar *s = N_("Available swap areas");
 gchar *s = N_("Enabled");
 gchar *s = N_("Device");
 gchar *s = N_("Priority");
@@ -15,6 +15,7 @@ gchar *s = N_("Size");
 gchar *s = N_("Create...");
 gchar *s = N_("Remove");
 gchar *s = N_("Settings...");
+gchar *s = N_(" Advanced >> ");
 gchar *s = N_("Available partitions:");
 gchar *s = N_("Device");
 gchar *s = N_("Size");
