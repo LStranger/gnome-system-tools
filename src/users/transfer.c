@@ -445,12 +445,12 @@ transfer_group_list_glist_to_xml (xmlNodePtr root)
 		g = (group *)tmplist->data;
 		node = xml_element_add (groupdb_node, "group");
 
-		sprintf (buf, "%d", g->key);
+		snprintf (buf, 15, "%d", g->key);
 		xml_element_add_with_content (node, "key", buf);
 		xml_element_add_with_content (node, "name", g->name);
 		xml_element_add_with_content (node, "password", g->password);
 
-		sprintf (buf, "%d", g->gid);
+		snprintf (buf, 15, "%d", g->gid);
 		xml_element_add_with_content (node, "gid", buf);
 
 		users_node = xml_element_add (node, "users");
