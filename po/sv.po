@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools\n"
-"POT-Creation-Date: 2003-08-18 14:09+0200\n"
-"PO-Revision-Date: 2003-08-18 14:10+0200\n"
+"POT-Creation-Date: 2003-08-23 12:15+0200\n"
+"PO-Revision-Date: 2003-08-23 12:17+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -224,7 +224,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Avbildsinställningar (steg 2 av 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1744
+#: src/network/connection.c:1745
 msgid "Manual"
 msgstr "Manuell"
 
@@ -833,7 +833,7 @@ msgid "Create a new local network interface."
 msgstr "Skapa ett nytt lokalt nätverksgränssnitt."
 
 #: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:46
-#: src/network/connection.c:1745
+#: src/network/connection.c:1746
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1145,8 +1145,8 @@ msgstr "Bläddra..."
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: interfaces/memory.glade.in.h:5 src/boot/table.c:48
-#: src/network/connection.c:508
+#: interfaces/memory.glade.in.h:5 src/boot/table.c:45
+#: src/network/connection.c:498
 msgid "Device"
 msgstr "Enhet"
 
@@ -1174,11 +1174,11 @@ msgstr "Sökväg:"
 msgid "Physical memory:"
 msgstr "Fysiskt minne:"
 
-#: interfaces/memory.glade.in.h:13 src/runlevel/table.c:73
+#: interfaces/memory.glade.in.h:13
 msgid "Priority"
 msgstr "Prioritet"
 
-#: interfaces/memory.glade.in.h:14 interfaces/runlevel.glade.in.h:7
+#: interfaces/memory.glade.in.h:14 interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "Prioritet:"
 
@@ -1261,7 +1261,7 @@ msgstr "Ändra aliasets IP-adress eller dess tillhörande namn."
 msgid "Delete"
 msgstr "Ta bort"
 
-#: interfaces/nameresolution.glade.in.h:10 interfaces/runlevel.glade.in.h:5
+#: interfaces/nameresolution.glade.in.h:10 interfaces/services.glade.in.h:5
 msgid "Description:"
 msgstr "Beskrivning:"
 
@@ -1489,7 +1489,7 @@ msgstr "Tillåt aktiveringskontroll för alla användare"
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1746
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -2372,41 +2372,37 @@ msgstr "Visa loggar..."
 msgid "days ago"
 msgstr "dagar sedan"
 
-#: interfaces/runlevel.glade.in.h:1
+#: interfaces/services.glade.in.h:1
 msgid "<span weight=\"bold\">Description</span>"
 msgstr "<span weight=\"bold\">Beskrivning</span>"
 
-#: interfaces/runlevel.glade.in.h:2
+#: interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">Allmän information</span>"
 
-#: interfaces/runlevel.glade.in.h:3
+#: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">Tjänsteinställningar</span>"
 
-#: interfaces/runlevel.glade.in.h:4
+#: interfaces/services.glade.in.h:4
 msgid "Click on an item in the list to show it's description."
 msgstr "Klicka på ett objekt i listan för att visa dess beskrivning."
 
-#: interfaces/runlevel.glade.in.h:6
+#: interfaces/services.glade.in.h:6
 msgid "Parameters:"
 msgstr "Parametrar:"
 
-#: interfaces/runlevel.glade.in.h:8
+#: interfaces/services.glade.in.h:8
 msgid "Service _Properties"
 msgstr "Tjänste_egenskaper"
 
-#: interfaces/runlevel.glade.in.h:9
+#: interfaces/services.glade.in.h:9
 msgid "Service:"
 msgstr "Tjänst:"
 
-#: interfaces/runlevel.glade.in.h:10
-msgid ""
-"Use this tool to specify which services to run and the runlevel for the "
-"services."
-msgstr ""
-"Använd detta verktyg för att bestämma de tjänster som ska köras och "
-"körnivåerna för tjänsterna."
+#: interfaces/services.glade.in.h:10
+msgid "Use this tool to specify which services to run"
+msgstr "Använd detta verktyg för att ange de tjänster som ska köras"
 
 #: interfaces/shares.glade.in.h:3
 msgid " Edit clients... "
@@ -2552,7 +2548,7 @@ msgstr "Monteringsalternativ"
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.in.h:42 src/boot/table.c:44
+#: interfaces/shares.glade.in.h:42 src/boot/table.c:41
 msgid "Name"
 msgstr "Namn"
 
@@ -3139,15 +3135,15 @@ msgstr "Start"
 msgid "Boot Manager"
 msgstr "Starthanterare"
 
-#: src/boot/callbacks.c:79
+#: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
 msgstr "Redigerare för startavbild"
 
-#: src/boot/callbacks.c:173
+#: src/boot/callbacks.c:169
 msgid "Boot Append Editor"
 msgstr "Redigerare för starttillägg"
 
-#: src/boot/callbacks.c:403
+#: src/boot/callbacks.c:390
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3155,12 +3151,12 @@ msgstr ""
 "Ditt system kommer inte att starta\n"
 "utan minst en startavbild.\n"
 
-#: src/boot/callbacks.c:418
+#: src/boot/callbacks.c:405
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Är du säker på att du vill ta bort \"%s\"?"
 
-#: src/boot/callbacks.c:463 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:450
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3173,27 +3169,27 @@ msgstr ""
 msgid "Boot Manager Settings"
 msgstr "Inställningar för starthanterare"
 
-#: src/boot/table.c:45
+#: src/boot/table.c:42
 msgid "Default"
 msgstr "Standard"
 
-#: src/boot/table.c:46 src/network/connection.c:492
+#: src/boot/table.c:43 src/network/connection.c:482
 msgid "Type"
 msgstr "Typ"
 
-#: src/boot/table.c:47
+#: src/boot/table.c:44
 msgid "Kernel Image"
 msgstr "Kärnavbildsfil"
 
-#: src/boot/table.c:53
+#: src/boot/table.c:50
 msgid "/_Add ..."
 msgstr "/_Lägg till..."
 
-#: src/boot/table.c:55 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Egenskaper"
 
-#: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Ta bort"
 
@@ -3302,7 +3298,7 @@ msgstr ""
 "Starta om din GNOME-session för att\n"
 "dessa ändringar ska börja gälla."
 
-#: src/network/callbacks.c:115
+#: src/network/callbacks.c:115 src/services/table.c:55
 msgid "Active"
 msgstr "Aktiv"
 
@@ -3460,17 +3456,17 @@ msgstr ""
 "under anslutningsfliken. Installera rpm-pkatet\n"
 "redhat-config-network för att undvika detta."
 
-#: src/network/callbacks.c:912
+#: src/network/callbacks.c:900
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Vill du aktivera gränssnittet %s?"
 
-#: src/network/callbacks.c:924
+#: src/network/callbacks.c:910
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Vill du inaktivera gränssnittet %s?"
 
-#: src/network/callbacks.c:998
+#: src/network/callbacks.c:983
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -3478,23 +3474,23 @@ msgstr ""
 "Kunde inte automatiskt detektera modemenheten. Kontrollera att den inte är "
 "upptagen och att den är korrekt ansluten"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:1028
 msgid "Silent"
 msgstr "Tyst"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:1030
 msgid "Low"
 msgstr "Låg"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:1032
 msgid "Medium"
 msgstr "Mellan"
 
-#: src/network/callbacks.c:1049
+#: src/network/callbacks.c:1034
 msgid "Loud"
 msgstr "Högljudd"
 
-#: src/network/callbacks.c:1215
+#: src/network/callbacks.c:1200
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Är du säker på att du vill ta bort aliasen för %s?"
@@ -3531,15 +3527,15 @@ msgstr "Loopback-gränssnitt"
 msgid "Unknown interface type"
 msgstr "Okänd gränssnittstyp"
 
-#: src/network/connection.c:520
+#: src/network/connection.c:510
 msgid "Status"
 msgstr "Status"
 
-#: src/network/connection.c:529 src/network/profiles-table.c:62
+#: src/network/connection.c:519 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Beskrivning"
 
-#: src/network/connection.c:1625
+#: src/network/connection.c:1626
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3549,7 +3545,7 @@ msgstr ""
 "lämnades tom. Ange giltiga IP-adresser i de\n"
 "fälten för att fortsätta."
 
-#: src/network/connection.c:1632
+#: src/network/connection.c:1633
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3559,7 +3555,7 @@ msgstr ""
 "gränssnittet lämnades tom. Ange giltiga\n"
 "IP-adresser i de fälten för att fortsätta."
 
-#: src/network/connection.c:1638
+#: src/network/connection.c:1639
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3573,7 +3569,7 @@ msgstr ""
 "för den primära DNS-servern eller avmarkera\n"
 "alternativet att välja DNS-servrarna manuellt."
 
-#: src/network/connection.c:2194
+#: src/network/connection.c:2195
 msgid "Autodetecting modem device"
 msgstr "Detekterar automatiskt modemenhet"
 
@@ -3676,32 +3672,32 @@ msgstr ""
 "\n"
 "Lösenord: %s"
 
-#: src/network/profiles-table.c:53
-msgid "Profile name"
-msgstr "Profilnamn"
-
 #: src/network/profile.c:43
 #, c-format
 msgid "Are you sure you want to delete profile %s?"
 msgstr "Är du säker på att du vill ta bort profilen %s?"
 
-#: src/runlevel/callbacks.c:49
+#: src/network/profiles-table.c:53
+msgid "Profile name"
+msgstr "Profilnamn"
+
+#: src/services/callbacks.c:45
 msgid "No description available."
 msgstr "Ingen beskrivning tillgänglig."
 
-#: src/runlevel/main.c:75
-msgid "Runlevel Settings"
-msgstr "Körnivåinställningar"
+#: src/services/main.c:62
+msgid "Services Settings"
+msgstr "Tjänsteinställningar"
 
-#: src/runlevel/runlevel.desktop.in.in.h:1
-msgid "Runlevel"
-msgstr "Körnivå"
+#: src/services/services.desktop.in.in.h:1
+msgid "Services"
+msgstr "Tjänster"
 
-#: src/runlevel/runlevel.desktop.in.in.h:2
-msgid "Runlevel Services Manager"
-msgstr "Hanterare för körnivåtjänster"
+#: src/services/services.desktop.in.in.h:2
+msgid "Services Manager"
+msgstr "Tjänstehanterare"
 
-#: src/runlevel/table.c:86
+#: src/services/table.c:65
 msgid "Service"
 msgstr "Tjänst"
 
@@ -3981,6 +3977,12 @@ msgstr "Kommentarer"
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
 msgstr "Användare och grupper."
+
+#~ msgid "Runlevel Settings"
+#~ msgstr "Körnivåinställningar"
+
+#~ msgid "Runlevel"
+#~ msgstr "Körnivå"
 
 #~ msgid "Security"
 #~ msgstr "Säkerhet"
