@@ -596,13 +596,12 @@ void
 on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
 	gboolean active, wins_active, configured, smb_installed;
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
 
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
 	wins_active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "wins_use")));
 	configured = (gboolean) g_object_get_data (G_OBJECT (tool), "tool_configured");
 	smb_installed = (gboolean) g_object_get_data (G_OBJECT (tool), "smbinstalled");
-	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
-
 	
 	if (configured && !smb_installed && active) {
 		GtkWidget *dialog;
