@@ -1497,9 +1497,9 @@
 	  <widget>
 	    <class>GtkLabel</class>
 	    <name>label102</name>
-	    <label>I can't think of anything for this page.</label>
-	    <justify>GTK_JUSTIFY_LEFT</justify>
-	    <wrap>False</wrap>
+	    <label>Unspecific data, such as activation management. The comment will help you identify the interface in the future.</label>
+	    <justify>GTK_JUSTIFY_FILL</justify>
+	    <wrap>True</wrap>
 	    <xalign>0</xalign>
 	    <yalign>0.25</yalign>
 	    <xpad>0</xpad>
@@ -1659,7 +1659,7 @@
 	    <class>GtkTable</class>
 	    <name>table9</name>
 	    <border_width>4</border_width>
-	    <rows>2</rows>
+	    <rows>3</rows>
 	    <columns>2</columns>
 	    <homogeneous>False</homogeneous>
 	    <row_spacing>4</row_spacing>
@@ -1686,6 +1686,34 @@
 
 	    <widget>
 	      <class>GtkCheckButton</class>
+	      <name>status_button</name>
+	      <can_focus>True</can_focus>
+	      <signal>
+		<name>toggled</name>
+		<handler>on_status_button_toggled</handler>
+		<last_modification_time>Fri, 19 Jan 2001 01:17:10 GMT</last_modification_time>
+	      </signal>
+	      <label>This device is active</label>
+	      <active>False</active>
+	      <draw_indicator>True</draw_indicator>
+	      <child>
+		<left_attach>1</left_attach>
+		<right_attach>2</right_attach>
+		<top_attach>0</top_attach>
+		<bottom_attach>1</bottom_attach>
+		<xpad>0</xpad>
+		<ypad>0</ypad>
+		<xexpand>True</xexpand>
+		<yexpand>False</yexpand>
+		<xshrink>False</xshrink>
+		<yshrink>False</yshrink>
+		<xfill>True</xfill>
+		<yfill>False</yfill>
+	      </child>
+	    </widget>
+
+	    <widget>
+	      <class>GtkCheckButton</class>
 	      <name>status_boot</name>
 	      <can_focus>True</can_focus>
 	      <signal>
@@ -1703,7 +1731,7 @@
 		<bottom_attach>2</bottom_attach>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
-		<xexpand>False</xexpand>
+		<xexpand>True</xexpand>
 		<yexpand>False</yexpand>
 		<xshrink>False</xshrink>
 		<yshrink>False</yshrink>
@@ -1714,21 +1742,16 @@
 
 	    <widget>
 	      <class>GtkCheckButton</class>
-	      <name>status_button</name>
+	      <name>status_user</name>
 	      <can_focus>True</can_focus>
-	      <signal>
-		<name>toggled</name>
-		<handler>on_status_button_toggled</handler>
-		<last_modification_time>Fri, 19 Jan 2001 01:17:10 GMT</last_modification_time>
-	      </signal>
-	      <label>This device is active</label>
+	      <label>Allow activation control for all users</label>
 	      <active>False</active>
 	      <draw_indicator>True</draw_indicator>
 	      <child>
 		<left_attach>1</left_attach>
 		<right_attach>2</right_attach>
-		<top_attach>0</top_attach>
-		<bottom_attach>1</bottom_attach>
+		<top_attach>2</top_attach>
+		<bottom_attach>3</bottom_attach>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
 		<xexpand>True</xexpand>
@@ -1991,7 +2014,7 @@ BOOTP
 
 	  <widget>
 	    <class>GtkEntry</class>
-	    <name>ip_subnet</name>
+	    <name>ip_netmask</name>
 	    <can_focus>True</can_focus>
 	    <signal>
 	      <name>changed</name>
