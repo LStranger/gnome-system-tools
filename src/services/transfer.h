@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.h: this file is part of runlevel-admin, a ximian-setup-tool frontend 
+/* transfer.h: this file is part of services-admin, a gnome-system-tool frontend 
  * for run level services administration.
  * 
  * Copyright (C) 2002 Ximian, Inc.

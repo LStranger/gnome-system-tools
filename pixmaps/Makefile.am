@@ -51,8 +51,8 @@ pixmaps_DATA = \
 	print.png                \
 	reading.png              \
 	redhat.png               \
-	runlevel.png		 \
 	server.png               \
+	services.png		 \
 	settings.png             \
 	shares.png               \
 	slackware.png            \

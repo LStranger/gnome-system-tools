@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* transfer.c: this file is part of runlevel-admin, a ximian-setup-tool frontend 
+/* table.h: this file is part of services-admin, a gnome-system-tool frontend 
  * for run level services administration.
  * 
  * Copyright (C) 2002 Ximian, Inc.
@@ -21,28 +21,20 @@
  * Authors: Carlos Garnacho <garparr@teleline.es>.
  */
 
+#ifndef _TABLE_H
+#define _TABLE_H
+
 #include <gnome.h>
-#include <glade/glade.h>
-#include "gst.h"
 
-#include "transfer.h"
-#include "callbacks.h"
-#include "table.h"
+enum {
+	COL_ACTIVE,
+	COL_SERVICE,
+	COL_POINTER,
+	COL_LAST
+};
 
-extern GstTool *tool;
+void			table_create				(void);
+void			table_populate				(xmlNodePtr, gint);
+void                    table_empty                             (void);
 
-static void
-transfer_check_data (xmlNodePtr root)
-{
-	g_return_if_fail (root!=NULL);
-}
-
-void
-transfer_xml_to_gui (GstTool *tool, gpointer data)
-{
-	xmlNodePtr root;
-	root = gst_xml_doc_get_root(tool->config);
-	transfer_check_data (root);
-	table_update_headers(root);
-	table_populate (root);
-}
+#endif /* _TABLE_H */

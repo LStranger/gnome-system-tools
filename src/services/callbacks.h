@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* callbacks.h: this file is part of runlevel-admin, a ximian-setup-tool frontend 
+/* callbacks.h: this file is part of services-admin, a gnome-system-tool frontend 
  * for run level services administration.
  * 
  * Copyright (C) 2002 Ximian, Inc.
@@ -27,13 +27,14 @@
 
 #include <gnome.h>
 
-gboolean	callbacks_conf_read_failed_hook		(GstTool* , GstReportLine* , gpointer);
-void		on_main_dialog_update_complexity	(GtkWidget*, gpointer);
+void		on_main_dialog_update_complexity	(GtkWidget*,   gpointer);
 void		on_runlevel_table_clicked		(GtkTreeView*, gpointer);
-void		on_description_button_clicked		(GtkWidget*, gpointer);
-void		on_settings_button_clicked		(GtkWidget*, gpointer);
-void            on_menu_item_activate                   (GtkWidget*, gpointer);
-void            on_throw_service_button_clicked         (GtkWidget*, gpointer);
-void            on_service_priority_changed             (GtkWidget*, gpointer);
+void		on_description_button_clicked		(GtkWidget*,   gpointer);
+void		on_settings_button_clicked		(GtkWidget*,   gpointer);
+void            on_menu_item_activate                   (GtkWidget*,   gpointer);
+void            on_throw_service_button_clicked         (GtkWidget*,   gpointer);
+void            on_service_priority_changed             (GtkWidget*,   gpointer);
+void            on_runlevel_changed                     (GtkWidget*,   gpointer);
+void            on_service_toggled                      (GtkWidget*,   gchar*, gpointer);
 
 #endif /* CALLBACKS_H */

@@ -4,7 +4,7 @@ interfaces = \
 	network.glade	\
 	time.glade	\
 	users.glade	\
-	runlevel.glade
+	services.glade
 #	font.glade
 #	disks.glade
 #	dhcpd.glade

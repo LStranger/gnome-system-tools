@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* main.c: this file is part of runlevel-admin, a ximian-setup-tool frontend 
+/* main.c: this file is part of services-admin, a gnome-system-tool frontend 
  * for run level services administration.
  * 
  * Copyright (C) 2002 Ximian, Inc.
@@ -49,41 +49,24 @@ static GstDialogSignal signals [] = {
 static GstWidgetPolicy policies [] = {
 	/* Name                     Basic                        Advanced                   Root   User */
 	{ "settings_button",        GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "runlevels_menu",         GST_WIDGET_MODE_HIDDEN,      GST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE },
 	{NULL}
 };
-
-static void 
-connect_signals (GstTool *tool) 
-{
-	gst_dialog_connect_signals (tool->main_dialog, signals);
-	
-	g_signal_connect (GTK_OBJECT (tool->main_dialog), "complexity_change", G_CALLBACK (on_main_dialog_update_complexity), NULL);
-}
-
 
 int 
 main (int argc, char *argv[])
 {
-	GstReportHookEntry report_hooks[]={
-		{"boot_conf_read_failed",	callbacks_conf_read_failed_hook,	GST_REPORT_HOOK_LOAD,	FALSE,	NULL},
-		{NULL,NULL,-1,FALSE,NULL}
-	};
-	
-	gst_init ("runlevel-admin", argc, argv, NULL);
+	gst_init ("services-admin", argc, argv, NULL);
 	
 	tool = gst_tool_new();
-	gst_tool_construct (tool, "runlevel", _("Runlevel Settings"));
+	gst_tool_construct (tool, "services", _("Services Settings"));
 	table_create ();
 
 	gst_dialog_set_widget_policies (tool->main_dialog, policies);
-	
 	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
-	gst_tool_add_report_hooks (tool, report_hooks);
-	
-	connect_signals (tool);
+	gst_dialog_connect_signals (tool->main_dialog, signals);
 	
 	gst_dialog_enable_complexity (tool->main_dialog);
-	on_main_dialog_update_complexity (GTK_WIDGET (tool->main_dialog), NULL);
 	
 	gst_tool_main (tool,FALSE);
 	

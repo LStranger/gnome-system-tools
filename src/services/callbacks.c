@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* callbacks.c: this file is part of runlevel-admin, a ximian-setup-tool frontend 
+/* callbacks.c: this file is part of services-admin, a gnome-system-tool frontend 
  * for run level services administration.
  * 
  * Copyright (C) 2002 Ximian, Inc.
@@ -33,10 +33,6 @@
 #include "callbacks.h"
 
 extern GstTool *tool;
-
-extern GdkPixbuf *start_icon;
-extern GdkPixbuf *stop_icon;
-extern GdkPixbuf *do_nothing_icon;
 
 GList *parameters_list = NULL;
 
@@ -78,126 +74,104 @@ service_get_parameters (gchar *script)
 	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu);
 }
 
-/* callbacks */
-
-void
-on_main_dialog_update_complexity (GtkWidget *main_dialog, gpointer data)
+static gint
+get_current_runlevel (GstTool *tool)
 {
-	GstDialogComplexity complexity;
-	complexity = GST_DIALOG (main_dialog)->complexity;
-	table_update_state (complexity);
+	GtkWidget *option_menu, *menu, *selected_option;
+	gint runlevel;
+	
+	option_menu = gst_dialog_get_widget (tool->main_dialog, "runlevels_menu");
+	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
+	selected_option = gtk_menu_get_active (GTK_MENU (menu));
+
+	runlevel = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (selected_option), "runlevel"));
+
+	return runlevel;
 }
 
-gboolean
-callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, gpointer data)
+static gboolean
+current_runlevel_is_default (GstTool *tool)
 {
-	GtkWidget *dialog;
-	gchar *txt;
-
-	txt = g_strdup_printf (_("The file ``%s'' is missing or could not be read:\nThe configuration will show empty."), rline->argv[0]);
+	GtkWidget *option_menu, *menu, *selected_option;
+	gboolean default_runlevel;
 	
-	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog), GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, txt);
-        gtk_dialog_run (GTK_DIALOG (dialog));
-	
-	g_free (txt);
+	option_menu = gst_dialog_get_widget (tool->main_dialog, "runlevels_menu");
+	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (option_menu));
+	selected_option = gtk_menu_get_active (GTK_MENU (menu));
 
-	return TRUE;
+	default_runlevel = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (selected_option), "default"));
+
+	return default_runlevel;
 }
 
+/* if we are changing the same runlevel than the default,
+ * start or stop the service */
+static void
+run_service (GstTool *tool, xmlNodePtr service, gchar *runlevel, gchar *action)
+{
+	gchar *script;
+	
+	if (current_runlevel_is_default (tool)) {
+		script = gst_xml_get_child_content (service, "script");
+		gst_tool_run_get_directive (tool, NULL, "throw_service", script, action, NULL);
+
+		g_free (script);
+	}
+}
 
 static void
-callbacks_service_toggled (GtkTreeView *treeview, GtkTreeIter iter, GtkTreeViewColumn *column, xmlNodePtr service)
+toggle_service (GstTool *tool, xmlNodePtr service, gint runlevel, gboolean status)
 {
-	GtkTreeModel *model;
-	GList *column_list;
-	GdkPixbuf *image;
-	gint ncol;
-	xmlNodePtr runlevels, node;
-	gchar *level;
+	xmlNodePtr runlevels = gst_xml_element_find_first (service, "runlevels");
+	xmlNodePtr node;
+	gchar *buf, *r, *action;
+	gboolean found = FALSE;
 
-	g_return_if_fail (GTK_IS_TREE_VIEW (treeview));
 
-	/* We get the column number we are clicking */
-	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (treeview));
-	ncol = g_list_index (column_list, column);
 
-	/* we really want to edit only the runlevel columns, not the service names */
-	if (ncol > COL_SERVICE) {
-		model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
+	buf = g_strdup_printf ("%i", runlevel);
 
-		/* get the image to change it */
-		gtk_tree_model_get (model, &iter,
-				    ncol, &image,
-				    -1);
+	if (status == TRUE)
+		action = g_strdup_printf ("start");
+	else
+		action = g_strdup_printf ("stop");
 
-		runlevels = gst_xml_element_find_first (service, "runlevels");
-
-		if (runlevels == NULL) 
-			runlevels = gst_xml_element_add (service, "runlevels");
-
-		/* the image will have the next states:   started --> stopped --> do nothing --> ... */
-		if (image == start_icon) {
-			/* The state turns to stopped */
-			image = stop_icon;
-			
-			for (node = gst_xml_element_find_first (runlevels, "runlevel");
-			     node != NULL;
-			     node = gst_xml_element_find_next (node, "runlevel"))
-			{
-				level = gst_xml_get_child_content (node, "number");
-				if (atoi (level) == ncol - 2) {
-					g_free (level);
-					gst_xml_set_child_content (node, "action", "stop");
-					break;
-				}
-				
-				g_free (level);
-			}
-		}
-		else if (image == stop_icon) {
-			/* The state turns to "do nothing" */
-			image = do_nothing_icon;
-
-			for (node = gst_xml_element_find_first (runlevels, "runlevel");
-			     node != NULL;
-			     node = gst_xml_element_find_next (node, "runlevel"))
-			{
-				level = gst_xml_get_child_content (node, "number");
-				if (atoi (level) == ncol - 2) {
-					g_free (level);
-					gst_xml_element_destroy (node);
-					break;
-				}
-
-				g_free (level);
-			}
-		}
-		else {
-			/* The state turns to started */
-			gchar *buf;
-		
-			image = start_icon;
-
-			if (runlevels == NULL){
-				runlevels= gst_xml_element_add (node, "runlevels");
-			}
-			node = gst_xml_element_add (runlevels, "runlevel");
-			gst_xml_element_add (node, "number");
-			gst_xml_element_add (node, "action");
-			buf = g_strdup_printf ("%i", ncol - 2);
-			gst_xml_set_child_content (node, "number", buf);
-			gst_xml_set_child_content (node, "action", "start");
-			g_free (buf);
-		}
-
-		gst_dialog_modify (tool->main_dialog);	
+	if (runlevels == NULL) {
+		runlevels = gst_xml_element_add (node, "runlevels");
+	}
 	
-		gtk_tree_store_set (GTK_TREE_STORE (model), &iter, ncol, image, -1);
+	/* if the node already exists, put its action to "start" or "stop" */
+	for (node = gst_xml_element_find_first (runlevels, "runlevel");
+	     node != NULL;
+	     node = gst_xml_element_find_next (node, "runlevel"))
+	{
+		r = gst_xml_get_child_content (node, "number");
+		
+		if (strcmp (r, buf) == 0) {
+			gst_xml_set_child_content (node, "action", action);
+			found = TRUE;
+		}
+
+		g_free (r);
 	}
 
-	g_list_free (column_list);
+	/* if the node hasn't been found, create it */
+	if (!found) {
+		node = gst_xml_element_add (runlevels, "runlevel");
+		gst_xml_element_add (node, "number");
+		gst_xml_element_add (node, "action");
+		gst_xml_set_child_content (node, "number", buf);
+		gst_xml_set_child_content (node, "action", action);
+	}
+
+/*	run_service (tool, service, buf, action); */
+
+	g_free (buf);
+
 }
 
+
+/* callbacks */
 static void
 callbacks_set_buttons_sensitive ()
 {
@@ -233,9 +207,6 @@ on_runlevel_table_clicked (GtkTreeView *treeview, gpointer data)
 	
 	/* get the xmlNodePtr */
 	gtk_tree_model_get (model, &iter, COL_POINTER, &service, -1);
-
-	/* if we are clicking to edit a service action in a runlevel, we want to call this */
-	callbacks_service_toggled (treeview, iter, column, service);
 
 	/* Change the description label */
 	callbacks_description_changed (service);
@@ -282,7 +253,6 @@ on_service_priority_changed (GtkWidget *spin_button, gpointer data)
 		return;
 
 	gst_xml_set_child_content (service, "priority", value);
-	gtk_tree_store_set (GTK_TREE_STORE (model), &iter, COL_PRIORITY, value, -1);
 
 	gst_dialog_modify (tool->main_dialog);
 
@@ -339,4 +309,48 @@ on_settings_button_clicked (GtkWidget *button, gpointer data)
 	/* we need to free the list and put it again to NULL, it may be used again */
 	g_list_free (parameters_list);
 	parameters_list = NULL;
+}
+
+void
+on_runlevel_changed (GtkWidget *widget, gpointer data)
+{
+	gint runlevel = GPOINTER_TO_INT (data);
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+
+	table_clear ();
+	table_populate (root, runlevel);
+}
+
+void
+on_service_toggled (GtkWidget *widget, gchar *path_str, gpointer data)
+{
+	gboolean value = gtk_cell_renderer_toggle_get_active (GTK_CELL_RENDERER_TOGGLE (widget));
+	gboolean new_value = !value;
+	GstTool *tool = GST_TOOL (data);
+	gint runlevel = get_current_runlevel (tool);
+	GtkTreeView *runlevel_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "runlevel_table"));
+	GtkTreeModel *model = gtk_tree_view_get_model (runlevel_table);
+	GtkTreePath *path = gtk_tree_path_new_from_string (path_str);
+	GtkTreeIter iter;
+	xmlNodePtr service;
+
+	gtk_tree_model_get_iter (model, &iter, path);
+	
+	gtk_tree_model_get (model,
+			    &iter,
+			    COL_POINTER, &service,
+			    -1);
+
+	/* change the XML */
+	toggle_service (tool, service, runlevel, new_value);
+	
+
+	gtk_tree_store_set (GTK_TREE_STORE (model),
+			    &iter,
+			    COL_ACTIVE, new_value,
+			    -1);
+
+	gst_dialog_modify (tool->main_dialog);
+
+	gtk_tree_path_free (path);
 }
