@@ -19,6 +19,7 @@ pixmaps_DATA = \
 	display.png              \
 	font.png            	\
 	freebsd.png              \
+	gentoo.png               \
 	gnome-laptop.png         \
 	gnome-light-on.png       \
 	gnome-light-off.png      \
