@@ -77,18 +77,20 @@ transfer_populate_option_menu (GstTool *tool, xmlNodePtr root)
 		n_items++;
 	}
 
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu->widget), menu_shell);
+
 	if (n_items == 1) {
 		/* it's has only one runlevel, we should hide the runlevels list at all */
 		option_menu->advanced = GST_WIDGET_MODE_HIDDEN;
 		gst_widget_apply_policy (option_menu);
 	} else {
 		gtk_widget_show_all (menu_shell);
-		gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu->widget), menu_shell);
-		gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu->widget), n_option);
-		g_object_set_data (G_OBJECT (option_menu->widget), "default_item", GINT_TO_POINTER (n_option));
 	}
 
-	if (!has_default) {
+	if (has_default) {
+		gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu->widget), n_option);
+		g_object_set_data (G_OBJECT (option_menu->widget), "default_item", GINT_TO_POINTER (n_option));
+	} else {
 		/* there isn't a default, so we load the first runlevel in the list */
 		gtk_option_menu_set_history (GTK_OPTION_MENU (option_menu->widget), 0);
 		change_runlevel (first_runlevel);
