@@ -11,7 +11,6 @@
 toolname = boot
 bin_PROGRAMS = boot-admin
 
-SUBDIRS = 
 CPPFLAGS =
 INCLUDES = $(XST_TOOL_CFLAGS)
 CLEANFILES = $(XST_TOOL_CLEANFILES)

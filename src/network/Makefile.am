@@ -11,7 +11,6 @@
 toolname = network
 bin_PROGRAMS = network-admin
 
-SUBDIRS = 
 CPPFLAGS =
 INCLUDES = $(XST_TOOL_CFLAGS)
 CLEANFILES = $(XST_TOOL_CLEANFILES)
