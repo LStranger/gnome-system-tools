@@ -1501,7 +1501,7 @@
 	      <widget>
 		<class>GtkLabel</class>
 		<name>label4</name>
-		<label>Change the user's password or options like its name.</label>
+		<label>Change the user's password or options like  their name.</label>
 		<justify>GTK_JUSTIFY_LEFT</justify>
 		<wrap>True</wrap>
 		<xalign>0.5</xalign>
@@ -2714,8 +2714,8 @@
 	<spacing>0</spacing>
 	<child>
 	  <padding>0</padding>
-	  <expand>True</expand>
-	  <fill>True</fill>
+	  <expand>False</expand>
+	  <fill>False</fill>
 	</child>
 
 	<widget>
@@ -2797,14 +2797,10 @@
 	  </widget>
 
 	  <widget>
-	    <class>GtkVButtonBox</class>
-	    <name>vbuttonbox3</name>
-	    <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
-	    <spacing>10</spacing>
-	    <child_min_width>85</child_min_width>
-	    <child_min_height>27</child_min_height>
-	    <child_ipad_x>7</child_ipad_x>
-	    <child_ipad_y>0</child_ipad_y>
+	    <class>GtkVBox</class>
+	    <name>vbox17</name>
+	    <homogeneous>False</homogeneous>
+	    <spacing>0</spacing>
 	    <child>
 	      <padding>0</padding>
 	      <expand>False</expand>
@@ -2812,42 +2808,75 @@
 	    </child>
 
 	    <widget>
-	      <class>GtkButton</class>
-	      <name>network_user_new</name>
-	      <can_default>True</can_default>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>on_network_user_new_clicked</handler>
-		<last_modification_time>Wed, 03 Jan 2001 14:40:59 GMT</last_modification_time>
-	      </signal>
-	      <label>New User</label>
+	      <class>GtkVButtonBox</class>
+	      <name>vbuttonbox3</name>
+	      <layout_style>GTK_BUTTONBOX_DEFAULT_STYLE</layout_style>
+	      <spacing>0</spacing>
+	      <child_min_width>85</child_min_width>
+	      <child_min_height>27</child_min_height>
+	      <child_ipad_x>8</child_ipad_x>
+	      <child_ipad_y>0</child_ipad_y>
+	      <child>
+		<padding>0</padding>
+		<expand>False</expand>
+		<fill>False</fill>
+	      </child>
+
+	      <widget>
+		<class>GtkButton</class>
+		<name>network_user_new</name>
+		<can_default>True</can_default>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_network_user_new_clicked</handler>
+		  <last_modification_time>Wed, 03 Jan 2001 14:40:59 GMT</last_modification_time>
+		</signal>
+		<label>New User</label>
+	      </widget>
+
+	      <widget>
+		<class>GtkButton</class>
+		<name>network_group_new</name>
+		<can_default>True</can_default>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_network_group_new_clicked</handler>
+		  <last_modification_time>Wed, 03 Jan 2001 14:55:37 GMT</last_modification_time>
+		</signal>
+		<label>New Group</label>
+	      </widget>
+
+	      <widget>
+		<class>GtkButton</class>
+		<name>network_delete</name>
+		<can_default>True</can_default>
+		<can_focus>True</can_focus>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_network_delete_clicked</handler>
+		  <last_modification_time>Wed, 03 Jan 2001 09:08:35 GMT</last_modification_time>
+		</signal>
+		<label>Delete</label>
+	      </widget>
 	    </widget>
 
 	    <widget>
-	      <class>GtkButton</class>
-	      <name>network_group_new</name>
-	      <can_default>True</can_default>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>on_network_group_new_clicked</handler>
-		<last_modification_time>Wed, 03 Jan 2001 14:55:37 GMT</last_modification_time>
-	      </signal>
-	      <label>New Group</label>
-	    </widget>
-
-	    <widget>
-	      <class>GtkButton</class>
-	      <name>network_delete</name>
-	      <can_default>True</can_default>
-	      <can_focus>True</can_focus>
-	      <signal>
-		<name>clicked</name>
-		<handler>on_network_delete_clicked</handler>
-		<last_modification_time>Wed, 03 Jan 2001 09:08:35 GMT</last_modification_time>
-	      </signal>
-	      <label>Delete</label>
+	      <class>GtkLabel</class>
+	      <name>label49</name>
+	      <label></label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0.5</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <child>
+		<padding>0</padding>
+		<expand>True</expand>
+		<fill>True</fill>
+	      </child>
 	    </widget>
 	  </widget>
 	</widget>
