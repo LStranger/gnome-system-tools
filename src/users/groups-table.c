@@ -109,12 +109,11 @@ construct_groups_table (void)
 {
 	GtkWidget *sw;
 	GtkWidget *list;
-	
+
 	sw = xst_dialog_get_widget (tool->main_dialog, "groups_table");
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
-	
+
 	list = create_groups_table ();
-	
+
 	gtk_widget_show_all (list);
 	gtk_container_add (GTK_CONTAINER (sw), list);
 }

@@ -85,7 +85,6 @@ static XstDialogSignal signals[] = {
 
 static const XstWidgetPolicy policies[] = {
 	/* Name                     Basic                        Advanced                   Root   User */
-	{ "users_table",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_new",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },

@@ -66,8 +66,6 @@ create_gtktree_list (GtkWidget *sw)
                                                      NULL);
 	g_object_unref (model);
 	
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
-	
 	gtk_widget_show_all (list);
 	gtk_container_add (GTK_CONTAINER (sw), list);
 	
