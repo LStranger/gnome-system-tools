@@ -59,11 +59,7 @@ struct _GstDialog {
 	GtkWidget *complexity_button_label;
 	GtkWidget *complexity_button_image;
 
-	/* this var will tell if the configuration has been applied at least one time */
-	gboolean config_has_changed;
-	
 	gboolean is_modified;
-	GtkWidget *apply_button;
 
 	GstDialogComplexity complexity;
 	gboolean frozen;

@@ -39,7 +39,6 @@
 enum {
 	BOGUS,
 	APPLY,
-	RESTORE,
 	COMPLEXITY_CHANGE,
 	LAST_SIGNAL
 };
@@ -186,24 +185,6 @@ gst_dialog_thaw_visible (GstDialog *xd)
 		gtk_widget_set_sensitive (GTK_WIDGET (xd), TRUE);
 }
 
-void
-gst_dialog_set_changed_config (GstDialog *xd, gboolean value)
-{
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
-
-	xd->config_has_changed = value;
-}
-
-gboolean
-gst_dialog_get_changed_config (GstDialog *xd)
-{
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
-
-	return xd->config_has_changed;
-}
-
 gboolean
 gst_dialog_get_modified (GstDialog *xd)
 {
@@ -220,7 +201,6 @@ gst_dialog_set_modified (GstDialog *xd, gboolean state)
 	g_return_if_fail (GST_IS_DIALOG (xd));
 
 	xd->is_modified = state;
-	gtk_widget_set_sensitive (xd->apply_button, state);
 }
 
 void
@@ -244,49 +224,31 @@ gst_dialog_modify_cb (GtkWidget *w, gpointer data)
 }
 
 static void
-gst_dialog_destroy (GtkObject *tool)
+gst_dialog_class_init (GstDialogClass *class)
 {
-	GTK_OBJECT_CLASS (parent_class)->destroy (GTK_OBJECT (tool));
-}
+	GObjectClass *gobject_class;
 
-static void
-gst_dialog_class_init (GstDialogClass *klass)
-{
-	GtkObjectClass *object_class;
-
-	object_class = (GtkObjectClass *)klass;
-	parent_class = gtk_type_class (GNOME_TYPE_APP);
+	gobject_class = G_OBJECT_CLASS (class);
+	parent_class = g_type_class_peek_parent (class);
 
 	gstdialog_signals[APPLY] = 
 		g_signal_new ("apply",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GstDialogClass, apply),
 			      NULL, NULL,
 			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
-	gstdialog_signals[RESTORE] =
-		g_signal_new ("restore",
-			      G_OBJECT_CLASS_TYPE (object_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GstDialogClass, restore),
-			      NULL, NULL,
-			      gst_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
-	
 	gstdialog_signals[COMPLEXITY_CHANGE] =
 		g_signal_new ("complexity_change",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GstDialogClass, complexity_change),
 			      NULL, NULL,
 			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE,
 			      0);
-
-	object_class->destroy = gst_dialog_destroy;
 }
 
 static void
@@ -302,8 +264,8 @@ gst_dialog_get_type (void)
 {
 	static GType gstdialog_type = 0;
 
-	if (gstdialog_type == 0) {
-		GTypeInfo gstdialog_info = {
+	if (!gstdialog_type) {
+		static const GTypeInfo gstdialog_info = {
 			sizeof (GstDialogClass),
 			NULL, /* base_init */
 			NULL, /* base finalize */
@@ -460,19 +422,6 @@ complexity_cb (GtkWidget *w, gpointer data)
 }
 
 static void
-restore_config (gpointer data)
-{
-	GstDialog *dialog;
-
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (GST_IS_DIALOG (data));
-
-	dialog = GST_DIALOG (data);
-
-	g_signal_emit (G_OBJECT (dialog), gstdialog_signals[RESTORE], 0);
-}
-
-static void
 apply_config (gpointer data)
 {
 	GstDialog *dialog;
@@ -526,29 +475,7 @@ dialog_close (GstDialog *dialog)
 	gtk_widget_hide (GTK_WIDGET (dialog));
 
 	if (dialog == dialog->tool->main_dialog)
-		g_signal_emit_by_name (GTK_OBJECT (dialog->tool), "close");
-}
-
-static void
-dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
-{
-	dialog_close (data);
-}
-
-static void
-apply_cb (GtkWidget *w, gpointer data)
-{
-	GstDialog *dialog;
-
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (GST_IS_DIALOG (data));
-
-	dialog = GST_DIALOG (data);
-
-	gst_dialog_set_changed_config (dialog, TRUE);
-
-	if (gst_dialog_get_modified (dialog))
-		apply_config (dialog);
+		g_signal_emit_by_name (G_OBJECT (dialog->tool), "close");
 }
 
 static void
@@ -556,13 +483,10 @@ cancel_cb (GtkWidget *w, gpointer data)
 {
 	GstDialog *dialog;
 
-	g_return_if_fail (data!= NULL);
+	g_return_if_fail (data != NULL);
 	g_return_if_fail (GST_IS_DIALOG (data));
 
 	dialog = GST_DIALOG (data);
-
-	if (gst_dialog_get_changed_config (dialog))
-		restore_config (dialog);
 
 	dialog_close (dialog);
 }
@@ -586,6 +510,12 @@ accept_cb (GtkWidget *w, gpointer data)
 static void
 help_cb (GtkWidget *w, gpointer data)
 {
+}
+
+static void
+dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
+{
+	cancel_cb (w, data);
 }
 
 void
@@ -682,11 +612,9 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 
 	w = glade_xml_get_widget (xml, "help");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (help_cb), dialog);
-	/* FIXME: help button hidden until the help files are ready. */
-	gtk_widget_hide (w);
 
 	w = glade_xml_get_widget (xml, "complexity");
-	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (complexity_cb), dialog);
+	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (complexity_cb), dialog);
 
 	dialog->complexity_button = w;
 
@@ -696,18 +624,13 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 	w = glade_xml_get_widget (xml, "complexity_button_image");
 	dialog->complexity_button_image = w;
 
-	w = glade_xml_get_widget (xml, "apply");
-	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (apply_cb), dialog);
-	dialog->apply_button = w;
-	
 	w = glade_xml_get_widget (xml, "cancel");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (cancel_cb), dialog);
 
 	w = glade_xml_get_widget (xml, "accept");
-	g_signal_connect (GTK_OBJECT (w), "clicked", G_CALLBACK (accept_cb), dialog);
+	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (accept_cb), dialog);
 	
 	gst_dialog_set_modified (dialog, FALSE);
-	gst_dialog_set_changed_config (dialog, FALSE);
 	gtk_widget_hide (dialog->complexity_button);
 
 	dialog->complexity = GST_DIALOG_NONE;

@@ -90,7 +90,7 @@ enum {
 	PLATFORM_LIST_COL_LAST
 };
 
-static GtkObjectClass *parent_class;
+static GObjectClass *parent_class;
 static gint gsttool_signals [LAST_SIGNAL] = { 0 };
 
 static void     gst_tool_idle_run_directives_remove (GstTool *tool);
@@ -588,8 +588,8 @@ gst_tool_kill_tool_cb (GstDirectiveEntry *entry)
 	GstTool *tool = entry->tool;
 
 	gst_tool_kill_backend_cb (entry);
-	
-	g_signal_emit_by_name (G_OBJECT (tool), "destroy");
+
+	g_object_unref (G_OBJECT (tool));
 }
 
 /* kills the whole tool */
@@ -899,10 +899,9 @@ gst_tool_load (GstTool *tool)
 #endif	
 	}
 
+	if (tool->config)
+		g_signal_emit (G_OBJECT (tool), gsttool_signals[FILL_GUI], 0);
 
-	if (tool->config){
-		g_signal_emit (GTK_OBJECT (tool), gsttool_signals[FILL_GUI], 0);
-	}
 	return tool->config != NULL;
 }
 
@@ -922,7 +921,7 @@ gst_tool_save (GstTool *tool, gboolean restore)
 
 	gst_dialog_freeze_visible (tool->main_dialog);
 
-	g_signal_emit (GTK_OBJECT (tool), gsttool_signals[FILL_XML], 0);
+	g_signal_emit (G_OBJECT (tool), gsttool_signals[FILL_XML], 0);
 #ifdef GST_DEBUG
 	/* don't actually save if we are just pretending */
 	if (tool->root_access == ROOT_ACCESS_SIMULATED) {
@@ -986,12 +985,6 @@ gst_tool_save_cb (GtkWidget *w, GstTool *tool)
 }
 
 void
-gst_tool_restore_cb (GtkWidget *w, GstTool *tool)
-{
-	gst_tool_save (tool, TRUE);
-}
-
-void
 gst_tool_load_try (GstTool *tool)
 {
 	if (!gst_tool_load (tool)) {
@@ -1051,28 +1044,23 @@ gst_tool_main_with_hidden_dialog (GstTool *tool, gboolean no_main_loop)
 }
 
 static void
-gst_tool_destroy (GtkObject *object)
+gst_tool_finalize (GObject *object)
 {
-	GstTool *tool;
-
-	tool = GST_TOOL (object);
-	
-	parent_class->destroy (object);
+	parent_class->finalize (object);
 	gtk_main_quit ();
 }
 
 static void
-gst_tool_class_init (GstToolClass *klass)
+gst_tool_class_init (GstToolClass *class)
 {	
-	GtkObjectClass *object_class;
+	GObjectClass *gobject_class;
 
-	object_class = (GtkObjectClass *)klass;
-
-	parent_class = g_type_class_peek_parent (klass);
+	gobject_class = G_OBJECT_CLASS (class);
+	parent_class = g_type_class_peek_parent (class);
 
 	gsttool_signals[FILL_GUI] = 
 		g_signal_new ("fill_gui",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GstToolClass, fill_gui),
 			      NULL, NULL,
@@ -1080,7 +1068,7 @@ gst_tool_class_init (GstToolClass *klass)
 			      G_TYPE_NONE, 0);
 	gsttool_signals[FILL_XML] = 
 		g_signal_new ("fill_xml",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GstToolClass, fill_xml),
 			      NULL, NULL,
@@ -1088,14 +1076,14 @@ gst_tool_class_init (GstToolClass *klass)
 			      G_TYPE_NONE, 0);
 	gsttool_signals[CLOSE] = 
 		g_signal_new ("close",
-			      G_OBJECT_CLASS_TYPE (object_class),
+			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GstToolClass, close),
 			      NULL, NULL,
 			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE, 0);
 
-	object_class->destroy = gst_tool_destroy;
+	gobject_class->finalize = gst_tool_finalize;
 }
 
 static void
@@ -1226,8 +1214,8 @@ gst_tool_type_init (GstTool *tool)
 	tool->report_gui = xml  = gst_tool_load_glade_common (tool, "report_window");
 
 	tool->report_window     = glade_xml_get_widget (xml, "report_window");
-	g_signal_connect (GTK_OBJECT (tool->report_window), "delete_event",
-			    G_CALLBACK (report_window_close_cb), tool);
+	g_signal_connect (G_OBJECT (tool->report_window), "delete_event",
+			  G_CALLBACK (report_window_close_cb), tool);
 
 	tool->report_label      = glade_xml_get_widget (xml, "report_label");
 
@@ -1262,7 +1250,7 @@ gst_tool_get_type (void)
 			(GInstanceInitFunc) gst_tool_type_init
 		};
 		
-		gsttool_type = g_type_register_static (GTK_TYPE_OBJECT, "GstTool", &gsttool_info, 0);
+		gsttool_type = g_type_register_static (G_TYPE_OBJECT, "GstTool", &gsttool_info, 0);
 	}
 
 	return gsttool_type;
@@ -1312,10 +1300,6 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	g_signal_connect (G_OBJECT (tool->main_dialog),
 			  "apply",
 			  G_CALLBACK (gst_tool_save_cb),
-			  tool);
-	g_signal_connect (G_OBJECT (tool->main_dialog),
-			  "restore",
-			  G_CALLBACK (gst_tool_restore_cb),
 			  tool);
 
 	tool->report_hook_list = NULL;
@@ -1376,8 +1360,7 @@ gst_tool_set_close_func (GstTool *tool, GstCloseFunc close_cb, gpointer data)
 	g_return_if_fail (GST_IS_TOOL (tool));
 
 	if (close_cb)
-		g_signal_connect (GTK_OBJECT (tool), "close", G_CALLBACK (close_cb), data);
-
+		g_signal_connect (G_OBJECT (tool), "close", G_CALLBACK (close_cb), data);
 }
 
 void

@@ -22,7 +22,6 @@
 #ifndef GST_TOOL_H
 #define GST_TOOL_H
 
-#include <gtk/gtkobject.h>
 #include <glade/glade.h>
 #include <popt.h>
 
@@ -45,7 +44,7 @@ typedef enum {
 } RootAccess;
 
 struct _GstTool {
-	GtkObject object;
+	GObject object;
 	char *name;
 
 	RootAccess root_access;
@@ -114,7 +113,7 @@ struct _GstTool {
 };
 
 struct _GstToolClass {
-	GtkObjectClass parent_class;
+	GObjectClass parent_class;
 
 	void (*fill_gui) (GstTool *xt);
 	void (*fill_xml) (GstTool *xt);
