@@ -10,6 +10,7 @@ interfaces = \
 	boot.glade					\
 	location-manager.glade			\
 	internetsharing.glade			\
+	rollback-location-management.glade \
 	print.glade
 
 interfaces_DATA = $(interfaces)

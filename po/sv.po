@@ -8,7 +8,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools\n"
-"POT-Creation-Date: 2001-05-24 22:38+0200\n"
+"POT-Creation-Date: 2001-05-25 14:26-0500\n"
 "PO-Revision-Date: 2001-05-24 23:00+0200\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -304,7 +304,8 @@ msgid "Checking if interface [%s] is active."
 msgstr "Kontrollerar om gränssnittet [%s] är aktivt."
 
 #: backend/report.pl.in:210
-msgid "Setting hostname."
+#, fuzzy, c-format
+msgid "Setting hostname to [%s]."
 msgstr "Ställer in värdnamnet."
 
 #: backend/report.pl.in:211
@@ -696,17 +697,27 @@ msgstr "sekunder innan standardkärnan eller -operativsystemet startas"
 msgid "Complexity"
 msgstr "Komplexitet"
 
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:72
+#: interfaces/shares.glade.in.h:38
+msgid "Password:"
+msgstr "Lösenord:"
+
+#: interfaces/common.glade.in.h:3
+#, fuzzy
+msgid "Run without password"
+msgstr "Nytt lösenord"
+
 #. Parent
 #. Close writing end
 #. LibXML support for parsing from memory is good, but parsing from
 #. * opened filehandles is not supported unless you write your own feed
 #. * mechanism. Let's just load it all into memory, then. Also, refusing
 #. * enormous documents can be considered a plus. </dystopic>
-#: interfaces/common.glade.in.h:2 src/common/xst-tool.c:641
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:641
 msgid "Scanning your system configuration."
 msgstr "Läser av din systemkonfiguration."
 
-#: interfaces/common.glade.in.h:3
+#: interfaces/common.glade.in.h:5
 msgid ""
 "The platform you are running is not supported by this tool. If you know for "
 "sure that it works like one of the platforms listed below, you can select "
@@ -722,12 +733,25 @@ msgstr ""
 "Observera dock att detta kan skada systemkonfigurationen eller rentav "
 "förstöra data på din dator."
 
-#: interfaces/common.glade.in.h:6
+#: interfaces/common.glade.in.h:8
+msgid ""
+"To run this tool, you need administrator privileges.\n"
+"\n"
+"To acquire such privileges, enter your root password below. If you don't\n"
+"specify a password, you will be unable to modify your system configuration."
+msgstr ""
+
+#: interfaces/common.glade.in.h:12
 msgid "Unsupported platform"
 msgstr "Plattformen stöds inte"
 
-#: interfaces/common.glade.in.h:7
+#: interfaces/common.glade.in.h:13
 msgid "Ximian Setup Tools"
+msgstr "Ximians inställningsverktyg"
+
+#: interfaces/common.glade.in.h:14
+#, fuzzy
+msgid "Ximian Setup Tools - Password"
 msgstr "Ximians inställningsverktyg"
 
 #: interfaces/disks.glade.in.h:1
@@ -1146,7 +1170,7 @@ msgstr "Alias:"
 msgid "Allow activation control for all users"
 msgstr "Tillåt aktiveringskontroll för alla användare"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1009
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1008
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -1188,7 +1212,7 @@ msgid "Create a new Internet Connection "
 msgstr "Skapa en ny internetanslutning "
 
 #: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:31
-#: src/network/connection.c:1008
+#: src/network/connection.c:1007
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1288,7 +1312,7 @@ msgstr "IP-inställningar"
 msgid "Local IP:"
 msgstr "Lokalt IP:"
 
-#: interfaces/network.glade.in.h:62 src/network/connection.c:1007
+#: interfaces/network.glade.in.h:62 src/network/connection.c:1006
 msgid "Manual"
 msgstr "Manuell"
 
@@ -1335,10 +1359,6 @@ msgstr "Parallellinje"
 #: interfaces/network.glade.in.h:71
 msgid "Password (confirm):"
 msgstr "Lösenord (bekräfta):"
-
-#: interfaces/network.glade.in.h:72 interfaces/shares.glade.in.h:38
-msgid "Password:"
-msgstr "Lösenord:"
 
 #: interfaces/network.glade.in.h:73
 msgid "Phone number:"
@@ -2206,20 +2226,13 @@ msgstr ""
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Ximians inställningsverktyg"
 
-#: src/common/xst-tool.c:1018
+#: src/common/xst-tool.c:1006
+msgid "The password you entered is invalid."
+msgstr ""
+
+#: src/common/xst-tool.c:1046
 msgid "Pretending we are root..."
 msgstr "Låtsas att vi är root..."
-
-#: src/common/xst-tool.c:1027
-msgid ""
-"You need full administration privileges (i.e. root)\n"
-"to use this configuration tool. Please enter the root\n"
-"password to acquire such privileges.\n"
-msgstr ""
-"Du behöver fullständiga administrationsrättigheter\n"
-"(d.v.s. root) för att använda detta konfigurations-\n"
-"verktyg. Ange rootlösenordet för att få sådana\n"
-"rättigheter.\n"
 
 #: src/disks/main.c:39
 msgid "Disk Partitions"
@@ -2245,53 +2258,53 @@ msgstr "Växlingsutrymmet %s finns redan."
 msgid "Swap Management"
 msgstr "Växlingsfilshantering"
 
-#: src/network/callbacks.c:165
+#: src/network/callbacks.c:164
 msgid "The name of this computer"
 msgstr "Namnet på denna dator"
 
-#: src/network/callbacks.c:168
+#: src/network/callbacks.c:167
 msgid "A short description of your computer"
 msgstr "En kort beskrivning av din dator"
 
-#: src/network/callbacks.c:171
+#: src/network/callbacks.c:170
 msgid "The Windows Networking workgroup for your network"
 msgstr "Arbetsgruppen för ditt nätverk i Windows-nätverk"
 
-#: src/network/callbacks.c:174
+#: src/network/callbacks.c:173
 msgid "The IP address of your WINS server"
 msgstr "IP-adressen till din WINS-server"
 
-#: src/network/callbacks.c:177
+#: src/network/callbacks.c:176
 msgid "The DNS domain for your computer"
 msgstr "DNS-domänen till din dator"
 
-#: src/network/callbacks.c:180
+#: src/network/callbacks.c:179
 msgid "A list of your DNS servers' IP addresses"
 msgstr "En lista på dina DNS-servrars IP-adresser"
 
-#: src/network/callbacks.c:183
+#: src/network/callbacks.c:182
 msgid "A list of domains where hosts will be searched"
 msgstr "En lista på domäner där värdar kommer att sökas"
 
-#: src/network/callbacks.c:186
+#: src/network/callbacks.c:185
 msgid "The IP address of this host"
 msgstr "IP-adress för denna dator"
 
-#: src/network/callbacks.c:189
+#: src/network/callbacks.c:188
 msgid "Aliases for this host, one per line"
 msgstr "Alias för denna dator, en per rad"
 
-#: src/network/callbacks.c:329
+#: src/network/callbacks.c:328
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Ta bort anslutningen %s: \"%s\"?"
 
-#: src/network/callbacks.c:331
+#: src/network/callbacks.c:330
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Ta bort anslutningen %s?"
 
-#: src/network/callbacks.c:393
+#: src/network/callbacks.c:392
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2299,11 +2312,11 @@ msgstr ""
 "Du har inte SMB-stöd installerat. Installera SMB-stöd på systemet\n"
 "för att möjliggöra nätverksanslutning till windows."
 
-#: src/network/callbacks.c:394
+#: src/network/callbacks.c:393
 msgid "SMB support missing."
 msgstr "Stöd för SMB saknas."
 
-#: src/network/callbacks.c:431
+#: src/network/callbacks.c:430
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications,\n"
@@ -2317,19 +2330,19 @@ msgstr ""
 "\n"
 "Fortsätta ändå?"
 
-#: src/network/callbacks.c:438
+#: src/network/callbacks.c:437
 msgid "Don't change host name"
 msgstr "Ändra inte värdnamnet"
 
-#: src/network/callbacks.c:471
+#: src/network/callbacks.c:470
 msgid "Active"
 msgstr "Aktiv"
 
-#: src/network/callbacks.c:472
+#: src/network/callbacks.c:471
 msgid "Inactive"
 msgstr "Inaktiv"
 
-#: src/network/callbacks.c:489
+#: src/network/callbacks.c:488
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3179,6 +3192,16 @@ msgstr "Import och export av kataloger"
 #: src/shares/shares.desktop.in.in.h:2
 msgid "Shares"
 msgstr "Utdelningar"
+
+#~ msgid ""
+#~ "You need full administration privileges (i.e. root)\n"
+#~ "to use this configuration tool. Please enter the root\n"
+#~ "password to acquire such privileges.\n"
+#~ msgstr ""
+#~ "Du behöver fullständiga administrationsrättigheter\n"
+#~ "(d.v.s. root) för att använda detta konfigurations-\n"
+#~ "verktyg. Ange rootlösenordet för att få sådana\n"
+#~ "rättigheter.\n"
 
 #~ msgid "Obtain DNS information from DHCP / BOOTP server"
 #~ msgstr "Få DNS-information från DHCP-/BOOTP-server"

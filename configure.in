@@ -18,7 +18,7 @@ then
   sleep 5
 fi
 
-AM_INIT_AUTOMAKE(ximian-setup-tools, 0.4.2)
+AM_INIT_AUTOMAKE(ximian-setup-tools, 0.5.0)
 AM_CONFIG_HEADER(config.h)
 
 dnl Pick up the Gnome macros.
@@ -135,6 +135,24 @@ else
   AC_DEFINE_UNQUOTED(INTERFACES_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces")
   interfacesdir="${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
 fi
+
+
+dnl ======================================
+dnl Variables for ximian_archiverConf.sh.in
+dnl =======================================
+
+XIMIAN_ARCHIVER_LIBDIR='-L${libdir}'
+XIMIAN_ARCHIVER_LIBS="$($GNOME_CONFIG --libs gnome libglade xml) -lximian_archiver"
+XIMIAN_ARCHIVER_INCLUDEDIR="$($GNOME_CONFIG --cflags gnome libglade xml)"
+
+AC_SUBST(XIMIAN_ARCHIVER_LIBDIR)
+AC_SUBST(XIMIAN_ARCHIVER_LIBS)
+AC_SUBST(XIMIAN_ARCHIVER_INCLUDEDIR)
+
+dnl =============================================
+dnl END : Variables for ximian_archiverConf.sh.in
+dnl =============================================
+
 
 AC_SUBST(scriptsdir)
 AC_SUBST(pixmapsdir)
