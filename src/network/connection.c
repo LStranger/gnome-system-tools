@@ -2250,3 +2250,26 @@ connection_autodetect_modem (void)
 	root = gst_xml_doc_get_root (doc);
 	return  gst_xml_get_child_content (root, "device");
 }
+
+gint
+connection_get_count (GstTool *tool)
+{
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	xmlNodePtr node;
+	gint count = 0;
+	gchar *name;
+
+	for (node = gst_xml_element_find_first (root, "interface");
+	     node != NULL;
+	     node = gst_xml_element_find_next (node, "interface"))
+	{
+		name = gst_xml_get_child_content (node, "dev");
+
+		if (strcmp (name, "lo") != 0)
+			count++;
+
+		g_free (name);
+	}
+
+	return count;
+}

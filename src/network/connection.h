@@ -181,4 +181,6 @@ gchar *connection_find_new_device (xmlNodePtr, GstConnectionType);
 gchar*   connection_autodetect_modem (void);
 void connection_set_bcast_and_network (GstConnection *cxn);
 
+gint connection_get_count (GstTool*);
+
 #endif /* CONNECTION_H */

@@ -294,7 +294,15 @@ main (int argc, char *argv[])
 
 		on_network_admin_show (NULL, tool);
 		update_complexity (tool->main_dialog, NULL);
-		gst_tool_main (tool, FALSE);
+
+		gst_tool_main (tool, TRUE);
+		
+		if (connection_get_count (tool) == 0)
+			g_signal_emit_by_name (G_OBJECT (gst_dialog_get_widget (tool->main_dialog, "connection_add")),
+					       "clicked",
+					       NULL);
+
+		gtk_main ();
 	}
 		
 	return 0;
