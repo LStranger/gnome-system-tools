@@ -64,7 +64,7 @@ void on_network_group_new_clicked (GtkButton *button, gpointer user_data);
 
 /* user settings dialog callbacks */
 void on_user_settings_dialog_show (GtkWidget*, gpointer);
-void on_user_settings_dialog_delete_event (GtkWidget*, gpointer);
+gboolean on_user_settings_dialog_delete_event (GtkWidget*, gpointer);
 void on_user_settings_ok_clicked (GtkButton*, gpointer);
 void on_user_settings_passwd_random_new (GtkButton*, gpointer);
 void on_user_settings_passwd_toggled (GtkToggleButton*, gpointer);

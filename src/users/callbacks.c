@@ -429,10 +429,12 @@ on_user_settings_dialog_show (GtkWidget *widget, gpointer user_data)
 	gtk_widget_grab_focus (gst_dialog_get_widget (tool->main_dialog, "user_settings_name"));
 }
 
-void
+gboolean
 on_user_settings_dialog_delete_event (GtkWidget *w, gpointer user_data)
 {
 	user_settings_dialog_close ();
+
+	return TRUE;
 }
 
 void
