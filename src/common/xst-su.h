@@ -24,6 +24,7 @@
 
 #include "xst-types.h"
 
-void xst_su_run (gchar *exec_path, gchar *user, gchar *prompt);
+gint xst_su_get_password      (gchar **password);
+void xst_su_run_with_password (gchar *exec_path, gchar *password);
 
 #endif /* XST_SU_H */

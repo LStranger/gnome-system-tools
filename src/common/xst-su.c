@@ -19,18 +19,25 @@
  *          Hans Petter Jansson <hpj@ximian.com>     Minor XST adaptions
  */
 
-#include <sys/types.h>
-#include <sys/ioctl.h>
-#include <sys/wait.h>
-#include <stdlib.h>
+#include <config.h>
+
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <signal.h>
 #include <pwd.h>
+#include <sys/types.h>
+#include <sys/ioctl.h>
+#include <sys/wait.h>
 
 #include <gnome.h>
+#include <glade/glade.h>
+
+#include "xst-su.h"
+
+#warning FIXME: exec_su and related code needs a bit more cleanup
 
 /* ABORT() kills GTK if we're not root, else it just exits.
  */
@@ -51,64 +58,25 @@
  */
 #define OPEN_TTY() getpt()
 
-static GtkWidget *win_wd;		/* main window */
-static char *exec_p, *user_p;		/* command to execute, user name */
-
 static int root;			/* if we are root, no password is
                                            required */
 
-static GtkSignalFunc win_wd_destroy (GtkWidget *, gpointer);
-
-static void error_box
-(const char *str)
+static gint
+exec_su (gchar *exec_path, gchar *user, gchar *pwd)
 {
-	GtkWidget *e_wd, *vb_wd, *hb_wd, *lb_wd, *bt_wd;
-
-	e_wd = gtk_window_new (GTK_WINDOW_DIALOG);
-	gtk_container_set_border_width (GTK_CONTAINER(e_wd), 5);
-	gtk_window_set_modal (GTK_WINDOW(e_wd), TRUE);
-	gtk_window_set_transient_for (GTK_WINDOW(e_wd), GTK_WINDOW(win_wd));
-	gtk_window_set_title (GTK_WINDOW(e_wd), _("Error"));
-	gtk_widget_show (e_wd);
-
-	gtk_signal_connect (GTK_OBJECT (e_wd), "delete_event",
-			    GTK_SIGNAL_FUNC (win_wd_destroy), (gpointer) NULL);
-	gtk_signal_connect(GTK_OBJECT (e_wd), "destroy",
-			   GTK_SIGNAL_FUNC (win_wd_destroy), (gpointer) NULL);
-
-	vb_wd = gtk_vbox_new (FALSE, 10);
-	gtk_widget_show (vb_wd);
-	gtk_container_add (GTK_CONTAINER (e_wd), vb_wd);
-
-	lb_wd = gtk_label_new (str);
-	gtk_label_set_line_wrap (GTK_LABEL (lb_wd), TRUE);
-	gtk_widget_show (lb_wd);
-	gtk_box_pack_start (GTK_BOX (vb_wd), lb_wd, TRUE, TRUE, 0);
-
-	hb_wd = gtk_hbox_new (TRUE, 20);
-	gtk_widget_show (hb_wd);
-	gtk_container_add (GTK_CONTAINER (vb_wd), hb_wd);
-
-	bt_wd = gtk_button_new_with_label (_("OK"));
-	gtk_window_set_focus (GTK_WINDOW(e_wd), bt_wd);
-	gtk_widget_show (bt_wd);
-	gtk_box_pack_start (GTK_BOX(hb_wd), bt_wd, TRUE, TRUE, 100);
-	gtk_signal_connect (GTK_OBJECT(bt_wd), "clicked",
-			    GTK_SIGNAL_FUNC(win_wd_destroy), (gpointer) NULL);
-}
-
-static GtkSignalFunc
-exec_su (GtkWidget *w_wd, gpointer pwd_entry)
-{
-	register char *pwd = NULL;
+	gchar *exec_p, *user_p;  /* command to execute, user name */
 	pid_t pid;
 	int t_fd;
 
-	if (root == 0) {
-		pwd = gtk_entry_get_text (GTK_ENTRY(pwd_entry));
-		if ((pwd == NULL) || (*pwd == '\0'))
-			return 0;
+	if (asprintf (&exec_p, "%s&", exec_path) < 0) {
+		perror ("Unable to allocate memory chunk");
+		return 0;
 	}
+
+	user_p = (user ? user : "root");
+
+	if ((pwd == NULL) || (*pwd == '\0'))
+		return 0;
 
 	/*
 	 * Make su think we're sending the password from a terminal:
@@ -135,27 +103,17 @@ exec_su (GtkWidget *w_wd, gpointer pwd_entry)
 		waitpid (pid, &status, 0);
 
 		if ((WIFEXITED(status)) && (WEXITSTATUS(status))) {
-			error_box (_("Incorrect password."));
+/*			error_box (_("Incorrect password.")); */
 			return 0;
 		}
 		else {
-			if (root == 0)
-				gtk_main_quit();
-			_exit(0);
+			memset (pwd, 0, strlen (pwd));
+			_exit (0);
 		}
 	}
 	else {				/* child process */
 		struct passwd *pw;
 		char *env, *home;
-
-		/*
-		 * We're the child, so we don't want or need gtk, so quit that.
-		 * Also, su will use stderr to print error messages that we
-		 * want, so redirect those to our pipe.
-		 */
-
-		if (root == 0)
-			gtk_main_quit();
 
 		/* We have rights to run X (obviously).  We need to ensure the
 		 * destination user has the right stuff in the environment
@@ -208,139 +166,60 @@ exec_su (GtkWidget *w_wd, gpointer pwd_entry)
 	return 0;
 }
 
-static GtkSignalFunc
-win_wd_destroy (GtkWidget *wd, gpointer ptr)
-{
-	gtk_main_quit ();
-	exit (0);
-
-	return 0;
-}
-
-static GtkSignalFunc
-cancel_cb (GtkWidget *w, gpointer data)
-{
-	gtk_main_quit ();
-	return TRUE;
-}
-
 void
-xst_su_run (gchar *exec_path, gchar *user, gchar *prompt)
+xst_su_run_with_password (gchar *exec_path, gchar *password)
 {
-	GtkWidget *vb_wd, *vbt_wd, *hb_wd, *lb_wd, *bt_wd,
-		  *ca_wd, *sep_wd, *hb2_wd, *ed_wd, *sep2_wd,
-		  *lb2_wd;
-	char *p_str;
+	exec_su (exec_path, "root", password);
+}
 
-	g_assert (exec_path);
-	g_assert (prompt);
+static GladeXML *
+load_glade_common (const gchar *widget)
+{
+	gchar *glade_common_path;
+	GladeXML *xml;
 
-	if (asprintf (&exec_p, "%s&", exec_path) < 0) {
-		perror ("Unable to allocate memory chunk");
-		return;
-	}
+	glade_common_path = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
+	xml = glade_xml_new (glade_common_path, widget);
+	g_free (glade_common_path);
 
-	user_p = (user ? user : "root");
+	return xml;
+}
 
-#if 0
-	/* If we're already the user we want to be, there's no reason to
-	 * go through and try and get the password.
-	 */
-	if ((root = (getuid() == 0)) == 0) {
-		char *user;
+gint
+xst_su_get_password (gchar **password)
+{
+	GladeXML *xml;
+	gint result;
+	gchar *blank;
+	GtkWidget *password_dialog, *password_entry;
 
-		user = getenv("USER");
-		if ((user != NULL) && (strcmp(user, user_p) == 0)) {
-			/* We're already user_p, so we can just execute the
-			 * program they're trying to run.
-			 */
-			execlp("sh", "sh", "-c", argv[1], NULL);
-		}
-	}
+	xml = load_glade_common ("password_dialog");
+	password_dialog = glade_xml_get_widget (xml, "password_dialog");
+	password_entry  = glade_xml_get_widget (xml, "password_entry");
+	g_assert (password_dialog);
+	g_assert (password_entry);
 
-	if (root != 0) {
-		exec_su(NULL, NULL);
-		_exit(-1);			/* NOTREACHED */
-	}
-#endif
+	gnome_dialog_editable_enters (GNOME_DIALOG (password_dialog), GTK_EDITABLE (password_entry));
 
-	win_wd = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-	gtk_container_set_border_width(GTK_CONTAINER(win_wd), 5);
-	gtk_window_set_title(GTK_WINDOW(win_wd), _("Access Verification"));
-	gtk_window_set_policy (GTK_WINDOW (win_wd), FALSE, FALSE, TRUE);
-	gtk_widget_show(win_wd);
+	result = gnome_dialog_run_and_close (GNOME_DIALOG (password_dialog));
+	if (result == 2 || result < 0)
+		return -1;  /* Cancel */
+	else if (result == 1)
+		return 0;   /* Run unprivileged */
 
-	gtk_signal_connect(GTK_OBJECT(win_wd), "delete_event",
-			GTK_SIGNAL_FUNC(win_wd_destroy), (gpointer) NULL);
-	gtk_signal_connect(GTK_OBJECT(win_wd), "destroy",
-			GTK_SIGNAL_FUNC(win_wd_destroy), (gpointer) NULL);
+	*password = gtk_entry_get_text (GTK_ENTRY (password_entry));
+	if (!*password)
+		*password = g_strdup ("");
 
-	vb_wd = gtk_vbox_new(FALSE, 4);
-	gtk_container_add(GTK_CONTAINER(win_wd), vb_wd);
-	gtk_widget_show(vb_wd);
+	/* Make a pathetic stab at clearing the GtkEntry field memory */
 
-	if (asprintf (&p_str, prompt) < 0) {
-		perror("Unable to allocate memory chunk");
-		return;
-	}
+	blank = g_strdup (*password);
+	if (strlen (blank))
+		memset (blank, ' ', strlen (blank));
 
-	lb_wd = gtk_label_new(p_str);
-	free(p_str);
-	gtk_widget_show(lb_wd);
-	gtk_box_pack_start(GTK_BOX(vb_wd), lb_wd, TRUE, TRUE, 5);
+	gtk_entry_set_text (GTK_ENTRY (password_entry), blank);
+	gtk_entry_set_text (GTK_ENTRY (password_entry), "");
+	g_free (blank);
 
-	hb_wd = gtk_hbox_new(TRUE, 10);
-	gtk_widget_show(hb_wd);
-	gtk_container_add(GTK_CONTAINER(vb_wd), hb_wd);
-
-	ed_wd = gtk_entry_new_with_max_length(255);
-	gtk_entry_set_visibility(GTK_ENTRY(ed_wd), FALSE);
-	gtk_widget_show(ed_wd);
-	gtk_box_pack_start(GTK_BOX(hb_wd), ed_wd, FALSE, TRUE, 30);
-	gtk_window_set_focus(GTK_WINDOW(win_wd), ed_wd);
-	gtk_signal_connect(GTK_OBJECT(ed_wd), "activate",
-			   GTK_SIGNAL_FUNC(exec_su), (gpointer) ed_wd);
-
-	vbt_wd = gtk_vbox_new(FALSE, 0);
-	gtk_widget_show(vbt_wd);
-	gtk_box_pack_end(GTK_BOX(vb_wd), vbt_wd, TRUE, TRUE, 0);
-
-	hb2_wd = gtk_hbox_new(TRUE, 0);
-	gtk_widget_show(hb2_wd);
-	gtk_box_pack_end(GTK_BOX(vb_wd), hb2_wd, TRUE, TRUE, 0);
-
-	sep_wd = gtk_hseparator_new();
-	gtk_widget_show(sep_wd);
-	gtk_box_pack_start(GTK_BOX(vb_wd), sep_wd, TRUE, TRUE, 10);
-
-	if (asprintf(&p_str, "%s: %s", _("Run"), exec_path) < 0) {
-		perror("Unable to allocate memory chunk");
-		return;
-	}
-
-	lb2_wd = gtk_label_new(p_str);
-	free(p_str);
-	gtk_widget_show(lb2_wd);
-	gtk_box_pack_start(GTK_BOX(vb_wd), lb2_wd, TRUE, TRUE, 0);
-
-	sep2_wd = gtk_hseparator_new();
-	gtk_widget_show(sep2_wd);
-	gtk_box_pack_start(GTK_BOX(vb_wd), sep2_wd, TRUE, TRUE, 10);
-
-	bt_wd = gtk_button_new_with_label(_("Run unprivileged"));
-	gtk_widget_show(bt_wd);
-	gtk_box_pack_start(GTK_BOX(hb2_wd), bt_wd, FALSE, TRUE, 30);
-	gtk_signal_connect(GTK_OBJECT(bt_wd), "clicked",
-			   GTK_SIGNAL_FUNC(cancel_cb), (gpointer) NULL);
-
-	ca_wd = gtk_button_new_with_label(_("Authenticate"));
-	gtk_widget_show(ca_wd);
-	gtk_box_pack_start(GTK_BOX(hb2_wd), ca_wd, FALSE, TRUE, 30);
-	gtk_signal_connect(GTK_OBJECT(ca_wd), "clicked",
-			   GTK_SIGNAL_FUNC(exec_su), (gpointer) ed_wd);
-
-	gtk_main();
-
-	gtk_signal_disconnect_by_func (GTK_OBJECT (win_wd), win_wd_destroy, NULL);
-	gtk_widget_destroy (win_wd);
+	return 1;  /* Run privileged with password */
 }

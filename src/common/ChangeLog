@@ -1,3 +1,17 @@
+2001-05-24  Hans Petter Jansson  <hpj@ximian.com>
+
+	* xst-su.[ch]: Remove som cruft, integrate our own dialog.
+	  (exec_su): Now static. Small fixes.
+	  (error_box): Remove.
+	  (win_wd_destroy): Remove.
+	  (xst_su_run): Remove.
+	  (load_glade_common): Small stub for pre-tool-initialization.
+	  (xst_su_get_password): Implement.
+	  (xst_su_run_with_password): Implement.
+
+	* xst-tool.[ch] (authenticate): Implement.
+	  (xst_init): Use authenticate().
+
 2001-05-23  Hans Petter Jansson  <hpj@ximian.com>
 
 	* xst-su.[ch]: Add. Based on gtksu 1.7 by Chris L. Bond. Not entirely

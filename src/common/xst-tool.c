@@ -828,8 +828,8 @@ xst_tool_type_init (XstTool *tool)
 #endif
 
 	xml = xst_tool_load_glade_common (tool, "platform_dialog");
-	tool->platform_dialog = glade_xml_get_widget (xml, "platform_dialog");
-	tool->platform_list = glade_xml_get_widget (xml, "platform_list");
+	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
+	tool->platform_list      = glade_xml_get_widget (xml, "platform_list");
 	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");
 }
 
@@ -980,6 +980,34 @@ xst_fool_the_linker (void)
 	xst_ui_create_image_widget (NULL, NULL, NULL, 0, 0);
 }
 
+static void
+authenticate (gchar *exec_path)
+{
+	GtkWidget *error_dialog;
+	gchar *password;
+	gint result;
+
+	for (;;)
+	{
+		result = xst_su_get_password (&password);
+
+		if (result < 0)
+			exit (0);
+		else if (result == 0)
+			return;
+
+		/* If successful, the following never returns */
+
+		xst_su_run_with_password (exec_path, password);
+
+		if (strlen (password))
+			memset (password, 0, strlen (password));
+
+		error_dialog = gnome_error_dialog (_("The password you entered is invalid."));
+		gnome_dialog_run_and_close (GNOME_DIALOG (error_dialog));
+	}
+}
+
 void
 xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
@@ -1019,15 +1047,7 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 		root_access = ROOT_ACCESS_SIMULATED;
 #endif
 	} else {
-		/* The following call returns if user proceeds without root privileges.
-		 * If su succeeds, a new instance of ourselves is spawned, and our process
-		 * exits. */
-
-		xst_su_run (argv [0], NULL,
-			    _("You need full administration privileges (i.e. root)\n"
-			      "to use this configuration tool. Please enter the root\n"
-			      "password to acquire such privileges.\n"));
-
+		authenticate (argv [0]);
 		root_access = ROOT_ACCESS_NONE;
 	}
 }
