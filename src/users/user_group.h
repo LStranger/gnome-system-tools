@@ -27,7 +27,7 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
-#include "global.h"
+#include "xst.h"
 #include "user_settings.h"
 
 #define IDMAX 100000

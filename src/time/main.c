@@ -30,7 +30,7 @@
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
-#include "global.h"
+#include "xst.h"
 
 #include "tz.h"
 #include "timeserv.h"

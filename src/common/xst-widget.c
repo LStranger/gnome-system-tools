@@ -71,8 +71,8 @@ xst_widget_apply_policy (XstWidget *xw)
 
 
 XstWidget *
-xst_widget_new (GtkWidget *w, XstDialog *d, XstWidgetMode basic, XstWidgetMode advanced,
-		gboolean need_access, gboolean user_sensitive)
+xst_widget_new_full (GtkWidget *w, XstDialog *d, XstWidgetMode basic, XstWidgetMode advanced,
+		     gboolean need_access, gboolean user_sensitive)
 {
 	XstWidget *xw;
 
@@ -92,9 +92,19 @@ xst_widget_new (GtkWidget *w, XstDialog *d, XstWidgetMode basic, XstWidgetMode a
 	else
 		xw->user = XST_WIDGET_MODE_INSENSITIVE;
 
-	return (xw);
+	d->xst_widget_list = g_slist_prepend (d->xst_widget_list, xw);
+	
+	return xw;
 }
 
+XstWidget *
+xst_widget_new (XstDialog *dialog, XstWidgetPolicy policy)
+{
+	return xst_widget_new_full (xst_dialog_get_widget (dialog, policy.widget),
+				    dialog,
+				    policy.basic, policy.advanced,
+				    policy.need_access, policy.user_sensitive);
+}
 
 void
 xst_widget_set_user_mode (XstWidget *xw, XstWidgetMode mode)

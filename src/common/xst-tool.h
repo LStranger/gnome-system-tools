@@ -97,6 +97,7 @@ struct _XstToolClass {
 
 GtkType      xst_tool_get_type            (void);
 
+
 void         xst_init                     (const gchar *app_name,
 					   int argc, char *argv [],
 					   const poptOption options);
@@ -126,5 +127,34 @@ void         xst_tool_reset_report_hooks  (XstTool *tool);
 
 void         xst_tool_add_supported_platform    (XstTool *tool, XstPlatform *platform);
 void         xst_tool_clear_supported_platforms (XstTool *tool);
+
+
+
+/*
+ * Handy define to reduce the boilerplate code
+ */
+#define XST_TOOL_MAKE_TYPE(name, Name) \
+\
+static void xst_ ## name ## _tool_type_init (XstIshareTool *tool);\
+static void xst_ ## name ## _tool_class_init (GtkObjectClass *object_class);\
+\
+GtkType \
+xst_ ## name ## _tool_get_type (void)\
+{\
+	static GtkType type = 0;\
+	if (!type) {\
+		GtkTypeInfo info = {\
+			"XstIshareTool",\
+			sizeof (Xst ## Name ## Tool),\
+			sizeof (Xst ## Name ## ToolClass),\
+			(GtkClassInitFunc)  xst_ ## name ## _tool_class_init,\
+			(GtkObjectInitFunc) xst_ ## name ## _tool_type_init,\
+			NULL, NULL, NULL\
+		};\
+\
+		type = gtk_type_unique (XST_TYPE_TOOL, &info);\
+	}\
+	return type;\
+}
 
 #endif /* XST_TOOL_H */

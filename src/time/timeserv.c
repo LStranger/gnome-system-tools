@@ -8,7 +8,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gnome-canvas-pixbuf.h>
 
-#include "global.h"
+#include "xst.h"
 
 #include "transfer.h"
 #include "timeserv.h"

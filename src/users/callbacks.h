@@ -26,7 +26,7 @@
 
 #include <gnome.h>
 #include <gnome-xml/tree.h>
-#include "global.h"
+#include "xst.h"
 
 void on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
 			      guint page_num, gpointer user_data);

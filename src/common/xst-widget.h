@@ -51,9 +51,11 @@ struct _XstWidgetUserPolicy {
 	XstWidgetMode mode;
 };
 
-XstWidget *xst_widget_new                (GtkWidget *w, XstDialog *d, XstWidgetMode basic,
-			                  XstWidgetMode advanced, gboolean need_access,
-			                  gboolean user_sensitive);
+XstWidget * xst_widget_new      (XstDialog *dialog, XstWidgetPolicy policy);
+XstWidget * xst_widget_new_full (GtkWidget *gtk_widget, XstDialog *dialog,
+				 XstWidgetMode basic, XstWidgetMode advanced,
+				 gboolean need_access, gboolean user_sensitive);
+
 
 void       xst_widget_apply_policy       (XstWidget *xw);
 

@@ -32,7 +32,7 @@
 #include "tz.h"
 #include "e-map/e-map.h"
 #include "tz-map.h"
-#include "global.h"
+#include "xst.h"
 
 extern XstTool *tool;
 

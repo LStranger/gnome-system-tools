@@ -272,13 +272,7 @@ xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy *xwp)
 	int i;
 
 	for (i = 0; xwp [i].widget; i++)
-	{
-		xw = xst_widget_new (xst_dialog_get_widget (xd, xwp [i].widget), xd,
-				     xwp [i].basic, xwp [i].advanced, xwp [i].need_access,
-				     xwp [i].user_sensitive);
-
-		xd->xst_widget_list = g_slist_append (xd->xst_widget_list, xw);
-	}
+		xw = xst_widget_new (xd, xwp [i]);
 
 	apply_widget_policies (xd);
 }
@@ -294,13 +288,9 @@ xst_dialog_set_widget_user_modes (XstDialog *xd, const XstWidgetUserPolicy *xwup
 		xw = xst_dialog_get_xst_widget (xd, xwup [i].widget);
 
 		if (!xw)
-		{
-			xw = xst_widget_new (xst_dialog_get_widget (xd, xwup [i].widget), xd,
-					     XST_WIDGET_MODE_SENSITIVE, XST_WIDGET_MODE_SENSITIVE,
-					     FALSE, TRUE);
-
-			xd->xst_widget_list = g_slist_append (xd->xst_widget_list, xw);
-		}
+			xw = xst_widget_new_full (xst_dialog_get_widget (xd, xwup [i].widget), xd,
+						  XST_WIDGET_MODE_SENSITIVE, XST_WIDGET_MODE_SENSITIVE,
+						  FALSE, TRUE);
 
 		xst_widget_set_user_mode (xw, xwup [i].mode);
 	}

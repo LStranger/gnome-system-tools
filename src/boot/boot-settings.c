@@ -28,7 +28,7 @@
 #include <ctype.h>
 #include <gnome.h>
 
-#include "global.h"
+#include "xst.h"
 #include "callbacks.h"
 #include "boot-settings.h"
 #include "e-table.h"

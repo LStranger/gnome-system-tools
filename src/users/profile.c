@@ -27,7 +27,7 @@
 #include <gal/e-table/e-table-memory.h>
 #include <gal/e-table/e-table-memory-callbacks.h>
 
-#include "global.h"
+#include "xst.h"
 #include "profile.h"
 #include "user_group.h"
 #include "callbacks.h"

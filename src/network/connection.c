@@ -29,7 +29,7 @@
 #include "connection.h"
 #include "callbacks.h"
 
-#include "global.h"
+#include "xst.h"
 
 typedef struct _XstNetworkInterfaceDescription XstNetworkInterfaceDescription;
 

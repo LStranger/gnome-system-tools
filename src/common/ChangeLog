@@ -1,3 +1,32 @@
+2001-05-13  Chema Celorio  <chema@celorio.com>
+
+	* xst-tool.h (XST_TOOL_MAKE_TYPE): add a macro that will reduce
+	the boilerplate when we subclass an XstTool.
+
+	* xst-dialog.c (xst_dialog_set_widget_policies): use 
+	widget_new function, don't append the widget to the
+	slist here
+	(xst_dialog_set_widget_user_modes): use widget_new_full
+
+	* xst-widget.h: upd the header
+
+	* xst-widget.c (xst_widget_new): reame to widget_new_full
+	(xst_widget_new): implement a widget_new which takes only 2
+	parameters an XstDialog and a XstWidgetPolicy. We prepend
+	to the dialog->xst_widget_list inside the function and not
+	in the caller.
+
+	* Makefile.am (noinst_LIBRARIES): s/global.h/xst.h
+
+2001-05-12  Chema Celorio  <chema@celorio.com>
+
+	* global.h: rename to xst.h
+
+	* xst-xml.c: constify
+	(xst_xml_element_get_boolean): implement
+
+	* xst-xml.h: constify
+
 2001-05-13  Hans Petter Jansson  <hpj@ximian.com>
 
 	* xst-util.[ch] (xst_util_strcasestr): Implement.

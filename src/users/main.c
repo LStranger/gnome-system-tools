@@ -35,7 +35,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "global.h"
+#include "xst.h"
 
 #include "transfer.h"
 #include "e-table.h"

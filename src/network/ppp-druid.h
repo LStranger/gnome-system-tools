@@ -25,7 +25,7 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "../common/global.h"
+#include "xst.h"
 #include "connection.h"
 
 typedef struct {

@@ -22,7 +22,7 @@
 #  include <config.h>
 #endif
 
-#include "global.h"
+#include "xst.h"
 #include "user-group-xml.h"
 
 #include "user_group.h"

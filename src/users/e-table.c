@@ -26,7 +26,7 @@
 #endif
 
 #include <gnome.h>
-#include "global.h"
+#include "xst.h"
 #include <gal/e-table/e-table-scrolled.h>
 #include <gal/e-table/e-table-memory.h>
 #include <gal/e-table/e-table-memory-callbacks.h>

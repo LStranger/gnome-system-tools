@@ -27,7 +27,7 @@
 #include <glade/glade.h>
 #include <gtk/gtkwidget.h>
 
-#include "global.h"
+#include "xst.h"
 
 typedef enum {
 	XST_CONNECTION_UNKNOWN = -1,

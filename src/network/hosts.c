@@ -27,7 +27,7 @@
 
 #include <gnome.h>
 
-#include "global.h"
+#include "xst.h"
 
 #include "callbacks.h"
 #include "transfer.h"

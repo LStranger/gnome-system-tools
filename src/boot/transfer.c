@@ -28,7 +28,7 @@
 #include <gnome-xml/tree.h>
 #include <gnome-xml/parser.h>
 #include <glade/glade.h>
-#include "global.h"
+#include "xst.h"
 
 #include "transfer.h"
 #include "callbacks.h"

@@ -27,7 +27,7 @@
 #include <gnome.h>
 #include <glade/glade.h>
 
-#include "global.h"
+#include "xst.h"
 
 void user_druid_run (xmlNodePtr user_node);
 

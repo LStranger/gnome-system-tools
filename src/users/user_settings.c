@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include <gnome.h>
 
-#include "global.h"
+#include "xst.h"
 #include "callbacks.h"
 #include "user_group.h"
 #include "transfer.h"

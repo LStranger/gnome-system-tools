@@ -95,7 +95,7 @@
       <shadow_type>GTK_SHADOW_ETCHED_IN</shadow_type>
       <child>
 	<padding>0</padding>
-	<expand>True</expand>
+	<expand>False</expand>
 	<fill>True</fill>
       </child>
 
@@ -104,14 +104,14 @@
 	<name>enable_button</name>
 	<can_focus>True</can_focus>
 	<label>Enable</label>
-	<active>True</active>
+	<active>False</active>
 	<draw_indicator>True</draw_indicator>
       </widget>
     </widget>
 
     <widget>
       <class>GtkFrame</class>
-      <name>frame13</name>
+      <name>enable_frame</name>
       <border_width>3</border_width>
       <label>Enable :</label>
       <label_xalign>0</label_xalign>
@@ -144,7 +144,7 @@
 
 	<widget>
 	  <class>GtkHBox</class>
-	  <name>hbox16</name>
+	  <name>dhcp_hbox</name>
 	  <homogeneous>False</homogeneous>
 	  <spacing>0</spacing>
 	  <child>
@@ -155,7 +155,7 @@
 
 	  <widget>
 	    <class>GtkCheckButton</class>
-	    <name>checkbutton10</name>
+	    <name>dhcp_button</name>
 	    <can_focus>True</can_focus>
 	    <label>DHCP</label>
 	    <active>True</active>
@@ -168,35 +168,11 @@
 	  </widget>
 
 	  <widget>
-	    <class>GtkLabel</class>
-	    <name>label57</name>
-	    <label>IP range :</label>
-	    <justify>GTK_JUSTIFY_CENTER</justify>
-	    <wrap>False</wrap>
-	    <xalign>0.5</xalign>
-	    <yalign>0.5</yalign>
-	    <xpad>0</xpad>
-	    <ypad>0</ypad>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>False</fill>
-	    </child>
+	    <class>Placeholder</class>
 	  </widget>
 
 	  <widget>
-	    <class>GtkEntry</class>
-	    <name>iprange_entry</name>
-	    <can_focus>True</can_focus>
-	    <editable>True</editable>
-	    <text_visible>True</text_visible>
-	    <text_max_length>0</text_max_length>
-	    <text>192.168.100.x</text>
-	    <child>
-	      <padding>0</padding>
-	      <expand>True</expand>
-	      <fill>True</fill>
-	    </child>
+	    <class>Placeholder</class>
 	  </widget>
 	</widget>
 

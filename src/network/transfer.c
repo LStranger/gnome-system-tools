@@ -25,7 +25,7 @@
 #include <gnome-xml/parser.h>
 #include <glade/glade.h>
 
-#include "global.h"
+#include "xst.h"
 
 #include "transfer.h"
 #include "callbacks.h"
@@ -384,25 +384,6 @@ transfer_interfaces_to_gui (XstTool *tool, xmlNodePtr root)
 		connection_new_from_node (node);
 
 	callbacks_update_connections_hook (tool->main_dialog, NULL);
-}
-
-static gboolean
-xst_xml_element_get_boolean (xmlNodePtr root, gchar *name)
-{
-	xmlNodePtr node;
-	gboolean res;
-	gchar *str;
-
-	res = FALSE;
-	node = xst_xml_element_find_first (root, name);
-
-	if (node) {
-		str = xst_xml_element_get_content (node);
-		res = (*str == '1')? TRUE: FALSE;
-		g_free (str);
-	}
-
-	return res;
 }
 
 static void

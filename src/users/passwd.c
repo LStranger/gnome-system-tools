@@ -39,7 +39,7 @@
 
 #include <crypt.h>
 
-#include "global.h"
+#include "xst.h"
 #include "md5.h"
 #include "e-table.h"
 
