@@ -115,7 +115,6 @@ user_value_group_peek (xmlNodePtr user_node)
 	buf = group_value_name_peek (group_node);
 	if (!buf)
 		return gid;
-	
 	return buf;
 }
 
@@ -372,7 +371,7 @@ user_add_blank_xml (xmlNodePtr user_db)
 	gst_xml_element_add (user, "passwd_exp_disable");
 	gst_xml_element_add (user, "passwd_disable");
 	gst_xml_element_add (user, "reserved");
-	gst_xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
+	gst_xml_element_add_with_content (user, "is_shadow", "1");
 
 	return user;
 }
@@ -381,12 +380,15 @@ xmlNodePtr
 group_add_blank_xml (xmlNodePtr group_db)
 {
 	xmlNodePtr group;
+	gchar* content;
 
 	g_return_val_if_fail (group_db != NULL, NULL);
 
 	group = gst_xml_element_add (group_db, "group");
 
-	gst_xml_element_add_with_content (group, "key", find_new_key (group_db));
+	content = find_new_key (group_db);
+	gst_xml_element_add_with_content (group, "key", content);
+	g_free (content);
 	gst_xml_element_add (group, "name");
 	gst_xml_element_add (group, "gid");
 	gst_xml_element_add (group, "users");
@@ -454,6 +456,7 @@ user_add_extra_groups (GList *groups_list, const gchar *username)
 			gst_xml_element_set_content (user_node, (gchar *) username);
 			g_list_remove (groups_list, groupname);
 		}
+		g_free (groupname);
 	}
 	
 	g_list_free (groups_list);
@@ -462,9 +465,13 @@ user_add_extra_groups (GList *groups_list, const gchar *username)
 void
 user_update_xml (xmlNodePtr node, UserAccountData *data, gboolean change_password)
 {
+	gchar *comment;
+
 	gst_xml_set_child_content (node, "login", data->login);
 	gst_xml_set_child_content (node, "uid", data->uid);
-	gst_xml_set_child_content (node, "comment", g_strjoin (",", data->name, data->location, data->work_phone, data->home_phone, data->other_info, NULL));
+        comment = g_strjoin (",", data->name, data->location, data->work_phone, data->home_phone, data->other_info, NULL);
+	gst_xml_set_child_content (node, "comment", comment);
+	g_free (comment);
 	gst_xml_set_child_content (node, "gid", data->gid);
 	gst_xml_set_child_content (node, "home", data->home);
 	gst_xml_set_child_content (node, "shell", data->shell);
@@ -550,12 +557,14 @@ node_exists (xmlNodePtr node, const gchar *name, const gchar *val)
 
 		if (!strcmp (val, buf))
 		{
+			g_free (key);
 			g_free (buf);  /* Woohoo! found! */
 			return TRUE;
 		}
 
 		g_free (buf);
 	}
+	g_free (key);
 
 	return FALSE;
 }
@@ -602,6 +611,8 @@ get_list_from_node (gchar *field, gint table)
 
 	for (u = gst_xml_element_find_first (n, key); u != NULL; u = gst_xml_element_find_next (u, key))
 		list = g_list_insert_sorted (list, gst_xml_get_child_content (u, field), my_strcmp);
+
+	g_free (key);
 
 	return list;
 }
