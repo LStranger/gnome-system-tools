@@ -473,8 +473,18 @@
 
 	<widget>
 	  <class>GtkCList</class>
-	  <name>clist1</name>
+	  <name>connection_list</name>
 	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>select_row</name>
+	    <handler>on_connection_list_select_row</handler>
+	    <last_modification_time>Wed, 10 Jan 2001 22:48:30 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>unselect_row</name>
+	    <handler>on_connection_list_unselect_row</handler>
+	    <last_modification_time>Wed, 10 Jan 2001 22:48:35 GMT</last_modification_time>
+	  </signal>
 	  <columns>2</columns>
 	  <column_widths>46,80</column_widths>
 	  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
@@ -553,7 +563,7 @@
 	    <handler>tool_modified_cb</handler>
 	    <last_modification_time>Fri, 29 Dec 2000 03:43:59 GMT</last_modification_time>
 	  </signal>
-	  <label>Delete</label>
+	  <label>Delete...</label>
 	  <relief>GTK_RELIEF_NORMAL</relief>
 	</widget>
 
@@ -1378,8 +1388,18 @@
 
 <widget>
   <class>GtkWindow</class>
-  <name>Connection</name>
+  <name>connection_config_dialog</name>
   <visible>False</visible>
+  <signal>
+    <name>delete_event</name>
+    <handler>on_connection_config_dialog_delete_event</handler>
+    <last_modification_time>Thu, 11 Jan 2001 20:12:33 GMT</last_modification_time>
+  </signal>
+  <signal>
+    <name>destroy</name>
+    <handler>connection_destroy</handler>
+    <last_modification_time>Fri, 12 Jan 2001 20:43:34 GMT</last_modification_time>
+  </signal>
   <title>Connection Settings</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1427,8 +1447,8 @@
 	  <spacing>8</spacing>
 	  <child>
 	    <padding>0</padding>
-	    <expand>True</expand>
-	    <fill>True</fill>
+	    <expand>False</expand>
+	    <fill>False</fill>
 	  </child>
 
 	  <widget>
@@ -1476,7 +1496,7 @@
 	    <class>GtkTable</class>
 	    <name>table5</name>
 	    <border_width>4</border_width>
-	    <rows>3</rows>
+	    <rows>2</rows>
 	    <columns>2</columns>
 	    <homogeneous>False</homogeneous>
 	    <row_spacing>4</row_spacing>
@@ -1511,7 +1531,7 @@
 	    <widget>
 	      <class>GtkLabel</class>
 	      <name>label97</name>
-	      <label>Description:</label>
+	      <label>Comment:</label>
 	      <justify>GTK_JUSTIFY_CENTER</justify>
 	      <wrap>False</wrap>
 	      <xalign>0</xalign>
@@ -1535,60 +1555,14 @@
 	    </widget>
 
 	    <widget>
-	      <class>GtkLabel</class>
-	      <name>label99</name>
-	      <label>Configuration:</label>
-	      <justify>GTK_JUSTIFY_CENTER</justify>
-	      <wrap>False</wrap>
-	      <xalign>0.5</xalign>
-	      <yalign>0.5</yalign>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <child>
-		<left_attach>0</left_attach>
-		<right_attach>1</right_attach>
-		<top_attach>2</top_attach>
-		<bottom_attach>3</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
-	      <class>GtkOptionMenu</class>
-	      <name>connection_config</name>
-	      <can_focus>True</can_focus>
-	      <items>Manual
-DHCP
-BOOTP
-</items>
-	      <initial_choice>1</initial_choice>
-	      <child>
-		<left_attach>1</left_attach>
-		<right_attach>2</right_attach>
-		<top_attach>2</top_attach>
-		<bottom_attach>3</bottom_attach>
-		<xpad>0</xpad>
-		<ypad>0</ypad>
-		<xexpand>False</xexpand>
-		<yexpand>False</yexpand>
-		<xshrink>False</xshrink>
-		<yshrink>False</yshrink>
-		<xfill>True</xfill>
-		<yfill>False</yfill>
-	      </child>
-	    </widget>
-
-	    <widget>
 	      <class>GtkEntry</class>
 	      <name>connection_desc</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>changed</name>
+		<handler>connection_modified</handler>
+		<last_modification_time>Thu, 11 Jan 2001 20:14:11 GMT</last_modification_time>
+	      </signal>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
 	      <text_max_length>0</text_max_length>
@@ -1610,13 +1584,15 @@ BOOTP
 	    </widget>
 
 	    <widget>
-	      <class>GtkEntry</class>
+	      <class>GtkLabel</class>
 	      <name>connection_device</name>
-	      <can_focus>True</can_focus>
-	      <editable>False</editable>
-	      <text_visible>True</text_visible>
-	      <text_max_length>0</text_max_length>
-	      <text></text>
+	      <label></label>
+	      <justify>GTK_JUSTIFY_CENTER</justify>
+	      <wrap>False</wrap>
+	      <xalign>0</xalign>
+	      <yalign>0.5</yalign>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
 	      <child>
 		<left_attach>1</left_attach>
 		<right_attach>2</right_attach>
@@ -1624,7 +1600,7 @@ BOOTP
 		<bottom_attach>1</bottom_attach>
 		<xpad>0</xpad>
 		<ypad>0</ypad>
-		<xexpand>True</xexpand>
+		<xexpand>False</xexpand>
 		<yexpand>False</yexpand>
 		<xshrink>False</xshrink>
 		<yshrink>False</yshrink>
@@ -1697,7 +1673,11 @@ BOOTP
 		<class>GtkButton</class>
 		<name>status_button</name>
 		<can_focus>True</can_focus>
-		<label>Deactivate</label>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_status_button_clicked</handler>
+		  <last_modification_time>Thu, 11 Jan 2001 19:58:11 GMT</last_modification_time>
+		</signal>
 		<relief>GTK_RELIEF_NORMAL</relief>
 		<child>
 		  <padding>0</padding>
@@ -1705,6 +1685,18 @@ BOOTP
 		  <fill>False</fill>
 		  <pack>GTK_PACK_END</pack>
 		</child>
+
+		<widget>
+		  <class>GtkLabel</class>
+		  <name>status_button_label</name>
+		  <label>Deactivate</label>
+		  <justify>GTK_JUSTIFY_CENTER</justify>
+		  <wrap>False</wrap>
+		  <xalign>0.5</xalign>
+		  <yalign>0.5</yalign>
+		  <xpad>0</xpad>
+		  <ypad>0</ypad>
+		</widget>
 	      </widget>
 	    </widget>
 
@@ -1712,6 +1704,11 @@ BOOTP
 	      <class>GtkCheckButton</class>
 	      <name>status_boot</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>toggled</name>
+		<handler>connection_modified</handler>
+		<last_modification_time>Thu, 11 Jan 2001 20:14:23 GMT</last_modification_time>
+	      </signal>
 	      <label>Activate this connection when the computer starts</label>
 	      <active>True</active>
 	      <draw_indicator>True</draw_indicator>
@@ -1726,6 +1723,11 @@ BOOTP
 	      <class>GtkCheckButton</class>
 	      <name>status_dhcp</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>toggled</name>
+		<handler>connection_modified</handler>
+		<last_modification_time>Thu, 11 Jan 2001 21:29:54 GMT</last_modification_time>
+	      </signal>
 	      <label>Update DNS settings when this interface becomes active</label>
 	      <active>True</active>
 	      <draw_indicator>True</draw_indicator>
@@ -1801,23 +1803,9 @@ BOOTP
 	</widget>
 
 	<widget>
-	  <class>GtkCheckButton</class>
-	  <name>ip_autoconf</name>
-	  <can_focus>True</can_focus>
-	  <label>Configure automatically</label>
-	  <active>True</active>
-	  <draw_indicator>True</draw_indicator>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
 	  <class>GtkTable</class>
 	  <name>ip_table</name>
-	  <rows>3</rows>
+	  <rows>4</rows>
 	  <columns>2</columns>
 	  <homogeneous>False</homogeneous>
 	  <row_spacing>4</row_spacing>
@@ -1841,8 +1829,8 @@ BOOTP
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
-	      <top_attach>0</top_attach>
-	      <bottom_attach>1</bottom_attach>
+	      <top_attach>1</top_attach>
+	      <bottom_attach>2</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>False</xexpand>
@@ -1867,8 +1855,8 @@ BOOTP
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
-	      <top_attach>1</top_attach>
-	      <bottom_attach>2</bottom_attach>
+	      <top_attach>2</top_attach>
+	      <bottom_attach>3</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>False</xexpand>
@@ -1893,8 +1881,8 @@ BOOTP
 	    <child>
 	      <left_attach>0</left_attach>
 	      <right_attach>1</right_attach>
-	      <top_attach>2</top_attach>
-	      <bottom_attach>3</bottom_attach>
+	      <top_attach>3</top_attach>
+	      <bottom_attach>4</bottom_attach>
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>False</xexpand>
@@ -1910,30 +1898,11 @@ BOOTP
 	    <class>GtkEntry</class>
 	    <name>ip_address</name>
 	    <can_focus>True</can_focus>
-	    <editable>True</editable>
-	    <text_visible>True</text_visible>
-	    <text_max_length>0</text_max_length>
-	    <text></text>
-	    <child>
-	      <left_attach>1</left_attach>
-	      <right_attach>2</right_attach>
-	      <top_attach>0</top_attach>
-	      <bottom_attach>1</bottom_attach>
-	      <xpad>0</xpad>
-	      <ypad>0</ypad>
-	      <xexpand>True</xexpand>
-	      <yexpand>False</yexpand>
-	      <xshrink>False</xshrink>
-	      <yshrink>False</yshrink>
-	      <xfill>True</xfill>
-	      <yfill>False</yfill>
-	    </child>
-	  </widget>
-
-	  <widget>
-	    <class>GtkEntry</class>
-	    <name>ip_subnet</name>
-	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>connection_modified</handler>
+	      <last_modification_time>Thu, 11 Jan 2001 20:50:02 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -1956,8 +1925,13 @@ BOOTP
 
 	  <widget>
 	    <class>GtkEntry</class>
-	    <name>ip_gateway</name>
+	    <name>ip_subnet</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>connection_modified</handler>
+	      <last_modification_time>Thu, 11 Jan 2001 20:50:12 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -1970,6 +1944,86 @@ BOOTP
 	      <xpad>0</xpad>
 	      <ypad>0</ypad>
 	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkEntry</class>
+	    <name>ip_gateway</name>
+	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>connection_modified</handler>
+	      <last_modification_time>Thu, 11 Jan 2001 20:53:02 GMT</last_modification_time>
+	    </signal>
+	    <editable>True</editable>
+	    <text_visible>True</text_visible>
+	    <text_max_length>0</text_max_length>
+	    <text></text>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>3</top_attach>
+	      <bottom_attach>4</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>True</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkLabel</class>
+	    <name>label99</name>
+	    <label>Configuration:</label>
+	    <justify>GTK_JUSTIFY_CENTER</justify>
+	    <wrap>False</wrap>
+	    <xalign>0</xalign>
+	    <yalign>0.5</yalign>
+	    <xpad>0</xpad>
+	    <ypad>0</ypad>
+	    <child>
+	      <left_attach>0</left_attach>
+	      <right_attach>1</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
+	      <yexpand>False</yexpand>
+	      <xshrink>False</xshrink>
+	      <yshrink>False</yshrink>
+	      <xfill>True</xfill>
+	      <yfill>False</yfill>
+	    </child>
+	  </widget>
+
+	  <widget>
+	    <class>GtkOptionMenu</class>
+	    <name>connection_config</name>
+	    <can_focus>True</can_focus>
+	    <items>Manual
+DHCP
+BOOTP
+</items>
+	    <initial_choice>1</initial_choice>
+	    <child>
+	      <left_attach>1</left_attach>
+	      <right_attach>2</right_attach>
+	      <top_attach>0</top_attach>
+	      <bottom_attach>1</bottom_attach>
+	      <xpad>0</xpad>
+	      <ypad>0</ypad>
+	      <xexpand>False</xexpand>
 	      <yexpand>False</yexpand>
 	      <xshrink>False</xshrink>
 	      <yshrink>False</yshrink>
@@ -2022,7 +2076,7 @@ BOOTP
 
       <widget>
 	<class>GtkVBox</class>
-	<name>vbox17</name>
+	<name>wvlan_vbox</name>
 	<border_width>4</border_width>
 	<homogeneous>False</homogeneous>
 	<spacing>4</spacing>
@@ -2072,6 +2126,16 @@ BOOTP
 	  <class>GtkCheckButton</class>
 	  <name>wvlan_adhoc</name>
 	  <can_focus>True</can_focus>
+	  <signal>
+	    <name>toggled</name>
+	    <handler>on_wvlan_adhoc_toggled</handler>
+	    <last_modification_time>Thu, 11 Jan 2001 19:59:33 GMT</last_modification_time>
+	  </signal>
+	  <signal>
+	    <name>toggled</name>
+	    <handler>connection_modified</handler>
+	    <last_modification_time>Thu, 11 Jan 2001 20:55:52 GMT</last_modification_time>
+	  </signal>
 	  <label>Ad-Hoc mode</label>
 	  <active>False</active>
 	  <draw_indicator>True</draw_indicator>
@@ -2160,6 +2224,11 @@ BOOTP
 	      <class>GtkEntry</class>
 	      <name>wvlan_essid</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>changed</name>
+		<handler>connection_modified</handler>
+		<last_modification_time>Thu, 11 Jan 2001 20:56:02 GMT</last_modification_time>
+	      </signal>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
 	      <text_max_length>0</text_max_length>
@@ -2184,6 +2253,11 @@ BOOTP
 	      <class>GtkEntry</class>
 	      <name>wvlan_freq</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>changed</name>
+		<handler>connection_modified</handler>
+		<last_modification_time>Thu, 11 Jan 2001 20:56:30 GMT</last_modification_time>
+	      </signal>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
 	      <text_max_length>0</text_max_length>
@@ -2234,6 +2308,11 @@ BOOTP
 	      <class>GtkSpinButton</class>
 	      <name>wvlan_channel</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>changed</name>
+		<handler>connection_modified</handler>
+		<last_modification_time>Thu, 11 Jan 2001 20:56:20 GMT</last_modification_time>
+	      </signal>
 	      <climb_rate>1</climb_rate>
 	      <digits>0</digits>
 	      <numeric>False</numeric>
@@ -2265,18 +2344,9 @@ BOOTP
 	</widget>
 
 	<widget>
-	  <class>GtkHSeparator</class>
-	  <name>hseparator7</name>
-	  <child>
-	    <padding>0</padding>
-	    <expand>False</expand>
-	    <fill>False</fill>
-	  </child>
-	</widget>
-
-	<widget>
 	  <class>GtkLabel</class>
 	  <name>wvlan_help</name>
+	  <height>110</height>
 	  <label></label>
 	  <justify>GTK_JUSTIFY_LEFT</justify>
 	  <wrap>False</wrap>
@@ -2307,7 +2377,7 @@ BOOTP
 
       <widget>
 	<class>GtkVBox</class>
-	<name>vbox18</name>
+	<name>ppp_vbox</name>
 	<border_width>4</border_width>
 	<homogeneous>False</homogeneous>
 	<spacing>4</spacing>
@@ -2449,6 +2519,11 @@ BOOTP
 	    <class>GtkEntry</class>
 	    <name>ppp_phone</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>connection_modified</handler>
+	      <last_modification_time>Thu, 11 Jan 2001 20:56:45 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -2473,6 +2548,11 @@ BOOTP
 	    <class>GtkEntry</class>
 	    <name>ppp_username</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>connection_modified</handler>
+	      <last_modification_time>Thu, 11 Jan 2001 20:57:03 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -2497,6 +2577,11 @@ BOOTP
 	    <class>GtkEntry</class>
 	    <name>ppp_password</name>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>changed</name>
+	      <handler>connection_modified</handler>
+	      <last_modification_time>Thu, 11 Jan 2001 20:57:11 GMT</last_modification_time>
+	    </signal>
 	    <editable>True</editable>
 	    <text_visible>False</text_visible>
 	    <text_max_length>0</text_max_length>
@@ -2567,6 +2652,11 @@ BOOTP
 	      <child_name>GnomeEntry:entry</child_name>
 	      <name>ppp_port_entry</name>
 	      <can_focus>True</can_focus>
+	      <signal>
+		<name>changed</name>
+		<handler>connection_modified</handler>
+		<last_modification_time>Thu, 11 Jan 2001 20:56:53 GMT</last_modification_time>
+	      </signal>
 	      <editable>True</editable>
 	      <text_visible>True</text_visible>
 	      <text_max_length>0</text_max_length>
@@ -2620,6 +2710,7 @@ BOOTP
     <widget>
       <class>GtkHBox</class>
       <name>hbox2</name>
+      <border_width>4</border_width>
       <homogeneous>False</homogeneous>
       <spacing>12</spacing>
       <child>
@@ -2632,6 +2723,11 @@ BOOTP
 	<class>GtkButton</class>
 	<name>connection_help</name>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_connection_help_clicked</handler>
+	  <last_modification_time>Thu, 11 Jan 2001 20:00:26 GMT</last_modification_time>
+	</signal>
 	<relief>GTK_RELIEF_NORMAL</relief>
 	<child>
 	  <padding>0</padding>
@@ -2646,9 +2742,10 @@ BOOTP
 
       <widget>
 	<class>GtkButton</class>
-	<name>button21</name>
+	<name>connection_complexity</name>
+	<sensitive>False</sensitive>
 	<can_focus>True</can_focus>
-	<label>Advanced &gt;&gt;</label>
+	<label>More Options &gt;&gt;</label>
 	<relief>GTK_RELIEF_NORMAL</relief>
 	<child>
 	  <padding>0</padding>
@@ -2676,8 +2773,13 @@ BOOTP
 
       <widget>
 	<class>GtkButton</class>
-	<name>button22</name>
+	<name>connection_apply</name>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_connection_apply_clicked</handler>
+	  <last_modification_time>Thu, 11 Jan 2001 20:02:03 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
 	<relief>GTK_RELIEF_NORMAL</relief>
 	<child>
@@ -2689,8 +2791,13 @@ BOOTP
 
       <widget>
 	<class>GtkButton</class>
-	<name>button23</name>
+	<name>connection_close</name>
 	<can_focus>True</can_focus>
+	<signal>
+	  <name>clicked</name>
+	  <handler>on_connection_close_clicked</handler>
+	  <last_modification_time>Thu, 11 Jan 2001 20:02:11 GMT</last_modification_time>
+	</signal>
 	<stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
 	<relief>GTK_RELIEF_NORMAL</relief>
 	<child>
@@ -2698,6 +2805,194 @@ BOOTP
 	  <expand>False</expand>
 	  <fill>False</fill>
 	</child>
+      </widget>
+    </widget>
+  </widget>
+</widget>
+
+<widget>
+  <class>GnomeDialog</class>
+  <name>connection_type_dialog</name>
+  <visible>False</visible>
+  <type>GTK_WINDOW_TOPLEVEL</type>
+  <position>GTK_WIN_POS_NONE</position>
+  <modal>True</modal>
+  <allow_shrink>False</allow_shrink>
+  <allow_grow>False</allow_grow>
+  <auto_shrink>False</auto_shrink>
+  <auto_close>True</auto_close>
+  <hide_on_close>True</hide_on_close>
+
+  <widget>
+    <class>GtkVBox</class>
+    <child_name>GnomeDialog:vbox</child_name>
+    <name>dialog-vbox1</name>
+    <homogeneous>False</homogeneous>
+    <spacing>8</spacing>
+    <child>
+      <padding>4</padding>
+      <expand>True</expand>
+      <fill>True</fill>
+    </child>
+
+    <widget>
+      <class>GtkHButtonBox</class>
+      <child_name>GnomeDialog:action_area</child_name>
+      <name>dialog-action_area1</name>
+      <layout_style>GTK_BUTTONBOX_END</layout_style>
+      <spacing>8</spacing>
+      <child_min_width>85</child_min_width>
+      <child_min_height>27</child_min_height>
+      <child_ipad_x>7</child_ipad_x>
+      <child_ipad_y>0</child_ipad_y>
+      <child>
+	<padding>0</padding>
+	<expand>False</expand>
+	<fill>True</fill>
+	<pack>GTK_PACK_END</pack>
+      </child>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button24</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
+      </widget>
+
+      <widget>
+	<class>GtkButton</class>
+	<name>button26</name>
+	<can_default>True</can_default>
+	<can_focus>True</can_focus>
+	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
+      </widget>
+    </widget>
+
+    <widget>
+      <class>GtkTable</class>
+      <name>table8</name>
+      <rows>2</rows>
+      <columns>2</columns>
+      <homogeneous>False</homogeneous>
+      <row_spacing>12</row_spacing>
+      <column_spacing>12</column_spacing>
+      <child>
+	<padding>0</padding>
+	<expand>True</expand>
+	<fill>True</fill>
+      </child>
+
+      <widget>
+	<class>GtkLabel</class>
+	<name>label115</name>
+	<label>Select which type of connection you would like to add.</label>
+	<justify>GTK_JUSTIFY_CENTER</justify>
+	<wrap>True</wrap>
+	<xalign>0</xalign>
+	<yalign>0.5</yalign>
+	<xpad>0</xpad>
+	<ypad>0</ypad>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GnomePixmap</class>
+	<name>pixmap10</name>
+	<filename>networking.png</filename>
+	<child>
+	  <left_attach>0</left_attach>
+	  <right_attach>1</right_attach>
+	  <top_attach>0</top_attach>
+	  <bottom_attach>1</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>False</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>False</xfill>
+	  <yfill>False</yfill>
+	</child>
+      </widget>
+
+      <widget>
+	<class>GtkVBox</class>
+	<name>vbox17</name>
+	<homogeneous>False</homogeneous>
+	<spacing>0</spacing>
+	<child>
+	  <left_attach>1</left_attach>
+	  <right_attach>2</right_attach>
+	  <top_attach>1</top_attach>
+	  <bottom_attach>2</bottom_attach>
+	  <xpad>0</xpad>
+	  <ypad>0</ypad>
+	  <xexpand>False</xexpand>
+	  <yexpand>True</yexpand>
+	  <xshrink>False</xshrink>
+	  <yshrink>False</yshrink>
+	  <xfill>True</xfill>
+	  <yfill>True</yfill>
+	</child>
+
+	<widget>
+	  <class>GtkRadioButton</class>
+	  <name>connection_eth</name>
+	  <can_focus>True</can_focus>
+	  <label>Ethernet</label>
+	  <active>False</active>
+	  <draw_indicator>True</draw_indicator>
+	  <group>connection_group</group>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkRadioButton</class>
+	  <name>connection_wvlan</name>
+	  <can_focus>True</can_focus>
+	  <label>Wavelan</label>
+	  <active>False</active>
+	  <draw_indicator>True</draw_indicator>
+	  <group>connection_group</group>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
+
+	<widget>
+	  <class>GtkRadioButton</class>
+	  <name>connection_ppp</name>
+	  <can_focus>True</can_focus>
+	  <label>Modem (PPP)</label>
+	  <active>True</active>
+	  <draw_indicator>True</draw_indicator>
+	  <group>connection_group</group>
+	  <child>
+	    <padding>0</padding>
+	    <expand>False</expand>
+	    <fill>False</fill>
+	  </child>
+	</widget>
       </widget>
     </widget>
   </widget>

@@ -1,4 +1,5 @@
-/* Copyright (C) 2000-2001 Ximian, Inc.
+/* 
+ * Copyright (C) 2000-2001 Ximian, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as
@@ -14,7 +15,9 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Hans Petter Jansson <hpj@ximian.com> and Arturo Espinosa <arturo@ximian.com>.
+ * Authors: Hans Petter Jansson <hpj@ximian.com>
+ *          Arturo Espinosa <arturo@ximian.com>
+ *          Jacob Berkman <jacob@ximian.com>
  */
 
 #ifdef HAVE_CONFIG_H
@@ -29,18 +32,12 @@
 
 #include "callbacks.h"
 #include "transfer.h"
+#include "connection.h"
 
 #define d(x) x
 
-GtkWidget *searchdomain_entry_selected = NULL;
-GtkWidget *aliases_settings_entry_selected = NULL;
-GtkWidget *dns_entry_selected = NULL;
-int statichost_row_selected = -1;
-
-#define SEARCHDOMAIN_ROW_SELECTED gtk_list_child_position (GTK_LIST (tool_widget_get ("searchdomain_list")), searchdomain_entry_selected)
-#define ALIASES_SETTINGS_ROW_SELECTED gtk_list_child_position (GTK_LIST (tool_widget_get ("aliases_settings_list")), aliases_settings_entry_selected)
-#define DNS_ROW_SELECTED gtk_list_child_position (GTK_LIST (tool_widget_get ("dns_list")), dns_entry_selected)
-
+static int statichost_row_selected = -1;
+static int connection_row_selected = -1;
 
 /* libglade callbacks */
 void on_network_notebook_switch_page (GtkWidget *notebook, 
@@ -63,7 +60,10 @@ gint update_hint (GtkWidget *w, GdkEventFocus *e, gpointer null);
 void on_connection_configure_clicked (GtkWidget *w, gpointer null);
 void on_connection_delete_clicked (GtkWidget *w, gpointer null);
 void on_connection_add_clicked (GtkWidget *w, gpointer null);
-
+void on_connection_list_select_row (GtkCList *clist, gint row, gint column,
+				    GdkEvent * event, gpointer user_data);
+void on_connection_list_unselect_row (GtkCList *clist, gint row, gint column,
+				      GdkEvent * event, gpointer user_data);
 void on_dns_dhcp_toggled (GtkWidget *w, gpointer null);
 void on_samba_use_toggled (GtkWidget *w, gpointer null);
 
@@ -72,6 +72,14 @@ statichost_actions_set_sensitive (gboolean state)
 {
 	gtk_widget_set_sensitive (tool_widget_get ("statichost_delete"), state);
 	gtk_widget_set_sensitive (tool_widget_get ("statichost_update"), state); 
+
+}
+
+static void
+connection_actions_set_sensitive (gboolean state)
+{
+	gtk_widget_set_sensitive (tool_widget_get ("connection_delete"), state);
+	gtk_widget_set_sensitive (tool_widget_get ("connection_configure"), state); 
 }
 
 static char *
@@ -435,22 +443,91 @@ update_hint (GtkWidget *w, GdkEventFocus *event, gpointer null)
 	return FALSE;
 }
 
+/* glade callbacks for the connection page */
+void
+on_connection_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
+{
+	connection_row_selected = row;
+	connection_actions_set_sensitive (TRUE);
+}
+
+void
+on_connection_list_unselect_row (GtkCList * clist, gint row, gint column, GdkEvent * event, gpointer user_data)
+{
+	connection_row_selected = -1;
+	connection_actions_set_sensitive (FALSE);
+}
+
+/* in my younger years i would do this function in 1 line */
 void
 on_connection_configure_clicked (GtkWidget *w, gpointer null)
 {
-	g_message ("connection configure");
+	GtkWidget *clist;
+	Connection *cxn;
+
+	clist = tool_widget_get ("connection_list");
+	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
+
+	connection_configure (cxn);
 }
 
 void
 on_connection_delete_clicked (GtkWidget *w, gpointer null)
 {
-	g_message ("connection delete");
+	GtkWidget *clist, *d;
+	Connection *cxn;
+	int res;
+
+	d = gnome_question_dialog_parented (_("Remove this connection?"), NULL, NULL,
+					    GTK_WINDOW (tool_get_top_window ()));
+
+	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
+	if (res)
+		return;
+
+	clist = tool_widget_get ("connection_list");
+	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
+
+	connection_free (cxn);
+	gtk_clist_remove (GTK_CLIST (clist), connection_row_selected);
 }
 
 void
 on_connection_add_clicked (GtkWidget *w, gpointer null)
 {
-	g_message ("connection add");
+	Connection *cxn;
+	GtkWidget *d, *ppp, *eth, *wvlan, *clist;
+	gint res, row;
+	ConnectionType cxn_type;
+	
+	d = tool_widget_get ("connection_type_dialog");
+
+	ppp   = tool_widget_get ("connection_ppp");
+	eth   = tool_widget_get ("connection_eth");
+	wvlan = tool_widget_get ("connection_wvlan");
+
+	/* ppp is the default for now */
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ppp), TRUE);
+
+	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
+
+	if (res)
+		return;
+
+	if (GTK_TOGGLE_BUTTON (ppp)->active)
+		cxn_type = CONNECTION_PPP;
+	else if (GTK_TOGGLE_BUTTON (eth)->active)
+		cxn_type = CONNECTION_ETH;
+	else if (GTK_TOGGLE_BUTTON (wvlan)->active)
+		cxn_type = CONNECTION_WVLAN;
+	else
+		cxn_type = CONNECTION_UNKNOWN;
+
+	cxn = connection_new_from_type (cxn_type);
+	/* connection_configure (cxn); */
+	clist = tool_widget_get ("connection_list");
+	row = gtk_clist_find_row_from_data (GTK_CLIST (clist), cxn);
+	gtk_clist_select_row (GTK_CLIST (clist), row, 0);
 }
 
 void
@@ -469,4 +546,5 @@ void
 on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
 	gtk_widget_set_sensitive (tool_widget_get ("samba_frame"),
-				  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));}
+				  gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
+}

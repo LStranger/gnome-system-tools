@@ -12,8 +12,9 @@ sbin_PROGRAMS = network-admin
 
 network_admin_SOURCES = \
 	main.c \
-	callbacks.c callbacks.h \
-	transfer.c transfer.h
+	callbacks.c	callbacks.h	\
+	transfer.c	transfer.h	\
+	connection.c	connection.h
 
 network_admin_LDADD = \
 $(GNOME_LIBDIR) \

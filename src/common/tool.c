@@ -503,6 +503,12 @@ tool_config_save ()
 	if (tc->to_xml)
 		tc->to_xml (xml_doc_get_root (tc->config));
 
+	/* don't actually save if we are just pretending */
+	if (getenv ("SET_ME_UP_HARDER")) {
+		g_warning (_("Skipping actual save..."));
+		return TRUE;
+	}
+
 	pipe (fd_xml);
 	pipe (fd_report);
 
@@ -782,7 +788,6 @@ tool_user_apply (GtkWidget *w, gpointer null)
 void
 tool_user_close (GtkWidget *widget, gpointer data)
 {
-	/* TODO: Check for changes and optionally ask for confirmation */
 	if (tool_get_modified ())
 	{
 		/* Changes have been made. */

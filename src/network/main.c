@@ -53,8 +53,11 @@ main (int argc, char *argv[])
 	};
 	
 	init_hint_entries ();
+	
 	tool_init ("network", argc, argv);
 	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
+
+	init_icons ();
 
 	for (i=0; s[i]; i++)
 		connect_editable_filter (tool_widget_get (s[i]), e[i]);
