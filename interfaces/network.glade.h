@@ -7,7 +7,7 @@
 gchar *s = N_("Networking Settings");
 gchar *s = N_("How this computer is identified.");
 gchar *s = N_("_Host name:");
-gchar *s = N_("_Enable windows networking");
+gchar *s = N_("_Enable Windows networking");
 gchar *s = N_("Windows Networking");
 gchar *s = N_("_Description:");
 gchar *s = N_("Domain / _Workgroup:");
@@ -99,13 +99,12 @@ gchar *s = N_("Add New Internet Connection");
 gchar *s = N_("Create a new Internet Connection ");
 gchar *s = N_("Welcome to the Internet Connection druid. \n"
               "\n"
-              "This druid will help you to configure a new \n"
-              "internet account. \n"
+              "This druid will help you configure a new \n"
+              "Internet account. \n"
               "\n"
               "Before you begin, you must have a modem and\n"
               "an Internet Service Provider (ISP). Please ask your \n"
-              "ISP for any information about your connection which\n"
-              "you are lacking.\n"
+              "ISP for any pertinent information about your connection.\n"
               "\n"
               "Click the \"Next\" button to begin.");
 gchar *s = N_("1. ISP phone number");
@@ -113,13 +112,13 @@ gchar *s = N_("First, please enter the phone number you use to connect to the in
 gchar *s = N_("Phone number:");
 gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
               "");
-gchar *s = N_("Warning message goes here..\n"
+gchar *s = N_("Warning message goes here.\n"
               "");
 gchar *s = N_("2. Username and password");
 gchar *s = N_("Next, please enter the user name and password which were assigned to you by your ISP.");
+gchar *s = N_("Password (confirm):");
 gchar *s = N_("User name:");
 gchar *s = N_("Password:");
-gchar *s = N_("Password (confirm):");
 gchar *s = N_("Warning message goes here..\n"
               "");
 gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
