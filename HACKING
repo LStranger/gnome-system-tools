@@ -1,0 +1,140 @@
+Hacking the Helix Setup Tools
+=============================
+
+Hacking the Helix Setup Tools is fairly straightforward (if you are a
+hacker). However, to get you started quicker, we provide this document. Here,
+we give an overview of the existing code, provide pointers to resources and
+administrivial procedures, and point out some non-obvious issues.
+
+
+What's interesting
+------------------
+
+We're most interested in work on the backends, porting them to other
+distributions and architectures. Our goal is to make them work on whatever
+Unix you happen to throw at them, consistently and without reducing neither
+themselves or the system configuration to unidentifiable goop.
+
+If you do good work on this, you can be sure to get our immediate attention
+and undying gratitude, as well as seeing your favouite set of workstation
+tools succeed in making Linux/Unix accessible to the masses.
+
+Other contributions - particularly any bugfixes you might have - are of
+course extremely valuable also.
+
+
+Package structure
+-----------------
+
+The package has two readily identifiable parts: Backends and frontends. The
+backends do all the actual configuration work, and communicate with their
+invokers using XML and an ad-hoc protocol for runtime errors and progress
+reporting.
+
+In addition, a frontend is defined by two parts; a part specifying the static
+layout of the interface in Glade XML (made with Glade), and another part
+which adds interactive behaviour and communication with the backend.
+
+Breakdown of the tools currently packaged:
+
+Backend                          Frontend              Frontend layout
+-------                          --------              ---------------
+backends/disks-conf.in           src/disks/*           interfaces/disks.glade
+backends/memory-conf.in          src/memory/*          interfaces/memory.glade
+backends/nameresolution-conf.in  src/nameresolution/*  interfaces/nameresolution.glade
+backends/networking-conf.in      src/networking/*      interfaces/networking.glade
+backends/shares-conf.in          src/shares/*          interfaces/shares.glade
+backends/time-conf.in            src/time/*            interfaces/time.glade
+backends/users-conf.in           src/users/*           interfaces/users.glade
+
+Currently, all the backends are in Perl, all the frontends are in C, and all
+the frontend layouts are in Glade XML. We accept backends and frontends in
+Python, though.
+
+There are also common libraries in these three categories:
+
+backends/be.pl          - shared Perl code.
+src/common/*            - shared C code.
+interfaces/common.glade - shared Glade specifications.
+
+
+Submitting patches
+------------------
+
+If you're a new contributor, we appreciate it if you send your patches to the
+mailinglist for approval. Once a patch is approved, you can apply it to CVS
+HEAD yourself, or we can apply it for you. If you submit patches on a regular
+basis, we can come to an agreement where you just apply your changes directly
+to the CVS version without needing prior approval. Note that your patch may
+still be reverted, or you may be asked to revert (or fix) it if it breaks
+something.
+
+When you make significant contributions (e.g. port a backend to a new
+distribution or platform, or add another important feature), we welcome you
+to add yourself to the authors list (with your e-mail address and a short
+description of what you did) at the top of the source. You will always be
+credited for your contribution when it's time for a release.
+
+Changelogs (the "ChangeLog" files usually present in every directory of a
+GNOME project) are not manually maintained by this project. Rather, they are
+generated from the CVS commit logs now and then. So try to keep those commit
+messages informative and well-formatted.
+
+
+Implementing a new tool
+-----------------------
+
+When starting work on a new tool, you're best off copying the source from an
+existing tool and modifying that. Old backends, frontends and Glade files can
+be used efficiently as basis for new ones.
+
+When coding the C frontend, make sure to initialize the tool with
+tool_init(). It does most of the traditional GNOME initialization for you,
+connects some signals, and loads the configuration from your backend to an
+internal XML tree.
+
+We believe existing source is the best documentation in this matter.
+
+
+Coding style
+------------
+
+The backends should be written with two-space indents (_no_ tabs). Try to
+follow the comment style from existing frontends, e.g. add liberal
+descriptions of the functions so they can be ported and updated with ease.
+
+Frontends must adhere to the GNOME coding standards, which means 8-space tab
+intenting. See the GNOME coding guidelines for details.
+
+
+Copyrights
+----------
+
+Copyright assigment is _not_ a requirement, but we'd appreciate it if you
+assigned it to Helix Code, as this makes the license more easily defendable
+(Helix Code has lawyers to do this, but if the copyright belongs to many
+different parties, they all have to give their consent or even show up in
+court to defend their code).
+
+
+Hands-on
+--------
+
+Checking it out (anonymously) from GNOME CVS:
+
+cvs -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome login
+cvs -d :pserver:anonymous@anoncvs.gnome.org:/cvs/gnome co helix-setup-tools
+
+Subscribing to the mailing list:
+
+http://lists.helixcode.com/mailman/listinfo/gnome-admin-tools
+
+Getting released packages:
+
+ftp://ftp.helixcode.com/pub/setuptools/
+
+Contacting principal developers:
+
+Hans Petter Jansson <hpj@helixcode.com>
+Arturo Espinosa     <arturo@helixcode.com>
+Tambet Ingo         <tambeti@sa.ee>
