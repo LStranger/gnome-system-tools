@@ -350,6 +350,7 @@ delete_location (GstLocation *location)
   GtkTreeIter   iter;
   GtkWidget    *dialog;
   gint          response;
+  xmlNodePtr    profile;
 
   priv  = GST_LOCATION_GET_PRIVATE (location);
   model = gtk_combo_box_get_model (GTK_COMBO_BOX (location));
@@ -366,6 +367,13 @@ delete_location (GstLocation *location)
 
   if (response == GTK_RESPONSE_YES)
     {
+      gtk_tree_model_get (model, &iter,
+			  LOCATION_COL_DATA, &profile,
+			  -1);
+
+      if (profile)
+	gst_xml_element_destroy (profile);
+
       gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
       gtk_combo_box_set_active (GTK_COMBO_BOX (location), -1);
       gst_dialog_modify (tool->main_dialog);
