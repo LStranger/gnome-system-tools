@@ -1294,7 +1294,6 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 {
 	char *s, *t, *u;
 	GConfClient *client = gconf_client_get_default ();
-	GError *error;
 
 	gchar *remote_config_key;
 	gchar *remote_hosts_key;
@@ -1341,8 +1340,8 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	remote_config_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote_configuration", NULL);
 	remote_hosts_key = g_strjoin ("/", GST_GCONF_ROOT, "global", "remote_hosts_list", NULL);
 
-	do_remote_conf = gconf_client_get_bool (client, remote_config_key, &error);
-	hosts = gconf_client_get_string (client, remote_hosts_key, &error);
+	do_remote_conf = gconf_client_get_bool (client, remote_config_key, NULL);
+	hosts = gconf_client_get_string (client, remote_hosts_key, NULL);
 
 	tool->remote_config = ((do_remote_conf) && (hosts != NULL) && (strcmp (SSH_PATH, "") != 0));
 	if (tool->remote_config && hosts)
