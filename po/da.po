@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools 0.1.0\n"
 "POT-Creation-Date: 2000-11-08 16:38-0600\n"
-"PO-Revision-Date: 2000-12-19 17:31+01:00\n"
+"PO-Revision-Date: 2000-12-22 17:31+01:00\n"
 "Last-Translator: Keld Simonsen <keld@dkuug.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,8 @@ msgstr "Montér denne partition"
 msgid "Open settings dialog for selected import"
 msgstr "Åbn dialogen indstillinger for valgt import"
 
-#: interfaces/disks.glade.h:21 interfaces/nameresolution.glade.h:41
+#: interfaces/disks.glade.h:21 interfaces/memory.glade.h:28
+#: interfaces/memory.glade.h:37 interfaces/nameresolution.glade.h:42
 #: interfaces/shares.glade.h:20 interfaces/shares.glade.h:34
 #: interfaces/shares.glade.h:39 interfaces/shares.glade.h:45
 #: interfaces/users.glade.h:14 interfaces/users.glade.h:21
@@ -123,11 +124,11 @@ msgstr "Diske og partitioner"
 
 #. Translation: respect the spaces before and after, and the minus than signs.
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
-#: interfaces/nameresolution.glade.h:43 interfaces/networking.glade.h:15
+#: interfaces/nameresolution.glade.h:44 interfaces/networking.glade.h:15
 #: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
-#: interfaces/users.glade.h:23 src/common/tool.c:618
-msgid " Advanced >> "
-msgstr " Avanceret >> "
+#: interfaces/users.glade.h:39 src/common/tool.c:621
+msgid " More Options >> "
+msgstr " Flere valgmuligheder >> "
 
 #: interfaces/disks.glade.h:25
 msgid "Partition Settings"
@@ -137,7 +138,7 @@ msgstr "Indstillinger for partition"
 msgid "Type:"
 msgstr "Type:"
 
-#: interfaces/disks.glade.h:27
+#: interfaces/disks.glade.h:27 interfaces/memory.glade.h:26
 msgid "Device:"
 msgstr "Enhed:"
 
@@ -234,20 +235,20 @@ msgstr "Navnetjeneste for domæner (DNS)"
 msgid "New server:"
 msgstr "Ny server:"
 
-#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
-#: interfaces/nameresolution.glade.h:49
+#: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:33
+#: interfaces/nameresolution.glade.h:50
 msgid "Existing:"
 msgstr "Eksisterende:"
 
-#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:27
-#: interfaces/nameresolution.glade.h:47 interfaces/shares.glade.h:32
+#: interfaces/nameresolution.glade.h:23 interfaces/nameresolution.glade.h:28
+#: interfaces/nameresolution.glade.h:48 interfaces/shares.glade.h:32
 #: interfaces/shares.glade.h:40 interfaces/shares.glade.h:43
 #: interfaces/time.glade.h:13
 msgid "Add"
 msgstr "Tilføj"
 
-#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:28
-#: interfaces/nameresolution.glade.h:38 interfaces/nameresolution.glade.h:48
+#: interfaces/nameresolution.glade.h:24 interfaces/nameresolution.glade.h:29
+#: interfaces/nameresolution.glade.h:39 interfaces/nameresolution.glade.h:49
 #: interfaces/users.glade.h:10 interfaces/users.glade.h:18
 msgid "Delete"
 msgstr "Slet"
@@ -260,23 +261,27 @@ msgstr "Brug WINS-tjener:"
 msgid "Servers"
 msgstr "Servere"
 
-#: interfaces/nameresolution.glade.h:29
+#: interfaces/nameresolution.glade.h:27
+msgid "Domain Lookup Order"
+msgstr "Rækkefølge for domæneopslag"
+
+#: interfaces/nameresolution.glade.h:30
 msgid " Move Up"
 msgstr " Flyt op"
 
-#: interfaces/nameresolution.glade.h:30
+#: interfaces/nameresolution.glade.h:31
 msgid "Move Down"
 msgstr "Flyt ned"
 
-#: interfaces/nameresolution.glade.h:31
+#: interfaces/nameresolution.glade.h:32
 msgid "New domain:"
 msgstr "Nyt domæne:"
 
-#: interfaces/nameresolution.glade.h:33
+#: interfaces/nameresolution.glade.h:34
 msgid "Search Domains"
 msgstr "Søgedomæner"
 
-#: interfaces/nameresolution.glade.h:34
+#: interfaces/nameresolution.glade.h:35
 msgid ""
 "Assign aliases to IP addresses that may not be registered in the DNS or WINS "
 "servers, or to override or set new names for commonly used IP addresses. "
@@ -285,40 +290,40 @@ msgstr ""
 "servere, eller for at overskrive eller sætte nye navne for ofte brugte "
 "IP-adresser. "
 
-#: interfaces/nameresolution.glade.h:35
+#: interfaces/nameresolution.glade.h:36
 msgid "IP address"
 msgstr "IP-adresse"
 
-#: interfaces/nameresolution.glade.h:36
+#: interfaces/nameresolution.glade.h:37
 msgid " Names"
 msgstr " Navne"
 
-#: interfaces/nameresolution.glade.h:37
+#: interfaces/nameresolution.glade.h:38
 msgid "New Alias"
 msgstr "Nyt alias"
 
-#: interfaces/nameresolution.glade.h:39 src/nameresolution/callbacks.c:354
+#: interfaces/nameresolution.glade.h:40 src/nameresolution/callbacks.c:354
 #: src/nameresolution/callbacks.c:398
 msgid "Settings for the selected alias"
 msgstr "Indstillinger for valgt alias"
 
-#: interfaces/nameresolution.glade.h:40
+#: interfaces/nameresolution.glade.h:41
 msgid "Change the alias' IP address or its corresponding names."
 msgstr "Ændr aliasens IP-adresse eller dens tilsvarende navne."
 
-#: interfaces/nameresolution.glade.h:42 interfaces/nameresolution.glade.h:46
+#: interfaces/nameresolution.glade.h:43 interfaces/nameresolution.glade.h:47
 msgid "Aliases"
 msgstr "Aliaser"
 
-#: interfaces/nameresolution.glade.h:44
+#: interfaces/nameresolution.glade.h:45
 msgid "Aliases Settings"
 msgstr "Aliasindstillinger"
 
-#: interfaces/nameresolution.glade.h:45
+#: interfaces/nameresolution.glade.h:46
 msgid "IP address:"
 msgstr "IP-adresse:"
 
-#: interfaces/nameresolution.glade.h:50
+#: interfaces/nameresolution.glade.h:51 interfaces/users.glade.h:52
 msgid "New:"
 msgstr "Ny:"
 
@@ -412,7 +417,8 @@ msgstr "Navn"
 msgid "Path"
 msgstr "Sti"
 
-#: interfaces/memory.glade.h:11 interfaces/shares.glade.h:25
+#: interfaces/memory.glade.h:11 interfaces/memory.glade.h:27
+#: interfaces/memory.glade.h:36 interfaces/shares.glade.h:25
 #: interfaces/shares.glade.h:31
 msgid "Enabled"
 msgstr "Aktiveret"
@@ -470,7 +476,7 @@ msgstr "Indstillinger for import"
 msgid "Host:"
 msgstr "Vært:"
 
-#: interfaces/memory.glade.h:22 interfaces/shares.glade.h:51
+#: interfaces/memory.glade.h:38 interfaces/shares.glade.h:51
 msgid "Path:"
 msgstr "Sti:"
 
@@ -502,7 +508,7 @@ msgstr "Lokal sti:"
 msgid "Export name:"
 msgstr "Eksportnavn:"
 
-#: interfaces/shares.glade.h:61 interfaces/users.glade.h:28
+#: interfaces/shares.glade.h:61 interfaces/users.glade.h:44
 msgid "Comment:"
 msgstr "Kommentar:"
 
@@ -576,7 +582,7 @@ msgstr ""
 msgid "New User"
 msgstr "Ny bruger"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:273
+#: interfaces/users.glade.h:11 src/users/callbacks.c:275
 msgid "Settings for the selected user"
 msgstr "Indstillinger for valgt bruger"
 
@@ -584,7 +590,8 @@ msgstr "Indstillinger for valgt bruger"
 msgid "Change the user's password or options like its name."
 msgstr "Ændr brugerens adgangskode eller andre alternativer som navn."
 
-#: interfaces/users.glade.h:13 interfaces/users.glade.h:33
+#: interfaces/users.glade.h:13 interfaces/users.glade.h:49
+#: interfaces/users.glade.h:51
 msgid "Change Password"
 msgstr "Ændr Adgangskode"
 
@@ -612,87 +619,155 @@ msgstr "Ændr gruppens alternativer som navn og medlemmer."
 msgid "Groups"
 msgstr "Grupper"
 
+#: interfaces/users.glade.h:23
+msgid ""
+"These are global values that will affect the creation of new users. They are "
+"only available when you click \"More Options\"."
+msgstr ""
+"Dette er globale værdier, som vil påvirke oprettelsen af nye brugere. De "
+"er kun tilstede når du klikker på 'Flere valgmuligheder'"
+
 #: interfaces/users.glade.h:24
+msgid "System settings"
+msgstr "Systemindstillinger"
+
+#: interfaces/users.glade.h:25
+msgid "Mailbox directory:"
+msgstr "Katalog for postkasse:"
+
+#: interfaces/users.glade.h:26
+msgid "Create home for new users:"
+msgstr "Opret hjem for nye brugere:"
+
+#: interfaces/users.glade.h:27
+msgid "Min/max values for automatic UID/GID"
+msgstr "Min/max værdier for automatis UID/GID"
+
+#: interfaces/users.glade.h:28
+msgid "Maximum UID:"
+msgstr "Maksimum UID:"
+
+#: interfaces/users.glade.h:29
+msgid "Minimum UID:"
+msgstr "Minimum UID:"
+
+#: interfaces/users.glade.h:30
+msgid "Minimum GID:"
+msgstr "Maksimum GID:"
+
+#: interfaces/users.glade.h:31
+msgid "Maximum GID:"
+msgstr "Minimum GID:"
+
+#: interfaces/users.glade.h:32
+msgid "Password expiration"
+msgstr "Adgangskode-udløb"
+
+#: interfaces/users.glade.h:33
+msgid "Days a password may be used:"
+msgstr "Dage en adgangskode kan bruges"
+
+#: interfaces/users.glade.h:34
+msgid "Minimum days allowed between password changes:"
+msgstr "Mindste antal dage tilladt mellem ændirnger af adgangskode:"
+
+#: interfaces/users.glade.h:35
+msgid ""
+"Days between warning and\n"
+" assword expiration:  "
+msgstr ""
+"Dage mellem advarsel og\n"
+"adgangskodes udløb: "
+
+#: interfaces/users.glade.h:37
+msgid "Minimum  password length:"
+msgstr "Mindste længde på adgangskode:"
+
+#: interfaces/users.glade.h:38
+msgid "Defaults"
+msgstr "Forvalgt"
+
+#: interfaces/users.glade.h:40
 msgid "User Settings"
 msgstr "Brugerindstillinger"
 
-#: interfaces/users.glade.h:25
-msgid "Basic"
-msgstr "Basic"
+#: interfaces/users.glade.h:41
+msgid "Basic settings"
+msgstr "Grundlæggende indstillinger"
 
-#: interfaces/users.glade.h:26
+#: interfaces/users.glade.h:42
 msgid "Main group:"
 msgstr "Hovedgruppe:"
 
-#: interfaces/users.glade.h:27
+#: interfaces/users.glade.h:43
 msgid "User name:"
 msgstr "Brugernavn:"
 
-#: interfaces/users.glade.h:29
-msgid "Advanced"
-msgstr "Avanceret"
+#: interfaces/users.glade.h:45
+msgid "Advanced settings"
+msgstr "Avancerede indstillinger"
 
-#: interfaces/users.glade.h:30
-msgid "User ID:"
-msgstr "Bruger-ID:"
-
-#: interfaces/users.glade.h:31
-msgid "Home directory:"
-msgstr "Hjemmekatalog"
-
-#: interfaces/users.glade.h:32
+#: interfaces/users.glade.h:46
 msgid "Shell:"
 msgstr "Skal:"
 
-#: interfaces/users.glade.h:34
-msgid "New password:"
-msgstr "Ny adgangskode:"
+#: interfaces/users.glade.h:47
+msgid "User ID:"
+msgstr "Bruger-ID:"
 
-#: interfaces/users.glade.h:35
-msgid "Confirmation:"
-msgstr "Bekræftelse:"
+#: interfaces/users.glade.h:48
+msgid "Home directory:"
+msgstr "Hjemmekatalog"
 
-#: interfaces/users.glade.h:36
-msgid "Check quality."
-msgstr "Tjek kvalitet."
+#: interfaces/users.glade.h:50
+msgid "Enter a new password manually, or have one randomly assigned."
+msgstr "Indtast manualt en adgangskode, eller få en tilfældig tildelt."
 
-#: interfaces/users.glade.h:37
+#: interfaces/users.glade.h:53
+msgid "Confirm:"
+msgstr "Bekræft:"
+
+#: interfaces/users.glade.h:54
 msgid "  Random Password  "
 msgstr "  Tilfældig adgangskode  "
 
-#: interfaces/users.glade.h:38
+#: interfaces/users.glade.h:55
+msgid "Check password quality"
+msgstr "Tjek kvalitet af adgangskode"
+
+#: interfaces/users.glade.h:56
 msgid "Group Settings"
 msgstr "Gruppeindstillinger"
 
-#: interfaces/users.glade.h:39
+#: interfaces/users.glade.h:57
 msgid "Group name:"
 msgstr "Gruppenavn:"
 
-#: interfaces/users.glade.h:40
+#: interfaces/users.glade.h:58
 msgid "Members"
 msgstr "Medlemmer"
 
-#: interfaces/users.glade.h:41
+#: interfaces/users.glade.h:59
 msgid "All Users"
 msgstr "Alle brugere"
 
-#: interfaces/users.glade.h:42
-msgid "Member Users"
-msgstr "Medlemmer"
+#: interfaces/users.glade.h:60
+msgid "Group Members"
+msgstr "Gruppemedlemmer"
 
-#: interfaces/users.glade.h:43
+#: interfaces/users.glade.h:61
 msgid "Add ->"
 msgstr "Tilføj ->"
 
-#: interfaces/users.glade.h:44
+#: interfaces/users.glade.h:62
 msgid "Remove <-"
 msgstr "Fjern <-"
 
-#: interfaces/users.glade.h:45
+#: interfaces/users.glade.h:63
 msgid "label27"
 msgstr "etiket27"
 
-#: interfaces/users.glade.h:46
+#: interfaces/users.glade.h:64
 msgid "label26"
 msgstr "etiket26"
 
@@ -702,8 +777,8 @@ msgstr "etiket26"
 #. * DO NOT compile it as part of your application.
 #.
 #: interfaces/memory.glade.h:7
-msgid "Memory administration"
-msgstr "Administration af hukommelsesresurser"
+msgid "Memory Administration"
+msgstr "Administration af hukommelse"
 
 #: interfaces/memory.glade.h:8
 msgid "Swap Memory:"
@@ -733,63 +808,63 @@ msgstr "Indstillinger..."
 msgid "Available partitions:"
 msgstr "Tilgængelige partitioner:"
 
-#: interfaces/memory.glade.h:23 interfaces/memory.glade.h:33
-msgid "Size:"
-msgstr "Størrelse:"
-
-#: interfaces/memory.glade.h:24
-msgid "Swap Partition"
-msgstr "Swap-partition"
-
-#: interfaces/memory.glade.h:25
-msgid "Swap File"
-msgstr "Swap-fil"
-
-#: interfaces/memory.glade.h:26
-msgid "Megabytes"
-msgstr "Megabyte"
-
-#: interfaces/memory.glade.h:27 interfaces/memory.glade.h:31
-msgid "Enable this swap space"
-msgstr "Aktiver dette swap-område"
-
-#: interfaces/memory.glade.h:28
-msgid "Use non-default priority:"
-msgstr "Brug ikke-standard prioritet:"
-
-#: interfaces/memory.glade.h:29
-msgid "Browse..."
-msgstr "Bladr igennem..."
-
-#: interfaces/memory.glade.h:30
-msgid "Swap device"
-msgstr "Swap-enhed"
-
-#: interfaces/memory.glade.h:32
-msgid "Use non-default priority"
-msgstr "Brug ikke-standard prioritet"
-
-#: interfaces/memory.glade.h:34
-msgid "Mb"
-msgstr "Mb"
-
-#: interfaces/memory.glade.h:35
+#: interfaces/memory.glade.h:22
 msgid "Select  Swap File"
-msgstr "Vælg swap-fil"
+msgstr "Vælg svop-fil"
 
-#: interfaces/memory.glade.h:36
+#: interfaces/memory.glade.h:23
 msgid "OK"
 msgstr "Ok"
 
-#: interfaces/memory.glade.h:37
+#: interfaces/memory.glade.h:24
 msgid "Cancel"
 msgstr "Afbryd"
 
-#: src/common/tool.c:620
-msgid " << Basic "
-msgstr "<< Basic "
+#: interfaces/memory.glade.h:25
+msgid "Swap Settings"
+msgstr "Indstillinger for svop"
 
-#: src/common/tool.c:715
+#: interfaces/memory.glade.h:29 interfaces/memory.glade.h:40
+msgid "Size:"
+msgstr "Størrelse:"
+
+#: interfaces/memory.glade.h:30 interfaces/memory.glade.h:39
+msgid "Priority:"
+msgstr "Prioritet:"
+
+#: interfaces/memory.glade.h:31 interfaces/memory.glade.h:41
+msgid "MB"
+msgstr "Mb"
+
+#: interfaces/memory.glade.h:32
+msgid "New Swap Device"
+msgstr "Ny svop-enhed"
+
+#: interfaces/memory.glade.h:33
+msgid "Swap type:"
+msgstr "Svop-type
+
+#: interfaces/memory.glade.h:34
+msgid "partition"
+msgstr "partition"
+
+#: interfaces/memory.glade.h:35
+msgid "file"
+msgstr "Fil"
+
+#: interfaces/memory.glade.h:42
+msgid "Browse..."
+msgstr "Bladr igennem..."
+
+#: src/common/tool.c:624
+msgid " Full Options >> "
+msgstr " Fulde valgmulighader >> "
+
+#: src/common/tool.c:627
+msgid " << Few Options "
+msgstr " << Få valgmuligheder "
+
+#: src/common/tool.c:734
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -806,12 +881,12 @@ msgstr ""
 "Du vil ikke kunne udføre nogen ændringer. Fortsæt alligevel?"
 
 #. No name, no swap
-#: src/memory/callbacks.c:569
+#: src/memory/callbacks.c:536
 msgid "You have to specify path to new swap location!"
 msgstr "Du er nødt til at angive sti til nyt swap-sted!"
 
 #. It's already in there, can't add
-#: src/memory/callbacks.c:584
+#: src/memory/callbacks.c:551
 msgid "It's already used as swap space!"
 msgstr "Det er allerede brugt som swap-sted!"
 
@@ -828,7 +903,7 @@ msgstr ""
 #: src/nameresolution/callbacks.c:210
 msgid ""
 "The domain may only contain letters, numbers and dots (.),\n"
-"wich may work as sub-domain separators."
+"which may work as sub-domain separators."
 msgstr ""
 "Domænet kan kun indeholde bogstaver, cifre og punktummer (.),\n"
 "som kan bruges som adskillelse mellem underdæmæner."
@@ -852,7 +927,7 @@ msgid "Settings for Alias %s"
 msgstr "Indstillinger for alias %s "
 
 #. Changes have been made.
-#: src/nameresolution/callbacks.c:651 src/users/callbacks.c:691
+#: src/nameresolution/callbacks.c:651 src/users/callbacks.c:708
 msgid ""
 "There are changes which haven't been applyed.\n"
 "Apply now?"
@@ -863,51 +938,51 @@ msgstr ""
 #: src/nameresolution/callbacks.c:756
 msgid ""
 "The alias entry may only contain letters, numbers and dots (.),\n"
-"wich may work as sub-domain separators."
+"which may work as sub-domain separators."
 msgstr ""
 "Alisa-indgangen kan kun indeholde bogstaver, cifre og punktummer (.),\n"
 "som kan bruges som adskillelse mellem underdæmæner."
 
-#: src/users/callbacks.c:164
+#: src/users/callbacks.c:166
 #, c-format
 msgid "Settings for User %s"
 msgstr "Indstillinger for bruger %s"
 
-#: src/users/callbacks.c:188
+#: src/users/callbacks.c:190
 #, c-format
 msgid "Password for User %s"
 msgstr "Adgangskode for bruger %s"
 
-#: src/users/callbacks.c:252
+#: src/users/callbacks.c:254
 msgid "The root user must not be deleted."
 msgstr "Root-brugeren må ikke slettes."
 
-#: src/users/callbacks.c:259
+#: src/users/callbacks.c:261
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Er du sikker på at du vil slette bruger %s?"
 
-#: src/users/callbacks.c:311
+#: src/users/callbacks.c:313
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Indstillinger for gruppe %s"
 
-#: src/users/callbacks.c:331
+#: src/users/callbacks.c:333
 msgid "Create New Group"
 msgstr "Opret en ny gruppe"
 
-#: src/users/callbacks.c:360
+#: src/users/callbacks.c:362
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Er du sikker på at du vil slette gruppe %s?"
 
-#: src/users/callbacks.c:482
+#: src/users/callbacks.c:492
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "Adgangskode sat ti'%s'."
 
 #. Bad confirmation
-#: src/users/callbacks.c:520
+#: src/users/callbacks.c:530
 msgid ""
 "The password and its confirmation\n"
 "must match."
@@ -916,7 +991,7 @@ msgstr ""
 "skal være ens."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:526
+#: src/users/callbacks.c:536
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -967,14 +1042,47 @@ msgstr "Sæt venligst et gyldigt gruppenavn, og brug kun små bogstaver."
 msgid "Group name is empty."
 msgstr "Gruppenavn er tomt."
 
+#~ msgid " Advanced >> "
+#~ msgstr " Avanceret >> "
+
+#~ msgid "Basic"
+#~ msgstr "Basic"
+
+#~ msgid "Advanced"
+#~ msgstr "Avanceret"
+
+#~ msgid "New password:"
+#~ msgstr "Ny adgangskode:"
+
+#~ msgid "Member Users"
+#~ msgstr "Medlemmer"
+
+#~ msgid "Swap Partition"
+#~ msgstr "Swap-partition"
+
+#~ msgid "Swap File"
+#~ msgstr "Swap-fil"
+
+#~ msgid "Megabytes"
+#~ msgstr "Megabyte"
+
+#~ msgid "Enable this swap space"
+#~ msgstr "Aktiver dette swap-område"
+
+#~ msgid "Use non-default priority:"
+#~ msgstr "Brug ikke-standard prioritet:"
+
+#~ msgid "Use non-default priority"
+#~ msgstr "Brug ikke-standard prioritet"
+
+#~ msgid "Mb"
+#~ msgstr "Mb"
+
+#~ msgid " << Basic "
+#~ msgstr "<< Basic "
+
 #~ msgid "label48"
 #~ msgstr "etiket48"
-
-#~ msgid "Basic settings"
-#~ msgstr "Grundlæggende indstillinger"
-
-#~ msgid "Advanced settings"
-#~ msgstr "Avancerede indstillinger"
 
 #~ msgid ""
 #~ "Automatic (detect when mounting)\n"
