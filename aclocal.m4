@@ -1094,6 +1094,10 @@ AC_SUBST(LIBGLADE_LIBS)
 # Macro to add for using GNU gettext.
 # Ulrich Drepper <drepper@cygnus.com>, 1995.
 #
+# Modified to never use included libintl. 
+# Owen Taylor <otaylor@redhat.com>, 12/15/1998
+#
+#
 # This file can be copied and used freely without restrictions.  It can
 # be used in projects which are not available under the GNU Public License
 # but which still want to provide support for the GNU gettext functionality.
@@ -1101,7 +1105,7 @@ AC_SUBST(LIBGLADE_LIBS)
 
 # serial 5
 
-AC_DEFUN(AM_WITH_NLS,
+AC_DEFUN(AM_GNOME_WITH_NLS,
   [AC_MSG_CHECKING([whether NLS is requested])
     dnl Default is enabled NLS
     AC_ARG_ENABLE(nls,
@@ -1115,12 +1119,13 @@ AC_DEFUN(AM_WITH_NLS,
     dnl If we use NLS figure out what method
     if test "$USE_NLS" = "yes"; then
       AC_DEFINE(ENABLE_NLS)
-      AC_MSG_CHECKING([whether included gettext is requested])
-      AC_ARG_WITH(included-gettext,
-        [  --with-included-gettext use the GNU gettext library included here],
-        nls_cv_force_use_gnu_gettext=$withval,
-        nls_cv_force_use_gnu_gettext=no)
-      AC_MSG_RESULT($nls_cv_force_use_gnu_gettext)
+#      AC_MSG_CHECKING([whether included gettext is requested])
+#      AC_ARG_WITH(included-gettext,
+#        [  --with-included-gettext use the GNU gettext library included here],
+#        nls_cv_force_use_gnu_gettext=$withval,
+#        nls_cv_force_use_gnu_gettext=no)
+#      AC_MSG_RESULT($nls_cv_force_use_gnu_gettext)
+      nls_cv_force_use_gnu_gettext="no"
 
       nls_cv_use_gnu_gettext="$nls_cv_force_use_gnu_gettext"
       if test "$nls_cv_force_use_gnu_gettext" != "yes"; then
@@ -1166,6 +1171,13 @@ AC_DEFUN(AM_WITH_NLS,
 		INSTOBJEXT=.mo
 	      fi
 	    fi
+
+	    # Added by Martin Baulig 12/15/98 for libc5 systems
+	    if test "$gt_cv_func_gettext_libc" != "yes" \
+	       && test "$gt_cv_func_gettext_libintl" = "yes"; then
+	       INTLLIBS=-lintl
+	       LIBS=`echo $LIBS | sed -e 's/-lintl//'`
+	    fi
 	])
 
         if test "$CATOBJEXT" = "NONE"; then
@@ -1182,24 +1194,25 @@ AC_DEFUN(AM_WITH_NLS,
 	      [AC_DEFINE(HAVE_CATGETS)
 	       INTLOBJS="\$(CATOBJS)"
 	       AC_PATH_PROG(GENCAT, gencat, no)dnl
-	       if test "$GENCAT" != "no"; then
-		 AC_PATH_PROG(GMSGFMT, gmsgfmt, no)
-		 if test "$GMSGFMT" = "no"; then
-		   AM_PATH_PROG_WITH_TEST(GMSGFMT, msgfmt,
-		    [test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], no)
-		 fi
-		 AM_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
-		   [test -z "`$ac_dir/$ac_word -h 2>&1 | grep '(HELP)'`"], :)
-		 USE_INCLUDED_LIBINTL=yes
-		 CATOBJEXT=.cat
-		 INSTOBJEXT=.cat
-		 DATADIRNAME=lib
-		 INTLDEPS='$(top_builddir)/intl/libintl.a'
-		 INTLLIBS=$INTLDEPS
-		 LIBS=`echo $LIBS | sed -e 's/-lintl//'`
-		 nls_cv_header_intl=intl/libintl.h
-		 nls_cv_header_libgt=intl/libgettext.h
-	       fi])
+#	       if test "$GENCAT" != "no"; then
+#		 AC_PATH_PROG(GMSGFMT, gmsgfmt, no)
+#		 if test "$GMSGFMT" = "no"; then
+#		   AM_PATH_PROG_WITH_TEST(GMSGFMT, msgfmt,
+#		    [test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], no)
+#		 fi
+#		 AM_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
+#		   [test -z "`$ac_dir/$ac_word -h 2>&1 | grep '(HELP)'`"], :)
+#		 USE_INCLUDED_LIBINTL=yes
+#		 CATOBJEXT=.cat
+#		 INSTOBJEXT=.cat
+#		 DATADIRNAME=lib
+#		 INTLDEPS='$(top_builddir)/intl/libintl.a'
+#		 INTLLIBS=$INTLDEPS
+#		 LIBS=`echo $LIBS | sed -e 's/-lintl//'`
+#		 nls_cv_header_intl=intl/libintl.h
+#		 nls_cv_header_libgt=intl/libgettext.h
+#              fi
+            ])
 	  fi
         fi
 
@@ -1210,24 +1223,28 @@ AC_DEFUN(AM_WITH_NLS,
         fi
       fi
 
-      if test "$nls_cv_use_gnu_gettext" = "yes"; then
-        dnl Mark actions used to generate GNU NLS library.
-        INTLOBJS="\$(GETTOBJS)"
-        AM_PATH_PROG_WITH_TEST(MSGFMT, msgfmt,
-	  [test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], msgfmt)
-        AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
-        AM_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
-	  [test -z "`$ac_dir/$ac_word -h 2>&1 | grep '(HELP)'`"], :)
-        AC_SUBST(MSGFMT)
-	USE_INCLUDED_LIBINTL=yes
-        CATOBJEXT=.gmo
-        INSTOBJEXT=.mo
-        DATADIRNAME=share
-	INTLDEPS='$(top_builddir)/intl/libintl.a'
-	INTLLIBS=$INTLDEPS
-	LIBS=`echo $LIBS | sed -e 's/-lintl//'`
-        nls_cv_header_intl=intl/libintl.h
-        nls_cv_header_libgt=intl/libgettext.h
+      if test "$nls_cv_use_gnu_gettext" != "yes"; then
+        AC_DEFINE(ENABLE_NLS)
+      else
+         # Unset this variable since we use the non-zero value as a flag.
+         CATOBJEXT=
+#        dnl Mark actions used to generate GNU NLS library.
+#        INTLOBJS="\$(GETTOBJS)"
+#        AM_PATH_PROG_WITH_TEST(MSGFMT, msgfmt,
+#	  [test -z "`$ac_dir/$ac_word -h 2>&1 | grep 'dv '`"], msgfmt)
+#        AC_PATH_PROG(GMSGFMT, gmsgfmt, $MSGFMT)
+#        AM_PATH_PROG_WITH_TEST(XGETTEXT, xgettext,
+#	  [test -z "`$ac_dir/$ac_word -h 2>&1 | grep '(HELP)'`"], :)
+#        AC_SUBST(MSGFMT)
+#	USE_INCLUDED_LIBINTL=yes
+#        CATOBJEXT=.gmo
+#        INSTOBJEXT=.mo
+#        DATADIRNAME=share
+#	INTLDEPS='$(top_builddir)/intl/libintl.a'
+#	INTLLIBS=$INTLDEPS
+#	LIBS=`echo $LIBS | sed -e 's/-lintl//'`
+#        nls_cv_header_intl=intl/libintl.h
+#        nls_cv_header_libgt=intl/libgettext.h
       fi
 
       dnl Test whether we really found GNU xgettext.
@@ -1257,12 +1274,12 @@ AC_DEFUN(AM_WITH_NLS,
       esac])
 
 
-    # If this is used in GNU gettext we have to set USE_NLS to `yes'
-    # because some of the sources are only built for this goal.
-    if test "$PACKAGE" = gettext; then
-      USE_NLS=yes
-      USE_INCLUDED_LIBINTL=yes
-    fi
+#    # If this is used in GNU gettext we have to set USE_NLS to `yes'
+#    # because some of the sources are only built for this goal.
+#    if test "$PACKAGE" = gettext; then
+#      USE_NLS=yes
+#      USE_INCLUDED_LIBINTL=yes
+#    fi
 
     dnl These rules are solely for the distribution goal.  While doing this
     dnl we only have to keep exactly one list of the available catalogs
@@ -1286,7 +1303,7 @@ AC_DEFUN(AM_WITH_NLS,
     AC_SUBST(POSUB)
   ])
 
-AC_DEFUN(AM_GNU_GETTEXT,
+AC_DEFUN(AM_GNOME_GETTEXT,
   [AC_REQUIRE([AC_PROG_MAKE_SET])dnl
    AC_REQUIRE([AC_PROG_CC])dnl
    AC_REQUIRE([AC_PROG_RANLIB])dnl
@@ -1312,7 +1329,7 @@ strdup __argz_count __argz_stringify __argz_next])
    fi
 
    AM_LC_MESSAGES
-   AM_WITH_NLS
+   AM_GNOME_WITH_NLS
 
    if test "x$CATOBJEXT" != "x"; then
      if test "x$ALL_LINGUAS" = "x"; then
@@ -1320,9 +1337,12 @@ strdup __argz_count __argz_stringify __argz_next])
      else
        AC_MSG_CHECKING(for catalogs to be installed)
        NEW_LINGUAS=
-       for lang in ${LINGUAS=$ALL_LINGUAS}; do
+       if test "x$LINGUAS" = "x"; then
+           LINGUAS=$ALL_LINGUAS
+       fi
+       for lang in $LINGUAS; do
          case "$ALL_LINGUAS" in
-          *$lang*) NEW_LINGUAS="$NEW_LINGUAS $lang" ;;
+          *\ $lang\ *|$lang\ *|*\ $lang) NEW_LINGUAS="$NEW_LINGUAS $lang" ;;
          esac
        done
        LINGUAS=$NEW_LINGUAS
@@ -1406,6 +1426,7 @@ strdup __argz_count __argz_stringify __argz_next])
    sed -e "/^#/d" -e "/^\$/d" -e "s,.*,	$posrcprefix& \\\\," -e "\$s/\(.*\) \\\\/\1/" \
 	< $srcdir/po/POTFILES.in > po/POTFILES
   ])
+
 
 # Search path for a program which passes the given test.
 # Ulrich Drepper <drepper@cygnus.com>, 1996.
