@@ -556,6 +556,8 @@ on_connection_list_clicked (GtkWidget *w, gpointer data)
 	gint ncol;
 	GdkPixbuf *stat_icon;
 	GstConnection *cxn;
+	GtkWidget *dialog;
+	gchar *txt;
 
 	cxn = connection_list_get_active ();
 	column_list = gtk_tree_view_get_columns (GTK_TREE_VIEW (w));
@@ -570,13 +572,27 @@ on_connection_list_clicked (GtkWidget *w, gpointer data)
 		
 		if (!cxn->enabled)
 		{
-			if (cxn->type != GST_CONNECTION_LO)
-				on_connection_activate_clicked (w, NULL);
+			if (cxn->type != GST_CONNECTION_LO) {
+				txt = g_strdup_printf (_("Do you want to enable interface %s?"), cxn->dev);
+				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
+				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+					on_connection_activate_clicked (w, NULL);
+
+				gtk_widget_destroy (dialog);
+				g_free (txt);
+			}
 		}
 		else
 		{
-			if (cxn->type != GST_CONNECTION_LO)
-				on_connection_deactivate_clicked (w, NULL);
+			if (cxn->type != GST_CONNECTION_LO) {
+				txt = g_strdup_printf (_("Do you want to disable interface %s?"), cxn->dev);
+				dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_MODAL, GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, txt);
+				if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_YES)
+					on_connection_deactivate_clicked (w, NULL);
+
+				gtk_widget_destroy (dialog);
+				g_free (txt);
+			}
 		}
 	}
 	g_list_free (column_list);
