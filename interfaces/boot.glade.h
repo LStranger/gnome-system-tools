@@ -25,21 +25,23 @@ gchar *s = N_("_Root:");
 gchar *s = N_("_Append:");
 gchar *s = N_("Other");
 gchar *s = N_("_Device:");
-gchar *s = N_("Boot Image Wizard");
+gchar *s = N_("Boot Image Druid");
 gchar *s = N_("Boot Image Druid");
 gchar *s = N_("This druid is designed to help you quickly \n"
               "and easily add new boot images to your system.\n"
               "\n"
               "To begin, click \"Next\". ");
 gchar *s = N_("Image Identity (step 1 of 2)");
-gchar *s = N_("Please enter a username for the new user in the space below. You may also enter a comment about the user, such as his or her real name. ");
+gchar *s = N_("Enter a name for the boot image, and specify what kind of operating system it is.");
 gchar *s = N_("Click \"Next\" to continue");
 gchar *s = N_("Other  (step 2 of 2)");
-gchar *s = N_("Please enter a username for the new user in the space below. You may also enter a comment about the user, such as his or her real name. ");
+gchar *s = N_("Specify the partition the the operating system is installed on.");
 gchar *s = N_("Click \"Next\" to continue");
 gchar *s = N_("Image (step 2 of 2)");
-gchar *s = N_("Please enter a password for the new user. ");
+gchar *s = N_("Choose a kernel image to boot, and a partition to mount as the root partition.\n"
+              "Optionally, you may also enter append parameters which are passed to the\n"
+              "kernel at boot time.");
 gchar *s = N_("Click \"Next\" to continue");
 gchar *s = N_("Finished");
-gchar *s = N_("Congratulations, the new user has been created.\n"
+gchar *s = N_("The new boot image has been added.\n"
               "Please click \"Finish\" to save your changes. ");
