@@ -37,6 +37,8 @@ void      on_main_dialog_update_complexity (GstDialog *main_dialog, gpointer dat
 void      callbacks_actions_set_sensitive      (gboolean state);
 gboolean  callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, gpointer data);
 
+void on_use_password_clicked (GtkWidget *use_password, gpointer gdata);
+
 void on_popup_add_activate (gpointer, guint, GtkWidget*);
 void on_popup_settings_activate (gpointer, guint, GtkWidget*);
 void on_popup_delete_activate (gpointer, guint, GtkWidget*);

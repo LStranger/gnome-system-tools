@@ -22,66 +22,18 @@
 
 #include "boot-image-editor.h"
 
-/*static void boot_image_editor_class_init (BootImageEditorClass *class);
-static void boot_image_editor_finalize   (GObject *obj);
-
-static GtkDialogClass *parent_class;
-
-GtkType
-boot_image_editor_get_type (void)
-{
-	static GtkType type = 0;
-
-	if (!type) {
-		static const GTypeInfo type_info = {
-			sizeof (BootImageEditorClass),
-			NULL,  base_init 
-			NULL,  base finalize 
-			(GClassInitFunc) boot_image_editor_class_init,
-			NULL,  class_finalize 
-			NULL,  class_data 
-			sizeof (BootImageEditor),
-			0,  n_preallocs 
-			(GInstanceInitFunc) NULL
-		};
-		
-		type = g_type_register_static (GTK_TYPE_DIALOG, "BootImageEditor", &type_info, 0);
-	}
-
-	return type;
-}
-
-static void
-boot_image_editor_class_init (BootImageEditorClass *class)
-{
-	GObjectClass *object_class = G_OBJECT_CLASS (class);
-
-	parent_class = gtk_type_class (gtk_dialog_get_type ());
-
-	object_class->finalize = boot_image_editor_finalize;
-}
-
-static void
-boot_image_editor_finalize (GObject *obj)
-{
-	BootImageEditor *editor = (BootImageEditor *) obj;
-
-	boot_settings_gui_destroy (editor->gui);
-
-	G_OBJECT_CLASS (parent_class)->finalize (obj);
-}*/
-
 static void
 editor_response (GtkDialog *dialog, gint response, gpointer data)
 {
 	BootImageEditor *editor = data;
 
-	switch (response) {
+	switch (response)
+	{
 	case GTK_RESPONSE_ACCEPT:
 		if (boot_settings_gui_save (editor->gui, TRUE))
 			boot_image_save (editor->gui->image);
-		else
-			return;
+		/*else
+		  return;*/
 		break;
 	default:
 		break;

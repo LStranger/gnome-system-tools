@@ -330,6 +330,21 @@ boot_value_initrd (xmlNodePtr node)
 	return buf;
 }
 
+gchar *
+boot_value_password (xmlNodePtr node)
+{
+	gchar *buf;
+	
+	g_return_val_if_fail (node != NULL, NULL);
+	
+	buf = gst_xml_get_child_content (node, "password");
+	
+	if (!buf)
+		return NULL;
+	
+	return buf;
+}
+
 void
 table_populate (xmlNodePtr root)
 {
@@ -337,8 +352,9 @@ table_populate (xmlNodePtr root)
 	xmlNodePtr node;
 	GtkTreeIter iter;
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (boot_table));
-	
-	for (node = gst_xml_element_find_first (root, "entry"); node != NULL; node = gst_xml_element_find_next (node, "entry")) 
+
+	for (node = gst_xml_element_find_first (root, "entry");
+	     node != NULL; node = gst_xml_element_find_next (node, "entry")) 
 	{
 		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
 		gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
@@ -366,8 +382,9 @@ boot_table_clear (void)
 void
 boot_table_update (void)
 {
-	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	xmlNodePtr root;
 
+	root = gst_xml_doc_get_root (tool->config);
 	boot_table_clear ();
 	callbacks_actions_set_sensitive (FALSE);
 	table_populate (root);
@@ -510,6 +527,25 @@ boot_value_set_initrd (xmlNodePtr node, const gchar *val)
 	{
 		if (!n0)
 			n0 = gst_xml_element_add (node, "initrd");
+		gst_xml_element_set_content (n0, val);
+	}
+	else
+		if (n0)
+			gst_xml_element_destroy (n0);
+}
+
+void
+boot_value_set_password (xmlNodePtr node, const gchar *val)
+{
+	xmlNodePtr n0;
+	
+	g_return_if_fail (node != NULL);
+	
+	n0 = gst_xml_element_find_first (node, "password");
+	if (val && strlen (val) > 0)
+	{
+		if (!n0)
+			n0 = gst_xml_element_add (node, "password");
 		gst_xml_element_set_content (n0, val);
 	}
 	else

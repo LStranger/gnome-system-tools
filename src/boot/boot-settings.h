@@ -26,6 +26,13 @@ typedef struct {
 	GtkEntry  *append;
 	GtkButton *append_browse;
 
+	/* Security Frame */
+	GtkCheckButton *use_password;
+	GtkLabel *pass_label;
+	GtkLabel *confirm_label;
+	GtkEntry *password;
+	GtkEntry *password_confirm;
+	
 	/* Other frame */
 	GtkWidget *other_frame;
 	GtkCombo  *device;

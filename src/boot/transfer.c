@@ -90,16 +90,19 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 	gint value;
 
 	buf = gst_xml_get_child_content (root, "timeout");
-	if (buf) {
+	if (buf)
+	{
 		value = atoi (buf);
 		g_free (buf);
-	} else
+	}
+	else
 		value = 50;
 	
 	/* Set value in seconds. */
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog,
 									   "boot_timeout")),
 				   (gfloat) value / 10);
+
 }
 
 static void

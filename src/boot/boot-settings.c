@@ -133,6 +133,13 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->other_frame = glade_xml_get_widget (gui->xml, "settings_other_frame");
 	gui->device = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_device"));
 
+	/* Security frame */
+	gui->use_password = GTK_CHECK_BUTTON (glade_xml_get_widget (gui->xml, "settings_use_password"));
+	gui->pass_label = GTK_LABEL (glade_xml_get_widget (gui->xml, "settings_pass_label"));
+	gui->confirm_label = GTK_LABEL (glade_xml_get_widget (gui->xml, "settings_confirm_label"));
+	gui->password = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_password"));
+	gui->password_confirm = GTK_ENTRY (glade_xml_get_widget (gui->xml, "settings_password_confirm"));
+
 	/* Connect signals */
 	g_signal_connect (G_OBJECT (gui->name), "activate",
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->type->entry);
@@ -146,6 +153,8 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 			  G_CALLBACK (gui_grab_focus), (gpointer) gui->append);
 	g_signal_connect (G_OBJECT (gui->append_browse), "clicked",
 	                  G_CALLBACK (on_boot_append_browse_clicked), (gpointer) gui);
+	g_signal_connect (G_OBJECT (gui->use_password), "clicked",
+			  G_CALLBACK (on_use_password_clicked), (gpointer) gui);
 
 	return gui;
 }
@@ -251,6 +260,31 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 
 	gst_ui_entry_set_text (gui->device->entry, image->image);
 
+	if (image->password != NULL)
+	{
+		gst_ui_entry_set_text (gui->password, image->password);
+		gst_ui_entry_set_text (gui->password_confirm, image->password);
+	}
+	
+	if ((image->password == NULL) || (strlen (image->password) <= 0))
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->use_password),
+					      FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->password), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->password_confirm), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->pass_label), FALSE);
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->confirm_label), FALSE);
+	}
+	else
+	{
+		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gui->use_password),
+					      TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->password), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->password_confirm), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->pass_label), TRUE);
+		gtk_widget_set_sensitive (GTK_WIDGET (gui->confirm_label), TRUE);
+	}
+	
 	if (!image->new) {
 		if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_ADVANCED)
 			setup_advanced (gui, top);
@@ -261,17 +295,23 @@ boot_settings_gui_setup (BootSettingsGui *gui, GtkWidget *top)
 
 gboolean
 boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
-{	
+{
+	gchar *msg_error;
 	BootImage *image = gui->image;
 
-	if (image->label)  g_free (image->label);
-	if (image->image)  g_free (image->image);
-	if (image->root)   g_free (image->root);
-	if (image->initrd) g_free (image->initrd);
-	if (image->append) g_free (image->append);
+	if (image->label)    g_free (image->label);
+	if (image->image)    g_free (image->image);
+	if (image->root)     g_free (image->root);
+	if (image->initrd)   g_free (image->initrd);
+	if (image->append)   g_free (image->append);
+	if (image->password) g_free (image->password);
 
 	image->type = label_to_type (gtk_entry_get_text (GTK_ENTRY (gui->type->entry)));
-	image->label = g_strdup (gtk_entry_get_text (gui->name));	
+	image->label = g_strdup (gtk_entry_get_text (gui->name));
+	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gui->use_password)))
+		image->password = g_strdup (gtk_entry_get_text (gui->password));
+	else
+		image->password = g_strdup ("");
 
 	if (image->type == TYPE_LINUX)
 	{
@@ -288,14 +328,25 @@ boot_settings_gui_save (BootSettingsGui *gui, gboolean check)
 		image->initrd = g_strdup ("");
 	}
 
-	if (check) {
-		gchar *error = boot_image_check (image);
-		if (error) {
-			boot_settings_gui_error (GTK_WINDOW (gui->top), error);
+	if (check)
+	{
+		msg_error = boot_image_check (image);
+
+		if (msg_error)
+		{
+			boot_settings_gui_error (GTK_WINDOW (gui->top), msg_error);
+			return FALSE;
+		}
+
+		if (strcmp (gtk_entry_get_text (gui->password),
+			    gtk_entry_get_text (gui->password_confirm)) != 0)
+		{
+			msg_error = g_strdup (_("Password confirmation isn't correct."));
+			boot_settings_gui_error (GTK_WINDOW (gui->top), msg_error);
 			return FALSE;
 		}
 	}
-	
+
 	boot_table_update ();
 	gst_dialog_modify (tool->main_dialog);
 

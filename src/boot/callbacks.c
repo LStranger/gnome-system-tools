@@ -119,6 +119,7 @@ on_boot_settings_clicked (GtkButton *button, gpointer data)
 	BootImageEditor *editor;
 	xmlNodePtr node;
 	gint response;
+	gboolean valid;
 
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
 
@@ -127,23 +128,30 @@ on_boot_settings_clicked (GtkButton *button, gpointer data)
 	}
 
 
-	if (gst_tool_get_access (tool)) {
+	if (gst_tool_get_access (tool))
+	{
 		image = boot_image_get_by_node (node);
 		editor = boot_image_editor_new (image);
 
-		response = gtk_dialog_run (editor->dialog);
-		switch (response)
+		valid = FALSE;
+		while (!valid)
 		{
-		case GTK_RESPONSE_OK:
-			if (boot_settings_gui_save (editor->gui, TRUE))
-				boot_image_save (editor->gui->image);
-			else
-				return;
-			break;
-		default:
-			break;
+			response = gtk_dialog_run (editor->dialog);
+			switch (response)
+			{
+			case GTK_RESPONSE_OK:
+				if (boot_settings_gui_save (editor->gui, TRUE))
+				{
+					boot_image_save (editor->gui->image);
+					valid = TRUE;
+				}
+				
+				break;
+			default:
+				valid = TRUE;
+				break;
+			}
 		}
-
 		boot_table_update ();
 		gtk_widget_destroy (GTK_WIDGET (editor->dialog));
 	}
@@ -299,6 +307,22 @@ on_boot_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpoint
 		return TRUE;
 	}
 	return FALSE;
+}
+
+void
+on_use_password_clicked (GtkWidget *use_password, gpointer gdata)
+{
+	BootSettingsGui *gui;
+	gboolean state;
+	
+	gui = (BootSettingsGui *) gdata;
+	
+	state = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (use_password));
+	
+	gtk_widget_set_sensitive (GTK_WIDGET (gui->password), state);
+	gtk_widget_set_sensitive (GTK_WIDGET (gui->password_confirm), state);
+	gtk_widget_set_sensitive (GTK_WIDGET (gui->pass_label), state);
+	gtk_widget_set_sensitive (GTK_WIDGET (gui->confirm_label), state);
 }
 
 void

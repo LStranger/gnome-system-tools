@@ -57,6 +57,7 @@ typedef struct {
 	gchar *root;
 	gchar *append;
 	gchar *initrd;
+	gchar *password;
 } BootImage;
 
 BootImage        *boot_image_new          (void);

@@ -71,6 +71,7 @@ void             *boot_value_image        (xmlNodePtr node, gboolean bare);
 void             *boot_value_device       (xmlNodePtr node, gboolean bare);
 void             *boot_value_root         (xmlNodePtr node);
 void             *boot_value_initrd       (xmlNodePtr node);
+gchar            *boot_value_password     (xmlNodePtr node);
 
 void              boot_table_update       (void);
 void		  boot_table_clear	  (void);
@@ -83,6 +84,7 @@ void              boot_value_set_root     (xmlNodePtr node, const gchar *val);
 void              boot_value_set_append   (xmlNodePtr node, const gchar *val);
 void              boot_value_set_type     (xmlNodePtr node, GstBootImageType type);
 void              boot_value_set_initrd   (xmlNodePtr node, const gchar *val);
+void              boot_value_set_password (xmlNodePtr node, const gchar *val);
 
 xmlNodePtr        boot_table_add          (void);
 

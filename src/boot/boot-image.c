@@ -102,8 +102,11 @@ boot_image_get_by_node (xmlNodePtr node)
 		image->root = boot_value_root (node);
 		image->append = boot_value_append (node);
 		image->initrd = boot_value_initrd (node);
-	} else
+	}
+	else
 		image->image = boot_value_device (node, TRUE);
+
+	image->password = boot_value_password (node);
 	
 	return image;
 }
@@ -162,6 +165,7 @@ boot_image_save (BootImage *image)
 	boot_value_set_root (node, image->root);
 	boot_value_set_append (node, image->append);
 	boot_value_set_initrd (node, image->initrd);
+	boot_value_set_password (node, image->password);
 }
 
 void
@@ -169,11 +173,12 @@ boot_image_destroy (BootImage *image)
 {
 	if (image)
 	{
-		if (image->label)  g_free (image->label);
-		if (image->image)  g_free (image->image);
-		if (image->root)   g_free (image->root);
-		if (image->append) g_free (image->append);
-		if (image->initrd) g_free (image->initrd);
+		if (image->label)    g_free (image->label);
+		if (image->image)    g_free (image->image);
+		if (image->root)     g_free (image->root);
+		if (image->append)   g_free (image->append);
+		if (image->initrd)   g_free (image->initrd);
+		if (image->password) g_free (image->password);
 	
 		g_free (image);
 	}
@@ -288,8 +293,6 @@ boot_image_valid_label (BootImage *image)
 		error = g_strdup_printf (_("Invalid image name: '%s'"), image->label);
 		return error;
 	}
-
-
 	
 	return error;
 }
@@ -333,7 +336,7 @@ boot_image_valid_initrd (BootImage *image)
 	if (image->initrd == NULL || strlen (image->initrd) == 0)
 		return NULL;
 
-	return boot_image_file_exists (image->initrd);;
+	return boot_image_file_exists (image->initrd);
 }
 
 gchar *
