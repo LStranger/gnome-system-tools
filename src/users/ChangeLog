@@ -1,3 +1,16 @@
+2001-03-15  Hans Petter Jansson <hpj@ximian.com>
+
+	* main.c (policies): Added table describing widget visibility policies.
+	  (set_access_sensitivity): Removed.
+	  (update_complexity): Removed all but one line.
+	  (main): Added call to load policy table, removed call to
+	  set_access_sensitivity ().
+
+	* callbacks.c (user_actions_set_sensitive): Re-implemented using
+	  xst_dialog_widget_set_user_sensisitve ().
+	  (group_actions_set_sensitive): Ditto.
+	  (net_actions_set_sensitive): Ditto.
+
 2001-03-15  Tambet Ingo  <tambet@ximian.com>
 
 	* e-table.c (create_extras): We don't need centering *again* :)

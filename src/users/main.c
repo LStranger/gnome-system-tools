@@ -80,57 +80,37 @@ static XstDialogSignal signals[] = {
 	{ "user_settings_remove",        "clicked",       on_user_settings_remove_clicked },
 	{ NULL }};
 
-static void
-set_access_sensitivity (void)
-{
-	char *access_no[] = {"user_new", "user_chpasswd", "group_new",
-					 "user_settings_basic", "user_settings_advanced",
-					 "group_settings_name_label", "defs_min_uid", "defs_max_uid",
-					 "defs_min_gid", "defs_max_gid", "defs_passwd_max_days",
-					 "defs_passwd_min_days", "defs_passwd_warn",
-					 "defs_passwd_min_len", "defs_mail_dir",
-					 "defs_create_home", "network_user_new", "network_group_new",
-					 NULL};
-	
-	char *access_yes[] = {"users_holder", "groups_holder", NULL};
-	char *unsensitive[] = {"user_delete", "user_settings", "user_chpasswd", "group_delete",
-					   "group_settings", "network_delete", "network_settings", NULL};
-	int i;
+static const XstWidgetPolicy policies[] = {
+	/* Name                     Basic                        Advanced                   Root   User */
+	{ "users_holder",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ "user_new",               XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "user_chpasswd",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "user_settings_basic",    XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "user_settings",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 
-	/* Those widgets that won't be available if you don't have the access. */
-	for (i = 0; access_no[i]; i++)
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, access_no[i]),
-							 xst_tool_get_access(tool));
+	{ "groups_holder",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ "group_new",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "group_delete",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "group_settings",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "group_settings_name_label", XST_WIDGET_MODE_SENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE, TRUE  },
 
-	/* Those widgets that will be available, even if you don't have the access. */
-	for (i = 0; access_yes[i]; i++)
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, access_yes[i]),
-							 TRUE);
+	{ "network_user_new",       XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "network_group_new",      XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "network_delete",         XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
+	{ "network_settings",       XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 
-	/* Those widgets you should never have access to, and will be activated later on. */
-	for (i = 0; unsensitive[i]; i++)
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, unsensitive[i]),
-							 FALSE);
-}
+	{ "defs_container",         XST_WIDGET_MODE_INSENSITIVE, XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+
+	{ "showall",                XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
+	{ NULL }
+};
 
 static void
 update_complexity (void)
 {
-	XstDialogComplexity complexity;
-
-	complexity = tool->main_dialog->complexity;
-	
-	tables_set_state (complexity == XST_DIALOG_ADVANCED);
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "defs_container"),
-				  complexity == XST_DIALOG_ADVANCED);
-
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_container"),
-						 complexity == XST_DIALOG_ADVANCED);
-
-	if (complexity == XST_DIALOG_ADVANCED)
-		gtk_widget_show (xst_dialog_get_widget (tool->main_dialog, "showall"));
-	else
-		gtk_widget_hide (xst_dialog_get_widget (tool->main_dialog, "showall"));
+	tables_set_state (tool->main_dialog->complexity == XST_DIALOG_ADVANCED);
 }
 
 static void
@@ -264,10 +244,9 @@ main (int argc, char *argv[])
 	connect_signals ();
 
 	xst_dialog_enable_complexity (tool->main_dialog);
-
-	set_access_sensitivity ();
+	xst_dialog_set_widget_policies (tool->main_dialog, policies);
 
 	xst_tool_main (tool);
-	
+
 	return 0;
 }

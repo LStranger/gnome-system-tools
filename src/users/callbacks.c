@@ -624,44 +624,27 @@ actions_set_sensitive (gboolean state)
 void
 user_actions_set_sensitive (gboolean state)
 {
-	if (xst_tool_get_access (tool))
-	{
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "user_new"), TRUE);
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "user_delete"), state);
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "user_chpasswd"), state);
-	}
-
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "user_settings"), state);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_new",      TRUE);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_delete",   state);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_chpasswd", state);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "user_settings", state);
 }
 
 void
 group_actions_set_sensitive (gboolean state)
 {
-	if (xst_tool_get_access (tool))
-	{
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "group_new"), TRUE);
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "group_delete"), state);
-	}
-
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "group_settings"), state);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_new",      TRUE);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_delete",   state);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "group_settings", state);
 }
 
 void
 net_actions_set_sensitive (gboolean state)
 {
-	if (xst_tool_get_access (tool))
-	{
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_group_new"),
-							 TRUE);
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_user_new"),
-							 TRUE);
-		
-		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_delete"),
-							 state);
-	}
-
-	gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "network_settings"),
-						 state);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_group_new", TRUE);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_user_new",  TRUE);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_delete",    state);
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "network_settings",  state);
 }
 
 void
