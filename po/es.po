@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ximian-setup-tools 0.5\n"
-"POT-Creation-Date: 2001-09-26 00:49+0200\n"
+"POT-Creation-Date: 2001-09-26 21:15+0200\n"
 "PO-Revision-Date: 2001-06-21 01:14+0200\n"
 "Last-Translator: Héctor García Álvarez <hector@scouts-es.org>\n"
 "Language-Team: Spanish\n"
@@ -51,7 +51,7 @@ msgstr ""
 "operativo es."
 
 #: interfaces/boot.glade.in.h:9 interfaces/internetsharing.glade.in.h:30
-#: interfaces/network.glade.in.h:36 interfaces/users.glade.in.h:31
+#: interfaces/network.glade.in.h:37 interfaces/users.glade.in.h:31
 msgid "Finished"
 msgstr "Terminado"
 
@@ -121,7 +121,7 @@ msgstr ""
 "sistemas operativos instalados que se podrán\n"
 "elegir al arrancar."
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:91
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:92
 #: interfaces/shares.glade.in.h:58
 msgid "_Add..."
 msgstr "_Añadir..."
@@ -130,7 +130,7 @@ msgstr "_Añadir..."
 msgid "_Append:"
 msgstr "_Añadir:"
 
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:96
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:97
 #: interfaces/shares.glade.in.h:61 interfaces/users.glade.in.h:90
 msgid "_Delete"
 msgstr "_Borrar"
@@ -168,7 +168,7 @@ msgstr "_segundos antes de cargar el núcleo o SO predeterminado"
 msgid "Complexity"
 msgstr "Complejidad"
 
-#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:55
+#: interfaces/common.glade.in.h:2 interfaces/network.glade.in.h:56
 #: interfaces/shares.glade.in.h:44
 msgid "Password:"
 msgstr "Contraseña:"
@@ -360,7 +360,7 @@ msgstr "<desconocido>"
 
 #: interfaces/display.glade.in.h:2
 msgid "1024x768"
-msgstr ""
+msgstr "1024x768"
 
 #: interfaces/display.glade.in.h:3
 msgid "1280x1024"
@@ -404,7 +404,7 @@ msgstr "Información del monitor"
 
 #: interfaces/display.glade.in.h:13
 msgid "Narrower"
-msgstr ""
+msgstr "Más estrecho"
 
 #: interfaces/display.glade.in.h:14
 msgid "Probe again"
@@ -432,7 +432,7 @@ msgstr "Derecha"
 
 #: interfaces/display.glade.in.h:20
 msgid "Shift my display:"
-msgstr ""
+msgstr "Cambiar mi patalla:"
 
 #: interfaces/display.glade.in.h:21
 msgid "Shorter"
@@ -440,7 +440,7 @@ msgstr "Más corto"
 
 #: interfaces/display.glade.in.h:22
 msgid "Stretch my display:"
-msgstr ""
+msgstr "Estirar mi pantalla:"
 
 #: interfaces/display.glade.in.h:23
 msgid "Taller"
@@ -538,7 +538,7 @@ msgstr "Memoria de intercambio:"
 msgid "Swap type:"
 msgstr "Tipo de memoria de intercambio:"
 
-#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:90
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.in.h:91
 #: interfaces/time.glade.in.h:17
 msgid "_Add"
 msgstr "_Añadir"
@@ -765,9 +765,9 @@ msgstr "Permite el control de activación para todos los usuarios"
 
 #: interfaces/network.glade.in.h:20
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1552
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1577
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -792,7 +792,7 @@ msgid "Create a new Internet Connection "
 msgstr "Crea una nueva conexión a internet "
 
 #: interfaces/internetsharing.glade.in.h:24 interfaces/network.glade.in.h:27
-#: src/network/connection.c:1551
+#: src/network/connection.c:1576
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -814,13 +814,17 @@ msgstr "D_esactivar"
 
 #: interfaces/network.glade.in.h:32
 msgid "Default Gateway Device:"
-msgstr ""
+msgstr "Dispositivo gateway por defecto:"
 
 #: interfaces/network.glade.in.h:33
 msgid "Description"
 msgstr "Descripción"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:36
+msgid "Domain / _Workgroup:"
+msgstr "Dominio / _Grupo de trabajo:"
+
+#: interfaces/network.glade.in.h:38
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
@@ -828,59 +832,59 @@ msgstr ""
 "Para empezar, introduzca el número de teléfono que emplea para conectarse a "
 "internet. Este número se lo facilitará su ISP. "
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:39
 msgid "General"
 msgstr "General"
 
-#: interfaces/network.glade.in.h:39 src/network/main.c:133
+#: interfaces/network.glade.in.h:40 src/network/main.c:133
 msgid "Hosts"
 msgstr "Máquinas"
 
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:41
 msgid "How other computers are accessed."
 msgstr "Como se accede a otros ordenadores."
 
-#: interfaces/network.glade.in.h:41
-msgid "How the IP address for this connection is determined"
+#: interfaces/network.glade.in.h:42
+msgid "How the IP address for this connection is determined."
 msgstr "Como se determina la dirección IP para esta conexión"
 
-#: interfaces/network.glade.in.h:42
-msgid "How the IP addresses for this connection are determined"
+#: interfaces/network.glade.in.h:43
+msgid "How the IP addresses for this connection are determined."
 msgstr "Como se determinan las direcciones IP para esta conexión"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:44
 msgid "How the names of other computers are found."
 msgstr "Como se encuentran los nombres de los otros ordenadores."
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:45
 msgid "How this computer is identified."
 msgstr "Como se identifica este ordenador."
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:46
 msgid "How to dial up to the internet."
 msgstr "Como llamar a internet."
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:47
 msgid "IP Address"
 msgstr "Dirección IP"
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:48
 msgid "IP Settings"
 msgstr "Opciones IP"
 
-#: interfaces/network.glade.in.h:48 src/network/connection.c:1550
+#: interfaces/network.glade.in.h:49 src/network/connection.c:1575
 msgid "Manual"
 msgstr "Manual"
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:50
 msgid "Networking Settings"
 msgstr "Opciones de la red"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:51
 msgid "New Connection Type"
 msgstr "Nuevo tipo de conexión"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:52
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -888,7 +892,7 @@ msgstr ""
 "A continuación, introduzca el nombre de usuario y la contraseña que le "
 "asignó su ISP."
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:53
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
@@ -896,51 +900,51 @@ msgstr ""
 "Ahora, asígnele un nombre a esta cuenta. Este nombre se empleará para "
 "identificar la cuenta."
 
-#: interfaces/network.glade.in.h:53 interfaces/print.glade.in.h:33
+#: interfaces/network.glade.in.h:54 interfaces/print.glade.in.h:33
 msgid "Options"
 msgstr "Opciones"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:55
 msgid "Password (confirm):"
 msgstr "Contraseña (confirmar):"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:57
 msgid "Phone _number:"
 msgstr "_Número de teléfono:"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:58
 msgid "Phone number:"
 msgstr "Número de teléfono:"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:59
 msgid "Pppd _options:"
 msgstr "_Opciones del pppd:"
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:60
 msgid "Se_condary:"
 msgstr "Se_cundario:"
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:61
 msgid "Sea_rch Domains:"
 msgstr "Busca_r dominios:"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:62
 msgid "Select which type of connection you would like to add."
 msgstr "Selecciones que tipo de conexión le gustaría añadir."
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:63
 msgid "Set _DNS servers manually"
 msgstr "Configurar manualmente los servidores _DNS"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:64
 msgid "Set as default _route"
 msgstr "Configurar como _ruta predeterminada"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:65
 msgid "Status"
 msgstr "Estado"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:66
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -952,7 +956,7 @@ msgstr ""
 "indicaciones de como proceder (volver,\n"
 "cancelar o finalizar)."
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:70
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click \"Cancel"
 "\"."
@@ -960,191 +964,190 @@ msgstr ""
 "Para continuar configurando su cuenta, pulse «Siguiente». Para salir, pulse "
 "«Cancelar»."
 
-#: interfaces/network.glade.in.h:70
-msgid "Use \"Auto\" if unsure."
-msgstr ""
-
 #: interfaces/network.glade.in.h:71
-msgid ""
-"Use the comment to identify the interface in the future. Activation "
-"management lets you set who and when will activate connections."
-msgstr ""
-"Emplear el comentario para identificar la interfaz. El gestor de "
-"activaciones le permite establecer quien y cuando activará conexiones."
+msgid "Use \"Auto\" if unsure."
+msgstr "Use \"Auto\" si no está seguro."
 
 #: interfaces/network.glade.in.h:72
+msgid ""
+"Use the comment to identify the interface in the future. Activation "
+"management lets you set who will activate connections, and when."
+msgstr ""
+"Emplear el comentario para identificar la interfaz en el futuro. El gestor de "
+"activaciones le permite establecer quien y cuando activará conexiones."
+
+#: interfaces/network.glade.in.h:73
 msgid "User name:"
 msgstr "Nombre del usuario:"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:74
 msgid "WI_NS server:"
 msgstr "Servidor WI_NS:"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:75
+msgid "Warning message goes here."
+msgstr "Aviso aquí va un mensaje."
+
+#: interfaces/network.glade.in.h:76
 msgid "Warning message goes here.."
 msgstr "Aquí va un mensaje de aviso.."
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:77
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:78
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
-"This druid will help you to configure a new \n"
-"internet account. \n"
+"This druid will help you configure a new \n"
+"Internet account. \n"
 "\n"
 "Before you begin, you must have a modem and\n"
 "an Internet Service Provider (ISP). Please ask your \n"
-"ISP for any information about your connection which\n"
-"you are lacking.\n"
+"ISP for any pertinent information about your connection.\n"
 "\n"
 "Click the \"Next\" button to begin."
 msgstr ""
-"Bienvenido al asistente para conexiones a internet. \n"
+"Bienvenido al asistente para conexiones a Internet. \n"
 "\n"
-"Este asistente le ayudará a configurar una nueva\n"
-"cuenta de acceso a internet. \n"
+"Este asistente te ayudará a configurar una nueva\n"
+"cuenta de acceso a Internet. \n"
 "\n"
-"Antes de empezar, debe tener un módem y \n"
+"Antes de empezar, debes tener un módem y \n"
 "un proveedor de acceso a internet (ISP). Pídale a su \n"
-"ISP cualquier información que desconozca sobre su conexión.\n"
+"ISP cualquier información pertinenete acerca de su conexión.\n"
 "\n"
 "Pulse el botón «Siguiente» para empezar."
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:88
 msgid "Windows Networking"
 msgstr "Trabajo en red de windows"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:89
 msgid "Wireless networking settings."
 msgstr "Configuración de la red sin cables."
 
-#: interfaces/network.glade.in.h:89
+#: interfaces/network.glade.in.h:90
 msgid "_Ad-Hoc mode"
 msgstr "Modo _Ad-Hoc"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:93
 msgid "_Channel:"
 msgstr "_Canal:"
 
-#: interfaces/network.glade.in.h:93 interfaces/shares.glade.in.h:60
+#: interfaces/network.glade.in.h:94 interfaces/shares.glade.in.h:60
 #: interfaces/users.glade.in.h:88
 msgid "_Comment:"
 msgstr "_Comentario:"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:95
 msgid "_Configuration:"
 msgstr "_Configuración:"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:96
 msgid "_Configure..."
 msgstr "_Configurar..."
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:98
 msgid "_Delete..."
 msgstr "_Borrar..."
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:99
 msgid "_Description:"
 msgstr "_Descripción:"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:100
 msgid "_Domain:"
 msgstr "_Dominio:"
 
-#: interfaces/network.glade.in.h:100
-msgid "_Enable windows networking (Samba)"
-msgstr "_Habilitar el trabajo en red de windows (Samba)"
-
 #: interfaces/network.glade.in.h:101
+msgid "_Enable Windows networking"
+msgstr "Habilitar el trabajo en r_ed de Windows"
+
+#: interfaces/network.glade.in.h:102
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:103
 msgid "_Frequency (GHz):"
 msgstr "_Frecuencia (GHz):"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:104
 msgid "_Gateway address:"
 msgstr "_Dirección de la puerta de enlace:"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:105
 msgid "_Host name:"
 msgstr "_Nombre del servidor:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:106
 msgid "_IP address:"
 msgstr "Dirección _IP:"
 
-#: interfaces/network.glade.in.h:106
-msgid "_IR LAN"
-msgstr ""
-
 #: interfaces/network.glade.in.h:107
+msgid "_IR LAN"
+msgstr "_IR LAN"
+
+#: interfaces/network.glade.in.h:108
 msgid "_Local IP:"
 msgstr "IP _local:"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:109
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:110
 msgid "_Modem port:"
 msgstr "Puerto del _modem:"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:111
 msgid "_Parallel Line"
 msgstr "_Puerto paralelo"
 
-#: interfaces/network.glade.in.h:111 interfaces/print.glade.in.h:73
+#: interfaces/network.glade.in.h:112 interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Contraseña:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:113
 msgid "_Primary:"
 msgstr "_Primario:"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:114
 msgid "_Remote IP:"
 msgstr "IP _remota:"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:115
 msgid "_Retry if the connection drops or fails to start"
 msgstr "_Reiniciar si se corta la conexión o falla al comenzar"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:116
 msgid "_Session ID:"
 msgstr "ID de la _sesión:"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:117
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Comenzar PPP tan pronto como se conecte el modem"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:118
 msgid "_Subnet mask:"
 msgstr "Máscara de _sub-red:"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:119
 msgid "_Update DNS when this connection becomes active"
 msgstr "Act_ualizar DNS cuando se active esta conexión"
 
-#: interfaces/network.glade.in.h:119
+#: interfaces/network.glade.in.h:120
 msgid "_Use remote IP as default gateway"
 msgstr "_Usar la IP remota como la ruta predeterminada"
 
-#: interfaces/network.glade.in.h:120
+#: interfaces/network.glade.in.h:121
 msgid "_User name:"
 msgstr "Nombre del _usuario:"
 
-#: interfaces/network.glade.in.h:121
+#: interfaces/network.glade.in.h:122
 msgid "_Wavelan"
 msgstr "_Wavelan"
-
-#: interfaces/network.glade.in.h:122 interfaces/print.glade.in.h:76
-msgid "_Workgroup:"
-msgstr "_Grupo de trabajo:"
 
 #: interfaces/rollback-location-management.glade.in.h:1
 msgid "Advanced..."
@@ -1181,7 +1184,7 @@ msgstr "Nombre de la ubicación"
 
 #: interfaces/rollback-location-management.glade.in.h:9
 msgid "Parent Location:"
-msgstr ""
+msgstr "Ubicación raíz:"
 
 #: interfaces/rollback-location-management.glade.in.h:10
 msgid "Rename..."
@@ -1290,7 +1293,7 @@ msgstr "Servidor:"
 
 #: interfaces/shares.glade.in.h:24
 msgid "If the mount point does not exist, it will be created."
-msgstr ""
+msgstr "Si el punto de montaje no existe se creará."
 
 #: interfaces/shares.glade.in.h:25
 msgid "Import"
@@ -2012,6 +2015,8 @@ msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
 msgstr ""
+"Sin al menos una imagen de arranque,\n"
+"su sistema no se iniciará.\n"
 
 #: src/boot/callbacks.c:111
 #, c-format
@@ -2024,6 +2029,8 @@ msgid ""
 "The file ``%s'' is missing or could not be read:\n"
 "The configuration will show empty."
 msgstr ""
+"El archivo ``%s'' falta o no pudo ser leído:\n"
+"La configuración aparecerá vacia."
 
 #: src/boot/e-table.c:365
 #, c-format
@@ -2056,7 +2063,7 @@ msgstr "Administrador de arranque"
 
 #: src/common/System.directory.in.in.h:2
 msgid "System administration"
-msgstr ""
+msgstr "Administrador del sistema"
 
 #: src/common/xst-dialog.c:58
 #, c-format
@@ -2167,6 +2174,8 @@ msgid ""
 "Plese restart your GNOME session for\n"
 "these changes to take effect."
 msgstr ""
+"Por favor reinicie su sesión GNOME para\n"
+"que estos cambios tomen efecto."
 
 #: src/network/callbacks.c:265
 msgid "The name of this computer"
@@ -2215,10 +2224,12 @@ msgid "Remove connection %s?"
 msgstr "¿Eliminar la conexión %s?"
 
 #: src/network/callbacks.c:479
+#, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Activando conexión ``%s.''"
 
 #: src/network/callbacks.c:502
+#, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Cortando conexión ``%s''"
 
@@ -2298,6 +2309,9 @@ msgid ""
 "information. Please provide this information to\n"
 "proceed, or choose another default gateway device.\n"
 msgstr ""
+"Al dispositivo gateway por defecto le falta información\n"
+"del gateway. Por favor facilite esta información para\n"
+"continuar, o elija otro dispositivo gateway por defecto.\n"
 
 #: src/network/connection.c:44
 msgid "Other type"
@@ -2321,7 +2335,7 @@ msgstr "Linea paralela"
 
 #: src/network/connection.c:49
 msgid "Infrared LAN"
-msgstr ""
+msgstr "LAN por infrerojos"
 
 #: src/network/connection.c:50
 msgid "Loopback: virtual interface"
@@ -2331,15 +2345,15 @@ msgstr "Loopback: interfaz virtual"
 msgid "Unknown type"
 msgstr "Tipo desconocido"
 
-#: src/network/connection.c:791 src/network/connection.c:822
+#: src/network/connection.c:807 src/network/connection.c:838
 msgid "Active"
 msgstr "Activa"
 
-#: src/network/connection.c:792 src/network/connection.c:823
+#: src/network/connection.c:808 src/network/connection.c:839
 msgid "Inactive"
 msgstr "Inactiva"
 
-#: src/network/connection.c:1327
+#: src/network/connection.c:1352
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2349,7 +2363,7 @@ msgstr ""
 "red de la interfaz. Por favor introduzca una dirección\n"
 "IP valida en esos campos para continuar."
 
-#: src/network/connection.c:1334
+#: src/network/connection.c:1359
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2359,7 +2373,7 @@ msgstr ""
 "remota de la interfaz. Por favor introduzca una\n"
 "dirección IP valida en esos campos para continuar."
 
-#: src/network/connection.c:1340
+#: src/network/connection.c:1365
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2378,11 +2392,11 @@ msgstr ""
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "¿Está seguro que desea borrar el alias de %s?"
 
-#: src/network/main.c:174
+#: src/network/main.c:172
 msgid "\tRun the internet conection druid."
 msgstr "\tEjecutar el asistente de conexión a internet."
 
-#: src/network/main.c:181
+#: src/network/main.c:179
 msgid "Network Settings"
 msgstr "Opciones de la red"
 
@@ -2538,6 +2552,9 @@ msgid ""
 "\n"
 "Please select a different Username"
 msgstr ""
+"Usuario \"%s\" ya existe.\n"
+"\n"
+"Por favor seleccione otro nombre diferente"
 
 #: src/users/user_group.c:365 src/users/user_group.c:555
 msgid "User id must be a positive number."
@@ -2658,6 +2675,7 @@ msgid ""
 "The home directory already exists. This will break the new user's "
 "permissions."
 msgstr ""
+"El directorio home ya existe. Esto romperá los permisos del nuevo usuario."
 
 #: src/users/user_group.c:1422
 msgid "The home directory path exists, but it is not a directory."
@@ -2706,48 +2724,58 @@ msgstr " No, lo configuraré yo más tarde."
 
 #: interfaces/internetsharing.glade.in.h:7
 msgid " No, exit this druid and continue later."
-msgstr ""
+msgstr " No, sal de este asistente y continua más tarde."
 
 #: interfaces/internetsharing.glade.in.h:8
 msgid " No, overwrite with new defaults (recommended)"
-msgstr ""
+msgstr " No, sobreescribe con nuevos valores por defecto (recomendado)"
 
 #: interfaces/internetsharing.glade.in.h:9
 msgid ""
 " Overwrite with the default internet sharing configuration (recommended)."
 msgstr ""
+" Sobreescribe con la configuración de compartición de Internet por defecto "
+"(recomendado)."
 
 #: interfaces/internetsharing.glade.in.h:10
 msgid ""
 " Yes, I'll set the local network computers to use automatic IP assignment  "
 "(recommended)."
 msgstr ""
+" Si, configuraré los ordenadores de la red local àra usar IP asignadas "
+"automaticamente (recomendado)."
 
 #: interfaces/internetsharing.glade.in.h:11
 msgid " Yes, keep the current DHCP configuration."
-msgstr ""
+msgstr " Si, mantén la información actual de DHCP."
 
 #: interfaces/internetsharing.glade.in.h:12
 msgid " Yes, launch network tool (recommended)."
-msgstr ""
+msgstr " Si, ejecuta la herramienta de red (recomendado)."
 
 #: interfaces/internetsharing.glade.in.h:13
 msgid ""
 "A local network connection was not detected.\n"
 "Would you like to configure one?"
 msgstr ""
+"No se ha detectado una conexión de red local.\n"
+"¿Te gustaría configurar una?"
 
 #: interfaces/internetsharing.glade.in.h:15
 msgid ""
 "A local network interface has been detected, but it's not active.\n"
 "Would you like to activate it now?"
 msgstr ""
+"Se ha detectado una interfaz de red local, pero no está activa.\n"
+"¿Querias activarla ahora?"
 
 #: interfaces/internetsharing.glade.in.h:17
 msgid ""
 "A previous DHCP configuration has been detected. \n"
 "Do you want to keep this configuration?"
 msgstr ""
+"Se ha detectado una configuración previa de DHCP. \n"
+"¿Quiere mantener esta configuración?"
 
 #: interfaces/internetsharing.glade.in.h:19
 msgid "Banner Removal (Junkbuster)"
@@ -2755,17 +2783,19 @@ msgstr "Eliminador de Baners (Junkbuster)"
 
 #: interfaces/internetsharing.glade.in.h:20
 msgid "Configure DHCP Service"
-msgstr ""
+msgstr "Configurar los servicios DHCP"
 
 #: interfaces/internetsharing.glade.in.h:21
 msgid ""
 "Congratulations! This computer is now\n"
 "configured to share its Internet connection."
 msgstr ""
+"¡Enhorabuena! Este ordenador está configurado\n"
+"para compartir su conexión a Internet."
 
 #: interfaces/internetsharing.glade.in.h:23
 msgid "Create a new local network interface."
-msgstr ""
+msgstr "Crear una nueva interfaz de red local."
 
 #: interfaces/internetsharing.glade.in.h:25
 msgid "DHCP service configuration."
@@ -2773,7 +2803,7 @@ msgstr "Servicio de configuración DHCP."
 
 #: interfaces/internetsharing.glade.in.h:26
 msgid "DHCP service requirements."
-msgstr ""
+msgstr "Requisitos del servicio DHCP."
 
 #: interfaces/internetsharing.glade.in.h:27
 msgid "Disable"
@@ -2785,7 +2815,7 @@ msgstr "Activo :"
 
 #: interfaces/internetsharing.glade.in.h:29
 msgid "End of Range"
-msgstr ""
+msgstr "Fin del rango"
 
 #: interfaces/internetsharing.glade.in.h:31
 msgid "Firewall"
@@ -2849,28 +2879,44 @@ msgid ""
 "If you haven't, you will be given the option to launch the\n"
 "Network Tool to configure them before continuing."
 msgstr ""
+"Bienevenido al asistente de configuración de compartición de Internet.\n"
+"\n"
+"Este asistente te ayudará a configurar y compartir tu conexión de Internet.\n"
+"\n"
+"Ya deberías haber instalado y configurado una conexión de red\n"
+"local, como una Ethernet o una tarjeta waveLAN,\n"
+"y una conexión a Internet, como un modem.\n"
+"\n"
+"Si no lo has hecho, tendras la opción de ejecutar la herramienta de red\n"
+"para configurarlas antes de continuar."
 
 #: interfaces/internetsharing.glade.in.h:53
 msgid ""
 "Would you like to give the automatic network\n"
 "address assignment service (DHCP)?"
 msgstr ""
+"¿Querias activar el servicio de asignación automático\n"
+"de direcciones de red (DHCP)?"
 
 #: interfaces/internetsharing.glade.in.h:55
 msgid "Yes (recommended)."
-msgstr ""
+msgstr "Si (recomendado)"
 
 #: interfaces/internetsharing.glade.in.h:56
 msgid ""
 "You already have an internet sharing configuration.\n"
 "Do you want to keep it, or use the druid's defaults?"
 msgstr ""
+"Ya tienes una configuración de compartición de Internet.\n"
+"¿Quieres conservarla, o usar los valores por defecto del asistente?"
 
 #: interfaces/internetsharing.glade.in.h:58
 msgid ""
 "You don't have a DHCP server installed, or\n"
 "some other related component is missing."
 msgstr ""
+"No tienes el servidor DHCP instalado, o\n"
+"falta algún otro componente relacionado."
 
 #: interfaces/location-manager.glade.in.h:1
 msgid "                           "
@@ -3268,6 +3314,10 @@ msgstr "Impresora _Local"
 #: interfaces/print.glade.in.h:74
 msgid "_Remote Name:"
 msgstr "Nombre _remoto:"
+
+#: interfaces/print.glade.in.h:76
+msgid "_Workgroup:"
+msgstr "_Grupo de trabajo:"
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
