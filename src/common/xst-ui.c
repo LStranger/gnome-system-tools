@@ -514,8 +514,12 @@ gboolean
 xst_ui_logout_dialog (const gchar *message)
 {
 	GtkWidget *dialog;
+	gchar *tmp;
 
-	dialog = gnome_ok_dialog (N_("Restart your X server for these changes to have effect."));
+	tmp = message? _(message):
+		_("Plese restart your GNOME session for\nthese changes to take effect.");
+	
+	dialog = gnome_ok_dialog (tmp);
 	gnome_dialog_run_and_close (GNOME_DIALOG( dialog));
 
 	return FALSE;
