@@ -200,7 +200,7 @@ e_map_class_init (EMapClass *class)
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (EMapClass, set_scroll_adjustments),
 			      NULL, NULL,
-			      e_map_marshal_VOID__OBJECT_OBJECT,
+			      g_cclosure_user_marshal_VOID__OBJECT_OBJECT,
 			      G_TYPE_NONE, 2,
 			      GTK_TYPE_ADJUSTMENT, GTK_TYPE_ADJUSTMENT);
 /*	
