@@ -14,7 +14,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Hans Petter Jansson <hpj@helixcode.com>.
+ * Authors: Hans Petter Jansson <hpj@helixcode.com> and Arturo Espinosa <arturo@helixcode.com>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -92,37 +92,75 @@ check_ip_number(GtkEditable *editable)
 	return TRUE;
 }
 
-
-void
-list_add_ip (GtkList *list, GtkWidget *w_ip_1, GtkWidget *w_ip_2, GtkWidget *w_ip_3, GtkWidget *w_ip_4)
+static gchar *
+ip_num_next (gchar *ip)
 {
-	gchar *ip, *ip1, *ip2, *ip3, *ip4;
+	gchar *ret;
+	
+	ret = strchr (ip, '.');
+	
+	if (ret)
+		*ret++ = 0;
+	
+	return ret;
+}
+
+static gboolean 
+ip_num_valid (gchar *strnum)
+{
+	guint num;
+	char *end;
+	
+	if (!strnum)
+		return FALSE;
+	
+	num = strtoul (strnum, &end, 10);
+	if (*end != 0)
+		return FALSE;
+	
+	return ((num >= 0) && (num <= 255));
+}
+
+gboolean
+list_add_ip (GtkList *list, GtkWidget *w_ip)
+{
+	gchar *ip, *ip_num[4], *ip_next;
+	gboolean success;
+	int i;
 	GtkWidget *item;
-	GList *list_add = 0;
+	GList *list_add = NULL;
+	
+	ip = gtk_editable_get_chars (GTK_EDITABLE (w_ip), 0, -1);
+	
+	ip_next = g_strdup (ip);
+	for (i = 0; (i < 4) && ip_next; i++)
+	{
+		ip_num[i] = ip_next;
+		ip_next = ip_num_next (ip_next);
+		if (!ip_num_valid (ip_num[i]))
+			break;
+	}
+	
+	if ((i < 4) || (ip_next) ||
+			(atoi(ip_num[3]) == 0) || (atoi(ip_num[3]) == 255) ||
+			(atoi(ip_num[0]) == 0) || (atoi(ip_num[0]) == 255))
+		success = FALSE;
+	else
+	{
+		success = TRUE;
+		gtk_editable_delete_text (GTK_EDITABLE (w_ip), 0, -1);
+		gtk_widget_grab_focus (GTK_WIDGET (w_ip));
 
-	if (!ip_first_entry_is_valid (GTK_EDITABLE (w_ip_1)) ||
-	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_2)) ||
-	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_3)) ||
-	    !ip_entry_is_valid (GTK_EDITABLE (w_ip_4)))
-		return;
-
-	ip1 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_1), 0, -1);
-	ip2 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_2), 0, -1);
-	ip3 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_3), 0, -1);
-	ip4 = gtk_editable_get_chars (GTK_EDITABLE (w_ip_4), 0, -1);
-
-	gtk_editable_delete_text (GTK_EDITABLE (w_ip_1), 0, -1);
-	gtk_editable_delete_text (GTK_EDITABLE (w_ip_2), 0, -1);
-	gtk_editable_delete_text (GTK_EDITABLE (w_ip_3), 0, -1);
-	gtk_editable_delete_text (GTK_EDITABLE (w_ip_4), 0, -1);
-	gtk_widget_grab_focus (GTK_WIDGET (w_ip_1));
-
-	ip = g_strjoin (".", ip1, ip2, ip3, ip4, NULL);
-	item = gtk_list_item_new_with_label (ip);
-	gtk_widget_show (item);
-	list_add = g_list_append (list_add, item);
-	gtk_list_append_items (GTK_LIST (list), list_add);
+		item = gtk_list_item_new_with_label (ip);
+		gtk_widget_show (item);
+		list_add = g_list_append (list_add, item);
+		gtk_list_append_items (GTK_LIST (list), list_add);
+	}
+	
 	g_free (ip);
+	g_free (ip_num[0]);
+	
+	return success;
 }
 
 

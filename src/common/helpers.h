@@ -7,8 +7,7 @@ int ip_entry_is_valid(GtkEditable *ip_entry);
 
 gboolean check_ip_number(GtkEditable *ip_entry);
 
-void list_add_ip(GtkList *list, GtkWidget *w_ip_1, GtkWidget *w_ip_2,
-		 GtkWidget *w_ip_3, GtkWidget *w_ip_4);
+gboolean list_add_ip(GtkList *list, GtkWidget *w_ip);
 
 void list_add_word(GtkList *list, GtkWidget *editable);
 
