@@ -12,3 +12,5 @@
 #undef ETSPECS_DIR
 #undef INTERFACES_DIR
 #undef HAVE_CRYPT_H
+#undef FRONTEND_DIR
+#undef DESKTOP_DATA_DIR

@@ -165,6 +165,8 @@ if test "x${prefix}" = "xNONE"; then
   interfacesdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
   AC_DEFINE_UNQUOTED(ETSPECS_DIR,"${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/etspecs")
   etspecsdir="${ac_default_prefix}/${DATADIRNAME}/${PACKAGE}/etspecs"
+  AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${ac_default_prefix}/${BINDIRNAME}")
+  AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${ac_default_prefix}/${DATADIRNAME}/control-center/capplets/System")
 else
   AC_DEFINE_UNQUOTED(PIXMAPS_DIR, "${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps")
   pixmapsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/pixmaps"
@@ -172,6 +174,8 @@ else
   interfacesdir="${prefix}/${DATADIRNAME}/${PACKAGE}/interfaces"
   AC_DEFINE_UNQUOTED(ETSPECS_DIR,"${prefix}/${DATADIRNAME}/${PACKAGE}/etspecs")
   etspecsdir="${prefix}/${DATADIRNAME}/${PACKAGE}/etspecs"
+  AC_DEFINE_UNQUOTED(FRONTEND_DIR,"${prefix}/${BINDIRNAME}")
+  AC_DEFINE_UNQUOTED(DESKTOP_DATA_DIR,"${prefix}/${DATADIRNAME}/control-center/capplets/System")
 fi
 
 dnl ==============================================================
