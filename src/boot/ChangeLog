@@ -1,3 +1,14 @@
+2001-02-26  Tambet Ingo  <tambet@ximian.com>
+
+	* transfer.c (transfer_check_data): New function.
+	(transfer_check_default): Check if "default" tag is valid, remove it if not.
+
+	* e-table.c (boot_value_set_append): delete node if new val is empty, quote if neccesary.
+	(boot_value_append): Don't show surrounding quotes.
+
+	* transfer.c (transfer_globals_xml_to_gui): Don't discard timeout val even if prompt
+	is not specified.
+
 2001-02-23  Tambet Ingo  <tambet@ximian.com>
 
 	* e-table.c (boot_value_set_append): New function.

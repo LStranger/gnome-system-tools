@@ -310,9 +310,20 @@ boot_value_root (xmlNodePtr node)
 void *
 boot_value_append (xmlNodePtr node)
 {
+	gchar *buf;
+	gchar ** str_array;
+	
 	g_return_val_if_fail (node != NULL, NULL);
 
-	return xst_xml_get_child_content (node, "append");
+	buf = xst_xml_get_child_content (node, "append");
+	if (!buf)
+		return NULL;
+
+	str_array = g_strsplit (buf, "\"", 10); /* FIXME: 10 = max_tokens */
+	buf = g_strjoinv (NULL, str_array);
+	g_strfreev (str_array);
+
+	return buf;
 }
 
 /* Set value functions */
@@ -369,6 +380,15 @@ void boot_value_set_append (xmlNodePtr node, gchar *val)
 {
 	g_return_if_fail (node != NULL);
 
+	if (strlen (val) < 1)
+	{
+		xst_xml_element_destroy (xst_xml_element_find_first (node, "append"));
+		return;
+	}
+	
+	if (strstr (val, " ") && !strstr (val, "\""))
+		val = g_strconcat ("\"", val, "\"", NULL);
+	
 	xst_xml_set_child_content (node, "append", val);
 }
 

@@ -37,9 +37,56 @@ extern XstTool *tool;
 
 
 static void
+transfer_check_default (xmlNodePtr root)
+{
+	xmlNodePtr node, def_node;
+	gchar *buf1, *buf2;
+	gboolean found;
+
+	def_node = xst_xml_element_find_first (root, "default");
+	if (def_node)
+	{
+		found = FALSE;
+		buf1 = xst_xml_element_get_content (def_node);
+
+		for (node = xst_xml_element_find_first (root, "entry");
+			node;
+			node = xst_xml_element_find_next (node, "entry"))
+
+		{
+			buf2 = xst_xml_get_child_content (node, "label");
+
+			if (!buf2)
+				continue;
+			
+			if (!strcmp (buf1, buf2))
+			{
+				g_free (buf2);
+				found = TRUE;
+				break;
+			}
+
+			g_free (buf2);
+		}
+
+		g_free (buf1);
+		
+		if (!found)
+			xst_xml_element_destroy (def_node);
+	}
+}
+
+static void
+transfer_check_data (xmlNodePtr root)
+{
+	g_return_if_fail (root != NULL);
+
+	transfer_check_default (root);
+}
+
+static void
 transfer_globals_xml_to_gui (xmlNodePtr root)
 {
-	GtkWidget *spin;
 	xmlNodePtr node;
 	gchar *buf;
 	gint value;
@@ -52,21 +99,23 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 											    (tool->main_dialog, "boot_prompt")),
 								TRUE);
 
-		spin = xst_dialog_get_widget (tool->main_dialog, "boot_timeout");
-		gtk_widget_set_sensitive (spin, TRUE);
-
-		buf = xst_xml_get_child_content (root, "timeout");
-		if (buf)
-		{
-			value = atoi (buf);
-			g_free (buf);
-		}
-		else
-			value = 50;
-		
-		/* Set value in seconds. */
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (spin), (gfloat) value / 10);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout"),
+							 TRUE);
 	}
+
+	buf = xst_xml_get_child_content (root, "timeout");
+	if (buf)
+	{
+		value = atoi (buf);
+		g_free (buf);
+	}
+	else
+		value = 50;
+	
+	/* Set value in seconds. */
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog,
+														  "boot_timeout")),
+						  (gfloat) value / 10);
 }
 
 static void
@@ -113,6 +162,7 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 	create_table (root);
 
 	transfer_globals_xml_to_gui (root);
+	transfer_check_data (root);
 }
 
 void
@@ -123,4 +173,5 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 	root = xst_xml_doc_get_root (tool->config);
 
 	transfer_globals_gui_to_xml (root);
+	transfer_check_data (root);
 }
