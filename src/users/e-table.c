@@ -226,6 +226,9 @@ user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *da
 			field = g_strdup ("login");
 			break;
 		case 1:
+			if (!is_free_uid (atoi (val)))
+				return;
+
 			field = g_strdup ("uid");
 			break;
 		case 2:

@@ -542,6 +542,29 @@ is_valid_name (gchar *str)
 	return TRUE;
 }
 
+gboolean
+is_free_uid (gint new_uid)
+{
+	GList *list, *tmp_list;
+	gint uid;
+
+	/* Check if uid does not exsist. */
+	
+	list = get_user_list ("uid", FALSE);
+	
+	tmp_list = list;
+	while (tmp_list)
+	{
+		uid = atoi (tmp_list->data);
+		tmp_list = tmp_list->next;
+
+		if (uid == new_uid)
+			return FALSE;
+	}
+
+	return TRUE;
+}
+
 static gint
 char_sort_func (gconstpointer a, gconstpointer b)
 {
@@ -923,7 +946,8 @@ adv_user_settings_update (xmlNodePtr node, gchar *login)
 	new_uid = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (tool_widget_get
 			("user_settings_uid")));
 
-	e_table_change_user (node, "uid", g_strdup_printf ("%d", new_uid));
+	if (is_free_uid (new_uid))
+		e_table_change_user (node, "uid", g_strdup_printf ("%d", new_uid));
 }
 
 gchar *

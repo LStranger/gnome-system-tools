@@ -56,6 +56,7 @@ extern gboolean group_add (void);
 extern gboolean group_update (void);
 gchar *find_new_id (gchar from);
 extern gchar *find_new_key (gchar from);
+gboolean is_free_uid (gint new_uid);
 extern GList *group_fill_members_list (xmlNodePtr node);
 extern void group_fill_all_users_list (GList *member_rows);
 extern GList *get_group_list (gchar *field, gboolean adv);
