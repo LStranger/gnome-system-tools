@@ -823,7 +823,7 @@ connection_update_row_enabled (XstConnection *cxn, gboolean enabled)
 	g_return_if_fail (row > -1);
 	connection_set_row_pixtext (clist, row, enabled ? _("To activate") :
 				    _("To inactivate"), enabled);
-	xst_dialog_modify (tool->main_dialog);
+	/*	xst_dialog_modify (tool->main_dialog);*/
 }
 
 void
@@ -954,6 +954,7 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 
 	cxn = g_new0 (XstConnection, 1);
 	cxn->type = type;
+	cxn->file = NULL;
 	
 	/* set up some defaults */
 	cxn->user = FALSE;
@@ -1008,6 +1009,10 @@ connection_new_from_node (xmlNode *node)
 	}
 
 	cxn->node = node;
+
+	s = xst_xml_get_child_content (node, "file");
+	if (s)
+		cxn->file = s;
 	
 	s = xst_xml_get_child_content (node, "bootproto");
 	if (s) {

@@ -68,6 +68,7 @@ typedef struct {
 	/* General */
 	gchar *dev;
 	gchar *name;
+	gchar *file;
 
 	gboolean enabled;
 	gboolean user;

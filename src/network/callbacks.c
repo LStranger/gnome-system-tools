@@ -461,10 +461,16 @@ on_connection_activate_clicked (GtkWidget *w, gpointer null)
 {
 	GtkWidget *clist;
 	XstConnection *cxn;
+	gchar *sign, *file;
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 	connection_update_row_enabled (cxn, TRUE);
+
+	file = (cxn->file)? cxn->file: cxn->dev;
+	sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
+	xst_tool_run_set_directive (tool, NULL, sign, "enable_iface", file, "1", NULL);
+	g_free (sign);
 }
 
 void
@@ -472,10 +478,16 @@ on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 {
 	GtkWidget *clist;
 	XstConnection *cxn;
+	gchar *sign, *file;
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
 	connection_update_row_enabled (cxn, FALSE);
+
+	file = (cxn->file)? cxn->file: cxn->dev;
+	sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
+	xst_tool_run_set_directive (tool, NULL, sign, "enable_iface", file, "0", NULL);
+	g_free (sign);
 }
 
 void
