@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-12-11 22:53+0900\n"
-"PO-Revision-Date: 2003-12-11 22:52+0900\n"
+"POT-Creation-Date: 2003-12-27 11:20+0900\n"
+"PO-Revision-Date: 2003-12-27 11:18+0900\n"
 "Last-Translator: Takeshi AIHANA <aihana@gnome.gr.jp>\n"
 "Language-Team: Japanese <gnome-translations@gnome.gr.jp>\n"
 "MIME-Version: 1.0\n"
@@ -87,8 +87,8 @@ msgid "Whether the warning dialog should be shown or not"
 msgstr "警告ダイアログを表示するかどうか"
 
 #: interfaces/boot.glade.in.h:1 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.in.h:1 interfaces/time.glade.in.h:2
-#: interfaces/users.glade.in.h:1
+#: interfaces/disks.glade.in.h:2 interfaces/network.glade.in.h:1
+#: interfaces/time.glade.in.h:2 interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
@@ -200,12 +200,12 @@ msgstr ""
 "起動するイメージの名前を入力して\n"
 "オペレーティング・システムの種類を指定して下さい。"
 
-#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:40
+#: interfaces/boot.glade.in.h:26 interfaces/network.glade.in.h:42
 msgid "Finished"
 msgstr "完了です"
 
-#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1859
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:51
+#: src/network/connection.c:1843
 msgid "Manual"
 msgstr "手動"
 
@@ -274,7 +274,7 @@ msgstr ""
 msgid "Video modes (only frame buffer)"
 msgstr "ビデオ・モードにする (フレームバッファのみ)"
 
-#: interfaces/boot.glade.in.h:41 interfaces/network.glade.in.h:85
+#: interfaces/boot.glade.in.h:41
 msgid "_Add..."
 msgstr "追加(_A)..."
 
@@ -372,9 +372,167 @@ msgstr "サポート外のプラットフォーム"
 msgid "Use this window to select the computer you wish to configure"
 msgstr "設定するコンピュータを選択します。"
 
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:107
+#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:108
 msgid "_Password:"
 msgstr "パスワード(_P):"
+
+#: interfaces/disks.glade.in.h:1
+msgid " "
+msgstr " "
+
+#: interfaces/disks.glade.in.h:3
+msgid "<b>Configuration</b>"
+msgstr "<b>設定</b>"
+
+#: interfaces/disks.glade.in.h:4
+msgid "<b>General Information</b>"
+msgstr "<b>全般の情報</b>"
+
+#: interfaces/disks.glade.in.h:5
+msgid "<b>Partition List</b>"
+msgstr "<b>パーティション一覧</b>"
+
+#: interfaces/disks.glade.in.h:6
+msgid "<b>Partition Properties</b>"
+msgstr "<b>パーティションのプロパティ</b>"
+
+#: interfaces/disks.glade.in.h:7
+msgid "<b>Storage List</b>"
+msgstr "<b>ストレージ一覧</b>"
+
+#: interfaces/disks.glade.in.h:8
+msgid "<b>Storage Properties</b>"
+msgstr "<b>ストレージの一覧</b>"
+
+#: interfaces/disks.glade.in.h:9
+msgid "<b>Supported Features</b>"
+msgstr "<b>サポートする機能</b>"
+
+#: interfaces/disks.glade.in.h:10
+msgid ""
+"<big><b>Storage Settings</b></big>\n"
+"Configure your hard disks and storage devices."
+msgstr ""
+"<big><b>ストレージの設定</b></big>\n"
+"お使いのハードディスクとストレージ・デバイスを設定します。"
+
+#: interfaces/disks.glade.in.h:12
+msgid "CD-ROM"
+msgstr "CD-ROM"
+
+#: interfaces/disks.glade.in.h:13
+msgid "Device: "
+msgstr "デバイス: "
+
+#: interfaces/disks.glade.in.h:14
+msgid "Enable DMA"
+msgstr "DMA 転送を有効にする"
+
+#: interfaces/disks.glade.in.h:15
+msgid "Extended 2"
+msgstr "拡張２"
+
+#: interfaces/disks.glade.in.h:16
+msgid "Extended 3"
+msgstr "拡張３"
+
+#: interfaces/disks.glade.in.h:17
+msgid "FAT"
+msgstr "FAT"
+
+#: interfaces/disks.glade.in.h:18
+msgid "Filesystem:"
+msgstr "ファイルシステム:"
+
+#: interfaces/disks.glade.in.h:19 src/disks/disks-storage-disk.c:83
+msgid "Hard Disk"
+msgstr "ハードディスク"
+
+#: interfaces/disks.glade.in.h:20
+msgid "JFS"
+msgstr "JFS"
+
+#: interfaces/disks.glade.in.h:21
+msgid "Memory Swap"
+msgstr "メモリのスワップ"
+
+#: interfaces/disks.glade.in.h:22
+msgid "Mount Point:"
+msgstr "マウント・ポイント:"
+
+#: interfaces/disks.glade.in.h:23
+msgid "NTFS"
+msgstr "NTFS"
+
+#: interfaces/disks.glade.in.h:24 src/disks/callbacks.c:312
+#: src/disks/callbacks.c:313 src/disks/callbacks.c:328
+#: src/disks/callbacks.c:329
+msgid "Not Available"
+msgstr "利用不可"
+
+#: interfaces/disks.glade.in.h:25
+msgid "Partitions"
+msgstr "パーティション"
+
+#: interfaces/disks.glade.in.h:26
+msgid "Play Audio"
+msgstr "オーディオの演奏"
+
+#: interfaces/disks.glade.in.h:27
+msgid "Properties"
+msgstr "プロパティ"
+
+#: interfaces/disks.glade.in.h:28
+msgid "Read DVD"
+msgstr "DVD の読み取り"
+
+#: interfaces/disks.glade.in.h:29
+msgid "Reiser FS"
+msgstr "Reiser FS"
+
+#: interfaces/disks.glade.in.h:30
+msgid "Size:"
+msgstr "大きさ:"
+
+#: interfaces/disks.glade.in.h:31
+msgid "Speed"
+msgstr "速度"
+
+#: interfaces/disks.glade.in.h:32
+msgid "Speed:"
+msgstr "速度:"
+
+#: interfaces/disks.glade.in.h:33
+msgid "Type:"
+msgstr "種類:"
+
+#: interfaces/disks.glade.in.h:34
+msgid "Type: "
+msgstr "種類: "
+
+#: interfaces/disks.glade.in.h:35
+msgid "Write CD-R"
+msgstr "CD-R の書き込み"
+
+#: interfaces/disks.glade.in.h:36
+msgid "Write CD-RW"
+msgstr "CD-RW の書き込み"
+
+#: interfaces/disks.glade.in.h:37
+msgid "Write DVD-R"
+msgstr "DVD-R の書き込み"
+
+#: interfaces/disks.glade.in.h:38
+msgid "Write DVD-RAM"
+msgstr "DVD-RAM の書き込み"
+
+#: interfaces/disks.glade.in.h:39
+msgid "XFS"
+msgstr "XFS"
+
+#: interfaces/disks.glade.in.h:40
+msgid "_Format"
+msgstr "フォーマット(_F)"
 
 #: interfaces/network.glade.in.h:2
 msgid "/dev/modem"
@@ -453,141 +611,149 @@ msgid "Account"
 msgstr "アカウント"
 
 #: interfaces/network.glade.in.h:21
+msgid "Activate"
+msgstr "有効にする"
+
+#: interfaces/network.glade.in.h:22
 msgid "Activate when the computer _starts"
 msgstr "コンピュータの起動時に有効にする(_S)"
 
-#: interfaces/network.glade.in.h:22
+#: interfaces/network.glade.in.h:23
 msgid "Address configuration"
 msgstr "アドレスの設定"
 
-#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:14
+#: interfaces/network.glade.in.h:24 interfaces/users.glade.in.h:14
 msgid "Advanced"
 msgstr "拡張"
 
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:25
 msgid "Advanced PPP connection tuning."
 msgstr "高度なPPP接続調整."
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:26
 msgid "Aliases of other computers."
 msgstr "他のコンピュータのエイリアスを定義します。"
 
-#: interfaces/network.glade.in.h:26
+#: interfaces/network.glade.in.h:27
 msgid "Allow activation control for all _users"
 msgstr "全てのユーザに活性化の権限を与える(_U)"
 
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:28
 msgid "Auto"
 msgstr "自動"
 
-#: interfaces/network.glade.in.h:28 src/network/connection.c:1861
+#: interfaces/network.glade.in.h:29 src/network/connection.c:1845
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:30
 msgid "Co_nfiguration:"
 msgstr "設定(_N):"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:31
 msgid "Connection _name:"
 msgstr "接続名(_N):"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:32
 msgid "Connection name"
 msgstr "接続名"
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "接続の種類"
 
-#: interfaces/network.glade.in.h:33
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "接続"
 
 #. set window titles
-#: interfaces/network.glade.in.h:34 src/network/network-druid.c:63
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "新しいネットワーク接続の作成"
 
-#: interfaces/network.glade.in.h:35 src/network/connection.c:1860
+#: interfaces/network.glade.in.h:36
+msgid "Current network profile:"
+msgstr "現在使用中のプロファイル:"
+
+#: interfaces/network.glade.in.h:37 src/network/connection.c:1844
 msgid "DHCP"
 msgstr "DHCP"
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:39
 msgid "Default gateway device:"
 msgstr "デフォルトのゲートウェイ:"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:40
 msgid "Device:"
 msgstr "デバイス:"
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:41
 msgid "Domain / _Workgroup:"
 msgstr "ドメイン/ワークグループ(_W):"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:43
 msgid "General"
 msgstr "全般"
 
-#: interfaces/network.glade.in.h:42 src/network/main.c:217
+#: interfaces/network.glade.in.h:44
 msgid "Hosts"
 msgstr "ホスト"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:45
 msgid "How the names of other computers are found."
 msgstr "他のコンピュータを見つける方法を設定します。"
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:46
 msgid "How this computer is identified."
 msgstr ""
 "このコンピュータが\n"
 "どのように識別されるか設定します。"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:47
 msgid "How to access other computers."
 msgstr "他のコンピュータのアクセス方法を指定します。"
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:48
 msgid "How to dial up to the Internet."
 msgstr "インターネットへのダイアルアップを設定します。"
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:49
 msgid "ISP phone number"
 msgstr "ISP の電話番号"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:50
 msgid "Interface properties"
 msgstr "インタフェースのプロパティ"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:52
 msgid "Modem _volume:"
 msgstr "モデムの音量(_V):"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:53
 msgid "Network name:"
 msgstr "ネットワーク名:"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:54
 msgid "Network profiles"
 msgstr "ネットワークのプロファイル"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:55
 msgid "Network profiles can be used to store different network configurations."
 msgstr "いろいろなネットワーク設定をネットワークのプロファイルに保存できます。"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:56
 msgid "Networking Settings"
 msgstr "ネットワークの設定"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:57
 msgid "New network profile"
 msgstr "ネットワークのプロファイル"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:58
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -595,7 +761,7 @@ msgstr ""
 "次に、ISP から割り当てられた\n"
 "ユーザ名とパスワードを入力して下さい。"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:59
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -603,36 +769,36 @@ msgstr ""
 "ここで、このネットワーク・デバイスに与える IP アドレスと、接続先のリモート・"
 "アドレスを入力して下さい。"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:60
 msgid "Now, please enter the address that this network device will have."
 msgstr ""
 "ここで、このネットワーク・デバイスに与える IP アドレスを入力して下さい。"
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:61
 msgid "Now, please give this connection a name."
 msgstr "最後に、この接続に名前をつけて下さい。"
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:62
 msgid "Number to _access an external line:"
 msgstr "外線にアクセスする番号(_A):"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:63
 msgid "Number to get to an _external line:"
 msgstr "外線に切り替える番号(_E):"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:64
 msgid "PPPD _options:"
 msgstr "PPPD オプション(_O):"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:65
 msgid "Pa_ssword (confirm):"
 msgstr "パスワード (確認)(_S):"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:66
 msgid "Phone _number:"
 msgstr "電話番号(_N):"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:67
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
@@ -640,7 +806,7 @@ msgstr ""
 "インターネットに接続する際に使用する電話番号を入力して下さい。この電話番号は "
 "ISP から提供されます。"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:68
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
@@ -648,35 +814,35 @@ msgstr ""
 "設定する無線 LAN デバイスを選択し、そのインタフェースのネットワーク名を入力し"
 "て下さい"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:69
 msgid "Please, give this network profile a name and a description."
 msgstr "このネットワークのプロファイルに名前と簡単な説明を入力して下さい。"
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:70
 msgid "Please, select which type of connection you would like to add."
 msgstr "追加する接続の種類を選択して下さい。"
 
-#: interfaces/network.glade.in.h:69 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:71 interfaces/users.glade.in.h:38
 msgid "Profile _name:"
 msgstr "プロファイル名(_N):"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:72
 msgid "Pulses"
 msgstr "パルス式"
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:73
 msgid "Se_condary:"
 msgstr "セカンダリ(_C):"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:74
 msgid "Set _DNS servers manually"
 msgstr "手動で DNS サーバを設定する(_D)"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:75
 msgid "Set modem as default _route to internet"
 msgstr "モデムをインターネットに対するデフォルト・ルートにする(_R)"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:76
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
@@ -684,7 +850,7 @@ msgstr ""
 "このアシスタントは\n"
 "新しいネットワーク接続の設定をお手伝いします。"
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:78
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -693,35 +859,35 @@ msgstr ""
 "[進む] をクリックして下さい。\n"
 "終了する場合は [キャンセル] をクリックして下さい。"
 
-#: interfaces/network.glade.in.h:77
+#: interfaces/network.glade.in.h:79
 msgid "Tones"
 msgstr "トーン式"
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:80
 msgid "Use \"Auto\" if unsure."
 msgstr "不明な場合は \"自動\" にして下さい。"
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:81
 msgid "Use this dialog for setting the configuration for this interface"
 msgstr "このインタフェースを設定して下さい。"
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:82
 msgid "Username and password"
 msgstr "ユーザ名とパスワード"
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:83
 msgid "WI_NS server:"
 msgstr "WINS サーバ(_I):"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:84
 msgid "Wireless device:"
 msgstr "無線 LAN デバイス:"
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:85
 msgid "Wireless settings"
 msgstr "無線 LAN の設定"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:86
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
@@ -729,135 +895,135 @@ msgstr ""
 "新しいネットワーク接続を作成します。変更を保存する場合は [適用] をクリックし"
 "て下さい。"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:87
 msgid "_Autodetect"
 msgstr "自動判別(_A)"
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:88
 msgid "_Comment:"
 msgstr "コメント(_C):"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:89
 msgid "_Configuration:"
 msgstr "設定(_C):"
 
-#: interfaces/network.glade.in.h:89
-msgid "_Configure"
-msgstr "設定(_C)"
+#: interfaces/network.glade.in.h:90
+msgid "_Deactivate"
+msgstr "無効にする(_D)"
 
-#: interfaces/network.glade.in.h:90 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:91 interfaces/users.glade.in.h:55
 msgid "_Delete"
 msgstr "削除(_D)"
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:92
 msgid "_Description:"
 msgstr "説明(_D):"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:93
 msgid "_Dial type:"
 msgstr "ダイアルの種類(_D):"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:94
 msgid "_Domain name:"
 msgstr "ドメイン名(_D):"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:95
 msgid "_Enable Windows networking"
 msgstr "Windows ネットワークを有効にする(_E)"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:96
 msgid "_Ethernet"
 msgstr "イーサネット(_E)"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:97
 msgid "_Gateway address:"
 msgstr "ゲートウェイ(_G):"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:98
 msgid "_Hostname:"
 msgstr "ホスト名(_H):"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:99
 msgid "_IP address:"
 msgstr "IP アドレス(_I):"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:100
 msgid "_IR LAN"
 msgstr "赤外線 LAN(_I)"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:101
 msgid "_Local IP address:"
 msgstr "ローカル IP アドレス(_L):"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:102
 msgid "_Local IP:"
 msgstr "ローカル IP(_L):"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:103
 msgid "_Modem (PPP)"
 msgstr "モデム (PPP 接続)(_M)"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:104
 msgid "_Modem port:"
 msgstr "モデムのポート(_M):"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:105
 msgid "_Network Profiles"
 msgstr "ネットワークのプロファイル(_N)"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:106
 msgid "_Network name:"
 msgstr "ネットワーク名(_N):"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:107
 msgid "_Parallel Line"
 msgstr "専用線(_P)"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:109
 msgid "_Phone number:"
 msgstr "電話番号(_P):"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:110
 msgid "_Primary:"
 msgstr "プライマリ(_P):"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:111
 msgid "_Remote IP address:"
 msgstr "リモート IP アドレス(_R):"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:112
 msgid "_Remote IP:"
 msgstr "リモート IP(_R):"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:113
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "切断されたり接続に失敗した場合に再試行する(_R)"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:114
 msgid "_Save Current"
 msgstr "保存する(_S)"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:115
 msgid "_Start PPP as soon as modem connects"
 msgstr "モデムが接続したらすぐに PPP を起動する(_S)"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:116
 msgid "_Subnet mask:"
 msgstr "サブネット・マスク(_S):"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:117
 msgid "_Update DNS when this connection becomes active"
 msgstr "接続を確立したら DNS を更新する(_U)"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:118
 msgid "_Use remote IP as default gateway"
 msgstr "リモート IP をデフォルトのゲートウェイとして使用する(_U)"
 
-#: interfaces/network.glade.in.h:118 interfaces/users.glade.in.h:65
+#: interfaces/network.glade.in.h:119 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "ユーザ名(_U):"
 
-#: interfaces/network.glade.in.h:119
+#: interfaces/network.glade.in.h:120
 msgid "_Wireless"
 msgstr "無線 LAN (_W)"
 
@@ -882,24 +1048,28 @@ msgid "Description:"
 msgstr "説明:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Parameters:"
-msgstr "パラメータ:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "優先度:"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "サービスの設定(_P)"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Service:"
 msgstr "サービス名:"
+
+#: interfaces/services.glade.in.h:9
+msgid "Status:"
+msgstr "状態:"
 
 #: interfaces/services.glade.in.h:10
 msgid "Use this tool to specify which services to run"
 msgstr "このツールを使って、起動するサービスを指定します。"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Start"
+msgstr "開始(_S)"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1228,7 +1398,8 @@ msgstr "新しい Boot イメージの生成 (%d / %d)"
 msgid "Finished creating a new boot image"
 msgstr "新しい Boot イメージの生成が完了しました"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:467
+#: src/boot/boot-image.c:40 src/disks/disks-storage-partition.c:128
+#: src/disks/disks-storage.c:101 src/network/profile.c:467
 msgid "Unknown"
 msgstr "<不明>"
 
@@ -1355,12 +1526,14 @@ msgstr "デバイス"
 msgid "/_Add ..."
 msgstr "/追加(_A)..."
 
-#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/services/table.c:36 src/users/table.c:49
+#: src/users/table.c:56
 msgid "/_Properties"
 msgstr "/プロパティ(_P)"
 
-#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
-#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/disks/disks-gui.c:44 src/network/connection.c:60
+#: src/network/dns.c:39 src/network/hosts.c:43 src/users/table.c:50
+#: src/users/table.c:57
 msgid "/_Delete"
 msgstr "/削除(_D)"
 
@@ -1461,6 +1634,42 @@ msgstr "GNOME システム・ツール"
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "これらの変更を有効にするために GNOME セッションを再起動して下さい。"
 
+#: src/disks/callbacks.c:304 src/disks/callbacks.c:305
+msgid "(Getting ...)"
+msgstr "(取得中 ...)"
+
+#: src/disks/disks-gui.c:43
+msgid "/_Format"
+msgstr "/フォーマット(_F)"
+
+#: src/disks/disks-storage-cdrom.c:103
+msgid "CDROM"
+msgstr "CDROM"
+
+#: src/disks/disks-storage-floppy.c:71
+msgid "Floppy"
+msgstr "フロッピー"
+
+#: src/disks/disks-storage-partition.c:260
+msgid "Swap Partition"
+msgstr "スワップ・パーティション"
+
+#: src/disks/disks-storage.c:100
+msgid "Unknown Storage"
+msgstr "不明なストレージ"
+
+#: src/disks/disks.desktop.in.in.h:1
+msgid "Configure the system disks"
+msgstr "ファイルシステムを設定します"
+
+#: src/disks/disks.desktop.in.in.h:2
+msgid "Disks"
+msgstr "ディスク"
+
+#: src/disks/main.c:76
+msgid "Disks Manager"
+msgstr "ディスク・マネージャ"
+
 #: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
@@ -1471,7 +1680,7 @@ msgstr "接続 %s を削除しますか: \"%s\"？"
 msgid "Remove connection %s?"
 msgstr "接続 %s を削除しますか？"
 
-#: src/network/callbacks.c:508
+#: src/network/callbacks.c:463
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1479,11 +1688,11 @@ msgstr ""
 "SMB サポートがインストールされていません。Windows ネットワークを使用する場合"
 "は SMB サポートをインストールして下さい。"
 
-#: src/network/callbacks.c:511
+#: src/network/callbacks.c:466
 msgid "SMB support missing."
 msgstr "SMB サポートが見つかりません。"
 
-#: src/network/callbacks.c:562
+#: src/network/callbacks.c:518
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1491,7 +1700,7 @@ msgstr ""
 "ホスト名が変更されました。これにより新しいアプリを起動できなくなるので再ログ"
 "インして下さい。続行してもよろしいですか？"
 
-#: src/network/callbacks.c:610
+#: src/network/callbacks.c:566
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1499,7 +1708,7 @@ msgstr ""
 "お使いのシステムの中に `wvdial` が見つかりませんでした。接続を有効にするため"
 "に、wvdial または PPP (モデム) をインストールして下さい。"
 
-#: src/network/callbacks.c:637
+#: src/network/callbacks.c:593
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1507,7 +1716,7 @@ msgstr ""
 "お使いのシステムの中に `wvdial` が見つかりませんでした。接続を無効にするため"
 "に、wvdial または PPP (モデム) をインストールして下さい。"
 
-#: src/network/callbacks.c:664
+#: src/network/callbacks.c:620
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1515,7 +1724,7 @@ msgstr ""
 "デフォルトのゲートウェイ・デバイスが有効ではありません。よって、インターネッ"
 "トへの接続ができません。続行してもよろしいですか？"
 
-#: src/network/callbacks.c:719
+#: src/network/callbacks.c:675
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1523,7 +1732,7 @@ msgstr ""
 "デフォルトのゲートウェイ・デバイスにゲートウェイ情報がありません。機能させる"
 "場合はこの情報を提供するか、他のデバイスを選択して下さい。"
 
-#: src/network/callbacks.c:765
+#: src/network/callbacks.c:721
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1533,17 +1742,17 @@ msgstr ""
 "ことになります。この問題を回避するために、RPM パッケージ `redhat-config-"
 "network` をインストールして下さい。"
 
-#: src/network/callbacks.c:802
+#: src/network/callbacks.c:758
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "インターフェース %s を有効にしますか？"
 
-#: src/network/callbacks.c:812
+#: src/network/callbacks.c:768
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "インターフェース %s を無効にしますか？"
 
-#: src/network/callbacks.c:899
+#: src/network/callbacks.c:855
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1551,19 +1760,19 @@ msgstr ""
 "モデム・デバイスを自動検出できませんでした。モデムがビジー状態でないか、また"
 "は正しく接続されているかを確認して下さい。"
 
-#: src/network/callbacks.c:951
+#: src/network/callbacks.c:907
 msgid "Silent"
 msgstr "無音"
 
-#: src/network/callbacks.c:953
+#: src/network/callbacks.c:909
 msgid "Low"
 msgstr "低"
 
-#: src/network/callbacks.c:955
+#: src/network/callbacks.c:911
 msgid "Medium"
 msgstr "中"
 
-#: src/network/callbacks.c:957
+#: src/network/callbacks.c:913
 msgid "Loud"
 msgstr "大"
 
@@ -1611,7 +1820,7 @@ msgstr "状態"
 msgid "Description"
 msgstr "詳細"
 
-#: src/network/connection.c:1723
+#: src/network/connection.c:1707
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1619,7 +1828,7 @@ msgstr ""
 "インタフェースに対する IP アドレスまたはネットマスクが空のままです。続行する"
 "場合は、このフィールドに正しい IP アドレスを入力して下さい。"
 
-#: src/network/connection.c:1730
+#: src/network/connection.c:1714
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1627,7 +1836,7 @@ msgstr ""
 "インタフェースに対する IP アドレスまたはリモート・アドレスが空のままです。続"
 "行する場合は、このフィールドに正しい IP アドレスを入力して下さい。"
 
-#: src/network/connection.c:1736
+#: src/network/connection.c:1720
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1637,7 +1846,7 @@ msgstr ""
 "アドレスが空のままです。プライマリ DNS の IP アドレスを入力するか、手動設定の"
 "オプションを無効にして下さい。"
 
-#: src/network/connection.c:1742
+#: src/network/connection.c:1726
 msgid ""
 "The modem device that the connection will use was left empty. Please enter a "
 "device or press \"autodetect\" to continue."
@@ -1645,7 +1854,7 @@ msgstr ""
 "モデム・デバイスに対する接続が空のままです。続行する場合は、デバイス名を入力"
 "するか [自動検出] をクリックして下さい。"
 
-#: src/network/connection.c:1747
+#: src/network/connection.c:1731
 msgid ""
 "The phone number that the connection will use was left empty. Please enter a "
 "valid phone number to continue."
@@ -1653,7 +1862,7 @@ msgstr ""
 "接続する電話番号が空のままです。続行する場合は、このフィールドに正しい電話番"
 "号を入力して下さい。"
 
-#: src/network/connection.c:2101
+#: src/network/connection.c:2082
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "インタフェース %s は存在しません。"
@@ -1666,39 +1875,39 @@ msgstr "IP アドレス"
 msgid "Aliases"
 msgstr "別名"
 
-#: src/network/main.c:257
+#: src/network/main.c:190
 msgid "Run the connection assistant."
 msgstr "接続アシスタントを起動する"
 
-#: src/network/main.c:258
+#: src/network/main.c:191
 msgid "Run the PPP connection assistant."
 msgstr "PPP 接続アシスタントを起動する"
 
-#: src/network/main.c:259
+#: src/network/main.c:192
 msgid "Run the ethernet connection assistant."
 msgstr "イーサネット接続アシスタントを起動する"
 
-#: src/network/main.c:260
+#: src/network/main.c:193
 msgid "Run the wlan connection assistant."
 msgstr "無線 LAN 接続アシスタントを起動する"
 
-#: src/network/main.c:261
+#: src/network/main.c:194
 msgid "Run the parallel port connection assistant."
 msgstr "パラレルポート接続アシスタントを起動する"
 
-#: src/network/main.c:262
+#: src/network/main.c:195
 msgid "Run the irlan connection assistant."
 msgstr "赤外線 LAN 接続アシスタントを起動する"
 
-#: src/network/main.c:263
+#: src/network/main.c:196
 msgid "Configure a network interface"
 msgstr "ネットワーク・インタフェースを設定する"
 
-#: src/network/main.c:263
+#: src/network/main.c:196
 msgid "interface"
 msgstr "インタフェース"
 
-#: src/network/main.c:270
+#: src/network/main.c:203
 msgid "Network Settings"
 msgstr "ネットワークの設定"
 
@@ -1728,16 +1937,28 @@ msgstr "本当にプロファイル %s を削除してもよろしいですか�
 msgid "Profile name"
 msgstr "プロファイル名:"
 
-#: src/services/callbacks.c:45
+#: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "説明がありません。"
 
-#: src/services/callbacks.c:301
+#: src/services/callbacks.c:239
+msgid "Running"
+msgstr "起動中"
+
+#: src/services/callbacks.c:243
+msgid "Stopped"
+msgstr "停止中"
+
+#: src/services/callbacks.c:248
+msgid "Could not get info"
+msgstr "情報を取得できませんでした"
+
+#: src/services/callbacks.c:300
 #, c-format
 msgid "Settings for service %s"
 msgstr "サービス %s の設定"
 
-#: src/services/main.c:62
+#: src/services/main.c:58
 msgid "Services Settings"
 msgstr "サービスの設定"
 
@@ -1749,11 +1970,11 @@ msgstr "システムの起動時に実行するサービスを設定します"
 msgid "Services"
 msgstr "サービスの管理"
 
-#: src/services/table.c:55
+#: src/services/table.c:78
 msgid "Active"
 msgstr "有効"
 
-#: src/services/table.c:65
+#: src/services/table.c:88
 msgid "Service"
 msgstr "サービス"
 
@@ -1761,11 +1982,11 @@ msgstr "サービス"
 msgid "Time Zone"
 msgstr "タイムゾーン"
 
-#: src/time/main.c:428
+#: src/time/main.c:423
 msgid "Time Servers"
 msgstr "時刻サーバ"
 
-#: src/time/main.c:506
+#: src/time/main.c:501
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1773,7 +1994,7 @@ msgstr ""
 "お使いのシステムでは NTP が実行されていません。サーバの同期を行う場合は、シス"
 "テムで NTP を実行して下さい。"
 
-#: src/time/main.c:813
+#: src/time/main.c:808
 msgid "Time and Date Settings"
 msgstr "時刻と日付の設定"
 
@@ -2035,18 +2256,3 @@ msgstr "Login シェル"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "ユーザやグループの追加と削除を行います"
-
-#~ msgid "Activating"
-#~ msgstr "有効です"
-
-#~ msgid "Inactive"
-#~ msgstr "無効"
-
-#~ msgid "Deactivating"
-#~ msgstr "無効です"
-
-#~ msgid "Activating connection ``%s.''"
-#~ msgstr "接続 ``%s'' を有効にしています。"
-
-#~ msgid "Deactivating connection ``%s.''"
-#~ msgstr "接続 ``%s'' を無効にしています。"
