@@ -37,8 +37,8 @@
 #include "user-group-xml.h"
 
 GroupsTableConfig groups_table_config [] = {
-	{ "Group",	TRUE,	TRUE},
-	{ "GID",	TRUE,	FALSE},
+	{ N_("Group"),	TRUE,	TRUE},
+	{ N_("GID"),	TRUE,	FALSE},
 	{NULL}
 };
 

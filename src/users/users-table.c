@@ -37,13 +37,13 @@
 
 TableConfig users_table_config [] = {
 	/*Column name,          Adv_state_show,	Basic_state_show*/
-	{ "User",		TRUE,		TRUE},
-	{ "UID",		TRUE,		FALSE},
-	{ "Home",		TRUE,		FALSE},
-	{ "Shell",		TRUE,		FALSE},
-	{ "Comments",		FALSE,		TRUE},
-	{ "Group",		FALSE,		TRUE},
-//	{ "GID",		FALSE,		FALSE},
+	{ N_("User"),		TRUE,		TRUE},
+	{ N_("UID"),		TRUE,		FALSE},
+	{ N_("Home"),		TRUE,		FALSE},
+	{ N_("Shell"),		TRUE,		FALSE},
+	{ N_("Comments"),	FALSE,		TRUE},
+	{ N_("Group"),		FALSE,		TRUE},
+//	{ N_("GID"),		FALSE,		FALSE},
 	{NULL}
 };
 
