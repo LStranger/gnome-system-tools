@@ -50,6 +50,11 @@ xst_xml_doc_dump (xmlDocPtr doc)
 	xmlDocDump (stdout, doc);
 }
 
+void
+xst_xml_doc_destroy (xmlDocPtr doc)
+{
+	xmlFreeDoc (doc);
+}
 
 xmlNodePtr
 xst_xml_element_get_parent (xmlNodePtr node)
@@ -57,6 +62,12 @@ xst_xml_element_get_parent (xmlNodePtr node)
 	return node->parent;
 }
 
+void
+xst_xml_element_reparent (xmlNodePtr node, xmlNodePtr new_parent)
+{
+	xmlUnlinkNode (node);
+	xst_xml_element_add_child (new_parent, node);
+}
 
 xmlNodePtr
 xst_xml_element_find_first (xmlNodePtr parent, const gchar *name)

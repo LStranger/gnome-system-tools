@@ -5,11 +5,12 @@
 
 
 xmlNodePtr     xst_xml_doc_get_root             (xmlDocPtr doc);
-
 void           xst_xml_doc_dump                 (xmlDocPtr doc);
+void           xst_xml_doc_destroy              (xmlDocPtr doc);
 
 xmlNodePtr     xst_xml_element_get_parent       (xmlNodePtr node);
 void           xst_xml_element_add_child        (xmlNodePtr parent, xmlNodePtr child);
+void           xst_xml_element_reparent         (xmlNodePtr node, xmlNodePtr new_parent);
 
 xmlNodePtr     xst_xml_element_find_first       (xmlNodePtr parent,  const gchar *name);
 xmlNodePtr     xst_xml_element_find_next        (xmlNodePtr sibling, const gchar *name);
