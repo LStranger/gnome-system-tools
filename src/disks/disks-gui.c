@@ -43,20 +43,17 @@
 
 extern GstTool *tool;
 
-/* Uncomment for 0.2 */
 /*GtkItemFactoryEntry popup_partition_menu_items[] = {
 	{ N_("/_Format"), NULL, NULL, POPUP_PARTITION_FORMAT, "<StockItem>", GTK_STOCK_DELETE },
 	{ N_("/_Delete"), NULL, NULL, POPUP_PARTITION_REMOVE, "<StockItem>", GTK_STOCK_REMOVE }
 	};*/
 
-/* Uncomment for 0.2 */
 /*static char *
 disks_partition_item_factory_trans (const char *path, gpointer data)
 {
 	return _((gchar*)path);
 }*/
 
-/* Uncomment for 0.2 */
 /*static GtkItemFactory *
 gst_disks_partition_popup_item_factory_create (GtkWidget *treeview)
 {
@@ -230,7 +227,7 @@ gst_disks_gui_partition_list_new ()
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeSelection *selection;
-	/*GtkItemFactory *item_factory;*/ /* Uncoment for 0.2 */
+	/*GtkItemFactory *item_factory;*/
 
 	model = GTK_TREE_MODEL (gtk_tree_store_new (PARTITION_LIST_LAST,
 						    G_TYPE_STRING,
@@ -255,7 +252,6 @@ gst_disks_gui_partition_list_new ()
 			  G_CALLBACK (gst_on_partition_list_selection_change),
 			  NULL);
 
-	/* Uncoment for 0.2 */
 	/*item_factory = gst_disks_partition_popup_item_factory_create (treeview);
 	g_signal_connect (G_OBJECT (treeview), "button_press_event",
 			  G_CALLBACK (gst_on_partition_list_button_press),
@@ -838,6 +834,8 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 		gtk_widget_show (status_label);
 		gtk_widget_show (mount_button);
 		gtk_widget_show (part_browse_button);
+		gtk_widget_show (size_progress);
+		gtk_widget_show (size_tit_label);
 
 		gtk_label_set_text (GTK_LABEL (device_label), device);
 		
@@ -905,7 +903,7 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 		} else {
 			gtk_widget_set_sensitive (part_browse_button, FALSE);
 
-			if (type == PARTITION_TYPE_SWAP)
+			if (type == PARTITION_TYPE_SWAP || !disk_present)
 				gtk_widget_set_sensitive (format_button, FALSE);
 			else
 				gtk_widget_set_sensitive (format_button, TRUE);
@@ -918,17 +916,20 @@ gst_disks_gui_setup_partition_properties (GstDisksPartition *part)
 		}
 		g_free (hr_size);
 	} else {
-		gtk_entry_set_text (GTK_ENTRY (point_entry), "");
-		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (size_progress), 0);
-		gtk_progress_bar_set_text (GTK_PROGRESS_BAR (size_progress), "");
-		gtk_label_set_text (GTK_LABEL (fs_label), "");
-		gtk_label_set_text (GTK_LABEL (device_label), "");
-
-		gtk_widget_set_sensitive (size_progress, FALSE);
-		gtk_widget_set_sensitive (device_label, FALSE);
-		gtk_widget_set_sensitive (change_mp_button, FALSE);
-		gtk_widget_set_sensitive (mount_button, FALSE);
-		gtk_widget_set_sensitive (part_browse_button, FALSE);
+		gtk_widget_hide (device_tit_label);
+		gtk_widget_hide (fs_tit_label);
+		gtk_widget_hide (fs_label);
+		gtk_widget_hide (format_button);
+		gtk_widget_hide (point_tit_label);
+		gtk_widget_hide (point_entry);
+		gtk_widget_hide (change_mp_button);
+		gtk_widget_hide (status_tit_label);
+		gtk_widget_hide (status_label);
+		gtk_widget_hide (mount_button);
+		gtk_widget_hide (part_browse_button);
+		gtk_widget_hide (size_progress);
+		gtk_widget_hide (size_tit_label);
+		gtk_label_set_text (GTK_LABEL (device_label), _("There aren't known partitions in the disk"));
 	}
 }
 
