@@ -583,6 +583,12 @@ xst_ui_logout_dialog (const gchar *message)
 #endif		
 }
 
+/**
+ * xst_ui_text_view_clear:
+ * @view: GtkTextView
+ * 
+ * Simple wrapper to clear buffer of GtkTextView.
+ **/
 void
 xst_ui_text_view_clear (GtkTextView *view)
 {
@@ -595,6 +601,15 @@ xst_ui_text_view_clear (GtkTextView *view)
 	gtk_text_buffer_set_text (buffer, "", 0);
 }
 
+/**
+ * xst_ui_text_view_get_text:
+ * @view: GtkTreeView
+ * 
+ * Get all text from GtkTextView. Note that using this function
+ * makes GtkTextView widget really simple and lame.
+ * 
+ * Return Value: Text, which should be freed when done using it.
+ **/
 gchar *
 xst_ui_text_view_get_text (GtkTextView *view)
 {
@@ -612,6 +627,15 @@ xst_ui_text_view_get_text (GtkTextView *view)
 	return gtk_text_buffer_get_text (buffer, &start_iter, &end_iter, FALSE);
 }
 
+/**
+ * xst_ui_text_view_add_text:
+ * @view: GtkTreeView
+ * @text: 
+ * 
+ * Insert text to the end of GtkTextView's buffer. Note that using this function
+ * makes GtkTextView widget really simple and lame.
+ *
+ **/
 void
 xst_ui_text_view_add_text (GtkTextView *view, const gchar *text)
 {

@@ -240,22 +240,24 @@ xst_su_construct_dialog (GladeXML *xml)
 
 	dialog = gtk_dialog_new_with_buttons (_("Ximian Setup Tools - Password"),
 					      NULL,
-					      GTK_DIALOG_MODAL,
-					      GTK_STOCK_OK,
-					      GTK_RESPONSE_OK,
+					      GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					      GTK_STOCK_OK, GTK_RESPONSE_OK,
 					      _("Run without password"),
 					      XST_SU_RESPONSE_NP,
-					      GTK_STOCK_CANCEL,
-					      GTK_RESPONSE_CANCEL,
+					      GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					      NULL);
 
 	content = glade_xml_get_widget (xml, "password_dialog_content");
-	gtk_widget_show (content);
-
 	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox),
 			    content, FALSE, FALSE, 8);
 
 	return dialog;
+}
+
+static void
+xst_su_enter_cb (GtkWidget *widget, gpointer data)
+{
+	gtk_dialog_response (GTK_DIALOG (data), GTK_RESPONSE_OK);
 }
 
 gint
@@ -272,6 +274,9 @@ xst_su_get_password (gchar **password)
 	g_assert (password_dialog);
 	g_assert (password_entry);
 
+	g_signal_connect (G_OBJECT (password_entry), "activate",
+			  G_CALLBACK (xst_su_enter_cb), (gpointer) password_dialog);
+
 	result = gtk_dialog_run (GTK_DIALOG (password_dialog));
 
 	*password = g_strdup (gtk_entry_get_text (GTK_ENTRY (password_entry)));
@@ -286,21 +291,28 @@ xst_su_get_password (gchar **password)
 	g_free (blank);
 
 	gtk_widget_destroy (password_dialog);
-
-	if (result == GTK_RESPONSE_CANCEL)
-		return -1;  /* Cancel */
-	else if (result == XST_SU_RESPONSE_NP)
-		return 0;   /* Run unprivileged */
-
-	if (!*password)
-		*password = g_strdup ("");
-
 	/* FIXME: I added this because if you click "OK", the dialog
 	 * never goes away.  Is it really needed?
 	 */
 	while (gtk_events_pending ())
 		gtk_main_iteration ();
 
+	switch (result) {
+	case GTK_RESPONSE_OK:
+		/* Run privileged with password */
+		if (!*password)
+			*password = g_strdup ("");
+		return 1;
+		break;
+	case XST_SU_RESPONSE_NP:
+		/* Run unprivileged */
+		return 0;
+		break;
+	default:
+		/* Cancel */
+		return -1;
+		break;
+	}
 
-	return 1;  /* Run privileged with password */
+	g_assert ("Not reached");
 }
