@@ -42,15 +42,15 @@ struct _GstNetworkInterfaceDescription {
 };
 
 static GstNetworkInterfaceDescription gst_iface_desc [] = {
-	{ N_("Other type"),                   GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
-	{ N_("Ethernet LAN card"),            GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
-	{ N_("WaveLAN wireless LAN"),         GST_CONNECTION_WLAN,   "wavelan-16.png",  "wvlan",      NULL },
-	{ N_("PPP: modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
-	{ N_("Parallel line"),                GST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
-	{ N_("Infrared LAN"),                 GST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
-	{ N_("Loopback: virtual interface"),  GST_CONNECTION_LO,      "16_loopback.xpm", "lo",         NULL },
-	{ N_("Unknown type"),                 GST_CONNECTION_UNKNOWN, "network.png",     NULL,         NULL },
-	{ NULL,                               GST_CONNECTION_UNKNOWN, NULL,              NULL,         NULL  }
+	{ N_("Other type"),              GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
+	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
+	{ N_("WaveLAN wireless LAN"),    GST_CONNECTION_WLAN,    "wavelan-16.png",  "wvlan",      NULL },
+	{ N_("Modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
+	{ N_("Parallel line"),           GST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
+	{ N_("Infrared LAN"),            GST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
+	{ N_("Loopback interface"),      GST_CONNECTION_LO,      "16_loopback.xpm", "lo",         NULL },
+	{ N_("Unknown interface type"),  GST_CONNECTION_UNKNOWN, "network.png",     NULL,         NULL },
+	{ NULL,                          GST_CONNECTION_UNKNOWN,  NULL,             NULL,         NULL }
 };
 
 #define W(s) my_get_widget (cxn->xml, (s))
@@ -447,6 +447,20 @@ connection_get_stat_pixbuf (GstConnection *cxn)
 	return cxn->enabled ? active : inactive;
 }
 
+static const gchar*
+connection_get_dev_type (GstConnection *cxn)
+{
+	gint i;
+
+	g_return_val_if_fail (cxn != NULL, NULL);
+
+	for (i = 0; gst_iface_desc[i].description != NULL; i++)
+		if (gst_iface_desc[i].type == cxn->type)
+			return _(gst_iface_desc[i].description);
+
+	return NULL;
+}
+
 static GtkTreeModel *
 connection_list_model_new (void)
 {
@@ -454,6 +468,7 @@ connection_list_model_new (void)
 
 	store = gtk_list_store_new (CONNECTION_LIST_COL_LAST,
 				    GDK_TYPE_PIXBUF,
+				    G_TYPE_STRING,
 				    G_TYPE_STRING,
 				    GDK_TYPE_PIXBUF,
 				    G_TYPE_STRING,
@@ -468,9 +483,13 @@ connection_list_add_columns (GtkTreeView *treeview)
 	GtkTreeViewColumn *col;
 	GtkTreeModel      *model = gtk_tree_view_get_model (treeview);
 
-	/* Device */
+	/* Device type */
 	col = gtk_tree_view_column_new ();
-	gtk_tree_view_column_set_title  (col, _("Device"));
+
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_column_set_sort_column_id (col, 1);
+	
+	gtk_tree_view_column_set_title (col, _("Type"));
 
 	pixbuf_renderer = gtk_cell_renderer_pixbuf_new ();
 
@@ -479,27 +498,40 @@ connection_list_add_columns (GtkTreeView *treeview)
 
 	text_renderer = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (col, text_renderer, TRUE);
-	gtk_tree_view_column_add_attribute (col, text_renderer, "text", CONNECTION_LIST_COL_DEVICE);
+	gtk_tree_view_column_add_attribute (col, text_renderer, "text", CONNECTION_LIST_COL_DEV_TYPE);
+
+	gtk_tree_view_append_column (treeview, col);
+	
+	/* Device */
+	text_renderer = gtk_cell_renderer_text_new ();
+
+	col = gtk_tree_view_column_new_with_attributes (_("Device"), text_renderer,
+							"text", CONNECTION_LIST_COL_DEVICE,
+							NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_column_set_sort_column_id (col, 2);
 
 	gtk_tree_view_append_column (treeview, col);
 
 	/* Status */
-	col = gtk_tree_view_column_new ();
-	gtk_tree_view_column_set_title  (col, _("Status"));
-
 	pixbuf_renderer = gtk_cell_renderer_pixbuf_new ();
 
 	g_object_set (G_OBJECT (pixbuf_renderer), "xalign", 0.5, NULL);
-	gtk_tree_view_insert_column_with_attributes (GTK_TREE_VIEW(treeview), -1, _("Status"), 
-	      pixbuf_renderer,"pixbuf", CONNECTION_LIST_COL_STAT_PIX, NULL);
+	col = gtk_tree_view_column_new_with_attributes (_("Status"), pixbuf_renderer,
+							"pixbuf", CONNECTION_LIST_COL_STAT_PIX,
+							NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_column_set_clickable (col, TRUE);
+	gtk_tree_view_append_column (treeview, col);
 	                                                                    
 	/* Description */
 	text_renderer = gtk_cell_renderer_text_new ();
-	col = gtk_tree_view_column_new_with_attributes (_("Description"),
-							text_renderer,
-							"text",
-							CONNECTION_LIST_COL_DESCR,
+	col = gtk_tree_view_column_new_with_attributes (_("Description"), text_renderer,
+							"text", CONNECTION_LIST_COL_DESCR,
 							NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_column_set_sort_column_id (col, 4);
+
 	gtk_tree_view_append_column (treeview, col);
 }
 
@@ -615,6 +647,7 @@ connection_list_append (GstConnection *cxn)
 
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
 			    CONNECTION_LIST_COL_DEV_PIX,  connection_get_dev_pixbuf (cxn),
+			    CONNECTION_LIST_COL_DEV_TYPE, connection_get_dev_type (cxn),
 			    CONNECTION_LIST_COL_DEVICE,   cxn->dev,
 			    CONNECTION_LIST_COL_STAT_PIX, connection_get_stat_pixbuf (cxn),
 			    CONNECTION_LIST_COL_DESCR,    cxn->name,

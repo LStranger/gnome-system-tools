@@ -36,9 +36,6 @@
 /* Yes, I don't like globals & externs we should really have
    an GstHostsPageInfo struct with all the stuff but it does
    not work with our signals connecting system */
-gboolean updating = FALSE;
-static gboolean hack = FALSE;
-
 extern GstTool *tool;
 
 static char *
@@ -104,10 +101,6 @@ gst_hosts_update_sensitivity (void)
 	gchar *alias_str;
 	GstStatichostUI *ui;
 
-	if (updating) {
-		return;
-	}
-
 	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 
 	/* Get the texts */
@@ -153,12 +146,16 @@ statichost_list_add_columns (GtkTreeView *treeview)
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (_("IP Address"), cell,
 							"text", STATICHOST_LIST_COL_IP, NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_column_set_sort_column_id (col, 0);
 	gtk_tree_view_append_column (treeview, col);
 
 	/* Aliases */
 	cell = gtk_cell_renderer_text_new ();
 	col = gtk_tree_view_column_new_with_attributes (_("Aliases"), cell,
 							"text", STATICHOST_LIST_COL_ALIAS, NULL);
+	gtk_tree_view_column_set_resizable (col, TRUE);
+	gtk_tree_view_column_set_sort_column_id (col, 1);
 	gtk_tree_view_append_column (treeview, col);
 }
 
@@ -175,16 +172,12 @@ statichost_list_select_row (GtkTreeSelection *selection, gpointer data)
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		/* Selection exists */
-		if (!updating) {
-			gtk_tree_model_get (model, &iter, STATICHOST_LIST_COL_IP, &buf, -1);
-
-			pos = 0;
-			gtk_editable_delete_text (GTK_EDITABLE (ui->ip), 0, -1);
-			gtk_editable_insert_text (GTK_EDITABLE (ui->ip), buf, strlen (buf), &pos);
-			g_free (buf);
-		}
-
-		updating = TRUE;
+		gtk_tree_model_get (model, &iter, STATICHOST_LIST_COL_IP, &buf, -1);
+		
+		pos = 0;
+		gtk_editable_delete_text (GTK_EDITABLE (ui->ip), 0, -1);
+		gtk_editable_insert_text (GTK_EDITABLE (ui->ip), buf, strlen (buf), &pos);
+		g_free (buf);
 
 		gtk_tree_model_get (model, &iter, STATICHOST_LIST_COL_ALIAS, &buf, -1);
 		buf = fixdown_text_list (buf);
@@ -192,21 +185,12 @@ statichost_list_select_row (GtkTreeSelection *selection, gpointer data)
 		gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
 		gst_ui_text_view_add_text (GTK_TEXT_VIEW (ui->alias), buf);
 		g_free (buf);
-
-		updating = FALSE;
 	} else {
 		/* Unselect row */
 		gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
 
-		if (updating)
-			return;
-
-		updating = TRUE;
-
 		/* Load aliases into entry widget */
 		gtk_editable_delete_text (GTK_EDITABLE (ui->ip), 0, -1);
-
-		updating = FALSE;
 	}
 
 	gst_hosts_update_sensitivity ();

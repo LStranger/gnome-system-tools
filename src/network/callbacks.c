@@ -47,8 +47,6 @@
 
 extern GstTool *tool;
 
-extern gboolean updating;
-
 static void
 scrolled_window_scroll_bottom (GtkWidget *sw)
 {
@@ -1051,16 +1049,12 @@ gst_hosts_unselect_all (void)
 	GstStatichostUI  *ui;
 	gboolean          valid;
 
-	updating = TRUE;
-
 	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
 
 	gtk_tree_selection_unselect_all (select);
 	gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
-
-	updating = FALSE;
 }
 
 static void
@@ -1076,8 +1070,6 @@ gst_hosts_select_row (const gchar *ip_str)
 	if (!ip_str || strlen (ip_str) == 0)
 		return;
 
-	updating = TRUE;
-
 	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
 	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
@@ -1089,7 +1081,6 @@ gst_hosts_select_row (const gchar *ip_str)
 		if (!strcmp (buf, ip_str)) {
 			gtk_tree_selection_select_iter (select, &iter);
 
-			updating = FALSE;
 			g_free (buf);
 
 			return;
@@ -1098,8 +1089,6 @@ gst_hosts_select_row (const gchar *ip_str)
 		g_free (buf);
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
-
-	updating = FALSE;
 }	
 
 static void
@@ -1109,10 +1098,8 @@ gst_hosts_clear_entries (void)
 
 	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 
-	updating = TRUE;
 	gtk_editable_delete_text (GTK_EDITABLE (ui->ip), 0, -1);
 	gst_ui_text_view_clear (GTK_TEXT_VIEW (ui->alias));
-	updating = FALSE;
 }
 
 static char *
@@ -1136,9 +1123,6 @@ on_hosts_ip_changed (GtkEditable *ip, gpointer not_used)
 {
 	const gchar *ip_str;
 
-	if (updating)
-		return;
-
 	gst_hosts_update_sensitivity ();
 
 	/* Get the texts */
@@ -1150,6 +1134,7 @@ on_hosts_ip_changed (GtkEditable *ip, gpointer not_used)
 void
 on_hosts_alias_changed (GtkTextBuffer *w, gpointer not_used)
 {
+	const gchar *ip_str;
 	char *s;
 	GstStatichostUI *ui;
 	GtkTreeModel    *model;
@@ -1159,22 +1144,25 @@ on_hosts_alias_changed (GtkTextBuffer *w, gpointer not_used)
 	if (!gst_tool_get_access (tool))
 		return;
 
-	if (updating)
-		return;
-
 	ui = (GstStatichostUI *)g_object_get_data (G_OBJECT (tool), STATICHOST_UI_STRING);
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (ui->list));
+	ip_str = gtk_editable_get_chars (GTK_EDITABLE (ui->ip), 0, -1);
 
-	select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
-	if (gtk_tree_selection_get_selected (select, &model, &iter)) {
-		s = fixup_text_list (ui->alias);
+	if (gst_hosts_ip_is_in_list (ip_str)) {
+		select = gtk_tree_view_get_selection (GTK_TREE_VIEW (ui->list));
+		if (gtk_tree_selection_get_selected (select, &model, &iter)) {
+			s = fixup_text_list (ui->alias);
+			
+			gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+					    STATICHOST_LIST_COL_IP, gtk_editable_get_chars (GTK_EDITABLE (ui->ip), 0, -1),
+					    STATICHOST_LIST_COL_ALIAS, s,
+					    -1);
 
-		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-				    STATICHOST_LIST_COL_IP, gtk_editable_get_chars (GTK_EDITABLE (ui->ip), 0, -1),
-				    STATICHOST_LIST_COL_ALIAS, s,
-				    -1);
+			gst_dialog_modify (tool->main_dialog);
+			g_free (s);
 
-		g_free (s);
+
+		}
 	}
 }
 
