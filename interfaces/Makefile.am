@@ -2,14 +2,13 @@ interfaces = \
 	common.glade					\
 	disks.glade 					\
 	memory.glade 					\
-	nameresolution.glade				\
+	nameresolution.glade			\
 	network.glade 					\
-	networking.glade 				\
 	shares.glade 					\
 	time.glade 					\
 	users.glade 					\
 	boot.glade					\
-	location-manager.glade				\
+	location-manager.glade			\
 	print.glade
 
 interfaces_DATA = $(interfaces)
