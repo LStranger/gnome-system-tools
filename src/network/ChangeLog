@@ -1,3 +1,12 @@
+2003-09-12  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
+	* callbacks.c, connection.[ch], main.c, transfer.[ch]: added support
+	  for the --configure "interface" parameter through command line, so
+	  anyone can configure an interface directly without viewing the whole
+	  interface
+	* callbacks.c: (callbacks_check_dialer): fixed a stupid bug that tried
+	  to load a warning dialog from random memory
+
 2003-09-06  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
 	* profile.[ch]: converted mega-xml-tags-comparison used in several 

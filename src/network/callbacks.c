@@ -702,7 +702,8 @@ callbacks_check_dialer (GtkWindow *window, GstTool *tool)
 {
 	gboolean has_dialer;
 	
-	has_dialer = connection_list_has_dialer (tool);
+	has_dialer = (gboolean) g_object_get_data (G_OBJECT (tool), "dialinstalled");
+	
 	if (!has_dialer)
 	{
 		gchar *text = _("wvdial could not be found on your system.\n"
@@ -710,11 +711,11 @@ callbacks_check_dialer (GtkWindow *window, GstTool *tool)
 				"connections will not activate.");
 		GtkWidget *message;
 
-		gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
-					GTK_DIALOG_MODAL,
-					GTK_MESSAGE_WARNING,
-					GTK_BUTTONS_OK,
-					text);
+		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+						  GTK_DIALOG_MODAL,
+						  GTK_MESSAGE_WARNING,
+						  GTK_BUTTONS_OK,
+						  text);
 
 		gtk_dialog_run (GTK_DIALOG (message));
 		gtk_widget_destroy (message);
@@ -728,6 +729,7 @@ callbacks_check_dialer_hook (GstDialog *dialog, gpointer data)
 	gboolean has_dialer;
 
 	tool = GST_TOOL (data);
+	
 	has_dialer = connection_list_has_dialer (tool);
 	if (!has_dialer)
 	{
@@ -923,19 +925,30 @@ on_connection_toggled (GtkWidget *w, gchar *path_str, gpointer data)
 void
 on_connection_ok_clicked (GtkWidget *w, GstConnection *cxn)
 {
+	GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
+	gboolean standalone = (g_object_get_data (G_OBJECT (window), "standalone") != NULL);
+	gboolean add_to_list = !standalone;
 
 	if (cxn->modified) {
-		if (connection_config_save (cxn))
+		if (connection_config_save (cxn, add_to_list))
 			gtk_widget_destroy (cxn->window);
 		cxn->creating = FALSE;
 		gst_dialog_modify (tool->main_dialog);
 	} else
 		gtk_widget_destroy (cxn->window);
+	
+	if (standalone) {
+		connection_save_to_node (cxn, gst_xml_doc_get_root (tool->config));
+		gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog), "apply", tool);
+		gtk_main_quit ();
+	}
 }
 
 void
 on_connection_cancel_clicked (GtkWidget *w, GstConnection *cxn)
 {
+	GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
+	
 	gtk_widget_destroy (cxn->window);
 
 	if (cxn->creating) {
@@ -943,6 +956,9 @@ on_connection_cancel_clicked (GtkWidget *w, GstConnection *cxn)
 		connection_free (cxn);
 		gst_dialog_modify (tool->main_dialog);
 	}
+
+	if (g_object_get_data (G_OBJECT (window), "standalone") != NULL)
+		gtk_main_quit ();
 }
 
 void

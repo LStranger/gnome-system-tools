@@ -291,7 +291,7 @@ transfer_interfaces_to_gui (GstTool *tool, xmlNodePtr root)
 	for (node = gst_xml_element_find_first (root, "interface"); 
 	     node; 
 	     node = gst_xml_element_find_next (node, "interface")) {
-		connection_new_from_node (node);
+		connection_new_from_node (node, TRUE);
 	}
 
 	callbacks_update_connections_hook (tool->main_dialog, NULL);
@@ -348,7 +348,7 @@ transfer_misc_tool_to_xml (GstTool *tool, xmlNodePtr root)
 	transfer_gatewaydev_to_xml (tool, root);
 }
 
-static void
+void
 transfer_misc_xml_to_tool (GstTool *tool, xmlNodePtr root)
 {
 	gboolean res;

@@ -214,6 +214,7 @@ main (int argc, char *argv[])
 	gboolean wlan_connection = FALSE;
 	gboolean plip_connection = FALSE;
 	gboolean irlan_connection = FALSE;
+	gchar *interface = NULL;
 	
 	struct poptOption options[] =
 	{
@@ -223,6 +224,7 @@ main (int argc, char *argv[])
 		{ "wlan-connection", '\0', 0, &wlan_connection, 0, _("Run the wlan connection druid."), NULL },
 		{ "plip-connection", '\0', 0, &plip_connection, 0, _("Run the parallel port connection druid."), NULL },
 		{ "irlan-connection", '\0', 0, &irlan_connection, 0, _("Run the irlan connection druid."), NULL },
+		{ "configure", '\0', POPT_ARG_STRING, &interface, 0, _("Configure a network interface"), _("interface") },
 		
 		{NULL, '\0', 0, NULL, 0}
 	};
@@ -258,6 +260,23 @@ main (int argc, char *argv[])
 		gtk_widget_show_all (druid_window);
 
 		gst_tool_main_with_hidden_dialog (tool, FALSE);
+	} else if (interface != NULL) {
+		GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
+		GstConnection *connection;
+		xmlNodePtr root;
+
+		connect_signals (tool->main_dialog, signals, signals_after);
+		init_editable_filters (tool->main_dialog);
+		gst_dialog_set_widget_policies (tool->main_dialog, policies);
+
+		gst_tool_main_with_hidden_dialog (tool, TRUE);
+
+		g_object_set_data (G_OBJECT (window), "standalone", GINT_TO_POINTER (TRUE));
+		root = gst_xml_doc_get_root (tool->config);
+		transfer_misc_xml_to_tool (tool, root);
+		connection_configure_device (root, interface);
+
+		gtk_main ();
 	} else {
 		connect_signals (tool->main_dialog, signals, signals_after);
 		

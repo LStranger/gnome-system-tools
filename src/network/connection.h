@@ -141,7 +141,7 @@ typedef struct {
 } GstConnection;
 
 extern void connection_init_gui (GstTool *tool);
-extern GstConnection *connection_new_from_node (xmlNode *node);
+extern GstConnection *connection_new_from_node (xmlNodePtr, gboolean);
 extern GstConnection *connection_new_from_dev_name (char *dev_name, xmlNode *root);
 extern GstConnection *connection_new_from_type (GstConnectionType type, xmlNode *root);
 extern GstConnection *connection_new_from_type_add (GstConnectionType type, xmlNode *root);
@@ -160,6 +160,7 @@ extern void connection_update_complexity (GstTool *tool, GstDialogComplexity com
 extern void connection_actions_set_sensitive (gboolean state);
 extern void connection_free (GstConnection *);
 extern void connection_configure (GstConnection *cxn);
+extern void connection_configure_device (xmlNodePtr, gchar*);
 extern void connection_save_to_node (GstConnection *cxn, xmlNode *node);
 
 GstConnection *connection_list_get_active (void);
@@ -172,7 +173,7 @@ void           connection_list_save       (GstTool *tool);
 void           connection_list_select_connection (GstConnection *cxn);
 void           connection_list_clear      (GstTool *tool);
 
-gboolean connection_config_save (GstConnection*);
+gboolean connection_config_save (GstConnection*, gboolean);
 void     connection_check_netmask_gui (GstConnection*, GtkWidget*, GtkWidget*);
 void     connection_set_modified (GstConnection*, gboolean);
 

@@ -70,3 +70,4 @@ struct _TransStringIPEntry
 void transfer_profile_to_gui (GstTool*,gpointer);
 void transfer_xml_to_gui     (GstTool*, gpointer);
 void transfer_gui_to_xml     (GstTool*, gpointer);
+void transfer_misc_xml_to_tool (GstTool*, xmlNodePtr);

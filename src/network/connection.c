@@ -1352,7 +1352,7 @@ connection_new_from_type (GstConnectionType type, xmlNode *root)
 }
 
 GstConnection *
-connection_new_from_node (xmlNode *node)
+connection_new_from_node (xmlNode *node, gboolean add_to_list)
 {
 	GstConnection *cxn;
 	char *s = NULL;
@@ -1408,7 +1408,8 @@ connection_new_from_node (xmlNode *node)
 		break;
 	}
 
-	connection_add_to_list (cxn);
+	if (add_to_list)
+		connection_add_to_list (cxn);
 
 	return cxn;
 }
@@ -2005,6 +2006,45 @@ connection_configure (GstConnection *cxn)
 	gtk_widget_show (cxn->window);
 }
 
+void
+connection_configure_device (xmlNodePtr root, gchar *interface)
+{
+	xmlNodePtr node = gst_xml_element_find_first (root, "interface");
+	gchar *dev;
+	gboolean found = FALSE;
+	GstConnection *connection;
+	gchar *txt;
+	GtkWidget *dialog;
+
+	for (node = gst_xml_element_find_first (root, "interface");
+	     node != NULL;
+	     node = gst_xml_element_find_next (node, "interface"))
+	{
+		dev = gst_xml_get_child_content (node, "dev");
+
+		if (strcmp (dev, interface) == 0) {
+			g_free (dev);
+			break;
+		}
+		
+		g_free (dev);
+	}
+
+	if (node != NULL) {
+		connection = connection_new_from_node (node, FALSE);
+		connection_configure (connection);
+	} else {
+		txt = g_strdup_printf (_("The interface %s doesn't exist."), interface);
+		dialog = gtk_message_dialog_new (NULL,
+						 GTK_DIALOG_MODAL,
+						 GTK_MESSAGE_QUESTION,
+						 GTK_BUTTONS_CLOSE,
+						 txt);
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		exit (0);
+	}
+}
+
 static gboolean
 connection_updatedns_supported (GstConnection *cxn)
 {
@@ -2169,7 +2209,7 @@ connection_list_select_connection (GstConnection *cxn)
 }
 
 gboolean
-connection_config_save (GstConnection *cxn)
+connection_config_save (GstConnection *cxn, gboolean add_to_list)
 {
 	GstConnection *tmp = g_new0 (GstConnection, 1);
 
@@ -2189,8 +2229,11 @@ connection_config_save (GstConnection *cxn)
 	}
 
 	connection_empty_gui (cxn);
+
 	connection_set_modified (cxn, FALSE);
-	connection_list_append (cxn);
+
+	if (add_to_list)
+		connection_list_append (cxn);
 
 	return TRUE;
 }
