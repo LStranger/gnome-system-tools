@@ -6,18 +6,9 @@
 
 gchar *s = N_("Networking Administration");
 gchar *s = N_("Interface:");
-gchar *s = N_(".");
-gchar *s = N_(".");
-gchar *s = N_(".");
 gchar *s = N_("Gateway IP:");
 gchar *s = N_("Netmask:");
 gchar *s = N_("Host IP:");
-gchar *s = N_(".");
-gchar *s = N_(".");
-gchar *s = N_(".");
-gchar *s = N_(".");
-gchar *s = N_(".");
-gchar *s = N_(".");
 gchar *s = N_("Use DHCP server");
 gchar *s = N_("Enable automatically at boot");
 gchar *s = N_("Primary networking");
