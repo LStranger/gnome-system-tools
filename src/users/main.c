@@ -89,7 +89,8 @@ static const XstWidgetPolicy policies[] = {
 	{ "user_settings_advanced", XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "user_delete",            XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
 	{ "user_settings",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
-	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
+	{ "user_profiles",          XST_WIDGET_MODE_HIDDEN,      XST_WIDGET_MODE_HIDDEN,    TRUE,  TRUE  },
+#warning I disabled profiles for the release because it is not really working 
 	{ "groups_holder",          XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, FALSE, TRUE  },
 	{ "group_new",              XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  TRUE  },
 	{ "group_delete",           XST_WIDGET_MODE_SENSITIVE,   XST_WIDGET_MODE_SENSITIVE, TRUE,  FALSE },
