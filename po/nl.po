@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.nl\n"
-"POT-Creation-Date: 2003-03-28 04:17+0100\n"
-"PO-Revision-Date: 2003-03-28 15:06--100\n"
+"POT-Creation-Date: 2003-04-22 03:57+0200\n"
+"PO-Revision-Date: 2003-04-22 12:45+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
 "MIME-Version: 1.0\n"
@@ -83,7 +83,7 @@ msgstr ""
 "worden tijdens het opstarten in te stellen."
 
 #: interfaces/boot.glade.h:9 interfaces/boot.glade.in.h:48
-#: interfaces/network.glade.h:22 interfaces/network.glade.in.h:102
+#: interfaces/network.glade.h:22 interfaces/network.glade.in.h:127
 #: interfaces/shares.glade.h:34 interfaces/shares.glade.h:43
 #: interfaces/shares.glade.in.h:60
 msgid "_Add..."
@@ -138,7 +138,12 @@ msgstr "Besturings_systeem:"
 #: interfaces/network.glade.h:121 interfaces/network.glade.h:123
 #: interfaces/network.glade.h:141 interfaces/network.glade.h:148
 #: interfaces/network.glade.h:149 interfaces/network.glade.h:151
-#: interfaces/network.glade.h:161 interfaces/network.glade.in.h:1
+#: interfaces/network.glade.h:161 interfaces/network.glade.h:198
+#: interfaces/network.glade.h:199 interfaces/network.glade.h:200
+#: interfaces/network.glade.h:210 interfaces/network.glade.h:211
+#: interfaces/network.glade.h:217 interfaces/network.glade.h:221
+#: interfaces/network.glade.h:222 interfaces/network.glade.h:224
+#: interfaces/network.glade.h:231 interfaces/network.glade.in.h:1
 #: interfaces/time.glade.h:10 interfaces/time.glade.h:12
 #: interfaces/time.glade.in.h:2 interfaces/users.glade.h:11
 #: interfaces/users.glade.h:58 interfaces/users.glade.h:59
@@ -243,8 +248,8 @@ msgstr ""
 #: interfaces/boot.glade.h:46 interfaces/boot.glade.in.h:26
 #: interfaces/internetsharing.glade.h:56
 #: interfaces/internetsharing.glade.in.h:33 interfaces/network.glade.h:166
-#: interfaces/network.glade.in.h:44 interfaces/users.glade.h:52
-#: interfaces/users.glade.in.h:34
+#: interfaces/network.glade.h:233 interfaces/network.glade.in.h:49
+#: interfaces/users.glade.h:52 interfaces/users.glade.in.h:34
 msgid "Finished"
 msgstr "Klaar"
 
@@ -261,8 +266,8 @@ msgid "Usual kernel parameters."
 msgstr "Standaard kernelparameters."
 
 #: interfaces/boot.glade.h:50 interfaces/boot.glade.in.h:29
-#: interfaces/network.glade.h:61 interfaces/network.glade.in.h:57
-#: src/network/connection.c:1894
+#: interfaces/network.glade.h:61 interfaces/network.glade.h:201
+#: interfaces/network.glade.in.h:63 src/network/connection.c:1693
 msgid "Manual"
 msgstr "Handmatig"
 
@@ -404,8 +409,9 @@ msgstr ""
 "wachtwoord kunt u geen wijzigingen in de systeeminstellingen aanbrengen."
 
 #: interfaces/common.glade.h:21 interfaces/common.glade.in.h:14
-#: interfaces/network.glade.h:153 interfaces/network.glade.in.h:64
-#: interfaces/shares.glade.h:112 interfaces/shares.glade.in.h:46
+#: interfaces/network.glade.h:153 interfaces/network.glade.h:226
+#: interfaces/network.glade.in.h:76 interfaces/shares.glade.h:112
+#: interfaces/shares.glade.in.h:46
 msgid "Password:"
 msgstr "Wachtwoord:"
 
@@ -513,7 +519,7 @@ msgid "_Add"
 msgstr "_Toevoegen"
 
 #: interfaces/dhcpd.glade.h:30 interfaces/dhcpd.glade.in.h:18
-#: interfaces/network.glade.h:38 interfaces/network.glade.in.h:108
+#: interfaces/network.glade.h:38 interfaces/network.glade.in.h:133
 #: interfaces/shares.glade.h:36 interfaces/shares.glade.h:45
 #: interfaces/shares.glade.in.h:63 interfaces/users.glade.h:18
 #: interfaces/users.glade.h:23 interfaces/users.glade.in.h:83
@@ -535,7 +541,7 @@ msgstr "Type:"
 
 #: interfaces/disks.glade.h:9 interfaces/disks.glade.in.h:7
 #: interfaces/memory.glade.h:14 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.h:52 interfaces/network.glade.in.h:42
+#: interfaces/network.glade.h:52 interfaces/network.glade.in.h:47
 msgid "Device:"
 msgstr "Apparaat:"
 
@@ -862,7 +868,7 @@ msgstr ""
 #: interfaces/internetsharing.glade.h:22
 #: interfaces/internetsharing.glade.in.h:26
 msgid "Create a new local network interface."
-msgstr "Een nieuwe lokale netwerk interface creëren."
+msgstr "Een nieuwe lokale netwerkverbinding maken."
 
 #: interfaces/internetsharing.glade.h:23
 #: interfaces/internetsharing.glade.in.h:13
@@ -1033,7 +1039,8 @@ msgstr "IP Doorsluizen"
 
 #: interfaces/internetsharing.glade.h:64
 #: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.h:62
-#: interfaces/network.glade.in.h:38 src/network/connection.c:1895
+#: interfaces/network.glade.h:202 interfaces/network.glade.in.h:43
+#: src/network/connection.c:1694
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1363,7 +1370,7 @@ msgstr "Beschikbare partities:"
 
 #: interfaces/memory.glade.h:8 interfaces/memory.glade.h:33
 #: interfaces/memory.glade.h:42 interfaces/memory.glade.in.h:5
-#: src/boot/table.c:48 src/network/connection.c:497
+#: src/boot/table.c:48 src/network/connection.c:473
 msgid "Device"
 msgstr "Apparaat"
 
@@ -1382,7 +1389,7 @@ msgstr "OK"
 
 #: interfaces/memory.glade.h:12 interfaces/memory.glade.in.h:4
 msgid "Cancel"
-msgstr "Afbreken"
+msgstr "Annuleren"
 
 #: interfaces/memory.glade.h:13 interfaces/memory.glade.in.h:19
 msgid "Swap Settings"
@@ -1479,7 +1486,7 @@ msgid "IP address:"
 msgstr "IP adres:"
 
 #: interfaces/nameresolution.glade.h:9 interfaces/nameresolution.glade.h:49
-#: interfaces/nameresolution.glade.in.h:5 src/network/hosts.c:380
+#: interfaces/nameresolution.glade.in.h:5 src/network/hosts.c:160
 msgid "Aliases"
 msgstr "Aliasen"
 
@@ -1640,11 +1647,11 @@ msgstr "Verander het IP adres of naam van de alias "
 #. * Añada este archivo a su POTFILES.in de su proyecto.
 #. * NO lo compile como parte de su aplicación.
 #.
-#: interfaces/network.glade.h:7 interfaces/network.glade.in.h:58
+#: interfaces/network.glade.h:7 interfaces/network.glade.in.h:64
 msgid "Networking Settings"
 msgstr "Netwerk Instellingen"
 
-#: interfaces/network.glade.h:8 interfaces/network.glade.in.h:54
+#: interfaces/network.glade.h:8 interfaces/network.glade.in.h:59
 msgid "How this computer is identified."
 msgstr "Identificatie van deze computer."
 
@@ -1652,7 +1659,7 @@ msgstr "Identificatie van deze computer."
 msgid "<span weight=\"bold\">Host Settings</span>"
 msgstr "<span weight=\"bold\">Host-instellingen</span>"
 
-#: interfaces/network.glade.h:10 interfaces/network.glade.in.h:116
+#: interfaces/network.glade.h:10 interfaces/network.glade.in.h:141
 msgid "_Host name:"
 msgstr "_Hostnaam:"
 
@@ -1660,52 +1667,52 @@ msgstr "_Hostnaam:"
 msgid "<span weight=\"bold\">Windows Networking</span>"
 msgstr "<span weight=\"bold\">Windows netwerkomgeving</span>"
 
-#: interfaces/network.glade.h:13 interfaces/network.glade.in.h:109
+#: interfaces/network.glade.h:13 interfaces/network.glade.in.h:134
 msgid "_Description:"
 msgstr "_Beschrijving:"
 
-#: interfaces/network.glade.h:14 interfaces/network.glade.in.h:43
+#: interfaces/network.glade.h:14 interfaces/network.glade.in.h:48
 msgid "Domain / _Workgroup:"
 msgstr "Domein / _Werkgroep:"
 
-#: interfaces/network.glade.h:18 interfaces/network.glade.in.h:84
+#: interfaces/network.glade.h:18 interfaces/network.glade.in.h:100
 msgid "WI_NS server:"
 msgstr "WI_NS server:"
 
-#: interfaces/network.glade.h:19 interfaces/network.glade.in.h:112
+#: interfaces/network.glade.h:19 interfaces/network.glade.in.h:137
 msgid "_Enable Windows networking"
 msgstr "Voorziening voor _Windows netwerkomgeving aanzetten"
 
 #: interfaces/network.glade.h:20 interfaces/network.glade.h:58
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:51
 msgid "General"
 msgstr "Algemeen"
 
-#: interfaces/network.glade.h:21 interfaces/network.glade.in.h:48
+#: interfaces/network.glade.h:21 interfaces/network.glade.in.h:53
 msgid "How other computers are accessed."
 msgstr "Hoe andere computers worden benaderd."
 
-#: interfaces/network.glade.h:23 interfaces/network.glade.in.h:107
+#: interfaces/network.glade.h:23 interfaces/network.glade.in.h:132
 msgid "_Configure"
 msgstr "In_stellen"
 
-#: interfaces/network.glade.h:24 interfaces/network.glade.in.h:41
+#: interfaces/network.glade.h:24 interfaces/network.glade.in.h:46
 msgid "Default gateway device:"
 msgstr "Standaard netwerkapparaat:"
 
-#: interfaces/network.glade.h:25 interfaces/network.glade.in.h:81
+#: interfaces/network.glade.h:25 interfaces/network.glade.in.h:96
 msgid "Use \"Auto\" if unsure."
 msgstr "Gebruik \"Automatisch\" als u het niet zeker weer."
 
-#: interfaces/network.glade.h:26 interfaces/network.glade.in.h:32
+#: interfaces/network.glade.h:26 interfaces/network.glade.in.h:33
 msgid "Auto"
 msgstr "Automatisch"
 
-#: interfaces/network.glade.h:27 interfaces/network.glade.in.h:36
+#: interfaces/network.glade.h:27 interfaces/network.glade.in.h:40
 msgid "Connections"
 msgstr "Verbindingen"
 
-#: interfaces/network.glade.h:28 interfaces/network.glade.in.h:52
+#: interfaces/network.glade.h:28 interfaces/network.glade.in.h:57
 msgid ""
 "How the names of other\n"
 "computers are found."
@@ -1713,23 +1720,23 @@ msgstr ""
 "Hoe namen van andere\n"
 "computers worden gevonden."
 
-#: interfaces/network.glade.h:30 interfaces/network.glade.in.h:111
+#: interfaces/network.glade.h:30 interfaces/network.glade.in.h:136
 msgid "_Domain name:"
 msgstr "_Domeinnaam:"
 
-#: interfaces/network.glade.h:32 interfaces/network.glade.in.h:40
+#: interfaces/network.glade.h:32 interfaces/network.glade.in.h:45
 msgid "DNS _Servers:"
 msgstr "DNS _Servers:"
 
-#: interfaces/network.glade.h:33 interfaces/network.glade.in.h:69
+#: interfaces/network.glade.h:33 interfaces/network.glade.in.h:83
 msgid "Sea_rch Domains:"
 msgstr "Z_oek Domeinen:"
 
-#: interfaces/network.glade.h:34 interfaces/network.glade.in.h:39
+#: interfaces/network.glade.h:34 interfaces/network.glade.in.h:44
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.h:35 interfaces/network.glade.in.h:29
+#: interfaces/network.glade.h:35 interfaces/network.glade.in.h:30
 msgid "Aliases of other computers."
 msgstr "Aliasen van andere computers."
 
@@ -1738,41 +1745,45 @@ msgid "A_liases:"
 msgstr "A_liasen:"
 
 #: interfaces/network.glade.h:39 interfaces/network.glade.h:66
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.h:196 interfaces/network.glade.in.h:142
 msgid "_IP address:"
 msgstr "_IP adres:"
 
-#: interfaces/network.glade.h:40 interfaces/network.glade.in.h:47
-#: src/network/main.c:134
+#: interfaces/network.glade.h:40 interfaces/network.glade.in.h:52
+#: src/network/main.c:179
 msgid "Hosts"
 msgstr "Hosts"
 
-#: interfaces/network.glade.h:41 interfaces/network.glade.in.h:59
-#: src/network/callbacks.c:475
+#: interfaces/network.glade.h:41 interfaces/network.glade.in.h:65
 msgid "New Connection Type"
 msgstr "Nieuw verbindingstype"
 
-#: interfaces/network.glade.h:42 interfaces/network.glade.in.h:120
+#: interfaces/network.glade.h:42 interfaces/network.glade.h:185
+#: interfaces/network.glade.in.h:146
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.h:43 interfaces/network.glade.in.h:113
+#: interfaces/network.glade.h:43 interfaces/network.glade.h:186
+#: interfaces/network.glade.in.h:138
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.h:44 interfaces/network.glade.in.h:134
+#: interfaces/network.glade.h:44 interfaces/network.glade.h:187
+#: interfaces/network.glade.in.h:161
 msgid "_Wavelan"
 msgstr "_WaveLAN"
 
-#: interfaces/network.glade.h:45 interfaces/network.glade.in.h:123
+#: interfaces/network.glade.h:45 interfaces/network.glade.h:188
+#: interfaces/network.glade.in.h:149
 msgid "_Parallel Line"
 msgstr "_Parallelle verbinding"
 
-#: interfaces/network.glade.h:46 interfaces/network.glade.in.h:118
+#: interfaces/network.glade.h:46 interfaces/network.glade.h:189
+#: interfaces/network.glade.in.h:143
 msgid "_IR LAN"
 msgstr "_Infrarood LAN"
 
-#: interfaces/network.glade.h:47 interfaces/network.glade.in.h:70
+#: interfaces/network.glade.h:47 interfaces/network.glade.in.h:84
 msgid ""
 "Select which type of connection\n"
 "you would like to add."
@@ -1780,11 +1791,11 @@ msgstr ""
 "Selecteer het type van de verbinding\n"
 "die u toe wilt voegen."
 
-#: interfaces/network.glade.h:49 interfaces/network.glade.in.h:34
+#: interfaces/network.glade.h:49 interfaces/network.glade.in.h:35
 msgid "Connection Settings"
 msgstr "Verbinding Instellingen"
 
-#: interfaces/network.glade.h:50 interfaces/network.glade.in.h:82
+#: interfaces/network.glade.h:50 interfaces/network.glade.in.h:97
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who will activate connections, and when."
@@ -1796,7 +1807,7 @@ msgstr ""
 msgid "<span weight=\"bold\">Connection</span>"
 msgstr "<span weight=\"bold\">Verbinding</span>"
 
-#: interfaces/network.glade.h:53 interfaces/network.glade.in.h:105
+#: interfaces/network.glade.h:53 interfaces/network.glade.in.h:130
 #: interfaces/shares.glade.h:142 interfaces/shares.glade.in.h:62
 msgid "_Comment:"
 msgstr "_Beschrijving:"
@@ -1805,7 +1816,7 @@ msgstr "_Beschrijving:"
 msgid "<span weight=\"bold\">Activation</span>"
 msgstr "<span weight=\"bold\">Activering</span>"
 
-#: interfaces/network.glade.h:56 interfaces/network.glade.in.h:30
+#: interfaces/network.glade.h:56 interfaces/network.glade.in.h:31
 msgid "Allow activation control for all _users"
 msgstr "Maak activatie mogelijk voor alle gebr_uikers"
 
@@ -1813,37 +1824,40 @@ msgstr "Maak activatie mogelijk voor alle gebr_uikers"
 msgid "Activate when the computer _starts"
 msgstr "Activeren tijdens het op_starten"
 
-#: interfaces/network.glade.h:59 interfaces/network.glade.in.h:49
+#: interfaces/network.glade.h:59 interfaces/network.glade.in.h:54
 msgid "How the IP address for this connection is determined."
 msgstr "Hoe het IP adres voor de verbinding wordt toegekend."
 
-#: interfaces/network.glade.h:60 interfaces/network.glade.in.h:106
+#: interfaces/network.glade.h:60 interfaces/network.glade.h:197
+#: interfaces/network.glade.in.h:131
 msgid "_Configuration:"
 msgstr "_Instellingen:"
 
-#: interfaces/network.glade.h:63 interfaces/network.glade.in.h:33
-#: src/network/connection.c:1896
+#: interfaces/network.glade.h:63 interfaces/network.glade.h:203
+#: interfaces/network.glade.in.h:34 src/network/connection.c:1695
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.h:64 interfaces/network.glade.in.h:115
+#: interfaces/network.glade.h:64 interfaces/network.glade.h:194
+#: interfaces/network.glade.in.h:140
 msgid "_Gateway address:"
 msgstr "_Gateway adres:"
 
-#: interfaces/network.glade.h:65 interfaces/network.glade.in.h:130
+#: interfaces/network.glade.h:65 interfaces/network.glade.h:195
+#: interfaces/network.glade.in.h:157
 msgid "_Subnet mask:"
 msgstr "_Subnetmasker:"
 
-#: interfaces/network.glade.h:70 interfaces/network.glade.in.h:131
+#: interfaces/network.glade.h:70 interfaces/network.glade.in.h:158
 msgid "_Update DNS when this connection becomes active"
 msgstr "DNS verversen als de verbinding actief wordt"
 
 #: interfaces/network.glade.h:71 interfaces/network.glade.h:79
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:61
 msgid "IP Settings"
 msgstr "IP Instellingen"
 
-#: interfaces/network.glade.h:72 interfaces/network.glade.in.h:50
+#: interfaces/network.glade.h:72 interfaces/network.glade.in.h:55
 msgid ""
 "How the IP addresses for this connection \n"
 "are determined."
@@ -1851,27 +1865,28 @@ msgstr ""
 "Hoe het IP adres voor deze verbinding \n"
 "wordt verkregen."
 
-#: interfaces/network.glade.h:74 interfaces/network.glade.in.h:119
+#: interfaces/network.glade.h:74 interfaces/network.glade.in.h:145
 msgid "_Local IP:"
 msgstr "_Lokale IP:"
 
-#: interfaces/network.glade.h:75 interfaces/network.glade.in.h:126
+#: interfaces/network.glade.h:75 interfaces/network.glade.in.h:153
 msgid "_Remote IP:"
 msgstr "IP aan ande_re kant:"
 
-#: interfaces/network.glade.h:78 interfaces/network.glade.in.h:132
+#: interfaces/network.glade.h:78 interfaces/network.glade.h:212
+#: interfaces/network.glade.in.h:159
 msgid "_Use remote IP as default gateway"
 msgstr "Gebr_uik IP van andere kant als standaard-gateway"
 
-#: interfaces/network.glade.h:80 interfaces/network.glade.in.h:100
+#: interfaces/network.glade.h:80 interfaces/network.glade.in.h:122
 msgid "Wireless networking settings."
 msgstr "Draadloos netwerk instellingen."
 
-#: interfaces/network.glade.h:81 interfaces/network.glade.in.h:101
+#: interfaces/network.glade.h:81 interfaces/network.glade.in.h:126
 msgid "_Ad-Hoc mode"
 msgstr "_Ad-Hoc mode"
 
-#: interfaces/network.glade.h:82 interfaces/network.glade.in.h:128
+#: interfaces/network.glade.h:82 interfaces/network.glade.in.h:155
 msgid "_Session ID:"
 msgstr "_Sessie ID:"
 
@@ -1879,11 +1894,11 @@ msgstr "_Sessie ID:"
 msgid "<span weight=\"bold\">Ad-Hoc Settings</span>"
 msgstr "<span weight=\"bold\">Ad-hoc instellingen</span>"
 
-#: interfaces/network.glade.h:85 interfaces/network.glade.in.h:104
+#: interfaces/network.glade.h:85 interfaces/network.glade.in.h:129
 msgid "_Channel:"
 msgstr "_Kanaal:"
 
-#: interfaces/network.glade.h:86 interfaces/network.glade.in.h:114
+#: interfaces/network.glade.h:86 interfaces/network.glade.in.h:139
 msgid "_Frequency (GHz):"
 msgstr "_Frequentie (GHz):"
 
@@ -1891,11 +1906,11 @@ msgstr "_Frequentie (GHz):"
 msgid "2.422"
 msgstr "2.422"
 
-#: interfaces/network.glade.h:89 interfaces/network.glade.in.h:89
+#: interfaces/network.glade.h:89 interfaces/network.glade.in.h:105
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.h:90 interfaces/network.glade.in.h:55
+#: interfaces/network.glade.h:90 interfaces/network.glade.in.h:60
 msgid "How to dial up to the internet."
 msgstr "Hoe verbinding met internet te maken."
 
@@ -1903,28 +1918,28 @@ msgstr "Hoe verbinding met internet te maken."
 msgid "<span weight=\"bold\">Account Data</span>"
 msgstr "<span weight=\"bold\">Accountinformatie</span>"
 
-#: interfaces/network.glade.h:92 interfaces/network.glade.in.h:65
+#: interfaces/network.glade.h:92 interfaces/network.glade.in.h:77
 msgid "Phone _number:"
 msgstr "Telefoon_nummer:"
 
-#: interfaces/network.glade.h:93 interfaces/network.glade.in.h:133
+#: interfaces/network.glade.h:93 interfaces/network.glade.in.h:160
 msgid "_User name:"
 msgstr "Gebr_uikersnaam:"
 
-#: interfaces/network.glade.h:94 interfaces/network.glade.in.h:124
+#: interfaces/network.glade.h:94 interfaces/network.glade.in.h:150
 #: interfaces/print.glade.h:19 interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Wachtwoord:"
 
-#: interfaces/network.glade.h:98 interfaces/network.glade.in.h:121
+#: interfaces/network.glade.h:98 interfaces/network.glade.in.h:147
 msgid "_Modem port:"
 msgstr "_Modem poort:"
 
-#: interfaces/network.glade.h:99 interfaces/network.glade.in.h:110
+#: interfaces/network.glade.h:99 interfaces/network.glade.in.h:135
 msgid "_Dial type:"
 msgstr "_Inbeltype:"
 
-#: interfaces/network.glade.h:100 interfaces/network.glade.in.h:122
+#: interfaces/network.glade.h:100 interfaces/network.glade.in.h:148
 msgid "_Modem volume:"
 msgstr "_Modem geluidniveau:"
 
@@ -1932,19 +1947,19 @@ msgstr "_Modem geluidniveau:"
 msgid "<span weight=\"bold\">Access Settings</span>"
 msgstr "<span weight=\"bold\">Toegangsinstellingen</span>"
 
-#: interfaces/network.glade.h:102 interfaces/network.glade.in.h:80
+#: interfaces/network.glade.h:102 interfaces/network.glade.in.h:95
 msgid "Tones"
 msgstr "Toon"
 
-#: interfaces/network.glade.h:103 interfaces/network.glade.in.h:67
+#: interfaces/network.glade.h:103 interfaces/network.glade.in.h:81
 msgid "Pulses"
 msgstr "Puls"
 
-#: interfaces/network.glade.h:104 interfaces/network.glade.in.h:127
+#: interfaces/network.glade.h:104 interfaces/network.glade.in.h:154
 msgid "_Retry if the connection drops or fails to start"
 msgstr "P_robeer opnieuw als de verbinding wegvalt of niet goed start"
 
-#: interfaces/network.glade.h:105 interfaces/network.glade.in.h:103
+#: interfaces/network.glade.h:105 interfaces/network.glade.in.h:128
 msgid "_Autodetect"
 msgstr "_Automatisch detecteren"
 
@@ -1973,7 +1988,7 @@ msgstr "/dev/ttyS3"
 msgid "Account"
 msgstr "Account"
 
-#: interfaces/network.glade.h:113 interfaces/network.glade.in.h:28
+#: interfaces/network.glade.h:113 interfaces/network.glade.in.h:29
 msgid "Advanced PPP connection tuning."
 msgstr "Geavanceerde instellingen voor PPP-verbinding."
 
@@ -1981,15 +1996,15 @@ msgstr "Geavanceerde instellingen voor PPP-verbinding."
 msgid "<span weight=\"bold\">PPP Settings</span>"
 msgstr "<span weight=\"bold\">PPP-instellingen</span>"
 
-#: interfaces/network.glade.h:115 interfaces/network.glade.in.h:62
+#: interfaces/network.glade.h:115 interfaces/network.glade.in.h:74
 msgid "PPPD _options:"
 msgstr "PPPD _instellingen:"
 
-#: interfaces/network.glade.h:117 interfaces/network.glade.in.h:129
+#: interfaces/network.glade.h:117 interfaces/network.glade.in.h:156
 msgid "_Start PPP as soon as modem connects"
 msgstr "PPP _starten zodra de modem verbinding maakt"
 
-#: interfaces/network.glade.h:118 interfaces/network.glade.in.h:73
+#: interfaces/network.glade.h:118 interfaces/network.glade.in.h:87
 msgid "Set modem as default _route to internet"
 msgstr "Modem instellen als standaard_route naar het internet"
 
@@ -1997,19 +2012,19 @@ msgstr "Modem instellen als standaard_route naar het internet"
 msgid "<span weight=\"bold\">DNS Servers</span>"
 msgstr "<span weight=\"bold\">DNS-servers</span>"
 
-#: interfaces/network.glade.h:120 interfaces/network.glade.in.h:125
+#: interfaces/network.glade.h:120 interfaces/network.glade.in.h:151
 msgid "_Primary:"
 msgstr "_Primaire:"
 
-#: interfaces/network.glade.h:122 interfaces/network.glade.in.h:68
+#: interfaces/network.glade.h:122 interfaces/network.glade.in.h:82
 msgid "Se_condary:"
 msgstr "Se_cundaire:"
 
-#: interfaces/network.glade.h:124 interfaces/network.glade.in.h:72
+#: interfaces/network.glade.h:124 interfaces/network.glade.in.h:86
 msgid "Set _DNS servers manually"
 msgstr "_DNS servers handmatig instellen"
 
-#: interfaces/network.glade.h:125 interfaces/network.glade.in.h:27
+#: interfaces/network.glade.h:125 interfaces/network.glade.in.h:28
 #: interfaces/users.glade.h:93 interfaces/users.glade.in.h:15
 msgid "Advanced"
 msgstr "Geavanceerd"
@@ -2018,11 +2033,11 @@ msgstr "Geavanceerd"
 msgid "Add New Internet Connection"
 msgstr "Nieuwe Internetverbinding toevoegen"
 
-#: interfaces/network.glade.h:127 interfaces/network.glade.in.h:37
+#: interfaces/network.glade.h:127 interfaces/network.glade.in.h:41
 msgid "Create a new Internet Connection "
-msgstr "Een nieuwe Internetverbinding creëren "
+msgstr "Een nieuwe Internetverbinding maken "
 
-#: interfaces/network.glade.h:128 interfaces/network.glade.in.h:90
+#: interfaces/network.glade.h:128 interfaces/network.glade.in.h:106
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -2050,7 +2065,7 @@ msgstr ""
 msgid "1. ISP phone number"
 msgstr "1. ISP telefoonnummer"
 
-#: interfaces/network.glade.h:139 interfaces/network.glade.in.h:45
+#: interfaces/network.glade.h:139 interfaces/network.glade.in.h:50
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
@@ -2058,20 +2073,21 @@ msgstr ""
 "Geef het telefoonnummer dat u gebruikt om met internet te verbinden. Dit "
 "telefoonnummer wordt gegeven door uw ISP."
 
-#: interfaces/network.glade.h:140 interfaces/network.glade.in.h:66
+#: interfaces/network.glade.h:140 interfaces/network.glade.h:216
+#: interfaces/network.glade.in.h:78
 msgid "Phone number:"
 msgstr "Telefoonnummer:"
 
 #: interfaces/network.glade.h:142 interfaces/network.glade.h:156
-#: interfaces/network.glade.h:162 interfaces/network.glade.in.h:78
+#: interfaces/network.glade.h:162 interfaces/network.glade.in.h:92
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click \"Cancel"
 "\".\n"
 msgstr ""
 "Om door te gaan dit account in te stellen, druk op \"Volgende\". Druk op "
-"\"Afbreken\" om te stoppen.\n"
+"\"Anuleren\" om te stoppen.\n"
 
-#: interfaces/network.glade.h:144 interfaces/network.glade.in.h:85
+#: interfaces/network.glade.h:144 interfaces/network.glade.in.h:101
 msgid "Warning message goes here.\n"
 msgstr "Hier staat een waarschuwing.\n"
 
@@ -2079,23 +2095,26 @@ msgstr "Hier staat een waarschuwing.\n"
 msgid "2. Username and password"
 msgstr "2. Gebruikersnaam en wachtwoord"
 
-#: interfaces/network.glade.h:147 interfaces/network.glade.in.h:60
+#: interfaces/network.glade.h:147 interfaces/network.glade.h:220
+#: interfaces/network.glade.in.h:67
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr ""
 "Geef de gebruikersnaam en het wachtwoord dat u van uw ISP heeft gekregen."
 
-#: interfaces/network.glade.h:150 interfaces/network.glade.in.h:63
+#: interfaces/network.glade.h:150 interfaces/network.glade.h:223
+#: interfaces/network.glade.in.h:75
 msgid "Password (confirm):"
 msgstr "Wachtwoord (nogmaals):"
 
-#: interfaces/network.glade.h:152 interfaces/network.glade.in.h:83
+#: interfaces/network.glade.h:152 interfaces/network.glade.h:225
+#: interfaces/network.glade.in.h:98
 msgid "User name:"
 msgstr "Gebruikersnaam:"
 
 #: interfaces/network.glade.h:154 interfaces/network.glade.h:164
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:103
 msgid "Warning message goes here..\n"
 msgstr "Hier staat een waarschuwing..\n"
 
@@ -2103,7 +2122,7 @@ msgstr "Hier staat een waarschuwing..\n"
 msgid "3. Account name"
 msgstr "3. Accountnaam"
 
-#: interfaces/network.glade.h:159 interfaces/network.glade.in.h:61
+#: interfaces/network.glade.h:159 interfaces/network.glade.in.h:72
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
@@ -2115,7 +2134,7 @@ msgstr ""
 msgid "Account name:"
 msgstr "Accountnaam:"
 
-#: interfaces/network.glade.h:167 interfaces/network.glade.in.h:74
+#: interfaces/network.glade.h:167 interfaces/network.glade.in.h:88
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -2127,7 +2146,7 @@ msgstr ""
 "over hoe door te gaan (vorige, afbreken\n"
 "of klaar)."
 
-#: interfaces/network.glade.h:171 interfaces/network.glade.in.h:35
+#: interfaces/network.glade.h:171 interfaces/network.glade.in.h:36
 msgid "Connection active"
 msgstr "Verbinding actief"
 
@@ -2135,13 +2154,125 @@ msgstr "Verbinding actief"
 msgid "Activate when the computer starts"
 msgstr "Activeren als de computer opstart"
 
-#: interfaces/network.glade.h:173 interfaces/network.glade.in.h:31
+#: interfaces/network.glade.h:173 interfaces/network.glade.in.h:32
 msgid "Allow activation control for all users"
 msgstr "Alle gebruikers toestaan om verbinding te activeren"
 
 #: interfaces/network.glade.h:174 interfaces/network.glade.in.h:25
 msgid "Activation"
 msgstr "Activatie"
+
+#: interfaces/network.glade.h:175 interfaces/network.glade.in.h:66
+msgid "New network connection"
+msgstr "Nieuwe netwerkverbinding"
+
+#: interfaces/network.glade.h:176 interfaces/network.glade.in.h:42
+msgid "Create a new network connection"
+msgstr "Een nieuwe netwerkverbinding maken"
+
+#: interfaces/network.glade.h:177 interfaces/network.glade.in.h:116
+msgid ""
+"Welcome to the Network Connection druid. \n"
+"\n"
+"This druid will help you configure a new \n"
+"network connection. \n"
+"\n"
+"Click the \"Next\" button to begin."
+msgstr ""
+"Welkom bij de Assistent voor netwerkverbindingen.\n"
+"\n"
+"Deze assistent zal helpen om een nieuwe\n"
+"netwerkverbinding in te stellen.\n"
+"\n"
+"Klik op \"Volgende\" om te beginnen."
+
+#: interfaces/network.glade.h:183 interfaces/network.glade.in.h:39
+msgid "Connection type"
+msgstr "Verbindingstype"
+
+#: interfaces/network.glade.h:184 interfaces/network.glade.in.h:80
+msgid "Please, select which type of connection you would like to add."
+msgstr "Selecteer het type van de verbinding die u toe wilt voegen."
+
+#: interfaces/network.glade.h:190 interfaces/network.glade.h:204
+#: interfaces/network.glade.h:213 interfaces/network.glade.h:218
+#: interfaces/network.glade.h:227 interfaces/network.glade.h:232
+#: interfaces/network.glade.in.h:94
+msgid ""
+"To continue configuring your network connection, click \"Next\". To quit, "
+"click \"Cancel\"."
+msgstr ""
+"Om door te gaan met instellen van deze netwerkverbinding, druk op \"Volgende"
+"\". Druk op \"Annuleren\" om te stoppen."
+
+#: interfaces/network.glade.h:191 interfaces/network.glade.h:205
+#: interfaces/network.glade.in.h:27
+msgid "Address configuration (Step 1 of 2)"
+msgstr "Adresconfiguratie  (stap 1 van 2)"
+
+#: interfaces/network.glade.h:192 interfaces/network.glade.in.h:68
+msgid ""
+"Now, please enter the address that \n"
+"this network device will have."
+msgstr ""
+"Geef nu alstublieft het adres van\n"
+"dit netwerkapparaat."
+
+#: interfaces/network.glade.h:206 interfaces/network.glade.in.h:70
+msgid ""
+"Now, please enter the address that this network device will have,\n"
+"and the remote address to which it will be connected."
+msgstr ""
+"Geef nu alstublieft het adres van dit netwerkapparaat,\n"
+"en het adres waarmee het verbonden zal worden."
+
+#: interfaces/network.glade.h:208 interfaces/network.glade.in.h:144
+msgid "_Local IP address:"
+msgstr "_Lokaal IP adres:"
+
+#: interfaces/network.glade.h:209 interfaces/network.glade.in.h:152
+msgid "_Remote IP address:"
+msgstr "_Remote IP adres:"
+
+#: interfaces/network.glade.h:214 interfaces/network.glade.in.h:62
+msgid "ISP phone number (Step 1 of 3)"
+msgstr "ISP telefoonnummer (stap 1 van 3)"
+
+#: interfaces/network.glade.h:215 interfaces/network.glade.in.h:79
+msgid ""
+"Please enter the phone number you use to connect to the internet. This "
+"number is provided by your ISP. "
+msgstr ""
+"Geef het telefoonnummer dat u gebruikt om met internet te verbinden. Dit "
+"telefoonnummer wordt gegeven door uw ISP."
+
+#: interfaces/network.glade.h:219 interfaces/network.glade.in.h:99
+msgid "Username and password (Step 2 of 3)"
+msgstr "Gebruikersnaam en wachtwoord (stap 2 van 3)"
+
+#: interfaces/network.glade.h:228 interfaces/network.glade.in.h:37
+#: src/network/network-druid.c:393
+msgid "Connection name (Step 3 of 3)"
+msgstr "Verbindingsnaam (stap 3 van 3)"
+
+#: interfaces/network.glade.h:229 interfaces/network.glade.in.h:73
+msgid "Now, please give this connection a name."
+msgstr "Geef deze verbinding nu een naam."
+
+#: interfaces/network.glade.h:230 interfaces/network.glade.in.h:38
+msgid "Connection name:"
+msgstr "Verbindingsnaam:"
+
+#: interfaces/network.glade.h:234 interfaces/network.glade.in.h:123
+msgid ""
+"You are about to create a new network connection.\n"
+"\n"
+"Please click \"Apply\" to save your changes."
+msgstr ""
+"U staat op het punt om deze nieuwe netwerkverbinding\n"
+"toe te voegen.\n"
+"\n"
+"Klik op \"Klaar\" om de wijzigingen op te slaan."
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -3372,7 +3503,7 @@ msgstr "Opstarten"
 msgid "Boot Manager"
 msgstr "Opstartbeheer"
 
-#: src/boot/callbacks.c:150
+#: src/boot/callbacks.c:239
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3380,12 +3511,12 @@ msgstr ""
 "Zonder tenminste een opstart-image\n"
 "zal uw systeem niet kunnen starten.\n"
 
-#: src/boot/callbacks.c:165
+#: src/boot/callbacks.c:254
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
 
-#: src/boot/callbacks.c:205 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:294 src/runlevel/callbacks.c:97
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3409,6 +3540,18 @@ msgstr "Type"
 #: src/boot/table.c:47
 msgid "Kernel Image"
 msgstr "Kernel Image"
+
+#: src/boot/table.c:53
+msgid "/_Add ..."
+msgstr "/_Toevoegen..."
+
+#: src/boot/table.c:55 src/users/table.c:49 src/users/table.c:56
+msgid "/_Properties"
+msgstr "/_eigenschappen"
+
+#: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
+msgid "/_Delete"
+msgstr "/Verwij_deren"
 
 #: src/common/System.directory.in.in.h:1
 msgid "System"
@@ -3439,7 +3582,7 @@ msgstr ""
 "Sommige veranderingen zijn nog niet toegepast.\n"
 "Wilt u deze nu toepassen?"
 
-#: src/common/gst-dialog.c:556
+#: src/common/gst-dialog.c:565
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fout bij het verbinden van signaal '%s' aan widget '%s'"
@@ -3525,79 +3668,79 @@ msgstr ""
 "Herstart uw GNOME sessie om deze\n"
 "wijzigingen toe te passen."
 
-#: src/network/callbacks.c:110
+#: src/network/callbacks.c:113
 msgid "Active"
 msgstr "Actief"
 
-#: src/network/callbacks.c:113
+#: src/network/callbacks.c:116
 msgid "Activating"
 msgstr "Bezig met activering"
 
-#: src/network/callbacks.c:124
+#: src/network/callbacks.c:127
 msgid "Inactive"
 msgstr "Niet actief"
 
-#: src/network/callbacks.c:127
+#: src/network/callbacks.c:130
 msgid "Deactivating"
 msgstr "Bezig met deactiveren"
 
-#: src/network/callbacks.c:357
+#: src/network/callbacks.c:360
 msgid "The name of this computer"
 msgstr "De naam van deze computer"
 
-#: src/network/callbacks.c:360
+#: src/network/callbacks.c:363
 msgid "A short description of your computer"
 msgstr "Een korte beschrijving van deze computer"
 
-#: src/network/callbacks.c:363
+#: src/network/callbacks.c:366
 msgid "The Windows Networking workgroup for your network"
 msgstr "De windows werkgroep voor deze computer"
 
-#: src/network/callbacks.c:366
+#: src/network/callbacks.c:369
 msgid "The IP address of your WINS server"
 msgstr "Het IP adres van de WINS server"
 
-#: src/network/callbacks.c:369
+#: src/network/callbacks.c:372
 msgid "The DNS domain for your computer"
 msgstr "Het DNS domein van de computer"
 
-#: src/network/callbacks.c:372
+#: src/network/callbacks.c:375
 msgid "A list of your DNS servers' IP addresses"
 msgstr "Een lijst van IP adressen van DNS servers"
 
-#: src/network/callbacks.c:375
+#: src/network/callbacks.c:378
 msgid "A list of domains where hosts will be searched"
 msgstr "Een lijst van domeinen om computers op te zoeken"
 
-#: src/network/callbacks.c:378
+#: src/network/callbacks.c:381
 msgid "The IP address of this host"
 msgstr "IP adres van deze host"
 
-#: src/network/callbacks.c:381
+#: src/network/callbacks.c:384
 msgid "Aliases for this host, one per line"
 msgstr "Aliases van deze host, een per regel"
 
-#: src/network/callbacks.c:525
+#: src/network/callbacks.c:485
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Verbinding %s verwijderen, ``%s''?"
 
-#: src/network/callbacks.c:527
+#: src/network/callbacks.c:487
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Verbinding %s verwijderen?"
 
-#: src/network/callbacks.c:573
+#: src/network/callbacks.c:533
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Bezig met activeren van verbinding ``%s.''"
 
-#: src/network/callbacks.c:611
+#: src/network/callbacks.c:571
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Bezig met deactiveren van verbinding ``%s.''"
 
-#: src/network/callbacks.c:648
+#: src/network/callbacks.c:608
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -3606,11 +3749,11 @@ msgstr ""
 "ondersteuning (Samba) in het systeem om een windows netwerk mogelijk te "
 "maken."
 
-#: src/network/callbacks.c:651
+#: src/network/callbacks.c:611
 msgid "SMB support missing."
 msgstr "SMB ondersteuning niet gevonden."
 
-#: src/network/callbacks.c:693
+#: src/network/callbacks.c:653
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -3624,7 +3767,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:739
+#: src/network/callbacks.c:699
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3634,7 +3777,7 @@ msgstr ""
 "U moet wvdial installeren om de PPP (modem)\n"
 "verbindingen te activeren."
 
-#: src/network/callbacks.c:765
+#: src/network/callbacks.c:725
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3648,7 +3791,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:792
+#: src/network/callbacks.c:752
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -3660,7 +3803,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:847
+#: src/network/callbacks.c:807
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -3671,7 +3814,7 @@ msgstr ""
 "door te gaan of kies een ander standaard gateway-\n"
 "apparaat.\n"
 
-#: src/network/callbacks.c:893
+#: src/network/callbacks.c:853
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -3683,57 +3826,70 @@ msgstr ""
 "het tabblad verbindingen veroorzaken. Installeer a.u.b. het\n"
 "redhat-config-network RPM pakket om dit te voorkomen."
 
-#: src/network/connection.c:56
-msgid "Other type"
-msgstr "Ander type"
-
-#: src/network/connection.c:57
-msgid "Ethernet LAN card"
-msgstr "Ethernet LAN kaart"
-
-#: src/network/connection.c:58
-msgid "WaveLAN wireless LAN"
-msgstr "waveLAN draadloos LAN"
-
-#: src/network/connection.c:59
-msgid "PPP: modem or transfer cable"
-msgstr "PPP, modem of transportkabel"
-
-#: src/network/connection.c:60
-msgid "Parallel line"
-msgstr "Parallelle verbinding"
-
-#: src/network/connection.c:61
-msgid "Infrared LAN"
-msgstr "Infrarood LAN"
-
-#: src/network/connection.c:62
-msgid "Loopback: virtual interface"
-msgstr "Loopback: virtuÃ«le interface"
-
-#: src/network/connection.c:63
-msgid "Unknown type"
-msgstr "Onbekend type"
-
-#: src/network/connection.c:512 src/network/connection.c:517
-msgid "Status"
-msgstr "Status"
-
-#: src/network/connection.c:522
-msgid "Description"
-msgstr "Beschrijving"
-
-#: src/network/connection.c:576
+#: src/network/callbacks.c:903
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Weet u zeker dat u het apparaat %s wilt inschakelen?"
 
-#: src/network/connection.c:588
+#: src/network/callbacks.c:915
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Weet u zeker dat u het apparaat %s wilt uitschakelen?"
 
-#: src/network/connection.c:1650
+#: src/network/callbacks.c:989
+msgid ""
+"Could not autodetect modem device, check that this is not busy and that it's "
+"correctly attached"
+msgstr ""
+"Kan modemapparaat niet detecteren. Controleer dat deze correct aangesloten, "
+"ingeschakeld en niet bezet is"
+
+#: src/network/callbacks.c:1200
+#, c-format
+msgid "Are you sure you want to delete the aliases for %s?"
+msgstr "Weet u zeker dat u de aliasen voor %s wilt verwijderen?"
+
+#: src/network/connection.c:45
+msgid "Other type"
+msgstr "Ander type"
+
+#: src/network/connection.c:46
+msgid "Ethernet LAN card"
+msgstr "Ethernet LAN kaart"
+
+#: src/network/connection.c:47
+msgid "WaveLAN wireless LAN"
+msgstr "waveLAN draadloos LAN"
+
+#: src/network/connection.c:48
+msgid "PPP: modem or transfer cable"
+msgstr "PPP, modem of transportkabel"
+
+#: src/network/connection.c:49
+msgid "Parallel line"
+msgstr "Parallelle verbinding"
+
+#: src/network/connection.c:50
+msgid "Infrared LAN"
+msgstr "Infrarood LAN"
+
+#: src/network/connection.c:51
+msgid "Loopback: virtual interface"
+msgstr "Loopback: virtuÃ«le interface"
+
+#: src/network/connection.c:52
+msgid "Unknown type"
+msgstr "Onbekend type"
+
+#: src/network/connection.c:488 src/network/connection.c:493
+msgid "Status"
+msgstr "Status"
+
+#: src/network/connection.c:498
+msgid "Description"
+msgstr "Beschrijving"
+
+#: src/network/connection.c:1574
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3743,7 +3899,7 @@ msgstr ""
 "leeggelaten. Vul a.u.b. een geldige waarde\n"
 "in voor beide velden."
 
-#: src/network/connection.c:1657
+#: src/network/connection.c:1581
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3753,7 +3909,7 @@ msgstr ""
 "de interface werd leeggelaten. Vul a.u.b.\n"
 "een geldige waarde in voor beide velden."
 
-#: src/network/connection.c:1663
+#: src/network/connection.c:1587
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3767,32 +3923,39 @@ msgstr ""
 "IP in als eerste DNS server of kies niet voor\n"
 "handmatige DNS instellingen."
 
-#: src/network/connection.c:1799
+#: src/network/connection.c:2138
 msgid "Autodetecting modem device"
 msgstr "Modemapparaat automatisch detecteren"
 
-#: src/network/connection.c:1809
-msgid ""
-"Could not autodetect modem device, check that this is not busy and that it's "
-"correctly attached"
-msgstr ""
-"Kan modemapparaat niet detecteren. Controleer dat deze correct aangesloten, "
-"ingeschakeld en niet bezet is"
-
-#: src/network/hosts.c:332
-#, c-format
-msgid "Are you sure you want to delete the aliases for %s?"
-msgstr "Weet u zeker dat u de aliasen voor %s wilt verwijderen?"
-
-#: src/network/hosts.c:374
+#: src/network/hosts.c:154
 msgid "IP Address"
 msgstr "IP-adres"
 
-#: src/network/main.c:176
-msgid "\tRun the internet conection druid."
-msgstr "\tStart de Assistent Internetverbinding."
+#: src/network/main.c:226
+msgid "Run the connection druid."
+msgstr "Start de Assistent netwerkverbinding."
 
-#: src/network/main.c:183
+#: src/network/main.c:227
+msgid "Run the PPP connection druid."
+msgstr "Start de Assistent PPP-verbinding."
+
+#: src/network/main.c:228
+msgid "Run the ethernet connection druid."
+msgstr "Start de Assistent ethernetverbinding."
+
+#: src/network/main.c:229
+msgid "Run the wlan connection druid."
+msgstr "Start de Assistent WLAN-verbinding."
+
+#: src/network/main.c:230
+msgid "Run the parallel port connection druid."
+msgstr "Start de Assistent paralelle poort-verbinding."
+
+#: src/network/main.c:231
+msgid "Run the irlan connection druid."
+msgstr "Start de Assistent IRlan-verbinding."
+
+#: src/network/main.c:238
 msgid "Network Settings"
 msgstr "Netwerkinstellingen"
 
@@ -3804,60 +3967,9 @@ msgstr "Netwertkkaartinstellingen."
 msgid "Networking"
 msgstr "Netwerk"
 
-#: src/network/ppp-druid.c:182
-msgid ""
-"The phone number must be composed of\n"
-"only numbers or commas (,)."
-msgstr ""
-"Het telefoonnummer mag alleen bestaan uit\n"
-"nummers of komma's (,)"
-
-#: src/network/ppp-druid.c:199
-msgid ""
-"The password and its confirmation\n"
-"must be the same."
-msgstr ""
-"Het wachtwoord en de bevestiging\n"
-"moeten hetzelfde zijn."
-
-#: src/network/ppp-druid.c:202
-msgid ""
-"If you are specifying a password,\n"
-"you should specify a user name."
-msgstr ""
-"Als u een wachtwoord opgeeft, moet\n"
-"u ook een gebruikersnaam opgeven."
-
-#: src/network/ppp-druid.c:225
-msgid ""
-"Please set a name for this account,\n"
-"using only space, letters and numbers."
-msgstr ""
-"Geef a.u.b. een naam voor dit account op,\n"
-"bestaande uit letters, spaties en nummers."
-
-#: src/network/ppp-druid.c:239
-#, c-format
-msgid ""
-"You are about to create an account named with the following information:\n"
-"\n"
-"Account Name: %s\n"
-"\n"
-"Phone number: %s\n"
-"\n"
-"User name: %s\n"
-"\n"
-"Password: %s"
-msgstr ""
-"U staat op het punt de volgende account aan te maken:\n"
-"\n"
-"Accountnaam: %s\n"
-"\n"
-"Telefoonnummer: %s\n"
-"\n"
-"Gebruikersnaam: %s\n"
-"\n"
-"Wachtwoord: %s"
+#: src/network/network-druid.c:382
+msgid "Connection name (Step 2 of 2)"
+msgstr "Verbindingsnaam (stap 2 van 2)"
 
 #: src/runlevel/callbacks.c:49
 msgid "No description available."
@@ -3904,11 +4016,11 @@ msgstr "Tijd en Datum Instellingen"
 msgid "Time, date and timezone."
 msgstr "Tijd, datum en tijdzone."
 
-#: src/users/callbacks.c:517
+#: src/users/callbacks.c:590
 msgid "Create New profile"
 msgstr "Nieuw profiel aanmaken"
 
-#: src/users/callbacks.c:548
+#: src/users/callbacks.c:621
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Instellingen voor profiel %s"
@@ -3955,11 +4067,11 @@ msgstr "Weet u zeker dat u de groep %s wilt verwijderen?"
 msgid "Settings for Group %s"
 msgstr "Instellingen voor groep %s"
 
-#: src/users/groups-table.c:40 src/users/users-table.c:46
+#: src/users/groups-table.c:44 src/users/users-table.c:51
 msgid "Group"
 msgstr "Groep"
 
-#: src/users/groups-table.c:41
+#: src/users/groups-table.c:45
 msgid "GID"
 msgstr "GID"
 
@@ -4041,6 +4153,14 @@ msgstr "Keuze"
 #: src/users/search-bar/search-bar.c:356
 msgid "Text"
 msgstr "Tekst"
+
+#: src/users/table.c:47
+msgid "/_Add User ..."
+msgstr "/Gebruiker _toevoegen ..."
+
+#: src/users/table.c:54
+msgid "/_Add group ..."
+msgstr "/Groep _toevoegen ..."
 
 #: src/users/user-settings.c:120
 msgid "The root user must not be deleted."
@@ -4129,23 +4249,23 @@ msgid "Settings for user %s"
 msgstr "Instellingen voor gebruiker %s"
 
 #. Column name,          Adv_state_show,	Basic_state_show
-#: src/users/users-table.c:41
+#: src/users/users-table.c:46
 msgid "User"
 msgstr "Gebruiker"
 
-#: src/users/users-table.c:42
+#: src/users/users-table.c:47
 msgid "UID"
 msgstr "UID"
 
-#: src/users/users-table.c:43
+#: src/users/users-table.c:48
 msgid "Home"
 msgstr "Persoonlijke map"
 
-#: src/users/users-table.c:44
+#: src/users/users-table.c:49
 msgid "Shell"
 msgstr "Shell"
 
-#: src/users/users-table.c:45
+#: src/users/users-table.c:50
 msgid "Comments"
 msgstr "Commentaar"
 
