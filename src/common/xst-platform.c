@@ -27,7 +27,7 @@
 #include "xst-report-line.h"
 
 XstPlatform *
-xst_platform_new (gchar *name)
+xst_platform_new (const gchar *name)
 {
 	XstPlatform *xp;
 
@@ -42,7 +42,7 @@ xst_platform_new (gchar *name)
 XstPlatform *
 xst_platform_new_from_report_line (XstReportLine *rline)
 {
-	gchar *key;
+	const gchar *key;
 	
 	g_return_val_if_fail (rline != NULL, NULL);
 
@@ -79,5 +79,6 @@ const gchar *
 xst_platform_get_name (XstPlatform *platform)
 {
 	g_return_val_if_fail (platform != NULL, NULL);
+	
 	return (platform->name);
 }

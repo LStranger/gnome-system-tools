@@ -94,6 +94,12 @@ platform_list_unselect_row_cb (GtkCList *clist, gint row, gint column, GdkEvent 
 }
 
 static void
+platform_dialog_close_cb (GtkWidget *dialog, XstTool *tool)
+{
+	exit (1);
+}
+
+static void
 platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
 {
 	if (ret == -1 || ret == 1)
@@ -117,6 +123,11 @@ platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
 	tool->run_again = TRUE;
 
 	report_dispatch (tool);
+
+	gtk_signal_disconnect_by_func (GTK_OBJECT (tool->platform_dialog),
+				       platform_dialog_close_cb,
+				       tool);
+	
 }
 
 static gboolean
@@ -151,6 +162,8 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 			    platform_list_unselect_row_cb, tool);
 	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "clicked",
 			    platform_unsupported_clicked_cb, tool);
+	gtk_signal_connect (GTK_OBJECT (tool->platform_dialog), "close",
+			    platform_dialog_close_cb, tool);
 
 	gtk_widget_set_sensitive (tool->platform_ok_button, FALSE);
 	gtk_widget_show (tool->platform_dialog);
@@ -263,6 +276,7 @@ xst_tool_get_access (XstTool *tool)
 	return root_access != ROOT_ACCESS_NONE;
 }
 
+#if 0
 static void
 timeout_cb (gpointer data)
 {
@@ -275,8 +289,6 @@ timeout_cb (gpointer data)
 	if (tool->timeout_done && !tool->report_list_visible)
 		gtk_main_quit ();
 }
-
-#if 0
 
 static void
 set_arrow (XstTool *tool, GtkArrowType arrow)
@@ -311,13 +323,13 @@ report_dispatch (XstTool *tool)
 {
 	GSList *list;
 	XstReportLine *rline;
+#if 0
 	GtkAdjustment *vadj;
 	char *report_text[] = {
 		NULL,
 		NULL
 	};
 
-#if 0
 	if (!GTK_IS_SCROLLED_WINDOW (tool->report_scrolled)) {
 		g_warning ("tool->report_scrolled is not a GtkScrolledWindow\n");
 		tool->report_dispatch_pending = FALSE;
@@ -444,7 +456,9 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 static void
 report_progress (XstTool *tool, int fd, const gchar *label)
 {
+#if 0
 	gint cb_id;
+#endif	
 
 	tool->timeout_done = FALSE;
 	tool->report_list_visible = FALSE;
@@ -491,7 +505,7 @@ gboolean
 xst_tool_save (XstTool *tool)
 {
 	FILE *f;
-#warning This is a security problem, fix
+#warning This might be a security problem, fix
 	FILE *debug_file;
 	int fd_xml [2], fd_report [2];
 	int t;
@@ -935,6 +949,20 @@ xst_tool_reset_report_hooks (XstTool *tool)
 		((XstReportHook *) list->data)->invoked = FALSE;
 }
 
+/**
+ * xst_fool_the_linker:
+ * @void: 
+ * 
+ * We need to keep the symbol for the create image widget function
+ * so that libglade can find it to create the icons.
+ **/
+void xst_fool_the_linker (void);
+void
+xst_fool_the_linker (void)
+{
+	xst_ui_create_image_widget (NULL, NULL, NULL, 0, 0);
+}
+
 void
 xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
@@ -944,11 +972,6 @@ xst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
 #endif
-
-	/* This is to fool the linker: do not delete, even if it doesn't
-	 * make sense. Arturo Espinosa <arturo@ximian.com>
-	 */
-	xst_ui_create_image_widget (NULL, NULL, NULL, 0, 0);
 
 	if (options == NULL) {
 		gnome_init (app_name, VERSION, argc, argv);

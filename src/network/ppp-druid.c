@@ -224,15 +224,11 @@ static gchar *ppp_druid_check_last (PppDruid *ppp)
 	gchar *text;
 	gchar *phone, *login, *passwd, *profile;
 	gchar *format =
-_("You are about to create an account named with the following information:
-
-Account Name: %s
-
-Phone number: %s
-
-User name: %s
-
-Password: %s");
+_("You are about to create an account named with the following information:\n\n"
+  "Account Name: %s\n\n"
+  "Phone number: %s\n\n"
+  "User name: %s\n\n"
+  "Password: %s");
 
 	w = my_get_widget (ppp->glade, "page_last");
 	

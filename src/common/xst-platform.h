@@ -29,7 +29,7 @@ struct _XstPlatform {
 	gchar *name;
 };
 
-XstPlatform     *xst_platform_new                  (gchar *name);
+XstPlatform     *xst_platform_new                  (const gchar *name);
 XstPlatform     *xst_platform_new_from_report_line (XstReportLine *rline);
 XstPlatform     *xst_platform_dup                  (XstPlatform *platform);
 

@@ -194,9 +194,6 @@ tz_data_file_get (void)
 
 	file = g_strdup (TZ_DATA_FILE);
 
-	g_print ("The timezone data file is %s\n",
-		 file);
-	
 	return file;
 }
 

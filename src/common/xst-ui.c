@@ -113,9 +113,10 @@ xst_ui_combo_remove_by_label (GtkCombo *combo, const gchar *label)
 
 /* Stolen and adapted from evolution's e-util/e-gui-utils.c
  * Arturo Espinosa <arturo@ximian.com> */
-GtkWidget *xst_ui_create_image_widget(gchar *name,
-				      gchar *string1, gchar *string2,
-				      gint int1, gint int2)
+GtkWidget *
+xst_ui_create_image_widget (gchar *name,
+			    gchar *string1, gchar *string2,
+			    gint int1, gint int2)
 {
 	char *filename;
 	GdkPixbuf *pixbuf;

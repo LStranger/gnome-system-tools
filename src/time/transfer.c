@@ -11,6 +11,7 @@
 #include <glade/glade.h>
 
 #include "xst.h"
+#include "time-tool.h"
 
 #include "transfer.h"
 #include "tz.h"

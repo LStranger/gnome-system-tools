@@ -1,3 +1,23 @@
+2001-05-14  Chema Celorio  <chema@celorio.com>
+
+	* timeserv.c: remove the extern time variable, pass the pointer of
+	the tool arround.
+	* tz-map.c: ditto
+
+	* time-tool.h : new file
+
+	* main.c: remove the global XstTime *time variable, pass the XstTool
+	dialog arround
+	(xst_time_clock_tick): rename clock_tick 
+	(xst_time_init_timezone): rename from init_timezone_selection
+	(main): sublass XstTool
+	(xst_time_tool_new): impl
+	(xst_time_load_widgets): impl
+
+	* Makefile.am (time_admin_SOURCES): add time-tool.h
+
+	* tz.c (tz_data_file_get): remove g_print
+
 2001-05-12  Hans Petter Jansson  <hpj@ximian.com>
 
 	* main.c (clock_tick): Put the freeze/thaw back in, since without them

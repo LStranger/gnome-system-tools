@@ -1,3 +1,27 @@
+2001-05-14  Chema Celorio  <chema@celorio.com>
+
+	* xst-tool.h (XST_TOOL_MAKE_TYPE): add even more boilerplate
+	code to the macro.
+
+	* xst-tool.c (platform_dialog_close_cb): implement
+	(platform_unsupported_clicked_cb): disconnect dialog close here
+	(platform_unsupported_cb): connect dialog_close_cb to "close",
+	this causes the platform dialog to be closed if ESC is pressed
+	(timeout_cb): #ifdef out
+	(set_arrow): ditto
+	(xst_fool_the_linker): implement
+	(xst_init): remove the call to xst_ui_create_image_widgte and
+	the "nice" message that acompanied it.
+
+	* xst-platform.h: upd. header
+
+	* xst-platform.c (xst_platform_new_from_report_line): make key
+	a const gchar
+	(xst_platform_new): constify
+
+	* xst-tool.c: remove compile time warning by #ifdefing out code/
+	variables that where not beeing used
+
 2001-05-13  Chema Celorio  <chema@celorio.com>
 
 	* xst-tool.h (XST_TOOL_MAKE_TYPE): add a macro that will reduce

@@ -31,6 +31,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "xst.h"
+#include "time-tool.h"
 
 #include "tz.h"
 #include "timeserv.h"
@@ -38,14 +39,13 @@
 #include "e-map/e-map.h"
 #include "tz-map.h"
 
-ETzMap *tzmap;
 
-XstTool *tool;
+ETzMap *tzmap;
 
 static void timezone_button_clicked (GtkWidget *w, gpointer data);
 static void update_tz (GtkWidget *w, gpointer data);
 static void server_button_clicked (GtkWidget *w, gpointer data);
-static void ntp_use_toggled (GtkWidget *w, gpointer data);
+static void ntp_use_toggled (GtkWidget *w, XstDialog *dialog);
 
 static char *ntp_servers[] =
 {
@@ -103,8 +103,9 @@ static XstDialogSignal signals[] = {
 };
 
 static void
-populate_ntp_list (void)
+xst_time_populate_ntp_list (XstTimeTool *time_tool)
 {
+	XstTool *tool = XST_TOOL (time_tool);
 	GtkWidget *ntp_list, *item;
 	GList *list_add = 0;
 	int i;
@@ -123,14 +124,15 @@ populate_ntp_list (void)
 
 
 static void
-init_timezone_selection (void)
+xst_time_init_timezone (XstTimeTool *time_tool)
 {
+	XstTool *tool = XST_TOOL (time_tool);
 	GtkWidget *w, *w2;
 	GPtrArray *locs;
 	GList *combo_locs = NULL;
 	int i;	
 
-	tzmap = e_tz_map_new ();
+	tzmap = e_tz_map_new (time_tool);
 	w = xst_dialog_get_widget (tool->main_dialog, "map_window");
 	gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (tzmap->map));
 	gtk_widget_show (GTK_WIDGET (tzmap->map));
@@ -156,8 +158,9 @@ init_timezone_selection (void)
 
 
 static gint
-clock_tick (gpointer data)
+xst_time_clock_tick (gpointer time_tool)
 {
+	XstTool *tool = XST_TOOL (time_tool);
 	GtkWidget *w;
 
 	xst_dialog_freeze (tool->main_dialog);
@@ -239,14 +242,13 @@ update_tz (GtkWidget *w, gpointer data)
 }      
 
 static void
-ntp_use_toggled (GtkWidget *w, gpointer data)
+ntp_use_toggled (GtkWidget *w, XstDialog *dialog)
 {
 	gboolean active, configured, ntp_installed;
-	XstDialog *xd;
 
 	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
-	configured = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "tool_configured");
-	ntp_installed = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "ntpinstalled");
+	configured = (gboolean) gtk_object_get_data (GTK_OBJECT (dialog->tool), "tool_configured");
+	ntp_installed = (gboolean) gtk_object_get_data (GTK_OBJECT (dialog->tool), "ntpinstalled");
 	
 	if (configured && !ntp_installed && active) {
 		GtkWidget *dialog;
@@ -259,10 +261,9 @@ ntp_use_toggled (GtkWidget *w, gpointer data)
 	}
 
 	if (ntp_installed)
-		xst_dialog_modify_cb (w, data);
+		xst_dialog_modify (dialog);
 	
-	xd = XST_DIALOG (data);
-	gtk_widget_set_sensitive (xst_dialog_get_widget (xd, "timeserver_button"), active);
+	gtk_widget_set_sensitive (xst_dialog_get_widget (dialog, "timeserver_button"), active);
 }
 
 /*static void
@@ -295,12 +296,12 @@ connect_signals ()
 }*/
 
 static void
-adjust (const char *s, gint max)
+adjust (XstDialog *dialog, const char *s, gint max)
 {
 	GtkObject *adj;
 	GtkWidget *w;
 
-	w = xst_dialog_get_widget (tool->main_dialog, s);
+	w = xst_dialog_get_widget (dialog, s);
 	if (!w)
 		return;
 
@@ -311,25 +312,52 @@ adjust (const char *s, gint max)
 	gtk_spin_button_set_wrap (GTK_SPIN_BUTTON (w), TRUE);	
 }
 
+XST_TOOL_MAKE_TYPE(time,Time)
+
+static void
+xst_time_tool_type_init (XstTimeTool *tool)
+{
+	/* empty */
+}
+
+static XstTool *
+xst_time_tool_new (void)
+{
+	return XST_TOOL (gtk_type_new (XST_TYPE_TIME_TOOL));
+}
+
+static void
+xst_time_load_widgets (XstTimeTool *tool)
+{
+	XstDialog *dialog = XST_TOOL (tool)->main_dialog;
+	
+	tool->seconds = xst_dialog_get_widget (dialog, "second");
+	tool->minutes = xst_dialog_get_widget (dialog, "minute");
+	tool->hours   = xst_dialog_get_widget (dialog, "hour");
+}
+
 int
 main (int argc, char *argv[])
 {
+	XstTool *tool;
 
 	xst_init ("time-admin", argc, argv, NULL);
-	tool = xst_tool_new ();
+	tool = xst_time_tool_new ();
 	xst_tool_construct (tool, "time", _("Time and Date Settings"));
 
 	xst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	xst_dialog_connect_signals (tool->main_dialog, signals);
 
-	adjust ("hour", 24);
-	adjust ("minute", 60);
-	adjust ("second", 60);
+	xst_time_load_widgets (XST_TIME_TOOL (tool));
+	
+	adjust (tool->main_dialog, "hour", 24);
+	adjust (tool->main_dialog, "minute", 60);
+	adjust (tool->main_dialog, "second", 60);
 
-	populate_ntp_list ();
-	init_timezone_selection ();
+	xst_time_populate_ntp_list (XST_TIME_TOOL (tool));
+	xst_time_init_timezone (XST_TIME_TOOL (tool));
 
-	gtk_timeout_add (1000, clock_tick, NULL);
+	gtk_timeout_add (1000, xst_time_clock_tick, XST_TIME_TOOL (tool));
 
 	xst_tool_main (tool);
 

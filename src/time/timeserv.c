@@ -13,10 +13,8 @@
 #include "transfer.h"
 #include "timeserv.h"
 
-extern XstTool *tool;
-
 void
-on_ntp_addserver (GtkButton *button, gpointer data)
+on_ntp_addserver (GtkButton *button, XstDialog *dialog)
 {
 	GtkEditable *ntp_entry;
 	GtkList *ntp_list;
@@ -24,8 +22,8 @@ on_ntp_addserver (GtkButton *button, gpointer data)
 	GList *list_add = NULL;
 	gchar *text;
 	
-	ntp_entry = GTK_EDITABLE (xst_dialog_get_widget (tool->main_dialog, "ntp_entry"));
-	ntp_list = GTK_LIST (xst_dialog_get_widget (tool->main_dialog, "ntp_list"));
+	ntp_entry = GTK_EDITABLE (xst_dialog_get_widget (dialog, "ntp_entry"));
+	ntp_list = GTK_LIST (xst_dialog_get_widget (dialog, "ntp_list"));
 	
 	text = gtk_editable_get_chars (ntp_entry, 0, -1);
 	g_strstrip (text);

@@ -135,8 +135,19 @@ void         xst_tool_clear_supported_platforms (XstTool *tool);
  */
 #define XST_TOOL_MAKE_TYPE(name, Name) \
 \
-static void xst_ ## name ## _tool_type_init (XstIshareTool *tool);\
-static void xst_ ## name ## _tool_class_init (GtkObjectClass *object_class);\
+static XstToolClass *xst_tool_parent_class = NULL; \
+\
+static void \
+xst_foo_tool_class_init (GtkObjectClass *object_class)\
+{\
+/*	XstIshareToolClass *ishare_class = XST_ISHARE_TOOL_CLASS (object_class);\
+ */\
+\
+	xst_tool_parent_class = gtk_type_class (xst_tool_get_type ());\
+}\
+\
+static void xst_ ## name ## _tool_type_init (Xst ## Name ## Tool *tool);\
+/*static void xst_ ## name ## _tool_class_init (GtkObjectClass *object_class);*/\
 \
 GtkType \
 xst_ ## name ## _tool_get_type (void)\
@@ -147,7 +158,7 @@ xst_ ## name ## _tool_get_type (void)\
 			"XstIshareTool",\
 			sizeof (Xst ## Name ## Tool),\
 			sizeof (Xst ## Name ## ToolClass),\
-			(GtkClassInitFunc)  xst_ ## name ## _tool_class_init,\
+			(GtkClassInitFunc)  xst_foo_tool_class_init,\
 			(GtkObjectInitFunc) xst_ ## name ## _tool_type_init,\
 			NULL, NULL, NULL\
 		};\
