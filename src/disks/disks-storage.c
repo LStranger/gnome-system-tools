@@ -37,6 +37,7 @@ enum {
 	PROP_SIZE,
 	PROP_ICON_NAME,
 	PROP_DEVICE,
+	PROP_ALIAS,
 	PROP_PRESENT,
 	PROP_SPEED
 };
@@ -48,6 +49,7 @@ struct _GstDisksStoragePriv
 	gulong   size;
 	gchar   *icon_name;
 	gchar   *device;
+	gchar   *alias;
 	gboolean present;
 	gchar   *speed;
 };
@@ -97,6 +99,7 @@ storage_init (GstDisksStorage *storage)
 	storage->priv->icon_name = g_strdup ("gnome-dev-harddisk");
 	storage->priv->name = g_strdup (_("Unknown Storage"));
 	storage->priv->model = g_strdup (_("Unknown"));
+	storage->priv->alias = NULL;
 	storage->priv->size = 0;
 	storage->priv->present = FALSE;
 	storage->priv->speed = NULL;
@@ -130,6 +133,9 @@ storage_class_init (GstDisksStorageClass *klass)
 							      NULL, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_DEVICE,
 					 g_param_spec_string ("device", NULL, NULL,
+							      NULL, G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_ALIAS,
+					 g_param_spec_string ("alias", NULL, NULL,
 							      NULL, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_PRESENT,
 					 g_param_spec_boolean ("present", NULL, NULL,
@@ -166,6 +172,11 @@ storage_finalize (GObject *object)
 		if (storage->priv->device) {
 			g_free (storage->priv->device);
 			storage->priv->device = NULL;
+		}
+
+		if (storage->priv->alias) {
+			g_free (storage->priv->alias);
+			storage->priv->alias = NULL;
 		}
 
 		if (storage->priv->speed) {
@@ -211,6 +222,10 @@ storage_set_property (GObject  *object, guint prop_id, const GValue *value,
 		if (storage->priv->device) g_free (storage->priv->device);
 		storage->priv->device = g_value_dup_string (value);
 		break;
+	case PROP_ALIAS:
+		if (storage->priv->alias) g_free (storage->priv->alias);
+		storage->priv->alias = g_value_dup_string (value);
+		break;
 	case PROP_PRESENT:
 		storage->priv->present = g_value_get_boolean (value);
 		break;
@@ -248,6 +263,9 @@ storage_get_property (GObject  *object, guint prop_id, GValue *value,
 		break;
 	case PROP_DEVICE:
 		g_value_set_string (value, storage->priv->device);
+		break;
+	case PROP_ALIAS:
+		g_value_set_string (value, storage->priv->alias);
 		break;
 	case PROP_PRESENT:
 		g_value_set_boolean (value, storage->priv->present);

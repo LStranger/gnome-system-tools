@@ -53,7 +53,7 @@ enum {
 };
 
 void
-gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
+gst_on_storage_list_selection_change (GtkTreeSelection *selection, gpointer gdata)
 {
 	GtkWidget        *notebook;
 	GtkTreeModel     *model;
@@ -79,11 +79,11 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 		if (GST_IS_DISKS_STORAGE (storage)) {
 			/* Properties Notebook */
 			properties_notebook = gst_dialog_get_widget (tool->main_dialog,
-								     "properties_notebook");
+												"properties_notebook");
 			if (GST_IS_DISKS_STORAGE_DISK (storage)) {
 				gtk_widget_show (properties_notebook);
 				gtk_notebook_set_current_page (GTK_NOTEBOOK (properties_notebook),
-							       TAB_PROP_DISK);
+										 TAB_PROP_DISK);
 				
 				gst_disks_storage_setup_properties_widget (storage);
 
@@ -119,7 +119,7 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 				gst_disks_storage_setup_properties_widget (storage);
 
 				g_object_get (G_OBJECT (storage), "empty", &cd_empty,
-					      "disc", &disc, NULL);
+						    "disc", &disc, NULL);
 
 				if (!cd_empty) {
 					gtk_widget_show (gtk_notebook_get_nth_page (
@@ -147,6 +147,19 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 	g_signal_handlers_unblock_by_func (G_OBJECT (selection),
 					   G_CALLBACK (gst_on_storage_list_selection_change),
 					   NULL);
+}
+
+gboolean
+gst_on_storage_list_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
+{
+	   GtkTreeSelection *selection;
+
+	   if (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS) {
+			 selection = gtk_tree_view_get_selection (treeview);
+			 gst_on_storage_list_selection_change (selection, NULL);
+	   }
+
+	   return FALSE;
 }
 
 void 

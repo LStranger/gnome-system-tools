@@ -27,7 +27,8 @@
 
 #include <gnome.h>
 
-void gst_on_storage_list_selection_change   (GtkWidget *selection, gpointer gdata);
+void gst_on_storage_list_selection_change   (GtkTreeSelection *selection, gpointer gdata);
+gboolean gst_on_storage_list_button_press   (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata);
 void gst_on_partition_list_selection_change (GtkTreeSelection *selection, gpointer gdata);
 void gst_on_point_entry_changed             (GtkWidget *entry, gpointer gdata);
 void gst_on_mount_button_clicked            (GtkWidget *toggle, gpointer gdata);

@@ -41,6 +41,7 @@ struct _GstDisksStorageCdromPriv
 	gboolean empty;
 	GstCdromDisc *disc;
 	/*gboolean automount;*/
+	gboolean listed;
 	gboolean play_audio;
 	gboolean write_cdr;
 	gboolean write_cdrw;
@@ -66,6 +67,7 @@ enum {
 	PROP_0,
 	PROP_EMPTY,
 	PROP_DISC,
+	PROP_LISTED,
 	PROP_PLAY_AUDIO,
 	PROP_WRITE_CDR,
 	PROP_WRITE_CDRW,
@@ -129,6 +131,9 @@ storage_cdrom_class_init (GstDisksStorageCdromClass *klass)
 	g_object_class_install_property (object_class, PROP_DISC,
 					 g_param_spec_pointer ("disc", NULL, NULL,
 							       G_PARAM_READWRITE));
+	g_object_class_install_property (object_class, PROP_LISTED,
+					 g_param_spec_boolean ("listed", NULL, NULL,
+							       FALSE, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_PLAY_AUDIO,
 					 g_param_spec_boolean ("play_audio", NULL, NULL,
 							       FALSE, G_PARAM_READWRITE));
@@ -185,14 +190,6 @@ storage_cdrom_setup_properties_widget (GstDisksStorage *storage)
 	GST_DISKS_STORAGE_GET_CLASS (storage)->setup_common_properties (storage);
 }
 
-/*void 
-gst_disks_cdrom_mount (GstDisksStorageCdrom *cdrom)
-{
-	g_return_if_fail (GST_IS_DISKS_STORAGE_CDROM (cdrom));
-	
-	gst_disks_mount_cdrom (cdrom);
-}*/
-
 GstDisksStorage*
 gst_disks_storage_cdrom_new (void)
 {
@@ -222,6 +219,9 @@ storage_cdrom_set_property (GObject *object, guint prop_id, const GValue *value,
 		if (storage->priv->disc)
 			gst_cdrom_disc_set_cdrom (storage->priv->disc,
 						  (gpointer) storage);
+		break;
+	case PROP_LISTED:
+		storage->priv->listed = g_value_get_boolean (value);
 		break;
 	case PROP_PLAY_AUDIO:
 		storage->priv->play_audio = g_value_get_boolean (value);
@@ -262,6 +262,9 @@ storage_cdrom_get_property (GObject *object, guint prop_id, GValue *value,
 		break;
 	case PROP_DISC:
 		g_value_set_pointer (value, storage->priv->disc);
+		break;
+	case PROP_LISTED:
+		g_value_set_boolean (value, storage->priv->listed);
 		break;
 	case PROP_PLAY_AUDIO:
 		g_value_set_boolean (value, storage->priv->play_audio);

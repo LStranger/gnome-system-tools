@@ -153,6 +153,7 @@ storage_set_property (GObject  *object, guint prop_id, const GValue *value,
 
 	switch (prop_id) {
 	case PROP_PARTITIONS:
+		/* FIXME: check if storage->priv->partitions != NULL */
 		storage->priv->partitions = g_value_get_pointer (value);
 		break;
 	default:

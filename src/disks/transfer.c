@@ -74,6 +74,13 @@ transfer_xml_to_config (xmlNodePtr root)
 					      buf, NULL);
 				g_free (buf);
 			}
+
+			buf = gst_xml_get_child_content (disk_node, "alias");
+			if (buf) {
+				g_object_set (G_OBJECT (storage), "alias",
+					      buf, NULL);
+				g_free (buf);
+			}
 			
 			buf = gst_xml_get_child_content (disk_node, "model");
 			if (buf) {
@@ -114,7 +121,7 @@ transfer_xml_to_config (xmlNodePtr root)
 					      gst_disks_partition_get_typefs_from_name (buf),
 					      NULL);
 				g_free (buf);
-			}
+				}
 
 			buf = gst_xml_get_child_content (disk_node, "point");
 			if (buf) {
@@ -260,7 +267,9 @@ transfer_xml_to_config (xmlNodePtr root)
 				}
 			}
 		}
-		gst_disks_tool_add_storage (GST_DISKS_TOOL (tool), storage);
+		
+		if (storage)
+			gst_disks_tool_add_storage (GST_DISKS_TOOL (tool), storage);
 	}
 }
 
@@ -382,8 +391,8 @@ gst_disks_mount_cdrom_disc_data (GstCdromDiscData *disc_data)
 {
 	xmlDoc *xml;
 	xmlNodePtr root, cdrom_node, node;
-	gchar *device, *typefs, *point;
-	gboolean mounted;
+	gchar *device, *alias, *typefs, *point;
+	gboolean mounted, listed;
 	gulong size;
 	gchar *buf, *text_uid;
 	GstDisksStorageCdrom *cdrom;
@@ -391,7 +400,8 @@ gst_disks_mount_cdrom_disc_data (GstCdromDiscData *disc_data)
 	g_return_if_fail (GST_IS_CDROM_DISC_DATA (disc_data));
 
 	cdrom = GST_DISKS_STORAGE_CDROM (gst_cdrom_disc_get_cdrom (GST_CDROM_DISC (disc_data)));
-	g_object_get (G_OBJECT (cdrom), "device", &device, NULL);
+	g_object_get (G_OBJECT (cdrom), "device", &device,
+		      "alias", &alias, "listed", &listed, NULL);
 
 	g_object_get (G_OBJECT (disc_data), "mount-point", &point,
 		      "mounted", &mounted, "size", &size, NULL);
@@ -400,10 +410,11 @@ gst_disks_mount_cdrom_disc_data (GstCdromDiscData *disc_data)
 	text_uid = g_strdup_printf ("%d", (guint) getuid ());
 
 	xml = gst_tool_run_get_directive (tool, NULL, "mount",
-					  device, "cdrom", 
+					  (listed && alias) ? alias : device,
+					  "cdrom", 
 					  typefs, point,
 					  mounted ? "1" : "0",
-					  "0", /* fixme: use listed when manage alias */
+					  listed  ? "1" : "0",
 					  text_uid,
 					  NULL);
 	g_free (typefs);
@@ -517,7 +528,7 @@ gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom)
 {
 	xmlDoc *xml;
 	xmlNodePtr root, disc_info, node;
-	gchar *buf, *device;
+	gchar *buf, *device, *alias;
 	gboolean empty = TRUE;
 	GstCdromDisc *disc;
 	GstCdromDiscData *data;
@@ -525,10 +536,12 @@ gst_disks_cdrom_get_disc_from_xml (GstDisksStorageCdrom *cdrom)
 
 
 	g_object_get (G_OBJECT (cdrom), "device", &device,
-		      "disc", &disc, NULL);
+		      "alias", &alias, "disc", &disc, NULL);
 
 	xml = gst_tool_run_get_directive (tool, NULL, "cdrom_disc_info",
-					  device, NULL);
+					  device,
+					  alias != NULL ? alias : " ",
+					  NULL);
 	if (!xml) {
 		if (disc)
 			g_object_unref (G_OBJECT (disc));

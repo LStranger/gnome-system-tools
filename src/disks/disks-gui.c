@@ -300,9 +300,6 @@ gst_disks_gui_setup_partition_list (GtkWidget *treeview, GList *partitions)
 						    PARTITION_LIST_POINTER, part,
 						    -1);
 			}
-			
-			/*g_free (device);
-			  g_free (name);*/
 		}
 		list = g_list_next (list);
 	}
@@ -398,6 +395,10 @@ gst_disks_gui_setup ()
 
 	treeview = gst_disks_gui_storage_list_new ();
 
+	g_signal_connect (G_OBJECT (treeview), "button_press_event",
+			  G_CALLBACK (gst_on_storage_list_button_press),
+			  NULL);
+	
 	gst_disks_gui_setup_storage_list (treeview, list);
 
 	/** Cdrom Disc Data Widgets **/

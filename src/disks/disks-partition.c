@@ -408,10 +408,12 @@ gchar *
 gst_disks_partition_get_human_readable_typefs (GstPartitionTypeFs type)
 {
 	gchar *filesystems[] = {
-		"Extended 2", "Extended 3",
-		"Reiser FS", "XFS", "JFS",
-		"FAT", "Memory Swap",
-		"vfat", "NTFS"
+		"Extended 2",
+		"Extended 3",
+		"ReiserFS", "XFS", "JFS",
+		"Windows Virtual FAT (vfat)",
+		"Windows NTFS",
+		"Memory Swap",
 		"Free Space",
 		"Unknown"
 	};
