@@ -293,6 +293,12 @@ partition_set_property (GObject  *object, guint prop_id, const GValue *value,
 				      _("Swap Partition"),
 				      NULL);
 		}
+
+		if (part->priv->type == PARTITION_TYPE_FREE) {
+			g_object_set (G_OBJECT (part), "name",
+				      _("Free Space"),
+				      NULL);
+		}
 		break;
 	case PROP_POINT:
 		if (part->priv->point) g_free (part->priv->point);
@@ -391,14 +397,6 @@ gst_disks_partition_setup_properties_widget (GstDisksPartition *part)
 	gst_disks_gui_setup_partition_properties (part);
 }
 
-/*void
-gst_disks_partition_mount (GstDisksPartition *part)
-{
-	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
-	
-	gst_disks_mount_partition (part);
-}*/
-
 static void
 partition_mount (GstDisksMountable *mountable)
 {
@@ -464,6 +462,8 @@ gst_disks_partition_get_typefs_from_name (const gchar *name)
 		return PARTITION_TYPE_NTFS;
 	else if (g_ascii_strcasecmp (name, "swap") == 0)
 		return PARTITION_TYPE_SWAP;
+	else if (g_ascii_strcasecmp (name, "empty") == 0)
+		return PARTITION_TYPE_FREE;
 	else
 		return PARTITION_TYPE_UNKNOWN;
 }
@@ -486,6 +486,8 @@ gst_disks_partition_get_typefs (GstPartitionTypeFs type)
 		return g_strdup ("vfat");
 	case PARTITION_TYPE_NTFS:
 		return g_strdup ("ntfs");
+	case PARTITION_TYPE_FREE:
+		return g_strdup ("empty");
 	case  PARTITION_TYPE_UNKNOWN:
 		return g_strdup ("auto");
 	default:
