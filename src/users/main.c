@@ -149,8 +149,7 @@ main (int argc, char *argv[])
 	create_tables ();
 	connect_signals ();
 
-	/* What's the better way to do it? */
-	gtk_widget_set_sensitive (tool->main_dialog->complexity_button, TRUE);
+	xst_dialog_enable_complexity (tool->main_dialog);
 
 	set_access_sensitivity ();
 

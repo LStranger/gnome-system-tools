@@ -661,7 +661,7 @@ check_login_delete (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, FALSE);
 
-	parent = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "users-admin"));
+	parent = GTK_WINDOW (tool->main_dialog);
 	name = xml_get_child_content (node, "login");
 
 	if (!strcmp (name, "root"))
@@ -672,7 +672,7 @@ check_login_delete (xmlNodePtr node)
 		gnome_dialog_run (dialog);
 		g_free (txt);
 		return FALSE;
-        }
+	}
 
 	txt = g_strdup_printf (_("Are you sure you want to delete user %s?"), name);
 	dialog = GNOME_DIALOG (gnome_question_dialog_parented (txt, reply_cb, NULL, parent));
@@ -749,7 +749,7 @@ check_group_delete (xmlNodePtr node)
 
 	g_return_val_if_fail (node != NULL, FALSE);
 
-	parent = GTK_WINDOW (xst_dialog_get_widget (tool->main_dialog, "users_admin"));
+	parent = GTK_WINDOW (tool->main_dialog);
 	name = xml_get_child_content (node, "name");
 
 	if (!name)
