@@ -34,6 +34,8 @@
 #include "e-table.h"
 #include "callbacks.h"
 
+#define BOOT_TABLE_SPEC "boot.etspec"
+
 extern XstTool *tool;
 
 GtkWidget *boot_table;
@@ -240,7 +242,9 @@ create_table (xmlNodePtr root)
 
 	spec = xst_conf_get_string (tool, "spec");
 	if (!spec) {
-		spec = xst_load_etspec (tool, "boot");
+		spec = xst_ui_load_etspec (tool->etspecs_common_path, BOOT_TABLE_SPEC);
+		if (!spec)
+			g_error ("create_table: Couldn't create table.");
 		xst_conf_set_string (tool, "spec", spec);
 	}
 
