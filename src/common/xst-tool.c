@@ -687,7 +687,7 @@ xst_tool_load_try (XstTool *tool)
 }
 
 void
-xst_tool_main (XstTool *tool)
+xst_tool_main (XstTool *tool, gboolean no_main_loop)
 {
 	xst_dialog_freeze_visible (tool->main_dialog);
 	gtk_widget_show (GTK_WIDGET (tool->main_dialog));
@@ -695,7 +695,9 @@ xst_tool_main (XstTool *tool)
 	xst_tool_load_try (tool);
 
 	xst_dialog_thaw_visible (tool->main_dialog);
-	gtk_main ();
+
+	if (!no_main_loop)
+		gtk_main ();
 }
 
 static void

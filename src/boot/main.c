@@ -101,7 +101,7 @@ main (int argc, char *argv[])
 
 	xst_dialog_thaw (tool->main_dialog);
 	
-	xst_tool_main (tool);
+	xst_tool_main (tool, FALSE);
 	
 	return 0;
 }

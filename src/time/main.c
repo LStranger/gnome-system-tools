@@ -14,6 +14,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
+ 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
@@ -357,9 +358,9 @@ main (int argc, char *argv[])
 	xst_time_populate_ntp_list (XST_TIME_TOOL (tool));
 	xst_time_init_timezone (XST_TIME_TOOL (tool));
 
+	xst_tool_main (tool, TRUE);
 	gtk_timeout_add (1000, xst_time_clock_tick, XST_TIME_TOOL (tool));
-
-	xst_tool_main (tool);
+	gtk_main ();
 
 	return 0;
 }

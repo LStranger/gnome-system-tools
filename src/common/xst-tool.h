@@ -102,7 +102,7 @@ void         xst_init                     (const gchar *app_name,
 					   int argc, char *argv [],
 					   const poptOption options);
 
-void         xst_tool_main                (XstTool *tool);
+void         xst_tool_main                (XstTool *tool, gboolean no_main_loop);
 gboolean     xst_tool_get_access          (XstTool *tool);
 
 XstTool     *xst_tool_new                 (void);

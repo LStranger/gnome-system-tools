@@ -260,7 +260,7 @@ main (int argc, char *argv[])
 	xst_dialog_enable_complexity (tool->main_dialog);
 	xst_dialog_set_widget_policies (tool->main_dialog, policies);
 	
-	xst_tool_main (tool);
+	xst_tool_main (tool, FALSE);
 
 	return 0;
 }
