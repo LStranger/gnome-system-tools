@@ -76,6 +76,7 @@ GdkPixbuf *conectiva;
 GdkPixbuf *black_panther;
 GdkPixbuf *vine;
 GdkPixbuf *specifix;
+GdkPixbuf *archlinux;
 
 enum {
 	BOGUS,
@@ -446,6 +447,7 @@ gst_tool_create_distro_images (void)
 	black_panther = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/black_panther.png", NULL);
 	vine = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/vine.png", NULL);
 	specifix = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/specifix.png", NULL);
+	archlinux = gdk_pixbuf_new_from_file (PIXMAPS_DIR "/archlinux.png", NULL);
 }
 
 static void
