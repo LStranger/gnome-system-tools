@@ -1,1 +1,1 @@
-SUBDIRS = common network shares disks memory users time
+SUBDIRS = common network shares disks memory users time boot
