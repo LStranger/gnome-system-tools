@@ -475,7 +475,7 @@ on_samba_use_toggled (GtkWidget *w, gpointer null)
 	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "workgroup"), active);
 	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "wins_use"), active);
 
-	if ((active) && (gtk_toggle_button_get_active (gst_dialog_get_widget (tool->main_dialog, "wins_use"))))
+	if ((active) && (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "wins_use")))))
 		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "winsserver"), active);
 	else
 		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "winsserver"), FALSE);
@@ -1451,4 +1451,62 @@ on_network_profile_option_selected (GtkWidget *widget, gpointer data)
 	gtk_list_store_clear (GTK_LIST_STORE (search_model));
 	
 	transfer_profile_to_gui (tool, NULL);
+}
+
+void
+on_drag_data_get (GtkTreeView *treeview, GdkDragContext *context, GtkSelectionData *data, guint info, guint time, gpointer user_data)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model (treeview);
+	GtkTreePath *path;
+	GtkTreeIter iter;
+	gchar *ip_address;
+
+	gtk_tree_view_get_cursor (treeview, &path, NULL);
+	gtk_tree_model_get_iter (model, &iter, path);
+	gtk_tree_model_get (model, &iter, 0, &ip_address, -1);
+	
+	gtk_selection_data_set (data,
+				gdk_atom_intern ("x/dns-data", FALSE),
+				8,
+				ip_address,
+				strlen (ip_address) + 1);
+}
+
+void
+on_drag_data_received (GtkTreeView *treeview,
+		       GdkDragContext *context,
+		       gint x,
+		       gint y,
+		       GtkSelectionData *data,
+		       guint info,
+		       guint time)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model (treeview);
+	GtkTreePath *dest_path;
+	GtkTreeViewDropPosition pos;
+	GtkTreeIter dest_iter, iter;
+
+	if (data->data == NULL || data->length == -1) {
+		gtk_drag_finish (context, FALSE, FALSE, GDK_CURRENT_TIME);
+		return;
+	}
+
+	if (gtk_tree_view_get_dest_row_at_pos (treeview, x, y, &dest_path, &pos)) {
+		if (!gtk_tree_model_get_iter (model, &dest_iter, dest_path)) {
+			gtk_drag_finish (context, FALSE, FALSE, GDK_CURRENT_TIME);
+			return;
+		}
+
+		if (pos == GTK_TREE_VIEW_DROP_BEFORE)
+			gtk_list_store_insert_before (GTK_LIST_STORE (model), &iter, &dest_iter);
+		else
+			gtk_list_store_insert_after (GTK_LIST_STORE (model), &iter, &dest_iter);
+	} else {
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	}
+
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter, 0, data->data, -1);
+	gtk_drag_finish (context, TRUE, TRUE, GDK_CURRENT_TIME);
+
+	gst_dialog_modify (tool->main_dialog);
 }

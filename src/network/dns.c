@@ -210,6 +210,7 @@ dns_search_gui_setup (GstTool *tool, const gchar *listname, const gchar *entryna
 	GtkTreeModel     *model;
 	GtkWidget        *entry;
 	GtkItemFactory   *item_factory;
+	GtkTargetEntry   target = { "dns", GTK_TARGET_SAME_WIDGET, 0 };
 
 	g_return_if_fail (tool != NULL);
 
@@ -239,10 +240,26 @@ dns_search_gui_setup (GstTool *tool, const gchar *listname, const gchar *entryna
 	g_signal_connect (G_OBJECT (treeview), "button_press_event",
 			  G_CALLBACK (callbacks_button_press),
 			  (gpointer) item_factory);
+	g_signal_connect (G_OBJECT (treeview), "drag-data-get",
+			  G_CALLBACK (on_drag_data_get),
+			  NULL);
+
+	g_signal_connect (G_OBJECT (treeview), "drag_data_received",
+			  G_CALLBACK (on_drag_data_received),
+			  NULL);
 
 	gst_dns_search_update_sensitivity (treeview);
 
-	return;
+	gtk_tree_view_enable_model_drag_source (GTK_TREE_VIEW (treeview),
+						GDK_BUTTON1_MASK,
+						&target,
+						1,
+						GDK_ACTION_MOVE);
+
+	gtk_tree_view_enable_model_drag_dest (GTK_TREE_VIEW (treeview),
+					      &target,
+					      1,
+					      GDK_ACTION_MOVE);
 }
 
 void

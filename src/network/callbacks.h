@@ -104,6 +104,8 @@ void on_dns_search_add_button_clicked (GtkWidget *button, gpointer gdata);
 void on_dns_search_del_button_clicked (GtkWidget *button, gpointer gdata);
 void on_dns_search_entry_changed      (GtkWidget *entry, gpointer gdata);
 void on_dns_search_popup_del_activate (gpointer callback_data, guint action, GtkWidget *widget);
+void on_drag_data_received (GtkTreeView*, GdkDragContext*, gint, gint, GtkSelectionData*, guint, guint);
+void on_drag_data_get (GtkTreeView*, GdkDragContext*, GtkSelectionData*, guint, guint, gpointer);
 
 /* Hosts tab callbacks */
 void on_hosts_ip_changed (GtkEditable*, gpointer);
