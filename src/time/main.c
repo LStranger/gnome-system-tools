@@ -499,7 +499,8 @@ ntp_use_toggled (GtkWidget *w, GstDialog *dialog)
 					      GTK_DIALOG_MODAL,
 					      GST_HIG_MESSAGE_INFO,
 					      _("NTP support is not running"),
-					      _("Please run NTP support in the system to enable time server synchronization"),
+					      _("Please run NTP support in the system to enable "
+						"synchronization of your local time server with internet time servers"),
 					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					      NULL);
 		gtk_dialog_run (GTK_DIALOG (message));
