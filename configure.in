@@ -116,6 +116,8 @@ PKG_CHECK_MODULES(GST_DEPENDS,[
 			   libglade-2.0 >= 1.99.5
 			   libxml-2.0 >= 2.4.12
 			   gconf-2.0 >= 2.2.0
+			   bonobo-activation-2.0 >= 2.8.0
+			   gnome-vfs-2.0 >= 2.8.0
 			   ])
 
 dnl =====================================================
@@ -128,14 +130,14 @@ dnl =====================================================
 
 
 AC_ARG_ENABLE(boot, 
-	      [  --enable-boot           Enable build boot module (default no)], , 
-	      enable_boot=no)
+	      [  --enable-boot           Enable build boot module (default yes)], , 
+	      enable_boot=yes)
 AC_ARG_ENABLE(network,
 	      [  --enable-network        Enable build network module (default yes)], , 
 	      enable_network=yes)
 AC_ARG_ENABLE(services,
-	      [  --enable-services       Enable build services module (default no)], , 
-	      enable_services=no)
+	      [  --enable-services       Enable build services module (default yes)], , 
+	      enable_services=yes)
 AC_ARG_ENABLE(time,
 	      [  --enable-time           Enable build time module (default yes)], , 
 	      enable_time=yes)
@@ -149,9 +151,9 @@ AC_ARG_ENABLE(shares,
 	      [  --enable-shares         Enable build shares module (default yes)], , 
 	      enable_shares=yes)
 
-AM_CONDITIONAL(BUILD_BOOT, test x$enable_boot != xno)
+AM_CONDITIONAL(BUILD_BOOT, test x$enable_boot = xyes)
 AM_CONDITIONAL(BUILD_NETWORK, test x$enable_network = xyes)
-AM_CONDITIONAL(BUILD_SERVICES, test x$enable_services != xno)
+AM_CONDITIONAL(BUILD_SERVICES, test x$enable_services = xyes)
 AM_CONDITIONAL(BUILD_TIME, test x$enable_time = xyes)
 AM_CONDITIONAL(BUILD_USERS, test x$enable_users = xyes)
 AM_CONDITIONAL(BUILD_DISKS, test x$enable_disks = xyes)
@@ -293,6 +295,7 @@ src/time/e-map/Makefile
 src/boot/Makefile
 src/services/Makefile
 src/shares/Makefile
+src/shares/component/Makefile
 src/disks/Makefile
 po/Makefile.in
 gnome-system-tools.pc
