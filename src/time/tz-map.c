@@ -105,6 +105,10 @@ void e_tz_map_set_tz_from_name (ETzMap *tzmap, gchar *name)
 		}
 	}
 
+	if (tzmap->point_selected)
+	        e_map_point_set_color_rgba (tzmap->map,
+					    tzmap->point_selected,
+					    TZ_MAP_POINT_NORMAL_RGBA);
 	tzmap->point_selected =
 	  e_map_get_closest_point (tzmap->map, l_longitude, l_latitude, FALSE);
 

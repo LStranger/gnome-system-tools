@@ -184,17 +184,27 @@ on_help_clicked(GtkButton *button, gpointer data)
 }
 
 
+void tz_select_combo (GtkList *list, GtkWidget *widget, gpointer data)
+{
+	GtkListItem *li;
+	gchar *text;
+	
+	li = GTK_LIST_ITEM (widget);
+	gtk_label_get (GTK_LABEL (GTK_BIN (li)->child), &text);
+	
+	e_tz_map_set_tz_from_name (tzmap, text);
+}
+
+
 void
 connect_signals()
 {
-#if 0
 	GtkWidget *w;
 
-	w = GTK_COMBO(tool_widget_get("timezone_combo"))->list;
+	w = GTK_COMBO(tool_widget_get("location_combo"))->list;
 	gtk_signal_connect(GTK_OBJECT(w), "select-child", tz_select_combo, NULL);
 	gtk_signal_connect(GTK_OBJECT(w), "select-child", tool_modified_cb, NULL);
-#endif
-	
+
 	gtk_timeout_add(1000, clock_tick, NULL);
 }
 
