@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 2.6\n"
 "Report-Msgid-Bugs-To: Duarte Loreto <happyguy_pt@hotmail.com>\n"
-"POT-Creation-Date: 2003-11-30 20:42+0000\n"
-"PO-Revision-Date: 2003-11-30 20:45+0000\n"
+"POT-Creation-Date: 2003-12-13 02:09+0000\n"
+"PO-Revision-Date: 2003-12-13 02:10+0000\n"
 "Last-Translator: Duarte Loreto <happyguy_pt@hotmail.com>\n"
 "Language-Team: Portuguese <gnome_pt@yahoogroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -205,7 +205,7 @@ msgid "Finished"
 msgstr "Terminar"
 
 #: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1786
+#: src/network/connection.c:1859
 msgid "Manual"
 msgstr "Manual"
 
@@ -246,8 +246,8 @@ msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
 msgstr ""
-"A nova imagem de arranque foi adicionada. Prima \"Aplicar\" para gravar "
-"as suas alterações."
+"A nova imagem de arranque foi adicionada. Prima \"Aplicar\" para gravar as "
+"suas alterações."
 
 #: interfaces/boot.glade.in.h:37
 msgid ""
@@ -479,7 +479,7 @@ msgstr "Permitir controlo de activação para todos os _utilizadores"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:28 src/network/connection.c:1788
+#: interfaces/network.glade.in.h:28 src/network/connection.c:1861
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -508,7 +508,7 @@ msgstr "Ligações"
 msgid "Creating a new network connection"
 msgstr "A criar uma nova ligação à rede"
 
-#: interfaces/network.glade.in.h:35 src/network/connection.c:1787
+#: interfaces/network.glade.in.h:35 src/network/connection.c:1860
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1218,7 +1218,7 @@ msgstr "A criar uma nova imagem de arranque (%d de %d)"
 msgid "Finished creating a new boot image"
 msgstr "Terminada a criação de uma nova imagem de arranque"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:466
+#: src/boot/boot-image.c:40 src/network/profile.c:467
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -1450,43 +1450,17 @@ msgstr "Ferramentas Sistema GNOME"
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "Reinicie a sua sessão GNOME para que estas alterações tenham efeito."
 
-#: src/network/callbacks.c:116 src/services/table.c:55
-msgid "Active"
-msgstr "Activo"
-
-#: src/network/callbacks.c:119
-msgid "Activating"
-msgstr "A activar"
-
-#: src/network/callbacks.c:130
-msgid "Inactive"
-msgstr "Inactivo"
-
-#: src/network/callbacks.c:133
-msgid "Deactivating"
-msgstr "A desactivar"
-
-#: src/network/callbacks.c:455
+#: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Remover ligação %s: \"%s\"?"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:367
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Remover ligação %s?"
 
-#: src/network/callbacks.c:523
-#, c-format
-msgid "Activating connection ``%s.''"
-msgstr "A activar ligação ``%s.''"
-
-#: src/network/callbacks.c:561
-#, c-format
-msgid "Deactivating connection ``%s.''"
-msgstr "A desactivar ligação ``%s.''"
-
-#: src/network/callbacks.c:600
+#: src/network/callbacks.c:508
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1494,11 +1468,11 @@ msgstr ""
 "Não possui suporte para SMB instalado. Instale suporte SMB no sistema para "
 "activar redes windows."
 
-#: src/network/callbacks.c:603
+#: src/network/callbacks.c:511
 msgid "SMB support missing."
 msgstr "Suporte SMB em falta."
 
-#: src/network/callbacks.c:654
+#: src/network/callbacks.c:562
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1506,7 +1480,7 @@ msgstr ""
 "O nome da máquina foi alterado. Isto impede-o de iniciar novas aplicações, "
 "pelo que será necessário iniciar nova sessão. Ainda assim continuar?"
 
-#: src/network/callbacks.c:702
+#: src/network/callbacks.c:610
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1514,7 +1488,7 @@ msgstr ""
 "O wvdial não foi encontrado no seu sistema. Necessita de instalá-lo ou as "
 "ligações PPP (modem) não poderão ser activadas."
 
-#: src/network/callbacks.c:729
+#: src/network/callbacks.c:637
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1522,7 +1496,7 @@ msgstr ""
 "O wvdial não foi encontrado no seu sistema. Necessita de instalá-lo ou as "
 "ligações PPP (modem) não poderão ser activadas. Ainda assim continuar?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:664
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1530,7 +1504,7 @@ msgstr ""
 "O dispositivo gateway por omissão não está activo. Isto irá impedi-lo de se "
 "ligar à Internet. Ainda assim continuar?"
 
-#: src/network/callbacks.c:811
+#: src/network/callbacks.c:719
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1539,7 +1513,7 @@ msgstr ""
 "esta informação para continuar ou escolha outro dispositivo de gateway por "
 "omissão."
 
-#: src/network/callbacks.c:857
+#: src/network/callbacks.c:765
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1549,17 +1523,17 @@ msgstr ""
 "ligações em falta na aba de ligações. Instale o pacote rpm redhat-config-"
 "network para evitar este problema."
 
-#: src/network/callbacks.c:894
+#: src/network/callbacks.c:802
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Deseja activar o interface %s?"
 
-#: src/network/callbacks.c:904
+#: src/network/callbacks.c:812
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Deseja desactivar o interface %s?"
 
-#: src/network/callbacks.c:989
+#: src/network/callbacks.c:899
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1567,19 +1541,19 @@ msgstr ""
 "Incapaz de autodetectar dispositivo modem, certifique-se de que não está "
 "ocupado e de que está correctamente ligado"
 
-#: src/network/callbacks.c:1041
+#: src/network/callbacks.c:951
 msgid "Silent"
 msgstr "Silencioso"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:953
 msgid "Low"
 msgstr "Baixo"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:955
 msgid "Medium"
 msgstr "Médio"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:957
 msgid "Loud"
 msgstr "Alto"
 
@@ -1627,7 +1601,7 @@ msgstr "Estado"
 msgid "Description"
 msgstr "Descrição"
 
-#: src/network/connection.c:1659
+#: src/network/connection.c:1723
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
@@ -1635,7 +1609,7 @@ msgstr ""
 "O endereço IP ou a máscara de rede para o interface foi deixado por "
 "preencher. Insira endereços IP válidos nesses campos para continuar."
 
-#: src/network/connection.c:1666
+#: src/network/connection.c:1730
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1643,7 +1617,7 @@ msgstr ""
 "O endereço IP ou o endereço remoto para o interface foi deixado por "
 "preencher. Insira endereços IP válidos nesses campos para continuar."
 
-#: src/network/connection.c:1672
+#: src/network/connection.c:1736
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1653,7 +1627,23 @@ msgstr ""
 "deixou por preencher o endereço IP do DNS primário. Insira o IP para o "
 "servidor DNS primário ou remova a opção manual para o DNS."
 
-#: src/network/connection.c:2028
+#: src/network/connection.c:1742
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr ""
+"O dispositivo de modem que a ligação irá utilizar foi deixado por preencher. "
+"Insira um dispositivo ou prima \"auto-detectar\" para continuar."
+
+#: src/network/connection.c:1747
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr ""
+"O número de telefone que a ligação irá utilizar foi deixado por preencher. "
+"Insira um número de telefone válido para continuar."
+
+#: src/network/connection.c:2101
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "O interface %s não existe."
@@ -1749,6 +1739,10 @@ msgstr "Configurar que serviços serão executados ao iniciar o sistema"
 msgid "Services"
 msgstr "Serviços"
 
+#: src/services/table.c:55
+msgid "Active"
+msgstr "Activo"
+
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Serviço"
@@ -1757,11 +1751,11 @@ msgstr "Serviço"
 msgid "Time Zone"
 msgstr "Zona Horária"
 
-#: src/time/main.c:428
+#: src/time/main.c:423
 msgid "Time Servers"
 msgstr "Servidor de Horas"
 
-#: src/time/main.c:506
+#: src/time/main.c:501
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1769,7 +1763,7 @@ msgstr ""
 "Não possui suporte NTP em execução. Execute suporte NTP no sistema para "
 "activar sincronização com o servidor."
 
-#: src/time/main.c:813
+#: src/time/main.c:808
 msgid "Time and Date Settings"
 msgstr "Definições de Data e Hora"
 
@@ -2033,6 +2027,21 @@ msgstr "Consola"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Adicionar ou remover utilizadores e grupos"
+
+#~ msgid "Activating"
+#~ msgstr "A activar"
+
+#~ msgid "Inactive"
+#~ msgstr "Inactivo"
+
+#~ msgid "Deactivating"
+#~ msgstr "A desactivar"
+
+#~ msgid "Activating connection ``%s.''"
+#~ msgstr "A activar ligação ``%s.''"
+
+#~ msgid "Deactivating connection ``%s.''"
+#~ msgstr "A desactivar ligação ``%s.''"
 
 #~ msgid "Boot Image Assistant"
 #~ msgstr "Assistente de Imagem de Arraque"
