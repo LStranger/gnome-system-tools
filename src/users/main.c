@@ -1,3 +1,4 @@
+/* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
 /* main.c: this file is part of users-admin, a helix-setup-tool frontend 
  * for user administration.
  * 
@@ -92,6 +93,7 @@ main (int argc, char *argv[])
 	tool_set_xml_funcs (transfer_xml_to_gui, transfer_gui_to_xml);
 	
 	tool_set_frozen(TRUE);
+	transfer_logindefs_from_xml (xml_doc_get_root(tool_config_get_xml ()));
 	e_table_create ();
 	network_create ();
 	transfer_xml_to_gui (xml_doc_get_root (tool_config_get_xml()));

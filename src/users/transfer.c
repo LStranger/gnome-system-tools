@@ -93,7 +93,7 @@ my_xml_element_get_content (xmlNodePtr node)
 
 /* ---- */
 
-static void
+void
 transfer_logindefs_from_xml (xmlNodePtr root)
 {
 	xmlNodePtr node, n0;
@@ -105,6 +105,7 @@ transfer_logindefs_from_xml (xmlNodePtr root)
 	};
 	gchar *tag, *tmp;
 	gint i;
+
 
 	/* Assign defaults */
 	
@@ -249,7 +250,6 @@ transfer_logindefs_to_xml (xmlNodePtr root)
 void
 transfer_xml_to_gui (xmlNodePtr root)
 {
-	transfer_logindefs_from_xml (root);
 	transfer_logindefs_to_gui ();
 	network_populate (root);
 }

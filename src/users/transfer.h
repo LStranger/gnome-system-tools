@@ -29,5 +29,6 @@
 void transfer_config_saved(xmlNodePtr root);
 void transfer_xml_to_gui(xmlNodePtr root);
 void transfer_gui_to_xml(xmlNodePtr root);
+void transfer_logindefs_from_xml (xmlNodePtr root);
 
 #endif /* TRANSFER_H */

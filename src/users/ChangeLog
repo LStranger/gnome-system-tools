@@ -1,3 +1,15 @@
+2001-01-16  Chema Celorio  <chema@celorio.com>
+
+	* main.c (main): call transfer_logindefs_from_xml before creating
+	the e-table because the e-table uses the logindefs to know which users
+	to display. This was causing a bug in which only one user would be
+	displayed.
+
+	* transfer.c (transfer_logindefs_from_xml): make non-static
+	* transfer.h (transfer_logindefs_from_xml): add to header
+	* transfer.c (transfer_xml_to_gui): and remove from here.
+	We only load the logindefs once.
+	
 2001-01-15  Chema Celorio  <chema@celorio.com>
 
 	* Start ChangeLog
