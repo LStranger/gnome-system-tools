@@ -209,8 +209,7 @@ connection_xml_wvsection_search (xmlNode *node, gchar *section_name, gchar *type
 	g_return_val_if_fail (section_name != NULL, NULL);
 	
 	for (node = xst_xml_element_find_first (node, "dialing");
-		node; node = xst_xml_element_find_next (node, "dialing"))
-	{
+	     node; node = xst_xml_element_find_next (node, "dialing")) {
 		if (type && !connection_xml_wvsection_is_type (node, type))
 			continue;
 		
@@ -349,35 +348,6 @@ connection_wvsection_name_generate (gchar *dev, xmlNode *root)
 	}
 
 	return str;
-}
-
-/* dev_type is "eth", "wvlan", "ppp", "plip"... */
-static gchar *
-connection_dev_get_next (xmlNode *root, gchar *dev_type)
-{
-	xmlNode *node;
-	gchar *dev;
-	gint len, max, num;
-
-	len = strlen (dev_type);
-	max = 0;
-
-	for (node = xst_xml_element_find_first (root, "interface");
-		node; node = xst_xml_element_find_next (node, "interface"))
-	{
-		dev = xst_xml_get_child_content (node, "dev");
-
-		g_return_val_if_fail (dev != NULL, NULL);
-		g_return_val_if_fail (dev_type != NULL, NULL);
-		
-		if (strstr (dev, dev_type)) {
-			num = atoi (dev + len) + 1;
-			max = (num > max)? num: max;
-		}
-		g_free (dev);
-	}
-
-	return g_strdup_printf ("%s%d", dev_type, max);
 }
 
 static IPConfigType
@@ -974,7 +944,49 @@ connection_get_ptp_from_node (xmlNode *node, XstConnection *cxn)
 {
 	cxn->remote_address = xst_xml_get_child_content (node, "remote_address");
 }
-	
+
+static gchar *
+connection_find_new_device (xmlNode *root, XstConnectionType type)
+{
+	xmlNode *node;
+	gchar *prefix, *dev, *numstr;
+	gint max;
+	gchar *devs[] = {
+		NULL,
+		"eth",
+		"wvlan",
+		"ppp",
+		"plip",
+		"irlan",
+		"lo",
+		NULL
+	};
+
+	prefix = devs[(gint) type];
+	if (!prefix)
+		return g_strdup ("NIL");
+
+	max = -1;
+
+	for (node = xst_xml_element_find_first (root, "interface");
+	     node; node = xst_xml_element_find_next (node, "interface")) {
+		dev = xst_xml_get_child_content (node, "dev");
+		if (dev) {
+			if (strstr (dev, prefix) == dev) {
+				numstr = dev + strlen (prefix);
+				if (*numstr && max < atoi (numstr))
+					max = atoi (numstr);
+			}
+
+			g_free (dev);
+		}
+	}
+
+	max++;
+
+	return g_strdup_printf ("%s%u", prefix, max);
+}					
+
 XstConnection *
 connection_new_from_type (XstConnectionType type, xmlNode *root)
 {
@@ -990,31 +1002,21 @@ connection_new_from_type (XstConnectionType type, xmlNode *root)
 	cxn->update_dns = TRUE;
 	cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
 	
-        /* FIXME: figure out a new device correctly */
+	cxn->dev = connection_find_new_device (root, cxn->type);
+
 	switch (cxn->type) {
-	case XST_CONNECTION_ETH:
-		cxn->dev = g_strdup ("eth0");
-		break;
-	case XST_CONNECTION_WVLAN:
-		cxn->dev = g_strdup ("wvlan0");
-		break;
-	case XST_CONNECTION_IRLAN:
-		cxn->dev = g_strdup ("irlan0");
-		break;
 	case XST_CONNECTION_PPP:
 		cxn->user = TRUE;
 		cxn->autoboot = FALSE;
-		cxn->dev = connection_dev_get_next (root, "ppp");
-		break;
-	case XST_CONNECTION_LO:
-		cxn->dev = g_strdup ("lo");
 		break;
 	case XST_CONNECTION_PLIP:
 		cxn->autoboot = FALSE;
-		cxn->dev = g_strdup ("plip0");
 		break;
+	case XST_CONNECTION_ETH:
+	case XST_CONNECTION_WVLAN:
+	case XST_CONNECTION_IRLAN:
+	case XST_CONNECTION_LO:
 	default:
-		cxn->dev = g_strdup ("NIL");
 		break;
 	}	
 

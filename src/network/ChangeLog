@@ -1,3 +1,15 @@
+2001-07-25  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.c (connection_dev_get_next): Deprecated.
+	(connection_new_from_type): Figure a new device name. Just
+	gets the next dev number (eth0, eth1, etc). TODO: get a
+	list of detected (ifconfig -a) ifaces and take next from
+	there.
+	(connection_configure): Disabled wavelan settings tab
+	until this stuff is supported.
+
+	* callbacks.c (on_connection_add_clicked): irlan support.
+
 Wed Jul 25 03:13:49 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* connection.c (connection_addr_to_str): use %u, not %d.

@@ -372,7 +372,7 @@ void
 on_connection_add_clicked (GtkWidget *w, gpointer null)
 {
 	XstConnection *cxn;
-	GtkWidget *d, *ppp, *eth, *wvlan, *plip, *clist;
+	GtkWidget *d, *ppp, *eth, *wvlan, *plip, *irlan, *clist;
 	gint res, row;
 	XstConnectionType cxn_type;
 	
@@ -382,6 +382,7 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 	eth   = xst_dialog_get_widget (tool->main_dialog, "connection_type_eth");
 	wvlan = xst_dialog_get_widget (tool->main_dialog, "connection_type_wvlan");
 	plip  = xst_dialog_get_widget (tool->main_dialog, "connection_type_plip");
+	irlan = xst_dialog_get_widget (tool->main_dialog, "connection_type_irlan");
 
 	/* ppp is the default for now */
 	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (ppp), TRUE);
@@ -399,6 +400,8 @@ on_connection_add_clicked (GtkWidget *w, gpointer null)
 		cxn_type = XST_CONNECTION_WVLAN;
 	else if (GTK_TOGGLE_BUTTON (plip)->active)
 		cxn_type = XST_CONNECTION_PLIP;
+	else if (GTK_TOGGLE_BUTTON (irlan)->active)
+		cxn_type = XST_CONNECTION_IRLAN;
 	else
 		cxn_type = XST_CONNECTION_UNKNOWN;
 
