@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools cvs\n"
-"POT-Creation-Date: 2003-01-23 10:57+0100\n"
+"POT-Creation-Date: 2003-02-14 04:05+0100\n"
 "PO-Revision-Date: 2003-01-23 21:48+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <nl@li.org>\n"
@@ -13,6 +13,59 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: KBabel 0.9.6\n"
+
+#: gnome-system-tools.schemas.in.h:1
+msgid "Default runlevel"
+msgstr "Standaard runlevel:"
+
+#: gnome-system-tools.schemas.in.h:2
+msgid "Dialog complexity for the boot-admin tool"
+msgstr "Complexiteit van het dialoogvenster Opstarten"
+
+#: gnome-system-tools.schemas.in.h:3
+msgid "Dialog complexity for the network-admin tool"
+msgstr "Complexiteit van het dialoogvenster Netwerk"
+
+#: gnome-system-tools.schemas.in.h:4
+msgid "Dialog complexity for the runlevel-admin tool"
+msgstr "Complexiteit van het dialoogvenster runlevel"
+
+#: gnome-system-tools.schemas.in.h:5
+msgid "Dialog complexity for the time-admin tool"
+msgstr "Complexiteit van het dialoogvenster tijd"
+
+#: gnome-system-tools.schemas.in.h:6
+msgid "Dialog complexity for the users-admin tool"
+msgstr "Complexiteit van het dialoogvenster gebruikers"
+
+#: gnome-system-tools.schemas.in.h:7
+msgid "Last GST version executed"
+msgstr "Versienummer laatste GST"
+
+#: gnome-system-tools.schemas.in.h:8
+msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
+msgstr "Weergegeven standaard-runlevel in runlevel-manager"
+
+#: gnome-system-tools.schemas.in.h:9
+msgid ""
+"The GNOME System Tools have two data display modes: basic mode and advanced "
+"mode, the basic mode is intended to show less options than the advanced mode"
+msgstr ""
+"De GNOME System Tools hebben twee standen: basisstand en geavanceerde stand. "
+"De basisstand is bedoeld om minder opties weer te geven dan de geavanceerde "
+"stand."
+
+#: gnome-system-tools.schemas.in.h:10
+msgid "The last GST version that this computer has run"
+msgstr "De laatst actieve GST-versie op deze computer"
+
+#: gnome-system-tools.schemas.in.h:11
+msgid "Wether the users-admin tool should show all users and groups or not"
+msgstr "Of gebruikersbeheer alle gebruikers en groepen moet weergeven of niet"
+
+#: gnome-system-tools.schemas.in.h:12
+msgid "wether the warning dialog should be shown or not"
+msgstr "of een waarschuwingsdialoogvenster weergegeven moet worden of niet"
 
 #.
 #. * Archivo de cadenas traducibles generado por Glade.
@@ -28,131 +81,122 @@ msgstr ""
 "besturingssystemen waaruit gekozen kan\n"
 "worden tijdens het opstarten in te stellen."
 
-#: interfaces/boot.glade.h:9 interfaces/boot.glade.in.h:49
-#: interfaces/network.glade.h:21 interfaces/network.glade.in.h:91
+#: interfaces/boot.glade.h:9 interfaces/boot.glade.in.h:48
+#: interfaces/network.glade.h:22 interfaces/network.glade.in.h:97
 #: interfaces/shares.glade.h:34 interfaces/shares.glade.h:43
 #: interfaces/shares.glade.in.h:60
 msgid "_Add..."
 msgstr "_Toevoegen..."
 
-#: interfaces/boot.glade.h:10 interfaces/boot.glade.in.h:51
+#: interfaces/boot.glade.h:10 interfaces/boot.glade.in.h:50
 #: interfaces/dhcpd.glade.h:30 interfaces/dhcpd.glade.in.h:18
-#: interfaces/network.glade.h:40 interfaces/network.glade.in.h:96
+#: interfaces/network.glade.h:41 interfaces/network.glade.in.h:102
 #: interfaces/shares.glade.h:36 interfaces/shares.glade.h:45
-#: interfaces/shares.glade.in.h:63 interfaces/users.glade.h:19
-#: interfaces/users.glade.h:25 interfaces/users.glade.in.h:86
+#: interfaces/shares.glade.in.h:63 interfaces/users.glade.h:18
+#: interfaces/users.glade.h:24 interfaces/users.glade.in.h:83
 msgid "_Delete"
 msgstr "Verwij_deren"
 
-#: interfaces/boot.glade.h:11 interfaces/boot.glade.in.h:54
+#: interfaces/boot.glade.h:11 interfaces/boot.glade.in.h:53
 msgid "_Edit..."
 msgstr "_Wijzigen..."
 
-#: interfaces/boot.glade.h:12 interfaces/boot.glade.in.h:58
-msgid "_Wait"
-msgstr "_Wacht"
+#: interfaces/boot.glade.h:12 interfaces/boot.glade.in.h:17
+msgid "<span weight=\"bold\">Starting your computer</span>"
+msgstr "<span weight=\"bold\">Uw computer wordt gestart</span>"
 
-#: interfaces/boot.glade.h:13 interfaces/boot.glade.in.h:48
-msgid "Wait"
-msgstr "Wacht"
+#: interfaces/boot.glade.h:13 interfaces/boot.glade.in.h:36
+msgid "Seconds to wait before loading default kernel or OS"
+msgstr ""
+"Aantal seconden om te wachten alvorens het standaard besturingssysteem te "
+"starten"
 
-#: interfaces/boot.glade.h:14 interfaces/boot.glade.in.h:59
-msgid "_seconds before loading default kernel or OS"
-msgstr "_seconden alvorens het standaard besturingssysteem te starten"
-
-#: interfaces/boot.glade.h:15 interfaces/boot.glade.in.h:37
-msgid "Starting your computer"
-msgstr "Bezig met opstarten van computer"
-
-#: interfaces/boot.glade.h:16 interfaces/boot.glade.in.h:29
+#: interfaces/boot.glade.h:14 interfaces/boot.glade.in.h:30
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Instellingen wijzigen voor een besturingssysteem of kernel."
 
-#: interfaces/boot.glade.h:17 interfaces/boot.glade.in.h:55
+#: interfaces/boot.glade.h:15 interfaces/boot.glade.in.h:14
+msgid "<span weight=\"bold\">Basic</span>"
+msgstr "<span weight=\"bold\">Basis</span>"
+
+#: interfaces/boot.glade.h:16 interfaces/boot.glade.in.h:54
 #: interfaces/print.glade.h:9 interfaces/print.glade.in.h:72
 #: interfaces/shares.glade.h:140 interfaces/shares.glade.in.h:68
-#: interfaces/users.glade.h:60
 msgid "_Name:"
 msgstr "_Naam:"
 
-#: interfaces/boot.glade.h:18 interfaces/boot.glade.in.h:18
+#: interfaces/boot.glade.h:17 interfaces/boot.glade.in.h:20
 msgid "Boot _type:"
 msgstr "Opstart_type:"
 
-#: interfaces/boot.glade.h:19 interfaces/boot.glade.h:20
-#: interfaces/boot.glade.h:25 interfaces/boot.glade.h:26
-#: interfaces/boot.glade.h:27 interfaces/boot.glade.h:31
-#: interfaces/boot.glade.h:76 interfaces/boot.glade.in.h:2
+#: interfaces/boot.glade.h:18 interfaces/boot.glade.h:19
+#: interfaces/boot.glade.h:23 interfaces/boot.glade.h:25
+#: interfaces/boot.glade.h:26 interfaces/boot.glade.h:30
+#: interfaces/boot.glade.h:71 interfaces/boot.glade.in.h:1
 #: interfaces/common.glade.h:22 interfaces/common.glade.in.h:1
-#: interfaces/network.glade.h:10 interfaces/network.glade.h:13
-#: interfaces/network.glade.h:15 interfaces/network.glade.h:16
-#: interfaces/network.glade.h:31 interfaces/network.glade.h:37
-#: interfaces/network.glade.h:53 interfaces/network.glade.h:68
+#: interfaces/network.glade.h:11 interfaces/network.glade.h:17
+#: interfaces/network.glade.h:18 interfaces/network.glade.h:19
+#: interfaces/network.glade.h:32 interfaces/network.glade.h:38
+#: interfaces/network.glade.h:55 interfaces/network.glade.h:68
 #: interfaces/network.glade.h:69 interfaces/network.glade.h:70
-#: interfaces/network.glade.h:76 interfaces/network.glade.h:78
-#: interfaces/network.glade.h:84 interfaces/network.glade.h:86
-#: interfaces/network.glade.h:87 interfaces/network.glade.h:94
-#: interfaces/network.glade.h:97 interfaces/network.glade.h:98
-#: interfaces/network.glade.h:103 interfaces/network.glade.h:110
-#: interfaces/network.glade.h:111 interfaces/network.glade.h:129
-#: interfaces/network.glade.h:136 interfaces/network.glade.h:137
-#: interfaces/network.glade.h:139 interfaces/network.glade.h:149
+#: interfaces/network.glade.h:77 interfaces/network.glade.h:79
+#: interfaces/network.glade.h:88 interfaces/network.glade.h:89
+#: interfaces/network.glade.h:90 interfaces/network.glade.h:93
+#: interfaces/network.glade.h:103 interfaces/network.glade.h:109
+#: interfaces/network.glade.h:111 interfaces/network.glade.h:117
+#: interfaces/network.glade.h:118 interfaces/network.glade.h:136
+#: interfaces/network.glade.h:143 interfaces/network.glade.h:144
+#: interfaces/network.glade.h:146 interfaces/network.glade.h:156
 #: interfaces/network.glade.in.h:1 interfaces/time.glade.h:10
-#: interfaces/time.glade.h:16 interfaces/time.glade.h:18
-#: interfaces/time.glade.in.h:2 interfaces/users.glade.h:8
-#: interfaces/users.glade.h:62 interfaces/users.glade.h:63
-#: interfaces/users.glade.h:72 interfaces/users.glade.h:76
-#: interfaces/users.glade.h:77 interfaces/users.glade.h:93
-#: interfaces/users.glade.h:94 interfaces/users.glade.h:100
-#: interfaces/users.glade.h:101 interfaces/users.glade.h:103
-#: interfaces/users.glade.h:108 interfaces/users.glade.h:109
-#: interfaces/users.glade.h:121 interfaces/users.glade.h:122
-#: interfaces/users.glade.h:130 interfaces/users.glade.h:147
-#: interfaces/users.glade.h:148 interfaces/users.glade.h:152
-#: interfaces/users.glade.h:153 interfaces/users.glade.in.h:2
+#: interfaces/time.glade.h:14 interfaces/time.glade.h:16
+#: interfaces/time.glade.in.h:2 interfaces/users.glade.h:11
+#: interfaces/users.glade.h:60 interfaces/users.glade.h:61
+#: interfaces/users.glade.h:66 interfaces/users.glade.h:67
+#: interfaces/users.glade.h:68 interfaces/users.glade.h:72
+#: interfaces/users.glade.h:73 interfaces/users.glade.h:76
+#: interfaces/users.glade.h:89 interfaces/users.glade.h:90
+#: interfaces/users.glade.h:109 interfaces/users.glade.h:110
+#: interfaces/users.glade.h:115 interfaces/users.glade.h:116
+#: interfaces/users.glade.in.h:1
 msgid "*"
 msgstr "*"
 
-#: interfaces/boot.glade.h:21 interfaces/boot.glade.in.h:16
-msgid "Basic"
-msgstr "Eenvoudig"
-
-#: interfaces/boot.glade.h:22 interfaces/boot.glade.in.h:56
+#: interfaces/boot.glade.h:20 interfaces/boot.glade.in.h:55
 #: interfaces/shares.glade.h:125 interfaces/shares.glade.h:141
 #: interfaces/shares.glade.in.h:69
 msgid "_Path:"
 msgstr "_Pad:"
 
-#: interfaces/boot.glade.h:23 interfaces/boot.glade.in.h:57
+#: interfaces/boot.glade.h:21 interfaces/boot.glade.in.h:56
 msgid "_Root:"
 msgstr "_Root:"
 
-#: interfaces/boot.glade.h:24 interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.h:22 interfaces/boot.glade.in.h:49
 msgid "_Append:"
 msgstr "_Toevoegen:"
 
-#: interfaces/boot.glade.h:28 interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.h:24 interfaces/boot.glade.in.h:15
+msgid "<span weight=\"bold\">Image</span>"
+msgstr "<span weight=\"bold\">Opstart-image</span>"
+
+#: interfaces/boot.glade.h:27 interfaces/boot.glade.in.h:52
 msgid "_Edit parameters"
 msgstr "Parameters be_werken"
 
-#: interfaces/boot.glade.h:29 interfaces/boot.glade.in.h:25
-msgid "Image"
-msgstr "Image"
+#: interfaces/boot.glade.h:28 interfaces/boot.glade.in.h:16
+msgid "<span weight=\"bold\">Other</span>"
+msgstr "<span weight=\"bold\">Diversen</span>"
 
-#: interfaces/boot.glade.h:30 interfaces/boot.glade.in.h:52
+#: interfaces/boot.glade.h:29 interfaces/boot.glade.in.h:51
 msgid "_Device:"
 msgstr "_Apparaat:"
 
-#: interfaces/boot.glade.h:32 interfaces/boot.glade.in.h:31
-msgid "Other"
-msgstr "Overig"
-
-#: interfaces/boot.glade.h:33 interfaces/boot.glade.h:34
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.h:31 interfaces/boot.glade.h:32
+#: interfaces/boot.glade.in.h:19
 msgid "Boot Image Assistant"
 msgstr "Opstart-Image-Assistent"
 
-#: interfaces/boot.glade.h:35 interfaces/boot.glade.in.h:40
+#: interfaces/boot.glade.h:33 interfaces/boot.glade.in.h:40
 msgid ""
 "This assistant is designed to help you quickly \n"
 "and easily add new boot images to your system.\n"
@@ -164,11 +208,11 @@ msgstr ""
 "\n"
 "Druk op \"Volgende\" om te beginnen."
 
-#: interfaces/boot.glade.h:39 interfaces/boot.glade.in.h:27
+#: interfaces/boot.glade.h:37 interfaces/boot.glade.in.h:28
 msgid "Image Identity (step 1 of 2)"
 msgstr "Image Identiteit (stap 1 van 2)"
 
-#: interfaces/boot.glade.h:40 interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.h:38 interfaces/boot.glade.in.h:25
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -176,26 +220,26 @@ msgstr ""
 "Geef een naam voor het opstart-image, en geef aan wat voor soort "
 "besturingssysteem het is."
 
-#: interfaces/boot.glade.h:41 interfaces/boot.glade.h:44
-#: interfaces/boot.glade.h:49 interfaces/boot.glade.in.h:22
-#: interfaces/users.glade.h:51 interfaces/users.glade.h:54
-#: interfaces/users.glade.in.h:24
+#: interfaces/boot.glade.h:39 interfaces/boot.glade.h:42
+#: interfaces/boot.glade.h:47 interfaces/boot.glade.in.h:24
+#: interfaces/users.glade.h:50 interfaces/users.glade.h:53
+#: interfaces/users.glade.in.h:23
 msgid "Click \"Next\" to continue"
 msgstr "Druk op \"Volgende\" om verder te gaan"
 
-#: interfaces/boot.glade.h:42 interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.h:40 interfaces/boot.glade.in.h:32
 msgid "Other  (step 2 of 2)"
-msgstr "Overig  (stap 2 van 2)"
+msgstr "Diversen  (stap 2 van 2)"
 
-#: interfaces/boot.glade.h:43 interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.h:41 interfaces/boot.glade.in.h:37
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Geef de partitie op waarop het besturingssysteem is geinstalleerd."
 
-#: interfaces/boot.glade.h:45 interfaces/boot.glade.in.h:26
+#: interfaces/boot.glade.h:43 interfaces/boot.glade.in.h:27
 msgid "Image (step 2 of 2)"
 msgstr "Image (stap 2 van 2)"
 
-#: interfaces/boot.glade.h:46 interfaces/boot.glade.in.h:19
+#: interfaces/boot.glade.h:44 interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition.\n"
@@ -207,114 +251,106 @@ msgstr ""
 "Optioneel kunnen extra parameters worden opgegeven die aan de kernel worden "
 "meegegeven tijdens het opstarten."
 
-#: interfaces/boot.glade.h:50 interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.h:48 interfaces/boot.glade.in.h:26
 #: interfaces/internetsharing.glade.h:56
-#: interfaces/internetsharing.glade.in.h:33 interfaces/network.glade.h:154
-#: interfaces/network.glade.in.h:33 interfaces/users.glade.h:55
-#: interfaces/users.glade.in.h:37
+#: interfaces/internetsharing.glade.in.h:33 interfaces/network.glade.h:161
+#: interfaces/network.glade.in.h:39 interfaces/users.glade.h:54
+#: interfaces/users.glade.in.h:35
 msgid "Finished"
-msgstr "Einde"
+msgstr "Klaar"
 
-#: interfaces/boot.glade.h:51 interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.h:49 interfaces/boot.glade.in.h:38
 msgid ""
 "The new boot image has been added.\n"
 "Please click \"Finish\" to save your changes. "
 msgstr ""
 "Het nieuwe opstart-image is toegevoegd.\n"
-"Druk op \"Einde\" om de wijzigingen op te slaan."
+"Druk op \"Klaar\" om de wijzigingen op te slaan."
 
-#: interfaces/boot.glade.h:53 interfaces/boot.glade.in.h:46
+#: interfaces/boot.glade.h:51 interfaces/boot.glade.in.h:46
 msgid "Usual kernel parameters"
 msgstr "Standaard kernelparameters"
 
-#: interfaces/boot.glade.h:54 interfaces/boot.glade.in.h:28
-#: interfaces/network.glade.h:61 interfaces/network.glade.in.h:46
-#: src/network/connection.c:1826
+#: interfaces/boot.glade.h:52 interfaces/boot.glade.in.h:29
+#: interfaces/network.glade.h:62 interfaces/network.glade.in.h:52
+#: src/network/connection.c:1852
 msgid "Manual"
 msgstr "Handmatig"
 
-#: interfaces/boot.glade.h:55 interfaces/boot.glade.in.h:10
+#: interfaces/boot.glade.h:53 interfaces/boot.glade.in.h:9
 msgid "256"
 msgstr "256"
 
-#: interfaces/boot.glade.h:56 interfaces/boot.glade.in.h:11
+#: interfaces/boot.glade.h:54 interfaces/boot.glade.in.h:10
 msgid "32K"
 msgstr "32K"
 
-#: interfaces/boot.glade.h:57 interfaces/boot.glade.in.h:13
+#: interfaces/boot.glade.h:55 interfaces/boot.glade.in.h:12
 msgid "64K"
 msgstr "64K"
 
-#: interfaces/boot.glade.h:58 interfaces/boot.glade.in.h:9
+#: interfaces/boot.glade.h:56 interfaces/boot.glade.in.h:8
 msgid "16M"
 msgstr "16M"
 
-#: interfaces/boot.glade.h:59 interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.h:57 interfaces/boot.glade.in.h:31
 msgid "Number of colours"
 msgstr "Aantal kleuren"
 
-#: interfaces/boot.glade.h:60 interfaces/boot.glade.in.h:12
+#: interfaces/boot.glade.h:58 interfaces/boot.glade.in.h:11
 #: interfaces/display.glade.h:18 interfaces/display.glade.in.h:3
 msgid "640x480"
 msgstr "640x480"
 
-#: interfaces/boot.glade.h:61 interfaces/boot.glade.in.h:14
+#: interfaces/boot.glade.h:59 interfaces/boot.glade.in.h:13
 #: interfaces/display.glade.h:19 interfaces/display.glade.in.h:4
 msgid "800x600"
 msgstr "800x600"
 
-#: interfaces/boot.glade.h:62 interfaces/boot.glade.in.h:7
+#: interfaces/boot.glade.h:60 interfaces/boot.glade.in.h:6
 #: interfaces/display.glade.h:20 interfaces/display.glade.in.h:1
 msgid "1024x768"
 msgstr "1024x768"
 
-#: interfaces/boot.glade.h:63 interfaces/boot.glade.in.h:8
+#: interfaces/boot.glade.h:61 interfaces/boot.glade.in.h:7
 #: interfaces/display.glade.h:21 interfaces/display.glade.in.h:2
 msgid "1280x1024"
 msgstr "1280x1024"
 
-#: interfaces/boot.glade.h:64 interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.h:62 interfaces/boot.glade.in.h:34
 #: interfaces/display.glade.h:41 interfaces/display.glade.in.h:16
 msgid "Resolution"
 msgstr "Resolutie"
 
-#: interfaces/boot.glade.h:65 interfaces/boot.glade.in.h:15
+#: interfaces/boot.glade.h:63 interfaces/boot.glade.in.h:18
 msgid "Ask at boot"
 msgstr "Vragen bij opstarten"
 
-#: interfaces/boot.glade.h:66 interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.h:64 interfaces/boot.glade.in.h:47
 msgid "Video modes (only framebuffer)"
 msgstr "Videomodi (alleen bij framebuffer)"
 
-#: interfaces/boot.glade.h:67 interfaces/boot.glade.h:68
-#: interfaces/boot.glade.h:72 interfaces/boot.glade.in.h:1
-#: interfaces/users.glade.h:145 interfaces/users.glade.h:151
-#: interfaces/users.glade.h:158 interfaces/users.glade.h:164
-#: interfaces/users.glade.in.h:1
-msgid "    "
-msgstr "    "
-
-#: interfaces/boot.glade.h:69 interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.h:65 interfaces/boot.glade.in.h:35
 msgid "Scsi emulation devices"
 msgstr "Scsi emulatie-apparaten"
 
-#: interfaces/boot.glade.h:70 interfaces/boot.glade.in.h:4
+#: interfaces/boot.glade.h:66 interfaces/boot.glade.in.h:3
 msgid "/dev/hdb"
 msgstr "/dev/hdb"
 
-#: interfaces/boot.glade.h:71 interfaces/boot.glade.in.h:6
+#: interfaces/boot.glade.h:67 interfaces/boot.glade.in.h:5
 msgid "/dev/hdd"
 msgstr "/dev/hdd"
 
-#: interfaces/boot.glade.h:73 interfaces/boot.glade.in.h:5
+#: interfaces/boot.glade.h:68 interfaces/boot.glade.in.h:4
 msgid "/dev/hdc"
 msgstr "/dev/hdc"
 
-#: interfaces/boot.glade.h:74 interfaces/boot.glade.in.h:3
+#: interfaces/boot.glade.h:69 interfaces/boot.glade.in.h:2
 msgid "/dev/hda"
 msgstr "/dev/hda"
 
-#: interfaces/boot.glade.h:75 interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.h:70 interfaces/boot.glade.in.h:33
 msgid "Other options"
 msgstr "Andere instellingen"
 
@@ -323,13 +359,13 @@ msgstr "Andere instellingen"
 #. * Añada este archivo a su POTFILES.in de su proyecto.
 #. * NO lo compile como parte de su aplicación.
 #.
-#: interfaces/common.glade.h:7 interfaces/common.glade.h:23
-#: interfaces/common.glade.in.h:12 src/common/xst-tool.c:1724
+#: interfaces/common.glade.h:7 interfaces/common.glade.in.h:12
+#: src/common/xst-tool.c:1725
 msgid "GNOME System Tools"
 msgstr "GNOME System Tools"
 
 #: interfaces/common.glade.h:8 interfaces/common.glade.in.h:16
-#: src/common/xst-tool.c:1016
+#: src/common/xst-tool.c:1018
 msgid "Scanning your system configuration."
 msgstr "Bezig met systeem-analyse."
 
@@ -380,18 +416,18 @@ msgstr ""
 "wachtwoord kunt u geen wijzigingen in de systeeminstellingen aanbrengen."
 
 #: interfaces/common.glade.h:21 interfaces/common.glade.in.h:15
-#: interfaces/network.glade.h:141 interfaces/network.glade.in.h:53
+#: interfaces/network.glade.h:148 interfaces/network.glade.in.h:58
 #: interfaces/shares.glade.h:112 interfaces/shares.glade.in.h:46
 msgid "Password:"
 msgstr "Wachtwoord:"
 
+#: interfaces/common.glade.h:23 interfaces/common.glade.in.h:14
+msgid "Gnome System Tools"
+msgstr "Gnome System Tools"
+
 #: interfaces/common.glade.h:24 interfaces/common.glade.in.h:11
 msgid "Complexity"
 msgstr "Complexiteit"
-
-#: interfaces/common.glade.in.h:14
-msgid "Gnome System Tools"
-msgstr "Gnome System Tools"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -448,7 +484,7 @@ msgstr "Router :"
 
 #: interfaces/dhcpd.glade.h:19 interfaces/dhcpd.glade.in.h:1
 msgid "Advanced mode not yet implemented. Sorry."
-msgstr "Geavanceerde modus is nog niet beschikbaar. Excuses voor het ongemak."
+msgstr "Geavanceerde stand is nog niet beschikbaar. Excuses voor het ongemak."
 
 #: interfaces/dhcpd.glade.h:20 interfaces/dhcpd.glade.in.h:10
 msgid "Hosts Editor"
@@ -468,7 +504,7 @@ msgstr "IP Adres:"
 
 #: interfaces/dhcpd.glade.h:24 interfaces/dhcpd.glade.in.h:8
 msgid "Host Info : "
-msgstr "Host Informatie : "
+msgstr "Host-informatie : "
 
 #: interfaces/dhcpd.glade.h:25 interfaces/dhcpd.glade.in.h:21
 msgid "_Hostname :"
@@ -488,9 +524,8 @@ msgstr "_Commentaar :"
 
 #: interfaces/dhcpd.glade.h:29 interfaces/dhcpd.glade.in.h:16
 #: interfaces/memory.glade.h:36 interfaces/memory.glade.h:45
-#: interfaces/memory.glade.in.h:22 interfaces/network.glade.h:39
-#: interfaces/network.glade.in.h:90 interfaces/time.glade.h:11
-#: interfaces/time.glade.h:19 interfaces/time.glade.in.h:17
+#: interfaces/memory.glade.in.h:22 interfaces/network.glade.h:40
+#: interfaces/network.glade.in.h:96
 msgid "_Add"
 msgstr "_Toevoegen"
 
@@ -509,7 +544,7 @@ msgstr "Type:"
 
 #: interfaces/disks.glade.h:9 interfaces/disks.glade.in.h:9
 #: interfaces/memory.glade.h:14 interfaces/memory.glade.in.h:6
-#: interfaces/network.glade.h:51 interfaces/network.glade.in.h:31
+#: interfaces/network.glade.h:53 interfaces/network.glade.in.h:37
 msgid "Device:"
 msgstr "Apparaat:"
 
@@ -562,7 +597,7 @@ msgstr "Let op foutmeldingen tijdens het opstarten"
 #: interfaces/disks.glade.h:21 interfaces/disks.glade.in.h:8
 #: interfaces/memory.glade.h:8 interfaces/memory.glade.h:33
 #: interfaces/memory.glade.h:42 interfaces/memory.glade.in.h:5
-#: src/boot/table.c:48 src/network/connection.c:472
+#: src/boot/table.c:48 src/network/connection.c:497
 msgid "Device"
 msgstr "Apparaat"
 
@@ -622,8 +657,8 @@ msgstr "Instellingenvenster openen voor geselecteerde import"
 #: interfaces/memory.glade.h:16 interfaces/memory.glade.h:25
 #: interfaces/memory.glade.h:37 interfaces/memory.glade.in.h:16
 #: interfaces/nameresolution.glade.h:48
-#: interfaces/nameresolution.glade.in.h:30 interfaces/users.glade.h:37
-#: interfaces/users.glade.in.h:64
+#: interfaces/nameresolution.glade.in.h:30 interfaces/users.glade.h:36
+#: interfaces/users.glade.in.h:60
 msgid "Settings"
 msgstr "Instellingen"
 
@@ -796,7 +831,6 @@ msgstr "Probeer"
 #.
 #: interfaces/hardware.glade.h:7 interfaces/shares.glade.h:15
 #: interfaces/shares.glade.h:26 interfaces/shares.glade.in.h:7
-#: interfaces/users.glade.h:66
 msgid "Add..."
 msgstr "Toevoegen..."
 
@@ -1046,8 +1080,8 @@ msgid "IP Forwarding"
 msgstr "IP Doorsluizen"
 
 #: interfaces/internetsharing.glade.h:64
-#: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.h:62
-#: interfaces/network.glade.in.h:26 src/network/connection.c:1827
+#: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.h:63
+#: interfaces/network.glade.in.h:33 src/network/connection.c:1853
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1178,8 +1212,8 @@ msgstr "\n"
 #: interfaces/location-manager.glade.h:16
 #: interfaces/location-manager.glade.in.h:41 interfaces/shares.glade.h:35
 #: interfaces/shares.glade.h:44 interfaces/shares.glade.in.h:72
-#: interfaces/users.glade.h:18 interfaces/users.glade.h:24
-#: interfaces/users.glade.in.h:98
+#: interfaces/users.glade.h:17 interfaces/users.glade.h:23
+#: interfaces/users.glade.in.h:95
 msgid "_Settings..."
 msgstr "Be_werken..."
 
@@ -1234,15 +1268,13 @@ msgstr "Kantoor in Boston"
 
 #: interfaces/location-manager.glade.h:26
 #: interfaces/location-manager.glade.h:47
-#: interfaces/location-manager.glade.in.h:12 interfaces/time.glade.h:21
-#: interfaces/time.glade.in.h:4
+#: interfaces/location-manager.glade.in.h:12
 msgid "Date"
 msgstr "Datum"
 
 #: interfaces/location-manager.glade.h:27
 #: interfaces/location-manager.glade.h:48
-#: interfaces/location-manager.glade.in.h:36 interfaces/time.glade.h:24
-#: interfaces/time.glade.in.h:12 src/time/time.desktop.in.in.h:1
+#: interfaces/location-manager.glade.in.h:36 src/time/time.desktop.in.in.h:1
 msgid "Time"
 msgstr "Tijd"
 
@@ -1275,13 +1307,13 @@ msgstr "PM"
 #: interfaces/location-manager.glade.h:32
 #: interfaces/location-manager.glade.h:53
 #: interfaces/location-manager.glade.in.h:38 interfaces/time.glade.h:7
-#: interfaces/time.glade.h:27 interfaces/time.glade.in.h:16
+#: interfaces/time.glade.in.h:16
 msgid "Time zone"
 msgstr "Tijdzone"
 
 #: interfaces/location-manager.glade.h:33
 #: interfaces/location-manager.glade.h:54
-#: interfaces/location-manager.glade.in.h:4 interfaces/time.glade.h:25
+#: interfaces/location-manager.glade.in.h:4 interfaces/time.glade.h:24
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
 msgstr "(niet ingesteld)"
@@ -1294,8 +1326,7 @@ msgstr "Tijdzone instellen..."
 
 #: interfaces/location-manager.glade.h:35
 #: interfaces/location-manager.glade.h:56
-#: interfaces/location-manager.glade.in.h:37 interfaces/time.glade.h:30
-#: interfaces/time.glade.in.h:14
+#: interfaces/location-manager.glade.in.h:37
 msgid "Time server"
 msgstr "Tijd-server (NTP)"
 
@@ -1323,8 +1354,8 @@ msgid "Date/Time "
 msgstr "Datum/Tijd "
 
 #: interfaces/location-manager.glade.h:40
-#: interfaces/location-manager.glade.in.h:30 interfaces/time.glade.h:20
-#: interfaces/time.glade.in.h:5
+#: interfaces/location-manager.glade.in.h:30 interfaces/time.glade.h:18
+#: interfaces/time.glade.in.h:6
 msgid ""
 "Please select the current date and time. You can also specify a time zone "
 "and a time server."
@@ -1475,7 +1506,7 @@ msgid "_Remove"
 msgstr "Ve_rwijderen"
 
 #: interfaces/memory.glade.h:47 interfaces/memory.glade.in.h:24
-#: interfaces/users.glade.h:141 interfaces/users.glade.in.h:97
+#: interfaces/users.glade.h:103 interfaces/users.glade.in.h:94
 msgid "_Settings"
 msgstr "In_stellingen"
 
@@ -1500,8 +1531,8 @@ msgstr "Aliasen"
 #: interfaces/nameresolution.glade.h:10 interfaces/nameresolution.glade.h:29
 #: interfaces/nameresolution.glade.h:34 interfaces/nameresolution.glade.in.h:4
 #: interfaces/shares.glade.h:85 interfaces/shares.glade.h:155
-#: interfaces/shares.glade.in.h:6 interfaces/users.glade.h:41
-#: interfaces/users.glade.in.h:17
+#: interfaces/shares.glade.in.h:6 interfaces/users.glade.h:40
+#: interfaces/users.glade.in.h:16
 msgid "Add"
 msgstr "Toevoegen"
 
@@ -1511,8 +1542,8 @@ msgstr "Toevoegen"
 #: interfaces/print.glade.in.h:21 interfaces/shares.glade.h:17
 #: interfaces/shares.glade.h:28 interfaces/shares.glade.h:87
 #: interfaces/shares.glade.h:157 interfaces/shares.glade.in.h:13
-#: interfaces/users.glade.h:33 interfaces/users.glade.h:42
-#: interfaces/users.glade.h:68 interfaces/users.glade.in.h:32
+#: interfaces/users.glade.h:32 interfaces/users.glade.h:41
+#: interfaces/users.glade.in.h:30
 msgid "Delete"
 msgstr "Verwijderen"
 
@@ -1653,72 +1684,76 @@ msgstr "Verander het IP adres of naam van de alias "
 #. * Añada este archivo a su POTFILES.in de su proyecto.
 #. * NO lo compile como parte de su aplicación.
 #.
-#: interfaces/network.glade.h:7 interfaces/network.glade.in.h:47
+#: interfaces/network.glade.h:7 interfaces/network.glade.in.h:53
 msgid "Networking Settings"
 msgstr "Netwerk Instellingen"
 
-#: interfaces/network.glade.h:8 interfaces/network.glade.in.h:43
+#: interfaces/network.glade.h:8 interfaces/network.glade.in.h:49
 msgid "How this computer is identified."
 msgstr "Identificatie van deze computer."
 
-#: interfaces/network.glade.h:9 interfaces/network.glade.in.h:104
+#: interfaces/network.glade.h:9 interfaces/network.glade.in.h:10
+msgid "<span weight=\"bold\">Host settings</span>"
+msgstr "<span weight=\"bold\">Host-instellingen</span>"
+
+#: interfaces/network.glade.h:10 interfaces/network.glade.in.h:111
 msgid "_Host name:"
 msgstr "_Hostnaam:"
 
-#: interfaces/network.glade.h:11 interfaces/network.glade.in.h:100
+#: interfaces/network.glade.h:12 interfaces/network.glade.in.h:13
+msgid "<span weight=\"bold\">Windows networking</span>"
+msgstr "<span weight=\"bold\">Windows netwerkomgeving</span>"
+
+#: interfaces/network.glade.h:13 interfaces/network.glade.in.h:107
 msgid "_Enable Windows networking"
 msgstr "Voorziening voor _Windows netwerkomgeving aanzetten"
 
-#: interfaces/network.glade.h:12 interfaces/network.glade.in.h:98
+#: interfaces/network.glade.h:14 interfaces/network.glade.in.h:104
 msgid "_Description:"
 msgstr "_Beschrijving:"
 
-#: interfaces/network.glade.h:14 interfaces/network.glade.in.h:32
+#: interfaces/network.glade.h:15 interfaces/network.glade.in.h:38
 msgid "Domain / _Workgroup:"
 msgstr "Domein / _Werkgroep:"
 
-#: interfaces/network.glade.h:17 interfaces/network.glade.in.h:71
+#: interfaces/network.glade.h:16 interfaces/network.glade.in.h:78
 msgid "WI_NS server:"
 msgstr "WI_NS server:"
 
-#: interfaces/network.glade.h:18 interfaces/network.glade.in.h:87
-msgid "Windows Networking"
-msgstr "Windows netwerk"
-
-#: interfaces/network.glade.h:19 interfaces/network.glade.h:58
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.h:20 interfaces/network.glade.h:59
+#: interfaces/network.glade.in.h:41
 msgid "General"
 msgstr "Algemeen"
 
-#: interfaces/network.glade.h:20 interfaces/network.glade.in.h:37
+#: interfaces/network.glade.h:21 interfaces/network.glade.in.h:43
 msgid "How other computers are accessed."
 msgstr "Hoe andere computers worden benaderd."
 
-#: interfaces/network.glade.h:22 interfaces/network.glade.in.h:97
+#: interfaces/network.glade.h:23 interfaces/network.glade.in.h:103
 msgid "_Delete..."
 msgstr "Verwij_deren..."
 
-#: interfaces/network.glade.h:23 interfaces/network.glade.in.h:95
+#: interfaces/network.glade.h:24 interfaces/network.glade.in.h:101
 msgid "_Configure..."
 msgstr "In_stellen..."
 
-#: interfaces/network.glade.h:24 interfaces/network.glade.in.h:30
+#: interfaces/network.glade.h:25 interfaces/network.glade.in.h:36
 msgid "Default Gateway Device:"
 msgstr "Standaard Gateway Apparaat:"
 
-#: interfaces/network.glade.h:25 interfaces/network.glade.in.h:68
+#: interfaces/network.glade.h:26 interfaces/network.glade.in.h:75
 msgid "Use \"Auto\" if unsure."
 msgstr "Gebruik \"Automatisch\" als u het niet zeker weer."
 
-#: interfaces/network.glade.h:26 interfaces/network.glade.in.h:19
+#: interfaces/network.glade.h:27 interfaces/network.glade.in.h:27
 msgid "Auto"
 msgstr "Automatisch"
 
-#: interfaces/network.glade.h:27 interfaces/network.glade.in.h:24
+#: interfaces/network.glade.h:28 interfaces/network.glade.in.h:31
 msgid "Connections"
 msgstr "Verbindingen"
 
-#: interfaces/network.glade.h:28 interfaces/network.glade.in.h:41
+#: interfaces/network.glade.h:29 interfaces/network.glade.in.h:47
 msgid ""
 "How the names of other\n"
 "computers are found."
@@ -1726,74 +1761,74 @@ msgstr ""
 "Hoe namen van andere\n"
 "computers worden gevonden."
 
-#: interfaces/network.glade.h:30 interfaces/network.glade.in.h:99
-msgid "_Domain:"
-msgstr "_Domein:"
+#: interfaces/network.glade.h:31 interfaces/network.glade.in.h:106
+msgid "_Domain name:"
+msgstr "_Domeinnaam:"
 
-#: interfaces/network.glade.h:32 interfaces/network.glade.in.h:29
+#: interfaces/network.glade.h:33 interfaces/network.glade.in.h:35
 msgid "DNS _Servers:"
 msgstr "DNS _Servers:"
 
-#: interfaces/network.glade.h:33 interfaces/network.glade.in.h:58
+#: interfaces/network.glade.h:34 interfaces/network.glade.in.h:64
 msgid "Sea_rch Domains:"
 msgstr "Z_oek Domeinen:"
 
-#: interfaces/network.glade.h:34 interfaces/network.glade.in.h:27
+#: interfaces/network.glade.h:35 interfaces/network.glade.in.h:34
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.h:35 interfaces/network.glade.in.h:16
+#: interfaces/network.glade.h:36 interfaces/network.glade.in.h:24
 msgid "Aliases of other computers."
 msgstr "Aliasen van andere computers."
 
-#: interfaces/network.glade.h:36 interfaces/network.glade.h:65
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.h:37 interfaces/network.glade.h:67
+#: interfaces/network.glade.in.h:112
 msgid "_IP address:"
 msgstr "_IP adres:"
 
-#: interfaces/network.glade.h:38 interfaces/network.glade.in.h:6
+#: interfaces/network.glade.h:39 interfaces/network.glade.in.h:14
 msgid "A_liases:"
 msgstr "A_liasen:"
 
-#: interfaces/network.glade.h:41 interfaces/network.glade.in.h:36
-#: src/network/main.c:130
+#: interfaces/network.glade.h:42 interfaces/network.glade.in.h:42
+#: src/network/main.c:134
 msgid "Hosts"
 msgstr "Hosts"
 
-#: interfaces/network.glade.h:42 interfaces/network.glade.in.h:48
+#: interfaces/network.glade.h:43 interfaces/network.glade.in.h:54
 #: src/network/callbacks.c:466
 msgid "New Connection Type"
 msgstr "Nieuw verbindingstype"
 
-#: interfaces/network.glade.h:43 interfaces/network.glade.in.h:59
+#: interfaces/network.glade.h:44 interfaces/network.glade.in.h:65
 msgid "Select which type of connection you would like to add."
 msgstr "Selecteer het toe te voegen verbindingstype."
 
-#: interfaces/network.glade.h:44 interfaces/network.glade.in.h:108
+#: interfaces/network.glade.h:45 interfaces/network.glade.in.h:115
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.h:45 interfaces/network.glade.in.h:101
+#: interfaces/network.glade.h:46 interfaces/network.glade.in.h:108
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.h:46 interfaces/network.glade.in.h:121
+#: interfaces/network.glade.h:47 interfaces/network.glade.in.h:129
 msgid "_Wavelan"
 msgstr "_WaveLAN"
 
-#: interfaces/network.glade.h:47 interfaces/network.glade.in.h:110
+#: interfaces/network.glade.h:48 interfaces/network.glade.in.h:118
 msgid "_Parallel Line"
 msgstr "_Parallelle verbinding"
 
-#: interfaces/network.glade.h:48 interfaces/network.glade.in.h:106
+#: interfaces/network.glade.h:49 interfaces/network.glade.in.h:113
 msgid "_IR LAN"
 msgstr "_Infrarood LAN"
 
-#: interfaces/network.glade.h:49 interfaces/network.glade.in.h:22
+#: interfaces/network.glade.h:50 interfaces/network.glade.in.h:29
 msgid "Connection Settings"
 msgstr "Verbinding Instellingen"
 
-#: interfaces/network.glade.h:50 interfaces/network.glade.in.h:69
+#: interfaces/network.glade.h:51 interfaces/network.glade.in.h:76
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who will activate connections, and when."
@@ -1801,163 +1836,183 @@ msgstr ""
 "Gebruik het commentaar om interfaces in de toekomst te herkennen. Activatie "
 "beheer laat u uitzoeken wie verbindingen kan activeren, en wanneer."
 
-#: interfaces/network.glade.h:52 interfaces/network.glade.in.h:93
+#: interfaces/network.glade.h:52 interfaces/network.glade.in.h:8
+msgid "<span weight=\"bold\">Connection</span>"
+msgstr "<span weight=\"bold\">Verbinding</span>"
+
+#: interfaces/network.glade.h:54 interfaces/network.glade.in.h:99
 #: interfaces/shares.glade.h:142 interfaces/shares.glade.in.h:62
-#: interfaces/users.glade.h:61
 msgid "_Comment:"
 msgstr "_Beschrijving:"
 
-#: interfaces/network.glade.h:54 interfaces/network.glade.in.h:21
-#: interfaces/print.glade.h:8 interfaces/print.glade.in.h:18
-msgid "Connection"
-msgstr "Verbinding"
+#: interfaces/network.glade.h:56 interfaces/network.glade.in.h:7
+msgid "<span weight=\"bold\">Activation</span>"
+msgstr "<span weight=\"bold\">Activering</span>"
 
-#: interfaces/network.glade.h:55 interfaces/network.glade.in.h:17
+#: interfaces/network.glade.h:57 interfaces/network.glade.in.h:25
 msgid "Allow activation control for all _users"
 msgstr "Maak activatie mogelijk voor alle gebr_uikers"
 
-#: interfaces/network.glade.h:56 interfaces/network.glade.in.h:9
+#: interfaces/network.glade.h:58 interfaces/network.glade.in.h:17
 msgid "Activate when the computer _starts"
 msgstr "Activeren tijdens het op_starten"
 
-#: interfaces/network.glade.h:57 interfaces/network.glade.h:162
-#: interfaces/network.glade.in.h:11
-msgid "Activation"
-msgstr "Activatie"
-
-#: interfaces/network.glade.h:59 interfaces/network.glade.in.h:38
+#: interfaces/network.glade.h:60 interfaces/network.glade.in.h:44
 msgid "How the IP address for this connection is determined."
 msgstr "Hoe het IP adres voor de verbinding wordt toegekend."
 
-#: interfaces/network.glade.h:60 interfaces/network.glade.in.h:94
+#: interfaces/network.glade.h:61 interfaces/network.glade.in.h:100
 msgid "_Configuration:"
 msgstr "_Instellingen:"
 
-#: interfaces/network.glade.h:63 interfaces/network.glade.in.h:20
-#: src/network/connection.c:1828
+#: interfaces/network.glade.h:64 interfaces/network.glade.in.h:28
+#: src/network/connection.c:1854
 msgid "BOOTP"
 msgstr "BOOTP"
 
-#: interfaces/network.glade.h:64 interfaces/network.glade.in.h:118
-msgid "_Update DNS when this connection becomes active"
-msgstr "DNS verversen als de verbinding actief wordt"
-
-#: interfaces/network.glade.h:66 interfaces/network.glade.in.h:117
-msgid "_Subnet mask:"
-msgstr "_Subnetmasker:"
-
-#: interfaces/network.glade.h:67 interfaces/network.glade.in.h:103
+#: interfaces/network.glade.h:65 interfaces/network.glade.in.h:110
 msgid "_Gateway address:"
 msgstr "_Gateway adres:"
 
-#: interfaces/network.glade.h:71 interfaces/network.glade.h:113
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.h:66 interfaces/network.glade.in.h:125
+msgid "_Subnet mask:"
+msgstr "_Subnetmasker:"
+
+#: interfaces/network.glade.h:71 interfaces/network.glade.in.h:126
+msgid "_Update DNS when this connection becomes active"
+msgstr "DNS verversen als de verbinding actief wordt"
+
+#: interfaces/network.glade.h:72 interfaces/network.glade.h:120
+#: interfaces/network.glade.in.h:51
 msgid "IP Settings"
 msgstr "IP Instellingen"
 
-#: interfaces/network.glade.h:72 interfaces/network.glade.in.h:88
+#: interfaces/network.glade.h:73 interfaces/network.glade.in.h:94
 msgid "Wireless networking settings."
 msgstr "Draadloos netwerk instellingen."
 
-#: interfaces/network.glade.h:73 interfaces/network.glade.in.h:89
+#: interfaces/network.glade.h:74 interfaces/network.glade.in.h:95
 msgid "_Ad-Hoc mode"
 msgstr "_Ad-Hoc mode"
 
-#: interfaces/network.glade.h:74 interfaces/network.glade.in.h:115
+#: interfaces/network.glade.h:75 interfaces/network.glade.in.h:123
 msgid "_Session ID:"
 msgstr "_Sessie ID:"
 
-#: interfaces/network.glade.h:75 interfaces/network.glade.in.h:102
+#: interfaces/network.glade.h:76 interfaces/network.glade.in.h:109
 msgid "_Frequency (GHz):"
 msgstr "_Frequentie (GHz):"
 
-#: interfaces/network.glade.h:77 interfaces/network.glade.in.h:4
+#: interfaces/network.glade.h:78 interfaces/network.glade.in.h:4
 msgid "2.422"
 msgstr "2.422"
 
-#: interfaces/network.glade.h:79 interfaces/network.glade.in.h:92
+#: interfaces/network.glade.h:80 interfaces/network.glade.in.h:98
 msgid "_Channel:"
 msgstr "_Kanaal:"
 
-#: interfaces/network.glade.h:80 interfaces/network.glade.in.h:12
+#: interfaces/network.glade.h:81 interfaces/network.glade.in.h:20
 msgid "Ad-Hoc Settings"
 msgstr "Ad-Hoc Instellingen"
 
-#: interfaces/network.glade.h:81 interfaces/network.glade.in.h:76
+#: interfaces/network.glade.h:82 interfaces/network.glade.in.h:83
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.h:82 interfaces/network.glade.in.h:44
+#: interfaces/network.glade.h:83 interfaces/network.glade.in.h:50
 msgid "How to dial up to the internet."
 msgstr "Hoe verbinding met internet te maken."
 
-#: interfaces/network.glade.h:83 interfaces/network.glade.in.h:54
+#: interfaces/network.glade.h:84 interfaces/network.glade.in.h:6
+msgid "<span weight=\"bold\">Account data</span>"
+msgstr "<span weight=\"bold\">Accountinformatie</span>"
+
+#: interfaces/network.glade.h:85 interfaces/network.glade.in.h:59
 msgid "Phone _number:"
 msgstr "Telefoon_nummer:"
 
-#: interfaces/network.glade.h:85 interfaces/network.glade.in.h:120
+#: interfaces/network.glade.h:86 interfaces/network.glade.in.h:128
 msgid "_User name:"
 msgstr "Gebr_uikersnaam:"
 
-#: interfaces/network.glade.h:88 interfaces/network.glade.in.h:111
+#: interfaces/network.glade.h:87 interfaces/network.glade.in.h:119
 #: interfaces/print.glade.h:19 interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Wachtwoord:"
 
-#: interfaces/network.glade.h:89 interfaces/network.glade.in.h:114
-msgid "_Retry if the connection drops or fails to start"
-msgstr "P_robeer opnieuw als de verbinding wegvalt of niet goed start"
+#: interfaces/network.glade.h:91 interfaces/network.glade.in.h:11
+msgid "<span weight=\"bold\">Options</span>"
+msgstr "<span weight=\"bold\">Instellingen</span>"
 
-#: interfaces/network.glade.h:90 interfaces/network.glade.in.h:51
-#: interfaces/print.glade.h:51 interfaces/print.glade.in.h:33
-msgid "Options"
-msgstr "Instellingen"
-
-#: interfaces/network.glade.h:91 interfaces/network.glade.in.h:7
-msgid "Account"
-msgstr "Account"
-
-#: interfaces/network.glade.h:92 interfaces/network.glade.in.h:15
-msgid "Advanced PPP connection tuning."
-msgstr "Geavanceerde instellingen voor PPP-verbinding."
-
-#: interfaces/network.glade.h:93 interfaces/network.glade.in.h:109
+#: interfaces/network.glade.h:92 interfaces/network.glade.in.h:116
 msgid "_Modem port:"
 msgstr "_Modem poort:"
 
-#: interfaces/network.glade.h:95 interfaces/network.glade.in.h:112
-msgid "_Primary:"
-msgstr "_Primaire:"
+#: interfaces/network.glade.h:94 interfaces/network.glade.in.h:122
+msgid "_Retry if the connection drops or fails to start"
+msgstr "P_robeer opnieuw als de verbinding wegvalt of niet goed start"
 
-#: interfaces/network.glade.h:96 interfaces/network.glade.in.h:57
-msgid "Se_condary:"
-msgstr "Se_cundaire:"
+#: interfaces/network.glade.h:95 interfaces/network.glade.in.h:105
+msgid "_Dial type:"
+msgstr "_Inbeltype:"
 
-#: interfaces/network.glade.h:99 interfaces/network.glade.in.h:60
-msgid "Set _DNS servers manually"
-msgstr "_DNS servers handmatig instellen"
+#: interfaces/network.glade.h:96 interfaces/network.glade.in.h:74
+msgid "Tones"
+msgstr "Toon"
 
-#: interfaces/network.glade.h:100 interfaces/network.glade.in.h:28
-msgid "DNS Servers"
-msgstr "DNS Servers"
+#: interfaces/network.glade.h:97 interfaces/network.glade.in.h:62
+msgid "Pulses"
+msgstr "Puls"
 
-#: interfaces/network.glade.h:101 interfaces/network.glade.in.h:116
-msgid "_Start PPP as soon as modem connects"
-msgstr "PPP _starten zodra de modem verbinding maakt"
+#: interfaces/network.glade.h:98 interfaces/network.glade.in.h:117
+msgid "_Modem volume:"
+msgstr "_Modem geluidniveau:"
+
+#: interfaces/network.glade.h:99 interfaces/network.glade.in.h:15
+msgid "Account"
+msgstr "Account"
+
+#: interfaces/network.glade.h:100 interfaces/network.glade.in.h:23
+msgid "Advanced PPP connection tuning."
+msgstr "Geavanceerde instellingen voor PPP-verbinding."
+
+#: interfaces/network.glade.h:101 interfaces/network.glade.in.h:12
+msgid "<span weight=\"bold\">PPP options</span>"
+msgstr "<span weight=\"bold\">PPP-instellingen</span>"
 
 #: interfaces/network.glade.h:102 interfaces/network.glade.in.h:61
-msgid "Set as default _route"
-msgstr "Instellen als standaard_route"
-
-#: interfaces/network.glade.h:104 interfaces/network.glade.in.h:56
 msgid "Pppd _options:"
 msgstr "Pppd _instellingen:"
 
-#: interfaces/network.glade.h:105 interfaces/network.glade.in.h:14
+#: interfaces/network.glade.h:104 interfaces/network.glade.in.h:124
+msgid "_Start PPP as soon as modem connects"
+msgstr "PPP _starten zodra de modem verbinding maakt"
+
+#: interfaces/network.glade.h:105 interfaces/network.glade.in.h:67
+msgid "Set modem as default _route to internet"
+msgstr "Modem instellen als standaard_route naar het internet"
+
+#: interfaces/network.glade.h:106 interfaces/network.glade.in.h:9
+msgid "<span weight=\"bold\">DNS Servers</span>"
+msgstr "<span weight=\"bold\">DNS-servers</span>"
+
+#: interfaces/network.glade.h:107 interfaces/network.glade.in.h:66
+msgid "Set _DNS servers manually"
+msgstr "_DNS servers handmatig instellen"
+
+#: interfaces/network.glade.h:108 interfaces/network.glade.in.h:120
+msgid "_Primary:"
+msgstr "_Primaire:"
+
+#: interfaces/network.glade.h:110 interfaces/network.glade.in.h:63
+msgid "Se_condary:"
+msgstr "Se_cundaire:"
+
+#: interfaces/network.glade.h:112 interfaces/network.glade.in.h:22
 msgid "Advanced"
 msgstr "Geavanceerd"
 
-#: interfaces/network.glade.h:106 interfaces/network.glade.in.h:39
+#: interfaces/network.glade.h:113 interfaces/network.glade.in.h:45
 msgid ""
 "How the IP addresses for this connection \n"
 "are determined."
@@ -1965,27 +2020,27 @@ msgstr ""
 "Hoe het IP adres voor deze verbinding \n"
 "wordt verkregen."
 
-#: interfaces/network.glade.h:108 interfaces/network.glade.in.h:107
+#: interfaces/network.glade.h:115 interfaces/network.glade.in.h:114
 msgid "_Local IP:"
 msgstr "_Lokale IP:"
 
-#: interfaces/network.glade.h:109 interfaces/network.glade.in.h:113
+#: interfaces/network.glade.h:116 interfaces/network.glade.in.h:121
 msgid "_Remote IP:"
 msgstr "IP aan ande_re kant:"
 
-#: interfaces/network.glade.h:112 interfaces/network.glade.in.h:119
+#: interfaces/network.glade.h:119 interfaces/network.glade.in.h:127
 msgid "_Use remote IP as default gateway"
 msgstr "Gebr_uik IP van andere kant als standaard-gateway"
 
-#: interfaces/network.glade.h:114 interfaces/network.glade.in.h:13
+#: interfaces/network.glade.h:121 interfaces/network.glade.in.h:21
 msgid "Add New Internet Connection"
 msgstr "Nieuwe Internetverbinding toevoegen"
 
-#: interfaces/network.glade.h:115 interfaces/network.glade.in.h:25
+#: interfaces/network.glade.h:122 interfaces/network.glade.in.h:32
 msgid "Create a new Internet Connection "
 msgstr "Een nieuwe Internetverbinding creëren "
 
-#: interfaces/network.glade.h:116 interfaces/network.glade.in.h:77
+#: interfaces/network.glade.h:123 interfaces/network.glade.in.h:84
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -2009,11 +2064,11 @@ msgstr ""
 "\n"
 "Klik op \"Volgende\" om te beginnen."
 
-#: interfaces/network.glade.h:126 interfaces/network.glade.in.h:2
+#: interfaces/network.glade.h:133 interfaces/network.glade.in.h:2
 msgid "1. ISP phone number"
 msgstr "1. ISP telefoonnummer"
 
-#: interfaces/network.glade.h:127 interfaces/network.glade.in.h:34
+#: interfaces/network.glade.h:134 interfaces/network.glade.in.h:40
 msgid ""
 "First, please enter the phone number you use to connect to the internet. "
 "This number is provided by your ISP. "
@@ -2021,12 +2076,12 @@ msgstr ""
 "Geef het telefoonnummer dat u gebruikt om met internet te verbinden. Dit "
 "telefoonnummer wordt gegeven door uw ISP."
 
-#: interfaces/network.glade.h:128 interfaces/network.glade.in.h:55
+#: interfaces/network.glade.h:135 interfaces/network.glade.in.h:60
 msgid "Phone number:"
 msgstr "Telefoonnummer:"
 
-#: interfaces/network.glade.h:130 interfaces/network.glade.h:144
-#: interfaces/network.glade.h:150 interfaces/network.glade.in.h:66
+#: interfaces/network.glade.h:137 interfaces/network.glade.h:151
+#: interfaces/network.glade.h:157 interfaces/network.glade.in.h:72
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click \"Cancel"
 "\".\n"
@@ -2034,39 +2089,39 @@ msgstr ""
 "Om door te gaan dit account in te stellen, druk op \"Volgende\". Druk op "
 "\"Afbreken\" om te stoppen.\n"
 
-#: interfaces/network.glade.h:132 interfaces/network.glade.in.h:72
+#: interfaces/network.glade.h:139 interfaces/network.glade.in.h:79
 msgid "Warning message goes here.\n"
 msgstr "Hier staat een waarschuwing.\n"
 
-#: interfaces/network.glade.h:134 interfaces/network.glade.in.h:3
+#: interfaces/network.glade.h:141 interfaces/network.glade.in.h:3
 msgid "2. Username and password"
 msgstr "2. Gebruikersnaam en wachtwoord"
 
-#: interfaces/network.glade.h:135 interfaces/network.glade.in.h:49
+#: interfaces/network.glade.h:142 interfaces/network.glade.in.h:55
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr ""
 "Geef de gebruikersnaam en het wachtwoord dat u van uw ISP heeft gekregen."
 
-#: interfaces/network.glade.h:138 interfaces/network.glade.in.h:52
+#: interfaces/network.glade.h:145 interfaces/network.glade.in.h:57
 msgid "Password (confirm):"
 msgstr "Wachtwoord (nogmaals):"
 
-#: interfaces/network.glade.h:140 interfaces/network.glade.in.h:70
+#: interfaces/network.glade.h:147 interfaces/network.glade.in.h:77
 msgid "User name:"
 msgstr "Gebruikersnaam:"
 
-#: interfaces/network.glade.h:142 interfaces/network.glade.h:152
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.h:149 interfaces/network.glade.h:159
+#: interfaces/network.glade.in.h:81
 msgid "Warning message goes here..\n"
 msgstr "Hier staat een waarschuwing..\n"
 
-#: interfaces/network.glade.h:146 interfaces/network.glade.in.h:5
+#: interfaces/network.glade.h:153 interfaces/network.glade.in.h:5
 msgid "3. Account name"
 msgstr "3. Accountnaam"
 
-#: interfaces/network.glade.h:147 interfaces/network.glade.in.h:50
+#: interfaces/network.glade.h:154 interfaces/network.glade.in.h:56
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
@@ -2074,11 +2129,11 @@ msgstr ""
 "Geef dit account een naam. Deze naam zal worden gebruikt voor identificatie "
 "van dit account."
 
-#: interfaces/network.glade.h:148 interfaces/network.glade.in.h:8
+#: interfaces/network.glade.h:155 interfaces/network.glade.in.h:16
 msgid "Account name:"
 msgstr "Accountnaam:"
 
-#: interfaces/network.glade.h:155 interfaces/network.glade.in.h:62
+#: interfaces/network.glade.h:162 interfaces/network.glade.in.h:68
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -2090,17 +2145,21 @@ msgstr ""
 "over hoe door te gaan (vorige, afbreken\n"
 "of klaar)."
 
-#: interfaces/network.glade.h:159 interfaces/network.glade.in.h:23
+#: interfaces/network.glade.h:166 interfaces/network.glade.in.h:30
 msgid "Connection active"
 msgstr "Verbinding actief"
 
-#: interfaces/network.glade.h:160 interfaces/network.glade.in.h:10
+#: interfaces/network.glade.h:167 interfaces/network.glade.in.h:18
 msgid "Activate when the computer starts"
 msgstr "Activeren als de computer opstart"
 
-#: interfaces/network.glade.h:161 interfaces/network.glade.in.h:18
+#: interfaces/network.glade.h:168 interfaces/network.glade.in.h:26
 msgid "Allow activation control for all users"
 msgstr "Alle gebruikers toestaan om verbinding te activeren"
+
+#: interfaces/network.glade.h:169 interfaces/network.glade.in.h:19
+msgid "Activation"
+msgstr "Activatie"
 
 #.
 #. * Translatable strings file generated by Glade.
@@ -2110,6 +2169,10 @@ msgstr "Alle gebruikers toestaan om verbinding te activeren"
 #: interfaces/print.glade.h:7 interfaces/print.glade.in.h:40
 msgid "Printer Settings"
 msgstr "Printer Instellingen"
+
+#: interfaces/print.glade.h:8 interfaces/print.glade.in.h:18
+msgid "Connection"
+msgstr "Verbinding"
 
 #: interfaces/print.glade.h:10 interfaces/print.glade.in.h:70
 msgid "_Hostname:"
@@ -2141,7 +2204,7 @@ msgstr "SMB werkgroep waartoe de printer behoort."
 
 #: interfaces/print.glade.h:17 interfaces/print.glade.in.h:75
 #: interfaces/shares.glade.h:127 interfaces/shares.glade.in.h:73
-#: interfaces/users.glade.h:96 interfaces/users.glade.in.h:101
+#: interfaces/users.glade.h:58 interfaces/users.glade.in.h:98
 msgid "_Username:"
 msgstr "Gebr_uikersnaam:"
 
@@ -2272,6 +2335,10 @@ msgstr "Hoge Kleuren"
 #: interfaces/print.glade.h:50 interfaces/print.glade.in.h:60
 msgid "True Color"
 msgstr "Ware Kleuren"
+
+#: interfaces/print.glade.h:51 interfaces/print.glade.in.h:33
+msgid "Options"
+msgstr "Instellingen"
 
 #: interfaces/print.glade.h:52 interfaces/print.glade.in.h:54
 msgid "Send an EOF after the print job to help eject the last page."
@@ -2816,12 +2883,12 @@ msgstr "Samba"
 msgid "Time servers"
 msgstr "Tijdservers (NTP)"
 
-#: interfaces/time.glade.h:9 interfaces/time.glade.h:17
-#: interfaces/time.glade.in.h:9
+#: interfaces/time.glade.h:9 interfaces/time.glade.h:15
+#: interfaces/time.glade.in.h:10
 msgid "Select the servers you wish to use for time synchronization."
 msgstr "Selecteer de te gebruiken servers voor tijdsynchronisatie."
 
-#: interfaces/time.glade.h:12 interfaces/time.glade.in.h:7
+#: interfaces/time.glade.h:11 interfaces/time.glade.in.h:8
 msgid ""
 "Select a time zone by clicking on \n"
 "one of the dots on the map."
@@ -2829,64 +2896,80 @@ msgstr ""
 "Kies een tijdzone door op een van\n"
 "de punten op de kaart te klikken."
 
-#: interfaces/time.glade.h:14 interfaces/time.glade.in.h:13
-msgid "Time Zones"
-msgstr "Tijdzones"
-
-#: interfaces/time.glade.h:15 interfaces/time.glade.in.h:11
+#: interfaces/time.glade.h:13 interfaces/time.glade.in.h:12
 msgid "Selection:"
 msgstr "Selectie:"
 
-#: interfaces/time.glade.h:26 interfaces/time.glade.in.h:10
+#: interfaces/time.glade.h:17
+msgid "window1"
+msgstr "window1"
+
+#: interfaces/time.glade.h:19 interfaces/time.glade.in.h:4
+msgid "<span weight=\"bold\">Time configuration</span>"
+msgstr "<span weight=\"bold\">Tijdinstellingen</span>"
+
+#: interfaces/time.glade.h:20 interfaces/time.glade.in.h:18
+msgid "_Time:"
+msgstr "_Tijd:"
+
+#: interfaces/time.glade.h:21 interfaces/time.glade.in.h:14
+msgid "Time _zone:"
+msgstr "Tijd_zone:"
+
+#: interfaces/time.glade.h:25 interfaces/time.glade.in.h:11
 msgid "Select time _zone..."
 msgstr "Selecteer tijd _zone..."
 
-#: interfaces/time.glade.h:28 interfaces/time.glade.in.h:18
-msgid "_Keep clock synchronized with selected servers"
-msgstr "_Klok synchroon houden met de geselecteerde servers"
+#: interfaces/time.glade.h:26 interfaces/time.glade.in.h:17
+msgid "_Date:"
+msgstr "_Datum:"
 
-#: interfaces/time.glade.h:29 interfaces/time.glade.in.h:6
+#: interfaces/time.glade.h:27 interfaces/time.glade.in.h:5
+msgid "<span weight=\"bold\">Time server</span>"
+msgstr "<span weight=\"bold\">Tijdservers</span>"
+
+#: interfaces/time.glade.h:28 interfaces/time.glade.in.h:7
 msgid "Select _servers..."
 msgstr "Selecteer _servers..."
+
+#: interfaces/time.glade.h:29 interfaces/time.glade.in.h:13
+msgid "Synchronize _clock with internet servers"
+msgstr "_Klok synchroon houden met de internetservers"
 
 #.
 #. * Archivo de cadenas traducibles generado por Glade.
 #. * Añada este archivo a su POTFILES.in de su proyecto.
 #. * NO lo compile como parte de su aplicación.
 #.
-#: interfaces/users.glade.h:7 interfaces/users.glade.in.h:39
+#: interfaces/users.glade.h:7 interfaces/users.glade.in.h:37
 msgid "Group Settings"
 msgstr "Groepsinstellingen"
 
-#: interfaces/users.glade.h:9 interfaces/users.glade.in.h:89
+#: interfaces/users.glade.h:8 interfaces/users.glade.in.h:7
+msgid "<span weight=\"bold\">Group settings</span>"
+msgstr "<span weight=\"bold\">Groepsinstellingen</span>"
+
+#: interfaces/users.glade.h:9 interfaces/users.glade.in.h:86
 msgid "_Group name:"
 msgstr "_Groepsnaam:"
 
-#: interfaces/users.glade.h:10
-msgid "G_id:"
-msgstr "G_id:"
+#: interfaces/users.glade.h:10 interfaces/users.glade.in.h:38
+msgid "Group _ID:"
+msgstr "Groeps-_ID:"
 
-#: interfaces/users.glade.h:11
-msgid "All _users"
-msgstr "Alle gebr_uikers"
+#: interfaces/users.glade.h:12 interfaces/users.glade.in.h:6
+msgid "<span weight=\"bold\">Group members</span>"
+msgstr "<span weight=\"bold\">Groepsleden</span>"
 
-#: interfaces/users.glade.h:12
-msgid "Group _members"
-msgstr "Groeps_leden"
+#: interfaces/users.glade.h:13 interfaces/users.glade.in.h:39
+msgid "Group _members:"
+msgstr "Groeps_leden:"
 
-#: interfaces/users.glade.h:13 interfaces/users.glade.h:133
-msgid "_Add >>"
-msgstr "_Toevoegen >>"
+#: interfaces/users.glade.h:14 interfaces/users.glade.in.h:17
+msgid "All _users:"
+msgstr "Alle gebr_uikers:"
 
-#: interfaces/users.glade.h:14
-msgid "<< _Remove"
-msgstr "<< Ve_rwijderen"
-
-#: interfaces/users.glade.h:15
-msgid "Members"
-msgstr "Leden"
-
-#: interfaces/users.glade.h:16 interfaces/users.glade.in.h:70
+#: interfaces/users.glade.h:15 interfaces/users.glade.in.h:66
 msgid ""
 "This is a list of the users available in the system. Create new users or "
 "edit existing user settings with this dialog."
@@ -2894,20 +2977,20 @@ msgstr ""
 "Dit is een lijst met beschikbare gebruikers op dit systeem. In dit venster "
 "kunt u nieuwe gebruikers aanmaken of bestaande gebruikers bewerken."
 
-#: interfaces/users.glade.h:17 interfaces/users.glade.in.h:84
+#: interfaces/users.glade.h:16 interfaces/users.glade.in.h:80
 msgid "_Add user..."
 msgstr "Gebruiker _toevoegen..."
 
-#: interfaces/users.glade.h:20 interfaces/users.glade.in.h:95
+#: interfaces/users.glade.h:19 interfaces/users.glade.in.h:92
 msgid "_Profiles..."
 msgstr "_Profielen..."
 
-#: interfaces/users.glade.h:21 interfaces/users.glade.in.h:80
+#: interfaces/users.glade.h:20 interfaces/users.glade.in.h:76
 #: src/users/users.desktop.in.in.h:1
 msgid "Users"
 msgstr "Gebruikers"
 
-#: interfaces/users.glade.h:22 interfaces/users.glade.in.h:71
+#: interfaces/users.glade.h:21 interfaces/users.glade.in.h:67
 msgid ""
 "This is the list of the groups available in the system. Create new groups or "
 "edit existing groups with this dialog."
@@ -2915,20 +2998,19 @@ msgstr ""
 "Dit is de lijst met beschikbare groepen op dit systeem. In dit venster kunt "
 "u nieuwe groepen aanmaken of bestaande groepen bewerken."
 
-#: interfaces/users.glade.h:23 interfaces/users.glade.in.h:82
+#: interfaces/users.glade.h:22 interfaces/users.glade.in.h:78
 msgid "_Add group..."
 msgstr "Groep _toevoegen..."
 
-#: interfaces/users.glade.h:26 interfaces/users.glade.h:135
-#: interfaces/users.glade.in.h:42
+#: interfaces/users.glade.h:25 interfaces/users.glade.in.h:40
 msgid "Groups"
 msgstr "Groepen"
 
-#: interfaces/users.glade.h:27 interfaces/users.glade.in.h:100
+#: interfaces/users.glade.h:26 interfaces/users.glade.in.h:97
 msgid "_Show all users and groups"
 msgstr "_Alle gebruikers en groepen weergeven"
 
-#: interfaces/users.glade.h:28 interfaces/users.glade.in.h:33
+#: interfaces/users.glade.h:27 interfaces/users.glade.in.h:31
 msgid ""
 "EXPERIMENTAL NIS support.\n"
 "It's only available if You have NIS\n"
@@ -2938,15 +3020,15 @@ msgstr ""
 "Dit is alleen beschikbaar als u NIS heeft\n"
 "en als u op \"Meer Opties\" klikt."
 
-#: interfaces/users.glade.h:31 interfaces/users.glade.in.h:52
+#: interfaces/users.glade.h:30 interfaces/users.glade.in.h:48
 msgid "New User"
 msgstr "Nieuwe Gebruiker"
 
-#: interfaces/users.glade.h:32 interfaces/users.glade.in.h:51
+#: interfaces/users.glade.h:31 interfaces/users.glade.in.h:47
 msgid "New Group"
 msgstr "Nieuwe Groep"
 
-#: interfaces/users.glade.h:34 interfaces/users.glade.in.h:20
+#: interfaces/users.glade.h:33 interfaces/users.glade.in.h:19
 msgid ""
 "Change the settings and options for the\n"
 "selected user or group, like a users password\n"
@@ -2956,11 +3038,11 @@ msgstr ""
 "geselecteerde gebruiker of groep, zoals een\n"
 "wachtwoord of groepsleden of -naam."
 
-#: interfaces/users.glade.h:38 interfaces/users.glade.in.h:65
+#: interfaces/users.glade.h:37 interfaces/users.glade.in.h:61
 msgid "Settings for selected user and group"
 msgstr "Instellingen voor geselecteerde gebruiker en groep"
 
-#: interfaces/users.glade.h:39 interfaces/users.glade.in.h:56
+#: interfaces/users.glade.h:38 interfaces/users.glade.in.h:52
 msgid ""
 "On this page, you can select scripts and files to be copied from your "
 "account into new users' accounts."
@@ -2968,20 +3050,19 @@ msgstr ""
 "Op deze pagina kunt u scripts en bestanden selecteren die vanuit uw account "
 "naar het account van de nieuwe gebruiker moeten worden gekopieerd."
 
-#: interfaces/users.glade.h:40 interfaces/users.glade.h:71
-#: interfaces/users.glade.h:86 interfaces/users.glade.in.h:36
+#: interfaces/users.glade.h:39 interfaces/users.glade.in.h:34
 msgid "Edit profile:"
 msgstr "Profiel wijzigen:"
 
-#: interfaces/users.glade.h:43 interfaces/users.glade.in.h:73
+#: interfaces/users.glade.h:42 interfaces/users.glade.in.h:69
 msgid "User Account Wizard"
 msgstr "Gebruikersaccount DruÃ¯de"
 
-#: interfaces/users.glade.h:44 interfaces/users.glade.in.h:74
+#: interfaces/users.glade.h:43 interfaces/users.glade.in.h:70
 msgid "User Creation Druid"
 msgstr "DruÃ¯de gebruikers aanmaken"
 
-#: interfaces/users.glade.h:45 interfaces/users.glade.in.h:66
+#: interfaces/users.glade.h:44 interfaces/users.glade.in.h:62
 msgid ""
 "This druid is designed to help you quickly \n"
 "and easily add new users to your system.\n"
@@ -2993,11 +3074,11 @@ msgstr ""
 "\n"
 "Om te beginnen, klik op \"Volgende\". "
 
-#: interfaces/users.glade.h:49 interfaces/users.glade.in.h:75
+#: interfaces/users.glade.h:48 interfaces/users.glade.in.h:71
 msgid "User Identity  (step 1 of 2)"
 msgstr "Gebruikersidentiteit  (stap 1 van 2)"
 
-#: interfaces/users.glade.h:50 interfaces/users.glade.in.h:61
+#: interfaces/users.glade.h:49 interfaces/users.glade.in.h:57
 msgid ""
 "Please enter a username for the new user in the space below. Optionally, you "
 "can fill in more information to identify the user. "
@@ -3005,15 +3086,15 @@ msgstr ""
 "Vul een gebruikersnaam in voor de nieuwe gebruiker. Als u wilt, kunt u meer "
 "informatie over de gebruiker invullen."
 
-#: interfaces/users.glade.h:52 interfaces/users.glade.in.h:58
+#: interfaces/users.glade.h:51 interfaces/users.glade.in.h:54
 msgid "Password options (step 2 of 2)"
 msgstr "Wachtwoordinstellingen (stap 2 van 2)"
 
-#: interfaces/users.glade.h:53 interfaces/users.glade.in.h:60
+#: interfaces/users.glade.h:52 interfaces/users.glade.in.h:56
 msgid "Please enter a password for the new user. "
 msgstr "Vul een wachtwoord in voor de nieuwe gebruiker. "
 
-#: interfaces/users.glade.h:56 interfaces/users.glade.in.h:27
+#: interfaces/users.glade.h:55 interfaces/users.glade.in.h:25
 msgid ""
 "Congratulations, the new user has been created.\n"
 "Please click \"Finish\" to save your changes. "
@@ -3021,252 +3102,136 @@ msgstr ""
 "Gefeliciteerd, de nieuwe gebruiker is aangemaakt.\n"
 "Klik op \"Klaar\" om de wijzigingen op te slaan. "
 
-#: interfaces/users.glade.h:58
-msgid "New Profile"
-msgstr "Nieuw Profiel"
+#: interfaces/users.glade.h:57 interfaces/users.glade.in.h:4
+msgid "<span weight=\"bold\">Basic settings</span>"
+msgstr "<span weight=\"bold\">Basisinstellingen</span>"
 
-#: interfaces/users.glade.h:59
-msgid "Use this dialog to create a new profile."
-msgstr "Gebruik dit venster om een nieuw profiel aan te maken."
+#: interfaces/users.glade.h:59 interfaces/users.glade.in.h:93
+msgid "_Real name:"
+msgstr "_Echte naam:"
 
-#: interfaces/users.glade.h:64
-msgid "C_opy settings from:"
-msgstr "Instellingen k_opiÃ«ren van:"
+#: interfaces/users.glade.h:62 interfaces/users.glade.in.h:5
+msgid "<span weight=\"bold\">Contact information</span>"
+msgstr "<span weight=\"bold\">Contactinformatie</span>"
 
-#: interfaces/users.glade.h:65
-msgid ""
-"User profiles can be used as templates to facilitate the creation of new "
-"users. To edit a profile, change the settings in the following tabs."
-msgstr ""
-"Gebruikersprofielen kunnen worden gebruikt als sjabloon voor het aanmaken "
-"van nieuwe gebruikers. Om een profiel te bewerken kunt u de instellingen in "
-"de volgende tabbladen wijzigen."
-
-#: interfaces/users.glade.h:67
-msgid "Copy..."
-msgstr "KopiÃ«ren..."
-
-#: interfaces/users.glade.h:69 interfaces/users.glade.h:137
-msgid "Profiles"
-msgstr "Profielen"
-
-#: interfaces/users.glade.h:70 interfaces/users.glade.h:143
-#: interfaces/users.glade.in.h:55
-msgid ""
-"On this page, you can define the system defaults which will be assigned to "
-"new users."
-msgstr ""
-"Op deze pagina kunt u systeemstandaarden opgeven welke zullen worden "
-"toegewezen aan nieuwe gebruikers."
-
-#: interfaces/users.glade.h:73 interfaces/users.glade.h:156
-#: interfaces/users.glade.in.h:43
-msgid "Home directory:"
-msgstr "Persoonlijke map:"
-
-#: interfaces/users.glade.h:74 interfaces/users.glade.h:154
-#: interfaces/users.glade.in.h:31
-msgid "Default shell:"
-msgstr "Standaard-shell:"
-
-#: interfaces/users.glade.h:75 interfaces/users.glade.h:155
-#: interfaces/users.glade.in.h:30
-msgid "Default group:"
-msgstr "Standaardgroep:"
-
-#: interfaces/users.glade.h:78
-msgid "System defaults"
-msgstr "Systeemstandaarden"
-
-#: interfaces/users.glade.h:79 interfaces/users.glade.h:165
-#: interfaces/users.glade.in.h:49
-msgid "Minimum UID:"
-msgstr "Minimale UID:"
-
-#: interfaces/users.glade.h:80 interfaces/users.glade.h:166
-#: interfaces/users.glade.in.h:48
-msgid "Minimum GID:"
-msgstr "Minimale GID:"
-
-#: interfaces/users.glade.h:81 interfaces/users.glade.h:168
-#: interfaces/users.glade.in.h:45
-msgid "Maximum GID:"
-msgstr "Maximale GID:"
-
-#: interfaces/users.glade.h:82 interfaces/users.glade.h:167
-#: interfaces/users.glade.in.h:46
-msgid "Maximum UID:"
-msgstr "Maximale UID:"
-
-#: interfaces/users.glade.h:83
-msgid "Automatic UID/GID"
-msgstr "Automatische UID/GID"
-
-#: interfaces/users.glade.h:84 src/common/System.directory.in.in.h:1
-msgid "System"
-msgstr "Systeem"
-
-#: interfaces/users.glade.h:85
-msgid ""
-"On this page, you can define security options, such as how frequently users "
-"must change their passwords."
-msgstr ""
-"Op deze pagina kunt u veiligheidsinstellingen wijzigen, zoals hoe vaak "
-"gebruikers hun wachtwoord moeten wijzigen."
-
-#: interfaces/users.glade.h:87 interfaces/users.glade.h:160
-#: interfaces/users.glade.in.h:29
-msgid "Days between warning and password expiration:"
-msgstr "Dagen tussen waarschuwing en verval van het wachtwoord:"
-
-#: interfaces/users.glade.h:88 interfaces/users.glade.h:159
-#: interfaces/users.glade.in.h:19
-msgid "Assign a random password by default"
-msgstr "Standaard een willekeurig wachtwoord toekennen"
-
-#: interfaces/users.glade.h:89 interfaces/users.glade.h:162
-#: interfaces/users.glade.in.h:53
-msgid "Number of days that a password may be used:"
-msgstr "Aantal dagen dat een wachtwoord gebruikt mag worden"
-
-#: interfaces/users.glade.h:90 interfaces/users.glade.h:161
-#: interfaces/users.glade.in.h:50
-msgid "Minimum days allowed between password changes:"
-msgstr "Minimum aantal dagen tussen wachtwoordwijzigingen:"
-
-#: interfaces/users.glade.h:91
-msgid "Password options"
-msgstr "Wachtwoordinstellingen"
-
-#: interfaces/users.glade.h:92
-msgid "Security"
-msgstr "Veiligheid"
-
-#: interfaces/users.glade.h:95
-msgid "Real _name:"
-msgstr "Echte _naam:"
-
-#: interfaces/users.glade.h:97
-msgid "Basic settings"
-msgstr "Basisgegevens"
-
-#: interfaces/users.glade.h:98
-msgid "_Office location:"
+#: interfaces/users.glade.h:63 interfaces/users.glade.in.h:50
+msgid "O_ffice location:"
 msgstr "_Kantoorlocatie:"
 
-#: interfaces/users.glade.h:99 interfaces/users.glade.in.h:102
+#: interfaces/users.glade.h:64 interfaces/users.glade.in.h:99
 msgid "_Work phone:"
 msgstr "_Werktelefoon:"
 
-#: interfaces/users.glade.h:102 interfaces/users.glade.in.h:91
+#: interfaces/users.glade.h:65 interfaces/users.glade.in.h:88
 msgid "_Home phone:"
 msgstr "_Huistelefoon:"
 
-#: interfaces/users.glade.h:104
-msgid "Contact information"
-msgstr "Contactinformatie"
+#: interfaces/users.glade.h:69 interfaces/users.glade.in.h:10
+msgid "<span weight=\"bold\">Password</span>"
+msgstr "<span weight=\"bold\">Wachtwoord</span>"
 
-#: interfaces/users.glade.h:105 interfaces/users.glade.in.h:63
+#: interfaces/users.glade.h:70 interfaces/users.glade.in.h:73
+msgid "User _password:"
+msgstr "_Wachtwoord van deze gebruiker:"
+
+#: interfaces/users.glade.h:71 interfaces/users.glade.in.h:24
+msgid "Con_firmation:"
+msgstr "Bevestiging:"
+
+#: interfaces/users.glade.h:74 interfaces/users.glade.in.h:59
 msgid "Set password b_y hand"
 msgstr "Wachtwoord handmatig ins_tellen"
 
-#: interfaces/users.glade.h:106 interfaces/users.glade.in.h:38
+#: interfaces/users.glade.h:75 interfaces/users.glade.in.h:55
+msgid "Password set to: "
+msgstr "Wachtwoord veranderd in:"
+
+#: interfaces/users.glade.h:77 interfaces/users.glade.in.h:90
+msgid "_New password"
+msgstr "_Nieuw wachtwoord"
+
+#: interfaces/users.glade.h:78 interfaces/users.glade.in.h:36
 msgid "Generate _random password"
 msgstr "_Willekeurig wachtwoord aanmaken"
 
-#: interfaces/users.glade.h:107
-msgid "Ne_w:"
-msgstr "Nieu_w:"
-
-#: interfaces/users.glade.h:110 interfaces/users.glade.in.h:23
+#: interfaces/users.glade.h:79 interfaces/users.glade.in.h:22
 msgid "Check password _quality"
 msgstr "Wachtwoord_kwaliteit testen"
 
-#: interfaces/users.glade.h:111
-msgid "C_onfirm:"
-msgstr "B_evestigen:"
-
-#: interfaces/users.glade.h:112
-msgid "Password set to:"
-msgstr "Wachtwoord veranderd in:"
-
-#: interfaces/users.glade.h:113
-msgid "New password"
-msgstr "Nieuw wachtwoord"
-
-#: interfaces/users.glade.h:114
-msgid "Password"
-msgstr "Wachtwoord"
-
-#: interfaces/users.glade.h:115 interfaces/users.glade.in.h:81
+#: interfaces/users.glade.h:80 interfaces/users.glade.in.h:77
 msgid "_Account"
 msgstr "_Account"
 
-#: interfaces/users.glade.h:116 interfaces/users.glade.in.h:94
+#: interfaces/users.glade.h:81 interfaces/users.glade.in.h:91
 msgid "_Profile:"
 msgstr "_Profiel:"
 
-#: interfaces/users.glade.h:117
-msgid "_Edit profiles..."
-msgstr "Profielen wijzigen..."
+#: interfaces/users.glade.h:82 interfaces/users.glade.in.h:85
+msgid "_Edit user profiles"
+msgstr "Gebruikersprofielen w_ijzigen"
 
-#: interfaces/users.glade.h:118 interfaces/users.glade.in.h:76
+#: interfaces/users.glade.h:83 interfaces/users.glade.in.h:13
+msgid "<span weight=\"bold\">User profile</span>"
+msgstr "<span weight=\"bold\">Gebruikersprofiel</span>"
+
+#: interfaces/users.glade.h:84 interfaces/users.glade.in.h:89
+msgid "_Main group:"
+msgstr "Hoofd_groep:"
+
+#: interfaces/users.glade.h:85 interfaces/users.glade.in.h:72
 msgid "User _ID:"
 msgstr "Gebruikers_ID:"
 
-#: interfaces/users.glade.h:119
-msgid "Home _directory:"
-msgstr "Persoonlijke _map:"
+#: interfaces/users.glade.h:86 interfaces/users.glade.in.h:2
+msgid "<span weight=\"bold\">Advanced settings</span>"
+msgstr "<span weight=\"bold\">Geavanceerde instellingen</span>"
 
-#: interfaces/users.glade.h:120 interfaces/users.glade.in.h:99
+#: interfaces/users.glade.h:87 interfaces/users.glade.in.h:96
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: interfaces/users.glade.h:123
-msgid "Advanced settings"
-msgstr "Geavanceerde instellingen"
+#: interfaces/users.glade.h:88 interfaces/users.glade.h:112
+#: interfaces/users.glade.in.h:87
+msgid "_Home directory:"
+msgstr "_Persoonlijke map:"
 
-#: interfaces/users.glade.h:124 interfaces/users.glade.in.h:44
-msgid "Ma_ximum days a password may be used:"
-msgstr "Ma_ximum aantal dagen dat een wachtwoord mag worden gebruikt:"
+#: interfaces/users.glade.h:91 interfaces/users.glade.in.h:8
+msgid "<span weight=\"bold\">Optional settings</span>"
+msgstr "<span weight=\"bold\">Optionele instellingen</span>"
 
-#: interfaces/users.glade.h:125 interfaces/users.glade.in.h:47
+#: interfaces/users.glade.h:92 interfaces/users.glade.in.h:43
 msgid "Mi_nimum days between password changes:"
 msgstr "Mi_nimum aantal dagen tussen wachtwoordwijzigingen:"
 
-#: interfaces/users.glade.h:126 interfaces/users.glade.in.h:85
+#: interfaces/users.glade.h:93 interfaces/users.glade.in.h:41
+msgid "Ma_ximum days a password may be used:"
+msgstr "Ma_ximum aantal dagen dat een wachtwoord mag worden gebruikt:"
+
+#: interfaces/users.glade.h:94 interfaces/users.glade.in.h:82
 msgid "_Days between warning and password expiration:"
 msgstr "_Dagen tussen waarschuwing en verval van het wachtwoord:"
 
-#: interfaces/users.glade.h:127
-msgid "Optional settings"
-msgstr "Optionele instellingen"
-
-#: interfaces/users.glade.h:128 interfaces/users.glade.in.h:15
+#: interfaces/users.glade.h:95 interfaces/users.glade.in.h:14
 msgid "A_dvanced"
 msgstr "_Geavanceerd"
 
-#: interfaces/users.glade.h:129
-msgid "Main _group:"
-msgstr "Hoofd_groep:"
+#: interfaces/users.glade.h:96 interfaces/users.glade.in.h:15
+msgid "A_vailable groups:"
+msgstr "Bes_chikbare groepen:"
 
-#: interfaces/users.glade.h:131
-msgid "A_vailable groups"
-msgstr "Bes_chikbare groepen"
+#: interfaces/users.glade.h:97 interfaces/users.glade.in.h:68
+msgid "Us_er's groups:"
+msgstr "Groe_pen van deze gebruiker:"
 
-#: interfaces/users.glade.h:132
-msgid "Us_er's groups"
-msgstr "Groe_pen van deze gebruiker"
+#: interfaces/users.glade.h:98 interfaces/users.glade.in.h:53
+msgid "Other _Groups"
+msgstr "Andere _Groepen"
 
-#: interfaces/users.glade.h:134
-msgid "<< _Remove "
-msgstr "<< Ve_rwijderen "
+#: interfaces/users.glade.h:99 interfaces/users.glade.in.h:74
+msgid "User profiles - GNOME System Tools"
+msgstr "Gebruikersprofielen - GNOME System Tools"
 
-#: interfaces/users.glade.h:136
-msgid "_Groups"
-msgstr "_Groepen"
-
-#: interfaces/users.glade.h:138 interfaces/users.glade.in.h:79
+#: interfaces/users.glade.h:100 interfaces/users.glade.in.h:75
 msgid ""
 "User profiles can be used as templates to facilitate the creation of new "
 "users. "
@@ -3274,137 +3239,86 @@ msgstr ""
 "Gebruikersprofielen kunnen worden gebruikt als sjabloon voor het aanmaken "
 "van nieuwe gebruikers. "
 
-#: interfaces/users.glade.h:139 interfaces/users.glade.in.h:103
+#: interfaces/users.glade.h:101 interfaces/users.glade.in.h:100
 msgid "profiles_table"
 msgstr "profiles_table"
 
-#: interfaces/users.glade.h:140 interfaces/users.glade.in.h:83
+#: interfaces/users.glade.h:102 interfaces/users.glade.in.h:79
 msgid "_Add profile"
 msgstr "Profiel _toevoegen"
 
-#: interfaces/users.glade.h:142 interfaces/users.glade.in.h:87
+#: interfaces/users.glade.h:104 interfaces/users.glade.in.h:84
 msgid "_Delete profile"
 msgstr "Profiel _verwijderen"
 
-#: interfaces/users.glade.h:144 interfaces/users.glade.in.h:12
+#: interfaces/users.glade.h:105 interfaces/users.glade.in.h:51
+msgid ""
+"On this page, you can define the system defaults which will be assigned to "
+"new users."
+msgstr ""
+"Op deze pagina kunt u systeemstandaarden opgeven welke zullen worden "
+"toegewezen aan nieuwe gebruikers."
+
+#: interfaces/users.glade.h:106 interfaces/users.glade.in.h:11
 msgid "<span weight=\"bold\">Profile settings</span>"
 msgstr "<span weight=\"bold\">Profielinstellingen:</span>"
 
-#: interfaces/users.glade.h:146 interfaces/users.glade.in.h:62
-msgid "Profile name:"
-msgstr "Profielnaam:"
+#: interfaces/users.glade.h:107 interfaces/users.glade.in.h:58
+msgid "Profile _name:"
+msgstr "Profiel_naam:"
 
-#: interfaces/users.glade.h:149 interfaces/users.glade.in.h:25
-msgid "Comments:"
-msgstr "Commentaar:"
+#: interfaces/users.glade.h:108 interfaces/users.glade.in.h:81
+msgid "_Comments"
+msgstr "_Commentaar"
 
-#: interfaces/users.glade.h:150 interfaces/users.glade.in.h:13
+#: interfaces/users.glade.h:111 interfaces/users.glade.in.h:12
 msgid "<span weight=\"bold\">System defaults</span>"
 msgstr "<span weight=\"bold\">Systeemstandaarden</span>"
 
-#: interfaces/users.glade.h:157 interfaces/users.glade.in.h:10
+#: interfaces/users.glade.h:113 interfaces/users.glade.in.h:29
+msgid "Default _shell:"
+msgstr "Standaard-_shell:"
+
+#: interfaces/users.glade.h:114 interfaces/users.glade.in.h:28
+msgid "Default _group:"
+msgstr "Standaard_groep:"
+
+#: interfaces/users.glade.h:117 interfaces/users.glade.in.h:9
 msgid "<span weight=\"bold\">Password options</span>"
 msgstr "<span weight=\"bold\">Wachtwoordinstellingen</span>"
 
-#: interfaces/users.glade.h:163 interfaces/users.glade.in.h:4
+#: interfaces/users.glade.h:118 interfaces/users.glade.in.h:49
+msgid "Number of days that a password may be used:"
+msgstr "Aantal dagen dat een wachtwoord gebruikt mag worden"
+
+#: interfaces/users.glade.h:119 interfaces/users.glade.in.h:46
+msgid "Minimum days allowed between password changes:"
+msgstr "Minimum aantal dagen tussen wachtwoordwijzigingen:"
+
+#: interfaces/users.glade.h:120 interfaces/users.glade.in.h:27
+msgid "Days between warning and password expiration:"
+msgstr "Dagen tussen waarschuwing en verval van het wachtwoord:"
+
+#: interfaces/users.glade.h:121 interfaces/users.glade.in.h:18
+msgid "Assign a random password by default"
+msgstr "Standaard een willekeurig wachtwoord toekennen"
+
+#: interfaces/users.glade.h:122 interfaces/users.glade.in.h:3
 msgid "<span weight=\"bold\">Automatic UID/GID</span>"
 msgstr "<span weight=\"bold\">Automatische UID/GID</span>"
 
-#: interfaces/users.glade.in.h:3
-msgid "<span weight=\"bold\">Advanced settings</span>"
-msgstr "<span weight=\"bold\">Geavanceerde instellingen</span>"
+#: interfaces/users.glade.h:123 interfaces/users.glade.in.h:42
+msgid "Maximum UID:"
+msgstr "Maximale UID:"
 
-#: interfaces/users.glade.in.h:5
-msgid "<span weight=\"bold\">Basic settings</span>"
-msgstr "<span weight=\"bold\">Basisinstellingen</span>"
+#: interfaces/users.glade.h:124 interfaces/users.glade.h:126
+#: interfaces/users.glade.in.h:44
+msgid "Minimum GID:"
+msgstr "Minimale GID:"
 
-#: interfaces/users.glade.in.h:6
-msgid "<span weight=\"bold\">Contact information</span>"
-msgstr "<span weight=\"bold\">Contactinformatie</span>"
-
-#: interfaces/users.glade.in.h:7
-msgid "<span weight=\"bold\">Group members</span>"
-msgstr "<span weight=\"bold\">Groepsleden</span>"
-
-#: interfaces/users.glade.in.h:8
-msgid "<span weight=\"bold\">Group settings</span>"
-msgstr "<span weight=\"bold\">Groepsinstellingen</span>"
-
-#: interfaces/users.glade.in.h:9
-msgid "<span weight=\"bold\">Optional settings</span>"
-msgstr "<span weight=\"bold\">Optionele instellingen</span>"
-
-#: interfaces/users.glade.in.h:11
-msgid "<span weight=\"bold\">Password</span>"
-msgstr "<span weight=\"bold\">Wachtwoord</span>"
-
-#: interfaces/users.glade.in.h:14
-msgid "<span weight=\"bold\">User profile</span>"
-msgstr "<span weight=\"bold\">Gebruikersprofiel</span>"
-
-#: interfaces/users.glade.in.h:16
-msgid "A_vailable groups:"
-msgstr "Bes_chikbare groepen:"
-
-#: interfaces/users.glade.in.h:18
-msgid "All _users:"
-msgstr "Alle gebr_uikers:"
-
-#: interfaces/users.glade.in.h:26
-msgid "Con_firmation:"
-msgstr "Bevestiging:"
-
-#: interfaces/users.glade.in.h:40
-msgid "Group _ID:"
-msgstr "Groeps-_ID:"
-
-#: interfaces/users.glade.in.h:41
-msgid "Group _members:"
-msgstr "Groeps_leden:"
-
-#: interfaces/users.glade.in.h:54
-msgid "O_ffice location:"
-msgstr "_Kantoorlocatie:"
-
-#: interfaces/users.glade.in.h:57
-msgid "Other _Groups"
-msgstr "Andere _Groepen"
-
-#: interfaces/users.glade.in.h:59
-msgid "Password set to: "
-msgstr "Wachtwoord veranderd in:"
-
-#: interfaces/users.glade.in.h:72
-msgid "Us_er's groups:"
-msgstr "Groe_pen van deze gebruiker:"
-
-#: interfaces/users.glade.in.h:77
-msgid "User _password:"
-msgstr "_Wachtwoord van deze gebruiker:"
-
-#: interfaces/users.glade.in.h:78
-msgid "User profiles - GNOME System Tools"
-msgstr "Gebruikersprofielen - GNOME System Tools"
-
-#: interfaces/users.glade.in.h:88
-msgid "_Edit user profiles"
-msgstr "Gebruikersprofielen w_ijzigen"
-
-#: interfaces/users.glade.in.h:90
-msgid "_Home directory:"
-msgstr "_Persoonlijke map:"
-
-#: interfaces/users.glade.in.h:92
-msgid "_Main group:"
-msgstr "Hoofd_groep:"
-
-#: interfaces/users.glade.in.h:93
-msgid "_New password"
-msgstr "_Nieuw wachtwoord"
-
-#: interfaces/users.glade.in.h:96
-msgid "_Real name:"
-msgstr "_Echte naam:"
+#: interfaces/users.glade.h:125 interfaces/users.glade.in.h:45
+msgid "Minimum UID:"
+msgstr "Minimale UID:"
 
 #. give our dialog an OK button and title
 #: src/boot/boot-append-editor.c:118
@@ -3492,7 +3406,7 @@ msgstr ""
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
 
-#: src/boot/callbacks.c:217 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:205 src/runlevel/callbacks.c:97
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3501,7 +3415,7 @@ msgstr ""
 "Het bestand ``%s'' kon niet worden gevonden of gelezen:\n"
 "De configuratie zal leeg blijven."
 
-#: src/boot/main.c:74
+#: src/boot/main.c:73
 msgid "Boot Manager Settings"
 msgstr "Opstartbeheer"
 
@@ -3516,6 +3430,10 @@ msgstr "Type"
 #: src/boot/table.c:47
 msgid "Kernel Image"
 msgstr "Kernel Image"
+
+#: src/common/System.directory.in.in.h:1
+msgid "System"
+msgstr "Systeem"
 
 #: src/common/System.directory.in.in.h:2
 msgid "System administration"
@@ -3534,7 +3452,7 @@ msgstr " Meer _Opties"
 msgid " Fewer _Options"
 msgstr " Minder _Opties "
 
-#: src/common/xst-dialog.c:476
+#: src/common/xst-dialog.c:479
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3542,25 +3460,25 @@ msgstr ""
 "Sommige veranderingen zijn nog niet toegepast.\n"
 "Wilt u deze nu toepassen?"
 
-#: src/common/xst-dialog.c:553
+#: src/common/xst-dialog.c:556
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fout bij het verbinden van signaal '%s' aan widget '%s'"
 
-#: src/common/xst-tool.c:958
+#: src/common/xst-tool.c:960
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Directive %s wordt overgeslagen..."
 
-#: src/common/xst-tool.c:1096
+#: src/common/xst-tool.c:1098
 msgid "Skipping actual save..."
 msgstr "Opslaan wordt overgeslagen..."
 
-#: src/common/xst-tool.c:1138
+#: src/common/xst-tool.c:1140
 msgid "Updating your system configuration."
 msgstr "Systeemconfiguratie wordt ververst."
 
-#: src/common/xst-tool.c:1159
+#: src/common/xst-tool.c:1161
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3568,16 +3486,16 @@ msgstr ""
 "Er was een foutmelding tijdens het uitvoeren van het werkscript,\n"
 "en de configuratie kon niet worden geladen."
 
-#: src/common/xst-tool.c:1416
+#: src/common/xst-tool.c:1408
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - GNOME System Tools"
 
-#: src/common/xst-tool.c:1618
+#: src/common/xst-tool.c:1610
 msgid "The password you entered is invalid."
 msgstr "Het opgegeven wachtwoord is onjuist."
 
-#: src/common/xst-tool.c:1630
+#: src/common/xst-tool.c:1625
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -3604,11 +3522,11 @@ msgstr ""
 "--\n"
 "Het GNOME System Tools team"
 
-#: src/common/xst-tool.c:1648
+#: src/common/xst-tool.c:1649
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: src/common/xst-tool.c:1657
+#: src/common/xst-tool.c:1658
 msgid "Don't show me this again"
 msgstr "Laat dit niet meer zien"
 
@@ -3709,7 +3627,7 @@ msgstr ""
 msgid "SMB support missing."
 msgstr "SMB ondersteuning niet gevonden."
 
-#: src/network/callbacks.c:681
+#: src/network/callbacks.c:684
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -3723,7 +3641,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:727
+#: src/network/callbacks.c:730
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3733,7 +3651,7 @@ msgstr ""
 "U moet wvdial installeren om de PPP (modem)\n"
 "verbindingen te activeren."
 
-#: src/network/callbacks.c:753
+#: src/network/callbacks.c:756
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -3747,7 +3665,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:780
+#: src/network/callbacks.c:783
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -3759,7 +3677,7 @@ msgstr ""
 "\n"
 "Toch doorgaan?"
 
-#: src/network/callbacks.c:835
+#: src/network/callbacks.c:838
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -3770,7 +3688,7 @@ msgstr ""
 "door te gaan of kies een ander standaard gateway-\n"
 "apparaat.\n"
 
-#: src/network/callbacks.c:881
+#: src/network/callbacks.c:884
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -3814,15 +3732,15 @@ msgstr "Loopback: virtuÃ«le interface"
 msgid "Unknown type"
 msgstr "Onbekend type"
 
-#: src/network/connection.c:487 src/network/connection.c:492
+#: src/network/connection.c:512 src/network/connection.c:517
 msgid "Status"
 msgstr "Status"
 
-#: src/network/connection.c:497
+#: src/network/connection.c:522
 msgid "Description"
 msgstr "Beschrijving"
 
-#: src/network/connection.c:1608
+#: src/network/connection.c:1633
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3832,7 +3750,7 @@ msgstr ""
 "leeggelaten. Vul a.u.b. een geldige waarde\n"
 "in voor beide velden."
 
-#: src/network/connection.c:1615
+#: src/network/connection.c:1640
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3842,7 +3760,7 @@ msgstr ""
 "de interface werd leeggelaten. Vul a.u.b.\n"
 "een geldige waarde in voor beide velden."
 
-#: src/network/connection.c:1621
+#: src/network/connection.c:1646
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3865,11 +3783,11 @@ msgstr "Weet u zeker dat u de aliasen voor %s wilt verwijderen?"
 msgid "IP Adress"
 msgstr "IP Adres"
 
-#: src/network/main.c:172
+#: src/network/main.c:176
 msgid "\tRun the internet conection druid."
 msgstr "\tStart de Assistent Internetverbinding."
 
-#: src/network/main.c:179
+#: src/network/main.c:183
 msgid "Network Settings"
 msgstr "Netwerkinstellingen"
 
@@ -3956,15 +3874,15 @@ msgstr "Runlevel Voorzieningenbeheer"
 msgid "Service"
 msgstr "Voorziening"
 
-#: src/time/main.c:309
+#: src/time/main.c:310
 msgid "GNOME System Tools - Timezone"
 msgstr "GNOME System Tools - Tijdzone"
 
-#: src/time/main.c:424
+#: src/time/main.c:425
 msgid "GNOME System Tools - Time Servers"
 msgstr "GNOME System Tools - Tijdservers"
 
-#: src/time/main.c:493
+#: src/time/main.c:494
 msgid ""
 "You don't have NTP support installed. Please install NTP support\n"
 "in the system to enable server synchronization."
@@ -3973,7 +3891,7 @@ msgstr ""
 "ondersteuning op uw systeem om tijd server synchronisatie te kunnen "
 "gebruiken."
 
-#: src/time/main.c:766
+#: src/time/main.c:783
 msgid "Time and Date Settings"
 msgstr "Tijd en Datum Instellingen"
 
@@ -4056,7 +3974,7 @@ msgstr "Groepsnaam bevat"
 msgid "User GID is"
 msgstr "GID van gebruiker is"
 
-#: src/users/main.c:303
+#: src/users/main.c:301
 msgid "Users and Groups"
 msgstr "Gebruikers en Groepen"
 
@@ -4103,19 +4021,19 @@ msgstr "Profiel"
 msgid "Comment"
 msgstr "Commentaar"
 
-#: src/users/search-bar/search-bar.c:160
+#: src/users/search-bar/search-bar.c:178
 msgid "Search"
 msgstr "Zoeken"
 
-#: src/users/search-bar/search-bar.c:170
+#: src/users/search-bar/search-bar.c:190
 msgid "Clear"
 msgstr "Schoonmaken"
 
-#: src/users/search-bar/search-bar.c:273
+#: src/users/search-bar/search-bar.c:294
 msgid "Choice"
 msgstr "Keuze"
 
-#: src/users/search-bar/search-bar.c:283
+#: src/users/search-bar/search-bar.c:304
 msgid "Text"
 msgstr "Tekst"
 
@@ -4230,6 +4148,162 @@ msgstr "Commentaar"
 msgid "Users and groups."
 msgstr "Gebruikers en groepen."
 
+#~ msgid "_Wait"
+#~ msgstr "_Wacht"
+
+#~ msgid "Wait"
+#~ msgstr "Wacht"
+
+#~ msgid "Starting your computer"
+#~ msgstr "Bezig met opstarten van computer"
+
+#~ msgid "Basic"
+#~ msgstr "Eenvoudig"
+
+#~ msgid "Image"
+#~ msgstr "Image"
+
+#~ msgid "Other"
+#~ msgstr "Overig"
+
+#~ msgid "    "
+#~ msgstr "    "
+
+#~ msgid "Windows Networking"
+#~ msgstr "Windows netwerk"
+
+#~ msgid "_Domain:"
+#~ msgstr "_Domein:"
+
+#~ msgid "DNS Servers"
+#~ msgstr "DNS Servers"
+
+#~ msgid "_Keep clock synchronized with selected servers"
+#~ msgstr "_Klok synchroon houden met de geselecteerde servers"
+
+#~ msgid "G_id:"
+#~ msgstr "G_id:"
+
+#~ msgid "All _users"
+#~ msgstr "Alle gebr_uikers"
+
+#~ msgid "Group _members"
+#~ msgstr "Groeps_leden"
+
+#~ msgid "_Add >>"
+#~ msgstr "_Toevoegen >>"
+
+#~ msgid "<< _Remove"
+#~ msgstr "<< Ve_rwijderen"
+
+#~ msgid "Members"
+#~ msgstr "Leden"
+
+#~ msgid "New Profile"
+#~ msgstr "Nieuw Profiel"
+
+#~ msgid "Use this dialog to create a new profile."
+#~ msgstr "Gebruik dit venster om een nieuw profiel aan te maken."
+
+#~ msgid "C_opy settings from:"
+#~ msgstr "Instellingen k_opiÃ«ren van:"
+
+#~ msgid ""
+#~ "User profiles can be used as templates to facilitate the creation of new "
+#~ "users. To edit a profile, change the settings in the following tabs."
+#~ msgstr ""
+#~ "Gebruikersprofielen kunnen worden gebruikt als sjabloon voor het aanmaken "
+#~ "van nieuwe gebruikers. Om een profiel te bewerken kunt u de instellingen "
+#~ "in de volgende tabbladen wijzigen."
+
+#~ msgid "Copy..."
+#~ msgstr "KopiÃ«ren..."
+
+#~ msgid "Profiles"
+#~ msgstr "Profielen"
+
+#~ msgid "Home directory:"
+#~ msgstr "Persoonlijke map:"
+
+#~ msgid "System defaults"
+#~ msgstr "Systeemstandaarden"
+
+#~ msgid "Maximum GID:"
+#~ msgstr "Maximale GID:"
+
+#~ msgid "Automatic UID/GID"
+#~ msgstr "Automatische UID/GID"
+
+#~ msgid ""
+#~ "On this page, you can define security options, such as how frequently "
+#~ "users must change their passwords."
+#~ msgstr ""
+#~ "Op deze pagina kunt u veiligheidsinstellingen wijzigen, zoals hoe vaak "
+#~ "gebruikers hun wachtwoord moeten wijzigen."
+
+#~ msgid "Password options"
+#~ msgstr "Wachtwoordinstellingen"
+
+#~ msgid "Security"
+#~ msgstr "Veiligheid"
+
+#~ msgid "Real _name:"
+#~ msgstr "Echte _naam:"
+
+#~ msgid "Basic settings"
+#~ msgstr "Basisgegevens"
+
+#~ msgid "_Office location:"
+#~ msgstr "_Kantoorlocatie:"
+
+#~ msgid "Contact information"
+#~ msgstr "Contactinformatie"
+
+#~ msgid "Ne_w:"
+#~ msgstr "Nieu_w:"
+
+#~ msgid "C_onfirm:"
+#~ msgstr "B_evestigen:"
+
+#~ msgid "Password set to:"
+#~ msgstr "Wachtwoord veranderd in:"
+
+#~ msgid "New password"
+#~ msgstr "Nieuw wachtwoord"
+
+#~ msgid "Password"
+#~ msgstr "Wachtwoord"
+
+#~ msgid "_Edit profiles..."
+#~ msgstr "Profielen wijzigen..."
+
+#~ msgid "Home _directory:"
+#~ msgstr "Persoonlijke _map:"
+
+#~ msgid "Advanced settings"
+#~ msgstr "Geavanceerde instellingen"
+
+#~ msgid "Optional settings"
+#~ msgstr "Optionele instellingen"
+
+#~ msgid "Main _group:"
+#~ msgstr "Hoofd_groep:"
+
+#~ msgid "A_vailable groups"
+#~ msgstr "Bes_chikbare groepen"
+
+#~ msgid "Us_er's groups"
+#~ msgstr "Groe_pen van deze gebruiker"
+
+#~ msgid "<< _Remove "
+#~ msgstr "<< Ve_rwijderen "
+
+#~ msgid "_Groups"
+#~ msgstr "_Groepen"
+
+#~ msgid "Comments:"
+#~ msgstr "Commentaar:"
+
 #~ msgid "Password for User %s"
 #~ msgstr "Wachtwoord voor gebruiker %s"
 
@@ -4241,9 +4315,6 @@ msgstr "Gebruikers en groepen."
 
 #~ msgid "Show All"
 #~ msgstr "Alles weergeven"
-
-#~ msgid "window1"
-#~ msgstr "window1"
 
 #~ msgid "D_efault"
 #~ msgstr "_Standaard"
