@@ -400,7 +400,11 @@ is_login_valid (xmlNodePtr node, const gchar *login)
 		buf = g_strdup (_("The username is empty."));
 
 	/* If too long. */
+#ifdef __FreeBSD__
+	else if (strlen (login) > UT_NAMESIZE) /*  = sizeof (ut.ut_name) */
+#else
 	else if (strlen (login) > sizeof (ut.ut_user))
+#endif
 		buf = g_strdup (_("The username is too long."));
 	
 	/* If user being modified is root */
