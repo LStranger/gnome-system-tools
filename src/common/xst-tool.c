@@ -66,23 +66,23 @@ static GtkObjectClass *parent_class;
 static gint xsttool_signals [LAST_SIGNAL] = { 0 };
 static const gchar *XST_TOOL_EOR = "\n<!-- XST: end of request -->\n";
 
-static gboolean platform_unsupported_cb   (XstTool *tool, XstReportLine *rline);
-static gboolean platform_add_supported_cb (XstTool *tool, XstReportLine *rline);
-static gboolean platform_set_current_cb   (XstTool *tool, XstReportLine *rline);
-static gboolean report_finished_cb        (XstTool *tool, XstReportLine *rline);
+static gboolean platform_unsupported_cb   (XstTool *tool, XstReportLine *rline, gpointer data);
+static gboolean platform_add_supported_cb (XstTool *tool, XstReportLine *rline, gpointer data);
+static gboolean platform_set_current_cb   (XstTool *tool, XstReportLine *rline, gpointer data);
+static gboolean report_finished_cb        (XstTool *tool, XstReportLine *rline, gpointer data);
 
 static void report_dispatch (XstTool *tool);
 
 static gint xst_tool_compare_platforms (XstPlatform *a, XstPlatform *b);
 
 static XstReportHookEntry common_report_hooks[] = {
-/*        key                 function                    type                      allow_repeat */
-	{ "end",              report_finished_cb,         XST_REPORT_HOOK_LOADSAVE, TRUE  },
-	{ "platform_list",    platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE  }, 
-	{ "platform_unsup",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
-	{ "platform_undet",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE },
-	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_SAVE,     FALSE }, 
-	{ 0,                  NULL,                       -1,                       FALSE }
+/*        key                 function                    type                      allow_repeat user_data */
+	{ "end",              report_finished_cb,         XST_REPORT_HOOK_LOADSAVE, TRUE,        NULL },
+	{ "platform_list",    platform_add_supported_cb,  XST_REPORT_HOOK_LOAD,     TRUE,        NULL }, 
+	{ "platform_unsup",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE,       NULL },
+	{ "platform_undet",   platform_unsupported_cb,    XST_REPORT_HOOK_LOADSAVE, FALSE,       NULL },
+	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_SAVE,     FALSE,       NULL }, 
+	{ NULL,               NULL,                       -1,                       FALSE,       NULL }
 };
 
 static gchar *location_id;    /* Location in which we are editing */
@@ -141,7 +141,7 @@ platform_unsupported_clicked_cb (GtkWidget *widget, gint ret, XstTool *tool)
 }
 
 static gboolean
-platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
+platform_unsupported_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 {
 	tool->run_again = TRUE;
 
@@ -149,7 +149,7 @@ platform_unsupported_cb (XstTool *tool, XstReportLine *rline)
 }
 
 static gboolean
-platform_add_supported_cb (XstTool *tool, XstReportLine *rline)
+platform_add_supported_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 {
 	XstPlatform *platform;
 
@@ -161,7 +161,7 @@ platform_add_supported_cb (XstTool *tool, XstReportLine *rline)
 }
 
 static gboolean
-platform_set_current_cb (XstTool *tool, XstReportLine *rline)
+platform_set_current_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 {
 	XstPlatform *platform;
 
@@ -179,7 +179,7 @@ platform_set_current_cb (XstTool *tool, XstReportLine *rline)
 /* --- Other Report Hooks --- */
 
 static gboolean
-report_finished_cb (XstTool *tool, XstReportLine *rline)
+report_finished_cb (XstTool *tool, XstReportLine *rline, gpointer data)
 {
 	tool->report_dispatch_pending = FALSE;
 	tool->report_finished = TRUE;
@@ -1118,6 +1118,7 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 			    tool);
 
 	tool->report_hook_list = NULL;
+	memset (&tool->report_hook_defaults, 0, sizeof (XstReportHook *) * XST_MAJOR_MAX);
 	xst_tool_add_report_hooks (tool, common_report_hooks);
 
 	tool->backend_pid = tool->backend_read_fd = tool->backend_write_fd = -1;
@@ -1179,13 +1180,42 @@ xst_tool_add_report_hooks (XstTool *tool, XstReportHookEntry *report_hook_table)
 }
 
 void
+xst_tool_set_default_hook (XstTool *tool, XstReportHookEntry *entry, XstReportMajor major)
+{
+	g_return_if_fail (major < XST_MAJOR_MAX);
+	
+	if (tool->report_hook_defaults[major])
+		g_free (tool->report_hook_defaults[major]);
+
+	tool->report_hook_defaults[major] = xst_report_hook_new_from_entry (entry);
+}
+
+static void
+xst_tool_invoke_default_hook (XstTool *tool, XstReportLine *rline)
+{
+	XstReportHook *hook;
+	
+	if (tool->report_hook_defaults[rline->major]) {
+		hook = tool->report_hook_defaults[rline->major];
+		if ((hook->allow_repeat || !hook->invoked) &&
+		    (hook->type == XST_REPORT_HOOK_LOADSAVE ||
+		     hook->type == tool->report_hook_type)) {
+			hook->invoked = TRUE;
+			hook->func (tool, rline, hook->data);
+		}
+	}
+}
+
+void
 xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, XstReportLine *rline)
 {
 	GSList *list;
 	XstReportHook *hook;
 	const gchar *key;
+	gboolean invoked;
 
 	key = xst_report_line_get_key (rline);
+	invoked = FALSE;
 
 	for (list = tool->report_hook_list; list; list = g_slist_next (list))
 	{
@@ -1193,10 +1223,14 @@ xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, XstReportLi
 
 		if (!strcmp (hook->key, key) && (hook->allow_repeat || !hook->invoked) &&
 		    (hook->type == XST_REPORT_HOOK_LOADSAVE || hook->type == type)) {
-			hook->invoked = TRUE;
-			hook->func (tool, rline);
+			hook->invoked = invoked = TRUE;
+			if (hook->func (tool, rline, hook->data))
+				return;
 		}
 	}
+
+	if (!invoked)
+		xst_tool_invoke_default_hook (tool, rline);
 }
 
 void

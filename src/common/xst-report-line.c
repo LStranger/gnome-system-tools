@@ -63,15 +63,17 @@ xst_report_sprintf (gchar *fmt, gchar **argv)
 }
 
 XstReportLine *
-xst_report_line_new (gchar *key, gchar *fmt, gchar **argv)
+xst_report_line_new (XstReportMajor major, gchar *key, gchar *fmt, gchar **argv)
 {
 	XstReportLine *xrl;
 	gchar *str;
 
 	xrl = g_new0 (XstReportLine, 1);
+	xrl->major = major;
 	xrl->key = g_strdup (key);
 	xrl->fmt = g_strdup (fmt);
 
+	/* This code duplicates the argv */
 	str = g_strjoinv ("::", argv);
 	xrl->argv = g_strsplit (str, "::", 0);
 	g_free (str);
@@ -82,22 +84,51 @@ xst_report_line_new (gchar *key, gchar *fmt, gchar **argv)
 	return xrl;
 }
 
+static XstReportMajor
+xst_report_line_str_to_major (gchar *string)
+{
+	struct {
+		XstReportMajor  major;
+		gchar          *str;
+	} table[] = {
+		{ XST_MAJOR_SYS,     "sys" },
+		{ XST_MAJOR_ERROR,   "error" },
+		{ XST_MAJOR_WARN,    "warn" },
+		{ XST_MAJOR_INFO,    "info" },
+		{ XST_MAJOR_DEBUG,   "debug" },
+		{ XST_MAJOR_INVALID, NULL }
+	};
+
+	gint i;
+
+	for (i = 0; table[i].major != XST_MAJOR_INVALID; i++)
+		if (!strcmp (string, table[i].str))
+			return table[i].major;
+	return XST_MAJOR_INVALID;
+}
+
 XstReportLine *
 xst_report_line_new_from_string (gchar *string)
 {
 	XstReportLine *xrl;
+	XstReportMajor major;
 	gchar **parts;
 
 	g_return_val_if_fail (strlen (string) > 1, NULL);
 
 	parts = g_strsplit (string, "::", 0);
 
-	if (!parts[0] || !parts[1])
+	if (!parts[0] || !parts[1] || !parts[2])
 		g_warning ("xst_report_line_new_from_string: Error in report string [%s]", string);
 	g_return_val_if_fail (parts[0], NULL);
 	g_return_val_if_fail (parts[1], NULL);
+	g_return_val_if_fail (parts[2], NULL);
+
+	major = xst_report_line_str_to_major (parts[0]);
+
+	g_return_val_if_fail (major != XST_MAJOR_INVALID, NULL);
 	
-	xrl = xst_report_line_new (parts[0], parts[1], &parts[2]);
+	xrl = xst_report_line_new (major, parts[1], parts[2], &parts[3]);
 	g_strfreev (parts);
 
 	return xrl;

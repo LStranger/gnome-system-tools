@@ -26,6 +26,9 @@
 #include "xst-tool.h"
 
 struct _XstReportLine {
+	
+	XstReportMajor major;
+	
 	gchar *key;
 	gchar *fmt;
 	gchar **argv;
@@ -33,7 +36,8 @@ struct _XstReportLine {
 	guint handled : 1;
 };
 
-XstReportLine     *xst_report_line_new              (gchar *key, gchar *fmt, gchar **argv);
+XstReportLine     *xst_report_line_new              (XstReportMajor major, gchar *key,
+						     gchar *fmt, gchar **argv);
 XstReportLine     *xst_report_line_new_from_string  (gchar *string);
 void               xst_report_line_free             (XstReportLine *line);
 

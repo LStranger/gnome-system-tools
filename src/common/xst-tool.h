@@ -88,8 +88,9 @@ struct _XstTool {
 	gboolean report_finished;
 	gboolean run_again;
 
-	XstReportHookType report_hook_type;
-	GSList *report_hook_list;
+	XstReportHookType  report_hook_type;
+	GSList            *report_hook_list;
+	XstReportHook     *report_hook_defaults[XST_MAJOR_MAX];
 
 	XstPlatform *current_platform;     /* Always set from backend report */
 	GSList *supported_platforms_list;  /* Gets set only if backend breaks */
@@ -138,6 +139,7 @@ GladeXML    *xst_tool_load_glade          (XstTool *tool, const gchar *widget);
 XstDialog   *xst_tool_get_dialog          (XstTool *tool);
 
 void         xst_tool_add_report_hooks    (XstTool *tool, XstReportHookEntry *report_hook_table);
+void         xst_tool_set_default_hook    (XstTool *tool, XstReportHookEntry *entry, XstReportMajor major);
 void         xst_tool_invoke_report_hooks (XstTool *tool, XstReportHookType type, XstReportLine *rline);
 void         xst_tool_reset_report_hooks  (XstTool *tool);
 

@@ -44,6 +44,16 @@ typedef enum {
 	XST_WIDGET_MODE_SENSITIVE
 } XstWidgetMode;
 
+typedef enum {
+	XST_MAJOR_SYS     = 0,
+	XST_MAJOR_ERROR   = 1,
+	XST_MAJOR_WARN    = 2,
+	XST_MAJOR_INFO    = 3,
+	XST_MAJOR_DEBUG   = 4,
+	XST_MAJOR_MAX     = 5, /* To make report major array declarations look nice */
+	XST_MAJOR_INVALID = 6  /* Only for validation purposes. Always last in enum */
+} XstReportMajor;
+
 typedef struct _XstTool             XstTool;
 typedef struct _XstToolClass        XstToolClass;
 

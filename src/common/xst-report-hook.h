@@ -26,31 +26,35 @@
 #include "xst-report-line.h"
 #include "xst-tool.h"
 
-typedef gboolean (XstReportHookFunc) (XstTool *tool, XstReportLine *rline);
+/* The return value defines if more hooks to the same entry type should be called. */
+typedef gboolean (XstReportHookFunc) (XstTool *tool, XstReportLine *rline, gpointer data);
 
 /* Internal storage */
 
 struct _XstReportHook {
-	gchar *key;
+	gchar             *key;
 	XstReportHookFunc *func;
-	XstReportHookType type;
-	guint allow_repeat : 1;
-	guint invoked : 1;
+	XstReportHookType  type;
+	gboolean           allow_repeat;
+	gboolean           invoked;
+	gpointer           data;
 };
 
 /* Arranged in arrays, allows for easy loading of report-hook entries */
 
 struct _XstReportHookEntry {
-	gchar *key;
+	gchar             *key;
 	XstReportHookFunc *func;
-	XstReportHookType type;
-	gboolean allow_repeat;
+	XstReportHookType  type;
+	gboolean           allow_repeat;
+	gpointer           data;
 };
 
-XstReportHook     *xst_report_hook_new             (gchar *key,
-						    XstReportHookFunc func,
-                                                    XstReportHookType type,
-                                                    gboolean allow_repeat);
+XstReportHook     *xst_report_hook_new             (gchar             *key,
+						    XstReportHookFunc  func,
+                                                    XstReportHookType  type,
+                                                    gboolean           allow_repeat,
+						    gpointer           data);
 XstReportHook     *xst_report_hook_new_from_entry  (XstReportHookEntry *entry);
 void               xst_report_hook_destroy         (XstReportHook *xrh);
 

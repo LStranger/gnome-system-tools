@@ -1,3 +1,37 @@
+Thu Aug 16 02:10:34 2001  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+        These changes have only been tested compile-time, but it has
+	additional functionality that should not impact any of the
+	old code.
+	
+	* xst-types.h: The report major enum.
+
+	* xst-tool.h: Added default hook table.
+
+	* xst-tool.c: Closure support all over the place (hoook cb's and
+	hook entry table declaration).
+	(xst_tool_set_default_hook): Set the default policy handler for
+	a given major.
+	(xst_tool_invoke_default_hook): Helper. Nothing is done if no
+	default hook is defined (if there's NULL).
+	(xst_tool_invoke_report_hooks): If no hooks for this key were
+	invoked, try with a default hook.
+
+	* xst-report-line.c (xst_report_line_str_to_major): Convert from
+	the major string received to the internal enum.
+	(xst_report_line_new_from_string): Check that the major part
+	is given, and that it is valid. Optional arguments now start from
+	the third field.
+
+	* xst-report-hook.h: ReportHookFuncs now receive a data gpointer.
+	Changed allow_repeat and invoked to gboolean. gpointer data.
+
+	* xst-report-hook.c (xst_report_hook_new): Use TRUE/FALSE for
+	invoked. Added data gpointer for closure.
+	(xst_report_hook_new_from_entry): Added closure support.
+
+	* xst-report-line.c (xst_report_line_new): major support.
+
 2001-08-01  Bradford Hovinen  <hovinen@ximian.com>
 
 	* xst-tool.c (xst_tool_save): Reorganize logic to remove duplicate
