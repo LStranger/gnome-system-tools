@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-24 03:57+0100\n"
-"PO-Revision-Date: 2003-11-24 13:48+0100\n"
+"POT-Creation-Date: 2003-12-12 14:54+0100\n"
+"PO-Revision-Date: 2003-12-12 18:04+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -206,7 +206,7 @@ msgid "Finished"
 msgstr "Dokončeno"
 
 #: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
-#: src/network/connection.c:1786
+#: src/network/connection.c:1859
 msgid "Manual"
 msgstr "Ruční"
 
@@ -246,7 +246,9 @@ msgstr "Zadejte oddíl, na kterém je operační systém instalován."
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
-msgstr "Nový zaváděcí obraz byl přidán. Uložte prosím své změny kliknutím na \"Použít\"."
+msgstr ""
+"Nový zaváděcí obraz byl přidán. Uložte prosím své změny kliknutím na \"Použít"
+"\"."
 
 #: interfaces/boot.glade.in.h:37
 msgid ""
@@ -478,7 +480,7 @@ msgstr "Povolit kontrolu nad připojením všem _uživatelům"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:28 src/network/connection.c:1788
+#: interfaces/network.glade.in.h:28 src/network/connection.c:1861
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -507,7 +509,7 @@ msgstr "Připojení"
 msgid "Creating a new network connection"
 msgstr "Vytvářím nové připojení k síti"
 
-#: interfaces/network.glade.in.h:35 src/network/connection.c:1787
+#: interfaces/network.glade.in.h:35 src/network/connection.c:1860
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1217,7 +1219,7 @@ msgstr "Vytvářím nový zaváděcí obraz (%d z %d)"
 msgid "Finished creating a new boot image"
 msgstr "Tvorba nového zaváděcího obrazu dokončena"
 
-#: src/boot/boot-image.c:40 src/network/profile.c:466
+#: src/boot/boot-image.c:40 src/network/profile.c:467
 msgid "Unknown"
 msgstr "Neznámý"
 
@@ -1449,43 +1451,17 @@ msgstr "Systémové nástroje GNOME"
 msgid "Please restart your GNOME session for these changes to take effect."
 msgstr "Restartujte prosím vaše sezení GNOME, aby se tyto změny projevily."
 
-#: src/network/callbacks.c:116 src/services/table.c:55
-msgid "Active"
-msgstr "Aktivní"
-
-#: src/network/callbacks.c:119
-msgid "Activating"
-msgstr "Aktivuje se"
-
-#: src/network/callbacks.c:130
-msgid "Inactive"
-msgstr "Neaktivní"
-
-#: src/network/callbacks.c:133
-msgid "Deactivating"
-msgstr "Deaktivuje se"
-
-#: src/network/callbacks.c:455
+#: src/network/callbacks.c:365
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Odstranit připojení %s: \"%s\"?"
 
-#: src/network/callbacks.c:457
+#: src/network/callbacks.c:367
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Odstranit připojení %s?"
 
-#: src/network/callbacks.c:523
-#, c-format
-msgid "Activating connection ``%s.''"
-msgstr "Aktivuje se připojení \"%s\"."
-
-#: src/network/callbacks.c:561
-#, c-format
-msgid "Deactivating connection ``%s.''"
-msgstr "Deaktivuje se připojení \"%s\"."
-
-#: src/network/callbacks.c:600
+#: src/network/callbacks.c:508
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable windows networking."
@@ -1493,11 +1469,11 @@ msgstr ""
 "nemáte nainstalovanou podporu SMB. Nainstalujte prosím podporu SMB na váš "
 "systém a pak můžete povolit síťování s Windows."
 
-#: src/network/callbacks.c:603
+#: src/network/callbacks.c:511
 msgid "SMB support missing."
 msgstr "Chybí podpora SMB."
 
-#: src/network/callbacks.c:654
+#: src/network/callbacks.c:562
 msgid ""
 "The host name has changed. This will prevent you from launching new "
 "applications, and so you will have to log in again. Continue anyway?"
@@ -1505,7 +1481,7 @@ msgstr ""
 "Název počítače se změnil. To vám znemožní spouštět nové aplikace, budete se "
 "muset znovu přihlásit. Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:702
+#: src/network/callbacks.c:610
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate."
@@ -1513,7 +1489,7 @@ msgstr ""
 "Nebylo možné na vašem systému nalézt wvdial. Musíte nainstalovat wvdial, "
 "jinak se připojení PPP (modem) nebudou aktivovat. "
 
-#: src/network/callbacks.c:729
+#: src/network/callbacks.c:637
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1521,7 +1497,7 @@ msgstr ""
 "Nebylo možné na vašem systému nalézt wvdial. Musíte nainstalovat wvdial, "
 "jinak se připojení PPP (modem) nebudou aktivovat. Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:756
+#: src/network/callbacks.c:664
 msgid ""
 "The default gateway device is not activated. This will prevent you from "
 "connecting to the Internet. Continue anyway?"
@@ -1529,7 +1505,7 @@ msgstr ""
 "Zařízení implicitní brány není aktivováno. To vám znemožní připojení k "
 "Internetu. Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:811
+#: src/network/callbacks.c:719
 msgid ""
 "The default gateway device is missing gateway information. Please provide "
 "this information to proceed, or choose another default gateway device."
@@ -1537,7 +1513,7 @@ msgstr ""
 "Zařízení implicitní brány neobsahuje informace o bráně. Zadejte tyto "
 "informace, chcete-li pokračovat, nebo vyberte jiné zařízení implicitní brány."
 
-#: src/network/callbacks.c:857
+#: src/network/callbacks.c:765
 msgid ""
 "The program redhat-config-network-cmd could not be found. This could render "
 "missing connections under the connections tab. Please install the redhat-"
@@ -1547,17 +1523,17 @@ msgstr ""
 "připojení pod odrážkou připojení. Abyste tomu zamezili, musíte nainstalovat "
 "balíček redhat-config-network."
 
-#: src/network/callbacks.c:894
+#: src/network/callbacks.c:802
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Chcete povolit rozhraní %s?"
 
-#: src/network/callbacks.c:904
+#: src/network/callbacks.c:812
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Chcete zakázat rozhraní %s?"
 
-#: src/network/callbacks.c:989
+#: src/network/callbacks.c:899
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1565,19 +1541,19 @@ msgstr ""
 "Nemohu autodetekovat zařízení modemu, zkontrolujte, že se nepoužívá a že je "
 "správně připojen"
 
-#: src/network/callbacks.c:1041
+#: src/network/callbacks.c:951
 msgid "Silent"
 msgstr "Tichá"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:953
 msgid "Low"
 msgstr "Nízká"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:955
 msgid "Medium"
 msgstr "Střední"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:957
 msgid "Loud"
 msgstr "Hlasitá"
 
@@ -1625,15 +1601,13 @@ msgstr "Stav"
 msgid "Description"
 msgstr "Popis"
 
-#: src/network/connection.c:1659
+#: src/network/connection.c:1723
 msgid ""
 "The IP address or netmask for the interface was left empty. Please enter "
 "valid IP addresses in those fields to continue."
-msgstr ""
-"IP adresa nebo síťová maska pro rozhraní byla ponechána prázdná. Pokračujte "
-"prosmím zadání platných IP adres do těchto polí."
+msgstr "IP adresa nebo síťová maska pro rozhraní byla ponechána prázdná. Pokračujte prosím zadáním platných IP adres do těchto polí."
 
-#: src/network/connection.c:1666
+#: src/network/connection.c:1730
 msgid ""
 "The IP address or remote address for the interface was left empty. Please "
 "enter valid IP addresses in those fields to continue."
@@ -1641,7 +1615,7 @@ msgstr ""
 "IP adresa nebo vzdálená adresa pro rozhraní byla ponechána prázdná. "
 "Pokračujte prosím zadáním platných IP adres do těchto polí."
 
-#: src/network/connection.c:1672
+#: src/network/connection.c:1736
 msgid ""
 "You chose to set the DNS servers for this connection manually, but left the "
 "IP address for the primary DNS empty. Please enter the IP for the primary "
@@ -1651,7 +1625,19 @@ msgstr ""
 "primární server DNS jste ponechali prázdnou. Zadejte prosím IP adresu pro "
 "primární DNS server nebo odškrtněte volbu pro ruční nastavení DNS."
 
-#: src/network/connection.c:2028
+#: src/network/connection.c:1742
+msgid ""
+"The modem device that the connection will use was left empty. Please enter a "
+"device or press \"autodetect\" to continue."
+msgstr "Zařízení modemu, které bude připojení používat, bylo ponecháno prázdné. Pokračujte prosím zadáním zařízení nebo stisknutím \"autodetekovat\"."
+
+#: src/network/connection.c:1747
+msgid ""
+"The phone number that the connection will use was left empty. Please enter a "
+"valid phone number to continue."
+msgstr "Telefonní číslo, které bude připojení používat, bylo ponecháno prázdné. Pokračujte prosím zadáním platného telefonního čísla."
+
+#: src/network/connection.c:2101
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Rozhraní %s neexistuje."
@@ -1747,6 +1733,10 @@ msgstr "Nastavit, které služby budou spuštěny při startu systému"
 msgid "Services"
 msgstr "Služby"
 
+#: src/services/table.c:55
+msgid "Active"
+msgstr "Aktivní"
+
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Služba"
@@ -1755,11 +1745,11 @@ msgstr "Služba"
 msgid "Time Zone"
 msgstr "Časová zóna"
 
-#: src/time/main.c:428
+#: src/time/main.c:423
 msgid "Time Servers"
 msgstr "Servery času"
 
-#: src/time/main.c:506
+#: src/time/main.c:501
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1767,7 +1757,7 @@ msgstr ""
 "Nemáte spuštěnou podporu NTP. Pro povolení synchronizace se serverem v "
 "systému prosím spusťte podporu NTP."
 
-#: src/time/main.c:813
+#: src/time/main.c:808
 msgid "Time and Date Settings"
 msgstr "Nastavení data a času"
 
@@ -2032,8 +2022,8 @@ msgstr "Shell"
 msgid "Add or remove users and groups"
 msgstr "Přidat nebo odstranit uživatele a skupiny"
 
-#~ msgid "Boot Image Assistant"
-#~ msgstr "Asistent pro zaváděcí obraz"
+#~ msgid "Inactive"
+#~ msgstr "Neaktivní"
 
 #~ msgid "_Profiles..."
 #~ msgstr "_Profily..."
