@@ -52,6 +52,7 @@ on_notebook_switch_page (GtkNotebook *notebook, GtkNotebookPage *page,
 void
 on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
 {
+	xst_conf_set_boolean (tool, "showall", gtk_toggle_button_get_active (toggle));
 	tables_update_content ();
 }
 

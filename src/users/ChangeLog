@@ -1,3 +1,13 @@
+2001-04-02  Tambet Ingo  <tambet@ximian.com>
+
+	* e-table.c (table_structure_change): (and couple of helpers):
+	Save ETable state and use it next time asked.
+
+	* callbacks.c (on_showall_toggled): Save state.
+
+	* main.c (main_window_prepare): New. Moved main dialog's init and conf
+	stuff here. Added "Showall" button to xst_conf.
+
 2001-04-01  Tambet Ingo  <tambet@ximian.com>
 
 	* e-table.c (create_user_table): Get ETable specs and state from gonf.

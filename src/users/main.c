@@ -254,25 +254,29 @@ create_searchbar (void)
 			    GTK_SIGNAL_FUNC (user_menu_activated), 0);
 }
 
-void
-quit_cb (XstTool *tool, gpointer data)
+static void
+main_window_prepare (void)
 {
+	GtkToggleButton *toggle;
+	/* For random password generation. */
+
+	srand (time (NULL));
+
+	toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "showall"));
+	gtk_toggle_button_set_active (toggle, xst_conf_get_boolean (tool, "showall"));
+	
+	config_clists ();
+	create_tables ();
+	create_searchbar ();
 }
 
 int
 main (int argc, char *argv[])
 {
-	/* For random password generation. */
-
-	srand (time (NULL));
-
 	tool = xst_tool_init ("users", _("Users and Groups"), argc, argv, NULL);
 	xst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
-	xst_tool_set_close_func (tool, quit_cb, NULL);
 
-	config_clists ();
-	create_tables ();
-	create_searchbar ();
+	main_window_prepare ();
 	connect_signals ();
 
 	xst_dialog_enable_complexity (tool->main_dialog);

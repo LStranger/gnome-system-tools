@@ -537,6 +537,86 @@ get_row_color (ETableModel *etm, gint row)
 	return NULL;
 }
 
+static gchar *
+construct_key (guint tbl, XstDialogComplexity c)
+{
+	gchar *buf, *key;
+
+	switch (tbl) {
+	case TABLE_USER:
+		buf = g_strdup ("user_state");
+		break;
+	case TABLE_GROUP:
+		buf = g_strdup ("group_state");
+		break;
+	default:
+		return NULL;
+	}
+
+	switch (c) {
+	case XST_DIALOG_ADVANCED:
+		key = g_strconcat (buf, "_adv", NULL);
+		break;
+	case XST_DIALOG_BASIC:
+	default:
+		key = g_strconcat (buf, "_basic", NULL);
+		break;
+	}
+
+	g_free (buf);
+	return key;
+}
+
+static void
+table_structure_change (ETableHeader *eth, gpointer user_data)
+{
+	ETable *et;
+	gchar *state, *key;
+
+	et = E_TABLE (user_data);
+	state = e_table_get_state (et);
+	
+	key = construct_key (GPOINTER_TO_INT (E_TABLE_MEMORY_CALLBACKS (et->model)->data),
+			     xst_dialog_get_complexity (tool->main_dialog));
+
+	xst_conf_set_string (tool, key, state);
+
+	g_free (key);
+	g_free (state);
+}
+
+static void
+table_dimension_change (ETableHeader *eth, int col, gpointer user_data)
+{
+	table_structure_change (eth, user_data);
+}
+
+/**
+ * table_connect_signals:
+ * @: 
+ * 
+ *  We have to reconnect these signals after every set_state call, cause
+ *  it makes new ETableHeader and loses old signal. Same for sorting, grouping...
+ **/
+static void
+table_connect_signals (ETable *table)
+{
+	gtk_signal_connect (GTK_OBJECT (table->header),
+			    "structure_change",
+			    table_structure_change,
+			    (gpointer)table);
+
+	gtk_signal_connect (GTK_OBJECT (table->header),
+			    "dimension_change",
+			    table_dimension_change,
+			    (gpointer)table);
+
+	gtk_signal_connect (GTK_OBJECT (table->sort_info),
+			    "sort_info_changed",
+			    GTK_SIGNAL_FUNC (table_structure_change),
+			    (gpointer)table);
+}
+
 static void
 create_user_table (void)
 {
@@ -582,6 +662,7 @@ create_user_table (void)
 	g_free (state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (user_table));
+	table_connect_signals (table);
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
 	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_settings_clicked, NULL);
 
@@ -635,6 +716,7 @@ create_group_table (void)
 	g_free (state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
+	table_connect_signals (table);
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", cursor_change, NULL);
 	gtk_signal_connect (GTK_OBJECT (table), "double_click", on_settings_clicked, NULL);
 
@@ -859,7 +941,10 @@ tables_set_state (gboolean state)
 	}
 
 	e_table_set_state (u_table, user_state);
+	table_connect_signals (u_table);
+	
 	e_table_set_state (g_table, group_state);
+	table_connect_signals (g_table);
 
 	tables_update_content ();
 }

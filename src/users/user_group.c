@@ -177,7 +177,7 @@ check_node_complexity (xmlNodePtr node)
 	XstDialogComplexity complexity;
 
 	complexity = tool->main_dialog->complexity;
-
+	
 	if (!toggle)
 		toggle = GTK_TOGGLE_BUTTON (xst_dialog_get_widget (tool->main_dialog, "showall"));
 
