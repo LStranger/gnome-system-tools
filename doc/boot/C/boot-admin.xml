@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN" 
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+  <!ENTITY legal SYSTEM "legal.xml">
+  <!ENTITY toolversion "0.35">
+  <!ENTITY manrevision "0.35">
+  <!ENTITY date "June 2004">
+  <!ENTITY tool "Bootloader administration tool">
+]>
+<!-- 
+      (Do not remove this comment block.)
+  Maintained by the GNOME Documentation Project
+  http://developer.gnome.org/projects/gdp
+  Template version: 2.0 beta
+  Template last modified Feb 06, 2003
+-->
+<!-- =============Document Header ============================= -->
+<article id="index" lang="en">
+<!-- please do not change the id; for translations, change lang to -->
+<!-- appropriate code -->
+  <articleinfo> 
+    <title>&tool; Manual V&manrevision;</title> 
+    <copyright>
+      <year>2004</year>
+      <holder>Carlos Garnacho Parro</holder>
+    </copyright>
+
+<!-- translators: uncomment this:
+  <copyright>
+   <year>2003</year>
+   <holder>ME-THE-TRANSLATOR (Latin translation)</holder>
+  </copyright>
+   -->
+
+    <publisher> 
+	 <publishername>Carlos Garnacho Parro</publishername> 
+    </publisher> 
+
+&legal;
+<!-- This file  contains link to license for the documentation (GNU FDL), and 
+     other legal stuff such as "NO WARRANTY" statement. Please do not change 
+     any of this. -->
+
+    <authorgroup> 
+      <author>
+        <firstname>Carlos</firstname>
+        <surname>Garnacho Parro</surname>
+      </author>
+      <!-- This is appropriate place for other contributors: translators,
+           maintainers,  etc. Commented out by default.
+        <othercredit role="translator">
+	      <firstname>Latin</firstname> 
+	      <surname>Translator 1</surname> 
+	      <affiliation> 
+	      	<orgname>Latin Translation Team</orgname> 
+	       	<address> <email>translator@gnome.org</email> </address> 
+	      </affiliation>
+	      <contrib>Latin translation</contrib>
+        </othercredit>
+-->
+    </authorgroup>
+
+    <revhistory>
+	 <revision>
+	   <revnumber>&tool; Manual V&manrevision;</revnumber>
+	   <date>&date;</date>
+	   <revdescription>
+          <para role="author">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+          <para role="publisher">carlosg@gnome.org (Carlos Garnacho Parro)</para>
+	   </revdescription>
+	 </revision>
+    </revhistory>
+
+    <releaseinfo>This manual describes version &toolversion; of &tool;.</releaseinfo> 
+
+    <legalnotice> 
+	 <title>Feedback</title> 
+	 <para> To report a bug or make a suggestion regarding the &tool; or this manual, follow the directions in the <ulink url="ghelp:gnome-feedback" type="help">GNOME Feedback Page</ulink>. </para>
+    </legalnotice> 
+  </articleinfo> 
+
+  <indexterm zone="index"> 
+    <primary>Bootloader Administration Tool</primary> 
+  </indexterm> 
+
+  <!-- ============= Document Body ============================= -->
+  <sect1 id="tool-introduction"> 
+    <title>Introduction</title> 
+    <para>The <application>&tool;</application> allows you to specify the operative systems and linux images that the bootloader will be able to load at boot time.</para>
+  </sect1>
+
+  <sect1 id="tool-getting-started">
+    <title>Getting started</title>
+
+    <para>You can start <application>&tool;</application> in the following ways:</para>
+
+    <variablelist>
+	 <varlistentry>
+	   <term><guimenu>Applications</guimenu> menu</term>
+	   <listitem>
+		<para>Choose <menuchoice><guisubmenu>System Tools</guisubmenu><guimenuitem>Boot</guimenuitem></menuchoice>.</para>
+	   </listitem>
+	 </varlistentry>
+
+	 <varlistentry>
+	   <term>Command line</term>
+	   <listitem>
+		<para>Execute the following command: <command>boot-admin</command></para>
+	   </listitem>
+	 </varlistentry>
+    </variablelist>
+
+    <para>When you start <application>&tool;</application>, you will be prompted for the administrator password, this is necessary because the changes done with this tool will affect the whole system.</para>
+
+    <para>After entering the administrator password, the following window is displayed.</para>
+
+    <figure id="boot-main-window">
+	 <title>&tool; main window</title>
+	 <screenshot>
+	   <mediaobject>
+		<imageobject>
+		  <imagedata fileref="figures/boot-tool.png" format="PNG"/>
+		</imageobject>
+		<textobject>
+		  <phrase>Shows &tool; main window.</phrase>
+		</textobject>
+	   </mediaobject>
+	 </screenshot>
+    </figure>
+
+    <para>The <application>&tool;</application> main window contains the following elements:</para>
+
+    <variablelist>
+	 <varlistentry>
+	   <term>Images list</term>
+	   <listitem>
+		<para>This is a list of the current options in your bootloader menu, beside the list there are buttons for adding new options, and modifying or deleting the already created ones.x</para>
+	   </listitem>
+	 </varlistentry>
+
+	 <varlistentry>
+	   <term>"Starting your computer" section</term>
+	   <listitem>
+		<para>This let's you specify the time that the bootloader menu will be displayed before running the default image.</para>
+	   </listitem>
+	 </varlistentry>
+    </variablelist>
+  </sect1>
+
+  <sect1 id="tool-usage">
+    <title>Usage</title>
+
+    <sect2 id="tool-adding-entries">
+	 <title>To create a new menu entry</title>
+	 <para>Press the <guilabel>Add</guilabel> button, an assistant will appear, depending on the menu entry type you want to add, you will be asked for different data.</para>
+
+	 <variablelist>
+	   <varlistentry>
+		<term>For Linux entries</term>
+		<listitem>
+		  <para>You will be asked for the name that will be shown in the menu, the path to the kernel image you want to boot and the partition that will be the root file system, optionally you can also set the contents of the initial RAM disk (initrd) and the parameters to pass to the kernel.</para>
+		</listitem>
+	   </varlistentry>
+
+	   <varlistentry>
+		<term>For Hurd entries</term>
+		<listitem>
+		  <para>You will be asked for the name that will be shown in the menu, the path to the kernel image you want to boot and the partition that will be the root file system, optionally you can also set the modules path.</para>
+		</listitem>
+	   </varlistentry>
+
+	   <varlistentry>
+		<term>For other entry types</term>
+		<listitem>
+		  <para>You will be asked for the name that will be shown in the menu and the partition that contains the operating system you want to boot.</para>
+		</listitem>
+	   </varlistentry>
+	 </variablelist>
+    </sect2>
+
+    <sect2 id="tool-modifying-entries">
+	 <title>To modify an already existing menu entry</title>
+	 <para>Press the <guilabel>Properties</guilabel> button, a new window will appear, depending on the menu entry type you want to modify, you will be able to modify different data.</para>
+    </sect2>
+
+    <sect2>
+	 <title>To delete a menu entry</title>
+	 <para>Select the image you want to delete and press the <guilabel>Delete</guilabel> button</para>
+    </sect2>
+
+    <sect2>
+	 <title>To change the ammount of time that the bootloader will be displayed</title>
+	 <para>Change the spin button in the main window.</para>
+    </sect2>
+
+    <sect2>
+	 <title>To change the options that are passed to the kernel</title>
+	 <para>You can add they by hand in the <guilabel>Parameters</guilabel> text entry, optionally, you can press the <guilabel>Edit</guilabel> button beside the text entry, a window will appear, letting you modify the most usual parameters that are passed to the kernel.</para>
+    </sect2>
+  </sect1>
+</article> 
