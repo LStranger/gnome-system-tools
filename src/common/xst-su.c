@@ -33,6 +33,7 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
+#include <pty.h>
 
 #include <gnome.h>
 #include <glade/glade.h>
@@ -47,7 +48,7 @@
 /* ABORT() kills GTK if we're not root, else it just exits.
  */
 #define ABORT(root)			\
-		if (root == 0)		\
+	        if (root == 0)		\
 			GTK_ABORT();	\
 		else			\
 			_exit(-1)
@@ -59,33 +60,10 @@
 			_exit(0);		\
 		    } while (0)
 
-/* OPEN_TTY() is supposed to return a file descriptor to a pseudo-terminal.
- */
-#define OPEN_TTY() getpt()
-
-
 #define XST_SU_RESPONSE_NP 1
 
-#ifdef __FreeBSD__
-/* FreeBSD doesn't have getpt(). This function emulates it's behaviour. */
-int getpt (void);
-
-int
-getpt ()
-{
-	int master, slave;
-
-	if (openpty (&master, &slave, NULL, NULL, NULL) < 0) {
-		/* Simulate getpt()'s only error condition. */
-		errno = ENOENT;
-		return -1;
-	}
-	return master;
-}
-#endif
-
 static int root;			/* if we are root, no password is
-                                           required */
+					   required */
 
 static gint
 exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
@@ -94,6 +72,7 @@ exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 	pid_t pid;
 	int t_fd, i;
 	GString *str;
+	gint fd;
 
 #if 0
 	exec_p = g_strdup (exec_path);
@@ -121,43 +100,20 @@ exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 	if ((pwd == NULL) || (*pwd == '\0'))
 		return 0;
 
-	/*
-	 * Make su think we're sending the password from a terminal:
-	 */
+	pid = forkpty (&fd, NULL, NULL, NULL);
 
-	if ((t_fd = OPEN_TTY()) < 0) {
-		fprintf (stderr, "Unable to open a terminal\n");
+	if (pid < 0) {
+		perror ("unable to fork a new process\n");
 		ABORT (root);
 	}
 
-	if ((pid = fork()) < 0) {
-		perror ("Unable to fork a new process");
-		ABORT (root);
-	}
-
-	if (pid > 0) {			/* parent process */
+	if (pid > 0) {
+		/* This is the parent process */
+		char *buf = g_malloc0 (20);
 		int status;
-
-		/* su(1) won't want a password if we're already root.
-		 */
-		if (root == 0)
-			write (t_fd, pwd, strlen(pwd));
-
-		waitpid (pid, &status, 0);
-
-		if (WIFEXITED (status) && WEXITSTATUS (status) && (WEXITSTATUS(status) < 255)) {
-/*			error_box (_("Incorrect password.")); */
-			return 0;
-		}
-		else {
-			memset (pwd, 0, strlen (pwd));
-			_exit (0);
-		}
-	}
-	else {				/* child process */
 		struct passwd *pw;
 		char *env, *home;
-
+		
 		/* We have rights to run X (obviously).  We need to ensure the
 		 * destination user has the right stuff in the environment
 		 * to be able to continue to run X.
@@ -196,18 +152,34 @@ exec_su (int argc, char *argv[], gchar *user, gchar *pwd)
 				_exit (-1);
 			}
 		}
+		
+		/* just read the password prompt, we don't really need it, but
+		 * it's just to ensure that the password is sent after the prompt */
+		read (fd, buf, 20);
 
-		dup2 (t_fd, 0);
+		/* Send the password */
+		write (fd, pwd, strlen (pwd));
 
-#if 0
-		freopen ("/dev/null", "w", stderr);
-		freopen ("/dev/null", "w", stdout);
-#endif
+		/* read all the trash from the file descriptor and clear buffer */
+		while (read (fd, buf, 20) > 0);
+		bzero (buf, 20);
 
-		sleep (1);
+		/* wait child process */
+		waitpid (pid, &status, 0);
+		
+		if (WIFEXITED (status) && WEXITSTATUS (status) && (WEXITSTATUS(status) < 255)) {
+			return 0;
+		}
+		else {
+			memset (pwd, 0, strlen (pwd));
+			_exit (0);
+		}
+	}
+	else {
+		/* This is the child process */
 		execlp ("su", "su", user_p, "-c", exec_p, NULL);
 
-		_exit (0);
+		_exit (1);
 	}
 
 	return 0;
@@ -248,7 +220,8 @@ xst_su_get_password (gchar **password)
 
 	result = gtk_dialog_run (GTK_DIALOG (password_dialog));
 
-	*password = g_strdup (gtk_entry_get_text (GTK_ENTRY (password_entry)));
+	/* get the password with a \n at the end */
+	*password = g_strdup_printf ("%s\n", gtk_entry_get_text (GTK_ENTRY (password_entry)));
 
 	/* Make a pathetic stab at clearing the GtkEntry field memory */
 	blank = g_strdup (*password);
