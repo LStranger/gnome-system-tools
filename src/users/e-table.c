@@ -282,10 +282,10 @@ e_table_del (gchar del)
 		row = e_table_get_cursor_row (table);
 		tmp_list = g_list_nth (user_current_list (), row);
 		
+		user_free (tmp_list->data);
 		user_adv_list = g_list_remove (user_adv_list, tmp_list->data);
 		if (!user_group_is_system ((user_group *) tmp_list->data))
 			user_basic_list = g_list_remove (user_basic_list, tmp_list->data);
-		user_free (tmp_list->data);
 	}
 
 	else if (del == GROUP)
@@ -294,10 +294,10 @@ e_table_del (gchar del)
 		row = e_table_get_cursor_row (table);
 		tmp_list = g_list_nth (group_list, row);
 		
+		group_free (tmp_list->data);
 		group_list = g_list_remove (group_list, tmp_list->data);
 		if (!user_group_is_system ((user_group *) tmp_list->data))
 			group_basic_list = g_list_remove (group_basic_list, tmp_list->data);
-		group_free (tmp_list->data);
 	}
 	
 	else

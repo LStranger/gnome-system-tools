@@ -99,6 +99,8 @@ user_new (gchar *name)
 
 extern void user_free (user *u)
 {
+	g_return_if_fail (u != NULL);
+	
 	user_group_free (&u->ug);
 	g_free (u->comment);
 	g_free (u->home);
@@ -413,6 +415,8 @@ extern void
 group_free (group *g)
 {
 	GList *i, *j;
+	
+	g_return_if_fail (g != NULL);
 	
 	user_group_free (&g->ug);
 	

@@ -194,9 +194,8 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 		tool_set_modified (TRUE);
 		user_actions_set_sensitive (FALSE);
 		gtk_frame_set_label (GTK_FRAME (tool_widget_get ("user_settings_frame")),
-				"Settings for the selected user");
+				_("Settings for the selected user"));
 	}
-
 }
 
 
