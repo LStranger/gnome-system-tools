@@ -1031,14 +1031,14 @@ try_show_usage_warning (void)
 {
 	gchar *key;
 	gboolean value;
-	gchar *first_run_text =
-		_("Welcome to the " VERSION " prerelease of the Ximian Setup Tools.\n\n"
+	gchar *warning = g_strdup_printf(_("Welcome to the %s prerelease of the "
+		  "Ximian Setup Tools.\n\n"
 		  "This is still a work in progress, and so it may have serious bugs.\n"
 		  "Due to the nature of these tools, bugs may render your computer\n"
 		  "PRACTICALLY USELESS, costing time, effort and sanity points.\n\n"
 		  "You have been warned. Thank you for trying out this prerelease of\n"
 		  "the Ximian Setup Tools!\n\n"
-		  "--\nThe Ximian Setup Tools team");
+		  "--\nThe Ximian Setup Tools team"), VERSION);
 
 	key = g_strjoin ("/", XST_CONF_ROOT, "global", "previously-run-" VERSION, NULL);
 
@@ -1049,7 +1049,7 @@ try_show_usage_warning (void)
 		GnomeDialog *dialog;
 		GtkWidget *w0, *w1, *w2;
 
-		dialog = GNOME_DIALOG (gnome_warning_dialog (first_run_text));
+		dialog = GNOME_DIALOG (gnome_warning_dialog (warning));
 		w0 = gtk_container_children (GTK_CONTAINER (GTK_BIN (GTK_BIN (dialog)->child)->child))->data;
 		w1 = GTK_WIDGET (gtk_check_button_new_with_label (_("Don't show me this again")));
 		gtk_widget_ref (w1);
@@ -1069,6 +1069,8 @@ try_show_usage_warning (void)
 
 		gtk_widget_unref (w1);
 	}
+
+	g_free (warning);
 
 	g_free (key);
 }
