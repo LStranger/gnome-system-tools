@@ -250,6 +250,28 @@ on_pro_save_clicked (GtkButton *button, gpointer user_data)
 	profile_save (NULL);
 }
 
+void
+on_pro_new_clicked (GtkButton *button, gpointer user_data)
+{
+	gchar *buf;
+
+	buf = g_strdup ("New");
+	profile_add (NULL, buf, TRUE);
+	g_free (buf);
+}
+
+void
+on_pro_copy_clicked (GtkButton *button, gpointer user_data)
+{
+	Profile *pf;
+	gchar *buf;
+
+	pf = profile_table_get_profile (NULL);
+	buf = g_strdup ("New copy");
+	profile_add (pf, buf, TRUE);
+	g_free (buf);
+}
+
 /* User settings callbacks */
 
 void

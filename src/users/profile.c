@@ -83,9 +83,9 @@ profile_fill (Profile *pf)
 					    GTK_SIGNAL_FUNC (on_pro_name_changed),
 					    NULL);
 
-	gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
+	my_gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
 					pf->home_prefix);	
-	gtk_entry_set_text (GTK_ENTRY (pft->shell->entry), pf->shell);
+	my_gtk_entry_set_text (GTK_ENTRY (pft->shell->entry), pf->shell);
 	
 	gtk_spin_button_set_value (pft->umin, (gfloat) pf->umin);
 	gtk_spin_button_set_value (pft->umax, (gfloat) pf->umax);
@@ -103,6 +103,7 @@ profile_save (gchar *name)
 {
 	gchar *buf;
 	Profile *pf;
+	GtkWidget *li;
 	
 	if (name)
 		buf = g_strdup (name);
@@ -114,11 +115,25 @@ profile_save (gchar *name)
 
 	if (pf)
 	{
-/* FIXME: We can't change name cause it messes up hash table
+		/* Name */
+/* FIXME: Can't modify name, messes up hash table.
                 if (pf->name)
+		{
+			buf = g_strdup (pf->name);
 			g_free (pf->name);
+		}
+
 		pf->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->name->entry)));
-*/
+		profile_table->selected = pf->name;
+		
+		xst_ui_combo_remove_by_label (pft->name, buf);
+		g_free (buf);
+		
+		li = gtk_list_item_new_with_label (pf->name);
+		gtk_widget_show (li);
+		gtk_container_add (GTK_CONTAINER (pft->name->list), li);
+*/		
+
 		if (pf->home_prefix)
 			g_free (pf->home_prefix);
 		pf->home_prefix = g_strdup (gtk_entry_get_text
@@ -219,34 +234,18 @@ profile_get_from_xml (xmlNodePtr root)
 }
 
 void
-profile_add (Profile *old_pf)
+profile_add (Profile *old_pf, const gchar *new_name, gboolean select)
 {	
 	Profile *pf;
 	
-	pf = g_new (Profile, 1);
+	pf = g_new0 (Profile, 1);
 
-	if (!old_pf)
-	{
-		/* Let's make blank profile. */
-		pf->name = NULL;
-		pf->home_prefix = NULL;
-		pf->shell = NULL;
-		pf->umin = 0;
-		pf->umax = 0;
-		pf->gmin = 0;
-		pf->gmax = 0;
-		pf->pwd_maxdays = 0;
-		pf->pwd_mindays = 0;
-		pf->pwd_warndays = 0;
-		pf->pwd_len = 0;
-		pf->logindefs = FALSE;
-	}
+	pf->name = g_strdup (new_name);
 
-	else
+	if (old_pf)
 	{
-		/* FIXME: This sucks! */
+		/* FIXME: This sucks! we can simply copy structs, right? */
 		/* Let's make copy of old profile. */
-		pf->name = NULL;
 		
 		pf->home_prefix = g_strdup (old_pf->home_prefix);
 		pf->shell = g_strdup (old_pf->shell);
@@ -259,10 +258,9 @@ profile_add (Profile *old_pf)
 		pf->pwd_mindays = old_pf->pwd_mindays;
 		pf->pwd_warndays = old_pf->pwd_warndays;
 		pf->pwd_len = old_pf->pwd_len;
-		pf->logindefs = FALSE;
 	}
-	
-	return pf;
+
+	profile_table_add_profile (pf, select);
 }
 
 static void
@@ -405,7 +403,7 @@ profile_table_del_profile (gchar *name)
 			GnomeDialog *d;
 
 			d = GNOME_DIALOG (gnome_error_dialog_parented (N_("Can't delete Default"),
-								       tool->main_dialog));
+								       GTK_WINDOW (tool->main_dialog)));
 			gnome_dialog_run (d);
 		}
 

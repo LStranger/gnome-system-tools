@@ -475,7 +475,7 @@ net_group_cursor_change (ETable *table, gint row, gpointer user_data)
 
 	set_active_table (TABLE_NET_GROUP);
 
-	/* Get group name */
+	/* Get group node */
 	node = e_table_memory_get_data (E_TABLE_MEMORY (table->model), row);
 
 	/* Get users table */
@@ -608,7 +608,7 @@ create_group_table (void)
 					      NULL);
 
 	group_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, group_spec,
-			basic_group_state);
+					    basic_group_state);
 
 	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (group_table));
 	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", group_cursor_change, NULL);

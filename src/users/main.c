@@ -79,6 +79,8 @@ static XstDialogSignal signals[] = {
 	{ "user_settings_remove",        "clicked",       on_user_settings_remove_clicked },
 	{ "pro_del",                     "clicked",       on_pro_del_clicked },
 	{ "pro_save",                    "clicked",       on_pro_save_clicked },
+	{ "pro_new",                     "clicked",       on_pro_new_clicked },
+	{ "pro_copy",                    "clicked",       on_pro_copy_clicked },
 	{ NULL }};
 
 static const XstWidgetPolicy policies[] = {
