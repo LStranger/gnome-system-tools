@@ -238,21 +238,27 @@ users_table_set_cursor (gchar *old_login)
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	gchar *login;
+	gboolean valid;
 	
 	if (old_login == NULL)
 		return;	
+
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (users_table));
-	if (gtk_tree_model_get_iter_first (model, &iter) != TRUE)
-		return;
-	do {
+	valid = gtk_tree_model_get_iter_first (model, &iter);
+
+	while (valid) {
 		gtk_tree_model_get (model, &iter, 0, &login, -1);
-		if (strcmp (old_login, login) == 0 ) 
-		{
+
+		if (strcmp (old_login, login) == 0 ) {
 			GtkTreePath *path = gtk_tree_model_get_path (model, &iter);
 			gtk_tree_view_set_cursor (GTK_TREE_VIEW (users_table), path, NULL, FALSE);
 			gtk_tree_path_free (path);
+
+			return;
 		}
-	} while (gtk_tree_model_iter_next (model, &iter) != FALSE);
+
+		valid = gtk_tree_model_iter_next (model, &iter);
+	}
 }
 
 void
