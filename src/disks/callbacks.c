@@ -290,6 +290,7 @@ gst_disks_partition_mount (GstDisksStoragePartition *part)
 	gchar *device, *typefs, *point;
 	gboolean mounted, listed;
 	gchar *buf;
+	gboolean error;
 	GstPartitionType type;
 
 	g_object_get (G_OBJECT (part), "type", &type, "point", &point,
@@ -306,50 +307,47 @@ gst_disks_partition_mount (GstDisksStoragePartition *part)
 		return FALSE;
 	}
 
+	error = FALSE;
 	root = gst_xml_doc_get_root (xml);
 	if (root) {
 		buf = gst_xml_get_child_content (root, "error");
 		if (buf) {
+			error = TRUE;
 			g_warning ("%s", buf);
-			gst_xml_doc_destroy (xml);
 			g_free (buf);
-
-			return FALSE;
-		} else {
-			part_node = gst_xml_element_find_first (root, "partition");
-			if (part_node) {
-				buf = gst_xml_get_child_content (part_node, "typefs");
-				if (buf) {
-					g_object_set (G_OBJECT (part), "type",
-						      gst_disks_storage_partition_get_typefs_from_name (buf),
-						      NULL);
-					g_free (buf);
-				}
-
-				buf = gst_xml_get_child_content (part_node, "point");
-				if (buf) {
-					g_object_set (G_OBJECT (part), "point",
-						      buf, NULL);
-					g_free (buf);
-				}
-				
-				buf = gst_xml_get_child_content (part_node, "free");
-				if (buf) {
-					g_object_set (G_OBJECT (part), "free",
-						      (gulong) g_ascii_strtoull (buf, NULL, 10),
-						      NULL);
-					g_free (buf);
-				}
+		}
+		
+		part_node = gst_xml_element_find_first (root, "partition");
+		if (part_node) {
+			buf = gst_xml_get_child_content (part_node, "typefs");
+			if (buf) {
+				g_object_set (G_OBJECT (part), "type",
+					      gst_disks_storage_partition_get_typefs_from_name (buf),
+					      NULL);
+				g_free (buf);
 			}
-				
+			
+			buf = gst_xml_get_child_content (part_node, "point");
+			if (buf) {
+				g_object_set (G_OBJECT (part), "point",
+					      buf, NULL);
+				g_free (buf);
+			}
+			
+			buf = gst_xml_get_child_content (part_node, "free");
+			if (buf) {
+				g_object_set (G_OBJECT (part), "free",
+					      (gulong) g_ascii_strtoull (buf, NULL, 10),
+					      NULL);
+				g_free (buf);
+			}
+		
 			g_object_set (G_OBJECT (part), "mounted", !mounted, NULL);
 			
 			gst_xml_doc_destroy (xml);
-
-			return TRUE;
+			
+			return !error;
 		}
-		
-		
 	} else {
 		return FALSE;
 	}
@@ -377,9 +375,8 @@ gst_on_mount_button_clicked (GtkWidget *button, gpointer gdata)
 			if (gst_disks_partition_mount (part)) {
 				status_label = gst_dialog_get_widget (tool->main_dialog, "status_label");
 				g_object_get (G_OBJECT (part), "mounted", &mounted, NULL);
-				/*gst_disks_gui_setup_mounted (status_label, button, mounted);*/
-				gst_partition_properties_refresh (part);
 			}
+			gst_partition_properties_refresh (part);
 		}
 	}
 }
