@@ -409,10 +409,10 @@ save_xml (gpointer key, gpointer value, gpointer user_data)
 		case 0: val = pf->pwd_maxdays;  break;
 		case 1: val = pf->pwd_mindays;  break;
 		case 2: val = pf->pwd_warndays; break;
-		case 4: val = pf->umin;         break;
-		case 5: val = pf->umax;         break;
-		case 6: val = pf->gmin;         break;
-		case 7: val = pf->gmax;         break;
+		case 3: val = pf->umin;         break;
+		case 4: val = pf->umax;         break;
+		case 5: val = pf->gmin;         break;
+		case 6: val = pf->gmax;         break;
 		default:
 			g_warning ("save_xml: Shouldn't be here");
 			continue;
