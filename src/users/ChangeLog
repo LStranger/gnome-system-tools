@@ -1,3 +1,19 @@
+2001-05-17  Tambet Ingo  <tambet@ximian.com>
+
+	* transfer.c: Removed old login_defs crap.
+
+	* profile.c (file_list_select): Implement.
+	(file_list_add): Implement.
+	(file_list_del): Implement.
+	(profile_tab_init): Add file_list_* Widgets and connect callbacks.
+	(profile_save): Save files also.
+	(profile_add): Add files
+	(profile_get_default): Did it right. Earlier we used login_defs struct,
+	now it's cleaned and done here.
+	(profile_table_from_xml): Add files.
+	(set_files): Save files.
+	(save_xml): ditto.
+
 2001-05-16  Tambet Ingo  <tambet@ximian.com>
 
 	* user-druid.c (druid_finish): Removed password writing from here,
