@@ -1,5 +1,13 @@
 2001-04-17  Arturo Espinosa Aldama  <arturo@ximian.com>
 
+	* transfer.c (transfer_misc_xml_to_tool): set flags and variables that don't
+	  have a related GUI element, such as smb_installed.
+	  In general, passed the tool var to all functions and deleted global tool
+	  pointer.
+
+	* callbacks.c (on_samba_use_toggled): if samba is not installed, don't allow
+	  windows networking activation, and send according message to user.
+
 	* connection.c (empty_general, fill_general, hookup_callbacks): removed code
 	regarding the old "enable" check, which caused warnings.
 

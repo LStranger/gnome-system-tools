@@ -31,11 +31,6 @@
 #include "callbacks.h"
 #include "connection.h"
 
-extern XstTool *tool;
-
-/* define to x for debugging output */
-#define d(x) x
-
 TransStringEntry transfer_string_entry_table[] =
 {
 	{ "hostname", "hostname", 0, 0 },
@@ -44,7 +39,7 @@ TransStringEntry transfer_string_entry_table[] =
 	{ "workgroup", "workgroup", 0, 0 },
 	{ "description", "description", 0, 0 },
 	{ "winsuse", NULL, "wins_use", 0 },	
-	{ "winsserver", "wins_ip" },	
+	{ "winsserver", "wins_ip", 0, 0 },	
 	{ 0, 0, 0, 0 }
 };
 
@@ -64,7 +59,7 @@ TransStringCList2 transfer_string_clist2_table[] = {
 
 
 static void
-transfer_string_entry_xml_to_gui (xmlNodePtr root)
+transfer_string_entry_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	int i;
 	xmlNodePtr node;
@@ -103,7 +98,7 @@ transfer_string_entry_xml_to_gui (xmlNodePtr root)
 
 
 static void
-transfer_string_entry_gui_to_xml (xmlNodePtr root)
+transfer_string_entry_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	int i;
 	xmlNodePtr node;
@@ -117,18 +112,18 @@ transfer_string_entry_gui_to_xml (xmlNodePtr root)
 
 		if (transfer_string_entry_table [i].editable)
 			content = gtk_editable_get_chars (GTK_EDITABLE
-									    (xst_dialog_get_widget
-										(tool->main_dialog,
-										 transfer_string_entry_table [i].editable)), 0, -1);
-			
+							  (xst_dialog_get_widget
+							   (tool->main_dialog,
+							    transfer_string_entry_table [i].editable)), 0, -1);
+		
 		if (transfer_string_entry_table [i].toggle) {
 			gboolean res;
 			
 			res = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON
-										 (xst_dialog_get_widget
-										  (tool->main_dialog,
-										   transfer_string_entry_table [i].toggle)));
-
+							    (xst_dialog_get_widget
+							     (tool->main_dialog,
+							      transfer_string_entry_table [i].toggle)));
+			
 			content = g_strdup ((res)? "1": "0");
 		}
 		
@@ -138,7 +133,7 @@ transfer_string_entry_gui_to_xml (xmlNodePtr root)
 }
 
 static void
-transfer_string_list_xml_to_gui (xmlNodePtr root)
+transfer_string_list_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	int i;
 	xmlNodePtr node;
@@ -172,7 +167,7 @@ transfer_string_list_xml_to_gui (xmlNodePtr root)
 
 
 static void
-transfer_string_list_gui_to_xml (xmlNodePtr root)
+transfer_string_list_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *widget;
 	int i;
@@ -209,7 +204,7 @@ transfer_string_list_gui_to_xml (xmlNodePtr root)
 
 
 static void
-transfer_string_clist2_xml_to_gui (xmlNodePtr root)
+transfer_string_clist2_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	int i, row;
 	xmlNodePtr node, nodesub;
@@ -284,7 +279,7 @@ transfer_string_clist2_xml_to_gui (xmlNodePtr root)
 
 
 static void
-transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *specs)
+transfer_string_clist2_gui_to_xml_item (XstTool *tool, xmlNodePtr root, TransStringCList2 *specs)
 {
 	gchar *node_name;
 	gchar *field_one;
@@ -352,7 +347,7 @@ transfer_string_clist2_gui_to_xml_item (xmlNodePtr root, TransStringCList2 *spec
 }
 
 static void
-transfer_string_clist2_gui_to_xml (xmlNodePtr root)
+transfer_string_clist2_gui_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	TransStringCList2 *specs;
 	gint i;
@@ -361,12 +356,12 @@ transfer_string_clist2_gui_to_xml (xmlNodePtr root)
 	{
 		specs = &transfer_string_clist2_table [i];
 
-		transfer_string_clist2_gui_to_xml_item (root, specs);
+		transfer_string_clist2_gui_to_xml_item (tool, root, specs);
 	}
 }
 
 static void
-transfer_interfaces_to_xml (xmlNodePtr root)
+transfer_interfaces_to_xml (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *clist;
 	int i;
@@ -377,7 +372,7 @@ transfer_interfaces_to_xml (xmlNodePtr root)
 }
 
 static void
-transfer_interfaces_to_gui (xmlNodePtr root)
+transfer_interfaces_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	xmlNodePtr node;
 
@@ -389,24 +384,45 @@ transfer_interfaces_to_gui (xmlNodePtr root)
 	callbacks_update_connections_hook (tool->main_dialog, NULL);
 }
 
-void
-transfer_xml_to_gui (XstTool *t, gpointer data)
+static void
+transfer_misc_xml_to_tool (XstTool *tool, xmlNodePtr root)
 {
-	xmlNode *root = xst_xml_doc_get_root (t->config);
-	transfer_string_entry_xml_to_gui (root);
-	transfer_string_list_xml_to_gui (root);
-	transfer_string_clist2_xml_to_gui (root);
-	transfer_interfaces_to_gui (root);
+	xmlNodePtr node;
+	gboolean res;
+	gchar *str;
+
+	res = FALSE;
+	node = xst_xml_element_find_first (root, "smbinstalled");
+
+	if (node) {
+		str = xst_xml_element_get_content (node);
+		res = (*str == '1')? TRUE: FALSE;
+		g_free (str);
+	}
+
+	gtk_object_set_data (GTK_OBJECT (tool), "smbinstalled", (gpointer) res);
+}
+
+void
+transfer_xml_to_gui (XstTool *tool, gpointer data)
+{
+	xmlNode *root = xst_xml_doc_get_root (tool->config);
+	
+	transfer_string_entry_xml_to_gui (tool, root);
+	transfer_string_list_xml_to_gui (tool, root);
+	transfer_string_clist2_xml_to_gui (tool, root);
+	transfer_interfaces_to_gui (tool, root);
+	transfer_misc_xml_to_tool (tool, root);
 }
 
 
 void
-transfer_gui_to_xml (XstTool *t, gpointer data)
+transfer_gui_to_xml (XstTool *tool, gpointer data)
 {
-	xmlNode *root = xst_xml_doc_get_root (t->config);
+	xmlNode *root = xst_xml_doc_get_root (tool->config);
 
-	transfer_string_entry_gui_to_xml (root);
-	transfer_string_list_gui_to_xml (root);
-	transfer_string_clist2_gui_to_xml (root);
-	transfer_interfaces_to_xml (root);
+	transfer_string_entry_gui_to_xml (tool, root);
+	transfer_string_list_gui_to_xml (tool, root);
+	transfer_string_clist2_gui_to_xml (tool, root);
+	transfer_interfaces_to_xml (tool, root);
 }

@@ -367,8 +367,22 @@ on_dns_dhcp_toggled (GtkWidget *w, gpointer null)
 void
 on_samba_use_toggled (GtkWidget *w, gpointer null)
 {
-	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "samba_frame",
-					      gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
+	gboolean active, smb_installed;
+
+	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w));
+	xst_dialog_widget_set_user_sensitive (tool->main_dialog, "samba_frame", active);
+	
+	if (active) {
+		smb_installed = (gboolean) gtk_object_get_data (GTK_OBJECT (tool), "smbinstalled");
+		if (!smb_installed) {
+			GtkWidget *dialog;
+			
+			gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w), FALSE);
+			dialog = gnome_ok_dialog (_("You don't have SMB support installed. Please install SMB support\nin the system to enable windows networking."));
+			gtk_window_set_title (GTK_WINDOW (dialog), _("SMB support missing."));
+			gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+		}
+	}
 }
 
 void
