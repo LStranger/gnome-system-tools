@@ -1837,7 +1837,7 @@ connection_update_ip_config (GstConnection *cxn)
 	IPConfigType ip;
 	gboolean sensitive;
 	
-	ip = cxn->tmp_ip_config;
+	ip = cxn->ip_config;
 	sensitive = (ip == IP_MANUAL);
 
 	SET_BOOL ("ip_", update_dns);

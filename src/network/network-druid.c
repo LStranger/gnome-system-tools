@@ -32,21 +32,24 @@
 static void
 network_druid_fill_wireless_devices_list (GstTool *tool)
 {
-	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog,
-						  "network_connection_wireless_device");
-	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
-	xmlNodePtr node;
-	GList *devices = NULL;
-	
+	GtkWidget    *combo;
+	GtkTreeModel *model;
+	xmlNodePtr    root, node;
+
+	root  = gst_xml_doc_get_root (tool->config);
+	combo = gst_dialog_get_widget (tool->main_dialog,
+				       "network_connection_wireless_device");
+
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
 	for (node = gst_xml_element_find_first (root, "wireless_device");
 	     node != NULL;
 	     node = gst_xml_element_find_next (node, "wireless_device"))
 	{
-		devices = g_list_append (devices, gst_xml_element_get_content (node));
+		gtk_combo_box_append_text (GTK_COMBO_BOX (combo),
+					   gst_xml_element_get_content (node));
 	}
-
-	if (devices)
-		gtk_combo_set_popdown_strings (GTK_COMBO (combo), devices);
 }
 
 void
@@ -85,7 +88,6 @@ network_druid_clear (GnomeDruid *druid, gboolean destroy_data)
 	GstTool *tool = druid_data->tool;
 	GtkWidget *widget;
 	gchar *entries [] = {
-		"network_connection_wireless_device_entry",
 		"network_connection_essid",
 		"network_connection_other_ip_address",
 		"network_connection_other_ip_mask",
@@ -104,6 +106,9 @@ network_druid_clear (GnomeDruid *druid, gboolean destroy_data)
 		widget = gst_dialog_get_widget (tool->main_dialog, entries[i]);
 		gtk_entry_set_text (GTK_ENTRY (widget), "");
 	}
+
+	widget = gst_dialog_get_widget (tool->main_dialog, "network_connection_wireless_device");
+	gtk_entry_set_text (GTK_ENTRY (GTK_BIN (widget)->child), "");
 
 	widget = gst_dialog_get_widget (tool->main_dialog, "network_connection_other_config_type");
 	gtk_combo_box_set_active (GTK_COMBO_BOX (widget), IP_MANUAL);
@@ -180,10 +185,10 @@ network_druid_get_connection_data (GnomeDruid *druid)
 
 		if (cxn->type == GST_CONNECTION_WLAN) {
 			GtkWidget *device = gst_dialog_get_widget (tool->main_dialog,
-								   "network_connection_wireless_device_entry");
+								   "network_connection_wireless_device");
 			GtkWidget *essid = gst_dialog_get_widget (tool->main_dialog,
 								  "network_connection_essid");
-			cxn->dev = g_strdup (gtk_entry_get_text (GTK_ENTRY (device)));
+			cxn->dev = g_strdup (gtk_entry_get_text (GTK_ENTRY (GTK_BIN (device)->child)));
 			cxn->essid = g_strdup (gtk_entry_get_text (GTK_ENTRY (essid)));
 		} else {
 			cxn->dev = connection_find_new_device (root, cxn->type);
@@ -264,14 +269,9 @@ network_druid_check_login_password (GnomeDruid *druid)
 }
 
 static gboolean
-network_druid_check_entry (GnomeDruid *druid, gchar *widget_name)
+network_druid_check_entry (GtkWidget *widget)
 {
-	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
-
-	GtkWidget *account = gst_dialog_get_widget (druid_data->tool->main_dialog,
-						    widget_name);
-	gchar *text = (gchar*) gtk_entry_get_text (GTK_ENTRY (account));
-
+	const gchar *text = gtk_entry_get_text (GTK_ENTRY (widget));
 	return (strcmp (text, "") != 0);
 }
 
@@ -317,11 +317,19 @@ void
 network_druid_check_page (GnomeDruid *druid, NetworkDruidPages page_number)
 {
 	gboolean cont;
+	GtkWidget *wireless_device, *essid;
+	NetworkDruidData *druid_data;
 
 	switch (page_number) {
 	case NETWORK_DRUID_WIRELESS:
-		cont = network_druid_check_entry (druid, "network_connection_wireless_device_entry") &&
-			network_druid_check_entry (druid, "network_connection_essid");
+		druid_data = g_object_get_data (G_OBJECT (druid), "data");
+		wireless_device = gst_dialog_get_widget (druid_data->tool->main_dialog,
+							 "network_connection_wireless_device");
+		essid = gst_dialog_get_widget (druid_data->tool->main_dialog,
+					       "network_connection_essid");
+
+		cont = network_druid_check_entry (GTK_BIN (wireless_device)->child) &&
+			network_druid_check_entry (essid);
 		break;
 	case NETWORK_DRUID_OTHER_1:
 		cont = network_druid_check_ip (druid);

@@ -91,7 +91,7 @@ GstDialogSignal signals[] = {
 	{ "network_connection_ppp_page2",    "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_page_activate", "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_page_finish",  "back",   G_CALLBACK (on_network_druid_page_back) },
-	{ "network_connection_wireless_device_entry", "changed", G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_wireless_device", "changed", G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_essid", "changed", G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_other_config_type", "changed", G_CALLBACK (on_network_druid_config_type_changed) },
 	{ "network_connection_other_ip_address", "changed", G_CALLBACK (on_network_druid_entry_changed) },
@@ -169,8 +169,13 @@ static GstReportHookEntry report_hooks[] = {
 static void
 connect_signals (GstDialog *main_dialog, GstDialogSignal *sigs, GstDialogSignal *sigs_after)
 {
+	GtkWidget *widget = gst_dialog_get_widget (main_dialog, "network_connection_wireless_device");
+	
 	gst_dialog_connect_signals (main_dialog, sigs);
 	gst_dialog_connect_signals_after (main_dialog, sigs_after);
+
+	g_signal_connect (GTK_BIN (GTK_COMBO_BOX (widget))->child,
+			  "changed", G_CALLBACK (on_network_druid_entry_changed), NULL);
 }
 
 int

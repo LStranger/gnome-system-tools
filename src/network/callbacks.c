@@ -1304,7 +1304,7 @@ on_network_druid_page_prepare (GnomeDruidPage *druid_page, GnomeDruid *druid, gp
 	gchar *next_default_focus[] = {
 		NULL,
 		"connection_type_modem_option",
-		"network_connection_wireless_device_entry",
+		"network_connection_wireless_device",
 		"network_connection_other_config_type",
 		"network_connection_plip_local_ip",
 		"network_connection_ppp_phone",
