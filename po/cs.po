@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-21 12:22+0200\n"
-"PO-Revision-Date: 2003-07-21 22:49+0200\n"
+"POT-Creation-Date: 2003-07-22 12:23+0200\n"
+"PO-Revision-Date: 2003-07-23 16:51+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -192,7 +192,7 @@ msgstr "Nastavení obrazu (krok 1 ze 2)"
 msgid "Image Settings (Step 2 of 2)"
 msgstr "Nastavení obrazu (krok 2 ze 2)"
 
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:66
+#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:67
 #: src/network/connection.c:1730
 msgid "Manual"
 msgstr "Ruční"
@@ -260,7 +260,7 @@ msgstr ""
 msgid "Video modes (only frame buffer)"
 msgstr "Režimy videa (jen framebuffer)"
 
-#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:138
+#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:140
 #: interfaces/shares.glade.in.h:60
 msgid "_Add..."
 msgstr "Přid_at..."
@@ -344,22 +344,22 @@ msgstr "Zadejte heslo - Systémové nástroje GNOME"
 msgid "GNOME System Tools"
 msgstr "Systémové nástroje GNOME"
 
-#: interfaces/common.glade.in.h:14 interfaces/network.glade.in.h:85
-#: interfaces/shares.glade.in.h:46
-msgid "Password:"
-msgstr "Heslo:"
+#: interfaces/common.glade.in.h:14
+msgid "Run _Without Password"
+msgstr "Spustit bez _hesla"
 
 #: interfaces/common.glade.in.h:15
-msgid "Scanning system configuration."
-msgstr "Zkoumám nastavení systému."
+msgid "Scanning system configuration..."
+msgstr "Zkoumám nastavení systému..."
 
 #: interfaces/common.glade.in.h:16
 msgid "Unsupported Platform"
 msgstr "Nepodporovaná platforma"
 
-#: interfaces/common.glade.in.h:17
-msgid "_Run without password"
-msgstr "Spustit bez _hesla"
+#: interfaces/common.glade.in.h:17 interfaces/network.glade.in.h:164
+#: interfaces/print.glade.in.h:73
+msgid "_Password:"
+msgstr "_Heslo:"
 
 #: interfaces/dhcpd.glade.in.h:1
 msgid "Advanced mode not yet implemented. Sorry."
@@ -429,7 +429,7 @@ msgstr "Přid_at"
 msgid "_Comment :"
 msgstr "K_omentář:"
 
-#: interfaces/dhcpd.glade.in.h:18 interfaces/network.glade.in.h:144
+#: interfaces/dhcpd.glade.in.h:18 interfaces/network.glade.in.h:146
 #: interfaces/shares.glade.in.h:63 interfaces/users.glade.in.h:83
 msgid "_Delete"
 msgstr "O_dstranit"
@@ -779,7 +779,7 @@ msgstr ""
 msgid "Create a new local network interface."
 msgstr "Vytvořit nové lokální síťové rozhraní."
 
-#: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:45
+#: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:46
 #: src/network/connection.c:1731
 msgid "DHCP"
 msgstr "DHCP"
@@ -1207,8 +1207,7 @@ msgstr "Změňte IP adresu přezdívky nebo její příslušné názvy."
 msgid "Delete"
 msgstr "Odstranit"
 
-#: interfaces/nameresolution.glade.in.h:10 interfaces/network.glade.in.h:49
-#: interfaces/runlevel.glade.in.h:5
+#: interfaces/nameresolution.glade.in.h:10 interfaces/runlevel.glade.in.h:5
 msgid "Description:"
 msgstr "Popis:"
 
@@ -1441,46 +1440,50 @@ msgid "BOOTP"
 msgstr "BOOTP"
 
 #: interfaces/network.glade.in.h:37
+msgid "Co_nfiguration:"
+msgstr "Nasta_vení:"
+
+#: interfaces/network.glade.in.h:38
 msgid "Connection Settings"
 msgstr "Nastavení připojení"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:39
+msgid "Connection _name:"
+msgstr "_Název připojení:"
+
+#: interfaces/network.glade.in.h:40
 msgid "Connection active"
 msgstr "Připojení aktivní"
 
-#: interfaces/network.glade.in.h:39 src/network/network-druid.c:395
+#: interfaces/network.glade.in.h:41 src/network/network-druid.c:395
 msgid "Connection name (Step 3 of 3)"
 msgstr "Název připojení (krok 3 ze 3)"
 
-#: interfaces/network.glade.in.h:40
-msgid "Connection name:"
-msgstr "Název připojení:"
-
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:42
 msgid "Connection type"
 msgstr "Typ připojení"
 
-#: interfaces/network.glade.in.h:42
+#: interfaces/network.glade.in.h:43
 msgid "Connections"
 msgstr "Připojení"
 
-#: interfaces/network.glade.in.h:43
-msgid "Create a new Internet Connection "
-msgstr "Vytvořit nové připojení k Internetu"
-
 #: interfaces/network.glade.in.h:44
+msgid "Create a new internet connection "
+msgstr "Vytvořit nové připojení k Internetu "
+
+#: interfaces/network.glade.in.h:45
 msgid "Create a new network connection"
 msgstr "Vytvořit nové připojení k síti"
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:47
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:48
 msgid "DNS _Servers:"
 msgstr "_Servery DNS:"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:49
 msgid "Default gateway device:"
 msgstr "Zařízení implicitní brány:"
 
@@ -1505,10 +1508,14 @@ msgid "Hosts"
 msgstr "Počítače"
 
 #: interfaces/network.glade.in.h:56
-msgid "How the IP address for this connection is determined."
-msgstr "Jak je určena IP adresa pro toto připojení."
+msgid ""
+"How the IP address for this connection\n"
+"is determined."
+msgstr ""
+"Jak je určena IP adresa\n"
+"pro toto připojení."
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:58
 msgid ""
 "How the IP addresses for this connection \n"
 "are determined."
@@ -1516,7 +1523,7 @@ msgstr ""
 "Jak jsou zjišťovány IP adresy pro toto\n"
 "připojení."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:60
 msgid ""
 "How the names of other\n"
 "computers are found."
@@ -1524,55 +1531,55 @@ msgstr ""
 "Jak jsou hledány\n"
 "názvy jiných počítačů."
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:62
 msgid "How this computer is identified."
 msgstr "Jak je počítač identifikován."
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:63
 msgid "How to access other computers."
 msgstr "Jak přistupovat k jiným počítačům."
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:64
 msgid "How to dial up to the Internet."
 msgstr "Jak vytáčet připojení k Internetu."
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:65
 msgid "IP Settings"
 msgstr "Nastavení IP"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:66
 msgid "ISP phone number (Step 1 of 3)"
 msgstr "Telefonní číslo ISP (krok 1 ze 3)"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:68
 msgid "Network profiles - GNOME System Tools"
 msgstr "Síťové profily - Systémové nástroje GNOME"
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:69
 msgid ""
-"Network profiles can be used to store different\n"
-" network configurations"
+"Network profiles can be used to store\n"
+"different network configurations."
 msgstr ""
 "Síťové profily mohou být použity pro\n"
-"uložení různých konfigurací sítě"
+"uložení různých konfigurací sítě."
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:71
 msgid "Networking Settings"
 msgstr "Nastavení sítě"
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:72
 msgid "New Connection Type"
 msgstr "Nový typ připojení"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:73
 msgid "New network connection"
 msgstr "Nové připojení k síti"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:74
 msgid "New network profile - GNOME System Tools"
 msgstr "Nový síťový profil - Systémové nástroje GNOME"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:75
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -1580,7 +1587,7 @@ msgstr ""
 "Dále zadejte vaše uživatelské jméno a heslo, které vám bylo přiřazeno vašim "
 "ISP."
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:76
 msgid ""
 "Now, please enter the address that \n"
 "this network device will have."
@@ -1588,7 +1595,7 @@ msgstr ""
 "Nyní prosím zadejte adresu, kterou\n"
 "bude mít toto síťové zařízení."
 
-#: interfaces/network.glade.in.h:77
+#: interfaces/network.glade.in.h:78
 msgid ""
 "Now, please enter the address that this network device will have,\n"
 "and the remote address to which it will be connected."
@@ -1596,7 +1603,7 @@ msgstr ""
 "Nyní prosím zadejte adresu, kterou bude mít toto síťové zařízení,\n"
 "a vzdálenou adresu, ke které bude připojeno."
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:80
 msgid ""
 "Now, please give this account a name. This name will be used to identify the "
 "account."
@@ -1604,35 +1611,43 @@ msgstr ""
 "Zadejte prosím název účtu. Tento název se bude používat k identifikaci "
 "tohoto účtu."
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:81
 msgid "Now, please give this connection a name."
 msgstr "Nyní toto připojení prosím pojmenujte."
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:82
 msgid "Number to _access an external line:"
 msgstr "Číslo pro _přístup k externí lince:"
 
-#: interfaces/network.glade.in.h:82
-msgid "Number to get to an external line:"
-msgstr "Číslo pro získání externí linky:"
-
 #: interfaces/network.glade.in.h:83
+msgid "Number to get to an _external line:"
+msgstr "Číslo pro získání _externí linky:"
+
+#: interfaces/network.glade.in.h:84
 msgid "PPPD _options:"
 msgstr "_Přepínače PPPD:"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:85
+msgid "Pa_ssword (confirm):"
+msgstr "He_slo (potvrdit):"
+
+#: interfaces/network.glade.in.h:86
 msgid "Password (confirm):"
 msgstr "Heslo (potvrdit):"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:87 interfaces/shares.glade.in.h:46
+msgid "Password:"
+msgstr "Heslo:"
+
+#: interfaces/network.glade.in.h:88
 msgid "Phone _number:"
 msgstr "Telefo_nní číslo:"
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:89
 msgid "Phone number:"
 msgstr "Telefonní číslo:"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:90
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP. "
@@ -1640,31 +1655,35 @@ msgstr ""
 "Zadejte prosím telefonní číslo, které používáte pro připojení k Internetu. "
 "Toto číslo vám poskytne váš ISP."
 
-#: interfaces/network.glade.in.h:89
-msgid "Please, give this network profile a name and a description"
-msgstr "Dejte prosím tomuto síťovému profilu název a popis"
+#: interfaces/network.glade.in.h:91
+msgid ""
+"Please, give this network profile\n"
+"a name and a description."
+msgstr ""
+"Dejte prosím tomuto síťovému profilu\n"
+"název a popis"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:93
 msgid "Please, select which type of connection you would like to add."
 msgstr "Vyberte prosím, který typ připojení chcete přidat."
 
-#: interfaces/network.glade.in.h:91
-msgid "Profile name:"
-msgstr "Název profilu:"
+#: interfaces/network.glade.in.h:94 interfaces/users.glade.in.h:57
+msgid "Profile _name:"
+msgstr "_Název profilu:"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:95
 msgid "Pulses"
 msgstr "Pulzy"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:96
 msgid "Se_condary:"
 msgstr "Se_kundární:"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:97
 msgid "Sea_rch domains:"
 msgstr "P_rohledávat domény:"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:98
 msgid ""
 "Select which type of connection\n"
 "you would like to add."
@@ -1672,15 +1691,15 @@ msgstr ""
 "Vyberte, který typ připojení\n"
 "si přejete přidat."
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:100
 msgid "Set _DNS servers manually"
 msgstr "Nastavit servery _DNS ručně"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:101
 msgid "Set modem as default _route to internet"
 msgstr "Nastavit modem jako implicitní cestu (default _route) k Internetu"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:102
 msgid ""
 "Summary of new account data\n"
 "goes here, plus indications on\n"
@@ -1692,7 +1711,7 @@ msgstr ""
 "jak pokračovat (zpět, zrušit nebo\n"
 "dokončit)."
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:106
 msgid ""
 "To continue configuring your account, click \"Next\". To quit, click \"Cancel"
 "\".\n"
@@ -1700,7 +1719,7 @@ msgstr ""
 "Po stisknutí tlačítka \"Další\" budete pokračovat v nastavení vašeho účtu. "
 "Skončíte stisknutím tlačítka \"Zrušit\".\n"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:108
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -1708,15 +1727,15 @@ msgstr ""
 "Po kliknutí na \"Další\" budete pokračovat v nastavení svého připojení k "
 "síti. Skončíte kliknutím na \"Zrušit\"."
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:109
 msgid "Tones"
 msgstr "Tóny"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:110
 msgid "Use \"Auto\" if unsure."
 msgstr "Použijte \"Auto\", pokud si nejste jisti."
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:111
 msgid ""
 "Use the comment to identify the interface in the future. Activation "
 "management lets you set who will activate connections, and when."
@@ -1724,31 +1743,31 @@ msgstr ""
 "Použijte tento komentář k identifikaci rozhraní v budoucnu. Správa aktivace "
 "vám umožní zadat, kdo bude aktivovat spojení a kdy."
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:112
 msgid "Username and password (Step 2 of 3)"
 msgstr "Jméno uživatele a heslo (krok 2 ze 3)"
 
-#: interfaces/network.glade.in.h:110 interfaces/shares.glade.in.h:58
+#: interfaces/network.glade.in.h:113 interfaces/shares.glade.in.h:58
 msgid "Username:"
 msgstr "Uživatelské jméno:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:114
 msgid "WI_NS server:"
 msgstr "Server W_INS:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:115
+msgid "Warning message goes here."
+msgstr "Varování bude zde."
+
+#: interfaces/network.glade.in.h:116
 msgid "Warning message goes here.\n"
 msgstr "Varování bude zde.\n"
 
-#: interfaces/network.glade.in.h:114
-msgid "Warning message goes here..\n"
-msgstr "Varování bude zde.\n"
-
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:118
 msgid "WaveLAN"
 msgstr "WaveLAN"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:119
 msgid ""
 "Welcome to the Internet Connection druid. \n"
 "\n"
@@ -1771,7 +1790,7 @@ msgstr ""
 "\n"
 "Začněte stisknutím tlačítka \"Další\"."
 
-#: interfaces/network.glade.in.h:127
+#: interfaces/network.glade.in.h:129
 msgid ""
 "Welcome to the Network Connection druid. \n"
 "\n"
@@ -1787,11 +1806,11 @@ msgstr ""
 "\n"
 "Začněte stisknutím tlačítka \"Další\"."
 
-#: interfaces/network.glade.in.h:133
+#: interfaces/network.glade.in.h:135
 msgid "Wireless networking settings."
 msgstr "Nastavení bezdrátové sítě."
 
-#: interfaces/network.glade.in.h:134
+#: interfaces/network.glade.in.h:136
 msgid ""
 "You are about to create a new network connection.\n"
 "\n"
@@ -1801,148 +1820,148 @@ msgstr ""
 "\n"
 "Uložte prosím své změny kliknutím na \"Použít\"."
 
-#: interfaces/network.glade.in.h:137
+#: interfaces/network.glade.in.h:139
 msgid "_Ad-Hoc mode"
 msgstr "_Ad-Hoc režim"
 
-#: interfaces/network.glade.in.h:139
+#: interfaces/network.glade.in.h:141
 msgid "_Autodetect"
 msgstr "_Autodetekovat"
 
-#: interfaces/network.glade.in.h:140
+#: interfaces/network.glade.in.h:142
 msgid "_Channel:"
 msgstr "_Kanál:"
 
-#: interfaces/network.glade.in.h:141 interfaces/shares.glade.in.h:62
+#: interfaces/network.glade.in.h:143 interfaces/shares.glade.in.h:62
 msgid "_Comment:"
 msgstr "_Komentář:"
 
-#: interfaces/network.glade.in.h:142
+#: interfaces/network.glade.in.h:144
 msgid "_Configuration:"
 msgstr "Nasta_vení:"
 
-#: interfaces/network.glade.in.h:143
+#: interfaces/network.glade.in.h:145
 msgid "_Configure"
 msgstr "Nasta_vit"
 
-#: interfaces/network.glade.in.h:145
+#: interfaces/network.glade.in.h:147
 msgid "_Description:"
 msgstr "_Popis:"
 
-#: interfaces/network.glade.in.h:146
+#: interfaces/network.glade.in.h:148
 msgid "_Dial type:"
 msgstr "Typ _vytáčení:"
 
-#: interfaces/network.glade.in.h:147
+#: interfaces/network.glade.in.h:149
 msgid "_Domain name:"
 msgstr "Název _domény:"
 
-#: interfaces/network.glade.in.h:148
+#: interfaces/network.glade.in.h:150
 msgid "_Enable Windows networking"
 msgstr "Povolit síťování typu _Windows"
 
-#: interfaces/network.glade.in.h:149
+#: interfaces/network.glade.in.h:151
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:150
+#: interfaces/network.glade.in.h:152
 msgid "_Frequency (GHz):"
 msgstr "_Frekvence (GHz):"
 
-#: interfaces/network.glade.in.h:151
+#: interfaces/network.glade.in.h:153
 msgid "_Gateway address:"
 msgstr "Adresa _brány:"
 
-#: interfaces/network.glade.in.h:152 interfaces/print.glade.in.h:70
+#: interfaces/network.glade.in.h:154 interfaces/print.glade.in.h:70
 msgid "_Hostname:"
 msgstr "Název _počítače:"
 
-#: interfaces/network.glade.in.h:153
+#: interfaces/network.glade.in.h:155
 msgid "_IP address:"
 msgstr "_IP adresa:"
 
-#: interfaces/network.glade.in.h:154
+#: interfaces/network.glade.in.h:156
 msgid "_IR LAN"
 msgstr "_IR LAN"
 
-#: interfaces/network.glade.in.h:155
+#: interfaces/network.glade.in.h:157
 msgid "_Local IP address:"
 msgstr "_Místní IP adresa:"
 
-#: interfaces/network.glade.in.h:156
+#: interfaces/network.glade.in.h:158
 msgid "_Local IP:"
 msgstr "_Lokální IP:"
 
-#: interfaces/network.glade.in.h:157
+#: interfaces/network.glade.in.h:159
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:158
+#: interfaces/network.glade.in.h:160
 msgid "_Modem port:"
 msgstr "Port _modemu:"
 
-#: interfaces/network.glade.in.h:159
+#: interfaces/network.glade.in.h:161
 msgid "_Modem volume:"
 msgstr "Hlasitost _modemu:"
 
-#: interfaces/network.glade.in.h:160
+#: interfaces/network.glade.in.h:162
 msgid "_Network Profiles"
 msgstr "_Síťové profily"
 
-#: interfaces/network.glade.in.h:161
+#: interfaces/network.glade.in.h:163
 msgid "_Parallel Line"
 msgstr "_Paralelní linka"
 
-#: interfaces/network.glade.in.h:162 interfaces/print.glade.in.h:73
-msgid "_Password:"
-msgstr "_Heslo:"
+#: interfaces/network.glade.in.h:165
+msgid "_Phone number:"
+msgstr "_Telefonní číslo:"
 
-#: interfaces/network.glade.in.h:163
+#: interfaces/network.glade.in.h:166
 msgid "_Primary:"
 msgstr "_Primární:"
 
-#: interfaces/network.glade.in.h:164
+#: interfaces/network.glade.in.h:167
 msgid "_Remote IP address:"
 msgstr "_Vzdálená IP adresa:"
 
-#: interfaces/network.glade.in.h:165
+#: interfaces/network.glade.in.h:168
 msgid "_Remote IP:"
 msgstr "_Vzdálená IP:"
 
-#: interfaces/network.glade.in.h:166
+#: interfaces/network.glade.in.h:169
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "Zkusit z_novu, pokud se spojení přeruší nebo nenaváže"
 
-#: interfaces/network.glade.in.h:167
+#: interfaces/network.glade.in.h:170
 msgid "_Save Current"
 msgstr "_Uložit současný"
 
-#: interfaces/network.glade.in.h:168
+#: interfaces/network.glade.in.h:171
 msgid "_Session ID:"
 msgstr "ID _sezení:"
 
-#: interfaces/network.glade.in.h:169
+#: interfaces/network.glade.in.h:172
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Spustit PPP hned, jakmile se modem připojí"
 
-#: interfaces/network.glade.in.h:170
+#: interfaces/network.glade.in.h:173
 msgid "_Subnet mask:"
 msgstr "Maska pod_sítě:"
 
-#: interfaces/network.glade.in.h:171
+#: interfaces/network.glade.in.h:174
 msgid "_Update DNS when this connection becomes active"
 msgstr "Akt_ualizovat DNS, když se připojení stane aktivním"
 
-#: interfaces/network.glade.in.h:172
+#: interfaces/network.glade.in.h:175
 msgid "_Use remote IP as default gateway"
 msgstr "Po_užít vzdálenou IP jako implicitní bránu"
 
-#: interfaces/network.glade.in.h:173 interfaces/print.glade.in.h:75
+#: interfaces/network.glade.in.h:176 interfaces/print.glade.in.h:75
 #: interfaces/shares.glade.in.h:73 interfaces/users.glade.in.h:94
 msgid "_Username:"
 msgstr "_Uživatelské jméno:"
 
-#: interfaces/network.glade.in.h:174
+#: interfaces/network.glade.in.h:177
 msgid "_Wavelan"
 msgstr "_Wavelan"
 
@@ -2601,8 +2620,8 @@ msgid "<span weight=\"bold\">Time Configuration</span>"
 msgstr "<span weight=\"bold\">Nastavení času</span>"
 
 #: interfaces/time.glade.in.h:6
-msgid "S_ynchronize clock with Internet servers"
-msgstr "Synchronizovat _hodiny s internetovými servery"
+msgid "S_ynchronize clock with Internet servers:"
+msgstr "Synchronizovat _hodiny s internetovými servery:"
 
 #: interfaces/time.glade.in.h:7
 msgid "Se_lect Servers..."
@@ -2613,26 +2632,22 @@ msgid "Select the servers you wish to use for time synchronization."
 msgstr "Vyberte servery, se kterými si přejete provádět synchronizaci času."
 
 #: interfaces/time.glade.in.h:9
-msgid "Time Zone:"
-msgstr "Časová zóna:"
-
-#: interfaces/time.glade.in.h:10
 msgid "Time zone:"
 msgstr "Časová zóna:"
 
-#: interfaces/time.glade.in.h:11
+#: interfaces/time.glade.in.h:10
 msgid "To select a time zone, click on one of the dots on the map"
 msgstr "Vyberte časovou zónu kliknutím na jeden z bodů na mapě."
 
-#: interfaces/time.glade.in.h:12
+#: interfaces/time.glade.in.h:11
 msgid "_Date:"
 msgstr "_Datum:"
 
-#: interfaces/time.glade.in.h:13
+#: interfaces/time.glade.in.h:12
 msgid "_Select Time Zone..."
 msgstr "_Vybrat časovou zónu..."
 
-#: interfaces/time.glade.in.h:14
+#: interfaces/time.glade.in.h:13
 msgid "_Time:"
 msgstr "Č_as:"
 
@@ -2839,10 +2854,6 @@ msgid ""
 msgstr ""
 "Zadejte prosím uživatelské jméno nového uživatele do políčka níže. Můžete "
 "také volitelně vyplnit další informace o uživateli."
-
-#: interfaces/users.glade.in.h:57
-msgid "Profile _name:"
-msgstr "_Název profilu:"
 
 #: interfaces/users.glade.in.h:58
 msgid "Set password b_y hand"
@@ -3635,11 +3646,11 @@ msgstr "Služba"
 msgid "Time Zone - GNOME System Tools"
 msgstr "Časová zóna - Systémové nástroje GNOME"
 
-#: src/time/main.c:425
+#: src/time/main.c:428
 msgid "Time Servers - GNOME System Tools"
 msgstr "Časové servery - Systémové nástroje GNOME"
 
-#: src/time/main.c:498
+#: src/time/main.c:500
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -3647,7 +3658,7 @@ msgstr ""
 "Nemáte spuštěnou podporu NTP. Pro povolení synchronizace\n"
 "se serverem v systému prosím spusťte podporu NTP."
 
-#: src/time/main.c:787
+#: src/time/main.c:789
 msgid "Time and Date Settings"
 msgstr "Nastavení data a času"
 
@@ -3911,6 +3922,12 @@ msgstr "Komentář"
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
 msgstr "Uživatelé a skupiny."
+
+#~ msgid "Profile name:"
+#~ msgstr "Název profilu:"
+
+#~ msgid "Time Zone:"
+#~ msgstr "Časová zóna:"
 
 #~ msgid "System"
 #~ msgstr "Systém"
