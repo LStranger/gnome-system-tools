@@ -3,6 +3,7 @@ pixmaps_DATA = \
 	16_loopback.xpm           \
 	16_ppp.xpm                \
 	16_plip.xpm               \
+	archlinux.png		  \
 	black_panther.png         \
 	computer.png              \
 	conectiva.png		  \
