@@ -1,5 +1,10 @@
 2001-06-25  Tambet Ingo  <tambet@ximian.com>
 
+	* profile.c: Made e-table f-ns more readable by giving names to cols.
+	(is_editable): Made description col editable.
+	(set_value_at): modify profile. Fixes bug #3483.
+	(pro_prepare): Connect "activate" signal to move focus better.
+
 	* user_settings.c (user_account_comment_changed): Implement.
 	(user_account_connect_signals): Implement, moved signal connection here
 	from (user_account_gui_new). Added new signals to check comment on the fly.

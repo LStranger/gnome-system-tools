@@ -36,6 +36,13 @@
 
 #define PROFILE_TABLE_SPEC "profiles.etspec"
 
+enum {
+	COL_PROFILE_NAME,
+	COL_PROFILE_DESC,
+
+	COL_PROFILE_LAST,
+};
+
 typedef struct
 {
 	XstDialog       *dialog;
@@ -104,11 +111,32 @@ value_to_string (ETableModel *etm, int col, const void *value, void *data)
 static void
 set_value_at (ETableModel *etm, int col, int row, const void *val, void *data)
 {
+	Profile *pf = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
+
+	switch (col) {
+	case COL_PROFILE_DESC:
+		if (pf->comment)
+			g_free (pf->comment);
+		
+		pf->comment = g_strdup ((gchar *)val);
+		break;
+	default:
+		g_warning ("set_value_at: shouldn't be here.");
+		break;
+	}
 }
 
 static gboolean
 is_editable (ETableModel *etm, int col, int row, void *model_data)
 {
+	switch (col) {
+	case COL_PROFILE_DESC:
+		return TRUE;
+	default:
+		return FALSE;
+	}
+
+	/* Not reached */
 	return FALSE;
 }
 
@@ -118,10 +146,10 @@ value_at (ETableModel *etm, int col, int row, void *model_data)
 	Profile *pf = e_table_memory_get_data (E_TABLE_MEMORY (etm), row);
 
 	switch (col) {
-	case 0:
+	case COL_PROFILE_NAME:
 		return pf->name;
 		break;
-	case 1:
+	case COL_PROFILE_DESC:
 		return pf->comment;
 		break;
 	default:
@@ -306,13 +334,18 @@ pro_ask_name (XstDialog *xd, gint action)
 static void
 pro_prepare (XstDialog *xd, gint action)
 {
-	GtkWidget *w;
+	GtkWidget *w, *name, *desc;
 
-	w = xst_dialog_get_widget (xd, "profile_new_name");
-	gtk_entry_set_text (GTK_ENTRY (w), "");
-	gtk_widget_grab_focus (w);
+	name = xst_dialog_get_widget (xd, "profile_new_name");
+	gtk_entry_set_text (GTK_ENTRY (name), "");
+	gtk_widget_grab_focus (name);
 
-	gtk_entry_set_text (GTK_ENTRY (xst_dialog_get_widget (xd, "profile_new_comment")), "");
+	desc = xst_dialog_get_widget (xd, "profile_new_comment");
+	gtk_entry_set_text (GTK_ENTRY (desc), "");
+
+	gtk_signal_connect_object (GTK_OBJECT (name), "activate",
+				   gtk_widget_grab_focus,
+				   GTK_OBJECT (desc));
 
 	w = xst_dialog_get_widget (xd, "profile_new_copy");
 	
