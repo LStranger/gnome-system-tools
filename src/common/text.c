@@ -51,9 +51,9 @@ tool_text_size_from_mb (guint size_mb)
 	gchar *r;
 
 	if (size_mb >= 1000)
-	        r = g_strdup_printf ("%.1fG", (double) size_mb / 1000.0);
+	        r = g_strdup_printf ("%.1fGB", (double) size_mb / 1000.0);
 	else
-	        r = g_strdup_printf ("%.1fM", (double) size_mb);
+	        r = g_strdup_printf ("%.1fMB", (double) size_mb);
 
 	return r;
 }
