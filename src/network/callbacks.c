@@ -383,31 +383,31 @@ on_statichost_update_clicked (GtkWidget *b, gpointer null)
 /* yeah, I don't like this formatting either */
 static const char *hint_entry[][3] = { {
 	"hostname", "general_help", 		
-	N_("This is your host name.  It is ending one day at a time.") 
+	N_("The name of this computer")
 },{
 	"description", "general_help", 
-	N_("Your computer; what not.")
+	N_("A short description of your computer")
 },{
 	"workgroup", "general_help",
-	N_("dum de dum")
+	N_("The Windows Networking workgroup for your network")
 },{
 	"wins_ip", "general_help", 
-	N_("this is boring")
+	N_("The IP address of your WINS server")
 },{
 	"domain", "dns_help",     
-	N_("Enter your DNS domain (bug-buddy.org)")
+	N_("The DNS domain for your computer")
 },{
 	"dns_list", "dns_help",
-	N_("Enter a list of your DNS servers' IP addresses: 1.2.3.4, 2.3.4.5"),
+	N_("A list of your DNS servers' IP addresses"),
 },{
 	"search_list", "dns_help",
-	N_("Enter a list of domains where hosts will be searched for (andrew.cmu.edu, res.cmu.edu, ximian.com)") 
+	N_("A list of domains where hosts will be searched") 
 },{
 	"ip", "hosts_help",
-	N_("Enter the IP address of the host: 1.2.4.9") 
+	N_("The IP address of this host") 
 },{
 	"alias", "hosts_help",
-	N_("Enter one alias per line") 
+	N_("Aliases for this host, one per line") 
 },{
 	NULL
 } };
