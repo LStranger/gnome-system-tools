@@ -529,22 +529,15 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	g_free (s);
 
 	xml = xst_tool_load_glade_common (tool, "tool_vbox");
-	
 	w = glade_xml_get_widget (xml, "tool_vbox");
 	gnome_app_set_contents (GNOME_APP (dialog), w);
 
 	dialog->gui   = xst_tool_load_glade (tool, NULL);
 	dialog->child = xst_dialog_get_widget (dialog, widget);
 
-	if (!dialog->child) {
-		g_warning ("Could not find parent Widget \"%s\".", widget);
-		return;
-	}
-	
 	if (GTK_WIDGET_TOPLEVEL (dialog->child)) {
-		g_warning ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
-			   "You just need to add the widget inside a GtkWindow so that it can be deparented it.", widget);
-		return;
+		g_error ("The widget \"%s\" should not be a toplevel widget in the .glade file\n"
+			 "You just need to add the widget inside a GtkWindow so that it can be deparented it.", widget);
 	}
 
 	gtk_widget_ref (dialog->child);
@@ -583,6 +576,7 @@ xst_dialog_construct (XstDialog *dialog, XstTool *tool,
 	xst_dialog_set_complexity (dialog, val);
 
 	gtk_signal_connect (GTK_OBJECT (dialog), "delete_event", dialog_delete_event_cb, dialog);
+
 }
 
 XstDialog *
@@ -596,6 +590,7 @@ xst_dialog_new (XstTool *tool, const char *widget, const char *title)
 	g_return_val_if_fail (title != NULL, NULL);
 
 	dialog = XST_DIALOG (gtk_type_new (XST_TYPE_DIALOG));
+	
 	xst_dialog_construct (dialog, tool, widget, title);
 
 	return dialog;

@@ -4,5 +4,5 @@ else
 ARCHIVER_TOOL = 
 endif
 
-SUBDIRS = common $(ARCHIVER_TOOL) network users time boot display shares internetsharing font
+SUBDIRS = common $(ARCHIVER_TOOL) network users time boot display shares internetsharing font dhcpd
 #memory print  disks 

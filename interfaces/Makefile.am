@@ -1,6 +1,7 @@
 interfaces = \
 	common.glade					\
 	disks.glade 					\
+	dhcpd.glade					\
 	memory.glade 					\
 	nameresolution.glade			\
 	network.glade 					\

@@ -226,21 +226,37 @@ xst_tool_clear_supported_platforms (XstTool *tool)
 GladeXML *
 xst_tool_load_glade_common (XstTool *tool, const gchar *widget)
 {
+	GladeXML *xml;
+	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (tool->glade_common_path != NULL, NULL);
 
-	return glade_xml_new (tool->glade_common_path, widget);
+	xml = glade_xml_new (tool->glade_common_path, widget);
+
+	if (!xml) {
+		g_error ("Could not load %s\n", tool->glade_common_path);
+	}
+
+	return xml;
 }
 
 GladeXML *
 xst_tool_load_glade (XstTool *tool, const gchar *widget)
 {
+	GladeXML *xml;
+	
 	g_return_val_if_fail (tool != NULL, NULL);
 	g_return_val_if_fail (XST_IS_TOOL (tool), NULL);
 	g_return_val_if_fail (tool->glade_path != NULL, NULL);
 
-	return glade_xml_new (tool->glade_path, widget);
+	xml = glade_xml_new (tool->glade_path, widget);
+
+	if (!xml) {
+		g_error ("Could not load %s\n", tool->glade_path);
+	}
+	
+	return xml;
 }
 
 XstDialog *
@@ -1307,6 +1323,16 @@ xst_tool_get_type (void)
 	return xsttool_type;
 }
 
+/**
+ * xst_tool_construct:
+ * @tool: 
+ * @name: 
+ * @title: 
+ * 
+ * 
+ * 
+ * Return Value: FALSE on error
+ **/
 void
 xst_tool_construct (XstTool *tool, const char *name, const char *title)
 {
@@ -1321,7 +1347,7 @@ xst_tool_construct (XstTool *tool, const char *name, const char *title)
 	s = g_strdup_printf ("%s_admin", name);
 	t = g_strdup_printf (_("%s - Ximian Setup Tools"), title);
 	u = g_strdup_printf (PIXMAPS_DIR "/%s.png", name);
-	
+
 	tool->main_dialog = xst_dialog_new (tool, s, t);
 	gnome_window_icon_set_from_file (GTK_WINDOW (tool->main_dialog), u);
 
