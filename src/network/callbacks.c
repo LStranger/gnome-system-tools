@@ -544,7 +544,7 @@ static void
 activate_directive_cb (XstDirectiveEntry *entry)
 {
 	gchar *file = entry->data;
-	
+
 	xst_tool_run_set_directive (entry->tool, entry->in_xml, entry->report_sign, entry->directive,
 				    file, "1", NULL);
 	g_free (entry->report_sign);
@@ -554,20 +554,26 @@ void
 on_connection_activate_clicked (GtkWidget *w, gpointer null)
 {
 	XstConnection *cxn;
+	gchar *sign, *file;
+	gboolean *modified = xst_dialog_get_modified (tool->main_dialog);
 
 	cxn = connection_list_get_active ();
 	connection_activate (cxn, TRUE);
 
-	if (xst_dialog_get_modified (tool->main_dialog)) {
+	file = (cxn->file)? cxn->file: cxn->dev;
+	sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
+	xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
+	
+	xst_dialog_set_modified (tool->main_dialog, modified);
+	
+/*	if (xst_dialog_get_modified (tool->main_dialog)) {
 		xst_tool_save (tool);
 		xst_dialog_set_modified (tool->main_dialog, FALSE);
 	} else {
-		gchar *sign, *file;
-		
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Activating connection ``%s.''"), cxn->name);
 		xst_tool_queue_directive (tool, activate_directive_cb, file, NULL, NULL, "enable_iface");
-	}
+	}*/
 
 	cxn->activation = ACTIVATION_UP;
 }
@@ -586,20 +592,29 @@ void
 on_connection_deactivate_clicked (GtkWidget *w, gpointer null)
 {
 	XstConnection *cxn;
+	gchar *sign, *file;
+	gboolean *modified = xst_dialog_get_modified (tool->main_dialog);
 
 	cxn = connection_list_get_active ();
+	connection_activate (cxn, FALSE);
+	
+	file = (cxn->file)? cxn->file: cxn->dev;
+	sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
+	xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
+	
+	xst_dialog_set_modified (tool->main_dialog, modified);
+	
+/*	cxn = connection_list_get_active ();
 	connection_activate (cxn, FALSE);
 
 	if (xst_dialog_get_modified (tool->main_dialog)) {
 		xst_tool_save (tool);
 		xst_dialog_set_modified (tool->main_dialog, FALSE);
 	} else {
-		gchar *sign, *file;
-		
 		file = (cxn->file)? cxn->file: cxn->dev;
 		sign = g_strdup_printf (_("Deactivating connection ``%s.''"), cxn->name);
 		xst_tool_queue_directive (tool, deactivate_directive_cb, file, NULL, NULL, "enable_iface");
-	}
+	}*/
 
 	cxn->activation = ACTIVATION_DOWN;
 }
