@@ -3,6 +3,7 @@ noinst_LIBRARIES = libsetuptool.a
 libsetuptool_a_SOURCES = \
 xml.c xml.h \
 helpers.c helpers.h \
+text.c text.h \
 tool.c tool.h \
 global.h \
 checked.xpm unchecked.xpm reading.xpm \
