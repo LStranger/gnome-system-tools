@@ -20,5 +20,7 @@ shares.glade.h \
 time.glade.h \
 users.glade.h
 
+CLEANFILES = users.glade
+
 users.glade: %.glade: %.glade.in
 	sed 's#<pixmaps_directory>.*</pixmaps_directory>#<pixmaps_directory>'$(pixmapsdir)'</pixmaps_directory>#' < $< > $@

@@ -4,7 +4,7 @@
  * DO NOT compile it as part of your application.
  */
 
-gchar *s = N_("Shares Administration");
+gchar *s = N_("Disks Administration");
 gchar *s = N_("Device");
 gchar *s = N_("Detected");
 gchar *s = N_("Listed");

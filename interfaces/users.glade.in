@@ -12,14 +12,17 @@
   <gettext_support>True</gettext_support>
   <use_widget_names>True</use_widget_names>
   <output_main_file>False</output_main_file>
+  <output_support_files>False</output_support_files>
+  <output_build_files>False</output_build_files>
+  <backup_source_files>False</backup_source_files>
   <output_translatable_strings>True</output_translatable_strings>
   <translatable_strings_file>users.glade.h</translatable_strings_file>
 </project>
 
 <widget>
   <class>GnomeApp</class>
-  <name>users-admin</name>
-  <title>User Account Configuration</title>
+  <name>users_admin</name>
+  <title>User Account Administration</title>
   <type>GTK_WINDOW_TOPLEVEL</type>
   <position>GTK_WIN_POS_NONE</position>
   <modal>False</modal>
@@ -197,7 +200,7 @@
 
 		  <widget>
 		    <class>GtkButton</class>
-		    <name>button9</name>
+		    <name>user_delete</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
 		    <label>Delete</label>
@@ -327,7 +330,7 @@
 
 		  <widget>
 		    <class>GtkButton</class>
-		    <name>button11</name>
+		    <name>user_chpasswd</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
 		    <label>Change Password...</label>
@@ -335,7 +338,7 @@
 
 		  <widget>
 		    <class>GtkButton</class>
-		    <name>button12</name>
+		    <name>user_settings</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
 		    <label>Settings...</label>
@@ -481,7 +484,7 @@
 
 		<widget>
 		  <class>GtkButton</class>
-		  <name>button14</name>
+		  <name>group_delete</name>
 		  <can_default>True</can_default>
 		  <can_focus>True</can_focus>
 		  <label>Delete</label>
@@ -610,7 +613,7 @@
 
 		  <widget>
 		    <class>GtkButton</class>
-		    <name>button16</name>
+		    <name>group_settings</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
 		    <label>Settings...</label>
@@ -668,7 +671,7 @@
 
 	<widget>
 	  <class>GtkButton</class>
-	  <name>button7</name>
+	  <name>user_level</name>
 	  <can_default>True</can_default>
 	  <can_focus>True</can_focus>
 	  <label> Advanced &gt;&gt; </label>
@@ -697,7 +700,7 @@
 
 	  <widget>
 	    <class>GtkButton</class>
-	    <name>button5</name>
+	    <name>apply</name>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
 	    <stock_button>GNOME_STOCK_BUTTON_APPLY</stock_button>
@@ -705,7 +708,7 @@
 
 	  <widget>
 	    <class>GtkButton</class>
-	    <name>button6</name>
+	    <name>close</name>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
 	    <stock_button>GNOME_STOCK_BUTTON_CLOSE</stock_button>
@@ -718,7 +721,7 @@
 
 <widget>
   <class>GnomeDialog</class>
-  <name>user_settings</name>
+  <name>user_settings_dialog</name>
   <title>User Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -760,7 +763,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>button17</name>
+	<name>user_settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
@@ -768,7 +771,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>button19</name>
+	<name>user_settings_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
@@ -810,7 +813,7 @@
 
 	  <widget>
 	    <class>GtkEntry</class>
-	    <name>entry1</name>
+	    <name>user_settings_comment</name>
 	    <can_focus>True</can_focus>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
@@ -834,7 +837,7 @@
 
 	  <widget>
 	    <class>GtkEntry</class>
-	    <name>entry2</name>
+	    <name>user_settings_name</name>
 	    <can_focus>True</can_focus>
 	    <editable>True</editable>
 	    <text_visible>True</text_visible>
@@ -858,7 +861,7 @@
 
 	  <widget>
 	    <class>GtkOptionMenu</class>
-	    <name>optionmenu1</name>
+	    <name>user_settings_group</name>
 	    <can_focus>True</can_focus>
 	    <items>Select a group
 </items>
@@ -964,7 +967,7 @@
 
 <widget>
   <class>GnomeDialog</class>
-  <name>user_change_passwd</name>
+  <name>user_passwd_dialog</name>
   <title>Change Password</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1006,7 +1009,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>button21</name>
+	<name>user_passwd_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
@@ -1014,7 +1017,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>button23</name>
+	<name>user_passwd_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
@@ -1037,7 +1040,7 @@
 
       <widget>
 	<class>GtkEntry</class>
-	<name>entry4</name>
+	<name>user_passwd_new</name>
 	<can_focus>True</can_focus>
 	<editable>True</editable>
 	<text_visible>True</text_visible>
@@ -1113,7 +1116,7 @@
 
       <widget>
 	<class>GtkEntry</class>
-	<name>entry3</name>
+	<name>user_passwd_confirmation</name>
 	<can_focus>True</can_focus>
 	<editable>True</editable>
 	<text_visible>True</text_visible>
@@ -1140,7 +1143,7 @@
 
 <widget>
   <class>GnomeDialog</class>
-  <name>group_settings</name>
+  <name>group_settings_dialog</name>
   <title>Group Settings</title>
   <type>GTK_WINDOW_DIALOG</type>
   <position>GTK_WIN_POS_NONE</position>
@@ -1182,7 +1185,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>button24</name>
+	<name>group_settings_ok</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_OK</stock_button>
@@ -1190,7 +1193,7 @@
 
       <widget>
 	<class>GtkButton</class>
-	<name>button26</name>
+	<name>group_settings_cancel</name>
 	<can_default>True</can_default>
 	<can_focus>True</can_focus>
 	<stock_button>GNOME_STOCK_BUTTON_CANCEL</stock_button>
@@ -1238,7 +1241,7 @@
 
 	<widget>
 	  <class>GtkEntry</class>
-	  <name>entry5</name>
+	  <name>group_settings_name</name>
 	  <can_focus>True</can_focus>
 	  <editable>True</editable>
 	  <text_visible>True</text_visible>
@@ -1348,7 +1351,7 @@
 
 	    <widget>
 	      <class>GtkList</class>
-	      <name>list4</name>
+	      <name>group_settings_all</name>
 	      <width>100</width>
 	      <height>150</height>
 	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
@@ -1377,7 +1380,7 @@
 
 	    <widget>
 	      <class>GtkList</class>
-	      <name>list5</name>
+	      <name>group_settings_members</name>
 	      <width>100</width>
 	      <height>150</height>
 	      <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
@@ -1415,7 +1418,7 @@
 
 	      <widget>
 		<class>GtkButton</class>
-		<name>button28</name>
+		<name>group_settings_add</name>
 		<can_focus>True</can_focus>
 		<label>Add -&gt;</label>
 		<child>
@@ -1427,7 +1430,7 @@
 
 	      <widget>
 		<class>GtkButton</class>
-		<name>button27</name>
+		<name>group_settings_remove</name>
 		<can_focus>True</can_focus>
 		<label>Remove &lt;-</label>
 		<child>
