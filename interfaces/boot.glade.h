@@ -5,18 +5,26 @@
  */
 
 gchar *s = N_("window1");
-gchar *s = N_("This is going to be Boot admin tool.\n"
-              "It's going to be cool thing. Can someone\n"
-              "write better text here?");
-gchar *s = N_("Add");
-gchar *s = N_("Delete");
+gchar *s = N_("Use this tool to manage the operating systems\n"
+              "or Linux kernels on your machine.");
+gchar *s = N_("_Add...");
+gchar *s = N_("_Delete");
+gchar *s = N_("_Settings...");
+gchar *s = N_("D_efault");
+gchar *s = N_("Starting your computer");
+gchar *s = N_("Wait");
+gchar *s = N_("seconds before loading default kernel or OS");
 gchar *s = N_("Settings");
-gchar *s = N_("Global stuff");
-gchar *s = N_("Timeout");
-gchar *s = N_("Seconds");
+gchar *s = N_("Use this dialog to add new kernel or\n"
+              "operating system to your computer.");
+gchar *s = N_("Boot type:");
+gchar *s = N_("Name:");
+gchar *s = N_("Settings");
+gchar *s = N_("Name:");
 gchar *s = N_("Image:");
-gchar *s = N_("Label:");
-gchar *s = N_("Type:");
-gchar *s = N_("Append:");
+gchar *s = N_("Make this my default");
+gchar *s = N_("Device:");
+gchar *s = N_("Optional");
 gchar *s = N_("Root:");
-gchar *s = N_("Default");
+gchar *s = N_("This kernel requires additional parameters");
+gchar *s = N_("Add...");
