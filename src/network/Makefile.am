@@ -6,7 +6,8 @@ INCLUDES = \
 	$(GNOME_INCLUDEDIR)		\
 	$(GNOME_CFLAGS) 		\
 	$(LIBGLADE_CFLAGS)		\
-	$(GNOME_XML_CFLAGS)
+	$(GNOME_XML_CFLAGS)             \
+	$(GCONF_CFLAGS)
 
 sbin_PROGRAMS = network-admin
 
@@ -25,6 +26,7 @@ $(GNOME_XML_LIB) \
 $(GDK_PIXBUF_LIBS) \
 $(LIBGLADE_LIBS) \
 $(INTLLIBS) \
+$(GCONF_LIBS) \
 ../common/libsetuptool.a
 
 #EXTRA_DIST = $(desktop).in users.pam $(security).in

@@ -8,7 +8,8 @@ INCLUDES = \
 	$(GDK_PIXBUF_CFLAGS) 		\
 	$(LIBGLADE_CFLAGS)		\
 	$(GNOME_XML_CFLAGS)		\
-	$(GAL_CFLAGS)
+	$(GAL_CFLAGS)                   \
+	$(GCONF_CFLAGS)
 
 sbin_PROGRAMS = boot-admin
 
@@ -29,6 +30,7 @@ $(GDK_PIXBUF_LIBS) \
 $(LIBGLADE_LIBS) \
 $(INTLLIBS) \
 $(GAL_LIBS) \
+$(GCONF_LIBS) \
 ../common/libsetuptool.a
 
 #desktop = boot.desktop

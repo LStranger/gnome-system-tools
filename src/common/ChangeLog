@@ -1,3 +1,19 @@
+2001-03-30  Tambet Ingo  <tambet@ximian.com>
+
+	* Makefile.am: Add gconf cflags.
+	
+	* xst-dialog.c (xst_dialog_construct): Set initial complexity right.
+	(xst_dialog_set_complexity): Save complexity.
+
+	* xst-tool.c (xst_tool_construct): construct GConfClient,
+	  add client directory if needed.
+	  (xst_tool_init): gconf_init ()
+
+	* xst-types.h: Added XST_DIALOG_NONE to XstDialogComplexity
+	  to notify errors.
+
+	* xst-tool.h: Added GConfClient to XstTool.
+
 2001-03-30  Arturo Espinosa Aldama  <arturo@ximian.com>
 
 	* xst-report-line.c (xst_report_hash_eq): equivalence function.

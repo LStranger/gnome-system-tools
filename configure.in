@@ -79,6 +79,27 @@ GAL_CFLAGS="`gnome-config --cflags gal`"
 AC_SUBST(GAL_LIBS)
 AC_SUBST(GAL_CFLAGS)
 
+
+dnl Gnome App Lib checking
+AC_MSG_CHECKING(for GConf >= 0.50)
+if gconf-config --version > /dev/null 2>&1; then
+        vers=`gconf-config --version | sed -e 's/cvs$//' -e 's/pre$//' | \
+                 awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
+        if test "$vers" -ge 50000; then
+                AC_MSG_RESULT(found)
+         else
+                AC_MSG_ERROR(You need at least GConf 0.50 for this version of ximian-setup-tools)
+        fi
+else
+        AC_MSG_ERROR(Did not find GConf installed)
+fi
+
+GCONF_LIBS="`gconf-config --libs gconf-gtk`"
+GCONF_CFLAGS="`gconf-config --cflags gconf-gtk`"
+
+AC_SUBST(GCONF_LIBS)
+AC_SUBST(GCONF_CFLAGS)
+
 GDK_PIXBUF_LIBS="`gnome-config --libs gdk_pixbuf gnomecanvaspixbuf`"
 GDK_PIXBUF_CFLAGS="`gnome-config --cflags gdk_pixbuf gnomecanvaspixbuf`"
 

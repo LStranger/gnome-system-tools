@@ -24,9 +24,12 @@
 
 #include <glib.h>
 
+#define XST_CONF_ROOT "/apps/xst"
+
 typedef enum {
 	XST_DIALOG_BASIC,
-	XST_DIALOG_ADVANCED
+	XST_DIALOG_ADVANCED,
+	XST_DIALOG_NONE
 } XstDialogComplexity;
 
 typedef enum {
