@@ -258,14 +258,24 @@ gst_time_update_date (GstTimeTool *tool, gint add)
 void
 gst_time_update (GstTimeTool *tool)
 {
+	gchar *s, *m, *h;
+	
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->seconds), (gfloat) tool->sec);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->minutes), (gfloat) tool->min);
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool->hours), (gfloat) tool->hrs);
 	
 	/* we add the 0 if the number is <= 9, it's more pretty */
-	gtk_entry_set_text (GTK_ENTRY (tool->seconds), g_strdup_printf ("%02d", tool->sec));
-	gtk_entry_set_text (GTK_ENTRY (tool->minutes), g_strdup_printf ("%02d", tool->min));
-	gtk_entry_set_text (GTK_ENTRY (tool->hours), g_strdup_printf ("%02d", tool->hrs));
+	s = g_strdup_printf ("%02d", tool->sec);
+	m = g_strdup_printf ("%02d", tool->min);
+	h = g_strdup_printf ("%02d", tool->hrs);
+	
+	gtk_entry_set_text (GTK_ENTRY (tool->seconds), s);
+	gtk_entry_set_text (GTK_ENTRY (tool->minutes), m);
+	gtk_entry_set_text (GTK_ENTRY (tool->hours), h);
+
+	g_free (s);
+	g_free (m);
+	g_free (h);
 }
 
 static gboolean
@@ -556,7 +566,7 @@ gst_time_filter (GtkEntry *entry, const gchar *new_text,
 	gchar new_val_string [4];
 	gint new_val;
 	gint max = (widget == tool->hours) ? 24 : 60;
-	
+
 	if (tool->ticking)
 		return;
 	if (length > 1)
@@ -564,7 +574,7 @@ gst_time_filter (GtkEntry *entry, const gchar *new_text,
 	
 	gst_time_clock_stop (tool);
 	text = gtk_entry_get_text (entry);
-	
+
 	/*
 	 * Get the resulting string after this insert text event
 	 * and its numberical value
@@ -605,8 +615,7 @@ static void
 gst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
 {
 	gint num = atoi (gtk_editable_get_chars (GTK_EDITABLE (widget), 0, -1));
-
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "focus_out_event");
+	gchar *value;
 
 	if (widget == tool->seconds) {
 		tool->sec = num;
@@ -617,8 +626,10 @@ gst_time_focus_out (GtkWidget *widget, GdkEventFocus *event, GstTimeTool *tool)
 	}
 
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), (gfloat) num);
-	gst_time_update (tool);
-	gtk_signal_emit_stop_by_name (GTK_OBJECT (widget), "focus_out_event");
+
+	value = g_strdup_printf ("%02d", num);
+	gtk_entry_set_text (GTK_ENTRY (widget), value);
+	g_free (value);
 }
 
 static void
@@ -626,6 +637,7 @@ gst_time_change (GtkSpinButton *widget, gpointer data)
 {
 	GstTimeTool *tool = data;
 	gint value = gtk_spin_button_get_value (widget);
+	gchar *val;
 
 	g_return_if_fail (GTK_IS_SPIN_BUTTON (widget));
 	g_return_if_fail (GST_IS_TIME_TOOL (tool));
@@ -664,7 +676,9 @@ gst_time_change (GtkSpinButton *widget, gpointer data)
 	gst_time_clock_stop (tool);
 	
 	/* We have to set it to 01 instead of 1, it's more pretty */
-	gtk_entry_set_text (GTK_ENTRY (widget), g_strdup_printf ("%02d", value));
+	val = g_strdup_printf ("%02d", value);
+	gtk_entry_set_text (GTK_ENTRY (widget), val);
+	g_free (val);
 }
 
 static GtkWidget *
