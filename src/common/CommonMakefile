@@ -6,16 +6,25 @@ $(desktop).in: %.desktop.in: %.desktop.in.in
 $(desktop): %.desktop: %.desktop.in
 		../../intltool-merge -d ../../po $(desktop).in $(desktop)
 
-install-data-local:
-	$(mkinstalldirs) $(DESTDIR)$(datadir)/applications
-	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/applications/$(desktop)
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/X11/sysconfig
-	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(sysconfdir)/X11/sysconfig/$(desktop)
-
-install-data-am: install-etspecsDATA install-data-local
-
+desktopdir = $(DESTDIR)$(datadir)/applications/
 desktop = $(toolname).desktop
+desktop_DATA = $(desktop)
 
-all-local: $(desktop)
+startheredir = $(DESTDIR)$(sysconfdir)/X11/sysconfig/
+desktop = $(toolname).desktop
+starthere_DATA = $(desktop)
 
-etspecs_DATA = $(etspecs)
+
+#install-data-local:
+#	$(mkinstalldirs) $(DESTDIR)$(datadir)/applications
+#	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(datadir)/applications/$(desktop)
+#	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)/X11/sysconfig
+#	$(INSTALL_DATA) $(desktop) $(DESTDIR)$(sysconfdir)/X11/sysconfig/$(desktop)
+
+#install-data-am: install-etspecsDATA install-data-local
+
+#desktop = $(toolname).desktop
+
+#all-local: $(desktop)
+
+#etspecs_DATA = $(etspecs)
