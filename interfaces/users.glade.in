@@ -2810,27 +2810,39 @@
 	  <widget>
 	    <class>GtkButton</class>
 	    <name>network_user_new</name>
-	    <sensitive>False</sensitive>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_network_user_new_clicked</handler>
+	      <last_modification_time>Wed, 03 Jan 2001 14:40:59 GMT</last_modification_time>
+	    </signal>
 	    <label>New User</label>
 	  </widget>
 
 	  <widget>
 	    <class>GtkButton</class>
 	    <name>network_group_new</name>
-	    <sensitive>False</sensitive>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_network_group_new_clicked</handler>
+	      <last_modification_time>Wed, 03 Jan 2001 14:55:37 GMT</last_modification_time>
+	    </signal>
 	    <label>New Group</label>
 	  </widget>
 
 	  <widget>
 	    <class>GtkButton</class>
 	    <name>network_delete</name>
-	    <sensitive>False</sensitive>
 	    <can_default>True</can_default>
 	    <can_focus>True</can_focus>
+	    <signal>
+	      <name>clicked</name>
+	      <handler>on_network_delete_clicked</handler>
+	      <last_modification_time>Wed, 03 Jan 2001 09:08:35 GMT</last_modification_time>
+	    </signal>
 	    <label>Delete</label>
 	  </widget>
 	</widget>
@@ -2942,9 +2954,13 @@ or a groups name or members.</label>
 	      <widget>
 		<class>GtkButton</class>
 		<name>network_settings</name>
-		<sensitive>False</sensitive>
 		<can_default>True</can_default>
 		<can_focus>True</can_focus>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_network_settings_clicked</handler>
+		  <last_modification_time>Wed, 03 Jan 2001 13:58:29 GMT</last_modification_time>
+		</signal>
 		<label>Settings</label>
 	      </widget>
 	    </widget>
