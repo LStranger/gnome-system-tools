@@ -165,14 +165,18 @@ on_statichost_list_select_row (GtkCList * clist, gint row, gint column, GdkEvent
 	
 	/* Load aliases into entry widget */
 
+	w = tool_widget_get ("statichost_enabled");
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (w),
+				      get_clist_checkmark (GTK_CLIST (clist), row, 0));
+
 	pos = 0;
-	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")), row, 1, &row_data);
+	gtk_clist_get_text (GTK_CLIST (clist), row, 1, &row_data);
 	w = tool_widget_get ("ip");
 	gtk_editable_delete_text (GTK_EDITABLE (w), 0, -1);
 	gtk_editable_insert_text (GTK_EDITABLE (w), row_data, strlen (row_data), &pos);
 
 	pos = 0;
-	gtk_clist_get_text (GTK_CLIST (tool_widget_get ("statichost_list")), row, 2, &row_data);
+	gtk_clist_get_text (GTK_CLIST (clist), row, 2, &row_data);
 	row_data = fixdown_text_list (g_strdup (row_data));
 	
 	w = tool_widget_get ("alias");
@@ -266,8 +270,10 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length, gint *po
 
  text_changed_success:
 	d(g_message ("success!"));
+#if 0
 	if (! (rules & EF_STATIC_HOST))
 		tool_modified_cb ();
+#endif
 }
 
 void
@@ -290,6 +296,10 @@ on_statichost_add_clicked (GtkWidget * button, gpointer user_data)
 
 	row = gtk_clist_append (GTK_CLIST (clist), entry);
 
+	w = tool_widget_get ("statichost_enabled");
+	set_clist_checkmark (GTK_CLIST (clist), row, 0,
+			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
+
 	w = tool_widget_get ("alias");
 
 #if 0
@@ -297,7 +307,6 @@ on_statichost_add_clicked (GtkWidget * button, gpointer user_data)
 	gtk_editable_insert_text (GTK_EDITABLE (w), entry[2], strlen (entry[2]), &pos);
 #endif
 
-	set_clist_checkmark (GTK_CLIST (clist), row, 0, TRUE);
 }
 
 
@@ -337,6 +346,10 @@ on_statichost_update_clicked (GtkWidget *b, gpointer null)
 
 	clist = tool_widget_get ("statichost_list");
 
+	w = tool_widget_get ("statichost_enabled");
+	set_clist_checkmark (GTK_CLIST (clist), statichost_row_selected, 0,
+			     gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (w)));
+
 	gtk_clist_set_text (GTK_CLIST (clist), statichost_row_selected, 1,
 			    gtk_editable_get_chars (
 				    GTK_EDITABLE (tool_widget_get ("ip")), 0, -1));
@@ -351,8 +364,6 @@ on_statichost_update_clicked (GtkWidget *b, gpointer null)
 	gtk_editable_insert_text (GTK_EDITABLE (w), s, strlen (s), &pos);
 #endif
 	g_free (s);
-
-	set_clist_checkmark (GTK_CLIST (clist), statichost_row_selected, 0, TRUE);
 }
 
 /* yeah, I don't like this formatting either */

@@ -41,5 +41,7 @@ void filter_editable (GtkEditable *e, const gchar *text,
 		      gint length, gint *pos, gpointer data);
 
 #define connect_editable_filter(w, r) gtk_signal_connect (GTK_OBJECT (w), "insert_text", \
-							   GTK_SIGNAL_FUNC (filter_editable), \
-							   GINT_TO_POINTER (r))
+			                                  GTK_SIGNAL_FUNC (filter_editable), \
+			                                  GINT_TO_POINTER (r))
+
+
