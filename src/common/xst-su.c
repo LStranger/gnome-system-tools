@@ -37,8 +37,6 @@
 
 #include "xst-su.h"
 
-#warning FIXME: exec_su and related code needs a bit more cleanup
-
 /* ABORT() kills GTK if we're not root, else it just exits.
  */
 #define ABORT(root)			\

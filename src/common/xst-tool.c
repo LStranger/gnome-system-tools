@@ -418,7 +418,6 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 
 	tool = XST_TOOL (data);
 
-#warning FIXME: make this not suck
 	if (!tool->line) {
 		tool->line = g_malloc(1024);
 		tool->line_len = 0;
@@ -453,7 +452,6 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 	else
 	{
 		/* Zero-length read; pipe closed unexpectedly */
-		/* FIXME: handle this at the UI level correctly. */
 
 		tool->report_finished = TRUE;
 	}
@@ -529,8 +527,6 @@ gboolean
 xst_tool_save (XstTool *tool)
 {
 	FILE *f;
-#warning This might be a security problem, fix
-	FILE *debug_file;
 	int fd_xml [2], fd_report [2];
 	int t;
 
@@ -569,13 +565,10 @@ xst_tool_save (XstTool *tool)
 		close (fd_report [1]);  /* Close writing end of report pipe */
 
 		f = fdopen (fd_xml [1], "w");
-		debug_file = fopen ("/tmp/xst-fe-write", "w");
 
 		xmlDocDump (f, tool->config);
-		xmlDocDump (debug_file, tool->config);
 		
 		fclose (f);
-		fclose (debug_file);
 		
 		report_progress (tool, fd_report [0], _("Updating your system configuration."));
 		close (fd_report [0]);
