@@ -281,17 +281,19 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 {
 	GtkWidget *clist, *d;
 	Connection *cxn;
-	int res;
-
-	d = gnome_question_dialog_parented (_("Remove this connection?"), NULL, NULL,
-					    GTK_WINDOW (tool->main_dialog));
-
-	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
-	if (res)
-		return;
+	gint res;
+	gchar *txt;
 
 	clist = xst_dialog_get_widget (tool->main_dialog, "connection_list");
 	cxn = gtk_clist_get_row_data (GTK_CLIST (clist), connection_row_selected);
+
+	txt = g_strdup_printf (_("Remove connection %s: ``%s''?"), cxn->dev, cxn->name);
+	d = gnome_question_dialog_parented (txt, NULL, NULL,
+								 GTK_WINDOW (tool->main_dialog));
+	g_free (txt);
+	res = gnome_dialog_run_and_close (GNOME_DIALOG (d));
+	if (res)
+		return;
 
 	connection_free (cxn);
 	gtk_clist_remove (GTK_CLIST (clist), connection_row_selected);
