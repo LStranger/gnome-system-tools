@@ -27,10 +27,15 @@
 #include "user_group.h"
 #include "callbacks.h"
 #include "e-table.h"
+#include "network.h"
 
 
 static gboolean is_valid_name (gchar *str);
 static gint char_sort_func (gconstpointer a, gconstpointer b);
+static gboolean user_update_login (xmlNodePtr node);
+static gboolean user_update_comment (xmlNodePtr node);
+static gboolean user_update_group (xmlNodePtr node);
+
 
 login_defs logindefs;
 
@@ -172,131 +177,46 @@ user_add (gchar type)
 }
 
 extern gboolean
-user_update (xmlNodePtr node)
+user_update (xmlNodePtr node, gchar type)
 {
-	GtkWidget *w0;
-	GtkWindow *win;
-	GnomeDialog *dialog;
-	gchar *new_login, *new_comment, *new_group_name;
-	gchar *login, *comment, *gid;
-	gchar *name = NULL;
-	GList *tmp_list;
-	gboolean found = FALSE;
-	gboolean comp;
-	xmlNodePtr g_node;
+	gboolean user_modified = FALSE;
+	gboolean modified = FALSE;
 
-	g_return_val_if_fail (login = my_xml_get_content (node, "login"), FALSE);
+	/* Update login. */
+	user_modified = user_update_login (node);
 
-	w0 = tool_widget_get ("user_settings_name");
-	new_login = gtk_entry_get_text (GTK_ENTRY (w0));
+	/* Update comment. */
+	if (user_update_comment (node))
+		user_modified = TRUE;
 
-	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
-
-	/* If login name is changed and isn't empty */
-	if (strcmp (new_login, login))
+	if (user_modified)
 	{
-		if (strlen (new_login) < 1)
+		modified = TRUE;
+		switch (type)
 		{
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
-					(_("The username is empty."), win));
-			
-			gnome_dialog_run (dialog);
-			gtk_widget_grab_focus (w0);
-			g_free (login);
-			return FALSE;
-		}
-
-		if (!is_valid_name (new_login))
-		{
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented (
-			("Please set a valid username, using only lower-case letters."), win));
-			gnome_dialog_run (dialog);
-			g_free (login);
-			return FALSE;
-		}
-
-		my_xml_set_child_content (node, "login", new_login);
-		e_table_change_user ();
-	}
-	g_free (login);
-
-	/* Change comment if comment is changed. */
-	w0 = tool_widget_get ("user_settings_comment");
-	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
-	comment = my_xml_get_content (node, "comment");
-	
-	if (comment == NULL)
-	{
-		if (strlen (new_comment) > 0)
-		{
-			my_xml_set_child_content (node, "comment", new_comment);
-			e_table_change_user ();
+			case LOCAL:
+				e_table_change_user ();
+				break;
+			case NIS:
+				network_change_user (node);
+				break;
+			default:
+				break;
 		}
 	}
-	else if (strcmp (new_comment, comment))
-	{
-		my_xml_set_child_content (node, "comment", new_comment);
-		e_table_change_user ();
-	}
 
-	g_free (comment);
-
+	/* If advanced mode, update advanced settings */
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
-		adv_user_settings_update (node, new_login);
+		adv_user_settings_update (node, NULL); /* FIXME: expects new_user_name!!! */
 
-	/* Get selected group name */
-	
-	w0 = tool_widget_get ("user_settings_group");
-	new_group_name = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
-	
-	/* Now find group's gid */
-	
-	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
-		comp = TRUE;
-	else
-		comp = FALSE;
-
-	tmp_list = get_group_list ("name", comp);
-	while (tmp_list)
+	/* Update group. */
+	if (user_update_group (node))
 	{
-		name = tmp_list->data;
-
-		if (!found && !strcmp (name, new_group_name))
-			found = TRUE;
-
-		g_free (tmp_list->data);
-		tmp_list = tmp_list->next;
-	}
-	g_free (tmp_list);
-	
-	if (!found)
-	{
-		/* New group: check that it is a valid group name */
-
-		if (!is_valid_name (new_group_name))
-		{
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented (
-				"Please set a valid main group name, with only lower-case letters,"
-				"\nor select one from pull-down menu.", win));
-
-			gnome_dialog_run (dialog);
-			return FALSE;
-		}
-
-		/* Cool: create new group */
-
-		g_node = group_add_to_xml (new_group_name, LOCAL);
-		gid = my_xml_get_content (g_node, "gid");
+		modified = TRUE;
 		e_table_add_group ();
 	}
 
-	else
-		gid = get_group_by_data ("name", new_group_name, "gid");
-
-	my_xml_set_child_content (node, "gid", gid);
-	g_free (gid);
-
-	return TRUE;
+	return modified;
 }
 
 extern void
@@ -1153,7 +1073,7 @@ group_settings_prepare (xmlNodePtr node)
 }
 
 extern void
-user_settings_prepare (xmlNodePtr node)
+user_settings_prepare (xmlNodePtr node, gchar type)
 {
 	GtkWidget *w0;
 	GList *tmp_list;
@@ -1240,6 +1160,9 @@ user_settings_prepare (xmlNodePtr node)
 
 	/* Add 0 to windows data refering that we are not making new user */
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (0));
+
+	/* Add type (local, nis, etc...) to windows data. */
+	gtk_object_set_data (GTK_OBJECT (w0), "type", GINT_TO_POINTER ((gint)type));
 	gtk_widget_show (w0);
 }
 
@@ -1373,5 +1296,150 @@ user_add_to_xml (gchar *name, gchar type)
 	xml_element_add_with_content (user, "is_shadow", g_strdup ("1"));
 
 	return user;
+}
+
+static gboolean
+user_update_login (xmlNodePtr node)
+{
+	GtkEntry *entry;
+	GtkWindow *win;
+	GnomeDialog *dialog = NULL;
+	gchar *new_login, *login;
+	gboolean modified = FALSE;
+
+	login = my_xml_get_content (node, "login");
+	entry = GTK_ENTRY (tool_widget_get ("user_settings_name"));
+	new_login = gtk_entry_get_text (entry);
+
+	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+
+	/* If login name is changed and isn't empty */
+	if (strcmp (new_login, login))
+	{
+		if (strlen (new_login) < 1)
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented 
+					(_("The username is empty."), win));
+		}
+
+		else if (!is_valid_name (new_login))
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (
+			("Please set a valid username, using only lower-case letters."), win));
+		}
+
+		if (dialog)
+		{
+			gnome_dialog_run (dialog);
+			gtk_widget_grab_focus (GTK_WIDGET (entry));
+		}
+
+		else
+		{
+			my_xml_set_child_content (node, "login", new_login);
+			modified = TRUE;
+		}
+	}
+	g_free (login);
+
+	return modified;
+}
+
+static gboolean
+user_update_comment (xmlNodePtr node)
+{
+	GtkEntry *entry;
+	gchar *comment, *new_comment;
+	gboolean modified = FALSE;
+
+	/* Change comment if comment is changed. */
+	entry = GTK_ENTRY (tool_widget_get ("user_settings_comment"));
+	new_comment = gtk_entry_get_text (entry);
+	comment = my_xml_get_content (node, "comment");
+
+	if (comment == NULL)
+	{
+		if (strlen (new_comment) > 0)
+		{
+			my_xml_set_child_content (node, "comment", new_comment);
+			modified = TRUE;
+		}
+	}
+	else if (strcmp (new_comment, comment))
+	{
+		my_xml_set_child_content (node, "comment", new_comment);
+		modified = TRUE;
+	}
+	g_free (comment);
+
+	return modified;
+}
+
+static gboolean
+user_update_group (xmlNodePtr node)
+{
+	GtkCombo *combo;
+	GtkWindow *win;
+	GnomeDialog *dialog;
+	gchar *new_group_name, *gid, *name;
+	GList *tmp_list;
+	xmlNodePtr g_node;
+	gboolean comp, found = FALSE;
+	gboolean new = FALSE;
+
+	/* Get selected group name */
+
+	combo = GTK_COMBO (tool_widget_get ("user_settings_group"));
+	new_group_name = gtk_editable_get_chars (GTK_EDITABLE (combo->entry), 0, -1);
+
+	/* Now find group's gid */
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		comp = TRUE;
+	else
+		comp = FALSE;
+
+	tmp_list = get_group_list ("name", comp);
+	while (tmp_list)
+	{
+		name = tmp_list->data;
+
+		if (!found && !strcmp (name, new_group_name))
+			found = TRUE;
+
+		g_free (tmp_list->data);
+		tmp_list = tmp_list->next;
+	}
+	g_free (tmp_list);
+	
+	if (!found)
+	{
+		/* New group: check that it is a valid group name */
+
+		if (!is_valid_name (new_group_name))
+		{
+			win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (
+				"Please set a valid main group name, with only lower-case letters,"
+				"\nor select one from pull-down menu.", win));
+
+			gnome_dialog_run (dialog);
+			return new;
+		}
+
+		/* Cool: create new group */
+
+		g_node = group_add_to_xml (new_group_name, LOCAL);
+		gid = my_xml_get_content (g_node, "gid");
+		new = TRUE;
+	}
+
+	else
+		gid = get_group_by_data ("name", new_group_name, "gid");
+
+	my_xml_set_child_content (node, "gid", gid);
+	g_free (gid);
+
+	return new;
 }
 

@@ -9,3 +9,6 @@ extern void network_current_delete (void);
 ETreePath *
 network_insert_user (ETreeModel *etree, ETreePath *parent, int position, gpointer node_data);
 
+extern void network_change_user (xmlNodePtr node);
+
+

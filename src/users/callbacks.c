@@ -50,7 +50,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	xmlNodePtr node;
 
 	g_return_if_fail (node = e_table_get_current_user ());
-	user_settings_prepare (node);
+	user_settings_prepare (node, LOCAL);
 }
 
 void 
@@ -257,7 +257,7 @@ on_network_settings_clicked (GtkButton *button, gpointer user_data)
 		group_settings_prepare (node);
 
 	else if (!strcmp (node->name, "user"))
-		user_settings_prepare (node);
+		user_settings_prepare (node, NIS);
 	else
 		g_warning ("unknown node.");
 
@@ -327,6 +327,7 @@ user_settings_dialog_close (void)
 
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_object_remove_data (GTK_OBJECT (w0), "new");
+	gtk_object_remove_data (GTK_OBJECT (w0), "type");
 	gtk_widget_hide (w0);
 }
 
@@ -349,17 +350,31 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	gboolean retval;
 	GtkWidget *w0;
 	guint new;
-	xmlNodePtr node;
-
-        g_return_if_fail (node = e_table_get_current_user ());
+	gchar type;
+	xmlNodePtr node = NULL;
 
 	w0 = tool_widget_get ("user_settings_dialog");
 	new = GPOINTER_TO_UINT (gtk_object_get_data (GTK_OBJECT (w0), "new"));
+	type = ((gint) (gtk_object_get_data (GTK_OBJECT (w0), "type")));
+
+	switch (type)
+	{
+		case LOCAL:
+			node = e_table_get_current_user ();
+			break;
+		case NIS:
+			node = network_current_node (); 
+		default:
+			break;
+	}
+
+	if (!node)
+		return;
 
 	if (new)
-		retval = user_add (LOCAL);
+		retval = user_add (type);
 	else
-		retval = user_update (node);
+		retval = user_update (node, type);
 
 	if (retval)
 	{

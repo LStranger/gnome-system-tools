@@ -102,6 +102,8 @@ group_value_at (ETreeModel *etm, ETreePath *path, int col, void *model_data)
 
 	if (!strcmp (node->name, "groupdb"))
 		return g_strdup ("Local");
+	if (!strcmp (node->name, "nis_groupdb"))
+		return g_strdup ("NIS");
 
 	node = xml_element_find_first (node, "name");
 	if (!node)
@@ -314,10 +316,10 @@ network_populate (xmlNodePtr xml_root)
 
 	e_tree_model_freeze (model);
 
-	node = xml_element_find_first (xml_root, "groupdb");
+	node = xml_element_find_first (xml_root, "nis_groupdb");
 	if (!node)
 	{
-		g_warning ("network_populate: couldn't find groupdb node.");
+		g_warning ("network_populate: couldn't find nis_groupdb node.");
 		e_tree_model_thaw (model);
 		return;
 	}
@@ -395,7 +397,7 @@ network_insert_user (ETreeModel *etree, ETreePath *parent, int position, gpointe
 	gchar *name, *txt;
 
 	name = xml_element_get_content (node);
-	user_node = xml_element_find_first (xml_doc_get_root (tool_config_get_xml()), "userdb");
+	user_node = xml_element_find_first (xml_doc_get_root (tool_config_get_xml()), "nis_userdb");
 
 	for (n0 = xml_element_find_first (user_node, "user"); n0;
 			n0 = xml_element_find_next (n0, "user"))
@@ -411,3 +413,19 @@ network_insert_user (ETreeModel *etree, ETreePath *parent, int position, gpointe
 	}
 	return NULL;
 }
+
+extern void
+network_change_user (xmlNodePtr node)
+{
+	ETable *table;
+	ETableModel *model;
+	gint row;
+
+	table = E_TABLE_SCROLLED (network_user)->table;
+	model = table->model;
+	row = e_table_get_cursor_row (table);
+
+	e_table_model_row_changed (model, row);
+	/* e_table_set_cursor_row (table, row); */
+}
+

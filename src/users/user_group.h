@@ -28,6 +28,7 @@
 
 
 #define LOCAL 1
+#define NIS 2
 
 /* Just as specified in the @login_defs_prop_array in the users-conf backend: */
 
@@ -51,7 +52,7 @@ typedef struct
 extern login_defs logindefs;
 
 extern gboolean user_add (gchar type);
-extern gboolean user_update (xmlNodePtr node);
+extern gboolean user_update (xmlNodePtr node, gchar type);
 extern void user_fill_settings_group (GtkCombo *combo, gboolean adv);
 extern GList *user_current_list (void);
 
@@ -81,7 +82,7 @@ void del_group_users (xmlNodePtr node);
 void add_group_users (xmlNodePtr node, gchar *name);
 
 extern void group_settings_prepare (xmlNodePtr node);
-extern void user_settings_prepare (xmlNodePtr node);
+extern void user_settings_prepare (xmlNodePtr node, gchar type);
 extern void user_new_prepare (gchar *group_name);
 extern void group_new_prepare (void);
 void my_xml_set_child_content (xmlNodePtr parent, gchar *name, gchar *val);

@@ -238,7 +238,7 @@ user_set_value_at (ETableModel *etm, int col, int row, const void *val, void *da
 			return;
 	}
 
-	my_xml_set_child_content (node, field, val);
+	my_xml_set_child_content (node, field, (gpointer)val);
 	e_table_change_user ();
 
 	g_free (field);
@@ -267,7 +267,7 @@ group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *d
 			return;
 	}
 
-	my_xml_set_child_content (node, field, val);
+	my_xml_set_child_content (node, field, (gpointer)val);
 	e_table_change_group ();
 	g_free (field);
 
