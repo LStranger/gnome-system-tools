@@ -31,8 +31,7 @@
 #include "tz.h"
 #include "e-map/e-map.h"
 #include "tz-map.h"
-#include "xst-tool.h"
-#include "xst-dialog.h"
+#include "global.h"
 
 extern XstTool *tool;
 
