@@ -26,4 +26,4 @@ EXTRA_DIST = \
 CLEANFILES = $(interfaces)
 
 $(interfaces): %.glade: %.glade.in
-	libglade-convert $< > $@
+	sed 's{../pixmaps/{$(pixmapsdir)/{g' < $< > $@
