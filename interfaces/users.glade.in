@@ -211,7 +211,7 @@
 
 		  <widget>
 		    <class>GtkButton</class>
-		    <name>new_user</name>
+		    <name>user_new</name>
 		    <can_default>True</can_default>
 		    <can_focus>True</can_focus>
 		    <signal>
@@ -528,7 +528,7 @@
 
 		<widget>
 		  <class>GtkButton</class>
-		  <name>button13</name>
+		  <name>group_new</name>
 		  <can_default>True</can_default>
 		  <can_focus>True</can_focus>
 		  <label>New Group...</label>
@@ -539,6 +539,11 @@
 		  <name>group_delete</name>
 		  <can_default>True</can_default>
 		  <can_focus>True</can_focus>
+		  <signal>
+		    <name>clicked</name>
+		    <handler>on_group_delete_clicked</handler>
+		    <last_modification_time>Thu, 26 Oct 2000 12:02:06 GMT</last_modification_time>
+		  </signal>
 		  <label>Delete</label>
 		</widget>
 	      </widget>
@@ -1484,6 +1489,11 @@
 		<widget>
 		  <class>GtkList</class>
 		  <name>group_settings_all</name>
+		  <signal>
+		    <name>selection_changed</name>
+		    <handler>on_group_settings_all_selection_changed</handler>
+		    <last_modification_time>Thu, 26 Oct 2000 13:38:16 GMT</last_modification_time>
+		  </signal>
 		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 		</widget>
 	      </widget>
@@ -1526,6 +1536,11 @@
 		<widget>
 		  <class>GtkList</class>
 		  <name>group_settings_members</name>
+		  <signal>
+		    <name>selection_changed</name>
+		    <handler>on_group_settings_members_selection_changed</handler>
+		    <last_modification_time>Thu, 26 Oct 2000 13:38:26 GMT</last_modification_time>
+		  </signal>
 		  <selection_mode>GTK_SELECTION_SINGLE</selection_mode>
 		</widget>
 	      </widget>
@@ -1564,7 +1579,13 @@
 	      <widget>
 		<class>GtkButton</class>
 		<name>group_settings_add</name>
+		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_group_settings_add_clicked</handler>
+		  <last_modification_time>Thu, 26 Oct 2000 12:38:49 GMT</last_modification_time>
+		</signal>
 		<label>Add -&gt;</label>
 		<child>
 		  <padding>0</padding>
@@ -1576,7 +1597,13 @@
 	      <widget>
 		<class>GtkButton</class>
 		<name>group_settings_remove</name>
+		<sensitive>False</sensitive>
 		<can_focus>True</can_focus>
+		<signal>
+		  <name>clicked</name>
+		  <handler>on_group_settings_remove_clicked</handler>
+		  <last_modification_time>Thu, 26 Oct 2000 12:38:59 GMT</last_modification_time>
+		</signal>
 		<label>Remove &lt;-</label>
 		<child>
 		  <padding>0</padding>
