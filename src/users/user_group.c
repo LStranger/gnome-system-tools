@@ -718,3 +718,111 @@ get_group_by_data (gchar *field, gchar *fdata, gchar *data)
 	return NULL;
 }
 
+int
+basic_user_count (xmlNodePtr parent)
+{
+	xmlNodePtr node, u;
+	gint ret = 0;
+	gint uid;
+
+	g_return_val_if_fail (parent != NULL, 0);
+
+	for (node = parent->childs; node;)
+	{
+		u = xml_element_find_first (node, "uid");
+		node = node->next;
+
+		if (!u)
+			continue;
+
+		uid = atoi (xml_element_get_content (u));
+		if (uid >= logindefs.new_user_min_id && uid <= logindefs.new_user_max_id)
+			ret++;
+	}
+
+	return ret;
+}
+
+xmlNodePtr
+basic_user_find_nth (xmlNodePtr parent, int n)
+{
+	xmlNodePtr node, u;
+	gint i = -1;
+	gint uid;
+
+	g_return_val_if_fail (parent != NULL, NULL);
+
+	for (node = parent->childs; node; node = node->next)
+	{
+		if (strcmp ("user", node->name))
+			continue;
+
+		u = xml_element_find_first (node, "uid");
+		if (!u)
+			continue;
+
+		uid = atoi (xml_element_get_content (u));
+		if (uid >= logindefs.new_user_min_id && uid <= logindefs.new_user_max_id)
+			i++;
+
+		if (i == n)
+			break;
+	}
+
+	return node;
+}
+
+int
+basic_group_count (xmlNodePtr parent)
+{
+	xmlNodePtr node, u;
+	gint ret = 0;
+	gint uid;
+
+	g_return_val_if_fail (parent != NULL, 0);
+
+	for (node = parent->childs; node;)
+	{
+		u = xml_element_find_first (node, "gid");
+		node = node->next;
+
+		if (!u)
+			continue;
+
+		uid = atoi (xml_element_get_content (u));
+		if (uid >= logindefs.new_group_min_id && uid <= logindefs.new_group_max_id)
+			ret++;
+	}
+
+	return ret;
+}
+
+xmlNodePtr
+basic_group_find_nth (xmlNodePtr parent, int n)
+{
+	xmlNodePtr node, u;
+	gint i = -1;
+	gint uid;
+
+	g_return_val_if_fail (parent != NULL, NULL);
+
+	for (node = parent->childs; node; node = node->next)
+	{
+		if (strcmp ("group", node->name))
+			continue;
+
+		u = xml_element_find_first (node, "gid");
+		if (!u)
+			continue;
+
+		uid = atoi (xml_element_get_content (u));
+		if (uid >= logindefs.new_group_min_id && uid <= logindefs.new_group_max_id)
+			i++;
+
+		if (i == n)
+			break;
+	}
+
+	return node;
+}
+

@@ -54,7 +54,7 @@
 
 #define GROUP_SPEC "<ETableSpecification> <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> <ETableState> <column source=\"0\"/> <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> </ETableState> </ETableSpecification>"
 
-#define ADV_USER_STATE "<ETableState><column source=\"1\"/><column source=\"0\"/><column source=\"2\"/><column source=\"3\"/><grouping><leaf column=\"1\" ascending=\"true\"/></grouping></ETableState>"
+#define ADV_USER_STATE "<ETableState><column source=\"0\"/><column source=\"1\"/><column source=\"2\"/><column source=\"3\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
 
 #define BASIC_USER_STATE "<ETableState><column source=\"0\"/><grouping><leaf column=\"0\" ascending=\"true\"/></grouping></ETableState>"
 
@@ -82,11 +82,25 @@ col_count (ETableModel *etm, void *data)
 
 /* This function returns the number of rows in our ETableModel. */ 
 static int
-row_count (ETableModel *etm, void *data)
+user_row_count (ETableModel *etm, void *data)
 {
 	xmlNodePtr parent = data;
 
-	return xml_parent_childs (parent);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+		return xml_parent_childs (parent);
+
+	return basic_user_count (parent);
+}
+
+static int
+group_row_count (ETableModel *etm, void *data)
+{
+	xmlNodePtr parent = data;
+
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+		return xml_parent_childs (parent);
+
+	return basic_group_count (parent);
 }
 
 /* This function returns the value at a particular point in our ETableModel. */
@@ -97,7 +111,11 @@ user_value_at (ETableModel *etm, int col, int row, void *data)
 	xmlNodePtr node, name;
 	gchar *field;
 
-	node = xml_element_find_nth (parent, "user", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		node = basic_user_find_nth (parent, row);
+	else
+		node = xml_element_find_nth (parent, "user", row);
+
 	if (!node)
 	{
 		g_warning ("value_at: Can't find %dth node\n", row);
@@ -142,7 +160,11 @@ group_value_at (ETableModel *etm, int col, int row, void *data)
 	xmlNodePtr parent = data;
 	xmlNodePtr node, name;
 
-	node = xml_element_find_nth (parent, "group", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		node = basic_group_find_nth (parent, row);
+	else
+		node = xml_element_find_nth (parent, "group", row);
+
 	if (!node)
 	{
 		g_warning ("value_at: Can't find %dth node\n", row);
@@ -268,7 +290,7 @@ e_table_create (void)
 	}
 
 	e_table_model = e_table_simple_new (col_count,
-                                           row_count,
+                                           user_row_count,
                                            user_value_at,
                                            set_value_at,
                                            is_cell_editable,
@@ -301,7 +323,7 @@ e_table_create (void)
 	}
 
 	e_table_model = e_table_simple_new (col_count,
-                                           row_count,
+                                           group_row_count,
                                            group_value_at,
                                            set_value_at,
                                            is_cell_editable,
@@ -340,7 +362,11 @@ e_table_get_user (gchar *node_name)
 
 	root = E_TABLE_SIMPLE (etm)->data;
 
-	node = xml_element_find_nth (root, "user", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_user_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "user", row);
+
 	if (!node)
 	{
 		g_warning ("e_table_get_char: can't get current user node %s.", node_name);
@@ -365,7 +391,11 @@ e_table_del_user (void)
 
         root = E_TABLE_SIMPLE (etm)->data;
 
-	node = xml_element_find_nth (root, "user", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_user_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "user", row);
+
 	if (!node)
 	{
 	g_warning ("e_table_del: can't get current user node.");
@@ -391,7 +421,11 @@ e_table_get_group (gchar *node_name)
 
 	root = E_TABLE_SIMPLE (etm)->data;
 
-	node = xml_element_find_nth (root, "group", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_group_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "group", row);
+
 	if (!node)
 	{
 		g_warning ("e_table_get_char: can't get current group node %s.", node_name);
@@ -416,7 +450,11 @@ e_table_del_group (void)
 
         root = E_TABLE_SIMPLE (etm)->data;
 
-	node = xml_element_find_nth (root, "group", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_group_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "group", row);
+
 	if (!node)
 	{
 	g_warning ("e_table_del: can't get current group node.");
@@ -469,7 +507,11 @@ e_table_get_group_users (void)
 
 	root = E_TABLE_SIMPLE (etm)->data;
 
-	node = xml_element_find_nth (root, "group", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_group_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "group", row);
+
 	if (!node)
 	{
 		g_warning ("e_table_get_group_users: can't get current group node.");
@@ -501,7 +543,11 @@ e_table_change_user (gchar *field, gchar *val)
 
 	 root = E_TABLE_SIMPLE (etm)->data;
 
-	 node = xml_element_find_nth (root, "user", row);
+	 if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_user_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "user", row);
+
 	 if (!node)
 	 {
 		  g_warning ("e_table_change_user: can't get current user node.");
@@ -534,7 +580,11 @@ e_table_change_group (gchar *field, gchar *val)
 
 	 root = E_TABLE_SIMPLE (etm)->data;
 
-	 node = xml_element_find_nth (root, "group", row);
+	 if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_group_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "group", row);
+
 	 if (!node)
 	 {
 		  g_warning ("e_table_change_group: can't get current group node.");
@@ -597,7 +647,11 @@ e_table_del_group_users (void)
 
 	root = E_TABLE_SIMPLE (etm)->data;
 
-	node = xml_element_find_nth (root, "group", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_group_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "group", row);
+
 	if (!node)
 	{
 		g_warning ("e_table_del_group_users: can't get current group node.");
@@ -628,7 +682,10 @@ e_table_add_group_users (gchar *name)
 
 	root = E_TABLE_SIMPLE (etm)->data;
 
-	node = xml_element_find_nth (root, "group", row);
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+                node = basic_group_find_nth (root, row);
+	else
+		node = xml_element_find_nth (root, "group", row);
 
 	if (!node)
 	{
@@ -674,12 +731,6 @@ e_table_add_group (gchar *new_name)
 	
 	e_table_model_changed (etm); 
 	e_table_model_row_inserted (etm, row);
-
-/*	while (gtk_events_pending ())
-		gtk_main_iteration ();
-
-	e_table_set_cursor_row (table, 32);
-*/
 }
 
 void
@@ -807,11 +858,12 @@ void
 e_table_state (gboolean state)
 {
 	if (state)
-	{
 		e_table_set_state (E_TABLE (user_table), ADV_USER_STATE);
-	}
 			
 	else
 		e_table_set_state (E_TABLE (user_table), BASIC_USER_STATE);
+
+	e_table_model_changed (E_TABLE (user_table)->model);
+	e_table_model_changed (E_TABLE (group_table)->model);
 }
 

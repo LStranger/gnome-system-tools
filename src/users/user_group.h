@@ -24,6 +24,7 @@
 #define __USER_GROUP_H
 
 #include <gnome.h>
+#include <gnome-xml/tree.h>
 
 /* Just as specified in the @login_defs_prop_array in the users-conf backend: */
 
@@ -60,6 +61,11 @@ extern void group_fill_all_users_list (GList *member_rows);
 extern GList *get_group_list (gchar *field, gboolean adv);
 extern GList *get_user_list (gchar *field, gboolean adv);
 extern gchar *get_group_by_data (gchar *field, gchar *fdata, gchar *data);
+
+int basic_user_count (xmlNodePtr parent);
+xmlNodePtr basic_user_find_nth (xmlNodePtr parent, int n);
+int basic_group_count (xmlNodePtr parent);
+xmlNodePtr basic_group_find_nth (xmlNodePtr parent, int n);
 
 
 #endif /* USER_GROUP_H */
