@@ -55,71 +55,101 @@ static void group_fill_all_users_list (xmlNodePtr node, GList *exclude);
 /* Global functions */
 
 void
-option_menu_add_profiles (GtkWidget *menu)
+combo_add_profiles (GtkWidget *combo)
 {
-	GtkWidget *menu_item;
-	GtkWidget *menu_shell = gtk_menu_new ();
-	xmlNodePtr node = get_root_node (NODE_PROFILE);
-	xmlNodePtr default_node;
-	gchar *profile_name;
-	gint i = 0;
-	gint index;
+	xmlNodePtr    root = get_root_node (NODE_PROFILE);
+	xmlNodePtr    node, default_node = NULL;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gchar        *profile_name;
+	gboolean      has_default = FALSE;
+	gint          index = 0;
+	gint          i = 0;
 
-	for (node = gst_xml_element_find_first (node, "profile");
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
+	model = GTK_TREE_MODEL (gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER));
+
+	for (node = gst_xml_element_find_first (root, "profile");
 	     node != NULL;
 	     node = gst_xml_element_find_next (node, "profile"))
 	{
-		profile_name = gst_xml_get_child_content (node, "name");
-
-		if (strcmp (profile_name, "Default") == 0) {
+		if (gst_xml_element_get_boolean (node, "default")) {
 			index = i;
 			default_node = node;
+			has_default  = TRUE;
 		}
-		menu_item = gtk_menu_item_new_with_label (profile_name);
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu_shell), menu_item);
-		g_signal_connect (G_OBJECT (menu_item), "activate", G_CALLBACK (on_user_settings_profile_changed), node);
 
+		profile_name = gst_xml_get_child_content (node, "name");
+
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set    (GTK_LIST_STORE (model), &iter,
+				       0, profile_name,
+				       1, node,
+				       -1);
+		
+		g_free (profile_name);
 		i++;
 	}
 
-	gtk_widget_show_all (menu_shell);
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (menu), menu_shell);
-		     
+	/* this is some kind of transition code,
+	 * because the profiles format has changed */
+	if (!has_default) {
+		index = i = 0;
+
+		for (node = gst_xml_element_find_first (root, "profile");
+		     node;
+		     node = gst_xml_element_find_next (node, "profile"))
+		{
+			profile_name = gst_xml_get_child_content (node, "name");
+			
+			if (strcmp (profile_name, "Default") == 0) {
+				gst_xml_element_set_boolean (node, "default", TRUE);
+				default_node = node;
+				index = i;
+			}
+
+			i++;
+		}
+	}
+		
+	gtk_combo_box_set_model (GTK_COMBO_BOX (combo), model);
+
 	/* we set the option menu to the 'Default' option */
-	gtk_option_menu_set_history (GTK_OPTION_MENU (menu), index);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (combo), index);
 	user_set_profile (default_node);
 }
 
 void
 combo_add_shells (GtkWidget *combo)
 {
-	xmlNodePtr shells = gst_xml_element_find_first (gst_xml_doc_get_root (tool->config), "shelldb");
-	xmlNodePtr node;
-	GList *shell_list = NULL;
+	xmlNodePtr    shells = gst_xml_element_find_first (gst_xml_doc_get_root (tool->config), "shelldb");
+	xmlNodePtr    node;
+	GtkTreeModel *model;
+	gchar        *str;
 
-	g_return_if_fail (combo != NULL);
+	g_return_if_fail (combo  != NULL);
 	g_return_if_fail (shells != NULL);
 	
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+
 	for (node = gst_xml_element_find_first (shells, "shell");
 	     node != NULL;
-	     node = gst_xml_element_find_next (node, "shell"))
-		shell_list = g_list_prepend (shell_list, gst_xml_element_get_content (node));
-
-	shell_list = g_list_sort (shell_list, my_strcmp);
-
-	gtk_combo_set_popdown_strings (GTK_COMBO (combo), shell_list);
-
-	g_list_free (shell_list);
+	     node = gst_xml_element_find_next (node, "shell")) {
+		str = gst_xml_element_get_content (node);
+		gtk_combo_box_append_text (GTK_COMBO_BOX (combo), str);
+	}
 }
 
 void
-option_menu_add_groups (GtkWidget *option_menu, gboolean add_user_group)
+combo_add_groups (GtkWidget *combo, gboolean add_user_group)
 {
-	GtkWidget *menu_shell = gtk_menu_new ();
-	xmlNodePtr groups = get_root_node (NODE_GROUP);
-	GList *element;
+	xmlNodePtr  groups = get_root_node (NODE_GROUP);
+	GList      *element;
 
-	g_return_if_fail (option_menu != NULL);
+	g_return_if_fail (combo != NULL);
 	g_return_if_fail (groups != NULL);
 
         groups_list = get_list_from_node ("name", NODE_GROUP);
@@ -132,15 +162,11 @@ option_menu_add_groups (GtkWidget *option_menu, gboolean add_user_group)
 	groups_list = g_list_sort (groups_list, my_strcmp);
 
 	element = g_list_first (groups_list);
-	do {
-		GtkWidget *menu_item = gtk_menu_item_new_with_label (element->data);
-		gtk_widget_show (menu_item);
 
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu_shell), menu_item);
+	while (element) {
+		gtk_combo_box_append_text (GTK_COMBO_BOX (combo), element->data);
 		element = g_list_next (element);
-	} while (element != NULL);
-
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (option_menu), menu_shell);
+	}
 }
 
 void

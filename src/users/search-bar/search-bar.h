@@ -49,11 +49,9 @@ struct _SearchBar
 	/* item specific fields */
 	GtkWidget *option;
 	GtkWidget *entry;
-	GtkWidget *search_button;
 	GtkWidget *clear_button;
 
 	/* PRIVATE */
-	GtkWidget *option_menu;
 	GtkSizeGroup *size_group;
 
 	int        option_choice;

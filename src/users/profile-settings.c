@@ -41,7 +41,7 @@ ProfileWidget profile_widgets [] = {
 	{ "profile_settings_name",        "name"          },
 	{ "profile_settings_comment",     "comment"       },
 	{ "profile_settings_home",        "home_prefix"   },
-	{ "profile_settings_shell_entry", "shell",        },
+	{ "profile_settings_shell",       "shell",        },
 	{ "profile_settings_group",       "group",        },
 	{ "profile_settings_maxdays",     "pwd_maxdays",  },
 	{ "profile_settings_mindays",     "pwd_mindays",  },
@@ -56,7 +56,8 @@ ProfileWidget profile_widgets [] = {
 void
 profile_settings_clear_dialog ()
 {
-	GtkWidget *widget;
+	GtkWidget     *widget;
+	GtkTreeModel  *model;
 	ProfileWidget *w;
 
 	for (w = profile_widgets; w->name; w++) {
@@ -66,9 +67,10 @@ profile_settings_clear_dialog ()
 			gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), 0);
 		else if (GTK_IS_ENTRY (widget))
 			gtk_entry_set_text (GTK_ENTRY (widget), "");
-		else if (GTK_IS_OPTION_MENU (widget))
-			gtk_option_menu_remove_menu (GTK_OPTION_MENU (widget));
-		else
+		else if (GTK_IS_COMBO_BOX (widget)) {
+			model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+			gtk_list_store_clear (GTK_LIST_STORE (model));
+		} else
 			g_warning ("Should not be here");
 	}
 }
@@ -76,8 +78,11 @@ profile_settings_clear_dialog ()
 void
 profile_settings_save_data (xmlNodePtr node)
 {
-	GtkWidget *widget;
+	GtkWidget     *widget;
+	GtkTreeModel  *model;
+	GtkTreeIter    iter;
 	ProfileWidget *w;
+	gchar         *str;
 
 	for (w = profile_widgets; w->name; w++) {
 		widget = gst_dialog_get_widget (tool->main_dialog, w->name);
@@ -88,10 +93,13 @@ profile_settings_save_data (xmlNodePtr node)
 							  g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (widget))));
 		} else if (GTK_IS_ENTRY (widget)) {
 			gst_xml_element_add_with_content (node, w->xml_tag, gtk_entry_get_text (GTK_ENTRY (widget)));
-		} else if (GTK_IS_OPTION_MENU (widget)) {
-			gst_xml_element_add_with_content (node,
-							  w->xml_tag,
-							  g_list_nth_data (groups_list, gtk_option_menu_get_history (GTK_OPTION_MENU (widget))));
+		} else if (GTK_IS_COMBO_BOX (widget)) {
+			model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+
+			if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter)) {
+				gtk_tree_model_get (model, &iter, 0, &str, -1);
+				gst_xml_element_add_with_content (node, w->xml_tag, str);
+			}
 		} else {
 			g_warning ("Should not be here");
 		}
@@ -118,13 +126,13 @@ profile_settings_check (void)
 	if (strlen (value) <= 0)
 		return _("The profile must have a default home");
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
-	value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
+	widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell");
+	value = (gchar *) gtk_entry_get_text (GTK_ENTRY (GTK_BIN (widget)->child));
 	if (strlen (value) <= 0)
 		return _("The profile must have a default shell");
 
-	widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell_entry");
-	value = (gchar *) gtk_entry_get_text (GTK_ENTRY (widget));
+	widget = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell");
+	value = (gchar *) gtk_entry_get_text (GTK_ENTRY (GTK_BIN (widget)->child));
 	if (strlen (value) <= 0)
 		return _("The profile must have a default shell");
 	   
@@ -151,14 +159,17 @@ profile_settings_set_data (xmlNodePtr node)
 			gtk_spin_button_set_value (GTK_SPIN_BUTTON (widget), g_ascii_strtod (value, NULL));
 		else if (GTK_IS_ENTRY (widget))
 			gtk_entry_set_text (GTK_ENTRY (widget), value);
-		else if (GTK_IS_OPTION_MENU (widget)) {
+		else if (GTK_IS_COMBO_BOX_ENTRY (widget))
+			gtk_entry_set_text (GTK_ENTRY (GTK_BIN (widget)->child), value);
+		else if (GTK_IS_COMBO_BOX (widget)) {
 			element = g_list_first (groups_list);
 
 			while ((element != NULL) && (strcmp (element->data, value) != 0)) {
 				element = element->next;
 				counter++;
 			}
-			gtk_option_menu_set_history (GTK_OPTION_MENU (widget), counter);
+
+			gtk_combo_box_set_active (GTK_COMBO_BOX (widget), counter);
 		} else {
 			g_warning ("Should not be here");
 		}

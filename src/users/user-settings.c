@@ -151,6 +151,8 @@ user_set_profile (xmlNodePtr profile)
 	gchar *buf;
 	ug_data *ud;
 	GtkWidget *widget = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
+
+	g_return_if_fail (profile != NULL);
 	
 	ud = g_object_get_data (G_OBJECT (widget), "data");
 
@@ -159,39 +161,39 @@ user_set_profile (xmlNodePtr profile)
 	g_free (buf);
 
 	buf = gst_xml_get_child_content (profile, "shell");
-	gtk_entry_set_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "user_settings_shell_entry")), buf);
+	gtk_entry_set_text (GTK_ENTRY (GTK_BIN (gst_dialog_get_widget (tool->main_dialog, "user_settings_shell"))->child), buf);
 	g_free (buf);
 
-	/* There are OS (like FreeBSD) that don't have these parameters, hide them if the tags don't exist*/
+	/* FIXME: this is hidden, will this section be ever necessary? */
+	gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "user_optional_settings"));
+
+/*
 	buf = gst_xml_get_child_content (profile, "pwd_maxdays");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_max")),
+				   g_strtod (buf, NULL));
+	g_free (buf);
 
-	if (!buf)
-		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "user_optional_settings"));
-	else {
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_max")),
-					   g_strtod (buf, NULL));
-		g_free (buf);
+	buf = gst_xml_get_child_content (profile, "pwd_mindays");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_min")),
+				   g_strtod (buf, NULL));
+	g_free (buf);
 
-		buf = gst_xml_get_child_content (profile, "pwd_mindays");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_min")),
-					   g_strtod (buf, NULL));
-		g_free (buf);
-
-		buf = gst_xml_get_child_content (profile, "pwd_warndays");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_days")),
-					   g_strtod (buf, NULL));
-		g_free (buf);
-	}
+	buf = gst_xml_get_child_content (profile, "pwd_warndays");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_days")),
+				   g_strtod (buf, NULL));
+	g_free (buf);
+*/
 
 	value = gst_xml_get_child_content (profile, "group");
 	element = g_list_first (groups_list);
 
-	while ((element != NULL) && (strcmp (element->data, value) != 0))
-	{
+	while ((element != NULL) && (strcmp (element->data, value) != 0)) {
 		element = element->next;
 		counter++;
 	}
-	gtk_option_menu_set_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, "user_settings_group")), counter);
+
+	gtk_combo_box_set_active (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, "user_settings_group")),
+				  counter);
 
 	/* Gets a new uid */
 	buf = (gchar *) find_new_id (ud->node, profile);
@@ -225,9 +227,9 @@ user_new_prepare (ug_data *ud)
 	populate_gtk_tree_list (GTK_TREE_VIEW (user_settings_all), user_settings_all_list);
 	
 	/* Fill menus */
-	option_menu_add_groups (gst_dialog_get_widget (tool->main_dialog, "user_settings_group"), TRUE);
-	combo_add_shells (gst_dialog_get_widget (tool->main_dialog, "user_settings_shell"));
-	option_menu_add_profiles (gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu"));
+	combo_add_groups   (gst_dialog_get_widget (tool->main_dialog, "user_settings_group"), TRUE);
+	combo_add_shells   (gst_dialog_get_widget (tool->main_dialog, "user_settings_shell"));
+	combo_add_profiles (gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu"));
 
 #ifdef HAVE_LIBCRACK
 	/* If we have libcrack, password quality check is enabled */
@@ -296,7 +298,8 @@ user_settings_dialog_close (void)
 	gtk_widget_hide (widget);
 
 	/* Clear groups option menu */
-	gtk_option_menu_remove_menu (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, "user_settings_group")));
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, "user_settings_group")));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
 }
 
 static gboolean
@@ -618,7 +621,7 @@ user_update (ug_data *ud)
 	}
 	
 	/* check user shell */
-	data->shell = (gchar *) gtk_entry_get_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, "user_settings_shell_entry")));
+	data->shell = (gchar *) gtk_entry_get_text (GTK_ENTRY (GTK_BIN (gst_dialog_get_widget (tool->main_dialog, "user_settings_shell"))->child));
 	if (!is_shell_valid (data->shell)) {
 		return FALSE;
 	}
@@ -653,14 +656,13 @@ user_update (ug_data *ud)
 	}
 
 	/* get user main group GID*/
-	data->group = g_list_nth_data (groups_list, gtk_option_menu_get_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, "user_settings_group"))));
+	data->group = g_list_nth_data (groups_list, gtk_combo_box_get_active (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, "user_settings_group"))));
 	if (strcmp (data->group, "$user") == 0)
 		data->group = data->login;
 	
 	data->gid = group_check (ud->node, data->group);
-	if (!data->gid) {
+	if (!data->gid)
 		return FALSE;
-	}
 
 	g_list_free (data->extra_groups);
 	data->extra_groups = get_gtk_tree_list_items (GTK_TREE_VIEW (user_settings_members));
@@ -769,23 +771,22 @@ user_settings_dialog_prepare (ug_data *ud)
 	/* Set shells combo */
 	combo_add_shells (combo);
 	txt = gst_xml_get_child_content (ud->node, "shell");
-	w0 = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell_entry");
-	gst_ui_entry_set_text (w0, txt);
+	w0 = gst_dialog_get_widget (tool->main_dialog, "user_settings_shell");
+	gtk_entry_set_text (GTK_ENTRY (GTK_BIN (w0)->child), txt);
 	g_free (txt);
 	
 	/* set main group option menu */
-	option_menu_add_groups (option_menu, FALSE);
+	combo_add_groups (option_menu, FALSE);
 	txt = get_group_name (gst_xml_get_child_content (ud->node, "gid"));
 
 	if (txt != NULL) {
 		element = g_list_first (groups_list);
 
-		while ((element != NULL) && (strcmp (element->data, txt) != 0))
-		{
+		while ((element != NULL) && (strcmp (element->data, txt) != 0))	{
 			element = element->next;
 			counter++;
 		}
-		gtk_option_menu_set_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, "user_settings_group")), counter);
+		gtk_combo_box_set_active (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, "user_settings_group")), counter);
 		g_free (txt);
 	}
 	
@@ -800,30 +801,25 @@ user_settings_dialog_prepare (ug_data *ud)
 	/* Set password */
 	user_settings_dialog_prepare_password ();
 
-	/* these values don't exist in some OS (say FreeBSD) so we hide them */
-	txt = gst_xml_get_child_content (ud->node, "passwd_max_life");
+	/* FIXME: This is hidden, will this section be ever necessary? */
+	w0 = gst_dialog_get_widget (tool->main_dialog, "user_optional_settings");
+	gtk_widget_hide (w0);
 
-	if (!txt) {
-		w0 = gst_dialog_get_widget (tool->main_dialog, "user_optional_settings");
-		gtk_widget_hide (w0);
-	} else {
-		/* Set maxdays */
-		w0 = gst_dialog_get_widget (tool->main_dialog, "user_passwd_max");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
-		g_free (txt);
+/*
+	w0 = gst_dialog_get_widget (tool->main_dialog, "user_passwd_max");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
+	g_free (txt);
 	
-		/* Set mindays */
-		txt = gst_xml_get_child_content (ud->node, "passwd_min_life");
-		w0 = gst_dialog_get_widget (tool->main_dialog, "user_passwd_min");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
-		g_free (txt);
+	txt = gst_xml_get_child_content (ud->node, "passwd_min_life");
+	w0 = gst_dialog_get_widget (tool->main_dialog, "user_passwd_min");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
+	g_free (txt);
 	
-		/* Set warndays */
-		txt = gst_xml_get_child_content (ud->node, "passwd_exp_warn");
-		w0 = gst_dialog_get_widget (tool->main_dialog, "user_passwd_days");
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
-		g_free (txt);
-	}
+	txt = gst_xml_get_child_content (ud->node, "passwd_exp_warn");
+	w0 = gst_dialog_get_widget (tool->main_dialog, "user_passwd_days");
+	gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0), g_strtod (txt, NULL));
+	g_free (txt);
+*/
 	
 	/* Set window title */
 	w0 = gst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");

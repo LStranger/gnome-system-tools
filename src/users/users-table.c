@@ -100,8 +100,8 @@ void
 create_users_table (void)
 {
 	GtkTreeSelection *selection;
-	GtkTreeModel *model;
-	GtkItemFactory *item_factory;
+	GtkTreeModel     *model;
+	GtkWidget        *popup;
 	
 	model = create_users_model ();
 	
@@ -115,14 +115,15 @@ create_users_table (void)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (users_table));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
-	item_factory = popup_item_factory_create (users_table);
+	popup = popup_menu_create (users_table);
 
 	g_signal_connect (G_OBJECT (selection), "changed",
 			  G_CALLBACK (on_table_clicked),
 			  (gpointer) users_table);
 	g_signal_connect (G_OBJECT (users_table), "button_press_event",
-			  G_CALLBACK (on_table_button_press),
-			  (gpointer) item_factory);
+			  G_CALLBACK (on_table_button_press), popup);
+	g_signal_connect (G_OBJECT (users_table), "popup-menu",
+			  G_CALLBACK (on_table_popup_menu), popup);
 }
 
 static char*

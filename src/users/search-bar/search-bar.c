@@ -33,7 +33,6 @@
 
 enum {
 	QUERY_CHANGED,
-
 	LAST_SIGNAL
 };
 
@@ -54,8 +53,6 @@ static void
 emit_query_changed (SearchBar *sb)
 {
 	gtk_signal_emit(GTK_OBJECT (sb), sb_signals [QUERY_CHANGED]);
-
-	gtk_widget_set_sensitive (sb->search_button, FALSE);
 }
 
 
@@ -65,18 +62,13 @@ static void
 option_activated_cb (GtkWidget *widget,
 		     SearchBar *sb)
 {
-	int id;
-
-	id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "SbChoiceId"));
-
-	sb->option_choice = id;
-	
-	gtk_widget_set_sensitive (sb->search_button, TRUE);
+	sb->option_choice = gtk_combo_box_get_active (GTK_COMBO_BOX (widget));
+	emit_query_changed (sb);
 }
 
 static void
 entry_activated_cb (GtkWidget *widget,
-		     SearchBar *sb)
+		    SearchBar *sb)
 {
 	emit_query_changed (sb);
 }
@@ -85,12 +77,17 @@ static void
 entry_changed_cb (GtkWidget *widget,
 		  SearchBar *sb)
 {
-	gtk_widget_set_sensitive (sb->search_button, TRUE);
+	emit_query_changed (sb);
+
+	if (strlen (gtk_entry_get_text (GTK_ENTRY (widget))) > 0)
+		gtk_widget_set_sensitive (sb->clear_button, TRUE);
+	else
+		gtk_widget_set_sensitive (sb->clear_button, FALSE);
 }
 
 static void
 clear_button_clicked_cb (GtkWidget *widget,
-			  SearchBar *sb)
+			 SearchBar *sb)
 {
 	gchar *text = (gchar *) gtk_entry_get_text (GTK_ENTRY (sb->entry));
 	
@@ -100,47 +97,48 @@ clear_button_clicked_cb (GtkWidget *widget,
 		emit_query_changed (sb);
 	}
 	
-	gtk_widget_set_sensitive (sb->search_button, FALSE);
-	gtk_option_menu_set_history (GTK_OPTION_MENU (sb->option), 0);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (sb->option), 0);
 }
 
 /* Widgetry creation.  */
 static void
 set_option(SearchBar *sb, SearchBarItem *items)
 {
-	GtkWidget *menu;
-	GtkRequisition option_requisition;
+	GtkWidget       *menu;
+	GtkTreeModel    *model;
+	GtkTreeIter      iter;
+	GtkCellRenderer *renderer;
 	int i;
 
-	if (sb->option) {
-		gtk_widget_destroy(sb->option_menu);
-	} else {
-		sb->option = gtk_option_menu_new();
-		gtk_widget_show(sb->option);
+	if (!sb->option) {
+		model = GTK_TREE_MODEL (gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_INT));
+		renderer = gtk_cell_renderer_text_new ();
+		
+		sb->option = gtk_combo_box_new_with_model (model);
+		g_object_unref (model);
+
+		gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (sb->option),
+					    renderer, TRUE);
+		gtk_cell_layout_add_attribute (GTK_CELL_LAYOUT (sb->option),
+					       renderer,
+					       "text", 0);
 		gtk_box_pack_start(GTK_BOX(sb), sb->option, FALSE, FALSE, 0);
 	}
 
-	sb->option_menu = menu = gtk_menu_new ();
 	for (i = 0; items[i].id != -1; i++) {
-		GtkWidget *item;
-
-		if (items[i].text)
-			item = gtk_menu_item_new_with_label (_(items[i].text));
-		else
-			item = gtk_menu_item_new();
-
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);
-
-		g_object_set_data (G_OBJECT (item), "SbChoiceId", GINT_TO_POINTER(items[i].id));
-
-		g_signal_connect (G_OBJECT (item), "activate",
-				  G_CALLBACK (option_activated_cb),
-				  sb);
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model),
+				    &iter,
+				    0, _(items[i].text),
+				    1, items[i].id,
+				    -1);
 	}
-	gtk_widget_show_all (menu);
 
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (sb->option), menu);
-	gtk_option_menu_set_history (GTK_OPTION_MENU (sb->option), 0);
+	gtk_widget_show(sb->option);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (sb->option), 0);
+
+	g_signal_connect (G_OBJECT (sb->option), "changed",
+			  G_CALLBACK (option_activated_cb), sb);
 
 	gtk_widget_set_sensitive (sb->option, TRUE);
 	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->option);
@@ -159,19 +157,7 @@ add_entry (SearchBar *sb)
 	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->entry);
 }
 
-static void
-add_spacer (SearchBar *sb)
-{
-	GtkWidget *spacer;
-
-	spacer = gtk_drawing_area_new();
-	gtk_widget_show(spacer);
-	gtk_box_pack_start(GTK_BOX(sb), spacer, FALSE, FALSE, 0);
-
-	gtk_widget_set_usize(spacer, 19, 1);
-	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), spacer);
-}
-
+/*
 static void
 add_search_button (SearchBar *sb)
 {
@@ -180,7 +166,7 @@ add_search_button (SearchBar *sb)
 
 	/* default i18nized stock button would certainly conflict with other
 	buttons so we create our own*/
-	sb->search_button = gtk_button_new ();
+/*	sb->search_button = gtk_button_new ();
 
 	search_button_hbox_align = gtk_alignment_new (0.50, 0.50, 1.0, 1.0);
 	gtk_container_add (GTK_CONTAINER (GTK_BUTTON (sb->search_button)),
@@ -209,6 +195,7 @@ add_search_button (SearchBar *sb)
 	gtk_box_pack_start (GTK_BOX (sb), sb->search_button, FALSE, FALSE, 0);
 	gtk_size_group_add_widget (GTK_SIZE_GROUP (sb->size_group), sb->search_button);
 }
+*/
 
 static void
 add_clear_button (SearchBar *sb)
@@ -248,26 +235,18 @@ add_clear_button (SearchBar *sb)
 }
 
 static int
-find_id(GtkWidget *menu, int idin, const char *type, GtkWidget **widget)
+find_id (GtkWidget *menu)
 {
-	GList *l = GTK_MENU_SHELL(menu)->children;
-	int row = -1, i = 0, id;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gint          id = 0;
 
-	if (widget)
-		*widget = NULL;
-	while (l) {
-		id = GPOINTER_TO_INT(g_object_get_data(G_OBJECT (l->data), type));
-/*		printf("comparing id %d to query %d\n", id, idin);*/
-		if (id == idin) {
-			row = i;
-			if (widget)
-				*widget = l->data;
-			break;
-		}
-		i++;
-		l = l->next;
-	}
-	return row;
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (menu));
+
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (menu), &iter))
+		gtk_tree_model_get (model, &iter, 1, &iter, -1);
+
+	return id;
 }
 
 /* GObject methods.  */
@@ -301,10 +280,11 @@ impl_set_property (GObject *object, guint prop_id, const GValue *value, GParamSp
 	switch (prop_id) {
 	case ARG_OPTION_CHOICE:
 		sb->option_choice = g_value_get_uint (value);
-		row = find_id (sb->option_menu, sb->option_choice, "SbChoiceId", NULL);
+		row = find_id (sb->option);
+
 		if (row == -1)
 			row = 0;
-		gtk_option_menu_set_history (GTK_OPTION_MENU (sb->option), row);
+		gtk_combo_box_set_active (GTK_COMBO_BOX (sb->option), row);
 		emit_query_changed (sb);
 		break;
 
@@ -373,7 +353,6 @@ init (SearchBar *sb)
 {
 	sb->option        = NULL;
 	sb->entry         = NULL;
-	sb->search_button = NULL;
 	sb->clear_button  = NULL;
 
 	sb->option_choice = 0;
@@ -396,10 +375,9 @@ search_bar_construct (SearchBar *search_bar,
 
 	add_entry (search_bar);
 
-	add_search_button (search_bar);
 	add_clear_button (search_bar);
 
-//	add_spacer (search_bar);
+	gtk_widget_set_sensitive (search_bar->clear_button, FALSE);
 }
 
 void

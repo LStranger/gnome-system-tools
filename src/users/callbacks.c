@@ -67,15 +67,6 @@ on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
 }
 
 /* Common stuff to users and groups tables */
-
-void
-counter (GtkTreeModel *model, GtkTreePath *path, GtkTreeIter *iter, gpointer data)
-{
-	int *cont = (int *) data;
-
-	(*cont) ++;
-}
-
 void
 on_table_clicked (GtkTreeSelection *selection, gpointer data)
 {
@@ -84,10 +75,7 @@ on_table_clicked (GtkTreeSelection *selection, gpointer data)
 	gboolean active;
 
 	treeview = (GtkTreeView *) data;
-	cont = 0;
-
-	gtk_tree_selection_selected_foreach (selection, counter , &cont);
-
+	cont = gtk_tree_selection_count_selected_rows (selection);
 	active = (cont > 0);
    
 	if (users_table == GTK_WIDGET (treeview))
@@ -108,17 +96,43 @@ on_table_clicked (GtkTreeSelection *selection, gpointer data)
 	}
 }
 
+static void
+do_popup_menu (GtkTreeView *treeview, GtkWidget *popup, GdkEventButton *event)
+{
+	GtkTreeSelection *selection;
+	GtkUIManager     *ui_manager;
+	gint              cont, button, event_time;
+
+	if (event) {
+		button     = event->button;
+		event_time = event->time;
+	} else {
+		button = 0;
+		event_time = gtk_get_current_event_time ();
+	}
+
+	selection = gtk_tree_view_get_selection (treeview);
+	cont = gtk_tree_selection_count_selected_rows (selection);
+	ui_manager = g_object_get_data (G_OBJECT (treeview), "ui-manager");
+
+	gtk_widget_set_sensitive (gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Properties"),
+				  cont == 1);
+	gtk_widget_set_sensitive (gtk_ui_manager_get_widget (ui_manager, "/MainMenu/Delete"),
+				  cont > 0);
+
+	gtk_menu_popup (GTK_MENU (popup), NULL, NULL, NULL, NULL,
+			button, event_time);
+}
+
 gboolean
 on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gdata)
 {
-	GtkTreePath *path;
-	GtkItemFactory *factory;
-	GtkTreeSelection* selection;
-	gint cont;
+	GtkTreePath      *path;
+	GtkTreeSelection *selection;
+	GtkWidget        *popup;
+	gint              cont;
 
-	factory = (GtkItemFactory *) gdata;
-
-	cont = 0;
+	popup = (GtkWidget *) gdata;
 
 	if (event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS) {
 		if (GTK_WIDGET (treeview) == groups_table)
@@ -127,41 +141,36 @@ on_table_button_press (GtkTreeView *treeview, GdkEventButton *event, gpointer gd
 			on_user_settings_clicked (NULL, NULL);
 	}
 	
-	selection = gtk_tree_view_get_selection (treeview);
-	gtk_tree_selection_selected_foreach (selection, counter , &cont);
-	
 	if (event->button == 3)	{
 		gtk_widget_grab_focus (GTK_WIDGET (treeview));
+		selection = gtk_tree_view_get_selection (treeview);
+		cont = gtk_tree_selection_count_selected_rows (selection);
+		
 		if (gtk_tree_view_get_path_at_pos (treeview, event->x, event->y, &path, NULL, NULL, NULL)) {
 			if (cont < 1) {
 				gtk_tree_selection_unselect_all (selection);
 				gtk_tree_selection_select_path (selection, path);
 			}
 
-			if (cont > 1) {
-				gtk_widget_set_sensitive (
-					gtk_item_factory_get_widget_by_action (factory,
-									       POPUP_SETTINGS),
-					FALSE);
-			} else {
-				gtk_widget_set_sensitive (
-					gtk_item_factory_get_widget_by_action (factory,
-									       POPUP_SETTINGS),
-					TRUE);
-			}
-
 			gtk_tree_path_free (path);
-			
-			gtk_item_factory_popup (factory, event->x_root, event->y_root,
-						event->button, event->time);
+
+			do_popup_menu (treeview, popup, event);
 		}
+
+		return TRUE;
 	}
 	
 	return FALSE;
 }
 
-/* Users Tab */
+gboolean
+on_table_popup_menu (GtkTreeView *treeview, GtkWidget *popup)
+{
+	do_popup_menu (treeview, popup, NULL);
+	return TRUE;
+}
 
+/* Users Tab */
 void
 on_user_new_clicked (GtkButton *button, gpointer user_data)
 {
@@ -255,14 +264,16 @@ on_profile_settings_dialog_clicked (GtkButton *button, gpointer user_data)
 void
 on_profile_settings_users_dialog_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *profile_window = gst_dialog_get_widget (tool->main_dialog, "profiles_dialog");
-	GtkWidget *option_menu = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
+	GtkWidget    *profile_window = gst_dialog_get_widget (tool->main_dialog, "profiles_dialog");
+	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
+	GtkTreeModel *model;
 	
 	gtk_dialog_run (GTK_DIALOG (profile_window));
 	gtk_widget_hide (profile_window);
 
-	gtk_option_menu_remove_menu (GTK_OPTION_MENU (option_menu));
-	option_menu_add_profiles (option_menu);
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+	gtk_list_store_clear (GTK_LIST_STORE (model));
+	combo_add_profiles (combo);
 }
 
 /* Groups tab */
@@ -335,7 +346,7 @@ on_group_delete_clicked (GtkButton *button, gpointer user_data)
 }
 
 void
-on_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_popup_add_activate (GtkAction *action, gpointer callback_data)
 {
 	if (GTK_WIDGET (callback_data) == groups_table)
 		on_group_new_clicked (callback_data, NULL);
@@ -344,7 +355,7 @@ on_popup_add_activate (gpointer callback_data, guint action, GtkWidget *widget)
 }
 
 void
-on_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_popup_settings_activate (GtkAction *action, gpointer callback_data)
 {
 	if (GTK_WIDGET (callback_data) == groups_table)
 		on_group_settings_clicked (callback_data, NULL);
@@ -353,7 +364,7 @@ on_popup_settings_activate (gpointer callback_data, guint action, GtkWidget *wid
 }
 
 void
-on_popup_delete_activate (gpointer callback_data, guint action, GtkWidget *widget)
+on_popup_delete_activate (GtkAction *action, gpointer callback_data)
 {
 	if (GTK_WIDGET (callback_data) == groups_table)
 		on_group_delete_clicked (callback_data, NULL);
@@ -505,9 +516,15 @@ on_user_settings_passwd_toggled (GtkToggleButton *toggle, gpointer data)
 void
 on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
 {
-	xmlNodePtr profile = data;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	xmlNodePtr    profile;
 
-	user_set_profile (profile);
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter)) {
+		model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+		gtk_tree_model_get (model, &iter, 1, &profile, -1);
+		user_set_profile (profile);
+	}
 }
 
 /* Group settings callbacks */
@@ -602,7 +619,7 @@ on_profile_new_clicked (GtkButton *button, gpointer data)
 	GtkWidget *shells_combo = gst_dialog_get_widget (tool->main_dialog, "profile_settings_shell");
 
 	combo_add_shells (shells_combo);
-	option_menu_add_groups (groups_option_menu, TRUE);
+	combo_add_groups (groups_option_menu, TRUE);
 
 	gtk_window_set_title (GTK_WINDOW (dialog), _("Create New profile"));
 
@@ -632,7 +649,7 @@ on_profile_settings_clicked (GtkButton *button, gpointer data)
 	gtk_tree_model_get (model, &iter, COL_PROFILE_POINTER, &node, -1);
 
 	combo_add_shells (shells_combo);
-	option_menu_add_groups (groups_option_menu, TRUE);
+	combo_add_groups (groups_option_menu, TRUE);
 	profile_settings_set_data (node);
 
 	g_object_set_data (G_OBJECT (dialog), "data", node);

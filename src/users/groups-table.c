@@ -87,9 +87,9 @@ create_groups_model (void)
 void
 create_groups_table (void)
 {
-	GtkTreeModel *model;
+	GtkTreeModel     *model;
 	GtkTreeSelection *selection;
-	GtkItemFactory *item_factory;
+	GtkWidget        *popup;
 	
 	model = create_groups_model ();
 	
@@ -103,14 +103,15 @@ create_groups_table (void)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (groups_table));
 	gtk_tree_selection_set_mode (selection, GTK_SELECTION_MULTIPLE);
 
-	item_factory = popup_item_factory_create (groups_table);
+	popup = popup_menu_create (groups_table);
 	
 	g_signal_connect (G_OBJECT (selection), "changed",
 			  G_CALLBACK (on_table_clicked),
 			  (gpointer) groups_table);
 	g_signal_connect (G_OBJECT (groups_table), "button_press_event",
-			  G_CALLBACK (on_table_button_press),
-			  (gpointer) item_factory);
+			  G_CALLBACK (on_table_button_press), popup);
+	g_signal_connect (G_OBJECT (groups_table), "popup-menu",
+			  G_CALLBACK (on_table_popup_menu), popup);
 }
 
 static char*

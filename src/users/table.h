@@ -24,26 +24,11 @@
 #ifndef __TABLE_H
 #define __TABLE_H
 
-#include <gnome.h>
-
-#include "user_group.h"
-#include "callbacks.h"
-
-#define COLOR_NORMAL "black"
-
-enum {
-	POPUP_NONE,
-	POPUP_ADD,
-	POPUP_SEPARATOR,
-	POPUP_SETTINGS,
-	POPUP_DELETE
-};
-
 /* User and group lists creation function */
 void                    create_gtk_tree_list		(GtkWidget*, GtkTargetEntry);
 void			populate_gtk_tree_list		(GtkTreeView*, GList*);
 GList*                  get_gtk_tree_list_items         (GtkTreeView*);
-GtkItemFactory *        popup_item_factory_create       (GtkWidget *widget);
+GtkWidget*              popup_menu_create               (GtkWidget*);
 
 /* User and group tables manipulation functions */
 void			create_tables			(void);

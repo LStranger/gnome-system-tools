@@ -25,7 +25,6 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
 #include <gtk/gtk.h>
 
 #include "gst.h"
@@ -43,41 +42,43 @@ extern GstTool *tool;
 extern GtkWidget *users_table;
 extern GtkWidget *groups_table;
 
-GtkItemFactoryEntry users_popup_menu_items[] = {
-	{ N_("/_Add User ..."), NULL, G_CALLBACK (on_popup_add_activate), POPUP_ADD, "<StockItem>", GTK_STOCK_ADD },
-	{ "/", NULL, NULL, POPUP_SEPARATOR, "<Separator>", NULL },
-	{ N_("/_Properties"), NULL, G_CALLBACK (on_popup_settings_activate), POPUP_SETTINGS, "<StockItem>", GTK_STOCK_PROPERTIES },
-	{ N_("/_Delete"), NULL, G_CALLBACK (on_popup_delete_activate), POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
+GtkActionEntry popup_menu_items [] = {
+	{ "Add",         GTK_STOCK_ADD,        N_("_Add"),        NULL, NULL, G_CALLBACK (on_popup_add_activate)      },
+	{ "Properties",  GTK_STOCK_PROPERTIES, N_("_Properties"), NULL, NULL, G_CALLBACK (on_popup_settings_activate) },
+	{ "Delete",      GTK_STOCK_DELETE,     N_("_Delete"),     NULL, NULL, G_CALLBACK (on_popup_delete_activate)   }
 };
 
-GtkItemFactoryEntry groups_popup_menu_items[] = {
-	{ N_("/_Add group ..."), NULL, G_CALLBACK (on_popup_add_activate), POPUP_ADD, "<StockItem>", GTK_STOCK_ADD },
-	{ "/", NULL, NULL, POPUP_SEPARATOR, "<Separator>", NULL },
-	{ N_("/_Properties"), NULL, G_CALLBACK (on_popup_settings_activate), POPUP_SETTINGS, "<StockItem>", GTK_STOCK_PROPERTIES },
-	{ N_("/_Delete"), NULL, G_CALLBACK (on_popup_delete_activate), POPUP_DELETE, "<StockItem>", GTK_STOCK_DELETE },
-};
+const gchar *ui_description =
+	"<ui>"
+	"  <popup name='MainMenu'>"
+	"    <menuitem action='Add'/>"
+	"    <separator/>"
+	"    <menuitem action='Properties'/>"
+	"    <menuitem action='Delete'/>"
+	"  </popup>"
+	"</ui>";
 
-static gchar *
-item_factory_trans (const char *path, gpointer data)
+GtkWidget*
+popup_menu_create (GtkWidget *widget)
 {
-	return _((gchar*)path);
-}
+	GtkUIManager   *ui_manager;
+	GtkActionGroup *action_group;
+	GtkWidget      *popup;
 
-GtkItemFactory *
-popup_item_factory_create (GtkWidget *widget)
-{
-	GtkItemFactory *item_factory;
+	action_group = gtk_action_group_new ("MenuActions");
+	gtk_action_group_add_actions (action_group, popup_menu_items, G_N_ELEMENTS (popup_menu_items), widget);
 
-	item_factory = gtk_item_factory_new (GTK_TYPE_MENU, "<main>", NULL);
-	gtk_item_factory_set_translate_func (item_factory, item_factory_trans,
-					     NULL, NULL);
-	if (widget == users_table)
-		gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (users_popup_menu_items),
-					       users_popup_menu_items, (gpointer) users_table);
-	else if (widget == groups_table)
-		gtk_item_factory_create_items (item_factory, G_N_ELEMENTS (groups_popup_menu_items),
-					       groups_popup_menu_items, (gpointer) groups_table);
-	return item_factory;
+	ui_manager = gtk_ui_manager_new ();
+	gtk_ui_manager_insert_action_group (ui_manager, action_group, 0);
+
+	if (!gtk_ui_manager_add_ui_from_string (ui_manager, ui_description, -1, NULL))
+		return NULL;
+
+	g_object_set_data (G_OBJECT (widget), "ui-manager", ui_manager);
+	popup = gtk_ui_manager_get_widget (ui_manager, "/MainMenu");
+
+	return popup;
+
 }
 
 void

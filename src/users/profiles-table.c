@@ -25,12 +25,12 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
 #include <gtk/gtk.h>
 
 #include "gst.h"
 #include "table.h"
 #include "profiles-table.h"
+#include "user_group.h"
 #include "callbacks.h"
 
 ProfilesTableConfig profiles_table_config [] = {

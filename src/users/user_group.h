@@ -41,45 +41,37 @@ enum {
 	NODE_PROFILE
 };
 
-typedef struct
-{
+typedef struct {
 	xmlNodePtr node;
 	gboolean is_new;
 	gint table;
 } ug_data;
 
-xmlNodePtr get_root_node (gint tbl);
-xmlNodePtr get_db_node (xmlNodePtr node);
-gchar *my_gst_xml_element_get_content (xmlNodePtr node);
-gboolean check_node_visibility (xmlNodePtr node);
+xmlNodePtr  get_root_node (gint tbl);
+xmlNodePtr  get_db_node (xmlNodePtr node);
+gboolean    check_node_visibility (xmlNodePtr node);
+gchar *     my_gst_xml_element_get_content (xmlNodePtr node);
 
-/*
-gboolean  check_user_root (xmlNodePtr node, const gchar *field, const gchar *value);
-gchar    *check_user_login (xmlNodePtr node, const gchar *login);
-gchar    *check_user_uid (xmlNodePtr node, const gchar *val);
-gchar    *check_user_shell (xmlNodePtr node, const gchar *val);
-*/
-
-gboolean get_min_max (xmlNodePtr db_node, gint *min, gint *max);
-xmlNodePtr get_corresp_field (xmlNodePtr node);
-xmlNodePtr get_node_by_data (xmlNodePtr dbnode, const gchar *field, const gchar *fdata);
-GList *my_g_list_remove_duplicates (GList *list1, GList *list2);
-gchar *find_new_id (xmlNodePtr parent, xmlNodePtr profile);
-gchar *find_new_key (xmlNodePtr parent);
+gboolean    get_min_max (xmlNodePtr db_node, gint *min, gint *max);
+xmlNodePtr  get_corresp_field (xmlNodePtr node);
+xmlNodePtr  get_node_by_data (xmlNodePtr dbnode, const gchar *field, const gchar *fdata);
+GList *     my_g_list_remove_duplicates (GList *list1, GList *list2);
+gchar *     find_new_id (xmlNodePtr parent, xmlNodePtr profile);
+gchar *     find_new_key (xmlNodePtr parent);
 
 /* Helpers */
-gboolean is_valid_name (const gchar*);
-gboolean is_valid_id (const gchar*);
+gboolean    is_valid_name (const gchar*);
+gboolean    is_valid_id (const gchar*);
 
-void user_query_string_set (gchar *str);
-gchar *user_query_string_get (void);
+void        user_query_string_set (gchar *str);
+gchar *     user_query_string_get (void);
 
-gint my_strcmp (gconstpointer, gconstpointer);
+gint        my_strcmp (gconstpointer, gconstpointer);
 
-void		show_error_message	 (gchar*,gchar*, gchar*);
-void            combo_add_shells         (GtkWidget*);
-void            option_menu_add_groups   (GtkWidget*, gboolean);
-void            option_menu_add_profiles (GtkWidget*);
+void        show_error_message (gchar*,gchar*, gchar*);
+void        combo_add_shells   (GtkWidget*);
+void        combo_add_groups   (GtkWidget*, gboolean);
+void        combo_add_profiles (GtkWidget*);
 
 #endif /* USER_GROUP_H */
 
