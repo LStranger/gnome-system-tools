@@ -44,7 +44,7 @@ struct _GstNetworkInterfaceDescription {
 static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ N_("Other type"),              GST_CONNECTION_OTHER,   "network.png",     "other_type", NULL },
 	{ N_("Ethernet LAN card"),       GST_CONNECTION_ETH,     "16_ethernet.xpm", "eth",        NULL },
-	{ N_("WaveLAN wireless LAN"),    GST_CONNECTION_WLAN,    "wavelan-16.png",  "wvlan",      NULL },
+	{ N_("Wireless LAN card"),    GST_CONNECTION_WLAN,    "wavelan-16.png",  "wlan",       NULL },
 	{ N_("Modem or transfer cable"), GST_CONNECTION_PPP,     "16_ppp.xpm",      "ppp",        NULL },
 	{ N_("Parallel line"),           GST_CONNECTION_PLIP,    "16_plip.xpm",     "plip",       NULL },
 	{ N_("Infrared LAN"),            GST_CONNECTION_IRLAN,   "irda-16.png",     "irlan",      NULL },
@@ -53,18 +53,17 @@ static GstNetworkInterfaceDescription gst_iface_desc [] = {
 	{ NULL,                          GST_CONNECTION_UNKNOWN,  NULL,             NULL,         NULL }
 };
 
-#define W(s) my_get_widget (cxn->xml, (s))
-
-#define GET_STR(yy_prefix,xx) g_free (cxn->xx); cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (W (yy_prefix#xx)), 0, -1)
-#define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (W (yy_prefix#xx))->active
+#define GET_STR(yy_prefix,xx) g_free (cxn->xx); \
+	cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), 0, -1)
+#define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))->active
 #define GET_BOOL_NOT(yy_prefix,xx) GET_BOOL(yy_prefix,xx); cxn->xx = !cxn->xx;
-#define SET_STR(yy_prefix,xx) gst_ui_entry_set_text (GTK_ENTRY (W (yy_prefix#xx)), cxn->xx)
-#define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), cxn->xx)
-#define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W (yy_prefix#xx)), !cxn->xx)
-#define SET_INT(yy_prefix,xx) gtk_range_set_value (GTK_RANGE (GTK_SCALE (W (yy_prefix#xx))), cxn->xx)
-#define GET_INT(yy_prefix,xx) cxn->xx = gtk_range_get_value (GTK_RANGE (GTK_SCALE (W (yy_prefix#xx))))
-#define SET_DIAL_OPTION_MENU(yy_prefix, xx) gtk_option_menu_set_history (GTK_OPTION_MENU (W (yy_prefix#xx)), ((cxn->xx != NULL) && (strcmp (cxn->xx, "ATDP") == 0))?1:0)
-#define GET_DIAL_OPTION_MENU(yy_prefix, xx) cxn->xx = (gtk_option_menu_get_history (GTK_OPTION_MENU (W (yy_prefix#xx))) == 0)? g_strdup ("ATDT"): g_strdup ("ATDP")
+#define GET_INT(yy_prefix,xx) cxn->xx = gtk_range_get_value (GTK_RANGE (GTK_SCALE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))))
+#define GET_DIAL_OPTION_MENU(yy_prefix, xx) cxn->xx = (gtk_option_menu_get_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))) == 0)? g_strdup ("ATDT"): g_strdup ("ATDP")
+#define SET_STR(yy_prefix,xx) gst_ui_entry_set_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), cxn->xx)
+#define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), cxn->xx)
+#define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), !cxn->xx)
+#define SET_INT(yy_prefix,xx) gtk_range_set_value (GTK_RANGE (GTK_SCALE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))), cxn->xx)
+#define SET_DIAL_OPTION_MENU(yy_prefix, xx) gtk_option_menu_set_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), ((cxn->xx != NULL) && (strcmp (cxn->xx, "ATDP") == 0))?1:0)
 
 typedef struct {
 	GtkWidget *list;
@@ -76,37 +75,6 @@ typedef struct {
 /*static GSList *connections;*/
 
 GstTool *tool;
-
-typedef struct {
-	const char *hname;
-	gpointer signalfunc;
-} WidgetSignal;
-
-static GtkWidget *
-my_get_widget (GladeXML *glade, const gchar *name)
-{
-	GtkWidget *w;
-
-	g_return_val_if_fail (glade != NULL, NULL);
-	
-	w = glade_xml_get_widget (glade, name);
-	if (!w)
-		g_warning ("my_get_widget: Unexistent widget %s", name);
-
-	return w;
-}
-
-static gint
-my_strcmp (gchar *a, gchar *b)
-{
-	if (!a)
-		a = "";
-
-	if (!b)
-		b = "";
-
-	return strcmp (a, b);
-}
 
 static gboolean
 connection_xml_get_boolean (xmlNode *node, gchar *elem)
@@ -1355,34 +1323,40 @@ GstConnection *
 connection_new_from_node (xmlNode *node, gboolean add_to_list)
 {
 	GstConnection *cxn;
-	char *s = NULL;
+	gchar *content, *essid;
 
-	s = gst_xml_get_child_content (node, "dev");
+	essid = gst_xml_get_child_content (node, "essid");
+	content = gst_xml_get_child_content (node, "dev");
 
-	if (s) {
-		cxn = connection_new_from_dev_name (s, node->parent);
+	if (essid) {
+		cxn = connection_new_from_type (GST_CONNECTION_WLAN, node->parent);
 		g_free (cxn->dev);
-		cxn->dev = s;
+		cxn->dev = content;
+		g_free (essid);
+	} else if (content) {
+		cxn = connection_new_from_dev_name (content, node->parent);
+		g_free (cxn->dev);
+		cxn->dev = content;
 	} else {
 		cxn = connection_new_from_type (GST_CONNECTION_OTHER, node->parent);
 	}
 
 	cxn->node = node;
 
-	s = gst_xml_get_child_content (node, "file");
-	if (s)
-		cxn->file = s;
+	content = gst_xml_get_child_content (node, "file");
+	if (content)
+		cxn->file = content;
 	
-	s = gst_xml_get_child_content (node, "bootproto");
-	if (s) {
-		cxn->ip_config = connection_config_type_from_str (s);
+	content = gst_xml_get_child_content (node, "bootproto");
+	if (content) {
+		cxn->ip_config = connection_config_type_from_str (content);
 		cxn->tmp_ip_config = cxn->ip_config;
-		g_free (s);
+		g_free (content);
 	}
 
-	s = gst_xml_get_child_content (node, "name");
-	if (s)
-		cxn->name = s;
+	content = gst_xml_get_child_content (node, "name");
+	if (content)
+		cxn->name = content;
 	else
 		cxn->name = connection_description_from_type (cxn->type);
 	
@@ -1404,6 +1378,9 @@ connection_new_from_node (xmlNode *node, gboolean add_to_list)
 	case GST_CONNECTION_PLIP:
 		connection_get_ptp_from_node (cxn->node, cxn);
 		break;
+	case GST_CONNECTION_WLAN:
+		cxn->essid = gst_xml_get_child_content (node, "essid");
+		break;
 	default:
 		break;
 	}
@@ -1423,7 +1400,7 @@ connection_new_from_dev_name (char *dev_name, xmlNode *root)
 		if (strstr (dev_name, gst_iface_desc[i].name) == dev_name)
 			break;
 
-	return connection_new_from_type (gst_iface_desc[i].type, root);
+	return  connection_new_from_type (gst_iface_desc[i].type, root);
 }
 
 void
@@ -1441,7 +1418,7 @@ connection_free (GstConnection *cxn)
 	g_free (cxn->network);
 	g_free (cxn->gateway);
 
-	g_free (cxn->session_id);
+	g_free (cxn->essid);
 
 	g_free (cxn->phone_number);
 	g_free (cxn->external_line);
@@ -1457,7 +1434,7 @@ connection_free (GstConnection *cxn)
 }
 
 void
-connection_check_netmask_gui (GstConnection *cxn, GtkWidget *address_widget, GtkWidget *netmask_widget)
+connection_check_netmask_gui (GtkWidget *address_widget, GtkWidget *netmask_widget)
 {
         gchar *address, *netmask;
         guint32 ip1;
@@ -1549,7 +1526,6 @@ empty_general (GstConnection *cxn)
 	GET_STR ("connection_", name);
 	GET_BOOL ("status_", autoboot);
 	GET_BOOL ("status_", user);
-/*	GET_BOOL ("status_", enabled);*/
 }
 
 static void
@@ -1557,10 +1533,10 @@ empty_ip (GstConnection *cxn)
 {
 	GtkWidget *netmask_widget, *address_widget;
 	
-	netmask_widget = W ("ip_netmask");
-	address_widget = W ("ip_address");
+	netmask_widget = gst_dialog_get_widget (tool->main_dialog, "ip_netmask");
+	address_widget = gst_dialog_get_widget (tool->main_dialog, "ip_address");
 
-	connection_check_netmask_gui (cxn, address_widget, netmask_widget);
+	connection_check_netmask_gui (address_widget, netmask_widget);
 
 	cxn->ip_config = cxn->tmp_ip_config;
 	GET_BOOL ("ip_", update_dns);
@@ -1570,8 +1546,9 @@ empty_ip (GstConnection *cxn)
 }
 
 static void
-empty_wvlan (GstConnection *cxn)
+empty_wlan (GstConnection *cxn)
 {
+	GET_STR ("wlan_", essid);
 }
 
 static void
@@ -1605,7 +1582,7 @@ empty_ptp (GstConnection *cxn)
 	GET_STR ("ptp_", remote_address);
 
 	g_free (cxn->gateway);
-	if (GTK_TOGGLE_BUTTON (W ("ptp_remote_is_gateway"))->active) {
+	if (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "ptp_remote_is_gateway"))->active) {
 		cxn->gateway = g_strdup (cxn->remote_address);
 	} else {
 		cxn->gateway = NULL;
@@ -1657,7 +1634,7 @@ connection_validate (GstConnection *cxn)
 	if (error) {
 		GtkWidget *message;
 
-		message = gtk_message_dialog_new (cxn->window ? GTK_WINDOW (tool->main_dialog) : NULL,
+		message = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 						  GTK_DIALOG_MODAL,
 						  GTK_MESSAGE_ERROR,
 						  GTK_BUTTONS_OK,
@@ -1678,7 +1655,7 @@ connection_empty_gui (GstConnection *cxn)
 
 	switch (cxn->type) {
 	case GST_CONNECTION_WLAN:
-		empty_wvlan (cxn);
+		empty_wlan (cxn);
 		empty_ip (cxn);
 		break;
 	case GST_CONNECTION_PPP:
@@ -1699,7 +1676,7 @@ connection_empty_gui (GstConnection *cxn)
 static void
 fill_general (GstConnection *cxn)
 {
-	gtk_label_set_text (GTK_LABEL (W ("connection_dev")), cxn->dev);
+	gtk_label_set_text (GTK_LABEL (gst_dialog_get_widget (tool->main_dialog, "connection_dev")), cxn->dev);
 	SET_STR ("connection_", name);
 	SET_BOOL ("status_", autoboot);
 	SET_BOOL ("status_", user);
@@ -1709,12 +1686,20 @@ static void
 update_ip_config (GstConnection *cxn)
 {
 	IPConfigType ip;
+	gboolean sensitive;
 	
 	ip = cxn->tmp_ip_config;
+	sensitive = (ip == IP_MANUAL);
 
 	SET_BOOL ("ip_", update_dns);
-	gtk_widget_set_sensitive (W ("ip_update_dns"), ip != IP_MANUAL);
-	gtk_widget_set_sensitive (W ("ip_table"), ip == IP_MANUAL);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "ip_update_dns"), ip != IP_MANUAL);
+
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "ip_address"), sensitive);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "ip_netmask"), sensitive);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "ip_gateway"), sensitive);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "ip_address_label"), sensitive);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "ip_netmask_label"), sensitive);
+	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "ip_gateway_label"), sensitive);
 }
 
 static void
@@ -1737,7 +1722,7 @@ ip_config_menu_cb (GtkWidget *w, gpointer data)
 
 	connection_set_modified (cxn, TRUE);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("ip_update_dns")),
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "ip_update_dns")),
 				      ip != IP_MANUAL);
 
 	update_ip_config (cxn);
@@ -1755,7 +1740,7 @@ fill_ip (GstConnection *cxn)
 		N_("BOOTP")
 	};
 
-	omenu = W ("connection_config");
+	omenu = gst_dialog_get_widget (tool->main_dialog, "connection_config");
 
 	menu = gtk_menu_new ();
 	for (i = 0; i < 3; i++) {
@@ -1780,9 +1765,9 @@ fill_ip (GstConnection *cxn)
 }
 
 static void
-fill_wvlan (GstConnection *cxn)
+fill_wlan (GstConnection *cxn)
 {
-
+	SET_STR ("wlan_", essid);
 }
 
 static void
@@ -1804,7 +1789,7 @@ fill_ppp_adv (GstConnection *cxn)
 	SET_BOOL ("ppp_", stupid);
 	SET_BOOL ("ppp_", set_default_gw);
 	SET_BOOL_NOT ("ppp_", update_dns);
-	gtk_signal_emit_by_name (GTK_OBJECT (W ("ppp_update_dns")), "toggled");
+	gtk_signal_emit_by_name (GTK_OBJECT (gst_dialog_get_widget (tool->main_dialog, "ppp_update_dns")), "toggled");
 	SET_STR ("ppp_", dns1);
 	SET_STR ("ppp_", dns2);
 	SET_STR ("ppp_", ppp_options);
@@ -1823,125 +1808,101 @@ fill_ptp (GstConnection *cxn)
 	else
 		state = FALSE;
 	
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (W ("ptp_remote_is_gateway")), state);
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog,
+										"ptp_remote_is_gateway")), state);
 }
 
 static void
-hookup_callbacks (GstConnection *cxn)
+connection_dialog_setup_widgets (GstConnection *cxn)
 {
-	gint i;
-	WidgetSignal signals[] =
-	{
-		{ "on_connection_ok_clicked", on_connection_ok_clicked },
-		{ "on_connection_cancel_clicked", on_connection_cancel_clicked },
-		{ "on_connection_config_dialog_delete_event", on_connection_config_dialog_delete_event },
-/*		{ "on_status_enabled_toggled", on_status_enabled_toggled },*/
-		{ "on_connection_modified", on_connection_modified },
-		{ "on_connection_config_dialog_destroy", on_connection_config_dialog_destroy },
-		{ "on_wvlan_adhoc_toggled", on_wvlan_adhoc_toggled },
-		{ "on_ppp_update_dns_toggled", on_ppp_update_dns_toggled },
-		{ "on_ppp_autodetect_modem_clicked", on_ppp_autodetect_modem_clicked },
-		{ "on_ip_address_focus_out", on_ip_address_focus_out },
-		{ "on_ip_netmask_focus_out", on_ip_address_focus_out },
-		{ "on_volume_format_value", on_volume_format_value },
-		{ NULL }
-	};
+	GtkWidget *notebook = gst_dialog_get_widget (tool->main_dialog, "connection_config_notebook");
+	GtkWidget *container = gst_dialog_get_widget (tool->main_dialog, "connection_general_vbox");
+	GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
 
-	struct
-	{
-		char *name;
-		EditableFilterRules rule;
-	}
-	s [] =
-	{
-		{ "ip_address",          EF_ALLOW_IP },
-      		{ "ip_netmask",          EF_ALLOW_IP },
-		{ "ip_gateway",          EF_ALLOW_IP },
-		{ "ppp_dns1",            EF_ALLOW_IP },
-		{ "ppp_dns2",            EF_ALLOW_IP },
-		{ "ptp_address",         EF_ALLOW_IP },
-		{ "ptp_remote_address",  EF_ALLOW_IP },
-		{ NULL,                  EF_ALLOW_NONE }
-	};
-
-	for (i = 0; signals[i].hname; i++)
-		glade_xml_signal_connect_data (cxn->xml, signals[i].hname,
-					       signals[i].signalfunc, cxn);
-	for (i = 0; s[i].name; i++)
-		g_signal_connect (G_OBJECT (W (s[i].name)), "insert_text",
-				  G_CALLBACK (filter_editable),
-				  GINT_TO_POINTER (s[i].rule));
-}
-
-
-/**
- * connection_dialog_set_visible_pages:
- * @cxn: 
- * 
- * Hides and shows the pages from the connection dialog notebook according to the
- * connection type. It also sets the the icons for the pages depending on the
- * connection type.
- **/
-static void
-connection_dialog_set_visible_pages (GstConnection *cxn)
-{
-	GtkNotebook *nb;
-	
-	nb = GTK_NOTEBOOK (W ("connection_nb"));
+	fill_general (cxn);
 
 	if (cxn->type == GST_CONNECTION_PPP) {
-		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/ppp.png");
+		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
+					 PIXMAPS_DIR "/ppp.png");
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
+		gtk_container_set_border_width (GTK_CONTAINER (container), 12);
+
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ethernet_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ptp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "wireless_settings"));
+		gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "ppp_settings"));
+		gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "account_page"));
+		gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "advanced_page"));
+
 		fill_ppp (cxn);
 		fill_ppp_adv (cxn);
-		gtk_notebook_remove_page (nb,
-					  gtk_notebook_page_num (nb,
-								 W ("ip_vbox")));
-		callbacks_check_dialer (GTK_WINDOW (cxn->window), tool);
-	} else {
-		gtk_notebook_remove_page (nb,
-					  gtk_notebook_page_num (nb,
-								 W ("ppp_vbox")));
-		gtk_notebook_remove_page (nb,
-					  gtk_notebook_page_num (nb,
-								 W ("ppp_adv_vbox")));
-	}
-       
-	if (cxn->type == GST_CONNECTION_WLAN) {
-		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/wavelan-48.png");
-		fill_wvlan (cxn);
-		/* FIXME: temprorarily disabling this notebook, until we get support for this. */
-		gtk_notebook_remove_page (nb,
-					  gtk_notebook_page_num (nb,
-								 W ("wvlan_vbox")));
-	} else
-		gtk_notebook_remove_page (nb,
-					  gtk_notebook_page_num (nb,
-								 W ("wvlan_vbox")));
 
-	if (cxn->type == GST_CONNECTION_PLIP) {
-		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/plip-48.png");
-		fill_ptp (cxn);
-		gtk_notebook_remove_page (nb,
-					  gtk_notebook_page_num (nb,
-								 W ("ip_vbox")));
-	} else 
-		gtk_notebook_remove_page (nb,
-					  gtk_notebook_page_num (nb,
-								 W ("ptp_vbox")));
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
+	} else if (cxn->type == GST_CONNECTION_WLAN) {
+		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
+					 PIXMAPS_DIR "/wavelan-48.png");
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
 
-	if (cxn->type == GST_CONNECTION_ETH) {
-		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")),
+		gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "ethernet_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ptp_settings"));
+		gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "wireless_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ppp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "account_page"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "advanced_page"));
+
+		fill_ip (cxn);
+		fill_wlan (cxn);
+	} else if (cxn->type == GST_CONNECTION_ETH) {
+		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
 					 PIXMAPS_DIR "/connection-ethernet.png");
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
+
+		gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "ethernet_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ptp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "wireless_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ppp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "account_page"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "advanced_page"));
+
+		fill_ip (cxn);
+	} else if (cxn->type == GST_CONNECTION_PLIP) {
+		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
+					 PIXMAPS_DIR "/plip-48.png");
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
+
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ethernet_settings"));
+		gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "ptp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "wireless_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ppp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "account_page"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "advanced_page"));
+
+		fill_ptp (cxn);
+	} else if (cxn->type == GST_CONNECTION_IRLAN) {
+		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
+					 PIXMAPS_DIR "/irda-48.png");
+		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
+		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
+
+		gtk_widget_show (gst_dialog_get_widget (tool->main_dialog, "ethernet_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ptp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "wireless_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ppp_settings"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "account_page"));
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "advanced_page"));
+
+		fill_ip (cxn);
 	}
 
-	if (cxn->type == GST_CONNECTION_IRLAN) {
-		gtk_image_set_from_file (GTK_IMAGE (W ("connection_pixmap")), PIXMAPS_DIR "/irda-48.png");
-	}
-
-	if (cxn->type == GST_CONNECTION_LO) {
-		gtk_widget_hide (W("ip_update_dns"));
-		gtk_widget_hide (W("ip_bootproto_box"));
-	}
+	/* try to set the dialog at the minimum possible size */
+	gtk_window_resize (GTK_WINDOW (window), 1, 1);
 }
 
 void
@@ -1966,44 +1927,26 @@ connection_actions_set_sensitive (gboolean state)
 void
 connection_configure (GstConnection *cxn)
 {
-	gchar *s;
+	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
 
-	if (cxn->window) {
-		gtk_widget_show (cxn->window);
-		return;
-	}
-
-	g_assert (!cxn->xml);
+	g_object_set_data (G_OBJECT (dialog), "connection_data", cxn);
 
 	cxn->frozen = TRUE;
-
-	s = g_strconcat (INTERFACES_DIR, "/", "network.glade", NULL);
-	cxn->xml = glade_xml_new (s, "connection_config_dialog", NULL);
-
-	g_assert (cxn->xml);
-	g_free (s);
-
-	hookup_callbacks (cxn);
+	
+	connection_dialog_setup_widgets (cxn);
+	
+	if (!gst_xml_element_get_boolean (cxn->node->parent, "smartdhcpcd"))
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "ip_update_dns"));
+	if (!gst_xml_element_get_boolean (cxn->node->parent, "userifacfectl"))
+		gtk_widget_hide (gst_dialog_get_widget (tool->main_dialog, "status_user"));
 
 	cxn->noauth = TRUE;
-	cxn->window = W("connection_config_dialog");
 	cxn->tmp_ip_config = cxn->ip_config;
 
-	fill_general (cxn);
-	fill_ip      (cxn);
-
-	if (!gst_xml_element_get_boolean (cxn->node->parent, "smartdhcpcd"))
-		gtk_widget_hide (W("ip_update_dns"));
-	if (!gst_xml_element_get_boolean (cxn->node->parent, "userifacfectl"))
-		gtk_widget_hide (W("status_user"));
-
-	connection_dialog_set_visible_pages (cxn);
-
 	cxn->frozen = FALSE;
-
 	connection_set_modified (cxn, FALSE);
-
-	gtk_widget_show (cxn->window);
+	
+	gtk_widget_show (dialog);
 }
 
 void
@@ -2124,9 +2067,12 @@ connection_save_to_node (GstConnection *cxn, xmlNode *root)
 	}
 
 	/* PtP */
-	if (cxn->type == GST_CONNECTION_PLIP) {
+	if (cxn->type == GST_CONNECTION_PLIP)
 		connection_xml_save_str_to_node (node, "remote_address", cxn->remote_address);
-	}
+
+	/* Wireless */
+	if (cxn->type == GST_CONNECTION_WLAN)
+		connection_xml_save_str_to_node (node, "essid", cxn->essid);
 }
 
 gboolean
@@ -2213,8 +2159,6 @@ connection_config_save (GstConnection *cxn, gboolean add_to_list)
 {
 	GstConnection *tmp = g_new0 (GstConnection, 1);
 
-	tmp->window = cxn->window;
-	tmp->xml = cxn->xml;
 	tmp->type = cxn->type;
 	tmp->modified = cxn->modified;
 	tmp->creating = cxn->creating;
@@ -2227,6 +2171,8 @@ connection_config_save (GstConnection *cxn, gboolean add_to_list)
 		connection_free (tmp);
 		return FALSE;
 	}
+
+	connection_free (tmp);
 
 	connection_empty_gui (cxn);
 

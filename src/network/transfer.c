@@ -289,11 +289,22 @@ static void
 transfer_interfaces_to_gui (GstTool *tool, xmlNodePtr root)
 {
 	xmlNodePtr node;
+	gchar *dev;
+	gboolean add_to_list;
 
 	for (node = gst_xml_element_find_first (root, "interface"); 
 	     node; 
 	     node = gst_xml_element_find_next (node, "interface")) {
-		connection_new_from_node (node, TRUE);
+		dev = gst_xml_get_child_content (node, "dev");
+
+		if (strcmp (dev, "lo") == 0)
+			add_to_list = FALSE;
+		else
+			add_to_list = TRUE;
+
+		g_free (dev);
+
+		connection_new_from_node (node, add_to_list);
 	}
 
 	callbacks_update_connections_hook (tool->main_dialog, NULL);

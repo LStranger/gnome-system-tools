@@ -53,6 +53,8 @@ network_druid_clear (GnomeDruid *druid, gboolean destroy_data)
 	GstTool *tool = druid_data->tool;
 	GtkWidget *widget;
 	gchar *entries [] = {
+		"network_connection_wireless_device_entry",
+		"network_connection_essid",
 		"network_connection_other_ip_address",
 		"network_connection_other_ip_mask",
 		"network_connection_other_gateway",
@@ -145,6 +147,17 @@ network_druid_get_connection_data (GnomeDruid *druid)
 
 		return cxn;
 	} else {
+		if (cxn->type == GST_CONNECTION_WLAN) {
+			GtkWidget *device = gst_dialog_get_widget (tool->main_dialog,
+								   "network_connection_wireless_device_entry");
+			GtkWidget *essid = gst_dialog_get_widget (tool->main_dialog,
+								  "network_connection_essid");
+			cxn->dev = g_strdup (gtk_entry_get_text (GTK_ENTRY (device)));
+			cxn->essid = g_strdup (gtk_entry_get_text (GTK_ENTRY (essid)));
+		} else {
+			cxn->dev = connection_find_new_device (root, cxn->type);
+		}
+			
 		GtkWidget *type = gst_dialog_get_widget (tool->main_dialog,
 							 "network_connection_other_config_type");
 		GtkWidget *ip_address = gst_dialog_get_widget (tool->main_dialog,
@@ -161,7 +174,6 @@ network_druid_get_connection_data (GnomeDruid *druid)
 		cxn->netmask = g_strdup (gtk_entry_get_text (GTK_ENTRY (ip_mask)));
 		cxn->gateway = g_strdup (gtk_entry_get_text (GTK_ENTRY (gateway)));
 		cxn->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (name)));
-		cxn->dev = connection_find_new_device (root, cxn->type);
 		connection_set_bcast_and_network (cxn);
 
 		cxn->user = TRUE;
@@ -233,18 +245,15 @@ network_druid_check_login_password (GnomeDruid *druid)
 }
 
 static gboolean
-network_druid_check_account_name (GnomeDruid *druid)
+network_druid_check_entry (GnomeDruid *druid, gchar *widget_name)
 {
 	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
 
 	GtkWidget *account = gst_dialog_get_widget (druid_data->tool->main_dialog,
-						    "network_connection_name");
+						    widget_name);
 	gchar *text = (gchar*) gtk_entry_get_text (GTK_ENTRY (account));
 
-	if (strcmp (text, "") != 0)
-		return TRUE;
-	else
-		return FALSE;
+	return (strcmp (text, "") != 0);
 }
 
 static gboolean
@@ -291,6 +300,10 @@ network_druid_check_page (GnomeDruid *druid, NetworkDruidPages page_number)
 	gboolean cont;
 
 	switch (page_number) {
+	case NETWORK_DRUID_WIRELESS:
+		cont = network_druid_check_entry (druid, "network_connection_wireless_device_entry") &&
+			network_druid_check_entry (druid, "network_connection_essid");
+		break;
 	case NETWORK_DRUID_OTHER_1:
 		cont = network_druid_check_ip (druid);
 		break;
@@ -304,7 +317,7 @@ network_druid_check_page (GnomeDruid *druid, NetworkDruidPages page_number)
 		cont = network_druid_check_login_password (druid);
 		break;
 	case NETWORK_DRUID_NAME:
-		cont = network_druid_check_account_name (druid);
+		cont = network_druid_check_entry (druid, "network_connection_name");
 		break;
 	}
 
@@ -346,13 +359,24 @@ network_druid_set_page_next (GnomeDruid *druid)
 				gnome_druid_set_page (druid, next_page);
 			
 				return TRUE;
+			} else if (druid_data->cxn->type == GST_CONNECTION_WLAN) {
+				network_druid_fill_wireless_devices_list (druid_data->tool);
+				
+				druid_data->current_page = NETWORK_DRUID_WIRELESS;
+
+				next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+										     "network_connection_wireless_page"));
+				gnome_druid_set_page (druid, next_page);
+
+				return TRUE;
 			} else {
+				druid_data->current_page = NETWORK_DRUID_OTHER_1;
+				next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+										     "network_connection_other_page1"));
+				
 				switch (druid_data->cxn->type) {
 				case GST_CONNECTION_ETH:
 					image_path = g_strdup_printf (PIXMAPS_DIR "/connection-ethernet.png");
-					break;
-				case GST_CONNECTION_WLAN:
-					image_path = g_strdup_printf (PIXMAPS_DIR "/wavelan-48.png");
 					break;
 				case GST_CONNECTION_IRLAN:
 					image_path = g_strdup_printf (PIXMAPS_DIR "/irda-48.png");
@@ -360,14 +384,12 @@ network_druid_set_page_next (GnomeDruid *druid)
 				}
 
 				image = gdk_pixbuf_new_from_file (image_path, NULL);
-				gnome_druid_page_standard_set_logo (GNOME_DRUID_PAGE_STANDARD (gst_dialog_get_widget (tool->main_dialog, "network_connection_other_page1")), image);
-				
+				gnome_druid_page_standard_set_logo (GNOME_DRUID_PAGE_STANDARD (next_page), image);
 				g_free (image_path);
 				gdk_pixbuf_unref (image);
 
-				druid_data->current_page = NETWORK_DRUID_OTHER_1;
-				next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
-										     "network_connection_other_page1"));
+				gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
+								     _("Address configuration (Step 1 of 2)"));
 				gnome_druid_set_page (druid, next_page);
 			
 				return TRUE;
@@ -375,14 +397,37 @@ network_druid_set_page_next (GnomeDruid *druid)
 		}
 
 		break;
+	case NETWORK_DRUID_WIRELESS:
+		druid_data->current_page = NETWORK_DRUID_OTHER_1;
+		next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+								     "network_connection_other_page1"));
+		gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
+						     _("Address configuration (Step 2 of 3)"));
+
+		/* set the wireless image to the druid */
+		image_path = g_strdup_printf (PIXMAPS_DIR "/wavelan-48.png");
+		image = gdk_pixbuf_new_from_file (image_path, NULL);
+		gnome_druid_page_standard_set_logo (GNOME_DRUID_PAGE_STANDARD (next_page), image);
+				
+		g_free (image_path);
+		gdk_pixbuf_unref (image);
+
+		gnome_druid_set_page (druid, next_page);
+
+		return TRUE;
+		break;
 	case NETWORK_DRUID_OTHER_1:
 	case NETWORK_DRUID_PLIP_1:
 		druid_data->current_page = NETWORK_DRUID_NAME;
 		next_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
 								     "network_connection_page_name"));
-		gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
-						     _("Connection name (Step 2 of 2)"));
-		
+		if (druid_data->cxn->type != GST_CONNECTION_WLAN)
+			gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
+							     _("Connection name (Step 2 of 2)"));
+		else
+			gnome_druid_page_standard_set_title (GNOME_DRUID_PAGE_STANDARD (next_page),
+							     _("Connection name (Step 3 of 3)"));
+
 		gnome_druid_set_page (druid, next_page);
 		
 		return TRUE;
@@ -411,9 +456,19 @@ network_druid_set_page_back (GnomeDruid *druid)
 
 	g_return_val_if_fail (druid_data != NULL, FALSE);
 
-	if ((druid_data->current_page == NETWORK_DRUID_PPP_1) ||
-	    (druid_data->current_page == NETWORK_DRUID_PLIP_1) ||
-	    (druid_data->current_page == NETWORK_DRUID_OTHER_1)) {
+	if ((druid_data->current_page == NETWORK_DRUID_OTHER_1) &&
+	    (druid_data->cxn->type == GST_CONNECTION_WLAN)) {
+		druid_data->current_page = NETWORK_DRUID_WIRELESS;
+		back_page = GNOME_DRUID_PAGE (gst_dialog_get_widget (druid_data->tool->main_dialog,
+								     "network_connection_wireless_page"));
+		gnome_druid_set_page (druid, back_page);
+		
+		return TRUE;
+	} else if ((druid_data->current_page == NETWORK_DRUID_PPP_1) ||
+		   (druid_data->current_page == NETWORK_DRUID_PLIP_1) ||
+		   (druid_data->current_page == NETWORK_DRUID_WIRELESS) ||
+		   ((druid_data->current_page == NETWORK_DRUID_OTHER_1) &&
+		    (druid_data->cxn->type != GST_CONNECTION_WLAN))) {
 		if (druid_data->fixed_type) {
 			druid_data->current_page = NETWORK_DRUID_START;
 		
@@ -451,4 +506,24 @@ network_druid_set_page_back (GnomeDruid *druid)
 	druid_data->current_page--;
 
 	return FALSE;
+}
+
+static void
+network_druid_fill_wireless_devices_list (GstTool *tool)
+{
+	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog,
+						  "network_connection_wireless_device");
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	xmlNodePtr node;
+	GList *devices = NULL;
+	
+	for (node = gst_xml_element_find_first (root, "wireless_device");
+	     node != NULL;
+	     node = gst_xml_element_find_next (node, "wireless_device"))
+	{
+		devices = g_list_append (devices, gst_xml_element_get_content (node));
+	}
+
+	if (devices)
+		gtk_combo_set_popdown_strings (GTK_COMBO (combo), devices);
 }

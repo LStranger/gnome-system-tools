@@ -82,15 +82,13 @@ gboolean callbacks_tool_not_found_hook     (GstTool *tool, GstReportLine *rline,
 
 /* connection callbacks */
 void on_connection_toggled (GtkWidget*, gchar*, gpointer);
-void on_connection_ok_clicked (GtkWidget*, GstConnection*);
-void on_connection_cancel_clicked (GtkWidget*, GstConnection*);
-void on_connection_config_dialog_destroy (GtkWidget*, GstConnection*);
-gint on_connection_config_dialog_delete_event (GtkWidget*, GdkEvent*, GstConnection*);
-void on_connection_modified (GtkWidget*, GstConnection*);
-void on_wvlan_adhoc_toggled (GtkWidget*, GstConnection*);
-void on_ppp_update_dns_toggled (GtkWidget*, GstConnection*);
-gboolean on_ip_address_focus_out (GtkWidget*, GdkEventFocus*, GstConnection*);
-void on_ppp_autodetect_modem_clicked (GtkWidget*, GstConnection*);
+void on_connection_ok_clicked (GtkWidget*, gpointer);
+void on_connection_cancel_clicked (GtkWidget*, gpointer);
+gboolean on_connection_delete_event (GtkWidget*, GdkEvent*, gpointer);
+void on_connection_modified (GtkWidget*, gpointer);
+void on_ppp_update_dns_toggled (GtkWidget*, gpointer);
+gboolean on_ip_address_focus_out (GtkWidget*, GdkEventFocus*, gpointer);
+void on_ppp_autodetect_modem_clicked (GtkWidget*, gpointer);
 gchar* on_volume_format_value (GtkWidget*, gdouble, gpointer);
 
 /* DNS tab callbacks */

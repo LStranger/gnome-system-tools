@@ -350,38 +350,6 @@ filter_editable (GtkEditable *editable, const gchar *text, gint length,
 		gtk_signal_emit_stop_by_name (GTK_OBJECT (editable), "insert_text");
 }
 
-/* yeah, I don't like this formatting either */
-static const char *hint_entry[][3] = { {
-	"hostname", "general_help", 		
-	N_("The name of this computer")
-},{
-	"smbdesc", "general_help", 
-	N_("A short description of your computer")
-},{
-	"workgroup", "general_help",
-	N_("The Windows Networking workgroup for your network")
-},{
-	"winsserver", "general_help", 
-	N_("The IP address of your WINS server")
-},{
-	"domain", "dns_help",     
-	N_("The DNS domain for your computer")
-},{
-	"dns_list", "dns_help",
-	N_("A list of your DNS servers' IP addresses"),
-},{
-	"search_list", "dns_help",
-	N_("A list of domains where hosts will be searched") 
-},{
-	"ip", "hosts_help",
-	N_("The IP address of this host") 
-},{
-	"alias", "hosts_help",
-	N_("Aliases for this host, one per line") 
-},{
-	NULL
-} };
-
 static GHashTable *help_hash;
 
 void
@@ -398,6 +366,13 @@ init_editable_filters (GstDialog *dialog)
 		{ "network_connection_other_gateway", EF_ALLOW_IP },
 		{ "network_connection_plip_local_ip", EF_ALLOW_IP },
 		{ "network_connection_plip_remote_ip", EF_ALLOW_IP },
+		{ "ip_address",          EF_ALLOW_IP },
+      		{ "ip_netmask",          EF_ALLOW_IP },
+		{ "ip_gateway",          EF_ALLOW_IP },
+		{ "ppp_dns1",            EF_ALLOW_IP },
+		{ "ppp_dns2",            EF_ALLOW_IP },
+		{ "ptp_address",         EF_ALLOW_IP },
+		{ "ptp_remote_address",  EF_ALLOW_IP },
 		{ "dns_server_entry",    EF_ALLOW_IP },
 		{ "search_domain_entry", EF_ALLOW_ENTER | EF_ALLOW_TEXT },
 		{ NULL,          EF_ALLOW_NONE }
@@ -426,16 +401,6 @@ init_editable_filters (GstDialog *dialog)
 				  G_CALLBACK (filter_editable),
 				  GINT_TO_POINTER (s1[i].rule));
 	}
-}
-
-void
-init_hint_entries (void)
-{
-	int i;
-	help_hash = g_hash_table_new (g_str_hash, g_str_equal);
-
-	for (i=0; hint_entry[i][0]; i++)
-		g_hash_table_insert (help_hash, (char *)hint_entry[i][0], hint_entry[i]);
 }
 
 gint
@@ -505,7 +470,9 @@ on_connection_delete_clicked (GtkWidget *w, gpointer null)
 void
 on_connection_configure_clicked (GtkWidget *w, gpointer null)
 {
-	connection_configure (connection_list_get_active ());
+	GstConnection *cxn = connection_list_get_active ();
+	
+	connection_configure (cxn);
 }
 
 static void
@@ -925,73 +892,57 @@ on_connection_toggled (GtkWidget *w, gchar *path_str, gpointer data)
 }
 
 void
-on_connection_ok_clicked (GtkWidget *w, GstConnection *cxn)
+on_connection_ok_clicked (GtkWidget *w, gpointer data)
 {
 	GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
+	GstConnection *cxn = g_object_get_data (G_OBJECT (window), "connection_data");
 	gboolean standalone = (g_object_get_data (G_OBJECT (window), "standalone") != NULL);
 	gboolean add_to_list = !standalone;
 
-	if (cxn->modified) {
-		if (connection_config_save (cxn, add_to_list))
-			gtk_widget_destroy (cxn->window);
+	if ((cxn->modified) && (connection_config_save (cxn, FALSE))) {
 		cxn->creating = FALSE;
 		gst_dialog_modify (tool->main_dialog);
-	} else
-		gtk_widget_destroy (cxn->window);
-	
+	}
+
 	if (standalone) {
+		gtk_widget_set_sensitive (window, FALSE);
 		connection_save_to_node (cxn, gst_xml_doc_get_root (tool->config));
 		gtk_signal_emit_by_name (GTK_OBJECT (tool->main_dialog), "apply", tool);
 		gtk_main_quit ();
 	}
+
+	gtk_widget_hide (window);
+}
+
+gboolean
+on_connection_delete_event (GtkWidget *window, GdkEvent *event, gpointer data)
+{
+	on_connection_cancel_clicked (window, NULL);
+	return TRUE;
 }
 
 void
-on_connection_cancel_clicked (GtkWidget *w, GstConnection *cxn)
+on_connection_cancel_clicked (GtkWidget *w, gpointer data)
 {
 	GtkWidget *window = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
-	
-	gtk_widget_destroy (cxn->window);
-
-	if (cxn->creating) {
-		connection_list_remove (cxn);
-		connection_free (cxn);
-		gst_dialog_modify (tool->main_dialog);
-	}
 
 	if (g_object_get_data (G_OBJECT (window), "standalone") != NULL)
 		gtk_main_quit ();
+
+	gtk_widget_hide (window);
 }
 
 void
-on_connection_config_dialog_destroy (GtkWidget *w, GstConnection *cxn)
+on_connection_modified (GtkWidget *w, gpointer data)
 {
-	g_object_unref (G_OBJECT (cxn->xml));
-	cxn->xml = NULL;
+	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
+	GstConnection *cxn = g_object_get_data (G_OBJECT (dialog), "connection_data");
 
-	cxn->window = NULL;
-}
-
-gint
-on_connection_config_dialog_delete_event (GtkWidget *w, GdkEvent *evt, GstConnection *cxn)
-{
-	return FALSE;
-}
-
-void
-on_connection_modified (GtkWidget *w, GstConnection *cxn)
-{
 	connection_set_modified (cxn, TRUE);
 }
 
 void
-on_wvlan_adhoc_toggled (GtkWidget *w, GstConnection *cxn)
-{
-/* FIXME: implement on_wvlan_adhoc_toggled*/
-}
-
-void
-on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
+on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 {
 	gchar *dev = connection_autodetect_modem ();
 	GtkWidget *w;
@@ -1002,7 +953,7 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
 		gtk_dialog_run (GTK_DIALOG (w));
 		gtk_widget_destroy (w);
 	} else {
-		w = glade_xml_get_widget (cxn->xml, "ppp_serial_port");
+		w = gst_dialog_get_widget (tool->main_dialog, "ppp_serial_port");
 		gtk_entry_set_text (GTK_ENTRY (w), dev);
 	}
 
@@ -1011,14 +962,14 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, GstConnection *cxn)
 }
 
 void
-on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn)
+on_ppp_update_dns_toggled (GtkWidget *w, gpointer data)
 {
 	gboolean active;
-	GtkWidget *ppp_update_dns = glade_xml_get_widget (cxn->xml, "ppp_update_dns");
-	GtkWidget *ppp_dns1_label = glade_xml_get_widget (cxn->xml, "ppp_dns1_label");
-	GtkWidget *ppp_dns2_label = glade_xml_get_widget (cxn->xml, "ppp_dns2_label");
-	GtkWidget *ppp_dns1 = glade_xml_get_widget (cxn->xml, "ppp_dns1");
-	GtkWidget *ppp_dns2 = glade_xml_get_widget (cxn->xml, "ppp_dns2");
+	GtkWidget *ppp_update_dns = gst_dialog_get_widget (tool->main_dialog, "ppp_update_dns");
+	GtkWidget *ppp_dns1_label = gst_dialog_get_widget (tool->main_dialog, "ppp_dns1_label");
+	GtkWidget *ppp_dns2_label = gst_dialog_get_widget (tool->main_dialog, "ppp_dns2_label");
+	GtkWidget *ppp_dns1 = gst_dialog_get_widget (tool->main_dialog, "ppp_dns1");
+	GtkWidget *ppp_dns2 = gst_dialog_get_widget (tool->main_dialog, "ppp_dns2");
 	
 	active = GTK_TOGGLE_BUTTON (ppp_update_dns)->active;
 
@@ -1029,11 +980,11 @@ on_ppp_update_dns_toggled (GtkWidget *w, GstConnection *cxn)
 }
 
 gboolean
-on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, GstConnection *cxn)
+on_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, gpointer data)
 {
-	GtkWidget *netmask_widget = glade_xml_get_widget (cxn->xml, "ip_netmask");
+	GtkWidget *netmask_widget = gst_dialog_get_widget (tool->main_dialog, "ip_netmask");
 
-	connection_check_netmask_gui (cxn, widget, netmask_widget);
+	connection_check_netmask_gui (widget, netmask_widget);
 
         return FALSE;
 }
@@ -1406,6 +1357,7 @@ on_network_druid_page_prepare (GnomeDruidPage *druid_page, GnomeDruid *druid, gp
 	gchar *next_default_focus[] = {
 		NULL,
 		"connection_type_modem_option",
+		"network_connection_wireless_device_entry",
 		"network_connection_other_config_type",
 		"network_connection_plip_local_ip",
 		"network_connection_ppp_phone",
@@ -1452,7 +1404,6 @@ on_network_druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer
 
 		gst_dialog_modify (tool->main_dialog);
 
-                /*	scrolled_window_scroll_bottom (gst_dialog_get_widget (tool->main_dialog, "connection_list_sw"));*/
 		network_druid_clear (druid, FALSE);
 		gtk_widget_hide (window);
 	} else {
@@ -1506,7 +1457,7 @@ on_network_druid_ip_address_focus_out (GtkWidget *widget, GdkEventFocus *event, 
 							"network_connection_other_ip_mask");
 	NetworkDruidData *druid_data = g_object_get_data (G_OBJECT (druid), "data");
 
-	connection_check_netmask_gui (druid_data->cxn, widget, mask_widget);
+	connection_check_netmask_gui (widget, mask_widget);
 
         return FALSE;
 }

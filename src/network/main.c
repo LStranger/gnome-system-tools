@@ -75,18 +75,22 @@ GstDialogSignal signals[] = {
 	{ "network_connection_druid",        "cancel", G_CALLBACK (on_network_druid_hide) },
 	{ "network_connection_page1",        "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_page2",        "next",   G_CALLBACK (on_network_druid_page_next) },
+	{ "network_connection_wireless_page",  "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_other_page1",  "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_plip_page1",   "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_ppp_page1",    "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_ppp_page2",    "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_page_name",         "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_page2",        "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_wireless_page",  "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_other_page1",  "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_plip_page1",  "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_ppp_page1",    "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_ppp_page2",    "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_page_name",    "back",   G_CALLBACK (on_network_druid_page_back) },
 	{ "network_connection_page_finish",  "back",   G_CALLBACK (on_network_druid_page_back) },
+	{ "network_connection_wireless_device_entry", "changed", G_CALLBACK (on_network_druid_entry_changed) },
+	{ "network_connection_essid", "changed", G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_other_config_type", "changed", G_CALLBACK (on_network_druid_config_type_changed) },
 	{ "network_connection_other_ip_address", "changed", G_CALLBACK (on_network_druid_entry_changed) },
 	{ "network_connection_other_ip_mask", "changed", G_CALLBACK (on_network_druid_entry_changed) },
@@ -105,10 +109,46 @@ GstDialogSignal signals[] = {
 	{ "network_profiles_button", "clicked", G_CALLBACK (on_network_profiles_button_clicked) },
 	{ "network_profile_new", "clicked", G_CALLBACK (on_network_profile_new_clicked) },
 	{ "network_profile_delete", "clicked", G_CALLBACK (on_network_profile_delete_clicked) },
+
+	/* Interface properties callbacks */
+	{ "connection_config_dialog", "delete_event", G_CALLBACK (on_connection_delete_event) },
+	{ "connection_cancel", "clicked", G_CALLBACK (on_connection_cancel_clicked) },
+	{ "connection_ok", "clicked", G_CALLBACK (on_connection_ok_clicked) },
+	{ "ppp_autodetect_modem", "clicked", G_CALLBACK (on_ppp_autodetect_modem_clicked) },
+	{ "ppp_volume", "format_value", G_CALLBACK (on_volume_format_value) },
+	{ "ip_address", "focus_out_event", G_CALLBACK (on_ip_address_focus_out) },
+	{ "ip_netmask", "focus_out_event", G_CALLBACK (on_ip_address_focus_out) },
+	{ "ppp_update_dns", "toggled", G_CALLBACK (on_ppp_update_dns_toggled) },
+	{ "connection_name", "changed", G_CALLBACK (on_connection_modified) },
+	{ "status_autoboot", "toggled", G_CALLBACK (on_connection_modified) },
+	{ "status_user", "toggled", G_CALLBACK (on_connection_modified) },
+	{ "wlan_essid", "changed", G_CALLBACK (on_connection_modified) },
+	{ "connection_config", "clicked", G_CALLBACK (on_connection_modified) },
+	{ "ip_address", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ip_netmask", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ip_gateway", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ip_update_dns", "toggled", G_CALLBACK (on_connection_modified) },
+	{ "ptp_address", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ptp_remote_address", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ptp_remote_is_gateway", "toggled", G_CALLBACK (on_connection_modified) },
+	{ "ppp_serial_port", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ppp_dial_command", "clicked", G_CALLBACK (on_connection_modified) },
+	{ "ppp_volume", "value_changed", G_CALLBACK (on_connection_modified) },
+	{ "ppp_persist", "toggled", G_CALLBACK (on_connection_modified) },
+	{ "ppp_phone_number", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ppp_external_line", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ppp_login", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ppp_password", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ppp_ppp_options", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ppp_stupid", "toggled", G_CALLBACK (on_connection_modified) },
+	{ "ppp_set_default_gw", "toggled", G_CALLBACK (on_connection_modified) },
+	{ "ppp_dns1", "changed", G_CALLBACK (on_connection_modified) },
+	{ "ppp_dns2", "changed", G_CALLBACK (on_connection_modified) },
 	{ NULL }
 };
 
 GstDialogSignal signals_after[] = {
+	{ "network_connection_wireless_page", "prepare", G_CALLBACK (on_network_druid_page_prepare) },
 	{ "network_connection_other_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
 	{ "network_connection_plip_page1",  "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
 	{ "network_connection_ppp_page1",    "prepare",   G_CALLBACK (on_network_druid_page_prepare) },
@@ -282,7 +322,6 @@ main (int argc, char *argv[])
 		gst_dialog_enable_complexity (tool->main_dialog);
 		gst_dialog_set_widget_policies (tool->main_dialog, policies);
 
-		init_hint_entries ();
 		init_editable_filters (tool->main_dialog);
 
 		on_network_admin_show (NULL, tool);

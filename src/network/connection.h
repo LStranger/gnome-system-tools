@@ -79,8 +79,6 @@ typedef enum {
 } ActivationType;
 
 typedef struct {
-	GtkWidget *window;
-	GladeXML *xml;
 	xmlNode *node;
 	
 	GstConnectionType type;
@@ -114,10 +112,7 @@ typedef struct {
 	gchar *gateway;
 
 	/* Wavelan */
-	gboolean adhoc;
-	gchar *session_id;
-	gint channel;
-	gfloat frequency;
+	gchar *essid;
 
 	/* PPP */
 	gchar *phone_number;
@@ -174,7 +169,7 @@ void           connection_list_select_connection (GstConnection *cxn);
 void           connection_list_clear      (GstTool *tool);
 
 gboolean connection_config_save (GstConnection*, gboolean);
-void     connection_check_netmask_gui (GstConnection*, GtkWidget*, GtkWidget*);
+void     connection_check_netmask_gui (GtkWidget*, GtkWidget*);
 void     connection_set_modified (GstConnection*, gboolean);
 
 gchar *connection_find_new_device (xmlNodePtr, GstConnectionType);
