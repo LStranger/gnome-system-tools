@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-31 08:44+0300\n"
-"PO-Revision-Date: 2004-08-01 18:18+0300\n"
+"POT-Creation-Date: 2004-08-04 22:47+0300\n"
+"PO-Revision-Date: 2004-08-04 22:52+0300\n"
 "Last-Translator: Žygimantas Beručka <uid0@akl.lt>\n"
 "Language-Team: Lithuanian <komp_lt@konferencijos.lt>\n"
 "MIME-Version: 1.0\n"
@@ -25,46 +25,18 @@ msgstr ""
 "nuotolinė konfigūracija"
 
 #: gnome-system-tools.schemas.in.h:2
-msgid "Dialog complexity for the boot-admin tool"
-msgstr "Dialogo sudėtingumas boot-admin įrankiui"
-
-#: gnome-system-tools.schemas.in.h:3
-msgid "Dialog complexity for the network-admin tool"
-msgstr "Dialogo sudėtingumas network-admin įrankiui"
-
-#: gnome-system-tools.schemas.in.h:4
-msgid "Dialog complexity for the services-admin tool"
-msgstr "Dialogo sudėtingumas services-admin įrankiui"
-
-#: gnome-system-tools.schemas.in.h:5
-msgid "Dialog complexity for the time-admin tool"
-msgstr "Dialogo sudėtingumas time-admin įrankiui"
-
-#: gnome-system-tools.schemas.in.h:6
-msgid "Dialog complexity for the users-admin tool"
-msgstr "Dialogo sudėtingumas users-admin įrankiui"
-
-#: gnome-system-tools.schemas.in.h:7
 msgid "Last GST version executed"
 msgstr "Paskutinė paleista GST versija"
 
-#: gnome-system-tools.schemas.in.h:8
+#: gnome-system-tools.schemas.in.h:3
 msgid "Preferred bootloader that boot-admin will configure"
 msgstr "Pradinis įkėliklis, kurį konfigūruos boot-admin"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:4
 msgid "Remote hosts"
 msgstr "Nuotoliniai hostai"
 
-#: gnome-system-tools.schemas.in.h:10
-msgid ""
-"The GNOME System Tools have two data display modes: basic mode and advanced "
-"mode, the basic mode is intended to show less options than the advanced mode"
-msgstr ""
-"GNOME Sistemos Įrankiai turi du rodymo rėžimus: pagrindinį ir išsamesnį, "
-"pagrindinis rėžimas rodo mažiau parinkčių negu išsamus rėžimas"
-
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:5
 msgid ""
 "The GST are able to do remote configuration through SSH, enable this option "
 "to use this feature"
@@ -72,11 +44,11 @@ msgstr ""
 "GST gali konfigūruoti nuotolinius kompiuterius per SSH, įjunk šią parinktį, "
 "kad naudoti šią ypatybę"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:6
 msgid "The last GST version that this computer has run"
 msgstr "Paskutinė šiame kompiuteryje paleista GST versija"
 
-#: gnome-system-tools.schemas.in.h:13
+#: gnome-system-tools.schemas.in.h:7
 msgid ""
 "This key stores the bootloader that boot-admin will configure if there are "
 "more than one installed, if it's not set or isn't valid, then boot-admin "
@@ -86,15 +58,15 @@ msgstr ""
 "įdiegta daugiau negu vienas; jeigu jis nenurodytas arba netinkamas, tada "
 "boot-admin paklaus naudotojo"
 
-#: gnome-system-tools.schemas.in.h:14
+#: gnome-system-tools.schemas.in.h:8
 msgid "Whether the tools will use remote administration or not"
 msgstr "Ar įrankiai bus naudos nuotolinę administraciją ar ne"
 
-#: gnome-system-tools.schemas.in.h:15
+#: gnome-system-tools.schemas.in.h:9
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Ar users-admin įrankis turėtų rodyti visus naudotojus ir grupes ar ne"
 
-#: gnome-system-tools.schemas.in.h:16
+#: gnome-system-tools.schemas.in.h:10
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Ar įspėjimo dialogas turėtų būti rodomas ar ne"
 
@@ -130,8 +102,8 @@ msgid ""
 "Use this tool to specify which operating systems users can choose at startup"
 msgstr ""
 "<span size=\"larger\" weight=\"bold\">Pradinio įkėliklio nustatymai</span>\n"
-"Šis įrankis naudojamas nurodyti kurias operacines sistemas naudotojai gali"
-"pasirinkti įkrauti"
+"Šis įrankis naudojamas nurodyti kurias operacines sistemas naudotojai "
+"galipasirinkti įkrauti"
 
 #: interfaces/boot.glade.in.h:9
 msgid ""
@@ -208,7 +180,7 @@ msgid ""
 msgstr ""
 "Įvesk įkelties bylos vardą ir nurodyk kokios rūšies operacinė sistema yra."
 
-#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:40
+#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:45
 msgid "Finished"
 msgstr "Baigta"
 
@@ -359,7 +331,7 @@ msgstr "Nepalaikoma platforma"
 msgid "Use this window to select the computer you wish to configure"
 msgstr "Naudokit šį langą konfigūruojamo kompiuterio pasirinkimui"
 
-#: interfaces/common.glade.in.h:12 interfaces/network.glade.in.h:96
+#: interfaces/common.glade.in.h:12 interfaces/network.glade.in.h:102
 msgid "_Password:"
 msgstr "_Slaptažodis:"
 
@@ -455,75 +427,95 @@ msgid "Activate when the computer _starts"
 msgstr "Aktyvuoti kai kompiuteris _startuoja"
 
 #: interfaces/network.glade.in.h:27
+msgid "Add DNS server"
+msgstr "Pridėti DNS serverį"
+
+#: interfaces/network.glade.in.h:28
+msgid "Add search domain"
+msgstr "Pridėti paieškos sritį"
+
+#: interfaces/network.glade.in.h:29
 msgid "Address configuration"
 msgstr "Adreso konfigūravimas"
 
-#: interfaces/network.glade.in.h:28 interfaces/users.glade.in.h:16
+#: interfaces/network.glade.in.h:30 interfaces/users.glade.in.h:16
 msgid "Advanced"
 msgstr "Papildomas"
 
-#: interfaces/network.glade.in.h:29
+#: interfaces/network.glade.in.h:31
 msgid "Allow activation control for all _users"
 msgstr "Leisti aktyvacijos valdymą visiems _naudotojams"
 
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:32
 msgid "Co_nfiguration:"
 msgstr "Ko_nfigūracija:"
 
-#: interfaces/network.glade.in.h:31
+#: interfaces/network.glade.in.h:33
 msgid "Connection type"
 msgstr "Prisijungimo tipas"
 
-#: interfaces/network.glade.in.h:32
+#: interfaces/network.glade.in.h:34
 msgid "Connections"
 msgstr "Prisijungimai"
 
 #. set window titles
-#: interfaces/network.glade.in.h:33 src/network/network-druid.c:72
+#: interfaces/network.glade.in.h:35 src/network/network-druid.c:72
 msgid "Creating a new network connection"
 msgstr "Kuriu naują tinklo prisijungimą"
 
-#: interfaces/network.glade.in.h:34
+#: interfaces/network.glade.in.h:36
 msgid "Current network profile:"
 msgstr "Esamas tinklo profilis:"
 
-#: interfaces/network.glade.in.h:35
+#: interfaces/network.glade.in.h:37
 msgid "DNS"
 msgstr "DNS"
 
-#: interfaces/network.glade.in.h:36
+#: interfaces/network.glade.in.h:38
+msgid "DNS Servers"
+msgstr "DNS serveriai"
+
+#: interfaces/network.glade.in.h:39
 msgid "D_omain name:"
 msgstr "_Domeno vardas:"
 
-#: interfaces/network.glade.in.h:37
+#: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
 msgstr "Įprastas šliuzo įrenginys:"
 
-#: interfaces/network.glade.in.h:38
+#: interfaces/network.glade.in.h:41
+msgid "Delete DNS server"
+msgstr "Pašalinti DNS serverį"
+
+#: interfaces/network.glade.in.h:42
+msgid "Delete search domain"
+msgstr "Pašalinti paieškos sritį"
+
+#: interfaces/network.glade.in.h:43
 msgid "Device:"
 msgstr "Įrenginys:"
 
-#: interfaces/network.glade.in.h:39
+#: interfaces/network.glade.in.h:44
 msgid "Domain / _Workgroup:"
 msgstr "Domenas / _Darbo grupė:"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:46
 msgid "General"
 msgstr "Pagrindiniai"
 
-#: interfaces/network.glade.in.h:42
+#: interfaces/network.glade.in.h:47
 msgid "Hosts"
 msgstr "Hostai"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:48
 msgid "ISP phone number"
 msgstr "IPT telefono numeris"
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:49
 msgid "Interface properties"
 msgstr "Sąsajos savybės"
 
-#: interfaces/network.glade.in.h:45
+#: interfaces/network.glade.in.h:50
 msgid ""
 "List of domains that the system will try to append to a hostname if there "
 "isn't already one specified"
@@ -531,27 +523,27 @@ msgstr ""
 "Domenų sąrašas, kuriuos sistema pridurs prie kompiuterio vardo jeigu dar "
 "joks nenurodytas"
 
-#: interfaces/network.glade.in.h:46
+#: interfaces/network.glade.in.h:51
 msgid "Modem _volume:"
 msgstr "Modemo _garsumas:"
 
-#: interfaces/network.glade.in.h:47
+#: interfaces/network.glade.in.h:52
 msgid "Network name:"
 msgstr "Tinklo vardas:"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:53
 msgid "Network profiles"
 msgstr "Tinklo profiliai"
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:54
 msgid "Networking Settings"
 msgstr "Tinklo nustatymai"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:55
 msgid "New network profile"
 msgstr "Naujas tinklo profilis"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:56
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
@@ -559,7 +551,7 @@ msgstr ""
 "Toliau, prašom įvesti naudotojo vardą ir slaptažodį, kuriuos jums suteikė "
 "Jūsų IPT."
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:57
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -567,11 +559,11 @@ msgstr ""
 "Dabar, prašom įvesti adresą, kurį turės šis tinklo įrenginys, ir nuotolinį "
 "adresą, prie kurio jis jungsis."
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:58
 msgid "Now, please enter the address that this network device will have."
 msgstr "Dabar įveskite adresą, kuris bus priskirtas šiam tinklo įrenginiui."
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:59
 msgid ""
 "Now, please specify if this connection should be enabled, this means that "
 "the configuration will be applied when the assistant finishes."
@@ -579,63 +571,67 @@ msgstr ""
 "Dabar nurodykite ar šis prisijungimas turi būti įjungtas, tai reiškia, kad "
 "konfigūracija bus pritaikyta kai pagalbininkas baigs darbą."
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:60
 msgid "Number to _access an external line:"
 msgstr "Numeris _prieiti prie išorinės linijos:"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:61
 msgid "Number to get to an _external line:"
 msgstr "Numeris išėjimui į _išorinę liniją :"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:62
 msgid "PPPD _options:"
 msgstr "PPPD _nustatymai:"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:63
 msgid "Pa_ssword (confirm):"
 msgstr "_Slaptažodis (patvirtinkit):"
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:64
 msgid "Phone _number:"
 msgstr "Telefono _numeris:"
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:65
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
 msgstr ""
-"Įveskite telefono numerį, kurį naudosite prisijungimui prie Interneto."
-"Šį numerį Jums turėjo nurodyti Jūsų IPT."
+"Įveskite telefono numerį, kurį naudosite prisijungimui prie Interneto.Šį "
+"numerį Jums turėjo nurodyti Jūsų IPT."
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:66
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
 msgstr ""
-"Pasirinkite bevielio ryšio įrenginį, kurį Jūs norite sukonfigūruoti ir nurodykite"
-"šios sąsajos tinklo vardą"
+"Pasirinkite bevielio ryšio įrenginį, kurį Jūs norite sukonfigūruoti ir "
+"nurodykitešios sąsajos tinklo vardą"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:67
 msgid "Please, select which type of connection you would like to add."
 msgstr "Pasirinkite, kurio tipo prisijungimą norėtumėte pridėti."
 
-#: interfaces/network.glade.in.h:63 interfaces/users.glade.in.h:39
+#: interfaces/network.glade.in.h:68 interfaces/users.glade.in.h:39
 msgid "Profile _name:"
 msgstr "Profilio _vardas:"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:69
 msgid "Se_condary:"
 msgstr "_Antrinis:"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:70
+msgid "Search Domains"
+msgstr "Paieškos sritys"
+
+#: interfaces/network.glade.in.h:71
 msgid "Set _DNS servers manually"
 msgstr "Nurodyti _DNS serverius rankiniu būdu"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:72
 msgid "Set modem as default _route to internet"
 msgstr "Nustatyti modemą kaip įprastą _kelią į internetą"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:73
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
@@ -643,12 +639,12 @@ msgstr ""
 "Padėjėjas padės Jums sukonfigūruoti naują\n"
 "tinklo prisijungimą."
 
-#: interfaces/network.glade.in.h:69
+#: interfaces/network.glade.in.h:75
 msgid ""
 "This is the list of IP addresses that the system will use as name servers"
 msgstr "Tai yra IP adresų, kuriuos sistema naudos kaip DNS serverius, sąrašas"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:76
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -656,159 +652,167 @@ msgstr ""
 "Norėdami tęsti Jūsų tinklo prisijungimo konfigūravimą, spauskite „Sekantis“. "
 "Norėdami išeiti, spauskite „Atšaukti“."
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:77
 msgid "Username and password"
 msgstr "Naudotojo vardas ir slaptažodis"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:78
 msgid "WI_NS server:"
 msgstr "WI_NS serveris:"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:79
 msgid "Wireless device:"
 msgstr "Bevielio ryšio įrenginys:"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:80
 msgid "Wireless settings"
 msgstr "Bevielio ryšio nustatymai"
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:81
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
 msgstr ""
-"Jūs ruošiatės sukurti naują tinklo prisijungimą. Norėdami išsaugoti pakeitimus "
-"spauskite „Pritaikyti“."
+"Jūs ruošiatės sukurti naują tinklo prisijungimą. Norėdami išsaugoti "
+"pakeitimus spauskite „Pritaikyti“."
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:82
 msgid "_Apply and activate connection"
 msgstr "_Pritaikyti ir aktyvuoti prisijungimą"
 
-#: interfaces/network.glade.in.h:77
+#: interfaces/network.glade.in.h:83
 msgid "_Autodetect"
 msgstr "_Aptikti"
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:84
 msgid "_Configuration:"
 msgstr "_Konfigūracija:"
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:85
 msgid "_Deactivate"
 msgstr "_Deaktyvuoti"
 
-#: interfaces/network.glade.in.h:80 interfaces/users.glade.in.h:53
+#: interfaces/network.glade.in.h:86 interfaces/users.glade.in.h:53
 #: src/boot/table.c:52 src/network/connection.c:64 src/network/dns.c:39
 #: src/network/hosts.c:42 src/users/table.c:48
 msgid "_Delete"
 msgstr "_Pašalinti"
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:87
 msgid "_Description:"
 msgstr "_Aprašymas:"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:88
 msgid "_Dial type:"
 msgstr "_Rinkimo tipas:"
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:89
 msgid "_Enable Windows networking"
 msgstr "Į_jungti Windows tinklų palaikymą"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:90
 msgid "_Ethernet"
 msgstr "_Tinklas"
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:91
 msgid "_Gateway address:"
 msgstr "Šliu_zo adresas:"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:92
 msgid "_Hostname:"
 msgstr "_Kompiuterio vardas:"
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:93
 msgid "_IP address:"
 msgstr "_IP adresas:"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:94
 msgid "_IR LAN"
 msgstr "_IR LAN"
 
-#: interfaces/network.glade.in.h:89
+#: interfaces/network.glade.in.h:95
 msgid "_Local IP address:"
 msgstr "_Vietinis IP adresas:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:96
 msgid "_Local IP:"
 msgstr "_Vietinis IP:"
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:97
 msgid "_Modem (PPP)"
 msgstr "_Modemas (PPP)"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:98
 msgid "_Modem port:"
 msgstr "_Modemo prievadas:"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:99
 msgid "_Network Profiles"
 msgstr "_Tinklo profiliai"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:100
 msgid "_Network name:"
 msgstr "_Tinklo vardas:"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:101
 msgid "_Parallel Line"
 msgstr "_Parelelinė linija"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:103
 msgid "_Phone number:"
 msgstr "_Telefono numeris:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:104
 msgid "_Primary:"
 msgstr "_Pirminis:"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:105
 msgid "_Remote IP address:"
 msgstr "_Nuotolinis IP adresas:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:106
 msgid "_Remote IP:"
 msgstr "_Nuotolinis IP:"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:107
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Bandyti iš naujo, jei prisijungimas nutrūksta arba neprisijungia"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:108
 msgid "_Save Current"
 msgstr "Iš_saugoti esamą"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:109
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Paleisti PPP kai tik modemas prisijungia"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:110
 msgid "_Subnet mask:"
 msgstr "_Subnet kaukė:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:111
 msgid "_Update DNS when this connection becomes active"
 msgstr "Atna_ujinti DNS kai šis prisijungimas tampa aktyviu"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:112
 msgid "_Use remote IP as default gateway"
 msgstr "Na_udoti nuotolinį IP kaip įprastą šliuzą"
 
-#: interfaces/network.glade.in.h:107 interfaces/users.glade.in.h:63
+#: interfaces/network.glade.in.h:113 interfaces/users.glade.in.h:63
 msgid "_Username:"
 msgstr "_Naudotojo vardas:"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:114
 msgid "_Wireless"
 msgstr "_Bevielis ryšys"
+
+#: interfaces/network.glade.in.h:115
+msgid "new DNS server"
+msgstr "naujas DNS serveris"
+
+#: interfaces/network.glade.in.h:116
+msgid "new search domain"
+msgstr "nauja paieškos sritis"
 
 #: interfaces/services.glade.in.h:1
 msgid ""
@@ -876,43 +880,68 @@ msgid ""
 "Use this tool for setting your current date, time and time zone"
 msgstr ""
 "<span size=\"larger\" weight=\"bold\">Laiko ir datos nustatymai</span>\n"
-"Šis įrankis naudojamas nustatyti Jūsų dabartinei datai, laikui ir laiko juostai"
+"Šis įrankis naudojamas nustatyti Jūsų dabartinei datai, laikui ir laiko "
+"juostai"
 
 #: interfaces/time.glade.in.h:8
 msgid "<span weight=\"bold\">Time Configuration</span>"
 msgstr "<span weight=\"bold\">Laiko konfigūracija</span>"
 
 #: interfaces/time.glade.in.h:9
+msgid "Add NTP Server"
+msgstr "Pridėti NTP serverį"
+
+#: interfaces/time.glade.in.h:10
+msgid "NTP server"
+msgstr "NTP serveris"
+
+#: interfaces/time.glade.in.h:11
 msgid "S_ynchronize clock with Internet servers:"
 msgstr "S_inchronizuoti laikrodį su Interneto serveriais:"
 
-#: interfaces/time.glade.in.h:10
+#: interfaces/time.glade.in.h:12
 msgid "Se_lect Servers..."
 msgstr "Pasi_rink serverius..."
 
-#: interfaces/time.glade.in.h:11
+#: interfaces/time.glade.in.h:13
 msgid "Time servers"
 msgstr "Laiko serveriai"
 
-#: interfaces/time.glade.in.h:12
+#: interfaces/time.glade.in.h:14
 msgid "Time zone"
 msgstr "Laiko juosta"
 
-#: interfaces/time.glade.in.h:13
+#: interfaces/time.glade.in.h:15
 msgid "Time zone:"
 msgstr "Laiko juosta:"
 
-#: interfaces/time.glade.in.h:14
+#: interfaces/time.glade.in.h:16
 msgid "_Date:"
 msgstr "_Data:"
 
-#: interfaces/time.glade.in.h:15
+#: interfaces/time.glade.in.h:17
 msgid "_Select Time Zone..."
 msgstr "_Pasirink laiko juostą..."
 
-#: interfaces/time.glade.in.h:16
+#: interfaces/time.glade.in.h:18
 msgid "_Time:"
 msgstr "_Laikas:"
+
+#: interfaces/time.glade.in.h:19
+msgid "date"
+msgstr "data"
+
+#: interfaces/time.glade.in.h:20
+msgid "hours"
+msgstr "valandos"
+
+#: interfaces/time.glade.in.h:21
+msgid "minutes"
+msgstr "minutės"
+
+#: interfaces/time.glade.in.h:22
+msgid "seconds"
+msgstr "sekundės"
 
 #: interfaces/users.glade.in.h:2
 msgid ""
@@ -1333,7 +1362,9 @@ msgstr "Įvestas slaptažodis yra neteisingas"
 msgid ""
 "Check that you typed it correctly and that you haven't activated the \"caps "
 "lock\" key"
-msgstr "Patikrinkit ar Jūs parašėte jį teisingai ir ar netyčia neįjungėte „Caps Lock“ klavišo"
+msgstr ""
+"Patikrinkit ar Jūs parašėte jį teisingai ir ar netyčia neįjungėte „Caps "
+"Lock“ klavišo"
 
 #: src/common/gst-auth.c:104
 #, c-format
@@ -1414,8 +1445,8 @@ msgid ""
 "This will disable any network connection with this interface as soon as you "
 "press \"apply\""
 msgstr ""
-"Iš karto kai tik paspausite „Pritaikyti“ visi tinklo prisijungimai su šia tinklo "
-"sąsaja bus atjungti"
+"Iš karto kai tik paspausite „Pritaikyti“ visi tinklo prisijungimai su šia "
+"tinklo sąsaja bus atjungti"
 
 #: src/network/callbacks.c:408
 #, c-format
@@ -1491,8 +1522,8 @@ msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device"
 msgstr ""
-"Norėdami tęsti Jūs turite suteikti šią informaciją arba pasirinkite kitą įprastą "
-"šliuzo įrenginį"
+"Norėdami tęsti Jūs turite suteikti šią informaciją arba pasirinkite kitą "
+"įprastą šliuzo įrenginį"
 
 #: src/network/callbacks.c:779
 msgid "The program redhat-config-network-cmd could not be found"
@@ -1745,7 +1776,8 @@ msgstr "Tinklo nustatymai"
 
 #: src/network/profile.c:51 src/users/profile-settings.c:215
 msgid "You will not be able to recover this profile after pressing \"apply\""
-msgstr "Po to kai paspausite „Pritaikyti“ Jūs jau nebegalėsite atkurti šio profilio"
+msgstr ""
+"Po to kai paspausite „Pritaikyti“ Jūs jau nebegalėsite atkurti šio profilio"
 
 #: src/network/profile.c:55
 #, c-format
@@ -1806,8 +1838,8 @@ msgid ""
 "Please run NTP support in the system to enable synchronization of your local "
 "time server with internet time servers"
 msgstr ""
-"Norėdami įjungti Jūsų vietinio laiko serverio sinchronizaciją su interneto laiko "
-"serveriais Jūs turite sistemoje paleisti NTP palaikymą"
+"Norėdami įjungti Jūsų vietinio laiko serverio sinchronizaciją su interneto "
+"laiko serveriais Jūs turite sistemoje paleisti NTP palaikymą"
 
 #: src/time/main.c:757
 msgid "Time and Date Settings"
@@ -1890,7 +1922,8 @@ msgstr "Grupės varde yra netinkamų simbolių"
 
 #: src/users/group-settings.c:206
 msgid "Please set a valid group name, using only lower case letters"
-msgstr "Prašom parinkite taisyklingą grupės vardą, naudojant tik mažąsias raides"
+msgstr ""
+"Prašom parinkite taisyklingą grupės vardą, naudojant tik mažąsias raides"
 
 #. if !exist.
 #: src/users/group-settings.c:209
@@ -2120,8 +2153,8 @@ msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
 msgstr ""
-"Keletas naudotojų gali dalintis tuo pačiu naudotojo ID, bet tai būna retai ir "
-"gali sukelti saugumo problemų"
+"Keletas naudotojų gali dalintis tuo pačiu naudotojo ID, bet tai būna retai "
+"ir gali sukelti saugumo problemų"
 
 #: src/users/user-settings.c:507
 #, c-format
@@ -2184,6 +2217,29 @@ msgstr "Šelas"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Pridėkite ir šalinkite naudotojus bei grupes"
+
+#~ msgid "Dialog complexity for the boot-admin tool"
+#~ msgstr "Dialogo sudėtingumas boot-admin įrankiui"
+
+#~ msgid "Dialog complexity for the network-admin tool"
+#~ msgstr "Dialogo sudėtingumas network-admin įrankiui"
+
+#~ msgid "Dialog complexity for the services-admin tool"
+#~ msgstr "Dialogo sudėtingumas services-admin įrankiui"
+
+#~ msgid "Dialog complexity for the time-admin tool"
+#~ msgstr "Dialogo sudėtingumas time-admin įrankiui"
+
+#~ msgid "Dialog complexity for the users-admin tool"
+#~ msgstr "Dialogo sudėtingumas users-admin įrankiui"
+
+#~ msgid ""
+#~ "The GNOME System Tools have two data display modes: basic mode and "
+#~ "advanced mode, the basic mode is intended to show less options than the "
+#~ "advanced mode"
+#~ msgstr ""
+#~ "GNOME Sistemos Įrankiai turi du rodymo rėžimus: pagrindinį ir išsamesnį, "
+#~ "pagrindinis rėžimas rodo mažiau parinkčių negu išsamus rėžimas"
 
 #~ msgid "1024x768"
 #~ msgstr "1024x768"
