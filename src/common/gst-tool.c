@@ -1680,6 +1680,9 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 	int ret;
 	gchar *p;
 
+	/* turn the descriptor blocking for writing the configuration */
+	fcntl (tool->backend_master_fd, F_SETFL, 0);
+
 	do {
 		ret = fputc (string [nread], tool->backend_stream);
 
@@ -1687,5 +1690,7 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 			nread++;
 	} while (nread < strlen (string));
 
+	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
+	
 	while (fflush (tool->backend_stream) != 0);
 }
