@@ -323,7 +323,7 @@ report_progress_do (GstTool *tool)
 	if (!tool->line)
 		tool->line = g_string_new ("");
 
-	while ((buffer = gst_tool_read_from_backend (tool, "\n", NULL))) {
+	while ((buffer = gst_tool_read_line_from_backend (tool))) {
 		for (i = 0; (i < strlen (buffer)); i++) {
 			gchar c = buffer [i];
 
@@ -638,8 +638,12 @@ gst_tool_read_xml_from_backend (GstTool *tool)
 	if (!tool->xml_document)
 		return NULL;
 
-	buffer = gst_tool_read_from_backend (tool, GST_TOOL_EOR "\r\n", NULL);
-	g_string_append (tool->xml_document, buffer);
+	do {
+		g_free (buffer);
+		buffer = gst_tool_read_line_from_backend (tool);
+		g_string_append (tool->xml_document, buffer);
+	} while (g_strrstr (buffer, GST_TOOL_EOR "\r\n") == NULL);
+
 	g_free (buffer);
 
 	if (tool->xml_document->str[0] == '<')
@@ -1672,12 +1676,28 @@ gst_tool_read_from_backend (GstTool *tool, gchar *needle, ...)
 	return gst_tool_read_from_backend_va (tool, needle, ap);
 }
 
+gchar*
+gst_tool_read_line_from_backend (GstTool *tool)
+{
+	gchar line[1000];
+
+	fcntl (tool->backend_master_fd, F_SETFL, 0);
+	fgets (line, 1000, tool->backend_stream);
+	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
+
+	return g_strdup (line);
+}
+
 void
 gst_tool_read_junk_from_backend (GstTool *tool, gchar *needle)
 {
-	gchar *buffer;
+	gchar *buffer = NULL;
 
-	buffer = gst_tool_read_from_backend (tool, needle, NULL);
+	do {
+		g_free (buffer);
+		buffer = gst_tool_read_line_from_backend (tool);
+	} while (g_strrstr (buffer, needle) == NULL);
+
 	g_free (buffer);
 }
 

@@ -174,6 +174,7 @@ void         gst_tool_clear_supported_platforms (GstTool *tool);
 void         gst_tool_process_startup (GstTool*);
 
 gchar*       gst_tool_read_from_backend (GstTool*, gchar*, ...);
+gchar*       gst_tool_read_line_from_backend (GstTool*);
 void         gst_tool_read_junk_from_backend (GstTool*, gchar*);
 void         gst_tool_write_to_backend (GstTool*, gchar*);
 void         gst_tool_write_xml_to_backend (GstTool*, xmlDoc*);
