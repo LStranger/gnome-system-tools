@@ -193,43 +193,6 @@ transfer_servers_xml_to_gui (XstTool *tool, xmlNodePtr root)
 }
 
 static void
-server_list_get_cb (GtkWidget *item, gpointer data)
-{
-	xmlNodePtr node = data;
-	char *s, *p;
-	
-	if (GTK_WIDGET_STATE (item) == GTK_STATE_SELECTED)
-	{
-		gtk_label_get (GTK_LABEL (GTK_BIN (item)->child), &s);
-		s = g_strdup (s);
-		
-		p = (char *) strchr (s, ' ');
-		if (p) 
-			*p = '\0';  /* Kill comments */
-		
-		node = xst_xml_element_add (node, "server");
-		xst_xml_element_set_content (node, s);
-		g_free (s);
-	}
-}
-
-static void
-transfer_servers_gui_to_xml (XstTool *tool, xmlNodePtr root)
-{
-	GtkWidget *ntp_list;
-	xmlNodePtr node;
-	
-	ntp_list = xst_dialog_get_widget (tool->main_dialog, "ntp_list");
-	
-	node = xst_xml_element_find_first (root, "sync");
-	if (!node) node = xst_xml_element_add (root, "sync");
-	
-	xst_xml_element_destroy_children (node);
-	
-	gtk_container_foreach (GTK_CONTAINER (ntp_list), server_list_get_cb, node);
-}
-
-static void
 transfer_sync_toggle_xml_to_gui (XstTool *tool, xmlNodePtr root)
 {
 	GtkWidget *toggle;
@@ -303,6 +266,5 @@ transfer_gui_to_xml (XstTool *tool, gpointer data)
 
 	transfer_time_gui_to_xml (tool, root);
 	transfer_timezone_gui_to_xml (tool, root);
-	//	transfer_servers_gui_to_xml (tool, root);
 	transfer_sync_toggle_gui_to_xml (tool, root);
 }
