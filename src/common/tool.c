@@ -92,32 +92,37 @@ static gboolean tool_interface_load()
 {
 	gchar *path;
 	
-  path = make_glade_path(tool_context->task);
-  tool_context->interface = glade_xml_new(path, NULL);
-  if (tool_context->interface)
-    glade_xml_signal_autoconnect(tool_context->interface);
-  else
-    g_error("Could not load tool interface from %s", path);
-  g_free(path);
+	/* Load interface from Glade file */
 
-  path = make_glade_path("common");
-  tool_context->common_interface = glade_xml_new(path, NULL);
-  if (!tool_context->common_interface) g_error("Could not load common interface elements from %s", path);
-  g_free(path);
+	path = make_glade_path(tool_context->task);
+	tool_context->interface = glade_xml_new(path, NULL);
 
-  /* TODO: Try some local paths here (e.g. if uninstalled). */
+	/* Connect signals */
 
-  if (tool_context->interface)
-  {
-    path = g_strjoin("_", tool_context->task, "admin", NULL);
-    tool_context->top_window = tool_widget_get(path);
-    g_free(path);
-		 
-		if (!tool_context->top_window)
-			g_error ("Undefined toplevel window in Glade file.");
-		else
-			return TRUE;
-	}
+	if (tool_context->interface)
+	        glade_xml_signal_autoconnect(tool_context->interface);
+	else
+	        g_error("Could not load tool interface from %s", path);
+	g_free(path);
+
+	/* Load common interface elements from Glade file */
+
+	path = make_glade_path("common");
+	tool_context->common_interface = glade_xml_new(path, NULL);
+	if (!tool_context->common_interface)
+	  g_error("Could not load common interface elements from %s", path);
+	g_free(path);
+
+	/* Locate and save a pointer to the top level window */
+
+	path = g_strjoin("_", tool_context->task, "admin", NULL);
+	tool_context->top_window = tool_widget_get(path);
+	g_free(path);
+
+	if (!tool_context->top_window)
+	        g_error ("Undefined toplevel window in Glade file.");
+	else
+	        return TRUE;
 	 
 	return FALSE;
 }
