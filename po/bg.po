@@ -3,14 +3,14 @@
 # This file is distributed under the same conditions as Gnome-system-tools.
 # Peter "Peshka" Slavov <pslavov@i-space.org>, 2004.
 # Vladimir "Kaladan" Petkov <vpetkov@i-space.org>, small updates, 2004.
-# 
-# 
+#
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: GST 0.34\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-07-03 04:51+0200\n"
-"PO-Revision-Date: 2004-07-03 17:26+0300\n"
+"POT-Creation-Date: 2004-07-26 04:16+0200\n"
+"PO-Revision-Date: 2004-07-26 09:13+0300\n"
 "Last-Translator: Vladimir Petkov <vpetkov@i-space.org>\n"
 "Language-Team: Bulgarian <dict@linux.zonebg.com>\n"
 "MIME-Version: 1.0\n"
@@ -88,6 +88,10 @@ msgid ""
 "more than one installed, if it's not set or isn't valid, then boot-admin "
 "will ask the user"
 msgstr ""
+"Този ключ определя коя програма за избиране на операционна система "
+"ще бъде настройвана от boot-admin в случай, че има инсталирани "
+"повече от една. Ако това не е зададено или не е поставена валидна "
+"информация - този въпрос ще бъде зададен на потребителя."
 
 #: gnome-system-tools.schemas.in.h:14
 msgid "Whether the tools will use remote administration or not"
@@ -129,31 +133,52 @@ msgstr "/dev/hdd"
 msgid "<b>Security</b>"
 msgstr "<b>Сигурност</b>"
 
-#: interfaces/boot.glade.in.h:7 interfaces/users.glade.in.h:4
+#: interfaces/boot.glade.in.h:7
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
+"Use this tool to specify which operating systems users can choose at startup"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Настройки на програмата за начално стартиране</span>\n"
+"Може да използвате този инструмент за да посочите между \n"
+"кои операционни системи ще може потребителите да \n"
+"избират при стартиране на системата."
+
+#: interfaces/boot.glade.in.h:9
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</"
+"span>\n"
+"\n"
+"please select which do you want to configure"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Няколко програми за начално стартиране са намерени на вашата система</span>\n"
+"\n"
+"моля, посочете коя искате да настроите"
+
+#: interfaces/boot.glade.in.h:12 interfaces/users.glade.in.h:6
 msgid "<span weight=\"bold\">Basic Settings</span>"
 msgstr "<span weight=\"bold\">Основни Настройки</span>"
 
-#: interfaces/boot.glade.in.h:8
+#: interfaces/boot.glade.in.h:13
 msgid "<span weight=\"bold\">Image Settings</span>"
 msgstr "<span weight=\"bold\">Настройки на Изображението</span>"
 
-#: interfaces/boot.glade.in.h:9
+#: interfaces/boot.glade.in.h:14
 msgid "<span weight=\"bold\">Other Settings</span>"
 msgstr "<span weight=\"bold\">Други Настройки</span>"
 
-#: interfaces/boot.glade.in.h:10
+#: interfaces/boot.glade.in.h:15
 msgid "<span weight=\"bold\">Starting the Computer</span>"
 msgstr "<span weight=\"bold\">Стартирайки Компютъра</span>"
 
-#: interfaces/boot.glade.in.h:11
+#: interfaces/boot.glade.in.h:16
 msgid "Ask at boot"
 msgstr "Пита при стартиране"
 
-#: interfaces/boot.glade.in.h:12 src/boot/main.c:73
+#: interfaces/boot.glade.in.h:17 src/boot/main.c:70
 msgid "Boot Manager Settings"
 msgstr "Настройки на Програмата за Начално Стартиране"
 
-#: interfaces/boot.glade.in.h:13
+#: interfaces/boot.glade.in.h:18
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -163,29 +188,29 @@ msgstr ""
 "като коренова директория. Също така може да въведете дапълнителните "
 "параметри, които се предават към ядрото при началното стартиране."
 
-#: interfaces/boot.glade.in.h:14
+#: interfaces/boot.glade.in.h:19
 msgid "Click \"Forward\" to continue"
 msgstr "Натиснете \"Напред\" за да Продължите"
 
-#: interfaces/boot.glade.in.h:15
+#: interfaces/boot.glade.in.h:20
 msgid "Confirmation"
 msgstr "Потвърждаване"
 
 #. set window title
-#: interfaces/boot.glade.in.h:16 src/boot/boot-druid.c:434
-#: src/boot/boot-druid.c:446
+#: interfaces/boot.glade.in.h:21 src/boot/boot-druid.c:441
+#: src/boot/boot-druid.c:453
 msgid "Creating a new boot image"
 msgstr "Създава ново изображение за стартиране"
 
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.in.h:22
 msgid "Don't ask me again"
 msgstr "Не ме питай пак"
 
-#: interfaces/boot.glade.in.h:18
+#: interfaces/boot.glade.in.h:23
 msgid "Enable IDE SCSI emulation"
 msgstr "Разрешаване на IDE-SCSI емулация"
 
-#: interfaces/boot.glade.in.h:19
+#: interfaces/boot.glade.in.h:24
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -193,57 +218,45 @@ msgstr ""
 "Въведете име, което се появява при началното стартиране и посочете какъв тип "
 "операционна система е."
 
-#: interfaces/boot.glade.in.h:20 interfaces/network.glade.in.h:40
+#: interfaces/boot.glade.in.h:25 interfaces/network.glade.in.h:40
 msgid "Finished"
 msgstr "Край"
 
-#: interfaces/boot.glade.in.h:21 src/network/connection.c:1612
+#: interfaces/boot.glade.in.h:26 src/network/connection.c:1612
 msgid "Manual"
 msgstr "Ръчно"
 
-#: interfaces/boot.glade.in.h:22
-msgid "Modify the settings for an operating system or kernel."
-msgstr "Промяна на настройките за операционната система или ядрото."
-
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:27
 msgid "Number of colors:"
 msgstr "Номер на цветовете:"
 
-#: interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.in.h:28
 msgid "Other parameters:"
 msgstr "Други параметри:"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:29
 msgid "Password"
 msgstr "Парола"
 
-#: interfaces/boot.glade.in.h:26
+#: interfaces/boot.glade.in.h:30
 msgid "Protect with password"
 msgstr "Защита с парола"
 
-#: interfaces/boot.glade.in.h:27
+#: interfaces/boot.glade.in.h:31
 msgid "Resolution:"
 msgstr "Разделителна способност:"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:32
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr ""
 "Секунди за изчакване, преди програмата да зареди ядрото или операционната "
 "система посочена по подразбиране"
 
-#: interfaces/boot.glade.in.h:29
-msgid ""
-"Several bootloaders have been found in the system, please select which do "
-"you want to configure"
-msgstr ""
-"Няколко програми за начално стартиране са намерени във вашата система, моля, "
-"посочете коя искате да настроите"
-
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:33
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Задаване на дяла, на който е инсталирана операционната система."
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:34
 msgid ""
 "The new boot image has been added. Please click \"Apply\" to save your "
 "changes."
@@ -251,7 +264,7 @@ msgstr ""
 "Новата операционна система за стартиране е добавена. Моля, натиснете "
 "\"Прилагане\" за да запазите вашите промени."
 
-#: interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.in.h:35
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -259,55 +272,43 @@ msgstr ""
 "Помощникът е направен, за да Ви помогне по-бързо и по-лесно да добавите нова "
 "операционна система за стартиране на Вашата система."
 
-#: interfaces/boot.glade.in.h:33
-msgid "Use this dialog to modify kernel parameters."
-msgstr "Използвайте този диалогов прозорец, за да промени параметрите на ядрото."
-
-#: interfaces/boot.glade.in.h:34
-msgid ""
-"Use this tool to specify which operating systems users can choose at startup."
-msgstr ""
-"Може да използвате този инструмент за да посочите между \n"
-"кои операционни системи ще може потребителите да \n"
-"избират при стартиране на системата."
-
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:36
 msgid "Video modes (only frame buffer)"
 msgstr "Видео режими (само за кадровата памет)"
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:37
 msgid "_Add..."
 msgstr "Доб_авяне..."
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:38
 msgid "_Device:"
 msgstr "Устройство:"
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:39
 msgid "_Edit"
 msgstr "Р_едактиране"
 
-#: interfaces/boot.glade.in.h:39 src/boot/boot-settings.c:43
+#: interfaces/boot.glade.in.h:40 src/boot/boot-settings.c:43
 msgid "_Initrd image path:"
 msgstr "Път до initrd - файла:"
 
-#: interfaces/boot.glade.in.h:40
+#: interfaces/boot.glade.in.h:41
 msgid "_Kernel image path:"
 msgstr "Път до ядрото:"
 
-#: interfaces/boot.glade.in.h:41
+#: interfaces/boot.glade.in.h:42
 msgid "_Name:"
 msgstr "_Име:"
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:43
 msgid "_Operating system:"
 msgstr "_Операционна система:"
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:44
 msgid "_Parameters:"
 msgstr "_Параметри:"
 
-#: interfaces/boot.glade.in.h:44
+#: interfaces/boot.glade.in.h:45
 msgid "_Root file system device:"
 msgstr "Уст_ройство с кореновата файлова система:"
 
@@ -328,14 +329,10 @@ msgstr ""
 "трябват администраторски права</span>"
 
 #: interfaces/common.glade.in.h:4
-msgid "Complexity"
-msgstr "Сложност"
-
-#: interfaces/common.glade.in.h:5
 msgid "Enter Password"
 msgstr "Въведете Парола"
 
-#: interfaces/common.glade.in.h:6
+#: interfaces/common.glade.in.h:5
 msgid ""
 "If you know for sure that it works like one of the platforms listed below, "
 "you can select that and continue. Note, however, that this might damage the "
@@ -345,19 +342,19 @@ msgstr ""
 "долу, можете да го посочите и да продължите. Забележете обаче, че това може "
 "да повреди настройките на системата или да осакати вашия компютър."
 
-#: interfaces/common.glade.in.h:7
+#: interfaces/common.glade.in.h:6
 msgid "Remote administration"
 msgstr "Отдалечена администрация"
 
-#: interfaces/common.glade.in.h:8
+#: interfaces/common.glade.in.h:7
 msgid "Run _Without Password"
 msgstr "Стартиране _Без Парола"
 
-#: interfaces/common.glade.in.h:9
+#: interfaces/common.glade.in.h:8
 msgid "Scanning system configuration..."
 msgstr "Преглеждане на системните настройки..."
 
-#: interfaces/common.glade.in.h:10
+#: interfaces/common.glade.in.h:9
 msgid ""
 "To acquire such privileges, enter your root password below. If you don't "
 "specify a password, you will be  unable to modify your system configuration."
@@ -366,16 +363,16 @@ msgstr ""
 "парола. Ако не въведете паролата няма да можете да променяте настройките на "
 "Вашата система."
 
-#: interfaces/common.glade.in.h:11
+#: interfaces/common.glade.in.h:10
 msgid "Unsupported Platform"
 msgstr "Неподдържана Платформа"
 
-#: interfaces/common.glade.in.h:12
+#: interfaces/common.glade.in.h:11
 msgid "Use this window to select the computer you wish to configure"
-msgstr "Този прозорец се използва за задаване на компютър, който изкате да "
-"настроите"
+msgstr ""
+"Този прозорец се използва за задаване на компютър, който изкате да настроите"
 
-#: interfaces/common.glade.in.h:13 interfaces/network.glade.in.h:103
+#: interfaces/common.glade.in.h:12 interfaces/network.glade.in.h:96
 msgid "_Password:"
 msgstr "_Парола:"
 
@@ -398,84 +395,85 @@ msgid "<b>Profile Settings</b>"
 msgstr "<b>Настройки на Профила</b>"
 
 #: interfaces/network.glade.in.h:9
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
+"Use this tool for configuring the way your system access to other computers"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Настройки на мрежата</span>\n"
+"Използвайте този инструмент, за да настроите начините, по които "
+"вашият компютър достъпва други компютри"
+
+#: interfaces/network.glade.in.h:11
 msgid "<span weight=\"bold\">Access Settings</span>"
 msgstr "<span weight=\"bold\">Настройки за Достъп</span>"
 
-#: interfaces/network.glade.in.h:10
+#: interfaces/network.glade.in.h:12
 msgid "<span weight=\"bold\">Account Data</span>"
 msgstr "<span weight=\"bold\">Данни за Абонамента</span>"
 
-#: interfaces/network.glade.in.h:11
+#: interfaces/network.glade.in.h:13
 msgid "<span weight=\"bold\">Connection settings</span>"
 msgstr "<span weight=\"bold\">Настройки за връзката</span>"
 
-#: interfaces/network.glade.in.h:12
+#: interfaces/network.glade.in.h:14
 msgid "<span weight=\"bold\">Connection</span>"
 msgstr "<span weight=\"bold\">Връзка</span>"
 
-#: interfaces/network.glade.in.h:13
+#: interfaces/network.glade.in.h:15
 msgid "<span weight=\"bold\">DNS Servers</span>"
 msgstr "<span weight=\"bold\">Сървър за Имена (DNS)</span>"
 
-#: interfaces/network.glade.in.h:14
+#: interfaces/network.glade.in.h:16
 msgid "<span weight=\"bold\">Host Settings</span>"
 msgstr "<span weight=\"bold\">Настройки на Хоста</span>"
 
-#: interfaces/network.glade.in.h:15
+#: interfaces/network.glade.in.h:17
 msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
 msgstr "<span weight=\"bold\">Данни за Доставчика на Интернет</span>"
 
-#: interfaces/network.glade.in.h:16
+#: interfaces/network.glade.in.h:18
 msgid "<span weight=\"bold\">PPP Settings</span>"
 msgstr "<span weight=\"bold\">Настройки за Модема</span>"
 
-#: interfaces/network.glade.in.h:17
+#: interfaces/network.glade.in.h:19
 msgid "<span weight=\"bold\">Search Domains</span>"
 msgstr "<span weight=\"bold\">Домейн за Търсене</span>"
 
-#: interfaces/network.glade.in.h:18
+#: interfaces/network.glade.in.h:20
 msgid "<span weight=\"bold\">Windows Networking</span>"
 msgstr "<span weight=\"bold\">Мрежова Връзка с Windows-и</span>"
 
-#: interfaces/network.glade.in.h:19
+#: interfaces/network.glade.in.h:21
 msgid "<span weight=\"bold\">Wireless settings:</span>"
 msgstr "<span weight=\"bold\">Настройки за безжична връзка</span>"
 
-#: interfaces/network.glade.in.h:20
+#: interfaces/network.glade.in.h:22
 msgid "A_liases:"
 msgstr "Псе_вдоними:"
 
-#: interfaces/network.glade.in.h:21 interfaces/users.glade.in.h:13
+#: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:15
 msgid "Account"
 msgstr "Абонамент"
 
-#: interfaces/network.glade.in.h:22
+#: interfaces/network.glade.in.h:24
 msgid "Activate"
 msgstr "Активиране"
 
-#: interfaces/network.glade.in.h:23
+#: interfaces/network.glade.in.h:25
 msgid "Activate connection"
 msgstr "Активиране на връзката"
 
-#: interfaces/network.glade.in.h:24
+#: interfaces/network.glade.in.h:26
 msgid "Activate when the computer _starts"
 msgstr "Активация когато се _стартира компютъра"
 
-#: interfaces/network.glade.in.h:25
+#: interfaces/network.glade.in.h:27
 msgid "Address configuration"
 msgstr "Настройки на Адреса"
 
-#: interfaces/network.glade.in.h:26 interfaces/users.glade.in.h:14
+#: interfaces/network.glade.in.h:28 interfaces/users.glade.in.h:16
 msgid "Advanced"
 msgstr "Допълнително"
-
-#: interfaces/network.glade.in.h:27
-msgid "Advanced PPP connection tuning."
-msgstr "Допълнителни ностройки на PPP връзката"
-
-#: interfaces/network.glade.in.h:28
-msgid "Aliases of other computers."
-msgstr "Псевдоними за адресите на други компютри"
 
 #: interfaces/network.glade.in.h:29
 msgid "Allow activation control for all _users"
@@ -531,30 +529,14 @@ msgid "Hosts"
 msgstr "Хостове"
 
 #: interfaces/network.glade.in.h:43
-msgid "How the names of other computers are found."
-msgstr "Как се намират имената на другите компюрти."
-
-#: interfaces/network.glade.in.h:44
-msgid "How this computer is identified."
-msgstr "Как се идентифицира този компютър."
-
-#: interfaces/network.glade.in.h:45
-msgid "How to access other computers."
-msgstr "Как да се свържа с другите компютри."
-
-#: interfaces/network.glade.in.h:46
-msgid "How to dial up to the Internet."
-msgstr "Как да се свържа по телефона с Интернет."
-
-#: interfaces/network.glade.in.h:47
 msgid "ISP phone number"
 msgstr "Телефонен номер на Доставчика"
 
-#: interfaces/network.glade.in.h:48
+#: interfaces/network.glade.in.h:44
 msgid "Interface properties"
 msgstr "Настройки на интерфейса"
 
-#: interfaces/network.glade.in.h:49
+#: interfaces/network.glade.in.h:45
 msgid ""
 "List of domains that the system will try to append to a hostname if there "
 "isn't already one specified"
@@ -562,41 +544,35 @@ msgstr ""
 "Списък с домейни, които системета ще се опита да приложи на името на "
 "компютъра аконяма вече избран такъв"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:46
 msgid "Modem _volume:"
 msgstr "Сила на _звука на модема:"
 
-#: interfaces/network.glade.in.h:51
+#: interfaces/network.glade.in.h:47
 msgid "Network name:"
 msgstr "Име в мрежата:"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:48
 msgid "Network profiles"
 msgstr "Мрежови профили"
 
-#: interfaces/network.glade.in.h:53
-msgid "Network profiles can be used to store different network configurations."
-msgstr ""
-"Мрежовите профили може да се използват за да се съхраняват различни мрежови "
-"конфигурации."
-
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:49
 msgid "Networking Settings"
 msgstr "Мрежови Настройки"
 
-#: interfaces/network.glade.in.h:55
+#: interfaces/network.glade.in.h:50
 msgid "New network profile"
 msgstr "Нов мрежов профил"
 
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:51
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
 msgstr ""
-"Следващ, моля въведете потребителското име и парола, дадени от "
-"Вашия Интернет Доставчик"
+"Следващ, моля въведете потребителското име и парола, дадени от Вашия "
+"Интернет Доставчик"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:52
 msgid ""
 "Now, please enter the address that this network device will have, and the "
 "remote address to which it will be connected."
@@ -604,37 +580,40 @@ msgstr ""
 "Сега, моля въведете адреса, който ще има това мрежово устройство и "
 "отдалечения адрес към, който то ще се свърже."
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:53
 msgid "Now, please enter the address that this network device will have."
 msgstr "Сега, моля въведете адреса, който ще има това мрежово устройство."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:54
 msgid ""
 "Now, please specify if this connection should be enabled, this means that "
 "the configuration will be applied when the assistant finishes."
 msgstr ""
+"Сега, определете дали тази връзка трябва да бъде разрешена, това "
+"означава, че настройките ще бъдат приложени след като приключи "
+"задаването им в тази програма."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:55
 msgid "Number to _access an external line:"
 msgstr "Номер за _достъп до външна линия:"
 
-#: interfaces/network.glade.in.h:61
+#: interfaces/network.glade.in.h:56
 msgid "Number to get to an _external line:"
 msgstr "Ном_ер за да получаване на външна линия:"
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:57
 msgid "PPPD _options:"
 msgstr "_Опции за PPPD:"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:58
 msgid "Pa_ssword (confirm):"
 msgstr "Потвърждение на паролата:"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:59
 msgid "Phone _number:"
 msgstr "Телефонен _номер"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:60
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP."
@@ -642,39 +621,35 @@ msgstr ""
 "Моля, въведете телефонен номер, който да използвате за връзка с Интернет. "
 "Този номер се дава от вашия Доставчик."
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:61
 msgid ""
 "Please select the wireless device that you want to configure and set the "
 "network name for this interface"
 msgstr ""
-"Моля, посочете безжично устройство, което искате да конфигурирате и настройте "
-"името в мрежата за този интерфейс"
+"Моля, посочете безжично устройство, което искате да конфигурирате и "
+"настройте името в мрежата за този интерфейс"
 
-#: interfaces/network.glade.in.h:67
-msgid "Please, give this network profile a name and a description."
-msgstr "Моля, дайте име и описание на този мрежови профил."
-
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:62
 msgid "Please, select which type of connection you would like to add."
 msgstr "Моля, посочете какъв тип връзка искате да добавите."
 
-#: interfaces/network.glade.in.h:69 interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:63 interfaces/users.glade.in.h:39
 msgid "Profile _name:"
 msgstr "Име _на профила:"
 
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:64
 msgid "Se_condary:"
 msgstr "Вторичен:"
 
-#: interfaces/network.glade.in.h:71
+#: interfaces/network.glade.in.h:65
 msgid "Set _DNS servers manually"
 msgstr "Посочете ръчно Сървър за Имената в интернет (DNS)"
 
-#: interfaces/network.glade.in.h:72
+#: interfaces/network.glade.in.h:66
 msgid "Set modem as default _route to internet"
 msgstr "Наст_ройте модема като връзка по подразбиране към Интернет"
 
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:67
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
@@ -682,14 +657,14 @@ msgstr ""
 "Този помощник ще ви помогне да настроите нова \n"
 "мрежова връзка."
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:69
 msgid ""
 "This is the list of IP addresses that the system will use as name servers"
 msgstr ""
 "Това е списък на IP адресите, които системата ще използва като сървъри за "
 "имена"
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:70
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
@@ -697,27 +672,23 @@ msgstr ""
 "За да продължите да конфигурирате вашата мрежова връзка, натиснете \"Напред"
 "\", за да излезете натиснете \"Прекъсване\"."
 
-#: interfaces/network.glade.in.h:77
-msgid "Use this dialog for setting the configuration for this interface"
-msgstr "Използвайте този прозорец за настройка на интерфейса"
-
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:71
 msgid "Username and password"
 msgstr "Потребителско име и парола"
 
-#: interfaces/network.glade.in.h:79
+#: interfaces/network.glade.in.h:72
 msgid "WI_NS server:"
 msgstr "WINS сървър:"
 
-#: interfaces/network.glade.in.h:80
+#: interfaces/network.glade.in.h:73
 msgid "Wireless device:"
 msgstr "Безжично устройство:"
 
-#: interfaces/network.glade.in.h:81
+#: interfaces/network.glade.in.h:74
 msgid "Wireless settings"
 msgstr "Настройки за безжичната връзка"
 
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:75
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
@@ -725,173 +696,178 @@ msgstr ""
 "Вие сте на път да създадете нова мрежова връзка. Моля, натиснете бутонът "
 "\"Прилага\", за да запазите настройките."
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:76
 msgid "_Apply and activate connection"
 msgstr "_Използване и активиране на връзката"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:77
 msgid "_Autodetect"
 msgstr "_Автоматично засичне"
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:78
 msgid "_Configuration:"
 msgstr "Настройки:"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:79
 msgid "_Deactivate"
 msgstr "Изключване"
 
-#: interfaces/network.glade.in.h:87 interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:80 interfaces/users.glade.in.h:53
 #: src/boot/table.c:52 src/network/connection.c:64 src/network/dns.c:39
 #: src/network/hosts.c:42 src/users/table.c:48
 msgid "_Delete"
 msgstr "Изтриване"
 
-#: interfaces/network.glade.in.h:88
+#: interfaces/network.glade.in.h:81
 msgid "_Description:"
 msgstr "Описание:"
 
-#: interfaces/network.glade.in.h:89
+#: interfaces/network.glade.in.h:82
 msgid "_Dial type:"
 msgstr "Тип на набиране:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:83
 msgid "_Enable Windows networking"
 msgstr "Позволяване на Windows - мр_ежа "
 
-#: interfaces/network.glade.in.h:91
+#: interfaces/network.glade.in.h:84
 msgid "_Ethernet"
 msgstr "Локална Мр_ежа"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:85
 msgid "_Gateway address:"
 msgstr "Адрес на Рутера:"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:86
 msgid "_Hostname:"
 msgstr "Име на Компютъра:"
 
-#: interfaces/network.glade.in.h:94
+#: interfaces/network.glade.in.h:87
 msgid "_IP address:"
 msgstr "_IP адрес:"
 
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:88
 msgid "_IR LAN"
 msgstr "Инфра-Червена (IR) LAN Връзка"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:89
 msgid "_Local IP address:"
 msgstr "_Локален IP адрес:"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:90
 msgid "_Local IP:"
 msgstr "_Локален IP:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:91
 msgid "_Modem (PPP)"
 msgstr "Модем (PPP)"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:92
 msgid "_Modem port:"
 msgstr "Порт на Модема:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:93
 msgid "_Network Profiles"
 msgstr "_Мрежови Профили"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:94
 msgid "_Network name:"
 msgstr "Име в _Мрежата:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:95
 msgid "_Parallel Line"
 msgstr "_Паралелна Връзка"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:97
 msgid "_Phone number:"
 msgstr "Телефонен Номер:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:98
 msgid "_Primary:"
 msgstr "_Основен:"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:99
 msgid "_Remote IP address:"
 msgstr "Отдалечен IP адрес:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:100
 msgid "_Remote IP:"
 msgstr "Отдалечен IP:"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:101
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "Опитате пак ако не се свъ_рже или връзката се разпадне"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:102
 msgid "_Save Current"
 msgstr "Запазване на Текущите"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:103
 msgid "_Start PPP as soon as modem connects"
 msgstr "Стартиране на PPP веднага щом модема се свърже"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:104
 msgid "_Subnet mask:"
 msgstr "Ма_ска на Мрежата:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:105
 msgid "_Update DNS when this connection becomes active"
 msgstr "Обновяване на DNS, когато се активира тази връзка"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:106
 msgid "_Use remote IP as default gateway"
 msgstr "Използване на отдалечен IP адрес като рутер по подразбиране"
 
-#: interfaces/network.glade.in.h:114 interfaces/users.glade.in.h:65
+#: interfaces/network.glade.in.h:107 interfaces/users.glade.in.h:63
 msgid "_Username:"
 msgstr "Потребителско _Име:"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:108
 msgid "_Wireless"
 msgstr "Безжична _връзка"
 
 #: interfaces/services.glade.in.h:1
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
+"use this tool to specify which services to run at boot time"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Настройки на услугите</span>\n"
+"използвайте този инструмент, за да определите, кои услуги "
+"искате да се зареждат при стартиране на системата"
+
+#: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">Обща Информация</span>"
 
-#: interfaces/services.glade.in.h:2
+#: interfaces/services.glade.in.h:4
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">Настройки на Услугите</span>"
 
-#: interfaces/services.glade.in.h:3
+#: interfaces/services.glade.in.h:5
 msgid "Description:"
 msgstr "Описание:"
 
-#: interfaces/services.glade.in.h:4
+#: interfaces/services.glade.in.h:6
 msgid "Service _Properties"
 msgstr "Настройки на Услугата"
 
-#: interfaces/services.glade.in.h:5
+#: interfaces/services.glade.in.h:7
 msgid "Service:"
 msgstr "Услуга:"
 
-#: interfaces/services.glade.in.h:6
+#: interfaces/services.glade.in.h:8
 msgid "Status:"
 msgstr "Състояние:"
 
-#: interfaces/services.glade.in.h:7
-msgid "Use this tool to specify which services to run"
-msgstr "Този инструмент се използва за определяне на услугите, които да се стартират"
-
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:9
 msgid "_Order list by startup sequence"
 msgstr "По_следователност на стартиране"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:10
 msgid "_Start"
 msgstr "Начало"
 
-#: interfaces/services.glade.in.h:10
+#: interfaces/services.glade.in.h:11
 msgid "_Startup sequence:"
 msgstr "По_следователност на стартиране:"
 
@@ -904,304 +880,286 @@ msgid ":"
 msgstr ":"
 
 #: interfaces/time.glade.in.h:4
+msgid "<b>Selection</b>"
+msgstr "<b>Избор</b>"
+
+#: interfaces/time.glade.in.h:5
+msgid "<b>Time zone</b>"
+msgstr "<b>Часова зона</b>"
+
+#: interfaces/time.glade.in.h:6
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
+"Use this tool for setting your current date, time and time zone"
+msgstr ""
+"<span size=\"larger\" weight=\"bold\">Настройки на час и дата</span>\n"
+"Използвайте този инструмент, за да настроите текущата дата, време "
+"и часова зона."
+
+#: interfaces/time.glade.in.h:8
 msgid "<span weight=\"bold\">Time Configuration</span>"
 msgstr "<span weight=\"bold\">Настройка на Час и Дата</span>"
 
-#: interfaces/time.glade.in.h:5
-msgid ""
-"Please select the current date and time. You can also specify a time zone "
-"and a time server."
-msgstr ""
-"Моля, посочете текущия час и дата. Можете също да посочите часова зона и "
-"сървър за часа."
-
-#: interfaces/time.glade.in.h:6
+#: interfaces/time.glade.in.h:9
 msgid "S_ynchronize clock with Internet servers:"
 msgstr "Синхронизация на часовника с Интернет сървъри:"
 
-#: interfaces/time.glade.in.h:7
+#: interfaces/time.glade.in.h:10
 msgid "Se_lect Servers..."
 msgstr "Избиране на Сървъри..."
 
-#: interfaces/time.glade.in.h:8
-msgid "Select the servers you wish to use for time synchronization."
-msgstr "Моля, изберете сървърите, които искате да използвате за синхронизация."
+#: interfaces/time.glade.in.h:11
+msgid "Time servers"
+msgstr "Сървъри за време"
 
-#: interfaces/time.glade.in.h:9
+#: interfaces/time.glade.in.h:12
+msgid "Time zone"
+msgstr "Часова зона"
+
+#: interfaces/time.glade.in.h:13
 msgid "Time zone:"
 msgstr "Часова зона:"
 
-#: interfaces/time.glade.in.h:10
-msgid "To select a time zone, click on one of the dots on the map"
-msgstr "За да посочите часова зона, натиснете върху една от точките на картата"
-
-#: interfaces/time.glade.in.h:11
+#: interfaces/time.glade.in.h:14
 msgid "_Date:"
 msgstr "_Дата:"
 
-#: interfaces/time.glade.in.h:12
+#: interfaces/time.glade.in.h:15
 msgid "_Select Time Zone..."
 msgstr "_Избиране на Часова Зона..."
 
-#: interfaces/time.glade.in.h:13
+#: interfaces/time.glade.in.h:16
 msgid "_Time:"
 msgstr "_Час:"
 
 #: interfaces/users.glade.in.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
+"Use this tool for configuring users and groups settings in your system"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Настройки на групите и потребителите</span>\n"
+"Използвайте този инструмент, за да настроите потребителите и групите "
+"на вашата система"
+
+#: interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Advanced Settings</span>"
 msgstr "<span weight=\"bold\">Разширени Настройки</span>"
 
-#: interfaces/users.glade.in.h:3
+#: interfaces/users.glade.in.h:5
 msgid "<span weight=\"bold\">Automatic UID/GID</span>"
 msgstr "<span weight=\"bold\">Автоматично UID/GID</span>"
 
-#: interfaces/users.glade.in.h:5
+#: interfaces/users.glade.in.h:7
 msgid "<span weight=\"bold\">Contact Information</span>"
 msgstr "<span weight=\"bold\">Информация за Контакт</span>"
 
-#: interfaces/users.glade.in.h:6
+#: interfaces/users.glade.in.h:8
 msgid "<span weight=\"bold\">Group Members</span>"
 msgstr "<span weight=\"bold\">Членове на Групата</span>"
 
-#: interfaces/users.glade.in.h:7
+#: interfaces/users.glade.in.h:9
 msgid "<span weight=\"bold\">Optional Settings</span>"
 msgstr "<span weight=\"bold\">Допълнителни Настройки</span>"
 
-#: interfaces/users.glade.in.h:8
+#: interfaces/users.glade.in.h:10
 msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Настройки за Паролата</span>"
 
-#: interfaces/users.glade.in.h:9
+#: interfaces/users.glade.in.h:11
 msgid "<span weight=\"bold\">Password</span>"
 msgstr "<span weight=\"bold\">Парола</span>"
 
-#: interfaces/users.glade.in.h:10
+#: interfaces/users.glade.in.h:12
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Настройки за Профила</span>"
 
-#: interfaces/users.glade.in.h:11
+#: interfaces/users.glade.in.h:13
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Настройки по Подразбиране</span"
 
-#: interfaces/users.glade.in.h:12
+#: interfaces/users.glade.in.h:14
 msgid "<span weight=\"bold\">User Profile</span>"
 msgstr "<span weight=\"bold\">Профил на потребителя</span>"
 
-#: interfaces/users.glade.in.h:15
+#: interfaces/users.glade.in.h:17
 msgid "Assign a random password by default"
 msgstr "Задаване на случайна парола по подразбиране"
 
-#: interfaces/users.glade.in.h:16
+#: interfaces/users.glade.in.h:18
 msgid "Check password _quality"
 msgstr "Проверка качеството на паролата"
 
-#: interfaces/users.glade.in.h:17
+#: interfaces/users.glade.in.h:19
 msgid "Con_firmation:"
 msgstr "Потвърждение:"
 
-#: interfaces/users.glade.in.h:18
+#: interfaces/users.glade.in.h:20
 msgid "Days between warning and password expiration:"
 msgstr "Дни между предупреждението и изтичането на паролата"
 
-#: interfaces/users.glade.in.h:19
+#: interfaces/users.glade.in.h:21
 msgid "Default _group:"
 msgstr "_Група по подразбиране:"
 
-#: interfaces/users.glade.in.h:20
+#: interfaces/users.glade.in.h:22
 msgid "Default _shell:"
 msgstr "Обвивка по подразбиране:"
 
-#: interfaces/users.glade.in.h:21
+#: interfaces/users.glade.in.h:23
 msgid "Generate _random password"
 msgstr "Гене_риране на случайна парола"
 
-#: interfaces/users.glade.in.h:22
-msgid "Group Properties"
-msgstr "Настройки на Групата"
-
-#: interfaces/users.glade.in.h:23
+#: interfaces/users.glade.in.h:24
 msgid "Group _ID:"
 msgstr "_ID на групата:"
 
-#: interfaces/users.glade.in.h:24
+#: interfaces/users.glade.in.h:25
 msgid "Group _members:"
 msgstr "Членове на групата:"
 
-#: interfaces/users.glade.in.h:25
+#: interfaces/users.glade.in.h:26
 msgid "Group _name:"
 msgstr "Име на групата:"
 
-#: interfaces/users.glade.in.h:26
+#: interfaces/users.glade.in.h:27
+msgid "Group properties"
+msgstr "Настройки на групата"
+
+#: interfaces/users.glade.in.h:28
 msgid "Groups"
 msgstr "Групи"
 
-#: interfaces/users.glade.in.h:27
+#: interfaces/users.glade.in.h:29
 msgid "Ma_ximum days a password may be used:"
 msgstr "Максимум дни за използване на паролата:"
 
-#: interfaces/users.glade.in.h:28
+#: interfaces/users.glade.in.h:30
 msgid "Maximum UID:"
 msgstr "Максимално·UID:"
 
-#: interfaces/users.glade.in.h:29
+#: interfaces/users.glade.in.h:31
 msgid "Mi_nimum days between password changes:"
 msgstr "Минимум дни между промяна на паролата:"
 
-#: interfaces/users.glade.in.h:30
+#: interfaces/users.glade.in.h:32
 msgid "Minimum GID:"
 msgstr "Минимум GID:"
 
-#: interfaces/users.glade.in.h:31
+#: interfaces/users.glade.in.h:33
 msgid "Minimum UID:"
 msgstr "Минимум UID:"
 
-#: interfaces/users.glade.in.h:32
+#: interfaces/users.glade.in.h:34
 msgid "Minimum days allowed between password changes:"
 msgstr "Позволени минимум дни между промяна на паролата:"
 
-#: interfaces/users.glade.in.h:33
+#: interfaces/users.glade.in.h:35
 msgid "Number of days that a password may be used:"
 msgstr "Брой дни, в които може да се използва паролата:"
 
-#: interfaces/users.glade.in.h:34
+#: interfaces/users.glade.in.h:36
 msgid "O_ffice location:"
 msgstr "Местоположение на о_фиса:"
 
-#: interfaces/users.glade.in.h:35
-msgid ""
-"On this page, you can define the system defaults which will be assigned to "
-"new users."
-msgstr ""
-"На тази страница, може да определите настройките, които по принцип да се "
-"прилагат на нов потребител."
-
-#: interfaces/users.glade.in.h:36
+#: interfaces/users.glade.in.h:37
 msgid "Other Groups"
 msgstr "Други Групи"
 
-#: interfaces/users.glade.in.h:37
+#: interfaces/users.glade.in.h:38
 msgid "Password set to: "
 msgstr "Настройване паролата на:"
 
-#: interfaces/users.glade.in.h:39
+#: interfaces/users.glade.in.h:40
 msgid "Set password b_y hand"
 msgstr "Настройва паролата р_ъчно"
 
-#: interfaces/users.glade.in.h:40
+#: interfaces/users.glade.in.h:41
 msgid "Show a_ll users and groups"
 msgstr "Показване на всички потребители и групи"
 
-#: interfaces/users.glade.in.h:41
-msgid ""
-"This is the list of the groups available on the system. Create new groups or "
-"edit existing groups with this dialog."
-msgstr ""
-"Това е списък със съществуващите групи в системата. С този прозорец можете "
-"да добавите група или да редактирате съществуваща такава."
-
 #: interfaces/users.glade.in.h:42
-msgid ""
-"This is the list of the users available on the system. Create new users or "
-"edit existing user settings with this dialog."
-msgstr ""
-"Това е списък със съществуващите потребители в системата. С този прозорец "
-"можете да добавите потребител или да редактирате съществуващ такъв."
-
-#: interfaces/users.glade.in.h:43
-msgid "User Profiles"
-msgstr "Профили на Потребителите"
-
-#: interfaces/users.glade.in.h:44
 msgid "User _ID:"
 msgstr "_ID на Потребителя:"
 
-#: interfaces/users.glade.in.h:45
+#: interfaces/users.glade.in.h:43
 msgid "User _password:"
 msgstr "Парола на потребителя:"
 
-#: interfaces/users.glade.in.h:46
-msgid ""
-"User profiles can be used as templates to facilitate the creation of new "
-"users."
-msgstr ""
-"Профилите на потребителите може де се използват като шаблон за създаването "
-"на нов потребител."
+#: interfaces/users.glade.in.h:44
+msgid "User profiles"
+msgstr "Профили на потребителите"
 
-#: interfaces/users.glade.in.h:47
+#: interfaces/users.glade.in.h:45
 msgid "Users"
 msgstr "Потребители"
 
-#: interfaces/users.glade.in.h:48
+#: interfaces/users.glade.in.h:46
 msgid "_Add Group..."
 msgstr "Доб_авяне на Група..."
 
-#: interfaces/users.glade.in.h:49
+#: interfaces/users.glade.in.h:47
 msgid "_Add Profile..."
 msgstr "Доб_авяне на Профил..."
 
-#: interfaces/users.glade.in.h:50
+#: interfaces/users.glade.in.h:48
 msgid "_Add User..."
 msgstr "Доб_авяне на Потребител..."
 
-#: interfaces/users.glade.in.h:51
+#: interfaces/users.glade.in.h:49
 msgid "_All users:"
 msgstr "_Всички потребители:"
 
-#: interfaces/users.glade.in.h:52
+#: interfaces/users.glade.in.h:50
 msgid "_Available groups:"
 msgstr "Групи на Р_азположение:"
 
-#: interfaces/users.glade.in.h:53
+#: interfaces/users.glade.in.h:51
 msgid "_Comments"
 msgstr "Коментари"
 
-#: interfaces/users.glade.in.h:54
+#: interfaces/users.glade.in.h:52
 msgid "_Days between warning and password expiration:"
 msgstr "_Дни между предупреждението и изтичането на паролата:"
 
-#: interfaces/users.glade.in.h:56
+#: interfaces/users.glade.in.h:54
 msgid "_Edit User Profiles..."
 msgstr "Р_едакция на Потребителските Профили..."
 
-#: interfaces/users.glade.in.h:57
+#: interfaces/users.glade.in.h:55
 msgid "_Generate Password"
 msgstr "_Генериране на Парола"
 
-#: interfaces/users.glade.in.h:58
+#: interfaces/users.glade.in.h:56
 msgid "_Home directory:"
 msgstr "_Домашна папка:"
 
-#: interfaces/users.glade.in.h:59
+#: interfaces/users.glade.in.h:57
 msgid "_Home phone:"
 msgstr "Домашен Телефон:"
 
-#: interfaces/users.glade.in.h:60
+#: interfaces/users.glade.in.h:58
 msgid "_Main group:"
 msgstr "Главна Група:"
 
-#: interfaces/users.glade.in.h:61
+#: interfaces/users.glade.in.h:59
 msgid "_Profile:"
 msgstr "_Профил:"
 
-#: interfaces/users.glade.in.h:62
+#: interfaces/users.glade.in.h:60
 msgid "_Real name:"
 msgstr "_Истинско име:"
 
-#: interfaces/users.glade.in.h:63
+#: interfaces/users.glade.in.h:61
 msgid "_Shell:"
 msgstr "Обвивка:"
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:62
 msgid "_User's groups:"
 msgstr "Гр_упи на Потребителя:"
 
-#: interfaces/users.glade.in.h:66
+#: interfaces/users.glade.in.h:64
 msgid "_Work phone:"
 msgstr "Работен Телефон:"
-
-#: interfaces/users.glade.in.h:67
-msgid "profiles_table"
-msgstr "таблица с профили"
 
 #: src/boot/boot-append-gui.c:140
 msgid "32,768"
@@ -1224,16 +1182,16 @@ msgstr "Невалидна VGA стойност"
 msgid "\"%s\" is not a valid VGA value"
 msgstr "%s не е валидна стойност за vga·"
 
-#: src/boot/boot-druid.c:105
+#: src/boot/boot-druid.c:112
 msgid "Error creating boot image"
 msgstr "Грешка при създаването на ново изображение за стартиране"
 
-#: src/boot/boot-druid.c:435
+#: src/boot/boot-druid.c:442
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "Създаване на ново начално стартиране (%d·от·%d)"
 
-#: src/boot/boot-druid.c:436
+#: src/boot/boot-druid.c:443
 msgid "Finished creating a new boot image"
 msgstr "Завърши създаването на новото начално стартиране"
 
@@ -1294,11 +1252,11 @@ msgstr "Невалидно кореново устройсто: \"%s\""
 msgid "_Module path:"
 msgstr "Път към _модула:"
 
-#: src/boot/boot-settings.c:398
+#: src/boot/boot-settings.c:405
 msgid "Password confirmation is not correct"
 msgstr "Невярно потвърждаване на паролата"
 
-#: src/boot/boot-settings.c:422
+#: src/boot/boot-settings.c:429
 msgid "Error modifying boot image"
 msgstr "Грешка при промяната на стартиращото изображение"
 
@@ -1310,11 +1268,11 @@ msgstr "Начално стартиране"
 msgid "Configure the system boot process"
 msgstr "Настройка на процеса на начално стартиране"
 
-#: src/boot/callbacks.c:76
+#: src/boot/callbacks.c:82
 msgid "Boot Image Editor"
 msgstr "Редактор на Начините за Началното Стартиране "
 
-#: src/boot/callbacks.c:170
+#: src/boot/callbacks.c:180
 msgid "Boot Append Editor"
 msgstr "Редактор за настройките към начално стартиране"
 
@@ -1324,7 +1282,9 @@ msgstr "Грешка при изтриването на изображениет
 
 #: src/boot/callbacks.c:413
 msgid "Without at least one boot image your computer will not start"
-msgstr "Без поне един начин за начално стартиране, вашата система няма да може да стартира."
+msgstr ""
+"Без поне един начин за начално стартиране, вашата система няма да може да "
+"стартира."
 
 #: src/boot/callbacks.c:434
 msgid "This may leave this operating system unbootable"
@@ -1335,11 +1295,11 @@ msgstr "Това може да направи тази операционна с
 msgid "Are you sure you want to delete \"%s\"?"
 msgstr "Сигурен ли сте че искате да изтриете \"%s\"?"
 
-#: src/boot/callbacks.c:480
+#: src/boot/callbacks.c:464
 msgid "The configuration will show empty"
 msgstr "Конфигурацията ще показва празно"
 
-#: src/boot/callbacks.c:485
+#: src/boot/callbacks.c:469
 #, c-format
 msgid "The file \"%s\" is missing or could not be read"
 msgstr "Файлът \"%s'' липсва или не може да бъде прочетен"
@@ -1381,8 +1341,9 @@ msgstr "Инструментът не може да се свърже с ком�
 msgid ""
 "Check that you have access to this network and that the computer is actually "
 "working and running SSHD"
-msgstr "Проверете дали имате достъп до тази мрежа, компютърът наистина"
-"работи, и че на него е стартиран SSHD"
+msgstr ""
+"Проверете дали имате достъп до тази мрежа, компютърът наистинаработи, и че "
+"на него е стартиран SSHD"
 
 #. the proccess was running su
 #: src/common/gst-auth.c:94
@@ -1394,8 +1355,8 @@ msgid ""
 "Check that you typed it correctly and that you haven't activated the \"caps "
 "lock\" key"
 msgstr ""
-"Проверете дали сте го изписали вярно, и че не сте натиснали клавиша"
-"\"caps lock\""
+"Проверете дали сте го изписали вярно, и че не сте натиснали клавиша\"caps "
+"lock\""
 
 #: src/common/gst-auth.c:104
 #, c-format
@@ -1410,46 +1371,38 @@ msgstr "Проверете дали имате право да изпълняв�
 msgid "An unexpected error has ocurred"
 msgstr "Случи се неочаквана грешка"
 
-#: src/common/gst-dialog.c:62
+#: src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "Уиджета: %s не може да бъде намерен"
 
-#: src/common/gst-dialog.c:94
-msgid " More _Options"
-msgstr " Повече _Опции"
-
-#: src/common/gst-dialog.c:95
-msgid " Fewer _Options"
-msgstr " По-Малко _Опции"
-
-#: src/common/gst-dialog.c:507
+#: src/common/gst-dialog.c:382
 msgid "There are changes which have not been applied"
 msgstr "Има промени, които не са приложени"
 
-#: src/common/gst-dialog.c:508
+#: src/common/gst-dialog.c:383
 msgid "Apply them now?"
 msgstr "Моментално прилагане на промените?"
 
-#: src/common/gst-dialog.c:626
+#: src/common/gst-dialog.c:477
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Грешка при свързващия сигнал `%s' в уиджета `%s'"
 
-#: src/common/gst-tool.c:1003
+#: src/common/gst-tool.c:998
 msgid "The configuration could not be loaded"
 msgstr "Настройките не могат да бъдат заредени"
 
-#: src/common/gst-tool.c:1004
+#: src/common/gst-tool.c:999
 msgid "There was an error running the backend script"
 msgstr "Грешка при изпълнението на скрипта"
 
-#: src/common/gst-tool.c:1486
+#: src/common/gst-tool.c:1471
 #, c-format
 msgid "Welcome to the %s prerelease of the GNOME System Tools"
 msgstr "Добре дошли във версия %s на Системните Инструменти за GNOME"
 
-#: src/common/gst-tool.c:1488
+#: src/common/gst-tool.c:1473
 msgid ""
 "This is still a work in progress, and so it may have serious bugs. Due to "
 "the nature of these tools, bugs may render your computer <span weight=\"bold"
@@ -1463,36 +1416,40 @@ msgstr ""
 "ви струва време и нерви. Вие бяхте предупреден. Благодаря ви, че изпробвате "
 "тази предварителна версия на Системните Инструменти на GNOME!"
 
-#: src/common/gst-tool.c:1509
+#: src/common/gst-tool.c:1494
 msgid "Warning"
 msgstr "Внимание"
 
-#: src/common/gst-tool.c:1529
+#: src/common/gst-tool.c:1514
 msgid "Don't show me this again"
 msgstr "Да не ми показва това съобщение отново"
 
-#: src/common/gst-tool.c:1604
+#: src/common/gst-tool.c:1590
 msgid "GNOME System Tools"
 msgstr "Системни Инструменти за GNOME"
 
-#: src/network/callbacks.c:397
+#: src/common/gst-tool.c:1751
+msgid "Could not display help"
+msgstr "Помощта не може да бъде показана"
+
+#: src/network/callbacks.c:403
 msgid ""
 "This will disable any network connection with this interface as soon as you "
 "press \"apply\""
 msgstr ""
-"Това ще спре всяка мрежова връзка през този интерфейс в момента,"
-"когато Вие натиснете \"Използване\""
+"Това ще спре всяка мрежова връзка през този интерфейс в момента,когато Вие "
+"натиснете \"Използване\""
 
-#: src/network/callbacks.c:402
+#: src/network/callbacks.c:408
 #, c-format
 msgid "Are you sure you want to delete connection \"%s\"?"
 msgstr "Сугурен ли сте, че искате да изтриете връзката \"%s\"?"
 
-#: src/network/callbacks.c:510
+#: src/network/callbacks.c:516
 msgid "SMB Support is not running"
 msgstr "Липсва SMB поддръжка"
 
-#: src/network/callbacks.c:511
+#: src/network/callbacks.c:517
 msgid ""
 "You don't have SMB support installed. Please install SMB support in the "
 "system to enable file sharing in Windows networks"
@@ -1500,35 +1457,35 @@ msgstr ""
 "Нямате инсталирана поддръжка за SMB. Моля, инсталирайте SMB поддръжка в "
 "системата за да имате възможност за включване в Windows мрежа."
 
-#: src/network/callbacks.c:575
+#: src/network/callbacks.c:581
 msgid "The host name has changed"
 msgstr "Името на хоста се промени"
 
-#: src/network/callbacks.c:576
+#: src/network/callbacks.c:582
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
 msgstr ""
-"Няма да можете да стартирате нови програми и ще трябва да се включите "
-"пак с вашия абонамент. Да продължа ли въпреки това?"
+"Няма да можете да стартирате нови програми и ще трябва да се включите пак с "
+"вашия абонамент. Да продължа ли въпреки това?"
 
-#: src/network/callbacks.c:580
+#: src/network/callbacks.c:586
 msgid "Change _Host name"
 msgstr "Промяна на Хоста"
 
-#: src/network/callbacks.c:623 src/network/callbacks.c:650
+#: src/network/callbacks.c:629 src/network/callbacks.c:656
 msgid "Wvdial command not found"
 msgstr "Командата Wvdial не е намерена"
 
-#: src/network/callbacks.c:624
+#: src/network/callbacks.c:630
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate"
 msgstr ""
-"wvdial не може да бъде намерен на Вашата система. Трябва да инсталирате wvdial, "
-"или връзката през PPP (модем) няма да се активира."
+"wvdial не може да бъде намерен на Вашата система. Трябва да инсталирате "
+"wvdial, или връзката през PPP (модем) няма да се активира."
 
-#: src/network/callbacks.c:651
+#: src/network/callbacks.c:657
 msgid ""
 "wvdial could not be found on your system. You need to install wvdial, or the "
 "PPP (modem) connections will not activate. Continue anyway?"
@@ -1537,93 +1494,93 @@ msgstr ""
 "wvdial, или връзката през PPP (модем) няма да се активира. Да продължа ли "
 "въпреки това?"
 
-#: src/network/callbacks.c:655 src/network/callbacks.c:682
+#: src/network/callbacks.c:661 src/network/callbacks.c:688
 msgid "_Continue"
 msgstr "_Продължаване"
 
-#: src/network/callbacks.c:678
+#: src/network/callbacks.c:684
 msgid "The default gateway device is not activated"
 msgstr "Подразбиращия се рутер не е активиран"
 
-#: src/network/callbacks.c:679
+#: src/network/callbacks.c:685
 msgid "This will prevent you from connecting to the Internet. Continue anyway?"
 msgstr ""
 "Това ще ви попречи да се свържете с Интернет. Да продължа ли въпреки това?"
 
-#: src/network/callbacks.c:727
+#: src/network/callbacks.c:733
 msgid "The default gateway device is missing gateway information"
 msgstr ""
 
-#: src/network/callbacks.c:728
+#: src/network/callbacks.c:734
 msgid ""
 "Please provide this information to proceed, or choose another default "
 "gateway device"
 msgstr ""
-"Моля, задайте тази информация, за да продължите, или изберете друг рутер по подразбиране."
+"Моля, задайте тази информация, за да продължите, или изберете друг рутер по "
+"подразбиране."
 
-#: src/network/callbacks.c:773
+#: src/network/callbacks.c:779
 msgid "The program redhat-config-network-cmd could not be found"
 msgstr "Програмата redhat-config-network-cmd не може да бъде намерена"
 
-#: src/network/callbacks.c:774
+#: src/network/callbacks.c:780
 msgid ""
 "This could render missing connections under the connections tab. Please "
 "install the redhat-config-network rpm package to avoid this"
 msgstr ""
-"Това може да причини липсващи връзки в страницата с връзките. Моля, инсталирайте "
-"пакета redhat-config-network rpm за да избегнете това."
+"Това може да причини липсващи връзки в страницата с връзките. Моля, "
+"инсталирайте пакета redhat-config-network rpm за да избегнете това."
 
-#: src/network/callbacks.c:805
+#: src/network/callbacks.c:811
 #, c-format
 msgid "Do you want to enable interface \"%s\"?"
 msgstr "Искате ли да активирате този интерфейс \"%s\"?"
 
-#: src/network/callbacks.c:806
+#: src/network/callbacks.c:812
 msgid "This will enable network access through this interface"
 msgstr "Това ще позволи достъп до мрежата през този интерфейс"
 
-#: src/network/callbacks.c:807
+#: src/network/callbacks.c:813
 msgid "_Enable"
 msgstr "_Позволяване"
 
-#: src/network/callbacks.c:809
+#: src/network/callbacks.c:815
 #, c-format
 msgid "Do you want to disable interface \"%s\"?"
 msgstr "Искате·ли·да изключите интерфейса \"%s\"?"
 
-#: src/network/callbacks.c:810
+#: src/network/callbacks.c:816
 msgid "This will disable network access through this interface"
 msgstr "Това ще спре достъпа до мрежата през този интерфейс"
 
-#: src/network/callbacks.c:811
+#: src/network/callbacks.c:817
 msgid "_Disable"
 msgstr "_Спиране"
 
-#: src/network/callbacks.c:941
+#: src/network/callbacks.c:953
 msgid "Could not autodetect modem device"
 msgstr "Модемът не може да бъде засечен автоматично"
 
-#: src/network/callbacks.c:942
+#: src/network/callbacks.c:954
 msgid ""
 "Check that the device is not busy and that is correctly attached to the "
 "computer"
 msgstr ""
-"Проверете дали устройството не е заето, и че е включено правилно в "
-"компютъра"
+"Проверете дали устройството не е заето, и че е включено правилно в компютъра"
 
-#: src/network/callbacks.c:995
+#: src/network/callbacks.c:1007
 msgid "Silent"
 msgstr "Тихо"
 
-#: src/network/callbacks.c:997
+#: src/network/callbacks.c:1009
 msgid "Low"
 msgstr "Ниско"
 
-#: src/network/callbacks.c:999
+#: src/network/callbacks.c:1011
 msgid "Medium"
 msgstr "Средно"
 
-#: src/network/callbacks.c:1001
+#: src/network/callbacks.c:1013
 msgid "Loud"
 msgstr "Силно"
 
@@ -1738,16 +1695,16 @@ msgstr ""
 "Телефонният номер, който трябва да се използва не е въведен. Моля, въведете "
 "валиден телефонен номер, за да продължите"
 
-#: src/network/connection.c:2107
+#: src/network/connection.c:2094
 #, c-format
 msgid "The interface \"%s\" doesn't exist"
 msgstr "Интерфейсът %s не съществува"
 
-#: src/network/connection.c:2111
+#: src/network/connection.c:2098
 msgid "Invalid interface"
 msgstr "Невалиден интерфейс"
 
-#: src/network/connection.c:2112
+#: src/network/connection.c:2099
 msgid "The loopback interface cannot be configured"
 msgstr "Интерфейсът loopback не може да бъде настроен"
 
@@ -1759,39 +1716,39 @@ msgstr "IP Адреси"
 msgid "Aliases"
 msgstr "Псевдоними"
 
-#: src/network/main.c:200
+#: src/network/main.c:203
 msgid "Run the connection assistant."
 msgstr "Стартира помощника за създаване на връзки."
 
-#: src/network/main.c:201
+#: src/network/main.c:204
 msgid "Run the PPP connection assistant."
 msgstr "Стартира помощника за създаване·на връзка чрез модем."
 
-#: src/network/main.c:202
+#: src/network/main.c:205
 msgid "Run the ethernet connection assistant."
 msgstr "Стартира помощника за създаване·на връзки чрез мрежова карта."
 
-#: src/network/main.c:203
+#: src/network/main.c:206
 msgid "Run the wlan connection assistant."
 msgstr "Стартира помощника за създаване на безжична връзка."
 
-#: src/network/main.c:204
+#: src/network/main.c:207
 msgid "Run the parallel port connection assistant."
 msgstr "Стартира помощника за създаване на паралелна връзка."
 
-#: src/network/main.c:205
+#: src/network/main.c:208
 msgid "Run the irlan connection assistant."
 msgstr "Стартира·помощника·за·създаване·на инфра-червена·връзка."
 
-#: src/network/main.c:206
+#: src/network/main.c:209
 msgid "Configure a network interface"
 msgstr "Настройка на мрежов интерфейс"
 
-#: src/network/main.c:206
+#: src/network/main.c:209
 msgid "interface"
 msgstr "интерфейс"
 
-#: src/network/main.c:213
+#: src/network/main.c:216
 msgid "Network Settings"
 msgstr "Мрежови Услуги"
 
@@ -1814,7 +1771,8 @@ msgstr "Мрежа"
 
 #: src/network/profile.c:51 src/users/profile-settings.c:215
 msgid "You will not be able to recover this profile after pressing \"apply\""
-msgstr "Няма да можете да възстановите този профил след натискането на \"Използване\""
+msgstr ""
+"Няма да можете да възстановите този профил след натискането на \"Използване\""
 
 #: src/network/profile.c:55
 #, c-format
@@ -1856,7 +1814,8 @@ msgstr "Настройки за Услугите"
 
 #: src/services/services.desktop.in.in.h:1
 msgid "Configure which services will be run when the system starts"
-msgstr "Настройка на услугите, които ще се стартират, когато се стартира системата"
+msgstr ""
+"Настройка на услугите, които ще се стартират, когато се стартира системата"
 
 #: src/services/services.desktop.in.in.h:2
 msgid "Services"
@@ -1866,19 +1825,11 @@ msgstr "Услуги"
 msgid "Service"
 msgstr "Услуга"
 
-#: src/time/main.c:310
-msgid "Time Zone"
-msgstr "Часова Зона"
-
-#: src/time/main.c:420
-msgid "Time Servers"
-msgstr "Сървъри за Време"
-
-#: src/time/main.c:501
+#: src/time/main.c:461
 msgid "NTP support is not running"
 msgstr "Липсва NTP поддръжка"
 
-#: src/time/main.c:502
+#: src/time/main.c:462
 msgid ""
 "Please run NTP support in the system to enable synchronization of your local "
 "time server with internet time servers"
@@ -1886,7 +1837,7 @@ msgstr ""
 "Нямате стартирана поддръжка за NTP (мрежов протокол за часа). Моля, "
 "стартирайте услугата за NTP за да позволите синхронизация със сървър"
 
-#: src/time/main.c:815
+#: src/time/main.c:757
 msgid "Time and Date Settings"
 msgstr "Настройки на Часа и Датата"
 
@@ -1898,15 +1849,15 @@ msgstr "Промяна на часа, дата и часовата зона на
 msgid "Time and Date"
 msgstr "Час и Дата"
 
-#: src/users/callbacks.c:589
+#: src/users/callbacks.c:569
 msgid "Error saving profile"
 msgstr "Грешка при запазването на профила"
 
-#: src/users/callbacks.c:624
+#: src/users/callbacks.c:609
 msgid "Create New profile"
 msgstr "Създаване на Нов Профил"
 
-#: src/users/callbacks.c:658
+#: src/users/callbacks.c:643
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Настройки за профила %s"
@@ -1927,7 +1878,8 @@ msgstr "Идентификацията на групата трябва да е 
 #. if group is root
 #: src/users/group-settings.c:167
 msgid "Group ID of the \"root\" user should not be modified"
-msgstr "Идентификацията на Групата на администратора (root) не трябва да се променя."
+msgstr ""
+"Идентификацията на Групата на администратора (root) не трябва да се променя."
 
 #: src/users/group-settings.c:168 src/users/group-settings.c:214
 #: src/users/group-settings.c:284 src/users/user-settings.c:105
@@ -1958,7 +1910,8 @@ msgstr "Името на групата е твърде дълго"
 #: src/users/group-settings.c:202
 #, c-format
 msgid "The group name should have less than %i characters for being valid"
-msgstr "За да бъде валидно, името на групата трябва да има по-малко от %i символа"
+msgstr ""
+"За да бъде валидно, името на групата трябва да има по-малко от %i символа"
 
 #. if invalid.
 #: src/users/group-settings.c:205
@@ -1990,7 +1943,8 @@ msgstr "Администраторската група не трябва да �
 
 #: src/users/group-settings.c:298
 msgid "This may leave files with invalid group ID in the filesystem"
-msgstr ""
+msgstr "Това може да остави файлове с невалидна идентификация "
+"или група във файловата система"
 
 #: src/users/group-settings.c:303
 #, c-format
@@ -2002,7 +1956,7 @@ msgstr "Сигурен ли сте, че искате да изтриете гр
 msgid "Settings for Group %s"
 msgstr "Настройки за Групата %s"
 
-#: src/users/groups-table.c:44 src/users/users-table.c:51
+#: src/users/groups-table.c:44
 msgid "Group"
 msgstr "Група"
 
@@ -2010,23 +1964,23 @@ msgstr "Група"
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:121
+#: src/users/main.c:124
 msgid "User name contains"
 msgstr "Името на потребителя съдържа"
 
-#: src/users/main.c:122
+#: src/users/main.c:125
 msgid "User ID is"
 msgstr "ID-то на потребителя е"
 
-#: src/users/main.c:123
+#: src/users/main.c:126
 msgid "Group name contains"
 msgstr "Името на групата съдържа"
 
-#: src/users/main.c:124
+#: src/users/main.c:127
 msgid "User GID is"
 msgstr "GID на потребителя е"
 
-#: src/users/main.c:315 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:246 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Потребители и Групи"
 
@@ -2061,7 +2015,8 @@ msgstr "Профилът по подразбиране не трябва да с
 
 #: src/users/profile-settings.c:205
 msgid "This profile is used for setting default data for new users"
-msgstr ""
+msgstr "Този профил се използва за поставяне на данните по "
+"подразбиране за новите потребители"
 
 #: src/users/profile-settings.c:214
 #, c-format
@@ -2118,7 +2073,8 @@ msgstr "Потребителското име е твърде дълго"
 #: src/users/user-settings.c:343 src/users/user-settings.c:348
 #, c-format
 msgid "The user name should have less than %i characters for being valid"
-msgstr "За да бъде валидно, потребителското име трябва да има по-малко от %i символа"
+msgstr ""
+"За да бъде валидно, потребителското име трябва да има по-малко от %i символа"
 
 #: src/users/user-settings.c:354
 msgid "User name for the \"root\" user should not be modified"
@@ -2194,8 +2150,9 @@ msgstr "Името на администратора (root) не трябва д
 msgid ""
 "Several users may share a single user ID, but it's not common and may lead "
 "to security problems"
-msgstr "Няколко потребителя могат да споделят един потребителски ID, но това"
-"не е обичайно и може да доведе до проблеми със сигурността"
+msgstr ""
+"Няколко потребителя могат да споделят един потребителски ID, но товане е "
+"обичайно и може да доведе до проблеми със сигурността"
 
 #: src/users/user-settings.c:507
 #, c-format
@@ -2235,30 +2192,129 @@ msgstr "Проверете дали сте въвели една и съща п�
 msgid "Settings for User %s"
 msgstr "Настройки за Потребител %s"
 
-#. Column name,          Adv_state_show,	Basic_state_show
-#: src/users/users-table.c:46
+#: src/users/users-table.c:45
 msgid "User"
 msgstr "Потребител"
 
-#: src/users/users-table.c:47
+#: src/users/users-table.c:46
 msgid "Home"
 msgstr "Домашна папка"
 
-#: src/users/users-table.c:48
+#: src/users/users-table.c:47
 msgid "User details"
 msgstr "Детайли за потребителя"
 
-#: src/users/users-table.c:49
+#: src/users/users-table.c:48
 msgid "UID"
 msgstr "UID"
 
-#: src/users/users-table.c:50
+#: src/users/users-table.c:49
 msgid "Shell"
 msgstr "Обвивка"
 
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Добавя или Премахва потребители и групи"
+
+#~ msgid "Modify the settings for an operating system or kernel."
+#~ msgstr "Промяна на настройките за операционната система или ядрото."
+
+#~ msgid "Use this dialog to modify kernel parameters."
+#~ msgstr ""
+#~ "Използвайте този диалогов прозорец, за да промени параметрите на ядрото."
+
+#~ msgid "Complexity"
+#~ msgstr "Сложност"
+
+#~ msgid "Advanced PPP connection tuning."
+#~ msgstr "Допълнителни ностройки на PPP връзката"
+
+#~ msgid "Aliases of other computers."
+#~ msgstr "Псевдоними за адресите на други компютри"
+
+#~ msgid "How the names of other computers are found."
+#~ msgstr "Как се намират имената на другите компюрти."
+
+#~ msgid "How this computer is identified."
+#~ msgstr "Как се идентифицира този компютър."
+
+#~ msgid "How to access other computers."
+#~ msgstr "Как да се свържа с другите компютри."
+
+#~ msgid "How to dial up to the Internet."
+#~ msgstr "Как да се свържа по телефона с Интернет."
+
+#~ msgid ""
+#~ "Network profiles can be used to store different network configurations."
+#~ msgstr ""
+#~ "Мрежовите профили може да се използват за да се съхраняват различни "
+#~ "мрежови конфигурации."
+
+#~ msgid "Please, give this network profile a name and a description."
+#~ msgstr "Моля, дайте име и описание на този мрежови профил."
+
+#~ msgid "Use this dialog for setting the configuration for this interface"
+#~ msgstr "Използвайте този прозорец за настройка на интерфейса"
+
+#~ msgid "Use this tool to specify which services to run"
+#~ msgstr ""
+#~ "Този инструмент се използва за определяне на услугите, които да се "
+#~ "стартират"
+
+#~ msgid ""
+#~ "Please select the current date and time. You can also specify a time zone "
+#~ "and a time server."
+#~ msgstr ""
+#~ "Моля, посочете текущия час и дата. Можете също да посочите часова зона и "
+#~ "сървър за часа."
+
+#~ msgid "Select the servers you wish to use for time synchronization."
+#~ msgstr ""
+#~ "Моля, изберете сървърите, които искате да използвате за синхронизация."
+
+#~ msgid "To select a time zone, click on one of the dots on the map"
+#~ msgstr ""
+#~ "За да посочите часова зона, натиснете върху една от точките на картата"
+
+#~ msgid ""
+#~ "On this page, you can define the system defaults which will be assigned "
+#~ "to new users."
+#~ msgstr ""
+#~ "На тази страница, може да определите настройките, които по принцип да се "
+#~ "прилагат на нов потребител."
+
+#~ msgid ""
+#~ "This is the list of the groups available on the system. Create new groups "
+#~ "or edit existing groups with this dialog."
+#~ msgstr ""
+#~ "Това е списък със съществуващите групи в системата. С този прозорец "
+#~ "можете да добавите група или да редактирате съществуваща такава."
+
+#~ msgid ""
+#~ "This is the list of the users available on the system. Create new users "
+#~ "or edit existing user settings with this dialog."
+#~ msgstr ""
+#~ "Това е списък със съществуващите потребители в системата. С този прозорец "
+#~ "можете да добавите потребител или да редактирате съществуващ такъв."
+
+#~ msgid ""
+#~ "User profiles can be used as templates to facilitate the creation of new "
+#~ "users."
+#~ msgstr ""
+#~ "Профилите на потребителите може де се използват като шаблон за "
+#~ "създаването на нов потребител."
+
+#~ msgid "profiles_table"
+#~ msgstr "таблица с профили"
+
+#~ msgid " More _Options"
+#~ msgstr " Повече _Опции"
+
+#~ msgid " Fewer _Options"
+#~ msgstr " По-Малко _Опции"
+
+#~ msgid "Time Zone"
+#~ msgstr "Часова Зона"
 
 #~ msgid "1024x768"
 #~ msgstr "1024x768"
