@@ -406,7 +406,7 @@ extern void
 on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkEntry *entry1, *entry2;
-	gchar *new, *confirm;
+	gchar *new_passwd, *confirm;
 	GtkWidget *win;
 	GnomeDialog *dialog;
 	gchar *msg;
@@ -415,7 +415,7 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 	entry2 = GTK_ENTRY (tool_widget_get ("user_passwd_confirmation"));
 	win = tool_widget_get ("user_passwd_dialog");
 
-	new = gtk_entry_get_text (entry1);
+	new_passwd = gtk_entry_get_text (entry1);
 	confirm = gtk_entry_get_text (entry2);
 
 	/* Empty old contnents */
@@ -426,14 +426,14 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 
 	/* Check passwords */
 	
-	if (strcmp (new, confirm))
+	if (strcmp (new_passwd, confirm))
 	{
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("The password and its confirmation\nmust match.",
 			GTK_WINDOW (win)));
 		
 		gnome_dialog_run (dialog);
 	}
-	else if (strlen (new) < logindefs.passwd_min_length)
+	else if (strlen (new_passwd) < logindefs.passwd_min_length)
 	{
 		msg = g_strdup_printf ("The password is too short:\nit must be at least %d "
 			"characters long.", logindefs.passwd_min_length);
@@ -450,12 +450,19 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		 * and steal some code for MD5 crypt */
 				
 		g_free (current_user->password);
-		current_user->password = g_strdup (new);
+		current_user->password = g_strdup (new_passwd);
 
-		msg = g_strdup_printf ("Password for %s updated.", current_user->login);
+		/* I understand the need of feedback for the user, but this
+		 * dialog is being more of an obstacle, and is not actually true,
+		 * as the password is not updated until Apply is pressed. Maybe
+		 * we need a way to tell the user which accounts are subject to
+		 * changes.
+		 * Arturo. */
+		
+/*		msg = g_strdup_printf ("Password for %s updated.", current_user->login);
 		dialog = GNOME_DIALOG (gnome_ok_dialog_parented (msg, GTK_WINDOW (win)));
 		gnome_dialog_run (dialog);
-		g_free (msg);
+		g_free (msg);*/
 
 		gtk_widget_hide (win);
 		tool_set_modified (TRUE);
