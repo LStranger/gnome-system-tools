@@ -114,7 +114,8 @@ is_char_ok (char c, EditableFilterRules rules)
 }
 
 void
-filter_editable (GtkEditable *editable, const gchar *text, gint length, gint *pos, gpointer data)
+filter_editable (GtkEditable *editable, const gchar *text, gint length,
+		 gint *pos, gpointer data)
 {
 	int i, l = 0;
 	char *s = NULL;

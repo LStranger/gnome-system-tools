@@ -9,7 +9,6 @@ gchar *s = N_("Scanning your system configuration.");
 gchar *s = N_("Ximian Setup Tools");
 gchar *s = N_("Complexity");
 gchar *s = N_("Unsupported platform");
-gchar *s = N_("[ICON]");
 gchar *s = N_("The platform you are running is not supported by this tool. If you know for sure that it works like one of the platforms listed below, you can select that and continue.\n"
               "\n"
               "Note, however, that this might damage the system configuration or downright cripple your computer.");
