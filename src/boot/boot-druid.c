@@ -207,7 +207,7 @@ other_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	error = boot_image_valid_device (config->gui->image);
 	if (error != NULL) {
 		druid_show_error (config, error);
-		other_prepare (page, druid, data);
+/*		other_prepare (page, druid, data); */
 		return TRUE;
 	}
 
@@ -222,8 +222,9 @@ static void
 image_check (BootDruid *druid)
 {
 	const gchar *buf = gtk_entry_get_text (druid->gui->image_entry);
-	gboolean enabled = (strlen (buf) > 0)?TRUE : FALSE;
-
+	const gchar *buf2 = gtk_entry_get_text (druid->gui->root);
+	gboolean enabled = ((strlen (buf) > 0) && (strlen (buf2) > 0))?TRUE : FALSE;
+	
 	/* TODO: Improve check */ 
 	gnome_druid_set_buttons_sensitive (druid->druid, TRUE, enabled, TRUE, FALSE);
 }
@@ -258,7 +259,7 @@ image_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	error = boot_image_valid_device (config->gui->image);
 	if (error != NULL) {
 		druid_show_error (config, error);
-		image_prepare (page, druid, data);
+/*		image_prepare (page, druid, data);*/
 		return TRUE;
 	}
 	
@@ -266,7 +267,7 @@ image_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	if (error != NULL) {
 		druid_show_error (config, error);
 		gtk_widget_grab_focus (GTK_WIDGET (config->gui->root));
-		identity_prepare (page, druid, data);
+/*		identity_prepare (page, druid, data);*/
 		return TRUE;
 	}
 	
@@ -440,6 +441,8 @@ construct (BootDruid *druid)
 	
 	g_signal_connect (G_OBJECT (druid->gui->image_entry), "changed",
 			  G_CALLBACK (image_changed), druid);
+	g_signal_connect (G_OBJECT (druid->gui->root), "changed",
+	          G_CALLBACK (image_changed), druid);
 	g_signal_connect (G_OBJECT (druid->gui->append), "activate",
 			  G_CALLBACK (druid_entry_activate), druid);
 
