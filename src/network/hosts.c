@@ -180,10 +180,13 @@ host_aliases_add_from_xml (xmlNodePtr node)
       g_free (str);
     }
 
-  host_aliases_add (address, aliases->str);
+  if (address && aliases)
+    host_aliases_add (address, aliases->str);
 
   g_free (address);
-  g_string_free (aliases, TRUE);
+
+  if (aliases)
+    g_string_free (aliases, TRUE);
 }
 
 void
