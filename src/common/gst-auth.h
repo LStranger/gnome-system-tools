@@ -24,11 +24,12 @@
 
 #include "gst-types.h"
 
-enum {
+typedef enum {
 	GST_AUTH_PASSWORDLESS,
 	GST_AUTH_PASSWORD
 } AuthRequired;
 
 void gst_auth_do_ssh_authentication (GstTool*, gchar*);
 void gst_auth_do_su_authentication (GstTool*);
+
 #endif /* GST_AUTH_H */
