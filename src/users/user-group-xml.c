@@ -428,7 +428,7 @@ static void
 user_add_extra_groups (GList *groups_list, const gchar *username)
 {
 	xmlNodePtr groupdb = gst_xml_element_find_first (gst_xml_doc_get_root (tool->config), "groupdb");
-	xmlNodePtr node, users;
+	xmlNodePtr node, users, user_node;
 	gchar *groupname;
 	GList *list;
 	gboolean found;
@@ -450,7 +450,8 @@ user_add_extra_groups (GList *groups_list, const gchar *username)
 		
 		if (found) {
 			users = gst_xml_element_find_first (node, "users");
-			gst_xml_element_add_with_content (users, "user", (gchar *) username);
+			user_node = gst_xml_element_add (users, "user");
+			gst_xml_element_set_content (user_node, (gchar *) username);
 			g_list_remove (groups_list, groupname);
 		}
 	}
