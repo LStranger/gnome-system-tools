@@ -58,8 +58,9 @@ static gboolean update_group (void);
 static gboolean add_group (void);
 static group *make_default_group (void);
 static user *make_default_user (gchar *name);
-static gint find_new_id (gchar from, gchar what);
+static guint find_new_id (gchar from, gchar what);
 static gchar *find_new_key (gchar from);
+static gboolean is_valid_name (gchar *str);
 
 /* Main button callbacks */
 
@@ -376,10 +377,9 @@ on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 	
 	if (!current_user)
 	{
-		retval = add_user ();
-		on_user_chpasswd_clicked (NULL, NULL);
+		if ((retval = add_user ()))
+			on_user_chpasswd_clicked (NULL, NULL);
 	}
-	
 	else
 		retval = update_user ();
 
@@ -461,7 +461,7 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		
 /*		msg = g_strdup_printf ("Password for %s updated.", current_user->login);*/
 		dialog = GNOME_DIALOG (gnome_ok_dialog_parented (
-												   "Password changing not ready yet.", GTK_WINDOW (win)));
+												   "The password manipulation routines are not ready yet.", GTK_WINDOW (win)));
 		gnome_dialog_run (dialog);
 /*		g_free (msg);*/
 
@@ -805,13 +805,11 @@ update_user (void)
 		if (strlen (txt) > 0)
 			current_user->comment = g_strdup (txt);
 	}
-
 	else if (strcmp (txt, current_user->comment))
 	{
 		g_free (current_user->comment);
 		current_user->comment = g_strdup (txt);
 	}
-
 
 	/* Get selected group name */
 
@@ -829,7 +827,7 @@ update_user (void)
 	
 	if (!tmplist)
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Select main group", win));
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Select main group.", win));
 		gnome_dialog_run (dialog);
 		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
 		return FALSE;
@@ -846,20 +844,20 @@ add_user (void)
 	GtkWidget *w0;
 	GtkWindow *win;
 	GnomeDialog *dialog;
-	gchar *txt, *txt1;
+	gchar *new_user_name, *new_group_name, *new_comment, *tmp;
 	GtkWidget *list_item;
 	GtkList *list;
 	GList *tmplist;
-	group *g;
-	user *tmpuser, *current_u;
+	group *g, *new_group;
+	user *new_user, *current_u;
 
 	w0 = tool_widget_get ("user_settings_name");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+	new_user_name = gtk_entry_get_text (GTK_ENTRY (w0));
 
 	win = GTK_WINDOW (tool_widget_get ("user_settings_dialog"));
 
 	/* If login name isn't empty */
-	if (strlen (txt) < 1)
+	if (strlen (new_user_name) < 1)
 	{
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented 
 				("Username is empty.", win));
@@ -869,72 +867,101 @@ add_user (void)
 		return FALSE;
 	}
 
-	/* Check, if user doesn't exist */
+	/* Check if user exists */
 
 	for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
 	{
 		current_u = (user *)tmplist->data;
-		if (!strcmp (current_u->login, txt))
+		if (!strcmp (current_u->login, new_user_name))
 		{
-			txt = g_strdup_printf ("User %s already exists.", txt);
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, win));
+			tmp = g_strdup_printf ("User %s already exists.", new_user_name);
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (tmp, win));
 			gnome_dialog_run (dialog);
+			g_free (tmp);
+			
 			gtk_widget_grab_focus (w0);
 			gtk_editable_select_region (GTK_EDITABLE (w0), 0, -1);
+			
 			return FALSE;
 		}
 	}
+	
+	if (!is_valid_name (new_user_name))
+	{
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid username, using only lower-case letters.", win));
+		gnome_dialog_run (dialog);
+		return FALSE;
+	}
 
-	/* Get selected group name */
+
+	/* Get group name */
 
 	w0 = tool_widget_get ("user_settings_group");
-	txt1 = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
+	new_group_name = gtk_editable_get_chars (GTK_EDITABLE (GTK_COMBO (w0)->entry), 0, -1);
 
-	/* Now find group's gid */
+	/* Now find new group's gid, if it exists */
 
 	for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
 	{
 		g = (group *)tmplist->data;
-		if (!strcmp (g->name, txt1))
+		if (!strcmp (g->name, new_group_name))
 		break;
 	}
 	
 	if (!tmplist)
 	{
-		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Select main group.", win));
-		gnome_dialog_run (dialog);
-		my_gtk_entry_set_text (GTK_ENTRY (GTK_COMBO (w0)->entry), "");
-		return FALSE;
+		/* New group: check that it is a valid group name */
+		
+		if (!is_valid_name (new_group_name))
+		{
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid main gruop name, with only lower-case letters,\nor select one from the pull-down menu.", win));
+			gnome_dialog_run (dialog);
+			return FALSE;
+		}
+		
+		/* Cool: create group. */
+		
+		new_group = make_default_group ();
+		new_group->name = g_strdup (new_group_name);
+		group_list = g_list_append (group_list, new_group);
+		
+		/* Add to the GtkList. */
+		
+		list = GTK_LIST (tool_widget_get ("group_list"));
+		list_item = gtk_list_item_new_with_label (new_group_name);
+		gtk_widget_show (list_item);
+		gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, new_group);
+		tmplist = g_list_append (NULL, list_item);
+		gtk_list_append_items (list, tmplist);
 	}
+	else
+		new_group = g;
 
-	/* Everything should be ok, let's create new user */
+	/* Everything should be ok, let's create a new user */
 
-	tmpuser = make_default_user (txt);
-	tmpuser->gid = g->gid;
-
-	list = GTK_LIST (tool_widget_get ("user_list"));
-	list_item = gtk_list_item_new_with_label (txt);
-	gtk_widget_show (list_item);
-	gtk_object_set_data (GTK_OBJECT (list_item), user_list_data_key, tmpuser);
-	tmplist = NULL;
-	tmplist = g_list_append (tmplist, list_item);
-	gtk_list_append_items (list, tmplist);
+	new_user = make_default_user (new_user_name);
+	new_user->gid = new_group->gid;
 	
-
 	w0 = tool_widget_get ("user_settings_comment");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
-
-	if (strlen (txt) > 0)
-		tmpuser->comment = g_strdup (txt);
-
+	new_comment = gtk_entry_get_text (GTK_ENTRY (w0));
+	if (strlen (new_comment) > 0)
+		new_user->comment = g_strdup (new_comment);
+	user_list = g_list_append (user_list, new_user);
 	
-	current_user = tmpuser;
-	user_list = g_list_append (user_list, tmpuser);
+	/* Add to the user_list GtkList */
+	
+	list = GTK_LIST (tool_widget_get ("user_list"));
+	list_item = gtk_list_item_new_with_label (new_user_name);
+	gtk_widget_show (list_item);
+	gtk_object_set_data (GTK_OBJECT (list_item), user_list_data_key, new_user);
+	tmplist = g_list_append (NULL, list_item);
+	gtk_list_append_items (list, tmplist);
 
 	/* Select current user in users list (last one)*/
 
 	tmplist = list->children;
 	gtk_list_select_item (list, g_list_length (tmplist) - 1);
+	current_user = new_user;
 
 	return TRUE;
 }
@@ -1016,7 +1043,7 @@ add_group (void)
 	GtkWidget *w0, *label, *list_item;
 	GtkWindow *win;
 	GnomeDialog *dialog;
-	gchar *txt;
+	gchar *new_group_name, *tmp;
 	GList *selection = NULL;
 	GtkList *list;
 	group *tmpgroup, *current_g;
@@ -1024,9 +1051,9 @@ add_group (void)
 	win = GTK_WINDOW (tool_widget_get ("group_settings_dialog"));
 
 	w0 = tool_widget_get ("group_settings_name");
-	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+	new_group_name = gtk_entry_get_text (GTK_ENTRY (w0));
 
-	if (strlen (txt) < 1)
+	if (strlen (new_group_name) < 1)
 	{
 		dialog = GNOME_DIALOG (gnome_error_dialog_parented 
 				("Group name is empty.", win));
@@ -1036,28 +1063,40 @@ add_group (void)
 		return FALSE;
 	}
 	
-	/* Find, if group with given name doesn't already exist */
+	/* Find if group with given name already exists */
 	for (selection = g_list_first (group_list); selection; selection = g_list_next (selection))
 	{
 		current_g = (group *)selection->data;
-		if (!strcmp (current_g->name, txt))
+		if (!strcmp (current_g->name, new_group_name))
 		{
-			txt = g_strdup_printf ("Group %s already exists.", txt);
-			dialog = GNOME_DIALOG (gnome_error_dialog_parented (txt, win));
+			tmp = g_strdup_printf ("Group %s already exists.", new_group_name);
+			dialog = GNOME_DIALOG (gnome_error_dialog_parented (tmp, win));
 			gnome_dialog_run (dialog);
+			g_free (tmp);
+			
 			gtk_widget_grab_focus (w0);
 			gtk_editable_select_region (GTK_EDITABLE (w0), 0, -1);
 			return FALSE;
 		}
 	}
+	
+	/* Is the group name valid? */
+	
+	if (!is_valid_name (new_group_name))
+	{
+		dialog = GNOME_DIALOG (gnome_error_dialog_parented ("Please set a valid gruop name, with only lower-case letters.", win));
+		gnome_dialog_run (dialog);
+		return FALSE;
+	}
+	
 
 	/* Everything should be ok and we can add new group */
 
 	tmpgroup = make_default_group ();
-	tmpgroup->name = g_strdup (txt);
+	tmpgroup->name = g_strdup (new_group_name);
 
 	list = GTK_LIST (tool_widget_get ("group_list"));
-	list_item = gtk_list_item_new_with_label (txt);
+	list_item = gtk_list_item_new_with_label (new_group_name);
 	gtk_widget_show (list_item);
 	gtk_object_set_data (GTK_OBJECT (list_item), group_list_data_key, tmpgroup);
 	selection = g_list_append (selection, list_item);
@@ -1069,23 +1108,21 @@ add_group (void)
 
 	for (selection = g_list_first (list->children); selection;
 			selection = g_list_next (selection))
-
 	{
 		list_item = (GtkWidget *)selection->data;
 		label = GTK_BIN (list_item)->child;
-		gtk_label_get (GTK_LABEL (label), &txt);
-		tmpgroup->users = g_list_append (tmpgroup->users, g_strdup (txt));
+		gtk_label_get (GTK_LABEL (label), &new_group_name);
+		tmpgroup->users = g_list_append (tmpgroup->users, g_strdup (new_group_name));
 	}
 	
 	current_group = tmpgroup;
 	group_list = g_list_append (group_list, current_group);
 
-	/* Select current group in group list (last one)*/
+	/* Select current group in group list (last one). */
 
 	selection = list->children;
 	gtk_list_select_item (list, g_list_length (selection) - 1);
-
-
+	
 	return TRUE;
 }
 
@@ -1127,46 +1164,51 @@ make_default_user (gchar *name)
 }
 	
 
-static gint
+static guint
 find_new_id (gchar from, gchar what)
 {
 	GList *tmplist;
 	group *current_g;
 	user *current_u;
-	gint ret = 0;
+	guint ret = 0;
 	
 	if (from == GROUP)
 	{
+		ret = logindefs.new_group_min_id;
+		
 		for (tmplist = g_list_first (group_list); tmplist; tmplist = g_list_next (tmplist))
 		{
 			current_g = (group *)tmplist->data;
-			if (ret < current_g->gid)
-				ret = current_g->gid;
+			if (ret <= current_g->gid)
+				ret = current_g->gid + 1;
 		}
 		
-		if (ret + 1 > logindefs.new_group_max_id || ret < logindefs.new_group_min_id)
+		if (ret > logindefs.new_group_max_id)
 		{
 			g_warning ("new gid is out of bounds");
 			return -1;
 		}
-		return ++ret;
+		
+		return ret;
 	}
-
 	else if (from == USER && what == UID)
 	{
+		ret = logindefs.new_user_min_id;
+		
 		for (tmplist = g_list_first (user_list); tmplist; tmplist = g_list_next (tmplist))
 		{
 			current_u = (user *)tmplist->data;
-			if (ret < current_u->uid)
-				ret = current_u->uid;
+			if (ret <= current_u->uid)
+				ret = current_u->uid + 1;
 		}
 		
-		if (ret + 1 > logindefs.new_user_max_id || ret < logindefs.new_user_min_id)
+		if (ret > logindefs.new_user_max_id)
 		{
 			g_warning ("new gid is out of bounds");
 			return -1;
 		}
-		return ++ret;
+		
+		return ret;
 	}
 
 
@@ -1182,9 +1224,8 @@ find_new_key (gchar from)
 	GList *tmplist;
 	group *current_g;
 	user *current_u;
-	gint ret = 0;
-	gint tmp;
-	gchar *s, *end;
+	guint ret = 0;
+	guint tmp;
 	gchar *buf;
 
 	if (from == GROUP)
@@ -1193,22 +1234,11 @@ find_new_key (gchar from)
 		{
 			current_g = (group *)tmplist->data;
 			tmp = atoi (current_g->key);
-			if (ret < tmp)
-				ret = tmp;
-
+			if (ret <= tmp)
+				ret = tmp + 1;
 		}
 
-		buf = g_strdup_printf ("%6d", ++ret);
-
-		s = buf;
-		end = buf + 6;
-
-		while (s < end)
-		{
-			if (*s == ' ')
-				*s = '0';
-			s++;
-		}
+		buf = g_strdup_printf ("%06d", ret);
 		
 		return buf;
 	}
@@ -1219,23 +1249,12 @@ find_new_key (gchar from)
 		{
 			current_u = (user *)tmplist->data;
 			tmp = atoi (current_u->key);
-			if (ret < tmp)
-				ret = tmp;
-
+			if (ret <= tmp)
+				ret = tmp + 1;
 		}
 
-		buf = g_strdup_printf ("%6d", ++ret);
+		buf = g_strdup_printf ("%06d", ret);
 
-		s = buf;
-		end = buf + 6;
-
-		while (s < end)
-		{
-			if (*s == ' ')
-				*s = '0';
-			s++;
-		}
-		
 		return buf;
 	}
 
@@ -1245,3 +1264,18 @@ find_new_key (gchar from)
 	return NULL;
 }
 
+static gboolean 
+is_valid_name (gchar *str)
+{
+	if (!str || !*str)
+		return FALSE;
+ 
+	for (;*str; str++)
+	{
+		if (((*str < 'a') || (*str > 'z')) &&
+				((*str < '0') || (*str > '9')))
+			return FALSE;
+	}
+	
+	return TRUE;
+}
