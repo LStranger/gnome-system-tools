@@ -203,13 +203,6 @@ wireless_dialog_save (GstConnectionDialog *dialog)
 		NULL);
 }
 
-static gboolean
-wireless_dialog_check_fields (GstConnectionDialog *dialog)
-{
-  return ((!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (dialog->connection_configured))) ||
-	  (get_entry_text (GTK_BIN (dialog->essid)->child)));
-}
-
 static void
 plip_dialog_prepare (GstConnectionDialog *dialog)
 {
@@ -533,11 +526,9 @@ connection_check_fields (GstConnectionDialog *dialog)
 {
   gboolean active;
 
-  if (GST_IS_IFACE_WIRELESS (dialog->iface))
-    active = (wireless_dialog_check_fields (dialog) &&
-	      ethernet_dialog_check_fields (dialog));
-  else if (GST_IS_IFACE_ETHERNET (dialog->iface) ||
-	   GST_IS_IFACE_IRLAN    (dialog->iface))
+  if (GST_IS_IFACE_ETHERNET (dialog->iface) ||
+      GST_IS_IFACE_WIRELESS (dialog->iface) ||
+      GST_IS_IFACE_IRLAN    (dialog->iface))
     active = ethernet_dialog_check_fields (dialog);
   else if (GST_IS_IFACE_PLIP (dialog->iface))
     active = plip_dialog_check_fields (dialog);
