@@ -105,9 +105,8 @@ xst_ui_combo_remove_by_label (GtkCombo *combo, const gchar *label)
 		buf = gtk_entry_get_text (GTK_ENTRY (combo->entry));
 	else
 		buf = (void *)label;
-
-	item = xst_ui_list_get_list_item_by_name (GTK_LIST (combo->list),
-									  buf);
+	
+	item = xst_ui_list_get_list_item_by_name (GTK_LIST (combo->list), buf);
 	if (item)
 		gtk_widget_destroy (item);
 }
@@ -202,6 +201,89 @@ xst_ui_option_menu_get_selected_row (GtkOptionMenu *option_menu)
 	row = g_list_index (menu_items, found);
 	gtk_option_menu_set_history (option_menu, row);
 	return row;
+}
+
+/**
+ * xst_ui_option_menu_get_selected_string: Returns string of selected label in GtkOptionMenu.
+ * @option_menu: GtkOptionMenu to examine.
+ * 
+ * It only works for GtkMenues conataining GtkLabels.
+ * 
+ * Return Value: Pointer to gchar containing the label of the active (selected) item in
+ * GtkOptionMenu. NULL if active item isn't GtkLabel. Must be g_free()'d.
+ **/
+gchar *
+xst_ui_option_menu_get_selected_string (GtkOptionMenu *option_menu)
+{
+	GtkWidget *selected;
+	gchar *label;
+	
+	selected = GTK_WIDGET (GTK_BIN (option_menu)->child);
+	if (!GTK_IS_LABEL (selected))
+		return NULL;
+
+	gtk_label_get (GTK_LABEL (selected), &label);
+	return g_strdup (label);
+}
+
+void
+xst_ui_option_menu_set_selected_string (GtkOptionMenu *option_menu, const gchar *string)
+{
+	GtkWidget *menu, *found;
+	GList *menu_items;
+	gint row;
+
+	menu = gtk_option_menu_get_menu (option_menu);
+	menu_items = GTK_MENU_SHELL (menu)->children;
+
+	found = get_list_item_by_name (menu_items, string);
+	if (!found)
+		return;
+
+	row = g_list_index (menu_items, found);
+	gtk_menu_set_active (GTK_MENU (menu), row);
+}
+
+/**
+ * xst_ui_option_menu_add_string: Add new GtkLabel child to GtkOptionMenu.
+ * @option_menu:  GtkOptionMenu to examine. 
+ * @string: Pointer to gchar containing the label.
+ * 
+ * Simple wrapper to make life easier when dealing with GtkOptionMenus containing GtkLabels.
+ * 
+ * Return Value: the newly created GtkMenuItem.
+ **/
+GtkWidget *
+xst_ui_option_menu_add_string (GtkOptionMenu *option_menu, const gchar *string)
+{
+	GtkWidget *menu, *item;
+
+	menu = gtk_option_menu_get_menu (option_menu);
+	item = gtk_menu_item_new_with_label (string);
+	gtk_widget_show (item);
+	gtk_menu_append (GTK_MENU (menu), item);
+
+	return item;
+}
+
+/**
+ * xst_ui_option_menu_remove_string: Remove GtkLabel child from GtkOptionMenu.
+ * @option_menu: GtkOptionMenu to examine.
+ * @string: Pointer to gchar containing the label.
+ * 
+ * Simple wrapper to make life easier when dealing with GtkOptionMenus containing GtkLabels.
+ **/
+void
+xst_ui_option_menu_remove_string (GtkOptionMenu *option_menu, const gchar *string)
+{
+	GtkWidget *found, *menu;
+	GList *menu_items;
+
+	menu = gtk_option_menu_get_menu (option_menu);
+	menu_items = GTK_MENU_SHELL (menu)->children;
+	found = get_list_item_by_name (menu_items, string);
+	if (found)
+		gtk_container_remove (GTK_CONTAINER (menu), found);
 }
 
 void

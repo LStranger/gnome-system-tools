@@ -8,6 +8,9 @@ xmlNodePtr xst_xml_doc_get_root(xmlDocPtr doc);
 
 void xst_xml_doc_dump(xmlDocPtr doc);
 
+xmlNodePtr xst_xml_element_get_parent (xmlNodePtr node);
+void       xst_xml_element_add_child  (xmlNodePtr parent, xmlNodePtr child);
+
 xmlNodePtr xst_xml_element_find_first(xmlNodePtr parent, char *name);
 xmlNodePtr xst_xml_element_find_next(xmlNodePtr sibling, char *name);
 xmlNodePtr xst_xml_element_find_nth (xmlNodePtr parent, char *name, int n);
