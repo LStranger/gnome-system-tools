@@ -1,11 +1,5 @@
 desktop = $(toolname).desktop
-
-$(desktop).in: %.desktop.in: %.desktop.in.in
-	sed s#Icon=.*#Icon=$(pixmapsdir)/$(toolname).png# < $< > $(toolname).desktop.in
-
-$(desktop): %.desktop: %.desktop.in
-		../../intltool-merge -d ../../po $(desktop).in $(desktop)
-
 desktopdir = $(datadir)/applications/
-desktop_DATA = $(desktop)
-
+desktop_in_files = $(desktop).in
+desktop_DATA = $(desktop_in_files:.desktop.in=.desktop)
+@INTLTOOL_DESKTOP_RULE@
