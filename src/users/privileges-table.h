@@ -26,6 +26,6 @@
 
 void     create_user_privileges_table      (void);
 void     populate_user_privileges_table    (gchar*);
-GList*   user_privileges_get_list          (void);
+GList*   user_privileges_get_list          (GList*);
 
 #endif /* __PRIVILEGES_TABLE_H */

@@ -93,6 +93,7 @@ void		group_update_xml	(xmlNodePtr, gchar*, gchar*, GList*);
 xmlNodePtr	user_add_blank_xml  	(xmlNodePtr);
 void		user_update_xml		(xmlNodePtr, UserAccountData*, gboolean);
 void		del_user_groups		(xmlNodePtr);
+GList*          user_get_groups         (xmlNodePtr);
 
 GList *		get_group_users		(xmlNodePtr);
 GList *		get_list_from_node	(gchar*, gint);

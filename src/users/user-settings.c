@@ -41,6 +41,7 @@
 #include "user-settings.h"
 #include "user_group.h"
 #include "passwd.h"
+#include "privileges-table.h"
 
 #define MAX_TOKENS 8
 
@@ -610,8 +611,9 @@ user_update (ug_data *ud)
 	if (!data->gid)
 		return FALSE;
 
-	g_list_free (data->extra_groups);
-	data->extra_groups = user_privileges_get_list ();
+	data->extra_groups = NULL;
+	data->extra_groups = user_get_groups (ud->node);
+	data->extra_groups = user_privileges_get_list (data->extra_groups);
 
 	data->pwd_maxdays = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_max"))));
 	data->pwd_mindays = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (gst_dialog_get_widget (tool->main_dialog, "user_passwd_min"))));

@@ -134,11 +134,11 @@ populate_user_privileges_table (gchar *username)
 }
 
 GList*
-user_privileges_get_list ()
+user_privileges_get_list (GList *groups)
 {
-	GtkWidget    *list = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
+	GtkWidget    *list  = gst_dialog_get_widget (tool->main_dialog, "user_privileges");
 	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (list));
-	GList        *groups = NULL;
+	GList        *elem  = NULL;
 	gboolean      valid, active;
 	GtkTreeIter   iter;
 	gchar        *group;
@@ -147,9 +147,12 @@ user_privileges_get_list ()
 
 	while (valid) {
 		gtk_tree_model_get (model, &iter, 0, &active, 2, &group, -1);
+		elem = g_list_find_custom (groups, group, my_strcmp);
 
-		if (active)
+		if (active && !elem)
 			groups = g_list_prepend (groups, group);
+		else if (!active && elem)
+			groups = g_list_remove (groups, elem->data);
 
 		valid = gtk_tree_model_iter_next (model, &iter);
 	}
