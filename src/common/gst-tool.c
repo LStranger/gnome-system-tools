@@ -51,7 +51,10 @@
 #include <sys/wait.h>
 #include <signal.h>
 
+#define BUFFER_SIZE 2048
 #define GST_DEBUG 1
+#define GST_TOOL_EOR "<!-- GST: end of request -->"
+
 /* Define this if you want the frontend to run the backend under strace */
 /*#define GST_DEBUG_STRACE_BACKEND*/
 
@@ -84,7 +87,6 @@ enum {
 
 static GtkObjectClass *parent_class;
 static gint gsttool_signals [LAST_SIGNAL] = { 0 };
-static const gchar *GST_TOOL_EOR = "<!-- GST: end of request -->";
 
 static void     gst_tool_idle_run_directives_remove (GstTool *tool);
 static void     gst_tool_idle_run_directives_add    (GstTool *tool);
@@ -310,8 +312,8 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 {
 	GstTool *tool;
 	GstReportLine *rline;
-	gchar buffer [500];
-	gint n, i = 0;
+	gchar *buffer;
+	gint i = 0;
 
 	tool = GST_TOOL (data);
 	if (tool->input_block)
@@ -320,11 +322,8 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 	if (!tool->line)
 		tool->line = g_string_new ("");
 
-	while ((n = read (fd, buffer, sizeof (buffer) - 1)) != 0) {
-		buffer [n] = 0;
-		fflush (NULL);
-
-		for (i = 0; (i < n); i++) {
+	while ((buffer = gst_tool_read_from_backend (tool))) {
+		for (i = 0; (i < strlen (buffer)); i++) {
 			gchar c = buffer [i];
 
 			if (c == '\n') {
@@ -353,17 +352,11 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 		}
 	}
 
- full_break:
-
-	if (n <= 0) {
-		/* Zero-length read; pipe closed unexpectedly */
-
-		tool->report_finished = TRUE;
-	}
-
+full_break:
 	if (tool->report_finished) {
-		if (n > 0)
+		if ((strlen (buffer) - i) > 0)
 			tool->xml_document = g_string_new (&buffer [i]);
+		
 		g_string_free (tool->line, TRUE);
 		tool->line = NULL;
 	}
@@ -415,7 +408,7 @@ report_progress (GstTool *tool, const gchar *label)
 					     report_progress_tick, NULL, tool, NULL);
 	tool->input_block = FALSE;
 
-	gtk_main (); 
+	gtk_main ();
 
 	if (tool->input_id)
 		gtk_input_remove (tool->input_id);
@@ -653,37 +646,17 @@ gst_tool_end_of_request (GString *string)
 static xmlDoc *
 gst_tool_read_xml_from_backend (GstTool *tool)
 {
-	char buffer [4096];
+	gchar *buffer;
 	int t;
 	xmlDoc *xml;
 
 	if (!tool->xml_document)
 		return NULL;
 
-	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
-
 	while (! gst_tool_end_of_request (tool->xml_document)) {
-		while (gtk_events_pending ())
-			gtk_main_iteration ();
-		while (g_main_context_iteration (NULL, FALSE));
-
-		t = read (tool->backend_master_fd, buffer, sizeof (buffer) - 1);
-		buffer[t] = '\0';
-
-		fflush (NULL);
-
-		if ((t == 0))
-			break;
-		if (t == -1)
-			t = 0;
-
-		if (t > 0) {
-			buffer [t] = 0;
-			g_string_append (tool->xml_document, buffer);
-		}
+		buffer = gst_tool_read_from_backend (tool);
+		g_string_append (tool->xml_document, buffer);
 	}
-
-	fcntl (tool->backend_master_fd, F_SETFL, 0);
 
 	if (tool->xml_document->str[0] == '<') {
 		xml = xmlParseDoc (tool->xml_document->str);
@@ -763,21 +736,14 @@ gst_tool_send_directive (GstTool *tool, const gchar *directive, va_list ap)
 {
 	GString *directive_line;
 	FILE *f;
-	gchar buffer[512];
+	gchar *buffer;
 
 	g_return_if_fail (tool->backend_pid >= 0);
 
        	directive_line = gst_tool_join_directive (directive, ap);
 	g_string_append_c (directive_line, '\n');
 
-	f = fdopen (dup (tool->backend_master_fd), "w");
-	fprintf (f, directive_line->str);
-	fflush (f);
-	fclose (f);
-
-	/* clear the buffer from the directive, this is done because there is only one
-	 * fd for reading and writing */
-	read (tool->backend_master_fd, buffer, strlen (directive_line->str));
+	gst_tool_write_to_backend (tool, directive_line->str);
 
 	g_string_free (directive_line, TRUE);
 }
@@ -836,7 +802,6 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 {
 	FILE *f;
 	xmlDoc *xml_out;
-	gchar *eor = g_strconcat ("\n", GST_TOOL_EOR, "\n", NULL);
 
 	int n;
 	gchar buf;
@@ -858,21 +823,10 @@ gst_tool_run_set_directive_va (GstTool *tool, xmlDoc *xml,
 	gst_tool_send_directive (tool, directive, ap);
 
 	if (xml) {
-		f = fdopen (dup (tool->backend_master_fd), "w");
-		xmlDocDump (f, xml);
-
-		fflush (f);
-		fclose (f);
-
-		/* read all output from the fd, this is done because a single fd is user for
-		 * reading and writing */
-		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
-		do {
-			n = read (tool->backend_master_fd, &buf, 1);
-		} while (n >= 0);
-		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
-
-		write (tool->backend_master_fd, eor, strlen (eor));
+		gst_tool_write_xml_to_backend (tool, xml);
+		gst_tool_write_to_backend (tool, "\n");
+		gst_tool_write_to_backend (tool, GST_TOOL_EOR);
+		gst_tool_write_to_backend (tool, "\n");
 	}
 
 
@@ -989,7 +943,6 @@ gst_tool_save (GstTool *tool, gboolean restore)
 	gst_dialog_freeze_visible (tool->main_dialog);
 
 	g_signal_emit (GTK_OBJECT (tool), gsttool_signals[FILL_XML], 0);
-
 #ifdef GST_DEBUG
 	/* don't actually save if we are just pretending */
 	if (tool->root_access == ROOT_ACCESS_SIMULATED) {
@@ -1654,4 +1607,67 @@ gst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
 				      _("GNOME System Tools"),
 				      NULL);
 	try_show_usage_warning ();
+}
+
+gchar*
+gst_tool_read_from_backend (GstTool *tool)
+{
+	gchar *buffer;
+	GString *str = g_string_new ("");
+	gchar *ptr;
+	gboolean may_exit = FALSE;
+	
+	buffer = (gchar*) g_malloc0 (sizeof (gchar) * BUFFER_SIZE);
+
+	do {
+		usleep (32000);
+		
+		while (fgets (buffer, BUFFER_SIZE, tool->backend_stream) != NULL) {
+			g_string_append (str, buffer);
+			may_exit = TRUE;
+		}
+		
+		while (gtk_events_pending ())
+			gtk_main_iteration ();
+	} while (!may_exit);
+
+	ptr = str->str;
+	g_string_free (str, FALSE);
+
+	return ptr;
+}
+
+void
+gst_tool_write_xml_to_backend (GstTool *tool, xmlDoc *doc)
+{
+	gint size;
+	xmlChar *xml;
+	gchar *string;
+
+	xmlDocDumpMemory (doc, &xml, &size);
+	string = (gchar *) xml;
+	
+	gst_tool_write_to_backend (tool, string);
+
+	xmlFree (xml);
+
+	usleep (32000);
+}
+
+void
+gst_tool_write_to_backend (GstTool *tool, gchar *string)
+{
+	gint ntotal = 0;
+	gint nread = 0;
+	gint ret;
+	gchar *p;
+
+	do {
+		ret = fputc (string [nread], tool->backend_stream);
+
+		if (ret >= 0)
+			nread++;
+	} while (nread < strlen (string));
+
+	while (fflush (tool->backend_stream) != 0);
 }

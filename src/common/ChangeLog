@@ -1,5 +1,13 @@
 2003-10-08  Carlos Garnacho Parro  <garnacho@tuxerver.net>
 
+	* gst-tool.[ch]: (gst_tool_read_from_backend)
+	(gst_tool_write_to_backend) (gst_tool_write_xml_to_backend): new
+	functions for non-blocking IO with the backend
+	* gst-tool.[ch], gst-dialog.c: now all the communication is done via
+	the new functions
+
+2003-10-08  Carlos Garnacho Parro  <garnacho@tuxerver.net>
+
 	* gst-dialog.[ch], gst-tool.[ch]: added "Apply" button with HIGgy
 	  behaviour
 

@@ -34,6 +34,7 @@
 #include <sys/ioctl.h>
 #include <sys/wait.h>
 #include <pty.h>
+#include <termios.h>
 
 #include <gnome.h>
 #include <gtk/gtk.h>
@@ -99,6 +100,8 @@ gst_auth_wait_child (GstTool *tool)
 void
 gst_auth_run_term (GstTool *tool, gchar *args[])
 {
+	struct termios t;
+	
 	tool->backend_pid = forkpty (&tool->backend_master_fd, NULL, NULL, NULL);
 
 	if (tool->backend_pid < 0) {
@@ -108,7 +111,14 @@ gst_auth_run_term (GstTool *tool, gchar *args[])
 		/* It's the child process */
 		execv (args[0], args);
 	} else {
+		tcgetattr (tool->backend_master_fd, &t);
+		t.c_lflag ^= ECHO;
+		tcsetattr (tool->backend_master_fd, TCSANOW, &t);
+
+		fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
+
 		tool->timeout_id = g_timeout_add (1000, (GSourceFunc) gst_auth_wait_child, tool);
+		tool->backend_stream = fdopen (tool->backend_master_fd, "a+");
 	}
 }
 
@@ -116,30 +126,27 @@ gst_auth_run_term (GstTool *tool, gchar *args[])
 void
 gst_auth_write_password (GstTool *tool, gchar *pwd)
 {
-	gchar buffer[500];
 	gchar *answer = "yes\n";
 	int t;
 	gboolean cont = FALSE;
+	gchar *str;
 
 	/* read all the su or ssh output and flush the descriptors */
 	while (!cont) {
-		t = read (tool->backend_master_fd, buffer, sizeof (buffer) - 1);
-		fflush (NULL);
-		buffer[t] = '\0';
+		str = gst_tool_read_from_backend (tool);
 
-		if (g_strrstr (g_ascii_strup (buffer, -1), "PASSWORD:") != NULL) {
-			/* the "password:" prompt has appeared, stop
-			 * requesting data and send the password */
-			cont = TRUE;
-		} else if (g_strrstr (buffer, "authenticity") != NULL) {
+		/* FIXME: hope that someday we can get rid of this ssh output string parsing */
+		if (g_strrstr (g_ascii_strup (str, -1), "AUTHENTICITY") != NULL) {
 			/* it's the "add to known hosts list" ssh's message, just answer "yes" */
-			write (tool->backend_master_fd, answer, strlen (answer));
-			fflush (NULL);
+			gst_tool_write_to_backend (tool, answer);
+		} else if (g_strrstr (g_ascii_strup (str, -1), "PASSWORD") != NULL) {
+			cont = TRUE;
 		}
+
+		g_free (str);
 	}
 
-	write (tool->backend_master_fd, pwd, strlen (pwd));
-	fflush (NULL);
+	gst_tool_write_to_backend (tool, pwd);
 }
 
 static GladeXML *
@@ -212,30 +219,18 @@ gst_auth_get_password (gchar **password)
 	g_assert ("Not reached");
 }
 
-/* this is done because we need to synchronize whith the backend */
+/* this is done because we need to synchronize with the backend */
 static void
 gst_auth_read_output (GstTool *tool)
 {
 	gint t;
 	gchar buffer[500];
 	gchar *error_message;
+	gchar *b;
 
 	/* read the synchrony CR after sending the password */
-	t = read (tool->backend_master_fd, buffer, sizeof (buffer) - 1);
-	fflush (NULL);
-
-	t = read (tool->backend_master_fd, buffer, sizeof (buffer) - 1);
-	buffer[t] = '\0';
-	fflush (NULL);
-
-	if ((g_strrstr (g_ascii_strup (buffer, -1), "TRY AGAIN") != NULL) ||
-	    (g_strrstr (g_ascii_strup (buffer, -1), "FAILURE") != NULL)) {
-		/* it has failed */
-		error_message = g_strdup_printf (_("The password you entered is invalid."));
-		gst_auth_display_error_message (error_message);
-
-		exit (0);
-	}
+	b = gst_tool_read_from_backend (tool);
+	g_free (b);
 }
 
 /* it does authentication, first of all it runs su (just to ensure that it's completely run
@@ -314,7 +309,7 @@ gst_auth_do_su_authentication (GstTool *tool)
 		g_string_append (command, (gchar *)gst_platform_get_key (tool->current_platform));
 	}
 
-	/* these are the ssh args */
+	/* these are the su args */
 	su_args[0] = SU_PATH;
 	su_args[1] = "root";
 	su_args[2] = "-c";

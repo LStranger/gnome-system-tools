@@ -62,6 +62,8 @@ struct _GstTool {
 	int backend_pid;
 	int backend_master_fd;
 
+	FILE *backend_stream;
+
 	/* configuration */
 	xmlDoc  *config;
 	xmlDoc  *original_config;
@@ -175,6 +177,10 @@ void         gst_tool_add_supported_platform    (GstTool *tool, GstPlatform *pla
 void         gst_tool_clear_supported_platforms (GstTool *tool);
 
 void         gst_tool_process_startup (GstTool*);
+
+gchar*       gst_tool_read_from_backend (GstTool*);
+void         gst_tool_write_to_backend (GstTool*, gchar*);
+void         gst_tool_write_xml_to_backend (GstTool*, xmlDoc*);
 
 #define __full_tool_name(parameter) "Gst" #parameter "Tool"
 
