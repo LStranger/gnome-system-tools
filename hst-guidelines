@@ -1,0 +1,173 @@
+Helix Setup Tools User Interface Guidelines.
+Arturo Espinosa
+Copyright (C) Helix Code, Inc.
+
+
+This document is a draft, to enable systematic and productive discussions
+regarding the general user interface design for the Helix Setup Tools
+frontends. It is far from perfect, and maybe not written by the best man for
+the task, but I hope it will evolve into a refference for all the points of 
+agreement for the interface.
+
+I have just read "The Design of Everyday Things", a book Joakim Ziegler
+recomended me to structure my understanding of design in general, so I'll
+use some concepts from the book and try to transmit part of the essence of
+these concepts to you.
+
+
+
+Terminology.
+
+This should probably be in some other place, as the terminology should be
+the same for all of our documents. 
+
+    HST - Helix Setup Tools.
+   Tool - a backend and all of its frontends.
+CVS/a/b - the directory a/b under the helix-setup-tools module in 
+          cvs.gnome.org.
+
+
+
+The HST target user.
+
+One of the main problems of writing a new project is defining its
+operating constraints, to avoid bloat and keep the efforts focused. One of
+such constraints is the intended user. HST most important target user is
+the personal computer user, who may have some low-profile, basic
+networking interactions with others. This user has no interest in reading
+manuals or spending time with the computer to learn how it works. This
+user has no structured understanding of the machine: he could even hate
+it. So we need to develop an interface that makes immediate sense to this
+kind of user, without effort.
+
+There is a second target user, which will take advantage of the advanced
+mode features of the dialogs, who may be a medium-sized - no more than 500
+users - network administrator. This user has a better understanding of the
+system in general, and may be ready to confront interfaces that may be  
+more agressive, but also more practical. Powerful, scalable interfaces can
+still be integrated, as long as they prove to be worthy for the user and 
+raise the complexity level as little as possible.
+
+Design and develop, thinking always in the target user.
+
+
+
+UI development priorities.
+
+There are several criterion that help a user interface developer create the
+right tool for its user. These criterion, such as screen realstate use,
+interface speed, constraints, spacing, visibility and unfolding should not
+be confused with our main goal: usability. All these criterion work around
+us, serving as tools to improve usability. 
+
+It doesn't matter if improving the spacing of a dialog reduces the screen
+realstate use, if that is going to improve the user experience. It doesn't
+matter if developing a friendlier, but slower interface will reduce the
+amount of data the user can input at a given point, if that is going to make
+it easier for him to understand what the elements on the screen stand for,
+and how they interact. Lots of other possible situations may arise, but the
+point here is that usability is the center of all this.
+
+
+
+Uniform interface.
+
+All the HST frontends must look the same, regarding spacing, the layout of
+the main action buttons and the way commonly used data mappings and control
+arrangements look and interact. This will let the user make his own
+explanation of how certain arrangements work. More on specific arrangements
+later.
+
+There is a file called CVS/interfaces/template.glade which can
+be used for new frontends and describe the elements that must be present all
+over the place. Frontends are like dialogs: there are no menu bars. Menu
+bars are dangerous elements: you have to be very careful of the naming
+conventions, so that the menu elements suggest what they will be unfolding.
+Also, they don't make the available actions directly visible to the user, so
+he has to go an look for them, and this obstrusve.
+
+Although frontends look like dialogs, we didn't use the gnome_dialog
+objects, as they are not flexible enough for the button arrangements we are
+using at the moment for the main actions. Still, we made them remain as
+close as possible to the gnome_dialog appereance.
+
+ Action buttons.
+
+ There are three main action buttons: one for the complexity level, shown at
+ the leftmost of the dialog, one to apply any changes done to the displayed
+ information, and the other to close the dialog. 
+
+ Always use the function calls and callbacks under the CVS/src/common directory
+ for the operation of the action buttons, to guarantee an uniform behaviour of
+ these elements.
+
+  Apply/Close.
+
+  An OK/Apply/Cancel arrangement was not used, as OK would then have been
+	equal to Apply+Cancel, and after pushing Apply, it is not clear if Cancel
+	will just close the dialog or if it will cancel the already applied
+	changes and then close. Maybe the Cancel button for other dialogs using
+	this scheme should change its label to "Close" as soon as Applied has been
+	pushed.
+
+  This ambiguity is reflected in the common mythical behaviour where the
+	user pushes first Apply, just to be sure, and then OK when he wants his
+	changes to take effect. This means they doubt about the effectiveness of
+	the OK or Apply buttons by themselves. I've heard users saying "No!" when
+	I've pushed Apply and then Cancel after some important configuration
+	process taking place in their machines.
+
+  The Apply/Close scheme also saves some space and allows us to have smaller
+  dialogs and more space for other buttons.
+ 
+
+Complexity level.
+
+Most of the frontends will have an advanced mode, which will be acessible
+through a button which I'll call from now on the Complexity Button. At the
+moment, two modes, basic and advanced, are being planned for certain
+frontends. We have to discuss if the implementation of frontends with more
+that two modes will confuse users or not.
+
+ Complexity button.
+
+ This button will change its label to reflect the next mode the frontend
+ will enter, as the mode rotates when the button is pushed. I propose the
+ Mac approach, using the "More Options" and "Less Options" labels, instead
+ of "Advanced" and "Basic", as the latter may be patronising and a little
+ bit agressive for the novice user.
+ 
+ Visibility and modes.
+
+ There's a visibility issue with the use of modality: the user doesn't know
+ the relation between the complexity button and the new controls that will
+ appear. One solution to this is not to hide the elements, but to turn off
+ their sensitivity. Specially with notebook tabs. Also, to avoid a clash
+ between sensitivity constraints (a Delete button going gray when there is
+ no record selected), all elements that will be unacessible under certain
+ modes should be grouped, most probably with a frame or a separator.
+
+
+
+Criteria for new frontend development.
+
+The HST architecture lets the developer design new UI interfaces with the
+same backend and infrastructure, and there is a tradeoff on doing this. As
+we tend to centralize our efforts on a single frontend for a tool, it
+becomes more powerful for the user at a given time, but it potentialy raises
+the complexity of the interface. On the other hand, having several frontends
+for the same task will prove to be confusing for the user.
+
+If you have a special project and want to add functionality for a HST
+frontend, please take into account the target end-user for the HST frontends
+and that UI friendlyness is our main concern. Adding features raises the
+complexity bar of the interface, and may compromise the frontend's
+usability. It there are too many additions or modifications planned for your
+project, you may consider writing a new frontend. Frontends are simple
+programs of less than 5,000 lines of code, so it may be less effort to
+create a new one, tailored for your specific situation, than coordinating
+with the HST project and discussing possible low-profile integrations.
+
+This doesn't mean we may not want to know about the suggestions you may have
+for the HST. It's just that all modifications should go through this
+criteria to see what is worth.
