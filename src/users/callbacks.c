@@ -226,6 +226,9 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
 		adv_user_settings_new ();
 
+	/* Set focus to user name entry. */
+	gtk_widget_grab_focus (tool_widget_get ("user_settings_name"));
+
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_window_set_title (GTK_WINDOW (w0), "Create New User");
 	gtk_object_set_data (GTK_OBJECT (w0), "new", GUINT_TO_POINTER (1));
@@ -324,6 +327,9 @@ on_group_new_clicked (GtkButton *button, gpointer user_data)
 
 	/* Fill all users list */
 	group_fill_all_users_list (NULL);
+
+	/* Set focus to user name entry. */
+	gtk_widget_grab_focus (tool_widget_get ("group_settings_name"));
 
 	/* Show group settings dialog */
 
