@@ -30,7 +30,7 @@
 
 #include "transfer.h"
 #include "callbacks.h"
-#include "e-table.h"
+#include "table.h"
 
 extern XstTool *tool;
 

@@ -32,7 +32,7 @@
 #endif
 #include "xst.h"
 #include "boot-image.h"
-#include "e-table.h"
+#include "table.h"
 
 extern XstTool *tool;
 
@@ -106,6 +106,31 @@ boot_image_get_by_node (xmlNodePtr node)
 	return image;
 }
 
+static gchar *
+get_new_key (xmlNodePtr root)
+{
+	xmlNodePtr node;
+	gchar *key;
+	gint maxkey, keynum;
+
+	maxkey = 0;
+	for (node = xst_xml_element_find_first (root, "entry");
+	     node; node = xst_xml_element_find_next (node, "entry"))
+	{
+		key = xst_xml_get_child_content (node, "key");
+		if (key) {
+			keynum = atoi (key);
+			if (maxkey <= keynum)
+				maxkey = keynum + 1;
+			g_free (key);
+		} else
+			/* This leaks, but it's not supposed to happen in production. */
+			g_warning ("Entry %s has no key.", xst_xml_get_child_content (node, "label"));
+	}
+
+	return g_strdup_printf ("%d", maxkey);
+}
+
 void
 boot_image_save (BootImage *image)
 {
@@ -172,11 +197,11 @@ boot_image_valid_name_chars (const gchar *string)
 }
 
 static gboolean
-boot_image_valid_chars (const gchar *string)
+boot_image_valid_chars (const gchar *str)
 {
 	gchar *s;
-
-	s = (gchar *) string;
+	
+	s = (gchar *) str;
 	while (*s != '\0') {
 		if (isalnum (*s) || *s == '-' || *s == '/' || *s == '.' || *s == '_') 
 			s++;

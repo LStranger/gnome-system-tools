@@ -36,7 +36,7 @@
 #include "xst-report-hook.h"
 
 #include "transfer.h"
-#include "e-table.h"
+#include "table.h"
 #include "callbacks.h"
 #include "boot-settings.h"
 
@@ -73,7 +73,7 @@ main (int argc, char *argv[])
 	xst_init ("boot-admin", argc, argv, NULL);
 	tool = xst_tool_new ();
 	xst_tool_construct (tool, "boot", _("Boot Manager Settings"));
-	table_construct (tool);
+	table_construct ();
 
 	xst_tool_set_xml_funcs    (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	xst_tool_add_report_hooks (tool, report_hooks);

@@ -32,9 +32,16 @@
 #include "xst-report-hook.h"
 #include "callbacks.h"
 #include "transfer.h"
-#include "e-table.h"
+#include "table.h"
 
-XstTool *tool;
+extern XstTool *tool;
+extern GtkWidget *boot_table;
+
+void
+on_boot_table_cursor_changed (GtkTreeSelection *selection, gpointer data)
+{
+	callbacks_actions_set_sensitive (TRUE);
+}
 
 /* Helpers */
 
@@ -79,6 +86,9 @@ callbacks_buttons_set_visibility (XstDialog *main_dialog)
 void
 on_boot_delete_clicked (GtkButton *button, gpointer data)
 {
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
 	xmlNodePtr   node;
 	gchar       *label, *buf;
 	gint         count, reply;
@@ -100,8 +110,12 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 		return;
 	}
 
-	g_return_if_fail (node = get_selected_node ());
-
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
+	
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
+	}
+	
 	label = xst_xml_get_child_content (node, "label");
 	buf = g_strdup_printf (_("Are you sure you want to delete '%s'?"), label);
 	g_free (label);
@@ -109,17 +123,18 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 	d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
 				    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 				    GTK_MESSAGE_QUESTION,
-				    GTK_BUTTONS_OK_CANCEL,
+				    GTK_BUTTONS_YES_NO,
 				    buf);
 
 	g_free (buf);
 	reply = gtk_dialog_run (GTK_DIALOG (d));
 	gtk_widget_destroy (d);
 
-	if (reply != GTK_RESPONSE_OK)
+	if (reply != GTK_RESPONSE_YES)
 		return;
 
-	boot_table_delete ();
+	xst_xml_element_destroy (node);
+	boot_table_update ();
 	xst_dialog_modify (tool->main_dialog);
 	callbacks_actions_set_sensitive (FALSE);
 }
@@ -127,10 +142,18 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 void
 on_boot_default_clicked (GtkButton *button, gpointer data)
 {
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
 	xmlNodePtr node;
 	gchar *label;
+	
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
+	
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
+	}
 
-	node = get_selected_node ();
 	label = xst_xml_get_child_content (node, "label");
 
 	xst_xml_set_child_content (xst_xml_doc_get_root (tool->config), "default", label);
@@ -153,15 +176,11 @@ on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer data)
 void
 on_main_dialog_update_complexity (XstDialog *main_dialog, gpointer data)
 {
-	XstTool *tool;
-	XstDialogComplexity complexity;
-
-	tool = XST_TOOL (data);
-
-	complexity = XST_DIALOG (main_dialog)->complexity;
-
-	boot_table_update_state ();
-	callbacks_buttons_set_visibility (XST_DIALOG (main_dialog));
+	XstDialogComplexity complexity = xst_dialog_get_complexity (tool->main_dialog);
+	
+	boot_table_update_state (complexity);
+	
+	callbacks_buttons_set_visibility (tool->main_dialog);
 }
 
 /* Hooks */

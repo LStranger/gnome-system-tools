@@ -22,11 +22,11 @@ boot_admin_SOURCES = \
 	main.c                              \
 	callbacks.c 		callbacks.h     \
 	transfer.c 		transfer.h      \
-	e-table.c 		e-table.h       \
+	table.c 		table.h       \
 	boot-settings.c	boot-settings.h \
 	boot-image.c		boot-image.h    \
 	boot-image-editor.c boot-image-editor.h \
 	boot-druid.c		boot-druid.h
 
 toolpixmaps =
-etspecs = boot.etspec
+etspecs = 

@@ -31,19 +31,30 @@
 #include "xst.h"
 #include "callbacks.h"
 #include "boot-settings.h"
-#include "e-table.h"
+#include "table.h"
 
 #include "boot-image-editor.h"
 #include "boot-druid.h"
 
-XstTool *tool;
+extern XstTool *tool;
+extern GtkWidget *boot_table;
 
 void
 on_boot_settings_clicked (GtkButton *button, gpointer data)
 {
+	GtkTreeSelection *selection;
+	GtkTreeModel *model;
+	GtkTreeIter iter;
 	BootImage *image;
 	BootImageEditor *editor;
-	xmlNodePtr node = get_selected_node ();
+	xmlNodePtr node;
+	
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
+	
+	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
+		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
+	}
+
 
 	if (xst_tool_get_access (tool)) {
 		image = boot_image_get_by_node (node);
@@ -62,7 +73,7 @@ on_boot_add_clicked (GtkButton *button, gpointer data)
 		druid = boot_druid_new ();
 
 		if (druid)
-			gtk_widget_show (GTK_WIDGET (druid));
+			gtk_widget_show_all (GTK_WIDGET (druid));
 		else {
 			gchar *error = g_strdup ("Can't add more images, maximum count reached.");
 

@@ -110,20 +110,17 @@ druid_show_error (BootDruid *druid, gchar *error)
 static void
 identity_check (BootDruid *druid)
 {
-	const gchar *label;
-
-	label = gtk_entry_get_text (druid->gui->name);
-	if (strlen (label) > 0)
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE, FALSE);
-	else
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE, FALSE);
+	const gchar *label = gtk_entry_get_text (druid->gui->name);
+	gboolean enabled = (strlen (label) > 0)? TRUE: FALSE;
+	
+	gnome_druid_set_buttons_sensitive (druid->druid, TRUE, enabled, TRUE, FALSE);
 }
 
 static void
 identity_changed (GtkWidget *widget, gpointer data)
 {
 	BootDruid *druid = data;
-	
+
 	identity_check (druid);
 }
 
@@ -131,8 +128,9 @@ static void
 identity_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	BootDruid *config = data;
-
+	
 	gtk_widget_grab_focus (GTK_WIDGET (config->gui->name));
+	g_signal_stop_emission_by_name (page, "prepare");
 	identity_check (config);
 }
 
@@ -172,14 +170,11 @@ identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 other_check (BootDruid *druid)
 {
-	const gchar *buf;
+	const gchar *buf = gtk_entry_get_text (GTK_ENTRY (druid->gui->device->entry));
+	gboolean enabled = (strlen (buf) > 0)? TRUE: FALSE;
 
 	/* TODO: Improve check */ 
-	buf = gtk_entry_get_text (GTK_ENTRY (druid->gui->device->entry));
-	if (strlen (buf) > 0)
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE, FALSE);
-	else
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE, FALSE);
+	gnome_druid_set_buttons_sensitive (druid->druid, TRUE, enabled, TRUE, FALSE);
 }
 
 static void
@@ -196,6 +191,7 @@ other_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	BootDruid *config = data;
 
 	gtk_widget_grab_focus (config->gui->device->entry);
+	g_signal_stop_emission_by_name (page, "prepare");
 	other_check (config);
 }
 
@@ -225,14 +221,11 @@ other_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 image_check (BootDruid *druid)
 {
-	const gchar *buf;
+	const gchar *buf = gtk_entry_get_text (druid->gui->image_entry);
+	gboolean enabled = (strlen (buf) > 0)?TRUE : FALSE;
 
 	/* TODO: Improve check */ 
-	buf = gtk_entry_get_text (druid->gui->image_entry);
-	if (strlen (buf) > 0)
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE, FALSE);
-	else
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE, FALSE);
+	gnome_druid_set_buttons_sensitive (druid->druid, TRUE, enabled, TRUE, FALSE);
 }
 
 static void
@@ -249,6 +242,7 @@ image_prepare (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 	BootDruid *config = data;
 
 	gtk_widget_grab_focus (GTK_WIDGET (config->gui->image_entry));
+	g_signal_stop_emission_by_name (page, "prepare");
 	image_check (config);
 }
 
@@ -257,6 +251,7 @@ image_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	gchar     *error;
 	BootDruid *config = data;
+	
 
 	boot_settings_gui_save (config->gui, FALSE);
 	
@@ -275,7 +270,6 @@ image_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 		return TRUE;
 	}
 	
-
 	return FALSE;
 }
 
@@ -312,8 +306,8 @@ druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
 	BootDruid *config = data;
 
-	boot_settings_gui_save (config->gui, TRUE);
 	boot_image_save (config->gui->image);
+	boot_settings_gui_save (config->gui, TRUE);
 	druid_exit (config);
 }
 
@@ -371,11 +365,7 @@ static struct {
 	  G_CALLBACK (NULL),
 	  G_CALLBACK (druid_finish_back),
 	  G_CALLBACK (druid_finish) },
-	{ NULL,
-	  G_CALLBACK (NULL),
-	  G_CALLBACK (NULL),
-	  G_CALLBACK (NULL),
-	  G_CALLBACK (NULL) }
+	NULL
 };
 
 static gboolean
@@ -390,16 +380,15 @@ construct (BootDruid *druid)
 		return FALSE;
 
 	druid->gui = boot_settings_gui_new (image, GTK_WIDGET (druid));
-
+	
 	/* get our toplevel widget and reparent it */
 	widget = glade_xml_get_widget (druid->gui->xml, "druid_druid");
 	gtk_widget_reparent (widget, GTK_WIDGET (druid));
-
 	druid->druid = GNOME_DRUID (widget);
 
+	
 	/* set window title */
 	gtk_window_set_title (GTK_WINDOW (druid), _("Boot Image Wizard"));
-	gtk_window_set_policy (GTK_WINDOW (druid), FALSE, TRUE, FALSE);
 	gtk_window_set_modal (GTK_WINDOW (druid), TRUE);
 
 	/* attach to druid page signals */

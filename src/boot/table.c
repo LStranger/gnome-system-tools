@@ -1,5 +1,5 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: t; c-basic-offset: 8 -*- */
-/* e-table.c: this file is part of users-admin, a ximian-setup-tool frontend 
+/* table.c: this file is part of users-admin, a ximian-setup-tool frontend 
  * for boot administration.
  * 
  * Copyright (C) 2000-2001 Ximian, Inc.
@@ -18,7 +18,8 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, USA.
  *
- * Authors: Tambet Ingo <tambet@ximian.com>.
+ * Authors: Tambet Ingo <tambet@ximian.com>,
+ *          Carlos Garnacho Parro <garnacho@tuxerver.net>.
  */
 
 #ifdef HAVE_CONFIG_H
@@ -27,272 +28,102 @@
 
 #include <gnome.h>
 #include "xst.h"
-#include <gal/e-table/e-table-scrolled.h>
-#include <gal/e-table/e-table-simple.h>
-#include <gal/e-table/e-cell-text.h>
 
-#include "e-table.h"
+#include "table.h"
 #include "callbacks.h"
-
-#define BOOT_TABLE_SPEC "boot.etspec"
 
 extern XstTool *tool;
 
 GtkWidget *boot_table = NULL;
-GArray *boot_array = NULL;
 
-const gchar *basic_boot_state = "\
-<ETableState> \
-  <column source=\"1\"/> \
-  <column source=\"2\"/> \
-  <grouping> \
-  </grouping> \
-</ETableState>";
-
-const gchar *adv_boot_state = "\
-<ETableState> \
-  <column source=\"1\"/> \
-  <column source=\"2\"/> \
-  <column source=\"3\"/> \
-  <column source=\"4\"/> \
-  <grouping> \
-  </grouping> \
-</ETableState>";
-
-static int
-boot_col_count (ETableModel *etc, void *data)
-{
-	return 3;
-}
-
-static int
-boot_row_count (ETableModel *etc, void *data)
-{
-	if (boot_array)
-		return boot_array->len;
-
-	/* else */
-	return 0;
-}
-
-static void *
-boot_value_at (ETableModel *etc, int col, int row, void *data)
-{
-	xmlNodePtr node;
-
-	node = g_array_index (boot_array, xmlNodePtr, row);
-
-	switch (col) {
-	case COL_LABEL:
-		return boot_value_label (node);
-		break;
-	case COL_TYPE:
-		return boot_value_type_char (node, FALSE);
-		break;
-	case COL_IMAGE:
-		return boot_value_image (node, FALSE);
-		break;
-	case COL_DEV:
-		return boot_value_device (node, FALSE);
-		break;
-	default:
-		return NULL;
-	}
-}
-
-static void
-boot_set_value_at (ETableModel *etc, int col, int row, const void *val, void *data)
-{
-}
-
-static gboolean
-boot_is_cell_editable (ETableModel *etc, int col, int row, void *data)
-{
-	return FALSE;
-}
-
-static void *
-boot_duplicate_value (ETableModel *etc, int col, const void *value, void *data)
-{
-	return g_strdup (value);
-}
-
-static void
-boot_free_value (ETableModel *etc, int col, void *value, void *data)
-{
-	g_free (value);
-}
-
-static void *
-boot_initialize_value (ETableModel *etc, int col, void *data)
-{
-	return g_strdup ("");
-}
-
-static gboolean
-boot_value_is_empty (ETableModel *etc, int col, const void *value, void *data)
-{
-	return !(value && *(char *)value);
-}
-
-static char *
-boot_value_to_string (ETableModel *etc, int col, const void *value, void *data)
-{
-	return g_strdup(value);
-}
-
-static void
-boot_cursor_change (ETable *table, gint row, gpointer user_data)
-{
-	callbacks_actions_set_sensitive (TRUE);
-}
-
-static ETableExtras *
-create_extras (void)
-{
-	ETableExtras *extras;
-	ECell *ec;
-
-	extras = e_table_extras_new ();
-
-	ec = e_cell_text_new (NULL, GTK_JUSTIFY_LEFT);
-	e_table_extras_add_cell (extras, "centered_cell", ec);
-
-	return extras;
-}
-
-static void
-table_structure_change (ETableHeader *eth, gpointer user_data)
-{
-	ETable *et;
-	gchar *state;
-
-	et = E_TABLE (user_data);
-	state = e_table_get_state (et);
-
-	switch (xst_dialog_get_complexity (tool->main_dialog)) {
-	case XST_DIALOG_ADVANCED:
-		xst_conf_set_string (tool, "state_adv", state);
-		break;
-	case XST_DIALOG_BASIC:
-	default:
-		xst_conf_set_string (tool, "state_basic", state);
-		break;
-	}
-
-	g_free (state);
-}
-
-static void
-table_dimension_change (ETableHeader *eth, int col, gpointer user_data)
-{
-	table_structure_change (eth, user_data);
-}
-
-/**
- * table_connect_signals:
- * @: 
- * 
- *  We have to reconnect these signals after every set_state call, cause
- *  it makes new ETableHeader and loses old signal. Same for sorting, grouping...
- **/
-static void
-table_connect_signals (ETable *table)
-{
-	g_signal_connect (G_OBJECT (table->header),
-			  "structure_change",
-			  G_CALLBACK (table_structure_change),
-			  (gpointer)table);
-
-	g_signal_connect (G_OBJECT (table->header),
-			  "dimension_change",
-			  G_CALLBACK (table_dimension_change),
-			  (gpointer)table);
-
-	g_signal_connect (G_OBJECT (table->sort_info),
-			  "sort_info_changed",
-			  G_CALLBACK (table_structure_change),
-			  (gpointer)table);
-}
-
-GtkWidget *
-table_create (void)
-{
-	ETableModel  *model;
-	ETableExtras *extras;
-	gchar        *spec;
-
-	if (boot_table)
-		return NULL;
-	
-	extras = create_extras ();
-	model = e_table_simple_new (boot_col_count,
-				    boot_row_count,
-				    NULL,
-				    boot_value_at,
-				    boot_set_value_at,
-				    boot_is_cell_editable,
-				    NULL,
-				    NULL,
-				    boot_duplicate_value,
-				    boot_free_value,
-				    boot_initialize_value,
-				    boot_value_is_empty,
-				    boot_value_to_string,
-				    NULL);
-
-	spec = xst_conf_get_string (tool, "spec");
-	if (!spec) {
-		spec = xst_ui_load_etspec (tool->etspecs_common_path, BOOT_TABLE_SPEC);
-		if (!spec)
-			g_error ("create_table: Couldn't create table.");
-		xst_conf_set_string (tool, "spec", spec);
-	}
-
-	boot_table = e_table_new (E_TABLE_MODEL (model), extras, spec, basic_boot_state);
-	g_free (spec);
-
-	g_return_val_if_fail (boot_table != NULL, NULL);
-
-	table_connect_signals (E_TABLE (boot_table));
-	g_signal_connect (G_OBJECT (boot_table), "cursor_change",
-			  G_CALLBACK (boot_cursor_change), NULL);
-
-	return boot_table;
-}
+BootTableConfig boot_table_config [] = {
+	{ N_("Default"),	FALSE,	FALSE },
+	{ N_("Name"),		TRUE,	TRUE },
+	{ N_("Type"),		TRUE,	TRUE },
+	{ N_("Kernel Image"),	TRUE,	FALSE },
+	{ N_("Device"),		TRUE,	FALSE },
+	{NULL}
+};
 
 void
-table_construct (XstTool *tool)
+table_construct (void)
 {
 	GtkWidget *sw;
 	GtkWidget *list;
 
 	sw = xst_dialog_get_widget (tool->main_dialog, "boot_table_sw");
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
-					     GTK_SHADOW_ETCHED_IN);
-
 	list = table_create ();
 	gtk_widget_show_all (list);
 	gtk_container_add (GTK_CONTAINER (sw), list);
 }
 
-void
-table_populate (xmlNodePtr root)
+GtkWidget *
+table_create (void)
 {
-	xmlNodePtr  node;
-	gint        row;
+	GtkTreeModel *model;
+	GtkCellRenderer *renderer;
+	GtkTreeSelection *selection;
+	GtkTreeViewColumn *column;
+	gint i;
+	
+	
+	model = GTK_TREE_MODEL (gtk_tree_store_new (BOOT_LIST_COL_LAST, G_TYPE_STRING, G_TYPE_STRING, 
+	                                            G_TYPE_STRING, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_POINTER));
+	boot_table = gtk_tree_view_new_with_model (model);
+	g_object_unref (model);
 
-	g_return_if_fail (root != NULL);
-	
-	boot_array = g_array_new (FALSE, FALSE, sizeof (xmlNodePtr));
-	
-	for (node = xst_xml_element_find_first (root, "entry"), row = 0;
-	     node != NULL;
-	     node = xst_xml_element_find_next (node, "entry"), row++)
+	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (boot_table), TRUE);
+	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (boot_table), TRUE);
+
+	for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
+		renderer = gtk_cell_renderer_text_new ();
 		
-		g_array_prepend_val (boot_array, node);
+		column = gtk_tree_view_column_new_with_attributes (boot_table_config [i].name, renderer, "text", i, NULL);
+		
+		gtk_tree_view_column_set_resizable (column, TRUE);
+		gtk_tree_view_column_set_sort_column_id (column, i);
+		
+		gtk_tree_view_insert_column (GTK_TREE_VIEW (boot_table), column, i);
+	}
 
-	e_table_model_changed (E_TABLE (boot_table)->model);
+	/* sets the 'default' column as default sort column */
+	column = gtk_tree_view_get_column (GTK_TREE_VIEW (boot_table), 0);
+	gtk_tree_view_column_set_sort_indicator (column, TRUE);
+	
+	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (boot_table));
+	gtk_tree_selection_set_mode (selection, GTK_SELECTION_SINGLE);
+
+	g_signal_connect (G_OBJECT (selection), "changed",
+			  G_CALLBACK (on_boot_table_cursor_changed),
+			  NULL);
+	return boot_table;
+}
+
+void
+boot_table_update_state (XstDialogComplexity complexity)
+{
+	GtkTreeViewColumn *column;
+	gint i;
+	
+	g_return_if_fail (boot_table != NULL);
+	
+	switch (complexity) {
+	case XST_DIALOG_BASIC:
+		for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
+			column = gtk_tree_view_get_column (GTK_TREE_VIEW (boot_table), i);
+			gtk_tree_view_column_set_visible (column, boot_table_config [i].basic_state_showable);
+		}
+		break;
+	case XST_DIALOG_ADVANCED:
+		for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
+			column = gtk_tree_view_get_column (GTK_TREE_VIEW (boot_table), i);
+			gtk_tree_view_column_set_visible (column, boot_table_config [i].advanced_state_showable);
+		}
+		break;
+	default:
+		g_warning ("tables_update_complexity: Unsupported complexity.");
+		return;
+	}
 }
 
 static gboolean
@@ -309,7 +140,7 @@ boot_is_linux (xmlNodePtr node)
 		return FALSE;
 }
 
-void *
+gchar *
 boot_value_label (xmlNodePtr node)
 {
 	g_return_val_if_fail (node != NULL, NULL);
@@ -435,7 +266,7 @@ boot_value_root (xmlNodePtr node)
 	return xst_xml_get_child_content (node, "root");
 }
 
-void *
+gchar *
 boot_value_append (xmlNodePtr node)
 {
 	gchar *buf;
@@ -452,6 +283,43 @@ boot_value_append (xmlNodePtr node)
 	g_strfreev (str_array);
 
 	return buf;
+}
+
+void
+table_populate (xmlNodePtr root)
+{
+	xmlNodePtr node;
+	GtkTreeIter iter;
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (boot_table));
+	
+	for (node = xst_xml_element_find_first (root, "entry"); node != NULL; node = xst_xml_element_find_next (node, "entry")) 
+	{
+		gtk_tree_store_append (GTK_TREE_STORE (model), &iter, NULL);
+		gtk_tree_store_set (GTK_TREE_STORE (model), &iter,
+		                    BOOT_LIST_COL_DEFAULT, NULL,
+		                    BOOT_LIST_COL_LABEL, boot_value_label (node),
+		                    BOOT_LIST_COL_TYPE, boot_value_type_char (node, FALSE),
+		                    BOOT_LIST_COL_IMAGE, boot_value_image (node, FALSE),
+		                    BOOT_LIST_COL_DEV, boot_value_device (node, FALSE),
+	                            BOOT_LIST_COL_POINTER, node,
+		                    -1);
+	}
+}
+
+void
+boot_table_clear (void)
+{
+	GtkTreeModel *model = gtk_tree_view_get_model (GTK_TREE_VIEW (boot_table));
+	gtk_tree_store_clear (GTK_TREE_STORE (model));
+}
+
+void
+boot_table_update (void)
+{
+	xmlNodePtr root = xst_xml_doc_get_root (tool->config);
+
+	boot_table_clear ();
+	table_populate (root);
 }
 
 /* Set value functions */
@@ -581,71 +449,6 @@ boot_value_set_type (xmlNodePtr node, XstBootImageType type)
 	g_free (buf);
 }
 
-xmlNodePtr
-get_selected_node (void)
-{
-	gint row;
-
-	if ((row = e_table_get_cursor_row (E_TABLE (boot_table))) >= 0)
-		return g_array_index (boot_array, xmlNodePtr, row);
-
-	return NULL;
-}
-
-void
-boot_table_update_state (void)
-{
-	XstDialogComplexity complexity;
-	gchar *state;
-
-	g_return_if_fail (boot_table != NULL);
-
-	complexity = tool->main_dialog->complexity;
-
-	if (complexity == XST_DIALOG_BASIC) {
-		state = xst_conf_get_string (tool, "state_basic");
-		if (state == NULL) {
-			state = g_strdup (basic_boot_state);
-			xst_conf_set_string (tool, "state_basic", state);
-		}
-	} else {
-		state = xst_conf_get_string (tool, "state_adv");
-		if (state == NULL) {
-			state = g_strdup (adv_boot_state);
-			xst_conf_set_string (tool, "state_adv", state);
-		}
-	}
-
-	e_table_set_state (E_TABLE (boot_table), state);
-	table_connect_signals (E_TABLE (boot_table));
-	g_free (state);
-}
-
-void
-boot_table_delete (void)
-{
-	gint row;
-	xmlNodePtr node;
-
-	row = e_table_get_cursor_row (E_TABLE (boot_table));
-	node = g_array_index (boot_array, xmlNodePtr, row);
-
-	xst_xml_element_destroy (node);
-	g_array_remove_index (boot_array, row);
-
-	e_table_model_row_deleted (E_TABLE (boot_table)->model, row);
-}
-
-void
-boot_table_update (void)
-{
-	gint row;
-
-	row = e_table_get_cursor_row (E_TABLE (boot_table));
-
-	e_table_model_row_changed (E_TABLE (boot_table)->model, row);
-}
-
 static gchar *
 boot_table_get_new_key (xmlNodePtr root)
 {
@@ -685,13 +488,6 @@ boot_table_add (void)
 	xst_xml_element_add_with_content (node, "key", newkey);
 	g_free (newkey);
 	
-	g_array_append_val (boot_array, node);
-	
-	row = boot_array->len - 1;
-	
-	e_table_model_row_inserted (E_TABLE (boot_table)->model, row);
-	e_table_set_cursor_row (E_TABLE (boot_table), row);
-
 	return node;
 }
 

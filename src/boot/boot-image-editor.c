@@ -87,6 +87,7 @@ editor_response (GtkDialog *dialog, gint response, gpointer data)
 		break;
 	}
 
+	boot_table_update ();
 	gtk_widget_destroy (GTK_WIDGET (editor));
 }
 
