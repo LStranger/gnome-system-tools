@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2005-01-23 12:27+0100\n"
-"PO-Revision-Date: 2005-01-23 15:18+0100\n"
+"POT-Creation-Date: 2005-01-31 05:42+0100\n"
+"PO-Revision-Date: 2005-01-31 10:53+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -270,7 +270,8 @@ msgstr "Zařízení _kořenového systému souborů:"
 #: interfaces/common.glade.in.h:1
 msgid ""
 "<span weight=\"bold\" size=\"larger\">Please enter your root password</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Zadejte prosím vaše heslo root</span>"
+msgstr ""
+"<span weight=\"bold\" size=\"larger\">Zadejte prosím vaše heslo root</span>"
 
 #: interfaces/common.glade.in.h:2
 msgid ""
@@ -307,7 +308,9 @@ msgstr "Spustit bez _hesla"
 msgid ""
 "To use this tool, you need administrator privileges, if you don't provide a "
 "password, you will be unable to modify your system configuration."
-msgstr "Pro používání tohoto nástroje potřebujete oprávnění správce, pokud nezadáte heslo, nebudete moci měnit nastavení vašeho systému."
+msgstr ""
+"Pro používání tohoto nástroje potřebujete oprávnění správce, pokud nezadáte "
+"heslo, nebudete moci měnit nastavení vašeho systému."
 
 #: interfaces/common.glade.in.h:8
 msgid "Unsupported Platform"
@@ -1187,6 +1190,14 @@ msgstr "Ověřte, že máte oprávnění tento příkaz spustit"
 msgid "An unexpected error has ocurred"
 msgstr "Došlo k neočekávané chybě"
 
+#: src/common/gst-auth.c:132
+msgid "Could not execute the backend"
+msgstr "Nemohu spustit backend"
+
+#: src/common/gst-auth.c:133
+msgid "There was an error creating the child process, the tool will close now."
+msgstr "Při vytváření synovského procesu došlo k chybě, nástroj nyní skončí."
+
 #: src/common/gst-dialog.c:59
 #, c-format
 msgid "Could not find widget: %s"
@@ -1276,11 +1287,11 @@ msgid ""
 msgstr ""
 "Zkontrolujte, že se zařízení nepoužívá a že je správně připojeno k počítači"
 
-#: src/network/callbacks.c:433
+#: src/network/callbacks.c:439
 msgid "The host name has changed"
 msgstr "Jméno počítače bylo změněno"
 
-#: src/network/callbacks.c:436
+#: src/network/callbacks.c:442
 msgid ""
 "This will prevent you from launching new applications, and so you will have "
 "to log in again. Continue anyway?"
@@ -1288,7 +1299,7 @@ msgstr ""
 "To vám znemožní spouštět nové aplikace, budete se muset znovu přihlásit. "
 "Chcete přesto pokračovat?"
 
-#: src/network/callbacks.c:442
+#: src/network/callbacks.c:448
 msgid "Change _Host name"
 msgstr "Změnit _název počítače"
 
@@ -1304,7 +1315,7 @@ msgstr "DHCP"
 msgid "IP Address"
 msgstr "IP adresa"
 
-#: src/network/hosts.c:95
+#: src/network/hosts.c:96
 msgid "Aliases"
 msgstr "Přezdívky"
 
@@ -1316,19 +1327,19 @@ msgstr "Vytvořit umístění"
 msgid "Delete current location"
 msgstr "Odstranit aktuální umístění"
 
-#: src/network/location.c:362
+#: src/network/location.c:363
 msgid "Do you want to remove this location?"
 msgstr "Chcete odstranit toto umístění?"
 
-#: src/network/location.c:428
+#: src/network/location.c:436
 msgid "Changing profile"
 msgstr "Měním profil"
 
-#: src/network/main.c:105
+#: src/network/main.c:107
 msgid "The interface does not exist"
 msgstr "Rozhraní neexistuje"
 
-#: src/network/main.c:107
+#: src/network/main.c:109
 msgid ""
 "Check that it is correctly typed and that it is correctly supported by your "
 "system."
@@ -1336,23 +1347,23 @@ msgstr ""
 "Zkontrolujte, že je zadáno správně a že je správně podporováno vaším "
 "systémem."
 
-#: src/network/main.c:139
+#: src/network/main.c:154
 msgid "Configure a network interface"
 msgstr "Nastavit síťové rozhraní."
 
-#: src/network/main.c:139
+#: src/network/main.c:154
 msgid "INTERFACE"
 msgstr "ROZHRANÍ"
 
-#: src/network/main.c:140
+#: src/network/main.c:155
 msgid "Configure the first network interface with a specific type"
 msgstr "Nastavit první síťové rozhraní určitého typu"
 
-#: src/network/main.c:140
+#: src/network/main.c:155
 msgid "TYPE"
 msgstr "TYP"
 
-#: src/network/main.c:147
+#: src/network/main.c:162
 msgid "Network settings"
 msgstr "Nastavení sítě"
 
@@ -1526,7 +1537,9 @@ msgstr "Služby pro sdílení nejsou nainstalovány"
 msgid ""
 "You need to install at least either Samba or NFS in order to share your "
 "folders. The tool will close now."
-msgstr "Pro sdílení svých složek musíte nainstalovat buď Samba nebo NFS. Tento nástroj nyní skončí."
+msgstr ""
+"Pro sdílení svých složek musíte nainstalovat buď Samba nebo NFS. Tento "
+"nástroj nyní skončí."
 
 #: src/time/main.c:461
 msgid "NTP support is not running"
@@ -1761,7 +1774,9 @@ msgstr "Jste si jisti, že chcete odstranit uživatele \"%s\"?"
 msgid ""
 "This will disable the access of this user to the system, but his home "
 "directory will not be deleted"
-msgstr "To zakáže přístup tohoto uživatele do systému, ale jeho domovský adresář nebude odstraněn"
+msgstr ""
+"To zakáže přístup tohoto uživatele do systému, ale jeho domovský adresář "
+"nebude odstraněn"
 
 #: src/users/user-settings.c:187
 msgid "User Account Editor"
