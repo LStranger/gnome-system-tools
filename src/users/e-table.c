@@ -273,7 +273,7 @@ group_set_value_at (ETableModel *etm, int col, int row, const void *val, void *d
 static gboolean
 is_cell_editable (ETableModel *etm, int col, int row, void *data)
 {
-	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+	if ((tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED) && tool_get_access())
 		return TRUE;
 	else
 		return FALSE;

@@ -841,27 +841,34 @@ basic_group_find_nth (xmlNodePtr parent, int n)
 void
 adv_user_settings (xmlNodePtr node, gboolean show)
 {
-	GtkWidget *win, *w0;
+	GtkWidget *win, *adv, *w0;
 
 	win = tool_widget_get ("user_settings_dialog");
-	w0 = tool_widget_get ("user_settings_advanced");
+	adv = tool_widget_get ("user_settings_advanced");
 
 	if (show)
 	{
 		g_return_if_fail (node != NULL);
 
-		/* Set shell, home and user id. */
-		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_shell")),
-				my_xml_get_content (node, "shell"));
+		/* Shell. */
+		w0 = tool_widget_get ("user_settings_shell");
+		gtk_entry_set_text (GTK_ENTRY (w0), my_xml_get_content (node, "shell"));
+		gtk_widget_set_sensitive (w0, tool_get_access());
 
-		gtk_entry_set_text (GTK_ENTRY (tool_widget_get ("user_settings_home")),
-				my_xml_get_content (node, "home"));
+		/* Home dir. */
+		w0 = tool_widget_get ("user_settings_home");
+		gtk_entry_set_text (GTK_ENTRY (w0), my_xml_get_content (node, "home"));
+		gtk_widget_set_sensitive (w0, tool_get_access());
 
-		gtk_spin_button_set_value (GTK_SPIN_BUTTON (tool_widget_get ("user_settings_uid")),
+		/* User ID. */
+		w0 = tool_widget_get ("user_settings_uid");
+		gtk_spin_button_set_value (GTK_SPIN_BUTTON (w0),
 				g_strtod (my_xml_get_content (node, "uid"), NULL));
 
+		gtk_widget_set_sensitive (w0, tool_get_access());
+
 		/* Show advanced frame. */
-		gtk_widget_show (w0);
+		gtk_widget_show (adv);
 	}
 	else
 	{
@@ -872,7 +879,7 @@ adv_user_settings (xmlNodePtr node, gboolean show)
 				("user_settings_uid")), 0);
 
 		/* Hide advanced frame. */
-		gtk_widget_hide (w0);
+		gtk_widget_hide (adv);
 	}
 }
 
