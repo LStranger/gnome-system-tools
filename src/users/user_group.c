@@ -33,6 +33,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
+#include <utmp.h>
 
 #include "callbacks.h"
 #include "user_group.h"
@@ -247,20 +248,27 @@ check_node_visibility (xmlNodePtr node)
 }
 
 static gboolean
-is_valid_name (const gchar *str)
+is_valid_name (const gchar *name)
 {
-	if (!str || !*str)
-		return FALSE;
+	/*
+	 * User/group names must start with a letter, and may not
+	 * contain colons, commas, newlines (used in passwd/group
+	 * files...) or any non-printable characters.
+	 */
+        if (!*name || !isalpha(*name))
+                return FALSE;
 
-	for (;*str; str++) {
-		if (((*str < 'a') || (*str > 'z')) &&
-				((*str < '0') || (*str > '9')))
+        while (*name) {
+                if (*name == ':' || *name == ',' ||
+                    *name == '\n' || !isprint(*name))
+                        return FALSE;
 
-			return FALSE;
-	}
+                name++;
+        }
 
-	return TRUE;
+        return TRUE;
 }
+
 
 static gboolean
 is_valid_id (const gchar *str)
@@ -321,6 +329,7 @@ gchar *
 check_user_login (xmlNodePtr node, const gchar *login)
 {
 	gchar *buf = NULL;
+	struct utmp ut;
 
 	g_return_val_if_fail (node != NULL, FALSE);
 	g_return_val_if_fail (login != NULL, FALSE);
@@ -330,7 +339,7 @@ check_user_login (xmlNodePtr node, const gchar *login)
 		buf = g_strdup (_("The username is empty."));
 
 	/* If too long. */
-	else if (strlen (login) > 32)
+	else if (strlen (login) > sizeof (ut.ut_user))
 		buf = g_strdup (_("The username is too long."));
 
 	else if (!check_user_root (node, "login", login))
