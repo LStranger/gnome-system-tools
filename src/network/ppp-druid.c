@@ -105,7 +105,7 @@ static void ppp_druid_save (PppDruid *ppp)
 	cxn->wvsection = connection_wvsection_name_generate (cxn->dev, root);
 	cxn->persist = FALSE;
 	cxn->set_default_gw = TRUE;
-	cxn->peerdns = TRUE;
+	cxn->update_dns = TRUE;
 	cxn->user = TRUE;
 
 	gtk_signal_emit_by_name (GTK_OBJECT (ppp->tool->main_dialog), "apply", ppp->tool);
