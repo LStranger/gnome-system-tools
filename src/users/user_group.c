@@ -801,6 +801,33 @@ check_group_delete (xmlNodePtr node)
 /* Static functions */
 
 static void
+user_settings_groups (ug_data *ud)
+{
+	GtkCList *list;
+	gchar *buf;
+	xmlNodePtr gnode;
+
+	list = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember"));
+	gtk_clist_set_auto_sort (list, TRUE);
+	
+	/* Primary group */
+	buf = xst_xml_get_child_content (ud->node, "gid");
+	gnode = get_corresp_field (get_db_node (ud->node));
+	gnode = get_node_by_data (gnode, "gid", buf);
+	g_free (buf);
+	buf = xst_xml_get_child_content (gnode, "name");
+
+	if (buf)
+	{
+		my_gtk_clist_append (list, g_strdup_printf ("(%s)", buf));
+		g_free (buf);
+	}
+	
+	/* Secondary groups */
+	my_gtk_clist_append_items (list, get_user_groups (ud->node));
+}
+
+static void
 user_settings_prepare (ug_data *ud)
 {
 	GtkWidget *w0;
@@ -851,6 +878,9 @@ user_settings_prepare (ug_data *ud)
 	if (adv)
 		adv_user_settings (ud->node, TRUE);
 
+	
+	user_settings_groups (ud);
+	
 	/* Set dialog's title and show it */
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	txt = g_strdup_printf (_("Settings for User %s"), name);
@@ -1348,31 +1378,15 @@ user_fill_settings_group (GtkCombo *combo, xmlNodePtr node, gboolean adv)
 static GList *
 group_fill_members_list (xmlNodePtr node)
 {
-	GList *tmp_list;
-	GList *member_rows = NULL;
+	GList *items;
 	GtkCList *clist;
-	gint row;
-	gchar *entry[2];
-
-	entry[1] = NULL;
 
 	clist = GTK_CLIST (xst_dialog_get_widget (tool->main_dialog, "group_settings_members"));
+	items = get_group_users (node);
+	
 	gtk_clist_set_auto_sort (clist, TRUE);
-	gtk_clist_freeze (clist);
-
-	tmp_list = get_group_users (node);
-
-	while (tmp_list)
-	{
-		entry[0] = tmp_list->data;
-		tmp_list = tmp_list->next;
-
-		row = gtk_clist_append (clist, entry);
-		member_rows = g_list_append (member_rows, entry[0]);
-	}
-
-	gtk_clist_thaw (clist);
-	return member_rows;
+	my_gtk_clist_append_items (clist, items);
+	return items;
 }
 
 static void
@@ -1384,6 +1398,8 @@ group_fill_all_users_list (xmlNodePtr node, GList *exclude)
 	gboolean found;
 	gchar *entry[2];
 	gboolean adv;
+
+	/* TODO: Clean it up like group_fill_members_list () */
 
 	entry[1] = NULL;
 
@@ -1559,4 +1575,37 @@ char_sort_func (gconstpointer a, gconstpointer b)
 	return (strcmp (a, b));
 }
 
+void
+my_gtk_clist_append_items (GtkCList *list, GList *items)
+{
+	gchar *entry[2];
 
+	g_return_if_fail (list != NULL);
+	g_return_if_fail (GTK_IS_CLIST (list));
+
+	entry[1] = NULL;
+
+	gtk_clist_freeze (list);
+	while (items)
+	{
+		entry[0] = items->data;
+		items = items->next;
+
+		gtk_clist_append (list, entry);
+	}
+	gtk_clist_thaw (list);
+}
+
+void
+my_gtk_clist_append (GtkCList *list, gchar *text)
+{
+	gchar *entry[2];
+	
+	g_return_if_fail (list != NULL);
+	g_return_if_fail (GTK_IS_CLIST (list));
+
+	entry[0] = text;
+	entry[1] = NULL;
+
+	gtk_clist_append (list, entry);
+}

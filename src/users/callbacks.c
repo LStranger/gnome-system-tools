@@ -258,6 +258,13 @@ user_settings_dialog_close (void)
 	if (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED)
 		adv_user_settings (NULL, FALSE);
 
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_gmember");
+	gtk_clist_clear (GTK_CLIST (w0));
+
+	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_gall");
+	gtk_clist_clear (GTK_CLIST (w0));
+
+	
 	w0 = xst_dialog_get_widget (tool->main_dialog, "user_settings_dialog");
 	ud = gtk_object_get_data (GTK_OBJECT (w0), "data");
 	gtk_object_remove_data (GTK_OBJECT (w0), "data");

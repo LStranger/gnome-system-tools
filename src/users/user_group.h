@@ -90,5 +90,9 @@ extern void group_new_prepare (ug_data *ud);
 extern gboolean group_update (ug_data *ud);
 extern gboolean check_group_delete (xmlNodePtr node);
 
+/* Helpers */
+void my_gtk_clist_append_items (GtkCList *list, GList *items);
+void my_gtk_clist_append (GtkCList *list, gchar *text);
+
 #endif /* USER_GROUP_H */
 
