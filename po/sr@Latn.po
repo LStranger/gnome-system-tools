@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.25.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-22 02:52+0200\n"
-"PO-Revision-Date: 2003-10-22 02:56+0200\n"
+"POT-Creation-Date: 2003-10-23 23:05+0200\n"
+"PO-Revision-Date: 2003-10-24 00:43+0200\n"
 "Last-Translator: Slobodan Sredojević <ssl@uns.ns.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -216,7 +216,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Podešavanje datoteke sa kernelom (korak 2 od 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:61
-#: src/network/connection.c:1738
+#: src/network/connection.c:1786
 msgid "Manual"
 msgstr "Uputstvo"
 
@@ -540,7 +540,7 @@ msgstr "Dozvoli kontrolu pokretanja za sve korisnike"
 msgid "Auto"
 msgstr "Automatski"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1740
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1788
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -577,7 +577,7 @@ msgstr "Napravi novu internet vezu "
 msgid "Create a new network connection"
 msgstr "Napravite novu mrežnu vezu"
 
-#: interfaces/network.glade.in.h:45 src/network/connection.c:1739
+#: interfaces/network.glade.in.h:45 src/network/connection.c:1787
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1643,7 +1643,7 @@ msgstr "Ime"
 msgid "Default"
 msgstr "Podrazumevano"
 
-#: src/boot/table.c:43 src/network/connection.c:450
+#: src/boot/table.c:43 src/network/connection.c:479
 msgid "Type"
 msgstr "Vrsta"
 
@@ -1651,11 +1651,11 @@ msgstr "Vrsta"
 msgid "Kernel Image"
 msgstr "Datoteka sa kernelom"
 
-#: src/boot/table.c:45 src/network/connection.c:466
+#: src/boot/table.c:45 src/network/connection.c:495
 msgid "Device"
 msgstr "Uređaj"
 
-#: src/boot/table.c:50
+#: src/boot/table.c:50 src/network/connection.c:57
 msgid "/_Add ..."
 msgstr "/_Dodaj ..."
 
@@ -1663,8 +1663,8 @@ msgstr "/_Dodaj ..."
 msgid "/_Properties"
 msgstr "/_Osobine"
 
-#: src/boot/table.c:53 src/network/dns.c:39 src/users/table.c:50
-#: src/users/table.c:57
+#: src/boot/table.c:53 src/network/connection.c:60 src/network/dns.c:39
+#: src/network/hosts.c:43 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Ukloni"
 
@@ -1695,7 +1695,7 @@ msgstr " Više _opcija"
 msgid " Fewer _Options"
 msgstr " Manje _opcija"
 
-#: src/common/gst-dialog.c:475
+#: src/common/gst-dialog.c:496
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1703,7 +1703,7 @@ msgstr ""
 "Postoje promene koje nisu primenjene.\n"
 "Da li želite da ih primenite sada?"
 
-#: src/common/gst-dialog.c:590
+#: src/common/gst-dialog.c:613
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Greška povezivanja signal `%s' u elementu `%s'"
@@ -1789,27 +1789,27 @@ msgstr "Neaktivno"
 msgid "Deactivating"
 msgstr "Deaktiviram"
 
-#: src/network/callbacks.c:449
+#: src/network/callbacks.c:455
 #, c-format
 msgid "Remove connection %s: \"%s\"?"
 msgstr "Uklanjate vezu %s: „%s“?"
 
-#: src/network/callbacks.c:451
+#: src/network/callbacks.c:457
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Uklanjate vezu %s?"
 
-#: src/network/callbacks.c:499
+#: src/network/callbacks.c:523
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Aktiviram vezu „%s“."
 
-#: src/network/callbacks.c:537
+#: src/network/callbacks.c:561
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Deaktiviram vezu „%s“."
 
-#: src/network/callbacks.c:576
+#: src/network/callbacks.c:600
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -1817,11 +1817,11 @@ msgstr ""
 "Nemate instaliranu SMB podršku. Molim instalirajte SMB podršku\n"
 "na sistemu kako bi omogućili vindouz umrežavanje."
 
-#: src/network/callbacks.c:579
+#: src/network/callbacks.c:603
 msgid "SMB support missing."
 msgstr "SMB podrška nedostaje."
 
-#: src/network/callbacks.c:630
+#: src/network/callbacks.c:654
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -1835,7 +1835,7 @@ msgstr ""
 "\n"
 "Nastavljate li, bez obzira na to?"
 
-#: src/network/callbacks.c:678
+#: src/network/callbacks.c:702
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1845,7 +1845,7 @@ msgstr ""
 "Potrebno je da instalirate wvdial jer se Vaše PPP modemske\n"
 "veze neće aktivirati."
 
-#: src/network/callbacks.c:705
+#: src/network/callbacks.c:729
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1859,7 +1859,7 @@ msgstr ""
 "\n"
 "Da li nastavljate, bez obzira na to?"
 
-#: src/network/callbacks.c:732
+#: src/network/callbacks.c:756
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -1871,7 +1871,7 @@ msgstr ""
 "\n"
 "Da li nastavljate, bez obzira na to?"
 
-#: src/network/callbacks.c:787
+#: src/network/callbacks.c:811
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -1881,7 +1881,7 @@ msgstr ""
 "opisan. Molim popunite tražene podatke kako bi nastavili\n"
 "ili izaberite drugi uređaj za mrežni prolaz.\n"
 
-#: src/network/callbacks.c:833
+#: src/network/callbacks.c:857
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -1893,17 +1893,17 @@ msgstr ""
 "pod jezičkom za veze. Molim instalirajte\n"
 "redhat-config-network rpm paket kako se ovo ne bi dogodilo."
 
-#: src/network/callbacks.c:871
+#: src/network/callbacks.c:894
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Da li želite da omogućite pristup %s?"
 
-#: src/network/callbacks.c:881
+#: src/network/callbacks.c:904
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Da li želite da onemogućite pristup %s?"
 
-#: src/network/callbacks.c:952
+#: src/network/callbacks.c:975
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1911,26 +1911,21 @@ msgstr ""
 "Ne mogu automatski pronaći modemski urećaj. Proverite da nije modem u "
 "upotrebi i da je pravilno priključen"
 
-#: src/network/callbacks.c:998
+#: src/network/callbacks.c:1021
 msgid "Silent"
 msgstr "Tiho"
 
-#: src/network/callbacks.c:1000
+#: src/network/callbacks.c:1023
 msgid "Low"
 msgstr "Slabo"
 
-#: src/network/callbacks.c:1002
+#: src/network/callbacks.c:1025
 msgid "Medium"
 msgstr "Srednje"
 
-#: src/network/callbacks.c:1004
+#: src/network/callbacks.c:1027
 msgid "Loud"
 msgstr "Glasno"
-
-#: src/network/callbacks.c:1303
-#, c-format
-msgid "Are you sure you want to delete the aliases for %s?"
-msgstr "Da li sigurno želite da uklonite drugi nadimak za %s?"
 
 #: src/network/connection.c:45
 msgid "Other type"
@@ -1964,15 +1959,19 @@ msgstr "Loopback sprega"
 msgid "Unknown interface type"
 msgstr "Nepoznata vrsta sprege"
 
-#: src/network/connection.c:478
+#: src/network/connection.c:59
+msgid "/_Configure"
+msgstr "/_Podesi"
+
+#: src/network/connection.c:507
 msgid "Status"
 msgstr "Stanje"
 
-#: src/network/connection.c:487 src/network/profiles-table.c:62
+#: src/network/connection.c:516 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Opis"
 
-#: src/network/connection.c:1611
+#: src/network/connection.c:1659
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -1982,7 +1981,7 @@ msgstr ""
 "nisu popunjeni. Molim navedite ispravne IP\n"
 "adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1618
+#: src/network/connection.c:1666
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -1992,7 +1991,7 @@ msgstr ""
 "pristup nisu popunjeni. Molim navedite ispravne IP\n"
 "adrese u ovim poljima kako bi nastavili."
 
-#: src/network/connection.c:1624
+#: src/network/connection.c:1672
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2006,20 +2005,20 @@ msgstr ""
 "primarni DNS ili isključite mogućnost ručnog\n"
 "postavljanja DNS opcija."
 
-#: src/network/connection.c:1980
+#: src/network/connection.c:2028
 #, c-format
 msgid "The interface %s doesn't exist."
 msgstr "Uređaj %s ne postoji."
 
-#: src/network/connection.c:2191
+#: src/network/connection.c:2239
 msgid "Autodetecting modem device"
 msgstr "Automatsko prepoznavanje modema"
 
-#: src/network/dns.c:163 src/network/hosts.c:147
+#: src/network/dns.c:163 src/network/hosts.c:174
 msgid "IP Address"
 msgstr "IP adresa"
 
-#: src/network/hosts.c:155
+#: src/network/hosts.c:182
 msgid "Aliases"
 msgstr "Drugi nadimci"
 
@@ -2158,15 +2157,15 @@ msgstr "Uslužni programi"
 msgid "Service"
 msgstr "Uslužni program"
 
-#: src/time/main.c:303
+#: src/time/main.c:313
 msgid "Time Zone - GNOME System Tools"
 msgstr "Vremenska zona - GNOM sistemski alati"
 
-#: src/time/main.c:417
+#: src/time/main.c:427
 msgid "Time Servers - GNOME System Tools"
 msgstr "Serveri za sinhronizaciju vremena - GNOM Sistemski Alati"
 
-#: src/time/main.c:495
+#: src/time/main.c:505
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2174,7 +2173,7 @@ msgstr ""
 "Nemate instaliranu NTP podršku. Molim instalirajte NTP podršku\n"
 "na sistemu kako bi omogućili sinhronizaciju vremena."
 
-#: src/time/main.c:798
+#: src/time/main.c:812
 msgid "Time and Date Settings"
 msgstr "Podešavanja vremena i datuma"
 
@@ -2438,6 +2437,9 @@ msgstr "Interpretator naredbi"
 #: src/users/users.desktop.in.in.h:1
 msgid "Add or remove users and groups"
 msgstr "Dodajte ili uklonite korisnike i grupe"
+
+#~ msgid "Are you sure you want to delete the aliases for %s?"
+#~ msgstr "Da li sigurno želite da uklonite drugi nadimak za %s?"
 
 #~ msgid "2.422"
 #~ msgstr "2.422"
