@@ -1,1 +1,1 @@
-SUBDIRS = nameresolution networking shares
+# SUBDIRS = 
