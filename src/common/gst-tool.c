@@ -1395,7 +1395,6 @@ gst_tool_get_type (void)
 void
 gst_tool_construct (GstTool *tool, const char *name, const char *title)
 {
-	GdkPixbuf *pb;
 	char *s, *t, *u;
 
 	g_return_if_fail (name != NULL);
@@ -1410,11 +1409,7 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 
 	tool->main_dialog = gst_dialog_new (tool, s, t);
 
-	pb = gdk_pixbuf_new_from_file (u, NULL);
-	if (pb) {
-		gtk_window_set_icon (GTK_WINDOW (tool->main_dialog), pb);
-		gdk_pixbuf_unref (pb);
-	}
+	gtk_window_set_default_icon_from_file (u, NULL);
 
 	g_free (s);
 	g_free (t);

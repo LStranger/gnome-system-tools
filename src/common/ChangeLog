@@ -1,5 +1,11 @@
 2003-03-13  Christian Neumair  <chris@gnome-de.org>
 
+	* gst-tool.c: Use gtk_window_set_default_icon_from_file rather than
+	gtk_window_set_icon so that child windows/dialogs automatically use
+	the tool's icon.
+
+2003-03-13  Christian Neumair  <chris@gnome-de.org>
+
 	* xst*: Removed, renamed to gst*.
 	* gst*: Added. s/XST/GST/, s/Xst/Gst/, s/xst/gst/.
 	* Makefile.am: Reflect that.
