@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
-"POT-Creation-Date: 2003-04-07 20:25+0200\n"
-"PO-Revision-Date: 2003-04-08 00:05+0200\n"
+"POT-Creation-Date: 2003-04-13 12:03+0200\n"
+"PO-Revision-Date: 2003-04-13 20:41+0200\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -816,7 +816,9 @@ msgstr "Sdílení Internetu - Pokročilý režim"
 msgid ""
 "The internet sharing tool allows you to share your internet conection with "
 "other computers on the network."
-msgstr "Tento nástroj pro sdílení Internetu vám umožní sdílet vaše připojení k Internetu s jinými počítači na síti."
+msgstr ""
+"Tento nástroj pro sdílení Internetu vám umožní sdílet vaše připojení k "
+"Internetu s jinými počítači na síti."
 
 #: interfaces/internetsharing.glade.h:9
 #: interfaces/internetsharing.glade.in.h:36
@@ -1087,7 +1089,9 @@ msgstr "Počátek rozsahu"
 msgid ""
 "The Internet sharing tool allows you to share your Internet conection with "
 "other computers on the network."
-msgstr "Nástroj na sdílení Internetu vám umožní sdílet vaše připojení k Internetu s ostatními počítači na síti."
+msgstr ""
+"Nástroj na sdílení Internetu vám umožní sdílet vaše připojení k Internetu s "
+"ostatními počítači na síti."
 
 #: interfaces/internetsharing.glade.in.h:45
 msgid ""
@@ -2204,7 +2208,9 @@ msgstr "Vyberte prosím, který typ připojení chcete přidat."
 msgid ""
 "To continue configuring your network connection, click \"Next\". To quit, "
 "click \"Cancel\"."
-msgstr "Po kliknutí na \"Další\" budete pokračovat v nastavení svého připojení k síti. Skončíte kliknutím na \"Zrušit\"."
+msgstr ""
+"Po kliknutí na \"Další\" budete pokračovat v nastavení svého připojení k "
+"síti. Skončíte kliknutím na \"Zrušit\"."
 
 #: interfaces/network.glade.h:191 interfaces/network.glade.in.h:62
 msgid "ISP phone number (Step 1 of 3)"
@@ -2214,7 +2220,9 @@ msgstr "Telefonní číslo ISP (krok 1 ze 3)"
 msgid ""
 "Please enter the phone number you use to connect to the internet. This "
 "number is provided by your ISP. "
-msgstr "Zadejte prosím telefonní číslo, které používáte pro připojení k Internetu. Toto číslo vám poskytne váš ISP."
+msgstr ""
+"Zadejte prosím telefonní číslo, které používáte pro připojení k Internetu. "
+"Toto číslo vám poskytne váš ISP."
 
 #: interfaces/network.glade.h:198 interfaces/network.glade.in.h:96
 msgid "Username and password (Step 2 of 3)"
@@ -3471,7 +3479,7 @@ msgstr "Zavedení"
 msgid "Boot Manager"
 msgstr "Správce zavádění"
 
-#: src/boot/callbacks.c:150
+#: src/boot/callbacks.c:239
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3479,12 +3487,12 @@ msgstr ""
 "Váš systém nenastartuje bez\n"
 "alespoň jednoho zaváděcího obrazu.\n"
 
-#: src/boot/callbacks.c:165
+#: src/boot/callbacks.c:254
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Jste si jisti, že chcete odstranit '%s'?"
 
-#: src/boot/callbacks.c:205 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:294 src/runlevel/callbacks.c:97
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3508,6 +3516,18 @@ msgstr "Typ"
 #: src/boot/table.c:47
 msgid "Kernel Image"
 msgstr "Obraz jádra"
+
+#: src/boot/table.c:53
+msgid "/_Add ..."
+msgstr "/Přid_at ..."
+
+#: src/boot/table.c:55 src/users/table.c:49 src/users/table.c:56
+msgid "/_Properties"
+msgstr "/_Vlastnosti"
+
+#: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
+msgid "/_Delete"
+msgstr "/O_dstranit"
 
 #: src/common/System.directory.in.in.h:1
 msgid "System"
@@ -4000,11 +4020,11 @@ msgstr "Nastavení data a času"
 msgid "Time, date and timezone."
 msgstr "Čas, datum a časová zóna."
 
-#: src/users/callbacks.c:517
+#: src/users/callbacks.c:590
 msgid "Create New profile"
 msgstr "Vytvořit nový profil"
 
-#: src/users/callbacks.c:548
+#: src/users/callbacks.c:621
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Nastavení profilu %s"
@@ -4051,11 +4071,11 @@ msgstr "Jste si jisti, že chcete odstranit skupinu %s?"
 msgid "Settings for Group %s"
 msgstr "Nastavení skupiny %s"
 
-#: src/users/groups-table.c:40 src/users/users-table.c:46
+#: src/users/groups-table.c:44 src/users/users-table.c:51
 msgid "Group"
 msgstr "Skupina"
 
-#: src/users/groups-table.c:41
+#: src/users/groups-table.c:45
 msgid "GID"
 msgstr "GID"
 
@@ -4137,6 +4157,14 @@ msgstr "Výběr"
 #: src/users/search-bar/search-bar.c:356
 msgid "Text"
 msgstr "Text"
+
+#: src/users/table.c:47
+msgid "/_Add User ..."
+msgstr "/Přid_at uživatele ..."
+
+#: src/users/table.c:54
+msgid "/_Add group ..."
+msgstr "/Přid_at skupinu ..."
 
 #: src/users/user-settings.c:120
 msgid "The root user must not be deleted."
@@ -4225,23 +4253,23 @@ msgid "Settings for user %s"
 msgstr "Nastavení uživatele %s"
 
 #. Column name,          Adv_state_show,	Basic_state_show
-#: src/users/users-table.c:41
+#: src/users/users-table.c:46
 msgid "User"
 msgstr "Uživatel"
 
-#: src/users/users-table.c:42
+#: src/users/users-table.c:47
 msgid "UID"
 msgstr "UID"
 
-#: src/users/users-table.c:43
+#: src/users/users-table.c:48
 msgid "Home"
 msgstr "Domov"
 
-#: src/users/users-table.c:44
+#: src/users/users-table.c:49
 msgid "Shell"
 msgstr "Shell"
 
-#: src/users/users-table.c:45
+#: src/users/users-table.c:50
 msgid "Comments"
 msgstr "Komentář"
 
@@ -4249,17 +4277,11 @@ msgstr "Komentář"
 msgid "Users and groups."
 msgstr "Uživatelé a skupiny."
 
-#~ msgid "<span weight=\"bold\">Basic</span>"
-#~ msgstr "<span weight=\"bold\">Základní</span>"
-
 #~ msgid "Boot _type:"
 #~ msgstr "_Typ zavedení:"
 
 #~ msgid "_Append:"
 #~ msgstr "Př_ipojit:"
-
-#~ msgid "<span weight=\"bold\">Other</span>"
-#~ msgstr "<span weight=\"bold\">Ostatní</span>"
 
 #~ msgid "Other options"
 #~ msgstr "Jiné volby"
@@ -4273,20 +4295,8 @@ msgstr "Uživatelé a skupiny."
 #~ msgid "_Delete..."
 #~ msgstr "O_dstranit..."
 
-#~ msgid "<span weight=\"bold\">Options</span>"
-#~ msgstr "<span weight=\"bold\">Volby</span>"
-
-#~ msgid "<span weight=\"bold\">Priority:</span>"
-#~ msgstr "<span weight=\"bold\">Priorita:</span>"
-
-#~ msgid "<span weight=\"bold\">Parameters:</span>"
-#~ msgstr "<span weight=\"bold\">Parametry:</span>"
-
 #~ msgid "Select _servers..."
 #~ msgstr "Vyberte _servery..."
-
-#~ msgid "<span weight=\"bold\">Group settings</span>"
-#~ msgstr "<span weight=\"bold\">Nastavení skupiny</span>"
 
 #~ msgid "_New password"
 #~ msgstr "_Nové heslo"
