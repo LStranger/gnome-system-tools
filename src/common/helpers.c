@@ -27,7 +27,6 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 
 #include "helpers.h"
-#include "tool.h"
 
 #include "checked.xpm"
 #include "unchecked.xpm"

@@ -26,7 +26,7 @@
 #include <gtk/gtksignal.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libart_lgpl/art_filterlevel.h>
-#include "../../common/tool.h"
+
 #include "e-map.h"
 
 /* Scroll step increment */
