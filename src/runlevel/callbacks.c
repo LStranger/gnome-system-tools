@@ -202,11 +202,8 @@ static void
 callbacks_set_buttons_sensitive ()
 {
 	GtkWidget *settings_button = xst_dialog_get_widget (tool->main_dialog, "settings_button");
-/*	GtkWidget *description_button = xst_dialog_get_widget (tool->main_dialog, "description_button"); */
 
-	/* set buttons sensitive */
 	gtk_widget_set_sensitive (settings_button, TRUE);
-/*	gtk_widget_set_sensitive (description_button, TRUE); */
 }
 
 static void
@@ -269,7 +266,8 @@ on_service_priority_changed (GtkWidget *spin_button, gpointer data)
 	GtkTreePath *path;
 	GtkTreeIter iter;
 	xmlNodePtr service;
-	gchar *value = g_strdup_printf ("%i", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spin_button)));
+	gint val = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (spin_button));
+	gchar *value = g_strdup_printf ("%0.2i", val);
 	gchar *old_value;
 
 	gtk_tree_view_get_cursor (runlevel_table, &path, NULL);

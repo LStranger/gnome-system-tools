@@ -165,7 +165,11 @@ table_create (void)
 static gchar*
 table_value_priority (xmlNodePtr node)
 {
-	return xst_xml_get_child_content (node, "priority");
+	gchar *buf =  xst_xml_get_child_content (node, "priority");
+	gint priority = atoi (buf);
+
+	g_free (buf);
+	return g_strdup_printf ("%0.2i", priority);
 }
 
 static gchar*
