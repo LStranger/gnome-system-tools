@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.25.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-09-13 05:39+0200\n"
-"PO-Revision-Date: 2003-09-13 05:38+0200\n"
+"POT-Creation-Date: 2003-09-26 17:26+0200\n"
+"PO-Revision-Date: 2003-09-26 17:27+0200\n"
 "Last-Translator: Slobodan Sredojević <ssl@uns.ns.ac.yu>\n"
 "Language-Team: Serbian (sr) <serbiangnome-lista@nongnu.org>\n"
 "MIME-Version: 1.0\n"
@@ -372,7 +372,7 @@ msgstr "Složenost"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Unesite lozinku - GNOM Sistemski Alati"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1799
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1636
 msgid "GNOME System Tools"
 msgstr "Gnom sistemski alati (GNOME System Tools)"
 
@@ -1464,7 +1464,7 @@ msgstr ""
 "Korisničke postavke se mogu koristiti kao kalupi tj. osnove za dodavanje "
 "novih korisnika. "
 
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:75
 msgid "Users"
 msgstr "Korisnici"
 
@@ -1620,8 +1620,8 @@ msgid "Boot"
 msgstr "Podizanje operativnog sistema"
 
 #: src/boot/boot.desktop.in.in.h:2
-msgid "Boot Manager"
-msgstr "Upravljanje podizanjem operativnog sistema"
+msgid "Configure the system boot process"
+msgstr "Podesite postupak podizanja sistema"
 
 #: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
@@ -1713,10 +1713,10 @@ msgid " More _Options"
 msgstr " Više _opcija"
 
 #: src/common/gst-dialog.c:93
-msgid " Less _Options"
+msgid " Fewer _Options"
 msgstr " Manje _opcija"
 
-#: src/common/gst-dialog.c:476
+#: src/common/gst-dialog.c:454
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1724,21 +1724,21 @@ msgstr ""
 "Postoje promene koje nisu primenjene.\n"
 "Da li želite da ih primenite sada?"
 
-#: src/common/gst-dialog.c:592
+#: src/common/gst-dialog.c:552
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Greška povezivanja signal `%s' u elementu `%s'"
 
-#: src/common/gst-tool.c:944
+#: src/common/gst-tool.c:853
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Preskačem %s direktivu..."
 
-#: src/common/gst-tool.c:1094
+#: src/common/gst-tool.c:993
 msgid "Skipping actual save..."
 msgstr "Preskačem stvarno snimanje..."
 
-#: src/common/gst-tool.c:1156
+#: src/common/gst-tool.c:1055
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1746,12 +1746,12 @@ msgstr ""
 "Dogodila se greška pri radu pozadinske skripte,\n"
 "i podešavanja ne mogu biti učitana."
 
-#: src/common/gst-tool.c:1522
+#: src/common/gst-tool.c:1359
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Gnom sistemski alati"
 
-#: src/common/gst-tool.c:1700
+#: src/common/gst-tool.c:1537
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1778,11 +1778,11 @@ msgstr ""
 "--\n"
 "„GNOM Sistemski Alati“ tim"
 
-#: src/common/gst-tool.c:1724
+#: src/common/gst-tool.c:1561
 msgid "Warning"
 msgstr "Upozorenje"
 
-#: src/common/gst-tool.c:1733
+#: src/common/gst-tool.c:1570
 msgid "Don't show me this again"
 msgstr "Ovu poruku više ne prikazuj"
 
@@ -2121,8 +2121,8 @@ msgid "Connection name (Step 2 of 2)"
 msgstr "Ime veze (korak 2 od 2)"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Podešavanje mrežne kartice."
+msgid "Configure network devices and connections"
+msgstr "Podesite mrežne uređaje i veze"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
@@ -2200,26 +2200,26 @@ msgid "Services Settings"
 msgstr "Podešavanje uslužnih programa"
 
 #: src/services/services.desktop.in.in.h:1
-msgid "Services"
-msgstr "Uslužni programi"
+msgid "Configure which services will be run when the system starts"
+msgstr "Podesite koji uslužni programi se pokreću pri pokretanju sistema"
 
 #: src/services/services.desktop.in.in.h:2
-msgid "Services Manager"
-msgstr "Upravljanje uslužnim programima"
+msgid "Services"
+msgstr "Uslužni programi"
 
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Uslužni program"
 
-#: src/time/main.c:310
+#: src/time/main.c:303
 msgid "Time Zone - GNOME System Tools"
 msgstr "Vremenska zona - GNOM sistemski alati"
 
-#: src/time/main.c:428
+#: src/time/main.c:417
 msgid "Time Servers - GNOME System Tools"
 msgstr "Serveri za sinhronizaciju vremena - GNOM Sistemski Alati"
 
-#: src/time/main.c:500
+#: src/time/main.c:495
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2227,23 +2227,23 @@ msgstr ""
 "Nemate instaliranu NTP podršku. Molim instalirajte NTP podršku\n"
 "na sistemu kako bi omogućili sinhronizaciju vremena."
 
-#: src/time/main.c:789
+#: src/time/main.c:784
 msgid "Time and Date Settings"
 msgstr "Podešavanja vremena i datuma"
 
 #: src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Vreme"
+msgid "Change system time, date, and timezone"
+msgstr "Promenite vreme, datum i vremensku zonu sistema."
 
 #: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
-msgstr "Vreme, datum i vremenska zona."
+msgid "Time and Date"
+msgstr "Vreme i datum"
 
-#: src/users/callbacks.c:592
+#: src/users/callbacks.c:598
 msgid "Create New profile"
 msgstr "Napravi novu postavku"
 
-#: src/users/callbacks.c:623
+#: src/users/callbacks.c:629
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Podešavanja za postavku %s"
@@ -2314,7 +2314,7 @@ msgstr "Ime grupe sadrži"
 msgid "User GID is"
 msgstr "Broj grupe je"
 
-#: src/users/main.c:321
+#: src/users/main.c:321 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Korisnici i grupe"
 
@@ -2488,9 +2488,27 @@ msgstr "Interpretator naredbi"
 msgid "Comments"
 msgstr "Napomene"
 
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Korisnici i grupe."
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Dodajte ili uklonite korisnike i grupe"
+
+#~ msgid "Boot Manager"
+#~ msgstr "Upravljanje podizanjem operativnog sistema"
+
+#~ msgid " Less _Options"
+#~ msgstr " Manje _opcija"
+
+#~ msgid "Network adapter setup."
+#~ msgstr "Podešavanje mrežne kartice."
+
+#~ msgid "Services Manager"
+#~ msgstr "Upravljanje uslužnim programima"
+
+#~ msgid "Time"
+#~ msgstr "Vreme"
+
+#~ msgid "Users and groups."
+#~ msgstr "Korisnici i grupe."
 
 #~ msgid "Default runlevel"
 #~ msgstr "Podrazumevani radni režim"
@@ -3762,6 +3780,3 @@ msgstr "Korisnici i grupe."
 
 #~ msgid "<span weight=\"bold\">Time Server</span>"
 #~ msgstr "<span weight=\"bold\">Server za sinhronizaciju vremena</span>"
-
-#~ msgid " Fewer _Options"
-#~ msgstr " Manje _opcija"
