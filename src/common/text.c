@@ -29,65 +29,69 @@
 #include "text.h"
 
 
-gchar *tool_text_size_from_kb(guint size_kb)
+gchar *
+tool_text_size_from_kb (guint size_kb)
 {
 	gchar *r;
 
 	if (size_kb >= 1000000)
-	        r = g_strdup_printf("%.1fG", (double) size_kb / 1000000.0);
+	        r = g_strdup_printf ("%.1fG", (double) size_kb / 1000000.0);
 	else if (size_kb >= 1000)
-	        r = g_strdup_printf("%.1fM", (double) size_kb / 1000.0);
+	        r = g_strdup_printf ("%.1fM", (double) size_kb / 1000.0);
 	else
-	        r = g_strdup_printf("%dK", size_kb);
+	        r = g_strdup_printf ("%dK", size_kb);
 
-	return(r);
+	return r;
 }
 
 
-gchar *tool_text_size_from_mb(guint size_mb)
+gchar *
+tool_text_size_from_mb (guint size_mb)
 {
 	gchar *r;
 
 	if (size_mb >= 1000)
-	        r = g_strdup_printf("%.1fG", (double) size_mb / 1000.0);
+	        r = g_strdup_printf ("%.1fG", (double) size_mb / 1000.0);
 	else
-	        r = g_strdup_printf("%.1fM", (double) size_mb);
+	        r = g_strdup_printf ("%.1fM", (double) size_mb);
 
-	return(r);
+	return r;
 }
 
 
-gchar *tool_text_description_from_device(const gchar *devin)
+gchar *
+tool_text_description_from_device (const gchar *devin)
 {
 	char *r;
 	int num;
 	char *device;
 
-	if (strlen(devin) < 3) return(NULL);
-	device = strdup(devin);
+	if (strlen (devin) < 3)
+		return NULL;
+	device = g_strdup (devin);
 	
-	while (*(device + strlen(device) - 1) - '0' < 10 &&
-               *(device + strlen(device) - 1) - '0' >= 0)
-	        *(device + strlen(device) - 1) = '\0';
+	while (*(device + strlen (device) - 1) - '0' < 10 &&
+               *(device + strlen (device) - 1) - '0' >= 0)
+	        *(device + strlen (device) - 1) = '\0';
 
-	if (!strncasecmp(device + strlen(device) - 3, "hd", 2))
+	if (!strncasecmp (device + strlen (device) - 3, "hd", 2))
 	{
-		num = tolower(*(device + strlen(device) - 1)) - 'a';
-		if (num <= 1) r = g_strdup_printf("IDE primary %d", num + 1);
-		else r = g_strdup_printf("IDE secondary %d", num - 1);
+		num = tolower (*(device + strlen (device) - 1)) - 'a';
+		if (num <= 1) r = g_strdup_printf ("IDE primary %d", num + 1);
+		else r = g_strdup_printf ("IDE secondary %d", num - 1);
 	}
-	else if (!strncasecmp(device + strlen(device) - 3, "sd", 2))
+	else if (!strncasecmp (device + strlen (device) - 3, "sd", 2))
 	{
-		num = tolower(*(device + strlen(device) - 1)) - 'a' + 1;
-		r = g_strdup_printf("SCSI %d", num);
+		num = tolower (*(device + strlen (device) - 1)) - 'a' + 1;
+		r = g_strdup_printf ("SCSI %d", num);
 	}
-	else if (!strncasecmp(device + strlen(device) - 3, "xd", 2))
+	else if (!strncasecmp (device + strlen (device) - 3, "xd", 2))
 	{
-		num = tolower(*(device + strlen(device) - 1)) - 'a' + 1;
-		r = g_strdup_printf("XT %d", num);
+		num = tolower (*(device + strlen (device) - 1)) - 'a' + 1;
+		r = g_strdup_printf ("XT %d", num);
 	}
-	else r = strdup(devin);
+	else r = g_strdup (devin);
 
-	free(device);
-	return(r);
+	g_free (device);
+	return r;
 }
