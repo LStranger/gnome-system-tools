@@ -1,3 +1,4 @@
+# translation of gnome-system-tools.HEAD.po to Spanish
 # translation of gnome-system-tools.HEAD.es.po to Spanish
 # GNOME System tools's Spanish translation
 # Copyright © 2001-2003 Free Software Foundation, Inc.
@@ -7,59 +8,71 @@
 # Héctor García Álvarez <hector@scouts-es.org>, 2001,2002.
 # Héctor García Álvarez <hector@scouts-es.org>, 2002.
 # Germán Poo Caamaño <gpoo@ubiobio.cl>, 2003.
-# Francisco Javier Fernandez <serrador@arrakis.es>, 2003
-# Francisco Javier F. Serrador <serrador@arrakis.es>, 2003
+# Francisco Javier Fernandez <serrador@arrakis.es>, 2003.
+# Francisco Javier F. Serrador <serrador@arrakis.es>, 2003.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-system-tools.HEAD.es\n"
+"Project-Id-Version: gnome-system-tools.HEAD\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-22 04:22+0200\n"
-"PO-Revision-Date: 2003-07-22 09:56+0200\n"
+"POT-Creation-Date: 2003-08-23 12:36+0200\n"
+"PO-Revision-Date: 2003-08-24 05:11+0200\n"
 "Last-Translator: Francisco Javier F. Serrador <serrador@arrakis.es>\n"
 "Language-Team: Spanish <traductores@es.gnome.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.0.1\n"
+"X-Generator: KBabel 1.0.2\n"
 
 #: gnome-system-tools.schemas.in.h:1
+msgid ""
+"Comma separated list of hosts that the GST will be able to access when the "
+"remote configuration option is enabled"
+msgstr ""
+"Lista separada por comas de los hosts que el GST será capaz de acceder cuando se active "
+"la opción de configuración remota"
+
+#: gnome-system-tools.schemas.in.h:2
 msgid "Default runlevel"
 msgstr "Nivel de ejecución predeterminado"
 
-#: gnome-system-tools.schemas.in.h:2
+#: gnome-system-tools.schemas.in.h:3
 msgid "Dialog complexity for the boot-admin tool"
 msgstr "Complejidad del diálogo para la herramienta del administrador de arranque"
 
-#: gnome-system-tools.schemas.in.h:3
+#: gnome-system-tools.schemas.in.h:4
 msgid "Dialog complexity for the network-admin tool"
 msgstr "Complejidad del diálogo de la herramienta de administración de la red"
 
-#: gnome-system-tools.schemas.in.h:4
+#: gnome-system-tools.schemas.in.h:5
 msgid "Dialog complexity for the runlevel-admin tool"
 msgstr ""
 "Complejidad del diálogo de la herramienta de administración de nivel de "
 "ejecución"
 
-#: gnome-system-tools.schemas.in.h:5
+#: gnome-system-tools.schemas.in.h:6
 msgid "Dialog complexity for the time-admin tool"
 msgstr "Complejidad del diálogo de la herramienta de administración del reloj"
 
-#: gnome-system-tools.schemas.in.h:6
+#: gnome-system-tools.schemas.in.h:7
 msgid "Dialog complexity for the users-admin tool"
 msgstr "Complejidad del diálogo para la herramienta de conf. de usuarios"
 
-#: gnome-system-tools.schemas.in.h:7
+#: gnome-system-tools.schemas.in.h:8
 msgid "Last GST version executed"
 msgstr "Última versión de GST ejecutada"
 
-#: gnome-system-tools.schemas.in.h:8
+#: gnome-system-tools.schemas.in.h:9
+msgid "Remote hosts"
+msgstr "Hosts remotos:"
+
+#: gnome-system-tools.schemas.in.h:10
 msgid "Runlevel that the runlevel-admin tool shows as default in basic mode"
 msgstr ""
 "Nivel de ejecución que la herramienta de administración de niveles de "
 "ejecución muestra como predeterminado en  modo básico"
 
-#: gnome-system-tools.schemas.in.h:9
+#: gnome-system-tools.schemas.in.h:11
 msgid ""
 "The GNOME System Tools have two data display modes: basic mode and advanced "
 "mode, the basic mode is intended to show less options than the advanced mode"
@@ -67,17 +80,29 @@ msgstr ""
 "Las herramientas de sistema de GNOME tienen dos modos de mostrar datos: el "
 "básico  y el avanzado. El básico muestra menos opciones que el avanzado."
 
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:12
+msgid ""
+"The GST are able to do remote configuration through SSH, enable this option "
+"to use this feature"
+msgstr ""
+"Los GST son capaces de hacer configuraciones remotas a través de SSH, active esta opción "
+"para usar esta característica"
+
+#: gnome-system-tools.schemas.in.h:13
 msgid "The last GST version that this computer has run"
 msgstr "La última versión de GST que esta computadora ha ejecutado"
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:14
+msgid "Whether the tools will use remote administration or not"
+msgstr "Indica si las herramientas usarán la administradicón remota o no"
+
+#: gnome-system-tools.schemas.in.h:15
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr ""
 "Indica si la herramienta de administración de usuarios debe mostrar todos "
 "los usuarios y grupos o no"
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:16
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Indica si el diálogo de advertencia debe mostrarse o no"
 
@@ -135,31 +160,35 @@ msgstr "65.536"
 msgid "800x600"
 msgstr "800x600"
 
-#: interfaces/boot.glade.in.h:14 interfaces/users.glade.in.h:4
+#: interfaces/boot.glade.in.h:14
+msgid "<b>Security</b>"
+msgstr "<b>Seguridad</b>"
+
+#: interfaces/boot.glade.in.h:15 interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Basic Settings</span>"
 msgstr "<span weight=\"bold\">Configuración básica</span>"
 
-#: interfaces/boot.glade.in.h:15
+#: interfaces/boot.glade.in.h:16
 msgid "<span weight=\"bold\">Image Settings</span>"
 msgstr "<span weight=\"bold\">Configuración de imágenes</span>"
 
-#: interfaces/boot.glade.in.h:16
+#: interfaces/boot.glade.in.h:17
 msgid "<span weight=\"bold\">Other Settings</span>"
 msgstr "<span weight=\"bold\">Otros ajustes</span>"
 
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.in.h:18
 msgid "<span weight=\"bold\">Starting the Computer</span>"
 msgstr "<span weight=\"bold\">Iniciando su computadora</span>"
 
-#: interfaces/boot.glade.in.h:18
+#: interfaces/boot.glade.in.h:19
 msgid "Ask at boot"
 msgstr "Preguntar al arrancar"
 
-#: interfaces/boot.glade.in.h:19
+#: interfaces/boot.glade.in.h:20
 msgid "Boot Image Assistant"
 msgstr "Asistente imágenes de arranque"
 
-#: interfaces/boot.glade.in.h:20
+#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition.\n"
@@ -170,15 +199,19 @@ msgstr ""
 "Opcionalmente, puede especificar parámetros que serán pasados al núcleo\n"
 "en el momento del arranque."
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:24
 msgid "Click \"Forward\" to continue"
 msgstr "Pulse «Siguiente» para continuar"
 
-#: interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.in.h:25
+msgid "Confirmation"
+msgstr "Confirmación"
+
+#: interfaces/boot.glade.in.h:26
 msgid "Enable IDE SCSI emulation"
 msgstr "Activar emulación IDE SCSI"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:27
 msgid ""
 "Enter a name for the boot image, and specify what kind of operating system "
 "it is."
@@ -186,53 +219,61 @@ msgstr ""
 "Escriba un nombre para la imagen, y especifique que tipo de sistema "
 "operativo es."
 
-#: interfaces/boot.glade.in.h:26 interfaces/internetsharing.glade.in.h:33
+#: interfaces/boot.glade.in.h:28 interfaces/internetsharing.glade.in.h:33
 #: interfaces/network.glade.in.h:52 interfaces/users.glade.in.h:34
 msgid "Finished"
 msgstr "Terminado"
 
-#: interfaces/boot.glade.in.h:27
+#: interfaces/boot.glade.in.h:29
 msgid "Image Settings (Step 1 of 2)"
 msgstr "Ajustes de la imagen (paso 1 de 2)"
 
-#: interfaces/boot.glade.in.h:28
+#: interfaces/boot.glade.in.h:30
 msgid "Image Settings (Step 2 of 2)"
 msgstr "Ajustes de la imagen (paso 2 de 2)"
 
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1730
+#: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
+#: src/network/connection.c:1745
 msgid "Manual"
 msgstr "Manual"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:32
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Modificar las opciones para un sistema operativo o núcleo."
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:33
 msgid "Number of colors:"
 msgstr "Número de colores:"
 
-#: interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.in.h:34
 msgid "Other Operating System (Step 2 of 2)"
 msgstr "Otro sistema operativo (paso 2 de 2)"
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:35
 msgid "Other parameters:"
 msgstr "Otros parámetros:"
 
-#: interfaces/boot.glade.in.h:34 interfaces/display.glade.in.h:17
+#: interfaces/boot.glade.in.h:36
+msgid "Password"
+msgstr "Contraseña"
+
+#: interfaces/boot.glade.in.h:37
+msgid "Protect with password"
+msgstr "Proteger con contraseña"
+
+#: interfaces/boot.glade.in.h:38 interfaces/display.glade.in.h:17
 msgid "Resolution:"
 msgstr "Resolución:"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:39
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "Segundos de espera antes de cargar el núcleo o SO predeterminado"
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:40
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Especificar la partición en la que está instalado el sistema operativo."
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:41
 msgid ""
 "The new boot image has been added.\n"
 "Please click \"Apply\" to save your changes. "
@@ -240,7 +281,7 @@ msgstr ""
 "La nueva imagen de arranque ha sido añadida.\n"
 "Pulse «Finalizar» para guardar sus cambios. "
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:43
 msgid ""
 "This assistant is designed to help you quickly \n"
 "and easily add a new boot image to your system.\n"
@@ -252,55 +293,55 @@ msgstr ""
 "\n"
 "Para empezar, pulse «Siguiente». "
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:47
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Use este diálogo para modificar los parámetros del núcleo."
 
-#: interfaces/boot.glade.in.h:44
+#: interfaces/boot.glade.in.h:48
 msgid "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Utilice esta herramienta para especificar qué sistemas operativos podrán "
 "elegir los usuarios al arrancar."
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:49
 msgid "Video modes (only frame buffer)"
 msgstr "Modos de vídeo (sólo framebuffer)"
 
-#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:140
+#: interfaces/boot.glade.in.h:50 interfaces/network.glade.in.h:140
 #: interfaces/shares.glade.in.h:60
 msgid "_Add..."
 msgstr "_Añadir..."
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:51
 msgid "_Device:"
 msgstr "_Dispositivo:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:52
 msgid "_Edit"
 msgstr "_Editar"
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:53
 msgid "_Initrd image path:"
 msgstr "Ruta a la imagen _initrd:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:54
 msgid "_Kernel image path:"
 msgstr "Ruta a la imagen del _núcleo:"
 
-#: interfaces/boot.glade.in.h:51 interfaces/print.glade.in.h:72
+#: interfaces/boot.glade.in.h:55 interfaces/print.glade.in.h:72
 #: interfaces/shares.glade.in.h:68
 msgid "_Name:"
 msgstr "_Nombre:"
 
-#: interfaces/boot.glade.in.h:52
+#: interfaces/boot.glade.in.h:56
 msgid "_Operating system:"
 msgstr "Sistema _operativo:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:57
 msgid "_Parameters:"
 msgstr "_Parámetros:"
 
-#: interfaces/boot.glade.in.h:54
+#: interfaces/boot.glade.in.h:58
 msgid "_Root file system device:"
 msgstr "Dispositivo del sistema de archivos _raíz:"
 
@@ -345,23 +386,35 @@ msgstr "Complejidad"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Introduzca contraseña - Herramientas de sistema de GNOME"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1700
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1783
 msgid "GNOME System Tools"
 msgstr "Herramientas de sistema de GNOME"
 
 #: interfaces/common.glade.in.h:14
+msgid "Remote administration"
+msgstr "Administración remota"
+
+#: interfaces/common.glade.in.h:15
 msgid "Run _Without Password"
 msgstr "_Ejecutar sin contraseña"
 
-#: interfaces/common.glade.in.h:15
+#: interfaces/common.glade.in.h:16
 msgid "Scanning system configuration..."
 msgstr "Inspeccionando la configuración de su sistema..."
 
-#: interfaces/common.glade.in.h:16
+#: interfaces/common.glade.in.h:17
 msgid "Unsupported Platform"
 msgstr "Plataforma no soportada"
 
-#: interfaces/common.glade.in.h:17 interfaces/network.glade.in.h:164
+#: interfaces/common.glade.in.h:18
+msgid ""
+"Use this window to select the computer\n"
+"you wish to configure"
+msgstr ""
+"Use esta ventana para seleccionar la computadora\n"
+"que quiere configurar"
+
+#: interfaces/common.glade.in.h:20 interfaces/network.glade.in.h:164
 #: interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Contraseña:"
@@ -786,7 +839,7 @@ msgid "Create a new local network interface."
 msgstr "Crear una nueva interfaz de red local."
 
 #: interfaces/internetsharing.glade.in.h:27 interfaces/network.glade.in.h:46
-#: src/network/connection.c:1731
+#: src/network/connection.c:1746
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1096,8 +1149,8 @@ msgstr "Explorar..."
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: interfaces/memory.glade.in.h:5 src/boot/table.c:48
-#: src/network/connection.c:508
+#: interfaces/memory.glade.in.h:5 src/boot/table.c:45
+#: src/network/connection.c:498
 msgid "Device"
 msgstr "Dispositivo"
 
@@ -1125,11 +1178,11 @@ msgstr "Ruta:"
 msgid "Physical memory:"
 msgstr "Memoria física:"
 
-#: interfaces/memory.glade.in.h:13 src/runlevel/table.c:73
+#: interfaces/memory.glade.in.h:13
 msgid "Priority"
 msgstr "Prioridad"
 
-#: interfaces/memory.glade.in.h:14 interfaces/runlevel.glade.in.h:7
+#: interfaces/memory.glade.in.h:14 interfaces/services.glade.in.h:7
 msgid "Priority:"
 msgstr "Prioridad:"
 
@@ -1212,7 +1265,7 @@ msgstr "Cambiar la dirección IP del alias o sus correspondientes nombres."
 msgid "Delete"
 msgstr "Borrar"
 
-#: interfaces/nameresolution.glade.in.h:10 interfaces/runlevel.glade.in.h:5
+#: interfaces/nameresolution.glade.in.h:10 interfaces/services.glade.in.h:5
 msgid "Description:"
 msgstr "Descripción:"
 
@@ -1440,7 +1493,7 @@ msgstr "Permite el control de activación para todos los usuarios"
 msgid "Auto"
 msgstr "Auto"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1732
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -2316,41 +2369,37 @@ msgstr "Ver registros..."
 msgid "days ago"
 msgstr "días"
 
-#: interfaces/runlevel.glade.in.h:1
+#: interfaces/services.glade.in.h:1
 msgid "<span weight=\"bold\">Description</span>"
 msgstr "<span weight=\"bold\">Descripción</span>"
 
-#: interfaces/runlevel.glade.in.h:2
+#: interfaces/services.glade.in.h:2
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">Información general</span>"
 
-#: interfaces/runlevel.glade.in.h:3
+#: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">Preferencias de servicios</span>"
 
-#: interfaces/runlevel.glade.in.h:4
+#: interfaces/services.glade.in.h:4
 msgid "Click on an item in the list to show it's description."
 msgstr "Pulsar en un elemento en la lista para mostrar su descripción."
 
-#: interfaces/runlevel.glade.in.h:6
+#: interfaces/services.glade.in.h:6
 msgid "Parameters:"
 msgstr "Parámetros:"
 
-#: interfaces/runlevel.glade.in.h:8
+#: interfaces/services.glade.in.h:8
 msgid "Service _Properties"
 msgstr "_Propiedades del servicio"
 
-#: interfaces/runlevel.glade.in.h:9
+#: interfaces/services.glade.in.h:9
 msgid "Service:"
 msgstr "Servicio:"
 
-#: interfaces/runlevel.glade.in.h:10
-msgid ""
-"Use this tool to specify which services to run and the runlevel for the "
-"services."
-msgstr ""
-"Utilice esta herramienta para indicar qué servicios que se deben iniciar y "
-"en qué niveles que se deben ejecutar."
+#: interfaces/services.glade.in.h:10
+msgid "Use this tool to specify which services to run"
+msgstr "Utilice esta herramienta para especificar qué servicios ejecutar"
 
 #: interfaces/shares.glade.in.h:3
 msgid " Edit clients... "
@@ -2500,7 +2549,7 @@ msgstr "Opciones de montaje"
 msgid "NFS"
 msgstr "NFS"
 
-#: interfaces/shares.glade.in.h:42 src/boot/table.c:44
+#: interfaces/shares.glade.in.h:42 src/boot/table.c:41
 msgid "Name"
 msgstr "Nombre"
 
@@ -3014,10 +3063,6 @@ msgstr "Teléfono del _trabajo:"
 msgid "profiles_table"
 msgstr "tabla_de_perfiles"
 
-#: src/boot/boot-append-editor.c:119 src/boot/callbacks.c:165
-msgid "Boot Append Editor"
-msgstr "Editor de parámetros de arranque"
-
 #: src/boot/boot-append-gui.c:226
 #, c-format
 msgid "vga=%s is not a valid vga value"
@@ -3027,11 +3072,6 @@ msgstr "vga=%s no es un valor vga válido"
 #: src/boot/boot-druid.c:407
 msgid "Boot Image Wizard"
 msgstr "Asistente para las imágenes de arranque"
-
-#. give our dialog an OK button and title
-#: src/boot/boot-image-editor.c:108 src/boot/callbacks.c:79
-msgid "Boot Image Editor"
-msgstr "Editor de las imágenes de arranque"
 
 #: src/boot/boot-image.c:40
 msgid "Unknown"
@@ -3057,30 +3097,34 @@ msgstr "Linux"
 msgid "Linux swap"
 msgstr "Linux swap"
 
-#: src/boot/boot-image.c:266
+#: src/boot/boot-image.c:271
 #, c-format
 msgid "Invalid path: %s"
 msgstr "Ruta no válida: %s"
 
-#: src/boot/boot-image.c:282
+#: src/boot/boot-image.c:287
 #, c-format
 msgid "Image '%s' already exists, please set another name."
 msgstr "La imagen «%s» ya existe, por favor seleccione otro nombre."
 
-#: src/boot/boot-image.c:288
+#: src/boot/boot-image.c:293
 #, c-format
 msgid "Invalid image name: '%s'"
 msgstr "Nombre de imagen no válido: «%s»"
 
-#: src/boot/boot-image.c:303
+#: src/boot/boot-image.c:306
 #, c-format
 msgid "Invalid image: '%s'"
 msgstr "Imagen no válida: «%s»"
 
-#: src/boot/boot-image.c:321
+#: src/boot/boot-image.c:324
 #, c-format
 msgid "Invalid root device: '%s'"
 msgstr "Dispositivo raíz no válido: «%s»"
+
+#: src/boot/boot-settings.c:344 src/users/user-settings.c:502
+msgid "Password confirmation isn't correct."
+msgstr "La confirmación de la contraseña es incorrecta."
 
 #: src/boot/boot.desktop.in.in.h:1
 msgid "Boot"
@@ -3090,7 +3134,15 @@ msgstr "Arranque"
 msgid "Boot Manager"
 msgstr "Gestor de arranque"
 
-#: src/boot/callbacks.c:379
+#: src/boot/callbacks.c:75
+msgid "Boot Image Editor"
+msgstr "Editor de las imágenes de arranque"
+
+#: src/boot/callbacks.c:169
+msgid "Boot Append Editor"
+msgstr "Editor de parámetros de arranque"
+
+#: src/boot/callbacks.c:390
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3098,12 +3150,12 @@ msgstr ""
 "Sin al menos una imagen de arranque,\n"
 "su sistema no se iniciará.\n"
 
-#: src/boot/callbacks.c:394
+#: src/boot/callbacks.c:405
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "¿Está seguro que desea borrar «%s»?"
 
-#: src/boot/callbacks.c:439 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:450
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3116,29 +3168,43 @@ msgstr ""
 msgid "Boot Manager Settings"
 msgstr "Ajustes del gestor de arranque"
 
-#: src/boot/table.c:45
+#: src/boot/table.c:42
 msgid "Default"
 msgstr "Predeterminado"
 
-#: src/boot/table.c:46 src/network/connection.c:492
+#: src/boot/table.c:43 src/network/connection.c:482
 msgid "Type"
 msgstr "Tipo"
 
-#: src/boot/table.c:47
+#: src/boot/table.c:44
 msgid "Kernel Image"
 msgstr "Imagen del núcleo"
 
-#: src/boot/table.c:53
+#: src/boot/table.c:50
 msgid "/_Add ..."
 msgstr "/_Añadir..."
 
-#: src/boot/table.c:55 src/users/table.c:49 src/users/table.c:56
+#: src/boot/table.c:52 src/users/table.c:49 src/users/table.c:56
 msgid "/_Properties"
 msgstr "/_Propiedades"
 
-#: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
+#: src/boot/table.c:53 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/_Borrar"
+
+#. the proccess was running ssh
+#: src/common/gst-auth.c:82
+msgid "Could not connect to the computer."
+msgstr "No se pudo conectar con la computadora."
+
+#. the proccess was running su
+#: src/common/gst-auth.c:85 src/common/gst-auth.c:234
+msgid "The password you entered is invalid."
+msgstr "La contraseña que ha introducido es incorrecta"
+
+#: src/common/gst-auth.c:88
+msgid "An unexpected error has occurred."
+msgstr "Ha ocurrido un error inesperado."
 
 #: src/common/gst-dialog.c:60
 #, c-format
@@ -3153,7 +3219,7 @@ msgstr " Más _opciones"
 msgid " Less _Options"
 msgstr " Menos _opciones"
 
-#: src/common/gst-dialog.c:479
+#: src/common/gst-dialog.c:476
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -3161,33 +3227,21 @@ msgstr ""
 "Existen cambios que no se han aplicado.\n"
 "¿Quiere aplicarlos ahora?"
 
-#: src/common/gst-dialog.c:565
+#: src/common/gst-dialog.c:571
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Se ha producido un error al conectar la señal «%s» con el widget «%s»"
 
-#: src/common/gst-su.c:83
-msgid "The password you entered is invalid."
-msgstr "La contraseña que ha introducido es incorrecta"
-
-#: src/common/gst-tool.c:962
+#: src/common/gst-tool.c:944
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Saltándose la directiva %s..."
 
-#: src/common/gst-tool.c:1020
-msgid "Scanning your system configuration."
-msgstr "Buscando la configuración de su sistema."
-
-#: src/common/gst-tool.c:1100
+#: src/common/gst-tool.c:1091
 msgid "Skipping actual save..."
 msgstr "Saltándose el guardado actual..."
 
-#: src/common/gst-tool.c:1142
-msgid "Updating your system configuration."
-msgstr "Actualizando la configuración de su sistema."
-
-#: src/common/gst-tool.c:1163
+#: src/common/gst-tool.c:1153
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -3195,12 +3249,12 @@ msgstr ""
 "Se produjo un error al ejecutar el script del backend,\n"
 "y la configuración no ha podido ser cargada."
 
-#: src/common/gst-tool.c:1409
+#: src/common/gst-tool.c:1506
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - Herramientas de sistema de GNOME"
 
-#: src/common/gst-tool.c:1600
+#: src/common/gst-tool.c:1684
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -3228,17 +3282,13 @@ msgstr ""
 "--\n"
 "El equipo de las Herramientas de sistema de GNOME"
 
-#: src/common/gst-tool.c:1624
+#: src/common/gst-tool.c:1708
 msgid "Warning"
 msgstr "Aviso"
 
-#: src/common/gst-tool.c:1633
+#: src/common/gst-tool.c:1717
 msgid "Don't show me this again"
 msgstr "No vuelva a mostrarme esto"
-
-#: src/common/gst-tool.c:1707
-msgid "Pretending we are root..."
-msgstr "Intentando ser root..."
 
 #: src/common/gst-ui.c:396
 msgid ""
@@ -3248,7 +3298,7 @@ msgstr ""
 "Por favor reinicie su sesión GNOME para\n"
 "que estos cambios tomen efecto."
 
-#: src/network/callbacks.c:115
+#: src/network/callbacks.c:115 src/services/table.c:55
 msgid "Active"
 msgstr "Activa"
 
@@ -3405,17 +3455,17 @@ msgstr ""
 "Por favor instale el paquete rpm redhat-config-network\n"
 "para que esto no ocurra."
 
-#: src/network/callbacks.c:912
+#: src/network/callbacks.c:900
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "¿Quiere activar el interfaz %s?"
 
-#: src/network/callbacks.c:924
+#: src/network/callbacks.c:910
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "¿Quiere desactivar el interfaz %s?"
 
-#: src/network/callbacks.c:998
+#: src/network/callbacks.c:983
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -3423,23 +3473,23 @@ msgstr ""
 "No se pudo detectar el dispositivo módem, compruebe que no esté usándose y "
 "que está conectado correctamente"
 
-#: src/network/callbacks.c:1043
+#: src/network/callbacks.c:1028
 msgid "Silent"
 msgstr "Silencioso"
 
-#: src/network/callbacks.c:1045
+#: src/network/callbacks.c:1030
 msgid "Low"
 msgstr "Bajo"
 
-#: src/network/callbacks.c:1047
+#: src/network/callbacks.c:1032
 msgid "Medium"
 msgstr "Medio"
 
-#: src/network/callbacks.c:1049
+#: src/network/callbacks.c:1034
 msgid "Loud"
 msgstr "Alto"
 
-#: src/network/callbacks.c:1215
+#: src/network/callbacks.c:1200
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "¿Está seguro que desea borrar el alias de %s?"
@@ -3476,15 +3526,15 @@ msgstr "Interfaz de bucle local"
 msgid "Unknown interface type"
 msgstr "Tipo de interfaz desconocido"
 
-#: src/network/connection.c:520
+#: src/network/connection.c:510
 msgid "Status"
 msgstr "Estado"
 
-#: src/network/connection.c:529 src/network/profiles-table.c:62
+#: src/network/connection.c:519 src/network/profiles-table.c:62
 msgid "Description"
 msgstr "Descripción"
 
-#: src/network/connection.c:1611
+#: src/network/connection.c:1626
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -3494,7 +3544,7 @@ msgstr ""
 "red de la interfaz. Por favor introduzca una dirección\n"
 "IP válida en esos campos para continuar."
 
-#: src/network/connection.c:1618
+#: src/network/connection.c:1633
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -3504,7 +3554,7 @@ msgstr ""
 "remota de la interfaz. Por favor introduzca una\n"
 "dirección IP válida en esos campos para continuar."
 
-#: src/network/connection.c:1624
+#: src/network/connection.c:1639
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -3518,7 +3568,7 @@ msgstr ""
 "la dirección IP del servidor primario de DNS o quite la\n"
 "marca de la opción de DNS manual."
 
-#: src/network/connection.c:2180
+#: src/network/connection.c:2195
 msgid "Autodetecting modem device"
 msgstr "Autodetectando dispositivo módem"
 
@@ -3621,32 +3671,32 @@ msgstr ""
 "\n"
 "Contraseña: %s"
 
-#: src/network/profiles-table.c:53
-msgid "Profile name"
-msgstr "Nombre del perfil:"
-
 #: src/network/profile.c:43
 #, c-format
 msgid "Are you sure you want to delete profile %s?"
 msgstr "¿Está seguro que desea borrar el perfil %s?"
 
-#: src/runlevel/callbacks.c:49
+#: src/network/profiles-table.c:53
+msgid "Profile name"
+msgstr "Nombre del perfil:"
+
+#: src/services/callbacks.c:45
 msgid "No description available."
 msgstr "No hay descripción disponible."
 
-#: src/runlevel/main.c:75
-msgid "Runlevel Settings"
-msgstr "Ajustes del nivel de ejecución"
+#: src/services/main.c:62
+msgid "Services Settings"
+msgstr "Opciones de los servicios"
 
-#: src/runlevel/runlevel.desktop.in.in.h:1
-msgid "Runlevel"
-msgstr "Nivel de ejecución"
+#: src/services/services.desktop.in.in.h:1
+msgid "Services"
+msgstr "Servicios"
 
-#: src/runlevel/runlevel.desktop.in.in.h:2
-msgid "Runlevel Services Manager"
-msgstr "Gestor de servicios de nivel de ejecución"
+#: src/services/services.desktop.in.in.h:2
+msgid "Services Manager"
+msgstr "Gestor de servicios"
 
-#: src/runlevel/table.c:86
+#: src/services/table.c:65
 msgid "Service"
 msgstr "Servicio"
 
@@ -3767,23 +3817,23 @@ msgstr ""
 "Contraseña errónea: %s.\n"
 "Por favor inténtelo con una contraseña nueva."
 
-#: src/users/profile-settings.c:125
+#: src/users/profile-settings.c:129
 msgid "The profile must have a name"
 msgstr "El perfil debe tener un nombre"
 
-#: src/users/profile-settings.c:130
+#: src/users/profile-settings.c:134
 msgid "The profile must have a default home"
 msgstr "El perfil debe tener un home predeterminado"
 
-#: src/users/profile-settings.c:135 src/users/profile-settings.c:140
+#: src/users/profile-settings.c:139 src/users/profile-settings.c:144
 msgid "The profile must have a default shell"
 msgstr "El perfil debe tener un intérprete predeterminado"
 
-#: src/users/profile-settings.c:210
+#: src/users/profile-settings.c:214
 msgid "The profile Default must not be deleted."
 msgstr "El perfil predeterminado no debe ser borrado."
 
-#: src/users/profile-settings.c:217
+#: src/users/profile-settings.c:221
 #, c-format
 msgid "Are you sure you want to delete the profile called %s?"
 msgstr "¿Está seguro que desea borrar el perfil llamado %s?"
@@ -3898,10 +3948,6 @@ msgstr "Especifique el intérprete de comandos con la ruta completa."
 msgid "Password must not be empty."
 msgstr "La contraseña no debe estar vacía."
 
-#: src/users/user-settings.c:502
-msgid "Password confirmation isn't correct."
-msgstr "La confirmación de la contraseña es incorrecta."
-
 #: src/users/user-settings.c:778
 #, c-format
 msgid "Settings for User %s"
@@ -3932,6 +3978,21 @@ msgstr "Comentarios"
 msgid "Users and groups."
 msgstr "Usuarios y grupos."
 
+#~ msgid "Scanning your system configuration."
+#~ msgstr "Buscando la configuración de su sistema."
+
+#~ msgid "Updating your system configuration."
+#~ msgstr "Actualizando la configuración de su sistema."
+
+#~ msgid "Pretending we are root..."
+#~ msgstr "Intentando ser root..."
+
+#~ msgid "Runlevel Settings"
+#~ msgstr "Ajustes del nivel de ejecución"
+
+#~ msgid "Runlevel"
+#~ msgstr "Nivel de ejecución"
+
 #~ msgid "P_arameters:"
 #~ msgstr "P_arámetros:"
 
@@ -3946,9 +4007,6 @@ msgstr "Usuarios y grupos."
 
 #~ msgid "System"
 #~ msgstr "Sistema"
-
-#~ msgid "System administration"
-#~ msgstr "Administración del sistema"
 
 #~ msgid "_Root:"
 #~ msgstr "_Raíz:"
@@ -4141,9 +4199,6 @@ msgstr "Usuarios y grupos."
 #~ msgid "<span weight=\"bold\">Group settings</span>"
 #~ msgstr "<span weight=\"bold\">Configuración del grupo:</span>"
 
-#~ msgid "_New password"
-#~ msgstr "Contraseña _nueva"
-
 #~ msgid "_Account"
 #~ msgstr "_Cuenta"
 
@@ -4232,9 +4287,6 @@ msgstr "Usuarios y grupos."
 #~ msgid "Password options"
 #~ msgstr "Opciones de la contraseña"
 
-#~ msgid "Security"
-#~ msgstr "Seguridad"
-
 #~ msgid "Basic settings"
 #~ msgstr "Opciones básicas"
 
@@ -4246,9 +4298,6 @@ msgstr "Usuarios y grupos."
 
 #~ msgid "C_onfirm:"
 #~ msgstr "C_onfirmación:"
-
-#~ msgid "Password"
-#~ msgstr "Contraseña"
 
 #~ msgid "Home _directory:"
 #~ msgstr "_Directorio home:"
