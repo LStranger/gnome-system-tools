@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-setup-tools\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-08-25 16:30+0200\n"
-"PO-Revision-Date: 2003-08-25 16:34+0200\n"
+"POT-Creation-Date: 2003-10-14 21:02+0200\n"
+"PO-Revision-Date: 2003-10-14 21:01+0200\n"
 "Last-Translator: Ole Laursen <olau@hardworking.dk>\n"
 "Language-Team: Danish <dansk@klid.dk>\n"
 "MIME-Version: 1.0\n"
@@ -235,7 +235,7 @@ msgid "Image Settings (Step 2 of 2)"
 msgstr "Aftryksindstillinger (trin 2 af 2)"
 
 #: interfaces/boot.glade.in.h:31 interfaces/network.glade.in.h:67
-#: src/network/connection.c:1745
+#: src/network/connection.c:1753
 msgid "Manual"
 msgstr "Manuelt"
 
@@ -389,7 +389,7 @@ msgstr "Kompleksitet"
 msgid "Enter Password - GNOME System Tools"
 msgstr "Indtast adgangskode - systemværktøjer"
 
-#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1786
+#: interfaces/common.glade.in.h:13 src/common/gst-tool.c:1609
 msgid "GNOME System Tools"
 msgstr "Systemværktøjer"
 
@@ -558,7 +558,7 @@ msgstr "Tillad aktiveringskontrol for alle brugere"
 msgid "Auto"
 msgstr "Automatisk"
 
-#: interfaces/network.glade.in.h:36 src/network/connection.c:1747
+#: interfaces/network.glade.in.h:36 src/network/connection.c:1755
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -598,7 +598,7 @@ msgstr "Opret en ny internetforbindelse "
 msgid "Create a new network connection"
 msgstr "Opret en ny netværksforbindelse"
 
-#: interfaces/network.glade.in.h:46 src/network/connection.c:1746
+#: interfaces/network.glade.in.h:46 src/network/connection.c:1754
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1479,7 +1479,7 @@ msgstr ""
 "Brugerprofiler bruges som skabeloner til at hjælpe med oprettelsen af nye "
 "brugere."
 
-#: interfaces/users.glade.in.h:75 src/users/users.desktop.in.in.h:1
+#: interfaces/users.glade.in.h:75
 msgid "Users"
 msgstr "Brugere"
 
@@ -1569,7 +1569,7 @@ msgstr "vga=%s er ikke en gyldig vga-værdi"
 msgid "Boot Image Wizard"
 msgstr "Startaftrykhjælper"
 
-#: src/boot/boot-image.c:40
+#: src/boot/boot-image.c:40 src/network/profile.c:466
 msgid "Unknown"
 msgstr "Ukendt"
 
@@ -1634,10 +1634,9 @@ msgstr "Bekræftelsen af adgangskoden er ikke korrekt."
 msgid "Boot"
 msgstr "Maskinstart"
 
-# hjælpeteksten i fodmenuen - opsætning mere sigende end håndtering
 #: src/boot/boot.desktop.in.in.h:2
-msgid "Boot Manager"
-msgstr "Opsætning af maskinstart"
+msgid "Configure the system boot process"
+msgstr "Konfigurér systemets startprocedure"
 
 #: src/boot/callbacks.c:75
 msgid "Boot Image Editor"
@@ -1706,33 +1705,33 @@ msgid "/_Delete"
 msgstr "/_Slet"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:82
+#: src/common/gst-auth.c:83
 msgid "Could not connect to the computer."
 msgstr "Kunne ikke tilkoble til maskinen."
 
 #. the proccess was running su
-#: src/common/gst-auth.c:85 src/common/gst-auth.c:234
+#: src/common/gst-auth.c:86
 msgid "The password you entered is invalid."
 msgstr "Den indtastede adgangskode er ugyldig."
 
-#: src/common/gst-auth.c:88
+#: src/common/gst-auth.c:89
 msgid "An unexpected error has occurred."
 msgstr "En uventet fejl opstod"
 
-#: src/common/gst-dialog.c:60
+#: src/common/gst-dialog.c:61
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "Kunne ikke finde kontrol: %s"
 
-#: src/common/gst-dialog.c:92
+#: src/common/gst-dialog.c:93
 msgid " More _Options"
 msgstr " Flere _indstillinger"
 
-#: src/common/gst-dialog.c:93
-msgid " Less _Options"
-msgstr " Færre _indstillinger"
+#: src/common/gst-dialog.c:94
+msgid " Fewer _Options"
+msgstr " Færre indstillinger "
 
-#: src/common/gst-dialog.c:476
+#: src/common/gst-dialog.c:475
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1740,22 +1739,22 @@ msgstr ""
 "Der findes ændringer som ikke er aktiveret.\n"
 "Aktivér disse nu?"
 
-#: src/common/gst-dialog.c:571
+#: src/common/gst-dialog.c:590
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Fejl ved forbindelse af signalet '%s' i kontrollen '%s'"
 
 # hm, ikke særligt kønt
-#: src/common/gst-tool.c:944
+#: src/common/gst-tool.c:823
 #, c-format
 msgid "Skipping %s directive..."
 msgstr "Springer over %s-direktiv..."
 
-#: src/common/gst-tool.c:1094
+#: src/common/gst-tool.c:954
 msgid "Skipping actual save..."
 msgstr "Springer over faktisk gemning..."
 
-#: src/common/gst-tool.c:1156
+#: src/common/gst-tool.c:1027
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -1763,12 +1762,12 @@ msgstr ""
 "Der opstod en fejl ved kørsel af bagendeprogrammet,\n"
 "og opsætningen kunne ikke indlæses."
 
-#: src/common/gst-tool.c:1509
+#: src/common/gst-tool.c:1328
 #, c-format
 msgid "%s - GNOME System Tools"
 msgstr "%s - systemværktøjer"
 
-#: src/common/gst-tool.c:1687
+#: src/common/gst-tool.c:1510
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the GNOME System Tools.\n"
@@ -1796,11 +1795,11 @@ msgstr ""
 "-- \n"
 "Holdet bag værktøjerne"
 
-#: src/common/gst-tool.c:1711
+#: src/common/gst-tool.c:1534
 msgid "Warning"
 msgstr "Advarsel"
 
-#: src/common/gst-tool.c:1720
+#: src/common/gst-tool.c:1543
 msgid "Don't show me this again"
 msgstr "Vis ikke dette vindue igen"
 
@@ -1909,7 +1908,7 @@ msgstr ""
 "\n"
 "Fortsæt alligevel?"
 
-#: src/network/callbacks.c:708
+#: src/network/callbacks.c:710
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1919,7 +1918,7 @@ msgstr ""
 "bliver nødt til at installere 'wvdial', ellers\n"
 "kan PPP-forbindelserne (via modem) ikke aktiveres."
 
-#: src/network/callbacks.c:734
+#: src/network/callbacks.c:737
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -1933,7 +1932,7 @@ msgstr ""
 "\n"
 "Fortsæt alligevel?"
 
-#: src/network/callbacks.c:761
+#: src/network/callbacks.c:764
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -1945,7 +1944,7 @@ msgstr ""
 "\n"
 "Fortsæt alligevel?"
 
-#: src/network/callbacks.c:816
+#: src/network/callbacks.c:819
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -1956,7 +1955,7 @@ msgstr ""
 "for at fortsætte, eller vælg en anden\n"
 "standardadgangspunktenhed.\n"
 
-#: src/network/callbacks.c:862
+#: src/network/callbacks.c:865
 msgid ""
 "The program redhat-config-network-cmd could not\n"
 "be found. This could render missing connections\n"
@@ -1968,17 +1967,17 @@ msgstr ""
 "på forbindelsesfanebladet. Installér venligst\n"
 "redhat-config-network RPM-pakken for at undgå dette."
 
-#: src/network/callbacks.c:900
+#: src/network/callbacks.c:903
 #, c-format
 msgid "Do you want to enable interface %s?"
 msgstr "Vil du aktivere forbindelsen %s?"
 
-#: src/network/callbacks.c:910
+#: src/network/callbacks.c:913
 #, c-format
 msgid "Do you want to disable interface %s?"
 msgstr "Vil du deaktivere forbindelsen %s?"
 
-#: src/network/callbacks.c:983
+#: src/network/callbacks.c:1000
 msgid ""
 "Could not autodetect modem device, check that this is not busy and that it's "
 "correctly attached"
@@ -1986,23 +1985,23 @@ msgstr ""
 "Kunne ikke finde modemenhed automatisk. Kontrollér at modemet er korrekt "
 "forbundet til computeren og ikke er optaget."
 
-#: src/network/callbacks.c:1028
+#: src/network/callbacks.c:1046
 msgid "Silent"
 msgstr "Stum"
 
-#: src/network/callbacks.c:1030
+#: src/network/callbacks.c:1048
 msgid "Low"
 msgstr "Svag"
 
-#: src/network/callbacks.c:1032
+#: src/network/callbacks.c:1050
 msgid "Medium"
 msgstr "Mellem"
 
-#: src/network/callbacks.c:1034
+#: src/network/callbacks.c:1052
 msgid "Loud"
 msgstr "Kraftig"
 
-#: src/network/callbacks.c:1200
+#: src/network/callbacks.c:1218
 #, c-format
 msgid "Are you sure you want to delete the aliases for %s?"
 msgstr "Er du sikker på at du vil slette aliaset for %s?"
@@ -2047,7 +2046,7 @@ msgstr "Status"
 msgid "Description"
 msgstr "Beskrivelse"
 
-#: src/network/connection.c:1626
+#: src/network/connection.c:1634
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2057,7 +2056,7 @@ msgstr ""
 "mangler. Indtast venligst gyldige IP-adresser\n"
 "i de felter for at fortsætte."
 
-#: src/network/connection.c:1633
+#: src/network/connection.c:1641
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2067,7 +2066,7 @@ msgstr ""
 "mangler. Indtast venligst gyldige IP-adresser\n"
 "i de felter for at fortsætte."
 
-#: src/network/connection.c:1639
+#: src/network/connection.c:1647
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2081,7 +2080,12 @@ msgstr ""
 "venligst adressen på den primære DNS eller\n"
 "fravælg manuel DNS-angivelse."
 
-#: src/network/connection.c:2195
+#: src/network/connection.c:2037
+#, c-format
+msgid "The interface %s doesn't exist."
+msgstr "Grænsefladen %s eksisterer ikke."
+
+#: src/network/connection.c:2245
 msgid "Autodetecting modem device"
 msgstr "Leder efter modemenhed"
 
@@ -2093,31 +2097,39 @@ msgstr "IP-adresse"
 msgid "Aliases"
 msgstr "Aliaser"
 
-#: src/network/main.c:220
+#: src/network/main.c:221
 msgid "Run the connection druid."
 msgstr "Kør hjælperen til forbindelser."
 
-#: src/network/main.c:221
+#: src/network/main.c:222
 msgid "Run the PPP connection druid."
 msgstr "Kør hjælperen til PPP-forbindelser."
 
-#: src/network/main.c:222
+#: src/network/main.c:223
 msgid "Run the ethernet connection druid."
 msgstr "Kør hjælperen til Ethernet-forbindelser."
 
-#: src/network/main.c:223
+#: src/network/main.c:224
 msgid "Run the wlan connection druid."
 msgstr "Kør hjælperen til trådløse forbindelser."
 
-#: src/network/main.c:224
+#: src/network/main.c:225
 msgid "Run the parallel port connection druid."
 msgstr "Kør hjælperen til parallel port-forbindelser."
 
-#: src/network/main.c:225
+#: src/network/main.c:226
 msgid "Run the irlan connection druid."
 msgstr "Kør hjælperen til infrarød port-forbindelser."
 
-#: src/network/main.c:232
+#: src/network/main.c:227
+msgid "Configure a network interface"
+msgstr "Konfigurér en netværksforbindelse"
+
+#: src/network/main.c:227
+msgid "interface"
+msgstr "forbindelse"
+
+#: src/network/main.c:234
 msgid "Network Settings"
 msgstr "Indstillinger for netværk"
 
@@ -2126,8 +2138,8 @@ msgid "Connection name (Step 2 of 2)"
 msgstr "Forbindelsesnavn (trin 2 af 2)"
 
 #: src/network/network.desktop.in.in.h:1
-msgid "Network adapter setup."
-msgstr "Opsætning af netværkskort"
+msgid "Configure network devices and connections"
+msgstr "Konfigurér netværksenheder og -forbindelser"
 
 #: src/network/network.desktop.in.in.h:2
 msgid "Networking"
@@ -2206,26 +2218,26 @@ msgid "Services Settings"
 msgstr "Tjenesteindstillinger"
 
 #: src/services/services.desktop.in.in.h:1
-msgid "Services"
-msgstr "Tjenester"
+msgid "Configure which services will be run when the system starts"
+msgstr "Konfigurér hvilke tjenester der vil blive kørt når systemet starter"
 
 #: src/services/services.desktop.in.in.h:2
-msgid "Services Manager"
-msgstr "Styring af tjenester"
+msgid "Services"
+msgstr "Tjenester"
 
 #: src/services/table.c:65
 msgid "Service"
 msgstr "Tjeneste"
 
-#: src/time/main.c:310
+#: src/time/main.c:303
 msgid "Time Zone - GNOME System Tools"
 msgstr "Tidszone - systemværktøjer"
 
-#: src/time/main.c:428
+#: src/time/main.c:417
 msgid "Time Servers - GNOME System Tools"
 msgstr "Tidsservere - systemværktøjer"
 
-#: src/time/main.c:500
+#: src/time/main.c:495
 msgid ""
 "You don't have NTP support running. Please run NTP support\n"
 "in the system to enable server synchronization."
@@ -2233,23 +2245,23 @@ msgstr ""
 "NTP-understøttelse kører ikke. Kør venligst NTP-understøttelse\n"
 "på systemet for at tillade serversynkronisering."
 
-#: src/time/main.c:789
+#: src/time/main.c:784
 msgid "Time and Date Settings"
-msgstr "Opsætning af dato og klokkeslet"
+msgstr "Indstillinger for dato og klokkeslet"
 
 #: src/time/time.desktop.in.in.h:1
-msgid "Time"
-msgstr "Tid"
+msgid "Change system time, date, and timezone"
+msgstr "Skift klokkeslet, dato og tidszone"
 
 #: src/time/time.desktop.in.in.h:2
-msgid "Time, date and timezone."
-msgstr "Klokkeslet, dato og tidszone"
+msgid "Time and Date"
+msgstr "Dato og klokkeslet"
 
-#: src/users/callbacks.c:592
+#: src/users/callbacks.c:598
 msgid "Create New profile"
 msgstr "Opret ny profil"
 
-#: src/users/callbacks.c:623
+#: src/users/callbacks.c:629
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Indstillinger for profilen %s"
@@ -2320,7 +2332,7 @@ msgstr "Gruppenavn indeholder"
 msgid "User GID is"
 msgstr "Brugers gruppe-id er"
 
-#: src/users/main.c:321
+#: src/users/main.c:321 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Brugere og grupper"
 
@@ -2482,24 +2494,42 @@ msgid "User"
 msgstr "Bruger"
 
 #: src/users/users-table.c:47
-msgid "UID"
-msgstr "Bruger-id"
-
-#: src/users/users-table.c:48
 msgid "Home"
 msgstr "Hjem"
 
+#: src/users/users-table.c:48
+msgid "User details"
+msgstr "Brugerdetaljer"
+
 #: src/users/users-table.c:49
+msgid "UID"
+msgstr "Bruger-id"
+
+#: src/users/users-table.c:50
 msgid "Shell"
 msgstr "Skal"
 
-#: src/users/users-table.c:50
-msgid "Comments"
-msgstr "Kommentarer"
+#: src/users/users.desktop.in.in.h:1
+msgid "Add or remove users and groups"
+msgstr "Tilføj eller fjern brugere og grupper"
 
-#: src/users/users.desktop.in.in.h:2
-msgid "Users and groups."
-msgstr "Brugere og grupper"
+#~ msgid " Less _Options"
+#~ msgstr " Færre _indstillinger"
+
+#~ msgid "Network adapter setup."
+#~ msgstr "Opsætning af netværkskort"
+
+#~ msgid "Services Manager"
+#~ msgstr "Styring af tjenester"
+
+#~ msgid "Time"
+#~ msgstr "Tid"
+
+#~ msgid "Comments"
+#~ msgstr "Kommentarer"
+
+#~ msgid "Users and groups."
+#~ msgstr "Brugere og grupper"
 
 #~ msgid "Default runlevel"
 #~ msgstr "Standardkørselsniveau"
@@ -2810,9 +2840,6 @@ msgstr "Brugere og grupper"
 #~ msgstr ""
 #~ "Tillykke! Denne maskine er nu konfigureret \n"
 #~ "til at dele dens internetforbindelse.\n"
-
-#~ msgid "Create a new local network interface."
-#~ msgstr "Opret en ny lokalnetværksgrænseflade."
 
 #~ msgid "DHCP service configuration."
 #~ msgstr "Konfiguration af DHCP-tjeneste."
@@ -3777,9 +3804,6 @@ msgstr "Brugere og grupper"
 #~ msgstr ""
 #~ "Dette er en liste med grupper på systemet. Du kan oprette nye grupper "
 #~ "eller redigere eksisterende gruppers indstillinger."
-
-#~ msgid " Fewer _Options"
-#~ msgstr " Færre indstillinger "
 
 #~ msgid "_Edit..."
 #~ msgstr "_Redigér..."
