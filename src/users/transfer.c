@@ -192,19 +192,20 @@ transfer_user_list_xml_to_glist (xmlNodePtr root)
 static void
 transfer_group_list_xml_to_glist (xmlNodePtr root)
 {
-	xmlNodePtr users_node, node, n0, n1, n2, n3;
+	xmlNodePtr group_node, node, n0, n1, n2, n3;
+	xmlNodePtr sub_node, user_node;
 	group *g;
 
 	/* Find groupdb */
 	
-	users_node = xml_element_find_first (root, "groupdb");
-	if (!users_node)
+	group_node = xml_element_find_first (root, "groupdb");
+	if (!group_node)
 	{
 		g_warning ("transfer_group_list_xml_to_glist: couldn't find groupdb node.");
 		return;
 	}
 
-	for (node = xml_element_find_first (users_node, "group");
+	for (node = xml_element_find_first (group_node, "group");
 			node;
 		       	node = xml_element_find_next (node, "group"))
 	{
@@ -228,6 +229,22 @@ transfer_group_list_xml_to_glist (xmlNodePtr root)
 		if (n3)
 			g->gid = atoi (xml_element_get_content (n3));
 
+		/* Get all users in group */
+
+		g->users = NULL;
+
+		sub_node = xml_element_find_first (node, "users");
+
+		if (!sub_node)
+			g_warning ("Couldn't find group users node.");
+
+		for (user_node = xml_element_find_first (sub_node, "user"); user_node;
+				user_node = xml_element_find_next (user_node, "user"))
+
+			
+			g->users = g_list_append (g->users, xml_element_get_content (user_node));
+		
+
 		group_list = g_list_append (group_list, g);
 	}
 }
@@ -239,15 +256,15 @@ transfer_user_list_to_gui (void)
 	GList *u, *rows = NULL;
 	GtkList *list;
 	user *current_u;
-	gint num_rows;
 	GtkWidget *list_item;
+	GtkObject *item;
 
 	/* Ok, first our users should be sorted by login */
 	user_list = g_list_sort (user_list, user_sort_by_login);
 
 	list = GTK_LIST (tool_widget_get ("user_list"));
 
-	for (u = g_list_first (user_list), num_rows = 0; u; u = g_list_next (u), num_rows++)
+	for (u = g_list_first (user_list); u; u = g_list_next (u))
 	{
 		current_u = (user *)u->data;
 		if (current_u->uid >= logindefs.new_user_min_id &&
@@ -262,10 +279,12 @@ transfer_user_list_to_gui (void)
 
 	gtk_list_append_items (list, rows);
 
-	/* Select last item (and make it current) */
-	u = g_list_last (user_list);
-	current_user = (user *)u->data;
-	gtk_list_select_item (list, --num_rows);
+	/* Select first item (and make it current) */
+
+	gtk_list_select_item (list, 0);
+	u = list->selection;
+	item = GTK_OBJECT (u->data);
+	current_user = gtk_object_get_data (item, user_list_data_key);
 }
 
 static void
@@ -274,15 +293,15 @@ transfer_group_list_to_gui (void)
 	GList *g, *rows = NULL;
 	GtkList *list;
 	group *current_g;
-	gint num_rows;
 	GtkWidget *list_item;
+	GtkObject *item;
 
 	/* Ok, first our groups should be sorted by name */
 	group_list = g_list_sort (group_list, group_sort_by_name);
 
 	list = GTK_LIST (tool_widget_get ("group_list"));
 
-	for (g = g_list_first (group_list), num_rows = 0; g; g = g_list_next (g), num_rows++)
+	for (g = g_list_first (group_list); g; g = g_list_next (g))
 	{
 		current_g = (group *)g->data;
 		if (current_g->gid >= logindefs.new_group_min_id &&
@@ -297,10 +316,11 @@ transfer_group_list_to_gui (void)
 
 	gtk_list_append_items (list, rows);
 
-	/* Select last item (and make it current) */
-	g = g_list_last (group_list);
-	current_group = (group *)g->data;
-	gtk_list_select_item (list, --num_rows);
+	/* Select first item (and make it current) */
+	gtk_list_select_item (list, 0);
+	g = list->selection;
+	item = GTK_OBJECT (g->data);
+	current_group = gtk_object_get_data (item, group_list_data_key);
 }
 
 

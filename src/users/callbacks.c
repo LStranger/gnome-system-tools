@@ -72,13 +72,46 @@ on_users_admin_delete_event (GtkWidget * widget, GdkEvent * event, gpointer gdat
 extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data)
 {
-	GtkWidget *w0;
+	GtkWidget *w0, *menu;
+	GList *g;
+	group *current_g;
+	GtkWidget *menu_item;
+	guint num_row;
+	guint index = 0;
+	
 
 	w0 = tool_widget_get ("user_settings_name");
 	gtk_entry_set_text (GTK_ENTRY (w0), current_user->login);
 
 	w0 = tool_widget_get ("user_settings_comment");
 	gtk_entry_set_text (GTK_ENTRY (w0), current_user->comment);
+	
+	/* Build groups menu */
+
+	menu = gtk_menu_new ();
+	w0 = tool_widget_get ("user_settings_group");
+
+	for (g = g_list_first (group_list), num_row = 0; g; g = g_list_next (g), num_row++)
+	{
+		current_g = (group *)g->data;
+
+/*
+		if (current_g->gid >= logindefs.new_group_min_id &&
+				current_g->gid <= logindefs.new_group_max_id) */
+		{
+			menu_item = gtk_menu_item_new_with_label (current_g->name);
+			gtk_menu_append (GTK_MENU (menu), menu_item);
+			gtk_widget_show (menu_item);
+
+			if (current_user->gid == current_g->gid)
+				index = num_row;
+		}
+	}
+
+	gtk_menu_set_active (GTK_MENU (menu), index);
+	
+	gtk_option_menu_set_menu (GTK_OPTION_MENU (w0), menu);
+	
 	
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_widget_show (w0);
@@ -88,6 +121,12 @@ extern void
 on_user_chpasswd_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
+	gchar *msg;
+
+	w0 = tool_widget_get ("user_passwd_label");
+	msg = g_strdup_printf ("Changing password for %s", current_user->login);
+	gtk_label_set_text (GTK_LABEL (w0), msg);
+	g_free (msg);
 	
 	w0 = tool_widget_get ("user_passwd_dialog");
 	gtk_widget_show (w0);
@@ -156,6 +195,8 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 	w0 = tool_widget_get ("group_settings_name");
 	gtk_entry_set_text (GTK_ENTRY (w0), current_group->name);
 
+	/* Fill all users list */
+	
 	list = GTK_LIST (tool_widget_get ("group_settings_all"));
 	for (u = g_list_first (user_list); u; u = g_list_next (u))
 	{
@@ -167,7 +208,23 @@ on_group_settings_clicked (GtkButton *button, gpointer user_data)
 
 	gtk_list_append_items (list, rows);
 
+	/* Fill group members */
 
+	rows = NULL;
+
+	list = GTK_LIST (tool_widget_get ("group_settings_members"));
+	for (u = g_list_first (current_group->users); u; u = g_list_next (u))
+	{
+		list_item = gtk_list_item_new_with_label ((gchar *)u->data);
+		gtk_widget_show (list_item);
+		rows = g_list_append (rows, list_item);
+	}
+
+	gtk_list_append_items (list, rows);
+
+
+	/* Show group settings dialog */
+	
 	w0 = tool_widget_get ("group_settings_dialog");
 	gtk_widget_show (w0);
 }
@@ -195,6 +252,31 @@ extern void
 on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
+	GtkWidget *menu, *menu_item;
+	GList *glist, *tmplist;
+
+	/* Clear entries */
+
+	w0 = tool_widget_get ("user_settings_name");
+	gtk_entry_set_text (GTK_ENTRY (w0), "");
+
+	w0 = tool_widget_get ("user_settings_comment");
+	gtk_entry_set_text (GTK_ENTRY (w0), "");
+
+	/* Destroy menu & menuitems */
+	
+	w0 = tool_widget_get ("user_settings_group");
+	menu = gtk_option_menu_get_menu (GTK_OPTION_MENU (w0));
+	glist = gtk_container_children (GTK_CONTAINER (menu));
+
+	for (tmplist = g_list_first (glist); tmplist; tmplist = g_list_next (tmplist))
+	{
+		menu_item = (GtkWidget *)tmplist->data;
+		gtk_widget_destroy (menu_item);
+	}
+	
+	gtk_widget_destroy (menu);
+
 
 	w0 = tool_widget_get ("user_settings_dialog");
 	gtk_widget_hide (w0);
@@ -203,6 +285,43 @@ on_user_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 extern void
 on_user_settings_ok_clicked (GtkButton *button, gpointer user_data)
 {
+	/* That #ifdef is just for commenting this code out, it crashes app and isn't ready.
+	 * I'll finish it tomorrow
+	 */
+	
+#ifdef TOMORROW
+	GtkWidget *w0;
+	gchar *txt;
+
+	w0 = tool_widget_get ("user_settings_name");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	/* If login name is changed and is at least 3 letters long (is that correct?) */
+	if (strcmp (txt, current_user->login) && strlen (txt) >= 3)
+	{
+		g_free (current_user->login);
+		current_user->login = txt;
+	}
+	else
+		g_free (txt);
+
+
+	w0 = tool_widget_get ("user_settings_comment");
+	txt = gtk_entry_get_text (GTK_ENTRY (w0));
+
+	/* Should it check for size? */
+	if (strcmp (txt, current_user->comment))
+	{
+		g_free (current_user->comment);
+		current_user->comment = txt;
+	}
+	else
+		g_free (txt);
+	
+#endif
+	
+	/* Clean up dialog, it's easiest to just call *_cancel_* function */
+	on_user_settings_cancel_clicked (NULL, NULL);
 }
 
 /* Password settings callbacks */
@@ -262,9 +381,11 @@ on_user_passwd_ok_clicked (GtkButton *button, gpointer user_data)
 		g_free (current_user->password);
 
 		current_user->password = g_strdup (new);
+
+		msg = g_strdup_printf ("Password changed successfully for %s!",
+				current_user->login);
 		
-		dialog = GNOME_DIALOG (gnome_ok_dialog_parented ("Passwords changed successfully!",
-			GTK_WINDOW (win)));
+		dialog = GNOME_DIALOG (gnome_ok_dialog_parented (msg, GTK_WINDOW (win)));
 		
 		gnome_dialog_run (dialog);
 		gtk_widget_hide (win);
@@ -278,6 +399,14 @@ extern void
 on_group_settings_cancel_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget *w0;
+
+	/* Clear lists */
+
+	w0 = tool_widget_get ("group_settings_all");
+	gtk_list_clear_items (GTK_LIST (w0), 0, -1);
+
+	w0 = tool_widget_get ("group_settings_members");
+	gtk_list_clear_items (GTK_LIST (w0), 0, -1);
 
 	w0 = tool_widget_get ("group_settings_dialog");
 	gtk_widget_hide (w0);
