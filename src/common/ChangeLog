@@ -1,3 +1,12 @@
+2001-06-19  Bradford Hovinen  <hovinen@ximian.com>
+
+	* xst-tool.c (xst_init): Added popt structure and call for --location parameter
+	Added file scope variable location (WORM policy)
+	(xst_tool_save): Pass --location to backend iff location was set on command line
+	(xst_tool_load): Print stringified errno if we cannot launch the backend
+	(xst_tool_load): Read from STDIN if we are editing a location we are not in
+	(xst_tool_load): Report progress only if the location is NULL
+
 2001-06-14  Tambet Ingo  <tambet@ximian.com>
 
 	* xst-ui.c (xst_ui_option_menu_get_selected_string): strdup the value before return.

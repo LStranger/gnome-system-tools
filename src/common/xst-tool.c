@@ -36,6 +36,7 @@
 
 #include <stdio.h>
 #include <fcntl.h>
+#include <errno.h>
 
 #define XST_DEBUG 1
 
@@ -71,6 +72,8 @@ static XstReportHookEntry common_report_hooks[] = {
 	{ "platform_success", platform_set_current_cb,    XST_REPORT_HOOK_LOAD,     FALSE }, 
 	{ 0,                  NULL,                       -1,                       FALSE }
 };
+
+static gchar *location_id;    /* Location in which we are editing */
 
 /* --- Report hook callbacks --- */
 
@@ -589,6 +592,8 @@ xst_tool_save (XstTool *tool)
 		close (fd_report [0]);
 
 	} else {
+		gchar *loc_arg;
+
 		/* Child */
 
 		close (fd_xml [1]);	/* Close writing end of XML pipe */
@@ -596,13 +601,16 @@ xst_tool_save (XstTool *tool)
 		dup2 (fd_xml [0], STDIN_FILENO);
 		dup2 (fd_report [1], STDOUT_FILENO);
 
+		loc_arg = (location_id == NULL) ? NULL : "--location";
+
 		if (tool->current_platform)
 			execl (tool->script_path, tool->script_path,
 			       "--set", "--progress", "--report", "--platform",
-			       xst_platform_get_name (tool->current_platform), NULL);
+			       xst_platform_get_name (tool->current_platform),
+			       loc_arg, location_id, NULL);
 		else
 			execl (tool->script_path, tool->script_path, "--set", "--progress",
-			       "--report", NULL);
+			       "--report", loc_arg, location_id, NULL);
 
 		g_error ("Unable to run backend: %s", tool->script_path);
 	}
@@ -638,9 +646,14 @@ xst_tool_load (XstTool *tool)
 		tool->config = NULL;
 	}
 
-	pipe (fd);
-			  
-	t = fork ();
+	if (location_id == NULL) {
+		pipe (fd);
+		t = fork ();
+	} else {
+		fd[0] = STDIN_FILENO;
+		fd[1] = -1;
+		t = 1;
+	}
 
 	if (t < 0) {
 		g_error ("Unable to fork.");
@@ -656,7 +669,8 @@ xst_tool_load (XstTool *tool)
 		 * mechanism. Let's just load it all into memory, then. Also, refusing
 		 * enormous documents can be considered a plus. </dystopic> */
 
-		report_progress (tool, fd [0], _("Scanning your system configuration."));
+		if (location_id == NULL)
+			report_progress (tool, fd [0], _("Scanning your system configuration."));
 
 		if (tool->run_again)
 			return TRUE;
@@ -684,12 +698,14 @@ xst_tool_load (XstTool *tool)
 		if (tool->current_platform)
 			execl (tool->script_path, tool->script_path,
 			       "--get", "--progress", "--report", "--platform",
-			       xst_platform_get_name (tool->current_platform), NULL);
+			       xst_platform_get_name (tool->current_platform),
+			       NULL);
 		else
 			execl (tool->script_path, tool->script_path, "--get", "--progress",
 			       "--report", NULL);
 
-		g_error ("Unable to run backend: %s", tool->script_path);
+		g_error ("Unable to run backend %s: %s", tool->script_path,
+			 g_strerror (errno));
 	}
 	
 	if (tool->config)
@@ -1078,10 +1094,20 @@ try_show_usage_warning (void)
 void
 xst_init (const gchar *app_name, int argc, char *argv [], const poptOption options)
 {
+	struct poptOption xst_options[] =
+	{
+		{ "location", '\0', POPT_ARG_STRING, &location_id, 0,
+		  N_("	Edit configuration in the location LOCATION."), N_("LOCATION") },
+		
+		{NULL, '\0', 0, NULL, 0}
+	};
+
 #ifdef ENABLE_NLS
 	bindtextdomain (PACKAGE, GNOMELOCALEDIR);
 	textdomain (PACKAGE);
 #endif
+
+        gnomelib_register_popt_table (xst_options, "general XST options");
 
 	if (options == NULL) {
 		gnome_init (app_name, VERSION, argc, argv);
