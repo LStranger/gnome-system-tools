@@ -242,7 +242,7 @@ transfer_check_several_bootloaders ()
 	exec = transfer_check_preferred_bootloader (bootloaders);
 
 	if (!exec)
-		exec = transfer_check_selected_bootloader (bootloaders);
+		exec = transfer_get_selected_bootloader (bootloaders);
 
 	/* replace the XML with the config from the chosen bootloader */
 	xmlFreeDoc (tool->config);
