@@ -101,6 +101,12 @@ extern void
 on_network_settings_clicked (GtkButton *button, gpointer user_data);
 
 extern void
+on_network_user_new_clicked (GtkButton *button, gpointer user_data);
+
+extern void
+on_network_group_new_clicked (GtkButton *button, gpointer user_data);
+
+extern void
 on_group_settings_dialog_delete_event (GtkWidget *w, gpointer user_data);
 
 extern void
