@@ -161,8 +161,6 @@ gst_dialog_freeze_visible (GstDialog *xd)
 	gdk_window_set_cursor (GTK_WIDGET (xd)->window, cursor);
 	gdk_cursor_unref (cursor);
 
-	gdk_display_flush (gtk_widget_get_display (GTK_WIDGET (xd)));
-
 	if (!xd->frozen)
 		gtk_widget_set_sensitive (GTK_WIDGET (xd), FALSE);
 	
@@ -177,7 +175,6 @@ gst_dialog_thaw_visible (GstDialog *xd)
 	g_return_if_fail (xd->frozen >= 0);
 
 	gdk_window_set_cursor (GTK_WIDGET (xd)->window, NULL);
-	gdk_display_flush (gtk_widget_get_display (GTK_WIDGET (xd)));
 
 	gst_dialog_thaw (xd);
 
