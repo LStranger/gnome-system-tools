@@ -171,7 +171,7 @@ case $host in
 	;;
 esac;
 
-XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/src/common/libsetuptool.a"
+XST_TOOL_LIBS="$XST_LIBS \$(top_builddir)/archiver/libximian_archiver.la \$(top_builddir)/src/common/libsetuptool.a"
 XST_TOOL_CFLAGS="$XST_CFLAGS -I\$(top_srcdir)/src/common"
 
 XST_TOOL_CLEANFILES="\$(desktop) \$(desktop).in"

@@ -30,6 +30,9 @@
 #include "xst-ui.h"
 #include "xst-su.h"
 
+#include "archive.h"
+#include "location.h"
+
 #include <gnome.h>
 #include <parser.h>
 #include <memory.h>
@@ -547,6 +550,9 @@ xst_tool_save (XstTool *tool)
 	FILE *f;
 	int fd_xml [2], fd_report [2];
 	int t;
+	Archive *archive;
+	Location *location;
+	gchar *backend_id;
 
 	g_return_val_if_fail (tool != NULL, FALSE);
 	g_return_val_if_fail (XST_IS_TOOL (tool), FALSE);
@@ -570,6 +576,30 @@ xst_tool_save (XstTool *tool)
 	}
 #endif
 
+	/* Archive data with the archiver */
+	archive = ARCHIVE (archive_load (TRUE));
+
+	if (location_id == NULL)
+		location = archive_get_current_location (archive);
+	else
+		location = archive_get_location (archive, location_id);
+
+	backend_id = strrchr (tool->script_path, '/');
+
+	if (backend_id != NULL)
+		backend_id++;
+	else
+		backend_id = tool->script_path;
+
+	location_store_xml (location, backend_id, tool->config, STORE_MASK_PREVIOUS);
+
+	archive_close (archive);
+
+	if (location_id != NULL) {
+		xst_dialog_thaw_visible (tool->main_dialog);
+		return TRUE;
+	}
+
 	pipe (fd_xml);
 	pipe (fd_report);
 
@@ -592,8 +622,6 @@ xst_tool_save (XstTool *tool)
 		close (fd_report [0]);
 
 	} else {
-		gchar *loc_arg;
-
 		/* Child */
 
 		close (fd_xml [1]);	/* Close writing end of XML pipe */
@@ -601,16 +629,13 @@ xst_tool_save (XstTool *tool)
 		dup2 (fd_xml [0], STDIN_FILENO);
 		dup2 (fd_report [1], STDOUT_FILENO);
 
-		loc_arg = (location_id == NULL) ? NULL : "--location";
-
 		if (tool->current_platform)
 			execl (tool->script_path, tool->script_path,
 			       "--set", "--progress", "--report", "--platform",
-			       xst_platform_get_name (tool->current_platform),
-			       loc_arg, location_id, NULL);
+			       xst_platform_get_name (tool->current_platform), NULL);
 		else
 			execl (tool->script_path, tool->script_path, "--set", "--progress",
-			       "--report", loc_arg, location_id, NULL);
+			       "--report", NULL);
 
 		g_error ("Unable to run backend: %s", tool->script_path);
 	}
