@@ -88,10 +88,8 @@ typedef struct
 } group;
 
 
-extern GList *user_list;
 extern GList *user_basic_list;
 extern GList *user_adv_list;
-extern GList *group_list;
 extern GList *group_basic_list;
 extern GList *group_adv_list;
 

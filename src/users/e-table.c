@@ -50,7 +50,7 @@
 #define USER_COLS 1
 #define GROUP_COLS 1
 
-#define USER_SPEC "<ETableSpecification> \
+#define USER_BASIC_SPEC "<ETableSpecification> \
   <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
     <ETableState> \
       <column source=\"0\"/> \
@@ -58,7 +58,26 @@
     </ETableState> \
   </ETableSpecification>"
 
-#define GROUP_SPEC "<ETableSpecification> \
+#define USER_ADV_SPEC "<ETableSpecification> \
+  <ETableColumn model_col=\"0\" _title=\"Users\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+  <ETableColumn model_col=\"0\" _title=\"\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+    <ETableState> \
+      <column source=\"0\"/> \
+      <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> \
+    </ETableState> \
+  </ETableSpecification>"
+
+#define GROUP_BASIC_SPEC "<ETableSpecification> \
+  <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
+    <ETableState> \
+      <column source=\"0\"/> \
+      <grouping><leaf column=\"0\" ascending=\"true\"/></grouping> \
+    </ETableState> \
+  </ETableSpecification>"
+
+#define GROUP_ADV_SPEC "<ETableSpecification> \
   <ETableColumn model_col=\"0\" _title=\"Groups\" expansion=\"1.0\" minimum_width=\"20\" resizable=\"true\" cell=\"string\" compare=\"string\"/> \
     <ETableState> \
       <column source=\"0\"/> \
@@ -188,7 +207,7 @@ select_row (ETable *et, int row)
 	else if (et == E_TABLE (group_table))
 	{
 		group_actions_set_sensitive (TRUE);
-		l = group_list;
+		l = group_current_list ();
 		frame_name = "group_settings_frame";
 		fmt = _("Settings for group ");
 	}
@@ -227,7 +246,7 @@ e_table_create (void)
                                            value_to_string,
                                            user_current_list());
 
-	user_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, USER_SPEC, NULL);
+	user_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, USER_BASIC_SPEC, NULL);
 
 	if (!user_table)
 		g_warning ("e-table: Can't make user table");
@@ -250,9 +269,9 @@ e_table_create (void)
                                            initialize_value,
                                            value_is_empty,
                                            value_to_string,
-                                           group_list);
+                                           group_current_list ());
 
-	group_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, GROUP_SPEC, NULL);
+	group_table = e_table_new (E_TABLE_MODEL(e_table_model), NULL, GROUP_BASIC_SPEC, NULL);
 
 	if (!group_table)
 		g_warning ("e-table: Can't make group table");
@@ -292,10 +311,10 @@ e_table_del (gchar del)
 	{
 		table = E_TABLE (group_table);
 		row = e_table_get_cursor_row (table);
-		tmp_list = g_list_nth (group_list, row);
+		tmp_list = g_list_nth (group_current_list (), row);
 		
 		group_free (tmp_list->data);
-		group_list = g_list_remove (group_list, tmp_list->data);
+		group_adv_list = g_list_remove (group_adv_list, tmp_list->data);
 		if (!user_group_is_system ((user_group *) tmp_list->data))
 			group_basic_list = g_list_remove (group_basic_list, tmp_list->data);
 	}
@@ -366,7 +385,7 @@ e_table_get (gchar get)
 		etm = E_TABLE_MODEL (table->model);
 		row = e_table_get_cursor_row (table);
 
-		return (group *)g_list_nth_data (group_list, row);
+		return (group *)g_list_nth_data (group_current_list (), row);
 	}
 
 	return NULL;

@@ -32,10 +32,8 @@ static gchar *find_new_key (gchar from);
 static gboolean is_valid_name (gchar *str);
 static gint char_sort_func (gconstpointer a, gconstpointer b);
 
-GList *user_list = NULL;
 GList *user_basic_list = NULL;
 GList *user_adv_list = NULL;
-GList *group_list = NULL;
 GList *group_basic_list = NULL;
 GList *group_adv_list = NULL;
 
@@ -378,7 +376,7 @@ user_fill_settings_group (GtkCombo *combo)
 	GList *u, *items;
 
 	items = NULL;
-	for (u = g_list_first (group_list); u; u = g_list_next (u))
+	for (u = g_list_first (group_current_list ()); u; u = g_list_next (u))
 		items = g_list_append (items, ((group *) u->data)->ug.name);
 
 	items = g_list_sort (items, char_sort_func);

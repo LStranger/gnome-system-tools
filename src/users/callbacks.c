@@ -88,7 +88,7 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	gtk_widget_set_sensitive (w0, tool_get_access());
 	user_fill_settings_group (GTK_COMBO (w0));
 
-	tmp_list = group_list;
+	tmp_list = group_adv_list;
 	while (tmp_list)
 	{
 		g = tmp_list->data;
