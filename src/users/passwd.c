@@ -44,118 +44,17 @@
 #include "md5.h"
 #include "table.h"
 
+#define RANDOM_PASSWD_SIZE 7
 
-#define RANDOM_PASSWD_SIZE 6
-
-static gchar *pam_passwd_files[] = { "/etc/pam.d/passwd", NULL };
+extern GstTool *tool;
 
 static gboolean
 uses_md5 (void)
 {
-	gint i;
-	gint fd = -1;
-	gint last_line = 1;
-	static gboolean been_here = FALSE;
-	static gboolean found = FALSE;
-	GScanner *scanner;
-	GScannerConfig scanner_config =
-	{
-		(
-		 " \t\r\n"
-		 )			/* cset_skip_characters */,
-		(
-		 G_CSET_a_2_z
-		 "_/.="
-		 G_CSET_A_2_Z
-		 )			/* cset_identifier_first */,
-		(
-		 G_CSET_a_2_z
-		 "_/.="
-		 G_CSET_A_2_Z
-		 "1234567890"
-		 G_CSET_LATINS
-		 G_CSET_LATINC
-		 )			/* cset_identifier_nth */,
-		( "#\n" )		/* cpair_comment_single */,
-		
-		FALSE			/* case_sensitive */,
-		
-		TRUE			/* skip_comment_multi */,
-		TRUE			/* skip_comment_single */,
-		TRUE			/* scan_comment_multi */,
-		TRUE			/* scan_identifier */,
-		FALSE			/* scan_identifier_1char */,
-		FALSE			/* scan_identifier_NULL */,
-		FALSE			/* scan_symbols */,
-		FALSE			/* scan_binary */,
-		FALSE			/* scan_octal */,
-		FALSE			/* scan_float */,
-		FALSE			/* scan_hex */,
-		FALSE			/* scan_hex_dollar */,
-		FALSE			/* scan_string_sq */,
-		FALSE			/* scan_string_dq */,
-		FALSE			/* numbers_2_int */,
-		FALSE			/* int_2_float */,
-		FALSE			/* identifier_2_string */,
-		FALSE			/* char_2_token */,
-		FALSE			/* symbol_2_token */,
-		FALSE			/* scope_0_fallback */,
-	};
-	
-	if (been_here)
-		return found;
-	
-	for (i = 0; pam_passwd_files[i]; i++)
-		if ((fd = open (pam_passwd_files[i], O_RDONLY)) != -1)
-			break;
-	
-	if (fd == -1)
-		return FALSE;
-	
-	found = FALSE;
-	scanner = g_scanner_new (&scanner_config);
-	g_scanner_input_file (scanner, fd);
-	
-	/* Scan the file, until the md5 argument for /lib/security/pam_pwdb.so
-	 * in the module-type password is found, or EOF */
-	while ((g_scanner_get_next_token (scanner) != G_TOKEN_EOF) && !found)
-	{
-		
-		/* Has a password module directive been found? */
-		if ((scanner->token == G_TOKEN_IDENTIFIER) &&
-				(scanner->position == 8) &&
-				(!strcmp (scanner->value.v_identifier, "password")))
-		{
-			last_line = scanner->line;
-			g_scanner_get_next_token (scanner);
-			g_scanner_get_next_token (scanner);
-			
-			/* Check that the following arguments are for /lib/security/pam_pwdb.so. */
-			if ((scanner->token == G_TOKEN_IDENTIFIER) &&
-					(!strcmp (scanner->value.v_identifier, "/lib/security/pam_pwdb.so")))
-				
-				/* Cool: search all identifiers on the same line */
-				while ((g_scanner_peek_next_token (scanner) != G_TOKEN_EOF) && 
-							 (scanner->next_line == last_line) &&
-							 !found)
-			    {
-						g_scanner_get_next_token (scanner);
-				
-						/* Is this the md5 argument? */
-						if ((scanner->token == G_TOKEN_IDENTIFIER) &&
-								(!strcmp (scanner->value.v_identifier, "md5")))
-						{
-							found = TRUE;
-							break;
-						}
-					}
-		}
-	}
-	
-	g_scanner_destroy (scanner);
-	close (fd);
-	
-	return found;
+	xmlNodePtr root;
+
+	root = gst_xml_doc_get_root (tool->config);
+	return gst_xml_element_get_boolean (root, "use_md5");
 }
 
 /* str must be a string of len + 1 allocated gchars */
@@ -287,7 +186,7 @@ passwd_set (xmlNodePtr node, const gchar *pwd)
 	if (!pwd)
 		password = passwd_get_random (); /* TODO: memory leak, free it! */
 	else
-		password = (gchar *)pwd;
+		password = g_strdup (pwd);
 
 	if (uses_md5 ()) 
 		buf = g_strdup (crypt_md5 (password, rand_str (salt, 8)));
@@ -295,4 +194,7 @@ passwd_set (xmlNodePtr node, const gchar *pwd)
 		buf = g_strdup (crypt (password, rand_str (salt, 2)));
 
 	gst_xml_set_child_content (node, "password", buf);
+
+	g_free (buf);
+	g_free (password);
 }
