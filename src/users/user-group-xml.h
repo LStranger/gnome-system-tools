@@ -24,14 +24,16 @@
 #include <gnome.h>
 #include <gnome-xml/tree.h>
 
-gchar *generic_value_string  (xmlNodePtr node, const gchar *name);
-gint   generic_value_integer (xmlNodePtr node, const gchar *name);
-void generic_set_value_string (xmlNodePtr node, const gchar *name, const gchar *value);
-void generic_set_value_integer (xmlNodePtr node, const gchar *name, gint value);
-gchar *user_value_group      (xmlNodePtr user_node);
-void user_set_value_group (xmlNodePtr user_node, const gchar *value);
-GSList *user_get_groups      (xmlNodePtr user_node);
-void user_set_groups     (xmlNodePtr user_node, GSList *list);
+gchar    *generic_value_string      (xmlNodePtr node, const gchar *name);
+gint      generic_value_integer     (xmlNodePtr node, const gchar *name);
+gpointer  generic_value_string_peek (xmlNodePtr parent, const gchar *name);
+void      generic_set_value_string  (xmlNodePtr node, const gchar *name, const gchar *value);
+void      generic_set_value_integer (xmlNodePtr node, const gchar *name, gint value);
+gchar    *user_value_group          (xmlNodePtr user_node);
+gpointer  user_value_group_peek     (xmlNodePtr user_node);
+void      user_set_value_group      (xmlNodePtr user_node, const gchar *value);
+GSList   *user_get_groups           (xmlNodePtr user_node);
+void      user_set_groups           (xmlNodePtr user_node, GSList *list);
 
 #define user_value_login(node)       (generic_value_string (node, "login"))
 #define user_value_home(node)        (generic_value_string (node, "home"))
@@ -46,10 +48,20 @@ void user_set_groups     (xmlNodePtr user_node, GSList *list);
 #define user_value_pwd_warndays(node) (generic_value_integer (node, "passwd_exp_warn"))
 #define user_value_password(node)    (generic_value_string (node, "password"))
 
-#define group_value_name(node)       (generic_value_string (node, "name"))
-#define group_value_gid_string(node) (generic_value_string (node, "gid"))
-#define group_value_gid_integer(node) (generic_value_integer (node, "gid"))
+#define user_value_login_peek(node)      (generic_value_string_peek (node, "login"))
+#define user_value_home_peek(node)       (generic_value_string_peek (node, "home"))
+#define user_value_shell_peek(node)      (generic_value_string_peek (node, "shell"))
+#define user_value_comment_peek(node)    (generic_value_string_peek (node, "comment"))
+#define user_value_uid_string_peek(node) (generic_value_string_peek (node, "uid"))
+#define user_value_gid_string_peek(node) (generic_value_string_peek (node, "gid"))
+#define user_value_password_peek(node)   (generic_value_string_peek (node, "password"))
 
+#define group_value_name(node)           (generic_value_string (node, "name"))
+#define group_value_gid_string(node)     (generic_value_string (node, "gid"))
+#define group_value_gid_integer(node)    (generic_value_integer (node, "gid"))
+
+#define group_value_name_peek(node)      (generic_value_string_peek (node, "name"))
+#define group_value_gid_string_peek(node) (generic_value_string_peek (node, "gid"))
 
 #define user_set_value_login(node,value)       (generic_set_value_string (node, "login", value))
 #define user_set_value_home(node,value)        (generic_set_value_string (node, "home", value))

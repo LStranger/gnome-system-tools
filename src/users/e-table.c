@@ -213,13 +213,13 @@ user_value_at (ETableModel *etm, int col, int row, void *model_data)
 		return NULL;
 
 	switch (col) {
-	case COL_USER_LOGIN:   return user_value_login (node); break;
-	case COL_USER_UID:     return user_value_uid_string (node); break;
-	case COL_USER_HOME:    return user_value_home (node); break;
-	case COL_USER_SHELL:   return user_value_shell (node); break;
-	case COL_USER_COMMENT: return user_value_comment (node); break;
-	case COL_USER_GROUP:   return user_value_group (node); break;
-	case COL_USER_GID:     return user_value_gid_string (node); break;
+	case COL_USER_LOGIN:   return user_value_login_peek (node); break;
+	case COL_USER_UID:     return user_value_uid_string_peek (node); break;
+	case COL_USER_HOME:    return user_value_home_peek (node); break;
+	case COL_USER_SHELL:   return user_value_shell_peek (node); break;
+	case COL_USER_COMMENT: return user_value_comment_peek (node); break;
+	case COL_USER_GROUP:   return user_value_group_peek (node); break;
+	case COL_USER_GID:     return user_value_gid_string_peek (node); break;
 
 	case COL_USER_COLOR:   return get_row_color (etm, row); break;
 
@@ -241,8 +241,8 @@ group_value_at (ETableModel *etm, int col, int row, void *model_data)
 
 	switch (col)
 	{
-	case COL_GROUP_NAME: return group_value_name (node); break;
-	case COL_GROUP_GID:  return group_value_gid_string (node); break;
+	case COL_GROUP_NAME: return group_value_name_peek (node); break;
+	case COL_GROUP_GID:  return group_value_gid_string_peek (node); break;
 		
 	case COL_USER_COLOR: return get_row_color (etm, row); break;
 		

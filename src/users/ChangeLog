@@ -1,3 +1,12 @@
+2001-05-31  Tambet Ingo  <tambet@ximian.com>
+
+	* user-group-xml.c (generic_value_string_peek): Implement.
+	(user_value_group_peek): Implement.
+
+	* e-table.c (user_value_at): Peek xmlNode's content, don't duplicate it.
+	Fixes bug #2844.
+	(group_value_at): ditto.
+
 2001-05-29  Chema Celorio  <chema@celorio.com>
 
 	* Makefile.am (users_admin_LDADD): clean

@@ -60,6 +60,21 @@ generic_value_integer (xmlNodePtr node, const gchar *name)
 	return val;
 }
 
+gpointer
+generic_value_string_peek (xmlNodePtr parent, const gchar *name)
+{
+	xmlNodePtr node;
+	
+	g_return_val_if_fail (parent != NULL, NULL);
+	g_return_val_if_fail (name != NULL, NULL);
+
+	node = xst_xml_element_find_first (parent, name);
+	if (node)
+		return (gpointer) xst_xml_element_peek_content (node);
+
+	return NULL;
+}
+
 gchar *
 user_value_group (xmlNodePtr user_node)
 {
@@ -77,6 +92,25 @@ user_value_group (xmlNodePtr user_node)
 		return gid;
 	
 	g_free (gid);
+	return buf;
+}
+
+gpointer
+user_value_group_peek (xmlNodePtr user_node)
+{
+	gchar *gid, *buf;
+	xmlNodePtr group_node;
+
+	gid = user_value_gid_string_peek (user_node);
+	group_node = get_corresp_field (get_db_node (user_node));
+	group_node = get_node_by_data (group_node, "gid", gid);
+	if (!group_node)
+		return gid;
+	
+	buf = group_value_name_peek (group_node);
+	if (!buf)
+		return gid;
+	
 	return buf;
 }
 
