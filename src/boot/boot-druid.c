@@ -417,8 +417,8 @@ construct (BootDruid *druid)
 			g_signal_connect (G_OBJECT (page), "next",
 					  pages[i].next_func, druid);
 		if (pages[i].prepare_func)
-			g_signal_connect (G_OBJECT (page), "prepare",
-					  pages[i].prepare_func, druid);
+			g_signal_connect_after (G_OBJECT (page), "prepare",
+						pages[i].prepare_func, druid);
 		if (pages[i].back_func)
 			g_signal_connect (G_OBJECT (page), "back",
 					  pages[i].back_func, druid);
