@@ -24,24 +24,33 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <libgnome/gnome-i18n.h>
 
-#include "gst.h"
 #include "disks-storage.h"
 #include "disks-storage-disk.h"
-
-extern GstTool *tool;
+#include "disks-gui.h"
 
 #define PARENT_TYPE GST_TYPE_DISKS_STORAGE
 
+enum {
+	PROP_0,
+	PROP_PARTITIONS
+};
+
 struct _GstDisksStorageDiskPriv
 {
-	gboolean use_dma;
+	GList *partitions;
+	/*gboolean use_dma;*/
 };
 
 static void storage_disk_init       (GstDisksStorageDisk      *storage);
 static void storage_disk_class_init (GstDisksStorageDiskClass *klass);
 static void storage_disk_finalize   (GObject                  *object);
+
+static void storage_set_property (GObject  *object, guint prop_id,
+				  const GValue *value, GParamSpec *spec);
+static void storage_get_property (GObject  *object, guint prop_id,
+				  GValue *value, GParamSpec *spec);
 
 static void storage_disk_setup_properties_widget (GstDisksStorage *storage);
 
@@ -76,7 +85,8 @@ storage_disk_init (GstDisksStorageDisk *storage)
 	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (storage));
 	
 	storage->priv = g_new0 (GstDisksStorageDiskPriv, 1);
-	storage->priv->use_dma = FALSE;
+	/*storage->priv->use_dma = FALSE;*/
+	storage->priv->partitions = NULL;
 
 	g_object_set (G_OBJECT (storage),
 		      "name", _("Hard Disk"),
@@ -92,7 +102,14 @@ storage_disk_class_init (GstDisksStorageDiskClass *klass)
 
 	parent_class = g_type_class_peek_parent (klass);
 
+	object_class->set_property = storage_set_property;
+	object_class->get_property = storage_get_property;
+	
 	storage_class->setup_properties_widget = storage_disk_setup_properties_widget;
+
+	g_object_class_install_property (object_class, PROP_PARTITIONS,
+					 g_param_spec_pointer ("partitions", NULL, NULL,
+							       G_PARAM_READWRITE));
 	
 	object_class->finalize = storage_disk_finalize;
 }
@@ -104,6 +121,10 @@ storage_disk_finalize (GObject *object)
 	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (storage));
 
 	if (storage->priv) {
+		if (storage->priv->partitions) {
+			g_list_free (storage->priv->partitions);
+			storage->priv->partitions = NULL;
+		}
 		g_free (storage->priv);
 		storage->priv = NULL;
 	}
@@ -114,15 +135,41 @@ storage_disk_finalize (GObject *object)
 }
 
 static void
-storage_disk_setup_properties_widget (GstDisksStorage *storage)
+storage_set_property (GObject  *object, guint prop_id, const GValue *value,
+		      GParamSpec *spec)
 {
-	GstDisksStorageDisk *disk;
-	GtkWidget *speed_label;
-	gchar *speed;
+	GstDisksStorageDisk *storage;
 
-	disk = GST_DISKS_STORAGE_DISK (storage);
+	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (object));
 
-	gst_disks_gui_setup_disk_properties (disk);
+	storage = GST_DISKS_STORAGE_DISK (object);
+
+	switch (prop_id) {
+	case PROP_PARTITIONS:
+		storage->priv->partitions = g_value_get_pointer (value);
+		break;
+	default:
+		break;
+	}
+}
+
+static void
+storage_get_property (GObject  *object, guint prop_id, GValue *value,
+		      GParamSpec *spec)
+{
+	GstDisksStorageDisk *storage;
+
+	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (object));
+
+	storage = GST_DISKS_STORAGE_DISK (object);
+
+	switch (prop_id) {
+	case PROP_PARTITIONS:
+		g_value_set_pointer (value, storage->priv->partitions);
+		break;
+	default:
+		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
+	}
 }
 
 GstDisksStorage*
@@ -133,4 +180,23 @@ gst_disks_storage_disk_new (void)
 	storage = g_object_new (GST_TYPE_DISKS_STORAGE_DISK, NULL);
 
 	return GST_DISKS_STORAGE (storage);
+}
+
+static void
+storage_disk_setup_properties_widget (GstDisksStorage *storage)
+{
+	GstDisksStorageDisk *disk;
+
+	disk = GST_DISKS_STORAGE_DISK (storage);
+
+	gst_disks_gui_setup_disk_properties (disk);
+}
+
+void
+gst_disks_storage_disk_add_partition (GstDisksStorageDisk *storage, GstDisksPartition *part)
+{
+	g_return_if_fail (GST_IS_DISKS_STORAGE_DISK (storage));
+	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
+
+	storage->priv->partitions = g_list_append (storage->priv->partitions, part);
 }

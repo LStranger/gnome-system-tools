@@ -24,10 +24,11 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <libgnome/gnome-i18n.h>
 
 #include "disks-storage.h"
 #include "disks-storage-floppy.h"
+#include "disks-gui.h"
 
 #define PARENT_TYPE GST_TYPE_DISKS_STORAGE
 
@@ -35,7 +36,7 @@ static void storage_floppy_init       (GstDisksStorageFloppy      *storage);
 static void storage_floppy_class_init (GstDisksStorageFloppyClass *klass);
 static void storage_floppy_finalize   (GObject                    *object);
 
-static GtkWidget*  storage_floppy_get_properties_widget   (GstDisksStorage *storage);
+/*static GtkWidget*  storage_floppy_get_properties_widget   (GstDisksStorage *storage);*/
 
 static GObjectClass *parent_class = NULL;
 
@@ -90,11 +91,11 @@ storage_floppy_finalize (GObject *object)
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
-static GtkWidget *
+/*static GtkWidget *
 storage_floppy_get_properties_widget (GstDisksStorage *storage)
 {
 	return NULL;
-}
+}*/
 
 GstDisksStorage*
 gst_disks_storage_floppy_new (void)

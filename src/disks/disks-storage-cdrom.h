@@ -24,7 +24,6 @@
 #define __DISKS_STORAGE_CDROM_H__
 
 #include <glib-object.h>
-#include "disks-storage.h"
 
 #define GST_TYPE_DISKS_STORAGE_CDROM         (gst_disks_storage_cdrom_get_type ())
 #define GST_DISKS_STORAGE_CDROM(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_DISKS_STORAGE_CDROM, GstDisksStorageCdrom))

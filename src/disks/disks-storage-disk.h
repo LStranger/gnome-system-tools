@@ -24,7 +24,7 @@
 #define __DISKS_STORAGE_DISK_H__
 
 #include <glib-object.h>
-#include "disks-storage-disk.h"
+#include "disks-partition.h"
 
 #define GST_TYPE_DISKS_STORAGE_DISK         (gst_disks_storage_disk_get_type ())
 #define GST_DISKS_STORAGE_DISK(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_DISKS_STORAGE_DISK, GstDisksStorageDisk))
@@ -49,5 +49,7 @@ struct _GstDisksStorageDiskClass {
 
 GType            gst_disks_storage_disk_get_type (void);
 GstDisksStorage* gst_disks_storage_disk_new      (void);
+void             gst_disks_storage_disk_add_partition (GstDisksStorageDisk *storage,
+						       GstDisksPartition *part);
 
 #endif /* __GST_DISKS_STORAGE_DISK_H__  */

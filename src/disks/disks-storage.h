@@ -24,7 +24,6 @@
 #define __DISKS_STORAGE_H__
 
 #include <glib-object.h>
-#include <gtk/gtk.h>
 
 #define GST_TYPE_DISKS_STORAGE         (gst_disks_storage_get_type ())
 #define GST_DISKS_STORAGE(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_DISKS_STORAGE, GstDisksStorage))
@@ -46,14 +45,12 @@ struct _GstDisksStorage {
 struct _GstDisksStorageClass {
         GObjectClass parent_class;
 
-	GtkWidget* (* get_properties_widget)   (GstDisksStorage *storage);
 	void       (* setup_properties_widget) (GstDisksStorage *storage);
 };
 
 GType      gst_disks_storage_get_type      (void);
 
 void       gst_disks_storage_add_child               (GstDisksStorage *storage, GstDisksStorage *child);
-GtkWidget* gst_disks_storage_get_properties_widget   (GstDisksStorage *storage);
 void       gst_disks_storage_setup_properties_widget (GstDisksStorage *storage);
 
 #endif /* __DISKS_STORAGE_H__  */

@@ -26,11 +26,8 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
-#include "gst.h"
+#include <libgnome/gnome-i18n.h>
 #include "disks-storage.h"
-
-extern GstTool *tool;
 
 #define PARENT_TYPE G_TYPE_OBJECT
 
@@ -41,8 +38,7 @@ enum {
 	PROP_SIZE,
 	PROP_ICON_NAME,
 	PROP_DEVICE,
-	PROP_SPEED,
-	PROP_CHILDREN
+	PROP_SPEED
 };
 
 struct _GstDisksStoragePriv
@@ -53,7 +49,6 @@ struct _GstDisksStoragePriv
 	gchar *icon_name;
 	gchar *device;
 	gchar *speed;
-	GList *children;
 };
 
 static void storage_init       (GstDisksStorage      *storage);
@@ -85,7 +80,7 @@ gst_disks_storage_get_type (void)
 			(GInstanceInitFunc) storage_init
 		};
 		type = g_type_register_static (PARENT_TYPE, "GstDisksStorage",
-					       &info, 0);
+					       &info, G_TYPE_FLAG_ABSTRACT);
 	   }
 	   return type;
 }
@@ -101,7 +96,6 @@ storage_init (GstDisksStorage *storage)
 	storage->priv->model = g_strdup (_("Unknown"));
 	storage->priv->size = 0;
 	storage->priv->speed = NULL;
-	storage->priv->children = NULL;
 }
 
 static void
@@ -133,9 +127,6 @@ storage_class_init (GstDisksStorageClass *klass)
 	g_object_class_install_property (object_class, PROP_SPEED,
 					 g_param_spec_string ("speed", NULL, NULL,
 							      NULL, G_PARAM_READWRITE));
-	g_object_class_install_property (object_class, PROP_CHILDREN,
-					 g_param_spec_pointer ("children", NULL, NULL,
-							       G_PARAM_READWRITE));
 	
 	object_class->finalize = storage_finalize;
 }
@@ -147,10 +138,6 @@ storage_finalize (GObject *object)
 	g_return_if_fail (GST_IS_DISKS_STORAGE (storage));
 
 	if (storage->priv) {
-		if (storage->priv->children) {
-			g_list_free (storage->priv->children);
-			storage->priv->children = NULL;
-		}
 		g_free (storage->priv);
 		storage->priv = NULL;
 	}
@@ -193,9 +180,6 @@ storage_set_property (GObject  *object, guint prop_id, const GValue *value,
 		if (storage->priv->speed) g_free (storage->priv->speed);
 		storage->priv->speed = g_value_dup_string (value);
 		break;
-	case PROP_CHILDREN:
-		storage->priv->children = g_value_get_pointer (value);
-		break;
 	default:
 		break;
 	}
@@ -230,44 +214,10 @@ storage_get_property (GObject  *object, guint prop_id, GValue *value,
 	case PROP_SPEED:
 		g_value_set_string (value, storage->priv->speed);
 		break;
-	case PROP_CHILDREN:
-		g_value_set_pointer (value, storage->priv->children);
-		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
 	}
 }
-
-GstDisksStorage*
-gst_disks_storage_new (void)
-{
-	GstDisksStorage *storage;
-	
-	storage = g_object_new (GST_TYPE_DISKS_STORAGE, NULL);
-
-	return storage;
-}
-
-void
-gst_disks_storage_add_child (GstDisksStorage *storage, GstDisksStorage *child)
-{
-	g_return_if_fail (GST_IS_DISKS_STORAGE (storage));
-	g_return_if_fail (GST_IS_DISKS_STORAGE (child));
-
-	storage->priv->children = g_list_append (storage->priv->children, child);
-}
-
-/*GtkWidget*
-gst_disks_storage_get_properties_widget (GstDisksStorage *storage)
-{
-	g_return_val_if_fail (GST_IS_DISKS_STORAGE (storage), NULL);
-	
-	if (GST_DISKS_STORAGE_GET_CLASS (storage)->get_properties_widget) {
-		return GST_DISKS_STORAGE_GET_CLASS (storage)->get_properties_widget (storage);
-	} else {
-		return NULL;
-	}
-}*/
 
 void
 gst_disks_storage_setup_properties_widget (GstDisksStorage *storage)

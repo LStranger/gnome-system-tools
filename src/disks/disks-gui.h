@@ -28,6 +28,8 @@
 #include <gnome.h>
 
 #include "disks-config.h"
+#include "disks-storage-disk.h"
+#include "disks-storage-cdrom.h"
 
 enum {
 	POPUP_PARTITION_FORMAT,
@@ -56,8 +58,10 @@ gfloat         gst_storage_get_float_size      (const gulong size);
 void           gst_disks_gui_setup_mounted     (GtkWidget *status_label,
 						GtkWidget *mount_button,
 						gboolean mounted);
-void           gst_storage_gui_setup           (GstDisksConfig *cfg);
-void           gst_disks_gui_set_device_speed  (GstDisksStorage *storage);
-void           gst_storage_partition_gui_setup (GtkWidget *treeview, GList *partitions);
+void           gst_storage_gui_setup                (GstDisksConfig *cfg);
+void           gst_disks_gui_set_device_speed       (GstDisksStorage *storage);
+void           gst_disks_gui_setup_partition        (GtkWidget *treeview, GList *partitions);
+void           gst_disks_gui_setup_disk_properties  (GstDisksStorageDisk *disk);
+void           gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom);
 
 #endif /* __DISKS_GUI_H */

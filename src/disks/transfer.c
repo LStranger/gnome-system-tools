@@ -25,16 +25,21 @@
 /* Functions for transferring information between XML tree and UI */
 
 
-#include <gnome.h>
-#include <glade/glade.h>
+#ifdef HAVE_CONFIG_H
+#  include <config.h>
+#endif
+
+#include <glib.h>
 #include "gst.h"
 
 #include "transfer.h"
 #include "disks-config.h"
 #include "disks-storage.h"
 #include "disks-factory-storage.h"
-#include "disks-storage-partition.h"
+#include "disks-partition.h"
+#include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"
+#include "disks-gui.h"
 
 extern GstTool *tool;
 
@@ -43,7 +48,7 @@ transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
 {
 	xmlNodePtr disk_node, part_node, node;
 	GstDisksStorage *storage;
-	GstDisksStoragePartition *part;
+	GstDisksPartition *part;
 	gchar *buf;
 	gulong p_size, storage_size;
 
@@ -151,8 +156,8 @@ transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
 		     part_node;
 		     part_node = gst_xml_element_find_next (part_node, "partition"))
 		{
-			part = GST_DISKS_STORAGE_PARTITION (gst_disks_storage_partition_new ());
-			if (GST_IS_DISKS_STORAGE (part))
+			part = GST_DISKS_PARTITION (gst_disks_partition_new ());
+			if (GST_IS_DISKS_PARTITION (part))
 			{
 				buf = gst_xml_get_child_content (part_node, "device");
 				if (buf) {
@@ -164,7 +169,7 @@ transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
 				buf = gst_xml_get_child_content (part_node, "type");
 				if (buf) {
 					g_object_set (G_OBJECT (part), "type",
-						      gst_disks_storage_partition_get_typefs_from_name (buf),
+						      gst_disks_partition_get_typefs_from_name (buf),
 						      NULL);
 					g_free (buf);
 				}
@@ -228,26 +233,20 @@ transfer_xml_to_config (xmlNodePtr root, GstDisksConfig *cfg)
 							      node, "state"),
 							      NULL);
 				
-				gst_disks_storage_add_child (storage, GST_DISKS_STORAGE (part));
+				gst_disks_storage_disk_add_partition (GST_DISKS_STORAGE_DISK (storage),
+								      part);
 			}
 		}
-
-		/*if ((storage_size - p_size) > 0) {
-			part = GST_DISKS_STORAGE_PARTITION (gst_disks_storage_partition_new ());
-			g_object_set (G_OBJECT (part), "type", PARTITION_TYPE_FREE,
-				      "size", (storage_size - p_size), NULL);
-			gst_disks_storage_add_child (storage, GST_DISKS_STORAGE (part));
-			}*/
-		
 		gst_disks_config_add_storage (cfg, storage);
 	}
 }
 
-static void
+/* Uncomment in the future */
+/*static void
 transfer_config_to_xml (GstDisksConfig *cfg, xmlNodePtr root)
 {
-	
-}
+	return;
+}*/
 
 void
 transfer_xml_to_gui (GstTool *tool, gpointer data)

@@ -33,7 +33,7 @@
 #include "disks-storage.h"
 #include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"
-#include "disks-storage-partition.h"
+#include "disks-partition.h"
 #include "disks-gui.h"
 #include "callbacks.h"
 
@@ -63,8 +63,6 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 	GList            *partitions;
 	gulong            size;
 	GtkWidget        *properties_notebook;
-	GtkWidget        *label_properties;
-	GList            *box_children;
 
 	notebook = gst_dialog_get_widget (tool->main_dialog, "main_notebook");
 	
@@ -116,12 +114,12 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 			}
 
 			if (GST_IS_DISKS_STORAGE_DISK (storage)) {		
-				g_object_get (G_OBJECT (storage), "children", &partitions, NULL);
+				g_object_get (G_OBJECT (storage), "partitions", &partitions, NULL);
 				
 				treeview = gst_dialog_get_widget (tool->main_dialog, "partition_list");
 				model = gtk_tree_view_get_model (GTK_TREE_VIEW (treeview));
 				if (partitions) {
-					gst_storage_partition_gui_setup (treeview, partitions);
+					gst_disks_gui_setup_partition (treeview, partitions);
 				
 					selec = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 					gtk_tree_model_get_iter_first (model, &iter);
@@ -146,7 +144,7 @@ gst_on_storage_list_selection_change (GtkWidget *selection, gpointer gdata)
 }
 
 static void
-gst_partition_properties_refresh (GstDisksStoragePartition *part)
+gst_partition_properties_refresh (GstDisksPartition *part)
 {
 	GtkWidget *device_label;
 	GtkWidget *point_entry;
@@ -155,7 +153,7 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 	GtkWidget *mount_button, *status_label;
 	GtkWidget *change_mp_button, *part_browse_button;
 	gchar *point, *device;
-	GstPartitionType type;
+	GstPartitionTypeFs type;
 	gulong size, free;
 	gboolean mounted, listed;
 
@@ -196,7 +194,7 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 		gtk_label_set_text (GTK_LABEL (device_label), device);
 		
 		gtk_label_set_text (GTK_LABEL (fs_label),
-				    gst_disks_storage_partition_get_human_readable_typefs (type));
+				    gst_disks_partition_get_human_readable_typefs (type));
 		
 		gst_disks_gui_setup_mounted (status_label, mount_button, mounted);
 		
@@ -251,14 +249,13 @@ gst_partition_properties_refresh (GstDisksStoragePartition *part)
 void 
 gst_on_partition_list_selection_change (GtkTreeSelection *selection, gpointer gdata)
 {
-	GtkWidget       *notebook;
 	GtkTreeModel    *model;
 	GtkTreeIter      iter;
-	GstDisksStoragePartition *part = NULL;
+	GstDisksPartition *part = NULL;
 
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
-		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
+		if (GST_IS_DISKS_PARTITION (part)) {
 			gst_partition_properties_refresh (part);
 		}
 	} else {
@@ -273,7 +270,7 @@ gst_on_point_entry_changed (GtkWidget *entry, gpointer gdata)
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
 	GtkTreeSelection *selection;
-	GstDisksStoragePartition *part;
+	GstDisksPartition *part;
 	const gchar *point;
 
 	treeview = (GtkWidget *) gdata;
@@ -286,14 +283,14 @@ gst_on_point_entry_changed (GtkWidget *entry, gpointer gdata)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
-		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
+		if (GST_IS_DISKS_PARTITION (part)) {
 			g_object_set (G_OBJECT (part), "point", point, NULL);
 		}
 	}
 }
 
 static gboolean
-gst_disks_partition_mount (GstDisksStoragePartition *part)
+gst_disks_partition_mount (GstDisksPartition *part)
 {
 	xmlDoc *xml;
 	xmlNodePtr root, part_node, node;
@@ -301,12 +298,12 @@ gst_disks_partition_mount (GstDisksStoragePartition *part)
 	gboolean mounted, listed;
 	gchar *buf;
 	gboolean error;
-	GstPartitionType type;
+	GstPartitionTypeFs type;
 
 	g_object_get (G_OBJECT (part), "type", &type, "point", &point,
 		      "device", &device, "mounted", &mounted,
 		      "listed", &listed, NULL);
-	typefs = gst_disks_storage_partition_get_typefs (type);
+	typefs = gst_disks_partition_get_typefs (type);
 
 	xml = gst_tool_run_get_directive (tool, NULL, "mount",
 					  device, typefs, point,
@@ -332,7 +329,7 @@ gst_disks_partition_mount (GstDisksStoragePartition *part)
 			buf = gst_xml_get_child_content (part_node, "typefs");
 			if (buf) {
 				g_object_set (G_OBJECT (part), "type",
-					      gst_disks_storage_partition_get_typefs_from_name (buf),
+					      gst_disks_partition_get_typefs_from_name (buf),
 					      NULL);
 				g_free (buf);
 			}
@@ -359,19 +356,17 @@ gst_disks_partition_mount (GstDisksStoragePartition *part)
 						      node, "state"),
 					      NULL);
 		
-			/*g_object_set (G_OBJECT (part), "mounted", !mounted, NULL);*/
-			
 			gst_xml_doc_destroy (xml);
 			
 			return !error;
 		}
-	} else {
+	} /*else {
 		return FALSE;
-	}
-}
-		
+		}*/
 
-	
+	return FALSE;
+}
+			
 void
 gst_on_mount_button_clicked (GtkWidget *button, gpointer gdata)
 {
@@ -380,7 +375,7 @@ gst_on_mount_button_clicked (GtkWidget *button, gpointer gdata)
 	GtkTreeIter       iter;
 	GtkTreeSelection *selection;
 	GtkWidget        *status_label;
-	GstDisksStoragePartition *part;
+	GstDisksPartition *part;
 	gboolean mounted;
 
 	treeview = (GtkWidget *) gdata;
@@ -388,7 +383,7 @@ gst_on_mount_button_clicked (GtkWidget *button, gpointer gdata)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
-		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
+		if (GST_IS_DISKS_PARTITION (part)) {
 			if (gst_disks_partition_mount (part)) {
 				status_label = gst_dialog_get_widget (tool->main_dialog, "status_label");
 				g_object_get (G_OBJECT (part), "mounted", &mounted, NULL);
@@ -405,8 +400,7 @@ gst_on_browse_button_clicked (GtkWidget *button, gpointer gdata)
 	GtkTreeModel     *model;
 	GtkTreeIter       iter;
 	GtkTreeSelection *selection;
-	GtkWidget        *status_label;
-	GstDisksStoragePartition *part;
+	GstDisksPartition *part;
 	gchar *point, *browser;
 
 	treeview = (GtkWidget *) gdata;
@@ -414,10 +408,10 @@ gst_on_browse_button_clicked (GtkWidget *button, gpointer gdata)
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (treeview));
 	if (gtk_tree_selection_get_selected (selection, &model, &iter)) {
 		gtk_tree_model_get (model, &iter, PARTITION_LIST_POINTER, &part, -1);
-		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
+		if (GST_IS_DISKS_PARTITION (part)) {
 			g_object_get (G_OBJECT (part), "point", &point, NULL);
 			if (point) {
-				if (browser = g_find_program_in_path ("nautilus")) {
+				if ((browser = g_find_program_in_path ("nautilus"))) {
 					g_spawn_command_line_async (
 						g_strdup_printf ("%s %s", browser, point),
 						NULL);
@@ -455,10 +449,11 @@ gst_on_partition_list_button_press (GtkTreeView *treeview, GdkEventButton *event
 void
 gst_disks_storage_get_device_speed_cb (GstDirectiveEntry *entry)
 {
-	xmlDoc *xml;
-	xmlNodePtr root, speed;
-	gchar *buf, *device, *value, *media;
 	GtkWidget *speed_label;
+	xmlDoc *xml;
+	xmlNodePtr root;
+	gchar *device, *media;
+	gchar *buf = NULL;
 	GstDisksStorage *storage;
 
 	storage = (GstDisksStorage *) entry->data;

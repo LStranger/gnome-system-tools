@@ -26,9 +26,6 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
-#include "gst.h"
-
 #include "disks-config.h"
 #include "disks-storage.h"
 

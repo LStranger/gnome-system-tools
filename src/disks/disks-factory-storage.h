@@ -24,4 +24,4 @@
 
 #include "disks-storage.h"
 
-GstDisksStorage* gst_disks_factory_storage_get (gchar *media);
+GstDisksStorage* gst_disks_factory_storage_get (const gchar *media);

@@ -24,13 +24,11 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <libgnome/gnome-i18n.h>
 
-#include "gst.h"
 #include "disks-storage.h"
 #include "disks-storage-cdrom.h"
-
-extern GstTool *tool;
+#include "disks-gui.h"
 
 #define PARENT_TYPE GST_TYPE_DISKS_STORAGE
 
@@ -183,8 +181,6 @@ static void
 storage_cdrom_setup_properties_widget (GstDisksStorage *storage)
 {
 	GstDisksStorageCdrom *cdrom;
-	GtkWidget *speed_label;
-	gchar *speed, *device;
 
 	cdrom = GST_DISKS_STORAGE_CDROM (storage);
 
@@ -299,7 +295,7 @@ gst_disks_storage_cdrom_get_status_from_name (const gchar *status)
 		return CDROM_STATUS_AUDIO;
 	else if (g_ascii_strcasecmp (status, "mixed") == 0)
 		return CDROM_STATUS_MIXED;
-	else if (g_ascii_strcasecmp (status, "blank") == 0)
+	else /*if (g_ascii_strcasecmp (status, "blank") == 0)*/
 		return CDROM_STATUS_BLANK;
 }
 
@@ -315,7 +311,8 @@ gst_disks_storage_cdrom_get_status (GstCdromStatus status)
 		return g_strdup ("audio");
 	case CDROM_STATUS_MIXED:
 		return g_strdup ("mixed");
-	case CDROM_STATUS_BLANK:
+		/*case CDROM_STATUS_BLANK:*/
+	default:
 		return g_strdup ("blank");
 	}
 }

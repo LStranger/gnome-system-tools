@@ -24,16 +24,16 @@
 #  include <config.h>
 #endif
 
-#include <gnome.h>
+#include <libgnome/gnome-i18n.h>
 
-#include "disks-storage.h"
-#include "disks-storage-partition.h"
+#include "disks-partition.h"
 
-#define PARENT_TYPE GST_TYPE_DISKS_STORAGE
+#define PARENT_TYPE G_TYPE_OBJECT
 
 
 enum {
 	PROP_0,
+	PROP_NAME,
 	PROP_DEVICE,
 	PROP_TYPE,
 	PROP_POINT,
@@ -46,10 +46,11 @@ enum {
 	PROP_DETECTED
 };
 
-struct _GstDisksStoragePartitionPriv
+struct _GstDisksPartitionPriv
 {
+	gchar    *name;
 	gchar    *device;
-	GstPartitionType type;
+	GstPartitionTypeFs type;
 	gchar    *point;
 	gulong   size;
 	gulong   free;
@@ -60,24 +61,24 @@ struct _GstDisksStoragePartitionPriv
 	gboolean detected;
 };
 
-static void storage_partition_init       (GstDisksStoragePartition      *storage);
-static void storage_partition_class_init (GstDisksStoragePartitionClass *klass);
-static void storage_partition_finalize   (GObject                       *object);
+static void partition_init       (GstDisksPartition      *storage);
+static void partition_class_init (GstDisksPartitionClass *klass);
+static void partition_finalize   (GObject                       *object);
 
-static void storage_partition_set_property (GObject  *object, guint prop_id,
-					    const GValue *value, GParamSpec *spec);
-static void storage_partition_get_property (GObject  *object, guint prop_id,
-					    GValue *value, GParamSpec *spec);
+static void partition_set_property (GObject  *object, guint prop_id,
+				    const GValue *value, GParamSpec *spec);
+static void partition_get_property (GObject  *object, guint prop_id,
+				    GValue *value, GParamSpec *spec);
 
 static GObjectClass *parent_class = NULL;
 
-#define GST_PARTITION_TYPE (gst_partition_type_get_type ())
+#define GST_PARTITION_TYPE (gst_partition_typefs_get_type ())
 
 static GType
-gst_partition_type_get_type (void)
+gst_partition_typefs_get_type (void)
 {
-	static GType partition_type_type = 0;
-	static GEnumValue partition_type[] = {
+	static GType partition_typefs_type = 0;
+	static GEnumValue partition_typefs[] = {
 		{ PARTITION_TYPE_EXT2,     "0", NULL },
 		{ PARTITION_TYPE_EXT3,     "1", NULL },
 		{ PARTITION_TYPE_REISERFS, "2", NULL },
@@ -89,57 +90,59 @@ gst_partition_type_get_type (void)
 		{ PARTITION_TYPE_FREE,     "8", NULL },
 		{ PARTITION_TYPE_UNKNOWN,  "9", NULL },
 	};
-	if (!partition_type_type) {
-		partition_type_type = g_enum_register_static ("GstPartitionType", partition_type);
+	if (!partition_typefs_type) {
+		partition_typefs_type = g_enum_register_static ("GstPartitionTypeFs", partition_typefs);
 	}
-	return partition_type_type;
+	return partition_typefs_type;
 }
 
 
 GType
-gst_disks_storage_partition_get_type (void)
+gst_disks_partition_get_type (void)
 {
 	static GType type = 0;
 	
 	if (!type) {
 		static const GTypeInfo info = {
-			sizeof (GstDisksStoragePartitionClass),
+			sizeof (GstDisksPartitionClass),
 			(GBaseInitFunc) NULL,
 			(GBaseFinalizeFunc) NULL,
-			(GClassInitFunc) storage_partition_class_init,
+			(GClassInitFunc) partition_class_init,
 			NULL,
 			NULL,
-			sizeof (GstDisksStoragePartition),
+			sizeof (GstDisksPartition),
 			0,
-			(GInstanceInitFunc) storage_partition_init
+			(GInstanceInitFunc) partition_init
 		};
-		type = g_type_register_static (PARENT_TYPE, "GstDisksStoragePartition",
+		type = g_type_register_static (PARENT_TYPE, "GstDisksPartition",
 					       &info, 0);
 	   }
 	   return type;
 }
 
 static void
-storage_partition_init (GstDisksStoragePartition *storage)
+partition_init (GstDisksPartition *part)
 {
-	g_return_if_fail (GST_IS_DISKS_STORAGE_PARTITION (storage));
+	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
 	
-	storage->priv = g_new0 (GstDisksStoragePartitionPriv, 1);
-	storage->priv->size = 0;
-	g_object_set (G_OBJECT (storage), "name", _("Unknown"),
-		      "icon_name", "gnome-dev-harddisk", NULL);
+	part->priv = g_new0 (GstDisksPartitionPriv, 1);
+	part->priv->name = g_strdup (_("Unknown"));
+	part->priv->size = 0;
 }
 
 static void
-storage_partition_class_init (GstDisksStoragePartitionClass *klass)
+partition_class_init (GstDisksPartitionClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
 	parent_class = g_type_class_peek_parent (klass);
 
-	object_class->set_property = storage_partition_set_property;
-	object_class->get_property = storage_partition_get_property;
+	object_class->set_property = partition_set_property;
+	object_class->get_property = partition_get_property;
 
+	g_object_class_install_property (object_class, PROP_NAME,
+					 g_param_spec_string ("name", NULL, NULL,
+							      NULL, G_PARAM_READWRITE));
 	g_object_class_install_property (object_class, PROP_DEVICE,
 					 g_param_spec_string ("device", NULL, NULL,
 							      NULL, G_PARAM_READWRITE));
@@ -175,32 +178,32 @@ storage_partition_class_init (GstDisksStoragePartitionClass *klass)
 					 g_param_spec_boolean ("detected", NULL, NULL, 
 							      FALSE, G_PARAM_READWRITE));
 	
-	object_class->finalize = storage_partition_finalize;
+	object_class->finalize = partition_finalize;
 }
 
 static void
-storage_partition_finalize (GObject *object)
+partition_finalize (GObject *object)
 {
-	GstDisksStoragePartition *storage = GST_DISKS_STORAGE_PARTITION (object);
-	g_return_if_fail (GST_IS_DISKS_STORAGE_PARTITION (storage));
+	GstDisksPartition *part = GST_DISKS_PARTITION (object);
+	g_return_if_fail (GST_IS_DISKS_PARTITION (part));
 
-	if (storage->priv) {
-		g_free (storage->priv);
-		storage->priv = NULL;
+	if (part->priv) {
+		g_free (part->priv);
+		part->priv = NULL;
 	}
 	
 	if (G_OBJECT_CLASS (parent_class)->finalize)
 		(* G_OBJECT_CLASS (parent_class)->finalize) (object);
 }
 
-GstDisksStorage*
-gst_disks_storage_partition_new (void)
+GstDisksPartition*
+gst_disks_partition_new (void)
 {
-	GstDisksStoragePartition *storage;
+	GstDisksPartition *part;
 	
-	storage = g_object_new (GST_TYPE_DISKS_STORAGE_PARTITION, NULL);
+	part = g_object_new (GST_TYPE_DISKS_PARTITION, NULL);
 
-	return GST_DISKS_STORAGE (storage);
+	return part;
 }
 
 static gchar *
@@ -208,7 +211,6 @@ get_partition_name (const gchar *device)
 {
 	gchar *last;
 
-	/* For IDE Devices */
 	last = g_strrstr (device, "/") + 4;
 	if (last)
 		return _(g_strdup_printf ("Partition %s", last));
@@ -218,55 +220,59 @@ get_partition_name (const gchar *device)
 		
 
 static void
-storage_partition_set_property (GObject  *object, guint prop_id, const GValue *value,
+partition_set_property (GObject  *object, guint prop_id, const GValue *value,
 				GParamSpec *spec)
 {
-	GstDisksStoragePartition *storage;
+	GstDisksPartition *part;
 
-	g_return_if_fail (GST_IS_DISKS_STORAGE_PARTITION (object));
+	g_return_if_fail (GST_IS_DISKS_PARTITION (object));
 
-	storage = GST_DISKS_STORAGE_PARTITION (object);
+	part = GST_DISKS_PARTITION (object);
 
 	switch (prop_id) {
+	case PROP_NAME:
+		if (part->priv->name) g_free (part->priv->name);
+		part->priv->name = g_value_dup_string (value);
+		break;
 	case PROP_DEVICE:
-		if (storage->priv->device) g_free (storage->priv->device);
-		storage->priv->device = g_value_dup_string (value);
-		g_object_set (G_OBJECT (storage), "name",
-			      get_partition_name (storage->priv->device),
+		if (part->priv->device) g_free (part->priv->device);
+		part->priv->device = g_value_dup_string (value);
+		g_object_set (G_OBJECT (part), "name",
+			      get_partition_name (part->priv->device),
 			      NULL);
 		break;
 	case PROP_TYPE:
-		storage->priv->type = g_value_get_enum (value);
-		if (storage->priv->type == PARTITION_TYPE_SWAP) {
-			g_object_set (G_OBJECT (storage), "name",
+		part->priv->type = g_value_get_enum (value);
+		if (part->priv->type == PARTITION_TYPE_SWAP) {
+			g_object_set (G_OBJECT (part), "name",
 				      _("Swap Partition"),
 				      NULL);
 		}
 		break;
 	case PROP_POINT:
-		if (storage->priv->point) g_free (storage->priv->point);
-		storage->priv->point = g_value_dup_string (value);
+		if (part->priv->point) g_free (part->priv->point);
+		part->priv->point = g_value_dup_string (value);
 		break;
 	case PROP_SIZE:
-		storage->priv->size = g_value_get_ulong (value);
+		part->priv->size = g_value_get_ulong (value);
 		break;
 	case PROP_FREE:
-		storage->priv->free = g_value_get_ulong (value);
+		part->priv->free = g_value_get_ulong (value);
 		break;
 	case PROP_BOOTABLE:
-		storage->priv->bootable = g_value_get_boolean (value);
+		part->priv->bootable = g_value_get_boolean (value);
 		break;
 	case PROP_INTEGRITYCHECK:
-		storage->priv->integritycheck = g_value_get_boolean (value);
+		part->priv->integritycheck = g_value_get_boolean (value);
 		break;
 	case PROP_MOUNTED:
-		storage->priv->mounted = g_value_get_boolean (value);
+		part->priv->mounted = g_value_get_boolean (value);
 		break;
 	case PROP_LISTED:
-		storage->priv->listed = g_value_get_boolean (value);
+		part->priv->listed = g_value_get_boolean (value);
 		break;
 	case PROP_DETECTED:
-		storage->priv->detected = g_value_get_boolean (value);
+		part->priv->detected = g_value_get_boolean (value);
 		break;
 	default:
 		break;
@@ -274,45 +280,48 @@ storage_partition_set_property (GObject  *object, guint prop_id, const GValue *v
 }
 
 static void
-storage_partition_get_property (GObject  *object, guint prop_id, GValue *value,
+partition_get_property (GObject  *object, guint prop_id, GValue *value,
 				GParamSpec *spec)
 {
-	GstDisksStoragePartition *storage;
+	GstDisksPartition *part;
 
-	g_return_if_fail (GST_IS_DISKS_STORAGE_PARTITION (object));
+	g_return_if_fail (GST_IS_DISKS_PARTITION (object));
 
-	storage = GST_DISKS_STORAGE_PARTITION (object);
+	part = GST_DISKS_PARTITION (object);
 
 	switch (prop_id) {
+	case PROP_NAME:
+		g_value_set_string (value, part->priv->name);
+		break;
 	case PROP_DEVICE:
-		g_value_set_string (value, storage->priv->device);
+		g_value_set_string (value, part->priv->device);
 		break;
 	case PROP_TYPE:
-		g_value_set_enum (value, storage->priv->type);
+		g_value_set_enum (value, part->priv->type);
 		break;
 	case PROP_POINT:
-		g_value_set_string (value, storage->priv->point);
+		g_value_set_string (value, part->priv->point);
 		break;
 	case PROP_SIZE:
-		g_value_set_ulong (value, storage->priv->size);
+		g_value_set_ulong (value, part->priv->size);
 		break;
 	case PROP_FREE:
-		g_value_set_ulong (value, storage->priv->free);
+		g_value_set_ulong (value, part->priv->free);
 		break;
 	case PROP_BOOTABLE:
-		g_value_set_boolean (value, storage->priv->bootable);
+		g_value_set_boolean (value, part->priv->bootable);
 		break;
 	case PROP_INTEGRITYCHECK:
-		g_value_set_boolean (value, storage->priv->integritycheck);
+		g_value_set_boolean (value, part->priv->integritycheck);
 		break;
 	case PROP_MOUNTED:
-		g_value_set_boolean (value, storage->priv->mounted);
+		g_value_set_boolean (value, part->priv->mounted);
 		break;
 	case PROP_LISTED:
-		g_value_set_boolean (value, storage->priv->listed);
+		g_value_set_boolean (value, part->priv->listed);
 		break;
 	case PROP_DETECTED:
-		g_value_set_boolean (value, storage->priv->detected);
+		g_value_set_boolean (value, part->priv->detected);
 		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, spec);
@@ -320,7 +329,7 @@ storage_partition_get_property (GObject  *object, guint prop_id, GValue *value,
 }
 
 gchar *
-gst_disks_storage_partition_get_human_readable_typefs (GstPartitionType type)
+gst_disks_partition_get_human_readable_typefs (GstPartitionTypeFs type)
 {
 	gchar *filesystems[] = {
 		"Extended 2", "Extended 3",
@@ -334,8 +343,8 @@ gst_disks_storage_partition_get_human_readable_typefs (GstPartitionType type)
 	return g_strdup (filesystems[type]);
 }
 
-GstPartitionType
-gst_disks_storage_partition_get_typefs_from_name (const gchar *name)
+GstPartitionTypeFs
+gst_disks_partition_get_typefs_from_name (const gchar *name)
 {
 	if (g_ascii_strcasecmp (name, "ext2") == 0)
 		return PARTITION_TYPE_EXT2;
@@ -359,7 +368,7 @@ gst_disks_storage_partition_get_typefs_from_name (const gchar *name)
 }
 
 gchar *
-gst_disks_storage_partition_get_typefs (GstPartitionType type)
+gst_disks_partition_get_typefs (GstPartitionTypeFs type)
 {
 	switch (type) {
 	case PARTITION_TYPE_EXT2:

@@ -22,17 +22,18 @@
  *          Carlos Garcia Campos <elkalmail@yahoo.es>
  */
 
-#include <gnome.h>
-
-#include "disks-storage.h"
+#include "disks-factory-storage.h"
+#include "disks-partition.h"
 #include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"
 #include "disks-storage-floppy.h"
 
 GstDisksStorage*
-gst_disks_factory_storage_get (gchar *media)
+gst_disks_factory_storage_get (const gchar *media)
 {
-	   GstDisksStorage *storage;
+	   GstDisksStorage *storage = NULL;
+
+	   g_return_val_if_fail (media != NULL, NULL);
 	   
 	   if (media) {
 			 if (g_ascii_strcasecmp (media, "disk") == 0)
@@ -41,12 +42,9 @@ gst_disks_factory_storage_get (gchar *media)
 				    storage = GST_DISKS_STORAGE (gst_disks_storage_cdrom_new ());
 			 else if (g_ascii_strcasecmp (media, "floppy") == 0)
 				    storage = GST_DISKS_STORAGE (gst_disks_storage_floppy_new ());
-			 else {
-				    storage = GST_DISKS_STORAGE (gst_disks_storage_new ());
-			 }
+			 else
+				 g_warning ("Unknown media type: %s\n", media);
 	   }
-	   else
-			 storage = GST_DISKS_STORAGE (gst_disks_storage_new ());
 	   
 	   return storage;
 }

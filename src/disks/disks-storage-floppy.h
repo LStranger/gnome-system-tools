@@ -20,11 +20,10 @@
  *          Carlos Garcia Campos <elkalmail@yahoo.es>
  */
 
-#ifndef __DISKS_STORAGE_CDROM_H__
-#define __DISKS_STORAGE_CDROM_H__
+#ifndef __DISKS_STORAGE_FLOPPY_H__
+#define __DISKS_STORAGE_FLOPPY_H__
 
 #include <glib-object.h>
-#include "disks-storage.h"
 
 #define GST_TYPE_DISKS_STORAGE_FLOPPY         (gst_disks_storage_floppy_get_type ())
 #define GST_DISKS_STORAGE_FLOPPY(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), GST_TYPE_DISKS_STORAGE_FLOPPY, GstDisksStorageFloppy))
@@ -44,7 +43,7 @@ struct _GstDisksStorageFloppyClass {
         GstDisksStorageClass parent_class;
 };
 
-GType            gst_disks_storage_cdrom_get_type (void);
-GstDisksStorage* gst_disks_storage_cdrom_new      (void);
+GType            gst_disks_storage_floppy_get_type (void);
+GstDisksStorage* gst_disks_storage_floppy_new      (void);
 
 #endif /* __GST_DISKS_STORAGE_FLOPPY_H__  */

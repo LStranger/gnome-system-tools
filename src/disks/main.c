@@ -28,9 +28,6 @@
 #endif
 
 #include <gnome.h>
-#include <glade/glade.h>
-
-#include <stdlib.h>
 
 #include "gst.h"
 #include "gst-report-hook.h"

@@ -29,29 +29,31 @@
 #include <gnome.h>
 #include "gst.h"
 
-#include "disks-config.h"
 #include "disks-storage.h"
+#include "disks-partition.h"
 #include "disks-storage-disk.h"
 #include "disks-storage-cdrom.h"
-#include "disks-storage-partition.h"
 #include "disks-gui.h"
 #include "callbacks.h"
 
 extern GstTool *tool;
 GnomeIconTheme *icon_theme;
 
-GtkItemFactoryEntry popup_partition_menu_items[] = {
+/* Uncomment for 0.2 */
+/*GtkItemFactoryEntry popup_partition_menu_items[] = {
 	{ N_("/_Format"), NULL, NULL, POPUP_PARTITION_FORMAT, "<StockItem>", GTK_STOCK_DELETE },
 	{ N_("/_Delete"), NULL, NULL, POPUP_PARTITION_REMOVE, "<StockItem>", GTK_STOCK_REMOVE }
-};
+	};*/
 
-static char *
+/* Uncomment for 0.2 */
+/*static char *
 disks_partition_item_factory_trans (const char *path, gpointer data)
 {
 	return _((gchar*)path);
-}
+}*/
 
-static GtkItemFactory *
+/* Uncomment for 0.2 */
+/*static GtkItemFactory *
 gst_disks_partition_popup_item_factory_create (GtkWidget *treeview)
 {
 	GtkItemFactory *item_factory;
@@ -64,7 +66,7 @@ gst_disks_partition_popup_item_factory_create (GtkWidget *treeview)
 				       (gpointer) treeview);
 
 	return item_factory;
-}
+}*/
 
 gchar *
 gst_storage_get_human_readable_size (const gulong size)
@@ -75,6 +77,8 @@ gst_storage_get_human_readable_size (const gulong size)
 		return g_strdup_printf ("%2.2f MiB", (gfloat) size / 1024);
 	if ((size / 1024) > 1024)
 		return g_strdup_printf ("%2.2f GiB", (gfloat) size / (1024 * 1024));
+	
+	return NULL;
 }
 
 gfloat 
@@ -86,6 +90,8 @@ gst_storage_get_float_size (const gulong size)
 		return ((gfloat) size / 1024);
 	if ((size / 1024) > 1024)
 		return ((gfloat) size / (1024 * 1024));
+
+	return (gfloat) 0.0;
 }
 
 GdkPixbuf *
@@ -156,7 +162,6 @@ gst_storage_list_set (GtkWidget *treeview, GList *storages)
 	GtkTreeIter iter;
 	GList *list = NULL;
 	GstDisksStorage *dsk;
-	gint i;
 	gchar *icon, *name;
 	gulong size;
 
@@ -242,15 +247,14 @@ gst_partition_list_new ()
 
 
 void 
-gst_storage_partition_gui_setup (GtkWidget *treeview, GList *partitions)
+gst_disks_gui_setup_partition (GtkWidget *treeview, GList *partitions)
 {
 	GtkTreeModel *model;
 	GtkTreeIter iter;
 	GList *list;
-	GstDisksStoragePartition *part;
-	gint i;
+	GstDisksPartition *part;
 	gchar *device, *name;
-	GstPartitionType type;
+	GstPartitionTypeFs type;
 
 	g_return_if_fail (treeview != NULL);
 	g_return_if_fail (partitions != NULL);
@@ -261,7 +265,7 @@ gst_storage_partition_gui_setup (GtkWidget *treeview, GList *partitions)
 	list = g_list_first (partitions);
 	while (list) {
 		part = list->data;
-		if (GST_IS_DISKS_STORAGE_PARTITION (part)) {
+		if (GST_IS_DISKS_PARTITION (part)) {
 			g_object_get (G_OBJECT (part),
 				      "device", &device,
 				      "name", &name,
@@ -373,7 +377,8 @@ gst_storage_gui_setup (GstDisksConfig *cfg)
 /* Porperties Widgets */
 
 /* Disk */
-void gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
+void
+gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
 {
 	gchar *speed, *device;
 
@@ -394,7 +399,8 @@ void gst_disks_gui_setup_disk_properties (GstDisksStorageDisk *disk)
 }
 
 /* CDROM */
-void gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
+void
+gst_disks_gui_setup_cdrom_properties (GstDisksStorageCdrom *cdrom)
 {
 	gchar *speed, *device;
 	gboolean play_audio, write_cdr, write_cdrw, read_dvd;

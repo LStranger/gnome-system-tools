@@ -12,7 +12,7 @@ bin_PROGRAMS = disks-admin
 
 ## SUBDIRS =
 CPPFLAGS =
-INCLUDES = $(GST_TOOL_CFLAGS)
+INCLUDES = -Wall $(GST_TOOL_CFLAGS)
 CLEANFILES = $(GST_TOOL_CLEANFILES)
 EXTRA_DIST = $(GST_TOOL_EXTRA_DIST)
 
@@ -24,7 +24,7 @@ disks_admin_SOURCES = \
 	disks-config.c       	  disks-config.h \
 	disks-storage.c 	  disks-storage.h \
 	disks-storage-disk.c 	  disks-storage-disk.h \
-	disks-storage-partition.c disks-storage-partition.h \
+	disks-partition.c 	  disks-partition.h \
 	disks-storage-cdrom.c     disks-storage-cdrom.h \
 	disks-storage-floppy.c    disks-storage-floppy.h \
 	disks-factory-storage.c   disks-factory-storage.h \
