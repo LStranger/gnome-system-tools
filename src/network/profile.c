@@ -469,32 +469,38 @@ profile_set_active (xmlNodePtr profile, GstTool *tool)
 void
 profile_populate_option_menu (GstTool *tool, xmlNodePtr root)
 {
-	xmlNodePtr profiledb = gst_xml_element_find_first (root, "profiledb");
-	xmlNodePtr node;
-	GtkWidget *profiles_menu = gst_dialog_get_widget (tool->main_dialog,
-							  "network_profiles_menu");
-	GtkWidget *menu = gtk_menu_new ();
-	GtkWidget *menu_item;
-	gchar *profile_name;
-	gint counter = 1;
-	gint default_profile = 0;
+	xmlNodePtr    profiledb, node;
+	GtkWidget    *menu;
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	gchar        *profile_name;
+	gint          default_profile, counter;
 
-	menu_item = gtk_menu_item_new_with_label (_("Unknown"));
-	gtk_widget_set_sensitive (menu_item, FALSE);
-	gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+	profiledb = gst_xml_element_find_first (root, "profiledb");
+	menu      = gst_dialog_get_widget (tool->main_dialog, "network_profiles_menu");
+	default_profile = 0;
+	counter = 1;
+
+	model = GTK_TREE_MODEL (gtk_list_store_new (2, G_TYPE_STRING, G_TYPE_POINTER));
+	gtk_combo_box_set_model (GTK_COMBO_BOX (menu), model);
+	g_object_unref (G_OBJECT (model));
+
+	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+			    0, _("Unknown"),
+			    1, NULL,
+			    -1);
 
 	for (node = gst_xml_element_find_first (profiledb, "profile");
 	     node != NULL;
 	     node = gst_xml_element_find_next (node, "profile"))
 	{
 		profile_name = gst_xml_get_child_content (node, "name");
-
-		/* set the option menu entry */
-		menu_item = gtk_menu_item_new_with_label (profile_name);
-		g_signal_connect (G_OBJECT (menu_item), "activate",
-				  G_CALLBACK (on_network_profile_option_selected), node);
-		
-		gtk_menu_shell_append (GTK_MENU_SHELL (menu), menu_item);
+		gtk_list_store_append (GTK_LIST_STORE (model), &iter);
+		gtk_list_store_set (GTK_LIST_STORE (model), &iter,
+				    0, profile_name,
+				    1, node,
+				    -1);
 
 		if (profile_compare_with_current_configuration (root, node))
 			default_profile = counter;
@@ -503,8 +509,5 @@ profile_populate_option_menu (GstTool *tool, xmlNodePtr root)
 		counter++;
 	}
 
-	gtk_widget_set_sensitive (profiles_menu, TRUE);
-	gtk_widget_show_all (menu);
-	gtk_option_menu_set_menu (GTK_OPTION_MENU (profiles_menu), menu);
-	gtk_option_menu_set_history (GTK_OPTION_MENU (profiles_menu), default_profile);
+	gtk_combo_box_set_active (GTK_COMBO_BOX (menu), default_profile);
 }

@@ -107,6 +107,7 @@ GstDialogSignal signals[] = {
 	{ "network_connection_other_ip_address", "focus_out_event", G_CALLBACK (on_network_druid_ip_address_focus_out) },
 
 	/* Network profiles callbacks */
+	{ "network_profiles_menu", "changed", G_CALLBACK (on_network_profile_option_selected) },
 	{ "network_profiles_button", "clicked", G_CALLBACK (on_network_profiles_button_clicked) },
 	{ "network_profile_new", "clicked", G_CALLBACK (on_network_profile_new_clicked) },
 	{ "network_profile_delete", "clicked", G_CALLBACK (on_network_profile_delete_clicked) },

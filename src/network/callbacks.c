@@ -1481,24 +1481,35 @@ on_network_profile_delete_clicked (GtkWidget *widget, gpointer data)
 void
 on_network_profile_option_selected (GtkWidget *widget, gpointer data)
 {
-	GtkWidget *connection_table = gst_dialog_get_widget (tool->main_dialog, "connection_list");
+	GtkWidget    *connection_table = gst_dialog_get_widget (tool->main_dialog, "connection_list");
 	GtkTreeModel *connection_model = gtk_tree_view_get_model (GTK_TREE_VIEW (connection_table));
-	GtkWidget *statichost_table = gst_dialog_get_widget (tool->main_dialog, "statichost_list");
+	GtkWidget    *statichost_table = gst_dialog_get_widget (tool->main_dialog, "statichost_list");
 	GtkTreeModel *statichost_model = gtk_tree_view_get_model (GTK_TREE_VIEW (statichost_table));
-	GtkWidget *dns_table = gst_dialog_get_widget (tool->main_dialog, "dns_list");
+	GtkWidget    *dns_table = gst_dialog_get_widget (tool->main_dialog, "dns_list");
 	GtkTreeModel *dns_model = gtk_tree_view_get_model (GTK_TREE_VIEW (dns_table));
-	GtkWidget *search_table = gst_dialog_get_widget (tool->main_dialog, "search_list");
+	GtkWidget    *search_table = gst_dialog_get_widget (tool->main_dialog, "search_list");
 	GtkTreeModel *search_model = gtk_tree_view_get_model (GTK_TREE_VIEW (search_table));
-	xmlNodePtr profile = (xmlNodePtr) data;
-	
-	profile_set_active (profile, tool);
+	GtkTreeModel *model;
+	GtkTreeIter   iter;
+	xmlNodePtr    profile;
 
-	gtk_list_store_clear (GTK_LIST_STORE (connection_model));
-	gtk_list_store_clear (GTK_LIST_STORE (statichost_model));
-	gtk_list_store_clear (GTK_LIST_STORE (dns_model));
-	gtk_list_store_clear (GTK_LIST_STORE (search_model));
+	model = gtk_combo_box_get_model (GTK_COMBO_BOX (widget));
+
+	if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (widget), &iter)) {
+		gtk_tree_model_get (model, &iter, 1, &profile, -1);
+
+		if (!profile)
+			return;
 	
-	transfer_profile_to_gui (tool, NULL);
+		profile_set_active (profile, tool);
+
+		gtk_list_store_clear (GTK_LIST_STORE (connection_model));
+		gtk_list_store_clear (GTK_LIST_STORE (statichost_model));
+		gtk_list_store_clear (GTK_LIST_STORE (dns_model));
+		gtk_list_store_clear (GTK_LIST_STORE (search_model));
+	
+		transfer_profile_to_gui (tool, NULL);
+	}
 }
 
 void
