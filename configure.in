@@ -116,18 +116,18 @@ dnl =====================================================
 dnl Ximian archiver checking
 dnl =====================================================
 
-dnl AC_MSG_CHECKING(for config_archiver >= 1.5.0)
-dnl if gnome-config --libs config_archiver > /dev/null 2>&1; then
-dnl 	vers=`gnome-config --modversion config_archiver | sed -e "s/config-archiver-//" -e 's/cvs$//' -e 's/pre$//' | \
-dnl 		 awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
-dnl 	if test "$vers" -ge 1050000; then
-dnl 		AC_MSG_RESULT(found)
-dnl 	 else
-dnl 		AC_MSG_ERROR(You need at least Control Center 1.5.0 for this version of ximian-setup-tools (CVS module gnome-control-center))
-dnl 	fi
-dnl else
-dnl 	   AC_MSG_ERROR(You need at least Control Center 1.5.0 for this version of ximian-setup-tools (CVS module gnome-control-center))
-dnl fi
+AC_MSG_CHECKING(for config_archiver >= 1.5.0)
+if gnome-config --libs config_archiver > /dev/null 2>&1; then
+	vers=`gnome-config --modversion config_archiver | sed -e "s/config-archiver-//" -e 's/cvs$//' -e 's/pre$//' | \
+		 awk 'BEGIN { FS = "."; } { print $1 * 1000000 + $2 * 10000 + $3 * 100 + $4;}'`
+	if test "$vers" -ge 1050000; then
+		AC_MSG_RESULT(found)
+	 else
+		AC_MSG_ERROR(You need at least Control Center 1.5.0 for this version of ximian-setup-tools (CVS module gnome-control-center))
+	fi
+else
+	   AC_MSG_ERROR(You need at least Control Center 1.5.0 for this version of ximian-setup-tools (CVS module gnome-control-center))
+fi
 dnl =====================================================
 dnl END: Ximian Archiver
 dnl =====================================================
