@@ -28,6 +28,7 @@ gchar *s = N_("2. Username and password");
 gchar *s = N_("Next, please enter the user name and password which were assigned to you by your ISP.");
 gchar *s = N_("User name:");
 gchar *s = N_("Password:");
+gchar *s = N_("Password (confirm):");
 gchar *s = N_("Warning message goes here..\n"
               "");
 gchar *s = N_("To continue configuring your account, click \"Next\". To quit, click \"Cancel\".\n"
