@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools.HEAD.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-07 12:53+0200\n"
+"POT-Creation-Date: 2003-07-16 12:27+0200\n"
 "PO-Revision-Date: 2003-06-15 15:16+0100\n"
 "Last-Translator: Vincent van Adrighem <V.vanAdrighem@dirck.mine.nu>\n"
 "Language-Team: Dutch <vertaling@nl.linux.org>\n"
@@ -1202,7 +1202,7 @@ msgstr "Verander het IP-adres of naam van de alias "
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: interfaces/nameresolution.glade.in.h:10 interfaces/network.glade.in.h:48
+#: interfaces/nameresolution.glade.in.h:10 interfaces/network.glade.in.h:49
 #: interfaces/runlevel.glade.in.h:5
 msgid "Description:"
 msgstr "Beschrijving:"
@@ -1229,7 +1229,7 @@ msgstr "Bestaande:"
 
 #: interfaces/nameresolution.glade.in.h:16 interfaces/shares.glade.in.h:24
 msgid "Host"
-msgstr "Computer"
+msgstr "Host"
 
 #: interfaces/nameresolution.glade.in.h:17
 msgid "Host name:"
@@ -1408,7 +1408,7 @@ msgstr "Nieuwe Internetverbinding toevoegen"
 msgid "Address configuration (Step 1 of 2)"
 msgstr "Adresconfiguratie  (stap 1 van 2)"
 
-#: interfaces/network.glade.in.h:29 interfaces/users.glade.in.h:15
+#: interfaces/network.glade.in.h:30 interfaces/users.glade.in.h:15
 msgid "Advanced"
 msgstr "Geavanceerd"
 
@@ -1492,7 +1492,7 @@ msgstr ""
 "Geef het telefoonnummer dat u gebruikt om met internet te verbinden. Dit "
 "telefoonnummer wordt gegeven door uw ISP."
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:54
 msgid "General"
 msgstr "Algemeen"
 
@@ -1822,7 +1822,7 @@ msgstr "_Instellingen:"
 msgid "_Configure"
 msgstr "In_stellen"
 
-#: interfaces/network.glade.in.h:142
+#: interfaces/network.glade.in.h:145
 msgid "_Description:"
 msgstr "_Beschrijving:"
 
@@ -1890,7 +1890,7 @@ msgstr "_Netwerkprofielen"
 msgid "_Parallel Line"
 msgstr "_Parallelle verbinding"
 
-#: interfaces/network.glade.in.h:159 interfaces/print.glade.in.h:73
+#: interfaces/network.glade.in.h:162 interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Wachtwoord:"
 
@@ -2360,7 +2360,7 @@ msgstr "CliÃ«nten"
 
 #: interfaces/shares.glade.in.h:12
 msgid "Comment:"
-msgstr "Commentaar:"
+msgstr "Opmerking:"
 
 #: interfaces/shares.glade.in.h:14
 msgid "Do not _remount this share after computer reboots"
@@ -2992,12 +2992,11 @@ msgstr "_Werktelefoon:"
 msgid "profiles_table"
 msgstr "profiles_table"
 
-#. give our dialog an OK button and title
-#: src/boot/boot-append-editor.c:118
+#: src/boot/boot-append-editor.c:119 src/boot/callbacks.c:168
 msgid "Boot Append Editor"
 msgstr "Opstart kernelopties bewerken"
 
-#: src/boot/boot-append-gui.c:241
+#: src/boot/boot-append-gui.c:226
 #, c-format
 msgid "vga=%s is not a valid vga value"
 msgstr "vga=%s is geen geldige vga-waarde"
@@ -3008,7 +3007,7 @@ msgid "Boot Image Wizard"
 msgstr "Opstart Image DruÃ¯de"
 
 #. give our dialog an OK button and title
-#: src/boot/boot-image-editor.c:108
+#: src/boot/boot-image-editor.c:108 src/boot/callbacks.c:79
 msgid "Boot Image Editor"
 msgstr "Opstart Image bewerken"
 
@@ -3069,7 +3068,7 @@ msgstr "Opstarten"
 msgid "Boot Manager"
 msgstr "Opstartbeheer"
 
-#: src/boot/callbacks.c:239
+#: src/boot/callbacks.c:385
 msgid ""
 "Without at least one boot image,\n"
 "your system will not start.\n"
@@ -3077,12 +3076,12 @@ msgstr ""
 "Zonder tenminste een opstart-image\n"
 "zal uw systeem niet kunnen starten.\n"
 
-#: src/boot/callbacks.c:254
+#: src/boot/callbacks.c:400
 #, c-format
 msgid "Are you sure you want to delete '%s'?"
 msgstr "Weet u zeker dat u '%s' wilt verwijderen?"
 
-#: src/boot/callbacks.c:299 src/runlevel/callbacks.c:97
+#: src/boot/callbacks.c:445 src/runlevel/callbacks.c:97
 #, c-format
 msgid ""
 "The file ``%s'' is missing or could not be read:\n"
@@ -3118,14 +3117,6 @@ msgstr "/_eigenschappen"
 #: src/boot/table.c:56 src/users/table.c:50 src/users/table.c:57
 msgid "/_Delete"
 msgstr "/Verwij_deren"
-
-#: src/common/System.directory.in.in.h:1
-msgid "System"
-msgstr "Systeem"
-
-#: src/common/System.directory.in.in.h:2
-msgid "System administration"
-msgstr "Systeembeheer"
 
 #: src/common/gst-dialog.c:60
 #, c-format
@@ -3417,11 +3408,11 @@ msgstr "CliÃ«nt"
 
 #: src/network/callbacks.c:1045
 msgid "Low"
-msgstr ""
+msgstr "Laag"
 
 #: src/network/callbacks.c:1047
 msgid "Medium"
-msgstr ""
+msgstr "Middel"
 
 #: src/network/callbacks.c:1049
 msgid "Loud"
@@ -3918,3 +3909,9 @@ msgstr "Commentaar"
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and groups."
 msgstr "Gebruikers en groepen."
+
+#~ msgid "System"
+#~ msgstr "Systeem"
+
+#~ msgid "System administration"
+#~ msgstr "Systeembeheer"
