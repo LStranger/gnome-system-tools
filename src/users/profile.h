@@ -67,7 +67,9 @@ typedef struct
 
 extern ProfileTable *profile_table;
 
+void profile_save (gchar *name);
 Profile *profile_get_default (void);
+void profile_get_from_xml (xmlNodePtr root);
 void profile_destroy (Profile *pf);
 
 void profile_table_init (void);

@@ -244,14 +244,15 @@ transfer_xml_to_gui (XstTool *tool, gpointer data)
 
 	transfer_logindefs_from_xml (root);
 	transfer_logindefs_to_gui ();
-	
-	/* Popuplate tables */
-	populate_all_tables ();
 
 	/* Profiles */
 	profile_table_init ();
 	pf = profile_get_default ();
 	profile_table_add_profile (pf, TRUE);
+	profile_get_from_xml (root);
+	
+	/* Popuplate tables */
+	populate_all_tables ();
 }
 
 void

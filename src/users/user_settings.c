@@ -30,6 +30,7 @@
 #include "transfer.h"
 #include "e-table.h"
 #include "user_settings.h"
+#include "profile.h"
 
 extern XstTool *tool;
 
@@ -191,6 +192,7 @@ user_settings_basic_fill (UserSettings *us)
 {
 	/* Fill "Basic" tab widgets. */
 	gchar *buf;
+	Profile *pf;
 
 	if (!us->new)
 	{
@@ -210,10 +212,13 @@ user_settings_basic_fill (UserSettings *us)
 
 	else /* New user. */
 	{
+		pf = profile_table_get_profile (NULL);
+		
 		gtk_spin_button_set_value (us->basic->uid,
 					   g_strtod (find_new_id (us->node), NULL));
-		
-		gtk_entry_set_text (us->basic->shell, "/bin/bash");
+
+		gtk_entry_set_text (us->basic->home,  g_strdup (pf->home_prefix));
+		gtk_entry_set_text (us->basic->shell, g_strdup (pf->shell));
 	}
 }
 
@@ -259,6 +264,7 @@ static void
 user_settings_pwd_fill (UserSettings *us)
 {
 	gchar *buf;
+	Profile *pf;
 	
 	if (!us->new)
 	{
@@ -277,9 +283,11 @@ user_settings_pwd_fill (UserSettings *us)
 
 	else
 	{
-		gtk_spin_button_set_value (us->pwd->min,  logindefs.passwd_min_day_use);
-		gtk_spin_button_set_value (us->pwd->max,  logindefs.passwd_max_day_use);
-		gtk_spin_button_set_value (us->pwd->days, logindefs.passwd_warning_advance_days);
+		pf = profile_table_get_profile (NULL);
+		
+		gtk_spin_button_set_value (us->pwd->min,  pf->pwd_mindays);
+		gtk_spin_button_set_value (us->pwd->max,  pf->pwd_maxdays);
+		gtk_spin_button_set_value (us->pwd->days, pf->pwd_warndays);
 	}
 }
 
@@ -341,9 +349,11 @@ user_settings_destroy (UserSettings *us)
 void
 user_settings_helper (UserSettings *us)
 {
+	Profile *pf;
+	gchar *buf;
 	/* In basic complexity mode user doesn't see all fields, so we have to fill them. */
 
-	/* Hardcoded homedir preffix - BAD */
-	gtk_entry_set_text (us->basic->home,
-			    g_strdup_printf ("/home/%s", gtk_entry_get_text (us->basic->name)));
+	pf = profile_table_get_profile (NULL);
+	buf = g_strdup_printf ("%s%s", pf->home_prefix, gtk_entry_get_text (us->basic->name));
+	gtk_entry_set_text (us->basic->home, buf);
 }

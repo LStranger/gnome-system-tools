@@ -32,6 +32,15 @@ extern XstTool *tool;
 ProfileTable *profile_table;
 static ProfileTab *pft;
 
+
+static guint
+my_atoi (gchar *str) 
+{
+	if (!str || !*str)
+		return 0;
+	return atoi (str);
+}
+
 static void
 profile_tab_init (void)
 {
@@ -60,15 +69,9 @@ profile_tab_init (void)
 static void
 profile_fill (Profile *pf)
 {
-	GtkWidget *li;
-	
 	if (!pft)
 		profile_tab_init ();
 
-	/* add name to combo box */
-	li = gtk_list_item_new_with_label (pf->name);
-	gtk_widget_show (li);
-	gtk_container_add (GTK_CONTAINER (pft->name->list), li);
 	gtk_entry_set_text (GTK_ENTRY (pft->name->entry), pf->name);
 
 	gtk_entry_set_text (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix)),
@@ -83,8 +86,49 @@ profile_fill (Profile *pf)
 	gtk_spin_button_set_value (pft->pwd_maxdays,  (gfloat) pf->pwd_maxdays);
 	gtk_spin_button_set_value (pft->pwd_mindays,  (gfloat) pf->pwd_mindays);
 	gtk_spin_button_set_value (pft->pwd_warndays, (gfloat) pf->pwd_warndays);
-	gtk_spin_button_set_value (pft->pwd_len,      (gfloat) pf->pwd_len);	
+	gtk_spin_button_set_value (pft->pwd_len,      (gfloat) pf->pwd_len);
 }
+
+void
+profile_save (gchar *name)
+{
+	gchar *buf;
+	Profile *pf;
+	
+	if (name)
+		buf = g_strdup (name);
+	else
+		buf = g_strdup (profile_table->selected);
+	
+	pf = (Profile *)g_hash_table_lookup (profile_table->hash, buf);
+	g_free (buf);
+
+	if (pf)
+	{
+		if (pf->name)
+			g_free (pf->name);
+		pf->name = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->name->entry)));
+
+		if (pf->home_prefix)
+			g_free (pf->home_prefix);
+		pf->home_prefix = g_strdup (gtk_entry_get_text
+					    (GTK_ENTRY (gnome_file_entry_gtk_entry (pft->home_prefix))));
+
+		if (pf->shell)
+			g_free (pf->shell);
+		pf->shell = g_strdup (gtk_entry_get_text (GTK_ENTRY (pft->shell->entry)));
+		
+		pf->umin = gtk_spin_button_get_value_as_int (pft->umin);
+		pf->umax = gtk_spin_button_get_value_as_int (pft->umax);
+		pf->gmin = gtk_spin_button_get_value_as_int (pft->gmin);
+		pf->gmax = gtk_spin_button_get_value_as_int (pft->gmax);
+
+		pf->pwd_maxdays  = gtk_spin_button_get_value_as_int (pft->pwd_maxdays);
+		pf->pwd_mindays  = gtk_spin_button_get_value_as_int (pft->pwd_mindays);
+		pf->pwd_warndays = gtk_spin_button_get_value_as_int (pft->pwd_warndays);
+		pf->pwd_len      = gtk_spin_button_get_value_as_int (pft->pwd_len);
+	}
+}	
 
 Profile *
 profile_get_default (void)
@@ -113,6 +157,56 @@ profile_get_default (void)
 }
 
 void
+profile_get_from_xml (xmlNodePtr root)
+{
+	xmlNodePtr node, n0, pf_node;
+	Profile *pf;
+	gchar *profile_tags[] = {
+		"home_prefix", "shell", "passwd_max_day_use",
+		"passwd_min_day_use", "passwd_min_length", "passwd_warning_advance_days", "new_user_min_id",
+		"new_user_max_id", "new_group_min_id", "new_group_max_id", "name", NULL
+	};
+	gchar *tag;
+	gint i;
+
+	node = xst_xml_element_find_first (root, "profiles");
+	if (!node)
+		return;
+
+	pf_node = xst_xml_element_find_first (node, "profile");	
+	while (pf_node)
+	{
+		pf = g_new (Profile, 1);
+		for (i = 0, tag = profile_tags[0]; tag; i++, tag = profile_tags[i]) 
+		{
+			n0 = xst_xml_element_find_first (pf_node, tag);
+			
+			if (n0) 
+			{
+				switch (i)
+				{
+				case  0: pf->home_prefix  = xst_xml_element_get_content (n0); break;
+				case  1: pf->shell        = xst_xml_element_get_content (n0); break;
+				case  2: pf->pwd_maxdays  = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  3: pf->pwd_mindays  = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  4: pf->pwd_len      = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  5: pf->pwd_warndays = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  6: pf->umin         = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  7: pf->umax         = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  8: pf->gmin         = my_atoi (xst_xml_element_get_content (n0)); break;
+				case  9: pf->gmax         = my_atoi (xst_xml_element_get_content (n0)); break;
+				case 10: pf->name         = xst_xml_element_get_content (n0); break;
+					
+				case 11: g_warning ("profile_get_from_xml: we shouldn't be here."); break;
+				}
+			}
+		}
+		profile_table_add_profile (pf, FALSE);
+		pf_node = xst_xml_element_find_next (pf_node, "profile");
+	}
+}
+
+void
 profile_destroy (Profile *pf)
 {
 	if (!pf)
@@ -134,7 +228,7 @@ profile_table_init (void)
 		profile_table = g_new (ProfileTable, 1);
 
 		profile_table->selected = NULL;
-		profile_table->hash = g_hash_table_new (g_direct_hash, g_str_equal);
+		profile_table->hash = g_hash_table_new (g_str_hash, g_str_equal);
 	}
 }
 
@@ -153,8 +247,18 @@ profile_table_destroy (void)
 void
 profile_table_add_profile (Profile *pf, gboolean select)
 {
+	GtkWidget *li;
+	
 	g_hash_table_insert (profile_table->hash, pf->name, pf);
 
+	if (!pft)
+		profile_tab_init ();
+	
+	/* add name to combo box */
+	li = gtk_list_item_new_with_label (pf->name);
+	gtk_widget_show (li);
+	gtk_container_add (GTK_CONTAINER (pft->name->list), li);
+	
 	if (select || g_hash_table_size (profile_table->hash) == 1)
 	{
 		profile_table->selected = pf->name;
@@ -165,19 +269,30 @@ profile_table_add_profile (Profile *pf, gboolean select)
 void
 profile_table_del_profile (gchar *name)
 {
+	gchar *buf;
 	Profile *pf;
+
+	if (name)
+		buf = g_strdup (name);
+	else
+		buf = g_strdup (profile_table->selected);
 	
-	pf = (Profile *)g_hash_table_lookup (profile_table->hash, name);
+	pf = (Profile *)g_hash_table_lookup (profile_table->hash, buf);
 
 	if (pf)
 	{
-		g_hash_table_remove (profile_table->hash, name);
+		g_hash_table_remove (profile_table->hash, buf);
 		profile_destroy (pf);
 
 		if (g_hash_table_size (profile_table->hash) == 0)
 			profile_table->selected = NULL;
-		/* FIXME: else: point profile_table->selected to next key */
+
+		/* FIXME: else: point profile_tabl->selected to next key.
+		   Remove it from pft->name->list.
+		 */
 	}
+
+	g_free (buf);
 }
 
 Profile *
@@ -205,11 +320,14 @@ profile_table_set_selected (gchar *name)
 	if (!name)
 		return;
 
+	if (profile_table->selected && !strcmp (profile_table->selected, name))
+		return;
+	
 	pf = (Profile *)g_hash_table_lookup (profile_table->hash, name);
 
 	if (!pf)
 		return;
-
+	
 	profile_table->selected = pf->name;
 	profile_fill (pf);
 }

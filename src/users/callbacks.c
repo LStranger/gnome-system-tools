@@ -35,6 +35,7 @@
 #include "passwd.h"
 #include "e-table.h"
 #include "user_settings.h"
+#include "profile.h"
 
 XstTool *tool;
 
@@ -226,6 +227,28 @@ on_network_group_new_clicked (GtkButton *button, gpointer user_data)
 	group_new_prepare (ud);
 }
 
+/* Profiles tab */
+
+void
+on_pro_name_activated (GtkEditable *editable, gpointer user_data)
+{
+	gchar *buf;
+
+	buf = gtk_editable_get_chars (editable, 0, -1);
+	profile_table_set_selected (buf);
+}
+
+void
+on_pro_del_clicked (GtkButton *button, gpointer user_data)
+{
+	profile_table_del_profile (NULL);
+}
+
+void
+on_pro_save_clicked (GtkButton *button, gpointer user_data)
+{
+	profile_save (NULL);
+}
 
 /* User settings callbacks */
 

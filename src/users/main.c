@@ -77,6 +77,8 @@ static XstDialogSignal signals[] = {
 	{ "user_settings_gall",          "unselect_row",  on_user_settings_gall_select_row },
 	{ "user_settings_add",           "clicked",       on_user_settings_add_clicked },
 	{ "user_settings_remove",        "clicked",       on_user_settings_remove_clicked },
+	{ "pro_del",                     "clicked",       on_pro_del_clicked },
+	{ "pro_save",                    "clicked",       on_pro_save_clicked },
 	{ NULL }};
 
 static const XstWidgetPolicy policies[] = {
@@ -133,6 +135,12 @@ connect_signals (void)
 					GINT_TO_POINTER (TABLE_NET_GROUP));
 
 	xst_dialog_connect_signals (tool->main_dialog, signals);
+
+	gtk_signal_connect (GTK_OBJECT (GTK_COMBO (xst_dialog_get_widget (tool->main_dialog,
+									  "pro_name"))->entry),
+			    "changed",
+			    GTK_SIGNAL_FUNC (on_pro_name_activated),
+			    NULL);
 }
 
 static void

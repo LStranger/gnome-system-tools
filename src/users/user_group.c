@@ -30,6 +30,7 @@
 #include "transfer.h"
 #include "e-table.h"
 #include "user_settings.h"
+#include "profile.h"
 
 extern XstTool *tool;
 
@@ -406,20 +407,23 @@ check_group_gid (xmlNodePtr node, gchar *val)
 gboolean
 get_min_max (xmlNodePtr db_node, gint *min, gint *max)
 {
+	Profile *pf;
+	
 	g_return_val_if_fail (db_node != NULL, FALSE);
 
+	pf = profile_table_get_profile (NULL);	
 	if (!strcmp (db_node->name, "userdb"))
 	{
-		*min = logindefs.new_user_min_id;
-		*max = logindefs.new_user_max_id;
+		*min = pf->umin;
+		*max = pf->umax;
 
 		return TRUE;
 	}
 
 	if (!strcmp (db_node->name, "groupdb"))
 	{
-		*min = logindefs.new_group_min_id;
-		*max = logindefs.new_group_max_id;
+		*min = pf->gmin;
+		*max = pf->gmax;
 
 		return TRUE;
 	}
@@ -548,21 +552,23 @@ find_new_id (xmlNodePtr parent)
 	gint min, max;
 	gint ret = 0;
 	xmlNodePtr n0;
+	Profile *pf;
 
 	g_return_val_if_fail (parent != NULL, NULL);
-
+	
+	pf = profile_table_get_profile (NULL);
 	if (!strcmp (parent->name, "userdb"))
 	{
 		field = g_strdup ("uid");
-		min = logindefs.new_user_min_id;
-		max = logindefs.new_user_max_id;
+		min = pf->umin;
+		max = pf->umax;
 	}
 
 	else if (!strcmp (parent->name, "groupdb"))
 	{
 		field = g_strdup ("gid");
-		min = logindefs.new_group_min_id;
-		max = logindefs.new_group_max_id;
+		min = pf->gmin;
+		max = pf->gmax;
 	}
 
 	else
@@ -965,20 +971,11 @@ user_update_xml (UserSettings *us)
 
 	adv = (xst_dialog_get_complexity (tool->main_dialog) == XST_DIALOG_ADVANCED);
 	
-	/* TODO hardcoded default shell and home dir prefix are BAD */
 	/* Home */
-	buf = adv ?
-		gtk_entry_get_text (us->basic->home) :
-		g_strdup_printf ("/home/%s", gtk_entry_get_text (us->basic->name));
+	xst_xml_set_child_content (us->node, "home", gtk_entry_get_text (us->basic->home));
 	
-	xst_xml_set_child_content (us->node, "home", buf);
-
 	/* Shell */
-	buf = adv ?
-		gtk_entry_get_text (us->basic->shell) :
-		g_strdup ("/bin/bash");
-
-	xst_xml_set_child_content (us->node, "shell", buf);
+	xst_xml_set_child_content (us->node, "shell", gtk_entry_get_text (us->basic->shell));
 
 	/* UID */
 	if (adv)
@@ -1002,10 +999,12 @@ static xmlNodePtr
 user_add_blank_xml (xmlNodePtr parent)
 {
 	xmlNodePtr user;
+	Profile *pf;
 
 	g_return_val_if_fail (parent != NULL, NULL);
 
 	user = xst_xml_element_add (parent, "user");
+	pf = profile_table_get_profile (NULL);
 
 	xst_xml_element_add_with_content (user, "key", find_new_key (parent));
 	xst_xml_element_add (user, "login");
@@ -1018,13 +1017,13 @@ user_add_blank_xml (xmlNodePtr parent)
 	xst_xml_element_add (user, "last_mod");
 
 	xst_xml_element_add_with_content (user, "passwd_min_life",
-			g_strdup_printf ("%d", logindefs.passwd_min_day_use));
+			g_strdup_printf ("%d", pf->pwd_mindays));
 
 	xst_xml_element_add_with_content (user, "passwd_max_life",
-			g_strdup_printf ("%d", logindefs.passwd_max_day_use));
+			g_strdup_printf ("%d", pf->pwd_maxdays));
 
 	xst_xml_element_add_with_content (user, "passwd_exp_warn",
-			g_strdup_printf ("%d", logindefs.passwd_warning_advance_days));
+			g_strdup_printf ("%d", pf->pwd_warndays));
 
 	xst_xml_element_add (user, "passwd_exp_disable");
 	xst_xml_element_add (user, "passwd_disable");
