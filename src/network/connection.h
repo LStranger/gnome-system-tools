@@ -53,8 +53,9 @@ typedef struct {
 	gboolean frozen;
 
 	/* General */
-	char *dev;
-	char *name;
+	gchar *file;
+	gchar *dev;
+	gchar *name;
 
 	gboolean enabled;
 	gboolean user;
@@ -67,17 +68,17 @@ typedef struct {
 	/* this is for the option menu because it sucks */
 	IPConfigType tmp_ip_config;
 
-	char *address;
-	char *netmask;
-	char *broadcast;
-	char *network;
-	char *gateway;
+	gchar *address;
+	gchar *netmask;
+	gchar *broadcast;
+	gchar *network;
+	gchar *gateway;
 
 	/* Wavelan */
 	gboolean adhoc;
-	char *session_id;
-	int channel;
-	float frequency;
+	gchar *session_id;
+	gint channel;
+	gfloat frequency;
 
 	/* PPP */
 	gchar *phone_number;

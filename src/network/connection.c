@@ -267,7 +267,7 @@ connection_xml_wvsection_save_boolean_to_node (xmlNode *node, gchar *section_nam
 }
 
 static gchar *
-connection_wvsection_generate (gchar *dev)
+connection_devkey_generate (gchar *dev)
 {
 	static gboolean flag = FALSE;
 	long int num;
@@ -409,7 +409,7 @@ add_connections_to_list (void)
 	g_slist_foreach (connections, (GFunc) add_connection_to_list, NULL);
 }*/
 
-static const gchar *
+static gchar *
 connection_description_from_type (ConnectionType type)
 {
 	gchar *descriptions[] = {
@@ -438,7 +438,35 @@ connection_description_from_type (ConnectionType type)
 		if (type == types[i])
 			break;
 
-	return descriptions[i];
+	return g_strdup (descriptions[i]);
+}
+
+static void
+connection_get_ppp_from_node (xmlNode *node, Connection *cxn)
+{
+	cxn->wvsection = connection_xml_get_str (node, "wvsection");
+	if (cxn->wvsection) {
+		cxn->phone_number = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "phone");
+		cxn->login = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "login");
+		cxn->password = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "password");
+		cxn->stupid = connection_xml_wvsection_get_boolean (node->parent, cxn->wvsection, "stupid");
+	} else {
+		cxn->wvsection = connection_devkey_generate (cxn->dev);
+		connection_xml_save_str_to_node (cxn->node, "wvsection", cxn->wvsection);
+
+		cxn->phone_number = connection_xml_get_str (node, "phone_number");
+		cxn->login = connection_xml_get_str (node, "login");
+		cxn->password = connection_xml_get_str (node, "password");
+		cxn->stupid = FALSE;
+	}
+
+	/* PPP advanced */
+	cxn->persist = connection_xml_get_boolean (node, "persist");
+	cxn->serial_port = connection_xml_get_str (node, "serial_port");
+	cxn->set_default_gw = connection_xml_get_boolean (node, "set_default_gw");
+	cxn->dns1 = connection_xml_get_str (node, "dns1");
+	cxn->dns2 = connection_xml_get_str (node, "dns2");
+	cxn->ppp_options = connection_xml_get_str (node, "ppp_options");
 }
 
 Connection *
@@ -468,8 +496,14 @@ connection_new_from_node (xmlNode *node)
 	if (s)
 		cxn->name = s;
 	else
-		cxn->name = g_strdup (connection_description_from_type (cxn->type));
-		
+		cxn->name = connection_description_from_type (cxn->type);
+	
+	s = connection_xml_get_str (node, "file");
+	if (s) {
+		g_free (cxn->file);
+		cxn->file = s;
+	}
+
 	/* Activation */
 	cxn->user = connection_xml_get_boolean (node, "user");
 	cxn->autoboot = connection_xml_get_boolean (node, "auto");
@@ -481,29 +515,8 @@ connection_new_from_node (xmlNode *node)
 	cxn->gateway = connection_xml_get_str (node, "gateway");
 
 	/* PPP stuff */
-	cxn->wvsection = connection_xml_get_str (node, "wvsection");
-	if (cxn->wvsection) {
-		cxn->phone_number = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "phone");
-		cxn->login = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "login");
-		cxn->password = connection_xml_wvsection_get_str (node->parent, cxn->wvsection, "password");
-		cxn->stupid = connection_xml_wvsection_get_boolean (node->parent, cxn->wvsection, "stupid");
-	} else {
-		cxn->wvsection = connection_wvsection_generate (cxn->dev);
-		connection_xml_save_str_to_node (cxn->node, "wvsection", cxn->wvsection);
-
-		cxn->phone_number = connection_xml_get_str (node, "phone_number");
-		cxn->login = connection_xml_get_str (node, "login");
-		cxn->password = connection_xml_get_str (node, "password");
-		cxn->stupid = FALSE;
-	}
-
-	/* PPP advanced */
-	cxn->persist = connection_xml_get_boolean (node, "persist");
-	cxn->serial_port = connection_xml_get_str (node, "serial_port");
-	cxn->set_default_gw = connection_xml_get_boolean (node, "set_default_gw");
-	cxn->dns1 = connection_xml_get_str (node, "dns1");
-	cxn->dns2 = connection_xml_get_str (node, "dns2");
-	cxn->ppp_options = connection_xml_get_str (node, "ppp_options");
+	if (cxn->type == CONNECTION_PPP)
+		connection_get_ppp_from_node (cxn->node, cxn);
 
 	update_row (cxn);
 
@@ -548,30 +561,35 @@ connection_new_from_type (ConnectionType type)
 #warning FIXME: figure out a new device correctly
 	switch (cxn->type) {
 	case CONNECTION_ETH:
+		cxn->autoboot = TRUE;
 		cxn->dev = g_strdup ("eth0");
 		break;
 	case CONNECTION_WVLAN:
+		cxn->autoboot = TRUE;
 		cxn->dev = g_strdup ("wvlan0");
 		break;
 	case CONNECTION_PPP:
+		cxn->autoboot = FALSE;
 		cxn->dev = g_strdup ("ppp0");
 		break;
 	case CONNECTION_LO:
+		cxn->autoboot = TRUE;
 		cxn->dev = g_strdup ("lo");
 		break;
 	case CONNECTION_PLIP:
+		cxn->autoboot = FALSE;
 		cxn->dev = g_strdup ("plip0");
 		break;
 	default:
-		cxn->dev = g_strdup ("???");
+		cxn->dev = g_strdup ("NIL");
 		break;
 	}	
 
 	/* set up some defaults */
-	cxn->autoboot = TRUE;
+	cxn->file = connection_devkey_generate (cxn->dev);
 	cxn->user = FALSE;
 	cxn->dhcp_dns = TRUE;
-	cxn->ip_config = cxn->tmp_ip_config = IP_DHCP;
+	cxn->ip_config = cxn->tmp_ip_config = IP_MANUAL;
 
 	add_connection_to_list (cxn, NULL);
 	
@@ -939,17 +957,18 @@ connection_save_to_node (Connection *cxn, xmlNode *root)
 	g_free (s);
 
 	/* PPP stuff */
-	connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "phone", cxn->phone_number);
-	connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "login", cxn->login);
-	connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "password", cxn->password);
-	connection_xml_wvsection_save_boolean_to_node (root, cxn->wvsection, "stupid", cxn->stupid);
-
-	/* PPP advanced */
-	connection_xml_save_boolean_to_node (node, "persist", cxn->persist);
-	connection_xml_save_str_to_node (node, "serial_port", cxn->serial_port);
-	connection_xml_save_boolean_to_node (node, "set_default_gw", cxn->set_default_gw);
-	connection_xml_save_str_to_node (node, "dns1", cxn->dns1);
-	connection_xml_save_str_to_node (node, "dns2", cxn->dns2);
-	connection_xml_save_str_to_node (node, "ppp_options", cxn->ppp_options);
+	if (cxn->type == CONNECTION_PPP) {
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "phone", cxn->phone_number);
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "login", cxn->login);
+		connection_xml_wvsection_save_str_to_node (root, cxn->wvsection, "password", cxn->password);
+		connection_xml_wvsection_save_boolean_to_node (root, cxn->wvsection, "stupid", cxn->stupid);
+		
+		/* PPP advanced */
+		connection_xml_save_boolean_to_node (node, "persist", cxn->persist);
+		connection_xml_save_str_to_node (node, "serial_port", cxn->serial_port);
+		connection_xml_save_boolean_to_node (node, "set_default_gw", cxn->set_default_gw);
+		connection_xml_save_str_to_node (node, "dns1", cxn->dns1);
+		connection_xml_save_str_to_node (node, "dns2", cxn->dns2);
+		connection_xml_save_str_to_node (node, "ppp_options", cxn->ppp_options);
+	}
 }
-

@@ -1,3 +1,14 @@
+2001-02-23  Arturo Espinosa Aldama  <arturo@ximian.com>
+
+	* connection.h: struc Connection: use gchar, gint and gfloat types. file field.
+
+	* connection.c (connection_devkey_generate): name change from wvsection_generate.
+	(connection_get_ppp_from_node):	for code readability. Don't get if interface is
+	not CONNECTION_PPP type.
+	(connection_new_from_node): handle the file tag.
+	(connection_new_from_type): the default autoboot value varies on the type.
+	
+
 2001-02-23  Chema Celorio  <chema@celorio.com>
 
 	* main.c: update some signals
