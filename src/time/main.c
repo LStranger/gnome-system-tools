@@ -30,9 +30,6 @@
 #include <stdio.h>
 #include <ctype.h>
 
-#include <locale.h>
-#include <langinfo.h>
-
 #include <gnome.h>
 #include <glade/glade.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
@@ -55,6 +52,8 @@ static void server_button_clicked (GtkWidget *w, gpointer data);
 static void ntp_use_toggled (GtkWidget *w, GstDialog *dialog);
 static void gst_time_calendar_change_cb (GtkCalendar *, gpointer);
 static void on_server_list_element_toggled (GtkCellRendererToggle*, gchar*, gpointer);
+static void on_timezone_help_button_clicked (GtkWidget*, gpointer);
+static void on_time_server_help_button_clicked (GtkWidget*, gpointer);
 
 static char *ntp_servers[] =
 {
@@ -123,12 +122,14 @@ static char *ntp_servers[] =
 static GstDialogSignal signals[] = {
 	/*	{ "calendar",          "day_selected",       G_CALLBACK (gst_time_calendar_change_cb) },
 		{ "calendar",          "month_changed",      G_CALLBACK (gst_time_calendar_change_cb) },*/
-	{ "timezone_button",   "clicked",            G_CALLBACK (timezone_button_clicked) },
-	{ "ntp_use",           "toggled",            G_CALLBACK (ntp_use_toggled) },
-	{ "timeserver_button", "clicked",            G_CALLBACK (server_button_clicked) },
-	{ "location_combo",    "set_focus_child",    G_CALLBACK (gst_dialog_modify_cb) },
-	{ "ntp_add_server",    "clicked",            G_CALLBACK (on_ntp_addserver) },
-	{ "ntp_add_server",    "clicked",            G_CALLBACK (gst_dialog_modify_cb) },
+	{ "timezone_button",         "clicked",         G_CALLBACK (timezone_button_clicked) },
+	{ "ntp_use",                 "toggled",         G_CALLBACK (ntp_use_toggled) },
+	{ "timeserver_button",       "clicked",         G_CALLBACK (server_button_clicked) },
+	{ "location_combo",          "set_focus_child", G_CALLBACK (gst_dialog_modify_cb) },
+	{ "ntp_add_server",          "clicked",         G_CALLBACK (on_ntp_addserver) },
+	{ "ntp_add_server",          "clicked",         G_CALLBACK (gst_dialog_modify_cb) },
+	{ "time_zone_help_button",   "clicked",         G_CALLBACK (on_timezone_help_button_clicked) },
+	{ "time_server_help_button", "clicked",         G_CALLBACK (on_time_server_help_button_clicked) },
 	{ NULL }
 };
 
@@ -297,33 +298,6 @@ gst_time_clock_tick (gpointer time_tool)
 	return TRUE;
 }
 
-static GtkWidget *
-timezone_construct_dialog (GstDialog *dialog)
-{
-	GtkWidget *content;
-	GtkWidget *d;
-
-        /* Added to test arguments  --AleX */
-	g_return_if_fail (dialog!=NULL);
-	g_return_if_fail (GST_IS_DIALOG(dialog));
-	
-	d = gtk_dialog_new_with_buttons (_("Time Zone"),
-					 GTK_WINDOW (dialog),
-					 GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
-					 GTK_STOCK_CLOSE,
-					 GTK_RESPONSE_CLOSE, NULL);
-
-	content = gst_dialog_get_widget (dialog, "time_zone_dialog_content");
-
-	/* FIXME: Yes, this is a hack. */
-	content->parent = NULL;
-
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (d)->vbox), content, TRUE,
-			    TRUE, 0);
-
-	return GTK_WIDGET (d);
-}
-
 static void
 on_server_list_element_toggled (GtkCellRendererToggle *cell, gchar *path_str, gpointer data)
 {
@@ -368,12 +342,29 @@ on_server_list_element_toggled (GtkCellRendererToggle *cell, gchar *path_str, gp
 }
 
 static void
+on_timezone_help_button_clicked (GtkWidget *w, gpointer data)
+{
+	GstDialog *dialog = GST_DIALOG (data);
+	GstTool *tool = gst_dialog_get_tool (dialog);
+
+	gst_tool_show_help (tool, "tool-time-zone");
+}
+
+static void
+on_time_server_help_button_clicked (GtkWidget *w, gpointer data)
+{
+	GstDialog *dialog = GST_DIALOG (data);
+	GstTool *tool = gst_dialog_get_tool (dialog);
+
+	gst_tool_show_help (tool, "tool-time-servers");
+}
+
+static void
 timezone_button_clicked (GtkWidget *w, gpointer data)
 {
-	static GtkWidget *d = NULL;
+	GtkWidget *d;
 	GstDialog *dialog;
 	GstTimeTool *time_tool;
-	gint result;
 	gchar *tz_name = NULL;
 	gchar *old_tz_name = NULL;
 	TzLocation *tz_location;
@@ -382,13 +373,14 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 	dialog = GST_DIALOG (data);
 	time_tool = GST_TIME_TOOL (gst_dialog_get_tool (dialog));
 
-	if (!d)
-		d = timezone_construct_dialog (dialog);
+	d = gst_dialog_get_widget (dialog, "time_zone_window");
 
 	if (time_tool->time_zone_name)
 		e_tz_map_set_tz_from_name (tzmap, time_tool->time_zone_name);
 
-	result = gtk_dialog_run (GTK_DIALOG (d));
+	gtk_window_set_transient_for (GTK_WINDOW (d), GTK_WINDOW (dialog));
+
+	while (gtk_dialog_run (GTK_DIALOG (d)) != GTK_RESPONSE_CLOSE);
 
 	tz_name     = e_tz_map_get_selected_tz_name (tzmap);
 	tz_location = e_tz_map_get_location_by_name (tzmap, tz_name);
@@ -405,51 +397,19 @@ timezone_button_clicked (GtkWidget *w, gpointer data)
 	gtk_widget_hide (d);
 }
 
-
-/* Function Added to construct Time Server Dialog using GtkDialog --AleX */
-static GtkWidget *
-server_construct_dialog (GstDialog *dialog)
-{
-	GtkWidget *content;
-	GtkWidget *d;
-
-	/* Added to test arguments --AleX */
-	g_return_if_fail (dialog!=NULL);
-	g_return_if_fail (GST_IS_DIALOG(dialog));
-
-	d = gtk_dialog_new_with_buttons (_("Time Servers"),
-					 GTK_WINDOW (dialog),
-					 GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
-					 GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-					 NULL);
-
-	gtk_container_set_border_width (GTK_CONTAINER (GTK_DIALOG (d)), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (d)->vbox), 2);
-	gtk_dialog_set_has_separator (GTK_DIALOG (d), FALSE);
-
-	content = gst_dialog_get_widget (dialog, "server_dialog_content");
-
-	/* FIXME: Yes, this is a hack. */
-	content->parent = NULL;
-
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (d)->vbox), content, TRUE,
-			    TRUE, 0);
-
-	return GTK_WIDGET (d);
-}
-
 static void
 server_button_clicked (GtkWidget *w, gpointer data)
 {
-	static GtkWidget *d = NULL;
+	GtkWidget *d;
 	GstDialog *dialog;
 
 	dialog = GST_DIALOG (data);
-	
-	if (!d) 
-	      d = server_construct_dialog (dialog);
 
-	gtk_dialog_run (GTK_DIALOG (d));
+	d = gst_dialog_get_widget (dialog, "time_server_window");
+
+	gtk_window_set_transient_for (GTK_WINDOW (d), GTK_WINDOW (dialog));
+
+	while (gtk_dialog_run (GTK_DIALOG (d)) != GTK_RESPONSE_CLOSE);
 	gtk_widget_hide (d);
 }
 
@@ -787,24 +747,6 @@ gst_time_connect_calendar_signals (GstTimeTool *tool)
 	g_signal_connect (G_OBJECT (calendar), "month_changed", G_CALLBACK (gst_time_calendar_change_cb), tool);
 }
 
-/* changes the calendar first day depending on the locale configuration */
-static void
-gst_time_configure_calendar (GstTimeTool *tool)
-{
-	gint firstday = 0;
-	GtkWidget *calendar = gst_dialog_get_widget (GST_TOOL (tool)->main_dialog, "calendar");
-
-#ifndef __FreeBSD__
-	setlocale (LC_ALL, "");
-	firstday = (int) *(nl_langinfo (_NL_TIME_FIRST_WEEKDAY));
-#endif
-
-	if (firstday == 1) 
-		gtk_calendar_display_options (GTK_CALENDAR (calendar), GTK_CALENDAR_WEEK_START_MONDAY | GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES);
-	else
-		gtk_calendar_display_options (GTK_CALENDAR (calendar), GTK_CALENDAR_SHOW_HEADING | GTK_CALENDAR_SHOW_DAY_NAMES);
-}
-
 int
 main (int argc, char *argv[])
 {
@@ -813,8 +755,6 @@ main (int argc, char *argv[])
 	gst_init ("time-admin", argc, argv, NULL);
 	tool = gst_time_tool_new ();
 	gst_tool_construct (tool, "time", _("Time and Date Settings"));
-
-	gst_time_configure_calendar (GST_TIME_TOOL (tool));
 
 	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 	gst_dialog_connect_signals (tool->main_dialog, signals);

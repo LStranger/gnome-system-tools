@@ -385,9 +385,6 @@ on_table_button_press_event (GtkWidget *widget, GdkEventButton *event, GtkWidget
 	GtkTreePath *path;
 	GtkTreeView *treeview = GTK_TREE_VIEW (widget);
 
-	if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_BASIC)
-		return;
-
 	if (event->button == 3) {
 		gtk_widget_grab_focus (widget);
 
@@ -427,31 +424,5 @@ on_sequence_ordering_changed (GtkWidget *widget, gpointer data)
 		gtk_tree_view_column_set_visible (priority_column, FALSE);
 	} else {
 		gtk_tree_view_column_clicked (services_column);
-	}
-}
-
-void
-on_dialog_complexity_change (GtkWidget *widget, GstTool *tool)
-{
-	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
-	GstWidget *menu = gst_dialog_get_gst_widget (tool->main_dialog, "runlevels_menu");
-	GtkTreeModel *model;
-	GtkTreeIter   iter;
-	gchar *default_runlevel;
-	gint n_option;
-
-	hide_sequence_ordering_toggle_button (root);
-
-	if ((menu->advanced != GST_WIDGET_MODE_HIDDEN) &&
-	    (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_BASIC))
-	{
-		default_runlevel = g_object_get_data (G_OBJECT (menu->widget),
-						      "default_runlevel");
-
-		n_option = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (menu->widget),
-							       "default_item"));
-
-		gtk_combo_box_set_active (GTK_COMBO_BOX (menu->widget), n_option);
-		change_runlevel (default_runlevel);
 	}
 }

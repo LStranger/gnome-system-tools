@@ -27,7 +27,6 @@
 
 #include <gtk/gtk.h>
 
-void		on_main_dialog_update_complexity	(GtkWidget*,   gpointer);
 void		on_services_table_select_row		(GtkTreeSelection*, gpointer);
 void		on_description_button_clicked		(GtkWidget*,   gpointer);
 void		on_settings_button_clicked		(GtkWidget*,   gpointer);
@@ -40,7 +39,6 @@ void            on_popup_settings_activate              (gpointer,     guint, Gt
 void            on_sequence_ordering_changed            (GtkWidget*,   gpointer);
 gboolean        on_table_button_press_event             (GtkWidget*,   GdkEventButton*, GtkWidget*);
 gboolean        on_table_popup_menu                     (GtkWidget*,   GtkWidget*);
-void            on_dialog_complexity_change             (GtkWidget*,   GstTool*);
 void            change_runlevel                         (gchar*);
 void            hide_sequence_ordering_toggle_button    (xmlNodePtr);
 

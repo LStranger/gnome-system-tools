@@ -46,15 +46,12 @@ static void
 connect_signals (GstTool *tool)
 {
 	GstDialogSignal signals[] = {
-		{ "boot_delete",   "clicked", G_CALLBACK (on_boot_delete_clicked) },
-		{ "boot_settings", "clicked", G_CALLBACK (on_boot_settings_clicked) },
-		{ "boot_add",      "clicked", G_CALLBACK (on_boot_add_clicked) },
-		{ "boot_timeout",  "changed", G_CALLBACK (gst_dialog_modify_cb) },
+		{ "boot_delete",      "clicked", G_CALLBACK (on_boot_delete_clicked) },
+		{ "boot_settings",    "clicked", G_CALLBACK (on_boot_settings_clicked) },
+		{ "boot_add",         "clicked", G_CALLBACK (on_boot_add_clicked) },
+		{ "boot_timeout",     "changed", G_CALLBACK (gst_dialog_modify_cb) },
 		{ NULL }
 	};
-
-	g_signal_connect (G_OBJECT (tool->main_dialog), "complexity_change",
-			  G_CALLBACK (on_main_dialog_update_complexity), tool);
 
 	gst_dialog_connect_signals (tool->main_dialog, signals);
 }
@@ -77,9 +74,6 @@ main (int argc, char *argv[])
 	gst_tool_add_report_hooks (tool, report_hooks);
 
 	connect_signals (tool);
-
-	gst_dialog_enable_complexity (tool->main_dialog);
-	on_main_dialog_update_complexity (tool->main_dialog, tool);
 
 	gst_tool_main (tool, FALSE);
 

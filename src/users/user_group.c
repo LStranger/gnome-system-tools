@@ -275,10 +275,7 @@ check_node_visibility (xmlNodePtr node)
 	gchar *field, *content;
 	gint min, max, val;
 	static GtkToggleButton *toggle;
-	GstDialogComplexity complexity;
 
-	complexity = tool->main_dialog->complexity;
-	
 	if (!toggle)
 		toggle = GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, "showall"));
 
@@ -307,10 +304,8 @@ check_node_visibility (xmlNodePtr node)
 
 	if (val >= min && val <= max)
 		return TRUE;
-
-	else if (complexity == GST_DIALOG_ADVANCED && gtk_toggle_button_get_active (toggle))
+	else if (gtk_toggle_button_get_active (toggle))
 		return TRUE;
-
 	else
 		return FALSE;
 }

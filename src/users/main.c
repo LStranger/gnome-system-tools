@@ -62,6 +62,7 @@ static GstDialogSignal signals[] = {
 	{ "user_passwd_entry1",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
 	{ "user_passwd_entry2",			"changed",		G_CALLBACK (on_user_settings_passwd_changed) },
 	{ "user_settings_profile_button",	"clicked",		G_CALLBACK (on_profile_settings_users_dialog_clicked) },
+	{ "user_settings_help",                 "clicked",              G_CALLBACK (on_user_settings_show_help) },
 	
 	/* Group settings dialog callbacks */
 	{ "group_settings_dialog",		"delete_event",  	G_CALLBACK (on_group_settings_dialog_delete_event) },
@@ -70,17 +71,19 @@ static GstDialogSignal signals[] = {
 	{ "group_settings_cancel",		"clicked",       	G_CALLBACK (on_group_settings_dialog_delete_event) },
 	{ "group_settings_add",			"clicked",       	G_CALLBACK (on_add_remove_button_clicked) },
 	{ "group_settings_remove",		"clicked",       	G_CALLBACK (on_add_remove_button_clicked) },
+	{ "group_settings_help",                "clicked",              G_CALLBACK (on_group_settings_show_help) },
 
 	/* Profile settings dialog callbacks */
 	{ "profile_settings_dialog",            "delete_event",         G_CALLBACK (on_profile_settings_dialog_delete_event) },
 	{ "profile_settings_cancel",            "clicked",              G_CALLBACK (on_profile_settings_dialog_delete_event) },
 	{ "profile_settings_ok",                "clicked",              G_CALLBACK (on_profile_settings_ok_clicked) },
-	
-	
+	{ "profile_settings_help",              "clicked",              G_CALLBACK (on_profile_settings_show_help) },
+
 	/* Profile dialog callbacks */
 	{ "profile_new",                        "clicked",              G_CALLBACK (on_profile_new_clicked) },
 	{ "profile_settings",                   "clicked",              G_CALLBACK (on_profile_settings_clicked) },
 	{ "profile_delete",                     "clicked",              G_CALLBACK (on_profile_delete_clicked) },
+	{ "profiles_dialog_help",               "clicked",              G_CALLBACK (on_profile_settings_show_help) },
 
 	/* Main dialog callbacks, users tab */
 	{ "user_new",				"clicked",		G_CALLBACK (on_user_new_clicked) },
@@ -171,82 +174,13 @@ user_query_changed (SearchBar *esb, gpointer user_data)
 }
 
 static void
-update_searchbar_complexity (GstDialogComplexity complexity)
-{	
-	SearchBar *sb = SEARCH_BAR (g_object_get_data (G_OBJECT (tool->main_dialog), "SearchBar"));
-
-	switch (complexity) {
-	case GST_DIALOG_BASIC:
-		gtk_widget_hide (GTK_WIDGET (sb));
-
-		/* we should also clear any previous search */
-		search_bar_clear_search (sb);
-		
-		break;
-	case GST_DIALOG_ADVANCED:
-		gtk_widget_show (GTK_WIDGET (sb));
-		break;
-	default:
-		g_warning ("update_searchbar_complexity: Unsupported complexity.");
-		return;
-	}
-}
-
-static void
-update_notebook_complexity (GstDialogComplexity complexity)
-{
-	GtkWidget *notebook = gst_dialog_get_widget (tool->main_dialog, "notebook");
-
-	switch (complexity) {
-	case GST_DIALOG_BASIC:
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
-		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
-		break;
-	case GST_DIALOG_ADVANCED:
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
-		break;
-	default:
-		g_warning ("update_notebook_complexity: Unsupported complexity.");
-	}
-}
-
-static void
-update_toggle_complexity (GstDialogComplexity complexity)
+update_toggle ()
 {
 	GtkWidget *toggle = gst_dialog_get_widget (tool->main_dialog, "showall");
 	
-	switch (complexity) {
-	case GST_DIALOG_BASIC:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), FALSE);
-		break;
-	case GST_DIALOG_ADVANCED:
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), gst_conf_get_boolean (tool, "showall"));
-		break;
-	default:
-		g_warning ("update_notebook_complexity: Unsupported complexity.");
-	}
+	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (toggle), gst_conf_get_boolean (tool, "showall"));
 }
 
-static void
-update_complexity (void)
-{
-	GstDialogComplexity complexity = tool->main_dialog->complexity;
-
-	update_notebook_complexity (complexity);
-	update_toggle_complexity (complexity);
-	update_searchbar_complexity (complexity);
-	update_tables_complexity (complexity);
-}
-
-static void
-connect_signals (void)
-{
-	g_signal_connect (G_OBJECT (tool->main_dialog), "complexity_change",
-	                  G_CALLBACK (update_complexity),
-	                  NULL);
-
-	gst_dialog_connect_signals (tool->main_dialog, signals);
-}
 
 static void
 create_searchbar (void)
@@ -265,8 +199,7 @@ create_searchbar (void)
 	g_object_set_data (G_OBJECT (tool->main_dialog), "SearchBar",
 			   (gpointer) search);
 
-	/* Show/hide */
-	update_searchbar_complexity (tool->main_dialog->complexity);
+	gtk_widget_show_all (GTK_WIDGET (search));
 }
 
 static void
@@ -297,9 +230,7 @@ main_window_prepare (void)
 	create_searchbar ();
 
 	create_button_sizegroup ();
-
-	/* General complexity update */
-	update_complexity ();
+	update_toggle ();
 
 	/* This sucks, but calculating the needed size for simple mode based on the
 	 * hidden widgets plus the tabs size is going to be ugly. Chema
@@ -316,11 +247,10 @@ main (int argc, char *argv[])
 
 	gst_tool_set_xml_funcs  (tool, transfer_xml_to_gui, transfer_gui_to_xml, NULL);
 
-	gst_dialog_enable_complexity (tool->main_dialog);
 	gst_dialog_set_widget_policies (tool->main_dialog, policies);
 
 	main_window_prepare ();
-	connect_signals ();
+	gst_dialog_connect_signals (tool->main_dialog, signals);
 
 	gst_tool_main (tool, FALSE);
 	

@@ -154,7 +154,6 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	                  G_CALLBACK (on_boot_append_browse_clicked), (gpointer) gui);
 	g_signal_connect (G_OBJECT (gui->use_password), "clicked",
 			  G_CALLBACK (on_use_password_clicked), (gpointer) gui);
-
 	return gui;
 }
 

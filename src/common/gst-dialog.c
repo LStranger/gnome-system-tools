@@ -39,7 +39,6 @@
 enum {
 	BOGUS,
 	APPLY,
-	COMPLEXITY_CHANGE,
 	LAST_SIGNAL
 };
 
@@ -68,9 +67,7 @@ gst_dialog_apply_widget_policies (GstDialog *xd)
 {
 	GSList *list;
 
-	/* Hide, show + desensitize or show + sensitize widgets based on access level
-	 * and complexity */
-
+	/* Hide, show + desensitize or show + sensitize widgets based on access level */
 	for (list = xd->gst_widget_list; list; list = g_slist_next (list))
 	{
 		gst_widget_apply_policy (list->data);
@@ -83,47 +80,7 @@ gst_dialog_get_complexity (GstDialog *xd)
 	g_return_val_if_fail (xd != NULL, 0);
 	g_return_val_if_fail (GST_IS_DIALOG (xd), 0);
 
-	return xd->complexity;
-}
-
-void
-gst_dialog_set_complexity (GstDialog *xd, GstDialogComplexity c)
-{
-	gchar *label[] = {
-		N_(" More _Options"),
-		N_(" Fewer _Options"),
-		NULL
-	};
-
-	gchar *image[] = {
-		GTK_STOCK_ADD,
-		GTK_STOCK_REMOVE,
-		NULL
-	};
-
-	g_return_if_fail (xd != NULL);
-	g_return_if_fail (GST_IS_DIALOG (xd));
-	g_return_if_fail (c >= GST_DIALOG_BASIC);
-	g_return_if_fail (c <= GST_DIALOG_ADVANCED);
-
-	if (xd->complexity == c)
-		return;
-
-	xd->complexity = c;
-
-	if (xd->complexity == GST_DIALOG_ADVANCED)
-		gst_conf_set_boolean (xd->tool, "advanced_mode", TRUE);
-	else
-		gst_conf_set_boolean (xd->tool, "advanced_mode", FALSE);
-
-	gst_dialog_apply_widget_policies (xd);
-
-	/* set the complexity button appearance */
-	gtk_label_set_text (GTK_LABEL (xd->complexity_button_label), _(label[c]));
-	gtk_label_set_use_underline (GTK_LABEL (xd->complexity_button_label), TRUE);
-	gtk_image_set_from_stock (GTK_IMAGE (xd->complexity_button_image), image[c], GTK_ICON_SIZE_MENU);
-
-	g_signal_emit (G_OBJECT (xd), gstdialog_signals[COMPLEXITY_CHANGE], 0);
+	return GST_DIALOG_ADVANCED;
 }
 
 void
@@ -236,15 +193,6 @@ gst_dialog_class_init (GstDialogClass *class)
 			      G_OBJECT_CLASS_TYPE (gobject_class),
 			      G_SIGNAL_RUN_LAST,
 			      G_STRUCT_OFFSET (GstDialogClass, apply),
-			      NULL, NULL,
-			      gst_marshal_VOID__VOID,
-			      G_TYPE_NONE,
-			      0);
-	gstdialog_signals[COMPLEXITY_CHANGE] =
-		g_signal_new ("complexity_change",
-			      G_OBJECT_CLASS_TYPE (gobject_class),
-			      G_SIGNAL_RUN_LAST,
-			      G_STRUCT_OFFSET (GstDialogClass, complexity_change),
 			      NULL, NULL,
 			      gst_marshal_VOID__VOID,
 			      G_TYPE_NONE,
@@ -400,28 +348,6 @@ gst_dialog_widget_set_user_sensitive (GstDialog *xd, const gchar *name, gboolean
 }
 
 static void
-complexity_cb (GtkWidget *w, gpointer data)
-{
-	GstDialog *dialog;
-
-	g_return_if_fail (data != NULL);
-	g_return_if_fail (GST_IS_DIALOG (data));
-
-	dialog = GST_DIALOG (data);
-
-	switch (dialog->complexity) {
-	case GST_DIALOG_BASIC:
-		gst_dialog_set_complexity (dialog, GST_DIALOG_ADVANCED);
-		break;
-	case GST_DIALOG_ADVANCED:
-		gst_dialog_set_complexity (dialog, GST_DIALOG_BASIC);
-		break;
-	default:
-		break;
-	}
-}
-
-static void
 apply_config (gpointer data)
 {
 	GstDialog *dialog;
@@ -510,21 +436,16 @@ accept_cb (GtkWidget *w, gpointer data)
 static void
 help_cb (GtkWidget *w, gpointer data)
 {
+	GstDialog *gst_dialog;
+
+	gst_dialog = GST_DIALOG (data);
+	gst_tool_show_help (gst_dialog->tool, NULL);
 }
 
 static void
 dialog_delete_event_cb (GtkWidget *w, GdkEvent *event, gpointer data)
 {
 	cancel_cb (w, data);
-}
-
-void
-gst_dialog_enable_complexity (GstDialog *dialog)
-{
-	g_return_if_fail (dialog != NULL);
-	g_return_if_fail (GST_IS_DIALOG (dialog));
-
-	gtk_widget_show (dialog->complexity_button);
 }
 
 static void
@@ -574,11 +495,10 @@ void
 gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 		      const char *widget, const char *title)
 {
-	GladeXML *xml;
-	GtkWidget *w;
-	GtkStockItem item;
-	gboolean val;
-	char *s;
+	GladeXML     *xml;
+	GtkWidget    *w;
+	char         *s;
+	GtkSizeGroup *size_group;
 
 	g_return_if_fail (dialog != NULL);
 	g_return_if_fail (GST_IS_DIALOG (dialog));
@@ -610,38 +530,23 @@ gst_dialog_construct (GstDialog *dialog, GstTool *tool,
 	gtk_widget_unparent (dialog->child);
 	gtk_box_pack_start (GTK_BOX (w), dialog->child, TRUE, TRUE, 0);
 
+	size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
+
 	w = glade_xml_get_widget (xml, "help");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (help_cb), dialog);
-
-	w = glade_xml_get_widget (xml, "complexity");
-	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (complexity_cb), dialog);
-
-	dialog->complexity_button = w;
-
-	w = glade_xml_get_widget (xml, "complexity_button_label");
-	dialog->complexity_button_label = w;
-
-	w = glade_xml_get_widget (xml, "complexity_button_image");
-	dialog->complexity_button_image = w;
+	gtk_size_group_add_widget (size_group, w);
 
 	w = glade_xml_get_widget (xml, "cancel");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (cancel_cb), dialog);
+	gtk_size_group_add_widget (size_group, w);
 
 	w = glade_xml_get_widget (xml, "accept");
 	g_signal_connect (G_OBJECT (w), "clicked", G_CALLBACK (accept_cb), dialog);
+	gtk_size_group_add_widget (size_group, w);
 	
 	gst_dialog_set_modified (dialog, FALSE);
-	gtk_widget_hide (dialog->complexity_button);
-
-	dialog->complexity = GST_DIALOG_NONE;
-	val = gst_conf_get_boolean (dialog->tool, "advanced_mode");
-	if (val == FALSE)
-		val = GST_DIALOG_BASIC;
-
-	gst_dialog_set_complexity (dialog, val);
 
 	g_signal_connect (G_OBJECT (dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
-
 	g_signal_connect (G_OBJECT (tool->remote_dialog), "delete_event", G_CALLBACK (dialog_delete_event_cb), dialog);
 
 }

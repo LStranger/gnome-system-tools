@@ -60,6 +60,12 @@ on_boot_add_clicked (GtkButton *button, gpointer data)
 	}
 }
 
+static void
+on_boot_help_button_clicked (GtkWidget *widget, gpointer data)
+{
+	gst_tool_show_help (tool, NULL);
+}
+
 static gboolean
 boot_image_editor_construct (BootImageEditor *editor, BootImage *image)
 {
@@ -95,6 +101,10 @@ boot_image_editor_new (BootImage *image)
 
 	xml = glade_xml_new (tool->glade_path, "boot_dialog", NULL);
 	new->dialog = GTK_DIALOG (glade_xml_get_widget (xml, "boot_dialog"));
+
+	g_signal_connect (G_OBJECT (glade_xml_get_widget (xml, "boot_dialog_help")),
+			  "clicked", G_CALLBACK (on_boot_help_button_clicked), NULL);
+
 	g_object_unref (xml);
 	
 	if (boot_image_editor_construct (new, image))
@@ -124,15 +134,12 @@ on_boot_settings_clicked (GtkButton *button, gpointer data)
 		gtk_tree_model_get (model, &iter, BOOT_LIST_COL_POINTER, &node, -1);
 	}
 
-
-	if (gst_tool_get_access (tool))
-	{
-		image = boot_image_get_by_node (node);
+	if (gst_tool_get_access (tool)) {
+		image  = boot_image_get_by_node (node);
 		editor = boot_image_editor_new (image);
+		valid  = FALSE;
 
-		valid = FALSE;
-		while (!valid)
-		{
+		while (!valid) {
 			response = gtk_dialog_run (editor->dialog);
 			switch (response)
 			{
@@ -144,8 +151,11 @@ on_boot_settings_clicked (GtkButton *button, gpointer data)
 				}
 				
 				break;
-			default:
+			case GTK_RESPONSE_CANCEL:
 				valid = TRUE;
+				break;
+			default:
+				valid = FALSE;
 				break;
 			}
 		}
@@ -189,6 +199,10 @@ boot_append_editor_new (BootSettingsGui *settings)
 
 	xml = glade_xml_new (tool->glade_path, "boot_dialog", NULL);
 	new->dialog = GTK_DIALOG (glade_xml_get_widget (xml, "boot_dialog"));
+
+	g_signal_connect (G_OBJECT (glade_xml_get_widget (xml, "boot_dialog_help")),
+			  "clicked", G_CALLBACK (on_boot_help_button_clicked), NULL);
+
 	g_object_unref (xml);
 
 	if (boot_append_editor_construct (new, settings))
@@ -207,25 +221,34 @@ on_boot_append_browse_clicked (GtkButton *button, gpointer data)
 	BootAppendEditor *editor;
 	gint response;
 	gchar *append;
+	gboolean valid;
 
 	if (gst_tool_get_access (tool))
 	{
 		settings = (BootSettingsGui *) data;
 		editor = boot_append_editor_new (settings);
-		response = gtk_dialog_run (editor->dialog);
+		valid = FALSE;
 
-		switch (response)
-		{
-		case GTK_RESPONSE_OK:
-			if (boot_append_gui_save (editor->gui, &append))
-				if (append)
-				{
-					gst_ui_entry_set_text (GTK_ENTRY (editor->gui->settings->append), g_strdup (append));
-					g_free (append);
-				}
-			break;
-		default:
-			break;
+		while (!valid) {
+			response = gtk_dialog_run (editor->dialog);
+
+			switch (response)
+			{
+			case GTK_RESPONSE_OK:
+				if (boot_append_gui_save (editor->gui, &append))
+					if (append) {
+						gst_ui_entry_set_text (GTK_ENTRY (editor->gui->settings->append), g_strdup (append));
+						g_free (append);
+					}
+				valid = TRUE;
+				break;
+			case GTK_RESPONSE_CANCEL:
+				valid = TRUE;
+				break;
+			default:
+				valid = FALSE;
+				break;
+			}
 		}
 		
 		gtk_widget_destroy (GTK_WIDGET (editor->dialog));
@@ -358,11 +381,7 @@ on_popup_delete_activate (GtkAction *action, gpointer callback_data)
 void
 callbacks_actions_set_sensitive (gboolean state)
 {
-	GstDialogComplexity complexity;
-
-	complexity = tool->main_dialog->complexity;
-
-	if (gst_tool_get_access (tool) && complexity == GST_DIALOG_ADVANCED) {
+	if (gst_tool_get_access (tool)) {
 		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "boot_add"), TRUE);
 		gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "boot_delete"),
 					  state);
@@ -371,26 +390,7 @@ callbacks_actions_set_sensitive (gboolean state)
 	gtk_widget_set_sensitive (gst_dialog_get_widget (tool->main_dialog, "boot_settings"), state);
 }
 
-static void
-callbacks_buttons_set_visibility (GstDialog *main_dialog)
-{
-	switch (gst_dialog_get_complexity (main_dialog)) {
-	case GST_DIALOG_ADVANCED:
-		gtk_widget_show (gst_dialog_get_widget (main_dialog, "boot_add"));
-		gtk_widget_show (gst_dialog_get_widget (main_dialog, "boot_delete"));
-		break;
-	case GST_DIALOG_BASIC:
-		gtk_widget_hide (gst_dialog_get_widget (main_dialog, "boot_add"));
-		gtk_widget_hide (gst_dialog_get_widget (main_dialog, "boot_delete"));
-		break;
-	default:
-		g_warning ("Unknown complexity.");
-		break;
-	}
-}
-
 /* Main window callbacks */
-
 void
 on_boot_delete_clicked (GtkButton *button, gpointer data)
 {
@@ -452,23 +452,7 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 	callbacks_actions_set_sensitive (FALSE);
 }
 
-void
-on_main_dialog_update_complexity (GstDialog *main_dialog, gpointer data)
-{
-	GstDialogComplexity complexity = gst_dialog_get_complexity (tool->main_dialog);
-	GtkTreeView *boot_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "boot_table"));
-
-	gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (boot_table));
-
-	callbacks_actions_set_sensitive (FALSE);
-	
-	boot_table_update_state (complexity);
-	
-	callbacks_buttons_set_visibility (tool->main_dialog);
-}
-
 /* Hooks */
-
 gboolean
 callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, gpointer data)
 {
@@ -489,4 +473,3 @@ callbacks_conf_read_failed_hook (GstTool *tool, GstReportLine *rline, gpointer d
 	/* Handled, don't go looking for more hooks to run */
 	return TRUE;
 }
-

@@ -53,16 +53,12 @@ extern GtkWidget *groups_table;
 void
 on_showall_toggled (GtkToggleButton *toggle, gpointer user_data)
 {
-	GstDialogComplexity complexity = tool->main_dialog->complexity;
 	SearchBar *sb = SEARCH_BAR (g_object_get_data (G_OBJECT (tool->main_dialog), "SearchBar"));
 
 	/* we ought to clear previous searches */
 	search_bar_clear_search (sb);
-	
-	/* Only saves the change if we are in advanced mode, basic mode will be always FALSE (we don't need to save it) */
-	if (complexity == GST_DIALOG_ADVANCED) {
-		gst_conf_set_boolean (tool, "showall", gtk_toggle_button_get_active (toggle));
-	}
+
+	gst_conf_set_boolean (tool, "showall", gtk_toggle_button_get_active (toggle));
 	tables_update_content ();
 }
 
@@ -184,14 +180,6 @@ on_user_new_clicked (GtkButton *button, gpointer user_data)
 	ud->table = NODE_USER;
 	ud->node = get_root_node (ud->table);
 
-	if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_ADVANCED) {
-		/* user settings dialog */
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
-	} else {
-		/* user settings druid */
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
-		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
-	}
 	user_new_prepare (ud);
 }
 
@@ -206,15 +194,6 @@ on_user_settings_clicked (GtkButton *button, gpointer user_data)
 	ud->is_new = FALSE;
 	ud->table = NODE_USER;
 	ud->node = get_selected_row_node (NODE_USER);
-
-	if (gst_dialog_get_complexity (tool->main_dialog) == GST_DIALOG_ADVANCED) {
-		/* user settings dialog */
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
-	} else {
-		/* user settings simple dialog */
-		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
-		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
-	}
 
 	user_settings_prepare (ud);
 }
@@ -252,23 +231,13 @@ on_user_delete_clicked (GtkButton *button, gpointer user_data)
 }
 
 void
-on_profile_settings_dialog_clicked (GtkButton *button, gpointer user_data)
-{
-	GtkWidget *profile_window = gst_dialog_get_widget (tool->main_dialog, "profiles_dialog");
-	GtkWidget *option_menu = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
-	
-	gtk_dialog_run (GTK_DIALOG (profile_window));
-	gtk_widget_hide (profile_window);
-}
-
-void
 on_profile_settings_users_dialog_clicked (GtkButton *button, gpointer user_data)
 {
 	GtkWidget    *profile_window = gst_dialog_get_widget (tool->main_dialog, "profiles_dialog");
 	GtkWidget    *combo = gst_dialog_get_widget (tool->main_dialog, "user_settings_profile_menu");
 	GtkTreeModel *model;
 	
-	gtk_dialog_run (GTK_DIALOG (profile_window));
+	while (gtk_dialog_run (GTK_DIALOG (profile_window)) != GTK_RESPONSE_CLOSE);
 	gtk_widget_hide (profile_window);
 
 	model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
@@ -527,8 +496,13 @@ on_user_settings_profile_changed (GtkWidget *widget, gpointer data)
 	}
 }
 
-/* Group settings callbacks */
+void
+on_user_settings_show_help (GtkButton *button, gpointer data)
+{
+	gst_tool_show_help (tool, "tool-add-new-user");
+}
 
+/* Group settings callbacks */
 void
 on_group_settings_dialog_show (GtkWidget *widget, gpointer user_data)
 {
@@ -558,6 +532,12 @@ on_group_settings_ok_clicked (GtkButton *button, gpointer user_data)
 		gst_dialog_modify (tool->main_dialog);
 		group_settings_dialog_close ();
 	}
+}
+
+void
+on_group_settings_show_help (GtkButton *button, gpointer data)
+{
+	gst_tool_show_help (tool, "tool-add-new-group");
 }
 
 /* Profile settings dialog callbacks */
@@ -609,8 +589,13 @@ on_profile_settings_ok_clicked (GtkButton *button, gpointer data)
 	}
 }
 
-/* Profile settings callbacks */
+void
+on_profile_settings_show_help (GtkButton *button, gpointer data)
+{
+	gst_tool_show_help (tool, "tool-add-new-profile");
+}
 
+/* Profile settings callbacks */
 void
 on_profile_new_clicked (GtkButton *button, gpointer data)
 {

@@ -1583,6 +1583,7 @@ gst_init (const gchar *app_name, int argc, char *argv [], const poptOption optio
  	program = gnome_program_init (app_name, VERSION,
 				      LIBGNOMEUI_MODULE, argc, argv,
 				      GNOME_PARAM_POPT_TABLE, options,
+				      GNOME_PARAM_APP_DATADIR, DATADIR,
 				      GNOME_PARAM_HUMAN_READABLE_NAME,
 				      _("GNOME System Tools"),
 				      NULL);
@@ -1723,10 +1724,37 @@ gst_tool_write_to_backend (GstTool *tool, gchar *string)
 		if (nread % REDRAW_NCHARS == 0)
 			while (gtk_events_pending ())
 				gtk_main_iteration ();
-
 	} while (nread < strlen (string));
 
 	while (fflush (tool->backend_stream) != 0);
 
 	fcntl (tool->backend_master_fd, F_SETFL, O_NONBLOCK);
+}
+
+void
+gst_tool_show_help (GstTool *tool, gchar *section)
+{
+	GError    *error = NULL;
+	gchar     *help_file;
+
+	help_file = g_strdup_printf ("%s-admin", tool->name);
+	gnome_help_display (help_file, section, &error);
+
+	if (error) {
+		GtkWidget *dialog;
+
+		dialog = gst_hig_dialog_new (GTK_WINDOW (tool->main_dialog),
+					     GTK_DIALOG_MODAL,
+					     GTK_MESSAGE_ERROR,
+					     _("Could not display help"),
+					     error->message,
+					     GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
+					     NULL);
+
+		gtk_dialog_run (GTK_DIALOG (dialog));
+		gtk_widget_destroy (dialog);
+		g_error_free (error);
+	}
+
+	g_free (help_file);
 }

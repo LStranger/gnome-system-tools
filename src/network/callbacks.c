@@ -889,6 +889,12 @@ on_connection_cancel_clicked (GtkWidget *w, gpointer data)
 }
 
 void
+on_connection_help_clicked (GtkWidget *w, gpointer data)
+{
+	gst_tool_show_help (tool, NULL);
+}
+
+void
 on_connection_modified (GtkWidget *w, gpointer data)
 {
 	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
@@ -1307,6 +1313,12 @@ on_network_druid_hide (GtkWidget *w, gpointer data)
 	return TRUE;
 }
 
+void
+on_network_druid_help (GtkWidget *w, gpointer data)
+{
+	gst_tool_show_help (tool, NULL);
+}
+
 gboolean
 on_network_druid_page_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
@@ -1446,7 +1458,7 @@ on_network_profiles_button_clicked (GtkWidget *widget, gpointer data)
 	GtkWidget *profiles_dialog = gst_dialog_get_widget (tool->main_dialog,
 							    "network_profiles_dialog");
 	
-	gtk_dialog_run (GTK_DIALOG (profiles_dialog));
+	while (gtk_dialog_run (GTK_DIALOG (profiles_dialog)) != GTK_RESPONSE_CLOSE);
 	gtk_widget_hide (profiles_dialog);
 
 	profile_populate_option_menu (tool, root);
@@ -1481,6 +1493,12 @@ on_network_profile_new_clicked (GtkWidget *widget, gpointer data)
 
 	gtk_entry_set_text (GTK_ENTRY (profile_name), "");
 	gtk_entry_set_text (GTK_ENTRY (profile_description), "");
+}
+
+void
+on_network_profile_help_clicked (GtkWidget *widget, gpointer data)
+{
+	gst_tool_show_help (tool, NULL);
 }
 
 void

@@ -36,13 +36,6 @@ enum {
 	COL_USER_LAST
 };
 
-typedef struct 
-{
-	gchar *name;
-	gboolean advanced_state_showable;
-	gboolean basic_state_showable;
-} TableConfig;
-
 typedef struct UserTreeItem_ UserTreeItem;
 	
 struct UserTreeItem_
@@ -52,14 +45,12 @@ struct UserTreeItem_
 	const gchar *home;
 	const gchar *shell;
 	const gchar *comment;
-	const gchar *group;
 	
 	UserTreeItem *children;
 };
 
 void	create_users_table		(void);
 void	populate_users_table		(void);
-void	update_users_table_complexity	(GstDialogComplexity);
 void	users_table_update_content	(void);
 
 #endif /* _USERS_TABLE_H */

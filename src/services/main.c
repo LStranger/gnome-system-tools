@@ -66,12 +66,6 @@ main (int argc, char *argv[])
 	gst_tool_set_xml_funcs (tool, transfer_xml_to_gui, NULL, NULL);
 
 	gst_dialog_connect_signals (tool->main_dialog, signals);
-	g_signal_connect (G_OBJECT (tool->main_dialog),
-			  "complexity_change",
-			  G_CALLBACK (on_dialog_complexity_change),
-			  tool);
-
-	gst_dialog_enable_complexity (tool->main_dialog);
 
 	gst_tool_main (tool,FALSE);
 	

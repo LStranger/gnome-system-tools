@@ -76,6 +76,7 @@ GstDialogSignal signals[] = {
 	/* Network druid callbacks */
 	{ "network_connection_window",       "delete_event",  G_CALLBACK (on_network_druid_hide) },
 	{ "network_connection_druid",        "cancel", G_CALLBACK (on_network_druid_hide) },
+	{ "network_connection_druid",        "help",   G_CALLBACK (on_network_druid_help) },
 	{ "network_connection_page1",        "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_page2",        "next",   G_CALLBACK (on_network_druid_page_next) },
 	{ "network_connection_wireless_page",  "next",   G_CALLBACK (on_network_druid_page_next) },
@@ -108,6 +109,7 @@ GstDialogSignal signals[] = {
 	{ "network_connection_other_ip_address", "focus_out_event", G_CALLBACK (on_network_druid_ip_address_focus_out) },
 
 	/* Network profiles callbacks */
+	{ "network_profiles_help", "clicked", G_CALLBACK (on_network_profile_help_clicked) },
 	{ "network_profiles_menu", "changed", G_CALLBACK (on_network_profile_option_selected) },
 	{ "network_profiles_button", "clicked", G_CALLBACK (on_network_profiles_button_clicked) },
 	{ "network_profile_new", "clicked", G_CALLBACK (on_network_profile_new_clicked) },
@@ -117,6 +119,7 @@ GstDialogSignal signals[] = {
 	{ "connection_config_dialog", "delete_event", G_CALLBACK (on_connection_delete_event) },
 	{ "connection_cancel", "clicked", G_CALLBACK (on_connection_cancel_clicked) },
 	{ "connection_ok", "clicked", G_CALLBACK (on_connection_ok_clicked) },
+	{ "connection_help", "clicked", G_CALLBACK (on_connection_help_clicked) },
 	{ "ppp_autodetect_modem", "clicked", G_CALLBACK (on_ppp_autodetect_modem_clicked) },
 	{ "ppp_volume", "format_value", G_CALLBACK (on_volume_format_value) },
 	{ "ip_address", "focus_out_event", G_CALLBACK (on_ip_address_focus_out) },

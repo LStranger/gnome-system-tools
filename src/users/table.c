@@ -197,12 +197,6 @@ create_tables (void)
 	create_profiles_table ();
 }
 
-void 
-update_tables_complexity (GstDialogComplexity complexity) 
-{
-	update_users_table_complexity (complexity);
-}
-
 void
 populate_all_tables (void)
 {

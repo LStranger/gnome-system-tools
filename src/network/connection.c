@@ -1938,8 +1938,6 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 	fill_general (cxn);
 
 	if (cxn->type == GST_CONNECTION_PPP) {
-		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
-					 PIXMAPS_DIR "/ppp.png");
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), TRUE);
 		gtk_container_set_border_width (GTK_CONTAINER (container), 12);
 
@@ -1957,8 +1955,6 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (notebook), 0);
 	} else if (cxn->type == GST_CONNECTION_WLAN) {
-		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
-					 PIXMAPS_DIR "/wavelan-48.png");
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
@@ -1973,8 +1969,6 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 		fill_ip (cxn);
 		fill_wlan (cxn);
 	} else if (cxn->type == GST_CONNECTION_ETH) {
-		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
-					 PIXMAPS_DIR "/connection-ethernet.png");
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
@@ -1988,8 +1982,6 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 
 		fill_ip (cxn);
 	} else if (cxn->type == GST_CONNECTION_PLIP) {
-		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
-					 PIXMAPS_DIR "/plip-48.png");
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
@@ -2003,8 +1995,6 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 
 		fill_ptp (cxn);
 	} else if (cxn->type == GST_CONNECTION_IRLAN) {
-		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
-					 PIXMAPS_DIR "/irda-48.png");
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_container_set_border_width (GTK_CONTAINER (container), 0);
@@ -2018,9 +2008,6 @@ connection_dialog_setup_widgets (GstConnection *cxn)
 
 		fill_ip (cxn);
 	} else {
-		gtk_image_set_from_file (GTK_IMAGE (gst_dialog_get_widget (tool->main_dialog, "connection_pixmap")),
-					 PIXMAPS_DIR "/network.png");
-
 		gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 		gtk_container_set_border_width (GTK_CONTAINER (container), 0);

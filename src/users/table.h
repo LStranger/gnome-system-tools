@@ -32,7 +32,6 @@ GtkWidget*              popup_menu_create               (GtkWidget*);
 
 /* User and group tables manipulation functions */
 void			create_tables			(void);
-void			update_tables_complexity	(GstDialogComplexity);
 void			populate_all_tables		(void);
 xmlNodePtr		get_selected_row_node		(gint);
 

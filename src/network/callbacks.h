@@ -95,6 +95,7 @@ gboolean on_table_popup_menu (GtkTreeView*, GtkWidget*);
 void on_connection_toggled (GtkWidget*, gchar*, gpointer);
 void on_connection_ok_clicked (GtkWidget*, gpointer);
 void on_connection_cancel_clicked (GtkWidget*, gpointer);
+void on_connection_help_clicked (GtkWidget*, gpointer);
 gboolean on_connection_delete_event (GtkWidget*, GdkEvent*, gpointer);
 void on_connection_modified (GtkWidget*, gpointer);
 void on_ppp_update_dns_toggled (GtkWidget*, gpointer);
@@ -120,6 +121,7 @@ void on_hosts_popup_del_activate (GtkAction*, gpointer);
 
 /* Network connection druid callbacks */
 gboolean on_network_druid_hide (GtkWidget*, gpointer);
+void     on_network_druid_help (GtkWidget*, gpointer);
 gboolean on_network_druid_page_next (GnomeDruidPage*, GnomeDruid*, gpointer);
 gboolean on_network_druid_page_back (GnomeDruidPage*, GnomeDruid*, gpointer);
 void on_network_druid_page_prepare  (GnomeDruidPage*, GnomeDruid*, gpointer);
@@ -131,6 +133,7 @@ gboolean on_network_druid_ip_address_focus_out (GtkWidget*, GdkEventFocus*, gpoi
 
 /* network profiles callbacks */
 void on_network_profiles_button_clicked (GtkWidget*, gpointer);
+void on_network_profile_help_clicked (GtkWidget*, gpointer);
 void on_network_profile_new_clicked (GtkWidget*, gpointer);
 void on_network_profile_delete_clicked (GtkWidget*, gpointer);
 void on_network_profile_table_selection_changed (GtkWidget*, gpointer);

@@ -1,7 +1,11 @@
 noinst_LIBRARIES = libsetuptool.a
 
 INCLUDES = \
-	$(GST_CFLAGS)					\
+	$(GST_CFLAGS) \
+	-DDATADIR=\""$(datadir)"\" \
+        -DLIBDIR=\""$(libdir)"\" \
+        -DSYSCONFDIR=\""$(sysconfdir)"\" \
+        -DPREFIX=\""$(prefix)"\" \
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
 libsetuptool_a_SOURCES =				\

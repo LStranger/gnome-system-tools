@@ -41,15 +41,13 @@ extern GstTool *tool;
 GtkWidget *users_table;
 GArray *users_array;
 
-TableConfig users_table_config [] = {
-	/*Column name,          Adv_state_show,	Basic_state_show*/
-	{ N_("User"),		TRUE,		TRUE},
-	{ N_("Home"),		TRUE,		TRUE},
-	{ N_("User details"),	TRUE,		TRUE},
-	{ N_("UID"),		TRUE,		FALSE},
-	{ N_("Shell"),		TRUE,		FALSE},
-	{ N_("Group"),		FALSE,		FALSE},
-	{NULL}
+gchar *users_table_columns [] = {
+	N_("User"),
+	N_("Home"),
+	N_("User details"),
+	N_("UID"),
+	N_("Shell"),
+	NULL
 };
 
 static void
@@ -57,24 +55,22 @@ add_user_columns (GtkTreeView *treeview)
 {
 	GtkTreeViewColumn *column;
 	GtkCellRenderer *renderer;
-	TableConfig *i;
-	guint j;
+	guint i;
 	
-	for (i = users_table_config, j = 0; 
-	     i->name != NULL; 
-	     i++, j++)
-	{	
+	for (i = 0; 
+	     users_table_columns [i] != NULL;
+	     i++)
+	{
 		renderer = gtk_cell_renderer_text_new ();
-	
-		column = gtk_tree_view_column_new_with_attributes (_(i->name),
+
+		column = gtk_tree_view_column_new_with_attributes (_(users_table_columns [i]),
 	                                                           renderer,
-	                                                           "text",
-	                                                           j,
+	                                                           "text", i,
 	                                                           NULL);
 		gtk_tree_view_column_set_resizable (column, TRUE);
-		gtk_tree_view_column_set_sort_column_id (column, j);
+		gtk_tree_view_column_set_sort_column_id (column, i);
 
-		gtk_tree_view_insert_column (GTK_TREE_VIEW (users_table), column, j);
+		gtk_tree_view_insert_column (GTK_TREE_VIEW (users_table), column, i);
 	}
 }
 
@@ -93,8 +89,6 @@ create_users_model (void)
 				    G_TYPE_POINTER);
 	return GTK_TREE_MODEL (model);
 }
-
-
 
 void
 create_users_table (void)
@@ -143,7 +137,6 @@ get_user_node_data (xmlNodePtr user)
 	item->home = users_table_value (user, "home");
 	item->shell = users_table_value (user, "shell");
 	item->comment = users_table_value (user, "comment");
-	item->group = user_value_group_peek (user);
         
         return item;
 }
@@ -178,52 +171,10 @@ populate_users_table (void)
 					    COL_USER_COMMENT, item->comment,
 					    COL_USER_UID, item->UID,
 					    COL_USER_SHELL, item->shell,
-					    COL_USER_GROUP, item->group,
 			                    COL_USER_POINTER, user,
 					    -1);
 		}
 	}
-}
-
-void
-update_users_table_complexity (GstDialogComplexity complexity)
-{
-	GtkTreeView *u_table = GTK_TREE_VIEW (users_table);
-	GtkTreeView *g_table = GTK_TREE_VIEW (gst_dialog_get_widget (tool->main_dialog, "groups_table"));
-	GtkTreeViewColumn *column;
-	TableConfig *i;
-	guint j;
-
-	gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (u_table));
-	gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (g_table));
-
-	actions_set_sensitive (NODE_USER, FALSE);
-	actions_set_sensitive (NODE_GROUP, FALSE);
-	
-	switch (complexity) {
-	case GST_DIALOG_BASIC:
-		for (i = users_table_config, j=0;
-		     i->name != NULL;
-		     i++, j++)
-		{
-			column = gtk_tree_view_get_column (u_table, j);
-			gtk_tree_view_column_set_visible (column, i->basic_state_showable);
-		}
-		break;
-	case GST_DIALOG_ADVANCED:
-		for (i = users_table_config, j=0;
-		     i->name != NULL;
-		     i++, j++)
-		{
-			column = gtk_tree_view_get_column (u_table, j);
-			gtk_tree_view_column_set_visible (column, i->advanced_state_showable);
-		}
-		break;
-	default:
-		g_warning ("tables_update_complexity: Unsupported complexity.");
-		return;
-	}
-
 }
 
 static void

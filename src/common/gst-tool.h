@@ -177,6 +177,7 @@ gchar*       gst_tool_read_line_from_backend (GstTool*);
 void         gst_tool_read_junk_from_backend (GstTool*, gchar*);
 void         gst_tool_write_to_backend (GstTool*, gchar*);
 void         gst_tool_write_xml_to_backend (GstTool*, xmlDoc*);
+void         gst_tool_show_help (GstTool*, gchar*);
 
 #define __full_tool_name(parameter) "Gst" #parameter "Tool"
 

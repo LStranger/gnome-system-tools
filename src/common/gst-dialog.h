@@ -54,11 +54,6 @@ struct _GstDialog {
 	GladeXML  *gui;
 	GtkWidget *child;
 
-	/* Common widgets */
-	GtkWidget *complexity_button;
-	GtkWidget *complexity_button_label;
-	GtkWidget *complexity_button_image;
-
 	gboolean is_modified;
 
 	GstDialogComplexity complexity;

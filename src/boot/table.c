@@ -37,13 +37,13 @@ extern GstTool *tool;
 GtkWidget *boot_table = NULL;
 GtkTreeIter default_entry_iter;
 
-BootTableConfig boot_table_config [] = {
-	{ N_("Name"),		TRUE,	TRUE },
-	{ N_("Default"),        TRUE,   TRUE },
-	{ N_("Type"),		TRUE,	TRUE },
-	{ N_("Kernel Image"),	TRUE,	FALSE },
-	{ N_("Device"),		TRUE,	FALSE },
-	{NULL}
+gchar *boot_table_columns [] = {
+	N_("Name"),
+	N_("Default"),
+	N_("Type"),
+	N_("Kernel Image"),
+	N_("Device"),
+	NULL
 };
 
 GtkActionEntry popup_menu_items [] = {
@@ -112,14 +112,14 @@ table_create (void)
 			/* We add the signal that will change the default option */
 			g_signal_connect (G_OBJECT (renderer), "toggled",
 					  G_CALLBACK (on_boot_table_default_toggled), boot_table);
-			column = gtk_tree_view_column_new_with_attributes (_(boot_table_config [i].name),
+			column = gtk_tree_view_column_new_with_attributes (_(boot_table_columns [i]),
 									   renderer,
 									   "active", i,
 									   NULL);
 		} else {
 			renderer = gtk_cell_renderer_text_new ();
 
-			column = gtk_tree_view_column_new_with_attributes (_(boot_table_config [i].name),
+			column = gtk_tree_view_column_new_with_attributes (_(boot_table_columns [i]),
 									   renderer,
 									   "text", i,
 									   NULL);
@@ -142,33 +142,6 @@ table_create (void)
 	g_signal_connect (G_OBJECT (boot_table), "button_press_event",
 			  G_CALLBACK (on_boot_table_button_press),
 			  (gpointer) popup_menu);
-}
-
-void
-boot_table_update_state (GstDialogComplexity complexity)
-{
-	GtkTreeViewColumn *column;
-	gint i;
-	
-	g_return_if_fail (boot_table != NULL);
-	
-	switch (complexity) {
-	case GST_DIALOG_BASIC:
-		for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
-			column = gtk_tree_view_get_column (GTK_TREE_VIEW (boot_table), i);
-			gtk_tree_view_column_set_visible (column, boot_table_config [i].basic_state_showable);
-		}
-		break;
-	case GST_DIALOG_ADVANCED:
-		for (i = 0; i < BOOT_LIST_COL_LAST - 1; i++) {
-			column = gtk_tree_view_get_column (GTK_TREE_VIEW (boot_table), i);
-			gtk_tree_view_column_set_visible (column, boot_table_config [i].advanced_state_showable);
-		}
-		break;
-	default:
-		g_warning ("tables_update_complexity: Unsupported complexity.");
-		return;
-	}
 }
 
 static gboolean

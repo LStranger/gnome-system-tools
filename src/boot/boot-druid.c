@@ -29,6 +29,7 @@
 #include "gst-hig-dialog.h"
 #include "boot-druid.h"
 #include "boot-settings.h"
+#include "callbacks.h"
 
 extern GstTool *tool;
 
@@ -92,6 +93,12 @@ static void
 druid_cancel (GtkWidget *w, gpointer data)
 {
 	druid_exit ((BootDruid *) data);
+}
+
+static void
+druid_help (GtkWidget *widget, gpointer data)
+{
+	gst_tool_show_help (tool, NULL);
 }
 
 static void
@@ -467,6 +474,8 @@ construct (BootDruid *druid)
 	}
 	g_signal_connect (G_OBJECT (druid->druid), "cancel",
 			  G_CALLBACK (druid_cancel), druid);
+	g_signal_connect (G_OBJECT (druid->druid), "help",
+			  G_CALLBACK (druid_help), NULL);
 
 	/* Reparent "interesting" widgets. */
 	

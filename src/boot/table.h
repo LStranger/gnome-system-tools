@@ -47,19 +47,9 @@ enum {
         POPUP_DELETE
 };
 
-
-typedef struct 
-{
-	gchar *name;
-	gboolean advanced_state_showable;
-	gboolean basic_state_showable;
-} BootTableConfig;
-
-
 void              table_create            (void);
 
 void              table_populate          (xmlNodePtr root);
-void              boot_table_update_state (GstDialogComplexity);
 
 gchar            *boot_value_label        (xmlNodePtr node); 
 gchar            *boot_value_append       (xmlNodePtr node); 
