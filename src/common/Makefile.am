@@ -7,7 +7,6 @@ INCLUDES =		\
 	$(GNOME_XML_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-# for now, leave tool.[ch] in
 libsetuptool_a_SOURCES = \
 	xst-xml.c		\
 	xst-xml.h		\
@@ -31,10 +30,9 @@ libsetuptool_a_SOURCES = \
 	xst-report-line.c \
 	xst-report-line.h \
 	xst-platform.c \
-	xst-platform.h
-
-#	tool.c		\
-#	tool.h
+	xst-platform.h \
+	xst-ui.c       \
+	xst-ui.h
 
 ccenterdir = $(datadir)/control-center
 Systemdir = $(ccenterdir)/System

@@ -29,3 +29,4 @@ gboolean get_ctree_checkmark(GtkCTree *ctree, GtkCTreeNode *node, gint column);
 void set_clist_checkmark(GtkCList *clist, gint row, gint column, gboolean state);
 
 gboolean get_clist_checkmark(GtkCList *clist, gint row, gint column);
+
