@@ -26,7 +26,6 @@
 
 typedef enum {
 	XST_DIALOG_BASIC,
-	XST_DIALOG_INTERMEDIATE,
 	XST_DIALOG_ADVANCED
 } XstDialogComplexity;
 
@@ -42,17 +41,6 @@ typedef enum {
 	XST_WIDGET_MODE_SENSITIVE
 } XstWidgetMode;
 
-/* NOTE: The following def should be in xst-widget.h, but alone it doesn't
- * warrant setting up a complete XstWidget subsystem. */
-
-struct _XstWidgetPolicy {
-	const gchar   *widget;
-	gboolean       need_access;
-	XstWidgetMode  basic;
-	XstWidgetMode  intermediate;
-	XstWidgetMode  advanced;
-};
-
 typedef struct _XstTool             XstTool;
 typedef struct _XstToolClass        XstToolClass;
 
@@ -61,6 +49,7 @@ typedef struct _XstDialogClass      XstDialogClass;
 
 typedef struct _XstDialogSignal     XstDialogSignal;
 
+typedef struct _XstWidget           XstWidget;
 typedef struct _XstWidgetPolicy     XstWidgetPolicy;
 
 typedef struct _XstReportLine       XstReportLine;

@@ -1,5 +1,24 @@
 2001-03-15  Hans Petter Jansson  <hpj@ximian.com>
 
+	* xst-widget.[ch]: Implement. Wrapper for XST-managed widgets; lets
+	  us update widget visibility and sensitivity according to defined
+	  policies. Policy includes complexity level, root access and a
+	  user-controlled sensitivity (e.g. for buttons that become sensitive
+	  when you select from a list).
+
+	* xst-dialog.[ch] (xst_dialog_set_widget_policies): Re-implement.
+	  Lets you define widget policies in an array and pass that to the
+	  dialog. Now converts the array into a GSList.
+	  (apply_widget_policies): Don't do the work here anymore, call
+	  xst_widget_apply_policy() on each XstWidget instead.
+
+	* xst-types.[ch]: Remove XST_DIALOG_INTERMEDIATE. Move
+	  XstWidgetPolicy struct to xst-widget.h. Add XstWidget typedef.
+
+	* Makefile.am: Add xst-widget.[ch].
+
+2001-03-15  Hans Petter Jansson  <hpj@ximian.com>
+
 	* xst-dialog.c (apply_widget_policies): Implement.
 	  (xst_dialog_set_complexity): Call apply_widget_policies().
 	  (xst_dialog_set_widget_policies): Implement.

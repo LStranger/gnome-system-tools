@@ -19,6 +19,8 @@ libsetuptool_a_SOURCES = \
 	checked.xpm 	\
 	unchecked.xpm 	\
 	reading.xpm	\
+	xst-widget.c    \
+	xst-widget.h    \
 	xst-dialog.c	\
 	xst-dialog.h	\
 	xst-tool.c	\

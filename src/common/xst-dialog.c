@@ -23,6 +23,7 @@
 
 #include <gnome.h>
 #include <gmodule.h>
+#include "xst-widget.h"
 #include "xst-dialog.h"
 
 #ifdef XST_DEBUG
@@ -61,56 +62,14 @@ xst_dialog_get_widget (XstDialog *xd, const char *widget)
 static void
 apply_widget_policies (XstDialog *xd)
 {
-	gboolean have_access;
-	XstDialogComplexity complexity;
-	const XstWidgetPolicy **xwp;
-	GtkWidget *widget;
-	XstWidgetMode mode;
-	int i;
+	GSList *list;
 
 	/* Hide, show + desensitize or show + sensitize widgets based on access level
 	 * and complexity */
 
-	if (!xd->widget_policies)
-		return;
-
-	have_access = xst_tool_get_access (xd->tool);
-	complexity  = xst_dialog_get_complexity (xd);
-	xwp         = xd->widget_policies;
-
-	for (i = 0; xwp [i]->widget; i++)
+	for (list = xd->xst_widget_list; list; list = g_slist_next (list))
 	{
-		widget = xst_dialog_get_widget (xd, xwp [i]->widget);
-
-		/* Get desired mode for current complexity from widget's struct */
-
-		switch (complexity)
-		{
-		        case XST_DIALOG_BASIC:        mode = xwp [i]->basic;        break;
-		        case XST_DIALOG_INTERMEDIATE: mode = xwp [i]->intermediate; break;
-		        case XST_DIALOG_ADVANCED:     mode = xwp [i]->advanced;     break;
-		        default:
-				mode = xwp [i]->basic;  /* Whatever. Happy cc. */
-				g_error ("Unhandled complexity.");
-		}
-
-		/* Show or hide the widget */
-
-		if (mode == XST_WIDGET_MODE_HIDDEN)
-			gtk_widget_hide (widget);
-		else if (mode == XST_WIDGET_MODE_INSENSITIVE ||
-			 mode == XST_WIDGET_MODE_SENSITIVE)
-			gtk_widget_show (widget);
-		else
-			g_error ("Unhandled widget mode.");
-
-		/* Sensitize or desensitize the widget. Done separately for readability. */
-
-		if (mode == XST_WIDGET_MODE_INSENSITIVE ||
-		    (access == FALSE && xwp [i]->need_access == TRUE))
-			gtk_widget_set_sensitive (widget, FALSE);
-		else
-			gtk_widget_set_sensitive (widget, TRUE);
+		xst_widget_apply_policy (list->data);
 	}
 }
 
@@ -280,7 +239,19 @@ xst_dialog_add_apply_hook (XstDialog *xd, XstDialogHookFunc *func, gpointer data
 void
 xst_dialog_set_widget_policies (XstDialog *xd, const XstWidgetPolicy **xwp)
 {
-	xd->widget_policies = xwp;
+	XstWidget *xw;
+	int i;
+
+	for (i = 0; xwp [i]->widget; i++)
+	{
+		xw = xst_widget_new (xst_dialog_get_widget (xd, xwp [i]->widget), xd,
+				     xwp [i]->basic, xwp [i]->advanced, xwp [i]->need_access,
+				     xwp [i]->user_sensitive);
+
+		xd->xst_widget_list = g_slist_append (xd->xst_widget_list, xw);
+	}
+
+	apply_widget_policies (xd);
 }
 
 static void

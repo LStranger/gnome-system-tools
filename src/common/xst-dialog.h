@@ -61,7 +61,7 @@ struct _XstDialog {
 	XstDialogComplexity complexity;
 	gint frozen;
 
-	const XstWidgetPolicy **widget_policies;
+	GSList *xst_widget_list;
 	GList *apply_hook_list;
 };
 
