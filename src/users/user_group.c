@@ -39,8 +39,6 @@ GList *group_adv_list = NULL;
 
 login_defs logindefs;
 
-static gboolean user_group_adv_mode = FALSE;
-
 extern void user_group_free (user_group *ug)
 {
 	g_free (ug->key);
@@ -388,7 +386,7 @@ user_fill_settings_group (GtkCombo *combo)
 extern GList *
 user_current_list (void)
 {
-	if (user_group_adv_mode)
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
 		return user_adv_list;
 	return user_basic_list;
 }
@@ -800,7 +798,7 @@ group_fill_all_users_list (GList *member_rows)
 extern GList *
 group_current_list (void)
 {
-	if (user_group_adv_mode)
+	if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
 		return group_adv_list;
 	return group_basic_list;
 }

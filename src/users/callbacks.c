@@ -51,12 +51,21 @@ on_close_clicked(GtkButton *button, gpointer data)
 	do_quit();
 }
 
-void
+extern void
 on_apply_clicked (GtkButton *button, gpointer user_data)
 {
 	transfer_gui_to_xml (xml_doc_get_root (tool_config_get_xml()));
  	tool_config_save();
 	tool_set_modified(FALSE);
+}
+
+extern void
+on_complexity_clicked (GtkButton *button, gpointer user_data)
+{
+	if (tool_get_complexity () == TOOL_COMPLEXITY_BASIC)
+		tool_set_complexity (TOOL_COMPLEXITY_ADVANCED);
+	else if (tool_get_complexity () == TOOL_COMPLEXITY_ADVANCED)
+		tool_set_complexity (TOOL_COMPLEXITY_BASIC);
 }
 
 /* Main window callbacks */

@@ -43,6 +43,10 @@ on_apply_clicked                       (GtkButton       *button,
                                         gpointer         user_data);
 
 extern void
+on_complexity_clicked                  (GtkButton       *button,
+                                        gpointer         user_data);
+
+extern void
 on_user_settings_clicked (GtkButton *button, gpointer user_data);
 
 extern void
