@@ -8,8 +8,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: helix-setup-tools\n"
-"POT-Creation-Date: 2000-12-12 02:12+0100\n"
-"PO-Revision-Date: 2000-12-12 02:16+0100\n"
+"POT-Creation-Date: 2000-12-14 13:24+0100\n"
+"PO-Revision-Date: 2000-12-14 13:27+0100\n"
 "Last-Translator: Christian Rose <menthos@menthos.com>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -127,7 +127,7 @@ msgstr "Diskar och partitioner"
 #: interfaces/disks.glade.h:24 interfaces/memory.glade.h:18
 #: interfaces/nameresolution.glade.h:42 interfaces/networking.glade.h:15
 #: interfaces/shares.glade.h:47 interfaces/time.glade.h:16
-#: interfaces/users.glade.h:23 src/common/tool.c:612
+#: interfaces/users.glade.h:23 src/common/tool.c:618
 msgid " Advanced >> "
 msgstr " Avancerat >> "
 
@@ -232,13 +232,12 @@ msgstr "Identifiering"
 msgid "Domain Name Service (DNS)"
 msgstr "Domännamnstjänst (DNS)"
 
-#: interfaces/nameresolution.glade.h:21 interfaces/nameresolution.glade.h:31
-#: interfaces/nameresolution.glade.h:50
-msgid "New:"
-msgstr "Ny:"
+#: interfaces/nameresolution.glade.h:21
+msgid "New server:"
+msgstr "Ny server:"
 
 #: interfaces/nameresolution.glade.h:22 interfaces/nameresolution.glade.h:32
-#: interfaces/nameresolution.glade.h:49
+#: interfaces/nameresolution.glade.h:48
 msgid "Existing:"
 msgstr "Existerande:"
 
@@ -271,9 +270,13 @@ msgstr " Flytta upp"
 msgid "Move Down"
 msgstr "Flytta ner"
 
+#: interfaces/nameresolution.glade.h:31
+msgid "New domain:"
+msgstr "Ny domän:"
+
 #: interfaces/nameresolution.glade.h:33
 msgid "Search Domains"
-msgstr "Sök domäner"
+msgstr "Sökdomäner"
 
 #: interfaces/nameresolution.glade.h:34
 msgid "IP address"
@@ -287,7 +290,7 @@ msgstr "Namn"
 msgid "New Alias"
 msgstr "Nytt alias"
 
-#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:207
+#: interfaces/nameresolution.glade.h:38 src/nameresolution/callbacks.c:255
 msgid "Settings for the selected alias"
 msgstr "Inställningar för det markerade aliaset"
 
@@ -307,7 +310,11 @@ msgstr "Aliasinställningar"
 msgid "IP address:"
 msgstr "IP-adress:"
 
-#: interfaces/nameresolution.glade.h:48
+#: interfaces/nameresolution.glade.h:49
+msgid "New:"
+msgstr "Ny:"
+
+#: interfaces/nameresolution.glade.h:50
 msgid "label48"
 msgstr "label48"
 
@@ -566,7 +573,7 @@ msgstr ""
 msgid "New User"
 msgstr "Ny användare"
 
-#: interfaces/users.glade.h:11 src/users/callbacks.c:258
+#: interfaces/users.glade.h:11 src/users/callbacks.c:273
 msgid "Settings for the selected user"
 msgstr "Inställningar för den markerade användaren"
 
@@ -775,11 +782,11 @@ msgstr "OK"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/common/tool.c:614
+#: src/common/tool.c:620
 msgid " << Basic "
 msgstr " << Grundläggande "
 
-#: src/common/tool.c:709
+#: src/common/tool.c:715
 msgid ""
 "You need full administration privileges (i.e. root)\n"
 "to run this configuration tool. You can acquire\n"
@@ -807,7 +814,7 @@ msgstr "Du måste ange sökvägen till det nya växlingsutrymmet!"
 msgid "It's already used as swap space!"
 msgstr "Det används redan som växlingsutrymme!"
 
-#: src/nameresolution/callbacks.c:57
+#: src/nameresolution/callbacks.c:62
 msgid ""
 "The IP address must have the form of four digits\n"
 "sepparated by a dot (.), being these digits in the range of 0 to 255,\n"
@@ -817,50 +824,64 @@ msgstr ""
 "Dessa tal måste vara i intervallet 0 till 255, förutom det första och\n"
 "sista, som måste vara i intervallet 1 till 254."
 
-#: src/nameresolution/callbacks.c:193
+#: src/nameresolution/callbacks.c:241
 msgid "Settings for alias of "
 msgstr "Inställningar för aliaset "
 
-#: src/users/callbacks.c:156
+#: src/nameresolution/callbacks.c:302
+#, c-format
+msgid "Settings for Alias %s"
+msgstr "Inställningar för aliaset %s"
+
+#. Changes have been made.
+#: src/nameresolution/callbacks.c:414 src/users/callbacks.c:691
+msgid ""
+"There are changes which haven't been applyed.\n"
+"Apply now?"
+msgstr ""
+"Det finns ändringar som inte har verkställts än.\n"
+"Verkställ nu?"
+
+#: src/users/callbacks.c:164
 #, c-format
 msgid "Settings for User %s"
 msgstr "Inställningar för användaren %s"
 
-#: src/users/callbacks.c:180
+#: src/users/callbacks.c:188
 #, c-format
 msgid "Password for User %s"
 msgstr "Lösenord för användaren %s"
 
-#: src/users/callbacks.c:238
+#: src/users/callbacks.c:252
 msgid "The root user must not be deleted."
 msgstr "Användaren root får inte tas bort."
 
-#: src/users/callbacks.c:245
+#: src/users/callbacks.c:259
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Är du säker på att du vill ta bort användaren %s?"
 
-#: src/users/callbacks.c:289
+#: src/users/callbacks.c:311
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Inställningar för gruppen %s"
 
-#: src/users/callbacks.c:308
+#: src/users/callbacks.c:331
 msgid "Create New Group"
 msgstr "Skapa ny grupp"
 
-#: src/users/callbacks.c:336
+#: src/users/callbacks.c:360
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Är du säker på att du vill ta bort gruppen %s?"
 
-#: src/users/callbacks.c:457
+#: src/users/callbacks.c:482
 #, c-format
 msgid "Password set to \"%s\"."
 msgstr "Lösenordet sattes till \"%s\"."
 
 #. Bad confirmation
-#: src/users/callbacks.c:495
+#: src/users/callbacks.c:520
 msgid ""
 "The password and its confirmation\n"
 "must match."
@@ -869,7 +890,7 @@ msgstr ""
 "måste stämma överens."
 
 #. Quality check problems, with err pointing to a string to the error
-#: src/users/callbacks.c:501
+#: src/users/callbacks.c:526
 #, c-format
 msgid ""
 "Bad password: %s.\n"
@@ -878,16 +899,7 @@ msgstr ""
 "Felaktigt lösenord: %s.\n"
 "Var vänlig och försök med ett nytt lösenord."
 
-#. Changes have been made.
-#: src/users/callbacks.c:666
-msgid ""
-"There are changes which haven't been applyed.\n"
-"Apply now?"
-msgstr ""
-"Det finns ändringar som inte har verkställts än.\n"
-"Verkställ nu?"
-
-#: src/users/user_group.c:57
+#: src/users/user_group.c:58
 msgid "Username is empty."
 msgstr "Användarnamnet är tomt."
 
@@ -896,13 +908,13 @@ msgstr "Användarnamnet är tomt."
 msgid "User %s already exists."
 msgstr "Användaren %s finns redan."
 
-#: src/users/user_group.c:89
+#: src/users/user_group.c:94
 msgid "Please set a valid username, using only lower-case letters."
 msgstr ""
 "Var vänlig och ange ett giltigt användarnamn som bara består av små "
 "bokstäver."
 
-#: src/users/user_group.c:122
+#: src/users/user_group.c:128
 msgid ""
 "Please set a valid main group name, with only lower-case letters,\n"
 "or select one from the pull-down menu."
@@ -910,25 +922,25 @@ msgstr ""
 "Var vänlig och ange ett giltigt gruppnamn med endast små bokstäver,\n"
 "eller välj ett från rullgardinsmenyn."
 
-#: src/users/user_group.c:187
+#: src/users/user_group.c:194
 msgid "The username is empty."
 msgstr "Användarnamnet är tomt."
 
-#: src/users/user_group.c:316
+#: src/users/user_group.c:330
 msgid "The group name is empty."
 msgstr "Gruppnamnet är tomt."
 
-#: src/users/user_group.c:333
+#: src/users/user_group.c:347
 #, c-format
 msgid "Group %s already exists."
 msgstr "Gruppen %s finns redan."
 
-#: src/users/user_group.c:349
+#: src/users/user_group.c:363
 msgid "Please set a valid group name, with only lower-case letters."
 msgstr ""
 "Var vänlig och ställ in ett giltigt gruppnamn, med endast små bokstäver."
 
-#: src/users/user_group.c:394
+#: src/users/user_group.c:409
 msgid "Group name is empty."
 msgstr "Gruppnamnet är tomt."
 
