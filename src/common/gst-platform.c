@@ -62,8 +62,9 @@ gst_platform_new (const gchar *key, const gchar *name)
 GstPlatform *
 gst_platform_new_from_node (xmlNodePtr node)
 {
-	gchar *key;
-	gchar *name;
+	gchar       *key;
+	gchar       *name;
+	GstPlatform *platform;
 	
 	g_return_val_if_fail (node != NULL, NULL);
 
@@ -81,7 +82,12 @@ gst_platform_new_from_node (xmlNodePtr node)
 		name = strdup (key);
 	}
 
-	return gst_platform_new (key, name);
+	platform = gst_platform_new (key, name);
+
+	g_free (key);
+	g_free (name);
+
+	return platform;
 }
 
 GstPlatform *

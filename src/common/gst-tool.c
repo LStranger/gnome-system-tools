@@ -98,6 +98,7 @@ static gint gsttool_signals [LAST_SIGNAL] = { 0 };
 
 static void     gst_tool_idle_run_directives_remove (GstTool *tool);
 static void     gst_tool_idle_run_directives_add    (GstTool *tool);
+static void     gst_tool_directive_free             (GstDirectiveEntry*);
 
 static gboolean platform_set_current_cb   (GstTool *tool, GstReportLine *rline, gpointer data);
 static gboolean platform_unsupported_cb   (GstTool *tool, GstReportLine *rline, gpointer data);
@@ -355,6 +356,8 @@ report_progress_do (GstTool *tool)
 				g_string_append_c (tool->line, buffer [i]);
 			}
 		}
+
+		g_free (buffer);
 	}
 
 full_break:
@@ -374,6 +377,8 @@ full_break:
 		gdk_input_remove (tool->input_id);
 		tool->input_id = 0;
 	}
+
+	g_free (buffer);
 }
 
 static gboolean
@@ -540,7 +545,7 @@ gst_tool_idle_run_directives (gpointer data)
 		entry = tool->directive_queue->data;
 		tool->directive_queue = g_slist_remove (tool->directive_queue, entry);
 		entry->callback (entry);
-		g_free (entry);
+		gst_tool_directive_free (entry);
 	}
 
 	tool->directive_queue_idle_id = 0;
@@ -695,6 +700,16 @@ gst_tool_queue_directive (GstTool *tool, GstDirectiveFunc callback, gpointer dat
 
 	tool->directive_queue = g_slist_append (tool->directive_queue, entry);
 	gst_tool_idle_run_directives_add (tool);
+}
+
+static void
+gst_tool_directive_free (GstDirectiveEntry *entry)
+{
+	g_free (entry->data);
+	g_free (entry->report_sign);
+	xmlFreeDoc (entry->in_xml);
+
+	g_free (entry);
 }
 
 /* As specified, escapes :: to \:: and \ to \\ and joins the strings. */
@@ -1331,6 +1346,7 @@ gst_tool_construct (GstTool *tool, const char *name, const char *title)
 	if (hosts != NULL) 
 		tool->remote_hosts = g_strsplit (hosts, ",", -1);
 
+	g_free (hosts);
 	g_free (remote_config_key);
 	g_free (remote_hosts_key);
 }
