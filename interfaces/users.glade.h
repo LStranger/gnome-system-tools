@@ -61,3 +61,13 @@ gchar *s = N_("Days between warning and\n"
               " password expiration:  ");
 gchar *s = N_("Minimum  password length:");
 gchar *s = N_("Defaults");
+gchar *s = N_("It doesn't work yet. It's here only on testing purposes and currently uses local data.");
+gchar *s = N_("New User");
+gchar *s = N_("New Group");
+gchar *s = N_("Delete");
+gchar *s = N_("Settings for selected user and group");
+gchar *s = N_("Change the settings and options for the\n"
+              "selected user or group, like a users password\n"
+              "or a groups name or members.");
+gchar *s = N_("Settings");
+gchar *s = N_("Network");
