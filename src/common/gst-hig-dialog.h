@@ -37,16 +37,6 @@ typedef enum
 	GST_HIG_MESSAGE_AUTHENTICATION
 } GstHigMessageType;
 
-typedef enum
-{
-  GST_HIG_BUTTONS_NONE,
-  GST_HIG_BUTTONS_OK,
-  GST_HIG_BUTTONS_CLOSE,
-  GST_HIG_BUTTONS_CANCEL,
-  GST_HIG_BUTTONS_YES_NO,
-  GST_HIG_BUTTONS_OK_CANCEL
-} GstHigButtonsType;
-
 #define GST_TYPE_HIG_MESSAGE_TYPE            (gst_hig_message_type_get_type())
 #define GST_TYPE_HIG_DIALOG                  (gst_hig_dialog_get_type ())
 #define GST_HIG_DIALOG(obj)                  (G_TYPE_CHECK_INSTANCE_CAST ((obj), GST_TYPE_HIG_DIALOG, GstHigDialog))

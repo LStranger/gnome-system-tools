@@ -43,8 +43,6 @@ static void gst_hig_dialog_get_property (GObject         *object,
 																				 guint            prop_id,
 																				 GValue          *value,
 																				 GParamSpec      *pspec);
-static void gst_hig_dialog_add_buttons  (GstHigDialog    *message_dialog,
-																				 GstHigButtonsType   buttons);
 
 enum {
   PROP_0,
