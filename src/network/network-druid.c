@@ -29,6 +29,26 @@
 #include "callbacks.h"
 #include "connection.h"
 
+static void
+network_druid_fill_wireless_devices_list (GstTool *tool)
+{
+	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog,
+						  "network_connection_wireless_device");
+	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
+	xmlNodePtr node;
+	GList *devices = NULL;
+	
+	for (node = gst_xml_element_find_first (root, "wireless_device");
+	     node != NULL;
+	     node = gst_xml_element_find_next (node, "wireless_device"))
+	{
+		devices = g_list_append (devices, gst_xml_element_get_content (node));
+	}
+
+	if (devices)
+		gtk_combo_set_popdown_strings (GTK_COMBO (combo), devices);
+}
+
 void
 network_druid_new (GnomeDruid *druid, GstTool *tool, GstConnectionType type)
 {
@@ -506,24 +526,4 @@ network_druid_set_page_back (GnomeDruid *druid)
 	druid_data->current_page--;
 
 	return FALSE;
-}
-
-static void
-network_druid_fill_wireless_devices_list (GstTool *tool)
-{
-	GtkWidget *combo = gst_dialog_get_widget (tool->main_dialog,
-						  "network_connection_wireless_device");
-	xmlNodePtr root = gst_xml_doc_get_root (tool->config);
-	xmlNodePtr node;
-	GList *devices = NULL;
-	
-	for (node = gst_xml_element_find_first (root, "wireless_device");
-	     node != NULL;
-	     node = gst_xml_element_find_next (node, "wireless_device"))
-	{
-		devices = g_list_append (devices, gst_xml_element_get_content (node));
-	}
-
-	if (devices)
-		gtk_combo_set_popdown_strings (GTK_COMBO (combo), devices);
 }
