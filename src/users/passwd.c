@@ -234,5 +234,5 @@ passwd_set (xmlNodePtr node, const gchar *pwd)
 
 	xst_xml_set_child_content (node, "password", buf);
 
-	return buf;
+	return password;
 }

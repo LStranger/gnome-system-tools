@@ -181,9 +181,14 @@ druid_entry_activate (GtkWidget *w, gpointer data)
 static void
 druid_finish (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {
+	gchar *buf;
 	UserSettings *us = data;
-
+	
 	user_update (us);
+
+	buf = gtk_entry_get_text (us->pwd->pwd1);
+	passwd_set (us->node, buf);
+	
 	druid_exit (us);
 }
 
