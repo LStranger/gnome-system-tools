@@ -1,1 +1,1 @@
-SUBDIRS = common networking nameresolution time shares memory
+SUBDIRS = common networking nameresolution time shares disks memory
