@@ -468,6 +468,13 @@ report_progress_tick (gpointer data, gint fd, GdkInputCondition cond)
 	}
 }
 
+static gboolean
+report_window_close_cb (GtkWidget *window, gpointer data)
+{
+	gtk_widget_hide (window);
+	return TRUE;
+}
+
 static void
 report_progress (XstTool *tool, int fd, const gchar *label)
 {
@@ -491,6 +498,8 @@ report_progress (XstTool *tool, int fd, const gchar *label)
 	tool->input_id = gtk_input_add_full (fd, GDK_INPUT_READ, report_progress_tick,
 					     NULL, tool, NULL);
 
+	gtk_signal_connect_after (GTK_OBJECT (tool->report_window), "delete-event",
+				  GTK_SIGNAL_FUNC (report_window_close_cb), NULL);
 	gtk_widget_show (tool->report_window);
 	
 	gtk_main ();
