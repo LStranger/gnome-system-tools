@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ms-longgok\n"
-"POT-Creation-Date: 2004-01-04 15:12+0800\n"
-"PO-Revision-Date: 2004-01-04 16:05+0730\n"
-"Last-Translator: Hasbullah Bin Pit <sebol@ikhlas.com>\n"
+"POT-Creation-Date: 2004-08-23 23:39+0800\n"
+"PO-Revision-Date: 2004-08-26 14:28+0730\n"
+"Last-Translator: Hasbullah Bin Pit <sebol@my-penguin.org>\n"
 "Language-Team: Projek Gabai <gabai-penyumbang@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,61 +18,44 @@ msgid "Comma separated list of hosts that the GST will be able to access when th
 msgstr ""
 
 #: gnome-system-tools.schemas.in.h:2
-msgid "Dialog complexity for the boot-admin tool"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:3
-msgid "Dialog complexity for the network-admin tool"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:4
-msgid "Dialog complexity for the services-admin tool"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:5
-msgid "Dialog complexity for the time-admin tool"
-msgstr "Kekompleksan dialog bagi alat time-admin"
-
-#: gnome-system-tools.schemas.in.h:6
-msgid "Dialog complexity for the users-admin tool"
-msgstr "Kekompleksan dialog bagi alat users-admin"
-
-#: gnome-system-tools.schemas.in.h:7
 msgid "Last GST version executed"
 msgstr "Versi terakhit GST dilaksanakan"
 
-#: gnome-system-tools.schemas.in.h:8
+#: gnome-system-tools.schemas.in.h:3
+msgid "Preferred bootloader that boot-admin will configure"
+msgstr ""
+
+#: gnome-system-tools.schemas.in.h:4
 msgid "Remote hosts"
 msgstr "Hos jauh"
 
-#: gnome-system-tools.schemas.in.h:9
-msgid "The GNOME System Tools have two data display modes: basic mode and advanced mode, the basic mode is intended to show less options than the advanced mode"
-msgstr ""
-
-#: gnome-system-tools.schemas.in.h:10
+#: gnome-system-tools.schemas.in.h:5
 msgid "The GST are able to do remote configuration through SSH, enable this option to use this feature"
 msgstr ""
 
-#: gnome-system-tools.schemas.in.h:11
+#: gnome-system-tools.schemas.in.h:6
 msgid "The last GST version that this computer has run"
 msgstr ""
 
-#: gnome-system-tools.schemas.in.h:12
+#: gnome-system-tools.schemas.in.h:7
+msgid "This key stores the bootloader that boot-admin will configure if there are more than one installed, if it's not set or isn't valid, then boot-admin will ask the user"
+msgstr ""
+
+#: gnome-system-tools.schemas.in.h:8
 msgid "Whether the tools will use remote administration or not"
 msgstr "Samada alatan akan menggunakan pentadbiran jauh atau tidak"
 
-#: gnome-system-tools.schemas.in.h:13
+#: gnome-system-tools.schemas.in.h:9
 msgid "Whether the users-admin tool should show all users and groups or not"
 msgstr "Samada alat users-admin patut memapar semua pengguna dan kumpulan atau tidak"
 
-#: gnome-system-tools.schemas.in.h:14
+#: gnome-system-tools.schemas.in.h:10
 #, fuzzy
 msgid "Whether the warning dialog should be shown or not"
 msgstr "Samada sempadan patut dipapar atau sebaliknya"
 
 #: interfaces/boot.glade.in.h:1
 #: interfaces/common.glade.in.h:1
-#: interfaces/disks.glade.in.h:2
 #: interfaces/network.glade.in.h:1
 #: interfaces/time.glade.in.h:2
 #: interfaces/users.glade.in.h:1
@@ -96,186 +79,164 @@ msgid "/dev/hdd"
 msgstr "/dev/hdd"
 
 #: interfaces/boot.glade.in.h:6
-msgid "1024x768"
-msgstr "1024x768"
-
-#: interfaces/boot.glade.in.h:7
-msgid "1280x1024"
-msgstr "1280x1024"
-
-#: interfaces/boot.glade.in.h:8
-msgid "16,777,216"
-msgstr "16,777,216"
-
-#: interfaces/boot.glade.in.h:9
-msgid "256"
-msgstr "256"
-
-#: interfaces/boot.glade.in.h:10
-msgid "32,768"
-msgstr "32,768"
-
-#: interfaces/boot.glade.in.h:11
-msgid "640x480"
-msgstr "640x800"
-
-#: interfaces/boot.glade.in.h:12
-msgid "65,536"
-msgstr "65,536"
-
-#: interfaces/boot.glade.in.h:13
-msgid "800x600"
-msgstr "800x600"
-
-#: interfaces/boot.glade.in.h:14
 msgid "<b>Security</b>"
 msgstr "<b>Sekuriti</b>"
 
-#: interfaces/boot.glade.in.h:15
-#: interfaces/users.glade.in.h:4
+#: interfaces/boot.glade.in.h:7
+#, fuzzy
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Bootloader settings</span>\n"
+"Use this tool to specify which operating systems users can choose at startup"
+msgstr "Guna alat ini untuk menyatakan sistem pengoperasian mana yg pengguna boleh pilih ketika permulaan."
+
+#: interfaces/boot.glade.in.h:9
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Several bootloaders have been found</span>\n"
+"\n"
+"please select which do you want to configure"
+msgstr ""
+
+#: interfaces/boot.glade.in.h:12
+#: interfaces/users.glade.in.h:6
 msgid "<span weight=\"bold\">Basic Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Asas</span>"
 
-#: interfaces/boot.glade.in.h:16
+#: interfaces/boot.glade.in.h:13
 msgid "<span weight=\"bold\">Image Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Imej</span>"
 
-#: interfaces/boot.glade.in.h:17
+#: interfaces/boot.glade.in.h:14
 msgid "<span weight=\"bold\">Other Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Lain</span>"
 
-#: interfaces/boot.glade.in.h:18
+#: interfaces/boot.glade.in.h:15
 msgid "<span weight=\"bold\">Starting the Computer</span>"
 msgstr "<span weight=\"bold\">Memulakan Komputer</span>"
 
-#: interfaces/boot.glade.in.h:19
+#: interfaces/boot.glade.in.h:16
 msgid "Ask at boot"
 msgstr "Tanya ketika but"
 
-#: interfaces/boot.glade.in.h:20
+#: interfaces/boot.glade.in.h:17
+#: src/boot/main.c:70
+msgid "Boot Manager Settings"
+msgstr "Tetapan Pengurus But"
+
+#: interfaces/boot.glade.in.h:18
 msgid "Choose a kernel image to boot, and a partition to mount as the root partition. Optionally, you may also enter append parameters which are passed to the kernel at boot time."
 msgstr "Pilih imej kernel untuk dibutkan, dan satu partisyen untuk dilekapkan sebagai partisyen root. secara opsyenal, anda boleh memasukkan parameter yang akan dihantar kepada kernel ketika but."
 
-#: interfaces/boot.glade.in.h:21
+#: interfaces/boot.glade.in.h:19
 msgid "Click \"Forward\" to continue"
 msgstr "Klik \"Maju\" untuk teruskan"
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:20
 msgid "Confirmation"
 msgstr "Kepastian"
 
 #. set window title
-#: interfaces/boot.glade.in.h:23
-#: src/boot/boot-druid.c:429
+#: interfaces/boot.glade.in.h:21
 #: src/boot/boot-druid.c:441
+#: src/boot/boot-druid.c:453
 msgid "Creating a new boot image"
 msgstr "Mencipta imej but baru"
 
-#: interfaces/boot.glade.in.h:24
+#: interfaces/boot.glade.in.h:22
+msgid "Don't ask me again"
+msgstr "Jangan tanya lagi"
+
+#: interfaces/boot.glade.in.h:23
 msgid "Enable IDE SCSI emulation"
 msgstr "Hidupkan emulasi SCSI bagi IDE"
 
-#: interfaces/boot.glade.in.h:25
+#: interfaces/boot.glade.in.h:24
 msgid "Enter a name for the boot image, and specify what kind of operating system it is."
 msgstr "Masukkan nama bagi imej but, dan nyatakan jenis apa sistem pengoperasian nya."
 
-#: interfaces/boot.glade.in.h:26
-#: interfaces/network.glade.in.h:42
+#: interfaces/boot.glade.in.h:25
+#: interfaces/network.glade.in.h:45
 msgid "Finished"
 msgstr "Selesai"
 
-#: interfaces/boot.glade.in.h:27
-#: interfaces/network.glade.in.h:51
-#: src/network/connection.c:1843
+#: interfaces/boot.glade.in.h:26
+#: src/network/connection.c:1612
 msgid "Manual"
 msgstr "Manual"
 
-#: interfaces/boot.glade.in.h:28
-msgid "Modify the settings for an operating system or kernel."
-msgstr "Ubahsuai tetapan bagi sistem pengoperasian atau kernel."
-
-#: interfaces/boot.glade.in.h:29
+#: interfaces/boot.glade.in.h:27
 msgid "Number of colors:"
 msgstr "Bilangan warna:"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:28
 msgid "Other parameters:"
 msgstr "Parameter lain:"
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:29
 msgid "Password"
 msgstr "Katalaluan"
 
-#: interfaces/boot.glade.in.h:32
+#: interfaces/boot.glade.in.h:30
 msgid "Protect with password"
 msgstr "Lindung dengan katalaluan"
 
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:31
 msgid "Resolution:"
 msgstr "Resolusi:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:32
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "Saat untuk ditunggu sebelum memuatkan kernel atau OS default"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:33
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Nyatakan partisyen dimana sistem pengoperasian dipasang."
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:34
 msgid "The new boot image has been added. Please click \"Apply\" to save your changes."
 msgstr "Imej but baru telah ditambah. Sila klip \"Terap\" untuk menyimpan perubahan."
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:35
 msgid "This assistant is designed to help you quickly and easily add a new boot image to your system."
 msgstr "Pembantu ini direka untuk membantu anda dengan cepat dan mudah untuk menambah imej but baru pada sistem anda."
 
-#: interfaces/boot.glade.in.h:38
-msgid "Use this dialog to modify kernel parameters."
-msgstr "Guna dialog ini untuk mengubahsuai parameter kernel."
-
-#: interfaces/boot.glade.in.h:39
-msgid "Use this tool to specify which operating systems users can choose at startup."
-msgstr "Guna alat ini untuk menyatakan sistem pengoperasian mana yg pengguna boleh pilih ketika permulaan."
-
-#: interfaces/boot.glade.in.h:40
+#: interfaces/boot.glade.in.h:36
 msgid "Video modes (only frame buffer)"
 msgstr "Mod video (hanya penimbal kerangka)"
 
-#: interfaces/boot.glade.in.h:41
+#: interfaces/boot.glade.in.h:37
 msgid "_Add..."
 msgstr "_Tambah..."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:38
 msgid "_Device:"
 msgstr "_Peranti:"
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:39
 msgid "_Edit"
 msgstr "_Edit"
 
-#: interfaces/boot.glade.in.h:44
-#: src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:40
+#: src/boot/boot-settings.c:43
 msgid "_Initrd image path:"
 msgstr "Laluan imej _initrd:"
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:41
 msgid "_Kernel image path:"
 msgstr "Laluan imej _kernel"
 
-#: interfaces/boot.glade.in.h:46
+#: interfaces/boot.glade.in.h:42
 msgid "_Name:"
 msgstr "_Nama:"
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:43
 msgid "_Operating system:"
 msgstr "_Sistem Pengoperasian:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:44
 msgid "_Parameters:"
 msgstr "_Parameter:"
 
-#: interfaces/boot.glade.in.h:49
+#: interfaces/boot.glade.in.h:45
 msgid "_Root file system device:"
 msgstr "Peranti sistem fail _root:"
 
@@ -288,337 +249,159 @@ msgid "<span weight=\"bold\" size=\"larger\">To run this tool, you need administ
 msgstr ""
 
 #: interfaces/common.glade.in.h:4
-msgid "Complexity"
-msgstr "Kekompleksan"
+msgid "Enter Password"
+msgstr "Masukkan Katalaluan"
 
 #: interfaces/common.glade.in.h:5
-#, fuzzy
-msgid "Enter Password"
-msgstr "_Jana Katalaluan"
-
-#: interfaces/common.glade.in.h:6
 msgid "If you know for sure that it works like one of the platforms listed below, you can select that and continue. Note, however, that this might damage the system configuration or downright cripple your computer."
 msgstr ""
 
-#: interfaces/common.glade.in.h:7
+#: interfaces/common.glade.in.h:6
 msgid "Remote administration"
 msgstr "Pentadbiran jauh"
 
-#: interfaces/common.glade.in.h:8
+#: interfaces/common.glade.in.h:7
 msgid "Run _Without Password"
 msgstr "Laksana _Tanpa Katalaluan"
 
-#: interfaces/common.glade.in.h:9
+#: interfaces/common.glade.in.h:8
 msgid "Scanning system configuration..."
 msgstr "Mengimbas konfigurasi sistem..."
 
-#: interfaces/common.glade.in.h:10
+#: interfaces/common.glade.in.h:9
 msgid "To acquire such privileges, enter your root password below. If you don't specify a password, you will be  unable to modify your system configuration."
 msgstr ""
 
-#: interfaces/common.glade.in.h:11
+#: interfaces/common.glade.in.h:10
 msgid "Unsupported Platform"
 msgstr "Platform tidak disokong"
 
-#: interfaces/common.glade.in.h:12
+#: interfaces/common.glade.in.h:11
 #, fuzzy
 msgid "Use this window to select the computer you wish to configure"
 msgstr ""
 "Guna tetingkap ini untuk memilih komputer\n"
 "yang anda ingin konfigurasikan"
 
-#: interfaces/common.glade.in.h:13
-#: interfaces/network.glade.in.h:108
+#: interfaces/common.glade.in.h:12
+#: interfaces/network.glade.in.h:102
 msgid "_Password:"
 msgstr "_Katalaluan:"
 
-#: interfaces/disks.glade.in.h:1
-msgid " "
-msgstr " "
-
-#: interfaces/disks.glade.in.h:3
-msgid "<b>Configuration</b>"
-msgstr "<b>Konfigurasi</b>"
-
-#: interfaces/disks.glade.in.h:4
-msgid "<b>General Information</b>"
-msgstr "<b>Maklumat Umum</b>"
-
-#: interfaces/disks.glade.in.h:5
-msgid "<b>Partition List</b>"
-msgstr "<b>Senarai Partisyen</b>"
-
-#: interfaces/disks.glade.in.h:6
-msgid "<b>Partition Properties</b>"
-msgstr "<b>Ciri-ciri Partisyen</b>"
-
-#: interfaces/disks.glade.in.h:7
-msgid "<b>Storage List</b>"
-msgstr "<b>Senarai Storan</b>"
-
-#: interfaces/disks.glade.in.h:8
-msgid "<b>Storage Properties</b>"
-msgstr "<b>Ciri-ciri Storan</b>"
-
-#: interfaces/disks.glade.in.h:9
-msgid "<b>Supported Features</b>"
-msgstr "<b>Keupayaan Disokong</b>"
-
-#: interfaces/disks.glade.in.h:10
-msgid ""
-"<big><b>Storage Settings</b></big>\n"
-"Configure your hard disks and storage devices."
-msgstr ""
-"<big><b>Tetapan Storan</b></big>\n"
-"KOnfigurasikan cakera keras anda dan peranti storan."
-
-#: interfaces/disks.glade.in.h:12
-msgid "CD-ROM"
-msgstr "CD-ROM"
-
-#: interfaces/disks.glade.in.h:13
-msgid "Device: "
-msgstr "Peranti:"
-
-#: interfaces/disks.glade.in.h:14
-msgid "Enable DMA"
-msgstr "Hidupkan DMA"
-
-#: interfaces/disks.glade.in.h:15
-msgid "Extended 2"
-msgstr "Lanjutan 2"
-
-#: interfaces/disks.glade.in.h:16
-msgid "Extended 3"
-msgstr "Lanjutan 3"
-
-#: interfaces/disks.glade.in.h:17
-msgid "FAT"
-msgstr "FAT"
-
-#: interfaces/disks.glade.in.h:18
-msgid "Filesystem:"
-msgstr "Sistem fail:"
-
-#: interfaces/disks.glade.in.h:19
-#: src/disks/disks-storage-disk.c:83
-msgid "Hard Disk"
-msgstr "Cakera Keras"
-
-#: interfaces/disks.glade.in.h:20
-msgid "JFS"
-msgstr "JFS"
-
-#: interfaces/disks.glade.in.h:21
-msgid "Memory Swap"
-msgstr "Swap Memori"
-
-#: interfaces/disks.glade.in.h:22
-msgid "Mount Point:"
-msgstr "Titik lekapan:"
-
-#: interfaces/disks.glade.in.h:23
-msgid "NTFS"
-msgstr "NTFS"
-
-#: interfaces/disks.glade.in.h:24
-#: src/disks/callbacks.c:312
-#: src/disks/callbacks.c:313
-#: src/disks/callbacks.c:328
-#: src/disks/callbacks.c:329
-msgid "Not Available"
-msgstr "Tidak Ada."
-
-#: interfaces/disks.glade.in.h:25
-msgid "Partitions"
-msgstr "Partisyen"
-
-#: interfaces/disks.glade.in.h:26
-msgid "Play Audio"
-msgstr "Main Bunyi"
-
-#: interfaces/disks.glade.in.h:27
-msgid "Properties"
-msgstr "Ciri-ciri"
-
-#: interfaces/disks.glade.in.h:28
-msgid "Read DVD"
-msgstr "Baca DVD"
-
-#: interfaces/disks.glade.in.h:29
-msgid "Reiser FS"
-msgstr "Reiser FS"
-
-#: interfaces/disks.glade.in.h:30
-msgid "Size:"
-msgstr "Saiz:"
-
-#: interfaces/disks.glade.in.h:31
-msgid "Speed"
-msgstr "Kelajuan"
-
-#: interfaces/disks.glade.in.h:32
-msgid "Speed:"
-msgstr "Kelajuan:"
-
-#: interfaces/disks.glade.in.h:33
-msgid "Type:"
-msgstr "Jenis:"
-
-#: interfaces/disks.glade.in.h:34
-msgid "Type: "
-msgstr "Jenis:"
-
-#: interfaces/disks.glade.in.h:35
-msgid "Write CD-R"
-msgstr "Tulis CD-R"
-
-#: interfaces/disks.glade.in.h:36
-msgid "Write CD-RW"
-msgstr "Tulis CD-RW"
-
-#: interfaces/disks.glade.in.h:37
-msgid "Write DVD-R"
-msgstr "Tulis DVD-R"
-
-#: interfaces/disks.glade.in.h:38
-msgid "Write DVD-RAM"
-msgstr "Tulis DVD-RAM"
-
-#: interfaces/disks.glade.in.h:39
-msgid "XFS"
-msgstr "XFS"
-
-#: interfaces/disks.glade.in.h:40
-msgid "_Format"
-msgstr "_Format"
-
 #: interfaces/network.glade.in.h:2
-msgid "/dev/modem"
-msgstr "/dev/modem"
+msgid ""
+"/dev/modem\n"
+"/dev/ttyS0\n"
+"/dev/ttyS1\n"
+"/dev/ttyS2\n"
+"/dev/ttyS3\n"
+msgstr ""
+"/dev/modem\n"
+"/dev/ttyS0\n"
+"/dev/ttyS1\n"
+"/dev/ttyS2\n"
+"/dev/ttyS3\n"
 
-#: interfaces/network.glade.in.h:3
-msgid "/dev/ttyS0"
-msgstr "/dev/ttyS0"
-
-#: interfaces/network.glade.in.h:4
-msgid "/dev/ttyS1"
-msgstr "/dev/ttyS1"
-
-#: interfaces/network.glade.in.h:5
-msgid "/dev/ttyS2"
-msgstr "/dev/ttyS2"
-
-#: interfaces/network.glade.in.h:6
-msgid "/dev/ttyS3"
-msgstr "/dev/ttyS3"
-
-#: interfaces/network.glade.in.h:7
+#: interfaces/network.glade.in.h:8
 msgid "<b>Profile Settings</b>"
 msgstr "<b>Tetapan Profil</b>"
 
-#: interfaces/network.glade.in.h:8
+#: interfaces/network.glade.in.h:9
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Network settings</span>\n"
+"Use this tool for configuring the way your system access to other computers"
+msgstr ""
+
+#: interfaces/network.glade.in.h:11
 msgid "<span weight=\"bold\">Access Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Akses</span>"
 
-#: interfaces/network.glade.in.h:9
+#: interfaces/network.glade.in.h:12
 msgid "<span weight=\"bold\">Account Data</span>"
 msgstr "<span weight=\"bold\">Data Akaun</span>"
 
-#: interfaces/network.glade.in.h:10
+#: interfaces/network.glade.in.h:13
 msgid "<span weight=\"bold\">Connection settings</span>"
 msgstr "<span weight=\"bold\">Tetapan sambungan</span>"
 
-#: interfaces/network.glade.in.h:11
+#: interfaces/network.glade.in.h:14
 msgid "<span weight=\"bold\">Connection</span>"
 msgstr "<span weight=\"bold\">Sambungan</span>"
 
-#: interfaces/network.glade.in.h:12
+#: interfaces/network.glade.in.h:15
 msgid "<span weight=\"bold\">DNS Servers</span>"
 msgstr "<span weight=\"bold\">Pelayan DNS</span>"
 
-#: interfaces/network.glade.in.h:13
+#: interfaces/network.glade.in.h:16
 msgid "<span weight=\"bold\">Host Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Hos</span>"
 
-#: interfaces/network.glade.in.h:14
+#: interfaces/network.glade.in.h:17
 msgid "<span weight=\"bold\">Internet Service Provider Data</span>"
 msgstr "<span weight=\"bold\">Data Pembekal Servis Internet</span>"
 
-#: interfaces/network.glade.in.h:15
+#: interfaces/network.glade.in.h:18
 msgid "<span weight=\"bold\">PPP Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan PPP</span>"
 
-#: interfaces/network.glade.in.h:16
+#: interfaces/network.glade.in.h:19
 msgid "<span weight=\"bold\">Search Domains</span>"
 msgstr "<span weight=\"bold\">Domain Carian</span>"
 
-#: interfaces/network.glade.in.h:17
+#: interfaces/network.glade.in.h:20
 msgid "<span weight=\"bold\">Windows Networking</span>"
 msgstr "<span weight=\"bold\">Rangkaian Windows</span>"
 
-#: interfaces/network.glade.in.h:18
+#: interfaces/network.glade.in.h:21
 msgid "<span weight=\"bold\">Wireless settings:</span>"
 msgstr "<span weight=\"bold\">Tetapan tanpawayar</span>"
 
-#: interfaces/network.glade.in.h:19
+#: interfaces/network.glade.in.h:22
 msgid "A_liases:"
 msgstr "A_lias:"
 
-#: interfaces/network.glade.in.h:20
-#: interfaces/users.glade.in.h:13
+#: interfaces/network.glade.in.h:23
+#: interfaces/users.glade.in.h:15
 msgid "Account"
 msgstr "Akaun"
 
-#: interfaces/network.glade.in.h:21
+#: interfaces/network.glade.in.h:24
 msgid "Activate"
 msgstr "Aktifkan"
 
-#: interfaces/network.glade.in.h:22
+#: interfaces/network.glade.in.h:25
+#, fuzzy
+msgid "Activate connection"
+msgstr "Buang sambungan %s?"
+
+#: interfaces/network.glade.in.h:26
 msgid "Activate when the computer _starts"
 msgstr "Aktifkan bila komputer ber_mula"
 
-#: interfaces/network.glade.in.h:23
+#: interfaces/network.glade.in.h:27
+msgid "Add DNS server"
+msgstr "Tambah pelayan DNS"
+
+#: interfaces/network.glade.in.h:28
+msgid "Add search domain"
+msgstr "Tambah domain carian"
+
+#: interfaces/network.glade.in.h:29
 msgid "Address configuration"
 msgstr "Konfigurasi alamat"
 
-#: interfaces/network.glade.in.h:24
-#: interfaces/users.glade.in.h:14
+#: interfaces/network.glade.in.h:30
+#: interfaces/users.glade.in.h:16
 msgid "Advanced"
 msgstr "Lanjutan"
 
-#: interfaces/network.glade.in.h:25
-msgid "Advanced PPP connection tuning."
-msgstr "Penalaan Sambungan PPP Lanjutan."
-
-#: interfaces/network.glade.in.h:26
-msgid "Aliases of other computers."
-msgstr "Alias bagi komputer lain."
-
-#: interfaces/network.glade.in.h:27
+#: interfaces/network.glade.in.h:31
 msgid "Allow activation control for all _users"
 msgstr "Izinkan pengaktifan kawalan bagi semua _pengguna"
 
-#: interfaces/network.glade.in.h:28
-msgid "Auto"
-msgstr "Auto"
-
-#: interfaces/network.glade.in.h:29
-#: src/network/connection.c:1845
-msgid "BOOTP"
-msgstr "BOOTP"
-
-#: interfaces/network.glade.in.h:30
+#: interfaces/network.glade.in.h:32
 msgid "Co_nfiguration:"
 msgstr "Ko_nfigurasi:"
-
-#: interfaces/network.glade.in.h:31
-msgid "Connection _name:"
-msgstr "_Nama sambungan:"
-
-#: interfaces/network.glade.in.h:32
-msgid "Connection name"
-msgstr "Nama sambungan:"
 
 #: interfaces/network.glade.in.h:33
 msgid "Connection type"
@@ -630,7 +413,7 @@ msgstr "Sambungan"
 
 #. set window titles
 #: interfaces/network.glade.in.h:35
-#: src/network/network-druid.c:63
+#: src/network/network-druid.c:72
 msgid "Creating a new network connection"
 msgstr "Mencipta sambungan rangkaian baru"
 
@@ -639,157 +422,147 @@ msgid "Current network profile:"
 msgstr "Profil rangkaian semasa."
 
 #: interfaces/network.glade.in.h:37
-#: src/network/connection.c:1844
-msgid "DHCP"
-msgstr "DHCP"
-
-#: interfaces/network.glade.in.h:38
 msgid "DNS"
 msgstr "DNS"
 
+#: interfaces/network.glade.in.h:38
+msgid "DNS Servers"
+msgstr "Pelayan DNS"
+
 #: interfaces/network.glade.in.h:39
+msgid "D_omain name:"
+msgstr "Nama _domain:"
+
+#: interfaces/network.glade.in.h:40
 msgid "Default gateway device:"
 msgstr "Peranti gateway default:"
 
-#: interfaces/network.glade.in.h:40
+#: interfaces/network.glade.in.h:41
+msgid "Delete DNS server"
+msgstr "Padam pelayan DNS"
+
+#: interfaces/network.glade.in.h:42
+msgid "Delete search domain"
+msgstr "Padam domain carian"
+
+#: interfaces/network.glade.in.h:43
 msgid "Device:"
 msgstr "Peranti:"
 
-#: interfaces/network.glade.in.h:41
+#: interfaces/network.glade.in.h:44
 msgid "Domain / _Workgroup:"
 msgstr "Domain / Kumpulankerja:"
 
-#: interfaces/network.glade.in.h:43
+#: interfaces/network.glade.in.h:46
 msgid "General"
 msgstr "Umum"
 
-#: interfaces/network.glade.in.h:44
+#: interfaces/network.glade.in.h:47
 msgid "Hosts"
 msgstr "Hos"
 
-#: interfaces/network.glade.in.h:45
-msgid "How the names of other computers are found."
-msgstr "Bagaimana nama bagi komputerlain dijumpai"
-
-#: interfaces/network.glade.in.h:46
-msgid "How this computer is identified."
-msgstr "Bagaimana komputer ini dikenalpasti"
-
-#: interfaces/network.glade.in.h:47
-msgid "How to access other computers."
-msgstr "Bagaimana mengakses komputer lain."
-
 #: interfaces/network.glade.in.h:48
-msgid "How to dial up to the Internet."
-msgstr "Bagaimana mendial ke Internet."
-
-#: interfaces/network.glade.in.h:49
 msgid "ISP phone number"
 msgstr "Nombor telefon ISP"
 
-#: interfaces/network.glade.in.h:50
+#: interfaces/network.glade.in.h:49
 msgid "Interface properties"
 msgstr "Ciri-ciri antaramuka"
 
-#: interfaces/network.glade.in.h:52
+#: interfaces/network.glade.in.h:50
+msgid "List of domains that the system will try to append to a hostname if there isn't already one specified"
+msgstr ""
+
+#: interfaces/network.glade.in.h:51
 msgid "Modem _volume:"
 msgstr "_Volum modem:"
 
-#: interfaces/network.glade.in.h:53
+#: interfaces/network.glade.in.h:52
 msgid "Network name:"
 msgstr "Nama rangkaian:"
 
-#: interfaces/network.glade.in.h:54
+#: interfaces/network.glade.in.h:53
 msgid "Network profiles"
 msgstr "Profil rangkaian"
 
-#: interfaces/network.glade.in.h:55
-msgid "Network profiles can be used to store different network configurations."
-msgstr "Profil rangkaian boleh digunakan untuk menyimpan konfigurasi rangkaian berlainan."
-
-#: interfaces/network.glade.in.h:56
+#: interfaces/network.glade.in.h:54
 msgid "Networking Settings"
 msgstr "Tetapan Rangkaian"
 
-#: interfaces/network.glade.in.h:57
+#: interfaces/network.glade.in.h:55
 msgid "New network profile"
 msgstr "Profil rangkaian baru"
 
-#: interfaces/network.glade.in.h:58
+#: interfaces/network.glade.in.h:56
 msgid "Next, please enter the user name and password which were assigned to you by your ISP."
 msgstr "Seterusnya, sila masukkan nama pengguna dan katalalaun dimana diberikan kepada anda oleh ISP anda."
 
-#: interfaces/network.glade.in.h:59
+#: interfaces/network.glade.in.h:57
 msgid "Now, please enter the address that this network device will have, and the remote address to which it will be connected."
 msgstr "Sekarang, sila masukkan alamat yang peranti rangkaian akan miliki, dan alamat jauh yang ia akan disambungkan."
 
-#: interfaces/network.glade.in.h:60
+#: interfaces/network.glade.in.h:58
 msgid "Now, please enter the address that this network device will have."
 msgstr "Sekarang, sila masukkkan alamat yang peranti rangkaian ini akan miliki."
 
-#: interfaces/network.glade.in.h:61
-msgid "Now, please give this connection a name."
-msgstr "Sekarang, sila beri sambungan ini satu nama."
+#: interfaces/network.glade.in.h:59
+msgid "Now, please specify if this connection should be enabled, this means that the configuration will be applied when the assistant finishes."
+msgstr ""
 
-#: interfaces/network.glade.in.h:62
+#: interfaces/network.glade.in.h:60
 msgid "Number to _access an external line:"
 msgstr "Nombor untuk meng_akses talian luar:"
 
-#: interfaces/network.glade.in.h:63
+#: interfaces/network.glade.in.h:61
 msgid "Number to get to an _external line:"
 msgstr "Nombor untuk mendapatkan talian _luar:"
 
-#: interfaces/network.glade.in.h:64
+#: interfaces/network.glade.in.h:62
 msgid "PPPD _options:"
 msgstr "_Opsyen PPPD:"
 
-#: interfaces/network.glade.in.h:65
+#: interfaces/network.glade.in.h:63
 msgid "Pa_ssword (confirm):"
 msgstr "_Katalaluan (kepastian):"
 
-#: interfaces/network.glade.in.h:66
+#: interfaces/network.glade.in.h:64
 msgid "Phone _number:"
 msgstr "_Nombor telefon:"
 
-#: interfaces/network.glade.in.h:67
+#: interfaces/network.glade.in.h:65
 msgid "Please enter the phone number you use to connect to the internet. This number is provided by your ISP."
 msgstr "Sila masukkan nombor telefon yg anda gunakan untuk menyambung ke internet. Nombor ini dibekalkan oleh ISP."
 
-#: interfaces/network.glade.in.h:68
+#: interfaces/network.glade.in.h:66
 msgid "Please select the wireless device that you want to configure and set the network name for this interface"
 msgstr "Sila pilih peranti tanpawayar yang anda ingin konfigurasikan dan tetapkan nama rangkaian bagi antaramuka ini."
 
-#: interfaces/network.glade.in.h:69
-msgid "Please, give this network profile a name and a description."
-msgstr "Sila beri profil rangkaian ini  satu nama dan keterangannya"
-
-#: interfaces/network.glade.in.h:70
+#: interfaces/network.glade.in.h:67
 msgid "Please, select which type of connection you would like to add."
 msgstr "Sila pilih jenis sambungan mana yang anda ingin tambah."
 
-#: interfaces/network.glade.in.h:71
-#: interfaces/users.glade.in.h:38
+#: interfaces/network.glade.in.h:68
+#: interfaces/users.glade.in.h:39
 msgid "Profile _name:"
 msgstr "_Nama profil:"
 
-#: interfaces/network.glade.in.h:72
-#, fuzzy
-msgid "Pulses"
-msgstr "Kaku"
-
-#: interfaces/network.glade.in.h:73
+#: interfaces/network.glade.in.h:69
 msgid "Se_condary:"
 msgstr "Se_kunder:"
 
-#: interfaces/network.glade.in.h:74
+#: interfaces/network.glade.in.h:70
+msgid "Search Domains"
+msgstr "Domain Carian"
+
+#: interfaces/network.glade.in.h:71
 msgid "Set _DNS servers manually"
 msgstr "Nyatakan Pelayan _DNS secara manual"
 
-#: interfaces/network.glade.in.h:75
+#: interfaces/network.glade.in.h:72
 msgid "Set modem as default _route to internet"
 msgstr "Tetapkan modem sebagai route default ke internet"
 
-#: interfaces/network.glade.in.h:76
+#: interfaces/network.glade.in.h:73
 msgid ""
 "This assistant will help you configure a new \n"
 "network connection."
@@ -797,221 +570,219 @@ msgstr ""
 "Pembantu ini akan menolong anda mengkonfigurasikan\n"
 " sambungan rangkaian baru."
 
-#: interfaces/network.glade.in.h:78
+#: interfaces/network.glade.in.h:75
+msgid "This is the list of IP addresses that the system will use as name servers"
+msgstr "Ini adalah senarai alamat IP yang sistem ini akan gunakan sebagai pelayan nama"
+
+#: interfaces/network.glade.in.h:76
 msgid "To continue configuring your network connection, click \"Next\". To quit, click \"Cancel\"."
 msgstr "Untuk terus mengkonfigurasi sambungan rangkaian anda, Klik \"Berikutnya\". Untuk keluar klik \"Batal\"."
 
-#: interfaces/network.glade.in.h:79
-msgid "Tones"
-msgstr "Ton"
-
-#: interfaces/network.glade.in.h:80
-msgid "Use \"Auto\" if unsure."
-msgstr "Guna \"Auto\" jika tak pasti."
-
-#: interfaces/network.glade.in.h:81
-msgid "Use this dialog for setting the configuration for this interface"
-msgstr "Guna dialog ini untuk menetapkan konfigurasi bagi komputer ini."
-
-#: interfaces/network.glade.in.h:82
+#: interfaces/network.glade.in.h:77
 msgid "Username and password"
 msgstr "Namapengguna dan katalaluan"
 
-#: interfaces/network.glade.in.h:83
+#: interfaces/network.glade.in.h:78
 msgid "WI_NS server:"
 msgstr "Pelayan WI_NS:"
 
-#: interfaces/network.glade.in.h:84
+#: interfaces/network.glade.in.h:79
 msgid "Wireless device:"
 msgstr "Peranti tanpawayar:"
 
-#: interfaces/network.glade.in.h:85
+#: interfaces/network.glade.in.h:80
 msgid "Wireless settings"
 msgstr "Tetapan Tanpawayar"
 
-#: interfaces/network.glade.in.h:86
+#: interfaces/network.glade.in.h:81
 msgid "You are about to create a new network connection. Please click \"Apply\" to save your changes."
 msgstr "Anda akan mencipta sambungan rangkaian baruSila klik \"Terap\" untuk menyimpan perubahan."
 
-#: interfaces/network.glade.in.h:87
+#: interfaces/network.glade.in.h:82
+msgid "_Apply and activate connection"
+msgstr ""
+
+#: interfaces/network.glade.in.h:83
 msgid "_Autodetect"
 msgstr "_Autokesan"
 
-# help-browser/toc2-man.c:21
-#: interfaces/network.glade.in.h:88
-msgid "_Comment:"
-msgstr "_Komen:"
-
-#: interfaces/network.glade.in.h:89
+#: interfaces/network.glade.in.h:84
 msgid "_Configuration:"
 msgstr "_Kongfigurasi:"
 
-#: interfaces/network.glade.in.h:90
+#: interfaces/network.glade.in.h:85
 msgid "_Deactivate"
 msgstr "_Pasifkan"
 
-#: interfaces/network.glade.in.h:91
-#: interfaces/users.glade.in.h:55
+#: interfaces/network.glade.in.h:86
+#: interfaces/users.glade.in.h:53
+#: src/boot/table.c:52
+#: src/network/connection.c:64
+#: src/network/dns.c:39
+#: src/network/hosts.c:42
+#: src/users/table.c:48
 msgid "_Delete"
 msgstr "Pa_dam"
 
-#: interfaces/network.glade.in.h:92
+#: interfaces/network.glade.in.h:87
 msgid "_Description:"
 msgstr "_Keterangan:"
 
-#: interfaces/network.glade.in.h:93
+#: interfaces/network.glade.in.h:88
 msgid "_Dial type:"
 msgstr "Jenis pen_dialan:"
 
-#: interfaces/network.glade.in.h:94
-msgid "_Domain name:"
-msgstr "Nama _domain:"
-
-#: interfaces/network.glade.in.h:95
+#: interfaces/network.glade.in.h:89
 msgid "_Enable Windows networking"
 msgstr "_Hidupkan rangkaian Windows"
 
-#: interfaces/network.glade.in.h:96
+#: interfaces/network.glade.in.h:90
 msgid "_Ethernet"
 msgstr "_Ethernet"
 
-#: interfaces/network.glade.in.h:97
+#: interfaces/network.glade.in.h:91
 msgid "_Gateway address:"
 msgstr "Alamat _gateway:"
 
-#: interfaces/network.glade.in.h:98
+#: interfaces/network.glade.in.h:92
 msgid "_Hostname:"
 msgstr "Nama_hos:"
 
-#: interfaces/network.glade.in.h:99
+#: interfaces/network.glade.in.h:93
 msgid "_IP address:"
 msgstr "Alamat _IP:"
 
-#: interfaces/network.glade.in.h:100
+#: interfaces/network.glade.in.h:94
 msgid "_IR LAN"
 msgstr "LAN _IR"
 
-#: interfaces/network.glade.in.h:101
+#: interfaces/network.glade.in.h:95
 msgid "_Local IP address:"
 msgstr "Alamat IP _lokal:"
 
-#: interfaces/network.glade.in.h:102
+#: interfaces/network.glade.in.h:96
 msgid "_Local IP:"
 msgstr "IP Lokal:"
 
-#: interfaces/network.glade.in.h:103
+#: interfaces/network.glade.in.h:97
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:104
+#: interfaces/network.glade.in.h:98
 msgid "_Modem port:"
 msgstr "Ciri-ciri _Modem:"
 
-#: interfaces/network.glade.in.h:105
+#: interfaces/network.glade.in.h:99
 msgid "_Network Profiles"
 msgstr "Profil _Rangkaian"
 
-#: interfaces/network.glade.in.h:106
+#: interfaces/network.glade.in.h:100
 msgid "_Network name:"
 msgstr "Nama _Rangkaian:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:101
 msgid "_Parallel Line"
 msgstr "Talian _Selari"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:103
 msgid "_Phone number:"
 msgstr " Nombor _telefon:"
 
-#: interfaces/network.glade.in.h:110
+#: interfaces/network.glade.in.h:104
 msgid "_Primary:"
 msgstr "_Utama:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:105
 msgid "_Remote IP address:"
 msgstr "Alamat IP _jauh:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:106
 msgid "_Remote IP:"
 msgstr "IP _Jauh:"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:107
 msgid "_Retry if the connection breaks or fails to start"
 msgstr "_Ulangi jika sambungan putus atau gagal untuk dimulakan"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:108
 msgid "_Save Current"
 msgstr "_Simpan Semasa"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:109
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Mula PPP sebaik sahaja modem tersambung"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:110
 #, fuzzy
 msgid "_Subnet mask:"
 msgstr "Netmask:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:111
 msgid "_Update DNS when this connection becomes active"
 msgstr "_Kemaskini DNS bila sambungan ini aktif"
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:112
 msgid "_Use remote IP as default gateway"
 msgstr "_Guna IP jauh sebagai gateway default"
 
-#: interfaces/network.glade.in.h:119
-#: interfaces/users.glade.in.h:65
+#: interfaces/network.glade.in.h:113
+#: interfaces/users.glade.in.h:63
 msgid "_Username:"
 msgstr "Nama_Pengguna:"
 
-#: interfaces/network.glade.in.h:120
+#: interfaces/network.glade.in.h:114
 msgid "_Wireless"
 msgstr "_Tanpawayar"
 
-#: interfaces/services.glade.in.h:1
-msgid "<span weight=\"bold\">Description</span>"
-msgstr "<span weight=\"bold\">Huraian:</span>"
+#: interfaces/network.glade.in.h:115
+msgid "new DNS server"
+msgstr "Pelayan DNS baru"
 
-#: interfaces/services.glade.in.h:2
+#: interfaces/network.glade.in.h:116
+msgid "new search domain"
+msgstr "domain carian baru"
+
+#: interfaces/services.glade.in.h:1
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Services settings</span>\n"
+"use this tool to specify which services to run at boot time"
+msgstr ""
+
+#: interfaces/services.glade.in.h:3
 msgid "<span weight=\"bold\">General Information</span>"
 msgstr "<span weight=\"bold\">Maklumat Umum</span>"
 
-#: interfaces/services.glade.in.h:3
+#: interfaces/services.glade.in.h:4
 msgid "<span weight=\"bold\">Service Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Servis</span>"
-
-#: interfaces/services.glade.in.h:4
-msgid "Click on an item in the list to show it's description."
-msgstr "Klik pada item dalam senarai untuk memaparkan huraian."
 
 #: interfaces/services.glade.in.h:5
 msgid "Description:"
 msgstr "Huraian:"
 
 #: interfaces/services.glade.in.h:6
-msgid "Priority:"
-msgstr "Prioriti:"
-
-#: interfaces/services.glade.in.h:7
 msgid "Service _Properties"
 msgstr "_Ciri-ciri Servis"
 
-#: interfaces/services.glade.in.h:8
+#: interfaces/services.glade.in.h:7
 msgid "Service:"
 msgstr "Servis:"
 
-#: interfaces/services.glade.in.h:9
+#: interfaces/services.glade.in.h:8
 msgid "Status:"
 msgstr "Status:"
 
-#: interfaces/services.glade.in.h:10
-msgid "Use this tool to specify which services to run"
-msgstr "Guna alat ini untuk mnyatakan servis mana untuk dilaksanakan"
+#: interfaces/services.glade.in.h:9
+msgid "_Order list by startup sequence"
+msgstr ""
 
-#: interfaces/services.glade.in.h:11
+#: interfaces/services.glade.in.h:10
 msgid "_Start"
 msgstr "_Mula"
+
+#: interfaces/services.glade.in.h:11
+msgid "_Startup sequence:"
+msgstr "Turutan per_mulaan:"
 
 #: interfaces/time.glade.in.h:1
 msgid "(unconfigured)"
@@ -1022,303 +793,341 @@ msgid ":"
 msgstr ":"
 
 #: interfaces/time.glade.in.h:4
+msgid "<b>Selection</b>"
+msgstr "<b>Pemilihan</b>"
+
+#: interfaces/time.glade.in.h:5
+msgid "<b>Time zone</b>"
+msgstr "<b>Zon Waktu</b>"
+
+#: interfaces/time.glade.in.h:6
+msgid ""
+"<span size=\"larger\" weight=\"bold\">Time and date settings</span>\n"
+"Use this tool for setting your current date, time and time zone"
+msgstr ""
+
+#: interfaces/time.glade.in.h:8
 msgid "<span weight=\"bold\">Time Configuration</span>"
 msgstr "<span weight=\"bold\">KOnfigurasi Masa</span>"
 
-#: interfaces/time.glade.in.h:5
-msgid "Please select the current date and time. You can also specify a time zone and a time server."
-msgstr "Sila pilih tarikh dan masa semasa. Anda juga boleh nyatakan zonwaktu can pelayan masa."
+#: interfaces/time.glade.in.h:9
+msgid "Add NTP Server"
+msgstr "Tambah pelayan NTP"
 
-#: interfaces/time.glade.in.h:6
+#: interfaces/time.glade.in.h:10
+msgid "NTP server"
+msgstr "Pelayan NTP"
+
+#: interfaces/time.glade.in.h:11
 msgid "S_ynchronize clock with Internet servers:"
 msgstr "_Sinkronisasi jam dengan pelayan Internet:"
 
-#: interfaces/time.glade.in.h:7
+#: interfaces/time.glade.in.h:12
 msgid "Se_lect Servers..."
 msgstr "Pi_lih Pelayan..."
 
-#: interfaces/time.glade.in.h:8
-msgid "Select the servers you wish to use for time synchronization."
-msgstr "Pilih pelayan yang anda ingin gunakan bagi sinkronisasi masa."
+#: interfaces/time.glade.in.h:13
+msgid "Time servers"
+msgstr "Pelayan waktu"
 
-#: interfaces/time.glade.in.h:9
+#: interfaces/time.glade.in.h:14
+msgid "Time zone"
+msgstr "Zon waktu"
+
+#: interfaces/time.glade.in.h:15
 msgid "Time zone:"
 msgstr "Zon waktu:"
 
-#: interfaces/time.glade.in.h:10
-msgid "To select a time zone, click on one of the dots on the map"
-msgstr "Untuk memilih zonwaktu, klik pada salah satu dot pada peta"
-
-#: interfaces/time.glade.in.h:11
+#: interfaces/time.glade.in.h:16
 msgid "_Date:"
 msgstr "_Tarikh:"
 
-#: interfaces/time.glade.in.h:12
+#: interfaces/time.glade.in.h:17
 msgid "_Select Time Zone..."
 msgstr "_Pilih Zon Waktu..."
 
-#: interfaces/time.glade.in.h:13
+#: interfaces/time.glade.in.h:18
 msgid "_Time:"
 msgstr "_Masa:"
 
+#: interfaces/time.glade.in.h:19
+msgid "date"
+msgstr "tarikh"
+
+#: interfaces/time.glade.in.h:20
+msgid "hours"
+msgstr "jam"
+
+#: interfaces/time.glade.in.h:21
+msgid "minutes"
+msgstr "minit"
+
+#: interfaces/time.glade.in.h:22
+msgid "seconds"
+msgstr "saat"
+
 #: interfaces/users.glade.in.h:2
+msgid ""
+"<span weight=\"bold\" size=\"larger\">Users and groups settings</span>\n"
+"Use this tool for configuring users and groups settings in your system"
+msgstr ""
+
+#: interfaces/users.glade.in.h:4
 msgid "<span weight=\"bold\">Advanced Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Lanjutan</span>"
 
-#: interfaces/users.glade.in.h:3
+#: interfaces/users.glade.in.h:5
 msgid "<span weight=\"bold\">Automatic UID/GID</span>"
 msgstr "<span weight=\"bold\">UID/GID automatik</span>"
 
-#: interfaces/users.glade.in.h:5
+#: interfaces/users.glade.in.h:7
 msgid "<span weight=\"bold\">Contact Information</span>"
 msgstr "<span weight=\"bold\">Maklumat Hubungan</span>"
 
-#: interfaces/users.glade.in.h:6
+#: interfaces/users.glade.in.h:8
 msgid "<span weight=\"bold\">Group Members</span>"
 msgstr "<span weight=\"bold\">Ahli Kumpulan</span>"
 
-#: interfaces/users.glade.in.h:7
+#: interfaces/users.glade.in.h:9
 msgid "<span weight=\"bold\">Optional Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Opsyenal</span>"
 
-#: interfaces/users.glade.in.h:8
+#: interfaces/users.glade.in.h:10
 msgid "<span weight=\"bold\">Password Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Katalalauan</span>"
 
-#: interfaces/users.glade.in.h:9
+#: interfaces/users.glade.in.h:11
 msgid "<span weight=\"bold\">Password</span>"
 msgstr "<span weight=\"bold\">Katalaluan</span>"
 
-#: interfaces/users.glade.in.h:10
+#: interfaces/users.glade.in.h:12
 msgid "<span weight=\"bold\">Profile Settings</span>"
 msgstr "<span weight=\"bold\">Tetapan Profil</span>"
 
-#: interfaces/users.glade.in.h:11
+#: interfaces/users.glade.in.h:13
 msgid "<span weight=\"bold\">System Defaults</span>"
 msgstr "<span weight=\"bold\">Default Sistem</span>"
 
-#: interfaces/users.glade.in.h:12
+#: interfaces/users.glade.in.h:14
 msgid "<span weight=\"bold\">User Profile</span>"
 msgstr "<span weight=\"bold\">Profil Pengguna</span>"
 
-#: interfaces/users.glade.in.h:15
+#: interfaces/users.glade.in.h:17
 msgid "Assign a random password by default"
 msgstr "Beri katalaluan rawak secara default"
 
-#: interfaces/users.glade.in.h:16
+#: interfaces/users.glade.in.h:18
 msgid "Check password _quality"
 msgstr "Periksa _kualiti katalaluan"
 
-#: interfaces/users.glade.in.h:17
+#: interfaces/users.glade.in.h:19
 msgid "Con_firmation:"
 msgstr "Ke_pastian:"
 
-#: interfaces/users.glade.in.h:18
+#: interfaces/users.glade.in.h:20
 msgid "Days between warning and password expiration:"
 msgstr "Hari diantara amaran dengan peluputan katalaluan:"
 
-#: interfaces/users.glade.in.h:19
+#: interfaces/users.glade.in.h:21
 msgid "Default _group:"
 msgstr "_Kumpulan default:"
 
-#: interfaces/users.glade.in.h:20
+#: interfaces/users.glade.in.h:22
 msgid "Default _shell:"
 msgstr "_Shell Default:"
 
-#: interfaces/users.glade.in.h:21
+#: interfaces/users.glade.in.h:23
 msgid "Generate _random password"
 msgstr "Jana katalaluan _rawak"
 
-#: interfaces/users.glade.in.h:22
-msgid "Group Properties"
-msgstr "Ciri-ciri Kumpulan"
-
-#: interfaces/users.glade.in.h:23
+#: interfaces/users.glade.in.h:24
 msgid "Group _ID:"
 msgstr "_ID Kumpulan:"
 
-#: interfaces/users.glade.in.h:24
+#: interfaces/users.glade.in.h:25
 msgid "Group _members:"
 msgstr "_Ahli Kumpulan:"
 
-#: interfaces/users.glade.in.h:25
+#: interfaces/users.glade.in.h:26
 msgid "Group _name:"
 msgstr "_Nama Kumpulan:"
 
-#: interfaces/users.glade.in.h:26
+#: interfaces/users.glade.in.h:27
+msgid "Group properties"
+msgstr "Ciri-ciri kumpulan"
+
+#: interfaces/users.glade.in.h:28
 msgid "Groups"
 msgstr "Kumpulan"
 
-#: interfaces/users.glade.in.h:27
+#: interfaces/users.glade.in.h:29
 msgid "Ma_ximum days a password may be used:"
 msgstr "Hari ma_ksimum katalaluan boleh digunakan:"
 
-#: interfaces/users.glade.in.h:28
+#: interfaces/users.glade.in.h:30
 msgid "Maximum UID:"
 msgstr "UID maksimum:"
 
-#: interfaces/users.glade.in.h:29
+#: interfaces/users.glade.in.h:31
 msgid "Mi_nimum days between password changes:"
 msgstr "Hari mi_nimum katalaluan boleh digunakan:"
 
-#: interfaces/users.glade.in.h:30
+#: interfaces/users.glade.in.h:32
 msgid "Minimum GID:"
 msgstr "GIG minimum:"
 
-#: interfaces/users.glade.in.h:31
+#: interfaces/users.glade.in.h:33
 msgid "Minimum UID:"
 msgstr "UID minimum:"
 
-#: interfaces/users.glade.in.h:32
+#: interfaces/users.glade.in.h:34
 msgid "Minimum days allowed between password changes:"
 msgstr "Hari minimum diizinkan antara penukaran katalalaun:"
 
-#: interfaces/users.glade.in.h:33
+#: interfaces/users.glade.in.h:35
 msgid "Number of days that a password may be used:"
 msgstr "Bilangan hari katalaluan boleh digunakan:"
 
-#: interfaces/users.glade.in.h:34
+#: interfaces/users.glade.in.h:36
 msgid "O_ffice location:"
 msgstr "Lokasi _Pejabat:"
 
-#: interfaces/users.glade.in.h:35
-msgid "On this page, you can define the system defaults which will be assigned to new users."
-msgstr "Pada halaman ini, anda boleh mentakrifkan default sistem yang diberikan kepada pengguna baru."
-
-#: interfaces/users.glade.in.h:36
+#: interfaces/users.glade.in.h:37
 msgid "Other Groups"
 msgstr "Kumpulan Lain"
 
-#: interfaces/users.glade.in.h:37
+#: interfaces/users.glade.in.h:38
 msgid "Password set to: "
 msgstr "Katalaluan ditetapkan ke: "
 
-#: interfaces/users.glade.in.h:39
+#: interfaces/users.glade.in.h:40
 msgid "Set password b_y hand"
 msgstr "Tetapkab katalaluan meng_gunakan tangan"
 
-#: interfaces/users.glade.in.h:40
+#: interfaces/users.glade.in.h:41
 msgid "Show a_ll users and groups"
 msgstr "Papar _semua pengguna dan kumpulan"
 
-#: interfaces/users.glade.in.h:41
-msgid "This is the list of the groups available on the system. Create new groups or edit existing groups with this dialog."
-msgstr "Ini adalah senarai kumpulan yang ada pada sistem. Cipta kumpulan baru atau edit kumpulan sedia ada dengan dialog ini."
-
 #: interfaces/users.glade.in.h:42
-msgid "This is the list of the users available on the system. Create new users or edit existing user settings with this dialog."
-msgstr "Ini adalah senarai pengguna yang ada pada sistem. Cipta pengguna baru atau edit pengguna sedia ada dengan dialog ini."
-
-#: interfaces/users.glade.in.h:43
-msgid "User Profiles"
-msgstr "Profil Pengguna"
-
-#: interfaces/users.glade.in.h:44
 msgid "User _ID:"
 msgstr "_ID Pengguna:"
 
-#: interfaces/users.glade.in.h:45
+#: interfaces/users.glade.in.h:43
 msgid "User _password:"
 msgstr "_Katalaluan pengguna:"
 
-#: interfaces/users.glade.in.h:46
-msgid "User profiles can be used as templates to facilitate the creation of new users."
-msgstr "Profil pengguna boleh digunakan sebagai templat untuk membantu penciptaan pengguna baru."
+#: interfaces/users.glade.in.h:44
+msgid "User profiles"
+msgstr "Profil pengguna"
 
-#: interfaces/users.glade.in.h:47
+#: interfaces/users.glade.in.h:45
 msgid "Users"
 msgstr "Pengguna"
 
-#: interfaces/users.glade.in.h:48
+#: interfaces/users.glade.in.h:46
 msgid "_Add Group..."
 msgstr "_Tambah Kumpulan..."
 
-#: interfaces/users.glade.in.h:49
+#: interfaces/users.glade.in.h:47
 msgid "_Add Profile..."
 msgstr "_Tambah Fail..."
 
-#: interfaces/users.glade.in.h:50
+#: interfaces/users.glade.in.h:48
 msgid "_Add User..."
 msgstr "_Tambah Pengguna..."
 
-#: interfaces/users.glade.in.h:51
+#: interfaces/users.glade.in.h:49
 msgid "_All users:"
 msgstr "_Semua pengguna:"
 
-#: interfaces/users.glade.in.h:52
+#: interfaces/users.glade.in.h:50
 msgid "_Available groups:"
 msgstr "Kumpulan yang _ada:"
 
-#: interfaces/users.glade.in.h:53
+#: interfaces/users.glade.in.h:51
 msgid "_Comments"
 msgstr "_Komen"
 
-#: interfaces/users.glade.in.h:54
+#: interfaces/users.glade.in.h:52
 msgid "_Days between warning and password expiration:"
 msgstr "_Hari diantara amaran dengan peluputan katalaluan:"
 
-#: interfaces/users.glade.in.h:56
+#: interfaces/users.glade.in.h:54
 msgid "_Edit User Profiles..."
 msgstr "_Edit Profil Pengguna..."
 
-#: interfaces/users.glade.in.h:57
+#: interfaces/users.glade.in.h:55
 msgid "_Generate Password"
 msgstr "_Jana Katalaluan"
 
-#: interfaces/users.glade.in.h:58
+#: interfaces/users.glade.in.h:56
 msgid "_Home directory:"
 msgstr "Direktori _rumah:"
 
-#: interfaces/users.glade.in.h:59
+#: interfaces/users.glade.in.h:57
 msgid "_Home phone:"
 msgstr "Telefon _rumah:"
 
-#: interfaces/users.glade.in.h:60
+#: interfaces/users.glade.in.h:58
 msgid "_Main group:"
 msgstr "Kumpulan _utama:"
 
-#: interfaces/users.glade.in.h:61
+#: interfaces/users.glade.in.h:59
 msgid "_Profile:"
 msgstr "_Profil:"
 
-#: interfaces/users.glade.in.h:62
+#: interfaces/users.glade.in.h:60
 msgid "_Real name:"
 msgstr "Nama _sebenar:"
 
-#: interfaces/users.glade.in.h:63
+#: interfaces/users.glade.in.h:61
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:62
 msgid "_User's groups:"
 msgstr "Kumpulan bagi _pengguna:"
 
-#: interfaces/users.glade.in.h:66
+#: interfaces/users.glade.in.h:64
 msgid "_Work phone:"
 msgstr "Telefon _pejabat:"
 
-#: interfaces/users.glade.in.h:67
-msgid "profiles_table"
-msgstr "_jadual profil"
+#: src/boot/boot-append-gui.c:140
+msgid "32,768"
+msgstr "32,768"
 
-#: src/boot/boot-append-gui.c:226
+#: src/boot/boot-append-gui.c:141
+msgid "65,536"
+msgstr "65,536"
+
+#: src/boot/boot-append-gui.c:142
+msgid "16,777,216"
+msgstr "16,777,216"
+
+#: src/boot/boot-append-gui.c:252
+msgid "Invalid VGA value"
+msgstr ""
+
+#: src/boot/boot-append-gui.c:257
 #, c-format
-msgid "vga=%s is not a valid vga value"
-msgstr "vga=%s adalah bukan nilai vga yang sah"
+msgid "\"%s\" is not a valid VGA value"
+msgstr "\"%s\" adalah bukan nilai vga yang sah"
 
-#: src/boot/boot-druid.c:430
+#: src/boot/boot-druid.c:112
+msgid "Error creating boot image"
+msgstr "Ralat mencipta imej but"
+
+#: src/boot/boot-druid.c:442
 #, c-format
 msgid "Creating a new boot image (%d of %d)"
 msgstr "Mencipta imej but baru (%d drpd %d)"
 
-#: src/boot/boot-druid.c:431
+#: src/boot/boot-druid.c:443
 msgid "Finished creating a new boot image"
 msgstr "Selesai mencipta imeh but baru"
 
 #: src/boot/boot-image.c:40
-#: src/disks/disks-storage-partition.c:128
-#: src/disks/disks-storage.c:101
-#: src/network/profile.c:467
+#: src/network/profile.c:490
 msgid "Unknown"
 msgstr "Entah"
 
@@ -1346,39 +1155,42 @@ msgstr "swap Linux"
 msgid "GNU/Hurd"
 msgstr "GNU/Hurd"
 
-#: src/boot/boot-image.c:278
+#: src/boot/boot-image.c:276
 #, c-format
-msgid "Invalid path: %s"
-msgstr "Laluan tidak sah: %s"
+msgid "\"%s\" is an invalid path"
+msgstr ""
 
-#: src/boot/boot-image.c:294
+#: src/boot/boot-image.c:292
 #, c-format
-msgid "Image '%s' already exists, please set another name."
-msgstr "Imej %s tersedia wujud,Sila tetapkan nama lain."
+msgid "\"%s\" already exists, please set another name"
+msgstr "\"%s\" tersedia wujud,Sila tetapkan nama lain."
 
-#: src/boot/boot-image.c:300
+#: src/boot/boot-image.c:298
 #, c-format
-msgid "Invalid image name: '%s'"
-msgstr "Nama imej tidak sah: '%s'"
+msgid "Invalid image name: \"%s\""
+msgstr "Nama imej tidak sah: \"%s\""
 
-#: src/boot/boot-image.c:313
+#: src/boot/boot-image.c:311
 #, c-format
-msgid "Invalid image: '%s'"
-msgstr "Imej tidak sah : '%s'"
+msgid "Invalid image: \"%s\""
+msgstr "Imej tidak sah : \"%s\""
 
-#: src/boot/boot-image.c:331
+#: src/boot/boot-image.c:329
 #, c-format
-msgid "Invalid root device: '%s'"
-msgstr "Peranti root tak sah: '%s'"
+msgid "Invalid root device: \"%s\""
+msgstr "Peranti root tak sah: \"%s\""
 
-#: src/boot/boot-settings.c:43
+#: src/boot/boot-settings.c:44
 msgid "_Module path:"
 msgstr "Laluan _modul:"
 
-#: src/boot/boot-settings.c:360
-#: src/users/user-settings.c:502
-msgid "Password confirmation isn't correct."
-msgstr "Kepastian katalaluan tak betul."
+#: src/boot/boot-settings.c:405
+msgid "Password confirmation is not correct"
+msgstr "Kepastian katalaluan tak betul"
+
+#: src/boot/boot-settings.c:429
+msgid "Error modifying boot image"
+msgstr ""
 
 #: src/boot/boot.desktop.in.in.h:1
 msgid "Boot"
@@ -1388,39 +1200,39 @@ msgstr "But"
 msgid "Configure the system boot process"
 msgstr "Konfigurasikan proses but sistem"
 
-#: src/boot/callbacks.c:75
+#: src/boot/callbacks.c:82
 msgid "Boot Image Editor"
 msgstr "Editor Imej But"
 
-#: src/boot/callbacks.c:169
+#: src/boot/callbacks.c:180
 msgid "Boot Append Editor"
 msgstr "Editor Penambahan But"
 
-#: src/boot/callbacks.c:390
-msgid ""
-"Without at least one boot image,\n"
-"your system will not start.\n"
+#: src/boot/callbacks.c:412
+msgid "Error deleting boot image"
+msgstr "Ralat memadam imej but"
+
+#: src/boot/callbacks.c:413
+msgid "Without at least one boot image your computer will not start"
+msgstr "Tanpa sekurang-kuranyanya satu imej but,sistem anda tak dapat bermula."
+
+#: src/boot/callbacks.c:434
+msgid "This may leave this operating system unbootable"
 msgstr ""
-"Tanpa sekurang-kuranyanya satu imej but,\n"
-"sistem anda tak dapat bermula.\n"
 
-#: src/boot/callbacks.c:405
+#: src/boot/callbacks.c:439
 #, c-format
-msgid "Are you sure you want to delete '%s'?"
-msgstr "Anda pasti untuk padam '%s'?"
+msgid "Are you sure you want to delete \"%s\"?"
+msgstr "Anda pasti untuk padam \"%s\"?"
 
-#: src/boot/callbacks.c:450
-#, c-format
-msgid ""
-"The file ``%s'' is missing or could not be read:\n"
-"The configuration will show empty."
+#: src/boot/callbacks.c:464
+msgid "The configuration will show empty"
 msgstr ""
-"Fail ``%s'' hilang atau tak dapat dibaca:\n"
-"Konfigurasi akan memaparkan kosong."
 
-#: src/boot/main.c:73
-msgid "Boot Manager Settings"
-msgstr "Tetapan Pengurus But"
+#: src/boot/callbacks.c:469
+#, c-format
+msgid "The file \"%s\" is missing or could not be read"
+msgstr "Fail \"%s\" hilang atau tak dapat dibaca"
 
 #: src/boot/table.c:41
 msgid "Name"
@@ -1431,7 +1243,7 @@ msgid "Default"
 msgstr "Default"
 
 #: src/boot/table.c:43
-#: src/network/connection.c:479
+#: src/network/connection.c:490
 msgid "Type"
 msgstr "Jenis"
 
@@ -1440,345 +1252,385 @@ msgid "Kernel Image"
 msgstr "Imej Kernel"
 
 #: src/boot/table.c:45
-#: src/network/connection.c:495
+#: src/network/connection.c:506
 msgid "Device"
 msgstr "Peranti"
 
 #: src/boot/table.c:50
-#: src/network/connection.c:57
-msgid "/_Add ..."
-msgstr "/_Tambah..."
+#: src/network/connection.c:62
+#: src/users/table.c:46
+msgid "_Add"
+msgstr "_Tambah"
 
-#: src/boot/table.c:52
-#: src/services/table.c:36
-#: src/users/table.c:49
-#: src/users/table.c:56
-msgid "/_Properties"
-msgstr "/_Ciri-ciri"
-
-#: src/boot/table.c:53
-#: src/disks/disks-gui.c:44
-#: src/network/connection.c:60
-#: src/network/dns.c:39
-#: src/network/hosts.c:43
-#: src/users/table.c:50
-#: src/users/table.c:57
-msgid "/_Delete"
-msgstr "/Pa_dam"
+#: src/boot/table.c:51
+#: src/network/connection.c:63
+#: src/users/table.c:47
+msgid "_Properties"
+msgstr "_Ciri-ciri"
 
 #. the proccess was running ssh
-#: src/common/gst-auth.c:83
-msgid "Could not connect to the computer."
-msgstr "Tak boleh menyambung ke komputer."
+#: src/common/gst-auth.c:89
+msgid "The tool could not connect to the computer"
+msgstr "Alat tak dapat menyambung ke komputer"
+
+#: src/common/gst-auth.c:90
+msgid "Check that you have access to this network and that the computer is actually working and running SSHD"
+msgstr ""
 
 #. the proccess was running su
-#: src/common/gst-auth.c:86
-msgid "The password you entered is invalid."
-msgstr "Katalaluan yang anda masukkan adalah tidak sah."
+#: src/common/gst-auth.c:94
+msgid "The entered password is invalid"
+msgstr "Katalaluan yang anda masukkan adalah tidak sah"
 
-#: src/common/gst-auth.c:89
-msgid "An unexpected error has occurred."
-msgstr "Ralat luar dugaan berlaku."
+#: src/common/gst-auth.c:95
+msgid "Check that you typed it correctly and that you haven't activated the \"caps lock\" key"
+msgstr ""
 
-#: src/common/gst-dialog.c:61
+#: src/common/gst-auth.c:104
+#, c-format
+msgid "Could not run \"%s\""
+msgstr "Tak dapat melaksanakan \"%s\""
+
+#: src/common/gst-auth.c:105
+msgid "Check that you have permissions to run this command"
+msgstr ""
+
+#: src/common/gst-auth.c:107
+msgid "An unexpected error has ocurred"
+msgstr "Ralat luar dugaan berlaku"
+
+#: src/common/gst-dialog.c:60
 #, c-format
 msgid "Could not find widget: %s"
 msgstr "Tidak menjumpai wiget: %s"
 
-#: src/common/gst-dialog.c:93
-msgid " More _Options"
-msgstr " Lebih _Opsyen"
+#: src/common/gst-dialog.c:382
+msgid "There are changes which have not been applied"
+msgstr "Terdapat perubahan yang belum diterapkan."
 
-#: src/common/gst-dialog.c:94
-msgid " Fewer _Options"
-msgstr "Kurang _Opsyen"
+#: src/common/gst-dialog.c:383
+msgid "Apply them now?"
+msgstr "Terapkan ia sekarang?"
 
-#: src/common/gst-dialog.c:507
-msgid ""
-"There are changes which haven't been applied.\n"
-"Apply them now?"
-msgstr ""
-"Terdapat perubahan yang belum diterapkan.\n"
-"terapkan sekarang?"
-
-#: src/common/gst-dialog.c:624
+#: src/common/gst-dialog.c:477
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Ralat isyarat sambungan '%s' pada wiget '%s'"
 
-#: src/common/gst-tool.c:822
-#, c-format
-msgid "Skipping %s directive..."
-msgstr "Melangkau lencongan %s..."
-
-#: src/common/gst-tool.c:953
-msgid "Skipping actual save..."
-msgstr "Melangkau simpanan sebenar..."
-
-#: src/common/gst-tool.c:1026
-msgid ""
-"There was an error running the backend script,\n"
-"and the configuration could not be loaded."
+#: src/common/gst-tool.c:1002
+msgid "The configuration could not be loaded"
 msgstr ""
-"Terdapat ralat melaksanakan skrip backend,\n"
-"dan konfigurasi tak dapat dimuatkan."
 
-#: src/common/gst-tool.c:1507
+#: src/common/gst-tool.c:1003
+msgid "There was an error running the backend script"
+msgstr "Terdapat ralat melaksanakan skrip backend"
+
+#: src/common/gst-tool.c:1475
 #, c-format
-msgid "<span weight=\"bold\" size=\"larger\">Welcome to the %s prerelease of the GNOME System Tools</span>"
-msgstr "<span weight=\"bold\" size=\"larger\">Selamat Datang ke pra keluaran %s Alatan Sistem GNOME</span>"
+msgid "Welcome to the %s prerelease of the GNOME System Tools"
+msgstr "Selamat Datang ke pra keluaran %s Alatan Sistem GNOME"
 
-#: src/common/gst-tool.c:1510
+#: src/common/gst-tool.c:1477
 msgid "This is still a work in progress, and so it may have serious bugs. Due to the nature of these tools, bugs may render your computer <span weight=\"bold\">practically useless</span>, costing time, effort and sanity points. You have been warned. Thank you for trying out this prerelease of the GNOME System Tools!"
 msgstr ""
 
-#: src/common/gst-tool.c:1531
+#: src/common/gst-tool.c:1498
 msgid "Warning"
 msgstr "Amaran"
 
-#: src/common/gst-tool.c:1551
+#: src/common/gst-tool.c:1518
 msgid "Don't show me this again"
 msgstr "Jangan papar mesej ini lagi"
 
-#: src/common/gst-tool.c:1625
+#: src/common/gst-tool.c:1594
 msgid "GNOME System Tools"
 msgstr "Alat Sistem GNOME"
 
-#: src/common/gst-ui.c:396
-msgid "Please restart your GNOME session for these changes to take effect."
-msgstr "Sila ulanghidup sesi GNOME  supaya perubahan bertindak balas."
+#: src/common/gst-tool.c:1755
+msgid "Could not display help"
+msgstr ""
 
-#: src/disks/callbacks.c:304
-#: src/disks/callbacks.c:305
-msgid "(Getting ...)"
-msgstr "(Memperolehi ...)"
+#: src/network/callbacks.c:403
+msgid "This will disable any network connection with this interface as soon as you press \"apply\""
+msgstr ""
 
-#: src/disks/disks-gui.c:43
-msgid "/_Format"
-msgstr "/_Format"
-
-#: src/disks/disks-storage-cdrom.c:103
-msgid "CDROM"
-msgstr "CDROM"
-
-#: src/disks/disks-storage-floppy.c:71
-msgid "Floppy"
-msgstr "Liut"
-
-#: src/disks/disks-storage-partition.c:260
-msgid "Swap Partition"
-msgstr "Partisyen Swap"
-
-#: src/disks/disks-storage.c:100
-msgid "Unknown Storage"
-msgstr "Storan tidak diketahui"
-
-#: src/disks/disks.desktop.in.in.h:1
-msgid "Configure the system disks"
-msgstr "Konfigurasikan careka sistem"
-
-#: src/disks/disks.desktop.in.in.h:2
-msgid "Disks"
-msgstr "Cakera"
-
-#: src/disks/main.c:76
-msgid "Disks Manager"
-msgstr "Pengurus Cakera"
-
-#: src/network/callbacks.c:365
+#: src/network/callbacks.c:408
 #, c-format
-msgid "Remove connection %s: \"%s\"?"
-msgstr "Buang sambungan  %s: \"%s\"?"
+msgid "Are you sure you want to delete connection \"%s\"?"
+msgstr "Adakah anda pasti untuk memadam sambungan \"%s\"?"
 
-#: src/network/callbacks.c:367
-#, c-format
-msgid "Remove connection %s?"
-msgstr "Buang sambungan %s?"
+#: src/network/callbacks.c:516
+msgid "SMB Support is not running"
+msgstr "Sokongan SMB tidak dilaksanakan"
 
-#: src/network/callbacks.c:463
-msgid "You don't have SMB support installed. Please install SMB support in the system to enable windows networking."
-msgstr "Anda tak mempunyai kosongan SMB yang dipasang. Sila pasang sokongan SMB pada sistem untuk menghidupkan rangkaian Windows."
+#: src/network/callbacks.c:517
+msgid "You don't have SMB support installed. Please install SMB support in the system to enable file sharing in Windows networks"
+msgstr "Anda tak mempunyai sokongan SMB yang dipasang. Sila pasang sokongan SMB pada sistem untuk membolehkan perkongsian fail dengan rangkaian Windows."
 
-#: src/network/callbacks.c:466
-msgid "SMB support missing."
-msgstr "Sokongan SMB hilang."
+#: src/network/callbacks.c:581
+msgid "The host name has changed"
+msgstr "nama hos berubah"
 
-#: src/network/callbacks.c:518
-msgid "The host name has changed. This will prevent you from launching new applications, and so you will have to log in again. Continue anyway?"
-msgstr "Nama hos telah berubah. Ini menghalang anda drpd melancarkan aplikasi baru, dan anda perlu logmasuk semula. Teruskan juga?"
+#: src/network/callbacks.c:582
+msgid "This will prevent you from launching new applications, and so you will have to log in again. Continue anyway?"
+msgstr "Ini menghalang anda drpd melancarkan aplikasi baru, dan anda perlu log masuk semula. Teruskan juga?"
 
-#: src/network/callbacks.c:566
-msgid "wvdial could not be found on your system. You need to install wvdial, or the PPP (modem) connections will not activate."
-msgstr "wvdial tak dapat dijumpai pada sistem anda. Anda perlu pasang wvdial, atau sambungan PPP (modem) tak diaktifkan.."
+#: src/network/callbacks.c:586
+msgid "Change _Host name"
+msgstr "Ubah nama _hos"
 
-#: src/network/callbacks.c:593
+#: src/network/callbacks.c:629
+#: src/network/callbacks.c:656
+msgid "Wvdial command not found"
+msgstr "arahan Wvdial tak dijumpai"
+
+#: src/network/callbacks.c:630
+msgid "wvdial could not be found on your system. You need to install wvdial, or the PPP (modem) connections will not activate"
+msgstr "wvdial tak dapat dijumpai pada sistem anda. Anda perlu pasang wvdial, atau sambungan PPP (modem) tak diaktifkan"
+
+#: src/network/callbacks.c:657
 msgid "wvdial could not be found on your system. You need to install wvdial, or the PPP (modem) connections will not activate. Continue anyway?"
 msgstr "Wvdial tak dapat dijumpai pada sistem anda. Anda perlu pasang wvdial, atau sambungan PPP (modem) tidak akan diaktifkan. Teruskan juga?"
 
-#: src/network/callbacks.c:620
-msgid "The default gateway device is not activated. This will prevent you from connecting to the Internet. Continue anyway?"
+#: src/network/callbacks.c:661
+#: src/network/callbacks.c:688
+msgid "_Continue"
+msgstr "_Teruskan"
+
+#: src/network/callbacks.c:684
+msgid "The default gateway device is not activated"
+msgstr "Peranti gateway default tak diaktifkan"
+
+#: src/network/callbacks.c:685
+msgid "This will prevent you from connecting to the Internet. Continue anyway?"
 msgstr ""
 
-#: src/network/callbacks.c:675
-msgid "The default gateway device is missing gateway information. Please provide this information to proceed, or choose another default gateway device."
+#: src/network/callbacks.c:733
+msgid "The default gateway device is missing gateway information"
 msgstr ""
 
-#: src/network/callbacks.c:721
-msgid "The program redhat-config-network-cmd could not be found. This could render missing connections under the connections tab. Please install the redhat-config-network rpm package to avoid this."
-msgstr "Program redhat-config-network-cmd tak dapat dijumpai. This could render missing connections under the connections tab. Please install the redhat-config-network rpm package to avoid this."
+#: src/network/callbacks.c:734
+msgid "Please provide this information to proceed, or choose another default gateway device"
+msgstr ""
 
-#: src/network/callbacks.c:758
+#: src/network/callbacks.c:779
+msgid "The program redhat-config-network-cmd could not be found"
+msgstr ""
+
+#: src/network/callbacks.c:780
+msgid "This could render missing connections under the connections tab. Please install the redhat-config-network rpm package to avoid this"
+msgstr "Ini akan menyebabkan kehilangan sambungan pada tab sambungan. Sila pasang pakej rpm redhat-config-network untuk mencegahnya."
+
+#: src/network/callbacks.c:811
 #, c-format
-msgid "Do you want to enable interface %s?"
-msgstr "Adakah anda ingin menghidupkan antaramuka %s?"
+msgid "Do you want to enable interface \"%s\"?"
+msgstr "Adakah anda ingin menghidupkan antaramuka \"%s\"?"
 
-#: src/network/callbacks.c:768
+#: src/network/callbacks.c:812
+msgid "This will enable network access through this interface"
+msgstr ""
+
+#: src/network/callbacks.c:813
+msgid "_Enable"
+msgstr "_Hidupkan"
+
+#: src/network/callbacks.c:815
 #, c-format
-msgid "Do you want to disable interface %s?"
-msgstr "Adakah anda mahu mematikan antaramuka %s"
+msgid "Do you want to disable interface \"%s\"?"
+msgstr "Adakah anda mahu mematikan antaramuka \"%s\""
 
-#: src/network/callbacks.c:855
-msgid "Could not autodetect modem device, check that this is not busy and that it's correctly attached"
-msgstr "Tak dapat autokesan peranti modem, periksa samada ianya tidak sibuk dan ianya disambung dengan betul"
+#: src/network/callbacks.c:816
+msgid "This will disable network access through this interface"
+msgstr ""
 
-#: src/network/callbacks.c:907
+#: src/network/callbacks.c:817
+msgid "_Disable"
+msgstr "_Matikan"
+
+#: src/network/callbacks.c:953
+msgid "Could not autodetect modem device"
+msgstr ""
+
+#: src/network/callbacks.c:954
+msgid "Check that the device is not busy and that is correctly attached to the computer"
+msgstr "Periksa samada peranti tidak sibuk dan ianya disambung ke komputer dengan betul"
+
+#: src/network/callbacks.c:1007
 msgid "Silent"
 msgstr "Senyap"
 
-#: src/network/callbacks.c:909
+#: src/network/callbacks.c:1009
 msgid "Low"
 msgstr "Rendah"
 
-#: src/network/callbacks.c:911
+#: src/network/callbacks.c:1011
 msgid "Medium"
 msgstr "Sederhana"
 
-#: src/network/callbacks.c:913
+#: src/network/callbacks.c:1013
 msgid "Loud"
 msgstr "Bising"
 
 # lom
-#: src/network/connection.c:45
+#: src/network/connection.c:46
 msgid "Other type"
 msgstr "Jenis lain"
 
-#: src/network/connection.c:46
+#: src/network/connection.c:47
+#: src/network/connection.c:48
+#: src/network/connection.c:49
+#: src/network/connection.c:50
 msgid "Ethernet LAN card"
 msgstr "Kad LAN Ethernet"
 
-#: src/network/connection.c:47
+#: src/network/connection.c:51
 msgid "Wireless LAN card"
 msgstr "Kad LAN Tanpawayar"
 
-#: src/network/connection.c:48
+#: src/network/connection.c:52
+#: src/network/connection.c:53
 msgid "Modem or transfer cable"
 msgstr "Modem atak kabel pemindahan"
 
-#: src/network/connection.c:49
+#: src/network/connection.c:54
 msgid "Parallel line"
 msgstr "Talian selari"
 
-#: src/network/connection.c:50
+#: src/network/connection.c:55
 msgid "Infrared LAN"
 msgstr "LAN infra merah"
 
-#: src/network/connection.c:51
+#: src/network/connection.c:56
 msgid "Loopback interface"
 msgstr "Antaramuka gelungbalik"
 
-#: src/network/connection.c:52
+#: src/network/connection.c:57
 msgid "Unknown interface type"
 msgstr "Jenis antaramuka tidak diketahui"
 
-#: src/network/connection.c:59
-msgid "/_Configure"
-msgstr "/_Konfigurasi"
+#: src/network/connection.c:477
+#: src/services/table.c:86
+msgid "Active"
+msgstr "Aktif"
 
-#: src/network/connection.c:507
-msgid "Status"
-msgstr "Status"
+#: src/network/connection.c:1613
+msgid "Automatic (DHCP)"
+msgstr "Automatik (DHCP)"
 
-#: src/network/connection.c:516
-#: src/network/profiles-table.c:62
-msgid "Description"
-msgstr "Huraian"
+#: src/network/connection.c:1614
+msgid "Automatic (BOOTP)"
+msgstr "Automatik (BOOTP)"
 
-#: src/network/connection.c:1707
-msgid "The IP address or netmask for the interface was left empty. Please enter valid IP addresses in those fields to continue."
-msgstr "Alamat IP atau netmask bagi antaramuka dibiarkan kosong. Sila masukkan Alamat IP yang sah pada medan itu untuk teruskan."
+#: src/network/connection.c:1632
+msgid "Tones"
+msgstr "Ton"
 
-#: src/network/connection.c:1714
-msgid "The IP address or remote address for the interface was left empty. Please enter valid IP addresses in those fields to continue."
-msgstr "Alamat IP atau alamat jauh bagi antaramuka dibiarkan kosong. Sila masukkan Alamat IP yang sah pada medan itu untuk teruskan."
+#: src/network/connection.c:1633
+#, fuzzy
+msgid "Pulses"
+msgstr "Kaku"
 
-#: src/network/connection.c:1720
-msgid "You chose to set the DNS servers for this connection manually, but left the IP address for the primary DNS empty. Please enter the IP for the primary DNS or uncheck the manual DNS option."
-msgstr "Anda memilih untuk menetapkan pelayan DNS bagi sambungan ini secara manual, tetapi membiarkan alamat IP bagi DNS utama kosong. Sila masukkan IPbagi DNS utama atau nyah semak opsyen DNS manual."
+#: src/network/connection.c:1734
+#: src/network/connection.c:1744
+msgid "Error in IP address"
+msgstr "Ralat pada Alamat IP"
 
-#: src/network/connection.c:1726
-msgid "The modem device that the connection will use was left empty. Please enter a device or press \"autodetect\" to continue."
-msgstr "Alamat IP atau netmask bagi antaramuka dibiarkan kosong. Sila masukkan Alamat IP yang sah pada medan itu untuk teruskan."
+#: src/network/connection.c:1735
+msgid "The IP address or netmask for the interface was left empty. Please enter valid IP addresses in those fields to continue"
+msgstr "Alamat IP atau netmask bagi antaramuka dibiarkan kosong. Sila masukkan Alamat IP yang sah pada medan itu untuk teruskan"
 
-#: src/network/connection.c:1731
-msgid "The phone number that the connection will use was left empty. Please enter a valid phone number to continue."
-msgstr "Alamat IP atau netmask bagi antaramuka dibiarkan kosong. Sila masukkan Alamat IP yang sah pada medan itu untuk teruskan."
+#: src/network/connection.c:1745
+msgid "The IP address or remote address for the interface was left empty. Please enter valid IP addresses in those fields to continue"
+msgstr "Alamat IP atau alamat jauh bagi antaramuka dibiarkan kosong. Sila masukkan Alamat IP yang sah pada medan itu untuk teruskan"
 
-#: src/network/connection.c:2082
+#: src/network/connection.c:1753
+msgid "Error in domain name servers"
+msgstr "Ralat pada pelayan nama domain"
+
+#: src/network/connection.c:1754
+msgid "You chose to set the domain name servers for this connection manually, but left the IP address for the primary name server empty. Please enter the IP for the primary domain name server or uncheck the manual DNS option"
+msgstr "Anda memilih untuk menetapkan pelayan DNS bagi sambungan ini secara manual, tetapi membiarkan alamat IP bagi DNS utama kosong. Sila masukkan IPbagi DNS utama atau nyah semak opsyen DNS manual"
+
+#: src/network/connection.c:1761
+msgid "Invalid modem device"
+msgstr "peranti modem tak sah"
+
+#: src/network/connection.c:1762
+msgid "The modem device that the connection will use was left empty. Please enter a device or press \"autodetect\" to continue"
+msgstr "Peranti modem yang sambungan akan gunakan dibiarkan kosong. Sila masukkan satu peranti atau tekan \"autokesan\" untuk teruskan"
+
+#: src/network/connection.c:1767
+msgid "Invalid phone number"
+msgstr "Nombor telefon tidak sah"
+
+#: src/network/connection.c:1768
+msgid "The phone number that the connection will use was left empty. Please enter a valid phone number to continue"
+msgstr "Nombor telefon bagi sambungan dibiarkan kosong. Sila masukkan nombor telefon untuk teruskan"
+
+#: src/network/connection.c:2094
 #, c-format
-msgid "The interface %s doesn't exist."
-msgstr "Antaramuka %s tidak wujud."
+msgid "The interface \"%s\" doesn't exist"
+msgstr "Antaramuka \"%s\" tidak wujud"
 
-#: src/network/dns.c:163
-#: src/network/hosts.c:174
+#: src/network/connection.c:2098
+msgid "Invalid interface"
+msgstr "antaramuka tidak sah"
+
+#: src/network/connection.c:2099
+msgid "The loopback interface cannot be configured"
+msgstr ""
+
+#: src/network/dns.c:148
+#: src/network/hosts.c:158
 msgid "IP Address"
 msgstr "Alamat IP"
 
-#: src/network/hosts.c:182
+#: src/network/hosts.c:166
 msgid "Aliases"
 msgstr "Alias"
 
-#: src/network/main.c:190
+#: src/network/main.c:203
 msgid "Run the connection assistant."
 msgstr "Laksana pembantu sambungan"
 
-#: src/network/main.c:191
+#: src/network/main.c:204
 msgid "Run the PPP connection assistant."
 msgstr "Laksana pembantu sambungan PPP."
 
-#: src/network/main.c:192
+#: src/network/main.c:205
 msgid "Run the ethernet connection assistant."
 msgstr "Laksana pembantu sambungan ethernet."
 
-#: src/network/main.c:193
+#: src/network/main.c:206
 msgid "Run the wlan connection assistant."
 msgstr "Laksana pembantu sambungan wlan"
 
-#: src/network/main.c:194
+#: src/network/main.c:207
 msgid "Run the parallel port connection assistant."
 msgstr "Laksana pembantu sambungan liang selari."
 
-#: src/network/main.c:195
+#: src/network/main.c:208
 msgid "Run the irlan connection assistant."
 msgstr "Laksana pembantu sambungan irlan."
 
-#: src/network/main.c:196
+#: src/network/main.c:209
 msgid "Configure a network interface"
 msgstr "Konfigurasi antaramuka rangkaian"
 
-#: src/network/main.c:196
+#: src/network/main.c:209
 msgid "interface"
 msgstr "antaramuka"
 
-#: src/network/main.c:203
+#: src/network/main.c:216
 msgid "Network Settings"
 msgstr "Tetapan Rangkaian"
 
-#: src/network/network-druid.c:64
+#: src/network/network-druid.c:73
 #, c-format
 msgid "Creating a new network connection (%d of %d)"
 msgstr "Mencipta sambungan rangkaian baru (%d drpd %d)"
 
-#: src/network/network-druid.c:65
+#: src/network/network-druid.c:74
 msgid "Finished creating a new network connection"
 msgstr "Selesai mencipta sambungan rangkaian baru"
 
@@ -1790,37 +1642,46 @@ msgstr "Konfigurasikan peranti dan sambungan rangkaian"
 msgid "Networking"
 msgstr "Rangkaian"
 
-#: src/network/profile.c:43
+#: src/network/profile.c:51
+#: src/users/profile-settings.c:215
+msgid "You will not be able to recover this profile after pressing \"apply\""
+msgstr ""
+
+#: src/network/profile.c:55
 #, c-format
-msgid "Are you sure you want to delete profile %s?"
-msgstr "Adakah anda pasti untuk memadam profil %s?"
+msgid "Are you sure you want to delete profile \"%s\"?"
+msgstr "Adakah anda pasti untuk memadam profil \"%s\"?"
 
 #: src/network/profiles-table.c:53
 msgid "Profile name"
 msgstr "Nama profil"
 
+#: src/network/profiles-table.c:62
+msgid "Description"
+msgstr "Huraian"
+
 #: src/services/callbacks.c:46
 msgid "No description available."
 msgstr "Tiada huraian yang ada."
 
-#: src/services/callbacks.c:239
+#: src/services/callbacks.c:217
 msgid "Running"
 msgstr "Terlaksana"
 
-#: src/services/callbacks.c:243
+#: src/services/callbacks.c:221
 msgid "Stopped"
 msgstr "Terhenti"
 
-#: src/services/callbacks.c:248
+#: src/services/callbacks.c:226
 msgid "Could not get info"
 msgstr "Tidak  memperolehi maklumat"
 
-#: src/services/callbacks.c:314
+#: src/services/callbacks.c:292
 #, c-format
 msgid "Settings for service %s"
 msgstr "Tetapan bagi servis %s"
 
-#: src/services/main.c:58
+#: src/services/main.c:62
 msgid "Services Settings"
 msgstr "Tetapan Servis"
 
@@ -1832,27 +1693,19 @@ msgstr "Konfigurasi servis yang mana akan dilaksanakan bila sistem bermula"
 msgid "Services"
 msgstr "Servis"
 
-#: src/services/table.c:78
-msgid "Active"
-msgstr "Aktif"
-
-#: src/services/table.c:88
+#: src/services/table.c:95
 msgid "Service"
 msgstr "Servis"
 
-#: src/time/main.c:313
-msgid "Time Zone"
-msgstr "Zon Waktu"
+#: src/time/main.c:461
+msgid "NTP support is not running"
+msgstr "Sokongan NTP tak dilaksanakan"
 
-#: src/time/main.c:423
-msgid "Time Servers"
-msgstr "Pelayan Waktu"
+#: src/time/main.c:462
+msgid "Please run NTP support in the system to enable synchronization of your local time server with internet time servers"
+msgstr ""
 
-#: src/time/main.c:501
-msgid "You don't have NTP support running. Please run NTP support in the system to enable server synchronization."
-msgstr "Anda tidak mempunyai sokongan NTP terlaksana. Sila laksana sokongan NTP pada sistem, supaya membolehkan sinkronisasi pelayan."
-
-#: src/time/main.c:808
+#: src/time/main.c:757
 msgid "Time and Date Settings"
 msgstr "Tetapan Masa dan Tarikh"
 
@@ -1864,60 +1717,115 @@ msgstr "Tukar masa , tarikh dan zonwaktu sistem"
 msgid "Time and Date"
 msgstr "Masa dan Tarikh"
 
-#: src/users/callbacks.c:598
+#: src/users/callbacks.c:569
+msgid "Error saving profile"
+msgstr "Ralat menyimpan profil"
+
+#: src/users/callbacks.c:609
 msgid "Create New profile"
 msgstr "Cipta Profil Baru"
 
-#: src/users/callbacks.c:629
+#: src/users/callbacks.c:643
 #, c-format
 msgid "Settings for profile %s"
 msgstr "Tetapan bagi profil %s"
 
-#: src/users/group-settings.c:111
+#: src/users/group-settings.c:90
 msgid "Create New Group"
 msgstr "Cipta Kumpulan baru"
 
-#: src/users/group-settings.c:165
-#: src/users/user-settings.c:457
-msgid "User id must be a positive number."
-msgstr "Id pengguna mestilah satu nombor positif."
+#. Check if gid is available
+#: src/users/group-settings.c:163
+#: src/users/group-settings.c:171
+msgid "Invalid group ID"
+msgstr "ID kumpulan tidak sah"
 
-#: src/users/group-settings.c:169
-msgid "Such group id already exists."
-msgstr "Id kumpulan sebegitu sudah wujud."
+#: src/users/group-settings.c:164
+msgid "Group ID must be a positive number"
+msgstr "ID kumpulan  mestilah satu nombor positif"
 
-#: src/users/group-settings.c:191
-msgid "Group name is empty."
-msgstr "Nama kumpulan adalah kosong."
+#. if group is root
+#: src/users/group-settings.c:167
+msgid "Group ID of the \"root\" user should not be modified"
+msgstr "ID kumpulan \"root\" tak sepatutnya diubah"
 
-#: src/users/group-settings.c:195
-msgid "The group name is too long."
-msgstr "Nama kumpulan terlalu panjang."
+#: src/users/group-settings.c:168
+#: src/users/group-settings.c:214
+#: src/users/group-settings.c:284
+#: src/users/user-settings.c:105
+#: src/users/user-settings.c:355
+#: src/users/user-settings.c:450
+#: src/users/user-settings.c:486
+msgid "This would leave the system unusable"
+msgstr ""
 
-#: src/users/group-settings.c:199
-msgid "Please set a valid group name, using only lower-case letters."
-msgstr "Sila tetapkan nama kumpulan yang sah, hanya menggunakan huruf kecil."
-
-#: src/users/group-settings.c:203
-msgid "Group already exists."
-msgstr "Kumpulan tersedia ada."
-
-#: src/users/group-settings.c:272
-msgid "The root group must not be deleted."
-msgstr "Kumpulan root tak boleh dipadam."
-
-#: src/users/group-settings.c:279
+#: src/users/group-settings.c:172
 #, c-format
-msgid "Are you sure you want to delete group %s?"
-msgstr "Adakah anda pasti untuk memadam kumpulan %s?"
+msgid "Group ID %s already exists"
+msgstr "ID Kumpulan %s sudah ada"
 
-#: src/users/group-settings.c:342
+#. If empty.
+#: src/users/group-settings.c:197
+msgid "Group name is empty"
+msgstr "Nama kumpulan adalah kosong"
+
+#: src/users/group-settings.c:198
+msgid "A group name must be specified"
+msgstr "Nama kumpulan mesti dinyatakan"
+
+#. If too long.
+#: src/users/group-settings.c:201
+msgid "The group name is too long"
+msgstr "Nama kumpulan terlalu panjang"
+
+#: src/users/group-settings.c:202
+#, c-format
+msgid "The group name should have less than %i characters for being valid"
+msgstr ""
+
+#. if invalid.
+#: src/users/group-settings.c:205
+msgid "Group name has invalid characters"
+msgstr "Nama kumpulan mengandungi aksara tidak sah"
+
+#: src/users/group-settings.c:206
+msgid "Please set a valid group name, using only lower case letters"
+msgstr "Sila tetapkan nama kumpulan yang sah, hanya menggunakan huruf kecil"
+
+#. if !exist.
+#: src/users/group-settings.c:209
+#, c-format
+msgid "Group \"%s\" already exists"
+msgstr "Kumpulan \"%s\"tersedia ada"
+
+#: src/users/group-settings.c:210
+msgid "Please select a different group name"
+msgstr "Sila guna nama kumpulan lain"
+
+#. if it's the root group
+#: src/users/group-settings.c:213
+msgid "Group name of the \"root\" user should not be modified"
+msgstr "Nama kumpulan bagi pengguna \"root\" tak sepatutnya diubah"
+
+#: src/users/group-settings.c:283
+msgid "The group \"root\" should not be deleted"
+msgstr "Pengguna \"root\" tidak sepatutnya dipadam"
+
+#: src/users/group-settings.c:298
+msgid "This may leave files with invalid group ID in the filesystem"
+msgstr ""
+
+#: src/users/group-settings.c:303
+#, c-format
+msgid "Are you sure you want to delete group \"%s\"?"
+msgstr "Adakah anda pasti untuk memadam kumpulan \"%s\"?"
+
+#: src/users/group-settings.c:358
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Tetapan bagi Kumpulan %s"
 
 #: src/users/groups-table.c:44
-#: src/users/users-table.c:51
 msgid "Group"
 msgstr "Kumpulan"
 
@@ -1925,61 +1833,65 @@ msgstr "Kumpulan"
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:120
+#: src/users/main.c:124
 msgid "User name contains"
 msgstr "Nama pengguna mengandungi"
 
-#: src/users/main.c:121
+#: src/users/main.c:125
 msgid "User ID is"
 msgstr "ID Pengguna adalah"
 
-#: src/users/main.c:122
+#: src/users/main.c:126
 msgid "Group name contains"
 msgstr "Nama kumpulan mengandungi"
 
-#: src/users/main.c:123
+#: src/users/main.c:127
 msgid "User GID is"
 msgstr "GID Penggunai adalah"
 
-#: src/users/main.c:314
+#: src/users/main.c:246
 #: src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Pengguna dan Kumpulan"
 
 #: src/users/passwd.c:266
-msgid "Passwords doesn't match."
-msgstr "Katalaluan tidak sepadan."
+msgid "Passwords do not match"
+msgstr "Katalaluan tidak sepadan"
 
 #: src/users/passwd.c:271
 #, c-format
 msgid ""
 "Bad password: %s.\n"
-"Please try with a new password."
+"Please try with a new password"
 msgstr ""
 "Katalaluan teruk: %s.\n"
-"Sila cuba dengan katalaluan baru."
+"Sila cuba dengan katalaluan baru"
 
-#: src/users/profile-settings.c:129
+#: src/users/profile-settings.c:122
 msgid "The profile must have a name"
 msgstr "Profil mesti mempunyai nama"
 
-#: src/users/profile-settings.c:134
+#: src/users/profile-settings.c:127
 msgid "The profile must have a default home"
 msgstr "Profil  mesti mempunyai rumah default"
 
-#: src/users/profile-settings.c:139
-#: src/users/profile-settings.c:144
+#: src/users/profile-settings.c:132
+#: src/users/profile-settings.c:137
 msgid "The profile must have a default shell"
 msgstr "Profil mesti mempunyai shell default"
 
-#: src/users/profile-settings.c:214
-msgid "The profile Default must not be deleted."
-msgstr "Default profil tak boleh dipadam."
+#: src/users/profile-settings.c:204
+msgid "The default profile should not be deleted"
+msgstr "Profil default tak sepatutnya dipadam"
 
-#: src/users/profile-settings.c:221
+#: src/users/profile-settings.c:205
+msgid "This profile is used for setting default data for new users"
+msgstr ""
+
+#: src/users/profile-settings.c:214
 #, c-format
-msgid "Are you sure you want to delete the profile called %s?"
-msgstr "Adakah anda pasti untuk memadam profil dipanggil %s?"
+msgid "Delete profile \"%s\"?"
+msgstr "Padam profil \"%s\"?"
 
 #. Column name,          Adv_state_show,	Basic_state_show
 #: src/users/profiles-table.c:38
@@ -1990,126 +1902,174 @@ msgstr "Profil"
 msgid "Comment"
 msgstr "Komen"
 
-#: src/users/search-bar/search-bar.c:200
-msgid "_Search"
-msgstr "_Cari"
-
-#: src/users/search-bar/search-bar.c:238
+#: src/users/search-bar/search-bar.c:225
 msgid "C_lear"
 msgstr "_Kosongkan"
 
-#: src/users/search-bar/search-bar.c:346
+#: src/users/search-bar/search-bar.c:326
 msgid "Choice"
 msgstr "Pilihan"
 
-#: src/users/search-bar/search-bar.c:356
+#: src/users/search-bar/search-bar.c:336
 msgid "Text"
 msgstr "Teks"
 
-#: src/users/table.c:47
-msgid "/_Add User ..."
-msgstr "_Tambah _Pengguna ..."
-
-#: src/users/table.c:54
-msgid "/_Add group ..."
-msgstr "/Tambah _Kumpulan ..."
+#: src/users/user-settings.c:104
+msgid "The \"root\" user should not be deleted"
+msgstr "Pengguna  \"root\" tidak boleh dipadam"
 
 #: src/users/user-settings.c:120
-msgid "The root user must not be deleted."
-msgstr "Pengguna root tidak boleh dipadam."
-
-#: src/users/user-settings.c:127
 #, c-format
-msgid "Are you sure you want to delete user %s?"
-msgstr "Adakah anda pasti untuk memadam pengguna %s?"
+msgid "Are you sure you want to delete user \"%s\"?"
+msgstr "Adakah anda pasti untuk memadam pengguna \"%s\"?"
 
-#: src/users/user-settings.c:208
+#: src/users/user-settings.c:219
 msgid "User Account Editor"
 msgstr "Editor Akaun Pengguna"
 
 #: src/users/user-settings.c:335
-msgid "The username is empty."
-msgstr "Namapengguna adalah kosong."
+msgid "The user name is empty"
+msgstr "Nama pengguna adalah kosong"
+
+#: src/users/user-settings.c:336
+msgid "A user name must be specified"
+msgstr "Nama pengguna mesti dinyatakan"
+
+#. = sizeof (ut.ut_name)
+#: src/users/user-settings.c:342
+#: src/users/user-settings.c:347
+msgid "The user name is too long"
+msgstr "Nama pengguna terlalu panjang"
 
 #: src/users/user-settings.c:343
-msgid "The username is too long."
-msgstr "Namapengguna terlalu panjang."
-
-#: src/users/user-settings.c:347
-msgid "root username shouldn't be modified."
-msgstr "namapengguna root tak sepatutnya diubah."
-
-#: src/users/user-settings.c:351
-msgid "Please set a valid username consisting of a lower case letter followed by lower case letters and numbers."
-msgstr "Sila tetapkan namapengguna yang sah terdiri drpd huruf kecil diikuti dengan huruf kecil dan nombor."
-
-#: src/users/user-settings.c:355
+#: src/users/user-settings.c:348
 #, c-format
-msgid ""
-"Username \"%s\" already exists.\n"
-"\n"
-"Please select a different Username"
+msgid "The user name should have less than %i characters for being valid"
 msgstr ""
-"Namapengguna  \"%s\" sudah ada.\n"
-"\n"
-" Sila guna namapengguna lain."
 
-#: src/users/user-settings.c:377
+#: src/users/user-settings.c:354
+msgid "User name for the \"root\" user should not be modified"
+msgstr "Nama pengguna \"root\" tak sepatutnya diubah"
+
+#: src/users/user-settings.c:360
+msgid "User name has invalid characters"
+msgstr ""
+
+#: src/users/user-settings.c:361
+msgid "Please set a valid user name consisting of a lower case letter followed by lower case letters and numbers"
+msgstr "Sila tetapkan nama pengguna yang sah terdiri drpd huruf kecil diikuti dengan huruf kecil dan nombor"
+
+#: src/users/user-settings.c:367
 #, c-format
-msgid "Invalid character '%c' in comment."
-msgstr "Aksara tidak sah '%c' pada komen."
+msgid "User name \"%s\" already exists"
+msgstr "Nama pengguna \"%s\" sudah sedia wujud."
 
-#: src/users/user-settings.c:423
-msgid "Home directory must not be empty."
-msgstr "Direktori rumah tidak boleh kosong."
+#: src/users/user-settings.c:368
+msgid "Please select a different user name"
+msgstr " Sila guna namapengguna lain"
 
-#: src/users/user-settings.c:426
-msgid "Please enter full path for home directory."
-msgstr "Sila masukkan laluan penuh bagidirektori rumah."
+#: src/users/user-settings.c:393
+#, c-format
+msgid "Invalid character \"%c\" in comment"
+msgstr "Aksara tidak sah \"%c\" pada komen."
 
-#: src/users/user-settings.c:429
-msgid "root home shouldn't be modified."
-msgstr "Rumah root tak sepatutnya diubah."
+#: src/users/user-settings.c:394
+msgid "Check that this character is not used"
+msgstr ""
 
-#: src/users/user-settings.c:459
-msgid "root uid shouldn't be modified."
-msgstr "Uid root sepatutnya tak boleh diubah."
+#: src/users/user-settings.c:442
+msgid "Home directory should not be empty"
+msgstr "Direktori rumah tidak boleh kosong"
 
-#: src/users/user-settings.c:461
-msgid "Such user id already exists."
-msgstr "Id pengguna sebegitu sudah sedia wujud."
+#: src/users/user-settings.c:443
+msgid "Make sure you provide a home directory"
+msgstr "Pastikan anda membekalkan satu direktori rumah."
 
-#: src/users/user-settings.c:481
-msgid "Please give shell with full path."
-msgstr "Sila beri shell yangan laluan penuh."
+#: src/users/user-settings.c:445
+msgid "Incomplete path in home directory"
+msgstr "laluan tak lengkap  bagi direktori rumah"
 
-#: src/users/user-settings.c:499
-msgid "Password must not be empty."
-msgstr "Katalaluan imestilah tak kosong."
+#: src/users/user-settings.c:446
+msgid ""
+"Please enter full path for home directory\n"
+"<span size=\"smaller\">i.e.: /home/john</span>"
+msgstr ""
+"Sila masukkan laluan penuh ke direktori rumah\n"
+"<span size=\"smaller\">i.e.: /home/johan</span>"
 
-#: src/users/user-settings.c:778
+#: src/users/user-settings.c:449
+msgid "Home directory of the \"root\" user should not be modified"
+msgstr "Direktori rumah bagi pengguna \"root\" tak sepatutnya diubah."
+
+#: src/users/user-settings.c:482
+msgid "Invalid user ID"
+msgstr "ID pengguna tidak sah"
+
+#: src/users/user-settings.c:483
+msgid "User ID must be a positive number"
+msgstr "ID pengguna mestilah satu nombor positif"
+
+#: src/users/user-settings.c:485
+msgid "User ID of the \"root\" user should not be modified"
+msgstr "ID pengguna \"root\" tak sepatutnya diubah"
+
+#: src/users/user-settings.c:502
+msgid "Several users may share a single user ID, but it's not common and may lead to security problems"
+msgstr ""
+
+#: src/users/user-settings.c:507
+#, c-format
+msgid "User ID %s already exists"
+msgstr "Id pengguna %s sudah sedia wujud"
+
+#: src/users/user-settings.c:524
+msgid "Incomplete path in shell"
+msgstr "Laluan tidak lengkap pada shell"
+
+#: src/users/user-settings.c:525
+msgid ""
+"Please enter full path for shell\n"
+"<span size=\"smaller\">i.e.: /bin/sh</span>"
+msgstr ""
+
+#: src/users/user-settings.c:547
+msgid "Password should not be empty"
+msgstr "Katalaluan mestilah tak kosong"
+
+#: src/users/user-settings.c:548
+msgid "A password must be provided"
+msgstr "Katalaluan mestilah dibekalkan"
+
+#: src/users/user-settings.c:550
+msgid "Password confirmation isn't correct"
+msgstr "Kepastian katalaluan tak betul"
+
+#: src/users/user-settings.c:551
+msgid "Check that you have provided the same password in both text fields"
+msgstr ""
+
+#: src/users/user-settings.c:827
 #, c-format
 msgid "Settings for User %s"
 msgstr "Tetapan bagi Pengguna %s"
 
-#. Column name,          Adv_state_show,	Basic_state_show
-#: src/users/users-table.c:46
+#: src/users/users-table.c:45
 msgid "User"
 msgstr "Pengguna"
 
-#: src/users/users-table.c:47
+#: src/users/users-table.c:46
 msgid "Home"
 msgstr "Rumah"
 
-#: src/users/users-table.c:48
+#: src/users/users-table.c:47
 msgid "User details"
 msgstr "Perincian pengguna"
 
-#: src/users/users-table.c:49
+#: src/users/users-table.c:48
 msgid "UID"
 msgstr "UID"
 
-#: src/users/users-table.c:50
+#: src/users/users-table.c:49
 msgid "Shell"
 msgstr "Shell"
 
