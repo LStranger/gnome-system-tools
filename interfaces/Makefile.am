@@ -9,7 +9,8 @@ interfaces = \
 	time.glade 					\
 	users.glade 					\
 	boot.glade					\
-	location-manager.glade
+	location-manager.glade				\
+	print.glade
 
 interfaces_DATA = $(interfaces)
 
