@@ -133,7 +133,6 @@ GstDialogSignal signals[] = {
 	{ "ptp_address", "changed", G_CALLBACK (on_connection_modified) },
 	{ "ptp_remote_address", "changed", G_CALLBACK (on_connection_modified) },
 	{ "ptp_remote_is_gateway", "toggled", G_CALLBACK (on_connection_modified) },
-	{ "ppp_serial_port", "changed", G_CALLBACK (on_connection_modified) },
 	{ "ppp_dial_command", "clicked", G_CALLBACK (on_connection_modified) },
 	{ "ppp_volume", "value_changed", G_CALLBACK (on_connection_modified) },
 	{ "ppp_persist", "toggled", G_CALLBACK (on_connection_modified) },
@@ -169,13 +168,19 @@ static GstReportHookEntry report_hooks[] = {
 static void
 connect_signals (GstDialog *main_dialog, GstDialogSignal *sigs, GstDialogSignal *sigs_after)
 {
-	GtkWidget *widget = gst_dialog_get_widget (main_dialog, "network_connection_wireless_device");
+	GtkWidget *widget;
 	
 	gst_dialog_connect_signals (main_dialog, sigs);
 	gst_dialog_connect_signals_after (main_dialog, sigs_after);
 
+	/* FIXME: do this here until the GtkComboBox child is accessible through glade */
+	widget = gst_dialog_get_widget (main_dialog, "network_connection_wireless_device");
 	g_signal_connect (GTK_BIN (GTK_COMBO_BOX (widget))->child,
 			  "changed", G_CALLBACK (on_network_druid_entry_changed), NULL);
+
+	widget = gst_dialog_get_widget (main_dialog, "ppp_serial_port");
+	g_signal_connect (GTK_BIN (GTK_COMBO_BOX (widget))->child,
+			  "changed", G_CALLBACK (on_connection_modified), NULL);
 }
 
 int

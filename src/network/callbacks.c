@@ -900,7 +900,7 @@ void
 on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 {
 	GtkWidget *autodetect_button = gst_dialog_get_widget (tool->main_dialog, "ppp_autodetect_modem");
-	GtkWidget *devices_combo = gst_dialog_get_widget (tool->main_dialog, "ppp_serial_port_g");
+	GtkWidget *devices_combo = gst_dialog_get_widget (tool->main_dialog, "ppp_serial_port");
 	GtkWidget *dialog = gst_dialog_get_widget (tool->main_dialog, "connection_config_dialog");
 	GtkWidget *w;
 	gchar *dev;
@@ -927,10 +927,8 @@ on_ppp_autodetect_modem_clicked (GtkWidget *widget, gpointer data)
 					NULL);
 		gtk_dialog_run (GTK_DIALOG (w));
 		gtk_widget_destroy (w);
-	} else {
-		w = gst_dialog_get_widget (tool->main_dialog, "ppp_serial_port");
-		gtk_entry_set_text (GTK_ENTRY (w), dev);
-	}
+	} else
+		gtk_entry_set_text (GTK_ENTRY (GTK_BIN (GTK_COMBO (devices_combo))->child), dev);
 
 	if (dev)
 		g_free (dev);

@@ -76,11 +76,14 @@ const gchar *connection_ui_description =
 
 #define GET_STR(yy_prefix,xx) g_free (cxn->xx); \
 	cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), 0, -1)
+#define GET_COMBO_STR(yy_prefix,xx) g_free (cxn->xx); \
+	cxn->xx = gtk_editable_get_chars (GTK_EDITABLE (GTK_BIN (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)))->child), 0, -1)
 #define GET_BOOL(yy_prefix,xx) cxn->xx = GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))->active
 #define GET_BOOL_NOT(yy_prefix,xx) GET_BOOL(yy_prefix,xx); cxn->xx = !cxn->xx;
 #define GET_INT(yy_prefix,xx) cxn->xx = gtk_range_get_value (GTK_RANGE (GTK_SCALE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))))
 #define GET_DIAL_OPTION_MENU(yy_prefix, xx) cxn->xx = (gtk_option_menu_get_history (GTK_OPTION_MENU (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))) == 0)? g_strdup ("ATDT"): g_strdup ("ATDP")
 #define SET_STR(yy_prefix,xx) gst_ui_entry_set_text (GTK_ENTRY (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), cxn->xx)
+#define SET_COMBO_STR(yy_prefix,xx) gst_ui_entry_set_text (GTK_ENTRY (GTK_BIN (GTK_COMBO_BOX (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)))->child), cxn->xx)
 #define SET_BOOL(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), cxn->xx)
 #define SET_BOOL_NOT(yy_prefix,xx) gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx)), !cxn->xx)
 #define SET_INT(yy_prefix,xx) gtk_range_set_value (GTK_RANGE (GTK_SCALE (gst_dialog_get_widget (tool->main_dialog, yy_prefix#xx))), cxn->xx)
@@ -1692,7 +1695,7 @@ empty_ppp (GstConnection *cxn)
 static void
 empty_ppp_adv (GstConnection *cxn)
 {
-	GET_STR ("ppp_", serial_port);
+	GET_COMBO_STR ("ppp_", serial_port);
 	GET_BOOL ("ppp_", stupid);
 	GET_BOOL ("ppp_", set_default_gw);
 	GET_BOOL_NOT ("ppp_", update_dns);
@@ -1898,7 +1901,7 @@ fill_ppp (GstConnection *cxn)
 static void
 fill_ppp_adv (GstConnection *cxn)
 {
-	SET_STR ("ppp_", serial_port);
+	SET_COMBO_STR ("ppp_", serial_port);
 	SET_BOOL ("ppp_", stupid);
 	SET_BOOL ("ppp_", set_default_gw);
 	SET_BOOL_NOT ("ppp_", update_dns);
