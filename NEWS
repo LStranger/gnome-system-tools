@@ -1,3 +1,327 @@
+XST - 0.10
+==========
+The Ximian Setup Tools 0.10.0 have been released.
+
+The Ximian Setup Tools are a set of cross-platform configuration utilities
+for Linux and other Unices. Internally they are divided in frontends and
+backends. The frontend knows nothing about the underlying system and provides
+the same user interface across the different types of systems. The backend
+knows how to read and write configuration information. The Ximian Setup Tools
+do not impose a new database on the system, they work with the default
+configuration files so that configuration can still be done by hand or by
+other tools. 
+
+
+HELP Wanted !
+-------------
+We still need lots of help from anybody interested in contributing
+to XST. Even if it only an email letting us know that the tools worked
+fine in you system.
+
+- Testing
+   Testing that the tools work correctly on your system and either filing
+   detailed bug reports or confirming that they work correctly is greatly
+   appreciated. If you test a tool on an unsupported distro/system and find out
+   that it works correctly let us know so that we can update the supported
+   tools matrix (see below).
+  
+- Porting
+   The backends are designed as to minimize the effort needed to support more
+   distros/systems. A great way to contribute is to port the tools to
+   another distribution/system.
+
+Changes since last release
+--------------------------
+
+- Added Font tool.
+
+- Added support for Red Hat 7.2
+
+- Added support for Grub.
+
+- Improved error reporting.
+
+- Time now changes the clock when a timezone change is made and ntp state
+  is loaded correctly.
+
+- Lots of bugfixing in the existing tools.
+
+
+Downloading
+-----------
+You can get it from :
+
+ftp://ftp.gnome.org/pub/GNOME/unstable/sources/ximian-setup-tools
+
+Mailing list / IRC
+------------------
+
+We have a mailing list set up at :
+http://lists.ximian.com/mailman/listinfo/setup-tool-hackers
+
+You can also find us in IRC server irc.gnome.org channel #xst
+
+
+Whitepaper
+----------
+
+You can find the latest version of the XST whitepaper at:
+
+http://primates.ximian.com/~miguel/helix-setup-tools.html
+
+
+Backup system
+-------------
+
+Every time a tool modifies your system configuration files, it makes backups
+of those files. The backups are rotated (for 9 levels in total), and the
+backup made the first time the tool was run is kept forever. This means that
+you can revert your system configuration to the point before you ever ran a
+Ximian Setup Tool.
+
+The backup path is /var/cache/ximian-setup-tools/backup/<tool>/<id>/. In this
+directory, you'll find a complete snapshot of the files that were modified.
+The original directory structure leading up to these files is also kept. <id>
+runs from 1-9, and when the first backup is rotated out, it is kept in a
+special catalog called "First", which is never touched again.
+
+
+The current set of tools include :
+----------------------------------
+
+- Network admin
+   
+   Allows you to configure your:
+   - hostname
+   - samba hostname and workgroup
+   - DNS servers
+   - search domains
+   - hosts (/etc/hosts)
+   - Network interfaces
+        - ppp 
+        - ethernet
+        - slip
+        - wavelan (limited support)
+  	
+- Time admin
+
+   Allows you to configure your:
+   - Date & Time
+   - Timezone
+   - NTPD servers
+   
+- Users admin
+
+    Allows you to manage:
+    - Users
+        - username / full name
+        - password
+        - home dir
+        - shell
+        - groups
+    - Groups
+    
+- Boot admin
+
+     Allows you to set:
+     - Default boot partition
+     - Partition type and label
+     - Timeout
+     - Kernel image
+     - Kernel extra parameters (append)
+     - adding or deleting partitions from the boot manager
+     
+- Shares admin
+
+     Allows you to import and export NFS and samba
+     shares.
+     - import NFS & samba shares
+     - export NFS & samba shares
+
+- Display admin
+
+     Allows you to configure your:
+     - Resolution
+     - Color depth
+
+- Internet Sharing admin
+
+     Lets you share your internet connection with a LAN, configuring:
+     - Masquerading
+     - DHCP server and ranges
+
+- Font tool
+     Allows you to install and configure:
+     - New truetype fonts
+     - Change your current fonts
+	
+
+Verification matrix
+-------------------
+
+This is a matrix describing the current status of tool platform/distribution
+support, to the best of our knowledge.
+
+Key:
+
++  Supported and tested. The tool will not ask you to select a compatible
+   version or distribution. Of course, there may still be bugs. :-)
++? Supported, not tested. Same as '+', but we haven't tested it. In other
+   words, it "should work", because we know it's compatible.
+?  Unsupported, may work. You'll be asked to select a compatible version or
+   distribution, which may or may not work.
+-  Unsupported, doesn't work. We haven't worked on any version of that
+   flavour. It's most likely that it won't work.
+
+
+Red Hat Linux:
+
+Version        5.2     6.0     6.1     6.2     7.0     7.1     7.2 
+
+Boot            +?      +?      +?      +       +       +	+
+Network         +?      +?      +?      +       +       +	+
+Shares          +?      +?      +?      +       +       +	+
+Time            +?      +?      +?      +       +       +	+
+Users           +?      +?      +?      +       +       +	+
+Display          ?       ?       ?      ?       +       +	+
+Internetsharing  ?       ?       ?      ?       +       +	+
+Font		 ?       ?       ?      ?       ?       ?       +
+
+Debian GNU/Linux:
+
+Version        2.2    Woody
+
+Boot            +       +
+Network         +       +?
+Shares          +       +
+Time            +       +
+Users           +       +?
+Display         +       +
+Internetsharing +       +
+Font            ?       ?
+
+Woody comments: You'll have to echo 'woody' > /etc/debian_version to
+make the ximian-setup-tools detect your distribution. 
+
+
+Linux Mandrake:
+
+Version        7.0     7.1     7.2     8.0
+
+Boot            ?       ?       +       ?
+Network         ?       ?       +       ?
+Shares          ?       ?       +       ?
+Time            ?       ?       +       ?
+Users           ?       ?       +       ?
+Display         ?       ?       ?       ?
+Internetsharing ?       ?       +       ?
+Font		?	?	?	?
+
+SuSE Linux:
+
+Version        6.3     6.4     7.0     7.1
+
+Boot            ?       ?       +       ?
+Network         ?       ?       +?      ?
+Shares          ?       ?       +       ?
+Time            ?       ?       +       ?
+Users           ?       ?       +       ?
+Display         ?       ?       ?       ?
+Internetsharing ?       ?       ?       ?
+Font 		?       ?       ?       ?
+
+Turbolinux:
+
+Version         6
+
+Boot            ?
+Network         -
+Shares          ?
+Time            -
+Users           ?
+Display         +?
+Internetsharing ?
+Font		?
+
+LinuxPPC:
+
+Version        2000
+
+Boot            -
+Network         -
+Shares          ?
+Time            -
+Users           ?
+Display         ?
+Internetsharing ?
+Font		?
+
+Yellow Dog Linux:
+
+Version        1.2     2.0
+
+Boot            -       -
+Network         -       -
+Shares          ?       ?
+Time            -       -
+Users           ?       ?
+Display         ?       ?
+Internetsharing ?       ?
+Font		?	?
+
+Solaris:
+
+Version        7.0     8.0
+
+Boot            -       -
+Network         -       -
+Shares          -       -
+Time            -       -
+Users           -       -
+Display         -       -
+Internetsharing -       -
+Font		-	-
+
+HPUX:
+
+Version       10.0     11.0
+
+Boot            -       -
+Network         -       -
+Shares          -       -
+Time            -       -
+Users           -       -
+Display         -       -
+Internetsharing -       -
+Font		-	-
+
+FreeBSD:
+
+Version        4.x     5.x
+
+Boot            -       -
+Network         -       -
+Shares          ?       ?
+Time            -       -
+Users           ?       ?
+Display         -       -
+Internetsharing -       -
+Font		-	-
+
+
+Developers:   Chema Celorio <chema@ximian.com>
+              Hans Petter Jansson <hpj@ximian.com>
+              Arturo Espinosa <arturo@ximian.com>
+              Tambet Ingo <tambet@ximian.com>
+              Jacob Berkman <jacob@ximian.com>
+              Bradford Hovinen <bradford@ximian.com>
+              Israel Escalante <israel@ximian.com>
+
+Artists:      Anna Dirks <anna@ximian.com>
+              Jakub Steiner <jimmac@ximian.com>
+              Tuomas Kuosmanen <tigert@ximian.com>
+              Joakim Ziegler <joakim@ximian.com>
+
 XST - 0.8
 ---------
 The Ximian Setup Tools 0.8.0 have been released.
