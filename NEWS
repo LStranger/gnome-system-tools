@@ -1,8 +1,22 @@
-XST - 0.5.0
------------
+XST - 0.5
+---------
 
+The Ximian Setup Tools 0.5.0 have been released.
+
+The Ximian Setup Tools are a set of cross-platform configuration utilities
+for Linux and other Unices. Internally they are divided in a frontend and
+backend, the frontends knows nothing about the underlying system and provides
+the same user interface across the different types of systems. The backend
+knows how to read and write configuration information. The Ximian Setup Tools
+do not impose a new database on the system, they work with the default
+configuration files so that configuration can still be done by hand or by
+other tools.
+
+Changes since last release
+--------------------------     
+- Bugs bugs bugs. Too many to count (Everybody)
 - Added a debian dir (thanks hadess)
-- More blinking removed from time tool (Hans Petter)
+- Blinking removed from time tool (Hans Petter)
 - User profiles in users tool (Tambet)
 - New backend framework for filesys manipulation and new shares backend
   (Hans Petter)
@@ -10,11 +24,133 @@ XST - 0.5.0
   significant speedup (Hans Petter)
 - Timezone setting on Debian fixed (Hans Petter)
 - Disks tool now omits entries for extended partitions (Hans Petter)
-- All tools can save their state between sessions. Currently only user tool
-  and boot tool use that (Tambet)
+- All tools can save their state between sessions (Tambet)
 - Searchbar is complexity-aware in users tool (Tambet)
 - Sort list of selectable distributions (Nils Barth)
 - Fix shares tool SMB problems (Hans Petter)
+- Location management builds by default now (Bradford)
+
+
+
+Contributions
+-------------
+
+We are happy to say that a lot of contributions have started flowing
+in. We still need lots of help from anybody interested in contributing
+to XST. 
+
+- Testing
+   Testing that the tools work correctly on your system and either filing
+   detailed bug reports or confirming that they work correctly is greatly
+   appreciated. If you test a tool in an unsupported distro/system and find out
+   that it works correctly let us know so that we can update the supported
+   tools Matrix (see below).
+  
+- Porting
+   The backends are designed as to minimize the effort needed to support more
+   distros/systems. A great way to contribute is to port the tools to
+   another distribution/system.
+
+
+Mailing list / IRC
+------------------
+We have a mailing list set up at :
+http://lists.ximian.com/mailman/listinfo/setup-tool-hackers
+
+You can also find us in IRC server irc.gnome.org channel #xst
+
+Backup system
+-------------
+
+Every time a tool modifies your system configuration files, it makes backups
+of those files. The backups are rotated (for 9 levels in total), and the
+backup made the first time the tool was run is kept forever. This means that
+you can revert your system configuration to the point before you ever ran a
+Ximian Setup Tool.
+
+The backup path is /var/cache/ximian-setup-tools/backup/<tool>/<id>/. In this
+directory, you'll find a complete snapshot of the files that were modified.
+The original directory structure leading up to these files is also kept. <id>
+runs from 1-9, and when the first backup is rotated out, it is kept in a
+special catalog called "First", which is never touched again.
+     
+Location Management
+-------------------
+
+The current set of tools include :
+----------------------------------
+
+- Network admin
+   
+   Allows you to configure your:
+   - hostname
+   - samba hostname and workgroup
+   - DNS servers
+   - search domains
+   - hosts (/etc/hosts)
+   - Network interfaces
+        - ppp 
+        - ethernet
+        - slip
+        - wavelan (limited support)
+  	
+- Time admin
+
+   Allows you to configure your :
+   - Date & Time
+   - Timezone
+   - NTPD servers
+   
+- Users admin
+
+    Allows you to manage :
+    - Users
+        - username / full name
+        - password
+        - home dir
+        - shell
+        - groups
+    - Groups
+    
+- Boot admin
+
+     Allows you to set :
+     - Default boot partition
+     - Partition type and label
+     - Timeout
+     - Kernel image
+     - Kernel extra parameters (append)
+     - adding or deleting partitions from the boot manager
+     
+- Shares admin
+
+     Allows you to import and export NFS and samba
+     shares.
+     - import NFS & samba shares
+     - export NFS & samba shares
+
+- Disks admin
+
+     Allows you to :
+     - Mount and unmount local file systems.
+
+- Memory admin
+
+     Allows you to configure :
+     - Swap partitions
+     - Swap files
+     - priorities of swap areas
+
+
+Verification matrix
+-------------------
+
+This is a matrix describing the current status of tool platform/distribution
+support. To the best of our knowledge.
+
+
+
+FIXME FIXME FIXME
 
 =================================================================
 XST - 0.4.1
