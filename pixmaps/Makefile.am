@@ -41,7 +41,7 @@ pixmaps_DATA = \
 	server.png               \
 	settings.png             \
 	shares.png               \
-   sysV.png                 \
+	sysV.png                 \
 	talk-userlist.png		\
 	test-colors.png		\
 	time.png                 \
@@ -54,6 +54,7 @@ pixmaps_DATA = \
 	wavelan-48.png           \
 	world_map-960.png        \
 	xstdruidbg-3.png         \
-	ximian30.png
+	ximian30.png			\
+	background.png
 
 EXTRA_DIST = $(pixmaps_DATA)
