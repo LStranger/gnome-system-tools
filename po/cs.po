@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-system-tools VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-11-18 03:57+0100\n"
-"PO-Revision-Date: 2003-11-18 13:18+0100\n"
+"POT-Creation-Date: 2003-11-24 03:57+0100\n"
+"PO-Revision-Date: 2003-11-24 13:48+0100\n"
 "Last-Translator: Miloslav Trmac <mitr@volny.cz>\n"
 "Language-Team: Czech <cs@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -166,10 +166,6 @@ msgid "Ask at boot"
 msgstr "Zeptat se při zavádění"
 
 #: interfaces/boot.glade.in.h:20
-msgid "Boot Image Assistant"
-msgstr "Asistent pro zaváděcí obraz"
-
-#: interfaces/boot.glade.in.h:21
 msgid ""
 "Choose a kernel image to boot, and a partition to mount as the root "
 "partition. Optionally, you may also enter append parameters which are passed "
@@ -179,13 +175,19 @@ msgstr ""
 "Můžete také volitelně připojit další parametry, které budou předány jádru "
 "při zavádění."
 
-#: interfaces/boot.glade.in.h:22
+#: interfaces/boot.glade.in.h:21
 msgid "Click \"Forward\" to continue"
 msgstr "Pokračujte kliknutím na \"Další\""
 
-#: interfaces/boot.glade.in.h:23
+#: interfaces/boot.glade.in.h:22
 msgid "Confirmation"
 msgstr "Potvrzení"
+
+#. set window title
+#: interfaces/boot.glade.in.h:23 src/boot/boot-druid.c:429
+#: src/boot/boot-druid.c:441
+msgid "Creating a new boot image"
+msgstr "Vytvářím nový zaváděcí obraz"
 
 #: interfaces/boot.glade.in.h:24
 msgid "Enable IDE SCSI emulation"
@@ -203,66 +205,50 @@ msgstr ""
 msgid "Finished"
 msgstr "Dokončeno"
 
-#: interfaces/boot.glade.in.h:27
-msgid "Image Settings (Step 1 of 2)"
-msgstr "Nastavení obrazu (krok 1 ze 2)"
-
-#: interfaces/boot.glade.in.h:28
-msgid "Image Settings (Step 2 of 2)"
-msgstr "Nastavení obrazu (krok 2 ze 2)"
-
-#: interfaces/boot.glade.in.h:29 interfaces/network.glade.in.h:49
+#: interfaces/boot.glade.in.h:27 interfaces/network.glade.in.h:49
 #: src/network/connection.c:1786
 msgid "Manual"
 msgstr "Ruční"
 
-#: interfaces/boot.glade.in.h:30
+#: interfaces/boot.glade.in.h:28
 msgid "Modify the settings for an operating system or kernel."
 msgstr "Úprava nastavení pro váš operační systém nebo jádro."
 
-#: interfaces/boot.glade.in.h:31
+#: interfaces/boot.glade.in.h:29
 msgid "Number of colors:"
 msgstr "Počet barev:"
 
-#: interfaces/boot.glade.in.h:32
-msgid "Other Operating System (Step 2 of 2)"
-msgstr "Jiný operační systém (krok 2 ze 2)"
-
-#: interfaces/boot.glade.in.h:33
+#: interfaces/boot.glade.in.h:30
 msgid "Other parameters:"
 msgstr "Jiné parametry:"
 
-#: interfaces/boot.glade.in.h:34
+#: interfaces/boot.glade.in.h:31
 msgid "Password"
 msgstr "Heslo"
 
-#: interfaces/boot.glade.in.h:35
+#: interfaces/boot.glade.in.h:32
 msgid "Protect with password"
 msgstr "Chránit heslem"
 
-#: interfaces/boot.glade.in.h:36
+#: interfaces/boot.glade.in.h:33
 msgid "Resolution:"
 msgstr "Rozlišení:"
 
-#: interfaces/boot.glade.in.h:37
+#: interfaces/boot.glade.in.h:34
 msgid "Seconds to wait before loading default kernel or OS"
 msgstr "Počet sekund před zavedením výchozího jádra nebo OS"
 
-#: interfaces/boot.glade.in.h:38
+#: interfaces/boot.glade.in.h:35
 msgid "Specify the partition on which the operating system is installed."
 msgstr "Zadejte oddíl, na kterém je operační systém instalován."
 
-#: interfaces/boot.glade.in.h:39
+#: interfaces/boot.glade.in.h:36
 msgid ""
-"The new boot image has been added.\n"
-"\n"
-"Please click \"Apply\" to save your changes."
-msgstr ""
-"Nový zaváděcí obraz byl přidán.\n"
-"\n"
-"Uložte prosím své změny kliknutím na \"Použít\"."
+"The new boot image has been added. Please click \"Apply\" to save your "
+"changes."
+msgstr "Nový zaváděcí obraz byl přidán. Uložte prosím své změny kliknutím na \"Použít\"."
 
-#: interfaces/boot.glade.in.h:42
+#: interfaces/boot.glade.in.h:37
 msgid ""
 "This assistant is designed to help you quickly and easily add a new boot "
 "image to your system."
@@ -270,54 +256,54 @@ msgstr ""
 "Tento asistent je navržen, aby vám pomohl rychle a jednoduše přidat do "
 "vašeho systému nový zaváděcí obraz."
 
-#: interfaces/boot.glade.in.h:43
+#: interfaces/boot.glade.in.h:38
 msgid "Use this dialog to modify kernel parameters."
 msgstr "Použijte tento dialog pro upravení parametrů jádra."
 
-#: interfaces/boot.glade.in.h:44
+#: interfaces/boot.glade.in.h:39
 msgid ""
 "Use this tool to specify which operating systems users can choose at startup."
 msgstr ""
 "Použijte tento nástroj pro určení operačních systémů, ze kterých si mohou "
 "uživatelé při startu vybírat."
 
-#: interfaces/boot.glade.in.h:45
+#: interfaces/boot.glade.in.h:40
 msgid "Video modes (only frame buffer)"
 msgstr "Režimy videa (jen framebuffer)"
 
-#: interfaces/boot.glade.in.h:46 interfaces/network.glade.in.h:85
+#: interfaces/boot.glade.in.h:41 interfaces/network.glade.in.h:85
 msgid "_Add..."
 msgstr "Přid_at..."
 
-#: interfaces/boot.glade.in.h:47
+#: interfaces/boot.glade.in.h:42
 msgid "_Device:"
 msgstr "_Zařízení:"
 
-#: interfaces/boot.glade.in.h:48
+#: interfaces/boot.glade.in.h:43
 msgid "_Edit"
 msgstr "_Upravit"
 
-#: interfaces/boot.glade.in.h:49 src/boot/boot-settings.c:42
+#: interfaces/boot.glade.in.h:44 src/boot/boot-settings.c:42
 msgid "_Initrd image path:"
 msgstr "Cesta k obrazu _initrd:"
 
-#: interfaces/boot.glade.in.h:50
+#: interfaces/boot.glade.in.h:45
 msgid "_Kernel image path:"
 msgstr "Cesta k _obrazu jádra:"
 
-#: interfaces/boot.glade.in.h:51
+#: interfaces/boot.glade.in.h:46
 msgid "_Name:"
 msgstr "_Název:"
 
-#: interfaces/boot.glade.in.h:52
+#: interfaces/boot.glade.in.h:47
 msgid "_Operating system:"
 msgstr "_Operační systém:"
 
-#: interfaces/boot.glade.in.h:53
+#: interfaces/boot.glade.in.h:48
 msgid "_Parameters:"
 msgstr "_Parametry:"
 
-#: interfaces/boot.glade.in.h:54
+#: interfaces/boot.glade.in.h:49
 msgid "_Root file system device:"
 msgstr "Zařízení _kořenového systému souborů:"
 
@@ -468,9 +454,9 @@ msgstr "Účet"
 msgid "Activate when the computer _starts"
 msgstr "Aktivovat při _spuštění počítače"
 
-#: interfaces/network.glade.in.h:22 src/network/network-druid.c:412
-msgid "Address configuration (Step 1 of 2)"
-msgstr "Nastavení adresy (krok 1 ze 2)"
+#: interfaces/network.glade.in.h:22
+msgid "Address configuration"
+msgstr "Nastavení adresy"
 
 #: interfaces/network.glade.in.h:23 interfaces/users.glade.in.h:14
 msgid "Advanced"
@@ -504,10 +490,9 @@ msgstr "Nasta_vení:"
 msgid "Connection _name:"
 msgstr "_Název připojení:"
 
-#: interfaces/network.glade.in.h:31 src/network/network-druid.c:449
-#: src/network/network-druid.c:460
-msgid "Connection name (Step 3 of 3)"
-msgstr "Název připojení (krok 3 ze 3)"
+#: interfaces/network.glade.in.h:31
+msgid "Connection name"
+msgstr "Název připojení"
 
 #: interfaces/network.glade.in.h:32
 msgid "Connection type"
@@ -517,7 +502,8 @@ msgstr "Typ připojení"
 msgid "Connections"
 msgstr "Připojení"
 
-#: interfaces/network.glade.in.h:34
+#. set window titles
+#: interfaces/network.glade.in.h:34 src/network/network-druid.c:63
 msgid "Creating a new network connection"
 msgstr "Vytvářím nové připojení k síti"
 
@@ -545,7 +531,7 @@ msgstr "Doména / Pracovní _skupina"
 msgid "General"
 msgstr "Obecné"
 
-#: interfaces/network.glade.in.h:42 src/network/main.c:214
+#: interfaces/network.glade.in.h:42 src/network/main.c:217
 msgid "Hosts"
 msgstr "Počítače"
 
@@ -566,8 +552,8 @@ msgid "How to dial up to the Internet."
 msgstr "Jak vytáčet připojení k Internetu."
 
 #: interfaces/network.glade.in.h:47
-msgid "ISP phone number (Step 1 of 3)"
-msgstr "Telefonní číslo ISP (krok 1 ze 3)"
+msgid "ISP phone number"
+msgstr "Telefonní číslo ISP"
 
 #: interfaces/network.glade.in.h:48
 msgid "Interface properties"
@@ -714,8 +700,8 @@ msgid "Use this dialog for setting the configuration for this interface"
 msgstr "Použijte tento dialog pro nastavení tohoto rozhraní"
 
 #: interfaces/network.glade.in.h:80
-msgid "Username and password (Step 2 of 3)"
-msgstr "Jméno uživatele a heslo (krok 2 ze 3)"
+msgid "Username and password"
+msgstr "Jméno uživatele a heslo"
 
 #: interfaces/network.glade.in.h:81
 msgid "WI_NS server:"
@@ -726,14 +712,16 @@ msgid "Wireless device:"
 msgstr "Bezdrátové zařízení:"
 
 #: interfaces/network.glade.in.h:83
-msgid "Wireless settings (Step 1 of 3)"
-msgstr "Bezdrátová nastavení (krok 1 ze 3)"
+msgid "Wireless settings"
+msgstr "Nastavení bezdrátové sítě"
 
 #: interfaces/network.glade.in.h:84
 msgid ""
 "You are about to create a new network connection. Please click \"Apply\" to "
 "save your changes."
-msgstr "Chystáte se vytvořit nové připojení k síti. Uložte prosím své změny kliknutím na \"Použít\"."
+msgstr ""
+"Chystáte se vytvořit nové připojení k síti. Uložte prosím své změny "
+"kliknutím na \"Použít\"."
 
 #: interfaces/network.glade.in.h:86
 msgid "_Autodetect"
@@ -859,7 +847,7 @@ msgstr "Akt_ualizovat DNS, když se připojení stane aktivním"
 msgid "_Use remote IP as default gateway"
 msgstr "Po_užít vzdálenou IP jako implicitní bránu"
 
-#: interfaces/network.glade.in.h:118 interfaces/users.glade.in.h:66
+#: interfaces/network.glade.in.h:118 interfaces/users.glade.in.h:65
 msgid "_Username:"
 msgstr "_Uživatelské jméno:"
 
@@ -1196,26 +1184,22 @@ msgid "_Profile:"
 msgstr "_Profil:"
 
 #: interfaces/users.glade.in.h:62
-msgid "_Profiles..."
-msgstr "_Profily..."
-
-#: interfaces/users.glade.in.h:63
 msgid "_Real name:"
 msgstr "Skutečné jmé_no:"
 
-#: interfaces/users.glade.in.h:64
+#: interfaces/users.glade.in.h:63
 msgid "_Shell:"
 msgstr "_Shell:"
 
-#: interfaces/users.glade.in.h:65
+#: interfaces/users.glade.in.h:64
 msgid "_User's groups:"
 msgstr "Skupiny uživat_ele:"
 
-#: interfaces/users.glade.in.h:67
+#: interfaces/users.glade.in.h:66
 msgid "_Work phone:"
 msgstr "_Pracovní telefon:"
 
-#: interfaces/users.glade.in.h:68
+#: interfaces/users.glade.in.h:67
 msgid "profiles_table"
 msgstr "tabulka_profilů"
 
@@ -1224,10 +1208,14 @@ msgstr "tabulka_profilů"
 msgid "vga=%s is not a valid vga value"
 msgstr "vga=%s není platná hodnota vga"
 
-#. set window title
-#: src/boot/boot-druid.c:407
-msgid "Creating a new boot image"
-msgstr "Vytvářím nový zaváděcí obraz"
+#: src/boot/boot-druid.c:430
+#, c-format
+msgid "Creating a new boot image (%d of %d)"
+msgstr "Vytvářím nový zaváděcí obraz (%d z %d)"
+
+#: src/boot/boot-druid.c:431
+msgid "Finished creating a new boot image"
+msgstr "Tvorba nového zaváděcího obrazu dokončena"
 
 #: src/boot/boot-image.c:40 src/network/profile.c:466
 msgid "Unknown"
@@ -1392,7 +1380,7 @@ msgstr " Více _voleb"
 msgid " Fewer _Options"
 msgstr " Méně _voleb"
 
-#: src/common/gst-dialog.c:504
+#: src/common/gst-dialog.c:507
 msgid ""
 "There are changes which haven't been applied.\n"
 "Apply them now?"
@@ -1400,7 +1388,7 @@ msgstr ""
 "Jsou zde změny, které nebyly použity.\n"
 "Chcete je použít nyní?"
 
-#: src/common/gst-dialog.c:621
+#: src/common/gst-dialog.c:624
 #, c-format
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Chyba při připojení signálu `%s' v prvku `%s'"
@@ -1676,49 +1664,50 @@ msgstr "IP adresa"
 msgid "Aliases"
 msgstr "Přezdívky"
 
-#: src/network/main.c:254
+#: src/network/main.c:257
 msgid "Run the connection assistant."
 msgstr "Spustit asistenta připojení."
 
-#: src/network/main.c:255
+#: src/network/main.c:258
 msgid "Run the PPP connection assistant."
 msgstr "Spustit asistenta připojení PPP."
 
-#: src/network/main.c:256
+#: src/network/main.c:259
 msgid "Run the ethernet connection assistant."
 msgstr "Spustit asistenta připojení ethernetu."
 
-#: src/network/main.c:257
+#: src/network/main.c:260
 msgid "Run the wlan connection assistant."
 msgstr "Spustit asistenta připojení vlan."
 
-#: src/network/main.c:258
+#: src/network/main.c:261
 msgid "Run the parallel port connection assistant."
 msgstr "Spustit asistenta připojení přes paralelní port."
 
-#: src/network/main.c:259
+#: src/network/main.c:262
 msgid "Run the irlan connection assistant."
 msgstr "Spustit asistenta připojení irlan."
 
-#: src/network/main.c:260
+#: src/network/main.c:263
 msgid "Configure a network interface"
 msgstr "Nastavit síťové rozhraní."
 
-#: src/network/main.c:260
+#: src/network/main.c:263
 msgid "interface"
 msgstr "rozhraní"
 
-#: src/network/main.c:267
+#: src/network/main.c:270
 msgid "Network Settings"
 msgstr "Nastavení sítě"
 
-#: src/network/network-druid.c:425
-msgid "Address configuration (Step 2 of 3)"
-msgstr "Nastavení adresy (krok 2 ze 3)"
+#: src/network/network-druid.c:64
+#, c-format
+msgid "Creating a new network connection (%d of %d)"
+msgstr "Vytvářím nové připojení k síti (%d z %d)"
 
-#: src/network/network-druid.c:446
-msgid "Connection name (Step 2 of 2)"
-msgstr "Název připojení (krok 2 ze 2)"
+#: src/network/network-druid.c:65
+msgid "Finished creating a new network connection"
+msgstr "Vytváření nového připojení k síti dokončeno"
 
 #: src/network/network.desktop.in.in.h:1
 msgid "Configure network devices and connections"
@@ -1766,11 +1755,11 @@ msgstr "Služba"
 msgid "Time Zone"
 msgstr "Časová zóna"
 
-#: src/time/main.c:427
+#: src/time/main.c:428
 msgid "Time Servers"
 msgstr "Servery času"
 
-#: src/time/main.c:505
+#: src/time/main.c:506
 msgid ""
 "You don't have NTP support running. Please run NTP support in the system to "
 "enable server synchronization."
@@ -1778,7 +1767,7 @@ msgstr ""
 "Nemáte spuštěnou podporu NTP. Pro povolení synchronizace se serverem v "
 "systému prosím spusťte podporu NTP."
 
-#: src/time/main.c:812
+#: src/time/main.c:813
 msgid "Time and Date Settings"
 msgstr "Nastavení data a času"
 
@@ -1849,23 +1838,23 @@ msgstr "Skupina"
 msgid "GID"
 msgstr "GID"
 
-#: src/users/main.c:122
+#: src/users/main.c:120
 msgid "User name contains"
 msgstr "Uživatelské jméno obsahuje"
 
-#: src/users/main.c:123
+#: src/users/main.c:121
 msgid "User ID is"
 msgstr "Uživatelské ID je"
 
-#: src/users/main.c:124
+#: src/users/main.c:122
 msgid "Group name contains"
 msgstr "Název skupiny obsahuje"
 
-#: src/users/main.c:125
+#: src/users/main.c:123
 msgid "User GID is"
 msgstr "GID uživatele je"
 
-#: src/users/main.c:316 src/users/users.desktop.in.in.h:2
+#: src/users/main.c:314 src/users/users.desktop.in.in.h:2
 msgid "Users and Groups"
 msgstr "Uživatelé a skupiny"
 
@@ -2043,17 +2032,14 @@ msgstr "Shell"
 msgid "Add or remove users and groups"
 msgstr "Přidat nebo odstranit uživatele a skupiny"
 
+#~ msgid "Boot Image Assistant"
+#~ msgstr "Asistent pro zaváděcí obraz"
+
+#~ msgid "_Profiles..."
+#~ msgstr "_Profily..."
+
 #~ msgid "Enter Password - GNOME System Tools"
 #~ msgstr "Zadejte heslo - Systémové nástroje GNOME"
-
-#~ msgid "1. ISP phone number"
-#~ msgstr "1. Telefonní číslo ISP"
-
-#~ msgid "2. Username and password"
-#~ msgstr "2. Uživatelské jméno a heslo"
-
-#~ msgid "3. Account name"
-#~ msgstr "3. Název účtu"
 
 #~ msgid "Account name:"
 #~ msgstr "Název účtu:"
@@ -2331,9 +2317,6 @@ msgstr "Přidat nebo odstranit uživatele a skupiny"
 #~ msgstr ""
 #~ "Použijte tento komentář k identifikaci rozhraní v budoucnu. Správa "
 #~ "aktivace vám umožní zadat, kdo bude aktivovat spojení a kdy."
-
-#~ msgid "Wireless networking settings."
-#~ msgstr "Nastavení bezdrátové sítě."
 
 #~ msgid "_Channel:"
 #~ msgstr "_Kanál:"
