@@ -1266,21 +1266,19 @@ visibility_toggled (GtkWidget *w, gpointer data)
 
 #endif
 
-static GtkWidget*
-xst_tool_create_platform_list (XstTool *tool)
+static void
+xst_tool_create_platform_list (GtkTreeView *list, XstTool *tool)
 {
 	GtkTreeModel *model = GTK_TREE_MODEL (gtk_tree_store_new (PLATFORM_LIST_COL_LAST, GDK_TYPE_PIXBUF, G_TYPE_STRING, G_TYPE_POINTER));
-	
-	GtkWidget *list;
 	GtkCellRenderer *renderer;
 	GtkTreeViewColumn *column;
 	GtkTreeSelection *select;
-	
-	list = gtk_tree_view_new_with_model (model);
+
+	g_return_if_fail (list != NULL);
+	g_return_if_fail (GTK_IS_TREE_VIEW (list));
+
+	gtk_tree_view_set_model (GTK_TREE_VIEW (list), model);
 	g_object_unref (model);
-	
-	gtk_tree_view_set_rules_hint (GTK_TREE_VIEW (list), TRUE);
-	gtk_tree_view_set_headers_visible (GTK_TREE_VIEW (list), FALSE);
 	
 	/* Insert the pixmaps cell */
 	renderer = gtk_cell_renderer_pixbuf_new ();
@@ -1308,16 +1306,12 @@ xst_tool_create_platform_list (XstTool *tool)
 	g_signal_connect (G_OBJECT (select), "changed",
 			  G_CALLBACK (on_platform_list_selection_changed),
 			  (gpointer) tool);
-
-	gtk_widget_show_all (list);
-	return list;
 }
 
 static void
 xst_tool_type_init (XstTool *tool)
 {
 	GladeXML *xml;
-	GtkWidget *sw;
 
 	tool->glade_common_path  = g_strdup_printf ("%s/common.glade", INTERFACES_DIR);
 
@@ -1357,12 +1351,8 @@ xst_tool_type_init (XstTool *tool)
 #endif
 
 	xml = xst_tool_load_glade_common (tool, "platform_dialog");
-	
-	/* We get the scrolled window that will contain the list and embed the GtkTreeView into it */
-	sw = glade_xml_get_widget (xml, "platform_list_holder");
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw), GTK_SHADOW_ETCHED_IN);
-	tool->platform_list = xst_tool_create_platform_list (tool);
-	gtk_container_add (GTK_CONTAINER (sw), tool->platform_list);
+	tool->platform_list = glade_xml_get_widget (xml, "platform_list");
+	xst_tool_create_platform_list (GTK_TREE_VIEW (tool->platform_list), tool);
 
 	tool->platform_dialog    = glade_xml_get_widget (xml, "platform_dialog");
 	tool->platform_ok_button = glade_xml_get_widget (xml, "platform_ok_button");

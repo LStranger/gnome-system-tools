@@ -20,5 +20,5 @@ gchar *s = N_("<span weight=\"bold\">To run this tool, you need administrator pr
               "specify a password, you will be unable to modify your system configuration.");
 gchar *s = N_("Password:");
 gchar *s = N_("*");
-gchar *s = N_("GNOME System Tools");
+gchar *s = N_("Gnome System Tools");
 gchar *s = N_("Complexity");
