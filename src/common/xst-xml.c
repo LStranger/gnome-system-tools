@@ -52,6 +52,13 @@ xst_xml_doc_dump (xmlDocPtr doc)
 
 
 xmlNodePtr
+xst_xml_element_get_parent (xmlNodePtr node)
+{
+	return node->parent;
+}
+
+
+xmlNodePtr
 xst_xml_element_find_first (xmlNodePtr parent, char *name)
 {
 	xmlNodePtr node;
@@ -114,6 +121,13 @@ xst_xml_element_add (xmlNodePtr parent, char *name)
 	g_return_val_if_fail (parent != NULL, NULL);
 
 	return (xmlNewChild (parent, NULL, name, NULL));
+}
+
+
+void
+xst_xml_element_add_child (xmlNodePtr parent, xmlNodePtr child)
+{
+	xmlAddChild (parent, child);
 }
 
 
@@ -355,4 +369,3 @@ xst_xml_set_child_content (xmlNodePtr parent, gchar *child, gchar *val)
 
 	xst_xml_element_set_content (node, val);
 }
-

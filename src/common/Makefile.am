@@ -7,34 +7,24 @@ INCLUDES =		\
 	$(GNOME_XML_CFLAGS)	\
 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\"
 
-libsetuptool_a_SOURCES = \
-	xst-xml.c		\
-	xst-xml.h		\
-	helpers.c		\
-	helpers.h		\
-	text.c		\
-	text.h		\
-	global.h		\
-	checked.xpm 	\
-	unchecked.xpm 	\
-	reading.xpm	\
-	xst-widget.c    \
-	xst-widget.h    \
-	xst-dialog.c	\
-	xst-dialog.h	\
-	xst-tool.c	\
-	xst-tool.h	\
-	xst-types.h	\
-	xst-report-hook.c \
-	xst-report-hook.h \
-	xst-report-line.c \
-	xst-report-line.h \
-	xst-platform.c \
-	xst-platform.h \
-	xst-ui.c       \
-	xst-ui.h       \
-	xst-conf.c     \
-	xst-conf.h
+libsetuptool_a_SOURCES =              \
+	xst-xml.c	xst-xml.h                 \
+	helpers.c	helpers.h                 \
+	text.c text.h		                    \
+	xst-widget.c xst-widget.h           \
+	xst-dialog.c xst-dialog.h	          \
+	xst-tool.c xst-tool.h	              \
+	xst-report-hook.c xst-report-hook.h \
+	xst-report-line.c xst-report-line.h \
+	xst-platform.c xst-platform.h       \
+	xst-ui.c xst-ui.h                   \
+	xst-util.c xst-util.h               \
+	xst-conf.c xst-conf.h               \
+	global.h                            \
+	checked.xpm                         \
+	unchecked.xpm                       \
+	reading.xpm                         \
+	xst-types.h
 
 ccenterdir = $(datadir)/control-center
 Systemdir = $(ccenterdir)/System
