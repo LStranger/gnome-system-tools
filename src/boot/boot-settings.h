@@ -3,7 +3,7 @@
 #define __BOOT_SETTINGS_H
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
+
 
 #include "boot-image.h"
 

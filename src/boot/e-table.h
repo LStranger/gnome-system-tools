@@ -40,6 +40,8 @@ enum {
 };
 
 GtkWidget        *table_create            (void);
+void              table_construct         (XstTool *tool);
+
 void              table_populate          (xmlNodePtr root);
 void              boot_table_update_state (void);
 

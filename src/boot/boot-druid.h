@@ -29,7 +29,7 @@
 #include "xst.h"
 #include "boot-settings.h"
 
-BEGIN_GNOME_DECLS
+G_BEGIN_DECLS
 
 #define BOOT_DRUID_TYPE        (boot_druid_get_type ())
 #define BOOT_DRUID(o)          (GTK_CHECK_CAST ((o), BOOT_DRUID_TYPE, BootDruid))
@@ -55,6 +55,6 @@ GtkType boot_druid_get_type (void);
 
 BootDruid *boot_druid_new (void);
 
-END_GNOME_DECLS
+G_END_DECLS
 
 #endif /* BOOT_DRUID_H */

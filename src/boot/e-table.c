@@ -82,8 +82,7 @@ boot_value_at (ETableModel *etc, int col, int row, void *data)
 
 	node = g_array_index (boot_array, xmlNodePtr, row);
 
-	switch (col)
-	{
+	switch (col) {
 	case COL_LABEL:
 		return boot_value_label (node);
 		break;
@@ -200,20 +199,20 @@ table_dimension_change (ETableHeader *eth, int col, gpointer user_data)
 static void
 table_connect_signals (ETable *table)
 {
-	gtk_signal_connect (GTK_OBJECT (table->header),
-			    "structure_change",
-			    table_structure_change,
-			    (gpointer)table);
+	g_signal_connect (G_OBJECT (table->header),
+			  "structure_change",
+			  G_CALLBACK (table_structure_change),
+			  (gpointer)table);
 
-	gtk_signal_connect (GTK_OBJECT (table->header),
-			    "dimension_change",
-			    table_dimension_change,
-			    (gpointer)table);
+	g_signal_connect (G_OBJECT (table->header),
+			  "dimension_change",
+			  G_CALLBACK (table_dimension_change),
+			  (gpointer)table);
 
-	gtk_signal_connect (GTK_OBJECT (table->sort_info),
-			    "sort_info_changed",
-			    GTK_SIGNAL_FUNC (table_structure_change),
-			    (gpointer)table);
+	g_signal_connect (G_OBJECT (table->sort_info),
+			  "sort_info_changed",
+			  G_CALLBACK (table_structure_change),
+			  (gpointer)table);
 }
 
 GtkWidget *
@@ -221,7 +220,6 @@ table_create (void)
 {
 	ETableModel  *model;
 	ETableExtras *extras;
-	ETable       *table;
 	gchar        *spec;
 
 	if (boot_table)
@@ -251,16 +249,31 @@ table_create (void)
 		xst_conf_set_string (tool, "spec", spec);
 	}
 
-	boot_table = e_table_scrolled_new (E_TABLE_MODEL (model), extras, spec, basic_boot_state);
+	boot_table = e_table_new (E_TABLE_MODEL (model), extras, spec, basic_boot_state);
 	g_free (spec);
 
 	g_return_val_if_fail (boot_table != NULL, NULL);
 
-	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
-	table_connect_signals (table);
-	gtk_signal_connect (GTK_OBJECT (table), "cursor_change", boot_cursor_change, NULL);
+	table_connect_signals (E_TABLE (boot_table));
+	g_signal_connect (G_OBJECT (boot_table), "cursor_change",
+			  G_CALLBACK (boot_cursor_change), NULL);
 
 	return boot_table;
+}
+
+void
+table_construct (XstTool *tool)
+{
+	GtkWidget *sw;
+	GtkWidget *list;
+
+	sw = xst_dialog_get_widget (tool->main_dialog, "boot_table_sw");
+	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (sw),
+					     GTK_SHADOW_ETCHED_IN);
+
+	list = table_create ();
+	gtk_widget_show_all (list);
+	gtk_container_add (GTK_CONTAINER (sw), list);
 }
 
 void
@@ -268,12 +281,9 @@ table_populate (xmlNodePtr root)
 {
 	xmlNodePtr  node;
 	gint        row;
-	ETable     *table;
 
 	g_return_if_fail (root != NULL);
 	
-	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
-
 	boot_array = g_array_new (FALSE, FALSE, sizeof (xmlNodePtr));
 	
 	for (node = xst_xml_element_find_first (root, "entry"), row = 0;
@@ -282,7 +292,7 @@ table_populate (xmlNodePtr root)
 		
 		g_array_prepend_val (boot_array, node);
 
-	e_table_model_changed (table->model);
+	e_table_model_changed (E_TABLE (boot_table)->model);
 }
 
 static gboolean
@@ -574,12 +584,9 @@ boot_value_set_type (xmlNodePtr node, XstBootImageType type)
 xmlNodePtr
 get_selected_node (void)
 {
-	ETable *table;
 	gint row;
 
-	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
-	
-	if ((row = e_table_get_cursor_row (table)) >= 0)
+	if ((row = e_table_get_cursor_row (E_TABLE (boot_table))) >= 0)
 		return g_array_index (boot_array, xmlNodePtr, row);
 
 	return NULL;
@@ -588,15 +595,11 @@ get_selected_node (void)
 void
 boot_table_update_state (void)
 {
-	ETable *table;
 	XstDialogComplexity complexity;
 	gchar *state;
 
 	g_return_if_fail (boot_table != NULL);
 
-	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
-	g_return_if_fail (table != NULL);
-	
 	complexity = tool->main_dialog->complexity;
 
 	if (complexity == XST_DIALOG_BASIC) {
@@ -613,38 +616,34 @@ boot_table_update_state (void)
 		}
 	}
 
-	e_table_set_state (table, state);
-	table_connect_signals (table);
+	e_table_set_state (E_TABLE (boot_table), state);
+	table_connect_signals (E_TABLE (boot_table));
 	g_free (state);
 }
 
 void
 boot_table_delete (void)
 {
-	ETable *table;
 	gint row;
 	xmlNodePtr node;
 
-	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
-	row = e_table_get_cursor_row (table);
+	row = e_table_get_cursor_row (E_TABLE (boot_table));
 	node = g_array_index (boot_array, xmlNodePtr, row);
 
 	xst_xml_element_destroy (node);
 	g_array_remove_index (boot_array, row);
 
-	e_table_model_row_deleted (table->model, row);
+	e_table_model_row_deleted (E_TABLE (boot_table)->model, row);
 }
 
 void
 boot_table_update (void)
 {
-	ETable *table;
 	gint row;
 
-	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
-	row = e_table_get_cursor_row (table);
+	row = e_table_get_cursor_row (E_TABLE (boot_table));
 
-	e_table_model_row_changed (table->model, row);
+	e_table_model_row_changed (E_TABLE (boot_table)->model, row);
 }
 
 static gchar *
@@ -675,12 +674,9 @@ boot_table_get_new_key (xmlNodePtr root)
 xmlNodePtr
 boot_table_add (void)
 {
-	ETable *table;
 	gint row;
 	gchar *newkey;
 	xmlNodePtr root, node;
-
-	table = e_table_scrolled_get_table (E_TABLE_SCROLLED (boot_table));
 
 	root = xst_xml_doc_get_root (tool->config);
 	
@@ -693,8 +689,8 @@ boot_table_add (void)
 	
 	row = boot_array->len - 1;
 	
-	e_table_model_row_inserted (table->model, row);
-	e_table_set_cursor_row (table, row);
+	e_table_model_row_inserted (E_TABLE (boot_table)->model, row);
+	e_table_set_cursor_row (E_TABLE (boot_table), row);
 
 	return node;
 }

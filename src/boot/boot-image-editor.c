@@ -23,28 +23,28 @@
 #include "boot-image-editor.h"
 
 static void boot_image_editor_class_init (BootImageEditorClass *class);
-static void boot_image_editor_finalize   (GtkObject *obj);
+static void boot_image_editor_finalize   (GObject *obj);
 
-static GnomeDialogClass *parent_class;
-
+static GtkDialogClass *parent_class;
 
 GtkType
-boot_image_editor_get_type ()
+boot_image_editor_get_type (void)
 {
 	static GtkType type = 0;
 
 	if (!type) {
-		GtkTypeInfo type_info = {
+		static const GtkTypeInfo type_info = {
 			"BootImageEditor",
 			sizeof (BootImageEditor),
 			sizeof (BootImageEditorClass),
 			(GtkClassInitFunc) boot_image_editor_class_init,
 			(GtkObjectInitFunc) NULL,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			/* reserved_1 */ NULL,
+			/* reserved_2 */ NULL,
+			(GtkClassInitFunc) NULL,
 		};
 
-		type = gtk_type_unique (gnome_dialog_get_type (), &type_info);
+		type = gtk_type_unique (GTK_TYPE_DIALOG, &type_info);
 	}
 
 	return type;
@@ -53,38 +53,38 @@ boot_image_editor_get_type ()
 static void
 boot_image_editor_class_init (BootImageEditorClass *class)
 {
-	GtkObjectClass *object_class;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-	object_class = (GtkObjectClass *) class;
-	parent_class = gtk_type_class (gnome_dialog_get_type ());
+	parent_class = gtk_type_class (gtk_dialog_get_type ());
 
 	object_class->finalize = boot_image_editor_finalize;
 }
 
 static void
-boot_image_editor_finalize (GtkObject *obj)
+boot_image_editor_finalize (GObject *obj)
 {
 	BootImageEditor *editor = (BootImageEditor *) obj;
 
 	boot_settings_gui_destroy (editor->gui);
-	((GtkObjectClass *)(parent_class))->finalize (obj);
+
+	G_OBJECT_CLASS (parent_class)->finalize (obj);
 }
 
 static void
-ok_clicked (GtkWidget *widget, gpointer data)
+editor_response (GtkDialog *dialog, gint response, gpointer data)
 {
 	BootImageEditor *editor = data;
 
-	if (boot_settings_gui_save (editor->gui, TRUE)) {
-		boot_image_save (editor->gui->image);
-		gtk_widget_destroy (GTK_WIDGET (editor));
+	switch (response) {
+	case GTK_RESPONSE_ACCEPT:
+		if (boot_settings_gui_save (editor->gui, TRUE))
+			boot_image_save (editor->gui->image);
+		else
+			return;
+		break;
+	default:
+		break;
 	}
-}
-
-static void
-cancel_clicked (GtkWidget *widget, gpointer data)
-{
-	BootImageEditor *editor = data;
 
 	gtk_widget_destroy (GTK_WIDGET (editor));
 }
@@ -100,25 +100,21 @@ construct (BootImageEditor *editor, BootImage *image)
 		return FALSE;
 
 	w = glade_xml_get_widget (editor->gui->xml, "boot_settings_editor");
-	gtk_widget_reparent (w, GNOME_DIALOG (editor)->vbox);
-	
+	gtk_widget_reparent (w, GTK_DIALOG (editor)->vbox);
+
 	/* give our dialog an OK button and title */
 	gtk_window_set_title (GTK_WINDOW (editor), _("Boot Image Editor"));
 	gtk_window_set_policy (GTK_WINDOW (editor), FALSE, TRUE, TRUE);
 	gtk_window_set_modal (GTK_WINDOW (editor), TRUE);
-	gnome_dialog_append_buttons (GNOME_DIALOG (editor),
-				     GNOME_STOCK_BUTTON_OK,
-				     GNOME_STOCK_BUTTON_CANCEL,
-				     NULL);
+	gtk_dialog_add_buttons (GTK_DIALOG (editor),
+				GTK_STOCK_OK, GTK_RESPONSE_ACCEPT,
+				GTK_STOCK_CANCEL, GTK_RESPONSE_REJECT,
+				NULL);
 
-	gnome_dialog_button_connect (GNOME_DIALOG (editor), 0 /* OK */,
-				     GTK_SIGNAL_FUNC (ok_clicked),
-				     editor);
-	gnome_dialog_button_connect (GNOME_DIALOG (editor), 1 /* CANCEL */,
-				     GTK_SIGNAL_FUNC (cancel_clicked),
-				     editor);
+	g_signal_connect (G_OBJECT (editor), "response",
+			  G_CALLBACK (editor_response), editor);
 
-	boot_settings_gui_setup (editor->gui, GNOME_DIALOG (editor)->vbox);
+	boot_settings_gui_setup (editor->gui, GTK_DIALOG (editor)->vbox);
 
 	return TRUE;
 }

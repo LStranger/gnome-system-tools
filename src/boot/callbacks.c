@@ -36,15 +36,6 @@
 
 XstTool *tool;
 
-static int reply;
-
-static void
-reply_cb (gint val, gpointer data)
-{
-	reply = val;
-	gtk_main_quit ();
-}
-
 /* Helpers */
 
 void
@@ -90,35 +81,44 @@ on_boot_delete_clicked (GtkButton *button, gpointer data)
 {
 	xmlNodePtr   node;
 	gchar       *label, *buf;
-	gint         count;
+	gint         count, reply;
 	GtkWidget   *d;
 	
 	g_return_if_fail (xst_tool_get_access (tool));
 
 	count = boot_image_count (xst_xml_doc_get_root (tool->config));
 	if (count <= 1) {
-		d = gnome_error_dialog_parented (_("Without at least one boot image,\n"
-						   "your system will not start.\n"),
-						 GTK_WINDOW (tool->main_dialog));
-		
-		gnome_dialog_run_and_close (GNOME_DIALOG (d));
+		d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+					    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					    GTK_MESSAGE_ERROR,
+					    GTK_BUTTONS_OK,
+					    _("Without at least one boot image,\n"
+					      "your system will not start.\n"));
+
+		gtk_dialog_run (GTK_DIALOG (d));
+		gtk_widget_destroy (d);
 		return;
 	}
 
 	g_return_if_fail (node = get_selected_node ());
 
 	label = xst_xml_get_child_content (node, "label");
-	buf = g_strdup_printf (_("Are you sure you want to delete %s?"), label);
-
-	d = gnome_question_dialog_parented (buf, reply_cb, NULL,
-					    GTK_WINDOW (tool->main_dialog));
-	gnome_dialog_run_and_close (GNOME_DIALOG (d));
+	buf = g_strdup_printf (_("Are you sure you want to delete '%s'?"), label);
 	g_free (label);
+
+	d = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+				    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				    GTK_MESSAGE_QUESTION,
+				    GTK_BUTTONS_OK_CANCEL,
+				    buf);
+
 	g_free (buf);
-	
-	if (reply)
+	reply = gtk_dialog_run (GTK_DIALOG (d));
+	gtk_widget_destroy (d);
+
+	if (reply != GTK_RESPONSE_OK)
 		return;
-	
+
 	boot_table_delete ();
 	xst_dialog_modify (tool->main_dialog);
 	callbacks_actions_set_sensitive (FALSE);
@@ -151,7 +151,7 @@ on_boot_prompt_toggled (GtkToggleButton *toggle, gpointer data)
 }
 
 void
-on_main_dialog_update_complexity (GtkWidget *main_dialog, gpointer data)
+on_main_dialog_update_complexity (XstDialog *main_dialog, gpointer data)
 {
 	XstTool *tool;
 	XstDialogComplexity complexity;
@@ -174,11 +174,16 @@ callbacks_conf_read_failed_hook (XstTool *tool, XstReportLine *rline, gpointer d
 
 	txt = g_strdup_printf (_("The file ``%s'' is missing or could not be read:\n"
 				 "The configuration will show empty."), rline->argv[0]);
-	
-	dialog = gnome_error_dialog_parented (txt, GTK_WINDOW (tool->main_dialog));
-	gnome_dialog_run_and_close (GNOME_DIALOG (dialog));
+
+	dialog = gtk_message_dialog_new (GTK_WINDOW (tool->main_dialog),
+					 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+					 GTK_MESSAGE_ERROR,
+					 GTK_BUTTONS_OK,
+					 txt);
 
 	g_free (txt);
+	gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_widget_destroy (dialog);
 
 	/* Handled, don't go looking for more hooks to run */
 	return TRUE;

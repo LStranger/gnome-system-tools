@@ -23,14 +23,11 @@
 #ifndef BOOT_IMAGE_EDITOR_H
 #define BOOT_IMAGE_EDITOR_H
 
-#ifdef __cplusplus
-extern "C" {
-#pragma }
-#endif /* __cplusplus */
-
 #include <libgnomeui/gnome-dialog.h>
 #include <libgnomeui/gnome-file-entry.h>
 #include "boot-settings.h"
+
+G_BEGIN_DECLS
 
 #define BOOT_IMAGE_EDITOR_TYPE        (boot_image_editor_get_type ())
 #define BOOT_IMAGE_EDITOR(o)          (GTK_CHECK_CAST ((o), BOOT_IMAGE_EDITOR_TYPE, BootImageEditor))
@@ -39,15 +36,15 @@ extern "C" {
 #define USER_IS_ACCOUNT_EDITOR_CLASS(k) (GTK_CHECK_CLASS_TYPE ((k), BOOT_IMAGE_EDITOR_TYPE))
 
 struct _BootImageEditor {
-	GnomeDialog parent;
-	
+	GtkDialog parent;
+
 	BootSettingsGui *gui;
 };
 
 typedef struct _BootImageEditor BootImageEditor;
 
 typedef struct {
-	GnomeDialogClass parent_class;
+	GtkDialogClass parent_class;
 	
 	/* signals */
 	
@@ -57,8 +54,6 @@ GtkType boot_image_editor_get_type (void);
 
 BootImageEditor *boot_image_editor_new (BootImage *image);
 
-#ifdef __cplusplus
-}
-#endif /* __cplusplus */
+G_END_DECLS
 
 #endif /* BOOT_IMAGE_EDITOR_H */

@@ -25,7 +25,7 @@
 #define BOOT_IMAGE_H
 
 #include <gnome.h>
-#include <gnome-xml/tree.h>
+
 
 #include "xst.h"
 

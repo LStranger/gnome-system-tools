@@ -31,7 +31,7 @@
 extern XstTool *tool;
 
 static void boot_druid_class_init (BootDruidClass *class);
-static void boot_druid_finalize   (GtkObject *obj);
+static void boot_druid_finalize   (GObject *obj);
 
 static GtkWindowClass *parent_class;
 
@@ -47,8 +47,9 @@ boot_druid_get_type (void)
 			sizeof (BootDruidClass),
 			(GtkClassInitFunc) boot_druid_class_init,
 			(GtkObjectInitFunc) NULL,
-			(GtkArgSetFunc) NULL,
-			(GtkArgGetFunc) NULL
+			/* reserved_1 */ NULL,
+			/* reserved_2 */ NULL,
+			(GtkClassInitFunc) NULL,
 		};
 
 		type = gtk_type_unique (gtk_window_get_type (), &type_info);
@@ -60,9 +61,8 @@ boot_druid_get_type (void)
 static void
 boot_druid_class_init (BootDruidClass *class)
 {
-	GtkObjectClass *object_class;
+	GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-	object_class = (GtkObjectClass *) class;
 	parent_class = gtk_type_class (gtk_window_get_type ());
 
 	/* override methods */
@@ -70,12 +70,13 @@ boot_druid_class_init (BootDruidClass *class)
 }
 
 static void
-boot_druid_finalize (GtkObject *obj)
+boot_druid_finalize (GObject *obj)
 {
 	BootDruid *druid = (BootDruid *) obj;
 
 	boot_settings_gui_destroy (druid->gui);
-        ((GtkObjectClass *)(parent_class))->finalize (obj);
+
+	G_OBJECT_CLASS (parent_class)->finalize (obj);
 }
 
 static void
@@ -95,22 +96,26 @@ druid_show_error (BootDruid *druid, gchar *error)
 {
 	GtkWidget *d;
 
-	d = gnome_error_dialog_parented (error, GTK_WINDOW (druid));
-	gnome_dialog_run (GNOME_DIALOG (d));
+	d = gtk_message_dialog_new (GTK_WINDOW (druid),
+				    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				    GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, error);
+
 	g_free (error);
+	gtk_dialog_run (GTK_DIALOG (d));
+	gtk_widget_destroy (d);
 }
 
 /* Identity Page */
 static void
 identity_check (BootDruid *druid)
 {
-	gchar *label;
+	const gchar *label;
 
 	label = gtk_entry_get_text (druid->gui->name);
 	if (strlen (label) > 0)
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE, FALSE);
 	else
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE, FALSE);
 }
 
 static void
@@ -135,7 +140,7 @@ identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 {
 	GnomeDruidPage   *next_page;
 	XstBootImageType  type;
-	gchar            *buf;
+	const gchar      *buf;
 	gchar            *error;
 	BootDruid        *config = data;
 
@@ -166,14 +171,14 @@ identity_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 other_check (BootDruid *druid)
 {
-	gchar *buf;
+	const gchar *buf;
 
 	/* TODO: Improve check */ 
 	buf = gtk_entry_get_text (GTK_ENTRY (druid->gui->device->entry));
 	if (strlen (buf) > 0)
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE, FALSE);
 	else
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE, FALSE);
 }
 
 static void
@@ -219,14 +224,14 @@ other_next (GnomeDruidPage *page, GnomeDruid *druid, gpointer data)
 static void
 image_check (BootDruid *druid)
 {
-	gchar *buf;
+	const gchar *buf;
 
 	/* TODO: Improve check */ 
 	buf = gtk_entry_get_text (druid->gui->image_entry);
 	if (strlen (buf) > 0)
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, TRUE, TRUE, FALSE);
 	else
-		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE);
+		gnome_druid_set_buttons_sensitive (druid->druid, TRUE, FALSE, TRUE, FALSE);
 }
 
 static void
@@ -316,7 +321,7 @@ druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 {	
 	GnomeDruidPage   *next_page;
 	XstBootImageType  type;
-	gchar            *buf;
+	const gchar      *buf;
 	BootDruid        *config = data;
 
 	buf = gtk_entry_get_text (GTK_ENTRY (config->gui->type->entry));
@@ -335,41 +340,41 @@ druid_finish_back (GnomeDruidPage *druid_page, GnomeDruid *druid, gpointer data)
 
 static struct {
 	gchar         *name;
-	GtkSignalFunc  next_func;
-	GtkSignalFunc  prepare_func;
-	GtkSignalFunc  back_func;
-	GtkSignalFunc  finish_func;
+	GCallback  next_func;
+	GCallback  prepare_func;
+	GCallback  back_func;
+	GCallback  finish_func;
 } pages[] = {
 	{ "druidStartPage",
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL) },
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL) },
 	{ "druidIdentityPage",
-	  GTK_SIGNAL_FUNC (identity_next),
-	  GTK_SIGNAL_FUNC (identity_prepare),
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL) },
+	  G_CALLBACK (identity_next),
+	  G_CALLBACK (identity_prepare),
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL) },
 	{ "druidOtherPage",
-	  GTK_SIGNAL_FUNC (other_next),
-	  GTK_SIGNAL_FUNC (other_prepare),
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL) },
+	  G_CALLBACK (other_next),
+	  G_CALLBACK (other_prepare),
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL) },
 	{ "druidImagePage",
-	  GTK_SIGNAL_FUNC (image_next),
-	  GTK_SIGNAL_FUNC (image_prepare),
-	  GTK_SIGNAL_FUNC (image_back),
-	  GTK_SIGNAL_FUNC (NULL) },
+	  G_CALLBACK (image_next),
+	  G_CALLBACK (image_prepare),
+	  G_CALLBACK (image_back),
+	  G_CALLBACK (NULL) },
 	{ "druidFinishPage",
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (druid_finish_back),
-	  GTK_SIGNAL_FUNC (druid_finish) },
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (druid_finish_back),
+	  G_CALLBACK (druid_finish) },
 	{ NULL,
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL),
-	  GTK_SIGNAL_FUNC (NULL) }
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL),
+	  G_CALLBACK (NULL) }
 };
 
 static gboolean
@@ -395,7 +400,6 @@ construct (BootDruid *druid)
 	gtk_window_set_title (GTK_WINDOW (druid), _("Boot Image Wizard"));
 	gtk_window_set_policy (GTK_WINDOW (druid), FALSE, TRUE, FALSE);
 	gtk_window_set_modal (GTK_WINDOW (druid), TRUE);
-	gtk_object_set (GTK_OBJECT (druid), "type", GTK_WINDOW_DIALOG, NULL);
 
 	/* attach to druid page signals */
 	for (i = 0; pages[i].name != NULL; i++) {
@@ -404,19 +408,20 @@ construct (BootDruid *druid)
 		page = glade_xml_get_widget (druid->gui->xml, pages[i].name);
 
 		if (pages[i].next_func)
-			gtk_signal_connect (GTK_OBJECT (page), "next",
-					    pages[i].next_func, druid);
+			g_signal_connect (G_OBJECT (page), "next",
+					  pages[i].next_func, druid);
 		if (pages[i].prepare_func)
-			gtk_signal_connect (GTK_OBJECT (page), "prepare",
-					    pages[i].prepare_func, druid);
+			g_signal_connect (G_OBJECT (page), "prepare",
+					  pages[i].prepare_func, druid);
 		if (pages[i].back_func)
-			gtk_signal_connect (GTK_OBJECT (page), "back",
-					    pages[i].back_func, druid);
+			g_signal_connect (G_OBJECT (page), "back",
+					  pages[i].back_func, druid);
 		if (pages[i].finish_func)
-			gtk_signal_connect (GTK_OBJECT (page), "finish",
-					    pages[i].finish_func, druid);
+			g_signal_connect (G_OBJECT (page), "finish",
+					  pages[i].finish_func, druid);
 	}
-	gtk_signal_connect (GTK_OBJECT (druid->druid), "cancel", druid_cancel, druid);
+	g_signal_connect (G_OBJECT (druid->druid), "cancel",
+			  G_CALLBACK (druid_cancel), druid);
 
 	/* Reparent "interesting" widgets. */
 	
@@ -439,14 +444,19 @@ construct (BootDruid *druid)
 
 	/* Connect druid specific signals. */
 	
-	gtk_signal_connect (GTK_OBJECT (druid->gui->name), "changed", identity_changed, druid);
-	gtk_signal_connect (GTK_OBJECT (druid->gui->type->entry), "activate", druid_entry_activate, druid);
+	g_signal_connect (G_OBJECT (druid->gui->name), "changed", G_CALLBACK (identity_changed), druid);
+	g_signal_connect (G_OBJECT (druid->gui->type->entry), "activate",
+			  G_CALLBACK (druid_entry_activate), druid);
 	
-	gtk_signal_connect (GTK_OBJECT (druid->gui->image_entry), "changed", image_changed, druid);
-	gtk_signal_connect (GTK_OBJECT (druid->gui->append), "activate", druid_entry_activate, druid);
+	g_signal_connect (G_OBJECT (druid->gui->image_entry), "changed",
+			  G_CALLBACK (image_changed), druid);
+	g_signal_connect (G_OBJECT (druid->gui->append), "activate",
+			  G_CALLBACK (druid_entry_activate), druid);
 
-	gtk_signal_connect (GTK_OBJECT (druid->gui->device->entry), "changed", other_changed, druid);
-	gtk_signal_connect (GTK_OBJECT (druid->gui->device->entry), "activate", druid_entry_activate, druid);
+	g_signal_connect (G_OBJECT (druid->gui->device->entry), "changed",
+			  G_CALLBACK (other_changed), druid);
+	g_signal_connect (G_OBJECT (druid->gui->device->entry), "activate",
+			  G_CALLBACK (druid_entry_activate), druid);
 
 	return TRUE;
 }

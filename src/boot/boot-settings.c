@@ -65,9 +65,8 @@ on_boot_add_clicked (GtkButton *button, gpointer data)
 			gtk_widget_show (GTK_WIDGET (druid));
 		else {
 			gchar *error = g_strdup ("Can't add more images, maximum count reached.");
-			
-			boot_settings_gui_error (GTK_WINDOW (tool->main_dialog),
-						 error);
+
+			boot_settings_gui_error (GTK_WINDOW (tool->main_dialog), error);
 		}		
 	}
 }
@@ -90,7 +89,7 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 
 	gui = g_new0 (BootSettingsGui, 1);
 	gui->image = image;
-	gui->xml = glade_xml_new (tool->glade_path, NULL);
+	gui->xml = glade_xml_new (tool->glade_path, NULL, NULL);
 	gui->top = parent;
 
 	/* Basic frame */
@@ -110,12 +109,12 @@ boot_settings_gui_new (BootImage *image, GtkWidget *parent)
 	gui->device = GTK_COMBO (glade_xml_get_widget (gui->xml, "settings_device"));
 
 	/* Connect signals */
-	gtk_signal_connect (GTK_OBJECT (gui->name), "activate",
-			    GTK_SIGNAL_FUNC (gui_grab_focus), (gpointer) gui->type->entry);
-	gtk_signal_connect (GTK_OBJECT (gui->image_entry), "activate",
-			    GTK_SIGNAL_FUNC (gui_grab_focus), (gpointer) gui->root);
-	gtk_signal_connect (GTK_OBJECT (gui->root), "activate",
-			    GTK_SIGNAL_FUNC (gui_grab_focus), (gpointer) gui->append);
+	g_signal_connect (G_OBJECT (gui->name), "activate",
+			  G_CALLBACK (gui_grab_focus), (gpointer) gui->type->entry);
+	g_signal_connect (G_OBJECT (gui->image_entry), "activate",
+			  G_CALLBACK (gui_grab_focus), (gpointer) gui->root);
+	g_signal_connect (G_OBJECT (gui->root), "activate",
+			  G_CALLBACK (gui_grab_focus), (gpointer) gui->append);
 
 	return gui;
 }
@@ -201,13 +200,12 @@ boot_settings_gui_error (GtkWindow *parent, gchar *error)
 {
 	GtkWidget *d;
 
-	if (parent)
-		d = gnome_error_dialog_parented (error, parent);
-	else
-		d = gnome_error_dialog (error);
+	d = gtk_message_dialog_new (parent, GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
+				    GTK_MESSAGE_ERROR, GTK_BUTTONS_OK, error);
 
-	gnome_dialog_run (GNOME_DIALOG (d));
 	g_free (error);
+	gtk_dialog_run (GTK_DIALOG (d));
+	gtk_widget_destroy (d);
 }
 
 void
@@ -215,7 +213,7 @@ boot_settings_gui_destroy (BootSettingsGui *gui)
 {
 	if (gui) {
 		boot_image_destroy (gui->image);
-		gtk_object_unref (GTK_OBJECT (gui->xml));
+		g_object_unref (G_OBJECT (gui->xml));
 		g_free (gui);
 	}
 }

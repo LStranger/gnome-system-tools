@@ -342,7 +342,7 @@ label_to_type (const gchar *label)
 		if (!strcmp (label, boot_image_type_table[i].label))
 			return boot_image_type_table[i].type;
 
-	g_warning ("label_to_type: unknown label.");
+	g_warning ("label_to_type: unknown label '%s'.", label);
 	return TYPE_UNKNOWN;
 }
 
