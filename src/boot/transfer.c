@@ -94,29 +94,28 @@ transfer_globals_xml_to_gui (xmlNodePtr root)
 
 	node = xst_xml_element_find_first (root, "prompt");
 
-	if (node)
-	{
+	if (node) {
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
-											    (tool->main_dialog, "boot_prompt")),
-								TRUE);
+								 (tool->main_dialog, "boot_prompt")),
+					      TRUE);
 
 		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout"),
-							 TRUE);
+					  TRUE);
+		gtk_widget_set_sensitive (xst_dialog_get_widget (tool->main_dialog, "boot_timeout_label"),
+					  TRUE);
 	}
 
 	buf = xst_xml_get_child_content (root, "timeout");
-	if (buf)
-	{
+	if (buf) {
 		value = atoi (buf);
 		g_free (buf);
-	}
-	else
+	} else
 		value = 50;
 	
 	/* Set value in seconds. */
 	gtk_spin_button_set_value (GTK_SPIN_BUTTON (xst_dialog_get_widget (tool->main_dialog,
-														  "boot_timeout")),
-						  (gfloat) value / 10);
+									   "boot_timeout")),
+				   (gfloat) value / 10);
 }
 
 static void
@@ -126,16 +125,15 @@ transfer_globals_gui_to_xml (xmlNodePtr root)
 	gint val;
 
 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (xst_dialog_get_widget
-											   (tool->main_dialog, "boot_prompt"))))
-	{
+							     (tool->main_dialog, "boot_prompt")))) {
 		node = xst_xml_element_find_first (root, "prompt");
 
 		if (!node)
 			xst_xml_element_add (root, "prompt");
 
 		val = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON
-										(xst_dialog_get_widget (tool->main_dialog,
-														    "boot_timeout")));
+							(xst_dialog_get_widget (tool->main_dialog,
+										"boot_timeout")));
 
 		node = xst_xml_element_find_first (root, "timeout");
 		if (!node)
@@ -143,10 +141,7 @@ transfer_globals_gui_to_xml (xmlNodePtr root)
 
 		/* We need timeout in tenths of seconds, so multiply by 10 */
 		xst_xml_element_set_content (node, g_strdup_printf ("%d", val * 10));
-	}
-
-	else
-	{
+	} else {
 		node = xst_xml_element_find_first (root, "prompt");
 
 		if (node)
