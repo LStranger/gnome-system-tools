@@ -147,17 +147,6 @@ network_druid_get_connection_data (GnomeDruid *druid)
 
 		return cxn;
 	} else {
-		if (cxn->type == GST_CONNECTION_WLAN) {
-			GtkWidget *device = gst_dialog_get_widget (tool->main_dialog,
-								   "network_connection_wireless_device_entry");
-			GtkWidget *essid = gst_dialog_get_widget (tool->main_dialog,
-								  "network_connection_essid");
-			cxn->dev = g_strdup (gtk_entry_get_text (GTK_ENTRY (device)));
-			cxn->essid = g_strdup (gtk_entry_get_text (GTK_ENTRY (essid)));
-		} else {
-			cxn->dev = connection_find_new_device (root, cxn->type);
-		}
-			
 		GtkWidget *type = gst_dialog_get_widget (tool->main_dialog,
 							 "network_connection_other_config_type");
 		GtkWidget *ip_address = gst_dialog_get_widget (tool->main_dialog,
@@ -169,6 +158,17 @@ network_druid_get_connection_data (GnomeDruid *druid)
 		GtkWidget *name = gst_dialog_get_widget (tool->main_dialog,
 							 "network_connection_name");
 
+		if (cxn->type == GST_CONNECTION_WLAN) {
+			GtkWidget *device = gst_dialog_get_widget (tool->main_dialog,
+								   "network_connection_wireless_device_entry");
+			GtkWidget *essid = gst_dialog_get_widget (tool->main_dialog,
+								  "network_connection_essid");
+			cxn->dev = g_strdup (gtk_entry_get_text (GTK_ENTRY (device)));
+			cxn->essid = g_strdup (gtk_entry_get_text (GTK_ENTRY (essid)));
+		} else {
+			cxn->dev = connection_find_new_device (root, cxn->type);
+		}
+			
 		cxn->ip_config = gtk_option_menu_get_history (GTK_OPTION_MENU (type));
 		cxn->address = g_strdup (gtk_entry_get_text (GTK_ENTRY (ip_address)));
 		cxn->netmask = g_strdup (gtk_entry_get_text (GTK_ENTRY (ip_mask)));
