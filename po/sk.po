@@ -5,14 +5,14 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.6.99\n"
-"POT-Creation-Date: 2001-07-23 14:47+0200\n"
-"PO-Revision-Date: 2001-07-23 14:45CET\n"
+"POT-Creation-Date: 2001-07-27 10:35+0200\n"
+"PO-Revision-Date: 2001-07-27 10:46CET\n"
 "Last-Translator: Stanislav Visnovsky <visnovsky@nenya.ms.mff.cuni.cz>\n"
-"Language-Team: Slovak <sk-i18n@linux.sk>\n"
+"Language-Team: Slovak <sk-i18n@lists.linux.sk>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=ISO-8859-2\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 0.8\n"
+"X-Generator: KBabel 0.9.3\n"
 
 #: backend/report.pl.in:144
 msgid "Start of work report."
@@ -648,7 +648,7 @@ msgstr "Heslo:"
 msgid "Run without password"
 msgstr "Spusti» bez hesla"
 
-#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:827
+#: interfaces/common.glade.in.h:4 src/common/xst-tool.c:843
 msgid "Scanning your system configuration."
 msgstr "Kontrolujem konfiguráciu vá¹ho systému."
 
@@ -826,6 +826,118 @@ msgstr "reiserfs (Linux)"
 msgid "ufs (FreeBSD)"
 msgstr "ufs (FreeBSD)"
 
+#: interfaces/display.glade.in.h:1 interfaces/nameresolution.glade.in.h:3
+msgid "<unknown>"
+msgstr "<neznámy>"
+
+#: interfaces/display.glade.in.h:2 src/display/transfer.c:483
+msgid "1024x768"
+msgstr "1024x768"
+
+#: interfaces/display.glade.in.h:3 src/display/transfer.c:485
+msgid "1280x1024"
+msgstr "1280x1024"
+
+#: interfaces/display.glade.in.h:4 src/display/transfer.c:481
+msgid "640x480"
+msgstr "640x480"
+
+#: interfaces/display.glade.in.h:5 src/display/transfer.c:482
+msgid "800x600"
+msgstr "800x600"
+
+#: interfaces/display.glade.in.h:6
+msgid "Appearance"
+msgstr "Vzhµad"
+
+#: interfaces/display.glade.in.h:7
+msgid "Colors"
+msgstr "Farby"
+
+#: interfaces/display.glade.in.h:8
+msgid "Colors:"
+msgstr "Farby:"
+
+#: interfaces/display.glade.in.h:9
+msgid "Down"
+msgstr "Dolu"
+
+#: interfaces/display.glade.in.h:10
+msgid "Left"
+msgstr "Vµavo"
+
+#: interfaces/display.glade.in.h:11
+msgid "Model:"
+msgstr "Model:"
+
+#: interfaces/display.glade.in.h:12
+msgid "Monitor information"
+msgstr "Informácie o monitore"
+
+#: interfaces/display.glade.in.h:13
+msgid "Narrower"
+msgstr "U¾¹í"
+
+#: interfaces/display.glade.in.h:14
+msgid "Refresh rate:"
+msgstr "Frekvencia:"
+
+#: interfaces/display.glade.in.h:15 src/print/print.etspec.h:3
+msgid "Resolution"
+msgstr "Rozlí¹enie"
+
+#: interfaces/display.glade.in.h:16
+msgid "Resolution:"
+msgstr "Rozlí¹enie:"
+
+#: interfaces/display.glade.in.h:17
+msgid "Restart X"
+msgstr "Re¹tartova» X"
+
+#: interfaces/display.glade.in.h:18
+msgid "Right"
+msgstr "Vpravo"
+
+#: interfaces/display.glade.in.h:19
+msgid "Shift my display:"
+msgstr "Posunú» displej:"
+
+#: interfaces/display.glade.in.h:20
+msgid "Shorter"
+msgstr "Krat¹í"
+
+#: interfaces/display.glade.in.h:21
+msgid "Stretch my display:"
+msgstr "Roztiahnu» displej:"
+
+#: interfaces/display.glade.in.h:22
+msgid "Taller"
+msgstr "Vy¹¹í"
+
+#: interfaces/display.glade.in.h:23
+msgid "Test current setting"
+msgstr "Test aktuálneho nastavenia"
+
+#: interfaces/display.glade.in.h:24
+msgid "Up"
+msgstr "Hore"
+
+#: interfaces/display.glade.in.h:25
+msgid "Use this tool to configure your monitor."
+msgstr "Pomocou tohto nástroja je mo¾né nastavi» monitor."
+
+#: interfaces/display.glade.in.h:26
+msgid "Vendor:"
+msgstr "Dodávateµ:"
+
+#: interfaces/display.glade.in.h:27
+msgid "Wider"
+msgstr "©ir¹í"
+
+#: interfaces/display.glade.in.h:28
+msgid "_Restore settings"
+msgstr "_Obnovi» nastavenie"
+
 #: interfaces/memory.glade.in.h:1
 msgid "Available partitions:"
 msgstr "Dostupné oddiely:"
@@ -904,6 +1016,7 @@ msgid "_Remove"
 msgstr "_Odstráni»"
 
 #: interfaces/memory.glade.in.h:24
+#: src/location-manager/location-manager-dialog.c:136
 msgid "_Settings"
 msgstr "Nas_tavenie"
 
@@ -922,10 +1035,6 @@ msgstr "Vy¹¹ie"
 #: interfaces/nameresolution.glade.in.h:2
 msgid " Names"
 msgstr " Mená"
-
-#: interfaces/nameresolution.glade.in.h:3
-msgid "<unknown>"
-msgstr "<neznámy>"
 
 #: interfaces/nameresolution.glade.in.h:4 interfaces/shares.glade.in.h:4
 #: interfaces/users.glade.in.h:4
@@ -1126,7 +1235,7 @@ msgstr "Povoli» aktiváciu v¹etkým pou¾ívateµom"
 msgid "Auto"
 msgstr "Automaticky"
 
-#: interfaces/network.glade.in.h:21 src/network/connection.c:1467
+#: interfaces/network.glade.in.h:21 src/network/connection.c:1554
 msgid "BOOTP"
 msgstr "BOOTP"
 
@@ -1151,7 +1260,7 @@ msgid "Create a new Internet Connection "
 msgstr "Vytvori» nové spojenie na Internet"
 
 #: interfaces/internetsharing.glade.in.h:2 interfaces/network.glade.in.h:27
-#: src/network/connection.c:1466
+#: src/network/connection.c:1553
 msgid "DHCP"
 msgstr "DHCP"
 
@@ -1227,7 +1336,7 @@ msgstr "IP adresa"
 msgid "IP Settings"
 msgstr "Nastavenie IP"
 
-#: interfaces/network.glade.in.h:48 src/network/connection.c:1465
+#: interfaces/network.glade.in.h:48 src/network/connection.c:1552
 msgid "Manual"
 msgstr "Ruène"
 
@@ -1243,8 +1352,7 @@ msgstr "Nový typ spojenia"
 msgid ""
 "Next, please enter the user name and password which were assigned to you by "
 "your ISP."
-msgstr ""
-"Teraz zadajte meno pou¾ívateµa a heslo, ktoré vám bolo priradené va¹ích ISP."
+msgstr "Teraz zadajte meno pou¾ívateµa a heslo, ktoré vám bolo priradené va¹ích ISP."
 
 #: interfaces/network.glade.in.h:52
 msgid ""
@@ -1401,6 +1509,7 @@ msgid "_Configure..."
 msgstr "_Nastavi»..."
 
 #: interfaces/network.glade.in.h:97
+#: src/location-manager/location-manager-dialog.c:106
 msgid "_Delete..."
 msgstr "_Odstráni»..."
 
@@ -1437,68 +1546,133 @@ msgid "_IP address:"
 msgstr "_IP adresa:"
 
 #: interfaces/network.glade.in.h:106
+msgid "_IR LAN"
+msgstr "_IR LAN"
+
+#: interfaces/network.glade.in.h:107
 msgid "_Local IP:"
 msgstr "_Lokálne IP:"
 
-#: interfaces/network.glade.in.h:107
+#: interfaces/network.glade.in.h:108
 msgid "_Modem (PPP)"
 msgstr "_Modem (PPP)"
 
-#: interfaces/network.glade.in.h:108
+#: interfaces/network.glade.in.h:109
 msgid "_Modem port:"
 msgstr "_Port modemu:"
 
-#: interfaces/network.glade.in.h:109
+#: interfaces/network.glade.in.h:110
 msgid "_Parallel Line"
 msgstr "Pa_ralelný kábel"
 
-#: interfaces/network.glade.in.h:110 interfaces/print.glade.in.h:73
+#: interfaces/network.glade.in.h:111 interfaces/print.glade.in.h:73
 msgid "_Password:"
 msgstr "_Heslo:"
 
-#: interfaces/network.glade.in.h:111
+#: interfaces/network.glade.in.h:112
 msgid "_Primary:"
 msgstr "_Primárny:"
 
-#: interfaces/network.glade.in.h:112
+#: interfaces/network.glade.in.h:113
 msgid "_Remote IP:"
 msgstr "_Vzdialené IP:"
 
-#: interfaces/network.glade.in.h:113
+#: interfaces/network.glade.in.h:114
 msgid "_Retry if the connection drops or fails to start"
 msgstr "_Re¹tartova», ak spojenie spadne"
 
-#: interfaces/network.glade.in.h:114
+#: interfaces/network.glade.in.h:115
 msgid "_Session ID:"
 msgstr "ID _sedenia:"
 
-#: interfaces/network.glade.in.h:115
+#: interfaces/network.glade.in.h:116
 msgid "_Start PPP as soon as modem connects"
 msgstr "_Spusti» PPP hneï po pripojení modemu"
 
-#: interfaces/network.glade.in.h:116
+#: interfaces/network.glade.in.h:117
 msgid "_Subnet mask:"
 msgstr "Sie»ová _maska:"
 
-#: interfaces/network.glade.in.h:117
+#: interfaces/network.glade.in.h:118
 msgid "_Update DNS when this connection becomes active"
 msgstr "_Aktualizova» DNS pri spojení tohto spojenia."
 
-#: interfaces/network.glade.in.h:118
+#: interfaces/network.glade.in.h:119
 msgid "_Use remote IP as default gateway"
 msgstr "_Pou¾i» vzdialené IP ako ¹tandardnú bránu"
 
-#: interfaces/network.glade.in.h:119
+#: interfaces/network.glade.in.h:120
 msgid "_User name:"
 msgstr "_Pou¾ívateµské meno:"
 
-#: interfaces/network.glade.in.h:120
+#: interfaces/network.glade.in.h:121
 msgid "_Wavelan"
 msgstr "_Wavelan"
 
-#: interfaces/network.glade.in.h:121 interfaces/print.glade.in.h:76
+#: interfaces/network.glade.in.h:122 interfaces/print.glade.in.h:76
 msgid "_Workgroup:"
 msgstr "_Skupina:"
+
+#: interfaces/rollback-location-management.glade.in.h:1
+msgid "Advanced..."
+msgstr "Pokroèilé..."
+
+#: interfaces/rollback-location-management.glade.in.h:2
+msgid "Change to this Location"
+msgstr "Zmeni» na toto umiestnenie"
+
+#: interfaces/rollback-location-management.glade.in.h:3
+msgid "Configuration Restoration"
+msgstr "Obnovi» nastavenie"
+
+#: interfaces/rollback-location-management.glade.in.h:4
+msgid "Create..."
+msgstr "Vytvori»..."
+
+#: interfaces/rollback-location-management.glade.in.h:5
+msgid "Destroy..."
+msgstr "Znièi»..."
+
+#: interfaces/rollback-location-management.glade.in.h:6
+msgid "Edit this Location"
+msgstr "Upravi» toto umiestnenie"
+
+#: interfaces/location-manager.glade.in.h:19
+#: interfaces/rollback-location-management.glade.in.h:7
+msgid "Location Management"
+msgstr "Správa umiestnení"
+
+#: interfaces/rollback-location-management.glade.in.h:8
+msgid "Location name:"
+msgstr "Meno umiestnenia:"
+
+#: interfaces/rollback-location-management.glade.in.h:9
+msgid "Parent Location:"
+msgstr "Rodièovské umiestnenie:"
+
+#: interfaces/rollback-location-management.glade.in.h:10
+msgid "Rename..."
+msgstr "Premenova»..."
+
+#: interfaces/rollback-location-management.glade.in.h:11
+msgid "Restore all tools"
+msgstr "Obnovi» v¹etky nástroje"
+
+#: interfaces/rollback-location-management.glade.in.h:12
+msgid "Restore configuration from"
+msgstr "Obnovi» nastavenie z"
+
+#: interfaces/rollback-location-management.glade.in.h:13
+msgid "Restore only"
+msgstr "Iba obnovi»"
+
+#: interfaces/rollback-location-management.glade.in.h:14
+msgid "View Logs..."
+msgstr "Zobrazi» záznam..."
+
+#: interfaces/rollback-location-management.glade.in.h:15
+msgid "days ago"
+msgstr "pred dòami"
 
 #: interfaces/shares.glade.in.h:1
 msgid " Edit clients... "
@@ -1814,12 +1988,12 @@ msgid "Select the servers you wish to use for time synchronization."
 msgstr "Vyberte servery, ktoré chcete pou¾íva» pre synchronizáciu."
 
 #: interfaces/time.glade.in.h:10
-msgid "Selection:"
-msgstr "Výber:"
+msgid "Select time _zone..."
+msgstr "Vybra» èasovú _zónu..."
 
 #: interfaces/time.glade.in.h:11
-msgid "Set time _zone..."
-msgstr "Nastavi» èasovú _zónu..."
+msgid "Selection:"
+msgstr "Výber:"
 
 #: interfaces/location-manager.glade.in.h:34 interfaces/time.glade.in.h:12
 #: src/time/time.desktop.in.in.h:1
@@ -1959,7 +2133,7 @@ msgid "Group _members"
 msgstr "È_lenovia skupiny"
 
 #: interfaces/users.glade.in.h:35 src/users/group.etspec.h:2
-#: src/users/user_settings.c:471 src/users/user_settings.c:547
+#: src/users/user_settings.c:475 src/users/user_settings.c:551
 msgid "Groups"
 msgstr "Skupiny"
 
@@ -2059,8 +2233,8 @@ msgstr ""
 msgid "Optional settings"
 msgstr "Nastavenie siete"
 
-#: interfaces/users.glade.in.h:57 src/users/user_settings.c:478
-#: src/users/user_settings.c:554
+#: interfaces/users.glade.in.h:57 src/users/user_settings.c:482
+#: src/users/user_settings.c:558
 msgid "Password"
 msgstr "Heslo"
 
@@ -2108,7 +2282,7 @@ msgstr "Nastavi» heslo _ruène"
 msgid "Settings for selected user and group"
 msgstr "Nastavenie pre vybranú skupinu a pou¾ívateµa"
 
-#: interfaces/users.glade.in.h:69
+#: interfaces/users.glade.in.h:69 src/common/System.directory.in.in.h:1
 msgid "System"
 msgstr "Systém"
 
@@ -2235,12 +2409,67 @@ msgstr "_Zobrazi» v¹etkých pou¾ívateµov a skupiny"
 msgid "_Work phone:"
 msgstr "Telefón do _zamestnania:"
 
+#. set window title
+#: src/boot/boot-druid.c:395
+msgid "Boot Image Wizard"
+msgstr "Sprievodca vytvorením ¹tartovacieho obrazu"
+
+#. give our dialog an OK button and title
+#: src/boot/boot-image-editor.c:106
+msgid "Boot Image Editor"
+msgstr "Editor ¹tartovacích obrazov"
+
+#: src/boot/boot-image.c:40
+msgid "Unknown"
+msgstr "Neznámy"
+
+#: src/boot/boot-image.c:41
+msgid "Windows NT"
+msgstr "Windows NT"
+
+#: src/boot/boot-image.c:42
+msgid "Windows 9x"
+msgstr "Windows 9x"
+
+#: src/boot/boot-image.c:43
+msgid "Dos"
+msgstr "Dos"
+
+#: src/boot/boot-image.c:44
+msgid "Linux"
+msgstr "Linux"
+
+#: src/boot/boot-image.c:212
+#, c-format
+msgid "Invalid path: %s"
+msgstr "Neplatná cesta: %s"
+
+#: src/boot/boot-image.c:228
+#, c-format
+msgid "Image '%s' already exists, please set another name."
+msgstr "Obraz \"%s\" u¾ existuje. Prosím, vyberte iné meno."
+
+#: src/boot/boot-image.c:234
+#, c-format
+msgid "Invalid image name: '%s'"
+msgstr "Neplatné meno obrazu: '%s'"
+
+#: src/boot/boot-image.c:249
+#, c-format
+msgid "Invalid image: '%s'"
+msgstr "Neplatný obraz: '%s'"
+
+#: src/boot/boot-image.c:267
+#, c-format
+msgid "Invalid root device: '%s'"
+msgstr "Neplatné koreòové zariadenie: '%s'"
+
 #: src/boot/callbacks.c:61
 #, c-format
 msgid "Are you sure you want to delete %s?"
 msgstr "Naozaj chcete odstráni» %s?"
 
-#: src/boot/e-table.c:370
+#: src/boot/e-table.c:362
 #, c-format
 msgid "%s (default)"
 msgstr "%s (¹tandard)"
@@ -2257,7 +2486,7 @@ msgstr "Obraz kernelu"
 msgid "Type"
 msgstr "Typ"
 
-#: src/boot/main.c:90
+#: src/boot/main.c:82
 msgid "Boot Manager Settings - Ximian Setup Tools"
 msgstr "Nastavenie správcu bootu - Konfiguraèné nástroje Ximian"
 
@@ -2268,6 +2497,10 @@ msgstr "Bootovanie"
 #: src/boot/boot.desktop.in.in.h:2
 msgid "Boot Manager"
 msgstr "Správca bootovania"
+
+#: src/common/System.directory.in.in.h:2
+msgid "System administration"
+msgstr "Správa systému"
 
 #: src/common/xst-dialog.c:58
 #, c-format
@@ -2295,23 +2528,23 @@ msgstr ""
 msgid "Error connection signal `%s' in widget `%s'"
 msgstr "Signál chyby spojenia `%s' v prvku `%s'"
 
-#: src/common/xst-tool.c:585
-msgid "Skipping backend init..."
-msgstr "Preskakujem inicializáciu stroja..."
-
-#: src/common/xst-tool.c:660
+#: src/common/xst-tool.c:654
 msgid "Closing tool."
 msgstr "Zatváram nástroj."
 
-#: src/common/xst-tool.c:854
+#: src/common/xst-tool.c:796
+msgid "Skipping set directive..."
+msgstr "Preskakujem direktívu nastavi»..."
+
+#: src/common/xst-tool.c:870
 msgid "Skipping actual save..."
 msgstr "Preskakujem vlastné ukladanie..."
 
-#: src/common/xst-tool.c:883
+#: src/common/xst-tool.c:899
 msgid "Updating your system configuration."
 msgstr "Aktualizujem konfiguráciu vá¹ho systému."
 
-#: src/common/xst-tool.c:902
+#: src/common/xst-tool.c:918
 msgid ""
 "There was an error running the backend script,\n"
 "and the configuration could not be loaded."
@@ -2319,16 +2552,16 @@ msgstr ""
 "Nastala chyba pri spustení skriptu,\n"
 "a nastavenie nebolo mo¾né naèíta»."
 
-#: src/common/xst-tool.c:1076
+#: src/common/xst-tool.c:1092
 #, c-format
 msgid "%s - Ximian Setup Tools"
 msgstr "%s - Konfiguraèné nástroje Ximian"
 
-#: src/common/xst-tool.c:1216
+#: src/common/xst-tool.c:1232
 msgid "The password you entered is invalid."
 msgstr "Heslo, ktoré ste zadali, nie je platné."
 
-#: src/common/xst-tool.c:1226
+#: src/common/xst-tool.c:1242
 #, c-format
 msgid ""
 "Welcome to the %s prerelease of the Ximian Setup Tools.\n"
@@ -2355,21 +2588,29 @@ msgstr ""
 "--\n"
 "Tím Konfiguraèných nástrojov Ximian"
 
-#: src/common/xst-tool.c:1246
+#: src/common/xst-tool.c:1262
 msgid "Don't show me this again"
 msgstr "Nabudúce u¾ túto správu nezobrazova»"
 
-#: src/common/xst-tool.c:1276
+#: src/common/xst-tool.c:1292
 msgid "\tEdit configuration in the location LOCATION."
 msgstr "\tUpravi» nastavenie umiestneniea UMIESTNENIE."
 
-#: src/common/xst-tool.c:1276
+#: src/common/xst-tool.c:1292
 msgid "LOCATION"
 msgstr "UMIESTNENIE"
 
-#: src/common/xst-tool.c:1313
+#: src/common/xst-tool.c:1329
 msgid "Pretending we are root..."
 msgstr "Tvárim sa ako root..."
+
+#: src/common/xst-ui.c:545
+msgid ""
+"Plese restart your GNOME session for\n"
+"these changes to take effect."
+msgstr ""
+"Pre pou¾itie zmien musíte re¹tartova»\n"
+"sedenie GNOME."
 
 #: src/disks/main.c:39
 msgid "Disk Partitions"
@@ -2382,6 +2623,197 @@ msgstr "Disky"
 #: src/disks/disks.desktop.in.in.h:2
 msgid "Local fixed media."
 msgstr "Lokálne pevné médium."
+
+#. run test
+#: src/display/callbacks.c:153
+msgid "Testing current settings."
+msgstr "Testovanie aktuálneho nastavenia."
+
+#: src/display/callbacks.c:175
+msgid "Restoring settings..."
+msgstr "Obnovujem nastavenie..."
+
+#: src/display/main.c:104
+msgid "X Display Configuration"
+msgstr "Nastavenie displeja X"
+
+#: src/display/transfer.c:430
+msgid "Greyscale"
+msgstr "Odtiene ¹edej"
+
+#: interfaces/print.glade.in.h:9 src/display/transfer.c:431
+msgid "16 colors"
+msgstr "16 farieb"
+
+#: interfaces/print.glade.in.h:10 src/display/transfer.c:432
+msgid "256 colors"
+msgstr "256 farieb"
+
+#: src/display/transfer.c:433
+msgid "32 thousand colors"
+msgstr "32 tisíc farieb"
+
+#: src/display/transfer.c:434
+msgid "65 thousand colors"
+msgstr "65 tisíc farieb"
+
+#: src/display/transfer.c:435
+msgid "16 million colors"
+msgstr "16 miliónov farieb"
+
+#: src/display/transfer.c:484
+msgid "1152x864"
+msgstr "1152x864"
+
+#: src/display/transfer.c:486
+msgid "1600x1200"
+msgstr "1600x1200"
+
+#: src/location-manager/gui-backend-list.c:385
+#: src/location-manager/gui-backend-list.c:408
+msgid "Could not launch configuration tool"
+msgstr "Nepodarilo sa spusti» konfiguraèný nástroj"
+
+#: src/location-manager/location-dialog.c:175
+msgid "Create new location"
+msgstr "Vytvori» nové umiestnenie"
+
+#: src/location-manager/location-dialog.c:180
+msgid "Copy a location"
+msgstr "Kopírova» umiestnenie"
+
+#: src/location-manager/location-dialog.c:185
+msgid "Rename a location"
+msgstr "Premenova» umiestnenie"
+
+#: src/location-manager/location-dialog.c:300
+msgid "You must supply a name"
+msgstr "Musíte zada» meno"
+
+#: src/location-manager/location-dialog.c:305
+msgid "You already have a location by that name"
+msgstr "Takto pomenované umiestnenie u¾ máte"
+
+#: src/location-manager/location-manager-dialog.c:97
+msgid "_New..."
+msgstr "_Nové..."
+
+#: src/location-manager/location-manager-dialog.c:98
+msgid "Create a new location"
+msgstr "Vytvori» nové umiestnenie"
+
+#: src/location-manager/location-manager-dialog.c:100
+msgid "_Copy..."
+msgstr "_Kopírova»..."
+
+#: src/location-manager/location-manager-dialog.c:101
+msgid "Create a new location identical to the selected one"
+msgstr "Vytvori» nové umiestnenie rovnaké ako vybrané"
+
+#: src/location-manager/location-manager-dialog.c:103
+msgid "_Rename..."
+msgstr "_Premenova»..."
+
+#: src/location-manager/location-manager-dialog.c:104
+msgid "Rename the selected location"
+msgstr "Premenova» vybrané umiestnenie"
+
+#: src/location-manager/location-manager-dialog.c:107
+msgid "Delete the selected location"
+msgstr "Odstráni» vybrané umiestnenie"
+
+#: src/location-manager/location-manager-dialog.c:110
+msgid "_Apply..."
+msgstr "_Pou¾i»..."
+
+#: src/location-manager/location-manager-dialog.c:111
+msgid "Apply the changes"
+msgstr "Pou¾i» zmeny"
+
+#: src/location-manager/location-manager-dialog.c:117
+msgid "_Edit..."
+msgstr "_Upravi»..."
+
+#: src/location-manager/location-manager-dialog.c:118
+msgid "Edit settings for the selected backend"
+msgstr "Upravi» nastavenie pre vybraný stroj"
+
+#: src/location-manager/location-manager-dialog.c:120
+msgid "_Select"
+msgstr "_Vybra»"
+
+#: src/location-manager/location-manager-dialog.c:121
+msgid "Select the selected backend for this location"
+msgstr "Vybra» daný stroj pre toto umiestnenie"
+
+#: src/location-manager/location-manager-dialog.c:123
+msgid "_Deselect"
+msgstr "Zru¹i» vý_ber"
+
+#: src/location-manager/location-manager-dialog.c:124
+msgid "Deselect the selected backend for this location"
+msgstr "Zru¹i» výber daného stroja pre toto umiestnenie"
+
+#: src/location-manager/location-manager-dialog.c:135
+msgid "_Location"
+msgstr "_Umiestnenie"
+
+#: interfaces/location-manager.glade.in.h:38
+#: src/location-manager/location-manager-dialog.c:137
+msgid "_Help"
+msgstr "_Pomocník"
+
+#: src/location-manager/location-manager-dialog.c:191
+#: src/location-manager/location-manager-dialog.c:482
+msgid "Location Manager"
+msgstr "Správa umiestnení"
+
+#: src/location-manager/location-manager-dialog.c:254
+msgid ""
+"Could not retrieve a configuration\n"
+"snapshot. This probably means you do\n"
+"not have the Ximian Setup Tools\n"
+"installed properly."
+msgstr ""
+"Nepodarilo sa získa» nastavenie.\n"
+"To asi znamená, ¾e nemáte správne\n"
+"nain¹talované Konfiguraèné nástroje "
+"Ximian."
+
+#: src/location-manager/location-manager-dialog.c:259
+msgid ""
+"Could not retrieve a configuration\n"
+"snapshot. This probably means you are\n"
+"running an old version of the GNOME\n"
+"control center. Please upgrade to\n"
+"at least version 1.3.2 or CVS HEAD."
+msgstr ""
+"Nepodarilo sa získa» nastavenie.\n"
+"To asi znamená, ¾e pou¾ívate starú\n"
+"verziu GNOME Ovládacieho centra.\n"
+"Prosím, pou¾ite aspoò verziu 1.3.2\n"
+"alebo CVS HEAD."
+
+#: src/location-manager/location-manager-dialog.c:415
+msgid "You cannot delete the default location"
+msgstr "Nemô¾ete odstráni» ¹tandardné umiestnenie"
+
+#: src/location-manager/location-manager-dialog.c:420
+#, c-format
+msgid "Are you sure you wish to destroy the location %s?"
+msgstr "Naozaj chcete znièi» umiestnenie %s?"
+
+#: src/location-manager/location-manager-dialog.c:485
+msgid "Ximian Setup Tools Location Manager"
+msgstr "Konfiguraèné nástroje Ximian Správca umiestnení"
+
+#: src/location-manager/main.c:37
+msgid "Operate on global backends"
+msgstr "Pracova» s globálnymi strojmi"
+
+#: src/location-manager/main.c:53
+msgid "Options for the location manager"
+msgstr "Mo¾nosti pre správu umiestnení"
 
 #: src/memory/callbacks.c:189
 #, c-format
@@ -2447,27 +2879,27 @@ msgstr "IP adresa tohto hostiteµa"
 msgid "Aliases for this host, one per line"
 msgstr "Aliasy pre tohto hostiteµa, jeden na riadku"
 
-#: src/network/callbacks.c:429
+#: src/network/callbacks.c:432
 #, c-format
 msgid "Remove connection %s: ``%s''?"
 msgstr "Odstráni» spojenie %s: ``%s''?"
 
-#: src/network/callbacks.c:431
+#: src/network/callbacks.c:434
 #, c-format
 msgid "Remove connection %s?"
 msgstr "Odstráni» spojenie %s?"
 
-#: src/network/callbacks.c:476
+#: src/network/callbacks.c:479
 #, c-format
 msgid "Activating connection ``%s.''"
 msgstr "Aktivujem pripojenie ``%s.''"
 
-#: src/network/callbacks.c:499
+#: src/network/callbacks.c:502
 #, c-format
 msgid "Deactivating connection ``%s.''"
 msgstr "Deaktivujem pripojeni ``%s.''"
 
-#: src/network/callbacks.c:519
+#: src/network/callbacks.c:522
 msgid ""
 "You don't have SMB support installed. Please install SMB support\n"
 "in the system to enable windows networking."
@@ -2475,11 +2907,11 @@ msgstr ""
 "Nemáte nain¹talovanú podporu SMB. Prosím, nain¹talujte ju, aby\n"
 "ste mohli pou¾íva» sie» windows."
 
-#: src/network/callbacks.c:520
+#: src/network/callbacks.c:523
 msgid "SMB support missing."
 msgstr "Chýba podpora SMB."
 
-#: src/network/callbacks.c:561
+#: src/network/callbacks.c:564
 msgid ""
 "The host name has changed. This will prevent you\n"
 "from launching new applications, and so you will\n"
@@ -2493,11 +2925,11 @@ msgstr ""
 "\n"
 "Aj tak pokraèova»?"
 
-#: src/network/callbacks.c:567
+#: src/network/callbacks.c:570
 msgid "Don't change host name"
 msgstr "Nemeni» meno hostiteµa"
 
-#: src/network/callbacks.c:609
+#: src/network/callbacks.c:612
 msgid ""
 "wvdial could not be found on your system.\n"
 "You need to install wvdial, or the PPP (modem)\n"
@@ -2511,7 +2943,7 @@ msgstr ""
 "\n"
 "Pokraèova»?"
 
-#: src/network/callbacks.c:636
+#: src/network/callbacks.c:639
 msgid ""
 "The default gateway device is not activated. This\n"
 "will prevent you from connecting to the Internet.\n"
@@ -2523,11 +2955,11 @@ msgstr ""
 "\n"
 "Aj tak pokraèova»?"
 
-#: src/network/callbacks.c:643
+#: src/network/callbacks.c:646
 msgid "Activate connection"
 msgstr "Aktivova» pripojenie"
 
-#: src/network/callbacks.c:689
+#: src/network/callbacks.c:692
 msgid ""
 "The default gateway device is missing gateway\n"
 "information. Please provide this information to\n"
@@ -2558,22 +2990,26 @@ msgid "Parallel line"
 msgstr "Paralelný kábel"
 
 #: src/network/connection.c:49
+msgid "Infrared LAN"
+msgstr "Infraèervená LAN"
+
+#: src/network/connection.c:50
 msgid "Loopback: virtual interface"
 msgstr "Loopback: virtuálne rozhranie"
 
-#: src/network/connection.c:50
+#: src/network/connection.c:51
 msgid "Unknown type"
 msgstr "Neznámy typ"
 
-#: src/network/connection.c:810 src/network/connection.c:841
+#: src/network/connection.c:791 src/network/connection.c:822
 msgid "Active"
 msgstr "Aktívne"
 
-#: src/network/connection.c:811 src/network/connection.c:842
+#: src/network/connection.c:792 src/network/connection.c:823
 msgid "Inactive"
 msgstr "Neaktívne"
 
-#: src/network/connection.c:1219
+#: src/network/connection.c:1329
 msgid ""
 "The IP address or netmask for the interface\n"
 "was left empty. Please enter valid IP\n"
@@ -2582,7 +3018,7 @@ msgstr ""
 "IP adresa alebo sie»ová maska pre rozhranie je prázdna.\n"
 "Pre pokraèovanie musíte zada» platné hodnoty IP."
 
-#: src/network/connection.c:1226
+#: src/network/connection.c:1336
 msgid ""
 "The IP address or remote address for the\n"
 "interface was left empty. Please enter valid\n"
@@ -2591,7 +3027,7 @@ msgstr ""
 "IP adresa alebo vzdialená adresa rozhrania je prázdna.\n"
 "Pre pokraèovanie musíte zada» platné hodnoty IP."
 
-#: src/network/connection.c:1232
+#: src/network/connection.c:1342
 msgid ""
 "You chose to set the DNS servers for this\n"
 "connection manually, but left the IP\n"
@@ -2813,8 +3249,7 @@ msgstr "Nepodarilo sa vytvori» nového pou¾ívateµa. Overte nastavenie profilu."
 
 #: src/users/callbacks.c:97
 msgid "Can't create new user. Too many users probably."
-msgstr ""
-"Nepodarilo sa vytvori» nového pou¾ívateµa. Asi príli¹ veµa pou¾ívateµov."
+msgstr "Nepodarilo sa vytvori» nového pou¾ívateµa. Asi príli¹ veµa pou¾ívateµov."
 
 #: src/users/main.c:97
 msgid "Show All"
@@ -2853,24 +3288,24 @@ msgstr ""
 "Neplatné heslo: %s\n"
 "Prosím, skúste iné heslo."
 
-#: src/users/user_group.c:326
+#: src/users/user_group.c:330
 msgid "The username is empty."
 msgstr "Pou¾ívateµské meno je prázdne."
 
-#: src/users/user_group.c:330
+#: src/users/user_group.c:334
 msgid "The username is too long."
 msgstr "Pou¾ívateµské meno je príli¹ dlhé."
 
-#: src/users/user_group.c:333 src/users/user_group.c:354
-#: src/users/user_group.c:438
+#: src/users/user_group.c:337 src/users/user_group.c:358
+#: src/users/user_group.c:442
 msgid "root user shouldn't be modified."
 msgstr "Pou¾ívateµ root nesmie by» upravovaný."
 
-#: src/users/user_group.c:337
+#: src/users/user_group.c:341
 msgid "Please set a valid username, using only lower-case letters."
 msgstr "Prosím, zadajte platné pou¾ívateµské meno, pou¾ite iba malé písmená."
 
-#: src/users/user_group.c:341
+#: src/users/user_group.c:345
 #, c-format
 msgid ""
 "Username \"%s\" already exists.\n"
@@ -2881,145 +3316,144 @@ msgstr ""
 "\n"
 "Prosím, vyberte iné meno."
 
-#: src/users/user_group.c:352 src/users/user_group.c:542
+#: src/users/user_group.c:356 src/users/user_group.c:546
 msgid "User id must be a positive number."
 msgstr "ID pou¾ívateµa musí by» kladné celé èíslo."
 
-#: src/users/user_group.c:356
+#: src/users/user_group.c:360
 msgid "Such user id already exists."
 msgstr "Takéto id pou¾ívateµa u¾ existuje."
 
-#: src/users/user_group.c:379
+#: src/users/user_group.c:383
 #, c-format
 msgid "Invalid character '%c' in comment."
 msgstr "Neplatný znak '%c' v komentári."
 
-#: src/users/user_group.c:395
+#: src/users/user_group.c:399
 msgid "Please give shell with full path."
 msgstr "Prosím, zadajte shell s plnou cestou."
 
-#: src/users/user_group.c:432
+#: src/users/user_group.c:436
 msgid "Home directory must not be empty."
 msgstr "Domovský prieèinok nesmie by» prázdny."
 
-#: src/users/user_group.c:435
+#: src/users/user_group.c:439
 msgid "Please enter full path for home directory."
 msgstr "Zadajte plnú cestu k domovskému prieèinku."
 
-#: src/users/user_group.c:443
+#: src/users/user_group.c:447
 msgid "Part of the path to the home directory is a file."
 msgstr "V ceste k domovskému prieèinku je súbor."
 
-#: src/users/user_group.c:444
+#: src/users/user_group.c:448
 msgid "There is a loop in the path to the home directory."
 msgstr "V ceste k domovskému prieèinku existuje cyklus."
 
-#: src/users/user_group.c:445
+#: src/users/user_group.c:449
 msgid "Not enough memory to check the home directory."
 msgstr "Nedostatok pamäti pre overenie domovského prieèinku."
 
-#: src/users/user_group.c:446
+#: src/users/user_group.c:450
 msgid "The path to the home directory is too long."
 msgstr "Cesta k domovskému prieèinku je príli¹ dlhá."
 
-#: src/users/user_group.c:478
+#: src/users/user_group.c:482
 msgid "Group name is not valid."
 msgstr "Meno skupiny nie je platné."
 
-#: src/users/user_group.c:481 src/users/user_group.c:546
+#: src/users/user_group.c:485 src/users/user_group.c:550
 msgid "Such group id already exists."
 msgstr "Takéto id skupiny u¾ existuje."
 
-#: src/users/user_group.c:484
+#: src/users/user_group.c:488
 msgid "Group does not exist. Create new?"
 msgstr "Skupina neexistuje. Vytvori»?"
 
-#: src/users/user_group.c:503
+#: src/users/user_group.c:507
 msgid "Group name is empty."
 msgstr "Meno skupiny je prázdne."
 
-#: src/users/user_group.c:507
+#: src/users/user_group.c:511
 msgid "The group name is too long."
 msgstr "Meno skupiny je príli¹ dlhé."
 
-#: src/users/user_group.c:511
+#: src/users/user_group.c:515
 msgid "Please set a valid group name, using only lower-case letters."
 msgstr "Prosím, zadajte platné meno skupiny, pou¾ite iba malé písmená."
 
-#: src/users/user_group.c:515
+#: src/users/user_group.c:519
 msgid "Group already exists."
 msgstr "Skupina u¾ existuje."
 
-#: src/users/user_group.c:816
+#: src/users/user_group.c:820
 #, c-format
 msgid "Password for User %s"
 msgstr "Heslo pre pou¾ívateµa %s"
 
-#: src/users/user_group.c:850
+#: src/users/user_group.c:854
 msgid "The root user must not be deleted."
 msgstr "Pou¾ívateµ root nesmie by» odstránený."
 
-#: src/users/user_group.c:857
+#: src/users/user_group.c:861
 #, c-format
 msgid "Are you sure you want to delete user %s?"
 msgstr "Naozaj chcete odstráni» pou¾ívateµa %s?"
 
-#: src/users/user_group.c:880
+#: src/users/user_group.c:884
 msgid "Create New Group"
 msgstr "Vytvori» novú skupinu"
 
-#: src/users/user_group.c:940
+#: src/users/user_group.c:944
 msgid "The root group must not be deleted."
 msgstr "Skupina root nesmie by» odstránená."
 
-#: src/users/user_group.c:947
+#: src/users/user_group.c:951
 #, c-format
 msgid "Are you sure you want to delete group %s?"
 msgstr "Naozaj chcete odstráni» skupinu %s?"
 
-#: src/users/user_group.c:992
+#: src/users/user_group.c:996
 #, c-format
 msgid "Settings for Group %s"
 msgstr "Nastavenie pre skupinu %s"
 
-#: src/users/user_group.c:1387
+#: src/users/user_group.c:1391
 msgid "The home directory does not exist, or its path is invalid."
 msgstr "Domovský prieèinok neexistuje, alebo nie je platná cesta."
 
-#: src/users/user_group.c:1391
+#: src/users/user_group.c:1395
 msgid "Couldn't get access to the home directory."
 msgstr "Nepodaril sa prístup k domovskému prieèinku."
 
 #. We shouldn't fall here: the other cases are in the error checks.
-#: src/users/user_group.c:1396
+#: src/users/user_group.c:1400
 msgid "There was an error trying to access the home directory."
 msgstr "Nastala chyba poèas pokusu o prístup do domovského prieèinku."
 
-#: src/users/user_group.c:1404
+#: src/users/user_group.c:1408
 msgid ""
 "The home directory already exists. This will break the new user's "
 "permissions."
 msgstr "Domovský prieèinok u¾ existuje. To naruèí práva nového pou¾ívateµa."
 
-#: src/users/user_group.c:1409
+#: src/users/user_group.c:1413
 msgid "The home directory path exists, but it is not a directory."
 msgstr "Cesta k domovskému prieèinku existuje, ale nie je to prieèinok."
 
-#: src/users/user_group.c:1413
+#: src/users/user_group.c:1417
 msgid "The home directory is not owned by the user."
 msgstr "Domovský prieèinok nevlastní pou¾ívateµ."
 
-#: src/users/user_group.c:1417
+#: src/users/user_group.c:1421
 msgid "The user doesn't have permission to read from the home directory."
 msgstr "Pou¾ívateµ nemá práva pre èítanie z domovského prieèinku."
 
-#: src/users/user_group.c:1421
+#: src/users/user_group.c:1425
 msgid "The user doesn't have permission to write in the home directory."
 msgstr "Pou¾ívateµ nemá práva pre zápis do domovského prieèinku."
 
-#: src/users/user_group.c:1425
-msgid ""
-"The user doesn't have permission to use (``execute'') the home directory."
+#: src/users/user_group.c:1429
+msgid "The user doesn't have permission to use (``execute'') the home directory."
 msgstr "Pou¾ívateµ nemá práva pou¾íva» (\"vykonáva»\") v domovskom prieèinku."
 
 #: interfaces/internetsharing.glade.in.h:1
@@ -3118,10 +3552,6 @@ msgstr "Udr¾iava» hodiny synchronizované s vybranými serverami"
 msgid "Location"
 msgstr "Umiestnenie"
 
-#: interfaces/location-manager.glade.in.h:19
-msgid "Location Management"
-msgstr "Správa umiestnení"
-
 #: interfaces/location-manager.glade.in.h:20
 msgid "Location:"
 msgstr "Umiestnenie:"
@@ -3178,10 +3608,6 @@ msgstr ""
 "Tento nástroj umo¾òuje správu v¹etkých umiestnení, kde by ste chceli "
 "pou¾íva» vá¹ prenosný poèítaè."
 
-#: interfaces/location-manager.glade.in.h:38
-msgid "_Help"
-msgstr "_Pomocník"
-
 #: interfaces/print.glade.in.h:1
 msgid "/dev/lp0 (LPT1)"
 msgstr "/dev/lp0 (LPT1)"
@@ -3214,14 +3640,6 @@ msgstr "1200x1200"
 msgid "1200x600"
 msgstr "1200x600"
 
-#: interfaces/print.glade.in.h:9
-msgid "16 colors"
-msgstr "16 farieb"
-
-#: interfaces/print.glade.in.h:10
-msgid "256 colors"
-msgstr "256 farieb"
-
 #: interfaces/print.glade.in.h:11
 msgid "300x300"
 msgstr "300x300"
@@ -3251,8 +3669,7 @@ msgid "Add a New Printer"
 msgstr "Prida» novú tlaèiareò"
 
 #: interfaces/print.glade.in.h:19
-msgid ""
-"Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
+msgid "Convert PC linefeeds to Un*x format. Helps avoid \"stairstepping\" text."
 msgstr "Prevedie konce riadkov PC na formát Un*n. Opraví \"schodový\" text."
 
 #: interfaces/print.glade.in.h:20
@@ -3481,10 +3898,6 @@ msgstr "Nástroj pre tlaè"
 msgid "Paper"
 msgstr "Papier"
 
-#: src/print/print.etspec.h:3
-msgid "Resolution"
-msgstr "Rozlí¹enie"
-
 #: src/print/print.etspec.h:4
 msgid "Share"
 msgstr "Zdieµaná"
@@ -3500,6 +3913,11 @@ msgstr "Tlaèi»"
 #: src/print/print.desktop.in.in.h:2
 msgid "lpr based Printer Admin"
 msgstr "Správa tlaèe lpr"
+
+#. give our dialog an OK button and title
+#: src/print/settings-editor.c:122
+msgid "Printer Settings Editor"
+msgstr "Editor nastavenia tlaèiarne"
 
 #: src/users/e-search-bar/e-search-bar.c:140
 msgid "Sear_ch"
@@ -3541,11 +3959,11 @@ msgstr ""
 "Momentálne je podporovaná iba '%s'."
 
 #. give our dialog an OK button and title
-#: src/users/user-account-editor.c:105
+#: src/users/user-account-editor.c:109
 msgid "User Account Editor"
 msgstr "Editor úètu pou¾ívateµa"
 
-#: src/users/user_settings.c:176
+#: src/users/user_settings.c:180
 #, c-format
 msgid ""
 "Invalid character '%c'.\n"
@@ -3554,12 +3972,12 @@ msgstr ""
 "Neplatný znak '%c'.\n"
 "Toto pole nesmie obsahova» znaky ',' ':' a '='."
 
-#: src/users/user_settings.c:464 src/users/user_settings.c:525
-#: src/users/user_settings.c:540
+#: src/users/user_settings.c:468 src/users/user_settings.c:529
+#: src/users/user_settings.c:544
 msgid "Identity"
 msgstr "Identita"
 
-#: src/users/user_settings.c:518
+#: src/users/user_settings.c:522
 msgid "Real name:"
 msgstr "Skutoèné meno:"
 
@@ -3614,3 +4032,4 @@ msgstr "Vzorka"
 #: src/shares/export_clients.etspec.h:2
 msgid "Write"
 msgstr "Zápis"
+
