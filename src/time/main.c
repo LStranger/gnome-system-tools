@@ -181,7 +181,7 @@ gst_time_init_timezone (GstTimeTool *time_tool)
 	GtkWidget *w;
 	GPtrArray *locs;
 	GList *combo_locs = NULL;
-	int i;	
+	int i;
 
 	tzmap = e_tz_map_new (time_tool);
 	g_return_if_fail (tzmap != NULL);
@@ -189,7 +189,7 @@ gst_time_init_timezone (GstTimeTool *time_tool)
 	w = gst_dialog_get_widget (tool->main_dialog, "map_window");
 	gtk_container_add (GTK_CONTAINER (w), GTK_WIDGET (tzmap->map));
 	gtk_widget_show (GTK_WIDGET (tzmap->map));
-	
+
 	locs = tz_get_locations (e_tz_map_get_tz_db (tzmap));
 	
 	for (i = 0; g_ptr_array_index (locs, i); i++) {
@@ -311,15 +311,10 @@ timezone_construct_dialog (GstDialog *dialog)
 	g_return_if_fail (GST_IS_DIALOG(dialog));
 	
 	d = gtk_dialog_new_with_buttons (_("Time Zone"),
-					      NULL,
-					      GTK_DIALOG_MODAL |
-					      GTK_DIALOG_NO_SEPARATOR,
-					      GTK_STOCK_CLOSE,
-					      GTK_RESPONSE_CLOSE, NULL);
-
-	gtk_container_set_border_width (GTK_CONTAINER (d), 5);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (d)->vbox), 2);
-	gtk_widget_set_usize (GTK_WIDGET (d), 320, 320);
+					 NULL,
+					 GTK_DIALOG_MODAL | GTK_DIALOG_NO_SEPARATOR,
+					 GTK_STOCK_CLOSE,
+					 GTK_RESPONSE_CLOSE, NULL);
 
 	content = gst_dialog_get_widget (dialog, "time_zone_dialog_content");
 
